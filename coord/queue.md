@@ -1,11 +1,11 @@
 # Work queue
 
-353 items; claim with `tools/claim.py next <group> [--stage N]`.
+348 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (353)
+## Stage 2: nodes to state (348)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -19,7 +19,6 @@
 | `lem-pc-perfect-tensor-hom-duality` | 1 | state |
 | `lem-pc-supported-perfect-generator` | 1 | state |
 | `lem-sc-affine-koszul-cech-derived-comparison` | 1 | state |
-| `lem-sc-affine-support-iterated-cones` | 1 | state |
 | `lem-sc-base-change-curve` | 1 | state |
 | `lem-sc-coherent-affine-free-resolution` | 1 | state |
 | `lem-sc-derived-mayer-vietoris-triangle` | 1 | state |
@@ -41,18 +40,14 @@
 | `lem-weil-pbc-quasi-coherent-tensor-product-affine-sections` | 1 | state |
 | `lem-weil-pbc-quotient-base-change-closed-immersion-ideal` | 1 | state |
 | `lem-weil-pbc-reduced-noetherian-total-ring-fractions` | 1 | state |
-| `lem-weil-pbc-reduction-projective-space` | 1 | state |
 | `lem-weil-pbc-reduction-universal-homeomorphism` | 1 | state |
 | `lem-weil-pbc-regular-base-change` | 1 | state |
-| `lem-weil-pbc-regular-composition` | 1 | state |
-| `lem-weil-pbc-regular-local-dim-one-iff-normal` | 1 | state |
 | `lem-weil-pbc-regular-local-generators-regular-sequence` | 1 | state |
 | `lem-weil-pbc-regular-local-localization` | 1 | state |
 | `lem-weil-pbc-regular-local-mcm-free` | 1 | state |
 | `lem-weil-pbc-regular-local-quotient-kernel-parameters` | 1 | state |
 | `lem-weil-pbc-regular-local-separable-residue-smooth` | 1 | state |
 | `lem-weil-pbc-regular-permanence` | 1 | state |
-| `lem-weil-pbc-regular-quotient-ideal-intersection` | 1 | state |
 | `lem-weil-pbc-regular-ring-faithfully-flat-descent` | 1 | state |
 | `lem-weil-pbc-regular-ring-local-criterion` | 1 | state |
 | `lem-weil-pbc-regular-ring-normal` | 1 | state |
