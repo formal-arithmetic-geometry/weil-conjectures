@@ -221,5 +221,23 @@
   "item": "lem-weil-pbc-gabber-root-criterion-etale-section-lifting",
   "worker": "stage1",
   "summary": "Read Stacks 09XI (5)=>(2) (more-algebra.tex lines 2680-2735) and the lemmas it uses: 09XH = lemma-helper-finite-type (line 2502), 0EM0 = lemma-helper-finite (line 2290), 0ELZ = lemma-check-isomorphism-zariski (line 2265), Algebra 00U7/00U8 (via the reviewed node lem-weil-pbc-etale-section-idempotent-splitting); tags checked in tags/tags. Proof in nine steps along Stacks: decomposition mod I (reviewed nodes etale-ring-base-change, etale-section-idempotent-splitting); 09XH (new unsplit node lem-weil-pbc-integral-closure-finite-fibre-part-localization); the finite subalgebra B'' written out (finite-of-integral-generators); 0EM0 (new unsplit node lem-weil-pbc-zariski-pair-finite-gabber-polynomial); the root alpha, the explicit idempotent E = g(alpha)^{-1} g of A[T]/(f) with (T-alpha)E in (f), its image e in B' lifting epsilon' and the unit b = alpha on eB' (elementary; Stacks says 'details omitted'); 0ELZ (new unsplit node lem-weil-pbc-zariski-pair-flat-integral-isomorphism) with flatness/finite presentation from etale (lem-weil-pbc-etale-algebra-flat, new Mathlib leaf lem-weil-pbc-etale-algebra-finite-presentation-localization); the section tau. Statement unchanged. Mathlib: no henselian-pair section lifting (FormallySmooth.lift needs nilpotent I); ZMT 00Q9 is Algebra.ZariskisMainProperty.of_finiteType and the rank-1 step of 0ELZ is Module.algebraMap_bijective_iff_rankAtStalk (recorded on the new nodes). Source repository: the two sorry-free Henselian.lean declarations are the local case of the converse (2)=>(1), not of this node."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.EtaleSectionLiftingOfGabberRoots",
+  "declaration": "Algebra.exists_etale_section_lift_of_gabber_roots",
+  "file": "lean/Sheaf/RingTheory/EtaleSectionLiftingOfGabberRoots.lean",
+  "statement": "theorem exists_etale_section_lift_of_gabber_roots (A : Type u) [CommRing A] (I : Ideal A) (hI : I ≤ Ideal.jacobson ⊥) (hroots : ∀ (n : ℕ), 1 ≤ n → ∀ (a : Fin (n + 1) → A), (∀ j, a j ∈ I) → ∀ (f : A[X]), f.Monic → f = X ^ n * (X - 1) + ∑ j : Fin (n + 1), C (a j) * X ^ (j : ℕ) → ∃ α : A, α - 1 ∈ I ∧ f.IsRoot α) (B : Type v) [CommRing B] [Algebra A B] [Etale A B] (σ : B →ₐ[A] A ⧸ I) : ∃ τ : B →ₐ[A] A, (Ideal.Quotient.mkₐ A I).comp τ = σ",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-grc1045",
+  "group": "F1",
+  "result": "pass",
+  "note": "A CommRing, I Ideal; (a) I ≤ jacobson ⊥; (b) ∀ n≥1, a:Fin(n+1)→I, monic f = X^n(X-1)+Σ C(a j)X^j has α with α-1∈I, IsRoot; [Algebra A B][Algebra.Etale A B] (#check: resolves to Algebra.Etale); σ : B →ₐ[A] A⧸I; ∃ τ, mkₐ.comp τ = σ (same form as J1 a0e39aa24)"
  }
 }
