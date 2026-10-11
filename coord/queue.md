@@ -1,11 +1,11 @@
 # Work queue
 
-812 items; claim with `tools/claim.py next <group> [--stage N]`.
+810 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (812)
+## Stage 2: nodes to state (810)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -37,9 +37,7 @@
 | `lem-weil-derived-limit-roos-complex` | 1 | state |
 | `lem-weil-pbc-charpoly-locally-free-direct-sum` | 1 | state |
 | `lem-weil-pbc-colimit-category-fp-algebras` | 1 | state |
-| `lem-weil-pbc-colimit-surjective-ring-map` | 1 | state |
 | `lem-weil-pbc-complex-spectral-sequence-comparison` | 1 | state |
-| `lem-weil-pbc-constant-sheaf-sections-locally-constant` | 1 | state |
 | `lem-weil-pbc-constant-sheaf-set-sections-connected-natural` | 1 | state |
 | `lem-weil-pbc-cotangent-complex-symmetric-algebra` | 1 | state |
 | `lem-weil-pbc-cover-module-exact` | 1 | state |
