@@ -174,5 +174,23 @@
     "The limit-tower construction's use of S' essentially of finite presentation over the intermediate ring S, supplied by the four proof steps here"
    ]
   }
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.EssentiallyFinitePresentationOverIntermediate",
+  "declaration": "RingHom.essentially_finite_presentation_over_intermediate",
+  "file": "lean/Sheaf/RingTheory/EssentiallyFinitePresentationOverIntermediate.lean",
+  "statement": "theorem essentially_finite_presentation_over_intermediate {R : Type u} {S : Type v} {T : Type w} [CommRing R] [CommRing S] [CommRing T] (φ : R →+* S) (ψ : S →+* T) (hS : φ.EssFiniteType) (P : Type p) [CommRing P] [Algebra R P] [Algebra.FinitePresentation R P] (U : Submonoid P) (f : P →+* T) (hf : f.comp (algebraMap R P) = ψ.comp φ) (hT : letI := f.toAlgebra; IsLocalization U T) : ∃ (Q : Type (max v p)) (_ : CommRing Q) (_ : Algebra S Q), Algebra.FinitePresentation S Q ∧ ∃ (V : Submonoid Q) (g : Q →+* T), g.comp (algebraMap S Q) = ψ ∧ (letI := g.toAlgebra; IsLocalization V T)",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-efi0953",
+  "group": "F1",
+  "result": "pass",
+  "note": "R,S,T CommRing; phi,psi named maps; hS=RingHom.EssFiniteType (landed H1 ed8652e23 precedent); T=U^-1 P witness form P FinitePresentation R, U Submonoid, f.toAlgebra IsLocalization, hf R-compatibility psi.comp phi; conclusion Q:Type(max v p) FinitePresentation S Q, V Submonoid, g with g.comp algebraMap = psi, IsLocalization V T via g.toAlgebra; no EssFinitePresentation def exists so literal witness form as E1 fd047eff9; #check all names"
  }
 }
