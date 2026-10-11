@@ -163,10 +163,21 @@ lemma exists_lift_whiskerRight_derivedCompletionCone
     rfl
 
 include hϖ hI in
-/-- An object which is right orthogonal to the objects on which `ϖ` acts invertibly is derived
-complete for `I = (ϖ)`. -/
-theorem derivedComplete_of_rightOrthogonal {K : DerivedCategory (Sheaf J (ModuleCat.{u + 1} R))}
-    (hK : (smulInvertible J ϖ).rightOrthogonal K) : derivedComplete J I K := by
+/-- The derived completion of an object `K` of `D(J, R)`, for `I = (ϖ)` with `ϖ` a
+nonzerodivisor: a homotopy limit `F` of the reductions `K ⊗ᴸ R/ϖⁿ`, with its Milnor triangle,
+together with a map `φ : K ⟶ F` extending the reduction maps. The object `F` receives no
+nonzero map from an object on which `ϖ` acts invertibly, and `ϖ` acts invertibly on the mapping
+cone of `φ`. -/
+theorem exists_derivedCompletion (K : DerivedCategory (Sheaf J (ModuleCat.{u + 1} R))) :
+    ∃ (F : DerivedCategory (Sheaf J (ModuleCat.{u + 1} R))) (φ : K ⟶ F)
+      (P : Fan fun n : ℕ ↦ (derivedCompletionDiagram J I K).obj (op n)) (hP : IsLimit P)
+      (ι : F ⟶ P.pt) (ε : P.pt ⟶ F⟦(1 : ℤ)⟧),
+      Triangle.mk ι (𝟙 _ - towerShift hP) ε ∈ distTriang _ ∧
+      Fan.IsLimit.lift hP
+          (fun n ↦ (derivedCompletionCone J I K).π.app (op n)) = φ ≫ ι ∧
+      (smulInvertible J ϖ).rightOrthogonal F ∧
+      ∀ ⦃X : DerivedCategory (Sheaf J (ModuleCat.{u + 1} R))⦄ (g : F ⟶ X) (h : X ⟶ K⟦(1 : ℤ)⟧),
+        Triangle.mk φ g h ∈ distTriang _ → smulInvertible J ϖ X := by
   have hϖI := mem_of_eq_span hI
   let G := derivedCompletionDiagram J I K
   let c := derivedCompletionCone J I K
@@ -199,14 +210,7 @@ theorem derivedComplete_of_rightOrthogonal {K : DerivedCategory (Sheaf J (Module
         (smul_id_derivedCompletionDiagram_obj J hϖI K n) _
     rw [this, zero_comp] at hg
     exact (shiftFunctor _ (1 : ℤ)).map_eq_zero_iff.mp hg
-  -- the cone `X` of `φ` is right orthogonal to `smulInvertible J ϖ`
-  obtain ⟨X, g, h, hX⟩ := distinguished_cocone_triangle φ
-  have hXorth : (smulInvertible J ϖ).rightOrthogonal X := by
-    intro L f hL
-    have hK1 : (smulInvertible J ϖ).rightOrthogonal (K⟦(1 : ℤ)⟧) :=
-      ObjectProperty.le_shift _ 1 K hK
-    obtain ⟨f', hf'⟩ := Triangle.coyoneda_exact₃ _ hX f (hK1 _ hL)
-    rw [hf', hF f' hL, zero_comp]
+  refine ⟨F, φ, P, hP, ι, ε, hT, hlift.trans hφ₁, hF, fun X g h hX ↦ ?_⟩
   -- `ϖ` acts invertibly on `X`, through `X ⊗ᴸ R/ϖ = 0`
   let M := (quotPowFunctor J I).obj (op 1)
   let TM := (curriedTensor (DerivedCategory (Sheaf J (ModuleCat.{u + 1} R)))).flip.obj M
@@ -263,26 +267,41 @@ theorem derivedComplete_of_rightOrthogonal {K : DerivedCategory (Sheaf J (Module
         TM.map_comp_assoc])
   have hXM : IsZero (X ⊗ M) :=
     (Triangle.isZero₃_iff_isIso₁ _ (TM.map_distinguished _ hX)).2 hφM
-  have hXinv : smulInvertible J ϖ X := by
-    have h₁ := (Triangle.isZero₃_iff_isIso₁ _ (tensorQuotPowTriangle_distinguished hϖ hI X 1)).1 hXM
-    change IsIso (X ◁ (quotPowTriangle J hϖ hI 1).mor₁) at h₁
-    rw [quotPowTriangle_mor₁, pow_one, MonoidalLinear.whiskerLeft_smul,
-      MonoidalCategory.whiskerLeft_id] at h₁
-    change IsIso (ϖ • 𝟙 X)
-    have : ϖ • 𝟙 X = (unitIso X).hom ≫ (ϖ • 𝟙 _) ≫ (unitIso X).inv := by
-      rw [Linear.smul_comp, id_comp, Linear.comp_smul, Iso.hom_inv_id]
-    have h₂ : IsIso (ϖ • 𝟙 (X ⊗ (singleFunctor (Sheaf J (ModuleCat.{u + 1} R)) 0).obj
-        (𝟙_ (Sheaf J (ModuleCat.{u + 1} R))))) := h₁
-    rw [this]
-    infer_instance
+  have h₁ := (Triangle.isZero₃_iff_isIso₁ _ (tensorQuotPowTriangle_distinguished hϖ hI X 1)).1 hXM
+  change IsIso (X ◁ (quotPowTriangle J hϖ hI 1).mor₁) at h₁
+  rw [quotPowTriangle_mor₁, pow_one, MonoidalLinear.whiskerLeft_smul,
+    MonoidalCategory.whiskerLeft_id] at h₁
+  change IsIso (ϖ • 𝟙 X)
+  have : ϖ • 𝟙 X = (unitIso X).hom ≫ (ϖ • 𝟙 _) ≫ (unitIso X).inv := by
+    rw [Linear.smul_comp, id_comp, Linear.comp_smul, Iso.hom_inv_id]
+  have h₂ : IsIso (ϖ • 𝟙 (X ⊗ (singleFunctor (Sheaf J (ModuleCat.{u + 1} R)) 0).obj
+      (𝟙_ (Sheaf J (ModuleCat.{u + 1} R))))) := h₁
+  rw [this]
+  infer_instance
+
+include hϖ hI in
+/-- An object which is right orthogonal to the objects on which `ϖ` acts invertibly is derived
+complete for `I = (ϖ)`. -/
+theorem derivedComplete_of_rightOrthogonal {K : DerivedCategory (Sheaf J (ModuleCat.{u + 1} R))}
+    (hK : (smulInvertible J ϖ).rightOrthogonal K) : derivedComplete J I K := by
+  obtain ⟨F, φ, P, hP, ι, ε, hT, hφι, hF, hcone⟩ := exists_derivedCompletion hϖ hI K
+  -- the cone `X` of `φ` is right orthogonal to `smulInvertible J ϖ`, and `ϖ` acts invertibly on it
+  obtain ⟨X, g, h, hX⟩ := distinguished_cocone_triangle φ
+  have hXorth : (smulInvertible J ϖ).rightOrthogonal X := by
+    intro L f hL
+    have hK1 : (smulInvertible J ϖ).rightOrthogonal (K⟦(1 : ℤ)⟧) :=
+      ObjectProperty.le_shift _ 1 K hK
+    obtain ⟨f', hf'⟩ := Triangle.coyoneda_exact₃ _ hX f (hK1 _ hL)
+    rw [hf', hF f' hL, zero_comp]
   have hXzero : IsZero X := by
     rw [IsZero.iff_id_eq_zero]
-    exact hXorth (𝟙 X) hXinv
+    exact hXorth (𝟙 X) (hcone g h hX)
   have : IsIso φ := (Triangle.isZero₃_iff_isIso₁ _ hX).1 hXzero
   refine ⟨_, hP, ε ≫ (inv φ)⟦(1 : ℤ)⟧', isomorphic_distinguished _ hT _
     (Triangle.isoMk _ _ (asIso φ) (Iso.refl _) (Iso.refl _) ?_ (by simp) ?_)⟩
-  · change Fan.IsLimit.lift hP (fun n ↦ c.π.app (op n)) ≫ 𝟙 _ = φ ≫ ι
-    rw [comp_id, hlift, hφ₁]
+  · change Fan.IsLimit.lift hP
+      (fun n ↦ (derivedCompletionCone J I K).π.app (op n)) ≫ 𝟙 _ = φ ≫ ι
+    rw [comp_id, hφι]
   · change (ε ≫ (inv φ)⟦(1 : ℤ)⟧') ≫ φ⟦(1 : ℤ)⟧' = 𝟙 _ ≫ ε
     rw [assoc, ← Functor.map_comp, IsIso.inv_hom_id, CategoryTheory.Functor.map_id, comp_id,
       id_comp]
