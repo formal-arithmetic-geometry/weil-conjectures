@@ -40,7 +40,8 @@ cocontinuous functor `U_H` to `Λ[H]`-modules whose right adjoint `V_H` is exact
   (`AlgebraicGeometry.ProEtale.not_hasAmbientExceptionalRightAdjoint_of_isAbelianVariety`);
 * (ii) `Ra_{E!} = Ra_{E*}` does not preserve countable coproducts and has no right adjoint on
   `D(E_proét, Λ)`
-  (`AlgebraicGeometry.ProEtale.not_isLeftAdjoint_rightDerivedLowerShriek_of_isAbelianVariety`);
+  (`AlgebraicGeometry.ProEtale.not_isLeftAdjoint_rightDerivedLowerShriek_of_isAbelianVariety`, in
+  `WeilConjectures.SixFunctors.ProEtale.AmbientCounterexampleCoproducts`);
 * (iii) nor on `D⁺(E_proét, Λ)`
   (`AlgebraicGeometry.ProEtale.not_isLeftAdjoint_rightDerivedLowerShriekPlus_of_isAbelianVariety`).
 
@@ -71,7 +72,6 @@ The chosen compactification of the proper morphism `a_E` need not be the trivial
 - `AlgebraicGeometry.ProEtale.exists_forall_not_isZero_homology_rightDerivedLowerStar`: the sheaf
   with nonvanishing pro-étale cohomology in every positive degree.
 - `AlgebraicGeometry.ProEtale.not_hasAmbientExceptionalRightAdjoint_of_isAbelianVariety`.
-- `AlgebraicGeometry.ProEtale.not_isLeftAdjoint_rightDerivedLowerShriek_of_isAbelianVariety`.
 - `AlgebraicGeometry.ProEtale.not_isLeftAdjoint_rightDerivedLowerShriekPlus_of_isAbelianVariety`.
 -/
 
@@ -286,35 +286,6 @@ theorem not_hasAmbientExceptionalRightAdjoint_of_isAbelianVariety
   have ⟨c, hc⟩ := h.exists_hasUniformCohomologicalDimensionLE
   not_hasUniformCohomologicalDimensionLE_of_isAbelianVariety Λ E hE c
     (hc.of_compactification _ _)
-
-/-- Blueprint `sk-rem-sf-fullcd-scope` (ii), `open-sf-ambient-adjoint-input`: for the structure
-morphism `a_E` of an elliptic curve (more generally an abelian variety of positive dimension)
-over an algebraically closed field, `Ra_{E*}` does not preserve countable coproducts on
-`D(E_proét, Λ)`.
-
-With `F` the sheaf of
-`AlgebraicGeometry.ProEtale.exists_forall_not_isZero_homology_rightDerivedLowerStar` and
-`Kₙ = F[n]`, countable products and coproducts of pro-étale sheaves are exact, so
-`⊕ Kₙ ≅ ∏ Kₙ`, while in degree `0` the coproduct comparison for `Ra_{E*}` is the non-surjective
-map `⊕_{n ≥ 1} Hⁿ(E, F) ⟶ ∏_{n ≥ 1} Hⁿ(E, F)`. -/
-theorem not_preservesColimitsOfShape_rightDerivedLowerStar_of_isAbelianVariety
-    (hE : 0 < IsAbelianVariety.dim E) :
-    ¬ PreservesColimitsOfShape (Discrete ℕ) (R((E.hom)_*[ModuleCat.{u + 1} Λ])) :=
-  sorry
-
-/-- Blueprint `sk-rem-sf-fullcd-scope` (ii), `open-sf-ambient-adjoint-input`: for the structure
-morphism `a_E` of an elliptic curve (more generally an abelian variety of positive dimension)
-over an algebraically closed field, `Ra_{E!}` has no right adjoint on `D(E_proét, Λ)`. Indeed
-`Ra_{E!} ≅ Ra_{E*}` (`AlgebraicGeometry.ProEtale.rightDerivedLowerShriekIsoOfIsProper`) does not
-preserve countable coproducts
-(`not_preservesColimitsOfShape_rightDerivedLowerStar_of_isAbelianVariety`),
-whereas left adjoints preserve all colimits. -/
-theorem not_isLeftAdjoint_rightDerivedLowerShriek_of_isAbelianVariety
-    (hE : 0 < IsAbelianVariety.dim E) :
-    ¬ (R(E.hom)_![ModuleCat.{u + 1} Λ]).IsLeftAdjoint := fun _ ↦
-  not_preservesColimitsOfShape_rightDerivedLowerStar_of_isAbelianVariety Λ E hE
-    (preservesColimitsOfShape_of_natIso
-      (rightDerivedLowerShriekIsoOfIsProper (ModuleCat.{u + 1} Λ) E.hom))
 
 /-- Blueprint `sk-rem-sf-fullcd-scope` (iii), `open-sf-ambient-adjoint-input`: for the structure
 morphism `a_E` of an elliptic curve (more generally an abelian variety of positive dimension)
