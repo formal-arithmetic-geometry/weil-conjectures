@@ -9,6 +9,7 @@ public import Mathlib.Algebra.Category.Ring.FilteredColimits
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.RingTheory.FiniteType
 public import Mathlib.RingTheory.Spectrum.Prime.ConstructibleSet
+public import WeilConjectures.Mathlib.Topology.Spectral.ConstructibleTopology
 
 /-!
 # Affine schemes are limits of Noetherian affine schemes
@@ -74,7 +75,7 @@ theorem exists_isLimit_isNoetherian_Spec :
 
 section Constructible
 
-open _root_.PrimeSpectrum
+open _root_.PrimeSpectrum Topology
 
 variable {A}
 
@@ -159,6 +160,76 @@ theorem exists_finset_comap_eq_empty {F : Finset A}
     simpa [BasicConstructibleSetData.map] using (hnc C hC).symm
   rw [he] at hp
   exact hp
+
+
+/-- **Compactness of the constructible topology**: a cover of a constructible subset of
+`Spec R` by quasi-compact opens has a finite subcover. -/
+lemma _root_.PrimeSpectrum.exists_finset_subset_iUnion_of_isConstructible {R : Type*}
+    [CommRing R] {s : Set (PrimeSpectrum R)} (hs : IsConstructible s) {ι : Type*}
+    (V : ι → Set (PrimeSpectrum R)) (hV : ∀ i, IsOpen (V i)) (hV' : ∀ i, IsCompact (V i))
+    (hcov : s ⊆ ⋃ i, V i) : ∃ t : Finset ι, s ⊆ ⋃ i ∈ t, V i := by
+  let φ : WithConstructibleTopology (PrimeSpectrum R) → PrimeSpectrum R :=
+    WithTopology.ofTopology
+  have hc : IsCompact (φ ⁻¹' s) := by
+    apply IsClosed.isCompact
+    rw [WithConstructibleTopology.isClosed_iff]
+    exact @IsClopen.isClosed _ (constructibleTopology _) _ hs.isClopen_constructibleTopology
+  obtain ⟨t, ht⟩ := hc.elim_finite_subcover (fun i ↦ φ ⁻¹' V i)
+    (fun i ↦ by
+      rw [WithConstructibleTopology.isOpen_iff]
+      exact (hV' i).isOpen_constructibleTopology_of_isOpen (hV i))
+    (fun y hy ↦ by simpa using hcov hy)
+  exact ⟨t, fun x hx ↦ by
+    simpa using ht (show WithTopology.toTopology _ x ∈ φ ⁻¹' s from hx)⟩
+
+/-- **Constructible locally closed subsets of `Spec R` are of finite type**: such a set is the
+intersection of a finite union of basic opens `D(a)` with the zero locus of finitely many
+elements, by compactness of the constructible topology. -/
+theorem _root_.PrimeSpectrum.exists_finset_eq_iUnion_basicOpen_inter_zeroLocus {R : Type*}
+    [CommRing R] {s : Set (PrimeSpectrum R)} (hs : IsConstructible s) (hs' : IsLocallyClosed s) :
+    ∃ f g : Finset R, s = (⋃ a ∈ f, (basicOpen a : Set (PrimeSpectrum R))) ∩
+      zeroLocus (g : Set R) := by
+  classical
+  obtain ⟨U, Z, hU, hZ, rfl⟩ := hs'
+  -- a finite union of basic opens between `U ∩ Z` and `U`
+  obtain ⟨f, hf⟩ := PrimeSpectrum.exists_finset_subset_iUnion_of_isConstructible hs
+    (fun a : {a : R // (basicOpen a : Set (PrimeSpectrum R)) ⊆ U} ↦
+      (basicOpen a.1 : Set (PrimeSpectrum R)))
+    (fun a ↦ (basicOpen a.1).isOpen) (fun a ↦ PrimeSpectrum.isCompact_basicOpen a.1)
+    (fun x hx ↦ by
+      obtain ⟨_, ⟨a, rfl⟩, hxa, haU⟩ :=
+        isTopologicalBasis_basic_opens.exists_subset_of_mem_open hx.1 hU
+      exact Set.mem_iUnion.2 ⟨⟨a, haU⟩, hxa⟩)
+  let U' : Set (PrimeSpectrum R) := ⋃ a ∈ f.image Subtype.val, (basicOpen a : Set _)
+  have hU'U : U' ⊆ U := by
+    simp only [U', Set.iUnion₂_subset_iff, Finset.mem_image]
+    rintro _ ⟨a, -, rfl⟩
+    exact a.2
+  have hsU' : U ∩ Z ⊆ U' := fun x hx ↦ by
+    obtain ⟨a, ha, hxa⟩ := Set.mem_iUnion₂.1 (hf hx)
+    exact Set.mem_iUnion₂.2 ⟨a.1, Finset.mem_image_of_mem _ ha, hxa⟩
+  have hU'c : IsConstructible U' :=
+    .biUnion (Finset.finite_toSet _) fun a _ ↦
+      (PrimeSpectrum.isCompact_basicOpen a).isConstructible (basicOpen a).isOpen
+  -- finitely many equations cutting out `U ∩ Z` inside `U'`
+  obtain ⟨g, hg⟩ := PrimeSpectrum.exists_finset_subset_iUnion_of_isConstructible (hU'c.sdiff hs)
+    (fun b : {b : R // b ∈ vanishingIdeal Z} ↦ (basicOpen b.1 : Set (PrimeSpectrum R)))
+    (fun b ↦ (basicOpen b.1).isOpen) (fun b ↦ PrimeSpectrum.isCompact_basicOpen b.1)
+    (fun x hx ↦ by
+      have hxZ : x ∉ Z := fun h ↦ hx.2 ⟨hU'U hx.1, h⟩
+      rw [← hZ.closure_eq, ← zeroLocus_vanishingIdeal_eq_closure] at hxZ
+      simp only [mem_zeroLocus, Set.not_subset] at hxZ
+      obtain ⟨b, hb, hbx⟩ := hxZ
+      exact Set.mem_iUnion.2 ⟨⟨b, hb⟩, hbx⟩)
+  refine ⟨f.image Subtype.val, g.image Subtype.val, Set.Subset.antisymm ?_ ?_⟩
+  · refine fun x hx ↦ ⟨hsU' hx, ?_⟩
+    simp only [mem_zeroLocus, Finset.coe_image, Set.image_subset_iff]
+    rintro b -
+    exact (mem_vanishingIdeal Z b.1).1 b.2 x hx.2
+  · rintro x ⟨hxU', hxg⟩
+    by_contra hx
+    obtain ⟨b, hb, hxb⟩ := Set.mem_iUnion₂.1 (hg ⟨hxU', hx⟩)
+    exact hxb (hxg (Finset.mem_coe.2 (Finset.mem_image_of_mem _ hb)))
 
 
 end Constructible
