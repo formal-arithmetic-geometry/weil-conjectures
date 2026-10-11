@@ -469,6 +469,70 @@ noncomputable def Scheme.IsFiniteLocallyConstantSheaf.galoisRep
     ext x
     simp [galoisAct, Scheme.FiniteLocallyConstant.galoisSMul_mul]
 
+
+variable [PreGaloisCategory.IsNaturalSMul (Scheme.FiniteEtale.fiber s) G]
+
+/-- **The geometric stalk as a representation of `G`**, on finite locally constant sheaves of
+`Λ`-modules. -/
+noncomputable def Scheme.galoisRepFunctor :
+    ObjectProperty.FullSubcategory
+        (fun F : Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ) ↦
+          IsFiniteLocallyConstantSheaf F) ⥤ Rep.{u + 1} Λ G where
+  obj F := Rep.of (F.property.galoisRep s G)
+  map {F F'} f := Rep.ofHom
+    { toLinearMap := (((Scheme.pointSmallEtale s).sheafFiber (A := ModuleCat.{u + 1} Λ)).map f.hom).hom
+      isIntertwining' g := LinearMap.ext fun v ↦
+        Scheme.IsFiniteLocallyConstantSheaf.galoisAct_naturality s G g F.2 F'.2 f.hom v }
+  map_id F := by
+    ext v
+    simp
+  map_comp f f' := by
+    ext v
+    simp
+
+/-- The underlying `Λ`-module of `AlgebraicGeometry.Scheme.galoisRepFunctor` is the stalk. -/
+noncomputable def Scheme.galoisRepFunctorCompForget₂Iso :
+    Scheme.galoisRepFunctor (s := s) (G := G) (Λ := Λ) ⋙ forget₂ (Rep.{u + 1} Λ G) (ModuleCat.{u + 1} Λ) ≅
+      ObjectProperty.ι _ ⋙ (Scheme.pointSmallEtale s).sheafFiber :=
+  NatIso.ofComponents (fun F ↦ Iso.refl _) fun f ↦ by
+    ext v
+    rfl
+
+
+omit [PreGaloisCategory.IsNaturalSMul (Scheme.FiniteEtale.fiber s) G] in
+/-- On a connected scheme, morphisms of finite locally constant sheaves of sets are determined
+by their stalks at a geometric point. -/
+lemma Scheme.FiniteLocallyConstant.hom_ext_of_sheafFiber [ConnectedSpace Y]
+    {S S' : Y.FiniteLocallyConstant} {φ ψ : S ⟶ S'}
+    (h : ∀ x, (Scheme.pointSmallEtale s).sheafFiber.map φ.hom x =
+      (Scheme.pointSmallEtale s).sheafFiber.map ψ.hom x) : φ = ψ := by
+  apply (Scheme.FiniteEtale.equivalenceFiniteLocallyConstant Y).inverse.map_injective
+  apply (Scheme.FiniteEtale.fiber s).map_injective
+  ext a
+  obtain ⟨x, hx⟩ := (stalkEquiv s S).surjective ⟨a⟩
+  have h₁ := stalkEquiv_naturality s φ x
+  have h₂ := stalkEquiv_naturality s ψ x
+  rw [hx, h x] at h₁
+  rw [hx] at h₂
+  exact congrArg ULift.down (h₁.symm.trans h₂)
+
+instance [ConnectedSpace Y] : (Scheme.galoisRepFunctor (s := s) (G := G) (Λ := Λ)).Faithful where
+  map_injective {F F'} f g h := by
+    have hfg (x) : ((Scheme.pointSmallEtale s).sheafFiber (A := ModuleCat.{u + 1} Λ)).map f.hom x =
+        ((Scheme.pointSmallEtale s).sheafFiber (A := ModuleCat.{u + 1} Λ)).map g.hom x :=
+      congr(($h).hom x)
+    let f' : F.property.toFLC ⟶ F'.property.toFLC :=
+      ObjectProperty.homMk ((sheafCompose _ (CategoryTheory.forget (ModuleCat.{u + 1} Λ))).map f.hom)
+    let g' : F.property.toFLC ⟶ F'.property.toFLC :=
+      ObjectProperty.homMk ((sheafCompose _ (CategoryTheory.forget (ModuleCat.{u + 1} Λ))).map g.hom)
+    have h' : f' = g' := Scheme.FiniteLocallyConstant.hom_ext_of_sheafFiber s fun z ↦ by
+      apply (F'.property.stalkEquiv s).symm.injective
+      have e₁ := Scheme.IsFiniteLocallyConstantSheaf.stalkEquiv_symm_naturality s F.2 F'.2 f.hom z
+      have e₂ := Scheme.IsFiniteLocallyConstantSheaf.stalkEquiv_symm_naturality s F.2 F'.2 g.hom z
+      exact e₁.symm.trans ((hfg _).trans e₂)
+    ext V v
+    exact congr(($h').hom.hom.app V v)
+
 end Linear
 
 end GaloisAction
