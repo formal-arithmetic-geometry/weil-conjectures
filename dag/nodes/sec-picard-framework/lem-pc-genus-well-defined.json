@@ -16,7 +16,8 @@
   "def-pc-smooth-projective-curve",
   "def-pc-geometrically-irreducible",
   "pqf-def-cohomology",
-  "def-weil-vector-space-dimension"
+  "def-weil-vector-space-dimension",
+  "def-sc-field-linear-module-cohomology-operations"
  ],
  "proof": [
   {
@@ -171,5 +172,23 @@
   "group": "K1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-gw2 (reviewer sub-agent of L); spot-checked: Re-review after the 14:36 return: all three points repaired. (1) step 1 now cites lem-pc-dim-base-change (dim 1 for curve base change), lem-pc-projective-proper + lem-pc-proper-base-change(1) + def-weil-proper-morphism (separated, finite type), sbc-lem-smooth-geometrically-reduced (fibre X geometrically reduced, so X_kbar reduced), def-pc-integral-scheme (nonempty+reduced+irreducible), with lem-pc-projective-proper and sbc-lem-smooth-geometrically-reduced declared in tool_uses; all conditions of def-pc-curve/def-pc-smooth-projective-curve checked, then lem-pc-curve-coherent-finiteness (alg. closed, smooth projective curve, coherent O) gives finite H^1. (2) step 2 establishes properness by lem-pc-projective-proper and states pullback of O_X is O_{X_kbar}; lem-sc-flat-base-change-coherent hypotheses (X proper over k, k->kbar flat, F quasi-coherent) all met, i=1. (3) lem-pc-projective-base-change source now Tags 01WF (morphisms-lemma-H-projective-base-change) and 01K5 (schemes-lemma-quasi-compact-preserved-base-change), verified in tags file; statement agrees with def-pc-projective-morphism (H-projective + quasi-compact), both preserved by arbitrary base change; true. Step 3 elementary (independence preserved under field extension). Item statement unchanged; only split-owned fields changed. Small cases: P^1_k, H^1(O)=0; identity base change. Tool uses accepted: lem-pc-curve-coherent-finiteness, lem-pc-projective-proper, sbc-lem-smooth-geometrically-reduced (generic black boxes). Minor cosmetic: step 1 source.document is morphisms.tex while several tags lie in other chapters. 14:5x UTC."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GenusWellDefined",
+  "declaration": "AlgebraicGeometry.genus_well_defined",
+  "file": "lean/Sheaf/AlgebraicGeometry/GenusWellDefined.lean",
+  "statement": "theorem genus_well_defined (k : Type u) [Field k] (X : Scheme.{u}) [X.Over (Spec (.of k))] [Scheme.Hom.IsSmoothProjectiveCurve (X ↘ Spec (.of k))] [GeometricallyIrreducible (X ↘ Spec (.of k))] : FiniteDimensional k (Scheme.Modules.scalarCohomology (f := X ↘ Spec (.of k)) (SheafOfModules.unit X.ringCatSheaf) 1)",
+  "by": "P1",
+  "date": "2026-10-11",
+  "existing": false,
+  "branch": "sheaf-dag"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-gwd",
+  "group": "P1",
+  "result": "fix",
+  "note": "statement matches node (k field, X over Spec k smooth projective curve via IsSmoothProjectiveCurve, Mathlib GeometricallyIrreducible on the structure morphism, FiniteDimensional k of scalarCohomology of O_X in degree 1); added stmt_dep def-sc-field-linear-module-cohomology-operations justified (recorded H_k^n with k-structure via ΓSpecIso.inv ≫ f.appTop), check_dag clean on the delivered node; no existentials, no inline instances, no let; fix: docstring stale Scheme.Modules.H text replaced, node proof in words added, unused WeilConjectures Cohomology.Defs import dropped"
  }
 }
