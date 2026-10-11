@@ -139,5 +139,24 @@
   "item": "lem-weil-pbc-etale-over-normal-ring-normal",
   "worker": "stage1",
   "summary": "Statement kept (correct: Stacks 033C restricted to etale maps). Proof in three steps following the proof of More on Algebra 06DI ('etale hence smooth' then Algebra 033C): etale morphism => smooth morphism by the existing lem-weil-pbc-etale-smooth-zero-dimensional-fibres; smooth Spec-morphism => smooth ring map by the existing lem-weil-pbc-smooth-ring-map-iff-smooth-affine (Morphisms 01V6 / More on Morphisms 02H6); then the new node lem-weil-pbc-smooth-over-normal-ring-normal (Stacks 033C, unsplit, absent from Mathlib after LeanSearch, Loogle, LeanFinder and grep). No node identifying etale ring maps (00U1) with def-weil-etale-morphism was needed. Source tags checked against tags/tags: 033C lemma-normal-goes-up, 00U9 lemma-etale-standard-smooth, 00U1 definition-etale, 02GJ lemma-etale-characterize, 06DI lemma-henselization-normal. No Lean candidate found in slopmaster2 (grep of IsIntegrallyClosed conclusions)."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.EtaleNormalRing",
+  "declaration": "RingHom.Etale.isNormalRing",
+  "file": "lean/Sheaf/RingTheory/EtaleNormalRing.lean",
+  "statement": "theorem Etale.isNormalRing {A : Type uA} {B : Type uB} [CommRing A] [CommRing B] {f : A →+* B} (hf : f.Etale) (hA : ∀ (p : Ideal A) [p.IsPrime], IsDomain (Localization.AtPrime p) ∧ IsIntegrallyClosed (Localization.AtPrime p)) : ∀ (q : Ideal B) [q.IsPrime], IsDomain (Localization.AtPrime q) ∧ IsIntegrallyClosed (Localization.AtPrime q)",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-enn0959"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-enn0959",
+  "group": "H1",
+  "result": "fix",
+  "note": "commutative rings A,B independent universes; f : A →+* B with Spec B→Spec A etale as RingHom.Etale; A normal and conclusion B normal both as ∀ prime, IsDomain ∧ IsIntegrallyClosed of Localization.AtPrime (K1 ccd06d885 spelling); zero ring vacuous; no finiteness/Noetherian added; reverted the delivery's change of existing node(s) def-weil-pbc-normal-ring (--revert-nodes; kept as on sheaf-dag); left out new module(s) lean/Sheaf/RingTheory/NormalRing.lean (--drop-files, or a record fixed to existing: true)"
  }
 }
