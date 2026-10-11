@@ -122,7 +122,7 @@ lemma eq_of_toRing_eq {X : Scheme.{u}} {A : CommRingCat.{u}} {h h' : X ⟶ Spec 
     CommRingCat.hom_ext e
   rwa [cancel_epi] at this
 
-variable [FiniteDimensional K M] [IsGalois K M]
+variable [IsGalois K M]
 
 /-- **The sections `s g` cover the Čech nerve.** A point of `Spec M ×_K ⋯ ×_K Spec M` with
 residue field `E` is given by embeddings `ιₗ : M → E`, and `ιₗ = ι₀ ∘ gₗ` for some `gₗ ∈ G` since
@@ -148,11 +148,11 @@ theorem iUnion_range_nerveSection {k : ℕ} (y : Fin (k + 1) → Fin 1) :
     change _ ≫ Spec.map (CommRingCat.ofHom (algebraMap K M)) = W.hom at h
     simp only [ι, κ, ← h, toRing_comp_specMap]
     rfl
-  letI : Algebra K Γ(W.left, ⊤) := κ.toAlgebra
+  let : Algebra K Γ(W.left, ⊤) := κ.toAlgebra
   let ιA (l : Fin (k + 1)) : M →ₐ[K] Γ(W.left, ⊤) :=
     { ι l with commutes' := fun c ↦ congrArg (fun φ : K →+* _ ↦ φ c) (hι l) }
   -- `ιₗ = ι₀ ∘ τₗ` with `τₗ ∈ G`, by normality
-  letI : Algebra M Γ(W.left, ⊤) := (ι 0).toAlgebra
+  let : Algebra M Γ(W.left, ⊤) := (ι 0).toAlgebra
   have : IsScalarTower K M Γ(W.left, ⊤) :=
     .of_algebraMap_eq fun c ↦ (congrArg (fun φ : K →+* _ ↦ φ c) (hι 0)).symm
   let τ (l : Fin (k + 1)) : Gal(M/K) := (ιA l).restrictNormal' M
@@ -206,7 +206,7 @@ lemma evalSection_smul {k : ℕ} (y : Fin (k + 1) → Fin 1) (g : Fin (k + 1) �
       .ofMul (Units.map h.toAlgHom.toMonoidHom (evalSection y g c).toMul) := by
   simp only [evalSection, AddMonoidHom.coe_comp, AddEquiv.coe_toAddMonoidHom,
     Function.comp_apply, ← coverMap_nerveSection, Over.comp_left, op_comp,
-    Functor.map_comp, ConcreteCategory.comp_apply]
+    Functor.map_comp]
   exact gmSheafEtaleSpecEquiv_map h.toAlgHom _
 
 lemma evalSection_map {k m : ℕ} (y : Fin (m + 1) → Fin 1) (θ : Fin (k + 1) → Fin (m + 1))
@@ -216,11 +216,12 @@ lemma evalSection_map {k m : ℕ} (y : Fin (m + 1) → Fin 1) (θ : Fin (k + 1) 
       evalSection (y ∘ θ) (g ∘ θ) c := by
   change gmSheafEtaleSpecEquiv M ((Spec (.of K)).gmSheaf.obj.map (nerveSection y g).left.op
     ((Spec (.of K)).gmSheaf.obj.map (cechNerveMap (family K M) y θ).left.op c)) =
-    gmSheafEtaleSpecEquiv M ((Spec (.of K)).gmSheaf.obj.map (nerveSection (y ∘ θ) (g ∘ θ)).left.op c)
+    gmSheafEtaleSpecEquiv M
+      ((Spec (.of K)).gmSheaf.obj.map (nerveSection (y ∘ θ) (g ∘ θ)).left.op c)
   rw [← nerveSection_cechNerveMap, Over.comp_left, op_comp, Functor.map_comp,
     ConcreteCategory.comp_apply]
 
-variable [FiniteDimensional K M] [IsGalois K M]
+variable [IsGalois K M]
 
 /-- Sections of `𝔾ₘ` over the Čech nerve are determined by their values at the sections
 `s g`. -/
@@ -291,11 +292,11 @@ end Sections
 
 section Exactness
 
-variable [FiniteDimensional K M] [IsGalois K M]
-
-lemma vec_three (g : Fin 3 → Gal(M/K)) : g = ![g 0, g 1, g 2] := by
+lemma vec_three {α : Type*} (g : Fin 3 → α) : g = ![g 0, g 1, g 2] := by
   funext l
   fin_cases l <;> rfl
+
+variable [FiniteDimensional K M] [IsGalois K M]
 
 /-- **The second Čech cohomology of `𝔾ₘ` for a Galois covering of a `C₁` field vanishes.** The
 Čech complex of `𝔾ₘ` for the covering `Spec M ⟶ Spec K` is the complex of homogeneous
@@ -351,9 +352,9 @@ theorem exactAt_two_cechComplex_gmSheaf [IsQuasiAlgClosed K] :
       .ofMul (E (g 0) (g 2)) := hb _
   have h2 : evalSection (fun _ ↦ (0 : Fin 1)) (g ∘ (2 : Fin 3).succAbove) b =
       .ofMul (E (g 0) (g 1)) := hb _
-  change (-1 : ℤ) ^ ((0 : Fin 3) : ℕ) • evalSection (fun _ ↦ (0 : Fin 1)) (g ∘ (0 : Fin 3).succAbove) b +
-    (-1 : ℤ) ^ ((1 : Fin 3) : ℕ) • evalSection (fun _ ↦ (0 : Fin 1)) (g ∘ (1 : Fin 3).succAbove) b +
-    (-1 : ℤ) ^ ((2 : Fin 3) : ℕ) • evalSection (fun _ ↦ (0 : Fin 1)) (g ∘ (2 : Fin 3).succAbove) b = _
+  change (-1 : ℤ) ^ ((0 : Fin 3) : ℕ) • evalSection (fun _ ↦ (0 : Fin 1)) (g ∘ Fin.succAbove 0) b +
+    (-1 : ℤ) ^ ((1 : Fin 3) : ℕ) • evalSection (fun _ ↦ (0 : Fin 1)) (g ∘ Fin.succAbove 1) b +
+    (-1 : ℤ) ^ ((2 : Fin 3) : ℕ) • evalSection (fun _ ↦ (0 : Fin 1)) (g ∘ Fin.succAbove 2) b = _
   rw [h0, h1, h2]
   conv_rhs => rw [vec_three g]
   change _ = Additive.ofMul (F (g 0) (g 1) (g 2))
