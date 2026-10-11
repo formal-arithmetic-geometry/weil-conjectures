@@ -3893,3 +3893,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 08:51 L: merged deliver/M1/lem-sc-ringed-space-restrict-injective-resolution (stage 2; reviewer PASS; first push; Sheaf.Topology.RestrictInjectiveResolution AlgebraicGeometry.RingedSpace.restrict_injectiveResolution)
 - 08:51 L: merged deliver/G1/lem-sc-qcoh-cech-total-tensor-iso (stage 2; reviewer FIX; first push; Sheaf.Algebra.Homology.TensorKunneth HomologicalComplex.tensor_kunneth; dropped nodes: def-sc-module-tensor-bifunctor)
 - 08:51 L: merged deliver/M1/lem-weil-pbc-another-helper-g-ring (stage 2; reviewer PASS; first push; Sheaf.RingTheory.PolynomialFormalFiber Polynomial.formalFiber_isGeometricallyRegular)
+- 08:51 L: merged deliver/G1/lem-pur-hom-kflat-into-kinjective (stage 2; reviewer FIX; first push; Sheaf.Algebra.Homology.KInjectiveHomComplex CochainComplex.isKInjective_homComplex_of_isKFlat)
