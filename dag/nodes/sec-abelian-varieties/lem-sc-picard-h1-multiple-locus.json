@@ -25,48 +25,137 @@
   "def-weil-flat-morphism",
   "def-weil-proper-morphism",
   "def-weil-scheme-over-base",
-  "def-sbc-locally-finite-presentation"
+  "def-sbc-locally-finite-presentation",
+  "def-pc-base-change"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Replace the base by the scheme-theoretic intersection of the $Z_i$, and then by an affine neighbourhood of $s$ on which every $\\mathcal L_i$ is trivial. The inclusion $Z\\subseteq\\bigcap_i Z_i$ and the universal Picard-locus construction [lem-sc-picard-diagonal-locally-closed] justify this replacement; the desired equality is now the assertion that $\\mathcal L$ becomes pulled back from the base.",
+   "uses": [
+    "lem-sc-picard-diagonal-locally-closed"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Lemma lemma-H1-O-multiple-picard-flat-proper, Tag 0BF2, first proof paragraph"
+   }
+  },
+  {
+   "text": "Put $E=Rf_*\\mathcal L$ and $E_i=Rf_{i,*}\\mathcal O_{X_i}$. The proper flat finite-presentation hypotheses and the universal pushforward assumptions give perfect complexes and arbitrary base-change isomorphisms; in particular the fibre of $E$ at $s$ is $R\\Gamma(X_s,\\mathcal L_s)=R\\Gamma(X_s,\\mathcal O_{X_s})$ because $s\\in Z$.",
+   "uses": [
+    "lem-pc-rf-perfect-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Lemma lemma-H1-O-multiple-picard-flat-proper, Tag 0BF2, definition of E and E_i"
+   }
+  },
+  {
+   "text": "After shrinking the affine base, apply the finite-free residue model [lem-sc-perfect-finite-free-residue-model] to $E$ and each $E_i$; by step 2 the ranks are $h_j=\\dim_{\\kappa(s)}H^j(X_s,\\mathcal O_{X_s})$ and $h_{i,j}=\\dim_{\\kappa(s)}H^j(X_{i,s},\\mathcal O_{X_{i,s}})$, which vanish for $j<0$, and $h_0=h_{i,0}=1$ by the pushforward hypothesis for $T=\\operatorname{Spec}\\kappa(s)$. Since the model of $E$ is a bounded complex of finite free modules on an affine scheme and the model of $E_i$ is a bounded complex of quasi-coherent modules, the map $E\\to E_i$ in the derived category (functoriality of $Rf_*$ along $u_i$, compatible with base change) is represented by a chain map $(a_i,b_i,c_i,\\ldots)$ between these two fixed models (higher cohomology of quasi-coherent modules on an affine vanishes, so derived-category maps out of a bounded finite free complex are chain maps up to homotopy). The degree-zero residue maps $a_i\\otimes\\kappa(s)$ are isomorphisms because the chosen fibre trivializing section pulls back to the chosen trivializing section on every $X_{i,s}$.",
+   "uses": [
+    "lem-sc-perfect-finite-free-residue-model"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Lemma lemma-H1-O-multiple-picard-flat-proper, Tag 0BF2, finite-free complexes and chain-map diagram"
+   }
+  },
+  {
+   "text": "The injectivity hypothesis on $H^1$ says that the direct-sum degree-one residue map $(b_1,\\ldots,b_n):\\kappa(s)^{h_1}\\to\\bigoplus_i\\kappa(s)^{h_{i,1}}$ has rank $h_1$. A nonzero $h_1\\times h_1$ minor therefore remains invertible after shrinking, so the direct-sum map of free modules is injective (for $h_1=0$ this is vacuous). Since each pulled-back line bundle is trivial, the degree-zero differentials $d_i$ vanish, and the degree-zero maps $a_i$ are isomorphisms after shrinking because their residue maps are. The chain-map identity gives $(\\oplus_i b_i)d=(\\oplus_i d_i)(a_1,\\ldots,a_n)=0$, hence $d=0$ by injectivity.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Lemma lemma-H1-O-multiple-picard-flat-proper, Tag 0BF2, injective minor and d=0 paragraphs"
+   }
+  },
+  {
+   "text": "The equality $d=0$ means that the chosen trivializing section of $\\mathcal L_s$ lifts to a global section $\\sigma$ of $\\mathcal L$ on $X$. Its zero locus is closed; by [lem-weil-pbc-proper-closed-image] its image under the proper morphism $f$ is closed in $S$. Since the zero locus misses the fibre over $s$, an open neighbourhood $U$ of $s$ avoids that image. Thus $\\sigma|_{X_U}$ is nowhere vanishing and, by the defining local property of an invertible module, gives a trivialization of $\\mathcal L|_{X_U}$. The universal property of $Z$ then identifies $Z$ with the scheme-theoretic intersection of the $Z_i$ on $U.",
+   "uses": [
+    "lem-weil-pbc-proper-closed-image"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Lemma lemma-H1-O-multiple-picard-flat-proper, Tag 0BF2, final paragraph"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-picard-diagonal-locally-closed",
+  "lem-pc-rf-perfect-base-change",
+  "lem-sc-perfect-finite-free-residue-model",
+  "lem-weil-pbc-proper-closed-image"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Lemma lemma-H1-O-multiple-picard-flat-proper, Tag 0BF2"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
-   "query": "lem-sc-picard-h1-multiple-locus theorem statement",
-   "results": "hits for unrelated algebraic H1 injectivity; no Picard locus theorem",
+   "query": "theorem that injectivity on H^1 of fibers makes multiple Picard triviality loci equal locally",
+   "results": "unrelated sheaf local-injectivity and scheme open-cover declarations; no Picard locus theorem",
    "date": "2026-10-11",
    "verdict": "no match"
   },
   {
    "tool": "loogle",
-   "query": "lem-sc-picard-h1-multiple-locus",
-   "results": "0 hits; unknown identifier",
+   "query": "theorem that injectivity on H^1 of fibers makes multiple Picard triviality loci equal locally",
+   "results": "0 hits; parser rejected the natural-language input",
    "date": "2026-10-11",
    "verdict": "no match"
   },
   {
    "tool": "grep",
-   "query": "lem-sc-picard-h1-multiple-locus AlgebraicGeometry",
+   "query": "theorem that injectivity on H^1 of fibers makes multiple Picard triviality loci equal locally Mathlib/",
    "results": "no hits",
    "date": "2026-10-11",
    "verdict": "no match"
   },
   {
    "tool": "leansearch",
-   "query": "lem-sc-picard-h1-multiple-locus theorem",
+   "query": "theorem that injectivity on H^1 of fibers makes multiple Picard triviality loci equal locally",
    "results": "service unavailable: Internal Server Error",
    "date": "2026-10-11",
    "verdict": "unavailable"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sc-picard-product-open",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-abelian-varieties",
- "unit": "sk-prop-av-cube"
+ "unit": "sk-prop-av-cube",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-sc-picard-h1-multiple-locus",
+  "worker": "stage1",
+  "summary": "Split Tag 0BF2 into the base-intersection reduction, existing perfect direct-image/base-change input, a new local perfect-complex normal-form statement, the fibrewise H^1 minor argument, and the proper-section shrinking argument. Existing DAG nodes were cited where they state the required perfect base-change theorem; no Lean declaration states this item.",
+  "blueprint": "Realizes the theorem-of-cube route at the step applying the H^1 multiple Picard flat-proper lemma to the two section morphisms, via lem-sc-picard-product-open.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-rf-perfect-base-change",
+    "why": "The Tag 0BF2 proof requires the generic perfect proper-flat direct-image and arbitrary base-change theorem, which is not supplied by the theorem-of-the-cube unit."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-rf-perfect-base-change",
+  "lem-pc-rf-perfect-base-change"
+ ],
+ "reviewed": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-pml0004",
+  "group": "H1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-pml0004 (reviewer sub-agent of L); spot-checked: Statement unchanged vs Tag 0BF2 (Z subset of intersection stated as hypothesis, always true). C4: lem-pc-rf-perfect-base-change hypotheses met (L invertible on flat X is fp and S-flat; f proper fp); lem-sc-picard-diagonal-locally-closed universal property handles every T->S, base-change of S to the intersection keeps all hypotheses (E ok); residue model gives ranks via step 2; proper-closed-image is a mathlib leaf; step 5 trivialization elementary. Class d: picard nodes under sec-abelian-varieties read, no duplicate, no new nodes. FIX more, RETURN less: (1) step 3 said the map E->E_i is lifted 'after replacing the finite free models by quasi-isomorphic ones', which would destroy the rank shape step 4 needs; rewritten as a chain map between the fixed models (finite free source on an affine, quasi-coherent target), with h_0=h_{i,0}=1 from the pushforward hypothesis at Spec k(s) and h_j=0 for j<0; (2) stmt_deps gained def-pc-base-change, cited in the statement text. Second reading missed (1) and wrongly claims step 5 cites lem-weil-pbc-nonvanishing-section-trivializes (it does not; left uncited since that node is another unit's split node and the step is elementary). tool_uses lem-pc-rf-perfect-base-change accepted (generic perfect base change).; 1 file(s) fixed by the reviewer"
+ }
 }
