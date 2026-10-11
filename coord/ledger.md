@@ -3539,3 +3539,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 06:39 L: merged deliver/G1/lem-pc-left-localization-hom-colimit (stage 2; reviewer PASS; first push; Sheaf.CategoryTheory.LocalizationHomColimit CategoryTheory.localization_hom_colimit)
 - 06:40 L: merged deliver/M1/lem-pc-derived-splitting-unique (stage 2; reviewer FIX; first push; Sheaf.Paper.DerivedSplittingUnique CategoryTheory.derivedSplittingUnique)
 - 06:40 L: merged deliver/H1/def-weil-pbc-associated-module (stage 2; reviewer FIX; first push; Sheaf.AlgebraicGeometry.AssociatedModule AlgebraicGeometry.associatedModule)
+- 06:40 L: merged deliver/F1/lem-pc-kflat-cone-direct-sum (stage 2; reviewer PASS; first push; Sheaf.Algebra.Homology.KFlatClosure CochainComplex.isKFlat_coproduct_nat)

@@ -126,5 +126,27 @@
   "group": "C1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-kcd2356 (reviewer sub-agent of L); spot-checked: No cycle: lem-pc-kflat-closure cites this item for its cone/sum clauses and this item does not cite kflat-closure (not class b). Step 1: tensor commutes with sums via left adjointness [lem-pc-sheaf-modules-tensor-closed], exact countable coproducts via Grothendieck [prop-pur-kinjective-resolutions-exist, generic tool accepted]. Step 2: tensor-of-cone identification and LES two-out-of-three are the statement of the new node, a genuine lemma (true up to the standard sign iso), not a duplicate of any DAG node. FIX more, RETURN less: (1) item source.place still said 06YS although the report claimed it was corrected; now names 07A3 and 06YR (missed by the second reading); (2) B3: new node's recorded grep 'mappingCone: no hits' was false (HomotopyCategory/MappingCone.lean exists); marked superseded and my own grep for tensor/mapBifunctor of mappingCone recorded (no match); (3) dropped unused stmt_dep def-pc-kflat-complex from the new node.; 2 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.KFlatClosure",
+  "declaration": "CochainComplex.isKFlat_coproduct_nat",
+  "declarations": [
+   "CochainComplex.isKFlat_coproduct_nat",
+   "CochainComplex.isKFlat_mappingCone"
+  ],
+  "file": "lean/Sheaf/Algebra/Homology/KFlatClosure.lean",
+  "statement": "theorem isKFlat_coproduct_nat (K : ℕ → CochainComplex (SheafOfModules.{u} ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj R)) ℤ) (hK : ∀ n : ℕ, (K n).IsKFlat) : (∐ K).IsKFlat",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-kcd0804",
+  "group": "F1",
+  "result": "pass",
+  "note": "site C:Type u/Category.{u}, R : Sheaf J CommRingCat = node's ringed site (universe as landed IsKFlat); family K : N -> complexes with hK all K-flat = countable K-flat family; (∐ K).IsKFlat = direct sum K-flat (sigmaObj in complexes, degreewise sum); f : K1 ⟶ K2 any morphism, h1 h2 = both K-flat, (mappingCone f).IsKFlat = Mathlib cone; IsKFlat is the landed def-pc-kflat-complex (H12 ok); no shift clause in node; docstrings carry node's two proof steps, sources 06YR/07A3 verified in tags; Mathlib has no KFlat, source FromJoel kFlat is a different notion with no cone/sum closure; compiled clean as L"
  }
 }
