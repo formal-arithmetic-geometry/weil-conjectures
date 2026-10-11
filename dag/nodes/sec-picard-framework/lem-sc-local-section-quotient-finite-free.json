@@ -127,5 +127,23 @@
   "group": "M1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-lsq (reviewer sub-agent of L); spot-checked: Source: blueprint lem-sc-riemann-roch.md proof of (*), determinant paragraph line 145 'locally the sequence splits'; Stacks modules.tex section-kernels (01AF) and lemma-abelian (01AG) for step 2. Statement unchanged in mathematics; only stmt_deps def-weil-pbc-exact-sequence and def-weil-sheaf-of-modules-category added for notions already used; from.place reworded (split-owned). Step 1 carried by def-amb-finite-locally-free-module (Zariski cover with E|_V iso O_V^d, pick the member containing x). Step 2: def-weil-pbc-exact-sequence gives q epimorphism; lem-weil-pbc-ringed-space-module-exactness-local-lifting (1) applied to q with W=V, h=e_i gives a cover with local lifts; finitely many lifts intersect to an open U containing x. Step 3 elementary: sections of E3|_W are unique O(W)-combinations of the e_i|_W, the formula is O-linear and restriction-compatible (def-weil-sheaf-of-modules-category morphism), q o s = id coefficientwise. Small cases: d=0 (E3=0, s=0) handled in steps 2-3; d=1 with E2=E3, q=id gives s=id. Tool use lem-weil-pbc-ringed-space-module-exactness-local-lifting (unit sk-thm-p1) accepted as a generic sheaf fact used as a black box (C8). No new nodes, no Mathlib leaf. blueprint_refs search 'local splitting locally free quotient section': 0 matches, same_as [] correct. Report mentions a citations.json not in the commit (harmless). Start Sat Oct 10 03:53:18 PM UTC 2026, end Sat Oct 10 03:53:42 PM UTC 2026."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.LocalSectionQuotientFiniteFree",
+  "declaration": "AlgebraicGeometry.exists_local_section_of_shortExact_finiteLocallyFree",
+  "file": "lean/Sheaf/AlgebraicGeometry/LocalSectionQuotientFiniteFree.lean",
+  "statement": "theorem exists_local_section_of_shortExact_finiteLocallyFree {X : Scheme.{u}} (S : ShortComplex X.Modules) (hS : S.ShortExact) {d : ℕ} (hE₃ : S.X₃.IsFiniteLocallyFreeOfRank d) : ∀ x : X, ∃ U : X.Opens, x ∈ U ∧ ∃ s : (Scheme.Modules.restrictFunctor U.ι).obj S.X₃ ⟶ (Scheme.Modules.restrictFunctor U.ι).obj S.X₂, (Scheme.Modules.restrictFunctor U.ι).map S.g ≫ s = 𝟙 _",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-lsq1226",
+  "group": "H1",
+  "result": "pass",
+  "note": "X:Scheme.{u} only universe; S:ShortComplex X.Modules+ShortExact = def-weil-pbc-exact-sequence 0->E1->E2->E3->0; hE3 IsFiniteLocallyFreeOfRank d (constant finite rank, d=0 allowed); forall x exists U:X.Opens, x in U, s: E3|U -> E2|U morphism in U.Modules (O_U-linear) via restrictFunctor U.ι, restrict(S.g) ≫ s = 𝟙 = q|U∘s=id; same forms as K1 09d108de0 sibling; no let, no hollow hyps, s tied by equation"
  }
 }

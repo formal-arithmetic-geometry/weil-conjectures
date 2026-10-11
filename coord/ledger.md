@@ -4599,3 +4599,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 12:21 L: merged deliver/K1/lem-weil-pbc-affine-module-correspondence (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.AffineModuleCorrespondence AlgebraicGeometry.Scheme.Modules.affine_module_correspondence)
 - 12:21 L: merged deliver/F1/lem-weil-pbc-normal-nagata-monogenic-n1 (stage 2; reviewer PASS; first push; Sheaf.RingTheory.IsN1AdjoinSingleton isN1_adjoin_singleton_of_isNagataRing)
 - 12:21 L: merged deliver/J1/lem-weil-pbc-normal-ring-integrally-closed-total (stage 2; reviewer PASS; first push; Sheaf.RingTheory.NormalRingIntegrallyClosedTotal integral_totalFraction_mem_range_of_normal)
+- 12:21 L: merged deliver/H1/lem-sc-local-section-quotient-finite-free (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.LocalSectionQuotientFiniteFree AlgebraicGeometry.exists_local_section_of_shortExact_finiteLocallyFree)
