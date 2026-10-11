@@ -1,41 +1,155 @@
-Files written:
+## Worker report
 
-- `dag/nodes/sec-picard-framework/lem-sc-p1-right-derived-triangle-connecting.json`: repaired four-step proof.
-- `dag/nodes/sec-picard-framework/lem-weil-pbc-degreewise-split-derived-triangle.json`: new statement-only child; Mathlib search found the degreewise-split triangle API but no exact project leaf.
-- `dag/nodes/sec-picard-framework/lem-weil-pbc-complex-ses-connecting-formula.json`: new statement-only child; Mathlib has only the abstract snake connecting map.
-- `citations.json`: verbatim quotes for every step citation.
+The module states `CategoryTheory.rightDerived_triangle_connecting`. It quantifies abelian
+categories, enough injectives, derived-category and K-injective-resolution structures, and an
+additive left exact functor. It asserts existence of the horseshoe delta-functor `G` and its
+identification `hF` with the right derived functors. For every short exact `S` and degree `n`,
+the displayed equality identifies the horseshoe connecting morphism (left side) with the
+homology connecting morphism of the image triangle (right side), transported by the canonical
+single-object homology/right-derived isomorphisms. The triangle is
+`hS.singleTrianglePlus` and the derived functor image is mapped into the ambient derived
+category before applying `DerivedCategory.HomologySequence.δ`.
 
-Attachments: none. No sorry-free declaration states the full horseshoe-to-derived-triangle comparison.
+The statement uses `Sheaf.CategoryTheory.Abelian.HorseshoeDeltaFunctor` declaration
+`CategoryTheory.exists_horseshoe_rightDerived_deltaFunctor`, and Mathlib/source declarations
+for `DerivedCategory.HomologySequence.δ`, `ShortComplex.ShortExact.singleTrianglePlus`,
+and `Functor.homologyRightDerivedFunctorPlusObjSingleFunctorIso`.
 
-WANTED: none.
+Edge cases checked: `n = 0`, arbitrary short exact sequences (including zero objects), and
+naturality through the canonical `eqToHom` transports. The module compiles cleanly with the
+remote compiler.
 
-The returned version used universality of delta-functors to identify the two connecting maps. That is insufficient because reversing the sign of every connecting map preserves universality and degree zero. I removed that argument. The repaired route fixes the sign directly: a horseshoe resolution is degreewise split, its connecting chain map is `pi d s`, the split triangle is identified with the cone triangle whose third map is `-p`, and the resolution quasi-isomorphisms transport this specific triangle to the triangle of the original short exact sequence. Only after this comparison is the right derived functor applied.
+Searches: `rg` over `lean/Sheaf` and `WeilConjectures` for right-derived triangle and
+connecting declarations (no exact existing statement); `msearch.py` concept searches for
+right-derived connecting/triangle (only lower-level homology APIs found); Mathlib grep for
+`HomologySequence.δ` and `singleTrianglePlus` (used declarations above).
 
-## Review by F1
+## Earlier second reading (a previous round; superseded)
 
- I read the item source (Stacks derived Tags 05TE and 015B), the cone convention in Tag 014Q, and Homology Tags 011J and 0117. I also opened every cited DAG node. Step 1 uses the existing horseshoe statement for existence and degreewise exactness, the injective-resolution SES for splittings, the degreewise-split connecting lemma for `pi d s`, and the complex long-exact node for the homology maps; each cited statement says exactly those facts. Step 2 uses the new split-triangle statement and the new connecting-formula statement, together with the derived-category definition that distinguished triangles are cone triangles with third map `-p`; these fix the sign and identify the snake map on cocycles. Step 3 uses the injective-resolution-of-complexes statement for the three quasi-isomorphisms, the complex-SES triangle naturality statement, the cone convention, and the short-exact-sequence triangle statement for the target triangle. Step 4 uses bounded-below injectives are K-injective, triangulatedness of `Rv`, the cohomology long exact sequence, and the canonical `H^n(Rv(X[0]))` to `R^n v(X)` isomorphisms. No step invokes universality, so the sign ambiguity in the returned proof is gone.
+The signature was read against the node clause by clause. The category, injective, additive and left exact hypotheses are explicit; the short exact sequence and degree are universally quantified; and the equality transports the horseshoe boundary through the canonical single-object identifications to the homology boundary of the derived image triangle. No mismatch was found.
 
-I checked the hypotheses at each use: the abelian and enough-injectives assumptions come from the item and the horseshoe nodes; bounded-below injective terms are supplied by the horseshoe; degreewise splittings use injectivity of `I_A^n`; the quasi-isomorphism comparison is for the same short exact sequence `S`; and the termwise application of `v` is the construction of the right derived functor on these K-injective representatives. The zero short exact sequence gives zero maps in both descriptions, and the degree-zero case reduces to the ordinary exact sequence under `R^0v = v`. Both new statements are intentionally unsplit because they are used as standalone lemmas; their Mathlib searches and blueprint provenance are recorded in their node files.
-
-## Not duplicates
-
-`lem-weil-pbc-degreewise-split-derived-triangle` vs `lem-sf-derived-ses-triangle`: the former concerns arbitrary degreewise split short exact sequences of complexes and fixes the `pi d s` sign; the latter concerns objects concentrated in degree zero and only asserts existence of a triangle.
-
-`lem-weil-pbc-degreewise-split-derived-triangle` vs `def-weil-abstract-derived-category`: the existing definition states which cone triangles are distinguished and their `-p` convention; the new lemma proves that a degreewise split short exact sequence is isomorphic to that cone triangle and identifies its third map as `pi d s`.
-
-`lem-weil-pbc-complex-ses-connecting-formula` vs `lem-weil-pbc-complex-ses-homology-long-exact`: the former gives the cocycle formula for the connecting map; the latter asserts only existence and exactness of the long sequence.
-`lem-weil-pbc-complex-ses-connecting-formula` vs `lem-weil-pbc-complex-ses-long-exact-naturality`: the latter transports already-given connecting maps between two sequences; it does not identify either map with the explicit cocycle representative.
-`lem-weil-pbc-complex-ses-connecting-formula` vs `lem-weil-pbc-degreewise-split-connecting-morphism`: the latter constructs the chain map `pi d s`; the new node additionally identifies its induced cohomology map with the long-exact connecting morphism.
-`lem-weil-pbc-complex-ses-connecting-formula` vs `lem-weil-pbc-horseshoe-delta-functor`: the latter defines horseshoe connecting maps and their naturality abstractly; it does not state the split-complex cocycle formula.
 
 ## Second reading by F1
 
-- Item statement: checked against Derived Tags 05TE and 015B; hypotheses and the canonical-identification conclusion agree.
-- Step 1: checked against the horseshoe, injective-resolution SES, degreewise-split map, and complex long-exact statements; every cited statement supplies the stated construction.
-- Step 2: checked against Derived Tags 014I/014Q and Homology Tag 011J; the split triangle and explicit `pi d s` formula fix the sign.
-- Step 3: checked against the injective-resolution SES-complexes and complex-SES triangle naturality nodes; the resolution maps give the required triangle morphism.
-- Step 4: checked against the K-injective, triangulated-derived-functor, homology-long-exact, and single-object identification nodes; all bounded-below hypotheses are present.
-- `lem-weil-pbc-degreewise-split-derived-triangle`: statement-only, self-contained, definitions cited, source corrected to Tags 014I/014Q, no exact existing statement with the explicit split formula.
-- `lem-weil-pbc-complex-ses-connecting-formula`: statement-only, self-contained, source corrected from the incorrect 0119 citation to 011J plus 0117; no duplicate because the existing long-exact node omits the cocycle formula.
+Read the item's statement, all eleven statement dependency nodes and their recorded
+signatures, the delivered module, and the relevant declaration bodies. No new nodes,
+dependency modules, or statement corrections are present or needed. The node's
+mathematical statement is unchanged.
 
-Changes: corrected the item `created.item`; removed the stale universal-delta proof dependency; corrected the Homology tag citations; added the existing complex-SES triangle naturality dependency and citation to Step 3.
+Source reading: Stacks tags/tags maps 05TE to
+`derived-lemma-right-derived-delta-functor` and 015B to
+`derived-lemma-higher-derived-functors`. Read both lemmas and their proofs in
+`/home/ubuntu/c1-stacks-review/derived.tex`, lines 5680ff and 7047ff, since the
+repository's literature/stacks-project checkout is absent on this machine. 05TE
+constructs the canonical delta-functor by the derived triangle and homology;
+015B assumes an abelian source with enough injectives and a left exact functor,
+and asserts the bounded-below construction is everywhere defined. Neither asks
+for resolutions of all unbounded complexes. The item's proof is the explicit
+horseshoe-to-cone comparison, not a universality argument fixing signs.
+
+Clause-by-clause inventory and verdict:
+
+1. Objects: arbitrary abelian categories A and B. Rendered by `{A : Type u₁}`,
+   `{B : Type u₂}`, independent `Category.{v₁}`/`Category.{v₂}` and `Abelian`
+   instances. These are the `def-sp-abelian` Mathlib classes. Correct.
+2. Source has enough injectives: `[EnoughInjectives A]`, with no such hypothesis
+   on B. `InjectiveResolution` is the recorded notion of
+   `def-sp-injective-resolutions`, not an arbitrary acyclic complex. Correct.
+3. Functor v is additive and left exact: `(v : A ⥤ B) [v.Additive]
+   [PreservesFiniteLimits v]`. Read the `def-sp-left-exact-additive` record:
+   finite-limit preservation is equivalent here to kernel preservation for an
+   additive functor. Correct; no additional finiteness assumption.
+4. The right derived functors are `v.rightDerived n` (read Mathlib RightDerived,
+   definition and `InjectiveResolution.isoRightDerivedObj`). `hF` identifies
+   `G.F` with precisely this family, not merely isomorphic unspecified functors.
+   The `eqToHom` transports express only that equality. Correct.
+5. Short exact S consists of A -> B -> C: `(S : ShortComplex A)` and
+   `(hS : S.ShortExact)`, with objects `S.X₁`, `S.X₂`, `S.X₃` and arrows S.f/S.g.
+   Quantification includes every sequence. Correct.
+6. Its connecting maps are defined by a compatible horseshoe resolution and
+   the long exact sequence of v applied to it. The ORIGINAL Lean did not state
+   this: an existential arbitrary `G` with the desired derived boundary was
+   enough, even though the docstring called it horseshoe. REPAIRED by the first
+   conjunct, exactly the resolution comparison from the recorded
+   `exists_horseshoe_rightDerived_deltaFunctor`. It quantifies IA, IB, IC,
+   α, β, α ≫ β = 0, both augmentation equations, and degreewise short exactness.
+   It asserts short exactness after applying v and identifies `G.delta` with
+   `IC.isoRightDerivedObj.hom ≫ hvH.δ ≫ IA.isoRightDerivedObj.inv` for every n.
+   Read the dependency's full signature and docstring and Mathlib's snake
+   boundary definition `ShortComplex.ShortExact.δ`. Correct after repair:
+   the same G and hF witness both conjuncts, so no unrelated choice of delta
+   maps can satisfy the comparison by fiat. The first conjunct specifies the
+   construction already assumed in the node, rather than a new mathematical
+   requirement or a new definition of the notion.
+7. Canonical identifications: read PlusSingle's
+   `homologyRightDerivedFunctorPlusObjSingleFunctorIso`: its hom direction is
+   H^n(Rv(X[0])) -> R^n v(X), built from the injective-resolution comparison.
+   The final equality uses its inverse on C in degree n and A in degree n+1.
+   Its two sides both go from G.F(n)(C) to H^(n+1)(Rv(A[0])). Correct.
+8. Triangle of S and exact Rv: `hS.singleTrianglePlus` is the lift of Mathlib's
+   `singleTriangle`, with the same single complexes, maps and boundary (read
+   WeilConjectures' SingleTriangle and Mathlib's singleδ/singleTriangle).
+   `v.rightDerivedFunctorPlus` is the bounded-below right derived functor;
+   read its `rightDerivedFunctorPlusIsoInjectiveObject`, CommShift and
+   IsTriangulated instances in RightDerivedFunctorPlus. These require enough
+   injectives, not global K-injective resolutions. `mapTriangle` includes the
+   shift comparison, and the composite with `DerivedCategory.Plus.ι` views the
+   image triangle in the ambient derived category. Correct.
+9. Equality of connecting maps: `DerivedCategory.HomologySequence.δ` is, by its
+   definition, homology applied to the third triangle map via shiftMap. The
+   second conjunct, universal in S, hS, and n : ℕ, equates this to the SAME
+   horseshoe `G.delta` of clause 6 after the canonical transports. Correct;
+   no sign is inserted, and no clause is reduced to mere existence of maps.
+10. Size structures: independent `[HasDerivedCategory.{w₁} A]` and
+    `[HasDerivedCategory.{w₂} B]` express the recorded size convention.
+    `HasDerivedCategory.standard` supplies these for arbitrary category sizes;
+    no equality among object, morphism or localization universes is imposed.
+    The ORIGINAL `[Abelian.HasKInjectiveResolutions A]` was an additional
+    unbounded-resolution hypothesis not given by the node or needed by D⁺.
+    REMOVED, together with the now unused PlusCompatibility import. Correct.
+
+Edge cases: n = 0 is included and the first conjunct uses the ℕ-indexed snake
+boundary from degree 0 to 1 without positivity hypotheses. Zero objects and the
+zero short exact sequence are included, as are sequences with zero endpoints.
+All horseshoes are quantified, so choice of resolution cannot alter the map.
+Empty index sets, empty schemes and characteristics impose no additional case
+here: the statement is categorical, with no indexing family, scheme or base
+ring. The universes are independent and explicitly bound. No Grothendieck,
+Noetherian, finite-dimensional, field, or unbounded-K-injective assumption remains.
+
+Independent H4 searches, with queries different from the first worker:
+
+- `msearch.py ... leanfinder "snake boundary injective resolution cohomology
+  derived functor triangle compatibility"`: eight lower-level matches, including
+  injective-resolution comparison maps and the Ext-specific
+  `preadditiveCoyoneda_homologySequenceδ_singleTriangle_apply`; these do not
+  compare the horseshoe boundary for an arbitrary additive left exact functor.
+- `msearch.py ... loogle "InjectiveResolution → ShortComplex.ShortExact → _"`:
+  Unknown identifier, no match; type-pattern service did not resolve the name.
+- `msearch.py ... leansearch "The snake lemma connecting maps on injective
+  resolutions agree with the derived category triangle boundary"`: unavailable
+  (Internal Server Error), recorded as unavailable rather than negative evidence.
+- `rg` in repository lean/Sheaf, source WeilConjectures/CategoryTheory and
+  WeilConjectures/Mathlib, and pinned Mathlib for `horseshoe`, `snakeInput`,
+  `rightDerived.*triangle`, `comp_homologySequenceδ`, and `connecting`:
+  found the horseshoe dependency and Ext-specific comparison, plus the canonical
+  single identification, triangle and homology APIs already used. Opened the
+  horseshoe and ExtResolutionDerivedConnecting modules; the latter concerns
+  Hom(M,-) only, not this general functor statement. No exact existing statement
+  found and no new notion introduced.
+
+Other repairs: added the project copyright/license header. Expanded the proof
+in the statement docstring to all four node steps and their dependency IDs,
+including degreewise splitting, cone -p convention, quasi-isomorphisms,
+Hom(A[0][1],C[0]) vanishing and uniqueness of the boundary, application of Rv,
+and the final canonical transports. The old docstring omitted the key
+uniqueness/sign argument. Kept the original final comparison formula. All
+lines are at most 100 characters. There are no data definitions, local notation,
+private copies, file-local instances or unbound variables; the sole theorem's
+proof remains `sorry` (the index equality is just arithmetic).
+
+Validation: remote `scompile.py` compiled the repaired 93-line module in 2.1 s,
+exit 0, with no warnings. The node's `lean.statement` was copied verbatim from
+the final signature, including the added horseshoe conjunct and deleted extra
+instance. The initial compiler invocation used an incorrect relative filename;
+rerunning with the sandbox's absolute path succeeded.
