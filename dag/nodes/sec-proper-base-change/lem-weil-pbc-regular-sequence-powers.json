@@ -176,5 +176,23 @@
   "by": "L",
   "result": "accepted",
   "note": "6 steps following Stacks 07DV with the omitted details written out: weakly regular reformulation, the one-element case with the short exact sequence N/fN -> N/f^eN -> N/f^{e-1}N, the nonvanishing condition by J^n subset J' (pigeonhole), forward direction by the new 0F1T node (part (a) = what its proof shows), converse by induction with the snake lemma leaf, induction on r. Checked steps 3-6."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.RegularSequencePowers",
+  "declaration": "RingTheory.Sequence.isRegular_ofFn_pow_iff",
+  "file": "lean/Sheaf/RingTheory/RegularSequencePowers.lean",
+  "statement": "theorem isRegular_ofFn_pow_iff {R : Type u} [CommRing R] (M : Type v) [AddCommGroup M] [Module R M] {r : ℕ} (f : Fin r → R) (e : Fin r → ℕ) (he : ∀ i : Fin r, 0 < e i) : IsRegular M (List.ofFn f) ↔ IsRegular M (List.ofFn (fun i ↦ f i ^ e i))",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-rsp",
+  "group": "H1",
+  "result": "pass",
+  "note": "CommRing R, arbitrary R-module M (independent universes), Fin r-indexed f and positive e by position, iff of RingTheory.Sequence.IsRegular (confirmed by #print) on List.ofFn f and List.ofFn (f i ^ e i); r=0 and zero module covered by top_ne_smul"
  }
 }
