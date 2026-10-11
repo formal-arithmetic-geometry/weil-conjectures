@@ -1,0 +1,97 @@
+{
+ "id": "def-sc-finite-locally-free-sheaf",
+ "kind": "definition",
+ "title": "Finite locally free sheaves with rank allowed to vary",
+ "status": "split",
+ "statement": "Let $X$ be a scheme [def-pc-scheme] and $\\mathcal F$ a sheaf of $\\mathcal O_X$-modules [def-weil-sheaf-of-modules-category]. The sheaf $\\mathcal F$ is finite locally free if there is an open cover $(U_i)_{i\\in I}$ of $X$ and, for each $i$, a finite integer $r_i\\geq 0$ with $\\mathcal F|_{U_i}\\cong\\mathcal O_{U_i}^{\\oplus r_i}$. The integers $r_i$ may vary with $i$.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "source": {
+  "document": "literature/stacks-project/modules.tex",
+  "place": "Definition 17.14.1 (Tag 01C6), definition-locally-free, part (2)"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "finite locally free sheaf of modules rank allowed to vary",
+   "results": "HTTP 500 Internal Server Error; service unavailable",
+   "date": "2026-10-11",
+   "verdict": "service unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "sheaf modules finite locally free local generators finite varying rank",
+   "results": "LocalGeneratorsData.IsFiniteType and related Mathlib generator-data notions; not the complete predicate",
+   "date": "2026-10-11",
+   "verdict": "ingredients only"
+  },
+  {
+   "tool": "grep",
+   "query": "rg IsFiniteLocallyFree Mathlib WeilConjectures lean/Sheaf; search DAG definition titles and declarations",
+   "results": "WeilConjectures/Mathlib/Algebra/Category/ModuleCat/Sheaf/LocallyFree.lean:156 defines SheafOfModules.IsFiniteLocallyFree. No Mathlib predicate or duplicate project definition; DAG def-amb-finite-locally-free-module fixes a single rank, def-pc-finite-locally-free concerns morphisms.",
+   "date": "2026-10-11",
+   "verdict": "existing source declaration; new DAG reference only"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sc-affine-finite-module-free-locus",
+  "date": "2026-10-11",
+  "group": "C1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-riemann-roch",
+   "place": "The affine free-locus criterion: its equivalent finite locally free sheaf conclusion",
+   "via": [
+    "lem-sc-affine-finite-module-free-locus",
+    "lem-sc-coherent-free-stalks-locally-free",
+    "lem-sc-regular-curve-torsionfree-free"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-rr",
+ "lean": {
+  "module": "WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree",
+  "declaration": "SheafOfModules.IsFiniteLocallyFree",
+  "statement": "class IsFiniteLocallyFree (M : SheafOfModules.{u} R) : Prop",
+  "branch": "slopmaster2",
+  "by": "C1",
+  "date": "2026-10-11",
+  "existing": true,
+  "note": "Existing variable-rank notion, specialized to the open site and structure sheaf of a scheme; no new Lean definition."
+ },
+ "reviewed": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-mfl0955",
+  "group": "C1",
+  "result": "fix",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-mfl0955",
+  "group": "C1",
+  "result": "fix",
+  "note": "A Noetherian (IsNoetherianRing), M finite (Module.Finite), every M_p free over A_p = Module.freeLocus A M = Set.univ (FIX: was the unfolded forall-prime form; finiteness of M_p implied by Module.Finite A M), finite family Fin n -> A spanning top, each M_{f_i} free and finite over A_{f_i}; sheaf clause: tilde (ModuleCat.of A M) IsFiniteLocallyFree (varying rank, Tag 01C6(2)); new node def-sc-finite-locally-free-sheaf existing:true on source SheafOfModules.IsFiniteLocallyFree, no DAG node carries varying rank (def-amb is constant rank, def-pc is morphisms); no exact Mathlib theorem (freeLocus_eq_univ_iff gives projectivity only)"
+ }
+}
