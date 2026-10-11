@@ -158,5 +158,27 @@
   "group": "F1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of F1; spot-checked by L: L: 5 steps (components, preimage pieces, forced restriction, gluing, functions) read against 01JB/01HI"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.CoproductCopiesMorphismsClopen",
+  "declaration": "AlgebraicGeometry.coproductCopiesMorphismsClopen",
+  "declarations": [
+   "AlgebraicGeometry.IsClopenDecomposition",
+   "AlgebraicGeometry.coproductCopiesMorphismsClopen"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/CoproductCopiesMorphismsClopen.lean",
+  "statement": "theorem coproductCopiesMorphismsClopen (U W : Scheme.{u}) (E : Type v) [Small.{u} E] (s : W ⟶ U) : ((∀ f : W ⟶ ∐ fun _ : E => U, f ≫ Sigma.desc (fun _ : E => 𝟙 U) = s → IsClopenDecomposition W E (fun e => f ⁻¹ᵁ (Sigma.ι (fun _ : E => U) e).opensRange) ∧ ∀ e : E, (f ⁻¹ᵁ (Sigma.ι (fun _ : E => U) e).opensRange).ι ≫ f = ((f ⁻¹ᵁ (Sigma.ι (fun _ : E => U) e).opensRange).ι ≫ s) ≫ Sigma.ι (fun _ : E => U) e)) ∧ (∀ P : E → W.Opens, IsClopenDecomposition W E P → ∃! f : W ⟶ ∐ fun _ : E => U, f ≫ Sigma.desc (fun _ : E => 𝟙 U) = s ∧ ∀ e : E, f ⁻¹ᵁ (Sigma.ι (fun _ : E => U) e).opensRange = P e) ∧ (∃ b : {f : W ⟶ ∐ fun _ : E => U // f ≫ Sigma.desc (fun _ : E => 𝟙 U) = s} ≃ {P : E → W.Opens // IsClopenDecomposition W E P}, ∀ f e, (b f).1 e = f.1 ⁻¹ᵁ (Sigma.ι (fun _ : E => U) e).opensRange) ∧ (∃ b : {f : W ⟶ ∐ fun _ : E => U // f ≫ Sigma.desc (fun _ : E => 𝟙 U) = s} ≃ LocallyConstant W E, ∀ f e, ((f.1 ⁻¹ᵁ (Sigma.ι (fun _ : E => U) e).opensRange) : Set W) = {x : W | b f x = e}) ∧ ((∀ e₀ : E, ∀ e : E, ((s ≫ Sigma.ι (fun _ : E => U) e₀) ⁻¹ᵁ (Sigma.ι (fun _ : E => U) e).opensRange) = if e = e₀ then ⊤ else ⊥)) ∧ (IsEmpty E → IsEmpty (∐ fun _ : E => U : Scheme.{u}) ∧ ((∃ f : W ⟶ ∐ fun _ : E => U, f ≫ Sigma.desc (fun _ : E => 𝟙 U) = s) ↔ IsEmpty W))",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-ccm0632",
+  "group": "H1",
+  "result": "pass",
+  "note": "U_E=∐ fun _:E=>U, ι_e=Sigma.ι, π=Sigma.desc 𝟙 (as ConstantGroupScheme.lean), V_e=opensRange; IsClopenDecomposition = disjoint + iSup ⊤; (a) decomposition + j_e-restricted equation; (b) ∃! with preimages; Equiv to decompositions and to LocallyConstant W E with fibre equations; (c) ⊤/⊥ components; empty E: empty coproduct and ∃ ↔ IsEmpty W; Small.{u} E only"
  }
 }
