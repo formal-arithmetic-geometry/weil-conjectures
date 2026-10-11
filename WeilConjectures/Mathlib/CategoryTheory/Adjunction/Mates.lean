@@ -66,6 +66,26 @@ lemma conjugateIsoEquiv_trans (e : L₂ ≅ L₁) (e' : L₃ ≅ L₂) :
   ext : 1
   exact (conjugateEquiv_comp adj₁ adj₂ adj₃ e.hom e'.hom).symm
 
+/-- **The mate of an isomorphism of left adjoints carries the pasted unit and counit.**
+Transporting the adjunction `L₁ ⊣ R₁` along an isomorphism `e : L₁ ≅ L₂` of left adjoints and
+along its conjugate `R₁ ≅ R₂` gives back the adjunction `L₂ ⊣ R₂`: the unit and counit of
+`adj₂` are those of `adj₁` pasted with `e` and with the conjugate of `e`:
+```
+  𝟭 --η₁--> L₁ ⋙ R₁ --e ◫ ẽ--> L₂ ⋙ R₂        R₂ ⋙ L₂ --ẽ⁻¹ ◫ e⁻¹--> R₁ ⋙ L₁ --ε₁--> 𝟭
+```
+where `ẽ : R₁ ≅ R₂` is the inverse of the conjugate `R₂ ≅ R₁` of `e`; the left composite is the
+unit `η₂` of `adj₂` and the right composite is its counit `ε₂`. -/
+lemma Adjunction.ofNatIsoLeft_ofNatIsoRight_conjugateIsoEquiv (e : L₁ ≅ L₂) :
+    (adj₁.ofNatIsoLeft e).ofNatIsoRight (conjugateIsoEquiv adj₂ adj₁ e).symm = adj₂ := by
+  ext c
+  have h := unit_conjugateEquiv adj₁ adj₂ e.inv c
+  have hn := (conjugateEquiv adj₁ adj₂ e.inv).naturality (e.hom.app c)
+  simp only [Functor.comp_obj, Functor.id_obj] at h hn
+  simp only [Adjunction.ofNatIsoRight_unit, Adjunction.ofNatIsoLeft_unit, NatTrans.comp_app,
+    Functor.whiskerRight_app, Functor.whiskerLeft_app, Iso.symm_hom, conjugateIsoEquiv_apply_inv,
+    Category.assoc, Functor.comp_obj, Functor.id_obj]
+  rw [hn, reassoc_of% h, ← R₂.map_comp, Iso.inv_hom_id_app, R₂.map_id, Category.comp_id]
+
 end
 
 /-- Conjugation carries the left unitor of a left adjoint to the right unitor of its right
