@@ -223,5 +223,23 @@
   "by": "L",
   "result": "pass",
   "note": "Reviewed by the lead (opus-relaunch6). Seven steps along the actual proof of Stacks 04FF (universal first order thickenings and conormal sheaves, 04F2-04FA, then 04FE (3)=>(1) written out): unramified => formally unramified (new leaf: the open-diagonal instance FormallyUnramified.lean:79 + hom_ext :193, verified), diagonal open immersion, projections formally unramified (02HB leaf, :120) and flat (01U9 leaf, Flat.lean:81/85/89, verified), p^* C_{X/S} = C_q (new unsplit 04F8/04F9 node), C_q restricted to the diagonal is C_{X/X} = 0 (new unsplit 04FA node), C_{X/S} = 0, existence of the lift, consequences. New definition nodes: formally unramified (Mathlib leaf by the def-weil-flat-morphism precedent: Mathlib's notion is affine-local with hom_ext/of_hom_ext :193/:240 giving the lifting characterisation), universal first order thickening and conormal sheaf (unsplit, with 04F3 existence unsplit). Brief errors: 04FD is lemma-formally-etale-not-affine and 02HM (etale => formally etale) is proved from 04FF; 04FB is not 02HE. Stage-3 note: G1's unramified-etale-local-decomposition may create its own 'unramified => formally unramified' node (merge with lem-weil-pbc-unramified-formally-unramified if so). Tags verified by the worker."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FlatUnramifiedFormallyEtale",
+  "declaration": "AlgebraicGeometry.flat_unramified_formally_etale",
+  "file": "lean/Sheaf/AlgebraicGeometry/FlatUnramifiedFormallyEtale.lean",
+  "statement": "theorem flat_unramified_formally_etale {X S : Scheme.{u}} (f : X ⟶ S) [Flat f] (h_unramified : LocallyOfFiniteType f ∧ IsOpenImmersion (pullback.diagonal f)) : (∀ {T T' : Scheme.{u}} (i : T ⟶ T') [IsAffine T] [IsAffine T'] [T'.Over S], IsFirstOrderThickening i → ∀ (a : T ⟶ X), a ≫ f = i ≫ (T' ↘ S) → ∃! a' : T' ⟶ X, i ≫ a' = a ∧ a' ≫ f = T' ↘ S) ∧ FormallySmooth f",
+  "branch": "sheaf-dag",
+  "by": "G1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-fuf1040",
+  "group": "G1",
+  "result": "pass",
+  "note": "f:X⟶S, [Flat f]=def-weil-flat-morphism, unramified = recorded LFT ∧ IsOpenImmersion(diagonal) match, affine T,T' with [T'.Over S], IsFirstOrderThickening i (recorded), a over S via i≫(T'↘S), ∃! a' with i≫a'=a ∧ a'≫f=T'↘S (02HG inline; no scheme-level FormallyEtale in pinned Mathlib), ∧ recorded FormallySmooth f; single universe u"
  }
 }
