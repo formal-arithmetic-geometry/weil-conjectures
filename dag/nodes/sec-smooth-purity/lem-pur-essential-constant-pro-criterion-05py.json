@@ -21,9 +21,60 @@
  "stmt_deps": [
   "def-pc-essentially-constant-pro-diagram"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For each object j of J, apply the assumed bijection with W=G(j) to the colimit class represented by id_{G(j)} at j. Let u_j:X\\to G(j) be its unique preimage. If a:j\\to j' is a morphism of J, postcomposition by G(a) carries the class of id_{G(j)} to the class of G(a) represented at j and also carries the class of id_{G(j')} to that same class. Naturality of the assumed bijections in W and injectivity therefore give G(a)\\circ u_j=u_{j'}, so (u_j) is a cone.",
+   "uses": [
+    "def-pc-essentially-constant-pro-diagram"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Categories, Lemma Tag 05PY, implication (4) => (1), construction of the cone maps in the pro-object case"
+   }
+  },
+  {
+   "text": "With W=X, naturality under postcomposition by r shows that the image of r\\circ u_{j_0} under the assumed bijection is the class of r represented at j_0. The image of id_X is also that class, because the defining map sends id_X to the class of id_X\\circ r=r at j_0. Injectivity gives r\\circ u_{j_0}=id_X.",
+   "uses": [
+    "def-pc-essentially-constant-pro-diagram"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Categories, Lemma Tag 05PY, implication (4) => (1), retraction clause in the pro-object case"
+   }
+  },
+  {
+   "text": "Fix j. By the definition of u_j, the class of u_j\\circ r represented at j_0 equals the class of id_{G(j)} represented at j in the relevant filtered colimit. Equality of two representatives in a filtered colimit of sets means that there is an object k with morphisms k\\to j_0 and k\\to j for which their pullbacks agree. Thus the transition G(k)\\to G(j) equals the composite G(k)\\to G(j_0)\\xrightarrow{r}X\\xrightarrow{u_j}G(j).",
+   "uses": [
+    "def-pc-essentially-constant-pro-diagram"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Categories, Lemma Tag 05PY, implication (4) => (1), factorization clause in the pro-object case"
+   }
+  },
+  {
+   "text": "The cone (u_j), the index j_0, the morphism r, the identity r\\circ u_{j_0}=id_X, and the factorization established for every j are exactly the data and clauses in the definition of an essentially constant pro-object with value X. The construction also gives the stated characterization of each u_j, namely that the class of u_j\\circ r at j_0 is the class of id_{G(j)} at j.",
+   "uses": [
+    "def-pc-essentially-constant-pro-diagram"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Categories, Definition Tag 05PU(2) and Lemma Tag 05PY, implication (4) => (1)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-essentially-constant-pro-diagram"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/categories.tex",
+  "place": "Categories, Lemma Tag 05PY, implication (4) => (1), pro-object case"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -48,12 +99,28 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-pur-derived-functor-triangles-05sc",
   "by": "worker",
   "date": "2026-10-11"
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-def-sf-operations"
+ "unit": "sk-def-sf-operations",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-pur-essential-constant-pro-criterion-05py",
+  "worker": "stage1",
+  "summary": "No sorry-free project declaration states this criterion. I split the converse Hom-colimit argument into explicit construction of the cone maps, proof of cone naturality, proof of the retraction, extraction of the cofiltered factorization, and identification with the pro-essential-constancy definition. No new nodes were needed; the existing pro-diagram definition is the sole dependency.",
+  "blueprint": "Realizes the converse essential-constancy criterion applied to the Hom-colimit bijections in the proof of Categories Lemma 05PY.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-epc0244",
+  "group": "J1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-epc0244 (reviewer sub-agent of L); spot-checked: Steps 1-4 against def-pc-essentially-constant-pro-diagram clause by clause: u_j as preimage of [id]_j with W=G(j), cone by naturality in W plus injectivity ([id_{G(j')}]_{j'}=[G(a)]_j), r∘u_{j0}=id_X by W=X injectivity, factorization from equality in the filtered colimit over J^op (k->j0, k->j). Statement identical to 152e1fcd6; only proof/proof_deps/status/split_report/proof_origin changed; no new nodes; not a duplicate of lem-pc-essentially-constant-pro-hom-colimit (forward direction). Mathlib grep 'essentially constant': no hit. Packet head f23063834 repushed as 941fb7bcb (rebase onto sheaf-dag), item and report byte-identical. No fault beyond the second reading by J1."
+ }
 }
