@@ -3185,3 +3185,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 00:58 UTC L: G1 recd-fibre-cartier-local FIX 4df7c822f (R-rfc0056; leaf pointed at the sorry-free exists_notMem_isRegularPrincipal_and_flat_of_fiber).
 - 00:58 L: merged deliver/H1/lem-sc-affine-koszul-hom-alternating-cech (reviewer FIX; after a return; new nodes: 1)
 - 00:59 L: returned deliver/C1/lem-pur-left-derived-exact-when-defined (reviewer RETURN: 1. D1/D2 (no real split): Step 2 (marked elementary) concludes by quoting Proposition 05SE LF part, which is the item's )
+- 00:59 L: returned deliver/K1/lem-sc-picard-kunneth-qcoh (reviewer RETURN: R-kun0058 (head 658955424). 1. C4/E7 (point 2 of R-kun0012 NOT repaired): the statement again drops 'functorial for pull)
