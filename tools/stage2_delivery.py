@@ -698,10 +698,26 @@ def read_delivery(git: Git, ref: str, base: str, group: str, item: str, max_comm
         if gone:
             f("b", f"the item's stmt_deps lost {', '.join(gone)}: a delivery only adds the new definition nodes to it "
                    "(or corrects the statement, with statement_change)")
-        bad = [x for x in added if x not in new_ids]
+        # STMT_DEPS MAY GAIN LANDED NODES (launcher 2026-10-11 07:55 +08): a node that exists on the base with a
+        # `lean` record (landed by another group meanwhile) may be added to the item's stmt_deps without a correction.
+        landed = []
+        for x in added:
+            if x in new_ids or x not in base_paths:
+                continue
+            try:
+                bn = json.loads(git.show(base, base_paths[x]) or "{}")
+            except ValueError:
+                bn = {}
+            r = bn.get("lean")
+            if isinstance(r, dict) and (r.get("module") or r.get("existing") is True or r.get("convention")) \
+                    or bn.get("status") in ("mathlib", "merged"):
+                landed.append(x)
+        if landed:
+            D["notes"].append(f"the item's stmt_deps gained the landed node(s) {', '.join(landed)} (STMT_DEPS MAY GAIN LANDED NODES)")
+        bad = [x for x in added if x not in new_ids and x not in landed]
         if bad:
-            f("b", f"the item's stmt_deps gained {', '.join(bad)}, which are not new nodes of the delivery (only new definition "
-                   "nodes may be added, or a statement correction with statement_change)")
+            f("b", f"the item's stmt_deps gained {', '.join(bad)}, which are neither new nodes of the delivery nor nodes landed "
+                   "on the base with a lean record (only those may be added, or a statement correction with statement_change)")
         D["added_deps"] = added
     if corrected:
         D["roles"].insert(0, f"the item is CORRECTED (statement_change): {len(D['citers'])} citer(s) on the base, "

@@ -52,7 +52,7 @@ You have no compiled Lean. Compile on the server:
 
 ## 5. The node records
 
-The delivery changes the item's node file ONLY in the field `lean` (and in `stmt_deps`, only by adding the new definition nodes of (A)):
+The delivery changes the item's node file ONLY in the field `lean` (and in `stmt_deps`, only by adding the new definition nodes of (A) or a node that already exists on sheaf-dag with a `lean` record, e.g. a notion another group landed meanwhile that a return asks you to cite: STMT_DEPS MAY GAIN LANDED NODES, `coord/STATE.md`):
 
 ```
 "lean": {"module": "Sheaf.<Topic>.<Name>", "declaration": "<full name>",
