@@ -57,6 +57,70 @@ instance reflectsIsomorphisms_mapDerivedCategory : F.mapDerivedCategory.Reflects
 
 end CategoryTheory.Functor
 
+namespace CategoryTheory
+
+section Biproduct
+
+variable {C D : Type*} [Category* C] [Category* D] [Preadditive C] [Preadditive D]
+  [HasFiniteBiproducts C] {ι : Type} [Finite ι]
+
+/-- An additive functor carries a morphism `⨁ X ⟶ Y` out of a finite biproduct of copies of `X`
+which is an isomorphism to a morphism out of a biproduct which is an isomorphism. -/
+lemma Functor.isIso_biproductDesc_map (F : C ⥤ D) [F.Additive] {X Y : C} (φ : ι → (X ⟶ Y))
+    [HasFiniteBiproducts D] [IsIso (biproduct.desc φ)] : IsIso (biproduct.desc fun i ↦ F.map (φ i)) := by
+  have hc : biproduct.desc (fun i ↦ F.map (biproduct.ι (fun _ : ι ↦ X) i)) =
+      (F.mapBiproduct fun _ : ι ↦ X).inv := by
+    ext i
+    simp [Functor.mapBiproduct]
+  have h : (biproduct.desc fun i ↦ F.map (φ i)) =
+      biproduct.desc (fun i ↦ F.map (biproduct.ι (fun _ : ι ↦ X) i)) ≫
+        F.map (biproduct.desc φ) := by
+    ext i
+    simp [← F.map_comp]
+  rw [h, hc]
+  infer_instance
+
+
+/-- If an additive functor carries the components of a morphism out of a finite biproduct to
+the components of a morphism which is an isomorphism, it carries the morphism to an
+isomorphism. -/
+lemma Functor.isIso_map_biproductDesc (F : C ⥤ D) [F.Additive] {X Y : C} (φ : ι → (X ⟶ Y))
+    [HasFiniteBiproducts D] [IsIso (biproduct.desc fun i ↦ F.map (φ i))] :
+    IsIso (F.map (biproduct.desc φ)) := by
+  have hc : IsIso (biproduct.desc (fun i ↦ F.map (biproduct.ι (fun _ : ι ↦ X) i))) := by
+    have : biproduct.desc (fun i ↦ F.map (biproduct.ι (fun _ : ι ↦ X) i)) =
+        (F.mapBiproduct fun _ : ι ↦ X).inv := by
+      ext i
+      simp [Functor.mapBiproduct]
+    rw [this]
+    infer_instance
+  have h : (biproduct.desc fun i ↦ F.map (φ i)) =
+      biproduct.desc (fun i ↦ F.map (biproduct.ι (fun _ : ι ↦ X) i)) ≫
+        F.map (biproduct.desc φ) := by
+    ext i
+    simp [← F.map_comp]
+  have : IsIso (biproduct.desc (fun i ↦ F.map (biproduct.ι (fun _ : ι ↦ X) i)) ≫
+      F.map (biproduct.desc φ)) := h ▸ inferInstance
+  exact IsIso.of_isIso_comp_left
+    (biproduct.desc (fun i ↦ F.map (biproduct.ι (fun _ : ι ↦ X) i))) _
+
+/-- The property that a morphism `⨁ X ⟶ Y` out of a biproduct of copies of `X`, given by maps
+`φ i : X ⟶ Y`, is an isomorphism is invariant under isomorphisms of `X` and `Y` compatible with
+the maps. -/
+lemma isIso_biproductDesc_of_iso {X Y X' Y' : C} (φ : ι → (X ⟶ Y)) (φ' : ι → (X' ⟶ Y'))
+    (e : X ≅ X') (e' : Y ≅ Y') (h : ∀ i, φ i ≫ e'.hom = e.hom ≫ φ' i)
+    (h' : IsIso (biproduct.desc φ')) : IsIso (biproduct.desc φ) := by
+  have hφ : biproduct.desc φ = biproduct.map (fun _ ↦ e.hom) ≫ biproduct.desc φ' ≫ e'.inv := by
+    ext i
+    simp [← reassoc_of% h i]
+  have : IsIso (biproduct.map fun _ : ι ↦ e.hom) := (biproduct.mapIso fun _ ↦ e).isIso_hom
+  rw [hφ]
+  infer_instance
+
+end Biproduct
+
+end CategoryTheory
+
 namespace AlgebraicGeometry.ProEtale
 
 open Scheme
@@ -198,6 +262,100 @@ noncomputable def derivedSheafExtendScalarsAdjunction :
     (sheafExtendScalars (algebraMap R S) X).leftDerivedFunctorIsoMapDerivedCategory.symm
 
 variable {X}
+
+local notation "𝐅" => sheafExtendScalars (algebraMap R S) X
+set_option hygiene false in
+local notation "𝐆" => sheafCompose (Scheme.ProEt.topology X)
+  (ModuleCat.restrictScalars.{u + 1} (algebraMap R S))
+
+attribute [local instance] Abelian.hasFiniteBiproducts in
+/-- Let `c : ι → S` be finitely many scalars such that, for every pro-étale sheaf `F` of
+`R`-modules, the maps `F ⟶ res (S ⊗_R F)` given by the unit of extension of scalars followed by
+multiplication by the `c i` exhibit `res (S ⊗_R F)` as a sum of copies of `F`. Then the same holds
+for the unit of the induced adjunction on derived categories, at every object. -/
+theorem isIso_biproductDesc_mapDerivedCategoryAdjunction_unit {ι : Type} [Finite ι] (c : ι → S)
+    (h : ∀ F : Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} R),
+      IsIso (biproduct.desc fun i ↦ (sheafExtendScalarsAdjunction (algebraMap R S) X).unit.app F ≫
+        (sheafCompose (Scheme.ProEt.topology X)
+          (ModuleCat.restrictScalars.{u + 1} (algebraMap R S))).map (c i • 𝟙 _)))
+    (M : DerivedCategory (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} R))) :
+    IsIso (biproduct.desc fun i ↦
+      (sheafExtendScalarsAdjunction (algebraMap R S) X).mapDerivedCategoryAdjunction.unit.app M ≫
+        D(sheafCompose (Scheme.ProEt.topology X)
+          (ModuleCat.restrictScalars.{u + 1} (algebraMap R S))).map (c i • 𝟙 _)) := by
+  -- the statement for complexes, degreewise
+  have hC (K : CochainComplex (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} R)) ℤ) :
+      IsIso (biproduct.desc fun i ↦ ((sheafExtendScalarsAdjunction (algebraMap R S) X).mapHomologicalComplex _).unit.app K ≫
+        ((𝐆).mapHomologicalComplex _).map (c i • 𝟙 _)) := by
+    have (n : ℤ) : IsIso ((biproduct.desc fun i ↦ ((sheafExtendScalarsAdjunction (algebraMap R S) X).mapHomologicalComplex _).unit.app K ≫
+        ((𝐆).mapHomologicalComplex _).map (c i • 𝟙 _)).f n) := by
+      have e : (fun i ↦ (HomologicalComplex.eval _ _ n).map
+          (((sheafExtendScalarsAdjunction (algebraMap R S) X).mapHomologicalComplex _).unit.app K ≫
+            ((𝐆).mapHomologicalComplex _).map (c i • 𝟙 _))) =
+          fun i ↦ (sheafExtendScalarsAdjunction (algebraMap R S) X).unit.app (K.X n) ≫ (𝐆).map (c i • 𝟙 _) := by
+        ext i
+        simp only [HomologicalComplex.eval_map, HomologicalComplex.comp_f,
+          Adjunction.mapHomologicalComplex_unit_app_f, Functor.mapHomologicalComplex_map_f,
+          HomologicalComplex.smul_f_apply, HomologicalComplex.id_f]
+        rfl
+      have : IsIso (biproduct.desc fun i ↦ (HomologicalComplex.eval _ _ n).map
+          (((sheafExtendScalarsAdjunction (algebraMap R S) X).mapHomologicalComplex _).unit.app K ≫
+            ((𝐆).mapHomologicalComplex _).map (c i • 𝟙 _))) := by
+        rw [e]
+        exact h (K.X n)
+      exact Functor.isIso_map_biproductDesc (HomologicalComplex.eval _ _ n) _
+    exact HomologicalComplex.Hom.isIso_of_components _
+  -- the statement on the image of a complex
+  have hQ (K : CochainComplex (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} R)) ℤ) :
+      IsIso (biproduct.desc fun i ↦ (sheafExtendScalarsAdjunction (algebraMap R S) X).mapDerivedCategoryAdjunction.unit.app
+          (DerivedCategory.Qh.obj ((HomotopyCategory.quotient _ _).obj K)) ≫
+        (𝐆).mapDerivedCategory.map (c i • 𝟙 _)) := by
+    have := hC K
+    have := Functor.isIso_biproductDesc_map
+      (HomotopyCategory.quotient _ (ComplexShape.up ℤ) ⋙ DerivedCategory.Qh)
+      (fun i ↦ ((sheafExtendScalarsAdjunction (algebraMap R S) X).mapHomologicalComplex _).unit.app K ≫
+        ((𝐆).mapHomologicalComplex _).map (c i • 𝟙 _))
+    refine isIso_biproductDesc_of_iso _ (fun i ↦
+      (HomotopyCategory.quotient _ (ComplexShape.up ℤ) ⋙ DerivedCategory.Qh).map
+        (((sheafExtendScalarsAdjunction (algebraMap R S) X).mapHomologicalComplex _).unit.app K ≫
+          ((𝐆).mapHomologicalComplex _).map (c i • 𝟙 _))) (Iso.refl _)
+      ((𝐆).mapDerivedCategory.mapIso ((𝐅).mapDerivedCategoryFactorsh.app _) ≪≫
+        (𝐆).mapDerivedCategoryFactorsh.app _) (fun i ↦ ?_) this
+    have hfac := (sheafExtendScalarsAdjunction (algebraMap R S) X).mapDerivedCategoryAdjunction_unit_app_fac
+      ((HomotopyCategory.quotient _ (ComplexShape.up ℤ)).obj K)
+    rw [Adjunction.mapHomotopyCategory_unit_app_quotient] at hfac
+    have e₁ : (c i • 𝟙 ((𝐅).mapDerivedCategory.obj
+          (DerivedCategory.Qh.obj ((HomotopyCategory.quotient _ _).obj K)))) ≫
+        (𝐅).mapDerivedCategoryFactorsh.hom.app ((HomotopyCategory.quotient _ _).obj K) =
+        (𝐅).mapDerivedCategoryFactorsh.hom.app ((HomotopyCategory.quotient _ _).obj K) ≫
+          DerivedCategory.Qh.map ((HomotopyCategory.quotient _ (ComplexShape.up ℤ)).map
+            (c i • 𝟙 (((𝐅).mapHomologicalComplex _).obj K))) := by
+      rw [Functor.map_smul, CategoryTheory.Functor.map_id, Functor.map_smul,
+        CategoryTheory.Functor.map_id, Linear.smul_comp, Linear.comp_smul, Category.id_comp]
+      erw [Category.comp_id]
+    have e₂ := (𝐆).mapDerivedCategoryFactorsh.hom.naturality
+      ((HomotopyCategory.quotient _ (ComplexShape.up ℤ)).map
+        (c i • 𝟙 (((𝐅).mapHomologicalComplex _).obj K)))
+    simp only [Functor.comp_map, Functor.mapHomotopyCategory_map] at e₂
+    simp only [Iso.trans_hom, Functor.mapIso_hom, Iso.app_hom, Iso.refl_hom, Category.id_comp,
+      Category.assoc, Functor.comp_map, Functor.map_comp]
+    rw [← reassoc_of% hfac, ← (𝐆).mapDerivedCategory.map_comp_assoc, e₁,
+      (𝐆).mapDerivedCategory.map_comp_assoc]
+    congr 2
+  -- every object is isomorphic to the image of a complex
+  let e := DerivedCategory.Qh.objObjPreimageIso M
+  refine isIso_biproductDesc_of_iso _ _ e.symm
+    ((𝐅.mapDerivedCategory ⋙ (𝐆).mapDerivedCategory).mapIso e.symm) (fun i ↦ ?_)
+    (hQ (DerivedCategory.Qh.objPreimage M).as)
+  have hu := (sheafExtendScalarsAdjunction (algebraMap R S) X).mapDerivedCategoryAdjunction.unit.naturality
+    e.inv
+  simp only [Functor.comp_obj, Functor.id_obj, Functor.id_map, Functor.comp_map] at hu
+  simp only [Functor.comp_obj, Functor.mapIso_hom, Iso.symm_hom, Functor.comp_map,
+    Category.assoc, ← (𝐆).mapDerivedCategory.map_comp]
+  rw [Linear.smul_comp, Category.id_comp, ← Category.comp_id ((𝐅).mapDerivedCategory.map e.inv),
+    ← Linear.comp_smul, (𝐆).mapDerivedCategory.map_comp]
+  erw [reassoc_of% hu]
+  rfl
 
 /-- For a basis `b` of the finite free `R`-algebra `S` and `M` in `D(X_proét, R)`, the maps
 `M ⟶ U N M` obtained from the unit of `N = L(S ⊗_R -) ⊣ U = D(res)` by multiplication with the
