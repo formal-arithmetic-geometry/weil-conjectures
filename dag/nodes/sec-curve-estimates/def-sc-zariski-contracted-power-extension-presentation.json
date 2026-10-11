@@ -1,0 +1,105 @@
+{
+ "id": "def-sc-zariski-contracted-power-extension-presentation",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-pic-proper-ntorsion",
+   "place": "the extension object used by the statement",
+   "via": [
+    "lem-sc-zariski-contracted-power-extension",
+    "lem-sc-zariski-ext-torsor",
+    "lem-sc-torsor-h1-boundary-representative",
+    "lem-sc-torsor-h1-functoriality",
+    "lem-sc-picard-h1-restriction-compatibility",
+    "lem-sc-pic-lift-closed-immersion-dim-le-one",
+    "lem-sc-dim-one-ample-invertible",
+    "lem-sc-dim-one-quasi-projective",
+    "lem-sc-proper-dim-one-projective"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "definition",
+ "title": "Presentation of a contracted-power extension",
+ "status": "split",
+ "statement": "For a scheme $X$ [def-pc-scheme], a Zariski abelian sheaf $G$ on $X$ [def-sc-zariski-site] and a $G$-torsor $T$ [def-sc-gm-torsor], a contracted-power extension presentation consists of coherent integer powers $T^{\\otimes n}$ with maps $\\mu_{m,n}$ [lem-sc-zariski-contracted-power-torsor], their sheaf coproduct $E=\\coprod_{n\\in\\mathbf Z}T^{\\otimes n}$ endowed with the abelian-sheaf law induced by $\\mu_{m,n}$, and maps $G\\to E\\to\\mathbf Z_X$ forming a short exact sequence. The natural summand maps identify $T^{\\otimes n}$ with the fibre over the constant integer $n$, addition on summands is $[x,y]\\mapsto\\mu_{m,n}([x,y])$ in degree $m+n$, and the degree-zero summand is the inclusion of $G$. The degree-one fibre is canonically and equivariantly $T$ via $T^{\\otimes1}=T$.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sc-zariski-site",
+  "def-sc-gm-torsor",
+  "lem-sc-zariski-contracted-power-torsor"
+ ],
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Lemma 02FQ, extension by contracted powers"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "contracted power extension presentation sheaf",
+   "results": "No declaration",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "contracted torsor extension short exact sheaf",
+   "results": "No declaration",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "contracted.*power.*extension",
+   "results": "No declaration in Mathlib, source, or Sheaf",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sc-zariski-contracted-power-extension",
+  "date": "2026-10-12",
+  "group": "E1"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-thm-curveestimate",
+ "lean": {
+  "module": "Sheaf.CategoryTheory.Sites.ZariskiContractedPowerExtensionPresentation",
+  "declaration": "CategoryTheory.Sheaf.Torsor.ContractedPowerExtension",
+  "file": "lean/Sheaf/CategoryTheory/Sites/ZariskiContractedPowerExtensionPresentation.lean",
+  "statement": "structure ContractedPowerExtension (X : AlgebraicGeometry.Scheme.{uE}) {G : Sheaf (Opens.grothendieckTopology X) AddCommGrpCat.{uE + 1}} (T : Torsor G)",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-sub-A",
+  "group": "E1",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-sub-A",
+  "group": "E1",
+  "result": "pass",
+  "note": "X scheme, G Zariski abelian sheaf (u+1 as the torsor family), T : Torsor G; conclusion Nonempty ContractedPowerExtension: powers = CoherentContractedPowers, middle with summand n natural + BijOn onto the fibre over constant n (coproduct), summand_add = powers.product m n quotient (mu-induced law), summand_zero = inclusion of G, projection to constant Z, ShortExact; fibre over 1 = summand 1 via powers.one; every point of return 38f2b150c repaired; no hollow data"
+ }
+}
