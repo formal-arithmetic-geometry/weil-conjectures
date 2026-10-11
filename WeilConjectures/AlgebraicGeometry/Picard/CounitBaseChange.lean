@@ -100,6 +100,8 @@ variable {k : Type u} [Field k] {X : Scheme.{u}} (f : X ⟶ Spec (.of k)) [Flat 
   [LocallyOfFinitePresentation f]
   [∀ T : Over (Spec (.of k)), HasInjectiveResolutions (Limits.pullback f T.hom).Modules]
 
+set_option maxHeartbeats 1600000 in
+-- the proof assembles the Čech complex, its base changes and their exactness in one context
 /-- **Pullbacks of generators of `f_{T,*} ℒ` to fibres are nonzero.** Let `ℒ ∈ Pic(X_T)` satisfy
 `IsInvertibleDirectImage`, let `s` be a free generator of `f_{T,*} ℒ` on an affine open `V ⊆ T`
 and let `i : T' ⟶ T` be a morphism from an affine scheme with nonzero ring of functions, landing
@@ -115,8 +117,8 @@ theorem pullbackSection_baseChangeMap_ne_zero {T : Over (Spec (.of k))}
     pullbackSection (baseChangeMap f i)
       (show Γ((fromSkeleton _).obj L.val, Limits.pullback.snd f T.hom ⁻¹ᵁ V) from s) ≠ 0 := by
   classical
-  set sT := Limits.pullback.snd f T.hom with hsT
-  set ℒ := (fromSkeleton _).obj L.val with hℒ
+  let sT := Limits.pullback.snd f T.hom
+  let ℒ := (fromSkeleton _).obj L.val
   have : SheafOfModules.IsInvertible.{u, u, u} ℒ := L.isInvertible
   have : ℒ.IsInvertible := IsInvertible.of_sheafOfModules _
   have hW := sT.isCompact_preimage hV.isCompact
@@ -192,7 +194,81 @@ theorem pullbackSection_baseChangeMap_ne_zero {T : Over (Spec (.of k))}
           rw [RingHom.id_apply, key, Iso.inv_hom_id_apply, Iso.inv_hom_id_apply,
             TrivSqZeroExt.inl_mul_inr] }
     exact Function.Exact.rTensor_of_retract ι' r (LinearMap.ext fun m ↦ by simp [r, ι']) h
-  sorry
+  -- the terms of `Č` are flat over `A`
+  have hflat (k : ℕ) : Module.Flat Γ(T.left, V) (CechCochain U ℒ.presheaf k) := by
+    have (y : Fin (k + 1) → ι) : Module.Flat Γ(T.left, V) Γ(ℒ, ⨅ l, U (y l)) := by
+      obtain ⟨e, he⟩ := he' k y
+      let := (sT.appLE V _ (iInf_le_preimage_of_forall_le U hUV y)).hom.toAlgebra
+      have : Module.Flat Γ(T.left, V) Γ(Limits.pullback f T.hom, ⨅ l, U (y l)) :=
+        HasRingHomProperty.appLE @Flat sT inferInstance ⟨V, hV⟩ ⟨_, hUa' k y⟩ _
+      let ψ : Γ(Limits.pullback f T.hom, ⨅ l, U (y l)) →ₗ[Γ(T.left, V)] Γ(ℒ, ⨅ l, U (y l)) :=
+        { toFun r := r • e
+          map_add' r r' := add_smul r r' e
+          map_smul' a r := by
+            rw [RingHom.id_apply, hU, Algebra.smul_def, mul_smul]
+            rfl }
+      exact Module.Flat.of_linearEquiv (LinearEquiv.ofBijective ψ he.bijective).symm
+    exact Module.Flat.of_linearEquiv (DFinsupp.linearEquivFunOnFintype (R := Γ(T.left, V))
+      (M := fun y : Fin (k + 1) → ι ↦ Γ(ℒ, ⨅ l, U (y l)))).symm
+  -- base change to `T'`: the kernel of `d⁰` stays a submodule of `Č⁰`
+  let := (i.left.appLE V ⊤ hi).hom.toAlgebra
+  have : Module.Flat Γ(T.left, V) (CechCochain U ℒ.presheaf (0 + 1)) := hflat _
+  have : Module.Flat Γ(T.left, V) (CechCochain U ℒ.presheaf (1 + 1)) := hflat _
+  have hinj := Module.Flat.lTensor_injective_ker_subtype (cechDifferential ℒ U hUV hU 0)
+    (cechDifferential ℒ U hUV hU 1) (cechDifferential_comp ℒ U hUV hU 0) hexM Γ(T'.left, ⊤)
+  -- the sections over `f_T⁻¹ V` are the kernel of `d⁰`
+  let ρ₀ : Γ((pushforward sT).obj ℒ, V) →ₗ[Γ(T.left, V)] CechCochain U ℒ.presheaf 0 :=
+    { toFun x z := ℒ.presheaf.map (homOfLE (iInf_le_of_iSup_eq U hUsup z)).op x
+      map_add' x x' := by funext z; exact map_add _ _ _
+      map_smul' a x := by
+        funext z
+        change ℒ.presheaf.map (homOfLE (iInf_le_of_iSup_eq U hUsup z)).op
+            ((sT.app V a) • (show Γ(ℒ, sT ⁻¹ᵁ V) from x)) =
+          (sT.appLE V _ (iInf_le_preimage_of_forall_le U hUV z) a) •
+            ℒ.presheaf.map (homOfLE (iInf_le_of_iSup_eq U hUsup z)).op x
+        rw [Scheme.Modules.map_smul, Scheme.Hom.app_eq_appLE, ← CommRingCat.comp_apply,
+          Scheme.Hom.appLE_map] }
+  have hρ₀ (x : Γ((pushforward sT).obj ℒ, V)) : ρ₀ x ∈ LinearMap.ker
+      (cechDifferential ℒ U hUV hU 0) :=
+    cechComplex_d_zero_restrict U ℒ.presheaf x (iInf_le_of_iSup_eq U hUsup)
+  let ρ : Γ((pushforward sT).obj ℒ, V) ≃ₗ[Γ(T.left, V)]
+      LinearMap.ker (cechDifferential ℒ U hUV hU 0) :=
+    LinearEquiv.ofBijective (ρ₀.codRestrict _ hρ₀)
+      ⟨fun x x' hxx' ↦ eq_of_forall_presheaf_map_eq ℒ U hUsup x x' fun z ↦
+        congr_fun (congrArg Subtype.val hxx') z, fun c ↦ by
+        obtain ⟨x, hx⟩ := exists_presheaf_map_eq_of_cechComplex_d_eq_zero ℒ U hUsup c.1 c.2
+        exact ⟨x, Subtype.ext (funext hx)⟩⟩
+  -- `1 ⊗ s ≠ 0`
+  let σ : Γ(T.left, V) ≃ₗ[Γ(T.left, V)] Γ((pushforward sT).obj ℒ, V) :=
+    LinearEquiv.ofBijective
+      { toFun a := a • s, map_add' a a' := add_smul a a' s, map_smul' a a' := mul_smul a a' s }
+      hs.bijective
+  have hne : ((1 : Γ(T'.left, ⊤)) ⊗ₜ[Γ(T.left, V)] ρ₀ s) ≠ 0 := by
+    intro h0
+    have h1 : ((LinearMap.ker (cechDifferential ℒ U hUV hU 0)).subtype.lTensor Γ(T'.left, ⊤))
+        ((1 : Γ(T'.left, ⊤)) ⊗ₜ ρ s) = 0 := h0
+    have h2 := hinj (h1.trans (map_zero _).symm)
+    have h3 := congrArg (TensorProduct.rid Γ(T.left, V) Γ(T'.left, ⊤))
+      (congrArg ((LinearEquiv.lTensor Γ(T'.left, ⊤) (σ.trans ρ)).symm) h2)
+    have h4 : (σ.trans ρ) 1 = ρ s := by
+      change ρ ((1 : Γ(T.left, V)) • s) = ρ s
+      rw [one_smul]
+    rw [map_zero, map_zero, ← h4, LinearEquiv.symm_lTensor, LinearEquiv.lTensor_tmul,
+      LinearEquiv.symm_apply_apply, TensorProduct.rid_tmul, one_smul] at h3
+    exact one_ne_zero h3
+  -- its image is the family of pullbacks of `s`
+  have H := isPullback_baseChangeMap f i
+  intro hzero
+  apply hne
+  refine (cechBaseChange_bijective hi ℒ U hUV rfl hU H hV hUa' he' 0).1 ?_
+  rw [map_zero]
+  funext z
+  rw [cechBaseChange_tmul]
+  have : ρ₀ s z = ℒ.presheaf.map (homOfLE (iInf_le_of_iSup_eq U hUsup z)).op s := rfl
+  rw [this, pullbackSection_map, map_one, one_smul]
+  erw [hzero]
+  rw [map_zero, map_zero]
+  rfl
 
 end Core
 
