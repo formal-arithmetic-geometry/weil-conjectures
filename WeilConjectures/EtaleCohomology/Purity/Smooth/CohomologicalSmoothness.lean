@@ -36,6 +36,9 @@ without it the hypothesis `[SmoothOfRelativeDimension d f]` would silently be dr
 - `AlgebraicGeometry.Etale.isInvertible_dualizingComplex`
 - `AlgebraicGeometry.Etale.nonempty_iso_rightDerivedUpperShriek_obj_derivedTensor`
 - `AlgebraicGeometry.Etale.nonempty_iso_leftDerivedUpperStar_comp_rightDerivedUpperShriek`
+- `AlgebraicGeometry.Etale.nonempty_dualizingComplex_iso_constantComplex_of_etale`: `ω_e ≅ Λ_X`
+  for `e` étale (`lem-pur-co-smooth-etale-locality`), hence `Re^! K ≅ Le^* K`
+  (`AlgebraicGeometry.Etale.nonempty_iso_rightDerivedUpperShriek_obj_of_etale`).
 -/
 
 @[expose] public section
@@ -114,6 +117,30 @@ theorem nonempty_iso_leftDerivedUpperStar_comp_rightDerivedUpperShriek {X' Y' : 
       L((g)^*[ModuleCat.{u + 1} Λ]) ⋙
         rightDerivedUpperShriek (ModuleCat.{u + 1} Λ) f') :=
   sorry
+
+/-- Blueprint `lem-pur-co-smooth-etale-locality`: Source-etale locality, without derived descent
+
+*Étale morphisms.* Every étale morphism `e : X ⟶ Y` is cohomologically smooth, with trivial
+dualizing complex `ω_e = Re^! Λ_Y ≅ Λ_X`. -/
+theorem nonempty_dualizingComplex_iso_constantComplex_of_etale {X Y : Scheme.{u}} (e : X ⟶ Y)
+    [_root_.AlgebraicGeometry.Etale e] [HasCompactification e] :
+    Nonempty (dualizingComplex (ModuleCat.{u + 1} Λ) e ≅ constantComplex Λ X) :=
+  sorry
+
+/-- For `e : X ⟶ Y` étale and `K ∈ D^b_{ctf}(Y, Λ)`, the exceptional inverse image is the
+ordinary one, `Re^! K ≅ Le^* K`: this is the tensor formula of `sk-prop-cohsm` (b) for `e`,
+smooth of relative dimension zero, together with `ω_e ≅ Λ_X`
+(`lem-pur-co-smooth-etale-locality`). -/
+theorem nonempty_iso_rightDerivedUpperShriek_obj_of_etale {X Y : Scheme.{u}} (e : X ⟶ Y)
+    [_root_.AlgebraicGeometry.Etale e] [HasCompactification e] [HasInvertibleExponent Λ X]
+    (K : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
+    (hK : DerivedCategory.boundedConstructibleFiniteTor Λ Y K) :
+    Nonempty ((rightDerivedUpperShriek (ModuleCat.{u + 1} Λ) e).obj K ≅
+      (L((e)^*[ModuleCat.{u + 1} Λ])).obj K) := by
+  obtain ⟨t⟩ := nonempty_iso_rightDerivedUpperShriek_obj_derivedTensor Λ (d := 0) e K hK
+  obtain ⟨ω⟩ := nonempty_dualizingComplex_iso_constantComplex_of_etale Λ e
+  exact ⟨t.symm ≪≫ ((derivedTensor (ModuleCat.{u + 1} Λ) X).obj _).mapIso ω ≪≫
+    derivedTensorRightUnitor _ X _⟩
 
 end Etale
 

@@ -38,12 +38,12 @@ Given a deformation datum `g̃ : 𝒟_s V ⟶ 𝔸¹_B` with section `s̃`
 ## Implementation notes
 
 The deformation space is carried as data, not constructed (see
-`WeilConjectures.AlgebraicGeometry.DeformationToNormalCone`). Its étale-local shape — that over
-an étale cover of `B` carrying coordinates for `(g, s)` the family object is the one of the
-standard pair `(𝔸^d → B, 0)`, which is pulled back from the base (`lem-pur-dnc-section-geometry`
-(2), (4), (5)) — therefore cannot be computed from the datum. It is a field of the datum,
-used through
-`AlgebraicGeometry.Scheme.Hom.DeformationToNormalConeData.exists_etale_nonempty_iso_familyObject`.
+`WeilConjectures.AlgebraicGeometry.DeformationToNormalCone`). Its étale-local coordinates
+(`lem-pur-dnc-section-geometry` (2), (4), (5)) are a field of the datum; from them,
+`AlgebraicGeometry.Scheme.Hom.DeformationToNormalConeData.exists_etale_nonempty_iso_familyObject`
+computes the family object over an étale cover of `B` as the one of the standard pair
+`(𝔸^d → B, 0)`, pulled back from the base. The sheaf-theoretic inputs are base change for the
+smooth `g̃` and `Re^! ≅ e^*` for an étale `e` (`lem-pur-co-smooth-etale-locality`).
 
 The family comparison `κ : F ≅ La^* 𝒞(g, s)` is pinned down by its restriction `θ` at `t = 1`
 (`AlgebraicGeometry.Scheme.Hom.DeformationToNormalConeData.existsUnique_familyObject_iso`), so
@@ -72,6 +72,10 @@ In the list below, `DeformationToNormalConeData` abbreviates
   object which is étale-locally `Λ(m)[2m]` is a lisse rank-one sheaf, twisted and shifted.
 - `AlgebraicGeometry.Etale.nonempty_iso_leftDerivedUpperStar_sectionInvariant`: base change
   of section invariants.
+- `AlgebraicGeometry.Etale.nonempty_iso_sectionInvariant_of_etale_chart`: section invariants
+  through an étale chart to `𝔸^d`.
+- `DeformationToNormalConeData.exists_etale_nonempty_iso_familyObject`: étale-locally the family
+  is the standard family.
 - `DeformationToNormalConeData.exists_nonempty_iso_familyObject_twistShift`,
   `DeformationToNormalConeData.exists_nonempty_iso_sectionInvariant_twistShift`:
   the family object and the section invariant are lisse rank-one sheaves, twisted and shifted.
@@ -101,19 +105,6 @@ open Scheme
 namespace Etale
 
 variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] [HasTateTwist Λ]
-
-omit [Finite Λ] in
-/-- Derived pullback preserves ⊗-invertibility: `Lf^*(K ⊗^L M) ≅ Lf^* K ⊗^L Lf^* M` and
-`Lf^* Λ_Y ≅ Λ_X`. -/
-theorem DerivedCategory.isInvertible_leftDerivedUpperStar_obj {X Y : Scheme.{u}} (f : X ⟶ Y)
-    {K : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
-    (hK : DerivedCategory.isInvertible Λ Y K) :
-    DerivedCategory.isInvertible Λ X ((L((f)^*[ModuleCat.{u + 1} Λ])).obj K) := by
-  obtain ⟨M, ⟨e⟩, ⟨e'⟩⟩ := hK
-  exact ⟨_, ⟨(leftDerivedUpperStarTensorIso _ f K M).symm ≪≫
-    (L((f)^*[ModuleCat.{u + 1} Λ])).mapIso e ≪≫ leftDerivedUpperStarConstantComplexIso Λ f⟩,
-    ⟨(leftDerivedUpperStarTensorIso _ f M K).symm ≪≫
-    (L((f)^*[ModuleCat.{u + 1} Λ])).mapIso e' ≪≫ leftDerivedUpperStarConstantComplexIso Λ f⟩⟩
 
 omit [Finite Λ] in
 /-- Blueprint `lem-pur-concentrated-complex-shift`: Complexes with cohomology in a single degree
@@ -176,6 +167,45 @@ theorem nonempty_iso_leftDerivedUpperStar_sectionInvariant {X Y X' Y' : Scheme.{
       (rightDerivedUpperShriek (ModuleCat.{u + 1} Λ) f').mapIso
         (leftDerivedUpperStarConstantComplexIso Λ g))⟩
 
+/-- *Section invariants through an étale chart.* Let `g' : X ⟶ T` be compactifiable, `j : W ⟶ X`
+a quasi-compact open immersion and `c : W ⟶ 𝔸^d_T` an étale map over `T`, with
+`j ≫ g' = c ≫ π`, and let `σ : T ⟶ W` be a section carried by `c` to the zero section. If
+`ω_π ≅ K` for some `K ∈ D^b_{ctf}`, then `𝒞(g', σ ≫ j) ≅ 𝒞(π, 0)`:
+
+`Lσ^* Lj^* ω_{g'} ≅ Lσ^* Rj^! Rg'^! Λ ≅ Lσ^* R(j ≫ g')^! Λ = Lσ^* R(c ≫ π)^! Λ ≅ Lσ^* Rc^! ω_π
+  ≅ Lσ^* Lc^* ω_π`,
+
+by `Rj^! ≅ j^*` for the open immersion `j`, the composition of exceptional inverse images, and
+`Rc^! ≅ Lc^*` on `D^b_{ctf}` for the étale `c` (`lem-pur-co-smooth-etale-locality`). -/
+theorem nonempty_iso_sectionInvariant_of_etale_chart {X W T : Scheme.{u}} {d : ℕ}
+    (g' : X ⟶ T) [HasCompactification g'] (j : W ⟶ X) [IsOpenImmersion j] [QuasiCompact j]
+    (c : W ⟶ 𝔸(ULift.{u} (Fin d); T)) [_root_.AlgebraicGeometry.Etale c]
+    [HasCompactification c] [HasInvertibleExponent Λ W]
+    (hjc : j ≫ g' = c ≫ 𝔸(ULift.{u} (Fin d); T) ↘ T) (σ : T ⟶ W)
+    (hσc : σ ≫ c = AffineSpace.zeroSection (ULift.{u} (Fin d)) T)
+    {K : _root_.DerivedCategory
+      (Sheaf 𝔸(ULift.{u} (Fin d); T).smallEtaleTopology (ModuleCat.{u + 1} Λ))}
+    (hK : DerivedCategory.boundedConstructibleFiniteTor Λ _ K)
+    (ω : dualizingComplex (ModuleCat.{u + 1} Λ) (𝔸(ULift.{u} (Fin d); T) ↘ T) ≅ K) :
+    Nonempty (sectionInvariant Λ g' (σ ≫ j) ≅
+      sectionInvariant Λ (𝔸(ULift.{u} (Fin d); T) ↘ T)
+        (AffineSpace.zeroSection (ULift.{u} (Fin d)) T)) := by
+  have : HasCompactification j := (Compactification.ofIsOpenImmersion j).hasCompactification
+  have : HasCompactification (j ≫ g') := .comp_of_isOpenImmersion g' j
+  have : HasCompactification (c ≫ 𝔸(ULift.{u} (Fin d); T) ↘ T) := .of_eq hjc
+  obtain ⟨e₁⟩ := nonempty_iso_rightDerivedUpperShriek_comp Λ j g'
+  obtain ⟨e₂⟩ := nonempty_iso_rightDerivedUpperShriek_of_eq (A := ModuleCat.{u + 1} Λ) hjc
+  obtain ⟨e₃⟩ := nonempty_iso_rightDerivedUpperShriek_comp Λ c (𝔸(ULift.{u} (Fin d); T) ↘ T)
+  obtain ⟨e₄⟩ := nonempty_iso_rightDerivedUpperShriek_obj_of_etale Λ c K hK
+  exact ⟨(leftDerivedUpperStarComp _ σ j).app _ ≪≫
+    (L((σ)^*[ModuleCat.{u + 1} Λ])).mapIso
+      ((leftDerivedUpperStarIsoMapDerivedCategory _ j).app _ ≪≫
+        ((rightDerivedUpperShriekIsoOfIsOpenImmersion Λ j).app _).symm ≪≫
+        (e₁.app _).symm ≪≫ e₂.app _ ≪≫ e₃.app _ ≪≫
+        (rightDerivedUpperShriek (ModuleCat.{u + 1} Λ) c).mapIso ω ≪≫ e₄ ≪≫
+        (L((c)^*[ModuleCat.{u + 1} Λ])).mapIso ω.symm) ≪≫
+    ((leftDerivedUpperStarComp _ σ c _ hσc.symm).app _).symm⟩
+
 end Etale
 
 namespace Scheme.Hom.DeformationToNormalConeData
@@ -224,24 +254,26 @@ theorem nonempty_iso_leftDerivedUpperStar_oneSection_familyObject :
 
 variable {k : Type u} [Field k] (aB : B ⟶ Spec (.of k)) [IsSeparated aB] [LocallyOfFiniteType aB]
 
-omit [HasCompactification g] [LocallyOfFiniteType aB] in
+omit [HasCompactification g] in
 include aB in
 /-- Blueprint `lem-pur-dnc-section-geometry`: Geometry of the deformation
 
-*Clauses (2), (4) and (5): the family is étale-locally the standard family.* Étale-locally on
-`B` there are coordinates `x₁, …, x_d` on `V` in which `s` is `x_i = 0` (2), the formation of
-the deformation, its section and its family object commutes with étale localization on `B`
-(5), and for the standard pair `(𝔸^d_B → B, 0)` the family object is the pullback
-`a^* 0^* ω_{𝔸^d_B/B}` of the standard section invariant along `a : 𝔸¹_B ⟶ B` (4). Hence there
-is a surjective étale `u : B' ⟶ B`, with `B'` separated of finite type over `k`, over which
+*Clauses (2), (4) and (5): the family is étale-locally the standard family.* There is a
+surjective étale `u : B' ⟶ B`, with `B'` separated of finite type over `k`, over which
 
 `F|_{𝔸¹_{B'}} ≅ a'^* 𝒞(𝔸^d_{B'} → B', 0)`.
 
-The deformation space is a datum and not a construction (see
-`WeilConjectures.AlgebraicGeometry.DeformationToNormalCone`); these clauses are recorded in the
-field `familyObject_locally_standard` of the datum, and `B'` is separated over `k` because `u`
-is separated. -/
-theorem exists_etale_nonempty_iso_familyObject :
+Take the étale coordinates of the datum (`exists_etale_coordinates`): over `u`, an open
+`j : W ⟶ 𝒟'` of the base-changed deformation `g' : 𝒟' ⟶ 𝔸¹_{B'}` containing its section `σ`,
+and an étale `c : W ⟶ 𝔸^d_{𝔸¹_{B'}}` over `𝔸¹_{B'}` carrying `σ` to the zero section. Then
+
+`F|_{𝔸¹_{B'}} ≅ Lσ^* Lj^* ω_{g'} ≅ Lσ^* Rj^! ω_{g'} ≅ Lσ^* Rc^! ω_π ≅ Lσ^* Lc^* ω_π ≅ L0^* ω_π`,
+
+by base change for `g̃` (`sk-prop-cohsm` (c)), `Rj^! ≅ j^*` for the open immersion `j`, the
+composition of exceptional inverse images along `j ≫ g' = c ≫ π`, and `Rc^! ≅ c^*` for the étale
+`c` (`lem-pur-co-smooth-etale-locality`). Both `L0^* ω_π` and `a'^* 𝒞(𝔸^d_{B'} → B', 0)` are
+`Λ(d)[2d]` by affine-space purity (`sk-prop-an`). -/
+theorem exists_etale_nonempty_iso_familyObject [HasTateTwist.IsNormalized Λ] :
     ∃ (B' : Scheme.{u}) (u : B' ⟶ B), _root_.AlgebraicGeometry.Etale u ∧ Surjective u ∧
       IsSeparated (u ≫ aB) ∧
       Nonempty ((L((AffineSpace.map (ULift.{u} (Fin 1)) u)^*[ModuleCat.{u + 1} Λ])).obj
@@ -249,8 +281,31 @@ theorem exists_etale_nonempty_iso_familyObject :
         (L((𝔸(ULift.{u} (Fin 1); B') ↘ B')^*[ModuleCat.{u + 1} Λ])).obj
           (sectionInvariant Λ (𝔸(ULift.{u} (Fin d); B') ↘ B')
             (AffineSpace.zeroSection (ULift.{u} (Fin d)) B'))) := by
-  obtain ⟨B', v, hv, hsurj, hsep, he⟩ := D.familyObject_locally_standard Λ
-  exact ⟨B', v, hv, hsurj, inferInstanceAs (IsSeparated (v ≫ aB)), he⟩
+  obtain ⟨B', v, W, j, c, σ, hv, hsurj, hsep, hj, hjqc, hc, hcc, hjc, hσj, hσc⟩ :=
+    D.exists_etale_coordinates
+  let T := 𝔸(ULift.{u} (Fin 1); B')
+  let v₁ := AffineSpace.map (ULift.{u} (Fin 1)) v
+  have := D.hasInvertibleExponent_scheme Λ
+  have : HasInvertibleExponent Λ B' := .of_hom v
+  have : HasInvertibleExponent Λ T := .of_hom (T ↘ B')
+  have : HasInvertibleExponent Λ (pullback D.proj v₁) := .of_hom (pullback.fst D.proj v₁)
+  have : HasInvertibleExponent Λ W := .of_hom j
+  -- `Lv₁^* F ≅ 𝒞(g', σ ≫ j)`, by base change for `g̃` along `v₁`
+  obtain ⟨e₁⟩ := nonempty_iso_leftDerivedUpperStar_sectionInvariant Λ (d := d) D.proj
+    (IsPullback.of_hasPullback D.proj v₁) D.sect (σ ≫ j) ((Category.assoc _ _ _).trans hσj)
+  -- `𝒞(g', σ ≫ j) ≅ 𝒞(𝔸^d_T → T, 0)` through the chart, with `ω_π ≅ Λ(d)[2d]` (`sk-prop-an`)
+  obtain ⟨ω⟩ := nonempty_iso_dualizingComplex_affineSpace Λ d T (T ↘ B' ≫ v ≫ aB)
+  obtain ⟨e₂⟩ := nonempty_iso_sectionInvariant_of_etale_chart Λ (pullback.snd D.proj v₁) j c hjc
+    σ hσc ((boundedConstructibleFiniteTor_tateObject Λ _ d).shift (2 * d))
+    (ω ≪≫ twistShiftConstantComplexIso Λ _ d)
+  -- both standard section invariants are `Λ(d)[2d]`
+  obtain ⟨c₁⟩ := nonempty_iso_sectionInvariant_affineSpace Λ d T (T ↘ B' ≫ v ≫ aB)
+  obtain ⟨c₀⟩ := nonempty_iso_sectionInvariant_affineSpace Λ d B' (v ≫ aB)
+  refine ⟨B', v, hv, hsurj, inferInstanceAs (IsSeparated (v ≫ aB)), ⟨?_⟩⟩
+  exact e₁ ≪≫ e₂ ≪≫ c₁ ≪≫
+    ((twistShift Λ T d).mapIso (leftDerivedUpperStarConstantComplexIso Λ (T ↘ B'))).symm ≪≫
+    (leftDerivedUpperStarTwistShiftIso Λ _ d _).symm ≪≫
+    (L((T ↘ B')^*[ModuleCat.{u + 1} Λ])).mapIso c₀.symm
 
 
 variable [HasTateTwist.IsNormalized Λ]
@@ -656,6 +711,28 @@ theorem existsUnique_iso_sectionInvariant_normalCone [HasTateTwist.IsNormalized 
       rw [Functor.map_comp, h₁, ← Functor.map_comp, Iso.hom_inv_id,
         CategoryTheory.Functor.map_id]; rfl)
   exact Iso.ext ((Iso.comp_inv_eq_id _).mp this)
+
+/-- Blueprint `sk-thm-dnc`: DNC invariance of the section dualizing line
+
+*The comparison for an arbitrary normal cone datum*, `𝒞(g, s) ≅ 𝒞(π_N, 0_N)` for every
+`N : NormalConeData d s`, without a deformation datum. This is the form smooth purity
+(`sk-thm-smooth-purity`) uses as long as `AlgebraicGeometry.Scheme.Hom.NormalConeData` is not
+tied to `s`: there `N` is the trivial bundle `𝔸^d`, for which no deformation datum need exist
+(see `AlgebraicGeometry.Scheme.Hom.nonempty_deformationToNormalConeData`), so
+`nonempty_iso_sectionInvariant_normalCone` does not apply.
+
+It is stronger than the blueprint, which takes `N` to be the normal cone of `s`, but it is true:
+both sides are `Λ_B(d)[2d]`, by smooth purity for `g` and for `π_N`. -/
+-- TODO(unify): sk-thm-dnc — remove once `NormalConeData` is the normal cone of `s` (branch
+-- `prove2/sk-thm-smooth-purity-2`); smooth purity then uses
+-- `nonempty_iso_sectionInvariant_normalCone` with the datum of
+-- `AlgebraicGeometry.Scheme.Hom.nonempty_deformationToNormalConeData`.
+theorem nonempty_iso_sectionInvariant_normalConeData (d : ℕ) (g : V ⟶ B)
+    [SmoothOfRelativeDimension d g] [HasCompactification g] (s : B ⟶ V) [IsClosedImmersion s]
+    (hs : s ≫ g = 𝟙 B) (N : Scheme.Hom.NormalConeData d s)
+    [HasCompactification N.proj] [HasInvertibleExponent Λ B] :
+    Nonempty (sectionInvariant Λ g s ≅ sectionInvariant Λ N.proj N.zeroSection) :=
+  sorry
 
 end Etale
 

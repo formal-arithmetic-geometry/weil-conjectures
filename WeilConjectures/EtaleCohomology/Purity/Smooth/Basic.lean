@@ -166,9 +166,9 @@ diagonal argument. Let `W = X ×_Y X` and `Δ : X ⟶ W` the diagonal, a closed 
 smooth projection `p₁`.
 1. `𝒞(p₁, Δ) ≅ ω_f` by smooth base change
    (`AlgebraicGeometry.Etale.nonempty_iso_sectionInvariant_diagonal`).
-2. The deformation to the normal cone (`sk-thm-dnc`,
-   `AlgebraicGeometry.Etale.nonempty_iso_sectionInvariant_normalCone`) identifies `𝒞(p₁, Δ)`
-   with the section invariant of a rank-`d` vector bundle with its zero section.
+2. The deformation to the normal cone (`sk-thm-dnc`, here in the form
+   `AlgebraicGeometry.Etale.nonempty_iso_sectionInvariant_normalConeData`) identifies
+   `𝒞(p₁, Δ)` with the section invariant of a rank-`d` vector bundle with its zero section.
 3. That section invariant is `Λ_X(d)[2d]` by affine-space purity
    (`AlgebraicGeometry.Etale.nonempty_iso_sectionInvariant_affineSpace`), which needs `X` of
    finite type over the field.
@@ -185,9 +185,10 @@ theorem nonempty_iso_dualizingComplex_twistShift [HasTateTwist.IsNormalized Λ]
       (twistShift Λ X d).obj (constantComplex Λ X)) := by
   -- TODO: the normal cone datum of `Δ` should be its normal bundle `T_{X/Y}`, as in blueprint
   -- `thm-pur-dnc-invariance`, and step 3 vector-bundle purity for it. `NormalConeData` does not
-  -- tie the datum to the immersion, so the trivial bundle `𝔸^d_X` is accepted here, together
-  -- with a deformation datum of `sk-lem-geometry` for it; undo this shortcut once the datum is
-  -- pinned down.
+  -- tie the datum to the immersion, so the trivial bundle `𝔸^d_X` is accepted here, through the
+  -- comparison `nonempty_iso_sectionInvariant_normalConeData` for an arbitrary datum (a
+  -- deformation datum of `sk-lem-geometry` need not exist for it); undo this shortcut, and use
+  -- `nonempty_iso_sectionInvariant_normalCone`, once the datum is pinned down.
   let N : (pullback.diagonal f).NormalConeData d :=
     { scheme := 𝔸(ULift.{u} (Fin d); X)
       proj := 𝔸(ULift.{u} (Fin d); X) ↘ X
@@ -199,11 +200,8 @@ theorem nonempty_iso_dualizingComplex_twistShift [HasTateTwist.IsNormalized Λ]
         rwa [show Nat.card (ULift.{u} (Fin d)) = d by simp] at this }
   have : HasCompactification N.proj := HasCompactification.affineSpace_over _ X
   obtain ⟨e₁⟩ := nonempty_iso_sectionInvariant_diagonal Λ (d := d) f
-  -- the deformation to the normal cone of `Δ`, a closed section of the separated `p₁`
-  obtain ⟨D⟩ := Scheme.Hom.nonempty_deformationToNormalConeData d (pullback.fst f f)
+  obtain ⟨e₂⟩ := nonempty_iso_sectionInvariant_normalConeData Λ d (pullback.fst f f)
     (pullback.diagonal f) (pullback.diagonal_fst f) N
-  obtain ⟨e₂⟩ := nonempty_iso_sectionInvariant_normalCone Λ d (pullback.fst f f)
-    (pullback.diagonal f) N D (f ≫ aY)
   obtain ⟨e₃⟩ := nonempty_iso_sectionInvariant_affineSpace Λ d X (f ≫ aY)
   exact ⟨e₁.symm ≪≫ e₂ ≪≫ e₃⟩
 
