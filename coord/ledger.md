@@ -3060,3 +3060,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 00:10 L: returned deliver/E1/lem-pc-ring-pseudo-coherent-localization-glue (reviewer RETURN: Reviewer R-pcg0010, head c339ca2ce. 1. B/E (false new statements): def-pc-ring-m-pseudo-coherent is not Tag 064N: 'a qua)
 - 00:11 L: merged deliver/C1/lem-wf-lie-algebra-derivation-bracket (reviewer FIX; first push; new nodes: 1)
 - 00:11 L: returned deliver/M1/lem-pur-left-derived-from-kflat-class (reviewer RETURN: Reviewer R-ldk0010 on head ce9b6fa8c. Four faults (more than three, so RETURN). 1 (C1/C4, bridge between Step 1 and Step)
+- 00:12 UTC L: returned: E1 ring-pseudo-coherent-localization-glue 49367317e second return (R-pcg0010: def-pc-ring-m-pseudo-coherent is not Tag 064N (requires P^i=0 for i>m), the iff-all-m node is false under it).
