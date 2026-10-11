@@ -160,5 +160,27 @@
   "by": "L",
   "result": "accepted",
   "note": "5 steps following Stacks 0CAI: the coproduct is the directed colimit of its finite subcoproducts with injective transitions (new Mathlib leaf, composed; see its lead_note), sections over a quasi-compact basis open come from a finite subcoproduct (new unsplit 009F (1),(3) node; the existing directed-colimit-sections node covers only (2),(4)), maps out of j_{V!}T are maps of sets T -> G(V) (adjunction + new unsplit constant-sheaf node), lift summand by summand, assemble. Statement sharpened (every h, explicit factorization). Stage 3: the citer sheaf-directed-colimit-finite-coequalizers cites the directed-colimit-sections node where the new 009F node is needed."
+ },
+ "lean": {
+  "module": "Sheaf.Topology.SheafFiniteRelationTruncations",
+  "declaration": "TopCat.extensionByEmptyConstant_finite_support",
+  "declarations": [
+   "TopCat.extensionByEmptyConstant_finite_support",
+   "TopCat.extensionByEmptyConstant_common_finite_support"
+  ],
+  "file": "lean/Sheaf/Topology/SheafFiniteRelationTruncations.lean",
+  "statement": "theorem extensionByEmptyConstant_finite_support (X : TopCat.{u}) (basis : Set (Set X)) (hbasis : IsTopologicalBasis basis) (hcompact : ∀ W ∈ basis, IsCompact W) (A B : Type u) (U : A → Opens X) (V : B → Opens X) (hU : ∀ a, (U a : Set X) ∈ basis) (hV : ∀ b, (V b : Set X) ∈ basis) (S : A → Type u) (T : B → Type u) [∀ a, Finite (S a)] [∀ b, Finite (T b)] (h : (sigmaObj (C := CategoryTheory.Sheaf (Opens.grothendieckTopology X) (Type u)) (fun b : B ↦ extensionByEmptyConstant (V b) (T b))) ⟶ (sigmaObj (C := CategoryTheory.Sheaf (Opens.grothendieckTopology X) (Type u)) (fun a : A ↦ extensionByEmptyConstant (U a) (S a)))) (B' : Set B) (hB' : B'.Finite) : ∃ (A' : Set A), A'.Finite ∧ ∃ g : (sigmaObj (C := CategoryTheory.Sheaf (Opens.grothendieckTopology X) (Type u)) (fun b : ↥B' ↦ extensionByEmptyConstant (V b.val) (T b.val))) ⟶ (sigmaObj (C := CategoryTheory.Sheaf (Opens.grothendieckTopology X) (Type u)) (fun a : ↥A' ↦ extensionByEmptyConstant (U a.val) (S a.val))), g ≫ Sigma.desc (fun a : ↥A' ↦ Sigma.ι (C := CategoryTheory.Sheaf (Opens.grothendieckTopology X) (Type u)) (fun a : A ↦ extensionByEmptyConstant (U a) (S a)) a.val) = Sigma.desc (fun b : ↥B' ↦ Sigma.ι (C := CategoryTheory.Sheaf (Opens.grothendieckTopology X) (Type u)) (fun b : B ↦ extensionByEmptyConstant (V b) (T b)) b.val) ≫ h",
+  "branch": "sheaf-dag",
+  "by": "U1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "U1",
+  "result": "pass",
+  "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
  }
 }
