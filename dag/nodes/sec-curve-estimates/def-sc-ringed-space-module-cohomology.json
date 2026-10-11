@@ -75,5 +75,32 @@
   "group": "E1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-rmc1910 (reviewer sub-agent of L); spot-checked: Definition-only split: statement matches Stacks 01DZ ringed-space paragraph hypothesis by hypothesis; stmt_deps exist on sheaf-dag (ringed space def, Mod(O) def, enough-injectives lem created by lem-sc-mayer-vietoris-ringed-space so no cycle, def-sp-left-exact-additive supplies R^n via injective resolutions incl. independence); no agreement-with-Ab(X) claim stated, so nothing to prove; grep Mathlib/Topology/Sheaves and ModuleCat/Sheaf: no ringed-space module cohomology (Sheaf.H is abelian-sheaf Ext), not a leaf. No repairs."
+ },
+ "lean": {
+  "module": "Sheaf.Topology.RingedSpaceModuleCohomology",
+  "declaration": "AlgebraicGeometry.RingedSpace.moduleCohomology",
+  "file": "lean/Sheaf/Topology/RingedSpaceModuleCohomology.lean",
+  "statement": "def moduleCohomology (X : RingedSpace.{u}) (p : ℕ) : SheafOfModules.{u} (moduleRings X) ⥤ ModuleCat.{u} ((moduleRings X).obj.obj (op ⊤))",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-11",
+  "existing": false,
+  "declarations": [
+   "AlgebraicGeometry.RingedSpace.globalSectionsFunctor",
+   "AlgebraicGeometry.RingedSpace.globalSectionsFunctor_additive",
+   "AlgebraicGeometry.RingedSpace.moduleCohomology",
+   "AlgebraicGeometry.RingedSpace.globalSectionsComplex",
+   "AlgebraicGeometry.RingedSpace.moduleCohomology_iso_resolution",
+   "AlgebraicGeometry.RingedSpace.moduleCohomology_independent"
+  ],
+  "fixed_by": "R-rmc1416"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-rmc1416",
+  "group": "E1",
+  "result": "fix",
+  "note": "X:RingedSpace, F:SheafOfModules(moduleRings X), Γ=evaluation at ⊤ into Mod_{O_X(X)} (Stacks 01DZ), H^p=rightDerived p with enough injectives from landed G1/H1 lemma, every injective resolution I: H^p≅H^p(Γ(I)) (closes by isoRightDerivedObj), independence, p=0 included, universe u"
  }
 }
