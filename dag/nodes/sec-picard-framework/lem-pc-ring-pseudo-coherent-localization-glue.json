@@ -14,59 +14,134 @@
  },
  "kind": "statement",
  "title": "A bounded-above finite-free model of a module complex glues from a finite standard-open cover",
- "statement": "Let $A$ be a ring and $M^\\bullet$ a complex of $A$-modules. Let $f_1,\\dots,f_n\\in A$ generate the unit ideal, and suppose that for each $i$ the localized complex $M^\\bullet_{f_i}=M^\\bullet\\otimes_AA_{f_i}$ is quasi-isomorphic to a bounded-above complex of finite free $A_{f_i}$-modules. Then $M^\\bullet$ is quasi-isomorphic to a bounded-above complex of finite free $A$-modules.",
+ "statement": "Let $A$ be a ring, let $m\\in\\mathbf Z$, and let $M^\\bullet$ be a complex of $A$-modules. Let $f_1,\\dots,f_r\\in A$ generate the unit ideal, and write $M^\\bullet_{f_i}=M^\\bullet\\otimes_A A_{f_i}$. View complexes as objects of the derived category $D(A)$ [def-weil-abstract-derived-category]. Call an object $C$ of $D(A)$ $m$-pseudo-coherent if there are a bounded complex $E^\\bullet$ of finite free $A$-modules and a morphism $E^\\bullet\\to C$ in $D(A)$ inducing isomorphisms $H^j(E^\\bullet)\\to H^j(C)$ for $j>m$ and a surjection $H^m(E^\\bullet)\\to H^m(C)$. Call $C$ pseudo-coherent if it is quasi-isomorphic to a bounded-above complex of finite free $A$-modules. If every $M^\\bullet_{f_i}$ is $m$-pseudo-coherent, then $M^\\bullet$ is $m$-pseudo-coherent. If every $M^\\bullet_{f_i}$ is pseudo-coherent, then $M^\\bullet$ is pseudo-coherent.",
  "source": {
   "document": "literature/stacks-project/more-algebra.tex",
   "place": "More on Algebra, Lemma 15.76.4 (Tag 066D, more-algebra-lemma-glue-pseudo-coherent), pseudo-coherent clause, read through Lemma 064Z (more-algebra-lemma-pseudo-coherent)"
  },
- "stmt_deps": [],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "stmt_deps": [
+  "def-weil-abstract-derived-category"
+ ],
+ "proof": [
+  {
+   "text": "Fix an integer $m$. We prove the $m$-pseudo-coherent clause in the form: every complex $K^\\bullet$ of $A$-modules whose localizations $K^\\bullet_{f_i}=K^\\bullet\\otimes_AA_{f_i}$ are $m$-pseudo-coherent (over $A_{f_i}$) is $m$-pseudo-coherent. Localization is exact, so $H^j(K^\\bullet)_{f_i}=H^j(K^\\bullet_{f_i})$. Each $K^\\bullet_{f_i}$ receives a morphism from a bounded complex inducing isomorphisms on $H^j$ for $j>m$, so $H^j(K^\\bullet_{f_i})=0$ for $j$ large; let $n$ be the largest integer with $H^n(K^\\bullet_{f_i})\\neq0$ for some $i$ ($n=-\\infty$ if there is none). Since the $f_i$ generate the unit ideal, a module whose localizations at all $f_i$ vanish is zero, so $H^j(K^\\bullet)=0$ for $j>n$. We induct on $n-m$. If $n<m$, then $H^j(K^\\bullet)=0$ for every $j\\ge m$, and $K^\\bullet$ is $m$-pseudo-coherent by [lem-pc-ring-m-pseudo-coherent-vanishing-base].",
+   "uses": [
+    "lem-pc-ring-m-pseudo-coherent-vanishing-base"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "More on Algebra, Lemma 15.76.4 (Tag 066D), proof: setup and the case $n<m$ via Tag 064W"
+   }
+  },
+  {
+   "text": "Let $n\\ge m$. The morphism witnessing that $K^\\bullet_{f_i}$ is $m$-pseudo-coherent also witnesses that it is $n$-pseudo-coherent (isomorphisms on $H^j$ for $j>n$, and on $H^n$ an isomorphism if $n>m$, a surjection if $n=m$), and $H^j(K^\\bullet_{f_i})=0$ for $j>n$. Hence [lem-sc-finite-cohomology], applied over $A_{f_i}$ with the integer $n$, shows that $H^n(K^\\bullet)_{f_i}=H^n(K^\\bullet_{f_i})$ is a finite $A_{f_i}$-module for each $i$, and [lem-weil-pbc-module-finite-of-localization-span] shows that $H^n(K^\\bullet)$ is a finite $A$-module. Choose a finite free $A$-module $E$ and a surjection $E\\to H^n(K^\\bullet)$; since $E$ is free it lifts to $E\\to\\operatorname{Ker}(d^n_K)$, giving a map of complexes $\\alpha\\colon E[-n]\\to K^\\bullet$ that is surjective on $H^n$. Let $C(\\alpha)^\\bullet$ be its cone, so $E[-n]\\to K^\\bullet\\to C(\\alpha)^\\bullet\\to E[-n][1]$ is a distinguished triangle in $D(A)$.",
+   "uses": [
+    "lem-sc-finite-cohomology",
+    "lem-weil-pbc-module-finite-of-localization-span"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "More on Algebra, Lemma 15.76.4 (Tag 066D), proof: finiteness of $H^n$ via Tag 064S and Algebra, Lemma 00EO, and the choice of $\\alpha$"
+   }
+  },
+  {
+   "text": "The long exact cohomology sequence of the triangle, with $H^j(E[-n])=0$ for $j\\neq n$, $H^n(E[-n])=E\\to H^n(K^\\bullet)$ surjective and $H^j(K^\\bullet)=0$ for $j>n$, gives $H^j(C(\\alpha)^\\bullet)=0$ for $j\\ge n$. Localization is exact and commutes with shifts and cones, so $E[-n]_{f_i}\\to K^\\bullet_{f_i}\\to C(\\alpha)^\\bullet_{f_i}\\to E[-n]_{f_i}[1]$ is a distinguished triangle in $D(A_{f_i})$, and $H^j(C(\\alpha)^\\bullet_{f_i})=0$ for $j\\ge n$. The complex $E[-n]_{f_i}$ is a bounded complex of finite free $A_{f_i}$-modules, so the identity shows it is $k$-pseudo-coherent for every $k$, in particular $(m+1)$-pseudo-coherent. The first clause of [lem-pc-ring-pseudo-coherent-distinguished-triangle] over $A_{f_i}$ shows that each $C(\\alpha)^\\bullet_{f_i}$ is $m$-pseudo-coherent. For $C(\\alpha)^\\bullet$ the largest degree of nonzero local cohomology is $<n$, so the induction hypothesis shows that $C(\\alpha)^\\bullet$ is $m$-pseudo-coherent. As $E[-n]$ is $m$-pseudo-coherent, the second clause of [lem-pc-ring-pseudo-coherent-distinguished-triangle] over $A$, applied to $E[-n]\\to K^\\bullet\\to C(\\alpha)^\\bullet\\to E[-n][1]$, shows that $K^\\bullet$ is $m$-pseudo-coherent. Taking $K^\\bullet=M^\\bullet$ proves the first assertion.",
+   "uses": [
+    "lem-pc-ring-pseudo-coherent-distinguished-triangle"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "More on Algebra, Lemma 15.76.4 (Tag 066D), proof: cone induction via Tag 064R"
+   }
+  },
+  {
+   "text": "For the pseudo-coherent clause, assume every $M^\\bullet_{f_i}$ is pseudo-coherent over $A_{f_i}$. By the implication from pseudo-coherence to $m$-pseudo-coherence for every $m$ in [lem-pc-ring-pseudo-coherent-iff-all-m] over $A_{f_i}$, each $M^\\bullet_{f_i}$ is $m$-pseudo-coherent for every integer $m$. By the first assertion, proved in the previous steps for an arbitrary $m$, $M^\\bullet$ is $m$-pseudo-coherent for every integer $m$. By the converse implication of [lem-pc-ring-pseudo-coherent-iff-all-m] over $A$, $M^\\bullet$ is pseudo-coherent, that is, quasi-isomorphic to a bounded-above complex of finite free $A$-modules.",
+   "uses": [
+    "lem-pc-ring-pseudo-coherent-iff-all-m"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "More on Algebra, Lemma 15.76.4 (Tag 066D), pseudo-coherent clause, via Lemma 15.66.5 (Tag 064U)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-ring-m-pseudo-coherent-vanishing-base",
+  "lem-sc-finite-cohomology",
+  "lem-weil-pbc-module-finite-of-localization-span",
+  "lem-pc-ring-pseudo-coherent-distinguished-triangle",
+  "lem-pc-ring-pseudo-coherent-iff-all-m"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "More on Algebra, Lemma 15.76.4 (Tag 066D), both clauses, with Tags 064N, 064R, 064S, 064U, and 064W"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
    "query": "pseudo-coherent complex is local under localization at elements generating the unit ideal",
-   "results": "IsLocalizedModule.exists_isLocalizedModule_powers_of_finitePresentation and Module.basicOpen_subset_freeLocus_iff; no pseudo-coherent complex gluing theorem",
-   "date": "2026-10-10",
+   "results": "No pseudo-coherence declaration; generic localization and projective-complex declarations only",
+   "date": "2026-10-11",
    "verdict": "no match"
   },
   {
    "tool": "loogle",
-   "query": "Module.FinitePresentation, Localization, Ideal.span",
-   "results": "IsLocalizedModule.exists_isLocalizedModule_powers_of_finitePresentation; no complex pseudo-coherence declaration",
-   "date": "2026-10-10",
-   "verdict": "no match"
+   "query": "Module.Finite.of_localizationSpan_finite",
+   "results": "Module.Finite.of_localizationSpan_finite, which supplies the finite-module localization step",
+   "date": "2026-10-11",
+   "verdict": "generalization: finite-module step only"
   },
   {
    "tool": "grep",
-   "query": "pseudo.?coherent|PseudoCoherent in Mathlib/RingTheory Mathlib/Algebra/Homology",
+   "query": "Pseudo.?Coherent|pseudo.?coherent in Mathlib",
    "results": "no matches",
-   "date": "2026-10-10",
+   "date": "2026-10-11",
    "verdict": "no match"
   },
   {
    "tool": "leansearch",
    "query": "a complex of modules pseudo-coherent if it is pseudo-coherent after localizing at elements generating the unit ideal",
-   "results": "service unavailable",
-   "date": "2026-10-10",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-11",
    "verdict": "unavailable"
-  },
-  {
-   "tool": "grep",
-   "query": "PseudoCoherent|pseudoCoherent|pseudo-coherent in ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib",
-   "results": "no matches",
-   "date": "2026-10-10",
-   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-pc-affine-pseudo-coherent-criterion",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-duality"
+ "unit": "sk-thm-picard-duality",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-pc-ring-pseudo-coherent-localization-glue",
+  "worker": "stage1",
+  "summary": "Proves Tag 066D: the fixed-m clause by induction on n-m (base case Tag 064W node, top-cohomology finiteness via lem-sc-finite-cohomology and the Mathlib localization-span leaf, cone step via the Tag 064R triangle node), and the pseudo-coherent clause via the new Tag 064U node (pseudo-coherent iff m-pseudo-coherent for every m). New statement-only nodes: Tag 064W base case and Tag 064U equivalence, both with the Tag 064N inline definition worded as in the merged triangle node.",
+  "blueprint": "Realizes the ancestor lem-sc-finite-duality proof sentence: local pseudo-coherence of the localized module complexes implies pseudo-coherence globally.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-module-finite-of-localization-span",
+    "why": "Step 2 takes finite generation of each localized top cohomology module and concludes finite generation over A; this generic localization-gluing lemma is outside the unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-module-finite-of-localization-span"
+ ],
+ "reviewed": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-pcg0034",
+  "group": "E1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-pcg0034 (reviewer sub-agent of L); spot-checked: Checked head b29cc41e5 against R-pcg0010's four points. (1) def node gone; both new nodes state Tag 064N word for word as the merged triangle/finite-cohomology/cone nodes; iff-all-m is true Tag 064U (1)<=>(2); vanishing base is Tag 064W(1); no duplicates (only 064U-related nodes are bounded-finite-free-model and summand, different statements). (2)(3) mathematically repaired but Step 1 and Step 2 duplicated the induction and Step 1 ended vaguely. (4) NOT repaired: source.place still read 064Z. Citer lem-pc-affine-pseudo-coherent-criterion uses the pseudo-coherent clause in the stated finite-free form (C4 ok). FIX more, RETURN less: rewrote the item proof as Step 1 setup (fixed arbitrary m, existence of n from bounded witnesses, unit-ideal vanishing, base case via the 064W node), Step 2 (m-pc => n-pc, lem-sc-finite-cohomology over A_{f_i}, localization-span leaf, lift alpha), Step 3 (cone vanishing, localized triangle, E[-n] (m+1)-pc, clause 1 locally, induction, clause 2 globally), Step 4 (pseudo-coherent clause via iff-all-m 1=>2 locally and 2=>1 globally), all in TeX with no plain-text arrows (B4); source.place corrected to Tag 064U; stale split_report summary (064N def node, 064S/064R nodes) corrected; both new node statements put in TeX with $ delimiters, iff-all-m ring renamed R to match the reference wording. Both Second readings missed the unrepaired 064Z source and the duplicated Step 1/Step 2.; 3 file(s) fixed by the reviewer"
+ }
 }
