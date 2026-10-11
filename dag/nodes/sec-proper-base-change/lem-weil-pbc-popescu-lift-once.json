@@ -246,5 +246,24 @@
   "by": "L",
   "result": "accepted",
   "note": "12 steps following Stacks 07CK with the gaps written out: reduction mod I; factoring through a standard smooth B-bar (new unsplit 07CI node, existing colimit nodes); a presentation of B-bar over A/IA (new leaf 00F4 (4), FinitePresentation.lean:208 verified by L); the lifts lambda_i, g_i, epsilon, mu; A' finitely presented and its map to Lambda; A'/IA' = B-bar[delta] standard smooth; B standard smooth (determinant Delta^2) hence smooth; B/IB = A'/IA'; the lift theta; surjectivity by Nakayama for nilpotent ideals; J = ker theta in IB and finitely generated (new exact leaf 00R2, FinitePresentation.lean:298 verified); conclusion."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.PopescuLiftOnce",
+  "declaration": "Algebra.exists_smooth_quotient_factorization",
+  "file": "lean/Sheaf/RingTheory/PopescuLiftOnce.lean",
+  "statement": "theorem exists_smooth_quotient_factorization (R : Type u) [CommRing R] (Λ : Type (max u v)) [CommRing Λ] [Algebra R Λ] (I : Ideal R) (hI : I ^ 2 = ⊥) (hΛ : ObjectProperty.ind.{max u v} (fun C : CommAlgCat.{max u v} (R ⧸ I) ↦ Smooth (R ⧸ I) C) (CommAlgCat.of (R ⧸ I) (Λ ⧸ I.map (algebraMap R Λ)))) (A : Type w) [CommRing A] [Algebra R A] [FinitePresentation R A] (φ : A →ₐ[R] Λ) : ∃ (B : Type (max u v w)) (_ : CommRing B) (_ : Algebra R B), Smooth R B ∧ ∃ (J : Ideal B), J.FG ∧ J ≤ I.map (algebraMap R B) ∧ ∃ (ψ : A →ₐ[R] B ⧸ J) (χ : B ⧸ J →ₐ[R] Λ), χ.comp ψ = φ",
+  "branch": "sheaf-dag",
+  "by": "M1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-plo1351"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-plo1351",
+  "group": "M1",
+  "result": "fix",
+  "note": "R comm ring, Λ R-algebra (max u v), I with I^2=⊥, Λ/IΛ ind-smooth over R/I via recorded ObjectProperty.ind on CommAlgCat.{max u v} with Algebra.Smooth and Mathlib's global algebraQuotientMapQuotient (redundant letI removed, rfl-checked identical), A FinitePresentation, φ arbitrary; ∃ B smooth over R, J FG with J ≤ IB, ψ, χ with χ∘ψ=φ"
  }
 }
