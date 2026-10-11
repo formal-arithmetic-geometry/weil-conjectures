@@ -148,5 +148,24 @@
   "group": "C1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-cee2234 (reviewer sub-agent of L); spot-checked: Read packet whole; statement vs Stacks 015H/015I (specialised to K^p=0 for p<0, unchanged); index convention I^{p,q} with columns resolving K^p as in 015H, consistent with thm-sp-grothendieck's use and with lem-sp-cartan-eilenberg-properties, which states itself explicitly in the exchanged convention; Step 4 identifications checked (ker d_I = J_Z since J_B->J_Z->I monic, im = J_B, H = J_H; p=0 case B^0=0). FIX more, RETURN less: dag/nodes/sec-abelian-varieties/lem-sp-cartan-eilenberg-exists.json steps 2-4: the induction needs the horseshoe with the subobject resolution PRESCRIBED (J_B^{p+1} from one row reused in the next, J_Z^p likewise), but cited lem-weil-pbc-injective-resolution-ses only asserts existence of three fresh resolutions (C4; missed by C1's second reading, which claimed a check against 013T); added statement-only unsplit node lem-sp-horseshoe-prescribed-resolutions (Stacks 013T last sentence, grep 'horseshoe' in Mathlib: 0 hits) and cite it in steps 2-4; existence of the starting/free-end resolutions now cites lem-weil-pbc-left-exact-injective-resolution-degree-zero (1) (C1, tool use); dropped tool use lem-weil-pbc-injective-resolution-ses (no longer cited); proof_deps corrected. End Sat Oct 10 08:14:40 PM UTC 2026; 2 file(s) fixed by the reviewer; 1 statement node(s) added by the reviewer (FIX more, RETURN less)"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.CartanEilenbergExists",
+  "declaration": "CategoryTheory.exists_cartanEilenberg_resolution",
+  "file": "lean/Sheaf/CategoryTheory/CartanEilenbergExists.lean",
+  "statement": "theorem exists_cartanEilenberg_resolution (B : Type u) [Category.{v} B] [Abelian B] [EnoughInjectives B] (K : CochainComplex B ℤ) (hK : ∀ p : ℤ, p < 0 → IsZero (K.X p)) : ∃ (I : HomologicalComplex₂ B (ComplexShape.up ℤ) (ComplexShape.up ℕ)) (e : ((CochainComplex.single₀ B).mapHomologicalComplex (ComplexShape.up ℤ)).obj K ⟶ I), (∀ p : ℤ, p < 0 → IsZero (I.X p)) ∧ (∀ p : ℤ, QuasiIso (e.f p)) ∧ (∀ (p : ℤ) (q : ℕ), Injective ((I.X p).X q)) ∧ (∀ (p : ℤ) (q : ℕ), Injective ((I.cycles p).X q) ∧ Injective ((image (I.d (p - 1) p)).X q) ∧ Injective ((I.homology p).X q)) ∧ (∀ p : ℤ, QuasiIso (HomologicalComplex.cyclesMap e p) ∧ QuasiIso (image.map (Arrow.homMk' (e.f (p - 1)) (e.f p) (e.comm (p - 1) p))) ∧ QuasiIso (HomologicalComplex.homologyMap e p))",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-11",
+  "existing": false,
+  "note": "Uses the dependency-recorded Mathlib bicomplex and homology declarations. The natural vertical index is the nonnegative restriction, extended by zero in negative degrees. InjectiveResolution is expressed by its defining fields: degreewise injectivity and a quasi-isomorphism from an object in degree zero. All four augmentations arise from the same bicomplex morphism."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-cee1314",
+  "group": "E1",
+  "result": "pass",
+  "note": "Abelian+EnoughInjectives B; K : CochainComplex B ℤ with K^p=0 for p<0; I : HomologicalComplex₂ (up ℤ)(up ℕ), I.X p=0 for p<0 (first quadrant); augmentation one bicomplex morphism e from single₀-prolonged K; columns = InjectiveResolution fields (Injective terms + QuasiIso e.f p, checked vs InjectiveResolution.mk); horizontal cycles/image(d_{p-1,p})/homology in CochainComplex B ℕ injective degreewise; cyclesMap/image.map/homologyMap of e quasi-isos resolve Z^p,B^p,H^p; #check confirms CategoryTheory.Injective, HomologicalComplex.cycles of outer index"
  }
 }
