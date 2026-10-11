@@ -1,11 +1,11 @@
 # Work queue
 
-988 items; claim with `tools/claim.py next <group> [--stage N]`.
+987 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (988)
+## Stage 2: nodes to state (987)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -23,7 +23,6 @@
 | `lem-exc-continuous-cochains-short-exact` | 1 | state |
 | `lem-exc-etale-sheaves-gsets-point` | 1 | state |
 | `lem-galois-fpqc-pullback-canonical-iso` | 1 | state |
-| `lem-pc-balanced-derived-tensor-model` | 1 | state |
 | `lem-pc-derived-adjoint-functors` | 1 | state |
 | `lem-pc-derived-limit-milnor-sequence` | 1 | state |
 | `lem-pc-derived-tensor-flat-second-localization` | 1 | state |
