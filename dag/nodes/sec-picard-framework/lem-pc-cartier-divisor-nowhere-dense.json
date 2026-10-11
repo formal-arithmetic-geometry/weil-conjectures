@@ -118,5 +118,23 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-cn2 (reviewer sub-agent of L); spot-checked: Re-push after return of 14:57 (head da596483e); all four returned points checked. (1) statement identical to sheaf-dag, scheme-theoretic density via [def-nagata-scheme-theoretically-dense-open] restored, no tag reference, convention paragraph gone. (2) quasi-compactness of j added: step 2 D(a)->Spec A quasi-compact (elementary: preimage of a quasi-compact open is a finite union of D(ah)), step 3 via new lem-pc-quasi-compact-local-on-target (Stacks 03KG spaces-morphisms-lemma-quasi-compact-local clause (6), read; schemes version 01K4 schemes.tex:3584), then the definition node with both hypotheses (quasi-compact open immersion, injectivity checked chartwise; restriction of j_* to V is (j|_V)_*, injectivity of a sheaf map is local). (3) generator regularity: new lem-pc-localization-preserves-nonzerodivisor (true: A->A_g flat; Mathlib IsLocalization.nonZeroDivisors_le_comap, Defs.lean:780 states it). (4) WANTED removed, report cites 07ZU lemma-complement-effective-Cartier-divisor, read at literature/stacks-project/divisors.tex:2449-2465; the proof follows it (affine local, A subset A_f, local on S). lem-pc-affine-nonzerodivisor-complement-dense unchanged as the return allowed (A->A_a injective for nzd a; density from injectivity). New nodes: statement only, created.item the item, from.node lem-pc-degree-base-change, same_as [], three searches each. FIX: dag/nodes/sec-picard-framework/lem-pc-cartier-divisor-nowhere-dense.json: proof[0].text: step 1 rewritten to quote def-nagata-effective-cartier-ideal (cover members taken affine as in the Stacks proof, principal refinement via the localization node) instead of the unexplained 'initial generator chart'; no change of mathematics, uses unchanged. Small cases: A=k[t], a=t; A=k[x,y]/(xy), a=x+y nzd, g=x: image nzd in A_x=k[x,1/x]. Start 2026-10-10 Sat Oct 10 03:22:58 PM UTC 2026, end Sat Oct 10 03:24:25 PM UTC 2026.; 1 file(s) fixed by the reviewer"
  },
- "lead_note": "2026-10-10 L (R-cn2): lem-pc-localization-preserves-nonzerodivisor has an exact Mathlib candidate IsLocalization.nonZeroDivisors_le_comap (Mathlib/RingTheory/Localization/Defs.lean:780, specialize M = powers g); lem-pc-quasi-compact-local-on-target is covered by HasAffineProperty @QuasiCompact (Mathlib/AlgebraicGeometry/Morphisms/QuasiCompact.lean:117) giving IsZariskiLocalAtTarget; both left unsplit for whoever takes them. Step 1 reads def-nagata-effective-cartier-ideal with affine cover members."
+ "lead_note": "2026-10-10 L (R-cn2): lem-pc-localization-preserves-nonzerodivisor has an exact Mathlib candidate IsLocalization.nonZeroDivisors_le_comap (Mathlib/RingTheory/Localization/Defs.lean:780, specialize M = powers g); lem-pc-quasi-compact-local-on-target is covered by HasAffineProperty @QuasiCompact (Mathlib/AlgebraicGeometry/Morphisms/QuasiCompact.lean:117) giving IsZariskiLocalAtTarget; both left unsplit for whoever takes them. Step 1 reads def-nagata-effective-cartier-ideal with affine cover members.",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.CartierDivisorNowhereDense",
+  "declaration": "AlgebraicGeometry.Scheme.IdealSheafData.IsInvertible.compl_support_dense",
+  "file": "lean/Sheaf/AlgebraicGeometry/CartierDivisorNowhereDense.lean",
+  "statement": "theorem IsInvertible.compl_support_dense {Y : Scheme.{u}} {C : Y.IdealSheafData} (hC : C.IsInvertible) : QuasiCompact (Scheme.Opens.ι C.support.compl) ∧ IsSchemeTheoreticallyDominant (Scheme.Opens.ι C.support.compl) ∧ Dense (C.support.compl : Set Y) ∧ ∀ V : Y.Opens, (V : Set Y) ⊆ C.support → V = ⊥",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-cdn0716",
+  "group": "H1",
+  "result": "pass",
+  "note": "X=Y:Scheme.{u}; effective Cartier ideal = C:IdealSheafData + recorded IsInvertible (regular principal on affine nbhd of each point); U,j = C.support.compl, Opens.ι; scheme-theoretic density = QuasiCompact j (presupposed by the def node) + IsSchemeTheoreticallyDominant (mathlib_match of def-nagata-scheme-theoretically-dense-open); Dense compl; no nonempty open in support; source Blowup/Density states only dominance so existing false; docstring follows 3 proof steps; header, tag, lines<=100, imports used, proof sorry"
+ }
 }
