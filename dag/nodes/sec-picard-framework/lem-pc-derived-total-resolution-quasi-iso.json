@@ -103,5 +103,23 @@
   "group": "J1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-dtr2254 (reviewer sub-agent of L); spot-checked: Statement matches Tag 09IZ (direct-sum Tot, A^{p,q}=A_{-p}^q); proof follows the Tag 09IZ argument (spliced image/cohomology rows, finite-support descending cancellation), all steps elementary; no boundedness needed since Tot is a direct sum; sign d_I+(-1)^p d_II matches the repository and the citing node lem-pc-derived-filtered-free-resolution, whose hypotheses (exact rows, surjective on cocycles) match. FIX more, RETURN less: (1) B4 plain-text arrows in all three steps rewritten in TeX; (2) Step 3 injectivity made explicit (lift m to A_0^{-1}, difference comes from Ker d^0_{A_1}); d^2=0 moved to Step 2; (3) stale split_report summary ('Stacks checkout absent, WANTED') corrected. Second reading missed (1) and (3).; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.DerivedTotalResolutionQuasiIso",
+  "declaration": "WeilConjectures.DerivedTotalResolution.total_resolution_quasiIso",
+  "file": "lean/Sheaf/Paper/DerivedTotalResolutionQuasiIso.lean",
+  "statement": "theorem total_resolution_quasiIso (M : CochainComplex (ModuleCat R) ℤ) (K : HomologicalComplex₂ (ModuleCat R) (ComplexShape.up ℤ) (ComplexShape.up ℤ)) [K.HasTotal (ComplexShape.up ℤ)] (ε : K.total (ComplexShape.up ℤ) ⟶ M) (a : K.X 0 ⟶ M) [∀ i, (K.total (ComplexShape.up ℤ)).HasHomology i] [∀ i, M.HasHomology i] [∀ p q, (K.X p).HasHomology q] (h_positive : ∀ p : ℤ, 0 < p → IsZero (K.X p)) (h_augmentation_zero : ∀ q : ℤ, K.ιTotal (ComplexShape.up ℤ) 0 q q (by simp) ≫ ε.f q = a.f q) (h_augmentation : ∀ (p q n : ℤ) (hp : p < 0) (h : ComplexShape.π (ComplexShape.up ℤ) (ComplexShape.up ℤ) (ComplexShape.up ℤ) (p, q) = n), K.ιTotal (ComplexShape.up ℤ) p q n h ≫ ε.f n = 0) (h_exact : ∀ (p q : ℤ), p < -1 → Function.Exact ((K.d p (p + 1)).f q).hom ((K.d (p + 1) (p + 2)).f q).hom) (h_exact_zero : ∀ q : ℤ, Function.Exact ((K.d (-1) 0).f q).hom (a.f q).hom) (h_surjective : ∀ q : ℤ, Function.Surjective (a.f q).hom) (h_cycles : ∀ (p q : ℤ), p < -1 → Function.Exact (HomologicalComplex.cyclesMap (K.d p (p + 1)) q).hom (HomologicalComplex.cyclesMap (K.d (p + 1) (p + 2)) q).hom) (h_cycles_zero : ∀ q : ℤ, Function.Exact (HomologicalComplex.cyclesMap (K.d (-1) 0) q).hom (HomologicalComplex.cyclesMap a q).hom) (h_cycles_surjective : ∀ q : ℤ, Function.Surjective (HomologicalComplex.cyclesMap a q).hom) : QuasiIso ε",
+  "branch": "sheaf-dag",
+  "by": "G1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-trq0753",
+  "group": "G1",
+  "result": "fix",
+  "note": "Matched Tag 09IZ/node clause by clause: M CochainComplex (ModuleCat R) Z; A_i = column -i of Mathlib HomologicalComplex2 up/up (positive columns IsZero), Tot = K.total (up Z) (sign (-1)^p = node's); augmentation eps fixed by h_augmentation_zero (=a on column 0) and h_augmentation (0 on negative columns); termwise exactness h_exact (A_i, i>=1), h_exact_zero (A_0), h_surjective (M); cycle rows h_cycles/h_cycles_zero/h_cycles_surjective via cyclesMap = Ker d^q; conclusion QuasiIso eps; HasTotal/HasHomology are Prop instance binders, automatic in ModuleCat; universes free (u_1 ring, u_2 modules), [Ring R] generalises the node's ring (citer uses CommRing, instantiates); no Mathlib/source statement of 09IZ (BicomplexColumns has only bounded-column total quasi-iso lemmas). FIX: docstring proof expanded to the node's three steps (H8)."
  }
 }
