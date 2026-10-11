@@ -22,7 +22,8 @@
  },
  "stmt_deps": [
   "pqf-def-coherent",
-  "pqf-def-cohomology"
+  "pqf-def-cohomology",
+  "def-sc-open-module-cohomology"
  ],
  "proof": [
   {
@@ -156,5 +157,23 @@
   "group": "G1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-pav2242 (reviewer sub-agent of L); spot-checked: Packet read whole. Step 2 cites lem-pc-affine-vanishing (Spec A, quasi-coherent, H^p=0 p>0), a generic tool from another unit: accepted (C7/C8). Its declaration subsingleton_H_succ_of_isAffine (slopmaster2 Affine.lean:284) is stated for [IsAffine X] only; grep of slopmaster2 WeilConjectures and Mathlib AlgebraicGeometry found no affine-open (IsAffineOpen U) cohomology vanishing, so no B10 attachment and the item is not a duplicate of lem-pc-affine-vanishing (that node is the U=X special case; class b does not apply, split cites it in one step). Steps 1 and 3 (induced open subscheme, F|_U quasi-coherent, H^p(U,F)=H^p(U,F|_U) per pqf-def-cohomology, Stacks 01E3) are elementary. D: no cycle. No faults; second reading missed none."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AffineOpenModuleCohomologyVanishing",
+  "declaration": "AlgebraicGeometry.subsingleton_openModuleCohomology_of_isAffineOpen",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineOpenModuleCohomologyVanishing.lean",
+  "statement": "theorem subsingleton_openModuleCohomology_of_isAffineOpen (X : Scheme.{u}) (F : X.Modules) [F.IsQuasicoherent] (U : X.Opens) (hU : IsAffineOpen U) (p : ℕ) (hp : 0 < p) : Subsingleton ((RingedSpace.openModuleCohomology X.toRingedSpace p U).obj F)",
+  "branch": "sheaf-dag",
+  "by": "J1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-pav",
+  "group": "J1",
+  "result": "pass",
+  "note": "X : Scheme.{u}; F : X.Modules [F.IsQuasicoherent] (STATE QC); U : X.Opens, IsAffineOpen U; p>0; H^p(U,F)=0 as Subsingleton of RingedSpace.openModuleCohomology X p U (STATE COHOMOLOGY ON OPENS); stmt_deps gain landed def-sc-open-module-cohomology justified, check_dag adds no cycle/error; no duplicate node or landed affine-open vanishing; single clause, no conjuncts"
  }
 }
