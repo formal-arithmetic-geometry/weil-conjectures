@@ -270,7 +270,8 @@ theorem Etale.exists_mono_biproduct_lowerStar_of_isNoetherian [IsNoetherianRing 
       (φ : C ⟶ ⨁ fun i ↦ ((h i)_*[ModuleCat.{u + 1} Λ]).obj
         ((constantSheaf (V i).smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj (M i))), Mono φ :=
   -- Proved steps of the Stacks proof: Step 3
-  -- (`Scheme.exists_isConstant_upperStar_of_isConstructibleSheaf`, constancy over a finite separable extension of a residue field), Step 5
+  -- (`Scheme.exists_isConstant_upperStar_of_isConstructibleSheaf`, constancy over a finite
+  -- separable extension of a residue field), Step 5
   -- (`Etale.homLowerStarConstantSheafEquiv`) and the 09Z5 input. Missing: 09YV, 0817, 09Z1.
   sorry
 
