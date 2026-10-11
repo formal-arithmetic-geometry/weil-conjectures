@@ -155,5 +155,23 @@
   "by": "L",
   "result": "pass",
   "note": "Reviewed by the lead (opus-relaunch6). Five steps along Stacks 07QF with no new node: B Noetherian (Hilbert basis via the finite type leaf), k' (x) A regular (definition), id (x) phi smooth by base change and the cancel-base-change leaf (Algebra.Smooth.of_equiv Smooth/Basic.lean:554 for transport), k' (x) B regular by 07NF (the node lem-weil-pbc-regular-ring-smooth-ascent created by the finitely-generated-extensions worker; the worker deleted its own duplicate), conclusion. Stacks runs over finitely generated extensions (0381 (1)); the definition node uses finite purely inseparable ones (0381 (2)), same argument."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.GeometricallyRegularSmoothAscent",
+  "declaration": "Algebra.isGeometricallyRegular_of_smooth",
+  "file": "lean/Sheaf/RingTheory/GeometricallyRegularSmoothAscent.lean",
+  "statement": "theorem isGeometricallyRegular_of_smooth {k : Type u} {A : Type v} {B : Type w} [Field k] [CommRing A] [CommRing B] [Algebra k A] [Algebra k B] (φ : A →ₐ[k] B) (hsmooth : letI : Algebra A B := φ.toRingHom.toAlgebra; Algebra.Smooth A B) (hnoetherian : IsNoetherianRing A) (hregular : IsGeometricallyRegular k A) : IsNoetherianRing B ∧ IsGeometricallyRegular k B",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-gsa1051",
+  "group": "H1",
+  "result": "pass",
+  "note": "k Field, A B CommRing k-algebras, phi A->[k]B, Algebra.Smooth A B via phi.toAlgebra (fields = FP + projective Omega + subsingleton H1Cotangent, inferInstance fails), IsNoetherianRing A, Algebra.IsGeometricallyRegular k A (Type (max u v) tests, k':=Q at Type 0 instantiates), conclusion Noetherian B and geometrically regular B; #check resolves Algebra.IsGeometricallyRegular"
  }
 }
