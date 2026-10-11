@@ -144,8 +144,8 @@ noncomputable def DerivedCategoryBoundedConstructible.leftDerivedUpperStarAdjunc
 
 /-- Blueprint `fix-prop-adjunctions` (2): the restriction `Rf_! : Dᵇc(X, Λ) ⥤ Dᵇc(Y, Λ)` of the
 compactly supported direct image to the bounded constructible categories, for a separated
-finite-type `f` between finite-type `k`-schemes (`Y` quasi-compact) and a finite `Λ` whose exponent
-is invertible on `Y` (finiteness theorem, `AlgebraicGeometry.Etale.boundedConstructible_rightDerivedLowerShriek`). -/
+finite-type `f` between finite-type `k`-schemes and a finite `Λ` whose exponent is invertible on
+`Y` (finiteness theorem, `AlgebraicGeometry.Etale.boundedConstructible_rightDerivedLowerShriek`). -/
 noncomputable def DerivedCategoryBoundedConstructible.rightDerivedLowerShriek
     (aX : X ⟶ Spec (.of k)) (aY : Y ⟶ Spec (.of k)) [LocallyOfFiniteType aX]
     [LocallyOfFiniteType aY] [QuasiCompact aY] [HasInvertibleExponent Λ Y] (f : X ⟶ Y)
