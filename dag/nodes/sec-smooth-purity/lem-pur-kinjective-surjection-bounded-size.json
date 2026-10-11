@@ -22,9 +22,52 @@
   "def-sp-grothendieck-abelian",
   "lem-pur-kinjective-set-iso-classes-bounded-size"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For every proper subobject N' of N, the inverse image pi^{-1}(N') is a proper subobject of M, since otherwise N' would contain pi(M)=N. The generator property therefore gives a morphism phi_{N'}:U\\to M that does not factor through pi^{-1}(N'). Consequently pi\\circ phi_{N'}:U\\to N does not factor through N'.",
+   "uses": [
+    "def-sp-grothendieck-abelian"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/injectives.tex",
+    "place": "Lemma lemma-surjection-bounded-size, proof, first sentence"
+   }
+  },
+  {
+   "text": "Let P=\\bigoplus_{N'}U be the coproduct of the maps phi_{N'} indexed by all proper subobjects N' of N, and let M' be its image in M. The index set is a subset of the set of subobjects of N, so it has cardinality at most |N|. Since M' is a quotient of P, sending a subobject of M' to its inverse image in P injects the subobject set of M' into the subobject set of P. The coproduct P is a direct summand, hence a subobject, of the coproduct of |N| copies of U (after enlarging the index set), so |M'| is at most |\\bigoplus_{|N|}U|=c(|N|).",
+   "uses": [
+    "def-sp-grothendieck-abelian",
+    "lem-pur-kinjective-set-iso-classes-bounded-size"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/injectives.tex",
+    "place": "Lemma lemma-surjection-bounded-size, proof, displayed definition of M'"
+   }
+  },
+  {
+   "text": "The image M' surjects onto N: if its image were contained in a proper subobject N' of N, then the composite pi\\circ phi_{N'} for the summand indexed by N' would factor through N', contradicting Step 1. Therefore M' is the required subobject, with |M'| \\le c(|N|).",
+   "uses": [
+    "def-sp-grothendieck-abelian",
+    "lem-pur-kinjective-set-iso-classes-bounded-size"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/injectives.tex",
+    "place": "Lemma lemma-surjection-bounded-size, proof, final sentence"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sp-grothendieck-abelian",
+  "lem-pur-kinjective-set-iso-classes-bounded-size"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/injectives.tex",
+  "place": "Lemma lemma-surjection-bounded-size"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -56,12 +99,28 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-pur-kinjective-acyclic-quotient-complexes-bounded-size",
   "by": "worker",
   "date": "2026-10-11"
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-def-sf-operations"
+ "unit": "sk-def-sf-operations",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-pur-kinjective-surjection-bounded-size",
+  "worker": "stage1",
+  "summary": "Repaired the two mathematical errors identified on return. Step 1 uses the proper inverse image pi^{-1}(N') and the generator directly, avoiding an invalid lift through an epimorphism. Step 2 treats M' as a quotient (image) of the coproduct and bounds its subobjects via inverse images in the coproduct, which embeds as a direct summand in the larger coproduct. Step 3 then proves surjectivity by the selected summand contradiction. No child node was needed.",
+  "blueprint": "The item realizes the bounded-size surjection lemma used in the bounded-size acyclic-subcomplex construction, as specified in the blueprint ancestor def-weil-derived-pullback-tensor-hom: its three steps implement the generator choice, coproduct-image cardinal estimate, and surjectivity argument.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-sbs0052",
+  "group": "K1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-sbs0052 (reviewer sub-agent of L); spot-checked: Re-push after R-sbs0044: (1) Step 1 now takes proper pi^{-1}(N') and applies the generator clause of def-sp-grothendieck-abelian, pi o phi not factoring through N' via pullback - matches Stacks proof, no lift; (2) Step 2 bounds |M'| via injection of subobjects of the quotient M' into subobjects of P by preimage, P a summand of the |N|-indexed coproduct, size as defined in lem-pur-kinjective-set-iso-classes-bounded-size; Step 3 surjectivity by the N'-summand. Statement agrees with Stacks; citer lem-pur-kinjective-acyclic-quotient-complexes-bounded-size uses exactly this (C4); no duplicate (only set-iso-classes nearby, different content). Second reading found no fault I missed."
+ }
 }

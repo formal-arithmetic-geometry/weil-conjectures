@@ -3168,3 +3168,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 00:50 UTC L: G1 ring-pseudo-coherent-iff-all-m FIX 95d7890f9 (R-pam0049); returned: K1 kinjective-characterize-K-injective 9c2a50f23 (R-cki0048: child lem-pur-kinjective-homotopy-limit-vanishing false, counterexample (1/n!)Z vs Q -> Q/Z).
 - 00:51 L: merged deliver/M1/lem-sp-ce-vertical-nullhomotopy (reviewer FIX; after a return; new nodes: 1)
 - 00:51 UTC L: M1 ce-vertical-nullhomotopy FIX 0d5ef1832 re-push (R-cvn0049; induction on p written out, duplicate row-comparison node dropped).
+- 00:52 L: merged deliver/K1/lem-pur-kinjective-surjection-bounded-size (reviewer PASS; after a return; new nodes: 0)
