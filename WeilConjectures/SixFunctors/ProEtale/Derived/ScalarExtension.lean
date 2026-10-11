@@ -297,13 +297,24 @@ theorem isIso_biproductDesc_mapDerivedCategoryAdjunction_unit {ι : Type} [Finit
 /-- For a basis `b` of the finite free `R`-algebra `S` and `M` in `D(X_proét, R)`, the maps
 `M ⟶ U N M` obtained from the unit of `N = L(S ⊗_R -) ⊣ U = D(res)` by multiplication with the
 `b i` exhibit `U N M` as a sum of copies of `M`. -/
-theorem isIso_biproductDesc_derivedSheafExtendScalarsAdjunction_unit {ι : Type} [Finite ι]
+theorem isIso_biproductDesc_derivedSheafExtendScalarsAdjunction_unit [Module.Finite R S]
+    [Module.Free R S] {ι : Type} [Finite ι]
     (b : Module.Basis ι R S)
     (M : DerivedCategory (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} R))) :
     IsIso (biproduct.desc fun i ↦ (derivedSheafExtendScalarsAdjunction X).unit.app M ≫
       D(sheafCompose (Scheme.ProEt.topology X)
         (ModuleCat.restrictScalars.{u + 1} (algebraMap R S))).map ((b i : S) • 𝟙 _)) := by
-  sorry
+  have h := isIso_biproductDesc_mapDerivedCategoryAdjunction_unit (fun i ↦ (b i : S))
+    (isIso_biproductDesc_sheafExtendScalarsAdjunction_unit b) M
+  refine isIso_biproductDesc_of_iso _ _ (Iso.refl _)
+    ((𝐆).mapDerivedCategory.mapIso
+      ((𝐅).leftDerivedFunctorIsoMapDerivedCategory.app M)) (fun i ↦ ?_) h
+  have e : (𝐅).leftDerivedFunctorIsoMapDerivedCategory.inv.app M ≫ ((b i : S) • 𝟙 _) ≫
+      (𝐅).leftDerivedFunctorIsoMapDerivedCategory.hom.app M = (b i : S) • 𝟙 _ := by
+    rw [Linear.smul_comp, Category.id_comp, Linear.comp_smul, Iso.inv_hom_id_app]
+  simp only [derivedSheafExtendScalarsAdjunction, Adjunction.ofNatIsoLeft_unit, NatTrans.comp_app,
+    Functor.whiskerRight_app, Iso.symm_hom, Functor.mapIso_hom, Iso.app_hom, Iso.refl_hom,
+    Category.id_comp, Category.assoc, ← Functor.map_comp, e]
 
 variable [Module.Finite R S] [Module.Free R S]
   [Nontrivial R] {Z Y : Scheme.{u}} (g : Z ⟶ Y)
