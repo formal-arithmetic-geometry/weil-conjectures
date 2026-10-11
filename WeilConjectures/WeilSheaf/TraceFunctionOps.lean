@@ -306,7 +306,7 @@ theorem traceFunction_fieldPointsCongr (K : WeilComplex k₀ l X) (n : ℕ)
     (x : (X ↘ Spec (CommRingCat.of k₀)).fieldPoints (FiniteField.galoisExtension k₀ n)) :
     K.traceFunction n ((X ↘ Spec (CommRingCat.of k₀)).fieldPointsCongr σ x) =
       K.traceFunction n x :=
-  finsum_congr fun j ↦ congrArg _ (WeilSheaf.traceFunction_eq_of_base_eq _ n
+  finsum_congr fun _ ↦ congrArg _ (WeilSheaf.traceFunction_eq_of_base_eq _ n
     ((Scheme.Hom.comp_apply _ _ _).trans (congrArg x.1.base (Subsingleton.elim _ _))))
 
 end WeilComplex

@@ -32,6 +32,10 @@ open scoped ProEtale
 variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime] [Fact (ringChar k₀ ≠ l)]
 
 local notation "ĀS" => affineLine.geometricArtinSchreierMap k₀
+local notation "𝐅𝐫" =>
+  Scheme.Hom.geometricGaloisFrobenius (affineLine k₀ ↘ Spec (CommRingCat.of k₀))
+local notation "Frₕ" =>
+  Iso.hom (Scheme.Hom.geometricGaloisFrobenius (affineLine k₀ ↘ Spec (CommRingCat.of k₀)))
 
 variable (k₀ l) in
 /-- The counit `ĀS^* ĀS_* ℚ̄_ℓ ⟶ ℚ̄_ℓ` of `ĀS^* ⊣ ĀS_*` at the constant sheaf. -/
@@ -45,19 +49,19 @@ variable (k₀ l) in
 /-- The Weil structure `Fr^* ĀS_* ℚ̄_ℓ ⟶ ĀS_* ℚ̄_ℓ` of `AS_* ℚ̄_ℓ`, through `Fr^* ≅ (Fr⁻¹)_*`, the
 exchange of `ĀS_*` with `(Fr⁻¹)_*` and the Weil structure of `ℚ̄_ℓ`. -/
 noncomputable def affineLine.artinSchreierPushforwardStr :
-    ((affineLine k₀ ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.hom)^*[WeilCoefficients.{u} l].obj ((ĀS)_*[WeilCoefficients.{u} l].obj
+    (Frₕ)^*[WeilCoefficients.{u} l].obj ((ĀS)_*[WeilCoefficients.{u} l].obj
       (ProEtale.adicConstantSheaf l (affineLine k₀ ↘ Spec (CommRingCat.of k₀)).geometricFiber)) ⟶
       (ĀS)_*[WeilCoefficients.{u} l].obj
         (ProEtale.adicConstantSheaf l (affineLine k₀ ↘ Spec (CommRingCat.of k₀)).geometricFiber) :=
-  (ProEtale.upperStarIsoLowerStarInv _ (affineLine k₀ ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius).hom.app _ ≫
-    ((ProEtale.lowerStarComp _ (affineLine.geometricArtinSchreierMap k₀) (affineLine k₀ ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.inv ≪≫
+  (ProEtale.upperStarIsoLowerStarInv _ (𝐅𝐫)).hom.app _ ≫
+    ((ProEtale.lowerStarComp _ (affineLine.geometricArtinSchreierMap k₀) (𝐅𝐫).inv ≪≫
         ProEtale.lowerStarCongr _
           (Scheme.Hom.geometricFiberMap_comp_geometricGaloisFrobenius_inv _ _) ≪≫
-        (ProEtale.lowerStarComp _ (affineLine k₀ ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.inv (affineLine.geometricArtinSchreierMap k₀)).symm).app
+        (ProEtale.lowerStarComp _ (𝐅𝐫).inv (affineLine.geometricArtinSchreierMap k₀)).symm).app
         (ProEtale.adicConstantSheaf l
           (affineLine k₀ ↘ Spec (CommRingCat.of k₀)).geometricFiber) ≪≫
       (affineLine.geometricArtinSchreierMap k₀)_*[WeilCoefficients.{u} l].mapIso
-        (ProEtale.adicConstantSheafLowerStarIso l (affineLine k₀ ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.symm)).hom
+        (ProEtale.adicConstantSheafLowerStarIso l (𝐅𝐫).symm)).hom
 
 /-- The Weil structure of `AS_* ℚ̄_ℓ`, on underlying sheaves. -/
 lemma affineLine.frobeniusStr_artinSchreierPushforward :
@@ -66,19 +70,21 @@ lemma affineLine.frobeniusStr_artinSchreierPushforward :
   exact congrArg ((ProEtale.upperStarIsoLowerStarInv _ _).hom.app _ ≫ ·)
     artinSchreierPushforward_str_hom_hom
 
+set_option linter.flexible false in
+omit [Fact (ringChar k₀ ≠ l)] in
 /-- The pushforward-level identity behind
 `AlgebraicGeometry.affineLine.artinSchreierCounit_frobenius`. -/
 lemma affineLine.lowerStar_map_adicConstantSheafToLowerStar_frobenius :
-    (ĀS)_*[WeilCoefficients.{u} l].map (ProEtale.adicConstantSheafToLowerStar l (affineLine k₀ ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.hom) ≫
-        (ProEtale.lowerStarFactor _ (rfl : (affineLine k₀ ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.hom ≫ ĀS = (affineLine k₀ ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.hom ≫ ĀS)).hom.app
+    (ĀS)_*[WeilCoefficients.{u} l].map (ProEtale.adicConstantSheafToLowerStar l Frₕ) ≫
+        (ProEtale.lowerStarFactor _ (rfl : Frₕ ≫ ĀS = Frₕ ≫ ĀS)).hom.app
           (ProEtale.adicConstantSheaf l _) =
-      (ProEtale.upperStarLowerStarAdjunction (WeilCoefficients.{u} l) (affineLine k₀ ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.hom).unit.app _ ≫
-        ((affineLine k₀ ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.hom)_*[WeilCoefficients.{u} l].map (affineLine.artinSchreierPushforwardStr k₀ l) ≫
+      (ProEtale.upperStarLowerStarAdjunction (WeilCoefficients.{u} l) Frₕ).unit.app _ ≫
+        (Frₕ)_*[WeilCoefficients.{u} l].map (affineLine.artinSchreierPushforwardStr k₀ l) ≫
         (ProEtale.lowerStarFactor _ (Scheme.Hom.geometricFiberMap_comp_geometricGaloisFrobenius
           (affineLine.artinSchreierMap k₀) (comp_over _ _))).hom.app
           (ProEtale.adicConstantSheaf l _) := by
   have hu := ProEtale.upperStarLowerStarAdjunction_unit_app_comp_map_upperStarIsoLowerStarInv
-    (WeilCoefficients.{u} l) (affineLine k₀ ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius
+    (WeilCoefficients.{u} l) (𝐅𝐫)
     ((ĀS)_*[WeilCoefficients.{u} l].obj (ProEtale.adicConstantSheaf l _))
   rw [affineLine.artinSchreierPushforwardStr, Functor.map_comp, Category.assoc, reassoc_of% hu]
   ext V : 3
@@ -103,35 +109,35 @@ lemma affineLine.lowerStar_map_adicConstantSheafToLowerStar_frobenius :
   · simp [MorphismProperty.Over.pullbackCongr, MorphismProperty.Over.pullback,
       MorphismProperty.Over.mk, MorphismProperty.Over.pullbackComp,
       MorphismProperty.Over.pullbackId]
-    done
 
+omit [Fact (ringChar k₀ ≠ l)] in
 /-- The counit `ε : ĀS^* ĀS_* ℚ̄_ℓ ⟶ ℚ̄_ℓ` is compatible with the Weil structures of `AS_* ℚ̄_ℓ`
 and of `ℚ̄_ℓ`, the latter being the canonical morphism `Fr^* ℚ̄_ℓ ⟶ ℚ̄_ℓ`. -/
 lemma affineLine.artinSchreierCounit_frobenius :
-    (ProEtale.upperStarComp _ (affineLine k₀ ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.hom ĀS).hom.app ((ĀS)_*[WeilCoefficients.{u} l].obj
+    (ProEtale.upperStarComp _ Frₕ ĀS).hom.app ((ĀS)_*[WeilCoefficients.{u} l].obj
         (ProEtale.adicConstantSheaf l _)) ≫
-        ((affineLine k₀ ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.hom)^*[WeilCoefficients.{u} l].map (affineLine.artinSchreierCounit k₀ l) ≫
-        ProEtale.upperStarAdicConstantSheafHom l (affineLine k₀ ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.hom =
+        (Frₕ)^*[WeilCoefficients.{u} l].map (affineLine.artinSchreierCounit k₀ l) ≫
+        ProEtale.upperStarAdicConstantSheafHom l Frₕ =
       (ProEtale.upperStarCongr _ (Scheme.Hom.geometricFiberMap_comp_geometricGaloisFrobenius
           (affineLine.artinSchreierMap k₀) (comp_over _ _)).symm).hom.app
           ((ĀS)_*[WeilCoefficients.{u} l].obj (ProEtale.adicConstantSheaf l _)) ≫
-        (ProEtale.upperStarComp _ ĀS (affineLine k₀ ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.hom).hom.app
+        (ProEtale.upperStarComp _ ĀS Frₕ).hom.app
           ((ĀS)_*[WeilCoefficients.{u} l].obj (ProEtale.adicConstantSheaf l _)) ≫
         (ĀS)^*[WeilCoefficients.{u} l].map (affineLine.artinSchreierPushforwardStr k₀ l) ≫
         affineLine.artinSchreierCounit k₀ l := by
   apply ((ProEtale.upperStarLowerStarAdjunction (WeilCoefficients.{u} l)
-    ((affineLine k₀ ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.hom ≫ ĀS)).homEquiv _ _).injective
-  have h₁ : ProEtale.upperStarAdicConstantSheafHom l (affineLine k₀ ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.hom =
-      ((affineLine k₀ ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.hom)^*[WeilCoefficients.{u} l].map (ProEtale.adicConstantSheafToLowerStar l (affineLine k₀ ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.hom) ≫
-        (ProEtale.upperStarLowerStarAdjunction _ (affineLine k₀ ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.hom).counit.app _ :=
+    (Frₕ ≫ ĀS)).homEquiv _ _).injective
+  have h₁ : ProEtale.upperStarAdicConstantSheafHom l Frₕ =
+      (Frₕ)^*[WeilCoefficients.{u} l].map (ProEtale.adicConstantSheafToLowerStar l Frₕ) ≫
+        (ProEtale.upperStarLowerStarAdjunction _ Frₕ).counit.app _ :=
     Adjunction.homEquiv_counit _ _ _ _
   have e₁ := ProEtale.homEquiv_upperStarFactor_hom_app_comp_counit
-    (rfl : (affineLine k₀ ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.hom ≫ ĀS = (affineLine k₀ ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.hom ≫ ĀS) ((ĀS)_*[WeilCoefficients.{u} l].obj
+    (rfl : Frₕ ≫ ĀS = Frₕ ≫ ĀS) ((ĀS)_*[WeilCoefficients.{u} l].obj
       (ProEtale.adicConstantSheaf l _)) (ProEtale.adicConstantSheaf l _)
-    (affineLine.artinSchreierCounit k₀ l ≫ ProEtale.adicConstantSheafToLowerStar l (affineLine k₀ ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.hom)
+    (affineLine.artinSchreierCounit k₀ l ≫ ProEtale.adicConstantSheafToLowerStar l Frₕ)
   have e₂ := ProEtale.homEquiv_upperStarFactor_hom_app_comp_counit
     (Scheme.Hom.geometricFiberMap_comp_geometricGaloisFrobenius (affineLine.artinSchreierMap k₀)
-      (comp_over _ _) : ĀS ≫ (affineLine k₀ ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.hom = (affineLine k₀ ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.hom ≫ ĀS)
+      (comp_over _ _) : ĀS ≫ Frₕ = Frₕ ≫ ĀS)
     ((ĀS)_*[WeilCoefficients.{u} l].obj (ProEtale.adicConstantSheaf l _))
     (ProEtale.adicConstantSheaf l _) (affineLine.artinSchreierPushforwardStr k₀ l)
   rw [ProEtale.upperStarFactor_rfl, Functor.map_comp, Category.assoc, ← h₁] at e₁
@@ -180,7 +186,8 @@ lemma affineLine.artinSchreierCounit_translation (c : k₀) :
         ((affineLine.geometricTranslationIso k₀ c).hom)^*[WeilCoefficients.{u} l].map
           (affineLine.artinSchreierCounit k₀ l) ≫
         ProEtale.upperStarAdicConstantSheafHom l (affineLine.geometricTranslationIso k₀ c).hom =
-      (ProEtale.upperStarCongr _ (affineLine.geometricTranslation_comp_artinSchreierMap k₀ c)).hom.app
+      (ProEtale.upperStarCongr _
+          (affineLine.geometricTranslation_comp_artinSchreierMap k₀ c)).hom.app
           ((ĀS)_*[WeilCoefficients.{u} l].obj (ProEtale.adicConstantSheaf l _)) ≫
         (ĀS)^*[WeilCoefficients.{u} l].map (affineLine.artinSchreierTranslation l c) ≫
         affineLine.artinSchreierCounit k₀ l := by

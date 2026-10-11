@@ -5,21 +5,20 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseStalk
 public import WeilConjectures.SixFunctors.ProEtale.Adic.UnitSection
 public import WeilConjectures.SixFunctors.ProEtale.UpperLowerStar.Coherence
 public import WeilConjectures.SixFunctors.ProEtale.UpperLowerStar.Restriction
 
 /-!
-# The canonical isomorphisms `g^* ℚ̄_ℓ ≅ ℚ̄_ℓ` and transports of sections of `ℚ̄_ℓ`
+# The canonical morphisms `g^* ℚ̄_ℓ ⟶ ℚ̄_ℓ`
 
 For a morphism of schemes `g : W ⟶ V` the canonical morphism
 `g^* ℚ̄_ℓ,V ⟶ ℚ̄_ℓ,W` (`AlgebraicGeometry.ProEtale.upperStarAdicConstantSheafHom`) is adjoint to
 the pullback of functions `ℚ̄_ℓ,V ⟶ g_* ℚ̄_ℓ,W`. These morphisms satisfy the cocycle condition
-for composites (`AlgebraicGeometry.ProEtale.upperStarAdicConstantSheafHom_comp`), so the
-transport of global sections along a commutative square and the canonical morphism maps the
-unit section of the stalk of `ℚ̄_ℓ` at a point with values in a field to the unit section
-(`AlgebraicGeometry.ProEtale.unitSection_comp_globalSectionsTransport`).
+for composites (`AlgebraicGeometry.ProEtale.upperStarAdicConstantSheafHom_comp`), and for an
+isomorphism `e` the canonical morphism is the identification `e^* ≅ (e⁻¹)_*` followed by
+`(e⁻¹)_* ℚ̄_ℓ ≅ ℚ̄_ℓ`
+(`upperStarIsoLowerStarInv_hom_app_comp_adicConstantSheafLowerStarIso_hom`).
 -/
 
 @[expose] public section

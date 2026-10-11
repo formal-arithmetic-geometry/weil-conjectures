@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.SixFunctors.ProEtale.Adic.ConstantSheafTransport
+public import WeilConjectures.SixFunctors.ProEtale.Adic.ConstantGlobalSections
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseStalk
 public import WeilConjectures.WeilSheaf.Constant
 public import WeilConjectures.WeilSheaf.StalkCharpoly
@@ -15,7 +16,8 @@ public import WeilConjectures.WeilSheaf.StalkCharpoly
 
 The transport of global sections along a commutative square and the canonical morphism
 `g^* ℚ̄_ℓ ⟶ ℚ̄_ℓ` maps the restriction of the unit section of `ℚ̄_ℓ` to the restriction of the unit
-section (`AlgebraicGeometry.ProEtale.globalSectionsTransport_globalSectionsToUpperStar_oneGlobalSection`).
+section
+(`AlgebraicGeometry.ProEtale.globalSectionsTransport_globalSectionsToUpperStar_oneGlobalSection`).
 The iterated Weil structures of the constant Weil sheaf are the canonical morphisms
 (`AlgebraicGeometry.WeilSheaf.frobeniusPowStr_adicConstant`), so the Frobenius of the stalks of
 `ℚ̄_ℓ` fixes the unit section.
@@ -97,9 +99,28 @@ lemma homEquiv_upperStarCongr_hom_app_comp {A : Type*} [Category.{u + 1} A] [Abe
     {M : Sheaf (Scheme.ProEt.topology W) A} {N : Sheaf (Scheme.ProEt.topology Z) A}
     (f : (b)^*[A].obj M ⟶ N) :
     ((upperStarLowerStarAdjunction A a).homEquiv _ _) ((upperStarCongr A p).hom.app M ≫ f) =
-      ((upperStarLowerStarAdjunction A b).homEquiv _ _) f ≫ (lowerStarCongr A p.symm).hom.app N := by
+      ((upperStarLowerStarAdjunction A b).homEquiv _ _) f ≫
+        (lowerStarCongr A p.symm).hom.app N := by
   subst p
   simp [upperStarCongr, lowerStarCongr]
+
+/-- Naturality of the composition isomorphisms of pullbacks. -/
+@[reassoc]
+lemma upperStarComp_hom_app_comp_map_map {A : Type*} [Category.{u + 1} A] [Abelian A]
+    [IsGrothendieckAbelian.{u + 1} A] {P Z Y : Scheme.{u}} (a : P ⟶ Z) (b : Z ⟶ Y)
+    {M M' : Sheaf (Scheme.ProEt.topology Y) A} (f : M ⟶ M') :
+    (upperStarComp A a b).hom.app M ≫ (a)^*[A].map ((b)^*[A].map f) =
+      (a ≫ b)^*[A].map f ≫ (upperStarComp A a b).hom.app M' :=
+  ((upperStarComp A a b).hom.naturality f).symm
+
+/-- Naturality of the congruence isomorphisms of pullbacks. -/
+@[reassoc]
+lemma upperStarCongr_hom_app_comp_map {A : Type*} [Category.{u + 1} A] [Abelian A]
+    [IsGrothendieckAbelian.{u + 1} A] {Z Y : Scheme.{u}} {a b : Z ⟶ Y} (p : a = b)
+    {M M' : Sheaf (Scheme.ProEt.topology Y) A} (f : M ⟶ M') :
+    (upperStarCongr A p).hom.app M ≫ (b)^*[A].map f =
+      (a)^*[A].map f ≫ (upperStarCongr A p).hom.app M' :=
+  ((upperStarCongr A p).hom.naturality f).symm
 
 /-- The components of the factorisation isomorphism `a^* ≅ c^* ⋙ b^*` of pullbacks. -/
 lemma upperStarFactor_hom_app {A : Type*} [Category.{u + 1} A] [Abelian A]
@@ -133,6 +154,21 @@ lemma homEquiv_upperStarFactor_hom_app_comp_counit {A : Type*} [Category.{u + 1}
   rwa [Adjunction.homEquiv_unit, Adjunction.homEquiv_counit] at h
 
 end AlgebraicGeometry.ProEtale
+
+namespace AlgebraicGeometry.WeilCoefficients
+
+variable {l : ℕ} [Fact l.Prime]
+
+/-- An endomorphism of a line fixing a nonzero vector is the identity. -/
+lemma eq_id_of_finrank_eq_one {M : WeilCoefficients.{u} l} (f : M ⟶ M)
+    (hM : Module.finrank (PadicAlgCl l) ((toModuleCat l).obj M) = 1)
+    (v : (toModuleCat l).obj M) (hv : v ≠ 0) (hf : ((toModuleCat l).map f).hom v = v) :
+    f = 𝟙 M := by
+  ext x
+  obtain ⟨c, rfl⟩ := (finrank_eq_one_iff_of_nonzero' v hv).1 hM x
+  exact (((toModuleCat l).map f).hom.map_smul c v).trans (congrArg (c • ·) hf)
+
+end AlgebraicGeometry.WeilCoefficients
 
 namespace AlgebraicGeometry.WeilSheaf
 
@@ -197,4 +233,70 @@ lemma frobeniusStr_naturality {F G : WeilSheaf k₀ l X} (f : F ⟶ G) :
   simp only [Mod.comp_hom'] at h
   exact h
 
+
 end AlgebraicGeometry.WeilSheaf
+
+namespace AlgebraicGeometry.ProEtale
+
+variable {l : ℕ} [Fact l.Prime]
+
+/-- The stalks of the constant sheaf `ℚ̄_ℓ` at points with values in a field are lines. -/
+lemma finrank_globalSections_upperStar_adicConstantSheaf {K : Type u} [Field K] {Y : Scheme.{u}}
+    (t : Spec (.of K) ⟶ Y) :
+    Module.finrank (PadicAlgCl l) ((WeilCoefficients.toModuleCat l).obj
+      ((Sheaf.Γ _ (WeilCoefficients.{u} l)).obj ((t)^*[_].obj (adicConstantSheaf l Y)))) = 1 :=
+  (WeilCoefficients.linearEquivOfIso ((Sheaf.Γ _ _).mapIso
+    (asIso (upperStarAdicConstantSheafHom l t)))).finrank_eq.trans
+    (finrank_globalSections_adicConstantSheaf _)
+
+/-- The restriction of the unit section of `ℚ̄_ℓ` to a point with values in a field is
+nonzero. -/
+lemma globalSectionsToUpperStar_oneGlobalSection_ne_zero {K : Type u} [Field K]
+    {Y : Scheme.{u}} (t : Spec (.of K) ⟶ Y) :
+    ((globalSectionsToUpperStar _ t).app (adicConstantSheaf l Y)).hom (oneGlobalSection Y) ≠ 0 := by
+  intro h
+  have e := Γ_map_adicUpperStarUnitIso_globalSectionsToUpperStar_oneGlobalSection (l := l) t
+  rw [h, map_zero] at e
+  exact oneGlobalSection_ne_zero _ e.symm
+
+/-- **Transports of stalks of `ℚ̄_ℓ` are trivial.** At a point `t` with values in a field, a
+composite of transports along commutative squares `τ ≫ t = t' ≫ g` and `τ' ≫ t' = t ≫ g'` and the
+canonical morphisms `g^* ℚ̄_ℓ ⟶ ℚ̄_ℓ`, `g'^* ℚ̄_ℓ ⟶ ℚ̄_ℓ` is the identity: both fix the restriction
+of the unit section, which spans the line `Γ(Spec K, t^* ℚ̄_ℓ)`. -/
+lemma globalSectionsTransport_comp_globalSectionsTransport_eq_id {K : Type u} [Field K]
+    {Y Y' : Scheme.{u}} {τ τ' : Spec (.of K) ⟶ Spec (.of K)} {t : Spec (.of K) ⟶ Y}
+    {t' : Spec (.of K) ⟶ Y'} {g : Y' ⟶ Y} {g' : Y ⟶ Y'} (h : τ ≫ t = t' ≫ g)
+    (h' : τ' ≫ t' = t ≫ g') :
+    globalSectionsTransport _ h (upperStarAdicConstantSheafHom l g) ≫
+      globalSectionsTransport _ h' (upperStarAdicConstantSheafHom l g') = 𝟙 _ := by
+  refine WeilCoefficients.eq_id_of_finrank_eq_one _
+    (finrank_globalSections_upperStar_adicConstantSheaf t) _
+    (globalSectionsToUpperStar_oneGlobalSection_ne_zero t) ?_
+  exact (congrArg _ (globalSectionsTransport_globalSectionsToUpperStar_oneGlobalSection h)).trans
+    (globalSectionsTransport_globalSectionsToUpperStar_oneGlobalSection h')
+
+/-- Transports along squares with equal target points agree up to `eqToHom`. -/
+lemma globalSectionsTransport_comp_eqToHom {A : Type*} [Category.{u + 1} A] [Abelian A]
+    [IsGrothendieckAbelian.{u + 1} A] {P P' Y Y' : Scheme.{u}} {τ : P' ⟶ P} {t : P ⟶ Y}
+    {t₁ t₂ : P' ⟶ Y'} {g : Y' ⟶ Y} (h₁ : τ ≫ t = t₁ ≫ g) (h₂ : τ ≫ t = t₂ ≫ g) (p : t₁ = t₂)
+    {F : Sheaf (Scheme.ProEt.topology Y) A} {F' : Sheaf (Scheme.ProEt.topology Y') A}
+    (ψ : (g)^*[A].obj F ⟶ F') :
+    globalSectionsTransport A h₁ ψ ≫
+        eqToHom (congrArg (fun s ↦ (Sheaf.Γ _ A).obj ((s)^*[A].obj F')) p) =
+      globalSectionsTransport A h₂ ψ := by
+  subst p
+  simp
+
+/-- Transports along squares with equal source points agree up to `eqToHom`. -/
+lemma eqToHom_comp_globalSectionsTransport {A : Type*} [Category.{u + 1} A] [Abelian A]
+    [IsGrothendieckAbelian.{u + 1} A] {P P' Y Y' : Scheme.{u}} {τ : P' ⟶ P} {t₁ t₂ : P ⟶ Y}
+    {t' : P' ⟶ Y'} {g : Y' ⟶ Y} (h₁ : τ ≫ t₁ = t' ≫ g) (h₂ : τ ≫ t₂ = t' ≫ g) (p : t₁ = t₂)
+    {F : Sheaf (Scheme.ProEt.topology Y) A} {F' : Sheaf (Scheme.ProEt.topology Y') A}
+    (ψ : (g)^*[A].obj F ⟶ F') :
+    eqToHom (congrArg (fun s ↦ (Sheaf.Γ _ A).obj ((s)^*[A].obj F)) p) ≫
+        globalSectionsTransport A h₂ ψ =
+      globalSectionsTransport A h₁ ψ := by
+  subst p
+  simp
+
+end AlgebraicGeometry.ProEtale
