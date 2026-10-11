@@ -1,11 +1,11 @@
 # Work queue
 
-870 items; claim with `tools/claim.py next <group> [--stage N]`.
+863 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (870)
+## Stage 2: nodes to state (863)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -22,12 +22,10 @@
 | `lem-pc-pre-derived-adjoint-functors-general` | 1 | state |
 | `lem-pc-ringed-space-derived-products` | 1 | state |
 | `lem-sc-base-change-curve` | 1 | state |
-| `lem-sc-dimension-locally-algebraic` | 1 | state |
 | `lem-sc-fibre-dimension-after-base-change` | 1 | state |
 | `lem-sc-invertible-module-generic-stalk` | 1 | state |
 | `lem-sc-mayer-vietoris-ringed-space` | 1 | state |
 | `lem-sc-p1-ext-locally-free-naturality` | 1 | state |
-| `lem-sc-picard-product-open` | 1 | state |
 | `lem-sc-separated-affine-function-field-surjective` | 1 | state |
 | `lem-sc-smooth-connected-curve-local-rings` | 1 | state |
 | `lem-sc-vector-bundle-line-subbundle` | 1 | state |
@@ -36,7 +34,6 @@
 | `lem-sp-ce-horizontal-lift` | 1 | state |
 | `lem-sp-ce-vertical-nullhomotopy` | 1 | state |
 | `lem-weil-derived-limit-roos-complex` | 1 | state |
-| `lem-weil-pbc-artinian-ideal-length-one-filtration` | 1 | state |
 | `lem-weil-pbc-associated-module-pullback` | 1 | state |
 | `lem-weil-pbc-associated-prime-localize-at-prime` | 1 | state |
 | `lem-weil-pbc-basis-sheaf-sections-germs` | 1 | state |
@@ -45,11 +42,7 @@
 | `lem-weil-pbc-change-ideal-completion` | 1 | state |
 | `lem-weil-pbc-charpoly-locally-free-existence` | 1 | state |
 | `lem-weil-pbc-closed-immersion-unit-quotient` | 1 | state |
-| `lem-weil-pbc-closed-pushforward-constant-restriction` | 1 | state |
 | `lem-weil-pbc-closed-pushforward-stalks` | 1 | state |
-| `lem-weil-pbc-cm-local-dimension-drop-regular-sequence` | 1 | state |
-| `lem-weil-pbc-cm-local-free-resolution-to-mcm` | 1 | state |
-| `lem-weil-pbc-cm-local-maximal-chain-length` | 1 | state |
 | `lem-weil-pbc-cm-local-quotient-nonzerodivisor-cm` | 1 | state |
 | `lem-weil-pbc-cm-module-good-element-nonzerodivisor` | 1 | state |
 | `lem-weil-pbc-cm-module-good-sequence-element-nonzerodivisor` | 1 | state |
