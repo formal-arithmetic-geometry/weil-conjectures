@@ -139,5 +139,24 @@
   "group": "F1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-dsu0149 (reviewer sub-agent of L); spot-checked: Item vs Tag 0BCG clauses (1)-(3) with degree bounds; Step 1/2 vs lem-pc-ring-precise-vanishing (P^i=0 below a, shift H^i(K[1])=H^{i+1}(K)); Step 4 matrix uniqueness elementary via Hom(L,K)=0; Mathlib Pretriangulated.lean:579 read with sed; citer lem-pc-affine-perfect-cut-degree-zero uses a=1, hypotheses met; no duplicate among split/biproduct nodes; tool_use of precise-vanishing accepted as generic. FIX more, RETURN less: C4 on lem-pc-derived-zero-third-split - its statement gave only an abstract iso Y = X+Z, but Step 3 needs compatibility with the triangle; restated with e.u = inl and v = snd.e, exactly as the Mathlib declaration concludes (mathlib_match.how updated).; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.DerivedSplittingUnique",
+  "declaration": "CategoryTheory.derivedSplittingUnique",
+  "file": "lean/Sheaf/Paper/DerivedSplittingUnique.lean",
+  "statement": "theorem derivedSplittingUnique (a b : ℤ) (K L : DerivedCategory (ModuleCat.{v} R)) (hL : ∃ P : CochainComplex (ModuleCat.{v} R) ℤ, (∀ i : ℤ, Projective (P.X i)) ∧ (∀ i : ℤ, i < a ∨ b < i → IsZero (P.X i)) ∧ Nonempty (L ≅ DerivedCategory.Q.obj P)) : ((∀ i : ℤ, a ≤ i → IsZero ((DerivedCategory.homologyFunctor (ModuleCat.{v} R) i).obj K)) → ∀ f : L ⟶ K, f = 0) ∧ ((∀ i : ℤ, a + 1 ≤ i → IsZero ((DerivedCategory.homologyFunctor (ModuleCat.{v} R) i).obj K)) → ∀ (M : DerivedCategory (ModuleCat.{v} R)) (T : Triangle (DerivedCategory (ModuleCat.{v} R))), T.obj₁ = K → T.obj₂ = M → T.obj₃ = L → T ∈ distTriang (DerivedCategory (ModuleCat.{v} R)) → ∃ e : T.obj₂ ≅ T.obj₁ ⊞ T.obj₃, T.mor₁ ≫ e.hom = biprod.inl ∧ T.mor₂ = e.hom ≫ biprod.snd) ∧ ((∀ i : ℤ, a ≤ i → IsZero ((DerivedCategory.homologyFunctor (ModuleCat.{v} R) i).obj K)) → ∀ (M : DerivedCategory (ModuleCat.{v} R)) (T : Triangle (DerivedCategory (ModuleCat.{v} R))), T.obj₁ = K → T.obj₂ = M → T.obj₃ = L → T ∈ distTriang (DerivedCategory (ModuleCat.{v} R)) → ∀ (e₁ e₂ : T.obj₂ ≅ T.obj₁ ⊞ T.obj₃), T.mor₁ ≫ e₁.hom = biprod.inl → T.mor₂ = e₁.hom ≫ biprod.snd → T.mor₁ ≫ e₂.hom = biprod.inl → T.mor₂ = e₂.hom ≫ biprod.snd → e₁ = e₂)",
+  "branch": "sheaf-dag",
+  "by": "M1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-dsu0759"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-dsu0759",
+  "group": "M1",
+  "result": "fix",
+  "note": "R ring, D(ModuleCat R), K L, a b, hL projective complex zero outside [a,b] iso to L; (1) H^i K=0 i>=a -> Hom(L,K)=0; (2) i>=a+1 -> every dist. triangle K->M->L splits compatibly (mor1, mor2); (3) i>=a -> compatible splittings equal; fixed precedence so the three clauses are conjuncts"
  }
 }
