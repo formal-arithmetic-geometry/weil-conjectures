@@ -251,5 +251,23 @@
   "by": "L",
   "result": "accepted",
   "note": "12 steps following Stacks 07FG with the gaps filled: m nilpotent and finitely generated; the inductive claim (C_n) with the section sigma and the finitely generated subfield F; lifting along nilpotent ideals from a field of characteristic p (new unsplit node, 0320 (3) with 07K4's step-by-step lifting); the derivation theta; the Jacobi-Zariski sequence for F_p in k in K (exactness at K (x) Omega_k only); the choice of D and the f_j; end of the induction; Psi_sigma surjective with finitely generated kernel; A_F -> Lambda flat and injective via base change to K and faithful flatness; A_F Artinian local with m_A Lambda = m and residue field F; essentially of finite type via the new unsplit 07DT (3) node and the new composed definition leaf def-weil-pbc-essentially-finite-type-algebra (Algebra.EssFiniteType, EssentialFiniteness.lean:40, one lemma per direction, lines verified by L); the directed union. Statement restated in the directed-union form the citer uses; Stacks typo 'A = F[x]/(x)^n' for F'."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.ArtinianFlatSubalgebras",
+  "declaration": "Algebra.exists_directed_artinian_flat_subalgebras",
+  "file": "lean/Sheaf/RingTheory/ArtinianFlatSubalgebras.lean",
+  "statement": "theorem exists_directed_artinian_flat_subalgebras (k : Type u) [Field k] (Λ : Type v) [CommRing Λ] [Algebra k Λ] [IsArtinianRing Λ] [IsLocalRing Λ] (p : ℕ) [CharP k p] (hp : 0 < p) (hH : Module.Finite (IsLocalRing.ResidueField Λ) (H1Cotangent k (IsLocalRing.ResidueField Λ))) : ∃ S : Set (Subalgebra k Λ), DirectedOn (· ≤ ·) S ∧ (∀ x : Λ, ∃ A ∈ S, x ∈ A) ∧ (∀ A ∈ S, ∃ hA : IsLocalRing A, IsArtinianRing A ∧ RingHom.Flat A.val.toRingHom ∧ Ideal.map A.val.toRingHom (@IsLocalRing.maximalIdeal A _ hA) = IsLocalRing.maximalIdeal Λ ∧ EssFiniteType k A) ∧ (∀ (T : Type (max u v w)) [CommRing T] [Algebra k T] (f : ∀ A : S, A.1 →ₐ[k] T), (∀ (A B : S) (h : A.1 ≤ B.1), (f B).comp (Subalgebra.inclusion h) = f A) → ∃! g : Λ →ₐ[k] T, ∀ A : S, g.comp A.1.val = f A)",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-paf1326",
+  "group": "F1",
+  "result": "pass",
+  "note": "k field u, CharP k p with 0<p (E1 resolve-char-p form), Λ IsArtinianRing+IsLocalRing, hH Module.Finite K (H1Cotangent k K) with K=ResidueField Λ, S : Set (Subalgebra k Λ) DirectedOn, union ∀x ∃A∈S, per-A ∃hA IsLocalRing tied into maximalIdeal, IsArtinianRing, RingHom.Flat A.val (Iff.rfl with Module.Flat A Λ checked), Ideal.map m_A = m, EssFiniteType (dep mathlib_match); in-particular colimit clause as inclusion-cocone UP with T : Type (max u v w), not vacuous; no let, all binders used, node diff only lean"
  }
 }
