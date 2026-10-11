@@ -128,20 +128,6 @@ theorem derivationOfHom_add_d (g : S ⟶ G.left)
     {V : (TopologicalSpace.Opens G.left)ᵒᵖ} (a : Γ(G.left, V.unop)) :
     (derivationOfHom G g (φ + ψ)).d a =
       (derivationOfHom G g φ).d a + (derivationOfHom G g ψ).d a := by
-  have h : PresheafOfModules.sheafificationHomEquiv (𝟙 _)
-      ((Scheme.Modules.pullbackPushforwardAdjunction g).homEquiv _ _ (φ + ψ)) =
-      PresheafOfModules.sheafificationHomEquiv (𝟙 _)
-        ((Scheme.Modules.pullbackPushforwardAdjunction g).homEquiv _ _ φ) +
-      PresheafOfModules.sheafificationHomEquiv (𝟙 _)
-        ((Scheme.Modules.pullbackPushforwardAdjunction g).homEquiv _ _ ψ) := by
-    apply (PresheafOfModules.toPresheaf _).map_injective
-    rw [Functor.map_add, PresheafOfModules.toPresheaf_map_sheafificationHomEquiv_def,
-      PresheafOfModules.toPresheaf_map_sheafificationHomEquiv_def,
-      PresheafOfModules.toPresheaf_map_sheafificationHomEquiv_def, ← Preadditive.comp_add,
-      ← Functor.map_add, ← SheafOfModules.add_val, Adjunction.homEquiv_unit,
-      Adjunction.homEquiv_unit, Adjunction.homEquiv_unit, Functor.map_add, Preadditive.comp_add]
-  simp only [derivationOfHom, PresheafOfModules.Derivation.postcomp_d_apply, h,
-    PresheafOfModules.add_app]
   rfl
 
 omit [GrpObj G] in
