@@ -95,5 +95,28 @@
   "group": "H1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-ftc2047 (reviewer sub-agent of L); spot-checked: Step 1 checked against cited lem-weil-pbc-flat-tensor-exact (R=A, M=B; hypotheses match); Mathlib grep: only Module.Flat.lTensor_shortComplex_exact / PreservesFiniteLimits tensorLeft (RingTheory/Flat/CategoryTheory.lean), no single homology-tensor declaration, so split stands (no B10). FIX more, RETURN less: (1) C1/D gap the second reading missed: kernel of d^i tensor 1 equals Z^i tensor B needs injectivity of B^{i+1} tensor B -> C^{i+1} tensor B; added the exact sequence 0->B^{i+1}->C^{i+1} and the factorisation argument, all from the cited node; (2) B4 preflight: step text rewritten in TeX. Note: second reading claims created.item was changed, but the file still has the parent item (correct; maintainer field).; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Mathlib.Algebra.Homology.ShortComplex.PreservesHomology",
+  "declaration": "CategoryTheory.ShortComplex.mapHomologyIso",
+  "branch": "mathlib",
+  "by": "C1",
+  "date": "2026-10-11",
+  "existing": true,
+  "statement": "def mapHomologyIso [S.HasHomology] [(S.map F).HasHomology] [F.PreservesLeftHomologyOf S] : (S.map F).homology ≅ F.obj S.homology",
+  "declarations": [
+   "Module.Flat.instPreservesFiniteLimitsModuleCatTensorRightOfCarrier",
+   "CategoryTheory.Functor.preservesHomologyOfExact"
+  ],
+  "note": "The node is (C.sc i).mapHomologyIso (tensorRight (ModuleCat.of A B)) for C : CochainComplex (ModuleCat A) ℤ, i : ℤ, with Algebra A B + Module.Flat A B encoding the flat ring map; the iso is the inverse direction H^i(C) ⊗_A B → H^i(C ⊗_A B). Its hypotheses are Mathlib instances: Module.Flat.instPreservesFiniteLimitsModuleCatTensorRightOfCarrier ([Module.Flat R M] : PreservesFiniteLimits (tensorRight M), Mathlib.RingTheory.Flat.CategoryTheory), finite-colimit preservation of the left adjoint tensorRight M (Mathlib.CategoryTheory.Monoidal.Closed.Braided), hence Functor.preservesHomologyOfExact; HomologicalComplex.homology i is (C.sc i).homology by definition. Boundedness of C is not needed. Checked to elaborate by reviewer R-ftc0948.",
+  "fixed_by": "R-ftc0948"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-ftc0948",
+  "group": "C1",
+  "result": "fix",
+  "note": "mapHomologyIso with F = tensorRight (ModuleCat.of A B), S = C.sc i elaborates (flat instance + preservesHomologyOfExact synthesized); flat ring map = Algebra A B + Module.Flat A B; every i : ℤ; boundedness unneeded; record: statement de-noncomputabled, declarations + note added per R-ftc0853"
  }
 }

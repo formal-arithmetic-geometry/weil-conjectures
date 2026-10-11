@@ -3641,3 +3641,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 07:29 L: merged deliver/J1/lem-pur-quasi-isos-saturated-triangulated (stage 2; reviewer FIX; first push; Sheaf.Algebra.Homology.QuasiIsoSaturatedTriangulated HomotopyCategory.quasiIso_saturated_triangulated)
 - 07:30 L: merged deliver/E1/lem-pc-balanced-derived-tensor-model (stage 2; reviewer FIX; first push; Sheaf.Algebra.Homology.BalancedDerivedTensorModel DerivedCategory.exists_balancedDerivedTensorModel; new nodes: def-pc-mixed-total-tensor, def-pc-module-kflat-complex)
 - 07:31 L: merged deliver/M1/lem-pc-kflat-tensor-quasi-iso (stage 2; reviewer PASS; after a return; Sheaf.Algebra.Homology.KFlatTensorQuasiIso CochainComplex.kFlat_tensor_quasiIso)
+- 07:31 L: merged deliver/C1/lem-pc-flat-tensor-complex-cohom (stage 2; reviewer FIX; after a return; Mathlib.Algebra.Homology.ShortComplex.PreservesHomology CategoryTheory.ShortComplex.mapHomologyIso; existing declaration)
