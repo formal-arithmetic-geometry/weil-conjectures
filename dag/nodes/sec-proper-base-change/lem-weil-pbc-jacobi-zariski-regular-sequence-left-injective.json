@@ -163,5 +163,23 @@
   "group": "C1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of C1; spot-checked by L: 07D4 extra conclusion; step 2 identification I_T/I_T K = (I/I^2) (x)_B C via I_T = I (x)_P T (T free over P) and the new 07CX node (regular sequence => H1-regular ideal by 062F) giving I_T cap K^2 = I_T K; steps 3-4 use clauses (1),(2) of nl-presentation-h1-functoriality (H1Cotangent.map_eq/map_id/map_comp) to pass between presentations; the map is u of jacobi-zariski-homology-sequence"
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.JacobiZariskiRegularSequenceLeftInjective",
+  "declaration": "Algebra.jacobiZariski_left_injective_of_regularSequence",
+  "file": "lean/Sheaf/RingTheory/JacobiZariskiRegularSequenceLeftInjective.lean",
+  "statement": "theorem jacobiZariski_left_injective_of_regularSequence (A : Type u) (B : Type v) (C : Type w) [CommRing A] [CommRing B] [CommRing C] [Algebra A B] [Algebra B C] [Algebra A C] [IsScalarTower A B C] (m : ℕ) (fs : List (MvPolynomial (Fin m) B)) (hreg : RingTheory.Sequence.IsRegular (MvPolynomial (Fin m) B) fs) (β : MvPolynomial (Fin m) B →ₐ[B] C) (hβ : Function.Surjective β) (hker : RingHom.ker β.toRingHom = Ideal.ofList fs) : let P := (Generators.self A B).toExtension let Q := (Generators.self A C).toExtension let F := (Generators.defaultHom (Generators.self A B) (Generators.self A C)).toExtensionHom let d := P.cotangentComplex.baseChange C let g := (Extension.Cotangent.map F).liftBaseChange C ∃ u : LinearMap.ker d →ₗ[C] H1Cotangent A C, (∀ x : LinearMap.ker d, Q.h1Cotangentι (u x) = g x.1) ∧ Function.Injective u",
+  "branch": "sheaf-dag",
+  "by": "M1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-jzr1105",
+  "group": "M1",
+  "result": "pass",
+  "note": "A->B->C as Algebra A B, Algebra B C, Algebra A C + IsScalarTower; f_i as List over MvPolynomial (Fin m) B with RingTheory.Sequence.IsRegular (weakly regular + top_ne_smul = M/(f)M != 0); beta B-alg hom, surjective, ker = Ideal.ofList fs; NL via Generators.self (val=id, sigma=X), H1Cotangent A C rfl to Q.H1Cotangent; phi_sharp = defaultHom, val b = X (algebraMap B C b) by rfl; g = Cotangent.map F liftBaseChange C (c (x) x -> c . map x, map_mk = phi_sharp(g) mod I^2); d = cotangentComplex.baseChange C, ker d = H1(NL_{B/A} (x) C) without flatness; exists u with h1Cotangentii (u x) = g x and Injective u = maps-into + restriction injective; no hollow hyps, no test-object universes"
  }
 }
