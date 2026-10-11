@@ -237,5 +237,24 @@
   "summary": "Split following Stacks 01YQ and its proof (coherent.tex 3557-3616) in 8 steps: preliminaries (f affine and of finite type, Y locally Noetherian, coherent = quasi-coherent of finite type), the devissage hypotheses (1) by the long exact sequence, (2) by a retraction (functoriality only), (3)(a)(b) from 01YO with G = f_*F coherent by 01Y6, (3)(c) with G' = JG coherent, G'_xi = G_xi, and H^1(X, JG) = H^1(X, f_*(f^{-1}J F)) = H^1(Y, f^{-1}J F) = 0 by 01YP, 089W, 01XB; then the devissage lemma 01YM gives H^1(X,F) = 0 for all coherent F and Serre's criterion 01XG (quasi-separated by 01OY, finite-type ideals coherent by 01XZ) gives X affine. Three new unsplit nodes: the devissage lemma 01YM, Lemma 01YO, Lemma 01YP with the quasi-coherence of f^{-1}I F that 01YQ takes from the proof of 01YP. Tags checked in tags/tags: 01YM (not 01YI), 01YO (not 01YL), 01YP, 01XB, 089W (lemma-relative-affine-cohomology; 01XC is the vanishing of R^p f_*), 01XG. Mathlib: no cohomology of O_X-modules, no coherent sheaves, no affineness criterion of Chevalley or Serre; searches recorded."
  },
  "reviewed": "Reviewed by L 2026-10-10: faithful to Cohomology of Schemes 01YQ with the three gaps (f_*F coherent; JG coherent with full stalk at xi; quasi-coherence of f^{-1}J.F taken from the proof of 01YP) written out; the devissage lemma 01YM, 01YO and 01YP become new unsplit nodes (01YM's (3)(c) stated with a coherent subsheaf, equivalent on Noetherian X); Serre's criterion is the existing pqf-lem-serre-criterion (01XG). No Mathlib match (no coherent cohomology in Mathlib).",
- "lead_note": "Amended by L (2026-10-10): the devissage node gained hypothesis (0) (P holds for the zero module; Stacks 01YM is false without it); steps 1 and 6 now check (0)."
+ "lead_note": "Amended by L (2026-10-10): the devissage node gained hypothesis (0) (P holds for the zero module; Stacks 01YM is false without it); steps 1 and 6 now check (0).",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FiniteSurjectiveAffineTargetNoetherian",
+  "declaration": "AlgebraicGeometry.isAffine_of_isFinite_surjective_of_isNoetherian",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteSurjectiveAffineTargetNoetherian.lean",
+  "statement": "theorem isAffine_of_isFinite_surjective_of_isNoetherian {X Y : Scheme.{u}} (f : Y ⟶ X) [IsFinite f] [Surjective f] [IsAffine Y] [IsNoetherian X] : IsAffine X",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-fsa1141"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-fsa1141",
+  "group": "E1",
+  "result": "fix",
+  "note": "(1) IsFinite f, (2) Surjective f, (3) IsAffine Y, (4) Noetherian X -> [IsNoetherian X] (was IsLocallyNoetherian+CompactSpace; STATE NOETHERIAN SCHEME), conclusion IsAffine X; one universe; no hollow clause"
+ }
 }
