@@ -5314,3 +5314,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 15:54 L: merged deliver/U1/lem-weil-pbc-symmetric-product-over-base (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.SymmetricProductOverBase AlgebraicGeometry.symmetricProduct_over_base)
 - 15:54 L: merged deliver/U1/lem-weil-pbc-underived-exchange-module-linear (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.EtaleUnderivedExchangeModuleLinear AlgebraicGeometry.etaleUnderivedExchange_moduleLinear)
 - 15:55 L: merged deliver/V1/lem-sp-derived-couple-functoriality (stage 2; reviewer PASS; first push; Sheaf.CategoryTheory.DerivedCoupleFunctoriality CategoryTheory.BigradedExactCouple.derivedCoupleFunctoriality)
+- 15:55 L: merged deliver/V1/lem-weil-pbc-symmetric-product-surjective (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.SymmetricProductSurjective AlgebraicGeometry.symmetricProduct_surjective)
