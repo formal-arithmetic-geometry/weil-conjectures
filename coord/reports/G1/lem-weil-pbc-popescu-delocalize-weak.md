@@ -143,12 +143,4 @@ code or node change; the only representational difference is the canonical commu
 tensor-product orientation, which preserves the specified induced map and is already
 documented in the module. The module compiles cleanly with `scompile.py`.
 
-## Reviewer fix (R-pdw1331)
-
-The localized-resolution premise is restated in the form of the sibling
-lem-weil-pbc-popescu-delocalize-height-zero (E1), which applies this lemma: a named hypothesis
-`hlocal` with the induced map `AlgHom.liftEquiv R R_p A Λ_q ((IsScalarTower.toAlgHom R Λ Λ_q).comp α)`
-(Mathlib's base-change adjunction, replacing the hand-built `TensorProduct.lift (ofId) … Commute.all`)
-and the prime `IsLocalRing.closedPoint Λ_q` (replacing `⟨maximalIdeal Λ_q, inferInstance⟩`);
-minimality as `(popescuIdeal α).IsMinimalPrime q.asIdeal` (`hminimal`). Same mathematics,
-one form for both siblings. Conclusion unchanged.
+Lead note (X-1350, 12:45 UTC): module realigned to the E1 9a2392fc7 form of the localized hypothesis (Algebra.TensorProduct.lift at the maximal ideal, popescuIdeal minimalPrimes).

@@ -291,7 +291,7 @@
   "module": "Sheaf.RingTheory.PopescuDelocalizeWeak",
   "declaration": "Algebra.exists_factorization_singularIdeal_not_le_of_local_popescu_resolution",
   "file": "lean/Sheaf/RingTheory/PopescuDelocalizeWeak.lean",
-  "statement": "theorem exists_factorization_singularIdeal_not_le_of_local_popescu_resolution {R : Type u} {A : Type v} {Λ : Type t} [CommRing R] [CommRing A] [CommRing Λ] [Algebra R A] [Algebra R Λ] [IsNoetherianRing R] [FinitePresentation R A] (α : A →ₐ[R] Λ) (q : PrimeSpectrum Λ) (hminimal : (popescuIdeal α).IsMinimalPrime q.asIdeal) (hlocal : letI := Localization.AtPrime.algebraOfLiesOver (q.asIdeal.under R) q.asIdeal CanBePopescuResolved (AlgHom.liftEquiv R (Localization.AtPrime (q.asIdeal.under R)) A (Localization.AtPrime q.asIdeal) ((IsScalarTower.toAlgHom R Λ (Localization.AtPrime q.asIdeal)).comp α)) (IsLocalRing.closedPoint (Localization.AtPrime q.asIdeal))) : ∃ (C : Type (max u v)) (_ : CommRing C) (_ : Algebra R C), ∃ (β : A →ₐ[R] C) (γ : C →ₐ[R] Λ), FinitePresentation R C ∧ γ.comp β = α ∧ ¬ Ideal.map γ.toRingHom (singularIdeal R C) ≤ q.asIdeal",
+  "statement": "theorem exists_factorization_singularIdeal_not_le_of_local_popescu_resolution {R : Type u} {A : Type v} {Λ : Type t} [CommRing R] [CommRing A] [CommRing Λ] [Algebra R A] [Algebra R Λ] [IsNoetherianRing R] [FinitePresentation R A] (α : A →ₐ[R] Λ) (q : PrimeSpectrum Λ) (hminimal : q.asIdeal ∈ (popescuIdeal α).minimalPrimes) (hlocal : letI := Localization.AtPrime.algebraOfLiesOver (q.asIdeal.under R) q.asIdeal CanBePopescuResolved (Algebra.TensorProduct.lift (Algebra.ofId (Localization.AtPrime (q.asIdeal.under R)) (Localization.AtPrime q.asIdeal)) ((IsScalarTower.toAlgHom R Λ (Localization.AtPrime q.asIdeal)).comp α) (fun _ _ => Commute.all _ _)) ⟨IsLocalRing.maximalIdeal (Localization.AtPrime q.asIdeal), inferInstance⟩) : ∃ (C : Type (max u v)) (_ : CommRing C) (_ : Algebra R C), ∃ (β : A →ₐ[R] C) (γ : C →ₐ[R] Λ), FinitePresentation R C ∧ γ.comp β = α ∧ ¬ Ideal.map γ.toRingHom (singularIdeal R C) ≤ q.asIdeal",
   "branch": "sheaf-dag",
   "by": "G1",
   "date": "2026-10-11",
@@ -304,6 +304,6 @@
   "reviewer": "R-pdw1331",
   "group": "G1",
   "result": "fix",
-  "note": "R Noetherian, A f.p., alpha, q prime; q minimal over popescuIdeal alpha; localized R_p -> R_p⊗A -> Lambda_q ⊃ closedPoint resolvable (CanBePopescuResolved); concl. exists C:Type(max u v) f.p., beta,gamma, gamma∘beta=alpha, H_{C/R}Lambda ⊄ q; premise restated in E1 height-zero sibling form"
+  "note": "R Noetherian, A f.p., alpha, q prime; q minimal over popescuIdeal alpha; localized R_p -> R_p⊗A -> Lambda_q at its maximal ideal resolvable (CanBePopescuResolved); concl. exists C:Type(max u v) f.p., beta,gamma, gamma∘beta=alpha, H_{C/R}Lambda ⊄ q; premise restated in E1 height-zero sibling form; L 2026-10-11 12:45: realigned by X-1350 to the E1 9a2392fc7 localized-hypothesis form"
  }
 }
