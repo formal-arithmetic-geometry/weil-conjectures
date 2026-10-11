@@ -134,5 +134,23 @@
   "group": "J1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-hea2512 (reviewer sub-agent of L); spot-checked: Statement = Stacks 02M7 and = what step 2 of citer lem-sc-hilbert-embedded-points uses (C4 ok); Mathlib AssociatedPrime/Localization.lean has Ass-localization only, no embedded-prime-removal quotient, so no leaf (C1); no new nodes (class b vacuous). FIX more, RETURN less: (1) Step 2 'discard the resulting primary components' was an unsupported, uncited primary-decomposition step (missed by J1 second reading): replaced by K = ker(M -> prod over minimal primes q_i of Supp(M) of M_q_i), derived from maximality in affine-removal + Tag 0052, and (M_q_i)_f = 0 for f in q_i, so K_f is the maximal nowhere-dense submodule of M_f; (2) B4: plain-text arrows and notation in steps 1-3 rewritten in TeX; step 3 notes R_f Noetherian, M_f finite (E hypotheses).; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.LocalizationEmbeddedPoints",
+  "declaration": "Module.localization_commutes_with_embedded_point_removal",
+  "file": "lean/Sheaf/RingTheory/LocalizationEmbeddedPoints.lean",
+  "statement": "theorem localization_commutes_with_embedded_point_removal (R : Type u) [CommRing R] [IsNoetherianRing R] (M : Type v) [AddCommGroup M] [Module R M] [Module.Finite R M] (f : R) (K : Submodule R M) (Kf : Submodule (Localization (Submonoid.powers f)) (LocalizedModule (Submonoid.powers f) M)) (hK : Maximal (fun L : Submodule R M => IsNowhereDense {p : Module.support R M | p.val ∈ Module.support R L}) K) (hKf : Maximal (fun L : Submodule (Localization (Submonoid.powers f)) (LocalizedModule (Submonoid.powers f) M) => IsNowhereDense {p : Module.support (Localization (Submonoid.powers f)) (LocalizedModule (Submonoid.powers f) M) | p.val ∈ Module.support (Localization (Submonoid.powers f)) L}) Kf) : ∃ e : LocalizedModule (Submonoid.powers f) (M ⧸ K) ≃ₗ[ Localization (Submonoid.powers f)] ((LocalizedModule (Submonoid.powers f) M) ⧸ Kf), ∀ m : M, e (LocalizedModule.mkLinearMap (Submonoid.powers f) (M ⧸ K) (K.mkQ m)) = Kf.mkQ (LocalizedModule.mkLinearMap (Submonoid.powers f) M m)",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-hel1249",
+  "group": "E1",
+  "result": "pass",
+  "note": "R Noetherian CommRing, M finite (Module.Finite), f arbitrary; K, Kf binders with the G1 Maximal IsNowhereDense-in-Module.support predicate over R and over Localization (powers f) on LocalizedModule; conclusion R_f-linear equiv LocalizedModule (M/K) = M_f/Kf compatible with mkLinearMap and mkQ (canonical iso); node statement unchanged; no new definitions"
  }
 }
