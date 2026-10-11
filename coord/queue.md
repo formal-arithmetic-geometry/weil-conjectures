@@ -1,11 +1,11 @@
 # Work queue
 
-225 items; claim with `tools/claim.py next <group> [--stage N]`.
+218 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (225)
+## Stage 2: nodes to state (218)
 
 | node | distance to Mathlib | kind | blockers |
 |---|---|---|---|
@@ -52,19 +52,15 @@
 | `lem-sc-hilb-dominating-power` | 1 | state | 0 |
 | `lem-sc-hilbert-embedded-points-gluing` | 1 | state | 0 |
 | `lem-sc-p1-right-derived-triangle-connecting` | 1 | state | 0 |
-| `lem-sc-point-tangent-separation-closed-immersion` | 1 | state | 0 |
 | `lem-weil-derived-limit-roos-complex` | 1 | state | 0 |
-| `lem-weil-pbc-closed-subset-proper-over-base-union-preimage` | 1 | state | 0 |
 | `lem-weil-pbc-coherent-property-devissage-integral-subschemes` | 1 | state | 0 |
 | `lem-weil-pbc-etale-geometric-fibre-constant-sections` | 1 | state | 0 |
-| `lem-weil-pbc-finite-surjective-coherent-generic-support` | 1 | state | 0 |
 | `lem-weil-pbc-projective-space-twisting-sheaf-charts` | 1 | state | 0 |
 | `lem-weil-pbc-pushforward-coherent-on-open` | 1 | state | 0 |
 | `lem-weil-pbc-scheme-theoretic-support` | 1 | state | 0 |
 | `lem-weil-pbc-sets-etale-section-continuity` | 1 | state | 0 |
 | `lem-weil-pbc-smooth-retract-relative-global-complete-intersection` | 1 | state | 0 |
 | `lem-weil-pbc-smooth-section-etale-lift` | 1 | state | 0 |
-| `lem-weil-pbc-smooth-zero-differentials-affine-open-etale` | 1 | state | 0 |
 | `lem-weil-pbc-spec-algebraically-closed-etale-sheaf-constant` | 1 | state | 0 |
 | `lem-weil-pbc-spec-field-point-residue-field` | 1 | state | 0 |
 | `lem-weil-pbc-spec-finite-product-fields` | 1 | state | 0 |
@@ -73,10 +69,8 @@
 | `lem-weil-pbc-spectral-limit-constructible-closed-quasi-compact` | 1 | state | 0 |
 | `lem-weil-pbc-spectral-limit-descend-opens` | 1 | state | 0 |
 | `lem-weil-pbc-spectral-limit-pullback-sections` | 1 | state | 0 |
-| `lem-weil-pbc-spectral-proconstructible-closure-specialization` | 1 | state | 0 |
 | `lem-weil-pbc-spectral-sheaf-colimit-constant-embeddings` | 1 | state | 0 |
 | `lem-weil-pbc-split-extension-free-presentation` | 1 | state | 0 |
-| `lem-weil-pbc-split-injection-after-completion` | 1 | state | 0 |
 | `lem-weil-pbc-spread-finite-separable-extension` | 1 | state | 0 |
 | `lem-weil-pbc-spread-purely-inseparable-factors` | 1 | state | 0 |
 | `lem-weil-pbc-stalk-change-of-rings-tensor` | 1 | state | 0 |
@@ -107,7 +101,6 @@
 | `lem-weil-pbc-tensor-finite-type-limit` | 1 | state | 0 |
 | `lem-weil-pbc-thickening-affine-scheme` | 1 | state | 0 |
 | `lem-weil-pbc-thickening-finite-cartesian` | 1 | state | 0 |
-| `lem-weil-pbc-thickening-integral` | 1 | state | 0 |
 | `lem-weil-pbc-thickening-lft-cartesian` | 1 | state | 0 |
 | `lem-weil-pbc-tilde-pullback-base-change` | 1 | state | 0 |
 | `lem-weil-pbc-topological-inverse-image-stalk` | 1 | state | 0 |
