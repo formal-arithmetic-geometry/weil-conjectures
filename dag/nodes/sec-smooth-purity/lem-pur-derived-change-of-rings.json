@@ -156,5 +156,24 @@
   "group": "F1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-dcr3100 (reviewer sub-agent of L); spot-checked: Read all cited statements, Stacks 06YT/06YY/06XN/05SE and Mathlib LeftDerived.lean:193; item statement unchanged and matches the uses in lem-pc-base-change-rhom-perfect steps 2-3, lem-pc-ringed-spaces-derived-adjoint-general step 1, def-pc-derived-pullback (no adjunction/RSheafHom clause is claimed or needed). FIX more, RETURN less: (1) C4 step 1 cited lem-pc-kflat-tensor-cone-two-out-of-three, whose hypothesis A acyclic fails (A = R, P, Q are K-flat, not acyclic): step rewritten with lem-pc-tensor-mapping-cone-iso (no acyclicity hypothesis), def-pc-kflat-complex, symmetry of Tot and cone-acyclic iff qis; (2) C1 step 2: the derivability condition from K-flat resolutions (Stacks 06XN) was asserted without a node, and the leaf lem-pur-total-left-derived-localization assumes it (its grep 'totalLeftDerived: no hits' was also false): new statement-only node lem-pur-left-derived-from-kflat-class (06XN + 05SE on K(A)) cited, leaf dropped; (3) C1 step 2: exactness of L phi^* asserted from 'commutes with shifts and cones' without a cited fact: now part of the new node (05SE), with exactness of F on K(O) shown; step 3 now uses the new node's counit and is elementary. Second reading by F1 missed (1)-(3).; 2 file(s) fixed by the reviewer; 1 statement node(s) added by the reviewer (FIX more, RETURN less)"
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.DerivedChangeOfRings",
+  "declaration": "SheafOfModules.derivedChangeOfRings",
+  "file": "lean/Sheaf/Algebra/Homology/DerivedChangeOfRings.lean",
+  "statement": "theorem derivedChangeOfRings {C : Type u} [Category.{u} C] {J : GrothendieckTopology C} [J.HasSheafCompose (forget₂ CommRingCat.{u} RingCat.{u})] [J.WEqualsLocallyBijective AddCommGrpCat.{u}] [HasWeakSheafify J AddCommGrpCat.{u}] {O O' : Sheaf J CommRingCat.{u}} (φ : O ⟶ O') [HasDerivedCategory.{w} (SheafOfModules.{u} (𝓡 O))] [HasDerivedCategory.{w} (SheafOfModules.{u} (𝓡 O'))] : ∃ (E : SheafOfModules.{u} (𝓡 O) ⥤ SheafOfModules.{u} (𝓡 O')) (h : ∀ M : SheafOfModules.{u} (𝓡 O), E.obj M = changeOfRings.{u, u, u} φ M) (_ : ∀ {M N : SheafOfModules.{u} (𝓡 O)} (a : M ⟶ N), E.map a = eqToHom (h M) ≫ changeOfRingsHom.{u, u, u} φ M a ≫ eqToHom (h N).symm) (_ : E.Additive), (∀ {P Q : CochainComplex (SheafOfModules.{u} (𝓡 O)) ℤ} (α : P ⟶ Q), P.IsKFlat → Q.IsKFlat → QuasiIso α → QuasiIso ((E.mapHomologicalComplex (ComplexShape.up ℤ)).map α)) ∧ (E.mapHomotopyCategory (ComplexShape.up ℤ) ⋙ DerivedCategory.Qh).HasPointwiseLeftDerivedFunctor (HomotopyCategory.quasiIso (SheafOfModules.{u} (𝓡 O)) (ComplexShape.up ℤ)) ∧ ∃ (LF : DerivedCategory (SheafOfModules.{u} (𝓡 O)) ⥤ DerivedCategory (SheafOfModules.{u} (𝓡 O'))) (ε : DerivedCategory.Qh ⋙ LF ⟶ E.mapHomotopyCategory (ComplexShape.up ℤ) ⋙ DerivedCategory.Qh), LF.IsLeftDerivedFunctor ε (HomotopyCategory.quasiIso (SheafOfModules.{u} (𝓡 O)) (ComplexShape.up ℤ)) ∧ (∃ (_ : LF.CommShift ℤ), LF.IsTriangulated) ∧ ∀ P : CochainComplex (SheafOfModules.{u} (𝓡 O)) ℤ, P.IsKFlat → IsIso (ε.app ((HomotopyCategory.quotient _ (ComplexShape.up ℤ)).obj P))",
+  "branch": "sheaf-dag",
+  "by": "J1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-dcr1246"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-dcr1246",
+  "group": "J1",
+  "result": "fix",
+  "note": "site (C,J) with Category.{u}, φ : O ⟶ O' of sheaves of comm rings; D(O),D(O') = DerivedCategory with HasDerivedCategory binders; - ⊗_O O' = E with E.obj = changeOfRings φ, E.map = changeOfRingsHom φ (F1), additive; (1) QuasiIso α, P,Q IsKFlat -> QuasiIso (E.mapHomologicalComplex.map α); (2) pointwise left derived of E.mapHomotopyCategory ⋙ Qh, LF triangulated, IsLeftDerivedFunctor ε, ε iso at every K-flat P (= canonical iso for every K-flat resolution; comparison isos are composites). Delivery had F, P arbitrary, φ unused and clause (1) as hypothesis hinv (C1/C2): rewritten."
  }
 }
