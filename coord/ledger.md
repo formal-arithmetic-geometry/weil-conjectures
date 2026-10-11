@@ -3607,3 +3607,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 07:12 L: returned deliver/K1/lem-pc-derived-adjoint-functors (reviewer RETURN: (reviewer R-daf0915, head 5d5d0b853) H7: this item was un-parked as a STAGE 2 STATEMENT CORRECTION (coord/stage2-parked.)
 - 07:13 L: merged deliver/K1/lem-pc-kflat-stalk-criterion (stage 2; reviewer FIX; first push; Sheaf.Algebra.Homology.KFlatStalkCriterion AlgebraicGeometry.RingedSpace.isKFlat_iff_stalk_isKFlat; new nodes: def-pc-module-stalk-functor)
 - 07:15 L: merged deliver/H1/def-weil-pbc-henselian-terminology (stage 2; reviewer FIX; first push; Sheaf.RingTheory.HenselianTerminology IsStrictlyHenselianLocalRing)
+- 07:16 L: merged deliver/M1/lem-pur-kinjective-characterize-injective (stage 2; reviewer PASS; first push; Sheaf.CategoryTheory.InjectiveIffExtendsSubobjectGenerator CategoryTheory.injective_iff_extends_subobject_generator)

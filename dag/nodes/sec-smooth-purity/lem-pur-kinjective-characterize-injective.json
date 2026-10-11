@@ -148,5 +148,23 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-cin0041 (reviewer sub-agent of L); spot-checked: Statement vs Tag 079G; Zorn chain bound uses AB5 from def-sp-grothendieck-abelian (C1); maximality step written out; def-sp-injective-resolutions is the right injective definition (C4); citer lem-pur-kinjective-degreewise-existence uses exactly the converse (C4); no baer/characterize-injective duplicate. FIX more, RETURN less: (1) B3: all five steps rewritten in TeX (plain-text arrows, incl. step 5); (2) class (d): dropped new node lem-pur-kinjective-generator-detects-proper-subobject (generator detecting proper subobjects is the Stacks 079B definition / two lines from the separator via B->B/A' nonzero), folded into step 3 as elementary citing def-sp-grothendieck-abelian, proof_deps updated; (3) E: step 4 now states M->N is an epimorphism, which justifies agreement of phi'' and phi' on N. Mathlib grep recorded on the item (generatingMonomorphisms_rlp, two declarations).; 1 file(s) fixed by the reviewer"
  },
- "lead_note": "2026-10-11 L (R-cin0041): Mathlib near-match: IsGrothendieckAbelian.generatingMonomorphisms_rlp (EnoughInjectives.lean:311) + injective_iff_rlp_monomorphisms_zero (Preadditive/Injective/LiftingProperties.lean:59) give the item in two declarations; kept split"
+ "lead_note": "2026-10-11 L (R-cin0041): Mathlib near-match: IsGrothendieckAbelian.generatingMonomorphisms_rlp (EnoughInjectives.lean:311) + injective_iff_rlp_monomorphisms_zero (Preadditive/Injective/LiftingProperties.lean:59) give the item in two declarations; kept split",
+ "lean": {
+  "module": "Sheaf.CategoryTheory.InjectiveIffExtendsSubobjectGenerator",
+  "declaration": "CategoryTheory.injective_iff_extends_subobject_generator",
+  "file": "lean/Sheaf/CategoryTheory/InjectiveIffExtendsSubobjectGenerator.lean",
+  "statement": "theorem injective_iff_extends_subobject_generator {C : Type u} [Category.{v} C] [Abelian C] [IsGrothendieckAbelian.{v} C] (U I : C) (hU : IsSeparator U) : Injective I ↔ ∀ (M : Subobject U) (f : (M : C) ⟶ I), ∃ g : U ⟶ I, M.arrow ≫ g = f",
+  "branch": "sheaf-dag",
+  "by": "M1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-kci0917",
+  "group": "M1",
+  "result": "pass",
+  "note": "C abelian + IsGrothendieckAbelian.{v} (w=v per def-sp-grothendieck-abelian record) = Grothendieck A; (U I : C) hU : IsSeparator U = generator U (equivalent to Stacks 079B in abelian C); Injective I = clause 1 of def-sp-injective-resolutions; iff; forall M : Subobject U, f : M -> I, exists g : U -> I, M.arrow >> g = f = extension along M -> U; docstring has the 5 proof steps; proof sorry"
+ }
 }
