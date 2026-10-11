@@ -4861,3 +4861,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 14:04 L: merged deliver/K1/lem-weil-pbc-regular-sequence-short-exact-sequence (stage 2; reviewer FIX; first push; Sheaf.RingTheory.RegularSequenceShortExactSequence RingTheory.Sequence.isRegular_of_shortExact)
 - 14:04 L: merged deliver/J1/lem-weil-pbc-relative-global-complete-intersection-flat (stage 2; reviewer FIX; first push; Sheaf.RingTheory.RelativeGlobalCompleteIntersectionFlat Algebra.flat_of_isRelativeGlobalCompleteIntersection_quotient; dependency modules: def-weil-pbc-relative-global-complete-intersection)
 - 14:05 L: merged deliver/E1/lem-weil-pbc-regular-through-localization (stage 2; reviewer FIX; first push; Sheaf.RingTheory.RegularThroughLocalization RingHom.isRegular_of_comp_algebraMap_localization)
+- 14:05 L: merged deliver/E1/lem-sc-p1-graded-syzygy (stage 2; reviewer PASS; first push; Sheaf.RingTheory.GradedSyzygy MvPolynomial.exists_graded_free_resolution_two)
