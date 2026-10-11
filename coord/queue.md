@@ -1,11 +1,11 @@
 # Work queue
 
-1011 items; claim with `tools/claim.py next <group> [--stage N]`.
+1012 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (1011)
+## Stage 2: nodes to state (1012)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -15,11 +15,9 @@
 | `def-sbc-normal-dominant-galois` | 1 | state |
 | `def-sc-perfect-closed-immersion` | 1 | state |
 | `def-sp-double-complex-total` | 1 | state |
-| `def-sp-exact-couple` | 1 | state |
 | `def-sp-image-filtration` | 1 | state |
 | `def-weil-derived-limit` | 1 | state |
 | `def-weil-extension-by-zero-presheaf` | 1 | state |
-| `def-weil-pbc-associated-graded-ring` | 1 | state |
 | `def-weil-pbc-associated-module` | 1 | state |
 | `def-weil-pbc-double-complex-zigzag-module` | 1 | state |
 | `def-weil-pbc-etale-sheaves` | 1 | state |
@@ -296,6 +294,7 @@
 | `lem-sc-zariski-contracted-power-torsor` | 1 | state |
 | `lem-sp-cart-eilenberg-left-exact-cohomology` | 1 | state |
 | `lem-sp-ce-compatible-homotopy-assembly` | 1 | state |
+| `lem-sp-derived-couple-exact` | 1 | state |
 | `lem-sp-filtered-complex-ZB-description` | 1 | state |
 | `lem-sp-filtered-complex-associated-spectral-sequence-construction` | 1 | state |
 | `lem-sp-finite-filtration-induction` | 1 | state |
@@ -360,6 +359,7 @@
 | `lem-weil-pbc-complete-local-map-cohen-presentation` | 1 | state |
 | `lem-weil-pbc-complete-local-map-regular-presentation` | 1 | state |
 | `lem-weil-pbc-complete-local-quotient` | 1 | state |
+| `lem-weil-pbc-completed-module-associated-graded-generators` | 1 | state |
 | `lem-weil-pbc-completion-at-quasi-finite-prime` | 1 | state |
 | `lem-weil-pbc-completion-dimension` | 1 | state |
 | `lem-weil-pbc-completion-finite-extension` | 1 | state |
@@ -993,6 +993,7 @@
 | `def-nagata-glued-limit-comparison` | 2 | state |
 | `def-pc-essentially-constant-ind-diagram` | 2 | state |
 | `def-sc-group-scheme` | 2 | state |
+| `def-sp-convergence` | 2 | state |
 | `lem-kun-etale-lfp` | 2 | state |
 | `lem-pc-finite-projective-cokernel-localization` | 2 | state |
 | `lem-pc-ring-pseudo-coherent-summand` | 2 | state |
@@ -1021,7 +1022,7 @@
 | `lem-sc-normalization-properties` | 3 | state |
 | `def-nagata-fixed-base-separated-stage` | 6 | state |
 
-Not open yet: 1174 nodes that wait for a statement dependency, 40 nodes that wait for stage 1.
+Not open yet: 1171 nodes that wait for a statement dependency, 40 nodes that wait for stage 1.
 
 ## Stage 3: modules to prove (0)
 
