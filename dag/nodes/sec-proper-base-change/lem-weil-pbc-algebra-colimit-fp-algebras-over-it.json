@@ -194,5 +194,24 @@
   "by": "L",
   "result": "pass",
   "note": "Seven steps along Stacks 0BUF with the footnote (representatives in P): I small and nonempty, tensor product of finitely presented algebras (new leaf: FinitePresentation.trans :181 + baseChange instance FiniteStability.lean:55, verified) gives common upper bounds, parallel arrows equalized by a quotient by a finitely generated ideal (existing leaf), the colimit taken in R-algebras (existing leaves) with the canonical map to Lambda surjective (R[x]) and injective (A'/(a')). Correct. Statement: citation of def-weil-pbc-finitely-presented-algebra added."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.ColimitFinitelyPresentedAlgebras",
+  "declaration": "CommAlgCat.isFiltered_and_isColimit_finitelyPresentedAlgebras",
+  "file": "lean/Sheaf/RingTheory/ColimitFinitelyPresentedAlgebras.lean",
+  "statement": "theorem isFiltered_and_isColimit_finitelyPresentedAlgebras (R : Type u) [CommRing R] (Λ : CommAlgCat.{max u v} R) (P : ObjectProperty (CommAlgCat.{max u v} R)) [ObjectProperty.Small.{max u v} P] (hfp : ∀ A : CommAlgCat.{max u v} R, P A → Algebra.FinitePresentation R A) (hrep : ∀ A : CommAlgCat.{max u v} R, Algebra.FinitePresentation R A → ∃ B : P.FullSubcategory, Nonempty (A ≅ B.obj)) : Small.{max u v} (CostructuredArrow P.ι Λ) ∧ IsFiltered (CostructuredArrow P.ι Λ) ∧ Nonempty (IsColimit (Cocone.fromCostructuredArrow P.ι (𝟭 (CostructuredArrow P.ι Λ))))",
+  "branch": "sheaf-dag",
+  "by": "K1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-acf1321"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-acf1321",
+  "group": "K1",
+  "result": "fix",
+  "note": "R CommRing; Λ CommAlgCat.{max u v} R; P ObjectProperty + [ObjectProperty.Small.{max u v} P] (set, added); hfp Algebra.FinitePresentation; hrep iso in CommAlgCat; I = CostructuredArrow P.ι Λ (pairs, triangles); conclusion Small.{max u v} I (added: node's 'small', needed by Step 4 and downstream factorization criterion) ∧ IsFiltered ∧ IsColimit of Cocone.fromCostructuredArrow (vertex Λ, legs α); no Mathlib existing statement (Presentable.Dense needs accessibility; isColimitFGSubalgebraCocone is fields/FG)"
  }
 }
