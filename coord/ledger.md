@@ -3772,3 +3772,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 08:09 L: merged deliver/F1/lem-sc-going-down-surjective-dimension (stage 2; reviewer FIX; first push; Sheaf.RingTheory.KrullDimension.GoingDown ringKrullDim_le_of_goingDown_of_surjective)
 - 08:10 L: merged deliver/M1/lem-sc-glue-component-reduced-cover-sections (stage 2; reviewer FIX; first push; Sheaf.AlgebraicGeometry.GlueComponentReducedCoverSections AlgebraicGeometry.glue_component_reduced_cover_sections)
 - 08:11 L: merged deliver/E1/def-weil-pbc-derived-categories (stage 2; reviewer FIX; first push; Sheaf.AlgebraicGeometry.DerivedCategories AlgebraicGeometry.Etale.DerivedCategory.torsionCohomology)
+- 08:11 L: merged deliver/H1/lem-sc-conductor-ideal-zero-intersection (stage 2; reviewer FIX; first push; Sheaf.AlgebraicGeometry.ConductorIdealZeroIntersection AlgebraicGeometry.conductorIdealZeroIntersection)
