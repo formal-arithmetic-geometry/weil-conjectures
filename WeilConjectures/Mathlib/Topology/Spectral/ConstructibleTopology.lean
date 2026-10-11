@@ -7,6 +7,7 @@ module
 
 public import Mathlib.Topology.Constructible
 public import Mathlib.Topology.Spectral.ConstructibleTopology
+public import WeilConjectures.Mathlib.Topology.Spectral.Basic
 
 /-!
 # Intersections of constructible sets of spectral spaces are quasi-compact
@@ -21,6 +22,9 @@ quasi-compact (`compactSpace_withConstructibleTopology`) and finer than the topo
 - `constructibleTopology_le`: the constructible topology of a prespectral space is finer than
   its topology.
 - `isCompact_iInter_of_isConstructible`: intersections of constructible sets are quasi-compact.
+- `IsClosed.isClosed_constructibleTopology`: closed sets are closed in the constructible topology.
+- `IsCompact.isClosed_constructibleTopology_generalizationHull`: the generalizations of a
+  quasi-compact subset of a spectral space form a closed set of the constructible topology.
 -/
 
 @[expose] public section
@@ -75,3 +79,18 @@ lemma IsCompact.isClosed_constructibleTopology_of_isOpen {s : Set X}
   rw [← @isOpen_compl_iff]
   apply TopologicalSpace.isOpen_generateFrom_of_mem
   simp [constructibleTopologySubbasis, ho, hs]
+
+/-- In a prespectral space, a closed set is closed in the constructible topology, which is finer
+than the topology of the space. -/
+lemma IsClosed.isClosed_constructibleTopology [PrespectralSpace X] {s : Set X} (hs : IsClosed s) :
+    IsClosed[constructibleTopology X] s :=
+  (@isOpen_compl_iff X s (constructibleTopology X)).mp (constructibleTopology_le _ hs.isOpen_compl)
+
+/-- In a spectral space, the set of generalizations of a quasi-compact subset is closed in the
+constructible topology: it is the intersection of the compact opens containing the subset. -/
+lemma IsCompact.isClosed_constructibleTopology_generalizationHull [SpectralSpace X] {s : Set X}
+    (hs : IsCompact s) : IsClosed[constructibleTopology X] (generalizationHull s) := by
+  obtain ⟨S, hS, hS'⟩ := generalizationHull.eq_sInter_of_isCompact hs
+  rw [hS']
+  exact @isClosed_sInter X (constructibleTopology X) S fun U hU ↦
+    (hS hU).2.isClosed_constructibleTopology_of_isOpen (hS hU).1
