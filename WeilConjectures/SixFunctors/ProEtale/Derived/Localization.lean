@@ -256,6 +256,106 @@ theorem exists_distTriang_derivedLowerStarClosedUpperShriekAdjunction_counit [Qu
     (fun M n ↦ subsingleton_hom_shift_rightDerivedFunctor_lowerStar i j hij M _ n)
     (rightDerivedFunctor_lowerStar_essImage_of_isZero i j hij hK')
 
+/-- The *closed-support triangle* of `K` with connecting map `w`:
+
+```
+  Ri_* Ri^! K --ε_K--> K --η_K--> Rj_* Lj^* K --w--> (Ri_* Ri^! K)[1]
+```
+
+where `ε` is the counit of `Ri_* ⊣ Ri^!`
+(`AlgebraicGeometry.ProEtale.derivedLowerStarClosedUpperShriekAdjunction`) and `η` the unit of
+`Lj^* ⊣ Rj_*`. -/
+noncomputable abbrev closedSupportTriangle [QuasiCompact j]
+    (hij : IsCompl (Set.range i.base) (Set.range j.base))
+    (K : DerivedCategory (Sheaf (ProEt.topology X) (ModuleCat.{u + 1} R)))
+    (w : R((j)_*[ModuleCat.{u + 1} R]).obj (L((j)^*[ModuleCat.{u + 1} R]).obj K) ⟶
+      (R((i)_*[ModuleCat.{u + 1} R]).obj
+        ((closedUpperShriek (ModuleCat.{u + 1} R) i j).rightDerivedFunctor.obj K))⟦(1 : ℤ)⟧) :
+    Triangle (DerivedCategory (Sheaf (ProEt.topology X) (ModuleCat.{u + 1} R))) :=
+  Triangle.mk ((derivedLowerStarClosedUpperShriekAdjunction i j hij).counit.app K)
+    ((derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} R) j).unit.app K) w
+
+/-- Blueprint `lem-exc-proetale-support-triangle`: Pro-etale closed-support triangle before
+constructible restriction (uniqueness of the connecting map).
+
+The connecting map of the closed-support triangle
+`AlgebraicGeometry.ProEtale.closedSupportTriangle` is unique [BBD, 1.1.9]: for two choices
+`w`, `w'`, the morphism of triangles extending `𝟙 K` has components `(𝟙, 𝟙, 𝟙)`, because
+`Hom((Ri_* Ri^! K)[1], Rj_* Lj^* K) = 0`
+(`AlgebraicGeometry.ProEtale.subsingleton_hom_shift_rightDerivedFunctor_lowerStar`). -/
+theorem existsUnique_distTriang_closedSupportTriangle [QuasiCompact j]
+    (hij : IsCompl (Set.range i.base) (Set.range j.base))
+    (K : DerivedCategory (Sheaf (ProEt.topology X) (ModuleCat.{u + 1} R))) :
+    ∃! w, closedSupportTriangle i j hij K w ∈ distTriang _ := by
+  obtain ⟨w, hw⟩ := exists_distTriang_derivedLowerStarClosedUpperShriekAdjunction_counit i j hij K
+  refine ⟨w, hw, fun w' hw' ↦ ?_⟩
+  have : Subsingleton ((closedSupportTriangle i j hij K w').obj₁⟦(1 : ℤ)⟧ ⟶
+      (closedSupportTriangle i j hij K w).obj₃) :=
+    subsingleton_hom_shift_rightDerivedFunctor_lowerStar i j hij _ _ 1
+  obtain ⟨τ, hτ⟩ := exists_triangleHom_of_comp_eq_zero hw' hw (𝟙 _)
+    (by rw [Category.id_comp]; exact comp_distTriang_mor_zero₁₂ _ hw')
+  have h₁ : τ.hom₁ = 𝟙 _ := Triangle.cancel_mor₁_of_subsingleton hw
+    (by rw [← τ.comm₁, hτ, Category.comp_id, Category.id_comp]; rfl)
+  have h₃ : τ.hom₃ = 𝟙 _ := Triangle.cancel_mor₂_of_subsingleton hw'
+    (by rw [τ.comm₂, hτ, Category.id_comp, Category.comp_id]; rfl)
+  have h := τ.comm₃
+  rw [h₁, h₃] at h
+  erw [CategoryTheory.Functor.map_id, Category.comp_id, Category.id_comp] at h
+  exact h
+
+/-- Blueprint `lem-exc-proetale-support-triangle`: Pro-etale closed-support triangle before
+constructible restriction (naturality).
+
+For `φ : K ⟶ K'` and distinguished closed-support triangles of `K` and `K'`, the triple
+`(Ri_* Ri^! φ, φ, Rj_* Lj^* φ)` is a morphism of triangles, and it is the only morphism of
+triangles with middle component `φ`
+(`CategoryTheory.Pretriangulated.triangleHom_ext_of_subsingleton`). -/
+theorem existsUnique_triangleHom_closedSupportTriangle [QuasiCompact j]
+    (hij : IsCompl (Set.range i.base) (Set.range j.base))
+    {K K' : DerivedCategory (Sheaf (ProEt.topology X) (ModuleCat.{u + 1} R))} (φ : K ⟶ K')
+    {w w'} (hw : closedSupportTriangle i j hij K w ∈ distTriang _)
+    (hw' : closedSupportTriangle i j hij K' w' ∈ distTriang _) :
+    ∃! τ : closedSupportTriangle i j hij K w ⟶ closedSupportTriangle i j hij K' w',
+      τ.hom₂ = φ ∧
+      τ.hom₁ = R((i)_*[ModuleCat.{u + 1} R]).map
+        ((closedUpperShriek (ModuleCat.{u + 1} R) i j).rightDerivedFunctor.map φ) ∧
+      τ.hom₃ = R((j)_*[ModuleCat.{u + 1} R]).map (L((j)^*[ModuleCat.{u + 1} R]).map φ) := by
+  have : Subsingleton ((closedSupportTriangle i j hij K w).obj₁⟦(1 : ℤ)⟧ ⟶
+      (closedSupportTriangle i j hij K' w').obj₃) :=
+    subsingleton_hom_shift_rightDerivedFunctor_lowerStar i j hij _ _ 1
+  obtain ⟨τ, hτ⟩ := exists_triangleHom_of_comp_eq_zero hw hw' φ (by
+    rw [← Category.assoc]
+    erw [← (derivedLowerStarClosedUpperShriekAdjunction i j hij).counit_naturality]
+    rw [Category.assoc]
+    erw [comp_distTriang_mor_zero₁₂ _ hw']
+    rw [comp_zero])
+  refine ⟨τ, ⟨hτ, Triangle.cancel_mor₁_of_subsingleton hw' ?_,
+    Triangle.cancel_mor₂_of_subsingleton hw ?_⟩, fun τ' hτ' ↦
+      triangleHom_ext_of_subsingleton hw hw' (hτ'.1.trans hτ.symm)⟩
+  · rw [← τ.comm₁, hτ]
+    exact ((derivedLowerStarClosedUpperShriekAdjunction i j hij).counit_naturality φ).symm
+  · rw [τ.comm₂, hτ]
+    exact ((derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} R) j).unit_naturality φ).symm
+
+/-- `Ri^! Rj_* = 0`: for `M ∈ D(Z_proét)`, maps `M ⟶ Ri^! Rj_* N` correspond to maps
+`Ri_* M ⟶ Rj_* N`, and there are none but zero
+(`AlgebraicGeometry.ProEtale.subsingleton_hom_shift_rightDerivedFunctor_lowerStar`). -/
+theorem isZero_closedUpperShriek_rightDerivedFunctor_obj_rightDerivedFunctor_lowerStar
+    [QuasiCompact j] (hij : IsCompl (Set.range i.base) (Set.range j.base))
+    (N : DerivedCategory (Sheaf (ProEt.topology U) (ModuleCat.{u + 1} R))) :
+    IsZero ((closedUpperShriek (ModuleCat.{u + 1} R) i j).rightDerivedFunctor.obj
+      (R((j)_*[ModuleCat.{u + 1} R]).obj N)) := by
+  set E := (closedUpperShriek (ModuleCat.{u + 1} R) i j).rightDerivedFunctor.obj
+    (R((j)_*[ModuleCat.{u + 1} R]).obj N)
+  rw [IsZero.iff_id_eq_zero]
+  have := subsingleton_hom_shift_rightDerivedFunctor_lowerStar i j hij E N 0
+  have : Subsingleton (R((i)_*[ModuleCat.{u + 1} R]).obj E ⟶
+      R((j)_*[ModuleCat.{u + 1} R]).obj N) :=
+    ((shiftFunctorZero _ ℤ).app _).homFromEquiv.symm.subsingleton
+  have : Subsingleton (E ⟶ E) :=
+    ((derivedLowerStarClosedUpperShriekAdjunction i j hij).homEquiv _ _).symm.subsingleton
+  exact Subsingleton.elim _ _
+
 end ProEtale
 
 end AlgebraicGeometry
