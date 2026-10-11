@@ -4092,3 +4092,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 09:50 L: merged deliver/H1/lem-weil-pbc-dvr-completion-regular (stage 2; reviewer FIX; first push; Sheaf.RingTheory.DVRCompletionRegular AdicCompletion.isRegular_algebraMap_of_isDiscreteValuationRing_of_charZero)
 - 09:50 L: merged deliver/J1/lem-weil-pbc-domains-strongly-transcendental-not-quasi-finite (stage 2; reviewer PASS; first push; Sheaf.RingTheory.NotQuasiFiniteAtPrimeOfStronglyTranscendental Algebra.not_isQuasiFiniteAtPrime_of_isStronglyTranscendental)
 - 09:50 L: merged deliver/E1/def-sp-truncation-couple (stage 2; reviewer FIX; first push; Sheaf.CategoryTheory.TruncationCouple CategoryTheory.truncationCouple)
+- 09:50 L: merged deliver/C1/lem-sp-shift-identification (stage 2; reviewer PASS; first push; Sheaf.CategoryTheory.DerivedCategory.ShiftIdentification CategoryTheory.Functor.exists_rightDerived_shift_identification)

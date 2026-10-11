@@ -173,5 +173,28 @@
   "by": "L",
   "result": "pass",
   "note": "statement made precise (named isomorphisms, naturality, p<0 case); lem-sp-kinjective-computes replaced by the closed node lem-weil-pbc-derived-direct-image-triangulated and two new nodes, one a Mathlib leaf (Functor.shiftIso), one closed by Lean"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.DerivedCategory.ShiftIdentification",
+  "declaration": "CategoryTheory.Functor.exists_rightDerived_shift_identification",
+  "declarations": [
+   "CategoryTheory.Functor.exists_rightDerived_shift_identification",
+   "CategoryTheory.Functor.exists_rightDerived_shift_identification_nonneg",
+   "CategoryTheory.Functor.isZero_rightDerived_shift_identification"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/DerivedCategory/ShiftIdentification.lean",
+  "statement": "theorem exists_rightDerived_shift_identification [PreservesFiniteLimits F] (p q : ℤ) : let Hq := CochainComplex.Plus.ι C ⋙ HomologicalComplex.homologyFunctor C (ComplexShape.up ℤ) q let S := DerivedCategory.Plus.singleFunctor C 0 let RF := F.rightDerivedFunctorPlus let H := DerivedCategory.Plus.homologyFunctor D 0 ∃ e : Hq ⋙ S ⋙ shiftFunctor (DerivedCategory.Plus C) (-q) ⋙ RF ⋙ H.shift (p + q) ≅ Hq ⋙ S ⋙ RF ⋙ H.shift p, ∀ K : CochainComplex.Plus C, e.app K = (H.shift (p + q)).mapIso ((RF.commShiftIso (-q)).app (S.obj (Hq.obj K))) ≪≫ (H.shiftIso (-q) (p + q) p (by omega)).app (RF.obj (S.obj (Hq.obj K)))",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-shi0949",
+  "group": "C1",
+  "result": "pass",
+  "note": "A,B abelian (C,D), EnoughInjectives C, F additive + PreservesFiniteLimits; Rv = rightDerivedFunctorPlus on D+ (node's proof routes sigma via lem-weil-pbc-derived-direct-image-triangulated = the source CommShift instance, #synth checked); X[0] = Plus.singleFunctor C 0, X[-q] its shift; tau = Plus.homologyFunctor shiftIso (H.shift a = homologyFunctor a by rfl); part 1 natiso with component = H^(p+q)(sigma) >> tau; part 2 n:N, theta = homologyRightDerivedFunctorPlusObjSingleFunctorIso; part 3 p<0 three IsZero"
  }
 }
