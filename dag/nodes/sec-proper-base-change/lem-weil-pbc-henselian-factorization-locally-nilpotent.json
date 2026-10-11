@@ -189,5 +189,23 @@
   "by": "L",
   "result": "accepted",
   "note": "Five steps: J ⊆ rad(A) (elementary), (A, J) henselian in the DAG sense via two new Mathlib leaves (extension of a locally nilpotent ideal; existsUnique_isIdempotentElem_eq_of_ker_isNilpotent @[stacks 00J9]), existence from the factorization criterion node (09XI, being split), coprimality lifts by Nakayama (new leaf Submodule.eq_bot_of_le_smul_of_le_jacobson_bot @[stacks 00DV (2)]; lem-weil-pbc-monic-quotient-free), uniqueness written out (agent; Stacks has no uniqueness lemma, as the worker found; holds for J ⊆ rad(A)). Checked, including the A = 0 case. Statement spelled out. The lean_audit diff flagged by review_split comes from the lead′s lean_status runs."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.FactorizationLocallyNilpotent",
+  "declaration": "Polynomial.existsUnique_monic_factorization_of_locally_nilpotent",
+  "file": "lean/Sheaf/RingTheory/FactorizationLocallyNilpotent.lean",
+  "statement": "theorem existsUnique_monic_factorization_of_locally_nilpotent {A : Type u} [CommRing A] (J : Ideal A) (hJ : ∀ x : A, x ∈ J → IsNilpotent x) (f : A[X]) (hf : f.Monic) (g₀ h₀ : (A ⧸ J)[X]) (hg₀ : g₀.Monic) (hh₀ : h₀.Monic) (hcoprime : IsCoprime g₀ h₀) (hfactor : f.map (Ideal.Quotient.mk J) = g₀ * h₀) : ∃! gh : A[X] × A[X], gh.1.Monic ∧ gh.2.Monic ∧ f = gh.1 * gh.2 ∧ gh.1.map (Ideal.Quotient.mk J) = g₀ ∧ gh.2.map (Ideal.Quotient.mk J) = h₀",
+  "branch": "sheaf-dag",
+  "by": "G1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-hfn1109",
+  "group": "G1",
+  "result": "pass",
+  "note": "A comm ring Type u; J ideal with hJ elementwise IsNilpotent (not Ideal.IsNilpotent); f Monic; g0 h0 in (A/J)[X] Monic, IsCoprime (Bezout = unit ideal); f.map mk = g0*h0; ExistsUnique ordered pair monic, f = g*h, reductions g0,h0; A=0 and J=0 edge cases; node proof 5 steps in docstring"
  }
 }

@@ -4326,3 +4326,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 10:51 L: merged deliver/F1/lem-weil-pbc-geometrically-regular-over-subfields (stage 2; reviewer PASS; first push; Sheaf.RingTheory.GeometricRegularitySubfields geometricallyRegular_of_directed_subfields)
 - 10:52 L: merged deliver/K1/lem-weil-pbc-grothendieck-regular-sequence-flat (stage 2; reviewer PASS; first push; Sheaf.RingTheory.RegularSequenceFlatClosedFiber RingTheory.Sequence.isRegular_and_flat_quotient_of_closedFiber)
 - 10:52 L: merged deliver/E1/lem-weil-pbc-exchange-identity-pasting (stage 2; reviewer PASS; first push; Sheaf.Paper.ExchangeIdentityPasting AlgebraicGeometry.Etale.derivedExchange_identity_pasting)
+- 10:52 L: merged deliver/G1/lem-weil-pbc-henselian-factorization-locally-nilpotent (stage 2; reviewer PASS; first push; Sheaf.RingTheory.FactorizationLocallyNilpotent Polynomial.existsUnique_monic_factorization_of_locally_nilpotent)
