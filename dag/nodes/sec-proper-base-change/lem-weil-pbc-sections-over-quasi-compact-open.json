@@ -223,5 +223,23 @@
   "worker": "stage1",
   "summary": "Read Properties 01PQ (properties.tex 4146) and its proof, Lemma 01PM (3941) with its proof, Example 01PN (4092), Lemma 01PO (3755) and Definition 01PP (3798); tags verified in tags/tags lines 2235-2239. The statement is kept (it agrees with 01PQ; the claim I^n(W)=O_X(W) for W in U and the facts on F_n it states are proved in Steps 1 and 5). The proof follows the source: Step 1 the powers on affine opens and on U; Step 2 the dictionary F|_W = M~ and Hom over affine W; Step 3 the identification of phi -> phi_U(1) with the map of 01PM on affine W (the verification the source omits); Step 4 injectivity in (1) by a finite affine cover; Step 5 F_n|_W = (M_n)~ via 01PO (the source's 'details omitted') and the quotients; Step 6 the affine bijection of (2) from 01PM; Steps 7-8 injectivity and gluing for (2) over a finite affine cover with quasi-compact overlaps. New node: the module statement 01PM (unsplit, no Mathlib match after LeanSearch, LeanFinder, Loogle and grep). No slopmaster2 declaration states the item or 01PM (grep by id, tags and key words).",
   "blueprint": "Realizes the place recorded in blueprint.from.place (the two uses of Properties 01PQ in the proof of Cohomology of Schemes 01YB, step 7 of the split of thm-weil-pbc-finite-etale-lifting): Steps 1-4 give the injectivity used for 'It is injective by Properties, Lemma 01PQ', Steps 5-8 the bijection used for 'Hence by Properties, Lemma 01PQ we deduce that the top horizontal arrow ... is a bijection'."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SectionsOverQuasiCompactOpen",
+  "declaration": "AlgebraicGeometry.Scheme.sections_over_quasiCompact_open",
+  "file": "lean/Sheaf/AlgebraicGeometry/SectionsOverQuasiCompactOpen.lean",
+  "statement": "theorem sections_over_quasiCompact_open {X : Scheme.{u}} [CompactSpace X] {I : X.Modules} (ι : I ⟶ SheafOfModules.unit X.ringCatSheaf) [Mono ι] [I.IsQuasicoherent] [I.IsFiniteType] (F : X.Modules) [F.IsQuasicoherent] : ∃ (U : X.Opens) (one : ∀ n : ℕ, Γ((idealSheafPower ι n).1, U)) (r : ∀ (n m : ℕ), n ≤ m → ((idealSheafPower ι m).1 ⟶ (idealSheafPower ι n).1)), (∀ x : X, x ∈ U ↔ Function.Surjective ((RingedSpace.moduleStalkFunctor X.toRingedSpace x).map ι).hom) ∧ (∀ n : ℕ, Mono (idealSheafPower ι n).2) ∧ (∀ (n : ℕ) (W : X.Opens), W ≤ U → Function.Bijective ((idealSheafPower ι n).2.app W)) ∧ (∀ n : ℕ, (idealSheafPower ι n).2.app U (one n) = (1 : Γ(X, U))) ∧ (∀ (n m : ℕ) (h : n ≤ m), r n m h ≫ (idealSheafPower ι n).2 = (idealSheafPower ι m).2) ∧ (∃ (D : ℕ ⥤ AddCommGrpCat.{u}) (e : ∀ n : ℕ, D.obj n ≅ AddCommGrpCat.of ((idealSheafPower ι n).1 ⟶ F)) (c : D ⟶ (Functor.const ℕ).obj Γ(F, U)), (∀ (n m : ℕ) (h : n ≤ m) (φ : (idealSheafPower ι n).1 ⟶ F), (e m).hom (D.map (homOfLE h) ((e n).inv φ)) = r n m h ≫ φ) ∧ (∀ (n : ℕ) (φ : (idealSheafPower ι n).1 ⟶ F), c.app n ((e n).inv φ) = φ.app U (one n)) ∧ Function.Injective (colimit.desc D ⟨Γ(F, U), c⟩)) ∧ (QuasiSeparatedSpace X → ∃ (A : ℕ → X.Modules) (a : ∀ n : ℕ, A n ⟶ F), (∀ n : ℕ, Mono (a n)) ∧ (∀ (n : ℕ) (W : X.Opens) (s : Γ(F, W)), s ∈ Set.range ((a n).app W) ↔ ∀ (W' : X.Opens) (h : W' ≤ W) (b : Γ((idealSheafPower ι n).1, W')), (F.smul (U := W') ((idealSheafPower ι n).2.val.app (op W') b)).hom (F.presheaf.map (homOfLE h).op s) = 0) ∧ (∀ (n m : ℕ), n ≤ m → ∃ t : A n ⟶ A m, t ≫ a m = a n) ∧ (∀ (n : ℕ) (W : X.Opens), W ≤ U → Subsingleton Γ(A n, W)) ∧ (∀ n : ℕ, IsIso ((SheafOfModules.overFunctor X.ringCatSheaf U).map (cokernel.π (a n)))) ∧ (∀ (n : ℕ) (W : X.Opens), W ≤ U → Function.Bijective ((cokernel.π (a n)).app W)) ∧ ∃ (q : ∀ (n m : ℕ), n ≤ m → (cokernel (a n) ⟶ cokernel (a m))) (D' : ℕ ⥤ AddCommGrpCat.{u}) (e' : ∀ n : ℕ, D'.obj n ≅ AddCommGrpCat.of ((idealSheafPower ι n).1 ⟶ cokernel (a n))) (c' : D' ⟶ (Functor.const ℕ).obj Γ(F, U)), (∀ (n m : ℕ) (h : n ≤ m), cokernel.π (a n) ≫ q n m h = cokernel.π (a m)) ∧ (∀ (n m : ℕ) (h : n ≤ m) (φ : (idealSheafPower ι n).1 ⟶ cokernel (a n)), (e' m).hom (D'.map (homOfLE h) ((e' n).inv φ)) = r n m h ≫ φ ≫ q n m h) ∧ (∀ (n : ℕ) (φ : (idealSheafPower ι n).1 ⟶ cokernel (a n)), (cokernel.π (a n)).app U (c'.app n ((e' n).inv φ)) = φ.app U (one n)) ∧ Function.Bijective (colimit.desc D' ⟨Γ(F, U), c'⟩))",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "F1",
+  "result": "pass",
+  "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
  }
 }

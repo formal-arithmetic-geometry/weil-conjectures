@@ -4904,3 +4904,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 14:18 L: merged deliver/E1/lem-weil-pbc-simplicial-index-finite-initial (stage 2; reviewer PASS; first push; Sheaf.AlgebraicTopology.SimplicialIndexFiniteInitial SSet.simplicialIndex_finite_initial)
 - 14:18 L: merged deliver/E1/lem-weil-pbc-smooth-at-generic-point-over-field (stage 2; reviewer PASS; first push; Sheaf.RingTheory.SmoothAtGenericPointOverField Algebra.smoothAtPrime_bot_of_isSeparable_fractionRing)
 - 14:19 L: merged deliver/M1/lem-weil-pbc-serre-criterion-normal (stage 2; reviewer PASS; first push; Sheaf.RingTheory.SerreCriterionNormal Ring.serreCriterionNormal)
+- 14:19 L: merged deliver/F1/lem-weil-pbc-sections-over-quasi-compact-open (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.SectionsOverQuasiCompactOpen AlgebraicGeometry.Scheme.sections_over_quasiCompact_open)
