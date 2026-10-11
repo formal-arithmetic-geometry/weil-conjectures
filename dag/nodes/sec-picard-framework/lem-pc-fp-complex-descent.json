@@ -127,5 +127,23 @@
   "group": "E1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-fcd2656 (reviewer sub-agent of L); spot-checked: Read packet whole; checked item vs Tag 01ZR, both new nodes vs 01ZR parts (1)-(3), no duplicate 01ZR node (flat/proper-support nodes depend on the item; lem-pc-affine-perfect-colimit-descent is finite projective/affine, not applicable, so no citation owed); Noetherian hypothesis unused but harmless (imported statement). FIX more, RETURN less: C4 Step 2 applied the single-map node lem-pc-fp-module-map-descent separately to each differential, which gives independent models of each shared term G^{r+1} and no complex; restated that node as Tag 01ZR parts (1) modules and (2) maps between fixed models, rewrote Step 2 to descend terms first then differentials between the fixed models, and Step 4 to use the resulting isomorphisms alpha_r. Missed by E1 second reading.; 2 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FinitelyPresentedComplexDescent",
+  "declaration": "AlgebraicGeometry.exists_finitelyPresented_complex_of_limit",
+  "file": "lean/Sheaf/AlgebraicGeometry/FinitelyPresentedComplexDescent.lean",
+  "statement": "theorem exists_finitelyPresented_complex_of_limit {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] (R : I ⥤ CommRingCat.{u}) [∀ k : I, IsNoetherianRing (R.obj k)] (c : Cone (R.op ⋙ Scheme.Spec)) (hc : IsLimit c) [IsAffine c.pt] (i : I) {Xi : Scheme.{u}} (f : Xi ⟶ Spec (R.obj i)) [LocallyOfFinitePresentation f] [QuasiCompact f] [QuasiSeparated f] (G : CochainComplex (pullback f (c.π.app (op i))).Modules ℤ) (hG_bounded : ∃ a b : ℤ, ∀ n : ℤ, n < a ∨ b < n → IsZero (G.X n)) (hG_fp : ∀ n : ℤ, (G.X n).IsFinitePresentation) (hG_qc : ∀ n : ℤ, (G.X n).IsQuasicoherent) : ∃ (j : I) (hij : i ≤ j) (H : CochainComplex (pullback f (Spec.map (R.map (homOfLE hij)))).Modules ℤ), (∃ a b : ℤ, ∀ n : ℤ, n < a ∨ b < n → IsZero (H.X n)) ∧ (∀ n : ℤ, (H.X n).IsFinitePresentation) ∧ (∀ n : ℤ, (H.X n).IsQuasicoherent) ∧ ∃ e : ∀ n : ℤ, (Scheme.Modules.moduleBaseChange f (T := Over.mk (Spec.map (R.map (homOfLE hij)))) (T' := Over.mk (c.π.app (op i))) (Over.homMk (c.π.app (op j)) (c.w (homOfLE hij).op))).obj (H.X n) ≅ G.X n, ∀ n m : ℤ, (Scheme.Modules.moduleBaseChange f (T := Over.mk (Spec.map (R.map (homOfLE hij)))) (T' := Over.mk (c.π.app (op i))) (Over.homMk (c.π.app (op j)) (c.w (homOfLE hij).op))).map (H.d n m) ≫ (e m).hom = (e n).hom ≫ G.d n m",
+  "branch": "sheaf-dag",
+  "by": "G1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-fcd1200",
+  "group": "G1",
+  "result": "pass",
+  "note": "Read packet whole; matched directed I (Preorder+IsDirected, Type u = CommRingCat.{u}), R_i Noetherian, cone+IsLimit+IsAffine (S=Spec R; same form as landed FlatBoundedComplexDescent), f LFP+QC+QS (def-pc-morphism-conventions), X/X_j as pullbacks, G CochainComplex ℤ bounded via IsZero with IsFinitePresentation+IsQuasicoherent terms, conclusion j>=i, H same three properties, termwise moduleBaseChange isos commuting with all d; #check names resolve to Mathlib SheafOfModules.IsFinitePresentation/IsQuasicoherent and recorded moduleBaseChange; hG_qc redundant (inferInstance from fp) but literal to node, not hollow; second reading's Type v -> Type u fix correct"
  }
 }
