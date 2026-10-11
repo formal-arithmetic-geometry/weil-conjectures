@@ -181,5 +181,23 @@
   "worker": "stage1",
   "summary": "Statement kept: it matches algebra.tex lines 10187-10191 (Tag 030U verified, tags line 3961) and the use in step 1 of the only citer lem-weil-pbc-separably-generated-tensor-reduced (finite T, L=k(x_i;i in T), K'=L(a_1..a_n), K'/L finite and separable algebraic). The source asserts it without proof, so the proof is the agent's, in 5 steps matching def-weil-pbc-separable-algebraic-extension (every element algebraic with separable minimal polynomial, separable meaning coprime to the derivative as in def-pc-separable-polynomial): (1) minimal polynomials P_j over M=k(x_i;i in I) with Bezout identities U_jP_j+V_jP_j'=1 give finitely many coefficients; (2) each coefficient lies in k(x_i;i in T_c) for finite T_c by the new Mathlib leaf lem-weil-pbc-adjoin-element-finite-subset (IntermediateField.exists_finset_of_mem_adjoin), T the union; (3) the identity holds in L[T], so P_j is separable over L, the minimal polynomial over L divides it and is separable (Bezout rewritten, inline); (4) K'/L finite by the leaf lem-weil-pbc-algebraic-generators-finite-extension, hence algebraic; (5) separable elements form a subfield (leaf lem-weil-pbc-separable-first-purely-inseparable) containing L and the a_j, so equal to K'. Including the coefficients of U_j, V_j in T avoids the descent of coprimality from M[T] to L[T]. One new node (Mathlib leaf). Not a Mathlib leaf itself: searches recorded, no single declaration states the descent to a finite subfamily of the transcendence basis. All cited nodes are definitions or Mathlib leaves; no tool use of another unit."
  },
- "reviewed": "2026-10-10 L: 5 steps checked (agent proof of the unproved assertion in the 030U proof): Bezout identities of the minimal polynomials over k(x_i), coefficients lie in k(x_i : i in T) for a finite T by the new leaf, separability descends to L since the minimal polynomial over L divides P_j, K'/L finite by algebraic-generators-finite-extension, separable algebraic via the relative separable closure; citer separably-generated-tensor-reduced step 1 matches"
+ "reviewed": "2026-10-10 L: 5 steps checked (agent proof of the unproved assertion in the 030U proof): Bezout identities of the minimal polynomials over k(x_i), coefficients lie in k(x_i : i in T) for a finite T by the new leaf, separability descends to L since the minimal polynomial over L divides P_j, K'/L finite by algebraic-generators-finite-extension, separable algebraic via the relative separable closure; citer separably-generated-tensor-reduced step 1 matches",
+ "lean": {
+  "module": "Sheaf.FieldTheory.SeparatingTranscendenceBasisFiniteSubextension",
+  "declaration": "separating_transcendence_basis_finite_subextension",
+  "statement": "theorem separating_transcendence_basis_finite_subextension (k : Type u) (K : Type v) [Field k] [Field K] [Algebra k K] (I : Type w) (x : I → K) (hx : IsTranscendenceBasis k x) (hsep : Algebra.IsSeparable (IntermediateField.adjoin k (Set.range x)) K) (n : ℕ) (a : Fin n → K) : ∃ T : Finset I, FiniteDimensional (IntermediateField.adjoin k (x '' (↑T : Set I))) (IntermediateField.adjoin (IntermediateField.adjoin k (x '' (↑T : Set I))) (Set.range a)) ∧ Algebra.IsSeparable (IntermediateField.adjoin k (x '' (↑T : Set I))) (IntermediateField.adjoin (IntermediateField.adjoin k (x '' (↑T : Set I))) (Set.range a))",
+  "by": "J1",
+  "date": "2026-10-11",
+  "file": "lean/Sheaf/FieldTheory/SeparatingTranscendenceBasisFiniteSubextension.lean",
+  "branch": "sheaf-dag",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "J1",
+  "result": "pass",
+  "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
+ }
 }
