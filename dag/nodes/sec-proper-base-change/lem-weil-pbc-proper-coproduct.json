@@ -178,5 +178,23 @@
   "by": "L",
   "result": "accepted",
   "note": "4 steps (fact used without proof in Stacks 0CYR; agent proof): (1) via the coproduct-family leaf; finite type from the affine-cover form of the definition; universally closed via the open-fibre-product leaf (W_T splits into the two base changes); separated via the four clopen pieces of W x_S W, the diagonal immersion node and the closed-image criterion. No new nodes. Tags 01JA, 01T1, 01KB, 01JR, 01W1, 01KK, 01KJ, 01IQ verified by the worker."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProperCoproduct",
+  "declaration": "AlgebraicGeometry.proper_coproduct_two",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProperCoproduct.lean",
+  "statement": "theorem proper_coproduct_two {S W₁ W₂ : Scheme.{u}} (p₁ : W₁ ⟶ S) (p₂ : W₂ ⟶ S) : IsOpenImmersion (coprod.inl : W₁ ⟶ W₁ ⨿ W₂) ∧ IsOpenImmersion (coprod.inr : W₂ ⟶ W₁ ⨿ W₂) ∧ IsCompl (Set.range (coprod.inl : W₁ ⟶ W₁ ⨿ W₂)) (Set.range (coprod.inr : W₂ ⟶ W₁ ⨿ W₂)) ∧ (∀ [IsProper p₁] [IsProper p₂], IsProper (coprod.desc p₁ p₂ : W₁ ⨿ W₂ ⟶ S))",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-pcd1354",
+  "group": "H1",
+  "result": "pass",
+  "note": "S,W1,W2 : Scheme.{u} one universe, p1 p2 explicit; W = Mathlib W1 ⨿ W2, ι = coprod.inl/inr, p = coprod.desc p1 p2 (p∘ι_k = p_k by inl_desc/inr_desc); (1) IsOpenImmersion inl, inr + IsCompl of ranges = disjoint union of point sets; (2) ∀ [IsProper p1] [IsProper p2], IsProper (coprod.desc) — binary node so no index type; no let, no hollow hyp, node unchanged beyond lean record"
  }
 }
