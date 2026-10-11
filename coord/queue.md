@@ -1,11 +1,11 @@
 # Work queue
 
-280 items; claim with `tools/claim.py next <group> [--stage N]`.
+277 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (280)
+## Stage 2: nodes to state (277)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -20,12 +20,10 @@
 | `lem-pc-finite-flat-proper-support-descent` | 1 | state |
 | `lem-pc-module-pullback-identity-composition` | 1 | state |
 | `lem-pc-noetherian-approximation-data` | 1 | state |
-| `lem-pc-proper-support-descent` | 1 | state |
 | `lem-sc-affine-koszul-cech-derived-comparison` | 1 | state |
 | `lem-sc-base-change-curve` | 1 | state |
 | `lem-sc-hilb-dominating-power` | 1 | state |
 | `lem-sc-hilbert-embedded-points-gluing` | 1 | state |
-| `lem-sc-picard-kunneth-qcoh` | 1 | state |
 | `lem-sc-point-tangent-separation-closed-immersion` | 1 | state |
 | `lem-weil-derived-limit-roos-complex` | 1 | state |
 | `lem-weil-pbc-closed-subset-proper-over-base-properties` | 1 | state |
@@ -59,7 +57,6 @@
 | `lem-weil-pbc-sheaf-algebras-directed-colimit` | 1 | state |
 | `lem-weil-pbc-sheaf-isomorphism-local-open-cover` | 1 | state |
 | `lem-weil-pbc-sheaves-directed-colimit-sections` | 1 | state |
-| `lem-weil-pbc-sheaves-killed-by-n-zmod-modules` | 1 | state |
 | `lem-weil-pbc-simplicial-set-glue-simplex` | 1 | state |
 | `lem-weil-pbc-smooth-at-maximal-ideal-alg-closed-differentials-bound` | 1 | state |
 | `lem-weil-pbc-smooth-at-prime-artinian-lifting` | 1 | state |
