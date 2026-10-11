@@ -44,7 +44,7 @@ Adjunction.mapModAdjunction adj R : F.mapMod ⊣ G.mapMod ⋙ Mod.comap (adj.uni
 (an `F.obj R`-linear map `F.obj M ⟶ N` is the same as an `R`-linear map `M ⟶ G.obj N`, where
 `R` acts on `G.obj N` through the unit). The lift of `adj` is the elementary input for the
 adjunction `f^* ⊣ f_*` on module objects over a coefficient ring sheaf, see
-`WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteExtension.UpperLowerStar.Defs`.
+`WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.Defs`.
 
 -/
 
