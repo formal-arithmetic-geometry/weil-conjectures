@@ -224,5 +224,23 @@
   "item": "lem-weil-pbc-fpqc-descend-flat",
   "worker": "stage1",
   "summary": "Read Descent 02L2 (descent.tex 5833) with its proof, the general criterion 02KP (5407, 'details omitted'), Definition 02KO, Topologies 022B/022E, Algebra 00HJ (algebra.tex 8903), Morphisms 01U5 (4694) and 01U9; tags verified in tags/tags (note: the general lemma is 02KP, not 02KZ-02L1, which are finite type/finite presentation/proper; the algebra lemma is 00HJ, not 00HS = going down). Statement kept (agrees with 02L2, descent direction). B8: no single Mathlib declaration (Mathlib's descent is along one surjective flat quasi-compact morphism, the node is for a covering family), so split along the source: steps 1-2 check conditions (0)-(2) of the criterion (by the definition of flatness; lem-weil-pbc-flat-morphism-base-change), steps 3-5 the affine condition exactly as the source (faithful flatness of R -> R' via the new leaf lem-weil-pbc-flat-ring-map-iff-flat-affine and lem-weil-pbc-flat-surjective-spectrum-faithfully-flat; U' = U x_S S' = Spec(A ⊗_R R') via open-preimage, pasting and affine fibre product leaves; descent by the new leaf lem-weil-pbc-flatness-descends-faithfully-flat = 00HJ), step 6 applies the new unsplit criterion node lem-weil-pbc-fpqc-local-on-base-criterion (02KP, fpqc, descent direction, with iso-invariance made explicit), shared with the sibling item lem-weil-pbc-fpqc-descend-finite. Citer lem-weil-pbc-finite-locally-free-degree-etale-descent step 2 uses exactly the statement."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FlatOfFpqcCover",
+  "declaration": "AlgebraicGeometry.flat_of_fpqc_cover",
+  "file": "lean/Sheaf/AlgebraicGeometry/FlatOfFpqcCover.lean",
+  "statement": "theorem flat_of_fpqc_cover {X S : Scheme.{u}} (f : X ⟶ S) {I : Type v} (S' : I → Scheme.{u}) (g : ∀ i, S' i ⟶ S) (hg : Presieve.ofArrows S' g ∈ Scheme.fpqcPrecoverage S) (h : ∀ i, Flat (pullback.snd f (g i))) : Flat f",
+  "branch": "sheaf-dag",
+  "by": "G1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-fdf1038",
+  "group": "G1",
+  "result": "pass",
+  "note": "X S f:X->S, I:Type v arbitrary, S' g family, hg = fpqcPrecoverage membership (flat + qc-cover, = 022B), h: Flat of pullback.snd f (g i) = f_i, concl Flat f (AlgebraicGeometry.Flat via #check); same form as H1 isIntegralHom_of_fpqcPrecoverage_pullback with P:=Flat; family not single-morphism so no Mathlib DescendsAlong instance applies"
  }
 }
