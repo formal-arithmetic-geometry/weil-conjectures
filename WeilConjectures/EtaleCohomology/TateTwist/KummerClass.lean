@@ -11,6 +11,11 @@ public import WeilConjectures.EtaleCohomology.TateTwist.Basic
 public import WeilConjectures.EtaleCohomology.TateTwist.RootsOfUnityPullback
 public import WeilConjectures.Mathlib.Algebra.Homology.ShortComplex.ShortExact
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.ExtendScalarsExact
+public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.ExtendScalarsComp
+public import WeilConjectures.ConstructibleSheaf.UpperStarConstantSheafComp
+public import WeilConjectures.SixFunctors.Etale.Derived.LeftDerivedUpperStarSingle
+public import WeilConjectures.SixFunctors.Etale.Derived.SingleDelta
+public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal.Composition
 
 /-!
 # The Kummer classes
@@ -170,13 +175,34 @@ instance : (constantSheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}).Additive :
 variable [NeZero (ringChar Λ)]
 
 variable (X) in
-/-- The constant complex `Λ_X` is `Λ ⊗ ℤ` placed in degree zero. -/
-noncomputable def constantComplexIsoSingleFunctorExtendScalarsInt :
+/-- The constant complex `Λ_X` is `Λ ⊗ ℤ` placed in degree zero: the identification through the
+monoidal unit and `Λ ⊗ ℤ ≅ Λ`. -/
+noncomputable def constantComplexIsoSingleFunctorExtendScalarsIntOfUnit :
     constantComplex Λ X ≅
       (DerivedCategory.singleFunctor _ 0).obj ((extendScalars Λ X).obj X.constantSheafInt) :=
   (singleFunctorObjUnitIso (ModuleCat.{u + 1} Λ) X).symm ≪≫
     (DerivedCategory.singleFunctor _ 0).mapIso
       (extendScalarsConstantZModIso X (n := 0) (by simp)).symm
+
+/-- For `π : X ⟶ S`, the identification `π^*(Λ ⊗ ℤ_S) ≅ Λ ⊗ ℤ_X`. -/
+noncomputable def upperStarExtendScalarsConstantSheafIntIso {S : Scheme.{u}} (π : X ⟶ S) :
+    (π)^*[ModuleCat.{u + 1} Λ].obj ((extendScalars Λ S).obj S.constantSheafInt) ≅
+      (extendScalars Λ X).obj X.constantSheafInt :=
+  (upperStarExtendScalarsIso Λ π).app _ ≪≫
+    (extendScalars Λ X).mapIso ((upperStarConstantSheafIso AddCommGrpCat.{u + 1} π).app _)
+
+variable (X) in
+/-- The constant complex `Λ_X` is `Λ ⊗ ℤ` placed in degree zero: the identification pulled back
+from the base `Spec ℤ[1/n]`, so that it is compatible with the derived pullbacks. -/
+noncomputable def constantComplexIsoSingleFunctorExtendScalarsInt :
+    constantComplex Λ X ≅
+      (DerivedCategory.singleFunctor _ 0).obj ((extendScalars Λ X).obj X.constantSheafInt) :=
+  (leftDerivedUpperStarConstantComplexIso Λ (toInvertibleExponentBase (Λ := Λ) X)).symm ≪≫
+    L((toInvertibleExponentBase (Λ := Λ) X)^*[ModuleCat.{u + 1} Λ]).mapIso
+      (constantComplexIsoSingleFunctorExtendScalarsIntOfUnit (invertibleExponentBase.{u} Λ) Λ) ≪≫
+    (singleFunctorCompLeftDerivedUpperStarIso _ (toInvertibleExponentBase (Λ := Λ) X)).app _ ≪≫
+    (DerivedCategory.singleFunctor _ 0).mapIso
+      (upperStarExtendScalarsConstantSheafIntIso Λ (toInvertibleExponentBase (Λ := Λ) X))
 
 lemma isUnit_ringChar_invertibleExponentBase :
     IsUnit ((ringChar Λ : ℕ) : Γ(invertibleExponentBase.{u} Λ, ⊤)) := by
@@ -317,6 +343,66 @@ noncomputable def upperStarKummerPullbackHom (v : Γ(Y, ⊤)ˣ) :
       simp
   comm₂₃ := by
     simp [upperStarKummerPullbackX₂, ShortComplex.pullback]
+
+/-- The comparison from the pullback of the Kummer sequence pulled back along `v`, with
+coefficients extended to `Λ`, to the Kummer sequence pulled back along the pullback of `v`,
+with coefficients extended to `Λ`. -/
+noncomputable def upperStarKummerExtendScalarsHom (v : Γ(Y, ⊤)ˣ) :
+    (((Y.kummerSequence (ringChar Λ)).pullback (unitToGmSheaf v)).map (extendScalars Λ Y)).map
+        (f)^*[ModuleCat.{u + 1} Λ] ⟶
+      ((X.kummerSequence (ringChar Λ)).pullback
+        (unitToGmSheaf (Units.map f.appTop.hom.toMonoidHom v))).map (extendScalars Λ X) where
+  τ₁ := (upperStarExtendScalarsIso Λ f).hom.app _ ≫
+    (extendScalars Λ X).map (upperStarKummerPullbackHom Λ f v).τ₁
+  τ₂ := (upperStarExtendScalarsIso Λ f).hom.app _ ≫
+    (extendScalars Λ X).map (upperStarKummerPullbackHom Λ f v).τ₂
+  τ₃ := (upperStarExtendScalarsIso Λ f).hom.app _ ≫
+    (extendScalars Λ X).map (upperStarKummerPullbackHom Λ f v).τ₃
+  comm₁₂ := by
+    simp only [ShortComplex.map_f, Category.assoc, ← Functor.map_comp,
+      (upperStarKummerPullbackHom Λ f v).comm₁₂]
+    rw [Functor.map_comp]
+    exact ((upperStarExtendScalarsIso Λ f).hom.naturality_assoc _ _).symm
+  comm₂₃ := by
+    simp only [ShortComplex.map_g, Category.assoc, ← Functor.map_comp,
+      (upperStarKummerPullbackHom Λ f v).comm₂₃]
+    rw [Functor.map_comp]
+    exact ((upperStarExtendScalarsIso Λ f).hom.naturality_assoc _ _).symm
+
+/-- The derived pullback of the connecting morphism of the Kummer sequence pulled back along `v`
+is the connecting morphism of the Kummer sequence pulled back along the pullback of `v`. -/
+lemma leftDerivedUpperStar_map_kummerδ (v : Γ(Y, ⊤)ˣ) :
+    (L((f)^*[ModuleCat.{u + 1} Λ])).map (kummerδ Λ (unitToGmSheaf v)
+        (fun y ↦ projective_sheafFiber_constantSheafInt (Y.uliftPointSmallEtale y))) ≫
+      ((L((f)^*[ModuleCat.{u + 1} Λ])).commShiftIso (1 : ℤ)).hom.app _ ≫
+        ((singleFunctorCompLeftDerivedUpperStarIso _ f).hom.app _ ≫
+          (DerivedCategory.singleFunctor _ 0).map
+            ((upperStarExtendScalarsIso Λ f).hom.app (Y.rootsOfUnitySheaf (ringChar Λ)) ≫
+              (extendScalars Λ X).map
+                (upperStarRootsOfUnitySheafToRootsOfUnitySheaf (ringChar Λ) f)))⟦(1 : ℤ)⟧' =
+      (singleFunctorCompLeftDerivedUpperStarIso _ f).hom.app _ ≫
+        (DerivedCategory.singleFunctor _ 0).map
+          ((upperStarExtendScalarsIso Λ f).hom.app Y.constantSheafInt ≫
+            (extendScalars Λ X).map
+              ((upperStarConstantSheafIso AddCommGrpCat.{u + 1} f).hom.app _)) ≫
+        kummerδ Λ (unitToGmSheaf (Units.map f.appTop.hom.toMonoidHom v))
+          (fun x ↦ projective_sheafFiber_constantSheafInt (X.uliftPointSmallEtale x)) := by
+  have hS := shortExact_kummerSequence_pullback_map_extendScalars Λ (unitToGmSheaf v)
+    (fun y ↦ projective_sheafFiber_constantSheafInt (Y.uliftPointSmallEtale y))
+  have h1 := leftDerivedUpperStar_map_singleδ (ModuleCat.{u + 1} Λ) f hS
+  have h2 := (ShortComplex.ShortExact.singleTriangle.map
+    (hS.map_of_exact (f)^*[ModuleCat.{u + 1} Λ])
+    (shortExact_kummerSequence_pullback_map_extendScalars Λ
+      (unitToGmSheaf (Units.map f.appTop.hom.toMonoidHom v))
+      (fun x ↦ projective_sheafFiber_constantSheafInt (X.uliftPointSmallEtale x)))
+    (upperStarKummerExtendScalarsHom Λ f v)).comm₃
+  simp only [ShortComplex.ShortExact.singleTriangle_mor₃,
+    ShortComplex.ShortExact.singleTriangle.map_hom₁,
+    ShortComplex.ShortExact.singleTriangle.map_hom₃] at h2
+  unfold kummerδ
+  rw [Functor.map_comp]
+  erw [reassoc_of% h1]
+  exact congrArg (_ ≫ ·) h2
 
 end Naturality
 

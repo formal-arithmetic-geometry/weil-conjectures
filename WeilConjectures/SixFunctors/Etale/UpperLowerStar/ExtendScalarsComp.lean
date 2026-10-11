@@ -127,4 +127,30 @@ lemma upperStarExtendScalarsIso_comp (M : Sheaf Z.smallEtaleTopology AddCommGrpC
   simp only [Functor.map_comp]
   rfl
 
+/-- Pulling back along `f : X ⟶ Y` the map `π_Y^* W ⟶ Λ ⊗ B_Y` induced by `ρ : W ⟶ Λ ⊗ B_S` and
+`c_Y : π_Y^* B_S ⟶ B_Y`, and composing with `c_f : f^* B_Y ⟶ B_X`, gives the map induced by `ρ` and
+`c_X : π_X^* B_S ⟶ B_X`, provided `c_X` is the composite of `c_Y` and `c_f`. -/
+lemma upperStarComp_hom_app_comp_upperStar_map_extendScalars {S : Scheme.{u}} (f : X ⟶ Y)
+    (πY : Y ⟶ S) (πX : X ⟶ S) (hπ : πX = f ≫ πY)
+    {BS : Sheaf S.smallEtaleTopology AddCommGrpCat.{u + 1}}
+    {BY : Sheaf Y.smallEtaleTopology AddCommGrpCat.{u + 1}}
+    {BX : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}}
+    (cY : (πY)^*[AddCommGrpCat.{u + 1}].obj BS ⟶ BY)
+    (cX : (πX)^*[AddCommGrpCat.{u + 1}].obj BS ⟶ BX)
+    (cf : (f)^*[AddCommGrpCat.{u + 1}].obj BY ⟶ BX)
+    (hc : (upperStarComp _ f πY πX hπ).hom.app BS ≫ (f)^*[AddCommGrpCat.{u + 1}].map cY ≫ cf = cX)
+    {W : Sheaf S.smallEtaleTopology (ModuleCat.{u + 1} Λ)} (ρ : W ⟶ (extendScalars Λ S).obj BS) :
+    (upperStarComp _ f πY πX hπ).hom.app W ≫
+        (f)^*[ModuleCat.{u + 1} Λ].map ((πY)^*[ModuleCat.{u + 1} Λ].map ρ ≫
+          (upperStarExtendScalarsIso Λ πY).hom.app BS ≫ (extendScalars Λ Y).map cY) ≫
+        (upperStarExtendScalarsIso Λ f).hom.app BY ≫ (extendScalars Λ X).map cf =
+      (πX)^*[ModuleCat.{u + 1} Λ].map ρ ≫ (upperStarExtendScalarsIso Λ πX).hom.app BS ≫
+        (extendScalars Λ X).map cX := by
+  subst hπ hc
+  have n1 := (upperStarComp (ModuleCat.{u + 1} Λ) f πY).hom.naturality ρ
+  have n2 := (upperStarExtendScalarsIso Λ f).hom.naturality cY
+  simp only [Functor.comp_map, Functor.comp_obj] at n1 n2
+  simp only [Functor.map_comp, Category.assoc]
+  rw [← reassoc_of% n1, reassoc_of% n2, reassoc_of% (upperStarExtendScalarsIso_comp Λ f πY BS)]
+
 end AlgebraicGeometry.Etale

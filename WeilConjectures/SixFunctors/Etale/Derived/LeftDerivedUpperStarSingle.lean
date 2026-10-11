@@ -56,4 +56,26 @@ lemma leftDerivedUpperStarComp_hom_app_singleFunctor {X Y Z : Scheme.{u}} (g : X
   rw [Iso.inv_hom_id_app_assoc, reassoc_of% hε, Iso.inv_hom_id_app_assoc, ← Functor.map_comp_assoc,
     Iso.inv_hom_id_app_assoc, key]
 
+/-- For `f : X ⟶ Y` and `π_X = f ≫ π_Y`, a morphism `Θ : f^* B_Y ⟶ B_X` compatible with
+morphisms `σ_Y : π_Y^* W ⟶ B_Y` and `σ_X : π_X^* W ⟶ B_X` induces, on the derived pullbacks of
+`W` placed in degree zero, the inverse of the composition isomorphism of derived pullbacks. -/
+lemma leftDerivedUpperStar_map_singleFunctor_comp {S X Y : Scheme.{u}} (f : X ⟶ Y)
+    (πY : Y ⟶ S) (πX : X ⟶ S) (hπ : πX = f ≫ πY) (W : Sheaf S.smallEtaleTopology A)
+    {BY : Sheaf Y.smallEtaleTopology A} {BX : Sheaf X.smallEtaleTopology A}
+    (σY : (πY)^*[A].obj W ⟶ BY) (σX : (πX)^*[A].obj W ⟶ BX) (Θ : (f)^*[A].obj BY ⟶ BX)
+    (hΘ : (upperStarComp A f πY πX hπ).hom.app W ≫ (f)^*[A].map σY ≫ Θ = σX) :
+    (L((f)^*[A])).map ((singleFunctorCompLeftDerivedUpperStarIso A πY).hom.app W ≫
+        (DerivedCategory.singleFunctor _ 0).map σY) ≫
+        (singleFunctorCompLeftDerivedUpperStarIso A f).hom.app BY ≫
+          (DerivedCategory.singleFunctor _ 0).map Θ =
+      (leftDerivedUpperStarComp A f πY πX hπ).inv.app _ ≫
+        (singleFunctorCompLeftDerivedUpperStarIso A πX).hom.app W ≫
+          (DerivedCategory.singleFunctor _ 0).map σX := by
+  subst hΘ
+  rw [← cancel_epi ((leftDerivedUpperStarComp A f πY πX hπ).hom.app _), Iso.hom_inv_id_app_assoc]
+  have D1 := leftDerivedUpperStarComp_hom_app_singleFunctor A f πY πX hπ W
+  have n := (singleFunctorCompLeftDerivedUpperStarIso A f).hom.naturality σY
+  simp only [Functor.comp_map, Functor.map_comp, Category.assoc] at n D1 ⊢
+  rw [reassoc_of% n, reassoc_of% D1]
+
 end AlgebraicGeometry.Etale

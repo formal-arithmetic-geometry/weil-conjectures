@@ -55,8 +55,8 @@ private lemma unit_app_upperStarConstantSheafIso {S T : Scheme.{u}} (f : S ⟶ T
   erw [← (lowerStarCompSheafSectionsTerminalIso A f).hom.naturality]
   rfl
 
-omit [Abelian A] [IsGrothendieckAbelian.{u + 1} A] [HasSmallSiteSheafify A] in
 set_option linter.flexible false in
+omit [Abelian A] [IsGrothendieckAbelian.{u + 1} A] [HasSmallSiteSheafify A] in
 /-- The identifications of global sections of pushforwards are compatible with composition. -/
 private lemma lowerStarComp_hom_app_sheafSections (F : Sheaf X.smallEtaleTopology A) :
     ((sheafSections Z.smallEtaleTopology A).obj (op (⊤_ Z.Etale))).map
