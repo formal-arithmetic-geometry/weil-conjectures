@@ -125,5 +125,24 @@
   "group": "C1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-hki3146 (reviewer sub-agent of L); spot-checked: Statement vs Stacks 0A96: matches; citers lem-pur-rhom-global-sections and lem-sc-derived-internal-hom-adjunction use it with K-flat source, K-injective target: quantifiers match; no kflat/kinjective duplicate node. FIX more, RETURN less: (1) C1/class d: Step 2 re-derived inline (as 'elementary') the sheaf-level total tensor-Hom isomorphism that is the existing node lem-sc-derived-hom-tensor-total (in base via 5f35dcb5e), and its termwise sheaf adjunction was uncited; Step 2 now cites lem-sc-derived-hom-tensor-total, elementary false. (2) C4: Step 3 took H^0 of the sheaf Hom complex as Hom in K(O); rewritten to take global sections, H^0(Gamma(Hom^bullet(A,B)))=Hom_K(A,B) from def-pur-hom-complex, as in the Stacks proof. proof_deps updated; def-pc-tensor-complex-sheaves dropped from stmt_deps (not in the statement).; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.KInjectiveHomComplex",
+  "declaration": "CochainComplex.isKInjective_homComplex_of_isKFlat",
+  "file": "lean/Sheaf/Algebra/Homology/KInjectiveHomComplex.lean",
+  "statement": "theorem isKInjective_homComplex_of_isKFlat {C : Type u} [Category.{v} C] {J : GrothendieckTopology C} {R : Sheaf J CommRingCat.{max u v}} (L I : CochainComplex (SheafOfModules.{max u v} ((sheafCompose J (forget₂ CommRingCat.{max u v} RingCat.{max u v})).obj R)) ℤ) (hL : L.IsKFlat) [I.IsKInjective] : (CategoryTheory.homComplex L I).IsKInjective",
+  "branch": "sheaf-dag",
+  "by": "G1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-hki1330"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-hki1330",
+  "group": "G1",
+  "result": "fix",
+  "note": "site C:Type u,Category.{v} (generalized from v=u to the recorded IsKFlat universes); R sheaf of CommRingCat.{max u v}; L,I unbounded Z-complexes in SheafOfModules.{max u v}; hL = recorded CochainComplex.IsKFlat; [I.IsKInjective] = Mathlib match of def-pur-kinjective-complex; conclusion K-injectivity of landed CategoryTheory.homComplex L I (#check-resolved)"
  }
 }
