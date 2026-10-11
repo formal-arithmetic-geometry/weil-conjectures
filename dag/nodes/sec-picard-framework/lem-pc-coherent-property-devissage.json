@@ -154,5 +154,23 @@
   "group": "M1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-cpd0015 (reviewer sub-agent of L); spot-checked: Return R-cpd3148 repaired: steps follow 01YI proof (minimal bad irreducible support via lem-weil-pbc-noetherian-scheme-closed-subsets-minimal, 01YH node with its (2) from minimality and its (3) from item (2) applied to Z_0, final filtration via 01YF node); new node compared with 01YH clause by clause; lem-pc-coherent-hi uses (0),(1),(2) as stated; not a duplicate of 01YM node. FIX more, RETURN less: (1) B3/E7: item statement had been silently rewritten to plain text, restored the TeX statement of ada4de874 unchanged; (2) B4/B3: new node statement TeX-ified (plain-text arrow Z -> X removed), its (1) restricted to sequences supported in T as in 01YH, stmt_deps corrected (pqf-lem-locnoeth-lft -> pqf-def-locnoeth; added def-weil-closed-immersion, def-pc-integral-scheme, def-pc-module-pullback); (3) C1: step 2 dropped the uncited closed-pushforward generic-stalk/dimension claim (unused) and states the support containment actually used; steps 3-5 rewritten so step 4 supplies 01YH (2),(3) explicitly, step 5 marked non-elementary.; 2 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.CoherentPropertyDevissage",
+  "declaration": "AlgebraicGeometry.coherent_property_devissage",
+  "file": "lean/Sheaf/AlgebraicGeometry/CoherentPropertyDevissage.lean",
+  "statement": "theorem coherent_property_devissage (X : Scheme.{u}) [IsLocallyNoetherian X] [CompactSpace X] (P : X.Modules → Prop) (hP_zero : ∀ F : X.Modules, IsZero F → P F) (hP_seq : ∀ (S : ShortComplex X.Modules), S.ShortExact → RingedSpace.IsCoherent X.toRingedSpace S.X₁ → RingedSpace.IsCoherent X.toRingedSpace S.X₂ → RingedSpace.IsCoherent X.toRingedSpace S.X₃ → ((P S.X₁ ∧ P S.X₂) ∨ (P S.X₁ ∧ P S.X₃) ∨ (P S.X₂ ∧ P S.X₃)) → P S.X₁ ∧ P S.X₂ ∧ P S.X₃) (hP_integral : ∀ (Z : Scheme.{u}) (i : Z ⟶ X) [IsIntegral Z] [IsClosedImmersion i] (ξ : Z), ∃ G : X.Modules, RingedSpace.IsCoherent X.toRingedSpace G ∧ (∀ x : X, (¬ Subsingleton (G.presheaf.stalk x)) ↔ x ∈ Set.range i.base) ∧ (∀ (r : X.presheaf.stalk (i.base ξ)), r ∈ IsLocalRing.maximalIdeal _ → ∀ m : (PresheafOfModules.stalkObj X.ringCatSheaf.presheaf (i.base ξ) G.val), r • m = 0) ∧ (∃ hκ : Module (X.residueField (i.base ξ)) (PresheafOfModules.stalkObj X.ringCatSheaf.presheaf (i.base ξ) G.val), @Module.finrank _ _ _ _ hκ = 1) ∧ P G) : ∀ F : X.Modules, RingedSpace.IsCoherent X.toRingedSpace F → P F",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "C1",
+  "result": "pass",
+  "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
  }
 }
