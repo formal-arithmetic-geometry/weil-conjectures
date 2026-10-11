@@ -129,6 +129,70 @@ instance isIso_upperStarRestrictScalars : IsIso (upperStarRestrictScalars φ g).
 
 end Pullback
 
+section BaseChangeMap
+
+variable {X' X Y' Y : Scheme.{u}} {g' : X' ⟶ X} {f' : X' ⟶ Y'} {f : X ⟶ Y} {g : Y' ⟶ Y}
+
+/-- Restriction of scalars commutes with the square isomorphism `g'_* ⋙ f_* ≅ f'_* ⋙ g_*` of
+pushforwards, both being computed objectwise. -/
+lemma restrictScalars_map_squareLowerStarIso_hom_app (sq : CommSq g' f' f g)
+    (N : Sheaf X'.smallEtaleTopology (ModuleCat.{u + 1} Λ')) :
+    (Sheaf.restrictScalars Y.smallEtaleTopology φ).map
+        ((squareLowerStarIso (ModuleCat.{u + 1} Λ') sq).hom.app N) =
+      (squareLowerStarIso (ModuleCat.{u + 1} Λ) sq).hom.app
+        ((Sheaf.restrictScalars X'.smallEtaleTopology φ).obj N) := by
+  ext U : 3
+  rfl
+
+/-- **Restriction of scalars carries the base change map over `Λ'` to the one over `Λ`**: for a
+commutative square `g' ≫ f = f' ≫ g` and a sheaf `G` of `Λ'`-modules on `X`, the base change
+map `g^* f_* (res G) ⟶ f'_* g'^* (res G)` over `Λ` corresponds to the restriction of scalars of
+the base change map `g^* f_* G ⟶ f'_* g'^* G` over `Λ'` through the comparison isomorphisms
+`AlgebraicGeometry.Etale.upperStarRestrictScalars`. -/
+theorem baseChangeMap_app_restrictScalars (sq : CommSq g' f' f g)
+    (G : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ')) :
+    (baseChangeMap (ModuleCat.{u + 1} Λ) sq).app
+        ((Sheaf.restrictScalars X.smallEtaleTopology φ).obj G) ≫
+        (f')_*[ModuleCat.{u + 1} Λ].map ((upperStarRestrictScalars φ g').natTrans.app G) =
+      (upperStarRestrictScalars φ g).natTrans.app ((f)_*[ModuleCat.{u + 1} Λ'].obj G) ≫
+        (Sheaf.restrictScalars Y'.smallEtaleTopology φ).map
+          ((baseChangeMap (ModuleCat.{u + 1} Λ') sq).app G) := by
+  apply ((upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) g).homEquiv _ _).injective
+  rw [Adjunction.homEquiv_unit, Adjunction.homEquiv_unit]
+  have h₁ := unit_map_baseChangeMap_app (ModuleCat.{u + 1} Λ) sq
+    ((Sheaf.restrictScalars X.smallEtaleTopology φ).obj G)
+  have h₂ := unit_map_baseChangeMap_app (ModuleCat.{u + 1} Λ') sq G
+  have h₃ := restrictScalars_map_unit_app φ g' G
+  have h₄ := restrictScalars_map_unit_app φ g ((f)_*[ModuleCat.{u + 1} Λ'].obj G)
+  have h₅ := restrictScalars_map_squareLowerStarIso_hom_app φ sq
+    ((g')^*[ModuleCat.{u + 1} Λ'].obj G)
+  have h₆ := (squareLowerStarIso (ModuleCat.{u + 1} Λ) sq).hom.naturality
+    ((upperStarRestrictScalars φ g').natTrans.app G)
+  calc _ = ((upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) g).unit.app _ ≫
+          (g)_*[ModuleCat.{u + 1} Λ].map ((baseChangeMap (ModuleCat.{u + 1} Λ) sq).app _)) ≫
+        (g)_*[ModuleCat.{u + 1} Λ].map ((f')_*[ModuleCat.{u + 1} Λ].map
+          ((upperStarRestrictScalars φ g').natTrans.app G)) := by
+        rw [Functor.map_comp, Category.assoc]
+    _ = (f)_*[ModuleCat.{u + 1} Λ].map
+          ((Sheaf.restrictScalars X.smallEtaleTopology φ).map
+            ((upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ') g').unit.app G)) ≫
+        (squareLowerStarIso (ModuleCat.{u + 1} Λ) sq).hom.app
+          ((Sheaf.restrictScalars X'.smallEtaleTopology φ).obj
+            ((g')^*[ModuleCat.{u + 1} Λ'].obj G)) := by
+        rw [h₁, h₃, Functor.map_comp, Category.assoc, Category.assoc]
+        congr 1
+        exact h₆.symm
+    _ = (Sheaf.restrictScalars Y.smallEtaleTopology φ).map
+          ((upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ') g).unit.app _ ≫
+            (g)_*[ModuleCat.{u + 1} Λ'].map ((baseChangeMap (ModuleCat.{u + 1} Λ') sq).app G)) := by
+        rw [h₂, Functor.map_comp, h₅]
+        rfl
+    _ = _ := by
+        rw [Functor.map_comp, h₄, Category.assoc, Functor.map_comp]
+        rfl
+
+end BaseChangeMap
+
 end Etale
 
 end AlgebraicGeometry
