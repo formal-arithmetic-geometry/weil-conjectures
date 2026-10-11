@@ -515,6 +515,13 @@ theorem tangentMap_congr {m m' : A} (h : m = m') (hm : m * m = 0) (hπ : π m = 
   subst h
   rfl
 
+omit [IsLocalRing A] [IsLocalHom π.toRingHom] in
+theorem tangentMap_apply_congr {m m' : A} (h : m = m') (hm : m * m = 0) (hπ : π m = 0)
+    (hm' : m' * m' = 0) (hπ' : π m' = 0) (v : pointsKer G aug₁) :
+    tangentMap m hm hπ v = tangentMap m' hm' hπ' v := by
+  subst h
+  rfl
+
 /-- **Substitution into the bracket.** `[v^{(m)}, w^{(n)}] = [v, w]^{(mn)}` for `m, n` of square
 zero in the maximal ideal. -/
 theorem commutator_tangentMap (m n : A) (hm : m * m = 0) (hn : n * n = 0) (hπm : π m = 0)
@@ -752,4 +759,163 @@ theorem tangentBracket_hallWitt (x y z : pointsKer G aug₁) :
   have := key _ _ _ _ _ _ (hc _ _) (hc _ _) (hc _ _) hw
   simp only [tangentMon, map_mul, map_one] at this ⊢
   exact this
+/-! ### The Lie algebra -/
+
+theorem tangentBracket_one_left (w : pointsKer G aug₁) : tangentBracket 1 w = 1 := by
+  have h := tangentBracket_mul_left (1 : pointsKer G aug₁) 1 w
+  rw [one_mul] at h
+  exact left_eq_mul.mp h
+
+theorem tangentBracket_inv_left (v w : pointsKer G aug₁) :
+    tangentBracket v⁻¹ w = (tangentBracket v w)⁻¹ := by
+  rw [eq_inv_iff_mul_eq_one, ← tangentBracket_mul_left, inv_mul_cancel,
+    tangentBracket_one_left]
+
+variable (G) in
+/-- The Lie algebra of `G` is the group of tangent vectors: `Lie(G) ≃ ker(G(k[ε]) → G(k))`. -/
+noncomputable def lieEquivTangent : Lie G ≃ pointsKer G (aug₁ (k := k)) :=
+  (lieEquiv G).symm.trans (infPointsEquivTangentGroup G).toEquiv
+
+theorem lieEquivTangent_add (x y : Lie G) :
+    lieEquivTangent G (x + y) = lieEquivTangent G x * lieEquivTangent G y := by
+  simp only [lieEquivTangent, Equiv.trans_apply, lieEquiv_symm_add, MulEquiv.toEquiv_eq_coe]
+  exact map_mul (infPointsEquivTangentGroup G) _ _
+
+theorem lieEquivTangent_symm_mul (p q : pointsKer G (aug₁ (k := k))) :
+    (lieEquivTangent G).symm (p * q) =
+      (lieEquivTangent G).symm p + (lieEquivTangent G).symm q :=
+  (lieEquivTangent G).injective (by simp [lieEquivTangent_add])
+
+theorem lieEquivTangent_symm_one : (lieEquivTangent G).symm 1 = 0 := by
+  have h := lieEquivTangent_symm_mul (G := G) 1 1
+  rw [one_mul] at h
+  exact left_eq_add.mp h
+
+/-- The Lie bracket on `Lie(G)` of a group scheme over a field: the mixed term `[v, w]` of the
+commutator `v_ε w_δ v_ε⁻¹ w_δ⁻¹` of two tangent vectors over `k[ε][δ]`.
+(blueprint: `sk-d-tangent`) -/
+noncomputable instance : Bracket (Lie G) (Lie G) where
+  bracket x y := (lieEquivTangent G).symm
+    (tangentBracket (lieEquivTangent G x) (lieEquivTangent G y))
+
+theorem lie_def (x y : Lie G) :
+    ⁅x, y⁆ = (lieEquivTangent G).symm
+      (tangentBracket (lieEquivTangent G x) (lieEquivTangent G y)) :=
+  rfl
+
+theorem lieEquivTangent_lie (x y : Lie G) :
+    lieEquivTangent G ⁅x, y⁆ = tangentBracket (lieEquivTangent G x) (lieEquivTangent G y) :=
+  (lieEquivTangent G).apply_symm_apply _
+
+theorem lie_add_left (x y z : Lie G) : ⁅x + y, z⁆ = ⁅x, z⁆ + ⁅y, z⁆ := by
+  rw [lie_def, lieEquivTangent_add, tangentBracket_mul_left, lieEquivTangent_symm_mul]
+  rfl
+
+theorem lie_add_right (x y z : Lie G) : ⁅x, y + z⁆ = ⁅x, y⁆ + ⁅x, z⁆ := by
+  rw [lie_def, lieEquivTangent_add, tangentBracket_mul_right, lieEquivTangent_symm_mul]
+  rfl
+
+theorem lie_self' (x : Lie G) : ⁅x, x⁆ = 0 := by
+  rw [lie_def, tangentBracket_self, lieEquivTangent_symm_one]
+
+theorem lie_neg_left' (x y : Lie G) : ⁅-x, y⁆ = -⁅x, y⁆ := by
+  rw [eq_neg_iff_add_eq_zero, ← lie_add_left, neg_add_cancel, lie_def,
+    show lieEquivTangent G 0 = 1 by
+      rw [← lieEquivTangent_symm_one (G := G), Equiv.apply_symm_apply],
+    tangentBracket_one_left, lieEquivTangent_symm_one]
+
+theorem lie_antisymm' (x y : Lie G) : ⁅x, y⁆ = -⁅y, x⁆ := by
+  have h := lie_self' (x + y)
+  rw [lie_add_left, lie_add_right, lie_add_right, lie_self', lie_self', zero_add, add_zero] at h
+  exact eq_neg_of_add_eq_zero_left h
+
+theorem lie_neg_right' (x y : Lie G) : ⁅x, -y⁆ = -⁅x, y⁆ := by
+  rw [lie_antisymm', lie_neg_left', neg_neg, lie_antisymm' x y, neg_neg]
+
+theorem lieEquivTangent_neg (x : Lie G) : lieEquivTangent G (-x) = (lieEquivTangent G x)⁻¹ := by
+  rw [eq_inv_iff_mul_eq_one, ← lieEquivTangent_add, neg_add_cancel,
+    ← lieEquivTangent_symm_one (G := G), Equiv.apply_symm_apply]
+
+theorem lie_jacobi' (x y z : Lie G) : ⁅⁅x, y⁆, z⁆ + ⁅⁅z, x⁆, y⁆ + ⁅⁅y, z⁆, x⁆ = 0 := by
+  have h := tangentBracket_hallWitt (lieEquivTangent G x) (lieEquivTangent G y)
+    (lieEquivTangent G z)
+  simp only [← lieEquivTangent_lie, ← lieEquivTangent_neg, ← lieEquivTangent_add] at h
+  have h' := congrArg (lieEquivTangent G).symm h
+  rw [Equiv.symm_apply_apply, lieEquivTangent_symm_one] at h'
+  simp only [lie_neg_left'] at h'
+  rw [← neg_add, ← neg_add, neg_eq_zero] at h'
+  exact h'
+
+theorem leibniz_lie' (x y z : Lie G) : ⁅x, ⁅y, z⁆⁆ = ⁅⁅x, y⁆, z⁆ + ⁅y, ⁅x, z⁆⁆ := by
+  have j := lie_jacobi' x y z
+  have a₂ : ⁅⁅z, x⁆, y⁆ = ⁅y, ⁅x, z⁆⁆ := by
+    rw [lie_antisymm' z x, lie_neg_left', lie_antisymm' ⁅x, z⁆ y, neg_neg]
+  rw [lie_antisymm' x ⁅y, z⁆, ← a₂]
+  exact (eq_neg_of_add_eq_zero_left j).symm
+
+/-- `Lie(G)` is a Lie ring. (blueprint: `sk-d-tangent`) -/
+noncomputable instance : LieRing (Lie G) where
+  add_lie := lie_add_left
+  lie_add := lie_add_right
+  lie_self := lie_self'
+  leibniz_lie := leibniz_lie'
+
+theorem inr_mul_self (c : k) : (inr c : DualNumber k) * inr c = 0 := by
+  ext <;> simp
+
+/-- The rescaling `v ↦ v^{(cε)}` of tangent vectors. -/
+noncomputable abbrev tangentScale (c : k) : pointsKer G aug₁ →* pointsKer G (aug₁ (k := k)) :=
+  tangentMap (A := DualNumber k) (π := aug₁) (inr c) (inr_mul_self c) (by simp)
+
+theorem dualNumbersScaleOver_comp_dualNumbersToSpecOver (c : k) :
+    Scheme.dualNumbersScaleOver (Spec (.of k)) ((Scheme.ΓSpecIso (.of k)).inv c) ≫
+        dualNumbersToSpecOver =
+      dualNumbersToSpecOver ≫
+        (Spec.map (CommRingCat.ofHom (DualNumber.liftElem (R := k) (inr c)
+          (inr_mul_self c)).toRingHom)).asOver (Spec (.of k)) := by
+  ext1
+  have e : DualNumber.liftElem (R := k) (inr c) (inr_mul_self c) = DualNumber.scale c := by
+    ext <;> simp [DualNumber.liftElem_apply, algebraMap_eq_inl]
+  simp only [Over.comp_left, Scheme.dualNumbersScaleOver_left, dualNumbersToSpecOver,
+    Over.homMk_left, e]
+  exact Scheme.dualNumbersScale_comp_dualNumbersToSpec (.of k) c
+
+theorem lieEquivTangent_smul (c : k) (x : Lie G) :
+    lieEquivTangent G (c • x) = tangentScale c (lieEquivTangent G x) := by
+  apply Subtype.ext
+  change inv dualNumbersToSpecOver ≫ ((lieEquiv G).symm ((Scheme.ΓSpecIso (.of k)).inv c • x)).1 =
+    points.map G _ (inv dualNumbersToSpecOver ≫ ((lieEquiv G).symm x).1)
+  rw [lieEquiv_symm_smul, points.map]
+  change inv dualNumbersToSpecOver ≫ Scheme.dualNumbersScaleOver _ _ ≫ _ = _
+  have key : inv dualNumbersToSpecOver ≫
+      Scheme.dualNumbersScaleOver (Spec (.of k)) ((Scheme.ΓSpecIso (.of k)).inv c) =
+      (Spec.map (CommRingCat.ofHom (DualNumber.liftElem (R := k) (inr c)
+        (inr_mul_self c)).toRingHom)).asOver (Spec (.of k)) ≫ inv dualNumbersToSpecOver := by
+    rw [IsIso.inv_comp_eq, ← Category.assoc, ← dualNumbersScaleOver_comp_dualNumbersToSpecOver,
+      Category.assoc,
+      IsIso.hom_inv_id, Category.comp_id]
+  rw [← Category.assoc, key, Category.assoc]
+
+theorem tangentBracket_tangentScale (c : k) (v w : pointsKer G aug₁) :
+    tangentBracket v (tangentScale c w) = tangentScale c (tangentBracket v w) := by
+  apply tangentMul_injective
+  rw [tangentMul_tangentBracket]
+  have e₁ : tangentDel (tangentScale c w) = tangentMap (A := DualNumber (DualNumber k))
+      (π := aug₂) (algebraMap k _ c * del₂) (by ext <;> simp [algebraMap_eq_inl']) (by simp) w :=
+    kerMap_tangentMap _ _ _ _ _ _ _ _ (by simp [DualNumber.liftElem_apply, Algebra.smul_def, algebraMap_eq_inl]) w
+  have e₂ : tangentMul (tangentScale c (tangentBracket v w)) =
+      tangentMap (A := DualNumber (DualNumber k)) (π := aug₂) (algebraMap k _ c * (eps₂ * del₂))
+        (by ext <;> simp [algebraMap_eq_inl']) (by simp) (tangentBracket v w) :=
+    kerMap_tangentMap _ _ _ _ _ _ _ _ (by simp [DualNumber.liftElem_apply, Algebra.smul_def, algebraMap_eq_inl]) _
+  rw [e₁, e₂, commutator_tangentMap]
+  exact tangentMap_apply_congr (mul_left_comm _ _ _) _ _ _ _ _
+
+theorem lie_smul' (c : k) (x y : Lie G) : ⁅x, c • y⁆ = c • ⁅x, y⁆ := by
+  apply (lieEquivTangent G).injective
+  rw [lieEquivTangent_lie, lieEquivTangent_smul, lieEquivTangent_smul, lieEquivTangent_lie,
+    tangentBracket_tangentScale]
+
+/-- `Lie(G)` is a Lie algebra over `k`. (blueprint: `sk-d-tangent`) -/
+noncomputable instance : LieAlgebra k (Lie G) where
+  lie_smul := lie_smul'
 end AlgebraicGeometry.GrpObj

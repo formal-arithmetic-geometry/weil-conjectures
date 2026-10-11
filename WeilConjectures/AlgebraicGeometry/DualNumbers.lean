@@ -192,6 +192,10 @@ theorem fst_foldRingHom (x : (R[ε])[ε]) : (foldRingHom x).fst = x.fst.fst := b
 theorem snd_foldRingHom (x : (R[ε])[ε]) : (foldRingHom x).snd = x.fst.snd + x.snd.fst := by
   simp [foldRingHom]
 
+theorem scale_mapRingHom (f : R →+* S) (c : R) (x : R[ε]) :
+    scale (f c) (mapRingHom f x) = mapRingHom f (scale c x) := by
+  ext <;> simp [map_mul]
+
 /-- Folding the constants in `δ` is the identity: `R[ε] → R[ε][δ] → R[ε]`. -/
 theorem foldRingHom_comp_inlHom : foldRingHom.comp (inlHom R[ε] R[ε]) = RingHom.id R[ε] := by
   ext x <;> simp
@@ -989,6 +993,23 @@ theorem ι_comp_dualNumbersToSpec :
   change (Scheme.ΓSpecIso R).hom
     ((DualNumber.mapRingHom (Scheme.ΓSpecIso R).inv.hom a).fst) = a.fst
   simp
+
+/-- The isomorphism `(Spec R)[ε] ⟶ Spec R[ε]` is compatible with scaling the infinitesimal. -/
+theorem dualNumbersScale_comp_dualNumbersToSpec (c : R) :
+    (Spec R).dualNumbersScale ((Scheme.ΓSpecIso R).inv c) ≫ dualNumbersToSpec R =
+      dualNumbersToSpec R ≫ Spec.map (CommRingCat.ofHom (DualNumber.scale c).toRingHom) := by
+  rw [dualNumbersToSpec, ← Category.assoc, toSpecΓ_naturality, Category.assoc, Category.assoc,
+    ← Spec.map_comp, ← Spec.map_comp]
+  congr 2
+  refine CommRingCat.hom_ext (RingHom.ext fun a ↦ ?_)
+  rw [CommRingCat.hom_comp, CommRingCat.hom_comp, RingHom.comp_apply, RingHom.comp_apply]
+  change DualNumber.scale ((Spec R).presheaf.map (homOfLE le_top : (⊤ : (Spec R).Opens) ⟶ ⊤).op
+    _) _ = _
+  rw [show (homOfLE le_top : (⊤ : (Spec R).Opens) ⟶ ⊤) = 𝟙 _ from rfl, op_id,
+    CategoryTheory.Functor.map_id]
+  simp only [CommRingCat.hom_ofHom, CommRingCat.id_apply, AlgHom.toRingHom_eq_coe,
+    RingHom.coe_coe]
+  exact DualNumber.scale_mapRingHom _ c a
 
 end Scheme
 
