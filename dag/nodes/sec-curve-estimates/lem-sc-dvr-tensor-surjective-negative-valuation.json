@@ -118,5 +118,23 @@
   "group": "M1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-dtv1706 (reviewer sub-agent of L); spot-checked: Source: Stacks Varieties Lemma 09N5 (varieties-lemma-create-globally-generated), proof, induction base case; the item statement (A subring of K with fraction field K, B a DVR with fraction field K, A tensor B -> K surjective => nonzero x in A with v(x)<0) is that base case, hypotheses unchanged. Audit point: the split does not cite the parent lem-sc-jacobson-denominator-function-field (no cycle); the parent cites this item only as its base case and does its own induction; lem-sc-semilocal-dim-one-conductor (conductor statement) and this item do not restate each other. Step 1: t^{-1} has v=-1 and so is not in B from lem-sc-dvr-valuation-ring-characterization (v>=0 on B\\{0}, v(t)=1, v(t^{-1})=-1); finite tensor expansion is the definition. Step 2: v(a_j b_j)=v(a_j)+v(b_j) from lem-sc-dvr-valuation-arithmetic; but the step also needs that an element of K^x with v>=0 lies in B, which neither cited node states (C4). Step 3 elementary negation. Small cases: K=k(t), B=k[t]_(t): A=B fails surjectivity, A=k[t,t^{-1}] has x=t^{-1}. FIX more, RETURN less: C4 in step 2 repaired by adding statement-only node lem-sc-dvr-nonnegative-valuation-in-ring (B DVR, x in K^x with v(x)>=0 => x in B; Algebra 00IE) and citing it: dag/nodes/sec-curve-estimates/lem-sc-dvr-tensor-surjective-negative-valuation.json: proof[1].text/uses, proof_deps: add lem-sc-dvr-nonnegative-valuation-in-ring. Mathlib: my LeanFinder query for the new node found IsDiscreteValuationRing.exists_lift_of_le_one, absent from the pinned Mathlib (grep), and ValuationSubring.valuation_le_one_iff (ValuationSubring.lean:183, own value group, not normalized Z) -> no leaf; blueprint_refs search found nothing. Start Sat Oct 10 05:06:29 PM UTC 2026, end Sat Oct 10 05:07:25 PM UTC 2026.; 2 file(s) fixed by the reviewer; 1 statement node(s) added by the reviewer (FIX more, RETURN less)"
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.ExistsNegativeValuationOfTensorSurjective",
+  "declaration": "IsDiscreteValuationRing.exists_negative_valuation_of_tensor_surjective",
+  "file": "lean/Sheaf/RingTheory/ExistsNegativeValuationOfTensorSurjective.lean",
+  "statement": "theorem exists_negative_valuation_of_tensor_surjective {K : Type u} [Field K] (A B : Subring K) [IsFractionRing A K] [IsDiscreteValuationRing B] [IsFractionRing B K] (h : Function.Surjective (Algebra.TensorProduct.productMap A.subtype.toIntAlgHom B.subtype.toIntAlgHom)) : ∃ x : A, x ≠ 0 ∧ -WithZero.log ((maximalIdeal B).valuation K (x : K)) < 0",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-dvt1000",
+  "group": "E1",
+  "result": "pass",
+  "note": "K field (universe u); A : Subring K + IsFractionRing A K; B : Subring K + IsDiscreteValuationRing B (recorded Mathlib leaf of def-sc-discrete-valuation-ring) + IsFractionRing B K; normalized v = -WithZero.log of (maximalIdeal B).valuation K (uniformizer -> exp(-1) -> 1, unique normalized valuation); h = surjectivity of productMap over Z of the subring inclusions (a⊗b -> ab); conclusion ∃ x : A, x ≠ 0 ∧ v x < 0, strict; edge cases A=B, A=K, x=0 (log 0) checked; no lean statements yet on sibling dvr nodes so no competing valuation convention"
  }
 }
