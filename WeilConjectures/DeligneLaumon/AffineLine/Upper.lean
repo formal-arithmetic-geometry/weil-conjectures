@@ -5,10 +5,15 @@ Authors: Claude
 -/
 module
 
+public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.LineIrreducible
 public import WeilConjectures.DeligneLaumon.AffineLine.DegreeOne
+public import WeilConjectures.DeligneLaumon.AffineLine.DenseOpen
 public import WeilConjectures.DeligneLaumon.AffineLine.Endpoints
 public import WeilConjectures.DeligneLaumon.AffineLine.Exactness
+public import WeilConjectures.DeligneLaumon.AffineLine.ExceptionalConstituents
+public import WeilConjectures.DeligneLaumon.AffineLine.UpperReduction
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Geometrically.Connected
+public import WeilConjectures.Mathlib.NumberTheory.LegendreSymbol.AddCharacter
 
 /-!
 # The Deligne–Laumon estimate on the affine line

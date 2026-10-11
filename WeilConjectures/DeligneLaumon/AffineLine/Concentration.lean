@@ -81,4 +81,58 @@ noncomputable def WeilSheaf.toComplexCompTensorLisseIso (G : WeilSheaf k₀ l X)
 
 end ToComplex
 
+section Kernel
+
+attribute [local instance] Abelian.hasFiniteBiproducts
+
+variable (ψ : AddChar k₀ (PadicAlgCl l))
+
+/-- The kernel sheaf `𝒦_ψ ⊗ pr₁^* F` on the affine plane whose compactly supported direct image
+along `pr₂` computes the Fourier transform of `F`. -/
+noncomputable abbrev WeilSheaf.fourierKernelTensor (F : WeilSheaf k₀ l (affineLine k₀)) :
+    WeilSheaf k₀ l (affinePlane k₀) :=
+  WeilSheaf.tensorObj (fourierKernel ψ) ((WeilSheaf.upperStar (affinePlane.fst k₀)).obj F)
+    (isLisse_fourierKernel ψ)
+
+/-- The compactly supported direct image `Rpr₂!(𝒦_ψ ⊗ pr₁^* F)` is the transform of `F` shifted
+by `-1`: the transform is `Rpr₂!(𝒦_ψ ⊗ pr₁^* -)[1]`, and the pullback and the tensor product
+with the lisse kernel are exact. (blueprint: `def-fd-transform`) -/
+noncomputable def WeilSheaf.derivedLowerShriekFourierKernelTensorIso
+    (F : WeilSheaf k₀ l (affineLine k₀)) :
+    (WeilComplex.derivedLowerShriek k₀ l (affinePlane.snd k₀)).obj
+        (WeilSheaf.toComplex.obj (WeilSheaf.fourierKernelTensor ψ F)) ≅
+      ((fourierTransform ψ).obj (WeilSheaf.toComplex.obj F))⟦(-1 : ℤ)⟧ :=
+  (WeilComplex.derivedLowerShriek k₀ l (affinePlane.snd k₀)).mapIso
+      (((WeilSheaf.toComplexCompTensorLisseIso (fourierKernel ψ)
+        (isLisse_fourierKernel ψ)).app _).symm ≪≫
+      (WeilComplex.tensorLisse (fourierKernel ψ) (isLisse_fourierKernel ψ)).mapIso
+        ((WeilSheaf.toComplexCompUpperStarIso (affinePlane.fst k₀)).app F).symm) ≪≫
+    (shiftFunctorCompIsoId _ (1 : ℤ) (-1) (by norm_num)).symm.app _
+
+variable {ψ} {F S : WeilSheaf k₀ l (affineLine k₀)}
+  (e : (fourierTransform ψ).obj (WeilSheaf.toComplex.obj F) ≅ WeilSheaf.toComplex.obj S)
+
+include e in
+/-- If the transform of `F` is a sheaf `S`, then `R^ν pr₂!(𝒦_ψ ⊗ pr₁^* F)` vanishes for
+`ν ≠ 1`. -/
+theorem WeilSheaf.isZero_higherLowerShriek_fourierKernelTensor {ν : ℕ} (hν : ν ≠ 1) :
+    IsZero ((WeilSheaf.higherLowerShriek k₀ l (affinePlane.snd k₀) ν).obj
+      (WeilSheaf.fourierKernelTensor ψ F)) :=
+  (WeilSheaf.isZero_homologySheaf_shift_toComplex S (n := -1) (a := ν) (by omega)).of_iso
+    ((WeilComplex.homologySheaf ν).mapIso
+      (WeilSheaf.derivedLowerShriekFourierKernelTensorIso ψ F ≪≫
+        (shiftFunctor _ (-1 : ℤ)).mapIso e))
+
+/-- If the transform of `F` is a sheaf `S`, then `R^1 pr₂!(𝒦_ψ ⊗ pr₁^* F) ≅ S`. -/
+noncomputable def WeilSheaf.higherLowerShriekFourierKernelTensorIso :
+    (WeilSheaf.higherLowerShriek k₀ l (affinePlane.snd k₀) 1).obj
+      (WeilSheaf.fourierKernelTensor ψ F) ≅ S :=
+  (WeilComplex.homologySheaf 1).mapIso
+      (WeilSheaf.derivedLowerShriekFourierKernelTensorIso ψ F ≪≫
+        (shiftFunctor _ (-1 : ℤ)).mapIso e) ≪≫
+    WeilComplex.homologySheafShiftIso _ (-1) 1 0 (by norm_num) ≪≫
+    WeilSheaf.toComplexCompHomologySheafIso.app S
+
+end Kernel
+
 end AlgebraicGeometry

@@ -30,6 +30,8 @@ every term on the right is `ι`-real since `K` is, so all the traces of the powe
   dividing `n ≠ 0` is the image of an `𝔽_{qⁿ}`-rational point.
 - `AlgebraicGeometry.WeilSheaf.IsReal.traceFunction`: the trace function of an `ι`-real Weil
   sheaf has real `ι`-image.
+- `AlgebraicGeometry.WeilSheaf.isZero_homologySheaf_derivedLowerShriek_toComplex_of_neg`: `Rf_!K`
+  vanishes in negative degrees.
 - `AlgebraicGeometry.WeilSheaf.isReal_higherLowerShriek_one`: reality of `R¹f_!K` when `Rf_!K` is
   concentrated in degree one.
 - `AlgebraicGeometry.WeilSheaf.isReal_higherLowerShriek_snd_one`
@@ -82,6 +84,28 @@ theorem IsReal.traceFunction {ι : PadicAlgCl l →+* ℂ} {F : WeilSheaf k₀ l
   rw [traceFunction_eq_trace_frobeniusEnd_stalk_pow F n x ⟨_, hx⟩ rfl]
   exact (FrobeniusModule.isReal_iff_forall_trace_pow ι _).1 (hF _) _
 
+attribute [local instance] Compactification.over in
+/-- The direct image with compact support `Rf_!K` of a Weil sheaf has no cohomology sheaves in
+negative degrees: `Rf_! = Rḡ_* ∘ ī_!` carries `K` placed in degree zero to the total right
+derived functor of `ḡ_*` applied to the sheaf `ī_!K` placed in degree zero. -/
+theorem isZero_homologySheaf_derivedLowerShriek_toComplex_of_neg (f : X ⟶ Y)
+    [f.IsOver (Spec (CommRingCat.of k₀))] [IsSeparated f] [LocallyOfFiniteType f]
+    [QuasiCompact f] [LocallyOfFiniteType (Y ↘ Spec (CommRingCat.of k₀))]
+    [QuasiCompact (Y ↘ Spec (CommRingCat.of k₀))]
+    [QuasiSeparated (Y ↘ Spec (CommRingCat.of k₀))] (K : WeilSheaf k₀ l X) {ν : ℤ}
+    (hν : ν < 0) :
+    IsZero ((WeilComplex.homologySheaf ν).obj
+      ((WeilComplex.derivedLowerShriek k₀ l f).obj (toComplex.obj K))) := by
+  let c := HasCompactification.compactification f (hf := hasCompactification_of_over (k₀ := k₀) f)
+  rw [WeilComplex.isZero_homologySheaf_obj_iff]
+  have := (ProEtaleWeilSheaf.lowerStar k₀ l c.g).isGE_rightDerivedFunctor_obj_singleFunctor
+    ((ProEtaleWeilSheaf.extensionByZero k₀ l c.i).obj K.obj)
+  exact (_root_.DerivedCategory.isZero_of_isGE (hX := this) _ 0 ν hν).of_iso
+    ((_root_.DerivedCategory.homologyFunctor _ ν).mapIso
+      ((ProEtaleWeilSheaf.lowerStar k₀ l c.g).rightDerivedFunctor.mapIso
+        (((ProEtaleWeilSheaf.extensionByZero k₀ l c.i).mapDerivedCategorySingleFunctor 0).app
+          K.obj)))
+
 /-- **Reality survives a direct image concentrated in degree one.** Let `f : X ⟶ Y` be a
 separated morphism of finite type of `k₀`-schemes and `K` an `ι`-real Weil sheaf on `X` such
 that `Rf_!K` has no cohomology sheaves outside degree one. Then `R¹f_!K` is `ι`-real.
@@ -92,8 +116,8 @@ is minus that of `Rf_!K`, the sum of the trace function of `K` over the fibre by
 trace formula (`AlgebraicGeometry.WeilComplex.traceFunction_derivedLowerShriek`). Each term is
 `ι`-real (`AlgebraicGeometry.WeilSheaf.IsReal.traceFunction`), so all the traces of the powers of
 `F_ξ` are `ι`-real, hence so is `det(1 - T F_ξ)` (`FrobeniusModule.isReal_iff_forall_trace_pow`).
-(blueprint: `lem-fd-realness-pushforward`, for a general `f`) -/
-theorem isReal_higherLowerShriek_one {ι : PadicAlgCl l →+* ℂ} (f : X ⟶ Y)
+(blueprint: `lem-fd-realness-pushforward`, for a general `f`, vanishing stated on `ℤ`) -/
+theorem isReal_higherLowerShriek_one_of_isZero_homologySheaf {ι : PadicAlgCl l →+* ℂ} (f : X ⟶ Y)
     [f.IsOver (Spec (CommRingCat.of k₀))] [IsSeparated f] [LocallyOfFiniteType f]
     [QuasiCompact f] [LocallyOfFiniteType (Y ↘ Spec (CommRingCat.of k₀))]
     [QuasiCompact (Y ↘ Spec (CommRingCat.of k₀))]
@@ -131,6 +155,25 @@ theorem isReal_higherLowerShriek_one {ι : PadicAlgCl l →+* ℂ} (f : X ⟶ Y)
   rw [WeilComplex.traceFunction_toComplex]
   exact hK.traceFunction _ _
 
+/-- **Reality survives a direct image concentrated in degree one**, with the vanishing of the
+higher direct images `Rᵛf_!K` assumed for `ν ∈ ℕ`, `ν ≠ 1`: in negative degrees they vanish
+automatically
+(`AlgebraicGeometry.WeilSheaf.isZero_homologySheaf_derivedLowerShriek_toComplex_of_neg`).
+See `AlgebraicGeometry.WeilSheaf.isReal_higherLowerShriek_one_of_isZero_homologySheaf`.
+(blueprint: `lem-fd-realness-pushforward`, for a general `f`) -/
+theorem isReal_higherLowerShriek_one {ι : PadicAlgCl l →+* ℂ} (f : X ⟶ Y)
+    [f.IsOver (Spec (CommRingCat.of k₀))] [IsSeparated f] [LocallyOfFiniteType f]
+    [QuasiCompact f] [LocallyOfFiniteType (Y ↘ Spec (CommRingCat.of k₀))]
+    [QuasiCompact (Y ↘ Spec (CommRingCat.of k₀))]
+    [QuasiSeparated (Y ↘ Spec (CommRingCat.of k₀))] {K : WeilSheaf k₀ l X} (hK : K.IsReal ι)
+    (hvan : ∀ ν : ℕ, ν ≠ 1 → IsZero ((higherLowerShriek k₀ l f ν).obj K)) :
+    ((higherLowerShriek k₀ l f 1).obj K).IsReal ι := by
+  refine isReal_higherLowerShriek_one_of_isZero_homologySheaf f hK fun ν hν ↦ ?_
+  rcases lt_or_ge ν 0 with h | h
+  · exact isZero_homologySheaf_derivedLowerShriek_toComplex_of_neg f K h
+  · obtain ⟨n, rfl⟩ := Int.eq_ofNat_of_zero_le h
+    exact hvan n (by omega)
+
 /-- **Reality survives the Fourier projection.** Let `K` be an `ι`-real Weil sheaf on the
 affine plane `𝔸¹ ×_{k₀} 𝔸¹` such that `Rpr₂!K` has no cohomology sheaves outside degree one,
 for the second projection `pr₂ : 𝔸¹ ×_{k₀} 𝔸¹ ⟶ 𝔸¹`. Then `R¹pr₂!K` is `ι`-real. This is the
@@ -138,8 +181,7 @@ case `f = pr₂` of `AlgebraicGeometry.WeilSheaf.isReal_higherLowerShriek_one`.
 (blueprint: `lem-fd-realness-pushforward`) -/
 theorem isReal_higherLowerShriek_snd_one {ι : PadicAlgCl l →+* ℂ}
     {K : WeilSheaf k₀ l (affinePlane k₀)} (hK : K.IsReal ι)
-    (hvan : ∀ ν : ℤ, ν ≠ 1 → IsZero ((WeilComplex.homologySheaf ν).obj
-      ((WeilComplex.derivedLowerShriek k₀ l (affinePlane.snd k₀)).obj (toComplex.obj K)))) :
+    (hvan : ∀ ν : ℕ, ν ≠ 1 → IsZero ((higherLowerShriek k₀ l (affinePlane.snd k₀) ν).obj K)) :
     ((higherLowerShriek k₀ l (affinePlane.snd k₀) 1).obj K).IsReal ι :=
   isReal_higherLowerShriek_one _ hK hvan
 

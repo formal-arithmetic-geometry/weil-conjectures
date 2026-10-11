@@ -44,9 +44,9 @@ noncomputable def linearHom (M : FrobeniusModule.{u, v} K) (N : FrobeniusModule.
 
 /-- The Frobenius of `Hom_K(M, N)` sends `f` to `F_N ∘ f ∘ F_M⁻¹`. -/
 lemma linearHom_frobenius_apply (M : FrobeniusModule.{u, v} K) (N : FrobeniusModule.{t, v} K)
-    (f : M.carrier →ₗ[K] N.carrier) (x : M.carrier) :
-    ((M.linearHom N).frobenius f : M.carrier →ₗ[K] N.carrier) x =
-      N.frobenius (f (M.frobenius.symm x)) :=
+    (f : M.carrier →ₗ[K] N.carrier) :
+    (M.linearHom N).frobenius f =
+      N.frobenius.toLinearMap ∘ₗ f ∘ₗ M.frobenius.symm.toLinearMap :=
   rfl
 
 end FrobeniusModule
@@ -197,6 +197,40 @@ lemma evaluationPairing_stalkAt_tensorObj_frobenius {F : WeilSheaf k₀ l X} (hF
     Mod.evaluationPairing_apply]
   exact ModuleCat.tmul_eq_of_tensorHom_comp h d x
 
+/-- The `ℚ̄_ℓ`-linear isomorphism `(F ⊗ G)_s ≅ Hom((F^∨)_s, G_s)` induced by the evaluation
+`[F^∨, G] ⊗ F^∨ ⟶ G`; it is bijective since `F^∨` is lisse
+(`AlgebraicGeometry.ProEtale.IsAdicLisseSheaf.bijective_evaluationPairing_of_lisse`). -/
+noncomputable def stalkAtTensorObjLinearEquiv {F : WeilSheaf k₀ l X} (hF : F.IsLisse)
+    (G : WeilSheaf k₀ l X) :
+    ((F.tensorObj G hF).stalkAt s m hs).carrier ≃ₗ[PadicAlgCl l]
+      (((F.dual hF).stalkAt s m hs).carrier →ₗ[PadicAlgCl l] (G.stalkAt s m hs).carrier) :=
+  LinearEquiv.ofBijective
+    (WeilCoefficients.homLinearMap
+      (Mod.evaluationPairing (stalkFunctor l s) (F.dual hF).obj.carrier G.obj.carrier))
+    (WeilCoefficients.bijective_homLinearMap
+      (IsAdicLisseSheaf.bijective_evaluationPairing_of_lisse hF.dual _ s))
+
+lemma stalkAtTensorObjLinearEquiv_apply {F : WeilSheaf k₀ l X} (hF : F.IsLisse)
+    (G : WeilSheaf k₀ l X) (d : ((F.tensorObj G hF).stalkAt s m hs).carrier)
+    (x : ((F.dual hF).stalkAt s m hs).carrier) :
+    stalkAtTensorObjLinearEquiv s m hs hF G d x =
+      Mod.evaluationPairing (stalkFunctor l s) (F.dual hF).obj.carrier G.obj.carrier d x :=
+  rfl
+
+/-- The isomorphism `(F ⊗ G)_s ≅ Hom((F^∨)_s, G_s)` intertwines the Frobenius of `(F ⊗ G)_s`
+with `f ↦ F_G ∘ f ∘ F_{F^∨}⁻¹`. -/
+lemma stalkAtTensorObjLinearEquiv_frobenius {F : WeilSheaf k₀ l X} (hF : F.IsLisse)
+    (G : WeilSheaf k₀ l X) (d : ((F.tensorObj G hF).stalkAt s m hs).carrier) :
+    stalkAtTensorObjLinearEquiv s m hs hF G (((F.tensorObj G hF).stalkAt s m hs).frobenius d) =
+      (G.stalkAt s m hs).frobenius.toLinearMap ∘ₗ stalkAtTensorObjLinearEquiv s m hs hF G d ∘ₗ
+        ((F.dual hF).stalkAt s m hs).frobenius.symm.toLinearMap := by
+  refine LinearMap.ext fun x ↦ ?_
+  obtain ⟨y, rfl⟩ := ((F.dual hF).stalkAt s m hs).frobenius.surjective x
+  rw [LinearMap.comp_apply, LinearMap.comp_apply, LinearEquiv.coe_coe, LinearEquiv.coe_coe,
+    LinearEquiv.symm_apply_apply, stalkAtTensorObjLinearEquiv_apply,
+    stalkAtTensorObjLinearEquiv_apply]
+  exact evaluationPairing_stalkAt_tensorObj_frobenius s m hs hF G d y
+
 /-- The stalk of the tensor product `F ⊗ G = [F^∨, G]` at a geometric point is
 `Hom(F^∨_s, G_s)` with the Frobenius `f ↦ F_G ∘ f ∘ F_{F^∨}⁻¹`: the pairing of stalks induced by
 the evaluation is perfect
@@ -207,15 +241,8 @@ noncomputable def stalkAtTensorObjEquiv {F : WeilSheaf k₀ l X} (hF : F.IsLisse
     (G : WeilSheaf k₀ l X) :
     ((F.tensorObj G hF).stalkAt s m hs).Equiv
       (((F.dual hF).stalkAt s m hs).linearHom (G.stalkAt s m hs)) where
-  toLinearEquiv := LinearEquiv.ofBijective
-    (WeilCoefficients.homLinearMap
-      (Mod.evaluationPairing (stalkFunctor l s) (F.dual hF).obj.carrier G.obj.carrier))
-    (WeilCoefficients.bijective_homLinearMap
-      (IsAdicLisseSheaf.bijective_evaluationPairing_of_lisse hF.dual _ s))
-  map_frobenius d := LinearMap.ext fun x ↦ by
-    obtain ⟨y, rfl⟩ := ((F.dual hF).stalkAt s m hs).frobenius.surjective x
-    rw [FrobeniusModule.linearHom_frobenius_apply, LinearEquiv.symm_apply_apply]
-    exact evaluationPairing_stalkAt_tensorObj_frobenius s m hs hF G d y
+  toLinearEquiv := stalkAtTensorObjLinearEquiv s m hs hF G
+  map_frobenius := stalkAtTensorObjLinearEquiv_frobenius s m hs hF G
 
 end TensorStalk
 

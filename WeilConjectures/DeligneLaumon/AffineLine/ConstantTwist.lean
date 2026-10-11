@@ -70,10 +70,10 @@ noncomputable def constantTwistEquivalence (b : (PadicAlgCl l)ˣ) :
   let P := WeilSheaf.objectProperty k₀ l X
   { functor := constantTwistFunctor b
     inverse := P.liftFullSubcategory P E.inverse fun _ hF ↦ hF
-    unitIso := NatIso.ofComponents (fun F ↦ P.isoMk (E.unitIso.app F.obj)) fun f ↦
+    unitIso := NatIso.ofComponents (fun F ↦ P.isoMk (E.unitIso.app F.obj)) fun _ ↦
       ObjectProperty.hom_ext _ (IsoAlgebra.hom_ext
         ((Category.comp_id _).trans (Category.id_comp _).symm))
-    counitIso := NatIso.ofComponents (fun F ↦ P.isoMk (E.counitIso.app F.obj)) fun f ↦
+    counitIso := NatIso.ofComponents (fun F ↦ P.isoMk (E.counitIso.app F.obj)) fun _ ↦
       ObjectProperty.hom_ext _ (IsoAlgebra.hom_ext
         ((Category.comp_id _).trans (Category.id_comp _).symm))
     functor_unitIso_comp _ := ObjectProperty.hom_ext _ (IsoAlgebra.hom_ext (Category.id_comp _)) }

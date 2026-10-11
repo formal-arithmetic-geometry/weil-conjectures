@@ -204,10 +204,11 @@ theorem exists_iso_constantTwist_of_iso_unit
     rw [← Category.comp_id (modHomOfGlobalSection F a), ← e.hom_inv_id, ← Category.assoc, h,
       zero_comp])
   have : IsIso (modHomOfGlobalSection F a) := IsIso.of_isIso_comp_right _ e.hom
-  have : IsIso (((WeilSheaf.objectProperty k₀ l U).ι ⋙
-      Endofunctor.IsoAlgebra.forget (WeilSheaf.frobeniusPullback k₀ l U)).map i) := this
-  have : IsIso i := isIso_of_reflects_iso i ((WeilSheaf.objectProperty k₀ l U).ι ⋙
-      Endofunctor.IsoAlgebra.forget (WeilSheaf.frobeniusPullback k₀ l U))
+  have : IsIso ((Endofunctor.IsoAlgebra.forget (WeilSheaf.frobeniusPullback k₀ l U)).map
+      ((WeilSheaf.objectProperty k₀ l U).ι.map i)) := this
+  have : IsIso ((WeilSheaf.objectProperty k₀ l U).ι.map i) :=
+    isIso_of_reflects_iso _ (Endofunctor.IsoAlgebra.forget _)
+  have : IsIso i := (ObjectProperty.fullyFaithfulι _).isIso_of_isIso_map i
   exact ⟨b, ⟨(asIso i).symm⟩⟩
 
 end WeilSheaf

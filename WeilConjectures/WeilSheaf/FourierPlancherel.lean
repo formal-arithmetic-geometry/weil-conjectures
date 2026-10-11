@@ -8,6 +8,7 @@ module
 public import WeilConjectures.WeilSheaf.Fourier
 public import WeilConjectures.WeilSheaf.HomologyShift
 public import WeilConjectures.WeilSheaf.StalkIso
+public import WeilConjectures.WeilSheaf.TraceFormula
 
 /-!
 # Trace energies of Weil complexes and the Plancherel identity
@@ -25,8 +26,7 @@ energy at level `n` by `qⁿ`.
 
 ## Main declarations
 
-- `AlgebraicGeometry.WeilSheaf.traceFunction_congr`,
-  `AlgebraicGeometry.WeilComplex.traceFunction_congr`: invariance of trace functions under
+- `AlgebraicGeometry.WeilComplex.traceFunction_congr`: invariance of trace functions under
   isomorphism.
 - `AlgebraicGeometry.WeilSheaf.traceFunction_shift_toComplex`: `t_{F[1]} = -t_F`.
 - `AlgebraicGeometry.WeilComplex.traceEnergy`: the trace energy of a Weil complex.
@@ -46,16 +46,6 @@ variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime] [Fa
 section
 
 variable {X : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
-
-/-- Isomorphic Weil sheaves have the same trace function: an isomorphism induces isomorphisms of
-Frobenius modules between the geometric stalks, which have the same characteristic polynomial of
-the Frobenius. -/
-theorem WeilSheaf.traceFunction_congr {F G : WeilSheaf k₀ l X} (e : F ≅ G) (n : ℕ)
-    (x : (X ↘ Spec (CommRingCat.of k₀)).fieldPoints (FiniteField.galoisExtension k₀ n)) :
-    F.traceFunction n x = G.traceFunction n x := by
-  obtain ⟨e'⟩ := nonempty_equiv_stalkAt_of_iso _ _ _ e
-  rw [traceFunction, traceFunction, LinearMap.trace_eq_neg_charpoly_nextCoeff,
-    LinearMap.trace_eq_neg_charpoly_nextCoeff, e'.charpoly_frobeniusEnd]
 
 /-- Isomorphic Weil complexes have the same trace function: their cohomology sheaves are
 isomorphic. -/

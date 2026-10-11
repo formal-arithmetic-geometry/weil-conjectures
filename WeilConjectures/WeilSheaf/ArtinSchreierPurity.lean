@@ -5,6 +5,7 @@ Authors: Claude
 -/
 module
 
+public import WeilConjectures.PointCount
 public import WeilConjectures.SixFunctors.ProEtale.Adic.ConstantGlobalSections
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseStalk
 public import WeilConjectures.WeilSheaf.ArtinSchreierTrace
@@ -76,6 +77,13 @@ lemma finrank_globalSections_of_iso_biproduct {K : Type u} [Field K]
 
 end ProEtale
 
+/-- An endomorphism of a line is multiplication by its trace. -/
+lemma _root_.LinearMap.eq_trace_smul_id_of_finrank_eq_one {K V : Type*} [Field K]
+    [AddCommGroup V] [Module K V] [FiniteDimensional K V] (h : Module.finrank K V = 1)
+    (f : V →ₗ[K] V) : f = LinearMap.trace K V f • LinearMap.id := by
+  obtain ⟨c, rfl, -⟩ := LinearMap.existsUnique_eq_smul_id_of_finrank_eq_one h f
+  rw [map_smul, LinearMap.trace_id, h, Nat.cast_one, smul_eq_mul, mul_one]
+
 variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime] [Fact (ringChar k₀ ≠ l)]
 
 local notation "ĀS" => affineLine.geometricArtinSchreierMap k₀
@@ -134,6 +142,138 @@ lemma finrank_stalkObj_image_artinSchreierIdempotent (ψ : AddChar k₀ (PadicAl
     ((ProEtale.upperStarComp _ t ĀS).app _))).finrank_eq).trans ?_
   exact ProEtale.finrank_globalSections_of_iso_biproduct e'
 
+section UpperStar
+
+variable {X Y : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
+  [Y.Over (Spec (CommRingCat.of k₀))]
+
+/-- **The local Frobenius of a pullback.** At a closed point `z` of `X` over `x = φ z`, the local
+Frobenius of `φ^* F` has the characteristic polynomial of `Fₓʳ`, `r = [κ(z) : κ(x)]`. -/
+theorem charpoly_frobeniusEnd_stalk_upperStar (φ : X ⟶ Y) [φ.IsOver (Spec (CommRingCat.of k₀))]
+    (F : WeilSheaf k₀ l Y) (z : X.finitePoints) :
+    (((upperStar φ).obj F).stalk z).frobeniusEnd.charpoly =
+      ((F.stalk ⟨φ.base z.1, Scheme.Hom.map_mem_finitePoints φ z.2⟩).frobeniusEnd ^
+        ((X ↘ Spec (CommRingCat.of k₀)).degreeOver z.1 /
+          (Y ↘ Spec (CommRingCat.of k₀)).degreeOver (φ.base z.1))).charpoly := by
+  have hφ := comp_over φ (Spec (CommRingCat.of k₀))
+  let x : Y.finitePoints := ⟨φ.base z.1, Scheme.Hom.map_mem_finitePoints φ z.2⟩
+  have hdvd : (Y ↘ Spec (CommRingCat.of k₀)).degreeOver x.1 ∣
+      (X ↘ Spec (CommRingCat.of k₀)).degreeOver z.1 := by
+    have := Scheme.Hom.degreeOver_dvd_degreeOver_comp φ (Y ↘ Spec (CommRingCat.of k₀)) z.2
+    rwa [hφ] at this
+  set s := (X ↘ Spec (CommRingCat.of k₀)).geometricFiberPointOfFinitePoint z
+  have ht := Scheme.Hom.geometricFiberPointOfFinitePoint_comp_geometricGaloisFrobenius_pow
+    (X ↘ Spec (CommRingCat.of k₀)) z
+  have ht' : (s ≫ Scheme.Hom.geometricFiberMap φ hφ) ≫
+      ((Y ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^
+        (X ↘ Spec (CommRingCat.of k₀)).degreeOver z.1).hom =
+      (specGeometricFrobenius k₀ ^ (X ↘ Spec (CommRingCat.of k₀)).degreeOver z.1).hom ≫
+        (s ≫ Scheme.Hom.geometricFiberMap φ hφ) := by
+    rw [Category.assoc, Scheme.Hom.geometricFiberMap_comp_geometricGaloisFrobenius_pow,
+      ← Category.assoc, ht, Category.assoc]
+  have : IsIso (𝟙 _ : (Scheme.Hom.geometricFiberMap φ hφ)^*[WeilCoefficients.{u} l].obj
+      F.obj.carrier.X ⟶ ((WeilSheaf.upperStar φ).obj F).obj.carrier.X) :=
+    inferInstanceAs (IsIso (𝟙 ((Scheme.Hom.geometricFiberMap φ hφ)^*[WeilCoefficients.{u} l].obj
+      F.obj.carrier.X)))
+  obtain ⟨e₁⟩ := nonempty_equiv_stalkAt_of_upperStar (G := (WeilSheaf.upperStar φ).obj F)
+    (θ := 𝟙 _) (upperStar_frobeniusStr_compatible (φ := φ) F) s _ ht ht'
+  have hbase : (((Y ↘ Spec (CommRingCat.of k₀)).geometricFiberPointOfFinitePoint x) ≫
+      (Y ↘ Spec (CommRingCat.of k₀)).geometricFiberProj).base
+        (IsLocalRing.closedPoint (AlgebraicClosure k₀)) = x.1 :=
+    Scheme.Hom.geometricFiberPointOfFinitePoint_comp_geometricFiberProj_base _ x
+  have hss' : (((Y ↘ Spec (CommRingCat.of k₀)).geometricFiberPointOfFinitePoint x) ≫
+      (Y ↘ Spec (CommRingCat.of k₀)).geometricFiberProj).base
+        (IsLocalRing.closedPoint (AlgebraicClosure k₀)) =
+      ((s ≫ Scheme.Hom.geometricFiberMap φ hφ) ≫
+        (Y ↘ Spec (CommRingCat.of k₀)).geometricFiberProj).base
+          (IsLocalRing.closedPoint (AlgebraicClosure k₀)) := by
+    rw [hbase, Category.assoc, Scheme.Hom.geometricFiberMap_comp_geometricFiberProj,
+      ← Category.assoc]
+    exact (congrArg φ.base
+      (Scheme.Hom.geometricFiberPointOfFinitePoint_comp_geometricFiberProj_base _ z)).symm
+  exact e₁.charpoly_frobeniusEnd.trans (F.charpoly_frobeniusEnd_stalkAt_of_dvd _ _ hss'
+    (hbase ▸ x.2) hdvd
+    (Scheme.Hom.geometricFiberPointOfFinitePoint_comp_geometricGaloisFrobenius_pow _ x) ht')
+
+/-- The stalks of a pullback have the dimensions of the stalks below. -/
+theorem finrank_stalk_upperStar (φ : X ⟶ Y) [φ.IsOver (Spec (CommRingCat.of k₀))]
+    (F : WeilSheaf k₀ l Y) (z : X.finitePoints) :
+    Module.finrank (PadicAlgCl l) (((upperStar φ).obj F).stalk z).carrier =
+      Module.finrank (PadicAlgCl l)
+        (F.stalk ⟨φ.base z.1, Scheme.Hom.map_mem_finitePoints φ z.2⟩).carrier := by
+  rw [← LinearMap.charpoly_natDegree, charpoly_frobeniusEnd_stalk_upperStar,
+    LinearMap.charpoly_natDegree]
+
+end UpperStar
+
+/-- The stalks of the Artin–Schreier sheaf `ℒ_{ψ(a x)}` are lines. -/
+theorem finrank_stalk_artinSchreier (ψ : AddChar k₀ (PadicAlgCl l)) (a : k₀)
+    (x : (affineLine k₀).finitePoints) :
+    Module.finrank (PadicAlgCl l) ((artinSchreier ψ a).stalk x).carrier = 1 :=
+  (finrank_stalk_upperStar _ _ x).trans (finrank_stalkObj_image_artinSchreierIdempotent ψ _)
+
+/-- **The local Frobenius of an Artin–Schreier sheaf.** At a closed point `x` of the line, the
+local Frobenius of `ℒ_{ψ(a x)}` is multiplication by `ψ(c)`, for some `c ∈ k₀` which does not
+depend on `ψ`: the stalk is a line, so the Frobenius is multiplication by its trace, the value
+`ψ(Tr(a x))` of the trace function at an `𝔽_{q^d}`-point over `x`, `d = [κ(x) : k₀]`
+(`AlgebraicGeometry.WeilSheaf.traceFunction_artinSchreier`). -/
+theorem exists_frobeniusEnd_stalk_artinSchreier (a : k₀) (x : (affineLine k₀).finitePoints) :
+    ∃ c : k₀, ∀ ψ : AddChar k₀ (PadicAlgCl l),
+      ((artinSchreier ψ a).stalk x).frobeniusEnd = ψ c • LinearMap.id := by
+  set f := affineLine k₀ ↘ Spec (CommRingCat.of k₀)
+  set d := f.degreeOver x.1
+  have hd : d ≠ 0 := Scheme.Hom.degreeOver_ne_zero _ x.2
+  have : Finite (FiniteField.galoisExtension k₀ d) := Module.finite_of_finite k₀
+  -- an `𝔽_{q^d}`-rational point over `x`
+  obtain ⟨y, hy⟩ : ∃ y : f.fieldPoints (FiniteField.galoisExtension k₀ d),
+      y.1.base (IsLocalRing.closedPoint _) = x.1 := by
+    let := (f.residueFieldAlgebraMap x.1).toAlgebra
+    obtain ⟨ψ⟩ : Nonempty ((affineLine k₀).residueField x.1 →ₐ[k₀]
+        FiniteField.galoisExtension k₀ d) := by
+      rw [FiniteField.nonempty_algHom_iff_finrank_dvd, FiniteField.finrank_galoisExtension k₀ d hd]
+      exact dvd_rfl
+    obtain ⟨y, hy⟩ := (f.exists_fieldPoints_base_eq_iff _ x.1).2
+      ⟨CommRingCat.ofHom ψ.toRingHom, ψ.comp_algebraMap⟩
+    exact ⟨y, (congrArg y.1.base (Subsingleton.elim _ _)).trans hy⟩
+  refine ⟨Algebra.trace k₀ (FiniteField.galoisExtension k₀ d)
+    (algebraMap k₀ _ a * (Scheme.ΓSpecIso (.of _)).hom.hom
+      (y.1.appTop (AffineSpace.coord _ PUnit.unit))), fun ψ ↦ ?_⟩
+  have h := traceFunction_eq_trace_frobeniusEnd_stalk_pow (artinSchreier ψ a) d y x hy
+  rw [Nat.div_self (Nat.pos_of_ne_zero hd), pow_one, traceFunction_artinSchreier ψ a hd y] at h
+  rw [h]
+  exact LinearMap.eq_trace_smul_id_of_finrank_eq_one (finrank_stalk_artinSchreier ψ a x) _
+
 end WeilSheaf
+
+/-- The values of an additive character of a finite field are roots of unity, of modulus one
+under any embedding into `ℂ`. -/
+lemma AddChar.norm_map_apply_eq_one {K : Type*} [Field K] [Finite K] {R : Type*} [CommRing R]
+    (ψ : AddChar K R) (ι : R →+* ℂ) (c : K) : ‖ι (ψ c)‖ = 1 := by
+  refine Complex.norm_eq_one_of_pow_eq_one (n := ringChar K) ?_
+    (CharP.char_ne_zero_of_finite K _)
+  rw [← map_pow, ← AddChar.map_nsmul_eq_pow, nsmul_eq_mul, ringChar.Nat.cast_ringChar, zero_mul,
+    AddChar.map_zero_eq_one, map_one]
+
+/-- **Purity of the Artin–Schreier sheaf.** The Artin–Schreier sheaf `ℒ_{ψ(a x)}` on the affine
+line is punctually `ι`-pure of weight zero: at every closed point its local Frobenius is
+multiplication by a value of `ψ`, a root of unity
+(`AlgebraicGeometry.WeilSheaf.exists_frobeniusEnd_stalk_artinSchreier`).
+(blueprint: `lem-fd-as-purity`) -/
+theorem isPunctuallyPureOfWeight_artinSchreier (ι : PadicAlgCl l →+* ℂ)
+    (ψ : AddChar k₀ (PadicAlgCl l)) (a : k₀) :
+    (artinSchreier ψ a).IsPunctuallyPureOfWeight ι 0 := by
+  intro x α hα
+  obtain ⟨c, hc⟩ := WeilSheaf.exists_frobeniusEnd_stalk_artinSchreier (l := l) a x
+  obtain ⟨v, hv⟩ := hα.exists_hasEigenvector
+  rw [Module.End.hasEigenvector_iff, Module.End.mem_eigenspace_iff, hc ψ,
+    LinearMap.smul_apply, LinearMap.id_apply] at hv
+  have hαc : α = ψ c := (smul_left_injective _ hv.2 hv.1).symm
+  rw [hαc, AddChar.norm_map_apply_eq_one ψ ι c, zero_div, Real.rpow_zero]
+
+/-- The Fourier kernel `μ^* ℒ_ψ` is punctually `ι`-pure of weight zero, as a pullback of the
+Artin–Schreier sheaf `ℒ_ψ`. -/
+theorem isPunctuallyPureOfWeight_fourierKernel (ι : PadicAlgCl l →+* ℂ)
+    (ψ : AddChar k₀ (PadicAlgCl l)) : (fourierKernel ψ).IsPunctuallyPureOfWeight ι 0 :=
+  (isPunctuallyPureOfWeight_artinSchreier ι ψ 1).upperStar _
 
 end AlgebraicGeometry

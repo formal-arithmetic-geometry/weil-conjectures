@@ -650,6 +650,7 @@ public import WeilConjectures.ConstructibleSheaf.Restriction
 public import WeilConjectures.ConstructibleSheaf.Simple
 public import WeilConjectures.ConstructibleSheaf.UniversalHomeomorphism
 public import WeilConjectures.Convergence
+public import WeilConjectures.DeligneLaumon.AffineLine.ConstantTwist
 public import WeilConjectures.DeligneLaumon.AffineLine.Defs
 public import WeilConjectures.DeligneLaumon.AffineLine.DegreeOne
 public import WeilConjectures.DeligneLaumon.AffineLine.DenseOpen
@@ -660,6 +661,7 @@ public import WeilConjectures.DeligneLaumon.AffineLine.LocalDuality
 public import WeilConjectures.DeligneLaumon.AffineLine.MiddleExtension
 public import WeilConjectures.DeligneLaumon.AffineLine.Perverse
 public import WeilConjectures.DeligneLaumon.AffineLine.Purity
+public import WeilConjectures.DeligneLaumon.AffineLine.RealPushforward
 public import WeilConjectures.DeligneLaumon.AffineLine.TraceEnergy
 public import WeilConjectures.DeligneLaumon.AffineLine.Upper
 public import WeilConjectures.DeligneLaumon.AffineLine.ZeroExtension
@@ -1816,6 +1818,7 @@ public import WeilConjectures.WeilSheaf.StalkUpperStar
 public import WeilConjectures.WeilSheaf.TateTwist
 public import WeilConjectures.WeilSheaf.TateTwistCohomology
 public import WeilConjectures.WeilSheaf.Tensor
+public import WeilConjectures.WeilSheaf.TraceFormula
 public import WeilConjectures.WeilSheaf.TraceIsomorphism
 public import WeilConjectures.WeilSheaf.TraceSeries
 public import WeilConjectures.WeilSheaf.Triangle
@@ -1829,6 +1832,7 @@ public import WeilConjectures.ZetaLinearAlgebra.DetTrace
 public import WeilConjectures.ZetaLinearAlgebra.Fatou
 public import WeilConjectures.ZetaLinearAlgebra.FrobeniusModule
 public import WeilConjectures.ZetaLinearAlgebra.FrobeniusModule.Map
+public import WeilConjectures.ZetaLinearAlgebra.FrobeniusModule.Real
 public import WeilConjectures.ZetaLinearAlgebra.FrobeniusModule.TraceSeries
 public import WeilConjectures.ZetaLinearAlgebra.FunctionalEquation
 public import WeilConjectures.ZetaLinearAlgebra.Hankel
