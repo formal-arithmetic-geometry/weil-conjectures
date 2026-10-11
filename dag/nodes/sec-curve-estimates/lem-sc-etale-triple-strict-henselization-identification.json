@@ -13,29 +13,90 @@
  },
  "kind": "statement",
  "title": "A strict henselization triple has the same strict henselization",
- "statement": "Let R be a commutative local ring with maximal ideal m and separable residue-field closure K, let C be the strict henselization of R obtained from the filtered category of pointed etale R-algebra triples (S,q,phi) with q over m and residue embedding into K [lem-weil-pbc-strict-henselization-triples]. For every such triple, put A=S_q and let A^{\\mathrm{sh}} be its strict henselization with respect to the induced embedding of its residue field into K. Then there is a canonical isomorphism A^{\\mathrm{sh}}\\cong C compatible with S\\to A\\to A^{\\mathrm{sh}} and S\\to C; under it qA^{\\mathrm{sh}} identifies with the maximal ideal mC, and the qA^{\\mathrm{sh}}-adic completion identifies with \\varprojlim_n C/(mC)^n [def-weil-pbc-adic-completion].",
+ "statement": "Let R be a commutative local ring with maximal ideal m and separable residue-field closure K, let C be the strict henselization of R obtained from the filtered category of pointed etale R-algebra triples (S,q,phi) with q over m and residue embedding into K [lem-weil-pbc-strict-henselization-triples]. For every such triple, put A=S_q and let A^{\\mathrm{sh}} be its strict henselization with respect to the residue-field embedding phi: $\\kappa(q)\\to K$. Then there is a canonical isomorphism A^{\\mathrm{sh}}\\cong C compatible with S\\to A\\to A^{\\mathrm{sh}} and S\\to C; under it qA^{\\mathrm{sh}} identifies with the maximal ideal mC, and the qA^{\\mathrm{sh}}-adic completion, defined as \\varprojlim_n A^{\\mathrm{sh}}/(qA^{\\mathrm{sh}})^n, identifies with \\varprojlim_n C/(mC)^n.",
  "source": {
   "document": "literature/stacks-project/more-algebra.tex",
   "place": "Lemma Tag 06LJ (lemma-henselization-noetherian), proof part (c), paragraph beginning 'To finish the proof of (c)', using Algebra Tag 04GW (lemma-strict-henselization-different) and Tag 04GP (lemma-strict-henselization)"
  },
  "stmt_deps": [
+  "lem-weil-pbc-strict-henselization-triples"
+ ],
+ "proof": [
+  {
+   "text": "Apply lem-weil-pbc-strict-henselization-triples to $(R,m,K)$ and to $(A,qA,K)$. The field $K$ is separably closed, and its given separable-algebraic extension structure over $\\kappa(m)$ makes it separable algebraic over $\\kappa(q)$ through the map induced by $S\\to A$, so both constructions apply. They give strictly henselian local rings $C$ and $D=A^{\\mathrm{sh}}$, with maximal ideals $m_C=mC$ and $m_D=qD$ and residue field $K$.",
+   "uses": [
+    "lem-weil-pbc-strict-henselization-triples"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Lemma Tag 04GW and Lemma Tag 04GP, items (2)-(5)"
+   }
+  },
+  {
+   "text": "The composite $S\\to C\\to K$ equals $S\\to\\kappa(q)\\to K$, so the preimage of $m_C$ in $S$ is $q$ by the preimage clause of lem-weil-pbc-strict-henselization-triples. Hence $S\\to C$ sends every element outside $q$ to a unit and factors uniquely through the localization $A=S_q$. Thus the maps $S\\to A\\to C$ and $S\\to C$ agree.",
+   "uses": [
+    "lem-weil-pbc-strict-henselization-triples"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Lemma Tag 04GW, item (2), and the universal property of localization"
+   }
+  },
+  {
+   "text": "Use lem-weil-pbc-map-into-henselian-colimit over the base $A$ with source $D$, target $C$, and residue map the identity of $K$ to obtain the unique $A$-algebra map $f:D\\to C$. Use the same lemma over the base $R$ with source $C$, target $D$, and residue map the identity of $K$ to obtain the unique $R$-algebra map $g:C\\to D$. The hypotheses hold because each of $C$ and $D$ is a filtered colimit of etale algebras over its base by the strict-henselization triples construction, and both targets are henselian local with residue field $K$.",
+   "uses": [
+    "lem-weil-pbc-strict-henselization-triples",
+    "lem-weil-pbc-map-into-henselian-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Lemma Tag 08HR (lemma-map-into-henselian-colimit) applied over A and over R"
+   }
+  },
+  {
+   "text": "The composite $f\\circ g$ is an $R$-algebra endomorphism of $C$ with preimage $m_C$ equal to $m_C$ and residue map the identity of $K$, so the uniqueness clause of lem-weil-pbc-map-into-henselian-colimit over $R$ gives $f\\circ g=\\operatorname{id}_C$. The maps $A\\to C\\to D$ and $A\\to D$ agree: they agree on $S$ by Step 2 and the uniqueness clause for the single etale $R$-algebra $S$, and $A=S_q$ is generated from $S$ by inverting elements outside $q$. Therefore $g\\circ f$ is an $A$-algebra endomorphism of $D$ with the same local and residue properties, and uniqueness over $A$ gives $g\\circ f=\\operatorname{id}_D$. The construction of $f$ also gives compatibility $S\\to A\\to D\\to C=S\\to C$.",
+   "uses": [
+    "lem-weil-pbc-map-into-henselian-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Lemma Tag 08HR, uniqueness clause, applied first over R and then over A"
+   }
+  },
+  {
+   "text": "The isomorphism f identifies the maximal ideal m_D=qD with m_C=mC because it is local. Consequently it identifies (qD)^n with (mC)^n and induces isomorphisms D/(qD)^n \\cong C/(mC)^n for all n. By the definition of adic completion [def-weil-pbc-adic-completion], passing to inverse limits identifies the qA^{\\mathrm{sh}}-adic completion with \\varprojlim_n C/(mC)^n.",
+   "uses": [
+    "lem-weil-pbc-map-into-henselian-colimit",
+    "def-weil-pbc-adic-completion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Lemma Tag 04GP, item (4), and the definition of adic completion"
+   }
+  }
+ ],
+ "proof_deps": [
   "lem-weil-pbc-strict-henselization-triples",
+  "lem-weil-pbc-map-into-henselian-colimit",
   "def-weil-pbc-adic-completion"
  ],
- "proof": [],
- "proof_deps": [],
  "mathlib_searches": [
   {
    "tool": "leanfinder",
-   "query": "strict henselization of an etale local algebra equals original strict henselization",
-   "results": "No strict-henselization declaration; hits concern standard etale/formally etale localization declarations.",
+   "query": "strict henselization of an etale local algebra equals the original strict henselization",
+   "results": "StandardEtalePair.instFormallyEtaleRing, Algebra.IsEtaleAt, Algebra.exists_etale_of_isEtaleAt, Algebra.Etale.of_isLocalization_Away, Algebra.Etale.of_isLocalizationAway, Algebra.FormallyEtale.localization_base, Algebra.instEtaleOfIsStandardEtale, Algebra.IsStandardEtale.of_isLocalizationAway; none concerns strict henselization.",
    "date": "2026-10-11",
    "verdict": "no match"
   },
   {
    "tool": "loogle",
-   "query": "flat completion strict henselization over base",
-   "results": "0 hits; parser reported expected end of input.",
+   "query": "StrictHenselization IsLocalRing",
+   "results": "0 hits; unknown identifier StrictHenselization.",
    "date": "2026-10-11",
    "verdict": "no match"
   },
@@ -45,15 +106,58 @@
    "results": "0 hits in Mathlib/RingTheory.",
    "date": "2026-10-11",
    "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "strict henselization invariant under etale localization",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sc-etale-triple-to-sh-completion-flat",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-curve-estimates",
- "unit": "sk-thm-br"
+ "unit": "sk-thm-br",
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Lemma Tag 04GW and Lemma Tag 04GP, with Lemma Tag 08HR for the comparison maps"
+ },
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-sc-etale-triple-strict-henselization-identification",
+  "worker": "stage1",
+  "summary": "Removed the relabelling node lem-sc-localized-triple-colimit because it restated the item after unfolding A^{\\mathrm{sh}}. The proof now directly constructs the comparison maps using lem-weil-pbc-strict-henselization-triples and lem-weil-pbc-map-into-henselian-colimit, proves they are inverse by the uniqueness clauses, and transports the maximal ideal and adic completion using def-weil-pbc-adic-completion.",
+  "blueprint": "Realizes the boundary-stalk strict-henselization construction clause of the blueprint ancestor lem-sc-brauer-zero.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-strict-henselization-triples",
+    "why": "It supplies the strict-henselization triple construction, locality, residue field, maximal ideal, and filtered-etale-colimit facts used to instantiate the item over R and A."
+   },
+   {
+    "node": "lem-weil-pbc-map-into-henselian-colimit",
+    "why": "It supplies the unique maps from the filtered etale colimits C and A^{\\mathrm{sh}} into the opposite henselian local rings, which is the comparison mechanism required by the item."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-strict-henselization-triples",
+  "lem-weil-pbc-map-into-henselian-colimit",
+  "lem-weil-pbc-strict-henselization-triples",
+  "lem-weil-pbc-map-into-henselian-colimit"
+ ],
+ "reviewed": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-shi0047",
+  "group": "C1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-shi0047 (reviewer sub-agent of L); spot-checked: Re-push after R-shi0029: (1) D1 repaired: lem-sc-localized-triple-colimit absent from tree; Steps 1-4 build C and D=A^sh from lem-weil-pbc-strict-henselization-triples over (R,m,K) and (A,qA,K) (K separable algebraic over kappa(q) via phi), S->C factors through S_q (preimage of m_C=ker psi is q), f:D->C over A and g:C->D over R from lem-weil-pbc-map-into-henselian-colimit (C4: targets henselian local, sources filtered etale colimits, primes m_D/m_C lie over qA/m, tau=id_K is a kappa-algebra map), f o g=id_C by uniqueness over R, A->C->D = A->D by uniqueness for etale S plus localization, g o f=id_D by uniqueness over A; no cofinality argument needed; (2) def-weil-pbc-adic-completion in Step 5 uses and proof_deps; (3) TeX in Step 2; (4) split_report and tool_uses rewritten. Statement change (residue embedding named phi, completion written inline) is E7-named and harmless; citer lem-sc-etale-triple-to-sh-completion-flat Step 0 uses exactly iso + qA^sh=mC + completion. No duplicate among henselization nodes (functoriality node is scheme-level). Second reading by C1: no missed fault. FIX more, RETURN less: no repairs needed."
+ }
 }

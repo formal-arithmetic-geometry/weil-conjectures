@@ -3154,3 +3154,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 00:47 L: merged deliver/C1/lemma-weil-pbc-prime-torsion-devissage (reviewer FIX; first push; new nodes: 0)
 - 00:48 L: merged deliver/H1/lem-sc-qcoh-complex-alternating-cech-derived-sections (reviewer FIX; after a return; new nodes: 0)
 - 00:48 UTC L: C1 prime-torsion-devissage FIX d099a5030 (R-ptd0046; step 4 misusing the filtered-colimit node removed, statement says lF[n] killed by n/l).
+- 00:48 L: merged deliver/C1/lem-sc-etale-triple-strict-henselization-identification (reviewer PASS; after a return; new nodes: 0)
