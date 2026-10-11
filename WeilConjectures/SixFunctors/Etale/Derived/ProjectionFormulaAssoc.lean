@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.CategoryTheory.Adjunction.ProjectionMapAssoc
 public import WeilConjectures.SixFunctors.Etale.Derived.OpenImmersionLowerShriekProjection
+public import WeilConjectures.SixFunctors.Etale.Derived.LowerStarProjection
 
 /-!
 # Associativity of the projection formula
@@ -71,6 +72,37 @@ lemma mapDerivedCategoryUpperStarDerivedTensorIso_assoc
     Iso.hom_inv_id_app, id_whiskerRight, Category.id_comp, whisker_exchange_assoc,
     ← associator_naturality_left_assoc, Functor.LaxMonoidal.associativity_inv_assoc,
     Iso.hom_inv_id_assoc]
+
+/-- The projection map `Rp_* M ⊗ᴸ L ⟶ Rp_*(M ⊗ᴸ Lp^* L)` is compatible with the associators. -/
+lemma rightDerivedLowerStarProjectionMap_assoc {Y Z : Scheme.{u}}
+    (p : Z ⟶ Y) (M : DerivedCategory (Sheaf Z.smallEtaleTopology A))
+    (L L' : DerivedCategory (Sheaf Y.smallEtaleTopology A)) :
+    letI := leftDerivedUpperStarOplaxMonoidal A p
+    ((rightDerivedLowerStarProjectionMap A p).app M).app (L ⊗ L') ≫
+        R((p)_*[A]).map (M ◁ Functor.OplaxMonoidal.δ L((p)^*[A]) L L') ≫
+          R((p)_*[A]).map (α_ M (L((p)^*[A]).obj L) (L((p)^*[A]).obj L')).inv =
+      (α_ (R((p)_*[A]).obj M) L L').inv ≫
+        (((rightDerivedLowerStarProjectionMap A p).app M).app L ▷ L') ≫
+          ((rightDerivedLowerStarProjectionMap A p).app (M ⊗ L((p)^*[A]).obj L)).app L' :=
+  letI := leftDerivedUpperStarOplaxMonoidal A p
+  (derivedUpperStarLowerStarAdjunction A p).rightAdjointProjectionMap_assoc M L L'
+
+/-- The projection map `j_!(K ⊗ᴸ Lj^*M) ⟶ j_!K ⊗ᴸ M` of an open immersion is compatible with the
+associators. -/
+lemma derivedOpenImmersionLowerShriekProjectionMap_assoc
+    (K : DerivedCategory (Sheaf U.smallEtaleTopology A))
+    (M M' : DerivedCategory (Sheaf X.smallEtaleTopology A)) :
+    letI := leftDerivedUpperStarMonoidal A j
+    D((j)_!open[A]).map (α_ K (L((j)^*[A]).obj M) (L((j)^*[A]).obj M')).hom ≫
+        D((j)_!open[A]).map (K ◁ μ L((j)^*[A]) M M') ≫
+          ((derivedOpenImmersionLowerShriekProjectionMap A j).app K).app (M ⊗ M') ≫
+            (α_ (D((j)_!open[A]).obj K) M M').inv =
+      ((derivedOpenImmersionLowerShriekProjectionMap A j).app (K ⊗ L((j)^*[A]).obj M)).app M' ≫
+        ((derivedOpenImmersionLowerShriekProjectionMap A j).app K).app M ▷ M' :=
+  letI := leftDerivedUpperStarMonoidal A j
+  (derivedOpenImmersionLowerShriekUpperStarAdjunction A j).projectionMap_assoc L((j)^*[A])
+    (mapDerivedCategoryUpperStarDerivedTensorIso A j).hom
+    (mapDerivedCategoryUpperStarDerivedTensorIso_assoc A j) K M M'
 
 end Etale
 
