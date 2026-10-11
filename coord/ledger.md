@@ -4778,3 +4778,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 13:33 L: merged deliver/E1/lem-sc-affine-perfect-plus-locally-free (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.AffinePerfectPlusLocallyFree AlgebraicGeometry.Scheme.exists_perfect_lift_plus_finiteLocallyFree)
 - 13:34 L: merged deliver/G1/lem-pc-perfect-generation-open-induction-step (stage 2; reviewer FIX; first push; Sheaf.AlgebraicGeometry.PerfectGenerationOpenInduction AlgebraicGeometry.Scheme.exists_perfect_generator_of_open_union_affine)
 - 13:34 L: merged deliver/F1/lem-sc-affine-perfect-plus-shift (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.AffinePerfectPlusShift AlgebraicGeometry.exists_perfect_restrict_iso_directSum_shift)
+- 13:34 L: merged deliver/C1/lem-sc-perfect-degree-zero-fibre-criterion (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.PerfectDegreeZeroFibreCriterion AlgebraicGeometry.perfect_degreeZero_fibre_criterion)
