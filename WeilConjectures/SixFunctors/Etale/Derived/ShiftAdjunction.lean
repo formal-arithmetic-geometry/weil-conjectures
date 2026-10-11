@@ -5,7 +5,7 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.CategoryTheory.DerivedCategory.ExactFunctorShift
+public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 public import WeilConjectures.Mathlib.CategoryTheory.Shift.Adjunction
 public import WeilConjectures.SixFunctors.BaseChange.DerivedUnbounded
 public import WeilConjectures.SixFunctors.Etale.Derived.Shift
@@ -70,21 +70,19 @@ theorem derivedUpperStarLowerStarAdjunction_unit :
   rw [h₁, ← h₃, leftDerivedUpperStarIsoMapDerivedCategory, ← Functor.map_comp,
     Iso.inv_hom_id_app_assoc, h₂]
 
-/-- The derived adjunction `Lg^* ⊣ Rg_*` is compatible with the shifts. -/
-instance commShift_derivedUpperStarLowerStarAdjunction :
-    (derivedUpperStarLowerStarAdjunction A g).CommShift ℤ := by
-  have := (mapDerivedUpperStarLowerStarAdjunction A g).commShift_of_leftAdjoint ℤ
-  have : NatTrans.CommShift (leftDerivedUpperStarIsoMapDerivedCategory A g).inv ℤ :=
-    Functor.CommShift.ofIso_compatibility (leftDerivedUpperStarIsoMapDerivedCategory A g).symm ℤ
-  refine Adjunction.CommShift.mk' _ _ ?_
-  rw [derivedUpperStarLowerStarAdjunction_unit]
-  infer_instance
-
 /-- The identification `Lg^* ≅ D(g^*)` commutes with the shifts, by definition of the shift on
 `Lg^*`. -/
 instance commShift_leftDerivedUpperStarIsoMapDerivedCategory_inv :
     NatTrans.CommShift (leftDerivedUpperStarIsoMapDerivedCategory A g).inv ℤ :=
   Functor.CommShift.ofIso_compatibility (leftDerivedUpperStarIsoMapDerivedCategory A g).symm ℤ
+
+/-- The derived adjunction `Lg^* ⊣ Rg_*` is compatible with the shifts. -/
+instance commShift_derivedUpperStarLowerStarAdjunction :
+    (derivedUpperStarLowerStarAdjunction A g).CommShift ℤ := by
+  have := (mapDerivedUpperStarLowerStarAdjunction A g).commShift_of_leftAdjoint ℤ
+  refine Adjunction.CommShift.mk' _ _ ?_
+  rw [derivedUpperStarLowerStarAdjunction_unit]
+  infer_instance
 
 /-- The identification `Lg^* ≅ D(g^*)` commutes with the shifts. -/
 instance commShift_leftDerivedUpperStarIsoMapDerivedCategory_hom :

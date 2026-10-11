@@ -8,6 +8,7 @@ module
 public import WeilConjectures.SixFunctors.Etale.Derived.Localization
 public import WeilConjectures.SixFunctors.Etale.Derived.ShiftAdjunction
 public import WeilConjectures.SixFunctors.Etale.Derived.Supports
+public import WeilConjectures.SixFunctors.Etale.Derived.Triangulated
 
 /-!
 # Base change of the supported localization triangle
@@ -43,13 +44,6 @@ namespace Etale
 variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
   [MonoidalCategory A] [MonoidalPreadditive A] [SymmetricCategory A] [MonoidalClosed A]
   [Abelian.HasFunctorialFlatResolution A] [HasSmallSiteSheafify A]
-
-omit [HasSmallSiteSheafify A] in
-/-- The derived pullback `Lg^*` is a triangulated functor, being isomorphic, compatibly with the
-shifts, to the functor `D(g^*)` induced by the exact pullback. -/
-instance isTriangulated_leftDerivedUpperStar {Z Y : Scheme.{u}} (g : Z ⟶ Y) :
-    (L((g)^*[A])).IsTriangulated :=
-  Functor.isTriangulated_of_iso (leftDerivedUpperStarIsoMapDerivedCategory A g).symm
 
 variable {X U Z Z' V V' : Scheme.{u}}
 
@@ -137,7 +131,16 @@ omit [HasSmallSiteSheafify A] in
 `e₁ ≫ j = j' ≫ e` with `j`, `j'` arbitrary, the pullback along `e` of the adjoint
 `K ⟶ Rj_* (M[1]) ≅ (Rj_* M)[1]` of a class `y : Lj^* K ⟶ M[1]`, followed by the derived base
 change map `Ex_*`, is the adjoint of the pulled back class: this combines the compatibility of
-`Ex_*` with the units, its naturality and its compatibility with the shifts. -/
+`Ex_*` with the units, its naturality and its compatibility with the shifts.
+
+```
+Le^* K ──Le^*(adjoint of y)──▶ Le^* ((Rj_* M)[1]) ──≅──▶ (Le^* Rj_* M)[1]
+   │                                                          │
+ η │                                                          │ Ex_*[1]
+   ▼                                                          ▼
+Rj'_* Lj'^* Le^* K ──Rj'_*(≅ ≫ Le₁^* y ≫ ≅)──▶ Rj'_* ((Le₁^* M)[1]) ──≅──▶ (Rj'_* Le₁^* M)[1]
+```
+-/
 lemma leftDerivedUpperStar_map_adjoint_comp_derivedBaseChangeMap (sq : CommSq e₁ j₀' j₀ e₀)
     (K : DerivedCategory (Sheaf U₀.smallEtaleTopology A))
     (M : DerivedCategory (Sheaf V₀.smallEtaleTopology A))
@@ -188,7 +191,16 @@ section Restriction
 variable {Z₀ Z₀' X₀ U₁ : Scheme.{u}}
 
 omit [HasSmallSiteSheafify A] in
-/-- The restriction of supports factors the pullback of the counit through the counit. -/
+/-- The restriction of supports factors the pullback of the counit through the counit:
+
+```
+Le^* (Ri_! Ri^! L) ──ψ──▶ Ri'_! Ri'^! L'
+        │                       │
+ Le^* ε │                       │ ε'
+        ▼                       ▼
+     Le^* L ────────τ────────▶ L'
+```
+-/
 @[reassoc]
 lemma supportedRestriction_comp_counit (e : U₁ ⟶ X₀) (i : Z₀ ⟶ X₀) (i' : Z₀' ⟶ U₁)
     [IsClosedImmersion i] [(R(i)_![A]).IsLeftAdjoint] [IsClosedImmersion i']
@@ -272,25 +284,3 @@ end Restriction
 end Etale
 
 end AlgebraicGeometry
-
-namespace CategoryTheory.Functor
-
-variable {C D : Type*} [Category* C] [Category* D] [HasShift C ℤ] [HasShift D ℤ]
-
-/-- A degree-two composite `X⟦1⟧ ⟶ Y⟦1⟧⟦1⟧ ≅ Y⟦2⟧` pushed through a functor commuting with
-shifts, followed by a map on the target, is the degree-one composite shifted by one. -/
-lemma map_shift_comp_shiftFunctorAdd'_inv (F : C ⥤ D) [F.CommShift ℤ] {X Y : C} {Z : D}
-    (δ : X ⟶ Y⟦(1 : ℤ)⟧) (ψ : F.obj Y ⟶ Z) :
-    F.map (δ⟦(1 : ℤ)⟧' ≫ (shiftFunctorAdd' C (1 : ℤ) 1 2 rfl).inv.app Y) ≫
-        (F.commShiftIso (2 : ℤ)).hom.app Y ≫ ψ⟦(2 : ℤ)⟧' =
-      (F.commShiftIso (1 : ℤ)).hom.app X ≫
-        (F.map δ ≫ (F.commShiftIso (1 : ℤ)).hom.app Y ≫ ψ⟦(1 : ℤ)⟧')⟦(1 : ℤ)⟧' ≫
-          (shiftFunctorAdd' D (1 : ℤ) 1 2 rfl).inv.app Z := by
-  rw [F.commShiftIso_add' (show (1 : ℤ) + 1 = 2 from rfl)]
-  simp only [CommShift.isoAdd'_hom_app, Functor.map_comp, Category.assoc]
-  rw [← F.map_comp_assoc ((shiftFunctorAdd' C 1 1 2 _).inv.app Y), Iso.inv_hom_id_app,
-    CategoryTheory.Functor.map_id, Category.id_comp, F.commShiftIso_hom_naturality_assoc,
-    ← NatTrans.naturality]
-  rfl
-
-end CategoryTheory.Functor

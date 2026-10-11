@@ -28,7 +28,17 @@ variable {C D E F : Type*} [Category* C] [Category* D] [Category* E] [Category* 
   [G.CommShift A] [H.CommShift A] [L₁.CommShift A] [R₁.CommShift A] [L₂.CommShift A]
   [R₂.CommShift A] (adj₁ : L₁ ⊣ R₁) (adj₂ : L₂ ⊣ R₂) [adj₁.CommShift A] [adj₂.CommShift A]
 
-/-- The mate of a square of functors commuting with shifts commutes with shifts. -/
+/-- The mate of a square of functors commuting with shifts commutes with shifts: for the square
+`α` on the left, its mate on the right commutes with the shifts.
+
+```
+    C ──L₁──▶ D             C ◀──R₁── D
+    │         │             │         │
+  G │    α    │ H         G │  mate   │ H
+    ▼         ▼             ▼         ▼
+    E ──L₂──▶ F             E ◀──R₂── F
+```
+-/
 instance NatTrans.CommShift.mateEquiv (α : TwoSquare G L₁ L₂ H)
     [NatTrans.CommShift α.natTrans A] :
     NatTrans.CommShift (mateEquiv adj₁ adj₂ α).natTrans A := by
