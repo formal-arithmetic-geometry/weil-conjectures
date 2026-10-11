@@ -247,5 +247,38 @@
   "result": "pass",
   "note": "Definition made self-contained in four parts (sites and sheaves; cohomology over an object as right derived functors with the universal delta-functor; continuous functors, u^s, u_s and morphisms of sites with exactness defined; composition; plus the clause that the abelian f^{-1} is the set-level f^{-1} on underlying sheaves, which the users rely on). Nine well-definedness steps on the reviewed derived-functor leaves and the new nodes lem-weil-pbc-site-continuous-pushforward-sheaf (00WW), lem-weil-pbc-continuous-functor-sheaf-pullback-adjunction (00WX; Mathlib leaf sheafPullbackConstruction.sheafAdjunctionContinuous, Sites/Pullback.lean:75, verified), lem-weil-pbc-site-morphism-composition (03CB/03CC), lem-weil-pbc-right-derived-universal-delta-functor (015B/05TE). The Stacks site / Grothendieck topology correspondence (00ZC) is recorded in the searches; a node for it is wanted at stage 2 (worker's note)."
  },
- "lead_note": " [L 2026-10-10] The long exact sequence cited from lem-weil-pbc-derived-functor-long-exact has the horseshoe δ; the universality cited from lem-weil-pbc-right-derived-universal-delta-functor is for the triangle δ. The two are not proved equal in the DAG (they may differ by a sign); universal δ-functors are unique up to unique isomorphism (Homology 010U), so this is harmless unless an argument mixes the two δ. A stage-3 note. [L 2026-10-10] Convention added to (1): coverings closed under bijective reindexing; needed because the axioms of 00VH see index sets (counterexample on lem-weil-pbc-site-covering-isomorphic-family), used by lem-weil-pbc-site-equivalence-morphism-transport Step 4(a)."
+ "lead_note": " [L 2026-10-10] The long exact sequence cited from lem-weil-pbc-derived-functor-long-exact has the horseshoe δ; the universality cited from lem-weil-pbc-right-derived-universal-delta-functor is for the triangle δ. The two are not proved equal in the DAG (they may differ by a sign); universal δ-functors are unique up to unique isomorphism (Homology 010U), so this is harmless unless an argument mixes the two δ. A stage-3 note. [L 2026-10-10] Convention added to (1): coverings closed under bijective reindexing; needed because the axioms of 00VH see index sets (counterexample on lem-weil-pbc-site-covering-isomorphic-family), used by lem-weil-pbc-site-equivalence-morphism-transport Step 4(a).",
+ "lean": {
+  "module": "Mathlib.CategoryTheory.Sites.SheafCohomology.Basic",
+  "declaration": "CategoryTheory.Sheaf.H'",
+  "declarations": [
+   "CategoryTheory.Sheaf.H'",
+   "CategoryTheory.Sheaf.cohomologyPresheafFunctor",
+   "CategoryTheory.Precoverage",
+   "CategoryTheory.Precoverage.HasIsos",
+   "CategoryTheory.Precoverage.IsStableUnderComposition",
+   "CategoryTheory.Precoverage.IsStableUnderBaseChange",
+   "CategoryTheory.Precoverage.HasPullbacks",
+   "CategoryTheory.Precoverage.toGrothendieck",
+   "CategoryTheory.Sheaf",
+   "CategoryTheory.sheafSections",
+   "CategoryTheory.Functor.IsContinuous",
+   "CategoryTheory.Functor.sheafPushforwardContinuous"
+  ],
+  "statement": "abbrev H' (F : Sheaf J AddCommGrpCat.{v}) (n : ℕ) (X : C) : AddCommGrpCat.{w'}",
+  "branch": "mathlib",
+  "by": "N1",
+  "date": "2026-10-11",
+  "existing": true,
+  "note": "Existing notions, one form each (R-sac). (1) A site (Stacks 00VH, with the node's bijective-reindexing convention, automatic for presieves) is C : Type u with [SmallCategory C] and J : Precoverage C with [J.HasIsos] [J.IsStableUnderComposition] [J.IsStableUnderBaseChange] [J.HasPullbacks] (the form of the landed siblings lem-weil-pbc-site-continuous-pushforward-sheaf and lem-weil-pbc-site-morphism-composition); sheaves of sets / abelian sheaves are Sheaf J.toGrothendieck (Type u) / Sheaf J.toGrothendieck AddCommGrpCat.{u} (covering form: Presieve.isSheaf_pretopology, lem-weil-pbc-pretopology-sheaf-condition). (2) H^p(U,F) is Mathlib's CategoryTheory.Sheaf.H' F p U (functorial in F via Sheaf.cohomologyPresheafFunctor), Ext^p from the sheafified free abelian sheaf on yoneda U; Γ(U,-) is (sheafSections J.toGrothendieck AddCommGrpCat).obj (op U). The identification Sheaf.H' F p U ≅ ((sheafSections _ _).obj (op U)).rightDerived p F with the node's clauses (resolution independence, H^0 = F(U), injective vanishing, universal δ-functor) is a stage-3 bridge, as Sheaf.H ≅ Etale.cohomology (ÉTALE COHOMOLOGY line). (3) Stacks continuity of u (00WV) is written inline as the two hypotheses hcover/hpullback of siteContinuous_pushforward_isSheaf with [u.IsContinuous J.toGrothendieck K.toGrothendieck]; u^s = Functor.sheafPushforwardContinuous, u_s = Functor.sheafPullbackConstruction.sheafPullback, u_s ⊣ u^s = Functor.sheafPullbackConstruction.sheafAdjunctionContinuous (Mathlib.CategoryTheory.Sites.Pullback; not in the declarations list only because the record's #check imports the main module alone); a morphism of sites (00X1) adds PreservesFiniteLimits and PreservesFiniteColimits of sheafPullback u (Type u) (as in siteMorphism_composition). (4) Composition: V ⋙ U (siteMorphism_composition). The delivered module (SiteCoverings, a second site structure, toPrecoverage, IsContinuous, IsMorphism, objectCohomology and sorried instance theorems) was a second spelling of these notions and is left out.",
+  "fixed_by": "R-sac"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-sac",
+  "group": "N1",
+  "result": "fix",
+  "note": "H4: SiteCoverings duplicates the landed Precoverage+HasIsos/IsStableUnderComposition/IsStableUnderBaseChange/HasPullbacks site form; H^p(U,F) = Mathlib Sheaf.H'; continuity/morphism inline as in siteMorphism_composition; record existing: true, module left out; left out new module(s) lean/Sheaf/CategoryTheory/SitesAndObjectCohomology.lean (--drop-files, or a record fixed to existing: true)"
+ }
 }
