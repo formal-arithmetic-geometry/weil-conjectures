@@ -5162,3 +5162,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 15:11 L: merged deliver/E1/lem-weil-pbc-unramified-base-change-open (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.Morphisms.UnramifiedBaseChangeOpen AlgebraicGeometry.unramified_baseChange_restrict_open)
 - 15:12 L: merged deliver/F1/lem-exc-coinduced-homotopy-continuous (stage 2; reviewer PASS; first push; Sheaf.RepresentationTheory.CoinducedHomotopyContinuous Rep.exists_coinduced_continuous_contraction)
 - 15:12 L: merged deliver/H1/lem-sc-mult-n-locally-quasi-finite (stage 2; reviewer PASS; first push; WeilConjectures.AlgebraicGeometry.AbelianVariety.Isogeny AlgebraicGeometry.locallyQuasiFinite_npow_id_of_isAlgClosed; existing declaration)
+- 15:12 L: merged deliver/F1/lem-pur-derived-functor-inverts-05sb (stage 2; reviewer PASS; first push; Sheaf.CategoryTheory.DerivedFunctorInverts CategoryTheory.Functor.leftDerived_inverts)

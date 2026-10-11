@@ -103,5 +103,23 @@
   "group": "E1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-dfi0150 (reviewer sub-agent of L); spot-checked: Statement = Stacks 05SB(2) in Situation 05S8; LF(s) is the 05SA(2) map (unsplit node of same batch, class b citation fine); essential constancy is def-pc-essentially-constant-pro-diagram via the definition node; citer lem-pur-left-derived-exact-when-defined uses only 'LF(s) iso', matches; no duplicate. FIX more, RETURN less: C4 in Step 1 (missed by the Second reading): it claimed the first MS2 clause (co-span completion) gives a comparison J_Y->J_X direction and called the MS2 squares a comparison J_X->J_Y; rewrote Step 1 as: MS1 gives c: S/X->S/Y, u|->s∘u; second MS2 clause plus second MS3 clause make c initial; Stacks Categories Lemma 0A1T transfers essential constancy. Step 2 (second MS2 clause, MS3, 05SA uniqueness) checked correct.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.DerivedFunctorInverts",
+  "declaration": "CategoryTheory.Functor.leftDerived_inverts",
+  "file": "lean/Sheaf/CategoryTheory/DerivedFunctorInverts.lean",
+  "statement": "theorem leftDerived_inverts {C : Type u} {D : Type uD} [Category.{v} C] [Category.{vD} D] [HasZeroObject C] [HasShift C ℤ] [Preadditive C] [∀ n : ℤ, (shiftFunctor C n).Additive] [Pretriangulated C] [CategoryTheory.IsTriangulated C] [HasZeroObject D] [HasShift D ℤ] [Preadditive D] [∀ n : ℤ, (shiftFunctor D n).Additive] [Pretriangulated D] [CategoryTheory.IsTriangulated D] (F : C ⥤ D) [F.CommShift ℤ] [F.IsTriangulated] (S : MorphismProperty C) (hS : S.IsSaturatedTriangulatedMultiplicativeSystem) {X Y : C} (s : X ⟶ Y) (hs : S s) : (F.IsTriangulatedLeftDerivedDefinedAt S hS X ↔ F.IsTriangulatedLeftDerivedDefinedAt S hS Y) ∧ (F.IsTriangulatedLeftDerivedDefinedAt S hS X → ∀ (LX LY : D), F.IsTriangulatedLeftDerivedValue S hS X LX → F.IsTriangulatedLeftDerivedValue S hS Y LY → ∀ (uX : (Functor.const (S.Over ⊤ X)).obj LX ⟶ MorphismProperty.Over.forget S ⊤ X ⋙ Over.forget X ⋙ F) (uY : (Functor.const (S.Over ⊤ Y)).obj LY ⟶ MorphismProperty.Over.forget S ⊤ Y ⋙ Over.forget Y ⋙ F), (∃ s₀ : S.Over ⊤ X, ∃ r : F.obj s₀.left ⟶ LX, uX.app s₀ ≫ r = 𝟙 LX ∧ ∀ t : S.Over ⊤ X, ∃ q : S.Over ⊤ X, ∃ a : q ⟶ s₀, ∃ b : q ⟶ t, F.map b.left = F.map a.left ≫ r ≫ uX.app t) → (∃ s₀ : S.Over ⊤ Y, ∃ r : F.obj s₀.left ⟶ LY, uY.app s₀ ≫ r = 𝟙 LY ∧ ∀ t : S.Over ⊤ Y, ∃ q : S.Over ⊤ Y, ∃ a : q ⟶ s₀, ∃ b : q ⟶ t, F.map b.left = F.map a.left ≫ r ≫ uY.app t) → ∃ (lf : LX ⟶ LY), (∀ (a : S.Over ⊤ X) (b : S.Over ⊤ Y) (f : a.left ⟶ b.left), a.hom ≫ s = f ≫ b.hom → uX.app a ≫ F.map f = lf ≫ uY.app b ∧ (uX.app a ≫ F.map a.hom) ≫ F.map s = lf ≫ uY.app b ≫ F.map b.hom) ∧ IsIso lf)",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "F1",
+  "result": "pass",
+  "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
  }
 }
