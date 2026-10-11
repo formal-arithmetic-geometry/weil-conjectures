@@ -3232,3 +3232,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 01:28 UTC L: deleted stale branch deliver/F1/lem-pc-derived-tensor-localization-cohomology (claim now G1's); notice quoting the pruned return in coord/returns/F1.md.
 - 01:28 L: merged deliver/H1/lem-pur-kinjective-homotopy-limit-vanishing (reviewer FIX; first push; new nodes: 1)
 - 01:29 UTC L: H1 kinjective-homotopy-limit-vanishing FIX 596ea7567 (R-hlv0127; new ML-over-ordinals node).
+- 01:33 UTC L: deleted stale branch deliver/H1/lem-pc-derived-tensor-transitivity (claim now J1's); notice quoting the return in coord/returns/H1.md. Three reviewers launched: C1 left-derived-exact-when-defined re-push, K1 picard-kunneth-qcoh third push, E1 perfect-local-pseudocoherent-free-model.
