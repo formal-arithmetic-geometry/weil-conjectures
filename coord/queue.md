@@ -1,11 +1,11 @@
 # Work queue
 
-212 items; claim with `tools/claim.py next <group> [--stage N]`.
+204 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (212)
+## Stage 2: nodes to state (204)
 
 | node | distance to Mathlib | kind | blockers |
 |---|---|---|---|
@@ -60,12 +60,9 @@
 | `lem-weil-pbc-smooth-section-etale-lift` | 1 | state | 0 |
 | `lem-weil-pbc-spec-algebraically-closed-etale-sheaf-constant` | 1 | state | 0 |
 | `lem-weil-pbc-spec-field-point-residue-field` | 1 | state | 0 |
-| `lem-weil-pbc-spec-map-residue-field-naturality` | 1 | state | 0 |
 | `lem-weil-pbc-spectral-limit-constructible-closed-nonempty` | 1 | state | 0 |
-| `lem-weil-pbc-spectral-limit-descend-opens` | 1 | state | 0 |
 | `lem-weil-pbc-spectral-limit-pullback-sections` | 1 | state | 0 |
 | `lem-weil-pbc-spectral-sheaf-colimit-constant-embeddings` | 1 | state | 0 |
-| `lem-weil-pbc-split-extension-free-presentation` | 1 | state | 0 |
 | `lem-weil-pbc-spread-finite-separable-extension` | 1 | state | 0 |
 | `lem-weil-pbc-spread-purely-inseparable-factors` | 1 | state | 0 |
 | `lem-weil-pbc-stalk-change-of-rings-tensor` | 1 | state | 0 |
@@ -73,20 +70,16 @@
 | `lem-weil-pbc-standard-fpqc-quotient-topology` | 1 | state | 0 |
 | `lem-weil-pbc-standard-smooth-include-generators` | 1 | state | 0 |
 | `lem-weil-pbc-standard-smooth-over-field-dimension-at-points` | 1 | state | 0 |
-| `lem-weil-pbc-stein-factorization-affine` | 1 | state | 0 |
 | `lem-weil-pbc-stein-fibre-idempotent-image` | 1 | state | 0 |
 | `lem-weil-pbc-stein-flat-base-change-global-sections` | 1 | state | 0 |
 | `lem-weil-pbc-stein-geometric-fibre-etale-criterion` | 1 | state | 0 |
 | `lem-weil-pbc-stein-universally-closed-factor` | 1 | state | 0 |
 | `lem-weil-pbc-strictly-henselian-sections-stalk` | 1 | state | 0 |
-| `lem-weil-pbc-strictly-standard-localization-smooth` | 1 | state | 0 |
-| `lem-weil-pbc-subcategory-right-resolution-05T6` | 1 | state | 0 |
 | `lem-weil-pbc-support-pullback-finite-type` | 1 | state | 0 |
 | `lem-weil-pbc-surjective-universally-closed-affine-target` | 1 | state | 0 |
 | `lem-weil-pbc-surjective-universally-closed-separated` | 1 | state | 0 |
 | `lem-weil-pbc-symmetric-algebra-base-change` | 1 | state | 0 |
 | `lem-weil-pbc-symmetric-algebra-finite-presentation` | 1 | state | 0 |
-| `lem-weil-pbc-symmetric-algebra-finite-projective-smooth` | 1 | state | 0 |
 | `lem-weil-pbc-symmetric-algebra-quotient-module` | 1 | state | 0 |
 | `lem-weil-pbc-symmetric-projective-presentation-conormal` | 1 | state | 0 |
 | `lem-weil-pbc-syntomic-at-prime-relative-global-complete-intersection` | 1 | state | 0 |
@@ -95,7 +88,6 @@
 | `lem-weil-pbc-tensor-finite-type-limit` | 1 | state | 0 |
 | `lem-weil-pbc-thickening-affine-scheme` | 1 | state | 0 |
 | `lem-weil-pbc-thickening-finite-cartesian` | 1 | state | 0 |
-| `lem-weil-pbc-thickening-lft-cartesian` | 1 | state | 0 |
 | `lem-weil-pbc-tilde-pullback-base-change` | 1 | state | 0 |
 | `lem-weil-pbc-topological-inverse-image-stalk` | 1 | state | 0 |
 | `lem-weil-pbc-tor-dimension-shift-free` | 1 | state | 0 |
