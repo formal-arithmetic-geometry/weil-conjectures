@@ -171,5 +171,23 @@
   "group": "G1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of G1; spot-checked by L: L: 4 elementary steps (coordinate map, triangular solving in both orientations, independence by the unit diagonal) checked against 00MT"
+ },
+ "lean": {
+  "module": "Sheaf.LinearAlgebra.TriangularChangeOfBasis",
+  "declaration": "Module.Basis.exists_basis_of_triangular_unit_diagonal",
+  "file": "lean/Sheaf/LinearAlgebra/TriangularChangeOfBasis.lean",
+  "statement": "theorem exists_basis_of_triangular_unit_diagonal {R : Type u} [CommRing R] {F : Type v} [AddCommGroup F] [Module R F] {m : ℕ} (b : Module.Basis (Fin m) R F) (v : Fin m → F) (t : Fin m → Fin m → R) (hcoords : ∀ k, v k = ∑ l : Fin m, t k l • b l) (htriangular : (∀ k l, l < k → t k l = 0) ∨ (∀ k l, k < l → t k l = 0)) (hdiag : ∀ k, IsUnit (t k k)) : ∃ c : Module.Basis (Fin m) R F, ∀ k, c k = v k",
+  "branch": "sheaf-dag",
+  "by": "S1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "S1",
+  "result": "pass",
+  "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
  }
 }

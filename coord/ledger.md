@@ -5094,3 +5094,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 14:56 L: merged deliver/R1/lem-weil-pbc-stein-universally-closed-factor (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.SteinUniversallyClosedFactor AlgebraicGeometry.stein_universally_closed_factor)
 - 14:57 L: merged deliver/S1/lem-sc-pic-restriction-boundary (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.Curve.PicRestrictionBoundary AlgebraicGeometry.Scheme.Hom.pic_restriction_boundary)
 - 14:57 L: merged deliver/P1/lem-weil-pbc-torsion-sheaf-characterizations (stage 2; reviewer FIX; first push; Sheaf.AlgebraicGeometry.TorsionSheafCharacterizations AlgebraicGeometry.Scheme.isTorsionAbelianSheaf_characterizations)
+- 14:57 L: merged deliver/S1/lem-weil-pbc-triangular-change-of-basis (stage 2; reviewer PASS; first push; Sheaf.LinearAlgebra.TriangularChangeOfBasis Module.Basis.exists_basis_of_triangular_unit_diagonal)
