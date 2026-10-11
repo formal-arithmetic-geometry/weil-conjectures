@@ -169,5 +169,22 @@
   "group": "K1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-fdt (reviewer sub-agent of L); spot-checked: Sources read: Stacks duality.tex lemma-smooth-proper (0BRT: S Noetherian, f smooth proper of rel. dim d, a(O_S)=wedge^d Omega[d]; the new node is the case S=Spec k, d=1, pure rel. dim one), lemma-upper-shriek-composition (0ATX; in the proper case it is composition of right adjoints of Rf_*, as the new node states), discriminant.tex lemma-compare-trace (0BVI: finite flat Noetherian, f^! single sheaf in degree 0 with f_*f^!O = Hom(f_*O_Y,O_X), extended to invertible L since f_*O is finite locally free; counit = evaluation at 1, f_*O_X-linearity gives the last clause); 0FKW is the section on finite morphisms, a loose but harmless place. Item statement unchanged; agrees with the sorried slopmaster2 exists_isIso_pushforwardHomObjComparison_unit (SerreDuality.lean:536). Step 1: lem-pc-projective-proper, lem-weil-pbc-finite-proper, lem-weil-pbc-proper-composition, def-weil-proper-morphism (proper => finite type) and lem-weil-pbc-finite-type-over-noetherian give g, h proper and X, Y Noetherian (X proper over k since f finite); P^1 smooth of rel. dim 1 from the k[t], k[s] charts. Step 2: the two new nodes give f^!(Omega_Y[1]) = Omega_X[1], shift cancels, alpha O_X-linear. Step 3: lem-pc-projective-space-canonical (n=1, A=k: Omega^1 locally free rank 1, same Proj k[x0,x1] as def-sc-p1-standard) gives the invertible-target hypothesis of lem-sc-finite-flat-duality-evaluation; f_*alpha is f_*O_X-linear. Step 4: tau = evaluation at 1 of Phi, Phi(omega)(a)=tau(a omega) from the node's last clause; elementary. Tests: identity of P^1, Frobenius t->t^p (trace exists, no division by p), empty X. No Mathlib leaves; B10: no slopmaster2 declaration states the new coherent-duality nodes (only etale upper-shriek ones). Tool uses: the three declared ones accepted as generic; lem-pc-projective-proper (off-unit sk-thm-picard-twist, imported) added as generic tool. FIX more, RETURN less (B3, smooth used without a definition node): dag/nodes/sec-picard-framework/lem-sc-smooth-proper-curve-dualizing.json: statement, stmt_deps: cite [def-sbc-smooth-morphisms] for 'smooth'; dag/nodes/sec-picard-framework/lem-sc-finite-duality-trace.json: proof[0].text, uses, proof_deps: cite [def-sbc-smooth-morphisms] for the smoothness of P^1 from its charts. Start Sat Oct 10 03:23:01 PM UTC 2026, end Sat Oct 10 03:24:35 PM UTC 2026.; 2 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "WeilConjectures.AlgebraicGeometry.Curve.SerreDuality",
+  "declaration": "AlgebraicGeometry.Scheme.exists_isIso_pushforwardHomObjComparison_unit",
+  "branch": "slopmaster2",
+  "by": "E1",
+  "date": "2026-10-11",
+  "existing": true,
+  "statement": "theorem exists_isIso_pushforwardHomObjComparison_unit (f : X ⟶ ProjectiveLine (Spec (.of k))) [f.IsOver (Spec (.of k))] [IsFinite f] [Flat f] : ∃ τ : (Modules.pushforward f).obj (X ↘ Spec (.of k)).relativeDifferentials ⟶ (ProjectiveLine (Spec (.of k)) ↘ Spec (.of k)).relativeDifferentials, IsIso (Modules.pushforwardHomObjComparison f τ (SheafOfModules.unit X.ringCatSheaf))"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-fdt1102",
+  "group": "E1",
+  "result": "pass",
+  "note": "existing slopmaster2 SerreDuality.lean:536 (sorried, statement only): section vars {k}[Field k]{X : Scheme.{u}} [X.Over Spec k][SmoothOfRelativeDimension 1 (X ↘ Spec k)] = k field, X smooth rel dim 1; f : X ⟶ ProjectiveLine (Spec k) (= ℙ(ULift (Fin 2)), the object TwistData of def-sc-p1-standard is built on) [f.IsOver][IsFinite f][Flat f] = f over k finite flat; relativeDifferentials = sheafified Kähler Ω (Stacks 01UM) on both sides; ∃ τ morphism of 𝒪_{ℙ¹}-modules; pushforwardHomObjComparison f τ unit : f_*Hom(𝒪_X,Ω_X) ⟶ Hom(f_*𝒪_X,Ω_ℙ¹), φ ↦ τ∘f_*φ = ω ↦ (a ↦ τ(aω)) under Hom(𝒪_X,Ω_X)≅Ω_X; IsIso = isomorphism. No hypothesis added or dropped; Frobenius/identity/empty X fit."
  }
 }

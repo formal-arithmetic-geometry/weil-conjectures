@@ -3725,3 +3725,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 07:56 L: merged deliver/G1/lem-sc-finite-type-nonclosed-closure-closed-points (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.InfiniteClosedPointsInterClosureSingleton AlgebraicGeometry.infinite_closedPoints_inter_closure_singleton)
 - 07:56 L: merged deliver/K1/lem-sc-ample-finite-affine-cover (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.AmpleFiniteAffineCover AlgebraicGeometry.Scheme.Modules.IsAmple.exists_finite_affine_cover)
 - 07:56 L: merged deliver/J1/def-pur-sheaf-hom (stage 2; reviewer PASS; first push; WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHom SheafOfModules.homObj; existing declaration)
+- 07:57 L: merged deliver/E1/lem-sc-finite-duality-trace (stage 2; reviewer PASS; first push; WeilConjectures.AlgebraicGeometry.Curve.SerreDuality AlgebraicGeometry.Scheme.exists_isIso_pushforwardHomObjComparison_unit; existing declaration)
