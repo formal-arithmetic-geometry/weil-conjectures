@@ -132,5 +132,23 @@
   "group": "F1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-ioj1816 (reviewer sub-agent of L); spot-checked: Statement identical to sheaf-dag fd83ed2fc (x in A cap J(B'), B and B' semilocal; no dimension-one hypothesis, none needed; surjectivity hypothesis is redundant by lying-over but harmless). Step 1 elementary integrality of B<=A<=B'. Step 2: surjectivity + prime-over-maximal gives maximals of A = contractions of maximals of B' (converse via the maximal-preimage clause of ideal-in-radical); finite since B' semilocal. Step 3: m_B A <= J(A) by ideal-in-radical for B<=A, I=m_B; reverse via prime avoidance on finitely many maximals of B (B semilocal used) then prime-over-maximal; t=0 handled. Step 4 correct. Mathlib grep: Ideal.exists_ideal_over_prime_of_isIntegral at RingTheory/Ideal/GoingUp.lean:327. No repairs. Note: report's 'corrected created.item' claim is not reflected in the diff (created.item still lem-sc-semilocal-dim-one-conductor, which is correct)."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.IntegralOverringJacobsonPower",
+  "declaration": "integral_overring_jacobson_power",
+  "file": "lean/Sheaf/AlgebraicGeometry/IntegralOverringJacobsonPower.lean",
+  "statement": "theorem integral_overring_jacobson_power (B : Type u) (A : Type v) (B' : Type w) [CommRing B] [CommRing A] [CommRing B'] [Algebra B A] [Algebra A B'] [Algebra B B'] [IsScalarTower B A B'] [Finite (MaximalSpectrum B)] [Finite (MaximalSpectrum B')] [Algebra.IsIntegral B B'] [FaithfulSMul B A] [FaithfulSMul A B'] (hspec : Function.Surjective (PrimeSpectrum.comap (algebraMap A B'))) : Finite (MaximalSpectrum A) ∧ Ideal.jacobson (⊥ : Ideal A) = (Ideal.map (algebraMap B A) (Ideal.jacobson (⊥ : Ideal B))).radical ∧ ∀ (x : A), algebraMap A B' x ∈ Ideal.jacobson (⊥ : Ideal B') → ∃ m : ℕ, 0 < m ∧ x ^ m ∈ Ideal.map (algebraMap B A) (Ideal.jacobson (⊥ : Ideal B))",
+  "branch": "sheaf-dag",
+  "by": "G1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-ioj1153",
+  "group": "G1",
+  "result": "pass",
+  "note": "B,A,B' CommRing; B<=A<=B' as injective algebra maps (FaithfulSMul) + IsScalarTower; semilocal = Finite (MaximalSpectrum _) (Mathlib idiom, same as landed FiniteIntegralConductor); integral = Algebra.IsIntegral B B'; hspec = surjective PrimeSpectrum.comap; conclusions Finite (MaximalSpectrum A), jacobson bot A = radical (map (jacobson bot B)), x in A with image in J(B') has positive power in m_B A (0<m harmless); no added hypotheses"
  }
 }

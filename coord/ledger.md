@@ -3774,3 +3774,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 08:11 L: merged deliver/E1/def-weil-pbc-derived-categories (stage 2; reviewer FIX; first push; Sheaf.AlgebraicGeometry.DerivedCategories AlgebraicGeometry.Etale.DerivedCategory.torsionCohomology)
 - 08:11 L: merged deliver/H1/lem-sc-conductor-ideal-zero-intersection (stage 2; reviewer FIX; first push; Sheaf.AlgebraicGeometry.ConductorIdealZeroIntersection AlgebraicGeometry.conductorIdealZeroIntersection)
 - 08:11 L: merged deliver/H1/lem-sc-conductor-sections (stage 2; reviewer FIX; first push; Sheaf.AlgebraicGeometry.ConductorSections AlgebraicGeometry.Scheme.Modules.conductor_sections)
+- 08:11 L: merged deliver/G1/lem-sc-integral-overring-jacobson-power (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.IntegralOverringJacobsonPower integral_overring_jacobson_power)
