@@ -3763,3 +3763,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 08:07 L: merged deliver/M1/lem-pod-lisse-module-sheaves-as-module-objects (stage 2; reviewer FIX; first push; Sheaf.Paper.LisseModuleSheaves AlgebraicGeometry.Scheme.lisseModuleSheaf_iff_underlying_finiteLocallyConstant)
 - 08:07 L: merged deliver/G1/lem-sc-hilbert-embedded-points-affine-removal (stage 2; reviewer PASS; first push; Sheaf.RingTheory.RemoveEmbeddedPrimes Module.exists_maximal_nowhereDense_support_quotient)
 - 08:07 L: merged deliver/F1/lem-pc-tower-surjective-lim-acyclic (stage 2; reviewer PASS; first push; Sheaf.CategoryTheory.SurjectiveTowerLimitAcyclic CategoryTheory.surjectiveTowerLimitAcyclic)
+- 08:07 L: merged deliver/J1/lem-pc-module-pullback-adjunction (stage 2; reviewer FIX; after a return; Sheaf.AlgebraicGeometry.TensorPullbackAdjunction AlgebraicGeometry.Scheme.Modules.exists_tensorPullbackAdjunction)
