@@ -135,6 +135,24 @@ theorem nonempty_iso_map_reductionModIdeal (Φ : 𝐃(X, Λ) ⥤ 𝐃(Y, Λ)) [�
       erw [Linear.smul_comp, Category.id_comp]))
   exact ⟨Pretriangulated.Triangle.π₃.mapIso e⟩
 
+/-- The internal hom commutes with reduction modulo a power of a nonzerodivisor in its second
+variable: `RHom(K, L) ⊗ᴸ Λ ⧸ (ϖⁿ) ≅ RHom(K, L ⊗ᴸ Λ ⧸ (ϖⁿ))`, `RHom(K, -)` being a triangulated
+`Λ`-linear functor (the right adjoint of `K ⊗ᴸ -`). -/
+theorem nonempty_iso_reductionModIdeal_derivedHom_obj {X : Scheme.{u}} {ϖ : Λ}
+    (hϖ : ϖ ∈ nonZeroDivisors Λ) (n : ℕ) (K L : 𝐃(X, Λ)) :
+    Nonempty ((reductionModIdeal Λ X (Ideal.span {ϖ} ^ n)).obj
+        (((derivedHom (ModuleCat.{u + 1} Λ) X).obj (op K)).obj L) ≅
+      ((derivedHom (ModuleCat.{u + 1} Λ) X).obj (op K)).obj
+        ((reductionModIdeal Λ X (Ideal.span {ϖ} ^ n)).obj L)) := by
+  let adj := derivedTensorHomAdjunction (ModuleCat.{u + 1} Λ) K
+  letI := adj.rightAdjointCommShift ℤ
+  have := adj.commShift_of_leftAdjoint ℤ
+  have := adj.isTriangulated_rightAdjoint
+  have := adj.right_adjoint_linear (R := Λ)
+  obtain ⟨e⟩ := nonempty_iso_map_reductionModIdeal
+    ((derivedHom (ModuleCat.{u + 1} Λ) X).obj (op K)) hϖ n L
+  exact ⟨e.symm⟩
+
 end Reduction
 
 section HomReduction
@@ -181,6 +199,27 @@ theorem derivedComplete_derivedHom {K L : 𝐃(X, Λ)}
 
 end HomReduction
 
+/-- The exceptional inverse image `Rf^!` is triangulated, being right adjoint to the triangulated
+`Rf_!`. -/
+lemma isTriangulated_rightDerivedUpperShriek {X Y : Scheme.{u}} (f : X ⟶ Y)
+    [HasCompactification f] [(R(f)_![ModuleCat.{u + 1} Λ]).IsLeftAdjoint] :
+    (R(f)^![ModuleCat.{u + 1} Λ]).IsTriangulated :=
+  have := (rightDerivedUpperShriekAdjunction (ModuleCat.{u + 1} Λ) f).commShift_of_leftAdjoint ℤ
+  (rightDerivedUpperShriekAdjunction _ f).isTriangulated_rightAdjoint
+
+/-- The derived limit of the exceptional inverse images of the reductions of a derived complete
+`L` is `Rf^! L`: `Rf^!`, a triangulated right adjoint, preserves the homotopy limit
+`L = R lim_n (L ⊗ᴸ Λ ⧸ Iⁿ)`. -/
+theorem nonempty_iso_rightDerivedUpperShriek_of_isHomotopyLimit {X Y : Scheme.{u}}
+    (f : X ⟶ Y) [HasCompactification f] [(R(f)_![ModuleCat.{u + 1} Λ]).IsLeftAdjoint]
+    {L : 𝐃(Y, Λ)} (hL : DerivedCategory.derivedComplete Y.smallEtaleTopology I L)
+    {c : Cone (DerivedCategory.derivedCompletionDiagram Y.smallEtaleTopology I L ⋙
+      R(f)^![ModuleCat.{u + 1} Λ])} (hc : Pretriangulated.IsHomotopyLimit c) :
+    Nonempty (c.pt ≅ (R(f)^![ModuleCat.{u + 1} Λ]).obj L) := by
+  have := isTriangulated_rightDerivedUpperShriek (Λ := Λ) f
+  obtain ⟨e, -⟩ := hc.exists_iso (hL.map (R(f)^![ModuleCat.{u + 1} Λ]))
+  exact ⟨e⟩
+
 section Constructible
 
 variable [IsDomain Λ] [IsNoetherianRing Λ] [IsAdicComplete I Λ] [Finite (Λ ⧸ I)]
@@ -220,8 +259,8 @@ theorem boundedConstructibleIntegral_derivedHom {X : Scheme.{u}} (aX : X ⟶ Spe
           (c - b - 2 * (d : ℤ)) (e - a + 2 * (d : ℤ))
           ((reductionModIdeal Λ X (I ^ (n + 1))).obj
             (((derivedHom (ModuleCat.{u + 1} Λ) X).obj (op K)).obj L)) :=
-  ⟨sorry, fun n _ _ _ _ hη hη' ↦ nonempty_iso_reductionModIdeal_derivedHom I hϖ hI n hη hη',
-    sorry⟩
+  ⟨⟨derivedComplete_derivedHom I hϖ hI hL.1, sorry⟩,
+    fun n _ _ _ _ hη hη' ↦ nonempty_iso_reductionModIdeal_derivedHom I hϖ hI n hη hη', sorry⟩
 
 include hϖ hI in
 /-- Blueprint `prop-coef-integral-exceptional-adjoint`: The integral exceptional adjoint on
@@ -265,7 +304,14 @@ theorem boundedConstructibleIntegral_exceptionalAdjoint {X Y : Scheme.{u}}
           ((reductionModIdeal Λ Y (I ^ (n + 1))).obj L)) →
         ∀ n : ℕ, DerivedCategory.torAmplitudeIn (ModuleCat.{u + 1} Λ) X
           (a - 2 * (dX : ℤ)) (b + 2 * (dY : ℤ)) ((reductionModIdeal Λ X (I ^ (n + 1))).obj c.pt) :=
-  sorry
+  by
+  subst hI
+  obtain ⟨e⟩ := nonempty_iso_rightDerivedUpperShriek_of_isHomotopyLimit _ f hL.1 hc
+  have := isTriangulated_rightDerivedUpperShriek (Λ := Λ) f
+  refine ⟨⟨sorry, fun n ↦ ?_⟩, fun K _ ↦ ⟨((rightDerivedUpperShriekAdjunction _ f).homEquiv K L).trans
+    ((Iso.refl K).homCongr e.symm)⟩, sorry, sorry⟩
+  obtain ⟨e'⟩ := nonempty_iso_map_reductionModIdeal (R(f)^![ModuleCat.{u + 1} Λ]) hϖ n L
+  exact ⟨(reductionModIdeal Λ X _).mapIso e ≪≫ e'.symm⟩
 
 end Constructible
 
