@@ -113,5 +113,23 @@
   "group": "C1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-sib0034 (reviewer sub-agent of L); spot-checked: Statement = Stacks lemma-set-iso-classes-bounded-size. Step 1 is the Stacks argument (one phi_{M'} per proper subobject; coproduct epi; <= |M| summands), generator clause of def-sp-grothendieck-abelian. Step 2 cites set-of-subobjects for well-poweredness (C1 satisfied) plus small coproducts; Step 3 (1)=>(2). Citers: lem-pur-kinjective-degreewise-existence uses exactly (2) termwise (C4 ok); no duplicate node (grep bounded-size/subobject/generator). FIX more, RETURN less: class (c) new node lem-pur-kinjective-set-of-subobjects is Mathlib CategoryTheory.wellPowered_of_isSeparator (Generator/Basic.lean:800; HasPullbacks/Balanced inferred from Abelian): made it a Mathlib leaf (status mathlib, mathlib_match, reviewer grep recorded); second reading missed this.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.BoundedSubobjectSize",
+  "declaration": "CategoryTheory.bounded_subobject_size_quotient_and_small_iso_classes",
+  "file": "lean/Sheaf/CategoryTheory/BoundedSubobjectSize.lean",
+  "statement": "theorem bounded_subobject_size_quotient_and_small_iso_classes {C : Type u} [Category.{v} C] [Abelian C] [IsGrothendieckAbelian.{v} C] (U : C) (_hU : IsSeparator U) (κ : Cardinal.{v}) : (∀ M : C, Cardinal.mk (Shrink.{v} (Subobject M)) ≤ κ → ∃ (I : Type v), Cardinal.mk I ≤ κ ∧ ∃ p : (∐ fun _ : I ↦ U) ⟶ M, Epi p) ∧ Small.{v} (Skeleton (ObjectProperty.FullSubcategory (fun M : C ↦ Cardinal.mk (Shrink.{v} (Subobject M)) ≤ κ)))",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-sib0940",
+  "group": "E1",
+  "result": "pass",
+  "note": "C,[Category.{v}],[Abelian],[IsGrothendieckAbelian.{v}] = Grothendieck abelian; (U, IsSeparator U) = generator; κ : Cardinal.{v} arbitrary; size = #Shrink.{v} (Subobject M) as in M1; (1) ∃ I : Type v, #I ≤ κ, epi ∐ (fun _ : I ↦ U) ⟶ M; (2) Small.{v} (Skeleton (FullSubcategory size ≤ κ)); κ=0 vacuous, zero object, empty coproduct ok; H4: no exact Mathlib match (isSeparator_iff_epi indexes by Hom(U,X), unbounded; HasCardinalLT/Subobject results are strict and lack (2))"
  }
 }
