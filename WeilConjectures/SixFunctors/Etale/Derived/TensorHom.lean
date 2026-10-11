@@ -38,8 +38,15 @@ for any coefficient category `A` for which the projection map is an isomorphism 
 `def-sf-datum`), by conjugating the projection formula along the two adjunctions with a
 parameter (`CategoryTheory.ParametrizedAdjunction.conjugateIso`). The other comparison maps are
 not constructed in this repository, so the remaining isomorphisms are asserted as
-`Nonempty (_ ≅ _)`. The blueprint's compatibilities with finite reduction, scalar extension and
-shifts are **not stated**.
+`Nonempty (_ ≅ _)`.
+
+As in the blueprint, the compatibilities of the tensor–Hom exchange are those of its
+ingredients, and they are stated in that form. A change of coefficients (finite reduction,
+scalar extension) is encoded by functors `T_X`, `T_Y` and comparison 2-squares for the left
+adjoints `Lf^*`, `Rf_!`, `M ⊗ᴸ -`; the comparison maps of the right adjoints `Rf_*`, `Rf^!`,
+`RHom(M, -)` are their mates. If the projection map is compatible with the change of
+coefficients (axiom (A5) of `def-sf-datum`), so is the exchange. Likewise the exchange commutes
+with shifts as soon as the projection map does.
 
 The tensor–Hom statement is made on `Dctf`, so applying it at `N = ω_Y` needs `ω_Y` to lie in
 `Dctf(Y, A)`. In the blueprint's setting (a finite-type scheme over a field, finite coefficient
@@ -52,6 +59,11 @@ discharges it over a Noetherian base whenever the unit `Λ_S` lies in `Dctf(S, A
 
 - `AlgebraicGeometry.Etale.derivedHomRightDerivedLowerShriekIso` (`lem-sf-tensor-hom`): the
   natural isomorphism `Rf_* RHom_X(M, Rf^! N) ≅ RHom_Y(Rf_! M, N)`, given the projection formula.
+- `AlgebraicGeometry.Etale.commShift_derivedHomRightDerivedLowerShriekIso_app_hom`
+  (`lem-sf-tensor-hom`): it commutes with shifts.
+- `AlgebraicGeometry.Etale.derivedHomRightDerivedLowerShriekIso_hom_app_comp_mateEquiv`
+  (`lem-sf-tensor-hom`): it is compatible with changes of coefficients, such as finite
+  reduction and scalar extension.
 - `AlgebraicGeometry.Etale.nonempty_iso_derivedHom_rightDerivedLowerShriek`
   (`sk-thm-sf-tensor-hom`): `Rf_* RHom_X(M, Rf^! N) ≅ RHom_Y(Rf_! M, N)`.
 - `AlgebraicGeometry.Etale.nonempty_iso_rightDerivedUpperShriek_dualizingComplex`
@@ -300,7 +312,15 @@ at `(M, N)` of the natural isomorphism
 `AlgebraicGeometry.Etale.derivedHomRightDerivedLowerShriekIso` (`lem-sf-tensor-hom`), the
 projection formula holding at finite coefficients
 (`AlgebraicGeometry.Etale.isIso_projectionMap_of_finite`). For torsion coefficients no
-finiteness hypothesis on `M` and `N` is needed. -/
+finiteness hypothesis on `M` and `N` is needed.
+
+The naturality in `M` and `N` and the compatibilities of the blueprint are those of
+`AlgebraicGeometry.Etale.derivedHomRightDerivedLowerShriekIso` at `A = ModuleCat Λ`: it commutes
+with shifts when the projection map does
+(`AlgebraicGeometry.Etale.commShift_derivedHomRightDerivedLowerShriekIso_app_hom`), and it is
+compatible with any change of coefficients `Λ → Λ'`, such as finite reduction or scalar
+extension, which is compatible with the projection map
+(`AlgebraicGeometry.Etale.derivedHomRightDerivedLowerShriekIso_hom_app_comp_mateEquiv`). -/
 theorem nonempty_iso_derivedHom_rightDerivedLowerShriek
     (M : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
     (N : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
