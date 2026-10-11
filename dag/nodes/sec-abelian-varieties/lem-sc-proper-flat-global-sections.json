@@ -16,7 +16,7 @@
  "statement": "Let $f:X\\to S$ be a proper [def-weil-proper-morphism], flat [def-weil-flat-morphism] morphism of schemes [def-weil-scheme-over-base] of finite presentation [def-sbc-locally-finite-presentation]. If for every point $s\\in S$, with residue field $\\kappa(s)$ [def-weil-residue-field], the fibre $X_s$ is geometrically reduced and geometrically connected over $\\kappa(s)$ [def-pc-geometrically-irreducible] (that is, the geometric fibres of $f$ are reduced and connected), then $f_*\\mathcal O_X\\cong\\mathcal O_S$, and this isomorphism remains true after every base change $T\\to S$ [def-pc-base-change].",
  "source": {
   "document": "Stacks Project",
-  "place": "Derived Categories of Schemes, Lemma 36.32.1, Tag 0E0L"
+  "place": "Derived Categories of Schemes, Lemma 36.32.6, Tag 0E0L"
  },
  "stmt_deps": [
   "def-weil-proper-morphism",
@@ -25,7 +25,9 @@
   "def-sbc-locally-finite-presentation",
   "def-weil-residue-field",
   "def-pc-geometrically-irreducible",
-  "def-pc-base-change"
+  "def-pc-base-change",
+  "def-pc-module-pullback",
+  "lem-pc-module-pullback-adjunction"
  ],
  "proof": [
   {
@@ -127,7 +129,7 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-pfg2946 (reviewer sub-agent of L); spot-checked: Criterion vs Tag 0E62 (clause (a) only, hypotheses match; no existing 0E62 node, no duplicate); Step 1 hypotheses of lem-pc-h0-geom-connected (proper over kappa(s), geometrically reduced, geometrically connected); citer lem-sc-general-theorem-of-cube step 2 supplies geometrically reduced+connected fibres over k; tool use lem-pc-h0-geom-connected accepted. FIX more, RETURN less: (1) C4/C1: statement said 'every geometric fibre reduced and connected' but cited def-pc-geometrically-irreducible (every-extension form) and Step 1 claimed the definition alone converts geometric fibres to geometrically reduced/connected X_s (needs Tags 0387/035X-type lemmas); restated hypothesis as fibres X_s geometrically reduced and connected over kappa(s), Step 1 now uses it by hypothesis; (2) B3: stmt_deps listed def-weil-connected-scheme though statement cites def-pc-geometrically-irreducible; replaced, added def-weil-residue-field.; 1 file(s) fixed by the reviewer"
  },
- "lead_note": "2026-10-10 L (R-pfg2946): Item hypothesis restated as 'every fibre X_s geometrically reduced and geometrically connected over kappa(s)' (Stacks-equivalent to geometric fibres reduced and connected; exactly what lem-sc-general-theorem-of-cube supplies); later citers must supply that form.",
+ "lead_note": "2026-10-10 L (R-pfg2946): Item hypothesis restated as 'every fibre X_s geometrically reduced and geometrically connected over kappa(s)' (Stacks-equivalent to geometric fibres reduced and connected; exactly what lem-sc-general-theorem-of-cube supplies); later citers must supply that form. | 2026-10-11 08:29 UTC L: stmt_deps gained def-pc-module-pullback and lem-pc-module-pullback-adjunction (landed Lean 54b8d74b6 uses tensorPullback / exists_tensorPullbackAdjunction); source place corrected Lemma 36.32.1 -> Lemma 36.32.6 (tag 0E0L unchanged). Statement unchanged.",
  "lean": {
   "module": "Sheaf.AlgebraicGeometry.ProperFlatGlobalSections",
   "declaration": "AlgebraicGeometry.isIso_structureSheafMap_of_proper_flat_geometricallyReduced_connected_fibers",
