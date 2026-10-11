@@ -1,112 +1,168 @@
 {
-  "id": "def-nagata-qc-open-equality-stage",
-  "blueprint": {
-    "is": "def-nagata-qc-open-equality-stage",
-    "from": null,
-    "same_as": []
+ "id": "def-nagata-qc-open-equality-stage",
+ "blueprint": {
+  "is": "def-nagata-qc-open-equality-stage",
+  "from": null,
+  "same_as": []
+ },
+ "kind": "definition",
+ "title": "Stage of equality for descended quasi-compact opens",
+ "statement": "Let $I$ be a nonempty directed preorder, let $D:I^{\\mathrm{op}}\\to\\mathrm{Sch}$ be an inverse system with affine transitions, and let $c$ be a limit cone with vertex $S$ and projections $p_\\lambda$. Fix $\\lambda_0\\in I$, a quasi-compact and quasi-separated scheme $Y_{\\lambda_0}$, and a morphism $p:Y_{\\lambda_0}\\to S_{\\lambda_0}$. Form the base-changed diagram $B$ and cone $b$ of [def-nagata-basechanged-system]; thus $B$ is indexed by $\\operatorname{Over}(\\lambda_0)$ in $I^{\\mathrm{op}}$, its object at $j=(\\lambda\\to\\lambda_0)$ is $Y_\\lambda=Y_{\\lambda_0}\\times_{S_{\\lambda_0}}S_\\lambda$, and its cone vertex is $Y=Y_{\\lambda_0}\\times_{S_{\\lambda_0}}S$. Let $W_1,W_2\\subseteq Y_{\\lambda_0}$ be quasi-compact opens whose inverse images under $Y\\to Y_{\\lambda_0}$ agree. Put $j_0=(\\lambda_0,\\mathrm{id})$ and $f_0:B(j_0)\\to Y_{\\lambda_0}$ the first pullback projection. Apply the proved compact-open equality descent theorem (Stacks Tag 01Z4(2), Mathlib `AlgebraicGeometry.exists_map_preimage_eq_map_preimage`) to the limit cone $b$, the compact opens $f_0^{-1}(W_1),f_0^{-1}(W_2)$, and their equal inverse images. Select one resulting witness $j$ with a morphism $j\\to j_0$ and equality of the transported opens, using classical choice on this proved existence result. Write $\\tau$ for the underlying index of $j$, so $\\tau\\geq\\lambda_0$. Fix the base point $i_\\varnothing=\\lambda_0$, selected binary upper bounds $d$, and auxiliary linear order $r$ of [def-nagata-directed-finite-upper-bound]. Set $F=\\{\\lambda_0,\\tau\\}$ and define $\\lambda_{W_1=W_2}:=\\operatorname{directedFiniteUpperBound}(\\lambda_0,d,r,F)$. The property that the two opens agree at this stage and every later stage is left to the eventual-equality lemma; the upper-bound property of $d$ is used in that lemma as in the recorded upper-bound definition. No chartwise coefficient or radical-identity data are outputs of this definition.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-nagata-compactification/sk-prop-nagata-sketch-approximation/def-nagata-qc-open-equality-stage.md",
+  "place": "node def-nagata-qc-open-equality-stage, order 349"
+ },
+ "stmt_deps": [
+  "def-nagata-basechanged-system",
+  "def-nagata-directed-finite-upper-bound"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "finite stage selected upper bound of witness stages for equality of quasi-compact opens",
+   "results": "AlgebraicGeometry.exists_eq_pow_mul_of_isCompact_of_isQuasiSeparated; AlgebraicGeometry.Scheme.quasiSeparatedSpace_of_isOpenCover; AlgebraicGeometry.exists_of_res_eq_of_qcqs; AlgebraicGeometry.Scheme.OpenCover.finiteSubcover_f; AlgebraicGeometry.exists_of_res_eq_of_qcqs_of_top; AlgebraicGeometry.isRetrocompact_basicOpen; AlgebraicGeometry.exists_of_res_zero_of_qcqs; AlgebraicGeometry.isCompactOpen_iff_eq_finset_affine_union",
+   "date": "2026-10-11",
+   "verdict": "no match: hits provide compact/basic-open facts but no project-specific selected equality stage"
   },
-  "kind": "definition",
-  "title": "Stage of equality for descended quasi-compact opens",
-  "statement": "Fix the base-changed system of [def-nagata-basechanged-system] with $\\lambda_0\\in I$. Assume that $I$ is directed, $S=\\varprojlim_\\lambda S_\\lambda$, every transition $S_\\mu\\to S_\\lambda$ is affine, and $Y_{\\lambda_0}$ is quasi-compact and quasi-separated (as a scheme; this holds when $S_{\\lambda_0}$ is quasi-compact and quasi-separated and $Y_{\\lambda_0}\\to S_{\\lambda_0}$ is quasi-compact and quasi-separated, e.g. $S_{\\lambda_0}$ of finite type over $\\mathbf Z$). Let $W_{1,\\lambda_0},W_{2,\\lambda_0}\\subseteq Y_{\\lambda_0}$ be quasi-compact opens whose inverse images in $Y$ agree. Choose a finite affine cover $Y_{\\lambda_0}=\\bigcup_k U_k$ and write $U_{k,\\lambda}$ for its inverse image in $Y_\\lambda$ and $U_k^\\infty$ for its inverse image in $Y$. Using quasi-separatedness, choose finite presentations $W_{i,\\lambda_0}\\cap U_k=\\bigcup_jD(f_{ijk})$ with $f_{ijk}\\in\\Gamma(U_k,\\mathcal O)$, and denote their pullbacks to $\\Gamma(U_k^\\infty,\\mathcal O)$ by $\\bar f_{ijk}$. Equality of the two inverse-image opens gives the radical containments $\\bar f_{1jk}\\in\\sqrt{(\\bar f_{2\\ell k})_\\ell}$ and $\\bar f_{2jk}\\in\\sqrt{(\\bar f_{1\\ell k})_\\ell}$ in the limit ring. Choose witnessing identities $\\bar f_{1jk}^{n_{1jk}}=\\sum_\\ell a_{1jk\\ell}\\bar f_{2\\ell k}$ and $\\bar f_{2jk}^{n_{2jk}}=\\sum_\\ell a_{2jk\\ell}\\bar f_{1\\ell k}$, with finitely many coefficients. By [lem-weil-pbc-limit-affine-transition] and [lem-weil-pbc-limit-global-sections-colimit] (Stacks Tags 01YW/01Z0), $\\Gamma(U_k^\\infty,\\mathcal O)\\cong\\varinjlim_{\\lambda\\geq\\lambda_0}\\Gamma(U_{k,\\lambda},\\mathcal O)$. Write $f_{ijk,\\lambda}\\in\\Gamma(U_{k,\\lambda},\\mathcal O)$ for the pullback of $f_{ijk}$ (so its image in $\\Gamma(U_k^\\infty,\\mathcal O)$ is $\\bar f_{ijk}$). For each $k$, apply [lemma-nagata-filtered-colimit-finite-data] to the directed system $(\\Gamma(U_{k,\\lambda},\\mathcal O))_{\\lambda\\geq\\lambda_0}$ and the finitely many coefficients $a_{ijk\\ell}$ (no equalities) to select a stage $\\mu_k\\geq\\lambda_0$ and lifts $a_{ijk\\ell,\\mu_k}\\in\\Gamma(U_{k,\\mu_k},\\mathcal O)$. For each witnessing identity, the element $f_{1jk,\\mu_k}^{n_{1jk}}-\\sum_\\ell a_{1jk\\ell,\\mu_k}f_{2\\ell k,\\mu_k}$ (resp. $f_{2jk,\\mu_k}^{n_{2jk}}-\\sum_\\ell a_{2jk\\ell,\\mu_k}f_{1\\ell k,\\mu_k}$) maps to $0$ in $\\Gamma(U_k^\\infty,\\mathcal O)$, so by the injectivity clause of [lem-weil-pbc-limit-global-sections-colimit] select a stage $\\nu\\geq\\mu_k$ at which its image in $\\Gamma(U_{k,\\nu},\\mathcal O)$ is $0$, i.e. the identity holds there with the actual pullbacks $f_{ijk,\\nu}$ and the transported coefficients. Let $F$ be the finite set consisting of $\\lambda_0$, the $\\mu_k$ and these finitely many witness stages $\\nu$, and define $\\lambda_{W_1=W_2}:=u(F)$ using [def-nagata-directed-finite-upper-bound]. (At any $\\lambda$ above every element of $F$ the transported identities give $D(f_{1jk,\\lambda})\\subseteq\\bigcup_\\ell D(f_{2\\ell k,\\lambda})$ and conversely in $U_{k,\\lambda}$, which is what the eventual-equality lemma for these opens uses.)",
+  {
+   "tool": "loogle",
+   "query": "QuasiCompact open inverse image equality finite stage",
+   "results": "none (parser rejected the supplied pattern)",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "quasi.?compact|equality.?stage|finite.?stage in Mathlib/AlgebraicGeometry",
+   "results": "none",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "stage at which inverse images of quasi-compact opens become equal",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "import_flags": [
+  "bypassed"
+ ],
+ "blueprint_kind": "definition",
+ "blueprint_order": 349,
+ "blueprint_uses": [
+  "def-nagata-directed-finite-upper-bound",
+  "lemma-nagata-filtered-colimit-finite-data"
+ ],
+ "uses_not_cited": [
+  "def-nagata-directed-finite-upper-bound",
+  "lemma-nagata-filtered-colimit-finite-data"
+ ],
+ "blueprint_notes": [
+  {
+   "label": "status",
+   "text": "**Status.** Bypassed by the formalized route: the finite-presentation and\nNoetherian descent is done in one step by\n`AlgebraicGeometry.Scheme.exists_isPullback_of_finitePresentation_of_isSeparated`\nand `AlgebraicGeometry.Scheme.nonempty_noetherianApproximation`, so\nthis stage-by-stage bookkeeping is never carried out.",
+   "where": "statement"
+  }
+ ],
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-nagata-compactification",
+ "unit": "sk-prop-nagata-sketch-approximation",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "def-nagata-qc-open-equality-stage",
+  "worker": "stage1",
+  "summary": "Repaired the definition after return E7: the statement now assumes the qcqs base scheme and affine transitions required for finite affine charts and the affine global-sections colimit, introduces the base-changed system dependency, specifies both chartwise radical containments and their witnessing power identities with coefficients, applies finite-data descent to obtain the finite witness-stage set, and then applies the selected finite upper bound.",
+  "blueprint": "The definition clause describing finite affine basic-open presentations and the selected upper bound of all witness stages; the explicit chartwise construction expands the blueprint's formerly unspecified required radical containment and finite stage containing a witnessing power.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-qoe2734",
+  "group": "G1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-qoe2734 (reviewer sub-agent of L); spot-checked: Return 21:35 points 1-3 repaired: E7 hypotheses (directed I, affine transitions, qcqs) named, finite list of chartwise radical-containment identities with u(F) from def-nagata-directed-finite-upper-bound, def-nagata-basechanged-system in stmt_deps; radical containments correct in the limit charts; Gamma(U_k^inf)=colim Gamma(U_k,lambda) from the two pbc limit nodes; sibling def-nagata-morphism-equality-stage and lemma-nagata-qc-open-eq-eventually get lambda_{W1=W2} with chartwise identities. FIX more, RETURN less: (1) E/C4 hypothesis 'Y_lambda0 qcqs over S_lambda0' gives no finite affine cover unless S_lambda0 qc: stated Y_lambda0 qcqs as a scheme (holds in the unit, S_lambda0 finite type over Z); (2) C4 lemma-nagata-filtered-colimit-finite-data gives arbitrary lifts, not the pullbacks of f_ijk: coefficients lifted per chart by it, each identity then made exact at a stage nu by the injectivity clause of lem-weil-pbc-limit-global-sections-colimit, F = {lambda0, mu_k, nu}.; 1 file(s) fixed by the reviewer"
+ },
+ "lead_note": "2026-10-10 L (R-qoe2734): R-qoe2622's three points repaired (E7 hypotheses, finite stage list via u(F), basechanged-system cited); reviewer made the qcqs hypothesis absolute (qcqs over S_lambda0 does not give a finite affine cover unless S_lambda0 is qcqs; holds in the unit, S_lambda finite type over Z) and fixed the witness stages so identities hold with the actual pullbacks f_{ijk,lambda}",
+ "lead_notes": [
+  "2026-10-10 22:03 UTC L: confirmed R-qoe2734's hypothesis change 'Y_λ0 qcqs as a scheme' (not 'over S_λ0'): the finite affine cover needs Y_λ0 itself quasi-compact, and in this unit S_λ0 is of finite type over Z, so the citers lemma-nagata-qc-open-eq-eventually and def-nagata-morphism-equality-stage can supply it; the change is named as E7 in the node."
+ ],
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.NagataQCOpenEqualityStage",
+  "declaration": "AlgebraicGeometry.nagataQCOpenEqualityStage",
+  "file": "lean/Sheaf/AlgebraicGeometry/NagataQCOpenEqualityStage.lean",
+  "statement": "def nagataQCOpenEqualityStage {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I] (D : Iᵒᵖ ⥤ Scheme.{u}) (c : Cone D) (hc : IsLimit c) [∀ {i j : Iᵒᵖ} (f : i ⟶ j), IsAffineHom (D.map f)] (i₀ : I) {Y₀ : Scheme.{u}} (p : Y₀ ⟶ D.obj (Opposite.op i₀)) [CompactSpace Y₀] [QuasiSeparatedSpace Y₀] (W₁ W₂ : Y₀.Opens) (hW₁ : IsCompact (W₁ : Set Y₀)) (hW₂ : IsCompact (W₂ : Set Y₀)) (hEq : pullback.fst p (c.π.app (Opposite.op i₀)) ⁻¹ᵁ W₁ = pullback.fst p (c.π.app (Opposite.op i₀)) ⁻¹ᵁ W₂) (d : I → I → I) (r : LinearOrder I) : I",
+  "branch": "sheaf-dag",
+  "by": "N1",
+  "date": "2026-10-11",
+  "existing": false,
+  "note": "R-qoe repair with explicit statement-correction proposal: full geometric inputs, baseChangeDiagram/baseChangeCone, and Classical.choose only from the proved compact-open equality descent result. F is the base stage and the chosen equality stage. The eventual-equality citer loses chartwise data and is flagged holds:false in statement_change."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-h86e76",
+  "group": "N1",
+  "result": "pass",
+  "note": "headless review: corrected node (correction authorized by R-qoe): nonempty directed preorder I ([Preorder I][IsDirected][Nonempty]); D : Iᵒᵖ ⥤ Scheme, cone c with hc : IsLimit c; affine transitions (IsAffineHom instance); λ₀ = i₀, p : Y₀ ⟶ D(op i₀), Y₀ qcqs (CompactSpace, QuasiSeparatedSpace); W₁ W₂ compact opens (hW₁ hW₂); equal inverse images under Y = pullback p (c.π.app i₀) → Y₀ (hEq via pullback.fst, the vertex of the recorded baseChangeCone); B, b = recorded baseChangeDiagram/baseChangeCone with isLimitBaseChangeCone; j₀ = Over.mk 𝟙, f₀ = pullback.fst; witness chosen by Classical.choose from the proved exists_map_preimage_eq_map_preimage; τ = left.unop ≥ λ₀; output directedFiniteUpperBound i₀ d r {i₀, τ}; no sorry; clean compile 1.9 s; citer lemma-nagata-qc-open-eq-eventually correctly flagged holds:false",
+  "statement_corrected": true
+ },
+ "statement_change": {
+  "date": "2026-10-11",
+  "by": "N1 stage 2",
+  "old_statement": "Fix the base-changed system of [def-nagata-basechanged-system] with $\\lambda_0\\in I$. Assume that $I$ is directed, $S=\\varprojlim_\\lambda S_\\lambda$, every transition $S_\\mu\\to S_\\lambda$ is affine, and $Y_{\\lambda_0}$ is quasi-compact and quasi-separated (as a scheme; this holds when $S_{\\lambda_0}$ is quasi-compact and quasi-separated and $Y_{\\lambda_0}\\to S_{\\lambda_0}$ is quasi-compact and quasi-separated, e.g. $S_{\\lambda_0}$ of finite type over $\\mathbf Z$). Let $W_{1,\\lambda_0},W_{2,\\lambda_0}\\subseteq Y_{\\lambda_0}$ be quasi-compact opens whose inverse images in $Y$ agree. Choose a finite affine cover $Y_{\\lambda_0}=\\bigcup_k U_k$ and write $U_{k,\\lambda}$ for its inverse image in $Y_\\lambda$ and $U_k^\\infty$ for its inverse image in $Y$. Using quasi-separatedness, choose finite presentations $W_{i,\\lambda_0}\\cap U_k=\\bigcup_jD(f_{ijk})$ with $f_{ijk}\\in\\Gamma(U_k,\\mathcal O)$, and denote their pullbacks to $\\Gamma(U_k^\\infty,\\mathcal O)$ by $\\bar f_{ijk}$. Equality of the two inverse-image opens gives the radical containments $\\bar f_{1jk}\\in\\sqrt{(\\bar f_{2\\ell k})_\\ell}$ and $\\bar f_{2jk}\\in\\sqrt{(\\bar f_{1\\ell k})_\\ell}$ in the limit ring. Choose witnessing identities $\\bar f_{1jk}^{n_{1jk}}=\\sum_\\ell a_{1jk\\ell}\\bar f_{2\\ell k}$ and $\\bar f_{2jk}^{n_{2jk}}=\\sum_\\ell a_{2jk\\ell}\\bar f_{1\\ell k}$, with finitely many coefficients. By [lem-weil-pbc-limit-affine-transition] and [lem-weil-pbc-limit-global-sections-colimit] (Stacks Tags 01YW/01Z0), $\\Gamma(U_k^\\infty,\\mathcal O)\\cong\\varinjlim_{\\lambda\\geq\\lambda_0}\\Gamma(U_{k,\\lambda},\\mathcal O)$. Write $f_{ijk,\\lambda}\\in\\Gamma(U_{k,\\lambda},\\mathcal O)$ for the pullback of $f_{ijk}$ (so its image in $\\Gamma(U_k^\\infty,\\mathcal O)$ is $\\bar f_{ijk}$). For each $k$, apply [lemma-nagata-filtered-colimit-finite-data] to the directed system $(\\Gamma(U_{k,\\lambda},\\mathcal O))_{\\lambda\\geq\\lambda_0}$ and the finitely many coefficients $a_{ijk\\ell}$ (no equalities) to select a stage $\\mu_k\\geq\\lambda_0$ and lifts $a_{ijk\\ell,\\mu_k}\\in\\Gamma(U_{k,\\mu_k},\\mathcal O)$. For each witnessing identity, the element $f_{1jk,\\mu_k}^{n_{1jk}}-\\sum_\\ell a_{1jk\\ell,\\mu_k}f_{2\\ell k,\\mu_k}$ (resp. $f_{2jk,\\mu_k}^{n_{2jk}}-\\sum_\\ell a_{2jk\\ell,\\mu_k}f_{1\\ell k,\\mu_k}$) maps to $0$ in $\\Gamma(U_k^\\infty,\\mathcal O)$, so by the injectivity clause of [lem-weil-pbc-limit-global-sections-colimit] select a stage $\\nu\\geq\\mu_k$ at which its image in $\\Gamma(U_{k,\\nu},\\mathcal O)$ is $0$, i.e. the identity holds there with the actual pullbacks $f_{ijk,\\nu}$ and the transported coefficients. Let $F$ be the finite set consisting of $\\lambda_0$, the $\\mu_k$ and these finitely many witness stages $\\nu$, and define $\\lambda_{W_1=W_2}:=u(F)$ using [def-nagata-directed-finite-upper-bound]. (At any $\\lambda$ above every element of $F$ the transported identities give $D(f_{1jk,\\lambda})\\subseteq\\bigcup_\\ell D(f_{2\\ell k,\\lambda})$ and conversely in $U_{k,\\lambda}$, which is what the eventual-equality lemma for these opens uses.)",
+  "what": "R-qoe rejects the data-only wrapper and explicitly permits a statement-correction proposal using Mathlib exists_map_preimage_eq_map_preimage / Stacks 01Z4(2) if the full chartwise construction is out of reach. The old construction leaves the actual choice rule for its covers, presentations, coefficients and stages unspecified; the delivered free-stage binders did not construct any of these. This proposal specifies classical choice from a proved geometric equality-descent result instead, and changes F to the base and selected equality witness. This is a change of the selection procedure, not a claim that the old mathematical construction is false. It preserves the geometric setting and eventual-equality purpose; the chartwise-data citer is explicitly marked broken. The blueprint unit statement is unchanged.",
   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-nagata-compactification/sk-prop-nagata-sketch-approximation/def-nagata-qc-open-equality-stage.md",
-    "place": "node def-nagata-qc-open-equality-stage, order 349"
+   "document": "https://stacks.math.columbia.edu/tag/01Z4",
+   "place": "Lemma 32.4.11 (2), applied to the base-changed limit; correction alternative explicitly authorized by return R-qoe"
   },
-  "stmt_deps": [
-    "def-nagata-basechanged-system",
-    "def-nagata-directed-finite-upper-bound",
-    "lemma-nagata-filtered-colimit-finite-data",
-    "lem-weil-pbc-limit-affine-transition",
-    "lem-weil-pbc-limit-global-sections-colimit"
+  "citers": [
+   {
+    "id": "def-nagata-morphism-descent",
+    "holds": true,
+    "note": "Uses the equality stage only to make two compact opens equal at all later stages; the new selection supports that use."
+   },
+   {
+    "id": "def-nagata-morphism-equality-stage",
+    "holds": true,
+    "note": "The same geometric inputs yield an index above the base; subsequent eventual open equality is unchanged."
+   },
+   {
+    "id": "def-nagata-relative-gluing-valid-stage",
+    "holds": true,
+    "note": "Uses only equality stages and transport of open equalities to a common upper bound."
+   },
+   {
+    "id": "lemma-nagata-qc-open-eq-eventually",
+    "holds": false,
+    "note": "The eventual-equality conclusion remains true, but its statement imports chart presentations and power identities that this corrected definition does not construct; its chartwise proof must instead use the chosen equality witness and transport."
+   }
   ],
-  "proof": [],
-  "proof_deps": [],
-  "proof_origin": null,
-  "mathlib_searches": [
-    {
-      "tool": "leanfinder",
-      "query": "finite stage selected upper bound of witness stages for equality of quasi-compact opens",
-      "results": "AlgebraicGeometry.exists_eq_pow_mul_of_isCompact_of_isQuasiSeparated; AlgebraicGeometry.Scheme.quasiSeparatedSpace_of_isOpenCover; AlgebraicGeometry.exists_of_res_eq_of_qcqs; AlgebraicGeometry.Scheme.OpenCover.finiteSubcover_f; AlgebraicGeometry.exists_of_res_eq_of_qcqs_of_top; AlgebraicGeometry.isRetrocompact_basicOpen; AlgebraicGeometry.exists_of_res_zero_of_qcqs; AlgebraicGeometry.isCompactOpen_iff_eq_finset_affine_union",
-      "date": "2026-10-11",
-      "verdict": "no match: hits provide compact/basic-open facts but no project-specific selected equality stage"
-    },
-    {
-      "tool": "loogle",
-      "query": "QuasiCompact open inverse image equality finite stage",
-      "results": "none (parser rejected the supplied pattern)",
-      "date": "2026-10-11",
-      "verdict": "no match"
-    },
-    {
-      "tool": "grep",
-      "query": "quasi.?compact|equality.?stage|finite.?stage in Mathlib/AlgebraicGeometry",
-      "results": "none",
-      "date": "2026-10-11",
-      "verdict": "no match"
-    },
-    {
-      "tool": "leansearch",
-      "query": "stage at which inverse images of quasi-compact opens become equal",
-      "results": "service unavailable: Internal Server Error",
-      "date": "2026-10-11",
-      "verdict": "unavailable"
-    }
-  ],
-  "mathlib_match": null,
-  "status": "split",
-  "merged_into": null,
-  "import_flags": [
-    "bypassed"
-  ],
-  "blueprint_kind": "definition",
-  "blueprint_order": 349,
-  "blueprint_uses": [
-    "def-nagata-directed-finite-upper-bound",
-    "lemma-nagata-filtered-colimit-finite-data"
-  ],
-  "uses_not_cited": [
-    "def-nagata-directed-finite-upper-bound",
-    "lemma-nagata-filtered-colimit-finite-data"
-  ],
-  "blueprint_notes": [
-    {
-      "label": "status",
-      "text": "**Status.** Bypassed by the formalized route: the finite-presentation and\nNoetherian descent is done in one step by\n`AlgebraicGeometry.Scheme.exists_isPullback_of_finitePresentation_of_isSeparated`\nand `AlgebraicGeometry.Scheme.nonempty_noetherianApproximation`, so\nthis stage-by-stage bookkeeping is never carried out.",
-      "where": "statement"
-    }
-  ],
-  "lean_audit": {
-    "master": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    },
-    "slopmaster2": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    }
-  },
-  "chapter": "sec-nagata-compactification",
-  "unit": "sk-prop-nagata-sketch-approximation",
-  "split_report": {
-    "date": "2026-10-11",
-    "item": "def-nagata-qc-open-equality-stage",
-    "worker": "stage1",
-    "summary": "Repaired the definition after return E7: the statement now assumes the qcqs base scheme and affine transitions required for finite affine charts and the affine global-sections colimit, introduces the base-changed system dependency, specifies both chartwise radical containments and their witnessing power identities with coefficients, applies finite-data descent to obtain the finite witness-stage set, and then applies the selected finite upper bound.",
-    "blueprint": "The definition clause describing finite affine basic-open presentations and the selected upper bound of all witness stages; the explicit chartwise construction expands the blueprint's formerly unspecified required radical containment and finite stage containing a witnessing power.",
-    "tool_uses": []
-  },
-  "reviewed": {
-    "date": "2026-10-10",
-    "by": "L",
-    "reviewer": "R-qoe2734",
-    "group": "G1",
-    "result": "pass",
-    "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-qoe2734 (reviewer sub-agent of L); spot-checked: Return 21:35 points 1-3 repaired: E7 hypotheses (directed I, affine transitions, qcqs) named, finite list of chartwise radical-containment identities with u(F) from def-nagata-directed-finite-upper-bound, def-nagata-basechanged-system in stmt_deps; radical containments correct in the limit charts; Gamma(U_k^inf)=colim Gamma(U_k,lambda) from the two pbc limit nodes; sibling def-nagata-morphism-equality-stage and lemma-nagata-qc-open-eq-eventually get lambda_{W1=W2} with chartwise identities. FIX more, RETURN less: (1) E/C4 hypothesis 'Y_lambda0 qcqs over S_lambda0' gives no finite affine cover unless S_lambda0 qc: stated Y_lambda0 qcqs as a scheme (holds in the unit, S_lambda0 finite type over Z); (2) C4 lemma-nagata-filtered-colimit-finite-data gives arbitrary lifts, not the pullbacks of f_ijk: coefficients lifted per chart by it, each identity then made exact at a stage nu by the injectivity clause of lem-weil-pbc-limit-global-sections-colimit, F = {lambda0, mu_k, nu}.; 1 file(s) fixed by the reviewer"
-  },
-  "lead_note": "2026-10-10 L (R-qoe2734): R-qoe2622's three points repaired (E7 hypotheses, finite stage list via u(F), basechanged-system cited); reviewer made the qcqs hypothesis absolute (qcqs over S_lambda0 does not give a finite affine cover unless S_lambda0 is qcqs; holds in the unit, S_lambda finite type over Z) and fixed the witness stages so identities hold with the actual pullbacks f_{ijk,lambda}",
-  "lead_notes": [
-    "2026-10-10 22:03 UTC L: confirmed R-qoe2734's hypothesis change 'Y_λ0 qcqs as a scheme' (not 'over S_λ0'): the finite affine cover needs Y_λ0 itself quasi-compact, and in this unit S_λ0 is of finite type over Z, so the citers lemma-nagata-qc-open-eq-eventually and def-nagata-morphism-equality-stage can supply it; the change is named as E7 in the node."
+  "old_stmt_deps": [
+   "def-nagata-basechanged-system",
+   "def-nagata-directed-finite-upper-bound",
+   "lemma-nagata-filtered-colimit-finite-data",
+   "lem-weil-pbc-limit-affine-transition",
+   "lem-weil-pbc-limit-global-sections-colimit"
   ]
+ }
 }
