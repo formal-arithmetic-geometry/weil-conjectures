@@ -4248,3 +4248,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 10:30 L: merged deliver/H1/lem-weil-pbc-flat-formally-smooth-closed-fibre-adic (stage 2; reviewer PASS; first push; Sheaf.RingTheory.FormallySmoothAdicOfFlatClosedFiber RingHom.formallySmoothAdic_of_flat_closedFiber)
 - 10:30 L: merged deliver/F1/lem-weil-pbc-flat-local-extension-given-residue-field (stage 2; reviewer PASS; first push; Sheaf.RingTheory.FlatLocalExtensionGivenResidueField IsLocalRing.exists_flat_local_extension_given_residue_field)
 - 10:30 L: merged deliver/G1/lem-weil-pbc-flat-fibres-irreducible (stage 2; reviewer PASS; first push; Sheaf.Paper.FlatFibresIrreducible flat_finitePresentation_dense_irreducible_fibres)
+- 10:30 L: merged deliver/E1/lem-weil-pbc-flat-another-variant-local-criterion (stage 2; reviewer PASS; first push; Sheaf.RingTheory.FlatOfLocalCriterionBaseChange Module.flat_of_local_criterion_baseChange)
