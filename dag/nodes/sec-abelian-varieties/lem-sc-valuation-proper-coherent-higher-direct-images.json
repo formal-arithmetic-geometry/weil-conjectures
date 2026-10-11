@@ -25,9 +25,50 @@
   "def-amb-finite-locally-free-module",
   "def-sc-finitely-presented-module"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Choose a finite affine trivializing cover of X (finite because f is of finite presentation). On each trivializing affine, F is a finite free module, so the local presentations glue to show that F is finitely presented. Since f is flat, O_X is flat over A; each such finite free F is therefore A-flat, and flatness is local on X, so F is flat over Spec(A). Apply [lem-pc-rf-perfect-base-change] to f and F. Its hypotheses are exactly properness and finite presentation of f, finite presentation of F, and flatness over the base, so E := Rf_*F is a perfect object of D(O_{Spec(A)}).",
+   "uses": [
+    "def-amb-finite-locally-free-module",
+    "lem-pc-rf-perfect-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Derived Categories of Schemes, Lemma 36.30.4, Tag 0B91, clause (2)"
+   }
+  },
+  {
+   "text": "A is coherent: by definition of a valuation ring every nonzero finitely generated ideal I of A is principal, I=aA with a\\neq0, and since A is a domain multiplication by a gives A\\cong aA, so I is free of rank one and hence finitely presented (Stacks, Algebra, Example 0EWV). Next, E=Rf_*F is perfect [def-pc-perfect-complex], so Spec(A) has an open covering (U_i) with E|_{U_i} strictly perfect. Since A is local, the only open subset of Spec(A) containing the closed point is Spec(A) itself, so some U_i equals Spec(A); thus E is strictly perfect on the affine Spec(A), and by the affine description in [def-pc-perfect-complex] (Tag 08EB) E\\cong\\widetilde{P^\\bullet} for a bounded complex P^\\bullet of finite projective A-modules. As M\\mapsto\\widetilde M is exact, R^qf_*F=H^q(E)\\cong\\widetilde{H^q(P^\\bullet)} [def-pc-derived-direct-image], a quasi-coherent sheaf on Spec(A). By [lem-sc-coherent-ring-perfect-complex-cohomology], applied to the coherent ring A, each H^q(P^\\bullet) is finitely presented over A. Finally F is quasi-coherent [def-amb-finite-locally-free-module], so the Leray spectral sequence [pqf-lem-leray] E_2^{p,q}=H^p(\\operatorname{Spec}(A),R^qf_*F)\\Rightarrow H^{p+q}(X,F) applies; its terms with p>0 vanish by [lem-pc-affine-vanishing] since R^qf_*F is quasi-coherent on the affine scheme Spec(A). Hence it degenerates and H^q(X,F)\\cong\\Gamma(\\operatorname{Spec}(A),R^qf_*F)=H^q(P^\\bullet), which is finitely presented over A for every q\\geq0.",
+   "uses": [
+    "def-pc-perfect-complex",
+    "def-pc-derived-direct-image",
+    "lem-sc-coherent-ring-perfect-complex-cohomology",
+    "def-amb-finite-locally-free-module",
+    "pqf-lem-leray",
+    "lem-pc-affine-vanishing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Derived Categories of Schemes, Lemma 0EX6 (cohomology over a coherent ring), with Algebra, Example 0EWV (valuation rings are coherent)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-amb-finite-locally-free-module",
+  "lem-pc-rf-perfect-base-change",
+  "def-pc-perfect-complex",
+  "def-pc-derived-direct-image",
+  "lem-sc-coherent-ring-perfect-complex-cohomology",
+  "pqf-lem-leray",
+  "lem-pc-affine-vanishing"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-on-algebra.tex",
+  "place": "More on Algebra, Lemma 0EX8 proof using coherent valuation rings and perfect cohomology"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -59,10 +100,36 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sc-valuation-proper-coherent-sections",
   "by": "worker",
   "date": "2026-10-11"
+ },
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-sc-valuation-proper-coherent-higher-direct-images",
+  "worker": "stage1",
+  "summary": "The item is not stated by a sorry-free declaration. I split off the genuine algebraic input that cohomology modules of bounded finite projective complexes over coherent rings are finitely presented. The item proof first applies the existing perfect direct-image/base-change theorem, then uses coherence of valuation rings, the affine description of perfect complexes, the new child statement, and the definition of derived direct image to obtain finite presentation in every degree.",
+  "blueprint": "Realizes the theorem-of-the-cube ancestor proof sentence 'properness over a valuation ring makes global sections of an invertible module finitely presented', with the higher-direct-image route supplied by the perfectness and coherent-ring arguments.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-rf-perfect-base-change",
+    "why": "The Picard unit has no local statement of perfectness for a proper finitely presented flat sheaf; this generic perfect direct-image theorem supplies it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-rf-perfect-base-change",
+  "pqf-lem-leray",
+  "lem-pc-rf-perfect-base-change"
+ ],
+ "reviewed": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-vhd0043",
+  "group": "F1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-vhd0043 (reviewer sub-agent of L); spot-checked: Step1 vs lem-pc-rf-perfect-base-change hyps (fp, flat over S from finite free + X flat) and def-amb: OK; citer 62557e2cd step 2 uses q=0 exactly: OK; no duplicate coherent/valuation node; Mathlib grep for coherent rings: none. FIX more, RETURN less: (1) C1 Step 2 coherence of valuation rings uncited: written out (f.g. ideal principal, free since domain; Tag 0EWV); (2) C1/C4 Step 2 'Spec A covered by itself' unjustified and H^q(X,F)=H^q(E) claimed from the definition of Rf_*: now local-ring argument for a global strictly perfect model and Leray [pqf-lem-leray, generic tool] + [lem-pc-affine-vanishing] for H^q(X,F)=Gamma(R^qf_*F); (3) B3 new node source cited Tag 0ASU (Bezout domains, unrelated): replaced by More on Algebra 0EWZ + Algebra 05CX; Mathlib grep recorded.; 2 file(s) fixed by the reviewer"
  }
 }
