@@ -120,5 +120,23 @@
   "group": "E1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-spt1950 (reviewer sub-agent of L); spot-checked: Checked item vs Tag 0A9R, new nodes vs Tags 09M1 and 0B6G (Noetherian specialization), no duplicate nodes for 09M1/0B6G in dag; steps 1-3 sound with cited statements. FIX more, RETURN less: (1) B3 step texts rewritten in TeX, including the preflight plain-text arrow in steps 2-3; (2) step 3 orthogonal class corrected from Hom(A,C)=0 (not shift-closed) to Hom(A[n],C)=0 for all n, with the shift argument for perfect P and A=C conclusion made explicit; step 2 now names compactness of P on X for the left-hand identification. Fault (2) was missed by the second reading.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProperPerfectRightAdjointCoproducts",
+  "declaration": "AlgebraicGeometry.properPerfect_rightAdjoint_preservesCoproducts",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProperPerfectRightAdjointCoproducts.lean",
+  "statement": "theorem properPerfect_rightAdjoint_preservesCoproducts {X Y : Scheme.{u}} [IsNoetherian X] [IsNoetherian Y] [HasDerivedCategory.{wX} (SheafOfModules.{u} (moduleRings X.toRingedSpace))] [HasDerivedCategory.{wY} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))] (f : X ⟶ Y) [IsProper f] (hTor : ∀ x : X, ∃ n : ℕ, ∀ (N : ModuleCat.{u} (Y.presheaf.stalk (f x))) (i : ℕ), n < i → IsZero (((Tor (ModuleCat.{u} (Y.presheaf.stalk (f x))) i).obj ((ModuleCat.restrictScalars (f.stalkMap x).hom).obj (ModuleCat.of (X.presheaf.stalk x) (X.presheaf.stalk x)))).obj N)) (R : schemeDerivedQCohCategory X ⥤ schemeDerivedQCohCategory Y) (eR : R ⋙ (schemeDerivedQCohProperty Y).ι ≅ (schemeDerivedQCohProperty X).ι ⋙ schemeDerivedDirectImage f) (c : schemeDerivedQCohCategory Y ⥤ schemeDerivedQCohCategory X) (adj : R ⊣ c) : ∀ I : Type v, PreservesColimitsOfShape (Discrete I) c",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "H1",
+  "result": "pass",
+  "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
  }
 }
