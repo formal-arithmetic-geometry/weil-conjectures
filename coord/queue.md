@@ -1,6 +1,6 @@
 # Work queue
 
-860 items; claim with `tools/claim.py next <group> [--stage N]`.
+861 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (33)
 
@@ -8,8 +8,8 @@
 |---|---|---|
 | `lem-weil-derived-limit-roos-complex` | 15 | none |
 | `lem-pc-ringed-space-module-stalk-tensor` | 3013 | none |
-| `lem-pc-ring-pseudo-coherent-distinguished-triangle` | 3017 | none |
 | `lem-pc-ring-pseudo-coherent-iff-all-m` | 3017 | none |
+| `lem-pc-ring-derived-map-lift` | 3018 | none |
 | `lem-sc-affine-koszul-hom-alternating-cech` | 3022 | none |
 | `lem-pc-termwise-tor-acyclic-derived-tensor` | 3023 | none |
 | `lem-pc-genus-agrees-sc` | 4007 | rests_on_sorry |
@@ -19,9 +19,9 @@
 | `lem-sc-finite-flat-surj-points` | 4009 | none |
 | `lem-sc-strict-henselization-completion-flat-over-base` | 4013 | none |
 | `lem-pc-derived-tensor-transitivity` | 5015 | none |
-| `lem-pc-derived-mayer-vietoris-functorial` | 5017 | none |
 | `lem-pc-derived-tensor-localization-cohomology` | 5017 | none |
 | `lem-pc-affine-flat-module-localization-preserves-flatness` | 5018 | none |
+| `lem-pc-derived-functor-termwise-split-ses-triangle` | 5018 | none |
 | `lem-sp-ce-vertical-nullhomotopy` | 6008 | none |
 | `pqf-lem-serre-criterion` | 6013 | none |
 | `lem-sc-perfect-finite-free-residue-model` | 6014 | none |
@@ -40,7 +40,7 @@
 | `lem-pur-left-derived-exact-when-defined` | - | none |
 | `lem-pur-quasi-isos-saturated-triangulated` | - | none |
 
-## Stage 2: nodes to state (827)
+## Stage 2: nodes to state (828)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -193,6 +193,7 @@
 | `lem-pc-right-derived-functor-triangulated` | 1 | state |
 | `lem-pc-right-localization-hom-colimit` | 1 | state |
 | `lem-pc-ring-m-pseudo-coherent-vanishing-base` | 1 | state |
+| `lem-pc-ring-pseudo-coherent-distinguished-triangle` | 1 | state |
 | `lem-pc-ring-pseudo-coherent-localization-glue` | 1 | state |
 | `lem-pc-scheme-connected-iff-idempotents` | 1 | state |
 | `lem-pc-scheme-dimension-local-rings` | 1 | state |
@@ -872,7 +873,7 @@
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 | `def-nagata-fixed-base-separated-stage` | 6 | state |
 
-Not open yet: 1739 nodes that wait for a statement dependency, 74 nodes that wait for stage 1.
+Not open yet: 1740 nodes that wait for a statement dependency, 74 nodes that wait for stage 1.
 
 ## Stage 3: modules to prove (0)
 
