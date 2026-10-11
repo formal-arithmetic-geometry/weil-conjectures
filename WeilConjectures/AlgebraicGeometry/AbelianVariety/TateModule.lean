@@ -42,6 +42,7 @@ they realise is about abelian varieties and so that they do not shadow
 - `AlgebraicGeometry.IsAbelianVariety.galoisRepresentation`: the action of `Gal(K̄/K)` on `T_ℓ A`.
 - `AlgebraicGeometry.IsAbelianVariety.pointsAddEquivGeometricPoints`: over an algebraically
   closed field `K`, `A(K) ≃ A(K̄)`.
+- `AlgebraicGeometry.IsAbelianVariety.tateModuleEquivTorsionPoints`: `T_ℓ A = lim_n A[ℓ ^ n](K̄)`.
 
 ## Main statements
 
@@ -125,7 +126,12 @@ variable {K : Type u} [Field K] (ℓ : ℕ) [Fact ℓ.Prime] (A : Over (Spec (.o
 
 The *`ℓ`-adic Tate module* of an abelian variety `A` over `K` is the inverse limit
 `T_ℓ A = lim_n A[ℓ^n](K̄)`, the transition map from level `n + 1` to level `n` being
-multiplication by `ℓ`. It is a `ℤ_[ℓ]`-module. -/
+multiplication by `ℓ`. It is a `ℤ_[ℓ]`-module.
+
+This is also blueprint `def-wf-abelian-tate-module`. It is defined as the Tate module
+`T_ℓ (A(K̄))` of the group of geometric points; the identification with compatible systems of
+points of the torsion subgroup schemes `A[ℓ ^ n]` is
+`AlgebraicGeometry.IsAbelianVariety.tateModuleEquivTorsionPoints`. -/
 noncomputable def tateModule :
     AddSubgroup (∀ _ : ℕ, Additive (Scheme.specAlgebraicClosure K ⟶ A)) :=
   AddCommGroup.tateModule ℓ (Additive (Scheme.specAlgebraicClosure K ⟶ A))
@@ -184,6 +190,7 @@ noncomputable def tateModuleEquivTorsionPoints :
     (cancel_mono (torsionSubgroupScheme.ι A (ℓ ^ n))).mp
       (torsionByPointsEquiv_comp_ι A (ℓ ^ n) _ _)
 
+omit [Fact ℓ.Prime] in
 /-- The point of `A[ℓ ^ n]` attached to `t ∈ T_ℓ A` by
 `AlgebraicGeometry.IsAbelianVariety.tateModuleEquivTorsionPoints` is the `n`-th coordinate of
 `t`, viewed in `A[ℓ ^ n]`. -/

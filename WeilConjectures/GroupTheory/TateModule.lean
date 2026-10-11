@@ -40,6 +40,8 @@ Tate module* is the `ℚ_[ℓ]`-vector space `V_ℓ M = ℚ_[ℓ] ⊗_{ℤ_[ℓ]
 - `AddCommGroup.tateModule.eq_zero_of_pow_zsmul_eq_zero`: `T_ℓ M` has no `ℓ`-power torsion; it
   is a torsion-free `ℤ_[ℓ]`-module.
 - `AddCommGroup.rationalTateModule.injective_one_tmul`: `T_ℓ M → V_ℓ M` is injective.
+- `AddCommGroup.rationalTateModule.exists_eq_inv_pow_tmul`,
+  `AddCommGroup.rationalTateModule.inv_pow_tmul_eq_inv_pow_tmul_iff`: `V_ℓ M = T_ℓ M [1 / ℓ]`.
 - `AddCommGroup.tateModule.nonempty_linearEquiv_of_natCard_eq`,
   `AddCommGroup.rationalTateModule.nonempty_linearEquiv_of_natCard_eq`: if `M` is `ℓ`-divisible
   and `|M[ℓ]| = ℓ ^ r`, then `T_ℓ M ≅ ℤ_[ℓ] ^ r` and `V_ℓ M ≅ ℚ_[ℓ] ^ r`.
@@ -59,7 +61,10 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] (M : Type u) [AddCommGroup M]
 
 The *Tate module* `T_ℓ M` of an abelian group `M` at a prime `ℓ` is the subgroup of the product
 `∀ n : ℕ, M` consisting of the compatible systems `t` of `ℓ ^ n`-torsion points, that is, those
-`t` with `ℓ ^ n • t n = 0` for all `n` and `ℓ • t (n + 1) = t n` for all `n`. -/
+`t` with `ℓ ^ n • t n = 0` for all `n` and `ℓ • t (n + 1) = t n` for all `n`.
+
+This is also blueprint `def-tate-module-abelian-group`; the blueprint indexes from `n = 1`, and
+the extra coordinate `t 0` here is always `0`. -/
 def tateModule : AddSubgroup (∀ _ : ℕ, M) where
   carrier := {t | (∀ n, (ℓ : ℤ) ^ n • t n = 0) ∧ ∀ n, (ℓ : ℤ) • t (n + 1) = t n}
   zero_mem' := by simp

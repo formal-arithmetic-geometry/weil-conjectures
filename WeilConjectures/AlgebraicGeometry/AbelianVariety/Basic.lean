@@ -31,6 +31,8 @@ varieties are the same thing.
   geometrically integral over the base field.
 - `AlgebraicGeometry.IsAbelianVariety.irreducibleSpace`: its underlying space is irreducible.
 - `AlgebraicGeometry.IsAbelianVariety.isCommMonObj`: an abelian variety is commutative.
+- `AlgebraicGeometry.isAbelianVariety_iff_geometricallyConnected`: abelian varieties are the
+  proper smooth geometrically connected group schemes.
 - `AlgebraicGeometry.IsAbelianVariety.pullback`: the base change of an abelian variety to an
   extension field is an abelian variety.
 -/

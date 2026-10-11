@@ -123,7 +123,9 @@ invertible, this equals `g!` times its coefficient of `m^g`. Here `g` is the top
 dimension of `X`, read as `0` if `X` is empty or infinite-dimensional.
 
 The value is meaningful only for `f` proper and `M` coherent: otherwise the Euler
-characteristics involved may be junk values. -/
+characteristics involved may be junk values.
+
+This is also blueprint `def-sc-hilbert-degree`. -/
 noncomputable def Scheme.Hom.degree (f : X ⟶ Spec (.of K)) (M : X.Modules) : ℤ :=
   Δ_[1]^[((topologicalKrullDim X).unbotD 0).toNat] (f.hilbertFunction M) 0
 

@@ -34,6 +34,8 @@ subgroup schemes, the `n`-torsion subgroup scheme and isogenies.
 - `AlgebraicGeometry.torsionSubgroupScheme`: the `n`-torsion subgroup scheme `G[n]`.
   Being a kernel, it is itself a group scheme (`CategoryTheory.GrpObj.instGrpObjKer`).
 - `AlgebraicGeometry.torsionByEquiv`: the `K`-points of `G[n]` are the `n`-torsion of `G(K)`.
+- `AlgebraicGeometry.torsionByPointsEquiv`: the same for `T`-points, `T` any `K`-scheme.
+- `AlgebraicGeometry.torsionSubgroupSchemeMul`: multiplication by `k` from `G[k * n]` to `G[n]`.
 - `AlgebraicGeometry.IsIsogeny`: a surjective homomorphism of group schemes with finite kernel.
 - `AlgebraicGeometry.isogenyDegree`: the degree of an isogeny, the order of its kernel.
 
@@ -177,6 +179,8 @@ theorem Scheme.Hom.etale_iff_etale_ΓAlgebra_of_isFinite {X : Scheme.{u}}
 end Etale
 
 /-- Blueprint `sk-def-av-mult-n`: Multiplication by `n` and `n`-torsion.
+
+This is also blueprint `def-sc-mult-n`.
 
 The `n`-torsion subgroup scheme `G[n]` of a group scheme `G` over `K` is the kernel of the
 `n`-th power map `𝟙 G ^ n`, which on points is `a ↦ a + ⋯ + a`:
