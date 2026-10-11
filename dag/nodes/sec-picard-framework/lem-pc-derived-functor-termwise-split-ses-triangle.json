@@ -141,5 +141,30 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-tst0107 (reviewer sub-agent of L); spot-checked: FIX more, RETURN less: (1) C4/B3: statement cited [def-pc-derived-direct-image] (schemes) while stmt_deps listed def-pc-ringed-spaces-derived-direct-image, and Step 2 cited the g_*-only definition for a general additive F; repaired by specializing the statement to g_* (E7, sufficient for the citer cab86b3fb step 3, F=h_*) citing def-pc-ringed-spaces-derived-direct-image. (2) C1: Step 3 asserted the RF triangle's third map equals delta' 'including the shift sign' with no cited statement about the unspecified shift isomorphism of lem-pc-right-derived-functor-triangulated; repaired by stating and proving the identification phi_{I_1[1]} Rg_*(delta) = delta' phi_{I_3} from the definition (functorial K-injective resolutions, g_* preserves homotopies; I_1[1] K-injective, elementary) and distinguishedness by TR1 isomorphism closure, dropping lem-pc-right-derived-functor-triangulated. (3) delta = Q(pi d s) from lem-weil-pbc-degreewise-split-derived-triangle (Mathlib homOfDegreewiseSplit, cone sign) and the image delta' = Q(g_*(pi d s)) since g_* is additive. Duplicates: lem-weil-pbc-right-derived-universal-delta-functor / lem-weil-pbc-exact-functor-ses-triangle-image are about R^n v / exact functors on objects, not this; no duplicate. Second reading missed (1) and (2); its claim of changing created.item is untrue (created.item stays the H1 item, correct).; 1 file(s) fixed by the reviewer"
  },
- "lead_note": "2026-10-11 L (R-tst0107): Statement specialized from a general additive F to g_* of a morphism of ringed spaces (E7: the only RF definition in the DAG is def-pc-ringed-spaces-derived-direct-image; the citer cab86b3fb step 3 uses F=h_*). Citer step 3 / lem-pc-right-derived-functor-triangulated leave the shift isomorphism sigma unspecified; this item now states the identification of Rg_*(delta) via phi_{I_1[1]} without sigma."
+ "lead_note": "2026-10-11 L (R-tst0107): Statement specialized from a general additive F to g_* of a morphism of ringed spaces (E7: the only RF definition in the DAG is def-pc-ringed-spaces-derived-direct-image; the citer cab86b3fb step 3 uses F=h_*). Citer step 3 / lem-pc-right-derived-functor-triangulated leave the shift isomorphism sigma unspecified; this item now states the identification of Rg_*(delta) via phi_{I_1[1]} without sigma.",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.DerivedDirectImageSplitTriangle",
+  "declaration": "AlgebraicGeometry.RingedSpace.derivedModuleDirectImage_termwise_split_ses_triangle",
+  "declarations": [
+   "AlgebraicGeometry.RingedSpace.derivedModuleDirectImageKInjectiveIso",
+   "AlgebraicGeometry.RingedSpace.moduleDirectImageLocalizedShiftIso",
+   "AlgebraicGeometry.RingedSpace.derivedModuleDirectImageSplitTriangle",
+   "AlgebraicGeometry.RingedSpace.derivedModuleDirectImage_termwise_split_ses_triangle"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/DerivedDirectImageSplitTriangle.lean",
+  "statement": "theorem derivedModuleDirectImage_termwise_split_ses_triangle (g : X ⟶ Y) (S : ShortComplex (CochainComplex (SheafOfModules.{u} (moduleRings X)) ℤ)) (hS : S.ShortExact) (_hSplit : ∀ n : ℤ, Nonempty ((S.map (HomologicalComplex.eval (SheafOfModules.{u} (moduleRings X)) (ComplexShape.up ℤ) n)).Splitting)) [S.X₁.IsKInjective] [S.X₂.IsKInjective] [S.X₃.IsKInjective] : ∃ hImage : (S.map ((moduleDirectImage g).mapHomologicalComplex (ComplexShape.up ℤ))).ShortExact, (∀ n : ℤ, Nonempty (((S.map ((moduleDirectImage g).mapHomologicalComplex (ComplexShape.up ℤ))).map (HomologicalComplex.eval (SheafOfModules.{u} (moduleRings Y)) (ComplexShape.up ℤ) n)).Splitting)) ∧ ((derivedModuleDirectImage g).map (DerivedCategory.Q.map S.f) ≫ (derivedModuleDirectImageKInjectiveIso g S.X₂).hom = (derivedModuleDirectImageKInjectiveIso g S.X₁).hom ≫ DerivedCategory.Q.map (((moduleDirectImage g).mapHomologicalComplex (ComplexShape.up ℤ)).map S.f)) ∧ ((derivedModuleDirectImage g).map (DerivedCategory.Q.map S.g) ≫ (derivedModuleDirectImageKInjectiveIso g S.X₃).hom = (derivedModuleDirectImageKInjectiveIso g S.X₂).hom ≫ DerivedCategory.Q.map (((moduleDirectImage g).mapHomologicalComplex (ComplexShape.up ℤ)).map S.g)) ∧ ((derivedModuleDirectImage g).map (DerivedCategory.triangleOfSESδ hS) ≫ (derivedModuleDirectImage g).map ((DerivedCategory.Q.commShiftIso (1 : ℤ)).inv.app S.X₁) ≫ (derivedModuleDirectImageKInjectiveIso g (S.X₁⟦(1 : ℤ)⟧)).hom ≫ (moduleDirectImageLocalizedShiftIso g S.X₁).hom = (derivedModuleDirectImageKInjectiveIso g S.X₃).hom ≫ DerivedCategory.triangleOfSESδ hImage) ∧ (∃ e : derivedModuleDirectImageSplitTriangle g S hS ≅ DerivedCategory.triangleOfSES hImage, e.hom.hom₁ = (derivedModuleDirectImageKInjectiveIso g S.X₁).hom ∧ e.hom.hom₂ = (derivedModuleDirectImageKInjectiveIso g S.X₂).hom ∧ e.hom.hom₃ = (derivedModuleDirectImageKInjectiveIso g S.X₃).hom) ∧ derivedModuleDirectImageSplitTriangle g S hS ∈ distTriang (DerivedCategory (SheafOfModules.{u} (moduleRings Y)))",
+  "branch": "sheaf-dag",
+  "by": "T1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-tst"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-tst",
+  "group": "T1",
+  "result": "fix",
+  "note": "g/S/hS/degreewise Nonempty Splitting/three IsKInjective binders vs node hypotheses; image ShortExact + degreewise split; phi_K = inverse rightDerivedFunctorUnit on K-injective (identity resolution); naturality for i,p; delta clause via Q.commShiftIso and canonical commShiftIso; triangle iso with components phi_1..3 to triangleOfSES hImage and distTriang; removed two tautological conjuncts (IsKInjective shift = Mathlib instance, commShiftIso component = rfl lemma)"
+ }
 }
