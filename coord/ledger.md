@@ -5354,3 +5354,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 16:07 L: merged deliver/H1/lem-weil-pbc-truncation-couple-morphism (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.TruncationExchangeCouple AlgebraicGeometry.Etale.truncation_exchange_couple_morphism)
 - 16:07 L: merged deliver/J1/lem-sc-smooth-proper-tensor-perfect-case (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.SmoothProperTensorPerfectCase AlgebraicGeometry.smoothProper_tensor_perfect_case)
 - 16:07 L: merged deliver/V1/lem-pc-derived-direct-image-direct-sums (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.DerivedDirectImagePreservesDirectSums AlgebraicGeometry.derivedDirectImagePreservesDirectSums; existing declaration)
+- 16:07 L: merged deliver/M1/pqf-lem-leray (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.LeraySpectralSequence AlgebraicGeometry.exists_leray_spectralSequence)

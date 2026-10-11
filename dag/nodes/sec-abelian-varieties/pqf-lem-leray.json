@@ -175,5 +175,23 @@
   "group": "E1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-plr2322 (reviewer sub-agent of L); spot-checked: Proof is thm-sp-grothendieck applied to Gamma(Y,-) o f_*; f_* of injective is Gamma-acyclic cited from lem-weil-pbc-module-pushforward-injective-acyclic (C1 ok); Grothendieck-abelian/enough-injectives, left exactness, abutment identification checked (C4 ok); item states no edge-map clause; no new nodes, thm-sp-grothendieck not restated (class b none). FIX more, RETURN less: (1) E7 statement silently changed (Lemma 20.13.4 -> 'Lemma 01F2', reflowed) with no reason given: original statement restored; (2) stmt_deps listed all nine proof deps incl. thm-sp-grothendieck: reset to the statement's own definitions [def-pc-scheme, pqf-def-cohomology]; (3) B3 Step 2 TeX unclosed $ after R^{p+q}(G o F)(F): closed; (4) Step 1 Ab Grothendieck now names the specialization R=Z of lem-weil-pbc-ring-modules-grothendieck-abelian. Second reading by E1 missed (1)-(3).; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.LeraySpectralSequence",
+  "declaration": "AlgebraicGeometry.exists_leray_spectralSequence",
+  "file": "lean/Sheaf/AlgebraicGeometry/LeraySpectralSequence.lean",
+  "statement": "theorem exists_leray_spectralSequence {X Y : Scheme.{v}} (f : X ⟶ Y) (F : SheafOfModules.{v} (moduleRings X.toRingedSpace)) [F.IsQuasicoherent] : ∃ E : E₂CohomologicalSpectralSequenceNat AddCommGrpCat.{v}, (∀ p q : ℕ, Nonempty ((E.page 2).X (p, q) ≅ (forget₂ (ModuleCat.{v} ((moduleRings Y.toRingedSpace).obj.obj (op ⊤))) AddCommGrpCat.{v}).obj ((RingedSpace.moduleCohomology Y.toRingedSpace p).obj (((RingedSpace.moduleDirectImage f.toLRSHom.toShHom).rightDerived q).obj F)))) ∧ E.AbutsTo (fun n ↦ (forget₂ (ModuleCat.{v} ((moduleRings X.toRingedSpace).obj.obj (op ⊤))) AddCommGrpCat.{v}).obj ((RingedSpace.moduleCohomology X.toRingedSpace n).obj F))",
+  "branch": "sheaf-dag",
+  "by": "M1",
+  "date": "2026-10-12",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "M1",
+  "result": "pass",
+  "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
  }
 }
