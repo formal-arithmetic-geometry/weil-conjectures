@@ -267,5 +267,23 @@
   "by": "L",
   "result": "pass",
   "note": "Twelve steps along Stacks 02HT ((1)<=>(3), with the (4)=>(1) argument run on small extensions). Step 1 identifies condition (1) with 00TB via principal opens and smooth-ring-map-iff-smooth-affine; step 3 is the square-zero lifting; steps 4-12 reduce to split injectivity of the conormal map at q (07BU + finite-flat-local-free), build the Artinian quotients B'_N -> B_N, lift along a length-one filtration, take a section, apply 02HP (Mathlib leaf retractionOfSectionOfKerSqZero_comp_kerToTensor, Kaehler.lean:129 verified; hypotheses ker^2=0 and pi.comp sigma = id match), unwind with Artin-Rees and 02HQ, and conclude by 02HO. Checked step 11 (modular law, the two 02HQ applications) and step 9 (section through the localization). Five new nodes: 02HQ and 02HO unsplit (statements match Stacks), length-one filtration unsplit, 02HP leaf, Noetherian-local quotient Artinian local as a leaf by one declaration per clause (quotient_artinian_of_mem_minimalPrimes_of_isLocalRing KrullsHeightTheorem.lean:48, IsLocalRing.of_surjective' LocalRing/Basic.lean:115, lines verified; accepted under the one-per-clause convention). Stage-3 note: the worker points out that Mathlib's split_injective_iff_lTensor_residueField_injective would make 02HO and the Artin-Rees step unnecessary (target finite free over A_q)."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SmoothAtPrimeArtinianLifting",
+  "declaration": "AlgebraicGeometry.smooth_on_open_iff_artinian_lifting",
+  "file": "lean/Sheaf/AlgebraicGeometry/SmoothAtPrimeArtinianLifting.lean",
+  "statement": "theorem smooth_on_open_iff_artinian_lifting {R A : Type u} [CommRing R] [CommRing A] [IsNoetherianRing R] (φ₀ : R →+* A) (hfinite : φ₀.FiniteType) (q : Ideal A) [q.IsPrime] : (∃ W : (Spec (CommRingCat.of A)).Opens, (⟨q, inferInstance⟩ : PrimeSpectrum A) ∈ W ∧ Smooth (W.ι ≫ Spec.map (CommRingCat.ofHom φ₀))) ↔ (∀ (B' B : Type (max u v)) [CommRing B'] [CommRing B] [IsArtinianRing B'] [IsArtinianRing B] [IsLocalRing B'] [IsLocalRing B] (φ : B' →+* B), Function.Surjective φ → Module.length B' (RingHom.ker φ) = 1 → ∀ (ρ : R →+* B') (a : A →+* B), a.comp φ₀ = φ.comp ρ → Ideal.comap a (IsLocalRing.maximalIdeal B) = q → ∃ a' : A →+* B', φ.comp a' = a ∧ a'.comp φ₀ = ρ)",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "F1",
+  "result": "pass",
+  "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
  }
 }
