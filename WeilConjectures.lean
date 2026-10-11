@@ -469,6 +469,7 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.Complete.QuotPowTri
 public import WeilConjectures.CategoryTheory.DerivedCategory.Complete.RationalCoefficient
 public import WeilConjectures.CategoryTheory.DerivedCategory.Complete.Rationalization
 public import WeilConjectures.CategoryTheory.DerivedCategory.Complete.RationalizationMap
+public import WeilConjectures.CategoryTheory.DerivedCategory.Complete.ReductionCone
 public import WeilConjectures.CategoryTheory.DerivedCategory.Complete.SmulInvertible
 public import WeilConjectures.CategoryTheory.DerivedCategory.Complete.TensorQuotPow
 public import WeilConjectures.CategoryTheory.DerivedCategory.Constructible

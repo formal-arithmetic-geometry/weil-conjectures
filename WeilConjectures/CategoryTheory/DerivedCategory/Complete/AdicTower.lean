@@ -7,7 +7,7 @@ module
 
 public import WeilConjectures.Algebra.Homology.DerivedCategory.AdicTower
 public import WeilConjectures.CategoryTheory.DerivedCategory.Complete.TensorQuotPow
-public import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.TensorMappingCone
+public import WeilConjectures.CategoryTheory.DerivedCategory.Complete.ReductionCone
 public import WeilConjectures.CategoryTheory.Triangulated.HomotopyLimit.Tower
 
 /-!
@@ -131,5 +131,51 @@ lemma IsHomotopyLimit.map_reductionFunctor (n : ℕ)
   exact hc.map (reductionFunctor J I n)
 
 end Products
+
+section Reduction
+
+variable {I : Ideal R} {ϖ : R} (hϖ : ϖ ∈ nonZeroDivisors R) (hI : I = Ideal.span {ϖ})
+
+lemma constantSheaf_map_smul_id (r : R) :
+    (constantSheaf J (ModuleCat.{u + 1} R)).map (r • 𝟙 (𝟙_ (ModuleCat.{u + 1} R))) =
+      r • 𝟙 (𝟙_ (Sheaf J (ModuleCat.{u + 1} R))) := by
+  rw [Functor.map_smul, CategoryTheory.Functor.map_id]
+  rfl
+
+include hI in
+lemma smul_comp_sheafQuotPowCone_π (n : ℕ) :
+    (ϖ ^ n • 𝟙 (𝟙_ (Sheaf J (ModuleCat.{u + 1} R)))) ≫ (Sheaf.quotPowCone J I).π.app (op n) =
+      0 := by
+  erw [← constantSheaf_map_smul_id]
+  change (constantSheaf J (ModuleCat.{u + 1} R)).map _ ≫
+    (constantSheaf J (ModuleCat.{u + 1} R)).map _ = 0
+  rw [← Functor.map_comp]
+  exact (congrArg _ (quotPowShortComplex I ϖ (mem_of_eq_span hI) n).zero).trans
+    (Functor.map_zero _ _ _)
+
+include hϖ in
+/-- The short exact sequence `0 ⟶ R ⟶ R ⟶ R/Iⁿ ⟶ 0` of constant sheaves, the first map being
+the multiplication by `ϖⁿ` on the monoidal unit. -/
+lemma sheafQuotPowShortComplex_shortExact' (n : ℕ) :
+    (ShortComplex.mk _ _ (smul_comp_sheafQuotPowCone_π (J := J) (R := R) hI n)).ShortExact := by
+  have h := sheafQuotPowShortComplex_shortExact J hϖ hI n
+  refine ShortComplex.shortExact_of_iso ?_ h
+  refine ShortComplex.isoMk (Iso.refl _) (Iso.refl _) (Iso.refl _) ?_ ?_
+  · simp only [Iso.refl_hom, id_comp, comp_id, ShortComplex.map_f]
+    exact (constantSheaf_map_smul_id (J := J) (ϖ ^ n)).symm
+  · simp only [Iso.refl_hom, id_comp, comp_id, ShortComplex.map_g]
+    rfl
+
+/-- The reduction `Q X ⊗ᴸ R/Iⁿ` of a complex `X` of sheaves is the mapping cone of `ϖⁿ` on
+`X`. -/
+noncomputable def reductionConeIso (n : ℕ)
+    (X : CochainComplex (Sheaf J (ModuleCat.{u + 1} R)) ℤ) :
+    Q.obj X ⊗ (quotPowFunctor J I).obj (op n) ≅
+      Q.obj (CochainComplex.mappingCone (ϖ ^ n • 𝟙 X)) :=
+  TensorStructure.reductionIso (sheafTensorStructure J R) rfl
+    (smul_comp_sheafQuotPowCone_π hI n)
+    (sheafQuotPowShortComplex_shortExact' hϖ hI n) X
+
+end Reduction
 
 end DerivedCategory
