@@ -196,5 +196,24 @@
   "group": "E1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of E1; spot-checked by L: L read the five steps (02LN via 02LL): finite pieces closed by properness over a separated base, pairwise intersections removed from the base, clause (iv) via fibre-product points with kappa(s) = kappa(u)."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.EtaleSplitsOffIsolatedPoints",
+  "declaration": "AlgebraicGeometry.exists_etale_splits_off_isolated_points",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleSplitsOffIsolatedPoints.lean",
+  "statement": "theorem exists_etale_splits_off_isolated_points {X S : Scheme.{u}} (f : X ⟶ S) [LocallyOfFiniteType f] [IsSeparated f] (s : S) (n : ℕ) (x : Fin n → X) (h_distinct : Function.Injective x) (h_over : ∀ i : Fin n, f (x i) = s) (h_isolated : ∀ i : Fin n, IsOpen ({f.asFiber (x i)} : Set (f.fiber (f (x i))))) : ∃ (U : Scheme.{u}) (φ : U ⟶ S) (t : U), Etale φ ∧ φ t = s ∧ IsIso (φ.residueFieldMap t) ∧ ∃ (W : (pullback φ f).Opens) (V : Fin n → (pullback φ f).Opens), (∀ i : Fin n, Disjoint W (V i)) ∧ (∀ i j : Fin n, i ≠ j → Disjoint (V i) (V j)) ∧ W ⊔ (⨆ i : Fin n, V i) = ⊤ ∧ (∀ i : Fin n, IsFinite ((V i).ι ≫ pullback.fst φ f)) ∧ (∀ i : Fin n, ∃ v : (V i).toScheme, ((V i).ι ≫ pullback.fst φ f) v = t ∧ (∀ v' : (V i).toScheme, ((V i).ι ≫ pullback.fst φ f) v' = t → v' = v) ∧ ((V i).ι ≫ pullback.snd φ f) v = x i ∧ IsIso (((V i).ι ≫ pullback.snd φ f).residueFieldMap v)) ∧ (∀ w : W.toScheme, (W.ι ≫ pullback.fst φ f) w = t → ∀ i : Fin n, (W.ι ≫ pullback.snd φ f) w ≠ x i)",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-esi1001"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-esi1001",
+  "group": "H1",
+  "result": "fix",
+  "note": "f lft+separated; s,n, injective x over s; isolated as f.asFiber singleton open (sibling spelling, was ∃ξ fiberι); elementary etale nbhd Etale φ, φ t = s, IsIso residueFieldMap; X_U = U×_S X as pullback φ f, q=fst, p=snd; W,V_i opens pairwise disjoint covering (hence clopen); (i) IsFinite (V i).ι≫fst; (ii) unique v over t; (iii) p v = x i, IsIso residue map of composite; (iv) W points over t avoid all x i; n=0 vacuous"
  }
 }
