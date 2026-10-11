@@ -171,5 +171,24 @@
   "group": "F1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of F1; spot-checked by L: 00S1 for two presentations of the same algebra: lifts by the polynomial universal property, induced chain maps, difference derivation D into I'/I'^2 (the P-action through alpha checked), the omitted homotopy calculation written out in step 4, composition termwise in step 5"
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.PresentationsHomotopyEquivalent",
+  "declaration": "Algebra.Extension.presentations_homotopy_equivalent",
+  "file": "lean/Sheaf/RingTheory/PresentationsHomotopyEquivalent.lean",
+  "statement": "theorem presentations_homotopy_equivalent {R : Type u} {S : Type v} [CommRing R] [CommRing S] [Algebra R S] {T : Type w} {U : Type w'} (α : MvPolynomial T R →ₐ[R] S) (α' : MvPolynomial U R →ₐ[R] S) (hα : Function.Surjective α) (hα' : Function.Surjective α') : (∀ f : (ofSurjective α hα).ker, (ofSurjective α hα).cotangentComplex (Cotangent.mk f) = (1 : S) ⊗ₜ[(ofSurjective α hα).Ring] KaehlerDifferential.D R (ofSurjective α hα).Ring f) ∧ (∀ f' : (ofSurjective α' hα').ker, (ofSurjective α' hα').cotangentComplex (Cotangent.mk f') = (1 : S) ⊗ₜ[(ofSurjective α' hα').Ring] KaehlerDifferential.D R (ofSurjective α' hα').Ring f') ∧ Nonempty ((ofSurjective α hα).Hom (ofSurjective α' hα')) ∧ Nonempty ((ofSurjective α' hα').Hom (ofSurjective α hα)) ∧ ∀ (φ : (ofSurjective α hα).Hom (ofSurjective α' hα')) (ψ : (ofSurjective α' hα').Hom (ofSurjective α hα)), ∃ (h : (ofSurjective α hα).CotangentSpace →ₗ[S] (ofSurjective α hα).Cotangent) (h' : (ofSurjective α' hα').CotangentSpace →ₗ[S] (ofSurjective α' hα').Cotangent), (ofSurjective α' hα').cotangentComplex ∘ₗ Cotangent.map φ = CotangentSpace.map φ ∘ₗ (ofSurjective α hα).cotangentComplex ∧ (ofSurjective α hα).cotangentComplex ∘ₗ Cotangent.map ψ = CotangentSpace.map ψ ∘ₗ (ofSurjective α' hα').cotangentComplex ∧ LinearMap.id - Cotangent.map ψ ∘ₗ Cotangent.map φ = h ∘ₗ (ofSurjective α hα).cotangentComplex ∧ LinearMap.id - CotangentSpace.map ψ ∘ₗ CotangentSpace.map φ = (ofSurjective α hα).cotangentComplex ∘ₗ h ∧ LinearMap.id - Cotangent.map φ ∘ₗ Cotangent.map ψ = h' ∘ₗ (ofSurjective α' hα').cotangentComplex ∧ LinearMap.id - CotangentSpace.map φ ∘ₗ CotangentSpace.map ψ = (ofSurjective α' hα').cotangentComplex ∘ₗ h'",
+  "branch": "sheaf-dag",
+  "by": "K1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-nph1155"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-nph1155",
+  "group": "K1",
+  "result": "fix",
+  "note": "R,S CommRing+Algebra; T,U arbitrary (indep. universes, empty ok); alpha,alpha' surjective R-alg maps from MvPolynomial; I/I^2=Cotangent, S(x)_P Omega=CotangentSpace; d formulas via Cotangent.mk/D; Hom (R'=R,S'=S) = R-alg lift with alpha' phi = alpha; phi1/phi0 = Cotangent.map/CotangentSpace.map, all lifts; h,h' with 2 chain + 4 homotopy eqs, id - composite signs; lets inlined"
  }
 }
