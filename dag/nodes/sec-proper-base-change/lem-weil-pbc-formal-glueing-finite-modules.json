@@ -200,5 +200,23 @@
   "worker": "stage1",
   "summary": "Split following Stacks More on Algebra Remark 05EU (case 'finite'): seven steps. (1) the forward direction, elementary (images of generators generate the base change and the localizations). (2)-(4) R -> T = S x prod R_{f_i} is faithfully flat: flat as a finite product of flat modules (new leaf lem-weil-pbc-finite-product-flat-modules; localizations flat by lem-weil-pbc-localization-flat), surjective on spectra (primes not containing I lie in some D(f_i), by the existing leaf lem-weil-pbc-basic-subset-immersion-image with n = 0; primes containing I come from S by the isomorphism R/I = S/IS, written out), then 00HQ (lem-weil-pbc-flat-surjective-spectrum-faithfully-flat). The source asserts this faithful flatness without argument. (5) T (x)_R M is the T-module product of S (x) M = M (x) S and R_{f_i} (x) M = M_{f_i} (existing leaf lem-weil-pbc-tensor-finite-product, created meanwhile by the sibling item lem-weil-pbc-formal-glueing-complex-exact and cited instead of a second node; T-linearity checked on pure tensors; lem-weil-pbc-localization-tensor). (6) a componentwise module over a finite product of rings is finite when each component is (elementary, generators written). (7) descent 03C4(1) (new leaf lem-weil-pbc-faithfully-flat-descent-finite-module). Statement unchanged; def-weil-ring-localization-away added to stmt_deps. Two new nodes, both Mathlib leaves (Module.Flat.directSum + Module.Flat.of_linearEquiv + DirectSum.linearEquivFunOnFintype; Module.Finite.of_finite_tensorProduct_of_faithfullyFlat). The existing candidate Module.Finite.of_finite_tensorProduct_of_faithfullyFlat is not a one-line specialization for the item itself (faithful flatness of T and the product decomposition are the content of steps 2-6); one more search (leanfinder) recorded."
  },
- "reviewed": "Reviewed by L 2026-10-10: faithful to More on Algebra 05EU 'finite' with the unargued faithful flatness of R -> S x prod R_{f_i} written out (steps 2-4: flat product, surjectivity on Spec via D(f_i) and the isomorphism R/I = S/IS, 00HQ), the product decomposition of T⊗M (step 5, tensor-finite-product leaf) and descent by 03C4 (1) (new exact leaf). Finite products of flat modules: new composed leaf. Not a Mathlib leaf itself."
+ "reviewed": "Reviewed by L 2026-10-10: faithful to More on Algebra 05EU 'finite' with the unargued faithful flatness of R -> S x prod R_{f_i} written out (steps 2-4: flat product, surjectivity on Spec via D(f_i) and the isomorphism R/I = S/IS, 00HQ), the product decomposition of T⊗M (step 5, tensor-finite-product leaf) and descent by 03C4 (1) (new exact leaf). Finite products of flat modules: new composed leaf. Not a Mathlib leaf itself.",
+ "lean": {
+  "module": "Sheaf.RingTheory.FiniteIffFormalGlueing",
+  "declaration": "Module.finite_iff_formalGlueing",
+  "file": "lean/Sheaf/RingTheory/FiniteIffFormalGlueing.lean",
+  "statement": "theorem finite_iff_formalGlueing {R : Type u} {S : Type v} [CommRing R] [CommRing S] (φ : R →+* S) (t : ℕ) (f : Fin t → R) (hflat : φ.Flat) (hquot : let I : Ideal R := Ideal.span (Set.range f) Function.Bijective (Ideal.quotientMap (I.map φ) φ Ideal.le_comap_map)) (M : Type w) [AddCommGroup M] [Module R M] : letI : Algebra R S := φ.toAlgebra Module.Finite R M ↔ Module.Finite S (S ⊗[R] M) ∧ ∀ i : Fin t, Module.Finite (Localization.Away (f i)) (LocalizedModule.Away (f i) M)",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-fgm1032",
+  "group": "H1",
+  "result": "pass",
+  "note": "explicit phi : R ->+* S with phi.Flat; f : Fin t -> R, I = span(range f); induced Ideal.quotientMap (I.map phi) phi bijective = R/I ≅ S/IS; M arbitrary R-module; Module.Finite R M <-> Module.Finite S (S ⊗[R] M) (phi.toAlgebra) ∧ ∀ i, Module.Finite (Localization.Away (f i)) (LocalizedModule.Away (f i) M); local moduleOfIsLocalization instance rfl-equal to Mathlib's native action; t=0 vacuous ok; no Mathlib exact result"
+ }
 }
