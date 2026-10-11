@@ -3972,3 +3972,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 09:15 L: merged deliver/C1/lem-weil-pbc-change-ideal-completion (stage 2; reviewer FIX; first push; Sheaf.Algebra.ChangeIdealCompletion changeIdealCompletion)
 - 09:15 L: merged deliver/C1/def-sc-scheme-tangent-space (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.SchemeTangentSpace AlgebraicGeometry.schemeTangentSpace)
 - 09:16 L: merged deliver/G1/lem-weil-pbc-conormal-intersection-regular-quotient (stage 2; reviewer PASS; first push; Sheaf.RingTheory.ConormalIntersectionRegularQuotient Ideal.inf_sq_eq_mul_of_regular_quotient)
+- 09:16 L: merged deliver/K1/lem-weil-pbc-completion-of-dvr-is-dvr (stage 2; reviewer FIX; first push; Sheaf.RingTheory.CompletionOfDVR AdicCompletion.isDiscreteValuationRing)
