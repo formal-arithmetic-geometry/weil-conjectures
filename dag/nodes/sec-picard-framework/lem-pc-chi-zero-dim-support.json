@@ -146,5 +146,24 @@
   "group": "M1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-chi0b (reviewer sub-agent of L); spot-checked: Source: Stacks 0AYT (varieties-lemma-chi-tensor-finite, varieties.tex l.6208) read with its proof; the item states parts (3),(4),(5) with E invertible (n=1), hypotheses (k field, X proper, F coherent, dim Supp<=0) as in the source; statement unchanged. Step 1: def-weil-proper-morphism gives finite type; closedness of Supp of a finite-type module is a few lines from pqf-def-coherent; lem-sc-dim0-finite (off-unit but Lean-closed, slopmaster2 IsClosed.finite_and_isClosed_singleton_of_topologicalKrullDim_le_zero) gives finiteness (the step is only needed for finite type). Step 2: lem-pc-zero-support-finite-scheme (finite type X) gives A, i, G, F=i_*G, F(x)N=i_*(G(x)i^*N), same support, H^q comparisons; this is the source's scheme-theoretic-support / 06LH / 089W / projection-formula argument, true (Supp closed, dim 0 Noetherian finite type => Spec of finite-dim k-algebra; closed immersion affine). Step 3: lem-pc-finite-scheme-cohomology-tensor with L=i^*N (pullback of invertible is invertible, elementary) gives vanishing and finite dimension; true (affine vanishing; A Artinian semilocal so L trivial). Step 4: def-pc-euler-characteristic plus the two new statements, H^0=Gamma elementary. proof_deps = union of uses. New nodes: unsplit, statements only, TeX, self-contained, created.item correct, from.node = ancestor lem-pc-degree-base-change (blueprint_refs ancestor checked), same_as [] confirmed by my own blueprint_refs searches (Euler characteristic zero dimensional support; scheme theoretic support finite subscheme; invertible module Artinian trivial: 0 hits); three Mathlib searches each; no slopmaster2 declaration states them (grep of 0AYT/chi_tensor/support in WeilConjectures; EulerChar.lean, Degree.lean read), so B10 does not apply. Small cases: empty support (A=0, all zero), X=Spec k with F=O, F=k(x) at a closed point with residue field l (chi=[l:k] both sides). Not a defect but noted: existing nodes pqf-lem-affine-vanishing and lem-weil-pbc-affine-morphism-cohomology-edge state pieces of the new nodes and should be cited when those are split. 14:19-14:21 UTC"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.EulerCharZeroDimSupport",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.eulerChar_zero_dim_support",
+  "file": "lean/Sheaf/AlgebraicGeometry/EulerCharZeroDimSupport.lean",
+  "statement": "theorem eulerChar_zero_dim_support (k : Type u) [Field k] (X : Scheme.{u}) [X.Over (Spec (.of k))] [IsProper (X ↘ Spec (.of k))] (F : X.Modules) (hF : RingedSpace.IsCoherent X.toRingedSpace F) (hdim : topologicalKrullDim {x : X | ¬ Subsingleton (F.presheaf.stalk x)} ≤ 0) : (∀ i : ℕ, 0 < i → Subsingleton (F.H i)) ∧ F.eulerChar k = (Module.finrank k (F.H 0) : ℤ) ∧ Module.finrank k (F.H 0) = @Module.finrank k Γ(F, ⊤) _ _ (Module.compHom Γ(F, ⊤) (globalSectionsRingHom k (X := X))) ∧ (∀ (N : X.Modules) [N.IsInvertible], RingedSpace.IsCoherent X.toRingedSpace (F ⊗ N : X.Modules) ∧ {x : X | ¬ Subsingleton ((F ⊗ N).presheaf.stalk x)} = {x : X | ¬ Subsingleton (F.presheaf.stalk x)} ∧ (F ⊗ N).eulerChar k = F.eulerChar k)",
+  "branch": "sheaf-dag",
+  "by": "J1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-czd1200"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-czd1200",
+  "group": "J1",
+  "result": "fix",
+  "note": "k field, X over Spec k with IsProper instance, F coherent (RingedSpace.IsCoherent), dim Supp<=0 via topologicalKrullDim of nonzero-stalk set; clause 1 IsZero (F.H i) lives in Type u and is refutable (proved ¬IsZero (F.H i) in sandbox) -> Subsingleton (F.H i) as upstream Grothendieck vanishing; let H0/letI H0 (duplicate of moduleHOfField)/let T removed, Gamma k-structure explicit compHom along globalSectionsRingHom; chi=dim H0=dim Gamma; tensor with invertible N: coherent, same support, same chi; H = Scheme.Modules.H as used by eulerChar (def-pc-euler-characteristic), so added unused stmt_dep def-sc-ringed-space-module-cohomology reverted; reverted the delivery's statement correction of the item (stmt_deps kept as on sheaf-dag; --revert-statement)"
  }
 }
