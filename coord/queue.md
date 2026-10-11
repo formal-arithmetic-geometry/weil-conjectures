@@ -1,18 +1,17 @@
 # Work queue
 
-922 items; claim with `tools/claim.py next <group> [--stage N]`.
+921 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (922)
+## Stage 2: nodes to state (921)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
 | `def-kun-dimension` | 1 | state |
 | `def-sc-function-field` | 1 | state |
 | `def-sc-ringed-space-module-cohomology` | 1 | state |
-| `def-weil-derived-tensor` | 1 | state |
 | `def-weil-pbc-kinjective-resolutions` | 1 | state |
 | `lem-exc-field-discrete-modules` | 1 | state |
 | `lem-galois-pi1-finite-etale-image-stabilizer` | 1 | state |
