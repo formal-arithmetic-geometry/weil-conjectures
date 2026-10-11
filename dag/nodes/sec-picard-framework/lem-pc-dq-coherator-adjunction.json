@@ -20,7 +20,8 @@
   "place": "Tag 0B6I (Lemma 48.1.1), proof after the sheaf comparison; Derived Categories of Schemes, Lemma perfect-lemma-better-coherator"
  },
  "stmt_deps": [
-  "def-pc-derived-category"
+  "def-pc-derived-category",
+  "def-sc-ringed-space-module-cohomology"
  ],
  "proof": [
   {
@@ -138,5 +139,30 @@
   "group": "F1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-dqc3052 (reviewer sub-agent of L); spot-checked: Statement has Y qcqs (E7 point of R-gha2856 resolved) and matches the DQ_Y clause used in lem-pc-global-hom-adjunction step 2; Brown representability cited from lem-pc-brown-representability-right-adjoint, the node J1 used; compact generation cited with X qcqs; no helper nodes; step 2 K-injective computation checked. FIX more, RETURN less: C4 in step 1 - lem-pc-derived-qcoh-direct-sums only states that D_QCoh has coproducts, not that they are the ambient ones; repaired by showing the ambient sum (lem-pc-derived-ambient-direct-sums) has quasi-coherent cohomology via lem-weil-pbc-quasi-coherent-module-direct-sum and -colimit-affine-sections (generic tools from sk-thm-p1, as in lem-pc-derived-qcoh-direct-sums) and is a coproduct in the full subcategory. Missed by F1's second reading.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.DQCoheratorAdjunction",
+  "declaration": "AlgebraicGeometry.exists_dqCoheratorAdjunction",
+  "declarations": [
+   "AlgebraicGeometry.exists_dqCoheratorAdjunction",
+   "AlgebraicGeometry.dqCoherator_detects_globalSections",
+   "AlgebraicGeometry.structureSheaf_shift_is_derivedQCoh",
+   "AlgebraicGeometry.globalSections_homology_equiv_structureSheaf_shift"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/DQCoheratorAdjunction.lean",
+  "statement": "theorem exists_dqCoheratorAdjunction (Y : Scheme.{u}) [CompactSpace Y] [QuasiSeparatedSpace Y] [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))] : ∃ DQ_Y : schemeDerivedCategory Y ⥤ schemeDerivedQCohCategory Y, Nonempty (Adjunction (schemeDerivedQCohProperty Y).ι DQ_Y)",
+  "branch": "sheaf-dag",
+  "by": "K1",
+  "date": "2026-10-11",
+  "existing": false,
+  "note": "Detection is expressed as QuasiIso on global sections of arbitrary K-injective representatives, the defining computation of RΓ; no independent derived-global-sections functor is introduced."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-dqc1314",
+  "group": "K1",
+  "result": "pass",
+  "note": "Y qcqs as CompactSpace+QuasiSeparatedSpace; D/D_QCoh are E1's schemeDerivedCategory/schemeDerivedQCohCategory, inclusion ObjectProperty.ι; DQ_Y tied by ∃ DQ_Y, Nonempty (Adjunction ι DQ_Y) (Adjunction carries the natural Hom bijection); detection for any right adjoint adj, K-injective reps I,J, f with IsIso (DQ_Y.map (Q.map f)) ⇒ QuasiIso of termwise RingedSpace.globalSectionsFunctor (landed, #check'd), equivalent to the RΓ clause via def-pc-global-derived-rhom's K-injective representation; O_Y[-i] = singleFunctor 0 unit ⟦-i⟧ concentrated in degree i (Mathlib shift sign checked) in D_QCoh; no hollow hypotheses, no let, no new definitions; stmt_deps gain landed def-sc-ringed-space-module-cohomology only"
  }
 }

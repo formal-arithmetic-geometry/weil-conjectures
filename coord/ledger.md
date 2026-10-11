@@ -4643,3 +4643,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 12:35 L: merged deliver/G1/def-weil-pbc-koszul-complex (stage 2; reviewer FIX; first push; Sheaf.Paper.KoszulComplex ExteriorAlgebra.koszulComplex)
 - 12:37 L: merged deliver/J1/lem-weil-pbc-polynomial-local-completion-formally-smooth (stage 2; reviewer PASS; first push; Sheaf.RingTheory.PolynomialLocalCompletionFormallySmooth Algebra.polynomial_local_completion_formallySmoothAdic)
 - 12:38 L: merged deliver/F1/lem-weil-pbc-polynomial-quotient-dimension-lower-bound (stage 2; reviewer PASS; first push; Sheaf.RingTheory.PolynomialQuotientDimensionLowerBound AlgebraicGeometry.sub_le_topologicalKrullDim_spec_mvPolynomial_quotient)
+- 12:38 L: merged deliver/K1/lem-pc-dq-coherator-adjunction (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.DQCoheratorAdjunction AlgebraicGeometry.exists_dqCoheratorAdjunction)
