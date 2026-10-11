@@ -4199,3 +4199,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 10:18 L: merged deliver/K1/lem-weil-pbc-etale-graph-section-extension-map (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.EtaleGraphSectionExtensionMap AlgebraicGeometry.etale_graph_section_extension_map)
 - 10:18 L: merged deliver/E1/lem-weil-pbc-filtered-colimit-normal-ring (stage 2; reviewer PASS; first push; Sheaf.RingTheory.FilteredColimitNormalRing CommRingCat.isNormal_of_filtered_colimit)
 - 10:18 L: merged deliver/H1/def-weil-pbc-derived-direct-image-composition (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.DerivedDirectImageComposition AlgebraicGeometry.Etale.derivedDirectImageComposition)
+- 10:19 L: merged deliver/C1/lem-weil-pbc-etale-inverse-image-algebraic-structures (stage 2; reviewer FIX; first push; Sheaf.AlgebraicGeometry.EtaleInverseImageAlgebraicStructures AlgebraicGeometry.etaleInverseImageAlgebraicStructures)
