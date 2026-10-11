@@ -3279,3 +3279,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 02:05 L: merged deliver/H1/lem-sc-pseudo-coherent-lift-stably-free-complex (reviewer FIX; first push; new nodes: 1)
 - 02:06 L: statement_change recorded on lem-sc-pseudo-coherent-lift-stably-free-complex (reviewer R-lsf0206 strengthened 'may be chosen free' to 'is free', as Tag 0BCB; merge 298cdca28 had no record); second reading by H1 missed the unjustified free-lift choice
 - 02:07 L: review queue empty; claimed lem-weil-derived-limit-roos-complex for L (claim.py next L --stage 1) and launched one stage-1 worker W-roos0207 on it (brief-common.md); reviewer slots stay first for any delivery that arrives
+- 02:10 L: merged deliver/E1/lem-pqf-quasicompact-h1-zero (reviewer FIX; first push; new nodes: 0)
