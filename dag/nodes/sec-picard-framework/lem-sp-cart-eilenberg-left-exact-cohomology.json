@@ -126,5 +126,24 @@
   "group": "H1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-cel1826 (reviewer sub-agent of L); spot-checked: Statement unchanged vs base (E7 ok); steps 1-3 checked: Z^q, B^q injective split both SESs, G additive keeps splittings, kernel preservation gives G(Z^q) via d^q = C^q->B^{q+1} mono C^{q+1}, image G(B^q) via split epi/split mono factorisation; only three definition deps, no citation of lem-sp-cartan-eilenberg-properties (its creator) or the E1 cartesian node, so no cycle; injectivity is a hypothesis so no 015H (4)-(6) citation needed. FIX more, RETURN less: (1) B4 plain-text arrows/'C^bullet' in steps 1-3 rewritten in TeX, step 2 now names the mono/split factorisations it uses; (2) item source.place still said 015I although the report and second reading claimed it corrected to 015J; set to 015J (lemma-two-ss-complex-functor).; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.CartanEilenbergLeftExactCohomology",
+  "declaration": "CategoryTheory.cartanEilenberg_leftExact_cohomology",
+  "file": "lean/Sheaf/Paper/CartanEilenbergLeftExactCohomology.lean",
+  "statement": "theorem cartanEilenberg_leftExact_cohomology {A B : Type*} [Category A] [Category B] [Abelian A] [Abelian B] (C : CochainComplex A ℤ) (hbounded : ∃ n : ℤ, ∀ q : ℤ, q < n → IsZero (C.X q)) (hcycles : ∀ q : ℤ, Injective (C.cycles q)) (hboundaries : ∀ q : ℤ, Injective (image (C.d (q - 1) q))) (G : A ⥤ B) [G.Additive] [PreservesFiniteLimits G] : ∀ q : ℤ, ∃ φ : ((G.mapHomologicalComplex (ComplexShape.up ℤ)).obj C).homology q ≅ G.obj (C.homology q), ((G.mapHomologicalComplex (ComplexShape.up ℤ)).obj C).liftCycles (G.map (C.iCycles q)) (q + 1) (by simp) (by simp [← G.map_comp]) ≫ ((G.mapHomologicalComplex (ComplexShape.up ℤ)).obj C).homologyπ q ≫ φ.hom = G.map (C.homologyπ q)",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-cel1320"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-cel1320",
+  "group": "E1",
+  "result": "fix",
+  "note": "A,B abelian; C : CochainComplex A ℤ bounded below (IsZero C.X q for q<n); Z^q=C.cycles q, B^q=image (C.d (q-1) q) injective; G Additive+PreservesFiniteLimits; FIX: conclusion was bare Nonempty (H^q(GC) ≅ G H^q C), now ∃ φ with liftCycles(G.map iCycles) ≫ homologyπ ≫ φ.hom = G.map homologyπ, pinning φ as the canonical comparison from cycles and quotients; docstring source 015J -> 015I (node's source) and proof in words"
  }
 }
