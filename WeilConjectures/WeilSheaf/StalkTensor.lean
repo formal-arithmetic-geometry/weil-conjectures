@@ -238,6 +238,11 @@ theorem traceFunction_tensorObj (F G : WeilSheaf k₀ l X) (hF : F.IsLisse) (n :
   rw [traceFunction_eq_trace, traceFunction_eq_trace, traceFunction_eq_trace,
     trace_stalk_tensorObj_frobeniusEnd_pow]
 
+/-- The tensor product of two lisse Weil sheaves is lisse. -/
+theorem IsLisse.tensorObj {F G : WeilSheaf k₀ l X} (hF : F.IsLisse) (hG : G.IsLisse) :
+    (F.tensorObj G hF).IsLisse :=
+  ProEtale.IsAdicLisseSheaf.ihom hF.dual hG
+
 /-- The tensor product of lisse `F` punctually `ι`-pure of weight `w₁` with `G` punctually `ι`-pure
 of weight `w₂` is punctually `ι`-pure of weight `w₁ + w₂`: the local eigenvalues of `F ⊗ G` are
 products of local eigenvalues of `F` and `G`. -/
