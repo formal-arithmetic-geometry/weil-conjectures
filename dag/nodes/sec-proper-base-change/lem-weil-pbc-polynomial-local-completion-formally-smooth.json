@@ -174,5 +174,23 @@
   "by": "L",
   "result": "accepted",
   "note": "5 steps following the sentence of the 07PU proof: A -> A[x] smooth hence square-zero lifting (00TK leaf); the localization T has the lifting property (new leaf: FormallySmooth.of_isLocalization with comp_surjective, Smooth/Basic.lean:482/80 verified by L; the composition lemma 031H written out); hence formally smooth for the qT-adic topology (07EC (1), an instance of the DAG's definition); qT finitely generated (T Noetherian); the completion (new unsplit 07ED (1)=>(2) node) with (qT)C = qC."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.PolynomialLocalCompletionFormallySmooth",
+  "declaration": "Algebra.polynomial_local_completion_formallySmoothAdic",
+  "file": "lean/Sheaf/RingTheory/PolynomialLocalCompletionFormallySmooth.lean",
+  "statement": "theorem polynomial_local_completion_formallySmoothAdic (A : Type u) [CommRing A] [IsNoetherianRing A] (q : Ideal (Polynomial A)) [q.IsPrime] : FormallySmoothAdic A (AdicCompletion (q.map (algebraMap (Polynomial A) (Localization.AtPrime q))) (Localization.AtPrime q)) (q.map (algebraMap (Polynomial A) (AdicCompletion (q.map (algebraMap (Polynomial A) (Localization.AtPrime q))) (Localization.AtPrime q))))",
+  "branch": "sheaf-dag",
+  "by": "J1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-plc1314",
+  "group": "J1",
+  "result": "pass",
+  "note": "A CommRing+IsNoetherianRing (genuine); Polynomial A; q prime of A[x], no maximality; T=Localization.AtPrime q; C=AdicCompletion (qT) T as in landed FormallySmoothAdic.adicCompletion; A-algebra on C is the A->A[x]->T->C composite (IsScalarTower by inferInstance, algebraMap rfl); conclusion recorded Algebra.FormallySmoothAdic with ideal qC=q.map; test universe Type (max u u)=Type u, not vacuous; no let, no new defs, node diff only adds lean record"
  }
 }
