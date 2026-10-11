@@ -188,5 +188,25 @@
    "decls": [],
    "missing": []
   }
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.SingleComplexAffineBaseChange",
+  "declaration": "AlgebraicGeometry.singleComplexAffineBaseChange",
+  "file": "lean/Sheaf/Algebra/Homology/SingleComplexAffineBaseChange.lean",
+  "statement": "theorem singleComplexAffineBaseChange [∀ Y : Scheme.{u}, HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))] (R A R' A' : Type u) [CommRing R] [CommRing A] [CommRing R'] [CommRing A'] (φf : R →+* A) (φg : R →+* R') (φg' : A →+* A') (φf' : R' →+* A') (sq : IsPullback (Spec.map (CommRingCat.ofHom φg')) (Spec.map (CommRingCat.ofHom φf')) (Spec.map (CommRingCat.ofHom φf)) (Spec.map (CommRingCat.ofHom φg))) (K : schemeDerivedCategory (Spec (.of A))) (hK : schemeDerivedQCohProperty (Spec (.of A)) K) (K' : schemeDerivedCategory (Spec (.of A'))) (hK' : schemeDerivedQCohProperty (Spec (.of A')) K') (φ : (derivedPullback (Spec.map (CommRingCat.ofHom φg'))).obj K ⟶ K') (h_stalk : SingleComplexBaseChange.StalkCondition (Spec.map (CommRingCat.ofHom φf)) (Spec.map (CommRingCat.ofHom φf')) (Spec.map (CommRingCat.ofHom φg)) (Spec.map (CommRingCat.ofHom φg')) sq K K' φ) : IsIso (schemeDerivedBaseChangeMap (Spec.map (CommRingCat.ofHom φf)) (Spec.map (CommRingCat.ofHom φf')) (Spec.map (CommRingCat.ofHom φg)) (Spec.map (CommRingCat.ofHom φg')) sq.w K ≫ (schemeDerivedDirectImage (Spec.map (CommRingCat.ofHom φf'))).map φ)",
+  "branch": "sheaf-dag",
+  "by": "T1",
+  "date": "2026-10-11",
+  "existing": false,
+  "note": "Reviewer R-sab FIX: restated geometrically as the affine case of the family form of lem-pc-rf-single-complex-qcqs-induction (IsPullback square of Spec.map of ring maps, K, K' with schemeDerivedQCohProperty, phi : L(g')^*K -> K', SingleComplexBaseChange.StalkCondition, conclusion IsIso of schemeDerivedBaseChangeMap followed by Rf'_* phi). The delivered module formulation dropped the node's geometric objects and absorbed proof step 1 into the statement; the stmt_deps it added are reverted.",
+  "fixed_by": "R-sab"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-sab",
+  "group": "T1",
+  "result": "fix",
+  "note": "module-only formulation (model L, localized model comparison, conclusion in ModuleCat D(B)) dropped the node's geometric K, K' in D_QCoh, L(g')^*K->K', stalk map and pullback/direct-image comparison and absorbed proof step 1; restated as affine case of the qcqs family: IsPullback of Spec.map squares, schemeDerivedQCohProperty K/K', phi, StalkCondition, IsIso(schemeDerivedBaseChangeMap ≫ Rf'_* phi); no conjuncts, no let/letI/inline instances; added module stmt_deps reverted; reverted the delivery's statement correction of the item (stmt_deps kept as on sheaf-dag; --revert-statement)"
  }
 }
