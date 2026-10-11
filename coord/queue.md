@@ -1,11 +1,11 @@
 # Work queue
 
-672 items; claim with `tools/claim.py next <group> [--stage N]`.
+669 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (672)
+## Stage 2: nodes to state (669)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -22,12 +22,10 @@
 | `lem-sc-hilb-dominating-power` | 1 | state |
 | `lem-weil-derived-limit-roos-complex` | 1 | state |
 | `lem-weil-pbc-derived-square-iso-pasting` | 1 | state |
-| `lem-weil-pbc-etale-graph-section-extension-map` | 1 | state |
 | `lem-weil-pbc-etale-inverse-image-algebraic-structures` | 1 | state |
 | `lem-weil-pbc-etale-qcqs-sections-filtered-colimit` | 1 | state |
 | `lem-weil-pbc-ext-one-direct-sum` | 1 | state |
 | `lem-weil-pbc-filtered-colimit-algebras-tensor-elementwise` | 1 | state |
-| `lem-weil-pbc-filtered-colimit-categories` | 1 | state |
 | `lem-weil-pbc-filtered-colimit-flat-modules` | 1 | state |
 | `lem-weil-pbc-filtered-colimit-localization-at-prime` | 1 | state |
 | `lem-weil-pbc-filtered-colimit-normal-ring` | 1 | state |
@@ -44,7 +42,6 @@
 | `lem-weil-pbc-finite-over-complete-ring` | 1 | state |
 | `lem-weil-pbc-finite-over-nagata-nagata` | 1 | state |
 | `lem-weil-pbc-finite-presentation-hom-directed-colimit` | 1 | state |
-| `lem-weil-pbc-finite-product-complex-cohomology` | 1 | state |
 | `lem-weil-pbc-finite-product-functor-left-exact` | 1 | state |
 | `lem-weil-pbc-finite-product-injective-resolutions` | 1 | state |
 | `lem-weil-pbc-finite-product-integral-closure` | 1 | state |
