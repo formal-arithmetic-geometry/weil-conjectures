@@ -46,6 +46,7 @@ namespace Functor
 variable (F : C ⥤ D) [F.Additive] [F.PreservesHomology] {ι : Type*} (c : ComplexShape ι)
   (j : ι) [DecidableEq ι]
 
+set_option linter.flexible false in
 /-- The isomorphism `H_j(F(A[j])) ≅ F(H_j(A[j]))` is compatible with the identifications
 `H_j(A[j]) ≅ A` and `F(A[j]) ≅ F(A)[j]`. -/
 lemma mapHomologicalComplexHomologyIso_hom_app_single (A : C) :
@@ -65,7 +66,8 @@ lemma mapHomologicalComplexHomologyIso_hom_app_single (A : C) :
     (((HomologicalComplex.single C c j).obj A).sc j)
   have h₂ := HomologicalComplex.homologyπ_naturality
     ((HomologicalComplex.singleMapHomologicalComplex F c j).hom.app A) j
-  have h₃ := ShortComplex.mapCyclesIso_hom_iCycles (((HomologicalComplex.single C c j).obj A).sc j) F
+  have h₃ := ShortComplex.mapCyclesIso_hom_iCycles
+    (((HomologicalComplex.single C c j).obj A).sc j) F
   erw [reassoc_of% h₁, reassoc_of% h₂]
   simp only [HomologicalComplex.homologyFunctorSingleIso_hom_app]
   erw [← F.map_comp, HomologicalComplex.homologyπ_singleObjHomologySelfIso_hom,

@@ -169,10 +169,12 @@ lemma rightDerivedBaseChange_app (e : G ⋙ γ ⟶ β ⋙ G') (p : ℕ) (Y : B) 
         (γ.mapDerivedCategoryPlusHomologyFunctorIso p).hom.app
           (G.rightDerivedFunctorPlus.obj ((DerivedCategory.Plus.singleFunctor B 0).obj Y)) ≫
         (DerivedCategory.Plus.homologyFunctor C' p).map
-          ((rightDerivedFunctorPlusBaseChange e).app ((DerivedCategory.Plus.singleFunctor B 0).obj Y)) ≫
+          ((rightDerivedFunctorPlusBaseChange e).app
+            ((DerivedCategory.Plus.singleFunctor B 0).obj Y)) ≫
         (DerivedCategory.Plus.homologyFunctor C' p).map (G'.rightDerivedFunctorPlus.map
           ((β.mapDerivedCategoryPlusSingleFunctor 0).hom.app Y)) ≫
-        (G'.singleFunctorCompRightDerivedFunctorPlusCompHomologyFunctorIso p).hom.app (β.obj Y) := by
+        (G'.singleFunctorCompRightDerivedFunctorPlusCompHomologyFunctorIso p).hom.app
+          (β.obj Y) := by
   simp only [rightDerivedBaseChange, NatTrans.comp_app, Iso.symm_hom, isoWhiskerRight_hom,
     whiskerRight_app, whiskerLeft_app, Functor.comp_map]
   rfl
@@ -188,7 +190,8 @@ lemma rightDerivedFunctorPlusBaseChange_homologyFunctor_shiftIso (e : G ⋙ γ �
         ((DerivedCategory.Plus.homologyFunctor C 0).shiftIso m a a' h).hom.app
           (G.rightDerivedFunctorPlus.obj Y)) ≫
       (γ.mapDerivedCategoryPlusHomologyFunctorIso a').hom.app (G.rightDerivedFunctorPlus.obj Y) ≫
-      (DerivedCategory.Plus.homologyFunctor C' a').map ((rightDerivedFunctorPlusBaseChange e).app Y) =
+      (DerivedCategory.Plus.homologyFunctor C' a').map
+        ((rightDerivedFunctorPlusBaseChange e).app Y) =
     (γ.mapDerivedCategoryPlusHomologyFunctorIso a).hom.app (G.rightDerivedFunctorPlus.obj (Y⟦m⟧)) ≫
       (DerivedCategory.Plus.homologyFunctor C' a).map
         ((rightDerivedFunctorPlusBaseChange e).app (Y⟦m⟧)) ≫
@@ -210,7 +213,8 @@ lemma rightDerivedFunctorPlusBaseChange_homologyFunctor_shiftIso (e : G ⋙ γ �
         (G'.rightDerivedFunctorPlus.obj (β.mapDerivedCategoryPlus.obj Y)) =
       ((DerivedCategory.Plus.homologyFunctor C' 0).shiftIso m a a' h).hom.app
         (γ.mapDerivedCategoryPlus.obj (G.rightDerivedFunctorPlus.obj Y)) ≫
-      (DerivedCategory.Plus.homologyFunctor C' a').map ((rightDerivedFunctorPlusBaseChange e).app Y) :=
+      (DerivedCategory.Plus.homologyFunctor C' a').map
+        ((rightDerivedFunctorPlusBaseChange e).app Y) :=
     (DerivedCategory.Plus.homologyFunctor C' 0).shiftIso_hom_naturality m a a' h _
   have h₂' := congrArg (DerivedCategory.Plus.homologyFunctor C' a).map h₂
   simp only [Functor.comp_obj, Functor.comp_map] at h₃

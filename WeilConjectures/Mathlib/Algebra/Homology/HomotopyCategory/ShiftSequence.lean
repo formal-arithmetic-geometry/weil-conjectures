@@ -39,7 +39,8 @@ lemma mapHomologicalComplexHomologyIso_hom_app_shiftIso (n a a' : ℤ) (h : n + 
         ((F.mapHomologicalComplex (.up ℤ)).obj K) ≫
       (F.mapHomologicalComplexHomologyIso (.up ℤ) a').hom.app K := by
   have e₁ : ((HomologicalComplex.homologyFunctor C (.up ℤ) 0).shiftIso n a a' h).hom.app K =
-      ShortComplex.homologyMap ((CochainComplex.shiftShortComplexFunctorIso C n a a' h).hom.app K) :=
+      ShortComplex.homologyMap
+        ((CochainComplex.shiftShortComplexFunctorIso C n a a' h).hom.app K) :=
     CochainComplex.ShiftSequence.shiftIso_hom_app n a a' h K
   have e₂ : ((HomologicalComplex.homologyFunctor D (.up ℤ) 0).shiftIso n a a' h).hom.app
       ((F.mapHomologicalComplex (.up ℤ)).obj K) =
@@ -51,7 +52,9 @@ lemma mapHomologicalComplexHomologyIso_hom_app_shiftIso (n a a' : ℤ) (h : n + 
       F.mapShortComplex.map ((CochainComplex.shiftShortComplexFunctorIso C n a a' h).hom.app K) =
       (CochainComplex.shiftShortComplexFunctorIso D n a a' h).hom.app
         ((F.mapHomologicalComplex (.up ℤ)).obj K) := by
-    ext <;> (simp [Functor.map_units_smul, HomologicalComplex.XIsoOfEq, eqToHom_map]; erw [Category.id_comp])
+    ext <;>
+      (simp [Functor.map_units_smul, HomologicalComplex.XIsoOfEq, eqToHom_map]
+       erw [Category.id_comp])
   have hμ (L : CochainComplex C ℤ) (b : ℤ) :
       (F.mapHomologicalComplexHomologyIso (.up ℤ) b).hom.app L =
         ((L.sc b).mapHomologyIso F).hom := by
