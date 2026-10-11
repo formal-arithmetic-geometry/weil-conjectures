@@ -3543,3 +3543,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 06:41 L: merged deliver/C1/lem-kun-separable-smooth-colimit (stage 2; reviewer FIX; first push; Sheaf.FieldTheory.SeparableSmoothColimit FieldTheory.separable_extension_is_filtered_colimit_smooth)
 - 06:41 L: merged deliver/G1/lem-pc-kflat-tensor-product (stage 2; reviewer FIX; first push; Sheaf.Algebra.Homology.KFlatTensorProduct CochainComplex.IsKFlat.mapBifunctor)
 - 06:42 L: merged deliver/F1/lem-pc-module-flat-opcycles-tor-criterion (stage 2; reviewer FIX; first push; Sheaf.Algebra.Homology.FlatOpcyclesTorCriterion Module.Flat.opcycles_of_exactAt)
+- 06:42 L: merged deliver/J1/lem-pc-principal-open-dense-of-nonzerodivisor (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.PrincipalOpenDenseOfNonZeroDivisor PrimeSpectrum.dense_basicOpen_of_mem_nonZeroDivisors)

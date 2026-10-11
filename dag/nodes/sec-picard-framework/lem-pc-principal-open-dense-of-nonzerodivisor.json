@@ -116,5 +116,23 @@
   "group": "F1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-pod (reviewer sub-agent of L); spot-checked: Shape: one commit, the item and two new Mathlib leaves with created.item = the item, report with Review by F1; item statement unchanged (Stacks 07ZU, divisors-lemma-complement-effective-Cartier-divisor, affine case: A commutative, a a non-zero-divisor, D(a) dense). Step 1 carried by lem-weil-pbc-spec-localization-away-basic-open (ii): Spec(A_a)->Spec(A) is a homeomorphism onto D(a), so D(a) is the range of comap. Step 2 by lem-pc-dense-range-comap-minimal-primes (if direction). Step 3 by lem-pc-minimal-prime-avoids-nonzerodivisor plus (ii) of the localization leaf. Mathlib lines verified with sed: PrimeSpectrum.denseRange_comap_iff_minimalPrimes at Topology.lean:948 (statement: DenseRange (comap f) iff every minimal prime is in the range, same as the leaf); Ideal.notMem_nonZeroDivisors_of_mem_mem_minimalPrimes at MinimalPrime/Localization.lean:98 (x in q, q minimal => x not a nonzerodivisor, contrapositive of the leaf). B10: no slopmaster2 declaration states density of D(a) for a nonzerodivisor (Blowup/Density.lean has only the scheme-theoretic dominance of invertible-ideal complements). Small cases: k[t], a=t (D(t) dense, minimal prime 0 avoids t); k[x,y]/(xy), a=x zero divisor, D(x)=V(x)^c not dense, the minimal prime (x) contains a. FIX: dag/nodes/sec-picard-framework/lem-pc-principal-open-dense-of-nonzerodivisor.json: proof[2].text: replaced 'disjoint from the powers of a, so the localization correspondence supplies a prime' by the inference from the cited statement (ii) (I in D(a) = image of Spec(A_a)), mathematics unchanged. Start Sat Oct 10 04:11:54 PM UTC 2026, end Sat Oct 10 04:12:32 PM UTC 2026.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.PrincipalOpenDenseOfNonZeroDivisor",
+  "declaration": "PrimeSpectrum.dense_basicOpen_of_mem_nonZeroDivisors",
+  "file": "lean/Sheaf/AlgebraicGeometry/PrincipalOpenDenseOfNonZeroDivisor.lean",
+  "statement": "theorem dense_basicOpen_of_mem_nonZeroDivisors (A : Type u) [CommRing A] (a : A) (ha : a ∈ nonZeroDivisors A) : Dense (↑(basicOpen a) : Set (PrimeSpectrum A))",
+  "branch": "sheaf-dag",
+  "by": "J1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-pod0809",
+  "group": "J1",
+  "result": "pass",
+  "note": "Not one statement twice: G1 lem-pc-affine-nonzerodivisor-complement-dense concludes injectivity of O_X->j_*O_U on every open AND DenseRange of the inclusion; this node states only topological density of D(a), a strictly weaker sub-statement (proof step of the chain), so separate declaration correct. (A : Type u) [CommRing A] = arbitrary commutative ring; (a : A) (ha : a ∈ nonZeroDivisors A) = non-zero-divisor; Dense (↑(basicOpen a) : Set (PrimeSpectrum A)) = D(a) dense in Spec A; nothing added/dropped; zero ring, a=1, k[t]/t, k[x,y]/(xy)/x checked. H4: no Mathlib (slopmaster2 .lake) basicOpen+dense/nonZeroDivisors hit, no slopmaster2 WeilConjectures hit. Conventions: header, blueprint tag, no Sheaf prefix, lines<=100, import used, proof sorry, docstring proof in words. Report error: says divisors.tex absent, it is present (07ZU = divisors-lemma-complement-effective-Cartier-divisor, line 2449)."
  }
 }
