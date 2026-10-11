@@ -146,5 +146,23 @@
     "step 7 of thm-weil-pbc-finite-etale-lifting: essential surjectivity via finite-etale approximation and Popescu smoothing; this node supplies the natural local-ring identification required by the equation-count flatness calculation in that chain"
    ]
   }
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.FibreLocalRingNaturalIso",
+  "declaration": "Ideal.Fiber.localRingHom_surjective_ker_quotientEquiv",
+  "file": "lean/Sheaf/RingTheory/FibreLocalRingNaturalIso.lean",
+  "statement": "theorem Fiber.localRingHom_surjective_ker_quotientEquiv {A : Type u} {B : Type v} [CommRing A] [CommRing B] [Algebra A B] (p : Ideal A) [p.IsPrime] (Q : Ideal (p.Fiber B)) [Q.IsPrime] : let j : B →+* p.Fiber B := Algebra.TensorProduct.includeRight.toRingHom let q : Ideal B := Q.comap j let θ := Localization.localRingHom q Q j rfl let I : Ideal (Localization.AtPrime q) := (p.map (algebraMap A B)).map (algebraMap B (Localization.AtPrime q)) (∀ (b : B) (s : q.primeCompl), θ (Localization.mk b s) = Localization.mk (j b) ⟨j s, s.property⟩) ∧ Function.Surjective θ ∧ RingHom.ker θ = I ∧ ∃ e : (Localization.AtPrime q ⧸ I) ≃+* Localization.AtPrime Q, ∀ x : Localization.AtPrime q, e (Ideal.Quotient.mk I x) = θ x",
+  "branch": "sheaf-dag",
+  "by": "G1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-frl1008",
+  "group": "G1",
+  "result": "pass",
+  "note": "A,B CommRing + [Algebra A B]=phi; p prime; C=p.Fiber B (kappa(p)⊗B, accepted order), j=includeRight; Q prime, q=Q.comap j; theta=localRingHom q Q j rfl with mk b s ↦ mk (j b) (j s) for all s∉q; surjective; ker = (p.map phi).map = <phi(a)/1>; ∃ quotient ≃+* with e∘mk=theta; Mathlib algEquivAux₂ has no formula/kernel so existing:false right"
  }
 }
