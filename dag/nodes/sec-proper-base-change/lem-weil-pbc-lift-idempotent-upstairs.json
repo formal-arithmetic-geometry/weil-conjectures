@@ -200,5 +200,23 @@
   "by": "L",
   "result": "accepted",
   "note": "Eight steps along Stacks 07M4 read against more-algebra.tex: annihilating polynomial (09XG node), lifting the coprime factorization x^d, (x-1)^d (07M1 node; coprimality written out with (x-(x-1))^{2d-1}), base change (leaf Algebra.IsIntegral.tensorProduct, IntegralClosure/Algebra/Basic.lean:252), closedness of Spec of an integral map (leaf isClosedMap_comap_of_isIntegral, Spectrum/Prime/Topology.lean:1156), separation (07M3 node), localization at a ≡ 1 mod I keeping A/I, clopen D(b_1) gives the idempotent (leaf existsUnique_idempotent_basicOpen_eq_of_isClopen :1084 / isIdempotentElemEquivClopens :1405), lift checked by uniqueness in B_2/IB_2. All leaves checked in the pinned Mathlib. Mathlib has no 07M4 (only the one-prime 00UJ/00UL forms); recorded."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.LiftIdempotentUpstairs",
+  "declaration": "AlgebraicGeometry.exists_etale_lift_isIdempotentElem",
+  "file": "lean/Sheaf/RingTheory/LiftIdempotentUpstairs.lean",
+  "statement": "theorem exists_etale_lift_isIdempotentElem {A : Type u} {B : Type v} [CommRing A] [CommRing B] (I : Ideal A) [Algebra A B] [Algebra.IsIntegral A B] (ebar : B ⧸ I.map (algebraMap A B)) (hebar : IsIdempotentElem ebar) : ∃ (A' : CommRingCat.{u}) (g : CommRingCat.of A ⟶ A'), letI : Algebra A A' := g.hom.toAlgebra; Etale (Spec.map g) ∧ ∃ α : A ⧸ I ≃+* A' ⧸ I.map (algebraMap A A'), (∀ a : A, α (Ideal.Quotient.mk I a) = Ideal.Quotient.mk _ (algebraMap A A' a)) ∧ ∃ (e' : TensorProduct A B (A' : Type u)), IsIdempotentElem e' ∧ ∃ β : B ⧸ I.map (algebraMap A B) ≃+* (TensorProduct A B (A' : Type u)) ⧸ I.map (algebraMap A (TensorProduct A B (A' : Type u))), (∀ b : B, β (Ideal.Quotient.mk _ b) = Ideal.Quotient.mk _ (Algebra.TensorProduct.includeLeftRingHom (R := A) (B := A') b)) ∧ β ebar = Ideal.Quotient.mk _ e'",
+  "branch": "sheaf-dag",
+  "by": "G1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-liu1140",
+  "group": "G1",
+  "result": "pass",
+  "note": "A,B commutative, Algebra A B = ring map, Algebra.IsIntegral, ebar in B/IB IsIdempotentElem; A' CommRingCat.{u} with g, Algebra A A' tied to g (rfl), Etale (Spec.map g) = recorded AlgebraicGeometry.Etale (#check); alpha pinned to induced map on representatives; e' IsIdempotentElem in B⊗A'; beta pinned to b|->b⊗1 (exists iff alpha iso, inverse = node's id_B⊗alpha^-1 composite), beta ebar = mk e'; algebraMap A (B⊗A') a = 1⊗g a (checked); node statement unchanged; I=⊥/⊤, zero rings ok"
  }
 }
