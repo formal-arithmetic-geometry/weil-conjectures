@@ -3949,3 +3949,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 09:08 L: merged deliver/M1/lem-weil-pbc-cohen-rings-exist (stage 2; reviewer PASS; first push; Sheaf.RingTheory.CohenRingsExist exists_cohenRing; dependency modules: def-weil-pbc-cohen-ring)
 - 09:08 L: merged deliver/M1/lem-weil-pbc-cech-vanishing-criterion (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.EtaleCechVanishingCriterion AlgebraicGeometry.Scheme.isZero_rightDerived_etale_of_cech_vanishing)
 - 09:08 L: merged deliver/C1/lem-weil-pbc-cohen-structure-power-series-surjection (stage 2; reviewer FIX; first push; Sheaf.RingTheory.CohenStructurePowerSeriesSurjection IsLocalRing.cohen_structure_power_series_surjection)
+- 09:08 L: merged deliver/H1/lem-weil-pbc-colimit-rings-flat (stage 2; reviewer PASS; first push; Sheaf.RingTheory.FlatColimitRings RingHom.flat_of_flat_comp_colimit_ι)
