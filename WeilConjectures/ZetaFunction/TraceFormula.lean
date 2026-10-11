@@ -210,7 +210,8 @@ variable [IsSeparated (X ↘ Spec (CommRingCat.of k₀))]
   [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
   [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))]
 
-/-- Blueprint `cor-trf-point-counting` (point-counting trace formula, subsection
+/-- Blueprints `cor-trf-point-counting` and `prop-every-iterate-trace` (constant-sheaf clause)
+(point-counting trace formula, subsection
 `sk-thm-trace-transport` of the trace formula chapter), compactly supported form: for a
 separated `k₀`-scheme `X₀` of finite type and every `m ≥ 1`,
 
@@ -245,7 +246,8 @@ section Proper
 variable (k₀ l) (X : Scheme.{u}) [X.Over (Spec (CommRingCat.of k₀))]
   [IsProper (X ↘ Spec (CommRingCat.of k₀))]
 
-/-- Blueprint `cor-trf-point-counting` (point-counting trace formula), proper form: for a proper
+/-- Blueprints `cor-trf-point-counting` and `prop-every-iterate-trace` (proper clause)
+(point-counting trace formula), proper form: for a proper
 `k₀`-scheme `X₀` and every `m ≥ 1`,
 
 `#X₀(𝔽_{qᵐ}) = ∑ᵢ (-1)ⁱ Tr(Fᵐ | Hⁱ(X₀ ⊗ k̄, ℚ̄_ℓ))`,
@@ -262,7 +264,8 @@ theorem WeilSheaf.pointCount_eq_finsum_trace_cohomology {m : ℕ} (hm : 1 ≤ m)
     (WeilSheaf.toComplex.obj (WeilSheaf.adicConstant k₀ l X)) i
   exact congrArg _ (e.trace_frobeniusEnd_pow m).symm
 
-/-- Blueprint `thm-weil-grothendieck-lefschetz-trace` (Grothendieck–Lefschetz trace formula):
+/-- Blueprints `thm-weil-grothendieck-lefschetz-trace` and `prop-every-iterate-trace` (general
+clause) (Grothendieck–Lefschetz trace formula):
 for a Weil complex `K` on a separated `k₀`-scheme `Y₀` of finite type and `m ≥ 1`, the sum over
 `y ∈ Y₀(𝔽_{qᵐ})` of the local alternating traces `t_K(y)` is the alternating trace of `Fᵐ` on
 `H_c^•(Y₀ ⊗ k̄, K)`; for `K = ℚ̄_ℓ` and a proper `X₀` this specializes to

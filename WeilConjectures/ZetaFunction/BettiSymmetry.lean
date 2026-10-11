@@ -125,6 +125,25 @@ theorem natDegree_eq_finrank_of_isIntegralFrobeniusFactor
   rw [← natDegree_frobeniusCharpolyRev, ← hP l,
     Polynomial.natDegree_map_eq_of_injective (RingHom.injective_int _)]
 
+/-- Blueprint `def-weil-determinant-constants`: the image in `ℚ̄_ℓ` of the determinant constant
+`D = (-1)^b [T^b] P` of an integral Frobenius factor `P` in degree `i` is the determinant
+`det(F | Hⁱ(X₀ ⊗ k̄, ℚ̄_ℓ))` of the geometric Frobenius, for every prime `ℓ ≠ p`: the leading
+coefficient of `det(1 - T F)` is `(-1)^{dim} det F`. -/
+theorem map_weilDeterminantConstant_eq_det
+    [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))] [QuasiSeparated (X ↘ Spec (CommRingCat.of k₀))]
+    [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))] {i : ℤ} {P : Polynomial ℤ}
+    (hP : IsIntegralFrobeniusFactor k₀ X i P) (l : ℕ) [Fact l.Prime] [Fact (ringChar k₀ ≠ l)] :
+    (weilDeterminantConstant P : PadicAlgCl l) =
+      LinearMap.det ((WeilSheaf.adicConstant k₀ l X).cohomology i).frobeniusEnd := by
+  have hlc : (P.leadingCoeff : PadicAlgCl l) =
+      (frobeniusCharpolyRev k₀ l X i).leadingCoeff := by
+    rw [← hP l, Polynomial.leadingCoeff_map_of_injective (RingHom.injective_int _)]
+    rfl
+  rw [weilDeterminantConstant, Int.cast_mul, Int.cast_pow, Int.cast_neg, Int.cast_one,
+    ← Polynomial.leadingCoeff, hlc,
+    leadingCoeff_frobeniusCharpolyRev, natDegree_eq_finrank_of_isIntegralFrobeniusFactor k₀ X hP l,
+    ← mul_assoc, ← mul_pow, neg_one_mul, neg_neg, one_pow, one_mul]
+
 variable (d : ℕ) [IsProper (X ↘ Spec (CommRingCat.of k₀))]
   [SmoothOfRelativeDimension d (X ↘ Spec (CommRingCat.of k₀))]
   [GeometricallyConnected (X ↘ Spec (CommRingCat.of k₀))]

@@ -72,6 +72,20 @@ def weilDeterminantConstant (P : Polynomial ℤ) : ℤ :=
 noncomputable def weilDeterminantScalar {n : ℕ} (P : Fin (n + 1) → Polynomial ℤ) : ℚ :=
   ∏ i : Fin (n + 1), (weilDeterminantConstant (P i) : ℚ) ^ ((-1 : ℤ) ^ (i : ℕ))
 
+/-- Blueprint `def-weil-determinant-constants`: the determinant constant of a polynomial with
+constant coefficient `1` is a nonzero integer. -/
+theorem weilDeterminantConstant_ne_zero {P : Polynomial ℤ} (h0 : P.coeff 0 = 1) :
+    weilDeterminantConstant P ≠ 0 := by
+  have hP : P ≠ 0 := fun h ↦ by simp [h] at h0
+  exact mul_ne_zero (pow_ne_zero _ (by decide)) (Polynomial.leadingCoeff_ne_zero.2 hP)
+
+/-- Blueprint `def-weil-determinant-constants`: the alternating determinant scalar
+`Δ = ∏ᵢ Dᵢ^{(-1)ⁱ}` of a family of polynomials with constant coefficients `1` lies in `ℚ^×`. -/
+theorem weilDeterminantScalar_ne_zero {n : ℕ} {P : Fin (n + 1) → Polynomial ℤ}
+    (h0 : ∀ i, (P i).coeff 0 = 1) : weilDeterminantScalar P ≠ 0 :=
+  Finset.prod_ne_zero_iff.2 fun i _ ↦
+    zpow_ne_zero _ (Int.cast_ne_zero.2 (weilDeterminantConstant_ne_zero (h0 i)))
+
 /-- **Betti symmetry.** The functional equation matches the reciprocal roots in degree `i` with
 those in degree `2 * d - i`, so the two root multisets have the same cardinality; over `ℂ` that
 cardinality is the degree, so the Betti numbers `b i = deg (P i)` satisfy
