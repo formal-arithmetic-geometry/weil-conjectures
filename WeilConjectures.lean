@@ -1059,6 +1059,7 @@ public import WeilConjectures.Mathlib.CategoryTheory.Limits.FunctorCategory.Shap
 public import WeilConjectures.Mathlib.CategoryTheory.Limits.HasLimits
 public import WeilConjectures.Mathlib.CategoryTheory.Limits.MorphismProperty
 public import WeilConjectures.Mathlib.CategoryTheory.Limits.Preserves.Shapes.Kernels
+public import WeilConjectures.Mathlib.CategoryTheory.Limits.Shapes.Biproducts
 public import WeilConjectures.Mathlib.CategoryTheory.Limits.Shapes.Diagonal
 public import WeilConjectures.Mathlib.CategoryTheory.Limits.Shapes.FiniteLimits
 public import WeilConjectures.Mathlib.CategoryTheory.Limits.Shapes.Kernels
@@ -1665,6 +1666,7 @@ public import WeilConjectures.SixFunctors.ProEtale.Adic.Abelian
 public import WeilConjectures.SixFunctors.ProEtale.Adic.AlgClosedField
 public import WeilConjectures.SixFunctors.ProEtale.Adic.AlgClosedFieldExact
 public import WeilConjectures.SixFunctors.ProEtale.Adic.BaseChange
+public import WeilConjectures.SixFunctors.ProEtale.Adic.ClosedImmersion
 public import WeilConjectures.SixFunctors.ProEtale.Adic.ClosedOpenImmersion
 public import WeilConjectures.SixFunctors.ProEtale.Adic.ConstantGlobalSections
 public import WeilConjectures.SixFunctors.ProEtale.Adic.ConstantSheaf
