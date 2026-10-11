@@ -10,6 +10,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
 public import WeilConjectures.AlgebraicGeometry.Regular
 public import WeilConjectures.DeligneLaumon.AffineLine.Defs
 public import WeilConjectures.DeligneLaumon.AffineLine.FiniteBoundary
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Geometrically.Connected
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Affine
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Smooth
 public import WeilConjectures.WeilSheaf.CohomologicalRange
@@ -52,7 +53,7 @@ This leaves degree one, which is the only place where the Fourier argument of
 
 universe u
 
-open CategoryTheory TopologicalSpace
+open CategoryTheory TopologicalSpace Pretriangulated
 
 namespace AlgebraicGeometry
 
@@ -62,7 +63,7 @@ variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime] [Fa
 
 /-- A smooth affine curve `C₀` is locally of finite type over `k₀`, being smooth over `k₀`. -/
 local instance : LocallyOfFiniteType (C ↘ Spec (CommRingCat.of k₀)) :=
-  haveI := SmoothOfRelativeDimension.smooth 1 (C ↘ Spec (CommRingCat.of k₀))
+  have := SmoothOfRelativeDimension.smooth 1 (C ↘ Spec (CommRingCat.of k₀))
   inferInstance
 
 /-- *Top compact-support bound on a curve.* If `C₀` is a smooth affine curve and `G` is a lisse
@@ -176,35 +177,129 @@ lemma exists_isClosedImmersion_range_eq_compl
 
 end Complement
 
+
+section Localization
+
+variable {U : Scheme.{u}} [U.Over (Spec (CommRingCat.of k₀))] (j : U ⟶ C) [IsOpenImmersion j]
+  [QuasiCompact j] [j.IsOver (Spec (CommRingCat.of k₀))]
+
+omit [Finite k₀] [IsAffine C] [SmoothOfRelativeDimension 1 (C ↘ Spec (CommRingCat.of k₀))]
+  [IsOpenImmersion j] [QuasiCompact j] in
+lemma over_eq_comp : U ↘ Spec (CommRingCat.of k₀) = j ≫ C ↘ Spec (CommRingCat.of k₀) :=
+  (comp_over j _).symm
+
+omit [Finite k₀] [SmoothOfRelativeDimension 1 (C ↘ Spec (CommRingCat.of k₀))] [QuasiCompact j] in
+include j in
+lemma isSeparated_over_of_isOpenImmersion : IsSeparated (U ↘ Spec (CommRingCat.of k₀)) := by
+  rw [over_eq_comp j]
+  infer_instance
+
+omit [Finite k₀] [IsAffine C] [QuasiCompact j] in
+include j in
+lemma locallyOfFiniteType_over_of_isOpenImmersion :
+    LocallyOfFiniteType (U ↘ Spec (CommRingCat.of k₀)) := by
+  rw [over_eq_comp j]
+  infer_instance
+
+omit [Finite k₀] [SmoothOfRelativeDimension 1 (C ↘ Spec (CommRingCat.of k₀))]
+  [IsOpenImmersion j] in
+include j in
+lemma quasiCompact_over_of_isOpenImmersion : QuasiCompact (U ↘ Spec (CommRingCat.of k₀)) := by
+  rw [over_eq_comp j]
+  infer_instance
+
+variable [IsDominant j] [GeometricallyConnected (C ↘ Spec (CommRingCat.of k₀))]
+  (F : WeilSheaf k₀ l U)
+
+set_option maxHeartbeats 1600000 in
+-- the cohomology of the three terms of the triangle unfolds through the Weil structures
+/-- *Localization in high degrees.* For a dense open immersion `j : U₀ ↪ C₀` into a smooth
+geometrically connected affine curve and a Weil sheaf `F` on `U₀`, the boundary triangle
+`RΓ_c(U, F) → RΓ_c(C, j_*F) → RΓ_c(Z, i^*j_*F) →`, whose third term is concentrated in degree
+zero, gives Frobenius-equivariant isomorphisms `H_c^r(U, F) ≃ H_c^r(C, j_*F)` for `r ≥ 2`. -/
+theorem nonempty_equiv_compactlySupportedCohomology_directImage_of_two_le
+    [IsSeparated (U ↘ Spec (CommRingCat.of k₀))]
+    [LocallyOfFiniteType (U ↘ Spec (CommRingCat.of k₀))]
+    [QuasiCompact (U ↘ Spec (CommRingCat.of k₀))] {r : ℤ} (hr : 2 ≤ r) :
+    Nonempty ((F.compactlySupportedCohomology r).Equiv
+      (((WeilSheaf.directImage j).obj F).compactlySupportedCohomology r)) := by
+  obtain ⟨Z, _, i, _, _, _, hij⟩ := exists_isClosedImmersion_range_eq_compl (k₀ := k₀) j
+  have : IsSeparated (Z ↘ Spec (CommRingCat.of k₀)) := inferInstance
+  have : LocallyOfFiniteType (Z ↘ Spec (CommRingCat.of k₀)) := inferInstance
+  have : QuasiCompact (Z ↘ Spec (CommRingCat.of k₀)) := inferInstance
+  set A := (WeilSheaf.directImage j).obj F
+  set B := (WeilSheaf.upperStar i).obj A
+  obtain ⟨α, β, γ, hT⟩ := WeilComplex.exists_distTriang_derivedLowerShriek_openClosed j i hij
+    (WeilSheaf.toComplex.obj A)
+  set T := Triangle.mk α β γ
+  have hA : A = (WeilSheaf.lowerStar j).obj F := rfl
+  let eU : (WeilComplex.upperStar j).obj (WeilSheaf.toComplex.obj A) ≅
+      WeilSheaf.toComplex.obj F :=
+    (WeilSheaf.toComplexCompUpperStarIso j).app A ≪≫
+      WeilSheaf.toComplex.mapIso (hA ▸ WeilSheaf.upperStarDirectImageIso j F)
+  let eZ : (WeilComplex.upperStar i).obj (WeilSheaf.toComplex.obj A) ≅
+      WeilSheaf.toComplex.obj B :=
+    (WeilSheaf.toComplexCompUpperStarIso i).app A
+  let EU (r : ℤ) := WeilComplex.cohomologyEquivOfIso
+    ((WeilComplex.derivedLowerShriek k₀ l (U ↘ Spec (CommRingCat.of k₀))).mapIso eU) r
+  let EZ (r : ℤ) := WeilComplex.cohomologyEquivOfIso
+    ((WeilComplex.derivedLowerShriek k₀ l (Z ↘ Spec (CommRingCat.of k₀))).mapIso eZ) r
+  -- the boundary has no cohomology outside degree `0`
+  have hZ (r : ℤ) (hr : r ≠ 0) : Subsingleton (T.obj₃.cohomologyFrobeniusModule r).carrier := by
+    have h := WeilSheaf.subsingleton_compactlySupportedCohomology_of_isFinite B hr
+    exact ⟨fun a b ↦ (EZ r).toLinearEquiv.injective (h.elim _ _)⟩
+  have hinj : Function.Injective (WeilComplex.cohomologyMap T.mor₁ r) := by
+    rw [injective_iff_map_eq_zero]
+    intro x hx
+    have := hZ (r - 1) (by omega)
+    obtain ⟨y, rfl⟩ := (WeilComplex.exact_cohomologyδ_right T (r - 1) r (by omega) hT x).1 hx
+    rw [Subsingleton.elim y 0, map_zero]
+  have hsurj : Function.Surjective (WeilComplex.cohomologyMap T.mor₁ r) := by
+    intro z
+    have := hZ r (by omega)
+    exact (WeilComplex.exact_cohomologyMap T r hT z).1 (Subsingleton.elim _ _)
+  let E : (T.obj₁.cohomologyFrobeniusModule r).Equiv (T.obj₂.cohomologyFrobeniusModule r) :=
+    ⟨LinearEquiv.ofBijective _ ⟨hinj, hsurj⟩, WeilComplex.cohomologyMap_frobenius T.mor₁ r⟩
+  exact ⟨(EU r).symm.trans E⟩
+
+end Localization
+
 variable {U : Scheme.{u}} [U.Over (Spec (CommRingCat.of k₀))] (j : U ⟶ C) [IsOpenImmersion j]
   [QuasiCompact j] [j.IsOver (Spec (CommRingCat.of k₀))] [IsDominant j]
   [GeometricallyConnected (C ↘ Spec (CommRingCat.of k₀))]
   (F : WeilSheaf k₀ l U)
 
+omit [IsDominant j] [GeometricallyConnected (C ↘ Spec (CommRingCat.of k₀))] in
 /-- For a dense open immersion `j : U₀ ↪ C₀` with `C₀` a smooth geometrically connected affine
 curve and `F` lisse on `U₀`, the compactly supported cohomology `H_c^r(C, j_*F)` vanishes for
-every `r` outside `{0, 1, 2}`. (blueprint: `sk-l-dl-a1-endpoints`) -/
-theorem subsingleton_compactlySupportedCohomology_directImage (hF : F.IsLisse) {r : ℤ}
+every `r` outside `{0, 1, 2}`: in negative degrees because `j_*F` is a sheaf, and in degrees
+above two by the cohomological range of the affine curve `C₀`
+(`AlgebraicGeometry.WeilSheaf.subsingleton_compactlySupportedCohomology_of_isAffine`).
+(blueprint: `sk-l-dl-a1-endpoints`, `lem-a1-middle-extension-endpoints`) -/
+theorem subsingleton_compactlySupportedCohomology_directImage (_hF : F.IsLisse) {r : ℤ}
     (hr : r < 0 ∨ 2 < r) :
     Subsingleton
       (((WeilSheaf.directImage j).obj F).compactlySupportedCohomology r).carrier := by
-  -- TODO(adic): prove once Weil sheaves carry genuine `ℓ`-adic coefficients
-  sorry
+  rcases hr with hr | hr
+  · exact WeilSheaf.subsingleton_globalSections_of_isZero
+      (WeilComplex.isZero_homologySheaf_derivedLowerShriek_toComplex_of_neg _ _ hr)
+  · exact WeilSheaf.subsingleton_compactlySupportedCohomology_of_isAffine _ (Or.inr hr)
 
 /-- In the situation of `AlgebraicGeometry.subsingleton_compactlySupportedCohomology_directImage`
 the degree-zero compactly supported cohomology `H_c^0(C, j_*F)` vanishes, because a nonzero
 global section of a lisse sheaf on a connected open has full support on a nonproper curve.
-(blueprint: `sk-l-dl-a1-endpoints`) -/
+(blueprint: `sk-l-dl-a1-endpoints`, `lem-a1-middle-extension-endpoints`) -/
 theorem subsingleton_compactlySupportedCohomology_directImage_zero (hF : F.IsLisse) :
     Subsingleton
       (((WeilSheaf.directImage j).obj F).compactlySupportedCohomology 0).carrier := by
-  -- TODO(adic): prove once Weil sheaves carry genuine `ℓ`-adic coefficients
   sorry
 
 /--
-In degree two, global Verdier duality on the smooth nonproper curve `U` identifies
-`H_c^2(C, j_*F)` with the geometric coinvariants `V_{π₁(U)}` of `F`, Tate-twisted by `(-1)`:
-the Frobenius of the cohomology is `q` times the Frobenius of the coinvariants.
+In degree two, the boundary localization sequence identifies `H_c^2(C, j_*F)` with
+`H_c^2(U, F)`, which global Verdier duality on the smooth nonproper curve `U` identifies with the
+geometric coinvariants `V_{π₁(U)}` of `F`, Tate-twisted by `(-1)`
+(`AlgebraicGeometry.WeilSheaf.nonempty_equiv_compactlySupportedCohomology_two`): the Frobenius
+of the cohomology is `q` times the Frobenius of the coinvariants.
 
 ```
   H_c²(C, j_*F) ──e──▶ V_{π₁(U)}
@@ -213,25 +308,48 @@ the Frobenius of the cohomology is `q` times the Frobenius of the coinvariants.
         ▼                 ▼
   H_c²(C, j_*F) ──e──▶ V_{π₁(U)}
 ```
-(blueprint: `sk-l-dl-a1-endpoints`)
+(blueprint: `sk-l-dl-a1-endpoints`, `lem-a1-middle-extension-endpoints`)
 -/
 theorem nonempty_equiv_compactlySupportedCohomology_directImage_two
     [QuasiCompact (U ↘ Spec (CommRingCat.of k₀))]
     [LocallyOfFiniteType (U ↘ Spec (CommRingCat.of k₀))] (hF : F.IsLisse) :
     Nonempty ((((WeilSheaf.directImage j).obj F).compactlySupportedCohomology 2).Equiv
       ((F.geometricCoinvariants hF).tateTwist (Nat.card k₀) (-1))) := by
-  sorry
+  have := isSeparated_over_of_isOpenImmersion (k₀ := k₀) j
+  have := isAffine_of_isDominant (k₀ := k₀) j
+  have := nonempty_of_isDominant (k₀ := k₀) j
+  have : SmoothOfRelativeDimension 1 (U ↘ Spec (CommRingCat.of k₀)) := by
+    rw [over_eq_comp j]
+    exact inferInstanceAs (SmoothOfRelativeDimension (0 + 1) _)
+  have : GeometricallyConnected (U ↘ Spec (CommRingCat.of k₀)) := by
+    rw [over_eq_comp j]
+    have := SmoothOfRelativeDimension.smooth 1 (C ↘ Spec (CommRingCat.of k₀))
+    have : GeometricallyIrreducible (C ↘ Spec (CommRingCat.of k₀)) :=
+      .of_smooth_of_geometricallyConnected _
+    have : Surjective (j ≫ C ↘ Spec (CommRingCat.of k₀)) :=
+      ⟨fun _ ↦ ⟨Nonempty.some inferInstance, Subsingleton.elim _ _⟩⟩
+    infer_instance
+  obtain ⟨e⟩ := nonempty_equiv_compactlySupportedCohomology_directImage_of_two_le j F le_rfl
+  obtain ⟨e'⟩ := WeilSheaf.nonempty_equiv_compactlySupportedCohomology_two F hF
+  exact ⟨e.symm.trans e'⟩
 
 /-- If `F` is moreover punctually `ι`-pure of weight `w`, then `H_c^2(C, j_*F)` is pure of
-weight `w + 2`: the Tate twist of
+weight `w + 2`: the geometric coinvariants are pure of weight `w`
+(`AlgebraicGeometry.WeilSheaf.isPureOfWeightOver_geometricCoinvariants`) and the Tate twist of
 `AlgebraicGeometry.nonempty_equiv_compactlySupportedCohomology_directImage_two` raises weights
-by two. (blueprint: `sk-l-dl-a1-endpoints`) -/
+by two. (blueprint: `sk-l-dl-a1-endpoints`, `lem-a1-middle-extension-endpoints`) -/
 theorem isPureOfWeightOver_compactlySupportedCohomology_directImage_two
     (ι : PadicAlgCl l →+* ℂ) (hF : F.IsLisse) {w : ℝ}
     (hw : F.IsPunctuallyPureOfWeight ι w) :
     (((WeilSheaf.directImage j).obj F).compactlySupportedCohomology 2).IsPureOfWeightOver
       k₀ ι (w + 2) := by
-  -- TODO(adic): prove once Weil sheaves carry genuine `ℓ`-adic coefficients
-  sorry
+  have := locallyOfFiniteType_over_of_isOpenImmersion (k₀ := k₀) j
+  have := quasiCompact_over_of_isOpenImmersion (k₀ := k₀) j
+  obtain ⟨e⟩ := nonempty_equiv_compactlySupportedCohomology_directImage_two j F hF
+  have h := (WeilSheaf.isPureOfWeightOver_geometricCoinvariants ι F hF hw).tateTwist
+    Nat.card_pos (-1)
+  have hw2 : w - 2 * ((-1 : ℤ) : ℝ) = w + 2 := by push_cast; ring
+  rw [hw2] at h
+  exact FrobeniusModule.IsPureOfWeight.of_equiv e h
 
 end AlgebraicGeometry
