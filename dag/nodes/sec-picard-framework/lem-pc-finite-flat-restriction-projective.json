@@ -11,20 +11,68 @@
  },
  "kind": "statement",
  "title": "Restriction of scalars along a finite flat algebra preserves finite projectivity",
- "statement": "Let $A\\to B$ be a homomorphism of commutative rings such that $B$ is finite, finitely presented [def-weil-pbc-finitely-presented-algebra], and flat as an $A$-module [def-weil-pbc-flat-ring-map]. Let $M$ be a $B$-module that is finitely presented [def-sc-finitely-presented-module] and projective over $B$ [def-weil-pbc-projective-module]. Regard $M$ as an $A$-module through $A\\to B$. Then $M$ is finitely presented and projective over $A$.",
+ "statement": "Let $A\\to B$ be a homomorphism of commutative rings such that $B$ is finite as an $A$-module [def-weil-finitely-generated-module], finitely presented as an $A$-algebra [def-weil-pbc-finitely-presented-algebra], and flat as an $A$-module [def-weil-pbc-flat-ring-map]. Let $M$ be a $B$-module that is finitely presented [def-sc-finitely-presented-module] and projective over $B$ [def-weil-pbc-projective-module]. Regard $M$ as an $A$-module through $A\\to B$. Then $M$ is finitely presented and projective over $A$.",
  "source": {
   "document": "WeilConjectures/AlgebraicGeometry/Modules/FinitePushforward.lean",
   "place": "theorem isFiniteLocallyFree_pushforward, lines 228-242: Module.FinitePresentation.of_finite_of_finitePresentation and Module.Projective.trans"
  },
  "stmt_deps": [
+  "def-weil-finitely-generated-module",
   "def-weil-pbc-finitely-presented-algebra",
   "def-weil-pbc-flat-ring-map",
   "def-sc-finitely-presented-module",
   "def-weil-pbc-projective-module"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "*Step 1 (finite presentation over $A$).* $B$ is a finite $A$-module [def-weil-finitely-generated-module] and a finitely presented $A$-algebra [def-weil-pbc-finitely-presented-algebra], so $B$ is a finitely presented $A$-module [def-sc-finitely-presented-module] by [lem-weil-pbc-finite-algebra-presentation-module-presentation]. Since $M$ is a finitely presented $B$-module, [lem-pc-module-finite-presentation-transitive] applied to $A\\to B$ and $M$ shows that $M$ is a finitely presented $A$-module.",
+   "uses": [
+    "def-weil-finitely-generated-module",
+    "def-weil-pbc-finitely-presented-algebra",
+    "def-sc-finitely-presented-module",
+    "lem-weil-pbc-finite-algebra-presentation-module-presentation",
+    "lem-pc-module-finite-presentation-transitive"
+   ],
+   "elementary": false,
+   "source": null
+  },
+  {
+   "text": "*Step 2 (flatness over $A$).* $M$ is projective over $B$ [def-weil-pbc-projective-module], hence flat over $B$ by [lem-weil-pbc-projective-module-flat]. As $B$ is flat over $A$ [def-weil-pbc-flat-ring-map], [lem-pc-module-flat-transitive] shows that $M$ is a flat $A$-module.",
+   "uses": [
+    "def-weil-pbc-projective-module",
+    "lem-weil-pbc-projective-module-flat",
+    "def-weil-pbc-flat-ring-map",
+    "lem-pc-module-flat-transitive"
+   ],
+   "elementary": false,
+   "source": null
+  },
+  {
+   "text": "*Step 3 (projectivity over $A$).* By Steps 1 and 2, $M$ is a finitely presented flat $A$-module, so it is a projective $A$-module by [lem-weil-pbc-finitely-presented-flat-module-projective]. Together with Step 1 this is the claim.",
+   "uses": [
+    "lem-weil-pbc-finitely-presented-flat-module-projective"
+   ],
+   "elementary": false,
+   "source": null
+  }
+ ],
+ "proof_deps": [
+  "def-weil-finitely-generated-module",
+  "def-weil-pbc-finitely-presented-algebra",
+  "def-sc-finitely-presented-module",
+  "lem-weil-pbc-finite-algebra-presentation-module-presentation",
+  "lem-pc-module-finite-presentation-transitive",
+  "def-weil-pbc-projective-module",
+  "lem-weil-pbc-projective-module-flat",
+  "def-weil-pbc-flat-ring-map",
+  "lem-pc-module-flat-transitive",
+  "lem-weil-pbc-finitely-presented-flat-module-projective"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "WeilConjectures/AlgebraicGeometry/Modules/FinitePushforward.lean",
+  "place": "theorem isFiniteLocallyFree_pushforward, lines 228-242 (finite-presentation and flatness transitivity, then finitely presented flat implies projective)"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -53,15 +101,60 @@
    "results": "service unavailable: Internal Server Error",
    "date": "2026-10-11",
    "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "projective module scalar tower restriction of scalars",
+   "results": "Module.Flat.projective_of_finitePresentation; no direct scalar-tower projectivity theorem",
+   "date": "2026-10-11",
+   "verdict": "generalization: projectivity follows after flatness and finite-presentation transitivity"
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.Projective R M, Module.Projective S M, IsScalarTower",
+   "results": "Unknown identifier R; no usable hit",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "Projective.trans|projective_of_finitePresentation in Mathlib",
+   "results": "no matches for Projective.trans; projective_of_finitePresentation in Mathlib/RingTheory/Flat/EquationalCriterion.lean",
+   "date": "2026-10-11",
+   "verdict": "match per clause via flatness"
+  },
+  {
+   "tool": "leansearch",
+   "query": "projectivity is transitive along a scalar tower of commutative rings",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-pc-finite-flat-pushforward-locally-free",
   "by": "worker",
   "date": "2026-10-11"
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-the-hilbert-functor--definition-1"
+ "unit": "sk-the-hilbert-functor--definition-1",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-pc-finite-flat-restriction-projective",
+  "worker": "stage1",
+  "summary": "Reviewer R-ffr0125 repair (B8): the leaf needed four non-instance Mathlib declarations, not one per clause; now a three-step proof citing lem-weil-pbc-finite-algebra-presentation-module-presentation, lem-weil-pbc-projective-module-flat, lem-weil-pbc-finitely-presented-flat-module-projective and two new statement-only nodes for module finite-presentation transitivity (Module.FinitePresentation.trans) and module flatness transitivity (Module.Flat.trans).",
+  "blueprint": "Realizes the ancestor proof step 'finite flatness and finite presentation of the algebra make restriction of scalars preserve finite presentation and projectivity' by the cited Mathlib declarations.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-ffr0125",
+  "group": "E1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-ffr0125 (reviewer sub-agent of L); spot-checked: Statement (E7: finite A-module made explicit) true; citer lem-pc-finite-flat-pushforward-locally-free supplies finite+fp algebra+flat and FP projective M (C4 ok). Read the Mathlib decls at FinitePresentation.lean:323, ModuleFinitePresentation.lean:80, Flat/Basic.lean:231, Flat/Stability.lean:62, EquationalCriterion.lean:287; no Module.Projective.trans exists, so no <=3-declaration composite. FIX more, RETURN less: (B8) leaf needed four non-instance declarations (of_finite_of_finitePresentation, FinitePresentation.trans, Flat.trans, projective_of_finitePresentation), and FinitePresentation.trans had no file/line; made the item a three-step proof citing lem-weil-pbc-finite-algebra-presentation-module-presentation, lem-weil-pbc-projective-module-flat, lem-weil-pbc-finitely-presented-flat-module-projective and two new statement-only nodes for module FP transitivity and module flatness transitivity (Mathlib leaves).; 3 file(s) fixed by the reviewer; 2 statement node(s) added by the reviewer (FIX more, RETURN less)"
+ },
+ "lead_note": "2026-10-11 L (R-ffr0125): 2026-10-11 R-ffr0125: new statement-only nodes lem-pc-module-finite-presentation-transitive = Module.FinitePresentation.trans (Mathlib/Algebra/Module/FinitePresentation.lean:323) and lem-pc-module-flat-transitive = Module.Flat.trans (Mathlib/RingTheory/Flat/Stability.lean:62) are exact Mathlib statements: attach them as leaves. No Module.Projective.trans in this Mathlib."
 }
