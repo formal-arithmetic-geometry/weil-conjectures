@@ -1,12 +1,14 @@
 # Work queue
 
-865 items; claim with `tools/claim.py next <group> [--stage N]`.
+867 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (17)
+## Stage 1: nodes to split (19)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
 | `lem-weil-derived-limit-roos-complex` | 15 | none |
+| `lem-weil-degreewise-epi-kernel-cocone-qis` | 16 | none |
+| `lem-weil-tower-split-envelope` | 16 | none |
 | `lem-pc-ringed-space-module-stalk-tensor` | 3013 | none |
 | `lem-pc-genus-agrees-sc` | 4007 | rests_on_sorry |
 | `prop-av-tate-rank` | 4008 | rests_on_sorry |
@@ -877,7 +879,7 @@
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 | `def-nagata-fixed-base-separated-stage` | 6 | state |
 
-Not open yet: 1770 nodes that wait for a statement dependency, 58 nodes that wait for stage 1.
+Not open yet: 1770 nodes that wait for a statement dependency, 60 nodes that wait for stage 1.
 
 ## Stage 3: modules to prove (0)
 
