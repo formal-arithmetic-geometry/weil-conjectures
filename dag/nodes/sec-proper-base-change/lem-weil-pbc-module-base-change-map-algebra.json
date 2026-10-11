@@ -197,5 +197,24 @@
  "tool_uses": [
   "lem-weil-pbc-module-pullback-tensor"
  ],
- "lead_note": "Off-route tool use recorded by L: lem-weil-pbc-module-pullback-tensor (Modules 01CD, pullback commutes with tensor products; unit sk-thm-reduction) used as a black box in step 3."
+ "lead_note": "Off-route tool use recorded by L: lem-weil-pbc-module-pullback-tensor (Modules 01CD, pullback commutes with tensor products; unit sk-thm-reduction) used as a black box in step 3.",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ModuleBaseChangeMapAlgebra",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.moduleBaseChangeMap_algebra",
+  "file": "lean/Sheaf/AlgebraicGeometry/ModuleBaseChangeMapAlgebra.lean",
+  "statement": "theorem moduleBaseChangeMap_algebra {X S X' S' : Scheme.{v}} (f : X ⟶ S) (f' : X' ⟶ S') (g : S' ⟶ S) (g' : X' ⟶ X) (h : g' ≫ f = f' ≫ g) : ∃ (mu : (pushforward f).obj (SheafOfModules.unit X.ringCatSheaf) ⊗ (pushforward f).obj (SheafOfModules.unit X.ringCatSheaf) ⟶ (pushforward f).obj (SheafOfModules.unit X.ringCatSheaf)) (mu' : (pushforward f').obj (SheafOfModules.unit X'.ringCatSheaf) ⊗ (pushforward f').obj (SheafOfModules.unit X'.ringCatSheaf) ⟶ (pushforward f').obj (SheafOfModules.unit X'.ringCatSheaf)), (∀ (W : S.Opens) (a b : Γ(X, f ⁻¹ᵁ W)), mu.app W (tmulSection a b) = a * b) ∧ (∀ (W : S'.Opens) (a b : Γ(X', f' ⁻¹ᵁ W)), mu'.app W (tmulSection a b) = a * b) ∧ (Classical.choose (exists_tensorPullbackAdjunction g)).unit.app ((pushforward f).obj (SheafOfModules.unit X.ringCatSheaf)) ≫ (pushforward g).map (moduleBaseChangeMap f f' g g' h (SheafOfModules.unit X.ringCatSheaf) ≫ (pushforward f').map (tensorPullbackObjUnitToUnit g')) = (pushforward f).map (SheafOfModules.unitToPushforwardObjUnit g'.toRingCatSheafHom) ≫ (pushforwardComp g' f).hom.app (SheafOfModules.unit X'.ringCatSheaf) ≫ (pushforwardCongr h).hom.app (SheafOfModules.unit X'.ringCatSheaf) ≫ (pushforwardComp f' g).inv.app (SheafOfModules.unit X'.ringCatSheaf) ∧ (tensorPullback g).map mu ≫ (moduleBaseChangeMap f f' g g' h (SheafOfModules.unit X.ringCatSheaf) ≫ (pushforward f').map (tensorPullbackObjUnitToUnit g')) = (Classical.choose (module_pullback_tensor g) ((pushforward f).obj (SheafOfModules.unit X.ringCatSheaf)) ((pushforward f).obj (SheafOfModules.unit X.ringCatSheaf))).hom ≫ ((moduleBaseChangeMap f f' g g' h (SheafOfModules.unit X.ringCatSheaf) ≫ (pushforward f').map (tensorPullbackObjUnitToUnit g')) ⊗ₘ (moduleBaseChangeMap f f' g g' h (SheafOfModules.unit X.ringCatSheaf) ≫ (pushforward f').map (tensorPullbackObjUnitToUnit g'))) ≫ mu' ∧ (tensorPullback g).map (SheafOfModules.unitToPushforwardObjUnit f.toRingCatSheafHom) ≫ (moduleBaseChangeMap f f' g g' h (SheafOfModules.unit X.ringCatSheaf) ≫ (pushforward f').map (tensorPullbackObjUnitToUnit g')) = tensorPullbackObjUnitToUnit g ≫ SheafOfModules.unitToPushforwardObjUnit f'.toRingCatSheafHom",
+  "branch": "sheaf-dag",
+  "by": "G1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-bca1240"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-bca1240",
+  "group": "G1",
+  "result": "fix",
+  "note": "4 schemes/4 morphisms/h:g'≫f=f'≫g only hypothesis; A,A' = pushforward of SheafOfModules.unit; gamma = C1 moduleBaseChangeMap (unit X) ≫ f'_*(tensorPullbackObjUnitToUnit g'); mu,mu' tied by tmulSection a b = a*b (F1 394d93d01 form); (i) unit of Classical.choose exists_tensorPullbackAdjunction g ≫ g_*gamma = f_*(g'^sharp) via pushforwardComp/Congr; (ii) mult via Classical.choose module_pullback_tensor, unit via tensorPullbackObjUnitToUnit g; FIX: inlined three let binders"
+ }
 }
