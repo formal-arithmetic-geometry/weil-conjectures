@@ -4395,3 +4395,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 11:09 L: merged deliver/G1/def-exc-etale-algebra-lift (stage 2; reviewer PASS; first push; Sheaf.RingTheory.JacobianPresentationLift Algebra.SquareJacobianPresentation.CoefficientLift.LiftRing)
 - 11:09 L: merged deliver/E1/lem-weil-pbc-lift-coprime-factorization-etale (stage 2; reviewer FIX; first push; Sheaf.RingTheory.EtaleLiftCoprimeFactorization Polynomial.exists_etale_lift_coprime_factorization)
 - 11:09 L: merged deliver/F1/lem-weil-pbc-horseshoe-morphism-lift-exact-source (stage 2; reviewer PASS; first push; Sheaf.CategoryTheory.Abelian.HorseshoeMorphismLiftExactSource CategoryTheory.InjectiveResolution.exists_horseshoe_morphism_lift_exact_source)
+- 11:10 L: merged deliver/H1/def-pc-smooth-projective-curve (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.SmoothProjectiveCurve AlgebraicGeometry.Scheme.Hom.IsSmoothProjectiveCurve)

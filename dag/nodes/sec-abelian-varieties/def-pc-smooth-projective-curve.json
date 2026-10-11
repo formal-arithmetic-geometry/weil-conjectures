@@ -95,5 +95,23 @@
   "blueprint": "The blueprint node is this definition itself (no proof); the item realizes its single sentence: 'curve over k' -> def-pc-curve, 'smooth' -> def-sbc-smooth-morphisms, 'projective' -> def-pc-projective-morphism."
  },
  "reviewed": "2026-10-10 L: definition node checked: curve (def-pc-curve, Stacks 0A23), projective (def-pc-projective-morphism), smooth (def-sbc-smooth-morphisms) cited directly; wording only, trailing \";\" of the blueprint closed. No Lean declaration for the notion (slopmaster2 bundles IsCurve+Smooth+IsProper, proper for projective; IsCurve is weaker). Worker flag: def-sc-general-curve states no dimension-1 condition, check at its split.",
- "lead_note": "2026-10-10 L: slopmaster2 states smooth projective curves as [IsCurve f] [Smooth f] [IsProper f] (proper, not projective); stage 2 should know."
+ "lead_note": "2026-10-10 L: slopmaster2 states smooth projective curves as [IsCurve f] [Smooth f] [IsProper f] (proper, not projective); stage 2 should know.",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SmoothProjectiveCurve",
+  "declaration": "AlgebraicGeometry.Scheme.Hom.IsSmoothProjectiveCurve",
+  "file": "lean/Sheaf/AlgebraicGeometry/SmoothProjectiveCurve.lean",
+  "statement": "class Scheme.Hom.IsSmoothProjectiveCurve (f : X ⟶ Spec (.of k)) : Prop extends f.IsCurveOverField, Smooth f, IsProjective f",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-spc1110",
+  "group": "H1",
+  "result": "pass",
+  "note": "k arbitrary field, f : X ⟶ Spec k structure morphism; curve = landed IsCurveOverField (integral, separated, LFT+QC, X.dim = 1); smooth = Mathlib Smooth f; projective = landed IsProjective (IsHProjective + QC); #print parents/fields checked, X.Over form (X ↘ Spec k).IsSmoothProjectiveCurve builds from instances; no source/Mathlib notion equals it (IsCurve dim<=1 non-integral, IsConnectedCurve connected+proper)"
+ }
 }
