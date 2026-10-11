@@ -176,5 +176,23 @@
   "item": "lem-weil-pbc-spectral-closed-subspace",
   "worker": "stage1",
   "summary": "Checked the statement against Stacks Topology Lemma 0902 (lemma-spectral-sub, topology.tex line 4428; tag verified in stacks-project/tags/tags) in the case of a closed subset; statement kept, it is correct and self-contained. Wrote the proof in seven steps following the Stacks proof specialized to E closed: sobriety and quasi-compactness of E become the closed cases of Tags 0B31 and 005C, which are two new Mathlib leaves (lem-weil-pbc-closed-subspace-sober: Topology.IsClosedEmbedding.quasiSober + Subtype.t0Space; lem-weil-pbc-closed-in-quasi-compact: IsClosed.isCompact), so neither the constructible topology (Tag 0901) nor Tag 005K is needed. The remaining steps (traces of quasi-compact opens are quasi-compact open; conversely every quasi-compact open of E is such a trace, which Stacks leaves implicit and is written out here; basis; quasi-separatedness) use only def-weil-spectral-space and the leaf 005C. The item is not itself a Mathlib leaf: Mathlib has the closed-embedding results for QuasiSober, PrespectralSpace (PrespectralSpace.of_isClosedEmbedding), CompactSpace and T0, but no QuasiSeparatedSpace for a closed subspace and no SpectralSpace for a closed subspace (only Topology.IsOpenEmbedding.spectralSpace); no Lean candidate in the slopmaster2 sources."
+ },
+ "lean": {
+  "module": "Sheaf.Topology.SpectralClosedSubspace",
+  "declaration": "Topology.spectral_closed_subspace",
+  "file": "lean/Sheaf/Topology/SpectralClosedSubspace.lean",
+  "statement": "theorem spectral_closed_subspace {X : Type u} [TopologicalSpace X] [SpectralSpace X] (E : Set X) (hE : IsClosed E) : SpectralSpace E ∧ ∀ V : Set E, (IsOpen V ∧ IsCompact V) ↔ ∃ U : Set X, IsOpen U ∧ IsCompact U ∧ V = Subtype.val ⁻¹' U",
+  "branch": "sheaf-dag",
+  "by": "M1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-scs",
+  "group": "M1",
+  "result": "pass",
+  "note": "X: TopologicalSpace + Mathlib SpectralSpace (recorded match of def-weil-spectral-space); E closed via IsClosed, subtype topology; SpectralSpace E; compact opens of E iff Subtype.val preimage of an ambient compact open (both directions); no Mathlib lemma for closed-subspace spectrality (only IsOpenEmbedding.spectralSpace, PrespectralSpace.of_isClosedEmbedding)"
  }
 }
