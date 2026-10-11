@@ -29,7 +29,8 @@
  "stmt_deps": [
   "def-weil-pbc-module-localization-away",
   "def-weil-pbc-module-localization",
-  "def-weil-module-base-change"
+  "def-weil-module-base-change",
+  "def-weil-pbc-formal-glueing-data"
  ],
  "proof": [
   {
@@ -212,5 +213,30 @@
   "group": "K1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of K1; spot-checked by L: L: 05EL maps checked: functorial localization, swap of iterated localizations by 07K0, tensor-localization via 00DK"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.FormalGlueingCanonicalMaps",
+  "declaration": "FormalGlueing.compare_properties",
+  "declarations": [
+   "LocalizedModule.away_map_functorial",
+   "FormalGlueing.localizedSModule_properties",
+   "FormalGlueing.swap_properties",
+   "FormalGlueing.compare_properties"
+  ],
+  "file": "lean/Sheaf/Paper/FormalGlueingCanonicalMaps.lean",
+  "statement": "theorem compare_properties {R : Type u} {S : Type w} [CommRing R] [CommRing S] (φ : R →+* S) (P : ModuleCat.{v} R) (f : R) : letI : Algebra R S := φ.toAlgebra Function.Bijective (fun x : restrict φ (extend φ (localize f P)) ↦ f • x) ∧ (∀ (p : P) (s : S) (n : ℕ), compare φ f P (LocalizedModule.mk (show restrict φ (extend φ P) from s ⊗ₜ[R] p) ⟨f ^ n, ⟨n, rfl⟩⟩) = (show restrict φ (extend φ (localize f P)) from s ⊗ₜ[R] LocalizedModule.mk p ⟨f ^ n, ⟨n, rfl⟩⟩)) ∧ (∀ t : localize f (restrict φ (extend φ P)) →ₗ[R] restrict φ (extend φ (localize f P)), (∀ (p : P) (s : S), t (LocalizedModule.mk (show restrict φ (extend φ P) from s ⊗ₜ[R] p) 1) = (show restrict φ (extend φ (localize f P)) from s ⊗ₜ[R] LocalizedModule.mk p 1)) ↔ t = compare φ f P) ∧ (∀ (s : S) (x : localize f (restrict φ (extend φ P))), compare φ f P ((localizedSModule φ f (extend φ P)).smul s x) = (s • (compare φ f P x : extend φ (localize f P)))) ∧ Function.Bijective (compare φ f P)",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-11",
+  "existing": false,
+  "note": "Four statements cover clauses (1)–(3), using the canonical maps already defined by the landed FormalGlueingData module. That definition node is added to stmt_deps; no notion is redefined."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-fgc1051",
+  "group": "F1",
+  "result": "pass",
+  "note": "(1) functoriality comp/add/id via IsLocalizedModule.map on arbitrary R-modules; localizedSModule fraction formula s(q/e^n)=(sq)/e^n, restricted R-action, mk S-linear, h_e S-linear; (2) f,g bijective on (P_g)_f, swap f g : (P_f)_g->(P_g)_f fraction formula, iff-uniqueness on (p/1)/1, swap g f two-sided inverse; (3) f bijective on S⊗P_f, compare (s⊗p)/f^n formula, iff-uniqueness on pure tensors /1, S-linear for localizedSModule, bijective; reuses landed FormalGlueingData swap/compare/localizedSModule (no redefinition); #check names resolve to FormalGlueing.*; no hollow hyps, universes independent"
  }
 }
