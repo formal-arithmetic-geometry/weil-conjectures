@@ -1,19 +1,21 @@
 # Work queue
 
-190 items; claim with `tools/claim.py next <group> [--stage N]`.
+191 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (190)
+## Stage 2: nodes to state (191)
 
 | node | distance to Mathlib | kind | blockers |
 |---|---|---|---|
+| `def-pc-ringed-spaces-derived-direct-image` | 1 | state | 146 |
+| `def-pur-derived-internal-hom` | 1 | state | 34 |
 | `def-weil-pbc-coherent-formal-module` | 1 | state | 33 |
 | `def-weil-pbc-strict-henselization-limit` | 1 | state | 9 |
 | `def-weil-pbc-semi-representable-object` | 1 | state | 8 |
-| `prop-pur-kinjective-resolutions-exist` | 1 | state | 173 |
-| `lem-weil-pbc-site-continuous-pushforward-sheaf` | 2 | state | 139 |
+| `def-weil-pbc-conormal-sheaf-formally-unramified` | 1 | state | 2 |
+| `lem-weil-pbc-site-morphism-composition` | 1 | state | 138 |
 | `prop-weil-pbc-kinjective-resolutions-exist` | 1 | state | 58 |
 | `prop-weil-pbc-inverse-image-modules-exact` | 1 | state | 46 |
 | `prop-weil-pbc-inverse-image-exact` | 1 | state | 36 |
@@ -25,7 +27,6 @@
 | `lem-weil-pbc-pair-henselization` | 1 | state | 5 |
 | `lem-weil-pbc-truncation-descends` | 1 | state | 5 |
 | `lem-weil-pbc-symmetric-product-properties` | 1 | state | 3 |
-| `lem-weil-pbc-universal-first-order-thickening-exists` | 1 | state | 3 |
 | `thm-sp-if-e1` | 1 | state | 3 |
 | `thm-sp-truncation-e2` | 1 | state | 3 |
 | `lem-exc-coinduced-discrete-embedding` | 2 | state | 3 |
@@ -37,11 +38,11 @@
 | `lem-sc-group-addition-tangent-differential` | 2 | state | 1 |
 | `lem-sc-hilbert-polynomial` | 2 | state | 1 |
 | `lem-sc-p1-proj-tilde-functorial` | 2 | state | 1 |
-| `lem-sc-p1-twist-exists` | 2 | state | 1 |
 | `lem-sc-pic-restriction-boundary` | 2 | state | 1 |
 | `lem-sp-edge-collapse` | 2 | state | 1 |
 | `cor-galois-lisse-representations` | 1 | state | 0 |
 | `lem-pc-coherent-property-devissage` | 1 | state | 0 |
+| `lem-pc-ringed-space-rgamma-derived-limit` | 1 | state | 0 |
 | `lem-pur-derived-functor-triangles-05sc` | 1 | state | 0 |
 | `lem-sc-affine-koszul-cech-derived-comparison` | 1 | state | 0 |
 | `lem-sc-hilb-dominating-power` | 1 | state | 0 |
@@ -64,7 +65,6 @@
 | `lem-weil-pbc-stein-universally-closed-factor` | 1 | state | 0 |
 | `lem-weil-pbc-strictly-henselian-sections-stalk` | 1 | state | 0 |
 | `lem-weil-pbc-support-pullback-finite-type` | 1 | state | 0 |
-| `lem-weil-pbc-surjective-universally-closed-affine-target` | 1 | state | 0 |
 | `lem-weil-pbc-symmetric-algebra-base-change` | 1 | state | 0 |
 | `lem-weil-pbc-symmetric-algebra-quotient-module` | 1 | state | 0 |
 | `lem-weil-pbc-symmetric-degree-exact` | 1 | state | 0 |
@@ -172,6 +172,7 @@
 | `lem-sc-p1-finite-homogeneous-generators` | 2 | state | 0 |
 | `lem-sc-p1-graded-kernel-finite` | 2 | state | 0 |
 | `lem-sc-p1-graded-nakayama-generation` | 2 | state | 0 |
+| `lem-sc-p1-proj-shifted-free-twist` | 2 | state | 0 |
 | `lem-sc-p1-serre-section-module-finite` | 2 | state | 0 |
 | `lem-sc-p1-twist-multiplication` | 2 | state | 0 |
 | `lem-sc-perfect-pullback-perfect-residue` | 2 | state | 0 |
@@ -200,7 +201,7 @@
 | `lem-pc-essentially-constant-pro-hom-colimit` | 4 | state | 0 |
 | `lem-pur-essential-constant-pro-criterion-05py` | 4 | state | 0 |
 
-Not open yet: 40 nodes that wait for stage 1, 453 nodes that wait for a statement dependency.
+Not open yet: 40 nodes that wait for stage 1, 447 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
