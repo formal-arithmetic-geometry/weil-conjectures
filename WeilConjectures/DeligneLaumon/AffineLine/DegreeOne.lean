@@ -119,8 +119,10 @@ closed point of the line, including the finitely many points outside `U₀`, whe
 singular. This is the case of the affine line of the blueprint lemma, which holds on every
 smooth geometrically connected curve. (blueprint: `lem-wf-boundary-semicontinuity`) -/
 theorem hasWeightsAtMost_directImage (D : LisseOnDenseOpen k₀ l) {ι : PadicAlgCl l →+* ℂ}
-    {β : ℝ} (hβ : D.sheaf.HasWeightsAtMost ι β) : D.directImage.HasWeightsAtMost ι β :=
-  sorry
+    {β : ℝ} (hβ : D.sheaf.HasWeightsAtMost ι β) : D.directImage.HasWeightsAtMost ι β := by
+  have : SmoothOfRelativeDimension 1 (affineLine k₀ ↘ Spec (CommRingCat.of k₀)) := by
+    simpa using AffineSpace.smoothOfRelativeDimension_over PUnit.{u + 1} (Spec (.of k₀))
+  exact hasWeightsAtMost_directImage_of_curve D.j D.sheaf D.lisse hβ
 
 /-- *The origin fibre is the stationary-phase contribution.* If the Fourier transform of the
 middle extension `(j_*M)[1]` is the middle extension `(j'_*M')[1]` of `D'`, then the fibre of

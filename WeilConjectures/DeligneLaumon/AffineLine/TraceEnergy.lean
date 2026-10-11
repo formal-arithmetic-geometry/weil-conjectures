@@ -21,6 +21,11 @@ public import WeilConjectures.WeilSheaf.StalkFunctor
 public import WeilConjectures.WeilSheaf.StalkConstantTwist
 public import WeilConjectures.WeilSheaf.Tensor
 public import WeilConjectures.WeilSheaf.TraceFunction
+public import WeilConjectures.WeilSheaf.UpperStarLowerStar
+public import WeilConjectures.WeilSheaf.Semicontinuity
+public import WeilConjectures.AlgebraicGeometry.AffineSpace.GeometricallyConnected
+public import WeilConjectures.PointCountFiber
+public import WeilConjectures.Mathlib.Topology.KrullDimension
 public import WeilConjectures.PointCountBound
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Smooth
 
@@ -696,23 +701,135 @@ theorem boundaryEnergy_nonneg (ι : PadicAlgCl l →+* ℂ) (D : LisseOnDenseOpe
     0 ≤ D.boundaryEnergy ι m :=
   finsum_nonneg fun _ ↦ finsum_nonneg fun _ ↦ sq_nonneg _
 
+/-- The trace function of the direct image `j_*M` at a rational point of `U₀` is that of `M`:
+`j^* j_* M ≅ M`. -/
+theorem traceFunction_directImage_mapFieldPoints (D : LisseOnDenseOpen k₀ l) (m : ℕ)
+    (y : (D.U ↘ Spec (CommRingCat.of k₀)).fieldPoints (FiniteField.galoisExtension k₀ m)) :
+    D.directImage.traceFunction m (D.j.mapFieldPoints y) = D.sheaf.traceFunction m y := by
+  have h : D.directImage = (WeilSheaf.lowerStar D.j).obj D.sheaf := rfl
+  rw [h, ← traceFunction_upperStar]
+  exact traceFunction_eq_of_iso (upperStarDirectImageIso D.j D.sheaf) m y
+
+/-- The rational points of the affine line whose closed point lies in `U₀` are the images of the
+rational points of `U₀`. -/
+theorem mem_range_mapFieldPoints_iff (D : LisseOnDenseOpen k₀ l) (m : ℕ)
+    (y : (affineLine k₀ ↘ Spec (CommRingCat.of k₀)).fieldPoints
+      (FiniteField.galoisExtension k₀ m)) :
+    y ∈ Set.range (D.j.mapFieldPoints (k₀ := k₀) (K := FiniteField.galoisExtension k₀ m)) ↔
+      y.1.base (IsLocalRing.closedPoint _) ∈ Set.range D.j.base := by
+  constructor
+  · rintro ⟨y', rfl⟩
+    exact ⟨_, rfl⟩
+  · rintro ⟨u, hu⟩
+    have hr : Set.range y.1.base ⊆ Set.range D.j.base := by
+      rintro _ ⟨z, rfl⟩
+      rw [Subsingleton.elim z (IsLocalRing.closedPoint _)]
+      exact ⟨u, hu⟩
+    refine ⟨⟨IsOpenImmersion.lift D.j y.1 hr, ?_⟩, Subtype.ext (IsOpenImmersion.lift_fac _ _ _)⟩
+    rw [← comp_over D.j (Spec (CommRingCat.of k₀)), ← Category.assoc,
+      IsOpenImmersion.lift_fac]
+    exact y.2
+
+lemma injective_mapFieldPoints (D : LisseOnDenseOpen k₀ l) (m : ℕ) :
+    Function.Injective (D.j.mapFieldPoints (k₀ := k₀) (K := FiniteField.galoisExtension k₀ m)) :=
+  fun y y' h ↦ Subtype.ext ((cancel_mono D.j).1 (congrArg Subtype.val h))
+
 /-- The trace energy of the direct image `j_*M` is that of `M` plus the boundary contribution
 `E_m`: since `j^*j_*M ≅ M`, the trace functions of `j_*M` and `M` agree at the points of `U₀`.
 (blueprint: `lem-fd-l2-middle-extension`) -/
 theorem traceEnergy_directImage_eq_add (ι : PadicAlgCl l →+* ℂ) (D : LisseOnDenseOpen k₀ l)
     (m : ℕ) :
-    D.directImage.traceEnergy ι m = D.sheaf.traceEnergy ι m + D.boundaryEnergy ι m :=
-  sorry
+    D.directImage.traceEnergy ι m = D.sheaf.traceEnergy ι m + D.boundaryEnergy ι m := by
+  have : Finite (FiniteField.galoisExtension k₀ m) := Module.finite_of_finite k₀
+  have := (affineLine k₀ ↘ Spec (CommRingCat.of k₀)).finite_fieldPoints
+    (FiniteField.galoisExtension k₀ m)
+  set s := Set.range (D.j.mapFieldPoints (k₀ := k₀) (K := FiniteField.galoisExtension k₀ m))
+  rw [traceEnergy, ← finsum_mem_univ, ← Set.union_compl_self s,
+    finsum_mem_union disjoint_compl_right.symm.symm (Set.toFinite _) (Set.toFinite _),
+    finsum_mem_range (injective_mapFieldPoints D m)]
+  congr 1
+  · exact finsum_congr fun y ↦ by rw [traceFunction_directImage_mapFieldPoints]
+  · rw [boundaryEnergy]
+    refine finsum_congr fun y ↦ ?_
+    rw [Set.mem_compl_iff, mem_range_mapFieldPoints_iff]
 
 /-- The boundary contribution `E_m` is at most `C q^{mw}` when `M` has weights at most `w`.
 (blueprint: `lem-fd-l2-middle-extension`) -/
 theorem exists_boundaryEnergy_le (ι : PadicAlgCl l →+* ℂ) (D : LisseOnDenseOpen k₀ l) {w : ℝ}
     (h : D.sheaf.HasWeightsAtMost ι w) :
-    ∃ C : ℝ, ∀ m : ℕ, D.boundaryEnergy ι m ≤ C * (Nat.card k₀ : ℝ) ^ ((m : ℝ) * w) :=
-  -- TODO: by the boundary semicontinuity
-  -- `AlgebraicGeometry.WeilSheaf.LisseOnDenseOpen.hasWeightsAtMost_directImage`, `E_m` is at most
-  -- `D r² q^{mw}`, with `D = ∑_{s ∈ S₀} d(s)` and `r` the rank of `M`.
-  sorry
+    ∃ C : ℝ, ∀ m : ℕ, D.boundaryEnergy ι m ≤ C * (Nat.card k₀ : ℝ) ^ ((m : ℝ) * w) := by
+  classical
+  have : SmoothOfRelativeDimension 1 (affineLine k₀ ↘ Spec (CommRingCat.of k₀)) := by
+    simpa using AffineSpace.smoothOfRelativeDimension_over PUnit.{u + 1} (Spec (.of k₀))
+  -- boundary semicontinuity: `j_*M` has weights at most `w` everywhere
+  have hJ : D.directImage.HasWeightsAtMost ι w :=
+    hasWeightsAtMost_directImage_of_curve D.j D.sheaf D.lisse h
+  -- the boundary is a finite set of closed points
+  have : Nonempty (affineLine k₀) :=
+    ⟨(AffineSpace.homOfVector (𝟙 (Spec (CommRingCat.of k₀))) 0).base (IsLocalRing.closedPoint k₀)⟩
+  have hU : (Set.range D.j.base).Nonempty := by
+    have : Nonempty D.U := D.j.denseRange.nonempty_iff.2 ‹_›
+    exact Set.range_nonempty _
+  have := LocallyOfFiniteType.isLocallyNoetherian (affineLine k₀ ↘ Spec (CommRingCat.of k₀))
+  have : IsNoetherian (affineLine k₀) := ⟨⟩
+  have hfin : (Set.range D.j.base)ᶜ.Finite :=
+    D.j.isOpenEmbedding.isOpen_range.finite_compl_of_topologicalKrullDim_le_one
+      (topologicalKrullDim_le_of_smoothOfRelativeDimension
+        (affineLine k₀ ↘ Spec (CommRingCat.of k₀)) 1) hU
+  let B : Finset (affineLine k₀).finitePoints :=
+    (hfin.preimage Subtype.val_injective.injOn).toFinset
+  have hB (x : (affineLine k₀).finitePoints) : x ∈ B ↔ x.1 ∉ Set.range D.j.base := by
+    simp [B]
+  let N : ℕ := B.sup fun x ↦ Module.finrank (PadicAlgCl l) (D.directImage.stalk x).carrier
+  let d : ℕ := ∑ x ∈ B, (affineLine k₀ ↘ Spec (CommRingCat.of k₀)).degreeOver x.1
+  refine ⟨d * N ^ 2, fun m ↦ ?_⟩
+  have : Finite (FiniteField.galoisExtension k₀ m) := Module.finite_of_finite k₀
+  have := (affineLine k₀ ↘ Spec (CommRingCat.of k₀)).finite_fieldPoints
+    (FiniteField.galoisExtension k₀ m)
+  set s := {y : (affineLine k₀ ↘ Spec (CommRingCat.of k₀)).fieldPoints
+    (FiniteField.galoisExtension k₀ m) | y.1.base (IsLocalRing.closedPoint _) ∉ Set.range D.j.base}
+  have hs : s.Finite := Set.toFinite s
+  have hq : (0 : ℝ) ≤ Nat.card k₀ := Nat.cast_nonneg _
+  -- each boundary term is at most `N² q^{mw}`
+  have hterm (y) (hy : y ∈ s) : ‖ι (D.directImage.traceFunction m y)‖ ^ 2 ≤
+      (N : ℝ) ^ 2 * (Nat.card k₀ : ℝ) ^ ((m : ℝ) * w) := by
+    have hb := norm_map_traceFunction_le hJ m y
+    have hN : Module.finrank (PadicAlgCl l) (D.directImage.stalk (finitePointOfFieldPoint y)).carrier
+        ≤ N := Finset.le_sup (f := fun x ↦ Module.finrank (PadicAlgCl l)
+          (D.directImage.stalk x).carrier) ((hB _).2 hy)
+    have hpow : ((Nat.card k₀ : ℝ) ^ (w / 2)) ^ m * ((Nat.card k₀ : ℝ) ^ (w / 2)) ^ m =
+        (Nat.card k₀ : ℝ) ^ ((m : ℝ) * w) := by
+      rw [← pow_add, ← Real.rpow_natCast, ← Real.rpow_mul hq]
+      congr 1
+      push_cast
+      ring
+    have h0 : (0 : ℝ) ≤ ((Nat.card k₀ : ℝ) ^ (w / 2)) ^ m := by positivity
+    calc ‖ι (D.directImage.traceFunction m y)‖ ^ 2
+        ≤ ((N : ℝ) * ((Nat.card k₀ : ℝ) ^ (w / 2)) ^ m) ^ 2 :=
+          pow_le_pow_left₀ (norm_nonneg _) (hb.trans (by gcongr)) 2
+      _ = _ := by rw [mul_pow, sq (((Nat.card k₀ : ℝ) ^ (w / 2)) ^ m), hpow]
+  -- there are at most `d` boundary points
+  have hcard : hs.toFinset.card ≤ d := by
+    rw [Finset.card_eq_sum_card_fiberwise (f := finitePointOfFieldPoint) (t := B)
+      (fun y hy ↦ (hB _).2 (hs.mem_toFinset.1 hy))]
+    refine Finset.sum_le_sum fun x hx ↦ ?_
+    calc _ ≤ Nat.card {p : (affineLine k₀ ↘ Spec (CommRingCat.of k₀)).fieldPoints
+          (FiniteField.galoisExtension k₀ m) // p.1.base (IsLocalRing.closedPoint _) = x.1} := by
+          rw [← Nat.card_eq_finsetCard]
+          refine Nat.card_le_card_of_injective (fun p ↦ ⟨p.1, congrArg Subtype.val
+            (Finset.mem_filter.1 p.2).2⟩) fun p p' h ↦ Subtype.ext (by simpa using congrArg Subtype.val h)
+      _ ≤ _ := (affineLine k₀ ↘ Spec (CommRingCat.of k₀)).card_fieldPoints_base_eq_le _ x.2
+  rw [boundaryEnergy]
+  change ∑ᶠ y ∈ s, _ ≤ _
+  rw [finsum_mem_eq_finite_toFinset_sum _ hs]
+  calc ∑ y ∈ hs.toFinset, ‖ι (D.directImage.traceFunction m y)‖ ^ 2
+      ≤ ∑ _y ∈ hs.toFinset, (N : ℝ) ^ 2 * (Nat.card k₀ : ℝ) ^ ((m : ℝ) * w) :=
+        Finset.sum_le_sum fun y hy ↦ hterm y (hs.mem_toFinset.1 hy)
+    _ = hs.toFinset.card * ((N : ℝ) ^ 2 * (Nat.card k₀ : ℝ) ^ ((m : ℝ) * w)) := by
+        rw [Finset.sum_const, nsmul_eq_mul]
+    _ ≤ d * ((N : ℝ) ^ 2 * (Nat.card k₀ : ℝ) ^ ((m : ℝ) * w)) := by
+        gcongr
+    _ = _ := by push_cast; ring
 
 /-- The trace energies of the lisse sheaf `M` on the dense open `U₀` are at most those of its
 direct image `j_*M` on the affine line, the boundary contribution being nonnegative. -/
