@@ -1,11 +1,11 @@
 # Work queue
 
-383 items; claim with `tools/claim.py next <group> [--stage N]`.
+380 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (383)
+## Stage 2: nodes to state (380)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -29,6 +29,7 @@
 | `lem-sc-affine-perfect-support-extension` | 1 | state |
 | `lem-sc-affine-support-iterated-cones` | 1 | state |
 | `lem-sc-base-change-curve` | 1 | state |
+| `lem-sc-coherent-affine-free-resolution` | 1 | state |
 | `lem-sc-derived-mayer-vietoris-triangle` | 1 | state |
 | `lem-sc-hilb-dominating-power` | 1 | state |
 | `lem-sc-hilbert-embedded-points-gluing` | 1 | state |
@@ -41,7 +42,6 @@
 | `lem-sc-perfect-hypercohomology-gap` | 1 | state |
 | `lem-sc-perfect-into-support-on-T` | 1 | state |
 | `lem-sc-perfect-jump-loci` | 1 | state |
-| `lem-sc-perfect-support-map-lift` | 1 | state |
 | `lem-sc-picard-kunneth-qcoh` | 1 | state |
 | `lem-sc-pseudo-coherent-support-annihilation` | 1 | state |
 | `lem-sc-smooth-proper-diagonal-koszul-regular` | 1 | state |
@@ -50,9 +50,6 @@
 | `lem-weil-pbc-closed-immersion-conormal-flat-base-change` | 1 | state |
 | `lem-weil-pbc-pair-henselization` | 1 | state |
 | `lem-weil-pbc-projective-space-functor-of-points` | 1 | state |
-| `lem-weil-pbc-quasi-coherent-finite-type-affine` | 1 | state |
-| `lem-weil-pbc-quasi-coherent-ideal-zero-set-affine` | 1 | state |
-| `lem-weil-pbc-quasi-coherent-iso-on-affine-cover` | 1 | state |
 | `lem-weil-pbc-quasi-coherent-module-cokernel-image` | 1 | state |
 | `lem-weil-pbc-quasi-coherent-module-colimit-affine-sections` | 1 | state |
 | `lem-weil-pbc-quasi-coherent-symmetric-algebra` | 1 | state |
@@ -393,7 +390,7 @@
 | `lem-pc-essentially-constant-pro-hom-colimit` | 4 | state |
 | `lem-pur-essential-constant-pro-criterion-05py` | 4 | state |
 
-Not open yet: 40 nodes that wait for stage 1, 519 nodes that wait for a statement dependency.
+Not open yet: 40 nodes that wait for stage 1, 518 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
