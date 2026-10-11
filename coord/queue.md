@@ -1,11 +1,11 @@
 # Work queue
 
-991 items; claim with `tools/claim.py next <group> [--stage N]`.
+986 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (991)
+## Stage 2: nodes to state (986)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -25,7 +25,6 @@
 | `lem-pc-hilb-containment-locus` | 1 | state |
 | `lem-pc-homeo-pure-insep` | 1 | state |
 | `lem-pc-kflat-derived-tensor-associator` | 1 | state |
-| `lem-pc-kflat-pullback-preservation` | 1 | state |
 | `lem-pc-module-pullback-adjunction` | 1 | state |
 | `lem-pc-module-pullback-identity-composition` | 1 | state |
 | `lem-pc-pre-derived-adjoint-functors-general` | 1 | state |
@@ -36,19 +35,15 @@
 | `lem-pc-tower-surjective-lim-acyclic` | 1 | state |
 | `lem-pc-very-ample-disjoint-union` | 1 | state |
 | `lem-pc-zero-scheme-pullback` | 1 | state |
-| `lem-pod-lisse-module-sheaves-as-module-objects` | 1 | state |
 | `lem-pur-derived-change-of-rings` | 1 | state |
 | `lem-sc-ample-proj-local-chart` | 1 | state |
 | `lem-sc-base-change-curve` | 1 | state |
 | `lem-sc-conductor-ideal-zero-intersection` | 1 | state |
 | `lem-sc-conductor-sections` | 1 | state |
 | `lem-sc-derived-hom-mayer-vietoris` | 1 | state |
-| `lem-sc-dvr-valuation-ring-characterization` | 1 | state |
 | `lem-sc-etale-base-change-geometric` | 1 | state |
 | `lem-sc-etale-faithfully-flat-local` | 1 | state |
-| `lem-sc-ext-derived-composite-natural` | 1 | state |
 | `lem-sc-finite-free-internal-hom-exact` | 1 | state |
-| `lem-sc-finite-sections-cover-qc` | 1 | state |
 | `lem-sc-finite-sheafhom-affine` | 1 | state |
 | `lem-sc-general-theorem-of-cube` | 1 | state |
 | `lem-sc-genus-invariant` | 1 | state |
