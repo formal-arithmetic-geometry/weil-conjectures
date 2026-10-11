@@ -250,5 +250,23 @@
   "date": "2026-10-09",
   "by": "L",
   "result": "pass"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.Curve.RetractAssertions",
+  "declaration": "AlgebraicGeometry.IsCurve.assertions_of_isIso_comp",
+  "file": "lean/Sheaf/AlgebraicGeometry/Curve/RetractAssertions.lean",
+  "statement": "theorem IsCurve.assertions_of_isIso_comp {k : Type u} [Field k] [IsAlgClosed k] (P : CurveCoefficientPair k) (H : Sheaf P.C.smallEtaleTopology AddCommGrpCat.{u + 1}) (hH : P.C.IsTorsionAbelianSheaf H) (a : P.F ⟶ H) (b : H ⟶ P.F) [IsIso (a ≫ b)] (hconstructible : P.IsConstructible → (⟨P.C, P.toSpec, P.isCurve, H, hH⟩ : CurveCoefficientPair k).IsConstructible) : let E := (forget₂ (ModuleCat.{u + 1} ℤ) AddCommGrpCat.{u + 1}).inv ⋙ ModuleCat.restrictScalars (ULift.ringEquiv : ULift.{u + 1} ℤ ≃+* ℤ).toRingHom let G' := (sheafCompose P.C.smallEtaleTopology E).obj P.F let H' := (sheafCompose P.C.smallEtaleTopology E).obj H (Scheme.IsTorsionSheafOfInvertibleOrder (Spec (.of k)) G' → Scheme.IsTorsionSheafOfInvertibleOrder (Spec (.of k)) H') → (∀ (p : ℕ) [Fact p.Prime] [CharP k p], Scheme.IsPrimaryTorsionSheaf (ULift.{u + 1} ℤ) G' p → Scheme.IsPrimaryTorsionSheaf (ULift.{u + 1} ℤ) H' p) → IsCurve.Assertions (ULift.{u + 1} ℤ) P.toSpec H' → IsCurve.Assertions (ULift.{u + 1} ℤ) P.toSpec G'",
+  "branch": "sheaf-dag",
+  "by": "J1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-car1138",
+  "group": "J1",
+  "result": "pass",
+  "note": "k alg closed; X,G = P (CurveCoefficientPair: P.isCurve, P.F, P.isTorsion); H torsion via hH on same P.C/P.toSpec; a,b with IsIso (a≫b) = b∘a automorphism; constructibility transfer via recorded CurveCoefficientPair.IsConstructible; prime-to-char via IsTorsionSheafOfInvertibleOrder (Spec k) as in C4/C6; p-primary over [Fact p.Prime][CharP k p] as in C3; C(X,H)->C(X,G) via IsCurve.Assertions through E1's E bridge verbatim; no new defs, no hollow hyps"
  }
 }
