@@ -40,7 +40,8 @@ The deformation space is carried as data, not constructed (see
 `WeilConjectures.AlgebraicGeometry.DeformationToNormalCone`). Its étale-local shape — that over
 an étale cover of `B` carrying coordinates for `(g, s)` the family object is the one of the
 standard pair `(𝔸^d → B, 0)`, which is pulled back from the base (`lem-pur-dnc-section-geometry`
-(2), (4), (5)) — therefore cannot be computed from the datum and is stated as
+(2), (4), (5)) — therefore cannot be computed from the datum. It is a field of the datum,
+used through
 `AlgebraicGeometry.Scheme.Hom.DeformationToNormalConeData.exists_etale_nonempty_iso_familyObject`.
 
 Since every isomorphism here is only known to exist, the compatibility of the comparison with
@@ -212,6 +213,7 @@ theorem nonempty_iso_leftDerivedUpperStar_oneSection_familyObject :
 
 variable {k : Type u} [Field k] (aB : B ⟶ Spec (.of k)) [IsSeparated aB] [LocallyOfFiniteType aB]
 
+omit [HasCompactification g] [LocallyOfFiniteType aB] in
 include aB in
 /-- Blueprint `lem-pur-dnc-section-geometry`: Geometry of the deformation
 
@@ -225,8 +227,9 @@ is a surjective étale `u : B' ⟶ B`, with `B'` separated of finite type over `
 `F|_{𝔸¹_{B'}} ≅ a'^* 𝒞(𝔸^d_{B'} → B', 0)`.
 
 The deformation space is a datum and not a construction (see
-`WeilConjectures.AlgebraicGeometry.DeformationToNormalCone`), so the coordinate charts and the
-standard deformation cannot be computed here and the consequence above is what is recorded. -/
+`WeilConjectures.AlgebraicGeometry.DeformationToNormalCone`); these clauses are recorded in the
+field `familyObject_locally_standard` of the datum, and `B'` is separated over `k` because `u`
+is separated. -/
 theorem exists_etale_nonempty_iso_familyObject :
     ∃ (B' : Scheme.{u}) (u : B' ⟶ B), _root_.AlgebraicGeometry.Etale u ∧ Surjective u ∧
       IsSeparated (u ≫ aB) ∧
@@ -234,8 +237,9 @@ theorem exists_etale_nonempty_iso_familyObject :
           (D.familyObject Λ) ≅
         (L((𝔸(ULift.{u} (Fin 1); B') ↘ B')^*[ModuleCat.{u + 1} Λ])).obj
           (sectionInvariant Λ (𝔸(ULift.{u} (Fin d); B') ↘ B')
-            (AffineSpace.zeroSection (ULift.{u} (Fin d)) B'))) :=
-  sorry
+            (AffineSpace.zeroSection (ULift.{u} (Fin d)) B'))) := by
+  obtain ⟨B', v, hv, hsurj, hsep, he⟩ := D.familyObject_locally_standard Λ
+  exact ⟨B', v, hv, hsurj, inferInstanceAs (IsSeparated (v ≫ aB)), he⟩
 
 
 variable [HasTateTwist.IsNormalized Λ]

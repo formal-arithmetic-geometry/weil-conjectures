@@ -6,7 +6,8 @@ Authors: Claude
 module
 
 public import WeilConjectures.AlgebraicGeometry.Morphisms.RegularImmersion
-public import WeilConjectures.Compactification.Defs
+public import WeilConjectures.Compactification.Affine
+public import WeilConjectures.EtaleCohomology.Purity.Smooth.Conventions
 public import WeilConjectures.Mathlib.AlgebraicGeometry.AffineSpace
 
 /-!
@@ -65,6 +66,8 @@ universe u
 
 open CategoryTheory Limits
 
+open scoped CategoryTheory.Functor AlgebraicGeometry.Etale
+
 namespace AlgebraicGeometry
 
 variable {V B : Scheme.{u}}
@@ -105,7 +108,10 @@ The normal cone datum `N` is not yet tied to `s`; see the TODO in the module doc
 
 In the purity conventions every scheme is separated of finite type over the base field, so
 `g̃` is moreover separated and compactifiable; both are recorded, the second being what makes
-the dualizing complex `ω_{g̃}` defined.
+the dualizing complex `ω_{g̃}` defined. Clauses (2), (4) and (5) — étale-local coordinates,
+compatibility with étale localization and the standard pair — enter the purity chapter only
+through the family object `Ls̃^* ω_{g̃}`, and are recorded as its étale-local shape
+(`familyObject_locally_standard`).
 
 Mathlib has neither the relative `Spec` of the extended Rees algebra nor a blow-up along an
 arbitrary closed subscheme, so the datum cannot be constructed here; existence is
@@ -155,6 +161,22 @@ structure DeformationToNormalConeData (d : ℕ) (g : V ⟶ B) (s : B ⟶ V)
   /-- Over `𝔾_{m,B}` the deformation is `V ×_B 𝔾_{m,B}`: the square formed by `κ°`, the
   projection to `𝔾_{m,B}`, `g̃` and the inclusion `𝔾_{m,B} ⊆ 𝔸¹_B` is cartesian. -/
   isPullback_generic : IsPullback generic (pullback.snd _ _) proj puncturedLine.ι
+  /-- Clauses (2), (4) and (5) of `sk-lem-geometry`: étale-locally on `B` there are coordinates
+  carrying `(g, s)` to the standard pair `(𝔸^d → B, 0)`, the deformation commutes with étale
+  localization, and the family object of the standard pair is the pullback `a^* 0^* ω` of the
+  standard section invariant. Hence, for every coefficient ring `Λ`, there is a separated,
+  surjective étale `v : B' ⟶ B` over which the family object `Ls̃^* ω_{g̃}` is
+  `a'^* 𝒞(𝔸^d_{B'} → B', 0)`. -/
+  familyObject_locally_standard (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
+    [Etale.HasTateTwist Λ] [HasInvertibleExponent Λ B] :
+    haveI : HasCompactification proj := hasCompactification_proj
+    ∃ (B' : Scheme.{u}) (v : B' ⟶ B), _root_.AlgebraicGeometry.Etale v ∧ Surjective v ∧
+      IsSeparated v ∧
+      Nonempty ((L((AffineSpace.map (ULift.{u} (Fin 1)) v)^*[ModuleCat.{u + 1} Λ])).obj
+          (Etale.sectionInvariant Λ proj sect) ≅
+        (L((𝔸(ULift.{u} (Fin 1); B') ↘ B')^*[ModuleCat.{u + 1} Λ])).obj
+          (Etale.sectionInvariant Λ (𝔸(ULift.{u} (Fin d); B') ↘ B')
+            (AffineSpace.zeroSection (ULift.{u} (Fin d)) B')))
 
 attribute [instance] DeformationToNormalConeData.smoothOfRelativeDimension_proj
   DeformationToNormalConeData.isSeparated_proj
