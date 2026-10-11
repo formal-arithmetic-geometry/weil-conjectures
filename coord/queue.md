@@ -1,11 +1,11 @@
 # Work queue
 
-522 items; claim with `tools/claim.py next <group> [--stage N]`.
+515 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (522)
+## Stage 2: nodes to state (515)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -27,12 +27,8 @@
 | `lem-weil-derived-limit-roos-complex` | 1 | state |
 | `lem-weil-pbc-finite-etale-trace-degree` | 1 | state |
 | `lem-weil-pbc-fs-adic-base-change` | 1 | state |
-| `lem-weil-pbc-fs-adic-lift-over-finite-coefficient-map` | 1 | state |
 | `lem-weil-pbc-gabber-h0-etale-criterion` | 1 | state |
-| `lem-weil-pbc-generic-finite-algebra-splitting` | 1 | state |
 | `lem-weil-pbc-graded-module-away-restriction` | 1 | state |
-| `lem-weil-pbc-grothendieck-spectral-sequence` | 1 | state |
-| `lem-weil-pbc-h0-spectral-closed-restriction` | 1 | state |
 | `lem-weil-pbc-h1-injective-differentials-injective-char-p` | 1 | state |
 | `lem-weil-pbc-henselian-etale-retraction` | 1 | state |
 | `lem-weil-pbc-henselian-factorization-criterion` | 1 | state |
@@ -41,7 +37,6 @@
 | `lem-weil-pbc-ideal-module-product-stalk` | 1 | state |
 | `lem-weil-pbc-immersion-affine-constructible-pieces` | 1 | state |
 | `lem-weil-pbc-improve-presentation-smooth-conormal-free` | 1 | state |
-| `lem-weil-pbc-injective-module-direct-image-acyclic` | 1 | state |
 | `lem-weil-pbc-injective-resolution-ses-complexes` | 1 | state |
 | `lem-weil-pbc-injective-sheaf-cech-acyclic` | 1 | state |
 | `lem-weil-pbc-integral-closure-finite-fibre-choose-g` | 1 | state |
@@ -50,12 +45,10 @@
 | `lem-weil-pbc-integral-extension-dimension` | 1 | state |
 | `lem-weil-pbc-integral-over-henselian-pair` | 1 | state |
 | `lem-weil-pbc-intersection-subfields-differentials` | 1 | state |
-| `lem-weil-pbc-intersection-subfields-subspace` | 1 | state |
 | `lem-weil-pbc-inverse-image-closed-pushforward-constant` | 1 | state |
 | `lem-weil-pbc-inverse-image-module-adjunction` | 1 | state |
 | `lem-weil-pbc-inverse-image-preserves-colimits` | 1 | state |
 | `lem-weil-pbc-inverse-image-stalk-germ` | 1 | state |
-| `lem-weil-pbc-invertible-generating-sections-fibre` | 1 | state |
 | `lem-weil-pbc-invertible-pullback-tensor` | 1 | state |
 | `lem-weil-pbc-irreducible-lisse-strata` | 1 | state |
 | `lem-weil-pbc-isolated-fibre-point-base-change` | 1 | state |
