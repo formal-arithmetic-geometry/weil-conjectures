@@ -4177,3 +4177,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 10:11 L: merged deliver/E1/lem-weil-pbc-etale-retraction-finite-type-splitting (stage 2; reviewer FIX; first push; Sheaf.RingTheory.EtaleRetractionFiniteTypeSplitting Algebra.etale_retraction_finite_type_splitting)
 - 10:12 L: merged deliver/E1/lem-pur-essential-constant-cofinal-0a1s (stage 2; reviewer FIX; first push; Sheaf.CategoryTheory.DerivedCategory.EssentiallyConstantCofinal CategoryTheory.initial_iff_essentiallyConstantProDiagram)
 - 10:12 L: merged deliver/H1/lem-weil-pbc-etale-separated-stratified-finite (stage 2; reviewer FIX; first push; Sheaf.AlgebraicGeometry.EtaleSeparatedStratifiedFinite AlgebraicGeometry.Scheme.exists_etale_separated_stratified_finite)
+- 10:12 L: merged deliver/H1/lem-weil-pbc-finite-coproduct-lfp-qcqs (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.FiniteCoproductLfpQcqs AlgebraicGeometry.finite_coproduct_lfp_qcqs)
