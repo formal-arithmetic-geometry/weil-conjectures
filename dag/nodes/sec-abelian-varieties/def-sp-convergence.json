@@ -108,5 +108,51 @@
   "group": "E1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-dsc1905 (reviewer sub-agent of L); spot-checked: Return of 18:47 repaired: (1) A^n=colim_{p->-inf}D^{p,n-p} along alpha with existence hypothesis, F^p=im(D^{p,n-p}->A^n), g lands in Z_inf, canonical maps D->E_inf and D->gr^p, weak convergence = both onto with same kernel giving E_inf=gr; (2) bounded, weakly converges, abuts, converges (regular+abuts+complete limit, Stacks 012U) defined; (3) E7 change named in report. Regular now Z_r-stabilization (Stacks regular, outgoing d_r vanish), named in second reading. Consistent with merged def-sp-exact-couple (alpha bidegree (-1,+1) so colimit p->-inf and decreasing image filtration correct; C_2=C type-0 couple, g bidegree (0,0) into E_2; g(D) permanent cycles via g'(alpha x)), def-sp-filtration (separated/exhaustive/gr), lem-sp-page-induction (Z_inf/B_inf uses only pages and d_r); no cycle (exact-couple, filtration do not depend on this node). FIX more, RETURN less: wording 'induced filtration of [def-sp-filtration]' was wrong (induced = intersection with a subobject there), replaced by the inclusion F^{p+1}subseteq F^p and 'decreasing filtration in the sense of'; dropped the stray Tag 0130 parenthetical from the statement and split_report.blueprint.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.ExactCoupleConvergence",
+  "declaration": "CategoryTheory.BigradedExactCouple.ConvergesTo",
+  "declarations": [
+   "CategoryTheory.BigradedExactCouple.CycleBoundaryTower",
+   "CategoryTheory.BigradedExactCouple.cycleBoundaryTower_exists",
+   "CategoryTheory.BigradedExactCouple.cycleBoundaryTower",
+   "CategoryTheory.BigradedExactCouple.IsRegular",
+   "CategoryTheory.BigradedExactCouple.alphaIter",
+   "CategoryTheory.BigradedExactCouple.incomingAlphaIter",
+   "CategoryTheory.BigradedExactCouple.IsComplete",
+   "CategoryTheory.BigradedExactCouple.IsBounded",
+   "CategoryTheory.BigradedExactCouple.LimitSubobjects",
+   "CategoryTheory.BigradedExactCouple.limitBoundary_le_cycle",
+   "CategoryTheory.BigradedExactCouple.pageInfinity",
+   "CategoryTheory.BigradedExactCouple.initialG",
+   "CategoryTheory.BigradedExactCouple.g_factors_limitCycles",
+   "CategoryTheory.BigradedExactCouple.toPageInfinity",
+   "CategoryTheory.BigradedExactCouple.alphaDiagonal",
+   "CategoryTheory.BigradedExactCouple.AlphaColimit",
+   "CategoryTheory.BigradedExactCouple.imageFiltration_antitone",
+   "CategoryTheory.BigradedExactCouple.imageFiltration",
+   "CategoryTheory.BigradedExactCouple.toGradedPiece",
+   "CategoryTheory.BigradedExactCouple.WeaklyConvergesTo",
+   "CategoryTheory.BigradedExactCouple.weakConvergence_comparison",
+   "CategoryTheory.BigradedExactCouple.AbutsTo",
+   "CategoryTheory.BigradedExactCouple.filtrationStep_comp_quotient_zero",
+   "CategoryTheory.BigradedExactCouple.quotientTransition",
+   "CategoryTheory.BigradedExactCouple.IsInverseLimit",
+   "CategoryTheory.BigradedExactCouple.ConvergesTo"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/ExactCoupleConvergence.lean",
+  "statement": "def ConvergesTo (X : BigradedExactCouple C 0) (L : LimitSubobjects X) (A : ∀ n : ℤ, AlphaColimit X n) : Prop",
+  "branch": "sheaf-dag",
+  "by": "J1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-dsc1110",
+  "group": "J1",
+  "result": "pass",
+  "note": "Mathlib (pinned) has no StronglyConvergesTo/exact couples; upstream SpectralSequence.AbutsTo is first-quadrant N-indexed with bare isos, not the node's exact-couple notion, so new def is right. Matched: X : BigradedExactCouple C 0 (type-0 couple, E2=E); CycleBoundaryTower Z/B in Subobject (X.E p q), Z0=top, B0=bot, Z_succ/B_succ = exists(Z_r.arrow) of pullback along canonical projection of ker d / im dInto, projection pinned by projection_zero/cycleLift/derivedEProjection (tower unique, choice harmless, existence true); IsRegular pointwise Z-stabilization; IsComplete all lower bounds of im(alpha^r: D^{p+r,q-r}->D^{p,q}) are bot; IsBounded finite nonzero E2 support per diagonal; LimitSubobjects GLB/LUB = 'when limits exist'; pageInfinity = Z_inf/B_inf; AlphaColimit = colimit p->-inf with consecutive alpha (p+1->p) and unique factorization; imageFiltration F^p = im(iota_p) via recorded DecreasingFiltration; toPageInfinity via g, toGradedPiece via image factorization + gradedPiece; Weakly = both Epi + same kernelSubobject; AbutsTo = weak + recorded IsSeparated/IsExhaustive; ConvergesTo = IsRegular and AbutsTo and canonical cone A -> A/F^p a limit. #print/#check verified; citers (thm-sp-half-plane-convergence, lem-sp-edge-collapse, hypercohomology-convergence) can instantiate it (AlphaColimit with obj D^{0,n})."
  }
 }

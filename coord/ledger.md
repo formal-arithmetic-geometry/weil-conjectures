@@ -4403,3 +4403,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 11:12 L: merged deliver/F1/lem-weil-pbc-lci-conormal-generators-global-complete-intersection (stage 2; reviewer PASS; first push; Sheaf.RingTheory.ConormalGeneratorsGlobalCompleteIntersection Algebra.conormal_generators_global_complete_intersection)
 - 11:12 L: merged deliver/C1/lem-weil-pbc-limit-contained-in-constructible (stage 2; reviewer FIX; first push; Sheaf.AlgebraicGeometry.LimitContainedInConstructible AlgebraicGeometry.exists_eventually_range_subset_of_isConstructible)
 - 11:12 L: merged deliver/H1/lem-weil-pbc-localization-n2-domain (stage 2; reviewer PASS; first push; Sheaf.RingTheory.LocalizationJapaneseDomain localization_isN1_isN2)
+- 11:13 L: merged deliver/J1/def-sp-convergence (stage 2; reviewer PASS; first push; Sheaf.CategoryTheory.ExactCoupleConvergence CategoryTheory.BigradedExactCouple.ConvergesTo)
