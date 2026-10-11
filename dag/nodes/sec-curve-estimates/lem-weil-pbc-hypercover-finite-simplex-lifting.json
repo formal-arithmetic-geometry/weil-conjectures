@@ -152,5 +152,23 @@
   "summary": "Read Stacks 01GN and its proof, 01GM, 01G0/01G3/01G4/01G5, 01G2, and simplicial 017H-017N, 018R, 018S, 018V. The statement is kept in meaning but now cites definition nodes for SR(X), its coverings and hypercovers, simplicial sets and Hom(S,K)_0 (previously inline); def-weil-pbc-finite-split-hypercover dropped from stmt_deps (unused). Proof in four steps following 01GN: chain of one-simplex extensions (018S, with the finiteness of the intermediate simplicial sets written out), each extension a covering (01GM), composition (01G4(1)) with the r=0 case, and the local-lifting clause unpacked from Definition 01G3 with the etale base-change leaf. No slopmaster2 Lean exists for the item or the new nodes.",
   "blueprint": "Realizes, in lem-weil-pbc-hypercover-refinement's proof, the fourth paragraph's 'Previously chosen faces prescribe compatible boundaries; the matching covers of U lift those boundaries after finite refinement' (as used in its step 5 for the prism inclusion): steps 1-3 give the covering, step 4 the local lift after an etale covering."
  },
- "reviewed": "2026-10-10 L: 4 steps following 01GN (a chain adding one simplex at a time 018S, the one-more-simplex covering 01GM, composition of coverings 01G4, the local lifts unpacked); the hypercover notions given definition nodes (SR(X), simplicial sets as a Mathlib leaf, Hom(S,K)_0, finite limits in SR as a leaf) and the source's omitted claims made nodes; 8 new nodes"
+ "reviewed": "2026-10-10 L: 4 steps following 01GN (a chain adding one simplex at a time 018S, the one-more-simplex covering 01GM, composition of coverings 01G4, the local lifts unpacked); the hypercover notions given definition nodes (SR(X), simplicial sets as a Mathlib leaf, Hom(S,K)_0, finite limits in SR as a leaf) and the source's omitted claims made nodes; 8 new nodes",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.HypercoverFiniteSimplexLifting",
+  "declaration": "AlgebraicGeometry.Scheme.hypercover_finite_simplex_lifting",
+  "file": "lean/Sheaf/AlgebraicGeometry/HypercoverFiniteSimplexLifting.lean",
+  "statement": "theorem hypercover_finite_simplex_lifting (X : Scheme.{u}) [CompactSpace X] [QuasiSeparatedSpace X] (K : SimplicialObject (FormalCoproduct.{w} X.Etale)) (hK : IsSemiRepresentableHypercover K) (B : SSet.{t}) (A : B.Subcomplex) [B.Finite] [A.toSSet.Finite] (hBfinite : ∀ n : ℕ, Finite (B.obj (op ⦋n⦌))) (hBnonempty : ∀ n : ℕ, Nonempty (B.obj (op ⦋n⦌))) (hAfinite : ∀ n : ℕ, Finite (A.toSSet.obj (op ⦋n⦌))) (hAnonempty : ∀ n : ℕ, Nonempty (A.toSSet.obj (op ⦋n⦌))) (H_B H_A : FormalCoproduct.{w} X.Etale) (uB : SimplicialHomFamily K B H_B) (uA : SimplicialHomFamily K A.toSSet H_A) (huB : (simplicialHomFamilyFunctor K B).IsRepresentedBy uB) (huA : (simplicialHomFamilyFunctor K A.toSSet).IsRepresentedBy uA) : IsSemiRepresentableCovering (simplicialHomRestriction A uB huA) ∧ ∀ (T : X.Etale) (a : semiRepresentablePoints T H_A), ∃ (ι : Type w) (Tc : ι → X.Etale) (p : ∀ c : ι, Tc c ⟶ T), Sieve.ofArrows Tc p ∈ X.smallEtaleTopology T ∧ ∃ b : ∀ c : ι, semiRepresentablePoints (Tc c) H_B, ∀ c : ι, b c ≫ simplicialHomRestriction A uB huA = (FormalCoproduct.incl X.Etale).map (p c) ≫ a",
+  "branch": "sheaf-dag",
+  "by": "M1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "M1",
+  "result": "pass",
+  "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
+ }
 }
