@@ -356,6 +356,31 @@ theorem exists_admissibleBlowup_isOpenImmersion_strictTransformMap
   rw [hrw]
   infer_instance
 
+/-- **The elimination-of-indeterminacy blow-up** `X^el(q, U) ⟶ X`: for a separated morphism
+`q : Z ⟶ X` of finite type over a qcqs scheme `X` which is an isomorphism over a quasi-compact
+open `U`, a selected `U`-admissible blow-up of `X` along which the strict transform
+`Z^el(q, U) ⟶ X^el(q, U)` of `q` is an open immersion. It is selected from
+`AlgebraicGeometry.exists_admissibleBlowup_isOpenImmersion_strictTransformMap`, whose proof
+performs the blueprint's three steps: the boundary preparation `X₁ = Bl_{I₀} X` making `U`
+scheme-theoretically dense, Conrad's extension of the induced quasi-domination over a second
+admissible blow-up of `X₁`, and the composition of the two blow-ups into a single `U`-admissible
+blow-up of `X`. (blueprint: `def-nagata-elimination-indeterminacy`) -/
+noncomputable def eliminationBlowup {X : Scheme.{u}} [CompactSpace X] [QuasiSeparatedSpace X]
+    {U : X.Opens} (hU : IsCompact (U : Set X)) {Z : Scheme.{u}} (q : Z ⟶ X)
+    [IsSeparated q] [LocallyOfFiniteType q] [QuasiCompact q] (hq : IsIso (q ∣_ U)) :
+    IsAdmissible X U :=
+  (exists_admissibleBlowup_isOpenImmersion_strictTransformMap hU q hq).choose
+
+/-- **Elimination of indeterminacy for the constructed blow-up** (Stacks Project Tag 081S;
+blueprint: `lemma-nagata-elimination-indeterminacy`): the strict transform of `q` along
+`AlgebraicGeometry.eliminationBlowup` is an open immersion. -/
+theorem isOpenImmersion_strictTransformMap_eliminationBlowup {X : Scheme.{u}} [CompactSpace X]
+    [QuasiSeparatedSpace X] {U : X.Opens} (hU : IsCompact (U : Set X)) {Z : Scheme.{u}}
+    (q : Z ⟶ X) [IsSeparated q] [LocallyOfFiniteType q] [QuasiCompact q] (hq : IsIso (q ∣_ U)) :
+    IsOpenImmersion (strictTransformMap q (eliminationBlowup hU q hq).I.blowupMap
+      (eliminationBlowup hU q hq).preservedOpen) :=
+  (exists_admissibleBlowup_isOpenImmersion_strictTransformMap hU q hq).choose_spec
+
 /-! ### Axiom census
 
 Elimination of indeterminacy is unconditional: the check below is run by the build, so a

@@ -385,4 +385,54 @@ theorem exists_admissibleBlowup_isIso_strictTransformMap_near_closure
       obtain ⟨w, hw⟩ := hmrange.ge this
       exact ⟨w, by rw [hmdef] at hw ⊢; rw [Scheme.Hom.comp_apply, hw]⟩
 
+/-- **The isomorphism-near-closure blow-up** `IsoBl_{U,T}(q)`: for a proper morphism
+`q : Z ⟶ X` over a qcqs scheme `X` which is an isomorphism over an open neighbourhood `N` of a
+piece `T ⊆ U` that is closed in the quasi-compact open `U`, a selected `U`-admissible blow-up of
+`X` after which the strict transform of `q` is an isomorphism over a neighbourhood of the closure
+of the inverse image of `T`. It is selected from
+`AlgebraicGeometry.exists_admissibleBlowup_isIso_strictTransformMap_near_closure`, whose proof
+performs the blueprint's construction: constructible separation of `T` from the complement of the
+maximal isomorphism open, the separation blow-up, elimination of indeterminacy over the
+separated region, extension of that blow-up and composition of the two blow-ups.
+(blueprint: `def-nagata-isomorphism-near-closure`) -/
+noncomputable def isoNearClosureBlowup {X Z : Scheme.{u}} [CompactSpace X]
+    [QuasiSeparatedSpace X] {U : X.Opens} (hU : IsCompact (U : Set X)) (q : Z ⟶ X) [IsProper q]
+    {T : Set X} (hTU : T ⊆ (U : Set X)) (hT : IsClosed (U.ι ⁻¹' T))
+    {N : X.Opens} (hTN : T ⊆ (N : Set X)) (hN : IsIso (q ∣_ N)) : IsAdmissible X U :=
+  (exists_admissibleBlowup_isIso_strictTransformMap_near_closure hU q hTU hT hTN hN).choose
+
+/-- **The isomorphism-near-closure blow-up does its job** (blueprint:
+`lemma-nagata-isomorphism-near-closure`): after the blow-up `IsoBl_{U,T}(q)`, the strict
+transform of `q` is an isomorphism over an open neighbourhood of the closure of the inverse
+image of `T`. -/
+theorem exists_isIso_strictTransformMap_isoNearClosureBlowup {X Z : Scheme.{u}} [CompactSpace X]
+    [QuasiSeparatedSpace X] {U : X.Opens} (hU : IsCompact (U : Set X)) (q : Z ⟶ X) [IsProper q]
+    {T : Set X} (hTU : T ⊆ (U : Set X)) (hT : IsClosed (U.ι ⁻¹' T))
+    {N : X.Opens} (hTN : T ⊆ (N : Set X)) (hN : IsIso (q ∣_ N)) :
+    ∃ N' : (isoNearClosureBlowup hU q hTU hT hTN hN).I.blowup.Opens,
+      closure ((isoNearClosureBlowup hU q hTU hT hTN hN).I.blowupMap ⁻¹' T) ⊆
+        (N' : Set (isoNearClosureBlowup hU q hTU hT hTN hN).I.blowup) ∧
+      IsIso (strictTransformMap q (isoNearClosureBlowup hU q hTU hT hTN hN).I.blowupMap
+        (isoNearClosureBlowup hU q hTU hT hTN hN).preservedOpen ∣_ N') :=
+  (exists_admissibleBlowup_isIso_strictTransformMap_near_closure hU q hTU hT hTN hN).choose_spec
+
+/-- **A proper open immersion with dense image is an isomorphism** (blueprint:
+`lemma-nagata-proper-open-dense-iso`): if `q : Z ⟶ X` is proper and an open immersion, and its
+image contains a scheme-theoretically dense quasi-compact open `D` of `X`, then `q` is an
+isomorphism. The image of `q` is open, and closed because `q` is universally closed; it contains
+the dense set `D`, hence is everything. -/
+theorem isIso_of_isProper_of_isOpenImmersion {X Z : Scheme.{u}} (q : Z ⟶ X) [IsProper q]
+    [IsOpenImmersion q] (D : X.Opens) [QuasiCompact D.ι] [IsSchemeTheoreticallyDominant D.ι]
+    (hD : D ≤ q.opensRange) : IsIso q := by
+  refine isIso_of_isOpenImmersion_of_opensRange_eq_top q ?_
+  have hclosed : IsClosed (Set.range q) := q.isClosedMap.isClosed_range
+  have hdense : closure (D : Set X) = Set.univ := by
+    simpa using D.ι.denseRange.closure_range
+  apply TopologicalSpace.Opens.ext
+  rw [Scheme.Hom.coe_opensRange, TopologicalSpace.Opens.coe_top, Set.eq_univ_iff_forall]
+  intro x
+  have : closure (D : Set X) ⊆ Set.range q := hclosed.closure_subset_iff.mpr (by
+    intro y hy; exact (hD hy : y ∈ q.opensRange))
+  exact this (hdense ▸ Set.mem_univ x)
+
 end AlgebraicGeometry
