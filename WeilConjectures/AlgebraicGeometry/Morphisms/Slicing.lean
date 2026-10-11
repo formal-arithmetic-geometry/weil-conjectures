@@ -18,19 +18,14 @@ public import WeilConjectures.Mathlib.RingTheory.Etale.ResidueField
 public import WeilConjectures.Mathlib.RingTheory.Etale.Field
 
 /-!
-# Slicing a smooth morphism
+# Étale slices of a smooth morphism
 
-A smooth morphism `f : X ⟶ S` becomes, after an étale covering of `X`, a smooth morphism of
-affine schemes with geometrically connected fibres and a section, over a scheme étale over `S`
-(Stacks `0EY4`).
-
-The proof follows Stacks. In each fibre of `f` the closed points with finite separable residue
-field are dense (Stacks `056U`), and through each of them passes an étale slice `ι : Z ⟶ X`,
-that is, `ι ≫ f` is étale (Stacks `057G`). The base change `X ×_S Z ⟶ Z` then has a section,
-whose relative connected component is open with geometrically irreducible fibres (Stacks `055R`).
-The projection to `X` maps connected components of fibres onto connected components, so these
-relative components cover `X`. A second slicing after shrinking to an affine open makes all the
-schemes affine.
+Ingredients of the slicing of a smooth morphism (Stacks `0EY4`), which is
+`AlgebraicGeometry.Smooth.exists_etaleCover_factorization` in
+`WeilConjectures.AlgebraicGeometry.Morphisms.SlicingSmooth`. In each fibre of a smooth morphism
+`f : X ⟶ S` the closed points with finite separable residue field are dense (Stacks `056U`), and
+through each of them passes an étale slice `ι : Z ⟶ X`, that is, `ι ≫ f` is étale (Stacks
+`057G`).
 
 ## Main statements
 
@@ -40,15 +35,11 @@ schemes affine.
   affine space.
 - `AlgebraicGeometry.Smooth.exists_etale_comp_of_etale_residueFieldMap`: through a point with
   finite separable residue field extension passes an étale slice.
-- `AlgebraicGeometry.Smooth.exists_geometricallyIrreducible_of_section`: the relative connected
-  component of a section of a smooth morphism is open, with geometrically irreducible fibres.
-- `AlgebraicGeometry.Smooth.exists_etale_factorization_of_mem`: the slicing near one point.
-- `AlgebraicGeometry.Smooth.exists_etaleCover_factorization`: the slicing of a smooth morphism.
 
 ## References
 
 - Stacks Project, Tag `0EY4`, <https://stacks.math.columbia.edu/tag/0EY4>
-- Stacks Project, Tags `056U`, `057G`, `055R`
+- Stacks Project, Tags `056U`, `057G`
 -/
 
 @[expose] public section
@@ -208,144 +199,5 @@ theorem Smooth.exists_etale_comp_of_etale_residueFieldMap {X S : Scheme.{u}} (f 
     rw [pullback.condition_assoc]
   rw [Category.assoc, this]
   infer_instance
-
-/-- **The relative connected component of a section** (Stacks `055R`). Let `g : P ⟶ T` be smooth,
-quasi-compact and quasi-separated, hence of finite presentation, with a section `σ`. The points
-`p` lying in the connected component of `σ (g p)` in their fibre form an open `P⁰` of `P`, here
-an open `U` containing them. Its fibres over `T` are the connected components through the
-rational points `σ t` of the smooth fibres, hence geometrically connected (Stacks `04KV`) and,
-being smooth, geometrically irreducible. -/
-@[stacks 055R]
-theorem Smooth.exists_geometricallyIrreducible_of_section {P T : Scheme.{u}} (g : P ⟶ T)
-    [Smooth g] [QuasiCompact g] [QuasiSeparated g] (σ : T ⟶ P) (hσ : σ ≫ g = 𝟙 T) :
-    ∃ U : P.Opens, Set.range σ ⊆ U ∧ GeometricallyIrreducible (U.ι ≫ g) ∧
-      ∀ p : P, p ∈ connectedComponentIn (g ⁻¹' {g p}) (σ (g p)) → p ∈ U :=
-  sorry
-
-/-- The slicing of a smooth morphism `f` near a point, for `f` quasi-compact and
-quasi-separated; see `AlgebraicGeometry.Smooth.exists_etale_factorization_of_mem`. -/
-private theorem exists_etale_factorization_of_mem_aux {X S : Scheme.{u}} (f : X ⟶ S) [Smooth f]
-    [QuasiCompact f] [QuasiSeparated f]
-    (x : X) :
-    ∃ (U : Scheme.{u}) (p : U ⟶ X) (V : Scheme.{u}) (q : U ⟶ V) (r : V ⟶ S),
-      Etale p ∧ x ∈ Set.range p ∧ Etale r ∧ Smooth q ∧ IsAffine U ∧ IsAffine V ∧
-      GeometricallyConnected q ∧ (∃ s : V ⟶ U, s ≫ q = 𝟙 V) ∧ q ≫ r = p ≫ f := by
-  -- a point `x'` with finite separable residue field in the connected component of `x`
-  obtain ⟨W, hxW, hW⟩ := f.exists_opens_inter_preimage_subset_connectedComponentIn x
-  obtain ⟨x', hx'W, hfx', hx'⟩ := Smooth.exists_mem_etale_residueFieldMap f W hxW
-  have hxx' : x ∈ connectedComponentIn (f ⁻¹' {f x}) x' := by
-    rw [← connectedComponentIn_eq (hW ⟨hx'W, hfx'⟩)]
-    exact mem_connectedComponentIn rfl
-  -- an étale slice `ι : Z ⟶ X` through `x'`, and the section `σ` of `X ×_S Z ⟶ Z`
-  obtain ⟨Z, ι, z, hZ, hιf, rfl⟩ := Smooth.exists_etale_comp_of_etale_residueFieldMap f hx'
-  let σ : Z ⟶ pullback f (ι ≫ f) := pullback.lift ι (𝟙 Z) (by rw [Category.id_comp])
-  have hσ : σ ≫ pullback.snd f (ι ≫ f) = 𝟙 Z := pullback.lift_snd _ _ _
-  rw [← hfx'] at hxx'
-  have hσz : pullback.snd f (ι ≫ f) (σ z) = z := by
-    rw [← Scheme.Hom.comp_apply, hσ]
-    rfl
-  have hσx : pullback.fst f (ι ≫ f) (σ z) = ι z := by
-    rw [← Scheme.Hom.comp_apply, pullback.lift_fst]
-  obtain ⟨p₀, hp₀, hp₀x⟩ := connectedComponentIn_subset_image_pullback_fst f (ι ≫ f) (σ z) hσz
-    (by rwa [hσx, Scheme.Hom.comp_apply])
-  have hp₀z : pullback.snd f (ι ≫ f) p₀ = z := 
-    connectedComponentIn_subset (pullback.snd f (ι ≫ f) ⁻¹' {z}) _ hp₀
-  -- the relative connected component `P₀` of `σ`
-  obtain ⟨P₀, -, hP₀, hP₀'⟩ :=
-    Smooth.exists_geometricallyIrreducible_of_section (pullback.snd f (ι ≫ f)) σ hσ
-  have hp₀P₀ : p₀ ∈ P₀ := hP₀' p₀ (by rwa [hp₀z])
-  -- an affine open `A` of `P₀` around `p₀`, and its open image `T` in `Z`
-  set h := P₀.ι ≫ pullback.snd f (ι ≫ f)
-  obtain ⟨A, hA, hp₀A, -⟩ := exists_isAffineOpen_mem_and_subset (X := P₀.toScheme) (U := ⊤)
-    (x := (⟨p₀, hp₀P₀⟩ : P₀.toScheme)) trivial
-  let T : Z.Opens := ⟨h '' A, h.isOpenMap _ A.2⟩
-  have hAT : A ≤ h ⁻¹ᵁ T := fun a ha ↦ ⟨a, ha, rfl⟩
-  let k := h.resLE T A hAT
-  have : IsAffine A := hA
-  have : Surjective k := ⟨by
-    rintro ⟨_, a, ha, rfl⟩
-    exact ⟨⟨a, ha⟩, Subtype.ext (by simp [k, -Scheme.Hom.comp_base])⟩⟩
-  have : GeometricallyIrreducible k := by
-    have : Surjective (P₀.toScheme.homOfLE hAT ≫ h ∣_ T) := ‹Surjective k›
-    exact inferInstanceAs (GeometricallyIrreducible (P₀.toScheme.homOfLE hAT ≫ h ∣_ T))
-  -- a second étale slice `ι' : Z' ⟶ A`, through a point of the fibre of `A ⟶ T` containing `p₀`
-  obtain ⟨a', -, hka', ha'⟩ :=
-    Smooth.exists_mem_etale_residueFieldMap k ⊤ (x := ⟨⟨p₀, hp₀P₀⟩, hp₀A⟩) trivial
-  obtain ⟨Z', ι', z', hZ', hι'k, rfl⟩ := Smooth.exists_etale_comp_of_etale_residueFieldMap k ha'
-  have : IsAffineHom (k ≫ T.ι) := by
-    rw [Scheme.Hom.resLE_comp_ι]
-    infer_instance
-  have : IsAffineHom k := IsAffineHom.of_comp k T.ι
-  refine ⟨pullback k (ι' ≫ k), pullback.fst _ _ ≫ A.ι ≫ P₀.ι ≫ pullback.fst f (ι ≫ f), Z',
-    pullback.snd _ _, ι' ≫ k ≫ T.ι ≫ ι ≫ f, inferInstance, ?_, ?_, inferInstance,
-    inferInstance, hZ', inferInstance,
-    ⟨pullback.lift ι' (𝟙 Z') (Category.id_comp _).symm, pullback.lift_snd _ _ _⟩, ?_⟩
-  · obtain ⟨u, hu, -⟩ := Scheme.Pullback.exists_preimage_pullback (f := k) (g := ι' ≫ k)
-      ⟨⟨p₀, hp₀P₀⟩, hp₀A⟩ z' (by simpa using hka'.symm)
-    exact ⟨u, by simp [hu, hp₀x]⟩
-  · have : Etale (ι' ≫ k ≫ T.ι) := by
-      rw [← Category.assoc]
-      infer_instance
-    rw [← Category.assoc, ← Category.assoc]
-    infer_instance
-  · have H := pullback.condition (f := f) (g := ι ≫ f)
-    rw [← Category.assoc ι' k, ← pullback.condition_assoc]
-    simp only [k, h, Scheme.Hom.resLE_comp_ι_assoc, Category.assoc] at H ⊢
-    rw [← H]
-
-/-- **Slicing a smooth morphism at a point.** Let `f : X ⟶ S` be smooth and `x : X`. Then there
-are an étale `p : U ⟶ X` with `x` in its image and a factorisation `p ≫ f = q ≫ r` with
-`r : V ⟶ S` étale and `q : U ⟶ V` a smooth morphism of affine schemes with geometrically connected
-fibres and a section.
-
-After shrinking `X` and `S` to affine opens, so that `f` is quasi-compact and quasi-separated,
-the proof follows Stacks `0EY4`. Choose `x'` in the connected component of `x` in its fibre with
-`κ(x')` finite separable over `κ(f x)`, and an étale slice `ι : Z ⟶ X` through `x'`. The base
-change `X ×_S Z ⟶ Z` has the section `(ι, 𝟙)`, whose relative connected component `P₀` is open
-with geometrically irreducible fibres, and contains a point over `x` because the projection maps
-connected components of fibres onto connected components. Finally an affine open `A` of `P₀`
-around that point is smooth with geometrically irreducible fibres over its open image `T`, and a
-second étale slice `ι' : Z' ⟶ A` provides the section of `A ×_T Z' ⟶ Z'`. -/
-theorem Smooth.exists_etale_factorization_of_mem {X S : Scheme.{u}} (f : X ⟶ S) [Smooth f]
-    (x : X) :
-    ∃ (U : Scheme.{u}) (p : U ⟶ X) (V : Scheme.{u}) (q : U ⟶ V) (r : V ⟶ S),
-      Etale p ∧ x ∈ Set.range p ∧ Etale r ∧ Smooth q ∧ IsAffine U ∧ IsAffine V ∧
-      GeometricallyConnected q ∧ (∃ s : V ⟶ U, s ≫ q = 𝟙 V) ∧ q ≫ r = p ≫ f := by
-  obtain ⟨S', hS', hxS', -⟩ := exists_isAffineOpen_mem_and_subset (U := ⊤) (x := f x) trivial
-  obtain ⟨X', hX', hxX', hX'S'⟩ :=
-    exists_isAffineOpen_mem_and_subset (U := f ⁻¹ᵁ S') (x := x) hxS'
-  have : IsAffine S' := hS'
-  have : IsAffine X' := hX'
-  obtain ⟨U, p, V, q, r, hp, ⟨u, hu⟩, hr, hq, hU, hV, hqc, hs, hqr⟩ :=
-    exists_etale_factorization_of_mem_aux (f.resLE S' X' hX'S') ⟨x, hxX'⟩
-  refine ⟨U, p ≫ X'.ι, V, q, r ≫ S'.ι, inferInstance, ⟨u, by simp [hu]⟩, inferInstance, hq, hU,
-    hV, hqc, hs, ?_⟩
-  rw [← Category.assoc, hqr, Category.assoc, Scheme.Hom.resLE_comp_ι, Category.assoc]
-
-/-- **Slicing a smooth morphism** (blueprint `sbc-lem-slicing`). Let `f : X ⟶ S` be smooth.
-Then there is an étale covering `p i : U i ⟶ X` of `X` such that each composite `p i ≫ f`
-factors as `q i ≫ r i` with `r i : V i ⟶ S` étale and `q i : U i ⟶ V i` a smooth morphism of
-affine schemes with geometrically connected fibres admitting a section:
-
-```
-U i --q i--> V i
- |            |
-p i          r i
- v            v
- X ----f----> S
-```
-
-This is Stacks `0EY4`, assembled pointwise from
-`AlgebraicGeometry.Smooth.exists_etale_factorization_of_mem`. -/
-@[stacks 0EY4]
-theorem Smooth.exists_etaleCover_factorization {X S : Scheme.{u}} (f : X ⟶ S) [Smooth f] :
-    ∃ (ι : Type u) (U : ι → Scheme.{u}) (p : ∀ i, U i ⟶ X) (V : ι → Scheme.{u})
-      (q : ∀ i, U i ⟶ V i) (r : ∀ i, V i ⟶ S),
-      (∀ i, Etale (p i)) ∧ (∀ x : X, ∃ (i : ι) (y : U i), (p i).base y = x) ∧
-      (∀ i, Etale (r i)) ∧ (∀ i, Smooth (q i)) ∧ (∀ i, IsAffine (U i)) ∧
-      (∀ i, IsAffine (V i)) ∧ (∀ i, GeometricallyConnected (q i)) ∧
-      (∀ i, ∃ s : V i ⟶ U i, s ≫ q i = 𝟙 (V i)) ∧ (∀ i, q i ≫ r i = p i ≫ f) := by
-  choose U p V q r hp hx hr hq hU hV hqc hs hqr using Smooth.exists_etale_factorization_of_mem f
-  exact ⟨X, U, p, V, q, r, hp, fun x ↦ ⟨x, hx x⟩, hr, hq, hU, hV, hqc, hs, hqr⟩
 
 end AlgebraicGeometry

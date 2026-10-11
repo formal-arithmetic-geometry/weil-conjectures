@@ -21,6 +21,28 @@ the image of the idempotent endomorphism of the truncation triangle of `K` induc
 - `CategoryTheory.Triangulated.TStructure.karoubi`: the t-structure on `Karoubi C`.
 - `CategoryTheory.Triangulated.TStructure.karoubiHeartEquivalence`: the heart of `t.karoubi` is
   canonically equivalent to the Karoubi envelope of the heart of `t`.
+
+## Blueprint nodes formalised in Mathlib
+
+Several blueprint nodes of the t-structure and Karoubi-envelope argument are Mathlib
+definitions and instances:
+
+- `def-weil-t-structure` (t-structures, their hearts, boundedness, truncation functors and
+  truncation triangles) is `CategoryTheory.Triangulated.TStructure`, with
+  `CategoryTheory.Triangulated.TStructure.heart`, `CategoryTheory.Triangulated.TStructure.bounded`,
+  `CategoryTheory.Triangulated.TStructure.truncLE`, `CategoryTheory.Triangulated.TStructure.truncGE`
+  and `CategoryTheory.Triangulated.TStructure.triangleLEGE_distinguished`.
+- `def-weil-derived-cohomology-sheaves` (the cohomology sheaves `𝓗ʳ(K)` of a complex of sheaves of
+  modules for the standard t-structure) is `DerivedCategory.homologyFunctor` applied to the
+  derived category of a category of sheaves of modules, the standard t-structure being
+  `DerivedCategory.TStructure.t`.
+- `lem-weil-karoubi-envelope-fully-faithful` (the canonical functor `C ⥤ Karoubi C` is fully
+  faithful) is `CategoryTheory.Idempotents.fullyFaithfulToKaroubi`.
+- `lem-weil-karoubi-envelope-idempotent-complete` (the Karoubi envelope is idempotent complete) is
+  the instance `CategoryTheory.Idempotents.instIsIdempotentCompleteKaroubi`.
+- The pointer remarks `rem-ptr-weil-karoubi-envelope-6` and `rem-ptr-weil-karoubi-envelope-7`
+  record exactly these two facts, the inputs of `thm-weil-karoubian-bounded-t`
+  (`CategoryTheory.Triangulated.TStructure.isEquivalence_toKaroubi_and_isTriangulated_of_bounded`).
 -/
 
 @[expose] public section

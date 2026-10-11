@@ -9,7 +9,7 @@ public import Mathlib
 public import WeilConjectures.AlgebraicGeometry.Curve.CohomologicalDimension
 public import WeilConjectures.AlgebraicGeometry.Morphisms.EtaleTorsorCohomology
 public import WeilConjectures.AlgebraicGeometry.Morphisms.EtaleTorsorSpreading
-public import WeilConjectures.AlgebraicGeometry.Morphisms.Slicing
+public import WeilConjectures.AlgebraicGeometry.Morphisms.SlicingSmooth
 public import WeilConjectures.AlgebraicGeometry.Sites.PointCohomology
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Geometrically.Reduced
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Etale

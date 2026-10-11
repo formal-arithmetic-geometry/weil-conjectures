@@ -373,7 +373,11 @@ theorem WeilComplex.IsMixedOfWeightsAtMost.upperStar_derivedLowerShriek_of_isPul
 exact sequence `Rʳf₀!F' ⟶ Rʳf₀!F ⟶ Rʳf₀!F''`, a piece of the long exact sequence of the
 distinguished triangle `F' ⟶ F ⟶ F'' ⟶ F'[1]`
 (blueprint: `lem-weil-heart-short-exact-triangles` and `lem-sp-long-exact-of-triangle`, used in
-`lem-zl-morphism-open-closed-reduction`, part 3). -/
+`lem-zl-morphism-open-closed-reduction`, part 3).
+
+The inclusion of Weil sheaves into pro-étale Weil sheaves is exact, so `S` gives a distinguished
+triangle in the derived category of pro-étale Weil sheaves; `Rf_!` is triangulated and the
+cohomology functor `𝓗ʳ` is homological. -/
 theorem WeilSheaf.exact_map_higherLowerShriek {X Y : Scheme.{u}}
     [X.Over (Spec (CommRingCat.of k₀))] [Y.Over (Spec (CommRingCat.of k₀))]
     (f : X ⟶ Y) [f.IsOver (Spec (CommRingCat.of k₀))] [IsSeparated f] [LocallyOfFiniteType f]
@@ -381,8 +385,31 @@ theorem WeilSheaf.exact_map_higherLowerShriek {X Y : Scheme.{u}}
     [QuasiCompact (Y ↘ Spec (CommRingCat.of k₀))]
     [QuasiSeparated (Y ↘ Spec (CommRingCat.of k₀))] {S : ShortComplex (WeilSheaf k₀ l X)}
     (hS : S.ShortExact) (r : ℕ) :
-    (S.map (WeilSheaf.higherLowerShriek k₀ l f r)).Exact :=
-  sorry
+    (S.map (WeilSheaf.higherLowerShriek k₀ l f r)).Exact := by
+  have : LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀)) := by
+    rw [← CategoryTheory.comp_over f (Spec (CommRingCat.of k₀))]
+    infer_instance
+  have : HasFiniteCoproducts (WeilSheaf.objectProperty k₀ l X).FullSubcategory :=
+    inferInstanceAs (HasFiniteCoproducts (WeilSheaf k₀ l X))
+  have : HasFiniteCoproducts (WeilSheaf.objectProperty k₀ l Y).FullSubcategory :=
+    inferInstanceAs (HasFiniteCoproducts (WeilSheaf k₀ l Y))
+  have := (WeilSheaf.objectProperty k₀ l X).preservesKernels_ι
+  have := (WeilSheaf.objectProperty k₀ l X).preservesCokernels_ι
+  have := (WeilSheaf.objectProperty k₀ l Y).preservesKernels_ι
+  have := (WeilSheaf.objectProperty k₀ l Y).preservesCokernels_ι
+  have : PreservesFiniteLimits (WeilSheaf.objectProperty k₀ l X).ι :=
+    Functor.preservesFiniteLimits_of_preservesKernels _
+  have : PreservesFiniteColimits (WeilSheaf.objectProperty k₀ l X).ι :=
+    Functor.preservesFiniteColimits_of_preservesCokernels _
+  have : PreservesFiniteLimits (WeilSheaf.objectProperty k₀ l Y).ι :=
+    Functor.preservesFiniteLimits_of_preservesKernels _
+  have : PreservesFiniteColimits (WeilSheaf.objectProperty k₀ l Y).ι :=
+    Functor.preservesFiniteColimits_of_preservesCokernels _
+  have hS' := hS.map_of_exact (WeilSheaf.objectProperty k₀ l X).ι
+  rw [← ShortComplex.exact_map_iff_of_faithful _ (WeilSheaf.objectProperty k₀ l Y).ι]
+  exact ((_root_.DerivedCategory.homologyFunctor _ r).map_distinguished_exact _
+    ((ProEtaleWeilSheaf.rightDerivedLowerShriek k₀ l f _).map_distinguished _
+      hS'.singleTriangle_distinguished))
 
 /-- Let `j : U ⟶ X` be an open immersion whose closed complement is `i : Z ⟶ X`. If the
 direct-image weight assertion holds for `j ≫ f` and for `i ≫ f`, then it holds for `f`:

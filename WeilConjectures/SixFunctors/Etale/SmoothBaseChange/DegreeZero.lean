@@ -267,7 +267,7 @@ theorem Etale.isIso_baseChangeMap_app_of_flat [Flat p] [LocallyOfFinitePresentat
   refine Sheaf.isIso_of_isIso_app_of_generate_mem _ (forget (ModuleCat.{u + 1} Λ)) _ fun W₀ ↦ ?_
   have : Etale W₀.hom := W₀.prop
   have : GeometricallyReduced (W₀.hom ≫ p) := GeometricallyReduced.comp_of_etale _ _
-  obtain ⟨ι, U, a, V, q, r, ha, hcov, hr, hq₁, -, hq₃, -, hq₄, -, hfac⟩ :=
+  obtain ⟨ι, U, a, V, q, r, ha, hcov, hr, hq₁, -, hq₃, -, hq₄, -, -, -, hfac⟩ :=
     exists_etaleCover_factorization (W₀.hom ≫ p)
   let W (i : ι) : X.Etale := Scheme.Etale.mk (a i ≫ W₀.hom)
   let ι' (i : ι) : W i ⟶ W₀ := MorphismProperty.Over.homMk (a i)
