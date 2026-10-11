@@ -1,11 +1,11 @@
 # Work queue
 
-36 items; claim with `tools/claim.py next <group> [--stage N]`.
+34 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (36)
+## Stage 2: nodes to state (34)
 
 | node | distance to Mathlib | kind | blockers |
 |---|---|---|---|
@@ -21,7 +21,6 @@
 | `lem-pc-global-hom-pullback-adjunction` | 1 | state | 0 |
 | `lem-pc-twist-cech-monomial-decomposition` | 1 | state | 0 |
 | `lem-sc-affine-koszul-cech-derived-comparison` | 1 | state | 0 |
-| `lem-sc-affine-koszul-hom-alternating-cech` | 1 | state | 0 |
 | `lem-sc-cech-comparison-map-iso-affine` | 1 | state | 0 |
 | `lem-sc-closed-pushforward-abelian-stalks` | 1 | state | 0 |
 | `lem-sc-closed-pushforward-boundary-naturality` | 1 | state | 0 |
@@ -39,7 +38,6 @@
 | `lem-weil-pbc-etale-mayer-vietoris-pullback` | 1 | state | 0 |
 | `lem-weil-pbc-gabber-strict-henselian-zariski-comparison` | 1 | state | 0 |
 | `lem-weil-pbc-module-injective-open-cover-cech-acyclic` | 1 | state | 0 |
-| `lem-weil-pbc-sets-affine-etale-inverse-image-comparison` | 1 | state | 0 |
 | `lem-weil-pbc-sheaf-finite-truncation-colimit` | 1 | state | 0 |
 | `lem-weil-pbc-sheafification-plus-theorem` | 1 | state | 0 |
 | `lem-weil-pbc-spectral-finite-coequalizer-embeds-constant` | 1 | state | 0 |
