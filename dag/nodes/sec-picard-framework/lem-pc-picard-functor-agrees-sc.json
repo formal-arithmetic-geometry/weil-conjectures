@@ -24,7 +24,8 @@
   "def-pc-fppf-site",
   "def-pc-picard-functor",
   "def-pc-picard-presheaf",
-  "def-pc-scheme"
+  "def-pc-scheme",
+  "def-pc-smooth-projective-curve"
  ],
  "proof": [
   {
@@ -153,5 +154,24 @@
   "group": "K1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-pfa1909 (reviewer sub-agent of L); spot-checked: Repaired re-push after 18:47 return, each point checked: (1) E1 repaired: statement now assumes geometrically integral [def-pc-geometrically-irreducible], in stmt_deps, named under Source error (E7), so def-sc-picard-functor applies in step 3; (2) C1/C4 repaired: step 2 now cites new statement-only node lem-pc-fppf-affine-sheafification-restriction ((F^#)|Aff = (F|Aff)^# canonically, functorially), sourced Tag 021V, true since u is continuous+cocontinuous (special cocontinuous), Mathlib searches recorded; (3) B source: lem-pc-fppf-affine-refinement dropped (allowed option, no step cites it; report's files list is stale on this but packet shows 1 new node). Steps 1 and 3 elementary as accepted before; C7/C8: def-sc-picard-functor (other unit) only gives the meaning of the right side, as an agrees bridge requires; no cycle (new node depends only on def-pc-fppf-site, def-pc-scheme)."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.PicardFunctorAgreesSC",
+  "declaration": "AlgebraicGeometry.picardFunctor_agrees_affineSheafification",
+  "statement": "theorem picardFunctor_agrees_affineSheafification (k : Type u) [Field k] (X : Scheme.{u}) (f : X ⟶ Scheme.Spec.obj (Opposite.op (CommRingCat.of k))) [Scheme.Hom.IsSmoothProjectiveCurve f] [GeometricallyIntegral f] : Nonempty ((CostructuredArrow.toOver Scheme.Spec (Scheme.Spec.obj (Opposite.op (CommRingCat.of k)))).op ⋙ (picardFunctor f).obj ≅ (sheafification ((Scheme.fppfPrecoverage.comap (CostructuredArrow.toOver Scheme.Spec (Scheme.Spec.obj (Opposite.op (CommRingCat.of k))) ⋙ Over.forget _)).toGrothendieck) (Type (u + 1))).obj ((CostructuredArrow.toOver Scheme.Spec (Scheme.Spec.obj (Opposite.op (CommRingCat.of k)))).op ⋙ picardPresheaf f))",
+  "branch": "sheaf-dag",
+  "by": "M1",
+  "date": "2026-10-11",
+  "existing": false,
+  "file": "lean/Sheaf/AlgebraicGeometry/PicardFunctorAgreesSC.lean",
+  "fixed_by": "R-pfa1208"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-pfa1208",
+  "group": "M1",
+  "result": "fix",
+  "note": "k field, f : X ⟶ Spec k with [IsSmoothProjectiveCurve f] (landed) and Mathlib [GeometricallyIntegral f]; LHS = source picardFunctor f (recorded at both def-pc- and def-sc-picard-functor) restricted along CostructuredArrow.toOver Spec (affine k-schemes = k-algebras); RHS = affine-site fppf sheafification (fppfPrecoverage.comap, as J1 fppfSheafification_affineRestriction) of the restricted source picardPresheaf f; FIX: the three let binders inlined, unused (R : Type u) [CommRing R] [Algebra k R] binders removed (the natural iso's component at Spec R is the node's equality)"
  }
 }
