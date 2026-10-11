@@ -169,6 +169,18 @@ noncomputable def toProd (c : Correspondence aX aY K L) : c.supp ⟶ pullback aY
 noncomputable def toProdSwap (d : Correspondence aY aX L K) : d.supp ⟶ pullback aY aX :=
   pullback.lift d.snd d.fst (d.snd_comp.trans d.fst_comp.symm)
 
+/-- The support map `c : C ⟶ Y × X` followed by the first projection is the exceptional
+leg `c₁`. -/
+@[reassoc (attr := simp)]
+lemma toProd_fst (c : Correspondence aX aY K L) : c.toProd ≫ pullback.fst aY aX = c.fst :=
+  pullback.lift_fst _ _ _
+
+/-- The support map `c : C ⟶ Y × X` followed by the second projection is the
+ordinary-pullback leg `c₂`. -/
+@[reassoc (attr := simp)]
+lemma toProd_snd (c : Correspondence aX aY K L) : c.toProd ≫ pullback.snd aY aX = c.snd :=
+  pullback.lift_snd _ _ _
+
 /-- The intersection support `E(C, D) = C ×_{Y × X} D` of an opposite pair
 (part of blueprint `sk-d-pairing`). -/
 noncomputable def intersection (c : Correspondence aX aY K L)
@@ -470,6 +482,266 @@ instance isClosedImmersion_toProd_ofGraph :
   have : IsClosedImmersion (pullback.lift (𝟙 X) g (Category.id_comp (g ≫ aX))) :=
     inferInstance
   infer_instance
+
+end Correspondence
+
+namespace GeometricOperations
+
+variable [DerivedBraiding A] (G : GeometricOperations A s)
+
+section SupportedClass
+
+variable {C Z : Scheme.{u}} (c : C ⟶ Z) (hc : IsGeometricHom s c) [HasCompactification c]
+
+/-- Classes supported on a morphism `c : C ⟶ Z` of geometric schemes with values in an internal
+hom are coefficient maps: for `M` and `N` in `Dᵇctf(Z)`, the composite bijection
+
+```
+  Hom(Rc_! A_C, RHom(M, N)) ≃ Hom(M ⊗ᴸ Rc_! A_C, N) ≃ Hom(Rc_! A_C ⊗ᴸ M, N)
+      ≃ Hom(Rc_! (A_C ⊗ᴸ Lc^* M), N) ≃ Hom(Rc_! Lc^* M, N) ≃ Hom(Lc^* M, Rc^! N)
+```
+
+of the tensor-hom adjunction, the braiding, the projection formula for `c`, the unitor and the
+exceptional adjunction for `c` (part of blueprint `lem-trf-correspondence-class`). -/
+noncomputable def supportedClassHomEquiv
+    {M N : DerivedCategory (Sheaf (Scheme.ProEt.topology Z) A)} (hM : G.ctf Z M)
+    (hN : G.ctf Z N) :
+    SupportedClass c ((ihom M).obj N) ≃
+      (((upperStar A c).leftDerivedFunctor).obj M ⟶ (rightDerivedUpperShriek A c).obj N) :=
+  have hC : IsGeometricHom s (𝟙 C) := by
+    obtain ⟨a, _, _⟩ := hc
+    exact .id (c ≫ a)
+  ((ihom.adjunction M).homEquiv _ _).symm.trans <|
+    ((β_ M _).homCongr (Iso.refl N)).trans <|
+    (((G.projectionFormula c hc).app (⟨𝟙_ _, G.ctf_unit hC⟩, ⟨M, hM⟩)).homCongr
+      (Iso.refl N)).trans <|
+    (((rightDerivedLowerShriek A c).mapIso (λ_ _)).homCongr (Iso.refl N)).trans <|
+    G.exceptionalHomEquiv c hc (G.ctf_upperStar c hc hM) hN
+
+variable {c} in
+lemma supportedClassHomEquiv_apply {M N : DerivedCategory (Sheaf (Scheme.ProEt.topology Z) A)}
+    (hM : G.ctf Z M) (hN : G.ctf Z N) (hC : IsGeometricHom s (𝟙 C))
+    (φ : SupportedClass c ((ihom M).obj N)) :
+    G.supportedClassHomEquiv c hc hM hN φ =
+      G.exceptionalHomEquiv c hc (G.ctf_upperStar c hc hM) hN
+        ((rightDerivedLowerShriek A c).map (λ_ _).inv ≫
+          ((G.projectionFormula c hc).app (⟨𝟙_ _, G.ctf_unit hC⟩, ⟨M, hM⟩)).inv ≫
+          (β_ M _).inv ≫ uncurry φ) := by
+  simp only [supportedClassHomEquiv, Equiv.trans_apply]
+  erw [Iso.homCongr_apply, Iso.homCongr_apply, Iso.homCongr_apply]
+  simp [uncurry]
+
+/-- `GeometricOperations.supportedClassHomEquiv` is natural in the target `N`. -/
+lemma supportedClassHomEquiv_naturality_right
+    {M N N' : DerivedCategory (Sheaf (Scheme.ProEt.topology Z) A)} (hM : G.ctf Z M)
+    (hN : G.ctf Z N) (hN' : G.ctf Z N') (φ : SupportedClass c ((ihom M).obj N)) (g : N ⟶ N') :
+    G.supportedClassHomEquiv c hc hM hN' (φ ≫ (ihom M).map g) =
+      G.supportedClassHomEquiv c hc hM hN φ ≫ (rightDerivedUpperShriek A c).map g := by
+  have hC : IsGeometricHom s (𝟙 C) := by
+    obtain ⟨a, _, _⟩ := hc
+    exact .id (c ≫ a)
+  rw [G.supportedClassHomEquiv_apply hc hM hN' hC, G.supportedClassHomEquiv_apply hc hM hN hC,
+    ← GeometricCoefficients.exceptionalHomEquiv_naturality_right _ c hc _ hN hN',
+    uncurry_natural_right]
+  simp only [Category.assoc]
+
+/-- `GeometricOperations.supportedClassHomEquiv` is natural in the source `M`. -/
+lemma supportedClassHomEquiv_naturality_left
+    {M M' N : DerivedCategory (Sheaf (Scheme.ProEt.topology Z) A)} (hM : G.ctf Z M)
+    (hM' : G.ctf Z M') (hN : G.ctf Z N) (f : M ⟶ M') (φ : SupportedClass c ((ihom M').obj N)) :
+    G.supportedClassHomEquiv c hc hM hN (φ ≫ (pre f).app N) =
+      ((upperStar A c).leftDerivedFunctor).map f ≫ G.supportedClassHomEquiv c hc hM' hN φ := by
+  have hC : IsGeometricHom s (𝟙 C) := by
+    obtain ⟨a, _, _⟩ := hc
+    exact .id (c ≫ a)
+  rw [G.supportedClassHomEquiv_apply hc hM hN hC, G.supportedClassHomEquiv_apply hc hM' hN hC,
+    ← GeometricCoefficients.exceptionalHomEquiv_naturality_left _ c hc (G.ctf_upperStar c hc hM)
+      (G.ctf_upperStar c hc hM') hN,
+    uncurry_pre_app, ← BraidedCategory.braiding_inv_naturality_right_assoc]
+  have h := (G.projectionFormula c hc).inv.naturality
+    (X := (⟨𝟙_ _, G.ctf_unit hC⟩, ⟨M, hM⟩)) (Y := (⟨𝟙_ _, G.ctf_unit hC⟩, ⟨M', hM'⟩))
+    (𝟙 _, ObjectProperty.homMk f)
+  dsimp at h
+  simp only [CategoryTheory.Functor.map_id, id_tensorHom] at h
+  simp only [Iso.app_inv]
+  -- the source of `h` is `Rc_! A_C ⊗ᴸ M` only up to unfolding the projection formula's functors
+  erw [← reassoc_of% h]
+  rw [← Functor.map_comp_assoc, ← Functor.map_comp_assoc, leftUnitor_inv_naturality]
+  rfl
+
+end SupportedClass
+
+section CorrespondenceClass
+
+variable {X Y C : Scheme.{u}} {aX : X ⟶ s} {aY : Y ⟶ s} [IsGeometric aX] [IsGeometric aY]
+  (c : C ⟶ pullback aY aX) [IsGeometric (c ≫ pullback.fst aY aX ≫ aY)]
+  [HasCompactification c] [HasCompactification (pullback.fst aY aX)]
+  [HasCompactification (c ≫ pullback.fst aY aX)]
+
+omit [DerivedBraiding A] [HasCompactification (pullback.fst aY aX)] in
+/-- The first projection `p₁ : Y ×_s X ⟶ Y` is a morphism of geometric schemes. -/
+lemma isGeometricHom_pullbackFst : IsGeometricHom s (pullback.fst aY aX) :=
+  .mk (aY := aY) rfl
+
+omit [DerivedBraiding A] [HasCompactification (pullback.fst aY aX)] in
+/-- The second projection `p₂ : Y ×_s X ⟶ X` is a morphism of geometric schemes. -/
+lemma isGeometricHom_pullbackSnd : IsGeometricHom s (pullback.snd aY aX) :=
+  .mk (aY := aX) pullback.condition.symm
+
+omit [DerivedBraiding A] [HasCompactification c] [HasCompactification (pullback.fst aY aX)]
+  [HasCompactification (c ≫ pullback.fst aY aX)] in
+/-- A morphism `c : C ⟶ Y ×_s X` from a geometric scheme is a morphism of geometric schemes. -/
+lemma isGeometricHom_toPullback : IsGeometricHom s c :=
+  .mk (aY := pullback.fst aY aX ≫ aY) rfl
+
+/-- The class of a correspondence (blueprint: `lem-trf-correspondence-class`): for a support
+map `c = (c₁, c₂) : C ⟶ Z = Y ×_s X` of geometric schemes with `c` and the projection
+`p₁ : Z ⟶ Y` exceptionally admissible, and `K ∈ Dᵇctf(X)`, `L ∈ Dᵇctf(Y)`, tensor-hom, the
+projection formula and exceptional adjunction give a bijection
+
+```
+  Hom(Rc_! A_C, RHom(Lp₂^* K, Rp₁^! L)) ≃ Hom(Lc^* Lp₂^* K, Rc^! Rp₁^! L)
+      ≃ Hom(L(c ≫ p₂)^* K, R(c ≫ p₁)^! L)
+```
+
+(`GeometricOperations.supportedClassHomEquiv`, then the composition isomorphisms
+`Lc^* Lp₂^* ≃ L(c ≫ p₂)^*` and `Rc^! Rp₁^! ≃ R(c ≫ p₁)^!`). It is natural in `K` and `L`
+(`correspondenceClassEquiv_naturality_left`, `correspondenceClassEquiv_naturality_right`). -/
+noncomputable def correspondenceClassEquiv
+    {K : DerivedCategory (Sheaf (Scheme.ProEt.topology X) A)} (hK : G.ctf X K)
+    {L : DerivedCategory (Sheaf (Scheme.ProEt.topology Y) A)} (hL : G.ctf Y L) :
+    SupportedClass c
+        ((ihom (((upperStar A (pullback.snd aY aX)).leftDerivedFunctor).obj K)).obj
+          ((rightDerivedUpperShriek A (pullback.fst aY aX)).obj L)) ≃
+      (((upperStar A (c ≫ pullback.snd aY aX)).leftDerivedFunctor).obj K ⟶
+        (rightDerivedUpperShriek A (c ≫ pullback.fst aY aX)).obj L) :=
+  (G.supportedClassHomEquiv c (isGeometricHom_toPullback c)
+      (G.ctf_upperStar _ isGeometricHom_pullbackSnd hK)
+      (G.ctf_upperShriek _ isGeometricHom_pullbackFst hL)).trans
+    (Iso.homCongr ((leftDerivedUpperStarComp A c (pullback.snd aY aX)).symm.app K)
+      ((DerivedCategory.constructibleFiniteTor A C).ι.mapIso
+        ((G.upperShriekComp c (pullback.fst aY aX) (isGeometricHom_toPullback c)
+          isGeometricHom_pullbackFst (.mk (aY := aY) (Category.assoc _ _ _))).symm.app
+            ⟨L, hL⟩)))
+
+lemma correspondenceClassEquiv_apply
+    {K : DerivedCategory (Sheaf (Scheme.ProEt.topology X) A)} (hK : G.ctf X K)
+    {L : DerivedCategory (Sheaf (Scheme.ProEt.topology Y) A)} (hL : G.ctf Y L)
+    (φ : SupportedClass c
+        ((ihom (((upperStar A (pullback.snd aY aX)).leftDerivedFunctor).obj K)).obj
+          ((rightDerivedUpperShriek A (pullback.fst aY aX)).obj L))) :
+    G.correspondenceClassEquiv c hK hL φ =
+      (leftDerivedUpperStarComp A c (pullback.snd aY aX)).hom.app K ≫
+        G.supportedClassHomEquiv c (isGeometricHom_toPullback c)
+          (G.ctf_upperStar _ isGeometricHom_pullbackSnd hK)
+          (G.ctf_upperShriek _ isGeometricHom_pullbackFst hL) φ ≫
+        ((G.upperShriekComp c (pullback.fst aY aX) (isGeometricHom_toPullback c)
+          isGeometricHom_pullbackFst (.mk (aY := aY) (Category.assoc _ _ _))).inv.app
+            ⟨L, hL⟩).hom := by
+  simp only [correspondenceClassEquiv, Equiv.trans_apply]
+  erw [Iso.homCongr_apply]
+  rfl
+
+/-- The class bijection `GeometricOperations.correspondenceClassEquiv` is natural in `L`
+(part of blueprint `lem-trf-correspondence-class`). -/
+lemma correspondenceClassEquiv_naturality_right
+    {K : DerivedCategory (Sheaf (Scheme.ProEt.topology X) A)} (hK : G.ctf X K)
+    {L L' : DerivedCategory (Sheaf (Scheme.ProEt.topology Y) A)} (hL : G.ctf Y L)
+    (hL' : G.ctf Y L') (g : L ⟶ L')
+    (φ : SupportedClass c
+        ((ihom (((upperStar A (pullback.snd aY aX)).leftDerivedFunctor).obj K)).obj
+          ((rightDerivedUpperShriek A (pullback.fst aY aX)).obj L))) :
+    G.correspondenceClassEquiv c hK hL'
+        (φ ≫ (ihom _).map ((rightDerivedUpperShriek A (pullback.fst aY aX)).map g)) =
+      G.correspondenceClassEquiv c hK hL φ ≫
+        (rightDerivedUpperShriek A (c ≫ pullback.fst aY aX)).map g := by
+  rw [correspondenceClassEquiv_apply, correspondenceClassEquiv_apply,
+    G.supportedClassHomEquiv_naturality_right c (isGeometricHom_toPullback c) _
+      (G.ctf_upperShriek _ isGeometricHom_pullbackFst hL)
+      (G.ctf_upperShriek _ isGeometricHom_pullbackFst hL') φ]
+  have h := congrArg (·.hom) ((G.upperShriekComp c (pullback.fst aY aX)
+    (isGeometricHom_toPullback c) isGeometricHom_pullbackFst
+      (.mk (aY := aY) (Category.assoc _ _ _))).inv.naturality
+        (X := ⟨L, hL⟩) (Y := ⟨L', hL'⟩) (ObjectProperty.homMk g))
+  dsimp at h
+  simp only [Category.assoc]
+  erw [h]
+
+/-- The class bijection `GeometricOperations.correspondenceClassEquiv` is natural in `K`
+(part of blueprint `lem-trf-correspondence-class`). -/
+lemma correspondenceClassEquiv_naturality_left
+    {K K' : DerivedCategory (Sheaf (Scheme.ProEt.topology X) A)} (hK : G.ctf X K)
+    (hK' : G.ctf X K') (f : K ⟶ K')
+    {L : DerivedCategory (Sheaf (Scheme.ProEt.topology Y) A)} (hL : G.ctf Y L)
+    (φ : SupportedClass c
+        ((ihom (((upperStar A (pullback.snd aY aX)).leftDerivedFunctor).obj K')).obj
+          ((rightDerivedUpperShriek A (pullback.fst aY aX)).obj L))) :
+    G.correspondenceClassEquiv c hK hL
+        (φ ≫ (pre (((upperStar A (pullback.snd aY aX)).leftDerivedFunctor).map f)).app _) =
+      ((upperStar A (c ≫ pullback.snd aY aX)).leftDerivedFunctor).map f ≫
+        G.correspondenceClassEquiv c hK' hL φ := by
+  rw [correspondenceClassEquiv_apply, correspondenceClassEquiv_apply,
+    G.supportedClassHomEquiv_naturality_left c (isGeometricHom_toPullback c) _
+      (G.ctf_upperStar _ isGeometricHom_pullbackSnd hK') _ _ φ,
+    Category.assoc, NatTrans.naturality_assoc]
+  rfl
+
+end CorrespondenceClass
+
+end GeometricOperations
+
+namespace Correspondence
+
+variable [DerivedBraiding A] (G : GeometricOperations A s) {X Y : Scheme.{u}}
+  {aX : X ⟶ s} {aY : Y ⟶ s} [IsGeometric aX] [IsGeometric aY]
+  {K : DerivedCategory (Sheaf (Scheme.ProEt.topology X) A)}
+  {L : DerivedCategory (Sheaf (Scheme.ProEt.topology Y) A)}
+  (c : Correspondence aX aY K L) [IsGeometric c.str]
+
+instance isGeometric_toProd_fst_comp : IsGeometric (c.toProd ≫ pullback.fst aY aX ≫ aY) :=
+  IsGeometric.of_eq (a := c.str) (by simp [c.fst_comp])
+
+instance hasCompactification_toProd_fst : HasCompactification (c.toProd ≫ pullback.fst aY aX) :=
+  .of_eq c.toProd_fst.symm
+
+variable [HasCompactification c.toProd] [HasCompactification (pullback.fst aY aX)]
+
+/-- The class bijection of a correspondence `(C, c, u)` from `(X, K)` to `(Y, L)`
+(blueprint: `lem-trf-correspondence-class`): for `K ∈ Dᵇctf(X)`, `L ∈ Dᵇctf(Y)` and the support
+map `c : C ⟶ Z = Y ×_s X` and the projection `p₁ : Z ⟶ Y` exceptionally admissible,
+
+```
+  Hom(Rc_! A_C, RHom(Lp₂^* K, Rp₁^! L)) ≃ Hom(Lc₂^* K, Rc₁^! L),
+```
+
+the bijection `GeometricOperations.correspondenceClassEquiv` read through `c ≫ p₂ = c₂` and
+`c ≫ p₁ = c₁`. -/
+noncomputable def classEquiv (hK : G.ctf X K) (hL : G.ctf Y L) :
+    SupportedClass c.toProd
+        ((ihom (((upperStar A (pullback.snd aY aX)).leftDerivedFunctor).obj K)).obj
+          ((rightDerivedUpperShriek A (pullback.fst aY aX)).obj L)) ≃
+      (((upperStar A c.snd).leftDerivedFunctor).obj K ⟶
+        (rightDerivedUpperShriek A c.fst).obj L) :=
+  (G.correspondenceClassEquiv c.toProd hK hL).trans
+    (Iso.homCongr ((leftDerivedUpperStarCongr A c.toProd_snd).app K)
+      ((rightDerivedUpperShriekCongr A c.toProd_fst).app L))
+
+/-- The class `[u] ∈ H_C^0(Z, RHom(Lp₂^* K, Rp₁^! L))` of a correspondence `(C, c, u)` from
+`(X, K)` to `(Y, L)`, a class supported on the support map `c : C ⟶ Z = Y ×_s X`: the inverse
+image of the coefficient map `u` under `Correspondence.classEquiv`. It carries the same
+information as `u` (blueprint: `lem-trf-correspondence-class`). -/
+noncomputable def rhomClass (hK : G.ctf X K) (hL : G.ctf Y L) :
+    SupportedClass c.toProd
+      ((ihom (((upperStar A (pullback.snd aY aX)).leftDerivedFunctor).obj K)).obj
+        ((rightDerivedUpperShriek A (pullback.fst aY aX)).obj L)) :=
+  (c.classEquiv G hK hL).symm c.coeff
+
+/-- The class `[u]` of a correspondence is sent to its coefficient map `u` by the class
+bijection (blueprint: `lem-trf-correspondence-class`). -/
+@[simp]
+lemma classEquiv_rhomClass (hK : G.ctf X K) (hL : G.ctf Y L) :
+    c.classEquiv G hK hL (c.rhomClass G hK hL) = c.coeff :=
+  Equiv.apply_symm_apply _ _
 
 end Correspondence
 

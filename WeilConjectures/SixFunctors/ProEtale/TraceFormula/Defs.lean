@@ -434,6 +434,43 @@ noncomputable def exceptionalHomEquiv (f : X ⟶ Y) (hf : IsGeometricHom s f)
     (((G.exceptionalAdjunction f hf).homEquiv ⟨K, hK⟩ ⟨L, hL⟩).trans
       (G.ctf X).fullyFaithfulι.homEquiv)
 
+/-- The exceptional adjunction `Hom(Rf_! K, L) ≃ Hom(K, Rf^! L)` is natural in `L`. -/
+lemma exceptionalHomEquiv_naturality_right (f : X ⟶ Y) (hf : IsGeometricHom s f)
+    [HasCompactification f]
+    {K : DerivedCategory (Sheaf (Scheme.ProEt.topology X) A)} (hK : G.ctf X K)
+    {L L' : DerivedCategory (Sheaf (Scheme.ProEt.topology Y) A)} (hL : G.ctf Y L)
+    (hL' : G.ctf Y L') (φ : (rightDerivedLowerShriek A f).obj K ⟶ L) (g : L ⟶ L') :
+    G.exceptionalHomEquiv f hf hK hL' (φ ≫ g) =
+      G.exceptionalHomEquiv f hf hK hL φ ≫ (rightDerivedUpperShriek A f).map g :=
+  congrArg (·.hom) ((G.exceptionalAdjunction f hf).homEquiv_naturality_right
+    (X := ⟨K, hK⟩) (Y := ⟨L, hL⟩) (Y' := ⟨L', hL'⟩) (ObjectProperty.homMk φ)
+    (ObjectProperty.homMk g))
+
+/-- The exceptional adjunction `Hom(Rf_! K, L) ≃ Hom(K, Rf^! L)` is natural in `K`. -/
+lemma exceptionalHomEquiv_naturality_left (f : X ⟶ Y) (hf : IsGeometricHom s f)
+    [HasCompactification f]
+    {K K' : DerivedCategory (Sheaf (Scheme.ProEt.topology X) A)} (hK : G.ctf X K)
+    (hK' : G.ctf X K')
+    {L : DerivedCategory (Sheaf (Scheme.ProEt.topology Y) A)} (hL : G.ctf Y L)
+    (g : K ⟶ K') (φ : (rightDerivedLowerShriek A f).obj K' ⟶ L) :
+    G.exceptionalHomEquiv f hf hK hL ((rightDerivedLowerShriek A f).map g ≫ φ) =
+      g ≫ G.exceptionalHomEquiv f hf hK' hL φ :=
+  congrArg (·.hom) ((G.exceptionalAdjunction f hf).homEquiv_naturality_left
+    (X' := ⟨K, hK⟩) (X := ⟨K', hK'⟩) (Y := ⟨L, hL⟩) (ObjectProperty.homMk g)
+    (ObjectProperty.homMk φ))
+
+/-- The exceptional adjunction sends the counit `Rf_! Rf^! L ⟶ L` to the identity. -/
+@[simp]
+lemma exceptionalHomEquiv_exceptionalCounit (f : X ⟶ Y) (hf : IsGeometricHom s f)
+    [HasCompactification f]
+    {L : DerivedCategory (Sheaf (Scheme.ProEt.topology Y) A)} (hL : G.ctf Y L) :
+    G.exceptionalHomEquiv f hf (G.ctf_upperShriek f hf hL) hL
+        (G.exceptionalCounit f hf L hL) = 𝟙 _ := by
+  have h : (G.exceptionalAdjunction f hf).homEquiv _ ⟨L, hL⟩
+      ((G.exceptionalAdjunction f hf).counit.app ⟨L, hL⟩) = 𝟙 _ := by
+    rw [← Adjunction.homEquiv_symm_id, Equiv.apply_symm_apply]
+  exact congrArg (·.hom) h
+
 end GeometricCoefficients
 
 /-- A braiding on the derived category `D(X, A)` of the pro-étale site of every scheme `X`.
