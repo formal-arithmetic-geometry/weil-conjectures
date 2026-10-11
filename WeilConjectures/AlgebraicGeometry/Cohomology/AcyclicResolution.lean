@@ -509,6 +509,18 @@ lemma H.cyclesZeroSuccAddEquiv_naturality (n : ℕ) (w : (K.cycles 0).H (n + 1))
   change H.cyclesOneAddEquiv K' hK' hacyc' n (H.map (HomologicalComplex.cyclesMap ψ n) 1 v) = _
   rw [← hs, H.map_cyclesδZero ψ hK hK', H.cyclesOneAddEquiv_cyclesδZero]
 
+
+include hK hacyc hK' hacyc' in
+lemma H.cyclesZeroSuccAddEquiv_naturality_symm (n : ℕ)
+    (c : Γ(K.cycles (n + 1), ⊤) ⧸ ((K.toCycles n (n + 1)).app ⊤).hom.range) :
+    (H.cyclesZeroSuccAddEquiv K' hK' hacyc' n).symm
+        (QuotientAddGroup.map _ _ ((HomologicalComplex.cyclesMap ψ (n + 1)).app ⊤).hom
+          (range_app_toCycles_le_comap ψ n) c) =
+      H.map (HomologicalComplex.cyclesMap ψ 0) (n + 1)
+        ((H.cyclesZeroSuccAddEquiv K hK hacyc n).symm c) := by
+  rw [AddEquiv.symm_apply_eq, H.cyclesZeroSuccAddEquiv_naturality ψ hK hacyc hK' hacyc',
+    AddEquiv.apply_symm_apply]
+
 end Naturality
 section NaturalitySections
 
