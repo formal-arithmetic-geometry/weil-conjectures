@@ -5484,3 +5484,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 17:59 L: merged deliver/Q1/lem-pc-noetherian-perfect-direct-image (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.NoetherianPerfectDirectImage AlgebraicGeometry.noetherian_perfect_directImage)
 - 17:59 L: merged deliver/S1/lem-sc-affine-perfect-derived-tensor-hom (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.PerfectDerivedTensorHom AlgebraicGeometry.exists_perfectDerivedTensorHomEquiv)
 - 18:00 L: merged deliver/P1/lem-pc-derived-tensor-transitivity (stage 2; reviewer PASS; first push; Sheaf.Algebra.Homology.DerivedTensorTransitivity DerivedCategory.exists_derivedTensor_transitivity)
+- 18:00 L: merged deliver/U1/lem-sc-open-restriction-support-triangle (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.OpenRestrictionSupportTriangle AlgebraicGeometry.openRestriction_support_triangle)

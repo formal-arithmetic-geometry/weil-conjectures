@@ -21,7 +21,8 @@
  "stmt_deps": [
   "def-weil-pbc-scheme-conventions",
   "def-pc-derived-category",
-  "def-pc-derived-direct-image"
+  "def-pc-derived-direct-image",
+  "def-pc-derived-open-restriction-maps"
  ],
  "proof": [
   {
@@ -166,5 +167,22 @@
    "decls": [],
    "missing": []
   }
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.OpenRestrictionSupportTriangle",
+  "declaration": "AlgebraicGeometry.openRestriction_support_triangle",
+  "file": "lean/Sheaf/AlgebraicGeometry/OpenRestrictionSupportTriangle.lean",
+  "statement": "theorem openRestriction_support_triangle (Y : Scheme.{u}) [CompactSpace Y] [QuasiSeparatedSpace Y] (V : Y.Opens) (hV : IsCompact (V : Set Y)) [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))] [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings V.toScheme.toRingedSpace))] (K : schemeDerivedCategory Y) (hK : schemeDerivedQCohProperty Y K) : ∃ (adj : (schemeOpenRestriction Y V).mapDerivedCategory ⊣ schemeDerivedDirectImage V.ι) (Q : schemeDerivedCategory Y) (β : (schemeDerivedDirectImage V.ι).obj ((schemeOpenRestriction Y V).mapDerivedCategory.obj K) ⟶ Q) (δ : Q ⟶ K⟦(1 : ℤ)⟧), Triangle.mk (adj.unit.app K) β δ ∈ distTriang (schemeDerivedCategory Y) ∧ schemeDerivedQCohProperty Y ((schemeDerivedDirectImage V.ι).obj ((schemeOpenRestriction Y V).mapDerivedCategory.obj K)) ∧ schemeDerivedQCohProperty Y Q ∧ (∀ (n : ℤ) (x : Y), x ∈ V → Subsingleton (↑(TopCat.Presheaf.stalk ((DerivedCategory.homologyFunctor (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) n).obj Q).val.presheaf x))) ∧ ((∃ a : ℤ, K.IsGE a) → ∃ b : ℤ, Q.IsGE b)",
+  "branch": "sheaf-dag",
+  "by": "U1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-ors",
+  "group": "U1",
+  "result": "pass"
  }
 }
