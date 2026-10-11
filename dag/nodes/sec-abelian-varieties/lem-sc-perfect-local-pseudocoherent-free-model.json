@@ -13,18 +13,69 @@
  },
  "kind": "statement",
  "title": "Minimal free model over a local ring",
- "statement": "Let $(R,\\mathfrak m,\\kappa)$ be a local ring and let $K\\in D(R)$ [def-pc-derived-category] be pseudo-coherent [def-pur-pseudo-coherent-complex]. Put $d_i=\\dim_\\kappa H^i(K\\otimes_R^{\\mathbf L}\\kappa)$. If the $d_i$ are finite and vanish for all sufficiently large $i$, then $K$ is represented by a bounded-above complex of finite free $R$-modules whose term in degree $i$ is $R^{\\oplus d_i}$.",
+ "statement": "Let $(R,\\mathfrak m,\\kappa)$ be a local ring and let $K\\in D(R)$ [def-pc-derived-category] be pseudo-coherent, that is, isomorphic in $D(R)$ to a bounded-above complex of finite free $R$-modules. Put $d_i=\\dim_\\kappa H^i(K\\otimes_R^{\\mathbf L}\\kappa)$. If the $d_i$ are finite and vanish for all sufficiently large $i$, then $K$ is represented by a bounded-above complex of finite free $R$-modules whose term in degree $i$ is $R^{\\oplus d_i}$. Such a complex is unique up to isomorphism of complexes.",
  "source": {
   "document": "literature/stacks-project/more-algebra.tex",
   "place": "More on Algebra, Lemma 15.75.7, Tag 0BCC (lemma-lift-pseudo-coherent-from-residue-field)"
  },
  "stmt_deps": [
-  "def-pc-derived-category",
-  "def-pur-pseudo-coherent-complex"
+  "def-pc-derived-category"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Choose an integer $b$ with $d_i=0$ for $i>b$. Every complex of $\\kappa$-vector spaces is quasi-isomorphic to the complex of its cohomology spaces with zero differential (choose complements of the boundaries in the cycles and of the cycles in the terms). Hence $K\\otimes_R^{\\mathbf L}\\kappa$ is represented in $D(\\kappa)$ by the complex $E^\\bullet$ with $E^i=\\kappa^{\\oplus d_i}$ and zero differentials; its terms are finite free because the $d_i$ are finite, and it is bounded above because $E^i=0$ for $i>b$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "More on Algebra, Lemma 15.75.7, proof: splitting complexes over a field"
+   }
+  },
+  {
+   "text": "Apply [lem-sc-pseudo-coherent-lift-stably-free-complex] with $I=\\mathfrak m$: every element of $1+\\mathfrak m$ is a unit of the local ring $R$, $K$ is pseudo-coherent, and $E^\\bullet$ is a bounded-above complex of finite free (in particular finite stably free) $\\kappa$-modules representing $K\\otimes_R^{\\mathbf L}\\kappa$. It gives a bounded-above complex $P^\\bullet$ of finite free $R$-modules representing $K$ in $D(R)$ with an isomorphism of complexes $P^\\bullet\\otimes_R\\kappa\\cong E^\\bullet$.",
+   "uses": [
+    "lem-sc-pseudo-coherent-lift-stably-free-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "More on Algebra, Lemma 15.75.7, proof: apply Lemma 15.75.6 (Tag 0BCB)"
+   }
+  },
+  {
+   "text": "For each $i$, $P^i\\otimes_R\\kappa\\cong E^i=\\kappa^{\\oplus d_i}$, and a finite free module $R^{\\oplus n}$ over the local ring $R$ has $R^{\\oplus n}\\otimes_R\\kappa=\\kappa^{\\oplus n}$, so $n=d_i$ and $P^i\\cong R^{\\oplus d_i}$. Transporting the differentials along these isomorphisms gives the complex of the statement; it is bounded above since $P^i=0$ for $i>b$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "More on Algebra, Lemma 15.75.7, displayed conclusion"
+   }
+  },
+  {
+   "text": "For uniqueness, let $F^\\bullet$ and $G^\\bullet$ be bounded-above complexes of finite free $R$-modules with $F^i\\cong G^i\\cong R^{\\oplus d_i}$, both isomorphic to $K$ in $D(R)$, and let $\\varphi:F^\\bullet\\to G^\\bullet$ be the resulting isomorphism in $D(R)$. Both are bounded-above complexes of projective $R$-modules, so by [lem-pc-ring-derived-map-representative] (in the abelian category of $R$-modules) $\\varphi$ and $\\varphi^{-1}$ are represented by chain maps $\\beta:F^\\bullet\\to G^\\bullet$ and $\\alpha:G^\\bullet\\to F^\\bullet$, and since $\\alpha\\beta$ and $\\beta\\alpha$ represent the identities, the injectivity in the same lemma makes them chain homotopic to the identities. Thus $\\beta$ is a homotopy equivalence, and so is $\\beta\\otimes_R\\kappa:F^\\bullet\\otimes_R\\kappa\\to G^\\bullet\\otimes_R\\kappa$; in particular it is a quasi-isomorphism. By [lem-pc-module-bounded-flat-kflat] $F^\\bullet$ and $G^\\bullet$ are K-flat, so $F^\\bullet\\otimes_R\\kappa$ and $G^\\bullet\\otimes_R\\kappa$ represent $K\\otimes_R^{\\mathbf L}\\kappa$ and $\\dim_\\kappa H^i(F^\\bullet\\otimes_R\\kappa)=d_i=\\dim_\\kappa(F^i\\otimes_R\\kappa)$ for all $i$, likewise for $G^\\bullet$. For a complex $C^\\bullet$ of finite-dimensional spaces, $\\dim H^i(C^\\bullet)=\\dim C^i-\\operatorname{rk}d^i-\\operatorname{rk}d^{i-1}$, so both reduced complexes have zero differentials and $\\beta^i\\otimes 1=H^i(\\beta\\otimes_R\\kappa)$ is an isomorphism for every $i$. By Nakayama's lemma [lem-weil-pbc-nakayama-local-generators] (the image of $\\beta^i$ maps onto $G^i/\\mathfrak mG^i$), $\\beta^i:F^i\\to G^i$ is surjective; as $G^i$ is free it splits, $F^i\\cong G^i\\oplus N$ with $N=\\ker\\beta^i$ finitely generated, and comparing dimensions over $\\kappa$ gives $N/\\mathfrak mN=0$, so $N=0$ by the same lemma (applied to the submodule $0\\subseteq N$). Hence every $\\beta^i$ is an isomorphism and $\\beta$ is an isomorphism of complexes.",
+   "uses": [
+    "lem-pc-ring-derived-map-representative",
+    "lem-pc-module-bounded-flat-kflat",
+    "lem-weil-pbc-nakayama-local-generators"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "More on Algebra, Lemma 15.75.7, proof: uniqueness of the minimal complex"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-pseudo-coherent-lift-stably-free-complex",
+  "lem-pc-ring-derived-map-representative",
+  "lem-pc-module-bounded-flat-kflat",
+  "lem-weil-pbc-nakayama-local-generators"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "More on Algebra, Lemma 15.75.7, Tag 0BCC"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -49,12 +100,32 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sc-perfect-finite-free-residue-model",
   "by": "worker",
   "date": "2026-10-11"
  },
  "chapter": "sec-abelian-varieties",
- "unit": "sk-prop-av-cube"
+ "unit": "sk-prop-av-cube",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-sc-perfect-local-pseudocoherent-free-model",
+  "worker": "stage1",
+  "summary": "Checked the item against Stacks Tag 0BCC and found no matching Lean declaration or duplicate DAG node. Added the general Tag 0BCB stably-free complex lifting lemma, then split the proof into residue-field pseudo-coherence and finite-dimensionality, splitting over a field, application of the lift, and identification of the free ranks.",
+  "blueprint": "Realizes the ancestor thm-sc-theorem-of-cube proof clause about constructing locally free models via lem-sc-perfect-h0-locally-closed.",
+  "tool_uses": []
+ },
+ "tool_uses": [
+  "lem-pc-ring-derived-map-representative",
+  "lem-pc-module-bounded-flat-kflat"
+ ],
+ "reviewed": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-lpf0132",
+  "group": "E1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-lpf0132 (reviewer sub-agent of L); spot-checked: Read Tag 0BCC/0BCB and the citer 2edf1260d (uses existence for a bounded finite-free P_p, compatible). FIX more, RETURN less: (1) class (b): new lem-sc-perfect-derived-morphism-chain-map duplicates existing leaf lem-pc-ring-derived-map-representative (Qh_map_bijective, missed by the second reading); cited it, dropped the new node. (2) C4/B3: def-pur-pseudo-coherent-complex is for schemes; inlined the ring wording (bounded-above finite free model, as in lem-pc-ring-pseudo-coherent-iff-all-m) in the item and in lem-sc-pseudo-coherent-lift-stably-free-complex, inlined 'finite stably free'. (3) C1 Step 4: beta tensor kappa quasi-iso and zero reduced differentials were unjustified; now homotopy equivalence via the representative lemma, K-flatness via lem-pc-module-bounded-flat-kflat, rank count, and Nakayama for surjectivity plus kernel (injectivity). (4) B4: plain-text statements/steps rewritten in TeX. d_i finite and eventual vanishing are hypotheses here though they follow from pseudo-coherence (Stacks); used in Step 1; uniqueness clause added with reason (E7).; 2 file(s) fixed by the reviewer"
+ }
 }
