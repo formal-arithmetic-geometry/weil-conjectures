@@ -112,6 +112,22 @@ def HasProjectionFormula (f : X ⟶ Y) [HasCompactification f]
 variable {FA : A → A → Type (u + 1)} {CA : A → Type (u + 1)}
   [∀ X Y, FunLike (FA X Y) (CA X) (CA Y)] [ConcreteCategory.{u + 1} A FA]
 
+/-- **Reduction of the pro-étale projection formula to the proper part.** For a
+compactification `f = g ∘ i` of `f` (`i` an open immersion, `g` proper), the projection map
+`PF : Rf_! K ⊗ᴸ L ⟶ Rf_!(K ⊗ᴸ Lf^* L)` is the projection map of `Rg_*` at `(i_! K, L)` followed by
+isomorphisms (the projection formula for the open immersion `i` and `Lg^* ⋙ Li^* ≅ Lf^*`), so
+it is an isomorphism as soon as the projection map of `Rg_*` is. -/
+theorem hasProjectionFormula_of_isIso_rightDerivedLowerStarProjectionMap (f : X ⟶ Y)
+    [HasCompactification f] (K : _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology X) A))
+    (L : _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology Y) A))
+    (h : IsIso (((rightDerivedLowerStarProjectionMap A
+      (HasCompactification.compactification f).g).app
+        (D(((HasCompactification.compactification f).i)_!open[A]).obj K)).app L)) :
+    HasProjectionFormula A f K L := by
+  change IsIso (((projectionMapOfCompactification A _).app K).app L)
+  rw [projectionMapOfCompactification_app_app]
+  infer_instance
+
 /-- Blueprint `sk-thm-sf-pf-proetale`: Projection formula: the pro-étale realization.
 
 Let `A` be killed by an integer `N ≠ 0`. For a morphism `f : X ⟶ Y` admitting a
