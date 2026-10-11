@@ -1,62 +1,163 @@
 {
- "id": "lem-pc-kflat-tensor-quasi-iso",
- "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-semicon",
- "blueprint": {
-  "is": null,
-  "from": {
-   "node": "lem-pc-rf-perfect-base-change",
-   "place": "proof of Tag 0DJ8: lemma-derived-tor-quasi-isomorphism-other-side used for clause (1)",
-   "via": [
-    "lem-pc-derived-tensor-second-factor-functor"
-   ]
+  "id": "lem-pc-kflat-tensor-quasi-iso",
+  "chapter": "sec-picard-framework",
+  "unit": "sk-thm-picard-semicon",
+  "blueprint": {
+    "is": null,
+    "from": {
+      "node": "lem-pc-rf-perfect-base-change",
+      "place": "proof of Tag 0DJ8: lemma-derived-tor-quasi-isomorphism-other-side used for clause (1)",
+      "via": [
+        "lem-pc-derived-tensor-second-factor-functor"
+      ]
+    },
+    "same_as": []
   },
-  "same_as": []
- },
- "kind": "statement",
- "title": "Tensoring a K-flat quasi-isomorphism with an arbitrary complex",
- "statement": "Let $R$ be a commutative ring, regarded as a sheaf of rings on the one-point site, let $N^\\bullet$ be a cochain complex of $R$-modules [def-pc-cochain-complex-modules], and let $\\alpha:E^\\bullet\\to E'^\\bullet$ be a quasi-isomorphism [def-pc-quasi-iso-modules] between K-flat complexes of $R$-modules [def-pc-kflat-complex]. Then the induced map of total complexes $\\operatorname{Tot}(\\alpha\\otimes 1_N):\\operatorname{Tot}(E^\\bullet\\otimes_R N^\\bullet)\\to\\operatorname{Tot}(E'^\\bullet\\otimes_R N^\\bullet)$ [def-pc-tensor-complex-sheaves] is a quasi-isomorphism.",
- "source": {
-  "document": "literature/stacks-project/more-algebra.tex",
-  "place": "Lemma 15.60.12, Tag 064L (lemma-derived-tor-quasi-isomorphism-other-side)"
- },
- "stmt_deps": [
-  "def-pc-cochain-complex-modules",
-  "def-pc-quasi-iso-modules",
-  "def-pc-kflat-complex",
-  "def-pc-tensor-complex-sheaves"
- ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
- "mathlib_searches": [
-  {
-   "tool": "leanfinder",
-   "query": "a quasi-isomorphism between K-flat complexes remains a quasi-isomorphism after tensoring with any complex",
-   "results": "generic quasi-isomorphism declarations; no K-flat tensor theorem",
-   "date": "2026-10-11",
-   "verdict": "no match"
+  "kind": "statement",
+  "title": "Tensoring a K-flat quasi-isomorphism with an arbitrary complex",
+  "statement": "Let $R$ be a commutative ring, regarded as a sheaf of rings on the one-point site, let $N^\\bullet$ be a cochain complex of $R$-modules [def-pc-cochain-complex-modules], and let $\\alpha:E^\\bullet\\to E'^\\bullet$ be a quasi-isomorphism [def-pc-quasi-iso-modules] between K-flat complexes of $R$-modules [def-pc-kflat-complex]. Then the induced map of total complexes $\\operatorname{Tot}(\\alpha\\otimes 1_N):\\operatorname{Tot}(E^\\bullet\\otimes_R N^\\bullet)\\to\\operatorname{Tot}(E'^\\bullet\\otimes_R N^\\bullet)$ [def-pc-tensor-complex-sheaves] is a quasi-isomorphism.",
+  "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Lemma 15.60.12, Tag 064L (lemma-derived-tor-quasi-isomorphism-other-side)"
   },
-  {
-   "tool": "loogle",
-   "query": "quasiIso tensor KFlat",
-   "results": "0 hits; unknown identifier quasiIso",
-   "date": "2026-10-11",
-   "verdict": "no match"
+  "stmt_deps": [
+    "def-pc-cochain-complex-modules",
+    "def-pc-quasi-iso-modules",
+    "def-pc-kflat-complex",
+    "def-pc-tensor-complex-sheaves"
+  ],
+  "proof": [
+    {
+      "text": "Throughout, $R$ is regarded as a sheaf of rings on the one-point site, whose sheaves of modules are the $R$-modules; so [def-pc-kflat-complex], [def-pc-quasi-iso-modules], [def-pc-tensor-complex-sheaves] and the cited lemmas about complexes of $\\mathcal O$-modules apply to complexes of $R$-modules. (Symmetry.) For complexes $F^\\bullet,G^\\bullet$ of $R$-modules let $\\sigma_{F,G}:\\operatorname{Tot}(F^\\bullet\\otimes_R G^\\bullet)\\to\\operatorname{Tot}(G^\\bullet\\otimes_R F^\\bullet)$ be $x\\otimes y\\mapsto(-1)^{pq}y\\otimes x$ on $F^p\\otimes_R G^q$. It is a chain map: for $x\\in F^p$, $y\\in G^q$, $d(x\\otimes y)=d_Fx\\otimes y+(-1)^p x\\otimes d_Gy$ is sent to $(-1)^{(p+1)q}y\\otimes d_Fx+(-1)^{p+p(q+1)}d_Gy\\otimes x$, while $d((-1)^{pq}y\\otimes x)=(-1)^{pq}d_Gy\\otimes x+(-1)^{pq+q}y\\otimes d_Fx$, and the two agree since $(-1)^{p+p(q+1)}=(-1)^{pq}$. It is an isomorphism with inverse $\\sigma_{G,F}$, and it is natural in both variables: $\\sigma_{F',G'}\\circ\\operatorname{Tot}(f\\otimes g)=\\operatorname{Tot}(g\\otimes f)\\circ\\sigma_{F,G}$ for chain maps $f:F\\to F'$, $g:G\\to G'$ (the sign depends only on the degrees, which $f,g$ preserve). Consequently, for a chain map $f$ and a complex $G$, $\\operatorname{Tot}(f\\otimes 1_G)$ is a quasi-isomorphism if and only if $\\operatorname{Tot}(1_G\\otimes f)$ is (they are conjugate by the isomorphisms $\\sigma$), and $\\operatorname{Tot}(F\\otimes G)$ is acyclic if and only if $\\operatorname{Tot}(G\\otimes F)$ is. (Mathlib's form of this symmetry is HomologicalComplex.mapBifunctorFlipIso with its naturality mapBifunctorFlipIso_hom_naturality, Mathlib/Algebra/Homology/BifunctorFlip.lean.)",
+      "uses": [
+        "def-pc-tensor-complex-sheaves",
+        "def-pc-quasi-iso-modules",
+        "def-pc-acyclic-complex-modules"
+      ],
+      "elementary": true,
+      "source": {
+        "document": "literature/stacks-project/more-algebra.tex",
+        "place": "Tag 0FNI (lemma-symmetric-monoidal-cat-complexes), the commutativity constraint and its verification in the paragraph before it"
+      }
+    },
+    {
+      "text": "(Tag 06Y0, lemma-K-flat-quasi-isomorphism, in both variables.) Let $K^\\bullet$ be a K-flat complex of $R$-modules and $s:L^\\bullet\\to L'^\\bullet$ a quasi-isomorphism of complexes of $R$-modules. Then $\\operatorname{Tot}(1_K\\otimes s)$ and $\\operatorname{Tot}(s\\otimes 1_K)$ are quasi-isomorphisms. Indeed, the mapping cone $C(s)$ is acyclic because $s$ is a quasi-isomorphism [lem-pur-quasi-iso-cone-acyclic]; hence $\\operatorname{Tot}(C(s)\\otimes_R K)$ is acyclic by the definition of K-flatness of $K$ [def-pc-kflat-complex], and so is $\\operatorname{Tot}(K\\otimes_R C(s))$ by step 1. By [lem-pc-tensor-mapping-cone-iso] (with $\\mathcal A^\\bullet=K^\\bullet$ and the morphism $s:L\\to L'$), $\\operatorname{Tot}(K\\otimes_R C(s))$ is isomorphic as a complex to the mapping cone of $\\operatorname{Tot}(1_K\\otimes s):\\operatorname{Tot}(K\\otimes_R L)\\to\\operatorname{Tot}(K\\otimes_R L')$, which is therefore acyclic, so $\\operatorname{Tot}(1_K\\otimes s)$ is a quasi-isomorphism [lem-pur-quasi-iso-cone-acyclic]. By step 1, $\\operatorname{Tot}(s\\otimes 1_K)$ is a quasi-isomorphism as well.",
+      "uses": [
+        "lem-pur-quasi-iso-cone-acyclic",
+        "def-pc-kflat-complex",
+        "lem-pc-tensor-mapping-cone-iso"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/more-algebra.tex",
+        "place": "Tag 06Y0 (lemma-K-flat-quasi-isomorphism) and its proof: Tag 064J (lemma-derived-tor-exact) and quasi-isomorphisms have acyclic cones"
+      }
+    },
+    {
+      "text": "Choose a K-flat resolution of $N^\\bullet$: a K-flat complex $K^\\bullet$ of $R$-modules and a quasi-isomorphism $s:K^\\bullet\\to N^\\bullet$ [lem-pc-kflat-resolution] (on the one-point site).",
+      "uses": [
+        "lem-pc-kflat-resolution"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/more-algebra.tex",
+        "place": "Tag 064L, proof, first sentence (citing Tag 06Y4, lemma-K-flat-resolution)"
+      }
+    },
+    {
+      "text": "The square $$\\begin{array}{ccc}\\operatorname{Tot}(E\\otimes_R K)&\\xrightarrow{\\operatorname{Tot}(\\alpha\\otimes 1_K)}&\\operatorname{Tot}(E'\\otimes_R K)\\\\ \\downarrow{\\scriptstyle\\operatorname{Tot}(1_E\\otimes s)}&&\\downarrow{\\scriptstyle\\operatorname{Tot}(1_{E'}\\otimes s)}\\\\ \\operatorname{Tot}(E\\otimes_R N)&\\xrightarrow{\\operatorname{Tot}(\\alpha\\otimes 1_N)}&\\operatorname{Tot}(E'\\otimes_R N)\\end{array}$$ commutes, both composites being $\\operatorname{Tot}(\\alpha\\otimes s)$, since on each summand $E^p\\otimes K^q$ both are $\\alpha^p\\otimes s^q$ (functoriality of the total tensor complex in both variables [def-pc-tensor-complex-sheaves]).",
+      "uses": [
+        "def-pc-tensor-complex-sheaves"
+      ],
+      "elementary": true,
+      "source": {
+        "document": "literature/stacks-project/more-algebra.tex",
+        "place": "Tag 064L, proof, the commutative diagram"
+      }
+    },
+    {
+      "text": "In the square of step 4 the vertical arrows are quasi-isomorphisms by step 2 applied to the K-flat complex $E$ (resp. $E'$) and the quasi-isomorphism $s$ (the form $\\operatorname{Tot}(1_E\\otimes s)$), and the top arrow is a quasi-isomorphism by step 2 applied to the K-flat complex $K$ and the quasi-isomorphism $\\alpha$ (the form $\\operatorname{Tot}(\\alpha\\otimes 1_K)$). Taking cohomology in degree $i$, $H^i(\\operatorname{Tot}(\\alpha\\otimes 1_N))\\circ H^i(\\operatorname{Tot}(1_E\\otimes s))=H^i(\\operatorname{Tot}(1_{E'}\\otimes s))\\circ H^i(\\operatorname{Tot}(\\alpha\\otimes 1_K))$ with the three maps other than the first isomorphisms, so $H^i(\\operatorname{Tot}(\\alpha\\otimes 1_N))$ is an isomorphism for every $i$, i.e. $\\operatorname{Tot}(\\alpha\\otimes 1_N)$ is a quasi-isomorphism [def-pc-quasi-iso-modules]. (Stacks states the lemma with $\\alpha$ in the second factor, $\\operatorname{Tot}(1_L\\otimes\\alpha)$; the item's form with $\\alpha$ in the first factor is the same argument, and either form follows from the other by step 1.)",
+      "uses": [
+        "def-pc-quasi-iso-modules"
+      ],
+      "elementary": true,
+      "source": {
+        "document": "literature/stacks-project/more-algebra.tex",
+        "place": "Tag 064L, proof, last sentence"
+      }
+    }
+  ],
+  "proof_deps": [
+    "def-pc-tensor-complex-sheaves",
+    "def-pc-quasi-iso-modules",
+    "def-pc-acyclic-complex-modules",
+    "lem-pur-quasi-iso-cone-acyclic",
+    "def-pc-kflat-complex",
+    "lem-pc-tensor-mapping-cone-iso",
+    "lem-pc-kflat-resolution"
+  ],
+  "proof_origin": {
+    "by": "document",
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Lemma 15.60.12, Tag 064L (lemma-derived-tor-quasi-isomorphism-other-side) and Tag 06Y0 (lemma-K-flat-quasi-isomorphism), with the commutativity constraint of Tag 0FNI"
   },
-  {
-   "tool": "grep",
-   "query": "quasiIso.*tensor|KFlat in Mathlib/Algebra/Homology",
-   "results": "0 matches",
-   "date": "2026-10-11",
-   "verdict": "no match"
-  }
- ],
- "mathlib_match": null,
- "status": "unsplit",
- "created": {
-  "item": "lem-pc-derived-tensor-second-factor-functor",
-  "by": "worker",
-  "date": "2026-10-11"
- }
+  "mathlib_searches": [
+    {
+      "tool": "leanfinder",
+      "query": "a quasi-isomorphism between K-flat complexes remains a quasi-isomorphism after tensoring with any complex",
+      "results": "generic quasi-isomorphism declarations; no K-flat tensor theorem",
+      "date": "2026-10-11",
+      "verdict": "no match"
+    },
+    {
+      "tool": "loogle",
+      "query": "quasiIso tensor KFlat",
+      "results": "0 hits; unknown identifier quasiIso",
+      "date": "2026-10-11",
+      "verdict": "no match"
+    },
+    {
+      "tool": "grep",
+      "query": "quasiIso.*tensor|KFlat in Mathlib/Algebra/Homology",
+      "results": "0 matches",
+      "date": "2026-10-11",
+      "verdict": "no match"
+    },
+    {
+      "tool": "leansearch",
+      "query": "tensor product of cochain complexes with a K-flat complex preserves quasi-isomorphisms",
+      "results": "HTTP 500 Internal Server Error",
+      "date": "2026-10-11",
+      "verdict": "unavailable"
+    },
+    {
+      "tool": "loogle",
+      "query": "HomologicalComplex.mapBifunctorFlipIso",
+      "results": "HomologicalComplex.mapBifunctorFlipIso, mapBifunctorFlipIso_flip, mapBifunctorFlipIso_hom_naturality (Mathlib.Algebra.Homology.BifunctorFlip): the symmetry of total complexes used in step 1, not the item",
+      "date": "2026-10-11",
+      "verdict": "no match (tool for step 1 only)"
+    },
+    {
+      "tool": "grep",
+      "query": "grep -rli 'kflat\\|K-flat' in ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib",
+      "results": "none",
+      "date": "2026-10-11",
+      "verdict": "no match"
+    }
+  ],
+  "mathlib_match": null,
+  "status": "split",
+  "created": {
+    "item": "lem-pc-derived-tensor-second-factor-functor",
+    "by": "worker",
+    "date": "2026-10-11"
+  },
+  "split_report": {
+    "date": "2026-10-11",
+    "item": "lem-pc-kflat-tensor-quasi-iso",
+    "worker": "stage1",
+    "summary": "Split following Stacks Tag 064L exactly: K-flat resolution K -> N (06Y4, lem-pc-kflat-resolution), the commutative square of total complexes, and Tag 06Y0 (K-flat K makes Tot(- (x) K) and Tot(K (x) -) preserve quasi-isomorphisms) for the three other arrows. 06Y0, whose Stacks proof is one line, is written as step 2 from the definition of K-flat, the cone criterion for quasi-isomorphisms (Mathlib leaf lem-pur-quasi-iso-cone-acyclic) and the cone identification lem-pc-tensor-mapping-cone-iso; since that node and the definition of K-flat put the K-flat factor on different sides, the sign symmetry (-1)^{pq} of Tag 0FNI is written out as elementary step 1. Statement unchanged (Stacks has alpha in the second factor; the item has it in the first; same argument). No new node. Related slopmaster2 Lean: MorphismProperty.whiskerRight_of_kFlat (WeilConjectures/FromJoel/CategoryTheory/Monoidal/KFlat.lean:97) is the abstract monoidal form with K-flat defined as 'tensoring on both sides preserves W' and a HasLeftResolutions hypothesis; not the node's statement, not attached.",
+    "blueprint": "Realizes the place of lem-pc-rf-perfect-base-change's proof named in from.place (proof of Tag 0DJ8: Tag 064L used for clause (1)); steps 3-5 are the proof of 064L, steps 1-2 its cited Tag 06Y0 with the symmetry 0FNI."
+  },
+  "tool_uses": []
 }
