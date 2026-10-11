@@ -23,6 +23,12 @@ dualizability; see `WeilConjectures.SixFunctors.Etale.Derived.Perfect` for the c
   `K ⊗ᴸ K^∨ ⟶ Λ_X`.
 - `AlgebraicGeometry.Etale.DerivedCategory.coefficientDualIsoOfExactPairing`: `K^∨ ≅ L` for a
   left dual `L` of `K`.
+- `AlgebraicGeometry.Etale.DerivedCategory.derivedHomTensorMap`: the canonical map
+  `RHom(K, M) ⊗ᴸ T ⟶ RHom(K, M ⊗ᴸ T)`.
+- `AlgebraicGeometry.Etale.DerivedCategory.derivedHomTensorIso`:
+  `RHom(K, M ⊗ᴸ T) ≅ RHom(K, M) ⊗ᴸ T` for an invertible `T`.
+- `AlgebraicGeometry.Etale.DerivedCategory.derivedHomIsoCoefficientDualTensor`:
+  `RHom(K, T) ≅ K^∨ ⊗ᴸ T` for an invertible `T`.
 
 ## Main statements
 
@@ -32,6 +38,8 @@ dualizability; see `WeilConjectures.SixFunctors.Etale.Derived.Perfect` for the c
   (`sk-prop-sf-dualizable-biduality`)
 - `AlgebraicGeometry.Etale.DerivedCategory.nonempty_iso_coefficientDual_tensor`
   (`sk-prop-sf-dualizable-biduality`, `prop-sf-dualizable-hom`)
+- `AlgebraicGeometry.Etale.DerivedCategory.isIso_derivedHomTensorMap`
+  (`sk-lem-sf-twist-interchange`)
 - `AlgebraicGeometry.Etale.DerivedCategory.nonempty_iso_derivedHom_tensor`
   (`sk-lem-sf-twist-interchange`)
 -/
@@ -143,6 +151,60 @@ theorem nonempty_iso_derivedHom_tensor
   obtain ⟨e₁⟩ := nonempty_iso_coefficientDual_tensor hK (M ⊗ T)
   obtain ⟨e₂⟩ := nonempty_iso_coefficientDual_tensor hK M
   exact ⟨e₁.symm ≪≫ (α_ _ _ _).symm ≪≫ whiskerRightIso e₂ T⟩
+
+/-- The canonical map `RHom(K, M) ⊗ᴸ T ⟶ RHom(K, M ⊗ᴸ T)`: the transpose of
+`K ⊗ᴸ (RHom(K, M) ⊗ᴸ T) ≅ (K ⊗ᴸ RHom(K, M)) ⊗ᴸ T ⟶ M ⊗ᴸ T`, built from the evaluation
+(`CategoryTheory.MonoidalClosed.ihomTensorToIhom`).
+
+It is written with `AlgebraicGeometry.Etale.derivedTensor`, so that it can be used at
+`A = ModuleCat Λ` without the kernel comparing two monoidal instances (see the implementation
+notes of `WeilConjectures.SixFunctors.Etale.Derived.TensorStructure`). -/
+noncomputable def derivedHomTensorMap
+    (K M T : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)) :
+    ((derivedTensor A X).obj ((RHom(X)[A].obj (op K)).obj M)).obj T ⟶
+      (RHom(X)[A].obj (op K)).obj (((derivedTensor A X).obj M).obj T) :=
+  MonoidalClosed.ihomTensorToIhom K M T
+
+/-- Blueprint `sk-lem-sf-twist-interchange`: Internal Hom with an invertible twist.
+
+For an invertible twist `T` and all `K`, `M`, the canonical map
+`RHom(K, M) ⊗ᴸ T ⟶ RHom(K, M ⊗ᴸ T)`, the transpose of `ev ⊗ 1_T`, is an isomorphism. The map
+`RHom(K, M ⊗ᴸ T) ⟶ RHom(K, M) ⊗ᴸ T` of the blueprint is its inverse,
+`AlgebraicGeometry.Etale.DerivedCategory.derivedHomTensorIso`. No hypothesis on `K` is
+needed. -/
+theorem isIso_derivedHomTensorMap
+    (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A))
+    {T : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)} (hT : IsInvertible T)
+    (M : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)) :
+    IsIso (derivedHomTensorMap K M T) :=
+  MonoidalClosed.isIso_ihomTensorToIhom K M hT
+
+/-- Blueprint `sk-lem-sf-twist-interchange`: Internal Hom with an invertible twist.
+
+The canonical isomorphism `RHom(K, M ⊗ᴸ T) ≅ RHom(K, M) ⊗ᴸ T` for an invertible `T`: the
+inverse of the canonical map `RHom(K, M) ⊗ᴸ T ⟶ RHom(K, M ⊗ᴸ T)`
+(`AlgebraicGeometry.Etale.DerivedCategory.isIso_derivedHomTensorMap`). -/
+noncomputable def derivedHomTensorIso
+    (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A))
+    {T : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)} (hT : IsInvertible T)
+    (M : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)) :
+    (RHom(X)[A].obj (op K)).obj (((derivedTensor A X).obj M).obj T) ≅
+      ((derivedTensor A X).obj ((RHom(X)[A].obj (op K)).obj M)).obj T :=
+  haveI := isIso_derivedHomTensorMap K hT M
+  (asIso (derivedHomTensorMap K M T)).symm
+
+/-- Blueprint `sk-lem-sf-twist-interchange`: Internal Hom with an invertible twist.
+
+The case `M = Λ_X` of the interchange: for an invertible `T` (in the `ℓ`-adic formalism
+`Λ_X(m)[n]`), `RHom(K, T) ≅ K^∨ ⊗ᴸ T`. -/
+noncomputable def derivedHomIsoCoefficientDualTensor
+    (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A))
+    {T : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)} (hT : IsInvertible T) :
+    (RHom(X)[A].obj (op K)).obj T ≅
+      ((derivedTensor A X).obj ((coefficientDual A X).obj (op K))).obj T :=
+  (RHom(X)[A].obj (op K)).mapIso
+      ((λ_ T).symm : T ≅ ((derivedTensor A X).obj (𝟙_ _)).obj T) ≪≫
+    derivedHomTensorIso K hT (𝟙_ _)
 
 /-- The derived hom out of a dualizable complex is tensoring with its coefficient dual,
 `RHom(K, M) ≅ K^∨ ⊗ᴸ M`, written with `AlgebraicGeometry.Etale.derivedTensor`
