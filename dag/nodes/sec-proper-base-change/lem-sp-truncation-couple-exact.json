@@ -188,5 +188,24 @@
   "by": "L",
   "result": "pass",
   "note": "the off-by-one of the imported proof corrected (ker α = im f comes from the sequence of T_{q+1}); lem-sp-kinjective-computes and lem-sp-grothendieck-enough-injectives (sk-prop-av-pqf-finite) accepted as tool uses; lem-sf-derived-homology-long-exact is a Mathlib leaf"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.TruncationCoupleExact",
+  "declaration": "CategoryTheory.truncationCouple_exact",
+  "file": "lean/Sheaf/CategoryTheory/TruncationCoupleExact.lean",
+  "statement": "theorem truncationCouple_exact {A : Type u₁} [Category.{v₁} A] [Abelian A] [IsGrothendieckAbelian.{v₁} A] {B : Type u₂} [Category.{v₂} B] [Abelian B] [IsGrothendieckAbelian.{v₂} B] (F : A ⥤ B) [F.Additive] [PreservesFiniteLimits F] (K : CochainComplex.Plus A) (a : ℤ) (ha : ∀ q : ℤ, q < a → IsZero (K.obj.homology q)) : (∀ p q : ℤ, ∃ w : (truncationCouple F K a ha).2.2.2.1 p q ≫ (truncationCouple F K a ha).2.2.1 (p + 2) (q - 1) = 0, (ShortComplex.mk _ _ w).Exact) ∧ (∀ p q : ℤ, ∃ w : (truncationCouple F K a ha).2.2.2.2 p q ≫ (truncationCouple F K a ha).2.2.2.1 p q = 0, (ShortComplex.mk _ _ w).Exact) ∧ (∀ p q : ℤ, ∃ w : (truncationCouple F K a ha).2.2.1 p q ≫ (truncationCouple F K a ha).2.2.2.2 (p - 1) (q + 1) = 0, (ShortComplex.mk _ _ w).Exact)",
+  "branch": "sheaf-dag",
+  "by": "J1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-tce1008"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-tce1008",
+  "group": "J1",
+  "result": "fix",
+  "note": "A,B Grothendieck abelian (IsGrothendieckAbelian, indep. universes); v additive+left exact = F.Additive+PreservesFiniteLimits; K : CochainComplex.Plus A; a, ha vanishing below a retained; conclusion: landed truncationCouple F K a ha components, zero composite + ShortComplex.Exact at D^{p+2,q-1} (f,alpha), E^{p,q} (g,f), D^{p-1,q+1} (alpha,g) for all p q in Z"
  }
 }

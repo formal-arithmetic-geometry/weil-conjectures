@@ -4161,3 +4161,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 10:08 L: merged deliver/G1/lem-weil-pbc-fibre-ring-local-ring-natural-iso (stage 2; reviewer PASS; first push; Sheaf.RingTheory.FibreLocalRingNaturalIso Ideal.Fiber.localRingHom_surjective_ker_quotientEquiv)
 - 10:08 L: merged deliver/J1/lem-weil-pbc-fibre-ring-noetherian (stage 2; reviewer FIX; first push; Sheaf.RingTheory.FibreRingNoetherian Ideal.isNoetherianRing_fiber)
 - 10:08 L: merged deliver/G1/lem-sc-product-tangent-space-direct-sum (stage 2; reviewer FIX; first push; Sheaf.AlgebraicGeometry.ProductTangentSpaceDirectSum AlgebraicGeometry.product_tangentSpace_directSum)
+- 10:09 L: merged deliver/J1/lem-sp-truncation-couple-exact (stage 2; reviewer FIX; first push; Sheaf.CategoryTheory.TruncationCoupleExact CategoryTheory.truncationCouple_exact)
