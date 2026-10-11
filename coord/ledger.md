@@ -4428,3 +4428,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 11:18 L: merged deliver/F1/lem-weil-pbc-localization-prime-residue-field-iso (stage 2; reviewer PASS; first push; Sheaf.RingTheory.LocalizationPrimeResidueFieldIso IsLocalization.prime_localRing_residueField_iso)
 - 11:19 L: merged deliver/E1/lem-weil-pbc-gabber-h0-etale-criterion (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.GabberH0EtaleCriterion AlgebraicGeometry.gabber_h0_etale_criterion)
 - 11:19 L: merged deliver/J1/lem-weil-pbc-miracle-flatness (stage 2; reviewer PASS; first push; Sheaf.RingTheory.MiracleFlatness RingHom.flat_of_regular_of_depth_ge)
+- 11:19 L: merged deliver/M1/lem-weil-pbc-local-dimension-zero-henselian (stage 2; reviewer FIX; first push; Sheaf.RingTheory.LocalDimensionZeroHenselian isHenselianLocalRing_of_ringKrullDim_eq_zero)

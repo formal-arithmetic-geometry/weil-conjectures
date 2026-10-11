@@ -157,5 +157,24 @@
   "by": "L",
   "result": "accepted",
   "note": "4 steps following Stacks 06RS with 04GG (10)=>(1) written out: the primes of a finite R-algebra are finitely many and maximal with nil intersection (existing leaf); B = product of its localizations at maximal ideals (00JA leaf); reduction mod m factorwise; idempotents of a product of local rings lift uniquely. No new nodes. Stage 3: lem-weil-pbc-dimension-zero-local-strictly-henselian repeats these steps and could cite this node."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.LocalDimensionZeroHenselian",
+  "declaration": "isHenselianLocalRing_of_ringKrullDim_eq_zero",
+  "file": "lean/Sheaf/RingTheory/LocalDimensionZeroHenselian.lean",
+  "statement": "theorem isHenselianLocalRing_of_ringKrullDim_eq_zero (R : Type u) [CommRing R] [IsLocalRing R] (hdim : ringKrullDim R = 0) : HenselianLocalRing R ∧ ∀ (B : Type (max u v)) [CommRing B] [Algebra R B] [Module.Finite R B], ∀ e : B ⧸ (IsLocalRing.maximalIdeal R).map (algebraMap R B), IsIdempotentElem e → ∃! b : B, IsIdempotentElem b ∧ Ideal.Quotient.mk ((IsLocalRing.maximalIdeal R).map (algebraMap R B)) b = e",
+  "branch": "sheaf-dag",
+  "by": "M1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-ldh1119"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-ldh1119",
+  "group": "M1",
+  "result": "fix",
+  "note": "local R: [CommRing R][IsLocalRing R]; dim 0: ringKrullDim R = 0; finite B: Type (max u v) CommRing/Algebra/Module.Finite; idempotent e of B/mB lifts uniquely (∃!, mk b = e); FIX: conclusion now cites HenselianLocalRing R ∧ inline condition as sibling StrictlyHenselianOfDimensionZero"
  }
 }
