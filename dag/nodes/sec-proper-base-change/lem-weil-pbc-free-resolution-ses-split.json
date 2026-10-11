@@ -170,5 +170,24 @@
   "worker": "stage1",
   "summary": "Proof written from Stacks 065P (algebra.tex lines 17682-17709; source naming M',M,M'' = DAG Q,Q',Q''): Step 1 the one-step construction with explicit free modules P, P''=free on generators of A, A'', P'=P (+) P'' mapped by the generators and chosen lifts, the explicit alpha, beta, pi, s and all four splitting identities, and the snake lemma [lem-weil-pbc-snake-lemma-modules] (Mathlib leaf) giving the short exact sequence of kernels and the surjectivity of the middle augmentation (which the source leaves implicit); Step 2 the recursion on the sequences of kernels and the definition of the differentials as inclusion o augmentation; Step 3 the verification of the resolutions, the chain-map identities, the augmentation identities and the splitting identities used by the citer lem-weil-pbc-tor-long-exact-first-variable. Statement unchanged; stmt_deps set to the free-module and exact-sequence definitions. No new nodes. Mathlib: no horseshoe lemma and no free resolutions of a short exact sequence (searches recorded); Derived 064C (horseshoe) not used since the module case is explicit."
  },
- "reviewed": "Reviewed by L 2026-10-10: faithful to the proof of Algebra 065P (module case; 064C not needed): the one-step construction with explicit splittings and the snake lemma (Mathlib leaf) for the kernels, the recursion and the verification of all identities written out; surjectivity of the middle augmentation taken from the snake lemma's cokernel part. No new nodes; no Mathlib match (no horseshoe lemma in Mathlib)."
+ "reviewed": "Reviewed by L 2026-10-10: faithful to the proof of Algebra 065P (module case; 064C not needed): the one-step construction with explicit splittings and the snake lemma (Mathlib leaf) for the kernels, the recursion and the verification of all identities written out; surjectivity of the middle augmentation taken from the snake lemma's cokernel part. No new nodes; no Mathlib match (no horseshoe lemma in Mathlib).",
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.FreeResolutionSesSplit",
+  "declaration": "Module.exists_free_resolution_ses_split",
+  "file": "lean/Sheaf/Algebra/Homology/FreeResolutionSesSplit.lean",
+  "statement": "theorem exists_free_resolution_ses_split (R : Type u) [CommRing R] {Q : Type v₁} [AddCommGroup Q] [Module R Q] {Q' : Type v₂} [AddCommGroup Q'] [Module R Q'] {Q'' : Type v₃} [AddCommGroup Q''] [Module R Q''] (u : Q →ₗ[R] Q') (v : Q' →ₗ[R] Q'') (hu : Function.Injective u) (huv : Function.Exact u v) (hv : Function.Surjective v) : ∃ (F F' F'' : ℕ → Type (max u v₁ v₂ v₃)) (_ : ∀ n, AddCommGroup (F n)) (_ : ∀ n, Module R (F n)) (_ : ∀ n, AddCommGroup (F' n)) (_ : ∀ n, Module R (F' n)) (_ : ∀ n, AddCommGroup (F'' n)) (_ : ∀ n, Module R (F'' n)) (d : ∀ i : ℕ, F (i + 1) →ₗ[R] F i) (d' : ∀ i : ℕ, F' (i + 1) →ₗ[R] F' i) (d'' : ∀ i : ℕ, F'' (i + 1) →ₗ[R] F'' i) (ε : F 0 →ₗ[R] Q) (ε' : F' 0 →ₗ[R] Q') (ε'' : F'' 0 →ₗ[R] Q'') (α : ∀ n : ℕ, F n →ₗ[R] F' n) (β : ∀ n : ℕ, F' n →ₗ[R] F'' n) (π : ∀ n : ℕ, F' n →ₗ[R] F n) (s : ∀ n : ℕ, F'' n →ₗ[R] F' n), (∀ n : ℕ, Module.Free R (F n) ∧ Module.Free R (F' n) ∧ Module.Free R (F'' n)) ∧ (Function.Surjective ε ∧ LinearMap.ker ε = LinearMap.range (d 0) ∧ ∀ i : ℕ, LinearMap.ker (d i) = LinearMap.range (d (i + 1))) ∧ (Function.Surjective ε' ∧ LinearMap.ker ε' = LinearMap.range (d' 0) ∧ ∀ i : ℕ, LinearMap.ker (d' i) = LinearMap.range (d' (i + 1))) ∧ (Function.Surjective ε'' ∧ LinearMap.ker ε'' = LinearMap.range (d'' 0) ∧ ∀ i : ℕ, LinearMap.ker (d'' i) = LinearMap.range (d'' (i + 1))) ∧ (∀ i : ℕ, d' i ∘ₗ α (i + 1) = α i ∘ₗ d i) ∧ (∀ i : ℕ, d'' i ∘ₗ β (i + 1) = β i ∘ₗ d' i) ∧ ε' ∘ₗ α 0 = u ∘ₗ ε ∧ ε'' ∘ₗ β 0 = v ∘ₗ ε' ∧ ∀ n : ℕ, β n ∘ₗ α n = 0 ∧ π n ∘ₗ α n = LinearMap.id ∧ β n ∘ₗ s n = LinearMap.id ∧ α n ∘ₗ π n + s n ∘ₗ β n = LinearMap.id",
+  "branch": "sheaf-dag",
+  "by": "M1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-frs1041"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-frs1041",
+  "group": "M1",
+  "result": "fix",
+  "note": "R CommRing; Q,Q',Q'' modules (own universes); u,v with Injective/Function.Exact/Surjective; three free resolutions F,F',F'' (Module.Free terms, d_i : F(i+1)→F i, eps surjective, ker eps = range d0, ker d_i = range d_(i+1)); alpha,beta chain-map equations; eps'alpha0 = u eps, eps''beta0 = v eps'; pi_n, s_n non-chain families with beta alpha=0, pi alpha=id, beta s=id, alpha pi + s beta = id; n=0 covered; zero ring/modules allowed"
+ }
 }
