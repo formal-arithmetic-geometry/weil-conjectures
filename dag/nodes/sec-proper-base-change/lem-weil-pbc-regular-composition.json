@@ -156,5 +156,24 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of E1; spot-checked by L: second delivery: reduction written out via localization and two finite-type base changes (07C1 node), fibres of B_k -> C_k identified and 0381 node applied, new 031E node correct (tag verified); L reworded the localization justification in step 1 post-merge"
  },
- "lead_note": "L 2026-10-10: step 1 cited 'the argument in the proof of' lem-weil-pbc-regular-local-maximal for A_p -> B_p regular; replaced by the direct justification (flat base change, fibres unchanged, definition)."
+ "lead_note": "L 2026-10-10: step 1 cited 'the argument in the proof of' lem-weil-pbc-regular-local-maximal for A_p -> B_p regular; replaced by the direct justification (flat base change, fibres unchanged, definition).",
+ "lean": {
+  "module": "Sheaf.RingTheory.RegularComposition",
+  "declaration": "RingHom.IsRegular.comp_of_fiber_noetherian",
+  "file": "lean/Sheaf/RingTheory/RegularComposition.lean",
+  "statement": "theorem IsRegular.comp_of_fiber_noetherian {A : Type u} {B : Type v} {C : Type w} [CommRing A] [CommRing B] [CommRing C] [Algebra A B] [Algebra B C] [Algebra A C] [IsScalarTower A B C] (hf : (algebraMap A B).IsRegular) (hg : (algebraMap B C).IsRegular) (h : ∀ (p : Ideal A) [p.IsPrime], IsNoetherianRing (p.Fiber C)) : (algebraMap A C).IsRegular",
+  "branch": "sheaf-dag",
+  "by": "J1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-rco"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-rco",
+  "group": "J1",
+  "result": "fix",
+  "note": "A,B,C CommRing with [Algebra A B] [Algebra B C] [Algebra A C] [IsScalarTower A B C]; hf/hg (algebraMap _ _).IsRegular (GRing); fibre p.Fiber C Noetherian for all primes p; conclusion (algebraMap A C).IsRegular"
+ }
 }
