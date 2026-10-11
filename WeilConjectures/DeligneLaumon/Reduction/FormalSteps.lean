@@ -288,6 +288,7 @@ theorem WeilSheaf.IsMixedOfWeightsAtMost.higherLowerShriek_zero_of_quasiFinite {
   obtain ⟨e⟩ := WeilSheaf.nonempty_higherLowerShriek_iso_higherLowerStar (l := l) f c 0 F
   exact ((h.extensionByZero c.i).higherLowerStar_zero_of_isFinite c.g).of_iso e.symm
 
+set_option linter.unusedSectionVars false in
 attribute [local instance] Compactification.over in
 /-- For a separated quasi-finite morphism `f : X ⟶ Y` of `k₀`-schemes the exact functor `f₀!`
 preserves punctual upper weight bounds (blueprint: `sk-l-dl-general-quasifinite`). -/
