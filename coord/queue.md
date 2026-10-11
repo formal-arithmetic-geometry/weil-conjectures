@@ -1,18 +1,18 @@
 # Work queue
 
-143 items; claim with `tools/claim.py next <group> [--stage N]`.
+177 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (143)
+## Stage 2: nodes to state (177)
 
 | node | distance to Mathlib | kind | blockers |
 |---|---|---|---|
 | `def-weil-pbc-sites-and-cohomology` | 1 | state | 137 |
-| `pqf-def-cohomology` | 1 | state | 57 |
 | `def-nagata-qc-open-equality-stage` | 1 | state | 13 |
 | `def-sc-field-extension` | 1 | state | 6 |
+| `def-weil-pbc-module-cohomology-fmap` | 1 | state | 6 |
 | `def-pc-global-derived-rhom` | 1 | state | 4 |
 | `def-weil-pbc-simplicial-hom-object` | 1 | state | 4 |
 | `def-pc-derived-rhom-algebra-module` | 1 | state | 2 |
@@ -40,8 +40,10 @@
 | `lem-pc-grothendieck-ss-double-complex-model` | 1 | state | 1 |
 | `lem-pc-restrict-derived-direct-image-open` | 1 | state | 1 |
 | `lem-sc-affine-pseudo-coherent-rhom-qcoherent` | 1 | state | 1 |
+| `lem-sc-cech-comparison-natural` | 1 | state | 1 |
 | `lem-sc-derived-internal-hom-restrict-open` | 1 | state | 1 |
 | `lem-weil-pbc-etale-mayer-vietoris` | 1 | state | 1 |
+| `pqf-lem-leray` | 1 | state | 1 |
 | `cor-galois-lisse-representations` | 1 | state | 0 |
 | `lem-pc-base-change-rhom-perfect` | 1 | state | 0 |
 | `lem-pc-bounded-coherent-finite-tor-proper-pushforward-perfect` | 1 | state | 0 |
@@ -51,7 +53,11 @@
 | `lem-pc-derived-direct-image-uniform-truncation-bound` | 1 | state | 0 |
 | `lem-pc-direct-image-bounded-coherent` | 1 | state | 0 |
 | `lem-pc-direct-image-qc-support-reduction` | 1 | state | 0 |
+| `lem-pc-euler-characteristic-well-defined` | 1 | state | 0 |
+| `lem-pc-finite-scheme-cohomology-tensor` | 1 | state | 0 |
 | `lem-pc-flat-filtered-complex-comparison` | 1 | state | 0 |
+| `lem-pc-genus-well-defined` | 1 | state | 0 |
+| `lem-pc-leray-degenerate-sections` | 1 | state | 0 |
 | `lem-pc-noetherian-perfect-direct-image` | 1 | state | 0 |
 | `lem-pc-projection-locality` | 1 | state | 0 |
 | `lem-pc-proper-derived-direct-image-composition` | 1 | state | 0 |
@@ -62,8 +68,12 @@
 | `lem-pc-rf-perfect-base-change` | 1 | state | 0 |
 | `lem-pc-rf-single-complex-qcqs-induction` | 1 | state | 0 |
 | `lem-pc-rf-single-complex-relative-mayer-vietoris` | 1 | state | 0 |
+| `lem-pc-ringed-space-derived-limit-stalk-injective` | 1 | state | 0 |
+| `lem-pc-ringed-space-pointwise-truncation-limit` | 1 | state | 0 |
 | `lem-pc-ringed-space-sheafification-cohomology` | 1 | state | 0 |
+| `lem-pc-ringed-space-truncation-derived-limit` | 1 | state | 0 |
 | `lem-pc-tor-independent-perfect-tensor-base-change` | 1 | state | 0 |
+| `lem-pqf-quasicompact-h1-zero` | 1 | state | 0 |
 | `lem-sc-affine-derived-cohomology` | 1 | state | 0 |
 | `lem-sc-affine-derived-concentration` | 1 | state | 0 |
 | `lem-sc-affine-derived-pushforward-conservative` | 1 | state | 0 |
@@ -72,10 +82,14 @@
 | `lem-sc-affine-perfect-derived-tensor-hom` | 1 | state | 0 |
 | `lem-sc-affine-projective-complex-derived-hom` | 1 | state | 0 |
 | `lem-sc-affine-rhom-qcoherent` | 1 | state | 0 |
+| `lem-sc-boundary-derivation-square-zero` | 1 | state | 0 |
 | `lem-sc-derived-hom-finite-free-model` | 1 | state | 0 |
 | `lem-sc-derived-hom-projective-resolution` | 1 | state | 0 |
 | `lem-sc-derived-internal-hom-stalk-localization` | 1 | state | 0 |
+| `lem-sc-ext-coherent-hom-injective-acyclic` | 1 | state | 0 |
+| `lem-sc-ext-sheaf-to-global-spectral-sequence` | 1 | state | 0 |
 | `lem-sc-ext-stalk-localization` | 1 | state | 0 |
+| `lem-sc-ext-support-cohomology-vanishing` | 1 | state | 0 |
 | `lem-sc-finite-affine-derived-equivalence` | 1 | state | 0 |
 | `lem-sc-finite-duality-derived-hom` | 1 | state | 0 |
 | `lem-sc-finite-flat-duality-evaluation` | 1 | state | 0 |
@@ -83,7 +97,12 @@
 | `lem-sc-finite-twisted-inverse-bounded-below` | 1 | state | 0 |
 | `lem-sc-hilb-dominating-power` | 1 | state | 0 |
 | `lem-sc-hilbert-embedded-points-gluing` | 1 | state | 0 |
+| `lem-sc-invert-s-cohomology` | 1 | state | 0 |
+| `lem-sc-invert-s-cohomology-affine-case` | 1 | state | 0 |
+| `lem-sc-invert-s-cohomology-gluing` | 1 | state | 0 |
+| `lem-sc-invert-s-cohomology-mayer-vietoris-diagram` | 1 | state | 0 |
 | `lem-sc-koszul-regular-immersion-derived-hom` | 1 | state | 0 |
+| `lem-sc-mayer-vietoris-open-cover` | 1 | state | 0 |
 | `lem-sc-open-curve-etale-leray-low-degree` | 1 | state | 0 |
 | `lem-sc-open-curve-gm-direct-image-cohomology` | 1 | state | 0 |
 | `lem-sc-open-restriction-support-triangle` | 1 | state | 0 |
@@ -94,6 +113,7 @@
 | `lem-sc-proper-upper-shriek-composition` | 1 | state | 0 |
 | `lem-sc-qcoh-acyclic-derived-pushforward-cohomology` | 1 | state | 0 |
 | `lem-sc-qcoh-acyclic-derived-sections-comparison` | 1 | state | 0 |
+| `lem-sc-section-affine-open-kills-cohomology` | 1 | state | 0 |
 | `lem-sc-sheaf-ext-coherent` | 1 | state | 0 |
 | `lem-sc-smooth-proper-curve-dualizing` | 1 | state | 0 |
 | `lem-sc-smooth-proper-diagonal-basechange-upper-shriek` | 1 | state | 0 |
@@ -104,21 +124,31 @@
 | `lem-sc-smooth-proper-tensor-perfect-case` | 1 | state | 0 |
 | `lem-sc-strict-henselization-cotangent-dimension` | 1 | state | 0 |
 | `lem-sc-strict-henselization-dvr` | 1 | state | 0 |
+| `lem-weil-pbc-coherent-serre-vanishing` | 1 | state | 0 |
+| `lem-weil-pbc-cohomology-powers-ideal-application` | 1 | state | 0 |
+| `lem-weil-pbc-cohomology-powers-ideal-rees-finite` | 1 | state | 0 |
 | `lem-weil-pbc-derived-etale-cohomology-limit` | 1 | state | 0 |
 | `lem-weil-pbc-etale-cohomology-limit-of-schemes` | 1 | state | 0 |
 | `lem-weil-pbc-finite-coproduct-cohomology-assembly` | 1 | state | 0 |
 | `lem-weil-pbc-finite-geometric-point-coproduct-cohomology` | 1 | state | 0 |
+| `lem-weil-pbc-formal-functions-complete-base` | 1 | state | 0 |
+| `lem-weil-pbc-formal-systems-graded-vanishing` | 1 | state | 0 |
 | `lem-weil-pbc-gabber-absolutely-algebraically-closed` | 1 | state | 0 |
 | `lem-weil-pbc-gabber-criterion` | 1 | state | 0 |
 | `lem-weil-pbc-geometric-point-cohomology` | 1 | state | 0 |
 | `lem-weil-pbc-gm-pullback-strict-henselization` | 1 | state | 0 |
 | `lem-weil-pbc-gm-strict-henselization-stalk-formula` | 1 | state | 0 |
+| `lem-weil-pbc-graded-finiteness-cohomology` | 1 | state | 0 |
 | `lem-weil-pbc-hypercohomology-e1-pullback-functorial` | 1 | state | 0 |
 | `lem-weil-pbc-integral-cover-kills-constant-cohomology` | 1 | state | 0 |
 | `lem-weil-pbc-inverse-image-composition-module-linear` | 1 | state | 0 |
 | `lem-weil-pbc-inverse-image-free-etale-module` | 1 | state | 0 |
+| `lem-weil-pbc-ml-cohomology-powers-ideal` | 1 | state | 0 |
+| `lem-weil-pbc-module-pushforward-injective-acyclic` | 1 | state | 0 |
 | `lem-weil-pbc-projective-space-twisting-sheaf-charts` | 1 | state | 0 |
 | `lem-weil-pbc-pullback-iso-prime-torsion-devissage` | 1 | state | 0 |
+| `lem-weil-pbc-qcqs-cohomology-direct-sum` | 1 | state | 0 |
+| `lem-weil-pbc-qs-scheme-cohomology-directed-colimit` | 1 | state | 0 |
 | `lem-weil-pbc-sets-pushforward-stalk-strict-henselization` | 1 | state | 0 |
 | `lem-weil-pbc-strict-henselization-functoriality` | 1 | state | 0 |
 | `lem-weil-pbc-strictly-henselian-etale-acyclic` | 1 | state | 0 |
@@ -126,11 +156,15 @@
 | `lem-weil-pbc-symmetric-product-finite` | 1 | state | 0 |
 | `lem-weil-pbc-symmetric-product-over-base` | 1 | state | 0 |
 | `lem-weil-pbc-symmetric-product-surjective` | 1 | state | 0 |
+| `lem-weil-pbc-theorem-formal-functions` | 1 | state | 0 |
 | `lem-weil-pbc-universal-thickening-flat-base-change` | 1 | state | 0 |
 | `lem-weil-pbc-universal-thickening-open-restriction` | 1 | state | 0 |
 | `lem-weil-pbc-unrestricted-strict-henselization-stalk` | 1 | state | 0 |
+| `lem-weil-pbc-vanishing-projective` | 1 | state | 0 |
 | `lem-weil-pbc-zero-dimensional-cohomology` | 1 | state | 0 |
 | `lemma-weil-pbc-fibre-product-limit` | 1 | state | 0 |
+| `pqf-lem-fff-vanishing` | 1 | state | 0 |
+| `pqf-lem-serre-criterion` | 1 | state | 0 |
 | `prop-weil-pbc-strict-henselization-stalk-formula` | 1 | state | 0 |
 | `sbc-lem-higher-direct-image-presheaf` | 1 | state | 0 |
 | `thm-weil-pbc-universal-homeomorphism-invariance` | 1 | state | 0 |
@@ -143,7 +177,6 @@
 | `lem-sc-mult-n-tangent-differential` | 2 | state | 0 |
 | `lem-sc-p1-graded-kernel-finite` | 2 | state | 0 |
 | `lem-sc-p1-proj-shifted-free-twist` | 2 | state | 0 |
-| `lem-sc-p1-twist-multiplication` | 2 | state | 0 |
 | `lem-sc-pic-affine-quotient` | 2 | state | 0 |
 | `lem-sc-picard-valuation-probe-closure` | 2 | state | 0 |
 | `lem-sc-right-adjoint-open-support-criterion` | 2 | state | 0 |
@@ -152,8 +185,9 @@
 | `lem-sc-valuation-closed-fibre-section-vanishing` | 2 | state | 0 |
 | `lem-sp-derived-couple-functoriality` | 2 | state | 0 |
 | `lemma-weil-pbc-etale-cohomology-continuity` | 2 | state | 0 |
+| `pqf-lem-affine-vanishing` | 2 | state | 0 |
 
-Not open yet: 40 nodes that wait for stage 1, 265 nodes that wait for a statement dependency.
+Not open yet: 40 nodes that wait for stage 1, 229 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
