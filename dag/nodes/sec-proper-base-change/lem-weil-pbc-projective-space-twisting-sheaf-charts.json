@@ -24,7 +24,8 @@
   "def-weil-pbc-proj-twisting-sheaf",
   "def-sc-invertible-module",
   "def-weil-residue-field",
-  "def-pc-projective-space-twist"
+  "def-pc-projective-space-twist",
+  "def-weil-pbc-ample-invertible-module"
  ],
  "mathlib_searches": [
   {
@@ -228,5 +229,23 @@
  "lean_candidates": {
   "branch": "slopmaster2",
   "note": "checked by the worker and the lead (2026-10-09), all sorry-free: (i) Proj.isInvertible_twist (ProjectiveSpectrum/Twist.lean:454) and Proj.isFreeGenerator_unitToTwist (:565); (iv) Proj.map_unitToTwist_eq_smul (:514); (ii) ProjectiveSpace.projIntBasicOpenIso (ProjectiveSpace/Charts.lean:66); (iii) Proj.compl_support_zeroLocus_unitToTwist (ProjectiveSpace/CoordinateSection.lean:57) states the complement of the support of the zero scheme, not the value locus; (v) has no Lean (Proj.twist is the Hartshorne-style O(m), not M~); conjunction, no attachment"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProjectiveSpaceTwistingSheafCharts",
+  "declaration": "AlgebraicGeometry.projectiveSpace_twistingSheaf_charts",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProjectiveSpaceTwistingSheafCharts.lean",
+  "statement": "theorem projectiveSpace_twistingSheaf_charts (n : ℕ) : (Proj.twist (MvPolynomial.homogeneousSubmodule (Fin (n + 1)) (ULift.{0} ℤ)) 1).IsInvertible ∧ (⨆ j : Fin (n + 1), Proj.basicOpen (MvPolynomial.homogeneousSubmodule (Fin (n + 1)) (ULift.{0} ℤ)) (MvPolynomial.X j)) = ⊤ ∧ (∀ j : Fin (n + 1), IsIso (Proj.basicOpenToSpec (MvPolynomial.homogeneousSubmodule (Fin (n + 1)) (ULift.{0} ℤ)) (MvPolynomial.X j))) ∧ (∀ j : Fin (n + 1), ∃ E : MvPolynomial {l : Fin (n + 1) // l ≠ j} (ULift.{0} ℤ) ≃ₐ[ULift.{0} ℤ] HomogeneousLocalization.Away (MvPolynomial.homogeneousSubmodule (Fin (n + 1)) (ULift.{0} ℤ)) (MvPolynomial.X j), ∀ l : {l : Fin (n + 1) // l ≠ j}, E (MvPolynomial.X l) = MvPolynomial.awayXRatio (ULift.{0} ℤ) j l.1) ∧ (∀ j : Fin (n + 1), IsIso ((Scheme.Modules.restrictFunctor (Proj.basicOpen (MvPolynomial.homogeneousSubmodule (Fin (n + 1)) (ULift.{0} ℤ)) (MvPolynomial.X j)).ι).map (Proj.unitToTwist (𝒜 := MvPolynomial.homogeneousSubmodule (Fin (n + 1)) (ULift.{0} ℤ)) (MvPolynomial.X_mem_homogeneousSubmodule_one (ULift.{0} ℤ) j)))) ∧ (∀ j : Fin (n + 1), Scheme.Modules.nonvanishingLocus (Proj.twist (MvPolynomial.homogeneousSubmodule (Fin (n + 1)) (ULift.{0} ℤ)) 1) ((Proj.unitToTwist (𝒜 := MvPolynomial.homogeneousSubmodule (Fin (n + 1)) (ULift.{0} ℤ)) (MvPolynomial.X_mem_homogeneousSubmodule_one (ULift.{0} ℤ) j)).app ⊤ (1 : Γ(Proj (MvPolynomial.homogeneousSubmodule (Fin (n + 1)) (ULift.{0} ℤ)), ⊤))) = (Proj.basicOpen (MvPolynomial.homogeneousSubmodule (Fin (n + 1)) (ULift.{0} ℤ)) (MvPolynomial.X j) : Set (Proj (MvPolynomial.homogeneousSubmodule (Fin (n + 1)) (ULift.{0} ℤ))))) ∧ (∀ j l : Fin (n + 1), (Proj.twist (MvPolynomial.homogeneousSubmodule (Fin (n + 1)) (ULift.{0} ℤ)) 1).presheaf.map (homOfLE (le_top : Proj.basicOpen (MvPolynomial.homogeneousSubmodule (Fin (n + 1)) (ULift.{0} ℤ)) (MvPolynomial.X j) ≤ ⊤)).op ((Proj.unitToTwist (𝒜 := MvPolynomial.homogeneousSubmodule (Fin (n + 1)) (ULift.{0} ℤ)) (MvPolynomial.X_mem_homogeneousSubmodule_one (ULift.{0} ℤ) l)).app ⊤ (1 : Γ(Proj (MvPolynomial.homogeneousSubmodule (Fin (n + 1)) (ULift.{0} ℤ)), ⊤))) = Proj.awayToSection (MvPolynomial.homogeneousSubmodule (Fin (n + 1)) (ULift.{0} ℤ)) (MvPolynomial.X j) (MvPolynomial.awayXRatio (ULift.{0} ℤ) j l) • (Proj.twist (MvPolynomial.homogeneousSubmodule (Fin (n + 1)) (ULift.{0} ℤ)) 1).presheaf.map (homOfLE (le_top : Proj.basicOpen (MvPolynomial.homogeneousSubmodule (Fin (n + 1)) (ULift.{0} ℤ)) (MvPolynomial.X j) ≤ ⊤)).op ((Proj.unitToTwist (𝒜 := MvPolynomial.homogeneousSubmodule (Fin (n + 1)) (ULift.{0} ℤ)) (MvPolynomial.X_mem_homogeneousSubmodule_one (ULift.{0} ℤ) j)).app ⊤ (1 : Γ(Proj (MvPolynomial.homogeneousSubmodule (Fin (n + 1)) (ULift.{0} ℤ)), ⊤)))) ∧ ∃! θ : (Scheme.Modules.pushforward (ProjectiveSpace.toProjInt (Fin (n + 1)) (Spec (CommRingCat.of (ULift.{0} ℤ))))).obj (ProjectiveSpace.twist (Fin (n + 1)) (Spec (CommRingCat.of (ULift.{0} ℤ))) 1) ≅ Proj.twist (MvPolynomial.homogeneousSubmodule (Fin (n + 1)) (ULift.{0} ℤ)) 1, (∀ i : Fin (n + 1), θ.hom.app (Proj.basicOpen (MvPolynomial.homogeneousSubmodule (Fin (n + 1)) (ULift.{0} ℤ)) (MvPolynomial.X i)) ((ProjectiveSpace.twist (Fin (n + 1)) (Spec (CommRingCat.of (ULift.{0} ℤ))) 1).presheaf.map (homOfLE (le_top : ProjectiveSpace.toProjInt (Fin (n + 1)) (Spec (CommRingCat.of (ULift.{0} ℤ))) ⁻¹ᵁ Proj.basicOpen (MvPolynomial.homogeneousSubmodule (Fin (n + 1)) (ULift.{0} ℤ)) (MvPolynomial.X i) ≤ ⊤)).op (ProjectiveSpace.twistOneSection (Fin (n + 1)) (Spec (CommRingCat.of (ULift.{0} ℤ))) i)) = Proj.twistPowSection 1 (MvPolynomial.X_mem_homogeneousSubmodule_one (ULift.{0} ℤ) i)) ∧ (∀ k : Fin (n + 1), θ.hom.app ⊤ (ProjectiveSpace.twistOneSection (Fin (n + 1)) (Spec (CommRingCat.of (ULift.{0} ℤ))) k) = (Proj.unitToTwist (𝒜 := MvPolynomial.homogeneousSubmodule (Fin (n + 1)) (ULift.{0} ℤ)) (MvPolynomial.X_mem_homogeneousSubmodule_one (ULift.{0} ℤ) k)).app ⊤ (1 : Γ(Proj (MvPolynomial.homogeneousSubmodule (Fin (n + 1)) (ULift.{0} ℤ)), ⊤)))",
+  "branch": "sheaf-dag",
+  "by": "V1",
+  "date": "2026-10-12",
+  "existing": false,
+  "note": "All five clauses, on the canonical ULift ℤ integral model; the glued twist is transported along toProjInt by pushforward, as in the recorded ProjectiveSpace.twist convention."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-tsc",
+  "group": "V1",
+  "result": "pass"
  }
 }
