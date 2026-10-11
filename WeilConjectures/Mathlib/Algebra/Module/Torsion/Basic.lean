@@ -64,7 +64,76 @@ theorem zsmul_mem_torsionBy_pow {l : ℤ} {n : ℕ} {x : M} (hx : x ∈ torsionB
   rw [smul_smul, ← pow_succ]
   exact hx
 
+/-- An additive isomorphism restricts to an isomorphism of the `n`-torsion subgroups. -/
+@[simps]
+def torsionByCongr (e : M ≃+ N) (n : ℤ) : torsionBy M n ≃+ torsionBy N n where
+  toFun x := ⟨e x.1, apply_mem_torsionBy e x.2⟩
+  invFun y := ⟨e.symm y.1, apply_mem_torsionBy e.symm y.2⟩
+  left_inv x := Subtype.ext (e.symm_apply_apply x.1)
+  right_inv y := Subtype.ext (e.apply_symm_apply y.1)
+  map_add' x y := Subtype.ext (map_add e x.1 y.1)
+
+/-- An additive isomorphism induces an isomorphism of the cokernels of multiplication by `n`. -/
+noncomputable def quotientRangeZsmulCongr (e : M ≃+ N) (n : ℤ) :
+    M ⧸ (zsmulAddGroupHom (α := M) n).range ≃+ N ⧸ (zsmulAddGroupHom (α := N) n).range :=
+  QuotientAddGroup.congr _ _ e <| by
+    ext y
+    simp only [AddSubgroup.mem_map, AddMonoidHom.mem_range, zsmulAddGroupHom_apply]
+    constructor
+    · rintro ⟨_, ⟨x, rfl⟩, rfl⟩
+      exact ⟨e x, (map_zsmul e n x).symm⟩
+    · rintro ⟨x, rfl⟩
+      exact ⟨n • e.symm x, ⟨e.symm x, rfl⟩, by simp⟩
+
 end Map
+
+section IntProd
+
+variable (G : Type*) [AddCommGroup G]
+
+/-- The `n`-torsion of `ℤ × G` is the `n`-torsion of `G`, for `n ≠ 0`. -/
+theorem nonempty_addEquiv_torsionBy_int_prod {n : ℤ} (hn : n ≠ 0) :
+    Nonempty (torsionBy (ℤ × G) n ≃+ torsionBy G n) := by
+  have h1 {x : ℤ × G} (hx : x ∈ torsionBy (ℤ × G) n) : x.1 = 0 := by
+    have : n • x = 0 := hx
+    have := congrArg Prod.fst this
+    simpa [hn] using this
+  have h2 {x : ℤ × G} (hx : x ∈ torsionBy (ℤ × G) n) : x.2 ∈ torsionBy G n :=
+    congrArg Prod.snd (show n • x = 0 from hx)
+  have h3 {y : G} (hy : y ∈ torsionBy G n) : ((0 : ℤ), y) ∈ torsionBy (ℤ × G) n := by
+    change n • ((0 : ℤ), y) = 0
+    rw [Prod.smul_mk, smul_zero, show n • y = 0 from hy]
+    rfl
+  exact ⟨{ toFun x := ⟨x.1.2, h2 x.2⟩
+           invFun y := ⟨(0, y.1), h3 y.2⟩
+           left_inv x := Subtype.ext (Prod.ext (h1 x.2).symm rfl)
+           right_inv y := rfl
+           map_add' x y := rfl }⟩
+
+/-- If multiplication by `n ≠ 0` is surjective on `G`, then `(ℤ × G) / n (ℤ × G) ≅ ℤ / n`. -/
+theorem nonempty_addEquiv_quotient_range_zsmul_int_prod {n : ℕ}
+    (hG : Function.Surjective (zsmulAddGroupHom (α := G) n)) :
+    Nonempty ((ℤ × G) ⧸ (zsmulAddGroupHom (α := ℤ × G) n).range ≃+ ZMod n) := by
+  let φ : ℤ × G →+ ZMod n := (Int.castAddHom (ZMod n)).comp (AddMonoidHom.fst ℤ G)
+  have hφ : Function.Surjective φ := fun a ↦ ⟨((a.cast : ℤ), 0), by simp [φ]⟩
+  have hker : φ.ker = (zsmulAddGroupHom (α := ℤ × G) n).range := by
+    ext ⟨a, g⟩
+    simp only [AddMonoidHom.mem_ker, AddMonoidHom.coe_comp, Function.comp_apply,
+      AddMonoidHom.coe_fst, Int.coe_castAddHom, φ, AddMonoidHom.mem_range,
+      zsmulAddGroupHom_apply, ZMod.intCast_zmod_eq_zero_iff_dvd]
+    constructor
+    · rintro ⟨b, rfl⟩
+      obtain ⟨h, hh⟩ := hG g
+      refine ⟨(b, h), Prod.ext ?_ hh⟩
+      simp [mul_comm]
+    · rintro ⟨⟨b, h⟩, he⟩
+      have := congrArg Prod.fst he
+      simp only [Prod.smul_mk, smul_eq_mul] at this
+      exact ⟨b, by rw [← this, mul_comm]⟩
+  rw [← hker]
+  exact ⟨QuotientAddGroup.quotientKerEquivOfSurjective φ hφ⟩
+
+end IntProd
 
 section
 

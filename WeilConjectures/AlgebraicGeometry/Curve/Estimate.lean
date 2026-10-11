@@ -9,7 +9,8 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
 public import Mathlib.FieldTheory.IsAlgClosed.Basic
 public import WeilConjectures.AlgebraicGeometry.Curve
-public import WeilConjectures.AlgebraicGeometry.Sites.Kummer
+public import WeilConjectures.AlgebraicGeometry.Curve.CohomologicalDimension
+public import WeilConjectures.AlgebraicGeometry.Curve.RiemannRoch
 
 /-!
 # The curve estimate
@@ -26,31 +27,106 @@ connected scheme (`AlgebraicGeometry.Scheme.nonempty_addEquiv_sheafH_zero_consta
 vanishing for `q ≥ 3` is `AlgebraicGeometry.IsCurve.subsingleton_sheafH_of_three_le` applied to
 `C.constantZMod n`.
 
+After choosing a primitive `n`-th root of unity, `ℤ/n ≅ μₙ`, and the Kummer sequence identifies
+`H¹(C, μₙ)` with `Pic(C)[n]` and `H²(C, μₙ)` with `Pic(C)/n`. The degree splits
+`Pic(C) = ℤ × Pic⁰(C)`, and `Pic⁰(C)` is the group of `k`-points of the Jacobian of `C`, an
+abelian variety of dimension `g`; its `n`-torsion is `(ℤ/n)^{2g}` and it is `n`-divisible.
+
 ## Main statements
 
+- `AlgebraicGeometry.Scheme.nonempty_addEquiv_torsionBy_pic_and_quotient`:
+  `Pic(C)[n] ≅ (ℤ/n)^{2g}` and `Pic(C)/n ≅ ℤ/n`.
 - `AlgebraicGeometry.IsCurve.nonempty_addEquiv_sheafH_constantZMod_zero`:
   `H⁰(C, ℤ/n) ≅ ℤ/n`.
 - `AlgebraicGeometry.IsCurve.nonempty_addEquiv_sheafH_constantZMod_one`:
   `H¹(C, ℤ/n) ≅ (ℤ/n)^{2g}`.
 - `AlgebraicGeometry.IsCurve.nonempty_addEquiv_sheafH_constantZMod_two`:
   `H²(C, ℤ/n) ≅ ℤ/n`.
-
-## TODO
-
-The genus is `AlgebraicGeometry.Scheme.Hom.genus`, the dimension of the global sections of the
-sheaf of relative differentials `AlgebraicGeometry.Scheme.Hom.relativeDifferentials`; it is the
-arithmetic genus `h¹(C, 𝒪_C)` by `AlgebraicGeometry.Scheme.genus_eq_arithmeticGenus`. Proving
-the `H¹` statement needs the Kummer sequence, the Jacobian of `C` with its group isomorphism
-`Pic⁰(C) ≃* J(k)` (`AlgebraicGeometry.exists_jacobian`), and the torsion of abelian varieties.
+- `AlgebraicGeometry.IsConnectedCurve.sheafH_constantZMod_of_isProper`: all degrees at once.
 -/
 
 @[expose] public section
 
 universe u
 
-open CategoryTheory
+open CategoryTheory MonoidalCategory MonObj
 
 namespace AlgebraicGeometry
+
+section Picard
+
+variable {k : Type u} [Field k] [IsAlgClosed k] {C : Scheme.{u}} [C.Over (Spec (.of k))]
+  [SmoothOfRelativeDimension 1 (C ↘ Spec (.of k))] [IsProper (C ↘ Spec (.of k))]
+  [ConnectedSpace C]
+
+/-- **The Picard group of a proper curve.** Let `C` be a smooth proper connected curve of genus
+`g` over an algebraically closed field `k`, and let `n ≥ 1` be prime to `char k`. Then
+
+`Pic(C)[n] ≅ (ℤ/n)^{2g}`, `Pic(C) / n Pic(C) ≅ ℤ/n`,
+
+and `Pic⁰(C)` is `n`-divisible.
+
+(`AlgebraicGeometry.Scheme.exists_mulEquiv_prod_ker_picDegreeHom`), and `Pic⁰(C) ≅ J(k)` for the
+Jacobian `J` of `C`, an abelian variety of dimension
+(`AlgebraicGeometry.Scheme.exists_mulEquiv_prod_ker_picDegreeHom`), and `Pic⁰(C) ≅ J(k)` for the Jacobian `J` of `C`, an abelian variety of dimension
+`h¹(C, 𝒪_C) = g` (`AlgebraicGeometry.exists_jacobian`), whose group of `k`-points is divisible
+with `n`-torsion `(ℤ/n)^{2g}` (`AlgebraicGeometry.abelianVariety_estimate_of_isAlgClosed`).
+(blueprint: `lem-sc-pic-proper-ntorsion`) -/
+theorem Scheme.nonempty_addEquiv_torsionBy_pic_and_quotient {n : ℕ} (hn : (n : k) ≠ 0) :
+    Nonempty (AddSubgroup.torsionBy (Additive C.Pic) n ≃+
+        (Fin (2 * (C ↘ Spec (.of k)).genus) → ZMod n)) ∧
+      Nonempty (Additive C.Pic ⧸ (zsmulAddGroupHom (α := Additive C.Pic) n).range ≃+
+        ZMod n) ∧
+      Function.Surjective fun L : picardZero k C ↦ L ^ n := by
+  have hn0 : n ≠ 0 := by rintro rfl; exact hn Nat.cast_zero
+  have hp : ¬ ringChar k ∣ n := fun h ↦ hn ((ringChar.spec k n).2 h)
+  -- `C` is geometrically integral, so it has a Jacobian `J`, an abelian variety of dimension `g`
+  have : Smooth (C ↘ Spec (.of k)) := SmoothOfRelativeDimension.smooth 1 _
+  have : GeometricallyConnected (C ↘ Spec (.of k)) :=
+    GeometricallyConnected.of_connectedSpace_of_isSepClosed _
+  have : GeometricallyIrreducible (C ↘ Spec (.of k)) :=
+    GeometricallyIrreducible.of_smooth_of_geometricallyConnected _
+  have : GeometricallyReduced (C ↘ Spec (.of k)) := GeometricallyReduced.of_smooth _
+  have : GeometricallyIntegral (C ↘ Spec (.of k)) :=
+    GeometricallyIntegral.of_geometricallyReduced_of_geometricallyIrreducible _
+  have : Nonempty C := inferInstance
+  obtain ⟨J, _, -, hP, hS, hG, -, ⟨ψ⟩⟩ := exists_jacobian (k := k) (X := C)
+  have : Smooth J.hom := SmoothOfRelativeDimension.smooth (arithmeticGenus k C) J.hom
+  have : IsIntegral J.left := GeometricallyIntegral.isIntegral_of_subsingleton J.hom
+  have : IsAbelianVariety J := { }
+  have hdim : IsAbelianVariety.dim J = (C ↘ Spec (.of k)).genus := by
+    rw [Scheme.genus_eq_arithmeticGenus]
+    have h := (IsAbelianVariety.topologicalKrullDim_eq J).symm.trans
+      (topologicalKrullDim_eq_of_smoothOfRelativeDimension J.hom (arithmeticGenus k C))
+    exact_mod_cast h
+  obtain ⟨eProd, -⟩ := Scheme.exists_mulEquiv_prod_ker_picDegreeHom (k := k) (C := C)
+  set G := Additive (𝟙_ (Over (Spec (.of k))) ⟶ J)
+  -- `Pic(C) ≅ ℤ × J(k)`
+  let E : Additive C.Pic ≃+ ℤ × G :=
+    { toFun := fun x ↦ ((eProd x.toMul).1.toAdd, .ofMul (ψ (eProd x.toMul).2))
+      invFun := fun y ↦ .ofMul (eProd.symm (.ofAdd y.1, ψ.symm y.2.toMul))
+      left_inv := fun x ↦ by simp
+      right_inv := fun y ↦ by simp
+      map_add' := fun x y ↦ by
+        simp only [toMul_add, map_mul, Prod.fst_mul, toAdd_mul, Prod.snd_mul]
+        rfl }
+  obtain ⟨hfin, -, hdiv, -, -⟩ := abelianVariety_estimate_of_isAlgClosed (ringChar k) J
+  have hG' : Function.Surjective (zsmulAddGroupHom (α := G) n) := by
+    intro x
+    obtain ⟨a, ha⟩ := hdiv n (Nat.pos_of_ne_zero hn0) x.toMul
+    refine ⟨.ofMul a, ?_⟩
+    rw [zsmulAddGroupHom_apply, natCast_zsmul, ← ofMul_pow, show a ^ n = x.toMul from ha]
+    rfl
+  obtain ⟨eJ⟩ := hfin n (Nat.pos_of_ne_zero hn0) hp
+  obtain ⟨eT⟩ := AddSubgroup.nonempty_addEquiv_torsionBy_int_prod G (n := n) (by exact_mod_cast hn0)
+  obtain ⟨eQ⟩ := AddSubgroup.nonempty_addEquiv_quotient_range_zsmul_int_prod G hG'
+  refine ⟨⟨(AddSubgroup.torsionByCongr E n).trans (eT.trans (hdim ▸ eJ))⟩,
+    ⟨(AddSubgroup.quotientRangeZsmulCongr E n).trans eQ⟩, fun L ↦ ?_⟩
+  obtain ⟨a, ha⟩ := hdiv n (Nat.pos_of_ne_zero hn0) (ψ L)
+  refine ⟨ψ.symm a, ψ.injective ?_⟩
+  simpa using ha
+
+end Picard
 
 variable {k : Type u} [Field k] [IsAlgClosed k] {C : Scheme.{u}}
 
@@ -58,12 +134,33 @@ omit [IsAlgClosed k] in
 /-- **The curve estimate in degree zero.** Let `C` be a smooth proper connected curve over a
 field `k`, and let `n ≥ 1` be prime to `char k`. Then `H⁰(C_ét, ℤ/n) ≅ ℤ/n`; this only uses
 that `C` is connected, so `k` need not be algebraically closed.
-(blueprint: `sk-thm-curveestimate`) -/
+(blueprint: `sk-thm-curveestimate`, `thm-sc-proper-cohomology`) -/
 theorem IsCurve.nonempty_addEquiv_sheafH_constantZMod_zero (f : C ⟶ Spec (.of k))
     [IsConnectedCurve f] [Smooth f] [IsProper f] (n : ℕ) (_hn : (n : k) ≠ 0) :
     Nonempty (Sheaf.H (C.constantZMod n) 0 ≃+ ZMod n) :=
   have := IsConnectedCurve.connectedSpace' f
   Scheme.nonempty_addEquiv_sheafH_zero_constantZMod C n
+
+/-- A primitive `n`-th root of unity identifies `H^q(C, ℤ/n)` with `H^q(C, μₙ)`. -/
+lemma Scheme.nonempty_addEquiv_sheafH_constantZMod_rootsOfUnitySheaf (f : C ⟶ Spec (.of k))
+    (n : ℕ) (hn : (n : k) ≠ 0) (q : ℕ) :
+    Nonempty (Sheaf.H (C.constantZMod n) q ≃+ Sheaf.H (C.rootsOfUnitySheaf n) q) := by
+  have : NeZero (n : k) := ⟨hn⟩
+  have : NeZero n := .of_neZero_natCast k
+  obtain ⟨-, -, ζ, hζ, -⟩ := IsSepClosed.exists_isPrimitiveRoot.{u, u} k n
+  exact ⟨((Sheaf.functorH _ q).mapIso
+    (C.constantZModIsoRootsOfUnitySheaf n f hζ)).addCommGroupIsoToAddEquiv⟩
+
+omit [IsAlgClosed k] in
+/-- A smooth connected curve is smooth of relative dimension one. -/
+lemma IsConnectedCurve.smoothOfRelativeDimension_one (f : C ⟶ Spec (.of k))
+    [IsConnectedCurve f] [Smooth f] : SmoothOfRelativeDimension 1 f := by
+  have := IsConnectedCurve.connectedSpace' f
+  have : IsLocallyNoetherian C := LocallyOfFiniteType.isLocallyNoetherian f
+  have : IsRegular C := IsRegular.of_smooth f
+  have : IrreducibleSpace C := IsRegular.irreducibleSpace C
+  exact (smoothOfRelativeDimension_iff_topologicalKrullDim_eq f 1).mpr
+    (IsConnectedCurve.krullDim_eq_one (f := f))
 
 /-- **The curve estimate in degree one.** Let `C` be a smooth proper connected curve of genus
 `g` over an algebraically closed field `k`, and let `n ≥ 1` be prime to `char k`. Then
@@ -73,18 +170,24 @@ The genus is `f.genus = dim_k H⁰(C, Ω¹_{C/k})`, the definition of the bluepr
 (`sk-def-curve`). For a smooth proper curve it agrees, by Serre duality, with the arithmetic genus
 `AlgebraicGeometry.Scheme.arithmeticGenus = dim_k H¹(C, 𝒪_C)` of the Riemann–Roch block
 (`AlgebraicGeometry.Scheme.genus_eq_arithmeticGenus`), which is the dimension of the Jacobian.
-(blueprint: `sk-thm-curveestimate`) -/
+
+After choosing a primitive `n`-th root of unity, `ℤ/n ≅ μₙ`, and `H¹(C, μₙ) ≅ Pic(C)[n]`
+(`AlgebraicGeometry.nonempty_addEquiv_sheafH_rootsOfUnitySheaf_one_of_isProper`), which is
+`(ℤ/n)^{2g}` by `AlgebraicGeometry.Scheme.nonempty_addEquiv_torsionBy_pic_and_quotient`.
+(blueprint: `sk-thm-curveestimate`, `thm-sc-proper-cohomology`) -/
 theorem IsCurve.nonempty_addEquiv_sheafH_constantZMod_one (f : C ⟶ Spec (.of k))
     [IsConnectedCurve f] [Smooth f] [IsProper f] (n : ℕ) (hn : (n : k) ≠ 0) :
-    Nonempty (Sheaf.H (C.constantZMod n) 1 ≃+ (Fin (2 * f.genus) → ZMod n)) :=
-  -- Proof sketch: after choosing a primitive `n`-th root of unity, `ℤ/n ≅ μₙ`, and
-  -- `H¹(C, μₙ) ≅ Pic(C)[n]` by
-  -- `AlgebraicGeometry.Scheme.exists_exact_sheafH_rootsOfUnitySheaf_one`, since
-  -- `Γ(C, 𝒪)ˣ = kˣ` is `n`-divisible. The degree map gives `Pic(C)[n] = Pic⁰(C)[n]`, and
-  -- `Pic⁰(C) ≃* J(k)` for the Jacobian `J`, an abelian variety of dimension `g`
-  -- (`AlgebraicGeometry.exists_jacobian`, a group isomorphism), so `Pic⁰(C)[n] ≅ J(k)[n]`,
-  -- which is `(ℤ/n)^{2g}` (`AlgebraicGeometry.abelianVariety_estimate_of_isAlgClosed`).
-  sorry
+    Nonempty (Sheaf.H (C.constantZMod n) 1 ≃+ (Fin (2 * f.genus) → ZMod n)) := by
+  have := IsConnectedCurve.connectedSpace' f
+  let : C.Over (Spec (.of k)) := ⟨f⟩
+  have : SmoothOfRelativeDimension 1 (C ↘ Spec (.of k)) :=
+    IsConnectedCurve.smoothOfRelativeDimension_one f
+  have : IsProper (C ↘ Spec (.of k)) := ‹IsProper f›
+  obtain ⟨e₁⟩ := Scheme.nonempty_addEquiv_sheafH_constantZMod_rootsOfUnitySheaf f n hn 1
+  obtain ⟨e₂⟩ := nonempty_addEquiv_sheafH_rootsOfUnitySheaf_one_of_isProper f n hn
+  obtain ⟨ePic⟩ := C.nonempty_addEquiv_cohomologicalPicardGroup
+  obtain ⟨⟨e₃⟩, -, -⟩ := Scheme.nonempty_addEquiv_torsionBy_pic_and_quotient (C := C) hn
+  exact ⟨e₁.trans (e₂.trans ((AddSubgroup.torsionByCongr ePic.symm n).trans e₃))⟩
 
 /-- **The curve estimate in degree two.** Let `C` be a smooth proper connected curve over an
 algebraically closed field `k`, and let `n ≥ 1` be prime to `char k`. Then
@@ -94,15 +197,41 @@ The isomorphism depends on the choice of a primitive `n`-th root of unity, that 
 isomorphism `μₙ ≅ ℤ/n` of étale sheaves, so it is only asserted to exist. A connected curve has
 dimension exactly one (`AlgebraicGeometry.IsConnectedCurve.krullDim_eq_one`); without this
 `Spec k` would be a smooth proper connected curve with `H² = 0`.
-(blueprint: `sk-thm-curveestimate`) -/
+
+After choosing a primitive `n`-th root of unity, `ℤ/n ≅ μₙ`, and `H²(C, μₙ) ≅ Pic(C)/n`
+(`AlgebraicGeometry.IsCurve.nonempty_addEquiv_sheafH_rootsOfUnitySheaf_two_of_smooth`), which is
+`ℤ/n` by `AlgebraicGeometry.Scheme.nonempty_addEquiv_torsionBy_pic_and_quotient`.
+(blueprint: `sk-thm-curveestimate`, `thm-sc-proper-cohomology`) -/
 theorem IsCurve.nonempty_addEquiv_sheafH_constantZMod_two (f : C ⟶ Spec (.of k))
     [IsConnectedCurve f] [Smooth f] [IsProper f] (n : ℕ) (hn : (n : k) ≠ 0) :
-    Nonempty (Sheaf.H (C.constantZMod n) 2 ≃+ ZMod n) :=
-  -- Proof sketch: after choosing a primitive `n`-th root of unity, `ℤ/n ≅ μₙ`, and
-  -- `H²(C, μₙ) ≅ Pic(C)/n` by
-  -- `AlgebraicGeometry.IsCurve.nonempty_addEquiv_sheafH_rootsOfUnitySheaf_two`.
-  -- The degree `Pic(C) → ℤ` is surjective with `n`-divisible kernel `Pic⁰(C)`, so
-  -- `Pic(C)/n ≅ ℤ/n`.
-  sorry
+    Nonempty (Sheaf.H (C.constantZMod n) 2 ≃+ ZMod n) := by
+  have := IsConnectedCurve.connectedSpace' f
+  let : C.Over (Spec (.of k)) := ⟨f⟩
+  have : SmoothOfRelativeDimension 1 (C ↘ Spec (.of k)) :=
+    IsConnectedCurve.smoothOfRelativeDimension_one f
+  have : IsProper (C ↘ Spec (.of k)) := ‹IsProper f›
+  obtain ⟨e₁⟩ := Scheme.nonempty_addEquiv_sheafH_constantZMod_rootsOfUnitySheaf f n hn 2
+  obtain ⟨e₂⟩ := IsCurve.nonempty_addEquiv_sheafH_rootsOfUnitySheaf_two_of_smooth f n hn
+  obtain ⟨ePic⟩ := C.nonempty_addEquiv_cohomologicalPicardGroup
+  obtain ⟨-, ⟨e₃⟩, -⟩ := Scheme.nonempty_addEquiv_torsionBy_pic_and_quotient (C := C) hn
+  exact ⟨e₁.trans (e₂.trans ((AddSubgroup.quotientRangeZsmulCongr ePic.symm n).trans e₃))⟩
+
+/-- **Kummer computation on a proper curve.** Let `C` be a smooth proper connected curve of
+genus `g` over an algebraically closed field `k` and let `n ≥ 1` be prime to `char k`. Then
+
+`H⁰(C, ℤ/n) ≅ ℤ/n`, `H¹(C, ℤ/n) ≅ (ℤ/n)^{2g}`, `H²(C, ℤ/n) ≅ ℤ/n`, `H^q(C, ℤ/n) = 0` for
+`q > 2`.
+(blueprint: `thm-sc-proper-cohomology`, `sk-thm-curveestimate`) -/
+theorem IsConnectedCurve.sheafH_constantZMod_of_isProper (f : C ⟶ Spec (.of k))
+    [IsConnectedCurve f] [Smooth f] [IsProper f] (n : ℕ) (hn : (n : k) ≠ 0) :
+    Nonempty (Sheaf.H (C.constantZMod n) 0 ≃+ ZMod n) ∧
+      Nonempty (Sheaf.H (C.constantZMod n) 1 ≃+ (Fin (2 * f.genus) → ZMod n)) ∧
+      Nonempty (Sheaf.H (C.constantZMod n) 2 ≃+ ZMod n) ∧
+      ∀ q, 2 < q → Subsingleton (Sheaf.H (C.constantZMod n) q) :=
+  ⟨IsCurve.nonempty_addEquiv_sheafH_constantZMod_zero f n hn,
+    IsCurve.nonempty_addEquiv_sheafH_constantZMod_one f n hn,
+    IsCurve.nonempty_addEquiv_sheafH_constantZMod_two f n hn,
+    fun q hq ↦ IsCurve.subsingleton_sheafH_of_three_le f (C.constantZMod n)
+      (C.isTorsion_constantZMod (by rintro rfl; exact hn Nat.cast_zero)) q hq⟩
 
 end AlgebraicGeometry
