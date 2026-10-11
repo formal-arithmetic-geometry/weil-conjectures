@@ -124,5 +124,23 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-bec1727 (reviewer sub-agent of L); spot-checked: All three earlier return points repaired: (1) E2 one-extension child now a sequence ending in O_X, class in Ext^1(O_X,A), boundary sends 1 to e (Stacks 0B3A verbatim); (2) D1/D2 duplicating pullback child replaced by two strictly smaller children, naturality partial_E(u o t)=partial_{u^*E}(t) and class(u^*E)=delta o u, neither contains the item; Steps 1-3 chain them with u=s, t=1, hypotheses (sequence s^*B ends in O_X, same A) checked; (3) C4 item and all children restricted to schemes, named in the report (E7). Mathlib check: grep extClass lemmas, extClass_naturality is the tool for both children but not an exact match for either (pullback SES construction needed), verdict no match; slopmaster2 LongExact.lean has no naturality-under-pullback declaration."
  },
- "lead_note": "2026-10-10 L (R-bec1727): Both lem-sc-p1-pullback-extension-class and lem-sc-p1-boundary-connecting-naturality should split via Mathlib ShortComplex.ShortExact.extClass_naturality (Ext/ExtClass.lean:131) applied to the morphism u^*E -> E with tau1 = id, tau3 = u; slopmaster2 H.δ is built from extClass (LongExact.lean:66-89). No exact declaration for either node (grep of Mathlib extClass lemmas and slopmaster2 LongExact.lean, verdict no match), so they stay unsplit."
+ "lead_note": "2026-10-10 L (R-bec1727): Both lem-sc-p1-pullback-extension-class and lem-sc-p1-boundary-connecting-naturality should split via Mathlib ShortComplex.ShortExact.extClass_naturality (Ext/ExtClass.lean:131) applied to the morphism u^*E -> E with tau1 = id, tau3 = u; slopmaster2 H.δ is built from extClass (LongExact.lean:66-89). No exact declaration for either node (grep of Mathlib extClass lemmas and slopmaster2 LongExact.lean, verdict no match), so they stay unsplit.",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.BoundaryExtensionComposition",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.boundary_extension_composition",
+  "file": "lean/Sheaf/AlgebraicGeometry/BoundaryExtensionComposition.lean",
+  "statement": "theorem boundary_extension_composition {X : Scheme.{u}} [HasExt.{u} X.Modules] {S : ShortComplex X.Modules} (hS : S.ShortExact) (s : 𝟙_ X.Modules ⟶ S.X₃) : H.δ hS 0 (locallyFreeUnitExtAddEquivH S.X₃ 0 (Abelian.Ext.mk₀ s)) = locallyFreeUnitExtAddEquivH S.X₁ 1 ((Abelian.Ext.mk₀ s).comp hS.extClass (Nat.zero_add 1))",
+  "branch": "sheaf-dag",
+  "by": "J1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "J1",
+  "result": "pass",
+  "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
+ }
 }
