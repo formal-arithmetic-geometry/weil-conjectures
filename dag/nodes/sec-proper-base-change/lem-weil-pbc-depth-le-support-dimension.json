@@ -212,5 +212,23 @@
   "worker": "stage1",
   "summary": "Checked statement against Stacks 00LK (lemma-bound-depth, algebra.tex 17813-17817; tag verified): agrees, statement kept. Not a Mathlib leaf (B8): the pinned Mathlib has no depth (grep: only a TODO in RegularSequence.lean), so the passage from depth to the supremum of regular-sequence lengths is not stated; Module.supportDim_add_length_eq_supportDim_of_isRegular (KrullDimension/Regular.lean:197) stays the mathlib_candidate (line added). Agreement of Module.supportDim with the DAG's chain-length dim Supp is already recorded by the reviewed leaves lem-weil-pbc-support-dimension-quotient-element-bound/-equality. Split in 5 steps following the source's proof: Nakayama gives mM != M so depth is the sup over M-regular sequences in m (the IM != M case of 00LJ); claim P(r) by induction on the length r: base r = 0 by Supp(N) = V(Ann N) containing m; step: f_2..f_r is (N/f_1N)-regular and dim Supp drops by exactly one (0B52, existing leaf ...-equality clause (2)). Reorganized from induction on dim Supp to induction on r, which removes the source's base case via Ass(M) = {m}. No new nodes. The six citers use the statement as stated."
  },
- "reviewed": "pass (L, 2026-10-10): 5 steps follow 00LK, inducting on the length of a regular sequence instead of on dim Supp (avoids the associated-primes base case): mM != M by Nakayama, nonzero finite modules have dim Supp >= 0, the tail of a regular sequence is regular on N/f_1N, and a nonzerodivisor drops dim Supp by exactly one (0B52 equality leaf). No new nodes."
+ "reviewed": "pass (L, 2026-10-10): 5 steps follow 00LK, inducting on the length of a regular sequence instead of on dim Supp (avoids the associated-primes base case): mM != M by Nakayama, nonzero finite modules have dim Supp >= 0, the tail of a regular sequence is regular on N/f_1N, and a nonzerodivisor drops dim Supp by exactly one (0B52 equality leaf). No new nodes.",
+ "lean": {
+  "module": "Sheaf.RingTheory.DepthLeSupportDimension",
+  "declaration": "IsLocalRing.depth_le_supportDim",
+  "file": "lean/Sheaf/RingTheory/DepthLeSupportDimension.lean",
+  "statement": "theorem depth_le_supportDim {R : Type u} [CommRing R] [IsNoetherianRing R] [IsLocalRing R] (M : Type v) [AddCommGroup M] [Module R M] [Module.Finite R M] [Nontrivial M] : (IsLocalRing.depth (R := R) M : WithBot ℕ∞) ≤ Module.supportDim R M",
+  "branch": "sheaf-dag",
+  "by": "M1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-dsd0938",
+  "group": "M1",
+  "result": "pass",
+  "note": "CommRing+IsNoetherianRing+IsLocalRing R; Module.Finite M; Nontrivial M (M!=0); Supp = Module.support (LocalizedModule at primeCompl nontrivial); dim = Module.supportDim = Order.krullDim of support (chain lengths, matches landed CM modules); depth = recorded IsLocalRing.depth; conclusion depth <= supportDim via ℕ∞->WithBot ℕ∞ coercion"
+ }
 }
