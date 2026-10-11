@@ -345,6 +345,21 @@ noncomputable def isTerminalPullbackEtaleTerminal {X Y : Scheme.{u}} (f : X ⟶ 
     (asIso ((MorphismProperty.Over.pullback @AlgebraicGeometry.Etale ⊤ f).obj
       (etaleTerminal Y)).hom) (Category.comp_id _)).symm
 
+/-- The evaluation morphism `⊕_{s ∈ Γ(X, F)} Λ_X ⟶ F`, `1_s ↦ s`, of an étale sheaf of
+`Λ`-modules. -/
+noncomputable def globalSectionsEvaluation (X : Scheme.{u})
+    (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :
+    ∐ (fun _ : F.obj.obj (op (etaleTerminal X)) ↦
+      (constantSheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj (ModuleCat.of Λ Λ)) ⟶ F :=
+  Sigma.desc fun s ↦ ((constantSheafAdj _ _ (isTerminalEtaleTerminal X)).homEquiv _ _).symm
+    (ModuleCat.ofHom (LinearMap.toSpanSingleton Λ _ s))
+
+/-- Blueprint `def-kun-global-generated` (for sheaves of `Λ`-modules): `F` is *globally
+generated* if its evaluation morphism `⊕_{s ∈ Γ(X, F)} Λ_X ⟶ F` is an epimorphism. -/
+def IsGloballyGenerated (X : Scheme.{u}) (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :
+    Prop :=
+  Epi (globalSectionsEvaluation Λ X F)
+
 /-- Blueprint `lem-kun-pullback-constant` (underived): the inverse image of a constant sheaf is
 the constant sheaf, `f^*(M_Y) ≅ M_X`. Both functors are left adjoint to the global sections
 functor on `X_ét`, since `Γ(Y, f_* G) = Γ(X, G)`. -/
@@ -512,6 +527,31 @@ theorem nonempty_iso_constantFunctor_rightDerivedGlobalSections_of_isSepClosed
   ⟨((constantSheafEquivalenceOfIsSepClosed Λ).mapDerivedCategory.counitIso.app C).symm ≪≫
     (constantFunctor Λ _).mapIso ((rightDerivedGlobalSectionsIsoOfIsSepClosed Λ).app C).symm⟩
 
+
+/-- Blueprint `lem-kun-03qu-global-generation` (for sheaves of `Λ`-modules): over a separably
+closed field `k`, every étale sheaf of `Λ`-modules on `Spec k` is globally generated. -/
+theorem isGloballyGenerated_of_isSepClosed
+    (F : Sheaf (Spec (.of k)).smallEtaleTopology (ModuleCat.{u + 1} Λ)) :
+    IsGloballyGenerated Λ (Spec (.of k)) F := by
+  let adj := constantSheafAdj (Spec (.of k)).smallEtaleTopology (ModuleCat.{u + 1} Λ)
+    (isTerminalEtaleTerminal (Spec (.of k)))
+  let Γ := (sheafSections (Spec (.of k)).smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj
+    (op (etaleTerminal (Spec (.of k))))
+  have : Γ.IsEquivalence := isEquivalence_sheafSections_etalePoint Λ
+  refine Γ.epi_of_epi_map ?_
+  rw [ModuleCat.epi_iff_surjective]
+  intro s
+  refine ⟨(adj.unit.app (ModuleCat.of Λ Λ) ≫ Γ.map (Sigma.ι
+    (fun _ : F.obj.obj (op (etaleTerminal (Spec (.of k)))) ↦ (constantSheaf
+      (Spec (.of k)).smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj (ModuleCat.of Λ Λ)) s))
+      (1 : Λ), ?_⟩
+  have h := adj.homEquiv_unit (ModuleCat.of Λ Λ) F
+    ((adj.homEquiv _ _).symm (ModuleCat.ofHom (LinearMap.toSpanSingleton Λ _ s)))
+  rw [Equiv.apply_symm_apply] at h
+  rw [← ConcreteCategory.comp_apply, Category.assoc, ← Γ.map_comp,
+    globalSectionsEvaluation, Sigma.ι_desc, ← h]
+  simp only [ModuleCat.hom_ofHom]
+  exact one_smul Λ s
 end Point
 
 end Inputs
