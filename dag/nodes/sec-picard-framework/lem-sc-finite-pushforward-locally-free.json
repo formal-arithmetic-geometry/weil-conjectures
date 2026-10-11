@@ -121,5 +121,24 @@
   "group": "K1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-fpl1708 (reviewer sub-agent of L); spot-checked: Start Sat Oct 10 05:07:53 PM UTC 2026. Source Stacks morphisms.tex Tag 04MH (lemma-finite-locally-free, line 12429: S = coprod S_d clopen, f|X_d finite locally free of degree d) and Tag 02KB; item hypotheses (finite, flat, lfp) are exactly def-pc-finite-locally-free. FIX more, RETURN less (per audit coord/audit-new-nodes.md 16:50): the delivered three-step affine route duplicated existing nodes and step 1 hid the fact that a finite algebra of finite presentation is a finitely presented module (C1); new node lem-sc-finite-affine-flat-projective dropped (--drop-nodes) and the proof replaced in dag/nodes/sec-picard-framework/lem-sc-finite-pushforward-locally-free.json: proof, proof_deps, proof_origin, split_report: step 1 cites lem-weil-pbc-finite-locally-free-degree-locally-constant (statement gives the clopen decomposition with f_d finite locally free of degree d, letters X,Y exchanged) and def-pc-finite-locally-free; step 2 cites lem-pc-flf-properties on each piece (f_d)_*O locally free of rank d, with (f_*O_X)|_{Y_d}=(f_d)_*O_{X_d} by definition of direct image, giving the open cover and locally constant rank. Tool uses (C8, generic black boxes, off-unit): lem-weil-pbc-finite-locally-free-degree-locally-constant (sk-thm-p1), lem-pc-flf-properties (sk-the-hilbert-functor--definition-1); worker's declared tool use lem-weil-pbc-finite-projective-standard-free-cover dropped as no longer cited. No cycle (degree lemma depends only on lem-weil-pbc-finite-flat-rank-iso, Mathlib leaf FlatRank.lean:232 isLocallyConstant_finrank verified by sed). Small cases: d=0 piece (empty fibres, pushforward 0), identity (Y=Y_1), disconnected base with two ranks. End Sat Oct 10 05:09:04 PM UTC 2026.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FinitePushforwardLocallyFree",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.isFiniteLocallyFree_pushforward_unit",
+  "file": "lean/Sheaf/AlgebraicGeometry/FinitePushforwardLocallyFree.lean",
+  "statement": "theorem isFiniteLocallyFree_pushforward_unit {X Y : Scheme.{u}} (f : X ⟶ Y) [IsFinite f] [Flat f] [LocallyOfFinitePresentation f] : SheafOfModules.IsFiniteLocallyFree.{u, u, u} (R := Y.ringCatSheaf) ((pushforward f).obj (SheafOfModules.unit X.ringCatSheaf)) ∧ ∃ d : Y → ℕ, IsLocallyConstant d ∧ ∀ (U : Y.Opens) (n : ℕ), (∀ y ∈ U, d y = n) → SheafOfModules.IsFiniteLocallyFreeOfRank.{u, u, u} (((pushforward f).obj (SheafOfModules.unit X.ringCatSheaf)).over U) n",
+  "branch": "sheaf-dag",
+  "by": "G1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-fpl1117"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-fpl1117",
+  "group": "G1",
+  "result": "fix",
+  "note": "X Y Scheme.{u}, f : X ⟶ Y; finite=IsFinite, flat=Flat, lfp=LocallyOfFinitePresentation; f_*O_X=(pushforward f).obj (unit X.ringCatSheaf); FIX: ad-hoc over-U ≅ free (ULift (Fin d)) encoding replaced by the source's SheafOfModules.IsFiniteLocallyFree (def-sc-finite-locally-free-sheaf, Stacks 01C6) plus locally constant d : Y → ℕ with (f_*O_X).over U IsFiniteLocallyFreeOfRank n on every open U where d = n (clopen pieces); renamed isFiniteLocallyFree_pushforward_unit (no collision; source isFiniteLocallyFree_pushforward is for general ℱ, isFiniteLocallyFreeOfRank_pushforward_unit needs global degree, so existing: false); edge cases d=0, U empty, empty X/Y; compiled clean"
  }
 }
