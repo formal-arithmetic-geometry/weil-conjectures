@@ -21,7 +21,8 @@
   "def-pc-derived-category",
   "def-pc-derived-direct-image",
   "def-pc-derived-pullback",
-  "def-pc-base-change"
+  "def-pc-base-change",
+  "def-pc-derived-pullback-tensor-comparison"
  ],
  "proof": [
   {
@@ -130,5 +131,23 @@
    "decls": [],
    "missing": []
   }
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SingleComplexBaseChangeCriterion",
+  "declaration": "AlgebraicGeometry.singleComplexBaseChangeCriterion",
+  "file": "lean/Sheaf/AlgebraicGeometry/SingleComplexBaseChangeCriterion.lean",
+  "statement": "theorem singleComplexBaseChangeCriterion [∀ Y : Scheme.{u}, HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))] {X X' S S' : Scheme.{u}} (f : X ⟶ S) (f' : X' ⟶ S') (g : S' ⟶ S) (g' : X' ⟶ X) (sq : IsPullback g' f' f g) [QuasiCompact f] [QuasiSeparated f] (E : schemeDerivedCategory X) (hE : schemeDerivedQCohProperty X E) (G : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ) (hG_bound : ∃ b : ℤ, G.IsStrictlyLE b) (hG_qcoh : ∀ i : ℤ, (G.X i).IsQuasicoherent) (h_stalk : SingleComplexBaseChange.StalkCondition f f' g g' sq (DerivedCategory.Q.obj G) (DerivedCategory.Q.obj (((Scheme.Modules.tensorPullback g').mapHomologicalComplex (.up ℤ)).obj G)) ((SingleComplexBaseChange.counit g').app ((HomotopyCategory.quotient _ (.up ℤ)).obj G))) (τ : ∀ A B : schemeDerivedCategory X, (derivedPullback g').obj (A ⊗ B) ⟶ (derivedPullback g').obj A ⊗ (derivedPullback g').obj B) (hτ : IsCanonicalPullbackTensorComparison g' τ) : IsIso (schemeDerivedBaseChangeMap f f' g g' sq.w (E ⊗ DerivedCategory.Q.obj G) ≫ (schemeDerivedDirectImage f').map (τ E (DerivedCategory.Q.obj G) ≫ (derivedPullback g').obj E ◁ (SingleComplexBaseChange.counit g').app ((HomotopyCategory.quotient _ (.up ℤ)).obj G)))",
+  "branch": "sheaf-dag",
+  "by": "R1",
+  "date": "2026-10-12",
+  "existing": false,
+  "fixed_by": "R-bsc"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-bsc",
+  "group": "R1",
+  "result": "fix"
  }
 }

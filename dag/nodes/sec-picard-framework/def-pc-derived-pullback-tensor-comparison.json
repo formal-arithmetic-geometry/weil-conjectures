@@ -1,0 +1,118 @@
+{
+ "id": "def-pc-derived-pullback-tensor-comparison",
+ "kind": "definition",
+ "title": "Canonical derived pullback tensor comparison in K-flat coordinates",
+ "statement": "Let $g:T\\to X$ be a morphism of schemes [def-pc-scheme], with derived categories [def-pc-derived-category], derived tensor [def-pc-scheme-derived-tensor-structure], and derived pullback [def-pc-derived-pullback]. Define the canonical map $\\tau_g(E,K):Lg^*(E\\otimes^L K)\\to Lg^*E\\otimes^L Lg^*K$ for all $E,K\\in D(\\mathcal O_X)$. The family is natural in both derived inputs. It is the map determined on every pair of K-flat representatives $P,N$ [def-pc-kflat-complex] by the following equation. Write $\\mu_X(P,N):Q(P)\\otimes^L Q(N)\\to Q(\\operatorname{Tot}(P\\otimes N))$ for the canonical localization tensor comparison [def-pc-tensor-complex-sheaves], and $\\epsilon_g(P):Lg^*Q(P)\\to Q(g^*P)$ for the shared left-derived counit [def-pc-single-complex-base-change-stalk-condition], using the actual termwise module pullback [def-pc-module-pullback]. Let $\\phi_g(P,N):g^*\\operatorname{Tot}(P\\otimes N)\\cong\\operatorname{Tot}(g^*P\\otimes g^*N)$ be the chain isomorphism whose map on the summand $P^p\\otimes N^q$ is precisely the canonical module pullback tensor isomorphism [lem-weil-pbc-module-pullback-tensor], followed by the target summand inclusion. Then $Lg^*(\\mu_X(P,N));\\epsilon_g(\\operatorname{Tot}(P\\otimes N));Q(\\phi_g(P,N))=\\tau_g(Q(P),Q(N));(\\epsilon_g(P)\\otimes\\epsilon_g(N));\\mu_T(g^*P,g^*N)$. Choose the comparison supplied by this equation. K-flat resolutions and their universal comparison maps make it independent of representatives. This is the canonical isomorphism of [lem-pc-derived-pullback-tensor-product], now as a named map on the recorded derived tensor objects.",
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 079U (lemma-pullback-tensor-product); perfect.tex Tag 0DJA(1), canonical tensor map in lemma-single-complex-base-change-condition-inherited"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "def-pc-scheme-derived-tensor-structure",
+  "def-pc-derived-pullback",
+  "def-pc-kflat-complex",
+  "def-pc-tensor-complex-sheaves",
+  "def-pc-single-complex-base-change-stalk-condition",
+  "def-pc-module-pullback",
+  "lem-weil-pbc-module-pullback-tensor",
+  "lem-pc-derived-pullback-tensor-product"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "canonical tensor comparison for derived inverse image of module sheaves",
+   "results": "Service unavailable: Internal Server Error.",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "inverse image tensor of unbounded quasi coherent complexes canonical comparison",
+   "results": "8 generic sheaf and homological-complex tensor hits; no scheme derived pullback tensor comparison definition.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Functor.LaxMonoidal.μ",
+   "results": "Unknown identifier on public index; local upstream localization lax monoidal map found and reused.",
+   "date": "2026-10-12",
+   "verdict": "generic localization map reused"
+  },
+  {
+   "tool": "grep",
+   "query": "derived.*pullback.*tensor|pullback.*tensor.*derived; canonicalPullbackTensorComparison; IsCanonicalPullbackTensorComparison; pullbackTensorModelMap in DAG, Mathlib, WeilConjectures and lean/Sheaf",
+   "results": "Existing derivedPullback_tensorProduct is an existential K-flat-coordinate theorem, not a named comparison on the shared derived monoidal tensor. Generic upstream DerivedCategory.laxMonoidalQ reused. No canonical global comparison definition found; no name collisions.",
+   "date": "2026-10-12",
+   "verdict": "no exact definition; existing components reused"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-pc-rf-base-change-single-complex-criterion",
+  "date": "2026-10-12",
+  "group": "R1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-perfect-base-change",
+   "place": "canonical tensor comparison in the single-complex criterion",
+   "via": [
+    "lem-pc-rf-base-change-single-complex-criterion",
+    "lem-pc-rf-base-change-complex",
+    "lem-pc-proper-support-perfect-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.CanonicalPullbackTensorComparison",
+  "declaration": "AlgebraicGeometry.IsCanonicalPullbackTensorComparison",
+  "file": "lean/Sheaf/AlgebraicGeometry/CanonicalPullbackTensorComparison.lean",
+  "statement": "def IsCanonicalPullbackTensorComparison {T X : Scheme.{uTC}} (g : T ⟶ X) (τ : ∀ E K : schemeDerivedCategory X, (derivedPullback g).obj (E ⊗ K) ⟶ (derivedPullback g).obj E ⊗ (derivedPullback g).obj K) : Prop",
+  "branch": "sheaf-dag",
+  "by": "R1",
+  "date": "2026-10-12",
+  "existing": false,
+  "declarations": [
+   "AlgebraicGeometry.pullbackTensorTotal",
+   "AlgebraicGeometry.pullbackTensorModelMap",
+   "AlgebraicGeometry.IsCanonicalPullbackTensorComparison",
+   "AlgebraicGeometry.exists_canonicalPullbackTensorComparison",
+   "AlgebraicGeometry.IsCanonicalPullbackTensorComparison.unique"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-bsc",
+  "group": "R1",
+  "result": "fix",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-bsc",
+  "group": "R1",
+  "result": "fix"
+ }
+}
