@@ -210,5 +210,23 @@
   "by": "L",
   "result": "pass",
   "note": "Reviewed by the lead (opus-relaunch6). Node created by C1; the map A^h -> A^ is now named (completion followed by theta^{-1}) and faithful flatness has a definition node. Seven steps along the proof of 0AGV with the gap of Stacks (each etale B is Noetherian: finite presentation and 00FN) filled; seven new nodes: four Mathlib leaves verified by line (00HB faithfully flat: Module.FaithfullyFlat FaithfullyFlat/Basic.lean:63 with RingHom.FaithfullyFlat; 00HP via faithfullyFlat_iff; 033E descent of Noetherian: IsNoetherian.of_isNoetherian_tensorProduct_of_faithfullyFlat :634; 00FN: Algebra.FiniteType.isNoetherianRing FiniteType.lean:187) and three unsplit (0AGU flatness of A -> A^h with A/I^n = A^h/I^n A^h; 05UU flatness through a filtered colimit of rings; the flat-modulo-I^n lemma from 051H). Faithful flatness of gamma from the Jacobson-radical property of the henselian pair (lem-weil-pbc-henselian-factorization-criterion) and 00HP."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.PairHenselizationNoetherianCompletion",
+  "file": "lean/Sheaf/RingTheory/PairHenselizationNoetherianCompletion.lean",
+  "declaration": "RingTheory.pair_henselization_noetherian_completion",
+  "statement": "theorem pair_henselization_noetherian_completion (A : Type u) [CommRing A] [IsNoetherianRing A] (I : Ideal A) (c : Cocone (ObjectProperty.ι (fun C : Under (CommRingCat.of A) ↦ AlgebraicGeometry.Etale (AlgebraicGeometry.Spec.map C.hom) ∧ Function.Bijective (Ideal.quotientMap (I.map C.hom.hom) C.hom.hom (Ideal.le_comap_map))))) (hc : IsColimit c) : IsNoetherianRing c.pt.right ∧ c.pt.hom.hom.Flat ∧ ∃ θ : AdicCompletion I A ≃+* AdicCompletion (I.map c.pt.hom.hom) c.pt.right, (∀ (n : ℕ) (x : AdicCompletion I A) (a : A), AdicCompletion.evalₐ I n x = Ideal.Quotient.mk (I ^ n) a → AdicCompletion.evalₐ (I.map c.pt.hom.hom) n (θ x) = Ideal.Quotient.mk ((I.map c.pt.hom.hom) ^ n) (c.pt.hom.hom a)) ∧ (θ.symm.toRingHom.comp (algebraMap c.pt.right (AdicCompletion (I.map c.pt.hom.hom) c.pt.right))).comp c.pt.hom.hom = algebraMap A (AdicCompletion I A) ∧ RingHom.FaithfullyFlat (θ.symm.toRingHom.comp (algebraMap c.pt.right (AdicCompletion (I.map c.pt.hom.hom) c.pt.right)))",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-12",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "E1",
+  "result": "pass",
+  "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
  }
 }
