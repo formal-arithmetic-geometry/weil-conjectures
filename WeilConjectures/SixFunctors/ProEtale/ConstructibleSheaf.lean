@@ -10,6 +10,8 @@ public import WeilConjectures.ConstructibleSheaf.Monoidal
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.ConstantSheaf
 public import WeilConjectures.SixFunctors.ProEtale.Comparison
 public import WeilConjectures.SixFunctors.ProEtale.Comparison.LowerStarAcyclic
+public import WeilConjectures.SixFunctors.ProEtale.Comparison.EssImage
+public import WeilConjectures.Mathlib.Topology.Spectral.ConstructibleTopology
 public import WeilConjectures.SixFunctors.ProEtale.UpperLowerStar.GlobalSections
 
 /-!
@@ -173,6 +175,51 @@ theorem isConstructible_comparisonUpperStar_obj [Finite Λ] {X : Scheme.{u}}
   exact isFiniteLocallyConstant_of_iso
     ((comparisonUpperStarCompUpperStarIso (ModuleCat.{u + 1} Λ) (S.immersion i)).app G).symm
     (isFiniteLocallyConstant_comparisonUpperStar_obj _)
+
+/-- The immersions of the strata of a stratification are quasi-compact: the strata are
+constructible, and a constructible subset of an affine scheme is quasi-compact. -/
+instance _root_.AlgebraicGeometry.Scheme.Stratification.quasiCompact_immersion {X : Scheme.{u}}
+    (S : Stratification X) (i : Fin S.n) : QuasiCompact (S.immersion i) := by
+  have hV (V : X.affineOpens) : IsCompact ((S.immersion i).base ⁻¹' (V : Set X)) := by
+    have : IsAffine (V : X.Opens) := V.2
+    have hc : IsCompact ((V : X.Opens).ι.base ⁻¹' S.stratum i) := by
+      have := isCompact_iInter_of_isConstructible (X := (V : X.Opens).toScheme)
+        (s := fun _ : Unit ↦ (V : X.Opens).ι.base ⁻¹' S.stratum i) fun _ ↦
+          (S.isConstructible_stratum i).preimage_of_isOpenEmbedding
+            (V : X.Opens).ι.isOpenEmbedding
+      rwa [Set.iInter_const] at this
+    rw [(S.immersion i).isEmbedding.isCompact_iff, Set.image_preimage_eq_inter_range,
+      S.range_immersion]
+    have := hc.image (V : X.Opens).ι.continuous
+    rwa [Set.image_preimage_eq_inter_range, Scheme.Opens.range_ι, Set.inter_comm] at this
+  refine ⟨fun U hU hUc ↦ ?_⟩
+  obtain ⟨s, hs, rfl⟩ := (isCompact_and_isOpen_iff_finite_and_eq_biUnion_affineOpens).1 ⟨hUc, hU⟩
+  rw [Set.preimage_iUnion₂]
+  exact hs.isCompact_biUnion fun V _ ↦ hV V
+
+/-- A pro-étale sheaf locally constant with finite stalks is of étale origin: it is so locally,
+constant sheaves being of étale origin, and being of étale origin is local for the pro-étale
+topology (`comparisonUpperStar_essImage_of_mem_proetalePrecoverage`). -/
+theorem comparisonUpperStar_essImage_of_isFiniteLocallyConstant {X : Scheme.{u}}
+    {F : Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} Λ)}
+    (hF : IsFiniteLocallyConstant Λ F) : (ν^*(X)[ModuleCat.{u + 1} Λ]).essImage F := by
+  obtain ⟨ι, W, g, hg, h⟩ := hF
+  refine comparisonUpperStar_essImage_of_mem_proetalePrecoverage g hg F fun i ↦ ?_
+  obtain ⟨M, -, ⟨e⟩⟩ := h i
+  exact ⟨_, ⟨(comparisonUpperStarConstantSheafIso Λ (W i)).app M ≪≫ e.symm⟩⟩
+
+/-- A constructible pro-étale sheaf is of étale origin: its pullbacks to the strata are, and the
+immersions of the strata are quasi-compact and jointly surjective
+(`comparisonUpperStar_essImage_of_finite`). -/
+theorem comparisonUpperStar_essImage_of_isConstructible {X : Scheme.{u}}
+    {F : Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} Λ)}
+    (hF : IsConstructible Λ F) : (ν^*(X)[ModuleCat.{u + 1} Λ]).essImage F := by
+  obtain ⟨S, hS⟩ := hF
+  refine comparisonUpperStar_essImage_of_finite S.immersion (fun x ↦ ?_) F fun i ↦
+    comparisonUpperStar_essImage_of_isFiniteLocallyConstant (hS i)
+  have hx : x ∈ ⋃ i, S.stratum i := S.iUnion_stratum_eq_univ ▸ Set.mem_univ x
+  obtain ⟨i, hi⟩ := Set.mem_iUnion.1 hx
+  exact ⟨i, (S.range_immersion i).symm ▸ hi⟩
 
 variable (Λ) in
 /-- Blueprint `lem-sf-proetale-constructible-origin`: Constructible pro-étale coefficients are
