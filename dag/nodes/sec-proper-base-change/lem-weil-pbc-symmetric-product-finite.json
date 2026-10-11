@@ -245,5 +245,23 @@
   "by": "L",
   "result": "pass",
   "note": "the chart argument of the imported node and of the parenthetical in unit step 5 does not prove finiteness for n >= 2 (the two charts D_+(T_0), D_+(T_n) do not cover P^n, and the mixed charts are not preimages of opens): finiteness proved instead by affine (01QF/01S8) + proper over separated (01W6) => integral (01WM) => finite (01WJ); the unit claim (sigma_n finite surjective) and the route are unchanged, so this is a node-level proof, not a route departure; pqf-lem-affine-local-target (sk-prop-nagata-sketch-zmt), lem-weil-pbc-proper-base-change and lem-weil-pbc-proper-composition (sk-thm-br) accepted as tool uses; 5 new nodes, 3 Mathlib leaves"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SymmetricProductFinite",
+  "declaration": "AlgebraicGeometry.symmetricProduct_finite",
+  "file": "lean/Sheaf/AlgebraicGeometry/SymmetricProductFinite.lean",
+  "statement": "theorem symmetricProduct_finite (S : Scheme.{u}) (m : ℕ) (X : Over S) (pr : Fin (m + 1) → (X ⟶ Over.mk (ℙ(ULift.{u} (Fin 2); S) ↘ S))) (_hprod : IsLimit (Fan.mk X pr)) (hL : (symmetricProductLineBundle (fun i ↦ (pr i).left)).IsInvertible) (hs : Epi ((symmetricProductLineBundle (fun i ↦ (pr i).left)).freeHomEquiv.symm (symmetricProductCoordinateSection (fun i ↦ (pr i).left)))) (σ : X.left ⟶ ℙ(ULift.{u} (Fin (m + 2)); S)) (_hσ : σ = @ProjectiveSpace.homOfGeneratingSections.{u} (ULift.{u} (Fin (m + 2))) _ X.left S X.hom (symmetricProductLineBundle (fun i ↦ (pr i).left)) hL (symmetricProductCoordinateSection (fun i ↦ (pr i).left)) hs) : IsFinite σ ∧ ∀ (V : S.Opens) (R : CommRingCat.{u}) (eV : V.toScheme ≅ Spec R) (b : Fin 2) (U : (ℙ(ULift.{u} (Fin (m + 2)); S)).Opens) (hU : U = ProjectiveSpace.standardOpen _ S (ULift.up (if b = 0 then 0 else Fin.last (m + 1))) ⊓ (ℙ(ULift.{u} (Fin (m + 2)); S) ↘ S) ⁻¹ᵁ V), (σ ⁻¹ᵁ U : Set X.left) = (⋂ i : Fin (m + 1), Scheme.Modules.nonvanishingLocus (symmetricProductFactor (fun i ↦ (pr i).left) i) ((symmetricProductFactorSection (fun i ↦ (pr i).left) i (if b = 0 then 1 else 0)).val (op ⊤))) ∩ X.hom.base ⁻¹' (V : Set S) ∧ IsAffineOpen U ∧ IsAffineOpen (σ ⁻¹ᵁ U) ∧ ∃ (h : U.toScheme ⟶ V.toScheme) (E : MvPolynomial (Fin (m + 1)) R ≃+* Γ(ℙ(ULift.{u} (Fin (m + 2)); S), U)) (D : MvPolynomial (Fin (m + 1)) R ≃+* Γ(X.left, σ ⁻¹ᵁ U)) (φ : MvPolynomial (Fin (m + 1)) R →+* MvPolynomial (Fin (m + 1)) R), h ≫ V.ι = U.ι ≫ (ℙ(ULift.{u} (Fin (m + 2)); S) ↘ S) ∧ (∀ r : R, E (MvPolynomial.C r) = U.topIso.hom ((h ≫ eV.hom).appTop ((Scheme.ΓSpecIso R).inv r))) ∧ (∀ i : Fin (m + 1), E (MvPolynomial.X i) = (ℙ(ULift.{u} (Fin (m + 2)); S)).presheaf.map (homOfLE (hU.symm ▸ inf_le_left)).op (ProjectiveSpace.coordRatio _ S (ULift.up (if b = 0 then 0 else Fin.last (m + 1))) (ULift.up (if b = 0 then i.succ else i.castSucc)))) ∧ (∀ i : Fin (m + 1), (symmetricProductFactor (fun i ↦ (pr i).left) i).presheaf.map (homOfLE (le_top : σ ⁻¹ᵁ U ≤ ⊤)).op ((symmetricProductFactorSection (fun i ↦ (pr i).left) i (if b = 0 then 0 else 1)).val (op ⊤)) = D (MvPolynomial.X i) • (symmetricProductFactor (fun i ↦ (pr i).left) i).presheaf.map (homOfLE (le_top : σ ⁻¹ᵁ U ≤ ⊤)).op ((symmetricProductFactorSection (fun i ↦ (pr i).left) i (if b = 0 then 1 else 0)).val (op ⊤))) ∧ (∀ f : MvPolynomial (Fin (m + 1)) R, D (φ f) = σ.app U (E f)) ∧ (∀ r : R, φ (MvPolynomial.C r) = MvPolynomial.C r) ∧ (∀ i : Fin (m + 1), φ (MvPolynomial.X i) = MvPolynomial.esymm (Fin (m + 1)) R (if b = 0 then i.val + 1 else m + 1 - i.val)) ∧ φ.Finite ∧ (∏ i : Fin (m + 1), (Polynomial.X - Polynomial.C (MvPolynomial.X i) : Polynomial (MvPolynomial (Fin (m + 1)) R))) = ∑ k ∈ Finset.range (m + 2), Polynomial.C ((-1 : MvPolynomial (Fin (m + 1)) R) ^ k * MvPolynomial.esymm (Fin (m + 1)) R k) * Polynomial.X ^ (m + 1 - k) ∧ (∏ i : Fin (m + 1), (Polynomial.X - Polynomial.C (MvPolynomial.X i) : Polynomial (MvPolynomial (Fin (m + 1)) R))).Monic ∧ ∀ i : Fin (m + 1), Polynomial.eval (MvPolynomial.X i) (∏ k : Fin (m + 1), (Polynomial.X - Polynomial.C (MvPolynomial.X k) : Polynomial (MvPolynomial (Fin (m + 1)) R))) = 0",
+  "branch": "sheaf-dag",
+  "by": "U1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "U1",
+  "result": "pass",
+  "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
  }
 }
