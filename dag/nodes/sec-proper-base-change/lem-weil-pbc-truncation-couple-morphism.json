@@ -229,5 +229,46 @@
   "date": "2026-10-09",
   "by": "L",
   "result": "pass"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.TruncationExchangeCouple",
+  "declaration": "AlgebraicGeometry.Etale.truncation_exchange_couple_morphism",
+  "declarations": [
+   "CategoryTheory.TruncationExchange.trunc",
+   "CategoryTheory.TruncationExchange.sheaf",
+   "CategoryTheory.TruncationExchange.layer",
+   "CategoryTheory.TruncationExchange.inclusion",
+   "CategoryTheory.TruncationExchange.layerIso",
+   "CategoryTheory.TruncationExchange.exists_triangle",
+   "CategoryTheory.TruncationExchange.projection",
+   "CategoryTheory.TruncationExchange.boundary",
+   "CategoryTheory.TruncationExchange.D",
+   "CategoryTheory.TruncationExchange.E",
+   "CategoryTheory.TruncationExchange.alpha",
+   "CategoryTheory.TruncationExchange.g",
+   "CategoryTheory.TruncationExchange.f",
+   "CategoryTheory.TruncationExchange.pageIso",
+   "CategoryTheory.TruncationExchange.tD",
+   "CategoryTheory.TruncationExchange.tE",
+   "AlgebraicGeometry.Etale.truncationPhi",
+   "AlgebraicGeometry.Etale.truncationPsi",
+   "AlgebraicGeometry.Etale.truncationSourceIso",
+   "AlgebraicGeometry.Etale.truncationTargetIso",
+   "AlgebraicGeometry.Etale.truncation_exchange_couple_morphism"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/TruncationExchangeCouple.lean",
+  "statement": "theorem truncation_exchange_couple_morphism {X' X Y' Y : Scheme.{u}} {g' : X' ⟶ X} {f' : X' ⟶ Y'} {f : X ⟶ Y} {g : Y' ⟶ Y} (sq : IsPullback g' f' f g) (K : _root_.DerivedCategory.Plus (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1})) : (∃ P Q : BigradedExactCouple (Sheaf Y'.smallEtaleTopology AddCommGrpCat.{u + 1}) 0, P.D = D (truncationPhi f g) K ∧ Q.D = D (truncationPsi g' f') K ∧ P.E = E (truncationPhi f g) K ∧ Q.E = E (truncationPsi g' f') K ∧ HEq P.alpha (alpha (truncationPhi f g) K) ∧ HEq Q.alpha (alpha (truncationPsi g' f') K) ∧ HEq P.f (CategoryTheory.TruncationExchange.f (truncationPhi f g) K) ∧ HEq Q.f (CategoryTheory.TruncationExchange.f (truncationPsi g' f') K) ∧ HEq P.g (CategoryTheory.TruncationExchange.g (truncationPhi f g) K) ∧ HEq Q.g (CategoryTheory.TruncationExchange.g (truncationPsi g' f') K)) ∧ (∀ p q : ℤ, alpha (truncationPhi f g) K p q ≫ tD (derivedBaseChangeMapPlus AddCommGrpCat.{u + 1} sq.toCommSq) K (p - 1) (q + 1) = tD (derivedBaseChangeMapPlus AddCommGrpCat.{u + 1} sq.toCommSq) K p q ≫ alpha (truncationPsi g' f') K p q) ∧ (∀ p q : ℤ, CategoryTheory.TruncationExchange.g (truncationPhi f g) K p q ≫ tE (derivedBaseChangeMapPlus AddCommGrpCat.{u + 1} sq.toCommSq) K p q = tD (derivedBaseChangeMapPlus AddCommGrpCat.{u + 1} sq.toCommSq) K p q ≫ CategoryTheory.TruncationExchange.g (truncationPsi g' f') K p q) ∧ (∀ p q : ℤ, CategoryTheory.TruncationExchange.f (truncationPhi f g) K p q ≫ tD (derivedBaseChangeMapPlus AddCommGrpCat.{u + 1} sq.toCommSq) K (p + 2) (q - 1) = tE (derivedBaseChangeMapPlus AddCommGrpCat.{u + 1} sq.toCommSq) K p q ≫ CategoryTheory.TruncationExchange.f (truncationPsi g' f') K p q) ∧ (∀ p q : ℤ, tE (derivedBaseChangeMapPlus AddCommGrpCat.{u + 1} sq.toCommSq) K p q ≫ (pageIso (truncationPsi g' f') K p q ≪≫ truncationTargetIso g' f' ((_root_.DerivedCategory.Plus.homologyFunctor _ q).obj K) p).hom = (pageIso (truncationPhi f g) K p q ≪≫ truncationSourceIso f g ((_root_.DerivedCategory.Plus.homologyFunctor _ q).obj K) p).hom ≫ (truncationSourceIso f g ((_root_.DerivedCategory.Plus.homologyFunctor _ q).obj K) p).inv ≫ (_root_.DerivedCategory.Plus.homologyFunctor (Sheaf Y'.smallEtaleTopology AddCommGrpCat.{u + 1}) p).map ((derivedBaseChangeMapPlus AddCommGrpCat.{u + 1} sq.toCommSq).app (sheaf K q)) ≫ (truncationTargetIso g' f' ((_root_.DerivedCategory.Plus.homologyFunctor _ q).obj K) p).hom)",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "H1",
+  "result": "pass",
+  "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
  }
 }
