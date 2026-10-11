@@ -34,7 +34,7 @@
 | `lem-sc-picard-kunneth-qcoh` | 6014 | none |
 | `lem-sc-valuation-closed-fibre-section-vanishing` | 6014 | none |
 | `lem-sc-valuation-fp-torsionfree-free` | 6014 | none |
-| `lem-sc-valuation-zero-section-relative-cartier` | 6014 | none |
+| `lem-pc-recd-fibre-cartier-local` | 6015 | none |
 | `lem-sc-finite-free-complex-homology-upper-semicontinuous` | 6015 | none |
 | `lem-sc-finite-locally-free-residue-isomorphism` | 6015 | none |
 | `lem-sc-perfect-cut-complex-degree-zero` | 6015 | none |
@@ -878,7 +878,7 @@
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 | `def-nagata-fixed-base-separated-stage` | 6 | state |
 
-Not open yet: 1722 nodes that wait for a statement dependency, 91 nodes that wait for stage 1.
+Not open yet: 1723 nodes that wait for a statement dependency, 91 nodes that wait for stage 1.
 
 ## Stage 3: modules to prove (0)
 
