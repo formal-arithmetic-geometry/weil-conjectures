@@ -19,7 +19,6 @@
 | `lem-pc-derived-pullback-tor-independent-flat-complex` | 1 | state |
 | `lem-pc-derived-tensor-localization-cohomology` | 1 | state |
 | `lem-pc-derived-tensor-transitivity` | 1 | state |
-| `lem-pc-dq-coherator-adjunction` | 1 | state |
 | `lem-pc-flat-complex-derived-pullback` | 1 | state |
 | `lem-pc-module-pullback-identity-composition` | 1 | state |
 | `lem-pc-noetherian-bounded-coherent-pseudo-coherent` | 1 | state |
@@ -32,13 +31,16 @@
 | `lem-sc-base-change-curve` | 1 | state |
 | `lem-sc-coherent-pseudo-coherent` | 1 | state |
 | `lem-sc-complex-lift-class-projective` | 1 | state |
+| `lem-sc-derived-k-injective-restrict-open` | 1 | state |
 | `lem-sc-derived-open-gluing` | 1 | state |
-| `lem-sc-derived-open-restriction-adjunction-exact` | 1 | state |
+| `lem-sc-derived-open-mayer-vietoris-ses` | 1 | state |
+| `lem-sc-derived-open-shriek-derived-adjunction` | 1 | state |
 | `lem-sc-ext-evaluation` | 1 | state |
 | `lem-sc-finite-free-complex-homology-upper-semicontinuous` | 1 | state |
 | `lem-sc-hilb-dominating-power` | 1 | state |
 | `lem-sc-hilbert-embedded-points-gluing` | 1 | state |
 | `lem-sc-intersection-effective-cartier` | 1 | state |
+| `lem-sc-module-extension-by-zero-stalk-maps` | 1 | state |
 | `lem-sc-picard-kunneth-qcoh` | 1 | state |
 | `lem-sc-pseudo-coherent-qcoh` | 1 | state |
 | `lem-sc-top-dimensional-reduction-intersection` | 1 | state |
@@ -56,11 +58,9 @@
 | `lem-weil-pbc-polynomial-complete-local-formal-fibres` | 1 | state |
 | `lem-weil-pbc-polynomial-ideal-coefficients-monomial` | 1 | state |
 | `lem-weil-pbc-polynomial-quotient-dimension-at-point-height-difference` | 1 | state |
-| `lem-weil-pbc-polynomial-quotient-dimension-lower-bound` | 1 | state |
 | `lem-weil-pbc-polynomial-ring-maximal-chain-height-difference` | 1 | state |
 | `lem-weil-pbc-polynomial-ring-maximal-localization-dimension` | 1 | state |
 | `lem-weil-pbc-polynomial-ring-n2` | 1 | state |
-| `lem-weil-pbc-polynomial-ring-origin-regular-local` | 1 | state |
 | `lem-weil-pbc-popescu-artinian-flat-subalgebras` | 1 | state |
 | `lem-weil-pbc-popescu-delocalize-base` | 1 | state |
 | `lem-weil-pbc-popescu-delocalize-height-zero` | 1 | state |
@@ -470,7 +470,7 @@
 | `lem-pc-essentially-constant-pro-hom-colimit` | 4 | state |
 | `lem-pur-essential-constant-pro-criterion-05py` | 4 | state |
 
-Not open yet: 40 nodes that wait for stage 1, 581 nodes that wait for a statement dependency.
+Not open yet: 40 nodes that wait for stage 1, 577 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
