@@ -179,5 +179,23 @@
   "by": "L",
   "result": "accepted",
   "note": "4 steps (Stacks 00MA(2),(3) route): the m-adic module completion of B is the n-adic ring completion, exactness leaf on 0 -> J -> A -> B -> 0, kernel = JA^ via the tensor leaf, homomorphism theorem. No new nodes. Tags 00MA, 00MB verified."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.LocalCompletionQuotient",
+  "declaration": "AdicCompletion.exists_local_completion_quotient",
+  "file": "lean/Sheaf/RingTheory/LocalCompletionQuotient.lean",
+  "statement": "theorem exists_local_completion_quotient (A : Type u) (B : Type v) [CommRing A] [CommRing B] [IsNoetherianRing A] [IsLocalRing A] (φ : A →+* B) (hφ : Function.Surjective φ) : let m := IsLocalRing.maximalIdeal A let n := m.map φ let Ahat := AdicCompletion m A let Bhat := AdicCompletion n B let cA := algebraMap A Ahat let cB := algebraMap B Bhat let Jhat := (RingHom.ker φ).map cA (∀ k : ℕ, (m ^ k).map φ = n ^ k) ∧ ∃ θ : Ahat →+* Bhat, (∀ k : ℕ, ∃ θk : (A ⧸ m ^ k) →+* (B ⧸ n ^ k), Function.Surjective θk ∧ θk.comp (Ideal.Quotient.mk (m ^ k)) = (Ideal.Quotient.mk (n ^ k)).comp φ ∧ (evalₐ n k).toRingHom.comp θ = θk.comp (evalₐ m k).toRingHom) ∧ θ.comp cA = cB.comp φ ∧ Function.Surjective θ ∧ RingHom.ker θ = Jhat ∧ ∃ e : (Ahat ⧸ Jhat) ≃+* Bhat, ∀ x : Ahat, e (Ideal.Quotient.mk Jhat x) = θ x",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-lcq1113",
+  "group": "E1",
+  "result": "pass",
+  "note": "A,B CommRing u/v; Noetherian local A only; φ surjective, J=ker φ derived; m maximalIdeal, n=m.map φ (=image by surjectivity); AdicCompletion m A / n B, cA,cB algebraMap; θ pinned coordinatewise via θk (mk-compatible, surjective) and evalₐ squares, so unique; θ∘cA=cB∘φ, surjective, ker θ = J.map cA, e : Ahat⧸Jhat ≃+* Bhat induced by θ; not in Mathlib (kerProj/ker_evalOneₐ_eq_map only special cases)"
  }
 }
