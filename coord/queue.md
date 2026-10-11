@@ -1,11 +1,11 @@
 # Work queue
 
-326 items; claim with `tools/claim.py next <group> [--stage N]`.
+323 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (326)
+## Stage 2: nodes to state (323)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -32,10 +32,7 @@
 | `lem-weil-pbc-pair-henselization` | 1 | state |
 | `lem-weil-pbc-projective-ample-invertible` | 1 | state |
 | `lem-weil-pbc-projective-space-twisting-sheaf-charts` | 1 | state |
-| `lem-weil-pbc-regular-base-change` | 1 | state |
 | `lem-weil-pbc-regular-local-quotient-kernel-parameters` | 1 | state |
-| `lem-weil-pbc-regular-sequence-conormal-free` | 1 | state |
-| `lem-weil-pbc-regular-sequence-short-exact-sequence` | 1 | state |
 | `lem-weil-pbc-regular-through-localization` | 1 | state |
 | `lem-weil-pbc-regularity-rk-goes-up` | 1 | state |
 | `lem-weil-pbc-relative-global-complete-intersection-base-change` | 1 | state |
