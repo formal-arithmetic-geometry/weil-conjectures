@@ -101,5 +101,23 @@
   "group": "M1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-fpc2 (reviewer sub-agent of L); spot-checked: Shape: one commit, only the item node and the report, report has ## Review by M1. Statement unchanged from sheaf-dag (finite I, cochain complexes of abelian groups [def-sp-abelian], natural H^q(prod K_i) = prod H^q(K_i)); true, indeed for any index set. Step 1: differential of the product complex is the product of differentials, so Z^q and B^q are the products of the coordinate cycles and boundaries (reverse inclusion by choosing one preimage per coordinate) - elementary, checkable in a few lines (C2). Step 2: induced map Z/B -> prod Z_i/B_i injective by step 1's B^q = prod B^q_i, surjective by assembling representatives, natural via coordinate projections - elementary. No citations needed; lem-weil-pbc-derived-finite-product (merged 16:32, K1) cites this item in its step 2, so it cannot be cited here (would be circular). Mathlib: homologyFunctor is Additive (Mathlib/Algebra/Homology/ShortComplex/HomologicalComplex.lean:791) so preserves finite biproducts, but no single declaration states the product isomorphism; the existing 'no match' verdicts stand. Small cases: I empty gives 0 = 0, I singleton gives the identity. Start Sat Oct 10 04:44:20 PM UTC 2026, end Sat Oct 10 04:44:41 PM UTC 2026."
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.FiniteProductCohomology",
+  "declaration": "HomologicalComplex.homology_finite_product_comparison_isIso",
+  "file": "lean/Sheaf/Algebra/Homology/FiniteProductCohomology.lean",
+  "statement": "theorem homology_finite_product_comparison_isIso (I : Type w) [Finite I] (K : I → CochainComplex AddCommGrpCat.{u} ℤ) (q : ℤ) : IsIso (piComparison (homologyFunctor AddCommGrpCat.{u} (ComplexShape.up ℤ) q) K)",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-fpc1017",
+  "group": "H1",
+  "result": "pass",
+  "note": "finite I = (I : Type w) [Finite I] (empty/singleton ok, independent universe); K_i cochain complexes of abelian groups = K : I → CochainComplex AddCommGrpCat.{u} ℤ (Abelian via Mathlib instance, def-sp-abelian); every q : ℤ; canonical natural H^q(∏K_i) ≅ ∏H^q(K_i) = IsIso of piComparison of homologyFunctor (canonical, natural by construction via piComparison_comp_π); Ab-level node, no product category so the 6a6d5fc0b existential Abelian form does not apply; true since homologyFunctor is additive; #check confirmed Mathlib homologyFunctor/piComparison"
  }
 }

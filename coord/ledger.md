@@ -4195,3 +4195,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 10:17 L: merged deliver/C1/lem-weil-pbc-fibre-dimension-bounded-open-upstairs (stage 2; reviewer FIX; first push; Sheaf.AlgebraicGeometry.FibreDimensionBoundedOpenUpstairs Algebra.fibre_dimension_bounded_open_upstairs)
 - 10:17 L: merged deliver/E1/lem-weil-pbc-finite-product-normal (stage 2; reviewer PASS; first push; Sheaf.RingTheory.FiniteProductNormal Pi.isNormalRing_of_finite)
 - 10:18 L: merged deliver/F1/lem-weil-pbc-filtered-colimit-categories (stage 2; reviewer PASS; first push; Sheaf.CategoryTheory.FilteredColimitCategories CategoryTheory.exists_filteredColimit_category; new nodes: def-weil-pbc-arrows-functor)
+- 10:18 L: merged deliver/H1/lem-weil-pbc-finite-product-complex-cohomology (stage 2; reviewer PASS; first push; Sheaf.Algebra.Homology.FiniteProductCohomology HomologicalComplex.homology_finite_product_comparison_isIso)
