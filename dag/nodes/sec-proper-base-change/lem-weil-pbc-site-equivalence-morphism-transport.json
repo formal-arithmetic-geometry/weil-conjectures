@@ -193,5 +193,23 @@
   "item": "lem-weil-pbc-site-equivalence-morphism-transport",
   "worker": "stage1",
   "summary": "Split into seven steps following the queue sketch: (1) p and a quasi-inverse q' of q are continuous and define morphisms of sites, by the new node lem-weil-pbc-site-equivalence-is-morphism-of-sites (no Stacks lemma states it; the guessed tags 03A4 and 039Z are a sites-modules section and the section 'Morphisms of topoi', and 00WX is lemma-adjoint-sheaves, not an isomorphism-invariance lemma; Lemma 03A0 is only the cocontinuous topos-level analogue); (2) u' ≅ w := q'up (elementary); (3) w continuous with w_s exact by lem-weil-pbc-site-morphism-composition (03CB) twice; (4) continuity of u' from the isomorphism, using the new node lem-weil-pbc-site-covering-isomorphic-family (axioms (i), (ii) of 00VH alone do not give it when the target changes; axiom (iii) with the 'some choice' clarification is needed) and the transport of fibre products along the isomorphic cospans; (5) u'^s ≅ w^s (elementary); (6) u'_s ≅ w_s by uniqueness of adjoints (lem-weil-pbc-conjugate-iso-unit-equation, Categories 0B65) and the 00WX adjunction node; (7) exactness transfers along the isomorphism (elementary). Mathlib searched three ways (sieve-level analogues only: Functor.isContinuous_of_iso, Equivalence.sheafCongr, IsDenseSubsite, sheafPushforwardContinuous); the source repository has no declaration for this statement."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.SiteEquivalenceMorphismTransport",
+  "declaration": "CategoryTheory.site_equivalence_morphism_transport",
+  "statement": "theorem site_equivalence_morphism_transport {A B C D : Type u} [SmallCategory A] [SmallCategory B] [SmallCategory C] [SmallCategory D] (JA : Precoverage A) (JB : Precoverage B) (JC : Precoverage C) (JD : Precoverage D) [JA.HasIsos] [JA.IsStableUnderComposition] [JA.IsStableUnderBaseChange] [JA.HasPullbacks] [JB.HasIsos] [JB.IsStableUnderComposition] [JB.IsStableUnderBaseChange] [JB.HasPullbacks] [JC.HasIsos] [JC.IsStableUnderComposition] [JC.IsStableUnderBaseChange] [JC.HasPullbacks] [JD.HasIsos] [JD.IsStableUnderComposition] [JD.IsStableUnderBaseChange] [JD.HasPullbacks] (p : A ⥤ C) (q : B ⥤ D) [p.IsEquivalence] [q.IsEquivalence] (hpcover : ∀ (X : A) (R : Presieve X), R ∈ JA X ↔ R.map p ∈ JC (p.obj X)) (hqcover : ∀ (X : B) (R : Presieve X), R ∈ JB X ↔ R.map q ∈ JD (q.obj X)) (u : C ⥤ D) (hucover : ∀ (X : C) (R : Presieve X), R ∈ JC X → R.map u ∈ JD (u.obj X)) (hupullback : ∀ (X Y Z : C) (R : Presieve X), R ∈ JC X → ∀ (f : Y ⟶ X) (g : Z ⟶ X), R f → PreservesLimit (cospan f g) u) [u.IsContinuous JC.toGrothendieck JD.toGrothendieck] [PreservesFiniteLimits (sheafPullback u (Type u) JC.toGrothendieck JD.toGrothendieck)] [PreservesFiniteColimits (sheafPullback u (Type u) JC.toGrothendieck JD.toGrothendieck)] (u' : A ⥤ B) (α : u' ⋙ q ≅ p ⋙ u) : (∀ (X : A) (R : Presieve X), R ∈ JA X → R.map u' ∈ JB (u'.obj X)) ∧ (∀ (X Y Z : A) (R : Presieve X), R ∈ JA X → ∀ (f : Y ⟶ X) (g : Z ⟶ X), R f → PreservesLimit (cospan f g) u') ∧ ∃ (_ : u'.IsContinuous JA.toGrothendieck JB.toGrothendieck), PreservesFiniteLimits (sheafPullback u' (Type u) JA.toGrothendieck JB.toGrothendieck) ∧ PreservesFiniteColimits (sheafPullback u' (Type u) JA.toGrothendieck JB.toGrothendieck)",
+  "by": "N1",
+  "date": "2026-10-11",
+  "file": "lean/Sheaf/CategoryTheory/SiteEquivalenceMorphismTransport.lean",
+  "existing": false,
+  "branch": "sheaf-dag"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "N1",
+  "result": "pass",
+  "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
  }
 }
