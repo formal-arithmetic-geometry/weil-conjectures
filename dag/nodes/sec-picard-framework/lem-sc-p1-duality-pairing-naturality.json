@@ -141,5 +141,28 @@
   "group": "C1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-dp2 (reviewer sub-agent of L); spot-checked: Re-push after the 15:45 return: point 1 repaired (the three relabelling nodes deleted); point 2 alpha repaired (step 2 by functoriality of H^1, def-sc-sheaf-cohomology-functor), beta partly (associativity cited, pullback=composition with u had no node); point 3 repaired in substance (square proved via partial_H s=delta o s and partial_E phi=phi[1] o delta, both sides t(phi[1] o delta o s), sign +1 checked against Stacks 0B3A and Baer pushout, split sequence/zero phi/zero s give 0=0); point 4: created.by/date superseded by tools/README (delivered new node carries created.item only), stmt_deps and TeX correct, citations.json mention removed. Source: blueprint thm-sc-p1-duality Step 2; item statement unchanged; read def-sc-ext-sheaf, lem-sc-ext-locally-free, lem-sc-p1-monomial. FIX more, RETURN less: steps 3 and 4 used two facts with no node (C1/C4): Ext^1(u,omega)(e)=e o u, and H^1(phi)(x)=phi[1] o x under Ext^1(O_X,-)=H^1(X,-) (naturality of lem-sc-ext-locally-free's identification, which that node does not state); added statement-only node lem-sc-p1-ext-yoneda-functoriality (Stacks Derived 06XP, Cohomology 0B3A; Mathlib searched, abstract analogue CategoryTheory.Abelian.extFunctor_map_app only) and cited it in steps 3 and 4, proof_deps updated. Other fixes: item proof steps 2,3: source.document pointed to nonexistent sk-thm-p1-duality.md, set to sk-thm-picard-duality/thm-sc-p1-duality.md; def-sc-sheaf-cohomology-functor source.place tag 0115 (a homology definition) -> 01DZ; lem-sc-p1-boundary-extension-composition source.place tag 015M (compose derived functors) -> Cohomology 0B3A + Derived 06XP; lem-sc-p1-ext-yoneda-associativity source.place adds Derived 06XP. No Mathlib leaves or attachments. Start Sat Oct 10 04:08:32 PM UTC 2026, end Sat Oct 10 04:10:45 PM UTC 2026.; 5 file(s) fixed by the reviewer; 1 statement node(s) added by the reviewer (FIX more, RETURN less)"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProjectiveLineDualityPairingNaturality",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.p1_duality_pairing_naturality",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.Modules.extDualPairing_isLinear",
+   "AlgebraicGeometry.Scheme.Modules.extDualPairing",
+   "AlgebraicGeometry.Scheme.Modules.p1_duality_pairing_naturality"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/ProjectiveLineDualityPairingNaturality.lean",
+  "statement": "theorem p1_duality_pairing_naturality (k : Type u) [Field k] [IsAlgClosed k] [HasExt.{u} (ProjectiveLine (Spec (.of k))).Modules] (t : ((ProjectiveLine (Spec (.of k)) ↘ Spec (.of k)).relativeDifferentials).H 1 ≃ₗ[k] k) : (∀ (G' G : (ProjectiveLine (Spec (.of k))).Modules) (f : G' ⟶ G) (φ : G ⟶ (ProjectiveLine (Spec (.of k)) ↘ Spec (.of k)).relativeDifferentials), dualPairing t.toLinearMap G' (f ≫ φ) = (dualPairing t.toLinearMap G φ).comp (H.mapLinearMap k f 1)) ∧ (∀ (G' G : (ProjectiveLine (Spec (.of k))).Modules) (f : G' ⟶ G) (e : Ext G (ProjectiveLine (Spec (.of k)) ↘ Spec (.of k)).relativeDifferentials 1), extDualPairing t.toLinearMap G' ((Abelian.Ext.mk₀ f).comp e (Nat.zero_add 1)) = (extDualPairing t.toLinearMap G e).comp (H.mapLinearMap k f 0)) ∧ (∀ (S : ShortComplex (ProjectiveLine (Spec (.of k))).Modules) (hS : S.ShortExact) (φ : S.X₁ ⟶ (ProjectiveLine (Spec (.of k)) ↘ Spec (.of k)).relativeDifferentials), extDualPairing t.toLinearMap S.X₃ (hS.extClass.comp (Abelian.Ext.mk₀ φ) (Nat.add_zero 1)) = (dualPairing t.toLinearMap S.X₁ φ).comp (H.δLinearMap k hS 0))",
+  "branch": "sheaf-dag",
+  "by": "K1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "K1",
+  "result": "pass",
+  "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
  }
 }
