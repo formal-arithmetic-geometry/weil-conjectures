@@ -88,6 +88,12 @@ theorem detWeight_of_equiv {V' : Type u} [AddCommGroup V'] [Module (PadicAlgCl l
     W.detWeight l σ ι = W.detWeight l ρ ι := by
   rw [detWeight, detWeight, e.det_apply, e.finrank_eq]
 
+/-- The determinant weight `dw_ι` is the determinant weight of `sk-d-weights` for the real weight
+character `λ_ι = wt_{ι, q}` and the chosen Frobenius lift. -/
+theorem detWeight_eq_detWeight_weightCharacter (σ : Representation (PadicAlgCl l) W.carrier V) :
+    W.detWeight l σ ι = σ.detWeight (weightCharacter ι (Nat.card K)) W.frobeniusLift :=
+  (detWeight_weightCharacter ι σ _ _).symm
+
 section DetLine
 
 variable [FiniteDimensional (PadicAlgCl l) V]
@@ -317,6 +323,27 @@ theorem card_rankDetWeightMultiset :
       ((F (i + 1)).toSubmodule ⧸ (F i).toSubmodule.comap (F (i + 1)).toSubmodule.subtype)),
     Subrepresentation.sum_finrank_subquotient hF0 fun i hi ↦ (hF i hi).le, hFn,
     Subrepresentation.toSubmodule_top, finrank_top]
+
+/-- The rank-counted list of determinant weights is additive in extensions: for a
+subrepresentation `A`, it is the sum of those of `A` and of the quotient `ρ / A`, as a composition
+series of `ρ` is obtained by concatenating composition series of `A` and of `ρ / A`. -/
+theorem rankDetWeightMultiset_eq_add (A : Subrepresentation ρ) :
+    W.rankDetWeightMultiset l ρ ι =
+      W.rankDetWeightMultiset l A.toRepresentation ι + W.rankDetWeightMultiset l A.quotient ι := by
+  obtain ⟨m, F₁, h₁0, h₁m, h₁⟩ :=
+    Subrepresentation.exists_compositionSeries (ρ := A.toRepresentation)
+  obtain ⟨n, F₂, h₂0, h₂n, h₂⟩ := Subrepresentation.exists_compositionSeries (ρ := A.quotient)
+  obtain ⟨F, hF0, hFn, hF, he₁, he₂⟩ :=
+    Subrepresentation.exists_compositionSeries_append A h₁0 h₁m h₁ h₂0 h₂n h₂
+  rw [rankDetWeightMultiset_eq ι hF0 hFn hF, rankDetWeightMultiset_eq ι h₁0 h₁m h₁,
+    rankDetWeightMultiset_eq ι h₂0 h₂n h₂, Fin.sum_univ_add]
+  congr 1
+  · refine Finset.sum_congr rfl fun i _ ↦ ?_
+    obtain ⟨e⟩ := he₁ i i.2
+    rw [Fin.val_castAdd, e.symm.finrank_eq, detWeight_of_equiv ι e.symm]
+  · refine Finset.sum_congr rfl fun i _ ↦ ?_
+    obtain ⟨e⟩ := he₂ i i.2
+    rw [Fin.val_natAdd, e.symm.finrank_eq, detWeight_of_equiv ι e.symm]
 
 variable (W l ρ) in
 /-- Blueprint `def-rp-weight-blocks`: Rank-counted determinant weights and weight blocks.

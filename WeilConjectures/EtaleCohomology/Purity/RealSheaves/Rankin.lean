@@ -9,9 +9,12 @@ public import Mathlib.RepresentationTheory.Coinvariants
 public import Mathlib.RingTheory.PowerSeries.Expand
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.LFunction
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.Operations
+public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.SheafRepresentation
 public import WeilConjectures.Evaluation
 public import WeilConjectures.Mathlib.Analysis.Analytic.ConvergenceRadius
 public import WeilConjectures.Mathlib.RingTheory.PowerSeries.Derivative
+public import WeilConjectures.Mathlib.RingTheory.PowerSeries.Inverse
+public import WeilConjectures.WeilSheaf.Curve
 
 /-!
 # The ingredients of the Rankin–Selberg bound
@@ -445,6 +448,7 @@ theorem exists_isConstituent_hasDetWeight_of_hasEigenvalue {α : PadicAlgCl l}
   field_simp
   ring
 
+open scoped PowerSeries.WithPiTopology in
 /-- Blueprint `cor-rp-euler-product`: Euler product of the `L`-function of a lisse sheaf.
 
 Let `U₀` be a smooth geometrically connected affine curve and `ℱ` a lisse Weil sheaf on it.
@@ -462,7 +466,55 @@ theorem exists_eulerSeries_mul_eq_coe [IsAffine C] [SmoothOfRelativeDimension 1 
     [GeometricallyConnected p] [Fact (ringChar K ≠ l)] (hρ : W.IsLisse l ρ) :
     ∃ P : Polynomial ℂ, W.eulerSeries l ρ ι *
       (((W.compactTopFrobenius l ρ).charpolyRev.map ι : Polynomial ℂ) : PowerSeries ℂ) = P := by
-  sorry
+  classical
+  let _ : C.Over (Spec (.of K)) := ⟨p⟩
+  have _ : IsCurve (C ↘ Spec (.of K)) := ‹IsCurve p›
+  have _ : SmoothOfRelativeDimension 1 (C ↘ Spec (.of K)) := ‹SmoothOfRelativeDimension 1 p›
+  have _ : GeometricallyConnected (C ↘ Spec (.of K)) := ‹GeometricallyConnected p›
+  obtain ⟨F, hF, hst, f, hf⟩ := exists_weilSheaf_of_isLisse (W := W) hρ
+  obtain ⟨e₂⟩ := WeilSheaf.nonempty_equiv_compactlySupportedCohomology_two F hF
+  -- the Frobenius on `H_c² (U, ℱ) = V_{π₁(U)} (-1)` is `compactTopFrobenius`
+  have hq : ((Nat.card K : PadicAlgCl l) ^ (-(-1 : ℤ))) ≠ 0 :=
+    zpow_ne_zero _ (Nat.cast_ne_zero.2 Nat.card_pos.ne')
+  have h₂ : (F.compactlySupportedCohomology 2).localPolynomial =
+      (W.compactTopFrobenius l ρ).charpolyRev := by
+    rw [FrobeniusModule.localPolynomial, LinearMap.charpolyRev_def, LinearMap.charpolyRev_def,
+      ← e₂.charpoly_frobeniusEnd]
+    refine congrArg _ (LinearMap.charpoly_eq_of_comp_eq f (LinearMap.ext fun v ↦ ?_))
+    have key := FrobeniusModule.frobeniusEnd_rescale_apply (M := F.geometricCoinvariants hF) hq v
+    rw [LinearMap.comp_apply, LinearMap.comp_apply]
+    refine (congrArg f key).trans ?_
+    rw [map_smul, FrobeniusModule.frobeniusEnd_apply, hf, compactTopFrobenius,
+      LinearMap.smul_apply, neg_neg, zpow_one]
+    rfl
+  -- the Euler product converges to `ι (det (1 - F T ∣ H_c¹) / det (1 - F T ∣ H_c²))`
+  have hprod : HasProd (W.eulerFactor l ρ ι) (PowerSeries.map ι
+      (((F.compactlySupportedCohomology 1).localPolynomial : PowerSeries (PadicAlgCl l)) *
+        ((F.compactlySupportedCohomology 2).localPolynomial : PowerSeries (PadicAlgCl l))⁻¹)) := by
+    rw [HasProd, PowerSeries.WithPiTopology.tendsto_iff_coeff_tendsto]
+    intro n
+    refine tendsto_nhds_of_eventually_eq ?_
+    filter_upwards [Filter.eventually_ge_atTop (p.finite_setOf_degreeOver_le n).toFinset]
+      with s hs
+    rw [PowerSeries.coeff_map, ← WeilSheaf.coeff_prod_inv_localPolynomial_stalk_eq F hF n s
+      fun x hx ↦ hs ((p.finite_setOf_degreeOver_le n).mem_toFinset.2 hx), ← PowerSeries.coeff_map,
+      map_prod (PowerSeries.map ι)]
+    refine congrArg (PowerSeries.coeff n) (Finset.prod_congr rfl fun x _ ↦ ?_)
+    have hx : (F.stalk x).localPolynomial = W.localPolynomial l ρ x := by
+      rw [FrobeniusModule.localPolynomial, localPolynomial, LinearMap.charpolyRev_def,
+        LinearMap.charpolyRev_def, hst x]
+    rw [eulerFactor, PowerSeries.map_inv, ← Polynomial.polynomial_map_coe, hx,
+      Polynomial.map_comp, Polynomial.map_pow, Polynomial.map_X]
+    rfl
+  refine ⟨(F.compactlySupportedCohomology 1).localPolynomial.map ι, ?_⟩
+  have h₀ : PowerSeries.constantCoeff
+      ((F.compactlySupportedCohomology 2).localPolynomial : PowerSeries (PadicAlgCl l)) ≠ 0 := by
+    rw [← PowerSeries.coeff_zero_eq_constantCoeff_apply, Polynomial.coeff_coe,
+      FrobeniusModule.localPolynomial, LinearMap.coeff_zero_charpolyRev]
+    exact one_ne_zero
+  rw [eulerSeries, hprod.tprod_eq, ← h₂, Polynomial.polynomial_map_coe,
+    Polynomial.polynomial_map_coe, ← map_mul, mul_assoc, PowerSeries.inv_mul_cancel _ h₀,
+    mul_one]
 
 end TopCohomology
 

@@ -39,12 +39,8 @@ variable {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j]
 include j in
 /-- A nonempty open subscheme of an irreducible scheme is connected. -/
 lemma connectedSpace_of_isOpenImmersion [IrreducibleSpace X] [Nonempty U] : ConnectedSpace U := by
-  have : PreconnectedSpace U := ⟨h.isInducing.isPreconnected_image.1 (by
-    rw [Set.image_univ]
-    exact (IsPreirreducible.open_subset (IrreducibleSpace.isIrreducible_univ X).isPreirreducible
-      h.isOpen_range (Set.subset_univ _)).isPreconnected)⟩
-  exact {}
-    h.isOpen_range (Set.subset_univ _)).isPreconnected
+  have := j.isOpenEmbedding.irreducibleSpace
+  infer_instance
 
 /-- Blueprint `lem-wf-dense-open-pi1-surjective`, part (1), second formulation: a connected
 finite étale cover of a connected locally noetherian regular scheme `X` stays connected over a

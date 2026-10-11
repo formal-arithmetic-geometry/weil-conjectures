@@ -127,7 +127,7 @@ theorem natCast_sub_one_mul_monodromy_eq_zero
   rintro _ ⟨σ, hσ, rfl⟩
   change ((Q : ZMod N) - 1) * (T.monodromy s G (ρ σ)).toAdd.down = 0
   -- a primitive `N`-th root of unity of `k`, in the function field and in `Ω`
-  haveI : NeZero (N : k) := ⟨hN⟩
+  have : NeZero (N : k) := ⟨hN⟩
   obtain ⟨ζk, hζk⟩ := HasEnoughRootsOfUnity.exists_primitiveRoot k N
   set F := C.functionField
   let ι : F →+* Ω := algebraMap F Ω
@@ -256,6 +256,8 @@ theorem natCast_sub_one_mul_monodromy_eq_zero
     (p.appTop.hom.comp (Scheme.ΓSpecIso (.of k)).inv.hom)
   have hRF (r : Γ(C, c.W)) : algebraMap Γ(C, c.W) Ω r = ι (algebraMap Γ(C, c.W) F r) :=
     IsScalarTower.algebraMap_apply _ F Ω r
+  have : Nonempty c.W := ⟨z'⟩
+  have := functionField_isScalarTower C c.W z'
   have hRO (r : Γ(C, c.W)) : algebraMap Γ(C, c.W) F r =
       algebraMap (C.presheaf.stalk z) F (algebraMap Γ(C, c.W) (C.presheaf.stalk z) r) :=
     IsScalarTower.algebraMap_apply _ (C.presheaf.stalk z) F r
@@ -269,7 +271,7 @@ theorem natCast_sub_one_mul_monodromy_eq_zero
     exact (C.germToFunctionField_injective c.W) (ι.injective h)
   have hinertia : ∀ w : Ω, w ^ N ∈ Us → σ w = w := by
     rintro w ⟨o, ho, hwo⟩
-    obtain ⟨r, s', rfl⟩ := IsLocalization.mk'_surjective c.ideal.primeCompl o
+    obtain ⟨⟨r, s'⟩, rfl⟩ := IsLocalization.mk'_surjective c.ideal.primeCompl o
     have hr : r ∈ c.ideal.primeCompl := (IsLocalization.AtPrime.isUnit_mk'_iff _ c.ideal r s').1 ho
     have hs : (s' : Γ(C, c.W)) ∉ c.ideal := s'.2
     have hrs : r * (s' : Γ(C, c.W)) ^ (N - 1) ∉ c.ideal := fun h ↦
@@ -282,21 +284,22 @@ theorem natCast_sub_one_mul_monodromy_eq_zero
       exact (Ne.isUnit this).map lR
     have := Ideal.inertia_smul_eq_of_pow_eq c.point hσ hζR hζRu (w := w)
       (r := r * (s' : Γ(C, c.W)) ^ (N - 1)) (s := s')
-      (by
-        rw [Ideal.over_def c.point c.ideal] at hrs
-        exact hrs)
+      (fun h ↦ hrs ((Ideal.mem_of_liesOver c.point c.ideal _).2 h))
       (fun h ↦ hs (by
         rw [show (s' : Γ(C, c.W)) = 0 from hinj (h.trans (map_zero _).symm)]
         exact c.ideal.zero_mem))
       (by
-        have hN1 : N = N - 1 + 1 := (Nat.succ_pred_eq_of_ne_zero (NeZero.ne N)).symm
-        rw [mul_pow, hwo, hRF, hRF, hRO, hRO, map_mul, map_mul, map_pow, map_pow, map_pow,
-          map_pow, ← map_pow ι, ← map_mul, ← map_pow ι, ← map_mul ι]
-        congr 1
-        rw [← map_pow, ← map_mul, ← map_pow, ← map_mul]
-        congr 1
-        conv_lhs => rw [hN1, pow_succ, ← mul_assoc, IsLocalization.mk'_spec_mul]
-        rw [mul_comm, ← hN1])
+        have he (x : Γ(C, c.W)) : algebraMap Γ(C, c.W) Ω x =
+            ι (algebraMap _ F (algebraMap Γ(C, c.W) (C.presheaf.stalk z) x)) := by
+          rw [hRF, hRO]
+        have hpow : (algebraMap Γ(C, c.W) (C.presheaf.stalk z) s') ^ N =
+            algebraMap Γ(C, c.W) (C.presheaf.stalk z) s' *
+              (algebraMap Γ(C, c.W) (C.presheaf.stalk z) s') ^ (N - 1) := by
+          rw [← pow_succ', Nat.sub_add_cancel NeZero.one_le]
+        dsimp only at hwo
+        rw [mul_pow, hwo, he, he, ← map_pow ι, ← map_mul ι, ← map_pow (algebraMap _ F),
+          ← map_mul (algebraMap _ F), hpow, ← mul_assoc, IsLocalization.mk'_spec]
+        simp only [map_mul, map_pow])
     exact this
   -- the tame relation
   have key := hζ.natCast_mul_eq_of_kummer (Γ := Gal(Ω/F)) AlgEquiv.toRingEquiv Us χ hx0 hy0 hxy

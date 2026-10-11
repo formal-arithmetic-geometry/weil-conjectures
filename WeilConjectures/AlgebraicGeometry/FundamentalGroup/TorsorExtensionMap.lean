@@ -79,22 +79,20 @@ lemma ιK₂_gmDiff_gmDiff :
 
 variable {m' : ℕ} [NeZero m'] (t' : EtaleTorsor (ULift.{u + 1} (ZMod m')) Y)
   (h : t'.P ⟶ t.P) (hπ : h ≫ t.π = t'.π) (c : ℕ)
-  (hc : t'.vadd 1 ≫ h = h ≫ t.vadd (c • 1)) (hm : m ∣ m')
 
 /-- Pullback of units along `h : P' ⟶ P`. -/
 noncomputable abbrev mapW : t.pushforwardGm ⟶ t'.pushforwardGm :=
   lowerStarGmSheafMap t.π h t'.π hπ
 
-include hc in
-lemma mapW_translate :
+lemma mapW_translate (hc : t'.vadd 1 ≫ h = h ≫ t.vadd (c • 1)) :
     t.mapW t' h hπ ≫ t'.pushforwardGmTranslate 1 = t.transl c ≫ t.mapW t' h hπ := by
   rw [mapW, pushforwardGmTranslate, transl, pushforwardGmTranslate, lowerStarGmSheafMap_comp,
     lowerStarGmSheafMap_comp]
   congr 1
 
-include hc in
 @[reassoc]
-lemma mapW_gmDiff : t.mapW t' h hπ ≫ t'.gmDiff = (t.transl c - 𝟙 _) ≫ t.mapW t' h hπ := by
+lemma mapW_gmDiff (hc : t'.vadd 1 ≫ h = h ≫ t.vadd (c • 1)) :
+    t.mapW t' h hπ ≫ t'.gmDiff = (t.transl c - 𝟙 _) ≫ t.mapW t' h hπ := by
   rw [gmDiff, Preadditive.comp_sub, t.mapW_translate t' h hπ c hc, Preadditive.sub_comp,
     Category.comp_id, Category.id_comp]
 
@@ -102,88 +100,97 @@ lemma mapW_gmDiff : t.mapW t' h hπ ≫ t'.gmDiff = (t.transl c - 𝟙 _) ≫ t.
 lemma pushforwardGmUnit_mapW : t.pushforwardGmUnit ≫ t.mapW t' h hπ = t'.pushforwardGmUnit :=
   gmSheafToLowerStarGmSheaf_comp_lowerStarGmSheafMap _ _ _ _
 
-include hc in
-lemma ιK₁_mapW_gmDiff :
+lemma ιK₁_mapW_gmDiff (hc : t'.vadd 1 ≫ h = h ≫ t.vadd (c • 1)) :
     (kernel.ι t.muDiff ≫ kernel.ι (m • 𝟙 t.pushforwardGm)) ≫ t.mapW t' h hπ ≫ t'.gmDiff = 0 := by
   rw [t.mapW_gmDiff t' h hπ c hc, ← Category.assoc, Preadditive.comp_sub, Category.comp_id,
     t.comp_transl_of_comp_gmDiff _ t.ιK₁_gmDiff, sub_self, zero_comp]
 
-include hc in
-lemma ιK₂_mapW_gmDiff_gmDiff :
+lemma ιK₂_mapW_gmDiff_gmDiff (hc : t'.vadd 1 ≫ h = h ≫ t.vadd (c • 1)) :
     (kernel.ι (t.muDiff ≫ t.muDiff) ≫ kernel.ι (m • 𝟙 t.pushforwardGm)) ≫ t.mapW t' h hπ ≫
       t'.gmDiff ≫ t'.gmDiff = 0 := by
   set X := kernel.ι (t.muDiff ≫ t.muDiff) ≫ kernel.ι (m • 𝟙 t.pushforwardGm)
-  have hX : (X ≫ t.gmDiff) ≫ t.gmDiff = 0 := by rw [Category.assoc]; exact t.ιK₂_gmDiff_gmDiff
+  have hX : (X ≫ t.gmDiff) ≫ t.gmDiff = 0 := by
+    rw [Category.assoc]
+    exact t.ιK₂_gmDiff_gmDiff
   rw [t.mapW_gmDiff_assoc t' h hπ c hc, t.mapW_gmDiff t' h hπ c hc, ← Category.assoc,
     t.comp_transl_sub _ t.ιK₂_gmDiff_gmDiff, Preadditive.nsmul_comp, ← Category.assoc,
     Preadditive.comp_sub, Category.comp_id, t.comp_transl_of_comp_gmDiff _ hX, sub_self,
     zero_comp, nsmul_zero]
 
-include hm in
-lemma nsmul_kernel_ι_mapW :
+lemma nsmul_kernel_ι_mapW (hm : m ∣ m') :
     m' • (kernel.ι (m • 𝟙 t.pushforwardGm) ≫ t.mapW t' h hπ) = 0 := by
   obtain ⟨e, he⟩ := hm
-  refine (congrArg (fun n : ℕ ↦ n • (kernel.ι (m • 𝟙 t.pushforwardGm) ≫ t.mapW t' h hπ))
-    he).trans ?_
-  dsimp only
-  rw [mul_comm, mul_smul, ← Preadditive.nsmul_comp, t.nsmul_kernel_ι_pushforwardMu, zero_comp,
-    smul_zero]
+  calc m' • (kernel.ι (m • 𝟙 t.pushforwardGm) ≫ t.mapW t' h hπ) =
+      (m * e) • (kernel.ι (m • 𝟙 t.pushforwardGm) ≫ t.mapW t' h hπ) := congrArg (· • _) he
+    _ = 0 := by
+      rw [mul_comm, mul_smul, ← Preadditive.nsmul_comp, t.nsmul_kernel_ι_pushforwardMu,
+        zero_comp, smul_zero]
 
-include hm in
 /-- Pullback along `h` on `π_* μ`. -/
-noncomputable def mapV : t.pushforwardMu ⟶ t'.pushforwardMu :=
+noncomputable def mapV (hm : m ∣ m') : t.pushforwardMu ⟶ t'.pushforwardMu :=
   kernel.lift _ (kernel.ι _ ≫ t.mapW t' h hπ) (by
     rw [Category.assoc, Preadditive.comp_nsmul, Category.comp_id, Preadditive.comp_nsmul,
       t.nsmul_kernel_ι_mapW t' h hπ hm])
 
 @[reassoc (attr := simp)]
-lemma mapV_ι : t.mapV t' h hπ hm ≫ kernel.ι _ = kernel.ι _ ≫ t.mapW t' h hπ :=
+lemma mapV_ι (hm : m ∣ m') : t.mapV t' h hπ hm ≫ kernel.ι _ = kernel.ι _ ≫ t.mapW t' h hπ :=
   kernel.lift_ι _ _ _
 
-include hc in
 /-- The map `K₁ ⟶ K₁'`. -/
-noncomputable def mapK₁ : kernel t.muDiff ⟶ kernel t'.muDiff :=
+noncomputable def mapK₁ (hc : t'.vadd 1 ≫ h = h ≫ t.vadd (c • 1)) (hm : m ∣ m') :
+    kernel t.muDiff ⟶ kernel t'.muDiff :=
   kernel.lift _ (kernel.ι _ ≫ t.mapV t' h hπ hm) (by
     rw [← cancel_mono (kernel.ι (m' • 𝟙 t'.pushforwardGm))]
     simp only [Category.assoc, muDiff_ι, mapV_ι_assoc, zero_comp]
     simpa only [Category.assoc] using t.ιK₁_mapW_gmDiff t' h hπ c hc)
 
 @[reassoc (attr := simp)]
-lemma mapK₁_ι : t.mapK₁ t' h hπ c hc hm ≫ kernel.ι _ = kernel.ι _ ≫ t.mapV t' h hπ hm :=
+lemma mapK₁_ι (hc : t'.vadd 1 ≫ h = h ≫ t.vadd (c • 1)) (hm : m ∣ m') :
+    t.mapK₁ t' h hπ c hc hm ≫ kernel.ι _ = kernel.ι _ ≫ t.mapV t' h hπ hm :=
   kernel.lift_ι _ _ _
 
-include hc in
 /-- The map `K₂ ⟶ K₂'`. -/
-noncomputable def mapK₂ : kernel (t.muDiff ≫ t.muDiff) ⟶ kernel (t'.muDiff ≫ t'.muDiff) :=
+noncomputable def mapK₂ (hc : t'.vadd 1 ≫ h = h ≫ t.vadd (c • 1)) (hm : m ∣ m') :
+    kernel (t.muDiff ≫ t.muDiff) ⟶ kernel (t'.muDiff ≫ t'.muDiff) :=
   kernel.lift _ (kernel.ι _ ≫ t.mapV t' h hπ hm) (by
     rw [← cancel_mono (kernel.ι (m' • 𝟙 t'.pushforwardGm))]
     simp only [Category.assoc, muDiff_ι, muDiff_ι_assoc, mapV_ι_assoc, zero_comp]
     simpa only [Category.assoc] using t.ιK₂_mapW_gmDiff_gmDiff t' h hπ c hc)
 
 @[reassoc (attr := simp)]
-lemma mapK₂_ι : t.mapK₂ t' h hπ c hc hm ≫ kernel.ι _ = kernel.ι _ ≫ t.mapV t' h hπ hm :=
+lemma mapK₂_ι (hc : t'.vadd 1 ≫ h = h ≫ t.vadd (c • 1)) (hm : m ∣ m') :
+    t.mapK₂ t' h hπ c hc hm ≫ kernel.ι _ = kernel.ι _ ≫ t.mapV t' h hπ hm :=
   kernel.lift_ι _ _ _
+
+lemma mapK₂_comm₂₃ (hc : t'.vadd 1 ≫ h = h ≫ t.vadd (c • 1)) (hm : m ∣ m') :
+    t.mapK₂ t' h hπ c hc hm ≫ kernelCompToKernel t'.muDiff =
+      kernelCompToKernel t.muDiff ≫ (c • t.mapK₁ t' h hπ c hc hm) := by
+  rw [← cancel_mono (kernel.ι _), ← cancel_mono (kernel.ι (m' • 𝟙 t'.pushforwardGm))]
+  have hX := t.comp_transl_sub
+    (kernel.ι (t.muDiff ≫ t.muDiff) ≫ kernel.ι (m • 𝟙 t.pushforwardGm)) t.ιK₂_gmDiff_gmDiff c
+  have e₁ : ((kernelCompToKernel t.muDiff ≫ (c • t.mapK₁ t' h hπ c hc hm)) ≫ kernel.ι _) ≫
+      kernel.ι (m' • 𝟙 t'.pushforwardGm) = c • (((kernel.ι (t.muDiff ≫ t.muDiff) ≫
+        kernel.ι (m • 𝟙 t.pushforwardGm)) ≫ t.gmDiff) ≫ t.mapW t' h hπ) := by
+    simp only [Preadditive.comp_nsmul, Preadditive.nsmul_comp, Category.assoc, mapK₁_ι_assoc,
+      mapV_ι, kernelCompToKernel_ι_assoc, muDiff_ι_assoc]
+  have e₂ : ((t.mapK₂ t' h hπ c hc hm ≫ kernelCompToKernel t'.muDiff) ≫ kernel.ι _) ≫
+      kernel.ι (m' • 𝟙 t'.pushforwardGm) = ((kernel.ι (t.muDiff ≫ t.muDiff) ≫
+        kernel.ι (m • 𝟙 t.pushforwardGm)) ≫ (t.transl c - 𝟙 _)) ≫ t.mapW t' h hπ := by
+    simp only [Category.assoc, kernelCompToKernel_ι_assoc, mapK₂_ι_assoc, muDiff_ι, mapV_ι_assoc,
+      t.mapW_gmDiff t' h hπ c hc]
+  rw [e₁, e₂, hX, Preadditive.nsmul_comp]
 
 /-- Pulling back along `h` is a morphism from the extension of `t` to that of `t'`, by `c` times
 the natural map on the quotient. -/
-noncomputable def extSeqMap : t.extSeq ⟶ t'.extSeq where
+noncomputable def extSeqMap (hc : t'.vadd 1 ≫ h = h ≫ t.vadd (c • 1)) (hm : m ∣ m') :
+    t.extSeq ⟶ t'.extSeq where
   τ₁ := t.mapK₁ t' h hπ c hc hm
   τ₂ := t.mapK₂ t' h hπ c hc hm
   τ₃ := c • t.mapK₁ t' h hπ c hc hm
   comm₁₂ := by
     rw [← cancel_mono (kernel.ι _)]
     simp [kernelToKernelComp]
-  comm₂₃ := by
-    rw [← cancel_mono (kernel.ι _), ← cancel_mono (kernel.ι (m' • 𝟙 t'.pushforwardGm))]
-    simp only [kernelSqShortComplex_g, Category.assoc, kernelCompToKernel_ι,
-      kernelCompToKernel_ι_assoc, mapK₂_ι_assoc, muDiff_ι, mapV_ι_assoc,
-      Preadditive.nsmul_comp, mapK₁_ι_assoc, muDiff_ι_assoc]
-    rw [t.mapW_gmDiff t' h hπ c hc]
-    have := t.comp_transl_sub _ t.ιK₂_gmDiff_gmDiff c
-    simp only [Category.assoc] at this
-    rw [← Category.assoc (t.transl c - 𝟙 _), ← Category.assoc (kernel.ι (m • 𝟙 _)),
-      ← Category.assoc (kernel.ι (t.muDiff ≫ t.muDiff)), this, Preadditive.nsmul_comp]
-    simp only [Category.assoc]
+  comm₂₃ := t.mapK₂_comm₂₃ t' h hπ c hc hm
 
 /-- The inclusion `μ_m ⊆ μ_{m'}` for `m ∣ m'`. -/
 noncomputable def rootsOfUnityInclusion {X : Scheme.{u}} (m m' : ℕ) (hm : m ∣ m') :
@@ -200,14 +207,16 @@ lemma rootsOfUnityInclusion_ι {X : Scheme.{u}} (m m' : ℕ) (hm : m ∣ m') :
       kernel.ι (m • 𝟙 X.gmSheaf) :=
   kernel.lift_ι _ _ _
 
-lemma muUnit_mapK₁ :
+lemma muUnit_mapK₁ (hc : t'.vadd 1 ≫ h = h ≫ t.vadd (c • 1)) (hm : m ∣ m') :
     t.muUnit ≫ t.mapK₁ t' h hπ c hc hm = rootsOfUnityInclusion m m' hm ≫ t'.muUnit := by
   rw [← cancel_mono (kernel.ι _), ← cancel_mono (kernel.ι (m' • 𝟙 t'.pushforwardGm))]
   simp [muUnit, muUnitV, rootsOfUnityInclusion]
 
 /-- Functoriality of the connecting homomorphism: `ι_* (δ_t x) = δ_{t'} (c • ι_* x)` for the
 inclusion `ι : μ_m ⟶ μ_{m'}`. -/
-lemma map_cupMu (x : Sheaf.H (Y.rootsOfUnitySheaf m) 1) :
+lemma map_cupMu (hπ : h ≫ t.π = t'.π) (hc : t'.vadd 1 ≫ h = h ≫ t.vadd (c • 1))
+    (hm : m ∣ m')
+    (x : Sheaf.H (Y.rootsOfUnitySheaf m) 1) :
     Sheaf.H.map (rootsOfUnityInclusion m m' hm) 2 (t.cupMu x) =
       t'.cupMu (c • Sheaf.H.map (rootsOfUnityInclusion m m' hm) 1 x) := by
   have := t.isIso_muUnit
@@ -221,11 +230,11 @@ lemma map_cupMu (x : Sheaf.H (Y.rootsOfUnitySheaf m) 1) :
   congr 1
   have h₁ := Sheaf.H.map_δSucc t.extSeq_shortExact t'.extSeq_shortExact
     (t.extSeqMap t' h hπ c hc hm) 1 (Sheaf.H.map t.muUnit 1 x)
-  change Sheaf.H.map (t.mapK₁ t' h hπ c hc hm) (1 + 1) _ = _ at h₁
-  rw [h₁]
+  refine h₁.trans ?_
   congr 1
-  change Sheaf.H.map (c • t.mapK₁ t' h hπ c hc hm) 1 _ = _
-  rw [Sheaf.H.map_nsmul_apply, ← Sheaf.H.map_comp_apply, muUnit_mapK₁, Sheaf.H.map_comp_apply,
-    map_nsmul]
+  have e := congrArg (fun f ↦ Sheaf.H.map f 1 x) (t.muUnit_mapK₁ t' h hπ c hc hm)
+  simp only [Sheaf.H.map_comp_apply] at e
+  rw [extSeqMap, Sheaf.H.map_nsmul_apply, map_nsmul]
+  exact congrArg (c • ·) e
 
 end AlgebraicGeometry.Scheme.EtaleTorsor

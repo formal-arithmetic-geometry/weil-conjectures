@@ -87,33 +87,157 @@ lemma ker_picDegreeMod [GeometricallyIntegral (X ↘ Spec (.of k))] [Nonempty X]
     rw [toMul_zsmul, map_zpow, toAdd_zpow, smul_eq_mul, Int.cast_mul, Int.cast_natCast,
       ZMod.natCast_self, zero_mul]
 
+/-! ### The Kummer identifications in degrees one and two -/
+
+omit [SmoothOfRelativeDimension 1 (X ↘ Spec (.of k))] [IsProper (X ↘ Spec (.of k))] in
+/-- An integer which is nonzero in `k` is a unit on every `k`-scheme. -/
+lemma isUnit_natCast_appTop (m : ℕ) (hm : (m : k) ≠ 0) : IsUnit (m : Γ(X, ⊤)) := by
+  simpa using hm.isUnit.map ((ΓSpecIso (.of k)).inv ≫ (X ↘ Spec (.of k)).appTop).hom
+
+omit [SmoothOfRelativeDimension 1 (X ↘ Spec (.of k))] in
+/-- On a proper scheme over an algebraically closed field, the map `H¹(X, μ_m) ⟶ H¹(X, 𝔾ₘ)`
+induced by the inclusion `μ_m ⊆ 𝔾ₘ` is injective: global units are `m`-th powers. -/
+lemma injective_sheafHMap_kernelι_one (m : ℕ) (hm : (m : k) ≠ 0) :
+    Function.Injective (Sheaf.H.map (kernel.ι (m • 𝟙 X.gmSheaf)) 1) := by
+  obtain ⟨hα, hαβ, -⟩ := X.exact_sheafH_rootsOfUnitySheaf_one m (isUnit_natCast_appTop m hm)
+  let := (globalSectionsRingHom k (X := X)).toAlgebra
+  have : Module.Finite k Γ(X, ⊤) := finite_globalSectionsRingHom_of_isProper
+  have hdiv := IsAlgClosed.exists_pow_eq_of_finite (A := Γ(X, ⊤)) hm
+  rw [injective_iff_map_eq_zero]
+  intro x hx
+  obtain ⟨u, rfl⟩ := (hαβ x).1 hx
+  obtain ⟨v, hv⟩ := hdiv (Additive.toMul u)
+  have hu : u ∈ (X.kummerδ₀ m (isUnit_natCast_appTop m hm)).ker := by
+    rw [hα]
+    exact ⟨Additive.ofMul v, by simp [← ofMul_pow, hv]⟩
+  exact hu
+
+omit [SmoothOfRelativeDimension 1 (X ↘ Spec (.of k))] in
+/-- The image of `H¹(X, μ_m) ⟶ H¹(X, 𝔾ₘ) ≅ Pic(X)` is the `m`-torsion. -/
+lemma mem_torsionBy_iff_exists_sheafHMap_kernelι_one (m : ℕ) (hm : (m : k) ≠ 0)
+    (L : Additive X.Pic) :
+    L ∈ AddSubgroup.torsionBy (Additive X.Pic) (m : ℤ) ↔
+      ∃ x, (Pic.toCohomologicalPicardGroupAddEquiv X).symm
+        (Sheaf.H.map (kernel.ι (m • 𝟙 X.gmSheaf)) 1 x) = L := by
+  obtain ⟨-, -, hβ⟩ := X.exact_sheafH_rootsOfUnitySheaf_one m (isUnit_natCast_appTop m hm)
+  have h := congrArg (fun H : AddSubgroup X.CohomologicalPicardGroup ↦
+    Pic.toCohomologicalPicardGroupAddEquiv X L ∈ H) hβ
+  simp only [AddMonoidHom.mem_range, eq_iff_iff] at h
+  rw [AddSubgroup.torsionBy.nsmul_iff]
+  simp only [AddEquiv.symm_apply_eq]
+  rw [h, AddSubgroup.torsionBy.nsmul_iff, ← map_nsmul, AddEquivClass.map_eq_zero_iff]
+
+omit [SmoothOfRelativeDimension 1 (X ↘ Spec (.of k))] in
+/-- Blueprint `lem-wf-curve-kummer-jacobian-tate-module` (first step): the Kummer
+identification `H¹(X, μ_m) ≅ Pic(X)[m]` of a proper scheme `X` over an algebraically closed
+field, for `m` prime to the characteristic: the map induced by `μ_m ⊆ 𝔾ₘ`, followed by the
+canonical identification `H¹(X, 𝔾ₘ) ≅ Pic(X)`
+(`AlgebraicGeometry.Scheme.Pic.toCohomologicalPicardGroupAddEquiv`). -/
+noncomputable def kummerTorsionEquiv (m : ℕ) (hm : (m : k) ≠ 0) :
+    Sheaf.H (X.rootsOfUnitySheaf m) 1 ≃+ AddSubgroup.torsionBy (Additive X.Pic) (m : ℤ) :=
+  (AddMonoidHom.ofInjective (f := ((Pic.toCohomologicalPicardGroupAddEquiv X).symm.toAddMonoidHom.comp
+    (Sheaf.H.map (kernel.ι (m • 𝟙 X.gmSheaf)) 1))) ((Pic.toCohomologicalPicardGroupAddEquiv
+      X).symm.injective.comp (injective_sheafHMap_kernelι_one m hm))).trans
+    (AddEquiv.addSubgroupCongr (by
+      ext L
+      rw [mem_torsionBy_iff_exists_sheafHMap_kernelι_one m hm]
+      rfl))
+
+omit [SmoothOfRelativeDimension 1 (X ↘ Spec (.of k))] in
+lemma coe_kummerTorsionEquiv_apply (m : ℕ) (hm : (m : k) ≠ 0)
+    (x : Sheaf.H (X.rootsOfUnitySheaf m) 1) :
+    (kummerTorsionEquiv m hm x : Additive X.Pic) = (Pic.toCohomologicalPicardGroupAddEquiv X).symm
+      (Sheaf.H.map (kernel.ι (m • 𝟙 X.gmSheaf)) 1 x) :=
+  rfl
+
+omit [SmoothOfRelativeDimension 1 (X ↘ Spec (.of k))] [IsProper (X ↘ Spec (.of k))] in
+/-- The Kummer map `Pic(X) ≅ H¹(X, 𝔾ₘ) ⟶ H²(X, μ_m)`, the connecting map of the Kummer
+sequence. -/
+noncomputable def picToSheafHTwo (m : ℕ) (hm : (m : k) ≠ 0) :
+    Additive X.Pic →+ Sheaf.H (X.rootsOfUnitySheaf m) 2 :=
+  (X.kummerδ₁ m (isUnit_natCast_appTop m hm)).comp
+    (Pic.toCohomologicalPicardGroupAddEquiv X).toAddMonoidHom
+omit [IsProper (X ↘ Spec (.of k))] in
+/-- On a smooth curve over an algebraically closed field the Kummer map to `H²(X, μ_m)` is
+surjective, since the Brauer group vanishes. -/
+lemma surjective_picToSheafHTwo (m : ℕ) (hm : (m : k) ≠ 0) :
+    Function.Surjective (picToSheafHTwo (X := X) m hm) := by
+  have : Smooth (X ↘ Spec (.of k)) := SmoothOfRelativeDimension.smooth 1 _
+  have : IsCurve (X ↘ Spec (.of k)) :=
+    { krullDim_le_one := topologicalKrullDim_le_of_smoothOfRelativeDimension (X ↘ Spec (.of k)) 1 }
+  have := IsCurve.subsingleton_cohomologicalBrauerGroup_of_smooth (X ↘ Spec (.of k))
+  obtain ⟨-, hαβ, -⟩ := X.exact_sheafH_rootsOfUnitySheaf_two m (isUnit_natCast_appTop m hm)
+  intro y
+  obtain ⟨z, hz⟩ := (hαβ y).1 (Subsingleton.elim _ _)
+  exact ⟨(Pic.toCohomologicalPicardGroupAddEquiv X).symm z, by simp [picToSheafHTwo, hz]⟩
+
+omit [SmoothOfRelativeDimension 1 (X ↘ Spec (.of k))] [IsProper (X ↘ Spec (.of k))] in
+/-- The kernel of the Kummer map to `H²(X, μ_m)` consists of the `m`-th multiples. -/
+lemma picToSheafHTwo_eq_zero_iff (m : ℕ) (hm : (m : k) ≠ 0) (L : Additive X.Pic) :
+    picToSheafHTwo m hm L = 0 ↔ ∃ L', (m : ℤ) • L' = L := by
+  obtain ⟨hα, -, -⟩ := X.exact_sheafH_rootsOfUnitySheaf_two m (isUnit_natCast_appTop m hm)
+  have h := congrArg (fun H : AddSubgroup X.CohomologicalPicardGroup ↦
+    Pic.toCohomologicalPicardGroupAddEquiv X L ∈ H) hα
+  simp only [AddMonoidHom.mem_ker, AddMonoidHom.mem_range, zsmulAddGroupHom_apply,
+    eq_iff_iff] at h
+  rw [picToSheafHTwo, AddMonoidHom.comp_apply, AddEquiv.coe_toAddMonoidHom, h]
+  constructor
+  · rintro ⟨z, hz⟩
+    exact ⟨(Pic.toCohomologicalPicardGroupAddEquiv X).symm z, by
+      rw [← map_zsmul, hz, AddEquiv.symm_apply_apply]⟩
+  · rintro ⟨L', rfl⟩
+    exact ⟨Pic.toCohomologicalPicardGroupAddEquiv X L', by rw [map_zsmul]⟩
+
+/-- The kernel of the Kummer map to `H²(X, μ_m)` has degree divisible by `m`. -/
+lemma ker_picToSheafHTwo_le (m : ℕ) (hm : (m : k) ≠ 0) :
+    (picToSheafHTwo (X := X) m hm).ker ≤ (picDegreeMod (k := k) (X := X) m).ker := by
+  intro L hL
+  obtain ⟨L', rfl⟩ := (picToSheafHTwo_eq_zero_iff m hm L).1 hL
+  rw [AddMonoidHom.mem_ker, map_zsmul, zsmul_eq_mul, Int.cast_natCast, ZMod.natCast_self,
+    zero_mul]
+
+/-- The trace `H²(X, μ_m) ⟶ ℤ/m` of a smooth proper curve over an algebraically closed field:
+the degree modulo `m` of a line bundle whose Kummer class is the given class. -/
+noncomputable def sheafHTwoTrace (m : ℕ) (hm : (m : k) ≠ 0) :
+    Sheaf.H (X.rootsOfUnitySheaf m) 2 →+ ZMod m :=
+  (QuotientAddGroup.lift _ (picDegreeMod (k := k) m) (ker_picToSheafHTwo_le m hm)).comp
+    (QuotientAddGroup.quotientKerEquivOfSurjective _
+      (surjective_picToSheafHTwo (X := X) m hm)).symm.toAddMonoidHom
+
+/-- The trace of the Kummer class of a line bundle is its degree modulo `m`. -/
+@[simp]
+lemma sheafHTwoTrace_picToSheafHTwo (m : ℕ) (hm : (m : k) ≠ 0) (L : Additive X.Pic) :
+    sheafHTwoTrace m hm (picToSheafHTwo m hm L) = picDegreeMod m L := by
+  rw [sheafHTwoTrace, AddMonoidHom.comp_apply, AddEquiv.coe_toAddMonoidHom,
+    (AddEquiv.symm_apply_eq _).2 rfl]
+  rfl
+
+/-- The trace `H²(X, μ_m) ⟶ ℤ/m` of a smooth proper connected curve over an algebraically
+closed field is bijective: by the Kummer sequence `H²(X, μ_m)` is `Pic(X)/m`, which the degree
+identifies with `ℤ/m` since `Pic⁰(X)` is divisible. -/
+theorem bijective_sheafHTwoTrace [GeometricallyIntegral (X ↘ Spec (.of k))] [Nonempty X]
+    (m : ℕ) [NeZero m] (hm : (m : k) ≠ 0) :
+    Function.Bijective (sheafHTwoTrace (X := X) m hm) := by
+  have hm0 : 0 < m := Nat.pos_of_ne_zero (NeZero.ne m)
+  refine ⟨?_, fun a ↦ ?_⟩
+  · rw [injective_iff_map_eq_zero]
+    intro z hz
+    obtain ⟨L, rfl⟩ := surjective_picToSheafHTwo m hm z
+    rw [sheafHTwoTrace_picToSheafHTwo, ← AddMonoidHom.mem_ker, ker_picDegreeMod m hm0] at hz
+    obtain ⟨L', rfl⟩ := hz
+    exact (picToSheafHTwo_eq_zero_iff m hm _).2 ⟨L', rfl⟩
+  · obtain ⟨L, hL⟩ := surjective_picDegreeHom (k := k) (C := X) (.ofAdd (a.val : ℤ))
+    refine ⟨picToSheafHTwo m hm (Additive.ofMul L), ?_⟩
+    rw [sheafHTwoTrace_picToSheafHTwo]
+    change (((picDegreeHom k X L).toAdd : ℤ) : ZMod m) = a
+    rw [hL, toAdd_ofAdd, Int.cast_natCast, ZMod.natCast_zmod_val]
+
 /-- `H²(X, μ_m)` has exactly `m` elements for a smooth proper connected curve `X` over an
 algebraically closed field and `m` prime to the characteristic: by the Kummer sequence it is
 `Pic(X)/m`, which the degree identifies with `ℤ/m` since `Pic⁰(X)` is divisible. -/
 theorem card_sheafH_two_rootsOfUnitySheaf [GeometricallyIntegral (X ↘ Spec (.of k))]
     [Nonempty X] (m : ℕ) [NeZero m] (hm : (m : k) ≠ 0) :
-    Nonempty (Sheaf.H (X.rootsOfUnitySheaf m) 2 ≃+ ZMod m) := by
-  have : Smooth (X ↘ Spec (.of k)) := SmoothOfRelativeDimension.smooth 1 _
-  have : IsCurve (X ↘ Spec (.of k)) :=
-    { krullDim_le_one := topologicalKrullDim_le_of_smoothOfRelativeDimension (X ↘ Spec (.of k)) 1 }
-  obtain ⟨e₁⟩ :=
-    IsCurve.nonempty_addEquiv_sheafH_rootsOfUnitySheaf_two_of_smooth (X ↘ Spec (.of k)) m hm
-  obtain ⟨e₂⟩ := X.nonempty_addEquiv_cohomologicalPicardGroup
-  have hsurj : Function.Surjective (picDegreeMod (k := k) (X := X) m) := fun a ↦ by
-    obtain ⟨L, hL⟩ := surjective_picDegreeHom (k := k) (C := X) (.ofAdd (a.val : ℤ))
-    refine ⟨Additive.ofMul L, ?_⟩
-    change (((picDegreeHom k X L).toAdd : ℤ) : ZMod m) = a
-    rw [hL, toAdd_ofAdd, Int.cast_natCast, ZMod.natCast_zmod_val]
-  have hm0 : 0 < m := Nat.pos_of_ne_zero (NeZero.ne m)
-  let e₃ := QuotientAddGroup.quotientKerEquivOfSurjective _ hsurj
-  refine ⟨e₁.trans ((QuotientAddGroup.congr _ _ e₂.symm ?_).trans
-    ((QuotientAddGroup.quotientAddEquivOfEq (ker_picDegreeMod m hm0).symm).trans e₃))⟩
-  ext L
-  simp only [AddSubgroup.mem_map, AddMonoidHom.mem_range, zsmulAddGroupHom_apply]
-  constructor
-  · rintro ⟨_, ⟨L', rfl⟩, rfl⟩
-    exact ⟨e₂.symm L', by rw [map_zsmul]⟩
-  · rintro ⟨L', rfl⟩
-    exact ⟨_, ⟨e₂ L', rfl⟩, by rw [map_zsmul, AddEquiv.symm_apply_apply]⟩
+    Nonempty (Sheaf.H (X.rootsOfUnitySheaf m) 2 ≃+ ZMod m) :=
+  ⟨AddEquiv.ofBijective _ (bijective_sheafHTwoTrace m hm)⟩
 
 end AlgebraicGeometry.Scheme

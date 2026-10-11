@@ -148,6 +148,8 @@ private theorem repLinearEquivOfIso_apply {k G : Type*} [CommRing k] [Monoid G]
 
 variable {W l}
 
+set_option maxHeartbeats 400000 in
+-- the final transport through the duals unfolds large `let`-bound linear equivalences
 /-- A lisse representation `ρ` of `W(C₀)` is the Weil fundamental representation of a lisse Weil
 sheaf `ℱ` on `C₀`: the local Frobenius `F_x` on the stalk `ℱ_x̄` has the characteristic
 polynomial of `ρ (Frob_x)` at every closed point `x`, and the geometric coinvariants
@@ -247,7 +249,7 @@ theorem exists_weilSheaf_of_isLisse {V : Type u} [AddCommGroup V] [Module (Padic
         simp only [LinearMap.comp_apply, LinearEquiv.coe_toLinearMap, htoF,
           LinearEquiv.symm_apply_apply]))
     -- the Frobenius `ρ (γ)` on the coinvariants
-    set Q := ρ.toCoinvariants G
+    let Q := ρ.toCoinvariants G
     let T : Representation.Coinvariants (ρ.comp G.subtype) ≃ₗ[PadicAlgCl l]
         Representation.Coinvariants (ρ.comp G.subtype) :=
       LinearEquiv.ofLinearMap (Q W.frobeniusLift) (Q W.frobeniusLift⁻¹)
@@ -257,13 +259,16 @@ theorem exists_weilSheaf_of_isLisse {V : Type u} [AddCommGroup V] [Module (Padic
         (LinearMap.ext fun n ↦ by
           rw [LinearMap.comp_apply, ← Module.End.mul_apply, ← map_mul, inv_mul_cancel, map_one,
             Module.End.one_apply, LinearMap.id_apply])
+    have hc (m : Fd.obj.globalSections.carrier)
+        (n : Representation.Coinvariants (ρ.comp G.subtype)) :
+        (a.trans d) (Fd.obj.globalSections.frobenius m) (T n) = (a.trans d) m n := by
+      refine Representation.Coinvariants.induction_on n fun v ↦ ?_
+      change toF (a _) (Q W.frobeniusLift (Representation.Coinvariants.mk _ v)) =
+        toF (a m) (Representation.Coinvariants.mk _ v)
+      rw [Representation.toCoinvariants_mk, htoF, htoF, ha, hb, hdual, hψ',
+        ← Module.End.mul_apply, ← map_mul, inv_mul_cancel, map_one, Module.End.one_apply]
     obtain ⟨f, hf⟩ := FrobeniusModule.exists_linearEquiv_dual_of_linearEquiv_dual
-      Fd.obj.globalSections T (a.trans d) fun m n ↦ by
-        obtain ⟨v, rfl⟩ := Representation.Coinvariants.mk_surjective _ n
-        change toF (a _) (Q W.frobeniusLift (Representation.Coinvariants.mk _ v)) =
-          toF (a m) (Representation.Coinvariants.mk _ v)
-        rw [Representation.toCoinvariants_mk, htoF, htoF, ha, hb, hdual, hψ',
-          ← Module.End.mul_apply, ← map_mul, inv_mul_cancel, map_one, Module.End.one_apply]
+      Fd.obj.globalSections T (a.trans d) hc
     exact ⟨f, hf⟩
 
 end WeilGroup

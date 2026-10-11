@@ -401,3 +401,45 @@ theorem gradedMap_bijective {j : ℕ} (hj : j ≤ r) :
 
 end Dimension
 end exteriorPower
+
+namespace Representation
+
+variable {k G V : Type*} [Field k] [Group G] [AddCommGroup V] [Module k V]
+  {ρ : Representation k G V}
+
+/-- The filtration `P_j` of the exterior power `⋀^r ρ` along a subrepresentation `A`, by the
+number of entries in `A`, as subrepresentations. -/
+def exteriorPowerFiltration (A : Subrepresentation ρ) (r j : ℕ) :
+    Subrepresentation (ρ.exteriorPower r) where
+  toSubmodule := exteriorPower.extFiltration A.toSubmodule r j
+  apply_mem_toSubmodule g x hx :=
+    exteriorPower.map_extFiltration_le (fun _ hy ↦ A.apply_mem_toSubmodule g hy) j ⟨x, hx, rfl⟩
+
+theorem exteriorPowerFiltration_antitone (A : Subrepresentation ρ) (r : ℕ) :
+    Antitone (exteriorPowerFiltration A r) :=
+  fun _ _ h ↦ exteriorPower.extFiltration_antitone (A := A.toSubmodule) (r := r) h
+
+theorem exteriorPowerFiltration_zero (A : Subrepresentation ρ) (r : ℕ) :
+    exteriorPowerFiltration A r 0 = ⊤ :=
+  Subrepresentation.toSubmodule_injective exteriorPower.extFiltration_zero
+
+theorem exteriorPowerFiltration_eq_bot (A : Subrepresentation ρ) {r j : ℕ} (hj : r < j) :
+    exteriorPowerFiltration A r j = ⊥ :=
+  Subrepresentation.toSubmodule_injective (exteriorPower.extFiltration_eq_bot hj)
+
+/-- The steps of the filtration of `⋀^r ρ` along a subrepresentation `A`:
+`P_j / P_{j + 1} ≅ ⋀^j A ⊗ ⋀^{r - j} (ρ / A)` as representations, for `j ≤ r`. -/
+theorem nonempty_equiv_exteriorPowerFiltration [FiniteDimensional k V] (A : Subrepresentation ρ)
+    {r j : ℕ} (hj : j ≤ r) :
+    Nonempty (((A.toRepresentation.exteriorPower j).tprod (A.quotient.exteriorPower (r - j))).Equiv
+      ((exteriorPowerFiltration A r j).subquotient (exteriorPowerFiltration A r (j + 1)))) := by
+  obtain ⟨σ, hσ⟩ := A.toSubmodule.mkQ.exists_rightInverse_of_surjective (Submodule.range_mkQ _)
+  refine ⟨IntertwiningMap.ofBijective
+    ⟨exteriorPower.gradedMap (Nat.add_sub_cancel' hj) σ, fun g ↦ LinearMap.ext fun t ↦ ?_⟩
+    (exteriorPower.gradedMap_bijective hσ hj)⟩
+  rw [LinearMap.comp_apply, LinearMap.comp_apply]
+  refine (exteriorPower.mk_eq_mk_iff _ _).2 ?_
+  rw [← neg_mem_iff, neg_sub]
+  exact exteriorPower.map_gradedLift_sub_mem _ hσ (ρ g) (fun _ hy ↦ A.apply_mem_toSubmodule g hy) t
+
+end Representation

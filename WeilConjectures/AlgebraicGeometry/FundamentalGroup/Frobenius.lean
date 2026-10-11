@@ -13,6 +13,7 @@ public import WeilConjectures.AlgebraicGeometry.Curve
 public import WeilConjectures.AlgebraicGeometry.Curve.Compactification
 public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.Functoriality
 public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.Inertia
+public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.LocalMonodromyFrobenius
 public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.Torsor
 public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.TorsorPullback
 public import WeilConjectures.AlgebraicGeometry.GeometricFrobenius
@@ -379,7 +380,25 @@ theorem exists_pow_mul_monodromy_eq_zero
       ∀ g ∈ fixingSubgroup s (IsOpenImmersion.lift V.ι (p.geometricFiberMap c.i c.comm.symm)
           (by rwa [Scheme.Opens.range_ι])) G,
         ((l ^ v : ℕ) : ZMod (l ^ n)) * (T.monodromy s G g).toAdd.down = 0 := by
-  sorry
+  have hl : l.Prime := Fact.out
+  -- a power `Φ ^ m` fixing `z` kills the local monodromy through `Q - 1`, `Q = q ^ m`
+  obtain ⟨m, hm, hmon⟩ := exists_natCast_sub_one_mul_monodromy_eq_zero p c s G V hV z hz
+  have hQ : 2 ≤ Nat.card K ^ m :=
+    (Finite.one_lt_card (α := K)).trans_le (Nat.le_self_pow (by omega) _)
+  obtain ⟨v, hv⟩ := ZMod.exists_natCast_pow_mul_eq_zero_of_natCast_sub_one_mul_eq_zero hl hQ
+  refine ⟨v, fun n T hT g hg ↦ hv n _ ?_⟩
+  obtain ⟨ψ, hψπ, hψv⟩ := hT
+  have : NeZero (l ^ n) := ⟨pow_ne_zero _ hl.ne_zero⟩
+  -- `ℓ` is invertible in `K̄`
+  have hlK : (l : K) ≠ 0 := fun h ↦ (Fact.out : ringChar K ≠ l)
+    ((Nat.prime_dvd_prime_iff_eq (CharP.char_is_prime K (ringChar K)) hl).1
+      ((ringChar.spec K l).1 h))
+  have hlK' : ((l ^ n : ℕ) : AlgebraicClosure K) ≠ 0 := by
+    rw [Nat.cast_pow, ← map_natCast (algebraMap K (AlgebraicClosure K))]
+    exact pow_ne_zero _ ((map_ne_zero _).2 hlK)
+  let ψ' : Aut T.P := ψ
+  exact hmon hlK' T (ψ' ^ m) (Aut.pow_hom_comp_eq_comp_pow_hom _ ψ' _ hψπ m)
+    (fun a ↦ (Aut.pow_hom_comp_eq_comp_pow_hom _ ψ' ψ' (hψv a).symm m).symm) g hg
 
 /-- Blueprint `lem-wf-open-curve-residue-sequence`: Finite-level residue sequences on an open
 curve, the vanishing of the residue at one boundary point.

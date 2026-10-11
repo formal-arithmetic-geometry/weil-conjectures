@@ -206,7 +206,7 @@ lemma smul_smul {F : Y.FiniteLocallyConstantModule Λ} (g : G) (c : Λ) (x : sta
     change (pointSmallEtale s).sheafFiber.map (c • 𝟙 F.obj) w = _
     rw [GrothendieckTopology.Point.sheafFiber_map_smul, CategoryTheory.Functor.map_id]
     rfl
-  rw [← hm, stalkMap_smul, hm]
+  rw [← hm, ← stalkMap_smul, hm]
 
 lemma one_smul {F : Y.FiniteLocallyConstantModule Λ} (x : stalk s F) : smul s G 1 x = x := by
   simp [smul, FiniteLocallyConstant.one_smul]
@@ -235,7 +235,8 @@ sheaves of `Λ`-modules to `Λ`-linear representations of `G = π₁(Y, s)`. -/
 noncomputable def toRep : Y.FiniteLocallyConstantModule Λ ⥤ Rep.{u + 1} Λ G where
   obj F := Rep.of (representation s G F)
   map {F F'} f := Rep.ofHom
-    ((stalkMap s f).hom.intertwiningMap_of_isIntertwiningMap fun g x ↦ stalkMap_smul s G f g x)
+    ((stalkMap s f).hom.intertwiningMap_of_isIntertwiningMap _ _
+      fun g x ↦ stalkMap_smul s G f g x)
   map_id F := by
     ext x
     change stalkMap s (𝟙 F) x = x
@@ -249,6 +250,7 @@ lemma toRep_map_hom_apply {F F' : Y.FiniteLocallyConstantModule Λ} (f : F ⟶ F
     (x : stalk s F) : ((toRep Λ s G).map f).hom x = stalkMap s f x := rfl
 
 end Action
+
 
 end FiniteLocallyConstantModule
 

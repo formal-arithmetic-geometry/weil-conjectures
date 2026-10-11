@@ -192,7 +192,7 @@ theorem exists_subquotient_equiv_of_subquotient {M N : Subrepresentation ρ}
         obtain ⟨y, hy, hxy⟩ := mem_map.1 hx
         exact hι hxy ▸ hy) fun y hy ↦ by
         obtain ⟨x, hx, rfl⟩ := mem_map.1 hy
-        exact ⟨x, hx, by rw [sub_self]; exact zero_mem _⟩).symm
+        exact ⟨x, hx, by rw [sub_self]; exact Submodule.zero_mem _⟩).symm
   exact ⟨_, _, ⟨e₂.trans e₁⟩⟩
 
 /-- Every irreducible subquotient `S / U` of `ρ` with `S ≤ F n`, for a chain of
@@ -217,23 +217,25 @@ theorem exists_subquotient_equiv_of_chain {n : ℕ} {F : ℕ → Subrepresentati
       let ι : (F (n + 1)).toRepresentation.IntertwiningMap ρ := ⟨Submodule.subtype _, fun _ ↦ rfl⟩
       let e₁ : ((comap ι S).subquotient (comap ι U)).Equiv (S.subquotient U) :=
         subquotientEquivOfIntertwiningMap ι (fun _ hx ↦ hx) (fun _ _ hx ↦ hx) (fun _ _ hx ↦ hx)
-          fun y hy ↦ ⟨⟨y, hS hy⟩, hy, by rw [sub_self]; exact zero_mem _⟩
+          fun y hy ↦ ⟨⟨y, hS hy⟩, hy, (congrArg (· ∈ U) (sub_self y)).mpr U.toSubmodule.zero_mem⟩
       have hinj (x) (hxS : x ∈ comap ι S) (hx : π x ∈ map π (comap ι U ⊓ comap ι S)) :
           x ∈ comap ι U := by
         obtain ⟨u, hu, hux⟩ := mem_map.1 hx
         have hxu : ((x - u : (F (n + 1)).toSubmodule) : V) ∈ F n := by
           have : π (x - u) = 0 := by rw [map_sub, hux, sub_self]
-          exact (Submodule.Quotient.mk_eq_zero _).1 this
+          exact (Submodule.Quotient.mk_eq_zero
+            ((F n).toSubmodule.comap (F (n + 1)).toSubmodule.subtype)).1 this
         have hxuS : ((x - u : (F (n + 1)).toSubmodule) : V) ∈ S :=
           S.toSubmodule.sub_mem hxS (mem_inf.1 hu).2
-        have := U.toSubmodule.add_mem (h (mem_inf.2 ⟨hxu, hxuS⟩)) (mem_inf.1 hu).1
-        simpa using this
+        have hu' : (u : V) ∈ U := (mem_inf.1 hu).1
+        have := U.toSubmodule.add_mem (h (mem_inf.2 ⟨hxu, hxuS⟩)) hu'
+        rwa [Submodule.coe_sub, sub_add_cancel] at this
       let e₂ : ((comap ι S).subquotient (comap ι U)).Equiv
           ((map π (comap ι S)).subquotient (map π (comap ι U ⊓ comap ι S))) :=
         subquotientEquivOfIntertwiningMap π (fun x hx ↦ mem_map.2 ⟨x, hx, rfl⟩)
           (fun x hxS hxU ↦ mem_map.2 ⟨x, mem_inf.2 ⟨hxU, hxS⟩, rfl⟩) hinj fun y hy ↦ by
             obtain ⟨x, hx, rfl⟩ := mem_map.1 hy
-            exact ⟨x, hx, by rw [sub_self]; exact zero_mem _⟩
+            exact ⟨x, hx, by rw [sub_self]; exact Submodule.zero_mem _⟩
       exact ⟨n, Nat.lt_succ_self n, _, _, ⟨e₂.symm.trans e₁⟩⟩
     · -- the subquotient comes from `F n`
       let e : ((F n ⊓ S).subquotient U).Equiv (S.subquotient U) :=
@@ -242,6 +244,26 @@ theorem exists_subquotient_equiv_of_chain {n : ℕ} {F : ℕ → Subrepresentati
       obtain ⟨i, hi, U', S', ⟨e'⟩⟩ := ih (fun i hi ↦ hF i (by omega)) inf_le_left
         (e.isIrreducible_iff.2 hirr)
       exact ⟨i, by omega, U', S', ⟨e'.trans e⟩⟩
+
+/-- Every irreducible subquotient `S / U` of `ρ` with `S ≤ P 0`, for a decreasing chain of
+subrepresentations `P 0 ≥ P 1 ≥ ⋯ ≥ P n = 0`, is equivalent to a subquotient of one of the steps
+`P j / P (j + 1)`. -/
+theorem exists_subquotient_equiv_of_antitone_chain {n : ℕ} {P : ℕ → Subrepresentation ρ}
+    (hn : P n = ⊥) (hP : ∀ j < n, P (j + 1) ≤ P j) {U S : Subrepresentation ρ} (hS : S ≤ P 0)
+    (hirr : (S.subquotient U).IsIrreducible) :
+    ∃ j < n, ∃ U' S' : Subrepresentation ((P j).subquotient (P (j + 1))),
+      Nonempty ((S'.subquotient U').Equiv (S.subquotient U)) := by
+  obtain ⟨i, hi, U', S', ⟨e⟩⟩ := exists_subquotient_equiv_of_chain (F := fun i ↦ P (n - i))
+    (n := n) (by rw [Nat.sub_zero, hn]) (fun i hi ↦ by
+      have h : n - i = n - (i + 1) + 1 := by omega
+      rw [h]
+      exact hP _ (by omega)) (by rwa [Nat.sub_self]) hirr
+  have key (a b : ℕ) (ha : a = n - (i + 1)) (hb : b = n - i) :
+      ∃ U' S' : Subrepresentation ((P a).subquotient (P b)),
+        Nonempty ((S'.subquotient U').Equiv (S.subquotient U)) := by
+    subst ha hb
+    exact ⟨U', S', ⟨e⟩⟩
+  exact ⟨n - (i + 1), by omega, key _ _ rfl (by omega)⟩
 
 /-- The dimensions of the factors `F (i + 1) / F i` of a chain `0 = F 0 ≤ F 1 ≤ ⋯ ≤ F n` of
 subrepresentations add up to the dimension of `F n`. -/
@@ -258,6 +280,16 @@ theorem sum_finrank_subquotient [FiniteDimensional k V] {n : ℕ} {F : ℕ → S
       ((F n).toSubmodule.comap (F (n + 1)).toSubmodule.subtype)
     rw [(Submodule.comapSubtypeEquivOfLe (hF n (by omega))).finrank_eq] at h
     omega
+
+/-- The subrepresentation `⊤` is equivalent to `ρ`. -/
+def topEquiv : (⊤ : Subrepresentation ρ).toRepresentation.Equiv ρ :=
+  .mk Submodule.topEquiv fun _ ↦ rfl
+
+/-- `ρ` is the internal direct sum of the one-member family `⊤`. -/
+theorem isInternal_const_top {ι : Type*} [Unique ι] :
+    DirectSum.IsInternal fun _ : ι ↦ (⊤ : Subrepresentation ρ).toSubmodule :=
+  DirectSum.isInternal_submodule_of_iSupIndep_of_iSup_eq_top (iSupIndep_subsingleton _)
+    (by simp)
 
 /-- Let `ρ` be the internal direct sum of a finite family of irreducible subrepresentations `Vs`.
 Then an irreducible subrepresentation `S` lies in the sum of those `Vs a` which are equivalent to
@@ -337,4 +369,116 @@ theorem exists_compositionSeries_of_iSupIndep {t : ℕ} {Vs : Fin t → Subrepre
       exact le_sup_left
     exact (isIrreducible_subquotient_iff hle).1
       ((hequiv ⟨i, hi⟩).some.isIrreducible_iff.2 (hirr _))
+
+section Quotient
+
+/-- The quotient representation `ρ / A` on `V ⧸ A` of a representation by a subrepresentation. -/
+noncomputable def quotient (A : Subrepresentation ρ) :
+    Representation k G (V ⧸ A.toSubmodule) where
+  toFun g := A.toSubmodule.mapQ A.toSubmodule (ρ g) fun _ hx ↦ A.apply_mem_toSubmodule g hx
+  map_one' := Submodule.linearMap_qext _ (LinearMap.ext fun _ ↦ by simp)
+  map_mul' _ _ := Submodule.linearMap_qext _ (LinearMap.ext fun _ ↦ by simp)
+
+theorem quotient_apply_mk (A : Subrepresentation ρ) (g : G) (v : V) :
+    A.quotient g (Submodule.Quotient.mk v) = Submodule.Quotient.mk (ρ g v) :=
+  rfl
+
+/-- The projection `ρ → ρ / A`, as an intertwining map. -/
+def mkQ (A : Subrepresentation ρ) : ρ.IntertwiningMap A.quotient :=
+  ⟨A.toSubmodule.mkQ, fun _ ↦ rfl⟩
+
+theorem mkQ_surjective (A : Subrepresentation ρ) : Function.Surjective A.mkQ :=
+  Submodule.mkQ_surjective _
+
+/-- The inclusion `A → ρ` of a subrepresentation, as an intertwining map. -/
+def subtype (A : Subrepresentation ρ) : A.toRepresentation.IntertwiningMap ρ :=
+  ⟨A.toSubmodule.subtype, fun _ ↦ rfl⟩
+
+theorem subtype_injective (A : Subrepresentation ρ) : Function.Injective A.subtype :=
+  Submodule.injective_subtype _
+
+/-- The image of `A` under its inclusion is `A`. -/
+theorem map_subtype_top (A : Subrepresentation ρ) : map A.subtype ⊤ = A :=
+  toSubmodule_injective (Submodule.map_subtype_top _)
+
+/-- The preimage of `0` under the projection `ρ → ρ / A` is `A`. -/
+theorem comap_mkQ_bot (A : Subrepresentation ρ) : comap A.mkQ ⊥ = A :=
+  toSubmodule_injective (Submodule.ker_mkQ _)
+
+theorem map_bot {V' : Type*} [AddCommGroup V'] [Module k V'] {σ : Representation k G V'}
+    (f : ρ.IntertwiningMap σ) : map f ⊥ = ⊥ :=
+  toSubmodule_injective (Submodule.map_bot _)
+
+theorem comap_top {V' : Type*} [AddCommGroup V'] [Module k V'] {σ : Representation k G V'}
+    (f : ρ.IntertwiningMap σ) : comap f ⊤ = ⊤ :=
+  toSubmodule_injective (Submodule.comap_top _)
+
+theorem map_mono {V' : Type*} [AddCommGroup V'] [Module k V'] {σ : Representation k G V'}
+    (f : ρ.IntertwiningMap σ) {S T : Subrepresentation ρ} (h : S ≤ T) : map f S ≤ map f T :=
+  fun _ ⟨x, hx, hxy⟩ ↦ ⟨x, h hx, hxy⟩
+
+theorem comap_mono {V' : Type*} [AddCommGroup V'] [Module k V'] {σ : Representation k G V'}
+    (f : ρ.IntertwiningMap σ) {S T : Subrepresentation σ} (h : S ≤ T) : comap f S ≤ comap f T :=
+  fun _ hx ↦ h hx
+
+/-- An injective intertwining map `f` identifies the subquotient `f(S) / f(U)` with `S / U`. -/
+noncomputable def subquotientMapEquiv {V' : Type*} [AddCommGroup V'] [Module k V']
+    {σ : Representation k G V'} (f : ρ.IntertwiningMap σ) (hf : Function.Injective f)
+    (U S : Subrepresentation ρ) : ((map f S).subquotient (map f U)).Equiv (S.subquotient U) :=
+  (subquotientEquivOfIntertwiningMap f (U := U) (S := S) (U' := map f U) (S' := map f S)
+    (fun x hx ↦ ⟨x, hx, rfl⟩) (fun x _ hx ↦ ⟨x, hx, rfl⟩)
+    (fun x _ hx ↦ by
+      obtain ⟨y, hy, hxy⟩ := mem_map.1 hx
+      exact hf hxy ▸ hy) fun y hy ↦ by
+      obtain ⟨x, hx, rfl⟩ := mem_map.1 hy
+      exact ⟨x, hx, by rw [sub_self]; exact Submodule.zero_mem _⟩).symm
+
+/-- Composition series of a subrepresentation `A` and of the quotient `ρ / A`, of lengths `m`
+and `n`, can be concatenated to a composition series of `ρ` of length `m + n` whose first `m`
+factors are those of `A` and whose last `n` factors are those of `ρ / A`. -/
+theorem exists_compositionSeries_append (A : Subrepresentation ρ) {m n : ℕ}
+    {F₁ : ℕ → Subrepresentation A.toRepresentation} (h₁0 : F₁ 0 = ⊥) (h₁m : F₁ m = ⊤)
+    (h₁ : ∀ i < m, F₁ i ⋖ F₁ (i + 1))
+    {F₂ : ℕ → Subrepresentation A.quotient} (h₂0 : F₂ 0 = ⊥) (h₂n : F₂ n = ⊤)
+    (h₂ : ∀ i < n, F₂ i ⋖ F₂ (i + 1)) :
+    ∃ F : ℕ → Subrepresentation ρ, F 0 = ⊥ ∧ F (m + n) = ⊤ ∧ (∀ i < m + n, F i ⋖ F (i + 1)) ∧
+      (∀ i < m,
+        Nonempty (((F (i + 1)).subquotient (F i)).Equiv ((F₁ (i + 1)).subquotient (F₁ i)))) ∧
+      ∀ i < n, Nonempty (((F (m + i + 1)).subquotient (F (m + i))).Equiv
+        ((F₂ (i + 1)).subquotient (F₂ i))) := by
+  let F : ℕ → Subrepresentation ρ := fun i ↦
+    if i ≤ m then map A.subtype (F₁ i) else comap A.mkQ (F₂ (i - m))
+  have hF₁ {i : ℕ} (hi : i ≤ m) : F i = map A.subtype (F₁ i) := if_pos hi
+  have hF₂ (i : ℕ) : F (m + i) = comap A.mkQ (F₂ i) := by
+    rcases Nat.eq_zero_or_pos i with rfl | hi
+    · rw [add_zero, hF₁ le_rfl, h₁m, h₂0, map_subtype_top, comap_mkQ_bot]
+    · exact (if_neg (by omega)).trans (by rw [Nat.add_sub_cancel_left])
+  have he₁ (i : ℕ) (hi : i < m) :
+      Nonempty (((F (i + 1)).subquotient (F i)).Equiv ((F₁ (i + 1)).subquotient (F₁ i))) := by
+    rw [hF₁ hi.le, hF₁ hi]
+    exact ⟨subquotientMapEquiv _ A.subtype_injective _ _⟩
+  have he₂ (i : ℕ) (_ : i < n) : Nonempty (((F (m + i + 1)).subquotient (F (m + i))).Equiv
+      ((F₂ (i + 1)).subquotient (F₂ i))) := by
+    rw [add_assoc, hF₂, hF₂]
+    exact ⟨subquotientComapEquiv _ A.mkQ_surjective _ _⟩
+  refine ⟨F, by rw [hF₁ (Nat.zero_le m), h₁0, map_bot], by rw [hF₂, h₂n, comap_top],
+    fun i hi ↦ ?_, he₁, he₂⟩
+  rcases lt_or_ge i m with him | him
+  · have hle : F i ≤ F (i + 1) := by
+      rw [hF₁ him.le, hF₁ him]
+      exact map_mono _ (h₁ i him).le
+    obtain ⟨e⟩ := he₁ i him
+    exact (isIrreducible_subquotient_iff hle).1 (e.isIrreducible_iff.2
+      ((isIrreducible_subquotient_iff (h₁ i him).le).2 (h₁ i him)))
+  · obtain ⟨i, rfl⟩ := Nat.exists_eq_add_of_le him
+    have hi' : i < n := by omega
+    have hle : F (m + i) ≤ F (m + i + 1) := by
+      rw [add_assoc, hF₂, hF₂]
+      exact comap_mono _ (h₂ i hi').le
+    obtain ⟨e⟩ := he₂ i hi'
+    exact (isIrreducible_subquotient_iff hle).1 (e.isIrreducible_iff.2
+      ((isIrreducible_subquotient_iff (h₂ i hi').le).2 (h₂ i hi')))
+
+end Quotient
+
 end Subrepresentation

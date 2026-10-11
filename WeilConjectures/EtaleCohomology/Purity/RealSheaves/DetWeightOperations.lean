@@ -56,13 +56,6 @@ theorem IsLisse.tensorPower (hρ : W.IsLisse l ρ) {n : ℕ} (hn : 1 ≤ n) :
   | base => exact IsLisse.of_equiv ρ.tensorPowerOneEquiv.symm hρ
   | succ n hn ih => exact IsLisse.of_equiv (ρ.tensorPowerSuccEquiv n).symm (ih.tprod hρ)
 
-omit [FiniteDimensional (PadicAlgCl l) V] in
-/-- The determinant weight `dw_ι` is the determinant weight of `sk-d-weights` for the real weight
-character `λ_ι = wt_{ι, q}` and the chosen Frobenius lift. -/
-theorem detWeight_eq_detWeight_weightCharacter (σ : Representation (PadicAlgCl l) W.carrier V) :
-    W.detWeight l σ ι = σ.detWeight (weightCharacter ι (Nat.card K)) W.frobeniusLift :=
-  (detWeight_weightCharacter ι σ _ _).symm
-
 variable [SmoothOfRelativeDimension 1 p] [GeometricallyConnected p] [Fact (ringChar K ≠ l)]
   [W.IsEtaleQuotient]
 

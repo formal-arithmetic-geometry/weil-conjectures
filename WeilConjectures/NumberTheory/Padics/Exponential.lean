@@ -841,28 +841,32 @@ theorem exists_smallLog_pow_hom {G : Type*} [Group G] [TopologicalSpace G] [Comp
   have hl0 : 0 < ‖(l : PadicAlgCl l)‖ :=
     norm_pos_iff.mpr (Nat.cast_ne_zero.mpr (Fact.out : l.Prime).ne_zero)
   obtain ⟨N, hN, hu⟩ := exists_pow_norm_sub_one_le l E (pow_pos hl0 2)
-  have hsmall (g : G) : χ g ^ N ∈ smallUnits l E := by
-    change (((χ g ^ N : Eˣ) : E) - 1) / ((l : E) ^ 2) ∈ integers l E
+  have hsmall' (g : G) : ((χ g : E) ^ N - 1) / ((l : E) ^ 2) ∈ integers l E := by
     rw [mem_integers_iff, ← NNReal.coe_le_coe, coe_nnnorm, map_div₀, norm_div, map_pow,
-      map_natCast, norm_pow, NNReal.coe_one, div_le_one (pow_pos hl0 2), Units.val_pow_eq_pow_val]
+      map_natCast, norm_pow, NNReal.coe_one, div_le_one (pow_pos hl0 2)]
     exact hu (u g)
+  have hsmall (g : G) : χ g ^ N ∈ smallUnits l E := by
+    have h := hsmall' g
+    rw [← Units.val_pow_eq_pow_val] at h
+    exact h
   refine ⟨N, hN, hsmall, fun g h ↦ ?_, ?_⟩
   · have := smallLog_mul l E ⟨_, hsmall g⟩ ⟨_, hsmall h⟩
     simpa [Units.val_pow_eq_pow_val, mul_pow] using this
   · let := normedFieldOfAlgebra l E
     have hnorm' (y : E) : ‖y‖ = ‖ι y‖ := rfl
-    have hball (g : G) : logExpConst l * ‖(χ g : E) ^ N - 1‖ < 1 := by
-      have := mul_logExpConst_lt_one_of_div_mem_integers (hsmall g)
-      simpa [Units.val_pow_eq_pow_val] using this
+    have hball (g : G) : logExpConst l * ‖(χ g : E) ^ N - 1‖ < 1 :=
+      mul_logExpConst_lt_one_of_div_mem_integers (hsmall' g)
     have ha : Continuous fun g ↦ ι ((χ g : E) ^ N - 1) := by
-      simpa [map_sub, map_pow] using (hχ.pow N).sub continuous_const
-    refine continuous_iff_continuousAt.2 fun g₀ ↦ ?_
-    rw [ContinuousAt, Metric.tendsto_nhds]
-    intro ε hε
-    filter_upwards [Metric.tendsto_nhds.1 (ha.tendsto g₀) ε hε] with g hg
-    rw [dist_eq_norm, ← map_sub, ← hnorm', norm_smallLog_sub_smallLog (hball g) (hball g₀),
-      hnorm', map_sub, ← dist_eq_norm]
-    exact hg
+      simp only [map_sub, map_pow, map_one]
+      exact (hχ.pow N).sub continuous_const
+    have hdist (g g' : G) : dist (ι (smallLog l E ((χ g : E) ^ N - 1)))
+        (ι (smallLog l E ((χ g' : E) ^ N - 1))) =
+          dist (ι ((χ g : E) ^ N - 1)) (ι ((χ g' : E) ^ N - 1)) := by
+      rw [dist_eq_norm, dist_eq_norm, ← map_sub, ← map_sub, ← hnorm', ← hnorm']
+      exact norm_smallLog_sub_smallLog (hball g) (hball g')
+    refine Metric.continuous_iff'.2 fun g₀ ε hε ↦ ?_
+    filter_upwards [Metric.continuous_iff'.1 ha g₀ ε hε] with g hg
+    rwa [hdist]
 
 end Characters
 
