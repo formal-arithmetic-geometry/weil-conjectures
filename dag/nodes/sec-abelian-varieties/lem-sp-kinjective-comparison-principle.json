@@ -155,5 +155,23 @@
   "group": "M1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-kcp1941 (reviewer sub-agent of L); spot-checked: Steps 1-3 against lem-weil-pbc-kinjective-hom-derived (Hom_K(N,I)->Hom_D bijective for K-injective I, any N) and def-weil-abstract-derived-category (Q inverts quasi-isos); conjugation argument correct; K-injective notion of def-sp-kinjective-bridge (Hom complex from acyclic is acyclic) equivalent to hom-derived's (maps from acyclics nullhomotopic, acyclics shift-closed); no new nodes, no class (b) restatement of prop-pur-kinjective-resolutions-exist or lem-weil-pbc-kinjective-*; tool use of the generic Mathlib leaf accepted. No repairs."
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.KInjectiveComparisonPrinciple",
+  "declaration": "CochainComplex.IsKInjective.precomp_bijective_of_quasiIso",
+  "file": "lean/Sheaf/Algebra/Homology/KInjectiveComparisonPrinciple.lean",
+  "statement": "theorem precomp_bijective_of_quasiIso {C : Type u} [Category.{v} C] [Abelian C] [HasDerivedCategory.{w} C] {A B : CochainComplex C ℤ} (s : A ⟶ B) [QuasiIso s] (I : CochainComplex C ℤ) [I.IsKInjective] : Function.Bijective (fun g : (HomotopyCategory.quotient C (ComplexShape.up ℤ)).obj B ⟶ (HomotopyCategory.quotient C (ComplexShape.up ℤ)).obj I ↦ (HomotopyCategory.quotient C (ComplexShape.up ℤ)).map s ≫ g)",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-kcp0938",
+  "group": "C1",
+  "result": "pass",
+  "note": "Abelian C + HasDerivedCategory.{w} = abelian cat with derived category; A B unbounded Z-complexes, s : A ⟶ B [QuasiIso s]; I [I.IsKInjective] (Mathlib, as KInjectiveBridge field); Bijective of g ↦ quotient.map s ≫ g on Hom_K(B,I)→Hom_K(A,I) = s^*; #check: all names Mathlib; no Mathlib precomp statement (Qh_map_bijective is Qh.map, Orthogonal map_bijective_of_isTriangulated is localization map), existing:false correct"
  }
 }
