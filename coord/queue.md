@@ -1,11 +1,11 @@
 # Work queue
 
-1005 items; claim with `tools/claim.py next <group> [--stage N]`.
+1006 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (1005)
+## Stage 2: nodes to state (1006)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -20,11 +20,9 @@
 | `def-weil-pbc-henselian-terminology` | 1 | state |
 | `def-weil-pbc-popescu-resolution` | 1 | state |
 | `def-weil-pbc-proetale-site` | 1 | state |
-| `def-weil-pbc-serre-conditions-rk-sk` | 1 | state |
 | `lem-exc-discrete-modules-abelian` | 1 | state |
 | `lem-exc-discrete-modules-abelian-injective-embeddings` | 1 | state |
 | `lem-exc-discrete-modules-abelian-structure` | 1 | state |
-| `lem-exc-etale-field-gsets` | 1 | state |
 | `lem-exc-etale-sheaves-gsets-point` | 1 | state |
 | `lem-exc-field-sections-stalk-invariants` | 1 | state |
 | `lem-exc-finite-galois-sheaf-sections-coproduct` | 1 | state |
@@ -48,7 +46,6 @@
 | `lem-pc-compact-generators-build-objects` | 1 | state |
 | `lem-pc-compact-hom-hocolim` | 1 | state |
 | `lem-pc-complex-hocolim-colimit` | 1 | state |
-| `lem-pc-derived-acyclic-resolution` | 1 | state |
 | `lem-pc-derived-adjoint-functors` | 1 | state |
 | `lem-pc-derived-filtered-free-resolution` | 1 | state |
 | `lem-pc-derived-free-complex-cover` | 1 | state |
@@ -801,6 +798,7 @@
 | `lem-weil-pbc-regular-sequence-short-exact-sequence` | 1 | state |
 | `lem-weil-pbc-regular-sequence-swap-two` | 1 | state |
 | `lem-weil-pbc-regular-through-localization` | 1 | state |
+| `lem-weil-pbc-regularity-rk-goes-up` | 1 | state |
 | `lem-weil-pbc-relative-global-complete-intersection-base-change` | 1 | state |
 | `lem-weil-pbc-relative-global-complete-intersection-conormal-free` | 1 | state |
 | `lem-weil-pbc-relative-global-complete-intersection-flat` | 1 | state |
@@ -837,6 +835,9 @@
 | `lem-weil-pbc-separate-image-closed-from-closed` | 1 | state |
 | `lem-weil-pbc-separated-affine-cover-criterion` | 1 | state |
 | `lem-weil-pbc-separating-transcendence-basis-finite-subextension` | 1 | state |
+| `lem-weil-pbc-serre-criterion-normal` | 1 | state |
+| `lem-weil-pbc-serre-criterion-reduced` | 1 | state |
+| `lem-weil-pbc-serre-sk-goes-up` | 1 | state |
 | `lem-weil-pbc-ses-cech-h1-surjective` | 1 | state |
 | `lem-weil-pbc-set-cech-nerve-free-resolution` | 1 | state |
 | `lem-weil-pbc-sets-etale-inverse-image-constant-base-change` | 1 | state |
@@ -1015,7 +1016,7 @@
 | `lem-sc-normalization-properties` | 3 | state |
 | `def-nagata-fixed-base-separated-stage` | 6 | state |
 
-Not open yet: 1134 nodes that wait for a statement dependency, 40 nodes that wait for stage 1.
+Not open yet: 1130 nodes that wait for a statement dependency, 40 nodes that wait for stage 1.
 
 ## Stage 3: modules to prove (0)
 
