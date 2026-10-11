@@ -11,6 +11,7 @@ public import Mathlib.Algebra.Homology.DerivedCategory.Plus
 public import WeilConjectures.FromJoel.Algebra.Homology.PreservesQuasiIso
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
 public import WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory.Plus
+public import WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory.ShiftSequence
 public import WeilConjectures.Mathlib.CategoryTheory.Functor.ReflectsIso.Jointly
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.TStructure
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.Plus
@@ -282,6 +283,113 @@ noncomputable def mapDerivedCategoryHomologyFunctorIso (F : C ⥤ D) [F.Additive
     (DerivedCategory.homologyFunctor C n ⋙ F)
     (F.mapDerivedCategory ⋙ DerivedCategory.homologyFunctor D n)
     (Iso.refl _)
+
+/-- The value of `Functor.mapDerivedCategoryHomologyFunctorIso` on the image of a cochain
+complex. -/
+lemma mapDerivedCategoryHomologyFunctorIso_hom_app_Q (F : C ⥤ D) [F.Additive]
+    [PreservesFiniteLimits F] [PreservesFiniteColimits F] (n : ℤ) (K : CochainComplex C ℤ) :
+    (F.mapDerivedCategoryHomologyFunctorIso n).hom.app (DerivedCategory.Q.obj K) =
+      F.map ((DerivedCategory.homologyFunctorFactors C n).hom.app K) ≫
+        (F.mapHomologicalComplexHomologyIso (.up ℤ) n).inv.app K ≫
+        (DerivedCategory.homologyFunctorFactors D n).inv.app
+          ((F.mapHomologicalComplex (.up ℤ)).obj K) ≫
+        (DerivedCategory.homologyFunctor D n).map (F.mapDerivedCategoryFactors.inv.app K) := by
+  simp [mapDerivedCategoryHomologyFunctorIso, Localization.liftNatIso, Localization.liftNatTrans_app]
+
+open DerivedCategory in
+lemma mapDerivedCategoryHomologyFunctorIso_hom_app_shiftIso_Q (F : C ⥤ D) [F.Additive]
+    [PreservesFiniteLimits F] [PreservesFiniteColimits F] (n a a' : ℤ) (h : n + a = a')
+    (K : CochainComplex C ℤ) :
+    F.map (((homologyFunctor C 0).shiftIso n a a' h).hom.app (Q.obj K)) ≫
+        (F.mapDerivedCategoryHomologyFunctorIso a').hom.app (Q.obj K) =
+      (F.mapDerivedCategoryHomologyFunctorIso a).hom.app ((Q.obj K)⟦n⟧) ≫
+        (homologyFunctor D a).map ((F.mapDerivedCategory.commShiftIso n).hom.app (Q.obj K)) ≫
+        ((homologyFunctor D 0).shiftIso n a a' h).hom.app (F.mapDerivedCategory.obj (Q.obj K)) := by
+  have S₁ := shiftMap_homologyFunctor_map_Q (𝟙 (K⟦n⟧)) a a' h
+  have S₂ := shiftMap_homologyFunctor_map_Q (𝟙 (((F.mapHomologicalComplex (.up ℤ)).obj K)⟦n⟧))
+    a a' h
+  simp only [Functor.shiftMap, ShiftedHom.map, Functor.map_id, Category.id_comp] at S₁ S₂
+  have hφ := NatTrans.shift_app_comm F.mapDerivedCategoryFactors.hom n K
+  simp only [Functor.comp_obj, Functor.commShiftIso_comp_hom_app, Category.assoc] at hφ
+  have hC := F.mapHomologicalComplexHomologyIso_hom_app_shiftIso n a a' h K
+  have ne := (F.mapDerivedCategoryHomologyFunctorIso a).hom.naturality
+    ((Q.commShiftIso n).hom.app K)
+  simp only [Functor.comp_obj, Functor.comp_map] at ne
+  have hφ' : F.mapDerivedCategory.map ((Q.commShiftIso n).hom.app K) ≫
+      (F.mapDerivedCategory.commShiftIso n).hom.app (Q.obj K) =
+      F.mapDerivedCategoryFactors.hom.app (K⟦n⟧) ≫
+        Q.map (((F.mapHomologicalComplex (.up ℤ)).commShiftIso n).hom.app K) ≫
+        (Q.commShiftIso n).hom.app ((F.mapHomologicalComplex (.up ℤ)).obj K) ≫
+        (F.mapDerivedCategoryFactors.inv.app K)⟦n⟧' := by
+    rw [← reassoc_of% hφ, ← Functor.map_comp, Iso.hom_inv_id_app]
+    erw [Functor.map_id, Category.comp_id]
+  rw [← cancel_epi (F.map ((homologyFunctor C a).map ((Q.commShiftIso n).hom.app K))),
+    ← F.map_comp_assoc]
+  erw [S₁]
+  rw [reassoc_of% ne, ← Functor.map_comp_assoc, hφ']
+  have hs := (homologyFunctor D 0).shiftIso_hom_naturality n a a' h
+    (F.mapDerivedCategoryFactors.inv.app K)
+  simp only [Functor.map_comp, Category.assoc]
+  erw [hs, reassoc_of% S₂]
+  rw [mapDerivedCategoryHomologyFunctorIso_hom_app_Q, mapDerivedCategoryHomologyFunctorIso_hom_app_Q]
+  have key : F.map (((HomologicalComplex.homologyFunctor C (.up ℤ) 0).shiftIso n a a' h).hom.app K) ≫
+      (F.mapHomologicalComplexHomologyIso (.up ℤ) a').inv.app K =
+      (F.mapHomologicalComplexHomologyIso (.up ℤ) a).inv.app (K⟦n⟧) ≫
+        (HomologicalComplex.homologyFunctor D (.up ℤ) a).map
+          (((F.mapHomologicalComplex (.up ℤ)).commShiftIso n).hom.app K) ≫
+        ((HomologicalComplex.homologyFunctor D (.up ℤ) 0).shiftIso n a a' h).hom.app
+          ((F.mapHomologicalComplex (.up ℤ)).obj K) := by
+    have hc : (HomologicalComplex.homologyFunctor D (.up ℤ) a).map
+        (((F.mapHomologicalComplex (.up ℤ)).commShiftIso n).hom.app K) ≫
+        (HomologicalComplex.homologyFunctor D (.up ℤ) a).map
+          (((F.mapHomologicalComplex (.up ℤ)).commShiftIso n).inv.app K) = 𝟙 _ := by
+      rw [← Functor.map_comp, Iso.hom_inv_id_app, Functor.map_id]
+    rw [← cancel_mono ((F.mapHomologicalComplexHomologyIso (.up ℤ) a').hom.app K),
+      Category.assoc, Iso.inv_hom_id_app]
+    erw [Category.comp_id]
+    simp only [Category.assoc]
+    erw [← hC, reassoc_of% hc, Iso.inv_hom_id_app_assoc]
+  have hF' := homologyFunctorFactors_hom_naturality
+    (((F.mapHomologicalComplex (.up ℤ)).commShiftIso n).hom.app K) a
+  have c₁ : F.map ((homologyFunctorFactors C a').inv.app K) ≫
+      F.map ((homologyFunctorFactors C a').hom.app K) = 𝟙 _ := by
+    rw [← F.map_comp, Iso.inv_hom_id_app, F.map_id]
+  have c₂ : (homologyFunctor D a).map
+        (F.mapDerivedCategoryFactors.inv.app ((shiftFunctor (CochainComplex C ℤ) n).obj K)) ≫
+      (homologyFunctor D a).map
+        (F.mapDerivedCategoryFactors.hom.app ((shiftFunctor (CochainComplex C ℤ) n).obj K)) =
+      𝟙 _ := by
+    rw [← Functor.map_comp, Iso.inv_hom_id_app, Functor.map_id]
+  simp only [Category.assoc, reassoc_of% c₁, reassoc_of% c₂]
+  erw [reassoc_of% key]
+  simp only [Category.assoc, reassoc_of% hF', Iso.inv_hom_id_app_assoc]
+  rfl
+
+open DerivedCategory in
+/-- The isomorphisms `H^n(-) ⋙ F ≅ F.mapDerivedCategory ⋙ H^n(-)` are compatible with the shift
+sequence structure of the homology functors. -/
+lemma mapDerivedCategoryHomologyFunctorIso_hom_app_shiftIso (F : C ⥤ D) [F.Additive]
+    [PreservesFiniteLimits F] [PreservesFiniteColimits F] (n a a' : ℤ) (h : n + a = a')
+    (X : DerivedCategory C) :
+    F.map (((homologyFunctor C 0).shiftIso n a a' h).hom.app X) ≫
+        (F.mapDerivedCategoryHomologyFunctorIso a').hom.app X =
+      (F.mapDerivedCategoryHomologyFunctorIso a).hom.app (X⟦n⟧) ≫
+        (homologyFunctor D a).map ((F.mapDerivedCategory.commShiftIso n).hom.app X) ≫
+        ((homologyFunctor D 0).shiftIso n a a' h).hom.app (F.mapDerivedCategory.obj X) := by
+  let τ₁ : shiftFunctor (DerivedCategory C) n ⋙ homologyFunctor C a ⋙ F ⟶
+      F.mapDerivedCategory ⋙ homologyFunctor D a' :=
+    Functor.whiskerRight ((homologyFunctor C 0).shiftIso n a a' h).hom F ≫
+      (F.mapDerivedCategoryHomologyFunctorIso a').hom
+  let τ₂ : shiftFunctor (DerivedCategory C) n ⋙ homologyFunctor C a ⋙ F ⟶
+      F.mapDerivedCategory ⋙ homologyFunctor D a' :=
+    Functor.whiskerLeft (shiftFunctor (DerivedCategory C) n)
+        (F.mapDerivedCategoryHomologyFunctorIso a).hom ≫
+      Functor.whiskerRight (F.mapDerivedCategory.commShiftIso n).hom (homologyFunctor D a) ≫
+      Functor.whiskerLeft F.mapDerivedCategory ((homologyFunctor D 0).shiftIso n a a' h).hom
+  have : τ₁ = τ₂ := Localization.natTrans_ext Q (HomologicalComplex.quasiIso C (.up ℤ))
+    (fun K ↦ by
+      simpa [τ₁, τ₂] using F.mapDerivedCategoryHomologyFunctorIso_hom_app_shiftIso_Q n a a' h K)
+  simpa [τ₁, τ₂] using congr_app this X
 
 /-- An exact functor `F` kills an object `K` of the derived category as soon as it kills all
 the homology objects of `K`, since `H^n (F K) ≅ F (H^n K)`. -/
@@ -721,7 +829,56 @@ lemma mapDerivedCategoryPlusHomologyFunctorIso_hom_app_shiftIso (n a a' : ℤ) (
           ((F.mapDerivedCategoryPlus.commShiftIso n).hom.app X) ≫
         ((DerivedCategory.Plus.homologyFunctor D 0).shiftIso n a a' h).hom.app
           (F.mapDerivedCategoryPlus.obj X) := by
-  sorry
+  have hsC : ((DerivedCategory.Plus.homologyFunctor C 0).shiftIso n a a' h).hom.app X =
+      (DerivedCategory.homologyFunctor C a).map
+        ((DerivedCategory.Plus.ι.commShiftIso n).hom.app X) ≫
+      ((DerivedCategory.homologyFunctor C 0).shiftIso n a a' h).hom.app
+        (DerivedCategory.Plus.ι.obj X) := by
+    refine (Category.id_comp _).trans ?_
+    simp only [Iso.trans_hom, NatTrans.comp_app, Functor.isoWhiskerRight_hom,
+      Functor.whiskerRight_app, Functor.associator_hom_app, Functor.isoWhiskerLeft_hom,
+      Functor.whiskerLeft_app]
+    erw [Category.id_comp]
+    rfl
+  have hsD : ((DerivedCategory.Plus.homologyFunctor D 0).shiftIso n a a' h).hom.app
+      (F.mapDerivedCategoryPlus.obj X) =
+      (DerivedCategory.homologyFunctor D a).map
+        ((DerivedCategory.Plus.ι.commShiftIso n).hom.app (F.mapDerivedCategoryPlus.obj X)) ≫
+      ((DerivedCategory.homologyFunctor D 0).shiftIso n a a' h).hom.app
+        (DerivedCategory.Plus.ι.obj (F.mapDerivedCategoryPlus.obj X)) := by
+    refine (Category.id_comp _).trans ?_
+    simp only [Iso.trans_hom, NatTrans.comp_app, Functor.isoWhiskerRight_hom,
+      Functor.whiskerRight_app, Functor.associator_hom_app, Functor.isoWhiskerLeft_hom,
+      Functor.whiskerLeft_app]
+    erw [Category.id_comp]
+    rfl
+  have he (m : ℤ) (Y : DerivedCategory.Plus C) :
+      (F.mapDerivedCategoryPlusHomologyFunctorIso m).hom.app Y =
+        (F.mapDerivedCategoryHomologyFunctorIso m).hom.app (DerivedCategory.Plus.ι.obj Y) := by
+    simp [mapDerivedCategoryPlusHomologyFunctorIso, mapDerivedCategoryPlusCompatibility]
+    erw [Functor.map_id, Category.comp_id, Category.id_comp]
+  have hc := NatTrans.shift_app_comm
+    (DerivedCategory.TStructure.t.plus.liftCompιIso
+      (DerivedCategory.Plus.ι ⋙ F.mapDerivedCategory) (fun Y ↦
+        (F.mapDerivedCategoryPlus.obj Y).2)).hom n X
+  simp only [Functor.comp_obj, Functor.commShiftIso_comp_hom_app] at hc
+  have hc' : DerivedCategory.Plus.ι.map ((F.mapDerivedCategoryPlus.commShiftIso n).hom.app X) ≫
+      (DerivedCategory.Plus.ι.commShiftIso n).hom.app (F.mapDerivedCategoryPlus.obj X) =
+      F.mapDerivedCategory.map ((DerivedCategory.Plus.ι.commShiftIso n).hom.app X) ≫
+        (F.mapDerivedCategory.commShiftIso n).hom.app (DerivedCategory.Plus.ι.obj X) := by
+    simp only [ObjectProperty.liftCompιIso, Iso.refl_hom, NatTrans.id_app] at hc
+    erw [Functor.map_id, Category.comp_id, Category.id_comp] at hc
+    exact hc
+  have hc'' := congrArg (DerivedCategory.homologyFunctor D a).map hc'
+  simp only [Functor.map_comp] at hc''
+  have := F.mapDerivedCategoryHomologyFunctorIso_hom_app_shiftIso n a a' h
+    (DerivedCategory.Plus.ι.obj X)
+  have ne := (F.mapDerivedCategoryHomologyFunctorIso a).hom.naturality
+    ((DerivedCategory.Plus.ι.commShiftIso n).hom.app X)
+  simp only [Functor.comp_obj, Functor.comp_map] at ne
+  rw [hsC, hsD, he, he, F.map_comp_assoc]
+  erw [this, reassoc_of% ne, reassoc_of% hc'']
+  rfl
 
 /-- The isomorphism `H^n(F(A)[-n]) ≅ F(H^n(A[-n]))` given by `F.mapDerivedCategoryPlusSingleFunctor`
 and `F.mapDerivedCategoryPlusHomologyFunctorIso` is compatible with the identifications
