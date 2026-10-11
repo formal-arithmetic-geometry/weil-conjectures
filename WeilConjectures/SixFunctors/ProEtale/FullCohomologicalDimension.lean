@@ -268,7 +268,8 @@ Let `k` be separably closed, `p : X ⟶ Y` a proper morphism of finite-type `k`-
 `V` of `Y_proét`, applied to the restriction of `F`. The blueprint asks this for the base changes
 whose source has dimension at most `d`; it holds for all of them, as
 `AlgebraicGeometry.ProEtale.isZero_homology_rightDerivedLowerStar_comparisonUpperStar` allows
-base change along an arbitrary morphism. -/
+base change along an arbitrary morphism. The hypothesis `[HasInvertibleExponent Λ X]` is only
+there to apply that statement, whose proof does not use it. -/
 theorem isZero_homology_rightDerivedLowerStar_of_etaleOrigin
     (F : Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} Λ))
     (hF : etaleOrigin (ModuleCat.{u + 1} Λ) X F) (r : ℤ) (hr : (2 * d : ℤ) < r) :
@@ -302,7 +303,8 @@ class-restricted bound `FullCD_cls(p, Λ; 2d)` holds. This is
 `AlgebraicGeometry.ProEtale.isZero_homology_rightDerivedLowerStar_of_etaleOrigin`; the
 comparison bound on the class is `M = 0`
 (`AlgebraicGeometry.ProEtale.isZero_homology_rightDerivedComparisonLowerStar`), so the residual
-`2d` is the étale direction. -/
+`2d` is the étale direction. As there, the hypothesis `[HasInvertibleExponent Λ X]` is not
+used. -/
 theorem hasCohomologicalDimensionLEOnEtaleOrigin :
     HasCohomologicalDimensionLEOnEtaleOrigin (ModuleCat.{u + 1} Λ) p (2 * d) :=
   ⟨fun F hF r hr ↦ (isZero_homology_rightDerivedLowerStar_of_etaleOrigin Λ p aX aY hp d hd F hF r

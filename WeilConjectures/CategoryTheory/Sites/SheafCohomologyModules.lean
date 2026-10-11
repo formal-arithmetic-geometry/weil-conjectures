@@ -216,12 +216,3 @@ end Acyclic
 end Sheaf
 
 end CategoryTheory
-
-open CategoryTheory in
-/-- Injective sheaves of modules over a finite ring on the small étale site of a scheme are
-acyclic. -/
-example {X : AlgebraicGeometry.Scheme.{u}} (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
-    (I : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) [Injective I] (n : ℕ) :
-    Subsingleton (Sheaf.H ((sheafCompose X.smallEtaleTopology
-      (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj I) (n + 1)) :=
-  Sheaf.subsingleton_H_forget₂_of_injective.{u + 1, u + 1, u, u + 1} Λ I n

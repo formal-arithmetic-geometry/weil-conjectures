@@ -33,8 +33,9 @@ The proof follows the blueprint. The sheaf `R^q f_* M` is the sheafification of 
 so it suffices that these groups vanish for affine `W`. Then `W ×_Y X` is a `k`-scheme of finite
 type, étale over `X`, hence of dimension at most `d`, and its torsion cohomological dimension is
 at most `2d` (`AlgebraicGeometry.Scheme.subsingleton_H_of_two_mul_lt_of_isSepClosed`, blueprint
-`sk-prop-sf-finiteness`). That bound is stated for abelian sheaves; it is transported to sheaves
-of `Λ`-modules by dimension shifting
+`sk-prop-sf-finiteness`, the case `c = 0` of the bound `cd_tor(X) ≤ 2d + c` of
+`thm-sc-finite-type-torsion-cd`). That bound is stated for abelian sheaves; it is transported to
+sheaves of `Λ`-modules by dimension shifting
 (`AlgebraicGeometry.Etale.subsingleton_ext_freeSheaf_of_subsingleton_H`), using that the
 underlying abelian sheaf of an injective sheaf of `Λ`-modules is acyclic
 (`CategoryTheory.Sheaf.subsingleton_H_forget₂_of_injective`).
@@ -76,8 +77,6 @@ of `Λ`-modules on `X`. -/
 def Etale.HasUniformDirectImageVanishingLE {X Y : Scheme.{u}} (f : X ⟶ Y) (N : ℕ) : Prop :=
   ∀ (M : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (q : ℤ), (N : ℤ) < q →
     IsZero (Etale.higherDirectImage Λ f q M)
-
-
 
 variable {Λ} in
 /-- For an étale `X`-scheme `V`, restricting an étale sheaf of `Λ`-modules to `V` commutes with

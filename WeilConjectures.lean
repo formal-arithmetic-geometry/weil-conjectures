@@ -864,7 +864,6 @@ public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.KInjectiv
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.KProjective
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.Plus
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.RightDerivedFunctorPlus
-public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.SingleProjective
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.SingleTriangle
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.TStructure
 public import WeilConjectures.Mathlib.Algebra.Homology.Double
@@ -876,6 +875,7 @@ public import WeilConjectures.Mathlib.Algebra.Homology.HomologySequence
 public import WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory
 public import WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory.Acyclic
 public import WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory.HomComplex
+public import WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory.HomComplexSingle
 public import WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory.KInjective
 public import WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory.Plus
 public import WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory.Shift

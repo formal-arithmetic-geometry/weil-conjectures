@@ -6,7 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Triangulated
-public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.SingleProjective
+public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.KProjective
 public import WeilConjectures.SixFunctors.ProEtale.FullCohomologicalDimension
 
 /-!
