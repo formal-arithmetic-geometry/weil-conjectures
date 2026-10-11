@@ -13,6 +13,7 @@ public import WeilConjectures.AlgebraicGeometry.Cohomology.FlatOver
 public import WeilConjectures.AlgebraicGeometry.Cohomology.Kunneth
 public import WeilConjectures.AlgebraicGeometry.GlobalSectionsBijective
 public import WeilConjectures.AlgebraicGeometry.Modules.GeneratesFibre
+public import WeilConjectures.AlgebraicGeometry.Modules.Invertible
 public import WeilConjectures.AlgebraicGeometry.Modules.ProjectionFormula
 public import WeilConjectures.AlgebraicGeometry.Seesaw
 public import WeilConjectures.AlgebraicGeometry.TheoremOfCube.Slices
@@ -45,6 +46,40 @@ universe u
 open CategoryTheory Limits MonoidalCategory CartesianMonoidalCategory
 
 namespace AlgebraicGeometry
+
+namespace Scheme.Modules
+
+set_option backward.isDefEq.respectTransparency false in
+/-- **Twists of pullbacks from a factor are flat over the other factor.** Let `W`, `Z` be schemes
+over a field `K`, `ℱ` a quasi-coherent module on `W` and `L` an invertible module on
+`W ×_K Z`. Then `pr_W^* ℱ ⊗ L` is flat over `Z`. -/
+theorem isFlatOver_pullback_fst_tensorObj {K : Type u} [Field K] {W Z : Scheme.{u}}
+    (gW : W ⟶ Spec (.of K)) (gZ : Z ⟶ Spec (.of K)) (ℱ : W.Modules) [ℱ.IsQuasicoherent]
+    (L : (Limits.pullback gW gZ).Modules) [L.IsInvertible] :
+    ((Modules.pullback (Limits.pullback.fst gW gZ)).obj ℱ ⊗ L).IsFlatOver (Limits.pullback.snd gW gZ) := by
+  set F := (Modules.pullback (Limits.pullback.fst gW gZ)).obj ℱ
+  have : SheafOfModules.IsInvertible.{u, u, u} L := IsInvertible.sheafOfModules_isInvertible L
+  have : (F ⊗ L).IsQuasicoherent := isQuasicoherent_tensorObj F L
+  refine isFlatOver_of_forall_exists _ _ fun V p _ ↦ ?_
+  obtain ⟨UW, hpUW, -, -⟩ := exists_isFreeGenerator (Modules.unit W)
+    (TopologicalSpace.Opens.mem_top (Limits.pullback.fst gW gZ p))
+  obtain ⟨N, hpN, -, ℓ, hℓ⟩ := exists_isFreeGenerator L (TopologicalSpace.Opens.mem_top p)
+  refine ⟨N.1 ⊓ Limits.pullback.fst gW gZ ⁻¹ᵁ UW.1, ⟨hpN, hpUW⟩, fun U e hUN ↦ ?_⟩
+  have hUN' : U.1 ≤ N.1 := hUN.trans inf_le_left
+  have hflat := flat_sections_pullback_fst gW gZ ℱ UW.2 V.2 U.2
+    (le_inf (hUN.trans inf_le_right) e)
+  letI : Module Γ(Z, V.1) Γ(F, U.1) :=
+    Module.compHom _ ((Limits.pullback.snd gW gZ).appLE V.1 U.1 e).hom
+  letI : Module Γ(Z, V.1) Γ(F ⊗ L, U.1) :=
+    Module.compHom _ ((Limits.pullback.snd gW gZ).appLE V.1 U.1 e).hom
+  let φ : Γ(F, U.1) →ₗ[Γ(Z, V.1)] Γ(F ⊗ L, U.1) :=
+    { toFun t := tmulSection t (L.presheaf.map (homOfLE hUN').op ℓ)
+      map_add' a b := add_tmulSection a b _
+      map_smul' r a := smul_tmulSection _ a _ }
+  exact Module.Flat.of_linearEquiv
+    (LinearEquiv.ofBijective φ (hℓ.bijective_tmulSection_right hUN')).symm
+
+end Scheme.Modules
 
 namespace TheoremOfCube
 
@@ -105,6 +140,52 @@ lemma subsingleton_H_one_crossIdeal [IsProper X.hom] [GeometricallyIntegral X.ho
   exact Scheme.IdealSheafData.Kunneth.subsingleton_H_one_toModules_prodIdeal (K := K) _ _
     (fun s hs ↦ eq_zero_of_mem_idealOfOpens_ker x.left (Over.w x) hs)
     (fun s hs ↦ eq_zero_of_mem_idealOfOpens_ker y.left (Over.w y) hs)
+
+
+variable (Z : Over (Spec (.of K)))
+
+/-- The module `𝒢 = pr^* J ⊗ L` on `X ×_K Y ×_K Z`, for the cross ideal `J` of `X ×_K Y`. -/
+noncomputable abbrev twist (x : 𝟙_ _ ⟶ X) (y : 𝟙_ _ ⟶ Y) (L : ((X ⊗ Y) ⊗ Z).left.Modules) :
+    ((X ⊗ Y) ⊗ Z).left.Modules :=
+  (Scheme.Modules.pullback (fst (X ⊗ Y) Z).left).obj (crossIdeal X Y x y).toModules ⊗ L
+
+variable [IsProper X.hom] [GeometricallyIntegral X.hom] [IsProper Y.hom]
+  [GeometricallyIntegral Y.hom]
+
+omit [GeometricallyIntegral X.hom] [GeometricallyIntegral Y.hom] in
+lemma isFinitePresentation_crossIdeal (x : 𝟙_ _ ⟶ X) (y : 𝟙_ _ ⟶ Y) :
+    SheafOfModules.IsFinitePresentation (R := (X ⊗ Y).left.ringCatSheaf)
+      (crossIdeal X Y x y).toModules := by
+  have : IsProper (X ⊗ Y).hom :=
+    inferInstanceAs (IsProper (Limits.pullback.fst X.hom Y.hom ≫ X.hom))
+  have : IsLocallyNoetherian (X ⊗ Y).left := LocallyOfFiniteType.isLocallyNoetherian (X ⊗ Y).hom
+  exact Scheme.Modules.isFinitePresentation_toModules _
+
+/-- **The fibre cohomology of `𝒢` vanishes in degree one.** If `L` is trivial on the fibre over
+`t`, then `H¹((X × Y)_{κ(t)}, 𝒢_t) = H¹(X × Y, J) ⊗ κ(t) = 0`. -/
+lemma hFiber_twist_eq_zero (x : 𝟙_ _ ⟶ X) (y : 𝟙_ _ ⟶ Y)
+    (L : ((X ⊗ Y) ⊗ Z).left.Modules) [L.IsInvertible] (t : Z.left)
+    (ht : Nonempty ((Scheme.Modules.pullback ((snd (X ⊗ Y) Z).left.fiberι t)).obj L ≅
+      𝟙_ ((snd (X ⊗ Y) Z).left.fiber t).Modules)) :
+    (twist X Y Z x y L).hFiber (snd (X ⊗ Y) Z).left 1 t = 0 := by
+  have : IsProper (X ⊗ Y).hom :=
+    inferInstanceAs (IsProper (Limits.pullback.fst X.hom Y.hom ≫ X.hom))
+  have := isFinitePresentation_crossIdeal X Y x y
+  have := Scheme.Modules.isQuasicoherent_toModules (crossIdeal X Y x y)
+  set f := (snd (X ⊗ Y) Z).left
+  set g := f.fiberι t
+  set F := (Scheme.Modules.pullback (fst (X ⊗ Y) Z).left).obj (crossIdeal X Y x y).toModules
+  obtain ⟨e⟩ := ht
+  obtain ⟨μ⟩ := Scheme.Modules.nonempty_pullback_tensorObj_iso g F L
+  have h1 : (twist X Y Z x y L).hFiber f 1 t = F.hFiber f 1 t := by
+    let := f.fiberOverSpecResidueField t
+    exact Scheme.Modules.finrankH_congr _ (μ ≪≫ whiskerLeftIso _ e ≪≫ ρ_ _) 1
+  have sq : IsPullback (fst (X ⊗ Y) Z).left f (X ⊗ Y).hom Z.hom :=
+    IsPullback.of_hasPullback (X ⊗ Y).hom Z.hom
+  rw [h1, Scheme.Modules.hFiber_pullback_of_isPullback (X ⊗ Y).hom _ Z.hom _ f sq,
+    Scheme.Modules.hFiber_eq_finrankH]
+  have := subsingleton_H_one_crossIdeal X Y x y
+  exact Module.finrank_zero_of_subsingleton
 
 end TheoremOfCube
 
