@@ -19,16 +19,23 @@ equivalence between finite locally constant sheaves of `Λ`-modules on the small
 
 ## Strategy
 
-For a finite étale `Y`-scheme `P`, the free sheaf `Λ[P]` is finite locally constant, with stalk
-the permutation representation `Λ[P_s]`. Morphisms out of `Λ[P]` correspond to sections over
-`P`, i.e. to morphisms of sheaves of sets out of `Hom_Y(-, P)`, and these correspond to
-`G`-equivariant maps out of `P_s`: so the stalk functor is bijective on morphisms out of free
-sheaves. Every finite locally constant sheaf of modules `F` is a quotient of a free sheaf
-`Λ[P]` (take `P` representing the underlying sheaf of sets of `F`), with finite locally constant
-kernel; together with the faithfulness of the stalk functor this gives full faithfulness.
-Every finite continuous representation `V` is the cokernel of a map `Λ[K] ⟶ Λ[V]` of permutation
-representations, which comes from a map of free sheaves; its cokernel is a finite locally
+The stalk functor `AlgebraicGeometry.Scheme.FiniteLocallyConstantModule.toRep` is faithful and
+full onto `G`-equivariant maps because the stalk functor on finite locally constant sheaves of
+sets is: a morphism of the underlying sheaves of sets inducing a `Λ`-linear map on stalks is
+`Λ`-linear on sections, as its compatibility with the addition `F ⊞ F ⟶ F` and the scalar
+multiplications can be tested on stalks. For a finite étale `Y`-scheme `P`, the free sheaf
+`Λ[P]` is finite locally constant, with stalk the permutation representation `Λ[P_s]`. Every
+finite continuous representation `V` is the cokernel of a map `Λ[K] ⟶ Λ[V]` of permutation
+representations on finite continuous `G`-sets, which are geometric fibres of finite étale
+`Y`-schemes; this map comes from a map of free sheaves, whose cokernel is a finite locally
 constant sheaf with stalk `V`, as the stalk functor is right exact.
+
+## Main definitions and statements
+
+- `AlgebraicGeometry.Scheme.FiniteLocallyConstantModule.exists_stalkMap_eq`: fullness.
+- `AlgebraicGeometry.Scheme.FiniteLocallyConstantModule.exists_iso_toRep`: essential
+  surjectivity.
+- `AlgebraicGeometry.Scheme.FiniteLocallyConstantModule.equivalenceRep`: the equivalence.
 -/
 
 @[expose] public section
@@ -595,5 +602,50 @@ theorem exists_iso_toRep (V : Rep.{u + 1} Λ G) (hV : Rep.IsFiniteContinuous V) 
   obtain ⟨w, rfl⟩ := hp y
   change ψ (smul s G g (stalkMap s p w)) = V.ρ g (ψ (stalkMap s p w))
   rw [← stalkMap_smul, hψ, hψ, hπ]
+
+section Equivalence
+
+variable (Λ)
+
+/-- Blueprint `sk-i-real-galois`: the geometric stalk functor from finite locally constant
+sheaves of `Λ`-modules to finite continuous `Λ`-linear representations of `G = π₁(Y, s)`. -/
+noncomputable def toRepFiniteContinuous : Y.FiniteLocallyConstantModule Λ ⥤
+    ObjectProperty.FullSubcategory (Rep.IsFiniteContinuous (Λ := Λ) (G := G)) :=
+  ObjectProperty.lift _ (toRep Λ s G) (isFiniteContinuous_toRep s G)
+
+instance : (toRepFiniteContinuous Λ s G).Faithful where
+  map_injective {F F'} _ _ h := hom_ext_of_stalkMap s fun x ↦
+    congrArg (fun φ : (toRepFiniteContinuous Λ s G).obj F ⟶ (toRepFiniteContinuous Λ s G).obj F' ↦
+      φ.hom.hom x) h
+
+instance : (toRepFiniteContinuous Λ s G).Full where
+  map_surjective {F F'} h := by
+    obtain ⟨f, hf⟩ := exists_stalkMap_eq s G h.hom.hom.toLinearMap fun g x ↦
+      Representation.IntertwiningMap.isIntertwining _ _ h.hom.hom g x
+    exact ⟨f, by ext x; exact hf x⟩
+
+instance : (toRepFiniteContinuous Λ s G).EssSurj where
+  mem_essImage V := by
+    obtain ⟨F, ⟨i⟩⟩ := exists_iso_toRep s G V.obj V.property
+    exact ⟨F, ⟨(ObjectProperty.fullyFaithfulι _).preimageIso i⟩⟩
+
+/-- Blueprint `sk-i-real-galois`: Galois correspondence for finite local systems.
+
+The geometric stalk at `s` is an equivalence between finite locally constant sheaves of
+`Λ`-modules on `Y_ét` and finite continuous `Λ`-linear representations of `G = π₁(Y, s)`. -/
+noncomputable def equivalenceRep : Y.FiniteLocallyConstantModule Λ ≌
+    ObjectProperty.FullSubcategory (Rep.IsFiniteContinuous (Λ := Λ) (G := G)) :=
+  have : (toRepFiniteContinuous Λ s G).IsEquivalence := { }
+  (toRepFiniteContinuous Λ s G).asEquivalence
+
+/-- Blueprint `sk-i-real-galois`: the underlying `Λ`-module of the representation attached to a
+finite locally constant sheaf is its stalk at `s`. -/
+noncomputable def equivalenceRepCompForgetIso :
+    (equivalenceRep Λ s G).functor ⋙ ObjectProperty.ι _ ⋙
+        forget₂ (Rep.{u + 1} Λ G) (ModuleCat.{u + 1} Λ) ≅
+      ObjectProperty.ι _ ⋙ (pointSmallEtale s).sheafFiber :=
+  NatIso.ofComponents (fun _ ↦ Iso.refl _) fun _ ↦ rfl
+
+end Equivalence
 
 end AlgebraicGeometry.Scheme.FiniteLocallyConstantModule
