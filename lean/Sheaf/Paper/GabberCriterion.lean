@@ -6,7 +6,7 @@ Authors: SHEAF group K1
 import Mathlib.AlgebraicGeometry.Restrict
 import Mathlib.RingTheory.Localization.AtPrime.Basic
 import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
-import Sheaf.RingTheory.HenselianTerminology
+import WeilConjectures.Mathlib.RingTheory.Henselian
 
 /-!
 # Gabber's criterion for vanishing of higher etale cohomology

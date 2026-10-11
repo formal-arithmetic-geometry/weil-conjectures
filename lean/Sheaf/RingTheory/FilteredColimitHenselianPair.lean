@@ -7,7 +7,7 @@ import Mathlib.RingTheory.Henselian
 import Mathlib.Algebra.Category.Ring.Basic
 import Mathlib.CategoryTheory.Filtered.Basic
 import Mathlib.CategoryTheory.Limits.HasLimits
-import Sheaf.RingTheory.HenselianTerminology
+import WeilConjectures.Mathlib.RingTheory.Henselian
 
 /-!
 # Filtered colimits of henselian pairs

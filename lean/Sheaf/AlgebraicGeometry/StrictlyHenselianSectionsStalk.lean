@@ -4,7 +4,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group S1
 -/
 import Mathlib.AlgebraicGeometry.Sites.EtalePoint
-import Sheaf.RingTheory.HenselianTerminology
+import WeilConjectures.Mathlib.RingTheory.Henselian
 
 /-!
 # Sections over a strictly henselian local scheme and the geometric stalk

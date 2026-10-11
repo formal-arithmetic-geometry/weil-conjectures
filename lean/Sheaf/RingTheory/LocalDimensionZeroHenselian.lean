@@ -1,4 +1,4 @@
-import Sheaf.RingTheory.HenselianTerminology
+import WeilConjectures.Mathlib.RingTheory.Henselian
 import Mathlib.RingTheory.Finiteness.Defs
 import Mathlib.RingTheory.Idempotents
 import Mathlib.RingTheory.KrullDimension.Basic

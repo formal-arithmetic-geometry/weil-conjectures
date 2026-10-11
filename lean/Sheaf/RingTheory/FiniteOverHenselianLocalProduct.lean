@@ -3,7 +3,7 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group K1
 -/
-import Sheaf.RingTheory.HenselianTerminology
+import WeilConjectures.Mathlib.RingTheory.Henselian
 import Mathlib.Algebra.Algebra.Pi
 import Mathlib.RingTheory.LocalRing.ResidueField.Basic
 

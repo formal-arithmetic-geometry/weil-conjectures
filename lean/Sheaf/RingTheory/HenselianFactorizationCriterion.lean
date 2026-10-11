@@ -3,7 +3,7 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group G1
 -/
-import Sheaf.RingTheory.HenselianTerminology
+import WeilConjectures.Mathlib.RingTheory.Henselian
 import Mathlib.RingTheory.Coprime.Basic
 import Mathlib.RingTheory.Ideal.Quotient.Defs
 
