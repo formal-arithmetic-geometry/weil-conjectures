@@ -3862,3 +3862,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 08:41 L: merged deliver/H1/lem-sc-tensor-globally-generated (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.TensorGloballyGenerated AlgebraicGeometry.Scheme.Modules.isInvertible_and_globallyGenerated_positiveTensorFamily; new nodes: def-sc-positive-tensor-family; statement corrected (1 citers))
 - 08:41 L: merged deliver/K1/lem-weil-degreewise-epi-kernel-cocone-qis (stage 2; reviewer PASS; first push; Sheaf.Algebra.Homology.KernelShiftedMappingCone CochainComplex.exists_kernel_to_shifted_mappingCone_of_degreewise_epi)
 - 08:41 L: merged deliver/G1/lem-weil-pbc-adic-completion-noetherian (stage 2; reviewer PASS; first push; Sheaf.RingTheory.AdicCompletionNoetherian AdicCompletion.isNoetherianRing)
+- 08:41 L: merged deliver/H1/lem-pc-base-change-product (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.BaseChangeProduct AlgebraicGeometry.baseChange_product)

@@ -106,5 +106,23 @@
   "group": "F1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-bcp (reviewer sub-agent of L); spot-checked: Source: the fact is the general-category-theory identification (X x_k Y)_{k'} = X_{k'} x_{k'} Y_{k'}; the cited tags 038F (varieties-lemma-bijection-irreducible-components) and 054P (varieties-lemma-geometrically-irreducible-check-after-extension) are where it is used, not where it is proved; Stacks proves no separate tag for it. The statement (k a field, X,Y k-schemes, k'/k a field extension, canonical k'-isomorphism compatible with the projections) is correct with no further hypotheses. Steps: both rest only on the universal property, existence and uniqueness-up-to-unique-projection-compatible-isomorphism clauses of def-pc-fibre-product (read; it says all three) and on def-pc-base-change (X_T := X x_S T with its projections; read). No new nodes; no tool uses; maintainer fields untouched (created.item unchanged, contrary to the report's sentence that it was corrected). Mathlib: searches recorded (Mathlib has it only as categorical pullback isomorphisms), no leaf. B10: no slopmaster2 declaration names the node (grep of WeilConjectures and Comparator for the id). Small cases: k'=k gives the identity; X=Spec k gives Y_{k'} = Spec k' x_{k'} Y_{k'}. FIX: dag/nodes/sec-picard-framework/lem-pc-base-change-product.json: proof[0].text: the delivered step said the base-changed projections 'identify the two factors of A with the corresponding factors of B', which is imprecise (A's factors are X x_k Y and Spec k'); rewritten, same mathematics, as the explicit verification that A with pi_X=(p r, s), pi_Y=(q r, s) satisfies the universal property of the fibre product of X_{k'} and Y_{k'} over Spec k' (existence and uniqueness of the induced map); proof[1].text: the isomorphism now comes from the uniqueness clause of def-pc-fibre-product applied to A and B, with the k'-structure checked; proof[*].elementary: true (each is a few lines from the cited statements); proof[*].source: place changed from 038F/054P (which do not prove it) to general category theory of fibre products. Start Sat Oct 10 03:41:35 PM UTC 2026, end Sat Oct 10 03:42:48 PM UTC 2026.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.BaseChangeProduct",
+  "declaration": "AlgebraicGeometry.baseChange_product",
+  "file": "lean/Sheaf/AlgebraicGeometry/BaseChangeProduct.lean",
+  "statement": "theorem baseChange_product {k k' : Type u} [Field k] [Field k'] [Algebra k k'] (X Y : Scheme.{u}) (f : X ⟶ Scheme.Spec.obj (op (CommRingCat.of k))) (g : Y ⟶ Scheme.Spec.obj (op (CommRingCat.of k))) : let i : Scheme.Spec.obj (op (CommRingCat.of k')) ⟶ Scheme.Spec.obj (op (CommRingCat.of k)) := Scheme.Spec.map (CommRingCat.ofHom (algebraMap k k')).op let P : Scheme.{u} := pullback f g let hP : P ⟶ Scheme.Spec.obj (op (CommRingCat.of k)) := pullback.snd f g ≫ g let A : Scheme.{u} := pullback hP i let B : Scheme.{u} := pullback (pullback.snd f i) (pullback.snd g i) ∃ e : A ≅ B, e.hom ≫ pullback.fst (pullback.snd f i) (pullback.snd g i) ≫ pullback.fst f i = pullback.fst hP i ≫ pullback.fst f g ∧ e.hom ≫ pullback.fst (pullback.snd f i) (pullback.snd g i) ≫ pullback.snd f i = pullback.snd hP i ∧ e.hom ≫ pullback.snd (pullback.snd f i) (pullback.snd g i) ≫ pullback.fst g i = pullback.fst hP i ≫ pullback.snd f g ∧ e.hom ≫ pullback.snd (pullback.snd f i) (pullback.snd g i) ≫ pullback.snd g i = pullback.snd hP i",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-bcp1312",
+  "group": "H1",
+  "result": "pass",
+  "note": "k field, k'/k as [Field k'] [Algebra k k'] with i = Spec.map algebraMap; X,Y with explicit f,g to Spec k (base change form allowed); P = pullback f g, A = pullback (snd≫g) i = Limits.pullback hP T.hom per BASE CHANGE X_T; B = pullback of the two pr_T = pullback.snd; four equations = compatibility with pi_X, pi_Y (by pullback.hom_ext) and over Spec k' (clauses 2,4); canonical since the equations determine e.hom; same universe u forced by Scheme API; no duplicate in lean/Sheaf (BaseChangeConventions, FpqcMorphismsDescend checked)"
  }
 }
