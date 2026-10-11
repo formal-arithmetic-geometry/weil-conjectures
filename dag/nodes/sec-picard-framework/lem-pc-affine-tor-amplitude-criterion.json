@@ -21,7 +21,8 @@
  "stmt_deps": [
   "def-pc-scheme",
   "def-pc-derived-category",
-  "lem-pc-affine-qcoh-derived-equivalence"
+  "lem-pc-affine-qcoh-derived-equivalence",
+  "def-pc-derived-tensor-cohomology-vanishes"
  ],
  "proof": [
   {
@@ -134,5 +135,24 @@
   "group": "E1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-atc2926 (reviewer sub-agent of L); spot-checked: Item iff vs Tag 08E9; module Tor amplitude defined as in lem-pc-ring-pseudo-coherent-finite-tor-perfect; test class (i) all O_X-modules = what lem-pc-tor-amplitude-qcoh-test step 2 consumes; flat-model node vs Tag 0654 (true, no dup); no duplication of K1's node. FIX more, RETURN less: (1) C1 Step 1: derived-tensor convention now cited via lem-pc-affine-derived-pullback-tensor-tilde; (2) C1/C4 Step 2 (missed by second reading): P free resolution's K-flatness was uncited and exactness/conservativity of tilde was attributed to the equivalence statement, which does not say it; rewrote with part (3) applied to M directly, tilde exact via lem-weil-pbc-spec-tilde-stalk-localization, Q=Gamma(Q~) via lem-weil-pbc-affine-tilde-gamma-adjunction (2); free-resolution node now unused, dropped; (3) source: flat-model node Tag 064L->0654, item label lemma-tor-amplitude-affine->lemma-tor-dimension-affine. Mathlib: searches recorded by delivery accepted (no standard Mathlib statement for module tor amplitude).; 2 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AffineTorAmplitudeCriterion",
+  "declaration": "AlgebraicGeometry.affine_torAmplitude_iff",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineTorAmplitudeCriterion.lean",
+  "statement": "theorem affine_torAmplitude_iff (A : Type u) [CommRing A] [HasDerivedCategory.{wA} (ModuleCat.{u} A)] [HasDerivedCategory.{wX} (SheafOfModules.{u} (moduleRings (Spec (.of A)).toRingedSpace))] (M : CochainComplex (ModuleCat.{u} A) ℤ) (a b : ℤ) (hab : a ≤ b) : (∀ G : SheafOfModules.{u} (moduleRings (Spec (.of A)).toRingedSpace), ∀ i : ℤ, i < a ∨ b < i → schemeDerivedTensorCohomologyVanishes (Spec (.of A)) (DerivedCategory.Q.obj ((@Functor.mapHomologicalComplex ℤ (ModuleCat.{u} A) (SheafOfModules.{u} (moduleRings (Spec (.of A)).toRingedSpace)) _ _ _ _ (tilde.functor (.of A)) ⟨fun _ _ ↦ tilde.map_zero⟩ (ComplexShape.up ℤ)).obj M)) G i) ↔ DerivedCategory.torAmplitudeIn (ModuleCat.{u} A) a b (DerivedCategory.Q.obj M)",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-tac"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-tac",
+  "group": "F1",
+  "result": "fix",
+  "note": "A ring, X=Spec(.of A), M arbitrary complex, E = Q(termwise tilde M) (free E+iso binder replaced by the sibling's direct form), a<=b; (i) all O_X-modules G, i<a or b<i, schemeDerivedTensorCohomologyVanishes (STATE TOR AMPLITUDE); (ii) source torAmplitudeIn over ModuleCat A; iff. stmt_deps gain landed def-pc-derived-tensor-cohomology-vanishes (used); check_dag 0 cycles, unchanged"
  }
 }
