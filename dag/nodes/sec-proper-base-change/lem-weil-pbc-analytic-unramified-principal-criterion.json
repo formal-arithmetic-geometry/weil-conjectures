@@ -232,5 +232,23 @@
   "summary": "Not a Mathlib leaf: Mathlib (slopmaster2 checkout) has no analytically unramified notion and no reducedness result for AdicCompletion (grep, LeanSearch, LeanFinder recorded). Statement checked against Algebra 0330 (lines 45917-45932) hypothesis by hypothesis and kept; stmt_deps gain def-weil-pbc-localization-at-prime and def-weil-pbc-adic-completion (A_p and the completion are named in it). Proof written in 8 steps from the proof of 0330 (lines 45934-45962), following each \\ref: completion Noetherian (0316), local (05GI/05GG), flat (00MB) so t is a nonzerodivisor; associated primes of A/tA have height one by Krull (00KW) so A_p regular of dimension one is a DVR (00PD via lem-weil-pbc-regular-local-dim-one-iff-normal); 032Z (new node) gives DVR localizations of the completion at Ass(A^/pA^); 0312 (Bourbaki, new node) gives Ass(A^/tA^) = union of these; 0311 (new node) gives y = ty' for square-zero y; induction and Krull intersection (00IP, via the existing Jacobson form 00IQ(2) leaf) give y = 0; reduction from nilpotent to square-zero written out. The source's 'regular, hence a domain' (00NP) is replaced by the fact that 032Z already concludes DVR, a domain by definition. Three new unsplit nodes: lem-weil-pbc-codimension-one-analytically-unramified (032Z), lem-weil-pbc-associated-primes-flat-base-change (0312), lem-weil-pbc-module-injects-localizations-associated-primes (0311). All cited nodes are in unit sk-thm-p1 or are definitions.",
   "blueprint": "the item serves lem-weil-pbc-normal-constant-generic at step 4 of its split (source: Lemma 59.73.13 (Tag 09Z5), proof of (1)) (via 6 created nodes); its steps realize: 0330: heights one, A_p DVR, 032Z and 0312 for the associated primes of A^/tA^, 0311 and Krull intersection for nilpotents (entry written by L at review; the worker predates the rule of 2026-10-10)"
  },
- "reviewed": "2026-10-10 L: 8 steps checked against the 0330 proof: completion flat so t regular on A^, associated primes of A/tA of height one (Krull), A_p a DVR (00PD), (A^)_q DVR by 032Z (new), Ass(A^/tA^) from 0312 (new), square-zero y = t y' by 0311 (new), Krull intersection; citer normal-nagata-monogenic-n1 matches"
+ "reviewed": "2026-10-10 L: 8 steps checked against the 0330 proof: completion flat so t regular on A^, associated primes of A/tA of height one (Krull), A_p a DVR (00PD), (A^)_q DVR by 032Z (new), Ass(A^/tA^) from 0312 (new), square-zero y = t y' by 0311 (new), Krull intersection; citer normal-nagata-monogenic-n1 matches",
+ "lean": {
+  "module": "Sheaf.RingTheory.AnalyticallyUnramifiedPrincipalCriterion",
+  "declaration": "isAnalyticallyUnramified_of_principal_quotient",
+  "file": "lean/Sheaf/RingTheory/AnalyticallyUnramifiedPrincipalCriterion.lean",
+  "statement": "theorem isAnalyticallyUnramified_of_principal_quotient (A : Type u) [CommRing A] [IsNoetherianRing A] [IsLocalRing A] [IsDomain A] (t : A) (ht : t ≠ 0) (htm : t ∈ IsLocalRing.maximalIdeal A) (hnoEmbedded : ∀ p ∈ associatedPrimes A (A ⧸ Ideal.span {t}), (Ideal.span {t}).IsMinimalPrime p) (hregular : ∀ p : associatedPrimes A (A ⧸ Ideal.span {t}), IsRegularLocalRing (Localization.AtPrime p.1)) (hunramified : ∀ p ∈ associatedPrimes A (A ⧸ Ideal.span {t}), p.IsAnalyticallyUnramified) : IsAnalyticallyUnramified A",
+  "branch": "sheaf-dag",
+  "by": "J1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-aup1323",
+  "group": "J1",
+  "result": "pass",
+  "note": "A Noetherian local domain (CommRing, IsNoetherianRing, IsLocalRing, IsDomain); t≠0, t∈maximalIdeal; Ass(A/tA)=associatedPrimes A (A⧸span{t}) (isAssociatedPrime_iff: prime = colon of an element under Noetherian); no embedded = (span{t}).IsMinimalPrime p; A_p regular = IsRegularLocalRing (Localization.AtPrime p) (mathlib_match of def-weil-regular-scheme); A/p analytically unramified = landed F1 Ideal.IsAnalyticallyUnramified (AdicCompletion of map of maximalIdeal, IsReduced); conclusion landed IsAnalyticallyUnramified A; universe free; diff only adds lean record + module + report"
+ }
 }
