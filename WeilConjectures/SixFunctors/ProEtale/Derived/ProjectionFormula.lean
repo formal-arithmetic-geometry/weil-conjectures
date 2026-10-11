@@ -154,6 +154,48 @@ lemma plus_derivedTensor_leftDerivedUpperStar_of_comparison [Etale.UpperStarPres
       ((_root_.DerivedCategory.exists_homologyConcentratedIn_iff_bounded _).1 ⟨_, _, hPN⟩)
   exact ((ν^*(Z)[A]).bounded_of_bounded_mapDerivedCategory_obj hb).1
 
+variable {A} in
+/-- **The pro-étale projection formula from the étale one.** Let `c = (X ⟶[i] Z ⟶[g] Y)` be a
+compactification of `f`, and let `K ≅ ν^* K₀`, `L ≅ ν^* L₀` be pro-étale complexes of étale
+origin, with `K₀` bounded and `i_! K₀ ⊗ᴸ Lg^* L₀` bounded below. If the étale projection map of
+`Rg_*` is an isomorphism at `(i_! K₀, L₀)`, the pro-étale projection formula holds for `c` at
+`(K, L)`: the projection map is the one of `Rg_*` at `(i_! K, L)` followed by isomorphisms,
+`i_! ν^* K₀ ≅ ν^* i_! K₀`, and `ν^*` carries the étale projection map of `Rg_*` to the
+pro-étale one
+(`AlgebraicGeometry.ProEtale.isIso_rightDerivedLowerStarProjectionMap_app_app_leftDerived`). -/
+theorem hasProjectionFormulaOfCompactification_of_comparison [Etale.UpperStarPreservesFlat A]
+    [∀ X : Scheme.{u}, (ν^*(X)[A]).PreservesFlat] {f : X ⟶ Y} (c : Compactification f)
+    {K : _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology X) A)}
+    {L : _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology Y) A)}
+    {K₀ : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)}
+    {L₀ : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology A)}
+    (eK : D(ν^*(X)[A]).obj K₀ ≅ K) (eL : D(ν^*(Y)[A]).obj L₀ ≅ L)
+    (hK₀ : _root_.DerivedCategory.TStructure.t.bounded K₀)
+    (hML : _root_.DerivedCategory.TStructure.t.plus
+      (((Etale.derivedTensor A c.Z).obj (D(Etale.openImmersionLowerShriek A c.i).obj K₀)).obj
+        ((L(Etale.upperStar A c.g)).obj L₀)))
+    (hPF : IsIso (((Etale.rightDerivedLowerStarProjectionMap A c.g).app
+      (D(Etale.openImmersionLowerShriek A c.i).obj K₀)).app L₀)) :
+    HasProjectionFormulaOfCompactification A c K L := by
+  rw [HasProjectionFormulaOfCompactification, projectionMapOfCompactification_app_app]
+  let M₀ := D(Etale.openImmersionLowerShriek A c.i).obj K₀
+  have hM₀ : _root_.DerivedCategory.TStructure.t.plus M₀ :=
+    ((Etale.openImmersionLowerShriek A c.i).bounded_mapDerivedCategory_obj hK₀).1
+  -- `i_! K ≅ ν^* M₀` and `L ≅ ν^* L₀`
+  let eM : D(ProEtale.openImmersionLowerShriek A c.i).obj K ≅ L(ν^*(c.Z)[A]).obj M₀ :=
+    D(ProEtale.openImmersionLowerShriek A c.i).mapIso eK.symm ≪≫
+      ((Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
+        Functor.mapDerivedCategoryNatIso
+          (openImmersionLowerShriekComparisonUpperStarIso A c.i).symm ≪≫
+        Functor.mapDerivedCategoryCompIso _ _).app K₀ ≪≫
+      ((ν^*(c.Z)[A]).leftDerivedFunctorIsoMapDerivedCategory.app M₀).symm
+  let eL' : L ≅ L(ν^*(Y)[A]).obj L₀ :=
+    eL.symm ≪≫ ((ν^*(Y)[A]).leftDerivedFunctorIsoMapDerivedCategory.app L₀).symm
+  have := isIso_rightDerivedLowerStarProjectionMap_app_app_leftDerived A c.g M₀ L₀ hM₀ hML
+  have := NatTrans.isIso_app_app_of_iso
+    (rightDerivedLowerStarProjectionMap A c.g) eM.symm eL'.symm
+  infer_instance
+
 end ProEtale
 
 end AlgebraicGeometry
@@ -184,39 +226,24 @@ theorem hasProjectionFormulaOfCompactification_of_constructibleFiniteTor [Finite
     (hK : DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} Λ) X K)
     (hL : DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} Λ) Y L) :
     HasProjectionFormulaOfCompactification (ModuleCat.{u + 1} Λ) c K L := by
-  rw [HasProjectionFormulaOfCompactification, projectionMapOfCompactification_app_app]
   obtain ⟨K₀, hK₀, ⟨eK⟩⟩ := hK.1
   obtain ⟨L₀, -, ⟨eL⟩⟩ := hL.1
   obtain ⟨a, b, hLt⟩ := hL.2
-  -- the étale complex `M₀ = i_! K₀` on the compactification
-  let M₀ := D(Etale.openImmersionLowerShriek (ModuleCat.{u + 1} Λ) c.i).obj K₀
-  have hM₀ : _root_.DerivedCategory.TStructure.t.plus M₀ :=
-    ((Etale.openImmersionLowerShriek (ModuleCat.{u + 1} Λ) c.i).bounded_mapDerivedCategory_obj
-      hK₀.1).1
-  -- `i_! K ≅ ν^* M₀` and `L ≅ ν^* L₀`
-  let eM : D(ProEtale.openImmersionLowerShriek (ModuleCat.{u + 1} Λ) c.i).obj K ≅
-      L(ν^*(c.Z)[ModuleCat.{u + 1} Λ]).obj M₀ :=
-    D(ProEtale.openImmersionLowerShriek (ModuleCat.{u + 1} Λ) c.i).mapIso eK.symm ≪≫
+  -- `i_! K₀ ⊗ᴸ Lg^* L₀` is bounded below, since its pro-étale realization `i_! K ⊗ᴸ Lg^* L` is
+  have hML := plus_derivedTensor_leftDerivedUpperStar_of_comparison c.g
+    (D(ProEtale.openImmersionLowerShriek (ModuleCat.{u + 1} Λ) c.i).mapIso eK.symm ≪≫
       ((Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
         Functor.mapDerivedCategoryNatIso
           (openImmersionLowerShriekComparisonUpperStarIso (ModuleCat.{u + 1} Λ) c.i).symm ≪≫
         Functor.mapDerivedCategoryCompIso _ _).app K₀ ≪≫
-      ((ν^*(c.Z)[ModuleCat.{u + 1} Λ]).leftDerivedFunctorIsoMapDerivedCategory.app M₀).symm
-  let eL' : L ≅ L(ν^*(Y)[ModuleCat.{u + 1} Λ]).obj L₀ :=
-    eL.symm ≪≫ ((ν^*(Y)[ModuleCat.{u + 1} Λ]).leftDerivedFunctorIsoMapDerivedCategory.app L₀).symm
-  -- `i_! K₀ ⊗ᴸ Lg^* L₀` is bounded below
-  have hML := plus_derivedTensor_leftDerivedUpperStar_of_comparison c.g eM eL'
+      ((ν^*(c.Z)[ModuleCat.{u + 1} Λ]).leftDerivedFunctorIsoMapDerivedCategory.app _).symm)
+    (eL.symm ≪≫
+      ((ν^*(Y)[ModuleCat.{u + 1} Λ]).leftDerivedFunctorIsoMapDerivedCategory.app L₀).symm)
     ((ProEtale.openImmersionLowerShriek (ModuleCat.{u + 1} Λ) c.i).bounded_mapDerivedCategory_obj
       hK.1.bounded) hLt
   -- the étale projection formula for the proper `g`
-  have : IsIso (((Etale.rightDerivedLowerStarProjectionMap (ModuleCat.{u + 1} Λ) c.g).app
-      M₀).app L₀) := by
-    have := Etale.isIso_rightDerivedLowerStarProjectionMap_of_finite Λ c.g
-    infer_instance
-  have := isIso_rightDerivedLowerStarProjectionMap_app_app_leftDerived _ c.g M₀ L₀ hM₀ hML
-  have := NatTrans.isIso_app_app_of_iso
-    (rightDerivedLowerStarProjectionMap (ModuleCat.{u + 1} Λ) c.g) eM.symm eL'.symm
-  infer_instance
+  have := Etale.isIso_rightDerivedLowerStarProjectionMap_of_finite Λ c.g
+  exact hasProjectionFormulaOfCompactification_of_comparison c eK eL hK₀.1 hML inferInstance
 
 /-- Blueprint `sk-thm-sf-pf-proetale`: Projection formula: the pro-étale realization.
 
