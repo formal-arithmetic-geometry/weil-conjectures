@@ -66,6 +66,18 @@ Written by the launcher at the start (`1-dag`), then kept current by the maintai
 
 **ABELIAN CURVE PAIRS AND C1–C8 (09:49 UTC; decision of L).** Feed through the Ab ≃ Mod(ULift ℤ) bridge `E` of E1 7631c4992 (lem-weil-pbc-curve-assertions-finite-pushforward); no second bridge.
 
+**NORMAL RING (10:14 UTC; decision of L).** Def-weil-pbc-normal-ring is written inline as `∀ (p : Ideal A) [p.IsPrime], IsDomain (Localization.AtPrime p) ∧ IsIntegrallyClosed (Localization.AtPrime p)` (K1 ccd06d885, H1 a96cb269b); for a domain `IsDomain ∧ IsIntegrallyClosed`; no named predicate.
+
+**FIBRE RING (10:14 UTC; decision of L).** Κ(p) ⊗[R] S is Mathlib `p.Fiber S` (`Ideal.Fiber`, `Algebra.TensorProduct.includeRight`, `PrimeSpectrum.preimageEquivFiber`); never a hand-written `S ⊗[R] κ(p)` (E1 846bd08dc, F1 c84d7f11f, G1 e8f0036eb, J1 609956747, K1 de4006636).
+
+**FILTERED COLIMITS OF RINGS (10:14 UTC; decision of L).** `{I : Type w} [SmallCategory I] [IsFiltered I]`, `F : I ⥤ CommRingCat`, `[HasColimit F]`, `colimit F`, `colimit.ι` (K1 ccd06d885, H1 e6c93b368, J1 8231d9091, F1 6ebcba30e); directed systems keep the DIRECTED SETS line.
+
+**UNRAMIFIED AT A POINT (10:14 UTC; decision of L).** `∃ U : X.Opens, x ∈ U ∧ LocallyOfFiniteType (U.ι ≫ f) ∧ IsOpenImmersion (pullback.diagonal (U.ι ≫ f))` (recorded def-weil-unramified-morphism match; E1 c97916d2e).
+
+**GEOMETRIC FIBRE (10:14 UTC; decision of L).** The scheme X ×_Y Spec Ω along ȳ is `Limits.pullback f ȳ` and its cardinality is the number of points of that scheme (J1 024846f33); def-weil-pbc-geometric-fibre (`Scheme.Hom.GeometricFiber`, the set of Ω-lifts) is a different object — cite the one the node's stmt_dep names.
+
+**ÉTALE SHEAF SECTIONS AND COVERS (10:14 UTC; decision of L).** Global sections at `op (Scheme.Etale.mk (𝟙 X))` (H1 f92914c51, J1 33fd4728f, F1 14053efbd); a clopen/coproduct cover as `(ι : ∀ i, C i ⟶ X) (hc : IsColimit (Cofan.mk X ι))` (E1 5d9bb8370) unless the node names Mathlib's chosen `∐`.
+
 **GENERAL-SITE RESTRICTION (09:05 UTC; decision of L).** On a general site, restriction of module sheaves to U is `SheafOfModules.overFunctor` on `J.over U`. Its zero-preservation instance is H1's `CategoryTheory.module_overFunctor_preservesZero` (node lem-pur-rhom-into-kinjective-local, lean/Sheaf/Algebra/Homology/RhomIntoKInjectiveLocal.lean, 38d166329) — cite it, never restate it. The ringed-space instances `moduleOverFunctor_additive`/`moduleOverFunctor_limits`/`moduleOverFunctor_colimits` (DERIVED RESTRICTION TO AN OPEN) are separate.
 
 **COHEN–MACAULAY (09:05 UTC; decision of L).** This Mathlib has no Cohen–Macaulay declaration. A CM local ring is stated inline exactly as H1's landed `Ideal.mem_minimalPrimes_of_depth_ge` (node lem-weil-pbc-cm-local-associated-prime-minimal, lean/Sheaf/RingTheory/AssociatedPrimeMinimalOfDepth.lean, e10ccd492) writes it: `[IsNoetherianRing T] [IsLocalRing T] (e : ℕ) (hdim : ringKrullDim T = (e : WithBot ℕ∞)) (hdepth : (e : ℕ∞) ≤ IsLocalRing.depth (R := T) T)`; maximal CM modules analogously (module depth ≥ Krull dimension of the ring). No private CM definition; a definition node may be recorded later.
