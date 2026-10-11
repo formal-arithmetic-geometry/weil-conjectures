@@ -110,6 +110,33 @@ theorem nonempty_iso_toShiftedComplex (K : WeilComplex k₀ l X)
     ((WeilSheaf.toShiftedComplexCompιIso (k₀ := k₀) (l := l) (X := X)).app
       ((homologySheaf (-1)).obj K)).symm)⟩
 
+/-- Isomorphic Weil complexes have the same trace function. -/
+theorem traceFunction_eq_of_iso {K L : WeilComplex k₀ l X} (e : K ≅ L) (n : ℕ)
+    (y : (X ↘ Spec (CommRingCat.of k₀)).fieldPoints (FiniteField.galoisExtension k₀ n)) :
+    K.traceFunction n y = L.traceFunction n y :=
+  finsum_congr fun a ↦ by rw [WeilSheaf.traceFunction_eq_of_iso ((homologySheaf a).mapIso e)]
+
+/-- The trace function of a Weil sheaf placed in degree `0` is that of the Weil sheaf. -/
+theorem traceFunction_toComplex (G : WeilSheaf k₀ l X) (n : ℕ)
+    (y : (X ↘ Spec (CommRingCat.of k₀)).fieldPoints (FiniteField.galoisExtension k₀ n)) :
+    (WeilSheaf.toComplex.obj G).traceFunction n y = G.traceFunction n y := by
+  rw [WeilSheaf.toComplex_obj]
+  rw [traceFunction_eq_sum _ {0} (fun a ha ↦
+      isZero_homologySheaf_singleComplex (Finset.notMem_singleton.1 ha) G),
+    Finset.sum_singleton, WeilSheaf.traceFunction_eq_of_iso (homologySheafSingleComplexIso 0 G)]
+  simp
+
+/-- The trace function of `G[1]` is the negative of that of the Weil sheaf `G`. -/
+theorem traceFunction_toShiftedComplex (G : WeilSheaf k₀ l X) (n : ℕ)
+    (y : (X ↘ Spec (CommRingCat.of k₀)).fieldPoints (FiniteField.galoisExtension k₀ n)) :
+    (WeilSheaf.toShiftedComplex.obj G).traceFunction n y = -G.traceFunction n y := by
+  have e : (homologySheaf (-1)).obj (WeilSheaf.toShiftedComplex.obj G) ≅ G :=
+    WeilSheaf.toShiftedComplexCompHomologySheafIso.app G
+  rw [traceFunction_eq_sum _ {-1} (fun a ha ↦
+      WeilSheaf.isZero_homologySheaf_toShiftedComplex (Finset.notMem_singleton.1 ha) G),
+    Finset.sum_singleton, WeilSheaf.traceFunction_eq_of_iso e]
+  simp
+
 end WeilComplex
 
 end AlgebraicGeometry
