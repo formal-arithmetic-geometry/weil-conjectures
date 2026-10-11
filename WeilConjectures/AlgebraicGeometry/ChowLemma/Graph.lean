@@ -65,9 +65,8 @@ into a single projective space `ℙ(N; S)` over `S`, is the separate statement
   graph is a definition and its properties are separate statements, so that a consumer obtains
   them by typeclass inference rather than by destructing an existential.
 * The hypotheses are minimal rather than the ones of the blueprint: the members of the cover
-  need not be affine and need not cover `X`, only `X` needs to be a Noetherian space (which is
-  what makes the tuple morphism quasi-compact), and `U∞` need not be dense in `X`. In the
-  application `X` is Noetherian because it is of finite type over a Noetherian scheme.
+  need not be affine and need not cover `X`, only the tuple morphism needs to be quasi-compact
+  (which holds for instance if `X` is a Noetherian space), and `U∞` need not be dense in `X`.
 * `Nonempty ι` is genuinely needed: for an empty cover the product is `S` itself and the tuple
   morphism is the structure morphism of `U∞`, which is not an immersion.
 
@@ -194,20 +193,30 @@ instance isProper_over : IsProper (over M) := by
 lemma toGraph_over : toGraph M ≫ over M = (⨅ i, U i).ι ≫ f := by
   rw [over, toGraph_emb_assoc, tuple_over]
 
-section Noetherian
-
-variable [NoetherianSpace X]
-
-instance noetherianSpace_iInf : NoetherianSpace ↑(⨅ i, U i) :=
+instance noetherianSpace_iInf [NoetherianSpace X] : NoetherianSpace ↑(⨅ i, U i) :=
   inferInstanceAs (NoetherianSpace ((⨅ i, U i : X.Opens) : Set X))
 
-/-- The tuple morphism is quasi-compact, its source being a Noetherian space. -/
-instance quasiCompact_tuple : QuasiCompact (tuple M) := inferInstance
+/-- The tuple morphism is quasi-compact if `X` is a Noetherian space, its source then being a
+Noetherian space. -/
+instance quasiCompact_tuple [NoetherianSpace X] : QuasiCompact (tuple M) := inferInstance
+
+section QuasiCompact
+
+variable [QuasiCompact (tuple M)]
+
+/-- The factorisation of the tuple morphism through the graph is quasi-compact. -/
+instance quasiCompact_toGraph : QuasiCompact (toGraph M) :=
+  have : QuasiCompact (toGraph M ≫ emb M) := by rw [toGraph_emb]; infer_instance
+  .of_comp _ (emb M)
 
 /-- **`U∞` is scheme-theoretically dense in the graph**, being the source of the factorisation
 of the tuple morphism through its scheme-theoretic image. -/
 instance isSchemeTheoreticallyDominant_toGraph :
     IsSchemeTheoreticallyDominant (toGraph M) := by
+  unfold toGraph; infer_instance
+
+/-- `U∞` is dense in the graph. -/
+instance isDominant_toGraph : IsDominant (toGraph M) := by
   unfold toGraph; infer_instance
 
 /-- **`U∞` is an open subscheme of the graph**: the tuple morphism is a quasi-compact
@@ -267,7 +276,7 @@ lemma opensRange_toGraph_le_preimage [Nonempty ι] (i : ι) :
   exact ⟨X.homOfLE (iInf_le U i) y, by
     rw [← Scheme.Hom.comp_apply, ← toGraph_proj, Scheme.Hom.comp_apply]⟩
 
-end Noetherian
+end QuasiCompact
 
 /-- **The graph is a closed subscheme of a single projective space over `S`.** Composing the
 closed immersion `Z ⟶ ∏_S ℙ(Mᵢ.n; S)` of `AlgebraicGeometry.ChowGraph.emb` with the `m`-fold
