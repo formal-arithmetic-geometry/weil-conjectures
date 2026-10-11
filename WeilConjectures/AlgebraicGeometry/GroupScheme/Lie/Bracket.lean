@@ -706,6 +706,7 @@ noncomputable abbrev tangentMon (u : pointsKer G aug₁) : pointsKer G (aug₃ (
 theorem tangentMon_injective : Function.Injective (tangentMon (G := G)) :=
   kerMap_injective _ _ liftElem_mon₃_injective
 
+omit [IsLocalHom π.toRingHom] in
 theorem commutator_commutator_tangentMap (m₁ m₂ m₃ : A) (h₁ : m₁ * m₁ = 0) (h₂ : m₂ * m₂ = 0)
     (h₃ : m₃ * m₃ = 0) (hπ₁ : π m₁ = 0) (hπ₂ : π m₂ = 0) (hπ₃ : π m₃ = 0) (m : A)
     (hm : m * m = 0) (hπ : π m = 0) (h : m₁ * m₂ * m₃ = m) (x y z : pointsKer G aug₁) :

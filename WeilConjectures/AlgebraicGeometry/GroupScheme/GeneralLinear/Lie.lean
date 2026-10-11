@@ -124,7 +124,7 @@ theorem one_add_smul_mul_one_add_smul_mul_one_sub_smul_mul_one_sub_smul (e d : R
   have hab : a * b = (e * d) • (X * Y) := by
     simp only [a, b, Matrix.smul_mul, Matrix.mul_smul, smul_smul, mul_comm d e]
   have hba : b * a = (e * d) • (Y * X) := by
-    simp only [a, b, Matrix.smul_mul, Matrix.mul_smul, smul_smul, mul_comm d e]
+    simp only [a, b, Matrix.smul_mul, Matrix.mul_smul, smul_smul]
   have h₁ : (1 + a) * (1 + b) * (1 - a) = 1 + b + a * b - b * a - a * a - a * b * a := by
     noncomm_ring
   have h₂ : (1 + b + a * b - b * a) * (1 - b) =
