@@ -228,5 +228,24 @@
   "by": "L",
   "result": "accepted",
   "note": "7 steps following Stacks 01PF: finite affine cover and the quasi-compact opens W_k; the affine case through the 01PE (3) node (quasi-coherent extension; W cap V quasi-compact by the spectral-space leaves), local finite generation on principal opens (01PB via the affine finite-type leaf), the finitely generated submodule N' and its tilde, agreement on W cap V; one extension step by gluing a subsheaf written out; induction. No new nodes; statement now cites the finite-type definition and quasi-compactness and spells out 'submodule'. Stage 3: lemma-nagata-finite-type-ideal-extension-exists contains this lemma as its 'more generally' clause."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ModuleFiniteTypeSubmoduleExtension",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.exists_quasicoherent_finiteType_submodule_extension",
+  "file": "lean/Sheaf/AlgebraicGeometry/ModuleFiniteTypeSubmoduleExtension.lean",
+  "statement": "theorem exists_quasicoherent_finiteType_submodule_extension (X : Scheme.{u}) [CompactSpace X] [QuasiSeparatedSpace X] (U : X.Opens) (hU : IsCompact (U : Set X)) (F : SheafOfModules.{u} (moduleRings X.toRingedSpace)) [F.IsQuasicoherent] (G : SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U)) [G.IsQuasicoherent] [G.IsFiniteType] (ι : G ⟶ F.over U) [Mono ι] : ∃ (G' : SheafOfModules.{u} (moduleRings X.toRingedSpace)), G'.IsQuasicoherent ∧ G'.IsFiniteType ∧ ∃ (ι' : G' ⟶ F), Mono ι' ∧ ∃ (e : G'.over U ≅ G), (SheafOfModules.overFunctor (moduleRings X.toRingedSpace) U).map ι' = e.hom ≫ ι",
+  "branch": "sheaf-dag",
+  "by": "K1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-fse1244"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-fse1244",
+  "group": "K1",
+  "result": "fix",
+  "note": "X qcqs CompactSpace+QuasiSeparatedSpace; U qc open IsCompact; F qcoh; G qcoh+IsFiniteType on (moduleRings).over U with Mono ι into F.over U; conclusion G' qcoh+finite type, Mono ι', iso e on U compatible with inclusions (submodule equality); Mono not hollow (inferInstance fails); no let, all existentials tied; restated in H1 ef7bad70c form"
  }
 }
