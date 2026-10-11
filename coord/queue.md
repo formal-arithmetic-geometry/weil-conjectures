@@ -1,20 +1,19 @@
 # Work queue
 
-838 items; claim with `tools/claim.py next <group> [--stage N]`.
+837 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (838)
+## Stage 2: nodes to state (837)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
 | `def-pod-l-adic-representations` | 1 | state |
 | `def-pod-lisse-l-adic-sheaves` | 1 | state |
-| `def-sc-divisor` | 1 | state |
+| `def-sc-constant-sheaves` | 1 | state |
 | `def-sc-kahler-differentials` | 1 | state |
 | `def-sp-truncation-couple` | 1 | state |
-| `def-weil-pbc-charpoly-locally-free` | 1 | state |
 | `lem-pc-clopen-smooth-proper-curve` | 1 | state |
 | `lem-pc-derived-adjoint-functors` | 1 | state |
 | `lem-pc-derived-tensor-transitivity` | 1 | state |
@@ -28,14 +27,15 @@
 | `lem-pod-profinite-stable-lattice` | 1 | state |
 | `lem-sc-base-change-curve` | 1 | state |
 | `lem-sc-curve-base-change-relative-dimension-one` | 1 | state |
+| `lem-sc-divisor-module-local` | 1 | state |
 | `lem-sc-finite-flat-unramified-tangent-criterion` | 1 | state |
 | `lem-sc-hilb-dominating-power` | 1 | state |
-| `lem-sc-invertible-module-generic-stalk` | 1 | state |
 | `lem-sc-mayer-vietoris-ringed-space` | 1 | state |
 | `lem-sc-p1-rhom-hom-derived-connecting` | 1 | state |
 | `lem-sc-point-tangent-cotangent-surjective` | 1 | state |
 | `lem-sc-product-tangent-space-direct-sum` | 1 | state |
 | `lem-sc-rational-point-tangent-derivation-identification` | 1 | state |
+| `lem-sc-rational-section-order` | 1 | state |
 | `lem-sc-rational-tangent-cotangent-duality` | 1 | state |
 | `lem-sc-rational-unramified-cotangent-criterion` | 1 | state |
 | `lem-sc-separated-affine-function-field-surjective` | 1 | state |
@@ -47,6 +47,7 @@
 | `lem-sp-kinjective-computes` | 1 | state |
 | `lem-sp-shift-identification` | 1 | state |
 | `lem-weil-derived-limit-roos-complex` | 1 | state |
+| `lem-weil-pbc-charpoly-locally-free-direct-sum` | 1 | state |
 | `lem-weil-pbc-cohen-power-series-presentation` | 1 | state |
 | `lem-weil-pbc-colimit-category-fp-algebras` | 1 | state |
 | `lem-weil-pbc-colimit-flat-ring-map` | 1 | state |
@@ -54,16 +55,12 @@
 | `lem-weil-pbc-complete-local-domain-finite-over-regular` | 1 | state |
 | `lem-weil-pbc-completion-at-quasi-finite-prime` | 1 | state |
 | `lem-weil-pbc-complex-spectral-sequence-comparison` | 1 | state |
-| `lem-weil-pbc-constant-sheaf-geometric-stalk` | 1 | state |
 | `lem-weil-pbc-constant-sheaf-sections-locally-constant` | 1 | state |
 | `lem-weil-pbc-constant-sheaf-set-sections-connected-natural` | 1 | state |
-| `lem-weil-pbc-constant-subsheaf-generic` | 1 | state |
 | `lem-weil-pbc-constructible-intersection-in-constructible` | 1 | state |
 | `lem-weil-pbc-constructible-module-finite-presentation` | 1 | state |
 | `lem-weil-pbc-constructible-module-finite-stalks` | 1 | state |
-| `lem-weil-pbc-constructible-module-support-constructible` | 1 | state |
 | `lem-weil-pbc-constructible-noetherian-finite-selection` | 1 | state |
-| `lem-weil-pbc-constructible-subobjects-noetherian` | 1 | state |
 | `lem-weil-pbc-coskeleton-free-homology-comparison` | 1 | state |
 | `lem-weil-pbc-coskeleton-matching-tuples` | 1 | state |
 | `lem-weil-pbc-cotangent-complex-symmetric-algebra` | 1 | state |
@@ -813,6 +810,7 @@
 | `lem-exc-coinduced-discrete-embedding` | 2 | state |
 | `lem-kun-etale-lfp` | 2 | state |
 | `lem-pc-bounded-above-flat-kflat` | 2 | state |
+| `lem-pc-divisor-line-bundle-agrees-sc` | 2 | state |
 | `lem-pc-finite-projective-cokernel-localization` | 2 | state |
 | `lem-pc-flat-sheaf-stalk-flat` | 2 | state |
 | `lem-pc-kflat-closure` | 2 | state |
@@ -833,6 +831,7 @@
 | `lem-sc-picard-valuation-probe-closure` | 2 | state |
 | `lem-sc-valuation-closed-fibre-section-vanishing` | 2 | state |
 | `lem-sc-valuation-proper-coherent-sections` | 2 | state |
+| `lem-sc-very-ample-separation-criterion` | 2 | state |
 | `lem-weil-pbc-finite-type-lift-nilpotent` | 2 | state |
 | `lem-weil-pbc-finite-type-z-g-ring` | 2 | state |
 | `lem-weil-pbc-henselian-finite-type-product-decomposition` | 2 | state |
@@ -848,7 +847,7 @@
 | `lem-sc-normalization-properties` | 3 | state |
 | `def-nagata-fixed-base-separated-stage` | 6 | state |
 
-Not open yet: 40 nodes that wait for stage 1, 841 nodes that wait for a statement dependency.
+Not open yet: 40 nodes that wait for stage 1, 835 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
