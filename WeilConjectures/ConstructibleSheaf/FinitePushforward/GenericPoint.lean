@@ -259,4 +259,26 @@ theorem Etale.isIso_unit_constantSheaf_fromSpecStalk_genericPoint (Z : Scheme.{u
     · obtain ⟨m, rfl⟩ := Scheme.surjective_toSheafify_app_of_connectedSpace _ M FW y
       exact ⟨_, Etale.constantSheafUnit_app_toSheafify g M W m⟩
 
+/-- **Maps into pushforwards of constant sheaves from a normal integral scheme** (Step 5 of the
+proof of Stacks 09Z6). Let `f : Y ⟶ X` with `Y` integral with integrally closed local rings, and
+`g : Spec K ⟶ Y` its generic point. Maps `C ⟶ f_* M_Y` correspond to maps `(g ≫ f)^* C ⟶ M_K`:
+by 09Z5 the constant sheaf `M_Y` is `g_* M_K`. -/
+noncomputable def Etale.homLowerStarConstantSheafEquiv {X Y : Scheme.{u}} (f : Y ⟶ X)
+    [IsIntegral Y] (hY : ∀ y : Y, IsIntegrallyClosed (Y.presheaf.stalk y))
+    (C : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (M : ModuleCat.{u + 1} Λ) :
+    (C ⟶ (Etale.lowerStar (ModuleCat.{u + 1} Λ) f).obj
+        ((constantSheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj M)) ≃
+      ((Etale.upperStar (ModuleCat.{u + 1} Λ) (Y.fromSpecStalk (genericPoint Y) ≫ f)).obj C ⟶
+        (constantSheaf (Spec (Y.presheaf.stalk (genericPoint Y))).smallEtaleTopology
+          (ModuleCat.{u + 1} Λ)).obj M) :=
+  let g := Y.fromSpecStalk (genericPoint Y)
+  let MY := (constantSheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj M
+  have := Etale.isIso_unit_constantSheaf_fromSpecStalk_genericPoint Y hY M
+  ((Etale.upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) f).homEquiv C MY).symm.trans <|
+    (Iso.homCongr (Iso.refl _)
+      (asIso ((Etale.upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) g).unit.app MY))).trans <|
+    ((Etale.upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) g).homEquiv _ _).symm.trans <|
+    Iso.homCongr ((Etale.upperStarComp (ModuleCat.{u + 1} Λ) g f).app C).symm
+      ((upperStarConstantSheafIso (ModuleCat.{u + 1} Λ) g).app M)
+
 end AlgebraicGeometry
