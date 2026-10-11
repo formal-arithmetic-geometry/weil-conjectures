@@ -29,8 +29,10 @@ shifts `Λ_s[r]` of the constant complex therefore detect isomorphisms.
   morphism `u : P ⟶ Q` of the point category is an isomorphism if and only if
   `Hom(Λ_s[r], u)` is bijective for every `r : ℤ`.
 - `AlgebraicGeometry.Etale.nonempty_iso_rightDerivedGlobalSections_coefficientDual`
-  (`lem-sf-point`, duality part): evaluation at the point carries the dual `RHom_s(C, Λ_s)` of
-  an object of `D^b_c(s, Λ)` to the dual `RHom_Λ(RΓ(s, C), Λ)`.
+  (`lem-sf-point`): evaluation at the point carries the dual `RHom_s(C, Λ_s)` of an object of
+  `D^b_c(s, Λ)` to the dual `RHom_Λ(RΓ(s, C), Λ)`.
+- `AlgebraicGeometry.Etale.isEquivalence_rightDerivedGlobalSections_of_isSepClosed`
+  (`lem-sf-point`): evaluation at the point `RΓ(s, -)` is an equivalence of categories.
 - `AlgebraicGeometry.Etale.nonempty_iso_rightDerivedGlobalSections_coefficientDual_of_isEquivalence`
   : the same for any coefficient category `A` and scheme `X` for which the constant sheaf functor
   `A ⥤ Sheaf X_ét A` is an equivalence of categories.
@@ -151,9 +153,38 @@ section
 
 universe u'
 
+section Equivalence
+
+variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
+  (X : Scheme.{u}) [(constantSheaf X.smallEtaleTopology A).IsEquivalence]
+
+/-- If the constant sheaf functor `F : A ⥤ Sheaf X_ét A` is an equivalence of categories, the
+global sections functor is a quasi-inverse of `F`, hence exact, and the derived global sections
+`RΓ(X, -)` are the functor induced by `F⁻¹` on derived categories. -/
+noncomputable def rightDerivedGlobalSectionsIsoMapDerivedCategoryInv :
+    rightDerivedGlobalSections A X ≅
+      (constantSheaf X.smallEtaleTopology A).inv.mapDerivedCategory :=
+  let eΓ : Sheaf.Γ X.smallEtaleTopology A ≅ (constantSheaf X.smallEtaleTopology A).inv :=
+    (constantSheafΓAdj _ _).rightAdjointUniq
+      (constantSheaf X.smallEtaleTopology A).asEquivalence.toAdjunction
+  have : PreservesFiniteLimits (Sheaf.Γ X.smallEtaleTopology A) :=
+    preservesFiniteLimits_of_natIso eΓ.symm
+  have : PreservesFiniteColimits (Sheaf.Γ X.smallEtaleTopology A) :=
+    preservesFiniteColimits_of_natIso eΓ.symm
+  (Sheaf.Γ _ _).rightDerivedFunctorIsoMapDerivedCategory ≪≫ Functor.mapDerivedCategoryNatIso eΓ
+
+/-- If the constant sheaf functor `A ⥤ Sheaf X_ét A` is an equivalence of categories, the
+derived global sections `RΓ(X, -) : D(X_ét) ⥤ D(A)` are an equivalence of categories. -/
+theorem isEquivalence_rightDerivedGlobalSections_of_isEquivalence :
+    (rightDerivedGlobalSections A X).IsEquivalence :=
+  Functor.isEquivalence_of_iso (rightDerivedGlobalSectionsIsoMapDerivedCategoryInv A X).symm
+
+end Equivalence
+
 variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
   [MonoidalCategory A] [MonoidalPreadditive A] [SymmetricCategory A] [MonoidalClosed A]
   [Abelian.HasFunctorialFlatResolution A] (X : Scheme.{u})
+  [(constantSheaf X.smallEtaleTopology A).IsEquivalence]
 
 /-- If the constant sheaf functor `A ⥤ Sheaf X_ét A` is an equivalence of categories (as it is
 for `X` the spectrum of a separably closed field), then the derived global sections carry the
@@ -167,24 +198,27 @@ coefficient category `A`: in this generality the monoidal structures on the deri
 are the ones of `AlgebraicGeometry.Etale.DerivedCategory.coefficientDual`, which keeps kernel
 checks of its instances cheap. -/
 theorem nonempty_iso_rightDerivedGlobalSections_coefficientDual_of_isEquivalence
-    [(constantSheaf X.smallEtaleTopology A).IsEquivalence]
     (C : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)) :
     Nonempty ((rightDerivedGlobalSections A X).obj
         ((DerivedCategory.coefficientDual A X).obj (op C)) ≅
-      (ihom ((rightDerivedGlobalSections A X).obj C)).obj (𝟙_ _)) := by
-  let F := constantSheaf X.smallEtaleTopology A
-  let eΓ : Sheaf.Γ X.smallEtaleTopology A ≅ F.inv :=
-    (constantSheafΓAdj _ _).rightAdjointUniq F.asEquivalence.toAdjunction
-  have : PreservesFiniteLimits (Sheaf.Γ X.smallEtaleTopology A) :=
-    preservesFiniteLimits_of_natIso eΓ.symm
-  have : PreservesFiniteColimits (Sheaf.Γ X.smallEtaleTopology A) :=
-    preservesFiniteColimits_of_natIso eΓ.symm
-  let e : rightDerivedGlobalSections A X ≅ F.inv.mapDerivedCategory :=
-    (Sheaf.Γ _ _).rightDerivedFunctorIsoMapDerivedCategory ≪≫ Functor.mapDerivedCategoryNatIso eΓ
-  exact ⟨e.app _ ≪≫ DerivedCategory.mapDerivedCategoryInvIhomUnitIso F C ≪≫
+      (ihom ((rightDerivedGlobalSections A X).obj C)).obj (𝟙_ _)) :=
+  let e := rightDerivedGlobalSectionsIsoMapDerivedCategoryInv A X
+  ⟨e.app _ ≪≫ DerivedCategory.mapDerivedCategoryInvIhomUnitIso _ C ≪≫
     (MonoidalClosed.internalHom.mapIso (e.app C).op).app (𝟙_ _)⟩
 
 end
+
+variable {Λ : Type (u + 1)} [CommRing Λ]
+
+/-- Blueprint `lem-sf-point`: The point, evaluated (evaluation at the point is an equivalence).
+
+Let `k` be a separably closed field and `s = Spec k`. Evaluation at the geometric point, the
+derived global sections `RΓ(s, -) : D(s_ét, Λ) ⥤ D(Λ)`, is an equivalence of categories; in
+particular it is conservative. It restricts to the equivalence `Fib_s` of the blueprint between
+the point category `D^b_c(s, Λ)` and the bounded derived category of finite `Λ`-modules. -/
+instance isEquivalence_rightDerivedGlobalSections_of_isSepClosed :
+    (rightDerivedGlobalSections (ModuleCat.{u + 1} Λ) (Spec (.of k))).IsEquivalence :=
+  isEquivalence_rightDerivedGlobalSections_of_isEquivalence _ _
 
 variable {Λ : Type (u + 1)} [CommRing Λ]
 
