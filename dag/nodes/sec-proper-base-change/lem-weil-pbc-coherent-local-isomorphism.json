@@ -172,5 +172,24 @@
   "worker": "stage1",
   "summary": "Split along Stacks 01Y3 (coherent.tex line 2364), whose proof only cites Modules 01B8, 01B9, 01C0 (tags verified in tags/tags). pqf-def-coherent is the Modules notion of coherent (01BV), so the Modules lemmas apply directly and the locally Noetherian hypothesis is not used (recorded in step 1; statement kept). Five steps: conventions; (3) from the new node lem-weil-pbc-module-finite-type-surjective-on-stalk (01B8); claim 01B9 (finite type with zero stalk vanishes near x) proved inline from 01B8 applied to 0 -> H and the sheaf axiom, giving (1); (2) as in 01C0: Ker(phi) of finite type by the existing lem-weil-pbc-coherent-finite-type-sub-kernel (2) (01BY), K_x = 0 written out with germs, then the claim; (4) from (2) and (3) on the intersection, with the gluing argument that injective plus locally surjective gives bijective sections and an O_U-linear inverse written out. One new node (01B8), unsplit, searched in Mathlib with leansearch, leanfinder, loogle and grep (no match). No slopmaster2 Lean for the item or the new node.",
   "blueprint": "No blueprint node is this item; its ancestor thm-weil-pbc-finite-etale-lifting (step 7 of its split, essential surjectivity of Lemma 0GS2) reaches it through lem-weil-pbc-coherent-generic-point-ideal-inclusion, which cites 01Y3. All five steps realize that citation of 01Y3 (parts (1)-(4)); none realizes a place of the blueprint proof text directly. Blueprint search (01Y3, 01B8, 01B9, 01C0, 'local isomorphism', 'stalk neighbourhood coherent', 'injective on a neighbourhood') found no node stating it: same_as = []."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.CoherentLocalIsomorphism",
+  "declaration": "AlgebraicGeometry.coherent_local_isomorphism",
+  "file": "lean/Sheaf/AlgebraicGeometry/CoherentLocalIsomorphism.lean",
+  "statement": "theorem coherent_local_isomorphism (X : Scheme.{u}) [IsLocallyNoetherian X] (F G : SheafOfModules (moduleRings X.toLocallyRingedSpace.toRingedSpace)) (hF : RingedSpace.IsCoherent X.toLocallyRingedSpace.toRingedSpace F) (hG : RingedSpace.IsCoherent X.toLocallyRingedSpace.toRingedSpace G) (φ : G ⟶ F) (x : X) : (IsZero ((RingedSpace.moduleStalkFunctor X.toRingedSpace x).obj F) → ∃ U : X.Opens, x ∈ U ∧ IsZero (F.over U)) ∧ (Function.Injective ((RingedSpace.moduleStalkFunctor X.toRingedSpace x).map φ) → ∃ U : X.Opens, x ∈ U ∧ ∀ (V : X.Opens), V ≤ U → Function.Injective (ConcreteCategory.hom (φ.val.app (.op V)))) ∧ (Function.Surjective ((RingedSpace.moduleStalkFunctor X.toRingedSpace x).map φ) → ∃ U : X.Opens, x ∈ U ∧ Epi ((SheafOfModules.overFunctor (moduleRings X.toLocallyRingedSpace.toRingedSpace) U).map φ)) ∧ (Function.Bijective ((RingedSpace.moduleStalkFunctor X.toRingedSpace x).map φ) → ∃ U : X.Opens, x ∈ U ∧ IsIso ((SheafOfModules.overFunctor (moduleRings X.toLocallyRingedSpace.toRingedSpace) U).map φ))",
+  "branch": "sheaf-dag",
+  "by": "K1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-cli1219"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-cli1219",
+  "group": "K1",
+  "result": "fix",
+  "note": "X Scheme.{u} + [IsLocallyNoetherian X]; F,G SheafOfModules over moduleRings with RingedSpace.IsCoherent; φ : G ⟶ F; x; stalks/stalk maps switched from Mathlib ModuleCat.of stalk + upstream Scheme.Modules.Hom.stalkLinearMap to RingedSpace.moduleStalkFunctor obj/map; (1) IsZero stalk -> ∃U∋x IsZero (F.over U); (2) injective -> ∃U∋x ∀V≤U section maps injective; (3) surjective -> ∃U∋x Epi (overFunctor U).map φ; (4) bijective -> ∃U∋x IsIso, all tied existentials"
  }
 }
