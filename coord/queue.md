@@ -1,11 +1,11 @@
 # Work queue
 
-311 items; claim with `tools/claim.py next <group> [--stage N]`.
+305 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (311)
+## Stage 2: nodes to state (305)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -55,14 +55,10 @@
 | `lem-weil-pbc-sections-base-field-extension` | 1 | state |
 | `lem-weil-pbc-sections-morphism-to-proj-polynomial-ring` | 1 | state |
 | `lem-weil-pbc-sections-over-quasi-compact-open-in-affine` | 1 | state |
-| `lem-weil-pbc-separable-extension-fraction-field-of-smooth-algebra` | 1 | state |
-| `lem-weil-pbc-separable-polynomial-quotient-reduced` | 1 | state |
-| `lem-weil-pbc-separable-residue-cotangent-injective` | 1 | state |
 | `lem-weil-pbc-separable-root-pth-power` | 1 | state |
 | `lem-weil-pbc-separable-split-purely-inseparable-residue-fields` | 1 | state |
 | `lem-weil-pbc-separable-tensor-purely-inseparable-field` | 1 | state |
 | `lem-weil-pbc-separably-generated-differentials-dimension` | 1 | state |
-| `lem-weil-pbc-separably-generated-tensor-reduced` | 1 | state |
 | `lem-weil-pbc-separated-affine-cover-criterion` | 1 | state |
 | `lem-weil-pbc-separated-lqf-base-change` | 1 | state |
 | `lem-weil-pbc-separating-transcendence-basis-finite-subextension` | 1 | state |
@@ -72,10 +68,7 @@
 | `lem-weil-pbc-sets-etale-inverse-image-restriction` | 1 | state |
 | `lem-weil-pbc-sets-etale-inverse-image-stalk-germ` | 1 | state |
 | `lem-weil-pbc-sets-etale-section-continuity` | 1 | state |
-| `lem-weil-pbc-sets-finite-pushforward-stalk` | 1 | state |
 | `lem-weil-pbc-sets-finite-surjective-descent` | 1 | state |
-| `lem-weil-pbc-sets-strictly-henselian-open-sections-stalk` | 1 | state |
-| `lem-weil-pbc-sheaf-algebraic-structures-objects` | 1 | state |
 | `lem-weil-pbc-sheaf-algebras-directed-colimit` | 1 | state |
 | `lem-weil-pbc-sheaf-cokernel-local-image` | 1 | state |
 | `lem-weil-pbc-sheaf-hom-finite-presentation-kernel` | 1 | state |
@@ -309,6 +302,7 @@
 | `lem-weil-pbc-integral-closure-finite-fibre-part-localization` | 2 | state |
 | `lem-weil-pbc-projective-space-twist-glued-identification` | 2 | state |
 | `lem-weil-pbc-quotient-henselian-pair` | 2 | state |
+| `lem-weil-pbc-site-continuous-pushforward-sheaf` | 2 | state |
 | `lemma-nagata-final-noetherian-base-system` | 2 | state |
 | `lemma-weil-pbc-etale-cohomology-continuity` | 2 | state |
 | `pqf-lem-pushforward-qcoh` | 2 | state |
@@ -321,7 +315,7 @@
 | `lem-pc-essentially-constant-pro-hom-colimit` | 4 | state |
 | `lem-pur-essential-constant-pro-criterion-05py` | 4 | state |
 
-Not open yet: 40 nodes that wait for stage 1, 467 nodes that wait for a statement dependency.
+Not open yet: 40 nodes that wait for stage 1, 466 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
