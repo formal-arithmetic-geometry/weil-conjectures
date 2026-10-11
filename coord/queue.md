@@ -1,11 +1,11 @@
 # Work queue
 
-177 items; claim with `tools/claim.py next <group> [--stage N]`.
+176 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (177)
+## Stage 2: nodes to state (176)
 
 | node | distance to Mathlib | kind | blockers |
 |---|---|---|---|
@@ -141,7 +141,6 @@
 | `lem-weil-pbc-graded-finiteness-cohomology` | 1 | state | 0 |
 | `lem-weil-pbc-hypercohomology-e1-pullback-functorial` | 1 | state | 0 |
 | `lem-weil-pbc-integral-cover-kills-constant-cohomology` | 1 | state | 0 |
-| `lem-weil-pbc-inverse-image-composition-module-linear` | 1 | state | 0 |
 | `lem-weil-pbc-inverse-image-free-etale-module` | 1 | state | 0 |
 | `lem-weil-pbc-ml-cohomology-powers-ideal` | 1 | state | 0 |
 | `lem-weil-pbc-module-pushforward-injective-acyclic` | 1 | state | 0 |
