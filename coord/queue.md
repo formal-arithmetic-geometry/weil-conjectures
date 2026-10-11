@@ -1,11 +1,11 @@
 # Work queue
 
-348 items; claim with `tools/claim.py next <group> [--stage N]`.
+344 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (348)
+## Stage 2: nodes to state (344)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -16,7 +16,6 @@
 | `lem-pc-derived-tensor-transitivity` | 1 | state |
 | `lem-pc-module-pullback-identity-composition` | 1 | state |
 | `lem-pc-perfect-generator-pullback` | 1 | state |
-| `lem-pc-perfect-tensor-hom-duality` | 1 | state |
 | `lem-pc-supported-perfect-generator` | 1 | state |
 | `lem-sc-affine-koszul-cech-derived-comparison` | 1 | state |
 | `lem-sc-base-change-curve` | 1 | state |
@@ -37,14 +36,11 @@
 | `lem-weil-pbc-projective-ample-invertible` | 1 | state |
 | `lem-weil-pbc-projective-space-twisting-sheaf-charts` | 1 | state |
 | `lem-weil-pbc-quasi-coherent-symmetric-algebra` | 1 | state |
-| `lem-weil-pbc-quasi-coherent-tensor-product-affine-sections` | 1 | state |
 | `lem-weil-pbc-quotient-base-change-closed-immersion-ideal` | 1 | state |
-| `lem-weil-pbc-reduced-noetherian-total-ring-fractions` | 1 | state |
 | `lem-weil-pbc-reduction-universal-homeomorphism` | 1 | state |
 | `lem-weil-pbc-regular-base-change` | 1 | state |
 | `lem-weil-pbc-regular-local-generators-regular-sequence` | 1 | state |
 | `lem-weil-pbc-regular-local-localization` | 1 | state |
-| `lem-weil-pbc-regular-local-mcm-free` | 1 | state |
 | `lem-weil-pbc-regular-local-quotient-kernel-parameters` | 1 | state |
 | `lem-weil-pbc-regular-local-separable-residue-smooth` | 1 | state |
 | `lem-weil-pbc-regular-permanence` | 1 | state |
