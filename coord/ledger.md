@@ -5599,3 +5599,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 18:46 L: merged deliver/E1/lem-weil-pbc-site-covering-morphisms-same-h0-map (stage 2; reviewer PASS; first push; Sheaf.Paper.SiteCoveringMorphismsSameH0Map CategoryTheory.PreOneHypercover.siteCoveringMorphismsSameH0Map)
 - 18:46 L: merged deliver/F1/lem-weil-pbc-site-coverings-common-refinement (stage 2; reviewer PASS; first push; Sheaf.CategoryTheory.SiteCoveringsCommonRefinement CategoryTheory.Precoverage.siteCoverings_common_refinement)
 - 18:46 L: merged deliver/T1/lem-sc-abelian-sheaf-short-exact-stalkwise (stage 2; reviewer PASS; first push; Sheaf.Topology.AbelianSheafShortExactStalkwise TopCat.shortExact_iff_stalkFunctor_map_shortExact)
+- 18:47 L: merged deliver/U1/lem-sc-ga-cohomology (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.EtaleZariskiCohomology AlgebraicGeometry.etale_zariski_cohomology_agree)

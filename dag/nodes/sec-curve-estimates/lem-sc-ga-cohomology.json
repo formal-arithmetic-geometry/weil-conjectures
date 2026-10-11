@@ -148,5 +148,29 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of E1; spot-checked by L: L: reviewed in full by a reviewer sub-agent (FIX: two wording fixes in split_report.blueprint and the new node's from.place): 03DW(2) and 02UZ read, 3 steps checked, route via the unit's step 5 (descent for quasi-coherent modules), small cases tested"
  },
- "lead_note": "2026-10-10 L: the report claims the imported compactification proof has a gap (C minus {P} not a proper open); the reviewer found that claim wrong (if P is not in C the open is C itself, proper in C-bar); the departure from the imported proof is justified by the unit route (sk-prop-cd step 5 names descent for quasi-coherent modules), not by an error; not recorded in HUMAN.md."
+ "lead_note": "2026-10-10 L: the report claims the imported compactification proof has a gap (C minus {P} not a proper open); the reviewer found that claim wrong (if P is not in C the open is C itself, proper in C-bar); the departure from the imported proof is justified by the unit route (sk-prop-cd step 5 names descent for quasi-coherent modules), not by an error; not recorded in HUMAN.md.",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.EtaleZariskiCohomology",
+  "declaration": "AlgebraicGeometry.etale_zariski_cohomology_agree",
+  "declarations": [
+   "AlgebraicGeometry.etale_zariski_cohomology_agree",
+   "AlgebraicGeometry.etale_ga_cohomology_agree",
+   "AlgebraicGeometry.subsingleton_etale_ga_and_structure_cohomology"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleZariskiCohomology.lean",
+  "statement": "theorem etale_zariski_cohomology_agree {k : Type u} [Field k] [IsAlgClosed k] {C : Scheme.{u}} (f : C ⟶ Spec (.of k)) [IsCurve f] (F : C.Modules) [F.IsQuasicoherent] (q : ℕ) : Nonempty (Sheaf.H (Scheme.Modules.etaleTensorSectionsSheaf F) q ≃+ ((RingedSpace.moduleCohomology C.toRingedSpace q).obj F))",
+  "branch": "sheaf-dag",
+  "by": "U1",
+  "date": "2026-10-11",
+  "existing": false,
+  "note": "The three declarations give respectively the comparison for every quasi-coherent module, its structure-module (G_a) specialization, and both vanishings under the smooth connected curve hypothesis. Sheaf.H is the prescribed abelian-sheaf encoding of etale cohomology; RingedSpace.moduleCohomology is Zariski module cohomology. The unit module quasi-coherence proof is passed explicitly from the upstream theorem."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "U1",
+  "result": "pass",
+  "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
+ }
 }
