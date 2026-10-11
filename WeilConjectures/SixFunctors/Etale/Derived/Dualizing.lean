@@ -8,6 +8,9 @@ module
 public import WeilConjectures.SixFunctors.Etale.Derived.Perfect
 public import WeilConjectures.AlgebraicGeometry.InvertibleExponent
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperShriek
+public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Rigid.Braided
+public import WeilConjectures.CategoryTheory.Monoidal.Instances.DerivedCategoryBraided
+public import WeilConjectures.CategoryTheory.ObjectProperty.Duality
 
 /-!
 
@@ -91,17 +94,56 @@ noncomputable def verdierDual :
       _root_.DerivedCategory (Sheaf X.smallEtaleTopology A) :=
   (RHom(X)[A]).flip.obj (dualizingComplex A a)
 
+/-- The braiding of the derived tensor product on `D(X_ét)`: the braiding of the sheaf category,
+with the Koszul sign rule on complexes, descended along K-flat resolutions
+(`CategoryTheory.DerivedMonoidal.braidedCategory`). It is the symmetry `K ⊗ᴸ M ≅ M ⊗ᴸ K` of
+`AlgebraicGeometry.Etale.nonempty_iso_derivedTensor_flip`, and is used as a local instance. -/
+noncomputable abbrev derivedBraidedCategory (X : Scheme.{u}) :
+    BraidedCategory (_root_.DerivedCategory (Sheaf X.smallEtaleTopology A)) :=
+  _root_.DerivedCategory.braidedCategory _
+
+attribute [local instance] derivedBraidedCategory
+
+/-- Blueprint `lem-weil-duality-pairing`: The duality pairing and the double-dual morphism.
+
+The evaluation `ev_K : K ⊗ᴸ 𝔻_X K ⟶ ω_X` of the internal hom, a pairing natural in `K`. No
+finiteness of `K` or of `𝔻_X K` is needed. -/
+noncomputable def verdierDualEvaluation
+    (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)) :
+    K ⊗ (verdierDual A a).obj (op K) ⟶ dualizingComplex A a :=
+  (ihom.ev K).app (dualizingComplex A a)
+
+/-- Blueprint `lem-weil-duality-pairing`: The duality pairing and the double-dual morphism.
+
+The double-dual morphism `δ_K : K ⟶ 𝔻_X 𝔻_X K`, natural in `K`: the transpose of the
+evaluation pairing `AlgebraicGeometry.Etale.verdierDualEvaluation` precomposed with the
+symmetry `𝔻_X K ⊗ᴸ K ≅ K ⊗ᴸ 𝔻_X K` (`AlgebraicGeometry.Etale.verdierDualDoubleDual_app`).
+It is `CategoryTheory.MonoidalClosed.toIhomIhom` for the dualizing complex. -/
+noncomputable def verdierDualDoubleDual :
+    𝟭 _ ⟶ (verdierDual A a).rightOp ⋙ verdierDual A a :=
+  MonoidalClosed.toIhomIhomNatTrans (dualizingComplex A a)
+
+/-- Blueprint `lem-weil-duality-pairing`: the double-dual morphism `δ_K` is the transpose of
+the evaluation `ev_K` composed with the symmetry, `CategoryTheory.MonoidalClosed.toIhomIhom`
+(see `CategoryTheory.MonoidalClosed.uncurry_toIhomIhom`). -/
+lemma verdierDualDoubleDual_app (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)) :
+    (verdierDualDoubleDual A a).app K = MonoidalClosed.toIhomIhom (dualizingComplex A a) K :=
+  rfl
+
 section Field
 
 variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] {k : Type u} [Field k]
   [HasInvertibleExponent Λ (Spec (.of k))] {X : Scheme.{u}} (a : X ⟶ Spec (.of k))
   [IsSeparated a] [LocallyOfFiniteType a] [QuasiCompact a] [HasCompactification a]
 
-/-- Blueprint `sk-prop-sf-biduality-general`: General Verdier biduality.
+/-- Blueprint `lem-weil-verdier-preservation-strata`: Constructible preservation before
+biduality (first half; the subsection `sk-prop-sf-rf-shriek-preservation`).
 
 For `X` separated of finite type over a field `k` and a finite coefficient ring `Λ` whose
 exponent is invertible on `k`, the Verdier dual `𝔻_X = RHom(-, ω_X)` carries `Dctf(X, Λ)` into
-itself. -/
+itself. The Tor-amplitude bound of the same blueprint lemma is
+`AlgebraicGeometry.Etale.torAmplitudeIn_verdierDual`. This is the preservation half of the
+general Verdier biduality `sk-prop-sf-biduality-general`, whose blueprint proof cites it. -/
 theorem constructibleFiniteTor_verdierDual
     {K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
     (hK : DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} Λ) X K) :
@@ -112,15 +154,45 @@ theorem constructibleFiniteTor_verdierDual
 /-- Blueprint `sk-prop-sf-biduality-general`: General Verdier biduality.
 
 For `X` separated of finite type over a field `k` and a finite coefficient ring `Λ` whose
+exponent is invertible on `k`, the double-dual morphism `δ_K : K ⟶ 𝔻_X 𝔻_X K`
+(`AlgebraicGeometry.Etale.verdierDualDoubleDual`) is an isomorphism for every `K` in
+`Dctf(X, Λ)`. Over an algebraically closed field this is the finite-stage étale biduality
+`thm-weil-etale-geometric-biduality`. -/
+theorem isIso_verdierDualDoubleDual_app
+    {K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
+    (hK : DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} Λ) X K) :
+    IsIso ((verdierDualDoubleDual (ModuleCat.{u + 1} Λ) a).app K) :=
+  sorry
+
+/-- Blueprint `sk-prop-sf-biduality-general`: General Verdier biduality.
+
+For `X` separated of finite type over a field `k` and a finite coefficient ring `Λ` whose
 exponent is invertible on `k`, the Verdier dual is a contravariant anti-equivalence of
 `Dctf(X, Λ)`: the double-dual morphism `K ⟶ 𝔻_X 𝔻_X K` is an isomorphism for every object `K`
-of `Dctf(X, Λ)`. -/
+of `Dctf(X, Λ)` (`AlgebraicGeometry.Etale.isIso_verdierDualDoubleDual_app`). -/
 theorem nonempty_iso_verdierDual_verdierDual
     {K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
     (hK : DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} Λ) X K) :
     Nonempty (K ≅ (verdierDual (ModuleCat.{u + 1} Λ) a).obj
       (op ((verdierDual (ModuleCat.{u + 1} Λ) a).obj (op K)))) :=
-  sorry
+  have := isIso_verdierDualDoubleDual_app Λ a hK
+  ⟨asIso ((verdierDualDoubleDual (ModuleCat.{u + 1} Λ) a).app K)⟩
+
+/-- Blueprint `sk-prop-sf-biduality-general`: General Verdier biduality.
+
+For `X` separated of finite type over a field `k` and a finite coefficient ring `Λ` whose
+exponent is invertible on `k`, the Verdier dual `𝔻_X = RHom(-, ω_X)` restricts to a
+contravariant anti-equivalence `Dctf(X, Λ)ᵒᵖ ≌ Dctf(X, Λ)`, with quasi-inverse `𝔻_X` itself:
+`𝔻_X` preserves `Dctf(X, Λ)` (`AlgebraicGeometry.Etale.constructibleFiniteTor_verdierDual`) and
+the unit and the counit are the double-dual isomorphisms `δ_K : K ≅ 𝔻_X 𝔻_X K`
+(`AlgebraicGeometry.Etale.isIso_verdierDualDoubleDual_app`). -/
+noncomputable def verdierDualEquivalence :
+    (DerivedCategoryFiniteTor (ModuleCat.{u + 1} Λ) X)ᵒᵖ ≌
+      DerivedCategoryFiniteTor (ModuleCat.{u + 1} Λ) X :=
+  (DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} Λ) X).liftDualEquivalence
+    (verdierDual (ModuleCat.{u + 1} Λ) a) (fun _ hK ↦ constructibleFiniteTor_verdierDual Λ a hK)
+    (verdierDualDoubleDual (ModuleCat.{u + 1} Λ) a)
+    (fun _ hK ↦ isIso_verdierDualDoubleDual_app Λ a hK)
 
 include a in
 /-- Blueprint `cor-weil-finite-constructible-hom`: Internal Hom for arbitrary finite-stage
