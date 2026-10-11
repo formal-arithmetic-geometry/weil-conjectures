@@ -204,5 +204,24 @@
   "worker": "stage1",
   "summary": "Six steps follow the proof of Stacks 00SU. Existing nodes supply field-extension dimension invariance, the principal-open fibre bound, spectral quasi-compactness, and the polynomial quotient lower bound. Explicitly descends a finite Bezout identity and checks the fibre bound survives enlarging the coefficient subring. No new nodes.",
   "blueprint": "Serves step 7 of thm-weil-pbc-finite-etale-lifting (0GS2 essential-surjectivity route): the coefficient approximation needed by the 00SV conormal proof through relative-global-complete-intersection-partial-local-flat. Steps 1-6 unpack the complete-intersection approximation cited along that chain."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.NoetherianApproximation",
+  "declaration": "Algebra.exists_finiteType_subring_relativeGlobalCompleteIntersection",
+  "statement": "theorem exists_finiteType_subring_relativeGlobalCompleteIntersection (R : Type u) [CommRing R] (n c : ℕ) (f : Fin c → MvPolynomial (Fin n) R) (h : IsRelativeGlobalCompleteIntersectionPresentation f) : ∃ (R₀ : Subring R), Algebra.FiniteType ℤ R₀ ∧ ∃ (f₀ : Fin c → MvPolynomial (Fin n) R₀), (∀ (i : Fin c) (d : Fin n →₀ ℕ), (MvPolynomial.coeff d (f i)) = (((MvPolynomial.coeff d (f₀ i)) : R₀) : R)) ∧ IsRelativeGlobalCompleteIntersectionPresentation f₀",
+  "by": "F1",
+  "date": "2026-10-11",
+  "file": "lean/Sheaf/Paper/NoetherianApproximation.lean",
+  "branch": "sheaf-dag",
+  "existing": false,
+  "fixed_by": "R-gna"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-gna",
+  "group": "F1",
+  "result": "fix",
+  "note": "R comm ring, n c : ℕ, f : Fin c → MvPolynomial (Fin n) R; hyp = landed IsRelativeGlobalCompleteIntersectionPresentation f; ∃ R₀ : Subring R, FiniteType ℤ R₀, f₀ with coeff (f i) = coeff (f₀ i) for all monomials, presentation predicate for f₀; reverted the delivery's change of existing node(s) def-weil-pbc-relative-global-complete-intersection (--revert-nodes; kept as on sheaf-dag)"
  }
 }
