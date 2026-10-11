@@ -174,5 +174,24 @@
   "by": "L",
   "result": "pass",
   "note": "Reviewed by the lead (opus-relaunch6). Five steps along 056J(1)/056I: the affine chart (restriction quasi-coherent of finite type, F|_U = tilde of M by the adjunction node), stalk on the chart (elementary: cofinal neighbourhoods), F_x = M_{p_x} by lem-weil-pbc-spec-tilde-stalk-localization (which the lead set to mathlib: AlgebraicGeometry.tilde.toStalk with its IsLocalizedModule instance, Tilde.lean:191/196, verified), Supp cap U = V(Ann M) by the new Mathlib leaf Module.mem_support_iff_of_finite / Module.support_eq_zeroLocus (Support.lean:200/216, @[stacks 00L2], verified), closedness from an affine cover (elementary). Stage-3 note: lem-weil-pbc-support-pullback-finite-type (unsplit, created for prop-weil-pbc-grothendieck-existence) states all of 056J; its part (1) is this item and should cite it when split. Tags corrected by the worker: Supp = V(Ann) is 00L2 (00L3 is support-quotient); stalk of tilde is 01HV(7); 01IA quasi-coherent on affine."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FiniteTypeModuleSupportClosed",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.finite_type_module_support_closed",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteTypeModuleSupportClosed.lean",
+  "statement": "theorem finite_type_module_support_closed (X : Scheme.{u}) (F : X.Modules) [F.IsQuasicoherent] [F.IsFiniteType] : (∀ (U : X.affineOpens) (x : X) (hx : x ∈ U.1), ∃ e : LocalizedModule (U.2.primeIdealOf ⟨x, hx⟩).asIdeal.primeCompl Γ(F, U.1) ≃+ (RingedSpace.moduleStalkFunctor X.toRingedSpace x).obj F, ∀ (m : Γ(F, U.1)) (s : (U.2.primeIdealOf ⟨x, hx⟩).asIdeal.primeCompl), X.presheaf.germ U.1 x hx s.1 • e (LocalizedModule.mk m s) = F.presheaf.germ U.1 x hx m) ∧ (∀ (U : X.affineOpens) (x : X) (hx : x ∈ U.1), ¬ Subsingleton (F.presheaf.stalk x) ↔ Module.annihilator Γ(X, U.1) Γ(F, U.1) ≤ (U.2.primeIdealOf ⟨x, hx⟩).asIdeal) ∧ (∀ (U : X.affineOpens), {x : X | ¬ Subsingleton (F.presheaf.stalk x)} ∩ (U.1 : Set X) = U.2.fromSpec '' PrimeSpectrum.zeroLocus (Module.annihilator Γ(X, U.1) Γ(F, U.1) : Set Γ(X, U.1))) ∧ IsClosed {x : X | ¬ Subsingleton (F.presheaf.stalk x)}",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-fsc"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-fsc",
+  "group": "E1",
+  "result": "fix",
+  "note": "X scheme, F quasi-coherent + IsFiniteType; per affine U, x in U: F_x = M_p tied via germs, x in Supp iff Ann(Gamma(F,U)) <= p_x, Supp cap U = fromSpec '' V(Ann), IsClosed Supp"
  }
 }
