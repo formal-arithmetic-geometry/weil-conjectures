@@ -187,5 +187,24 @@
   "item": "lem-weil-pbc-quasi-coherent-module-colimit-affine-sections",
   "worker": "stage1",
   "summary": "Statement kept (Stacks Schemes 01ID / Section 26.24 item (4), module version). Proof written in four steps mirroring Steps 3-5 of the reviewed lem-weil-pbc-quasi-coherent-algebra-colimit, but simpler since the colimit of the sections is itself the module M: (1) restrict to an open immersion Spec R -> U (restriction leaf: colimits and quasi-coherence preserved, sections F_i(U)); counits eps_i iso (tilde adjunction (3)); (2) tilde preserves colimits (adjunction (4)) and uniqueness of colimits give psi: (colim M_i)~ = F|_Spec R; (3) lambda = Gamma(psi) o tau is bijective (unit iso, adjunction (2)) and equals the canonical map by the triangle identity; elementwise clauses from a new Mathlib leaf lem-weil-pbc-filtered-colimit-modules-elementwise (Concrete.isColimit_exists_rep / isColimit_rep_eq_iff_exists with ModuleCat forget preserving filtered colimits; Stacks 00D6/00D7); (4) quasi-coherence by the definition pqf-def-coherent (elementary). Mathlib searched three ways: no closure of IsQuasicoherent under colimits; the source repository has only isQuasicoherent_sigma (coproducts, sorry-free). proof_origin agent: Stacks treats general colimits as 'a similar argument'."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.QuasiCoherentModuleColimitAffineSections",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.quasiCoherentModuleColimitAffineSections",
+  "file": "lean/Sheaf/AlgebraicGeometry/QuasiCoherentModuleColimitAffineSections.lean",
+  "statement": "theorem quasiCoherentModuleColimitAffineSections (X : Scheme.{u}) (I : Type u) [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I] (F : I ⥤ X.Modules) (c : Cocone F) (hc : IsColimit c) (hF : ∀ i : I, (F.obj i).IsQuasicoherent) : c.pt.IsQuasicoherent ∧ ∀ (U : X.Opens), IsAffineOpen U → (∀ s : Γ(c.pt, U), ∃ (i : I) (x : Γ(F.obj i, U)), ((c.ι.app i).val.app (Opposite.op U)) x = s) ∧ (∀ (i : I) (x : Γ(F.obj i, U)), ((c.ι.app i).val.app (Opposite.op U)) x = 0 ↔ ∃ (i' : I) (h : i ≤ i'), ((F.map (homOfLE h)).val.app (Opposite.op U)) x = 0)",
+  "branch": "sheaf-dag",
+  "by": "K1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-cas"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-cas",
+  "group": "K1",
+  "result": "fix",
+  "note": "X Scheme.{u}; I Type u directed (Preorder+IsDirected) + added [Nonempty I] (Stacks 00D3; empty I makes surjectivity clause false); F : I ⥤ X.Modules, c/hc colimit cocone (no hollow HasColimit); hF IsQuasicoherent; concl c.pt.IsQuasicoherent; affine U: surjectivity via c.ι.app i on sections, zero iff eventually zero via F.map (homOfLE h) — node's stated equivalent elementwise form"
  }
 }
