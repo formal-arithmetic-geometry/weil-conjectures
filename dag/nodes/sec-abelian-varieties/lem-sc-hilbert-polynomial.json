@@ -151,5 +151,23 @@
   "group": "J1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-hpo2233 (reviewer sub-agent of L); spot-checked: All four 19:42 return points repaired: item statement verbatim to sheaf-dag (prefix gone, 'Varieties, Lemma 33.45.1' restored); difference node uses the Stacks regular-meromorphic definition (K_X->K_X(L) injective); existence node assumes X locally Noetherian without embedded points (02OZ(3)); step 1 shows Ass(O_Z) in Ass(G) via faithful G, so Z has no embedded points. Checked step 2 identity sign, step 3 base/finite differences, Tag 02P2/02OL/02OZ against nodes. FIX more, RETURN less: (1) E lem-sc-hilbert-embedded-points: dim Supp K < dim Supp F is false when that dimension is infinite (locally Noetherian, e.g. disjoint union of Spec k[x,y,z_1..z_n]/(x^2,xy)); added 'finite and positive' (step 1 uses it on a proper k-scheme). (2) E lem-sc-hilbert-difference: for X empty both sides of dim<dim X are -infinity; added 'nonempty' (step 2 has d>0). Coherent-sheaf 0BEM (degree <= dim Supp F) is proved inside step 1-3 but stated by no node.; 2 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "WeilConjectures.AlgebraicGeometry.Modules.Ample",
+  "declaration": "AlgebraicGeometry.Scheme.Hom.exists_polynomial_hilbertFunction",
+  "statement": "theorem Scheme.Hom.exists_polynomial_hilbertFunction (f : X ⟶ Spec (.of K)) [IsProper f]\n    (M : X.Modules) (hM : IsAmple f M) :\n    ∃ P : Polynomial ℚ, P.natDegree ≤ ((topologicalKrullDim X).unbotD 0).toNat ∧\n      ∀ m : ℕ, P.eval (m : ℚ) = f.hilbertFunction M m :=",
+  "branch": "slopmaster2",
+  "by": "P1",
+  "date": "2026-10-11",
+  "existing": true,
+  "note": "The upstream theorem states the Hilbert polynomial assertion exactly: for a proper scheme over a field and an ample module, there is a rational polynomial of degree at most the topological Krull dimension agreeing with the Euler-characteristic Hilbert function on every natural m."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-hpo",
+  "group": "P1",
+  "result": "pass",
+  "note": "existing upstream Ample.lean:244 at 71d63dcf6 (sorry body, docstring cites this node+0BEM): K Field; X proper over K via explicit f (decl takes f); M X.Modules with IsAmple f M (=def-sc-ample record, includes IsInvertible); g = (topologicalKrullDim X).unbotD 0; exists P : Q[x], natDegree <= g, P.eval m = f.hilbertFunction M m = eulerChar K (M.tensorPow m) (def-pc-euler-characteristic record) for all m : N; empty X forces P=0"
  }
 }
