@@ -1,11 +1,11 @@
 # Work queue
 
-719 items; claim with `tools/claim.py next <group> [--stage N]`.
+712 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (719)
+## Stage 2: nodes to state (712)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -21,29 +21,22 @@
 | `lem-sc-product-tangent-space-direct-sum` | 1 | state |
 | `lem-sp-truncation-couple-exact` | 1 | state |
 | `lem-weil-derived-limit-roos-complex` | 1 | state |
-| `lem-weil-pbc-cotangent-complex-symmetric-algebra` | 1 | state |
 | `lem-weil-pbc-derived-square-iso-pasting` | 1 | state |
 | `lem-weil-pbc-descend-qc-open-fg-subalgebra` | 1 | state |
 | `lem-weil-pbc-directed-colimit-base-change-elementwise` | 1 | state |
 | `lem-weil-pbc-etale-fibre-specialization-bound` | 1 | state |
 | `lem-weil-pbc-etale-graph-section-extension-map` | 1 | state |
 | `lem-weil-pbc-etale-inverse-image-algebraic-structures` | 1 | state |
-| `lem-weil-pbc-etale-local-ring-triples` | 1 | state |
 | `lem-weil-pbc-etale-qcqs-sections-filtered-colimit` | 1 | state |
 | `lem-weil-pbc-etale-restriction-pullback-unit` | 1 | state |
 | `lem-weil-pbc-etale-retraction-finite-product-local` | 1 | state |
 | `lem-weil-pbc-etale-retraction-finite-type-splitting` | 1 | state |
-| `lem-weil-pbc-etale-ring-map-conormal-criterion` | 1 | state |
 | `lem-weil-pbc-etale-ring-map-prescribed-residue-field` | 1 | state |
 | `lem-weil-pbc-etale-separated-stratified-finite` | 1 | state |
-| `lem-weil-pbc-etale-sheaf-clopen-product` | 1 | state |
 | `lem-weil-pbc-etale-stratification-local-gluing` | 1 | state |
-| `lem-weil-pbc-etale-subsheaf-final-open` | 1 | state |
 | `lem-weil-pbc-exact-free-complex-last-minors-regular-sequence` | 1 | state |
 | `lem-weil-pbc-exact-sequence-ml` | 1 | state |
 | `lem-weil-pbc-ext-one-direct-sum` | 1 | state |
-| `lem-weil-pbc-factorization-criterion-filtered-colimit` | 1 | state |
-| `lem-weil-pbc-fibre-degree-base-change` | 1 | state |
 | `lem-weil-pbc-fibre-degree-bound-field-points` | 1 | state |
 | `lem-weil-pbc-fibre-dimension-bounded-open-upstairs` | 1 | state |
 | `lem-weil-pbc-fibre-dimension-neighborhood` | 1 | state |
