@@ -245,5 +245,28 @@
   "summary": "Proof written in ten steps after Stacks Remark 09Z3 and the proof of Lemma 09Z2 transposed to sheaves of sets: f_1 finite (permanence + composition); the sheaves A=f_*f^{-1}G, B=f_{1*}f_1^{-1}G, the unit eta and the maps delta_j built from p_j^* and c_{f,p_j,G}; eta equalizes them (clause (1) of the composition node) and factors through the sectionwise equalizer E; on stalks at a geometric point xbar, with P the lifts of xbar (nonempty by surjectivity and lem-weil-pbc-finite-geometric-point-lift) and P_1 = P x P, the finite pushforward stalk (sets) and the new germ-compatible inverse-image stalk bijection identify eta with the diagonal and delta_j with the map induced by the j-th projection (the compatibility of c_{f,p_j,G} with the stalk bijections is proved in step 7 by checking on germs of f^*a, no filteredness used); so psi:G->E is bijective on stalks, hence an isomorphism, and global sections give the statement. Statement: only a parenthetical added naming the canonical identifications X x_X X' = X' and X' x_{X'} X'' = X'' the statement already used implicitly. New node: lem-weil-pbc-sets-etale-inverse-image-stalk-germ (Stacks 03Q1 (3) for sets, with germs; unsplit). Lean: none on slopmaster2 for 09Z2/09Z3.",
   "blueprint": "Realizes, in lemma-weil-pbc-proper-strict-henselian-h0's proof (Tag 0A0C, through 09ZF), the last sentence of 09ZF's proof \"s comes from a section of F over X by Remark 09Z3\": steps 2-3 the equalizer of f_{0*}f_0^{-1}G => f_{1*}f_1^{-1}G, steps 4-9 the stalkwise check of 09Z2 ('(F_n)_ybar = prod over E^{n+1}' by 03QP and 03Q1, diagonal and projection maps), step 10 the passage to global sections."
  },
- "reviewed": "2026-10-10 L: 10 steps following 09Z2 for sheaves of sets (the equalizer map, stalks of the finite pushforwards as products over the fibre (03QP (1), new node), the unit as the diagonal and the two maps as projections (the germ node 03Q1 (3), new), bijectivity on stalks, geometric points cover); 4 new nodes (3 written by the worker that died at the 22nd limit, kept)"
+ "reviewed": "2026-10-10 L: 10 steps following 09Z2 for sheaves of sets (the equalizer map, stalks of the finite pushforwards as products over the fibre (03QP (1), new node), the unit as the diagonal and the two maps as projections (the germ node 03Q1 (3), new), bijectivity on stalks, geometric points cover); 4 new nodes (3 written by the worker that died at the 22nd limit, kept)",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FiniteSurjectiveSetDescent",
+  "declaration": "AlgebraicGeometry.finiteSurjectiveSetDescent",
+  "declarations": [
+   "AlgebraicGeometry.etaleSetDescentUnit",
+   "AlgebraicGeometry.etaleSetDescentComparison",
+   "AlgebraicGeometry.finiteSurjectiveSetDescent"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteSurjectiveSetDescent.lean",
+  "statement": "theorem finiteSurjectiveSetDescent {X X' : Scheme.{u}} (f : X' ⟶ X) [IsFinite f] [Surjective f] (G : Sheaf X.smallEtaleTopology (Type (u + 1))) : Function.Injective (etaleSetDescentUnit f G (Scheme.Etale.mk (𝟙 X))) ∧ ∀ s' : ((Scheme.etaleSetPullback f).obj G).obj.obj (op ((MorphismProperty.Over.pullback @Etale ⊤ f).obj (Scheme.Etale.mk (𝟙 X)))), etaleSetDescentComparison f (pullback.fst f f) G (Scheme.Etale.mk (𝟙 X)) s' = eqToHom (congrArg (fun k : pullback f f ⟶ X ↦ ((Scheme.etaleSetPullback k).obj G).obj.obj (op ((MorphismProperty.Over.pullback @Etale ⊤ k).obj (Scheme.Etale.mk (𝟙 X))))) (pullback.condition (f := f) (g := f)).symm) (etaleSetDescentComparison f (pullback.snd f f) G (Scheme.Etale.mk (𝟙 X)) s') ↔ ∃ s : G.obj.obj (op (Scheme.Etale.mk (𝟙 X))), etaleSetDescentUnit f G (Scheme.Etale.mk (𝟙 X)) s = s'",
+  "branch": "sheaf-dag",
+  "by": "G1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "G1",
+  "result": "pass",
+  "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
+ }
 }
