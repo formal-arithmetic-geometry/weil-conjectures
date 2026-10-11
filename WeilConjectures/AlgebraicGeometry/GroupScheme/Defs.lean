@@ -33,7 +33,8 @@ subgroup schemes, the `n`-torsion subgroup scheme and isogenies.
   `AlgebraicGeometry.IsClosedSubgroupScheme`: (normal, closed) subgroup schemes.
 - `AlgebraicGeometry.torsionSubgroupScheme`: the `n`-torsion subgroup scheme `G[n]`.
   Being a kernel, it is itself a group scheme (`CategoryTheory.GrpObj.instGrpObjKer`).
-- `AlgebraicGeometry.torsionByEquiv`: the `K`-points of `G[n]` are the `n`-torsion of `G(K)`.
+- `AlgebraicGeometry.torsionByEquivHom`, `AlgebraicGeometry.torsionByEquiv`: the `T`-points
+  (and the `K`-points) of `G[n]` are the `n`-torsion of `G(T)` (and of `G(K)`).
 - `AlgebraicGeometry.IsIsogeny`: a surjective homomorphism of group schemes with finite kernel.
 - `AlgebraicGeometry.isogenyDegree`: the degree of an isogeny, the order of its kernel.
 
@@ -198,15 +199,15 @@ noncomputable instance (G : Over (Spec (.of K))) [GrpObj G] [IsCommMonObj G] (n 
     GrpObj (torsionSubgroupScheme G n) :=
   inferInstanceAs (GrpObj (GrpObj.ker (𝟙 G ^ n)))
 
-/-- The `K`-points of the `n`-torsion subgroup scheme `G[n]` of a commutative group scheme `G`
-are the `n`-torsion points of `G`: the `n`-torsion of the group `G(K)`, written additively, is
-in bijection with `𝟙_ (Over (Spec (.of K))) ⟶ G[n]`, a point `x` of `G[n]` corresponding to
-its image `x ≫ GrpObj.kerι (𝟙 G ^ n)` in `G(K)`. -/
-noncomputable def torsionByEquiv (G : Over (Spec (.of K))) [GrpObj G] [IsCommMonObj G] (n : ℕ) :
-    AddSubgroup.torsionBy (Additive (𝟙_ (Over (Spec (.of K))) ⟶ G)) (n : ℤ) ≃
-      (𝟙_ (Over (Spec (.of K))) ⟶ torsionSubgroupScheme G n) :=
+/-- The `T`-points of the `n`-torsion subgroup scheme `G[n]` of a commutative group scheme `G`
+are the `n`-torsion points of `G(T)`: the `n`-torsion of the group `T ⟶ G`, written additively,
+is in bijection with `T ⟶ G[n]`, a point `x` of `G[n]` corresponding to its image
+`x ≫ GrpObj.kerι (𝟙 G ^ n)` in `G(T)`. -/
+noncomputable def torsionByEquivHom (G : Over (Spec (.of K))) [GrpObj G] [IsCommMonObj G] (n : ℕ)
+    (T : Over (Spec (.of K))) :
+    AddSubgroup.torsionBy (Additive (T ⟶ G)) (n : ℤ) ≃ (T ⟶ torsionSubgroupScheme G n) :=
   (Equiv.subtypeEquiv (p := fun x ↦ x ∈ AddSubgroup.torsionBy _ (n : ℤ))
-    (q := fun x ↦ x ∈ MonoidHom.ker (IsMonHom.monoidHom (𝟙 G ^ n) (𝟙_ _))) Additive.toMul
+    (q := fun x ↦ x ∈ MonoidHom.ker (IsMonHom.monoidHom (𝟙 G ^ n) T)) Additive.toMul
     fun x ↦ by
       rw [MonoidHom.mem_ker, AddSubgroup.torsionBy, Submodule.mem_toAddSubgroup,
         Submodule.mem_torsionBy_iff, natCast_zsmul]
@@ -214,13 +215,27 @@ noncomputable def torsionByEquiv (G : Over (Spec (.of K))) [GrpObj G] [IsCommMon
       rw [comp_pow, Category.comp_id]
       rfl).trans (GrpObj.kerRepresentableBy (𝟙 G ^ n)).homEquiv.symm
 
+/-- The `K`-points of the `n`-torsion subgroup scheme `G[n]` of a commutative group scheme `G`
+are the `n`-torsion points of `G`: the `n`-torsion of the group `G(K)`, written additively, is
+in bijection with `𝟙_ (Over (Spec (.of K))) ⟶ G[n]`, a point `x` of `G[n]` corresponding to
+its image `x ≫ GrpObj.kerι (𝟙 G ^ n)` in `G(K)`. -/
+noncomputable def torsionByEquiv (G : Over (Spec (.of K))) [GrpObj G] [IsCommMonObj G] (n : ℕ) :
+    AddSubgroup.torsionBy (Additive (𝟙_ (Over (Spec (.of K))) ⟶ G)) (n : ℤ) ≃
+      (𝟙_ (Over (Spec (.of K))) ⟶ torsionSubgroupScheme G n) :=
+  torsionByEquivHom G n _
+
 /-- Blueprint `sk-def-av-isogeny`: Isogenies and their degree.
 
 An *isogeny* `f : A ⟶ B` of group schemes over `K` is a surjective homomorphism with finite
 kernel. The blueprint defines isogenies between abelian varieties; the definition makes sense
 for arbitrary group schemes, but it is only for abelian varieties that
 `AlgebraicGeometry.isogenyDegree` is the degree of `f` as a finite flat morphism (see
-`AlgebraicGeometry.IsIsogeny.finrank_eq`). -/
+`AlgebraicGeometry.IsIsogeny.finrank_eq`).
+
+This is also blueprint `def-sc-isogeny`. As blueprint `rem-ptr-sc-isogeny-2` records, that an
+isogeny of abelian varieties is finite and flat of degree the order of its kernel is not part of
+the definition: it is `AlgebraicGeometry.IsIsogeny.isFiniteLocallyFreeOfDegree`
+(blueprint `lem-sc-isogeny-degree`). -/
 class IsIsogeny {A B : Over (Spec (.of K))} [GrpObj A] [GrpObj B] (f : A ⟶ B) : Prop
     extends IsMonHom f, Surjective f.left where
   /-- The kernel of an isogeny is a finite group scheme. -/
