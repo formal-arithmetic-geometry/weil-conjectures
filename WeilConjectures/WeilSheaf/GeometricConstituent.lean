@@ -112,7 +112,7 @@ theorem isIrreducibleAdicLocalSystem_frobeniusPullback_obj
         simpa using this
       exact Or.inr (isIso_of_reflects_iso j eqv.inverse)
 
-variable [Fact (ringChar k₀ ≠ l)] [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
+variable [Fact (ringChar k₀ ≠ l)]
   [IrreducibleSpace (X ↘ Spec (CommRingCat.of k₀)).geometricFiber]
 
 /-- **The trivial geometric constituent of an irreducible Weil sheaf** (sheaf-theoretic Clifford
@@ -216,6 +216,42 @@ theorem IsIrreducibleLisse.exists_iso_biproduct_unit {F : WeilSheaf k₀ l X}
     have : Mono ((ObjectProperty.ι _ ⋙ Endofunctor.IsoAlgebra.forget _).map g) :=
       inferInstanceAs (Mono ι)
     exact (ObjectProperty.ι _ ⋙ Endofunctor.IsoAlgebra.forget _).mono_of_mono_map this
-  sorry
+  have hιiso : IsIso ι := by
+    rcases hF.2.2 G g inferInstance (hT N) with hz | hiso
+    · have hz' : IsZero T := isZero_iff_isZero_carrier.1 hz
+      have : Mono (Abelian.monoLift ι (seq 0).2 (hfac 0 (Nat.zero_le _))) := by
+        have : Mono (Abelian.monoLift ι (seq 0).2 (hfac 0 (Nat.zero_le _)) ≫ ι) := by
+          rw [Abelian.monoLift_comp]
+          exact hmono 0
+        exact mono_of_mono _ ι
+      exact (hS₀.2.1 (IsZero.of_mono
+        (Abelian.monoLift ι (seq 0).2 (hfac 0 (Nat.zero_le _))) hz')).elim
+    · exact inferInstanceAs
+        (IsIso ((ObjectProperty.ι _ ⋙ Endofunctor.IsoAlgebra.forget _).map g))
+  have : Epi (σ N) := by
+    rw [← image.fac (σ N)]
+    have : Epi ι := inferInstance
+    exact epi_comp _ _
+  -- the trivial constituent is some `S_k`
+  have hP : IsAdicLisseSheaf (pullback (σ N) i) :=
+    (((hW N).biprod hB).kernel_cokernel_of_irreducibleSpace hFl
+      (biprod.desc (σ N) (-i))).1.of_iso
+      (IsLimit.conePointUniqueUpToIso
+        (Abelian.PullbackToBiproductIsKernel.isLimitPullbackToBiproduct (σ N) i)
+        (kernelIsKernel _)).symm
+  have hU := isIrreducibleAdicLocalSystem_unit (l := l) (Y := Y)
+  obtain ⟨k, g', hg'⟩ := hU.exists_ne_zero_of_mono_of_epi N (fun i ↦ (seq i).1) (fun i ↦ hirr i)
+    (pullback (σ N) i) hP (pullback.fst _ _) (pullback.snd _ _ ≫ p)
+  have := (hirr k).isIso_of_ne_zero hU g' hg'
+  have hdown (n : ℕ) (e : (seq n).1 ≅ AdicSheaf.unit l Y) : Nonempty (S₀ ≅ AdicSheaf.unit l Y) := by
+    induction n with
+    | zero => exact ⟨e⟩
+    | succ n ih => exact ih (E.preimageIso (e ≪≫ frobeniusPullbackUnitIso.symm))
+  obtain ⟨e₀⟩ := hdown k (asIso g')
+  have hup (n : ℕ) : Nonempty ((seq n).1 ≅ AdicSheaf.unit l Y) := by
+    induction n with
+    | zero => exact ⟨e₀⟩
+    | succ n ih => exact ⟨E.mapIso ih.some ≪≫ frobeniusPullbackUnitIso⟩
+  exact exists_iso_biproduct_unit_of_epi N (fun i ↦ (seq i).1) (fun i ↦ hup i) _ hFl (σ N)
 
 end AlgebraicGeometry.WeilSheaf
