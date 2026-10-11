@@ -2,12 +2,11 @@
 
 867 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (18)
+## Stage 1: nodes to split (17)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
 | `lem-weil-derived-limit-roos-complex` | 15 | none |
-| `lem-weil-degreewise-epi-kernel-cocone-qis` | 16 | none |
 | `lem-weil-tower-split-envelope` | 16 | none |
 | `lem-pc-ringed-space-module-stalk-tensor` | 3013 | none |
 | `lem-pc-genus-agrees-sc` | 4007 | rests_on_sorry |
@@ -25,7 +24,7 @@
 | `lem-pur-essential-constant-pro-criterion-05py` | - | none |
 | `lem-pur-triangle-morphism-category-05r9` | - | none |
 
-## Stage 2: nodes to state (849)
+## Stage 2: nodes to state (850)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -335,6 +334,7 @@
 | `lem-sp-ce-compatible-homotopy-assembly` | 1 | state |
 | `lem-sp-horseshoe-prescribed-resolutions` | 1 | state |
 | `lem-weil-common-extension-fields` | 1 | state |
+| `lem-weil-degreewise-epi-kernel-cocone-qis` | 1 | state |
 | `lem-weil-l-adic-extension-integers-dvr` | 1 | state |
 | `lem-weil-pbc-adic-completion-noetherian` | 1 | state |
 | `lem-weil-pbc-adjunction-lifts-group-ring-objects` | 1 | state |
@@ -879,7 +879,7 @@
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 | `def-nagata-fixed-base-separated-stage` | 6 | state |
 
-Not open yet: 1774 nodes that wait for a statement dependency, 59 nodes that wait for stage 1.
+Not open yet: 1774 nodes that wait for a statement dependency, 58 nodes that wait for stage 1.
 
 ## Stage 3: modules to prove (0)
 
