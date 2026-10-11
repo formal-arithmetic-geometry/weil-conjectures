@@ -4447,3 +4447,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 11:26 L: merged deliver/J1/lem-weil-pbc-map-into-henselian-colimit (stage 2; reviewer FIX; first push; Sheaf.RingTheory.MapIntoHenselianColimit Algebra.map_into_henselian_colimit)
 - 11:27 L: merged deliver/H1/lem-weil-pbc-locally-constant-finite-values-finite-type (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.LocallyConstantFiniteValuesFiniteType AlgebraicGeometry.Scheme.locallyConstant_finiteValues_isFiniteType)
 - 11:27 L: merged deliver/C1/lem-weil-pbc-make-separably-generated (stage 2; reviewer FIX; first push; Sheaf.FieldTheory.MakeSeparablyGenerated FieldExtension.exists_finitePurelyInseparable_separablyGenerated)
+- 11:27 L: merged deliver/H1/lem-weil-pbc-module-finite-presentation-cokernel (stage 2; reviewer FIX; first push; Sheaf.AlgebraicGeometry.ModuleFinitePresentationCokernel AlgebraicGeometry.RingedSpace.isFinitePresentation_cokernel_of_isFiniteType)
