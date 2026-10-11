@@ -157,5 +157,23 @@
   "summary": "Split against Stacks 0BN2 (pione.tex, lemma-galois) and the lemma its proof uses, 0BN0 (lemma-epi-mono) = lem-galois-axioms, whose clauses (2),(3),(4),(6),(7) match 0BN0 (2)-(3),(4)-(5),(6),(7)+Galois paragraph,(8). The statement was kept, made self-contained (cites def-galois-category, def-galois-connected-object, and lem-galois-axioms(6) where 'Galois object' is defined; stmt_deps was empty). The single imported step became four: setup (n>=1 via lem-galois-axioms(3), X^n and the S_n action from finite limits, F(X^n)=F(X)^n and disjoint fibres of the components from exactness and axiom (2)); Claim 1 written out: Stacks' 'Z_t is the image of a connected component of X^{n-1} under Delta_ij' is made precise by lem-galois-axioms(7) applied to Delta_ij and (4),(2); Claim 2: the stabilizer G, the automorphisms tau_g (uniqueness from iota_t mono), transitivity; conclusion pr_1 o iota_t. The imported step's injectivity of G -> Aut(Z_t) and the counting were unnecessary (Galois = connected + transitive, lem-galois-axioms(6)) and were dropped. No new nodes: everything the proof uses is in lem-galois-axioms and the definition leaves of def-galois-category. lem-galois-transitive (0BN3) was NOT cited: it cites this item (Stacks 0BN3 uses 0BN2), so citing it would make a cycle. Mathlib: exists_hom_from_galois_of_connected (Decomposition.lean 316) is for Mathlib's SGA1 notion; recorded as mathlib_candidate. No slopmaster2 declaration.",
   "blueprint": "The blueprint node's proof (one paragraph) is realized: 'consider X^n with the action of S_n ... lies in F(Z_t) for some t' -> step 1; 'Claim 1' -> step 2; 'Claim 2' -> step 3; 'Step 3: conclusion' -> steps 3 (Galois via transitivity, lem-galois-axioms(6)) and 4 (the morphism Z_t -> X)."
  },
- "reviewed": "2026-10-10 L: 4 steps following 0BN2 (components of X^n, distinct coordinates via the diagonals, the stabilizer acting transitively so Z_t is Galois by 0BN0 (6)); statement made self-contained; Mathlib's exists_hom_from_galois_of_connected recorded as candidate (SGA1 notion); 0 new nodes"
+ "reviewed": "2026-10-10 L: 4 steps following 0BN2 (components of X^n, distinct coordinates via the diagonals, the stabilizer acting transitively so Z_t is Galois by 0BN0 (6)); statement made self-contained; Mathlib's exists_hom_from_galois_of_connected recorded as candidate (SGA1 notion); 0 new nodes",
+ "lean": {
+  "module": "Sheaf.CategoryTheory.Galois.StacksGaloisObjectExists",
+  "declaration": "CategoryTheory.exists_stacksGaloisObject_hom_of_isConnected",
+  "file": "lean/Sheaf/CategoryTheory/Galois/StacksGaloisObjectExists.lean",
+  "statement": "theorem exists_stacksGaloisObject_hom_of_isConnected {C : Type u} [Category.{v} C] (F : C ⥤ Type w) (hG : IsStacksGaloisCategory F) (X : C) [IsConnected X] : ∃ (Z : C) (_ : Z ⟶ X), IsStacksGaloisObject F Z",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-goe0742",
+  "group": "C1",
+  "result": "pass",
+  "note": "Stacks setting hG : IsStacksGaloisCategory F (as lem-galois-transitive), X connected = [PreGaloisCategory.IsConnected X], Z Galois = recorded IsStacksGaloisObject F Z of lem-galois-axioms (connected + #Aut=#F, transitivity via (6)), morphism Z ⟶ X, universes u v w as def; n=0 excluded by axioms not binder; Mathlib exists_hom_from_galois_of_connected is GaloisCategory setting so existing:false"
+ }
 }
