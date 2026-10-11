@@ -145,7 +145,7 @@ structure SixOperationsPackage : Prop where
     Nonempty (Rf_!(c)[ModuleCat.{u + 1} Λ] ≅ Rf_!(c')[ModuleCat.{u + 1} Λ])
   /-- (4) The composition law `R(f ≫ h)_! ≅ Rf_! ⋙ Rh_!`. -/
   lowerShriekComp : ∀ {Z : Scheme.{u}} (h : Y ⟶ Z) [HasCompactification h]
-    [HasCompactification (f ≫ h)],
+    [HasCompactification (f ≫ h)] [QuasiCompact (f ≫ h)],
     Nonempty (R(f ≫ h)_![ModuleCat.{u + 1} Λ] ≅
       R(f)_![ModuleCat.{u + 1} Λ] ⋙ R(h)_![ModuleCat.{u + 1} Λ])
   /-- (4) Proper coincidence `Rf_! ≅ Rf_*`. -/
