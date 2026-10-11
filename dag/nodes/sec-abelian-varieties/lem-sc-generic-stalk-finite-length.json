@@ -13,14 +13,14 @@
  },
  "kind": "statement",
  "title": "Finite module supported only at a maximal ideal has finite length",
- "statement": "Let $(R,\\mathfrak m)$ be a Noetherian local ring [def-weil-pbc-noetherian-ring] and let $M$ be a finite nonzero $R$-module [def-weil-pbc-module-finite-type-presentation] whose support [def-weil-pbc-module-localization] is contained in $\\{\\mathfrak m\\}$. Then $M$ has finite length over $R$; equivalently, $\\mathrm{length}_R(M)$ [def-weil-pbc-module-length] is a positive natural number.",
+ "statement": "Let $(R,\\mathfrak m)$ be a Noetherian local ring [def-weil-pbc-noetherian-ring] and let $M$ be a finite nonzero $R$-module [def-weil-finitely-generated-module] whose support [def-weil-pbc-module-localization] is contained in $\\{\\mathfrak m\\}$. Then $M$ has finite length over $R$; equivalently, $\\mathrm{length}_R(M)$ [def-weil-pbc-module-length] is a positive natural number.",
  "source": {
   "document": "literature/stacks-project/algebra.tex",
   "place": "Algebra, Lemma Tag 00L5 (algebra-lemma-support-point: a nonzero finite module over a Noetherian local ring with support {m} has finite length)"
  },
  "stmt_deps": [
   "def-weil-pbc-noetherian-ring",
-  "def-weil-pbc-module-finite-type-presentation",
+  "def-weil-finitely-generated-module",
   "def-weil-pbc-module-localization",
   "def-weil-pbc-module-length"
  ],
@@ -156,5 +156,47 @@
   "group": "K1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-gsl2708 (reviewer sub-agent of L); spot-checked: Mathlib grep: no single declaration (only Module.length_ne_top_iff, isFiniteLength_iff_isNoetherian_isArtinian, support_of_supportDim_eq_zero). Split is the Tag 00L5 argument (m^N M=0 via annihilator radical, powers filtration with residue-field quotients, length additivity); C4 citer lem-sc-numerical-polynomial-leading-term uses finite length/positivity, matches. FIX more, RETURN less: (1) C1 step 1: m in sqrt(Ann M) from V(Ann M) in {m} needs sqrt = intersection of primes; cited lem-weil-pbc-zero-locus-eq-iff-radical-eq. (2) C1 step 2: m^iM/m^{i+1}M finite needs submodules of finite modules over Noetherian rings finite; cited lem-weil-pbc-noetherian-submodule-finite (both missed by the Second reading). (3) TeX: unclosed $M. in step 2. proof_deps and tool_uses updated (other-unit generic tools).; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.LengthOfSupportAtMaximalIdeal",
+  "declaration": "Module.length_eq_nat_of_support_subset_maximalIdeal",
+  "file": "lean/Sheaf/RingTheory/LengthOfSupportAtMaximalIdeal.lean",
+  "statement": "theorem length_eq_nat_of_support_subset_maximalIdeal (R : Type u) [CommRing R] [IsNoetherianRing R] [IsLocalRing R] (M : Type v) [AddCommGroup M] [Module R M] [Module.Finite R M] [Nontrivial M] (h_support : ∀ p ∈ Module.support R M, p.asIdeal = IsLocalRing.maximalIdeal R) : ∃ n : ℕ, 0 < n ∧ Module.length R M = (n : ℕ∞)",
+  "branch": "sheaf-dag",
+  "by": "G1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-gsf1120",
+  "group": "G1",
+  "result": "pass",
+  "note": "CommRing+IsNoetherianRing+IsLocalRing R; Module.Finite (corrected from sheaf finite-type node, legit: that predicate takes SheafOfModules) + Nontrivial M; support subset {m} as forall p in Module.support, p.asIdeal = maximalIdeal; conclusion exists n>0, Module.length = n; no duplicate of 00L5 in lean/Sheaf or Mathlib; citer lem-sc-numerical-polynomial-leading-term holds (stalk of coherent sheaf is finite module)",
+  "statement_corrected": true
+ },
+ "statement_change": {
+  "date": "2026-10-11",
+  "by": "G1 stage 2",
+  "old_statement": "Let $(R,\\mathfrak m)$ be a Noetherian local ring [def-weil-pbc-noetherian-ring] and let $M$ be a finite nonzero $R$-module [def-weil-pbc-module-finite-type-presentation] whose support [def-weil-pbc-module-localization] is contained in $\\{\\mathfrak m\\}$. Then $M$ has finite length over $R$; equivalently, $\\mathrm{length}_R(M)$ [def-weil-pbc-module-length] is a positive natural number.",
+  "what": "The finite R-module hypothesis cited a definition of finite-type sheaves on ringed spaces, whose recorded SheafOfModules predicates cannot be applied to an R-module M. Replace that citation by the existing finite R-module node def-weil-finitely-generated-module; no mathematical hypothesis or conclusion changes.",
+  "source": {
+   "document": "literature/stacks-project/algebra.tex",
+   "place": "Algebra, Lemma Tag 00L5 (algebra-lemma-support-point: a nonzero finite module over a Noetherian local ring with support {m} has finite length)"
+  },
+  "citers": [
+   {
+    "id": "lem-sc-numerical-polynomial-leading-term",
+    "holds": true,
+    "note": "The finite nonzero generic stalk still has positive finite length; only the definition citation for finite modules changes."
+   }
+  ],
+  "old_stmt_deps": [
+   "def-weil-pbc-noetherian-ring",
+   "def-weil-pbc-module-finite-type-presentation",
+   "def-weil-pbc-module-localization",
+   "def-weil-pbc-module-length"
+  ]
  }
 }
