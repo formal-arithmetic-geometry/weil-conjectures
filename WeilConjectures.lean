@@ -304,6 +304,9 @@ public import WeilConjectures.AlgebraicGeometry.ProEtale.FromPi1
 public import WeilConjectures.AlgebraicGeometry.ProEtale.LocalProperties
 public import WeilConjectures.AlgebraicGeometry.ProEtale.Proetale.Basic
 public import WeilConjectures.AlgebraicGeometry.ProEtale.Proetale.Sheafification
+public import WeilConjectures.AlgebraicGeometry.ProEtale.Replete
+public import WeilConjectures.AlgebraicGeometry.ProEtale.SequentialLimit
+public import WeilConjectures.AlgebraicGeometry.ProEtale.SigmaCover
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.AffineImmersion
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.ChartSections
@@ -997,6 +1000,7 @@ public import WeilConjectures.Mathlib.Analysis.Complex.Polynomial.Basic
 public import WeilConjectures.Mathlib.Analysis.Normed.Field.Basic
 public import WeilConjectures.Mathlib.CategoryTheory.Abelian.CommSq
 public import WeilConjectures.Mathlib.CategoryTheory.Abelian.Exact
+public import WeilConjectures.Mathlib.CategoryTheory.Abelian.GrothendieckAxioms.Basic
 public import WeilConjectures.Mathlib.CategoryTheory.Abelian.GrothendieckAxioms.Sheaf
 public import WeilConjectures.Mathlib.CategoryTheory.Abelian.GrothendieckCategory.Basic
 public import WeilConjectures.Mathlib.CategoryTheory.Abelian.GrothendieckCategory.ModuleEmbedding.GabrielPopescu
@@ -1409,6 +1413,7 @@ public import WeilConjectures.RingTheory.RegularLocalRing.UniqueFactorization
 public import WeilConjectures.RingTheory.RelativeComponentConstructible
 public import WeilConjectures.RingTheory.RelativeComponentFlatApprox
 public import WeilConjectures.RingTheory.RelativeComponentGeneralization
+public import WeilConjectures.RingTheory.Spectrum.Prime.Colimit
 public import WeilConjectures.RingTheory.Spectrum.Prime.LocallyConstant
 public import WeilConjectures.RingTheory.TensorLocalizationAway
 public import WeilConjectures.RingTheory.TensorProduct.Hilbert90
