@@ -201,5 +201,23 @@
   "worker": "stage1",
   "summary": "Read Descent 02VO (descent.tex 6225) with its proof, the descent lemmas it cites 02LA (6102), 02L2 (5833), 02KY (5767; the source's 'locally finite presentation' lemma, not 02L0), Definition 02KO (5310), Topologies 022C (topologies.tex 3044) with its proof, the definition node def-pc-finite-locally-free (finite + flat + lfp, degree by fibre dimension, so Morphisms 02KB is the definition here), and the citer lem-weil-pbc-flat-fp-lqf-bounded-stratification step 6, which uses exactly the statement. Statement kept. Proof in 5 steps: the etale family is an fpqc covering, following the proof of 022C (etale => flat by definition, open map, affine quasi-compact); finite, flat, lfp descend by three new unsplit nodes lem-weil-pbc-fpqc-descend-finite (02LA), -flat (02L2), -locally-finite-presentation (02KY), stated for fpqc coverings as in Stacks (the descent direction of 'fpqc local on the base'); the degree via the fibre definition: Y_t finite over kappa(t) as a base change of the finite h (lem-weil-pbc-finite-morphism-permanence), and its degree equals the degree d of the fibre of h_i at a preimage t_i (lem-weil-pbc-fibre-degree-base-change). Mathlib: no descent of IsFinite or Flat, lfp only along one surjective flat quasi-compact morphism; candidates recorded on the new nodes. The source repository slopmaster2 has sorry-free Scheme.of_isPullback_of_ofArrows_mem_fpqcTopology (WeilConjectures/Mathlib/AlgebraicGeometry/Sites/Fpqc.lean:115-126) with IsFinite/Flat descent instances (WeilConjectures/Mathlib/AlgebraicGeometry/Morphisms/FlatDescent.lean:35-39, 101-108) that state the three new nodes for covering sieves; left to the lead to attach."
  },
- "reviewed": "Reviewed by L 2026-10-10: faithful to Descent 02VO via Topologies 022C (etale family is fpqc, step 1 written out) and the three descent lemmas 02LA, 02L2, 02KY (new unsplit nodes, descent direction only); the degree is checked with lem-weil-pbc-fibre-degree-base-change against def-pc-finite-locally-free. No Mathlib match; candidates recorded on the new nodes. Lean in the source repository (of_isPullback_of_ofArrows_mem_fpqcTopology, sieve form) not attached."
+ "reviewed": "Reviewed by L 2026-10-10: faithful to Descent 02VO via Topologies 022C (etale family is fpqc, step 1 written out) and the three descent lemmas 02LA, 02L2, 02KY (new unsplit nodes, descent direction only); the degree is checked with lem-weil-pbc-fibre-degree-base-change against def-pc-finite-locally-free. No Mathlib match; candidates recorded on the new nodes. Lean in the source repository (of_isPullback_of_ofArrows_mem_fpqcTopology, sieve form) not attached.",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.IsFiniteLocallyFreeOfDegreeOfEtaleCover",
+  "declaration": "AlgebraicGeometry.Scheme.Hom.isFiniteLocallyFreeOfDegree_of_etale_cover",
+  "file": "lean/Sheaf/AlgebraicGeometry/IsFiniteLocallyFreeOfDegreeOfEtaleCover.lean",
+  "statement": "theorem isFiniteLocallyFreeOfDegree_of_etale_cover {Y T : Scheme.{u}} (h : Y ⟶ T) (d : ℕ) {I : Type w} (T' : I → Scheme.{u}) (φ : ∀ i : I, T' i ⟶ T) (hφ : ∀ i : I, Etale (φ i)) (hcover : ∀ t : T, ∃ (i : I) (t' : T' i), φ i t' = t) (hdegree : ∀ i : I, (pullback.snd h (φ i)).IsFiniteLocallyFreeOfDegree d) : h.IsFiniteLocallyFreeOfDegree d",
+  "branch": "sheaf-dag",
+  "by": "J1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-fld1020",
+  "group": "J1",
+  "result": "pass",
+  "note": "h:Y⟶T, d:ℕ (0 allowed), arbitrary family I:Type w with T' i ⟶ T, each Etale (φ i), pointwise joint surjectivity = union of images, hyp on pullback.snd h (φ i) IsFiniteLocallyFreeOfDegree d (recorded upstream decl of def-pc-finite-locally-free; fiberDegree = finrank κ(s) Γ(fibre) = finrankΓ of fiberToSpecResidueField), conclusion h.IsFiniteLocallyFreeOfDegree d; #check resolved Etale/pullback.snd/class to AlgebraicGeometry/CategoryTheory.Limits/upstream FiberDegree"
+ }
 }
