@@ -1,17 +1,16 @@
 # Work queue
 
-121 items; claim with `tools/claim.py next <group> [--stage N]`.
+120 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (121)
+## Stage 2: nodes to state (120)
 
 | node | distance to Mathlib | kind | blockers |
 |---|---|---|---|
 | `def-weil-pbc-sites-and-cohomology` | 1 | state | 136 |
 | `def-nagata-qc-open-equality-stage` | 1 | state | 13 |
-| `def-sc-field-extension` | 1 | state | 6 |
 | `def-weil-pbc-module-cohomology-fmap` | 1 | state | 6 |
 | `def-pc-global-derived-rhom` | 1 | state | 4 |
 | `def-weil-pbc-simplicial-hom-object` | 1 | state | 4 |
@@ -29,6 +28,7 @@
 | `lem-pc-affine-tor-amplitude-criterion` | 1 | state | 2 |
 | `lem-pc-derived-mayer-vietoris-triangle` | 1 | state | 2 |
 | `lem-weil-pbc-formal-systems-annihilated-by-power` | 1 | state | 2 |
+| `lem-sc-local-dvr-base-change` | 2 | state | 2 |
 | `lem-pc-affine-derived-pullback-tensor-tilde` | 1 | state | 1 |
 | `lem-pc-cech-resolution` | 1 | state | 1 |
 | `lem-pc-derived-sections-pushforward-comparison` | 1 | state | 1 |
@@ -79,6 +79,7 @@
 | `lem-sc-koszul-regular-immersion-derived-hom` | 1 | state | 0 |
 | `lem-sc-mayer-vietoris-open-cover` | 1 | state | 0 |
 | `lem-sc-open-restriction-support-triangle` | 1 | state | 0 |
+| `lem-sc-pic-affine-base-change-compatibility` | 1 | state | 0 |
 | `lem-sc-proper-flat-right-adjoint-basechange` | 1 | state | 0 |
 | `lem-sc-proper-flat-right-adjoint-direct-sums` | 1 | state | 0 |
 | `lem-sc-proper-flat-right-adjoint-open-support` | 1 | state | 0 |
@@ -91,11 +92,9 @@
 | `lem-sc-smooth-proper-diagonal-pushforward-structure` | 1 | state | 0 |
 | `lem-sc-smooth-proper-diagonal-tensor-formula` | 1 | state | 0 |
 | `lem-sc-smooth-proper-relative-dualizing-general` | 1 | state | 0 |
-| `lem-weil-pbc-coherent-formal-modules-local-exactness` | 1 | state | 0 |
 | `lem-weil-pbc-coherent-formal-short-exact-levels` | 1 | state | 0 |
 | `lem-weil-pbc-cohomology-powers-ideal-application` | 1 | state | 0 |
 | `lem-weil-pbc-cohomology-powers-ideal-rees-finite` | 1 | state | 0 |
-| `lem-weil-pbc-etale-cohomology-limit-of-schemes` | 1 | state | 0 |
 | `lem-weil-pbc-etale-mayer-vietoris-pullback` | 1 | state | 0 |
 | `lem-weil-pbc-formal-functions-complete-base` | 1 | state | 0 |
 | `lem-weil-pbc-formal-systems-graded-vanishing` | 1 | state | 0 |
@@ -118,8 +117,8 @@
 | `lem-weil-pbc-unrestricted-strict-henselization-stalk` | 1 | state | 0 |
 | `lem-weil-pbc-vanishing-projective` | 1 | state | 0 |
 | `pqf-lem-fff-vanishing` | 1 | state | 0 |
-| `pqf-lem-serre-criterion` | 1 | state | 0 |
 | `prop-weil-pbc-strict-henselization-stalk-formula` | 1 | state | 0 |
+| `thm-sc-constant-invariance` | 1 | state | 0 |
 | `thm-weil-pbc-universal-homeomorphism-invariance` | 1 | state | 0 |
 | `lem-pc-proper-support-perfect-direct-image` | 2 | state | 0 |
 | `lem-pc-rf-base-change-flat-module` | 2 | state | 0 |
@@ -131,7 +130,7 @@
 | `pqf-lem-affine-vanishing` | 2 | state | 0 |
 | `pqf-lem-leray-lowdegree` | 2 | state | 0 |
 
-Not open yet: 40 nodes that wait for stage 1, 206 nodes that wait for a statement dependency.
+Not open yet: 40 nodes that wait for stage 1, 203 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
