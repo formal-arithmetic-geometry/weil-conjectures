@@ -134,4 +134,121 @@ lemma refinementComparison_comp (r : c.Refinement d) (s : d.Refinement e)
 
 end Refinement
 
+
+section ProperExchange
+
+variable [F.HasProperExchange] {c d e : Compactification f}
+
+instance isIso_refinementComparison (r : c.Refinement d)
+    (hr : IsPullback c.i (𝟙 X) r.hom d.i) : IsIso (F.refinementComparison r hr) := by
+  have := HasBaseChange.isIso_baseChange (F := F) hr.flip
+  have := HasProperExchange.isIso_exchange (F := F) hr.flip
+  unfold refinementComparison
+  infer_instance
+
+/-- Equal refinements give equal comparisons. -/
+lemma asIso_refinementComparison_congr {r r' : c.Refinement d} (h : r = r')
+    (hr : IsPullback c.i (𝟙 X) r.hom d.i) (hr' : IsPullback c.i (𝟙 X) r'.hom d.i) :
+    asIso (F.refinementComparison r hr) = asIso (F.refinementComparison r' hr') := by
+  subst h
+  rfl
+
+lemma asIso_refinementComparison_comp (r : c.Refinement d) (s : d.Refinement e)
+    (hr : IsPullback c.i (𝟙 X) r.hom d.i) (hs : IsPullback d.i (𝟙 X) s.hom e.i) :
+    asIso (F.refinementComparison (r.comp s)
+        (Compactification.Refinement.isPullback_comp r s hr hs)) =
+      asIso (F.refinementComparison s hs) ≪≫ asIso (F.refinementComparison r hr) := by
+  ext : 1
+  exact F.refinementComparison_comp r s hr hs
+
+/-- Comparing through a common refinement `e` gives the same isomorphism as comparing through
+any further refinement of `e`. -/
+lemma refinementComparison_trans_eq_of_refinement {c d e e' : Compactification f}
+    (r : e.Refinement c) (s : e.Refinement d)
+    (hr : IsPullback e.i (𝟙 X) r.hom c.i) (hs : IsPullback e.i (𝟙 X) s.hom d.i)
+    (t : e'.Refinement e) (ht : IsPullback e'.i (𝟙 X) t.hom e.i) :
+    asIso (F.refinementComparison r hr) ≪≫ (asIso (F.refinementComparison s hs)).symm =
+      asIso (F.refinementComparison (t.comp r)
+          (Compactification.Refinement.isPullback_comp t r ht hr)) ≪≫
+        (asIso (F.refinementComparison (t.comp s)
+          (Compactification.Refinement.isPullback_comp t s ht hs))).symm := by
+  rw [F.asIso_refinementComparison_comp t r ht hr, F.asIso_refinementComparison_comp t s ht hs]
+  ext : 1
+  simp
+
+variable [QuasiCompact f]
+
+/-- **The comparison of two compactifications**: the isomorphism `F.shriek c ≅ F.shriek d`
+obtained through the common refinement `Compactification.inf c d`. -/
+noncomputable def shriekIso (c d : Compactification f) : F.shriek c ≅ F.shriek d :=
+  asIso (F.refinementComparison (Compactification.infFst c d)
+      (Compactification.isPullback_infFst c d)) ≪≫
+    (asIso (F.refinementComparison (Compactification.infSnd c d)
+      (Compactification.isPullback_infSnd c d))).symm
+
+/-- **Independence of the common refinement**: comparing `c` and `d` through any common
+refinement with cartesian squares over `X` gives `F.shriekIso c d`. -/
+theorem shriekIso_eq (r : e.Refinement c) (s : e.Refinement d)
+    (hr : IsPullback e.i (𝟙 X) r.hom c.i) (hs : IsPullback e.i (𝟙 X) s.hom d.i) :
+    F.shriekIso c d =
+      asIso (F.refinementComparison r hr) ≪≫ (asIso (F.refinementComparison s hs)).symm := by
+  set e' := Compactification.inf c d
+  have hdense := Compactification.isSchemeTheoreticallyDominant_inf_i e e'
+  rw [shriekIso, F.refinementComparison_trans_eq_of_refinement r s hr hs
+      (Compactification.infFst e e') (Compactification.isPullback_infFst e e'),
+    F.refinementComparison_trans_eq_of_refinement _ _
+      (Compactification.isPullback_infFst c d) (Compactification.isPullback_infSnd c d)
+      (Compactification.infSnd e e') (Compactification.isPullback_infSnd e e'),
+    F.asIso_refinementComparison_congr
+      (Compactification.Refinement.ext_of_isSchemeTheoreticallyDominant hdense
+        ((Compactification.infSnd e e').comp (Compactification.infFst c d))
+        ((Compactification.infFst e e').comp r)),
+    F.asIso_refinementComparison_congr
+      (Compactification.Refinement.ext_of_isSchemeTheoreticallyDominant hdense
+        ((Compactification.infSnd e e').comp (Compactification.infSnd c d))
+        ((Compactification.infFst e e').comp s))]
+
+/-- For a refinement `r : c.Refinement d` with cartesian square, `F.shriekIso c d` is the inverse
+of the comparison along `r`. -/
+theorem shriekIso_eq_symm (r : c.Refinement d) (hr : IsPullback c.i (𝟙 X) r.hom d.i) :
+    F.shriekIso c d = (asIso (F.refinementComparison r hr)).symm := by
+  have hid : IsPullback c.i (𝟙 X) (Compactification.Refinement.id c).hom c.i := by
+    rw [Compactification.Refinement.id_hom]
+    exact IsPullback.of_vert_isIso ⟨by simp⟩
+  rw [F.shriekIso_eq (Compactification.Refinement.id c) r hid hr]
+  ext : 1
+  simp [F.refinementComparison_eq_id _ hid rfl]
+
+@[simp]
+theorem shriekIso_refl (c : Compactification f) : F.shriekIso c c = Iso.refl _ := by
+  rw [F.shriekIso_eq (Compactification.infFst c c) (Compactification.infFst c c)
+    (Compactification.isPullback_infFst c c) (Compactification.isPullback_infFst c c)]
+  ext : 1
+  simp
+
+/-- **The cocycle condition.** -/
+theorem shriekIso_trans (c₁ c₂ c₃ : Compactification f) :
+    F.shriekIso c₁ c₂ ≪≫ F.shriekIso c₂ c₃ = F.shriekIso c₁ c₃ := by
+  set e₁₂ := Compactification.inf c₁ c₂
+  have h₁ := Compactification.Refinement.isPullback_comp (Compactification.infFst e₁₂ c₃)
+    (Compactification.infFst c₁ c₂) (Compactification.isPullback_infFst e₁₂ c₃)
+    (Compactification.isPullback_infFst c₁ c₂)
+  have h₂ := Compactification.Refinement.isPullback_comp (Compactification.infFst e₁₂ c₃)
+    (Compactification.infSnd c₁ c₂) (Compactification.isPullback_infFst e₁₂ c₃)
+    (Compactification.isPullback_infSnd c₁ c₂)
+  have h₃ := Compactification.isPullback_infSnd e₁₂ c₃
+  rw [F.shriekIso_eq _ _ h₁ h₂, F.shriekIso_eq _ _ h₂ h₃, F.shriekIso_eq _ _ h₁ h₃]
+  ext : 1
+  simp
+
+theorem shriekIso_symm (c d : Compactification f) :
+    (F.shriekIso c d).symm = F.shriekIso d c := by
+  have h := F.shriekIso_trans c d c
+  rw [shriekIso_refl] at h
+  ext : 1
+  rw [Iso.symm_hom, ← cancel_epi (F.shriekIso c d).hom, Iso.hom_inv_id]
+  exact (congrArg Iso.hom h).symm
+
+end ProperExchange
+
 end AlgebraicGeometry.CompactSupportFormalism
