@@ -158,5 +158,23 @@
   "by": "L",
   "result": "pass",
   "note": "Reviewed by the lead (opus-relaunch6). Five steps along Stacks 07QG (with the misprint corrected as recorded in source.place): finite presentation of k' over k, coefficients in one k_i, k (x)_{k_i} k_i' = k' (three Mathlib leaves), k_i'/k_i finite purely inseparable by the new unsplit descent node (agent-formulated: if L (x)_K B is a field finite purely inseparable over L then B is a field finite purely inseparable over K), conclusion by cancel base change. The generators-with-pure-relations route was avoided (it can give a ring strictly bigger than k'). lem-weil-pbc-polynomial-scalar-extension is a Mathlib leaf in sk-thm-reduction (tool). Tags verified by the worker (07QG, 09HI, 09HH)."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.GeometricRegularitySubfields",
+  "declaration": "geometricallyRegular_of_directed_subfields",
+  "file": "lean/Sheaf/RingTheory/GeometricRegularitySubfields.lean",
+  "statement": "theorem geometricallyRegular_of_directed_subfields (k : Type u) [Field k] (I : Type v) [Nonempty I] (K : I → Subfield k) (hdir : ∀ i j : I, ∃ l : I, K i ≤ K l ∧ K j ≤ K l) (hUnion : ∀ x : k, ∃ i : I, x ∈ K i) (A : Type w) [CommRing A] [Algebra k A] (hA : IsNoetherianRing A) (hgeom : ∀ i : I, Algebra.IsGeometricallyRegular (K i) A) : Algebra.IsGeometricallyRegular k A",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-grs1107",
+  "group": "F1",
+  "result": "pass",
+  "note": "k field Type u; I nonempty Type v; K : I → Subfield k; hdir pairwise common upper member; hUnion coverage; A CommRing Algebra k A Type w; hA IsNoetherianRing; hgeom IsGeometricallyRegular (K i) A with Algebra (K i) A = Algebra.ofSubsemiring (algebraMap = (algebraMap k A).comp subtype, rfl); conclusion IsGeometricallyRegular k A; test fields Type (max u w) not vacuous"
  }
 }
