@@ -96,6 +96,60 @@ lemma refinementSquareMap_tensor (M N : DerivedCategory (Sheaf d.Z.smallEtaleTop
   simp only [reassoc_of% w]
   simp only [MonoidalCategory.tensorHom_def, Category.assoc]
 
+
+/-- The base change isomorphism `D(c.i)_! ≅ D(d.i)_! ⋙ Lq^*` of a refinement, through the derived
+pullback. -/
+noncomputable abbrev refinementLowerShriekBaseChangeLeftDerivedIso
+    (hcart : IsPullback c.i (𝟙 X) r.hom d.i) :
+    D((c.i)_!open[A]) ≅ D((d.i)_!open[A]) ⋙ L((r.hom)^*[A]) :=
+  refinementLowerShriekBaseChangeDerivedIso A r hcart ≪≫
+    Functor.isoWhiskerLeft _ (leftDerivedUpperStarIsoMapDerivedCategory A r.hom).symm
+
+omit [Etale.UpperStarPreservesFlat A] in
+lemma unit_map_refinementLowerShriekBaseChangeLeftDerivedIso
+    (hcart : IsPullback c.i (𝟙 X) r.hom d.i)
+    (K : DerivedCategory (Sheaf X.smallEtaleTopology A)) :
+    (derivedOpenImmersionLowerShriekUpperStarAdjunction A c.i).unit.app K ≫
+        D((c.i)^*[A]).map ((refinementLowerShriekBaseChangeLeftDerivedIso A r hcart).hom.app K) =
+      (derivedOpenImmersionLowerShriekUpperStarAdjunction A d.i).unit.app K ≫
+        (refinementSquareMap A r).app (D((d.i)_!open[A]).obj K) := by
+  have h := unit_map_refinementLowerShriekBaseChangeDerivedIso A r hcart K
+  simp only [Iso.trans_hom, NatTrans.comp_app, Functor.isoWhiskerLeft_hom,
+    Functor.whiskerLeft_app, Iso.symm_hom, Functor.map_comp, refinementSquareMap,
+    Functor.whiskerRight_app]
+  rw [reassoc_of% h]
+  simp only [Iso.trans_hom, NatTrans.comp_app, Category.assoc]
+
+/-- **The projection formula for the extension by zero and refinements**: the derived pullback
+along `q = r.hom` of the projection map of `D(d.i)_!` is the projection map of `D(c.i)_!`, through
+the base change isomorphism `D(c.i)_! ≅ D(d.i)_! ⋙ Lq^*`. -/
+lemma refinementLowerShriekProjectionMap_baseChange (hcart : IsPullback c.i (𝟙 X) r.hom d.i)
+    (K : DerivedCategory (Sheaf X.smallEtaleTopology A))
+    (M : DerivedCategory (Sheaf d.Z.smallEtaleTopology A)) :
+    (refinementLowerShriekBaseChangeLeftDerivedIso A r hcart).hom.app
+          (((-⊗ᴸ-(X)[A]).obj K).obj (L((d.i)^*[A]).obj M)) ≫
+        L((r.hom)^*[A]).map (((derivedOpenImmersionLowerShriekProjectionMap A d.i).app K).app M) ≫
+        ((leftDerivedUpperStarTensorComparison A r.hom).app (D((d.i)_!open[A]).obj K)).app M =
+      D((c.i)_!open[A]).map (((-⊗ᴸ-(X)[A]).obj K).map
+          ((leftDerivedUpperStarComp A c.i r.hom d.i r.i_hom.symm).hom.app M)) ≫
+        ((derivedOpenImmersionLowerShriekProjectionMap A c.i).app K).app
+          (L((r.hom)^*[A]).obj M) ≫
+        ((-⊗ᴸ-(c.Z)[A]).map ((refinementLowerShriekBaseChangeLeftDerivedIso A r hcart).hom.app
+          K)).app (L((r.hom)^*[A]).obj M) := by
+  have h := Adjunction.projectionMap_mate (U := 𝟭 _) (V := L((r.hom)^*[A]))
+    (derivedOpenImmersionLowerShriekUpperStarAdjunction A d.i)
+    (derivedOpenImmersionLowerShriekUpperStarAdjunction A c.i) L((d.i)^*[A]) L((c.i)^*[A])
+    (mapDerivedCategoryUpperStarDerivedTensorIso A d.i).hom
+    (mapDerivedCategoryUpperStarDerivedTensorIso A c.i).hom (𝟙 _)
+    (leftDerivedUpperStarTensorComparison A r.hom) (refinementSquareMap A r)
+    (leftDerivedUpperStarComp A c.i r.hom d.i r.i_hom.symm).hom
+    (refinementLowerShriekBaseChangeLeftDerivedIso A r hcart).hom
+    (unit_map_refinementLowerShriekBaseChangeLeftDerivedIso A r hcart)
+    (fun M N ↦ by
+      rw [NatTrans.id_app, NatTrans.id_app, Category.id_comp]
+      exact refinementSquareMap_tensor A r M N) K M
+  rw [NatTrans.id_app, NatTrans.id_app, CategoryTheory.Functor.map_id, Category.id_comp] at h
+  exact h
 end Etale
 
 end AlgebraicGeometry
