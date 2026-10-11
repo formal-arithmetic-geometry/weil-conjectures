@@ -460,4 +460,102 @@ lemma upperStarCongr_hom_app_comp_upperStarComp_hom_app' (g : P ⟶ Q) {x y : Q 
 
 end Congr
 
+section UnitLaws
+
+variable {X Y : Scheme.{u}}
+
+set_option backward.isDefEq.respectTransparency.types false in
+lemma _root_.CategoryTheory.MorphismProperty.Over.pullbackCongr_hom_app_eq {X Y : Scheme.{u}}
+    {f g : X ⟶ Y} (h : f = g) (h' : g = f) (V : Y.ProEt) :
+    (MorphismProperty.Over.pullbackCongr (P := @WeaklyEtale) (Q := ⊤) h).hom.app V =
+      (MorphismProperty.Over.pullbackCongr (P := @WeaklyEtale) (Q := ⊤) h').inv.app V := by
+  subst h
+  simp [MorphismProperty.Over.pullbackCongr_refl]
+
+set_option backward.isDefEq.respectTransparency.types false in
+omit [Abelian A] [IsGrothendieckAbelian.{u + 1} A] in
+lemma lowerStarComp_id_right_hom_app (t : X ⟶ Y) (M : Sheaf (Scheme.ProEt.topology X) A) :
+    (lowerStarComp A t (𝟙 Y)).hom.app M = (lowerStarId A Y).hom.app ((t)_*[A].obj M) ≫
+      (lowerStarCongr A (Category.comp_id t).symm).hom.app M := by
+  ext V
+  simp only [NatTrans.comp_app, ObjectProperty.FullSubcategory.comp_hom,
+    lowerStarComp_hom_app_hom_app, lowerStarCongr_hom_app_hom_app,
+    lowerStar_obj_obj_map', lowerStarId_hom_app_hom_app]
+  rw [MorphismProperty.Over.pullbackComp_id_right t (t ≫ 𝟙 Y) rfl]
+  simp only [Iso.trans_hom, NatTrans.comp_app, Iso.symm_hom, Functor.leftUnitor_inv_app,
+    Functor.isoWhiskerRight_hom, Functor.whiskerRight_app, Category.id_comp,
+    MorphismProperty.Over.pullbackCongr_hom_app_eq _ (Category.comp_id t).symm]
+  exact (congrArg M.obj.map op_comp).trans (M.obj.map_comp _ _)
+
+
+omit [Abelian A] [IsGrothendieckAbelian.{u + 1} A] in
+/-- The right unit law for the composition isomorphisms of the pushforwards. -/
+lemma lowerStarComp_id_right (t : X ⟶ Y) :
+    lowerStarComp A t (𝟙 Y) = Functor.isoWhiskerLeft (t)_*[A] (lowerStarId A Y) ≪≫
+      (t)_*[A].rightUnitor ≪≫ (lowerStarCongr A (Category.comp_id t)).symm := by
+  refine Iso.ext (NatTrans.ext (funext fun M ↦ ?_))
+  simp only [lowerStarComp_id_right_hom_app, Functor.comp_obj, lowerStarCongr_rfl, Iso.refl_symm,
+    Iso.trans_hom, Functor.isoWhiskerLeft_hom, Iso.refl_hom, NatTrans.comp_app, Functor.id_obj,
+    Functor.whiskerLeft_app, Functor.rightUnitor_hom_app, NatTrans.id_app, Category.id_comp]
+  rfl
+
+/-- The right unit law for the composition isomorphisms of the pullbacks, obtained from
+`AlgebraicGeometry.ProEtale.lowerStarComp_id_right` by conjugation. -/
+lemma upperStarComp_id_right (t : X ⟶ Y) :
+    upperStarComp A t (𝟙 Y) = upperStarCongr A (Category.comp_id t) ≪≫
+      (t)^*[A].leftUnitor.symm ≪≫ Functor.isoWhiskerRight (upperStarId A Y).symm (t)^*[A] := by
+  refine (conjugateIsoEquiv ((upperStarLowerStarAdjunction A (𝟙 Y)).comp
+    (upperStarLowerStarAdjunction A t)) (upperStarLowerStarAdjunction A (t ≫ 𝟙 Y))).injective ?_
+  rw [conjugateIsoEquiv_trans _ (upperStarLowerStarAdjunction A t) _,
+    conjugateIsoEquiv_trans _ (Adjunction.id.comp (upperStarLowerStarAdjunction A t)) _]
+  rw [conjugateIsoEquiv_upperStarComp, conjugateIsoEquiv_upperStarCongr,
+    conjugateIsoEquiv_isoWhiskerRight, conjugateIsoEquiv_iso_symm, conjugateIsoEquiv_upperStarId,
+    conjugateIsoEquiv_iso_symm, conjugateIsoEquiv_leftUnitor, lowerStarComp_id_right]
+  refine Iso.ext (NatTrans.ext (funext fun M ↦ ?_))
+  simp
+
+
+set_option backward.isDefEq.respectTransparency.types false in
+omit [Abelian A] [IsGrothendieckAbelian.{u + 1} A] in
+lemma lowerStarComp_id_left_hom_app (t : X ⟶ Y) (M : Sheaf (Scheme.ProEt.topology X) A) :
+    (lowerStarComp A (𝟙 X) t).hom.app M = (t)_*[A].map ((lowerStarId A X).hom.app M) ≫
+      (lowerStarCongr A (Category.id_comp t).symm).hom.app M := by
+  ext V
+  simp only [NatTrans.comp_app, ObjectProperty.FullSubcategory.comp_hom,
+    lowerStarComp_hom_app_hom_app, lowerStarCongr_hom_app_hom_app,
+    lowerStar_map_hom_app', lowerStarId_hom_app_hom_app]
+  rw [MorphismProperty.Over.pullbackComp_id_left t (𝟙 X ≫ t) rfl]
+  simp only [Iso.trans_hom, NatTrans.comp_app, Iso.symm_hom, Functor.rightUnitor_inv_app,
+    Functor.isoWhiskerLeft_hom, Functor.whiskerLeft_app, Category.id_comp,
+    MorphismProperty.Over.pullbackCongr_hom_app_eq _ (Category.id_comp t).symm]
+  exact (congrArg M.obj.map op_comp).trans (M.obj.map_comp _ _)
+
+omit [Abelian A] [IsGrothendieckAbelian.{u + 1} A] in
+/-- The left unit law for the composition isomorphisms of the pushforwards. -/
+lemma lowerStarComp_id_left (t : X ⟶ Y) :
+    lowerStarComp A (𝟙 X) t = Functor.isoWhiskerRight (lowerStarId A X) (t)_*[A] ≪≫
+      (t)_*[A].leftUnitor ≪≫ (lowerStarCongr A (Category.id_comp t)).symm := by
+  refine Iso.ext (NatTrans.ext (funext fun M ↦ ?_))
+  simp only [lowerStarComp_id_left_hom_app, Functor.comp_obj, lowerStarCongr_rfl, Iso.refl_symm,
+    Iso.trans_hom, Functor.isoWhiskerRight_hom, Iso.refl_hom, NatTrans.comp_app, Functor.id_obj,
+    Functor.whiskerRight_app, Functor.leftUnitor_hom_app, NatTrans.id_app, Category.id_comp]
+  rfl
+
+/-- The left unit law for the composition isomorphisms of the pullbacks, obtained from
+`AlgebraicGeometry.ProEtale.lowerStarComp_id_left` by conjugation. -/
+lemma upperStarComp_id_left (t : X ⟶ Y) :
+    upperStarComp A (𝟙 X) t = upperStarCongr A (Category.id_comp t) ≪≫
+      (t)^*[A].rightUnitor.symm ≪≫ Functor.isoWhiskerLeft (t)^*[A] (upperStarId A X).symm := by
+  refine (conjugateIsoEquiv ((upperStarLowerStarAdjunction A t).comp
+    (upperStarLowerStarAdjunction A (𝟙 X))) (upperStarLowerStarAdjunction A (𝟙 X ≫ t))).injective ?_
+  rw [conjugateIsoEquiv_trans _ (upperStarLowerStarAdjunction A t) _,
+    conjugateIsoEquiv_trans _ ((upperStarLowerStarAdjunction A t).comp Adjunction.id) _]
+  rw [conjugateIsoEquiv_upperStarComp, conjugateIsoEquiv_upperStarCongr,
+    conjugateIsoEquiv_isoWhiskerLeft, conjugateIsoEquiv_iso_symm, conjugateIsoEquiv_upperStarId,
+    conjugateIsoEquiv_iso_symm, conjugateIsoEquiv_rightUnitor, lowerStarComp_id_left]
+  refine Iso.ext (NatTrans.ext (funext fun M ↦ ?_))
+  simp
+
+end UnitLaws
+
 end AlgebraicGeometry.ProEtale
