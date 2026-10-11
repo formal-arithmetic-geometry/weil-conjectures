@@ -191,5 +191,23 @@
   "worker": "stage1",
   "summary": "Statement kept (agent-formulated; used without statement in Stacks Remark 032C, citer lem-weil-pbc-power-series-field-cohen-regular-complete clause (3) with J = pΛ, which matches). No source argument exists, so the proof is by agent, directly from the definitions in 6 elementary steps: (1) the sets S_n of series with a_E in J^{n-|E|} for |E|<n and U_n of series of order >= n are ideals, S_nS_m in S_{n+m}; (2) (X)^n = U_n (finitely many monomials of degree n); (3) a^n = S_n; (4) injectivity of R -> lim R/a^n from the injectivity for Λ, coefficientwise; (5) surjectivity, coefficientwise via the completeness of Λ after reindexing k = n - |E|; (6) conclusion. proof_deps: def-weil-pbc-multivariate-power-series, def-weil-pbc-adically-complete-ring. The Noetherian hypothesis is not used (the statement holds for any J-adically complete Λ); kept since the citer supplies it. No new nodes. Alternative document route (Stacks 0DYC, lemma-complete-modulo-nilpotent, with R Noetherian by lem-weil-pbc-power-series-noetherian and (X)-complete by lem-weil-pbc-power-series-variables-complete) rejected as it would need 0DYC and its inputs as new nodes. Mathlib searched again (LeanSearch, Loogle, LeanFinder, grep, local search): only the J = 0 case exists (MvPowerSeries.instIsAdicCompleteSpanRangeXOfFinite), so not a leaf."
  },
- "reviewed": "Reviewed by L 2026-10-10: proof by agent (the source uses the fact without statement): a^n identified with the explicit ideal S_n of series with coefficients in the right powers of J (steps 1-3, checked), then injectivity and surjectivity of R → lim R/a^n coefficientwise from the J-adic completeness of Λ; the Noetherian hypothesis is not used. No new nodes; no Mathlib match."
+ "reviewed": "Reviewed by L 2026-10-10: proof by agent (the source uses the fact without statement): a^n identified with the explicit ideal S_n of series with coefficients in the right powers of J (steps 1-3, checked), then injectivity and surjectivity of R → lim R/a^n coefficientwise from the J-adic completeness of Λ; the Noetherian hypothesis is not used. No new nodes; no Mathlib match.",
+ "lean": {
+  "module": "Sheaf.RingTheory.PowerSeriesCompleteOverCompleteBase",
+  "declaration": "power_series_complete_over_complete_base",
+  "file": "lean/Sheaf/RingTheory/PowerSeriesCompleteOverCompleteBase.lean",
+  "statement": "theorem power_series_complete_over_complete_base (Λ : Type u) [CommRing Λ] [IsNoetherianRing Λ] (J : Ideal Λ) [IsAdicComplete J Λ] (d : ℕ) : IsAdicComplete (Ideal.map (algebraMap Λ (MvPowerSeries (Fin d) Λ)) J ⊔ Ideal.span (Set.range (MvPowerSeries.X : Fin d → MvPowerSeries (Fin d) Λ))) (MvPowerSeries (Fin d) Λ)",
+  "branch": "sheaf-dag",
+  "by": "J1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-pcc1308",
+  "group": "J1",
+  "result": "pass",
+  "note": "Λ CommRing Type u; [IsNoetherianRing Λ] (node hyp, kept though unused); J : Ideal Λ, [IsAdicComplete J Λ] (not inferInstance-derivable); d : ℕ incl. Fin 0; R = MvPowerSeries (Fin d) Λ; JR = Ideal.map (algebraMap = MvPowerSeries.C by rfl) J; (X) = span (range X) as C1 PowerSeriesAdicEvaluation; a = ⊔; conclusion IsAdicComplete a R; no let, single universe, no duplicate decl"
+ }
 }
