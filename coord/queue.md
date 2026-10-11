@@ -1,17 +1,16 @@
 # Work queue
 
-1007 items; claim with `tools/claim.py next <group> [--stage N]`.
+1012 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (1007)
+## Stage 2: nodes to state (1012)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
 | `def-nagata-relative-finite-affine-presentation` | 1 | state |
 | `def-pur-sheaf-tensor-product` | 1 | state |
-| `def-sbc-formally-smooth` | 1 | state |
 | `def-sbc-normal-dominant-galois` | 1 | state |
 | `def-sp-double-complex-total` | 1 | state |
 | `def-sp-image-filtration` | 1 | state |
@@ -19,9 +18,7 @@
 | `def-weil-pbc-associated-module` | 1 | state |
 | `def-weil-pbc-etale-sheaves` | 1 | state |
 | `def-weil-pbc-formal-glueing-data` | 1 | state |
-| `def-weil-pbc-generating-sections` | 1 | state |
 | `def-weil-pbc-henselian-terminology` | 1 | state |
-| `def-weil-pbc-nagata-ring` | 1 | state |
 | `def-weil-pbc-popescu-resolution` | 1 | state |
 | `def-weil-pbc-proetale-site` | 1 | state |
 | `def-weil-pbc-serre-conditions-rk-sk` | 1 | state |
@@ -30,7 +27,6 @@
 | `lem-exc-discrete-modules-abelian` | 1 | state |
 | `lem-exc-discrete-modules-abelian-injective-embeddings` | 1 | state |
 | `lem-exc-discrete-modules-abelian-structure` | 1 | state |
-| `lem-exc-etale-field-galois-classification` | 1 | state |
 | `lem-exc-etale-field-gsets` | 1 | state |
 | `lem-exc-etale-sheaves-gsets-point` | 1 | state |
 | `lem-exc-field-sections-stalk-invariants` | 1 | state |
@@ -285,6 +281,7 @@
 | `lem-weil-pbc-adjunction-lifts-group-ring-objects` | 1 | state |
 | `lem-weil-pbc-affine-basic-set-difference` | 1 | state |
 | `lem-weil-pbc-affine-basic-sets-disjoint-refinement` | 1 | state |
+| `lem-weil-pbc-affine-formally-smooth-iff-ring-lifting` | 1 | state |
 | `lem-weil-pbc-algebra-colimit-fp-algebras-over-it` | 1 | state |
 | `lem-weil-pbc-analytic-unramified-principal-criterion` | 1 | state |
 | `lem-weil-pbc-analytically-unramified-n1` | 1 | state |
@@ -337,6 +334,7 @@
 | `lem-weil-pbc-complete-local-g-ring` | 1 | state |
 | `lem-weil-pbc-complete-local-map-cohen-presentation` | 1 | state |
 | `lem-weil-pbc-complete-local-map-regular-presentation` | 1 | state |
+| `lem-weil-pbc-complete-local-nagata` | 1 | state |
 | `lem-weil-pbc-complete-local-quotient` | 1 | state |
 | `lem-weil-pbc-completed-module-associated-graded-generators` | 1 | state |
 | `lem-weil-pbc-completion-at-quasi-finite-prime` | 1 | state |
@@ -489,6 +487,7 @@
 | `lem-weil-pbc-finite-open-cover-degree-sum` | 1 | state |
 | `lem-weil-pbc-finite-over-complete-local-product` | 1 | state |
 | `lem-weil-pbc-finite-over-complete-ring` | 1 | state |
+| `lem-weil-pbc-finite-over-nagata-nagata` | 1 | state |
 | `lem-weil-pbc-finite-presentation-hom-directed-colimit` | 1 | state |
 | `lem-weil-pbc-finite-product-complex-cohomology` | 1 | state |
 | `lem-weil-pbc-finite-product-functor-left-exact` | 1 | state |
@@ -534,6 +533,7 @@
 | `lem-weil-pbc-flat-smooth-fibre-smooth-at-prime` | 1 | state |
 | `lem-weil-pbc-flat-tor-ideal-criterion` | 1 | state |
 | `lem-weil-pbc-flat-under-regular` | 1 | state |
+| `lem-weil-pbc-flat-unramified-formally-etale` | 1 | state |
 | `lem-weil-pbc-formal-glueing-canonical-maps` | 1 | state |
 | `lem-weil-pbc-formal-glueing-complex-exact` | 1 | state |
 | `lem-weil-pbc-formal-glueing-finite-modules` | 1 | state |
@@ -622,6 +622,7 @@
 | `lem-weil-pbc-inverse-image-closed-pushforward-constant` | 1 | state |
 | `lem-weil-pbc-inverse-image-preserves-colimits` | 1 | state |
 | `lem-weil-pbc-inverse-image-stalk-germ` | 1 | state |
+| `lem-weil-pbc-invertible-generating-sections-fibre` | 1 | state |
 | `lem-weil-pbc-isolated-fibre-point-base-change` | 1 | state |
 | `lem-weil-pbc-isolated-fibre-point-quasi-finite-affine-pairs` | 1 | state |
 | `lem-weil-pbc-isolated-fibre-point-residue-finite` | 1 | state |
@@ -656,6 +657,7 @@
 | `lem-weil-pbc-linear-equation-localization-polynomial` | 1 | state |
 | `lem-weil-pbc-local-artinian-basis-when-flat` | 1 | state |
 | `lem-weil-pbc-local-completion-quotient` | 1 | state |
+| `lem-weil-pbc-local-nagata-domain-analytically-unramified` | 1 | state |
 | `lem-weil-pbc-local-ring-colimit-essentially-finite-type-over-z` | 1 | state |
 | `lem-weil-pbc-localization-colimit-principal-localizations` | 1 | state |
 | `lem-weil-pbc-localization-finite-gl-dim` | 1 | state |
@@ -691,6 +693,8 @@
 | `lem-weil-pbc-n2-ascends-finite-domain-extension` | 1 | state |
 | `lem-weil-pbc-n2-char-p-purely-inseparable-criterion` | 1 | state |
 | `lem-weil-pbc-n2-descends-finite-domain-extension` | 1 | state |
+| `lem-weil-pbc-nagata-localization` | 1 | state |
+| `lem-weil-pbc-nagata-universally-japanese` | 1 | state |
 | `lem-weil-pbc-nakayama-nilpotent` | 1 | state |
 | `lem-weil-pbc-nl-presentations-homotopy-equivalent` | 1 | state |
 | `lem-weil-pbc-noether-normalization-over-domain` | 1 | state |
@@ -700,6 +704,7 @@
 | `lem-weil-pbc-normal-domain-principal-quotient-associated-height` | 1 | state |
 | `lem-weil-pbc-normal-extension-purely-inseparable-then-galois` | 1 | state |
 | `lem-weil-pbc-normal-locus-open` | 1 | state |
+| `lem-weil-pbc-normal-nagata-monogenic-n1` | 1 | state |
 | `lem-weil-pbc-normal-ring-integrally-closed-total` | 1 | state |
 | `lem-weil-pbc-normalization-in-residue-field-extension` | 1 | state |
 | `lem-weil-pbc-ogoma` | 1 | state |
@@ -1017,7 +1022,7 @@
 | `lem-sc-normalization-properties` | 3 | state |
 | `def-nagata-fixed-base-separated-stage` | 6 | state |
 
-Not open yet: 1153 nodes that wait for a statement dependency, 40 nodes that wait for stage 1.
+Not open yet: 1144 nodes that wait for a statement dependency, 40 nodes that wait for stage 1.
 
 ## Stage 3: modules to prove (0)
 
