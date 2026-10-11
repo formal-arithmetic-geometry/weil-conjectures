@@ -3749,3 +3749,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 08:02 L: merged deliver/M1/lem-pc-kflat-bounded-flat-replacement (stage 2; reviewer PASS; first push; Sheaf.Algebra.Homology.BoundedFlatReplacement CochainComplex.exists_functorial_boundedAbove_flat_replacement)
 - 08:03 L: merged deliver/J1/lem-sc-graded-prime-avoidance (stage 2; reviewer PASS; first push; Sheaf.RingTheory.GradedPrimeAvoidance HomogeneousIdeal.exists_homogeneous_mem_notMem_of_isPrime)
 - 08:03 L: merged deliver/J1/lem-exc-abelian-sheaves-gmodules (stage 2; reviewer FIX; first push; Sheaf.AlgebraicGeometry.AbelianSheavesGModules AlgebraicGeometry.Scheme.abelianSheaves_equiv_discreteGModules; statement corrected (1 citers))
+- 08:03 L: merged deliver/G1/lem-sc-free-prime-membership (stage 2; reviewer PASS; first push; Sheaf.RingTheory.FreePrimeMembership Module.free_prime_mem_localized_iff)
