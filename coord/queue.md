@@ -1,11 +1,11 @@
 # Work queue
 
-527 items; claim with `tools/claim.py next <group> [--stage N]`.
+523 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (527)
+## Stage 2: nodes to state (523)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -25,7 +25,6 @@
 | `lem-sc-affine-cap-section-open-dictionary` | 1 | state |
 | `lem-sc-affine-section-localization` | 1 | state |
 | `lem-sc-ample-ideal-section` | 1 | state |
-| `lem-sc-ample-square-zero-thickening` | 1 | state |
 | `lem-sc-ass-weakass-fg-stalk` | 1 | state |
 | `lem-sc-base-change-curve` | 1 | state |
 | `lem-sc-closed-subset-qc-ideal` | 1 | state |
@@ -77,7 +76,6 @@
 | `lem-weil-pbc-integral-algebra-directed-colimit-finite` | 1 | state |
 | `lem-weil-pbc-integral-scheme-ideal-generic-stalk` | 1 | state |
 | `lem-weil-pbc-koszul-differential-square-zero` | 1 | state |
-| `lem-weil-pbc-lift-projective-module-etale` | 1 | state |
 | `lem-weil-pbc-limit-fibre-products` | 1 | state |
 | `lem-weil-pbc-module-base-change-map-algebra` | 1 | state |
 | `lem-weil-pbc-module-directed-colimit-finite-presentation` | 1 | state |
@@ -86,13 +84,11 @@
 | `lem-weil-pbc-module-finite-presentation-representatives` | 1 | state |
 | `lem-weil-pbc-module-finite-type-image-extension` | 1 | state |
 | `lem-weil-pbc-module-finite-type-submodule-extension` | 1 | state |
-| `lem-weil-pbc-module-finite-type-surjective-on-stalk` | 1 | state |
 | `lem-weil-pbc-module-pullback-affine-sections` | 1 | state |
 | `lem-weil-pbc-module-pullback-finite-type` | 1 | state |
 | `lem-weil-pbc-module-pushforward-injectives-sections-quasi-iso` | 1 | state |
 | `lem-weil-pbc-module-sheaves-grothendieck-abelian` | 1 | state |
 | `lem-weil-pbc-module-stalk-exact` | 1 | state |
-| `lem-weil-pbc-module-stalk-pullback` | 1 | state |
 | `lem-weil-pbc-module-stalk-tensor` | 1 | state |
 | `lem-weil-pbc-module-tensor-hom-adjunction` | 1 | state |
 | `lem-weil-pbc-n1-local-characterization` | 1 | state |
