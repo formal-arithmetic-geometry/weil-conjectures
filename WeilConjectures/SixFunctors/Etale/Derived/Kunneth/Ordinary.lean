@@ -293,6 +293,60 @@ theorem nonempty_iso_rightDerivedGlobalSections_derivedTensor_constantFunctor
         (((derivedTensor (ModuleCat.{u + 1} Λ) X).obj E).obj ((constantFunctor Λ X).obj C))) :=
   sorry
 
+/-- Blueprint `lem-kun-0f11`: direct sums and finite cohomological dimension.
+
+For a quasi-compact quasi-separated morphism `f` of finite cohomological dimension and a torsion
+ring `Λ`, `Rf_* : D(X_ét, Λ) ⥤ D(Y_ét, Λ)` commutes with direct sums. -/
+theorem preservesCoproducts_rightDerivedLowerStar (hΛ : IsAddTorsion Λ) {X Y : Scheme.{u}}
+    (f : X ⟶ Y) [QuasiCompact f] [QuasiSeparated f]
+    (hf : HasFiniteCohomologicalDimensionMorphism Λ f) (ι : Type (u + 1)) :
+    PreservesColimitsOfShape (Discrete ι) (R((f)_*[ModuleCat.{u + 1} Λ])) :=
+  sorry
+
+/-- Blueprint `lem-kun-0f11`, part (2): for a quasi-compact quasi-separated scheme `X` of finite
+cohomological dimension and a torsion ring `Λ`, `RΓ(X, -)` commutes with direct sums. -/
+theorem preservesCoproducts_rightDerivedGlobalSections (hΛ : IsAddTorsion Λ) (X : Scheme.{u})
+    [CompactSpace X] [QuasiSeparatedSpace X] (hX : HasFiniteCohomologicalDimension Λ X)
+    (ι : Type (u + 1)) :
+    PreservesColimitsOfShape (Discrete ι) (rightDerivedGlobalSections (ModuleCat.{u + 1} Λ) X) :=
+  sorry
+
+/-- Blueprint `lem-kun-0f1j`: base change for a pushforward tensored with a bounded below complex
+of finite Tor amplitude.
+
+Let `K` be a field and `Λ` a finite ring whose exponent is invertible in `K`. For a diagram
+
+```
+  X <--p-- X' <--h-- Y
+  |        |         |
+  a        f'        e
+  v        v         v
+Spec K <-b- S' <--g-- T
+```
+
+with both squares cartesian and `g` quasi-compact and quasi-separated, the base change map
+(`AlgebraicGeometry.Etale.tensorBaseChangeMap`)
+
+`Lp^* E ⊗ᴸ Lf'^* Rg_* F ⟶ Rh_* (Lh^* Lp^* E ⊗ᴸ Le^* F)`
+
+is an isomorphism for every bounded below `E ∈ D(X_ét, Λ)` of Tor amplitude in `[n, ∞)` and every
+bounded below `F ∈ D(T_ét, Λ)`. -/
+theorem isIso_tensorBaseChangeMap_of_isGE [Finite Λ] {K : Type u} [Field K]
+    [HasInvertibleExponent Λ (Spec (.of K))] {X X' S' T Y : Scheme.{u}}
+    (a : X ⟶ Spec (.of K)) (b : S' ⟶ Spec (.of K))
+    (p : X' ⟶ X) (f' : X' ⟶ S') (h : Y ⟶ X') (e : Y ⟶ T) (g : T ⟶ S') [QuasiCompact g]
+    [QuasiSeparated g] (_sq₁ : IsPullback p f' a b) (sq₂ : IsPullback h e f' g)
+    (E : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
+    (F : DerivedCategory (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ))) (m n : ℤ)
+    (_hE : DerivedCategory.TStructure.t.IsGE E m)
+    (_hEt : ∀ (M : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (q : ℤ), q < n →
+      IsZero ((DerivedCategory.homologyFunctor _ q).obj (((derivedTensor (ModuleCat.{u + 1} Λ)
+        X).obj E).obj ((DerivedCategory.singleFunctor _ 0).obj M))))
+    (_hF : DerivedCategory.TStructure.t.IsGE F m) :
+    IsIso (tensorBaseChangeMap (ModuleCat.{u + 1} Λ) h e f' g sq₂.w
+      ((L((p)^*[ModuleCat.{u + 1} Λ])).obj E) F) :=
+  sorry
+
 /-- Blueprint `lem-kun-0f1n`: base change for a pushforward tensored with an arbitrary complex.
 
 Let `K` be a field and `Λ` a finite ring whose exponent is invertible in `K`. For a diagram
