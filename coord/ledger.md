@@ -4945,3 +4945,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 14:25 L: merged deliver/C1/lem-weil-pbc-sheaves-killed-by-n-zmod-modules (stage 2; reviewer PASS; first push; Sheaf.Paper.SheavesKilledByNZmodModules AlgebraicGeometry.sheaves_killed_by_n_zmod_modules)
 - 14:25 L: merged deliver/H1/lem-pc-proper-support-descent (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.ProperSupportDescent AlgebraicGeometry.exists_hasSupportProperOver_baseChange_of_isLimit)
 - 14:27 L: merged deliver/G1/lem-sc-picard-kunneth-qcoh (stage 2; reviewer FIX; after a return; Sheaf.AlgebraicGeometry.PicardKunnethQcoh AlgebraicGeometry.Scheme.Modules.picard_kunneth_qcoh; new nodes: def-sc-field-linear-module-cohomology-operations)
+- 14:27 L: merged deliver/F1/lem-weil-pbc-smooth-at-prime-field-extension-descent (stage 2; reviewer PASS; first push; Sheaf.RingTheory.SmoothAtPrimeFieldExtensionDescent Algebra.isSmoothAtPrime_of_fieldExtension)
