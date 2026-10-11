@@ -197,5 +197,24 @@
   "by": "L",
   "result": "pass",
   "note": "Reviewed by the lead (opus-relaunch6). Five steps, agent-written (no Stacks statement; the unit-side counterpart of 03CF/03EF), no new nodes: the unit of h = p g' = g p' at W is written through both factorizations with lem-weil-pbc-inverse-image-composition (2); restricting the first along the diagonal W -> W x_X W and the second along sigma = (iota, id) brings both to the same comparison gamma = (g', id): W' -> W x_X W', using lem-weil-pbc-etale-inverse-image-restriction (2) to turn the units of the etale maps p and p' into the restriction isomorphisms (E1, E2); comparing (E3) and (E4) and cancelling the isomorphisms gives the assertion. Replaces the monomorphism argument of the open-immersion case. Checked step by step."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.EtaleRestrictionPullbackUnit",
+  "declaration": "AlgebraicGeometry.etale_restriction_pullback_unit",
+  "file": "lean/Sheaf/Paper/EtaleRestrictionPullbackUnit.lean",
+  "statement": "theorem etale_restriction_pullback_unit {X Y W W' : Scheme.{u}} (g : Y ⟶ X) (p : W ⟶ X) (g' : W' ⟶ W) (p' : W' ⟶ Y) (hcomm : g' ≫ p = p' ≫ g) (ι : W' ⟶ pullback p g) (hι₁ : ι ≫ pullback.fst p g = g') (hι₂ : ι ≫ pullback.snd p g = p') [IsIso ι] [hp : Etale p] : ∃ hp' : Etale p', let A := AddCommGrpCat.{u + 1} let w : W.Etale := Scheme.Etale.mk (𝟙 W) let w' : W'.Etale := Scheme.Etale.mk (𝟙 W') let wx : X.Etale := Scheme.Etale.mk p let wy' : Y.Etale := @Scheme.Etale.mk _ _ p' hp' let eW : (MorphismProperty.Over.map ⊤ hp).obj w ≅ wx := MorphismProperty.Over.isoMk (Iso.refl W) (by simp [wx, w]) let eW' : (MorphismProperty.Over.map ⊤ hp').obj w' ≅ wy' := MorphismProperty.Over.isoMk (Iso.refl W') (by simp [wy', w']) let theta : w' ⟶ (MorphismProperty.Over.pullback @Etale ⊤ g').obj w := MorphismProperty.Over.homMk (pullback.lift g' (𝟙 W') (by exact (Category.comp_id g').trans (Category.id_comp g').symm)) (by simp [w']) let iotaSite : wy' ⟶ (MorphismProperty.Over.pullback @Etale ⊤ g).obj wx := MorphismProperty.Over.homMk ι hι₂ ∀ F : Sheaf X.smallEtaleTopology A, let pF := (Etale.upperStar A p).obj F let gF := (Etale.upperStar A g).obj F let K := (Etale.upperStar A g').obj pF let rhoF := (Etale.upperStarIsoLocalizationRestriction A p hp).hom.app F let rhoG := (Etale.upperStarIsoLocalizationRestriction A p' hp').hom.app gF let kappa := (Etale.upperStarComp A g' p).inv.app F ≫ (Etale.upperStarComp A p' g (g' ≫ p) hcomm).hom.app F ((Etale.upperStarLowerStarAdjunction A g').unit.app pF).hom.app (op w) ≫ K.obj.map theta.op ≫ kappa.hom.app (op w') ≫ rhoG.hom.app (op w') ≫ gF.obj.map eW'.inv.op = rhoF.hom.app (op w) ≫ F.obj.map eW.inv.op ≫ ((Etale.upperStarLowerStarAdjunction A g).unit.app F).hom.app (op wx) ≫ gF.obj.map iotaSite.op",
+  "branch": "sheaf-dag",
+  "by": "M1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-erp1009"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-erp1009",
+  "group": "M1",
+  "result": "fix",
+  "note": "schemes X,Y,W,W' and g,p,g',p'; hcomm; iota=(g',p') via hι₁/hι₂ + IsIso (cartesian); Etale p instance, Etale p' as ∃ conclusion; F : Sheaf X.smallEtaleTopology AddCommGrpCat; p^-1,g^-1,g'^-1 = Etale.upperStar; units = upperStarLowerStarAdjunction.unit at w=(W,id) and wx=(W,p); theta=(g',id) into Over.pullback g' w; kappa = (upperStarComp g' p).inv ≫ (upperStarComp p' g _ hcomm).hom = c_{g,p'}^-1 c_{p,g'}; rho = upperStarIsoLocalizationRestriction (Etale only, no Mono); restriction along iotaSite=homMk ι hι₂; equality of hom = for every a"
  }
 }
