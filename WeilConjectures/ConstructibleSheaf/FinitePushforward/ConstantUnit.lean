@@ -60,7 +60,8 @@ theorem Etale.constantSheafUnit_app_toSheafify (V : Y.Etale) (m : M) :
       (sheafify J ((Functor.const Cᵒᵖ).obj M)).map f.op
         ((CategoryTheory.toSheafify J ((Functor.const Cᵒᵖ).obj M)).app (op W) m) =
       (CategoryTheory.toSheafify J ((Functor.const Cᵒᵖ).obj M)).app (op U) m :=
-    (congr(($((CategoryTheory.toSheafify J ((Functor.const Cᵒᵖ).obj M)).naturality f.op)).hom m)).symm
+    (congr(($((CategoryTheory.toSheafify J ((Functor.const Cᵒᵖ).obj M)).naturality
+      f.op)).hom m)).symm
   let θ := Etale.constantSheafUnit g M
   let F := MorphismProperty.Over.pullback @Etale ⊤ g
   let i := (PreservesTerminal.iso g.Etale)
