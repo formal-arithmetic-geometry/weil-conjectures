@@ -5151,3 +5151,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 15:09 L: merged deliver/U1/lem-weil-pbc-truncation-step-ses (stage 2; reviewer PASS; first push; Sheaf.Algebra.Homology.UpperTruncationStepSES CochainComplex.exists_upperTruncationStepSES)
 - 15:10 L: merged deliver/U1/thm-pqf-immersion-descent (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.NormalizationImmersionFiniteStage AlgebraicGeometry.Scheme.Hom.exists_normalization_immersion_at_finite_stage)
 - 15:10 L: merged deliver/V1/lemma-weil-pbc-torsion-assembly (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.TorsionAssembly AlgebraicGeometry.Etale.isIso_derivedBaseChangeMapPlus_torsion_assembly)
+- 15:10 L: merged deliver/P1/lem-pc-degree-zero-properties (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.DegreeZeroCohomology AlgebraicGeometry.cohomology_of_iso_invertible_single_zero)
