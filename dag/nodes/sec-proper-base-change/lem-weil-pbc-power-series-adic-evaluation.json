@@ -151,5 +151,23 @@
   "summary": "Statement kept (checked against its only citer lem-weil-pbc-complete-local-map-regular-presentation steps 3-4, which use existence with the values on C and the X_i, uniqueness, and continuity). No sorry-free slopmaster2 declaration states it (grep of WeilConjectures for the id and for files with both MvPowerSeries and IsAdicComplete: none). Following the lead note, the split cites lem-weil-pbc-power-series-universal-property-complete for existence, the explicit formula and uniqueness (that node's uniqueness is among all ring maps, stronger than among continuous ones), and proves only the continuity: (2) every element of (X_1..X_n)^M is a finite sum X^mu g with |mu|=M, hence has no coefficients in degree < M; (3) so its partial sum below degree M is 0 and the explicit formula gives E(F) in I^M; M=N works. Three elementary steps, no new nodes. Mathlib: candidate MvPowerSeries.eval₂Hom kept; LeanSearch and Loogle searches added.",
   "blueprint": "The blueprint ancestor thm-weil-pbc-finite-etale-lifting is reached only through the chain in blueprint.from.via; the steps realize, at the place recorded in from.place (step 7 of its split, power-series evaluation used in Stacks 07NN to construct and invert the parameter perturbation), the existence and uniqueness of the substitution maps (step 1) and their continuity (steps 2-3) used by lem-weil-pbc-complete-local-map-regular-presentation steps 3-4. same_as: [] (blueprint_refs search 'power series evaluation', 'power series continuous', 'power series ring', 'adically complete', 'universal property power', '07NL', '07NN': no blueprint node states it)."
  },
- "reviewed": "2026-10-10 L: 3 steps; cites lem-weil-pbc-power-series-universal-property-complete for existence, formula and uniqueness and proves the continuity (no terms of degree < N in (X)^N, so E(F) is in I^N); 0 new nodes"
+ "reviewed": "2026-10-10 L: 3 steps; cites lem-weil-pbc-power-series-universal-property-complete for existence, formula and uniqueness and proves the continuity (no terms of degree < N in (X)^N, so E(F) is in I^N); 0 new nodes",
+ "lean": {
+  "module": "Sheaf.RingTheory.PowerSeriesAdicEvaluation",
+  "declaration": "MvPowerSeries.exists_unique_adic_evaluation",
+  "file": "lean/Sheaf/RingTheory/PowerSeriesAdicEvaluation.lean",
+  "statement": "theorem exists_unique_adic_evaluation {C : Type u} {T : Type v} [CommRing C] [CommRing T] (α : C →+* T) (I : Ideal T) [IsAdicComplete I T] (n : ℕ) (b : Fin n → T) (hb : ∀ i : Fin n, b i ∈ I) : ∃ E : MvPowerSeries (Fin n) C →+* T, (∀ c : C, E (MvPowerSeries.C c) = α c) ∧ (∀ i : Fin n, E (X i) = b i) ∧ (∀ N : ℕ, ∃ M : ℕ, ∀ F ∈ (Ideal.span (Set.range (X : Fin n → MvPowerSeries (Fin n) C))) ^ M, E F ∈ I ^ N) ∧ (∀ E' : MvPowerSeries (Fin n) C →+* T, (∀ c : C, E' (MvPowerSeries.C c) = α c) → (∀ i : Fin n, E' (X i) = b i) → (∀ N : ℕ, ∃ M : ℕ, ∀ F ∈ (Ideal.span (Set.range (X : Fin n → MvPowerSeries (Fin n) C))) ^ M, E' F ∈ I ^ N) → E' = E) ∧ (∀ (F : MvPowerSeries (Fin n) C) (t : T), (∀ N : ℕ, 1 ≤ N → Ideal.Quotient.mk (I ^ N) t = Ideal.Quotient.mk (I ^ N) (MvPolynomial.eval₂ α b (F.truncTotal N))) ↔ t = E F)",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-pse1253",
+  "group": "C1",
+  "result": "pass",
+  "note": "C,T CommRing indep. universes; α →+*; IsAdicComplete I T (recorded); b : Fin n → T with hb; E on MvPowerSeries (Fin n) C with C c ↦ α c, X i ↦ b i; continuity ∀N ∃M (span range X)^M ↦ I^N; uniqueness among continuous E'; reductions mod I^N (N≥1) via eval₂ α b (truncTotal N F) (degree<N, rfl-checked) iff t = E F; statement true; no let/hollow"
+ }
 }
