@@ -4821,3 +4821,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 13:53 L: merged deliver/G1/lem-weil-pbc-regular-local-finite-gl-dim (stage 2; reviewer PASS; first push; Sheaf.RingTheory.RegularLocalFiniteGlobalDimension IsRegularLocalRing.hasGlobalDimensionLE_of_ringKrullDim_eq)
 - 13:53 L: merged deliver/M1/lem-weil-pbc-regular-local-maximal (stage 2; reviewer PASS; first push; Sheaf.RingTheory.RegularLocalMaximal RingHom.isRegular_iff_localRingHom_prime_and_maximal)
 - 13:54 L: merged deliver/H1/lem-pc-derived-qcoh-perfect-generation (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.DerivedQCohPerfectGeneration AlgebraicGeometry.derivedQCohPerfectGeneration; new nodes: def-pc-perfect-localizing-closure)
+- 13:54 L: merged deliver/F1/lem-weil-pbc-quasi-finite-at-point-isolated (stage 2; reviewer FIX; first push; Sheaf.AlgebraicGeometry.QuasiFiniteAtPointIsolated AlgebraicGeometry.Scheme.Hom.quasiFiniteAtPoint_isolated_in_fiber)
