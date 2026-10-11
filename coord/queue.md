@@ -1,8 +1,8 @@
 # Work queue
 
-861 items; claim with `tools/claim.py next <group> [--stage N]`.
+862 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (32)
+## Stage 1: nodes to split (31)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -16,7 +16,7 @@
 | `cor-pc-sigma-pic-iso` | 4009 | rests_on_sorry |
 | `lem-pc-vanishing-above-dim` | 4009 | rests_on_sorry |
 | `lem-sc-finite-flat-surj-points` | 4009 | none |
-| `lem-sc-strict-henselization-completion-flat-over-base` | 4013 | none |
+| `lem-sc-strict-henselization-mod-power-free` | 4014 | none |
 | `lem-pc-derived-tensor-transitivity` | 5015 | none |
 | `lem-pc-derived-tensor-localization-cohomology` | 5017 | none |
 | `lem-pc-affine-flat-module-localization-preserves-flatness` | 5018 | none |
@@ -33,13 +33,12 @@
 | `lem-sc-base-change-curve` | - | none |
 | `lem-sc-global-functions` | - | rests_on_sorry |
 | `lem-pur-kinjective-characterize-K-injective` | - | none |
-| `lem-pur-kinjective-functorial-homotopies` | - | none |
 | `lem-pc-finite-flat-pushforward-locally-free` | - | none |
 | `lem-pur-left-derived-defined-pointwise-kan-bridge` | - | none |
 | `lem-pur-left-derived-exact-when-defined` | - | none |
 | `lem-pur-quasi-isos-saturated-triangulated` | - | none |
 
-## Stage 2: nodes to state (829)
+## Stage 2: nodes to state (831)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -219,6 +218,7 @@
 | `lem-pqf-finite-spectrum-maximal-primes` | 1 | state |
 | `lem-pur-kinjective-characterize-injective` | 1 | state |
 | `lem-pur-kinjective-degreewise-existence` | 1 | state |
+| `lem-pur-kinjective-functorial-homotopies` | 1 | state |
 | `lem-pur-kinjective-functorial-injective` | 1 | state |
 | `lem-pur-kinjective-set-iso-classes-bounded-size` | 1 | state |
 | `lem-pur-left-derived-from-kflat-class` | 1 | state |
@@ -324,6 +324,7 @@
 | `lem-sc-semilocal-dim-one-conductor` | 1 | state |
 | `lem-sc-semilocal-dim-one-normalization` | 1 | state |
 | `lem-sc-smooth-algebra-reduced-field` | 1 | state |
+| `lem-sc-strict-henselization-completion-flat-over-base` | 1 | state |
 | `lem-sc-strict-henselization-dimension` | 1 | state |
 | `lem-sc-strict-henselization-regular` | 1 | state |
 | `lem-sc-weakass-localization` | 1 | state |
@@ -873,7 +874,7 @@
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 | `def-nagata-fixed-base-separated-stage` | 6 | state |
 
-Not open yet: 1743 nodes that wait for a statement dependency, 73 nodes that wait for stage 1.
+Not open yet: 1743 nodes that wait for a statement dependency, 72 nodes that wait for stage 1.
 
 ## Stage 3: modules to prove (0)
 
