@@ -36,6 +36,23 @@ Checks (roles/remote-lead.md §4-5, the returns of 2026-10-09):
      maintainer's field (lean_audit, lean, blueprint.is, created, reviewed, lead_note, tool_uses, import_flags,
      ...) must be unchanged against the base, and a new node has blueprint.is null and no maintainer's fields
      except created.
+
+Stage 2 (stages/2-statements.md; the format is in tools/stage2_delivery.py and tools/README.md "Stage 2"):
+
+    python3 tools/preflight_delivery.py <group> <item> --stage 2 [--base origin/sheaf-dag] [--branch <ref>]
+
+checks the branch <ref> (default HEAD; the lead passes deliver/<group>/<item>) against the base:
+  a. one commit on top of the base with only lean/Sheaf/<Topic>/<Name>.lean, the node file and the report;
+  b. the node changed only in `lean`, a record {module, declaration, [declarations], [file], statement, branch, by,
+     date, existing} with the module matching the file and by = <group>;
+  c. the Lean file: imports of Mathlib.*, WeilConjectures.*, Sheaf.* only; lines of at most 100 characters; the
+     declaration defined, its docstring with `(blueprint: <item>)`, its name not already in Mathlib or the source;
+     every theorem/lemma proved by `sorry`, no `sorry` in a definition; the recorded statement equal to the file's;
+  d. an existing declaration (existing: true): no Lean file, module Mathlib.* or WeilConjectures.*, declared there;
+  e. the report with non-empty `## Worker report` and `## Second reading by <group>`;
+  f. the compile with tools/lean_file.sh in lean/.sandbox/<group>/<item>.lean, on the server only
+     (SHEAF_COMPILE_ROOT names another project directory to compile in).
+Prints "preflight OK (stage 2)" or every failure with its letter, exit code 1.
 """
 from __future__ import annotations
 import json, pathlib, re, subprocess, sys
@@ -80,9 +97,82 @@ def text_tokens(s: str) -> tuple[set[str], set[str]]:
     return set(TAG.findall(s or "")), set(SECTION.findall(s or ""))
 
 
+def default_base() -> str:
+    """origin/sheaf-dag on a remote clone; sheaf-dag on the server, where the branch is local (lead, 2026-10-11)."""
+    import subprocess
+    r = subprocess.run(["git", "rev-parse", "--verify", "-q", "origin/sheaf-dag"], capture_output=True, text=True)
+    return "origin/sheaf-dag" if r.returncode == 0 else "sheaf-dag"
+
+
+def main_stage2(argv: list[str]) -> int:
+    import stage2_delivery as s2
+    base, branch, args = default_base(), None, []
+    i = 0
+    while i < len(argv):
+        a = argv[i]
+        if a in ("--base", "--branch", "--stage") and i + 1 < len(argv):
+            if a == "--base":
+                base = argv[i + 1]
+            elif a == "--branch":
+                branch = argv[i + 1]
+            i += 2; continue
+        if a.startswith("--base="):
+            base = a.split("=", 1)[1]
+        elif a.startswith("--branch="):
+            branch = a.split("=", 1)[1]
+        elif not a.startswith("--stage"):
+            args.append(a)
+        i += 1
+    if len(args) != 2:
+        print(__doc__); return 2
+    group, item = args
+    g = s2.Git(ROOT)
+    ref = branch or "HEAD"
+    D = s2.read_delivery(g, ref, base, group, item)
+    fails = list(D["fails"])
+    if branch is None:
+        dirty = g.run("status", "--porcelain")
+        if dirty:
+            fails.insert(0, ("a", "uncommitted changes in the working tree (commit them into the one delivery commit, or stash):\n   "
+                             + "\n   ".join(dirty.splitlines()[:10])))
+    compiled = None
+    if D["lean_text"] is not None:
+        ran, rc, out = s2.compile_text(D["lean_text"], group, item)
+        if not ran:
+            compiled = out
+        elif rc != 0:
+            fails.append(("f", f"the module does not compile (exit {rc}):\n   " + "\n   ".join(out.splitlines()[-40:])))
+        else:
+            compiled = "compile: OK\n   " + "\n   ".join(out.splitlines()[-15:])
+    for n in D["notes"]:
+        print(f" ! {n}")
+    if compiled:
+        print(compiled)
+    if not fails:
+        print("preflight OK (stage 2)")
+        return 0
+    order = "abcdef"
+    fails.sort(key=lambda x: order.index(x[0]))
+    print(f"preflight FAILED (stage 2), {len(fails)} reason(s); do not push:")
+    for L, x in fails:
+        print(f" ({L}) {x}")
+    return 1
+
+
 def main() -> int:
+    if "--stage" in sys.argv[1:] or any(a.startswith("--stage=") for a in sys.argv[1:]):
+        argv = sys.argv[1:]
+        st = next((a.split("=", 1)[1] for a in argv if a.startswith("--stage=")), None)
+        if st is None:
+            k = argv.index("--stage")
+            st = argv[k + 1] if k + 1 < len(argv) else ""
+        if st == "2":
+            return main_stage2(argv)
+        if st != "1":
+            print(f"--stage {st!r}: 1 or 2"); return 2
+        sys.argv = [sys.argv[0]] + [a for k, a in enumerate(argv) if not (a.startswith("--stage") or (k > 0 and argv[k - 1] == "--stage"))]
     args: list[str] = []
-    base = "origin/sheaf-dag"
+    base = default_base()
     argv = sys.argv[1:]
     i = 0
     while i < len(argv):

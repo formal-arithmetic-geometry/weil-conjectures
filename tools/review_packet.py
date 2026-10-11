@@ -10,6 +10,12 @@ node it cites; the new nodes (statement, source, Mathlib searches and match); th
 for each new node the existing nodes with the same Stacks tag; the Stacks text (statement and proof) of every tag
 named by the item and the new nodes; the group's report; earlier returns of the item. A reviewer who has the packet
 opens other files only to follow a doubt.
+
+  tools/review_packet.py <group> <item> --stage 2 [--out <file>]
+Stage 2 (a statement delivery, tools/README.md "Stage 2"): the node (statement, kind, chapter, unit, stmt_deps); each
+stmt_dep with its statement and its recorded `lean`; the delivered `lean` record and the result of the mechanical
+checks of tools/stage2_delivery.py; the Lean file in full; for every identifier of the file that is some node's
+recorded declaration, that node's statement; the compile (on the server only); the report; earlier returns.
 """
 from __future__ import annotations
 import json, pathlib, re, subprocess, sys
@@ -64,7 +70,78 @@ def stacks(tag, tagmap, cap=9000):
     return f"{f.name} lines {a+1}-{b+1} ({lab})\n{txt}"
 
 
+def main_stage2(g, item) -> int:
+    import stage2_delivery as s2
+    br = f"deliver/{g}/{item}"
+    G = s2.Git(ROOT)
+    head = git("rev-parse", "--short", br).strip()
+    if not head: print(f"no branch {br}"); return 1
+    base = git("merge-base", "sheaf-dag", br).strip()
+    D = s2.read_delivery(G, br, base, g, item)
+    nodes = s2.nodes_at(G, "sheaf-dag")
+    o = []; w = o.append
+    w(f"# Review packet (stage 2): {item} (group {g})\n")
+    files = git("diff", "--name-status", f"{base}..{br}").strip()
+    w(f"Branch {br} at {head}, on base {base[:9]} (sheaf-dag is at {git('rev-parse', '--short', 'sheaf-dag').strip()}). "
+      f"Files:\n\n```\n{files}\n```\n")
+    d = D["node"] or nodes.get(item) or {}
+    w(f"## 1. The node\n\n- kind {d.get('kind')}, status {d.get('status')}, chapter {d.get('chapter')}, unit {d.get('unit')}\n"
+      f"- source: {json.dumps(d.get('source'), ensure_ascii=False)}\n- stmt_deps: {d.get('stmt_deps')}\n")
+    w(f"**Statement.** {d.get('statement')}\n")
+    w("## 2. The statement dependencies and their recorded declarations\n")
+    for u in d.get("stmt_deps") or []:
+        n = nodes.get(u)
+        if n is None: w(f"- **[{u}]** DOES NOT EXIST on sheaf-dag\n"); continue
+        l = n.get("lean") if isinstance(n.get("lean"), dict) else None
+        lean = (f"`{l.get('module')}` / `{l.get('declaration')}`" + (f"\n  - statement: `{l.get('statement')}`" if l.get("statement") else "")
+                + (f"\n  - branch {l.get('branch')}" if l.get("branch") else "")) if l else "**no Lean declaration recorded**"
+        w(f"- **[{u}]** ({n.get('kind')}): {n.get('statement')}\n  - lean: {lean}\n")
+    w("## 3. The delivered `lean` record\n\n```json\n" + json.dumps(D["rec"], indent=1, ensure_ascii=False) + "\n```\n")
+    if D["fails"] or D["notes"]:
+        w("**Mechanical checks (tools/stage2_delivery.py) found:**\n")
+        for L, x in D["fails"]: w(f"- ({L}) {x}")
+        for x in D["notes"]: w(f"- note: {x}")
+        w("")
+    else:
+        w("Mechanical checks (a)-(e) of tools/stage2_delivery.py: nothing found.\n")
+    w("## 4. The Lean file\n")
+    text = D["lean_text"]
+    if text is None:
+        w("no Lean file in the delivery" + (" (an existing declaration)" if (D["rec"] or {}).get("existing") else "") + "\n")
+    else:
+        w(f"`{D['lean_path']}`\n\n```lean\n{text.rstrip()}\n```\n")
+        w("## 5. Recorded declarations the file uses, with the statements of their nodes\n")
+        used = [u for u in s2.used_recorded(text, s2.declaration_map(nodes)) if u[2] != item]
+        if not used: w("none found (the file uses no declaration that a node records)\n")
+        for tok, full, nid in used:
+            n = nodes.get(nid) or {}
+            w(f"- `{tok}` = `{full}` is the declaration of **[{nid}]**{' (a stmt_dep)' if nid in (d.get('stmt_deps') or []) else ' (NOT a stmt_dep of the node)'}: {n.get('statement')}\n")
+        undeclared = [u for u in (d.get("stmt_deps") or []) if u not in {x[2] for x in used}]
+        if undeclared: w(f"stmt_deps whose recorded declaration the file does not visibly use: {undeclared}\n")
+        w("## 6. The compile\n")
+        ran, rc, out = s2.compile_text(text, g, item)
+        w(("```\n" + out[-6000:] + f"\n```\nexit code {rc}\n") if ran else out + "\n")
+    w("## 7. The group's report\n\n" + (D["report"] or "**no report in the delivery**") + "\n")
+    ret = ROOT / "coord" / "returns" / f"{g}.md"
+    if ret.exists():
+        ent = [e for e in re.split(r"\n(?=## )", ret.read_text()) if item in e.split("\n")[0]]
+        if ent: w("## 8. Earlier returns of this item (check that every point was repaired)\n\n" + "\n\n".join(ent)[-8000:] + "\n")
+    out = pathlib.Path(sys.argv[sys.argv.index("--out") + 1]) if "--out" in sys.argv else pathlib.Path("/tmp/review-packets") / f"{g}__{item}.md"
+    out.parent.mkdir(parents=True, exist_ok=True); out.write_text("\n".join(o))
+    print(out, f"({len(out.read_text())} characters)")
+    return 0
+
+
 def main() -> int:
+    if "--stage" in sys.argv:
+        k = sys.argv.index("--stage"); st = sys.argv[k + 1] if k + 1 < len(sys.argv) else ""
+        rest = [a for j, a in enumerate(sys.argv[1:], 1) if j not in (k, k + 1) and not a.startswith("--")
+                and not (j > 1 and sys.argv[j - 1] == "--out")]
+        if st == "2":
+            if len(rest) < 2: print(__doc__); return 2
+            return main_stage2(rest[0], rest[1])
+        if st != "1": print(f"--stage {st!r}: 1 or 2"); return 2
+        sys.argv = [x for j, x in enumerate(sys.argv) if j not in (k, k + 1)]
     args = [a for a in sys.argv[1:] if not a.startswith("--")]
     if len(args) < 2: print(__doc__); return 2
     g, item = args[0], args[1]; br = f"deliver/{g}/{item}"

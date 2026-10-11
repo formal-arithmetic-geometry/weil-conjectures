@@ -20,6 +20,14 @@ Usage (from the project root; by the lead, or by a reviewer sub-agent of the lea
       --lead-note TEXT      appended to the item's `lead_note`
       --verdict PASS|FIX    for the ledger line (default FIX with --apply-fixes, else PASS)
       --head SHA            refuse unless the branch head is SHA (the commit the reviewer read)
+  tools/merge_delivery.py <group> <item> --stage 2 --reviewer ID --head SHA [--apply-fixes DIR] [--spot-checked NOTE]
+                        [--verdict PASS|FIX] [--dry-run]
+                                                        a stage-2 delivery (tools/README.md "Stage 2"): the mechanical
+                        checks of tools/stage2_delivery.py; the module (DIR/<basename>.lean replaces it) written to
+                        lean/.sandbox/L/<item>.lean and landed with `SHEAF_GROUP=L tools/land.sh` (a failure aborts,
+                        nothing changed); the node's `lean` set to the delivered record (statement re-read from the
+                        landed file) and `reviewed_lean`; the report; the same bookkeeping as stage 1; one commit
+                        "State <item> (<group>, reviewed by <ID>)". --dry-run prints what it would do, changes nothing.
   tools/merge_delivery.py return <group> <item> REASONS write the reasons into coord/returns/<group>.md, the ledger
                                                         line, and commit; the claim and the branch stay with the group
 
@@ -593,6 +601,155 @@ def cmd_return(group, item, reasons):
     return 0
 
 
+# ---------------------------------------------------------------- stage 2
+
+def cmd_merge2(o):
+    """A stage-2 delivery: land the module, record `lean` and `reviewed_lean`, the report, the bookkeeping."""
+    import stage2_delivery as s2
+    group, item = o.group, o.item
+    br = branch_of(group, item)
+    dry = o.dry_run
+    say = (lambda m: print(f"  would {m}")) if dry else (lambda m: None)
+    if not o.head:
+        raise Fail("--stage 2 needs --head SHA (the commit the reviewer read)")
+    if git("symbolic-ref", "-q", "--short", "HEAD", check=False) != MAIN:
+        raise Fail(f"the working tree is not on {MAIN}")
+    lock = contextlib.nullcontext() if dry else merge_lock()
+    with lock:
+        # (1) the branch and its head
+        if not has_ref(f"refs/heads/{br}"):
+            raise Fail(f"no branch {br}")
+        if not git("rev-parse", br).startswith(o.head):
+            raise Fail(f"the branch head is {git('rev-parse', '--short', br)}, not {o.head}: the group pushed again; review the new head")
+        base = git("merge-base", MAIN, br)
+        age = time.time() - int(git("show", "-s", "--format=%ct", base))
+        if age > MAX_AGE:
+            raise Fail(f"base {base[:7]} is {age/3600:.0f} h behind {MAIN}: pull {MAIN}, rebase, push again")
+        D = s2.read_delivery(s2.Git(ROOT), br, base, group, item)
+        rec = D["rec"] if isinstance(D["rec"], dict) else None
+        text = D["lean_text"]
+        nfix = 0
+        if o.apply_fixes:
+            fixdir = pathlib.Path(o.apply_fixes).resolve()
+            if not fixdir.is_dir():
+                raise Fail(f"--apply-fixes {fixdir}: no such directory")
+            want = pathlib.PurePosixPath(D["lean_path"]).name if D["lean_path"] else None
+            for p in sorted(x for x in fixdir.rglob("*") if x.is_file()):
+                if want is None or p.relative_to(fixdir).as_posix() != want:
+                    raise Fail(f"--apply-fixes: {p.relative_to(fixdir)}: a stage-2 fix is only DIR/{want or '<the module>.lean'}")
+                text = p.read_text(); nfix = 1
+        # the static checks; with a fix the Lean file is checked again on the fixed text, the statement read from it
+        fails = [x for x in D["fails"] if not (nfix and x[0] == "c")]
+        decl = D["decl"]
+        if nfix and rec:
+            cf, decl = s2.check_lean_text(text, rec, item, check_statement=False)
+            fails += cf
+        if fails:
+            raise Fail("stage-2 checks: " + " | ".join(f"({L}) {x}" for L, x in fails))
+        if rec is None:
+            raise Fail("the node has no `lean` record")
+        record = dict(rec)
+        if text is not None:
+            record["statement"] = decl["statement"]
+        node_rel = node_path(item)
+        if node_rel is None or node_rel != D["node_path"]:
+            raise Fail(f"the node file of {item} is {node_rel} on {MAIN}, {D['node_path']} on the branch")
+        lib_rel = record.get("file")
+        report_rel = f"coord/reports/{group}/{item}.md"
+        if dry:
+            print(f"DRY RUN {item} (stage 2): branch {br} at {git('rev-parse', '--short', br)}, base {base[:9]}; checks (a)-(e) pass"
+                  + (f"; {nfix} file fixed by the reviewer" if nfix else ""))
+            for n in D["notes"]:
+                print(f"  note: {n}")
+        rid = o.reviewer
+        verdict = (o.verdict or ("FIX" if nfix else "PASS")).upper()
+        reviewed = {"date": today(), "by": "L", "reviewer": rid, "group": group, "result": verdict.lower()}
+        if o.spot_checked:
+            reviewed["note"] = o.spot_checked
+        tree = Tree()
+        book = {"group": group, "item": item}
+        landed = None
+        try:
+            # (3) the node: `lean` and `reviewed_lean` on the current version of the node file
+            cur = json.loads((ROOT / node_rel).read_text())
+            cur["lean"] = record
+            cur["reviewed_lean"] = reviewed
+            say(f"set {node_rel}: lean = {json.dumps(record, ensure_ascii=False)}")
+            say(f"set {node_rel}: reviewed_lean = {json.dumps(reviewed, ensure_ascii=False)}")
+            if not dry:
+                tree.write(node_rel, dump(cur))
+            # (4) the report
+            say(f"write {report_rel} ({len(D['report'] or '')} characters) from the branch")
+            if not dry:
+                tree.write(report_rel, D["report"])
+            # (2) the landing, last before the bookkeeping: a failure aborts with nothing changed
+            if text is not None:
+                sand = ROOT / "lean" / ".sandbox" / "L" / f"{item}.lean"
+                cmd = ["bash", str(ROOT / "tools" / "land.sh"), str(sand), str(ROOT / lib_rel)]
+                say(f"write {sand.relative_to(ROOT)} ({len(text.splitlines())} lines) and run SHEAF_GROUP=L tools/land.sh {sand.relative_to(ROOT)} {lib_rel}")
+                if not dry:
+                    sand.parent.mkdir(parents=True, exist_ok=True)
+                    sand.write_text(text)
+                    r = subprocess.run(cmd, cwd=ROOT, env=dict(_os.environ, SHEAF_GROUP="L"), text=True, capture_output=True)
+                    if r.returncode != 0:
+                        raise Fail(f"land.sh exit {r.returncode}: " + " | ".join((r.stdout + r.stderr).strip().splitlines()[-25:]))
+                    landed = (r.stdout.strip().splitlines() or [""])[-1]
+                    got = next((d for d in s2.declarations((ROOT / lib_rel).read_text()) if d["name"] == record["declaration"]), None)
+                    if got is None:
+                        raise Fail(f"{record['declaration']} not found in the landed {lib_rel}")
+                    if got["statement"] != record["statement"]:
+                        record["statement"] = got["statement"]; cur["lean"] = record
+                        tree.write(node_rel, dump(cur))
+            # (5) bookkeeping as in stage 1: the return entry, the claim, the ledger line, the commit
+            rp, rtext, parts = return_entries(group, item)
+            keep = [x for x in parts if not x.startswith(f"## {item} (")]
+            returned = rtext is not None and len(keep) != len(parts)
+            claim = ROOT / "coord" / "claims" / (item.replace("/", "__") + ".lock")
+            ltext = (f"merged {br} (stage 2; reviewer {verdict}; {'after a return' if returned else 'first push'}; "
+                     f"{record.get('module')} {record.get('declaration')}{'; existing declaration' if record.get('existing') else ''})")
+            author = git("show", "-s", "--format=%an <%ae>", D["commits"][-1]) if D["commits"] else "L"
+            paths = [node_rel, report_rel, "coord/ledger.md", "coord/deliveries.log"] + ([lib_rel] if text is not None else [])
+            msg = (f"State {item} ({group}, reviewed by {rid})\n\nDelivered by group {group} ({br}, {git('rev-parse', '--short', br)}); "
+                   f"reviewer {rid}: {verdict}; merged by tools/merge_delivery.py --stage 2 for L.")
+            if dry:
+                if returned:
+                    print(f"  would drop the return entry of {item} from {rp.relative_to(ROOT)}")
+                print(f"  would run tools/claim.py done {group} {item} (claim file {'present' if claim.exists() else 'absent'})")
+                print(f"  would append the ledger line: - HH:MM L: {ltext}")
+                print(f"  would commit {paths + ([rp.relative_to(ROOT).as_posix()] if returned else [])} as {author}:")
+                print("    " + msg.replace("\n", "\n    "))
+                print(f"  would delete the branch {br} and rewrite the queue (if coord/queue.tsv is older than 60 s)")
+                print(f"DRY RUN {item}: nothing changed")
+                return 0
+            book["returns"] = (rp, rtext)
+            if returned:
+                rp.write_text("".join(keep))
+            book["claim"] = (claim, claim.read_text() if claim.exists() else None)
+            dlog = ROOT / "coord" / "deliveries.log"
+            book["dlog"] = (dlog, dlog.read_text() if dlog.exists() else "")
+            done = subprocess.run([sys.executable, "tools/claim.py", "done", group, item,
+                                   f"delivered by {group} on {br}, merged by L (reviewer {rid})"],
+                                  cwd=ROOT, text=True, capture_output=True)
+            book["ledger"] = ledger_line(ltext + ("" if done.stdout.startswith("done") else f"; claim not held by {group}: {done.stdout.strip()}"))
+            if returned:
+                paths.append(rp.relative_to(ROOT).as_posix())
+            if book["claim"][1] is not None and exists_at("HEAD", claim.relative_to(ROOT).as_posix()):
+                paths.append(claim.relative_to(ROOT).as_posix())
+            git_retry("add", "-A", "--", *paths)
+            git_retry("commit", "-q", f"--author={author}", "-m", msg, "--", *paths)
+        except BaseException as e:
+            tree.restore()
+            unbook(book)
+            if landed and isinstance(e, Fail):
+                raise Fail(f"{e} (the module was landed: {landed}; revert it with tools/landing.py revert <id> <reason>)")
+            raise
+        sha = git("rev-parse", "--short", "HEAD")
+        git("branch", "-D", br, check=False)
+        refresh_queue(item)
+    print(f"MERGED {item} {sha}")
+    return 0
+
+
 def main():
     a = sys.argv[1:]
     if not a or a[0] in ("-h", "--help"):
@@ -620,12 +777,15 @@ def main():
     ap.add_argument("--apply-fixes"); ap.add_argument("--tool-uses"); ap.add_argument("--drop-tool-uses"); ap.add_argument("--drop-nodes"); ap.add_argument("--reviewed")
     ap.add_argument("--lead-note"); ap.add_argument("--verdict", choices=["PASS", "FIX", "pass", "fix"])
     ap.add_argument("--head")
+    ap.add_argument("--stage", choices=["1", "2"], default="1"); ap.add_argument("--dry-run", action="store_true")
     try:
         o = ap.parse_args(a)
     except SystemExit:
         print(f"NOT MERGED {a[1] if len(a) > 1 else '?'}: bad arguments (see --help)"); return 1
+    if o.dry_run and o.stage != "2":
+        print(f"NOT MERGED {o.item}: --dry-run is for --stage 2 only"); return 1
     try:
-        return cmd_merge(o)
+        return cmd_merge2(o) if o.stage == "2" else cmd_merge(o)
     except Exception as e:  # noqa: BLE001
         print(f"NOT MERGED {o.item}: {e}")
         return 1
