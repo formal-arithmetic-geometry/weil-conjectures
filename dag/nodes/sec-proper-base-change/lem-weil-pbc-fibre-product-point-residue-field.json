@@ -211,5 +211,23 @@
   "by": "L",
   "result": "pass",
   "note": "Reviewed by the lead (opus-relaunch6). Agent-written proof of the residue-field sentence of Stacks 01JT (Stacks omits it), six steps and no new node: psi well defined, the morphism T: Spec R -> X x_S Y, T o Spec psi = j_z, the residue map lambda of Spec psi via the spec-field-point node, lambda o T^sharp = id by naturality, conclusion. Mathlib has the morphisms (PullbackCarrier.lean: Triplet.SpecTensorTo :141, ofPointTensor_SpecTensorTo :205) but not the residue-field isomorphism."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FibreProductPointResidueField",
+  "declaration": "AlgebraicGeometry.Scheme.Pullback.exists_residueField_equiv_ofPointTensor",
+  "file": "lean/Sheaf/AlgebraicGeometry/FibreProductPointResidueField.lean",
+  "statement": "theorem exists_residueField_equiv_ofPointTensor {X Y S : Scheme.{u}} (f : X ⟶ S) (g : Y ⟶ S) (z : ↑(pullback f g)) : let T := Triplet.ofPoint z let ψ := (ofPointTensor z).hom let p := RingHom.ker ψ letI : p.IsPrime := RingHom.ker_isPrime ψ (∃ e : p.ResidueField ≃+* (pullback f g).residueField z, e.toRingHom.comp (algebraMap T.tensor p.ResidueField) = ψ ∧ e.toRingHom.comp ((algebraMap T.tensor p.ResidueField).comp T.tensorInl.hom) = ((pullback.fst f g).residueFieldMap z).hom ∧ e.toRingHom.comp ((algebraMap T.tensor p.ResidueField).comp T.tensorInr.hom) = ((pullback.snd f g).residueFieldMap z).hom) ∧ (IsField (T.tensor ⧸ p) → ∃ e : (T.tensor ⧸ p) ≃+* (pullback f g).residueField z, e.toRingHom.comp (Ideal.Quotient.mk p) = ψ ∧ e.toRingHom.comp ((Ideal.Quotient.mk p).comp T.tensorInl.hom) = ((pullback.fst f g).residueFieldMap z).hom ∧ e.toRingHom.comp ((Ideal.Quotient.mk p).comp T.tensorInr.hom) = ((pullback.snd f g).residueFieldMap z).hom)",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-fpr1007",
+  "group": "F1",
+  "result": "pass",
+  "note": "X Y S arbitrary schemes, f g to S, z in Limits.pullback f g; x,y,s via Mathlib Triplet.ofPoint (fst/snd/f of fst); kappa(x) tensor_kappa(s) kappa(y) = Triplet.tensor (pushout model used by carrierEquiv); psi = ofPointTensor (pushout.desc of fst/snd residueFieldMap); p = ker psi (= SpecOfPoint prime); kappa(p)=Ideal.ResidueField, iso pinned to induced map by e∘algebraMap=psi; compat with kappa(x),kappa(y) via tensorInl/Inr vs residueFieldMap; IsField(R/p) clause with Quotient.mk; no Mathlib iso exists (PullbackCarrier read)"
  }
 }
