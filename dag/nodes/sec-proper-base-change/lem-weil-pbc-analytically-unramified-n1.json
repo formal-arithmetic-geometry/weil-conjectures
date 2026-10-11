@@ -221,5 +221,23 @@
   "summary": "Read Algebra Lemma 032Y (lemma-analytically-unramified-easy), its proof of (4) and (5), the remarks after Definition 032X, and the cited Lemmas 00MB, 00MC, 05GH, 031C, 02LX, 032W, 02JK (tags checked in tags/tags). Statement kept (it is clause (5), the domain case of (4)). Proof written in six steps following the proof of (4) with Q(A)=K: set-up (completion Noetherian, local, complete, hence Nagata by 032W; flat, faithfully flat); the total ring of fractions of the reduced completion is a product of fields K_i=Frac(A^/p_i) and the product P of the integral closures S_i is a finite A^-module (Nagata => N-2 => N-1); the injection A'(x)A^ -> K(x)A^ = T^{-1}A^ -> Q(A^) written out (nonzero elements of A stay nonzerodivisors by flatness); the image lies in P by base change of integrality; finiteness by Noetherianity and choice of generators f_i(x)1; descent by the exactness-reflecting definition of faithful flatness. Only one inclusion of Stacks' equality S = prod S_i is used. One new node: lem-weil-pbc-complete-local-nagata (032W, unsplit, no Mathlib match); every other fact is an existing node of unit sk-thm-p1.",
   "blueprint": "the item serves lem-weil-pbc-normal-constant-generic at step 4 of its split (source: Lemma 59.73.13 (Tag 09Z5), proof of (1)) (via 6 created nodes); its steps realize: 032Y (4)-(5): completion Nagata (032W), integral closure inside the finite normalization of the reduced completion, faithfully flat descent of finiteness (entry written by L at review; the worker predates the rule of 2026-10-10)"
  },
- "reviewed": "2026-10-10 L: 6 steps checked against the proof of 032Y (4),(5): completion Noetherian local complete, Nagata by the new 032W node, Q(A^) a product of fields, A' (x) A^ embeds into the finite module prod S_i (injectivity written out), finite as a submodule over Noetherian A^, descent by faithful flatness; citer normal-nagata-monogenic-n1 step 7 matches"
+ "reviewed": "2026-10-10 L: 6 steps checked against the proof of 032Y (4),(5): completion Noetherian local complete, Nagata by the new 032W node, Q(A^) a product of fields, A' (x) A^ embeds into the finite module prod S_i (injectivity written out), finite as a submodule over Noetherian A^, descent by faithful flatness; citer normal-nagata-monogenic-n1 step 7 matches",
+ "lean": {
+  "module": "Sheaf.RingTheory.IsN1OfIsAnalyticallyUnramified",
+  "declaration": "isN1_of_isAnalyticallyUnramified",
+  "file": "lean/Sheaf/RingTheory/IsN1OfIsAnalyticallyUnramified.lean",
+  "statement": "theorem isN1_of_isAnalyticallyUnramified (R : Type u) (K : Type v) [CommRing R] [IsDomain R] [IsLocalRing R] [IsNoetherianRing R] [Field K] [Algebra R K] [IsFractionRing R K] (h : IsAnalyticallyUnramified R) : IsN1 R K",
+  "branch": "sheaf-dag",
+  "by": "K1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-aun1326",
+  "group": "K1",
+  "result": "pass",
+  "note": "Noetherian local domain = [CommRing R][IsDomain R][IsLocalRing R][IsNoetherianRing R]; reduced m-adic completion = landed F1 IsAnalyticallyUnramified R (unfolds to IsReduced (AdicCompletion (maximalIdeal R) R)); fraction field K via [Field K][Algebra R K][IsFractionRing R K]; integral closure finite = i.e. N-1 = landed IsN1 R K (Module.Finite R (integralClosure R K)); no private copies"
+ }
 }
