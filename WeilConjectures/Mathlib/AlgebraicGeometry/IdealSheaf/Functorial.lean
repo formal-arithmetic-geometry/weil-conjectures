@@ -47,7 +47,11 @@ is `AlgebraicGeometry.Scheme.Hom.ker_pullback_snd` in `map`/`comap` language.
   finite intersections, and `AlgebraicGeometry.Scheme.IdealSheafData.comap_iInf_map_of_flat`:
   descent of ideal sheaves along a finite family of flat quasi-compact morphisms;
 - `AlgebraicGeometry.Scheme.IdealSheafData.exists_comap_ι_eq`: ideal sheaves on the affine opens
-  compatible with restriction to basic opens glue.
+  compatible with restriction to basic opens glue;
+- `AlgebraicGeometry.Scheme.IdealSheafData.eq_of_forall_le_ker_iff`: on an affine scheme, an
+  ideal sheaf is determined by the morphisms from affine schemes whose kernel contains it;
+- `AlgebraicGeometry.Scheme.IdealSheafData.le_of_forall_comap_le`: an inclusion of ideal sheaves
+  may be checked on an open cover.
 
 The last section computes sections of the inverse image ideal sheaf:
 `AlgebraicGeometry.Scheme.IdealSheafData.ideal_map_appLE_le_ideal_comap` and
@@ -371,6 +375,13 @@ theorem comap_mul (f : X ⟶ Y) (I J : Y.IdealSheafData) :
     rw [ideal_comap_appLE _ f U V e, ideal_comap_appLE _ f U V e, ideal_comap_appLE _ f U V e,
       ideal_mul, Pi.mul_apply, Ideal.map_mul]
 
+/-- **Pullback of ideal sheaves commutes with powers**, by `comap_mul` and `comap_top`. -/
+theorem comap_pow (f : X ⟶ Y) (J : Y.IdealSheafData) (n : ℕ) :
+    (J ^ n).comap f = J.comap f ^ n := by
+  induction n with
+  | zero => rw [pow_zero, pow_zero]; exact comap_top f
+  | succ n ih => rw [pow_succ, comap_mul, ih, pow_succ]
+
 end Mul
 
 section OpenImmersion
@@ -406,5 +417,55 @@ lemma map_comap_of_subset_range [IsOpenImmersion j] (I : Y.IdealSheafData)
     IsOpenImmersion.lift_fac, ker_subschemeι]
 
 end OpenImmersion
+
+section Pullback
+
+open Limits
+
+/-- The base change of the closed subscheme of `I` along `h : Y' ⟶ Y` is the closed subscheme of
+the pulled back ideal sheaf `I.comap h`. -/
+lemma isPullback_comap {Y Y' : Scheme.{u}} (I : Y.IdealSheafData) (h : Y' ⟶ Y) :
+    IsPullback (I.comap h).subschemeι ((I.comapIso h).hom ≫ pullback.snd h I.subschemeι) h
+      I.subschemeι :=
+  IsPullback.of_iso_pullback ⟨by simp⟩ (I.comapIso h) (by simp) rfl
+
+end Pullback
+
+section Kernel
+
+/-- The pullback of `K` along `h` is contained in the kernel of `a` if and only if `K` is
+contained in the kernel of `a ≫ h`. -/
+lemma comap_le_ker_iff {W : Scheme.{u}} (K : Y.IdealSheafData) (h : X ⟶ Y) (a : W ⟶ X) :
+    K.comap h ≤ a.ker ↔ K ≤ (a ≫ h).ker := by
+  rw [← map_bot a, ← map_bot (a ≫ h), le_map_iff_comap_le, le_map_iff_comap_le, comap_comp]
+
+/-- An ideal sheaf on an affine scheme is determined by the morphisms from affine schemes whose
+kernel contains it: test with the inclusions of the closed subschemes. -/
+lemma eq_of_forall_le_ker_iff [IsAffine X] {K₁ K₂ : X.IdealSheafData}
+    (H : ∀ (W : Scheme.{u}) [IsAffine W] (a : W ⟶ X), K₁ ≤ a.ker ↔ K₂ ≤ a.ker) : K₁ = K₂ := by
+  have (K : X.IdealSheafData) : IsAffine K.subscheme := isAffine_of_isAffineHom K.subschemeι
+  refine le_antisymm ?_ ?_
+  · simpa only [ker_subschemeι] using (H _ K₂.subschemeι).2 (ker_subschemeι K₂).ge
+  · simpa only [ker_subschemeι] using (H _ K₁.subschemeι).1 (ker_subschemeι K₁).ge
+
+/-- An inclusion of ideal sheaves can be checked after pullback along a family of open
+immersions jointly covering the scheme. -/
+lemma le_of_forall_comap_le {ι : Type*} {Z : ι → Scheme.{u}} (j : ∀ i, Z i ⟶ X)
+    [∀ i, IsOpenImmersion (j i)] (hj : ⨆ i, (j i).opensRange = ⊤) {A B : X.IdealSheafData}
+    (H : ∀ i, A.comap (j i) ≤ B.comap (j i)) : A ≤ B := by
+  refine le_of_iSup_eq_top (ι := Σ i, (Z i).affineOpens)
+    (fun p ↦ ⟨j p.1 ''ᵁ p.2.1, p.2.2.image_of_isOpenImmersion _⟩) ?_ fun p ↦ ?_
+  · rw [eq_top_iff]
+    intro x _
+    obtain ⟨i, z, rfl⟩ := TopologicalSpace.Opens.mem_iSup.mp (hj.ge (Set.mem_univ x))
+    obtain ⟨_, ⟨W, hW, rfl⟩, hzW, -⟩ :=
+      (Z i).isBasis_affineOpens.exists_subset_of_mem_open (Set.mem_univ z) isOpen_univ
+    exact TopologicalSpace.Opens.mem_iSup.mpr ⟨⟨i, ⟨W, hW⟩⟩, ⟨z, hzW, rfl⟩⟩
+  · have h := H p.1 p.2
+    rw [ideal_comap_of_isOpenImmersion, ideal_comap_of_isOpenImmersion] at h
+    exact (Ideal.comap_le_comap_iff_of_surjective _
+      (j p.1 |>.appIso p.2.1).commRingCatIsoToRingEquiv.symm.surjective _ _).mp h
+
+end Kernel
 
 end AlgebraicGeometry.Scheme.IdealSheafData

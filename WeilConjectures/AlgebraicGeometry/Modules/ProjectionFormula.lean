@@ -7,6 +7,9 @@ module
 
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 public import WeilConjectures.AlgebraicGeometry.Modules.Invertible
+public import WeilConjectures.AlgebraicGeometry.Modules.PullbackFreeGenerator
+public import WeilConjectures.AlgebraicGeometry.Modules.PullbackMonoidal
+public import WeilConjectures.AlgebraicGeometry.Modules.TensorSection
 public import WeilConjectures.AlgebraicGeometry.PicardFunctor
 
 /-!
@@ -34,6 +37,10 @@ the tensor product, and the projection formula `g_* (ℱ ⊗ g^* N) ≅ g_* ℱ 
 - `AlgebraicGeometry.Scheme.Modules.isQuasicoherent_tensorObj`,
   `AlgebraicGeometry.Scheme.Modules.isFinitePresentation_tensorObj`: twisting by an invertible
   module preserves quasi-coherence and finite presentation.
+- `AlgebraicGeometry.Scheme.Modules.projectionHom`: the projection morphism
+  `g_* ℱ ⊗ N ⟶ g_* (ℱ ⊗ g^* N)`, `x ⊗ n ↦ x ⊗ η n`.
+- `AlgebraicGeometry.Scheme.Modules.isIso_projectionHom`: the projection formula, i.e.
+  `projectionHom` is an isomorphism for an invertible module `N`.
 - `AlgebraicGeometry.Scheme.Modules.nonempty_pushforward_tensorObj_pullback_iso`: the projection
   formula `g_* (ℱ ⊗ g^* N) ≅ g_* ℱ ⊗ N` for an invertible module `N`.
 - `AlgebraicGeometry.Scheme.Modules.nonempty_pushforward_pullback_iso`: its case `ℱ = 𝒪_X`.
@@ -59,7 +66,7 @@ sheafification of the presheaf pullback, which is a base change of modules and s
 tensor products. -/
 theorem nonempty_pullback_tensorObj_iso (g : X ⟶ Y) (M N : Y.Modules) :
     Nonempty ((pullback g).obj (M ⊗ N) ≅ (pullback g).obj M ⊗ (pullback g).obj N) :=
-  sorry
+  ⟨(Functor.Monoidal.μIso (pullback g) M N).symm⟩
 
 /-- **The pullback of a tensor power is the tensor power of the pullback.**
 `g^* (M^{⊗ m}) ≅ (g^* M)^{⊗ m}`. -/
@@ -176,20 +183,153 @@ theorem isFinitePresentation_tensorObj (M N : X.Modules)
 
 end Quasicoherent
 
-section ProjectionFormula
+section ProjectionHom
+
+open Opposite
+
+attribute [local instance] presheafMonoidalCategory presheafSymmetricCategory
+  SheafOfModules.sheafificationMonoidal SheafOfModules.sheafificationBraided
+  sheafificationMonoidal sheafificationBraided forgetToPresheafOfModulesLaxMonoidal
+
+variable (g : X ⟶ Y) (F : X.Modules) (N : Y.Modules)
+
+/-- The bilinear map `Γ(g_* F, U) × Γ(N, U) → Γ(g_* (F ⊗ g^* N), U)`,
+`(x, n) ↦ x ⊗ η n`, where `η : N ⟶ g_* g^* N` is the unit of the adjunction. -/
+noncomputable def projectionSectionsMap (U : Y.Opens) :
+    Γ((pushforward g).obj F, U) →ₗ[Γ(Y, U)] Γ(N, U) →ₗ[Γ(Y, U)]
+      Γ((pushforward g).obj (F ⊗ (pullback g).obj N), U) :=
+  LinearMap.mk₂ Γ(Y, U)
+    (fun x n ↦ tmulSection (M := F) (N := (pullback g).obj N) (U := g ⁻¹ᵁ U) x
+      (((pullbackPushforwardAdjunction g).unit.app N).app U n))
+    (fun x x' n ↦ add_tmulSection _ _ _)
+    (fun r x n ↦ smul_tmulSection _ _ _)
+    (fun x n n' ↦ by rw [map_add, tmulSection_add])
+    (fun r x n ↦ (congrArg (tmulSection (M := F) (U := g ⁻¹ᵁ U) x) (Hom.app_smul _ r n)).trans
+      (tmulSection_smul _ _ _))
+
+/-- The sections `x ⊗ η n` of `F ⊗ g^* N` are compatible with restriction. -/
+lemma tmulSection_unit_app_presheaf_map {U V : Y.Opens} (i : V ⟶ U) (x : Γ(F, g ⁻¹ᵁ U))
+    (n : Γ(N, U)) :
+    tmulSection (F.presheaf.map ((TopologicalSpace.Opens.map g.base).map i).op x)
+        (((pullbackPushforwardAdjunction g).unit.app N).app V (N.presheaf.map i.op n)) =
+      (F ⊗ (pullback g).obj N).presheaf.map ((TopologicalSpace.Opens.map g.base).map i).op
+        (tmulSection x (((pullbackPushforwardAdjunction g).unit.app N).app U n)) := by
+  have h₁ : ((pullbackPushforwardAdjunction g).unit.app N).app V (N.presheaf.map i.op n) =
+      ((pullback g).obj N).presheaf.map ((TopologicalSpace.Opens.map g.base).map i).op
+        (((pullbackPushforwardAdjunction g).unit.app N).app U n) :=
+    Hom.app_presheaf_map _ i n
+  rw [h₁]
+  exact (tmulSection_map (M := F) (N := (pullback g).obj N)
+    (leOfHom ((TopologicalSpace.Opens.map g.base).map i)) _ _).symm
+
+/-- The morphism of presheaves of modules `g_* F ⊗ₚ N ⟶ g_* (F ⊗ g^* N)` given on sections by
+`x ⊗ n ↦ x ⊗ η n`. -/
+noncomputable def projectionPresheafHom :
+    (forgetToPresheafOfModules Y).obj ((pushforward g).obj F) ⊗
+        (forgetToPresheafOfModules Y).obj N ⟶
+      (forgetToPresheafOfModules Y).obj ((pushforward g).obj (F ⊗ (pullback g).obj N)) where
+  app U := ModuleCat.ofHom
+    (TensorProduct.lift (R := Γ(Y, U.unop)) (projectionSectionsMap g F N U.unop))
+  naturality {U U'} i := by
+    ext1
+    refine LinearMap.ext fun t ↦ ?_
+    induction t using TensorProduct.induction_on with
+    | zero => simp only [map_zero]
+    | tmul x n =>
+      have := PresheafOfModules.Monoidal.tensorObj_map_tmul (R := Y.presheaf) i x n
+      refine (congrArg (TensorProduct.lift (projectionSectionsMap g F N U'.unop)) this).trans ?_
+      refine (TensorProduct.lift.tmul _ _).trans ?_
+      refine Eq.trans ?_ (congrArg (((forgetToPresheafOfModules Y).obj
+        ((pushforward g).obj (F ⊗ (pullback g).obj N))).map i).hom
+          (TensorProduct.lift.tmul _ _).symm)
+      dsimp only [projectionSectionsMap, LinearMap.mk₂_apply]
+      exact tmulSection_unit_app_presheaf_map g F N i.unop x n
+    | add a b ha hb => rw [map_add, map_add, ha, hb]
+
+/-- The comparison map `a(M ⊗ₚ N) ⟶ M ⊗ N` from the sheafification of the presheaf tensor
+product is an isomorphism. -/
+instance isIso_δ_comp_tensorHom_counit (M N : Y.Modules) :
+    IsIso (Functor.OplaxMonoidal.δ (sheafification Y)
+      ((forgetToPresheafOfModules Y).obj M) ((forgetToPresheafOfModules Y).obj N) ≫
+        ((sheafificationAdjunction Y).counit.app M ⊗ₘ
+          (sheafificationAdjunction Y).counit.app N)) := by
+  have : IsIso (sheafificationAdjunction Y).counit :=
+    (inferInstance : IsIso (_root_.PresheafOfModules.sheafificationAdjunction.{u}
+      (𝟙 Y.ringCatSheaf.obj)).counit)
+  infer_instance
+
+/-- The projection morphism `g_* F ⊗ N ⟶ g_* (F ⊗ g^* N)`, given on sections by
+`x ⊗ n ↦ x ⊗ η n` where `η : N ⟶ g_* g^* N` is the unit of the adjunction `g^* ⊣ g_*`. -/
+noncomputable def projectionHom :
+    (pushforward g).obj F ⊗ N ⟶ (pushforward g).obj (F ⊗ (pullback g).obj N) :=
+  inv (Functor.OplaxMonoidal.δ (sheafification Y) _ _ ≫
+      ((sheafificationAdjunction Y).counit.app ((pushforward g).obj F) ⊗ₘ
+        (sheafificationAdjunction Y).counit.app N)) ≫
+    ((sheafificationAdjunction Y).homEquiv _ _).symm (projectionPresheafHom g F N)
+
+/-- On the presheaf tensor product, the projection morphism is `projectionPresheafHom`. -/
+lemma μ_comp_map_projectionHom :
+    Functor.LaxMonoidal.μ (forgetToPresheafOfModules Y) ((pushforward g).obj F) N ≫
+      (forgetToPresheafOfModules Y).map (projectionHom g F N) = projectionPresheafHom g F N := by
+  rw [Adjunction.rightAdjointLaxMonoidal_μ, Adjunction.homEquiv_unit, Category.assoc,
+    ← Functor.map_comp, projectionHom, IsIso.hom_inv_id_assoc, ← Adjunction.homEquiv_unit,
+    Equiv.apply_symm_apply]
+
+/-- The projection morphism sends `x ⊗ n` to `x ⊗ η n`. -/
+lemma projectionHom_app_tmulSection (U : Y.Opens) (x : Γ(F, g ⁻¹ᵁ U)) (n : Γ(N, U)) :
+    (projectionHom g F N).app U (tmulSection (M := (pushforward g).obj F) x n) =
+      tmulSection (M := F) (N := (pullback g).obj N) (U := g ⁻¹ᵁ U) x
+        (((pullbackPushforwardAdjunction g).unit.app N).app U n) :=
+  (congr_arg (fun φ ↦ φ.app (op U) (x ⊗ₜ n)) (μ_comp_map_projectionHom g F N)).trans
+    (TensorProduct.lift.tmul _ _)
+
+/-- The projection morphism is bijective on sections over opens on which `N` has a free
+generator. -/
+lemma bijective_projectionHom_app {V : Y.Opens} {e : Γ(N, V)} (he : IsFreeGenerator e)
+    {W : Y.Opens} (hW : W ≤ V) : Function.Bijective ((projectionHom g F N).app W) := by
+  have h₁ := he.bijective_tmulSection_right (M := (pushforward g).obj F) hW
+  have h₂ := (he.pullback_unit_app g).bijective_tmulSection_right (M := F) (g.preimage_mono hW)
+  have : (projectionHom g F N).app W ∘
+      (fun x : Γ(F, g ⁻¹ᵁ W) ↦ tmulSection (M := (pushforward g).obj F) x
+        (N.presheaf.map (homOfLE hW).op e)) =
+      fun x : Γ(F, g ⁻¹ᵁ W) ↦ tmulSection x (((pullback g).obj N).presheaf.map
+        (homOfLE (g.preimage_mono hW)).op
+          (((pullbackPushforwardAdjunction g).unit.app N).app V e)) := by
+    funext x
+    rw [Function.comp_apply, projectionHom_app_tmulSection]
+    exact congrArg (tmulSection x) (Hom.app_presheaf_map _ (homOfLE hW) e)
+  rw [← this] at h₂
+  exact (Function.Bijective.of_comp_iff _ h₁).1 h₂
 
 /-- **The projection formula** for an invertible module. For `g : X ⟶ Y`, an `𝒪_X`-module `ℱ`
-and an invertible `𝒪_Y`-module `N`, `g_* (ℱ ⊗ g^* N) ≅ g_* ℱ ⊗ N`. The comparison map is the
-adjoint of `g^* (g_* ℱ ⊗ N) ≅ g^* g_* ℱ ⊗ g^* N ⟶ ℱ ⊗ g^* N`; it is an isomorphism because it is
-one locally on `Y`: on an open `V` where `N ≅ 𝒪_V`, both sides are `g_* ℱ` on `V`.
+and an invertible `𝒪_Y`-module `N`, the natural map `projectionHom : g_* ℱ ⊗ N ⟶ g_* (ℱ ⊗ g^* N)`,
+`x ⊗ n ↦ x ⊗ η n` with `η : N ⟶ g_* g^* N` the unit of the adjunction, is an isomorphism. It is
+one locally on `Y`: if `e` is a free generator of `N` on `V`, then `η e` is one of `g^* N` on
+`g ⁻¹ᵁ V`, and both sides have sections `Γ(ℱ, g ⁻¹ᵁ W)` over every `W ≤ V`, via `x ↦ x ⊗ e` and
+`x ↦ x ⊗ η e`.
 
 For a closed immersion `g` this is the last clause of the blueprint lemma.
+
+(blueprint: `lem-pc-closed-immersion-coherent-cohomology`) -/
+theorem isIso_projectionHom [N.IsInvertible] : IsIso (projectionHom g F N) := by
+  have := IsInvertible.sheafOfModules_isInvertible N
+  refine Hom.isIso_of_forall_bijective_app _ fun y ↦ ?_
+  obtain ⟨U, hy, -, e, he⟩ := exists_isFreeGenerator N (W := ⊤) (x := y) trivial
+  exact ⟨U.1, hy, fun W hW ↦ bijective_projectionHom_app g F N he hW⟩
+
+end ProjectionHom
+
+section ProjectionFormula
+
+/-- **The projection formula** for an invertible module: `g_* (ℱ ⊗ g^* N) ≅ g_* ℱ ⊗ N`, the
+inverse of the isomorphism `projectionHom` (`isIso_projectionHom`).
 
 (blueprint: `lem-pc-closed-immersion-coherent-cohomology`) -/
 theorem nonempty_pushforward_tensorObj_pullback_iso (g : X ⟶ Y) (F : X.Modules) (N : Y.Modules)
     [N.IsInvertible] :
     Nonempty ((pushforward g).obj (F ⊗ (pullback g).obj N) ≅ (pushforward g).obj F ⊗ N) :=
-  sorry
+  have := isIso_projectionHom g F N
+  ⟨(asIso (projectionHom g F N)).symm⟩
 
 /-- **The projection formula** for an invertible module and the structure sheaf. For
 `g : X ⟶ Y` and an invertible `𝒪_Y`-module `N`, `g_* (g^* N) ≅ g_* 𝒪_X ⊗ N`: this is

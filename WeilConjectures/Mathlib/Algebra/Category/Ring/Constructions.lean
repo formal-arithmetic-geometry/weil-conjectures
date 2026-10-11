@@ -6,6 +6,7 @@ Authors: Christian Merten
 module
 
 public import Mathlib.Algebra.Category.Ring.Constructions
+public import Mathlib.RingTheory.TensorProduct.IsBaseChangeFree
 public import Mathlib.RingTheory.TensorProduct.Quotient
 public import Mathlib.CategoryTheory.ConcreteCategory.EpiMono
 public import WeilConjectures.Mathlib.Algebra.Ring.Subring.Basic
@@ -27,6 +28,8 @@ invariant under an isomorphism of `R` (`CommRingCat.closure_range_union_eq_top_i
 ## Main results
 
 - `CommRingCat.isPushout_quotient`
+- `CommRingCat.IsPushout.bijective_sum_mul`: a `ℤ`-basis is carried to a basis along a pushout
+  square of commutative rings over a quotient of `ℤ`.
 -/
 
 @[expose] public section
@@ -77,5 +80,52 @@ lemma closure_range_union_eq_top_iff_of_iso {A B R R' : CommRingCat.{u}}
   refine ⟨fun h ↦ ?_, closure_range_union_eq_top_of_iso e⟩
   have := closure_range_union_eq_top_of_iso (a := a ≫ e) (b := b ≫ e) (inv e) h
   simpa using this
+
+end CommRingCat
+
+namespace CommRingCat
+
+set_option backward.isDefEq.respectTransparency false in
+/-- **Bases are preserved by pushouts over the integers**: given a pushout square of commutative
+rings `R → A, R → B, A → X, B → X` with `R` a quotient of `ℤ`, a `ℤ`-basis `v` of `A` maps to a
+`B`-basis of `X`, i.e. every element of `X` is uniquely a finite sum `∑ b(cᵢ) a(vᵢ)`. -/
+theorem IsPushout.bijective_sum_mul {R A B X : CommRingCat} {f : R ⟶ A} {g : R ⟶ B}
+    {a : A ⟶ X} {b : B ⟶ X} (h : IsPushout f g a b)
+    (hR : Function.Surjective (Int.castRingHom R)) {ι : Type*} (v : Module.Basis ι ℤ A) :
+    Function.Bijective fun c : ι →₀ B ↦ c.sum fun i r ↦ b r * a (v i) := by
+  let := f.hom.toAlgebra
+  let := g.hom.toAlgebra
+  let := a.hom.toAlgebra
+  let := b.hom.toAlgebra
+  let : Algebra R X := (f ≫ a).hom.toAlgebra
+  have : IsScalarTower R A X := .of_algebraMap_eq' rfl
+  have : IsScalarTower R B X := .of_algebraMap_eq' (by
+    change (f ≫ a).hom = (g ≫ b).hom
+    rw [h.w])
+  have hp : Algebra.IsPushout R A B X := CommRingCat.isPushout_iff_isPushout.mp h
+  have hli : LinearIndependent R v := by
+    rw [linearIndependent_iff']
+    intro t c hc i hi
+    choose z hz using fun j ↦ hR (c j)
+    have h' : ∑ j ∈ t, z j • v j = 0 := by
+      rw [← hc]
+      refine Finset.sum_congr rfl fun j _ ↦ ?_
+      rw [← hz j, eq_intCast, Int.cast_smul_eq_zsmul]
+    rw [← hz i, linearIndependent_iff'.mp v.linearIndependent t z h' i hi, eq_intCast,
+      Int.cast_zero]
+  have hsp : (⊤ : Submodule R A) ≤ Submodule.span R (Set.range v) := by
+    intro x _
+    have := Submodule.span_le_restrictScalars ℤ R (Set.range v)
+    exact this (v.span_eq.ge Submodule.mem_top)
+  let vX := IsBaseChange.basis (Module.Basis.mk hli hsp) hp.symm.out
+  have hvX : ∀ i, vX i = a (v i) := fun i ↦ by
+    simp [vX, IsBaseChange.basis_apply]
+    rfl
+  convert vX.repr.symm.bijective using 1
+  ext c
+  rw [Module.Basis.repr_symm_apply, Finsupp.linearCombination_apply]
+  refine Finsupp.sum_congr fun i _ ↦ ?_
+  rw [hvX, Algebra.smul_def]
+  rfl
 
 end CommRingCat

@@ -30,9 +30,11 @@ compactly supported ones.
 
 ## Implementation notes
 
-The dualizing complex and the Verdier dual take `[(R(a)_![A]).IsLeftAdjoint]` as a hypothesis,
-since the ambient pro-étale `Ra^!` exists only under it (see
-`WeilConjectures.SixFunctors.ProEtale.Derived.UpperShriek`).
+The exceptional inverse image `Ra^!` is the constructible one of blueprint
+`sk-def-sf-operations` (vi), `ν_X^* ∘ a^× ∘ Rν_{Y,*}` (see
+`WeilConjectures.SixFunctors.ProEtale.Derived.UpperShriek`), which needs no hypothesis on `a`
+beyond a compactification: the ambient right adjoint of the pro-étale `Ra_!` does not exist in
+general.
 
 The constant sheaf `Λ_X` is the monoidal unit `𝟙_ D(X_proét)` of the derived tensor product,
 and the coefficient object `Λ` at the point is the monoidal unit `𝟙_ A` of the coefficient
@@ -84,7 +86,8 @@ noncomputable def cohomology (i : ℤ) :
 @[inherit_doc cohomology]
 scoped notation "H(" X ")[" A "](" i ")" => cohomology A X i
 
-variable {X} {Y : Scheme.{u}} (a : X ⟶ Y) [HasCompactification a] [(R(a)_![A]).IsLeftAdjoint]
+variable {X} {Y : Scheme.{u}} (a : X ⟶ Y) [HasCompactification a]
+  [Etale.HasBoundedBelowUpperShriek A a]
 
 /-- Blueprint `sk-def-ops`: The six operations, the dualizing complex, the duals.
 

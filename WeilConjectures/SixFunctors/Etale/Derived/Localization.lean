@@ -5,12 +5,16 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.Mathlib.CategoryTheory.Triangulated.Adjunction
+public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.FullyFaithful
+public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.KInjective
 public import WeilConjectures.Mathlib.CategoryTheory.Triangulated.Pretriangulated
+public import WeilConjectures.SixFunctors.BaseChange.Etale
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekToLowerStar
-public import WeilConjectures.SixFunctors.Etale.Derived.OpenImmersionLowerShriekBaseChange
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStar
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperShriek
+public import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Complement
+public import WeilConjectures.SixFunctors.Etale.LowerShriek.Proper
+public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.ClosedImmersion
 public import WeilConjectures.SixFunctors.OpenClosed.Derived
 public import WeilConjectures.SixFunctors.OpenClosed.Exact
 
@@ -34,12 +38,9 @@ proper.
 ## Main statements
 
 - `AlgebraicGeometry.Etale.isIso_rightDerivedUpperShriekAdjunction_unit_app`
-- `AlgebraicGeometry.Etale.isZero_mapDerivedCategoryUpperStar_obj_rightDerivedLowerShriek`:
-  `D(j^*) Ri_! = 0` when the images of `i` and `j` are disjoint.
+- `AlgebraicGeometry.Etale.isZero_upperStar_rightDerivedLowerShriek`: `j^* Ri_! = 0` for an
+  open immersion `j` whose range is disjoint from the range of `i`.
 - `AlgebraicGeometry.Etale.subsingleton_hom_shift_rightDerivedLowerShriek_rightDerivedLowerStar`
-- `AlgebraicGeometry.Etale.\
-  isZero_of_isZero_mapDerivedCategoryUpperStar_of_isZero_rightDerivedUpperShriek`:
-  `D(j^*)` and `Ri^!` jointly detect zero objects.
 - `AlgebraicGeometry.Etale.existsUnique_distTriang_supportedLocalization`
 - `AlgebraicGeometry.Etale.supportedLocalizationBoundary`: the boundary of the triangle.
 - `AlgebraicGeometry.Etale.exists_triangleHom_supportedLocalization`
@@ -50,7 +51,7 @@ proper.
 
 universe u' u
 
-open CategoryTheory Limits Pretriangulated
+open CategoryTheory Limits Pretriangulated Abelian
 
 open scoped CategoryTheory.Functor
 
@@ -63,6 +64,7 @@ namespace Etale
 variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
   [HasSmallSiteSheafify A] {U Z X : Scheme.{u}}
 
+omit [HasSmallSiteSheafify A] in
 /-- Blueprint `sk-prop-sf-closed-unit`: Closed-immersion unit
 
 For a closed immersion `i : Z ⟶ X` and `Q ∈ D^b_{ctf}(Z, Λ)` the unit
@@ -72,11 +74,94 @@ For a closed immersion `i : Z ⟶ X` and `Q ∈ D^b_{ctf}(Z, Λ)` the unit
 of the exceptional adjunction `AlgebraicGeometry.Etale.rightDerivedUpperShriekAdjunction` is
 an isomorphism; since a closed immersion is proper, `Ri_!` is `Ri_*`, so this says that `Ri_*`
 is fully faithful on the exceptional side. It is the derived counterpart of the full
-faithfulness of `i_*` recorded in `AlgebraicGeometry.Etale.fullyFaithfulLowerStar`. -/
+faithfulness of `i_*` recorded in `AlgebraicGeometry.Etale.fullyFaithfulLowerStar`.
+
+The unit is invertible for every `Q ∈ D(Z_ét, A)` because `Ri_!` is fully faithful. Write
+`Ri_! = D(k_!) ⋙ Rg_*` for the chosen compactification `Z ⟶[k] Z̄ ⟶[g] X` of `i`. As `i` is
+proper, `k` has closed range, so `k_! ≅ k_*`
+(`AlgebraicGeometry.Etale.isIso_openImmersionLowerShriekToLowerStar_of_isClosed_range`); hence
+`k_!` preserves K-injective complexes and `Ri_! ≅ R(k_! ⋙ g_*)`. On sheaves `k_! ⋙ g_* ≅ i_*`
+(`AlgebraicGeometry.Etale.isIso_lowerShriekToLowerStar`), which is fully faithful for any
+coefficients (`AlgebraicGeometry.Etale.full_lowerStar_of_isClosedImmersion`), and the right
+derived functor of a fully faithful functor preserving K-injective complexes is fully faithful
+(`CategoryTheory.Functor.full_rightDerivedFunctor`). -/
 theorem isIso_rightDerivedUpperShriekAdjunction_unit_app (i : Z ⟶ X) [IsClosedImmersion i]
-    [HasCompactification i] (Q : _root_.DerivedCategory (Sheaf Z.smallEtaleTopology A)) :
-    IsIso ((rightDerivedUpperShriekAdjunction A i).unit.app Q) :=
-  sorry
+    [HasCompactification i]
+    [(R(i)_![A]).IsLeftAdjoint] (Q : _root_.DerivedCategory (Sheaf Z.smallEtaleTopology A)) :
+    IsIso ((rightDerivedUpperShriekAdjunction A i).unit.app Q) := by
+  let c := HasCompactification.compactification i
+  -- `k_! ≅ k_*` for the open immersion `k` of the compactification, whose range is closed
+  have : IsIso (Etale.openImmersionLowerShriekToLowerStar A c.i) :=
+    Etale.isIso_openImmersionLowerShriekToLowerStar_of_isClosed_range A c.i
+      (c.isClopen_range_openImmersion inferInstance).isClosed
+  have : ((c.i)_!open[A]).PreservesKInjectiveComplexes :=
+    Functor.preservesKInjectiveComplexes_of_iso
+      (asIso (Etale.openImmersionLowerShriekToLowerStar A c.i)).symm
+  -- on sheaves, `k_! ⋙ g_* ≅ i_*` is fully faithful
+  let e : (c.i)_!open[A] ⋙ (c.g)_*[A] ≅ (i)_*[A] := asIso (Etale.lowerShriekToLowerStar A i)
+  have : ((c.i)_!open[A] ⋙ (c.g)_*[A]).Full := Functor.Full.of_iso e.symm
+  have : ((c.i)_!open[A] ⋙ (c.g)_*[A]).Faithful := Functor.Faithful.of_iso e.symm
+  -- hence so is `Ri_! = D(k_!) ⋙ Rg_* ≅ R(k_! ⋙ g_*)`
+  let e' : R(i)_![A] ≅ R((c.i)_!open[A] ⋙ (c.g)_*[A]) :=
+    Functor.isoWhiskerRight ((c.i)_!open[A]).rightDerivedFunctorIsoMapDerivedCategory.symm _ ≪≫
+      (Functor.rightDerivedFunctorCompIso _ _).symm
+  have : (R(i)_![A]).Full := Functor.Full.of_iso e'.symm
+  have : (R(i)_![A]).Faithful := Functor.Faithful.of_iso e'.symm
+  infer_instance
+
+/-- **Étale base change kills what the pullback kills.** Let `g : W ⟶ X` be a morphism and
+`j : U ⟶ X` an open immersion, with base change `j' : W ×_X U ⟶ W`. If `D(j'^*) M = 0`, then
+`D(j^*) Rg_* M = 0`.
+
+Represent `M` by a K-injective complex `I`. Then `Rg_* M` is `g_* I`, and étale base change for
+the pushforward (`AlgebraicGeometry.Etale.isIso_baseChangeMap_flip_of_isPullback`) identifies
+`j^* g_* I` with `g'_* j'^* I`. The complex `j'^* I` is K-injective, `j'^*` being right adjoint
+to the exact `j'_!`, so `g'_* j'^* I` is `Rg'_*` of `D(j'^*) M = 0`. -/
+lemma isZero_upperStar_rightDerivedLowerStar {W : Scheme.{u}} (g : W ⟶ X) (j : U ⟶ X)
+    [IsOpenImmersion j] (M : _root_.DerivedCategory (Sheaf W.smallEtaleTopology A))
+    (hM : IsZero (D((pullback.fst g j)^*[A]).obj M)) :
+    IsZero (D((j)^*[A]).obj (R((g)_*[A]).obj M)) := by
+  obtain ⟨I, _, ⟨e⟩⟩ := _root_.DerivedCategory.exists_iso_Q_obj_of_isKInjective M
+  have hsq : IsPullback (pullback.snd g j) (pullback.fst g j) j g :=
+    (IsPullback.of_hasPullback g j).flip
+  have := Etale.isIso_baseChangeMap_flip_of_isPullback A hsq
+  have : ((pullback.fst g j)^*[A]).PreservesKInjectiveComplexes :=
+    (Etale.openImmersionLowerShriekUpperStarAdjunction A _).preservesKInjectiveComplexes
+  let J := (((pullback.fst g j)^*[A]).mapHomologicalComplex _).obj I
+  have hJ : IsZero (R(((pullback.snd g j))_*[A]).obj (_root_.DerivedCategory.Q.obj J)) :=
+    Functor.isZero_rightDerivedFunctor_obj _
+      (hM.of_iso ((D((pullback.fst g j)^*[A]).mapIso e ≪≫
+        ((pullback.fst g j)^*[A]).mapDerivedCategoryFactors.app I).symm))
+  exact hJ.of_iso
+    (D((j)^*[A]).mapIso (R((g)_*[A]).mapIso e ≪≫ ((g)_*[A]).rightDerivedFunctorObjQIso I) ≪≫
+      ((j)^*[A]).mapDerivedCategoryFactors.app _ ≪≫
+      _root_.DerivedCategory.Q.mapIso ((NatIso.mapHomologicalComplex
+        (asIso (Etale.baseChangeMap A hsq.toCommSq.flip)) _).app I) ≪≫
+      (((pullback.snd g j)_*[A]).rightDerivedFunctorObjQIso J).symm)
+
+/-- **`j^* Ri_!` vanishes** for an open immersion `j` whose range is disjoint from the range of
+`i`. Write `Ri_! = Rg_* D(i'_!)` for the chosen compactification `Z ⟶[i'] Z̄ ⟶[g] X` of `i`.
+By étale base change along `j`
+(`AlgebraicGeometry.Etale.isZero_upperStar_rightDerivedLowerStar`) it suffices that the
+restriction of `D(i'_!) B` to the open `g⁻¹(U)` vanishes, and it does termwise because
+`g⁻¹(U)` misses the range of `i'`
+(`AlgebraicGeometry.Etale.isInitial_openImmersionRestriction_openImmersionLowerShriek`). -/
+lemma isZero_upperStar_rightDerivedLowerShriek (i : Z ⟶ X) [HasCompactification i]
+    (j : U ⟶ X) [IsOpenImmersion j] (hij : Disjoint (Set.range i.base) (Set.range j.base))
+    (B : _root_.DerivedCategory (Sheaf Z.smallEtaleTopology A)) :
+    IsZero (D((j)^*[A]).obj ((R(i)_![A]).obj B)) := by
+  let c := HasCompactification.compactification i
+  have : IsOpenImmersion c.i := c.isOpenImmersion
+  refine isZero_upperStar_rightDerivedLowerStar A c.g j _ ?_
+  have hd : Disjoint (Set.range c.i.base) (Set.range (pullback.fst c.g j).base) := by
+    rw [Scheme.Pullback.range_fst, Set.disjoint_left]
+    rintro _ ⟨z, rfl⟩ hz
+    refine Set.disjoint_left.mp hij ⟨z, ?_⟩ hz
+    exact (congrArg (fun f ↦ f.base z) c.comm).trans rfl
+  refine (Functor.isZero_mapDerivedCategory_obj ((c.i)_!open[A] ⋙ (pullback.fst c.g j)^*[A]) B
+    fun n ↦ ?_).of_iso ((((c.i)_!open[A]).mapDerivedCategoryCompIso _).symm.app B)
+  exact ((Etale.isInitial_openImmersionRestriction_openImmersionLowerShriek A c.i _ hd
+    _).isZero).of_iso ((Etale.upperStarIsoOpenImmersionRestriction A _).app _)
 
 section Localization
 
@@ -93,6 +178,7 @@ variable [MonoidalCategory A] [MonoidalPreadditive A] [SymmetricCategory A] [Mon
 
 where `ε` is the counit of `Ri_! ⊣ Ri^!` and `η` the unit of `Lj^* ⊣ Rj_*`. -/
 noncomputable abbrev supportedLocalizationTriangle (i : Z ⟶ X) [HasCompactification i]
+    [(R(i)_![A]).IsLeftAdjoint]
     (j : U ⟶ X) (L : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A))
     (w : (R((j)_*[A])).obj ((L((j)^*[A])).obj L) ⟶
       ((R(i)_![A]).obj ((R(i)^![A]).obj L))⟦(1 : ℤ)⟧) :
@@ -100,63 +186,19 @@ noncomputable abbrev supportedLocalizationTriangle (i : Z ⟶ X) [HasCompactific
   Triangle.mk ((rightDerivedUpperShriekAdjunction A i).counit.app L)
     ((derivedUpperStarLowerStarAdjunction A j).unit.app L) w
 
+omit [MonoidalCategory A] [MonoidalPreadditive A] [SymmetricCategory A] [MonoidalClosed A]
+  [Abelian.HasFunctorialFlatResolution A] in
 /-- Blueprint `sk-prop-sf-localization`: Supported localization
 
-**The open restriction of a compactly supported direct image vanishes away from the image.**
-Let `i : Z ⟶ X` be compactifiable and `j : U ⟶ X` an open immersion with disjoint images. Then
-`D(j^*) (Ri_! B) = 0` for every `B ∈ D(Z_ét, A)`.
-
-Write `Ri_! = Rp_* ∘ D(i'_!)` for the chosen compactification `Z ⟶[i'] Z̄ ⟶[p] X`, and let
-`j' : V ⟶ Z̄` be the base change of `j` along `p`, with `p' : V ⟶ U`. For every `N`,
+**No maps from the closed side to the open side.** Let `i : Z ⟶ X` be compactifiable and let
+`j : U ⟶ X` be an open immersion, with disjoint ranges. Then `Hom((Ri_! B)[n], Rj_* C) = 0` for
+all `B ∈ D(Z_ét, A)`, `C ∈ D(U_ét, A)` and `n`. By `j^* ⊣ Rj_*`,
 
 ```
-  Hom(N, D(j^*) Rp_* M) ≅ Hom(D(j_!) N, Rp_* M) ≅ Hom(Lp^* D(j_!) N, M)
-    ≅ Hom(D(j'_!) Lp'^* N, M) ≅ Hom(Lp'^* N, D(j'^*) M),
+  Hom((Ri_! B)[n], Rj_* C) ≅ Hom(j^* ((Ri_! B)[n]), C) ≅ Hom((j^* Ri_! B)[n], C),
 ```
 
-using `D(j_!) ⊣ D(j^*)`, `Lp^* ⊣ Rp_*`, the base change isomorphism of the extension by zero
-`AlgebraicGeometry.Etale.derivedOpenImmersionLowerShriekBaseChangeIso` and `D(j'_!) ⊣ D(j'^*)`.
-For `M = D(i'_!) B` the last group vanishes, because the ranges of `j'` and `i'` are disjoint
-(`AlgebraicGeometry.Etale.\
-isZero_mapDerivedCategoryUpperStar_obj_openImmersionLowerShriek_of_disjoint_range`). -/
-theorem isZero_mapDerivedCategoryUpperStar_obj_rightDerivedLowerShriek (i : Z ⟶ X)
-    [HasCompactification i] (j : U ⟶ X) [IsOpenImmersion j]
-    (hij : Disjoint (Set.range i.base) (Set.range j.base))
-    (B : _root_.DerivedCategory (Sheaf Z.smallEtaleTopology A)) :
-    IsZero (D((j)^*[A]).obj ((R(i)_![A]).obj B)) := by
-  set c := HasCompactification.compactification i
-  have hsq : IsPullback (pullback.snd c.g j) (pullback.fst c.g j) j c.g :=
-    (IsPullback.of_hasPullback c.g j).flip
-  have hdisj : Disjoint (Set.range (pullback.fst c.g j).base) (Set.range c.i.base) := by
-    refine Set.disjoint_left.2 ?_
-    rintro _ ⟨v, rfl⟩ ⟨a, ha⟩
-    refine Set.disjoint_left.1 hij ⟨a, rfl⟩ ⟨(pullback.snd c.g j).base v, ?_⟩
-    rw [← Scheme.Hom.comp_apply, ← pullback.condition, Scheme.Hom.comp_apply, ← ha,
-      ← Scheme.Hom.comp_apply, ← c.comm]
-  have h₀ := isZero_mapDerivedCategoryUpperStar_obj_openImmersionLowerShriek_of_disjoint_range
-    A c.i (pullback.fst c.g j) hdisj B
-  set T := D((j)^*[A]).obj ((R(i)_![A]).obj B)
-  rw [IsZero.iff_id_eq_zero]
-  let e : (T ⟶ T) ≃ (_ ⟶ D((pullback.fst c.g j)^*[A]).obj (D((c.i)_!open[A]).obj B)) :=
-    ((derivedOpenImmersionLowerShriekUpperStarAdjunction A j).homEquiv _ _).symm.trans <|
-      ((derivedUpperStarLowerStarAdjunction A c.g).homEquiv _ _).symm.trans <|
-        (((derivedOpenImmersionLowerShriekBaseChangeIso A hsq).app T).symm.homCongr
-          (Iso.refl _)).trans <|
-          (derivedOpenImmersionLowerShriekUpperStarAdjunction A _).homEquiv _ _
-  have : Subsingleton (T ⟶ T) := e.subsingleton_congr.2 ⟨h₀.eq_of_tgt⟩
-  exact Subsingleton.elim _ _
-
-/-- Blueprint `sk-prop-sf-localization`: Supported localization
-
-**No maps from the closed side to the open side.** Let `i : Z ⟶ X` be compactifiable and
-`j : U ⟶ X` an open immersion, with disjoint images. Then `Hom((Ri_! B)[n], Rj_* C) = 0` for all
-`B ∈ D(Z_ét, A)`, `C ∈ D(U_ét, A)` and `n`. By `D(j^*) ⊣ Rj_*`,
-
-```
-  Hom((Ri_! B)[n], Rj_* C) ≅ Hom(D(j^*) ((Ri_! B)[n]), C) ≅ Hom((D(j^*) Ri_! B)[n], C),
-```
-
-and `D(j^*) Ri_! = 0` by base change of `Ri_!` along `j`, since the fibre product of the square
+and `j^* Ri_! = 0` by base change of `Ri_!` along `j`, since the fibre product of the square
 
 ```
   Z ×_X U ---> U
@@ -165,66 +207,22 @@ and `D(j^*) Ri_! = 0` by base change of `Ri_!` along `j`, since the fibre produc
      Z ---i--> X
 ```
 
-is empty (`AlgebraicGeometry.Etale.isZero_mapDerivedCategoryUpperStar_obj_rightDerivedLowerShriek`).
--/
+is empty (`AlgebraicGeometry.Etale.isZero_upperStar_rightDerivedLowerShriek`).
+
+`j` has to be an open immersion: for an arbitrary `j`, base change of `Ri_!` along `j` is
+proper base change, which fails for coefficients that are not torsion. -/
 theorem subsingleton_hom_shift_rightDerivedLowerShriek_rightDerivedLowerStar (i : Z ⟶ X)
     [HasCompactification i] (j : U ⟶ X) [IsOpenImmersion j]
     (hij : Disjoint (Set.range i.base) (Set.range j.base))
     (B : _root_.DerivedCategory (Sheaf Z.smallEtaleTopology A))
     (C : _root_.DerivedCategory (Sheaf U.smallEtaleTopology A)) (n : ℤ) :
     Subsingleton (((R(i)_![A]).obj B)⟦n⟧ ⟶ (R((j)_*[A])).obj C) := by
-  have h := (Functor.map_isZero (shiftFunctor _ n)
-    (isZero_mapDerivedCategoryUpperStar_obj_rightDerivedLowerShriek A i j hij B)).of_iso
+  have hz : IsZero (D((j)^*[A]).obj (((R(i)_![A]).obj B)⟦n⟧)) :=
+    ((shiftFunctor _ n).map_isZero (isZero_upperStar_rightDerivedLowerShriek A i j hij B)).of_iso
       ((D((j)^*[A]).commShiftIso n).app _)
-  exact ((mapDerivedUpperStarLowerStarAdjunction A j).homEquiv _ _).subsingleton_congr.1
-    ⟨h.eq_of_src⟩
-
-/-- Blueprint `sk-prop-sf-localization`: Supported localization
-
-**The derived lower shriek of a closed immersion is fully faithful**: its exceptional
-adjunction unit is invertible by the closed-immersion unit
-`AlgebraicGeometry.Etale.isIso_rightDerivedUpperShriekAdjunction_unit_app`. -/
-noncomputable def fullyFaithfulRightDerivedLowerShriek (i : Z ⟶ X) [IsClosedImmersion i]
-    [HasCompactification i] : (R(i)_![A]).FullyFaithful :=
-  have : IsIso (rightDerivedUpperShriekAdjunction A i).unit :=
-    have := isIso_rightDerivedUpperShriekAdjunction_unit_app A i
-    NatIso.isIso_of_isIso_app _
-  (rightDerivedUpperShriekAdjunction A i).fullyFaithfulLOfIsIsoUnit
-
-/-- For an open immersion `j`, the counit `D(j^*) Rj_* ⟶ 𝟭` of `D(j^*) ⊣ Rj_*` is an
-isomorphism: `D(j_!) ⊣ D(j^*) ⊣ Rj_*` is an adjoint triple whose first unit is invertible
-(`AlgebraicGeometry.Etale.isIso_derivedOpenImmersionLowerShriekUpperStarAdjunction_unit`). -/
-instance isIso_mapDerivedUpperStarLowerStarAdjunction_counit_of_isOpenImmersion (j : U ⟶ X)
-    [IsOpenImmersion j] : IsIso (mapDerivedUpperStarLowerStarAdjunction A j).counit :=
-  (Adjunction.Triple.isIso_unit_iff_isIso_counit
-    ⟨derivedOpenImmersionLowerShriekUpperStarAdjunction A j,
-      mapDerivedUpperStarLowerStarAdjunction A j⟩).1 inferInstance
-
-/-- Blueprint `sk-prop-sf-localization`: Supported localization
-
-**Open–closed detection by the exceptional inverse image**: let `i : Z ⟶ X` be a closed
-immersion with complementary open `j : U ⟶ X`. An object `E` of `D(X_ét, A)` with
-`D(j^*) E = 0` and `Ri^! E = 0` is zero.
-
-This is `CategoryTheory.Adjunction.isZero_of_isZero_rightAdjoint` for
-`D(i^*) ⊣ Ri_! ⊣ Ri^!` (with `Ri_! ≅ Ri_*`): the unit `E ⟶ Ri_! D(i^*) E` is inverted by
-`D(j^*)` and by `D(i^*)`, hence invertible by open–closed detection
-(`AlgebraicGeometry.Etale.isZero_of_isZero_mapDerivedCategoryUpperStar`), and then
-`Hom(E, E) ≅ Hom(D(i^*) E, Ri^! E) = 0`. -/
-theorem isZero_of_isZero_mapDerivedCategoryUpperStar_of_isZero_rightDerivedUpperShriek
-    (i : Z ⟶ X) (j : U ⟶ X) [IsClosedImmersion i] [HasCompactification i] [IsOpenImmersion j]
-    (hij : Set.range i.base = (Set.range j.base)ᶜ)
-    {E : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)}
-    (hj : IsZero (D((j)^*[A]).obj E)) (hi : IsZero ((R(i)^![A]).obj E)) : IsZero E :=
-  have := (fullyFaithfulRightDerivedLowerShriek A i).full
-  have := (fullyFaithfulRightDerivedLowerShriek A i).faithful
-  let adj := (mapDerivedUpperStarLowerStarAdjunction A i).ofNatIsoRight
-    (rightDerivedLowerShriekIsoRightDerivedLowerStar A i).symm
-  have : IsIso adj.counit := adj.counit_isIso_of_R_fully_faithful
-  (rightDerivedUpperShriekAdjunction A i).isZero_of_isZero_rightAdjoint adj
-    (isZero_mapDerivedCategoryUpperStar_obj_rightDerivedLowerShriek A i j
-      (hij ▸ disjoint_compl_left))
-    (fun _ hj hi ↦ isZero_of_isZero_mapDerivedCategoryUpperStar A j i hij hj hi) hj hi
+  have : Subsingleton (D((j)^*[A]).obj (((R(i)_![A]).obj B)⟦n⟧) ⟶ C) :=
+    ⟨fun _ _ ↦ hz.eq_of_src _ _⟩
+  exact ((mapDerivedUpperStarLowerStarAdjunction A j).homEquiv _ _).symm.subsingleton
 
 /-- Blueprint `sk-prop-sf-localization`: Supported localization
 
@@ -239,16 +237,12 @@ complementary open `j : U ⟶ X`. For `L ∈ D(X_ét, A)` the *adjunction maps*
 distinguished triangle `supportedLocalizationTriangle A i j L w`, and the connecting map `w` is
 *unique*. Under the closed-immersion unit `Ri_! Ri^! L` is cohomology with supports along `Z`.
 
-Existence is `CategoryTheory.Adjunction.exists_distTriang_counit_unit` for `Ri_! ⊣ Ri^!` and
-`D(j^*) ⊣ Rj_*`: complete `ε_L` to a distinguished triangle `Ri_! Ri^! L ⟶ L ⟶ C ⟶`; the unit
-factors through `L ⟶ C`, and the cone of the factorisation `C ⟶ Rj_* D(j^*) L` is killed by
-`D(j^*)` and by `Ri^!`, hence zero
-(`AlgebraicGeometry.Etale.\
-isZero_of_isZero_mapDerivedCategoryUpperStar_of_isZero_rightDerivedUpperShriek`).
-The inputs are `D(j^*) Ri_! = 0`
-(`AlgebraicGeometry.Etale.isZero_mapDerivedCategoryUpperStar_obj_rightDerivedLowerShriek`), the
-closed-immersion unit and the full faithfulness of `Rj_*`. The unit of `D(j^*) ⊣ Rj_*` is then
-replaced by that of `Lj^* ⊣ Rj_*`.
+Existence: complete `η_L` to a distinguished triangle `K ⟶ L ⟶ Rj_* Lj^* L ⟶ K[1]`. As `Rj_*`
+is fully faithful, `j^* η_L` is invertible and `j^* K = 0`, so the open–closed triangle of `K`
+(`AlgebraicGeometry.Etale.exists_distTriang_openClosed`) gives `K ≅ Ri_* i^* K ≅ Ri_! i^* K`.
+Since `Ri_!` is fully faithful (`isIso_rightDerivedUpperShriekAdjunction_unit_app`) and
+`Hom((Ri_! M)[n], Rj_* Lj^* L) = 0`, the map `Ri_! Ri^! L ⟶ K` through which `ε_L` factors is an
+isomorphism (`CategoryTheory.Pretriangulated.exists_distTriang_counit_of_subsingleton`).
 
 Uniqueness is [BBD, 1.1.9] applied to two such triangles and the identity of `L`: as
 `Hom((Ri_! Ri^! L)[1], Rj_* Lj^* L) = 0`
@@ -256,27 +250,43 @@ Uniqueness is [BBD, 1.1.9] applied to two such triangles and the identity of `L`
 triangles extending `𝟙 L` (`CategoryTheory.Pretriangulated.exists_triangleHom_of_comp_eq_zero`)
 has components `(𝟙, 𝟙, 𝟙)`, so the two connecting maps agree. -/
 theorem existsUnique_distTriang_supportedLocalization (i : Z ⟶ X) (j : U ⟶ X)
-    [IsClosedImmersion i] [HasCompactification i] [IsOpenImmersion j]
+    [IsClosedImmersion i] [HasCompactification i] [(R(i)_![A]).IsLeftAdjoint] [IsOpenImmersion j]
     (hij : Set.range i.base = (Set.range j.base)ᶜ)
     (L : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)) :
     ∃! w, supportedLocalizationTriangle A i j L w ∈ distTriang _ := by
   obtain ⟨w, hw⟩ : ∃ w, supportedLocalizationTriangle A i j L w ∈ distTriang _ := by
-    have : IsIso (rightDerivedUpperShriekAdjunction A i).unit :=
-      have := isIso_rightDerivedUpperShriekAdjunction_unit_app A i
-      NatIso.isIso_of_isIso_app _
-    obtain ⟨w, hw⟩ := (rightDerivedUpperShriekAdjunction A i).exists_distTriang_counit_unit
-      (mapDerivedUpperStarLowerStarAdjunction A j)
-      (isZero_mapDerivedCategoryUpperStar_obj_rightDerivedLowerShriek A i j
-        (hij ▸ disjoint_compl_left))
-      (fun _ hj hi ↦
-        isZero_of_isZero_mapDerivedCategoryUpperStar_of_isZero_rightDerivedUpperShriek A i j hij
-          hj hi) L
-    -- Replace the unit of `D(j^*) ⊣ Rj_*` by that of `Lj^* ⊣ Rj_*`.
-    let e := Adjunction.leftAdjointUniq (derivedUpperStarLowerStarAdjunction A j)
-      (mapDerivedUpperStarLowerStarAdjunction A j)
-    refine ⟨(R((j)_*[A])).map (e.hom.app L) ≫ w, isomorphic_distinguished _ hw _ ?_⟩
-    exact Triangle.isoMk _ _ (Iso.refl _) (Iso.refl _) ((R((j)_*[A])).mapIso (e.app L))
-      (by simp) (by simp [e]) (by simp)
+    obtain ⟨K, a, δ, hT⟩ :=
+      distinguished_cocone_triangle₁ ((derivedUpperStarLowerStarAdjunction A j).unit.app L)
+    -- `j^*` kills the fibre `K` of `η_L`, since `Rj_*` is fully faithful
+    have hK : IsZero (D((j)^*[A]).obj K) := by
+      have : IsIso (mapDerivedUpperStarLowerStarAdjunction A j).counit :=
+        (Adjunction.Triple.mk (derivedOpenImmersionLowerShriekUpperStarAdjunction A j)
+          (mapDerivedUpperStarLowerStarAdjunction A j)).isIso_unit_iff_isIso_counit.1
+          inferInstance
+      have hff := (mapDerivedUpperStarLowerStarAdjunction A j).fullyFaithfulROfIsIsoCounit
+      have := hff.full
+      have := hff.faithful
+      have : IsIso (derivedUpperStarLowerStarAdjunction A j).counit :=
+        (derivedUpperStarLowerStarAdjunction A j).counit_isIso_of_R_fully_faithful
+      have h := (derivedUpperStarLowerStarAdjunction A j).left_triangle_components L
+      have : IsIso (L((j)^*[A]).map ((derivedUpperStarLowerStarAdjunction A j).unit.app L)) := by
+        rw [IsIso.eq_inv_of_inv_hom_id h]
+        infer_instance
+      exact (Triangle.isZero₁_iff_isIso₂ _ (D((j)^*[A]).map_distinguished _ hT)).2
+        ((NatIso.isIso_map_iff (leftDerivedUpperStarIsoMapDerivedCategory A j) _).1 this)
+    -- so `K` is supported on `Z`, by the open–closed triangle of `K`
+    have hKi : (R(i)_![A]).essImage K := by
+      obtain ⟨w, hw⟩ := exists_distTriang_openClosed A j i hij K
+      have : IsIso ((mapDerivedUpperStarLowerStarAdjunction A i).unit.app K) :=
+        (Triangle.isZero₁_iff_isIso₂ _ hw).1 (D((j)_!open[A]).map_isZero hK)
+      exact ⟨D((i)^*[A]).obj K, ⟨(rightDerivedLowerShriekIsoRightDerivedLowerStar A i).app _ ≪≫
+        (asIso ((mapDerivedUpperStarLowerStarAdjunction A i).unit.app K)).symm⟩⟩
+    have := isIso_rightDerivedUpperShriekAdjunction_unit_app A i
+    have : IsIso (rightDerivedUpperShriekAdjunction A i).unit := NatIso.isIso_of_isIso_app _
+    exact exists_distTriang_counit_of_subsingleton (rightDerivedUpperShriekAdjunction A i)
+      (rightDerivedUpperShriekAdjunction A i).fullyFaithfulLOfIsIsoUnit hT
+      (fun M n ↦ subsingleton_hom_shift_rightDerivedLowerShriek_rightDerivedLowerStar A i j
+        (hij ▸ disjoint_compl_left) M _ n) hKi
   refine ⟨w, hw, fun w' hw' ↦ ?_⟩
   have : Subsingleton ((supportedLocalizationTriangle A i j L w').obj₁⟦(1 : ℤ)⟧ ⟶
       (supportedLocalizationTriangle A i j L w).obj₃) :=
@@ -298,11 +308,11 @@ of `L`: the unique connecting map making `supportedLocalizationTriangle A i j L 
 distinguished.
 
 It is *defined* as `Classical.choose` of the existence half of
-`AlgebraicGeometry.Etale.existsUnique_distTriang_supportedLocalization`; uniqueness is what
-makes the choice canonical. The supported term is
+`AlgebraicGeometry.Etale.existsUnique_distTriang_supportedLocalization`; uniqueness is what makes
+the choice canonical. The supported term is
 `Ri_!`, which for a closed immersion is `Ri_*`. -/
 noncomputable def supportedLocalizationBoundary (i : Z ⟶ X) (j : U ⟶ X)
-    [IsClosedImmersion i] [HasCompactification i] [IsOpenImmersion j]
+    [IsClosedImmersion i] [HasCompactification i] [(R(i)_![A]).IsLeftAdjoint] [IsOpenImmersion j]
     (hij : Set.range i.base = (Set.range j.base)ᶜ)
     (L : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)) :
     (R((j)_*[A])).obj ((L((j)^*[A])).obj L) ⟶ ((R(i)_![A]).obj ((R(i)^![A]).obj L))⟦(1 : ℤ)⟧ :=
@@ -311,7 +321,7 @@ noncomputable def supportedLocalizationBoundary (i : Z ⟶ X) (j : U ⟶ X)
 /-- The supported localization triangle with its boundary
 `AlgebraicGeometry.Etale.supportedLocalizationBoundary` is distinguished. -/
 theorem supportedLocalizationTriangle_mem_distTriang (i : Z ⟶ X) (j : U ⟶ X)
-    [IsClosedImmersion i] [HasCompactification i] [IsOpenImmersion j]
+    [IsClosedImmersion i] [HasCompactification i] [(R(i)_![A]).IsLeftAdjoint] [IsOpenImmersion j]
     (hij : Set.range i.base = (Set.range j.base)ᶜ)
     (L : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)) :
     supportedLocalizationTriangle A i j L (supportedLocalizationBoundary A i j hij L) ∈
@@ -339,6 +349,7 @@ The middle component extends to a morphism of triangles
 because `Hom((Ri_! Ri^! L)[1], Rj_* Lj^* L') = 0`
 (`subsingleton_hom_shift_rightDerivedLowerShriek_rightDerivedLowerStar`). -/
 theorem exists_triangleHom_supportedLocalization (i : Z ⟶ X) [HasCompactification i]
+    [(R(i)_![A]).IsLeftAdjoint]
     (j : U ⟶ X) [IsOpenImmersion j] (hij : Disjoint (Set.range i.base) (Set.range j.base))
     {L L' : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)} (φ : L ⟶ L')
     {w : (R((j)_*[A])).obj ((L((j)^*[A])).obj L) ⟶
@@ -371,11 +382,11 @@ theorem exists_triangleHom_supportedLocalization (i : Z ⟶ X) [HasCompactificat
 **A morphism of supported localization triangles is determined by its middle component.** Let
 `i : Z ⟶ X` be compactifiable and `j : U ⟶ X` an open immersion, with disjoint images. Two
 morphisms between distinguished supported localization triangles with the same middle component
-are equal
-(`CategoryTheory.Pretriangulated.triangleHom_ext_of_subsingleton`), because
+are equal (`CategoryTheory.Pretriangulated.triangleHom_ext_of_subsingleton`), because
 `Hom((Ri_! Ri^! L)[1], Rj_* Lj^* L') = 0`
 (`subsingleton_hom_shift_rightDerivedLowerShriek_rightDerivedLowerStar`) [BBD, 1.1.9]. -/
 theorem triangleHom_supportedLocalization_ext (i : Z ⟶ X) [HasCompactification i]
+    [(R(i)_![A]).IsLeftAdjoint]
     (j : U ⟶ X) [IsOpenImmersion j] (hij : Disjoint (Set.range i.base) (Set.range j.base))
     {L L' : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)}
     {w : (R((j)_*[A])).obj ((L((j)^*[A])).obj L) ⟶

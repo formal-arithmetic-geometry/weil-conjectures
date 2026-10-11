@@ -8,6 +8,7 @@ module
 public import Mathlib.CategoryTheory.Adjunction.Unique
 public import Mathlib.CategoryTheory.Monoidal.Closed.Basic
 public import Mathlib.CategoryTheory.Monoidal.Rigid.Braided
+public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Closed.InternalCurrying
 public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Rigid.Basic
 
 /-!
@@ -123,6 +124,35 @@ theorem isIso_toIhomIhomUnit (X : C) [HasRightDual X] : IsIso (toIhomIhomUnit X)
     rw [h]
     infer_instance
   exact IsIso.of_isIso_comp_right _ ((pre e.inv).app (𝟙_ C))
+
+section
+
+variable (Y X : C) [ExactPairing Y X] (e : Y ⊗ X ≅ 𝟙_ C)
+
+/-- **Twisting by an invertible object cancels in internal homs.** If `Y` and `X` form an exact
+pairing with `Y ⊗ X ≅ 𝟙_ C`, then `[A ⊗ X, Z] ⊗ X ≅ [X, [A, Z]] ⊗ X ≅ (Y ⊗ [A, Z]) ⊗ X ≅ [A, Z]`.
+-/
+noncomputable def ihomTensorObjWhiskerRightIso (A Z : C) :
+    (ihom (A ⊗ X)).obj Z ⊗ X ≅ (ihom A).obj Z :=
+  whiskerRightIso (ihomCurryIso A X Z ≪≫ ihomObjIsoTensor Y X _ ≪≫ β_ Y _) X ≪≫ α_ _ _ _ ≪≫
+    whiskerLeftIso _ e ≪≫ ρ_ _
+
+/-- The isomorphism `[A ⊗ X, Z] ⊗ X ≅ [A, Z]` is natural in `A`. -/
+@[reassoc]
+lemma pre_whiskerRight_app_whiskerRight_comp_ihomTensorObjWhiskerRightIso_hom {A A' : C}
+    (f : A' ⟶ A) (Z : C) :
+    (pre (f ▷ X)).app Z ▷ X ≫ (ihomTensorObjWhiskerRightIso Y X e A' Z).hom =
+      (ihomTensorObjWhiskerRightIso Y X e A Z).hom ≫ (pre f).app Z := by
+  simp only [ihomTensorObjWhiskerRightIso, ihomObjIsoTensor, Iso.trans_hom, whiskerRightIso_hom,
+    Iso.app_hom, whiskerLeftIso_hom, comp_whiskerRight, Category.assoc]
+  rw [← comp_whiskerRight_assoc, pre_whiskerRight_app_comp_ihomCurryIso_hom,
+    comp_whiskerRight_assoc, ← comp_whiskerRight_assoc ((ihom X).map _),
+    (ihomIsoTensorLeft Y X).hom.naturality, curriedTensor_obj_map, comp_whiskerRight_assoc,
+    ← comp_whiskerRight_assoc (Y ◁ _), BraidedCategory.braiding_naturality_right,
+    comp_whiskerRight_assoc, associator_naturality_left_assoc, ← whisker_exchange_assoc,
+    rightUnitor_naturality]
+
+end
 
 end MonoidalClosed
 

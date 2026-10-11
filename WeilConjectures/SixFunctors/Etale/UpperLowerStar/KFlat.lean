@@ -66,11 +66,13 @@ attribute [instance] Etale.UpperStarPreservesFlat.preservesFlat
 
 variable {A}
 
-/-- If `g^*` preserves flat étale sheaves, it sends `ℤ`-indexed colimits of bounded above
+/-- If `g^*` preserves flat étale sheaves (for instance under
+`AlgebraicGeometry.Etale.UpperStarPreservesFlat A`), it sends `ℤ`-indexed colimits of bounded above
 complexes of flat étale sheaves to K-flat complexes. This applies to the functorial flat
 resolutions, see `CategoryTheory.Functor.kFlat_mapHomologicalComplex_obj_resolutionFunctor_obj`. -/
-lemma Etale.kFlat_upperStar_mapHomologicalComplex_obj [Etale.UpperStarPreservesFlat A]
-    {X Y : Scheme.{u}} (g : X ⟶ Y) {K : CochainComplex (Sheaf Y.smallEtaleTopology A) ℤ}
+lemma Etale.kFlat_upperStar_mapHomologicalComplex_obj
+    {X Y : Scheme.{u}} (g : X ⟶ Y) [(g)^*[A].PreservesFlat]
+    {K : CochainComplex (Sheaf Y.smallEtaleTopology A) ℤ}
     (hK : ObjectProperty.flat.cochainComplexMinus.colimitsOfShape ℤ K) :
     (HomologicalComplex.quasiIso _ (.up ℤ)).kFlat
       (((g)^*[A].mapHomologicalComplex (.up ℤ)).obj K) :=

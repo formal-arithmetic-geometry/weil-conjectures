@@ -13,11 +13,11 @@ public import Mathlib.Topology.Sheaves.SheafCondition.UniqueGluing
 public import Mathlib.Topology.Sheaves.Stalks
 
 /-!
-# The Čech complex of a finite family of open subsets
+# The Čech complex of a family of open subsets
 
-Let `X` be a topological space, `U : Fin n → Opens X` a finite family of open subsets and `P` a
+Let `X` be a topological space, `U : ι → Opens X` a family of open subsets and `P` a
 presheaf of abelian groups on `X`. The (ordered) Čech complex `Č(U, P)` has in degree `k` the
-cochains `c = (c y)_y`, indexed by the tuples `y : Fin (k + 1) → Fin n`, with
+cochains `c = (c y)_y`, indexed by the tuples `y : Fin (k + 1) → ι`, with
 `c y ∈ P(U (y 0) ⊓ ⋯ ⊓ U (y k))`; the differential is the alternating sum of the restrictions
 `(d c) y = ∑ i, (-1) ^ i • c (y ∘ Fin.succAbove i)`.
 
@@ -52,7 +52,7 @@ cosimplicial abelian group `TopCat.Presheaf.cechCosimplicialObject`.
 
 @[expose] public section
 
-universe u
+universe u v
 
 open CategoryTheory Limits TopologicalSpace Opposite
 
@@ -64,9 +64,9 @@ lemma AddCommGrpCat.sum_apply {M N : AddCommGrpCat.{u}} {ι : Type*} (f : ι →
 
 namespace TopCat.Presheaf
 
-variable {X : TopCat.{u}} {n : ℕ} (U : Fin n → Opens X)
+variable {X : TopCat.{u}} {ι : Type v} (U : ι → Opens X)
 
-lemma iInf_le_iInf_comp {k m : ℕ} (y : Fin (m + 1) → Fin n) (θ : Fin (k + 1) → Fin (m + 1)) :
+lemma iInf_le_iInf_comp {k m : ℕ} (y : Fin (m + 1) → ι) (θ : Fin (k + 1) → Fin (m + 1)) :
     ⨅ l, U (y l) ≤ ⨅ l, U ((y ∘ θ) l) :=
   le_iInf fun l ↦ iInf_le _ (θ l)
 
@@ -84,16 +84,16 @@ lemma map_homOfLE_self_apply (P : (Opens X)ᵒᵖ ⥤ AddCommGrpCat.{u}) {V : Op
   exact ConcreteCategory.congr_hom (P.map_id (op V)) x
 
 /-- The Čech cochains of degree `k` of the family `U` with values in `P`: the families of
-sections `c y ∈ P(U (y 0) ⊓ ⋯ ⊓ U (y k))` indexed by the tuples `y : Fin (k + 1) → Fin n`. -/
-abbrev CechCochain (P : (Opens X)ᵒᵖ ⥤ AddCommGrpCat.{u}) (k : ℕ) : Type u :=
-  ∀ y : Fin (k + 1) → Fin n, P.obj (op (⨅ l, U (y l)))
+sections `c y ∈ P(U (y 0) ⊓ ⋯ ⊓ U (y k))` indexed by the tuples `y : Fin (k + 1) → ι`. -/
+abbrev CechCochain (P : (Opens X)ᵒᵖ ⥤ AddCommGrpCat.{u}) (k : ℕ) : Type (max u v) :=
+  ∀ y : Fin (k + 1) → ι, P.obj (op (⨅ l, U (y l)))
 
 /-- The Čech cosimplicial abelian group of the family `U` with values in a presheaf `P`, as a
 functor of `P`. In degree `k` it is the group `CechCochain U P k`, and a map `θ` of the simplex
 category acts by `c ↦ (y ↦ c (y ∘ θ))`, restricted to the smaller intersection. -/
 @[simps]
 noncomputable def cechCosimplicialObject :
-    ((Opens X)ᵒᵖ ⥤ AddCommGrpCat.{u}) ⥤ CosimplicialObject AddCommGrpCat.{u} where
+    ((Opens X)ᵒᵖ ⥤ AddCommGrpCat.{u}) ⥤ CosimplicialObject AddCommGrpCat.{max u v} where
   obj P :=
     { obj k := AddCommGrpCat.of (CechCochain U P k.len)
       map {k m} θ := AddCommGrpCat.ofHom (AddMonoidHom.pi fun y ↦
@@ -117,13 +117,16 @@ noncomputable def cechCosimplicialObject :
 /-- The Čech complex `Č(U, P)` of the family `U` with values in a presheaf `P`, as a functor
 of `P`: the alternating coface map complex of `cechCosimplicialObject U`. -/
 noncomputable def cechComplex :
-    ((Opens X)ᵒᵖ ⥤ AddCommGrpCat.{u}) ⥤ CochainComplex AddCommGrpCat.{u} ℕ :=
+    ((Opens X)ᵒᵖ ⥤ AddCommGrpCat.{u}) ⥤ CochainComplex AddCommGrpCat.{max u v} ℕ :=
   cechCosimplicialObject U ⋙ AlgebraicTopology.alternatingCofaceMapComplex _
+
+instance : (cechComplex U).Additive where
+  map_add := rfl
 
 variable (P : (Opens X)ᵒᵖ ⥤ AddCommGrpCat.{u})
 
 /-- The Čech differential is the alternating sum of the restrictions of the faces. -/
-lemma cechComplex_d_apply (k : ℕ) (c : CechCochain U P k) (y : Fin (k + 2) → Fin n) :
+lemma cechComplex_d_apply (k : ℕ) (c : CechCochain U P k) (y : Fin (k + 2) → ι) :
     ((cechComplex U).obj P).d k (k + 1) c y =
       ∑ i : Fin (k + 2), (-1 : ℤ) ^ (i : ℕ) •
         P.map (homOfLE (iInf_le_iInf_comp U y i.succAbove)).op (c (y ∘ i.succAbove)) := by
@@ -139,7 +142,7 @@ lemma cechComplex_d_apply (k : ℕ) (c : CechCochain U P k) (y : Fin (k + 2) →
 
 @[simp]
 lemma cechComplex_map_f_apply {P Q : (Opens X)ᵒᵖ ⥤ AddCommGrpCat.{u}} (φ : P ⟶ Q) (k : ℕ)
-    (c : CechCochain U P k) (y : Fin (k + 1) → Fin n) :
+    (c : CechCochain U P k) (y : Fin (k + 1) → ι) :
     ((cechComplex U).map φ).f k c y = φ.app _ (c y) :=
   rfl
 
@@ -154,7 +157,7 @@ lemma exactAt_cechComplex_iff (q : ℕ) :
   rfl
 
 /-- Restrictions of the components of a cochain along two equal tuples agree. -/
-lemma map_homOfLE_apply_congr {k : ℕ} (c : CechCochain U P k) {y y' : Fin (k + 1) → Fin n}
+lemma map_homOfLE_apply_congr {k : ℕ} (c : CechCochain U P k) {y y' : Fin (k + 1) → ι}
     (hy : y = y') {V : Opens X} (h : V ≤ ⨅ l, U (y l)) (h' : V ≤ ⨅ l, U (y' l)) :
     P.map (homOfLE h).op (c y) = P.map (homOfLE h').op (c y') := by
   subst hy
@@ -162,17 +165,17 @@ lemma map_homOfLE_apply_congr {k : ℕ} (c : CechCochain U P k) {y y' : Fin (k +
 
 /-- An open subset of `U j` and of `⨅ l, U (z l)` is contained in the intersection indexed by
 the tuple `Fin.cons j z`. -/
-lemma le_iInf_cons {k : ℕ} {V : Opens X} {j : Fin n} {z : Fin (k + 1) → Fin n} (hj : V ≤ U j)
-    (hz : V ≤ ⨅ l, U (z l)) : V ≤ ⨅ l, U ((Fin.cons j z : Fin (k + 2) → Fin n) l) := by
+lemma le_iInf_cons {k : ℕ} {V : Opens X} {j : ι} {z : Fin (k + 1) → ι} (hj : V ≤ U j)
+    (hz : V ≤ ⨅ l, U (z l)) : V ≤ ⨅ l, U ((Fin.cons j z : Fin (k + 2) → ι) l) := by
   refine le_iInf fun l ↦ ?_
   cases l using Fin.cases with
   | zero => simpa using hj
   | succ l => simpa using hz.trans (iInf_le _ l)
 
 /-- Deleting the entry `i + 1` of `Fin.cons j y` is the same as deleting the entry `i` of `y`. -/
-lemma cons_comp_succAbove_succ {k : ℕ} (j : Fin n) (y : Fin (k + 1) → Fin n) (i : Fin (k + 1)) :
-    (Fin.cons j y : Fin (k + 2) → Fin n) ∘ i.succ.succAbove =
-      (Fin.cons j (y ∘ i.succAbove) : Fin (k + 1) → Fin n) := by
+lemma cons_comp_succAbove_succ {k : ℕ} (j : ι) (y : Fin (k + 1) → ι) (i : Fin (k + 1)) :
+    (Fin.cons j y : Fin (k + 2) → ι) ∘ i.succ.succAbove =
+      (Fin.cons j (y ∘ i.succAbove) : Fin (k + 1) → ι) := by
   funext l
   cases l using Fin.cases <;> simp
 
@@ -180,8 +183,8 @@ lemma cons_comp_succAbove_succ {k : ℕ} (j : Fin n) (y : Fin (k + 1) → Fin n)
 `U j ⊓ ⨅ l, U (y l)`: the component `c y` is the alternating sum of the components
 `c (Fin.cons j (y ∘ Fin.succAbove i))`. -/
 lemma map_cocycle_eq_sum_cons {q : ℕ} (c : CechCochain U P (q + 1))
-    (hc : ((cechComplex U).obj P).d (q + 1) (q + 2) c = 0) (j : Fin n)
-    (y : Fin (q + 2) → Fin n) {V : Opens X} (hVj : V ≤ U j) (hV : V ≤ ⨅ l, U (y l)) :
+    (hc : ((cechComplex U).obj P).d (q + 1) (q + 2) c = 0) (j : ι)
+    (y : Fin (q + 2) → ι) {V : Opens X} (hVj : V ≤ U j) (hV : V ≤ ⨅ l, U (y l)) :
     P.map (homOfLE hV).op (c y) = ∑ i : Fin (q + 2), (-1 : ℤ) ^ (i : ℕ) •
       P.map (homOfLE (le_iInf_cons U hVj (hV.trans (iInf_le_iInf_comp U y i.succAbove)))).op
         (c (Fin.cons j (y ∘ i.succAbove))) := by
@@ -201,18 +204,18 @@ lemma map_cocycle_eq_sum_cons {q : ℕ} (c : CechCochain U P (q + 1))
 finite intersections of the family, then the Čech complex `Č(U, P)` is exact in positive
 degrees: inserting the index `j` in the first slot, `(h c) y = c (Fin.cons j y)`, is a
 contraction. -/
-theorem exactAt_cechComplex_of_bijective {j : Fin n}
-    (hj : ∀ (k : ℕ) (y : Fin (k + 1) → Fin n),
+theorem exactAt_cechComplex_of_bijective {j : ι}
+    (hj : ∀ (k : ℕ) (y : Fin (k + 1) → ι),
       Function.Bijective (P.map (homOfLE (inf_le_left : (⨅ l, U (y l)) ⊓ U j ≤ _)).op))
     (q : ℕ) : ((cechComplex U).obj P).ExactAt (q + 1) := by
   rw [exactAt_cechComplex_iff]
   intro c hc
-  let e (z : Fin (q + 1) → Fin n) := Equiv.ofBijective _ (hj q z)
-  have he (z : Fin (q + 1) → Fin n) (x) :
+  let e (z : Fin (q + 1) → ι) := Equiv.ofBijective _ (hj q z)
+  have he (z : Fin (q + 1) → ι) (x) :
       P.map (homOfLE (inf_le_left : (⨅ l, U (z l)) ⊓ U j ≤ _)).op ((e z).symm x) = x :=
     (e z).apply_symm_apply x
   refine ⟨fun z ↦ (e z).symm (P.map (homOfLE (le_iInf_cons U inf_le_right inf_le_left)).op
-    (c (Fin.cons j z))), funext fun (y : Fin (q + 2) → Fin n) ↦ (hj (q + 1) y).injective ?_⟩
+    (c (Fin.cons j z))), funext fun (y : Fin (q + 2) → ι) ↦ (hj (q + 1) y).injective ?_⟩
   rw [map_cocycle_eq_sum_cons U P c hc j y inf_le_right inf_le_left, cechComplex_d_apply,
     map_sum]
   refine Finset.sum_congr rfl fun i _ ↦ ?_
@@ -222,7 +225,7 @@ theorem exactAt_cechComplex_of_bijective {j : Fin n}
 
 /-- If some member `U j` of the family contains all the others, then the Čech complex
 `Č(U, P)` is exact in positive degrees. -/
-theorem exactAt_cechComplex_of_le {j : Fin n} (hj : ∀ i, U i ≤ U j) (q : ℕ) :
+theorem exactAt_cechComplex_of_le {j : ι} (hj : ∀ i, U i ≤ U j) (q : ℕ) :
     ((cechComplex U).obj P).ExactAt (q + 1) := by
   refine exactAt_cechComplex_of_bijective U P (j := j) (fun k y ↦ ?_) q
   have heq : (⨅ l, U (y l)) ⊓ U j = ⨅ l, U (y l) := inf_eq_left.2 ((iInf_le _ 0).trans (hj _))
@@ -246,13 +249,13 @@ theorem exactAt_cechComplex_godement (S : X → Type u) [∀ x, AddCommGroup (S 
     ((cechComplex U).obj (godement S)).ExactAt (q + 1) := by
   rw [exactAt_cechComplex_iff]
   intro c hc
-  let j (x : X) (h : ∃ i, x ∈ U i) : Fin n := h.choose
+  let j (x : X) (h : ∃ i, x ∈ U i) : ι := h.choose
   have hj (x : X) (h : ∃ i, x ∈ U i) : x ∈ U (j x h) := h.choose_spec
-  have hmem {k : ℕ} (y : Fin (k + 1) → Fin n) (x : ↥(⨅ l, U (y l))) : x.1 ∈ U (y 0) :=
+  have hmem {k : ℕ} (y : Fin (k + 1) → ι) (x : ↥(⨅ l, U (y l))) : x.1 ∈ U (y 0) :=
     (iInf_le _ 0 : _ ≤ U (y 0)) x.2
   refine ⟨fun y x ↦ c (Fin.cons (j x ⟨y 0, hmem y x⟩) y)
     ⟨x, le_iInf_cons U inf_le_right inf_le_left (Opens.mem_inf.2 ⟨x.2, hj _ _⟩)⟩, ?_⟩
-  refine funext fun (y : Fin (q + 2) → Fin n) ↦ funext fun x ↦ ?_
+  refine funext fun (y : Fin (q + 2) → ι) ↦ funext fun x ↦ ?_
   have h := congrFun (map_cocycle_eq_sum_cons U _ c hc (j x.1 ⟨y 0, hmem y x⟩) y
     (V := (⨅ l, U (y l)) ⊓ U (j x.1 ⟨y 0, hmem y x⟩)) inf_le_right inf_le_left)
     ⟨x.1, Opens.mem_inf.2 ⟨x.2, hj _ _⟩⟩
@@ -303,7 +306,7 @@ theorem exactAt_cechComplex_of_injective
 
 /-- Restriction of Čech cochains from a family `U` to a pointwise smaller family `U'`. -/
 noncomputable def cechCochainRestrict (P : (Opens X)ᵒᵖ ⥤ AddCommGrpCat.{u})
-    {U U' : Fin n → Opens X} (h : ∀ i, U' i ≤ U i) (k : ℕ) :
+    {U U' : ι → Opens X} (h : ∀ i, U' i ≤ U i) (k : ℕ) :
     CechCochain U P k →+ CechCochain U' P k where
   toFun c y := P.map (homOfLE (iInf_mono fun l ↦ h (y l))).op (c y)
   map_zero' := funext fun _ ↦ map_zero _
@@ -311,17 +314,17 @@ noncomputable def cechCochainRestrict (P : (Opens X)ᵒᵖ ⥤ AddCommGrpCat.{u}
 
 @[simp]
 lemma cechCochainRestrict_apply (P : (Opens X)ᵒᵖ ⥤ AddCommGrpCat.{u})
-    {U U' : Fin n → Opens X} (h : ∀ i, U' i ≤ U i) (k : ℕ) (c : CechCochain U P k)
-    (y : Fin (k + 1) → Fin n) :
+    {U U' : ι → Opens X} (h : ∀ i, U' i ≤ U i) (k : ℕ) (c : CechCochain U P k)
+    (y : Fin (k + 1) → ι) :
     cechCochainRestrict P h k c y = P.map (homOfLE (iInf_mono fun l ↦ h (y l))).op (c y) :=
   rfl
 
 /-- Restriction of Čech cochains to a pointwise smaller family commutes with the differential. -/
 lemma cechComplex_d_cechCochainRestrict (P : (Opens X)ᵒᵖ ⥤ AddCommGrpCat.{u})
-    {U U' : Fin n → Opens X} (h : ∀ i, U' i ≤ U i) (k : ℕ) (c : CechCochain U P k) :
+    {U U' : ι → Opens X} (h : ∀ i, U' i ≤ U i) (k : ℕ) (c : CechCochain U P k) :
     ((cechComplex U').obj P).d k (k + 1) (cechCochainRestrict P h k c) =
       cechCochainRestrict P h (k + 1) (((cechComplex U).obj P).d k (k + 1) c) := by
-  funext (y : Fin (k + 1 + 1) → Fin n)
+  funext (y : Fin (k + 1 + 1) → ι)
   dsimp only [cechCochainRestrict, AddMonoidHom.coe_mk, ZeroHom.coe_mk]
   simp only [cechComplex_d_apply, map_sum, map_zsmul,
     ← ConcreteCategory.comp_apply, ← Functor.map_comp, ← op_comp, homOfLE_comp]

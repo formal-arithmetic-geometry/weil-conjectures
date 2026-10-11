@@ -209,6 +209,38 @@ instance : (Etale.DerivedCategory.boundedConstructible A X).IsStableUnderShift �
 
 variable {A X}
 
+/-- Blueprint `prop-constructible-truncations`: Construction of constructible truncations.
+
+At a finite coefficient stage, `Dᵇc(X, A)` is stable under the truncation `τ^{≤ n}` of the
+canonical t-structure: the homology sheaves of `τ^{≤ n} K` are those of `K` in degrees `≤ n`,
+and zero above. So the canonical truncations restrict to `Dᵇc(X, A)`. -/
+lemma Etale.DerivedCategory.boundedConstructible_truncLE
+    [PreservesFiniteLimits (CategoryTheory.forget A)]
+    {K : DerivedCategory (Sheaf X.smallEtaleTopology A)}
+    (hK : Etale.DerivedCategory.boundedConstructible A X K) (n : ℤ) :
+    Etale.DerivedCategory.boundedConstructible A X
+      ((DerivedCategory.TStructure.t.truncLE n).obj K) := by
+  obtain ⟨⟨⟨a, ha⟩, -⟩, hc⟩ := hK
+  refine ⟨⟨⟨a, inferInstance⟩, ⟨n, inferInstance⟩⟩, ?_⟩
+  rw [Etale.DerivedCategory.constructibleHomology_eq] at hc ⊢
+  exact DerivedCategory.homologyProperty_truncLE hc n
+
+/-- Blueprint `prop-constructible-truncations`: Construction of constructible truncations.
+
+At a finite coefficient stage, `Dᵇc(X, A)` is stable under the truncation `τ^{≥ n}` of the
+canonical t-structure: the homology sheaves of `τ^{≥ n} K` are those of `K` in degrees `≥ n`,
+and zero below. -/
+lemma Etale.DerivedCategory.boundedConstructible_truncGE
+    [PreservesFiniteLimits (CategoryTheory.forget A)]
+    {K : DerivedCategory (Sheaf X.smallEtaleTopology A)}
+    (hK : Etale.DerivedCategory.boundedConstructible A X K) (n : ℤ) :
+    Etale.DerivedCategory.boundedConstructible A X
+      ((DerivedCategory.TStructure.t.truncGE n).obj K) := by
+  obtain ⟨⟨-, ⟨b, hb⟩⟩, hc⟩ := hK
+  refine ⟨⟨⟨n, inferInstance⟩, ⟨b, inferInstance⟩⟩, ?_⟩
+  rw [Etale.DerivedCategory.constructibleHomology_eq] at hc ⊢
+  exact DerivedCategory.homologyProperty_truncGE hc n
+
 /-- A constructible sheaf placed in degree `n` is a bounded constructible complex: its only
 nonzero homology sheaf is itself, in degree `n`. -/
 lemma Etale.DerivedCategory.boundedConstructible_singleFunctor_obj
@@ -270,8 +302,9 @@ section ModuleCat
 
 variable {Λ : Type (u + 1)} [Ring Λ]
 
-/-- Constructible sheaves of `Λ`-modules are closed under kernels. -/
-instance : (Etale.constructibleSheaf (ModuleCat.{u + 1} Λ) X).IsClosedUnderKernels where
+/-- Constructible sheaves of `Λ`-modules over a noetherian ring are closed under kernels. -/
+instance [IsNoetherianRing Λ] :
+    (Etale.constructibleSheaf (ModuleCat.{u + 1} Λ) X).IsClosedUnderKernels where
   kernels_le := by
     rintro _ ⟨f, k, hk, hf⟩
     have := (Etale.constructibleSheaf_iff _ _ _).mp hf.1
@@ -306,6 +339,27 @@ instance : (Etale.constructibleSheaf (ModuleCat.{u + 1} Λ) X).IsClosedUnderBina
 and are closed under binary products. -/
 instance : (Etale.constructibleSheaf (ModuleCat.{u + 1} Λ) X).IsClosedUnderFiniteProducts :=
   .mk'
+
+/-- Constructible sheaves of modules over a finite ring are closed under extensions
+(`AlgebraicGeometry.Scheme.IsConstructibleSheaf.of_shortExact`). -/
+instance [Finite Λ] :
+    (Etale.constructibleSheaf (ModuleCat.{u + 1} Λ) X).IsClosedUnderExtensions where
+  prop_X₂_of_shortExact {S} hS h₁ h₃ := by
+    have := (Etale.constructibleSheaf_iff _ _ _).mp h₁
+    have := (Etale.constructibleSheaf_iff _ _ _).mp h₃
+    exact (Etale.constructibleSheaf_iff _ _ _).mpr (IsConstructibleSheaf.of_shortExact hS)
+
+/-- `Dᵇc(X, Λ)` is stable under retracts, for a noetherian ring `Λ`: the homology sheaves of a
+retract are retracts of constructible sheaves (`IsConstructibleSheaf.of_retract`). -/
+instance [IsNoetherianRing Λ] :
+    (Etale.DerivedCategory.boundedConstructible (ModuleCat.{u + 1} Λ) X).IsStableUnderRetracts where
+  of_retract {M N} e := by
+    rintro ⟨hb, hc⟩
+    obtain ⟨a, b, hab⟩ := (DerivedCategory.exists_homologyConcentratedIn_iff_bounded N).2 hb
+    exact ⟨(DerivedCategory.exists_homologyConcentratedIn_iff_bounded M).1
+      ⟨a, b, (DerivedCategory.homologyConcentratedIn a b).prop_of_retract e hab⟩,
+      fun n ↦ have := hc n; IsConstructibleSheaf.of_retract
+        (e.map (DerivedCategory.homologyFunctor _ n))⟩
 
 end ModuleCat
 

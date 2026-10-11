@@ -34,6 +34,9 @@ section of `Pic_{X/S}` over `T`.
   compatible with base change (blueprint `lem-pd-degree-locally-constant`).
 - `AlgebraicGeometry.picardPresheafDegree_eq_of_toPicardFunctor_eq`: two classes with the same
   image in `Pic_{X/S}` have the same fibrewise degree.
+- `AlgebraicGeometry.Scheme.Modules.degree_pullback_of_isPullback`: the degree of an invertible
+  module on a proper scheme over a field is invariant under base change along any cartesian square
+  of fields.
 - `AlgebraicGeometry.picardDegree_toPicardFunctor`, `AlgebraicGeometry.picardDegree_map` and
   `AlgebraicGeometry.isLocallyConstant_picardDegree`: the degree of a section of `Pic_{X/S}` is
   the fibrewise degree of any local representative, is compatible with base change, and is
@@ -50,7 +53,10 @@ The blueprint packages the degree as a morphism `Pic_{X/S} ⟶ ℤ` to the const
 spelled out as a function `AlgebraicGeometry.picardDegree` on sections, together with its
 naturality `AlgebraicGeometry.picardDegree_map` and its local constancy; the sheaf property of
 the target is not needed.  Twisting by a class pulled back from the base (part (2) of the
-blueprint lemma) is not stated, since `AlgebraicGeometry.Scheme.Pic` carries no group law.
+blueprint lemma) is not stated here. The group law of `AlgebraicGeometry.Scheme.Pic` is in
+`WeilConjectures/AlgebraicGeometry/Picard/Group.lean`, which this file does not need; for a
+smooth proper curve, the additivity of the degree on the fibres over field-valued points is
+`AlgebraicGeometry.picardFibreDegree_mul`.
 -/
 
 @[expose] public section
@@ -102,6 +108,28 @@ theorem picardPresheafDegree_map [IsProper f] [LocallyOfFinitePresentation f] {T
     Modules.eulerCharFiber_congr (Modules.pullbackObjUnitIso _),
     ← Modules.eulerCharFiber_congr (fromSkeletonToSkeletonIso
       ((Modules.pullback (baseChangeMap f g)).obj ((fromSkeleton _).obj (Pic.val L))))]
+  rfl
+
+/-- **The fibrewise degree is compatible with cartesian squares of families.** Let `f' : X' ⟶ S'`
+be another morphism, `T'` a scheme over `S'` and `e : X'_{T'} ⟶ X_T` a morphism over
+`φ : T' ⟶ T` exhibiting `X'_{T'}` as `X_T ×_T T'`. Then the fibrewise degree of the pullback of
+`ℒ ∈ Pic (X_T)` along `e` at `t'` is the fibrewise degree of `ℒ` at `φ(t')`. -/
+theorem picardPresheafDegree_pic_map_of_isPullback [IsProper f] [LocallyOfFinitePresentation f]
+    {X' S' : Scheme.{u}} (f' : X' ⟶ S') {T : Over S} {T' : Over S'} (φ : T'.left ⟶ T.left)
+    (e : pullback f' T'.hom ⟶ pullback f T.hom)
+    (sq : IsPullback e (pullback.snd f' T'.hom) (pullback.snd f T.hom) φ)
+    (L : (picardPresheaf f).obj (.op T)) (t : T'.left) :
+    picardPresheafDegree f' (Pic.map e L) t = picardPresheafDegree f L (φ t) := by
+  have := Modules.isGrothendieckAbelian (pullback f T.hom)
+  have := Pic.isInvertible (Y := pullback f T.hom) L
+  have : (SheafOfModules.unit (pullback f T.hom).ringCatSheaf).IsFinitePresentation :=
+    SheafOfModules.IsFiniteLocallyFree.isFinitePresentation.{u, u, u} _
+  simp only [picardPresheafDegree]
+  rw [← Modules.eulerCharFiber_pullback_of_isPullback _ _ _ _ _ sq,
+    ← Modules.eulerCharFiber_pullback_of_isPullback _ _ _ _ _ sq,
+    Modules.eulerCharFiber_congr (Modules.pullbackObjUnitIso _),
+    ← Modules.eulerCharFiber_congr (fromSkeletonToSkeletonIso
+      ((Modules.pullback e).obj ((fromSkeleton _).obj (Pic.val L))))]
   rfl
 
 /-- **The fibrewise degree is locally constant** when `f` is proper, flat and locally of finite
@@ -237,5 +265,45 @@ theorem isLocallyConstant_picardDegree [IsProper f] [LocallyOfFinitePresentation
   exact hv
 
 end Degree
+
+section BaseChange
+
+/-- **The degree is invariant under base change along a cartesian square.** Let `C` be a proper
+scheme over a field `K`, let `C'` over a field `K'` sit in a cartesian square over
+`g : Spec K' ⟶ Spec K`, and let `ℒ` be an invertible module on `C`. Then the degree of the pullback
+of `ℒ` to `C'` is the degree of `ℒ`: both are fibre Euler characteristics over the unique points,
+which are invariant under base change
+(`AlgebraicGeometry.Scheme.Modules.eulerCharFiber_pullback_of_isPullback`). The square need not
+be the canonical one, and `g` need not be a `K`-algebra map.
+
+(blueprint: `lem-pc-degree-base-change`) -/
+theorem Scheme.Modules.degree_pullback_of_isPullback {C C' : Scheme.{u}} {K K' : Type u} [Field K]
+    [Field K'] [C.Over (Spec (.of K))] [C'.Over (Spec (.of K'))] [IsProper (C ↘ Spec (.of K))]
+    (g : Spec (.of K') ⟶ Spec (.of K)) (g' : C' ⟶ C)
+    (sq : IsPullback g' (C' ↘ Spec (.of K')) (C ↘ Spec (.of K)) g) (L : C.Modules)
+    [L.IsInvertible] : ((Modules.pullback g').obj L).degree K' = L.degree K := by
+  obtain ⟨s'⟩ : Nonempty (Spec (.of K')) := inferInstance
+  have := Modules.IsInvertible.sheafOfModules_isInvertible L
+  have : L.IsFinitePresentation :=
+    SheafOfModules.IsFiniteLocallyFree.isFinitePresentation.{u, u, u} _
+  have : (SheafOfModules.unit C.ringCatSheaf).IsFinitePresentation :=
+    SheafOfModules.IsFiniteLocallyFree.isFinitePresentation.{u, u, u} _
+  have := SheafOfModules.isQuasicoherent_unit (R := C.ringCatSheaf)
+  have := SheafOfModules.isQuasicoherent_unit (R := C'.ringCatSheaf)
+  have h₁ := Modules.eulerCharFiber_eq_eulerChar (C' ↘ Spec (.of K'))
+    ((Modules.pullback g').obj L) s'
+  have h₂ := Modules.eulerCharFiber_eq_eulerChar (C' ↘ Spec (.of K'))
+    (SheafOfModules.unit C'.ringCatSheaf) s'
+  have h₃ := Modules.eulerCharFiber_eq_eulerChar (C ↘ Spec (.of K)) L (g.base s')
+  have h₄ := Modules.eulerCharFiber_eq_eulerChar (C ↘ Spec (.of K))
+    (SheafOfModules.unit C.ringCatSheaf) (g.base s')
+  have h₅ := Modules.eulerCharFiber_pullback_of_isPullback (C ↘ Spec (.of K)) L g g' _ sq s'
+  have h₆ := Modules.eulerCharFiber_pullback_of_isPullback (C ↘ Spec (.of K))
+    (SheafOfModules.unit C.ringCatSheaf) g g' _ sq s'
+  rw [Modules.eulerCharFiber_congr (Modules.pullbackObjUnitIso g')] at h₆
+  simp only [Modules.degree]
+  rw [← h₁, ← h₂, ← h₃, ← h₄, h₅, h₆]
+
+end BaseChange
 
 end AlgebraicGeometry

@@ -22,6 +22,8 @@ adjunction is used to compute germs.
 - `CategoryTheory.GrothendieckTopology.Point.skyscraperSheafAdjunction_unit_app_hom_app_π`:
   the `x`-th component of the unit of the skyscraper adjunction over `X` is the germ map of
   `Φ` at `(X, x)`.
+- `CategoryTheory.GrothendieckTopology.Point.sheafFiber_additive`: the fibre functor on sheaves
+  with values in a preadditive category is additive, being a left adjoint.
 
 -/
 
@@ -50,5 +52,13 @@ lemma skyscraperSheafAdjunction_unit_app_hom_app_π (P : Sheaf J A) (X : C)
     exact Φ.skyscraperSheafAdjunction_homEquiv_apply_hom _
   rw [h, skyscraperPresheafHomEquiv_app_π]
   exact Category.comp_id _
+
+/-- The fibre functor on sheaves with values in a preadditive category is additive: being a
+left adjoint, it preserves binary coproducts, hence binary biproducts. This is not an instance:
+its hypothesis `HasProducts.{w} A` makes instance search get stuck on universe constraints. -/
+lemma sheafFiber_additive [Preadditive A] [HasBinaryBiproducts (Sheaf J A)] :
+    (Φ.sheafFiber (A := A)).Additive :=
+  have := preservesBinaryBiproducts_of_preservesBinaryCoproducts (Φ.sheafFiber (A := A))
+  Functor.additive_of_preservesBinaryBiproducts _
 
 end CategoryTheory.GrothendieckTopology.Point

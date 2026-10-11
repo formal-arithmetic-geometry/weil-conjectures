@@ -31,6 +31,8 @@ changes is not.
   the class as the infimum of being integral, universally injective and surjective.
 - `AlgebraicGeometry.Scheme.Hom.isHomeomorph`: a universal homeomorphism is in particular a
   homeomorphism on underlying spaces.
+- `AlgebraicGeometry.IsUniversalHomeomorphism.of_comp`: if `g ≫ f` and `f` are universal
+  homeomorphisms, then so is `g`.
 - `AlgebraicGeometry.isUniversalHomeomorphism_le_universally_isHomeomorph`: a universal
   homeomorphism stays a homeomorphism after an arbitrary base change. This is the direction
   of [Stacks 04DF] that the definition does not make trivial; the converse, that a morphism
@@ -107,6 +109,26 @@ instance (f : X ⟶ S) (g : Y ⟶ S) [IsUniversalHomeomorphism f] :
 thickening is a universal homeomorphism, which is the case of [Stacks 03SI] usually quoted
 as invariance of the étale site under nilpotent thickenings. -/
 instance (f : X ⟶ Y) [IsClosedImmersion f] [Surjective f] : IsUniversalHomeomorphism f where
+
+/-- **Cancellation**: if `g ≫ f` and `f` are universal homeomorphisms, then so is `g`.
+The morphism `f` is separated since it is injective, so `g` is integral; `g` is surjective
+since `g ≫ f` is surjective and `f` is injective; and `g` is injective on field-valued points
+since `g ≫ f` is. -/
+theorem of_comp (g : X ⟶ Y) (f : Y ⟶ Z) [IsUniversalHomeomorphism (g ≫ f)]
+    [IsUniversalHomeomorphism f] : IsUniversalHomeomorphism g := by
+  have : IsSeparated f := isSeparated_of_injective f f.injective
+  have : IsIntegralHom g := .of_comp g f
+  have : Surjective g := by
+    refine ⟨fun y ↦ ?_⟩
+    obtain ⟨x, hx⟩ := (g ≫ f).surjective (f y)
+    exact ⟨x, f.injective (by rwa [← Scheme.Hom.comp_apply])⟩
+  have : UniversallyInjective g := by
+    have hgf := (tfae_universallyInjective (g ≫ f)).out 0 1
+    have hg := (tfae_universallyInjective g).out 0 1
+    rw [hg]
+    intro K _ g₁ g₂ h
+    exact hgf.mp inferInstance K (by simpa using congr($h ≫ f))
+  exact { }
 
 /-- The homeomorphism of underlying topological spaces induced by a universal
 homeomorphism.

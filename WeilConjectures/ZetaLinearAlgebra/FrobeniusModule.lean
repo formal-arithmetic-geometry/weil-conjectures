@@ -118,6 +118,24 @@ theorem Equiv.hasEigenvalue {M N : FrobeniusModule.{u, v} K} (e : M.Equiv N) {α
     exact congrArg e.toLinearEquiv hx.1
   · exact (map_ne_zero_iff _ e.toLinearEquiv.injective).2 hx.2
 
+/-- The isomorphism of Frobenius modules given by a linear isomorphism `e` with
+`e ∘ F_M = F_N ∘ e`. -/
+def Equiv.ofComp {M N : FrobeniusModule.{u, v} K} (e : M.carrier ≃ₗ[K] N.carrier)
+    (h : e.toLinearMap ∘ₗ M.frobeniusEnd = N.frobeniusEnd ∘ₗ e.toLinearMap) : M.Equiv N :=
+  ⟨e, fun x ↦ LinearMap.congr_fun h x⟩
+
+/-- An isomorphism of Frobenius modules conjugates the two Frobenius endomorphisms. -/
+theorem Equiv.frobeniusEnd_eq_conj {M N : FrobeniusModule.{u, v} K} (e : M.Equiv N) :
+    N.frobeniusEnd = e.toLinearEquiv.conj M.frobeniusEnd := by
+  ext x
+  change N.frobenius x = e.toLinearEquiv (M.frobenius (e.toLinearEquiv.symm x))
+  rw [e.map_frobenius, LinearEquiv.apply_symm_apply]
+
+/-- Isomorphic Frobenius modules have the same characteristic polynomial of the Frobenius. -/
+theorem Equiv.charpoly_frobeniusEnd {M N : FrobeniusModule.{u, v} K} (e : M.Equiv N) :
+    N.frobeniusEnd.charpoly = M.frobeniusEnd.charpoly := by
+  rw [e.frobeniusEnd_eq_conj, LinearEquiv.charpoly_conj]
+
 /-- A Frobenius module isomorphic to one with weights at most `w` has weights at most `w`. -/
 theorem HasWeightsAtMost.of_equiv {ι : K →+* ℂ} {q : ℕ} {M N : FrobeniusModule.{u, v} K}
     (e : M.Equiv N) {w : ℝ} (h : N.HasWeightsAtMost ι q w) : M.HasWeightsAtMost ι q w :=
@@ -197,6 +215,23 @@ theorem hasEigenvalue_frobeniusEnd_rescale_iff {M : FrobeniusModule.{u, v} K} {c
     exact Module.End.hasEigenvalue_of_hasEigenvector
       (Module.End.hasEigenvector_iff.2 ⟨Module.End.mem_eigenspace_iff.2 ((key x).2 hx.1), hx.2⟩)
 
+/-- A Frobenius module isomorphic to one pure of weight `w` is pure of weight `w`. -/
+theorem IsPureOfWeight.of_equiv {ι : K →+* ℂ} {q : ℕ} {M N : FrobeniusModule.{u, v} K}
+    (e : M.Equiv N) {w : ℝ} (h : N.IsPureOfWeight ι q w) : M.IsPureOfWeight ι q w :=
+  fun α hα ↦ h α (e.hasEigenvalue hα)
+
+/-- Rescaling the Frobenius by `c` with `|ι c| = q ^ (w' / 2)` raises the weight by `w'`. -/
+theorem IsPureOfWeight.rescale {ι : K →+* ℂ} {q : ℕ} (hq : 0 < q)
+    {M : FrobeniusModule.{u, v} K} {w : ℝ} (h : M.IsPureOfWeight ι q w) {c : K} (hc : c ≠ 0)
+    {w' : ℝ} (hcw : ‖ι c‖ = (q : ℝ) ^ (w' / 2)) :
+    (M.rescale c).IsPureOfWeight ι q (w + w') := by
+  intro β hβ
+  obtain ⟨α, rfl⟩ : ∃ α, β = c * α := ⟨c⁻¹ * β, by field_simp⟩
+  rw [map_mul, norm_mul, h α ((hasEigenvalue_frobeniusEnd_rescale_iff hc α).1 hβ), hcw,
+    ← Real.rpow_add (by exact_mod_cast hq)]
+  congr 1
+  ring
+
 /-- The Tate twist by `n` lowers the weight by `2 n`: the twist `(-1)` raises it by two. -/
 theorem IsPureOfWeight.tateTwist {ι : K →+* ℂ} {q : ℕ} (hq : 0 < q)
     {M : FrobeniusModule.{u, v} K} {w : ℝ} (h : M.IsPureOfWeight ι q w) (n : ℤ) :
@@ -236,6 +271,31 @@ lemma dual_frobenius_apply (M : FrobeniusModule.{u, v} K) (f : Module.Dual K M.c
     (M.dual.frobenius f : Module.Dual K M.carrier) = f ∘ₗ M.frobenius.symm.toLinearMap :=
   rfl
 
+/-- The dual of a module pure of weight `w` is pure of weight `-w`: the eigenvalues of the
+inverse transpose `(F⁻¹)^∨` are the inverses of those of `F`. -/
+theorem IsPureOfWeight.dual {ι : K →+* ℂ} {q : ℕ} {M : FrobeniusModule.{u, v} K} {w : ℝ}
+    (h : M.IsPureOfWeight ι q w) : M.dual.IsPureOfWeight ι q (-w) := by
+  intro α hα
+  have hF : M.dual.frobeniusEnd.charpoly = M.frobenius.symm.toLinearMap.charpoly :=
+    LinearMap.charpoly_dualMap _
+  rw [Module.End.hasEigenvalue_iff_isRoot_charpoly, hF,
+    ← Module.End.hasEigenvalue_iff_isRoot_charpoly] at hα
+  obtain ⟨x, hx⟩ := hα.exists_hasEigenvector
+  rw [Module.End.hasEigenvector_iff, Module.End.mem_eigenspace_iff] at hx
+  have hx' : x = α • M.frobenius x := by
+    simpa using congrArg M.frobenius hx.1
+  have hα0 : α ≠ 0 := by
+    rintro rfl
+    exact hx.2 (by simpa using hx')
+  have hev : M.frobeniusEnd.HasEigenvalue α⁻¹ := by
+    refine Module.End.hasEigenvalue_of_hasEigenvector (x := x)
+      (Module.End.hasEigenvector_iff.2 ⟨Module.End.mem_eigenspace_iff.2 ?_, hx.2⟩)
+    change M.frobenius x = α⁻¹ • x
+    conv_rhs => rw [hx', inv_smul_smul₀ hα0]
+  have hn := h _ hev
+  rw [map_inv₀, norm_inv] at hn
+  rw [neg_div, Real.rpow_neg (Nat.cast_nonneg q), ← hn, inv_inv]
+
 /-- The evaluation pairing `M^∨ ⊗ M → K` is invariant under the Frobenius:
 `(F^∨ f) (F x) = f x`. -/
 lemma dual_frobenius_comp_frobenius (M : FrobeniusModule.{u, v} K)
@@ -262,6 +322,22 @@ theorem localPolynomial_prod (M : FrobeniusModule.{u, v} K) (N : FrobeniusModule
     ← LinearMap.charpoly_prodMap]
   rfl
 
+/-- A direct sum of two modules pure of weight `w` is pure of weight `w`: the characteristic
+polynomial of the diagonal Frobenius is the product of those of the summands. -/
+theorem IsPureOfWeight.prod {ι : K →+* ℂ} {q : ℕ} {M : FrobeniusModule.{u, v} K}
+    {N : FrobeniusModule.{t, v} K} {w : ℝ} (hM : M.IsPureOfWeight ι q w)
+    (hN : N.IsPureOfWeight ι q w) : (M.prod N).IsPureOfWeight ι q w := by
+  intro α hα
+  have hF : (M.prod N).frobeniusEnd.charpoly =
+      M.frobeniusEnd.charpoly * N.frobeniusEnd.charpoly := by
+    rw [← LinearMap.charpoly_prodMap]
+    rfl
+  rw [Module.End.hasEigenvalue_iff_isRoot_charpoly, hF, Polynomial.IsRoot, Polynomial.eval_mul,
+    mul_eq_zero] at hα
+  rcases hα with hα | hα
+  · exact hM α ((Module.End.hasEigenvalue_iff_isRoot_charpoly _ _).2 hα)
+  · exact hN α ((Module.End.hasEigenvalue_iff_isRoot_charpoly _ _).2 hα)
+
 /-- Isomorphic Frobenius modules have the same local polynomial. -/
 theorem Equiv.localPolynomial_eq {M N : FrobeniusModule.{u, v} K} (e : M.Equiv N) :
     M.localPolynomial = N.localPolynomial := by
@@ -278,7 +354,8 @@ noncomputable def Equiv.rescale {M N : FrobeniusModule.{u, v} K} (e : M.Equiv N)
   toLinearEquiv := e.toLinearEquiv
   map_frobenius x := by
     change e.toLinearEquiv ((_ : K) • M.frobenius x) = (_ : K) • N.frobenius (e.toLinearEquiv x)
-    rw [map_smul, e.map_frobenius]
+    rw [map_smul]
+    exact congrArg _ (e.map_frobenius x)
 
 /-- `ι`-reality only depends on the local polynomial. -/
 theorem IsReal.of_localPolynomial_eq {ι : K →+* ℂ} {M : FrobeniusModule.{u, v} K}
@@ -391,6 +468,18 @@ theorem IsPureOfWeight.isReal_prod_rescale_dual [IsAlgClosed K] {ι : K →+* �
   have hcc : (starRingEnd ℂ).comp (starRingEnd ℂ) = RingHom.id ℂ :=
     RingHom.ext Complex.conj_conj
   rw [hcc, Polynomial.map_id, mul_comm]
+
+/-- Rescaling the Frobenius by `1` does not change it. -/
+noncomputable def rescaleOneEquiv (M : FrobeniusModule.{u, v} K) : (M.rescale 1).Equiv M where
+  toLinearEquiv := LinearEquiv.refl K M.carrier
+  map_frobenius x := (frobeniusEnd_rescale_apply (M := M) one_ne_zero x).trans (one_smul K _)
+
+/-- If `M` is `ι`-pure of weight `0` relative to `q > 0`, then `M ⊕ M^∨` is `ι`-real: this is
+`FrobeniusModule.IsPureOfWeight.isReal_prod_rescale_dual` with `c = 1`. -/
+theorem IsPureOfWeight.isReal_prod_dual [IsAlgClosed K] {ι : K →+* ℂ} {q : ℕ} (hq : 0 < q)
+    {M : FrobeniusModule.{u, v} K} (h : M.IsPureOfWeight ι q 0) : (M.prod M.dual).IsReal ι := by
+  refine (h.isReal_prod_rescale_dual hq (c := 1) (by simp)).of_localPolynomial_eq ?_
+  rw [localPolynomial_prod, localPolynomial_prod, (rescaleOneEquiv _).localPolynomial_eq]
 
 end Realization
 

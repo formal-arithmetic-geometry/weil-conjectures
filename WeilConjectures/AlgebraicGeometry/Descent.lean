@@ -15,6 +15,13 @@ public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFr
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.FlatDescent
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Fpqc
+public import WeilConjectures.AlgebraicGeometry.Modules.PullbackUnit
+public import WeilConjectures.AlgebraicGeometry.Modules.DescentEffective
+public import WeilConjectures.AlgebraicGeometry.Modules.FiniteDescent
+public import WeilConjectures.AlgebraicGeometry.Modules.FpqcFullyFaithful
+public import WeilConjectures.AlgebraicGeometry.Modules.LocallyFreeRank
+public import WeilConjectures.AlgebraicGeometry.Modules.PullbackTilde
+public import WeilConjectures.Mathlib.RingTheory.Finiteness.Descent
 
 /-!
 # Fpqc descent for quasi-coherent modules and for finite locally free closed subschemes
@@ -63,7 +70,10 @@ of finite presentation, hence finite locally free.
   `AlgebraicGeometry.isLocallyFree_of_toDescentData_iso`,
   `AlgebraicGeometry.isFiniteLocallyFreeOfRank_of_toDescentData_iso` and
   `AlgebraicGeometry.isInvertible_of_toDescentData_iso`: (D1), fpqc descent for
-  quasi-coherent modules.
+  quasi-coherent modules. Effectivity and the rank statement are deduced from
+  `AlgebraicGeometry.exists_toDescentData_iso`,
+  `AlgebraicGeometry.isQuasicoherent_of_toDescentData_iso` and
+  `AlgebraicGeometry.isFiniteLocallyFreeOfRank_of_toDescentData_iso_of_isQuasicoherent`.
 - `AlgebraicGeometry.Scheme.IdealSheafData.exists_comap_eq_of_mem_fpqcTopology` and
   `AlgebraicGeometry.Scheme.IdealSheafData.eq_of_comap_eq_of_mem_fpqcTopology`: closed
   subschemes satisfy fpqc descent.
@@ -96,15 +106,6 @@ open CategoryTheory Opposite CategoryTheory.Bicategory CategoryTheory.Limits
 
 namespace AlgebraicGeometry
 
-/-- The pseudofunctor sending a scheme `X` to its category `X.Modules` of sheaves of
-modules and a morphism to the pullback functor. This is the pseudofunctor underlying
-`AlgebraicGeometry.Scheme.Modules.pseudofunctor`, which also records the pushforward
-functors and the adjunctions; here we only keep the contravariant part, which is the
-shape required by `CategoryTheory.Pseudofunctor.DescentData`. -/
-noncomputable abbrev modulesPseudofunctor :
-    Pseudofunctor (LocallyDiscrete Scheme.{u}ᵒᵖ) Cat :=
-  Scheme.Modules.pseudofunctor.comp Adj.forget₁
-
 variable {T : Scheme.{u}} {ι : Type w} {T' : ι → Scheme.{u}} (g : ∀ i, T' i ⟶ T)
 
 /-- **Fpqc descent for modules: full faithfulness.** For an fpqc covering `{g i : T i ⟶ T}`,
@@ -116,19 +117,24 @@ theorem bijective_toDescentData_map (hg : Sieve.ofArrows T' g ∈ Scheme.fpqcTop
     (M N : modulesPseudofunctor.obj (.mk (op T)))
     (hM : (M : T.Modules).IsQuasicoherent) (hN : (N : T.Modules).IsQuasicoherent) :
     Function.Bijective ((modulesPseudofunctor.toDescentData g).map : (M ⟶ N) → _) :=
-  sorry
+  bijective_toDescentData_map_of_mem_fpqcTopology g hg M N hM hN
 
-/-- **Fpqc descent for modules: effectivity.** For an fpqc covering `{g i : T i ⟶ T}`, every
-descent datum whose components are quasi-coherent comes from a quasi-coherent module on `T`.
+/-- **Quasi-coherence descends along an fpqc covering.** A sheaf of modules whose descent datum
+relative to an fpqc covering has quasi-coherent components is quasi-coherent.
+
+This holds for arbitrary sheaves of modules `M`: a descended quasi-coherent module `M₀` with the
+same descent datum receives a morphism `M ⟶ M₀` (by the fpqc sheaf property of `M₀`) whose
+pullbacks are the given isomorphisms, and pullback along a flat covering reflects isomorphisms
+(on stalks, by faithful flatness of the local rings).
 
 (blueprint: `lem-pc-fpqc-descent`; `sk-thm-picard-descent`, part (D1)) -/
-theorem exists_isQuasicoherent_toDescentData_iso
-    (hg : Sieve.ofArrows T' g ∈ Scheme.fpqcTopology T)
+theorem isQuasicoherent_of_toDescentData_iso (hg : Sieve.ofArrows T' g ∈ Scheme.fpqcTopology T)
     (D : modulesPseudofunctor.DescentData g)
+    (M : modulesPseudofunctor.obj (.mk (op T)))
+    (hM : Nonempty ((modulesPseudofunctor.toDescentData g).obj M ≅ D))
     (hD : ∀ i, (D.obj i : (T' i).Modules).IsQuasicoherent) :
-    ∃ M : modulesPseudofunctor.obj (.mk (op T)), (M : T.Modules).IsQuasicoherent ∧
-      Nonempty ((modulesPseudofunctor.toDescentData g).obj M ≅ D) :=
-  sorry
+    (M : T.Modules).IsQuasicoherent :=
+  isQuasicoherent_of_toDescentData_iso_of_mem_fpqcTopology g hg D M hM hD
 
 /-- **Finite presentation descends along an fpqc covering.**
 
@@ -139,7 +145,8 @@ theorem isFinitePresentation_of_toDescentData_iso (hg : Sieve.ofArrows T' g ∈ 
     (hM : Nonempty ((modulesPseudofunctor.toDescentData g).obj M ≅ D))
     (hD : ∀ i, (D.obj i : (T' i).Modules).IsFinitePresentation) :
     (M : T.Modules).IsFinitePresentation :=
-  sorry
+  isFinitePresentation_of_toDescentData_iso_of_isQuasicoherent g hg D M
+    (isQuasicoherent_of_toDescentData_iso g hg D M hM fun i ↦ have := hD i; inferInstance) hM hD
 
 /-- **Finite local freeness descends along an fpqc covering.** A descent datum whose
 components are of finite presentation and locally free, i.e. finite locally free with a rank
@@ -154,8 +161,152 @@ theorem isLocallyFree_of_toDescentData_iso (hg : Sieve.ofArrows T' g ∈ Scheme.
     (hD : ∀ i, (D.obj i : (T' i).Modules).IsFinitePresentation ∧
       (D.obj i : (T' i).Modules).IsLocallyFree) :
     (M : T.Modules).IsLocallyFree :=
-  sorry
+  isLocallyFree_of_toDescentData_iso_of_isQuasicoherent g hg D M
+    (isQuasicoherent_of_toDescentData_iso g hg D M hM fun i ↦ have := (hD i).1; inferInstance)
+    hM hD
 
+/-- **Fpqc descent for modules: existence.** For an fpqc covering `{g i : T i ⟶ T}`, every
+descent datum whose components are quasi-coherent comes from a sheaf of modules on `T`.
+
+(blueprint: `lem-pc-fpqc-descent`; `sk-thm-picard-descent`, part (D1)) -/
+theorem exists_toDescentData_iso (hg : Sieve.ofArrows T' g ∈ Scheme.fpqcTopology T)
+    (D : modulesPseudofunctor.DescentData g)
+    (hD : ∀ i, (D.obj i : (T' i).Modules).IsQuasicoherent) :
+    ∃ M : modulesPseudofunctor.obj (.mk (op T)),
+      Nonempty ((modulesPseudofunctor.toDescentData g).obj M ≅ D) :=
+  have ⟨M, _, hM⟩ := exists_isQuasicoherent_toDescentData_iso_of_mem_fpqcTopology g hg D hD
+  ⟨M, hM⟩
+
+/-- **Fpqc descent for modules: effectivity.** For an fpqc covering `{g i : T i ⟶ T}`, every
+descent datum whose components are quasi-coherent comes from a quasi-coherent module on `T`.
+
+(blueprint: `lem-pc-fpqc-descent`; `sk-thm-picard-descent`, part (D1)) -/
+theorem exists_isQuasicoherent_toDescentData_iso
+    (hg : Sieve.ofArrows T' g ∈ Scheme.fpqcTopology T)
+    (D : modulesPseudofunctor.DescentData g)
+    (hD : ∀ i, (D.obj i : (T' i).Modules).IsQuasicoherent) :
+    ∃ M : modulesPseudofunctor.obj (.mk (op T)), (M : T.Modules).IsQuasicoherent ∧
+      Nonempty ((modulesPseudofunctor.toDescentData g).obj M ≅ D) :=
+  exists_isQuasicoherent_toDescentData_iso_of_mem_fpqcTopology g hg D hD
+
+namespace Scheme.Modules
+
+/-- **Finite local freeness of rank `r` descends along a faithfully flat map of affine schemes**
+`Spec.map φ : Spec B ⟶ Spec R`, for quasi-coherent modules: the global sections of the pullback
+are `B ⊗[R] Γ(P, ⊤)`, and finite presentation, flatness and rank descend along `R ⟶ B`. -/
+theorem isFiniteLocallyFreeOfRank_of_pullback_Spec_map {R B : CommRingCat.{u}} (φ : R ⟶ B)
+    [Flat (Spec.map φ)] [Surjective (Spec.map φ)] (P : (Spec R).Modules) [P.IsQuasicoherent]
+    {r : ℕ} [((pullback (Spec.map φ)).obj P).IsFiniteLocallyFreeOfRank r] :
+    P.IsFiniteLocallyFreeOfRank r := by
+  obtain ⟨_, _, hrank⟩ := rankAtStalk_eq_of_isFiniteLocallyFreeOfRank
+    ((pullback (Spec.map φ)).obj P) (r := r)
+  have hφ : φ.hom.FaithfullyFlat := (flat_and_surjective_SpecMap_iff φ).1 ⟨‹_›, ‹_›⟩
+  let e := pullbackSpecΓEquiv φ P
+  have hfp : Module.FinitePresentation B
+      ((ModuleCat.extendScalars φ.hom).obj (moduleSpecΓFunctor.obj P)) := .of_equiv e.symm
+  have hfl : Module.Flat B
+      ((ModuleCat.extendScalars φ.hom).obj (moduleSpecΓFunctor.obj P)) := .of_linearEquiv e
+  have hrank' (q : PrimeSpectrum B) : Module.rankAtStalk
+      ((ModuleCat.extendScalars φ.hom).obj (moduleSpecΓFunctor.obj P)) q = r := by
+    rw [Module.rankAtStalk_eq_of_equiv e, hrank]
+  algebraize [φ.hom]
+  have : Module.FinitePresentation B (TensorProduct R B Γ(P, ⊤)) := by exact hfp
+  have : Module.Flat B (TensorProduct R B Γ(P, ⊤)) := by exact hfl
+  have : Module.FinitePresentation R Γ(P, ⊤) :=
+    .of_finitePresentation_tensorProduct_of_faithfullyFlat (B := B)
+  have : Module.Flat R Γ(P, ⊤) := .of_flat_tensorProduct _ _ B
+  exact isFiniteLocallyFreeOfRank_of_rankAtStalk_eq P
+    (Module.rankAtStalk_eq_of_rankAtStalk_tensorProduct_eq (B := B) hrank')
+
+/-- **Finite local freeness of rank `r` descends along a flat surjective morphism**
+`F : W ⟶ Spec R` from an affine scheme, for quasi-coherent modules on `Spec R`. -/
+theorem isFiniteLocallyFreeOfRank_of_pullback_of_isAffine {R : CommRingCat.{u}} {W : Scheme.{u}}
+    [IsAffine W] (F : W ⟶ Spec R) [Flat F] [Surjective F] (P : (Spec R).Modules)
+    [P.IsQuasicoherent] {r : ℕ} [((pullback F).obj P).IsFiniteLocallyFreeOfRank r] :
+    P.IsFiniteLocallyFreeOfRank r := by
+  obtain ⟨φ, hφ⟩ := Spec.map_surjective (W.isoSpec.inv ≫ F)
+  have : Flat (Spec.map φ) := by
+    rw [hφ]
+    infer_instance
+  have : Surjective (Spec.map φ) := by
+    rw [hφ]
+    infer_instance
+  have : ((pullback (Spec.map φ)).obj P).IsFiniteLocallyFreeOfRank r :=
+    .of_iso (pullbackCompOfEq W.isoSpec.inv F _ hφ.symm P)
+  exact isFiniteLocallyFreeOfRank_of_pullback_Spec_map φ P
+
+/-- **Finite local freeness of rank `r` descends along a finite jointly surjective family of
+flat morphisms** `f j : W j ⟶ Spec R` from affine schemes, for quasi-coherent modules on
+`Spec R`: the morphism `∐ W j ⟶ Spec R` is flat and surjective, with affine source. -/
+theorem isFiniteLocallyFreeOfRank_of_pullback_of_iUnion_range_eq_univ {R : CommRingCat.{u}}
+    (P : (Spec R).Modules) [P.IsQuasicoherent] {κ : Type u} [Finite κ] {W : κ → Scheme.{u}}
+    [∀ j, IsAffine (W j)] (f : ∀ j, W j ⟶ Spec R) [∀ j, Flat (f j)]
+    (hf : ⋃ j, Set.range (f j) = Set.univ) {r : ℕ}
+    (h : ∀ j, ((pullback (f j)).obj P).IsFiniteLocallyFreeOfRank r) :
+    P.IsFiniteLocallyFreeOfRank r := by
+  have : Surjective (Sigma.desc f) := .sigmaDesc_of_union_range_eq_univ hf
+  have : ((pullback (Sigma.desc f)).obj P).IsFiniteLocallyFreeOfRank r := by
+    refine isFiniteLocallyFreeOfRank_of_isOpenImmersion _ (Sigma.ι W)
+      (sigmaOpenCover W).iSup_opensRange fun j ↦ ?_
+    have := h j
+    exact .of_iso (pullbackCompOfEq _ _ _ (Sigma.ι_desc f j) P).symm
+  exact isFiniteLocallyFreeOfRank_of_pullback_of_isAffine (Sigma.desc f) P
+
+end Scheme.Modules
+
+set_option backward.isDefEq.respectTransparency.types false in
+/-- The affine-local step of `isFiniteLocallyFreeOfRank_of_toDescentData_iso_of_isQuasicoherent`:
+the pullback of `M` to the spectrum of the ring of sections of an affine open is finite locally
+free of rank `r`. The covering is refined over `U` by finitely many flat affine schemes; their
+disjoint union is the spectrum of a faithfully flat `Γ(T, U)`-algebra `B`, over which the
+global sections of `M` become finite locally free of rank `r`, and finite presentation, flatness
+and rank descend along `Γ(T, U) → B`. -/
+theorem isFiniteLocallyFreeOfRank_pullback_fromSpec_of_toDescentData_iso
+    (hg : Sieve.ofArrows T' g ∈ Scheme.fpqcTopology T)
+    (D : modulesPseudofunctor.DescentData g)
+    (M : modulesPseudofunctor.obj (.mk (op T))) (hMq : (M : T.Modules).IsQuasicoherent)
+    (hM : Nonempty ((modulesPseudofunctor.toDescentData g).obj M ≅ D)) (r : ℕ)
+    (hD : ∀ i, (D.obj i : (T' i).Modules).IsFiniteLocallyFreeOfRank r)
+    {U : T.Opens} (hU : IsAffineOpen U) :
+    ((Scheme.Modules.pullback hU.fromSpec).obj M).IsFiniteLocallyFreeOfRank r := by
+  obtain ⟨e⟩ := hM
+  obtain ⟨κ, W, f, _, _, _, hfS, hcov⟩ := Scheme.exists_finite_affine_flat_of_mem_fpqcTopology
+    (Scheme.fpqcTopology.pullback_stable hU.fromSpec hg)
+  choose i k hk using fun j ↦ (Sieve.mem_ofArrows_iff _ _ _).1 (hfS j)
+  refine Scheme.Modules.isFiniteLocallyFreeOfRank_of_pullback_of_iUnion_range_eq_univ _ f ?_
+    fun j ↦ ?_
+  · refine Set.eq_univ_of_forall fun x ↦ ?_
+    obtain ⟨Y, h, hh, y, rfl⟩ := Scheme.exists_mem_of_mem_fpqcTopology hcov x
+    obtain ⟨j, k', rfl⟩ := (Sieve.mem_ofArrows_iff _ _ _).1 hh
+    exact Set.mem_iUnion.2 ⟨j, k' y, rfl⟩
+  · -- `f j ≫ fromSpec = k j ≫ g (i j)`, and `(g (i j))^* M ≅ D (i j)` by the descent datum
+    have := hD (i j)
+    let c : (Scheme.Modules.pullback (g (i j))).obj M ≅ D.obj (i j) :=
+      ⟨e.hom.hom (i j), e.inv.hom (i j), congrArg (fun φ ↦ φ.hom (i j)) e.hom_inv_id,
+        congrArg (fun φ ↦ φ.hom (i j)) e.inv_hom_id⟩
+    exact .of_iso ((Scheme.Modules.pullback (k j)).mapIso c.symm ≪≫
+      pullbackCompOfEq (k j) (g (i j)) _ rfl M ≪≫
+      (pullbackCompOfEq (f j) hU.fromSpec _ (hk j) M).symm)
+
+set_option backward.isDefEq.respectTransparency.types false in
+/-- **Finite local freeness of a fixed rank descends along an fpqc covering**, for a
+quasi-coherent module: this is part (2) of the blueprint lemma, which is stated for
+quasi-coherent modules.
+
+(blueprint: `lem-pc-fpqc-descent`; `sk-thm-picard-descent`, part (D1)) -/
+theorem isFiniteLocallyFreeOfRank_of_toDescentData_iso_of_isQuasicoherent
+    (hg : Sieve.ofArrows T' g ∈ Scheme.fpqcTopology T)
+    (D : modulesPseudofunctor.DescentData g)
+    (M : modulesPseudofunctor.obj (.mk (op T))) (hMq : (M : T.Modules).IsQuasicoherent)
+    (hM : Nonempty ((modulesPseudofunctor.toDescentData g).obj M ≅ D)) (r : ℕ)
+    (hD : ∀ i, (D.obj i : (T' i).Modules).IsFiniteLocallyFreeOfRank r) :
+    (M : T.Modules).IsFiniteLocallyFreeOfRank r := by
+  refine Scheme.Modules.isFiniteLocallyFreeOfRank_of_isOpenImmersion (M : T.Modules)
+    (fun U : T.affineOpens ↦ U.2.fromSpec) ?_ fun U ↦
+      isFiniteLocallyFreeOfRank_pullback_fromSpec_of_toDescentData_iso g hg D M hMq hM r hD U.2
+  simpa only [IsAffineOpen.opensRange_fromSpec] using iSup_affineOpens_eq_top T
+
+set_option backward.isDefEq.respectTransparency.types false in
 /-- **Finite local freeness of a fixed rank descends along an fpqc covering.** A descent datum
 whose components are finite locally free of rank `r` comes from a module on `T` which is
 finite locally free of rank `r`. This refines `isLocallyFree_of_toDescentData_iso`: the rank
@@ -170,7 +321,11 @@ theorem isFiniteLocallyFreeOfRank_of_toDescentData_iso
     (hM : Nonempty ((modulesPseudofunctor.toDescentData g).obj M ≅ D)) (r : ℕ)
     (hD : ∀ i, (D.obj i : (T' i).Modules).IsFiniteLocallyFreeOfRank r) :
     (M : T.Modules).IsFiniteLocallyFreeOfRank r :=
-  sorry
+  have : (M : T.Modules).IsQuasicoherent := isQuasicoherent_of_toDescentData_iso g hg D M hM
+    fun i ↦ haveI := hD i
+    haveI := SheafOfModules.IsFiniteLocallyFreeOfRank.isLocallyFree (D.obj i : (T' i).Modules) r
+    inferInstance
+  isFiniteLocallyFreeOfRank_of_toDescentData_iso_of_isQuasicoherent g hg D M this hM r hD
 
 /-- **Invertibility descends along an fpqc covering**: a compatible family of invertible
 modules `ℒ i` on the `T i` glues to an invertible module `ℒ` on `T` with `ℒ|_{T i} ≅ ℒ i`.
@@ -302,6 +457,7 @@ theorem exists_comap_eq_of_mem_fpqcTopology {X : Scheme.{u}} {X' : ι → Scheme
 
 end Scheme.IdealSheafData
 
+set_option backward.isDefEq.respectTransparency.types false in
 /-- **Fpqc descent for finite locally free closed subschemes.** Let `f : X ⟶ T` be a morphism
 of schemes, let `{g i : T i ⟶ T}` be an fpqc covering and let `p i : X i ⟶ X`,
 `q i : X i ⟶ T i` exhibit `X i` as the base change `X ×_T T i`:

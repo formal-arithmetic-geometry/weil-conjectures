@@ -18,7 +18,8 @@ We also record `AlgebraicGeometry.Scheme.IdealSheafData.le_ker_iff_range_subset_
 an ideal sheaf is contained in the kernel of a morphism from a reduced scheme if and only
 if the range of the morphism lies in its support; and
 `AlgebraicGeometry.Scheme.IdealSheafData.coe_support_sup`, the set-level form of
-`support_sup`.
+`support_sup`, and `AlgebraicGeometry.Scheme.Hom.ker_eq_vanishingIdeal`: the kernel of a morphism
+from a reduced scheme is the vanishing ideal of the closure of its range.
 
 Finally we record the monotonicity of the product of ideal sheaves, its distributivity over
 suprema and the containment of the support of a power in the support.
@@ -50,6 +51,20 @@ lemma le_ker_iff_range_subset_support {W : Scheme.{u}} (g : W ⟶ X) [IsReduced 
     I ≤ g.ker ↔ Set.range g ⊆ (I.support : Set X) := by
   rw [← map_bot, le_map_iff_comap_le, le_bot_iff, ← support_eq_top_iff, support_comap]
   simp [TopologicalSpace.Closeds.ext_iff, Set.preimage_eq_univ_iff]
+
+/-- The kernel of a morphism from a reduced scheme is the vanishing ideal of the closure of its
+range: both are the largest ideal sheaf whose support contains the range. -/
+lemma _root_.AlgebraicGeometry.Scheme.Hom.ker_eq_vanishingIdeal {W : Scheme.{u}} (g : W ⟶ X)
+    [IsReduced W] : g.ker = vanishingIdeal ⟨closure (Set.range g), isClosed_closure⟩ := by
+  refine le_antisymm ?_ ?_
+  · rw [← le_support_iff_le_vanishingIdeal]
+    exact closure_minimal ((le_ker_iff_range_subset_support _ g).mp le_rfl)
+      (support _).isClosed
+  · rw [le_ker_iff_range_subset_support]
+    have : (⟨closure (Set.range g), isClosed_closure⟩ : TopologicalSpace.Closeds X) ≤
+        (vanishingIdeal ⟨closure (Set.range g), isClosed_closure⟩).support :=
+      le_support_iff_le_vanishingIdeal.mpr le_rfl
+    exact subset_closure.trans this
 
 /-- The support of a sum of ideal sheaves is the intersection of the supports: the
 set-level form of `support_sup`. -/

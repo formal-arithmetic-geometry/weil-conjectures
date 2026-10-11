@@ -7,9 +7,11 @@ module
 
 public import Mathlib.Algebra.Category.ModuleCat.AB
 public import Mathlib.Algebra.Category.ModuleCat.Monoidal.Closed
+public import Mathlib.CategoryTheory.Generator.Sheaf
 public import WeilConjectures.CategoryTheory.Abelian.Flat.Basic
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.TensorColimits
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Sheaf
+public import WeilConjectures.Mathlib.CategoryTheory.Abelian.GrothendieckCategory.Basic
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.Monoidal
 
 /-!
@@ -51,24 +53,25 @@ is a flat separator of `ModuleCat.{u} Λ`, so `ModuleCat.hasFunctorialFlatResolu
 supplies the functorial flat resolutions that the étale six-functor files ask of their
 coefficient category.
 
-## The sheaf case (sorried)
+## The sheaf case
 
 With the criterion in hand, the sheaf statement reduces to the transfer of flat
-separators along the site, `exists_flat_separator_sheaf_of_essentiallySmall`, which is the
-one `sorry` left in this file. As in the sibling files it is stated for an arbitrary site
-`C` with `Hom`-types in the universe `u` and objects in `u + 1` which is essentially
-small in `u + 1`; the small étale site and the small pro-étale site are such sites, so the
-étale and pro-étale instances are obtained from the general one by `inferInstance`.
+separators along the site, `exists_flat_separator_sheaf_of_essentiallySmall`. As in the
+sibling files it is stated for an arbitrary site `C` with `Hom`-types in the universe `u` and
+objects in `u + 1` which is essentially small in `u + 1`; the small étale site and the small
+pro-étale site are such sites, so the étale and pro-étale instances are obtained from the
+general one by `inferInstance`.
 
-The intended proof combines a flat separator of the coefficient category with the site.
-For an object `U` of `C` write `j_{U!}` for the extension by zero along the localization
-of the site at `U`; it is exact, left adjoint to the restriction `(-)|_U`, and satisfies
-`j_{U!} P ⊗ G ≅ j_{U!} (P ⊗ G|_U)`, so `j_{U!} P` is a flat sheaf as soon as `P` is a flat
-object of `A`. Since `Hom (j_{U!} P, F) ≅ Hom (P, F(U))`, the sheaves `j_{U!} G` for `G` a
-separator of `A` and `U` ranging over the (essentially small) site form a generating
-family, and their coproduct is a flat separator of `Sheaf J A`. On the small étale site
-with `A = ModuleCat.{u + 1} Λ` this is the construction by local free covers
-`⊕ j_{U!} Λ_U` of the Stacks Project, Tag 06YL.
+For an object `U` of `C` and a flat separator `G` of `A`, let `G_U` be the free presheaf
+`V ↦ ∐_{V ⟶ U} G` (`CategoryTheory.Presheaf.freeYoneda`), so that
+`Hom (G_U, F) ≅ Hom (G, F(U))`. Its sheafification `L G_U` (`CategoryTheory.Sheaf.freeYoneda`)
+is flat: tensoring with it is `F ↦ L (G_U ⊗ F)`, and the objectwise tensor product with `G_U`
+is left exact because each `G_U(V)` is a coproduct of copies of `G`
+(`CategoryTheory.GrothendieckTopology.flat_presheafToSheaf_obj`). The sheaves `L G_U`, for `U`
+ranging over the site, form a separating family (`CategoryTheory.Sheaf.isSeparating`), so
+their coproduct is a flat separator of `Sheaf J A`. On the small étale site with
+`A = ModuleCat.{u + 1} Λ` this is the construction by local free covers `⊕ j_{U!} Λ_U` of the
+Stacks Project, Tag 06YL.
 
 ## Main results
 
@@ -76,18 +79,9 @@ with `A = ModuleCat.{u + 1} Λ` this is the construction by local free covers
   functorial flat resolutions exist exactly when there is a flat separator.
 - `ModuleCat.hasFunctorialFlatResolution`: `ModuleCat.{u} Λ` admits functorial flat
   resolutions, over a commutative ring `Λ : Type u`.
-
-## Sorried results
-
 - `CategoryTheory.GrothendieckTopology.exists_flat_separator_sheaf_of_essentiallySmall`:
-  a flat separator of the coefficient category induces one of the sheaf category.
-
-## Sorried instances
-
-- `CategoryTheory.GrothendieckTopology.hasFunctorialFlatResolution_sheaf_of_essentiallySmall`:
-  the category of `A`-valued sheaves on an essentially small site admits functorial flat
-  resolutions. It is not sorried directly: it is deduced from the criterion and the
-  sorried transfer of flat separators above.
+  a flat separator of the coefficient category induces one of the sheaf category, hence
+  `CategoryTheory.GrothendieckTopology.hasFunctorialFlatResolution_sheaf_of_essentiallySmall`.
 
 -/
 
@@ -161,13 +155,45 @@ make `Sheaf J A` itself monoidal closed, which is one of the hypotheses of
 `Abelian.hasFunctorialFlatResolution_iff_exists_flat_separator` below. -/
 variable [MonoidalCategory A] [MonoidalPreadditive A] [SymmetricCategory A] [MonoidalClosed A]
 
+omit [MonoidalPreadditive A] in
+/-- The sheafification of a presheaf with flat values is flat: tensoring with it is
+`F ↦ L (P ⊗ F)`, the composite of the inclusion of sheaves into presheaves, the objectwise
+tensor product with `P` and sheafification, each of which is left exact. -/
+lemma flat_presheafToSheaf_obj (P : Cᵒᵖ ⥤ A) (hP : ∀ U, ObjectProperty.flat (P.obj U)) :
+    ObjectProperty.flat ((presheafToSheaf J A).obj P) := by
+  rw [ObjectProperty.flat_iff_preservesFiniteLimits]
+  have (U : Cᵒᵖ) : PreservesFiniteLimits (tensorLeft (P.obj U)) :=
+    (ObjectProperty.flat_iff_preservesFiniteLimits _).1 (hP U)
+  have : PreservesFiniteLimits (tensorLeft P) :=
+    preservesFiniteLimits_of_evaluation _ fun U ↦
+      inferInstanceAs (PreservesFiniteLimits ((evaluation Cᵒᵖ A).obj U ⋙ tensorLeft (P.obj U)))
+  let e : tensorLeft ((presheafToSheaf J A).obj P) ≅
+      sheafToPresheaf J A ⋙ tensorLeft P ⋙ presheafToSheaf J A :=
+    (Functor.leftUnitor _).symm ≪≫
+      Functor.isoWhiskerRight (asIso (sheafificationAdjunction J A).counit).symm _ ≪≫
+      Functor.associator _ _ _ ≪≫
+      Functor.isoWhiskerLeft (sheafToPresheaf J A) (Sheaf.presheafToSheafCompTensorLeftIso P)
+  exact preservesFiniteLimits_of_natIso e.symm
+
+omit [MonoidalPreadditive A] in
 /-- A flat separator of the coefficient category `A` induces a flat separator of the
-category of `A`-valued sheaves on an essentially small site, obtained by applying
-extension by zero to it and summing over the site; see the module docstring. -/
+category of `A`-valued sheaves on an essentially small site: the coproduct of the free sheaves
+`Sheaf.freeYoneda J U G`; see the module docstring. -/
 theorem exists_flat_separator_sheaf_of_essentiallySmall
     (hA : ∃ G : A, IsSeparator G ∧ ObjectProperty.flat G) :
-    ∃ G : Sheaf J A, IsSeparator G ∧ ObjectProperty.flat G :=
-  sorry
+    ∃ G : Sheaf J A, IsSeparator G ∧ ObjectProperty.flat G := by
+  obtain ⟨G, hG, hG'⟩ := hA
+  have : HasCoproducts.{u} A := hasCoproducts_shrink.{u, u + 1}
+  have := IsGrothendieckAbelian.hasColimitsOfShape_discrete.{_, _, u + 1} (Sheaf J A) (C × Unit)
+  have hflat (U : C) (V : Cᵒᵖ) : ObjectProperty.flat ((Presheaf.freeYoneda U G).obj V) := by
+    have := IsGrothendieckAbelian.hasColimitsOfShape_discrete.{_, _, u + 1} A
+      (ULift.{u + 1} (V.unop ⟶ U))
+    exact ObjectProperty.prop_of_iso _
+      (Sigma.whiskerEquiv (f := fun _ : ULift.{u + 1} (V.unop ⟶ U) ↦ G) Equiv.ulift
+        fun _ ↦ Iso.refl G)
+      (ObjectProperty.flat_coproduct _ fun _ ↦ hG')
+  exact ⟨_, Sheaf.isSeparator J (S := fun _ : Unit ↦ G) (by simpa using! hG),
+    ObjectProperty.flat_coproduct _ fun _ ↦ flat_presheafToSheaf_obj A J _ (hflat _)⟩
 
 /-- Functorial flat resolutions of `A`-valued sheaves on an essentially small site: by
 `Abelian.hasFunctorialFlatResolution_iff_exists_flat_separator` this is the existence of a

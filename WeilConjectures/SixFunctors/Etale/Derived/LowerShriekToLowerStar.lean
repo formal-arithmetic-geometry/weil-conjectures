@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
+public import WeilConjectures.SixFunctors.Etale.Derived.GlobalSections
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
 public import WeilConjectures.SixFunctors.Etale.Derived.OpenImmersionLowerShriek
 
@@ -35,6 +36,8 @@ of the unit `K ⟶ D(j^*) D(j_!) K`, which is an isomorphism
 - `AlgebraicGeometry.Etale.rightDerivedLowerShriekToLowerStarComp`
 - `AlgebraicGeometry.Etale.rightDerivedLowerShriekIsoRightDerivedLowerStar`: `Rf_! ≅ Rf_*` for
   a proper `f`.
+- `AlgebraicGeometry.Etale.compactlySupportedGlobalSectionsIsoOfIsProper`: `RΓ_c(X/Y, -) ≅ RΓ(X, -)`
+  for a proper `f`.
 - `AlgebraicGeometry.Etale.rightDerivedLowerShriekTranspose`
 
 ## Main statements
@@ -148,6 +151,15 @@ lemma rightDerivedLowerShriekIsoRightDerivedLowerStar_hom [IsProper f] :
       rightDerivedLowerShriekToLowerStarComp A f ≫ (rightDerivedLowerStarComp A _ _).hom ≫
         (rightDerivedLowerStarCongr A (HasCompactification.compactification f).comm.symm).hom :=
   rfl
+
+/-- For a proper morphism `f : X ⟶ Y`, compactly supported and ordinary global sections agree,
+`RΓ_c(X/Y, -) ≅ RΓ(X, -)`: the composite of `Rf_! ≅ Rf_*` with the Leray isomorphism
+`RΓ(Y, Rf_* -) ≅ RΓ(X, -)`. -/
+noncomputable def compactlySupportedGlobalSectionsIsoOfIsProper [HasSmallSiteSheafify A]
+    [IsProper f] :
+    compactlySupportedGlobalSections A f ≅ rightDerivedGlobalSections A X :=
+  Functor.isoWhiskerRight (rightDerivedLowerShriekIsoRightDerivedLowerStar A f) _ ≪≫
+    rightDerivedLowerStarCompRightDerivedGlobalSectionsIso A f
 
 /-- The *transpose* of a class `γ : K ⟶ Rf_! N` along the forget-supports map: the morphism
 `Li^* Lg^* K ⟶ N` adjoint, under `Li^* Lg^* ⊣ Rg_* Ri_*`, to

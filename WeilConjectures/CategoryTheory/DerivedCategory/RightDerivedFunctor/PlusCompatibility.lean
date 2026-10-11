@@ -7,6 +7,7 @@ module
 
 public import Mathlib.Algebra.Homology.DerivedCategory.RightDerivedFunctorPlus
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Defs
+public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusSingle
 
 /-!
 # Compatibility of the unbounded right derived functor with `rightDerivedFunctorPlus`
@@ -21,7 +22,11 @@ derived category with the right derived functor
 `F.rightDerivedFunctorPlus ⋙ DerivedCategory.Plus.ι ≅
   DerivedCategory.Plus.ι ⋙ F.rightDerivedFunctor`
 
-(`Functor.rightDerivedFunctorPlusCompatibility`).
+(`Functor.rightDerivedFunctorPlusCompatibility`). In particular the homology of the unbounded
+total right derived functor applied to an object placed in degree `0` is given by the
+classical right derived functors, `H^n(RF(X[0])) ≅ RⁿF X`
+(`Functor.homologyRightDerivedFunctorObjSingleFunctorIso`), and it vanishes in negative
+degrees (`Functor.isGE_rightDerivedFunctor_obj_singleFunctor`).
 -/
 
 @[expose] public section
@@ -87,6 +92,34 @@ noncomputable def rightDerivedFunctorPlusCompatibility :
       DerivedCategory.Plus.ι ⋙ F.rightDerivedFunctor :=
   Functor.rightDerivedUnique _ _ F.rightDerivedFunctorPlusιUnit F.ιRightDerivedFunctorUnit
     (HomotopyCategory.Plus.quasiIso C)
+
+/-- The `n`-th homology of the unbounded total right derived functor `RF` applied to `X`
+placed in degree `0` is the classical right derived functor `RⁿF X`. -/
+noncomputable def homologyRightDerivedFunctorObjSingleFunctorIso (X : C) (n : ℕ) :
+    (DerivedCategory.homologyFunctor D n).obj
+        (F.rightDerivedFunctor.obj ((DerivedCategory.singleFunctor C 0).obj X)) ≅
+      (F.rightDerived n).obj X :=
+  (DerivedCategory.homologyFunctor D n).mapIso
+      (F.rightDerivedFunctorPlusCompatibility.app
+        ((DerivedCategory.Plus.singleFunctor C 0).obj X)).symm ≪≫
+    F.homologyRightDerivedFunctorPlusObjSingleFunctorIso X n
+
+/-- The unbounded total right derived functor `RF` of an object `X` placed in degree `0` is
+concentrated in degrees `≥ 0`: it is computed by `F` applied to an injective resolution of
+`X`. -/
+lemma isGE_rightDerivedFunctor_obj_singleFunctor (X : C) :
+    (F.rightDerivedFunctor.obj ((DerivedCategory.singleFunctor C 0).obj X)).IsGE 0 := by
+  have : (F.rightDerivedPlusComplex X).obj.IsStrictlyGE 0 := by
+    dsimp [rightDerivedPlusComplex]
+    infer_instance
+  refine (DerivedCategory.isGE_iff _ 0).2 fun i hi ↦ ?_
+  exact (((F.rightDerivedPlusComplex X).obj.exactAt_of_isGE 0 i hi).isZero_homology).of_iso
+    ((DerivedCategory.homologyFunctor D i).mapIso
+        (F.rightDerivedFunctorPlusCompatibility.app
+          ((DerivedCategory.Plus.singleFunctor C 0).obj X)).symm ≪≫
+      (DerivedCategory.Plus.homologyFunctor D i).mapIso
+        (F.rightDerivedFunctorPlusObjSingleFunctorIsoQ X) ≪≫
+      DerivedCategory.Plus.homologyFunctorObjQIso _ i)
 
 end Functor
 

@@ -21,6 +21,9 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.Restrict
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Scheme
 public import WeilConjectures.Mathlib.Algebra.Category.Ring.FilteredColimits
 public import WeilConjectures.Mathlib.Algebra.Category.Ring.FinitePresentation
+public import Mathlib.CategoryTheory.Presentable.Basic
+public import Mathlib.CategoryTheory.Filtered.Basic
+public import Mathlib.CategoryTheory.Limits.Types.ColimitTypeFiltered
 
 /-!
 # Cofiltered limits of schemes with affine transition morphisms
@@ -1289,10 +1292,15 @@ instance : IsCofilteredOrEmpty E.Stage where
     have hmap : T₂.A.map (resAlgHom (k ≫ k₂)) ≤ E.fiberProduct j := by
       rintro p ⟨q, hq, rfl⟩
       exact resAlgHom_mem_fiberProduct _ (T₂.A_le_fiberProduct hq)
-    refine ⟨T₁.restrict (k ≫ k₁) (T₂.A.map (resAlgHom (k ≫ k₂))) hmap (T₂.hAfg.map _),
-      T₁.restrictHom _ _ _ _, ⟨k ≫ k₂, fun l ↦ ?_, fun p hp ↦ ?_⟩, trivial⟩
-    · exact (E.res_res k₂ k _).symm.trans ((hk l).symm.trans (E.res_res k₁ k _))
-    · exact T₁.le_restrict_A _ _ _ _ ⟨p, hp, rfl⟩
+    -- Stated for a general subalgebra `A'`: for the concrete one, elaborating the components
+    -- of the morphism to `T₂` is very slow.
+    have H (A' : Subalgebra ℤ (Γ(E.X, E.V) × Γ(E.WD.obj j, ⊤))) (hA' : A' ≤ E.fiberProduct j)
+        (hfg : A'.FG) (hle : T₂.A.map (resAlgHom (k ≫ k₂)) ≤ A') :
+        ∃ (W : E.Stage) (_ : W ⟶ T₁) (_ : W ⟶ T₂), True :=
+      ⟨T₁.restrict (k ≫ k₁) A' hA' hfg, T₁.restrictHom _ _ _ _,
+        ⟨k ≫ k₂, fun l ↦ (E.res_res k₂ k _).symm.trans ((hk l).symm.trans (E.res_res k₁ k _)),
+          fun p hp ↦ T₁.le_restrict_A _ _ _ _ (hle ⟨p, hp, rfl⟩)⟩, trivial⟩
+    exact H _ hmap (T₂.hAfg.map _) le_rfl
   cone_maps T₁ T₂ f g := by
     obtain ⟨j', k, hk⟩ := IsCofilteredOrEmpty.cone_maps f.base g.base
     refine ⟨T₁.restrict k ⊥ bot_le Subalgebra.fg_bot, T₁.restrictHom _ _ _ _, ?_⟩
@@ -1458,6 +1466,9 @@ lemma isPullback_pushout_inr {T T' : E.Stage} (f : T ⟶ T') :
     (Stage.toSpec_comp_SpecMap_algHom f).symm (isPullback_Wι f)
 
 instance (T : E.Stage) : CompactSpace (E.stageDiagram.obj T) :=
+  have : CompactSpace (E.N.D.obj T.j.left) := inferInstance
+  have : CompactSpace (Spec (CommRingCat.of ↥T.A)) :=
+    inferInstanceAs (CompactSpace (PrimeSpectrum ↥T.A))
   inferInstanceAs (CompactSpace ↑(pushout (E.Wι T.j) T.toSpec))
 
 instance (T : E.Stage) :
@@ -1773,8 +1784,6 @@ noncomputable def isLimitBaseCone (E : ExtensionData.{u}) (T₀ : E.Stage) :
     IsLimit (E.cone.whisker (Over.forget T₀ ⋙ E.stageIndex ⋙ Over.forget E.i₀)) :=
   (Functor.Initial.isLimitWhiskerEquiv _ E.cone).symm E.N.isLimit
 
-set_option maxHeartbeats 1600000 in
--- Naturality of the chart isomorphism unfolds the pushout of every stage below `T₀`.
 /-- (Implementation) The `U`-chart of a stage scheme is `Dⱼ`, compatibly with the
 transition morphisms. -/
 noncomputable def chartUIso (E : ExtensionData.{u}) (T₀ : E.Stage) :
@@ -1782,8 +1791,7 @@ noncomputable def chartUIso (E : ExtensionData.{u}) (T₀ : E.Stage) :
   NatIso.ofComponents
     (fun S ↦ IsOpenImmersion.isoOfRangeEq (pushout.inl (E.Wι S.left.j) S.left.toSpec)
       (Scheme.Opens.ι (E.stageDiagram.map S.hom ⁻¹ᵁ T₀.chartU))
-      (by rw [← Scheme.Hom.coe_opensRange, ← Scheme.Hom.coe_opensRange,
-        Scheme.Opens.opensRange_ι, Stage.preimage_chartU S.hom]))
+      (Scheme.Hom.range_eq_range_ι_of_opensRange_eq _ (Stage.preimage_chartU S.hom).symm))
     (fun {S S'} k ↦ by
       rw [← cancel_mono (Scheme.Opens.ι (E.stageDiagram.map S'.hom ⁻¹ᵁ T₀.chartU))]
       simp only [Category.assoc, IsOpenImmersion.isoOfRangeEq_hom_fac,
@@ -1820,8 +1828,6 @@ noncomputable def isLimitInterCone (E : ExtensionData.{u}) (T₀ : E.Stage) :
     IsLimit (E.Wc.whisker (Over.forget T₀ ⋙ E.stageIndex)) :=
   (Functor.Initial.isLimitWhiskerEquiv _ E.Wc).symm E.isLimitWc
 
-set_option maxHeartbeats 1600000 in
--- Naturality of the overlap isomorphism unfolds the pushout of every stage below `T₀`.
 /-- (Implementation) The overlap of the two charts of a stage scheme is `Wⱼ`, compatibly
 with the transition morphisms. -/
 noncomputable def interIso (E : ExtensionData.{u}) (T₀ : E.Stage) :
@@ -1830,9 +1836,9 @@ noncomputable def interIso (E : ExtensionData.{u}) (T₀ : E.Stage) :
     (fun S ↦ IsOpenImmersion.isoOfRangeEq
       (E.Wι S.left.j ≫ pushout.inl (E.Wι S.left.j) S.left.toSpec)
       (Scheme.Opens.ι (E.stageDiagram.map S.hom ⁻¹ᵁ (T₀.chartU ⊓ T₀.chartV)))
-      (by rw [← Scheme.Hom.coe_opensRange, ← Scheme.Hom.coe_opensRange,
-        Scheme.Opens.opensRange_ι, Scheme.Hom.preimage_inf, Stage.preimage_chartU S.hom,
-        Stage.preimage_chartV S.hom, Stage.chartU_inf_chartV]))
+      (Scheme.Hom.range_eq_range_ι_of_opensRange_eq _ ((congrArg₂ (· ⊓ ·)
+        (Stage.preimage_chartU S.hom) (Stage.preimage_chartV S.hom)).trans
+          (Stage.chartU_inf_chartV _)).symm))
     (fun {S S'} k ↦ by
       rw [← cancel_mono (Scheme.Opens.ι (E.stageDiagram.map S'.hom ⁻¹ᵁ
         (T₀.chartU ⊓ T₀.chartV)))]
@@ -1898,8 +1904,12 @@ lemma exists_hom_algHom_eq (E : ExtensionData.{u}) (T : E.Stage) (a b : ↥T.A)
     rw [← T.hA _ a.2, ← T.hA _ b.2, h]
   have hcpt : IsCompact ((⊤ : (E.WD.obj T.j).Opens) : Set (E.WD.obj T.j)) := isCompact_univ
   obtain ⟨j', k, hk⟩ := exists_app_map_eq_map_of_isLimit E.WD E.Wc E.isLimitWc hcpt _ _ ht
-  exact ⟨T.restrict k ⊥ bot_le Subalgebra.fg_bot,
-    T.restrictHom k ⊥ bot_le Subalgebra.fg_bot, Stage.Hom.algHom_eq_of _ a b h hk⟩
+  -- Stated for a general subalgebra `A'`: at `A' = ⊥`, unifying `hk` with the goal is very
+  -- slow.
+  have H (A' : Subalgebra ℤ (Γ(E.X, E.V) × Γ(E.WD.obj j', ⊤))) (hA' : A' ≤ E.fiberProduct j')
+      (hfg : A'.FG) : ∃ (T' : E.Stage) (f : T' ⟶ T), f.algHom a = f.algHom b :=
+    ⟨T.restrict k A' hA' hfg, T.restrictHom k A' hA' hfg, Stage.Hom.algHom_eq_of _ a b h hk⟩
+  exact H ⊥ bot_le Subalgebra.fg_bot
 
 /-- (Implementation) The system of coefficient algebras of the stages, as a diagram in the
 opposite category of commutative rings. -/
@@ -1958,8 +1968,6 @@ lemma isoSpec_inv_toSpecΓ (E : ExtensionData.{u}) :
     E.hV.isoSpec.inv ≫ E.V.toSpecΓ = 𝟙 _ := by
   rw [← IsAffineOpen.isoSpec_hom E.hV, Iso.inv_hom_id]
 
-set_option maxHeartbeats 1600000 in
--- Naturality of the chart isomorphism unfolds the pushout of every stage below `T₀`.
 /-- (Implementation) The `Spec A`-chart of a stage scheme is `Spec A`, compatibly with the
 transition morphisms. -/
 noncomputable def chartVIso (E : ExtensionData.{u}) (T₀ : E.Stage) :
@@ -1967,8 +1975,7 @@ noncomputable def chartVIso (E : ExtensionData.{u}) (T₀ : E.Stage) :
   NatIso.ofComponents
     (fun S ↦ IsOpenImmersion.isoOfRangeEq (pushout.inr (E.Wι S.left.j) S.left.toSpec)
       (Scheme.Opens.ι (E.stageDiagram.map S.hom ⁻¹ᵁ T₀.chartV))
-      (by rw [← Scheme.Hom.coe_opensRange, ← Scheme.Hom.coe_opensRange,
-        Scheme.Opens.opensRange_ι, Stage.preimage_chartV S.hom]))
+      (Scheme.Hom.range_eq_range_ι_of_opensRange_eq _ (Stage.preimage_chartV S.hom).symm))
     (fun {S S'} k ↦ by
       rw [← cancel_mono (Scheme.Opens.ι (E.stageDiagram.map S'.hom ⁻¹ᵁ T₀.chartV))]
       simp only [Category.assoc, IsOpenImmersion.isoOfRangeEq_hom_fac,
@@ -3543,8 +3550,16 @@ theorem Scheme.exists_pullback_hom_of_isLimit [∀ i, CompactSpace (D.obj i)]
     ∃ (j : I) (f : j ⟶ i) (ψj : pullback pV (D.map f) ⟶ W),
       ψj ≫ pW = pullback.fst pV (D.map f) ≫ pV ∧
         pullback.map pV (c.π.app i) pV (D.map f) (𝟙 V) (c.π.app j) (𝟙 _) (by simp)
-          (by simp) ≫ ψj = ψ :=
-  sorry
+          (by simp) ≫ ψj = ψ := by
+  have : CompactSpace V := QuasiCompact.compactSpace_of_compactSpace pV
+  have : QuasiSeparatedSpace V := quasiSeparatedSpace_of_quasiSeparated pV
+  obtain ⟨j, g, hga, hgt⟩ := Scheme.exists_π_app_comp_eq_of_locallyOfFinitePresentation
+    (baseChangeDiagram D pV) (baseChangeDiagramStructure D pV) pW (baseChangeCone D c pV)
+    (isLimitBaseChangeCone D c pV hc) ψ (by
+      ext j
+      change ((baseChangeCone D c pV).π.app j ≫ pullback.fst pV (D.map j.hom)) ≫ pV = ψ ≫ pW
+      rw [baseChangeCone_π_app_fst, hψ])
+  exact ⟨j.left, j.hom, g, hgt, hga⟩
 
 include hc in
 /-- **Equalities of morphisms between schemes of finite presentation descend to a finite stage**
@@ -3561,8 +3576,17 @@ theorem Scheme.exists_pullback_fst_comp_eq_of_isLimit [∀ i, CompactSpace (D.ob
     [LocallyOfFinitePresentation pW] [QuasiCompact pW] [QuasiSeparated pW] (ψ χ : V ⟶ W)
     (hψ : ψ ≫ pW = pV) (hχ : χ ≫ pW = pV)
     (h : pullback.fst pV (c.π.app i) ≫ ψ = pullback.fst pV (c.π.app i) ≫ χ) :
-    ∃ (j : I) (f : j ⟶ i), pullback.fst pV (D.map f) ≫ ψ = pullback.fst pV (D.map f) ≫ χ :=
-  sorry
+    ∃ (j : I) (f : j ⟶ i), pullback.fst pV (D.map f) ≫ ψ = pullback.fst pV (D.map f) ≫ χ := by
+  have : CompactSpace V := QuasiCompact.compactSpace_of_compactSpace pV
+  have : QuasiSeparatedSpace V := quasiSeparatedSpace_of_quasiSeparated pV
+  obtain ⟨k, hk, heq⟩ := Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType
+    (baseChangeDiagram D pV) (baseChangeDiagramStructure D pV) pW (baseChangeCone D c pV)
+    (isLimitBaseChangeCone D c pV hc) (i := Over.mk (𝟙 i))
+    (pullback.fst _ _ ≫ ψ) (pullback.fst _ _ ≫ χ)
+    (by simp [baseChangeDiagramStructure, hψ]) (by simp [baseChangeDiagramStructure, hχ])
+    (by rw [baseChangeCone_π_app_fst_assoc, baseChangeCone_π_app_fst_assoc, h])
+  refine ⟨k.left, k.hom, ?_⟩
+  simpa using heq
 
 end Descent
 
@@ -5078,5 +5102,344 @@ theorem Scheme.exists_isClosedImmersion_of_isOpenImmersion_of_isLimit [IsCofilte
   rw [Category.assoc, h₂, reassoc_of% hg₀]
 
 end ClosedImmersionDescent
+
+end AlgebraicGeometry
+
+/-! ### Ported from the `proetale` package
+(`Proetale.Mathlib.AlgebraicGeometry.AffineTransitionLimit`) -/
+
+universe t
+universe v₁ v₂ v₃ u₁ u₂ u₃
+
+open CategoryTheory Limits
+
+namespace CategoryTheory
+
+lemma IsConnected.of_forall_nonempty_hom_left {C : Type*} [Category* C]
+    (X : C) (h : ∀ (Y : C), Nonempty (X ⟶ Y)) :
+    IsConnected C :=
+  have : Nonempty C := ⟨X⟩
+  zigzag_isConnected fun _ _ ↦ .trans (.of_inv (h _).some) (.of_hom (h _).some)
+
+lemma IsConnected.of_forall_nonempty_hom_right {C : Type*} [Category* C]
+    (X : C) (h : ∀ (Y : C), Nonempty (Y ⟶ X)) :
+    IsConnected C :=
+  have : Nonempty C := ⟨X⟩
+  zigzag_isConnected fun _ _ ↦ .trans (.of_hom (h _).some) (.of_inv (h _).some)
+
+variable {C : Type u₁} [Category.{v₁} C]
+  {I : Type u₂} {I' : Type u₃} [Category.{v₂} I]
+  [Category.{v₃} I']
+  {D : I ⥤ C} {D' : I' ⥤ C}
+  {c : Cone D} {c' : Cone D'}
+  (hc : IsLimit c) (hc' : IsLimit c')
+  (f : c.pt ⟶ c'.pt)
+
+namespace ConstructLimitMap
+
+def Aux : ObjectProperty (Comma D D') :=
+  fun A ↦ c.π.app A.left ≫ A.hom = f ≫ c'.π.app A.right
+
+@[reassoc]
+lemma Aux.w (A : (Aux f).FullSubcategory) :
+    c.π.app A.obj.left ≫ A.obj.hom = f ≫ c'.π.app A.obj.right :=
+  A.property
+
+@[simps!]
+def Aux.projLeft : (Aux f).FullSubcategory ⥤ I :=
+  (Aux f).ι ⋙ Comma.fst _ _
+
+@[simps!]
+def Aux.projRight : (Aux f).FullSubcategory ⥤ I' :=
+  (Aux f).ι ⋙ Comma.snd _ _
+
+variable
+  [IsCofiltered I] [IsCofiltered I']
+  [∀ i : I', PreservesColimit D.op (yoneda.obj (D'.obj i))]
+
+/-! TODO: The following three proofs are very similar, unify them. -/
+
+include hc in
+lemma isCofiltered : IsCofiltered (Aux f).FullSubcategory := by
+  obtain ⟨i'⟩ := IsCofiltered.nonempty (C := I')
+  obtain ⟨a, p, hp⟩ := exists_hom_of_preservesColimit_yoneda hc (f ≫ c'.π.app i')
+  have : Nonempty (Aux f).FullSubcategory := ⟨⟨a, i', p⟩, hp⟩
+  have : IsCofilteredOrEmpty (Aux f).FullSubcategory := by
+    refine ⟨?_, ?_⟩
+    · intro j₁ j₂
+      let l' := IsCofiltered.min j₁.obj.right j₂.obj.right
+      let lp₁ := IsCofiltered.minToLeft j₁.obj.right j₂.obj.right
+      let lp₂ := IsCofiltered.minToRight j₁.obj.right j₂.obj.right
+      obtain ⟨a, q, hq⟩ := exists_hom_of_preservesColimit_yoneda hc
+        (f ≫ c'.π.app (IsCofiltered.min j₁.obj.right j₂.obj.right))
+      obtain ⟨ia, va₁, va₂, heqa⟩ := exists_eq_of_preservesColimit_yoneda hc
+        (q ≫ D'.map lp₁) j₁.obj.hom (by simp [reassoc_of% hq, Aux.w])
+      obtain ⟨ib, vb₁, vb₂, heqb⟩ := exists_eq_of_preservesColimit_yoneda hc
+        (q ≫ D'.map lp₂) j₂.obj.hom (by simp [reassoc_of% hq, Aux.w])
+      obtain ⟨i₀, il₀, ir₀, heq⟩ := IsCofiltered.cospan va₁ vb₁
+      refine ⟨⟨⟨i₀, l', D.map il₀ ≫ D.map va₁ ≫ q⟩, by simp [Aux, hq, l']⟩, ?_, ?_, trivial⟩
+      · exact ObjectProperty.homMk ⟨il₀ ≫ va₂, lp₁, by simp [heqa]⟩
+      · exact ObjectProperty.homMk ⟨ir₀ ≫ vb₂, lp₂, by
+          dsimp
+          rw [← Functor.map_comp_assoc, heq]
+          simp [heqb]⟩
+    · intro j₁ j₂ u v
+      obtain ⟨a, q, hq⟩ := exists_hom_of_preservesColimit_yoneda hc
+        (f ≫ c'.π.app (IsCofiltered.eq u.hom.right v.hom.right))
+      obtain ⟨ia, va₁, va₂, heqa⟩ := exists_eq_of_preservesColimit_yoneda hc
+        (q ≫ D'.map (IsCofiltered.eqHom _ _)) j₁.obj.hom (by simp [reassoc_of% hq, Aux.w])
+      obtain ⟨i₀, α, β, hα, hβ⟩ := IsCofiltered.bowtie u.hom.left (va₂ ≫ v.hom.left) (𝟙 _) va₂
+      refine ⟨⟨⟨i₀, IsCofiltered.eq u.hom.right v.hom.right,
+          D.map β ≫ D.map va₁ ≫ q⟩, by simp [Aux, hq]⟩, ?_, ?_⟩
+      · refine ObjectProperty.homMk
+          ⟨β ≫ va₂, IsCofiltered.eqHom _ _, ?_⟩
+        simp [heqa]
+      · ext
+        · simp only [Category.comp_id] at hβ
+          subst hβ
+          simpa using hα
+        · simp [← IsCofiltered.eq_condition]
+  constructor
+
+include hc in
+lemma initial_projLeft : (Aux.projLeft f).Initial := by
+  constructor
+  intro i
+  have : Nonempty (CostructuredArrow (Aux.projLeft f) i) := by
+    obtain ⟨i'⟩ := IsCofiltered.nonempty (C := I')
+    obtain ⟨a, p, hp⟩ := exists_hom_of_preservesColimit_yoneda hc (f ≫ c'.π.app i')
+    exact ⟨CostructuredArrow.mk
+      (Y := ⟨⟨IsCofiltered.min i a, i', D.map (IsCofiltered.minToRight _ _) ≫ p⟩, by
+        simp [Aux, hp]⟩)
+      (IsCofiltered.minToLeft _ _)⟩
+  refine zigzag_isConnected fun j₁ j₂ ↦ ?_
+  obtain ⟨i₁, l, r, hlr⟩ := IsCofiltered.cospan j₁.hom j₂.hom
+  obtain ⟨a, q, hq⟩ := exists_hom_of_preservesColimit_yoneda hc
+    (f ≫ c'.π.app (IsCofiltered.min j₁.left.obj.right j₂.left.obj.right))
+  let l' := IsCofiltered.min j₁.left.obj.right j₂.left.obj.right
+  let lp₁ := IsCofiltered.minToLeft j₁.left.obj.right j₂.left.obj.right
+  let lp₂ := IsCofiltered.minToRight j₁.left.obj.right j₂.left.obj.right
+  obtain ⟨ia, va₁, va₂, heqa⟩ := exists_eq_of_preservesColimit_yoneda hc
+    (q ≫ D'.map lp₁) j₁.left.obj.hom (by simp [reassoc_of% hq, Aux.w])
+  obtain ⟨ib, vb₁, vb₂, heqb⟩ := exists_eq_of_preservesColimit_yoneda hc
+    (q ≫ D'.map lp₂) j₂.left.obj.hom (by simp [reassoc_of% hq, Aux.w])
+  obtain ⟨i₀, il₀, ir₀, heq₁, heq₂⟩ := IsCofiltered.bowtie va₁ vb₁ (va₂ ≫ j₁.hom) (vb₂ ≫ j₂.hom)
+  let middle : CostructuredArrow (Aux.projLeft f) i :=
+    CostructuredArrow.mk (Y := ⟨⟨i₀, l', D.map il₀ ≫ D.map va₁ ≫ q⟩, by simp [Aux, hq, l']⟩)
+      (il₀ ≫ va₂ ≫ j₁.hom)
+  trans middle
+  · refine .of_inv ?_
+    refine CostructuredArrow.homMk ?_ ?_
+    · refine ObjectProperty.homMk ?_
+      refine .mk (il₀ ≫ va₂) lp₁ ?_
+      · dsimp [middle]
+        rw [← Functor.map_comp_assoc]
+        simp only [Functor.map_comp, Category.assoc]
+        rw [heqa]
+    · simp [middle]
+  · refine .of_hom ?_
+    refine CostructuredArrow.homMk ?_ ?_
+    · refine ObjectProperty.homMk ?_
+      refine .mk (ir₀ ≫ vb₂) lp₂ ?_
+      · dsimp [middle]
+        rw [← Functor.map_comp_assoc, heq₁]
+        simp [heqb]
+    · simp [middle, heq₂]
+
+include hc in
+lemma initial_projRight : (Aux.projRight f).Initial := by
+  refine ⟨fun i' ↦ ?_⟩
+  have : Nonempty (CostructuredArrow (Aux.projRight f) i') := by
+    obtain ⟨i, p, hp⟩ := exists_hom_of_preservesColimit_yoneda hc (f ≫ c'.π.app i')
+    exact ⟨CostructuredArrow.mk (Y := ⟨Comma.mk i i' p, hp⟩) <| 𝟙 _⟩
+  refine zigzag_isConnected fun j₁ j₂ ↦ ?_
+  obtain ⟨l', lp₁, lp₂, hlp⟩ := IsCofiltered.cospan j₁.hom j₂.hom
+  obtain ⟨a, q, hq⟩ := exists_hom_of_preservesColimit_yoneda hc (f ≫ c'.π.app l')
+  obtain ⟨ia, va₁, va₂, heqa⟩ := exists_eq_of_preservesColimit_yoneda hc
+    (q ≫ D'.map lp₁) j₁.left.obj.hom (by simp [reassoc_of% hq, Aux.w]; rfl)
+  obtain ⟨ib, vb₁, vb₂, heqb⟩ := exists_eq_of_preservesColimit_yoneda hc
+    (q ≫ D'.map lp₂) j₂.left.obj.hom (by simp [reassoc_of% hq, Aux.w]; rfl)
+  obtain ⟨i₀, il₀, ir₀, heq⟩ := IsCofiltered.cospan va₁ vb₁
+  let middle : CostructuredArrow (Aux.projRight f) i' :=
+    CostructuredArrow.mk (Y := ⟨⟨i₀, l', D.map il₀ ≫ D.map va₁ ≫ q⟩, by simp [Aux, hq]⟩)
+      (lp₁ ≫ j₁.hom)
+  trans middle
+  · refine .of_inv ?_
+    refine CostructuredArrow.homMk ?_ ?_
+    · refine ObjectProperty.homMk ?_
+      refine .mk (il₀ ≫ va₂) lp₁ ?_
+      · dsimp [middle]
+        rw [← Functor.map_comp_assoc]
+        simp only [Functor.map_comp, Category.assoc]
+        rw [heqa]
+    · simp [middle]
+  · refine .of_hom ?_
+    refine CostructuredArrow.homMk ?_ ?_
+    · refine ObjectProperty.homMk ?_
+      refine .mk (ir₀ ≫ vb₂) lp₂ ?_
+      · dsimp [middle]
+        rw [← Functor.map_comp_assoc, heq]
+        simp [heqb]
+    · simp [middle, hlp]
+
+@[simps]
+def map : Aux.projLeft f ⋙ D ⟶ Aux.projRight f ⋙ D' where
+  app A := A.obj.hom
+
+end ConstructLimitMap
+
+variable
+  [IsCofiltered I] [IsCofiltered I']
+  [∀ i : I', PreservesColimit D.op (yoneda.obj (D'.obj i))]
+
+set_option linter.unusedSectionVars false in
+open ConstructLimitMap in
+include hc hc' in
+lemma Limits.exists_eq_isLimitMap_of_preservesColimit_yoneda :
+    ∃ (J : Type (max u₂ u₃ v₁))
+      (_ : Category.{max v₂ v₃} J) (_ : IsCofiltered J) (G : J ⥤ I) (G' : J ⥤ I')
+      (_ : G.Initial) (_ : G'.Initial) (g : G ⋙ D ⟶ G' ⋙ D'),
+      f = IsLimit.map (c.whisker _) ((Functor.Initial.isLimitWhiskerEquiv _ _).symm hc') g := by
+  have := initial_projRight hc f
+  have := initial_projLeft hc f
+  use (Aux f).FullSubcategory, inferInstance, isCofiltered hc f,
+    Aux.projLeft f, Aux.projRight f, inferInstance, inferInstance, map f
+  apply ((Functor.Initial.isLimitWhiskerEquiv _ _).symm hc').hom_ext
+  intro i'
+  rw [IsLimit.map_π]
+  apply i'.property.symm
+
+end CategoryTheory
+
+namespace AlgebraicGeometry
+
+variable {S : Scheme.{u}}
+
+-- `Scheme.preservesColimit_yoneda` has been upstreamed to
+-- `Mathlib.AlgebraicGeometry.AffineTransitionLimit`.
+
+variable {I : Type u} [Category.{u} I] {S X : Scheme.{u}} (D : I ⥤ Scheme.{u})
+  (t : D ⟶ (Functor.const I).obj S) (c : Cone D) (hc : IsLimit c)
+
+variable [IsCofiltered I]
+  [∀ {i j} (f : i ⟶ j), IsAffineHom (D.map f)]
+  [∀ (i : I), CompactSpace (D.obj i)] [∀ (i : I), QuasiSeparatedSpace (D.obj i)]
+
+open TopologicalSpace
+
+-- `Scheme.exists_isOpenCover_and_isAffine_of_finite` and
+-- `Scheme.OpenCover.exists_of_isCofiltered_of_finite` have been upstreamed to
+-- `Mathlib.AlgebraicGeometry.AffineTransitionLimit`.
+
+section
+
+variable (D' : I ⥤ Scheme.{u}) (t' : D' ⟶ (Functor.const I).obj S) (c' : Cone D')
+  (hc' : IsLimit c')
+
+variable [∀ {i j} (f : i ⟶ j), IsAffineHom (D'.map f)]
+  [∀ (i : I), CompactSpace (D'.obj i)] [∀ (i : I), QuasiSeparatedSpace (D'.obj i)]
+
+omit [∀ {i j : I} (f : i ⟶ j), IsAffineHom (D.map f)] [∀ (i : I), CompactSpace ↥(D.obj i)]
+  [∀ (i : I), QuasiSeparatedSpace ↥(D.obj i)] [∀ (i : I), QuasiSeparatedSpace ↥(D'.obj i)] in
+include hc' in
+/-- If `lim fᵢ` is surjective and `fᵢ` has open image (e.g. if `fᵢ` is étale), then the image of
+a deep enough transition map `D'ₖ ⟶ D'ᵢ` is contained in the image of `fᵢ`. In particular, the
+base change of `fᵢ` along `D'ₖ ⟶ D'ᵢ` is surjective. Compare [EGA4.3, Thm. 8.10.5 (vi)].
+
+Note that the naive statement "`fₖ` is surjective for all `k ⟶ i` for `i` deep enough" is false
+for a general natural transformation `f`: EGA 8.10.5 considers systems induced from a single
+morphism by base change. (Counterexample: `I = ℕᵒᵖ`, `D k = 𝔸¹ ∖ {0, …, k}`,
+`D' k = 𝔸¹ ∖ {0, …, k - 1}` with `f.app k` the open immersion; no `f.app k` is surjective,
+but the limit map is an isomorphism.) -/
+lemma exists_range_map_subset_range_app_of_surjective_isLimitMap (f : D ⟶ D') (i : I)
+    (hopen : IsOpen (Set.range (f.app i).base))
+    (hf : Surjective (IsLimit.map c hc' f)) :
+    ∃ (k : I) (fki : k ⟶ i), Set.range (D'.map fki).base ⊆ Set.range (f.app i).base := by
+  let U : (D'.obj i).Opens := ⟨Set.range (f.app i).base, hopen⟩
+  obtain ⟨k, fki, hk⟩ := exists_map_eq_top D' c' hc' (i := i) U <| by
+    rw [TopologicalSpace.Opens.ext_iff]
+    refine Set.eq_univ_of_forall fun y ↦ ?_
+    obtain ⟨x, rfl⟩ := hf.surj y
+    refine ⟨c.π.app i x, ?_⟩
+    calc f.app i (c.π.app i x)
+        = (c.π.app i ≫ f.app i) x := (Scheme.Hom.comp_apply _ _ _).symm
+      _ = (IsLimit.map c hc' f ≫ c'.π.app i) x :=
+        (congrArg (fun g : c.pt ⟶ D'.obj i ↦ g x) (IsLimit.map_π c hc' f i)).symm
+      _ = c'.π.app i (IsLimit.map c hc' f x) := Scheme.Hom.comp_apply _ _ _
+  refine ⟨k, fki, ?_⟩
+  rintro _ ⟨z, rfl⟩
+  have : z ∈ (D'.map fki ⁻¹ᵁ U : Set (D'.obj k)) := by
+    rw [hk]
+    trivial
+  exact this
+
+end
+
+variable {I' : Type u} [SmallCategory I'] (D' : I' ⥤ Scheme.{u})
+  (t' : D' ⟶ (Functor.const I').obj S)
+  (c' : Cone D') (hc' : IsLimit c')
+
+variable [IsCofiltered I']
+
+instance {C : Type*} [Category* C] (X : C) : Nonempty (Over X) :=
+  ⟨Over.mk (𝟙 X)⟩
+
+instance {C : Type*} [Category* C] (X : C) : Nonempty (Under X) :=
+  ⟨Under.mk (𝟙 X)⟩
+
+include hc hc' in
+lemma exists_eq_isLimitMap_whisker (f : c.pt ⟶ c'.pt)
+    (hf : ∀ (i : I) (i' : I'), c.π.app i ≫ t.app i = f ≫ c'.π.app i' ≫ t'.app i')
+    [∀ i, LocallyOfFinitePresentation (t.app i)] [∀ i, LocallyOfFinitePresentation (t'.app i)] :
+    ∃ (J : Type u) (_ : SmallCategory J) (_ : IsCofiltered J) (G : J ⥤ I) (G' : J ⥤ I')
+      (_ : G.Initial) (_ : G'.Initial) (g : G ⋙ D ⟶ G' ⋙ D'),
+      f = IsLimit.map (c.whisker _) ((Functor.Initial.isLimitWhiskerEquiv _ _).symm hc') g ∧
+      (∀ j, g.app j ≫ t'.app _ = t.app _) := by
+  obtain ⟨i'⟩ := IsCofiltered.nonempty (C := I')
+  obtain ⟨i, g, hi, hg⟩ := Scheme.exists_π_app_comp_eq_of_locallyOfFinitePresentation _ t
+    (t'.app i') _ hc (f ≫ c'.π.app i') (by ext; simp [hf _ i'])
+  let p' : c'.pt ⟶ S :=
+    c'.π.app i' ≫ t'.app i'
+  have hp' (j' : Over i') : c'.π.app j'.left ≫ t'.app j'.left = p' := by
+    simp only [p']
+    rw [← c'.w j'.hom, Category.assoc, (Cocone.mk S t').w j'.hom]
+  let p : c.pt ⟶ S :=
+    f ≫ p'
+  have hp (j : Over i) : c.π.app j.left ≫ t.app j.left = p := by
+    simp only [p, p', hf _ i']
+  have hc₀ : IsLimit (Cone.whisker (Over.forget i) c) :=
+    (Functor.Initial.isLimitWhiskerEquiv _ _).symm hc
+  have hc'₀ : IsLimit (Cone.whisker (Over.forget i') c') :=
+    (Functor.Initial.isLimitWhiskerEquiv _ _).symm hc'
+  have : IsCofiltered (Over i) := inferInstance
+  have (j' : Over i') :
+      PreservesColimit (Over.lift (Over.forget i ⋙ D) ((Over.forget i).whiskerLeft t)).op
+        (yoneda.obj ((Over.lift (Over.forget i' ⋙ D')
+        ((Over.forget i').whiskerLeft t')).obj j')) := by
+    apply +allowSynthFailures @Scheme.preservesColimit_yoneda
+    · exact fun f ↦ inferInstanceAs (IsAffineHom (D.map f.left))
+    · exact fun a ↦ inferInstanceAs (CompactSpace (D.obj a.left))
+    · exact fun a ↦ inferInstanceAs (QuasiSeparatedSpace (D.obj a.left))
+    · exact inferInstanceAs (LocallyOfFinitePresentation (t'.app j'.left))
+  obtain ⟨J, _, _, G, G', _, _, g, hg⟩ := Limits.exists_eq_isLimitMap_of_preservesColimit_yoneda
+    (D := Over.lift (Over.forget i ⋙ D) (Functor.whiskerLeft _ t))
+    (D' := Over.lift (Over.forget i' ⋙ D') (Functor.whiskerLeft _ t'))
+    (c := Over.liftCone _ _ (c.whisker _) p hp)
+    (c' := Over.liftCone _ _ (c'.whisker _) p' hp')
+    (hc := Over.isLimitLiftCone _ _ _ _ _ hc₀)
+    (hc' := Over.isLimitLiftCone _ _ _ _ _ hc'₀)
+    (Over.homMk f rfl)
+  use J, inferInstance, inferInstance, G ⋙ Over.forget _, G' ⋙ Over.forget _, inferInstance,
+    inferInstance
+  refine ⟨Functor.whiskerRight g (Over.forget S), ?_, ?_⟩
+  · apply ((Functor.Initial.isLimitWhiskerEquiv (G' ⋙ Over.forget i') c').symm hc').hom_ext
+    intro j
+    rw [IsLimit.map_π]
+    have := hg =≫ (Cone.whisker G'
+      (Over.liftCone _ ((Over.forget i').whiskerLeft t') (Cone.whisker _ _) _ hp')).π.app j
+    rw [IsLimit.map_π] at this
+    exact congr($(this).left)
+  · intro j
+    exact Over.w (g.app j)
 
 end AlgebraicGeometry

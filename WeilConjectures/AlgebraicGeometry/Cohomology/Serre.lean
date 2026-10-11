@@ -13,13 +13,17 @@ public import Mathlib.RingTheory.MvPolynomial.Homogeneous
 public import WeilConjectures.AlgebraicGeometry.Cohomology.Affine
 public import WeilConjectures.AlgebraicGeometry.Cohomology.Defs
 public import WeilConjectures.AlgebraicGeometry.Cohomology.Exact
-public import WeilConjectures.AlgebraicGeometry.Modules.Ample
+public import WeilConjectures.AlgebraicGeometry.Modules.VeryAmple
+public import WeilConjectures.AlgebraicGeometry.Modules.ClearDenominators
 public import WeilConjectures.AlgebraicGeometry.Modules.ClosedImmersion
 public import WeilConjectures.AlgebraicGeometry.Modules.Invertible
 public import WeilConjectures.AlgebraicGeometry.Modules.ProjectionFormula
+public import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentKernel
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Charts
+public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.CoordinateSection
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.MonomialCech
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Twist
+public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.TwistSections
 public import WeilConjectures.Mathlib.Algebra.Homology.ShortComplex.ModuleCat
 public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Braided.Basic
 
@@ -107,7 +111,7 @@ theorem ProjectiveSpace.nonempty_cechComplex_twist_iso_monomialCechComplex (k : 
       ((cechComplexFunctor (ProjectiveSpace.standardOpen n (Spec (.of k)))).obj
         (ProjectiveSpace.twist n (Spec (.of k)) m).presheafModuleCat) ≅
       ProjectiveSpace.monomialCechComplex n k m) :=
-  sorry
+  ⟨ProjectiveSpace.cechComplexTwistIso n k m⟩
 
 /-- **Cohomology vanishes above the number of projective coordinates.** For a commutative
 ring `A`, `n` with `Nat.card n = d + 1` and a quasi-coherent module `ℱ` on `ℙᵈ_A = ℙ(n; Spec A)`,
@@ -240,8 +244,56 @@ theorem ProjectiveSpace.exists_epi_sigma_twist (A : Type u) [CommRing A] [IsNoet
       (φ : (∐ fun a ↦ ProjectiveSpace.twist n (Spec (.of A)) (-(e a : ℤ))) ⟶ F), Epi φ ∧
         SheafOfModules.IsQuasicoherent (R := (ℙ(n; Spec (.of A))).ringCatSheaf) (kernel φ) ∧
         SheafOfModules.IsFinitePresentation (R := (ℙ(n; Spec (.of A))).ringCatSheaf)
-          (kernel φ) :=
-  sorry
+          (kernel φ) := by
+  -- every section over `D₊(Tᵢ)` is hit by a map from a twist `𝒪(-m)`, by clearing denominators
+  have key (i : n) : ∀ (V : (ℙ(n; Spec (.of A))).Opens)
+      (_ : (Hom.zeroLocus (ProjectiveSpace.coordinateSection n (Spec (.of A)) i)).support.compl
+        = V) (t : Γ(F, V)), ∃ (m : ℕ) (φ : ProjectiveSpace.twist n (Spec (.of A)) (-(m : ℤ)) ⟶ F)
+        (w : Γ(ProjectiveSpace.twist n (Spec (.of A)) (-(m : ℤ)), V)), φ.app V w = t := by
+    rintro V rfl t
+    have : CompactSpace ℙ(n; Spec (.of A)) :=
+      QuasiCompact.compactSpace_of_compactSpace (ℙ(n; Spec (.of A)) ↘ Spec (.of A))
+    obtain ⟨m, u, hu⟩ := exists_tensorPowSection_eq_restrict (ℙ(n; Spec (.of A)) ↘ Spec (.of A))
+      _ (ProjectiveSpace.coordinateSection n (Spec (.of A)) i) F t
+    obtain ⟨e₁⟩ := ProjectiveSpace.nonempty_tensorPow_twist_one_iso n (Spec (.of A)) m
+    obtain ⟨e₂⟩ := ProjectiveSpace.nonempty_tensorObj_twist_iso n (Spec (.of A)) m (-m)
+    let c : (ProjectiveSpace.twist n (Spec (.of A)) 1).tensorPow m ⊗
+        ProjectiveSpace.twist n (Spec (.of A)) (-(m : ℤ)) ≅ 𝟙_ _ :=
+      (e₁ ⊗ᵢ Iso.refl _) ≪≫ e₂ ≪≫ eqToIso (by rw [add_neg_cancel]) ≪≫
+        (ProjectiveSpace.unitIsoTwistZero n _).symm
+    exact ⟨m, exists_hom_app_eq_of_tensorPowSection _ (isFreeGenerator_app_one_of_le _ le_rfl)
+      m c t u hu⟩
+  -- finitely many generators of `Γ(D₊(Tᵢ), ℱ)` for each `i`
+  have := Fintype.ofFinite n
+  have hfin (i : n) : Module.Finite Γ(ℙ(n; Spec (.of A)), ProjectiveSpace.standardOpen n _ i)
+      Γ(F, ProjectiveSpace.standardOpen n _ i) :=
+    finite_sections_of_isFinitePresentation F (ProjectiveSpace.isAffineOpen_standardOpen _ _ i)
+  choose r t ht using fun i ↦ (hfin i).exists_fin
+  choose m φ w hw using fun (a : Σ i : n, ULift.{u} (Fin (r i))) ↦ key a.1 _
+    (ProjectiveSpace.compl_support_zeroLocus_coordinateSection n _ a.1) (t a.1 a.2.down)
+  refine ⟨Σ i : n, ULift.{u} (Fin (r i)), inferInstance, m, Sigma.desc φ, ?_, ?_, ?_⟩
+  · -- the sum of these maps is surjective on every `D₊(Tᵢ)`
+    refine epi_of_surjective_app _ (ProjectiveSpace.standardOpen n (Spec (.of A)))
+      (fun i ↦ ProjectiveSpace.isAffineOpen_standardOpen _ _ i)
+      (ProjectiveSpace.iSup_standardOpen n _) fun i y ↦ ?_
+    have hy : y ∈ Submodule.span Γ(ℙ(n; Spec (.of A)), ProjectiveSpace.standardOpen n _ i)
+        (Set.range (t i)) := by
+      rw [ht i]
+      trivial
+    obtain ⟨c, rfl⟩ := (Submodule.mem_span_range_iff_exists_fun _).mp hy
+    refine ⟨∑ a, c a • (Sigma.ι (fun b ↦ ProjectiveSpace.twist n (Spec (.of A)) (-(m b : ℤ)))
+      ⟨i, ⟨a⟩⟩).app _ (w ⟨i, ⟨a⟩⟩), ?_⟩
+    simp only [map_sum, Hom.app_smul]
+    refine Finset.sum_congr rfl fun a _ ↦ ?_
+    rw [← ConcreteCategory.comp_apply, ← Hom.comp_app, Sigma.ι_desc, hw]
+  · have := isQuasicoherent_sigma
+      (fun a ↦ ProjectiveSpace.twist n (Spec (.of A)) (-(m a : ℤ)))
+    exact isQuasicoherent_kernel _
+  · have : IsLocallyNoetherian ℙ(n; Spec (.of A)) :=
+      LocallyOfFiniteType.isLocallyNoetherian (ℙ(n; Spec (.of A)) ↘ Spec (.of A))
+    have := isFinitePresentation_sigma
+      (fun a ↦ ProjectiveSpace.twist n (Spec (.of A)) (-(m a : ℤ)))
+    exact isFinitePresentation_kernel _
 
 end TwistQuotient
 
@@ -320,7 +372,7 @@ theorem ProjectiveSpace.exists_subsingleton_H_tensor_twist [Finite n]
     · exact h₁ d hd₁ q hqj hq0
     -- twisting by `𝒪(d)` is an equivalence, with inverse twisting by `𝒪(-d)`
     let T := ProjectiveSpace.twist n (Spec (.of k)) d
-    obtain ⟨e₁⟩ := ProjectiveSpace.nonempty_twist_tensorObj_iso n (Spec (.of k)) d (-d)
+    obtain ⟨e₁⟩ := ProjectiveSpace.nonempty_tensorObj_twist_iso n (Spec (.of k)) d (-d)
     let E := BraidedCategory.tensorRightEquivalence T (ProjectiveSpace.twist n (Spec (.of k)) (-d))
       (e₁ ≪≫ eqToIso (congrArg _ (add_neg_cancel d)) ≪≫
         (ProjectiveSpace.unitIsoTwistZero n (Spec (.of k))).symm)
@@ -330,7 +382,7 @@ theorem ProjectiveSpace.exists_subsingleton_H_tensor_twist [Finite n]
     have hS' := hS.map_of_exact (tensorRight T)
     let G := fun i ↦ ProjectiveSpace.twist n (Spec (.of k)) (-(m i : ℤ))
     have : ∀ i, Subsingleton ((G i ⊗ T).H q) := fun i ↦ by
-      obtain ⟨e⟩ := ProjectiveSpace.nonempty_twist_tensorObj_iso n (Spec (.of k)) (-(m i : ℤ)) d
+      obtain ⟨e⟩ := ProjectiveSpace.nonempty_tensorObj_twist_iso n (Spec (.of k)) (-(m i : ℤ)) d
       have := ProjectiveSpace.subsingleton_H_twist_of_pos k hD hq0 (e := -(m i : ℤ) + d)
         (by have := hdm i; omega)
       exact subsingleton_H_of_iso e.symm q
@@ -426,7 +478,7 @@ theorem Scheme.Modules.exists_generatingSections_tensor_twist [Finite n]
   -- Step 2: each `𝒪(-mₐ) ⊗ 𝒪(m) ≅ 𝒪(m - mₐ)` is generated by global sections.
   have hgen (a : ι) : Nonempty (SheafOfModules.GeneratingSections
       (twist n (Spec (.of k)) (-(e a : ℤ)) ⊗ₘ twist n (Spec (.of k)) m)) := by
-    obtain ⟨t⟩ := nonempty_twist_tensorObj_iso n (Spec (.of k)) (-(e a : ℤ)) m
+    obtain ⟨t⟩ := nonempty_tensorObj_twist_iso n (Spec (.of k)) (-(e a : ℤ)) m
     have hd : -(e a : ℤ) + m = ((m - e a).toNat : ℕ) := by
       have := hM ⟨a, rfl⟩
       omega
@@ -434,7 +486,7 @@ theorem Scheme.Modules.exists_generatingSections_tensor_twist [Finite n]
       (generatingSectionsTwist n _ _)⟩
   -- Step 3: `- ⊗ 𝒪(m)` is an autoequivalence, so `φ ⊗ 𝒪(m)` is an epimorphism out of
   -- `(⊕ₐ 𝒪(-mₐ)) ⊗ 𝒪(m) ≅ ⊕ₐ (𝒪(-mₐ) ⊗ 𝒪(m))`.
-  obtain ⟨t⟩ := nonempty_twist_tensorObj_iso n (Spec (.of k)) m (-m)
+  obtain ⟨t⟩ := nonempty_tensorObj_twist_iso n (Spec (.of k)) m (-m)
   have : (tensorRight (twist n (Spec (.of k)) m)).IsEquivalence :=
     (BraidedCategory.tensorRightEquivalence (twist n (Spec (.of k)) m)
       (twist n (Spec (.of k)) (-m))
@@ -465,11 +517,11 @@ The blueprint asks `X` to be proper over `k`; this is not needed here, since
 (blueprint: `lem-pc-serre-vanishing`) -/
 @[stacks 0B5U]
 theorem Scheme.Modules.exists_subsingleton_H_tensorObj_tensorPow (f : X ⟶ Spec (.of k))
-    (ℒ : X.Modules) [ℒ.IsInvertible] (hℒ : IsAmple f ℒ) (ℱ : X.Modules)
+    (ℒ : X.Modules) (hℒ : IsAmple f ℒ) (ℱ : X.Modules)
     [SheafOfModules.IsQuasicoherent (R := X.ringCatSheaf) ℱ]
     [SheafOfModules.IsFinitePresentation (R := X.ringCatSheaf) ℱ] :
     ∃ n₀ : ℕ, ∀ n ≥ n₀, ∀ p : ℕ, 0 < p → Subsingleton ((ℱ ⊗ ℒ.tensorPow n).H p) := by
-  obtain ⟨m, hm, N, i, hN, hi, -, ⟨e⟩⟩ := hℒ
+  obtain ⟨hinv, m, hm, N, i, hN, hi, -, ⟨e⟩⟩ := hℒ
   have key (r : Fin m) : ∃ t₀ : ℕ, ∀ t ≥ t₀, ∀ p : ℕ, 0 < p →
       Subsingleton (((ℱ ⊗ ℒ.tensorPow r) ⊗ ProjectiveSpace.twistRestrict i t).H p) := by
     have := isQuasicoherent_tensorObj ℱ (ℒ.tensorPow r)

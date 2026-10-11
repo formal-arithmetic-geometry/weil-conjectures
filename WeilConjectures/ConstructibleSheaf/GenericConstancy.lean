@@ -81,15 +81,12 @@ omit [HasSmallSiteSheafify A] in
 are finite, so is `G`. -/
 theorem IsFiniteSheaf.of_openCover (𝒰 : OpenCover.{u} X) (G : Sheaf X.smallEtaleTopology A)
     [∀ i, IsFiniteSheaf ((Etale.upperStar A (𝒰.f i)).obj G)] : IsFiniteSheaf G where
-  finite_sheafFiber Ω _ _ s := by
+  isFinitelyGenerated_sheafFiber Ω _ _ s := by
     obtain ⟨i, x, hx⟩ := 𝒰.exists_eq (s (IsLocalRing.closedPoint _))
     obtain ⟨s', rfl⟩ := exists_comp_eq_of_mem_range (𝒰.f i) s ⟨x, hx⟩
-    have := IsFiniteSheaf.finite_sheafFiber (FA := FA) (CA := CA)
-      (F := (Etale.upperStar A (𝒰.f i)).obj G) Ω s'
-    exact Finite.of_equiv
-      (ToType ((pointSmallEtale s').sheafFiber.obj ((Etale.upperStar A (𝒰.f i)).obj G)))
-      ((CategoryTheory.forget A).mapIso
-        ((Etale.upperStarCompSheafFiberIso A (𝒰.f i) s').app G)).toEquiv
+    exact (IsFiniteSheaf.isFinitelyGenerated_sheafFiber (FA := FA) (CA := CA)
+      (F := (Etale.upperStar A (𝒰.f i)).obj G) Ω s').of_iso
+      ((Etale.upperStarCompSheafFiberIso A (𝒰.f i) s').app G)
 
 /-- **Finite local constancy is Zariski local**: if the pullbacks of `G` to the members of
 an open cover are finite locally constant, so is `G`. -/

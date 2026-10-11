@@ -29,6 +29,7 @@ group objects is the fibre product of `f` and the unit `η[H] : 𝟙_ C ⟶ H`:
 - `CategoryTheory.GrpObj.kerLift`: the universal property of the kernel.
 - `CategoryTheory.GrpObj.kerPresheaf`: the presheaf of groups that `ker f` represents.
 - `CategoryTheory.GrpObj.instGrpObjKer`: the group structure on `ker f`.
+- `CategoryTheory.GrpObj.shearIso`: the shear automorphism `(g, h) ↦ (g, g * h)` of `G ⊗ G`.
 - `CategoryTheory.GrpObj.ofMono`: the group structure on the source of a monomorphism into a
   group object through which the group operations factor.
 
@@ -292,6 +293,21 @@ theorem isMonHom_ofMono :
       rw [Subgroup.coe_mul, _root_.CategoryTheory.Hom.mul_def, lift_fst_comp_snd_comp] }
 
 end OfMono
+
+section Shear
+
+/-- The shear morphism `(g, h) ↦ (g, g * h)` of `G ⊗ G` for a group object `G` in a cartesian
+monoidal category, as an isomorphism with inverse `(g, h) ↦ (g, g⁻¹ * h)`. -/
+@[simps]
+noncomputable def shearIso (G : C) [GrpObj G] : G ⊗ G ≅ G ⊗ G where
+  hom := lift (fst G G) (fst G G * snd G G)
+  inv := lift (fst G G) ((fst G G)⁻¹ * snd G G)
+  hom_inv_id := by
+    ext <;> simp [MonObj.comp_mul, GrpObj.comp_inv]
+  inv_hom_id := by
+    ext <;> simp [MonObj.comp_mul]
+
+end Shear
 
 end GrpObj
 

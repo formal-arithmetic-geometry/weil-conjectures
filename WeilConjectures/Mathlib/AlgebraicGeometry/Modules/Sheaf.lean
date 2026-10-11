@@ -50,6 +50,8 @@ matrices of morphisms between free modules of finite rank.
   is surjective on stalks is an epimorphism.
 - `AlgebraicGeometry.Scheme.Modules.bijective_stalk_of_isIso_restrict`: a morphism which
   restricts to an isomorphism on an open `U` is bijective on the stalks at points of `U`.
+- `AlgebraicGeometry.Scheme.Modules.hom_ext_of_restrictAdjunction_unit`: morphisms of
+  `𝒪_X`-modules which agree after restriction to the members of an open cover are equal.
 
 ## Main definitions
 
@@ -268,6 +270,12 @@ noncomputable def freeMatrix {I J : Type u} [DecidableEq J]
     (φ : free (R := X.ringCatSheaf) I ⟶ free J) : Matrix J I Γ(X, ⊤) :=
   Matrix.of fun j i ↦ Hom.app (ιFree i ≫ φ ≫ freeπ j) ⊤ (1 : Γ(X, ⊤))
 
+@[simp]
+lemma freeMatrix_zero {I J : Type u} [DecidableEq J] :
+    freeMatrix (0 : free (R := X.ringCatSheaf) I ⟶ free J) = 0 := by
+  ext j i
+  simp [freeMatrix]
+
 /-- The pullback of a free module is free. -/
 noncomputable def pullbackFreeIso (g : Y ⟶ X) (I : Type u) :
     (pullback g).obj (free (R := X.ringCatSheaf) I) ≅ free I :=
@@ -476,6 +484,24 @@ lemma bijective_stalk_of_isIso_restrict {M N : X.Modules} (φ : M ⟶ N) {U : X.
   exact ConcreteCategory.bijective_of_isIso
     ((toPresheaf X ⋙ TopCat.Presheaf.stalkFunctor AddCommGrpCat.{u} (U.ι y)).map φ)
 
+/-- Two morphisms of `𝒪_X`-modules `M ⟶ N` agree as soon as their composites with the units
+`N ⟶ (U i).ι_* (N|_{U i})` of the restriction adjunctions agree for a family of opens `U i`
+covering `X`, since `N` is a sheaf. -/
+lemma hom_ext_of_restrictAdjunction_unit {ι : Type*} (U : ι → X.Opens)
+    (hU : ∀ x : X, ∃ i, x ∈ U i) {M N : X.Modules} {g₁ g₂ : M ⟶ N}
+    (h : ∀ i, g₁ ≫ (restrictAdjunction (U i).ι).unit.app N =
+      g₂ ≫ (restrictAdjunction (U i).ι).unit.app N) : g₁ = g₂ := by
+  refine hom_ext _ _ fun W ↦ ?_
+  ext s
+  let F : TopCat.Sheaf AddCommGrpCat.{u} X := ⟨N.presheaf, N.isSheaf⟩
+  refine F.eq_of_locally_eq' (fun i ↦ (U i).ι ''ᵁ ((U i).ι ⁻¹ᵁ W))
+    W (fun i ↦ homOfLE ((U i).ι.image_preimage_le W)) (fun x hx ↦ ?_) _ _ fun i ↦ ?_
+  · obtain ⟨i, hi⟩ := hU x
+    refine TopologicalSpace.Opens.mem_iSup.mpr ⟨i, ?_⟩
+    rw [Scheme.Hom.image_preimage_eq_opensRange_inf, Scheme.Opens.opensRange_ι]
+    exact ⟨hi, hx⟩
+  · exact congr(((($(h i)).app W).hom s))
+
 end Stalk
 
 section GeneratingSections
@@ -497,5 +523,187 @@ noncomputable def GeneratingSections.pullback (g : X ⟶ Y) {M : Y.Modules}
     (pullbackObjUnitIso g).symm).hom ≫ (Scheme.Modules.pullback g).map σ.π)
 
 end GeneratingSections
+
+section LocallyFree
+
+variable {X : Scheme.{u}}
+
+/-- Under the equivalence `overEquiv U`, the unit of the restricted site is the unit of `U`. -/
+noncomputable def overEquivFunctorObjUnitIso (U : X.Opens) :
+    SheafOfModules.unit U.toScheme.ringCatSheaf ≅
+      (overEquiv U).functor.obj (SheafOfModules.unit (X.ringCatSheaf.over U)) :=
+  ((overFunctorEquiv U).app _ ≪≫ restrictUnitIso U.ι).symm
+
+/-- `M.over U` is free of rank `r` if and only if the restriction of `M` to `U` is. -/
+noncomputable def overIsoFreeEquiv (M : X.Modules) (U : X.Opens) (I : Type u) :
+    (M.over U ≅ SheafOfModules.free I) ≃ (M.restrict U.ι ≅ SheafOfModules.free I) where
+  toFun e := ((overFunctorEquiv U).app M).symm ≪≫ (overEquiv U).functor.mapIso e ≪≫
+    (SheafOfModules.mapFreeIso _ I (overEquivFunctorObjUnitIso U)).symm
+  invFun e := (overEquiv U).functor.preimageIso (((overFunctorEquiv U).app M) ≪≫ e ≪≫
+    SheafOfModules.mapFreeIso _ I (overEquivFunctorObjUnitIso U))
+  left_inv e := by ext1; simp
+  right_inv e := by ext1; simp
+
+
+/-- The restriction of a free module along an open immersion is free. -/
+noncomputable def restrictFreeIso {Y : Scheme.{u}} (f : Y ⟶ X) [IsOpenImmersion f] (I : Type u) :
+    restrict (SheafOfModules.free (R := X.ringCatSheaf) I) f ≅ SheafOfModules.free I :=
+  (restrictFunctorIsoPullback f).app _ ≪≫ pullbackFreeIso f I
+
+/-- Restricting along a composite of open immersions is restricting twice. -/
+noncomputable def restrictCompIso (M : X.Modules) {Y Z : Scheme.{u}} (f : Y ⟶ X) (g : Z ⟶ Y)
+    (h : Z ⟶ X) [IsOpenImmersion f] [IsOpenImmersion g] [IsOpenImmersion h] (hh : g ≫ f = h) :
+    M.restrict h ≅ (M.restrict f).restrict g :=
+  (restrictFunctorCongr hh).symm.app M ≪≫ (restrictFunctorComp g f).app M
+
+/-- An `𝒪_X`-module whose restrictions along a family of open immersions covering `X` are free
+of rank `r` is finite locally free of rank `r`. -/
+theorem isFiniteLocallyFreeOfRank_of_restrict_iso_free (M : X.Modules) {r : ℕ} {ι : Type u}
+    {Y : ι → Scheme.{u}} (f : ∀ i, Y i ⟶ X) [∀ i, IsOpenImmersion (f i)]
+    (hf : ⨆ i, (f i).opensRange = ⊤)
+    (h : ∀ i, Nonempty (M.restrict (f i) ≅ SheafOfModules.free (ULift.{u} (Fin r)))) :
+    M.IsFiniteLocallyFreeOfRank r := by
+  refine SheafOfModules.isFiniteLocallyFreeOfRank_iff_exists_over_iso_free.{u, u, u}.2
+    ⟨ι, fun i ↦ (f i).opensRange, (Opens.coversTop_iff _ _).2 hf, fun i ↦ ⟨?_⟩⟩
+  refine (overIsoFreeEquiv M _ _).symm ?_
+  exact restrictCompIso M (f i) (f i).isoOpensRange.inv (f i).opensRange.ι
+      (f i).isoOpensRange_inv_comp ≪≫
+    (restrictFunctor _).mapIso (h i).some ≪≫ restrictFreeIso _ _
+
+/-- An `𝒪_X`-module whose restrictions along a family of open immersions covering `X` are free
+of finite rank is finite locally free. -/
+theorem isFiniteLocallyFree_of_restrict_iso_free (M : X.Modules) {ι : Type u}
+    {Y : ι → Scheme.{u}} (f : ∀ i, Y i ⟶ X) [∀ i, IsOpenImmersion (f i)]
+    (hf : ⨆ i, (f i).opensRange = ⊤) (κ : ι → Type u) [∀ i, Finite (κ i)]
+    (h : ∀ i, Nonempty (M.restrict (f i) ≅ SheafOfModules.free (κ i))) :
+    M.IsFiniteLocallyFree := by
+  refine SheafOfModules.isFiniteLocallyFree_of_exists_over_iso_free.{u, u, u}
+    (fun i ↦ (f i).opensRange) ((Opens.coversTop_iff _ _).2 hf) κ fun i ↦ ⟨?_⟩
+  refine (overIsoFreeEquiv M _ _).symm ?_
+  exact restrictCompIso M (f i) (f i).isoOpensRange.inv (f i).opensRange.ι
+      (f i).isoOpensRange_inv_comp ≪≫
+    (restrictFunctor _).mapIso (h i).some ≪≫ restrictFreeIso _ _
+
+/-- A finite locally free `𝒪_X`-module of rank `r` is free of rank `r` on the members of an open
+cover of `X`. -/
+theorem IsFiniteLocallyFreeOfRank.exists_restrict_iso_free (M : X.Modules) {r : ℕ}
+    [M.IsFiniteLocallyFreeOfRank r] :
+    ∃ (ι : Type u) (U : ι → X.Opens), ⨆ i, U i = ⊤ ∧
+      ∀ i, Nonempty (M.restrict (U i).ι ≅ SheafOfModules.free (ULift.{u} (Fin r))) := by
+  obtain ⟨I, U, hU, h⟩ :=
+    SheafOfModules.isFiniteLocallyFreeOfRank_iff_exists_over_iso_free.{u, u, u}.1
+      ‹M.IsFiniteLocallyFreeOfRank r›
+  exact ⟨I, U, (Opens.coversTop_iff _ _).1 hU, fun i ↦ ⟨overIsoFreeEquiv M _ _ (h i).some⟩⟩
+
+/-- The free module of rank `r` is finite locally free of rank `r`. -/
+instance isFiniteLocallyFreeOfRank_free (r : ℕ) :
+    (SheafOfModules.free (R := X.ringCatSheaf) (ULift.{u} (Fin r))).IsFiniteLocallyFreeOfRank r :=
+  isFiniteLocallyFreeOfRank_of_restrict_iso_free _ (ι := PUnit) (fun _ ↦ 𝟙 X)
+    (by simpa using (Scheme.Hom.opensRange_of_isIso (𝟙 X))) fun _ ↦ ⟨restrictFreeIso _ _⟩
+
+/-- **Finite local freeness of rank `r` is local.** An `𝒪_X`-module whose restrictions to the
+members of an open cover are finite locally free of rank `r` is finite locally free of
+rank `r`. -/
+theorem isFiniteLocallyFreeOfRank_of_iSup_eq_top (M : X.Modules) {r : ℕ} {ι : Type u}
+    (U : ι → X.Opens) (hU : ⨆ i, U i = ⊤)
+    (h : ∀ i, (M.restrict (U i).ι).IsFiniteLocallyFreeOfRank r) :
+    M.IsFiniteLocallyFreeOfRank r := by
+  choose κ W hW e using fun i ↦
+    have := h i
+    IsFiniteLocallyFreeOfRank.exists_restrict_iso_free (M.restrict (U i).ι) (r := r)
+  refine isFiniteLocallyFreeOfRank_of_restrict_iso_free M
+    (fun j : Σ i, κ i ↦ (W j.1 j.2).ι ≫ (U j.1).ι) ?_ fun j ↦
+      ⟨(restrictFunctorComp _ _).app M ≪≫ (e j.1 j.2).some⟩
+  refine eq_top_iff.2 fun x _ ↦ ?_
+  obtain ⟨i, hi⟩ := TopologicalSpace.Opens.mem_iSup.1 (hU.ge (Set.mem_univ x) : x ∈ ⨆ i, U i)
+  obtain ⟨k, hk⟩ := TopologicalSpace.Opens.mem_iSup.1
+    (by rw [hW i]; trivial : (⟨x, hi⟩ : U i) ∈ ⨆ k, W i k)
+  refine TopologicalSpace.Opens.mem_iSup.2 ⟨⟨i, k⟩, ⟨⟨⟨x, hi⟩, hk⟩, rfl⟩⟩
+
+/-- The restriction of a finite locally free module of rank `r` along an open immersion is
+finite locally free of rank `r`. -/
+instance isFiniteLocallyFreeOfRank_restrict (M : X.Modules) {r : ℕ}
+    [M.IsFiniteLocallyFreeOfRank r] {Y : Scheme.{u}} (f : Y ⟶ X) [IsOpenImmersion f] :
+    (M.restrict f).IsFiniteLocallyFreeOfRank r := by
+  obtain ⟨ι, U, hU, e⟩ := IsFiniteLocallyFreeOfRank.exists_restrict_iso_free M (r := r)
+  refine isFiniteLocallyFreeOfRank_of_restrict_iso_free _ (fun i ↦ (f ⁻¹ᵁ U i).ι) ?_ fun i ↦
+    ⟨((restrictFunctorComp _ _).app M).symm ≪≫
+      restrictCompIso M (U i).ι (f ∣_ U i) ((f ⁻¹ᵁ U i).ι ≫ f)
+        (morphismRestrict_ι f (U i)) ≪≫
+      (restrictFunctor _).mapIso (e i).some ≪≫ restrictFreeIso _ _⟩
+  simp only [Scheme.Opens.opensRange_ι]
+  rw [← Scheme.Hom.preimage_iSup, hU]
+  rfl
+
+/-- **Vanishing is local.** An `𝒪_X`-module whose restrictions to the members of an open cover
+vanish is zero. -/
+lemma isZero_of_iSup_eq_top (M : X.Modules) {ι : Type*} (U : ι → X.Opens) (hU : ⨆ i, U i = ⊤)
+    (h : ∀ i, IsZero (M.restrict (U i).ι)) : IsZero M := by
+  refine (IsZero.iff_id_eq_zero M).2 (hom_ext _ _ fun W ↦ ?_)
+  ext x
+  change x = 0
+  refine TopCat.Sheaf.eq_of_locally_eq' ⟨M.presheaf, M.isSheaf⟩
+    (fun i ↦ (U i).ι ''ᵁ ((U i).ι ⁻¹ᵁ W)) W (fun i ↦ homOfLE (Scheme.Hom.image_preimage_le _ _))
+    ?_ x 0 fun i ↦ ?_
+  · intro y hy
+    obtain ⟨i, hi⟩ := TopologicalSpace.Opens.mem_iSup.1 (hU.ge (Set.mem_univ y) : y ∈ ⨆ i, U i)
+    exact TopologicalSpace.Opens.mem_iSup.2 ⟨i, ⟨⟨y, hi⟩, hy, rfl⟩⟩
+  · have : Subsingleton Γ(M.restrict (U i).ι, (U i).ι ⁻¹ᵁ W) := ModuleCat.subsingleton_of_isZero
+      ((SheafOfModules.evaluation _ (Opposite.op ((U i).ι ⁻¹ᵁ W))).map_isZero (h i))
+    have : Subsingleton Γ(M, (U i).ι ''ᵁ ((U i).ι ⁻¹ᵁ W)) :=
+      (M.restrictAppIso (U i).ι _).addCommGroupIsoToAddEquiv.toEquiv.symm.subsingleton
+    exact Subsingleton.elim _ _
+
+/-- A module whose restriction along an isomorphism is free is free. -/
+noncomputable def isoFreeOfRestrictIso (M : X.Modules) {Y : Scheme.{u}} (f : Y ⟶ X) [IsIso f]
+    {I : Type u} (e : M.restrict f ≅ SheafOfModules.free I) : M ≅ SheafOfModules.free I :=
+  (restrictFunctorId.app M).symm ≪≫ restrictCompIso M f (inv f) (𝟙 X) (IsIso.inv_hom_id f) ≪≫
+    (restrictFunctor _).mapIso e ≪≫ restrictFreeIso _ _
+
+end LocallyFree
+
+section Restrict
+
+variable {X : Scheme.{u}}
+
+instance {Y : Scheme.{u}} (f : X ⟶ Y) [IsOpenImmersion f] : (restrictFunctor f).Additive where
+  map_add := rfl
+
+/-- A morphism of `𝒪_X`-modules vanishing over every member of an open cover vanishes. -/
+lemma hom_eq_zero_of_restrict {M N : X.Modules} (φ : M ⟶ N) {ι : Type*} (U : ι → X.Opens)
+    (hU : ⨆ i, U i = ⊤) (h : ∀ i, (restrictFunctor (U i).ι).map φ = 0) : φ = 0 := by
+  have h' (i : ι) (W : X.Opens) (hW : W ≤ U i) : φ.app W = 0 := by
+    have key : ∀ W' : X.Opens, W' = W → φ.app W' = 0 → φ.app W = 0 := by
+      rintro _ rfl h
+      exact h
+    refine key _ ?_ (by
+      have := congrArg (fun ψ ↦ Hom.app ψ ((U i).ι ⁻¹ᵁ W)) (h i)
+      exact this)
+    rw [Scheme.Hom.image_preimage_eq_opensRange_inf, Scheme.Opens.opensRange_ι]
+    exact inf_eq_right.2 hW
+  ext V s
+  change φ.app V s = 0
+  refine TopCat.Sheaf.eq_of_locally_eq' ⟨N.presheaf, N.isSheaf⟩ (fun i ↦ V ⊓ U i) V
+    (fun _ ↦ homOfLE inf_le_left) (fun x hx ↦ ?_) _ 0 fun i ↦ ?_
+  · obtain ⟨i, hi⟩ := TopologicalSpace.Opens.mem_iSup.mp (hU.ge (Set.mem_univ x))
+    exact TopologicalSpace.Opens.mem_iSup.mpr ⟨i, hx, hi⟩
+  · rw [map_zero]
+    have := ConcreteCategory.congr_hom
+      (φ.mapPresheaf.naturality (homOfLE (inf_le_left : V ⊓ U i ≤ V)).op) s
+    refine (this.symm.trans ?_)
+    change φ.app (V ⊓ U i) _ = 0
+    rw [h' i _ inf_le_right]
+    rfl
+
+/-- A morphism of `𝒪_X`-modules which is a monomorphism over every member of an open cover is a
+monomorphism. -/
+lemma mono_of_restrict {M N : X.Modules} (φ : M ⟶ N) {ι : Type*} (U : ι → X.Opens)
+    (hU : ⨆ i, U i = ⊤) (h : ∀ i, Mono ((restrictFunctor (U i).ι).map φ)) : Mono φ := by
+  refine Preadditive.mono_of_cancel_zero _ fun {Z} g hg ↦ ?_
+  refine hom_eq_zero_of_restrict g U hU fun i ↦ ?_
+  rw [← cancel_mono ((restrictFunctor (U i).ι).map φ), ← Functor.map_comp, hg,
+    Functor.map_zero, zero_comp]
+
+end Restrict
 
 end AlgebraicGeometry.Scheme.Modules

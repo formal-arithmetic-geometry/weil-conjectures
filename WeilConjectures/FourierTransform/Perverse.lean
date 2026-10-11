@@ -54,14 +54,19 @@ variable {k : Type u} [Field k] [HasInvertibleExponent Λ (Spec (.of k))]
 variable {V V' : Scheme.{u}} (π : V ⟶ Spec (.of k)) (π' : V' ⟶ Spec (.of k))
   [CharP Γ(pullback π π', ⊤) p]
 
+omit [HasInvertibleExponent Λ (Spec (.of k))] in
 /-- The Fourier kernel `𝒦_ψ = ℒ_{Ψ, b}`, placed in degree zero, is lisse of rank one: it is
-the pullback of the Artin–Schreier sheaf `ℒ_Ψ` along the pairing `b`, which is étale locally
-the constant sheaf `Λ`. (sketch blueprint: `sk-prop-kernel-lisse`) -/
+the pullback of the Artin–Schreier sheaf `ℒ_Ψ` along the pairing `b`, hence locally constant,
+and it is invertible, with inverse `𝒦_{ψ⁻¹}`; so it is dualizable, constructible and of finite
+Tor amplitude. `IsLisse` does not record the rank: that the rank is one is recorded only through
+the tensor inverse, `AlgebraicGeometry.Etale.nonempty_iso_fourierKernel_inv`.
+(sketch blueprint: `sk-prop-kernel-lisse`; blueprint: `prop-kernel-lisse`) -/
 theorem isLisse_fourierKernel (Ψ : AddChar (ZMod p) Λ) (b : Γ(pullback π π', ⊤)) :
     IsLisse ((_root_.DerivedCategory.singleFunctor _ 0).obj (fourierKernel Λ π π' Ψ b)) :=
-  -- TODO(adic): the Artin–Schreier sheaf is invertible, and constructible being finite
-  -- locally constant
-  sorry
+  ⟨isDualizable_fourierKernel Λ π π' Ψ b,
+    ⟨DerivedCategory.boundedConstructible_singleFunctor_obj _ 0, 0, 0,
+      torAmplitudeIn_fourierKernel Λ π π' Ψ b⟩, torAmplitudeIn_fourierKernel Λ π π' Ψ b,
+    fourierKernel Λ π π' Ψ b, inferInstance, ⟨Iso.refl _⟩⟩
 
 variable [LocallyOfFiniteType π] [IsSeparated π] [QuasiCompact π] [HasCompactification π]
   [LocallyOfFiniteType π'] [IsSeparated π'] [QuasiCompact π'] [HasCompactification π']

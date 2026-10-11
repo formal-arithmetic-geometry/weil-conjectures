@@ -9,6 +9,11 @@ public import Mathlib.AlgebraicGeometry.Group.Affine
 public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 public import Mathlib.AlgebraicGeometry.Morphisms.Immersion
 public import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
+public import WeilConjectures.AlgebraicGeometry.GroupScheme.AmpleFamily
+public import WeilConjectures.AlgebraicGeometry.GroupScheme.AmpleFamilySmooth
+public import WeilConjectures.AlgebraicGeometry.GroupScheme.Reduced
+public import WeilConjectures.AlgebraicGeometry.GroupScheme.Separated
+public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.OfAmple
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.QuasiProjective
 
 /-!
@@ -35,27 +40,66 @@ and quasi-projectivity descends from `K` to `k`
 
 universe u
 
-open CategoryTheory
+open CategoryTheory MonoidalCategory
 
 namespace AlgebraicGeometry
 
 variable {k : Type u} [Field k]
+
+/-- The identity component of a group scheme of finite type over a field is quasi-compact over
+the field: it is a connected component, hence closed in the quasi-compact scheme `G`. -/
+instance GrpObj.quasiCompact_identityComponent_hom (G : Over (Spec (.of k))) [GrpObj G]
+    [LocallyOfFiniteType G.hom] [QuasiCompact G.hom] :
+    QuasiCompact (GrpObj.identityComponent G).hom := by
+  have : CompactSpace G.left := QuasiCompact.compactSpace_of_compactSpace G.hom
+  have hc : IsCompact (GrpObj.identityComponentOpens G : Set G.left) :=
+    isClosed_connectedComponent.isCompact
+  have : CompactSpace (GrpObj.identityComponent G).left := isCompact_iff_compactSpace.mp hc
+  exact quasiCompact_of_compactSpace _
+
+/-- **Group schemes of finite type over an algebraically closed field carry an ample invertible
+module.** A group scheme `G` of finite type over an algebraically closed field `k` carries an
+invertible module `ℒ` with finitely many global sections `s i` whose non-vanishing loci `G_{s i}`
+are affine and cover `G`; that is, `ℒ` is ample in the sense of Stacks 01PS.
+
+This is the geometric core of Stacks 0BF7. One reduces to `G` smooth
+(`AlgebraicGeometry.GrpObj.exists_isAffineOpen_compl_support_zeroLocus_of_smooth`: Cartier's
+theorem in characteristic zero, `G_red` and Frobenius in characteristic `p`), then to the
+identity component (`AlgebraicGeometry.GrpObj.hasAmpleFamily_of_identityComponent`), and treats
+the smooth irreducible case with translates of a divisor with affine complement
+(`AlgebraicGeometry.GrpObj.hasAmpleFamily_of_smooth_of_irreducibleSpace`). -/
+theorem GrpObj.exists_isAffineOpen_compl_support_zeroLocus [IsAlgClosed k]
+    (G : Over (Spec (.of k))) [GrpObj G] [LocallyOfFiniteType G.hom] [QuasiCompact G.hom] :
+    ∃ (L : G.left.Modules) (_ : SheafOfModules.IsInvertible.{u, u, u} L) (ι : Type u)
+      (_ : Finite ι) (s : ι → (𝟙_ G.left.Modules ⟶ L)),
+      (∀ i, IsAffineOpen (Scheme.Modules.Hom.zeroLocus (s i)).support.compl) ∧
+        ⨆ i, (Scheme.Modules.Hom.zeroLocus (s i)).support.compl = ⊤ := by
+  refine GrpObj.exists_isAffineOpen_compl_support_zeroLocus_of_smooth (fun H _ _ _ _ ↦ ?_) G
+  refine GrpObj.hasAmpleFamily_of_identityComponent H ?_
+  have := GrpObj.irreducibleSpace_identityComponent H
+  have : LocallyOfFiniteType (GrpObj.identityComponent H).hom :=
+    inferInstanceAs (LocallyOfFiniteType ((GrpObj.identityComponentOpens H).ι ≫ H.hom))
+  have : Smooth (GrpObj.identityComponent H).hom :=
+    inferInstanceAs (Smooth ((GrpObj.identityComponentOpens H).ι ≫ H.hom))
+  exact GrpObj.hasAmpleFamily_of_smooth_of_irreducibleSpace (GrpObj.identityComponent H)
 
 /-- **Group schemes of finite type over an algebraically closed field are quasi-projective.**
 A group scheme `G` of finite type over an algebraically closed field `k` admits an immersion
 `G ⟶ ℙ(α; Spec k)` over `Spec k` into a projective space with finitely many homogeneous
 coordinates.
 
-This is the main case of Stacks 0BF7: one reduces to `G` connected, then to `G` smooth by
-passing to `G_red`, and for `G` smooth and connected one constructs an ample invertible module
-from an effective Cartier divisor with affine complement. It is the input of
-`AlgebraicGeometry.GrpObj.exists_isImmersion_projectiveSpace`, used for blueprint
+`G` is separated over `k` (`AlgebraicGeometry.GrpObj.isSeparated_hom`, Stacks 047L) and carries
+an ample invertible module
+(`AlgebraicGeometry.GrpObj.exists_isAffineOpen_compl_support_zeroLocus`), whose sections give the
+immersion (`AlgebraicGeometry.exists_isImmersion_projectiveSpace_of_isAffineOpen`). It is the
+input of `AlgebraicGeometry.GrpObj.exists_isImmersion_projectiveSpace`, used for blueprint
 `lem-sc-abelian-variety-projective` and the subsection `sk-prop-av-projective`. -/
 theorem GrpObj.exists_isImmersion_projectiveSpace_of_isAlgClosed [IsAlgClosed k]
     (G : Over (Spec (.of k))) [GrpObj G] [LocallyOfFiniteType G.hom] [QuasiCompact G.hom] :
     ∃ (α : Type u) (_ : Finite α) (j : G.left ⟶ ℙ(α; Spec (.of k))),
-      IsImmersion j ∧ j ≫ ℙ(α; Spec (.of k)) ↘ Spec (.of k) = G.hom :=
-  sorry
+      IsImmersion j ∧ j ≫ ℙ(α; Spec (.of k)) ↘ Spec (.of k) = G.hom := by
+  obtain ⟨L, _, ι, _, s, hs, hcov⟩ := GrpObj.exists_isAffineOpen_compl_support_zeroLocus G
+  exact exists_isImmersion_projectiveSpace_of_isAffineOpen G.hom L s hs hcov
 
 /-- **Group schemes of finite type over a field are quasi-projective.** A group scheme `G` of
 finite type over a field `k` admits an immersion `G ⟶ ℙ(α; Spec k)` over `Spec k` into a

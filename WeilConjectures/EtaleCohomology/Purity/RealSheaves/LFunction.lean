@@ -7,6 +7,8 @@ module
 
 public import Mathlib.RingTheory.PowerSeries.Inverse
 public import Mathlib.RingTheory.PowerSeries.PiTopology
+public import WeilConjectures.Mathlib.RingTheory.PowerSeries.PiTopology
+public import WeilConjectures.PointCount
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.Weights
 
 /-!
@@ -65,6 +67,22 @@ noncomputable def eulerFactor (x : C.finitePoints) : PowerSeries ℂ :=
   ((((W.localPolynomial l ρ x).map ι).comp (Polynomial.X ^ p.degreeOver x.1) :
     Polynomial ℂ) : PowerSeries ℂ)⁻¹
 
+variable {W l ρ} in
+/-- The complex local polynomial takes the value `1` at `0`. -/
+theorem eval_zero_map_localPolynomial (x : C.finitePoints) :
+    ((W.localPolynomial l ρ x).map ι).eval 0 = 1 := by
+  rw [← Polynomial.coeff_zero_eq_eval_zero, Polynomial.coeff_map, localPolynomial,
+    LinearMap.coeff_zero_charpolyRev, map_one]
+
+variable {W l ρ} in
+/-- The constant term of a local factor of the Euler series is `1`. -/
+theorem constantCoeff_eulerFactor (x : C.finitePoints) :
+    PowerSeries.constantCoeff (W.eulerFactor l ρ ι x) = 1 := by
+  rw [eulerFactor, PowerSeries.constantCoeff_inv, ← PowerSeries.coeff_zero_eq_constantCoeff_apply,
+    Polynomial.coeff_coe, Polynomial.coeff_zero_eq_eval_zero, Polynomial.eval_comp,
+    Polynomial.eval_pow, Polynomial.eval_X, zero_pow (p.degreeOver_ne_zero x.2),
+    eval_zero_map_localPolynomial, inv_one]
+
 /-- Blueprint `sk-d-real-cohom`: Cohomology and the Euler series.
 
 The Euler product converges in the product topology of `ℂ⟦X⟧`: the local factor at `x` is
@@ -72,7 +90,21 @@ The Euler product converges in the product topology of `ℂ⟦X⟧`: the local f
 (`AlgebraicGeometry.Scheme.Hom.finite_setOf_degreeOver_le`), so only finitely many factors
 contribute to a fixed coefficient. -/
 theorem multipliable_eulerFactors : Multipliable (W.eulerFactor l ρ ι) := by
-  sorry
+  refine PowerSeries.WithPiTopology.multipliable_inv_of_X_pow_dvd_sub_one
+    (e := fun x : C.finitePoints ↦ p.degreeOver x.1) (fun x ↦ p.degreeOver_ne_zero x.2)
+    (fun x ↦ ?_) p.finite_setOf_degreeOver_le
+  set P := (W.localPolynomial l ρ x).map ι
+  obtain ⟨Q, hQ⟩ := Polynomial.X_dvd_iff.2 (show (P - 1).coeff 0 = 0 by
+    rw [Polynomial.coeff_sub, Polynomial.coeff_one_zero, Polynomial.coeff_zero_eq_eval_zero,
+      eval_zero_map_localPolynomial, sub_self])
+  have h : P.comp (Polynomial.X ^ p.degreeOver x.1) - 1 =
+      Polynomial.X ^ p.degreeOver x.1 * Q.comp (Polynomial.X ^ p.degreeOver x.1) := by
+    rw [← Polynomial.one_comp (p := Polynomial.X ^ p.degreeOver x.1), ← Polynomial.sub_comp, hQ,
+      Polynomial.mul_comp, Polynomial.X_comp]
+  refine ⟨(Q.comp (Polynomial.X ^ p.degreeOver x.1) : PowerSeries ℂ), ?_⟩
+  have h' := congrArg (fun q : Polynomial ℂ ↦ (q : PowerSeries ℂ)) h
+  simpa only [Polynomial.coe_sub, Polynomial.coe_one, Polynomial.coe_mul, Polynomial.coe_pow,
+    Polynomial.coe_X] using h'
 
 /-- Blueprint `sk-d-real-cohom`: Cohomology and the Euler series.
 
@@ -94,7 +126,10 @@ The Euler series lies in `1 + T ℂ⟦X⟧`: every local factor has constant ter
 local polynomial `P_x(ρ, T) = det (1 - T F_x)` does. -/
 theorem constantCoeff_eulerSeries :
     PowerSeries.constantCoeff (W.eulerSeries l ρ ι) = 1 := by
-  sorry
+  have h := (W.multipliable_eulerFactors l ρ ι).hasProd.map (PowerSeries.constantCoeff (R := ℂ))
+    (PowerSeries.WithPiTopology.continuous_constantCoeff ℂ)
+  simp only [Function.comp_def, constantCoeff_eulerFactor] at h
+  exact h.unique hasProd_one
 
 end WeilGroup
 

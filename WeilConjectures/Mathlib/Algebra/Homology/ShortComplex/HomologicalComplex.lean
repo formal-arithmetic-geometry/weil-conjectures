@@ -15,6 +15,9 @@ complexes (`HomologicalComplex.Acyclic.map`).
 
 If a homological complex `K` is exact at `j`, then `K.toCycles i j` is an epimorphism
 (`HomologicalComplex.ExactAt.epi_toCycles`).
+
+A natural endomorphism of the identity functor induces itself on homology
+(`HomologicalComplex.homologyMap_eq_app_homology`).
 -/
 
 @[expose] public section
@@ -55,5 +58,16 @@ variable (K) in
 noncomputable def cyclesShortComplex (i j : ι) : ShortComplex C :=
   ShortComplex.mk (K.iCycles i) (K.toCycles i j) (by
     rw [← cancel_mono (K.iCycles j), Category.assoc, toCycles_i, iCycles_d, zero_comp])
+
+/-- A natural endomorphism `β` of the identity functor, applied termwise to a complex `K`, induces
+`β` on the homology of `K`. -/
+lemma homologyMap_eq_app_homology (β : 𝟭 C ⟶ 𝟭 C) {K : HomologicalComplex C c} (φ : K ⟶ K)
+    (hφ : ∀ i, φ.f i = β.app (K.X i)) (i : ι) :
+    homologyMap φ i = β.app (K.homology i) := by
+  have hc : cyclesMap φ i = β.app (K.cycles i) := by
+    rw [← cancel_mono (K.iCycles i), cyclesMap_i, hφ]
+    exact β.naturality (K.iCycles i)
+  rw [← cancel_epi (K.homologyπ i), homologyπ_naturality, hc]
+  exact (β.naturality (K.homologyπ i)).symm
 
 end HomologicalComplex

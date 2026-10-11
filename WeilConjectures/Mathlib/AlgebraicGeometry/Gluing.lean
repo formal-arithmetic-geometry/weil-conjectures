@@ -686,4 +686,74 @@ lemma isIso_pushoutOpensDesc (hUV : U ⊔ V = ⊤) : IsIso (pushoutOpensDesc U V
 
 end TwoOpens
 
+section ContinuousMap
+
+variable {M : Type*} [TopologicalSpace M] [DiscreteTopology M] {X Y : Scheme.{u}}
+
+/-- The open subscheme `f⁻¹(m)` of a scheme `X`, for a continuous map `f : X → M` to a
+discrete space. -/
+def Scheme.fiberOpens (f : C(X, M)) (m : M) : X.Opens :=
+  ⟨f ⁻¹' {m}, (isOpen_discrete _).preimage f.continuous⟩
+
+@[simp]
+lemma Scheme.mem_fiberOpens (f : C(X, M)) (m : M) (x : X) : x ∈ X.fiberOpens f m ↔ f x = m :=
+  Iff.rfl
+
+lemma Scheme.iSup_fiberOpens (f : C(X, M)) : ⨆ m, X.fiberOpens f m = ⊤ :=
+  eq_top_iff.2 fun x _ ↦ TopologicalSpace.Opens.mem_iSup.2 ⟨f x, rfl⟩
+
+/-- Two morphisms out of `X` are equal if they agree on every fibre of a continuous map
+`f : X → M` to a discrete space. -/
+lemma Scheme.hom_ext_fiberOpens (f : C(X, M)) {g₁ g₂ : X ⟶ Y}
+    (h : ∀ m, (X.fiberOpens f m).ι ≫ g₁ = (X.fiberOpens f m).ι ≫ g₂) : g₁ = g₂ :=
+  Scheme.Opens.hom_ext_of_iSup_eq_top _ (X.iSup_fiberOpens f) g₁ g₂ h
+
+/-- Morphisms out of the intersection of two distinct fibres agree: the intersection is
+empty. -/
+lemma Scheme.homOfLE_fiberOpens_comp (f : C(X, M)) (g : M → (X ⟶ Y)) (m n : M) :
+    X.homOfLE (inf_le_left : X.fiberOpens f m ⊓ X.fiberOpens f n ≤ _) ≫
+        (X.fiberOpens f m).ι ≫ g m =
+      X.homOfLE (inf_le_right : X.fiberOpens f m ⊓ X.fiberOpens f n ≤ _) ≫
+        (X.fiberOpens f n).ι ≫ g n := by
+  by_cases hmn : m = n
+  · subst hmn
+    rfl
+  · have : IsEmpty (X.fiberOpens f m ⊓ X.fiberOpens f n).toScheme :=
+      ⟨fun x ↦ hmn ((x.2.1 : f x.1 = m).symm.trans x.2.2)⟩
+    exact isInitialOfIsEmpty.hom_ext _ _
+
+/-- **Gluing along the fibres of a locally constant function.** For a continuous map
+`f : X → M` to a discrete space and a family of morphisms `g m : X ⟶ Y`, the morphism
+`X ⟶ Y` which is `g m` on the open fibre `f⁻¹(m)`. -/
+noncomputable def Scheme.glueOfContinuousMap (f : C(X, M)) (g : M → (X ⟶ Y)) : X ⟶ Y :=
+  Scheme.Opens.glueMorphismsOfTop (X.fiberOpens f) (X.iSup_fiberOpens f)
+    (fun m ↦ (X.fiberOpens f m).ι ≫ g m) (Scheme.homOfLE_fiberOpens_comp f g)
+
+@[reassoc (attr := simp)]
+lemma Scheme.fiberOpens_ι_glueOfContinuousMap (f : C(X, M)) (g : M → (X ⟶ Y)) (m : M) :
+    (X.fiberOpens f m).ι ≫ X.glueOfContinuousMap f g = (X.fiberOpens f m).ι ≫ g m :=
+  Scheme.Opens.ι_glueMorphismsOfTop _ _ _ _ m
+
+lemma Scheme.glueOfContinuousMap_comp {Z : Scheme.{u}} (f : C(X, M)) (g : M → (X ⟶ Y))
+    (h : Y ⟶ Z) : X.glueOfContinuousMap f g ≫ h = X.glueOfContinuousMap f (fun m ↦ g m ≫ h) :=
+  X.hom_ext_fiberOpens f fun m ↦ by simp
+
+lemma Scheme.glueOfContinuousMap_eq {f : C(X, M)} {g : M → (X ⟶ Y)} {g' : X ⟶ Y}
+    (h : ∀ m, (X.fiberOpens f m).ι ≫ g m = (X.fiberOpens f m).ι ≫ g') :
+    X.glueOfContinuousMap f g = g' :=
+  X.hom_ext_fiberOpens f fun m ↦ by simp [h]
+
+/-- Gluing is compatible with precomposition: `φ ≫ glue f g` is glued from the `φ ≫ g m` along
+the fibres of `f ∘ φ`. -/
+lemma Scheme.comp_glueOfContinuousMap {X' : Scheme.{u}} (φ : X' ⟶ X) (f : C(X, M))
+    (g : M → (X ⟶ Y)) :
+    φ ≫ X.glueOfContinuousMap f g =
+      X'.glueOfContinuousMap (f.comp φ.base.hom) (fun m ↦ φ ≫ g m) := by
+  refine X'.hom_ext_fiberOpens (f.comp φ.base.hom) fun m ↦ ?_
+  have e : X'.fiberOpens (f.comp φ.base.hom) m = φ ⁻¹ᵁ X.fiberOpens f m := rfl
+  rw [Scheme.fiberOpens_ι_glueOfContinuousMap, e, ← morphismRestrict_ι_assoc,
+    Scheme.fiberOpens_ι_glueOfContinuousMap, morphismRestrict_ι_assoc]
+
+end ContinuousMap
+
 end AlgebraicGeometry

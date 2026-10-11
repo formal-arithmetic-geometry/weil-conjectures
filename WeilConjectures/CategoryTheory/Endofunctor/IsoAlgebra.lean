@@ -216,6 +216,130 @@ lemma isSeparator_algebra (hS : IsSeparator S) : IsSeparator (algebra F S) := by
   simp only [Functor.map_comp] at this
   simpa only [forget_map, ι_desc_hom_f_assoc] using this
 
+variable {K}
+
+/-- A morphism of algebras out of the free algebra satisfies, on the summands, the recursion
+defining `Free.hom`. -/
+lemma map_ι_comp_comp_str (g : algebra F S ⟶ K) (n : ℤ) :
+    F.map (Sigma.ι (obj F S) n ≫ g.hom.f) ≫ K.str.hom =
+      (objSucc F S n).hom ≫ Sigma.ι (obj F S) (n + 1) ≫ g.hom.f := by
+  rw [F.map_comp, Category.assoc, str_hom, g.hom.h, ← map_ι_comp_str_assoc]
+  rfl
+
+/-- Morphisms of algebras out of the free algebra `∐ₙ Fⁿ S` are determined by their
+restrictions to the summand `F⁰ S = S`. -/
+lemma hom_ext {g g' : algebra F S ⟶ K}
+    (h : Sigma.ι (obj F S) 0 ≫ g.hom.f = Sigma.ι (obj F S) 0 ≫ g'.hom.f) : g = g' := by
+  have step : ∀ m n : ℤ, m + 1 = n → (Sigma.ι (obj F S) m ≫ g.hom.f =
+      Sigma.ι (obj F S) m ≫ g'.hom.f ↔
+        Sigma.ι (obj F S) n ≫ g.hom.f = Sigma.ι (obj F S) n ≫ g'.hom.f) := by
+    rintro m _ rfl
+    have e₁ := map_ι_comp_comp_str g m
+    have e₂ := map_ι_comp_comp_str g' m
+    constructor
+    · intro hm
+      rw [← cancel_epi (objSucc F S m).hom, ← e₁, ← e₂, hm]
+    · intro hm
+      apply F.map_injective
+      rw [← cancel_mono K.str.hom, e₁, e₂, hm]
+  have hn (n : ℤ) : Sigma.ι (obj F S) n ≫ g.hom.f = Sigma.ι (obj F S) n ≫ g'.hom.f :=
+    Int.induction_on n h (fun i hi ↦ (step _ _ rfl).1 hi)
+      (fun i hi ↦ (step _ _ (by omega)).2 hi)
+  exact (forget F).map_injective (Sigma.hom_ext _ _ hn)
+
+variable {T U : C}
+
+variable (F) in
+/-- (Impl) The morphisms `Fⁿ S ⟶ Fⁿ T` induced by `f : S ⟶ T`, for `n ≥ 0`. -/
+def posMap (f : S ⟶ T) : ∀ n : ℕ, posObj F S n ⟶ posObj F T n
+  | 0 => f
+  | n + 1 => F.map (posMap f n)
+
+variable (F) in
+/-- (Impl) The morphisms `F⁻⁽ⁿ⁺¹⁾ S ⟶ F⁻⁽ⁿ⁺¹⁾ T` induced by `f : S ⟶ T`, for `n ≥ 0`. -/
+noncomputable def negMap (f : S ⟶ T) : ∀ n : ℕ, negObj F S n ⟶ negObj F T n
+  | 0 => F.inv.map f
+  | n + 1 => F.inv.map (negMap f n)
+
+variable (F) in
+/-- (Impl) The morphisms `Fⁿ S ⟶ Fⁿ T` induced by `f : S ⟶ T`, for `n : ℤ`. -/
+noncomputable def objMap (f : S ⟶ T) : ∀ n : ℤ, obj F S n ⟶ obj F T n
+  | .ofNat n => posMap F f n
+  | .negSucc n => negMap F f n
+
+omit [HasColimitsOfShape (Discrete ℤ) C] in
+@[simp]
+lemma objMap_zero (f : S ⟶ T) : objMap F f 0 = f :=
+  rfl
+
+omit [HasColimitsOfShape (Discrete ℤ) C] in
+/-- The morphisms `Fⁿ S ⟶ Fⁿ T` are compatible with the isomorphisms `F (Fⁿ S) ≅ Fⁿ⁺¹ S`. -/
+@[reassoc]
+lemma map_objMap_comp_objSucc (f : S ⟶ T) (n : ℤ) :
+    F.map (objMap F f n) ≫ (objSucc F T n).hom = (objSucc F S n).hom ≫ objMap F f (n + 1) := by
+  rcases n with n | _ | n
+  · exact (Category.comp_id _).trans (Category.id_comp _).symm
+  · exact F.asEquivalence.counit.naturality f
+  · exact F.asEquivalence.counit.naturality (negMap F f n)
+
+omit [HasColimitsOfShape (Discrete ℤ) C] in
+instance mono_objMap (f : S ⟶ T) [Mono f] (n : ℤ) : Mono (objMap F f n) := by
+  have hpos (n : ℕ) : Mono (posMap F f n) := by
+    induction n with
+    | zero => assumption
+    | succ n ih => exact F.map_mono (posMap F f n)
+  have hneg (n : ℕ) : Mono (negMap F f n) := by
+    induction n with
+    | zero => exact F.inv.map_mono f
+    | succ n ih => exact F.inv.map_mono (negMap F f n)
+  rcases n with n | n
+  · exact hpos n
+  · exact hneg n
+
+/-- The morphism of free algebras `∐ₙ Fⁿ S ⟶ ∐ₙ Fⁿ T` induced by a morphism `f : S ⟶ T`. -/
+noncomputable def map (f : S ⟶ T) : algebra F S ⟶ algebra F T :=
+  ObjectProperty.homMk
+    { f := Limits.Sigma.map (objMap F f)
+      h := map_hom_ext F S fun n ↦ by
+        change F.map (Sigma.ι (obj F S) n) ≫ F.map (Limits.Sigma.map (objMap F f)) ≫ (str F T).hom =
+          F.map (Sigma.ι (obj F S) n) ≫ (str F S).hom ≫ Limits.Sigma.map (objMap F f)
+        rw [← F.map_comp_assoc, Sigma.ι_map, F.map_comp, Category.assoc,
+          map_ι_comp_str, map_objMap_comp_objSucc_assoc, map_ι_comp_str_assoc,
+          Sigma.ι_map] }
+
+@[simp]
+lemma map_hom_f (f : S ⟶ T) : (map f).hom.f = Limits.Sigma.map (objMap F f) :=
+  rfl
+
+variable (F) in
+/-- The free algebra functor `S ↦ ∐ₙ Fⁿ S`, left adjoint to the forgetful functor
+(`CategoryTheory.Endofunctor.IsoAlgebra.Free.adjunction`). -/
+@[simps obj]
+noncomputable def functor : C ⥤ IsoAlgebra F where
+  obj S := algebra F S
+  map f := map f
+  map_id S := hom_ext ((Sigma.ι_map _ _).trans
+    ((Category.id_comp _).trans (Category.comp_id _).symm))
+  map_comp f g := hom_ext (by simp [Sigma.ι_map_assoc])
+
+variable (F) in
+/-- The free algebra functor is left adjoint to the forgetful functor: a morphism of
+algebras `∐ₙ Fⁿ S ⟶ K` is the same as a morphism `S ⟶ K` in `C`. -/
+noncomputable def adjunction : functor F ⊣ forget F :=
+  Adjunction.mkOfHomEquiv
+    { homEquiv S K :=
+        { toFun g := Sigma.ι (obj F S) 0 ≫ g.hom.f
+          invFun s := desc K s
+          left_inv g := hom_ext (ι_desc_hom_f _ _)
+          right_inv s := ι_desc_hom_f K s }
+      homEquiv_naturality_left_symm f s := hom_ext (by simp [functor, Sigma.ι_map_assoc])
+      homEquiv_naturality_right g φ := by simp }
+
+/-- The free algebra functor preserves monomorphisms if coproducts indexed by `ℤ` do. -/
+instance [(MorphismProperty.monomorphisms C).IsStableUnderCoproductsOfShape ℤ] :
+    (functor F).PreservesMonomorphisms where
+  preserves _ _ := (forget F).mono_of_mono_map (inferInstanceAs (Mono (Limits.Sigma.map _)))
+
 end Free
 
 end Autoequivalence

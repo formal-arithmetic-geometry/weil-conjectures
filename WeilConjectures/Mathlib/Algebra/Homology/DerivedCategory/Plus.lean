@@ -8,6 +8,7 @@ module
 public import Mathlib.Algebra.Homology.DerivedCategory.Plus
 public import Mathlib.Algebra.Homology.DerivedCategory.FullyFaithful
 public import Mathlib.CategoryTheory.Triangulated.TStructure.ETrunc
+public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.TStructure
 
 /-!
 # Truncations and homology in the bounded below derived category
@@ -42,26 +43,22 @@ namespace DerivedCategory.Plus
 /-- `H^n(τ_{<a} X) ⟶ H^n(X)` is an isomorphism for `n < a`. -/
 lemma isIso_homologyFunctor_map_truncLTι_app (X : Plus C) (a n : ℤ) (h : n < a) :
     IsIso ((homologyFunctor C n).map ((t.truncLTι a).app X)) := by
-  have hT := t.triangleLTGE_distinguished a X
-  have h₁ : Mono ((homologyFunctor C n).map ((t.truncLTι a).app X)) :=
-    ((homologyFunctor C 0).homologySequence_mono_shift_map_mor₁_iff _ hT (n - 1) n
-      (by lia)).2 (IsZero.eq_of_src (isZero_homology_of_isGE _ a _ (by lia)) _ _)
-  have h₂ : Epi ((homologyFunctor C n).map ((t.truncLTι a).app X)) :=
-    ((homologyFunctor C 0).homologySequence_epi_shift_map_mor₁_iff _ hT n).2
-      (IsZero.eq_of_tgt (isZero_homology_of_isGE _ a _ h) _ _)
-  exact isIso_of_mono_of_epi _
+  have hT := ι.map_distinguished _ (t.triangleLTGE_distinguished a X)
+  have : (ι.mapTriangle.obj ((t.triangleLTGE a).obj X)).obj₁.IsLE (a - 1) :=
+    inferInstanceAs ((ι.obj ((t.truncLT a).obj X)).IsLE (a - 1))
+  have : (ι.mapTriangle.obj ((t.triangleLTGE a).obj X)).obj₃.IsGE a :=
+    inferInstanceAs ((ι.obj ((t.truncGE a).obj X)).IsGE a)
+  exact DerivedCategory.isIso_homologyFunctor_map_mor₁_of_isLE_of_isGE _ hT a n h
 
 /-- `H^n(X) ⟶ H^n(τ_{≥a} X)` is an isomorphism for `a ≤ n`. -/
 lemma isIso_homologyFunctor_map_truncGEπ_app (X : Plus C) (a n : ℤ) (h : a ≤ n) :
     IsIso ((homologyFunctor C n).map ((t.truncGEπ a).app X)) := by
-  have hT := t.triangleLTGE_distinguished a X
-  have h₁ : Mono ((homologyFunctor C n).map ((t.truncGEπ a).app X)) :=
-    ((homologyFunctor C 0).homologySequence_mono_shift_map_mor₂_iff _ hT n).2
-      (IsZero.eq_of_src (isZero_homology_of_isLE _ (a - 1) _ (by lia)) _ _)
-  have h₂ : Epi ((homologyFunctor C n).map ((t.truncGEπ a).app X)) :=
-    ((homologyFunctor C 0).homologySequence_epi_shift_map_mor₂_iff _ hT n (n + 1) rfl).2
-      (IsZero.eq_of_tgt (isZero_homology_of_isLE _ (a - 1) _ (by lia)) _ _)
-  exact isIso_of_mono_of_epi _
+  have hT := ι.map_distinguished _ (t.triangleLTGE_distinguished a X)
+  have : (ι.mapTriangle.obj ((t.triangleLTGE a).obj X)).obj₁.IsLE (a - 1) :=
+    inferInstanceAs ((ι.obj ((t.truncLT a).obj X)).IsLE (a - 1))
+  have : (ι.mapTriangle.obj ((t.triangleLTGE a).obj X)).obj₃.IsGE a :=
+    inferInstanceAs ((ι.obj ((t.truncGE a).obj X)).IsGE a)
+  exact DerivedCategory.isIso_homologyFunctor_map_mor₂_of_isLE_of_isGE _ hT a n h
 
 /-- For `q : ℤ`, the object `τ_{≥ q} τ_{< q + 1} X` (written with the `EInt`-indexed
 truncations, as in `t.spectralObject X`) is isomorphic to the single complex
@@ -131,5 +128,50 @@ noncomputable def eTruncLTCompETruncGEIso (q : ℤ) :
   have : IsIso α := NatIso.isIso_of_isIso_app _
   have : IsIso β := NatIso.isIso_of_isIso_app _
   e₁.symm ≪≫ Functor.isoWhiskerRight (e₂.symm ≪≫ (asIso β).symm ≪≫ asIso α) S
+
+instance (q : ℤ) (X : Plus C) : IsIso ((homologyFunctor C q).map ((t.eTruncGEπ (q : EInt)).app
+    ((t.eTruncLT.obj ((q + 1 : ℤ) : EInt)).obj X))) :=
+  isIso_homologyFunctor_map_truncGEπ_app ((t.truncLT (q + 1)).obj X) q q le_rfl
+
+/-- The isomorphism `τ_{≥ q} τ_{< q + 1} X ≅ H^q(X)[-q]` induces on `H^q` the inverse of the map
+induced by the projection `τ_{< q + 1} X ⟶ τ_{≥ q} τ_{< q + 1} X` followed by the map induced by
+the inclusion `τ_{< q + 1} X ⟶ X`. -/
+lemma homologyFunctor_map_eTruncLTCompETruncGEIso_hom_app (q : ℤ) (X : Plus C) :
+    (homologyFunctor C q).map ((eTruncLTCompETruncGEIso q).hom.app X) ≫
+        (singleFunctorCompHomologyFunctorIso q).hom.app ((homologyFunctor C q).obj X) =
+      inv ((homologyFunctor C q).map ((t.eTruncGEπ (q : EInt)).app
+          ((t.eTruncLT.obj ((q + 1 : ℤ) : EInt)).obj X))) ≫
+        (homologyFunctor C q).map ((t.eTruncLTι ((q + 1 : ℤ) : EInt)).app X) := by
+  have hS {a b : C} (u : a ⟶ b) : (homologyFunctor C q).map ((singleFunctor C q).map u) ≫
+      (singleFunctorCompHomologyFunctorIso q).hom.app b =
+      (singleFunctorCompHomologyFunctorIso q).hom.app a ≫ u :=
+    (singleFunctorCompHomologyFunctorIso (C := C) q).hom.naturality u
+  have hS' {a b : C} (u : a ⟶ b) {Z : C} (w : b ⟶ Z) :
+      (homologyFunctor C q).map ((singleFunctor C q).map u) ≫
+      (singleFunctorCompHomologyFunctorIso q).hom.app b ≫ w =
+      (singleFunctorCompHomologyFunctorIso q).hom.app a ≫ u ≫ w := by
+    rw [reassoc_of% (hS u)]
+  simp [eTruncLTCompETruncGEIso, -Functor.map_inv, hS, hS']
+
+/-- Morphisms to `H^q(M)[-q]` from an object concentrated in degree `q` are determined by the
+morphisms they induce on `H^q`. -/
+lemma singleFunctor_hom_ext_of_isGE_of_isLE {W : Plus C} (q : ℤ) [W.IsGE q] [W.IsLE q] {M : C}
+    {f g : W ⟶ (singleFunctor C q).obj M}
+    (h : (homologyFunctor C q).map f = (homologyFunctor C q).map g) : f = g := by
+  obtain ⟨A, ⟨e⟩⟩ := DerivedCategory.exists_iso_singleFunctor_obj_of_isGE_of_isLE (ι.obj W) q
+  let e' : W ≅ (singleFunctor C q).obj A := ι.preimageIso e
+  rw [← cancel_epi e'.inv]
+  suffices (singleFunctor C q).preimage (e'.inv ≫ f) =
+      (singleFunctor C q).preimage (e'.inv ≫ g) by
+    simpa using congrArg (singleFunctor C q).map this
+  have hu (u : A ⟶ M) : u = (singleFunctorCompHomologyFunctorIso q).inv.app A ≫
+      (homologyFunctor C q).map ((singleFunctor C q).map u) ≫
+      (singleFunctorCompHomologyFunctorIso q).hom.app M := by
+    have := (singleFunctorCompHomologyFunctorIso (C := C) q).hom.naturality u
+    simp only [Functor.comp_obj, Functor.comp_map, Functor.id_map] at this
+    rw [this, Iso.inv_hom_id_app_assoc]
+  rw [hu ((singleFunctor C q).preimage (e'.inv ≫ f)),
+    hu ((singleFunctor C q).preimage (e'.inv ≫ g))]
+  simp [h]
 
 end DerivedCategory.Plus

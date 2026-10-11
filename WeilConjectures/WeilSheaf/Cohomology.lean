@@ -35,6 +35,8 @@ Frobenius.
 - `AlgebraicGeometry.WeilComplex.compactlySupportedCohomology` and
   `AlgebraicGeometry.WeilSheaf.compactlySupportedCohomology`: compactly supported cohomology
   with its geometric Frobenius.
+- `AlgebraicGeometry.WeilComplex.cohomology` and `AlgebraicGeometry.WeilSheaf.cohomology`:
+  ordinary cohomology `Hʳ(X ⊗ k̄, K) := Hʳ(Spec k̄, Ra_* K)` with its geometric Frobenius.
 
 ## Main statements
 
@@ -83,6 +85,28 @@ noncomputable def compactlySupportedCohomology (K : WeilComplex k₀ l X) (r : �
   ((derivedLowerShriek k₀ l (X ↘ Spec (CommRingCat.of k₀))).obj K).cohomologyFrobeniusModule r
 
 end WeilComplex
+
+section Ordinary
+
+variable {Y : Scheme.{u}} [Y.Over (Spec (CommRingCat.of k₀))]
+  [QuasiCompact (Y ↘ Spec (CommRingCat.of k₀))] [QuasiSeparated (Y ↘ Spec (CommRingCat.of k₀))]
+  [LocallyOfFiniteType (Y ↘ Spec (CommRingCat.of k₀))]
+
+/-- The ordinary cohomology `Hʳ(Y ⊗ k̄, K) := Hʳ(Spec k̄, Ra_* K)` of a Weil complex `K` on a
+`k₀`-scheme `a : Y ⟶ Spec k₀` of finite type, with its geometric Frobenius: the cohomology of the
+derived direct image of `K` along `a`, a Weil complex on `Spec k₀`. For `a` proper it agrees with
+`AlgebraicGeometry.WeilComplex.compactlySupportedCohomology`. -/
+noncomputable def WeilComplex.cohomology (K : WeilComplex k₀ l Y) (r : ℤ) :
+    FrobeniusModule.{u + 1, 0} (PadicAlgCl l) :=
+  ((derivedLowerStar (Y ↘ Spec (CommRingCat.of k₀))).obj K).cohomologyFrobeniusModule r
+
+/-- The ordinary cohomology `Hʳ(Y ⊗ k̄, F)` of a Weil sheaf, with its geometric Frobenius: that of
+the Weil complex `F` concentrated in degree zero. -/
+noncomputable def WeilSheaf.cohomology (F : WeilSheaf k₀ l Y) (r : ℤ) :
+    FrobeniusModule.{u + 1, 0} (PadicAlgCl l) :=
+  (toComplex.obj F).cohomology r
+
+end Ordinary
 
 namespace WeilSheaf
 

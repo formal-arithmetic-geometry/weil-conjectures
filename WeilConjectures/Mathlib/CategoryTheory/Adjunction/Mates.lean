@@ -33,6 +33,8 @@ and it is the latter that one wants when transporting the coherence of a pseudof
   `CategoryTheory.Adjunction.liftAlgebraStr : G (R (L K)) ⟶ R (L K)` along a lift of `G`.
 - `CategoryTheory.mateEquiv_whiskerBottom`: the mate of a 2-square whiskered at the bottom is
   the mate whiskered on the left.
+- `CategoryTheory.mateEquiv_whiskerTop_conjugateEquiv`: conjugates of morphisms of left
+  adjoints compatible with 2-squares are compatible with the mates of these 2-squares.
 - `CategoryTheory.Adjunction.whiskerRight_comp_conjugateIsoEquiv_hom`: for an adjoint triple
   `L ⊣ M ⊣ R`, the comparison `L ⟶ R` commutes with the exchange isomorphisms obtained by
   conjugating an isomorphism `ED ⋙ M ≅ M ⋙ EC` for self-equivalences `EC` and `ED`.
@@ -65,6 +67,26 @@ lemma conjugateIsoEquiv_trans (e : L₂ ≅ L₁) (e' : L₃ ≅ L₂) :
       conjugateIsoEquiv adj₁ adj₂ e ≪≫ conjugateIsoEquiv adj₂ adj₃ e' := by
   ext : 1
   exact (conjugateEquiv_comp adj₁ adj₂ adj₃ e.hom e'.hom).symm
+
+/-- **The mate of an isomorphism of left adjoints carries the pasted unit and counit.**
+Transporting the adjunction `L₁ ⊣ R₁` along an isomorphism `e : L₁ ≅ L₂` of left adjoints and
+along its conjugate `R₁ ≅ R₂` gives back the adjunction `L₂ ⊣ R₂`: the unit and counit of
+`adj₂` are those of `adj₁` pasted with `e` and with the conjugate of `e`:
+```
+  𝟭 --η₁--> L₁ ⋙ R₁ --e ◫ ẽ--> L₂ ⋙ R₂        R₂ ⋙ L₂ --ẽ⁻¹ ◫ e⁻¹--> R₁ ⋙ L₁ --ε₁--> 𝟭
+```
+where `ẽ : R₁ ≅ R₂` is the inverse of the conjugate `R₂ ≅ R₁` of `e`; the left composite is the
+unit `η₂` of `adj₂` and the right composite is its counit `ε₂`. -/
+lemma Adjunction.ofNatIsoLeft_ofNatIsoRight_conjugateIsoEquiv (e : L₁ ≅ L₂) :
+    (adj₁.ofNatIsoLeft e).ofNatIsoRight (conjugateIsoEquiv adj₂ adj₁ e).symm = adj₂ := by
+  ext c
+  have h := unit_conjugateEquiv adj₁ adj₂ e.inv c
+  have hn := (conjugateEquiv adj₁ adj₂ e.inv).naturality (e.hom.app c)
+  simp only [Functor.comp_obj, Functor.id_obj] at h hn
+  simp only [Adjunction.ofNatIsoRight_unit, Adjunction.ofNatIsoLeft_unit, NatTrans.comp_app,
+    Functor.whiskerRight_app, Functor.whiskerLeft_app, Iso.symm_hom, conjugateIsoEquiv_apply_inv,
+    Category.assoc, Functor.comp_obj, Functor.id_obj]
+  rw [hn, reassoc_of% h, ← R₂.map_comp, Iso.inv_hom_id_app, R₂.map_id, Category.comp_id]
 
 end
 
@@ -164,6 +186,29 @@ lemma mateEquiv_whiskerBottom {G : A ⥤ C} {H H' : B ⥤ D} {L₁ : A ⥤ B} {R
     mateEquiv adj₁ adj₂ (w.whiskerBottom β) = (mateEquiv adj₁ adj₂ w).whiskerLeft β := by
   ext X
   simp [mateEquiv, TwoSquare.whiskerBottom, TwoSquare.whiskerLeft, ← Functor.map_comp]
+
+/-- Conjugation is compatible with 2-squares: let `α : L₂ ⟶ L₁` and `α' : L₂' ⟶ L₁'` be
+morphisms of left adjoints, and let `w₁ : TwoSquare G L₁ L₁' H` and
+`w₂ : TwoSquare G L₂ L₂' H` be 2-squares compatible with them, `w₂ ≫ α = α' ≫ w₁`. Then the
+conjugates `R₁ ⟶ R₂` and `R₁' ⟶ R₂'` of `α` and `α'` are compatible with the mates of `w₁` and
+`w₂`:
+
+```
+R₁ ⋙ G ---conj α---> R₂ ⋙ G
+   |                    |
+mate w₁              mate w₂
+   v                    v
+H ⋙ R₁' --conj α'--> H ⋙ R₂'
+```
+-/
+lemma mateEquiv_whiskerTop_conjugateEquiv {G : A ⥤ C} {H : B ⥤ D}
+    {L₁ L₂ : A ⥤ B} {R₁ R₂ : B ⥤ A} {L₁' L₂' : C ⥤ D} {R₁' R₂' : D ⥤ C}
+    (adj₁ : L₁ ⊣ R₁) (adj₂ : L₂ ⊣ R₂) (adj₁' : L₁' ⊣ R₁') (adj₂' : L₂' ⊣ R₂')
+    (α : L₂ ⟶ L₁) (α' : L₂' ⟶ L₁') (w₁ : TwoSquare G L₁ L₁' H) (w₂ : TwoSquare G L₂ L₂' H)
+    (h : w₂.whiskerLeft α = w₁.whiskerRight α') :
+    (mateEquiv adj₂ adj₂' w₂).whiskerTop (conjugateEquiv adj₁ adj₂ α) =
+      (mateEquiv adj₁ adj₁' w₁).whiskerBottom (conjugateEquiv adj₁' adj₂' α') := by
+  rw [← conjugateEquiv_mateEquiv_vcomp, h, mateEquiv_conjugateEquiv_vcomp]
 
 section Triple
 

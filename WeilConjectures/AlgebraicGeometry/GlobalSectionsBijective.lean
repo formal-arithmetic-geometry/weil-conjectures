@@ -9,10 +9,11 @@ public import Mathlib.AlgebraicGeometry.Geometrically.Integral
 public import Mathlib.AlgebraicGeometry.Morphisms.Flat
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import WeilConjectures.AlgebraicGeometry.Cohomology.Defs
-public import WeilConjectures.AlgebraicGeometry.Cohomology.EulerChar
+public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage
 public import WeilConjectures.AlgebraicGeometry.Sites.EtaleTopologicalInvariance.GlobalSections
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Geometrically.Connected
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Geometrically.Reduced
+public import WeilConjectures.Mathlib.AlgebraicGeometry.AffineScheme
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Scheme
 public import WeilConjectures.Mathlib.RingTheory.Artinian.Ring
 
@@ -44,10 +45,14 @@ connected `X` over a separably closed field.
 - `AlgebraicGeometry.Scheme.GlobalSectionsBijective.of_geometricallyIntegral` and
   `AlgebraicGeometry.Scheme.GlobalSectionsBijective.of_isSepClosed`: the geometrically integral
   case and the case of a smooth connected scheme over a separably closed field.
+- `AlgebraicGeometry.Scheme.GlobalSectionsBijective.of_isAlgClosed`: a proper, reduced and
+  connected scheme over an algebraically closed field has `H⁰(X, 𝒪_X) = k`.
 - `AlgebraicGeometry.Scheme.GlobalSectionsBijective.pullback`: `H⁰(X, 𝒪_X) = k` is stable under
   base change along a field extension `K/k`, for quasi-compact quasi-separated `X`.
 - `AlgebraicGeometry.Scheme.GlobalSectionsBijective.isIso_appTop_pullback_snd`: more generally
   `Γ(X ×_k U, 𝒪) = Γ(U, 𝒪_U)` for every affine `k`-scheme `U`.
+- `AlgebraicGeometry.Scheme.GlobalSectionsBijective.isIso_app_of_isPullback`: for a base change
+  `π : X ×_k B ⟶ B`, `Γ(B, A) ≅ Γ(X ×_k B, π⁻¹ A)` for every affine open `A ⊆ B`.
 -/
 
 @[expose] public section
@@ -152,6 +157,29 @@ instance GlobalSectionsBijective.of_geometricallyConnected [IsProper (X ↘ Spec
     (f := Algebra.linearMap k A) (by rw [hA, Module.finrank_self])).1
     (algebraMap k A).injective
 
+/-- **Global functions on a proper curve.** A proper, reduced and connected scheme `X` over an
+algebraically closed field `k` has `H⁰(X, 𝒪_X) = k`: the ring `Γ(X, 𝒪_X)` is a finite reduced
+`k`-algebra (`AlgebraicGeometry.Scheme.finite_globalSectionsRingHom_of_isProper`) without
+nontrivial idempotents, hence equal to `k` (`IsAlgClosed.finrank_eq_one_of_isReduced`).
+
+The blueprint states this for proper connected curves; reducedness is needed, as the proper
+connected curve `ℙ¹_k ×_k Spec k[ε]/(ε²)` has `H⁰ = k[ε]/(ε²)`. It holds for the smooth curves to
+which the blueprint applies it.
+(blueprint: `lem-sc-global-functions`) -/
+instance GlobalSectionsBijective.of_isAlgClosed [IsAlgClosed k] [IsProper (X ↘ Spec (.of k))]
+    [IsReduced X] [ConnectedSpace X] : GlobalSectionsBijective k X := by
+  let A := Γ(X, ⊤)
+  let : Algebra k A := (globalSectionsRingHom k (X := X)).toAlgebra
+  have : Module.Finite k A := finite_globalSectionsRingHom_of_isProper
+  obtain ⟨x⟩ : Nonempty X := inferInstance
+  have : Nonempty (⊤ : X.Opens) := ⟨⟨x, trivial⟩⟩
+  have hA : Module.finrank k A = 1 := IsAlgClosed.finrank_eq_one_of_isReduced
+    ((connectedSpace_iff_isIdempotentElem X).1 inferInstance)
+  refine ⟨⟨(globalSectionsRingHom k (X := X)).injective, ?_⟩⟩
+  exact (LinearMap.injective_iff_surjective_of_finrank_eq_finrank
+    (f := Algebra.linearMap k A) (by rw [hA, Module.finrank_self])).1
+    (algebraMap k A).injective
+
 /-- A proper geometrically integral `k`-scheme has `H⁰(X, 𝒪_X) = k`. -/
 theorem GlobalSectionsBijective.of_geometricallyIntegral [IsProper (X ↘ Spec (.of k))]
     [GeometricallyIntegral (X ↘ Spec (.of k))] : GlobalSectionsBijective k X :=
@@ -224,6 +252,20 @@ theorem GlobalSectionsBijective.nonempty [GlobalSectionsBijective k X] : Nonempt
     ((GlobalSectionsBijective.bijective_globalSectionsRingHom (k := k) (X := X)).1
       (Subsingleton.elim _ _))
 
+/-- A `k`-scheme with `H⁰(X, 𝒪_X) = k` is connected: its only idempotent global functions are
+the idempotents `0` and `1` of the field `k`. -/
+theorem GlobalSectionsBijective.connectedSpace [GlobalSectionsBijective k X] :
+    ConnectedSpace X := by
+  have := GlobalSectionsBijective.nonempty (k := k) (X := X)
+  rw [connectedSpace_iff_isIdempotentElem]
+  intro e he
+  have hb := GlobalSectionsBijective.bijective_globalSectionsRingHom (k := k) (X := X)
+  obtain ⟨c, rfl⟩ := hb.2 e
+  have hc : IsIdempotentElem c := hb.1 (by rw [map_mul]; exact he)
+  rcases IsIdempotentElem.iff_eq_zero_or_one.mp hc with rfl | rfl
+  · exact .inl (map_zero _)
+  · exact .inr (map_one _)
+
 /-- **`h⁰(X, 𝒪_X) = 1`** for a `k`-scheme `X` with `H⁰(X, 𝒪_X) = k`, using
 `H⁰(X, 𝒪_X) = Γ(X, 𝒪_X)`. -/
 theorem Modules.finrankH_unit_zero [GlobalSectionsBijective k X] :
@@ -240,5 +282,31 @@ theorem Modules.finrankH_unit_zero [GlobalSectionsBijective k X] :
         exact (map_mul φ.symm (φ c) (Modules.H.zeroLinearEquiv O x : Γ(X, ⊤))).trans
           (congrArg (· * _) (φ.symm_apply_apply c)) }
   exact e.finrank_eq.trans (Module.finrank_self k)
+
+section BaseChange
+
+/-- **Flat base change of `H⁰(X, 𝒪_X) = k` over an affine open.** Let `X` be a quasi-compact
+quasi-separated `k`-scheme with `H⁰(X, 𝒪_X) = k`, and let `P = X ×_k B` be a base change of `X`.
+Then for every affine open `A ⊆ B` the projection `π : P ⟶ B` induces an isomorphism
+`Γ(B, A) ≅ Γ(P, π⁻¹ A)`: by flat base change, `Γ(P, π⁻¹ A) = Γ(X, 𝒪_X) ⊗_k Γ(B, A)`. -/
+theorem GlobalSectionsBijective.isIso_app_of_isPullback [CompactSpace X] [QuasiSeparatedSpace X]
+    [GlobalSectionsBijective k X] {P B : Scheme.{u}} {ρ : P ⟶ X} {π : P ⟶ B}
+    {g : B ⟶ Spec (.of k)} (H : IsPullback ρ π (X ↘ Spec (.of k)) g) {A : B.Opens}
+    (hA : IsAffineOpen A) : IsIso (π.app A) := by
+  have hUY : π ⁻¹ᵁ A = ρ ⁻¹ᵁ ⊤ ⊓ π ⁻¹ᵁ A := by simp
+  have hiso := isIso_pushoutSection_of_isQuasiSeparated_of_flat_right H (US := ⊤) (UT := A)
+    (UX := ⊤) le_top le_top hUY (isAffineOpen_top _) hA isCompact_univ isQuasiSeparated_univ
+  have hpush := (isIso_pushoutSection_iff _ _ _ _).mp hiso
+  have hX : IsIso ((X ↘ Spec (.of k)).appLE ⊤ ⊤ le_top) := by
+    have h := GlobalSectionsBijective.bijective_globalSectionsRingHom (k := k) (X := X)
+    rw [globalSectionsRingHom, ← ConcreteCategory.isIso_iff_bijective] at h
+    have : IsIso (X ↘ Spec (.of k)).appTop :=
+      IsIso.of_isIso_comp_left (Scheme.ΓSpecIso (.of k)).inv _
+    simpa [Scheme.Hom.appTop, Scheme.Hom.app_eq_appLE] using this
+  have := hpush.isIso_inr_of_isIso
+  rw [Scheme.Hom.app_eq_appLE]
+  exact this
+
+end BaseChange
 
 end AlgebraicGeometry.Scheme

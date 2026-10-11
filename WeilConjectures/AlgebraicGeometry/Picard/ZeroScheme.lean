@@ -103,6 +103,11 @@ variable {k : Type u} [Field k] {X : Scheme.{u}} [X.Over (Spec (.of k))]
   [SmoothOfRelativeDimension 1 (X ↘ Spec (.of k))] [IsProper (X ↘ Spec (.of k))]
   [GeometricallyIntegral (X ↘ Spec (.of k))]
 
+/-- A morphism smooth of relative dimension `1` is smooth, hence flat and locally of finite
+presentation, as `AlgebraicGeometry.picardFunctorInvertibleDirectImage` requires. -/
+local instance {Y Z : Scheme.{u}} (f : Y ⟶ Z) [SmoothOfRelativeDimension 1 f] : Smooth f :=
+  SmoothOfRelativeDimension.smooth 1 f
+
 /-- For a class `ℒ ∈ Pic(X_T)`, the adjunction morphism `f_T^* f_{T,*} ℒ ⟶ ℒ`, where
 `f_T : X_T ⟶ T` is the base change of `f`. For `ℒ ∈ F(T)` the module `𝒩 = f_{T,*} ℒ` is
 invertible with `Rf_{T,*} ℒ ≅ 𝒩[0]`, and this is the morphism whose zero scheme is the divisor
@@ -131,8 +136,7 @@ theorem Scheme.Pic.directImageCounit_ne_zero {S : Scheme.{u}} (f : X ⟶ S) (T :
     ((Modules.pushforward (Limits.pullback.snd f T.hom)).obj ((fromSkeleton _).obj L.val))
   exact Modules.IsInvertible.not_isZero _ ((IsZero.iff_id_eq_zero _).mpr tri.symm)
 
-omit [SmoothOfRelativeDimension 1 (X ↘ Spec (.of k))] [IsProper (X ↘ Spec (.of k))]
-  [GeometricallyIntegral (X ↘ Spec (.of k))] in
+omit [GeometricallyIntegral (X ↘ Spec (.of k))] in
 /-- For `ℒ ∈ F(T)`, the source `f_T^* f_{T,*} ℒ` of the adjunction morphism is invertible, since
 `f_{T,*} ℒ ≅ R⁰f_{T,*} ℒ` is. -/
 lemma isInvertible_pullback_pushforward
@@ -212,7 +216,7 @@ theorem comap_fiberι_zeroLocus_directImageCounit_ne_bot
   let T' : Over (Spec (.of k)) := Over.mk (T.left.fromSpecResidueField t ≫ T.hom)
   let i : T' ⟶ T := Over.homMk (T.left.fromSpecResidueField t)
   let L' := Pic.map (baseChangeMap (X ↘ Spec (.of k)) i) ℒ.1.1
-  have hL' := IsInvertibleDirectImage.map (X ↘ Spec (.of k)) i ℒ.2
+  have hL' := IsInvertibleDirectImage.map_of_isProper (X ↘ Spec (.of k)) i ℒ.2
   have h𝒩 : SheafOfModules.IsInvertible.{u, u, u}
       ((Modules.pushforward (Limits.pullback.snd (X ↘ Spec (.of k)) T'.hom)).obj
         ((fromSkeleton _).obj L'.val)) :=

@@ -106,6 +106,30 @@ noncomputable def DerivedCategory.constructibleFiniteTor :
     ObjectProperty (_root_.DerivedCategory (Sheaf (Scheme.ProEt.topology X) A)) :=
   DerivedCategory.boundedConstructible A X ⊓ DerivedCategory.finiteTorAmplitude A X
 
+/-- Being bounded constructible of finite Tor amplitude is invariant under isomorphism. -/
+instance : (DerivedCategory.constructibleFiniteTor A X).IsClosedUnderIsomorphisms :=
+  have : (DerivedCategory.finiteTorAmplitude A X).IsClosedUnderIsomorphisms :=
+    ⟨fun e ⟨a, b, h⟩ ↦ ⟨a, b, (_root_.DerivedCategory.torAmplitudeIn _ a b).prop_of_iso e h⟩⟩
+  inferInstanceAs (DerivedCategory.boundedConstructible A X ⊓
+    DerivedCategory.finiteTorAmplitude A X).IsClosedUnderIsomorphisms
+
+variable {A X} in
+/-- A bounded constructible complex of finite Tor amplitude is bounded below of étale
+origin. -/
+lemma DerivedCategory.constructibleFiniteTor.plusEtaleOrigin
+    {K : _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology X) A)}
+    (hK : DerivedCategory.constructibleFiniteTor A X K) :
+    DerivedCategory.plusEtaleOrigin A X K :=
+  hK.1.plusEtaleOrigin
+
+variable {A X} in
+/-- A bounded constructible complex of finite Tor amplitude is bounded below. -/
+lemma DerivedCategory.constructibleFiniteTor.plus
+    {K : _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology X) A)}
+    (hK : DerivedCategory.constructibleFiniteTor A X K) :
+    _root_.DerivedCategory.TStructure.t.plus K :=
+  hK.plusEtaleOrigin.plus
+
 /-- Unfolding of `DerivedCategory.constructibleFiniteTor`. -/
 lemma DerivedCategory.constructibleFiniteTor_iff
     (K : _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology X) A)) :

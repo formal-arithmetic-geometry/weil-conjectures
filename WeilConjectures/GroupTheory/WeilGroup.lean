@@ -31,7 +31,10 @@ cyclic subgroup `⟨Φ⟩` and `W(π, Φ)` with the inverse image of `⟨Φ⟩` 
 
 ## Blueprint
 
-`MonoidHom.exact_weilGroupDeg` implements `lem-wf-weil-group-exact-sequence`.
+`MonoidHom.exact_weilGroupDeg` implements `lem-wf-weil-group-exact-sequence`. The Weil group of a
+scheme (`def-wf-weil-group`) is `AlgebraicGeometry.Scheme.FiniteEtale.weilGroup`, the Weil group
+`W(π, Φ)` of the action of `π₁(X₀, s)` on the geometric fibres of the constant covers and the
+geometric Frobenius.
 -/
 
 @[expose] public section

@@ -12,6 +12,8 @@ public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.AlgebraicGeometry.Morphisms.Flat
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage
 public import WeilConjectures.AlgebraicGeometry.Modules.Invertible
+public import WeilConjectures.AlgebraicGeometry.Modules.LocallyFreeAffine
+public import WeilConjectures.AlgebraicGeometry.Modules.LocallyFreeRank
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
 public import WeilConjectures.Mathlib.RingTheory.Spectrum.Prime.FreeLocus
 public import WeilConjectures.AlgebraicGeometry.Morphisms.FiberDegree
@@ -213,8 +215,32 @@ generated projective `A`-module. -/
 theorem isFiniteLocallyFree_pushforward (g : X ⟶ Y) [IsFinite g] [Flat g]
     [LocallyOfFinitePresentation g] (ℱ : X.Modules)
     [SheafOfModules.IsFiniteLocallyFree (R := X.ringCatSheaf) ℱ] :
-    SheafOfModules.IsFiniteLocallyFree (R := Y.ringCatSheaf) ((pushforward g).obj ℱ) :=
-  sorry
+    SheafOfModules.IsFiniteLocallyFree (R := Y.ringCatSheaf) ((pushforward g).obj ℱ) := by
+  have := SheafOfModules.IsFiniteLocallyFree.isLocallyFree ℱ
+  have := SheafOfModules.instIsQuasicoherentOfIsLocallyFree ℱ
+  have := isQuasicoherent_pushforward_of_isAffineHom g ℱ
+  refine isFiniteLocallyFree_of_isAffineOpen _ fun V hV ↦ ?_
+  have hV' : IsAffineOpen (g ⁻¹ᵁ V) := hV.preimage g
+  obtain ⟨hfp, hproj⟩ := finitePresentation_projective_sections ℱ hV'
+  -- `Γ(g_* ℱ, V) = Γ(ℱ, g ⁻¹ᵁ V)` is a module over `Γ(X, g ⁻¹ᵁ V)`, a `Γ(Y, V)`-algebra via `g`.
+  let := (g.app V).hom.toAlgebra
+  let : Module Γ(X, g ⁻¹ᵁ V) Γ((pushforward g).obj ℱ, V) :=
+    inferInstanceAs (Module Γ(X, g ⁻¹ᵁ V) Γ(ℱ, g ⁻¹ᵁ V))
+  have : Module.FinitePresentation Γ(X, g ⁻¹ᵁ V) Γ((pushforward g).obj ℱ, V) := hfp
+  have : Module.Projective Γ(X, g ⁻¹ᵁ V) Γ((pushforward g).obj ℱ, V) := hproj
+  have : IsScalarTower Γ(Y, V) Γ(X, g ⁻¹ᵁ V) Γ((pushforward g).obj ℱ, V) :=
+    .of_algebraMap_smul fun _ _ ↦ rfl
+  have : Module.Finite Γ(Y, V) Γ(X, g ⁻¹ᵁ V) := g.finite_app V hV
+  have : Algebra.FinitePresentation Γ(Y, V) Γ(X, g ⁻¹ᵁ V) := by
+    have := g.finitePresentation_appLE hV hV' le_rfl
+    rwa [← Hom.app_eq_appLE] at this
+  have : Module.Flat Γ(Y, V) Γ(X, g ⁻¹ᵁ V) := by
+    have := g.flat_appLE hV hV' le_rfl
+    rwa [← Hom.app_eq_appLE] at this
+  have : Module.FinitePresentation Γ(Y, V) Γ(X, g ⁻¹ᵁ V) :=
+    .of_finite_of_finitePresentation Γ(Y, V) Γ(X, g ⁻¹ᵁ V)
+  exact ⟨.trans Γ(Y, V) Γ((pushforward g).obj ℱ, V) Γ(X, g ⁻¹ᵁ V),
+    .trans Γ(Y, V) Γ(X, g ⁻¹ᵁ V) Γ((pushforward g).obj ℱ, V)⟩
 
 /-- **The pushforward of the structure sheaf along a finite locally free morphism.** If
 `g : X ⟶ Y` is finite locally free of degree `d`, then `g_* 𝒪_X` is a finite locally free
@@ -228,7 +254,35 @@ proved in the blueprint as `lem-pc-flf-properties`.
 (blueprint: `rem-ptr-pc-finite-locally-free-11`) -/
 theorem isFiniteLocallyFreeOfRank_pushforward_unit (g : X ⟶ Y) (d : ℕ)
     [g.IsFiniteLocallyFreeOfDegree d] :
-    ((pushforward g).obj (𝟙_ X.Modules)).IsFiniteLocallyFreeOfRank d :=
-  sorry
+    ((pushforward g).obj (𝟙_ X.Modules)).IsFiniteLocallyFreeOfRank d := by
+  have := SheafOfModules.isQuasicoherent_unit (R := X.ringCatSheaf)
+  have : ((pushforward g).obj (𝟙_ X.Modules)).IsQuasicoherent :=
+    isQuasicoherent_pushforward_of_isAffineHom g _
+  refine isFiniteLocallyFreeOfRank_of_isAffineOpen _ fun V hV ↦ ?_
+  have hV' : IsAffineOpen (g ⁻¹ᵁ V) := hV.preimage g
+  let := (g.app V).hom.toAlgebra
+  have : Module.Finite Γ(Y, V) Γ(X, g ⁻¹ᵁ V) := g.finite_app V hV
+  have : Algebra.FinitePresentation Γ(Y, V) Γ(X, g ⁻¹ᵁ V) := by
+    have := g.finitePresentation_appLE hV hV' le_rfl
+    rwa [← Hom.app_eq_appLE] at this
+  have hfl : Module.Flat Γ(Y, V) Γ(X, g ⁻¹ᵁ V) := by
+    have := g.flat_appLE hV hV' le_rfl
+    rwa [← Hom.app_eq_appLE] at this
+  have hfp : Module.FinitePresentation Γ(Y, V) Γ(X, g ⁻¹ᵁ V) :=
+    .of_finite_of_finitePresentation Γ(Y, V) Γ(X, g ⁻¹ᵁ V)
+  -- `Spec Γ(X, g ⁻¹ᵁ V) ⟶ Spec Γ(Y, V)` is the base change of `g` along `Spec Γ(Y, V) ⟶ Y`.
+  have hpb : IsPullback hV'.fromSpec
+      (Spec.map (CommRingCat.ofHom (algebraMap Γ(Y, V) Γ(X, g ⁻¹ᵁ V)))) g hV.fromSpec := by
+    refine (IsOpenImmersion.isPullback _ _ _ _ ?_ ?_).flip
+    · rw [← IsAffineOpen.SpecMap_appLE_fromSpec g hV hV' le_rfl, ← Hom.app_eq_appLE]
+      rfl
+    · rw [hV.opensRange_fromSpec, hV'.opensRange_fromSpec]
+  refine ⟨hfp, hfl, fun p ↦ ?_⟩
+  calc Module.rankAtStalk Γ(X, g ⁻¹ᵁ V) p = p.asIdeal.fiberDegree Γ(X, g ⁻¹ᵁ V) :=
+        Module.rankAtStalk_eq p
+    _ = (Spec.map (CommRingCat.ofHom (algebraMap Γ(Y, V) Γ(X, g ⁻¹ᵁ V)))).fiberDegree p :=
+        (Hom.fiberDegree_SpecMap _ _ p).symm
+    _ = g.fiberDegree (hV.fromSpec p) := g.fiberDegree_of_isPullback hpb p
+    _ = d := Hom.IsFiniteLocallyFreeOfDegree.fiberDegree_eq _
 
 end AlgebraicGeometry.Scheme.Modules

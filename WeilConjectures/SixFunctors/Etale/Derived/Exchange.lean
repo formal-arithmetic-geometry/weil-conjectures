@@ -9,6 +9,7 @@ public import WeilConjectures.AlgebraicGeometry.InvertibleExponent
 public import WeilConjectures.SixFunctors.Etale.Derived.Coefficients
 public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.Proper
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekBaseChange
+public import WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormula
 
 /-!
 # Compact-support base change, the projection formula and finite reduction
@@ -30,14 +31,16 @@ proper map of `c`. The blueprint states it on `D⁺` instead.
 The statement for the canonical exchange map
 `AlgebraicGeometry.Etale.rightDerivedLowerShriekBaseChangeMap` is a corollary. That map is only
 defined for `f'` quasi-compact, and it goes through the comparison isomorphism
-`AlgebraicGeometry.Etale.rightDerivedLowerShriekIso`, which rests on an unproved instance that is
-not expected to hold on unbounded derived categories in this generality. Both the hypothesis
-`[QuasiCompact f']` and this dependence should disappear once `Ex_!` is constructed on `D⁺`.
+`AlgebraicGeometry.Etale.rightDerivedLowerShriekIso`, which is defined for torsion coefficients
+and rests on unbounded proper base change. The hypothesis `[QuasiCompact f']` should disappear
+once `Ex_!` is constructed on `D⁺`.
 
-The projection map `PF : Rf_! K ⊗^L L ⟶ Rf_!(K ⊗^L Lf^* L)` is not
-constructed yet, so the projection formula below asserts that the two objects in question are
-isomorphic. It should be restated as `IsIso PF`, in the style of
-`AlgebraicGeometry.Etale.isIso_baseChange_of_isProper`.
+The projection formula is stated as the invertibility of the projection map
+`PF : Rf_! K ⊗^L L ⟶ Rf_!(K ⊗^L Lf^* L)` of `AlgebraicGeometry.Etale.projectionMap`
+(`AlgebraicGeometry.Etale.hasProjectionFormula_of_finite`, in
+`WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormula`); its case of `sk-thm-sf-pf-finite`,
+for `K` bounded constructible and `L` in `Dᵇctf`, is
+`AlgebraicGeometry.Etale.hasProjectionFormula_of_boundedConstructible`.
 
 The exchange `Ex_*` for `Rf_*` does already exist in this repository, as
 `AlgebraicGeometry.Etale.baseChange` and `AlgebraicGeometry.Etale.derivedBaseChangeMapPlus`.
@@ -46,7 +49,7 @@ The exchange `Ex_*` for `Rf_*` does already exist in this repository, as
 
 - `AlgebraicGeometry.Etale.isIso_rightDerivedLowerShriekOfCompactificationBaseChangeMap_of_finite`
 - `AlgebraicGeometry.Etale.isIso_rightDerivedLowerShriekBaseChangeMap`
-- `AlgebraicGeometry.Etale.nonempty_iso_derivedTensor_rightDerivedLowerShriek`
+- `AlgebraicGeometry.Etale.hasProjectionFormula_of_boundedConstructible`
 - `AlgebraicGeometry.Etale.nonempty_iso_reductionModIdeal_rightDerivedLowerShriek`,
   `AlgebraicGeometry.Etale.nonempty_iso_reductionModIdeal_rightDerivedLowerStar`
 - `AlgebraicGeometry.Etale.nonempty_iso_reductionModIdeal_leftDerivedUpperStar`
@@ -119,16 +122,15 @@ functors `D(X_ét, Λ) ⥤ D(Y'_ét, Λ)`.
 `Ex_!` is `Ex_!(c)` for the chosen compactification `c` of `f`, followed by the comparison
 isomorphism `AlgebraicGeometry.Etale.rightDerivedLowerShriekIso` for `f'`, so this follows from
 `AlgebraicGeometry.Etale.isIso_rightDerivedLowerShriekOfCompactificationBaseChangeMap_of_finite`.
-That comparison isomorphism rests on the unproved instance
-`AlgebraicGeometry.Etale.isIso_rightDerivedLowerShriekOfCompactificationComparison`, which is not
-expected to hold on unbounded derived categories in this generality; the blueprint states this
-theorem on `D⁺`. If `f` is quasi-compact, `[QuasiCompact f']` is obtained from `sq` by
-`MorphismProperty.of_isPullback`. -/
+That comparison isomorphism is
+`AlgebraicGeometry.Etale.isIso_rightDerivedLowerShriekOfCompactificationComparison`, which rests
+on unbounded proper base change; the blueprint states this theorem on `D⁺`. If `f` is
+quasi-compact, `[QuasiCompact f']` is obtained from `sq` by `MorphismProperty.of_isPullback`. -/
 -- TODO: state this for the `D⁺` exchange map built from `derivedBaseChangeMapPlus`, and drop
 -- `[QuasiCompact f']` once `Ex_!` is constructed without it.
 theorem isIso_rightDerivedLowerShriekBaseChangeMap [Finite Λ] [HasCompactification f]
     [HasCompactification f'] [QuasiCompact f'] (sq : IsPullback g' f' f g) :
-    IsIso (rightDerivedLowerShriekBaseChangeMap (ModuleCat.{u + 1} Λ) sq) := by
+    IsIso (rightDerivedLowerShriekBaseChangeMap Λ sq) := by
   have := isIso_rightDerivedLowerShriekOfCompactificationBaseChangeMap_of_finite Λ sq
     (HasCompactification.compactification f)
   unfold rightDerivedLowerShriekBaseChangeMap
@@ -148,21 +150,19 @@ on `X` and `L` bounded constructible *of finite Tor amplitude* on `Y`, the proje
 
 `PF : Rf_! K ⊗^L L ⟶ Rf_!(K ⊗^L Lf^* L)`
 
-is an isomorphism, naturally in `K` and `L`. The finite Tor amplitude of `L` is essential: the
-fibrewise argument represents the stalks of `L` by bounded complexes of finite free modules. -/
--- TODO(unify): def:exchange-projection — restate as `IsIso (PF f K L)`.
-theorem nonempty_iso_derivedTensor_rightDerivedLowerShriek [Finite Λ]
+is an isomorphism, naturally in `K` and `L`: the projection map is a natural transformation, and
+it is invertible at every such `K` and `L`. It is the case of
+`AlgebraicGeometry.Etale.hasProjectionFormula_of_finite` treated by the fibrewise argument of
+the blueprint, which represents the stalks of `L` by bounded complexes of finite free modules;
+the hypotheses on `K` and `L` are not needed for the conclusion. -/
+theorem hasProjectionFormula_of_boundedConstructible [Finite Λ]
     [HasInvertibleExponent Λ Y] [LocallyOfFiniteType f]
     (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
     (L : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
-    (hK : DerivedCategory.boundedConstructible (ModuleCat.{u + 1} Λ) X K)
-    (hL : DerivedCategory.boundedConstructibleFiniteTor Λ Y L) :
-    Nonempty (((derivedTensor (ModuleCat.{u + 1} Λ) Y).obj
-          ((R(f)_![ModuleCat.{u + 1} Λ]).obj K)).obj L ≅
-      (R(f)_![ModuleCat.{u + 1} Λ]).obj
-        (((derivedTensor (ModuleCat.{u + 1} Λ) X).obj K).obj
-          ((L((f)^*[ModuleCat.{u + 1} Λ])).obj L))) :=
-  sorry
+    (_hK : DerivedCategory.boundedConstructible (ModuleCat.{u + 1} Λ) X K)
+    (_hL : DerivedCategory.boundedConstructibleFiniteTor Λ Y L) :
+    HasProjectionFormula (ModuleCat.{u + 1} Λ) f K L :=
+  hasProjectionFormula_of_finite Λ f K L
 
 /-- Blueprint `sk-prop-sf-pf-reduction`: Projection formula: compatibility with finite
 reduction

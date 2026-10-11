@@ -8,6 +8,7 @@ module
 public import Mathlib.AlgebraicGeometry.AffineScheme
 public import WeilConjectures.Mathlib.AlgebraicGeometry.GammaSpecAdjunction
 public import Mathlib.RingTheory.PrincipalIdealDomain
+public import Mathlib.RingTheory.IntegralClosure.IntegrallyClosed
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Restrict
 
 /-!
@@ -30,6 +31,9 @@ to `Spec Γ(X, ⊤)_x`. We record this morphism and the induced map on global se
 We also show that an affine scheme `V` equipped with a morphism `g : V ⟶ S` is covered by
 finitely many basic opens, each of which lands in an affine open of `S`.
 
+The local rings of `Spec A` are integrally closed if `A` is an integrally closed domain
+(`AlgebraicGeometry.Scheme.isIntegrallyClosed_stalk_Spec`).
+
 We also record that, for a morphism `f : X ⟶ Y`, the affine opens of `X` contained in the
 preimage of an affine open of `Y` form a basis of the topology of `X`
 (`AlgebraicGeometry.isBasis_affineOpens_le_preimage`).
@@ -41,6 +45,10 @@ Finally, a morphism `a : T ⟶ U` to an affine scheme inducing an isomorphism on
 is universal among morphisms to affine schemes: every `φ : T ⟶ V` with `V` affine factors as
 `a ≫ h` (`AlgebraicGeometry.Scheme.Hom.exists_comp_eq_of_isIso_appTop`), and `h` is unique
 (`AlgebraicGeometry.Scheme.Hom.cancel_left_of_isIso_appTop`).
+
+If `π : P ⟶ B` has a section and induces isomorphisms on sections over affine opens, then it
+induces bijections on sections over all opens
+(`AlgebraicGeometry.Scheme.Hom.bijective_app_of_comp_eq_id`).
 -/
 
 @[expose] public section
@@ -334,5 +342,66 @@ lemma Scheme.iSup_basicOpen_eq_top_of_sum_eq_one {X : Scheme.{u}} {ι : Type*} [
     (Ideal.eq_top_of_isUnit_mem _ ?_ isUnit_one)
   rw [← h]
   exact sum_mem fun i _ ↦ Ideal.subset_span ⟨i, rfl⟩
+
+namespace Scheme
+
+/-- If `π : P ⟶ B` has a section `σ` and `π` induces isomorphisms `Γ(B, A) ≅ Γ(P, π⁻¹ A)` on
+affine opens `A`, then it induces bijections `Γ(B, V) ≅ Γ(P, π⁻¹ V)` on all opens `V`. -/
+theorem Hom.bijective_app_of_comp_eq_id {P B : Scheme.{u}} (π : P ⟶ B) (σ : B ⟶ P)
+    (hσ : σ ≫ π = 𝟙 B) (h : ∀ A : B.Opens, IsAffineOpen A → IsIso (π.app A)) (V : B.Opens) :
+    Function.Bijective (π.app V) := by
+  have hle (W : B.Opens) : W ≤ σ ⁻¹ᵁ π ⁻¹ᵁ W := by
+    rw [← Scheme.Hom.comp_preimage, hσ]
+    exact le_rfl
+  have gen (f : B ⟶ B) (hf : f = 𝟙 B) (W : B.Opens) (hW : W ≤ f ⁻¹ᵁ W) (a : Γ(B, W)) :
+      B.presheaf.map (homOfLE hW).op (f.app W a) = a := by
+    subst hf
+    change B.presheaf.map (𝟙 (Opposite.op W)) a = a
+    rw [B.presheaf.map_id]
+    rfl
+  have key (W : B.Opens) (a : Γ(B, W)) :
+      B.presheaf.map (homOfLE (hle W)).op (σ.app _ (π.app W a)) = a :=
+    gen (σ ≫ π) hσ W (hle W) a
+  refine ⟨fun a b hab ↦ by rw [← key V a, ← key V b, hab], fun f ↦ ?_⟩
+  refine ⟨B.presheaf.map (homOfLE (hle V)).op (σ.app _ f), ?_⟩
+  refine TopCat.Sheaf.eq_of_locally_eq' P.sheaf
+    (fun A : {A : B.Opens // IsAffineOpen A ∧ A ≤ V} ↦ π ⁻¹ᵁ A.1) (π ⁻¹ᵁ V)
+    (fun A ↦ homOfLE (π.preimage_mono A.2.2)) ?_ _ _ fun A ↦ ?_
+  · intro x hx
+    obtain ⟨A, hA, hxA, hAV⟩ := exists_isAffineOpen_mem_and_subset (x := π x) (U := V) hx
+    exact TopologicalSpace.Opens.mem_iSup.mpr ⟨⟨A, hA, hAV⟩, hxA⟩
+  · have := h A.1 A.2.1
+    obtain ⟨b, hb⟩ := (ConcreteCategory.bijective_of_isIso (π.app A.1)).2
+      (P.presheaf.map (homOfLE (π.preimage_mono A.2.2)).op f)
+    change P.presheaf.map _ (π.app V _) = P.presheaf.map _ f
+    have e1 (y : Γ(B, V)) : P.presheaf.map (homOfLE (π.preimage_mono A.2.2)).op (π.app V y) =
+        π.app A.1 (B.presheaf.map (homOfLE A.2.2).op y) :=
+      (ConcreteCategory.congr_hom (π.naturality (homOfLE A.2.2).op) y).symm
+    have e2 : σ.app (π ⁻¹ᵁ A.1) (P.presheaf.map (homOfLE (π.preimage_mono A.2.2)).op f) =
+        B.presheaf.map (homOfLE (σ.preimage_mono (π.preimage_mono A.2.2))).op
+          (σ.app (π ⁻¹ᵁ V) f) :=
+      ConcreteCategory.congr_hom (σ.naturality (homOfLE (π.preimage_mono A.2.2)).op) f
+    rw [e1, ← hb]
+    congr 1
+    rw [← key A.1 b, hb, e2]
+    simp only [← ConcreteCategory.comp_apply]
+    rw [Category.assoc, Category.assoc, ← Functor.map_comp, ← Functor.map_comp]
+    rfl
+
+end Scheme
+
+/-- The local rings of the spectrum of an integrally closed domain are integrally closed. -/
+lemma Scheme.isIntegrallyClosed_stalk_Spec (A : Type u) [CommRing A] [IsDomain A]
+    [IsIntegrallyClosed A] (z : Spec (.of A)) :
+    IsIntegrallyClosed ((Spec (.of A)).presheaf.stalk z) := by
+  let := TopCat.Presheaf.algebra_section_stalk (Spec (.of A)).presheaf
+    (⟨z, trivial⟩ : (⊤ : (Spec (.of A)).Opens))
+  have := (isAffineOpen_top (Spec (.of A))).isLocalization_stalk ⟨z, trivial⟩
+  have : IsIntegrallyClosed Γ(Spec (.of A), ⊤) :=
+    .of_equiv (Scheme.ΓSpecIso (.of A)).commRingCatIsoToRingEquiv.symm
+  have : IsDomain Γ(Spec (.of A), ⊤) :=
+    MulEquiv.isDomain A (Scheme.ΓSpecIso (.of A)).commRingCatIsoToRingEquiv.toMulEquiv
+  exact isIntegrallyClosed_of_isLocalization _ _
+    ((isAffineOpen_top _).primeIdealOf ⟨z, trivial⟩).asIdeal.primeCompl_le_nonZeroDivisors
 
 end AlgebraicGeometry

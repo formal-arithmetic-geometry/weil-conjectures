@@ -5,6 +5,8 @@ Authors: Claude
 -/
 module
 
+public import WeilConjectures.AlgebraicGeometry.GeometricFrobenius
+public import WeilConjectures.SixFunctors.Etale.Derived.AlgClosedField
 public import WeilConjectures.SixFunctors.Etale.Derived.Stability
 
 /-!
@@ -29,6 +31,13 @@ underlying complexes commuting with the two `φ`s. These form the category
 - `AlgebraicGeometry.Etale.WeilComplex.Hom` and the `Category` instance on
   `AlgebraicGeometry.Etale.WeilComplex`.
 - `AlgebraicGeometry.Etale.WeilComplex.forget`: the forgetful functor to `Dctf(X, Λ)`.
+
+## Main results
+
+- `AlgebraicGeometry.Etale.WeilComplex.map_hom_eq_zero_of_iso_unit` and
+  `AlgebraicGeometry.Etale.WeilComplex.map_hom_eq_zero_of_iso_unit_geometricFiber`: on a point,
+  there is no nonzero morphism of strict Weil complexes from `Λ` to `Λ[1]`, whatever the Weil
+  structures, so the Hom-groups are not Ext groups of Weil sheaves.
 
 ## Implementation notes
 
@@ -61,7 +70,7 @@ variable {FA : A → A → Type (u + 1)} {CA : A → Type (u + 1)}
 
 namespace Etale
 
-variable {X : Scheme.{u}} (g : X ≅ X)
+variable [UpperStarPreservesFlat A] {X : Scheme.{u}} (g : X ≅ X)
 
 /-- Blueprint `sk-def-sf-weil-complexes`: Strict Weil complexes.
 
@@ -136,6 +145,46 @@ noncomputable def forget : WeilComplex A g ⥤ DerivedCategoryFiniteTor A X wher
   map f := f.hom
 
 end WeilComplex
+
+section HomGroups
+
+variable {K : Type u} [Field K] [IsAlgClosed K] {Λ : Type (u + 1)} [CommRing Λ]
+
+/-- Blueprint `sk-def-sf-weil-complexes`: Strict Weil complexes.
+
+The Hom-groups of strict Weil complexes are not Ext groups of Weil sheaves. On a point
+`Y ≅ Spec K`, `K` algebraically closed, a strict Weil complex `M` with underlying complex `Λ`
+and one `N` with underlying complex `Λ[1]` admit no nonzero morphism `M ⟶ N`, whatever their
+Weil structures: the underlying morphism lies in `Hom(Λ, Λ[1]) = H¹(Y_ét, Λ) = 0`. In
+particular a nonsplit Frobenius extension of `Λ` by `Λ` (a Jordan block), which is a nonzero
+extension class of Weil sheaves, gives no nonzero map `Λ ⟶ Λ[1]` of pairs. -/
+lemma WeilComplex.map_hom_eq_zero_of_iso_unit {Y : Scheme.{u}} (e : Y ≅ Spec (.of K))
+    {h : Y ≅ Y} {M N : WeilComplex (ModuleCat.{u + 1} Λ) h}
+    (eM : (DerivedCategoryFiniteTor.ι _ Y).obj M.obj ≅ 𝟙_ _)
+    (eN : (DerivedCategoryFiniteTor.ι _ Y).obj N.obj ≅ (𝟙_ _)⟦(1 : ℤ)⟧) (f : M ⟶ N) :
+    (DerivedCategoryFiniteTor.ι _ Y).map f.hom = 0 := by
+  rw [← cancel_epi eM.inv, ← cancel_mono eN.hom, Limits.comp_zero, Limits.zero_comp]
+  exact DerivedCategory.unit_hom_shift_one_eq_zero_of_iso Λ e _
+
+variable {k₀ : Type u} [Field k₀] [Finite k₀]
+
+/-- Blueprint `sk-def-sf-weil-complexes`: Strict Weil complexes.
+
+The Hom-groups of `D^b_{ctf,W}(X, Λ)` are not Ext groups of Weil sheaves: on the geometric
+fiber `X = Spec k̄` of the point `Spec k₀`, with its geometric-Frobenius automorphism `g_γ`,
+there is no nonzero morphism of strict Weil complexes from one with underlying complex `Λ` to
+one with underlying complex `Λ[1]`, so a nonsplit Frobenius extension of `Λ` by `Λ` (a Jordan
+block) gives no nonzero map `Λ ⟶ Λ[1]` of pairs. -/
+lemma WeilComplex.map_hom_eq_zero_of_iso_unit_geometricFiber
+    {M N : WeilComplex (ModuleCat.{u + 1} Λ)
+      (Scheme.Hom.geometricGaloisFrobenius (𝟙 (Spec (.of k₀))))}
+    (eM : (DerivedCategoryFiniteTor.ι _ _).obj M.obj ≅ 𝟙_ _)
+    (eN : (DerivedCategoryFiniteTor.ι _ _).obj N.obj ≅ (𝟙_ _)⟦(1 : ℤ)⟧) (f : M ⟶ N) :
+    (DerivedCategoryFiniteTor.ι _ _).map f.hom = 0 :=
+  WeilComplex.map_hom_eq_zero_of_iso_unit
+    (asIso (pullback.snd (𝟙 (Spec (.of k₀))) (Scheme.specAlgebraicClosure k₀).hom)) eM eN f
+
+end HomGroups
 
 end Etale
 

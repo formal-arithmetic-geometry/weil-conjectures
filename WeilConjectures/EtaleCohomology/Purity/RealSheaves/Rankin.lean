@@ -40,10 +40,10 @@ is used here in its place. The numerator `det (1 - F T ∣ H_c¹ (U, ℱ))` of t
 asserted to be some polynomial, which is all that the Rankin–Selberg argument uses.
 
 The Euler product identity `AlgebraicGeometry.WeilGroup.exists_eulerSeries_mul_eq_coe` is the
-Grothendieck–Lefschetz trace formula; like the other statements of the real-sheaves block (see
-the implementation notes of `WeilConjectures.EtaleCohomology.Purity.RealSheaves.Purity`) it is
-not a consequence of the data of an `AlgebraicGeometry.WeilGroup` alone, and becomes provable
-once `AlgebraicGeometry.WeilGroup` is rebased on the étale fundamental group.
+Grothendieck–Lefschetz trace formula for the lisse sheaf attached to a representation of the
+Weil group of the étale fundamental group (`AlgebraicGeometry.WeilGroup`), which is not
+available. It needs `ℓ ≠ char 𝔽_q`: for `ℓ = p` the `L`-function of a `p`-adic character of
+infinite geometric image, such as that of an Artin–Schreier–Witt `ℤ_p`-tower, is not rational.
 
 ## Main definitions
 
@@ -228,22 +228,6 @@ section Positivity
 open PowerSeries
 
 open scoped ComplexOrder
-
-/-- The complex local polynomial takes the value `1` at `0`. -/
-theorem eval_zero_map_localPolynomial (x : C.finitePoints) :
-    ((W.localPolynomial l ρ x).map ι).eval 0 = 1 := by
-  rw [map_localPolynomial, Polynomial.eval_multiset_prod, Multiset.map_map]
-  exact Multiset.prod_eq_one fun a ha ↦ by
-    obtain ⟨c, -, rfl⟩ := Multiset.mem_map.1 ha
-    simp
-
-/-- The constant term of a local factor of the Euler series is `1`. -/
-theorem constantCoeff_eulerFactor (x : C.finitePoints) :
-    PowerSeries.constantCoeff (W.eulerFactor l ρ ι x) = 1 := by
-  rw [eulerFactor, PowerSeries.constantCoeff_inv, ← coeff_zero_eq_constantCoeff_apply,
-    Polynomial.coeff_coe, Polynomial.coeff_zero_eq_eval_zero, Polynomial.eval_comp,
-    Polynomial.eval_pow, Polynomial.eval_X, zero_pow (p.degreeOver_ne_zero x.2),
-    eval_zero_map_localPolynomial, inv_one]
 
 /-- The power sums of the pairwise products of two multisets are the products of their power
 sums. -/
@@ -472,11 +456,10 @@ is only recorded as some polynomial `P`.
 
 This is the curve case of the Euler-product form of the Grothendieck–Lefschetz trace formula,
 together with `H_c⁰ (U, ℱ) = 0` (`lem-a1-affine-hc0`) and the coinvariant description of
-`H_c²` (`lem-a1-affine-hc2`). It needs the trace formula and the identification of `W (U₀)`
-with the Weil group of the étale fundamental group, neither of which is available; see the
-implementation notes. -/
+`H_c²` (`lem-a1-affine-hc2`), for `ℓ ≠ char 𝔽_q`. It needs the trace formula, which is not
+available; see the implementation notes. -/
 theorem exists_eulerSeries_mul_eq_coe [IsAffine C] [SmoothOfRelativeDimension 1 p]
-    [GeometricallyConnected p] (hρ : W.IsLisse l ρ) :
+    [GeometricallyConnected p] [Fact (ringChar K ≠ l)] (hρ : W.IsLisse l ρ) :
     ∃ P : Polynomial ℂ, W.eulerSeries l ρ ι *
       (((W.compactTopFrobenius l ρ).charpolyRev.map ι : Polynomial ℂ) : PowerSeries ℂ) = P := by
   sorry

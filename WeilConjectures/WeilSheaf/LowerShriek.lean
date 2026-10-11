@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Additive
+public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Triangulated
 public import WeilConjectures.Compactification.NagataCompactification
 public import WeilConjectures.WeilSheaf.OpenImmersion
 
@@ -120,6 +121,16 @@ theorem WeilComplex.objectProperty_rightDerivedLowerShriek (f : X ⟶ Y)
     WeilComplex.objectProperty k₀ l Y ((ProEtaleWeilSheaf.rightDerivedLowerShriek k₀ l f
       (HasCompactification.compactification f)).obj K) := by
   let c := HasCompactification.compactification f
+  -- `c.Z` is noetherian, being proper over the noetherian `Y`; so the open immersion `c.i` is
+  -- quasi-compact.
+  have : IsLocallyNoetherian Y :=
+    LocallyOfFiniteType.isLocallyNoetherian (Y ↘ Spec (CommRingCat.of k₀))
+  have : CompactSpace Y :=
+    QuasiCompact.compactSpace_of_compactSpace (Y ↘ Spec (CommRingCat.of k₀))
+  have : IsLocallyNoetherian c.Z := LocallyOfFiniteType.isLocallyNoetherian c.g
+  have : CompactSpace c.Z := QuasiCompact.compactSpace_of_compactSpace c.g
+  have : IsNoetherian c.Z := ⟨⟩
+  have : TopologicalSpace.NoetherianSpace X := c.i.isOpenEmbedding.isInducing.noetherianSpace
   have hK' : WeilComplex.objectProperty k₀ l c.Z
       ((ProEtaleWeilSheaf.extensionByZero k₀ l c.i).mapDerivedCategory.obj K) :=
     ⟨(ProEtaleWeilSheaf.extensionByZero k₀ l c.i).bounded_mapDerivedCategory_obj hK.1,
@@ -174,6 +185,36 @@ instance (f : X ⟶ Y)
     [QuasiSeparated (Y ↘ Spec (CommRingCat.of k₀))] :
     (WeilComplex.derivedLowerShriek k₀ l f).Additive :=
   ObjectProperty.liftFullSubcategory_additive _ _ _ _
+
+noncomputable instance (f : X ⟶ Y) [f.IsOver (Spec (CommRingCat.of k₀))]
+    (c : Compactification f) :
+    (ProEtaleWeilSheaf.rightDerivedLowerShriek k₀ l f c).CommShift ℤ := by
+  unfold ProEtaleWeilSheaf.rightDerivedLowerShriek
+  infer_instance
+
+/-- The direct image with compact support is a triangulated functor. -/
+instance (f : X ⟶ Y) [f.IsOver (Spec (CommRingCat.of k₀))] (c : Compactification f) :
+    (ProEtaleWeilSheaf.rightDerivedLowerShriek k₀ l f c).IsTriangulated := by
+  unfold ProEtaleWeilSheaf.rightDerivedLowerShriek
+  infer_instance
+
+noncomputable instance (f : X ⟶ Y)
+    [f.IsOver (Spec (CommRingCat.of k₀))] [IsSeparated f] [LocallyOfFiniteType f]
+    [QuasiCompact f] [LocallyOfFiniteType (Y ↘ Spec (CommRingCat.of k₀))]
+    [QuasiCompact (Y ↘ Spec (CommRingCat.of k₀))]
+    [QuasiSeparated (Y ↘ Spec (CommRingCat.of k₀))] :
+    (WeilComplex.derivedLowerShriek k₀ l f).CommShift ℤ :=
+  ObjectProperty.commShiftLiftFullSubcategory _ _ _ _
+
+/-- The direct image with compact support of Weil complexes is a triangulated functor. -/
+instance (f : X ⟶ Y)
+    [f.IsOver (Spec (CommRingCat.of k₀))] [IsSeparated f] [LocallyOfFiniteType f]
+    [QuasiCompact f] [LocallyOfFiniteType (Y ↘ Spec (CommRingCat.of k₀))]
+    [QuasiCompact (Y ↘ Spec (CommRingCat.of k₀))]
+    [QuasiSeparated (Y ↘ Spec (CommRingCat.of k₀))]
+    [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))] :
+    (WeilComplex.derivedLowerShriek k₀ l f).IsTriangulated :=
+  ObjectProperty.isTriangulated_liftFullSubcategory _ _ _ _
 
 instance (f : X ⟶ Y)
     [f.IsOver (Spec (CommRingCat.of k₀))] [IsSeparated f] [LocallyOfFiniteType f]

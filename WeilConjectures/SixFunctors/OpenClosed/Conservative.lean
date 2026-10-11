@@ -28,8 +28,6 @@ by assumption; likewise for `i`.
 
 ## Main results
 
-- `AlgebraicGeometry.Etale.isZero_of_isZero_upperStar`: a sheaf killed by `j^*` and `i^*` is
-  zero, for any Grothendieck abelian coefficient category.
 - `AlgebraicGeometry.Etale.jointlyReflectIsomorphisms_upperStar`: the pair `(j^*, i^*)`
   jointly reflects isomorphisms, as a `CategoryTheory.JointlyReflectIsomorphisms` for the
   two-element family `CategoryTheory.pairFunctor` indexed by `Bool`, with `j^*` at `true`
@@ -100,22 +98,6 @@ lemma Etale.isIso_uliftSheafFiber_map_of_isIso_upperStar_map
     exact Etale.isIso_uliftSheafFiber_comp_map_of_isIso_upperStar_map A j φ hj t
   · subst ht
     exact Etale.isIso_uliftSheafFiber_comp_map_of_isIso_upperStar_map A i φ hi t
-
-include hij in
-omit [HasSmallSiteSheafify A] in
-/-- Blueprint `lem-exc-open-closed-detection` (étale form): Detection by the open and the closed
-restriction
-
-Let `j : U ⟶ X` be an open immersion and `i : Z ⟶ X` a closed immersion whose range is the
-complement of the range of `j`. An `A`-valued étale sheaf `F` on `X` with `j^* F = 0` and
-`i^* F = 0` is zero, for any Grothendieck abelian coefficient category `A`.
-
-For a concrete `A` this is the case `0 ⟶ F` of
-`AlgebraicGeometry.Etale.jointlyReflectIsomorphisms_upperStar`, which is proved through the
-geometric stalks; those are not available for a general `A`. -/
-theorem Etale.isZero_of_isZero_upperStar {F : Sheaf X.smallEtaleTopology A}
-    (hj : IsZero ((j)^*[A].obj F)) (hi : IsZero ((i)^*[A].obj F)) : IsZero F :=
-  sorry
 
 variable {FC : A → A → Type*} {CC : A → Type (u + 1)}
   [∀ (P Q : A), FunLike (FC P Q) (CC P) (CC Q)] [ConcreteCategory.{u + 1} A FC]

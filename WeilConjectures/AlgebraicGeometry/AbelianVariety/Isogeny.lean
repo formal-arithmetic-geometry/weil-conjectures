@@ -75,7 +75,8 @@ theorem locallyQuasiFinite_npow_id_of_isAlgClosed [IsAlgClosed K] (A : Over (Spe
     LocallyQuasiFinite (𝟙 A ^ n).left := by
   set f := (𝟙 A ^ n).left
   -- A symmetric ample module `N` with `[n]^* N ≅ N^{⊗ n²}`.
-  obtain ⟨L, hLinv, hL⟩ := IsAbelianVariety.exists_isAmple A
+  obtain ⟨L, hL⟩ := IsAbelianVariety.exists_isAmple A
+  have hLinv := hL.isInvertible
   have : L.symmetrisation.IsInvertible :=
     inferInstanceAs (Scheme.Modules.tensorObj L (overPullback ι[A] L)).IsInvertible
   have hN := IsAbelianVariety.isAmple_symmetrisation A L hL
@@ -273,6 +274,7 @@ theorem IsIsogeny.fiberDegree_eq (f : A ⟶ B) [IsIsogeny f] [IsAffineHom f.left
 
 variable [IsAbelianVariety A] [IsAbelianVariety B]
 
+omit [IsAbelianVariety B] in
 /-- Blueprint `sk-prop-av-isogeny-degree`: The degree of an isogeny is the degree of the kernel.
 
 An isogeny of abelian varieties is a finite morphism: it is proper, `A` being proper, and has
@@ -319,19 +321,48 @@ theorem isIsogeny_npow_id (n : ℕ) (hn : 0 < n) : IsIsogeny (𝟙 A ^ n) :=
   have := surjective_npow_id A n hn
   { isFinite_ker := isFinite_torsionSubgroupScheme A n hn }
 
+open Scheme.Modules in
 /-- Blueprint `sk-prop-av-isogeny`: The multiplication-by-`n` isogeny.
 
-Multiplication by `0 < n` on an abelian variety of dimension `g` has degree `n ^ (2 * g)`. -/
+Multiplication by `0 < n` on an abelian variety of dimension `g` has degree `n ^ (2 * g)`.
+
+Let `N = L ⊗ [-1]^* L` for an ample invertible `L`; it is ample and symmetric, so
+`[n]^* N ≅ N^{⊗ n²}` (`AlgebraicGeometry.nonempty_iso_overPullback_npow_id`). Hence
+`deg_{[n]^* N}(A) = deg_{N^{⊗ n²}}(A) = n^{2g} deg_N(A)`
+(`AlgebraicGeometry.Scheme.Hom.degree_tensorPow`), while
+`deg_{[n]^* N}(A) = deg [n] · deg_N(A)` for the finite surjective `[n]`
+(`AlgebraicGeometry.Scheme.Hom.degree_pullback`), and `deg [n]` is the order of `A[n]`
+(`AlgebraicGeometry.IsIsogeny.finrank_eq`). As `deg_N(A) > 0` (Stacks 0BEV), `deg [n] = n^{2g}`.
+-/
 theorem isogenyDegree_npow_id (n : ℕ) (hn : 0 < n) :
-    isogenyDegree (𝟙 A ^ n) = n ^ (2 * IsAbelianVariety.dim A) :=
-  sorry
+    isogenyDegree (𝟙 A ^ n) = n ^ (2 * IsAbelianVariety.dim A) := by
+  obtain ⟨L, hL⟩ := IsAbelianVariety.exists_isAmple A
+  have hLinv := hL.isInvertible
+  have : L.symmetrisation.IsInvertible :=
+    inferInstanceAs (Scheme.Modules.tensorObj L (overPullback ι[A] L)).IsInvertible
+  have hN := IsAbelianVariety.isAmple_symmetrisation A L hL
+  obtain ⟨e⟩ := nonempty_iso_overPullback_npow_id A L.symmetrisation
+    (IsAbelianVariety.nonempty_iso_overPullback_inv_symmetrisation A L) n
+  have := isIsogeny_npow_id (A := A) n hn
+  have := isFinite_npow_id A n hn
+  have := surjective_npow_id A n hn
+  have : IsReduced A.left := GeometricallyReduced.isReduced_of_flat_of_isLocallyNoetherian A.hom
+  have : IsIntegral A.left := isIntegral_of_irreducibleSpace_of_isReduced _
+  have hpull := A.hom.degree_pullback A.hom (𝟙 A ^ n).left (Over.w _) L.symmetrisation hN
+  rw [A.hom.degree_congr e, A.hom.degree_tensorPow _ hN, IsIsogeny.finrank_eq,
+    ← IsAbelianVariety.dim] at hpull
+  have hpos := A.hom.degree_pos_of_isAmple_of_nonempty L.symmetrisation hN
+  rw [pow_mul]
+  exact_mod_cast (mul_right_cancel₀ hpos.ne' hpull).symm
 
+omit [IsAbelianVariety A] in
 /-- Blueprint `sk-prop-av-isogeny`: The multiplication-by-`n` isogeny.
 
-The `n`-torsion of an abelian variety is flat over the base field for `0 < n`. -/
-theorem flat_torsionSubgroupScheme (n : ℕ) (hn : 0 < n) :
+The `n`-torsion of an abelian variety is flat over the base field for `0 < n`: every scheme over
+a field is flat over it. -/
+theorem flat_torsionSubgroupScheme (n : ℕ) (_hn : 0 < n) :
     Flat (torsionSubgroupScheme A n).hom :=
-  sorry
+  inferInstance
 
 /-- Blueprint `sk-prop-av-isogeny`: The multiplication-by-`n` isogeny.
 

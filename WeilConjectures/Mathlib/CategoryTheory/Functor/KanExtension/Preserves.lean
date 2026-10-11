@@ -11,6 +11,7 @@ public import Mathlib.CategoryTheory.Limits.Final
 public import Mathlib.CategoryTheory.Limits.FunctorCategory.Basic
 public import Mathlib.CategoryTheory.Limits.Preserves.Finite
 public import Mathlib.CategoryTheory.Limits.Shapes.ZeroMorphisms
+public import WeilConjectures.Mathlib.CategoryTheory.NatIso
 
 /-!
 
@@ -40,6 +41,9 @@ exact.
   evaluating the left Kan extension at `L.obj X` is evaluation at `X`.
 - `CategoryTheory.Functor.preservesLimitsOfShape_lan_of_essImage_or_isEmpty`: the exactness
   statement.
+- `CategoryTheory.Functor.isIso_lanAdjunction_counit_app_of_isZero`: the counit of the Kan
+  extension adjunction is invertible at a functor vanishing at the objects with empty comma
+  category.
 - `CategoryTheory.Functor.lanCompEvaluationIsoColimOfFinal`: if `s : K ⥤ CostructuredArrow L Y`
   is final, evaluating the left Kan extension at `Y` is the colimit over `K`.
 - `CategoryTheory.Functor.preservesFiniteLimits_lan_of_final`: left Kan extension is left exact
@@ -126,6 +130,26 @@ lemma preservesFiniteLimits_lan_of_essImage_or_isEmpty [L.Full] [L.Faithful] [Ha
     (hL : ∀ Y : D, (∃ X : C, Nonempty (L.obj X ≅ Y)) ∨ IsEmpty (CostructuredArrow L Y)) :
     PreservesFiniteLimits (L.lan : (C ⥤ H) ⥤ D ⥤ H) where
   preservesFiniteLimits _ := L.preservesLimitsOfShape_lan_of_essImage_or_isEmpty hL _
+
+/-- Let `L` be fully faithful such that every object of `D` is in the essential image of `L` or
+has empty comma category. The counit `L.lan (L ⋙ G) ⟶ G` of the Kan extension adjunction is
+invertible at a functor `G` vanishing at the objects with empty comma category: it is the
+inverse of the invertible unit on the essential image, and a morphism of zero objects
+elsewhere. -/
+lemma isIso_lanAdjunction_counit_app_of_isZero [L.Full] [L.Faithful] [HasZeroMorphisms H]
+    [∀ F : C ⥤ H, L.HasPointwiseLeftKanExtension F]
+    (hL : ∀ Y : D, (∃ X : C, Nonempty (L.obj X ≅ Y)) ∨ IsEmpty (CostructuredArrow L Y))
+    (G : D ⥤ H) (hG : ∀ Y : D, IsEmpty (CostructuredArrow L Y) → IsZero (G.obj Y)) :
+    IsIso ((L.lanAdjunction H).counit.app G) := by
+  rw [NatTrans.isIso_iff_isIso_app]
+  intro Y
+  rcases hL Y with ⟨X, ⟨e⟩⟩ | hY
+  · have : IsIso (((L.lanAdjunction H).counit.app G).app (L.obj X)) := by
+      rw [← IsIso.inv_eq_of_hom_inv_id (L.lanUnit_app_app_lanAdjunction_counit_app_app G X)]
+      infer_instance
+    exact NatTrans.isIso_app_of_iso _ e.symm
+  · exact ⟨⟨(hG Y hY).to_ _, (L.isInitialLanObjObj _ hY).isZero.eq_of_src _ _,
+      (hG Y hY).eq_of_src _ _⟩⟩
 
 section Final
 

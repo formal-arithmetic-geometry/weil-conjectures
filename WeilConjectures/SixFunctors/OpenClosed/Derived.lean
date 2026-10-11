@@ -5,7 +5,10 @@ Authors: Christian Merten
 -/
 module
 
+public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.FullyFaithful
+public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.KInjective
 public import WeilConjectures.SixFunctors.OpenClosed.Conservative
+public import WeilConjectures.SixFunctors.OpenClosed.Supported
 public import WeilConjectures.SixFunctors.OpenClosed.Vanishing
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStar
 public import WeilConjectures.SixFunctors.Etale.Derived.OpenImmersionLowerShriek
@@ -33,19 +36,25 @@ total left derived functors `L(g^*)` through the isomorphism
 
 ## Main results
 
-- `AlgebraicGeometry.Etale.isZero_of_isZero_mapDerivedCategoryUpperStar`: an object killed by
-  `D(j^*)` and `D(i^*)` is zero.
 - `AlgebraicGeometry.Etale.jointlyReflectIsomorphisms_leftDerivedUpperStar`: the pair
   `(Lj^*, Li^*)` jointly reflects isomorphisms, with the two-hypothesis form
   `AlgebraicGeometry.Etale.isIso_of_isIso_leftDerivedUpperStar_map` and the levelwise versions
   `AlgebraicGeometry.Etale.jointlyReflectIsomorphisms_mapDerivedCategoryUpperStar` and
   `AlgebraicGeometry.Etale.isIso_of_isIso_mapDerivedCategoryUpperStar_map`
-  (blueprint: `prop:openclosed-conservative-derived`).
+  (blueprint: `prop:openclosed-conservative-derived`). These need a concrete coefficient
+  category; `AlgebraicGeometry.Etale.jointlyReflectIsomorphisms_mapDerivedCategoryUpperStar'`
+  is the levelwise version for arbitrary coefficients, deduced from
+  `WeilConjectures.SixFunctors.OpenClosed.Supported`.
 - `AlgebraicGeometry.Etale.isZero_leftDerivedUpperStar_obj_mapDerivedCategory_\
   openImmersionLowerShriek_of_disjoint_range`: `Li^* (j_! K) = 0`, with the levelwise version
   `AlgebraicGeometry.Etale.isZero_mapDerivedCategoryUpperStar_obj_\
   openImmersionLowerShriek_of_disjoint_range`
   (blueprint: `lemma:openclosed-vanishing-lowerShriek-derived`).
+- `AlgebraicGeometry.Etale.isZero_mapDerivedCategoryUpperStar_obj_rightDerivedLowerStar_\
+  of_disjoint_range`: `j^* (Ri_* N) = 0`.
+- `AlgebraicGeometry.Etale.exists_distTriang_openClosed`: the open–closed triangle
+  `j_! j^* M ⟶ M ⟶ Ri_* i^* M ⟶ (j_! j^* M)[1]`
+  (blueprint: `sk-prop-sf-open-closed-triangle`).
 - `AlgebraicGeometry.Etale.isIso_of_isIso_leftDerivedUpperStar_closedComplement_map` and
   `AlgebraicGeometry.Etale.isZero_leftDerivedUpperStar_closedComplement_obj_\
   openImmersionLowerShriek`: the two results for `i = j.closedComplement`.
@@ -68,20 +77,6 @@ variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{
 section Conservative
 
 variable {X U Z : Scheme.{u}} (j : U ⟶ X) (i : Z ⟶ X) [IsOpenImmersion j] [IsClosedImmersion i]
-
-/-- **Derived open–closed detection**: an object `E` of `D(X_ét)` with `D(j^*) E = 0` and
-`D(i^*) E = 0` is zero. On homology sheaves this is
-`AlgebraicGeometry.Etale.isZero_of_isZero_upperStar`, since `H^n (D(g^*) E) ≅ g^* (H^n E)` for
-`g = j, i`. -/
-theorem isZero_of_isZero_mapDerivedCategoryUpperStar
-    (hij : Set.range i.base = (Set.range j.base)ᶜ)
-    {E : DerivedCategory (Sheaf X.smallEtaleTopology A)}
-    (hj : IsZero (D((j)^*[A]).obj E)) (hi : IsZero (D((i)^*[A]).obj E)) : IsZero E :=
-  (DerivedCategory.isZero_iff _).2 fun n ↦ Etale.isZero_of_isZero_upperStar A j i hij
-    (((DerivedCategory.isZero_iff _).1 hj n).of_iso
-      (((j)^*[A].mapDerivedCategoryHomologyFunctorIso n).app E))
-    (((DerivedCategory.isZero_iff _).1 hi n).of_iso
-      (((i)^*[A].mapDerivedCategoryHomologyFunctorIso n).app E))
 
 variable {FC : A → A → Type*} {CC : A → Type (u + 1)}
   [∀ (P Q : A), FunLike (FC P Q) (CC P) (CC Q)] [ConcreteCategory.{u + 1} A FC]
@@ -155,6 +150,24 @@ theorem isIso_of_isIso_leftDerivedUpperStar_closedComplement_map
 
 end Conservative
 
+section ConservativeAbstract
+
+variable {X U Z : Scheme.{u}} (j : U ⟶ X) (i : Z ⟶ X) [IsOpenImmersion j] [IsClosedImmersion i]
+
+/-- **Derived open–closed conservativity, for arbitrary coefficients**: the pair
+`(D(j^*), D(i^*))` jointly reflects isomorphisms of `D(X_ét, A)` for any Grothendieck abelian
+`A`. This is `AlgebraicGeometry.Etale.jointlyReflectIsomorphisms_mapDerivedCategoryUpperStar`
+without concreteness assumptions on `A`, deduced in the same way from the sheaf-level
+`AlgebraicGeometry.Etale.jointlyReflectIsomorphisms_upperStar'`.
+(blueprint: `prop:openclosed-conservative-derived`) -/
+theorem jointlyReflectIsomorphisms_mapDerivedCategoryUpperStar'
+    (hij : Set.range i.base = (Set.range j.base)ᶜ) :
+    JointlyReflectIsomorphisms (pairFunctor D((j)^*[A]) D((i)^*[A])) :=
+  Functor.jointlyReflectIsomorphisms_pairFunctor_mapDerivedCategory _ _
+    (jointlyReflectIsomorphisms_upperStar' A i hij)
+
+end ConservativeAbstract
+
 section Vanishing
 
 variable {U Z X : Scheme.{u}} (j : U ⟶ X) (i : Z ⟶ X) [IsOpenImmersion j]
@@ -170,6 +183,22 @@ lemma isZero_mapDerivedCategoryUpperStar_obj_openImmersionLowerShriek_of_disjoin
     (isZero_upperStar_openImmersionLowerShriek_of_disjoint_range A j i hij.symm
       ((DerivedCategory.homologyFunctor _ n).obj K)).of_iso
       ((i)^*[A].mapIso (((j)_!open[A].mapDerivedCategoryHomologyFunctorIso n).symm.app K))
+
+/-- **`j^* (Ri_* N)` vanishes** in `D(U_ét)` when the ranges of `i` and `j` are disjoint.
+Representing `N` by a K-injective complex `I`, `Ri_* N` is `i_* I`, and `j^* i_* I` vanishes
+termwise by `AlgebraicGeometry.Etale.isZero_upperStar_lowerStar_of_disjoint_range`. -/
+lemma isZero_mapDerivedCategoryUpperStar_obj_rightDerivedLowerStar_of_disjoint_range
+    (hij : Disjoint (Set.range j.base) (Set.range i.base))
+    (N : DerivedCategory (Sheaf Z.smallEtaleTopology A)) :
+    IsZero (D((j)^*[A]).obj (R((i)_*[A]).obj N)) := by
+  obtain ⟨I, _, ⟨e⟩⟩ := DerivedCategory.exists_iso_Q_obj_of_isKInjective N
+  have hC : IsZero ((((i)_*[A] ⋙ (j)^*[A]).mapHomologicalComplex _).obj I) := by
+    rw [IsZero.iff_id_eq_zero]
+    refine HomologicalComplex.hom_ext _ _ fun n ↦ ?_
+    exact (isZero_upperStar_lowerStar_of_disjoint_range A j i hij (I.X n)).eq_of_src _ _
+  exact (DerivedCategory.Q.map_isZero hC).of_iso
+    (D((j)^*[A]).mapIso (R((i)_*[A]).mapIso e ≪≫ ((i)_*[A]).rightDerivedFunctorObjQIso I) ≪≫
+      ((j)^*[A]).mapDerivedCategoryFactors.app _)
 
 variable [MonoidalCategory A] [MonoidalPreadditive A] [SymmetricCategory A] [MonoidalClosed A]
   [Abelian.HasFunctorialFlatResolution A]
@@ -201,5 +230,80 @@ lemma isZero_leftDerivedUpperStar_closedComplement_obj_openImmersionLowerShriek
     A j j.closedComplement (by rw [j.range_closedComplement]; exact disjoint_compl_left) K
 
 end Vanishing
+
+section Triangle
+
+variable {U Z X : Scheme.{u}} (j : U ⟶ X) (i : Z ⟶ X) [IsOpenImmersion j] [IsClosedImmersion i]
+  [MonoidalCategory A] [MonoidalPreadditive A] [SymmetricCategory A] [MonoidalClosed A]
+  [Abelian.HasFunctorialFlatResolution A]
+
+open Pretriangulated in
+/-- Blueprint `sk-prop-sf-open-closed-triangle`: The open–closed triangle
+
+Let `j : U ⟶ X` and `i : Z ⟶ X` be complementary open and closed immersions. For every
+`M ∈ D(X_ét, A)` the counit of `D(j_!) ⊣ D(j^*)` and the unit of `D(i^*) ⊣ Ri_*` extend to a
+distinguished triangle
+
+```
+  j_! j^* M ⟶ M ⟶ Ri_* i^* M ⟶ (j_! j^* M)[1].
+```
+
+It is the derived form of the open–closed short exact sequence
+`0 ⟶ j_! j^* F ⟶ F ⟶ i_* i^* F ⟶ 0`
+(`AlgebraicGeometry.Etale.shortExact_openClosedShortComplex`).
+
+The proof completes the counit to a distinguished triangle `j_! j^* M ⟶ M ⟶[g] C` and
+identifies `C` with `Ri_* i^* M`. Applying `j^*` kills `C`, the counit becoming invertible;
+applying `i^*` makes `g` invertible, as `i^* j_! = 0`. Hence the unit `C ⟶ Ri_* i^* C` is
+invertible: after `j^*` both ends vanish (`j^* Ri_* = 0`), and after `i^*` it is inverse to the
+counit of `D(i^*) ⊣ Ri_*`, an isomorphism because `Ri_*` is fully faithful
+(`CategoryTheory.Functor.full_rightDerivedFunctor`); so it is invertible by open–closed
+conservativity (`AlgebraicGeometry.Etale.jointlyReflectIsomorphisms_mapDerivedCategoryUpperStar'`),
+which holds for arbitrary coefficients. By naturality of the unit, `g` followed by
+`C ≅ Ri_* i^* C ≅ Ri_* i^* M` is the unit at `M`. -/
+theorem exists_distTriang_openClosed (hij : Set.range i.base = (Set.range j.base)ᶜ)
+    (M : DerivedCategory (Sheaf X.smallEtaleTopology A)) :
+    ∃ w, Pretriangulated.Triangle.mk
+      ((derivedOpenImmersionLowerShriekUpperStarAdjunction A j).counit.app M)
+      ((mapDerivedUpperStarLowerStarAdjunction A i).unit.app M) w ∈ distTriang _ := by
+  have hd : Disjoint (Set.range i.base) (Set.range j.base) := by
+    rw [hij]; exact disjoint_compl_left
+  let adj := mapDerivedUpperStarLowerStarAdjunction A i
+  let adj' := derivedOpenImmersionLowerShriekUpperStarAdjunction A j
+  -- complete the counit `j_! j^* M ⟶ M` to a distinguished triangle `j_! j^* M ⟶ M ⟶ C`
+  obtain ⟨C, g, h, hT⟩ := distinguished_cocone_triangle (adj'.counit.app M)
+  -- `j^* C = 0`, since `j^*` of the counit is invertible
+  have hCj : IsZero (D((j)^*[A]).obj C) := by
+    refine (Triangle.isZero₃_iff_isIso₁ _ (D((j)^*[A]).map_distinguished _ hT)).2 ?_
+    change IsIso (D((j)^*[A]).map (adj'.counit.app M))
+    rw [← IsIso.inv_eq_of_hom_inv_id (adj'.right_triangle_components M)]
+    infer_instance
+  -- `i^* g` is invertible, since `i^* j_! j^* M = 0`
+  have hgi : IsIso (D((i)^*[A]).map g) :=
+    (Triangle.isZero₁_iff_isIso₂ _ (D((i)^*[A]).map_distinguished _ hT)).1
+      (isZero_mapDerivedCategoryUpperStar_obj_openImmersionLowerShriek_of_disjoint_range
+        A j i hd _)
+  -- the unit `C ⟶ Ri_* i^* C` is invertible, by open–closed conservativity
+  have hηC : IsIso (adj.unit.app C) := by
+    refine (jointlyReflectIsomorphisms_mapDerivedCategoryUpperStar' A j i hij).isIso_of_pairFunctor
+      _ ?_ ?_
+    · exact ⟨⟨0, hCj.eq_of_src _ _,
+        (isZero_mapDerivedCategoryUpperStar_obj_rightDerivedLowerStar_of_disjoint_range
+          A j i hd.symm _).eq_of_src _ _⟩⟩
+    · rw [← IsIso.inv_eq_of_inv_hom_id (adj.left_triangle_components C)]
+      infer_instance
+  let e : C ≅ R((i)_*[A]).obj (D((i)^*[A]).obj M) :=
+    asIso (adj.unit.app C) ≪≫ R((i)_*[A]).mapIso (asIso (D((i)^*[A]).map g)).symm
+  have he : g ≫ e.hom = adj.unit.app M := by
+    have := adj.unit.naturality g
+    dsimp at this
+    simp only [e, Iso.trans_hom, asIso_hom, Functor.mapIso_hom, Iso.symm_hom, asIso_inv]
+    rw [reassoc_of% this, ← Functor.map_comp, IsIso.hom_inv_id, CategoryTheory.Functor.map_id,
+      Category.comp_id]
+  refine ⟨e.inv ≫ h, isomorphic_distinguished _ hT _ ?_⟩
+  exact Triangle.isoMk _ _ (Iso.refl _) (Iso.refl _) e.symm (by simp [adj'])
+    (by rw [← he]; simp) (by simp)
+
+end Triangle
 
 end AlgebraicGeometry.Etale

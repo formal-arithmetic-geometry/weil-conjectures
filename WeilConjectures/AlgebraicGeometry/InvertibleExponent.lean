@@ -23,6 +23,8 @@ images, nor purity survives. This file records that hypothesis as a class.
 ## Main statements
 
 - `AlgebraicGeometry.HasInvertibleExponent.of_hom`: the hypothesis passes to `Y`-schemes.
+- `AlgebraicGeometry.HasInvertibleExponent.of_hom_of_nonempty`: it descends from a nonempty
+  scheme over a field to the field.
 -/
 
 @[expose] public section
@@ -46,5 +48,23 @@ theorem HasInvertibleExponent.of_hom {Λ : Type*} [CommRing Λ] {X Y : Scheme.{u
     [HasInvertibleExponent Λ Y] : HasInvertibleExponent Λ X := by
   obtain ⟨n, hn, hΛ, hu⟩ := HasInvertibleExponent.exists_isUnit_natCast (Λ := Λ) (X := Y)
   exact ⟨n, hn, hΛ, by simpa using hu.map f.appTop.hom⟩
+
+/-- If the exponent of `Λ` is invertible on a nonempty scheme `X` over a field `k`, it is
+invertible on `k`: otherwise it would vanish in `k`, hence in `Γ(X, ⊤)`, which is nonzero. -/
+theorem HasInvertibleExponent.of_hom_of_nonempty {Λ : Type*} [CommRing Λ] {k : Type u} [Field k]
+    {X : Scheme.{u}} (aX : X ⟶ Spec (.of k)) [HasInvertibleExponent Λ X] [Nonempty X] :
+    HasInvertibleExponent Λ (Spec (.of k)) := by
+  obtain ⟨n, hn, hΛ, hu⟩ := HasInvertibleExponent.exists_isUnit_natCast (Λ := Λ) (X := X)
+  refine ⟨n, hn, hΛ, ?_⟩
+  have hk : (n : k) ≠ 0 := by
+    intro h0
+    have : (n : Γ(X, ⊤)) = 0 := by
+      rw [← map_natCast aX.appTop.hom, ← map_natCast (Scheme.ΓSpecIso (.of k)).inv.hom, h0,
+        map_zero, map_zero]
+    rw [this] at hu
+    obtain ⟨x⟩ := ‹Nonempty X›
+    exact not_isUnit_zero (M₀ := X.presheaf.stalk x)
+      (by simpa using hu.map (X.presheaf.germ ⊤ x trivial).hom)
+  simpa using (Ne.isUnit hk).map (Scheme.ΓSpecIso (.of k)).inv.hom
 
 end AlgebraicGeometry

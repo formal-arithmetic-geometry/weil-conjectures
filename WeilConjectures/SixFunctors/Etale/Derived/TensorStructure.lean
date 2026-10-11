@@ -13,14 +13,14 @@ public import WeilConjectures.SixFunctors.Etale.Derived.Hom
 # The monoidal structure of `D(X_ét)` in terms of the derived tensor product
 
 The derived tensor product `AlgebraicGeometry.Etale.derivedTensor` is the tensor product of
-the monoidal structure on `D(X_ét)`. This file restates the associator, the left unitor,
-invertibility and perfectness of pairings in terms of `derivedTensor`, for a general coefficient
-category `A`.
+the monoidal structure on `D(X_ét)`. This file restates the associator, the left unitor, the
+symmetry, invertibility and perfectness of pairings in terms of `derivedTensor`, for a general
+coefficient category `A`.
 
 ## Implementation notes
 
 Statements about a concrete coefficient category such as `ModuleCat Λ` should use these
-declarations rather than `α_`, `λ_`, `CategoryTheory.IsInvertible` or
+declarations rather than `α_`, `λ_`, `ρ_`, `CategoryTheory.IsInvertible` or
 `CategoryTheory.MonoidalClosed.IsPerfectPairing` directly. There, the monoidal instance on
 `D(X_ét)` found by instance search is a different term from the one inside `derivedTensor`.
 The two are equal, but the kernel does not decide this in reasonable time: already
@@ -32,10 +32,13 @@ involves no comparison at all.
 
 - `AlgebraicGeometry.Etale.derivedTensorAssociator`: `(K ⊗ᴸ M) ⊗ᴸ N ≅ K ⊗ᴸ (M ⊗ᴸ N)`.
 - `AlgebraicGeometry.Etale.derivedTensorLeftUnitor`: `Λ_X ⊗ᴸ K ≅ K`.
+- `AlgebraicGeometry.Etale.derivedTensorLeftUnitorNatIso`: `Λ_X ⊗ᴸ - ≅ 𝟭`.
+- `AlgebraicGeometry.Etale.derivedTensorRightUnitor`: `K ⊗ᴸ Λ_X ≅ K`.
 - `AlgebraicGeometry.Etale.IsPerfectPairing`: perfectness of a pairing `C ⊗ᴸ D ⟶ Λ_X`.
 
 ## Main statements
 
+- `AlgebraicGeometry.Etale.nonempty_iso_derivedTensor_flip`: the symmetry `K ⊗ᴸ M ≅ M ⊗ᴸ K`.
 - `AlgebraicGeometry.Etale.isPerfectPairing_iff`,
   `AlgebraicGeometry.Etale.isInvertible_iff_exists_derivedTensor`: the comparison with
   `CategoryTheory.MonoidalClosed.IsPerfectPairing` and `CategoryTheory.IsInvertible`.
@@ -73,6 +76,33 @@ noncomputable def derivedTensorLeftUnitor
     ((derivedTensor A X).obj (𝟙_ _)).obj K ≅ K :=
   λ_ K
 
+/-- The left unitor `Λ_X ⊗ᴸ K ≅ K` of the derived tensor product, as a natural isomorphism
+`Λ_X ⊗ᴸ - ≅ 𝟭`. -/
+noncomputable def derivedTensorLeftUnitorNatIso :
+    (derivedTensor A X).obj (𝟙_ _) ≅ 𝟭 (_root_.DerivedCategory (Sheaf X.smallEtaleTopology A)) :=
+  NatIso.ofComponents (derivedTensorLeftUnitor A X) fun f ↦ leftUnitor_naturality f
+
+/-- The right unitor `K ⊗ᴸ Λ_X ≅ K` of the derived tensor product, `Λ_X = 𝟙_` being the
+constant complex. -/
+noncomputable def derivedTensorRightUnitor
+    (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)) :
+    ((derivedTensor A X).obj K).obj (𝟙_ _) ≅ K :=
+  ρ_ K
+
+/-- The symmetry `K ⊗ᴸ M ≅ M ⊗ᴸ K` of the derived tensor product, natural in both variables:
+an isomorphism between `- ⊗ᴸ -` and the flipped bifunctor `(K, M) ↦ M ⊗ᴸ K`. The derived
+tensor product is symmetric monoidal (blueprint `sk-def-sf-operations`, remark
+`rem-sf-summary`); this is the existence of its symmetry.
+
+It is the braiding of `D(X_ét)` given by `DerivedCategory.nonempty_braidedCategory`. -/
+theorem nonempty_iso_derivedTensor_flip :
+    Nonempty (derivedTensor A X ≅ (derivedTensor A X).flip) := by
+  obtain ⟨_⟩ := _root_.DerivedCategory.nonempty_braidedCategory
+    (Sheaf X.smallEtaleTopology A)
+  -- `curriedBraidingNatIso` is generic in the category, so the kernel does not check the
+  -- naturality of the braiding in `D(X_ét)` (which took about 50s).
+  exact ⟨BraidedCategory.curriedBraidingNatIso _⟩
+
 variable {A X}
 
 /-- A pairing `b : C ⊗ᴸ D ⟶ Λ_X` in `D(X_ét)` is *perfect* if its tensor–internal-hom adjoint
@@ -100,10 +130,12 @@ lemma isPerfectPairing_iff {C D : _root_.DerivedCategory (Sheaf X.smallEtaleTopo
         (Sheaf X.smallEtaleTopology A)) b :=
   Iff.rfl
 
-/-- An object `K` of `D(X_ét)` is invertible if and only if `K ⊗ᴸ M ≅ Λ_X` for some `M`. -/
+/-- An object `K` of `D(X_ét)` is invertible if and only if `K ⊗ᴸ M ≅ Λ_X` and
+`M ⊗ᴸ K ≅ Λ_X` for some `M`. -/
 lemma isInvertible_iff_exists_derivedTensor
     (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)) :
-    IsInvertible K ↔ ∃ M, Nonempty (((derivedTensor A X).obj K).obj M ≅ 𝟙_ _) :=
+    IsInvertible K ↔ ∃ M, Nonempty (((derivedTensor A X).obj K).obj M ≅ 𝟙_ _) ∧
+      Nonempty (((derivedTensor A X).obj M).obj K ≅ 𝟙_ _) :=
   Iff.rfl
 
 end Etale

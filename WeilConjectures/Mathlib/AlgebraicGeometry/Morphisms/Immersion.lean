@@ -6,13 +6,13 @@ Authors: Christian Merten
 module
 
 public import Mathlib.AlgebraicGeometry.Morphisms.Immersion
-
+public import Mathlib.AlgebraicGeometry.Morphisms.IsIso
 public import Mathlib.AlgebraicGeometry.Morphisms.Separated
 
 /-!
 # Complements on immersions
 
-Two unrelated additions to Mathlib's `AlgebraicGeometry.IsImmersion`:
+Unrelated additions to Mathlib's `AlgebraicGeometry.IsImmersion`:
 
 - `AlgebraicGeometry.IsImmersion.respectsRight_isOpenImmersion`: immersions are stable under
   post-composition with open immersions. This is the instance needed to apply
@@ -20,7 +20,8 @@ Two unrelated additions to Mathlib's `AlgebraicGeometry.IsImmersion`:
 - `AlgebraicGeometry.isImmersion_left_pi_lift`: a tuple of morphisms of `S`-schemes one of
   whose components is an immersion is itself an immersion. Here the fibre product over `S` is
   the categorical product in `Over S`.
-
+- `AlgebraicGeometry.IsImmersion.isIso_of_nonempty`: an immersion with nonempty source into
+  the spectrum of a field is an isomorphism.
 
 -/
 
@@ -55,6 +56,25 @@ instance respectsRight_isOpenImmersion :
     have := hi
     have := hf
     infer_instance
+
+/-- An immersion with nonempty source into the spectrum of a field is an isomorphism: the
+target is a reduced point, so the open immersion part is surjective and the closed immersion
+part is a surjective closed immersion into a reduced scheme. -/
+lemma isIso_of_nonempty {K : Type u} [Field K] {Z : Scheme.{u}}
+    (g : Z ⟶ Spec (.of K)) [IsImmersion g] [Nonempty Z] : IsIso g := by
+  obtain ⟨Y, g₁, g₂, h₁, h₂, rfl⟩ := (isImmersion_iff_exists (f := g)).1 inferInstance
+  have hs : ∀ {T : Scheme.{u}} (t : T ⟶ Spec (.of K)), Nonempty T → Surjective t :=
+    fun t ⟨x⟩ ↦ ⟨fun y ↦ ⟨x, Subsingleton.elim _ _⟩⟩
+  have : Surjective g₂ := hs g₂ ⟨g₁ (Classical.arbitrary Z)⟩
+  have : IsIso g₂ := (isIso_iff_isOpenImmersion_and_surjective g₂).2 ⟨h₂, this⟩
+  have : Surjective g₁ := by
+    have := hs (g₁ ≫ g₂) inferInstance
+    exact ⟨fun y ↦ by
+      obtain ⟨x, hx⟩ := (g₁ ≫ g₂).surjective (g₂ y)
+      exact ⟨x, g₂.isOpenEmbedding.injective (by simpa using hx)⟩⟩
+  have : IsReduced Y := isReduced_of_isOpenImmersion g₂
+  have : IsIso g₁ := isIso_of_isClosedImmersion_of_surjective g₁
+  infer_instance
 
 end IsImmersion
 
@@ -125,5 +145,14 @@ theorem Scheme.Hom.exists_isCompact_isClosedImmersion (f : X ⟶ Y) [IsImmersion
   have : IsClosedImmersion (IsOpenImmersion.lift W.ι f hrange ≫ Y.homOfLE hWle) := by
     rw [key]; infer_instance
   exact IsClosedImmersion.of_comp _ (Y.homOfLE hWle)
+
+/-- The preimage under an immersion `j` of an affine open contained in the open `j.coborderRange`
+(in which the image of `j` is closed) is affine. -/
+lemma Scheme.Hom.isAffineOpen_preimage_of_le_coborderRange {X Y : Scheme.{u}} (j : X ⟶ Y)
+    [IsImmersion j] {V : Y.Opens} (hV : IsAffineOpen V) (hle : V ≤ j.coborderRange) :
+    IsAffineOpen (j ⁻¹ᵁ V) := by
+  have h := (hV.preimage_of_isOpenImmersion j.coborderRange.ι
+    (by rwa [Scheme.Opens.opensRange_ι])).preimage j.liftCoborder
+  rwa [← Scheme.Hom.comp_preimage, Scheme.Hom.liftCoborder_ι] at h
 
 end AlgebraicGeometry

@@ -132,3 +132,60 @@ theorem exists_isOpen_inter_closure_subset_of_isConstructible {X : Type*} [Topol
   refine ⟨u ∩ (⋃₀ T)ᶜ, hu.inter hΩ, ⟨x, ⟨hxu, (hus ⟨hxu, hxC⟩).2⟩, hCZ hxC⟩, ?_⟩
   rintro y ⟨⟨hyu, hyΩ⟩, hyZ⟩
   exact (hus ⟨hyu, hΩZ ⟨hyΩ, hyZ⟩⟩).1
+
+section Noetherian
+
+open Set TopologicalSpace
+
+variable {X Y : Type*} [TopologicalSpace X] [TopologicalSpace Y]
+
+/-- In a Noetherian space every set is retrocompact. -/
+lemma TopologicalSpace.NoetherianSpace.isRetrocompact [NoetherianSpace X] (s : Set X) :
+    IsRetrocompact s :=
+  fun _ _ _ ↦ NoetherianSpace.isCompact _
+
+/-- In a Noetherian space open sets are constructible. -/
+lemma IsOpen.isConstructible_of_noetherianSpace [NoetherianSpace X] {s : Set X} (hs : IsOpen s) :
+    IsConstructible s :=
+  (NoetherianSpace.isRetrocompact s).isConstructible hs
+
+/-- In a Noetherian space closed sets are constructible. -/
+lemma IsClosed.isConstructible_of_noetherianSpace [NoetherianSpace X] {s : Set X}
+    (hs : IsClosed s) : IsConstructible s :=
+  isConstructible_compl.1 hs.isOpen_compl.isConstructible_of_noetherianSpace
+
+/-- In a Noetherian space locally closed sets are constructible. -/
+lemma IsLocallyClosed.isConstructible_of_noetherianSpace [NoetherianSpace X] {s : Set X}
+    (hs : IsLocallyClosed s) : IsConstructible s := by
+  obtain ⟨U, Z, hU, hZ, rfl⟩ := hs
+  exact hU.isConstructible_of_noetherianSpace.inter hZ.isConstructible_of_noetherianSpace
+
+/-- The image of a constructible set under an embedding with locally closed range into a
+Noetherian space is constructible. -/
+lemma Topology.IsConstructible.image_of_isEmbedding [NoetherianSpace Y] {f : X → Y}
+    (hf : IsEmbedding f)
+    (hr : IsLocallyClosed (range f)) {s : Set X} (hs : IsConstructible s) :
+    IsConstructible (f '' s) := by
+  obtain ⟨U, Z, hU, hZ, hUZ⟩ := hr
+  have hfU (x : X) : f x ∈ U := (hUZ ▸ mem_range_self x : f x ∈ U ∩ Z).1
+  let g : X → U := fun x ↦ ⟨f x, hfU x⟩
+  have hg : IsClosedEmbedding g := by
+    refine ⟨IsEmbedding.codRestrict hf _ _, ?_⟩
+    have : range g = Subtype.val ⁻¹' Z := by
+      ext ⟨y, hy⟩
+      simp only [mem_range, mem_preimage, g]
+      constructor
+      · rintro ⟨x, hx⟩
+        have := (hUZ ▸ mem_range_self x : f x ∈ U ∩ Z).2
+        rwa [show f x = y from congrArg Subtype.val hx] at this
+      · intro hyZ
+        obtain ⟨x, rfl⟩ : y ∈ range f := hUZ ▸ ⟨hy, hyZ⟩
+        exact ⟨x, rfl⟩
+    rw [this]
+    exact hZ.preimage continuous_subtype_val
+  have h1 := hs.image_of_isClosedEmbedding hg (NoetherianSpace.isRetrocompact _)
+  have h2 := h1.image_of_isOpenEmbedding hU.isOpenEmbedding_subtypeVal
+    (NoetherianSpace.isRetrocompact _)
+  rwa [← image_comp] at h2
+
+end Noetherian

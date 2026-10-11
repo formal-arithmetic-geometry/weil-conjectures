@@ -7,6 +7,7 @@ module
 
 public import Mathlib.Algebra.Category.Grp.Basic
 public import WeilConjectures.AlgebraicGeometry.Picard.Defs
+public import WeilConjectures.CategoryTheory.Sites.SheafifyGrp
 
 /-!
 # The group law on the Picard group
@@ -14,6 +15,12 @@ public import WeilConjectures.AlgebraicGeometry.Picard.Defs
 The Picard group `Pic Y` of a scheme `Y` is a commutative group under the tensor product of
 invertible modules: the unit is the class of `𝒪_Y`, the inverse of the class of `ℒ` is the class
 of its dual `ℒᵛ`, and pulling back along a morphism of schemes is a group homomorphism.
+
+The Picard presheaf `T ↦ Pic (X_T)` of a morphism `f : X ⟶ S` is therefore a presheaf of groups,
+`AlgebraicGeometry.picardPresheafGrp`. Its fppf sheafification, the relative Picard functor
+`Pic_{X/S}`, inherits the group law (`CategoryTheory.sheafifyGrp`), so a scheme representing
+`Pic_{X/S}` is a commutative group scheme whose group law is the tensor product of invertible
+modules (`AlgebraicGeometry.exists_commGrpObj_isPicardMul`).
 
 For a morphism `f : X ⟶ S` with a section `σ`, the `σ`-normalized Picard functor `Pic_{X/S,σ}` is
 the kernel of `σ_T^* : Pic (X_T) ⟶ Pic T`, so it is a presheaf of groups; this is
@@ -24,15 +31,24 @@ the kernel of `σ_T^* : Pic (X_T) ⟶ Pic T`, so it is a presheaf of groups; thi
 
 - `AlgebraicGeometry.Scheme.Pic.instCommGroup`: the group law on `Pic Y`.
 - `AlgebraicGeometry.Scheme.Pic.mapHom`: the pullback `Pic Y →* Pic X` along `X ⟶ Y`.
+- `AlgebraicGeometry.picardPresheafGrp`: the Picard presheaf as a presheaf of groups.
+- `AlgebraicGeometry.IsPicardMul`: a representation of `Pic_{X/S}` by a group scheme respects the
+  group laws.
 - `AlgebraicGeometry.picardFunctorNormalizedGrp`: the `σ`-normalized Picard functor as a presheaf
   of groups (blueprint `rem-pc-group-structure`).
+
+## Main statements
+
+- `AlgebraicGeometry.exists_commGrpObj_isPicardMul`: a scheme representing `Pic_{X/S}` carries a
+  commutative group scheme structure respecting the group laws (blueprint
+  `rem-pc-group-structure`).
 -/
 
 @[expose] public section
 
 universe u
 
-open CategoryTheory Limits MonoidalCategory
+open CategoryTheory Limits MonoidalCategory MonObj
 
 open scoped AlgebraicGeometry.Scheme.Modules
 
@@ -143,9 +159,93 @@ noncomputable def mapHom (g : X ⟶ Y) : Y.Pic →* X.Pic :=
 lemma mapHom_apply (g : X ⟶ Y) (L : Y.Pic) : mapHom g L = map g L :=
   rfl
 
+/-- Isomorphic invertible modules have the same class. -/
+lemma ofIsInvertible_eq_of_iso {M N : Y.Modules} [Modules.IsInvertible M]
+    [Modules.IsInvertible N] (e : M ≅ N) : ofIsInvertible M = ofIsInvertible N :=
+  (eq_ofIsInvertible_iff _ N).2 ⟨ofIsInvertibleIso M ≪≫ e⟩
+
+/-- Invertible modules with the same class are isomorphic. -/
+lemma nonempty_iso_of_ofIsInvertible_eq {M N : Y.Modules} [Modules.IsInvertible M]
+    [Modules.IsInvertible N] (h : ofIsInvertible M = ofIsInvertible N) : Nonempty (M ≅ N) := by
+  obtain ⟨e⟩ := (eq_ofIsInvertible_iff _ N).1 h
+  exact ⟨(ofIsInvertibleIso M).symm ≪≫ e⟩
+
+/-- Every class is the class of its representative. -/
+lemma ofIsInvertible_fromSkeleton (L : Y.Pic) :
+    ofIsInvertible ((fromSkeleton Y.Modules).obj L.val) = L :=
+  ((eq_ofIsInvertible_iff L _).2 ⟨Iso.refl _⟩).symm
+
+lemma ofIsInvertible_unit : ofIsInvertible (𝟙_ Y.Modules) = 1 :=
+  rfl
+
+/-- The class of a tensor product of invertible modules is the product of their classes. -/
+lemma ofIsInvertible_tensorObj (M N : Y.Modules) [Modules.IsInvertible M]
+    [Modules.IsInvertible N] : ofIsInvertible (M ⊗ N) = ofIsInvertible M * ofIsInvertible N :=
+  ofIsInvertible_eq_of_iso ((ofIsInvertibleIso M).symm ⊗ᵢ (ofIsInvertibleIso N).symm)
+
+/-- The class of the dual of an invertible module is the inverse of its class. -/
+lemma ofIsInvertible_dual (M : Y.Modules) [Modules.IsInvertible M] :
+    ofIsInvertible Mᵛ = (ofIsInvertible M)⁻¹ := by
+  obtain ⟨d⟩ := Modules.nonempty_tensorObj_dual_iso_unit M
+  refine eq_inv_of_mul_eq_one_right ?_
+  rw [← ofIsInvertible_tensorObj, ofIsInvertible_eq_of_iso d, ofIsInvertible_unit]
+
 end Scheme.Pic
 
 variable {X S : Scheme.{u}}
+
+/-- **The Picard presheaf is a presheaf of groups**: `T ↦ Pic (X_T)` with the tensor product of
+invertible modules, pulling back along `X_{T'} ⟶ X_T` being a group homomorphism. The underlying
+presheaf of sets is `AlgebraicGeometry.picardPresheaf`
+(`AlgebraicGeometry.picardPresheafGrp_comp_forget`). -/
+noncomputable def picardPresheafGrp (f : X ⟶ S) : (Over S)ᵒᵖ ⥤ GrpCat.{u + 1} where
+  obj T := GrpCat.of (pullback f T.unop.hom).Pic
+  map φ := GrpCat.ofHom (Pic.mapHom (baseChangeMap f φ.unop))
+  map_id T := by
+    refine GrpCat.hom_ext (MonoidHom.ext fun L ↦ ?_)
+    change Pic.map (baseChangeMap f (𝟙 T).unop) L = L
+    rw [unop_id, baseChangeMap_id, Pic.map_id]
+  map_comp φ ψ := by
+    refine GrpCat.hom_ext (MonoidHom.ext fun L ↦ ?_)
+    change Pic.map (baseChangeMap f (φ ≫ ψ).unop) L =
+      Pic.map (baseChangeMap f ψ.unop) (Pic.map (baseChangeMap f φ.unop) L)
+    rw [unop_comp, baseChangeMap_comp, Pic.map_comp]
+
+/-- The underlying presheaf of sets of `picardPresheafGrp` is `picardPresheaf`. -/
+lemma picardPresheafGrp_comp_forget (f : X ⟶ S) :
+    picardPresheafGrp f ⋙ forget GrpCat.{u + 1} = picardPresheaf f :=
+  rfl
+
+/-- A representation `e` of the relative Picard functor `Pic_{X/S}` by a group scheme `A`
+*respects the group laws* if, for every `S`-scheme `T`, the map `Pic (X_T) ⟶ (T ⟶ A)` sending a
+class `ℒ` to the point of `A` classifying its image in `Pic_{X/S}(T)` is a group homomorphism:
+the group law of `A` is the tensor product of invertible modules. Equivalently, `e` is an
+isomorphism of group-valued functors between `Pic_{X/S}`, with the group law induced by that of
+the Picard presheaf, and the functor of points of `A`.
+
+(blueprint: `rem-pc-group-structure`) -/
+def IsPicardMul (f : X ⟶ S) {A : Over S} [GrpObj A]
+    (e : (picardFunctor f).obj.RepresentableBy A) : Prop :=
+  ∀ {T : Over S} (L M : (pullback f T.hom).Pic),
+    e.homEquiv.symm ((toPicardFunctor f).app (.op T) (L * M)) =
+      e.homEquiv.symm ((toPicardFunctor f).app (.op T) L) *
+        e.homEquiv.symm ((toPicardFunctor f).app (.op T) M)
+
+/-- **A scheme representing the Picard functor is a commutative group scheme.** Let `A` represent
+the relative Picard functor `Pic_{X/S}`. Then `A` carries a commutative group scheme structure
+for which the representation respects the group laws: its group law is induced by the tensor
+product of invertible modules, through the group law that the fppf sheafification `Pic_{X/S}`
+inherits from the Picard presheaf (`CategoryTheory.sheafifyGrp`).
+
+(blueprint: `rem-pc-group-structure`) -/
+theorem exists_commGrpObj_isPicardMul (f : X ⟶ S) {A : Over S}
+    (e : (picardFunctor f).obj.RepresentableBy A) : ∃ _ : CommGrpObj A, IsPicardMul f e := by
+  let G := picardPresheafGrp f
+  let e' : (sheafify (fppfTopology.over S) (G ⋙ forget GrpCat)).RepresentableBy A := e
+  let := GrpObj.ofRepresentableBySheafify _ G A e'
+  have := isCommMonObj_ofRepresentableBySheafify _ G
+    (fun Y (x y : (pullback f Y.unop.hom).Pic) ↦ mul_comm x y) e'
+  exact ⟨{ }, fun {T} L M ↦ homEquiv_symm_toSheafify_mul _ G e' (Y := T) L M⟩
 
 /-- **The `σ`-normalized Picard functor is a presheaf of groups.** For `f : X ⟶ S` with a
 section `σ`, the `σ`-normalized classes form the kernel of the group homomorphism

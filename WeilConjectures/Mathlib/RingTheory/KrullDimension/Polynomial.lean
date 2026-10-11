@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import Mathlib.RingTheory.FiniteType
+public import Mathlib.RingTheory.Jacobson.Ring
 public import Mathlib.RingTheory.KrullDimension.Field
 public import Mathlib.RingTheory.KrullDimension.NonZeroDivisors
 public import Mathlib.RingTheory.KrullDimension.Polynomial
@@ -25,6 +26,7 @@ public import WeilConjectures.Mathlib.RingTheory.Spectrum.Prime.Topology
   ideal has strictly smaller dimension.
 - `ringKrullDim_quotient_lt_of_irreducibleSpace`: a proper closed subset of an irreducible affine
   variety has strictly smaller dimension.
+- `MvPolynomial.height_eq_of_isMaximal`: every maximal ideal of `k[X₁, …, Xₙ]` has height `n`.
 
 ## Blueprint
 
@@ -94,3 +96,25 @@ theorem ringKrullDim_quotient_lt_of_irreducibleSpace (k A : Type*) [Field k] [Co
     {I : Ideal A} (hI : I ≠ ⊥) : ringKrullDim (A ⧸ I) < ringKrullDim A := by
   have := PrimeSpectrum.isDomain_of_irreducibleSpace A
   exact ringKrullDim_quotient_lt_of_ne_bot (ringKrullDim_ne_top_of_finiteType k A) hI
+
+open Ideal in
+/-- Every maximal ideal of the polynomial ring `k[X₁, …, Xₙ]` over a field `k` has height `n`:
+writing `k[X₁, …, Xₙ₊₁] = k[X₁, …, Xₙ][X]`, a maximal ideal lies over a maximal ideal of
+`k[X₁, …, Xₙ]` since this ring is Jacobson, and its height is one more than that one. -/
+theorem MvPolynomial.height_eq_of_isMaximal {k : Type*} [Field k] :
+    ∀ (n : ℕ) (M : Ideal (MvPolynomial (Fin n) k)) [M.IsMaximal], M.height = n
+  | 0, M, _ => by
+    have h := height_le_ringKrullDim_of_ne_top (IsMaximal.ne_top ‹M.IsMaximal›)
+    rw [MvPolynomial.ringKrullDim_of_isNoetherianRing, ringKrullDim_eq_zero_of_field] at h
+    simp only [Nat.card_eq_fintype_card, Fintype.card_fin, Nat.cast_zero, add_zero] at h
+    exact_mod_cast le_antisymm (by exact_mod_cast h) zero_le
+  | n + 1, M, _ => by
+    let e := MvPolynomial.finSuccEquiv k n
+    let M' : Ideal (Polynomial (MvPolynomial (Fin n) k)) := M.map e.toRingEquiv
+    have : M'.IsMaximal := map_isMaximal_of_equiv e.toRingEquiv
+    have hM : M.height = M'.height := (e.toRingEquiv.height_map M).symm
+    let p := M'.comap Polynomial.C
+    have : p.IsMaximal := Polynomial.isMaximal_comap_C_of_isJacobsonRing M'
+    have : M'.LiesOver p := ⟨rfl⟩
+    rw [hM, Polynomial.height_eq_height_add_one p M', MvPolynomial.height_eq_of_isMaximal n p]
+    norm_cast

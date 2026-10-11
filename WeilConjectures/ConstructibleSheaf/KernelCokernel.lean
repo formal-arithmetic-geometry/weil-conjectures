@@ -14,14 +14,16 @@ public import WeilConjectures.Mathlib.CategoryTheory.Sites.Point.ConstantSheaf
 
 Let `Λ` be a ring and let `φ : F ⟶ G` be a morphism of finite locally constant sheaves of
 `Λ`-modules on the small étale site of `X`. On a common trivialising cover `φ` is a morphism
-`M_U ⟶ N_U` between constant sheaves with finite values (the value of a constant sheaf on a
-nonempty scheme is a stalk, `AlgebraicGeometry.Scheme.finite_of_isFiniteSheaf_constantSheaf`),
+`M_U ⟶ N_U` between constant sheaves with finitely generated values (the value of a constant
+sheaf on a nonempty scheme is a stalk,
+`AlgebraicGeometry.Scheme.moduleFinite_of_isFiniteSheaf_constantSheaf`),
 which is, on a further étale cover, induced by a linear map `f : M ⟶ N`
 (`CategoryTheory.exists_mem_forall_exists_constantSheafOverHom_comp_map_eq`); the kernel and
 cokernel of `φ` restrict to the constant sheaves at `ker f` and `coker f` there. Hence
 kernels and cokernels of morphisms between finite locally constant sheaves are locally
-constant; their stalks are kernels and cokernels of maps between finite modules, hence
-finite (`AlgebraicGeometry.Scheme.IsFiniteLocallyConstantSheaf.kernel`,
+constant; their stalks are kernels and cokernels of maps between finitely generated modules,
+hence finitely generated, for kernels when `Λ` is noetherian
+(`AlgebraicGeometry.Scheme.IsFiniteLocallyConstantSheaf.kernel`,
 `IsFiniteLocallyConstantSheaf.cokernel`). Pulling back to the strata of a common refinement of
 stratifications, kernels, cokernels and direct sums of constructible sheaves of modules are
 constructible (`IsConstructibleSheaf.kernel`, `IsConstructibleSheaf.cokernel`,
@@ -98,24 +100,24 @@ section Finite
 
 variable {Y : Scheme.{u}} {Λ : Type (u + 1)} [Ring Λ]
 
-/-- **The value of a finite constant sheaf on a nonempty scheme is finite**: it is the stalk
-at any geometric point. -/
-lemma finite_of_isFiniteSheaf_constantSheaf [Nonempty Y] (M : ModuleCat.{u + 1} Λ)
+/-- **The value of a finite constant sheaf on a nonempty scheme is finitely generated**: it is
+the stalk at any geometric point. -/
+lemma moduleFinite_of_isFiniteSheaf_constantSheaf [Nonempty Y] (M : ModuleCat.{u + 1} Λ)
     [IsFiniteSheaf (FA := fun M N : ModuleCat.{u + 1} Λ ↦ M →ₗ[Λ] N)
       (CA := fun M : ModuleCat.{u + 1} Λ ↦ M)
       ((constantSheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj M)] :
-    Finite M := by
+    Module.Finite Λ M := by
   have : PreservesFilteredColimitsOfSize.{u, u} (CategoryTheory.forget (ModuleCat.{u + 1} Λ)) :=
     preservesFilteredColimitsOfSize_shrink.{u, u + 1, u, u + 1} _
   let y : Y := Classical.arbitrary _
   let s : Spec (.of (SeparableClosure (Y.residueField y))) ⟶ Y :=
     (SpecToEquivOfField (SeparableClosure (Y.residueField y)) _).2
       ⟨y, CommRingCat.ofHom (algebraMap (Y.residueField y) _)⟩
-  have := IsFiniteSheaf.finite_sheafFiber (FA := fun M N : ModuleCat.{u + 1} Λ ↦ M →ₗ[Λ] N)
-    (CA := fun M : ModuleCat.{u + 1} Λ ↦ M)
-    (F := (constantSheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj M) _ s
-  exact Finite.of_equiv _ ((CategoryTheory.forget _).mapIso
-    ((pointSmallEtale s).sheafFiberConstantSheafIso M)).toEquiv
+  exact (ModuleCat.isFinitelyGenerated_iff M).1
+    ((IsFiniteSheaf.isFinitelyGenerated_sheafFiber
+      (FA := fun M N : ModuleCat.{u + 1} Λ ↦ M →ₗ[Λ] N) (CA := fun M : ModuleCat.{u + 1} Λ ↦ M)
+      (F := (constantSheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj M) _ s).of_iso
+      ((pointSmallEtale s).sheafFiberConstantSheafIso M))
 
 end Finite
 
@@ -178,8 +180,8 @@ variable {X : Scheme.{u}} {Λ : Type (u + 1)} [Ring Λ]
 
 /-- **The kernel and cokernel of a morphism between finite locally constant sheaves of modules
 are locally constant**: on a common trivialising cover `φ` is a morphism of constant sheaves
-with finite values, which is étale-locally induced by a linear map `f`, so that the kernel
-and cokernel are étale-locally the constant sheaves at `ker f` and `coker f`.
+with finitely generated values, which is étale-locally induced by a linear map `f`, so that the
+kernel and cokernel are étale-locally the constant sheaves at `ker f` and `coker f`.
 (blueprint: `lemma:constructible-hom-constant-locally`, `lemma:constructible-flc-serre`) -/
 theorem IsLocallyConstantSheaf.kernel_and_cokernel
     [IsFiniteLocallyConstantSheaf (FA := fun M N : ModuleCat.{u + 1} Λ ↦ M →ₗ[Λ] N)
@@ -211,7 +213,7 @@ theorem IsLocallyConstantSheaf.kernel_and_cokernel
         (CA := fun M : ModuleCat.{u + 1} Λ ↦ M) g F
       IsFiniteSheaf.of_iso (FA := fun M N : ModuleCat.{u + 1} Λ ↦ M →ₗ[Λ] N)
         (CA := fun M : ModuleCat.{u + 1} Λ ↦ M) eF.symm
-    have : Finite M := finite_of_isFiniteSheaf_constantSheaf (Y := Y) M
+    have : Module.Finite Λ M := moduleFinite_of_isFiniteSheaf_constantSheaf (Y := Y) M
     obtain ⟨S, hS, hmem⟩ := exists_mem_forall_exists_constantSheafOverHom_comp_map_eq
       Y.smallEtaleTopology (T := Etale.mk (𝟙 Y)) M N ψ
     refine ⟨Cover.ofSieve S hS, fun y ↦ ?_⟩
@@ -259,6 +261,11 @@ variable {X : Scheme.{u}} {Λ : Type (u + 1)} [Ring Λ]
 instance : AB5OfSize.{u, u} (ModuleCat.{u + 1} Λ) :=
   AB5OfSize_shrink.{u, u, u + 1, u + 1} _
 
+/-- Limits of size `u` exist in `ModuleCat.{u + 1} Λ`; stated explicitly, since the universe
+constraint of the general instance does not unify. -/
+instance : HasLimitsOfSize.{u, u} (ModuleCat.{u + 1} Λ) :=
+  hasLimitsOfSizeShrink.{u, u, u + 1, u + 1} _
+
 /-- The stalk functors at geometric points, with values in `ModuleCat.{u + 1} Λ`, preserve
 finite colimits. -/
 instance {Ω : Type u} [Field Ω] [IsSepClosed Ω] (s : Spec (.of Ω) ⟶ X) :
@@ -271,42 +278,48 @@ instance {Ω : Type u} [Field Ω] [IsSepClosed Ω] (s : Spec (.of Ω) ⟶ X) :
       (A := ModuleCat.{u + 1} Λ)).leftAdjoint_preservesColimits
   PreservesColimitsOfSize.preservesFiniteColimits _
 
-/-- The kernel of a morphism out of a finite sheaf is finite: its stalks are kernels of maps
-out of finite modules. -/
-theorem IsFiniteSheaf.kernel
+/-- Over a noetherian ring, the kernel of a morphism out of a finite sheaf is finite: its stalks
+are kernels of maps out of finitely generated modules, submodules of noetherian modules. -/
+theorem IsFiniteSheaf.kernel [IsNoetherianRing Λ]
     [IsFiniteSheaf (FA := fun M N : ModuleCat.{u + 1} Λ ↦ M →ₗ[Λ] N)
       (CA := fun M : ModuleCat.{u + 1} Λ ↦ M) F] :
     IsFiniteSheaf (FA := fun M N : ModuleCat.{u + 1} Λ ↦ M →ₗ[Λ] N)
       (CA := fun M : ModuleCat.{u + 1} Λ ↦ M) (kernel φ) where
-  finite_sheafFiber Ω _ _ s := by
-    have := IsFiniteSheaf.finite_sheafFiber (FA := fun M N : ModuleCat.{u + 1} Λ ↦ M →ₗ[Λ] N)
-      (CA := fun M : ModuleCat.{u + 1} Λ ↦ M) (F := F) Ω s
+  isFinitelyGenerated_sheafFiber Ω _ _ s := by
+    have := (ModuleCat.isFinitelyGenerated_iff _).1
+      (IsFiniteSheaf.isFinitelyGenerated_sheafFiber
+        (FA := fun M N : ModuleCat.{u + 1} Λ ↦ M →ₗ[Λ] N)
+        (CA := fun M : ModuleCat.{u + 1} Λ ↦ M) (F := F) Ω s)
     let e := PreservesKernel.iso (pointSmallEtale s).sheafFiber φ
     have hι : Function.Injective (kernel.ι ((pointSmallEtale s).sheafFiber.map φ)) :=
       (ModuleCat.mono_iff_injective _).mp inferInstance
-    exact Finite.of_injective (fun k ↦ kernel.ι ((pointSmallEtale s).sheafFiber.map φ) (e.hom k))
-      (hι.comp ((ModuleCat.mono_iff_injective e.hom).mp inferInstance))
+    exact ((ModuleCat.isFinitelyGenerated_iff _).2
+      (Module.Finite.of_injective (kernel.ι ((pointSmallEtale s).sheafFiber.map φ)).hom hι)).of_iso
+      e.symm
 
 /-- The cokernel of a morphism into a finite sheaf is finite: its stalks are cokernels of maps
-into finite modules. -/
+into finitely generated modules. -/
 theorem IsFiniteSheaf.cokernel
     [IsFiniteSheaf (FA := fun M N : ModuleCat.{u + 1} Λ ↦ M →ₗ[Λ] N)
       (CA := fun M : ModuleCat.{u + 1} Λ ↦ M) G] :
     IsFiniteSheaf (FA := fun M N : ModuleCat.{u + 1} Λ ↦ M →ₗ[Λ] N)
       (CA := fun M : ModuleCat.{u + 1} Λ ↦ M) (cokernel φ) where
-  finite_sheafFiber Ω _ _ s := by
-    have := IsFiniteSheaf.finite_sheafFiber (FA := fun M N : ModuleCat.{u + 1} Λ ↦ M →ₗ[Λ] N)
-      (CA := fun M : ModuleCat.{u + 1} Λ ↦ M) (F := G) Ω s
-    let e := PreservesCokernel.iso (pointSmallEtale s).sheafFiber φ
+  isFinitelyGenerated_sheafFiber Ω _ _ s := by
+    let e := PreservesCokernel.iso ((pointSmallEtale s).sheafFiber (A := ModuleCat.{u + 1} Λ)) φ
+    have := (ModuleCat.isFinitelyGenerated_iff ((pointSmallEtale s).sheafFiber.obj G)).1
+      (IsFiniteSheaf.isFinitelyGenerated_sheafFiber
+        (FA := fun M N : ModuleCat.{u + 1} Λ ↦ M →ₗ[Λ] N)
+        (CA := fun M : ModuleCat.{u + 1} Λ ↦ M) (F := G) Ω s)
     have hπ : Function.Surjective (cokernel.π ((pointSmallEtale s).sheafFiber.map φ)) :=
       (ModuleCat.epi_iff_surjective _).mp inferInstance
-    exact Finite.of_surjective
-      (fun k ↦ e.inv (cokernel.π ((pointSmallEtale s).sheafFiber.map φ) k))
-      (((ModuleCat.epi_iff_surjective e.inv).mp inferInstance).comp hπ)
+    exact ((ModuleCat.isFinitelyGenerated_iff
+      (Limits.cokernel ((pointSmallEtale s).sheafFiber.map φ))).2
+      (Module.Finite.of_surjective (cokernel.π ((pointSmallEtale s).sheafFiber.map φ)).hom
+        hπ)).of_iso e.symm
 
-/-- **The kernel of a morphism between finite locally constant sheaves of modules is finite
-locally constant.** (blueprint: `lemma:constructible-flc-serre`) -/
-theorem IsFiniteLocallyConstantSheaf.kernel
+/-- **The kernel of a morphism between finite locally constant sheaves of modules over a
+noetherian ring is finite locally constant.** (blueprint: `lemma:constructible-flc-serre`) -/
+theorem IsFiniteLocallyConstantSheaf.kernel [IsNoetherianRing Λ]
     [IsFiniteLocallyConstantSheaf (FA := fun M N : ModuleCat.{u + 1} Λ ↦ M →ₗ[Λ] N)
       (CA := fun M : ModuleCat.{u + 1} Λ ↦ M) F]
     [IsFiniteLocallyConstantSheaf (FA := fun M N : ModuleCat.{u + 1} Λ ↦ M →ₗ[Λ] N)
@@ -328,6 +341,45 @@ theorem IsFiniteLocallyConstantSheaf.cokernel
   toIsLocallyConstantSheaf := (IsLocallyConstantSheaf.kernel_and_cokernel φ).2
   toIsFiniteSheaf := IsFiniteSheaf.cokernel φ
 
+/-- **The homology of a short complex of finite locally constant sheaves of modules over a
+noetherian ring is finite locally constant**: it is the cokernel of a morphism into the cycles,
+the kernel of the second morphism. -/
+theorem IsFiniteLocallyConstantSheaf.homology [IsNoetherianRing Λ]
+    (S : ShortComplex (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
+    [IsFiniteLocallyConstantSheaf (FA := fun M N : ModuleCat.{u + 1} Λ ↦ M →ₗ[Λ] N)
+      (CA := fun M : ModuleCat.{u + 1} Λ ↦ M) S.X₁]
+    [IsFiniteLocallyConstantSheaf (FA := fun M N : ModuleCat.{u + 1} Λ ↦ M →ₗ[Λ] N)
+      (CA := fun M : ModuleCat.{u + 1} Λ ↦ M) S.X₂]
+    [IsFiniteLocallyConstantSheaf (FA := fun M N : ModuleCat.{u + 1} Λ ↦ M →ₗ[Λ] N)
+      (CA := fun M : ModuleCat.{u + 1} Λ ↦ M) S.X₃] :
+    IsFiniteLocallyConstantSheaf (FA := fun M N : ModuleCat.{u + 1} Λ ↦ M →ₗ[Λ] N)
+      (CA := fun M : ModuleCat.{u + 1} Λ ↦ M) S.homology := by
+  have := IsFiniteLocallyConstantSheaf.kernel S.g
+  have : IsFiniteLocallyConstantSheaf (FA := fun M N : ModuleCat.{u + 1} Λ ↦ M →ₗ[Λ] N)
+      (CA := fun M : ModuleCat.{u + 1} Λ ↦ M) S.cycles :=
+    IsFiniteLocallyConstantSheaf.of_iso (F := Limits.kernel S.g)
+      ((S.cyclesIsKernel.conePointUniqueUpToIso (kernelIsKernel S.g)).symm)
+  have := IsFiniteLocallyConstantSheaf.cokernel S.toCycles
+  exact IsFiniteLocallyConstantSheaf.of_iso (F := Limits.cokernel S.toCycles)
+    ((cokernelIsCokernel S.toCycles).coconePointUniqueUpToIso S.homologyIsCokernel)
+
+/-- Blueprint `lemma-constructible-flc-serre`: Kernels, cokernels and extensions of finite
+locally constant sheaves.
+
+**The extension clause.** For a finite ring `Λ`, the middle term of a short exact sequence of
+sheaves of `Λ`-modules whose outer terms are finite locally constant is finite locally constant:
+on an étale cover trivialising the outer terms, the sheaf of splittings is a torsor under the
+finite group `Hom_Λ(N, M)`, so the extension is locally constant. -/
+theorem IsFiniteLocallyConstantSheaf.of_shortExact [Finite Λ]
+    {S : ShortComplex (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))} (hS : S.ShortExact)
+    [IsFiniteLocallyConstantSheaf (FA := fun M N : ModuleCat.{u + 1} Λ ↦ M →ₗ[Λ] N)
+      (CA := fun M : ModuleCat.{u + 1} Λ ↦ M) S.X₁]
+    [IsFiniteLocallyConstantSheaf (FA := fun M N : ModuleCat.{u + 1} Λ ↦ M →ₗ[Λ] N)
+      (CA := fun M : ModuleCat.{u + 1} Λ ↦ M) S.X₃] :
+    IsFiniteLocallyConstantSheaf (FA := fun M N : ModuleCat.{u + 1} Λ ↦ M →ₗ[Λ] N)
+      (CA := fun M : ModuleCat.{u + 1} Λ ↦ M) S.X₂ :=
+  sorry
+
 end FiniteStalks
 
 section Constructible
@@ -335,11 +387,11 @@ section Constructible
 variable {X : Scheme.{u}} {Λ : Type (u + 1)} [Ring Λ]
   {F G : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)} (φ : F ⟶ G)
 
-/-- **The kernel of a morphism between constructible sheaves of modules is constructible**: on
-the common refinement of witnessing stratifications, the pullback of the kernel to a stratum is
-the kernel of a morphism between finite locally constant sheaves.
+/-- **The kernel of a morphism between constructible sheaves of modules over a noetherian ring
+is constructible**: on the common refinement of witnessing stratifications, the pullback of the
+kernel to a stratum is the kernel of a morphism between finite locally constant sheaves.
 (blueprint: `thm:constructible-serre`) -/
-theorem IsConstructibleSheaf.kernel
+theorem IsConstructibleSheaf.kernel [IsNoetherianRing Λ]
     [IsConstructibleSheaf (FA := fun M N : ModuleCat.{u + 1} Λ ↦ M →ₗ[Λ] N)
       (CA := fun M : ModuleCat.{u + 1} Λ ↦ M) F]
     [IsConstructibleSheaf (FA := fun M N : ModuleCat.{u + 1} Λ ↦ M →ₗ[Λ] N)
@@ -385,6 +437,23 @@ theorem IsConstructibleSheaf.cokernel
     (CA := fun M : ModuleCat.{u + 1} Λ ↦ M)
     (PreservesCokernel.iso (Etale.upperStar (ModuleCat.{u + 1} Λ) ((S.inter T).immersion k)) φ).symm
 
+/-- **A retract of a constructible sheaf of modules over a noetherian ring is constructible**:
+it is the kernel of the complementary idempotent. -/
+theorem IsConstructibleSheaf.of_retract [IsNoetherianRing Λ] {S : Sheaf X.smallEtaleTopology
+    (ModuleCat.{u + 1} Λ)} (e : Retract S F)
+    [IsConstructibleSheaf (FA := fun M N : ModuleCat.{u + 1} Λ ↦ M →ₗ[Λ] N)
+      (CA := fun M : ModuleCat.{u + 1} Λ ↦ M) F] :
+    IsConstructibleSheaf (FA := fun M N : ModuleCat.{u + 1} Λ ↦ M →ₗ[Λ] N)
+      (CA := fun M : ModuleCat.{u + 1} Λ ↦ M) S := by
+  have h : e.i ≫ (𝟙 F - e.r ≫ e.i) = 0 := by simp
+  have := IsConstructibleSheaf.kernel (𝟙 F - e.r ≫ e.i)
+  refine IsConstructibleSheaf.of_iso (F' := S)
+    ⟨Limits.kernel.ι _ ≫ e.r, Limits.kernel.lift _ e.i h, (cancel_mono (Limits.kernel.ι _)).1 ?_,
+      by simp⟩
+  have := Limits.kernel.condition (𝟙 F - e.r ≫ e.i)
+  rw [Preadditive.comp_sub, Category.comp_id, sub_eq_zero] at this
+  simpa using this.symm
+
 variable (F G) in
 /-- **The direct sum of two constructible sheaves of modules is constructible**: on the common
 refinement of witnessing stratifications, the pullback of `F ⊞ G` to a stratum is the direct sum
@@ -413,6 +482,37 @@ theorem IsConstructibleSheaf.biprod
     (CA := fun M : ModuleCat.{u + 1} Λ ↦ M)
     ((Etale.upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ)
       ((S.inter T).immersion k)).leftAdjointBiprodIso F G).symm
+
+/-- **The middle term of a short exact sequence of sheaves of modules over a finite ring whose
+outer terms are constructible is constructible**: on the common refinement of witnessing
+stratifications, the pullback of the sequence to a stratum is a short exact sequence of finite
+locally constant sheaves. (blueprint: `thm:constructible-serre`) -/
+theorem IsConstructibleSheaf.of_shortExact [Finite Λ]
+    {S : ShortComplex (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))} (hS : S.ShortExact)
+    [IsConstructibleSheaf (FA := fun M N : ModuleCat.{u + 1} Λ ↦ M →ₗ[Λ] N)
+      (CA := fun M : ModuleCat.{u + 1} Λ ↦ M) S.X₁]
+    [IsConstructibleSheaf (FA := fun M N : ModuleCat.{u + 1} Λ ↦ M →ₗ[Λ] N)
+      (CA := fun M : ModuleCat.{u + 1} Λ ↦ M) S.X₃] :
+    IsConstructibleSheaf (FA := fun M N : ModuleCat.{u + 1} Λ ↦ M →ₗ[Λ] N)
+      (CA := fun M : ModuleCat.{u + 1} Λ ↦ M) S.X₂ := by
+  obtain ⟨T₁, hT₁⟩ := IsConstructibleSheaf.exists_stratification
+    (FA := fun M N : ModuleCat.{u + 1} Λ ↦ M →ₗ[Λ] N) (CA := fun M : ModuleCat.{u + 1} Λ ↦ M)
+    (F := S.X₁)
+  obtain ⟨T₃, hT₃⟩ := IsConstructibleSheaf.exists_stratification
+    (FA := fun M N : ModuleCat.{u + 1} Λ ↦ M →ₗ[Λ] N) (CA := fun M : ModuleCat.{u + 1} Λ ↦ M)
+    (F := S.X₃)
+  refine ⟨T₁.inter T₃, fun k ↦ ?_⟩
+  have h₁ := (T₁.inter_refines_left T₃).isFiniteLocallyConstantSheaf_upperStar S.X₁ hT₁ k
+  have h₃ := (T₁.inter_refines_right T₃).isFiniteLocallyConstantSheaf_upperStar S.X₃ hT₃ k
+  let F := Etale.upperStar (ModuleCat.{u + 1} Λ) ((T₁.inter T₃).immersion k)
+  have : PreservesFiniteLimits F := inferInstance
+  have : PreservesFiniteColimits F := inferInstance
+  have hS' : (S.map F).ShortExact := hS.map_of_exact F
+  have : IsFiniteLocallyConstantSheaf (FA := fun M N : ModuleCat.{u + 1} Λ ↦ M →ₗ[Λ] N)
+      (CA := fun M : ModuleCat.{u + 1} Λ ↦ M) (S.map F).X₁ := h₁
+  have : IsFiniteLocallyConstantSheaf (FA := fun M N : ModuleCat.{u + 1} Λ ↦ M →ₗ[Λ] N)
+      (CA := fun M : ModuleCat.{u + 1} Λ ↦ M) (S.map F).X₃ := h₃
+  exact IsFiniteLocallyConstantSheaf.of_shortExact hS'
 
 end Constructible
 

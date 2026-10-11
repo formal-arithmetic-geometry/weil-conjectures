@@ -9,6 +9,7 @@ public import Mathlib.Algebra.Homology.DerivedCategory.FullyFaithful
 public import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
 public import Mathlib.Algebra.Homology.DerivedCategory.TStructure
 public import Mathlib.CategoryTheory.Triangulated.Subcategory
+public import Mathlib.CategoryTheory.Triangulated.TStructure.TruncLEGT
 public import Mathlib.CategoryTheory.Triangulated.TStructure.TruncLTGE
 
 /-!
@@ -30,6 +31,8 @@ homology in degrees `[a, b]` only, expressed through the canonical t-structure
 - `DerivedCategory.prop_of_bounded`: *dévissage*, a triangulated subcategory of `D(C)`
   containing the objects of `C` satisfying `P`, placed in degree `0`, contains every bounded
   object all of whose homology objects satisfy `P`.
+- `DerivedCategory.homologyFunctor_map_bijective_of_isLE_of_isGE`: for `X ≤ n ≤ Y`, the functor
+  `H^n` is bijective on morphisms `X ⟶ Y`.
 
 -/
 
@@ -59,6 +62,17 @@ lemma homologyConcentratedIn.mono {a b a' b' : ℤ} (ha : a' ≤ a) (hb : b ≤ 
     homologyConcentratedIn a' b' M := by
   obtain ⟨h₁, h₂⟩ := hM
   exact ⟨TStructure.t.isGE_of_ge M a' a ha, TStructure.t.isLE_of_le M b b' hb⟩
+
+/-- A retract of an object with homology concentrated in `[a, b]` has homology concentrated in
+`[a, b]`: its homology objects are retracts of those of the bigger object. -/
+instance (a b : ℤ) : (homologyConcentratedIn (C := C) a b).IsStableUnderRetracts where
+  of_retract {_ N} e h := by
+    obtain ⟨h₁, h₂⟩ := h
+    have key (q : ℤ) (hq : IsZero ((homologyFunctor C q).obj N)) :
+        IsZero ((homologyFunctor C q).obj _) := (IsZero.iff_id_eq_zero _).2 (by
+      rw [← (e.map (homologyFunctor C q)).retract, hq.eq_of_tgt (e.map _).i 0, zero_comp])
+    exact ⟨(isGE_iff _ a).2 fun q hq ↦ key q ((isGE_iff N a).1 h₁ q hq),
+      (isLE_iff _ b).2 fun q hq ↦ key q ((isLE_iff N b).1 h₂ q hq)⟩
 
 /-- An object of `D(C)` is bounded exactly when its homology is concentrated in some
 interval. -/
@@ -157,5 +171,127 @@ lemma prop_of_bounded (Q : ObjectProperty (DerivedCategory C)) [Q.IsTriangulated
   have : M.IsLE (a + ↑(b - a + 1).toNat - 1) :=
     TStructure.t.isLE_of_le M b _ (by lia)
   exact prop_of_isGE_of_isLE Q P hP (b - a + 1).toNat a M ha this fun q _ _ ↦ hMP q
+
+section Heart
+
+open Category
+open TStructure (t)
+
+/-- Let `T : A ⟶ B ⟶ C ⟶ A[1]` be a distinguished triangle with `A ≤ a - 1` and `C ≥ a`.
+Then `H^n(A) ⟶ H^n(B)` is an isomorphism for `n < a`. -/
+lemma isIso_homologyFunctor_map_mor₁_of_isLE_of_isGE (T : Triangle (DerivedCategory C))
+    (hT : T ∈ distTriang _) (a n : ℤ) (h : n < a) [T.obj₁.IsLE (a - 1)] [T.obj₃.IsGE a] :
+    IsIso ((homologyFunctor C n).map T.mor₁) := by
+  have h₁ : Mono ((homologyFunctor C n).map T.mor₁) :=
+    ((homologyFunctor C 0).homologySequence_mono_shift_map_mor₁_iff _ hT (n - 1) n
+      (by lia)).2 (IsZero.eq_of_src (isZero_of_isGE _ a _ (by lia)) _ _)
+  have h₂ : Epi ((homologyFunctor C n).map T.mor₁) :=
+    ((homologyFunctor C 0).homologySequence_epi_shift_map_mor₁_iff _ hT n).2
+      (IsZero.eq_of_tgt (isZero_of_isGE _ a _ h) _ _)
+  exact isIso_of_mono_of_epi _
+
+/-- Let `T : A ⟶ B ⟶ C ⟶ A[1]` be a distinguished triangle with `A ≤ a - 1` and `C ≥ a`.
+Then `H^n(B) ⟶ H^n(C)` is an isomorphism for `a ≤ n`. -/
+lemma isIso_homologyFunctor_map_mor₂_of_isLE_of_isGE (T : Triangle (DerivedCategory C))
+    (hT : T ∈ distTriang _) (a n : ℤ) (h : a ≤ n) [T.obj₁.IsLE (a - 1)] [T.obj₃.IsGE a] :
+    IsIso ((homologyFunctor C n).map T.mor₂) := by
+  have h₁ : Mono ((homologyFunctor C n).map T.mor₂) :=
+    ((homologyFunctor C 0).homologySequence_mono_shift_map_mor₂_iff _ hT n).2
+      (IsZero.eq_of_src (isZero_of_isLE _ (a - 1) _ (by lia)) _ _)
+  have h₂ : Epi ((homologyFunctor C n).map T.mor₂) :=
+    ((homologyFunctor C 0).homologySequence_epi_shift_map_mor₂_iff _ hT n (n + 1) rfl).2
+      (IsZero.eq_of_tgt (isZero_of_isLE _ (a - 1) _ (by lia)) _ _)
+  exact isIso_of_mono_of_epi _
+
+/-- `H^n(τ_{<a} X) ⟶ H^n(X)` is an isomorphism for `n < a`. -/
+lemma isIso_homologyFunctor_map_truncLTι_app (X : DerivedCategory C) (a n : ℤ) (h : n < a) :
+    IsIso ((homologyFunctor C n).map ((t.truncLTι a).app X)) :=
+  isIso_homologyFunctor_map_mor₁_of_isLE_of_isGE _ (t.triangleLTGE_distinguished a X) a n h
+
+/-- `H^n(X) ⟶ H^n(τ_{≥a} X)` is an isomorphism for `a ≤ n`. -/
+lemma isIso_homologyFunctor_map_truncGEπ_app (X : DerivedCategory C) (a n : ℤ) (h : a ≤ n) :
+    IsIso ((homologyFunctor C n).map ((t.truncGEπ a).app X)) :=
+  isIso_homologyFunctor_map_mor₂_of_isLE_of_isGE _ (t.triangleLTGE_distinguished a X) a n h
+
+/-- On objects of the shifted heart `[n, n]`, the functor `H^n` is bijective on morphisms. -/
+lemma homologyFunctor_map_bijective_of_isGE_of_isLE {P Q : DerivedCategory C} (n : ℤ)
+    [P.IsGE n] [P.IsLE n] [Q.IsGE n] [Q.IsLE n] :
+    Function.Bijective (fun φ : P ⟶ Q ↦ (homologyFunctor C n).map φ) := by
+  obtain ⟨A, ⟨eP⟩⟩ := P.exists_iso_singleFunctor_obj_of_isGE_of_isLE n
+  obtain ⟨B, ⟨eQ⟩⟩ := Q.exists_iso_singleFunctor_obj_of_isGE_of_isLE n
+  let ε := singleFunctorCompHomologyFunctorIso C n
+  have key (a : A ⟶ B) : (homologyFunctor C n).map ((singleFunctor C n).map a) =
+      ε.hom.app A ≫ a ≫ ε.inv.app B := by
+    have := ε.hom.naturality a
+    simp only [Functor.comp_map, Functor.id_map] at this
+    calc (homologyFunctor C n).map ((singleFunctor C n).map a)
+        = ((homologyFunctor C n).map ((singleFunctor C n).map a) ≫ ε.hom.app B) ≫
+            ε.inv.app B := by rw [assoc, Iso.hom_inv_id_app]; exact (comp_id _).symm
+      _ = _ := by rw [this, assoc]
+  constructor
+  · intro φ φ' h
+    simp only at h
+    suffices (singleFunctor C n).preimage (eP.inv ≫ φ ≫ eQ.hom) =
+        (singleFunctor C n).preimage (eP.inv ≫ φ' ≫ eQ.hom) by
+      have := congrArg (singleFunctor C n).map this
+      simp only [Functor.map_preimage] at this
+      simpa using this
+    have h1 := key ((singleFunctor C n).preimage (eP.inv ≫ φ ≫ eQ.hom))
+    have h2 := key ((singleFunctor C n).preimage (eP.inv ≫ φ' ≫ eQ.hom))
+    simp only [Functor.map_preimage, Functor.map_comp, h] at h1 h2
+    rw [h1] at h2
+    exact (cancel_mono _).1 ((cancel_epi _).1 h2).symm |>.symm
+  · intro g
+    let a : A ⟶ B := ε.inv.app A ≫ (homologyFunctor C n).map eP.inv ≫ g ≫
+      (homologyFunctor C n).map eQ.hom ≫ ε.hom.app B
+    refine ⟨eP.hom ≫ (singleFunctor C n).map a ≫ eQ.inv, ?_⟩
+    simp only
+    rw [Functor.map_comp, Functor.map_comp, key]
+    simp only [a, assoc, Iso.hom_inv_id_app_assoc]
+    rw [← Functor.map_comp_assoc, Iso.hom_inv_id, CategoryTheory.Functor.map_id, id_comp,
+      ← Functor.map_comp, Iso.hom_inv_id, CategoryTheory.Functor.map_id, comp_id]
+
+/-- For `X ≤ n` and `Y ≥ n` in the derived category, `H^n` induces a bijection between
+morphisms `X ⟶ Y` and morphisms `H^n X ⟶ H^n Y`: every morphism `X ⟶ Y` factors uniquely
+through `τ_{≥ n} X ⟶ τ_{≤ n} Y`, a morphism between objects of the shifted heart:
+```
+X ──f──▶ Y
+│π       ▲ι
+▼        │
+τ_{≥n}X ─▶ τ_{≤n}Y
+```
+-/
+lemma homologyFunctor_map_bijective_of_isLE_of_isGE {X Y : DerivedCategory C} (n : ℤ)
+    [X.IsLE n] [Y.IsGE n] :
+    Function.Bijective (fun f : X ⟶ Y ↦ (homologyFunctor C n).map f) := by
+  let π := (t.truncGEπ n).app X
+  let ι := (t.truncLTι (n + 1)).app Y
+  have : IsIso ((homologyFunctor C n).map π) := isIso_homologyFunctor_map_truncGEπ_app X n n le_rfl
+  have : IsIso ((homologyFunctor C n).map ι) :=
+    isIso_homologyFunctor_map_truncLTι_app Y (n + 1) n (by lia)
+  have : ((t.truncGE n).obj X).IsLE n := inferInstance
+  have : ((t.truncLT (n + 1)).obj Y).IsGE n := inferInstance
+  have hPQ := homologyFunctor_map_bijective_of_isGE_of_isLE
+    (P := (t.truncGE n).obj X) (Q := (t.truncLT (n + 1)).obj Y) n
+  have fac (f : X ⟶ Y) : f = π ≫ t.liftTruncLT (t.descTruncGE f n) n (n + 1) rfl ≫ ι := by
+    simp [π, ι]
+  constructor
+  · intro f f' h
+    simp only at h
+    rw [fac f, fac f']
+    congr 2
+    apply hPQ.1
+    simp only
+    rw [← cancel_epi ((homologyFunctor C n).map π), ← cancel_mono ((homologyFunctor C n).map ι)]
+    simp only [assoc, ← Functor.map_comp]
+    rw [← fac f, ← fac f', h]
+  · intro g
+    obtain ⟨φ, hφ⟩ := hPQ.2 (inv ((homologyFunctor C n).map π) ≫ g ≫
+      inv ((homologyFunctor C n).map ι))
+    refine ⟨π ≫ φ ≫ ι, ?_⟩
+    simp only at hφ ⊢
+    simp [hφ]
+
+end Heart
 
 end DerivedCategory

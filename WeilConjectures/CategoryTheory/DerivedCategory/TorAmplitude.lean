@@ -5,16 +5,20 @@ Authors: Claude
 -/
 module
 
-public import Mathlib.CategoryTheory.Monoidal.Category
+public import WeilConjectures.CategoryTheory.Monoidal.Instances.DerivedCategory
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.TStructure
 
 /-!
 
 # Tor amplitude in a monoidal derived category
 
-Let `C` be an abelian category whose derived category `D(C)` carries a monoidal structure, for
-instance the derived tensor product `- ⊗ᴸ -` of a category of sheaves. This file defines Tor
-amplitude for objects of `D(C)`, tested by tensoring with objects of `C` placed in degree `0`.
+Let `C` be a monoidal closed braided Grothendieck abelian category, for instance a category of
+sheaves of modules, such that the localization `Qh : K(C) ⥤ D(C)` admits a derived monoidal
+structure (`Qh.HasDerivedMonoidalCategory`). Then `D(C)` carries the derived tensor product
+`- ⊗ᴸ -` (`DerivedCategory.monoidalCategoryOfMonoidalClosedBraidedCategory`). This file defines
+Tor amplitude for objects of `D(C)` with respect to this derived tensor product, tested by
+tensoring with objects of `C` placed in degree `0`. The monoidal structure is not a parameter:
+Tor amplitude only has its meaning for the derived tensor product.
 
 Nothing here depends on a site: the étale and pro-étale Tor amplitude of
 `WeilConjectures.SixFunctors.Etale.Derived.TorAmplitude` and
@@ -36,15 +40,22 @@ Nothing here depends on a site: the étale and pro-étale Tor amplitude of
 
 @[expose] public section
 
-open CategoryTheory MonoidalCategory
+universe w v u
+
+open CategoryTheory Limits MonoidalCategory
 
 namespace DerivedCategory
 
-variable (C : Type*) [Category C] [Abelian C] [HasDerivedCategory C]
-  [MonoidalCategory (DerivedCategory C)]
+variable (C : Type u) [Category.{v} C] [Abelian C] [IsGrothendieckAbelian.{v} C]
+  [HasDerivedCategory.{w} C] [MonoidalCategory C] [MonoidalClosed C] [MonoidalPreadditive C]
+  [BraidedCategory C]
+
+local instance : HasColimitsOfSize.{0, 0} C := hasColimitsOfSizeShrink C
+
+variable [Qh.HasDerivedMonoidalCategory (HomotopyCategory.quasiIso C (ComplexShape.up ℤ))]
 
 /-- An object `M` of `D(C)` has *Tor amplitude in `[a, b]`* if for every object `F` of `C` the
-tensor product `M ⊗ F` has homology concentrated in `[a, b]`. -/
+derived tensor product `M ⊗ᴸ F` has homology concentrated in `[a, b]` (Stacks, Tag 0651). -/
 def torAmplitudeIn (a b : ℤ) : ObjectProperty (DerivedCategory C) :=
   fun M ↦ ∀ F : C, homologyConcentratedIn a b (M ⊗ (singleFunctor C 0).obj F)
 
@@ -55,12 +66,32 @@ lemma torAmplitudeIn.mono {a b a' b' : ℤ} (ha : a' ≤ a) (hb : b ≤ b') {M :
     (hM : torAmplitudeIn C a b M) : torAmplitudeIn C a' b' M :=
   fun F ↦ (hM F).mono ha hb
 
+/-- Tor amplitude is invariant under isomorphism. -/
+instance (a b : ℤ) : (torAmplitudeIn C a b).IsClosedUnderIsomorphisms where
+  of_iso e hM F := by
+    obtain ⟨h₁, h₂⟩ := hM F
+    exact ⟨TStructure.t.isGE_of_iso (whiskerRightIso e _) a,
+      TStructure.t.isLE_of_iso (whiskerRightIso e _) b⟩
+
+/-- Tor amplitude passes to retracts. -/
+instance (a b : ℤ) : (torAmplitudeIn C a b).IsStableUnderRetracts where
+  of_retract e h F := (homologyConcentratedIn a b).prop_of_retract
+    (e.map (tensorRight ((singleFunctor C 0).obj F))) (h F)
+
 variable (C)
 
 /-- An object of `D(C)` has *finite Tor amplitude* if it has Tor amplitude in some interval
 `[a, b]`. -/
 def finiteTorAmplitude : ObjectProperty (DerivedCategory C) :=
   fun M ↦ ∃ a b : ℤ, torAmplitudeIn C a b M
+
+/-- Finite Tor amplitude is invariant under isomorphism. -/
+instance : (finiteTorAmplitude C).IsClosedUnderIsomorphisms where
+  of_iso e := fun ⟨a, b, h⟩ ↦ ⟨a, b, (torAmplitudeIn C a b).prop_of_iso e h⟩
+
+/-- Finite Tor amplitude passes to retracts. -/
+instance : (finiteTorAmplitude C).IsStableUnderRetracts where
+  of_retract e := fun ⟨a, b, h⟩ ↦ ⟨a, b, (torAmplitudeIn C a b).prop_of_retract e h⟩
 
 variable {C}
 

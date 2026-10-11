@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import Mathlib.Algebra.Category.Grp.AB
+public import Mathlib.Algebra.Category.ModuleCat.Projective
 public import Mathlib.AlgebraicGeometry.Sites.EtalePoint
 public import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.HasExt
 public import Mathlib.CategoryTheory.Sites.EpiMono
@@ -37,10 +38,18 @@ In degree `1` and for an arbitrary field `K` we do not go through Galois cohomol
 descent datum is a function on the finite set of points of `Spec (L ⊗_K L)` whose set of values
 is closed under addition, hence zero.
 
+Along the way we record that for `k` separably closed an étale sheaf on `Spec k` is determined
+by its global sections, since every étale `k`-scheme is covered by its `k`-points.
+
 ## Main statements
 
 - `AlgebraicGeometry.Scheme.surjective_app_of_epi_of_isSepClosed`: for `k` separably closed,
-  an epimorphism of abelian étale sheaves on `Spec k` is surjective on global sections.
+  an epimorphism of étale sheaves on `Spec k` (with values in a concrete category such as
+  abelian groups or modules) is surjective on global sections.
+- `AlgebraicGeometry.Scheme.eq_of_forall_restrict_eq_of_isSepClosed`: two sections of an étale
+  sheaf on `Spec k` agreeing at every `k`-point are equal.
+- `AlgebraicGeometry.Scheme.isZero_of_subsingleton_sections_of_isSepClosed`: an étale sheaf of
+  modules on `Spec k` without nonzero global sections is zero.
 - `AlgebraicGeometry.Scheme.subsingleton_H_constantSheaf_of_isSepClosed`:
   `H^q(Spec k_ét, ℤ) = 0` for `q ≥ 1` and `k` separably closed.
 - `AlgebraicGeometry.Scheme.surjective_app_of_shortExact_constantSheaf_int`: every `ℤ`-torsor
@@ -65,55 +74,128 @@ open CategoryTheory Opposite
 
 namespace AlgebraicGeometry.Scheme
 
+section EtalePoint
+
+variable (k : Type u) [Field k]
+
+/-- The terminal object `𝟙 : Spec k ⟶ Spec k` of the small étale site of `Spec k`, as an object
+of `(Spec k).Etale`. -/
+noncomputable def etalePoint : (Spec (.of k)).Etale :=
+  MorphismProperty.Over.mk ⊤ (𝟙 (Spec (CommRingCat.of k)))
+    (MorphismProperty.id_mem @AlgebraicGeometry.Etale (Spec (CommRingCat.of k)))
+
+variable {k} in
+/-- `𝟙 : Spec k ⟶ Spec k` is the terminal object of the small étale site of `Spec k`. -/
+noncomputable def isTerminalEtalePoint : Limits.IsTerminal (etalePoint k) :=
+  MorphismProperty.Over.mkIdTerminal @AlgebraicGeometry.Etale (Spec (.of k))
+
+end EtalePoint
+
 section IsSepClosed
 
 variable (k : Type u) [Field k] [IsSepClosed k]
 
-/-- The terminal object `𝟙 : Spec k ⟶ Spec k` of the small étale site of `Spec k`. -/
-local notation "𝟙ₑ" => MorphismProperty.Over.mk ⊤ (𝟙 (Spec (CommRingCat.of k)))
-  (MorphismProperty.id_mem @AlgebraicGeometry.Etale (Spec (CommRingCat.of k)))
+/-- Let `X` be a scheme isomorphic to `Spec k` for a separably closed field `k`. Every covering
+sieve of the terminal object `X` of the small étale site of `X` contains the identity: some
+member of an étale covering is nonempty, and a nonempty étale `X`-scheme has an `X`-point. -/
+lemma id_mem_of_mem_smallEtaleTopology_of_iso {k} [Field k] [IsSepClosed k] {X : Scheme.{u}}
+    (e : X ≅ Spec (.of k)) {R : Sieve (Etale.mk (𝟙 X))} (hR : R ∈ X.smallEtaleTopology _) :
+    R.arrows (𝟙 _) := by
+  obtain ⟨𝒰, h𝒰, p, hle⟩ := (mem_smallGrothendieckTopology _ _).1 hR
+  obtain ⟨j, y, hy⟩ := 𝒰.exists_eq (e.inv (default : Spec (.of k)))
+  obtain ⟨l, hl, -⟩ := exists_fac_of_etale_of_isSepClosed (𝒰.f j) e.inv y (by rw [hy]; rfl)
+  have hl' : (e.hom ≫ l) ≫ 𝒰.f j = 𝟙 X := by rw [Category.assoc, hl, e.hom_inv_id]
+  have hmem : R.arrows ((𝒰.f j).asOverProp _) := hle _ _ (Presieve.ofArrows.mk j)
+  convert R.downward_closed hmem (MorphismProperty.Over.homMk (A := Etale.mk (𝟙 X))
+    (B := (𝒰.X j).asOverProp _ (p j)) (e.hom ≫ l) (by
+      change (e.hom ≫ l) ≫ (𝒰.X j ↘ _) = 𝟙 _
+      rw [← comp_over (𝒰.f j), ← Category.assoc, hl', Category.id_comp]
+      rfl))
+  exact MorphismProperty.Over.Hom.ext hl'.symm
 
 /-- Over a separably closed field `k`, every covering sieve of `Spec k` in the small étale site
-contains the identity: some member of an étale covering is nonempty, and a nonempty étale
-`k`-scheme has a `k`-point. -/
-lemma id_mem_of_mem_smallEtaleTopology_of_isSepClosed (R : Sieve 𝟙ₑ)
-    (hR : R ∈ (Spec (.of k)).smallEtaleTopology 𝟙ₑ) : R.arrows (𝟙 _) := by
-  obtain ⟨𝒰, h𝒰, p, hle⟩ := (mem_smallGrothendieckTopology _ _).1 hR
-  obtain ⟨j, y, hy⟩ := 𝒰.exists_eq (default : Spec (.of k))
-  obtain ⟨l, hl, -⟩ := exists_fac_of_etale_of_isSepClosed (𝒰.f j) (𝟙 _) y (by rw [hy]; rfl)
-  have hmem : R.arrows ((𝒰.f j).asOverProp _) := hle _ _ (Presieve.ofArrows.mk j)
-  convert R.downward_closed hmem (MorphismProperty.Over.homMk (A := 𝟙ₑ)
-    (B := (𝒰.X j).asOverProp _ (p j)) l (by
-      change l ≫ (𝒰.X j ↘ _) = 𝟙 _
-      rw [← comp_over (𝒰.f j), ← Category.assoc, hl, Category.id_comp]
-      rfl))
-  exact MorphismProperty.Over.Hom.ext hl.symm
+contains the identity. -/
+lemma id_mem_of_mem_smallEtaleTopology_of_isSepClosed (R : Sieve (etalePoint k))
+    (hR : R ∈ (Spec (.of k)).smallEtaleTopology (etalePoint k)) : R.arrows (𝟙 _) :=
+  id_mem_of_mem_smallEtaleTopology_of_iso (Iso.refl _) hR
 
-/-- Over a separably closed field `k`, an epimorphism of abelian étale sheaves on `Spec k` is
-surjective on global sections. -/
-lemma surjective_app_of_epi_of_isSepClosed
-    {F G : Sheaf (Spec (.of k)).smallEtaleTopology AddCommGrpCat.{u + 1}} (φ : F ⟶ G) [Epi φ] :
-    Function.Surjective (φ.hom.app (op 𝟙ₑ)) := by
-  have := (Sheaf.isLocallySurjective_iff_epi' (A := AddCommGrpCat.{u + 1}) φ).2 inferInstance
+section Concrete
+
+variable {A : Type*} [Category A] {FA : A → A → Type*} {CA : A → Type*}
+  [∀ X Y, FunLike (FA X Y) (CA X) (CA Y)] [ConcreteCategory A FA]
+  [ConcreteCategory.HasFunctorialSurjectiveInjectiveFactorization A]
+
+/-- Let `X` be a scheme isomorphic to `Spec k` for a separably closed field `k`. An epimorphism
+of étale sheaves on `X` with values in a concrete category `A` (for instance abelian groups or
+modules) is surjective on sections over `X`. -/
+lemma surjective_app_of_epi_of_iso {k} [Field k] [IsSepClosed k] {X : Scheme.{u}}
+    (e : X ≅ Spec (.of k))
+    [X.smallEtaleTopology.WEqualsLocallyBijective A] [HasSheafify X.smallEtaleTopology A]
+    [X.smallEtaleTopology.HasSheafCompose (CategoryTheory.forget A)]
+    [Balanced (Sheaf X.smallEtaleTopology A)]
+    {F G : Sheaf X.smallEtaleTopology A} (φ : F ⟶ G) [Epi φ] :
+    Function.Surjective (φ.hom.app (op (Etale.mk (𝟙 X)))) := by
+  have := (Sheaf.isLocallySurjective_iff_epi' A φ).2 inferInstance
   intro s
-  obtain ⟨t, ht⟩ := id_mem_of_mem_smallEtaleTopology_of_isSepClosed k _
-    (Presheaf.imageSieve_mem (Spec (.of k)).smallEtaleTopology φ.hom (U := op 𝟙ₑ) s)
+  obtain ⟨t, ht⟩ := id_mem_of_mem_smallEtaleTopology_of_iso e
+    (Presheaf.imageSieve_mem X.smallEtaleTopology φ.hom (U := op (Etale.mk (𝟙 X))) s)
   exact ⟨t, ht.trans (by simp)⟩
+
+/-- Over a separably closed field `k`, an epimorphism of étale sheaves on `Spec k` with values
+in a concrete category `A` (for instance abelian groups or modules) is surjective on global
+sections. -/
+lemma surjective_app_of_epi_of_isSepClosed
+    [(Spec (.of k)).smallEtaleTopology.WEqualsLocallyBijective A]
+    [HasSheafify (Spec (.of k)).smallEtaleTopology A]
+    [(Spec (.of k)).smallEtaleTopology.HasSheafCompose (CategoryTheory.forget A)]
+    [Balanced (Sheaf (Spec (.of k)).smallEtaleTopology A)]
+    {F G : Sheaf (Spec (.of k)).smallEtaleTopology A} (φ : F ⟶ G) [Epi φ] :
+    Function.Surjective (φ.hom.app (op (etalePoint k))) :=
+  surjective_app_of_epi_of_iso (Iso.refl _) φ
+
+/-- Let `X` be a scheme isomorphic to `Spec k` for a separably closed field `k`. Taking sections
+over `X` preserves epimorphisms of étale sheaves on `X` with values in a concrete category. -/
+lemma preservesEpimorphisms_sheafSections_of_iso {k} [Field k] [IsSepClosed k]
+    {X : Scheme.{u}} (e : X ≅ Spec (.of k))
+    [X.smallEtaleTopology.WEqualsLocallyBijective A] [HasSheafify X.smallEtaleTopology A]
+    [X.smallEtaleTopology.HasSheafCompose (CategoryTheory.forget A)]
+    [Balanced (Sheaf X.smallEtaleTopology A)] :
+    ((sheafSections X.smallEtaleTopology A).obj (op (Etale.mk (𝟙 X)))).PreservesEpimorphisms
+    where
+  preserves φ _ := (CategoryTheory.forget A).epi_of_epi_map
+    ((epi_iff_surjective _).2 (surjective_app_of_epi_of_iso e φ))
+
+end Concrete
 
 instance preservesEpimorphisms_sheafSections_of_isSepClosed :
     ((sheafSections (Spec (.of k)).smallEtaleTopology AddCommGrpCat.{u + 1}).obj
-      (op 𝟙ₑ)).PreservesEpimorphisms where
-  preserves φ _ := (AddCommGrpCat.epi_iff_surjective _).2
-    (surjective_app_of_epi_of_isSepClosed k φ)
+      (op (etalePoint k))).PreservesEpimorphisms :=
+  preservesEpimorphisms_sheafSections_of_iso (Iso.refl _)
+
+instance preservesEpimorphisms_sheafSections_moduleCat_of_isSepClosed (Λ : Type (u + 1))
+    [Ring Λ] : ((sheafSections (Spec (.of k)).smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj
+      (op (etalePoint k))).PreservesEpimorphisms :=
+  preservesEpimorphisms_sheafSections_of_iso (Iso.refl _)
 
 /-- Over a separably closed field `k`, the constant sheaf `ℤ` on the small étale site of
 `Spec k` is projective: it corepresents the global sections functor, which is exact. -/
 instance projective_constantSheaf_of_isSepClosed :
     Projective ((constantSheaf (Spec (.of k)).smallEtaleTopology AddCommGrpCat.{u + 1}).obj
-      (AddCommGrpCat.of (ULift ℤ))) := by
-  have hT : Limits.IsTerminal 𝟙ₑ := MorphismProperty.Over.mkIdTerminal @AlgebraicGeometry.Etale _
-  exact @Adjunction.map_projective _ _ _ _ _ _ (constantSheafAdj _ _ hT)
+      (AddCommGrpCat.of (ULift ℤ))) :=
+  @Adjunction.map_projective _ _ _ _ _ _ (constantSheafAdj _ _ isTerminalEtalePoint)
     (preservesEpimorphisms_sheafSections_of_isSepClosed k) _ AddCommGrpCat.projective_of_uliftInt
+
+/-- Let `X` be a scheme isomorphic to `Spec k` for a separably closed field `k`, and let `Λ` be
+a ring. The constant sheaf `Λ` on the small étale site of `X` is projective: it corepresents
+the functor of sections over `X`, which is exact. -/
+lemma projective_constantSheaf_moduleCat_of_iso {k} [Field k] [IsSepClosed k]
+    {X : Scheme.{u}} (e : X ≅ Spec (.of k)) (Λ : Type (u + 1)) [Ring Λ] :
+    Projective ((constantSheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj
+      (ModuleCat.of Λ Λ)) :=
+  @Adjunction.map_projective _ _ _ _ _ _
+    (constantSheafAdj _ _ (MorphismProperty.Over.mkIdTerminal @AlgebraicGeometry.Etale X))
+    (preservesEpimorphisms_sheafSections_of_iso e) _
+    (ModuleCat.projective_of_categoryTheory_projective (ModuleCat.of Λ Λ))
 
 /-- **Cohomology of `ℤ` on a geometric point.** For a separably closed field `k` (in
 particular an algebraically closed one), `H^q(Spec k_ét, ℤ) = 0` for all `q ≥ 1`. The
@@ -127,6 +209,103 @@ theorem subsingleton_H_constantSheaf_of_isSepClosed (q : ℕ) :
   Abelian.Ext.subsingleton_of_projective _ _ _
 
 end IsSepClosed
+
+section Sections
+
+open Limits
+
+variable {k : Type u} [Field k] [IsSepClosed k]
+
+variable {A : Type*} [Category A] {FA : A → A → Type*} {CA : A → Type*}
+  [∀ X Y, FunLike (FA X Y) (CA X) (CA Y)] [ConcreteCategory A FA]
+  [(Spec (.of k)).smallEtaleTopology.HasSheafCompose (CategoryTheory.forget A)]
+
+/-- Over a separably closed field `k`, two sections of an étale sheaf on `Spec k` over an étale
+`k`-scheme `U` are equal as soon as they agree after restriction along every morphism
+`V ⟶ U` from an étale `k`-scheme `V ≅ Spec k`: the `k`-points of `U` form an étale covering of
+`U`. -/
+theorem eq_of_forall_restrict_eq_of_isSepClosed (F : Sheaf (Spec (.of k)).smallEtaleTopology A)
+    {U : (Spec (.of k)).Etale} {x y : ToType (F.obj.obj (op U))}
+    (h : ∀ (V : (Spec (.of k)).Etale) (_ : IsIso V.hom) (f : V ⟶ U),
+      F.obj.map f.op x = F.obj.map f.op y) :
+    x = y := by
+  have : AlgebraicGeometry.Etale U.hom := U.prop
+  let pts := {l : Spec (.of k) ⟶ U.left // l ≫ U.hom = 𝟙 _}
+  let T : (Spec (.of k)).Etale := etalePoint k
+  let g : ∀ l : pts, T ⟶ U := fun l ↦ MorphismProperty.Over.homMk (A := T) (B := U) l.1
+    (l.2.trans rfl)
+  refine Sheaf.isSeparated F U (Sieve.ofArrows (fun _ : pts ↦ T) g) ?_ x y ?_
+  · rw [ofArrows_mem_smallEtaleTopology_iff]
+    ext z
+    simp only [Set.mem_iUnion, Set.mem_range, Set.mem_univ, iff_true]
+    obtain ⟨l, hl, hz⟩ := exists_fac_of_etale_of_isSepClosed U.hom (𝟙 _) z
+      (Subsingleton.elim (α := Spec (.of k)) _ _)
+    exact ⟨⟨l, hl⟩, (default : Spec (.of k)), hz⟩
+  · rintro V f ⟨W, f', _, ⟨l⟩, rfl⟩
+    simp only [op_comp, Functor.map_comp, ConcreteCategory.comp_apply,
+      h T (inferInstanceAs (IsIso (𝟙 (Spec (.of k)))))]
+
+omit [IsSepClosed k] in
+/-- An étale `k`-scheme `V` whose structure morphism is an isomorphism is isomorphic, in the
+small étale site of `Spec k`, to the terminal object `𝟙 : Spec k ⟶ Spec k`. -/
+noncomputable def etaleIsoOfIsIso (V : (Spec (.of k)).Etale) (hV : IsIso V.hom) :
+    V ≅ etalePoint k :=
+  MorphismProperty.Over.isoMk (@asIso _ _ _ _ V.hom hV) (Category.comp_id V.hom)
+
+variable {Λ : Type (u + 1)} [Ring Λ]
+
+/-- Over a separably closed field `k`, an étale sheaf of `Λ`-modules on `Spec k` whose global
+sections vanish is zero. -/
+theorem isZero_of_subsingleton_sections_of_isSepClosed
+    (F : Sheaf (Spec (.of k)).smallEtaleTopology (ModuleCat.{u + 1} Λ))
+    (h : Subsingleton (F.obj.obj (op (etalePoint k)))) : IsZero F := by
+  have hU : ∀ U, Subsingleton (F.obj.obj (op U)) := fun U ↦ ⟨fun x y ↦
+    eq_of_forall_restrict_eq_of_isSepClosed F fun V hV f ↦ by
+      have : Subsingleton (F.obj.obj (op V)) :=
+        (F.obj.mapIso (etaleIsoOfIsIso V hV).op).toLinearEquiv.toEquiv.symm.subsingleton
+      exact Subsingleton.elim _ _⟩
+  rw [IsZero.iff_id_eq_zero]
+  ext U x
+  exact Subsingleton.elim _ _
+
+/-- The map `Λ_k ⟶ G` from the constant sheaf `Λ` on `Spec k` to an étale sheaf of
+`Λ`-modules `G` corresponding to a global section `s` of `G`. -/
+noncomputable def homOfGlobalSection
+    {G : Sheaf (Spec (.of k)).smallEtaleTopology (ModuleCat.{u + 1} Λ)}
+    (s : G.obj.obj (op (etalePoint k))) :
+    (constantSheaf (Spec (.of k)).smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj
+      (ModuleCat.of Λ Λ) ⟶ G :=
+  ((constantSheafAdj _ _ isTerminalEtalePoint).homEquiv
+    _ _).symm (ModuleCat.ofHom (LinearMap.toSpanSingleton Λ _ s))
+
+omit [IsSepClosed k] in
+/-- Composing the map attached to a global section `s` with `ψ : G ⟶ G'` gives the map attached
+to the global section `ψ(s)`. -/
+theorem homOfGlobalSection_comp
+    {G G' : Sheaf (Spec (.of k)).smallEtaleTopology (ModuleCat.{u + 1} Λ)}
+    (s : G.obj.obj (op (etalePoint k))) (ψ : G ⟶ G') :
+    homOfGlobalSection s ≫ ψ = homOfGlobalSection (ψ.hom.app _ s) := by
+  rw [homOfGlobalSection, homOfGlobalSection, ← Adjunction.homEquiv_naturality_right_symm]
+  congr 1
+  ext
+  simp
+
+omit [IsSepClosed k] in
+/-- The map attached to a nonzero global section is nonzero. -/
+theorem homOfGlobalSection_ne_zero
+    {G : Sheaf (Spec (.of k)).smallEtaleTopology (ModuleCat.{u + 1} Λ)}
+    {s : G.obj.obj (op (etalePoint k))} (hs : s ≠ 0) : homOfGlobalSection s ≠ 0 := by
+  intro h
+  apply hs
+  have := congrArg (fun f : (constantSheaf (Spec (.of k)).smallEtaleTopology
+      (ModuleCat.{u + 1} Λ)).obj (ModuleCat.of Λ Λ) ⟶ G ↦ ModuleCat.Hom.hom
+    (((constantSheafAdj (Spec (.of k)).smallEtaleTopology (ModuleCat.{u + 1} Λ)
+      isTerminalEtalePoint).homEquiv (ModuleCat.of Λ Λ) G) f) (1 : Λ)) h
+  simp only [homOfGlobalSection, Equiv.apply_symm_apply, Adjunction.homEquiv_unit, Functor.map_zero,
+    comp_zero] at this
+  simpa using this
+
+end Sections
 
 section Field
 

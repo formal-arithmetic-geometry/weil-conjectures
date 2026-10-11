@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.AlgebraicGeometry.InvertibleExponent
+public import WeilConjectures.ConstructibleSheaf.Defs
 public import WeilConjectures.SixFunctors.Etale.Derived.Coefficients
 public import WeilConjectures.SixFunctors.Etale.Derived.Dualizing
 public import WeilConjectures.SixFunctors.Etale.Derived.Shift
@@ -42,14 +43,25 @@ blueprint home is the framework chapter (`def:coefficient-twists`), not this blo
 sheaf of roots of unity `μ_n` it is built from belongs to the Kummer block. It is therefore
 taken as a *parameter*: `AlgebraicGeometry.Etale.HasTateTwist` bundles the twisting objects
 `Λ_X(m)` with the identifications `Λ_X(0) ≅ Λ_X`, `Λ_X(m) ⊗ Λ_X(m') ≅ Λ_X(m + m')` and
-`Lf^* Λ_Y(m) ≅ Λ_X(m)`, ⊗-invertibility, and the coherences between these identifications
-listed in "Additivity and pullback of twists" of the framework chapter: unit and
-associativity laws, compatibility of pullback with composition, and compatibility of pullback
-with products. Every statement of the chapter carries `[HasTateTwist Λ]`, and becomes an
-unconditional theorem once the instance is constructed. The Kummer classes of units, the
-rank-one datum, are cohomological data about `μ_n` rather than twist data; they are the
-separate class `AlgebraicGeometry.Etale.HasKummerClass` of
+`Lf^* Λ_Y(m) ≅ Λ_X(m)`, ⊗-invertibility, membership in `D^b_{ctf}`, and the coherences
+between these identifications listed in "Additivity and pullback of twists" of the framework
+chapter: unit and associativity laws, compatibility of pullback with composition, and
+compatibility of pullback with products. The Kummer classes of units, the rank-one datum, are
+cohomological data about `μ_n` rather than twist data; they are the separate class
+`AlgebraicGeometry.Etale.HasKummerClass` of
 `WeilConjectures.EtaleCohomology.Purity.Smooth.KummerClass`.
+
+These fields do not determine the twisting objects: the untwisted datum `Λ_X(m) = Λ_X` and the
+shifted datum `Λ_X(m) = Λ_X[-2m]`, with the evident identifications, satisfy all of them. A
+statement that only manipulates twists formally — the twist-and-shift calculus, co-projection,
+the pairings and traces built from a given orientation — holds for every twist datum and carries
+`[HasTateTwist Λ]`. A statement comparing the twist with geometry — `Rs^! Λ(1)[2] ≅ Λ` for the
+zero section of `𝔸¹`, affine-space and smooth purity, purity for regular immersions, Fourier
+inversion — is false for those data and assumes moreover `[HasTateTwist.IsNormalized Λ]`
+(`WeilConjectures.EtaleCohomology.Purity.Smooth.KummerClass`): the twist underlies Kummer
+classes whose boundary for the coordinate of `𝔸¹_B` is the fundamental class of the zero
+section, which forces `Λ_B(1) ≅ μ_n ⊗ Λ` on every `B` on which the exponent `n` of `Λ` is
+invertible.
 
 Invertibility is a field rather than a consequence of the zero and addition isomorphisms:
 `Λ_X(m) ⊗ Λ_X(-m) ≅ Λ_X(0) ≅ Λ_X` is a two-line proof, but checking it forces the kernel to
@@ -69,6 +81,7 @@ unfold `AlgebraicGeometry.Etale.derivedTensor`, and that does not terminate in r
 ## Main statements
 
 - `AlgebraicGeometry.Etale.isInvertible_tateObject`
+- `AlgebraicGeometry.Etale.boundedConstructibleFiniteTor_tateObject`
 -/
 
 @[expose] public section
@@ -132,6 +145,21 @@ class HasTateTwist where
   which is prohibitively expensive. -/
   isInvertible_twistObject (X : Scheme.{u}) (m : ℤ) :
     DerivedCategory.isInvertible Λ X (twistObject X m)
+  /-- Every twisting object lies in `D^b_{ctf}(X, Λ)`: in the concrete model `Λ_X(m)` is a lisse
+  sheaf of free `Λ`-modules of rank one placed in degree zero. This is what lets the twists pass
+  through the co-projection formula and the other finiteness statements of the chapter, all of
+  which are stated on `D^b_{ctf}`. -/
+  boundedConstructibleFiniteTor_twistObject (X : Scheme.{u}) (m : ℤ) :
+    DerivedCategory.boundedConstructibleFiniteTor Λ X (twistObject X m)
+  /-- Every twisting object is locally constant of rank one (`def-coefficient-twists-detailed`):
+  `Λ_X(m)` is a locally constant sheaf `L` of `Λ`-modules placed in degree zero, every stalk of
+  which at a geometric point is free of rank one. In the concrete model
+  `L = (μ_{ℓ^N} ⊗ Λ)^{⊗ m}`, respectively its `Λ`-dual for `m < 0`. -/
+  exists_isLocallyConstantSheaf_twistObject (X : Scheme.{u}) (m : ℤ) :
+    ∃ L : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ), IsLocallyConstantSheaf L ∧
+      (∀ (Ω : Type u) [Field Ω] [IsSepClosed Ω] (s : Spec (.of Ω) ⟶ X),
+        Nonempty ((pointSmallEtale s).sheafFiber.obj L ≅ ModuleCat.of Λ Λ)) ∧
+      Nonempty (twistObject X m ≅ (DerivedCategory.singleFunctor _ 0).obj L)
   /-- The left unit law: `Λ_X(0) ⊗ Λ_X(m) ≅ Λ_X(m)` is the left unitor, through
   `Λ_X(0) ≅ Λ_X`.
 
@@ -223,6 +251,11 @@ theorem isInvertible_tateObject (m : ℤ) :
     DerivedCategory.isInvertible Λ X (tateObject Λ X m) :=
   HasTateTwist.isInvertible_twistObject X m
 
+/-- Every Tate twisting object lies in `D^b_{ctf}(X, Λ)`. -/
+theorem boundedConstructibleFiniteTor_tateObject (m : ℤ) :
+    DerivedCategory.boundedConstructibleFiniteTor Λ X (tateObject Λ X m) :=
+  HasTateTwist.boundedConstructibleFiniteTor_twistObject X m
+
 /-- The Tate twist `(m) : D(X_ét, Λ) ⥤ D(X_ét, Λ)`, tensoring with the twisting object
 `Λ_X(m)`. -/
 noncomputable def tateTwist (m : ℤ) :
@@ -291,7 +324,8 @@ The *section invariant* `𝒞(g, s) = Ls^* ω_g = Ls^* Rg^! Λ_B` of a morphism 
 together with a section `s : B ⟶ V`. For `g` smooth of pure relative dimension `d` with `s` a
 closed section, smooth purity identifies it with `Λ_B(d)[2d]`; the deformation to the normal
 cone of the section reduces the general case to the standard pair `(𝔸^d_B → B, 0)`. -/
-noncomputable def sectionInvariant {V B : Scheme.{u}} (g : V ⟶ B) [HasCompactification g]
+noncomputable def sectionInvariant [Finite Λ] {V B : Scheme.{u}} (g : V ⟶ B)
+    [HasCompactification g]
     (s : B ⟶ V) : DerivedCategory (Sheaf B.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :=
   (L((s)^*[ModuleCat.{u + 1} Λ])).obj (dualizingComplex (ModuleCat.{u + 1} Λ) g)
 

@@ -8,6 +8,7 @@ module
 public import WeilConjectures.DeligneLaumon.AffineLine.DegreeOne
 public import WeilConjectures.DeligneLaumon.AffineLine.Endpoints
 public import WeilConjectures.DeligneLaumon.AffineLine.Exactness
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Geometrically.Connected
 
 /-!
 # The Deligne–Laumon estimate on the affine line
@@ -71,7 +72,12 @@ theorem hasWeightsAtMost_compactlySupportedCohomology_directImage (ι : PadicAlg
 theorem subsingleton_compactlySupportedCohomology_directImage_zero
     (D : LisseOnDenseOpen k₀ l) :
     Subsingleton (D.directImage.compactlySupportedCohomology 0).carrier := by
-  sorry
+  have : SmoothOfRelativeDimension 1 (affineLine k₀ ↘ Spec (CommRingCat.of k₀)) := by
+    simpa using AffineSpace.smoothOfRelativeDimension_over PUnit.{u + 1} (Spec (.of k₀))
+  have : GeometricallyConnected (affineLine k₀ ↘ Spec (CommRingCat.of k₀)) :=
+    GeometricallyConnected.of_geometricallyIrreducible _
+  exact AlgebraicGeometry.subsingleton_compactlySupportedCohomology_directImage_zero D.j D.sheaf
+    D.lisse
 
 /-- In degree two the compactly supported cohomology of `j_*F` on the line is pure of weight
 `w + 2`, not merely of weights at most `w + 2`. (blueprint: `sk-thm-dl-a1-upper`) -/
@@ -79,7 +85,12 @@ theorem isPureOfWeightOver_compactlySupportedCohomology_directImage_two
     (ι : PadicAlgCl l →+* ℂ) (D : LisseOnDenseOpen k₀ l) {w : ℝ}
     (hw : D.sheaf.IsPunctuallyPureOfWeight ι w) :
     (D.directImage.compactlySupportedCohomology 2).IsPureOfWeightOver k₀ ι (w + 2) := by
-  sorry
+  have : SmoothOfRelativeDimension 1 (affineLine k₀ ↘ Spec (CommRingCat.of k₀)) := by
+    simpa using AffineSpace.smoothOfRelativeDimension_over PUnit.{u + 1} (Spec (.of k₀))
+  have : GeometricallyConnected (affineLine k₀ ↘ Spec (CommRingCat.of k₀)) :=
+    GeometricallyConnected.of_geometricallyIrreducible _
+  exact AlgebraicGeometry.isPureOfWeightOver_compactlySupportedCohomology_directImage_two D.j
+    D.sheaf ι D.lisse hw
 
 end WeilSheaf.LisseOnDenseOpen
 

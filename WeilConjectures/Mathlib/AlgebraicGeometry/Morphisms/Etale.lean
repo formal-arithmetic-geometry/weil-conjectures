@@ -11,6 +11,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Etale
 public import Mathlib.AlgebraicGeometry.Morphisms.Separated
 public import Mathlib.AlgebraicGeometry.Pullbacks
 public import Mathlib.RingTheory.Unramified.LocalStructure
+public import WeilConjectures.Mathlib.AlgebraicGeometry.AffineOpenAlgebra
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Fiber
 public import WeilConjectures.Mathlib.AlgebraicGeometry.FunctionField
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.FormallyUnramified
@@ -33,6 +34,11 @@ This is the geometric counterpart of the ring theoretic statement that a standar
 over a quotient `R ⧸ I` is the base change of a standard étale algebra over `R`
 (`Algebra.IsStandardEtale.exists_algEquiv_quotient_tensor`): everything is local on `X` and on
 `W`, so the lift is produced inside a single affine chart and no gluing is involved.
+
+## Local structure
+
+An étale morphism `q : W ⟶ Spec B` is, around every point of `W`, dominated by `Spec` of a
+standard étale `B`-algebra (`AlgebraicGeometry.Etale.exists_standardEtalePair`).
 
 ## Étale covers of a normal scheme with separably closed function field
 
@@ -63,6 +69,8 @@ A scheme étale over a reduced scheme is reduced, by the corresponding statement
 - `AlgebraicGeometry.Etale.exists_pullback_hom_of_isClosedImmersion`: the pointed form. Given a
   morphism `s : Spec Ω ⟶ W` with `Ω` a field — in the application a geometric point of `W` — there
   is an étale `q : V ⟶ X` and a morphism `V ×[X] Z ⟶ W` over `Z` through which `s` factors.
+- `AlgebraicGeometry.Etale.exists_standardEtalePair`: an étale morphism to `Spec B` is locally
+  dominated by `Spec` of a standard étale `B`-algebra.
 - `AlgebraicGeometry.Etale.exists_opens_isOpenImmersion_of_isSepClosed_functionField`: a
   separated étale scheme over an integral normal base with separably closed function field is a
   disjoint union of opens of the base.
@@ -215,6 +223,40 @@ theorem Etale.exists_pullback_hom_of_isClosedImmersion {X Z W : Scheme.{u}} (i :
   · rw [Category.assoc, Iso.inv_comp_eq]
     exact hpb.isoPullback_hom_snd.symm
   · rw [Category.assoc, Iso.hom_inv_id_assoc, IsOpenImmersion.lift_fac]
+
+/-- **Étale morphisms are locally standard étale.** For an étale morphism `q : W ⟶ Spec B` and a
+point `w` of `W`, there is a standard étale `B`-algebra `P.Ring` and a morphism
+`Spec P.Ring ⟶ W` over `Spec B` whose image contains `w`: the restriction of `q` to an affine
+open `Spec C` around `w` is given by an étale `B`-algebra `C`, which is standard étale after
+inverting an element not in the prime of `w` (`Algebra.IsEtaleAt.exists_isStandardEtale`). -/
+theorem Etale.exists_standardEtalePair {B : CommRingCat.{u}} {W : Scheme.{u}} (q : W ⟶ Spec B)
+    [Etale q] (w : W) :
+    ∃ (P : StandardEtalePair B) (e : Spec (.of P.Ring) ⟶ W),
+      e ≫ q = Spec.map (CommRingCat.ofHom (algebraMap B P.Ring)) ∧ w ∈ Set.range e := by
+  obtain ⟨W', hW', hwW', -⟩ := exists_isAffineOpen_mem_and_subset (X := W) (x := w) (U := ⊤) trivial
+  let _ : Algebra B Γ(W, W') := (hW'.ringHomOfSpec q).toAlgebra
+  have : Algebra.Etale B Γ(W, W') := RingHom.etale_algebraMap.mp (hW'.etale_ringHomOfSpec q)
+  obtain ⟨a, ha, hst⟩ := Algebra.IsEtaleAt.exists_isStandardEtale
+    (R := B) (hW'.primeIdealOf ⟨w, hwW'⟩).asIdeal
+  let Pr := hst.nonempty_standardEtalePresentation.some
+  let φ : Γ(W, W') →+* Pr.P.Ring :=
+    Pr.equivRing.toRingEquiv.toRingHom.comp (algebraMap Γ(W, W') (Localization.Away a))
+  refine ⟨Pr.P, Spec.map (CommRingCat.ofHom φ) ≫ hW'.fromSpec, ?_, ?_⟩
+  · rw [Category.assoc, ← hW'.SpecMap_ringHomOfSpec q, ← Spec.map_comp, ← CommRingCat.ofHom_comp]
+    congr 2
+    ext b
+    change Pr.equivRing (algebraMap Γ(W, W') (Localization.Away a) (algebraMap B Γ(W, W') b)) = _
+    rw [← IsScalarTower.algebraMap_apply, AlgEquiv.commutes]
+  · obtain ⟨r, hr⟩ : hW'.primeIdealOf ⟨w, hwW'⟩ ∈
+        Set.range (PrimeSpectrum.comap (algebraMap Γ(W, W') (Localization.Away a))) := by
+      rw [PrimeSpectrum.localization_away_comap_range (Localization.Away a) a]
+      exact ha
+    refine ⟨PrimeSpectrum.comap Pr.equivRing.symm.toRingEquiv.toRingHom r, ?_⟩
+    rw [Scheme.Hom.comp_apply, Spec.map_apply]
+    refine (congrArg hW'.fromSpec ?_).trans (hW'.fromSpec_primeIdealOf ⟨w, hwW'⟩)
+    rw [← hr]
+    refine PrimeSpectrum.ext (Ideal.ext fun x ↦ ?_)
+    simp [φ]
 
 /-- An étale morphism `p : V ⟶ S` into an integral normal scheme `S` with separably closed
 function field is a local isomorphism: every point of `V` has an open neighbourhood mapping

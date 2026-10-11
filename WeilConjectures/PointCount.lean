@@ -6,6 +6,7 @@ Authors: Christian Merten
 module
 
 public import Mathlib.AlgebraicGeometry.FunctionField
+public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 public import Mathlib.AlgebraicGeometry.QuasiAffine
 public import WeilConjectures.ClosedPoints
@@ -66,6 +67,31 @@ theorem Hom.specMap_residueFieldAlgebraMap (f : X.Hom (Spec (.of k))) (x : X) :
     Spec.map_inj]
   ext a
   rfl
+
+/-- The residue field of a closed point of a scheme locally of finite type over a field `k` is
+finite over `k` (Nullstellensatz). -/
+theorem Hom.finite_residueField_of_isClosed (f : X.Hom (Spec (.of k))) [LocallyOfFiniteType f]
+    (x : X) (hx : IsClosed {x}) :
+    letI := (f.residueFieldAlgebraMap x).toAlgebra
+    Module.Finite k (X.residueField x) := by
+  have : JacobsonSpace X := LocallyOfFiniteType.jacobsonSpace f
+  have := isClosed_singleton_iff_isClosedImmersion.mp hx
+  have := (isFinite_iff_locallyOfFiniteType_of_jacobsonSpace
+    (f := X.fromSpecResidueField x ≫ f)).mpr inferInstance
+  rw [← f.specMap_residueFieldAlgebraMap, IsFinite.SpecMap_iff] at this
+  exact this
+
+/-- A closed point of a scheme locally of finite type over an algebraically closed field `K` is
+the image of a `K`-point: its residue field is finite over `K`, hence `K` itself. -/
+theorem Hom.exists_spec_base_eq_of_isClosed {K : Type u} [Field K] [IsAlgClosed K]
+    (f : X ⟶ Spec (.of K)) [LocallyOfFiniteType f] (x : X) (hx : IsClosed {x}) :
+    ∃ s : Spec (.of K) ⟶ X, s.base (IsLocalRing.closedPoint K) = x := by
+  let := (f.residueFieldAlgebraMap x).toAlgebra
+  have := f.finite_residueField_of_isClosed x hx
+  let φ : X.residueField x →ₐ[K] K := IsAlgClosed.lift
+  refine ⟨Spec.map (CommRingCat.ofHom φ.toRingHom) ≫ X.fromSpecResidueField x, ?_⟩
+  rw [Scheme.Hom.comp_apply]
+  exact X.fromSpecResidueField_apply x _
 
 /-- The embedding of the base field into the residue field of a point of `X` over `k`,
 for `X` mapping to a `k`-scheme `Y`, is the embedding into the residue field of the image

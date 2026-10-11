@@ -81,28 +81,29 @@ variable {U W X : Scheme.{u}} (j : U ⟶ X) (k : W ⟶ X) [IsOpenImmersion j] [I
 
 open ProEtale
 
-omit [IsOpenImmersion j] in
 set_option backward.isDefEq.respectTransparency false in
+omit [IsOpenImmersion j] in
 /-- For `T` weakly étale over `W`, the fibre product `T ×_X U` is empty when the ranges of `j`
-and `k` are disjoint: `T` maps into the range of `k`, which misses the range of `j`. Only `k`
-needs to be an open immersion. -/
+and `k` are disjoint: `T` maps into the range of `k`, which misses the range of `j`. Here `j`
+is arbitrary. -/
 lemma Scheme.ProEt.isEmpty_left_pullback_map
     (hjk : Set.range j.base ∩ Set.range k.base = ∅) (T : W.ProEt) :
     IsEmpty ((MorphismProperty.Over.pullback @WeaklyEtale ⊤ j).obj
       ((MorphismProperty.Over.map ⊤ (inferInstance : @WeaklyEtale _ _ k)).obj T)).left := by
-  refine ⟨fun x ↦ ?_⟩
-  have hmem : j.base ((pullback.snd (T.hom ≫ k) j).base x) ∈
+  refine ⟨fun z ↦ ?_⟩
+  have hz : (Limits.pullback.fst (T.hom ≫ k) j ≫ T.hom ≫ k).base z ∈
       Set.range j.base ∩ Set.range k.base := by
-    refine ⟨⟨_, rfl⟩, T.hom.base ((pullback.fst (T.hom ≫ k) j).base x), ?_⟩
-    have h := congrArg (fun φ ↦ φ.base x) (pullback.condition (f := T.hom ≫ k) (g := j))
-    simp only [Scheme.Hom.comp_apply] at h
-    exact h
-  rw [hjk] at hmem
-  exact hmem
+    refine ⟨?_, ⟨T.hom.base (Limits.pullback.fst (T.hom ≫ k) j z), ?_⟩⟩
+    · rw [Limits.pullback.condition]
+      exact ⟨_, rfl⟩
+    · rfl
+  rw [hjk] at hz
+  exact hz
 
-omit [IsOpenImmersion j] in
 set_option backward.isDefEq.respectTransparency false in
-/-- The sections of `k^* j_* F` over `T : W.ProEt` are `F(T ×_X U) = F(∅)`, hence terminal. -/
+omit [IsOpenImmersion j] in
+/-- The sections of `k^* j_* F` over `T : W.ProEt` are `F(T ×_X U) = F(∅)`, hence terminal.
+Here `j` is arbitrary. -/
 noncomputable def ProEtale.isTerminalSections_openImmersionRestriction_lowerStar
     (hjk : Set.range j.base ∩ Set.range k.base = ∅)
     (F : Sheaf (Scheme.ProEt.topology U) A) (T : W.ProEt) :
@@ -115,7 +116,8 @@ noncomputable def ProEtale.isTerminalSections_openImmersionRestriction_lowerStar
 
 set_option backward.isDefEq.respectTransparency false in
 omit [IsGrothendieckAbelian.{u + 1} A] [IsOpenImmersion j] in
-/-- **`k^* j_* F` vanishes.** All its sections are terminal, hence zero. -/
+/-- **`k^* j_* F` vanishes.** All its sections are terminal, hence zero. Here `j` is
+arbitrary. -/
 lemma ProEtale.isZero_openImmersionRestriction_lowerStar
     (hjk : Set.range j.base ∩ Set.range k.base = ∅) (F : Sheaf (Scheme.ProEt.topology U) A) :
     IsZero ((ProEtale.openImmersionRestriction A k).obj ((j)_*[A].obj F)) := by
@@ -159,5 +161,38 @@ lemma ProEtale.isIso_openImmersionRestriction_openImmersionLowerShriekToLowerSta
   infer_instance
 
 end Disjoint
+
+section DisjointPullback
+
+variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
+variable {U W X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] (g : W ⟶ X)
+
+open ProEtale
+
+/-- **The pullback of `j_! F` along a morphism `g` missing the range of `j` is initial.** The
+adjunctions `g^* ⊣ g_*` and `j_! ⊣ j^*` turn `Hom(g^* j_! F, H)` into `Hom(F, j^* g_* H)`,
+and `j^* g_* H` vanishes by `AlgebraicGeometry.ProEtale.isZero_openImmersionRestriction_lowerStar`.
+-/
+noncomputable def ProEtale.isInitial_upperStar_openImmersionLowerShriek
+    (hjg : Set.range j.base ∩ Set.range g.base = ∅) (F : Sheaf (Scheme.ProEt.topology U) A) :
+    IsInitial ((g)^*[A].obj ((j)_!open[A].obj F)) := by
+  refine IsInitial.ofUnique (h := fun H => ?_)
+  haveI : Unique (F ⟶ (ProEtale.openImmersionRestriction A j).obj ((g)_*[A].obj H)) := by
+    have hz := ProEtale.isZero_openImmersionRestriction_lowerStar A g j
+      (by rw [Set.inter_comm]; exact hjg) H
+    exact ⟨⟨hz.isTerminal.from F⟩, fun a => hz.isTerminal.hom_ext _ _⟩
+  exact Equiv.unique
+    (((ProEtale.upperStarLowerStarAdjunction A g).homEquiv _ H).trans
+      ((ProEtale.openImmersionLowerShriekAdjunction A j).homEquiv F _))
+
+/-- **The pullback of `j_! F` along a morphism `g` missing the range of `j` vanishes.** -/
+lemma ProEtale.isZero_upperStar_openImmersionLowerShriek
+    (hjg : Set.range j.base ∩ Set.range g.base = ∅) (F : Sheaf (Scheme.ProEt.topology U) A) :
+    IsZero ((g)^*[A].obj ((j)_!open[A].obj F)) :=
+  (isZero_zero _).of_iso
+    ((ProEtale.isInitial_upperStar_openImmersionLowerShriek A j g hjg F).uniqueUpToIso
+      HasZeroObject.zeroIsInitial)
+
+end DisjointPullback
 
 end AlgebraicGeometry
