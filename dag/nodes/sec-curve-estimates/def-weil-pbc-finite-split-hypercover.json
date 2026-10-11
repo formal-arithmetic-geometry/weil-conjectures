@@ -65,7 +65,7 @@
   "file": "lean/Sheaf/Paper/FiniteSplitEtaleHypercover.lean",
   "statement": "structure FiniteSplitEtaleHypercover (X : Scheme.{u}) [CompactSpace X] [QuasiSeparatedSpace X]",
   "branch": "sheaf-dag",
-  "by": "C1",
+  "by": "M1",
   "date": "2026-10-12",
   "existing": false,
   "declarations": [
@@ -76,15 +76,19 @@
    "AlgebraicGeometry.FiniteSplitEtaleHypercover.truncation",
    "AlgebraicGeometry.FiniteSplitEtaleHypercover.sectionCosimplicial",
    "AlgebraicGeometry.FiniteSplitEtaleHypercover.complex",
-   "AlgebraicGeometry.FiniteSplitEtaleHypercover.cohomology"
-  ]
+   "AlgebraicGeometry.FiniteSplitEtaleHypercover.cohomology",
+   "AlgebraicGeometry.TruncatedFiniteSplitEtaleHypercover",
+   "AlgebraicGeometry.TruncatedFiniteSplitEtaleHypercover.diagram",
+   "AlgebraicGeometry.TruncatedFiniteSplitEtaleHypercover.IsBaseChange"
+  ],
+  "note": "The existing truncation is an inferred tuple, not a type of independent finite-stage truncations. Retain all existing declarations and add a typed finite truncation with its canonical splitting cofans, matching universal properties, and base-change comparison."
  },
  "reviewed_lean": {
   "date": "2026-10-11",
   "by": "L",
-  "reviewer": "R-hd354e",
-  "group": "C1",
+  "reviewer": "R-sub-B",
+  "group": "M1",
   "result": "pass",
-  "note": "headless review: X qcqs = [CompactSpace X][QuasiSeparatedSpace X]; augmented simplicial X-scheme with identities = SimplicialObject X.Etale (no loss: inductively all U_n, M_n etale over X); matching scheme M_n = universal property over all T : Over X on the coskeleton diagram (maps [k]→[n], k<n; M_0 = X, M_1 = U_0×_X U_0); U_n→M_n etale covering = morphism in X.Etale + Surjective; split summands N_m over [n]↠[m] = Mathlib Splitting; finite in each degree = Fin k colimit cofan of qcqs etale V_i with LFP∧QC∧QS structure maps; truncation through r; refinement = simplicial morphism over X, identified up to EqvGen/Quot of SimplicialObject.Homotopy; C^n = F(U_n) with alternating coface differential; H^q = homology q (uses the differential into degree q+1)"
+  "note": "cofiltered system D : Iᵒᵖ ⥤ Scheme with I : Type w filtered, affine transitions, qcqs stages, limit cone c; clause 1 every r-truncation over c.pt is IsBaseChange of a stage truncation whose matching maps stay surjective at every later stage; clause 2 morphisms of pulled-back diagrams descend (01ZM(2) form, comparison via pullbackComp); clause 3 equalities descend; dependency module only appends TruncatedFiniteSplitEtaleHypercover/diagram/IsBaseChange to the landed module (diff has no deleted line), fields read against the truncation clause of the node (splitting cofan over epis, finite pieces, matching UP on Over X, covers, n ≤ r); combined scratch compile clean"
  }
 }

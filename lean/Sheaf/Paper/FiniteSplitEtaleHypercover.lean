@@ -133,4 +133,87 @@ noncomputable def cohomology (U : FiniteSplitEtaleHypercover X)
   (U.complex F).homology q
 
 end FiniteSplitEtaleHypercover
+
+
+/-- Independent finite truncations retain precisely the data in degrees at most `r`.
+The canonical degeneracy cofan is indexed by order-preserving epimorphisms, as in
+`SimplicialObject.Splitting`; no data in higher degrees is required. Matching objects
+are universal among all schemes over the base, and matching arrows are covers.
+Source: blueprint order 946, truncation clause; Stacks Simplicial Methods 017O,
+Hypercoverings `example-hypercovering-in-C`.
+(blueprint: def-weil-pbc-finite-split-hypercover) -/
+structure TruncatedFiniteSplitEtaleHypercover (X : Scheme.{u}) (r : ℕ) where
+  simplicial : SimplicialObject.Truncated X.Etale r
+  N : Fin (r + 1) → X.Etale
+  inclusion : ∀ n, N n ⟶ simplicial.obj (op ⟨SimplexCategory.mk n.val,
+    Nat.le_of_lt_succ n.isLt⟩)
+  splitting : ∀ Δ : (SimplexCategory.Truncated r)ᵒᵖ,
+    IsColimit (Cofan.mk (simplicial.obj Δ)
+      (fun a : Σ m : Fin (r + 1),
+          {α : Δ.unop.obj ⟶ SimplexCategory.mk m.val // Epi α} ↦
+        inclusion a.1 ≫ simplicial.map (SimplexCategory.Truncated.Hom.tr a.2.val Δ.unop.property
+          (Nat.le_of_lt_succ a.1.isLt)).op))
+  finite_each_degree : ∀ n, ∃ (k : ℕ) (V : Fin k → X.Etale)
+    (ι : ∀ i, V i ⟶ N n),
+    Nonempty (IsColimit (Cofan.mk (N n) ι)) ∧
+      ∀ i, CompactSpace (V i).left ∧ QuasiSeparatedSpace (V i).left ∧
+        LocallyOfFinitePresentation (V i).hom ∧ QuasiCompact (V i).hom ∧
+          QuasiSeparated (V i).hom
+  matching : Fin (r + 1) → X.Etale
+  projection : ∀ (n : Fin (r + 1)) (Δ : SimplexCategory.Truncated r),
+    Δ.obj.len < n.val → (Δ.obj ⟶ SimplexCategory.mk n.val) →
+      (matching n ⟶ simplicial.obj (op Δ))
+  projection_naturality : ∀ (n : Fin (r + 1)) (Δ Δ' : SimplexCategory.Truncated r)
+    (h : Δ.obj.len < n.val) (h' : Δ'.obj.len < n.val) (α : Δ' ⟶ Δ)
+    (θ : Δ.obj ⟶ SimplexCategory.mk n.val),
+    projection n Δ h θ ≫ simplicial.map α.op =
+      projection n Δ' h' (α.hom ≫ θ)
+  matching_universal : ∀ (n : Fin (r + 1)) (T : Over X)
+    (p : ∀ (Δ : SimplexCategory.Truncated r), Δ.obj.len < n.val →
+      (Δ.obj ⟶ SimplexCategory.mk n.val) →
+        (T ⟶ (Scheme.Etale.forget X).obj (simplicial.obj (op Δ)))),
+    (∀ (Δ Δ' : SimplexCategory.Truncated r)
+      (h : Δ.obj.len < n.val) (h' : Δ'.obj.len < n.val) (α : Δ' ⟶ Δ)
+      (θ : Δ.obj ⟶ SimplexCategory.mk n.val),
+      p Δ h θ ≫ (Scheme.Etale.forget X).map (simplicial.map α.op) =
+        p Δ' h' (α.hom ≫ θ)) →
+    ∃! f : T ⟶ (Scheme.Etale.forget X).obj (matching n),
+      ∀ (Δ : SimplexCategory.Truncated r) (h : Δ.obj.len < n.val)
+        (θ : Δ.obj ⟶ SimplexCategory.mk n.val),
+        f ≫ (Scheme.Etale.forget X).map (projection n Δ h θ) = p Δ h θ
+  matchingMap : ∀ n : Fin (r + 1),
+    simplicial.obj (op ⟨SimplexCategory.mk n.val, Nat.le_of_lt_succ n.isLt⟩) ⟶ matching n
+  matchingMap_projection : ∀ (n : Fin (r + 1)) (Δ : SimplexCategory.Truncated r)
+    (h : Δ.obj.len < n.val) (θ : Δ.obj ⟶ SimplexCategory.mk n.val),
+    matchingMap n ≫ projection n Δ h θ =
+      simplicial.map (SimplexCategory.Truncated.Hom.tr θ Δ.property
+        (Nat.le_of_lt_succ n.isLt)).op
+  matching_cover : ∀ n, Surjective (matchingMap n).left
+
+namespace TruncatedFiniteSplitEtaleHypercover
+
+/-- The augmented truncated diagram as schemes over its base.
+Source: blueprint order 946, truncation clause.
+(blueprint: def-weil-pbc-finite-split-hypercover) -/
+def diagram {X : Scheme.{u}} {r : ℕ} (U : TruncatedFiniteSplitEtaleHypercover X r) :=
+  U.simplicial ⋙ Scheme.Etale.forget X
+
+/-- Identification after base change, retaining the chosen nondegenerate summands
+and their inclusions. The canonical degeneracy cofans then commute by naturality;
+matching objects and matching arrows are identified uniquely by their universal
+properties. Morphisms of truncations themselves need not preserve a splitting.
+Source: blueprint order 946, all retained truncation data; Stacks 017O.
+(blueprint: def-weil-pbc-finite-split-hypercover) -/
+def IsBaseChange {X Y : Scheme.{u}} {r : ℕ} (f : X ⟶ Y)
+    (U : TruncatedFiniteSplitEtaleHypercover Y r)
+    (V : TruncatedFiniteSplitEtaleHypercover X r) : Prop :=
+  ∃ e : U.diagram ⋙ Over.pullback f ≅ V.diagram,
+    ∀ n : Fin (r + 1),
+      ∃ a : (Over.pullback f).obj ((Scheme.Etale.forget Y).obj (U.N n)) ≅
+          (Scheme.Etale.forget X).obj (V.N n),
+        (Over.pullback f).map ((Scheme.Etale.forget Y).map (U.inclusion n)) ≫
+            e.hom.app (op ⟨SimplexCategory.mk n.val, Nat.le_of_lt_succ n.isLt⟩) =
+          a.hom ≫ (Scheme.Etale.forget X).map (V.inclusion n)
+
+end TruncatedFiniteSplitEtaleHypercover
 end AlgebraicGeometry
