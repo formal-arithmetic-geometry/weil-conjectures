@@ -440,16 +440,6 @@ open scoped MonObj
 
 variable {I J : Ideal (CoordinateRing n k)} [I.IsHopfIdeal k] [J.IsHopfIdeal k]
 
-/-- A point of `V(J)` viewed in `V(I) ⊇ V(J)` has the same matrix. -/
-theorem zeroLocusMulEquiv_comp_subgroupSchemeHom (h : I ≤ J) {R : Type u} [CommRing R]
-    [Algebra k R] (g : zeroLocus J R) :
-    zeroLocusMulEquiv J R g ≫ subgroupSchemeHom h =
-      zeroLocusMulEquiv I R ⟨g, zeroLocus_anti h g.2⟩ := by
-  apply injective_homMulEquiv_comp I R
-  dsimp only
-  rw [Category.assoc, subgroupSchemeHom_comp_subgroupSchemeι, homMulEquiv_zeroLocusMulEquiv_comp,
-    homMulEquiv_zeroLocusMulEquiv_comp]
-
 /-- If the closed subgroup scheme `V(J) ⊆ V(I)` contains the commutators of `V(I)`, then the
 commutators of `R`-points of `V(I)` are `R`-points of `V(J)`. -/
 theorem commutatorElement_mem_zeroLocus (h : I ≤ J)
