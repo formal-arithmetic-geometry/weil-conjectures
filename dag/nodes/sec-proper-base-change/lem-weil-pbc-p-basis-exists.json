@@ -194,5 +194,24 @@
   "worker": "stage1",
   "summary": "Split from More on Algebra Lemma 07P2 (statement line 11372, proof lines 11401-11409) for the extension F_p -> k, read against Definition 07P1 (lines 11343-11355); both tags verified in tags/tags. Six steps: the subfield k^p and p-independent subsets (elementary); a maximal p-independent subset T by Zorn's lemma, the chain condition written out (new Mathlib leaf lem-weil-pbc-zorn-lemma = zorn_subset, Mathlib/Order/Zorn.lean:143); the k^p-span L of the monomials of T is a subfield (elementary, finite-dimensional subrings); an element t outside L has degree p over L (lem-weil-pbc-simple-algebraic-extension-power-basis, the minimal polynomial divides (X-t)^p, coefficient -et; written out because the source's 'L(x) ≅ L[z]/(z^p − x)' is stated without proof and has a misprint, z^p − x for z^p − x^p); T ∪ {t} p-independent contradicts maximality, so L = k (elementary); conclusion. Statement unchanged except that 'field' now cites [def-weil-field] (stmt_deps). The citers (lem-weil-pbc-differential-zero-iff-pth-power Step 3, lem-weil-pbc-derivation-nonzero-on-non-pth-power Step 5, lem-weil-pbc-intersection-subfields-differentials Step 1) use exactly this statement. Mathlib: p-bases absent (LeanSearch, LeanFinder, Loogle, local_search, grep), no candidate close enough for mathlib_candidate."
  },
- "reviewed": "Reviewed by L 2026-10-10: faithful to More on Algebra 07P2 (existence of p-bases) with Zorn's lemma (new exact Mathlib leaf), the span of the monomials shown to be a subfield (step 3), and the degree-p claim for an element outside it written out via the power-basis leaf (step 4; the source's L[z]/(z^p − x) is a misprint for z^p − x^p). No Mathlib match (no p-bases)."
+ "reviewed": "Reviewed by L 2026-10-10: faithful to More on Algebra 07P2 (existence of p-bases) with Zorn's lemma (new exact Mathlib leaf), the span of the monomials shown to be a subfield (step 3), and the degree-p claim for an element outside it written out via the power-basis leaf (step 4; the source's L[z]/(z^p − x) is a misprint for z^p − x^p). No Mathlib match (no p-bases).",
+ "lean": {
+  "module": "Sheaf.FieldTheory.ExistsPBasis",
+  "declaration": "Field.exists_p_basis",
+  "file": "lean/Sheaf/FieldTheory/ExistsPBasis.lean",
+  "statement": "theorem exists_p_basis (p : ℕ) [Fact p.Prime] (k : Type u) [Field k] [CharP k p] : ∃ (I : Type u) (t : I → k) (b : Module.Basis {E : I →₀ ℕ // ∀ i : I, E i < p} (IntermediateField.adjoin (ZMod p) (Set.range (fun x : k => x ^ p))) k), ∀ E, b E = E.val.prod (fun i e => t i ^ e)",
+  "branch": "sheaf-dag",
+  "by": "G1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-pbe1254"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-pbe1254",
+  "group": "G1",
+  "result": "fix",
+  "note": "prime p [Fact p.Prime], field k [Field k], char p [CharP k p]; k^p as IntermediateField.adjoin (ZMod p) (range (·^p)) (C1 p-basis form, base F_p via local ZMod.algebra); tied ∃ I : Type u, t, Basis indexed by {E : I →₀ ℕ // ∀ i, E i < p} with b E = ∏ t_i^e_i; empty I for perfect k"
+ }
 }
