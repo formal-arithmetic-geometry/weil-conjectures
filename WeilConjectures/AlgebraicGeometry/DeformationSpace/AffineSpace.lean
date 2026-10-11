@@ -114,4 +114,44 @@ lemma deformationSpaceToAffineSpace_over :
     rw [ι_deformationSpaceToAffineSpace_assoc, deformationSpaceToAffineSpaceChart,
       AffineSpace.homOfVector_over]
 
+set_option backward.isDefEq.respectTransparency false in
+lemma reesToQuotientPolynomial_comp_deformationSpaceToAffineSpace :
+    relativeGluingMap (AffineSpace.zeroSection n B).ker.coequifibered_toReesPresheaf
+      (AffineSpace.zeroSection n B).ker.coequifibered_toQuotientPolynomialAlgebra
+      (AffineSpace.zeroSection n B).ker.reesToQuotientPolynomial ≫
+        deformationSpaceToAffineSpace n B =
+      (relativeGluingMap (AffineSpace.zeroSection n B).ker.coequifibered_toReesPresheaf
+        (AffineSpace.zeroSection n B).ker.coequifibered_toQuotientPolynomialAlgebra
+        (AffineSpace.zeroSection n B).ker.reesToQuotientPolynomial ≫
+          deformationSpaceProj (𝔸(n; B) ↘ B) (AffineSpace.zeroSection n B)) ≫
+        AffineSpace.zeroSection n _ := by
+  refine colimit.hom_ext fun U ↦ AffineSpace.hom_ext ?_ fun k ↦ ?_
+  · simp only [Category.assoc, deformationSpaceToAffineSpace_over, AffineSpace.zeroSection_over,
+      Category.comp_id]
+  · conv_rhs => simp only [Scheme.Hom.comp_appTop, CommRingCat.comp_apply,
+      AffineSpace.zeroSection_appTop_coord, map_zero]
+    rw [ι_relativeGluingMap_assoc, ι_deformationSpaceToAffineSpace,
+      deformationSpaceToAffineSpaceChart, AffineSpace.comp_homOfVector,
+      AffineSpace.homOfVector_appTop_coord, Function.comp_apply]
+    have h := congr($(Scheme.ΓSpecIso_inv_naturality
+      ((AffineSpace.zeroSection n B).ker.reesToQuotientPolynomial.app (.op U))) (uCoord n B U k))
+    refine h.symm.trans ?_
+    change (ΓSpecIso ((AffineSpace.zeroSection n B).ker.quotientPolynomialAlgebra.obj (.op U))).inv
+      (Ideal.extendedReesAlgebraToPolynomial _ _ Ideal.mk_ker.ge
+      ⟨_, Ideal.C_mul_T_neg_one_mem_extendedReesAlgebra (coordRes_mem n B U k)⟩) = 0
+    exact (congrArg _ (Ideal.extendedReesAlgebraToPolynomial_C_mul_T_neg_one
+      (I := (AffineSpace.zeroSection n B).ker.siteIdeal U) _ Ideal.mk_ker.ge
+      (coordRes_mem n B U k))).trans (map_zero _)
+
+/-- The section `s̃` of the deformation space of the zero section is the zero section of
+`𝔸^n_{𝔸¹_B}` in the coordinates `u_k`. -/
+lemma deformationSpaceSection_comp_deformationSpaceToAffineSpace :
+    (AffineSpace.zeroSection n B).deformationSpaceSection ≫ deformationSpaceToAffineSpace n B =
+      AffineSpace.zeroSection n _ := by
+  rw [deformationSpaceSection, Category.assoc,
+    reesToQuotientPolynomial_comp_deformationSpaceToAffineSpace, ← Category.assoc,
+    ← Category.assoc, ← deformationSpaceSection,
+    deformationSpaceSection_deformationSpaceProj (AffineSpace.zeroSection_over n B),
+    Category.id_comp]
+
 end AlgebraicGeometry.Scheme.Hom
