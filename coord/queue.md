@@ -1,11 +1,11 @@
 # Work queue
 
-669 items; claim with `tools/claim.py next <group> [--stage N]`.
+664 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (669)
+## Stage 2: nodes to state (664)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -22,7 +22,7 @@
 | `lem-sc-hilb-dominating-power` | 1 | state |
 | `lem-weil-derived-limit-roos-complex` | 1 | state |
 | `lem-weil-pbc-derived-square-iso-pasting` | 1 | state |
-| `lem-weil-pbc-etale-qcqs-sections-filtered-colimit` | 1 | state |
+| `lem-weil-pbc-etale-finite-pushforward-locally-constant` | 1 | state |
 | `lem-weil-pbc-exchange-identity-pasting` | 1 | state |
 | `lem-weil-pbc-ext-one-direct-sum` | 1 | state |
 | `lem-weil-pbc-filtered-colimit-algebras-tensor-elementwise` | 1 | state |
@@ -31,20 +31,15 @@
 | `lem-weil-pbc-finite-after-completion` | 1 | state |
 | `lem-weil-pbc-finite-etale-lifting-limit-descent` | 1 | state |
 | `lem-weil-pbc-finite-galois-receiving-separable-extensions` | 1 | state |
-| `lem-weil-pbc-finite-locally-constant-module-values` | 1 | state |
-| `lem-weil-pbc-finite-locally-free-degree-etale-descent` | 1 | state |
 | `lem-weil-pbc-finite-locally-free-degree-locally-constant` | 1 | state |
 | `lem-weil-pbc-finite-module-complete-over-complete-noetherian` | 1 | state |
 | `lem-weil-pbc-finite-over-complete-local-product` | 1 | state |
-| `lem-weil-pbc-finite-over-complete-ring` | 1 | state |
 | `lem-weil-pbc-finite-over-nagata-nagata` | 1 | state |
-| `lem-weil-pbc-finite-presentation-hom-directed-colimit` | 1 | state |
 | `lem-weil-pbc-finite-product-functor-left-exact` | 1 | state |
 | `lem-weil-pbc-finite-product-injective-resolutions` | 1 | state |
 | `lem-weil-pbc-finite-product-integral-closure` | 1 | state |
 | `lem-weil-pbc-finite-projective-prime-local-free` | 1 | state |
 | `lem-weil-pbc-finite-projective-standard-free-cover` | 1 | state |
-| `lem-weil-pbc-finite-purely-inseparable-degree-p-intermediate` | 1 | state |
 | `lem-weil-pbc-finite-purely-inseparable-scalar-descent` | 1 | state |
 | `lem-weil-pbc-finite-pushforward-constructible-noetherian` | 1 | state |
 | `lem-weil-pbc-finite-pushforward-generic-constructible` | 1 | state |
@@ -679,7 +674,7 @@
 | `lem-pur-essential-constant-pro-criterion-05py` | 4 | state |
 | `def-nagata-fixed-base-separated-stage` | 6 | state |
 
-Not open yet: 40 nodes that wait for stage 1, 811 nodes that wait for a statement dependency.
+Not open yet: 40 nodes that wait for stage 1, 810 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
