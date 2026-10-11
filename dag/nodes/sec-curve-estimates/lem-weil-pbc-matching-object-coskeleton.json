@@ -142,5 +142,28 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by reviewer (reviewer sub-agent of L); spot-checked: L: third push, reviewed in full by a reviewer sub-agent: the mathematics is now right (0183 helper, all-alpha families reduced to injective faces via the simplex-face leaves and proper-faces); the field faults (statement and from.place changed, mathlib_searches degraded, TeX) are corrected by the lead at merge as an exception to a fourth round"
  },
- "lead_note": "2026-10-10 L: merged at the third push as an exception: the route was right, the remaining faults were field-level (statement, from.place and mathlib_searches restored from the committed version by L; TeX fixed)."
+ "lead_note": "2026-10-10 L: merged at the third push as an exception: the route was right, the remaining faults were field-level (statement, from.place and mathlib_searches restored from the committed version by L; TeX fixed).",
+ "lean": {
+  "module": "Sheaf.CategoryTheory.MatchingObjectCoskeleton",
+  "declaration": "CategoryTheory.matching_object_coskeleton",
+  "statement": "theorem matching_object_coskeleton {C : Type u} [Category.{v} C] [HasFiniteLimits C] (K : SimplicialObject C) (n : ℕ) (M : Cone (SimplicialObject.matchingBoundaryIndex K n).multicospan) (_hM : IsLimit M) (μ : K _⦋n + 2⦌ ⟶ M.pt) (_hμ : ∀ i : Fin (n + 3), μ ≫ M.π.app (WalkingMulticospan.left i) = K.δ i) : ∃ (L : SimplicialObject C) (ε : (SimplicialObject.truncation (n + 1)).obj L ⟶ (SimplicialObject.truncation (n + 1)).obj K), L.IsRightKanExtension ε ∧ ∃ (c : K ⟶ L), (SimplicialObject.truncation (n + 1)).map c ≫ ε = 𝟙 ((SimplicialObject.truncation (n + 1)).obj K) ∧ ∃ (θ : L _⦋n + 2⦌ ⟶ M.pt), (∀ i : Fin (n + 3), θ ≫ M.π.app (WalkingMulticospan.left i) = L.δ i ≫ ε.app (op ⟨SimplexCategory.mk (n + 1), Nat.le_refl (n + 1)⟩)) ∧ (∀ θ' : L _⦋n + 2⦌ ⟶ M.pt, (∀ i : Fin (n + 3), θ' ≫ M.π.app (WalkingMulticospan.left i) = L.δ i ≫ ε.app (op ⟨SimplexCategory.mk (n + 1), Nat.le_refl (n + 1)⟩)) → θ' = θ) ∧ IsIso θ ∧ c.app (op (SimplexCategory.mk (n + 2))) ≫ θ = μ",
+  "branch": "sheaf-dag",
+  "by": "J1",
+  "date": "2026-10-11",
+  "existing": false,
+  "file": "lean/Sheaf/CategoryTheory/MatchingObjectCoskeleton.lean",
+  "declarations": [
+   "CategoryTheory.matching_object_coskeleton_one",
+   "CategoryTheory.matching_object_coskeleton"
+  ],
+  "note": "The two declarations cover degree one and degree n+2 for every natural n. Limiting fans/cones and matching-map equations specify the matching objects of the dependency; coskeleton existence is stated using Mathlib IsRightKanExtension, without assuming a Kan-extension instance."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "J1",
+  "result": "pass",
+  "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
+ }
 }
