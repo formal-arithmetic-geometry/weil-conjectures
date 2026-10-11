@@ -27,7 +27,8 @@
   "def-pc-scheme",
   "pqf-def-coherent",
   "def-weil-sheaf-of-modules-category",
-  "def-pc-module-pullback"
+  "def-pc-module-pullback",
+  "lem-pc-module-pullback-adjunction"
  ],
  "proof": [
   {
@@ -220,5 +221,23 @@
   "by": "L",
   "result": "accepted",
   "note": "7 steps assembling Schemes 01I9 (1), 01IA, 01HV affine-locally: the affine charts; G|_V = M~; pullback along the charts is restriction (00A0); composition of pullbacks normalized by the units (0097, leaves of other units); 01I9 (1) for Spec rho (existing node); the isomorphism on global sections followed through the chain; naturality. No new nodes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ModulePullbackAffineSections",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.exists_tensorPullback_affine_sections",
+  "file": "lean/Sheaf/AlgebraicGeometry/ModulePullbackAffineSections.lean",
+  "statement": "theorem exists_tensorPullback_affine_sections {X Y : Scheme.{u}} (f : X ⟶ Y) (V : Y.affineOpens) (U : X.affineOpens) (hUV : U.1 ≤ f ⁻¹ᵁ V.1) : letI : Algebra Γ(Y, V.1) Γ(X, U.1) := (f.appLE V.1 U.1 hUV).hom.toAlgebra letI : ∀ G : Y.Modules, Module Γ(Y, V.1) Γ((tensorPullback f).obj G, U.1) := fun G ↦ Module.compHom _ (f.appLE V.1 U.1 hUV).hom ∃ c : ∀ (G : Y.Modules) (_ : G.IsQuasicoherent), (Γ(G, V.1) ⊗[Γ(Y, V.1)] Γ(X, U.1)) →ₗ[Γ(Y, V.1)] Γ((tensorPullback f).obj G, U.1), (∀ (G : Y.Modules) (hG : G.IsQuasicoherent), Function.Bijective (c G hG)) ∧ (∀ (G : Y.Modules) (hG : G.IsQuasicoherent) (b : Γ(X, U.1)) (t : Γ(G, V.1) ⊗[Γ(Y, V.1)] Γ(X, U.1)), c G hG ((TensorProduct.comm Γ(Y, V.1) Γ(G, V.1) Γ(X, U.1)).symm (b • TensorProduct.comm Γ(Y, V.1) Γ(G, V.1) Γ(X, U.1) t)) = b • c G hG t) ∧ (∀ (G : Y.Modules) (hG : G.IsQuasicoherent) (s : Γ(G, V.1)) (b : Γ(X, U.1)), c G hG (s ⊗ₜ[Γ(Y, V.1)] b) = b • ((tensorPullback f).obj G).presheaf.map (homOfLE hUV).op (((Classical.choose (exists_tensorPullbackAdjunction f)).unit.app G).val.app (op V.1) s)) ∧ (∀ (G G' : Y.Modules) (hG : G.IsQuasicoherent) (hG' : G'.IsQuasicoherent) (a : G ⟶ G') (t : Γ(G, V.1) ⊗[Γ(Y, V.1)] Γ(X, U.1)), ((tensorPullback f).map a).app U.1 (c G hG t) = c G' hG' (TensorProduct.map (a.val.app (op V.1)).hom LinearMap.id t))",
+  "branch": "sheaf-dag",
+  "by": "M1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-mpa1253",
+  "group": "M1",
+  "result": "pass",
+  "note": "f:X⟶Y arbitrary schemes; V,U affineOpens with U ≤ f⁻¹ᵁV; A=Γ(Y,V), B=Γ(X,U), rho=f.appLE (algebra by inlined letI, both letIs needed, #print shows no let); G ranges over Y.Modules with SheafOfModules.IsQuasicoherent; c A-linear on Γ(G,V)⊗[A]B, bijective, B-linear on the second factor via comm conjugation; c(s⊗b)=b•(unit of Classical.choose exists_tensorPullbackAdjunction at op V, restricted along homOfLE hUV) s; naturality (f^*a)_U∘c_G = c_G'∘(a_V⊗id) for all a:G⟶G' quasi-coherent; no new definitions, name unused on sheaf-dag"
  }
 }
