@@ -1557,6 +1557,7 @@ public import WeilConjectures.SixFunctors.ProEtale.Adic.Truncation
 public import WeilConjectures.SixFunctors.ProEtale.Adic.UnitMatrix
 public import WeilConjectures.SixFunctors.ProEtale.Adic.UnitSection
 public import WeilConjectures.SixFunctors.ProEtale.Adic.UpperStar
+public import WeilConjectures.SixFunctors.ProEtale.BaseChange.SmoothBaseChange
 public import WeilConjectures.SixFunctors.ProEtale.BaseChange.WeaklyEtale
 public import WeilConjectures.SixFunctors.ProEtale.Comparison
 public import WeilConjectures.SixFunctors.ProEtale.Comparison.Continuity
