@@ -1467,6 +1467,7 @@ public import WeilConjectures.RingTheory.HopfAlgebra.GeneralLinearGroup.HopfIdea
 public import WeilConjectures.RingTheory.HopfAlgebra.GeneralLinearGroup.IdentityComponent
 public import WeilConjectures.RingTheory.HopfAlgebra.GeneralLinearGroup.Kronecker
 public import WeilConjectures.RingTheory.Kaehler.Trace
+public import WeilConjectures.RingTheory.Kaehler.TraceBaseChange
 public import WeilConjectures.RingTheory.Kaehler.TraceDuality
 public import WeilConjectures.RingTheory.Kaehler.TraceDualityField
 public import WeilConjectures.RingTheory.Kaehler.TraceIdempotent
