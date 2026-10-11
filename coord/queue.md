@@ -1,18 +1,19 @@
 # Work queue
 
-962 items; claim with `tools/claim.py next <group> [--stage N]`.
+974 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (962)
+## Stage 2: nodes to state (974)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
 | `def-nagata-relative-finite-affine-presentation` | 1 | state |
-| `def-pur-sheaf-tensor-product` | 1 | state |
-| `def-sbc-normal-dominant-galois` | 1 | state |
+| `def-pc-flat-sheaf-modules` | 1 | state |
+| `def-pc-module-pullback` | 1 | state |
 | `def-sp-double-complex-total` | 1 | state |
+| `def-weil-pbc-ample-invertible-module` | 1 | state |
 | `def-weil-pbc-etale-sheaves` | 1 | state |
 | `def-weil-pbc-formal-glueing-data` | 1 | state |
 | `def-weil-pbc-henselian-terminology` | 1 | state |
@@ -21,10 +22,11 @@
 | `lem-exc-discrete-modules-abelian` | 1 | state |
 | `lem-exc-discrete-modules-abelian-structure` | 1 | state |
 | `lem-exc-etale-sheaves-gsets-point` | 1 | state |
-| `lem-exc-field-sections-stalk-invariants` | 1 | state |
 | `lem-exc-finite-galois-sheaf-sections-coproduct` | 1 | state |
 | `lem-exc-rg-discrete-modules-functorial-injective-embeddings` | 1 | state |
 | `lem-exc-rg-open-stabilizer-adjoint` | 1 | state |
+| `lem-fin-etale-normal-components` | 1 | state |
+| `lem-fin-normal-generic-constant` | 1 | state |
 | `lem-galois-descent` | 1 | state |
 | `lem-galois-descent-datum-diagonal-identity` | 1 | state |
 | `lem-galois-fpqc-pullback-canonical-iso` | 1 | state |
@@ -41,10 +43,15 @@
 | `lem-pc-fppf-affine-sheafification-restriction` | 1 | state |
 | `lem-pc-fppf-affine-site-topos-equivalence` | 1 | state |
 | `lem-pc-kflat-hocolim-truncations` | 1 | state |
+| `lem-pc-kflat-pullback-preservation` | 1 | state |
 | `lem-pc-kflat-stalk-criterion` | 1 | state |
 | `lem-pc-kflat-tensor-cone-two-out-of-three` | 1 | state |
 | `lem-pc-kflat-tensor-quasi-iso` | 1 | state |
 | `lem-pc-module-bounded-flat-kflat` | 1 | state |
+| `lem-pc-module-change-of-rings-adjunction` | 1 | state |
+| `lem-pc-module-filtered-colimits-tensor` | 1 | state |
+| `lem-pc-module-pullback-adjunction` | 1 | state |
+| `lem-pc-module-pullback-identity-composition` | 1 | state |
 | `lem-pc-monomial-cech-complex-homology` | 1 | state |
 | `lem-pc-nonzero-section-integral-cartier` | 1 | state |
 | `lem-pc-pic-of-field` | 1 | state |
@@ -55,11 +62,10 @@
 | `lem-pc-right-localization-hom-colimit` | 1 | state |
 | `lem-pc-ring-derived-map-lift` | 1 | state |
 | `lem-pc-ring-m-pseudo-coherent-vanishing-base` | 1 | state |
-| `lem-pc-ring-precise-vanishing` | 1 | state |
 | `lem-pc-ring-pseudo-coherent-distinguished-triangle` | 1 | state |
 | `lem-pc-ring-pseudo-coherent-iff-all-m` | 1 | state |
 | `lem-pc-ring-pseudo-coherent-localization-glue` | 1 | state |
-| `lem-pc-separable-polynomial-alg-closed-quotient-product` | 1 | state |
+| `lem-pc-ringed-space-module-stalk-tensor` | 1 | state |
 | `lem-pc-separable-tensor-algebraic-closure` | 1 | state |
 | `lem-pc-sites-modules-quotient-j-shriek` | 1 | state |
 | `lem-pc-skyscraper-complex` | 1 | state |
@@ -202,6 +208,8 @@
 | `lem-sc-strict-henselization-regular` | 1 | state |
 | `lem-sc-supported-factor-through-thick` | 1 | state |
 | `lem-sc-tangent-space-vector-space` | 1 | state |
+| `lem-sc-tensor-generating-sections` | 1 | state |
+| `lem-sc-tensor-globally-generated` | 1 | state |
 | `lem-sc-valuation-zero-section-relative-cartier` | 1 | state |
 | `lem-sc-weakass-localization` | 1 | state |
 | `lem-sc-zariski-contracted-power-torsor` | 1 | state |
@@ -221,6 +229,7 @@
 | `lem-weil-pbc-affine-basic-set-difference` | 1 | state |
 | `lem-weil-pbc-affine-basic-sets-disjoint-refinement` | 1 | state |
 | `lem-weil-pbc-affine-formally-smooth-iff-ring-lifting` | 1 | state |
+| `lem-weil-pbc-affine-tilde-tensor` | 1 | state |
 | `lem-weil-pbc-algebra-colimit-fp-algebras-over-it` | 1 | state |
 | `lem-weil-pbc-analytic-unramified-principal-criterion` | 1 | state |
 | `lem-weil-pbc-analytically-unramified-n1` | 1 | state |
@@ -543,6 +552,7 @@
 | `lem-weil-pbc-higher-direct-image-sheafified-presheaf` | 1 | state |
 | `lem-weil-pbc-horseshoe-morphism-lift` | 1 | state |
 | `lem-weil-pbc-hypersurface-derivation-regular` | 1 | state |
+| `lem-weil-pbc-ideal-module-product-stalk` | 1 | state |
 | `lem-weil-pbc-idempotent-endomorphism-charpoly-field` | 1 | state |
 | `lem-weil-pbc-idempotent-endomorphism-image-base-change` | 1 | state |
 | `lem-weil-pbc-idempotent-splitting-monic-factorization` | 1 | state |
@@ -630,6 +640,7 @@
 | `lem-weil-pbc-module-skyscraper-stalk-adjunction` | 1 | state |
 | `lem-weil-pbc-module-stalk-exact` | 1 | state |
 | `lem-weil-pbc-module-stalk-filtered-colimit` | 1 | state |
+| `lem-weil-pbc-module-stalk-tensor` | 1 | state |
 | `lem-weil-pbc-n1-descends-finite-domain-extension` | 1 | state |
 | `lem-weil-pbc-n1-local-characterization` | 1 | state |
 | `lem-weil-pbc-n2-ascends-finite-domain-extension` | 1 | state |
@@ -853,6 +864,7 @@
 | `lem-weil-pbc-split-injection-after-completion` | 1 | state |
 | `lem-weil-pbc-spread-finite-separable-extension` | 1 | state |
 | `lem-weil-pbc-spread-purely-inseparable-factors` | 1 | state |
+| `lem-weil-pbc-stalk-change-of-rings-tensor` | 1 | state |
 | `lem-weil-pbc-standard-fpqc-quotient-topology` | 1 | state |
 | `lem-weil-pbc-standard-smooth-include-generators` | 1 | state |
 | `lem-weil-pbc-stein-factorization-affine` | 1 | state |
@@ -972,7 +984,7 @@
 | `lem-sc-normalization-properties` | 3 | state |
 | `def-nagata-fixed-base-separated-stage` | 6 | state |
 
-Not open yet: 1127 nodes that wait for a statement dependency, 40 nodes that wait for stage 1.
+Not open yet: 1110 nodes that wait for a statement dependency, 40 nodes that wait for stage 1.
 
 ## Stage 3: modules to prove (0)
 
