@@ -15,45 +15,113 @@
  },
  "kind": "statement",
  "title": "Flat localization in the second derived tensor factor",
- "statement": "Let $R\\to A$ and $R\\to B$ be maps of commutative rings, let $C$ be a flat localization of $B$, and let $M$ be a complex of $A$-modules [def-pc-derived-category]. For every $i$, the canonical map $H^i(M\\otimes_R^{\\mathbf L}B)\\otimes_B C\\to H^i(M\\otimes_R^{\\mathbf L}C)$ is an isomorphism of $A\\otimes_R C$-modules, natural in $M$ and compatible with the derived-category actions of $A$ and $B$. It is also compatible with the comparison maps: the square formed by $H^i$ of the canonical comparison map $M\\otimes_R^{\\mathbf L}B\\to M\\otimes_A^{\\mathbf L}(A\\otimes_R B)$ tensored with $C$, $H^i$ of the comparison map $M\\otimes_R^{\\mathbf L}C\\to M\\otimes_A^{\\mathbf L}(A\\otimes_R C)$, the above isomorphism, and the canonical map $H^i(M\\otimes_A^{\\mathbf L}(A\\otimes_R B))\\otimes_B C\\to H^i(M\\otimes_A^{\\mathbf L}(A\\otimes_R C))$ commutes.",
+ "statement": "Let $R\\to A$ and $R\\to B$ be maps of commutative rings, let $S\\subset B$ be multiplicative, set $C=S^{-1}B$, and assume $B\\to C$ is flat [def-weil-pbc-flat-ring-map]. Let $M$ be a cochain complex of $A$-modules [def-pc-cochain-complex-modules]. For every $i$, the canonical map $H^i(M\\otimes_R^{\\mathbf L}B)\\otimes_B C\\to H^i(M\\otimes_R^{\\mathbf L}C)$ is an isomorphism of $A\\otimes_R C$-modules, natural in $M$ and compatible with the derived-category actions of $A$ and $B$. It is also compatible with the comparison maps: the square formed by $H^i$ of the canonical comparison map $M\\otimes_R^{\\mathbf L}B\\to M\\otimes_A^{\\mathbf L}(A\\otimes_R B)$ tensored with $C$, $H^i$ of the comparison map $M\\otimes_R^{\\mathbf L}C\\to M\\otimes_A^{\\mathbf L}(A\\otimes_R C)$, the above isomorphism, and the canonical map $H^i(M\\otimes_A^{\\mathbf L}(A\\otimes_R B))\\otimes_B C\\to H^i(M\\otimes_A^{\\mathbf L}(A\\otimes_R C))$ commutes.",
  "source": {
   "document": "literature/stacks-project/more-algebra.tex",
   "place": "Tag 06Y6 (lemma-derived-base-change) with flat base change of cohomology; equation comparison-map"
  },
  "stmt_deps": [
-  "def-pc-derived-category"
+  "def-weil-pbc-flat-ring-map",
+  "def-pc-cochain-complex-modules"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Let $I_S$ be the category with objects the elements $s\\in S$ and, for $s,t\\in S$, a morphism $t:s\\to st$, composition being multiplication. It is filtered: $s$ and $s'$ both map to $ss'$, and if $t,t':s\\to s'$ are parallel then $s(t-t')=0$, so the composites of $t,t'$ with $s:s'\\to s's$ agree. Let $N_s=B$ for every $s$, with $t:s\\to st$ acting as multiplication by $t$ (an $R$-linear chain map of complexes concentrated in degree $0$); the maps $\\iota_s:B\\to C$, $b\\mapsto b/s$, are compatible and identify $C=S^{-1}B$ with $\\varinjlim_{I_S}N_s$ (every element of $C$ is some $b/s$, and $b/s=0$ iff $ub=0$ for some $u\\in S$, i.e. $b$ dies at the stage $us$). By [lem-pc-filtered-colimit-derived-tensor] the maps $H^i(M\\otimes_R^{\\mathbf L}\\iota_s)$ induce an isomorphism $\\varinjlim_{I_S}H^i(M\\otimes_R^{\\mathbf L}B)\\to H^i(M\\otimes_R^{\\mathbf L}C)$ of $A$-modules, natural in $M$, where the transition map for $t:s\\to st$ is $H^i$ of the endomorphism of $M\\otimes_R^{\\mathbf L}B$ induced by multiplication by $t$ on $B$, i.e. the action of $t\\in B$ [lem-pc-balanced-derived-tensor-model], whose models are those of [lem-pc-derived-tensor-second-factor-functor] (2).",
+   "uses": [
+    "lem-pc-filtered-colimit-derived-tensor",
+    "lem-pc-balanced-derived-tensor-model",
+    "lem-pc-derived-tensor-second-factor-functor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tags 06YR and 06Y6, filtered-colimit model for the localized second factor"
+   }
+  },
+  {
+   "text": "Put $H=H^i(M\\otimes_R^{\\mathbf L}B)$, a $B$-module via the action of Step 1, and $\\varphi=H^i(M\\otimes_R^{\\mathbf L}\\iota_1):H\\to H^i(M\\otimes_R^{\\mathbf L}C)$, the map induced by $B\\to C$. The colimit over $I_S$ of copies of $H$ with transition maps multiplication by $t$ is $S^{-1}H=H\\otimes_B C$, the element $x$ at stage $s$ going to $x\\otimes(1/s)$ (the same elementwise verification as in Step 1). Since $\\iota_s=\\mu_{1/s}\\circ\\iota_1$ with $\\mu_{1/s}$ multiplication by $1/s$ on $C$, functoriality gives $H^i(M\\otimes_R^{\\mathbf L}\\iota_s)(x)=(1/s)\\cdot\\varphi(x)$ for the $C$-action of [lem-pc-balanced-derived-tensor-model]; hence the isomorphism of Step 1 is the canonical map $H\\otimes_B C\\to H^i(M\\otimes_R^{\\mathbf L}C)$, $x\\otimes c\\mapsto c\\cdot\\varphi(x)$, which is therefore bijective. It is $C$-linear by construction and $A$-linear (hence $A\\otimes_R C$-linear) and natural in $M$ by the naturality in $M$ of Step 1, the $A$-action being induced by the endomorphisms of $M$ given by multiplication by $a\\in A$. Flatness of $B\\to C$ [def-weil-pbc-flat-ring-map] holds for every localization and is not otherwise used.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 06Y6, localization colimit and flat base-change cohomology"
+   }
+  },
+  {
+   "text": "Write $c_{R'}:M\\otimes_R^{\\mathbf L}R'\\to M\\otimes_A^{\\mathbf L}(A\\otimes_R R')$ for the comparison map, $R'=B,C$. By [lem-pc-derived-tensor-action-naturality], for a K-flat resolution $P\\to M$ over $A$ and $F\\to R'$ over $R$, $c_{R'}$ is represented by $\\operatorname{Tot}(P\\otimes_R F)\\to\\operatorname{Tot}(P\\otimes_R R')=P\\otimes_A(A\\otimes_R R')$ induced by $F\\to R'$, and $H^i(c_{R'})$ is $A\\otimes_R R'$-linear. This is the value at $R'$ of the canonical transformation from the left derived functor $-\\otimes_R^{\\mathbf L}P$ of [lem-pc-derived-tensor-second-factor-functor] (2) to the functor $E\\mapsto\\operatorname{Tot}(E\\otimes_R P)$ on complexes of $R$-modules (a left derived functor comes with this transformation, and clause (2) says it is computed on K-flat resolutions), so it is natural with respect to the chain map $B\\to C$: $H^i(c_C)\\circ\\varphi=\\psi\\circ H^i(c_B)$, where $\\psi:H^i(P\\otimes_R B)\\to H^i(P\\otimes_R C)$ is induced by $B\\to C$, i.e. by $A\\otimes_R B\\to A\\otimes_R C$. In the square of the statement all four maps are $C$-linear (the two maps out of a $-\\otimes_B C$ by construction, $H^i(c_C)$ by the cited linearity, the isomorphism by Step 2), and $H^i(M\\otimes_R^{\\mathbf L}B)\\otimes_B C$ is generated over $C$ by the elements $x\\otimes1$, on which the two composites are $H^i(c_C)(\\varphi(x))$ and $\\psi(H^i(c_B)(x))$; so the square commutes.",
+   "uses": [
+    "lem-pc-derived-tensor-action-naturality",
+    "lem-pc-derived-tensor-second-factor-functor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 06Y6, functoriality and comparison-map equation"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-filtered-colimit-derived-tensor",
+  "lem-pc-balanced-derived-tensor-model",
+  "lem-pc-derived-tensor-second-factor-functor",
+  "lem-pc-derived-tensor-action-naturality"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tags 06YR and 06Y6"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
-   "query": "derived tensor commutes with flat localization in second algebra factor",
-   "results": "IsLocalization.tensorProduct_tensorProduct, IsLocalization.algebraTensorEquiv; ordinary tensor only",
+   "query": "derived tensor cohomology commutes with localization in second factor via filtered colimits",
+   "results": "CategoryTheory.Tor and Tor' declarations; no derived-tensor localization theorem",
    "date": "2026-10-11",
    "verdict": "no match"
   },
   {
    "tool": "loogle",
-   "query": "derived tensor localization flat",
-   "results": "0 hits; loogle: Unknown identifier derived",
+   "query": "CategoryTheory.Tor Homology localization",
+   "results": "0 hits; loogle: Unknown identifier Homology",
    "date": "2026-10-11",
    "verdict": "no match"
   },
   {
    "tool": "grep",
-   "query": "derived.*localiz|localiz.*derived in Mathlib/Algebra/Homology",
-   "results": "0 matches",
+   "query": "localization.*homology|homology.*localization Mathlib/Algebra/Homology",
+   "results": "Mathlib/Algebra/Homology/Localization.lean has localization of homology functors, but no tensor-localization comparison",
    "date": "2026-10-11",
    "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "derived tensor cohomology commutes with flat localization in second factor",
+   "results": "service unavailable",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-pc-derived-tensor-localization-cohomology",
   "by": "worker",
   "date": "2026-10-11"
+ },
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-pc-derived-tensor-flat-second-localization",
+  "worker": "stage1",
+  "summary": "Repair of the returned split: removed the ill-typed attempt to tensor an R-complex over B. The proof writes C as the filtered colimit of copies of B, applies the general filtered-colimit/derived-tensor statement, identifies the resulting module colimit with localization, and transports the comparison square stagewise.",
+  "blueprint": "Realizes the parent proof of Tag 06Y6 at the clause 'localize the second factor of the derived tensor', including the filtered-colimit model, flat cohomology comparison, and compatibility with the comparison-map equation.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-dfl0338",
+  "group": "J1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-dfl0338 (reviewer sub-agent of L); spot-checked: Return points of R-dfl0239: 1 (ill-typed K-flat B-resolution node) repaired: node deleted, colimit route C=colim over I_S of B; 2 (K tensor_B C ill-typed) repaired: no B-complex model used; 3 (TeX of lem-pc-flat-localization-cohomology) repaired but node now cited by nothing, dropped. FIX more, RETURN less: (a) lem-pc-filtered-colimit-derived-tensor narrowed to the cohomology clause (the D(A) filtered-colimit clause is not defined in general and unused), M tensor^L N defined via lem-pc-derived-tensor-second-factor-functor (2), isomorphism specified by coprojections; true by K-flat R-resolution E of M, termwise colimits and exactness of filtered colimits; not a duplicate of second-factor-functor (no colimit clause) or lem-pc-kflat-closure; (b) Step 1: index category of S made precise (morphisms t:s->st, filtered since s(t-t')=0), transition maps identified with the B-action; (c) Step 2: colimit isomorphism identified with the canonical map, A tensor C-linearity; (d) Step 3 (C4: balanced model is functorial only in M) replaced by naturality of the comparison map in the second factor (transformation LF->F of second-factor-functor (2), model of lem-pc-derived-tensor-action-naturality) plus C-linearity on generators x tensor 1; (e) statement_change recorded (E7), parent lem-pc-derived-tensor-localization-cohomology step 3 (R'_p -> R'_p') covered. No cycle: action-naturality, second-factor-functor, balanced-model do not depend on the item.; 2 file(s) fixed by the reviewer"
  }
 }

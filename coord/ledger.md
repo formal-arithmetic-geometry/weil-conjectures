@@ -3348,3 +3348,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 03:15 L: merged deliver/E1/lem-pur-triangle-common-refinement-ms3-05r9 (reviewer FIX; first push; new nodes: 0)
 - 03:15 L: lem-pur-triangle-common-refinement-ms3-05r9 merged by R-tcr0314 (FIX ed73f286a: saturation argument for the S-arrows added to step 1); second reading by E1 missed it and claims a created.item change it did not make (E1 too now)
 - 03:38 L: finding: J1 re-pushed lem-pc-derived-tensor-flat-second-localization at 03:20 (head 9816501ff) to the existing branch; the lead's Monitor reported only changes of the branch COUNT, so the re-push went unseen for 17 minutes; the Monitor now reports every change of a deliver/* head; reviewer R-dfl0338 launched (statement made precise without a record: S^{-1}B with B -> C flat)
+- 03:42 L: merged deliver/J1/lem-pc-derived-tensor-flat-second-localization (reviewer FIX; after a return; new nodes: 1)

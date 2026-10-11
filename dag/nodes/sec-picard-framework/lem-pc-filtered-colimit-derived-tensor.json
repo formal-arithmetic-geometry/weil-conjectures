@@ -1,0 +1,71 @@
+{
+ "id": "lem-pc-filtered-colimit-derived-tensor",
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-perfect-base-change",
+   "place": "proof of Tag 06Y6: replace the localized second factor by the filtered colimit of its stages and commute totalization and cohomology with that colimit",
+   "via": [
+    "lem-pc-derived-tensor-flat-second-localization"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Filtered colimits and derived tensor in the second factor",
+ "statement": "Let $R$ be a commutative ring, let $A$ be a commutative $R$-algebra, let $M$ be a cochain complex of $A$-modules [def-pc-cochain-complex-modules], and for a complex $N$ of $R$-modules write $M\\otimes_R^{\\mathbf L}N$ for the value $N\\otimes_R^{\\mathbf L}M\\in D(A)$ of the exact functor $-\\otimes_R^{\\mathbf L}M:D(R)\\to D(A)$ of [lem-pc-derived-tensor-second-factor-functor] (2) [def-weil-abstract-derived-category], so that a morphism $N\\to N'$ of complexes of $R$-modules induces an $A$-linear map $H^n(M\\otimes_R^{\\mathbf L}N)\\to H^n(M\\otimes_R^{\\mathbf L}N')$. Let $I$ be a filtered category, let $(N_i)_{i\\in I}$ be a diagram of complexes of $R$-modules indexed by $I$, and let $N=\\varinjlim_i N_i$ be its termwise colimit with coprojections $\\iota_j:N_j\\to N$. Then for every integer $n$ the maps $H^n(M\\otimes_R^{\\mathbf L}\\iota_j)$ induce an isomorphism of $A$-modules $\\varinjlim_i H^n(M\\otimes_R^{\\mathbf L}N_i)\\to H^n(M\\otimes_R^{\\mathbf L}N)$, natural in $M$ (for morphisms of complexes of $A$-modules) and in the diagram.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tags 06YR and 06Y6: for a K-flat R-resolution E of M, Tot(E (x)_R -) commutes with filtered colimits termwise and cohomology commutes with filtered colimits (exactness of filtered colimits)"
+ },
+ "stmt_deps": [
+  "def-pc-cochain-complex-modules",
+  "def-weil-abstract-derived-category",
+  "lem-pc-derived-tensor-second-factor-functor"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "filtered colimit of K-flat complexes over a ring remains K-flat",
+   "results": "HomologicalComplex.instHasFilteredColimitsOfSize and HomologicalComplex.ab5OfSize in Mathlib/Algebra/Homology/GrothendieckAbelian; no K-flat declaration",
+   "date": "2026-10-11",
+   "verdict": "generalization: filtered colimits of complexes only"
+  },
+  {
+   "tool": "loogle",
+   "query": "KFlat filtered colimit HomologicalComplex",
+   "results": "0 hits; loogle: Unknown identifier KFlat",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "KFlat|filtered.*colimit|colimit.*K-flat Mathlib/Algebra/Homology",
+   "results": "filtered-colimit infrastructure in Mathlib/Algebra/Homology/GrothendieckAbelian.lean; no K-flat or derived-tensor colimit theorem",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "filtered colimits of K-flat complexes and cohomology commute with filtered colimits",
+   "results": "service unavailable",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "item": "lem-pc-derived-tensor-flat-second-localization",
+  "by": "worker",
+  "date": "2026-10-11"
+ },
+ "lead_notes": [
+  "R-dfl0338 (reviewer, 03:45 UTC): statement narrowed to the cohomology clause, with M (x)^L_R N defined as the value of the functor of lem-pc-derived-tensor-second-factor-functor (2) and the isomorphism specified by the coprojections. The delivered clause 'M (x)^L_R colim N_i = colim (M (x)^L_R N_i) in D(A)' was dropped: a filtered colimit in D(A) is not defined in general, and the item uses only the cohomology clause. Proof sketch for the worker: take a K-flat R-resolution E -> M (restriction of scalars); Tot(F_N (x) M) <- Tot(F_N (x) E) -> Tot(N (x) E) are quasi-isomorphisms naturally in N, Tot(E (x) colim N_i) = colim Tot(E (x) N_i) termwise, and H^n commutes with filtered colimits [lem-weil-pbc-filtered-colimit-abelian-groups-exact]."
+ ]
+}
