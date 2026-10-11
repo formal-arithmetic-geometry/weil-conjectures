@@ -38,8 +38,9 @@ once `Ex_!` is constructed on `D⁺`.
 The projection formula is stated as the invertibility of the projection map
 `PF : Rf_! K ⊗^L L ⟶ Rf_!(K ⊗^L Lf^* L)` of `AlgebraicGeometry.Etale.projectionMap`
 (`AlgebraicGeometry.Etale.hasProjectionFormula_of_finite`, in
-`WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormula`); the objectwise form
-`AlgebraicGeometry.Etale.nonempty_iso_derivedTensor_rightDerivedLowerShriek` follows.
+`WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormula`); its case of `sk-thm-sf-pf-finite`,
+for `K` bounded constructible and `L` in `Dᵇctf`, is
+`AlgebraicGeometry.Etale.hasProjectionFormula_of_boundedConstructible`.
 
 The exchange `Ex_*` for `Rf_*` does already exist in this repository, as
 `AlgebraicGeometry.Etale.baseChange` and `AlgebraicGeometry.Etale.derivedBaseChangeMapPlus`.
@@ -48,7 +49,7 @@ The exchange `Ex_*` for `Rf_*` does already exist in this repository, as
 
 - `AlgebraicGeometry.Etale.isIso_rightDerivedLowerShriekOfCompactificationBaseChangeMap_of_finite`
 - `AlgebraicGeometry.Etale.isIso_rightDerivedLowerShriekBaseChangeMap`
-- `AlgebraicGeometry.Etale.nonempty_iso_derivedTensor_rightDerivedLowerShriek`
+- `AlgebraicGeometry.Etale.hasProjectionFormula_of_boundedConstructible`
 - `AlgebraicGeometry.Etale.nonempty_iso_reductionModIdeal_rightDerivedLowerShriek`,
   `AlgebraicGeometry.Etale.nonempty_iso_reductionModIdeal_rightDerivedLowerStar`
 - `AlgebraicGeometry.Etale.nonempty_iso_reductionModIdeal_leftDerivedUpperStar`
@@ -149,23 +150,19 @@ on `X` and `L` bounded constructible *of finite Tor amplitude* on `Y`, the proje
 
 `PF : Rf_! K ⊗^L L ⟶ Rf_!(K ⊗^L Lf^* L)`
 
-is an isomorphism, naturally in `K` and `L`; here in the objectwise form
-`Rf_! K ⊗^L L ≅ Rf_!(K ⊗^L Lf^* L)`. It is the case of
+is an isomorphism, naturally in `K` and `L`: the projection map is a natural transformation, and
+it is invertible at every such `K` and `L`. It is the case of
 `AlgebraicGeometry.Etale.hasProjectionFormula_of_finite` treated by the fibrewise argument of
 the blueprint, which represents the stalks of `L` by bounded complexes of finite free modules;
 the hypotheses on `K` and `L` are not needed for the conclusion. -/
-theorem nonempty_iso_derivedTensor_rightDerivedLowerShriek [Finite Λ]
+theorem hasProjectionFormula_of_boundedConstructible [Finite Λ]
     [HasInvertibleExponent Λ Y] [LocallyOfFiniteType f]
     (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
     (L : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
     (_hK : DerivedCategory.boundedConstructible (ModuleCat.{u + 1} Λ) X K)
     (_hL : DerivedCategory.boundedConstructibleFiniteTor Λ Y L) :
-    Nonempty (((derivedTensor (ModuleCat.{u + 1} Λ) Y).obj
-          ((R(f)_![ModuleCat.{u + 1} Λ]).obj K)).obj L ≅
-      (R(f)_![ModuleCat.{u + 1} Λ]).obj
-        (((derivedTensor (ModuleCat.{u + 1} Λ) X).obj K).obj
-          ((L((f)^*[ModuleCat.{u + 1} Λ])).obj L))) :=
-  ⟨@asIso _ _ _ _ _ (hasProjectionFormula_of_finite Λ f K L)⟩
+    HasProjectionFormula (ModuleCat.{u + 1} Λ) f K L :=
+  hasProjectionFormula_of_finite Λ f K L
 
 /-- Blueprint `sk-prop-sf-pf-reduction`: Projection formula: compatibility with finite
 reduction

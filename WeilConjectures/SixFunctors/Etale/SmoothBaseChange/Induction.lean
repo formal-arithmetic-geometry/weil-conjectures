@@ -30,6 +30,8 @@ base-change property universally in every degree.
 - `AlgebraicGeometry.Etale.UniversalBaseChangeProperty.of_forall_lt`: for an affine smooth
   relative curve, the universal base-change property in all degrees `< q` implies it in
   degree `q`.
+- `AlgebraicGeometry.Etale.UniversalBaseChangeProperty.forall_le_of_forall_le_sub_one`: the same
+  step in cumulative form, universally in all degrees `≤ q`.
 - `AlgebraicGeometry.Etale.universalBaseChangeProperty_of_smoothOfRelativeDimension_one`:
   affine smooth base change in relative dimension one, universally and in every degree.
 
@@ -78,6 +80,24 @@ theorem Etale.UniversalBaseChangeProperty.of_forall_lt [IsAffine X] [IsAffineHom
     isUnit_of_dvd_unit (Nat.cast_dvd_cast hd) (by simpa using hn.map a.appTop.hom)
   exact hne (Etale.CurveTestDatum.isZero_higherDirectImage_constantSheaf Λ
     ⟨S', hnorm, X', p', K, i, Y, e, h, sq, d, hd'⟩ q hq)
+
+/-- Blueprint `sbc-lem-rel-dim-one-induction`: The induction step in relative dimension one,
+cumulative form.
+
+Let `p : X ⟶ S` be affine smooth of relative dimension one with `X` affine, and let `n` be
+invertible on `S` and annihilate `Λ`. If, for some `q ≥ 1`, `BC(p, Λ, q')` holds universally for
+all `q' ≤ q - 1`, then `BC(p, Λ, q')` holds universally for all `q' ≤ q`. The new degree `q` is
+`AlgebraicGeometry.Etale.UniversalBaseChangeProperty.of_forall_lt`. -/
+theorem Etale.UniversalBaseChangeProperty.forall_le_of_forall_le_sub_one [IsAffine X]
+    [IsAffineHom p] [SmoothOfRelativeDimension 1 p] (n : ℕ) (hn : IsUnit (n : Γ(S, ⊤)))
+    (hΛ : (n : Λ) = 0) {q : ℤ} (hq : 1 ≤ q)
+    (hprev : ∀ q' ≤ q - 1, Etale.UniversalBaseChangeProperty Λ p q') :
+    ∀ q' ≤ q, Etale.UniversalBaseChangeProperty Λ p q' := by
+  intro q' hq'
+  rcases hq'.lt_or_eq with h | rfl
+  · exact hprev q' (by omega)
+  · exact Etale.UniversalBaseChangeProperty.of_forall_lt n hn hΛ hq fun q'' h ↦
+      hprev q'' (by omega)
 
 /-- Affine smooth base change in relative dimension one: for `p : X ⟶ S` affine smooth of
 relative dimension one with `X` affine, and `n` invertible on `S` and annihilating `Λ`,

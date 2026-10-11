@@ -26,6 +26,9 @@ public import WeilConjectures.SixFunctors.Etale.Derived.KernelTransform.Defs
 
 ## Main statements
 
+- `AlgebraicGeometry.Etale.nonempty_iso_kernelTransform_tensor_of_hasProjectionFormula`: kernel
+  transforms are linear over the base on full subcategories where the projection formula for
+  the second projection holds.
 - `AlgebraicGeometry.Etale.nonempty_iso_kernelTransform_tensor`: kernel transforms are linear
   over the base, given the projection formula for the second projection.
 
@@ -57,53 +60,65 @@ variable [Etale.UpperStarPreservesFlat A]
   [PreservesFilteredColimitsOfSize.{u + 1, u + 1} (CategoryTheory.forget A)]
   [∀ Z : Scheme.{u}, Z.smallEtaleTopology.HasSheafCompose (CategoryTheory.forget A)]
 
-/-- A kernel transform is linear over the base: tensoring the input with a complex pulled back
-from `S` along `π` is the same as tensoring the output with the same complex pulled back along
-`π'`,
+/-- The projection map of `f : X ⟶ Y`, `Rf_! K ⊗ᴸ L ⟶ Rf_!(K ⊗ᴸ f^* L)`, as a natural
+transformation of functors of `L` and then `K`, with `f^*` the functor `D(f^*)` induced by the
+exact pullback. -/
+private noncomputable def projectionMapFlip {X Y : Scheme.{u}} (f : X ⟶ Y)
+    [HasCompactification f] :
+    (-⊗ᴸ-(Y)[A]).flip ⋙ (Functor.whiskeringLeft _ _ _).obj R(f)_![A] ⟶
+      D((f)^*[A]) ⋙ (-⊗ᴸ-(X)[A]).flip ⋙ (Functor.whiskeringRight _ _ _).obj R(f)_![A] :=
+  (flipFunctor _ _ _).map (projectionMap A f) ≫
+    (Functor.isoWhiskerRight (leftDerivedUpperStarIsoMapDerivedCategory A f)
+      ((-⊗ᴸ-(X)[A]).flip ⋙ (Functor.whiskeringRight _ _ _).obj R(f)_![A])).hom
 
-`Φ_𝒦(K ⊗ᴸ π^* N) ≅ Φ_𝒦(K) ⊗ᴸ π'^* N`,
+private lemma isIso_projectionMapFlip_app_app {X Y : Scheme.{u}} (f : X ⟶ Y)
+    [HasCompactification f] (K : DerivedCategory (Sheaf X.smallEtaleTopology A))
+    (L : DerivedCategory (Sheaf Y.smallEtaleTopology A)) (h : HasProjectionFormula A f K L) :
+    IsIso (((projectionMapFlip A f).app L).app K) :=
+  have : IsIso (((projectionMap A f).app K).app L) := h
+  @IsIso.comp_isIso _ _ _ _ _ _ _ this (Iso.isIso_hom ((Functor.isoWhiskerRight
+    (leftDerivedUpperStarIsoMapDerivedCategory A f)
+      ((-⊗ᴸ-(X)[A]).flip ⋙ (Functor.whiskeringRight _ _ _).obj R(f)_![A])).app L |>.app K))
 
-naturally in `K` and `N`, provided the projection formula holds for the second projection
-`p₂ : V ×_S V' ⟶ V'` on the whole unbounded derived categories.
+/-- Linearity over the base of the kernel transform `K ↦ Rp₂,!(p₁^* K ⊗ᴸ 𝒦)` without shift, up
+to the projection map. There are an isomorphism from `Rp₂,!(p₁^*(K ⊗ᴸ π^* N) ⊗ᴸ 𝒦)` to
+`Rp₂,!((p₁^* K ⊗ᴸ 𝒦) ⊗ᴸ p₂^* π'^* N)` and a natural transformation `t` to the latter from
+`Rp₂,!(p₁^* K ⊗ᴸ 𝒦) ⊗ᴸ π'^* N`, both natural in `N` and `K`, such that `t` is invertible at
+`(N, K)` whenever the projection formula holds for `p₂` at `p₁^* K ⊗ᴸ 𝒦` and `π'^* N`.
 
-The shift is first moved into the kernel
-(`AlgebraicGeometry.Etale.nonempty_iso_kernelTransform_shift`). Then
-`p₁^*(K ⊗ᴸ π^* N) ≅ p₁^* K ⊗ᴸ p₂^* π'^* N` by monoidality of `Lp₁^*` and
-`p₁ ≫ π = p₂ ≫ π'`, the factor `p₂^* π'^* N` is moved past `𝒦` with the associator and a
-braiding of `D((V ×_S V')_ét)`, and the projection formula for `p₂` concludes.
-(sketch blueprint: `sk-prop-base-linear`, proof) -/
-theorem nonempty_iso_kernelTransform_tensor [HasCompactification (pullback.snd π π')]
-    [IsIso (projectionMap A (pullback.snd π π'))]
-    (𝒦 : DerivedCategory (Sheaf (pullback π π').smallEtaleTopology A)) (a : ℤ) :
-    Nonempty (derivedTensorRightPullback A π ⋙
-          (Functor.whiskeringRight _ _ _).obj (kernelTransform A π π' 𝒦 a) ≅
-        derivedTensorRightPullback A π' ⋙
-          (Functor.whiskeringLeft _ _ _).obj (kernelTransform A π π' 𝒦 a)) := by
-  -- Move the shift into the kernel.
-  obtain ⟨eₛ⟩ := nonempty_iso_kernelTransform_shift A π π' 𝒦 a 0
-  rw [add_zero] at eₛ
-  suffices h : Nonempty (derivedTensorRightPullback A π ⋙
-      (Functor.whiskeringRight _ _ _).obj
-        (D((pullback.fst π π')^*[A]) ⋙ derivedTensorRight A (pullback π π') (𝒦⟦a⟧) ⋙
-          R(pullback.snd π π')_![A]) ≅
-      derivedTensorRightPullback A π' ⋙ (Functor.whiskeringLeft _ _ _).obj
-        (D((pullback.fst π π')^*[A]) ⋙ derivedTensorRight A (pullback π π') (𝒦⟦a⟧) ⋙
-          R(pullback.snd π π')_![A])) by
-    obtain ⟨e⟩ := h
-    let e₀ : kernelTransform A π π' (𝒦⟦a⟧) 0 ≅
-        D((pullback.fst π π')^*[A]) ⋙ derivedTensorRight A (pullback π π') (𝒦⟦a⟧) ⋙
-          R(pullback.snd π π')_![A] :=
-      Functor.isoWhiskerLeft (D((pullback.fst π π')^*[A]) ⋙
-          derivedTensorRight A (pullback π π') (𝒦⟦a⟧) ⋙ R(pullback.snd π π')_![A])
-        (shiftFunctorZero _ ℤ)
-    let f := eₛ.symm ≪≫ e₀
-    exact ⟨Functor.isoWhiskerLeft _ ((Functor.whiskeringRight _ _ _).mapIso f) ≪≫ e ≪≫
-      Functor.isoWhiskerLeft _ ((Functor.whiskeringLeft _ _ _).mapIso f.symm)⟩
-  generalize 𝒦⟦a⟧ = 𝒦
-  set p₁ := pullback.fst π π'
-  set p₂ := pullback.snd π π'
+The isomorphism is built from monoidality of `Lp₁^*`, `p₁ ≫ π = p₂ ≫ π'` and the associator
+and a braiding of `D((V ×_S V')_ét)`; `t` is the projection map of `p₂`. -/
+private theorem exists_iso_kernelTransform_tensor [HasCompactification (pullback.snd π π')]
+    (𝒦 : DerivedCategory (Sheaf (pullback π π').smallEtaleTopology A)) :
+    ∃ (_ : derivedTensorRightPullback A π ⋙ (Functor.whiskeringRight _ _ _).obj
+          (D((pullback.fst π π')^*[A]) ⋙ derivedTensorRight A (pullback π π') 𝒦 ⋙
+            R(pullback.snd π π')_![A]) ≅
+        D((π')^*[A]) ⋙ (D((pullback.snd π π')^*[A]) ⋙ (-⊗ᴸ-(pullback π π')[A]).flip ⋙
+          (Functor.whiskeringRight _ _ _).obj R(pullback.snd π π')_![A]) ⋙
+            (Functor.whiskeringLeft _ _ _).obj (derivedTensorRight A (pullback π π') 𝒦) ⋙
+              (Functor.whiskeringLeft _ _ _).obj D((pullback.fst π π')^*[A]))
+      (t : derivedTensorRightPullback A π' ⋙ (Functor.whiskeringLeft _ _ _).obj
+          (D((pullback.fst π π')^*[A]) ⋙ derivedTensorRight A (pullback π π') 𝒦 ⋙
+            R(pullback.snd π π')_![A]) ⟶
+        D((π')^*[A]) ⋙ (D((pullback.snd π π')^*[A]) ⋙ (-⊗ᴸ-(pullback π π')[A]).flip ⋙
+          (Functor.whiskeringRight _ _ _).obj R(pullback.snd π π')_![A]) ⋙
+            (Functor.whiskeringLeft _ _ _).obj (derivedTensorRight A (pullback π π') 𝒦) ⋙
+              (Functor.whiskeringLeft _ _ _).obj D((pullback.fst π π')^*[A])),
+      ∀ N K, HasProjectionFormula A (pullback.snd π π')
+          ((derivedTensorRight A (pullback π π') 𝒦).obj ((D((pullback.fst π π')^*[A])).obj K))
+          ((D((π')^*[A])).obj N) →
+        IsIso ((t.app N).app K) := by
   obtain ⟨_⟩ := _root_.DerivedCategory.nonempty_braidedCategory
     (Sheaf (pullback π π').smallEtaleTopology A)
+  refine ⟨?_, Functor.whiskerLeft D((π')^*[A]) (Functor.whiskerRight
+    (projectionMapFlip A (pullback.snd π π'))
+    ((Functor.whiskeringLeft _ _ _).obj (derivedTensorRight A (pullback π π') 𝒦) ⋙
+      (Functor.whiskeringLeft _ _ _).obj D((pullback.fst π π')^*[A]))),
+    fun N K h ↦ isIso_projectionMapFlip_app_app A (pullback.snd π π')
+      ((derivedTensorRight A (pullback π π') 𝒦).obj ((D((pullback.fst π π')^*[A])).obj K))
+      ((D((π')^*[A])).obj N) h⟩
+  set p₁ := pullback.fst π π'
+  set p₂ := pullback.snd π π'
   -- `Lp₁^*(K ⊗ᴸ M) ≅ Lp₁^* K ⊗ᴸ Lp₁^* M`, naturally in `M` and `K`.
   let ι₁ := leftDerivedUpperStarIsoMapDerivedCategory A p₁
   let μ₁ : (-⊗ᴸ-(V)[A]).flip ⋙ (Functor.whiskeringRight _ _ _).obj L((p₁)^*[A]) ≅
@@ -143,12 +158,6 @@ theorem nonempty_iso_kernelTransform_tensor [HasCompactification (pullback.snd �
         rw [associator_naturality_middle_assoc, ← whiskerLeft_comp_assoc,
           BraidedCategory.braiding_naturality_left, whiskerLeft_comp_assoc, Category.assoc,
           Category.assoc, associator_inv_naturality_right])
-  -- The projection formula `Rp₂,!(X ⊗ᴸ p₂^* L) ≅ Rp₂,! X ⊗ᴸ L`.
-  let ρ : D((p₂)^*[A]) ⋙ (-⊗ᴸ-(pullback π π')[A]).flip ⋙
-        (Functor.whiskeringRight _ _ _).obj R(p₂)_![A] ≅
-      (-⊗ᴸ-(V')[A]).flip ⋙ (Functor.whiskeringLeft _ _ _).obj R(p₂)_![A] :=
-    Functor.isoWhiskerRight (leftDerivedUpperStarIsoMapDerivedCategory A p₂).symm _ ≪≫
-      (flipFunctor _ _ _).mapIso (asIso (projectionMap A p₂)).symm
   let T𝒦 := derivedTensorRight A (pullback π π') 𝒦
   let s₁ : derivedTensorRightPullback A π ⋙ (Functor.whiskeringRight _ _ _).obj
         (D((p₁)^*[A]) ⋙ T𝒦 ⋙ R(p₂)_![A]) ≅
@@ -178,16 +187,93 @@ theorem nonempty_iso_kernelTransform_tensor [HasCompactification (pullback.snd �
     Functor.isoWhiskerLeft (D((π')^*[A]) ⋙ D((p₂)^*[A])) (Functor.isoWhiskerRight β
       ((Functor.whiskeringRight _ _ _).obj R(p₂)_![A] ⋙
         (Functor.whiskeringLeft _ _ _).obj D((p₁)^*[A])))
-  let s₄ : D((π')^*[A]) ⋙ (D((p₂)^*[A]) ⋙ (-⊗ᴸ-(pullback π π')[A]).flip ⋙
-        (Functor.whiskeringRight _ _ _).obj R(p₂)_![A]) ⋙
-          (Functor.whiskeringLeft _ _ _).obj T𝒦 ⋙
-            (Functor.whiskeringLeft _ _ _).obj D((p₁)^*[A]) ≅
-      D((π')^*[A]) ⋙ ((-⊗ᴸ-(V')[A]).flip ⋙ (Functor.whiskeringLeft _ _ _).obj R(p₂)_![A]) ⋙
-          (Functor.whiskeringLeft _ _ _).obj T𝒦 ⋙
-            (Functor.whiskeringLeft _ _ _).obj D((p₁)^*[A]) :=
-    Functor.isoWhiskerLeft D((π')^*[A]) (Functor.isoWhiskerRight ρ
-      ((Functor.whiskeringLeft _ _ _).obj T𝒦 ⋙ (Functor.whiskeringLeft _ _ _).obj D((p₁)^*[A])))
-  exact ⟨s₁ ≪≫ s₂ ≪≫ s₃ ≪≫ s₄⟩
+  exact s₁ ≪≫ s₂ ≪≫ s₃
+
+/-- A kernel transform is linear over the base: tensoring the input with a complex pulled back
+from `S` along `π` is the same as tensoring the output with the same complex pulled back along
+`π'`,
+
+`Φ_𝒦(K ⊗ᴸ π^* N) ≅ Φ_𝒦(K) ⊗ᴸ π'^* N`,
+
+naturally in `K` and `N`, on full subcategories `P` of `D(V_ét)` and `Q` of `D(S_ét)` such
+that the projection formula for the second projection `p₂ : V ×_S V' ⟶ V'` holds at
+`p₁^* K ⊗ᴸ 𝒦[a]` and `π'^* N` for `K ∈ P` and `N ∈ Q`.
+
+The shift is first moved into the kernel
+(`AlgebraicGeometry.Etale.nonempty_iso_kernelTransform_shift`). Then
+`p₁^*(K ⊗ᴸ π^* N) ≅ p₁^* K ⊗ᴸ p₂^* π'^* N` by monoidality of `Lp₁^*` and
+`p₁ ≫ π = p₂ ≫ π'`, the factor `p₂^* π'^* N` is moved past `𝒦` with the associator and a
+braiding of `D((V ×_S V')_ét)`, and the projection formula for `p₂` concludes.
+(sketch blueprint: `sk-prop-base-linear`, proof) -/
+theorem nonempty_iso_kernelTransform_tensor_of_hasProjectionFormula
+    [HasCompactification (pullback.snd π π')]
+    (P : ObjectProperty (DerivedCategory (Sheaf V.smallEtaleTopology A)))
+    (Q : ObjectProperty (DerivedCategory (Sheaf S.smallEtaleTopology A)))
+    (𝒦 : DerivedCategory (Sheaf (pullback π π').smallEtaleTopology A)) (a : ℤ)
+    (h : ∀ K, P K → ∀ N, Q N → HasProjectionFormula A (pullback.snd π π')
+      ((derivedTensorRight A (pullback π π') (𝒦⟦a⟧)).obj ((D((pullback.fst π π')^*[A])).obj K))
+      ((D((π')^*[A])).obj N)) :
+    Nonempty (Q.ι ⋙ derivedTensorRightPullback A π ⋙
+          (Functor.whiskeringRight _ _ _).obj (kernelTransform A π π' 𝒦 a) ⋙
+            (Functor.whiskeringLeft _ _ _).obj P.ι ≅
+        Q.ι ⋙ derivedTensorRightPullback A π' ⋙
+          (Functor.whiskeringLeft _ _ _).obj (kernelTransform A π π' 𝒦 a) ⋙
+            (Functor.whiskeringLeft _ _ _).obj P.ι) := by
+  -- Move the shift into the kernel.
+  obtain ⟨eₛ⟩ := nonempty_iso_kernelTransform_shift A π π' 𝒦 a 0
+  rw [add_zero] at eₛ
+  let f : kernelTransform A π π' 𝒦 a ≅
+      D((pullback.fst π π')^*[A]) ⋙ derivedTensorRight A (pullback π π') (𝒦⟦a⟧) ⋙
+        R(pullback.snd π π')_![A] :=
+    eₛ.symm ≪≫ Functor.isoWhiskerLeft (D((pullback.fst π π')^*[A]) ⋙
+      derivedTensorRight A (pullback π π') (𝒦⟦a⟧) ⋙ R(pullback.snd π π')_![A])
+        (shiftFunctorZero _ ℤ)
+  obtain ⟨s, t, ht⟩ := exists_iso_kernelTransform_tensor A π π' (𝒦⟦a⟧)
+  let t' := Functor.whiskerLeft Q.ι
+    (Functor.whiskerRight t ((Functor.whiskeringLeft _ _ _).obj P.ι))
+  have (N : Q.FullSubcategory) : IsIso (t'.app N) :=
+    have (K : P.FullSubcategory) : IsIso ((t'.app N).app K) :=
+      ht N.obj K.obj (h K.obj K.property N.obj N.property)
+    NatIso.isIso_of_isIso_app _
+  have := NatIso.isIso_of_isIso_app t'
+  exact ⟨Functor.isoWhiskerLeft Q.ι (Functor.isoWhiskerRight
+      (Functor.isoWhiskerLeft _ ((Functor.whiskeringRight _ _ _).mapIso f) ≪≫ s)
+        ((Functor.whiskeringLeft _ _ _).obj P.ι)) ≪≫
+    (asIso t').symm ≪≫ Functor.isoWhiskerLeft Q.ι (Functor.isoWhiskerRight
+      (Functor.isoWhiskerLeft _ ((Functor.whiskeringLeft _ _ _).mapIso f.symm))
+        ((Functor.whiskeringLeft _ _ _).obj P.ι))⟩
+
+/-- A kernel transform is linear over the base on the whole unbounded derived categories,
+`Φ_𝒦(K ⊗ᴸ π^* N) ≅ Φ_𝒦(K) ⊗ᴸ π'^* N` naturally in `K` and `N`, provided the projection map of
+the second projection `p₂ : V ×_S V' ⟶ V'` is an isomorphism.
+
+This is the proof of
+`AlgebraicGeometry.Etale.nonempty_iso_kernelTransform_tensor_of_hasProjectionFormula`, without
+restriction to full subcategories. -/
+theorem nonempty_iso_kernelTransform_tensor [HasCompactification (pullback.snd π π')]
+    [IsIso (projectionMap A (pullback.snd π π'))]
+    (𝒦 : DerivedCategory (Sheaf (pullback π π').smallEtaleTopology A)) (a : ℤ) :
+    Nonempty (derivedTensorRightPullback A π ⋙
+          (Functor.whiskeringRight _ _ _).obj (kernelTransform A π π' 𝒦 a) ≅
+        derivedTensorRightPullback A π' ⋙
+          (Functor.whiskeringLeft _ _ _).obj (kernelTransform A π π' 𝒦 a)) := by
+  -- Move the shift into the kernel.
+  obtain ⟨eₛ⟩ := nonempty_iso_kernelTransform_shift A π π' 𝒦 a 0
+  rw [add_zero] at eₛ
+  let f : kernelTransform A π π' 𝒦 a ≅
+      D((pullback.fst π π')^*[A]) ⋙ derivedTensorRight A (pullback π π') (𝒦⟦a⟧) ⋙
+        R(pullback.snd π π')_![A] :=
+    eₛ.symm ≪≫ Functor.isoWhiskerLeft (D((pullback.fst π π')^*[A]) ⋙
+      derivedTensorRight A (pullback π π') (𝒦⟦a⟧) ⋙ R(pullback.snd π π')_![A])
+        (shiftFunctorZero _ ℤ)
+  obtain ⟨s, t, ht⟩ := exists_iso_kernelTransform_tensor A π π' (𝒦⟦a⟧)
+  have (N : DerivedCategory (Sheaf S.smallEtaleTopology A)) : IsIso (t.app N) :=
+    have (K : DerivedCategory (Sheaf V.smallEtaleTopology A)) : IsIso ((t.app N).app K) :=
+      ht N K (inferInstanceAs (IsIso (((projectionMap A _).app _).app _)))
+    NatIso.isIso_of_isIso_app _
+  have := NatIso.isIso_of_isIso_app t
+  exact ⟨Functor.isoWhiskerLeft _ ((Functor.whiskeringRight _ _ _).mapIso f) ≪≫ s ≪≫
+    (asIso t).symm ≪≫ Functor.isoWhiskerLeft _ ((Functor.whiskeringLeft _ _ _).mapIso f.symm)⟩
 
 end General
 

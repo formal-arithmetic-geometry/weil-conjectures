@@ -252,6 +252,26 @@ section Finite
 
 variable (Λ : Type (u + 1)) [CommRing Λ] {X Y : Scheme.{u}}
 
+/-- **The projection formula for a proper direct image at finite coefficients, unbounded.**
+For a finite coefficient ring `Λ` and a proper morphism `g : Z ⟶ Y`, the projection map
+
+`Rg_* M ⊗ᴸ L ⟶ Rg_*(M ⊗ᴸ Lg^* L)`
+
+of `AlgebraicGeometry.Etale.rightDerivedLowerStarProjectionMap` is an isomorphism of bifunctors
+on the unbounded derived categories.
+
+This is the non-formal part of the unbounded projection formula
+`AlgebraicGeometry.Etale.isIso_projectionMap_of_finite`, the part for the open immersion of a
+compactification being formal. It holds by SGA 4 XVII 5.2.9: the question is local on `Y`,
+over a quasi-compact open the fibres of `g` have bounded dimension, so `Rg_*` has finite
+cohomological dimension on torsion sheaves and commutes with direct sums; on geometric stalks,
+by unbounded proper base change, it becomes `RΓ(Z_ȳ, M) ⊗ᴸ N ≅ RΓ(Z_ȳ, M ⊗ᴸ N)` for a complex
+`N` of `Λ`-modules, which holds for `N = Λ` and passes to all `N` through these colimits. -/
+theorem isIso_rightDerivedLowerStarProjectionMap_of_finite [Finite Λ] {Z : Scheme.{u}}
+    (g : Z ⟶ Y) [IsProper g] :
+    IsIso (rightDerivedLowerStarProjectionMap (ModuleCat.{u + 1} Λ) g) :=
+  sorry
+
 /-- **The projection formula at finite coefficients, unbounded.** For a finite coefficient
 ring `Λ` and `f : X ⟶ Y` admitting a compactification, the projection map
 
@@ -261,18 +281,27 @@ of `AlgebraicGeometry.Etale.projectionMap` is an isomorphism of bifunctors on th
 unbounded derived categories, with no boundedness, constructibility or Tor amplitude hypothesis
 on `K` and `L`.
 
-This is the unbounded form of clause (5) of `prop-functor-package` that the base linearity of
-kernel transforms (and of the Fourier–Deligne transform, `sk-prop-base-linear`) consumes.
-It holds for torsion coefficients (SGA 4 XVII 5.2.9): for the open immersion `i` of the
-compactification `PF` is an isomorphism formally
-(`AlgebraicGeometry.Etale.derivedOpenImmersionLowerShriekProjectionIso`), and for the proper
-map `g` one checks on geometric stalks with unbounded proper base change, where it becomes
-`RΓ(X_ȳ, K) ⊗ᴸ M ≅ RΓ(X_ȳ, K ⊗ᴸ M)` for a complex `M` of `Λ`-modules; this holds because
-`RΓ(X_ȳ, -)` has finite cohomological dimension on torsion sheaves, so commutes with the
-colimits reducing `M` to `Λ`. -/
+This is an unbounded form of clause (5) of `prop-functor-package`, from which the case
+`sk-thm-sf-pf-finite` (`AlgebraicGeometry.Etale.hasProjectionFormula_of_boundedConstructible`)
+is read off.
+
+For the compactification `c = (X ⟶[i] Z ⟶[g] Y)` the projection map is the projection map of
+`Rg_*` followed by isomorphisms (`AlgebraicGeometry.Etale.projectionMapOfCompactification_app_app`),
+the projection formula for the open immersion `i` being formal
+(`AlgebraicGeometry.Etale.derivedOpenImmersionLowerShriekProjectionIso`). So this is the proper
+case `AlgebraicGeometry.Etale.isIso_rightDerivedLowerStarProjectionMap_of_finite`. -/
 theorem isIso_projectionMap_of_finite [Finite Λ] (f : X ⟶ Y) [HasCompactification f] :
     IsIso (projectionMap (ModuleCat.{u + 1} Λ) f) :=
-  sorry
+  have := isIso_rightDerivedLowerStarProjectionMap_of_finite Λ
+    (HasCompactification.compactification f).g
+  have (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
+      IsIso ((projectionMap (ModuleCat.{u + 1} Λ) f).app K) :=
+    have (L : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
+        IsIso (((projectionMap (ModuleCat.{u + 1} Λ) f).app K).app L) := by
+      rw [projectionMap, projectionMapOfCompactification_app_app]
+      infer_instance
+    NatIso.isIso_of_isIso_app _
+  NatIso.isIso_of_isIso_app _
 
 /-- The projection formula at finite coefficients, objectwise: for a finite coefficient ring
 `Λ`, the projection formula holds for `f` at all `K` and `L`.
