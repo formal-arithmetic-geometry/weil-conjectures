@@ -179,5 +179,23 @@
   "summary": "Proof written from Stacks Simplicial Lemma 01A6 (lemma-section, simplicial.tex 5981-6020; tag verified in tags/tags line 1677). The statement agrees with the source hypothesis by hypothesis. Step 1 reduces to the lifting problems of def-weil-pbc-trivial-kan-fibration (which asks p_0 surjective separately, handled by (1)/(2)). Step 2 writes out the source's case k<=n, including the source's tacit check that the chosen lift restricts to the given boundary map (via face factorization and injectivity of f_{k-1}). Steps 3-6 write out the case k>n: the adjunction bijection of the coskeleton definition plus the canonical isomorphism give Mor(K,W) = Mor(sk_n K, sk_n W) for W=U,V; sk_n of the boundary inclusion is the identity for k>n; so restriction to the boundary is bijective for U and V and the lift is the unique extension. The case k=n+1 is covered by this coskeletal argument (as in the source), not by surjectivity. No new nodes: every fact is an existing node (definitions of coskeleton and trivial Kan fibration, face factorization leaf) or elementary. Mathlib: no 01A6 statement (searches recorded); slopmaster2 has no declaration (grep of node id, 01A6, cosk, Kan, boundary: none).",
   "blueprint": "The item serves lem-weil-pbc-hypercover-free-resolution, proof, first paragraph ('Exactness is a local assertion ... every cycle is locally a boundary') through lem-weil-pbc-coskeleton-free-homology-comparison step 4; the steps realize the trivial-Kan-fibration input of that place (lifting against boundaries for the coskeletal map), which the blueprint text does not spell out. No blueprint node states 01A6 (searches 'trivial Kan fibration', 'coskeletal', 'coskeleton', 'Kan', '01A6': 0 matches)."
  },
- "reviewed": "2026-10-10 L: 6 steps along 01A6 checked (reduction to the definition, f_0 surjective; case 1 <= k <= n by lifting b(id) and the face factorization with injectivity below n; coskeletal objects: morphisms determined by n-skeleta via the adjunction; for k > n the n-skeleton of the boundary inclusion is the identity; restriction bijective; the lift). No new nodes. LeanSearch down."
+ "reviewed": "2026-10-10 L: 6 steps along 01A6 checked (reduction to the definition, f_0 surjective; case 1 <= k <= n by lifting b(id) and the face factorization with injectivity below n; coskeletal objects: morphisms determined by n-skeleta via the adjunction; for k > n the n-skeleton of the boundary inclusion is the identity; restriction bijective; the lift). No new nodes. LeanSearch down.",
+ "lean": {
+  "module": "Sheaf.AlgebraicTopology.CoskeletalMapTrivialKan",
+  "declaration": "SSet.rlp_boundaries_of_coskeletal_map",
+  "file": "lean/Sheaf/AlgebraicTopology/CoskeletalMapTrivialKan.lean",
+  "statement": "theorem rlp_boundaries_of_coskeletal_map {V U : SSet.{u}} (f : V ⟶ U) (n : ℕ) (hbij : ∀ i : ℕ, i < n → Function.Bijective (f.app (Opposite.op (SimplexCategory.mk i)))) (hsurj : Function.Surjective (f.app (Opposite.op (SimplexCategory.mk n)))) (hU : IsIso ((coskAdj n).unit.app U)) (hV : IsIso ((coskAdj n).unit.app V)) : modelCategoryQuillen.I.rlp f",
+  "branch": "sheaf-dag",
+  "by": "M1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-ctk1532",
+  "group": "M1",
+  "result": "pass",
+  "note": "V U : SSet.{u}, f : V ⟶ U, n : ℕ (n=0 allowed); (1) hbij f.app (op [i]) bijective ∀ i<n; (2) hsurj at [n]; (3)/(4) IsIso of SSet.coskAdj n unit (truncation n ⊣ Truncated.cosk n, = canonical K→cosk_n sk_n K per dep mathlib_match) for U and V; conclusion modelCategoryQuillen.I.rlp f = recorded trivial-Kan predicate (I = ofHoms ∂Δ[n].ι all n, degree 0 = f_0 surjective); #check confirmed SSet.coskAdj resolution; no landed lean/Sheaf hypercover/cosk material"
+ }
 }
