@@ -74,4 +74,16 @@ noncomputable def globalSectionsUpperStarIso [IsIso f] :
     (Sheaf.Γ _ A).obj G ≅ (Sheaf.Γ _ A).obj ((f)^*[A].obj G) :=
   asIso (globalSectionsUpperStarMap A f G)
 
+/-- The structure morphism of the terminal object of the small étale site of `X` is an
+isomorphism: the terminal object is isomorphic to `𝟙 X`. -/
+lemma isIso_terminal_hom (X : Scheme.{u}) : IsIso (⊤_ X.Etale).hom := by
+  let e := terminalIsTerminal.uniqueUpToIso
+    (MorphismProperty.Over.mkIdTerminal @AlgebraicGeometry.Etale X)
+  have : IsIso e.hom.left :=
+    ⟨e.inv.left, congrArg (·.left) e.hom_inv_id, congrArg (·.left) e.inv_hom_id⟩
+  have h : e.hom.left = (⊤_ X.Etale).hom :=
+    (Category.comp_id _).symm.trans (MorphismProperty.Over.w e.hom)
+  rw [← h]
+  exact this
+
 end AlgebraicGeometry.Etale
