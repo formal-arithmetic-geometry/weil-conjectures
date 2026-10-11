@@ -174,5 +174,24 @@
   "by": "L",
   "result": "accepted",
   "note": "6 steps following Stacks 02OB (1),(3): the ladder of long exact sequences (horseshoe delta-functor node); the constant from the new unsplit 02OA (2),(3) node in degrees p and p+1; part (1) from 02OA (2) with n = 0; part (2) both inclusions, the diagram chase using 02OA (3) in degree p+1 (Stacks cites part (4) where part (3) is used; recorded); the ML parenthetical, now citing the def-weil-pbc-mittag-leffler-system node created in parallel (L added the citation)."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.MLCohomologyPowersIdeal",
+  "declaration": "AlgebraicGeometry.ml_cohomology_powers_ideal",
+  "by": "S1",
+  "date": "2026-10-12",
+  "file": "lean/Sheaf/Paper/MLCohomologyPowersIdeal.lean",
+  "branch": "sheaf-dag",
+  "existing": false,
+  "statement": "theorem ml_cohomology_powers_ideal {A : Type u} [CommRing A] [IsNoetherianRing A] {X : Scheme.{u}} (f : X ⟶ Spec (.of A)) [IsProper f] (I : Ideal A) (F : X.Modules) (hF : RingedSpace.IsCoherent X.toRingedSpace F) (p : ℕ) : ∃ c : ℕ, (∀ n : ℕ, 1 ≤ n → c ≤ n → LinearMap.ker (((ModuleCat.restrictScalars ((Scheme.ΓSpecIso (.of A)).inv ≫ f.appTop).hom).map ((RingedSpace.moduleCohomology X.toRingedSpace p).map (formalModuleQuotientπ ((Scheme.IdealSheafData.ofIdealTop (I.map (Scheme.ΓSpecIso (.of A)).inv.hom)).comap f) n F))).hom) ≤ I ^ (n - c) • (⊤ : Submodule A ((ModuleCat.restrictScalars ((Scheme.ΓSpecIso (.of A)).inv ≫ f.appTop).hom).obj ((RingedSpace.moduleCohomology X.toRingedSpace p).obj F)))) ∧ (∀ (n k : ℕ), 1 ≤ n → ∀ h : n + c ≤ k, Set.range (((RingedSpace.moduleCohomology X.toRingedSpace p).map (formalModuleQuotientMap ((Scheme.IdealSheafData.ofIdealTop (I.map (Scheme.ΓSpecIso (.of A)).inv.hom)).comap f) (𝟙 F) (Nat.le_trans (Nat.le_add_right n c) h))).hom) = Set.range (((RingedSpace.moduleCohomology X.toRingedSpace p).map (formalModuleQuotientπ ((Scheme.IdealSheafData.ofIdealTop (I.map (Scheme.ΓSpecIso (.of A)).inv.hom)).comap f) n F)).hom)) ∧ (formalCompletionSystem ((Scheme.IdealSheafData.ofIdealTop (I.map (Scheme.ΓSpecIso (.of A)).inv.hom)).comap f) F ⋙ RingedSpace.moduleCohomology X.toRingedSpace p ⋙ forget (ModuleCat ((moduleRings X.toRingedSpace).obj.obj (op ⊤)))).IsMittagLeffler",
+  "note": "Second reading replaces arbitrary cohomology types, functions and ideal subsets by moduleCohomology, canonical ideal-power quotients and maps, restriction of scalars along A → Γ(X), and the established Mittag-Leffler predicate. The node statement is unchanged; positive levels are explicit."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "S1",
+  "result": "pass",
+  "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
  }
 }
