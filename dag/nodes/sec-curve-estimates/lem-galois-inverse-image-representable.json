@@ -163,5 +163,23 @@
   "group": "C1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-iir (reviewer sub-agent of L); spot-checked: Repaired re-push; every point of the 13:28 return is repaired: (1) new Mathlib leaf lem-galois-yoneda-hom-bijection (general Yoneda, any category, any presheaf, tau -> tau_A(id_A), naturality in A and in F) cited in steps 2 and 3; verified CategoryTheory.yonedaEquiv at Mathlib/CategoryTheory/Yoneda.lean:724, yonedaEquiv_naturality 747-749 (F(g)(yonedaEquiv f) = yonedaEquiv(yoneda.map g >> f), the node's first formula), yonedaEquiv_comp 758-760 (the second); statement agrees with Stacks 001P plus these two naturality equations; three searches recorded (LeanSearch HTTP 500 recorded honestly, LeanFinder, Loogle, grep; the grep log names a wrong path /home/ubuntu/weil-src-slopmaster2, harmless); blueprint_refs search Yoneda gives only lem-pc-yoneda (Sch/S specialization, not same_as). (2) step 4 cites lem-weil-pbc-coyoneda-iso-of-natural-hom-bijection in category Sh(X_et), A=f^{-1}h_V, B=h_{X x_Y V}, Phi natural in F from steps 2-3; the naturality-in-V equality f^{-1}h_g o theta_V = theta_V' o h_{g_X} follows from that node's formula clause Phi(f)=f o theta applied to f^{-1}h_g (the step says 'uniqueness clause', imprecise but the cited node carries it). (3) minor points: lem-weil-pbc-small-etale-representable-presheaf-sheaf cited in steps 2 and 3 (accepted tool use, generic sheaf fact, unit sk-thm-p1), stray capital and idle def-pc-fibre-product in step 3 removed. Source Stacks 03Q1 (4) etale-cohomology.tex 4648-4723: f^{-1}h_V = h_{X x_Y V} for any f and V etale over Y; proof is exactly the chain Mor(f^{-1}h_V,F)=Mor(h_V,f_*F)=f_*F(V)=F(X x_Y V) with Yoneda and representable sheaves; item statement unchanged, hypotheses agree. Step 1 carried by lem-weil-pbc-etale-scheme-base-change (02GO) and def-pc-fibre-product; step 2 by the adjunction hypothesis, def-weil-pbc-etale-sheaf-of-sets (full subcategory), the new leaf with target f_*F. Only split-owned fields of the item changed (proof, proof_deps, proof_origin, split_report, status); new node created.item = item, TeX ascii. Small cases: one-object category (bijection = evaluation of maps from a singleton), F(A) empty, identity g in both naturality formulas. 14:41-14:42 UTC"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.Sites.InverseImageRepresentable",
+  "declaration": "AlgebraicGeometry.nonempty_inverseImage_representable_iso",
+  "file": "lean/Sheaf/AlgebraicGeometry/Sites/InverseImageRepresentable.lean",
+  "statement": "theorem nonempty_inverseImage_representable_iso {X Y : Scheme.{u}} (f : X ⟶ Y) (L : Sheaf Y.smallEtaleTopology (Type (max u v)) ⥤ Sheaf X.smallEtaleTopology (Type (max u v))) (_adj : L ⊣ f.Etale.sheafPushforwardContinuous (Type (max u v)) Y.smallEtaleTopology X.smallEtaleTopology) : Nonempty (Y.smallEtaleTopology.uliftYoneda.{v} ⋙ L ≅ f.Etale ⋙ X.smallEtaleTopology.uliftYoneda.{v})",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "E1",
+  "result": "pass",
+  "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
  }
 }

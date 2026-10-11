@@ -4976,3 +4976,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 14:32 L: merged deliver/J1/lem-weil-pbc-smooth-free-differentials-strictly-standard-power (stage 2; reviewer PASS; first push; Sheaf.RingTheory.SmoothFreeDifferentialsStrictlyStandardPower Algebra.smooth_free_differentials_strictly_standard_power)
 - 14:33 L: merged deliver/J1/lem-weil-pbc-smooth-retract-standard-smooth (stage 2; reviewer PASS; first push; Sheaf.RingTheory.SmoothStandardSmoothRetract Algebra.Smooth.exists_standardSmooth_retract)
 - 14:33 L: merged deliver/M1/lem-weil-pbc-spectral-closed-subspace (stage 2; reviewer PASS; first push; Sheaf.Topology.SpectralClosedSubspace Topology.spectral_closed_subspace)
+- 14:33 L: merged deliver/E1/lem-galois-inverse-image-representable (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.Sites.InverseImageRepresentable AlgebraicGeometry.nonempty_inverseImage_representable_iso)
