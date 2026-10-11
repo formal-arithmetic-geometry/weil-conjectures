@@ -385,6 +385,44 @@ lemma comp_deformationSpaceOneFibre (hs : s ≫ g = 𝟙 B) :
   · rw [hP.lift_snd, Category.assoc, Category.assoc, IsPullback.isoPullback_inv_snd,
       pullback.lift_snd, reassoc_of% hs]
 
+lemma zeroSection_comp_affineSpaceToQuotientPolynomialSpec :
+    AffineSpace.zeroSection (ULift.{u} (Fin 1)) B ≫ s.affineSpaceToQuotientPolynomialSpec =
+      s.toQuotientSpec ≫ relativeGluingMap s.ker.coequifibered_toQuotientPolynomialAlgebra
+        s.ker.coequifibered_toQuotientAlgebra s.ker.quotientPolynomialEvalZero := by
+  refine s.ker.isPullback_quotientPolynomialSpec.hom_ext ?_ ?_
+  · rw [Category.assoc, affineSpaceToQuotientPolynomialSpec_toQuotientSpec,
+      AffineSpace.zeroSection_over_assoc, Category.assoc, ← relativeGluingMap_comp,
+      s.ker.polynomialC_comp_quotientPolynomialEvalZero]
+    exact (Category.comp_id _).symm.trans (congrArg (s.toQuotientSpec ≫ ·)
+      (relativeGluingMap_id s.ker.coequifibered_toQuotientAlgebra).symm)
+  · rw [Category.assoc, affineSpaceToQuotientPolynomialSpec_toPolynomialSpec,
+      ← Category.assoc (AffineSpace.zeroSection _ B), AffineSpace.zeroSection_comp_map,
+      Category.assoc, Category.assoc, ← relativeGluingMap_comp,
+      ← s.ker.polynomialToPolynomialZero_comp_polynomialZeroToQuotient,
+      relativeGluingMap_comp V.coequifibered_toPolynomialPresheaf
+        V.coequifibered_toPolynomialZeroPresheaf]
+    have h : relativeGluingMap V.coequifibered_toPolynomialZeroPresheaf
+        s.ker.coequifibered_toQuotientAlgebra s.ker.polynomialZeroToQuotient =
+        (relativeGluingData s.ker.coequifibered_toQuotientAlgebra).toBase ≫
+          inv (relativeGluingData V.coequifibered_toPolynomialZeroPresheaf).toBase := by
+      rw [IsIso.eq_comp_inv]
+      exact relativeGluingMap_toBase _ _ _
+        s.ker.toPolynomialZeroPresheaf_comp_polynomialZeroToQuotient
+    rw [reassoc_of% h, toQuotientSpec_toBase_assoc]
+    change _ = s ≫ V.polynomialSpecZeroSection
+    rw [
+      ← polynomialSpecZeroSection_comp_polynomialSpecToAffineSpace, Category.assoc,
+      IsIso.hom_inv_id, Category.comp_id]
+
+variable {s} in
+lemma normalConeZeroSection_comp_normalConeToDeformationSpace :
+    s.normalConeZeroSection ≫ s.ker.normalConeToDeformationSpace =
+      AffineSpace.zeroSection (ULift.{u} (Fin 1)) B ≫ s.deformationSpaceSection := by
+  rw [normalConeZeroSection, deformationSpaceSection, reassoc_of%
+    zeroSection_comp_affineSpaceToQuotientPolynomialSpec, Category.assoc,
+    IdealSheafData.normalConeToDeformationSpace, ← relativeGluingMap_comp,
+    ← relativeGluingMap_comp, s.ker.toQuotientPresheaf_comp_normalConeToQuotient]
+
 end Construction
 
 /-- Blueprint `sk-lem-geometry`: Geometry of the deformation of a section
