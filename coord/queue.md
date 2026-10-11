@@ -1,6 +1,6 @@
 # Work queue
 
-860 items; claim with `tools/claim.py next <group> [--stage N]`.
+862 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (28)
 
@@ -20,7 +20,6 @@
 | `lem-pc-derived-tensor-transitivity` | 5015 | none |
 | `lem-pc-derived-tensor-localization-cohomology` | 5017 | none |
 | `lem-pc-derived-functor-termwise-split-ses-triangle` | 5018 | none |
-| `lem-sp-ce-compatible-homotopy-assembly` | 6009 | none |
 | `pqf-lem-serre-criterion` | 6013 | none |
 | `lem-sc-picard-kunneth-qcoh` | 6014 | none |
 | `lem-sc-valuation-closed-fibre-section-vanishing` | 6014 | none |
@@ -30,12 +29,13 @@
 | `lem-sc-coherent-ring-perfect-complex-cohomology` | 6016 | none |
 | `lem-sc-base-change-curve` | - | none |
 | `lem-sc-global-functions` | - | rests_on_sorry |
-| `lem-pur-kinjective-characterize-K-injective` | - | none |
+| `lem-pur-kinjective-homotopy-exact-injective-target` | - | none |
+| `lem-pur-kinjective-homotopy-limit-vanishing` | - | none |
 | `lem-pc-finite-flat-pushforward-locally-free` | - | none |
 | `lem-pur-left-derived-exact-when-defined` | - | none |
 | `lem-pur-quasi-isos-saturated-triangulated` | - | none |
 
-## Stage 2: nodes to state (832)
+## Stage 2: nodes to state (834)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -214,6 +214,7 @@
 | `lem-pod-equivalence-induces-module-objects` | 1 | state |
 | `lem-pod-lisse-tensor-and-scalar-extension` | 1 | state |
 | `lem-pqf-finite-spectrum-maximal-primes` | 1 | state |
+| `lem-pur-kinjective-characterize-K-injective` | 1 | state |
 | `lem-pur-kinjective-characterize-injective` | 1 | state |
 | `lem-pur-kinjective-degreewise-existence` | 1 | state |
 | `lem-pur-kinjective-functorial-homotopies` | 1 | state |
@@ -328,6 +329,7 @@
 | `lem-sc-weakass-localization` | 1 | state |
 | `lem-sc-zero-dim-noetherian-closed-finite` | 1 | state |
 | `lem-sp-cart-eilenberg-left-exact-cohomology` | 1 | state |
+| `lem-sp-ce-compatible-homotopy-assembly` | 1 | state |
 | `lem-sp-horseshoe-prescribed-resolutions` | 1 | state |
 | `lem-weil-common-extension-fields` | 1 | state |
 | `lem-weil-l-adic-extension-integers-dvr` | 1 | state |
