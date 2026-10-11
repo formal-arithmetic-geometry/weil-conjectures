@@ -148,5 +148,23 @@
   "group": "J1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-cdf (reviewer sub-agent of L); spot-checked: Source read locally: Stacks 0AYY (varieties-lemma-degree-effective-Cartier-divisor), item statement agrees hypothesis by hypothesis (k field, X proper over k, dim X <= 1, D effective Cartier; D finite over k, Gamma(D,O_D) finite-dim); proof follows its first two sentences. 07ZU (divisors-lemma-complement-effective-Cartier-divisor): any scheme, effective Cartier D, complement scheme-theoretically dense - matches lem-pc-cartier-divisor-nowhere-dense. 06LH (varieties-lemma-algebraic-scheme-dim-0): algebraic k-scheme of dim 0 is affine and finite over k - lem-pc-dim-zero-finite-over-field is its proper case (proper gives finite type; empty case trivial). lem-pc-nowhere-dense-dim-zero checked by argument: a 1-dim component W of Z lies in a component C of X with dim C <= 1, so W = C (finite type over a field), and C contains a nonempty open of X (finitely many components), contradiction. Step 1 carried by lem-pc-cartier-divisor-nowhere-dense (sch.-th. dense implies dense); step 2 by lem-pc-nowhere-dense-dim-zero (finite type from proper, def-weil-proper-morphism); step 3 by lem-weil-pbc-closed-immersion-proper (c) (off-unit mathlib leaf, accepted as generic tool C8); step 4 by lem-pc-dim-zero-finite-over-field with steps 2-3. Small cases: D empty; Spec k[t], D=V(t); Y=Spec k[e]/(e^2). B10: RiemannRoch.lean:336 isFinite_subschemeι_comp is under smooth curve context, not the item. Blueprint search 'zero-dimensional finite', 'nowhere dense': 0 matches. Fixes (B3 missing citations, typo): dag/nodes/sec-picard-framework/lem-pc-cartier-divisor-nowhere-dense.json: statement/stmt_deps: cite def-nagata-scheme-theoretically-dense-open with its meaning O_X -> j_*O_U injective; dag/nodes/sec-picard-framework/lem-pc-nowhere-dense-dim-zero.json: statement/stmt_deps: cite def-weil-finite-type-morphism and def-weil-closed-immersion, nowhere density stated of the underlying set, unclosed math '$Z.' fixed; dag/nodes/sec-picard-framework/lem-pc-dim-zero-finite-over-field.json: statement/stmt_deps: cite def-weil-finite-integral-morphism (finite) and def-pc-scheme (affine). 14:35-14:36 UTC; 3 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.CartierDivisorFinite",
+  "declaration": "AlgebraicGeometry.effectiveCartierDivisor_finite_over_field",
+  "file": "lean/Sheaf/AlgebraicGeometry/CartierDivisorFinite.lean",
+  "statement": "theorem effectiveCartierDivisor_finite_over_field (X : Scheme.{u}) [X.Over (Spec (.of k))] [IsProper (X ↘ Spec (.of k))] (hX : X.dim ≤ 1) (J : X.IdealSheafData) (hJ : J.IsInvertible) : J.subscheme.dim ≤ 0 ∧ (∀ x : J.subscheme, IsClosed ({x} : Set J.subscheme)) ∧ (¬ ∃ U : X.Opens, U ≠ ⊥ ∧ ∀ x : U, ∃ y : J.subscheme, J.subschemeι y = U.ι x) ∧ IsAffine J.subscheme ∧ IsFinite (J.subschemeι ≫ X ↘ Spec (.of k)) ∧ (letI := (J.subschemeι ≫ X ↘ Spec (.of k)).ΓAlgebra FiniteDimensional k (Γ(J.subscheme, ⊤)))",
+  "branch": "sheaf-dag",
+  "by": "G1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-cdf0737",
+  "group": "G1",
+  "result": "pass",
+  "note": "k field {k:Type u}[Field k]; X:Scheme.{u} over Spec k with IsProper (Mathlib, def-weil-proper-morphism); dim X<=1 as landed Scheme.dim; D = J.subscheme with J.IsInvertible (same form as 792c2d2de); clauses dim D<=0, points closed in D, no nonempty open of X inside D, IsAffine D, IsFinite (subschemeι ≫ X↘Spec k), FiniteDimensional k Γ(D) under the canonical ΓAlgebra of that map; consistent with landed DimZeroFiniteOverField; source has only smooth-curve versions (RelativeEffectiveCartier/RiemannRoch), so existing:false; docstring carries the node's 4 proof steps; edge cases empty D, WithBot dims"
  }
 }
