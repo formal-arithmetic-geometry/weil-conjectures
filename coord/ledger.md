@@ -3944,3 +3944,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 09:05 L: merged deliver/K1/lem-sc-dimension-locally-algebraic (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.DimensionLocallyAlgebraic AlgebraicGeometry.dimension_locally_algebraic)
 - 09:06 L: merged deliver/G1/lem-weil-pbc-charpoly-locally-free-existence (stage 2; reviewer PASS; first push; Sheaf.Algebra.CharpolyLocallyFree Algebra.charpoly_locallyFree_exists_unique)
 - 09:06 L: merged deliver/J1/lem-weil-pbc-cm-module-good-element-nonzerodivisor (stage 2; reviewer FIX; first push; Sheaf.RingTheory.CmModuleGoodElementNonzerodivisor Module.cm_module_good_element_nonzerodivisor)
+- 09:06 L: merged deliver/F1/lem-sp-ce-vertical-nullhomotopy (stage 2; reviewer PASS; first push; Sheaf.CategoryTheory.CartanEilenbergVerticalNullhomotopy CategoryTheory.cartanEilenberg_vertical_nullhomotopy)

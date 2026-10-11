@@ -119,5 +119,24 @@
   "group": "M1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-cvn0049 (reviewer sub-agent of L); spot-checked: Return R-cvn0013 points: (1) assembly node now assumes exact augmented source 0->Z_0->I_0->B_0->0 and R_I eps_I=0; hand test Z=B=Q, I=Q+Q in degree 0, R_I(a,b)=(b,0): exact augmentation forces eps_I iso, so R_I eps_I=0 forces R_I=0, counterexample excluded; proof sketch (extend s_Z into J_Z, add sigma s_B pi, defect j E pi, E chain map vanishing on augmentation killed by acyclic-to-injective) checked. (2) induction on p checked: h_B^p -> h_Z^p via B->Z->H, then s2^p and h_B^{p+1} via Z->I->B; s2 d_h = d_h s2 from h_Z^{p+1} iota = iota_J h_B^{p+1} and rho s2^p = h_B^{p+1} pi. (3) parent lem-sp-cartan-eilenberg-double-complex-homotopy step 2 supplies identical hypotheses and R eps_I=0, R a double-complex map; uses exactly s2, s2^{p,0}=0, R=d_v s2+s2 d_v, s2 d_h=d_h s2. No duplicate among cartan-eilenberg/nullhomotopy nodes. FIX more, RETURN less: (a) assembly statement: removed the ill-typed horizontal-differential clause the return asked to remove (still present, unused) and stray literal \\n, made R_Ii=jR_Z, rho R_I=R_B pi explicit; (b) C1 step 1 cited lem-sp-cartan-eilenberg-exists which does not state it: now elementary, citation dropped; (c) step 3 rewritten to state the invariant, base h_B^0=0, both applications' augmentations/targets, and the s2 d_h computation (old text fed h_H^p as an input the lemma does not take); stmt_deps restored to sheaf-dag value (proof lemmas are proof_deps); (d) class (b): lem-sp-ce-row-comparison-nullhomotopy dropped, special case of lem-weil-pbc-acyclic-map-to-injective-nullhomotopy (return point 3, not done). Both Second readings missed (a), (b), (d) and claimed them repaired.; 2 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.CartanEilenbergVerticalNullhomotopy",
+  "declaration": "CategoryTheory.cartanEilenberg_vertical_nullhomotopy",
+  "file": "lean/Sheaf/CategoryTheory/CartanEilenbergVerticalNullhomotopy.lean",
+  "statement": "theorem cartanEilenberg_vertical_nullhomotopy (A : Type u) [Category.{v} A] [Abelian A] (K L : CochainComplex A ℤ) (I J : HomologicalComplex₂ A (ComplexShape.up ℤ) (ComplexShape.up ℕ)) (eI : ((CochainComplex.single₀ A).mapHomologicalComplex (ComplexShape.up ℤ)).obj K ⟶ I) (eJ : ((CochainComplex.single₀ A).mapHomologicalComplex (ComplexShape.up ℤ)).obj L ⟶ J) (hI : ∀ p : ℤ, p < 0 → IsZero (I.X p)) (hJ : ∀ p : ℤ, p < 0 → IsZero (J.X p)) (hsource : ∀ p : ℤ, QuasiIso (HomologicalComplex.cyclesMap eI p) ∧ QuasiIso (image.map (Arrow.homMk' (eI.f (p - 1)) (eI.f p) (eI.comm (p - 1) p))) ∧ QuasiIso (HomologicalComplex.homologyMap eI p)) (htarget : ∀ p : ℤ, QuasiIso (HomologicalComplex.cyclesMap eJ p) ∧ QuasiIso (image.map (Arrow.homMk' (eJ.f (p - 1)) (eJ.f p) (eJ.comm (p - 1) p))) ∧ QuasiIso (HomologicalComplex.homologyMap eJ p)) (hinjective : ∀ (p : ℤ) (q : ℕ), Injective ((J.cycles p).X q) ∧ Injective ((image (J.d (p - 1) p)).X q) ∧ Injective ((J.homology p).X q)) (R : I ⟶ J) (hR : eI ≫ R = 0) : (∀ p : ℤ, Nonempty (Homotopy (HomologicalComplex.cyclesMap R p) 0) ∧ Nonempty (Homotopy (image.map (Arrow.homMk' (R.f (p - 1)) (R.f p) (R.comm (p - 1) p))) 0) ∧ Nonempty (Homotopy (HomologicalComplex.homologyMap R p) 0)) ∧ ∃ s : ∀ p : ℤ, Homotopy (R.f p) 0, (∀ (p : ℤ) (q : ℕ), (s p).hom 0 q = 0) ∧ (∀ (p p' : ℤ) (q q' : ℕ), (s p).hom q q' ≫ (J.d p p').f q' = (I.d p p').f q ≫ (s p').hom q q')",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-11",
+  "existing": false,
+  "note": "Uses the bicomplex and induced augmentation convention of exists_cartanEilenberg_resolution. Source exact augmented rows are quasi-isomorphisms; target injective resolutions use the defining fields of InjectiveResolution. Homotopy supplies the vertical equation and the zero component at degree zero; horizontal compatibility is explicit. Canonical cycle-column-boundary sequences are automatically short exact in the abelian category of vertical complexes."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-cvn1431",
+  "group": "F1",
+  "result": "pass",
+  "note": "A abelian; K L : CochainComplex A Z; I J HomologicalComplex2 (up Z)(up N) with hI/hJ first quadrant; eI/eJ single0 augmentations (E1 form); hsource = exact induced cycle/image/homology rows of I via cyclesMap/image.map/homologyMap of eI; htarget+hinjective = InjectiveResolution fields of J rows; R : I->J, eI>>R=0; conclusion: row null-homotopies (Homotopy ... 0) and s : forall p, Homotopy (R.f p) 0 with s.hom 0 q = 0 and s d_h = d_h s; Homotopy conventions match K1 7d8957ec3; #check QuasiIso/Injective/Homotopy resolve to Mathlib"
  }
 }
