@@ -240,5 +240,24 @@
  "tool_uses": [
   "pqf-lem-coherent-ft-locnoeth",
   "pqf-lem-locnoeth-lft"
- ]
+ ],
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.CoherentFiltrationIntegralSubschemes",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.exists_coherent_filtration_integral_subschemes",
+  "file": "lean/Sheaf/AlgebraicGeometry/CoherentFiltrationIntegralSubschemes.lean",
+  "statement": "theorem exists_coherent_filtration_integral_subschemes (X : Scheme.{u}) [IsNoetherian X] (F : X.Modules) (hF : RingedSpace.IsCoherent X.toRingedSpace F) : ∃ (m : ℕ) (c : Fin (m + 1) → Subobject F) (hc : Monotone c), c 0 = ⊥ ∧ c (Fin.last m) = ⊤ ∧ (∀ k : Fin (m + 1), RingedSpace.IsCoherent X.toRingedSpace (c k : X.Modules)) ∧ ∀ j : Fin m, ∃ (Z : Scheme.{u}) (i : Z ⟶ X), IsClosedImmersion i ∧ IsIntegral Z ∧ ∃ I : Z.IdealSheafData, I ≠ ⊥ ∧ RingedSpace.IsCoherent Z.toRingedSpace I.toModules ∧ Nonempty (cokernel (Subobject.ofLE (c j.castSucc) (c j.succ) (hc j.castSucc_le_succ)) ≅ (pushforward i).obj I.toModules)",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-cfi1207"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-cfi1207",
+  "group": "F1",
+  "result": "fix",
+  "note": "X Noetherian=[IsNoetherian X]; F coherent=IsCoherent; chain c:Fin(m+1)→Subobject F monotone, c 0=⊥, c last=⊤, each coherent; ∀ j: Z,i IsClosedImmersion, IsIntegral Z (AlgebraicGeometry.IsIntegral by #check), ∃ I:Z.IdealSheafData, I≠⊥, I.toModules coherent, cokernel(ofLE) ≅ (pushforward i).obj I.toModules; m=0/F=0 edge ok"
+ }
 }
