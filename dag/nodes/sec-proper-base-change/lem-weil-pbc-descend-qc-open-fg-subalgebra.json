@@ -141,5 +141,23 @@
   "group": "K1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-dqo (reviewer sub-agent of L); spot-checked: Source: Stacks Varieties Lemma Tag 0388 (varieties-lemma-descend-open, varieties.tex 811-848); statement agrees hypothesis by hypothesis (k field, X any k-scheme, A any k-algebra, V quasi-compact open of X_A; conclusion A' f.g. k-subalgebra, V' qc open of X_{A'}, V = pi^{-1}(V'); no qs/separatedness, as in the source). The four steps follow the source proof lines 819-821, 821-829, 829-838, 838-848: finite affine U_i with U_{i,A} covering V; finitely many D(f_ij) with V their union (no claim on V cap U_{i,A}); coefficients of the f_ij generate A', f_ij lift to f'_ij in R_i (x)_k A', V' = union D(f'_ij) qc; pi^{-1}(D(f'_ij)) = D(f_ij) gives V = pi^{-1}(V'). Stmt deps def-weil-scheme-over-base, def-pc-base-change, def-weil-affine-spectrum read and adequate. Small cases: V empty (empty list, A' = k), A = k (A' = k). Fixes (C1, fact used without citing existing nodes): dag/nodes/sec-proper-base-change/lem-weil-pbc-descend-qc-open-fg-subalgebra.json: proof[0].uses: added lem-weil-pbc-open-fibre-product (U_{i,A} = pr_X^{-1}(U_i) open in X_A), elementary false; proof[1].uses: added lem-weil-pbc-fibre-product-affine-spectra (U_{i,A} = Spec(R_i (x)_k A)), elementary false; proof[3].uses: both, with one sentence stating pi^{-1}(U_{i,A'}) = U_{i,A} and pi restricted is Spec of R_i (x) A' -> R_i (x) A; proof_deps: the two leaves (Mathlib leaves, no tool_uses needed). Remaining facts (principal opens form a basis, D(f) quasi-compact, preimage of D(g) under Spec(phi) is D(phi(g)), finite coefficient support of a tensor) are elementary from the definitions. Reviewed 14:47-14:58 UTC 14:48.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.DescendQCOpenFGSubalgebra",
+  "declaration": "AlgebraicGeometry.descend_qc_open_fg_subalgebra",
+  "file": "lean/Sheaf/AlgebraicGeometry/DescendQCOpenFGSubalgebra.lean",
+  "statement": "theorem descend_qc_open_fg_subalgebra (k : Type u) [Field k] (X : Scheme.{u}) (f : X ⟶ Spec (CommRingCat.of k)) (A : Type u) [CommRing A] [Algebra k A] : ∀ (V : (pullback f (Spec.map (CommRingCat.ofHom (algebraMap k A)))).Opens), IsCompact V.1 → ∃ (A' : Subalgebra k A), A'.FG ∧ ∃ (V' : (pullback f (Spec.map (CommRingCat.ofHom (algebraMap k A')))).Opens), IsCompact V'.1 ∧ ∃ (π : (pullback f (Spec.map (CommRingCat.ofHom (algebraMap k A)))) ⟶ (pullback f (Spec.map (CommRingCat.ofHom (algebraMap k A')))) ), π = baseChangeMap f (Over.homMk (Spec.map (CommRingCat.ofHom (Subalgebra.val A'))) (by change Spec.map (CommRingCat.ofHom (Subalgebra.val A')) ≫ Spec.map (CommRingCat.ofHom (algebraMap k A')) = Spec.map (CommRingCat.ofHom (algebraMap k A)) rw [← Spec.map_comp] congr 1 ) : Over.mk (Spec.map (CommRingCat.ofHom (algebraMap k A))) ⟶ Over.mk (Spec.map (CommRingCat.ofHom (algebraMap k A')))) ∧ V = (π ⁻¹ᵁ V')",
+  "branch": "sheaf-dag",
+  "by": "M1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-dqo1014",
+  "group": "M1",
+  "result": "pass",
+  "note": "k field; X with explicit f : X ⟶ Spec k (base-change form); A comm k-algebra; X_A, X_A' = pullback f (Spec.map algebraMap); V Opens + IsCompact; A' : Subalgebra k A with A'.FG (algebra generation); V' Opens + IsCompact; π pinned to baseChangeMap f (Over.homMk (Spec.map val)) = id_X × Spec(A'↪A), the recorded g_X of def-pc-base-change; V = π ⁻¹ᵁ V'; no separatedness"
  }
 }
