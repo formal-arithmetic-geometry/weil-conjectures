@@ -52,7 +52,7 @@ theorem isConstructibleEtaleModuleSheaf_etaleLowerShriek_constant
     {Λ : Type (u + 1)} [CommRing Λ] [Finite Λ]
     (j : U ⟶ X) [Etale j] (M : ModuleCat.{u + 1} Λ) [Finite M] :
     IsConstructibleEtaleModuleSheaf
-      ((Etale.etaleLowerShriek Λ j inferInstance).obj
+      ((Etale.etaleLowerShriek (ModuleCat.{u + 1} Λ) j inferInstance).obj
         ((constantSheaf U.smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj M)) := sorry
 
 end AlgebraicGeometry.Scheme
