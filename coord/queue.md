@@ -1,11 +1,11 @@
 # Work queue
 
-544 items; claim with `tools/claim.py next <group> [--stage N]`.
+539 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (544)
+## Stage 2: nodes to state (539)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -32,10 +32,8 @@
 | `lem-weil-pbc-g-ring-maximal-ideal-criterion` | 1 | state |
 | `lem-weil-pbc-gabber-h0-etale-criterion` | 1 | state |
 | `lem-weil-pbc-generic-finite-algebra-splitting` | 1 | state |
-| `lem-weil-pbc-geometrically-connected-finite-separable-test` | 1 | state |
 | `lem-weil-pbc-global-complete-intersection-equidimensional` | 1 | state |
 | `lem-weil-pbc-global-complete-intersection-principal-localization` | 1 | state |
-| `lem-weil-pbc-global-dimension-finite-modules-suffice` | 1 | state |
 | `lem-weil-pbc-glue-sheaves-of-modules` | 1 | state |
 | `lem-weil-pbc-graded-module-away-restriction` | 1 | state |
 | `lem-weil-pbc-grothendieck-spectral-sequence` | 1 | state |
@@ -44,9 +42,7 @@
 | `lem-weil-pbc-helper-g-ring-char-p` | 1 | state |
 | `lem-weil-pbc-henselian-etale-retraction` | 1 | state |
 | `lem-weil-pbc-henselian-factorization-criterion` | 1 | state |
-| `lem-weil-pbc-henselian-local-root-lifting` | 1 | state |
 | `lem-weil-pbc-henselian-pair-approximation` | 1 | state |
-| `lem-weil-pbc-henselian-pair-prime-connected` | 1 | state |
 | `lem-weil-pbc-henselization-finite-separable-fibres` | 1 | state |
 | `lem-weil-pbc-higher-direct-image-sheafified-presheaf` | 1 | state |
 | `lem-weil-pbc-horseshoe-morphism-lift` | 1 | state |
@@ -54,7 +50,6 @@
 | `lem-weil-pbc-ideal-module-product-stalk` | 1 | state |
 | `lem-weil-pbc-idempotent-endomorphism-charpoly-field` | 1 | state |
 | `lem-weil-pbc-idempotent-endomorphism-image-base-change` | 1 | state |
-| `lem-weil-pbc-idempotent-splitting-monic-factorization` | 1 | state |
 | `lem-weil-pbc-idempotents-determined-modulo-radical` | 1 | state |
 | `lem-weil-pbc-immersion-affine-constructible-pieces` | 1 | state |
 | `lem-weil-pbc-immersion-fibre-degree-one` | 1 | state |
