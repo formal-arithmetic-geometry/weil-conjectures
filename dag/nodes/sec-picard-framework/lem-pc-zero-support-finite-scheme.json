@@ -27,7 +27,9 @@
   "def-weil-finite-dimensional-subspace",
   "def-weil-vector-space-dimension",
   "def-weil-closed-immersion",
-  "def-pc-euler-characteristic"
+  "def-pc-euler-characteristic",
+  "def-pc-module-pullback",
+  "def-sc-ringed-space-module-cohomology"
  ],
  "proof": [
   {
@@ -171,5 +173,24 @@
   "group": "M1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-zsf (reviewer sub-agent of L); spot-checked: Source: Stacks 0AYT (varieties-lemma-chi-tensor-finite) proof, and 06LH (varieties-lemma-algebraic-scheme-dim-0) read in varieties.tex. New child lem-pc-zero-dimensional-closed-subscheme-finite agrees with 06LH algebraic case: a closed subscheme of a finite-type k-scheme is algebraic, dim<=0 (empty case trivially affine, finite, Gamma=0), conclusions affine, finite over k, Gamma finite-dimensional; statement-only, TeX, same_as [], from set, three Mathlib searches, no slopmaster2 declaration found by grep (B10). Step 1: lem-weil-pbc-finite-type-module-support-closed (closed support), lem-sc-dim0-finite (finite closed points), lem-weil-pbc-scheme-theoretic-support (2)-(4) (closed immersion, i(Z)=Supp F, Ann F kills F). Step 2: Z finite type over k via closed immersion, underlying space homeomorphic to Supp F, new child gives Z=Spec A, A finite-dim. Step 3: lem-weil-pbc-closed-immersion-coherent-equivalence (1) gives F=i_*G (X Noetherian); FIX: that node does not state the cohomology comparison or the projection isomorphism (C4), which the report claimed; dag/nodes/sec-picard-framework/lem-pc-zero-support-finite-scheme.json: proof[2].text/uses and proof_deps: added citation of the existing lem-pc-closed-immersion-coherent-cohomology (closed immersion of locally Noetherian schemes: i_*F coherent, H^q(Y,i_*F)=H^q(X,F), i_*F (x) L = i_*(F (x) i^*L)), which states exactly these; split_report.tool_uses: added it (generic tool from sk-thm-picard-serre-b, also passed via --tool-uses). Step 4 (lem-pc-finite-scheme-cohomology-tensor, hypotheses A finite-dim, G coherent, i^*N invertible match) is true but not needed by the item statement; left as is. Small cases: Supp empty (A=0), X=Spec k with F=O_X (A=k), skyscraper at a closed point with residue field L (A=L). Start Sat Oct 10 02:59:45 PM UTC 2026, end Sat Oct 10 03:01:01 PM UTC 2026.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ZeroSupportFiniteScheme",
+  "declaration": "AlgebraicGeometry.coherent_zero_support_finite_scheme",
+  "file": "lean/Sheaf/AlgebraicGeometry/ZeroSupportFiniteScheme.lean",
+  "statement": "theorem coherent_zero_support_finite_scheme {k : Type v} [Field k] (X : Scheme.{v}) [X.Over (Spec (.of k))] [LocallyOfFiniteType (X ↘ Spec (.of k))] [QuasiCompact (X ↘ Spec (.of k))] (F : X.Modules) (hF : RingedSpace.IsCoherent X.toRingedSpace F) (hS : topologicalKrullDim {x : X | ¬ Subsingleton (F.presheaf.stalk x)} ≤ 0) (N : X.Modules) [N.IsInvertible] : ∃ (A : Type v) (_ : CommRing A) (_ : Algebra k A) (_ : FiniteDimensional k A) (i : Spec (CommRingCat.of A) ⟶ X) (_ : IsClosedImmersion i) (G : (Spec (CommRingCat.of A)).Modules), i ≫ (X ↘ Spec (.of k)) = Spec.map (CommRingCat.ofHom (algebraMap k A)) ∧ Set.range i.base = {x : X | ¬ Subsingleton (F.presheaf.stalk x)} ∧ RingedSpace.IsCoherent (Spec (CommRingCat.of A)).toRingedSpace G ∧ Nonempty (F ≅ (Scheme.Modules.pushforward i).obj G) ∧ Nonempty (Scheme.Modules.tensorObj F N ≅ (Scheme.Modules.pushforward i).obj (Scheme.Modules.tensorObj G ((Scheme.Modules.tensorPullback i).obj N))) ∧ RingedSpace.IsCoherent X.toRingedSpace (Scheme.Modules.tensorObj F N) ∧ {x : X | ¬ Subsingleton ((Scheme.Modules.tensorObj F N).presheaf.stalk x)} = {x : X | ¬ Subsingleton (F.presheaf.stalk x)} ∧ (∀ q : ℕ, Nonempty ((RingedSpace.moduleCohomology X.toRingedSpace q).obj F ≅ (ModuleCat.restrictScalars i.appTop.hom).obj ((RingedSpace.moduleCohomology (Spec (CommRingCat.of A)).toRingedSpace q).obj G))) ∧ (∀ q : ℕ, Nonempty ((RingedSpace.moduleCohomology X.toRingedSpace q).obj (Scheme.Modules.tensorObj F N) ≅ (ModuleCat.restrictScalars i.appTop.hom).obj ((RingedSpace.moduleCohomology (Spec (CommRingCat.of A)).toRingedSpace q).obj (Scheme.Modules.tensorObj G ((Scheme.Modules.tensorPullback i).obj N)))))",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-zsf1216"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-zsf1216",
+  "group": "C1",
+  "result": "fix",
+  "note": "k field; X.Over Spec k with LocallyOfFiniteType+QuasiCompact = finite type; F coherent (IsCoherent); dim Supp<=0 via topologicalKrullDim of inline nonzero-stalk set; N invertible; exists A f.d. k-algebra (algebra tied by i over k), closed immersion Spec A->X, coherent G, range i = Supp F, F=i_*G, F(x)N = i_*(G (x) i^*N) via tensorPullback, F(x)N coherent same support, H^q iso via moduleCohomology with restrictScalars i.appTop; empty support allows A=0; dropped duplicate new node(s) def-pc-module-support (--drop-nodes; not merged, the item points at the landed declaration)"
  }
 }
