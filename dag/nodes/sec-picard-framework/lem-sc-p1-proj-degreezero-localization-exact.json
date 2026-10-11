@@ -20,7 +20,8 @@
  },
  "stmt_deps": [
   "def-sc-p1-standard",
-  "def-pc-standard-graded-algebra"
+  "def-pc-standard-graded-algebra",
+  "def-sc-degree-zero-module-fractions"
  ],
  "proof": [
   {
@@ -111,5 +112,24 @@
   "group": "H1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-dzl (reviewer sub-agent of L); spot-checked: Source: Stacks 00JL (algebra-section-graded), 00HT (algebra-lemma-flat-localization), 01M7 (constructions-lemma-proj-sheaves) (5); item statement unchanged from sheaf-dag (hypotheses: k field, S=k[x0,x1] standard grading, exact sequence of Z-graded S-modules with degree-preserving maps, homogeneous prime p not containing S_+, T homogeneous elements outside p, M_(p) defined by fractions with the localization relation). Step 1 carried by lem-sc-p1-localization-short-exact (T multiplicative since p prime and homogeneous). Step 2 elementary: induced Z-grading deg(y/h)=deg y - deg h on T^{-1}M, maps graded. Step 3 carried by lem-sc-p1-graded-degree-component-exact applied over the Z-graded ring T^{-1}S at n=0; degree-zero part of T^{-1}M equals M_(p) (sum of degree-zero homogeneous fractions is one such fraction over the product of denominators). Mathlib leaf verified: IsLocalizedModule.map_exact at Mathlib/Algebra/Module/LocalizedModule/Exact.lean:56, map_injective/map_surjective at Basic.lean:1258/1269. Small cases: zero sequence; 0->S->S->0->0 with p=(0),(x0) gives S_(p)->S_(p)->0 exact. FIX more, RETURN less: dag/nodes/sec-picard-framework/lem-sc-p1-localization-short-exact.json: statement, stmt_deps: cited def-weil-pbc-module-localization-away (powers of one element) replaced by def-weil-pbc-module-localization (general multiplicative subset, C4/B3); mathlib_match.how: added map_injective/map_surjective lines for the end clauses. dag/nodes/sec-picard-framework/lem-sc-p1-graded-degree-component-exact.json: statement, stmt_deps: cited def-weil-pbc-proj-twisting-sheaf defines graded modules only over N-graded S, not over a Z-graded ring R (B3); the notions Z-graded ring, graded module, degree-preserving map are now written out in the statement and the stmt_dep dropped; mathematics unchanged. Start Sat Oct 10 03:53:35 PM UTC 2026, end Sat Oct 10 03:54:39 PM UTC 2026.; 2 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Module.ProjDegreeZeroLocalizationExact",
+  "declaration": "LocalizedModule.proj_degreeZero_localization_shortExact",
+  "file": "lean/Sheaf/Algebra/Module/ProjDegreeZeroLocalizationExact.lean",
+  "statement": "theorem proj_degreeZero_localization_shortExact {k : Type u} [Field k] {M₀ : Type v₀} {M₁ : Type v₁} {M₂ : Type v₂} [AddCommGroup M₀] [AddCommGroup M₁] [AddCommGroup M₂] [Module (MvPolynomial (Fin 2) k) M₀] [Module (MvPolynomial (Fin 2) k) M₁] [Module (MvPolynomial (Fin 2) k) M₂] (𝓜₀ : ℤ → AddSubgroup M₀) (𝓜₁ : ℤ → AddSubgroup M₁) (𝓜₂ : ℤ → AddSubgroup M₂) (h𝓜₀ : DirectSum.IsInternal 𝓜₀) (h𝓜₁ : DirectSum.IsInternal 𝓜₁) (h𝓜₂ : DirectSum.IsInternal 𝓜₂) (hsmul₀ : ∀ (n : ℕ) (z : ℤ) (a : MvPolynomial (Fin 2) k) (y : M₀), a ∈ homogeneousSubmodule (Fin 2) k n → y ∈ 𝓜₀ z → a • y ∈ 𝓜₀ (n + z)) (hsmul₁ : ∀ (n : ℕ) (z : ℤ) (a : MvPolynomial (Fin 2) k) (y : M₁), a ∈ homogeneousSubmodule (Fin 2) k n → y ∈ 𝓜₁ z → a • y ∈ 𝓜₁ (n + z)) (hsmul₂ : ∀ (n : ℕ) (z : ℤ) (a : MvPolynomial (Fin 2) k) (y : M₂), a ∈ homogeneousSubmodule (Fin 2) k n → y ∈ 𝓜₂ z → a • y ∈ 𝓜₂ (n + z)) (f : M₀ →ₗ[MvPolynomial (Fin 2) k] M₁) (g : M₁ →ₗ[MvPolynomial (Fin 2) k] M₂) (hf : ∀ (z : ℤ) (y : M₀), y ∈ 𝓜₀ z → f y ∈ 𝓜₁ z) (hg : ∀ (z : ℤ) (y : M₁), y ∈ 𝓜₁ z → g y ∈ 𝓜₂ z) (hinj : Function.Injective f) (hex : Function.Exact f g) (hsurj : Function.Surjective g) (p : Ideal (MvPolynomial (Fin 2) k)) [p.IsPrime] (hp : p.IsHomogeneous (homogeneousSubmodule (Fin 2) k)) (hproj : ¬ (HomogeneousIdeal.irrelevant (homogeneousSubmodule (Fin 2) k)).toIdeal ≤ p) : let 𝒜 := homogeneousSubmodule (Fin 2) k let T := homogeneousSubmonoid 𝒜 ⊓ p.primeCompl let H := HomogeneousLocalization 𝒜 T letI : Module H (LocalizedModule T M₀) := Module.compHom (LocalizedModule T M₀) (algebraMap H (Localization T)) letI : Module H (LocalizedModule T M₁) := Module.compHom (LocalizedModule T M₁) (algebraMap H (Localization T)) letI : Module H (LocalizedModule T M₂) := Module.compHom (LocalizedModule T M₂) (algebraMap H (Localization T)) let Z₀ := degreeZeroFractions (fun n : ℕ => (𝒜 n : Set _)) (fun n : ℕ => (𝓜₀ n : Set M₀)) T let Z₁ := degreeZeroFractions (fun n : ℕ => (𝒜 n : Set _)) (fun n : ℕ => (𝓜₁ n : Set M₁)) T let Z₂ := degreeZeroFractions (fun n : ℕ => (𝒜 n : Set _)) (fun n : ℕ => (𝓜₂ n : Set M₂)) T ∃ (N₀ : Submodule H (LocalizedModule T M₀)) (N₁ : Submodule H (LocalizedModule T M₁)) (N₂ : Submodule H (LocalizedModule T M₂)), (N₀ : Set _) = Z₀ ∧ (N₁ : Set _) = Z₁ ∧ (N₂ : Set _) = Z₂ ∧ ∃ (f₀ : N₀ →ₗ[H] N₁) (g₀ : N₁ →ₗ[H] N₂), (∀ x : N₀, (f₀ x : LocalizedModule T M₁) = IsLocalizedModule.map T (mkLinearMap T M₀) (mkLinearMap T M₁) f x) ∧ (∀ y : N₁, (g₀ y : LocalizedModule T M₂) = IsLocalizedModule.map T (mkLinearMap T M₁) (mkLinearMap T M₂) g y) ∧ Function.Injective f₀ ∧ Function.Exact f₀ g₀ ∧ Function.Surjective g₀",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-pdz1218"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-pdz1218",
+  "group": "E1",
+  "result": "fix",
+  "note": "field k, S=MvPolynomial (Fin 2) k with homogeneousSubmodule grading; three Z-graded modules (now IsInternal, was Decomposition) with hsmul S_n M_z ⊆ M_(n+z); f,g linear degree-preserving; injective/Function.Exact/surjective; p prime, homogeneous, irrelevant ⊄ p; T = homogeneousSubmonoid ⊓ primeCompl; S_(p) = HomogeneousLocalization 𝒜 T; M_(p) carriers = degreeZeroFractions (y/h, y∈M_n, h∈T∩S_n, n:ℕ suffices since deg h ≥ 0); maps restrict y/h ↦ φ(y)/h; conclusion short exact over S_(p); new def matches its node, not a duplicate (homogeneousPieceAway is Away s only)"
  }
 }

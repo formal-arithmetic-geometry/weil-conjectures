@@ -1,0 +1,95 @@
+{
+ "id": "def-sc-degree-zero-module-fractions",
+ "kind": "definition",
+ "title": "Equal-degree fractions in a localized module",
+ "status": "split",
+ "statement": "Let $R$ be a commutative ring, $M$ an $R$-module, $I$ an index set, $A_i\\subseteq R$ and $M_i\\subseteq M$ families of subsets, and $T\\subseteq R$ a multiplicative submonoid. Inside $T^{-1}M$ [def-weil-pbc-module-localization], the equal-degree fraction subset is $\\{y/h: \\exists i\\in I,\\ y\\in M_i,\\ h\\in T\\cap A_i\\}$. For graded families these are exactly the homogeneous fractions of degree zero; equality is the ordinary localization equivalence relation. This definition names the subset, with module operations inherited from localization when the families are gradings.",
+ "stmt_deps": [
+  "def-weil-pbc-module-localization"
+ ],
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Section 00JM, definition of homogeneous localization M_(p); Constructions 01M7 (5)"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "degree zero submodule homogeneous localization graded module",
+   "results": "[leansearch] UNAVAILABLE 0 hit(s) | service unavailable: Internal Server Error",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "graded module homogeneous fractions numerator denominator same degree",
+   "results": "[leanfinder] OK 8 hit(s): HomogeneousLocalization.NumDenSameDeg.num; HomogeneousLocalization.NumDenSameDeg; HomogeneousLocalization.NumDenSameDeg.den; HomogeneousLocalization.NumDenSameDeg.deg; HomogeneousLocalization.num_mem_deg; HomogeneousLocalization.num; HomogeneousLocalization.NumDenSameDeg.num_mul; HomogeneousLocalization.den_mem_deg. All are ring fractions, not module fractions.",
+   "date": "2026-10-11",
+   "verdict": "no module match"
+  },
+  {
+   "tool": "grep",
+   "query": "graded.*localization|degree.?zero.*localization|degreeZeroFractions (msearch Mathlib); rg degreeZeroFractions|degree-zero|HomogeneousLocalization in WeilConjectures and lean/Sheaf; rg -l homogeneous.*localization|degree-zero.*localization dag/nodes; tools/blueprint_refs.py search degree-zero localization",
+   "results": "Mathlib: 5 hits, ProjectiveSpectrum/Functor, Scheme, StructureSheaf, and GradedAlgebra/HomogeneousLocalization, all ring localization. Source: ring dehomogenization and sheaf degree-zero comparisons only. Sheaf: no homogeneous module fraction definition. DAG: def-nagata-homogeneous-localization-degree-zero (ring, away from one element), def-weil-pbc-proj-twisting-sheaf (module away from one element, no prime localization); neither supplies arbitrary-submonoid equal-degree module fractions. Blueprint search: 0 blueprint nodes match degree-zero localization.",
+   "date": "2026-10-11",
+   "verdict": "no duplicate notion"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sc-p1-proj-degreezero-localization-exact",
+  "date": "2026-10-11",
+  "group": "E1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-p1-graded-resolution",
+   "place": "proof, degree-zero parts of localizations in the exact sheafification calculation",
+   "via": [
+    "lem-sc-p1-proj-degreezero-localization-exact",
+    "lem-sc-p1-proj-sheafification-exact"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "module": "Sheaf.Algebra.Module.DegreeZeroFractions",
+  "declaration": "LocalizedModule.degreeZeroFractions",
+  "file": "lean/Sheaf/Algebra/Module/DegreeZeroFractions.lean",
+  "statement": "def degreeZeroFractions {R : Type uF} [CommRing R] {M : Type vF} [AddCommGroup M] [Module R M] {ι : Type wF} (𝒜 : ι → Set R) (𝓜 : ι → Set M) (T : Submonoid R) : Set (LocalizedModule T M)",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-pdz1218",
+  "group": "E1",
+  "result": "fix",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-pdz1218",
+  "group": "E1",
+  "result": "fix",
+  "note": "field k, S=MvPolynomial (Fin 2) k with homogeneousSubmodule grading; three Z-graded modules (now IsInternal, was Decomposition) with hsmul S_n M_z ⊆ M_(n+z); f,g linear degree-preserving; injective/Function.Exact/surjective; p prime, homogeneous, irrelevant ⊄ p; T = homogeneousSubmonoid ⊓ primeCompl; S_(p) = HomogeneousLocalization 𝒜 T; M_(p) carriers = degreeZeroFractions (y/h, y∈M_n, h∈T∩S_n, n:ℕ suffices since deg h ≥ 0); maps restrict y/h ↦ φ(y)/h; conclusion short exact over S_(p); new def matches its node, not a duplicate (homogeneousPieceAway is Away s only)"
+ }
+}
