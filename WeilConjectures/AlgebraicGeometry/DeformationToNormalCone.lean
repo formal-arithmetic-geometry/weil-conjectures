@@ -197,6 +197,51 @@ lemma deformationSpaceSection_deformationSpaceProj (hs : s ≫ g = 𝟙 B) :
   rw [deformationSpaceProj, deformationSpaceSection_toPolynomialSpec_assoc,
     IsIso.inv_hom_id_assoc, ← AffineSpace.map_comp, hs, AffineSpace.map_id]
 
+/-! #### The fibre over `t = 0` -/
+
+/-- `Spec_V 𝒪_V[t] = V ×_B 𝔸¹_B`. -/
+lemma isPullback_polynomialSpecProj :
+    IsPullback V.polynomialSpecProj (V.polynomialSpecToAffineSpace ≫
+      AffineSpace.map (ULift.{u} (Fin 1)) g) g (𝔸(ULift.{u} (Fin 1); B) ↘ B) := by
+  refine (AffineSpace.isPullback_map (n := ULift.{u} (Fin 1)) g).flip.of_iso
+    (asIso V.polynomialSpecToAffineSpace).symm (Iso.refl _) (Iso.refl _) (Iso.refl _) ?_ ?_
+    (by simp) (by simp)
+  · simp only [Iso.symm_hom, asIso_inv, Iso.refl_hom, Category.comp_id, IsIso.eq_inv_comp,
+      polynomialSpecToAffineSpace_over]
+  · simp
+
+/-- The zero section of `Spec_V 𝒪_V[t]` is the base change of the zero section of `𝔸¹_B`. -/
+lemma isPullback_polynomialSpecZeroSection :
+    IsPullback V.polynomialSpecZeroSection g
+      (V.polynomialSpecToAffineSpace ≫ AffineSpace.map (ULift.{u} (Fin 1)) g)
+      (AffineSpace.zeroSection (ULift.{u} (Fin 1)) B) := by
+  refine IsPullback.of_right ?_ ?_ (isPullback_polynomialSpecProj g)
+  · rw [polynomialSpecZeroSection, Category.assoc, ← polynomialSpecToAffineSpace_over,
+      ← Category.assoc V.polynomialZeroSpecToPolynomialSpec,
+      polynomialZeroSpecToPolynomialSpec_comp_polynomialSpecToAffineSpace, Category.assoc,
+      AffineSpace.zeroSection_over, Category.comp_id, IsIso.inv_hom_id,
+      AffineSpace.zeroSection_over]
+    exact IsPullback.of_horiz_isIso ⟨by simp⟩
+  · rw [← Category.assoc, polynomialSpecZeroSection_comp_polynomialSpecToAffineSpace,
+      AffineSpace.zeroSection_comp_map]
+
+/-- **The fibre over `t = 0` is the normal cone.** -/
+lemma isPullback_normalConeToDeformationSpace :
+    IsPullback s.ker.normalConeToDeformationSpace (normalConeProj g s) (deformationSpaceProj g s)
+      (AffineSpace.zeroSection (ULift.{u} (Fin 1)) B) := by
+  have h : IsPullback s.ker.normalConeToDeformationSpace
+      (relativeGluingData s.ker.coequifibered_toNormalConePresheaf).toBase
+      s.ker.deformationSpaceToPolynomialSpec V.polynomialSpecZeroSection :=
+    s.ker.isPullback_normalConeToDeformationSpace.of_iso (Iso.refl _) (Iso.refl _)
+      (asIso (relativeGluingData V.coequifibered_toPolynomialZeroPresheaf).toBase) (Iso.refl _)
+      (by simp) (by
+        simp only [asIso_hom, Iso.refl_hom, Category.id_comp,
+          IdealSheafData.normalConeToPolynomialZeroSpec]
+        exact relativeGluingMap_toBase _ _ _
+          s.ker.toPolynomialZeroPresheaf_comp_polynomialZeroToNormalCone)
+      (by simp) (by simp [polynomialSpecZeroSection])
+  exact h.paste_vert (isPullback_polynomialSpecZeroSection g)
+
 end Construction
 
 /-- Blueprint `sk-lem-geometry`: Geometry of the deformation of a section
