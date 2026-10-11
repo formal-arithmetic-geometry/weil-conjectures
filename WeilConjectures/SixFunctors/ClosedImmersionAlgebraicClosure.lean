@@ -35,9 +35,10 @@ blueprint `prop-sf-closed-unit-all-stages` at the stage `ℚ̄_ℓ`.
 ## Implementation notes
 
 The morphisms of `𝒞_Y` are taken in the rational stages `D_comp(Y_ét, L)`, of which `Dᵇc(Y, L)` is
-a full subcategory, so they are the blueprint's morphisms. The transition functors are
-coextension of scalars, which for the finite free `𝒪_E`-algebra `𝒪_L` is the base change
-`− ⊗_{𝒪_E} 𝒪_L` up to the inverse different, an invertible `𝒪_L`-module.
+a full subcategory; they are the blueprint's morphisms once the transition functors preserve
+`Dᵇc`, which is not proved here. The transition functors are coextension of scalars, which for
+the finite free `𝒪_E`-algebra `𝒪_L` is the base change `− ⊗_{𝒪_E} 𝒪_L` up to the inverse
+different, an invertible `𝒪_L`-module; this identification is not formalised here either.
 -/
 
 @[expose] public section
