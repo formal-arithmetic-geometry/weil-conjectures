@@ -30,12 +30,24 @@ namespace CategoryTheory.Functor
 variable {C D H : Type*} [Category C] [Category D] [Category H] [MonoidalCategory H]
   (L : C ⥤ D) [∀ F : C ⥤ H, L.HasPointwiseLeftKanExtension F]
 
-/-- The presheaf-level projection map `Lan(F ⊗ L ⋙ G) ⟶ Lan F ⊗ G`. -/
+/-- The projection map `Lan(F ⊗ (L ⋙ G)) ⟶ Lan F ⊗ G`: the map adjoint to
+`F ⊗ (L ⋙ G) ⟶ (L ⋙ Lan F) ⊗ (L ⋙ G)`, the unit of `Lan ⊣ (L ⋙ ·)` tensored with the identity.
+-/
 noncomputable def lanProjectionMap (F : C ⥤ H) (G : D ⥤ H) :
     L.lan.obj (F ⊗ (L ⋙ G)) ⟶ L.lan.obj F ⊗ G :=
   (L.lanAdjunction H).homEquiv _ _ |>.symm
-    (((L.lanAdjunction H).unit.app F ⊗ₘ 𝟙 (L ⋙ G)) ≫ 𝟙 _)
+    ((L.lanAdjunction H).unit.app F ⊗ₘ 𝟙 (L ⋙ G))
 
+/-- The projection map restricted along `L` is the unit tensored with the identity: for `c : C`
+the square
+```
+  F c ⊗ G (L c) ──── unit ────▶ Lan(F ⊗ (L ⋙ G))(L c)
+        │                               │
+   unit ⊗ 𝟙                       lanProjectionMap
+        ▼                               ▼
+  (Lan F)(L c) ⊗ G (L c) ═══════ (Lan F)(L c) ⊗ G (L c)
+```
+commutes. -/
 lemma lanUnit_app_comp_lanProjectionMap_app (F : C ⥤ H) (G : D ⥤ H) (c : C) :
     (L.lanUnit.app (F ⊗ (L ⋙ G))).app c ≫ (L.lanProjectionMap F G).app (L.obj c) =
       (L.lanUnit.app F).app c ⊗ₘ 𝟙 (G.obj (L.obj c)) := by
@@ -43,11 +55,10 @@ lemma lanUnit_app_comp_lanProjectionMap_app (F : C ⥤ H) (G : D ⥤ H) (c : C) 
     (L.lanProjectionMap F G)
   have h0 : (L.lanAdjunction H).homEquiv _ _ (L.lanProjectionMap F G) =
       (L.lanAdjunction H).unit.app F ⊗ₘ 𝟙 (L ⋙ G) := by
-    rw [lanProjectionMap, Equiv.apply_symm_apply, Category.comp_id]
+    rw [lanProjectionMap, Equiv.apply_symm_apply]
   have h' := congr_app (h.symm.trans h0) c
   rw [lanAdjunction_unit] at h'
   exact h'
-
 
 /-- The projection map is natural in both variables. -/
 lemma lanProjectionMap_naturality {F F' : C ⥤ H} {G G' : D ⥤ H} (φ : F ⟶ F') (ψ : G ⟶ G') :
@@ -55,7 +66,7 @@ lemma lanProjectionMap_naturality {F F' : C ⥤ H} {G G' : D ⥤ H} (φ : F ⟶ 
       L.lanProjectionMap F G ≫ (L.lan.map φ ⊗ₘ ψ) := by
   apply ((L.lanAdjunction H).homEquiv _ _).injective
   rw [Adjunction.homEquiv_naturality_left, Adjunction.homEquiv_naturality_right]
-  simp only [lanProjectionMap, Equiv.apply_symm_apply, Category.comp_id]
+  simp only [lanProjectionMap, Equiv.apply_symm_apply]
   ext c
   simp only [NatTrans.comp_app, Monoidal.tensorHom_app, whiskeringLeft_obj_map,
     Functor.whiskerLeft_app, NatTrans.id_app, tensorHom_comp_tensorHom, Category.comp_id,
@@ -81,8 +92,14 @@ noncomputable def lanProjectionCocone (F : C ⥤ H) (G : D ⥤ H) (Y : D) :
         congr 2
         exact (L.lanUnit.app F).naturality φ.left }
 
-
-
+/-- **The projection formula for pointwise left Kan extensions.** If the comma category
+`CostructuredArrow L Y` receives a final functor `s` from a discrete category `ι` whose objects
+have invertible structure maps `L (s i) ≅ Y`, and `- ⊗ G Y` preserves `ι`-indexed coproducts,
+then the projection map
+```
+  Lan(F ⊗ (L ⋙ G))(Y) ⟶ (Lan F)(Y) ⊗ G(Y)
+```
+is an isomorphism: both sides are `⨁_i F(s i) ⊗ G(Y)`. -/
 theorem isIso_lanProjectionMap_app (F : C ⥤ H) (G : D ⥤ H) (Y : D) {ι : Type*}
     (s : Discrete ι ⥤ CostructuredArrow L Y) [s.Final] (hs : ∀ i, IsIso (s.obj i).hom)
     [HasColimitsOfShape (Discrete ι) H]

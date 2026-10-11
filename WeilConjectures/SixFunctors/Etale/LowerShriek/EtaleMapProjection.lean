@@ -5,30 +5,27 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
-public import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasLeftKanExtension
+public import WeilConjectures.SixFunctors.Etale.LowerShriek.EtaleMap
 public import WeilConjectures.CategoryTheory.HomotopyCategory.Adjunction
 public import Mathlib.CategoryTheory.Localization.Adjunction
 public import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStar
-public import WeilConjectures.CategoryTheory.GrothendieckAbelian.LiftIndexFinal
 public import WeilConjectures.CategoryTheory.Functor.KanExtension.ProjectionFormula
 
 /-!
-# Extension by zero along an étale morphism
+# Extension by zero along an étale morphism: derived adjunction and projection formula
 
-For an étale morphism `f : V ⟶ U`, not necessarily a monomorphism, the lower shriek
-`f_! : Sh(V_ét) ⥤ Sh(U_ét)` is the left adjoint of the restriction along the localization
-functor `V_ét ⥤ U_ét`, which computes the pullback `f^*`. Its presheaf-level part is the
-pointwise left Kan extension, which at `W` is the direct sum over the lifts of `W` through `f`
-(`AlgebraicGeometry.SmallSite.preservesFiniteLimits_op_lan_overMap_of_isGrothendieckAbelian`),
-so `f_!` is exact, and it induces a left adjoint of `D(f^*)` on derived categories.
+For an étale morphism `f : V ⟶ U`, the extension by zero
+`AlgebraicGeometry.Etale.etaleLowerShriek` is exact for any Grothendieck abelian coefficient
+category with sheafification, so it induces a left adjoint of `D(f^*)` on derived categories.
+It also satisfies the projection formula `f_!(F ⊗ f^*G) ≅ f_!F ⊗ G`: at the presheaf level
+both sides are `⨁_α F(α) ⊗ G(W)` over the lifts `α` of `W` through `f`, and sheafification
+is monoidal.
 
 ## Main definitions
 
-- `AlgebraicGeometry.Etale.etaleLowerShriek`: the lower shriek `f_!` along an étale `f`.
-- `AlgebraicGeometry.Etale.etaleLowerShriekUpperStarAdjunction`: `f_! ⊣ f^*`.
 - `AlgebraicGeometry.Etale.derivedEtaleLowerShriekUpperStarAdjunction`: `D(f_!) ⊣ D(f^*)`.
+- `AlgebraicGeometry.Etale.etaleLowerShriekTensorIso`: `f_!(F ⊗ f^*G) ≅ f_!F ⊗ G`.
 -/
 
 @[expose] public section
@@ -48,29 +45,21 @@ variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{
 
 variable {V U : Scheme.{u}} (f : V ⟶ U) (h : Etale f)
 
-/-- The lower shriek `f_!` along an étale morphism `f : V ⟶ U`: left Kan extension on presheaves
-along the localization functor followed by sheafification. -/
-noncomputable def Etale.etaleLowerShriek :
-    Sheaf V.smallEtaleTopology A ⥤ Sheaf U.smallEtaleTopology A :=
-  Functor.sheafPullbackConstruction.sheafPullback (MorphismProperty.Over.map ⊤ h) A
-    (V.smallGrothendieckTopology @Etale) (U.smallGrothendieckTopology @Etale)
-
-/-- The lower shriek along an étale morphism is left adjoint to the restriction along the
+/-- The extension by zero along an étale morphism is left adjoint to the restriction along the
 localization functor. -/
 noncomputable def Etale.etaleLowerShriekAdjunction :
     Etale.etaleLowerShriek A f h ⊣ Etale.localizationRestriction A f h :=
+  have : (MorphismProperty.Over.map ⊤ h).IsContinuous V.smallEtaleTopology
+      U.smallEtaleTopology :=
+    inferInstanceAs ((MorphismProperty.Over.map ⊤ h).IsContinuous
+      (V.smallGrothendieckTopology @Etale) (U.smallGrothendieckTopology @Etale))
   Functor.sheafPullbackConstruction.sheafAdjunctionContinuous (MorphismProperty.Over.map ⊤ h)
-    A (V.smallGrothendieckTopology @Etale) (U.smallGrothendieckTopology @Etale)
+    A V.smallEtaleTopology U.smallEtaleTopology
 
-/-- The lower shriek along an étale morphism is left adjoint to the pullback `f^*`. -/
-noncomputable def Etale.etaleLowerShriekUpperStarAdjunction :
-    Etale.etaleLowerShriek A f h ⊣ (f)^*[A] :=
-  (Etale.etaleLowerShriekAdjunction A f h).ofNatIsoRight
-    (Etale.upperStarIsoLocalizationRestriction A f h).symm
-
-/-- The lower shriek along an étale morphism is left exact: pointwise on presheaves it is a
-direct sum of evaluations, and sheafification is left exact. -/
-instance Etale.preservesFiniteLimits_etaleLowerShriek :
+/-- The extension by zero along an étale morphism is left exact for any Grothendieck abelian
+coefficient category with sheafification: pointwise on presheaves it is a direct sum of
+evaluations, and sheafification is left exact. -/
+instance Etale.preservesFiniteLimits_etaleLowerShriek_of_hasSmallSiteSheafify :
     PreservesFiniteLimits (Etale.etaleLowerShriek A f h) := by
   have : PreservesFiniteLimits ((MorphismProperty.Over.map ⊤ h).op.lan :
       (V.Etaleᵒᵖ ⥤ A) ⥤ U.Etaleᵒᵖ ⥤ A) :=
