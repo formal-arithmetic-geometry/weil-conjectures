@@ -1,11 +1,11 @@
 # Work queue
 
-969 items; claim with `tools/claim.py next <group> [--stage N]`.
+964 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (969)
+## Stage 2: nodes to state (964)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -15,18 +15,15 @@
 | `def-weil-derived-tensor` | 1 | state |
 | `def-weil-pbc-derived-categories` | 1 | state |
 | `def-weil-pbc-finite-torsors` | 1 | state |
-| `lem-exc-abelian-sheaves-gmodules` | 1 | state |
 | `lem-kun-03sa` | 1 | state |
 | `lem-pc-derived-adjoint-functors` | 1 | state |
 | `lem-pc-derived-tensor-second-factor-functor` | 1 | state |
 | `lem-pc-derived-tensor-transitivity` | 1 | state |
-| `lem-pc-kflat-bounded-flat-replacement` | 1 | state |
 | `lem-pc-kflat-derived-tensor-associator` | 1 | state |
 | `lem-pc-kflat-pullback-preservation` | 1 | state |
 | `lem-pc-module-pullback-adjunction` | 1 | state |
 | `lem-pc-module-pullback-identity-composition` | 1 | state |
 | `lem-pc-pre-derived-adjoint-functors-general` | 1 | state |
-| `lem-pc-ring-pseudo-coherent-iff-all-m` | 1 | state |
 | `lem-pc-sheaf-modules-tensor-closed` | 1 | state |
 | `lem-pc-skyscraper-complex` | 1 | state |
 | `lem-pc-stalk-tensor-complex` | 1 | state |
@@ -46,7 +43,6 @@
 | `lem-sc-finite-free-internal-hom-exact` | 1 | state |
 | `lem-sc-finite-sections-cover-qc` | 1 | state |
 | `lem-sc-finite-sheafhom-affine` | 1 | state |
-| `lem-sc-free-prime-membership` | 1 | state |
 | `lem-sc-genus-invariant` | 1 | state |
 | `lem-sc-global-generation-nonvanishing-cover` | 1 | state |
 | `lem-sc-global-sections-left-exact` | 1 | state |
@@ -55,7 +51,6 @@
 | `lem-sc-glue-component-transition-cocycle` | 1 | state |
 | `lem-sc-going-down-surjective-dimension` | 1 | state |
 | `lem-sc-graded-localization-exact` | 1 | state |
-| `lem-sc-graded-prime-avoidance` | 1 | state |
 | `lem-sc-hilbert-affine-denominator-module` | 1 | state |
 | `lem-sc-hilbert-denominator-ideal-nowhere-dense` | 1 | state |
 | `lem-sc-hilbert-embedded-points-affine-removal` | 1 | state |
