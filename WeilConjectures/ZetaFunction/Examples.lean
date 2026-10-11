@@ -425,7 +425,8 @@ theorem isIntegralFrobeniusFactor_projectiveLine :
         Module.finrank (PadicAlgCl l)
           ((WeilSheaf.adicConstant k l (ProjectiveLine (Spec (.of k)))).cohomology 1).carrier = 0 ∧
         Module.finrank (PadicAlgCl l)
-          ((WeilSheaf.adicConstant k l (ProjectiveLine (Spec (.of k)))).cohomology 2).carrier = 1 := by
+          ((WeilSheaf.adicConstant k l (ProjectiveLine (Spec (.of k)))).cohomology 2).carrier =
+            1 := by
   obtain ⟨P, hfact, -, -, hP⟩ :=
     Scheme.exists_isWeilFactorization_of_smoothProper k (ProjectiveLine (Spec (.of k))) 1
   obtain ⟨h, h0, h1, h2⟩ := isWeilFactorization_projectiveLine k
