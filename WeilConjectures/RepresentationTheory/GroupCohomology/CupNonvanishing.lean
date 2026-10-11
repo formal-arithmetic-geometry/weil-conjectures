@@ -287,4 +287,23 @@ theorem exists_ext_ne_zero_of_dualFamily.{w} [Nontrivial k] [HasExt.{w} (Rep.{u}
   rw [hg, LinearEquiv.apply_symm_apply, altPairing_cupHom e a h] at this
   exact one_ne_zero this
 
+/-- The `Ext`-form of `groupCohomology.not_isZero_groupCohomology_finsupp`:
+`Extⁿ(k, k) ≠ 0` in `Rep k (⊕_ι ℤ)` for `n ≥ 1` and an infinite index type `ι`. -/
+theorem exists_ext_ne_zero_finsupp.{w} [Nontrivial k] (ι : Type u) [Infinite ι]
+    [HasExt.{w} (Rep.{u} k (Multiplicative (ι →₀ ℤ)))] (n : ℕ) :
+    ∃ x : Abelian.Ext (Rep.trivial k (Multiplicative (ι →₀ ℤ)) k)
+      (Rep.trivial k (Multiplicative (ι →₀ ℤ)) k) (n + 1), x ≠ 0 := by
+  let f : ℕ ↪ ι := Infinite.natEmbedding ι
+  refine exists_ext_ne_zero_of_dualFamily (fun j ↦ Multiplicative.ofAdd (Finsupp.single (f j) 1))
+    (fun i ↦ (Int.castAddHom k).comp ((Finsupp.applyAddHom (f i)).comp
+      (AddEquiv.additiveMultiplicative _).toAddMonoidHom)) fun i j ↦ ?_
+  simp only [AddMonoidHom.coe_comp, Function.comp_apply, Finsupp.applyAddHom_apply,
+    Int.coe_castAddHom]
+  change ((Finsupp.single (f j) (1 : ℤ) (f i) : ℤ) : k) = _
+  by_cases hij : i = j
+  · subst hij; simp
+  · classical
+    rw [Finsupp.single_apply, if_neg (fun h ↦ hij (Fin.ext (f.injective h).symm)), if_neg hij]
+    simp
+
 end groupCohomology

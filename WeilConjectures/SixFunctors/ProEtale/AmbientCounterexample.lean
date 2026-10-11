@@ -12,6 +12,12 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor
 public import WeilConjectures.RepresentationTheory.GroupCohomology.CupNonvanishing
 public import WeilConjectures.SixFunctors.ProEtale.Derived.ClopenIdempotent
 public import WeilConjectures.SixFunctors.ProEtale.ExceptionalAdjoint
+public import WeilConjectures.SixFunctors.ProEtale.AlgClosedFieldSite
+public import WeilConjectures.SixFunctors.ProEtale.Derived.FlatModel
+public import WeilConjectures.SixFunctors.ProEtale.Derived.ExtPullback
+public import Mathlib.Algebra.Category.ModuleCat.EnoughInjectives
+public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.Ext.MapBijective
+public import WeilConjectures.SixFunctors.ProEtale.UpperLowerStar.GlobalSections
 
 /-!
 # The ambient exceptional right adjoint fails for an elliptic curve
@@ -162,48 +168,100 @@ theorem HasUniformCohomologicalDimensionLE.of_compactification {f : X ⟶ Y} [Is
 
 end General
 
+set_option synthInstance.maxHeartbeats 400000 in
+-- the instances `WEqualsLocallyBijective` and `HasSheafCompose` on the small pro-étale site
+-- take long to synthesize
+/-- The constant pro-étale sheaf `Λ` on the spectrum of an algebraically closed field is
+projective: it is the image of the free module `Λ` under the left adjoint of the global sections
+functor, and global sections preserve epimorphisms there
+(`AlgebraicGeometry.ProEtale.preservesEpimorphisms_sheafSections_of_iso`). -/
+lemma projective_constantSheaf_spec (Λ : Type (u + 1)) [CommRing Λ] (k : Type u) [Field k]
+    [IsAlgClosed k] :
+    Projective ((constantSheaf (Scheme.ProEt.topology (Spec (.of k))) (ModuleCat.{u + 1} Λ)).obj
+      (ModuleCat.of Λ Λ)) := by
+  have := preservesEpimorphisms_sheafSections_of_iso (A := ModuleCat.{u + 1} Λ)
+    (Iso.refl (Spec (.of k)))
+  have : (Sheaf.Γ (Scheme.ProEt.topology (Spec (.of k)))
+      (ModuleCat.{u + 1} Λ)).PreservesEpimorphisms :=
+    Functor.PreservesEpimorphisms.of_iso
+      (Sheaf.ΓNatIsoSheafSections _ _ (Scheme.ProEt.isTerminalMkId _)).symm
+  exact (constantSheafΓAdj _ _).map_projective _ inferInstance
+
 section AbelianVariety
 
 variable (Λ : Type (u + 1)) [Field Λ] {k : Type u} [Field k] [IsAlgClosed k]
   (E : Over (Spec (.of k))) [GrpObj E] [IsAbelianVariety E]
 
-/-- Blueprint `sk-rem-sf-fullcd-scope`, the cohomology of the counterexample sheaf: for an
+/-- Blueprint `sk-rem-sf-fullcd-scope`, the evaluation functor of the counterexample: for an
 elliptic curve (more generally an abelian variety of positive dimension) `E` over an
-algebraically closed field `k` and a field `Λ`, there is a pro-étale sheaf `F` of `Λ`-modules on
-`E` with `Hⁿ(E_proét, F) ≅ Hⁿ(H, Λ)` for `n ≥ 1`, where `H ≅ ⊕_ℕ ℤ` acts trivially on `Λ`. Here
-`Hⁿ(E_proét, F) = Γ(Spec k, Rⁿa_{E*} F)`, global sections on `Spec k` being exact.
+algebraically closed field `k` and a field `Λ`, there is an exact functor `U` from pro-étale
+sheaves of `Λ`-modules on `E` to `Λ`-linear representations of `H = ⊕_ℕ ℤ`, with an exact
+right adjoint `V`, sending the constant sheaf `Λ` to the trivial representation.
 
-The sheaf is `F = V_H(Λ)`, for `V_H` the right adjoint of evaluation at the pro-étale geometric
-generic point `T = Spec k(E)^sep`, viewed as a functor to modules over the group ring of an
-abstract subgroup `H ≅ ⊕_ℕ ℤ` of `Gal(k(E)^sep / k(E))` acting freely on `Hom_E(T, W)` for every
-affine weakly contractible `W`. -/
-theorem exists_nonempty_iso_groupCohomology (hE : 0 < IsAbelianVariety.dim E) :
-    ∃ F : Sheaf (Scheme.ProEt.topology E.left) (ModuleCat.{u + 1} Λ), ∀ n : ℕ, 0 < n →
-      Nonempty ((Sheaf.Γ (Scheme.ProEt.topology (Spec (.of k))) (ModuleCat.{u + 1} Λ)).obj
-        ((DerivedCategory.homologyFunctor _ n).obj
-          ((R((E.hom)_*[ModuleCat.{u + 1} Λ])).obj ((DerivedCategory.singleFunctor _ 0).obj F))) ≅
-        groupCohomology
-          (Rep.trivial Λ (Multiplicative (ULift.{u + 1} ℕ →₀ ℤ)) Λ) n) :=
+`U` is evaluation at the pro-étale geometric generic point `T = Spec k(E)^sep`, which is
+weakly contractible, so `U` is exact; `H` is an abstract subgroup of
+`Gal(k(E)^sep / k(E))`, chosen inside the pro-`r` part of a procyclic subgroup on which the
+surjection `Gal(k(E)^sep / k(E)) ↠ T_r E ↠ ℤ_r` given by the multiplication covers `[r^m]` is
+injective. `H` acts freely on `Hom_E(T, W)` for every affine weakly contractible `W`, so `U` sends
+the representables `Λ[h_W]` to free `Λ[H]`-modules and its right adjoint `V` is exact. -/
+theorem exists_exact_evaluation (hE : 0 < IsAbelianVariety.dim E) :
+    ∃ (U : Sheaf (Scheme.ProEt.topology E.left) (ModuleCat.{u + 1} Λ) ⥤
+        Rep.{u + 1} Λ (Multiplicative (ULift.{u + 1} ℕ →₀ ℤ)))
+      (V : Rep.{u + 1} Λ (Multiplicative (ULift.{u + 1} ℕ →₀ ℤ)) ⥤
+        Sheaf (Scheme.ProEt.topology E.left) (ModuleCat.{u + 1} Λ)) (_ : U ⊣ V),
+      U.Additive ∧ PreservesFiniteLimits U ∧ PreservesFiniteColimits U ∧ V.Additive ∧
+        PreservesFiniteLimits V ∧ PreservesFiniteColimits V ∧
+        Nonempty (U.obj ((E.hom)^*[ModuleCat.{u + 1} Λ].obj
+          ((constantSheaf (Scheme.ProEt.topology (Spec (.of k))) (ModuleCat.{u + 1} Λ)).obj
+            (ModuleCat.of Λ Λ))) ≅ Rep.trivial Λ (Multiplicative (ULift.{u + 1} ℕ →₀ ℤ)) Λ) :=
   sorry
 
 /-- Blueprint `sk-rem-sf-fullcd-scope`, the counterexample sheaf: for an elliptic curve (more
 generally an abelian variety of positive dimension) `E` over an algebraically closed field `k`
 and a field `Λ`, there is a pro-étale sheaf `F` of `Λ`-modules on `E` whose pro-étale cohomology
-`Hⁿ(E_proét, F) = Hⁿ(Ra_{E*} F)` is nonzero in every degree `n ≥ 1`: by
-`AlgebraicGeometry.ProEtale.exists_nonempty_iso_groupCohomology` its global sections are
-`Hⁿ(⊕_ℕ ℤ, Λ)`, which is nonzero (`groupCohomology.not_isZero_groupCohomology_finsupp`). -/
+`Hⁿ(E_proét, F) = Hⁿ(Ra_{E*} F)` is nonzero in every degree `n ≥ 1`.
+
+Take `F = V(Λ)` for the exact evaluation functor `U ⊣ V` of
+`AlgebraicGeometry.ProEtale.exists_exact_evaluation`. Both adjoints being exact,
+`Extⁿ(Λ_E, F) ≅ Extⁿ_H(U Λ_E, Λ) = Extⁿ_H(Λ, Λ) = Hⁿ(⊕_ℕ ℤ, Λ)`
+(`CategoryTheory.Adjunction.mapExtCounit_bijective`), which is nonzero
+(`groupCohomology.exists_ext_ne_zero_finsupp`); since the constant sheaf on `Spec k` is
+projective, a nonzero class in `Extⁿ(Λ_E, F)` forces `Rⁿa_{E*} F ≠ 0`
+(`AlgebraicGeometry.ProEtale.not_isZero_homology_of_ext_ne_zero`). -/
 theorem exists_forall_not_isZero_homology_rightDerivedLowerStar
     (hE : 0 < IsAbelianVariety.dim E) :
     ∃ F : Sheaf (Scheme.ProEt.topology E.left) (ModuleCat.{u + 1} Λ), ∀ n : ℤ, 0 < n →
       ¬ IsZero ((DerivedCategory.homologyFunctor _ n).obj
         ((R((E.hom)_*[ModuleCat.{u + 1} Λ])).obj
           ((DerivedCategory.singleFunctor _ 0).obj F))) := by
-  obtain ⟨F, hF⟩ := exists_nonempty_iso_groupCohomology Λ E hE
-  refine ⟨F, fun n hn hZ ↦ ?_⟩
+  obtain ⟨U, V, adj, _, _, _, _, _, _, ⟨eU⟩⟩ := exists_exact_evaluation Λ E hE
+  let H := Multiplicative (ULift.{u + 1} ℕ →₀ ℤ)
+  let triv := Rep.trivial Λ H Λ
+  let Λk := (constantSheaf (Scheme.ProEt.topology (Spec (.of k))) (ModuleCat.{u + 1} Λ)).obj
+    (ModuleCat.of Λ Λ)
+  have := projective_constantSheaf_spec Λ k
+  have : LocallySmall.{u + 1} (Rep.{u + 1} Λ H) := locallySmall_self _
+  have : EnoughProjectives (Rep.{u + 1} Λ H) :=
+    Rep.equivalenceModuleMonoidAlgebra.enoughProjectives_iff.2 ModuleCat.enoughProjectives.{u + 1}
+  let : HasExt.{u + 1} (Rep.{u + 1} Λ H) := hasExt_of_enoughProjectives _
+  have : EnoughInjectives (Rep.{u + 1} Λ H) :=
+    Rep.equivalenceModuleMonoidAlgebra.enoughInjectives_iff.2
+      (ModuleCat.enoughInjectives.{u + 1} (MonoidAlgebra Λ H))
+  refine ⟨V.obj triv, fun n hn ↦ ?_⟩
   obtain ⟨m, rfl⟩ : ∃ m : ℕ, n = ((m + 1 : ℕ) : ℤ) := ⟨n.toNat - 1, by omega⟩
-  obtain ⟨e⟩ := hF (m + 1) (by omega)
-  exact groupCohomology.not_isZero_groupCohomology_finsupp (k := Λ) (ULift.{u + 1} ℕ) m
-    (((Sheaf.Γ _ _).map_isZero hZ).of_iso e.symm)
+  obtain ⟨x, hx⟩ := groupCohomology.exists_ext_ne_zero_finsupp (k := Λ) (ULift.{u + 1} ℕ) m
+  -- transport `x` along `U Λ_E ≅ Λ`
+  let y : Abelian.Ext (U.obj ((E.hom)^*[ModuleCat.{u + 1} Λ].obj Λk)) triv (m + 1) :=
+    (Abelian.Ext.mk₀ eU.hom).comp x (zero_add _)
+  have hy : y ≠ 0 := fun h ↦ hx (by
+    have := congrArg (fun z ↦ (Abelian.Ext.mk₀ eU.inv).comp z (zero_add _)) h
+    simp only [y, Abelian.Ext.mk₀_comp_mk₀_assoc, Iso.inv_hom_id, Abelian.Ext.mk₀_id_comp,
+      Abelian.Ext.comp_zero] at this
+    exact this)
+  obtain ⟨z, hz⟩ := (adj.mapExtCounit_bijective _ triv (m + 1)).2 y
+  refine not_isZero_homology_of_ext_ne_zero (ModuleCat.{u + 1} Λ) E.hom Λk (V.obj triv)
+    (m + 1) z fun h ↦ hy ?_
+  rw [← hz, h, map_zero]
 
 /-- Blueprint `sk-rem-sf-fullcd-scope` (i): for the structure morphism `a_E` of an elliptic
 curve (more generally an abelian variety of positive dimension) over an algebraically closed
