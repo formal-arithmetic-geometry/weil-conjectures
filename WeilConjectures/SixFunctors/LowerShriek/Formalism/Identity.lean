@@ -260,6 +260,14 @@ lemma pfComp'_id_left_hom_app (f : X ⟶ Y) (M : F.obj X) :
     pfComp'_id_left_inv_app, ← Functor.map_comp, Iso.inv_hom_id_app]
   exact (CategoryTheory.Functor.map_id _ _).symm
 
+
+lemma pfComp'_id_right_hom_app (f : X ⟶ Y) (M : F.obj X) :
+    (F.pfComp' f (𝟙 Y) f (Category.comp_id f)).hom.app M =
+      (F.pfId Y).inv.app ((F.pf f).obj M) := by
+  rw [← cancel_mono ((F.pfComp' f (𝟙 Y) f (Category.comp_id f)).inv.app M), Iso.hom_inv_id_app,
+    pfComp'_id_right_inv_app, Iso.inv_hom_id_app]
+  rfl
+
 end PushforwardUnit
 
 end AlgebraicGeometry.CompactSupportFormalism

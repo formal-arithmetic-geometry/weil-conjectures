@@ -75,6 +75,24 @@ lemma pfComp'_assoc (f : X ⟶ Y) (g : Y ⟶ Z) (h : Z ⟶ W) (fg : X ⟶ Z) (gh
     ← conjugateEquiv_whiskerRight _ _ (F.adj f), conjugateEquiv_comp, conjugateEquiv_comp,
     conjugateEquiv_comp, Category.assoc, F.pbComp'_assoc_inv f g h fg gh fgh hfg hgh hfgh]
 
+
+/-- The associativity of the composition isomorphisms of the pushforwards, objectwise, for
+their inverses. -/
+@[reassoc]
+lemma pfComp'_assoc_inv_app (f : X ⟶ Y) (g : Y ⟶ Z) (h : Z ⟶ W) (fg : X ⟶ Z) (gh : Y ⟶ W)
+    (fgh : X ⟶ W) (hfg : f ≫ g = fg) (hgh : g ≫ h = gh) (hfgh : fg ≫ h = fgh)
+    (h' : f ≫ gh = fgh) (M : F.obj X) :
+    (F.pfComp' g h gh hgh).inv.app ((F.pf f).obj M) ≫ (F.pfComp' f gh fgh h').inv.app M =
+      (F.pf h).map ((F.pfComp' f g fg hfg).inv.app M) ≫ (F.pfComp' fg h fgh hfgh).inv.app M := by
+  have := congr_app (F.pfComp'_assoc f g h fg gh fgh hfg hgh hfgh) M
+  simp only [NatTrans.comp_app, Functor.whiskerRight_app, Functor.associator_hom_app,
+    Functor.whiskerLeft_app, Category.comp_id, Functor.comp_obj] at this
+  rw [← cancel_epi ((F.pfComp' g h gh hgh).hom.app ((F.pf f).obj M)),
+    ← cancel_epi ((F.pfComp' f gh fgh h').hom.app M)]
+  simp only [Iso.hom_inv_id_app_assoc, Iso.hom_inv_id_app]
+  rw [← reassoc_of% this]
+  simp [← Functor.map_comp_assoc]
+
 end Pushforward
 
 end AlgebraicGeometry.CompactSupportFormalism
