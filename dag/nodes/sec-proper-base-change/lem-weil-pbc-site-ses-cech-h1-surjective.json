@@ -176,5 +176,23 @@
   "item": "lem-weil-pbc-site-ses-cech-h1-surjective",
   "worker": "stage1",
   "summary": "Statement checked against Stacks sites-cohomology Lemma 03F8 (any site; cofinal system of coverings of U with vanishing Cech H^1 of F): kept; stmt_deps unchanged. Proof written from Stacks' proof in six steps, the structure of the reviewed etale version lem-weil-pbc-ses-cech-h1-surjective with the etale-only nodes replaced: (1) exactness (def-weil-pbc-exact-sequence) gives epi and sectionwise kernel via the general-site Mathlib leaf lem-weil-pbc-sheafification-exact part 1 (sheafToPresheaf preserves limits); (2) local lifts by the new general-site Mathlib leaf lem-weil-pbc-site-abelian-sheaf-epi-locally-surjective (Stacks 03CN(5)/00WM/00WN; Sheaf.isLocallySurjective_iff_epi' EpiMono.lean:124 with Precoverage.mem_toGrothendieck_iff_of_isStableUnderComposition PrecoverageToGrothendieck.lean:166 for the covering-family form); (3) refinement into Sigma (elementary); (4) the Cech 1-cocycle of differences with the sign convention of def-weil-pbc-site-cech-complex written out (elementary); (5) correction by a 0-cochain (elementary); (6) gluing by the sheaf condition of G (choice of fibre products irrelevant) and separatedness of H (elementary). Mathlib has no version of the lemma (two further searches added: loogle \"cech\", leansearch). Source repository: TopCat.Presheaf.surjective_app_of_exactAt_cechComplex_one (WeilConjectures/Topology/Sheaves/CechCriterion.lean:231) and TopCat.Sheaf.surjective_app_of_exactAt_cechComplex (:306) are sorry-free (sorry map: no sorry reachable) but are the topological finite-open-cover analogue, not a site statement: no attachment."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.SiteSesCechH1Surjective",
+  "declaration": "CategoryTheory.surjective_sections_of_site_cech_h1_vanishing",
+  "file": "lean/Sheaf/CategoryTheory/SiteSesCechH1Surjective.lean",
+  "statement": "theorem surjective_sections_of_site_cech_h1_vanishing (C : Type u) [Category.{v} C] (J : Precoverage C) [J.HasIsos] [J.IsStableUnderComposition] [J.IsStableUnderBaseChange] [J.HasPullbacks] (S : ShortComplex (Sheaf J.toGrothendieck AddCommGrpCat.{max u v r})) (hS : S.ShortExact) (U : C) (Cov : ∀ (I : Type (max u v w)) (V : I → C) (f : ∀ i, V i ⟶ U), Prop) (hcover : ∀ (I : Type (max u v w)) (V : I → C) (f : ∀ i, V i ⟶ U), Cov I V f → Presieve.ofArrows V f ∈ J U) (hcofinal : ∀ (I : Type (max u v w)) (V : I → C) (f : ∀ i, V i ⟶ U), Presieve.ofArrows V f ∈ J U → ∃ (K : Type (max u v w)) (W : K → C) (g : ∀ k, W k ⟶ U), Cov K W g ∧ ∀ k, ∃ (i : I) (t : W k ⟶ V i), t ≫ f i = g k) (hcech : ∀ (I : Type (max u v w)) (V : I → C) (f : ∀ i, V i ⟶ U), Cov I V f → ∀ (T : SiteCechComplex V f), IsZero ((T.cohomologyFunctor 1).obj S.X₁.1)) : Function.Surjective (S.g.hom.app (op U))",
+  "branch": "sheaf-dag",
+  "by": "G1",
+  "date": "2026-10-12",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "G1",
+  "result": "pass",
+  "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
  }
 }
