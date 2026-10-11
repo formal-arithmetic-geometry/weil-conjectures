@@ -1,11 +1,11 @@
 # Work queue
 
-969 items; claim with `tools/claim.py next <group> [--stage N]`.
+965 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (969)
+## Stage 2: nodes to state (965)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -15,13 +15,11 @@
 | `def-weil-pbc-etale-sheaves` | 1 | state |
 | `def-weil-pbc-formal-glueing-data` | 1 | state |
 | `lem-exc-discrete-modules-abelian` | 1 | state |
-| `lem-exc-discrete-modules-abelian-structure` | 1 | state |
 | `lem-exc-etale-sheaves-gsets-point` | 1 | state |
 | `lem-exc-rg-discrete-modules-functorial-injective-embeddings` | 1 | state |
 | `lem-exc-rg-open-stabilizer-adjoint` | 1 | state |
 | `lem-fin-etale-normal-components` | 1 | state |
 | `lem-fin-normal-generic-constant` | 1 | state |
-| `lem-galois-descent` | 1 | state |
 | `lem-galois-fpqc-pullback-canonical-iso` | 1 | state |
 | `lem-pc-balanced-derived-tensor-model` | 1 | state |
 | `lem-pc-derived-adjoint-functors` | 1 | state |
@@ -36,7 +34,6 @@
 | `lem-pc-module-filtered-colimits-tensor` | 1 | state |
 | `lem-pc-module-pullback-adjunction` | 1 | state |
 | `lem-pc-module-pullback-identity-composition` | 1 | state |
-| `lem-pc-nonzero-section-integral-cartier` | 1 | state |
 | `lem-pc-pre-derived-adjoint-functors-general` | 1 | state |
 | `lem-pc-presheaf-module-inverse-image-adjunction` | 1 | state |
 | `lem-pc-right-localization-hom-colimit` | 1 | state |
@@ -50,7 +47,6 @@
 | `lem-pod-etale-stalk-tensor-scalar` | 1 | state |
 | `lem-pod-lisse-tensor-and-scalar-extension` | 1 | state |
 | `lem-pur-kinjective-degreewise-existence` | 1 | state |
-| `lem-pur-kinjective-functorial-homotopies` | 1 | state |
 | `lem-pur-kinjective-functorial-injective` | 1 | state |
 | `lem-pur-kinjective-homotopy-limit-vanishing` | 1 | state |
 | `lem-pur-kinjective-set-iso-classes-bounded-size` | 1 | state |
