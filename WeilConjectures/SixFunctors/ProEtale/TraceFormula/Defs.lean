@@ -563,7 +563,8 @@ the identification `Rf_* = Rf_!` for proper `f`, composition of exceptional dire
 for `DerivedBraiding`, and the invertibility of two canonical maps: the biduality map
 `K ⟶ D_X D_X K` on `Dᵇctf`, and the Künneth-Verdier map `kunnethVerdierMapOf`. The
 identity isomorphism `R(𝟙 X)_! ≃ 𝟭` is tied to `lowerShriekComp` by unit axioms, and
-`lowerShriekComp` is associative;
+`lowerShriekComp` is associative; `properComparison` and `lowerShriekComp` commute with the
+shifts;
 `properComparison`, `dualizingBase`, `dualizingComp` and the unit of `Lf^*` are tied to the
 identity isomorphisms at `f = 𝟙`; `properComparison` and `dualizingComp`
 are compatible with composition, and `baseChange` with vertical pasting.

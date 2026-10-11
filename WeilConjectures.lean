@@ -1679,6 +1679,7 @@ public import WeilConjectures.SixFunctors.ProEtale.Derived.OpenImmersionLowerShr
 public import WeilConjectures.SixFunctors.ProEtale.Derived.OpenImmersionLowerShriekProjection
 public import WeilConjectures.SixFunctors.ProEtale.Derived.Perfect
 public import WeilConjectures.SixFunctors.ProEtale.Derived.ProjectionFormula
+public import WeilConjectures.SixFunctors.ProEtale.Derived.Shift
 public import WeilConjectures.SixFunctors.ProEtale.Derived.Stability
 public import WeilConjectures.SixFunctors.ProEtale.Derived.Tensor
 public import WeilConjectures.SixFunctors.ProEtale.Derived.TensorResolution
@@ -1709,6 +1710,7 @@ public import WeilConjectures.SixFunctors.ProEtale.TraceFormula.Correspondence
 public import WeilConjectures.SixFunctors.ProEtale.TraceFormula.Curve
 public import WeilConjectures.SixFunctors.ProEtale.TraceFormula.Defs
 public import WeilConjectures.SixFunctors.ProEtale.TraceFormula.Frobenius
+public import WeilConjectures.SixFunctors.ProEtale.TraceFormula.GlobalOperator
 public import WeilConjectures.SixFunctors.ProEtale.TraceFormula.Localization
 public import WeilConjectures.SixFunctors.ProEtale.TraceFormula.Main
 public import WeilConjectures.SixFunctors.ProEtale.TraceFormula.Pairing

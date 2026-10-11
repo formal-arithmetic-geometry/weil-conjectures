@@ -25,6 +25,9 @@ pushforward `RΓ_c(C, Rc₁^! K) ⟶ RΓ_c(X, K)`. We record the properties of t
 
 ## Main results
 
+- `AlgebraicGeometry.ProEtale.GeometricOperations.properPullback_comp`,
+  `AlgebraicGeometry.ProEtale.GeometricOperations.properPullback_commShift`: the proper pullback
+  is compatible with composition and commutes with the shifts.
 - `AlgebraicGeometry.ProEtale.Correspondence.globalOperator_naturality`: the global operator is
   natural in the pair `(u, K)` (blueprint `lem-trf-global-operator-naturality`).
 - `AlgebraicGeometry.ProEtale.Correspondence.ctf_globalOperator`: every intermediate complex of
@@ -36,6 +39,11 @@ pushforward `RΓ_c(C, Rc₁^! K) ⟶ RΓ_c(X, K)`. We record the properties of t
   a graph correspondence `(1, h)` is the proper pullback along `h` followed by `RΓ_c(X, v)`; it
   is functorial in `(K, v)` and compatible with composition of proper endomorphisms
   (blueprint `prop-trf-graph-operator`).
+- `AlgebraicGeometry.ProEtale.Correspondence.exists_triangleHom_globalOperator_ofGraph`: the
+  global operators of graph correspondences are additive in triangles
+  (blueprint `prop-trf-graph-operator`).
+- `AlgebraicGeometry.ProEtale.Correspondence.globalOperator_add`: the global operator is
+  additive in the coefficient map.
 -/
 
 @[expose] public section
@@ -48,7 +56,7 @@ namespace AlgebraicGeometry.ProEtale
 
 variable {A : Type u'} [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
   [MonoidalCategory A] [MonoidalPreadditive A] [SymmetricCategory A] [MonoidalClosed A]
-  [Abelian.HasFunctorialFlatResolution A] [Etale.HasBoundedBelowUpperShrieks A]
+  [Abelian.HasFunctorialFlatResolution A]
   {FA : A → A → Type (u + 1)} {CA : A → Type (u + 1)}
   [∀ X Y, FunLike (FA X Y) (CA X) (CA Y)] [ConcreteCategory.{u + 1} A FA] {s : Scheme.{u}}
 
@@ -79,6 +87,32 @@ lemma ctfLowerShriekCongr_inv_app_hom {X Y : Scheme.{u}} {f g : X ⟶ Y} (e : f 
       (rightDerivedLowerShriekCongr A e).inv.app M.obj := by
   subst e
   rfl
+
+/-- The unit of `L(f ≫ g)^* ⊣ R(f ≫ g)_*` is the composite of the units of `Lg^* ⊣ Rg_*` and
+`Lf^* ⊣ Rf_*`, read through `L(f ≫ g)^* ≃ Lg^* ⋙ Lf^*` and its conjugate
+`R(f ≫ g)_* ≃ Rf_* ⋙ Rg_*`. -/
+lemma derivedUpperStarLowerStarAdjunction_comp_unit_app {X Y Z : Scheme.{u}} (f : X ⟶ Y)
+    (g : Y ⟶ Z) (K : DerivedCategory (Sheaf (Scheme.ProEt.topology Z) A)) :
+    (derivedUpperStarLowerStarAdjunction A (f ≫ g)).unit.app K =
+      (derivedUpperStarLowerStarAdjunction A g).unit.app K ≫
+        ((lowerStar A g).rightDerivedFunctor).map
+          ((derivedUpperStarLowerStarAdjunction A f).unit.app
+            (((upperStar A g).leftDerivedFunctor).obj K)) ≫
+        ((lowerStar A g).rightDerivedFunctor).map (((lowerStar A f).rightDerivedFunctor).map
+          ((leftDerivedUpperStarComp A f g).inv.app K)) ≫
+        (conjugateIsoEquiv (derivedUpperStarLowerStarAdjunction A (f ≫ g))
+          ((derivedUpperStarLowerStarAdjunction A g).comp
+            (derivedUpperStarLowerStarAdjunction A f))
+          (leftDerivedUpperStarComp A f g).symm).inv.app
+            (((upperStar A (f ≫ g)).leftDerivedFunctor).obj K) := by
+  rw [← cancel_mono ((conjugateIsoEquiv (derivedUpperStarLowerStarAdjunction A (f ≫ g))
+    ((derivedUpperStarLowerStarAdjunction A g).comp (derivedUpperStarLowerStarAdjunction A f))
+    (leftDerivedUpperStarComp A f g).symm).hom.app _)]
+  simp only [Category.assoc, Iso.inv_hom_id_app]
+  rw [conjugateIsoEquiv_apply_hom, unit_conjugateEquiv, Adjunction.comp_unit_app]
+  simp
+
+variable [Etale.HasBoundedBelowUpperShrieks A]
 
 namespace GeometricOperations
 
@@ -189,30 +223,6 @@ lemma properComparison_inv_commShift (f : X ⟶ Y) (hf : IsGeometricHom s f)
   simp
 end Naturality
 
-/-- The unit of `L(f ≫ g)^* ⊣ R(f ≫ g)_*` is the composite of the units of `Lg^* ⊣ Rg_*` and
-`Lf^* ⊣ Rf_*`, read through `L(f ≫ g)^* ≃ Lg^* ⋙ Lf^*` and its conjugate
-`R(f ≫ g)_* ≃ Rf_* ⋙ Rg_*`. -/
-lemma derivedUpperStarLowerStarAdjunction_comp_unit_app {X Y Z : Scheme.{u}} (f : X ⟶ Y)
-    (g : Y ⟶ Z) (K : DerivedCategory (Sheaf (Scheme.ProEt.topology Z) A)) :
-    (derivedUpperStarLowerStarAdjunction A (f ≫ g)).unit.app K =
-      (derivedUpperStarLowerStarAdjunction A g).unit.app K ≫
-        ((lowerStar A g).rightDerivedFunctor).map
-          ((derivedUpperStarLowerStarAdjunction A f).unit.app
-            (((upperStar A g).leftDerivedFunctor).obj K)) ≫
-        ((lowerStar A g).rightDerivedFunctor).map (((lowerStar A f).rightDerivedFunctor).map
-          ((leftDerivedUpperStarComp A f g).inv.app K)) ≫
-        (conjugateIsoEquiv (derivedUpperStarLowerStarAdjunction A (f ≫ g))
-          ((derivedUpperStarLowerStarAdjunction A g).comp
-            (derivedUpperStarLowerStarAdjunction A f))
-          (leftDerivedUpperStarComp A f g).symm).inv.app
-            (((upperStar A (f ≫ g)).leftDerivedFunctor).obj K) := by
-  rw [← cancel_mono ((conjugateIsoEquiv (derivedUpperStarLowerStarAdjunction A (f ≫ g))
-    ((derivedUpperStarLowerStarAdjunction A g).comp (derivedUpperStarLowerStarAdjunction A f))
-    (leftDerivedUpperStarComp A f g).symm).hom.app _)]
-  simp only [Category.assoc, Iso.inv_hom_id_app, Category.comp_id]
-  rw [conjugateIsoEquiv_apply_hom, unit_conjugateEquiv, Adjunction.comp_unit_app]
-  simp
-
 section ProperPullback
 
 variable {X X' X'' : Scheme.{u}} {aX : X ⟶ s} {aX' : X' ⟶ s} {aX'' : X'' ⟶ s}
@@ -257,13 +267,14 @@ lemma properPullback_naturality (h : X' ⟶ X) [IsProper h] (hh : h ≫ aX = aX'
   rw [← G.lowerShriekComp_hom_app_naturality h aX _ _ _
       (M' := ⟨_, G.ctf_upperStar h (.mk (aY := aX) rfl) hK'⟩),
     ← Functor.map_comp_assoc, ← Functor.map_comp_assoc, Category.assoc,
-    ← G.properComparison_inv_app_naturality h _ (M' := ⟨_, G.ctf_upperStar h (.mk (aY := aX) rfl) hK'⟩),
+    ← G.properComparison_inv_app_naturality h _
+      (M' := ⟨_, G.ctf_upperStar h (.mk (aY := aX) rfl) hK'⟩),
     ← Category.assoc, (derivedUpperStarLowerStarAdjunction A h).unit_naturality]
-  simp only [Functor.id_obj, Functor.id_map, Functor.comp_obj, Functor.map_comp, Category.assoc]
+  simp only [Functor.comp_obj, Functor.map_comp, Category.assoc]
 
+set_option maxHeartbeats 400000 in
 -- the composite of the two proper pullbacks is a long chain of morphisms between objects of
 -- `Dᵇctf`, whose types are only defeq after unfolding the functors on `Dᵇctf`
-set_option maxHeartbeats 400000 in
 /-- The proper pullback is compatible with composition: for proper `h : X' ⟶ X` and
 `h' : X'' ⟶ X'`, the pullback along `h' ≫ h` is the pullback along `h` followed by the
 pullback along `h'`, read through `Lh'^* Lh^* K ≃ L(h' ≫ h)^* K`. -/
@@ -295,7 +306,7 @@ theorem properPullback_comp (h : X' ⟶ X) (h' : X'' ⟶ X') [IsProper h] [IsPro
     Functor.map_comp_assoc (rightDerivedLowerShriek A h),
     G.lowerShriekComp_hom_app_naturality h' h _ _ _ (M := ⟨_, hN⟩) (M' := ⟨_, hM⟩)]
   simp only [Functor.map_comp, Category.assoc]
-  haveI : HasCompactification ((h' ≫ h) ≫ aX) := .of_eq (Category.assoc _ _ _).symm
+  have : HasCompactification ((h' ≫ h) ≫ aX) := .of_eq (Category.assoc _ _ _).symm
   rw [G.lowerShriekComp_hom_app_naturality (h' ≫ h) aX _ _ _ (M := ⟨_, hN⟩) (M' := ⟨_, hM⟩)]
   rw [reassoc_of% (G.lowerShriekComp_assoc h' h aX (.mk (aY := h ≫ aX) rfl) (.mk (aY := aX) rfl)
     (.of_isGeometric aX) (.mk (aY := aX) rfl) (.of_isGeometric (h ≫ aX))
@@ -349,7 +360,8 @@ lemma properPullback_commShift (h : X' ⟶ X) [IsProper h] (hh : h ≫ aX = aX')
   have hL : G.ctf X' (((upperStar A h).leftDerivedFunctor).obj K) :=
     G.ctf_upperStar h (.mk (aY := aX) rfl) hK
   have hLn : G.ctf X' (((upperStar A h).leftDerivedFunctor).obj (K⟦n⟧)) :=
-    G.ctf_upperStar h (.mk (aY := aX) rfl) (ProEtale.DerivedCategory.constructibleFiniteTor.shift hK n)
+    G.ctf_upperStar h (.mk (aY := aX) rfl)
+      (ProEtale.DerivedCategory.constructibleFiniteTor.shift hK n)
   have u := (derivedUpperStarLowerStarAdjunction A h).unit_app_commShiftIso_hom_app ℤ n K
   rw [Functor.commShiftIso_comp_hom_app] at u
   have key : (derivedUpperStarLowerStarAdjunction A h).unit.app (K⟦n⟧) ≫
@@ -523,6 +535,19 @@ theorem globalOperator_naturality (c : Correspondence aX aX K K) [IsGeometric c.
   rw [← G.exceptionalPushforward_naturality, ← Functor.map_comp_assoc, w,
     Functor.map_comp_assoc, G.properPullback_naturality_assoc]
 
+/-- The global operator is additive in the coefficient map: for coefficient maps `u` and `u'`
+on the same support and legs, `T_c(u + u') = T_c(u) + T_c(u')` (the additivity in `u` recorded
+in blueprint `rem-ptr-trf-global-operator-7`). -/
+theorem globalOperator_add (c : Correspondence aX aX K K) [IsGeometric c.str] [IsProper c.snd]
+    [HasCompactification c.str] (hK : G.ctf X K)
+    (u u' : ((upperStar A c.snd).leftDerivedFunctor).obj K ⟶
+      (rightDerivedUpperShriek A c.fst).obj K) :
+    globalOperator G { c with coeff := u + u' } hK =
+      globalOperator G { c with coeff := u } hK + globalOperator G { c with coeff := u' } hK := by
+  simp only [globalOperator, globalOperatorUnit_eq, globalOperatorCounit_eq, Functor.map_add,
+    Preadditive.add_comp, Preadditive.comp_add]
+
+omit [HasCompactification aX] in
 /-- Blueprint `lem-trf-global-operator-perfect`: every intermediate complex of the composite
 defining the global operator `T_c(u)` is compactly supported cohomology of an object of
 `Dᵇctf`: the coefficient complexes `Lc₂^* K`, `Rc₂_* Lc₂^* K`, `Rc₂_! Lc₂^* K`, `Rc₁^! K` and
@@ -580,7 +605,8 @@ theorem globalOperator_ofGraph_naturality (g : X ⟶ X) (hg : g ≫ aX = aX) [Is
     (v' : ((upperStar A g).leftDerivedFunctor).obj K' ⟶ K') (φ : K ⟶ K')
     (w : ((upperStar A g).leftDerivedFunctor).map φ ≫ v' = v ≫ φ) :
     globalOperator G (ofGraph G aX K hK g hg v) hK ≫ (rightDerivedLowerShriek A aX).map φ =
-      (rightDerivedLowerShriek A aX).map φ ≫ globalOperator G (ofGraph G aX K' hK' g hg v') hK' := by
+      (rightDerivedLowerShriek A aX).map φ ≫
+        globalOperator G (ofGraph G aX K' hK' g hg v') hK' := by
   rw [globalOperator_ofGraph, globalOperator_ofGraph, Category.assoc, ← Functor.map_comp, ← w,
     Functor.map_comp, G.properPullback_naturality_assoc]
 

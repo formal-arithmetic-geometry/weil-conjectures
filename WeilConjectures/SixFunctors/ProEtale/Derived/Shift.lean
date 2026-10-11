@@ -11,7 +11,7 @@ public import WeilConjectures.SixFunctors.ProEtale.Derived.TorAmplitude
 public import WeilConjectures.SixFunctors.ProEtale.Derived.UpperLowerStar
 
 /-!
-# Compatibility of the pro-étale derived functors with shifts
+# Compatibility of the pro-étale derived functors with shifts, and their additivity
 
 The derived pullback, pushforward and lower shriek on the unbounded derived categories of
 pro-étale sheaves commute with the shift functors, and `Dᵇctf(X, A)` is stable under shifts:
@@ -22,6 +22,8 @@ pro-étale sheaves commute with the shift functors, and `Dᵇctf(X, A)` is stabl
   inherits the structure by `Adjunction.rightAdjointCommShift`, compatibly with the adjunction;
 * `Rf_! = D(i_!) ⋙ R(g_*)` for the chosen compactification `(i, g)` is a composite of two
   functors commuting with shifts.
+
+The same descriptions show that the three functors are additive.
 
 ## Main definitions
 
@@ -79,6 +81,23 @@ noncomputable instance commShiftRightDerivedLowerShriek {X Y : Scheme.{u}} (f : 
     [HasCompactification f] : (R(f)_![A]).CommShift ℤ :=
   inferInstanceAs ((D(((HasCompactification.compactification f).i)_!open[A]) ⋙
     R(((HasCompactification.compactification f).g)_*[A])).CommShift ℤ)
+
+/-- The derived pullback `Lg^*` is additive, being isomorphic to the functor `D(g^*)` induced by
+the exact pullback. -/
+instance additive_leftDerivedUpperStar {Z Y : Scheme.{u}} (g : Z ⟶ Y) :
+    (L((g)^*[A])).Additive :=
+  Functor.additive_of_iso (leftDerivedUpperStarIsoMapDerivedCategory A g).symm
+
+/-- The total right derived pushforward `Rg_*` is additive, being right adjoint to `Lg^*`. -/
+instance additive_rightDerivedLowerStar {Z Y : Scheme.{u}} (g : Z ⟶ Y) :
+    (R((g)_*[A])).Additive :=
+  (derivedUpperStarLowerStarAdjunction A g).right_adjoint_additive
+
+/-- The derived lower shriek `Rf_! = D(i_!) ⋙ R(g_*)` is additive. -/
+instance additive_rightDerivedLowerShriek {X Y : Scheme.{u}} (f : X ⟶ Y)
+    [HasCompactification f] : (R(f)_![A]).Additive :=
+  inferInstanceAs ((D(((HasCompactification.compactification f).i)_!open[A]) ⋙
+    R(((HasCompactification.compactification f).g)_*[A])).Additive)
 
 variable {FA : A → A → Type (u + 1)} {CA : A → Type (u + 1)}
   [∀ X Y, FunLike (FA X Y) (CA X) (CA Y)] [ConcreteCategory.{u + 1} A FA]
