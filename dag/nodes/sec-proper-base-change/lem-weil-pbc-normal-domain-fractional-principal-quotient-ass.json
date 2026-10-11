@@ -142,5 +142,24 @@
   "group": "C1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of C1; spot-checked by L: L: 031T (3) by the embedding A/J into A/aA and the height-one node"
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.FractionalPrincipalQuotientAssociatedPrimes",
+  "declaration": "Ideal.associatedPrimes_fractionalPrincipalQuotient",
+  "file": "lean/Sheaf/RingTheory/FractionalPrincipalQuotientAssociatedPrimes.lean",
+  "statement": "theorem associatedPrimes_fractionalPrincipalQuotient (A : Type u) [CommRing A] [IsNoetherianRing A] [IsDomain A] [IsIntegrallyClosed A] (K : Type v) [Field K] [Algebra A K] [IsFractionRing A K] (y : K) (hy : y ≠ 0) : ∀ p ∈ associatedPrimes A (A ⧸ (Submodule.span A ({y} : Set K)).comap (Algebra.linearMap A K)), p ∈ Ideal.minimalPrimes ((Submodule.span A ({y} : Set K)).comap (Algebra.linearMap A K)) ∧ p.height = 1",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-nfq1156"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-nfq1156",
+  "group": "F1",
+  "result": "fix",
+  "note": "A: CommRing+IsNoetherianRing+IsDomain+IsIntegrallyClosed (NORMAL RING domain form); K: Field+Algebra+IsFractionRing; y≠0; J=A∩yA as comap (Algebra.linearMap A K) (A∙y) (membership ↔ ∃b, a=y·b checked by simp); associated primes = associatedPrimes (isAssociatedPrime_iff under Noetherian); no embedded = p ∈ Ideal.minimalPrimes J; height = p.height = 1 as in landed sibling; FIX: let J inlined (J1 c634916b4 rule)"
  }
 }
