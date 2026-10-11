@@ -117,5 +117,23 @@
   "group": "J1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-asl2106 (reviewer sub-agent of L); spot-checked: Not a single Mathlib fact: Mathlib Tilde.lean:179 gives Gamma(D(f)) = M_f for f in R only; the item composes it with B(x)_A A_a = B_b (cited leaf lem-weil-pbc-localization-base-change) and M(x)_A A_a = M_b (Step 3, elementary: M(x)_A A_a = M(x)_B (B(x)_A A_a) = M(x)_B B_b = M_b), so the 3-step split citing both leaves stands; C1/C4/C5 checked (leaf mathlib_match Tilde.lean:150/170/175/179 read), D: steps prove the statement, no cycle; E: hypotheses (M a B-module, b image of a) fine. Second reading missed no mathematical fault; its claim to have filled blueprint.from/same_as is not borne out (both still null/empty), cosmetic only."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AssociatedSectionsLocalize",
+  "declaration": "AlgebraicGeometry.associated_sections_localize",
+  "file": "lean/Sheaf/AlgebraicGeometry/AssociatedSectionsLocalize.lean",
+  "statement": "theorem associated_sections_localize {A : Type v} [CommRing A] {B : CommRingCat.{u}} (φ : A →+* B) (M : ModuleCat.{u} B) (a : A) : ∃ e : ((ModuleCat.restrictScalars φ).obj M ⊗[A] Localization.Away a) ≃ₗ[A] (ModuleCat.restrictScalars φ).obj ((modulesSpecToSheaf.obj (tilde M)).presheaf.obj (op (PrimeSpectrum.basicOpen (φ a)))), ∀ m : M, e (m ⊗ₜ[A] (1 : Localization.Away a)) = tilde.toOpen M (PrimeSpectrum.basicOpen (φ a)) m",
+  "branch": "sheaf-dag",
+  "by": "V1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-asl",
+  "group": "V1",
+  "result": "pass",
+  "note": "A->B as phi : A →+* B (A Type v, B CommRingCat.{u}), arbitrary M : ModuleCat B, a : A; Mathlib tilde M; Spec(B⊗A_a) = D(phi a) = preimage of D(a) (proof step 1, consumer pqf-lem-pushforward-qcoh uses Γ(f⁻¹D(a))); sections = codomain of tilde.toOpen; M⊗_A A_a via restrictScalars phi ⊗ Localization.Away a; A-linear e with e(m⊗1)=tilde.toOpen m pins the canonical restriction map (a invertible on target); no inline instances/notation; recompiled 2.1 s"
  }
 }
