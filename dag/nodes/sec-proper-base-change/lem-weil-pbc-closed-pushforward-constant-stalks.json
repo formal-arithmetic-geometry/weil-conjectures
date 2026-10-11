@@ -24,7 +24,8 @@
  },
  "stmt_deps": [
   "def-weil-pbc-category-colimit",
-  "def-weil-pbc-sites-and-cohomology"
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-pbc-closed-pushforward-constant-presheaf"
  ],
  "proof": [
   {
@@ -129,5 +130,23 @@
   "group": "C1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of C1; spot-checked by L: L read the three steps and both children (locally constant maps form a sheaf; germ evaluation bijective); stalk off C is a singleton via the complement."
+ },
+ "lean": {
+  "module": "Sheaf.Topology.ClosedPushforwardConstantStalks",
+  "declaration": "TopCat.closed_pushforward_constant_stalks",
+  "file": "lean/Sheaf/Topology/ClosedPushforwardConstantStalks.lean",
+  "statement": "theorem closed_pushforward_constant_stalks (X : TopCat.{w}) (C : Set X) (hC : IsClosed C) (R : Type w) : (closedPushforwardConstantPresheaf X C R).IsSheaf ∧ (∀ (x : X) (hxC : x ∈ C), ∃ ev : (closedPushforwardConstantPresheaf X C R).stalk x → R, (∀ (V : Opens X) (hxV : x ∈ V) (g : LocallyConstant {y : X // y ∈ V ∧ y ∈ C} R), ev ((closedPushforwardConstantPresheaf X C R).germ V x hxV g) = g ⟨x, hxV, hxC⟩) ∧ Function.Bijective ev ∧ (∀ ev' : (closedPushforwardConstantPresheaf X C R).stalk x → R, (∀ (V : Opens X) (hxV : x ∈ V) (g : LocallyConstant {y : X // y ∈ V ∧ y ∈ C} R), ev' ((closedPushforwardConstantPresheaf X C R).germ V x hxV g) = g ⟨x, hxV, hxC⟩) → ev' = ev)) ∧ (∀ (x : X), x ∉ C → Nonempty ((closedPushforwardConstantPresheaf X C R).stalk x) ∧ Subsingleton ((closedPushforwardConstantPresheaf X C R).stalk x))",
+  "branch": "sheaf-dag",
+  "by": "J1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-cps",
+  "group": "J1",
+  "result": "pass",
+  "note": "T=X:TopCat, C closed, R:Type; L=closedPushforwardConstantPresheaf (LocallyConstant on V∩C subtype, comap restriction; new def node, no landed/Mathlib named form, siblings only inline lets); (0) IsSheaf; (a) ∃ ev on stalk with ev(germ g)=g x, Bijective, unique among all ev'; (b) off C Nonempty ∧ Subsingleton; check_dag clean for new node"
  }
 }

@@ -1,0 +1,106 @@
+{
+ "id": "def-weil-pbc-closed-pushforward-constant-presheaf",
+ "kind": "definition",
+ "title": "Section presheaf of a constant sheaf pushed forward from a closed subset",
+ "status": "split",
+ "statement": "Let $X$ be a topological space, $C\\subseteq X$ a subset and $R$ a set. Define the presheaf of sets [def-weil-pbc-sites-and-cohomology] $L_{C,R}$ by $L_{C,R}(V)=\\{\\text{locally constant maps }V\\cap C\\to R\\}$ for every open $V\\subseteq X$, with the subspace topology on $V\\cap C$ and restriction of functions as transition maps. When $C$ is closed this is the section presheaf of the direct image of the constant sheaf on $C$.",
+ "stmt_deps": [
+  "def-weil-pbc-sites-and-cohomology"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sheaves.tex",
+  "place": "Definition Tag 006W and Lemma Tag 00AE: sectionwise description of the closed direct image of the constant sheaf"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "presheaf locally constant maps on intersection with closed subset",
+   "results": "Service unavailable: Internal Server Error.",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Stalks of pushforward of constant sheaf along closed subset are the set on the subset and singleton outside",
+   "results": "Eight hits: skyscraper constructions and TopCat.stalkToFiber; no section presheaf of locally constant maps on V intersect C.",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "TopCat.Presheaf.stalkPushforward, TopCat.locallyConstant",
+   "results": "No hits; unknown identifier TopCat.locallyConstant.",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "closed.*[Pp]ush|[Ll]ocally[Cc]onstant in Mathlib/Topology/Sheaves; closed.*pushforward.*constant in WeilConjectures; locallyConstant|locally_constant|LocallyConstant in lean/Sheaf/Topology",
+   "results": "Mathlib: no hits. Upstream: no matching closed pushforward constant definition. Sheaf: inline presheaves in ClosedPushforwardConstantRestriction and InverseImageClosedPushforwardConstant, not reusable named definitions. LocallyConstantGermEvaluation is on the whole space.",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-closed-pushforward-constant-stalks",
+  "date": "2026-10-11",
+  "group": "J1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-henselian-idempotent-lifting",
+   "place": "Definition of L(V) in the statement and step 1 of the closed-pushforward constant-stalk lemma",
+   "via": [
+    "lem-weil-pbc-closed-pushforward-constant-stalks",
+    "lem-weil-pbc-inverse-image-closed-pushforward-constant",
+    "lem-weil-pbc-spectral-finite-coequalizer-embeds-constant",
+    "lem-weil-pbc-spectral-sheaf-colimit-constant-embeddings",
+    "lem-weil-pbc-h0-spectral-closed-restriction",
+    "lem-weil-pbc-zariski-h0-proper-henselian-pair"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "module": "Sheaf.Topology.ClosedPushforwardConstantPresheaf",
+  "declaration": "TopCat.closedPushforwardConstantPresheaf",
+  "file": "lean/Sheaf/Topology/ClosedPushforwardConstantPresheaf.lean",
+  "statement": "def closedPushforwardConstantPresheaf (X : TopCat.{u}) (C : Set X) (R : Type u) : X.Presheaf (Type u)",
+  "branch": "sheaf-dag",
+  "by": "J1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-cps",
+  "group": "J1",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-cps",
+  "group": "J1",
+  "result": "pass",
+  "note": "T=X:TopCat, C closed, R:Type; L=closedPushforwardConstantPresheaf (LocallyConstant on V∩C subtype, comap restriction; new def node, no landed/Mathlib named form, siblings only inline lets); (0) IsSheaf; (a) ∃ ev on stalk with ev(germ g)=g x, Bijective, unique among all ev'; (b) off C Nonempty ∧ Subsingleton; check_dag clean for new node"
+ }
+}
