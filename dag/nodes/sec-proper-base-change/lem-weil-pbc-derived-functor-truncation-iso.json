@@ -200,5 +200,27 @@
   "date": "2026-10-09",
   "by": "L",
   "result": "pass"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.RightDerivedFunctorTruncationIso",
+  "declaration": "CategoryTheory.Functor.isIso_homologyFunctor_rightDerivedFunctorPlus_map",
+  "declarations": [
+   "CategoryTheory.Functor.isIso_homologyFunctor_rightDerivedFunctorPlus_map",
+   "CategoryTheory.Functor.isIso_homologyFunctor_rightDerivedFunctorPlus_truncLEι"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/RightDerivedFunctorTruncationIso.lean",
+  "statement": "theorem isIso_homologyFunctor_rightDerivedFunctorPlus_map {A : Type u₁} [Category.{v₁} A] [Abelian A] [IsGrothendieckAbelian.{v₁} A] {B : Type u₂} [Category.{v₂} B] [Abelian B] [IsGrothendieckAbelian.{v₂} B] [HasDerivedCategory.{w₁} A] [HasDerivedCategory.{w₂} B] (v : A ⥤ B) [v.Additive] [PreservesFiniteLimits v] (n : ℤ) {L M : DerivedCategory.Plus A} (c : L ⟶ M) (hiso : ∀ i : ℤ, i ≤ n → IsIso ((DerivedCategory.Plus.homologyFunctor A i).map c)) (hmono : Mono ((DerivedCategory.Plus.homologyFunctor A (n + 1)).map c)) : ∀ j : ℤ, j ≤ n → IsIso ((DerivedCategory.Plus.homologyFunctor B j).map (v.rightDerivedFunctorPlus.map c))",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-dti0945b",
+  "group": "F1",
+  "result": "pass",
+  "note": "A,B Abelian+IsGrothendieckAbelian (both); v Additive+PreservesFiniteLimits (=def-sp-left-exact-additive); Rv = Mathlib rightDerivedFunctorPlus as siblings negative-vanishing/triangulated records; L M : DerivedCategory.Plus A, c; hiso all i<=n, hmono at n+1 via Plus.homologyFunctor; concl forall j<=n IsIso H^j(Rv c); corollary K : Plus A, tau<=n = TStructure.t.onPlus.truncLEι n (no DerivedCategory.truncLE in pinned Mathlib), concl H^n iso; #check'd elaborated statements"
  }
 }
