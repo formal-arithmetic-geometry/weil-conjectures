@@ -192,5 +192,23 @@
   "by": "L",
   "result": "accepted",
   "note": "5 steps following Stacks 009F (1), (3) by the separated-presheaf route: the colimit is the sheafified presheaf colimit (colimit-sheafification leaf, uniqueness of colimits); injective transitions make the coprojections injective and P separated (elementwise leaf (1), (3) and the sheaf axiom); clause (1) from the local-equality clause of the sections-local node; local lifts of a section; over a quasi-compact open a finite subcover, a common index, agreement on overlaps by clause (1), gluing in F_i and in F. Statement: quasi-compact defined inline. No new node."
+ },
+ "lean": {
+  "module": "Sheaf.Topology.SheavesInjectiveDirectedColimitSections",
+  "declaration": "TopCat.sheaves_injective_directedColimit_sections",
+  "file": "lean/Sheaf/Topology/SheavesInjectiveDirectedColimitSections.lean",
+  "statement": "theorem sheaves_injective_directedColimit_sections (X : TopCat.{u}) (I : Type u) [Preorder I] [Nonempty I] [IsDirected I (· ≤ ·)] (D : I ⥤ TopCat.Sheaf (Type u) X) (hinj : ∀ (i i' : I) (h : i ≤ i') (W : Opens X), Function.Injective ((D.map (homOfLE h)).1.app (op W))) (c : Cocone D) (hc : IsColimit c) : (∀ (W : Opens X) (i : I), Function.Injective ((c.ι.app i).1.app (op W))) ∧ (∀ (U : Opens X), IsCompact (U : Set X) → (∀ t : c.pt.obj.obj (op U), ∃ (i : I) (s : (D.obj i).obj.obj (op U)), (c.ι.app i).1.app (op U) s = t) ∧ Function.Bijective (colimit.desc (D ⋙ TopCat.Sheaf.forget (Type u) X ⋙ (evaluation (Opens X)ᵒᵖ (Type u)).obj (op U)) ((TopCat.Sheaf.forget (Type u) X ⋙ (evaluation (Opens X)ᵒᵖ (Type u)).obj (op U)).mapCocone c)))",
+  "branch": "sheaf-dag",
+  "by": "M1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "M1",
+  "result": "pass",
+  "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
  }
 }
