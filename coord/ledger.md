@@ -4392,3 +4392,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 11:09 L: merged deliver/K1/def-weil-pbc-constructible-torsion (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.ConstructibleTorsionCurveSheaf AlgebraicGeometry.CurveCoefficientPair.IsConstructible)
 - 11:09 L: merged deliver/J1/lem-weil-pbc-jacobi-zariski-homology-sequence (stage 2; reviewer PASS; first push; Sheaf.RingTheory.JacobiZariskiHomologySequence Algebra.jacobiZariski_homology_sequence)
 - 11:09 L: merged deliver/C1/pqf-def-quasifinite (stage 2; reviewer FIX; first push; Sheaf.AlgebraicGeometry.QuasiFiniteMorphism AlgebraicGeometry.Scheme.Hom.IsQuasiFiniteAtPoint)
+- 11:09 L: merged deliver/G1/def-exc-etale-algebra-lift (stage 2; reviewer PASS; first push; Sheaf.RingTheory.JacobianPresentationLift Algebra.SquareJacobianPresentation.CoefficientLift.LiftRing)

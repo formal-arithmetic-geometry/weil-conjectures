@@ -85,5 +85,33 @@
   "group": "K1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-eal3026 (reviewer sub-agent of L); spot-checked: Statement byte-identical to sheaf-dag (no E7); matches the construction used by lem-exc-etale-algebra-lift (adjoin t with t*Delta-1, Jacobian Delta^2 is in the lemma, not here); choice of lifts f_i named; localisation at Delta as A[x,t]/(f,t Delta-1) = (A[x]/(f))_Delta, Stacks 00UE/04D1; reduction map well defined since Delta-bar invertible by cited def-exc-jacobian-presentation (attached Algebra.SquareJacobianPresentation, ab952daed); no etaleness or isomorphism smuggled; slopmaster2 grep SquareJacobianPresentation/lift/etaleLift: no lift definition, so no B10 attach. No repairs."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.JacobianPresentationLift",
+  "declaration": "Algebra.SquareJacobianPresentation.CoefficientLift.LiftRing",
+  "declarations": [
+   "Algebra.SquareJacobianPresentation.CoefficientLift",
+   "Algebra.SquareJacobianPresentation.CoefficientLift.jacobianPolynomial",
+   "Algebra.SquareJacobianPresentation.CoefficientLift.liftIdeal",
+   "Algebra.SquareJacobianPresentation.CoefficientLift.LiftRing",
+   "Algebra.SquareJacobianPresentation.CoefficientLift.polynomialReduction",
+   "Algebra.SquareJacobianPresentation.CoefficientLift.liftIdeal_vanish",
+   "Algebra.SquareJacobianPresentation.CoefficientLift.reduction"
+  ],
+  "file": "lean/Sheaf/RingTheory/JacobianPresentationLift.lean",
+  "statement": "abbrev LiftRing : Type u",
+  "branch": "sheaf-dag",
+  "by": "G1",
+  "date": "2026-10-11",
+  "existing": false,
+  "note": "Chosen lifts, the explicit quotient, and its canonical reduction map. The named theorem liftIdeal_vanish postpones only the well-definedness proof of the map; no data is sorry."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-eal1108",
+  "group": "G1",
+  "result": "pass",
+  "note": "A CommRing, I : Ideal A, B̄ = cited Algebra.SquareJacobianPresentation (A⧸I) B (Fin m) (map_eq_id pairs f_i with x_i); chosen lifts = structure CoefficientLift (map_relation: coefficientwise reduction = P.relation i, real constraint); Δ = det(pderiv j f_i); LiftRing = MvPolynomial (Option (Fin m)) A ⧸ span(rename some f_i, X none * Δ - 1), Type u, Algebra A instance via quotient; reduction = Quotient.lift of eval₂Hom (A→A/I→B, x_i↦P.val i, t↦jacobian unit inverse), checked by simp that t ↦ Δ̄⁻¹; no sorry in data (only liftIdeal_vanish); no Mathlib/landed duplicate (SubmersivePresentation.ofHasCoeffs descends, StandardEtalePair univariate); citer lem-exc-etale-algebra-lift can form B^lift/IB^lift → B̄ from reduction; one algebra instance, nothing untied; blueprint tags present"
  }
 }
