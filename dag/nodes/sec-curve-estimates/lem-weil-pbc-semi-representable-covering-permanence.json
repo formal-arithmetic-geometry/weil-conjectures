@@ -135,5 +135,23 @@
   "summary": "Read Stacks 01G4 and its proof, 01G0/01G3 and the proof of 01G1 (fibre products in SR). Rule 0: no slopmaster2 declaration (grep of the id, 'semi-representable', 'SemiRepresentable', '01G4' in WeilConjectures: none); lean_audit none. Proof in four steps: notation (covering = componentwise covering family of X_et, composition law); (1) by the Mathlib leaf lem-weil-pbc-etale-covering-composition plus the reindexing bijection i -> (alpha(i), i) written out (Stacks calls it immediate); (2) fibre product from the Mathlib leaf lem-weil-pbc-semi-representable-finite-limits (2) with X_et's fibre products from def-weil-pbc-etale-site, and the covering property componentwise from the Mathlib leaf lem-weil-pbc-etale-covering-base-change. Statement made precise (not changed in content): (2) now says the fibre product exists and names it as the one of lem-weil-pbc-semi-representable-finite-limits (2), with its index set and projection, so the claim does not depend on a choice of fibre product; stmt_dep lem-weil-pbc-semi-representable-finite-limits added. Stacks proves (1),(2) for SR(C) and transfers to SR(C,X)=SR(C/X); here the site is X_et directly (objects already over X), which is the same thing. No new node; the existing Mathlib searches of the item (three kinds) stand.",
   "blueprint": "lem-weil-pbc-hypercover-refinement, proof, fourth paragraph: 'Previously chosen faces prescribe compatible boundaries; the matching covers of U lift those boundaries after finite refinement': steps 2 (composition of coverings) and 3-4 (base change of coverings) realize the composition and pullback of the one-simplex coverings used there (via lem-weil-pbc-hypercover-finite-simplex-lifting)."
  },
- "reviewed": "2026-10-10 L: 4 steps following 01G4 (componentwise composition via the composition leaf, the fibre product in SR(X) from the finite-limits leaf, base change via the base-change leaf); statement made precise about the fibre product; 0 new nodes"
+ "reviewed": "2026-10-10 L: 4 steps following 01G4 (componentwise composition via the composition leaf, the fibre product in SR(X) from the finite-limits leaf, base change via the base-change leaf); statement made precise about the fibre product; 0 new nodes",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SemiRepresentableCoveringPermanence",
+  "declaration": "AlgebraicGeometry.Scheme.semiRepresentableCovering_comp_baseChange",
+  "file": "lean/Sheaf/AlgebraicGeometry/SemiRepresentableCoveringPermanence.lean",
+  "statement": "theorem semiRepresentableCovering_comp_baseChange {X : Scheme.{u}} {K L : FormalCoproduct.{w} X.Etale} (a : K ⟶ L) (ha : IsSemiRepresentableCovering a) : (∀ {M : FormalCoproduct.{w} X.Etale} (b : L ⟶ M), IsSemiRepresentableCovering b → IsSemiRepresentableCovering (a ≫ b)) ∧ (∀ {L' : FormalCoproduct.{w} X.Etale} (c : L' ⟶ L), IsSemiRepresentableCovering (pullback.fst c a : pullback c a ⟶ L'))",
+  "branch": "sheaf-dag",
+  "by": "G1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "G1",
+  "result": "pass",
+  "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
+ }
 }
