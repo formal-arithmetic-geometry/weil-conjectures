@@ -1,11 +1,11 @@
 # Work queue
 
-135 items; claim with `tools/claim.py next <group> [--stage N]`.
+132 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (135)
+## Stage 2: nodes to state (132)
 
 | node | distance to Mathlib | kind | blockers |
 |---|---|---|---|
@@ -42,7 +42,6 @@
 | `lem-pc-base-change-rhom-perfect` | 1 | state | 0 |
 | `lem-pc-bounded-coherent-finite-tor-proper-pushforward-perfect` | 1 | state | 0 |
 | `lem-pc-derived-direct-image-direct-sums` | 1 | state | 0 |
-| `lem-pc-direct-image-qc-support-reduction` | 1 | state | 0 |
 | `lem-pc-euler-characteristic-well-defined` | 1 | state | 0 |
 | `lem-pc-finite-scheme-cohomology-tensor` | 1 | state | 0 |
 | `lem-pc-genus-well-defined` | 1 | state | 0 |
@@ -72,9 +71,7 @@
 | `lem-sc-affine-rhom-qcoherent` | 1 | state | 0 |
 | `lem-sc-boundary-derivation-square-zero` | 1 | state | 0 |
 | `lem-sc-derived-internal-hom-stalk-localization` | 1 | state | 0 |
-| `lem-sc-ext-coherent-hom-injective-acyclic` | 1 | state | 0 |
 | `lem-sc-ext-sheaf-to-global-spectral-sequence` | 1 | state | 0 |
-| `lem-sc-ext-stalk-localization` | 1 | state | 0 |
 | `lem-sc-ext-support-cohomology-vanishing` | 1 | state | 0 |
 | `lem-sc-finite-affine-derived-equivalence` | 1 | state | 0 |
 | `lem-sc-finite-duality-derived-hom` | 1 | state | 0 |
