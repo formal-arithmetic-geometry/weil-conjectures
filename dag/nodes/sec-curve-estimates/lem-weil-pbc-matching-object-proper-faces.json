@@ -172,5 +172,32 @@
   "summary": "Split following the proof of Stacks 0186 restricted to injective faces: Step 1 factors every proper face as delta_i o psi with psi unique and injective (new Mathlib leaf lem-weil-pbc-simplex-face-factorization, Stacks 0166 proof / 0186 proof); Step 2 the forward map lands in the tuples via the identity delta_j delta_i = delta_i delta_{j-1} (new Mathlib leaf lem-weil-pbc-simplex-face-face-identity, Stacks 0167(1)); Step 3 independence of the factorization via the double factorization through delta_{i,j}, derived from the factorization leaf applied twice plus the identity (instead of a separate 'omitting i and j' lemma); Step 4 compatibility; Step 5 the mutually-inverse/natural check the source leaves to the reader; Step 6 (2) by composing the W-point bijection of lem-weil-pbc-simplicial-matching-object (2) with (1); Step 7 (3) from lem-weil-pbc-simplicial-matching-object (3). Statement unchanged. No Lean on slopmaster2 (grep by id and key words: none). No DAG node for the definition of a limit cone exists; Step 6 uses it as the definition behind def-galois-finite-limits-colimits.",
   "blueprint": "The steps realize, in the blueprint node lem-weil-pbc-hypercover-refinement, proof fourth paragraph ('Previously chosen faces prescribe compatible boundaries; the matching covers of $U$ lift those boundaries'): Steps 1-5 show that compatible boundary data on all proper faces is the same as a compatible tuple of codimension-1 faces, Steps 6-7 that the matching object/matching map of the faces equals the one of all proper faces."
  },
- "reviewed": "2026-10-10 L: 7 steps along Stacks 0186 restricted to injective maps checked (factorization through a face, forward map into the tuples by the face-face identity, inverse map independent of the factorization, compatibility, mutual inverse and naturality written out, parts (2) and (3) from lem-weil-pbc-simplicial-matching-object). Two new Mathlib leaves accepted: lem-weil-pbc-simplex-face-factorization (eq_comp_delta_of_not_surjective' 783, Mono (delta i) 692, Injective.of_comp 203) and lem-weil-pbc-simplex-face-face-identity (delta_comp_delta 240), lines verified. Worker notes: no DAG node defines limit/cone (def-galois-finite-limits-colimits only names them); lem-weil-pbc-simplicial-matching-object (3) can cite the face-face identity at its split."
+ "reviewed": "2026-10-10 L: 7 steps along Stacks 0186 restricted to injective maps checked (factorization through a face, forward map into the tuples by the face-face identity, inverse map independent of the factorization, compatibility, mutual inverse and naturality written out, parts (2) and (3) from lem-weil-pbc-simplicial-matching-object). Two new Mathlib leaves accepted: lem-weil-pbc-simplex-face-factorization (eq_comp_delta_of_not_surjective' 783, Mono (delta i) 692, Injective.of_comp 203) and lem-weil-pbc-simplex-face-face-identity (delta_comp_delta 240), lines verified. Worker notes: no DAG node defines limit/cone (def-galois-finite-limits-colimits only names them); lem-weil-pbc-simplicial-matching-object (3) can cite the face-face identity at its split.",
+ "lean": {
+  "module": "Sheaf.CategoryTheory.ProperFaceMatchingObject",
+  "declaration": "CategoryTheory.SimplicialObject.matching_object_proper_faces_succ_succ",
+  "declarations": [
+   "CategoryTheory.SimplicialObject.properFaceProperty",
+   "CategoryTheory.SimplicialObject.ProperFaceCategory",
+   "CategoryTheory.SimplicialObject.properFace",
+   "CategoryTheory.SimplicialObject.properFaceDiagram",
+   "CategoryTheory.SimplicialObject.matching_object_proper_faces_one",
+   "CategoryTheory.SimplicialObject.matching_object_proper_faces_succ_succ"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/ProperFaceMatchingObject.lean",
+  "statement": "theorem matching_object_proper_faces_succ_succ {C : Type u} [Category.{v} C] [HasFiniteLimits C] (K : SimplicialObject C) (n : ℕ) (c : Cone (matchingBoundaryIndex K n).multicospan) (hc : IsLimit c) (μ : K _⦋n + 2⦌ ⟶ c.pt) (hμ : ∀ i : Fin (n + 3), μ ≫ c.π.app (WalkingMulticospan.left i) = K.δ i) : (∃ E : ∀ W : C, ((Functor.const _).obj W ⟶ properFaceDiagram K (n + 2)) ≃ {x : Fin (n + 3) → (W ⟶ K _⦋n + 1⦌) // ∀ p : (matchingBoundaryShape n).R, x p.val.1 ≫ (matchingBoundaryIndex K n).fst p = x p.val.2 ≫ (matchingBoundaryIndex K n).snd p}, (∀ (W : C) (x : (Functor.const _).obj W ⟶ properFaceDiagram K (n + 2)) (i : Fin (n + 3)), (E W x).val i = x.app (op (properFace (n + 1) i))) ∧ (∀ (W W' : C) (f : W' ⟶ W) (x : (Functor.const _).obj W ⟶ properFaceDiagram K (n + 2)) (i : Fin (n + 3)), (E W' ((Functor.const _).map f ≫ x)).val i = f ≫ (E W x).val i)) ∧ (∃ π : (Functor.const _).obj c.pt ⟶ properFaceDiagram K (n + 2), Nonempty (IsLimit (Cone.mk c.pt π)) ∧ (∀ (a : ProperFaceCategory (n + 2)) (i : Fin (n + 3)) (ε : a.obj.left ⟶ ⦋n + 1⦌), ε ≫ SimplexCategory.δ i = a.obj.hom → π.app (op a) = c.π.app (WalkingMulticospan.left i) ≫ K.map ε.op) ∧ (∀ a : ProperFaceCategory (n + 2), μ ≫ π.app (op a) = K.map a.obj.hom.op) ∧ (∀ μ' : K _⦋n + 2⦌ ⟶ c.pt, (∀ a : ProperFaceCategory (n + 2), μ' ≫ π.app (op a) = K.map a.obj.hom.op) → μ' = μ))",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-11",
+  "existing": false,
+  "note": "The two theorem statements cover degree one and every degree n+2. The definitions construct the index category and diagram explicitly introduced in this node. Matching objects and maps are arbitrary limiting boundary cones and their uniquely prescribed matching maps, using the dependency module, rather than a new choice of matching object."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-mpf",
+  "group": "C1",
+  "result": "pass",
+  "note": "C finite limits, K SimplicialObject; I_n = full subcat of Over [n] (len<n, injective), arrows = commuting triangles; P_n = (iota>>forget).op>>K; (1) cones from W = landed matchingBoundaryIndex tuples via restriction to delta_i, natural in W; (2) one pi on the same vertex, component pr_i>>K(eps) for every factorization, limit; (3) mu components K(delta) + uniqueness; n=1 Fan case; boundary cone/mu bound as in landed MatchingObjectCoskeleton"
+ }
 }
