@@ -6,6 +6,8 @@ Authors: Claude
 module
 
 public import WeilConjectures.SixFunctors.Etale.Derived.AlgebraicClosureStage
+public import WeilConjectures.SixFunctors.Etale.Derived.DerivedComplete
+public import WeilConjectures.SixFunctors.Etale.Derived.Triangulated
 
 /-!
 # Direct images and the transition functors of the `ℚ̄_ℓ` coefficient stage
@@ -118,5 +120,112 @@ lemma derivedLowerStarTransitionIso_hexagon {E L L' : FiniteSubext l} (h : E ≤
     (Functor.rightDerivedFunctorCompIso'_cocycle _ _ _ _ (by
       simp only [lowerStarCompCoextendScalarsIso, Iso.refl_hom, Functor.whiskerRight_id',
         Functor.whiskerLeft_id', Category.id_comp]; rfl))
+
+section Integral
+
+/-- The small étale site of a scheme is essentially small. Instance search does not find this
+in the presence of the imports of this file. -/
+local instance (X : Scheme.{u}) : EssentiallySmall.{u + 1} X.Etale :=
+  have : LocallySmall.{u + 1} X.Etale :=
+    @locallySmall_of_univLE X.Etale _ (@univLE_of_max.{u, u + 1} UnivLE.self)
+  essentiallySmall_of_small_of_locallySmall _
+
+/-- The direct image `Rf_* : D_comp(Z_ét, 𝒪_E) ⥤ D_comp(X_ét, 𝒪_E)` at the integral stage `E`. -/
+noncomputable def integralStageLowerStar (E : FiniteSubext l) :
+    DerivedCategoryDerivedCompleteIntegral Z.smallEtaleTopology l E.field ⥤
+      DerivedCategoryDerivedCompleteIntegral X.smallEtaleTopology l E.field :=
+  (DerivedCategory.derivedCompleteIntegral X.smallEtaleTopology l E.field).lift
+    ((DerivedCategory.derivedCompleteIntegral Z.smallEtaleTopology l E.field).ι ⋙
+      (stageLowerStar f E).rightDerivedFunctor)
+    (fun K ↦ derivedCompleteIntegral_rightDerivedLowerStar l E.field f _ K.property)
+
+/-- `Rf_*` commutes with the integral transition functors. -/
+noncomputable def integralLowerStarTransitionIso {E L : FiniteSubext l} (h : E ≤ L) :
+    integralStageLowerStar f E ⋙ integralStageTransition X h ≅
+      integralStageTransition Z h ⋙ integralStageLowerStar f L :=
+  NatIso.ofComponents
+    (fun K ↦ (ObjectProperty.fullyFaithfulι _).preimageIso
+      ((derivedLowerStarTransitionIso f h).app
+        ((DerivedCategoryDerivedCompleteIntegral.ι _ l E.field).obj K)))
+    (fun g ↦ (ObjectProperty.fullyFaithfulι _).map_injective
+      ((derivedLowerStarTransitionIso f h).hom.naturality
+        ((DerivedCategoryDerivedCompleteIntegral.ι _ l E.field).map g)))
+
+/-- The hexagon for the integral compatibility isomorphisms. -/
+lemma integralLowerStarTransitionIso_hexagon {E L L' : FiniteSubext l} (h : E ≤ L)
+    (h' : L ≤ L') :
+    Functor.whiskerLeft (integralStageLowerStar f E) (integralStageTransitionComp X h h').hom ≫
+      (integralLowerStarTransitionIso f (h.trans h')).hom =
+    Functor.whiskerRight (integralLowerStarTransitionIso f h).hom (integralStageTransition X h') ≫
+      Functor.whiskerLeft (integralStageTransition Z h) (integralLowerStarTransitionIso f h').hom ≫
+        Functor.whiskerRight (integralStageTransitionComp Z h h').hom
+          (integralStageLowerStar f L') := by
+  ext K
+  apply (ObjectProperty.fullyFaithfulι _).map_injective
+  exact congr_app (derivedLowerStarTransitionIso_hexagon f h h')
+    ((DerivedCategoryDerivedCompleteIntegral.ι _ l E.field).obj K)
+
+noncomputable instance (E : FiniteSubext l) : (integralStageLowerStar f E).CommShift ℤ :=
+  inferInstanceAs (((DerivedCategory.derivedCompleteIntegral X.smallEtaleTopology l E.field).lift
+    ((DerivedCategory.derivedCompleteIntegral Z.smallEtaleTopology l E.field).ι ⋙
+      (stageLowerStar f E).rightDerivedFunctor) _).CommShift ℤ)
+
+instance (E : FiniteSubext l) : (integralStageLowerStar f E).IsTriangulated :=
+  inferInstanceAs (((DerivedCategory.derivedCompleteIntegral X.smallEtaleTopology l E.field).lift
+    ((DerivedCategory.derivedCompleteIntegral Z.smallEtaleTopology l E.field).ι ⋙
+      (stageLowerStar f E).rightDerivedFunctor) _).IsTriangulated)
+
+-- The instance arguments of the derived complete categories are expensive to unify.
+set_option maxHeartbeats 1600000 in
+/-- The integral direct image carries torsion objects to torsion objects, being linear. -/
+lemma torsion_integralStageLowerStar_obj (E : FiniteSubext l)
+    (K : DerivedCategoryDerivedCompleteIntegral Z.smallEtaleTopology l E.field)
+    (hK : Rationalization.torsion (nonZeroDivisors (Shrink.{u + 1} (integers l E.field)))
+      (DerivedCategoryDerivedCompleteIntegral Z.smallEtaleTopology l E.field) K) :
+    Rationalization.torsion (nonZeroDivisors (Shrink.{u + 1} (integers l E.field)))
+      (DerivedCategoryDerivedCompleteIntegral X.smallEtaleTopology l E.field)
+      ((integralStageLowerStar f E).obj K) := by
+  obtain ⟨m, hm, hK⟩ := hK
+  refine ⟨m, hm, ?_⟩
+  have h0 : (stageLowerStar f E).rightDerivedFunctor.map
+      ((DerivedCategoryDerivedCompleteIntegral.ι _ l E.field).map (m • 𝟙 K)) = 0 := by
+    rw [hK]
+    exact Functor.map_zero (stageLowerStar f E).rightDerivedFunctor _ _
+  have h1 : (stageLowerStar f E).rightDerivedFunctor.map
+      (m • 𝟙 ((DerivedCategoryDerivedCompleteIntegral.ι _ l E.field).obj K)) =
+        m • 𝟙 _ := by
+    have := Etale.linear_rightDerivedLowerStar
+      (ModuleCat.{u + 1} (Shrink.{u + 1} (integers l E.field))) f
+      (Shrink.{u + 1} (integers l E.field))
+    exact (Functor.Linear.map_smul (𝟙 _) m).trans
+      (congrArg (m • ·) (CategoryTheory.Functor.map_id _ _))
+  exact (ObjectProperty.fullyFaithfulι _).map_injective (h1.symm.trans (by exact h0))
+
+/-- The direct image `Rf_* : D_comp(Z_ét, E) ⥤ D_comp(X_ét, E)` at the rational stage `E`. -/
+noncomputable abbrev rationalStageLowerStar (E : FiniteSubext l) :
+    DerivedCategoryDerivedCompleteRational Z.smallEtaleTopology l E.field ⥤
+      DerivedCategoryDerivedCompleteRational X.smallEtaleTopology l E.field :=
+  Rationalization.mapOfTorsion _ _ (integralStageLowerStar f E)
+    (torsion_integralStageLowerStar_obj f E)
+
+lemma torsion_integralLowerStarTransition {E L : FiniteSubext l} (h : E ≤ L)
+    (K : DerivedCategoryDerivedCompleteIntegral Z.smallEtaleTopology l E.field)
+    (hK : Rationalization.torsion (nonZeroDivisors (Shrink.{u + 1} (integers l E.field)))
+      (DerivedCategoryDerivedCompleteIntegral Z.smallEtaleTopology l E.field) K) :
+    Rationalization.torsion (nonZeroDivisors (Shrink.{u + 1} (integers l L.field)))
+      (DerivedCategoryDerivedCompleteIntegral X.smallEtaleTopology l L.field)
+      ((integralStageTransition Z h ⋙ integralStageLowerStar f L).obj K) :=
+  torsion_integralStageLowerStar_obj f L _ (torsion_integralStageTransition_obj Z h K hK)
+
+/-- `Rf_*` commutes with the rational transition functors. -/
+noncomputable def rationalLowerStarTransitionIso {E L : FiniteSubext l} (h : E ≤ L) :
+    rationalStageLowerStar f E ⋙ rationalStageTransition X h ≅
+      rationalStageTransition Z h ⋙ rationalStageLowerStar f L :=
+  Rationalization.mapOfTorsionCompIso _ _ (torsion_integralLowerStarTransition f h)
+      (integralLowerStarTransitionIso f h) ≪≫
+    (Rationalization.mapOfTorsionCompIso _ _ (torsion_integralLowerStarTransition f h)
+      (Iso.refl _)).symm
+
+end Integral
 
 end AlgebraicGeometry.Etale
