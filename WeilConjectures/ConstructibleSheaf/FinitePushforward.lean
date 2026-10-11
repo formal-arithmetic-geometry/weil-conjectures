@@ -11,6 +11,7 @@ public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Sheaf
 public import WeilConjectures.ConstructibleSheaf.Defs
 public import WeilConjectures.ConstructibleSheaf.FinitePushforward.Generators
 public import WeilConjectures.ConstructibleSheaf.FinitePushforward.GenericPoint
+public import WeilConjectures.ConstructibleSheaf.FinitePushforward.PointSplitting
 public import WeilConjectures.SixFunctors.Finite.BaseChange
 public import WeilConjectures.SixFunctors.Etale.LowerShriek.FinitelyPresentable
 
@@ -268,6 +269,9 @@ theorem Etale.exists_mono_biproduct_lowerStar_of_isNoetherian [IsNoetherianRing 
       (M : Fin r → ModuleCat.{u + 1} Λ) (_ : ∀ i, Module.Finite Λ (M i))
       (φ : C ⟶ ⨁ fun i ↦ ((h i)_*[ModuleCat.{u + 1} Λ]).obj
         ((constantSheaf (V i).smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj (M i))), Mono φ :=
+  -- Proved steps of the Stacks proof: Step 3
+  -- (`Scheme.exists_isConstant_upperStar_of_isConstructibleSheaf`, constancy over a finite separable extension of a residue field), Step 5
+  -- (`Etale.homLowerStarConstantSheafEquiv`) and the 09Z5 input. Missing: 09YV, 0817, 09Z1.
   sorry
 
 section Auxiliary

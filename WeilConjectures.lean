@@ -594,6 +594,7 @@ public import WeilConjectures.ConstructibleSheaf.FinitePushforward
 public import WeilConjectures.ConstructibleSheaf.FinitePushforward.ConstantUnit
 public import WeilConjectures.ConstructibleSheaf.FinitePushforward.Generators
 public import WeilConjectures.ConstructibleSheaf.FinitePushforward.GenericPoint
+public import WeilConjectures.ConstructibleSheaf.FinitePushforward.PointSplitting
 public import WeilConjectures.ConstructibleSheaf.GenericConstancy
 public import WeilConjectures.ConstructibleSheaf.KernelCokernel
 public import WeilConjectures.ConstructibleSheaf.LocallyConstantReduction
