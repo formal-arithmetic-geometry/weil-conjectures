@@ -1,11 +1,11 @@
 # Work queue
 
-690 items; claim with `tools/claim.py next <group> [--stage N]`.
+683 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (690)
+## Stage 2: nodes to state (683)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -22,16 +22,11 @@
 | `lem-sc-hilb-dominating-power` | 1 | state |
 | `lem-weil-derived-limit-roos-complex` | 1 | state |
 | `lem-weil-pbc-derived-square-iso-pasting` | 1 | state |
-| `lem-weil-pbc-descend-qc-open-fg-subalgebra` | 1 | state |
 | `lem-weil-pbc-etale-graph-section-extension-map` | 1 | state |
 | `lem-weil-pbc-etale-inverse-image-algebraic-structures` | 1 | state |
 | `lem-weil-pbc-etale-qcqs-sections-filtered-colimit` | 1 | state |
-| `lem-weil-pbc-etale-separated-stratified-finite` | 1 | state |
-| `lem-weil-pbc-exact-free-complex-last-minors-regular-sequence` | 1 | state |
 | `lem-weil-pbc-ext-one-direct-sum` | 1 | state |
 | `lem-weil-pbc-fibre-dimension-bounded-open-upstairs` | 1 | state |
-| `lem-weil-pbc-field-cohen-power-series-formally-smooth` | 1 | state |
-| `lem-weil-pbc-field-extension-complete-intersection-subalgebras` | 1 | state |
 | `lem-weil-pbc-filtered-colimit-algebras-tensor-elementwise` | 1 | state |
 | `lem-weil-pbc-filtered-colimit-categories` | 1 | state |
 | `lem-weil-pbc-filtered-colimit-flat-modules` | 1 | state |
@@ -40,7 +35,6 @@
 | `lem-weil-pbc-filtered-colimit-normal-ring` | 1 | state |
 | `lem-weil-pbc-filtered-colimit-tensor-varying-rings` | 1 | state |
 | `lem-weil-pbc-finite-after-completion` | 1 | state |
-| `lem-weil-pbc-finite-coproduct-lfp-qcqs` | 1 | state |
 | `lem-weil-pbc-finite-etale-etale-local-split` | 1 | state |
 | `lem-weil-pbc-finite-etale-lifting-complete` | 1 | state |
 | `lem-weil-pbc-finite-etale-lifting-essential-surjectivity` | 1 | state |
@@ -49,7 +43,6 @@
 | `lem-weil-pbc-finite-free-resolution-noetherian` | 1 | state |
 | `lem-weil-pbc-finite-galois-receiving-separable-extensions` | 1 | state |
 | `lem-weil-pbc-finite-gl-dim-regular-local` | 1 | state |
-| `lem-weil-pbc-finite-length-module-simple-filtration` | 1 | state |
 | `lem-weil-pbc-finite-locally-constant-module-values` | 1 | state |
 | `lem-weil-pbc-finite-locally-free-degree-etale-descent` | 1 | state |
 | `lem-weil-pbc-finite-locally-free-degree-locally-constant` | 1 | state |
