@@ -195,5 +195,27 @@
   "by": "L",
   "result": "pass",
   "note": "Six steps, the direct partition-of-unity argument (Stacks 00EK's proof localizes at maximal ideals instead; the argument here is the one of Mathlib's ring case existsUnique_algebraMap_eq_of_span_eq_top, Away/Basic.lean:569): notation and beta alpha = 0; injectivity (new Mathlib leaf lem-weil-pbc-localized-span-eq-zero: Module.eq_zero_of_isLocalized_span LocalProperties/Submodule.lean:161, verified; and lem-weil-pbc-span-pow-eq-top: Ideal.span_pow_eq_top Ideal/Basic.lean:161, verified); common denominator; compatibility as an identity in M; the glued element m = sum a_i f_i^K m_i with sum a_i f_i^{N+K} = 1; uniqueness. New definition leaf def-weil-pbc-module-localization-away (LocalizedModule.Away, IsLocalizedModule.Away LocalizedModule/Basic.lean:1469-1475, verified). Worker notes: 00EJ is proved from 00EK (the brief's guess reversed); lem-pc-affine-cech-complex (imported, sec-picard-framework) implies this lemma (stage-3 link)."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.CoverModuleExact",
+  "declaration": "RingTheory.coverModuleExact",
+  "file": "lean/Sheaf/RingTheory/CoverModuleExact.lean",
+  "statement": "theorem coverModuleExact {R : Type u} [CommRing R] {M : Type v} [AddCommGroup M] [Module R M] (n : ℕ) (f : Fin n → R) (hspan : Ideal.span (Set.range f) = ⊤) : let ρ := fun (a h : R) (ha : a ∣ h) => IsLocalizedModule.lift (Submonoid.powers a) (LocalizedModule.mkLinearMap (Submonoid.powers a) M) (LocalizedModule.mkLinearMap (Submonoid.powers h) M) (localizationAway_map_units_of_dvd (M := M) a h ha) (∀ m : M, (∀ i : Fin n, LocalizedModule.mkLinearMap (Submonoid.powers (f i)) M m = 0) → m = 0) ∧ (∀ (s : ∀ i : Fin n, LocalizedModule.Away (f i) M), (∀ i j : Fin n, ρ (f i) (f i * f j) (dvd_mul_right (f i) (f j)) (s i) = ρ (f j) (f i * f j) (dvd_mul_left (f j) (f i)) (s j)) → ∃! m : M, ∀ i : Fin n, LocalizedModule.mkLinearMap (Submonoid.powers (f i)) M m = s i)",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-11",
+  "existing": false,
+  "declarations": [
+   "RingTheory.localizationAway_map_units_of_dvd",
+   "RingTheory.coverModuleExact"
+  ]
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-cme0940",
+  "group": "C1",
+  "result": "pass",
+  "note": "CommRing R; arbitrary M (AddCommGroup, Module, indep. universe); f : Fin n -> R with Ideal.span (range f) = ⊤ (n=0 zero ring admitted); M_f = LocalizedModule.Away (recorded dep); canonical M_{f_i}->M_{f_i f_j} = IsLocalizedModule.lift of mkLinearMaps (checked lift_apply sends m/1 to m/1); clause 1 alpha injective; clause 2 compatible families glue to unique m; no Mathlib module version (only ring existsUnique_algebraMap_eq_of_span_eq_top)"
  }
 }
