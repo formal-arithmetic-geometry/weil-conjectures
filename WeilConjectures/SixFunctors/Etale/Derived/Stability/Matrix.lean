@@ -85,6 +85,28 @@ theorem constructibleFiniteTor_derivedHom [HasInvertibleExponent Λ X]
   exact ⟨boundedConstructible_derivedHom Λ aX a b c d hKbc hKt hMbc hMt, _, _,
     torAmplitudeIn_derivedHom Λ aX m hm a b c d hKbc hKt hMbc hMt⟩
 
+/-- Blueprint `rem-sf-proetale-hom-status`: Status of the coefficient-only internal-Hom bound.
+
+The sharp bound `[c - b, d - a]` of
+`AlgebraicGeometry.Etale.torAmplitudeIn_derivedHom_of_isDualizable` requires a site-perfect first
+variable: for arbitrary bounded constructible first variables of finite Tor amplitude it is
+false. For the origin `i : {0} ⟶ 𝔸¹` over an algebraically closed `k` and a nonzero finite `Λ`
+whose exponent is invertible on `k`, both `i_* Λ` and `Λ` have Tor amplitude in `[0, 0]`, while
+`RHom(i_* Λ, Λ) = i_* Λ(-1)[-2]` has nonzero cohomology in degree `2`. The general
+finite-coefficient bound is the dimension-dependent
+`AlgebraicGeometry.Etale.torAmplitudeIn_derivedHom`. -/
+theorem not_forall_torAmplitudeIn_derivedHom [IsAlgClosed k] [Nontrivial Λ] :
+    ¬ ∀ (Z : Scheme.{u}) (aZ : Z ⟶ Spec (.of k)) [LocallyOfFiniteType aZ] [QuasiCompact aZ]
+      (a b c d : ℤ)
+      (K M : _root_.DerivedCategory (Sheaf Z.smallEtaleTopology (ModuleCat.{u + 1} Λ))),
+      boundedConstructible (ModuleCat.{u + 1} Λ) Z K →
+        torAmplitudeIn (ModuleCat.{u + 1} Λ) Z a b K →
+          boundedConstructible (ModuleCat.{u + 1} Λ) Z M →
+            torAmplitudeIn (ModuleCat.{u + 1} Λ) Z c d M →
+              torAmplitudeIn (ModuleCat.{u + 1} Λ) Z (c - b) (d - a)
+                (((RHom(Z)[ModuleCat.{u + 1} Λ]).obj (op K)).obj M) :=
+  sorry
+
 variable (f : X ⟶ Y) (hf : f ≫ aY = aX)
 
 include hf
@@ -344,9 +366,12 @@ whose exponent is invertible on `k`.
   `[c - b, d - a]` (`cor-sf-hom-ctf-proetale-unconditional`); for a general first variable
   this sharp bound fails, see `AlgebraicGeometry.Etale.torAmplitudeIn_derivedHom_of_isDualizable`.
 * Item 4, closed-boundary exchange: for a closed immersion `i : Z ⟶ X` and `L ∈ Dctf(X, Λ)`,
-  `i^* 𝔻_X L ≅ 𝔻_Z Ri^! L` (`cor-weil-boundary-duality-discharge`). -/
+  `i^* 𝔻_X L ≅ 𝔻_Z Ri^! L` (`cor-weil-boundary-duality-discharge`).
+* Item 3, status: for a general constructible first variable of finite Tor amplitude the
+  sharp bound `[c - b, d - a]` is false (`rem-sf-proetale-hom-status`). -/
 theorem preservationMatrix_of_isAlgClosure {k : Type u} [Field k] {p : ℕ} [Fact p.Prime]
     [Algebra (ZMod p) k] [IsAlgClosure (ZMod p) k] [HasInvertibleExponent Λ (Spec (.of k))]
+    [Nontrivial Λ]
     {X : Scheme.{u}} (aX : X ⟶ Spec (.of k)) [LocallyOfFiniteType aX] [QuasiCompact aX]
     [IsSeparated aX] [HasCompactification aX] :
     (∀ (a b c d : ℤ)
@@ -363,20 +388,30 @@ theorem preservationMatrix_of_isAlgClosure {k : Type u} [Field k] {p : ℕ} [Fac
                   (((ProEtale.derivedHom (ModuleCat.{u + 1} Λ) X).obj
                     (op (D(ν^*(X)[ModuleCat.{u + 1} Λ]).obj K))).obj
                       (D(ν^*(X)[ModuleCat.{u + 1} Λ]).obj M))) ∧
-    ∀ {Z : Scheme.{u}} (i : Z ⟶ X) [IsClosedImmersion i] [HasCompactification i]
+    (∀ {Z : Scheme.{u}} (i : Z ⟶ X) [IsClosedImmersion i] [HasCompactification i]
       [HasCompactification (i ≫ aX)]
       (L : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))),
       Etale.DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} Λ) X L →
         Nonempty ((Etale.upperStar (ModuleCat.{u + 1} Λ) i).leftDerivedFunctor.obj
             ((Etale.verdierDual (ModuleCat.{u + 1} Λ) aX).obj (op L)) ≅
           (Etale.verdierDual (ModuleCat.{u + 1} Λ) (i ≫ aX)).obj
-            (op ((Etale.rightDerivedUpperShriek (ModuleCat.{u + 1} Λ) i).obj L))) := by
+            (op ((Etale.rightDerivedUpperShriek (ModuleCat.{u + 1} Λ) i).obj L)))) ∧
+    ¬ ∀ (Z : Scheme.{u}) (aZ : Z ⟶ Spec (.of k)) [LocallyOfFiniteType aZ] [QuasiCompact aZ]
+      (a b c d : ℤ)
+      (K M : _root_.DerivedCategory (Sheaf Z.smallEtaleTopology (ModuleCat.{u + 1} Λ))),
+      Etale.DerivedCategory.boundedConstructible (ModuleCat.{u + 1} Λ) Z K →
+        Etale.DerivedCategory.torAmplitudeIn (ModuleCat.{u + 1} Λ) Z a b K →
+          Etale.DerivedCategory.boundedConstructible (ModuleCat.{u + 1} Λ) Z M →
+            Etale.DerivedCategory.torAmplitudeIn (ModuleCat.{u + 1} Λ) Z c d M →
+              Etale.DerivedCategory.torAmplitudeIn (ModuleCat.{u + 1} Λ) Z (c - b) (d - a)
+                (((Etale.derivedHom (ModuleCat.{u + 1} Λ) Z).obj (op K)).obj M) := by
   have : HasInvertibleExponent Λ X := .of_hom aX
   have : IsAlgClosed k := ‹IsAlgClosure (ZMod p) k›.isAlgClosed
   exact ⟨fun a b c d K M hK hKt hKd hM hMt ↦
       boundedConstructible_derivedHom_mapDerivedCategory_of_isDualizable Λ (p := p) aX hK hKt
         hKd hM hMt,
-    fun i _ _ _ L hL ↦ Etale.nonempty_iso_leftDerivedUpperStar_verdierDual Λ aX i hL⟩
+    fun i _ _ _ L hL ↦ Etale.nonempty_iso_leftDerivedUpperStar_verdierDual Λ aX i hL,
+    Etale.not_forall_torAmplitudeIn_derivedHom Λ⟩
 
 end ProEtale.DerivedCategory
 

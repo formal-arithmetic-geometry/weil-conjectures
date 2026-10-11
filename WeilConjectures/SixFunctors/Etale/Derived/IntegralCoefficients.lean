@@ -265,6 +265,58 @@ noncomputable def NormalizedTower.restrict (M : NormalizedTower I X) : ℕᵒᵖ
     (derivedRestrictScalars (Ideal.Quotient.mk (I ^ (n + 2))) X).map (M.map n) ≫
       (derivedRestrictScalarsQuotientPowSuccIso n).hom.app (M.obj n)
 
+/-- The transition map `K_{n+1} ⟶ Res K_n` of the tower of derived reductions of `K`: the map
+adjoint to `η_n`. -/
+lemma exists_transition_of_isDerivedBaseChange {K : 𝐃(X, Λ)}
+    (Kn : ∀ n : ℕ, 𝐃(X, Λ ⧸ I ^ (n + 1)))
+    (η : ∀ n : ℕ, K ⟶ (derivedRestrictScalars (Ideal.Quotient.mk (I ^ (n + 1))) X).obj (Kn n))
+    (hη : ∀ n : ℕ, IsDerivedBaseChange (η n)) (n : ℕ) :
+    ∃ t : Kn (n + 1) ⟶ (derivedRestrictScalars (quotientPowSuccFactor I n) X).obj (Kn n),
+      η (n + 1) ≫ (derivedRestrictScalars (Ideal.Quotient.mk (I ^ (n + 2))) X).map t =
+        η n ≫ (derivedRestrictScalarsQuotientPowSuccIso n).inv.app (Kn n) :=
+  (hη (n + 1) ((derivedRestrictScalars (quotientPowSuccFactor I n) X).obj (Kn n))).2 _
+
+/-- Blueprint `rem-sf-tower-shapes-occurring`: the reductions of an object form a normalized
+tower.
+
+For `K ∈ D(X_ét, Λ)` and derived reductions `η_n : K ⟶ Res K_n` exhibiting each
+`K_n ∈ D(X_ét, Λ ⧸ Iⁿ⁺¹)` as `K ⊗ᴸ_Λ Λ ⧸ Iⁿ⁺¹`, the transition maps `K_{n+1} ⟶ Res K_n` are
+the maps adjoint to `η_n`, and they exhibit `K_n` as `K_{n+1} ⊗ᴸ Λ ⧸ Iⁿ⁺¹`. -/
+noncomputable def NormalizedTower.ofIsDerivedBaseChange {K : 𝐃(X, Λ)}
+    (Kn : ∀ n : ℕ, 𝐃(X, Λ ⧸ I ^ (n + 1)))
+    (η : ∀ n : ℕ, K ⟶ (derivedRestrictScalars (Ideal.Quotient.mk (I ^ (n + 1))) X).obj (Kn n))
+    (hη : ∀ n : ℕ, IsDerivedBaseChange (η n)) : NormalizedTower I X where
+  obj := Kn
+  map n := (exists_transition_of_isDerivedBaseChange Kn η hη n).choose
+  isDerivedBaseChange n N := by
+    have hspec := (exists_transition_of_isDerivedBaseChange Kn η hη n).choose_spec
+    set t := (exists_transition_of_isDerivedBaseChange Kn η hη n).choose
+    let e := (derivedRestrictScalarsQuotientPowSuccIso (I := I) (X := X) n).app N
+    rw [← Function.Bijective.of_comp_iff' (hη (n + 1)
+      ((derivedRestrictScalars (quotientPowSuccFactor I n) X).obj N))]
+    have h : ((fun g' ↦ η (n + 1) ≫
+          (derivedRestrictScalars (Ideal.Quotient.mk (I ^ (n + 2))) X).map g') ∘
+        fun g ↦ t ≫ (derivedRestrictScalars (quotientPowSuccFactor I n) X).map g) =
+        (fun h ↦ h ≫ e.inv) ∘
+          fun g ↦ η n ≫ (derivedRestrictScalars (Ideal.Quotient.mk (I ^ (n + 1))) X).map g := by
+      funext g
+      have hnat := (derivedRestrictScalarsQuotientPowSuccIso (I := I) (X := X) n).inv.naturality g
+      simp only [Functor.comp_obj, Functor.comp_map] at hnat
+      simp only [Function.comp_apply, Functor.map_comp, ← Category.assoc, hspec]
+      simp only [Category.assoc, e, Iso.app_inv, hnat]
+    rw [h]
+    refine Function.Bijective.comp ?_ (hη n N)
+    exact Function.bijective_iff_has_inverse.2 ⟨fun h ↦ h ≫ e.hom, fun h ↦ by simp,
+      fun h ↦ by simp⟩
+
+@[simp]
+lemma NormalizedTower.ofIsDerivedBaseChange_obj {K : 𝐃(X, Λ)}
+    (Kn : ∀ n : ℕ, 𝐃(X, Λ ⧸ I ^ (n + 1)))
+    (η : ∀ n : ℕ, K ⟶ (derivedRestrictScalars (Ideal.Quotient.mk (I ^ (n + 1))) X).obj (Kn n))
+    (hη : ∀ n : ℕ, IsDerivedBaseChange (η n)) :
+    (NormalizedTower.ofIsDerivedBaseChange Kn η hη).obj = Kn :=
+  rfl
+
 variable {ϖ : Λ} (hϖ : ϖ ∈ nonZeroDivisors Λ) (hI : I = Ideal.span {ϖ})
 
 include hϖ hI in
@@ -280,6 +332,36 @@ theorem NormalizedTower.isDerivedBaseChange_of_isHomotopyLimit (M : NormalizedTo
     (∀ n : ℕ, IsDerivedBaseChange (φ := Ideal.Quotient.mk (I ^ (n + 1))) (c.π.app (op n))) ∧
       DerivedCategory.derivedComplete X.smallEtaleTopology I c.pt :=
   sorry
+
+include hϖ hI in
+/-- Blueprint `rem-sf-tower-shapes-occurring`: Tower shapes that occur.
+
+1. The derived reductions `K_n = K ⊗ᴸ_Λ Λ ⧸ Iⁿ⁺¹` of any `K ∈ D(X_ét, Λ)` form a normalized
+   tower (`AlgebraicGeometry.Etale.NormalizedTower.ofIsDerivedBaseChange`).
+2. Conversely, a normalized tower is the tower of reductions of its derived limit, which is
+   derived complete (`lem-coef-normalized-dvr-effectivity`); no common stratification or lisse
+   local model is needed.
+3. Membership in `Dᵇc(X, Λ)` is derived completeness together with finite-level
+   constructibility of the reductions and a uniform Tor bound.
+
+The common Tor interval of the reductions of an integral object is
+`lem-coef-integral-residue-tor`, and the compact-support and exceptional versions are
+`prop-coef-integral-exceptional-adjoint`. -/
+theorem exists_normalizedTower_and_effective :
+    (∀ (K : 𝐃(X, Λ)) (Kn : ∀ n : ℕ, 𝐃(X, Λ ⧸ I ^ (n + 1)))
+      (η : ∀ n : ℕ, K ⟶ (derivedRestrictScalars (Ideal.Quotient.mk (I ^ (n + 1))) X).obj (Kn n)),
+      (∀ n : ℕ, IsDerivedBaseChange (η n)) → ∃ M : NormalizedTower I X, M.obj = Kn) ∧
+    (∀ (M : NormalizedTower I X) (c : Cone M.restrict), Pretriangulated.IsHomotopyLimit c →
+      (∀ n : ℕ, IsDerivedBaseChange (φ := Ideal.Quotient.mk (I ^ (n + 1))) (c.π.app (op n))) ∧
+        DerivedCategory.derivedComplete X.smallEtaleTopology I c.pt) ∧
+    ∀ K : 𝐃(X, Λ), DerivedCategory.boundedConstructibleIntegral I X K ↔
+      DerivedCategory.derivedComplete X.smallEtaleTopology I K ∧ ∃ a b : ℤ, ∀ n : ℕ,
+        DerivedCategory.boundedConstructible (ModuleCat.{u + 1} Λ) X
+            ((reductionModIdeal Λ X (I ^ (n + 1))).obj K) ∧
+          DerivedCategory.torAmplitudeIn (ModuleCat.{u + 1} Λ) X a b
+            ((reductionModIdeal Λ X (I ^ (n + 1))).obj K) :=
+  ⟨fun _ Kn η hη ↦ ⟨NormalizedTower.ofIsDerivedBaseChange Kn η hη, rfl⟩,
+    fun M _ hc ↦ M.isDerivedBaseChange_of_isHomotopyLimit hϖ hI hc, fun _ ↦ Iff.rfl⟩
 
 end Tower
 
@@ -303,11 +385,9 @@ finite-type `k`-schemes:
 * the derived limit `G_f L` of the reduced exceptional inverse images lies in `Dᵇc(X, Λ)` and
   is right adjoint to `Rf_!` on the constructible categories
   (`prop-coef-integral-exceptional-adjoint`);
-* a normalized tower is the tower of reductions of its derived limit, which is derived complete
-  (`lem-coef-normalized-dvr-effectivity`).
-
-The scope of other tower shapes (`rem-sf-tower-shapes-occurring`) is a remark without a
-statement of its own. -/
+* the derived reductions of any object form a normalized tower, and a normalized tower is the
+  tower of reductions of its derived limit, which is derived complete
+  (`rem-sf-tower-shapes-occurring`, `lem-coef-normalized-dvr-effectivity`). -/
 theorem preservationMatrix_integral {X Y : Scheme.{u}}
     (aX : X ⟶ Spec (.of k)) (aY : Y ⟶ Spec (.of k)) [LocallyOfFiniteType aX] [QuasiCompact aX]
     [LocallyOfFiniteType aY] [QuasiCompact aY] [IsSeparated aX] [IsSeparated aY]
@@ -336,6 +416,9 @@ theorem preservationMatrix_integral {X Y : Scheme.{u}}
         DerivedCategory.boundedConstructibleIntegral I X c.pt ∧
           ∀ K : 𝐃(X, Λ), DerivedCategory.boundedConstructibleIntegral I X K →
             Nonempty (((R(f)_![ModuleCat.{u + 1} Λ]).obj K ⟶ L) ≃ (K ⟶ c.pt))) ∧
+    (∀ (K : 𝐃(X, Λ)) (Kn : ∀ n : ℕ, 𝐃(X, Λ ⧸ I ^ (n + 1)))
+      (η : ∀ n : ℕ, K ⟶ (derivedRestrictScalars (Ideal.Quotient.mk (I ^ (n + 1))) X).obj (Kn n)),
+      (∀ n : ℕ, IsDerivedBaseChange (η n)) → ∃ M : NormalizedTower I X, M.obj = Kn) ∧
     ∀ (M : NormalizedTower I X) (c : Cone M.restrict), Pretriangulated.IsHomotopyLimit c →
       (∀ n : ℕ, IsDerivedBaseChange (φ := Ideal.Quotient.mk (I ^ (n + 1))) (c.π.app (op n))) ∧
         DerivedCategory.derivedComplete X.smallEtaleTopology I c.pt :=
@@ -345,6 +428,7 @@ theorem preservationMatrix_integral {X Y : Scheme.{u}}
     fun _ hL _ hc ↦
       have h := boundedConstructibleIntegral_exceptionalAdjoint I hϖ hI aX aY f hf hL hc
       ⟨h.1.1, h.2.1⟩,
+    (exists_normalizedTower_and_effective hϖ hI).1,
     fun M _ hc ↦ M.isDerivedBaseChange_of_isHomotopyLimit hϖ hI hc⟩
 
 end Matrix
