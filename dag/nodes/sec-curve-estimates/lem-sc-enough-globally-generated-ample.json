@@ -142,5 +142,24 @@
   "group": "K1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-ega (reviewer sub-agent of L); spot-checked: Source: Stacks 09NC (varieties.tex label lemma-enough-globally-generated-ample, read locally at line 7894) with Properties 28.27.4 (lemma-affine-cap-s-open) and Modules lemma-tensor-product-globally-generated; the item's statement agrees with 09NC hypothesis by hypothesis (X quasi-compact; per point a globally generated invertible L and s with x in X_s affine; conclusion an ample invertible sheaf). Step 1: quasi-compactness from def-weil-pbc-quasi-compact-scheme. Step 2: lem-sc-finite-sections-cover-qc (true: a generating section is nonvanishing at x by Nakayama on the rank-one stalk, then quasi-compactness). Step 3: lem-sc-tensor-globally-generated gives L invertible. Step 4: lem-sc-tensor-section-affine-open (true: X_tau is the intersection of the X_{t_i} on fibres of rank one, and affineness follows from Properties 28.27.4, existing node lem-sc-affine-cap-section-open, with U = X_{t_i}), the cover argument checked, and def-weil-pbc-ample-invertible-module with n=1 and X quasi-compact. Small cases: X affine (n=1, one section), X empty, a point in exactly one X_{s_i}. No Mathlib leaf; blueprint search 'globally generated tensor' and 'enough globally generated ample' found 0 nodes; no sorry-free slopmaster2 attachment found. FIX more, RETURN less (B3, C4): dag/nodes/sec-curve-estimates/lem-sc-tensor-globally-generated.json: statement, stmt_deps: tensor product of modules now cites [def-pur-sheaf-tensor-product]; dag/nodes/sec-curve-estimates/lem-sc-tensor-section-affine-open.json: statement, stmt_deps: the same, and tau named as the induced section of the tensor product; dag/nodes/sec-curve-estimates/lem-sc-enough-globally-generated-ample.json: proof step 3 text and uses, proof_deps: cite def-pur-sheaf-tensor-product, and the claim that the tau_J generate L dropped (the cited node needs the t_{i,j} to be a generating family, which step 2 does not establish; the claim was unused), tau_J defined for all J with 0<=j_i<=m_i; step 4 text: 'globally generated' dropped and the ample condition spelled out (affine X_{tau_J}, tau_J a section of L^{otimes 1}, X quasi-compact). Start Sat Oct 10 03:54:55 PM UTC 2026, end Sat Oct 10 03:56:05 PM UTC 2026.; 3 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ExistsAmpleOfEnoughGloballyGenerated",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.exists_isAmple_of_enough_globallyGenerated",
+  "file": "lean/Sheaf/AlgebraicGeometry/ExistsAmpleOfEnoughGloballyGenerated.lean",
+  "statement": "theorem exists_isAmple_of_enough_globallyGenerated (X : Scheme.{u}) [CompactSpace X] (h : ∀ x : X, ∃ L : X.Modules, L.IsInvertible ∧ Nonempty (SheafOfModules.GeneratingSections L) ∧ ∃ s : L.val.presheaf.obj (Opposite.op ⊤), ∃ U : X.Opens, (U : Set X) = nonvanishingLocus L s ∧ x ∈ U ∧ IsAffineOpen U) : ∃ (L : X.Modules) (hL : L.IsInvertible), @IsAmple X L hL",
+  "branch": "sheaf-dag",
+  "by": "M1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-gga1114"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-gga1114",
+  "group": "M1",
+  "result": "fix",
+  "note": "X : Scheme with [CompactSpace X] (quasi-compact, def-weil-pbc-quasi-compact-scheme); forall x, exists L : X.Modules, L.IsInvertible (def-sc-invertible-module) and Nonempty (SheafOfModules.GeneratingSections L) (def-weil-pbc-generating-sections, Mathlib); global section s of L (n=1) and U : X.Opens with U = nonvanishingLocus L s (X_s by K1's landed def, replacing the inline germ condition: H4/H12), x in U, IsAffineOpen U; conclusion exists L invertible with Scheme.Modules.IsAmple (#check in namespace resolves to the project def, not AlgebraicGeometry.IsAmple); edge cases empty X (vacuous, O_X), empty index of GeneratingSections allowed, universes explicit"
  }
 }
