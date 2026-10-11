@@ -267,5 +267,24 @@
   "by": "L",
   "result": "pass",
   "note": "Ten steps along Stacks 07RZ with the gluing written out: restriction to affine opens keeps the hypotheses and bounds the fibres (03JA node), 07RY over each affine open (new unsplit node with the 03J4 bound inline), strata determined pointwise so they glue, Z_r closed, finite locally free of degree r local on the target, the universal property on a cover, quasi-compactness of S_r -> S by descending Z_r cap W' to a finitely generated ideal via Limits 06AC (new unsplit node) and induction. Correct."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FlatQuasiFiniteStratification",
+  "declaration": "AlgebraicGeometry.Scheme.Hom.exists_closed_stratification_of_flat_quasiFinite",
+  "file": "lean/Sheaf/AlgebraicGeometry/FlatQuasiFiniteStratification.lean",
+  "statement": "theorem exists_closed_stratification_of_flat_quasiFinite {X S : Scheme.{u}} (f : X ⟶ S) [Flat f] [LocallyOfFinitePresentation f] [IsSeparated f] (hf : f.IsQuasiFinite) : ∃ Z : ℕ → Set S, Z 0 = ∅ ∧ (∀ n : ℕ, IsClosed (Z n)) ∧ Monotone Z ∧ Pairwise (fun r t : ℕ => Disjoint (Z (r + 1) \\ Z r) (Z (t + 1) \\ Z t)) ∧ (⋃ r : ℕ, Z (r + 1) \\ Z r) = Set.univ ∧ (∀ (T : Scheme.{u}) (g : T ⟶ S) (r : ℕ), (pullback.snd f g).IsFiniteLocallyFreeOfDegree r ↔ Set.range g ⊆ Z (r + 1) \\ Z r) ∧ (∀ (r : ℕ) (W : S.Opens), IsCompact (W : Set S) → IsCompact ((Z (r + 1) \\ Z r) ∩ (W : Set S)))",
+  "branch": "sheaf-dag",
+  "by": "J1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-fqs1143"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-fqs1143",
+  "group": "J1",
+  "result": "fix",
+  "note": "X S : Scheme.{u}, f; Flat/LocallyOfFinitePresentation/IsSeparated instances; hf : landed Scheme.Hom.IsQuasiFinite (LOFT+QC+isolated fibre points, c85d109b5); Z : N -> Set S with Z 0 = Z_{-1} = empty, closed, monotone; strata Z(r+1)\\Z r disjoint, cover; all T : Scheme.{u}, g, r: pullback.snd f g IsFiniteLocallyFreeOfDegree r iff range g in stratum; IsCompact W -> IsCompact (stratum cap W); fix: let strata inlined (J1 c634916b4 let rule); #print resolves all names"
  }
 }
