@@ -157,5 +157,24 @@
   "group": "C1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-dht0000 (reviewer sub-agent of L); spot-checked: Statement = Stacks 0A90 sheaf version (SheafHom^bullet both sides, functorial); citers lem-sc-derived-internal-hom-adjunction and lem-pur-hom-kflat-into-kinjective use exactly this sheaf version. Step 3 Koszul signs checked by hand on (p,q) component, degree n: LHS (df)^p(x)^q(y)=d_M f(x)(y)-(-1)^{p+n} f(x)(d_L y)-(-1)^n f(d_K x)(y); RHS d_M F(x(x)y)-(-1)^n F(d_K x(x)y+(-1)^p x(x)d_L y) gives the same three terms, so plain currying with no sign is a chain map. No duplicate helper (no new nodes). FIX more, RETURN less: (1) C4: Steps 1,2,4 cited lem-weil-pbc-module-tensor-hom-adjunction, stated for ringed spaces only, while the item is on a site; replaced by the site tensor-Hom adjunction lem-pc-sheaf-modules-tensor-closed applied over each U on C/U (proof_deps, uses, tool_uses updated). The second reading by C1 missed this.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.HomTensorTotal",
+  "declaration": "CategoryTheory.homComplex_tensorTotal_iso",
+  "file": "lean/Sheaf/Algebra/Homology/HomTensorTotal.lean",
+  "statement": "theorem homComplex_tensorTotal_iso : letI := SheafOfModules.monoidalCategory R ∃ e : ∀ (K L M : CochainComplex Mod ℤ), homComplex (R := R) K (homComplex (R := R) L M) ≅ homComplex (R := R) (CochainComplex.mapBifunctor K L (curriedTensor Mod)) M, ∀ (K K' L L' M M' : CochainComplex Mod ℤ) (f : K' ⟶ K) (g : L' ⟶ L) (h : M ⟶ M'), (((homComplexFunctor (R := R)).map f.op).app (homComplex (R := R) L M)) ≫ ((homComplexFunctor (R := R)).obj (op K')).map ((((homComplexFunctor (R := R)).map g.op).app M) ≫ ((homComplexFunctor (R := R)).obj (op L')).map h) ≫ (e K' L' M').hom = (e K L M).hom ≫ (((homComplexFunctor (R := R)).map (HomologicalComplex.mapBifunctorMap f g (curriedTensor Mod) (.up ℤ)).op).app M) ≫ ((homComplexFunctor (R := R)).obj (op (CochainComplex.mapBifunctor K' L' (curriedTensor Mod)))).map h",
+  "branch": "sheaf-dag",
+  "by": "M1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-dht1356"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-dht1356",
+  "group": "M1",
+  "result": "fix",
+  "note": "site C/J (generalized to Category.{v}, R in max u v as IsKFlat), sheaf of comm rings R, arbitrary K L M : CochainComplex Mod ℤ, LHS homComplex K (homComplex L M), RHS homComplex (mapBifunctor K L curriedTensor) M under SheafOfModules.monoidalCategory, ≅ of complexes, naturality in f:K'⟶K, g:L'⟶L, h:M⟶M' via homComplexFunctor and mapBifunctorMap"
  }
 }
