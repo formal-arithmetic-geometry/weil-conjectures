@@ -18,8 +18,9 @@ until stage 2 has stated that node. A module in the closure may still contain de
 closure is an upper bound of what the targets need.
 
 coord/queue.tsv lists stage 1 first, then 2, then 3. Within stages 1 and 3 the items nearest to a target come
-first; within stage 2 the items nearest to Mathlib, counted in dependency steps down to a Mathlib leaf, so the
-statements climb from Mathlib upward. `claim.py next` without `--stage` takes from the head.
+first; within stage 2 the definitions first, then the items the most stage-2 nodes wait for through stmt_deps (the
+last column, `blockers`; human, 2026-10-11 23:30 +08), ties nearest to Mathlib, counted in dependency steps down
+to a Mathlib leaf, so the statements climb from Mathlib upward. `claim.py next` without `--stage` takes from the head.
 """
 from __future__ import annotations
 import collections, pathlib, sys
@@ -93,11 +94,11 @@ def main() -> int:
     if cmd != "write":
         print(__doc__); return 2
     WORK.mkdir(exist_ok=True)
-    rows = [(i, 1, d if d < 10**6 else "-", "", dag_queue.audit_state(g.live[i])) for d, i in s1]
-    rows += [(i, 2, h, "", "target-statement" if pri == 0 else "state") for pri, h, i in s2]
-    rows += [(m, 3, d, n, k) for _, d, m, n, k in items3]
+    rows = [(i, 1, d if d < 10**6 else "-", "", dag_queue.audit_state(g.live[i]), "") for d, i in s1]
+    rows += [(i, 2, h, "", "target-statement" if pri == 0 else "state", nb) for pri, h, i, nb in s2]
+    rows += [(m, 3, d, n, k, "") for _, d, m, n, k in items3]
     with open(WORK / "queue.tsv", "w") as f:
-        f.write("# item\tstage\tdistance (to a target; to Mathlib in stage 2)\tsorry\tkind\n")
+        f.write("# item\tstage\tdistance (to a target; to Mathlib in stage 2)\tsorry\tkind\tblockers (stage 2: open stage-2 nodes that wait for it through stmt_deps)\n")
         for r in rows:
             f.write("\t".join(str(x) for x in r) + "\n")
     with open(WORK / "queue.md", "w") as f:
@@ -109,9 +110,9 @@ def main() -> int:
                 f.write(f"| `{i}` | {d if d < 10**6 else '-'} | {dag_queue.audit_state(g.live[i])} |\n")
         f.write(f"\n## Stage 2: nodes to state ({len(s2)})\n\n")
         if s2:
-            f.write("| node | distance to Mathlib | kind |\n|---|---|---|\n")
-            for pri, h, i in s2:
-                f.write(f"| `{i}` | {h} | {'target-statement' if pri == 0 else 'state'} |\n")
+            f.write("| node | distance to Mathlib | kind | blockers |\n|---|---|---|---|\n")
+            for pri, h, i, nb in s2:
+                f.write(f"| `{i}` | {h} | {'target-statement' if pri == 0 else 'state'} | {nb} |\n")
         if why:
             f.write("\nNot open yet: " + ", ".join(f"{v} nodes that {k.replace('waits', 'wait')}" for k, v in why.items()) + ".\n")
         f.write("\n")

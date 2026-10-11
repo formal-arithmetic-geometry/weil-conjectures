@@ -4,7 +4,7 @@
 Usage:
   tools/dag_queue.py summary      how many nodes each stage has open, and why the others are not open
   tools/dag_queue.py items        the open items, one per line: stage, item, distance (to a target in stage 1, to Mathlib in stage 2),
-                                  kind (in stage 1 the node's lean_audit state on the done branch)
+                                  kind (in stage 1 the node's lean_audit state on the done branch), in stage 2 also blockers
   tools/dag_queue.py waiting      modules whose proof uses a node that has no Lean declaration yet, one per line
 
 `queue.py write` calls this and puts the items into coord/queue.tsv; run this by hand only to look.
@@ -23,8 +23,10 @@ What is open follows the stage documents. A node that no target reaches is not o
            (the key printed by `items` is rank*1000 + distance);
   stage 2  when stage 1 has split it (a definition naming the notions it is built from, or a statement with its proof in steps),
            it has no Lean declaration yet, and every node its statement needs has one or is a Mathlib leaf;
-           definitions before statements (launcher, 2026-10-11), each nearest to Mathlib first (the fewest dependency steps down to a Mathlib leaf), so that the
-           statements climb from Mathlib upward. With SHEAF_EARLY_REVIEW=1 in coord/sheaf.env the nodes
+           definitions before statements (launcher, 2026-10-11); then, blockers first (human, 2026-10-11 23:30 +08), the
+           item that the most stage-2 nodes still needing a statement wait for, counted transitively through stmt_deps
+           (`items` prints the count last, queue.tsv as the column `blockers`); ties nearest to Mathlib first (the
+           fewest dependency steps down to a Mathlib leaf), so that the statements climb from Mathlib upward. With SHEAF_EARLY_REVIEW=1 in coord/sheaf.env the nodes
            needed to state the targets come first instead.
 
 A module of stage 3 is held back ("waiting") while a node that its proof uses has no Lean declaration: its
@@ -236,8 +238,33 @@ class Dag:
             out.add(i); st += self.deps(i, "stmt")
         return out
 
-    def stage2(self) -> tuple[list[tuple[int, int, str]], collections.Counter]:
-        """(priority, height, node): nearest to Mathlib first; the targets' statement closure first when the early review is on."""
+    def needs_statement(self, i: str) -> bool:
+        """A stage-2 node that still needs a statement: reached from a target, not a Mathlib leaf, no Lean declaration."""
+        d = self.live.get(i)
+        return d is not None and i in self.dist and not is_leaf(d) and not has_decl(d)
+
+    def blockers(self, items) -> dict[str, int]:
+        """item -> how many stage-2 nodes still needing a statement cannot be stated before it: every node whose stmt_deps
+        chain reaches the item (transitively, each counted once, the item itself excluded). Reverse stmt_deps graph, one
+        walk per item."""
+        rev = collections.defaultdict(set)
+        for j in self.live:
+            for c in self.deps(j, "stmt"):
+                if c != j:
+                    rev[c].add(j)
+        out = {}
+        for i in items:
+            seen, st = {i}, [i]
+            while st:
+                for p in rev.get(st.pop(), ()):
+                    if p not in seen:
+                        seen.add(p); st.append(p)
+            out[i] = sum(1 for j in seen if j != i and self.needs_statement(j))
+        return out
+
+    def stage2(self) -> tuple[list[tuple[int, int, str, int]], collections.Counter]:
+        """(priority, height, node, blockers): definitions first, then the most blocking first (human, 2026-10-11 23:30 +08),
+        then nearest to Mathlib; the targets' statement closure first when the early review is on."""
         why = collections.Counter(); items = []; tsc = self.target_statement_closure()
         early = li.config().get("SHEAF_EARLY_REVIEW", "") not in ("", "0", "no")
         for i, d in self.live.items():
@@ -249,8 +276,12 @@ class Dag:
                 why["waits for a statement dependency"] += 1; continue
             items.append((0 if early and i in tsc else 1, self.h(i), i))
         # launcher, 2026-10-11 10:50 UTC (STAGE 2 ORDER: DEFINITIONS FIRST): a statement cannot be written before its
-        # definitions, so within the open items the definitions come first, then the statements, each by the order above
-        return sorted(items, key=lambda t: (t[0], not is_def(self.live[t[2]]), t[1], t[2])), why
+        # definitions, so within the open items the definitions come first, then the statements, each by the order above.
+        # human, 2026-10-11 23:30 +08 (STAGE 2 ORDER: BLOCKERS FIRST): after the definitions rule, the item that the most
+        # stage-2 nodes wait for (transitively through stmt_deps) comes first; ties by the distance order above
+        b = self.blockers([t[2] for t in items])
+        items = [(pri, hgt, i, b[i]) for pri, hgt, i in items]
+        return sorted(items, key=lambda t: (t[0], not is_def(self.live[t[2]]), -t[3], t[1], t[2])), why
 
     def waiting(self) -> list[tuple[str, str]]:
         """(module, node it waits for) for every stated node whose proof uses an unstated node."""
@@ -281,8 +312,8 @@ def main() -> int:
     elif cmd == "items":
         for dist, i in s1:
             print(f"1\t{i}\t{dist}\t{audit_state(g.live[i])}")
-        for pri, hgt, i in s2:
-            print(f"2\t{i}\t{hgt}\t{'target-statement' if pri == 0 else 'state'}")
+        for pri, hgt, i, nb in s2:
+            print(f"2\t{i}\t{hgt}\t{'target-statement' if pri == 0 else 'state'}\t{nb}")
     elif cmd == "waiting":
         for m, c in w:
             print(f"{m}\t{c}")
