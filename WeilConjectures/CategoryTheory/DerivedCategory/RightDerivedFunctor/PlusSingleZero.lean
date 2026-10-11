@@ -115,15 +115,13 @@ namespace CategoryTheory
 
 variable {C D : Type*} [Category* C] [Category* D] [Abelian C] [Abelian D]
 
-omit [Abelian C] in
-/-- If `a ≫ b = c ≫ d` with `a`, `c` and `d` isomorphisms, then `b` is an isomorphism. -/
-lemma isIso_of_comp_eq {P Q R W : C} (a : P ⟶ Q) (b : Q ⟶ W) (c : P ⟶ R) (d : R ⟶ W)
-    [IsIso a] [IsIso c] [IsIso d] (w : a ≫ b = c ≫ d) : IsIso b := by
-  have : IsIso (a ≫ b) := by rw [w]; infer_instance
-  exact IsIso.of_isIso_comp_left a b
-
 /-- If `a ≫ x = b ≫ y ≫ c` with `a`, `b` and `c` isomorphisms, the arrows `x` and `y` are
-isomorphic. -/
+isomorphic. The hypothesis says that the two paths from `P` to `B` agree:
+```
+P --a--> A  --x--> B
+P --b--> A' --y--> B' --c--> B
+```
+-/
 noncomputable def Arrow.isoOfCompEq {P A B A' B' : C} {x : A ⟶ B} {y : A' ⟶ B'} (a : P ⟶ A)
     (b : P ⟶ A') (c : B' ⟶ B) [IsIso a] [IsIso b] [IsIso c] (w : a ≫ x = b ≫ y ≫ c) :
     Arrow.mk x ≅ Arrow.mk y :=

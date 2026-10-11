@@ -31,8 +31,8 @@ an isomorphism for a finite `k` and a monomorphism for an open immersion `k` alo
 base-change property holds in lower degrees and the sheaf is injective. The image of the
 cokernel element in `j_* J ⊕ i_* i⁻¹ π⁻¹ F` survives in one of the summands
 (`CategoryTheory.mem_range_of_mono_cokernelMap`, `CategoryTheory.mem_range_of_decomp`), and the
-two summands are handled by `AlgebraicGeometry.Etale.not_mem_range_of_baseChangeProperty` and
-`AlgebraicGeometry.Etale.not_mem_range_of_isFinite`.
+two summands are handled by `AlgebraicGeometry.Etale.notMem_range_of_baseChangeProperty` and
+`AlgebraicGeometry.Etale.notMem_range_of_isFinite`.
 
 ## Main statements
 
@@ -41,8 +41,8 @@ two summands are handled by `AlgebraicGeometry.Etale.not_mem_range_of_baseChange
   monomorphism on `H^n` stays a monomorphism on `H^n` after a right derived functor.
 - `AlgebraicGeometry.Etale.exists_baseChangeTargetTransition_comp_eq`: the decomposition of the
   transition maps along a morphism.
-- `AlgebraicGeometry.Etale.not_mem_range_of_isFinite`,
-  `AlgebraicGeometry.Etale.not_mem_range_of_baseChangeProperty`: the closed and the open summand.
+- `AlgebraicGeometry.Etale.notMem_range_of_isFinite`,
+  `AlgebraicGeometry.Etale.notMem_range_of_baseChangeProperty`: the closed and the open summand.
 -/
 
 @[expose] public section
@@ -608,7 +608,8 @@ variable {X S T Y T' Y' : Scheme.{u}}
 omit [CommRing Λ] in
 /-- The naturality of a natural transformation between composites, evaluated at objects, stated
 for abstract functors so that its instances are checked syntactically. -/
-lemma natTrans_app_comp_map_map_eq {𝒜 ℬ ℬ' 𝒞 : Type*} [Category* 𝒜] [Category* ℬ]
+lemma _root_.CategoryTheory.NatTrans.app_comp_map_map_eq
+    {𝒜 ℬ ℬ' 𝒞 : Type*} [Category* 𝒜] [Category* ℬ]
     [Category* ℬ'] [Category* 𝒞] {F₁ : 𝒜 ⥤ ℬ} {F₂ : ℬ ⥤ 𝒞} {G₁ : 𝒜 ⥤ ℬ'} {G₂ : ℬ' ⥤ 𝒞}
     (β : F₁ ⋙ F₂ ⟶ G₁ ⋙ G₂) {A A' : 𝒜} (f : A ⟶ A') :
     β.app A ≫ G₂.map (G₁.map f) = F₂.map (F₁.map f) ≫ β.app A' :=
@@ -638,7 +639,7 @@ theorem Etale.baseChange_app_comp_pushforward {p : X ⟶ S} {g : T ⟶ S}
         (Etale.baseChange (ModuleCat.{u + 1} Λ) sq').app L := by
   rw [← Etale.targetTransitionPlus_comp_map Λ e h k a e' h' wa wh sqk K L ψ,
     reassoc_of% (Etale.baseChange_app_comp_targetTransitionPlus Λ sq k g' hg sq' a wa wh K),
-    natTrans_app_comp_map_map_eq (Etale.baseChange (ModuleCat.{u + 1} Λ) sq'),
+    NatTrans.app_comp_map_map_eq (Etale.baseChange (ModuleCat.{u + 1} Λ) sq'),
     ← Functor.map_comp_assoc, Etale.lowerStarPlusTransition_comp_map]
 
 /-- The comparison `k_* N[0] ⟶ Rk_*(N[0])` is the unit followed by `Rk_*` of the counit. -/
@@ -713,14 +714,16 @@ lemma Etale.baseChangeTargetFunctor_map (e : Y ⟶ T) (h : Y ⟶ X) (q : ℤ)
 omit [CommRing Λ] in
 /-- The naturality of a natural transformation out of a composite, stated for abstract functors
 so that its instances are checked syntactically. -/
-lemma natTrans_app_comp_map {𝒜 ℬ 𝒞 : Type*} [Category* 𝒜] [Category* ℬ] [Category* 𝒞]
+lemma _root_.CategoryTheory.NatTrans.app_comp_map
+    {𝒜 ℬ 𝒞 : Type*} [Category* 𝒜] [Category* ℬ] [Category* 𝒞]
     {F₁ : 𝒜 ⥤ ℬ} {F₂ : ℬ ⥤ 𝒞} {G : 𝒜 ⥤ 𝒞} (β : F₁ ⋙ F₂ ⟶ G) {A A' : 𝒜} (f : A ⟶ A') :
     β.app A ≫ G.map f = F₂.map (F₁.map f) ≫ β.app A' :=
   (β.naturality f).symm
 
 omit [CommRing Λ] in
 /-- Two equal composites stay equal under a functor. -/
-lemma map_comp_map_eq_map_comp_map {𝒞 𝒟 : Type*} [Category* 𝒞] [Category* 𝒟] (G : 𝒞 ⥤ 𝒟)
+lemma _root_.CategoryTheory.Functor.map_comp_map_eq_map_comp_map
+    {𝒞 𝒟 : Type*} [Category* 𝒞] [Category* 𝒟] (G : 𝒞 ⥤ 𝒟)
     {A B B' C : 𝒞} {f₁ : A ⟶ B} {f₂ : B ⟶ C} {g₁ : A ⟶ B'} {g₂ : B' ⟶ C}
     (w : f₁ ≫ f₂ = g₁ ≫ g₂) : G.map f₁ ≫ G.map f₂ = G.map g₁ ≫ G.map g₂ := by
   rw [← G.map_comp, w, G.map_comp]
@@ -751,14 +754,14 @@ lemma Etale.targetPushforward_naturality (e : Y ⟶ T) (h : Y ⟶ X) (k : T' ⟶
       (DerivedCategory.Plus.homologyFunctor _ q).map (R+((h')_*[ModuleCat.{u + 1} Λ]).map
         (D+((e')^*[ModuleCat.{u + 1} Λ]).map
           ((DerivedCategory.Plus.singleFunctor _ 0).map φ))) := by
-  have h₁ := map_comp_map_eq_map_comp_map D+((e)^*[ModuleCat.{u + 1} Λ])
+  have h₁ := Functor.map_comp_map_eq_map_comp_map D+((e)^*[ModuleCat.{u + 1} Λ])
     (Etale.singleLowerStarComparison_naturality Λ k φ).symm
   rw [← Functor.map_comp, ← Functor.map_comp]
   congr 1
-  rw [Category.assoc, natTrans_app_comp_map (Etale.lowerStarPlusCompIso Λ a h h' wh).hom,
+  rw [Category.assoc, NatTrans.app_comp_map (Etale.lowerStarPlusCompIso Λ a h h' wh).hom,
     ← Functor.map_comp_assoc (R+((h)_*[ModuleCat.{u + 1} Λ])),
     ← Functor.map_comp_assoc (R+((h)_*[ModuleCat.{u + 1} Λ])), reassoc_of% h₁, Category.assoc,
-    natTrans_app_comp_map_map_eq (Etale.baseChange (ModuleCat.{u + 1} Λ) sqk)]
+    NatTrans.app_comp_map_map_eq (Etale.baseChange (ModuleCat.{u + 1} Λ) sqk)]
 
 /-- The comparison of the targets for a pushed forward sheaf is an isomorphism when the
 comparison `k_* N[0] ⟶ Rk_*(N[0])` and the derived base-change map at `N[0]` are. -/
@@ -862,7 +865,8 @@ lemma Etale.baseChangeTargetTransition_comp_eq {X T Y T₂ Y₂ T₁ Y₁ : Sche
 
 omit [CommRing Λ] in
 /-- Two equal composites stay equal under a functor, followed by a common morphism. -/
-lemma map_comp_map_comp_map_comp_eq {ℬ 𝒞 𝒟 : Type*} [Category* ℬ] [Category* 𝒞] [Category* 𝒟]
+lemma _root_.CategoryTheory.Functor.map_comp_map_comp_map_comp_eq
+    {ℬ 𝒞 𝒟 : Type*} [Category* ℬ] [Category* 𝒞] [Category* 𝒟]
     (R : ℬ ⥤ 𝒞) (G : 𝒞 ⥤ 𝒟) {A B C B' : 𝒞} {L : ℬ} {E : 𝒟} {a : A ⟶ B} {b : B ⟶ C}
     {c : C ⟶ R.obj L} {x : A ⟶ B'} {y : B' ⟶ R.obj L} (d : (R ⋙ G).obj L ⟶ E)
     (w : x ≫ y = a ≫ b ≫ c) :
@@ -940,7 +944,8 @@ theorem Etale.exists_baseChangeTargetTransition_comp_eq {X T Y T₂ Y₂ T₁ Y�
       (Etale.lowerStarPlusCompIso Λ a' h₂ h₁ wh').hom.app
         (D+((e₁)^*[ModuleCat.{u + 1} Λ]).obj ((DerivedCategory.Plus.singleFunctor _ 0).obj
           (((i ≫ f₂)^*[ModuleCat.{u + 1} Λ]).obj F))))
-      (map_comp_map_comp_map_comp_eq R+((i)_*[ModuleCat.{u + 1} Λ]) D+((e₂)^*[ModuleCat.{u + 1} Λ])
+      (Functor.map_comp_map_comp_map_comp_eq R+((i)_*[ModuleCat.{u + 1} Λ])
+        D+((e₂)^*[ModuleCat.{u + 1} Λ])
         (A := (DerivedCategory.Plus.singleFunctor _ 0).obj (((f₂)^*[ModuleCat.{u + 1} Λ]).obj F))
         (B := ?oB) (C := ?oC) (B' := ?oB') (L := ?oL)
         (E := R+((a')_*[ModuleCat.{u + 1} Λ]).obj (D+((e₁)^*[ModuleCat.{u + 1} Λ]).obj
@@ -988,7 +993,8 @@ variable {X S T Y T₁ Y₁ : Scheme.{u}}
 omit [CommRing Λ] in
 /-- On modules: if `b` sends `y` outside the range of `bc₂`, and `bc₂` and `bc₁` are related by
 isomorphisms `τ` and `σ`, then `b ≫ τ` sends `y` outside the range of `bc₁`. -/
-lemma not_mem_range_of_isIso_comm {R : Type*} [Ring R] {M₂ M₂' S₂ S₁ M₁ : ModuleCat R}
+lemma _root_.ModuleCat.notMem_range_of_isIso_comm
+    {R : Type*} [Ring R] {M₂ M₂' S₂ S₁ M₁ : ModuleCat R}
     (b : M₂ ⟶ M₂') (τ : M₂' ⟶ M₁) (bc₂ : S₂ ⟶ M₂') (σ : S₂ ⟶ S₁) (bc₁ : S₁ ⟶ M₁)
     [IsIso τ] [IsIso σ] (w : bc₂ ≫ τ = σ ≫ bc₁) (y : M₂) (hB : b.hom y ∉ Set.range bc₂.hom) :
     τ.hom (b.hom y) ∉ Set.range bc₁.hom := by
@@ -1004,7 +1010,7 @@ variable {X S T Y T₁ Y₁ : Scheme.{u}}
 change, if the image of `y` under `R^q h_* e⁻¹ β` is not in the image of the base-change map for
 `k_* N`, then its image under the comparison of the targets is not in the image of the
 base-change map over `T₁` for `N`. -/
-theorem Etale.not_mem_range_of_isFinite {p : X ⟶ S} {g : T ⟶ S} {e : Y ⟶ T} {h : Y ⟶ X}
+theorem Etale.notMem_range_of_isFinite {p : X ⟶ S} {g : T ⟶ S} {e : Y ⟶ T} {h : Y ⟶ X}
     (sq : IsPullback e h g p) (k : T₁ ⟶ T) [IsFinite k] {e₁ : Y₁ ⟶ T₁} {h₁ : Y₁ ⟶ X}
     (g₁ : T₁ ⟶ S) (hg : k ≫ g = g₁) (sq₁ : IsPullback e₁ h₁ g₁ p) (a : Y₁ ⟶ Y)
     (wa : a ≫ e = e₁ ≫ k) (wh : a ≫ h = h₁) (sqk : IsPullback e₁ a k e) (q : ℤ)
@@ -1040,12 +1046,13 @@ theorem Etale.not_mem_range_of_isFinite {p : X ⟶ S} {g : T ⟶ S} {e : Y ⟶ T
     (Etale.baseChangeHomologyMap_comp_pushforward Λ sq k g₁ hg sq₁ a wa wh sqk.toCommSq q N)
   rw [(X.uliftPointSmallEtale x).sheafFiber.map_comp,
     (X.uliftPointSmallEtale x).sheafFiber.map_comp] at w
-  exact not_mem_range_of_isIso_comm _ _ _ _ _ w y hy
+  exact ModuleCat.notMem_range_of_isIso_comm _ _ _ _ _ w y hy
 
 omit [CommRing Λ] in
 /-- On modules: if `b ≫ jι` sends `y` outside the range of `bcJ`, `jι ≫ τJ = τ ≫ ι₁` with `τJ`
 injective and `bc₁ ≫ ι₁ = 0`, then `b ≫ τ` sends `y` outside the range of `bc₁`. -/
-lemma not_mem_range_of_mono_comm {R : Type*} [Ring R] {M₂ M₂' M₁ M₁' J₂ S₁ SJ : ModuleCat R}
+lemma _root_.ModuleCat.notMem_range_of_mono_comm
+    {R : Type*} [Ring R] {M₂ M₂' M₁ M₁' J₂ S₁ SJ : ModuleCat R}
     (b : M₂ ⟶ M₂') (τ : M₂' ⟶ M₁) (ι₁ : M₁ ⟶ M₁') (jι : M₂' ⟶ J₂) (τJ : J₂ ⟶ M₁')
     (bc₁ : S₁ ⟶ M₁) (bcJ : SJ ⟶ J₂) [Mono τJ] (wn : jι ≫ τJ = τ ≫ ι₁) (hz : bc₁ ≫ ι₁ = 0)
     (y : M₂) (hA : jι.hom (b.hom y) ∉ Set.range bcJ.hom) :
@@ -1065,7 +1072,7 @@ base-change maps of the squares along `j` over `e` are isomorphisms in degrees `
 image of `y` under `R^q h_* e⁻¹ (β ≫ j_* ι)`, `ι : N ⟶ J` an injective envelope, is not in the
 image of the base-change map for `j_* J`, then the image of `y` under the comparison of the
 targets is not in the image of the base-change map over `T₁` for `N`. -/
-theorem Etale.not_mem_range_of_baseChangeProperty {p : X ⟶ S} {g : T ⟶ S} {e : Y ⟶ T}
+theorem Etale.notMem_range_of_baseChangeProperty {p : X ⟶ S} {g : T ⟶ S} {e : Y ⟶ T}
     {h : Y ⟶ X} (sq : IsPullback e h g p) (j : T₁ ⟶ T) [QuasiCompact j] [QuasiSeparated j]
     {e₁ : Y₁ ⟶ T₁} {h₁ : Y₁ ⟶ X} (g₁ : T₁ ⟶ S) (sq₁ : IsPullback e₁ h₁ g₁ p)
     (a : Y₁ ⟶ Y) (wh : a ≫ h = h₁) (sqk : IsPullback e₁ a j e) (q : ℤ) (hq : 1 ≤ q)
@@ -1114,7 +1121,7 @@ theorem Etale.not_mem_range_of_baseChangeProperty {p : X ⟶ S} {g : T ⟶ S} {e
     (Etale.baseChangeHomologyMap_comp_map_eq_zero_of_injective Λ sq₁ (q := q) (by lia)
       ι)
   rw [(X.uliftPointSmallEtale x).sheafFiber.map_comp, Functor.map_zero] at hz
-  exact not_mem_range_of_mono_comm _ _ _ _ _ _ _ wn hz y hy
+  exact ModuleCat.notMem_range_of_mono_comm _ _ _ _ _ _ _ wn hz y hy
 
 
 end Summands

@@ -215,7 +215,7 @@ theorem Etale.survivesBaseChange_of_isLimit [IsAffine S] (q : ℤ) (sq : IsPullb
       ((Etale.stageFunctor sq).obj V).hom ≫ h = ((Etale.stageFunctor sq).obj U).hom ≫ h := by
     rw [← Category.assoc, Over.w]
   rw [hconv]
-  refine Etale.not_mem_range_of_forall_not_mem_range
+  refine ModuleCat.notMem_range_of_forall_notMem_range
     (A := fun i ↦ (DerivedCategory.Plus.homologyFunctor _ q ⋙
         (X.uliftPointSmallEtale x).sheafFiber).obj
       (D+((p)^*[ModuleCat.{u + 1} Λ]).obj (R+(((D.obj i).hom ≫ g)_*[ModuleCat.{u + 1} Λ]).obj
@@ -318,7 +318,7 @@ theorem Etale.survivesBaseChange_of_isLimit [IsAffine S] (q : ℤ) (sq : IsPullb
   case refine_6 =>
     have lim := Etale.higherDirectImage_limit Λ g F D c hc q
     intro y
-    refine Etale.mem_iSup_range_of_comm _
+    refine ModuleCat.mem_iSup_range_of_comm _
       (fun i ↦ (X.uliftPointSmallEtale x).sheafFiber.map (((p)^*[ModuleCat.{u + 1} Λ]).map
         (Etale.higherDirectImageOverMap Λ g F q (c.π.app i))))
       (fun i ↦ (X.uliftPointSmallEtale x).sheafFiber.map
@@ -480,14 +480,14 @@ theorem Etale.survivesBaseChange_or_of_isClosedImmersion [IsAffine S] (q : ℤ) 
     (Etale.baseChangeHomologyMap_naturality Λ _ q) biprod.fst biprod.snd
     biprod.inl biprod.inr biprod.total _ ?_ ?_
   · by_contra hA
-    refine Etale.not_mem_range_of_baseChangeProperty Λ (IsPullback.of_hasPullback (f ≫ g) p)
+    refine Etale.notMem_range_of_baseChangeProperty Λ (IsPullback.of_hasPullback (f ≫ g) p)
       V.ι ((V.ι ≫ f) ≫ g) (IsPullback.of_hasPullback _ _) _ (pullback.lift_snd _ _ _) sqV q hq
       hbc βV ι x _ ?_ hVin
     rw [← ModuleCat.comp_apply, ← Functor.map_comp, ← Functor.map_comp]
     rw [← ModuleCat.comp_apply, ← Functor.map_comp, ← Functor.map_comp, biprod.lift_fst] at hA
     exact hA
   · by_contra hB
-    refine Etale.not_mem_range_of_isFinite Λ (IsPullback.of_hasPullback (f ≫ g) p)
+    refine Etale.notMem_range_of_isFinite Λ (IsPullback.of_hasPullback (f ≫ g) p)
       i ((i ≫ f) ≫ g) (Category.assoc _ _ _).symm (IsPullback.of_hasPullback _ _) _
       (pullback.lift_fst _ _ _) (pullback.lift_snd _ _ _) sqZ q βZ x _ ?_ hZin
     rw [← ModuleCat.comp_apply, ← Functor.map_comp, ← Functor.map_comp, biprod.lift_snd] at hB

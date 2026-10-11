@@ -21,7 +21,7 @@ the limit theorem for higher direct images (`AlgebraicGeometry.Etale.higherDirec
 
 ## Main statements
 
-- `AlgebraicGeometry.Etale.not_mem_range_of_forall_not_mem_range`: an element of a colimit of
+- `ModuleCat.notMem_range_of_forall_notMem_range`: an element of a colimit of
   modules that is not in the image of compatible maps at every stage is not in the image of the
   limit map.
 - `AlgebraicGeometry.Etale.mem_range_baseChangeHomologyMap_iff`: the survival condition written
@@ -526,7 +526,8 @@ section Abstract
 /-- An element of a module which survives at every stage of a cofiltered system survives at the
 limit, when the sources of the comparison maps form a filtered colimit up to surjectivity and the
 targets are a filtered colimit up to injectivity. -/
-lemma Etale.not_mem_range_of_forall_not_mem_range {R : Type*} [Ring R] {I : Type*} [Category I]
+lemma _root_.ModuleCat.notMem_range_of_forall_notMem_range
+    {R : Type*} [Ring R] {I : Type*} [Category I]
     [IsCofiltered I] (A B : I → ModuleCat R) (Al Bl B₀ : ModuleCat R) (φ : ∀ i, A i ⟶ B i)
     (φl : Al ⟶ Bl) (tA : ∀ {i j : I}, (j ⟶ i) → (A i ⟶ A j))
     (tB : ∀ {i j : I}, (j ⟶ i) → (B i ⟶ B j))
@@ -773,7 +774,8 @@ lemma Etale.sheafFiber_map_overTargetTransition {X Y T Tᵢ Tⱼ : Scheme.{u}} (
 
 omit [CommRing Λ] in
 /-- Transport of membership in a supremum of ranges along compatible isomorphisms. -/
-lemma Etale.mem_iSup_range_of_comm {R : Type*} [Ring R] {ι : Type*} {A B : ι → ModuleCat R}
+lemma _root_.ModuleCat.mem_iSup_range_of_comm
+    {R : Type*} [Ring R] {ι : Type*} {A B : ι → ModuleCat R}
     {Al Bl : ModuleCat R} (s : ∀ i, A i ⟶ Al) (t : ∀ i, B i ⟶ Bl) (θ : ∀ i, A i ⟶ B i)
     [∀ i, IsIso (θ i)] (θl : Al ≅ Bl) (w : ∀ i, s i ≫ θl.hom = θ i ≫ t i) (y : Al)
     (hy : θl.hom.hom y ∈ ⨆ i, LinearMap.range (t i).hom) :

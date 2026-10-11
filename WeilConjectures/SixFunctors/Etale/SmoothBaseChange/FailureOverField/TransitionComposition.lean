@@ -411,7 +411,7 @@ lemma Etale.baseChangeHomologyMap_eq_homologyFunctor_map {X S T Y : Scheme.{u}} 
       ((Etale.baseChange (ModuleCat.{u + 1} Λ) sq.toCommSq).app
         ((DerivedCategory.Plus.singleFunctor _ 0).obj F)) := by
   rw [Etale.baseChangeHomologyMap, Etale.baseChangeHomologyNatTrans_eq,
-    whiskerLeft_whiskerRight_app']
+    Functor.whiskerLeft_whiskerRight_app]
 
 omit [CommRing Λ] in
 /-- The naturality of a natural transformation `β` along the inverse of an isomorphism

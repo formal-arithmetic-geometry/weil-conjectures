@@ -198,7 +198,8 @@ instances at the concrete derived functors are checked syntactically (see the im
 notes of `WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Locality`). -/
 omit [CommRing Λ] in
 /-- Whiskering on both sides, evaluated at an object. -/
-lemma whiskerLeft_whiskerRight_app' {𝒜 ℬ 𝒞 𝒟 : Type*} [Category* 𝒜] [Category* ℬ]
+lemma _root_.CategoryTheory.Functor.whiskerLeft_whiskerRight_app
+    {𝒜 ℬ 𝒞 𝒟 : Type*} [Category* 𝒜] [Category* ℬ]
     [Category* 𝒞] [Category* 𝒟] (E : 𝒜 ⥤ ℬ) {P Q : ℬ ⥤ 𝒞} (α : P ⟶ Q) (Hh : 𝒞 ⥤ 𝒟) (X : 𝒜) :
     (Functor.whiskerLeft E (Functor.whiskerRight α Hh)).app X = Hh.map (α.app (E.obj X)) :=
   rfl
@@ -253,7 +254,7 @@ theorem Etale.baseChangeHomologyMap_comp_baseChangeTargetTransition (sq : IsPull
         Etale.baseChangeHomologyMap Λ sq' q (((π)^*[ModuleCat.{u + 1} Λ]).obj F) := by
   rw [Etale.baseChangeHomologyMap, Etale.baseChangeHomologyMap,
     Etale.baseChangeHomologyNatTrans_eq, Etale.baseChangeHomologyNatTrans_eq,
-    whiskerLeft_whiskerRight_app', whiskerLeft_whiskerRight_app',
+    Functor.whiskerLeft_whiskerRight_app, Functor.whiskerLeft_whiskerRight_app,
     Etale.baseChangeTargetTransition, Etale.baseChangeSourceTransition, ← Functor.map_comp,
     ← Functor.map_comp]
   congr 1

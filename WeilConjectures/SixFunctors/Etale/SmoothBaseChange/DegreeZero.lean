@@ -381,7 +381,7 @@ theorem Etale.nonempty_arrowIso_baseChangeHomologyMap_zero (sq : IsPullback e h 
     have hN := congrArg (DerivedCategory.Plus.homologyFunctor _ 0).map
       (((h)_*[ModuleCat.{u + 1} Λ]).rightDerivedFunctorPlusUnit.naturality ψ.hom)
     simp only [Functor.comp_map, Functor.map_comp] at hN
-    exact CategoryTheory.isIso_of_comp_eq _ _ _ _ hN
+    exact IsIso.of_isIso_fac_left hN
   have hfac := congrArg (DerivedCategory.Plus.homologyFunctor _ 0).map
     (Etale.derivedBaseChangeMapPlus_fac_app _ sq.toCommSq K)
   rw [Functor.map_comp, Functor.map_comp, Functor.map_comp, Functor.map_comp] at hfac
