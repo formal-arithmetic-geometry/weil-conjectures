@@ -21,9 +21,41 @@
  "stmt_deps": [
   "def-sc-finitely-presented-module"
  ],
- "proof": [],
+ "proof": [
+  {
+   "text": "Coherent here means (Stacks Definition 05CU) finitely generated with every finitely generated submodule finitely presented; the hypothesis says exactly that R is coherent as a module over itself. By Stacks Lemma 05CW(4) and induction on n, R^n is coherent; a finitely presented module is the cokernel of a map R^a\\to R^b, hence coherent by 05CW(3) (this is the argument of Stacks Lemma 05CX). So M and N are coherent. By 05CW(2) applied to f:M\\to N (M finite, N coherent), K=\\operatorname{Ker}(f) is finitely generated; as a finitely generated submodule of the coherent module M it is finitely presented by Definition 05CU.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Definition 05CU and Lemmas 05CW, 05CX"
+   }
+  },
+  {
+   "text": "Choose finite generators m_1,\\ldots,m_r of M. Their images f(m_i) generate I=\\operatorname{Im}(f), so I is finitely generated. As a finitely generated submodule of the coherent module N (step 1), I is finitely presented by Stacks Definition 05CU (equivalently 05CW(1)).",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemmas 05CW and 05CX"
+   }
+  },
+  {
+   "text": "The cokernel is N/I. Take a finite presentation R^a\\to R^b\\to N\\to0 and finite generators i_1,\\ldots,i_s of I (step 2). Lift the i_j to R^b and append these lifts to the finitely many relation generators for N; the resulting finite presentation presents N/I. Thus \\operatorname{Coker}(f) is finitely presented.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma 05CW"
+   }
+  }
+ ],
  "proof_deps": [],
- "proof_origin": null,
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemmas 05CW and 05CX"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -48,12 +80,29 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sc-coherent-ring-perfect-complex-cohomology",
   "by": "worker",
   "date": "2026-10-11"
  },
  "chapter": "sec-abelian-varieties",
- "unit": "sk-prop-av-cube"
+ "unit": "sk-prop-av-cube",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-sc-coherent-ring-fp-kernel-cokernel",
+  "worker": "stage1",
+  "summary": "No sorry-free Lean declaration states the item. The initial child-node attempt was rejected by the D1/D2 duplicate check because the children restated clauses of this item and shared its Stacks tags. The final split keeps the coherent-module argument in three proof steps: kernel, image, and cokernel closure. Mathlib searches found no coherent-ring closure theorem.",
+  "blueprint": "Realizes the ancestor theorem-of-cube proof clause supplying the coherent-ring algebraic input for finite presentation of global sections.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-ckc0142",
+  "group": "C1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-ckc0142 (reviewer sub-agent of L); spot-checked: Statement hypothesis = Stacks Def 05CU coherent ring (fg ideals fp), conclusions Ker/Im/Coker match 05CW(2),(3)+05CX and the citer cc39d75af steps 0-1 (Ker, Im, Coker of maps of fp modules) exactly; Im covered as fg submodule of coherent N; step 3 quotient presentation correct; no duplicate (lem-weil-pbc-*finitely-presented* nodes concern projective/flat/algebra cases; only coherent-ring nodes are the item and its parent); Mathlib grep 'coherent' in Mathlib/RingTheory: only Grassmannian.lean, no IsCoherentRing. FIX more, RETURN less: C1 step 1 rewritten to write the chain Def 05CU -> R^n coherent by 05CW(4) -> fp = coker(R^a->R^b) coherent by 05CW(3) (05CX argument) -> Ker finite by 05CW(2) -> fp as fg submodule of coherent M; step 2 cites coherence of N from step 1 and Def 05CU; step 3 cross-reference tidied.; 1 file(s) fixed by the reviewer"
+ },
+ "lead_note": "2026-10-11 L (R-ckc0142): Second reading by C1 is stale: describes two child nodes and citations.json that the final delivery deleted; it did not note that steps 1-2 cited '05CW and 05CX clauses' without writing the 05CX chain."
 }

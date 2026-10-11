@@ -3245,3 +3245,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 01:42 L: returned deliver/G1/lem-pc-derived-tensor-localization-cohomology (reviewer RETURN: R-dtl0141. 1. E (wrong mathematics, Step 1, repeated in Steps 2-3): P is K-flat over A, not over R, so P tensor_R R' doe)
 - 01:42 L: merged deliver/K1/lem-sc-picard-kunneth-qcoh (reviewer FIX; after a return; new nodes: 5)
 - 01:42 UTC L: K1 picard-kunneth-qcoh FIX c6920c975 third push (R-kun0138; the dropped functoriality clause restored by the reviewer and proved in a new step 8; a Mathlib leaf for affine diagonals isAffineHom_diagonal_iff); returned: G1 derived-tensor-localization-cohomology 08a035602 (R-dtl0141: same fault as F1's version, P K-flat only over A; counterexample R=k[t], A=R'=R/t).
+- 01:43 L: merged deliver/C1/lem-sc-coherent-ring-fp-kernel-cokernel (reviewer FIX; first push; new nodes: 0)
