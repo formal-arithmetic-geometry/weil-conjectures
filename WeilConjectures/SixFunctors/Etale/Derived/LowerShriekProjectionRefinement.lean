@@ -67,6 +67,7 @@ lemma rightDerivedFunctorCompIso'_refinementLowerStarComp_hom :
       exact (congrArg Iso.hom
         (Etale.conjugateIsoEquiv_upperStarComp A r.hom d.g c.g r.hom_g.symm)).symm)
 
+omit [Etale.UpperStarPreservesFlat A] in
 lemma rightDerivedFunctorCompIso'_refinementLowerStarComp_hom_eq :
     (Functor.rightDerivedFunctorCompIso' (r.hom)_*[A] (d.g)_*[A]
         (refinementLowerStarComp A r)).hom =
@@ -104,6 +105,10 @@ lemma projectionMapOfCompactification_comparison (hcart : IsPullback c.i (𝟙 X
       ((-⊗ᴸ-(Y)[A]).map ((rightDerivedLowerShriekOfCompactificationComparison A r hcart).app
           K)).app L ≫
         ((projectionMapOfCompactification A c).app K).app L := by
+  rw [rightDerivedLowerShriekOfCompactificationComparison_app,
+    rightDerivedLowerShriekOfCompactificationComparison_app, projectionMapOfCompactification_app_app,
+    projectionMapOfCompactification_app_app]
+  trace_state
   sorry
 
 
