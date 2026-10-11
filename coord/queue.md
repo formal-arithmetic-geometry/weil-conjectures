@@ -1,15 +1,16 @@
 # Work queue
 
-236 items; claim with `tools/claim.py next <group> [--stage N]`.
+232 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (236)
+## Stage 2: nodes to state (232)
 
 | node | distance to Mathlib | kind | blockers |
 |---|---|---|---|
 | `def-weil-pbc-coherent-formal-module` | 1 | state | 33 |
+| `def-weil-pbc-semi-representable-object` | 1 | state | 8 |
 | `prop-pur-kinjective-resolutions-exist` | 1 | state | 173 |
 | `lem-weil-pbc-site-continuous-pushforward-sheaf` | 2 | state | 139 |
 | `prop-weil-pbc-kinjective-resolutions-exist` | 1 | state | 58 |
@@ -18,7 +19,6 @@
 | `lemma-nagata-filtered-colimit-finite-data` | 1 | state | 24 |
 | `lem-pc-module-pullback-identity-composition` | 1 | state | 11 |
 | `lemma-weil-pbc-affine-neighbourhood-cofinal` | 1 | state | 10 |
-| `lem-weil-pbc-matching-object-coskeleton` | 1 | state | 9 |
 | `lem-weil-pbc-strict-henselization-triples` | 1 | state | 7 |
 | `lem-sc-divisor-class-curve` | 2 | state | 7 |
 | `thm-sp-half-plane-convergence` | 2 | state | 6 |
@@ -48,7 +48,6 @@
 | `cor-galois-lisse-representations` | 1 | state | 0 |
 | `lem-pc-chow-relative-ample` | 1 | state | 0 |
 | `lem-pc-coherent-property-devissage` | 1 | state | 0 |
-| `lem-pc-noetherian-approximation-data` | 1 | state | 0 |
 | `lem-sc-affine-koszul-cech-derived-comparison` | 1 | state | 0 |
 | `lem-sc-ext-locally-free-second-naturality` | 1 | state | 0 |
 | `lem-sc-hilb-dominating-power` | 1 | state | 0 |
@@ -66,7 +65,6 @@
 | `lem-weil-pbc-pushforward-coherent-on-open` | 1 | state | 0 |
 | `lem-weil-pbc-scheme-theoretic-support` | 1 | state | 0 |
 | `lem-weil-pbc-sets-etale-section-continuity` | 1 | state | 0 |
-| `lem-weil-pbc-sets-finite-surjective-descent` | 1 | state | 0 |
 | `lem-weil-pbc-smooth-differentials-free-rank-fibre-dimension` | 1 | state | 0 |
 | `lem-weil-pbc-smooth-retract-relative-global-complete-intersection` | 1 | state | 0 |
 | `lem-weil-pbc-smooth-section-etale-lift` | 1 | state | 0 |
@@ -75,8 +73,6 @@
 | `lem-weil-pbc-spec-field-point-residue-field` | 1 | state | 0 |
 | `lem-weil-pbc-spec-finite-product-fields` | 1 | state | 0 |
 | `lem-weil-pbc-spec-map-residue-field-naturality` | 1 | state | 0 |
-| `lem-weil-pbc-spectral-closed-clopen-decomposition-lift` | 1 | state | 0 |
-| `lem-weil-pbc-spectral-constructible-topology-hausdorff` | 1 | state | 0 |
 | `lem-weil-pbc-spectral-generalizations-of-quasi-compact` | 1 | state | 0 |
 | `lem-weil-pbc-spectral-limit-constructible-closed-nonempty` | 1 | state | 0 |
 | `lem-weil-pbc-spectral-limit-constructible-closed-quasi-compact` | 1 | state | 0 |
@@ -246,7 +242,7 @@
 | `lem-pc-essentially-constant-pro-hom-colimit` | 4 | state | 0 |
 | `lem-pur-essential-constant-pro-criterion-05py` | 4 | state | 0 |
 
-Not open yet: 40 nodes that wait for stage 1, 459 nodes that wait for a statement dependency.
+Not open yet: 40 nodes that wait for stage 1, 458 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
