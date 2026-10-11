@@ -143,6 +143,7 @@ noncomputable def Etale.etaleLowerShriekTensorIso (F : Sheaf V.smallEtaleTopolog
     (Functor.Monoidal.μIso (presheafToSheaf U.smallEtaleTopology A) _ _).symm ≪≫
     whiskerLeftIso _ (asIso ((sheafificationAdjunction _ A).counit.app G))
 
+omit [HasSmallSiteSheafify A] in
 lemma Etale.etaleLowerShriekTensorIso_hom_naturality {F F' : Sheaf V.smallEtaleTopology A}
     {G G' : Sheaf U.smallEtaleTopology A} (φ : F ⟶ F') (ψ : G ⟶ G') :
     (Etale.etaleLowerShriek A f h).map (φ ⊗ₘ ((f)^*[A]).map ψ) ≫
