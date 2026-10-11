@@ -133,5 +133,24 @@
   "group": "M1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-ldk0037 (reviewer sub-agent of L); spot-checked: All four R-ldk0010 points checked against derived.tex 05S8/05S9/05SA/05SE/05RT/06XN and PointwiseLeftDerived.lean 60-110: (1) bridge node now links 05S9 essential constancy to the Kan-extension limit over StructuredArrow (QX) Q, cited in Steps 2 and 4; LF of Step 3 is a right Kan extension, hence the LF of the exactness node by uniqueness; (2) lem-pur-quasi-isos-saturated-triangulated states 05RT saturation and triangulation compatibility, cited in Step 4, not a duplicate of lem-pc-quasi-isomorphisms-multiplicative-system or def-weil-abstract-derived-category (Mathlib has only pieces: quasiIso_eq_trW_subcategoryAcyclic, no single declaration); (3) exactness node now has exact F, saturated compatible S, 05S9 everywhere-defined, equation-everywhere LF; (4) NOT repaired, fixed here. Preflight '05S9 quoted by item only' fine: 05S9 is a definition, now carried by the bridge node. Citer lem-pur-derived-change-of-rings (ddb16112d) uses exactly everywhere-defined, exact, component iso on P. No duplicate. FIX more, RETURN less: (a) B leaf lem-pur-total-left-derived-localization source.document LeftDerived.lean -> PointwiseLeftDerived.lean (return point 4 left unrepaired), grep verdict 'no match' -> match, my grep recorded; (b) C4 leaf statement 'L o LF -> F' -> 'LF o L -> F' (matches item's LF o Q); (c) E/C4 bridge node claimed an equivalence, but the converse (limit exists => pro-object essentially constant) is not true in general (essential constancy is strictly stronger than limit existence, cf. Stacks 05SA proof remark); weakened to the used direction (i)=>(ii) plus the comparison-map clause, title adjusted.; 2 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.DerivedCategory.LeftDerivedFromResolvingClass",
+  "declaration": "CategoryTheory.Functor.leftDerived_from_resolvingClass",
+  "file": "lean/Sheaf/CategoryTheory/DerivedCategory/LeftDerivedFromResolvingClass.lean",
+  "statement": "theorem leftDerived_from_resolvingClass (A : Type u) [Category.{v} A] [Abelian A] [HasDerivedCategory.{w} A] (D' : Type u') [Category.{v'} D'] [Preadditive D'] [HasZeroObject D'] [HasShift D' ℤ] [∀ n : ℤ, (shiftFunctor D' n).Additive] [Pretriangulated D'] [CategoryTheory.IsTriangulated D'] (F : HomotopyCategory A (ComplexShape.up ℤ) ⥤ D') [F.CommShift ℤ] [F.IsTriangulated] (P : Set (HomotopyCategory A (ComplexShape.up ℤ))) (hres : ∀ X : HomotopyCategory A (ComplexShape.up ℤ), ∃ (X' : HomotopyCategory A (ComplexShape.up ℤ)) (s : X' ⟶ X), X' ∈ P ∧ HomotopyCategory.quasiIso A (ComplexShape.up ℤ) s) (hinv : ∀ (X X' : HomotopyCategory A (ComplexShape.up ℤ)) (s : X ⟶ X'), X ∈ P → X' ∈ P → HomotopyCategory.quasiIso A (ComplexShape.up ℤ) s → IsIso (F.map s)) : F.HasPointwiseLeftDerivedFunctor (HomotopyCategory.quasiIso A (ComplexShape.up ℤ)) ∧ ∃ (LF : DerivedCategory A ⥤ D') (ε : DerivedCategory.Qh ⋙ LF ⟶ F), LF.IsLeftDerivedFunctor ε (HomotopyCategory.quasiIso A (ComplexShape.up ℤ)) ∧ (∃ (_ : LF.CommShift ℤ), LF.IsTriangulated) ∧ ∀ X : HomotopyCategory A (ComplexShape.up ℤ), X ∈ P → IsIso (ε.app X)",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-ldk0933"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-ldk0933",
+  "group": "F1",
+  "result": "fix",
+  "note": "A abelian, K(A)=HomotopyCategory up Z, Q=DerivedCategory.Qh, D' triangulated, F exact (CommShift+IsTriangulated), P arbitrary Set; hres direction X'->X quasiIso, hinv both ends in P; conclusions HasPointwiseLeftDerivedFunctor quasiIso, IsLeftDerivedFunctor (right Kan) eps : Qh ⋙ LF ⟶ F, LF exact via existential CommShift, IsIso eps.app on P; no Mathlib/source exact match (only derivability-structure/K-flat-monoidal forms); FIX: beta-reduced the lambda in the exactness clause"
  }
 }
