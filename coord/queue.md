@@ -1,11 +1,11 @@
 # Work queue
 
-904 items; claim with `tools/claim.py next <group> [--stage N]`.
+899 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (904)
+## Stage 2: nodes to state (899)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -14,8 +14,6 @@
 | `def-sc-ringed-space-module-cohomology` | 1 | state |
 | `def-weil-l-adic-coefficient-extension` | 1 | state |
 | `def-weil-pbc-kinjective-resolutions` | 1 | state |
-| `lem-exc-field-discrete-modules` | 1 | state |
-| `lem-galois-pi1-finite-etale-image-stabilizer` | 1 | state |
 | `lem-kun-04ca` | 1 | state |
 | `lem-pc-derived-adjoint-functors` | 1 | state |
 | `lem-pc-derived-tensor-transitivity` | 1 | state |
@@ -39,21 +37,18 @@
 | `lem-sc-ringed-space-restrict-injective-resolution` | 1 | state |
 | `lem-sc-smooth-proper-diagonal-conormal-differentials` | 1 | state |
 | `lem-sc-tangent-map-linear` | 1 | state |
-| `lem-sc-tensor-section-affine-open` | 1 | state |
 | `lem-sc-valuation-zero-section-relative-cartier` | 1 | state |
 | `lem-sp-cartan-eilenberg-comparison-independence` | 1 | state |
 | `lem-sp-cartan-eilenberg-double-complex-homotopy` | 1 | state |
 | `lem-sp-ce-horizontal-lift` | 1 | state |
 | `lem-sp-ce-vertical-nullhomotopy` | 1 | state |
 | `lem-weil-derived-limit-existence` | 1 | state |
-| `lem-weil-geometrically-connected-check-after-extension` | 1 | state |
 | `lem-weil-pbc-adjunction-lifts-group-ring-objects` | 1 | state |
 | `lem-weil-pbc-affine-basic-set-difference` | 1 | state |
 | `lem-weil-pbc-affine-formally-smooth-iff-ring-lifting` | 1 | state |
 | `lem-weil-pbc-affine-tilde-tensor` | 1 | state |
 | `lem-weil-pbc-algebraize-finite-over-proper` | 1 | state |
 | `lem-weil-pbc-ample-very-ample-immersion-affine-base` | 1 | state |
-| `lem-weil-pbc-analytically-unramified-n1` | 1 | state |
 | `lem-weil-pbc-annihilator-element-flat-base-change` | 1 | state |
 | `lem-weil-pbc-annihilator-localization-finite` | 1 | state |
 | `lem-weil-pbc-another-helper-g-ring` | 1 | state |
