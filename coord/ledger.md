@@ -4315,3 +4315,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 10:49 L: merged deliver/H1/lem-weil-pbc-galois-invariant-closed-subset-descends (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.GaloisInvariantClosedSubsetDescends AlgebraicGeometry.exists_closed_subset_of_galois_invariant)
 - 10:49 L: merged deliver/J1/lem-weil-pbc-geometrically-regular-h1-injective (stage 2; reviewer PASS; first push; Sheaf.RingTheory.GeometricallyRegularH1Injective Algebra.isRegularLocalRing_and_injective_h1Cotangent_of_isGeometricallyRegular)
 - 10:49 L: merged deliver/J1/lem-weil-pbc-flat-mod-injective (stage 2; reviewer FIX; first push; Sheaf.RingTheory.FlatModInjective flat_mod_injective)
+- 10:49 L: merged deliver/K1/lem-weil-pbc-fpqc-finer-than-etale (stage 2; reviewer FIX; first push; Sheaf.AlgebraicGeometry.FpqcFinerThanEtale AlgebraicGeometry.Scheme.fpqcCover_of_smallEtaleCover)

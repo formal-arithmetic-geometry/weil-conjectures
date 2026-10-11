@@ -172,5 +172,24 @@
   "worker": "stage1",
   "summary": "Read Stacks Topologies Lemma 022C (tag verified in tags/tags; topologies.tex 3043-3065) and Remark 03O4 (etale-cohomology.tex 1086-1095), the definitions def-weil-pbc-etale-site (covering families are jointly surjective families of etale morphisms) and def-weil-pbc-fpqc-covering (flat, and every affine open of the target is a finite union of images of affine opens), and the only citer lem-weil-pbc-small-etale-representable-presheaf-sheaf, whose step uses only that an etale covering family is an fpqc covering; the statement is kept. Proof in four steps following 022C: flatness from the definition of etale; restriction of the family over an affine open V to an etale jointly surjective family g_i: f_i^{-1}(V) -> V (open immersions etale, composition and cancellation: lem-weil-pbc-etale-composition-cancellation); the finite affine refinement over the affine V by the existing Mathlib leaf lem-weil-pbc-etale-covering-affine-refinement (Tag 0218, which carries 022C's openness plus quasi-compactness argument); the two clauses of the fpqc definition. No new node. Mathlib: no single declaration; etalePrecoverage <= fpqcPrecoverage on the big site is le_trans of etalePrecoverage_le_proetalePrecoverage (Sites/Proetale.lean:72) and proetalePrecoverage_le_fpqcPrecoverage (:61), recorded as a candidate in the searches."
  },
- "reviewed": "pass (L, 2026-10-10): 4 steps follow 022C for etale coverings: etale is flat; restrict over an affine open V (etale by composition/cancellation); the affine refinement node 0218 gives finitely many affine opens covering V; these are the two clauses of the fpqc definition. No new nodes."
+ "reviewed": "pass (L, 2026-10-10): 4 steps follow 022C for etale coverings: etale is flat; restrict over an affine open V (etale by composition/cancellation); the affine refinement node 0218 gives finitely many affine opens covering V; these are the two clauses of the fpqc definition. No new nodes.",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FpqcFinerThanEtale",
+  "declaration": "AlgebraicGeometry.Scheme.fpqcCover_of_smallEtaleCover",
+  "file": "lean/Sheaf/AlgebraicGeometry/FpqcFinerThanEtale.lean",
+  "statement": "theorem fpqcCover_of_smallEtaleCover (T : Scheme.{u}) {U : T.Etale} {ι : Type v} {Z : ι → T.Etale} (f : ∀ i, Z i ⟶ U) (hf : Sieve.ofArrows Z f ∈ T.smallEtaleTopology U) : Presieve.ofArrows (fun i ↦ (Z i).left) (fun i ↦ (f i).left) ∈ Scheme.fpqcPrecoverage U.left",
+  "branch": "sheaf-dag",
+  "by": "K1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-ffe1051"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-ffe1051",
+  "group": "K1",
+  "result": "fix",
+  "note": "FIX: étale family restated as Sieve.ofArrows Z f ∈ T.smallEtaleTopology U (recorded dep; replaces Cover+[Over T]+derivable hEt), conclusion as Presieve.ofArrows ((f i).left) ∈ Scheme.fpqcPrecoverage U.left (fpqc convention, H4/H12); arbitrary ι, n=0 inside Mathlib qc clause; truth checked: reduces to etale≤proetale≤fpqc"
+ }
 }
