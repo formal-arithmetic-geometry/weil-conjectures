@@ -167,5 +167,23 @@
   "group": "M1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-gvk (reviewer sub-agent of L); spot-checked: Source: blueprint lem-sc-generic-cohomology-comparison proof (kernel/cokernel of F->eta_*eta^*F, acyclicity sentence) and Lean GenericComparison.lean:164-211 (diagram over NonemptyAffineOpens^op, mono via colim.map of a mono nat trans under AB5, epi via Sheaf.IsLocallySurjective, isIso_of_mono_of_epi); statement unchanged (imported), steps follow the Lean route. Step 1: def-pc-integral-scheme (nonempty, irreducible: two nonempty opens meet) + lem-weil-pbc-affine-opens-basis (affine W in U cap V) give a nonempty directed poset, filtered by def-weil-pbc-category-colimit; u_V factors through u_U from the adjunction of def-weil-pbc-inverse-image and the formula of def-weil-pbc-direct-image (W x_C V = (W x_C U) x_U V), kernel inclusion by def-pur-abelian-sheaf-kernel; checked K_U subset K_V for V subset U. Step 2: lem-weil-pbc-site-abelian-sheaves-filtered-colimits-exact applied to 0->K_U->G->G/K_U->0, constant colimit = G by def-weil-pbc-category-colimit. Step 3: hypothesis + sectionwise kernel (def-pur-abelian-sheaf-kernel) + lem-weil-pbc-abelian-sheaf-epi-locally-surjective (iff, small etale site of a scheme: hypotheses match). Step 4: Ab(C_et) abelian (def-weil-pbc-abelian-etale-sheaves), mono+epi iso. Tool uses accepted: both pbc lemmas are general black-box statements (mathlib leaves). Small case U=C: K_C=0 (unit is id). Fix: dag/nodes/sec-curve-estimates/lem-sc-generic-vanishing-kernel-colimit.json: proof[1].text: the short exact sequence read 0->K_U->G->coker(u_U)->0, which is not exact (G->coker(u_U) is zero); replaced coker(u_U) by G/K_U = coker(K_U->G), argument unchanged. Note: report mentions citations.json, which is not on the branch (harmless). Start 2026-10-10 15:24:42 UTC, end Sat Oct 10 03:25:18 PM UTC 2026 per date -u.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.Curve.GenericVanishingKernelColimit",
+  "declaration": "AlgebraicGeometry.IsCurve.exists_kernel_cocone_isIso_colimitDesc_of_genericVanishing",
+  "file": "lean/Sheaf/AlgebraicGeometry/Curve/GenericVanishingKernelColimit.lean",
+  "statement": "theorem exists_kernel_cocone_isIso_colimitDesc_of_genericVanishing {k : Type u} [Field k] [IsAlgClosed k] {C : Scheme.{u}} (f : C ⟶ Spec (.of k)) [IsCurve f] [IsIntegral C] (G : Sheaf C.smallEtaleTopology AddCommGrpCat.{u + 1}) (hG : ∀ (V : C.Etale) (s : G.obj.obj (op V)), C.genericVanishingSieve G s ∈ C.smallEtaleTopology V) : ∃ (D : C.NonemptyAffineOpensᵒᵖ ⥤ Sheaf C.smallEtaleTopology AddCommGrpCat.{u + 1}) (ι : D ⟶ (Functor.const C.NonemptyAffineOpensᵒᵖ).obj G) (hι : ∀ U : C.NonemptyAffineOpensᵒᵖ, ι.app U ≫ C.affineOpenUnit U.unop G = 0), (∀ U : C.NonemptyAffineOpensᵒᵖ, Nonempty (IsLimit (KernelFork.ofι (ι.app U) (hι U)))) ∧ IsIso (colimit.desc D { pt := G, ι := ι })",
+  "branch": "sheaf-dag",
+  "by": "J1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-gvk1118",
+  "group": "J1",
+  "result": "pass",
+  "note": "k alg closed=[Field k][IsAlgClosed k]; integral curve=f:C->Spec k,[IsCurve f],[IsIntegral C] (AlgebraicGeometry.IsIntegral, Mathlib); G=Sheaf C.smallEtaleTopology AddCommGrpCat.{u+1} as in source; reverse-inclusion poset=C.NonemptyAffineOpens^op; u_U=C.affineOpenUnit (unit of upperStarLowerStarAdjunction for j_U=affineOpensDiagramι, Spec Γ(C,U) iso to U); K_U=ker u_U via existential D,ι with pointwise KernelFork IsLimit, transitions forced by naturality + mono legs (equivalent to the chosen kernel diagram of GenericComparison.lean); hypothesis=genericVanishingSieve covering for every V,s, U per covering arrow, sieve form equivalent to covering family; conclusion IsIso colimit.desc; matches source lines 156-201 exactly"
  }
 }
