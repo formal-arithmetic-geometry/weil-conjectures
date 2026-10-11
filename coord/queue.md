@@ -1,11 +1,11 @@
 # Work queue
 
-128 items; claim with `tools/claim.py next <group> [--stage N]`.
+123 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (128)
+## Stage 2: nodes to state (123)
 
 | node | distance to Mathlib | kind | blockers |
 |---|---|---|---|
@@ -16,17 +16,17 @@
 | `def-nagata-qc-open-equality-stage` | 1 | state | 13 |
 | `def-pc-global-derived-rhom` | 1 | state | 4 |
 | `def-weil-pbc-sheaf-ext` | 1 | state | 4 |
+| `def-weil-pbc-simplicial-hom-object` | 1 | state | 4 |
 | `def-pc-derived-rhom-algebra-module` | 1 | state | 2 |
+| `def-weil-pbc-hypercohomology-filtrations` | 1 | state | 2 |
 | `lem-pc-module-pullback-identity-composition` | 1 | state | 11 |
 | `lemma-nagata-qc-open-descends` | 1 | state | 10 |
 | `lem-weil-pbc-coherent-formal-modules-abelian` | 1 | state | 9 |
 | `lemma-nagata-affine-fp-descends` | 3 | state | 8 |
 | `lem-weil-pbc-pair-henselization` | 1 | state | 5 |
-| `lem-weil-pbc-simplicial-hom-object-exists` | 1 | state | 5 |
 | `lem-sc-derived-internal-hom-adjunction` | 1 | state | 4 |
 | `lem-weil-pbc-truncation-triangle` | 1 | state | 4 |
 | `lem-pc-ringed-spaces-derived-adjoint-general` | 1 | state | 3 |
-| `lem-sp-exact-functor-couple` | 1 | state | 3 |
 | `lem-weil-pbc-coherent-formal-modules-affine` | 1 | state | 3 |
 | `lem-weil-pbc-etale-graph-section-extension-map-linear` | 1 | state | 3 |
 | `lem-weil-pbc-underived-exchange-module-linear` | 1 | state | 2 |
@@ -56,7 +56,6 @@
 | `lem-sc-derived-internal-hom-stalk-localization` | 1 | state | 0 |
 | `lem-sc-etale-torsor-inverse-image-extension` | 1 | state | 0 |
 | `lem-sc-finite-sheafhom-affine-adjoint` | 1 | state | 0 |
-| `lem-sc-generic-vanishing-acyclic` | 1 | state | 0 |
 | `lem-sc-hilb-dominating-power` | 1 | state | 0 |
 | `lem-sc-hilbert-embedded-points-gluing` | 1 | state | 0 |
 | `lem-sc-koszul-regular-immersion-derived-hom` | 1 | state | 0 |
@@ -68,7 +67,6 @@
 | `lem-sc-p1-pullback-extension-class` | 1 | state | 0 |
 | `lem-sc-strict-henselization-cotangent-dimension` | 1 | state | 0 |
 | `lem-sc-strict-henselization-dvr` | 1 | state | 0 |
-| `lem-weil-pbc-closed-immersion-coherent-equivalence` | 1 | state | 0 |
 | `lem-weil-pbc-closed-immersion-pushforward-ideal-powers` | 1 | state | 0 |
 | `lem-weil-pbc-coherent-homs-over-open` | 1 | state | 0 |
 | `lem-weil-pbc-cohomology-filtered-colimit` | 1 | state | 0 |
@@ -104,10 +102,8 @@
 | `prop-weil-pbc-strict-henselization-stalk-formula` | 1 | state | 0 |
 | `sbc-lem-higher-direct-image-presheaf` | 1 | state | 0 |
 | `lem-exc-coinduced-continuous-acyclic` | 2 | state | 0 |
-| `lem-exc-coinduced-homotopy-identity` | 2 | state | 0 |
 | `lem-pc-affine-perfect-hom-colimit` | 2 | state | 0 |
 | `lem-pc-rf-single-complex-inherited-tensor-condition` | 2 | state | 0 |
-| `lem-pc-ring-pseudo-coherent-summand` | 2 | state | 0 |
 | `lem-sc-finite-locally-free-derived-hom` | 2 | state | 0 |
 | `lem-sc-hom-etale-locus-translation` | 2 | state | 0 |
 | `lem-sc-mult-n-tangent-differential` | 2 | state | 0 |
@@ -131,14 +127,13 @@
 | `lem-weil-pbc-henselian-finite-type-product-decomposition` | 2 | state | 0 |
 | `lem-weil-pbc-integral-closure-finite-fibre-part-localization` | 2 | state | 0 |
 | `lemma-weil-pbc-etale-cohomology-continuity` | 2 | state | 0 |
-| `pqf-lem-pushforward-qcoh` | 2 | state | 0 |
 | `thm-sc-proper-cohomology` | 2 | state | 0 |
 | `lem-pc-essentially-constant-ind-hom-colimit` | 3 | state | 0 |
 | `lem-sc-normalization-properties` | 3 | state | 0 |
 | `lem-pc-essentially-constant-pro-hom-colimit` | 4 | state | 0 |
 | `lem-pur-essential-constant-pro-criterion-05py` | 4 | state | 0 |
 
-Not open yet: 40 nodes that wait for stage 1, 332 nodes that wait for a statement dependency.
+Not open yet: 40 nodes that wait for stage 1, 330 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
