@@ -1,0 +1,47 @@
+/-
+Copyright (c) 2026 The SHEAF contributors. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: SHEAF group G1
+-/
+import Sheaf.RingTheory.JapaneseDomain
+import Mathlib.RingTheory.Noetherian.Defs
+
+/-!
+# Descent of N-1 along finite extensions of domains
+
+Source: Stacks Project, Algebra, Lemma 10.161.7 (Tag 032K), N-1 clause
+(blueprint: lem-weil-pbc-n1-descends-finite-domain-extension).
+-/
+
+universe uA uB uK uL
+
+set_option autoImplicit false
+
+/-- N-1 descends along a finite injective extension of domains when the smaller domain
+is Noetherian. Source: Stacks Project, Algebra, Lemma 10.161.7 (Tag 032K), N-1 clause
+(blueprint: lem-weil-pbc-n1-descends-finite-domain-extension).
+
+Proof (the source omits the proof and gives the integral-closure containment as a hint):
+1. The inclusion `A → B` extends to an injective `A`-linear map `K → L` of fraction
+   fields: send `a / s` to `a / s` in `L`. Equality of fractions gives well-definedness;
+   nonzero elements of `A` stay nonzero, and a field homomorphism is injective
+   (def-weil-pbc-localization-at-prime).
+2. This map sends the integral closure of `A` in `K` into that of `B` in `L`:
+   apply the map to a monic equation over `A` and regard its coefficients as elements
+   of `B` (def-weil-pbc-integral-closure).
+3. The latter closure is finite over `B` by N-1, and `B` is finite over `A`, so it is
+   finite over `A` by transitivity (def-weil-pbc-japanese-domain,
+   def-weil-finitely-generated-module, lem-weil-pbc-finite-module-over-finite-algebra).
+4. The image of the first closure is an `A`-submodule of the latter closure. Since
+   `A` is Noetherian it is finite (def-weil-pbc-noetherian-ring,
+   lem-weil-pbc-noetherian-submodule-finite). Injectivity identifies the first closure
+   with this image, so it too is finite over `A`, precisely N-1
+   (def-weil-pbc-integral-closure, def-weil-pbc-japanese-domain). -/
+theorem isN1_of_finite_domain_extension
+    (A : Type uA) (B : Type uB) (K : Type uK) (L : Type uL)
+    [CommRing A] [IsDomain A] [CommRing B] [IsDomain B]
+    [Algebra A B] [IsNoetherianRing A] [Module.Finite A B]
+    [Field K] [Algebra A K] [IsFractionRing A K]
+    [Field L] [Algebra B L] [IsFractionRing B L]
+    (hAB : Function.Injective (algebraMap A B)) (hB : IsN1 B L) : IsN1 A K := by
+  sorry

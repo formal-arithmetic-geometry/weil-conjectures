@@ -146,5 +146,23 @@
   "summary": "Read Algebra Lemma 032K (lemma-finite-extension-N-2, algebra.tex 45257-45266; tag verified in tags/tags): proof 'Omitted' with the hint that integral closures of R in extension fields lie in those of S. Wrote the N-1 clause out in four steps: the A-linear embedding K=Frac(A) -> L=Frac(B); the closure A' of A in K maps into the closure B' of B in L (same monic equation); B' is finite over B (N-1) and B finite over A, so B' is a finite A-module (Mathlib leaf Module.Finite.trans); A' is isomorphic to an A-submodule of B', finite as A is Noetherian (Mathlib leaf Submodule.FG.of_le). Statement checked against the source and kept; stmt_deps unchanged. No new node; no blueprint node states the lemma (blueprint_refs search 'N-1 finite extension', '032K', 'Japanese', 'integral closure', 'Nagata'), same_as []. proof_origin agent because the source omits the proof.",
   "blueprint": "Realizes, through the via chain (lem-weil-pbc-normal-nagata-monogenic-n1, step 8: 'Apply [lem-weil-pbc-n1-descends-finite-domain-extension] to the finite extension S_m ⊆ B'), the place of the blueprint node lem-weil-pbc-normal-constant-generic recorded in from.place: step 4 of its split ('O^sh_{Y,ybar} is a normal domain', Lemma 59.73.13, Tag 09Z5, proof of (1)), which uses lem-weil-pbc-etale-colimit-normal-local-domain; down the via chain this reaches the N-1 property of local rings of the monogenic extension in step 8 of lem-weil-pbc-normal-nagata-monogenic-n1. All four steps serve that one place."
  },
- "reviewed": "2026-10-10 L: 4 steps checked (032K N-1 clause, proof omitted in Stacks, written out): K embeds in L, A' maps into B' by the same monic equation, B' finite over A by transitivity, A' an A-submodule of a finite module over Noetherian A"
+ "reviewed": "2026-10-10 L: 4 steps checked (032K N-1 clause, proof omitted in Stacks, written out): K embeds in L, A' maps into B' by the same monic equation, B' finite over A by transitivity, A' an A-submodule of a finite module over Noetherian A",
+ "lean": {
+  "module": "Sheaf.RingTheory.IsN1OfFiniteDomainExtension",
+  "declaration": "isN1_of_finite_domain_extension",
+  "file": "lean/Sheaf/RingTheory/IsN1OfFiniteDomainExtension.lean",
+  "statement": "theorem isN1_of_finite_domain_extension (A : Type uA) (B : Type uB) (K : Type uK) (L : Type uL) [CommRing A] [IsDomain A] [CommRing B] [IsDomain B] [Algebra A B] [IsNoetherianRing A] [Module.Finite A B] [Field K] [Algebra A K] [IsFractionRing A K] [Field L] [Algebra B L] [IsFractionRing B L] (hAB : Function.Injective (algebraMap A B)) (hB : IsN1 B L) : IsN1 A K",
+  "branch": "sheaf-dag",
+  "by": "G1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-ndf1149",
+  "group": "G1",
+  "result": "pass",
+  "note": "A,B domains (IsDomain); A subset B = [Algebra A B]+Injective algebraMap (not hollow: Z->ZMod 2 finite, non-injective); A Noetherian IsNoetherianRing; B finite Module.Finite A B; K,L fraction fields IsFractionRing; hyp IsN1 B L, concl IsN1 A K (recorded J1 IsN1 = Module.Finite R (integralClosure R K), #print checked, root namespace); no quantified universes; node diff = lean field only"
+ }
 }
