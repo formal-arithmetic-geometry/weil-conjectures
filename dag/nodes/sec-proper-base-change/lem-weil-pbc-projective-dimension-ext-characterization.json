@@ -173,5 +173,23 @@
   "group": "C1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of C1; spot-checked by L: L: 065R by induction with the Ext long exact sequence and the Ext^1 criterion for projectivity (new Mathlib leaf projective_iff_subsingleton_ext_one)"
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.ProjectiveResolutionExtCharacterization",
+  "declaration": "ModuleCat.hasProjectiveResolutionLE_iff_ext_vanishing",
+  "file": "lean/Sheaf/RingTheory/ProjectiveResolutionExtCharacterization.lean",
+  "statement": "theorem hasProjectiveResolutionLE_iff_ext_vanishing {R : Type u} [CommRing R] (X : ModuleCat.{max u v} R) (n : ℕ) : (HasProjectiveResolutionLE X n ↔ ∀ Y : ModuleCat.{max u v} R, Subsingleton (@Abelian.Ext _ _ _ (HasExt.standard (ModuleCat.{max u v} R)) X Y (n + 1))) ∧ (HasProjectiveResolutionLE X n ↔ ∀ (Y : ModuleCat.{max u v} R) (i : ℕ), n + 1 ≤ i → Subsingleton (@Abelian.Ext _ _ _ (HasExt.standard (ModuleCat.{max u v} R)) X Y i))",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-pde1342",
+  "group": "E1",
+  "result": "pass",
+  "note": "R comm ring {R:Type u}[CommRing R}; X,Y arbitrary ModuleCat.{max u v} R (sibling universe, contains R so module/categorical projectivity agree, not vacuous); (1) landed ModuleCat.HasProjectiveResolutionLE X n; (2) Subsingleton of Abelian.Ext (HasExt.standard, landed E1 form, no let) in degree n+1 for all Y; all-degrees clause n+1<=i; both iffs; n=0 included; #check clean"
  }
 }
