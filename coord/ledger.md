@@ -5535,3 +5535,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 18:24 L: merged deliver/F1/def-weil-pbc-special-cocontinuous-functor (stage 2; reviewer FIX; first push; Sheaf.CategoryTheory.SpecialCocontinuousFunctor CategoryTheory.Functor.IsSpecialCocontinuous)
 - 18:24 L: merged deliver/H1/lem-pc-sites-module-sheafification-bilinear-extension (stage 2; reviewer PASS; first push; Sheaf.Algebra.Category.ModuleCat.Presheaf.SheafificationBilinearExtension PresheafOfModules.existsUnique_bilinear_sheafification_extension)
 - 18:24 L: merged deliver/M1/lem-weil-pbc-sheaf-surjection-kernel-pair-coequalizer (stage 2; reviewer PASS; first push; Sheaf.Topology.SurjectionKernelPairCoequalizer TopCat.surjection_kernel_pair_coequalizer)
+- 18:24 L: merged deliver/J1/lem-sc-irreducible-constant-sections (stage 2; reviewer PASS; first push; Sheaf.Topology.IrreducibleConstantSections TopCat.irreducible_constant_sections)
