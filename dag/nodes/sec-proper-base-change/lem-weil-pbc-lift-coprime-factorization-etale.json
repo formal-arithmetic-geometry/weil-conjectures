@@ -150,5 +150,24 @@
   "item": "lem-weil-pbc-lift-coprime-factorization-etale",
   "worker": "stage1",
   "summary": "Read Stacks 07M1 (more-algebra.tex:1899-1924), 07LX (:1771-1782), 0ALH (:1843-1897), 07M0 (:1820-1838) and Example 00UA's use, tags checked in stacks-project/tags/tags (07LX, 07M0, 07M1, 0ALH, 00UA). Not a Mathlib leaf: Mathlib has the universal (coprime) factorization ring (UniversalFactorizationRing.lean, read in full: etale instance, homEquiv, naturality) and the one-prime version 00UH, but not 07M1 or 0ALH, and 0ALH needs in addition the idempotent splitting of an etale section modulo I, so no one-declaration-per-clause route. Split along the 07M1 proof in four steps: (1) invert a lift of the leading coefficient, new Mathlib leaf lem-weil-pbc-lift-invertible-element (07LX, stated with the explicit A_a; clauses: open immersion => etale, IsLocalization quotient instance + IsLocalization.atUnits, Away.algebraMap_isUnit); (2) reduction to monic G = u^{-1} g_1, H = u h_1 (elementary, coprimality and monicity of H written out, including A_1/IA_1 = 0); (3) new unsplit node lem-weil-pbc-lift-monic-coprime-factorization-etale (0ALH), with the Mathlib route through UniversalCoprimeFactorizationRing recorded in its search verdict; (4) composite etale (existing leaf lem-weil-pbc-etale-composition-cancellation), alpha = beta∘alpha_1, and undoing the twist g' = v g_1, h' = v^{-1} h_1. Statement unchanged. Source repository slopmaster2 has no Lean for this (grep recorded)."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.EtaleLiftCoprimeFactorization",
+  "declaration": "Polynomial.exists_etale_lift_coprime_factorization",
+  "file": "lean/Sheaf/RingTheory/EtaleLiftCoprimeFactorization.lean",
+  "statement": "theorem exists_etale_lift_coprime_factorization {A : Type u} [CommRing A] (I : Ideal A) (f : A[X]) (hf : f.Monic) (g₀ h₀ : (A ⧸ I)[X]) (hfactor : f.map (Ideal.Quotient.mk I) = g₀ * h₀) (hleading : IsUnit g₀.leadingCoeff) (hcoprime : IsCoprime g₀ h₀) : ∃ (A' : Type u) (_ : CommRing A') (φ : A →+* A'), let J : Ideal A' := I.map φ let α : A ⧸ I →+* A' ⧸ J := Ideal.quotientMap J φ Ideal.le_comap_map AlgebraicGeometry.Etale (AlgebraicGeometry.Spec.map (CommRingCat.ofHom φ)) ∧ Function.Bijective α ∧ ∃ g' h' : A'[X], f.map φ = g' * h' ∧ g'.map (Ideal.Quotient.mk J) = g₀.map α ∧ h'.map (Ideal.Quotient.mk J) = h₀.map α",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-lcf1108b"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-lcf1108b",
+  "group": "E1",
+  "result": "fix",
+  "note": "A comm ring, I arbitrary ideal, f monic, g0 h0 over A/I with f-bar = g0*h0, IsUnit g0.leadingCoeff, IsCoprime g0 h0 (no monicity added); exists A' : Type u, phi, Etale (Spec.map phi), alpha = induced quotientMap bijective, g' h' with f.map phi = g'*h' and reductions = alpha-images; respelled conclusion to landed H1 f843176ef form (A', let J, typed alpha, g' h')"
  }
 }
