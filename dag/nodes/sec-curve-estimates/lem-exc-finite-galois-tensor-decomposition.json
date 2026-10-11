@@ -196,5 +196,23 @@
   "group": "C1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-gtd1804 (reviewer sub-agent of L); spot-checked: Return of 17:34 repaired: D2 part (1) now proved in steps 1-4 (primitive element, L[T]/(f)=E, tensor identification, roots = Q-orbit of alpha, distinct-linear CRT; composite a(x)b -> (a q(b))_q checked); algebra child now only the affine consequence (p1=id, p2=Spec q on component q checked); C4 sheaf child now on the small etale site of an arbitrary S, applied with S=Spec L. Tool use CRT accepted. FIX more, RETURN less: C4 step 2 cited lem-weil-pbc-polynomial-tensor-product (R[X] (x)_R R[Y], not E (x)_L L[T]) and tensor-quotient-base-change for E (x)_L L[T]/(f) = E[T]/(f); replaced by the explicit UP map plus E-basis comparison 1(x)T^i -> T^i, dropped both from uses/proof_deps; step 3 now says q is determined by q(alpha) (injectivity of q -> q(alpha)).; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FiniteGaloisTensorDecomposition",
+  "declaration": "AlgebraicGeometry.finiteGaloisTensorDecomposition",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteGaloisTensorDecomposition.lean",
+  "statement": "theorem finiteGaloisTensorDecomposition (L E : Type u) [Field L] [Field E] [Algebra L E] [FiniteDimensional L E] [IsGalois L E] (F : Sheaf ((Spec (CommRingCat.of L)).smallEtaleTopology) (Type v)) : (∃ φ : (E ⊗[L] E) ≃ₐ[L] ((E ≃ₐ[L] E) → E), ∀ (a b : E) (q : E ≃ₐ[L] E), φ (a ⊗ₜ[L] b) q = a * q b) ∧ (let π : Spec (CommRingCat.of E) ⟶ Spec (CommRingCat.of L) := Spec.map (CommRingCat.ofHom (algebraMap L E)) ∃ (hπ : Etale π) (hW : Etale (pullback.fst π π ≫ π)), letI : Etale π := hπ letI : Etale (pullback.fst π π ≫ π) := hW let U : (Spec (CommRingCat.of L)).Etale := .mk π let V : (Spec (CommRingCat.of L)).Etale := .mk (pullback.fst π π ≫ π) ∃ (p₁ p₂ : V ⟶ U) (σ : (E ≃ₐ[L] E) → (U ⟶ U)), p₁.left = pullback.fst π π ∧ p₂.left = pullback.snd π π ∧ (∀ q : E ≃ₐ[L] E, (σ q).left = Spec.map (CommRingCat.ofHom q.toRingEquiv.toRingHom)) ∧ ∃ β : F.obj.obj (Opposite.op V) ≃ ((E ≃ₐ[L] E) → F.obj.obj (Opposite.op U)), (∀ s q, β (F.obj.map p₁.op s) q = s) ∧ (∀ s q, β (F.obj.map p₂.op s) q = F.obj.map (σ q).op s))",
+  "branch": "sheaf-dag",
+  "by": "K1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-fgt0730",
+  "group": "K1",
+  "result": "pass",
+  "note": "IsGalois+FiniteDimensional L E; Q=E≃ₐ[L]E; (1) φ:(E⊗[L]E)≃ₐ[L](Q→E) Pi L-algebra, φ(a⊗b)q=a*q b (q on second factor); (2) π=Spec(algebraMap), W=pullback π π, p1/p2 pinned to pullback.fst/snd, σ q pinned to Spec q, β with p1↦const, p2↦(Spec q)^*s (consistent: component q ↔ a⊗b↦a q(b)); sheaf in Type v; no Mathlib/source match (grep FieldTheory/RingTheory, WeilConjectures); docstring follows the 6 proof steps"
  }
 }
