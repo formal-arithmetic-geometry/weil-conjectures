@@ -3415,3 +3415,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 05:55 L: merged deliver/E1/def-sc-rational-functions (stage 2; reviewer FIX; first push; Sheaf.AlgebraicGeometry.RationalFunctions AlgebraicGeometry.Scheme.rationalFunctions)
 - 05:55 L: merged deliver/F1/lem-exc-etale-coproduct-etale (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.EtaleCoproductOfFiniteSeparableFields AlgebraicGeometry.etale_sigmaDesc_spec_of_finite_separable)
 - 05:56 L: merged deliver/F1/def-weil-pbc-constant-group-scheme (stage 2; reviewer FIX; first push; Sheaf.AlgebraicGeometry.ConstantGroupScheme AlgebraicGeometry.constantGroupScheme)
+- 05:56 L: merged deliver/E1/def-sp-filtration (stage 2; reviewer PASS; first push; Sheaf.CategoryTheory.Filtration CategoryTheory.DecreasingFiltration)
