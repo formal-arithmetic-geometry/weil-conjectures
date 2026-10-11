@@ -1,21 +1,23 @@
 # Work queue
 
-766 items; claim with `tools/claim.py next <group> [--stage N]`.
+768 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (766)
+## Stage 2: nodes to state (768)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
 | `def-pod-lisse-l-adic-sheaves` | 1 | state |
+| `def-pur-saturated-triangulated-localization` | 1 | state |
 | `def-sc-rational-section-divisor` | 1 | state |
 | `def-sp-truncation-couple` | 1 | state |
-| `lem-pc-derived-adjoint-functors` | 1 | state |
 | `lem-pc-derived-tensor-transitivity` | 1 | state |
 | `lem-pc-module-pullback-identity-composition` | 1 | state |
 | `lem-pc-pre-derived-adjoint-functors-general` | 1 | state |
+| `lem-pur-essential-constant-cofinal-0a1s` | 1 | state |
+| `lem-pur-left-derived-defined-pointwise-kan-bridge` | 1 | state |
 | `lem-sc-base-change-curve` | 1 | state |
 | `lem-sc-hilb-dominating-power` | 1 | state |
 | `lem-sc-p1-rhom-hom-derived-connecting` | 1 | state |
@@ -29,8 +31,6 @@
 | `lem-weil-pbc-derived-exchange-termwise` | 1 | state |
 | `lem-weil-pbc-derived-inverse-image-composition` | 1 | state |
 | `lem-weil-pbc-descend-qc-open-fg-subalgebra` | 1 | state |
-| `lem-weil-pbc-dimension-at-point-components` | 1 | state |
-| `lem-weil-pbc-direct-image-preserves-injectives` | 1 | state |
 | `lem-weil-pbc-direct-image-split-cover-product` | 1 | state |
 | `lem-weil-pbc-direct-sum-extension-assembly` | 1 | state |
 | `lem-weil-pbc-directed-colimit-base-change-elementwise` | 1 | state |
@@ -730,7 +730,6 @@
 | `thm-pqf-zmt-factorization` | 1 | state |
 | `thm-sp-grothendieck` | 1 | state |
 | `def-nagata-glued-limit-comparison` | 2 | state |
-| `def-pc-essentially-constant-ind-diagram` | 2 | state |
 | `def-pc-smooth-projective-curve` | 2 | state |
 | `def-sc-group-scheme` | 2 | state |
 | `def-sp-convergence` | 2 | state |
@@ -773,10 +772,13 @@
 | `sbc-lem-higher-direct-image-limit` | 2 | state |
 | `thm-sc-proper-cohomology` | 2 | state |
 | `def-exc-etale-algebra-lift` | 3 | state |
+| `lem-pc-essentially-constant-ind-hom-colimit` | 3 | state |
 | `lem-sc-normalization-properties` | 3 | state |
+| `lem-pc-essentially-constant-pro-hom-colimit` | 4 | state |
+| `lem-pur-essential-constant-pro-criterion-05py` | 4 | state |
 | `def-nagata-fixed-base-separated-stage` | 6 | state |
 
-Not open yet: 40 nodes that wait for stage 1, 833 nodes that wait for a statement dependency.
+Not open yet: 40 nodes that wait for stage 1, 826 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
