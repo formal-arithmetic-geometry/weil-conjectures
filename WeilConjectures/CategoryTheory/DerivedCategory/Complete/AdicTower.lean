@@ -312,3 +312,36 @@ lemma map_smul_coneToLevel (hT : IsNormalizedAdicTower ϖ T) {k n n' N : ℕ} (h
   · simp [mappingCone.map]
 
 end CochainComplex.IsNormalizedAdicTower
+
+namespace DerivedCategory
+
+open CochainComplex CochainComplex.IsNormalizedAdicTower ConeCoimage
+
+variable {C : Type (u + 1)} [Category.{u} C] [EssentiallySmall.{u + 1} C]
+  {J : GrothendieckTopology C} {R : Type (u + 1)} [CommRing R]
+  {I : Ideal R} {ϖ : R} (hϖ : ϖ ∈ nonZeroDivisors R) (hI : I = Ideal.span {ϖ})
+  {T : ℕᵒᵖ ⥤ CochainComplex (Sheaf J (ModuleCat.{u + 1} R)) ℤ}
+  (hT : IsNormalizedAdicTower ϖ T)
+  {c : Cone (T ⋙ Q)} (hc : IsHomotopyLimit c)
+
+include hc in
+lemma isIso_reduction_comp_coneToLevel (n : ℕ) :
+    IsIso ((reductionFunctor J I n).map (c.π.app (op (0 + n))) ≫
+      (reductionConeIso hϖ hI n (T.obj (op (0 + n)))).hom ≫
+        Q.map (hT.coneToLevel (k := n) (n := n) (N := 0 + n) le_rfl (by omega))) := by
+  let c₁ := (reductionFunctor J I n).mapCone c
+  have hc₂ := (IsHomotopyLimit.map_reductionFunctor hϖ hI n hc).whiskerAdd n
+  let E : addOpFunctor n ⋙ (T ⋙ Q) ⋙ reductionFunctor J I n ≅
+      arrowTower (ϖ := ϖ) (T := T) n ⋙ cone ⋙ Q :=
+    NatIso.ofComponents (fun m ↦ reductionConeIso hϖ hI n (T.obj ((addOpFunctor n).obj m)))
+      (fun f ↦ reductionConeIso_hom_naturality hϖ hI n (T.map ((addOpFunctor n).map f)))
+  let c₃ : Cone (arrowTower (ϖ := ϖ) (T := T) n ⋙ cone ⋙ Q) :=
+    { pt := c₁.pt, π := (c₁.whisker (addOpFunctor n)).π ≫ E.hom }
+  have hc₃ : IsHomotopyLimit c₃ := hc₂.of_iso E c₃ (Iso.refl _) fun m ↦ by
+    simp only [Iso.refl_hom, id_comp]
+    rfl
+  have := hT.isIso_π_comp n hc₃
+  rw [ρ_desc_cokerIso_hom] at this
+  simpa [c₃, E, c₁] using this
+
+end DerivedCategory
