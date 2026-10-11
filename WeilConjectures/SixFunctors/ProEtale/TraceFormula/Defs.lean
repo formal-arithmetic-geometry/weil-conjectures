@@ -323,6 +323,11 @@ lemma quasiCompact {f : X ⟶ Y} (hf : IsGeometricHom s f) : QuasiCompact f := b
   obtain ⟨a, _, _⟩ := hf
   exact QuasiCompact.of_comp f a
 
+/-- The source of a morphism of geometric schemes is geometric. -/
+lemma id_source {f : X ⟶ Y} (hf : IsGeometricHom s f) : IsGeometricHom s (𝟙 X) := by
+  obtain ⟨a, _, _⟩ := hf
+  exact .id (f ≫ a)
+
 /-- Morphisms of geometric schemes are stable under composition. -/
 lemma comp {f : X ⟶ Y} {g : Y ⟶ Z} (hf : IsGeometricHom s f) (hg : IsGeometricHom s g) :
     IsGeometricHom s (f ≫ g) := by
@@ -966,6 +971,33 @@ lemma conjugateIsoEquiv_lowerShriekComp {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : 
         ((G.exceptionalAdjunction f hf).comp (G.exceptionalAdjunction g hg))
         (G.lowerShriekComp f g hf hg hfg) = G.upperShriekComp f g hf hg hfg :=
   rfl
+
+/-- The composition isomorphism `f^! g^! L ≃ (f ≫ g)^! L` of exceptional inverse images at an
+object `L` of `Dᵇctf(Z)`, as an isomorphism of `D(X, A)`. -/
+noncomputable def upperShriekCompIso {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)
+    (hf : IsGeometricHom s f) (hg : IsGeometricHom s g) (hfg : IsGeometricHom s (f ≫ g))
+    [HasCompactification f] [HasCompactification g] [HasCompactification (f ≫ g)]
+    (L : DerivedCategory (Sheaf (Scheme.ProEt.topology Z) A)) (hL : G.ctf Z L) :
+    (rightDerivedUpperShriek A f).obj ((rightDerivedUpperShriek A g).obj L) ≅
+      (rightDerivedUpperShriek A (f ≫ g)).obj L :=
+  (DerivedCategory.constructibleFiniteTor A X).ι.mapIso
+    (X := (G.upperShriekCtf g hg ⋙ G.upperShriekCtf f hf).obj ⟨L, hL⟩)
+    (Y := (G.upperShriekCtf (f ≫ g) hfg).obj ⟨L, hL⟩)
+    ((G.upperShriekComp f g hf hg hfg).symm.app ⟨L, hL⟩)
+
+/-- `GeometricOperations.upperShriekCompIso` is natural in `L`. -/
+@[reassoc]
+lemma upperShriekCompIso_hom_naturality {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)
+    (hf : IsGeometricHom s f) (hg : IsGeometricHom s g) (hfg : IsGeometricHom s (f ≫ g))
+    [HasCompactification f] [HasCompactification g] [HasCompactification (f ≫ g)]
+    {L L' : DerivedCategory (Sheaf (Scheme.ProEt.topology Z) A)} (hL : G.ctf Z L)
+    (hL' : G.ctf Z L') (φ : L ⟶ L') :
+    (rightDerivedUpperShriek A f).map ((rightDerivedUpperShriek A g).map φ) ≫
+        (G.upperShriekCompIso f g hf hg hfg L' hL').hom =
+      (G.upperShriekCompIso f g hf hg hfg L hL).hom ≫
+        (rightDerivedUpperShriek A (f ≫ g)).map φ :=
+  congrArg (·.hom) ((G.upperShriekComp f g hf hg hfg).inv.naturality
+    (X := ⟨L, hL⟩) (Y := ⟨L', hL'⟩) (ObjectProperty.homMk φ))
 
 /-- The exceptional trace `Rp_{X!} p_Y^* ω_Y ⟶ A_X` of a Cartesian square `Z = X ×_s Y`: the
 composite
