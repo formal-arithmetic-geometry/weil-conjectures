@@ -170,5 +170,24 @@
   "by": "L",
   "result": "pass",
   "note": "five steps (charts of P^1_S, pullback along the projections via the value formula, the cover, the fibre product of charts by induction with Stacks 01JR, the polynomial ring by 01I4); O(1) on P^1_S made explicit in the statement; 4 new nodes, three Mathlib leaves verified by the lead (Pullbacks.lean:701/726, PullbackCarrier.lean:355, TensorProduct/MvPolynomial.lean:139); the Lean of the source repository for the standard-charts node recorded on that node as candidates"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProjectiveLinePowerAffineCharts",
+  "declaration": "AlgebraicGeometry.ProjectiveSpace.projectiveLinePower_affineCharts",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProjectiveLinePowerAffineCharts.lean",
+  "statement": "theorem projectiveLinePower_affineCharts (S : Scheme.{u}) (n : ℕ) (_hn : 1 ≤ n) (c : Fan (fun _ : Fin n ↦ Over.mk (ℙ(ULift.{u} (Fin 2); S) ↘ S))) (_hc : IsLimit c) : (⋃ a : Fin n → ULift.{u} (Fin 2), ⋂ i : Fin n, Scheme.Modules.nonvanishingLocus ((Scheme.Modules.tensorPullback (c.proj i).left).obj (twist (ULift.{u} (Fin 2)) S 1)) (((Classical.choose (Scheme.Modules.exists_tensorPullbackAdjunction (c.proj i).left)).unit.app (twist (ULift.{u} (Fin 2)) S 1)).val.app (op ⊤) (twistOneSection (ULift.{u} (Fin 2)) S (a i)))) = Set.univ ∧ ∀ (V : S.Opens) (R : CommRingCat.{u}) (eV : V.toScheme ≅ Spec R) (a : Fin n → ULift.{u} (Fin 2)) (U : c.pt.left.Opens), (U : Set c.pt.left) = (⋂ i : Fin n, Scheme.Modules.nonvanishingLocus ((Scheme.Modules.tensorPullback (c.proj i).left).obj (twist (ULift.{u} (Fin 2)) S 1)) (((Classical.choose (Scheme.Modules.exists_tensorPullbackAdjunction (c.proj i).left)).unit.app (twist (ULift.{u} (Fin 2)) S 1)).val.app (op ⊤) (twistOneSection (ULift.{u} (Fin 2)) S (a i)))) ∩ c.pt.hom.base ⁻¹' (V : Set S) → IsAffineOpen U ∧ ∃ (h : U.toScheme ⟶ V.toScheme) (E : MvPolynomial (Fin n) R ≃+* Γ(c.pt.left, U)), h ≫ V.ι = U.ι ≫ c.pt.hom ∧ (∀ r : R, E (MvPolynomial.C r) = U.topIso.hom ((h ≫ eV.hom).appTop ((Scheme.ΓSpecIso R).inv r))) ∧ ∀ (i : Fin n) (j : {j : ULift.{u} (Fin 2) // j ≠ a i}), ((Scheme.Modules.tensorPullback (c.proj i).left).obj (twist (ULift.{u} (Fin 2)) S 1)).presheaf.map (homOfLE (le_top : U ≤ ⊤)).op (((Classical.choose (Scheme.Modules.exists_tensorPullbackAdjunction (c.proj i).left)).unit.app (twist (ULift.{u} (Fin 2)) S 1)).val.app (op ⊤) (twistOneSection (ULift.{u} (Fin 2)) S j.1)) = E (MvPolynomial.X i) • ((Scheme.Modules.tensorPullback (c.proj i).left).obj (twist (ULift.{u} (Fin 2)) S 1)).presheaf.map (homOfLE (le_top : U ≤ ⊤)).op (((Classical.choose (Scheme.Modules.exists_tensorPullbackAdjunction (c.proj i).left)).unit.app (twist (ULift.{u} (Fin 2)) S 1)).val.app (op ⊤) (twistOneSection (ULift.{u} (Fin 2)) S (a i)))",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-pac1314"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-pac1314",
+  "group": "E1",
+  "result": "fix",
+  "note": "S, n>=1, P^1_S=ℙ(ULift (Fin 2);S), X/pr_i/p_n as limit Fan in Over S; O(1)=twist (ρ^* along toProjInt) with T_k=twistOneSection; L_i=tensorPullback pr_i, x_i/y_i via unit of exists_tensorPullbackAdjunction; U_A as ⋂ nonvanishingLocus (was: preimages of standardOpen); (i) ⋃=univ; (ii) affine open V≅Spec R, U=U_A∩p_n⁻¹V affine, E: R[X_i]≃Γ(X,U) over R, X_i ↦ unique z_i/w_i with other section = E(X i)•denominator on U"
  }
 }

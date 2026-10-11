@@ -4647,3 +4647,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 12:38 L: merged deliver/K1/lem-sc-derived-open-restriction-adjunction-exact (stage 2; reviewer FIX; first push; Sheaf.Algebra.Homology.OpenRestrictionAdjunctionExact AlgebraicGeometry.open_restriction_adjunction_exact)
 - 12:38 L: merged deliver/F1/lem-weil-pbc-polynomial-ring-origin-regular-local (stage 2; reviewer PASS; first push; Sheaf.RingTheory.PolynomialOriginRegularLocal MvPolynomial.polynomial_origin_regularLocal)
 - 12:38 L: merged deliver/E1/lem-sc-ext-evaluation (stage 2; reviewer FIX; first push; Sheaf.AlgebraicGeometry.ExtEvaluation AlgebraicGeometry.Scheme.Modules.dual_tensor_hom_iso)
+- 12:39 L: merged deliver/E1/lem-weil-pbc-p1-power-affine-charts (stage 2; reviewer FIX; first push; Sheaf.AlgebraicGeometry.ProjectiveLinePowerAffineCharts AlgebraicGeometry.ProjectiveSpace.projectiveLinePower_affineCharts)
