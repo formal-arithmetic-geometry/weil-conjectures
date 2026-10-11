@@ -83,7 +83,7 @@ open Matrix.GeneralLinearGroup
 
 section ClosedSubgroup
 
-variable {n : Type u} [Fintype n] [DecidableEq n] {k : Type u} [CommRing k]
+variable {n : Type u} [Fintype n] [DecidableEq n] {k : Type u} [Field k]
   {I J : Ideal (CoordinateRing n k)} [I.IsHopfIdeal k] [J.IsHopfIdeal k]
 
 /-- The differential `Lie(V(J)) → Lie(V(I))` of the closed immersion `V(J) ⟶ V(I)`, an injective
