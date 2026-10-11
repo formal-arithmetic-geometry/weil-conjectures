@@ -673,6 +673,7 @@ public import WeilConjectures.DeligneLaumon.AffineLine.ZeroExtension
 public import WeilConjectures.DeligneLaumon.Reduction.AffineCurve
 public import WeilConjectures.DeligneLaumon.Reduction.DirectImage
 public import WeilConjectures.DeligneLaumon.Reduction.FibreCohomology
+public import WeilConjectures.DeligneLaumon.Reduction.FiniteMiddleExtension
 public import WeilConjectures.DeligneLaumon.Reduction.FormalSteps
 public import WeilConjectures.DeligneLaumon.Reduction.OpenLine
 public import WeilConjectures.DeligneLaumon.Reduction.QuasiFiniteStalk
@@ -1828,6 +1829,7 @@ public import WeilConjectures.WeilSheaf.LowerShriekFunctoriality
 public import WeilConjectures.WeilSheaf.LowerStar
 public import WeilConjectures.WeilSheaf.LowerStarComp
 public import WeilConjectures.WeilSheaf.LowerStarId
+public import WeilConjectures.WeilSheaf.MiddleExtension
 public import WeilConjectures.WeilSheaf.OpenImmersion
 public import WeilConjectures.WeilSheaf.Operations
 public import WeilConjectures.WeilSheaf.PoincareDuality
