@@ -6,6 +6,7 @@ Authors: Weil conjectures project
 module
 
 public import WeilConjectures.Compactification.Comp
+public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekFormalism
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekIndependenceUnbounded
 public import WeilConjectures.SixFunctors.Etale.Derived.OpenImmersionLowerShriekLowerStarExchange
 public import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Comp
@@ -159,6 +160,107 @@ theorem nonempty_iso_rightDerivedLowerShriek_comp (f : X ⟶ Y) (g : Y ⟶ S)
     Functor.isoWhiskerRight (rightDerivedLowerShriekIso Λ e.restrict) _⟩
 
 end Torsion
+
+
+section Plus
+
+variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] {X Y S T : Scheme.{u}}
+
+/-- The comparison isomorphism `Rf_!(c)[Λ]+ ≅ Rf_!(d)[Λ]+` between the bounded below compactly
+supported direct images attached to two compactifications of a quasi-compact morphism: the one of
+the compact support formalism `AlgebraicGeometry.Etale.derivedPlusFormalism`, obtained through
+the common refinement `Compactification.inf c d` and satisfying the coherences of blueprint
+`sk-prop-sf-comp-coherence` (`CompactSupportFormalism.shriekIso_eq`,
+`CompactSupportFormalism.shriekIso_trans`). -/
+noncomputable abbrev rightDerivedLowerShriekPlusCompactificationIso {f : X ⟶ Y} [QuasiCompact f]
+    (c d : Compactification f) :
+    Rf_!(c)[ModuleCat.{u + 1} Λ]+ ≅ Rf_!(d)[ModuleCat.{u + 1} Λ]+ :=
+  (derivedPlusFormalism (ModuleCat.{u + 1} Λ)).shriekIso c d
+
+/-- The isomorphism `R(f)_![Λ]+ ≅ R(f')_![Λ]+` for `f = f'`. -/
+noncomputable abbrev rightDerivedLowerShriekPlusCongr {f f' : X ⟶ Y} [HasCompactification f]
+    [HasCompactification f'] (h : f = f') :
+    R(f)_![ModuleCat.{u + 1} Λ]+ ≅ R(f')_![ModuleCat.{u + 1} Λ]+ :=
+  (derivedPlusFormalism (ModuleCat.{u + 1} Λ)).lowerShriekCongr h
+
+/-- The identification `R(𝟙 X)_![Λ]+ ≅ 𝟭` of the bounded below compactly supported direct image
+along the identity. -/
+noncomputable abbrev rightDerivedLowerShriekPlusId (X : Scheme.{u}) [HasCompactification (𝟙 X)] :
+    R(𝟙 X)_![ModuleCat.{u + 1} Λ]+ ≅ 𝟭 _ :=
+  (derivedPlusFormalism (ModuleCat.{u + 1} Λ)).lowerShriekId X
+
+/-- Blueprint `sk-thm-sf-comp-composition` (detailed: `thm-sf-comp-composition`): **the canonical
+composition isomorphism** `α_{g,f} : Rg_! Rf_! ≅ R(g ∘ f)_!` of functors `D⁺(X_ét, Λ) ⥤ D⁺(S_ét, Λ)`
+for torsion coefficients, for composable `f`, `g` admitting compactifications with `f ≫ g`
+quasi-compact. It is the composition isomorphism `CompactSupportFormalism.compIso` of the
+triangle of compactifications `Compactification.Triangle.ofHasCompactification f g`: compactify
+`g` as `Y ⟶[v] Ȳ ⟶[ḡ] S` and `f ≫ v` as `X ⟶[a] X̄ ⟶[p] Ȳ`; with `V = X̄ ×_Ȳ Y`, the exchange
+isomorphism `v_! Rp_{Y*} ≅ Rp_* b_!` (proper base change) gives
+`Rf_! ⋙ Rg_! = c_! Rp_{Y*} v_! Rḡ_* ≅ a_! R(p ≫ ḡ)_* = R(f ≫ g)_!`, compared with the chosen
+compactifications of `f` and `f ≫ g`. -/
+noncomputable def rightDerivedLowerShriekPlusCompIso (f : X ⟶ Y) (g : Y ⟶ S)
+    [HasCompactification f] [HasCompactification g] [HasCompactification (f ≫ g)]
+    [QuasiCompact (f ≫ g)] :
+    R(f)_![ModuleCat.{u + 1} Λ]+ ⋙ R(g)_![ModuleCat.{u + 1} Λ]+ ≅
+      R(f ≫ g)_![ModuleCat.{u + 1} Λ]+ :=
+  (derivedPlusFormalism (ModuleCat.{u + 1} Λ)).lowerShriekCompIso f g
+
+/-- Blueprint `sk-thm-sf-comp-composition`: **independence of all compactification choices**. The
+composition isomorphism is computed by any triangle of compactifications `T` of `(f, g)`
+(compactifications of `f`, `g`, `f ≫ g` linked by a cartesian square): it is the composition
+isomorphism of `T`, conjugated by the comparison isomorphisms between the compactifications of
+`T` and the chosen ones. -/
+theorem rightDerivedLowerShriekPlusCompIso_hom_eq {f : X ⟶ Y} {g : Y ⟶ S}
+    [HasCompactification f] [HasCompactification g] [HasCompactification (f ≫ g)]
+    [QuasiCompact f] [QuasiCompact g] [QuasiCompact (f ≫ g)] (T : Compactification.Triangle f g) :
+    (rightDerivedLowerShriekPlusCompIso Λ f g).hom =
+      NatTrans.hcomp
+          (rightDerivedLowerShriekPlusCompactificationIso Λ
+            (HasCompactification.compactification f) T.cf).hom
+          (rightDerivedLowerShriekPlusCompactificationIso Λ
+            (HasCompactification.compactification g) T.cg).hom ≫
+        ((derivedPlusFormalism (ModuleCat.{u + 1} Λ)).compIso T).hom ≫
+          (rightDerivedLowerShriekPlusCompactificationIso Λ T.cfg
+            (HasCompactification.compactification (f ≫ g))).hom :=
+  (derivedPlusFormalism (ModuleCat.{u + 1} Λ)).lowerShriekCompIso_hom_eq T
+
+/-- Blueprint `sk-thm-sf-comp-composition`: **the composition isomorphism is the identity when
+`f` is an identity**. -/
+theorem rightDerivedLowerShriekPlusCompIso_id_left (f : X ⟶ Y) [HasCompactification f]
+    [HasCompactification (𝟙 X)] [HasCompactification (𝟙 X ≫ f)] [QuasiCompact f] :
+    (rightDerivedLowerShriekPlusCompIso Λ (𝟙 X) f).hom =
+      Functor.whiskerRight (rightDerivedLowerShriekPlusId Λ X).hom _ ≫
+        (Functor.leftUnitor _).hom ≫
+          (rightDerivedLowerShriekPlusCongr Λ (Category.id_comp f).symm).hom :=
+  (derivedPlusFormalism (ModuleCat.{u + 1} Λ)).lowerShriekCompIso_id_left f
+
+/-- Blueprint `sk-thm-sf-comp-composition`: **the composition isomorphism is the identity when
+`g` is an identity**. -/
+theorem rightDerivedLowerShriekPlusCompIso_id_right (f : X ⟶ Y) [HasCompactification f]
+    [HasCompactification (𝟙 Y)] [HasCompactification (f ≫ 𝟙 Y)] [QuasiCompact f] :
+    (rightDerivedLowerShriekPlusCompIso Λ f (𝟙 Y)).hom =
+      Functor.whiskerLeft _ (rightDerivedLowerShriekPlusId Λ Y).hom ≫
+        (Functor.rightUnitor _).hom ≫
+          (rightDerivedLowerShriekPlusCongr Λ (Category.comp_id f).symm).hom :=
+  (derivedPlusFormalism (ModuleCat.{u + 1} Λ)).lowerShriekCompIso_id_right f
+
+/-- Blueprint `sk-thm-sf-comp-composition`: **associativity of the composition isomorphism**: for
+a third morphism `h : S ⟶ T`, the two composites `Rh_! Rg_! Rf_! ≅ R(f ≫ g ≫ h)_!` agree. -/
+theorem rightDerivedLowerShriekPlusCompIso_assoc (f : X ⟶ Y) (g : Y ⟶ S) (h : S ⟶ T)
+    [HasCompactification f] [HasCompactification g] [HasCompactification h]
+    [HasCompactification (f ≫ g)] [HasCompactification (g ≫ h)]
+    [HasCompactification ((f ≫ g) ≫ h)] [HasCompactification (f ≫ g ≫ h)] [QuasiCompact f]
+    [QuasiCompact g] [QuasiCompact h] :
+    Functor.whiskerRight (rightDerivedLowerShriekPlusCompIso Λ f g).hom
+        R(h)_![ModuleCat.{u + 1} Λ]+ ≫ (rightDerivedLowerShriekPlusCompIso Λ (f ≫ g) h).hom ≫
+        (rightDerivedLowerShriekPlusCongr Λ (Category.assoc f g h)).hom =
+      (Functor.associator _ _ _).hom ≫
+        Functor.whiskerLeft R(f)_![ModuleCat.{u + 1} Λ]+
+          (rightDerivedLowerShriekPlusCompIso Λ g h).hom ≫
+          (rightDerivedLowerShriekPlusCompIso Λ f (g ≫ h)).hom :=
+  (derivedPlusFormalism (ModuleCat.{u + 1} Λ)).lowerShriekCompIso_assoc f g h
+
+end Plus
 
 end Etale
 
