@@ -1,247 +1,265 @@
 {
-  "id": "lem-sc-base-change-curve",
-  "blueprint": {
-    "is": "lem-sc-base-change-curve",
-    "from": null,
-    "same_as": []
-  },
-  "kind": "statement",
-  "title": "Base change of a curve",
-  "statement": "Let $k\\subseteq k'$ be an extension [def-pc-field-extension] of algebraically closed fields and let $C$ be a curve over $k$ [def-sc-curves]. Let $C_{k'}=C\\times_{\\operatorname{Spec}k}\\operatorname{Spec}k'$ be the base change [def-pc-base-change], a scheme over $k'$ through its second projection. Then:\n1. $C_{k'}$ is a curve over $k'$, i.e. separated and of finite type over $k'$, and $\\dim C_{k'}=\\dim C$ (in particular $\\dim C_{k'}\\le1$);\n2. if $C$ is smooth (resp. proper, resp. affine) over $k$, then $C_{k'}$ is smooth (resp. proper, resp. affine) over $k'$;\n3. if $C$ is a connected curve (nonempty, connected, of dimension one), then $C_{k'}$ is a connected curve over $k'$.",
-  "source": {
-    "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-ext-invariance/lem-sc-base-change-curve.md",
-    "place": "node lem-sc-base-change-curve, order 1029",
-    "external": [
-      {
-        "document": "Stacks Project",
-        "place": "Tag 00OY"
-      },
-      {
-        "document": "Stacks Project",
-        "place": "Tag 00GU"
-      }
-    ]
-  },
-  "stmt_deps": [
-    "def-sc-curves",
-    "def-pc-field-extension",
-    "def-pc-base-change"
-  ],
-  "proof": [
-    {
-      "text": "Curve over $k'$, first half. The structure morphism $C\\to\\operatorname{Spec}k$ is separated and of finite type [def-sc-curves]; its base change along $\\operatorname{Spec}k'\\to\\operatorname{Spec}k$ is the second projection $C_{k'}\\to\\operatorname{Spec}k'$ [def-pc-base-change], which is therefore separated and of finite type by [lem-pod-separated-finite-type-base-change] (Stacks Tags 01KU, 01T4).",
-      "uses": [
-        "def-sc-curves",
-        "def-pc-base-change",
-        "lem-pod-separated-finite-type-base-change"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-ext-invariance/lem-sc-base-change-curve.md",
-        "place": "## Proof, first sentence: 'Separation, ... finite type ... are all stable under base change'"
-      }
-    },
-    {
-      "text": "An affine open cover of $C_{k'}$. As $C\\to\\operatorname{Spec}k$ is of finite type, $C$ is covered by affine opens $U_i\\cong\\operatorname{Spec}A_i$ ($i\\in I$) with each $A_i$ a finitely generated $k$-algebra [def-weil-finite-type-morphism] (the definition, applied to the affine open $\\operatorname{Spec}k$ of the target). Let $p:C_{k'}\\to C$ be the first projection. By [lem-weil-pbc-open-fibre-product] (with $S=U=\\operatorname{Spec}k$, $V=U_i$, $W=\\operatorname{Spec}k'$), $p^{-1}(U_i)$ is an open subscheme of $C_{k'}$ identified with $U_i\\times_{\\operatorname{Spec}k}\\operatorname{Spec}k'$, which is isomorphic to $\\operatorname{Spec}(A_i\\otimes_kk')$ by [lem-weil-pbc-fibre-product-affine-spectra]. Since the $U_i$ cover $C$, the $p^{-1}(U_i)$ cover $C_{k'}$.",
-      "uses": [
-        "def-weil-finite-type-morphism",
-        "lem-weil-pbc-open-fibre-product",
-        "lem-weil-pbc-fibre-product-affine-spectra"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-ext-invariance/lem-sc-base-change-curve.md",
-        "place": "## Proof, second paragraph: 'for an affine open piece $U=\\operatorname{Spec}A$ of $C$'"
-      }
-    },
-    {
-      "text": "Nonemptiness. If $C=\\emptyset$ then $C_{k'}=\\emptyset$, since $p$ maps it into $C$; then $\\dim C_{k'}=\\dim C=-\\infty$ and clause 3 is void. If $C\\neq\\emptyset$: $\\operatorname{Spec}k$ is one point and $\\operatorname{Spec}k'$ is nonempty, so $\\operatorname{Spec}k'\\to\\operatorname{Spec}k$ is surjective [def-weil-surjective-morphism], and its base change $p:C_{k'}\\to C$ along $C\\to\\operatorname{Spec}k$ is surjective by [lem-weil-pbc-surjective-base-change] (Stacks Tag 01S1); hence $C_{k'}\\neq\\emptyset$.",
-      "uses": [
-        "def-weil-surjective-morphism",
-        "lem-weil-pbc-surjective-base-change"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-ext-invariance/lem-sc-base-change-curve.md",
-        "place": "## Proof, second paragraph (the dimension comparison needs both schemes nonempty)"
-      }
-    },
-    {
-      "text": "Dimension. Let $C\\ne\\emptyset$ (the empty case is step 3). By [lem-pc-dimension-affine-open-cover] applied to the cover $(U_i)$ of $C$ and to the cover $(p^{-1}(U_i))$ of the nonempty scheme $C_{k'}$ (step 2), $\\dim C=\\sup_i\\dim A_i$ and $\\dim C_{k'}=\\sup_i\\dim(A_i\\otimes_kk')$. Each $A_i$ is a finite type $k$-algebra, so $\\dim(A_i\\otimes_kk')=\\dim A_i$ by [lem-pc-dim-base-change] (Stacks Tag 00P3, whose proof is the blueprint's Noether normalization (00OY) and going-up (00GU) argument). Hence $\\dim C_{k'}=\\dim C$. These are the dimensions of [def-pc-dimension] (supremum of the dimensions of the local rings), which equal the Krull dimensions of the underlying spaces by [lem-pc-scheme-dimension-local-rings]; so $\\dim C_{k'}=\\dim C\\le1$ in the sense of [def-sc-curves]. With step 1 and $k'$ algebraically closed, $C_{k'}$ is a curve over $k'$: clause 1.",
-      "uses": [
-        "lem-pc-dimension-affine-open-cover",
-        "lem-pc-dim-base-change",
-        "def-pc-dimension",
-        "lem-pc-scheme-dimension-local-rings",
-        "def-sc-curves"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-ext-invariance/lem-sc-base-change-curve.md",
-        "place": "## Proof, second paragraph: 'by Noether normalization (Tag 00OY) ... finite morphisms preserve dimension (Tag 00GU) ... hence $\\dim C_{k'}=\\dim C$'"
-      }
-    },
-    {
-      "text": "Smoothness. If $C\\to\\operatorname{Spec}k$ is smooth, its base change $C_{k'}\\to\\operatorname{Spec}k'$ is smooth by clause (2) of [lem-pc-proper-base-change] (Stacks Tag 01VB).",
-      "uses": [
-        "lem-pc-proper-base-change"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-ext-invariance/lem-sc-base-change-curve.md",
-        "place": "## Proof, first sentence: 'smoothness ... stable under base change'"
-      }
-    },
-    {
-      "text": "Properness. If $C\\to\\operatorname{Spec}k$ is proper, its base change $C_{k'}\\to\\operatorname{Spec}k'$ is proper by [lem-weil-pbc-proper-base-change] (Stacks Tag 01W4).",
-      "uses": [
-        "lem-weil-pbc-proper-base-change"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-ext-invariance/lem-sc-base-change-curve.md",
-        "place": "## Proof, first sentence: 'properness ... stable under base change'"
-      }
-    },
-    {
-      "text": "Affineness. If $C$ is affine, $C\\cong\\operatorname{Spec}A$ for a $k$-algebra $A$; since a fibre product is unique up to unique isomorphism [def-pc-fibre-product], $C_{k'}\\cong\\operatorname{Spec}A\\times_{\\operatorname{Spec}k}\\operatorname{Spec}k'\\cong\\operatorname{Spec}(A\\otimes_kk')$ by [lem-weil-pbc-fibre-product-affine-spectra], an affine scheme. With steps 5 and 6 this is clause 2.",
-      "uses": [
-        "def-pc-fibre-product",
-        "lem-weil-pbc-fibre-product-affine-spectra"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-ext-invariance/lem-sc-base-change-curve.md",
-        "place": "## Proof, first sentence: 'for an affine curve $C=\\operatorname{Spec}A$ one has $C_{k'}=\\operatorname{Spec}(A\\otimes_kk')$'"
-      }
-    },
-    {
-      "text": "Connectedness. Let $C$ be a connected curve: nonempty, connected and of dimension one. Then $C_{k'}$ is nonempty (step 3) and of dimension $\\dim C=1$ (step 4). The algebraically closed field $k$ is separably closed [def-pc-separably-closed] (every nonconstant polynomial, separable or not, has a root in $k$). So the connected $k$-scheme $C$ is geometrically connected over $k$ by [lem-weil-separably-closed-geometrically-connected] (Stacks Tag 0363), and by the definition of geometric connectedness [def-pc-geometrically-irreducible], applied to the extension $k'/k$, the base change $C_{k'}=C\\times_{\\operatorname{Spec}k}\\operatorname{Spec}k'$ is connected. Hence $C_{k'}$ is a connected curve over $k'$: clause 3.",
-      "uses": [
-        "def-pc-separably-closed",
-        "lem-weil-separably-closed-geometrically-connected",
-        "def-pc-geometrically-irreducible"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/varieties.tex",
-        "place": "Lemma 0363 (lemma-separably-closed-field-connected-components), second assertion; Definition 0362 (geometrically connected)"
-      }
-    }
-  ],
-  "proof_deps": [
+ "id": "lem-sc-base-change-curve",
+ "blueprint": {
+  "is": "lem-sc-base-change-curve",
+  "from": null,
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Base change of a curve",
+ "statement": "Let $k\\subseteq k'$ be an extension [def-pc-field-extension] of algebraically closed fields and let $C$ be a curve over $k$ [def-sc-curves]. Let $C_{k'}=C\\times_{\\operatorname{Spec}k}\\operatorname{Spec}k'$ be the base change [def-pc-base-change], a scheme over $k'$ through its second projection. Then:\n1. $C_{k'}$ is a curve over $k'$, i.e. separated and of finite type over $k'$, and $\\dim C_{k'}=\\dim C$ (in particular $\\dim C_{k'}\\le1$);\n2. if $C$ is smooth (resp. proper, resp. affine) over $k$, then $C_{k'}$ is smooth (resp. proper, resp. affine) over $k'$;\n3. if $C$ is a connected curve (nonempty, connected, of dimension one), then $C_{k'}$ is a connected curve over $k'$.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-ext-invariance/lem-sc-base-change-curve.md",
+  "place": "node lem-sc-base-change-curve, order 1029",
+  "external": [
+   {
+    "document": "Stacks Project",
+    "place": "Tag 00OY"
+   },
+   {
+    "document": "Stacks Project",
+    "place": "Tag 00GU"
+   }
+  ]
+ },
+ "stmt_deps": [
+  "def-sc-curves",
+  "def-pc-field-extension",
+  "def-pc-base-change"
+ ],
+ "proof": [
+  {
+   "text": "Curve over $k'$, first half. The structure morphism $C\\to\\operatorname{Spec}k$ is separated and of finite type [def-sc-curves]; its base change along $\\operatorname{Spec}k'\\to\\operatorname{Spec}k$ is the second projection $C_{k'}\\to\\operatorname{Spec}k'$ [def-pc-base-change], which is therefore separated and of finite type by [lem-pod-separated-finite-type-base-change] (Stacks Tags 01KU, 01T4).",
+   "uses": [
     "def-sc-curves",
     "def-pc-base-change",
-    "lem-pod-separated-finite-type-base-change",
+    "lem-pod-separated-finite-type-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-ext-invariance/lem-sc-base-change-curve.md",
+    "place": "## Proof, first sentence: 'Separation, ... finite type ... are all stable under base change'"
+   }
+  },
+  {
+   "text": "An affine open cover of $C_{k'}$. As $C\\to\\operatorname{Spec}k$ is of finite type, $C$ is covered by affine opens $U_i\\cong\\operatorname{Spec}A_i$ ($i\\in I$) with each $A_i$ a finitely generated $k$-algebra [def-weil-finite-type-morphism] (the definition, applied to the affine open $\\operatorname{Spec}k$ of the target). Let $p:C_{k'}\\to C$ be the first projection. By [lem-weil-pbc-open-fibre-product] (with $S=U=\\operatorname{Spec}k$, $V=U_i$, $W=\\operatorname{Spec}k'$), $p^{-1}(U_i)$ is an open subscheme of $C_{k'}$ identified with $U_i\\times_{\\operatorname{Spec}k}\\operatorname{Spec}k'$, which is isomorphic to $\\operatorname{Spec}(A_i\\otimes_kk')$ by [lem-weil-pbc-fibre-product-affine-spectra]. Since the $U_i$ cover $C$, the $p^{-1}(U_i)$ cover $C_{k'}$.",
+   "uses": [
     "def-weil-finite-type-morphism",
     "lem-weil-pbc-open-fibre-product",
-    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-weil-pbc-fibre-product-affine-spectra"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-ext-invariance/lem-sc-base-change-curve.md",
+    "place": "## Proof, second paragraph: 'for an affine open piece $U=\\operatorname{Spec}A$ of $C$'"
+   }
+  },
+  {
+   "text": "Nonemptiness. If $C=\\emptyset$ then $C_{k'}=\\emptyset$, since $p$ maps it into $C$; then $\\dim C_{k'}=\\dim C=-\\infty$ and clause 3 is void. If $C\\neq\\emptyset$: $\\operatorname{Spec}k$ is one point and $\\operatorname{Spec}k'$ is nonempty, so $\\operatorname{Spec}k'\\to\\operatorname{Spec}k$ is surjective [def-weil-surjective-morphism], and its base change $p:C_{k'}\\to C$ along $C\\to\\operatorname{Spec}k$ is surjective by [lem-weil-pbc-surjective-base-change] (Stacks Tag 01S1); hence $C_{k'}\\neq\\emptyset$.",
+   "uses": [
     "def-weil-surjective-morphism",
-    "lem-weil-pbc-surjective-base-change",
+    "lem-weil-pbc-surjective-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-ext-invariance/lem-sc-base-change-curve.md",
+    "place": "## Proof, second paragraph (the dimension comparison needs both schemes nonempty)"
+   }
+  },
+  {
+   "text": "Dimension. Let $C\\ne\\emptyset$ (the empty case is step 3). By [lem-pc-dimension-affine-open-cover] applied to the cover $(U_i)$ of $C$ and to the cover $(p^{-1}(U_i))$ of the nonempty scheme $C_{k'}$ (step 2), $\\dim C=\\sup_i\\dim A_i$ and $\\dim C_{k'}=\\sup_i\\dim(A_i\\otimes_kk')$. Each $A_i$ is a finite type $k$-algebra, so $\\dim(A_i\\otimes_kk')=\\dim A_i$ by [lem-pc-dim-base-change] (Stacks Tag 00P3, whose proof is the blueprint's Noether normalization (00OY) and going-up (00GU) argument). Hence $\\dim C_{k'}=\\dim C$. These are the dimensions of [def-pc-dimension] (supremum of the dimensions of the local rings), which equal the Krull dimensions of the underlying spaces by [lem-pc-scheme-dimension-local-rings]; so $\\dim C_{k'}=\\dim C\\le1$ in the sense of [def-sc-curves]. With step 1 and $k'$ algebraically closed, $C_{k'}$ is a curve over $k'$: clause 1.",
+   "uses": [
     "lem-pc-dimension-affine-open-cover",
     "lem-pc-dim-base-change",
     "def-pc-dimension",
     "lem-pc-scheme-dimension-local-rings",
-    "lem-pc-proper-base-change",
-    "lem-weil-pbc-proper-base-change",
+    "def-sc-curves"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-ext-invariance/lem-sc-base-change-curve.md",
+    "place": "## Proof, second paragraph: 'by Noether normalization (Tag 00OY) ... finite morphisms preserve dimension (Tag 00GU) ... hence $\\dim C_{k'}=\\dim C$'"
+   }
+  },
+  {
+   "text": "Smoothness. If $C\\to\\operatorname{Spec}k$ is smooth, its base change $C_{k'}\\to\\operatorname{Spec}k'$ is smooth by clause (2) of [lem-pc-proper-base-change] (Stacks Tag 01VB).",
+   "uses": [
+    "lem-pc-proper-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-ext-invariance/lem-sc-base-change-curve.md",
+    "place": "## Proof, first sentence: 'smoothness ... stable under base change'"
+   }
+  },
+  {
+   "text": "Properness. If $C\\to\\operatorname{Spec}k$ is proper, its base change $C_{k'}\\to\\operatorname{Spec}k'$ is proper by [lem-weil-pbc-proper-base-change] (Stacks Tag 01W4).",
+   "uses": [
+    "lem-weil-pbc-proper-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-ext-invariance/lem-sc-base-change-curve.md",
+    "place": "## Proof, first sentence: 'properness ... stable under base change'"
+   }
+  },
+  {
+   "text": "Affineness. If $C$ is affine, $C\\cong\\operatorname{Spec}A$ for a $k$-algebra $A$; since a fibre product is unique up to unique isomorphism [def-pc-fibre-product], $C_{k'}\\cong\\operatorname{Spec}A\\times_{\\operatorname{Spec}k}\\operatorname{Spec}k'\\cong\\operatorname{Spec}(A\\otimes_kk')$ by [lem-weil-pbc-fibre-product-affine-spectra], an affine scheme. With steps 5 and 6 this is clause 2.",
+   "uses": [
     "def-pc-fibre-product",
+    "lem-weil-pbc-fibre-product-affine-spectra"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-ext-invariance/lem-sc-base-change-curve.md",
+    "place": "## Proof, first sentence: 'for an affine curve $C=\\operatorname{Spec}A$ one has $C_{k'}=\\operatorname{Spec}(A\\otimes_kk')$'"
+   }
+  },
+  {
+   "text": "Connectedness. Let $C$ be a connected curve: nonempty, connected and of dimension one. Then $C_{k'}$ is nonempty (step 3) and of dimension $\\dim C=1$ (step 4). The algebraically closed field $k$ is separably closed [def-pc-separably-closed] (every nonconstant polynomial, separable or not, has a root in $k$). So the connected $k$-scheme $C$ is geometrically connected over $k$ by [lem-weil-separably-closed-geometrically-connected] (Stacks Tag 0363), and by the definition of geometric connectedness [def-pc-geometrically-irreducible], applied to the extension $k'/k$, the base change $C_{k'}=C\\times_{\\operatorname{Spec}k}\\operatorname{Spec}k'$ is connected. Hence $C_{k'}$ is a connected curve over $k'$: clause 3.",
+   "uses": [
     "def-pc-separably-closed",
     "lem-weil-separably-closed-geometrically-connected",
     "def-pc-geometrically-irreducible"
-  ],
-  "proof_origin": {
-    "by": "agent",
-    "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-ext-invariance/lem-sc-base-change-curve.md",
-    "place": "## Proof (route followed; each permanence fact and the dimension comparison taken from the cited nodes with their Stacks tags 01KU, 01T4, 01VB, 01W4, 01S1, 00P3, 0363); the connectedness clause is not in the blueprint proof and was written by the worker"
-  },
-  "mathlib_searches": [
-    {
-      "tool": "leansearch",
-      "query": "Krull dimension of scheme preserved under base change to a field extension",
-      "results": "HTTP Error 500 (service down)",
-      "date": "2026-10-11",
-      "verdict": "unavailable"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "base change of a scheme of finite type over a field along a field extension has the same dimension",
-      "results": "IsBaseChange.finrank_eq (Mathlib.LinearAlgebra.Dimension.Localization), RingHom.finiteType_isStableUnderBaseChange, RingHom.EssFiniteType.isStableUnderBaseChange, RingHom.finite_isStableUnderBaseChange, AlgebraicGeometry.IsFinite.instIsStableUnderBaseChangeScheme, RingHom.QuasiFinite.isStableUnderBaseChange: no dimension statement for schemes or algebras under field extension",
-      "date": "2026-10-11",
-      "verdict": "no match for the item (clauses 1 and 2 have the per-clause leaves cited in the proof)"
-    },
-    {
-      "tool": "loogle",
-      "query": "AlgebraicGeometry.Smooth, CategoryTheory.MorphismProperty.IsStableUnderBaseChange",
-      "results": "AlgebraicGeometry.smooth_isStableUnderBaseChange (Mathlib.AlgebraicGeometry.Morphisms.Smooth)",
-      "date": "2026-10-11",
-      "verdict": "match for the smoothness clause only (Mathlib's Smooth vs the node's smooth is the 02H6 comparison, see lem-pc-proper-base-change); no match for the whole item"
-    },
-    {
-      "tool": "grep",
-      "query": "grep -rn 'krullDim.*TensorProduct\\|krullDim.*⊗\\|ringKrullDim.*⊗' and grep -rln topologicalKrullDim in ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry",
-      "results": "no tensor-product dimension lemma; topologicalKrullDim occurs only in AlgebraicGeometry/Artinian.lean",
-      "date": "2026-10-11",
-      "verdict": "no match"
-    }
-  ],
-  "mathlib_match": null,
-  "status": "split",
-  "merged_into": null,
-  "import_flags": [
-    "proof_cites_literature"
-  ],
-  "blueprint_kind": "lemma",
-  "blueprint_order": 1029,
-  "blueprint_uses": [
-    "def-sc-curves",
-    "def-weil-pbc-scheme-conventions"
-  ],
-  "uses_not_cited": [
-    "def-sc-curves"
-  ],
-  "proof_split_by": "paragraphs",
-  "lean_audit": {
-    "master": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    },
-    "slopmaster2": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    }
-  },
-  "chapter": "sec-curve-estimates",
-  "unit": "sk-prop-ext-invariance",
-  "statement_change": {
-    "date": "2026-10-11",
-    "by": "worker W-bcc0224 (for L)",
-    "what": "(a) 'C_{k'} is a smooth separated curve' for an arbitrary curve C is false (a nodal cubic over k stays singular over k'): smoothness is now asserted only when C is smooth, as every citer has it (the unit sk-prop-ext-invariance takes C smooth); (b) clause 3 added: a connected curve base-changes to a connected curve, which lem-sc-c7 step 1 and lem-sc-kummer-base-change-compatibility step 1 take from this node; (c) the base change and the notion of curve over k' are made explicit.",
-    "old_statement": "Let $k\\subseteq k'$ be algebraically closed and let $C$ be a\ncurve over $k$. Then $C_{k'}$ is a\nsmooth separated curve over $k'$ of the same dimension, and\n$C_{k'}$ is proper (resp. affine) if $C$ is proper (resp. affine)."
-  },
-  "split_report": {
-    "date": "2026-10-11",
-    "item": "lem-sc-base-change-curve",
-    "worker": "stage1 W-bcc0224 (for L)",
-    "summary": "Statement corrected (see statement_change): smoothness of C_{k'} only when C is smooth (the old text claimed it for every curve, false for a nodal curve), and a connectedness clause added that the citers lem-sc-c7 (step 1) and lem-sc-kummer-base-change-compatibility (step 1) take from this node. Proof in 8 steps following the blueprint proof: separated/finite type (01KU, 01T4), smooth (01VB), proper (01W4), affine (fibre product of affine spectra) by existing Mathlib leaves or reviewed split nodes; dimension via an affine open cover of C, its base-changed cover, the sup formula lem-pc-dimension-affine-open-cover and lem-pc-dim-base-change (Stacks 00P3, which is the blueprint's 00OY+00GU argument); nonemptiness by surjective base change (01S1); connectedness by 0363 and the definition of geometric connectedness. No new node. lean_audit none on both branches; no slopmaster2 declaration found.",
-    "blueprint": "Steps 1, 5, 6 realize '## Proof', first sentence ('Separation, smoothness, properness, finite type ... stable under base change'); step 7 realizes 'for an affine curve C=Spec A one has C_{k'}=Spec(A ⊗_k k')'; steps 2-4 realize the second paragraph (dimension via affine open pieces, Noether normalization 00OY and going-up 00GU, packaged as 00P3 in lem-pc-dim-base-change); step 8 (connectedness) is not in the blueprint proof and serves the citers. blueprint.same_as searched (tools/blueprint_refs.py search 'base change curve', 'fibre product affine tensor'): lem-pd-geometric-curve and prop-pc-xk-integral are base-change statements for smooth projective (geometrically integral) curves over other fields, not the same statement: [].",
-    "tool_uses": [
-      {
-        "node": "lem-weil-separably-closed-geometrically-connected",
-        "why": "step 8 needs that a connected scheme over a separably closed field is geometrically connected (Stacks 0363); no node of sk-prop-ext-invariance or its route gives it (same tool use as thm-sc-constant-invariance step 1)"
-      }
-    ]
-  },
-  "tool_uses": [
-    "lem-weil-separably-closed-geometrically-connected"
-  ],
-  "reviewed": {
-    "date": "2026-10-11",
-    "by": "L",
-    "reviewer": "R-bcc0229",
-    "group": "L",
-    "result": "pass",
-    "note": "lead item: E7: smoothness only for smooth C; worker W-bcc0224; mathematics reviewed in full by R-bcc0229 (reviewer sub-agent of L); reviewed field set by L at 04:19 UTC (the lead splits were committed without it, so the queue still counted them as open)"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Lemma 0363 (lemma-separably-closed-field-connected-components), second assertion; Definition 0362 (geometrically connected)"
+   }
   }
+ ],
+ "proof_deps": [
+  "def-sc-curves",
+  "def-pc-base-change",
+  "lem-pod-separated-finite-type-base-change",
+  "def-weil-finite-type-morphism",
+  "lem-weil-pbc-open-fibre-product",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "def-weil-surjective-morphism",
+  "lem-weil-pbc-surjective-base-change",
+  "lem-pc-dimension-affine-open-cover",
+  "lem-pc-dim-base-change",
+  "def-pc-dimension",
+  "lem-pc-scheme-dimension-local-rings",
+  "lem-pc-proper-base-change",
+  "lem-weil-pbc-proper-base-change",
+  "def-pc-fibre-product",
+  "def-pc-separably-closed",
+  "lem-weil-separably-closed-geometrically-connected",
+  "def-pc-geometrically-irreducible"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-ext-invariance/lem-sc-base-change-curve.md",
+  "place": "## Proof (route followed; each permanence fact and the dimension comparison taken from the cited nodes with their Stacks tags 01KU, 01T4, 01VB, 01W4, 01S1, 00P3, 0363); the connectedness clause is not in the blueprint proof and was written by the worker"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Krull dimension of scheme preserved under base change to a field extension",
+   "results": "HTTP Error 500 (service down)",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "base change of a scheme of finite type over a field along a field extension has the same dimension",
+   "results": "IsBaseChange.finrank_eq (Mathlib.LinearAlgebra.Dimension.Localization), RingHom.finiteType_isStableUnderBaseChange, RingHom.EssFiniteType.isStableUnderBaseChange, RingHom.finite_isStableUnderBaseChange, AlgebraicGeometry.IsFinite.instIsStableUnderBaseChangeScheme, RingHom.QuasiFinite.isStableUnderBaseChange: no dimension statement for schemes or algebras under field extension",
+   "date": "2026-10-11",
+   "verdict": "no match for the item (clauses 1 and 2 have the per-clause leaves cited in the proof)"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Smooth, CategoryTheory.MorphismProperty.IsStableUnderBaseChange",
+   "results": "AlgebraicGeometry.smooth_isStableUnderBaseChange (Mathlib.AlgebraicGeometry.Morphisms.Smooth)",
+   "date": "2026-10-11",
+   "verdict": "match for the smoothness clause only (Mathlib's Smooth vs the node's smooth is the 02H6 comparison, see lem-pc-proper-base-change); no match for the whole item"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'krullDim.*TensorProduct\\|krullDim.*⊗\\|ringKrullDim.*⊗' and grep -rln topologicalKrullDim in ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry",
+   "results": "no tensor-product dimension lemma; topologicalKrullDim occurs only in AlgebraicGeometry/Artinian.lean",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "import_flags": [
+  "proof_cites_literature"
+ ],
+ "blueprint_kind": "lemma",
+ "blueprint_order": 1029,
+ "blueprint_uses": [
+  "def-sc-curves",
+  "def-weil-pbc-scheme-conventions"
+ ],
+ "uses_not_cited": [
+  "def-sc-curves"
+ ],
+ "proof_split_by": "paragraphs",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-ext-invariance",
+ "statement_change": {
+  "date": "2026-10-11",
+  "by": "worker W-bcc0224 (for L)",
+  "what": "(a) 'C_{k'} is a smooth separated curve' for an arbitrary curve C is false (a nodal cubic over k stays singular over k'): smoothness is now asserted only when C is smooth, as every citer has it (the unit sk-prop-ext-invariance takes C smooth); (b) clause 3 added: a connected curve base-changes to a connected curve, which lem-sc-c7 step 1 and lem-sc-kummer-base-change-compatibility step 1 take from this node; (c) the base change and the notion of curve over k' are made explicit.",
+  "old_statement": "Let $k\\subseteq k'$ be algebraically closed and let $C$ be a\ncurve over $k$. Then $C_{k'}$ is a\nsmooth separated curve over $k'$ of the same dimension, and\n$C_{k'}$ is proper (resp. affine) if $C$ is proper (resp. affine)."
+ },
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-sc-base-change-curve",
+  "worker": "stage1 W-bcc0224 (for L)",
+  "summary": "Statement corrected (see statement_change): smoothness of C_{k'} only when C is smooth (the old text claimed it for every curve, false for a nodal curve), and a connectedness clause added that the citers lem-sc-c7 (step 1) and lem-sc-kummer-base-change-compatibility (step 1) take from this node. Proof in 8 steps following the blueprint proof: separated/finite type (01KU, 01T4), smooth (01VB), proper (01W4), affine (fibre product of affine spectra) by existing Mathlib leaves or reviewed split nodes; dimension via an affine open cover of C, its base-changed cover, the sup formula lem-pc-dimension-affine-open-cover and lem-pc-dim-base-change (Stacks 00P3, which is the blueprint's 00OY+00GU argument); nonemptiness by surjective base change (01S1); connectedness by 0363 and the definition of geometric connectedness. No new node. lean_audit none on both branches; no slopmaster2 declaration found.",
+  "blueprint": "Steps 1, 5, 6 realize '## Proof', first sentence ('Separation, smoothness, properness, finite type ... stable under base change'); step 7 realizes 'for an affine curve C=Spec A one has C_{k'}=Spec(A ⊗_k k')'; steps 2-4 realize the second paragraph (dimension via affine open pieces, Noether normalization 00OY and going-up 00GU, packaged as 00P3 in lem-pc-dim-base-change); step 8 (connectedness) is not in the blueprint proof and serves the citers. blueprint.same_as searched (tools/blueprint_refs.py search 'base change curve', 'fibre product affine tensor'): lem-pd-geometric-curve and prop-pc-xk-integral are base-change statements for smooth projective (geometrically integral) curves over other fields, not the same statement: [].",
+  "tool_uses": [
+   {
+    "node": "lem-weil-separably-closed-geometrically-connected",
+    "why": "step 8 needs that a connected scheme over a separably closed field is geometrically connected (Stacks 0363); no node of sk-prop-ext-invariance or its route gives it (same tool use as thm-sc-constant-invariance step 1)"
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-separably-closed-geometrically-connected"
+ ],
+ "reviewed": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-bcc0229",
+  "group": "L",
+  "result": "pass",
+  "note": "lead item: E7: smoothness only for smooth C; worker W-bcc0224; mathematics reviewed in full by R-bcc0229 (reviewer sub-agent of L); reviewed field set by L at 04:19 UTC (the lead splits were committed without it, so the queue still counted them as open)"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.BaseChangeCurve",
+  "declaration": "AlgebraicGeometry.baseChange_curve",
+  "file": "lean/Sheaf/AlgebraicGeometry/BaseChangeCurve.lean",
+  "statement": "theorem baseChange_curve {k k' : Type u} {C : Scheme.{u}} [Field k] [Field k'] [Algebra k k'] [IsAlgClosed k] [IsAlgClosed k'] (f : C ⟶ Spec (.of k)) [IsCurve f] : IsCurve (CategoryTheory.Limits.pullback.snd f (Spec.map (CommRingCat.ofHom (algebraMap k k')))) ∧ topologicalKrullDim (CategoryTheory.Limits.pullback f (Spec.map (CommRingCat.ofHom (algebraMap k k'))) : Scheme.{u}) = topologicalKrullDim C ∧ (Smooth f → Smooth (CategoryTheory.Limits.pullback.snd f (Spec.map (CommRingCat.ofHom (algebraMap k k'))))) ∧ (IsProper f → IsProper (CategoryTheory.Limits.pullback.snd f (Spec.map (CommRingCat.ofHom (algebraMap k k'))))) ∧ (IsAffine C → IsAffine (CategoryTheory.Limits.pullback f (Spec.map (CommRingCat.ofHom (algebraMap k k'))))) ∧ (IsConnectedCurve f → IsConnectedCurve (CategoryTheory.Limits.pullback.snd f (Spec.map (CommRingCat.ofHom (algebraMap k k')))))",
+  "branch": "sheaf-dag",
+  "by": "N1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "N1",
+  "result": "pass",
+  "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
+ }
 }
