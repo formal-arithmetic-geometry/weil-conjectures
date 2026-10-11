@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import Mathlib.AlgebraicGeometry.Morphisms.Etale
+public import WeilConjectures.Mathlib.AlgebraicGeometry.ResidueField
 public import Mathlib.RingTheory.AdjoinRoot
 public import Mathlib.RingTheory.Etale.Basic
 public import WeilConjectures.Mathlib.RingTheory.Etale.StandardEtale
@@ -128,5 +129,48 @@ theorem exists_lift {Ω : Type*} [Field Ω] [IsSepClosed Ω] [NeZero (n : Ω)] (
   exact AdjoinRoot.lift_of hroot
 
 end PrimitiveRootsAlgebra
+
+open CategoryTheory
+
+/-- The étale cover `Spec B[ζ] ⟶ Spec B` adjoining a primitive `n`-th root of unity. -/
+noncomputable def primitiveRootsCover :
+    Spec (.of (PrimitiveRootsAlgebra B n)) ⟶ Spec (.of B) :=
+  Spec.map (CommRingCat.ofHom (algebraMap B (PrimitiveRootsAlgebra B n)))
+
+/-- The cover `Spec B[ζ] ⟶ Spec B` is étale when `n ≠ 0` is invertible in `B`. -/
+theorem etale_primitiveRootsCover (hn₀ : n ≠ 0) (hn : IsUnit (n : B)) :
+    Etale (primitiveRootsCover B n) := by
+  have := PrimitiveRootsAlgebra.etale B n hn₀ hn
+  rw [primitiveRootsCover, HasRingHomProperty.Spec_iff (P := @Etale)]
+  exact RingHom.etale_algebraMap.mpr inferInstance
+
+/-- Every separably closed point of `Spec B` lifts to `Spec B[ζ]` when `n` is invertible in `B`.
+-/
+theorem exists_comp_primitiveRootsCover_eq (hn : IsUnit (n : B)) {Ω : Type u} [Field Ω]
+    [IsSepClosed Ω] (s : Spec (.of Ω) ⟶ Spec (.of B)) :
+    ∃ t : Spec (.of Ω) ⟶ Spec (.of (PrimitiveRootsAlgebra B n)),
+      t ≫ primitiveRootsCover B n = s := by
+  let φ := Spec.preimage s
+  have : NeZero (n : Ω) := ⟨by simpa using (hn.map φ.hom).ne_zero⟩
+  obtain ⟨ψ, hψ⟩ := PrimitiveRootsAlgebra.exists_lift B n φ.hom
+  refine ⟨Spec.map (CommRingCat.ofHom ψ), ?_⟩
+  rw [primitiveRootsCover, ← Spec.map_comp, ← Spec.map_preimage s]
+  congr 1
+  ext b
+  exact congr($hψ b)
+
+/-- The cover `Spec B[ζ] ⟶ Spec B` is surjective when `n` is invertible in `B`. -/
+theorem surjective_primitiveRootsCover (hn : IsUnit (n : B)) :
+    Function.Surjective (primitiveRootsCover B n).base := by
+  intro x
+  let Ω := AlgebraicClosure ((Spec (.of B)).residueField x)
+  let s : Spec (.of Ω) ⟶ Spec (.of B) :=
+    Spec.map (CommRingCat.ofHom (algebraMap ((Spec (.of B)).residueField x) Ω)) ≫
+      (Spec (.of B)).fromSpecResidueField x
+  obtain ⟨t, ht⟩ := exists_comp_primitiveRootsCover_eq B n hn s
+  refine ⟨t (IsLocalRing.closedPoint Ω), ?_⟩
+  rw [← Scheme.Hom.comp_apply, ht]
+  simp only [s, Scheme.Hom.comp_apply, Scheme.SpecMap_apply_closedPoint]
+  exact Scheme.fromSpecResidueField_apply x _
 
 end AlgebraicGeometry
