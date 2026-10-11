@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import Mathlib.CategoryTheory.Shift.CommShift
+public import Mathlib.Algebra.Group.Int.Defs
 
 /-!
 # Detecting the compatibility of a natural transformation with shifts
@@ -21,6 +22,9 @@ We give two criteria for `τ` to commute with shifts (`NatTrans.CommShift τ A`)
   applies for instance when `L` is essentially surjective, or when `L` is the inclusion of
   a class of objects such as complexes of injective objects, through which every object is
   resolved.
+
+We also record `CategoryTheory.Functor.map_shift_comp_shiftFunctorAdd'_inv`, which splits a
+degree-two shift pushed through a functor commuting with shifts into two degree-one shifts.
 -/
 
 @[expose] public section
@@ -66,3 +70,34 @@ lemma of_whiskerLeft (L : E ⥤ C) [L.CommShift A]
       Category.assoc, ← Functor.commShiftIso_hom_naturality, τ.naturality_assoc]
 
 end CategoryTheory.NatTrans.CommShift
+
+namespace CategoryTheory.Functor
+
+variable {C D : Type*} [Category* C] [Category* D] [HasShift C ℤ] [HasShift D ℤ]
+
+/-- A degree-two composite `X⟦1⟧ ⟶ Y⟦1⟧⟦1⟧ ≅ Y⟦2⟧` pushed through a functor commuting with
+shifts, followed by a map `ψ : F Y ⟶ Z`, is the degree-one composite shifted by one:
+
+```
+F (X⟦1⟧) ──F(δ⟦1⟧ ≫ add⁻¹)──▶ F (Y⟦2⟧) ──≅──▶ (F Y)⟦2⟧ ──ψ⟦2⟧──▶ Z⟦2⟧
+    │                                                            ▲
+  ≅ │                                                            │ add⁻¹
+    ▼                                                            │
+(F X)⟦1⟧ ─────────(F δ ≫ ≅ ≫ ψ⟦1⟧)⟦1⟧─────────────────────▶ Z⟦1⟧⟦1⟧
+```
+-/
+lemma map_shift_comp_shiftFunctorAdd'_inv (F : C ⥤ D) [F.CommShift ℤ] {X Y : C} {Z : D}
+    (δ : X ⟶ Y⟦(1 : ℤ)⟧) (ψ : F.obj Y ⟶ Z) :
+    F.map (δ⟦(1 : ℤ)⟧' ≫ (shiftFunctorAdd' C (1 : ℤ) 1 2 rfl).inv.app Y) ≫
+        (F.commShiftIso (2 : ℤ)).hom.app Y ≫ ψ⟦(2 : ℤ)⟧' =
+      (F.commShiftIso (1 : ℤ)).hom.app X ≫
+        (F.map δ ≫ (F.commShiftIso (1 : ℤ)).hom.app Y ≫ ψ⟦(1 : ℤ)⟧')⟦(1 : ℤ)⟧' ≫
+          (shiftFunctorAdd' D (1 : ℤ) 1 2 rfl).inv.app Z := by
+  rw [F.commShiftIso_add' (show (1 : ℤ) + 1 = 2 from rfl)]
+  simp only [CommShift.isoAdd'_hom_app, Functor.map_comp, Category.assoc]
+  rw [← F.map_comp_assoc ((shiftFunctorAdd' C 1 1 2 _).inv.app Y), Iso.inv_hom_id_app,
+    CategoryTheory.Functor.map_id, Category.id_comp, F.commShiftIso_hom_naturality_assoc,
+    ← NatTrans.naturality]
+  rfl
+
+end CategoryTheory.Functor

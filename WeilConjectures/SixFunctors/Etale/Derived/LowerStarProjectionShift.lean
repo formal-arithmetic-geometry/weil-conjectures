@@ -42,14 +42,6 @@ variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{
 
 namespace Etale
 
-/-- The derived pullback `Lg^*` is triangulated, being isomorphic to the functor `D(g^*)`
-induced by the exact pullback. -/
-instance isTriangulated_leftDerivedUpperStar {Z Y : Scheme.{u}} (g : Z ⟶ Y) :
-    (L((g)^*[A])).IsTriangulated :=
-  have : NatTrans.CommShift (leftDerivedUpperStarIsoMapDerivedCategory A g).symm.hom ℤ :=
-    Functor.CommShift.ofIso_compatibility _ ℤ
-  Functor.isTriangulated_of_iso (leftDerivedUpperStarIsoMapDerivedCategory A g).symm
-
 variable [Etale.UpperStarPreservesFlat A] {X Y : Scheme.{u}} (p : X ⟶ Y)
 
 /-- The projection map `Rp_*M ⊗ᴸ L ⟶ Rp_*(M ⊗ᴸ Lp^*L)` of the derived pushforward commutes
