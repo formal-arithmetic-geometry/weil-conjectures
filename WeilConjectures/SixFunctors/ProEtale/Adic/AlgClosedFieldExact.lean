@@ -8,7 +8,7 @@ module
 public import Mathlib.Algebra.Category.ModuleCat.FilteredColimits
 public import Mathlib.CategoryTheory.Sites.EpiMono
 public import WeilConjectures.SixFunctors.ProEtale.Adic.AlgClosedField
-public import WeilConjectures.SixFunctors.ProEtale.Derived.AlgClosedField
+public import WeilConjectures.SixFunctors.ProEtale.AlgClosedFieldSite
 
 /-!
 # Global sections on the spectrum of an algebraically closed field are exact
