@@ -5538,3 +5538,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 18:24 L: merged deliver/J1/lem-sc-irreducible-constant-sections (stage 2; reviewer PASS; first push; Sheaf.Topology.IrreducibleConstantSections TopCat.irreducible_constant_sections)
 - 18:25 L: merged deliver/H1/lem-pur-site-restriction-module-adjunction-exact (stage 2; reviewer PASS; first push; Sheaf.CategoryTheory.LocalizedModuleAdjunctionExact SheafOfModules.localizedModule_adjunction_exact)
 - 18:25 L: merged deliver/K1/lem-weil-pbc-ringed-site-free-cech-complex-exact (stage 2; reviewer PASS; first push; Sheaf.Paper.FreeCechComplexExactK1 CategoryTheory.free_presheaf_cech_complex_exact)
+- 18:25 L: merged deliver/M1/lem-weil-pbc-ringed-site-injective-module-injective-presheaf (stage 2; reviewer PASS; first push; Sheaf.CategoryTheory.InjectiveModulePresheaf CategoryTheory.injective_module_sheaf_injective_presheaf)
