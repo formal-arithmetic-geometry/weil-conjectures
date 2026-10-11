@@ -24,7 +24,8 @@
  "stmt_deps": [
   "def-weil-pbc-scheme-conventions",
   "def-weil-constructible-subset",
-  "def-pc-fibre-product"
+  "def-pc-fibre-product",
+  "def-constructible-stratification"
  ],
  "proof": [
   {
@@ -153,5 +154,23 @@
   "group": "F1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of F1; spot-checked by L: fifth push: the stratum is now Z_i = X_i x_X W_{a,b} (the false factorization claim is gone), the 09YJ node carries the basis hypothesis and step 1 says why a qcqs scheme has one; L added the three missing citations in step 3 post-merge"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.EtaleStratificationLocalGluing",
+  "declaration": "AlgebraicGeometry.Scheme.exists_constructible_stratification_finite_etale_of_affine_local",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleStratificationLocalGluing.lean",
+  "statement": "theorem exists_constructible_stratification_finite_etale_of_affine_local {X U : Scheme.{u}} [CompactSpace X] [QuasiSeparatedSpace X] [CompactSpace U] [QuasiSeparatedSpace U] (j : U ⟶ X) [Etale j] (hlocal : ∃ (n : ℕ) (W : Fin n → X.Opens), (∀ a : Fin n, IsAffineOpen (W a)) ∧ (⋃ a : Fin n, (W a : Set X)) = Set.univ ∧ ∀ a : Fin n, ∃ S : LocallyClosedStratification (W a), (∀ b : Fin S.n, Topology.IsConstructible (S.stratum b)) ∧ ∀ b : Fin S.n, IsFinite (pullback.snd j (S.immersion b ≫ (W a).ι)) ∧ Etale (pullback.snd j (S.immersion b ≫ (W a).ι))) : ∃ S : LocallyClosedStratification X, (∀ i : Fin S.n, Topology.IsConstructible (S.stratum i)) ∧ ∀ i : Fin S.n, IsFinite (pullback.snd j (S.immersion i)) ∧ Etale (pullback.snd j (S.immersion i))",
+  "branch": "sheaf-dag",
+  "by": "K1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-esg1005",
+  "group": "K1",
+  "result": "pass",
+  "note": "qcqs X,U as CompactSpace+QuasiSeparatedSpace; [Etale j]; existential finite affine cover (Fin n, IsAffineOpen, union=univ); per-chart recorded LocallyClosedStratification (W a) + IsConstructible strata (slopmaster2 Topology.Stratification has no constructibility field); IsFinite∧Etale of pullback.snd j (S.immersion b ≫ (W a).ι); conclusion identical in form to F1 39c27f035 exists_etale_stratified_finite"
  }
 }
