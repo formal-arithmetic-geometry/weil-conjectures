@@ -4663,3 +4663,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 12:43 L: merged deliver/C1/lem-weil-pbc-polynomial-ring-n2 (stage 2; reviewer PASS; first push; Sheaf.RingTheory.PolynomialRingN2 isN2_polynomial)
 - 12:43 L: merged deliver/C1/lem-weil-pbc-polynomial-quotient-dimension-at-point-height-difference (stage 2; reviewer FIX; first push; Sheaf.RingTheory.PolynomialQuotientDimensionAtPointHeightDifference AlgebraicGeometry.topologicalKrullDimAt_polynomial_quotient_eq_height_difference)
 - 12:44 L: merged deliver/H1/lem-weil-pbc-popescu-desingularize-strictly-standard (stage 2; reviewer PASS; first push; Sheaf.RingTheory.DesingularizeStrictlyStandard Algebra.exists_desingularization_strictlyStandard)
+- 12:45 L: merged deliver/K1/lem-weil-pbc-polynomial-ring-maximal-chain-height-difference (stage 2; reviewer FIX; first push; Sheaf.RingTheory.PolynomialRingMaximalChainHeightDifference MvPolynomial.maximalChain_height_difference)

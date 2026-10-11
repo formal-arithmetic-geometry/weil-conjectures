@@ -193,5 +193,24 @@
   "summary": "Six steps following Stacks 00OR: P is a regular ring (00OQ, Mathlib leaf lem-weil-pbc-polynomial-ring-field-regular-ring), so every P_r is regular local; regular local rings are CM (00NQ node: a generating set of dim many elements is a regular sequence, depth >= dim); ht(r) = dim P_r finite, monotone, and ht(q) <= ht(M) = n by the 00OP node (first clause of the statement, which 00OR itself does not state); a chain realizing ht(p) is saturated and starts at (0) since P is a domain; concatenated with the given maximal chain it becomes, through the prime correspondence of the localization (00E3 leaf), a maximal chain of P_q; 00N9 (accepted node) gives its length = dim P_q = ht(q). The source's appeal to 00NA ('see Lemma 00NA for example') is replaced by this direct use of 00N9 in P_q (00NA's proof is 'follows immediately from 00N9'), so no 00NA node is created. No new nodes. Tags verified in tags/tags: 00OR, 00OQ, 00NQ, 00N9, 00NA, 00OP (the brief's guesses 00NJ/00NM are wrong). No citer of the item (00OS) or of its citers is used.",
   "blueprint": "The item's blueprint ancestor is thm-weil-pbc-finite-etale-lifting (step 7, the essential-surjectivity paragraphs of 0GS2), through a long via chain ending in lem-weil-pbc-finite-type-domain-dimension-local-ring (00OS); the item serves the dimension count of that via chain (dim S_m = dim S for finite type domains). All six steps realize that single place: steps 1-2 the regularity/CM input, step 3 the bound ht <= n, steps 4-6 the maximal-chain length. No blueprint node states 00OR (search: 00OR, maximal chain, catenary, saturated, chain of primes, Cohen-Macaulay, height, 00N9, 00NQ, 00OQ: none)."
  },
- "reviewed": "2026-10-10 L: 6 steps checked against 00OR: P regular (00OQ leaf), P_r Cohen-Macaulay (00NQ), ht(r) = dim P_r, ht(q) <= n via a maximal ideal and 00OP, a chain realizing ht(p) starts at (0) since P is a domain, joined with the given maximal chain it is maximal in P_q so 00N9 gives the length; 00NA replaced by a direct use of 00N9 (sound); no use of 00OS"
+ "reviewed": "2026-10-10 L: 6 steps checked against 00OR: P regular (00OQ leaf), P_r Cohen-Macaulay (00NQ), ht(r) = dim P_r, ht(q) <= n via a maximal ideal and 00OP, a chain realizing ht(p) starts at (0) since P is a domain, joined with the given maximal chain it is maximal in P_q so 00N9 gives the length; 00NA replaced by a direct use of 00N9 (sound); no use of 00OS",
+ "lean": {
+  "module": "Sheaf.RingTheory.PolynomialRingMaximalChainHeightDifference",
+  "declaration": "MvPolynomial.maximalChain_height_difference",
+  "file": "lean/Sheaf/RingTheory/PolynomialRingMaximalChainHeightDifference.lean",
+  "statement": "theorem maximalChain_height_difference {k : Type u} [Field k] (n : ℕ) (q : Ideal (MvPolynomial (Fin n) k)) [q.IsPrime] : q.height ≤ (n : ℕ∞) ∧ ∀ (p : Ideal (MvPolynomial (Fin n) k)) [p.IsPrime], p ≤ q → ∀ (c : LTSeries (PrimeSpectrum (MvPolynomial (Fin n) k))), c.head.asIdeal = p → c.last.asIdeal = q → (∀ i : Fin c.length, c i.castSucc ⋖ c i.succ) → (c.length : ℕ∞) = q.height - p.height",
+  "branch": "sheaf-dag",
+  "by": "K1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-pmc1346"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-pmc1346",
+  "group": "K1",
+  "result": "fix",
+  "note": "k field {k:Type u}; n:ℕ incl. 0; P = MvPolynomial (Fin n) k; q prime [q.IsPrime]; ht = Ideal.height (prime case = sup of strict chains below q); ht(q) ≤ n first conjunct; p prime, p ≤ q; chain as LTSeries (PrimeSpectrum P) head p last q; saturation as CovBy (Iff.rfl to no prime strictly between); t = c.length; (t:ℕ∞) = q.height - p.height truncated sub safe as both ≤ n; t=0/p=q covered"
+ }
 }
