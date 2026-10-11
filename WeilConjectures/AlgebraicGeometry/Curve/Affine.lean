@@ -33,8 +33,8 @@ collects the inputs of the computation of the étale cohomology of `C`
 * `Pic(C)` is a quotient of the `k`-points of the Jacobian of the smooth compactification of `C`
   by a finitely generated subgroup; hence it is `n`-divisible with finite `n`-torsion for `n`
   prime to `char k`;
-* `H²(C, ℤ/ℓ) = 0` for every prime `ℓ`, and `H²(C, η_* M) = 0` for every torsion sheaf `M` on
-  the generic point `η` of `C`.
+* `H²(C, ℤ/ℓ) = 0` for every prime `ℓ`; the vanishing of `H²(C, η_* M)` for torsion sheaves `M`
+  on the generic point `η` of `C` is in `WeilConjectures.AlgebraicGeometry.Curve.AffineGeneric`.
 
 ## Main statements
 
@@ -43,7 +43,6 @@ collects the inputs of the computation of the étale cohomology of `C`
 - `AlgebraicGeometry.IsConnectedCurve.surjective_zsmul_pic_and_finite_torsionBy`: `Pic(C)` is
   `n`-divisible with finite `n`-torsion.
 - `AlgebraicGeometry.IsConnectedCurve.subsingleton_sheafH_two_constantZMod`: `H²(C, ℤ/ℓ) = 0`.
-- `AlgebraicGeometry.IsConnectedCurve.subsingleton_sheafH_two_lowerStar`: `H²(C, η_* M) = 0`.
 -/
 
 @[expose] public section
@@ -493,27 +492,5 @@ theorem subsingleton_sheafH_two_constantZMod (f : C ⟶ Spec (.of k)) [IsConnect
   have e' := ((Sheaf.functorH _ 2).mapIso
     (C.constantZModIsoRootsOfUnitySheaf ℓ f hζ)).addCommGroupIsoToAddEquiv
   exact (e'.trans e).subsingleton
-
-/-- **Second cohomology of a generic extension on an affine curve.** Let `C` be a smooth integral
-affine connected curve over an algebraically closed field `k`, with generic point
-`η : Spec k(C) ⟶ C`. Then `H²(C_ét, η_* M) = 0` for every torsion étale sheaf `M` on
-`Spec k(C)`.
-
-For `M` finite and `ℓ`-primary, a finite separable extension `K'/k(C)` of degree prime to `ℓ`
-over which `M` has a filtration with trivial `𝔽_ℓ` quotients makes `η_* M` a direct summand of
-`h_* b_* M|_{K'}`, where `h : C' ⟶ C` is the normalization of `C` in `K'`
-(`AlgebraicGeometry.IsConnectedCurve.normalizationIn`) and `b` the generic point of `C'`. Since
-`h_*` is exact, the claim reduces along the filtration to
-`AlgebraicGeometry.IsConnectedCurve.subsingleton_sheafH_two_constantZMod` on `C'`. A general
-torsion module is the filtered union of its finite submodules, and cohomology commutes with
-filtered colimits on the quasi-compact quasi-separated scheme `C`.
-(blueprint: `lem-sc-affine-generic-second`) -/
-theorem subsingleton_sheafH_two_lowerStar (f : C ⟶ Spec (.of k)) [IsConnectedCurve f]
-    [Smooth f] [IsAffine C] [IsIntegral C]
-    (M : Sheaf (Spec C.functionField).smallEtaleTopology AddCommGrpCat.{u + 1})
-    (hM : M.IsTorsion) :
-    Subsingleton
-      (Sheaf.H ((Etale.lowerStar AddCommGrpCat.{u + 1} C.fromSpecFunctionField).obj M) 2) :=
-  sorry
 
 end AlgebraicGeometry.IsConnectedCurve

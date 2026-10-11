@@ -27,6 +27,11 @@ So `H²(C, η_* N) = 0` follows from `H²(C, η_* ℤ/ℓ) = H²(C, ℤ/ℓ) = 0
 
 - `AlgebraicGeometry.IsConnectedCurve.subsingleton_sheafH_two_lowerStar_of_isSplitBy`:
   `H²(C, η_* N) = 0` for `N` split by an `ℓ`-group extension.
+- `AlgebraicGeometry.IsConnectedCurve.subsingleton_sheafH_two_lowerStar_of_isSplitBy_of_finite`:
+  `H²(C, η_* N) = 0` for `N` split by a finite Galois extension, with finite sections over it
+  (Sylow reduction and trace).
+- `AlgebraicGeometry.IsConnectedCurve.subsingleton_sheafH_two_lowerStar`: `H²(C, η_* M) = 0` for
+  every torsion sheaf `M` on the generic point.
 -/
 
 @[expose] public section
@@ -464,3 +469,135 @@ theorem subsingleton_sheafH_two_lowerStar_of_isSplitBy_of_finite (L : Type u) [F
   exact AddMonoid.addOrderOf_eq_one_iff.1 this
 
 end AlgebraicGeometry.IsConnectedCurve
+
+namespace AlgebraicGeometry
+
+open Etale
+
+variable {X : Scheme.{u}}
+
+set_option synthInstance.maxHeartbeats 400000 in
+-- the colimits of shape `J` in the category of sheaves are found by a long instance search
+/-- **Filtered unions of subsheaves, indexed by a large category.** The variant of
+`AlgebraicGeometry.Etale.isColimitOfMonoOfLocallySurjective` for filtered diagrams indexed by a
+category of the universe of the sheaf values. -/
+noncomputable def Etale.isColimitOfMonoOfLocallySurjective' {J : Type (u + 1)} [SmallCategory J]
+    [IsFiltered J] {D : J ⥤ Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}} (c : Cocone D)
+    [∀ j, Mono (c.ι.app j)]
+    (h : ∀ (V : X.Etale) (s : c.pt.obj.obj (op V)), ∃ R ∈ X.smallEtaleTopology V,
+      ∀ ⦃W : X.Etale⦄ (g : W ⟶ V), R g →
+        ∃ (j : J) (t : (D.obj j).obj.obj (op W)),
+          (c.ι.app j).hom.app (op W) t = c.pt.obj.map g.op s) :
+    IsColimit c := by
+  have : IsConnected J := IsFiltered.isConnected _
+  have : HasColimitsOfShape J (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) := inferInstance
+  let φ := colimit.desc D c
+  have hmono : Mono φ := by
+    let α : D ⟶ (Functor.const _).obj c.pt := { app j := c.ι.app j }
+    have : Mono α := NatTrans.mono_of_mono_app _
+    have : Mono (colim.map α) := inferInstance
+    let e := (colimit.isColimit ((Functor.const J).obj c.pt)).coconePointUniqueUpToIso
+      (isColimitConstCocone J c.pt)
+    have : φ = colim.map α ≫ e.hom := by
+      refine colimit.hom_ext fun j ↦ ?_
+      simp [φ, e, α]
+    rw [this]
+    infer_instance
+  have hepi : Epi φ := by
+    have : Sheaf.IsLocallySurjective φ := by
+      refine ⟨fun {V} s ↦ ?_⟩
+      obtain ⟨R, hR, hRs⟩ := h V s
+      refine X.smallEtaleTopology.superset_covering ?_ hR
+      intro W g hg
+      obtain ⟨j, t, ht⟩ := hRs g hg
+      refine ⟨(colimit.ι D j).hom.app (op W) t, ?_⟩
+      rw [← ConcreteCategory.comp_apply, ← NatTrans.comp_app,
+        ← ObjectProperty.FullSubcategory.comp_hom, colimit.ι_desc]
+      exact ht
+    exact Sheaf.epi_of_isLocallySurjective _
+  have : IsIso ((colimit.isColimit D).desc c) := isIso_of_mono_of_epi φ
+  exact IsColimit.ofPointIso (colimit.isColimit D)
+
+namespace IsConnectedCurve
+
+variable {k : Type u} [Field k] [IsAlgClosed k] {C : Scheme.{u}}
+
+/-- The generic fibre of an affine étale scheme over an affine integral scheme is affine. -/
+lemma isAffine_fromSpecFunctionField_etale_obj [IsAffine C] [IsIntegral C] (W : C.Etale)
+    [IsAffine W.left] :
+    IsAffine ((MorphismProperty.Over.pullback @AlgebraicGeometry.Etale ⊤
+      C.fromSpecFunctionField).obj W).left := by
+  change IsAffine (pullback W.hom C.fromSpecFunctionField)
+  have : IsAffine ((𝟭 Scheme).obj W.left) := ‹IsAffine W.left›
+  have : IsAffine ((Functor.fromPUnit C).obj W.right) := ‹IsAffine C›
+  have : IsAffineHom W.hom := isAffineHom_of_isAffine _
+  exact isAffine_of_isAffineHom (pullback.snd W.hom C.fromSpecFunctionField)
+
+/-- **Second cohomology of a generic extension on an affine curve.** Let `C` be a smooth integral
+affine connected curve over an algebraically closed field `k`, with generic point
+`η : Spec k(C) ⟶ C`. Then `H²(C_ét, η_* M) = 0` for every torsion étale sheaf `M` on
+`Spec k(C)`.
+
+The sheaf `M` is the filtered union of its subsheaves split by a finite Galois extension of
+`k(C)` with finite sections over it (`AlgebraicGeometry.Scheme.SplitFamily`), so `η_* M` is the
+filtered union of their pushforwards, and cohomology commutes with filtered colimits on the
+quasi-compact quasi-separated scheme `C`. For each of them
+`AlgebraicGeometry.IsConnectedCurve.subsingleton_sheafH_two_lowerStar_of_isSplitBy_of_finite`
+applies.
+(blueprint: `lem-sc-affine-generic-second`) -/
+theorem subsingleton_sheafH_two_lowerStar (f : C ⟶ Spec (.of k)) [IsConnectedCurve f]
+    [Smooth f] [IsAffine C] [IsIntegral C]
+    (M : Sheaf (Spec C.functionField).smallEtaleTopology AddCommGrpCat.{u + 1})
+    (hM : M.IsTorsion) :
+    Subsingleton
+      (Sheaf.H ((Etale.lowerStar AddCommGrpCat.{u + 1} C.fromSpecFunctionField).obj M) 2) := by
+  classical
+  set η := C.fromSpecFunctionField
+  let R := (η)_*[AddCommGrpCat.{u + 1}]
+  let D := Scheme.SplitFamily.diagram M ⋙ R
+  let c := R.mapCocone (Scheme.SplitFamily.cocone M)
+  have : ∀ j, Mono (c.ι.app j) := fun j ↦
+    have := Scheme.SplitFamily.mono_cocone_ι M j
+    R.map_mono ((Scheme.SplitFamily.cocone M).ι.app j)
+  have hc : IsColimit c := Etale.isColimitOfMonoOfLocallySurjective' c fun V s ↦ by
+    let S : Sieve V :=
+      { arrows W g := ∃ (j : Scheme.SplitFamily M) (t : (D.obj j).obj.obj (op W)),
+          (c.ι.app j).hom.app (op W) t = c.pt.obj.map g.op s
+        downward_closed := by
+          rintro W W' g ⟨j, t, ht⟩ h
+          refine ⟨j, (D.obj j).obj.map h.op t, ?_⟩
+          rw [NatTrans.naturality_apply, ht]
+          exact Scheme.FieldTrace.map_map_apply c.pt.obj h g s }
+    refine ⟨S, Etale.mem_smallEtaleTopology_of_forall_isAffine _ fun W g hW ↦ ?_, fun _ _ h ↦ h⟩
+    let Y := (MorphismProperty.Over.pullback @AlgebraicGeometry.Etale ⊤ η).obj W
+    let x : M.obj.obj (op Y) := c.pt.obj.map g.op s
+    have : IsAffine Y.left := isAffine_fromSpecFunctionField_etale_obj W
+    have : DiscreteTopology Y.left := inferInstanceAs (DiscreteTopology
+      (Y : (Spec (CommRingCat.of C.functionField)).Etale).left)
+    have : Finite Y.left := finite_of_compact_of_discrete
+    have := Fintype.ofFinite Y.left
+    have hy (y : Y.left) : ∃ j : Scheme.SplitFamily M,
+        M.obj.map (Scheme.pointι Y y).op x ∈ j.1 (Scheme.pointObj Y y) := by
+      obtain ⟨L, _, _, _, _, B, hB, ht, hmem⟩ := Scheme.exists_mem_splitSubgroup hM
+        (M.obj.map (Scheme.pointι Y y).op x)
+      exact ⟨⟨_, L, inferInstance, inferInstance, inferInstance, inferInstance, B, hB, ht, rfl⟩,
+        hmem⟩
+    choose jy hjy using hy
+    obtain ⟨j, hj⟩ := Finset.exists_le (Finset.univ.image jy)
+    have hjy' (y : Y.left) := hj (jy y) (Finset.mem_image_of_mem _ (Finset.mem_univ y))
+    have hxdef : x = c.pt.obj.map g.op s := rfl
+    clear_value x
+    rcases j with ⟨_, L, _, _, _, _, B, hB, ht, rfl⟩
+    have hx : x ∈ Scheme.splitSubgroup M L (Scheme.orbitClosure M L B) Y :=
+      Scheme.mem_splitSubgroup_of_pointι fun y ↦ hjy' y _ (hjy y)
+    exact ⟨⟨_, L, inferInstance, inferInstance, inferInstance, inferInstance, B, hB, ht, rfl⟩,
+      ⟨x, hx⟩, hxdef⟩
+  refine subsingleton_of_forall_eq 0 fun x ↦ ?_
+  obtain ⟨j, y, rfl⟩ := (Scheme.H_map_isColimit_of_isFiltered C hc 2).1 x
+  obtain ⟨L, _, _, _, _, hL, hfin⟩ := Scheme.SplitFamily.exists_isSplitBy j
+  have := subsingleton_sheafH_two_lowerStar_of_isSplitBy_of_finite f L _ hL
+  rw [Subsingleton.elim (h := this) y 0, map_zero]
+
+end IsConnectedCurve
+
+end AlgebraicGeometry

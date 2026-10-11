@@ -1003,11 +1003,14 @@ noncomputable def SplitFamily.cocone : Cocone (SplitFamily.diagram M) where
   ι := NatTrans.mk (fun j ↦ ⟨NatTrans.mk (fun V ↦ AddCommGrpCat.ofHom (j.1 V.unop).subtype)
     (fun _ _ _ ↦ rfl)⟩) (fun _ _ _ ↦ rfl)
 
-instance (j : SplitFamily M) : Mono ((SplitFamily.cocone M).ι.app j) := by
+lemma SplitFamily.mono_cocone_ι (j : SplitFamily M) : Mono ((SplitFamily.cocone M).ι.app j) := by
   have (V : (Spec (.of F)).Etaleᵒᵖ) : Mono (((SplitFamily.cocone M).ι.app j).hom.app V) :=
     (AddCommGrpCat.mono_iff_injective _).2 Subtype.val_injective
   have : Mono ((SplitFamily.cocone M).ι.app j).hom := NatTrans.mono_of_mono_app _
   exact Sheaf.Hom.mono_of_presheaf_mono _ _ _
+
+instance (j : SplitFamily M) : Mono ((SplitFamily.cocone M).ι.app j) :=
+  SplitFamily.mono_cocone_ι M j
 
 variable {M} in
 /-- Each subsheaf of the split family is split by a finite Galois extension, with finite sections
