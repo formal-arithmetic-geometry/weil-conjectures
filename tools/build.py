@@ -50,26 +50,12 @@ def run(cmd, **kw):
 
 def commit_tree(inflight: list[dict]):
     """Commit the repository holding the Lean sources, with the previous version of every file of the landings held
-    back (newest first, so that the oldest previous version of a file is the one that stays)."""
+    back (newest first, so that the oldest previous version of a file is the one that stays). Called by snapshot()
+    with coord/.merge.lock held."""
     top = run(["git", "-C", str(li.LEAN), "rev-parse", "--show-toplevel"])
     if top.returncode != 0:
         return None
     repo = pathlib.Path(top.stdout.strip())
-    # Stage and commit under coord/.merge.lock, as merge_delivery.py writes the tree and commits under it: a build
-    # commit in the middle of a merge would commit the merge's partial tree (2026-10-11 09:58, 2a55d0584).
-    with open(mergelock.LOCK, "a") as f:
-        try:
-            mergelock.acquire(f, mergelock.LOCK, LOCK_SECS)
-        except mergelock.LockTimeout as e:
-            print(f"warning: build commit skipped: {e}")
-            return run(["git", "rev-parse", "HEAD"], cwd=repo).stdout.strip() or None
-        try:
-            return _commit_tree(repo, inflight)
-        finally:
-            fcntl.flock(f, fcntl.LOCK_UN)
-
-
-def _commit_tree(repo: pathlib.Path, inflight: list[dict]):
     run(["git", "add", "-A"], cwd=repo)
     for r in inflight:
         for f in r["files"]:
@@ -102,8 +88,27 @@ def seed_copy():
 
 def snapshot(allowed=None):
     """Returns (commit, the landings contained, whether any source changed since the last snapshot).
-    Landings still being checked are held back; with `allowed`, so is every waiting landing whose id is not in it."""
+    Landings still being checked are held back; with `allowed`, so is every waiting landing whose id is not in it.
+    The commit and the copy are taken under coord/.merge.lock, as merge_delivery.py writes the tree and commits under
+    it: otherwise a build could commit or build a merge's partial tree (2026-10-11 09:58, 2a55d0584). The merge lock is
+    taken before local/tree.lock, the order of merge_delivery.py (which runs land.sh under it). None if the merge lock
+    is not had within SHEAF_BUILD_LOCK_TIMEOUT."""
     ld.dirs()
+    with open(mergelock.LOCK, "a") as lockf:
+        try:
+            mergelock.acquire(lockf, mergelock.LOCK, LOCK_SECS)
+        except mergelock.LockTimeout as e:
+            print(f"warning: build skipped, no snapshot taken: {e}")
+            return None
+        try:
+            commit, included, changed = _snapshot(allowed)
+        finally:
+            fcntl.flock(lockf, fcntl.LOCK_UN)
+    seed_copy()
+    return commit, included, changed
+
+
+def _snapshot(allowed):
     with ld.tree_lock():
         waiting = ld.records(ld.REQUESTS)
         held = [] if allowed is None else [r for r in waiting if r["id"] not in allowed]
@@ -123,7 +128,6 @@ def snapshot(allowed=None):
                 elif dst.exists():
                     dst.unlink()
         included = [r for r in waiting if allowed is None or r["id"] in allowed]
-    seed_copy()
     return commit, included, changed
 
 
@@ -232,7 +236,10 @@ def main() -> int:
             if not last or last["result"] != "red":
                 print("--retry follows a red build; the last build was not red."); return 2
             allowed = set(last.get("included", [])) | {r["id"] for r in ld.records(ld.REQUESTS) if r["group"] == "M"}
-        commit, included, changed = snapshot(allowed)
+        snap = snapshot(allowed)
+        if snap is None:
+            return 1
+        commit, included, changed = snap
         if not included and not changed and last and last["result"] == "green":
             deadline = time.time() + float(CFG.get("SHEAF_BUILD_WAIT", "600"))
             while wait and time.time() < deadline and not ld.records(ld.REQUESTS):
