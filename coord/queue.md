@@ -1,11 +1,11 @@
 # Work queue
 
-97 items; claim with `tools/claim.py next <group> [--stage N]`.
+93 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (97)
+## Stage 2: nodes to state (93)
 
 | node | distance to Mathlib | kind | blockers |
 |---|---|---|---|
@@ -32,14 +32,11 @@
 | `lem-pc-cech-resolution` | 1 | state | 1 |
 | `lem-pc-derived-sections-pushforward-comparison` | 1 | state | 1 |
 | `lem-pc-derived-tensor-transitivity` | 1 | state | 1 |
-| `lem-pc-restrict-derived-direct-image-open` | 1 | state | 1 |
 | `lem-sc-cech-comparison-natural` | 1 | state | 1 |
 | `cor-galois-lisse-representations` | 1 | state | 0 |
 | `lem-pc-base-change-rhom-perfect` | 1 | state | 0 |
 | `lem-pc-bounded-coherent-finite-tor-proper-pushforward-perfect` | 1 | state | 0 |
-| `lem-pc-finite-scheme-cohomology-tensor` | 1 | state | 0 |
 | `lem-pc-genus-well-defined` | 1 | state | 0 |
-| `lem-pc-grothendieck-edge-cocycle` | 1 | state | 0 |
 | `lem-pc-noetherian-perfect-direct-image` | 1 | state | 0 |
 | `lem-pc-projection-locality` | 1 | state | 0 |
 | `lem-pc-proper-derived-direct-image-composition` | 1 | state | 0 |
@@ -96,7 +93,6 @@
 | `lem-weil-pbc-strict-henselization-functoriality` | 1 | state | 0 |
 | `lem-weil-pbc-theorem-formal-functions` | 1 | state | 0 |
 | `lem-weil-pbc-unrestricted-strict-henselization-stalk` | 1 | state | 0 |
-| `pqf-lem-fff-vanishing` | 1 | state | 0 |
 | `prop-weil-pbc-strict-henselization-stalk-formula` | 1 | state | 0 |
 | `thm-sc-constant-invariance` | 1 | state | 0 |
 | `lem-pc-rf-single-complex-inherited-tensor-condition` | 2 | state | 0 |
