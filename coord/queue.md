@@ -1,11 +1,11 @@
 # Work queue
 
-976 items; claim with `tools/claim.py next <group> [--stage N]`.
+974 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (976)
+## Stage 2: nodes to state (974)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -29,7 +29,6 @@
 | `lem-pc-pre-derived-adjoint-functors-general` | 1 | state |
 | `lem-pc-ring-pseudo-coherent-iff-all-m` | 1 | state |
 | `lem-pc-sheaf-modules-tensor-closed` | 1 | state |
-| `lem-pc-sites-modules-j-shriek-flat` | 1 | state |
 | `lem-pc-skyscraper-complex` | 1 | state |
 | `lem-pc-stalk-tensor-complex` | 1 | state |
 | `lem-pc-tor-independent-projective-complex-tensor` | 1 | state |
@@ -40,7 +39,6 @@
 | `lem-pod-lisse-module-sheaves-as-module-objects` | 1 | state |
 | `lem-pur-derived-change-of-rings` | 1 | state |
 | `lem-sc-ample-proj-local-chart` | 1 | state |
-| `lem-sc-ample-proj-open` | 1 | state |
 | `lem-sc-conductor-ideal-restriction` | 1 | state |
 | `lem-sc-conductor-ideal-zero-intersection` | 1 | state |
 | `lem-sc-conductor-sections` | 1 | state |
