@@ -19,9 +19,39 @@
   "place": "Tag 00O0, Algebra, Lemma cokernel-flat, parts (1) and (3)"
  },
  "stmt_deps": [],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Apply [lem-weil-pbc-finite-projective-prime-local-free] to P_1 and P_2 at p. After replacing R by a principal localization R_g with g not in p, both modules are finite free, and the residue-field hypothesis is unchanged because g is invertible in kappa(p).",
+   "uses": [
+    "lem-weil-pbc-finite-projective-prime-local-free"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00O0, reduction to the finite-free case using Tag 00NX"
+   }
+  },
+  {
+   "text": "Apply [lem-pc-finite-free-map-residue-localization] to the resulting finite-free map. In the injective-fibre case it gives a further principal localization, still away from p, on which the map is injective and its cokernel is finite free, hence finite projective. In the isomorphism-fibre case it gives a localization on which the map is an isomorphism. Composing the two localizations gives the required element f not in the original prime.",
+   "uses": [
+    "lem-pc-finite-free-map-residue-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00O0, Lemma cokernel-flat, parts (1) and (3)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-projective-prime-local-free",
+  "lem-pc-finite-free-map-residue-localization"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 00O0, Lemma cokernel-flat, parts (1) and (3)"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -53,12 +83,36 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-pc-affine-perfect-cut-degree-zero",
   "by": "worker",
   "date": "2026-10-11"
  },
  "chapter": "sec-abelian-varieties",
- "unit": "sk-prop-av-cube"
+ "unit": "sk-prop-av-cube",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-pc-finite-projective-cokernel-localization",
+  "worker": "stage1",
+  "summary": "Split Tag 00O0 into the existing finite-projective-to-finite-free localization lemma and a new finite-free matrix/minor lemma. The first step preserves the residue-field hypotheses after localization; the second supplies injectivity plus finite-free cokernel, or an isomorphism, on a further principal neighborhood.",
+  "blueprint": "Realizes the proof sentence of thm-sc-theorem-of-cube used by lem-pc-affine-perfect-cut-degree-zero: localize so the selected differential has finite-projective cokernel.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-finite-projective-prime-local-free",
+    "why": "The projective source and target must be made finite free near the chosen prime before applying the finite-free matrix calculation."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-finite-projective-prime-local-free"
+ ],
+ "reviewed": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-pcl0145",
+  "group": "F1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-pcl0145 (reviewer sub-agent of L); spot-checked: Step 1 cites lem-weil-pbc-finite-projective-prime-local-free (Tag 00NX) exactly; residue field of pR_g is kappa(p), composite principal localization R_{ga} stays outside p. Step 2 new finite-free node: true (m x m minor unit at p, invert it, split identity block, cokernel free; iso case m=n, det unit); Coker(phi)_f = Coker(phi_f) by exactness of localization. Isomorphism clause correct. Citer 0756c63f7 uses the isomorphism clause for R^{r+s+t}->K^0 and the injective clause for R^t->K^1, matching. No duplicate: lem-sc-finite-locally-free-residue-isomorphism is scheme-level all-points iso only; lem-sc-perfect-degree-zero-fibre-criterion and lem-weil-pbc-split-injection-after-completion differ. Mathlib: Module.FinitePresentation.exists_notMem_bijective needs bijectivity at the stalk, not the fibre; not a match. Second reading by F1: no missed fault found."
+ }
 }
