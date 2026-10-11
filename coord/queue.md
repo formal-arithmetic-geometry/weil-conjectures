@@ -1,11 +1,11 @@
 # Work queue
 
-162 items; claim with `tools/claim.py next <group> [--stage N]`.
+156 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (162)
+## Stage 2: nodes to state (156)
 
 | node | distance to Mathlib | kind | blockers |
 |---|---|---|---|
@@ -80,7 +80,6 @@
 | `lem-weil-pbc-tor-long-exact-first-variable` | 1 | state | 0 |
 | `lem-weil-pbc-tor-one-surjective-change-rings` | 1 | state | 0 |
 | `lem-weil-pbc-tor-one-surjective-flat-middle` | 1 | state | 0 |
-| `lem-weil-pbc-torsion-extension-flat-descent` | 1 | state | 0 |
 | `lem-weil-pbc-torsion-module-flat-base-change-iso` | 1 | state | 0 |
 | `lem-weil-pbc-torsion-submodule-flat-base-change-iso` | 1 | state | 0 |
 | `lem-weil-pbc-tower-limit-exact-surjective-kernels` | 1 | state | 0 |
@@ -89,9 +88,7 @@
 | `lem-weil-pbc-truncated-coskeleton-finite-limits` | 1 | state | 0 |
 | `lem-weil-pbc-truncation-step-ses` | 1 | state | 0 |
 | `lem-weil-pbc-unramified-base-change-open` | 1 | state | 0 |
-| `lem-weil-pbc-valuation-ring-normal` | 1 | state | 0 |
 | `lem-weil-pbc-vanishing-descends-retract` | 1 | state | 0 |
-| `lem-weil-pbc-well-ordered-union-projective-dimension` | 1 | state | 0 |
 | `lem-weil-pbc-zariski-pair-rank-one-propagation` | 1 | state | 0 |
 | `lem-weil-pbc-zero-dim-integral-point` | 1 | state | 0 |
 | `lem-weil-pbc-zero-dimensional-base-change-points` | 1 | state | 0 |
@@ -102,8 +99,6 @@
 | `lemma-weil-pbc-chow-factorization` | 1 | state | 0 |
 | `lemma-weil-pbc-torsion-assembly` | 1 | state | 0 |
 | `lemma-weil-pbc-torsion-filtered-union` | 1 | state | 0 |
-| `pqf-lem-proper-basic` | 1 | state | 0 |
-| `pqf-lem-qf-finitefibres` | 1 | state | 0 |
 | `pqf-lem-qs-intersection-qc` | 1 | state | 0 |
 | `prop-pur-kinjective-objects-small` | 1 | state | 0 |
 | `prop-weil-pbc-composition-stability` | 1 | state | 0 |
@@ -116,7 +111,6 @@
 | `thm-pqf-immersion-descent` | 1 | state | 0 |
 | `thm-pqf-zmt-factorization` | 1 | state | 0 |
 | `lem-exc-coinduced-continuous-acyclic` | 2 | state | 0 |
-| `lem-kun-etale-lfp` | 2 | state | 0 |
 | `lem-pc-affine-perfect-hom-colimit` | 2 | state | 0 |
 | `lem-pc-bounded-above-flat-kflat` | 2 | state | 0 |
 | `lem-pc-degree-zero-properties` | 2 | state | 0 |
