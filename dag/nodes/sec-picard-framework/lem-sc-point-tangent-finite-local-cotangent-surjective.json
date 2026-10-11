@@ -111,5 +111,23 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-fl2b (reviewer sub-agent of L); spot-checked: Reviewer R-fl2b (re-push after the 16:26 return): points 1 and 2 repaired, mathematics right; point 3 (report lists files not in the commit) is a form fault that does not change the split; L merged at 16:42 UTC instead of a third round trip"
  },
- "lead_note": "2026-10-10 L (R-fl2b): merged by L over the reviewer's return: the only unrepaired point was report-only (the report lists citations.json and report.md that are not in the commit); points 1-2 repaired and the mathematics right per R-fl2b"
+ "lead_note": "2026-10-10 L (R-fl2b): merged by L over the reviewer's return: the only unrepaired point was report-only (the report lists citations.json and report.md that are not in the commit); points 1-2 repaired and the mathematics right per R-fl2b",
+ "lean": {
+  "module": "Sheaf.RingTheory.SurjectiveOfFiniteOfCotangent",
+  "declaration": "RingHom.surjective_of_finite_of_cotangent",
+  "file": "lean/Sheaf/RingTheory/SurjectiveOfFiniteOfCotangent.lean",
+  "statement": "theorem surjective_of_finite_of_cotangent {A : Type u} {B : Type v} [CommRing A] [CommRing B] [IsLocalRing A] [IsLocalRing B] (f : A →+* B) [IsLocalHom f] (hfinite : f.Finite) (k : Type w) [Field k] (iA : IsLocalRing.ResidueField A ≃+* k) (iB : IsLocalRing.ResidueField B ≃+* k) (hres : iB.toRingHom.comp (IsLocalRing.ResidueField.map f) = iA.toRingHom) (hcot : Function.Surjective (Ideal.mapCotangent (IsLocalRing.maximalIdeal A) (IsLocalRing.maximalIdeal B) f.toIntAlgHom (fun a ha => map_nonunit f a ha))) : Function.Surjective f",
+  "branch": "sheaf-dag",
+  "by": "K1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-ptc1212",
+  "group": "K1",
+  "result": "pass",
+  "note": "IsLocalRing A,B (CommRing); f : A →+* B [IsLocalHom f]; hfinite f.Finite (Module.Finite); common k with iA,iB and hres = identity on residue field; hcot surjectivity of Ideal.mapCotangent on maximalIdeal (= IsLocalRing.CotangentSpace, abbrev); conclusion Function.Surjective f; dropping m_B f.g. valid (B/m_AB Artinian)"
+ }
 }
