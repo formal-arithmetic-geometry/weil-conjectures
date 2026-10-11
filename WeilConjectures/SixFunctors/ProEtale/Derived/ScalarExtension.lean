@@ -202,6 +202,8 @@ variable {X}
 
 local notation "𝐅" => sheafExtendScalars (algebraMap R S) X
 set_option hygiene false in
+local notation "𝐀" => sheafExtendScalarsAdjunction (algebraMap R S) X
+set_option hygiene false in
 local notation "𝐆" => sheafCompose (Scheme.ProEt.topology X)
   (ModuleCat.restrictScalars.{u + 1} (algebraMap R S))
 
@@ -222,21 +224,21 @@ theorem isIso_biproductDesc_mapDerivedCategoryAdjunction_unit {ι : Type} [Finit
           (ModuleCat.restrictScalars.{u + 1} (algebraMap R S))).map (c i • 𝟙 _)) := by
   -- the statement for complexes, degreewise
   have hC (K : CochainComplex (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} R)) ℤ) :
-      IsIso (biproduct.desc fun i ↦ ((sheafExtendScalarsAdjunction (algebraMap R S) X).mapHomologicalComplex _).unit.app K ≫
+      IsIso (biproduct.desc fun i ↦ ((𝐀).mapHomologicalComplex _).unit.app K ≫
         ((𝐆).mapHomologicalComplex _).map (c i • 𝟙 _)) := by
-    have (n : ℤ) : IsIso ((biproduct.desc fun i ↦ ((sheafExtendScalarsAdjunction (algebraMap R S) X).mapHomologicalComplex _).unit.app K ≫
+    have (n : ℤ) : IsIso ((biproduct.desc fun i ↦ ((𝐀).mapHomologicalComplex _).unit.app K ≫
         ((𝐆).mapHomologicalComplex _).map (c i • 𝟙 _)).f n) := by
       have e : (fun i ↦ (HomologicalComplex.eval _ _ n).map
-          (((sheafExtendScalarsAdjunction (algebraMap R S) X).mapHomologicalComplex _).unit.app K ≫
+          (((𝐀).mapHomologicalComplex _).unit.app K ≫
             ((𝐆).mapHomologicalComplex _).map (c i • 𝟙 _))) =
-          fun i ↦ (sheafExtendScalarsAdjunction (algebraMap R S) X).unit.app (K.X n) ≫ (𝐆).map (c i • 𝟙 _) := by
+          fun i ↦ (𝐀).unit.app (K.X n) ≫ (𝐆).map (c i • 𝟙 _) := by
         ext i
         simp only [HomologicalComplex.eval_map, HomologicalComplex.comp_f,
           Adjunction.mapHomologicalComplex_unit_app_f, Functor.mapHomologicalComplex_map_f,
           HomologicalComplex.smul_f_apply, HomologicalComplex.id_f]
         rfl
       have : IsIso (biproduct.desc fun i ↦ (HomologicalComplex.eval _ _ n).map
-          (((sheafExtendScalarsAdjunction (algebraMap R S) X).mapHomologicalComplex _).unit.app K ≫
+          (((𝐀).mapHomologicalComplex _).unit.app K ≫
             ((𝐆).mapHomologicalComplex _).map (c i • 𝟙 _))) := by
         rw [e]
         exact h (K.X n)
@@ -244,21 +246,21 @@ theorem isIso_biproductDesc_mapDerivedCategoryAdjunction_unit {ι : Type} [Finit
     exact HomologicalComplex.Hom.isIso_of_components _
   -- the statement on the image of a complex
   have hQ (K : CochainComplex (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} R)) ℤ) :
-      IsIso (biproduct.desc fun i ↦ (sheafExtendScalarsAdjunction (algebraMap R S) X).mapDerivedCategoryAdjunction.unit.app
+      IsIso (biproduct.desc fun i ↦ (𝐀).mapDerivedCategoryAdjunction.unit.app
           (DerivedCategory.Qh.obj ((HomotopyCategory.quotient _ _).obj K)) ≫
         (𝐆).mapDerivedCategory.map (c i • 𝟙 _)) := by
     have := hC K
     have := Functor.isIso_biproductDesc_map
       (HomotopyCategory.quotient _ (ComplexShape.up ℤ) ⋙ DerivedCategory.Qh)
-      (fun i ↦ ((sheafExtendScalarsAdjunction (algebraMap R S) X).mapHomologicalComplex _).unit.app K ≫
+      (fun i ↦ ((𝐀).mapHomologicalComplex _).unit.app K ≫
         ((𝐆).mapHomologicalComplex _).map (c i • 𝟙 _))
     refine isIso_biproductDesc_of_iso _ (fun i ↦
       (HomotopyCategory.quotient _ (ComplexShape.up ℤ) ⋙ DerivedCategory.Qh).map
-        (((sheafExtendScalarsAdjunction (algebraMap R S) X).mapHomologicalComplex _).unit.app K ≫
+        (((𝐀).mapHomologicalComplex _).unit.app K ≫
           ((𝐆).mapHomologicalComplex _).map (c i • 𝟙 _))) (Iso.refl _)
       ((𝐆).mapDerivedCategory.mapIso ((𝐅).mapDerivedCategoryFactorsh.app _) ≪≫
         (𝐆).mapDerivedCategoryFactorsh.app _) (fun i ↦ ?_) this
-    have hfac := (sheafExtendScalarsAdjunction (algebraMap R S) X).mapDerivedCategoryAdjunction_unit_app_fac
+    have hfac := (𝐀).mapDerivedCategoryAdjunction_unit_app_fac
       ((HomotopyCategory.quotient _ (ComplexShape.up ℤ)).obj K)
     rw [Adjunction.mapHomotopyCategory_unit_app_quotient] at hfac
     have e₁ : (c i • 𝟙 ((𝐅).mapDerivedCategory.obj
@@ -284,7 +286,7 @@ theorem isIso_biproductDesc_mapDerivedCategoryAdjunction_unit {ι : Type} [Finit
   refine isIso_biproductDesc_of_iso _ _ e.symm
     ((𝐅.mapDerivedCategory ⋙ (𝐆).mapDerivedCategory).mapIso e.symm) (fun i ↦ ?_)
     (hQ (DerivedCategory.Qh.objPreimage M).as)
-  have hu := (sheafExtendScalarsAdjunction (algebraMap R S) X).mapDerivedCategoryAdjunction.unit.naturality
+  have hu := (𝐀).mapDerivedCategoryAdjunction.unit.naturality
     e.inv
   simp only [Functor.comp_obj, Functor.id_obj, Functor.id_map, Functor.comp_map] at hu
   simp only [Functor.comp_obj, Functor.mapIso_hom, Iso.symm_hom, Functor.comp_map,
