@@ -1,8 +1,8 @@
 # Work queue
 
-864 items; claim with `tools/claim.py next <group> [--stage N]`.
+863 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (45)
+## Stage 1: nodes to split (44)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -16,7 +16,6 @@
 | `lem-sc-qcoh-complex-alternating-cech-derived-sections` | 3022 | none |
 | `lem-pc-finite-projective-tor-acyclic` | 3023 | none |
 | `lem-pc-termwise-tor-acyclic-derived-tensor` | 3023 | none |
-| `lem-sc-perfect-hypercohomology-gap` | 3023 | none |
 | `lem-pc-genus-agrees-sc` | 4007 | rests_on_sorry |
 | `prop-av-tate-rank` | 4008 | rests_on_sorry |
 | `cor-pc-sigma-pic-iso` | 4009 | rests_on_sorry |
@@ -876,7 +875,7 @@
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 | `def-nagata-fixed-base-separated-stage` | 6 | state |
 
-Not open yet: 1726 nodes that wait for a statement dependency, 86 nodes that wait for stage 1.
+Not open yet: 1727 nodes that wait for a statement dependency, 85 nodes that wait for stage 1.
 
 ## Stage 3: modules to prove (0)
 
