@@ -248,7 +248,7 @@ uses instead a cover of `X` by two affine opens.
 theorem Modules.subsingleton_H_of_two_le (ℱ : X.Modules)
     [SheafOfModules.IsQuasicoherent (R := X.ringCatSheaf) ℱ] {q : ℕ} (hq : 2 ≤ q) :
     Subsingleton (ℱ.H q) := by
-  obtain ⟨π, hπ, hfin, -, -⟩ := exists_isFinite_flat_hom_projectiveLine (k := k) (X := X)
+  obtain ⟨π, hπ, hfin, -, -, -⟩ := exists_isFinite_flat_hom_projectiveLine (k := k) (X := X)
   obtain ⟨e⟩ := Modules.nonempty_cohomologyFunctor_iso_pushforward_of_isAffineHom k π q
   have := Modules.isQuasicoherent_pushforward_of_isAffineHom π ℱ
   have h := ProjectiveLine.subsingleton_H_of_two_le (k := k) ((Modules.pushforward π).obj ℱ) hq

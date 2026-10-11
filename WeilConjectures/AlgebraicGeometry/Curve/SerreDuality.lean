@@ -425,14 +425,16 @@ theorem isFinite_flat_of_hom_projectiveLine_of_functionField [IsIntegral X]
   exact key _ Scheme.fromSpecStalk_closedPoint.symm
 
 /-- **Finite flat morphisms to the projective line.** Every smooth proper curve `X` over `k` has
-a finite flat morphism `X ⟶ ℙ¹_k` over `k`. Each connected component of `X` is integral
+a finite flat morphism `X ⟶ ℙ¹_k` over `k`, unramified at the generic points of `X`. Each
+connected component of `X` is integral
 (`AlgebraicGeometry.IsRegular.irreducibleSpace`) of dimension one, so its function field has a
 transcendental element `t`, and `π_t` is finite flat
 (`isFinite_flat_of_hom_projectiveLine_of_functionField`); there are finitely many components,
 and the morphisms on the components glue. -/
 theorem exists_isFinite_flat_hom_projectiveLine :
     ∃ f : X ⟶ ProjectiveLine (Spec (.of k)), f.IsOver (Spec (.of k)) ∧ IsFinite f ∧ Flat f ∧
-      LocallyOfFinitePresentation f := by
+      LocallyOfFinitePresentation f ∧
+        ∀ x : X, IsField (X.presheaf.stalk x) → (f.stalkMap x).hom.FormallyUnramified := by
   have := SmoothOfRelativeDimension.smooth 1 (X ↘ Spec (.of k))
   have : IsLocallyNoetherian X := LocallyOfFiniteType.isLocallyNoetherian (X ↘ Spec (.of k))
   let U : ConnectedComponents X → X.Opens := fun c ↦ ⟨ConnectedComponents.mk ⁻¹' {c}, by
@@ -515,7 +517,7 @@ theorem exists_isFinite_flat_hom_projectiveLine :
   have : IsLocallyNoetherian (ProjectiveLine (Spec (.of k))) :=
     LocallyOfFiniteType.isLocallyNoetherian (ProjectiveLine (Spec (.of k)) ↘ Spec (.of k))
   exact ⟨f, ⟨hover⟩, inferInstance, inferInstance,
-    LocallyOfFinitePresentation.iff_locallyOfFiniteType.2 inferInstance⟩
+    LocallyOfFinitePresentation.iff_locallyOfFiniteType.2 inferInstance, sorry⟩
 
 
 end ProjectiveLine
@@ -534,7 +536,8 @@ codifferent of the finite flat extension `R ⊆ B` of Dedekind domains, i.e. Gro
 
 (blueprint: `lem-sc-finite-duality`, the trace identification) -/
 theorem exists_isIso_pushforwardHomObjComparison_unit (f : X ⟶ ProjectiveLine (Spec (.of k)))
-    [f.IsOver (Spec (.of k))] [IsFinite f] [Flat f] :
+    [f.IsOver (Spec (.of k))] [IsFinite f] [Flat f]
+    (hf : ∀ x : X, IsField (X.presheaf.stalk x) → (f.stalkMap x).hom.FormallyUnramified) :
     ∃ τ : (Modules.pushforward f).obj (X ↘ Spec (.of k)).relativeDifferentials ⟶
         (ProjectiveLine (Spec (.of k)) ↘ Spec (.of k)).relativeDifferentials,
       IsIso (Modules.pushforwardHomObjComparison f τ (SheafOfModules.unit X.ringCatSheaf)) :=
@@ -550,12 +553,13 @@ since `ℳ` is a direct summand of a free module of finite rank over the affine 
 
 (blueprint: `lem-sc-finite-duality`, the sheaf-level statement) -/
 theorem exists_isIso_pushforwardHomObjComparison (f : X ⟶ ProjectiveLine (Spec (.of k)))
-    [f.IsOver (Spec (.of k))] [IsFinite f] [Flat f] :
+    [f.IsOver (Spec (.of k))] [IsFinite f] [Flat f]
+    (hf : ∀ x : X, IsField (X.presheaf.stalk x) → (f.stalkMap x).hom.FormallyUnramified) :
     ∃ τ : (Modules.pushforward f).obj (X ↘ Spec (.of k)).relativeDifferentials ⟶
         (ProjectiveLine (Spec (.of k)) ↘ Spec (.of k)).relativeDifferentials,
       ∀ ℳ : X.Modules, ℳ.IsFiniteLocallyFree →
         IsIso (Modules.pushforwardHomObjComparison f τ ℳ) := by
-  obtain ⟨τ, hτ⟩ := exists_isIso_pushforwardHomObjComparison_unit f
+  obtain ⟨τ, hτ⟩ := exists_isIso_pushforwardHomObjComparison_unit f hf
   exact ⟨τ, fun ℳ _ ↦ Modules.isIso_pushforwardHomObjComparison_of_isIso_unit hτ ℳ⟩
 
 /-- **Duality along a finite flat morphism to `ℙ¹`, sheaf-level.** Let `X` be a smooth curve
@@ -566,7 +570,8 @@ naturally in finite locally free `ℳ`: the isomorphism `φ ↦ τ ∘ f_* φ` o
 
 (blueprint: `lem-sc-finite-duality`, the sheaf-level statement) -/
 theorem nonempty_homObj_pushforward_iso_pushforward_homObj (f : X ⟶ ProjectiveLine (Spec (.of k)))
-    [f.IsOver (Spec (.of k))] [IsFinite f] [Flat f] :
+    [f.IsOver (Spec (.of k))] [IsFinite f] [Flat f]
+    (hf : ∀ x : X, IsField (X.presheaf.stalk x) → (f.stalkMap x).hom.FormallyUnramified) :
     Nonempty ((SheafOfModules.isFiniteLocallyFree X.ringCatSheaf).ι.op ⋙
         (Modules.pushforward f).op ⋙
         (SheafOfModules.homFunctor (ProjectiveLine (Spec (.of k))).sheaf).flip.obj
@@ -574,7 +579,7 @@ theorem nonempty_homObj_pushforward_iso_pushforward_homObj (f : X ⟶ Projective
       (SheafOfModules.isFiniteLocallyFree X.ringCatSheaf).ι.op ⋙
         (SheafOfModules.homFunctor X.sheaf).flip.obj (X ↘ Spec (.of k)).relativeDifferentials ⋙
           Modules.pushforward f) := by
-  obtain ⟨τ, hτ⟩ := exists_isIso_pushforwardHomObjComparison f
+  obtain ⟨τ, hτ⟩ := exists_isIso_pushforwardHomObjComparison f hf
   have (ℳ : (SheafOfModules.isFiniteLocallyFree X.ringCatSheaf).FullSubcategoryᵒᵖ) :
       IsIso ((Functor.whiskerLeft (SheafOfModules.isFiniteLocallyFree X.ringCatSheaf).ι.op
         (Modules.pushforwardHomObjComparisonNatTrans f τ)).app ℳ) :=
@@ -595,7 +600,8 @@ since `Ω¹_{X/k}` is invertible (`Modules.dualTensorHomIso`).
 
 (blueprint: `lem-sc-finite-duality`) -/
 theorem nonempty_homObj_pushforward_iso (f : X ⟶ ProjectiveLine (Spec (.of k)))
-    [f.IsOver (Spec (.of k))] [IsFinite f] [Flat f] :
+    [f.IsOver (Spec (.of k))] [IsFinite f] [Flat f]
+    (hf : ∀ x : X, IsField (X.presheaf.stalk x) → (f.stalkMap x).hom.FormallyUnramified) :
     Nonempty ((SheafOfModules.isFiniteLocallyFree X.ringCatSheaf).ι.op ⋙
         (Modules.pushforward f).op ⋙
         (SheafOfModules.homFunctor (ProjectiveLine (Spec (.of k))).sheaf).flip.obj
@@ -603,7 +609,7 @@ theorem nonempty_homObj_pushforward_iso (f : X ⟶ ProjectiveLine (Spec (.of k))
         Modules.cohomologyFunctor k 0 ≅
       (SheafOfModules.isFiniteLocallyFree X.ringCatSheaf).ι.op ⋙ Modules.dualFunctor X ⋙
         tensorRight (X ↘ Spec (.of k)).relativeDifferentials ⋙ Modules.cohomologyFunctor k 0) := by
-  obtain ⟨E⟩ := nonempty_homObj_pushforward_iso_pushforward_homObj f
+  obtain ⟨E⟩ := nonempty_homObj_pushforward_iso_pushforward_homObj f hf
   have := Hom.isInvertible_relativeDifferentials (X ↘ Spec (.of k))
   have := Modules.IsInvertible.of_sheafOfModules (X ↘ Spec (.of k)).relativeDifferentials
   exact ⟨Functor.isoWhiskerRight E (Modules.cohomologyFunctor k 0) ≪≫
@@ -1172,10 +1178,10 @@ theorem nonempty_dual_H_one_iso :
         (Modules.cohomologyFunctor k 1).op ⋙ ModuleCat.dualFunctor k ≅
       (SheafOfModules.isFiniteLocallyFree X.ringCatSheaf).ι.op ⋙ Modules.dualFunctor X ⋙
         tensorRight (X ↘ Spec (.of k)).relativeDifferentials ⋙ Modules.cohomologyFunctor k 0) := by
-  obtain ⟨f, _, _, _, _⟩ := exists_isFinite_flat_hom_projectiveLine (k := k) (X := X)
+  obtain ⟨f, _, _, _, _, hf⟩ := exists_isFinite_flat_hom_projectiveLine (k := k) (X := X)
   obtain ⟨T⟩ := Modules.nonempty_cohomologyFunctor_iso_pushforward_of_isAffineHom k f 1
   obtain ⟨D⟩ := ProjectiveLine.nonempty_dual_H_one_iso k
-  obtain ⟨E⟩ := nonempty_homObj_pushforward_iso f
+  obtain ⟨E⟩ := nonempty_homObj_pushforward_iso f hf
   let L₁ : (SheafOfModules.isFiniteLocallyFree X.ringCatSheaf).FullSubcategory ⥤
       (SheafOfModules.isQuasicoherent X.ringCatSheaf).FullSubcategory :=
     ObjectProperty.lift _ (SheafOfModules.isFiniteLocallyFree X.ringCatSheaf).ι fun ℱ ↦ by
