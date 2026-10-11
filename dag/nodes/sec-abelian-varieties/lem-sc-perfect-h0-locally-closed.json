@@ -22,7 +22,10 @@
   "def-pc-scheme",
   "def-pc-perfect-complex",
   "def-pc-derived-category",
-  "def-amb-finite-locally-free-module"
+  "def-amb-finite-locally-free-module",
+  "def-pc-derived-pullback",
+  "def-pc-module-pullback",
+  "def-pc-derived-tensor-cohomology-vanishes"
  ],
  "proof": [
   {
@@ -148,5 +151,23 @@
   "group": "J1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-phl3134 (reviewer sub-agent of L); spot-checked: Read packet whole: item statement vs Tag 0BDL (perfect, tor-amplitude [a,b], r>=0, fp immersion, factorization tested after every further base change, pullback compatibility) agrees; new nodes lem-sc-perfect-jump-loci vs 0BDI and lem-sc-perfect-finite-free-residue-model vs 0BCD agree, no duplicates (grep 0BDI/0BCD; lem-pc-perfect-locus and lem-sc-affine-truncation-kernel-finite-locally-free are different statements). Steps 1-2 cite jump-loci for openness (C1 ok), 0BCD model for the chart; both directions of the factorization in step 3 present. FIX more, RETURN less: (1) step 3 converse justified 'kernel locally free of rank r inside O^r, hence a direct summand of full rank, complement zero' - false as stated (2:Z->Z) and the needed fact uncited (C1): added statement-only node lem-sc-square-injective-free-map-dual-coker-zero (More on Algebra Tag 0EWY, the lemma Stacks cites in 0BDL; Mathlib grep recorded, only the converse direction exists) and rewrote the converse via Hom(Coker psi,B)=0 and the coordinate projections of Coker psi -> B^m; uses/proof_deps updated. (2) step 2: vanishing of the model below degree a now justified from tor-amplitude (beta_i=0 for i<a). The J1 Second reading missed (1). Start Sat Oct 10 11:34:55 PM UTC 2026, end Sat Oct 10 11:34:55 PM UTC 2026; 2 file(s) fixed by the reviewer; 1 statement node(s) added by the reviewer (FIX more, RETURN less)"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.PerfectLowestCohomologyLocus",
+  "declaration": "AlgebraicGeometry.Scheme.exists_perfectLowestCohomologyLocus",
+  "file": "lean/Sheaf/AlgebraicGeometry/PerfectLowestCohomologyLocus.lean",
+  "statement": "theorem exists_perfectLowestCohomologyLocus [∀ T : Scheme.{u}, HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings T.toRingedSpace))] (S : Scheme.{u}) [∀ U : S.Opens, HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings S.toRingedSpace).over U))] (E : schemeDerivedCategory S) (hE : IsPerfect S E) (a b : ℤ) (hamp : ∀ F : SheafOfModules.{u} (moduleRings S.toRingedSpace), ∀ i : ℤ, i < a ∨ b < i → schemeDerivedTensorCohomologyVanishes S E F i) (r : ℕ) : ∃ (Z : Scheme.{u}) (j : Z ⟶ S), IsImmersion j ∧ LocallyOfFinitePresentation j ∧ QuasiCompact j ∧ (∀ (T : Scheme.{u}) (h : T ⟶ S), (∃ g : T ⟶ Z, g ≫ j = h) ↔ ∀ (T' : Scheme.{u}) (u' : T' ⟶ T), SheafOfModules.IsFiniteLocallyFreeOfRank.{u, u, u} ((DerivedCategory.homologyFunctor (SheafOfModules.{u} (moduleRings T'.toRingedSpace)) a).obj ((derivedPullback (u' ≫ h)).obj E)) r) ∧ SheafOfModules.IsFiniteLocallyFreeOfRank.{u, u, u} ((DerivedCategory.homologyFunctor (SheafOfModules.{u} (moduleRings Z.toRingedSpace)) a).obj ((derivedPullback j).obj E)) r ∧ (∀ (T : Scheme.{u}) (g : T ⟶ Z), Nonempty ((Modules.tensorPullback g).obj ((DerivedCategory.homologyFunctor (SheafOfModules.{u} (moduleRings Z.toRingedSpace)) a).obj ((derivedPullback j).obj E)) ≅ (DerivedCategory.homologyFunctor (SheafOfModules.{u} (moduleRings T.toRingedSpace)) a).obj ((derivedPullback (g ≫ j)).obj E)))",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-phl1527",
+  "group": "E1",
+  "result": "pass",
+  "note": "S Scheme.{u}; E schemeDerivedCategory S with IsPerfect; tor-amplitude [a,b] as all-module schemeDerivedTensorCohomologyVanishes outside [a,b] (same form as C1 b8d6461bd); r:ℕ; fp immersion = IsImmersion+LFP+QC (immersions separated); factorization iff H^a(L(u'≫h)^*E) FLF rank r for all T',u' in Scheme.{u}; H^a(Lj^*E) FLF rank r; pullback compatibility as Nonempty iso tensorPullback g H^a ≅ H^a(L(g≫j)^*E); stmt_deps gained only landed defs; no let, no hollow binders, no new definitions"
  }
 }
