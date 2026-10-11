@@ -1,11 +1,11 @@
 # Work queue
 
-969 items; claim with `tools/claim.py next <group> [--stage N]`.
+972 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (969)
+## Stage 2: nodes to state (972)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -16,7 +16,6 @@
 | `def-weil-pbc-etale-sheaves` | 1 | state |
 | `def-weil-pbc-formal-glueing-data` | 1 | state |
 | `def-weil-pbc-henselian-terminology` | 1 | state |
-| `def-weil-pbc-popescu-resolution` | 1 | state |
 | `lem-exc-discrete-modules-abelian` | 1 | state |
 | `lem-exc-discrete-modules-abelian-structure` | 1 | state |
 | `lem-exc-etale-sheaves-gsets-point` | 1 | state |
@@ -55,7 +54,6 @@
 | `lem-pc-right-localization-hom-colimit` | 1 | state |
 | `lem-pc-ring-pseudo-coherent-distinguished-triangle` | 1 | state |
 | `lem-pc-ring-pseudo-coherent-iff-all-m` | 1 | state |
-| `lem-pc-ring-pseudo-coherent-localization-glue` | 1 | state |
 | `lem-pc-ringed-space-module-stalk-tensor` | 1 | state |
 | `lem-pc-separable-tensor-algebraic-closure` | 1 | state |
 | `lem-pc-sites-modules-quotient-j-shriek` | 1 | state |
@@ -673,6 +671,8 @@
 | `lem-weil-pbc-polynomial-ring-origin-regular-local` | 1 | state |
 | `lem-weil-pbc-popescu-artinian-flat-subalgebras` | 1 | state |
 | `lem-weil-pbc-popescu-delocalize-base` | 1 | state |
+| `lem-weil-pbc-popescu-delocalize-height-zero` | 1 | state |
+| `lem-weil-pbc-popescu-delocalize-weak` | 1 | state |
 | `lem-weil-pbc-popescu-delocalize-weak-localization-smooth` | 1 | state |
 | `lem-weil-pbc-popescu-desingularize` | 1 | state |
 | `lem-weil-pbc-popescu-desingularize-lifting-apply` | 1 | state |
@@ -682,10 +682,13 @@
 | `lem-weil-pbc-popescu-height-zero-auxiliary-algebra-localizations` | 1 | state |
 | `lem-weil-pbc-popescu-lift-nilpotent` | 1 | state |
 | `lem-weil-pbc-popescu-lift-once` | 1 | state |
+| `lem-weil-pbc-popescu-lift-solution` | 1 | state |
 | `lem-weil-pbc-popescu-lift-twice` | 1 | state |
 | `lem-weil-pbc-popescu-lifting` | 1 | state |
 | `lem-weil-pbc-popescu-product` | 1 | state |
 | `lem-weil-pbc-popescu-reduce-to-field` | 1 | state |
+| `lem-weil-pbc-popescu-resolve-char-p` | 1 | state |
+| `lem-weil-pbc-popescu-resolve-separable` | 1 | state |
 | `lem-weil-pbc-popescu-solution-modulo` | 1 | state |
 | `lem-weil-pbc-popescu-solution-modulo-choose` | 1 | state |
 | `lem-weil-pbc-power-in-base-after-localization` | 1 | state |
@@ -979,7 +982,7 @@
 | `lem-sc-normalization-properties` | 3 | state |
 | `def-nagata-fixed-base-separated-stage` | 6 | state |
 
-Not open yet: 1106 nodes that wait for a statement dependency, 40 nodes that wait for stage 1.
+Not open yet: 1101 nodes that wait for a statement dependency, 40 nodes that wait for stage 1.
 
 ## Stage 3: modules to prove (0)
 
