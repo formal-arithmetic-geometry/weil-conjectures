@@ -1,11 +1,11 @@
 # Work queue
 
-484 items; claim with `tools/claim.py next <group> [--stage N]`.
+478 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (484)
+## Stage 2: nodes to state (478)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -17,7 +17,6 @@
 | `def-weil-pbc-koszul-complex` | 1 | state |
 | `cor-galois-lisse-representations` | 1 | state |
 | `lem-pc-affine-derived-base-change-comparison-map` | 1 | state |
-| `lem-pc-derived-ambient-direct-sums` | 1 | state |
 | `lem-pc-derived-functor-truncation-stabilization` | 1 | state |
 | `lem-pc-derived-module-free-generation` | 1 | state |
 | `lem-pc-derived-qcoh-compact-generation` | 1 | state |
@@ -46,19 +45,15 @@
 | `lem-sc-picard-kunneth-qcoh` | 1 | state |
 | `lem-sc-qc-open-derived-lift` | 1 | state |
 | `lem-sc-regular-curve-torsionfree-free` | 1 | state |
-| `lem-sc-smooth-omega-finite-locally-free` | 1 | state |
 | `lem-sc-torsion-sections-generic` | 1 | state |
 | `lem-sc-valuation-proper-coherent-higher-direct-images` | 1 | state |
 | `lem-weil-derived-limit-roos-complex` | 1 | state |
 | `lem-weil-pbc-affine-module-finite-type` | 1 | state |
 | `lem-weil-pbc-affine-morphism-relative-spec` | 1 | state |
 | `lem-weil-pbc-closed-immersion-conormal-functorial` | 1 | state |
-| `lem-weil-pbc-closed-immersion-pushforward-annihilated` | 1 | state |
 | `lem-weil-pbc-coherent-generic-point-ideal-inclusion` | 1 | state |
 | `lem-weil-pbc-coherent-stalk-map-extends` | 1 | state |
-| `lem-weil-pbc-ideal-times-quasi-coherent-affine-sections` | 1 | state |
 | `lem-weil-pbc-integral-algebra-directed-colimit-finite` | 1 | state |
-| `lem-weil-pbc-limit-fibre-products` | 1 | state |
 | `lem-weil-pbc-module-base-change-map-algebra` | 1 | state |
 | `lem-weil-pbc-module-directed-colimit-finite-presentation` | 1 | state |
 | `lem-weil-pbc-module-finite-type-image-extension` | 1 | state |
@@ -67,7 +62,6 @@
 | `lem-weil-pbc-module-pullback-finite-type` | 1 | state |
 | `lem-weil-pbc-noetherian-acc-quasi-coherent` | 1 | state |
 | `lem-weil-pbc-normalization-in-residue-field-extension` | 1 | state |
-| `lem-weil-pbc-ogoma` | 1 | state |
 | `lem-weil-pbc-open-restriction-pullback-unit` | 1 | state |
 | `lem-weil-pbc-open-subscheme-fpqc-descent` | 1 | state |
 | `lem-weil-pbc-openness-of-flatness` | 1 | state |
