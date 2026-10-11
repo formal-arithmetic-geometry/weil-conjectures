@@ -75,4 +75,69 @@ lemma isAffineOpen_iInf_of_isSeparated {Y T : Scheme.{u}} (p : Y ⟶ T) [IsSepar
       exact ⟨H _ (hUV _) _ ih.2 (hU _) ih.1, inf_le_left.trans (hUV _)⟩
   simpa using (key Finset.univ Finset.univ_nonempty).1
 
+
+section Core
+
+variable {k : Type u} [Field k] {X : Scheme.{u}} (f : X ⟶ Spec (.of k)) [Flat f] [IsProper f]
+  [LocallyOfFinitePresentation f]
+  [∀ T : Over (Spec (.of k)), HasInjectiveResolutions (Limits.pullback f T.hom).Modules]
+
+/-- **Pullbacks of generators of `f_{T,*} ℒ` to fibres are nonzero.** Let `ℒ ∈ Pic(X_T)` satisfy
+`IsInvertibleDirectImage`, let `s` be a free generator of `f_{T,*} ℒ` on an affine open `V ⊆ T`
+and let `i : T' ⟶ T` be a morphism from an affine scheme with nonzero ring of functions, landing
+in `V`. Then the pullback of `s` to `X_{T'}` is nonzero.
+
+This is the degree `0` part of cohomology and base change: see the module documentation. -/
+theorem pullbackSection_baseChangeMap_ne_zero {T : Over (Spec (.of k))}
+    {L : (Limits.pullback f T.hom).Pic} (hL : IsInvertibleDirectImage f T L)
+    {V : T.left.Opens} (hV : IsAffineOpen V)
+    {s : Γ((pushforward (Limits.pullback.snd f T.hom)).obj ((fromSkeleton _).obj L.val), V)}
+    (hs : IsFreeGenerator s) {T' : Over (Spec (.of k))} (i : T' ⟶ T) [IsAffine T'.left]
+    [Nontrivial Γ(T'.left, ⊤)] (hi : ⊤ ≤ i.left ⁻¹ᵁ V) :
+    pullbackSection (baseChangeMap f i)
+      (show Γ((fromSkeleton _).obj L.val, Limits.pullback.snd f T.hom ⁻¹ᵁ V) from s) ≠ 0 := by
+  classical
+  set sT := Limits.pullback.snd f T.hom with hsT
+  set ℒ := (fromSkeleton _).obj L.val with hℒ
+  have : SheafOfModules.IsInvertible.{u, u, u} ℒ := L.isInvertible
+  have : ℒ.IsInvertible := IsInvertible.of_sheafOfModules _
+  have hW := sT.isCompact_preimage hV.isCompact
+  obtain ⟨ι, _, U, hUa, hUV, hUsup, he⟩ := exists_finite_cover_isFreeGenerator ℒ hW
+  have := Fintype.ofFinite ι
+  let instC : ∀ (k : ℕ) (y : Fin (k + 1) → ι), Module Γ(T.left, V) Γ(ℒ, ⨅ l, U (y l)) :=
+    fun k y ↦ Module.compHom _ (sT.appLE V _ (iInf_le_preimage_of_forall_le U hUV y)).hom
+  have hU : ∀ (k : ℕ) (y : Fin (k + 1) → ι) (a : Γ(T.left, V)) (x : Γ(ℒ, ⨅ l, U (y l))),
+      a • x = sT.appLE V _ (iInf_le_preimage_of_forall_le U hUV y) a • x :=
+    fun _ _ _ _ ↦ rfl
+  have hUa' (k : ℕ) (y : Fin (k + 1) → ι) : IsAffineOpen (⨅ l, U (y l)) :=
+    isAffineOpen_iInf_of_isSeparated sT hV U hUa hUV y
+  have he' (k : ℕ) (y : Fin (k + 1) → ι) : ∃ e : Γ(ℒ, ⨅ l, U (y l)), IsFreeGenerator e := by
+    obtain ⟨e, he⟩ := he (y 0)
+    exact ⟨_, he.map (iInf_le _ 0)⟩
+  -- the Čech complex stays exact in degree `1` after base change to affine `T''` over `V`
+  have hexB : ∀ (T'' : Over (Spec (.of k))) (j : T'' ⟶ T) [IsAffine T''.left]
+      (hj : ⊤ ≤ j.left ⁻¹ᵁ V),
+      letI := (j.left.appLE V ⊤ hj).hom.toAlgebra
+      Function.Exact ((cechDifferential ℒ U hUV hU 0).lTensor Γ(T''.left, ⊤))
+        ((cechDifferential ℒ U hUV hU 1).lTensor Γ(T''.left, ⊤)) := by
+    intro T'' j _ hj
+    let := (j.left.appLE V ⊤ hj).hom.toAlgebra
+    have H := isPullback_baseChangeMap f j
+    have hL'' := IsInvertibleDirectImage.map_of_isProper f j hL
+    have : ((Modules.pullback (baseChangeMap f j)).obj ℒ).IsInvertible :=
+      IsInvertible.pullback ..
+    have hZ : IsZero ((higherDirectImage (Limits.pullback.snd f T''.hom) 1).obj
+        ((Modules.pullback (baseChangeMap f j)).obj ℒ)) :=
+      (hL''.2 1 one_pos).of_iso ((higherDirectImage _ 1).mapIso (fromSkeletonToSkeletonIso _).symm)
+    have hsup : ⨆ i, baseChangeMap f j ⁻¹ᵁ U i = ⊤ := by
+      rw [← Scheme.Hom.preimage_iSup, hUsup, ← Scheme.Hom.comp_preimage, H.w,
+        Scheme.Hom.comp_preimage, eq_top_iff]
+      exact (Scheme.Hom.preimage_top _).ge.trans (Scheme.Hom.preimage_mono _ hj)
+    exact exact_lTensor_cechDifferential hj ℒ U hUV rfl hU H hV hUa' he'
+      (exactAt_cechComplex_of_isZero_higherDirectImage (Limits.pullback.snd f T''.hom) _
+        (fun i ↦ isAffineOpen_preimage_of_isPullback H hV hj (hUV i) (hUa i)) hsup _ 1 hZ)
+  sorry
+
+end Core
+
 end AlgebraicGeometry
