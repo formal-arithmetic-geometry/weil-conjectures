@@ -12,7 +12,7 @@ public import Mathlib.CategoryTheory.Adjunction.Mates
 # Mates and transported adjunctions commuting with shifts
 
 * If two adjunctions commute with shifts, the mate of a natural transformation which
-  commutes with shifts commutes with shifts (`NatTrans.CommShift.mateEquiv`).
+  commutes with shifts commutes with shifts (`NatTrans.CommShift.mateEquiv_natTrans`).
 * An adjunction commuting with shifts, transported along an isomorphism of left adjoints
   commuting with shifts, commutes with shifts (`Adjunction.commShift_ofNatIsoLeft`).
 -/
@@ -36,7 +36,7 @@ variable {C D E F : Type*} [Category* C] [Category* D] [Category* E] [Category* 
 
 /-- The mate of a natural transformation commuting with shifts, with respect to adjunctions
 commuting with shifts, commutes with shifts. -/
-lemma mateEquiv (α : TwoSquare G L₁ L₂ H) [NatTrans.CommShift α.natTrans A] :
+lemma mateEquiv_natTrans (α : TwoSquare G L₁ L₂ H) [NatTrans.CommShift α.natTrans A] :
     NatTrans.CommShift (mateEquiv adj₁ adj₂ α).natTrans A := by
   dsimp only [CategoryTheory.mateEquiv, Equiv.coe_fn_mk, TwoSquare.mk, TwoSquare.natTrans]
   infer_instance
