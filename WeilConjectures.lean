@@ -1281,6 +1281,7 @@ public import WeilConjectures.Mathlib.RingTheory.OrderOfVanishing.Noetherian
 public import WeilConjectures.Mathlib.RingTheory.PiTensorProduct
 public import WeilConjectures.Mathlib.RingTheory.PicardGroup
 public import WeilConjectures.Mathlib.RingTheory.Polynomial.Cyclotomic.Basic
+public import WeilConjectures.Mathlib.RingTheory.Polynomial.Quotient
 public import WeilConjectures.Mathlib.RingTheory.PowerSeries.Derivative
 public import WeilConjectures.Mathlib.RingTheory.PowerSeries.Inverse
 public import WeilConjectures.Mathlib.RingTheory.PowerSeries.Log

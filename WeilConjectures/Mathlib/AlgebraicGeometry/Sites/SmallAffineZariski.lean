@@ -7,6 +7,7 @@ module
 
 public import Mathlib.AlgebraicGeometry.Sites.SmallAffineZariski
 public import Mathlib.AlgebraicGeometry.Morphisms.Finite
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Pullbacks
 
 /-!
 # Relative spectra of quasi-coherent algebras on the small affine Zariski site
@@ -242,20 +243,6 @@ lemma isPullback_ι_relativeGluingMap (φ : F ⟶ G) (hφ : α ≫ φ = β) (U :
   rw [specMap_comp_natTrans_app H H' φ hφ, relativeGluingMap_toBase H H' φ hφ]
   exact ((relativeGluingData H').isPullback_natTrans_ι_toBase U).flip
 
-/-- A variant of `AlgebraicGeometry.Scheme.isPullback_of_openCover` in which the pullbacks of the
-cover are given by arbitrary pullback squares. -/
-lemma _root_.AlgebraicGeometry.Scheme.isPullback_of_openCover' {W Y Z X' : Scheme.{u}}
-    (fWX : W ⟶ X') (fWY : W ⟶ Y) (fXZ : X' ⟶ Z) (fYZ : Y ⟶ Z) (𝒰 : X'.OpenCover)
-    (W' : 𝒰.I₀ → Scheme.{u}) (a : ∀ i, W' i ⟶ W) (b : ∀ i, W' i ⟶ 𝒰.X i)
-    (ha : ∀ i, IsPullback (a i) (b i) fWX (𝒰.f i))
-    (H : ∀ i, IsPullback (b i) (a i ≫ fWY) (𝒰.f i ≫ fXZ) fYZ) :
-    IsPullback fWX fWY fXZ fYZ := by
-  refine Scheme.isPullback_of_openCover fWX fWY fXZ fYZ 𝒰 fun i ↦ ?_
-  refine (H i).of_iso (ha i).isoPullback (Iso.refl _) (Iso.refl _)
-    (Iso.refl _) ?_ ?_ (by simp) (by simp)
-  · simp [Cover.pullbackHom]
-  · exact (Category.comp_id _).trans (congrArg (· ≫ fWY) (ha i).isoPullback_hom_fst.symm)
-
 /-- **Pushouts of quasi-coherent algebras give pullbacks of relative spectra.** If a commutative
 square of quasi-coherent `𝒪_X`-algebras is a pushout over every affine open, the square of their
 relative spectra is a pullback. -/
@@ -268,7 +255,7 @@ theorem isPullback_relativeGluingMap {F₀ F₁ F₂ F₃ : X.AffineZariskiSite�
     (h : ∀ U, IsPushout (a.app (.op U)) (b.app (.op U)) (c.app (.op U)) (e.app (.op U))) :
     IsPullback (relativeGluingMap H₁ H₃ c) (relativeGluingMap H₂ H₃ e)
       (relativeGluingMap H₀ H₁ a) (relativeGluingMap H₀ H₂ b) := by
-  refine Scheme.isPullback_of_openCover' _ _ _ _ (relativeGluingData H₁).cover
+  refine Scheme.isPullback_of_openCover_of_isPullback _ _ _ _ (relativeGluingData H₁).cover
     (fun U ↦ Spec (F₃.obj (.op U))) (fun U ↦ colimit.ι (relativeGluingData H₃).functor U)
     (fun U ↦ Spec.map (c.app (.op U))) (fun U ↦ isPullback_ι_relativeGluingMap H₁ H₃ c hc U)
     fun U ↦ ?_
