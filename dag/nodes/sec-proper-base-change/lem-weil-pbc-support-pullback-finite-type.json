@@ -196,5 +196,24 @@
  "tool_uses": [
   "lem-weil-pbc-module-stalk-pullback"
  ],
- "lead_note": "Off-route tool use recorded by L (2026-10-10): lem-weil-pbc-module-stalk-pullback (Sheaves 0098, stalk of a pullback = base change of the stalk; unit sk-thm-reduction) in step 6, used as a black box."
+ "lead_note": "Off-route tool use recorded by L (2026-10-10): lem-weil-pbc-module-stalk-pullback (Sheaves 0098, stalk of a pullback = base change of the stalk; unit sk-thm-reduction) in step 6, used as a black box.",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FiniteTypeModuleSupportPullback",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.finiteType_module_support_pullback",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteTypeModuleSupportPullback.lean",
+  "statement": "theorem finiteType_module_support_pullback {X : Scheme.{u}} (F : X.Modules) [F.IsQuasicoherent] [F.IsFiniteType] : IsClosed {x : X | ¬ Subsingleton (F.presheaf.stalk x)} ∧ (∀ x : X, ¬ Subsingleton (F.presheaf.stalk x) ↔ ¬ Subsingleton (residueFiber F x)) ∧ ∀ (Y : Scheme.{u}) (f : Y ⟶ X), ((tensorPullback f).obj F).IsFiniteType ∧ {y : Y | ¬ Subsingleton (((tensorPullback f).obj F).presheaf.stalk y)} = f.base ⁻¹' {x : X | ¬ Subsingleton (F.presheaf.stalk x)}",
+  "branch": "sheaf-dag",
+  "by": "T1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-spf"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-spf",
+  "group": "T1",
+  "result": "fix",
+  "note": "X scheme, F X.Modules [IsQuasicoherent] [IsFiniteType]; (1) IsClosed of inline support; (2) nonzero stalk iff nonzero residueFiber F x (membership clause definitional); (3) all f : Y ⟶ X, tensorPullback finite type and support = f.base preimage; reverted the delivery's statement correction of the item (stmt_deps kept as on sheaf-dag; --revert-statement)"
+ }
 }
