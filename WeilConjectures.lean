@@ -65,6 +65,8 @@ public import WeilConjectures.CategoryTheory.Monoidal.Instances.CochainComplex
 public import WeilConjectures.CategoryTheory.Monoidal.Instances.DerivedCategory
 public import WeilConjectures.CategoryTheory.Monoidal.Instances.HomotopyCategory
 public import WeilConjectures.CategoryTheory.RingObjects.Ab
+public import WeilConjectures.CategoryTheory.RingObjects.Condensed.ContinuousMap
+public import WeilConjectures.CategoryTheory.RingObjects.Condensed.EllAdic
 public import WeilConjectures.CategoryTheory.RingObjects.ContinuousMap
 public import WeilConjectures.CategoryTheory.RingObjects.EllAdic
 public import WeilConjectures.CategoryTheory.RingObjects.RingPresheaf
@@ -258,6 +260,7 @@ public import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.FullyF
 public import WeilConjectures.SixFunctors.Etale.LowerShriek.Proper
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Monoidal
+public import WeilConjectures.SixFunctors.ProEtale.CondensedCoefficientPullback
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Hom
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.LowerShriek
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.OpenImmersionLowerShriek
