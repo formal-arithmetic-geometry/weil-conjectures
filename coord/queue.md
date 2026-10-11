@@ -1,11 +1,11 @@
 # Work queue
 
-844 items; claim with `tools/claim.py next <group> [--stage N]`.
+846 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (844)
+## Stage 2: nodes to state (846)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -13,7 +13,7 @@
 | `def-pod-lisse-l-adic-sheaves` | 1 | state |
 | `def-sc-divisor` | 1 | state |
 | `def-sc-kahler-differentials` | 1 | state |
-| `def-sp-kinjective-bridge` | 1 | state |
+| `def-sp-truncation-couple` | 1 | state |
 | `def-weil-pbc-charpoly-locally-free` | 1 | state |
 | `lem-pc-clopen-smooth-proper-curve` | 1 | state |
 | `lem-pc-derived-adjoint-functors` | 1 | state |
@@ -22,6 +22,7 @@
 | `lem-pc-pre-derived-adjoint-functors-general` | 1 | state |
 | `lem-pc-proper-base-change` | 1 | state |
 | `lem-pc-ringed-space-derived-products` | 1 | state |
+| `lem-pc-ringed-space-product-kinjective` | 1 | state |
 | `lem-pod-adic-limit-finite-modules` | 1 | state |
 | `lem-pod-lattice-stabilizer-open` | 1 | state |
 | `lem-pod-profinite-stable-lattice` | 1 | state |
@@ -31,6 +32,7 @@
 | `lem-sc-hilb-dominating-power` | 1 | state |
 | `lem-sc-invertible-module-generic-stalk` | 1 | state |
 | `lem-sc-mayer-vietoris-ringed-space` | 1 | state |
+| `lem-sc-p1-rhom-hom-derived-connecting` | 1 | state |
 | `lem-sc-point-tangent-cotangent-surjective` | 1 | state |
 | `lem-sc-product-tangent-space-direct-sum` | 1 | state |
 | `lem-sc-rational-point-tangent-derivation-identification` | 1 | state |
@@ -42,7 +44,9 @@
 | `lem-sc-standard-smooth-local-relative-dimension` | 1 | state |
 | `lem-sc-vector-bundle-line-subbundle` | 1 | state |
 | `lem-sp-cartan-eilenberg-comparison-homotopy` | 1 | state |
-| `lem-sp-cartan-eilenberg-comparison-independence` | 1 | state |
+| `lem-sp-kinjective-comparison-principle` | 1 | state |
+| `lem-sp-kinjective-computes` | 1 | state |
+| `lem-sp-shift-identification` | 1 | state |
 | `lem-weil-derived-limit-roos-complex` | 1 | state |
 | `lem-weil-pbc-cohen-power-series-presentation` | 1 | state |
 | `lem-weil-pbc-colimit-category-fp-algebras` | 1 | state |
@@ -50,9 +54,7 @@
 | `lem-weil-pbc-colimit-surjective-ring-map` | 1 | state |
 | `lem-weil-pbc-complete-local-domain-finite-over-regular` | 1 | state |
 | `lem-weil-pbc-complete-local-map-regular-presentation` | 1 | state |
-| `lem-weil-pbc-complete-local-quotient` | 1 | state |
 | `lem-weil-pbc-completion-at-quasi-finite-prime` | 1 | state |
-| `lem-weil-pbc-completion-dimension` | 1 | state |
 | `lem-weil-pbc-complex-spectral-sequence-comparison` | 1 | state |
 | `lem-weil-pbc-constant-group-scheme-multiplication` | 1 | state |
 | `lem-weil-pbc-constant-sheaf-geometric-stalk` | 1 | state |
@@ -61,7 +63,6 @@
 | `lem-weil-pbc-constant-subsheaf-generic` | 1 | state |
 | `lem-weil-pbc-constructible-field-finite-separable-constant` | 1 | state |
 | `lem-weil-pbc-constructible-generation` | 1 | state |
-| `lem-weil-pbc-constructible-in-retrocompact-open` | 1 | state |
 | `lem-weil-pbc-constructible-intersection-in-constructible` | 1 | state |
 | `lem-weil-pbc-constructible-is-retrocompact` | 1 | state |
 | `lem-weil-pbc-constructible-module-finite-presentation` | 1 | state |
@@ -95,6 +96,7 @@
 | `lem-weil-pbc-derived-exchange-termwise` | 1 | state |
 | `lem-weil-pbc-derived-finite-product` | 1 | state |
 | `lem-weil-pbc-derived-functor-long-exact` | 1 | state |
+| `lem-weil-pbc-derived-functor-truncation-iso` | 1 | state |
 | `lem-weil-pbc-derived-inverse-image-composition` | 1 | state |
 | `lem-weil-pbc-derived-square-iso-commshift` | 1 | state |
 | `lem-weil-pbc-descend-qc-open-fg-subalgebra` | 1 | state |
@@ -854,7 +856,7 @@
 | `lem-sc-normalization-properties` | 3 | state |
 | `def-nagata-fixed-base-separated-stage` | 6 | state |
 
-Not open yet: 40 nodes that wait for stage 1, 848 nodes that wait for a statement dependency.
+Not open yet: 40 nodes that wait for stage 1, 841 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
