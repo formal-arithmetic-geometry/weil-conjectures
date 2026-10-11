@@ -1,0 +1,107 @@
+{
+ "id": "def-pc-perfect-morphism",
+ "kind": "definition",
+ "title": "Stalkwise finite Tor dimension of a scheme morphism",
+ "status": "split",
+ "statement": "Let $f:X\\to Y$ be a morphism of schemes [def-pc-scheme]. Say that f has stalkwise finite Tor dimension if for every $x\\in X$ there is $n\\in\\mathbb N$ such that $\\operatorname{Tor}^{\\mathcal O_{Y,f(x)}}_i(\\mathcal O_{X,x},M)=0$ [def-weil-pbc-tor-modules] for every $\\mathcal O_{Y,f(x)}$-module M and every $i>n$. The scalar action is induced by the stalk homomorphism of f. For a finite type morphism over a Noetherian scheme this is the perfectness criterion of Stacks Lemma 37.61.11.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-tor-modules"
+ ],
+ "source": {
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Lemma 37.61.11, condition (3), applied in Lemma 37.61.13 (Tag 0B6G)"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "perfect morphism schemes finite Tor dimension of stalk maps",
+   "results": "UNAVAILABLE 0 hits: service unavailable: Internal Server Error. No verdict inferred.",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "finite Tor dimension of a morphism of schemes stalk local rings",
+   "results": "8 hits: AlgebraicGeometry.LocallyOfFiniteType.stalkMap, HasRingHomProperty.of_stalkMap, HasRingHomProperty.stalkMap, Scheme.Hom local stalk-map instance, IsSmoothOfRelativeDimension, Scheme.isLocalHom_stalkClosedPointTo, Scheme.isLocalHom_stalkClosedPointTo', Flat.of_stalkMap; no finite Tor dimension predicate.",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Tor', ModuleCat.restrictScalars",
+   "results": "OK 0 hits: unknown identifier Tor'.",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "IsPerfectMorphism|HasFiniteTorDimension|perfect.*morphism (Mathlib/AlgebraicGeometry)",
+   "results": "msearch.py: OK 0 hits. rg in WeilConjectures found no predicate. rg in lean/Sheaf found Scheme.HasFiniteTorDimension for derived O_X objects and its citer, not the relative stalk-ring notion. rg in dag/nodes found no general morphism definition; def-sc-perfect-closed-immersion is restricted to closed immersions. blueprint_refs.py searches perfect morphism and finite Tor dimension found no definition of this notion.",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-pc-proper-perfect-direct-image-perfect",
+  "date": "2026-10-11",
+  "group": "E1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "perfect morphism hypothesis in the direct-image lemma",
+   "via": [
+    "lem-pc-proper-perfect-direct-image-perfect",
+    "lem-sc-smooth-proper-tensor-direct-sums",
+    "lem-sc-smooth-proper-diagonal-tensor-formula",
+    "lem-sc-smooth-proper-relative-dualizing-general",
+    "lem-sc-smooth-proper-curve-dualizing",
+    "lem-sc-finite-duality-trace"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.PerfectMorphism",
+  "declaration": "AlgebraicGeometry.HasStalkwiseFiniteTorDimension",
+  "file": "lean/Sheaf/AlgebraicGeometry/PerfectMorphism.lean",
+  "statement": "def HasStalkwiseFiniteTorDimension {X Y : Scheme.{uTor}} (f : X ⟶ Y) : Prop",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-ppd",
+  "group": "E1",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-ppd",
+  "group": "E1",
+  "result": "pass",
+  "note": "Y Noetherian=[IsNoetherian Y]; f proper=[IsProper f]; f perfect=HasStalkwiseFiniteTorDimension f (Stacks 37.61.11(3), equivalent for finite type f over Noetherian Y; every x, point bound n, all test modules M, Tor' of O_X,x restricted along f.stalkMap); P perfect=Scheme.IsPerfect X P; conclusion Scheme.IsPerfect Y ((schemeDerivedDirectImage f).obj P). New node def-pc-perfect-morphism: no Mathlib/slopmaster2 7d675a263/landed morphism-level finite-Tor predicate (landed HasFiniteTorDimension/HasLocallyFiniteTorDimension are object-level on D(O_X)); not a duplicate of R-pft's def-pc-finite-tor-dimension-over (object over f^-1 O_S, global K-flat bound); check_dag clean; only item stmt_deps+lean changed"
+ }
+}

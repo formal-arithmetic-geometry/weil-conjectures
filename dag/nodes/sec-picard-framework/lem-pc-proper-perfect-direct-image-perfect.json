@@ -22,7 +22,8 @@
   "def-pc-scheme",
   "def-weil-proper-morphism",
   "def-pc-perfect-complex",
-  "def-pc-derived-direct-image"
+  "def-pc-derived-direct-image",
+  "def-pc-perfect-morphism"
  ],
  "proof": [
   {
@@ -106,5 +107,23 @@
   "group": "G1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-ppd2217 (reviewer sub-agent of L); spot-checked: Lead's special-case hypothesis checked and rejected: lem-pc-proper-support-perfect-direct-image (0A1H) and lem-pc-noetherian-perfect-direct-image (0DJQ) need G flat over S; with G=O_X that is f flat, while the item (Tag 0B6G) only assumes f perfect (finite Tor dimension), so it is not a special case and is not class (b). New node = Tag 08EV exactly (D^b_Coh, proper supports, finite Tor dim over f^{-1}O_S, f lft, S Noetherian); no existing node states 08EV; statement true. Item statement = Tag 0B6G (perfect morphism over Noetherian base: pseudo-coherence automatic, X quasi-compact so local = global finite Tor dim). Step 2 hypotheses checked. FIX more, RETURN less: (1) C1 step 1: facts argued only from definitions (closed-in-proper is proper, perfect on Noetherian => D^b_Coh, locality/uniformity of finite Tor dimension) marked elementary with Tags 08EV/0B6G named and quasi-compactness made explicit; (2) step 2 notation slip 'perfect on S' corrected to Y, hypotheses listed with S=Y; (3) B3 new node: cited stmt_dep def-weil-pbc-closed-subset-proper-over-base inline and recorded own grep of Mathlib (no match). Second reading by G1 missed the S/Y slip left in step 2.; 2 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProperPerfectDirectImagePerfect",
+  "declaration": "AlgebraicGeometry.proper_perfect_directImage_perfect",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProperPerfectDirectImagePerfect.lean",
+  "statement": "theorem proper_perfect_directImage_perfect {X Y : Scheme.{u}} [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))] [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))] [∀ U : X.Opens, HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))] [∀ U : Y.Opens, HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings Y.toRingedSpace).over U))] [IsNoetherian Y] (f : X ⟶ Y) [IsProper f] (hperfect : HasStalkwiseFiniteTorDimension f) (P : schemeDerivedCategory X) (hP : Scheme.IsPerfect X P) : Scheme.IsPerfect Y ((schemeDerivedDirectImage f).obj P)",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-ppd",
+  "group": "E1",
+  "result": "pass",
+  "note": "Y Noetherian=[IsNoetherian Y]; f proper=[IsProper f]; f perfect=HasStalkwiseFiniteTorDimension f (Stacks 37.61.11(3), equivalent for finite type f over Noetherian Y; every x, point bound n, all test modules M, Tor' of O_X,x restricted along f.stalkMap); P perfect=Scheme.IsPerfect X P; conclusion Scheme.IsPerfect Y ((schemeDerivedDirectImage f).obj P). New node def-pc-perfect-morphism: no Mathlib/slopmaster2 7d675a263/landed morphism-level finite-Tor predicate (landed HasFiniteTorDimension/HasLocallyFiniteTorDimension are object-level on D(O_X)); not a duplicate of R-pft's def-pc-finite-tor-dimension-over (object over f^-1 O_S, global K-flat bound); check_dag clean; only item stmt_deps+lean changed"
  }
 }

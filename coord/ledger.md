@@ -5357,3 +5357,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 16:07 L: merged deliver/M1/pqf-lem-leray (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.LeraySpectralSequence AlgebraicGeometry.exists_leray_spectralSequence)
 - 16:07 L: merged deliver/N1/lem-pc-euler-characteristic-well-defined (stage 2; reviewer PASS; first push; Sheaf.Paper.EulerCharacteristicWellDefined AlgebraicGeometry.Scheme.eulerCharacteristic_wellDefined)
 - 16:08 L: merged deliver/R1/lem-pc-ringed-space-derived-limit-stalk-injective (stage 2; reviewer PASS; first push; Sheaf.Topology.DerivedLimitStalkInjective AlgebraicGeometry.RingedSpace.derivedLimit_stalk_injective)
+- 16:08 L: merged deliver/E1/lem-pc-proper-perfect-direct-image-perfect (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.ProperPerfectDirectImagePerfect AlgebraicGeometry.proper_perfect_directImage_perfect; new nodes: def-pc-perfect-morphism)
