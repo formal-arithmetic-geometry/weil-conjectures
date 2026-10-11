@@ -8,6 +8,8 @@ module
 public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 public import Mathlib.AlgebraicGeometry.Morphisms.Separated
 public import Mathlib.Topology.KrullDimension
+public import WeilConjectures.CategoryTheory.Abelian.Flat.PreservesFlat
+public import WeilConjectures.CategoryTheory.DerivedCategory.FlatModel
 public import WeilConjectures.SixFunctors.ProEtale.Derived.TorAmplitude
 public import WeilConjectures.SixFunctors.ProEtale.Derived.UpperLowerStar
 
@@ -70,6 +72,30 @@ variable {FA : A → A → Type (u + 1)} {CA : A → Type (u + 1)}
   [∀ X Y, FunLike (FA X Y) (CA X) (CA Y)] [ConcreteCategory.{u + 1} A FA]
 
 namespace ProEtale
+
+section Pullback
+
+omit [∀ X Y, FunLike (FA X Y) (CA X) (CA Y)] [ConcreteCategory.{u + 1} A FA]
+
+/-- The derived pullback along a morphism `f : X ⟶ Y` of pro-étale sites preserves the Tor
+amplitude interval, as soon as `f^*` preserves flat sheaves: `K` is represented by a complex `P`
+of flat sheaves in degrees `[a, b]`, so `Lf^* K` is represented by the complex `f^* P` of flat
+sheaves in degrees `[a, b]`. This is the pro-étale counterpart of
+`AlgebraicGeometry.Etale.torAmplitudeIn_leftDerivedUpperStar`. -/
+theorem torAmplitudeIn_leftDerivedUpperStar {X Y : Scheme.{u}} (f : X ⟶ Y)
+    [(ProEtale.upperStar A f).PreservesFlat] (a b : ℤ)
+    {K : _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology Y) A)}
+    (hta : DerivedCategory.torAmplitudeIn A Y a b K) :
+    DerivedCategory.torAmplitudeIn A X a b ((L(ProEtale.upperStar A f)).obj K) := by
+  obtain ⟨P, _, _, hP, ⟨e⟩⟩ := _root_.DerivedCategory.exists_iso_Q_obj_flat_of_torAmplitudeIn hta
+  refine (DerivedCategory.torAmplitudeIn A X a b).prop_of_iso
+    (((ProEtale.upperStar A f).mapDerivedCategoryFactors.app P).symm ≪≫
+      (ProEtale.upperStar A f).mapDerivedCategory.mapIso e ≪≫
+      ((leftDerivedUpperStarIsoMapDerivedCategory A f).app K).symm)
+    (_root_.DerivedCategory.torAmplitudeIn_Q_obj_of_flat _ a b fun n ↦ ?_)
+  exact Functor.PreservesFlat.flat_obj (F := ProEtale.upperStar A f) (hP n)
+
+end Pullback
 
 section DirectImage
 
