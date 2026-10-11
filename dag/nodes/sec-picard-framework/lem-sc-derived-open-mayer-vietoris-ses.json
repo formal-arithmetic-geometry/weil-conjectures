@@ -22,11 +22,61 @@
  "stmt_deps": [
   "def-weil-locally-ringed-space-morphism",
   "def-weil-sheaf-of-modules-category",
-  "lem-sc-derived-open-restriction-adjunction-exact"
+  "lem-sc-derived-open-restriction-adjunction-exact",
+  "def-weil-pbc-exact-sequence"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For opens $W\\subseteq W'$ of $X$ let $\\iota_{W,W'}:j_{W,!}(F|_W)\\to j_{W',!}(F|_{W'})$ be the canonical morphism of $\\mathcal O_X$-modules of [lem-sc-module-extension-by-zero-stalk-maps], with $\\iota_{U,X}$, $\\iota_{V,X}$ the counits and $\\iota_{W',W''}\\circ\\iota_{W,W'}=\\iota_{W,W''}$. Define the first arrow by $s\\mapsto(\\iota_{U\\cap V,U}(s),-\\iota_{U\\cap V,V}(s))$ and the second arrow by $(a,b)\\mapsto\\iota_{U,X}(a)+\\iota_{V,X}(b)$, the pair of counits. These are morphisms of $\\mathcal O_X$-modules, and the composite sends $s$ to $\\iota_{U\\cap V,X}(s)-\\iota_{U\\cap V,X}(s)=0$ by transitivity, so the sequence is a complex.",
+   "uses": [
+    "lem-sc-module-extension-by-zero-stalk-maps",
+    "lem-sc-derived-open-restriction-adjunction-exact",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 08BU (cohomology-lemma-exact-sequence-lower-shriek), proof: the displayed short exact sequence of complexes"
+   }
+  },
+  {
+   "text": "At every point $x$, compute the stalks of the three terms and of the two arrows using the stalk identifications of [lem-sc-module-extension-by-zero-stalk-maps]: $(j_{W,!}(F|_W))_x=F_x$ for $x\\in W$, zero otherwise, with $(\\iota_{W,W'})_x=\\mathrm{id}_{F_x}$ for $x\\in W$. If $x\\in U\\cap V$, the stalk complex is $0\\to F_x\\xrightarrow{s\\mapsto(s,-s)}F_x\\oplus F_x\\xrightarrow{(a,b)\\mapsto a+b}F_x\\to0$. If $x\\in U\\setminus V$ (respectively $x\\in V\\setminus U$), it is $0\\to0\\to F_x\\xrightarrow{\\mathrm{id}}F_x\\to0$ (respectively with the two summands interchanged). If $x\\notin U\\cup V$, all three nonzero-position stalks are zero. Each displayed sequence is exact by direct module calculations.",
+   "uses": [
+    "lem-sc-module-extension-by-zero-stalk-maps",
+    "def-weil-pbc-module-stalk"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 08BU (cohomology-lemma-exact-sequence-lower-shriek), proof: exactness checked on stalks using Sheaves Tag 00A7 (sheaves-lemma-j-shriek-modules)"
+   }
+  },
+  {
+   "text": "Exactness of a complex of sheaves of $\\mathcal O_X$-modules is equivalent to exactness on every stalk. Applying this stalkwise exactness criterion to the complex in steps 1 and 2 proves exactness in $\\operatorname{Mod}(\\mathcal O_X)$; together with the zero end terms this is the asserted short exact sequence by the definition of short exact sequence.",
+   "uses": [
+    "lem-weil-pbc-module-stalk-exact",
+    "def-weil-pbc-exact-sequence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 08BU (cohomology-lemma-exact-sequence-lower-shriek), proof: exactness checked on stalks"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-module-extension-by-zero-stalk-maps",
+  "lem-sc-derived-open-restriction-adjunction-exact",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-module-stalk",
+  "lem-weil-pbc-module-stalk-exact",
+  "def-weil-pbc-exact-sequence"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 08BU (cohomology-lemma-exact-sequence-lower-shriek)"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -58,12 +108,37 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "chapter": "sec-picard-framework",
  "unit": "sk-thm-picard-duality",
  "created": {
   "item": "lem-sc-derived-mayer-vietoris-triangle",
   "by": "worker",
   "date": "2026-10-10"
+ },
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-sc-derived-open-mayer-vietoris-ses",
+  "worker": "stage1",
+  "summary": "Read Stacks Tag 08BU and its proof, which constructs the extension-by-zero Mayer–Vietoris sequence and checks exactness on stalks. No new node was needed: the existing topological extension-by-zero stalk formula supplies the four pointwise cases, the existing module stalk exactness criterion upgrades those cases to sheaf exactness, and the existing exact-sequence definition supplies the short-exact conclusion. The maps and their signs were made explicit, and the hypotheses are valid for an arbitrary ringed space and open cover.",
+  "blueprint": "Realizes the proper-flat-support proof sentence in the ancestor blueprint: the underlying short exact sequence of extension-by-zero sheaves used to form the Mayer–Vietoris triangle.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-module-stalk-exact",
+    "why": "The equivalence between sheaf exactness and stalkwise exactness is a generic module-sheaf tool needed to turn the 08BU stalk calculation into a short exact sequence."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-module-stalk-exact",
+  "lem-weil-pbc-module-stalk-exact"
+ ],
+ "reviewed": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-mvs0012",
+  "group": "K1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-mvs0012 (reviewer sub-agent of L); spot-checked: Read packet whole, Tag 08BU (cohomology.tex 8083, label lemma-exact-sequence-lower-shriek) and Sheaves Tag 00A7 (lemma-j-shriek-modules); signs checked by hand (s->(s,-s), (a,b)->a+b, composite 0; stalk cases U∩V, U\\V, V\\U, outside exact); stalkwise exactness cited via lem-weil-pbc-module-stalk-exact (5); citer lem-sc-derived-mayer-vietoris-triangle uses the same SES with difference map and counits; no duplicate SES node (grep mayer-vietoris). FIX more, RETURN less: (1) step 1 first arrow was ill-typed '(s,t)->s-t' and composite-zero reason garbled; rewritten as s->(iota(s),-iota(s)), composite zero by transitivity (E/C1); (2) step 2 applied the abelian-sheaf stalk lemma lem-sc-topological-extension-by-zero-stalks to the module j_! of lem-sc-derived-open-restriction-adjunction-exact, whose statement gives no construction, and the stalks of the first arrow were uncited (C4); added statement-only node lem-sc-module-extension-by-zero-stalk-maps (ringed-space Stacks 00A7 with the maps iota_{W,W'}; lem-weil-pbc-module-extension-by-zero-adjunction covers schemes only, so not a duplicate; leanfinder no match) and dropped the topological tool use; (3) the second reading's 'correction' of the source label to lemma-unbounded-mayer-vietoris was wrong (that is Tag 08BX); step sources and proof_origin restored to Tag 08BU cohomology-lemma-exact-sequence-lower-shriek. End Sun Oct 11 12:13:13 AM UTC 2026.; 2 file(s) fixed by the reviewer; 1 statement node(s) added by the reviewer (FIX more, RETURN less)"
  }
 }

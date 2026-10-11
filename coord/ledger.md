@@ -3064,3 +3064,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 00:12 UTC L: C1 lie-algebra-derivation-bracket FIX 0645b5857 (R-lab0010); returned: M1 left-derived-from-kflat-class e6d2518e9 second return (R-ldk0010: Mathlib pointwise leaf not linked to the 05S9 condition; Tag 05RT has no node).
 - 00:12 L: returned deliver/K1/lem-sc-picard-kunneth-qcoh (reviewer RETURN: R-kun0012 (head ab95fe231). 1. D2: the whole Kunneth argument is moved into the new node lem-sc-qcoh-cech-total-tensor-i)
 - 00:13 UTC L: returned: K1 picard-kunneth-qcoh d0990e54d (R-kun0012: child holds the whole argument, functoriality clause dropped although the citer lem-sc-picard-h1-product-injective uses it, algebraic Kunneth and affine-diagonal facts uncited).
+- 00:13 L: merged deliver/K1/lem-sc-derived-open-mayer-vietoris-ses (reviewer FIX+NODE(1); first push; new nodes: 1)
