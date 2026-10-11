@@ -1,0 +1,121 @@
+{
+ "id": "def-sc-sheaf-exterior-power",
+ "kind": "definition",
+ "title": "Exterior powers of sheaves of modules and determinant lines",
+ "status": "split",
+ "statement": "Let $X$ be a scheme [def-pc-scheme] and $\\mathcal E$ a sheaf of $\\mathcal O_X$-modules [def-weil-sheaf-of-modules-category]. For $n\\geq0$, let $P_n(U)=\\bigwedge^n_{\\mathcal O_X(U)}\\mathcal E(U)$, the module exterior power [def-weil-pbc-exterior-algebra]. Its restriction from $U$ to $V\\subseteq U$ is the unique semilinear map sending $e_1\\wedge\\cdots\\wedge e_n$ to $e_1|_V\\wedge\\cdots\\wedge e_n|_V$; these maps satisfy the identity and composition laws. Define $\\bigwedge^n\\mathcal E$ as the sheafification of $P_n$. The wedge of local sections is their sectionwise wedge followed by the canonical map to sheafification. In degree zero this is canonically isomorphic to $\\mathcal O_X$. If $\\mathcal E$ is finite locally free of constant rank $r$ [def-amb-finite-locally-free-module], its determinant line is $\\det(\\mathcal E)=\\bigwedge^r\\mathcal E$, with the degree-zero identification giving $\\det(0)=\\mathcal O_X$.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-exterior-algebra",
+  "def-amb-finite-locally-free-module"
+ ],
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-rr/lem-sc-riemann-roch.md",
+  "place": "Proof of (*), determinant paragraph, lines 140-147: determinant as top exterior power and its local wedge formula"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "exterior|determinant",
+   "results": "No hits.",
+   "date": "2026-10-11",
+   "verdict": "no matching sheaf exterior-power construction"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "exterior power of a sheaf of modules sheafification of exterior powers of sections",
+   "results": "8 hits: ModuleCat.exteriorPower.functor_obj, PresheafOfModules.sheafify, ModuleCat.exteriorPower.functor, PresheafOfModules.sheafification, PresheafOfModules.Sheafify.module, ModuleCat.exteriorPower, SheafOfModules.freeFunctor, SheafOfModules.freeFunctor_obj",
+   "date": "2026-10-11",
+   "verdict": "no matching sheaf exterior-power construction"
+  },
+  {
+   "tool": "leansearch",
+   "query": "exterior power of a sheaf of modules sheafification of exterior powers of sections",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-11",
+   "verdict": "unavailable; no mathematical verdict"
+  },
+  {
+   "tool": "grep",
+   "query": "rg exteriorSheaf|exteriorPowerSheaf|exterior.*[Ss]heaf|[Ss]heaf.*exterior /home/ubuntu/weil-src-slopmaster2/WeilConjectures; rg exterior|determinant lean/Sheaf",
+   "results": "No sheaf exterior power; two unrelated matrix determinant mentions in FiniteFreeMapResidueLocalization.lean.",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -l -i exterior.*sheaf|sheaf.*exterior dag/nodes/*/def-*.json; python3 tools/blueprint_refs.py search exterior power",
+   "results": "No definition-node hits; blueprint search gives nine representation or theorem nodes, no exterior power of O_X-module sheaves.",
+   "date": "2026-10-11",
+   "verdict": "no existing node"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sc-determinant-short-exact",
+  "date": "2026-10-11",
+  "group": "E1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-riemann-roch",
+   "place": "Proof of (*), determinant paragraph: the exterior powers defining the determinant sheaves",
+   "via": [
+    "lem-sc-determinant-short-exact"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-rr",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.Modules.ExteriorSheaf",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.exteriorSheaf",
+  "file": "lean/Sheaf/AlgebraicGeometry/Modules/ExteriorSheaf.lean",
+  "statement": "def exteriorSheaf (M : X.Modules) (n : ℕ) : X.Modules",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-11",
+  "existing": false,
+  "declarations": [
+   "AlgebraicGeometry.Scheme.Modules.exteriorSheafObj",
+   "AlgebraicGeometry.Scheme.Modules.exteriorSheafRestriction_existsUnique",
+   "AlgebraicGeometry.Scheme.Modules.exteriorSheafRestriction",
+   "AlgebraicGeometry.Scheme.Modules.exteriorSheafRestriction_laws",
+   "AlgebraicGeometry.Scheme.Modules.exteriorSheafPresheaf",
+   "AlgebraicGeometry.Scheme.Modules.exteriorSheaf",
+   "AlgebraicGeometry.Scheme.Modules.exteriorSheafSection",
+   "AlgebraicGeometry.Scheme.Modules.exteriorSheaf_zero_iso"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-dse1029",
+  "group": "E1",
+  "result": "fix",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-dse1029",
+  "group": "E1",
+  "result": "fix",
+  "note": "X scheme; S ShortComplex X.Modules + ShortExact (mono/epi, sheaf exactness); 3 IsFiniteLocallyFreeOfRank r_i + r2=r1+r3; det = exteriorSheaf (sheafified sectionwise ⋀[O(U)]^n, now in Mathlib notation), det(0)=O_X via exteriorSheaf_zero_iso; 3 IsInvertible; ∃! iso det E2 ≅ det E1 ⊗ det E3 characterized on wedges on every open, lifts arbitrary, f(a) before c; edge ranks 0, char 2, empty X"
+ }
+}

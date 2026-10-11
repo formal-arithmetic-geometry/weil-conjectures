@@ -18,7 +18,8 @@
  },
  "stmt_deps": [
   "def-pc-scheme",
-  "def-sc-invertible-module"
+  "def-sc-invertible-module",
+  "def-sc-sheaf-exterior-power"
  ],
  "proof": [
   {
@@ -122,5 +123,23 @@
   "group": "E1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-ds2 (reviewer sub-agent of L); spot-checked: Repaired re-push after the 14:49 return (3ab5ceb0a); all four points checked repaired: (1) lem-sc-exterior-top-direct-sum now cites def-weil-pbc-free-module, def-weil-pbc-exterior-algebra, def-weil-pbc-module-tensor-product with stmt_deps exactly these, and lem-sc-local-splitting-finite-free is stated for constant ranks citing def-amb-finite-locally-free-module, def-pc-flat-sheaf-modules dropped; (2) all three proof steps are TeX; (3) step 1 refines the cover so E_1, E_3 are free of ranks r_1, r_3 (def-amb-finite-locally-free-module), step 2 applies lem-sc-exterior-top-direct-sum chartwise with lem-weil-pbc-exterior-power-free-basis giving the sheaf wedge basis compatibly with restriction; (4) step 3 gives the local formula with a splitting s and shows independence of s since s'-s lands in u(E_1), every changed term having r_1+1 factors in a free rank-r_1 module, zero by lem-weil-pbc-exterior-power-free-basis (wedge^n=0 for n>r), hence gluing. Source: blueprint lem-sc-riemann-roch.md lines 140-147 (determinant paragraph: local splitting, wedge^r(L+E')=L(x)wedge^{r-1}E', independence of lifts, gluing) agrees with the item and both new statements. Cited statements read: def-amb-finite-locally-free-module, lem-weil-pbc-exterior-power-free-basis (generic Mathlib-leaf tool, off-unit, accepted), def-weil-pbc-free-module/exterior-algebra/module-tensor-product, def-sc-invertible-module, def-pc-scheme. New statements true (local splitting: E_3 locally free so locally a basis lifts; top-degree direct-sum iso for free modules), small cases ranks (0,0),(1,0),(0,1),(1,1) checked: identity on R, evident identifications, 2x2 determinant. Changed fields of the item are split-owned (status, proof, proof_deps, proof_origin, split_report, blueprint.from.place). Start-end UTC: Sat Oct 10 02:57:25 PM UTC 2026 - Sat Oct 10 02:57:59 PM UTC 2026"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.Modules.DeterminantShortExact",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.determinant_shortExact",
+  "file": "lean/Sheaf/AlgebraicGeometry/Modules/DeterminantShortExact.lean",
+  "statement": "theorem determinant_shortExact {X : Scheme.{v}} (S : ShortComplex X.Modules) (hS : S.ShortExact) (r₁ r₂ r₃ : ℕ) (hr : r₂ = r₁ + r₃) [S.X₁.IsFiniteLocallyFreeOfRank r₁] [S.X₂.IsFiniteLocallyFreeOfRank r₂] [S.X₃.IsFiniteLocallyFreeOfRank r₃] : (exteriorSheaf S.X₁ r₁).IsInvertible ∧ (exteriorSheaf S.X₂ r₂).IsInvertible ∧ (exteriorSheaf S.X₃ r₃).IsInvertible ∧ ∃! e : exteriorSheaf S.X₂ r₂ ≅ exteriorSheaf S.X₁ r₁ ⊗ exteriorSheaf S.X₃ r₃, ∀ (U : X.Opens) (a : Fin r₁ → S.X₁.val.obj (op U)) (b : Fin r₃ → S.X₃.val.obj (op U)) (c : Fin r₃ → S.X₂.val.obj (op U)), (∀ i, S.g.val.app (op U) (c i) = b i) → e.inv.val.app (op U) (tmulSection (exteriorSheafSection S.X₁ r₁ U a) (exteriorSheafSection S.X₃ r₃ U b)) = exteriorSheafSection S.X₂ r₂ U (fun i => Fin.append (fun j => S.f.val.app (op U) (a j)) c (Fin.cast hr i))",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-dse1029",
+  "group": "E1",
+  "result": "fix",
+  "note": "X scheme; S ShortComplex X.Modules + ShortExact (mono/epi, sheaf exactness); 3 IsFiniteLocallyFreeOfRank r_i + r2=r1+r3; det = exteriorSheaf (sheafified sectionwise ⋀[O(U)]^n, now in Mathlib notation), det(0)=O_X via exteriorSheaf_zero_iso; 3 IsInvertible; ∃! iso det E2 ≅ det E1 ⊗ det E3 characterized on wedges on every open, lifts arbitrary, f(a) before c; edge ranks 0, char 2, empty X"
  }
 }
