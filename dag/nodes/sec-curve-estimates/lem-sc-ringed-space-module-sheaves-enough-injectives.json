@@ -109,5 +109,24 @@
   "group": "F1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-rme2014 (reviewer sub-agent of L); spot-checked: Delivered 6-step skyscraper-product reproof of Stacks 01DI is correct but reproves at length. FIX more, RETURN less: (1) replaced proof by one step on the site of opens of X (small, O_X commutative per def-weil-locally-ringed-space-morphism): first clause of prop-pur-kinjective-resolutions-exist (Mod(O) Grothendieck abelian; declared generic tool_use) + lem-sp-grothendieck-enough-injectives (Mathlib leaf IsGrothendieckAbelian.enoughInjectives); proof_deps updated; no cycle (prop-pur unsplit, not created from this item); (2) dropped new node lem-sc-ringed-space-module-skyscraper-stalk-adjunction, now unused; delivered tool_uses dropped; (3) not a Mathlib leaf: grep of ModuleCat/Sheaf and CategoryTheory/Sites finds no EnoughInjectives/IsGrothendieckAbelian for SheafOfModules (search recorded; the delivered leanfinder note naming SheafOfModules.isGrothendieckAbelian is nonexistent). Second reading by F1 missed this and claims step-5/created.item edits absent from head d29b0ff2d.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Topology.RingedSpaceModuleEnoughInjectives",
+  "declaration": "AlgebraicGeometry.RingedSpace.moduleSheaves_abelian_enoughInjectives",
+  "file": "lean/Sheaf/Topology/RingedSpaceModuleEnoughInjectives.lean",
+  "statement": "theorem moduleSheaves_abelian_enoughInjectives (X : RingedSpace.{u}) : Nonempty (Abelian (SheafOfModules.{u} (moduleRings X))) ∧ EnoughInjectives (SheafOfModules.{u} (moduleRings X))",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-rei1249"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-rei1249",
+  "group": "H1",
+  "result": "fix",
+  "note": "X arbitrary RingedSpace (no locality/nonempty); Mod(O_X)=SheafOfModules over landed moduleRings X (fix: was inlined sheafCompose copy); abelian=Nonempty Abelian; enough injectives=Mathlib EnoughInjectives; not existing (Mathlib has no SheafOfModules EnoughInjectives; follows from landed J1 IsGrothendieckAbelian + Mathlib instance but not stated)"
  }
 }
