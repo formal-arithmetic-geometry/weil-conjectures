@@ -202,8 +202,8 @@ lemma filtrationClosure_map {D : Type*} [Category* D] [Abelian D] {Q : ObjectPro
 `X₁ ⟶ X₂ ⟶ X₃` whose outer terms satisfy `P`, so does the middle term: the image of `X₁` is a
 quotient of `X₁`, and the cokernel of its inclusion is a subobject of `X₃`. -/
 lemma prop_X₂_of_exact_of_isClosedUnderExtensions [P.IsClosedUnderSubobjects]
-    [P.IsClosedUnderQuotients] [P.IsClosedUnderExtensions] {S : ShortComplex C} (hS : S.Exact) (h₁ : P S.X₁)
-    (h₃ : P S.X₃) : P S.X₂ := by
+    [P.IsClosedUnderQuotients] [P.IsClosedUnderExtensions] {S : ShortComplex C}
+    (hS : S.Exact) (h₁ : P S.X₁) (h₃ : P S.X₃) : P S.X₂ := by
   have := hS.epi_kernelLift
   exact P.prop_X₂_of_shortExact (S := ShortComplex.mk (kernel.ι S.g) (cokernel.π _)
       (cokernel.condition _))
