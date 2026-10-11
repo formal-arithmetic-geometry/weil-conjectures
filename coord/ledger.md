@@ -3178,3 +3178,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 00:54 UTC L: G1 perfect-finite-free-residue-model FIX 2edf1260d (R-pfr0052), K1 kinjective-functorial-homotopies FIX 1ce5e0fd0 (R-kfh0054).
 - 00:56 L: merged deliver/E1/lem-sc-strict-henselization-completion-flat-over-base (reviewer FIX; first push; new nodes: 1)
 - 00:57 UTC L: E1 strict-henselization-completion-flat-over-base FIX da814487e (R-shc0055; cyclic tool-use entries dropped).
+- 00:57 L: merged deliver/C1/lem-pc-affine-flat-module-localization-preserves-flatness (reviewer PASS; first push; new nodes: 0)

@@ -21,9 +21,42 @@
  "stmt_deps": [
   "def-weil-pbc-flat-ring-map"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Let $N_1\\to N_2$ be an injective map of $R$-modules. Since $M$ is flat over $R$, the induced map $N_1\\otimes_R M\\to N_2\\otimes_R M$ is injective by the definition of flatness. Using the canonical symmetry isomorphisms of tensor products, regard this as the corresponding injective map $M\\otimes_R N_1\\to M\\otimes_R N_2$. These are $A$-linear maps through the $A$-factor $M$. Localizing this map at the image of $S$ remains injective because localization of modules is exact [lem-weil-pbc-localization-module-exact], applied with base ring $A$. The natural localization-tensor identification [lem-weil-pbc-localization-tensor-over-base], together with its naturality in $N$, identifies the localized map with $S^{-1}M\\otimes_R N_1\\to S^{-1}M\\otimes_R N_2$, whose tensor-symmetric form is $N_1\\otimes_R S^{-1}M\\to N_2\\otimes_R S^{-1}M$.",
+   "uses": [
+    "def-weil-pbc-flat-ring-map",
+    "lem-weil-pbc-localization-module-exact",
+    "lem-weil-pbc-localization-tensor-over-base"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma 10.39.18, Tag 00HT, part (6), localization argument"
+   }
+  },
+  {
+   "text": "The map $N_1\\otimes_R S^{-1}M\\to N_2\\otimes_R S^{-1}M$ is injective for every injective $R$-linear map $N_1\\to N_2$. By the definition of a flat module [def-weil-pbc-flat-ring-map], $S^{-1}M$ is flat over $R$.",
+   "uses": [
+    "def-weil-pbc-flat-ring-map"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma 10.39.18, Tag 00HT, part (6), localization argument"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-flat-ring-map",
+  "lem-weil-pbc-localization-module-exact",
+  "lem-weil-pbc-localization-tensor-over-base"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma 10.39.18, Tag 00HT, part (6), localization argument"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -55,12 +88,28 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-pc-affine-flat-module-local-criterion",
   "by": "worker",
   "date": "2026-10-11"
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-semicon"
+ "unit": "sk-thm-picard-semicon",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-pc-affine-flat-module-localization-preserves-flatness",
+  "worker": "stage1",
+  "summary": "Split the Tag 00HT localization argument into tensoring an injective map and then applying the flat-module definition. The first step uses the existing exactness of module localization and localization-tensor compatibility; no new nodes were needed.",
+  "blueprint": "Realizes the final local flatness criterion used to pass from prime-local flatness to global flatness in lem-pc-rf-perfect-base-change, via lem-pc-affine-flat-module-descent.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-lpf0056",
+  "group": "C1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-lpf0056 (reviewer sub-agent of L); spot-checked: Mathlib: Flat/Localization.lean:45 Localization.flat covers only M=A (S submonoid of A); Flat/Stability.lean:116-130 localizedModule/of_isLocalizedModule localize at a submonoid of the base R; no declaration states S^{-1}M flat over R for S in A, so R-flc0039's claim holds and the node stays split. Step 1: M R-flat gives injective M(x)N1->M(x)N2, A-linear; localization exact over A [lem-weil-pbc-localization-module-exact]; identification with S^{-1}M(x)_R N_i incl. naturality [lem-weil-pbc-localization-tensor-over-base, T subset A, matches]; Step 2 is the definition. Citer c693c7457 (lem-pc-affine-flat-module-local-criterion step 1) uses exactly this with S=A\\q and R-structure via A->S^{-1}A. No duplicate: lem-weil-pbc-flat-over-localization (M over A'=W^{-1}A, flat over A' iff over A) and lem-weil-pbc-localization-flat (M=R') are different statements. No faults; Second reading missed nothing."
+ }
 }
