@@ -188,5 +188,24 @@
   "group": "G1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of G1; spot-checked by L: L read the five steps (0897 (2)): base change to X' = Spec B x X, affine module correspondence 01SB (new unsplit), coherent Serre vanishing on X' (new unsplit, 02O1/0B5T; cf. lem-pc-serre-vanishing for the field case), projection formula checked on trivializations, affine cohomology edge; statement corrected to drop the standard-graded citation; tool use 01XZ recorded by G1."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GradedSerreVanishing",
+  "declaration": "AlgebraicGeometry.graded_serre_vanishing",
+  "file": "lean/Sheaf/AlgebraicGeometry/GradedSerreVanishing.lean",
+  "statement": "theorem graded_serre_vanishing {A B : Type u} [CommRing A] [CommRing B] [Algebra A B] [IsNoetherianRing A] [Algebra.FiniteType A B] (graded : ℕ → Submodule A B) (hgrading : DirectSum.IsInternal graded) (hunit : (1 : B) ∈ graded 0) (hmul : ∀ (k l : ℕ) {x y : B}, x ∈ graded k → y ∈ graded l → x * y ∈ graded (k + l)) (hscalar : ∀ (a : A), algebraMap A B a ∈ graded 0) {X : Scheme.{u}} (f : X ⟶ Spec (.of A)) [IsProper f] (G : ℕ → X.Modules) (hG : ∀ m : ℕ, (G m).IsQuasicoherent) (mu : ∀ (m k : ℕ), graded k → (G m ⟶ G (m + k))) (hmu_add : ∀ (m k : ℕ) (b b' : graded k), mu m k (b + b') = mu m k b + mu m k b') (hmu_mul : ∀ (m k l : ℕ) (b : graded k) (b' : graded l), HEq (mu m l b' ≫ mu (m + l) k b) (mu m (k + l) ⟨b.val * b'.val, hmul k l b.property b'.property⟩)) (hmu_scalar : ∀ (m : ℕ) (a : A) (U : X.Opens) (t : (G m).val.obj (op U)), HEq ((mu m 0 ⟨algebraMap A B a, hscalar a⟩).val.app (op U) t) ((X.presheaf.map (homOfLE (le_top (a := U))).op).hom (((Scheme.ΓSpecIso (.of A)).inv ≫ f.appTop).hom a) • t)) (hfinite : ∀ x : X, ∃ (U : X.Opens), x ∈ U ∧ ∃ (r : ℕ) (d : Fin r → ℕ) (s : ∀ i : Fin r, (G (d i)).val.obj (op U)), ∀ (m : ℕ) (V : X.Opens) (hVU : V ≤ U) (t : (G m).val.obj (op V)) (y : X), y ∈ V → ∃ (W : X.Opens) (hWV : W ≤ V), y ∈ W ∧ (G m).val.map (homOfLE hWV).op t ∈ Submodule.span ((moduleRings X.toRingedSpace).obj.obj (op W)) {z | ∃ (i : Fin r), d i ≤ m ∧ ∃ b : graded (m - d i), HEq z ((mu (d i) (m - d i) b).val.app (op W) ((G (d i)).val.map (homOfLE (hWV.trans hVU)).op (s i)))}) (L : X.Modules) [L.IsInvertible] (hL : Scheme.Modules.IsAmple X L) : ∃ d₀ : ℕ, ∀ (p d : ℕ), 0 < p → d₀ ≤ d → IsZero ((RingedSpace.moduleCohomology X.toRingedSpace p).obj (Scheme.Modules.tensorObj (∐ G) (L.tensorPow d)))",
+  "branch": "sheaf-dag",
+  "by": "K1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-fgv"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-fgv",
+  "group": "K1",
+  "result": "fix",
+  "note": "R-fgv: PulledBackGradedModule was a second spelling (H4/H12) of the graded f^*B~-module of the landed sibling 0897(1) gradedFinitenessCohomology (STATE GRADED O_X-ALGEBRAS AND MODULES); restated in that sibling's inline form (IsInternal grading, pieces G, homogeneous maps mu, shifted local generators d i) with the sheaf tensor Scheme.Modules.tensorObj (∐ G) (L.tensorPow d) (STATE SECTIONWISE TENSOR MAP); dropped duplicate new node(s) def-weil-pbc-pulled-back-graded-module (--drop-nodes; not merged, the item points at the landed declaration); left out new module(s) lean/Sheaf/AlgebraicGeometry/PulledBackGradedModule.lean (--drop-files, or a record fixed to existing: true)"
  }
 }
