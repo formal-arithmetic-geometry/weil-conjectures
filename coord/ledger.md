@@ -4423,3 +4423,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 11:17 L: merged deliver/M1/lem-weil-pbc-koszul-differential (stage 2; reviewer PASS; first push; Sheaf.Paper.KoszulDifferential ExteriorAlgebra.koszul_differential)
 - 11:17 L: merged deliver/K1/lem-weil-pbc-localization-of-regular-ring (stage 2; reviewer PASS; first push; Sheaf.RingTheory.LocalizationOfRegularRing RingTheory.isRegularRing_of_localization)
 - 11:17 L: merged deliver/G1/lem-weil-pbc-limit-module-essentially-finite-presentation-over-system (stage 2; reviewer FIX; first push; Sheaf.RingTheory.LimitModuleEssentiallyFinitePresentationOverSystem RingHom.exists_limit_module_essentially_finite_presentation_over_system)
+- 11:18 L: merged deliver/H1/lem-weil-pbc-locally-constant-germ-evaluation (stage 2; reviewer FIX; first push; Sheaf.Topology.LocallyConstantGermEvaluation TopCat.existsUnique_locallyConstant_germ_evaluation)
