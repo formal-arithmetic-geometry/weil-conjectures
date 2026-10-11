@@ -126,5 +126,23 @@
   "group": "M1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-fdi1711 (reviewer sub-agent of L); spot-checked: Source: Stacks algebra.tex Tags 00G1 (algebra-lemma-finite-type-field-Jacobson) and 00FV (algebra-theorem-nullstellensatz), both located in tags/tags. Statement unchanged (k a field, A a finite type k-algebra that is a domain, dim A > 0 => infinitely many maximal ideals); no hypothesis on k needed, the argument works for finite k. Delivery changes only split-owned fields of the item (proof, proof_deps, proof_origin, status, split_report); no new nodes. Step 1: lem-weil-pbc-finite-type-over-field-prime-intersection-maximal (Mathlib leaf isJacobsonRing_of_finiteType / isJacobsonRing_iff_prime_eq) applied to the prime (0) of the domain A gives (0) = intersection of maximal ideals; with finitely many maximals, all nonzero if A is not a field, the product of chosen nonzero elements is nonzero (domain) and lies in every maximal ideal, contradiction; empty case excluded by lem-weil-pbc-proper-ideal-contained-in-maximal (Ideal.exists_le_maximal, I=(0), A nonzero). Both are mathlib leaves read in full, statements carry exactly what the step takes (C4 ok). Steps 2-4 elementary: field has only prime (0), so dim 0 by def-weil-pbc-krull-dimension-ring, contradicting dim > 0. Mathlib query (one, mine): grep -rn 'Infinite.*IsMaximal|IsMaximal.*Infinite|finite_maximal' Mathlib -> only Dedekind/Semilocal PID results, no statement of the item; node stays a split statement. Small cases: k[t] (dim 1; maximals (t-a) or irreducibles, infinitely many also for finite k), a field (dim 0, hypothesis fails, one maximal ideal), Z_(p)-type semilocal domains are not of finite type over a field, consistent. Start Sat Oct 10 05:09:35 PM UTC 2026, end Sat Oct 10 05:09:58 PM UTC 2026."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.InfiniteSetOfIsMaximalOfRingKrullDimPos",
+  "declaration": "Algebra.FiniteType.infinite_setOf_isMaximal_of_ringKrullDim_pos",
+  "file": "lean/Sheaf/RingTheory/InfiniteSetOfIsMaximalOfRingKrullDimPos.lean",
+  "statement": "theorem infinite_setOf_isMaximal_of_ringKrullDim_pos (k : Type u) (A : Type v) [Field k] [CommRing A] [Algebra k A] [Algebra.FiniteType k A] [IsDomain A] (hdim : 0 < ringKrullDim A) : Set.Infinite {m : Ideal A | m.IsMaximal}",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-fdm1038",
+  "group": "F1",
+  "result": "pass",
+  "note": "k field=[Field k]; A f.g. k-algebra=[CommRing A][Algebra k A][Algebra.FiniteType k A] (recorded mathlib decl); domain=[IsDomain A]; dim>0=0<ringKrullDim A (recorded decl, WithBot ℕ∞, no extra bound); conclusion Set.Infinite {m : Ideal A | m.IsMaximal}; no hypothesis on k (finite k ok via k[t]); Mathlib has no exact statement (grep Infinite/IsMaximal/MaximalSpectrum: only Finite (MaximalSpectrum) instances), existing:false right; docstring carries the 4-step proof and blueprint marker"
  }
 }
