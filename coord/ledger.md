@@ -3282,3 +3282,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 02:10 L: merged deliver/E1/lem-pqf-quasicompact-h1-zero (reviewer FIX; first push; new nodes: 0)
 - 02:10 L: read step 1 of lem-pqf-quasicompact-h1-zero (R-qh1-0209's DOUBTFUL point): the reduced-induced ideals I_Z|_U = A (Z∩U empty), I_{Z'}|_U = m, quotient the skyscraper κ(x), lift of 1 by H^1(I_{Z'})=0: sound; tool uses accepted: lem-weil-pbc-reduced-induced-closed-subscheme, lem-weil-pbc-affine-unit-ideal-basic-opens, lem-weil-pbc-derived-functor-long-exact; second reading by E1 missed the wrong ideal (0) for Z on U
 - 02:11 L: merged deliver/G1/lem-sc-valuation-limit-affine-pushforward-colimit (reviewer FIX; first push; new nodes: 0)
+- 02:16 L: lead note on lem-sc-picard-qcoh-universal-delta-embedding: the field hypothesis is a harmless unused restriction from the citer; prove from Tag 0BDY as stated (H1 abandoned at 02:13 asking for human instruction; J1 now holds the claim)
