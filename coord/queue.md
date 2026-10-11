@@ -1,11 +1,11 @@
 # Work queue
 
-570 items; claim with `tools/claim.py next <group> [--stage N]`.
+567 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (570)
+## Stage 2: nodes to state (567)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -13,7 +13,6 @@
 | `def-pc-derived-category` | 1 | state |
 | `def-nagata-finite-type-closed-in-fp` | 3 | state |
 | `cor-galois-lisse-representations` | 1 | state |
-| `lem-pc-arrow-iso-pullback-counit` | 1 | state |
 | `lem-pc-base-change-closure-components` | 1 | state |
 | `lem-pc-chi-zero-dim-support` | 1 | state |
 | `lem-pc-derived-tensor-transitivity` | 1 | state |
@@ -74,10 +73,8 @@
 | `lem-weil-pbc-coherent-stalk-map-extends` | 1 | state |
 | `lem-weil-pbc-coherent-twist-global-generation` | 1 | state |
 | `lem-weil-pbc-constructible-module-noetherian-descent` | 1 | state |
-| `lem-weil-pbc-constructible-torsion-modules-agree` | 1 | state |
 | `lem-weil-pbc-curve-assertions-dense-open` | 1 | state |
 | `lem-weil-pbc-curve-assertions-retract` | 1 | state |
-| `lem-weil-pbc-curve-constructible-sub-quotient` | 1 | state |
 | `lem-weil-pbc-descend-closed-immersion` | 1 | state |
 | `lem-weil-pbc-descend-finite` | 1 | state |
 | `lem-weil-pbc-descend-finite-locally-free` | 1 | state |
