@@ -231,5 +231,23 @@
   "by": "L",
   "result": "pass",
   "note": "Eleven elementary steps along Stacks 07PE (1),(2) with the omitted checks (D^ is a derivation; well-definedness on fractions with the u). Correct; 0 new nodes. Statement: the ring of fractions for a general multiplicative subset written out (no DAG node for general localization); def-weil-pbc-localization-at-prime removed from stmt_deps accordingly. Stage-3 note: a general localization definition node would serve several nodes."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.Derivation.CompletionAndLocalization",
+  "declaration": "Derivation.exists_completion_and_unique_localization",
+  "file": "lean/Sheaf/RingTheory/Derivation/CompletionAndLocalization.lean",
+  "statement": "theorem exists_completion_and_unique_localization (R : Type u) [CommRing R] (D : Derivation ℤ R R) : (∀ I : Ideal R, ∃ Dc : Derivation ℤ (AdicCompletion I R) (AdicCompletion I R), ∃ d : (n : ℕ) → (R ⧸ I ^ (n + 1)) →+ (R ⧸ I ^ n), (∀ a : R, Dc (algebraMap R (AdicCompletion I R) a) = algebraMap R (AdicCompletion I R) (D a)) ∧ (∀ (n : ℕ), 1 ≤ n → ∀ a : R, d n (Ideal.Quotient.mk (I ^ (n + 1)) a) = Ideal.Quotient.mk (I ^ n) (D a)) ∧ (∀ (n : ℕ), 1 ≤ n → ∀ x : AdicCompletion I R, AdicCompletion.evalₐ I n (Dc x) = d n (AdicCompletion.evalₐ I (n + 1) x))) ∧ (∀ W : Submonoid R, ∃ Dw : Derivation ℤ (Localization W) (Localization W), (∀ a : R, Dw (algebraMap R (Localization W) a) = algebraMap R (Localization W) (D a)) ∧ (∀ (a : R) (w : W), Dw (Localization.mk a w) = Localization.mk (D a) w - Localization.mk (a * D (w : R)) (w ^ 2)) ∧ (∀ Dw' : Derivation ℤ (Localization W) (Localization W), (∀ a : R, Dw' (algebraMap R (Localization W) a) = algebraMap R (Localization W) (D a)) → Dw' = Dw))",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-dex0937",
+  "group": "H1",
+  "result": "pass",
+  "note": "R CommRing univ u; D Derivation ℤ R R (additive Leibniz); (1) ∀ I, ∃ Dc derivation on AdicCompletion I R with Dc∘algebraMap = algebraMap∘D, ∃ additive d n : R/I^(n+1)→R/I^n with d n (a mod I^(n+1)) = D a mod I^n for n≥1, evalₐ n (Dc x) = d n (evalₐ (n+1) x) for all x, n≥1 (evalₐ_of checked = a mod I^n; n=0 component R/R trivial); (2) ∀ W Submonoid, ∃ Dw on Localization W extending D, Dw(mk a w)=mk (D a) w − mk (a D w) (w^2), unique among all extending derivations; no added hypotheses; compiles, sorry only"
  }
 }
