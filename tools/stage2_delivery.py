@@ -742,12 +742,14 @@ def read_delivery(git: Git, ref: str, base: str, group: str, item: str, max_comm
                           + (f"; delivered module {x['file']}" if x["file"] else "") + ")")
     for nid, x in D["dropped"].items():
         D["roles"].append(f"DROPPED new node {nid} ({x['path']}" + (f", module {x['file']}" if x["file"] else "") + ")")
-    if D["dropped"]:
+    # a dropped node landed on sheaf-dag under the same id keeps its citations (they name the landed node)
+    gone_nodes = {x for x in D["dropped"] if x not in tip_paths}
+    if gone_nodes:
         # the item loses its citations of the dropped nodes (the reviewer's fixes repoint the module and the record)
         node = dict(node)
         for k in ("stmt_deps", "proof_deps"):
-            if isinstance(node.get(k), list) and any(x in D["dropped"] for x in node[k]):
-                node[k] = [x for x in node[k] if x not in D["dropped"]]
+            if isinstance(node.get(k), list) and any(x in gone_nodes for x in node[k]):
+                node[k] = [x for x in node[k] if x not in gone_nodes]
         D["node"] = node
     if revert_statement and base_text is not None:
         # --revert-statement: the item's statement fields as on the base, whatever the branch (or a fixed node file)
@@ -771,7 +773,7 @@ def read_delivery(git: Git, ref: str, base: str, group: str, item: str, max_comm
         # what the branch changes, beyond adding new nodes to stmt_deps and the citations of dropped nodes
         for k in ("stmt_deps", "proof_deps"):
             if isinstance(raw.get(k), list):
-                raw[k] = [x for x in raw[k] if x not in D["dropped"]]
+                raw[k] = [x for x in raw[k] if x not in gone_nodes]
         ch = [k for k in STAGE2_ITEM_CORRECTION if raw.get(k, miss) != rnode.get(k, miss)]
         if not ch:
             f("b", "--revert-statement: the delivery does not change the item's " + ", ".join(STAGE2_ITEM_CORRECTION)
@@ -837,10 +839,12 @@ def read_delivery(git: Git, ref: str, base: str, group: str, item: str, max_comm
         # `lean` record (landed by another group meanwhile) may be added to the item's stmt_deps without a correction.
         landed = []
         for x in added:
-            if x in new_ids or x not in base_paths:
+            # a dropped new node landed on sheaf-dag since the base is read there (--drop-nodes, 2026-10-11)
+            at = (base, base_paths[x]) if x in base_paths else ("sheaf-dag", tip_paths[x]) if x in D["dropped"] and x in tip_paths else None
+            if x in new_ids or at is None:
                 continue
             try:
-                bn = json.loads(git.show(base, base_paths[x]) or "{}")
+                bn = json.loads(git.show(*at) or "{}")
             except ValueError:
                 bn = {}
             r = bn.get("lean")
