@@ -177,5 +177,24 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-qst0105 (reviewer sub-agent of L); spot-checked: Read packet whole; Stacks 05RT/05S8; citers 1b8c1d0bb step 4 (needs full 05S8 hypotheses) and Kan bridge (RMS1-3 only); lem-pc-quasi-isomorphisms-multiplicative-system (gives MS1-MS3 only, item strictly stronger, no duplicate); Mathlib Acyclic.lean 35-46, Triangulated.lean 208, Pretriangulated.lean 479/579, DerivedCategory/Basic.lean 155/173 by sed, names from .ilean. FIX more, RETURN less: (1) B3/C4 'saturated multiplicative system compatible with the triangulated structure' undefined in DAG and the gloss omitted MS4/MS5 and replaced MS6: statement now states MS1-MS6 inline (E7); (2) C1 Step 3 claimed MS5 (morphism-of-triangles completion) from 2-of-3 on cone objects, which no cited statement gives: MS5 now via TR3 in K(A), exactness of Q, lem-sf-derived-homology-long-exact, lem-weil-pbc-derived-cohomology-ladder and lem-weil-pbc-five-lemma; MS4 and MS6 elementary via H^r; lem-pur-acyclic-subcategory-triangulated no longer used, dropped; (3) C1 K(A) triangulated and Q exact were cited to definitions that only make D(A) triangulated: new statement node lem-pur-homotopy-category-triangulated (Mathlib match recorded). Second reading by C1 missed (1)-(3).; 2 file(s) fixed by the reviewer; 1 statement node(s) added by the reviewer (FIX more, RETURN less)"
  },
- "lead_note": "2026-10-11 L (R-qst0105): E7: item statement rewritten to define inline the Stacks clauses MS1-MS6 of a saturated multiplicative system compatible with the triangulated structure (04VB/04VC/04VD/05R2), which the DAG defines nowhere and which citer lem-pur-left-derived-from-kflat-class step 4 needs in full for Prop 05SE; old gloss kept. New unsplit node lem-pur-homotopy-category-triangulated is an exact Mathlib match (Triangulated.lean:208, DerivedCategory/Basic.lean:173): make it a leaf."
+ "lead_note": "2026-10-11 L (R-qst0105): E7: item statement rewritten to define inline the Stacks clauses MS1-MS6 of a saturated multiplicative system compatible with the triangulated structure (04VB/04VC/04VD/05R2), which the DAG defines nowhere and which citer lem-pur-left-derived-from-kflat-class step 4 needs in full for Prop 05SE; old gloss kept. New unsplit node lem-pur-homotopy-category-triangulated is an exact Mathlib match (Triangulated.lean:208, DerivedCategory/Basic.lean:173): make it a leaf.",
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.QuasiIsoSaturatedTriangulated",
+  "declaration": "HomotopyCategory.quasiIso_saturated_triangulated",
+  "file": "lean/Sheaf/Algebra/Homology/QuasiIsoSaturatedTriangulated.lean",
+  "statement": "theorem quasiIso_saturated_triangulated (A : Type u) [Category.{v} A] [Abelian A] [HasDerivedCategory.{w} A] : (quasiIso A (ComplexShape.up ℤ)).HasLeftCalculusOfFractions ∧ (quasiIso A (ComplexShape.up ℤ)).HasRightCalculusOfFractions ∧ (quasiIso A (ComplexShape.up ℤ)).IsCompatibleWithTriangulation ∧ (∀ (W X Y Z : HomotopyCategory A (ComplexShape.up ℤ)) (f : X ⟶ Y) (g : W ⟶ X) (h : Y ⟶ Z), quasiIso A (ComplexShape.up ℤ) (f ≫ h) → quasiIso A (ComplexShape.up ℤ) (g ≫ f) → quasiIso A (ComplexShape.up ℤ) f) ∧ (quasiIso A (ComplexShape.up ℤ)).HasTwoOutOfThreeProperty ∧ (quasiIso A (ComplexShape.up ℤ)).IsStableUnderRetracts ∧ (∀ (T : Triangle (HomotopyCategory A (ComplexShape.up ℤ))), T ∈ distTriang (HomotopyCategory A (ComplexShape.up ℤ)) → (quasiIso A (ComplexShape.up ℤ) T.mor₁ ↔ subcategoryAcyclic A T.obj₃)) ∧ (DerivedCategory.Qh (C := A)).IsLocalization (quasiIso A (ComplexShape.up ℤ)) ∧ (DerivedCategory.Qh (C := A)).IsTriangulated",
+  "branch": "sheaf-dag",
+  "by": "J1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-qst0940"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-qst0940",
+  "group": "J1",
+  "result": "fix",
+  "note": "A abelian (u,v), HasDerivedCategory.{w}; K=HomotopyCategory A (up ℤ), S=HomotopyCategory.quasiIso; MS1-3 = Left/RightCalculusOfFractions (fraction/ext orientations checked); MS4+MS5 now Mathlib IsCompatibleWithTriangulation (field = old explicit clause); MS6 f≫h,g≫f orientation; 2-of-3, arrow retracts; cone iff subcategoryAcyclic on any dist. triangle; Qh.IsLocalization, Qh.IsTriangulated; existing false (no Mathlib MS6/2-of-3/retracts for quasiIso)"
+ }
 }
