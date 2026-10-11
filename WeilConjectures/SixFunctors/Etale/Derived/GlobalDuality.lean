@@ -159,6 +159,61 @@ noncomputable def coefficientDualRightDerivedLowerShriekIso [IsIso (projectionMa
   (Functor.isoWhiskerRight (derivedHomRightDerivedLowerShriekIso A aX)
     ((CategoryTheory.evaluation _ _).obj (𝟙_ _))).symm
 
+section Shift
+
+variable {Z : Scheme.{u}}
+
+attribute [local instance] Sheaf.monoidalCategory in
+/-- Tensoring with a shifted complex shifts the tensor product, `K⟦a⟧ ⊗ᴸ M ≅ (K ⊗ᴸ M)⟦a⟧`,
+naturally in `M`. -/
+noncomputable def derivedTensorObjShiftIso
+    (K : _root_.DerivedCategory (Sheaf Z.smallEtaleTopology A)) (a : ℤ) :
+    (derivedTensor A Z).obj (K⟦a⟧) ≅ (derivedTensor A Z).obj K ⋙ shiftFunctor _ a :=
+  NatIso.ofComponents (fun M ↦ (((derivedTensor A Z).flip.obj M).commShiftIso a).app K)
+    (fun f ↦
+      have : NatTrans.CommShift ((derivedTensor A Z).flip.map f) ℤ :=
+        Functor.CommShift₂.commShift_flip_map (h := .int)
+          (G := curriedTensor (_root_.DerivedCategory (Sheaf Z.smallEtaleTopology A))) f
+      (NatTrans.shift_app_comm ((derivedTensor A Z).flip.map f) a K).symm)
+
+/-- The derived internal hom out of a shifted complex, `RHom(K⟦a⟧, M) ≅ RHom(K, M⟦-a⟧)`,
+naturally in `M`: the conjugate of `K⟦a⟧ ⊗ᴸ - ≅ (K ⊗ᴸ -)⟦a⟧`. -/
+noncomputable def derivedHomShiftIso
+    (K : _root_.DerivedCategory (Sheaf Z.smallEtaleTopology A)) (a : ℤ) :
+    (RHom(Z)[A]).obj (op (K⟦a⟧)) ≅ shiftFunctor _ (-a) ⋙ (RHom(Z)[A]).obj (op K) :=
+  conjugateIsoEquiv (derivedTensorHomAdjunction A (K⟦a⟧))
+    ((derivedTensorHomAdjunction A K).comp (shiftEquiv _ a).toAdjunction)
+    (derivedTensorObjShiftIso A K a).symm
+
+/-- The derived internal hom `RHom(K, -)` commutes with shifts, being right adjoint to
+`K ⊗ᴸ -`. -/
+noncomputable instance commShiftDerivedHomObj
+    (K : _root_.DerivedCategory (Sheaf Z.smallEtaleTopology A)) :
+    ((RHom(Z)[A]).obj (op K)).CommShift ℤ :=
+  (derivedTensorHomAdjunction A K).rightAdjointCommShift ℤ
+
+/-- The coefficient dual turns shifts into opposite shifts, `(K⟦a⟧)^∨ ≅ (K^∨)⟦-a⟧`. -/
+noncomputable def coefficientDualShiftIso
+    (K : _root_.DerivedCategory (Sheaf Z.smallEtaleTopology A)) (a : ℤ) :
+    (DerivedCategory.coefficientDual A Z).obj (op (K⟦a⟧)) ≅
+      ((DerivedCategory.coefficientDual A Z).obj (op K))⟦-a⟧ :=
+  (derivedHomShiftIso A K a).app (𝟙_ _) ≪≫
+    (((RHom(Z)[A]).obj (op K)).commShiftIso (-a)).app (𝟙_ _)
+
+/-- Blueprint `sk-thm-sf-global-duality` (shifts): global duality for a shifted complex is the
+shift of global duality, `RΓ_c(X, K⟦a⟧)^∨ ≅ RΓ(X, 𝔻_X K)⟦-a⟧`. It is the coefficient dual of the
+commutation `Ra_{X!}(K⟦a⟧) ≅ (Ra_{X!} K)⟦a⟧`, then `(-)^∨` turning `⟦a⟧` into `⟦-a⟧`
+(`AlgebraicGeometry.Etale.coefficientDualShiftIso`), then the shift of global duality for `K`. -/
+noncomputable def coefficientDualRightDerivedLowerShriekShiftIso [IsIso (projectionMap A aX)]
+    (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)) (a : ℤ) :
+    (DerivedCategory.coefficientDual A S).obj (op ((R(aX)_![A]).obj (K⟦a⟧))) ≅
+      ((R((aX)_*[A])).obj ((verdierDual A aX).obj (op K)))⟦-a⟧ :=
+  ((DerivedCategory.coefficientDual A S).mapIso (((R(aX)_![A]).commShiftIso a).app K).op).symm ≪≫
+    coefficientDualShiftIso A _ a ≪≫
+      (shiftFunctor _ (-a)).mapIso ((coefficientDualRightDerivedLowerShriekIso A aX).app (op K))
+
+end Shift
+
 end General
 
 variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] {X S : Scheme.{u}} (aX : X ⟶ S)
