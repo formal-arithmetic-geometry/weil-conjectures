@@ -229,7 +229,8 @@ is `Λ`. So the constant complex `(Λ/J)_Y` is dualizable, and the comparison
 `AlgebraicGeometry.Etale.rightDerivedLowerStarReductionModIdealMap` (the projection map of `Rf_*`
 at `(Λ/J)_Y`) is an isomorphism
 (`AlgebraicGeometry.Etale.isIso_rightDerivedLowerStarReductionModIdealMap_span_pow`).
-This is the reduction `𝒪_E → 𝒪_E/𝔪_Eⁿ` that carries `sk-lem-finite` from the finite stages to the integral stage `𝒪_E`, and the input of
+This is the reduction `𝒪_E → 𝒪_E/𝔪_Eⁿ` that carries `sk-lem-finite` from the finite stages to
+the integral stage `𝒪_E`, and the input of
 `AlgebraicGeometry.Etale.derivedComplete_rightDerivedLowerStar`. -/
 theorem nonempty_iso_reductionModIdeal_rightDerivedLowerStar (f : X ⟶ Y) [IsDomain Λ]
     (J : Ideal Λ) (hJ : J.IsPrincipal) :
