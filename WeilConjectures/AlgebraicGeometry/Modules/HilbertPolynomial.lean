@@ -294,7 +294,10 @@ theorem eulerChar_sub_eulerChar_eq {M N : X.Modules}
     [SheafOfModules.IsFinitePresentation (R := X.ringCatSheaf) N] (φ : M ⟶ N) :
     N.eulerChar K - M.eulerChar K = (cokernel φ).eulerChar K - (kernel φ).eulerChar K := by
   have := isNoetherian_of_isProper K (X := X)
-  obtain ⟨D, hD⟩ := exists_forall_subsingleton_H K (X := X)
+  have : IsSeparated (terminal.from X) := by
+    rw [← terminal.comp_from (X ↘ Spec (.of K))]
+    infer_instance
+  obtain ⟨D, hD⟩ := exists_forall_subsingleton_H_of_isQuasicoherent (X := X)
   have := isQuasicoherent_kernel φ
   have := isFinitePresentation_kernel φ
   have := isQuasicoherent_cokernel φ
@@ -315,8 +318,10 @@ theorem eulerChar_sub_eulerChar_eq {M N : X.Modules}
     finiteDimensional_H_of_isProper (kernel (cokernel.π φ))
   have j₂ : ∀ q, FiniteDimensional K (S₂.X₂.H q) := finiteDimensional_H_of_isProper N
   have j₃ : ∀ q, FiniteDimensional K (S₂.X₃.H q) := finiteDimensional_H_of_isProper (cokernel φ)
-  have h₁ := eulerChar_eq_add_of_shortExact K hS₁ D (hD _) (hD _) (hD _)
-  have h₂ := eulerChar_eq_add_of_shortExact K hS₂ D (hD _) (hD _) (hD _)
+  have h₁ := eulerChar_eq_add_of_shortExact K hS₁ D (hD (kernel φ)) (hD M)
+    (hD (cokernel (kernel.ι φ)))
+  have h₂ := eulerChar_eq_add_of_shortExact K hS₂ D (hD (kernel (cokernel.π φ))) (hD N)
+    (hD (cokernel φ))
   have h₃ := eulerChar_congr K (Abelian.coimageIsoImage φ)
   change M.eulerChar K = (kernel φ).eulerChar K + (cokernel (kernel.ι φ)).eulerChar K at h₁
   change N.eulerChar K = (kernel (cokernel.π φ)).eulerChar K + (cokernel φ).eulerChar K at h₂
