@@ -206,5 +206,27 @@
   "by": "L",
   "result": "pass",
   "note": "seven steps (unwinding with fixed resolutions; functoriality of H^q in the sheaf written out; the adjunct identity for Ex^0 by the new leaf eq_unit_comp_map_iff (Adjunction/Basic.lean:301, verified); naturality and composition of pullbacks on both sides through the one map h^*; cancellation; the finite case); 1 new Mathlib leaf; the source repository has the sheaf-level identity (upperStar_map_baseChangeMap_app_counit, attached to the exchange definition) but not the cohomological identity, no attachment"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.EtaleEdgeMapBaseChange",
+  "declaration": "AlgebraicGeometry.Etale.cohomology_edgeMap_baseChange",
+  "declarations": [
+   "AlgebraicGeometry.Etale.cohomology_edgeMap_baseChange",
+   "AlgebraicGeometry.Etale.bijective_edgeMap_baseChange"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleEdgeMapBaseChange.lean",
+  "statement": "theorem cohomology_edgeMap_baseChange {X' X Y' Y : Scheme.{u}} {g' : X' ⟶ X} {f' : X' ⟶ Y'} {f : X ⟶ Y} {g : Y' ⟶ Y} (sq : IsPullback g' f' f g) (F : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) (q : ℕ) : (cohomologyMap g' F q).comp ((Sheaf.H.map ((upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} f).counit.app F) q).comp (cohomologyMap f ((lowerStar AddCommGrpCat.{u + 1} f).obj F) q)) = (Sheaf.H.map ((upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} f').counit.app ((upperStar AddCommGrpCat.{u + 1} g').obj F)) q).comp ((cohomologyMap f' ((lowerStar AddCommGrpCat.{u + 1} f').obj ((upperStar AddCommGrpCat.{u + 1} g').obj F)) q).comp ((Sheaf.H.map ((baseChangeMap AddCommGrpCat.{u + 1} sq.toCommSq).app F) q).comp (cohomologyMap g ((lowerStar AddCommGrpCat.{u + 1} f).obj F) q)))",
+  "branch": "sheaf-dag",
+  "by": "J1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "J1",
+  "result": "pass",
+  "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
  }
 }
