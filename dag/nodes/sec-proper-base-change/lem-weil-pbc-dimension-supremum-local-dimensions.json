@@ -172,5 +172,23 @@
   "worker": "stage1",
   "summary": "Statement checked against Topology Lemma 0B7I (topology.tex line 1428; tag verified in tags/tags) and Definition 0055 (definition-Krull, line 1392): unchanged. The definitions def-kun-topological-dimension-at-point (min over open neighbourhoods) and def-kun-topological-krull-dimension (Mathlib leaf topologicalKrullDim) agree with 0055 (3)-(4). Proof written in four steps following the proof of 0B7I: (1) dim_x X <= dim X by taking U = X in the minimum (Stacks' monotonicity remark is not needed); (2) reduction to chains; (3) a chain Z_0 ... Z_n and x in Z_0 give for every open U containing x the chain Z_i cap U in U, the 'details omitted' of the source carried by the new Mathlib leaf lem-weil-pbc-open-subspace-irreducible-closed-correspondence (TopologicalSpace.IrreducibleCloseds.orderIsoOfIsOpenEmbedding, Mathlib/Topology/Sets/Closeds.lean:515); (4) conclusion. Mathlib has no local Krull dimension of a topological space and no supremum formula (searches recorded); the source repository's topologicalKrullDimAt is not Mathlib. The citer lem-weil-pbc-smooth-retract-relative-global-complete-intersection step 6 uses exactly this statement."
  },
- "reviewed": "pass (L, 2026-10-10): 4 steps follow 0B7I: dim_x X <= dim X by taking U = X; conversely a chain of irreducible closed subsets through a point x restricts, for every open U containing x, to a strict chain in U (new leaf, the open-subspace correspondence of irreducible closed subsets), so dim_x X >= n."
+ "reviewed": "pass (L, 2026-10-10): 4 steps follow 0B7I: dim_x X <= dim X by taking U = X; conversely a chain of irreducible closed subsets through a point x restricts, for every open U containing x, to a strict chain in U (new leaf, the open-subspace correspondence of irreducible closed subsets), so dim_x X >= n.",
+ "lean": {
+  "module": "Sheaf.Topology.DimensionSupremumLocalDimensions",
+  "declaration": "topologicalKrullDim_eq_iSup_topologicalKrullDimAt",
+  "file": "lean/Sheaf/Topology/DimensionSupremumLocalDimensions.lean",
+  "statement": "theorem topologicalKrullDim_eq_iSup_topologicalKrullDimAt (X : Type u) [TopologicalSpace X] : topologicalKrullDim X = ⨆ x : X, topologicalKrullDimAt x",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-dsl0945",
+  "group": "H1",
+  "result": "pass",
+  "note": "arbitrary X : Type u [TopologicalSpace X], no extra hypotheses = node's topological space; dim X = Mathlib topologicalKrullDim (recorded def-kun-topological-krull-dimension), dim_x X = slopmaster2 root-namespace topologicalKrullDimAt (recorded def-kun-topological-dimension-at-point, #check resolved); sup over x : X in WithBot ℕ∞, empty X gives ⊥ = -∞; not already proved in WeilConjectures.Mathlib.Topology.KrullDimension (only def, _eq_of_forall, IsOpen._eq); no C1 dependency"
+ }
 }
