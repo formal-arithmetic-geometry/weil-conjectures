@@ -3645,3 +3645,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 07:32 L: merged deliver/K1/lem-pur-sheaf-hom-cover-gluing (stage 2; reviewer PASS; first push; Sheaf.Algebra.Category.ModuleCat.Sheaf.HomCoverGluing SheafOfModules.existsUnique_hom_of_cover)
 - 07:32 L: merged deliver/E1/lem-sc-affine-maximal-points-closed-in-lft-scheme (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.ClosedPointOfAffineOpen AlgebraicGeometry.closedPoint_of_affineOpen)
 - 07:33 L: merged deliver/J1/lem-pc-fppf-affine-sheafification-restriction (stage 2; reviewer FIX; first push; Sheaf.AlgebraicGeometry.FppfAffineSheafificationRestriction AlgebraicGeometry.Scheme.fppfSheafification_affineRestriction)
+- 07:33 L: merged deliver/K1/lem-sc-affine-cap-section-open-algebra (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.AffineCapSectionOpenAlgebra AlgebraicGeometry.affine_cap_section_open_algebra)
