@@ -1,11 +1,11 @@
 # Work queue
 
-167 items; claim with `tools/claim.py next <group> [--stage N]`.
+162 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (167)
+## Stage 2: nodes to state (162)
 
 | node | distance to Mathlib | kind | blockers |
 |---|---|---|---|
@@ -26,7 +26,6 @@
 | `lem-weil-pbc-truncation-triangle` | 1 | state | 4 |
 | `lem-sp-exact-functor-couple` | 1 | state | 3 |
 | `lem-weil-pbc-coherent-formal-modules-affine` | 1 | state | 3 |
-| `thm-sp-if-e1` | 1 | state | 3 |
 | `thm-sp-truncation-e2` | 1 | state | 3 |
 | `lem-sc-p1-ext-yoneda-functoriality` | 1 | state | 2 |
 | `thm-sp-grothendieck` | 1 | state | 2 |
@@ -47,7 +46,6 @@
 | `lem-sc-hilb-dominating-power` | 1 | state | 0 |
 | `lem-sc-hilbert-embedded-points-gluing` | 1 | state | 0 |
 | `lem-sc-p1-proj-sheafification-exact` | 1 | state | 0 |
-| `lem-sc-p1-right-derived-triangle-connecting` | 1 | state | 0 |
 | `lem-sc-strict-henselization-completion-flat` | 1 | state | 0 |
 | `lem-sc-strict-henselization-completion-noetherian` | 1 | state | 0 |
 | `lem-sc-strict-henselization-faithfully-flat` | 1 | state | 0 |
@@ -104,12 +102,9 @@
 | `lemma-weil-pbc-chow-factorization` | 1 | state | 0 |
 | `lemma-weil-pbc-torsion-assembly` | 1 | state | 0 |
 | `lemma-weil-pbc-torsion-filtered-union` | 1 | state | 0 |
-| `pqf-lem-finite-qf` | 1 | state | 0 |
-| `pqf-lem-finite-type-algebra-finite-spectrum` | 1 | state | 0 |
 | `pqf-lem-proper-basic` | 1 | state | 0 |
 | `pqf-lem-qf-finitefibres` | 1 | state | 0 |
 | `pqf-lem-qs-intersection-qc` | 1 | state | 0 |
-| `pqf-lem-sheaf-zero-stalks` | 1 | state | 0 |
 | `prop-pur-kinjective-objects-small` | 1 | state | 0 |
 | `prop-weil-pbc-composition-stability` | 1 | state | 0 |
 | `prop-weil-pbc-formal-glueing-equivalence` | 1 | state | 0 |
