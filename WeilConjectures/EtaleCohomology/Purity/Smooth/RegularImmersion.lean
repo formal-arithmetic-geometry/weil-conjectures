@@ -229,7 +229,7 @@ theorem nonempty_iso_dualizingComplex_of_isRegularImmersion [HasTateTwist Λ]
     [HasTateTwist.IsNormalized Λ]
     {k : Type u} [Field k] [PerfectField k] (c n m : ℕ) (hm : m + c = n) (i : Z ⟶ X)
     [IsRegularImmersion c i] [HasCompactification i] (aX : X ⟶ Spec (.of k)) [IsSeparated aX]
-    [SmoothOfRelativeDimension n aX] [HasCompactification aX]
+    [QuasiCompact aX] [SmoothOfRelativeDimension n aX] [HasCompactification aX]
     [SmoothOfRelativeDimension m (i ≫ aX)] [HasCompactification (i ≫ aX)]
     [HasInvertibleExponent Λ X] [HasInvertibleExponent Λ Z] :
     Nonempty (dualizingComplex (ModuleCat.{u + 1} Λ) i ≅
@@ -279,7 +279,7 @@ theorem nonempty_iso_rightDerivedUpperShriek_shiftTateObject_of_isRegularImmersi
     [HasTateTwist Λ] [HasTateTwist.IsNormalized Λ]
     {k : Type u} [Field k] [PerfectField k] (c n m : ℕ) (hm : m + c = n) (i : Z ⟶ X)
     [IsRegularImmersion c i] [HasCompactification i] (aX : X ⟶ Spec (.of k)) [IsSeparated aX]
-    [SmoothOfRelativeDimension n aX] [HasCompactification aX]
+    [QuasiCompact aX] [SmoothOfRelativeDimension n aX] [HasCompactification aX]
     [SmoothOfRelativeDimension m (i ≫ aX)] [HasCompactification (i ≫ aX)]
     [HasInvertibleExponent Λ X] [HasInvertibleExponent Λ Z] :
     Nonempty ((R(i)^![ModuleCat.{u + 1} Λ]).obj ((tateObject Λ X c)⟦2 * (c : ℤ)⟧) ≅
