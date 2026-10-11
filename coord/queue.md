@@ -1,15 +1,14 @@
 # Work queue
 
-980 items; claim with `tools/claim.py next <group> [--stage N]`.
+985 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (980)
+## Stage 2: nodes to state (985)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
-| `def-pc-flat-sheaf-modules` | 1 | state |
 | `def-pc-module-pullback` | 1 | state |
 | `def-weil-pbc-ample-invertible-module` | 1 | state |
 | `def-weil-pbc-derived-categories` | 1 | state |
@@ -22,10 +21,13 @@
 | `lem-exc-cochains-derived-invariants` | 1 | state |
 | `lem-exc-continuous-cochains-short-exact` | 1 | state |
 | `lem-exc-etale-sheaves-gsets-point` | 1 | state |
+| `lem-pc-bounded-above-flat-kflat-site` | 1 | state |
+| `lem-pc-bounded-above-flat-tensor-acyclic` | 1 | state |
 | `lem-pc-derived-adjoint-functors` | 1 | state |
-| `lem-pc-derived-limit-milnor-sequence` | 1 | state |
 | `lem-pc-derived-tensor-flat-second-localization` | 1 | state |
+| `lem-pc-kflat-bounded-flat-replacement` | 1 | state |
 | `lem-pc-kflat-pullback-preservation` | 1 | state |
+| `lem-pc-kflat-resolution` | 1 | state |
 | `lem-pc-module-change-of-rings-adjunction` | 1 | state |
 | `lem-pc-module-filtered-colimits-tensor` | 1 | state |
 | `lem-pc-module-inverse-image-adjunction` | 1 | state |
@@ -35,6 +37,8 @@
 | `lem-pc-right-localization-hom-colimit` | 1 | state |
 | `lem-pc-ring-pseudo-coherent-iff-all-m` | 1 | state |
 | `lem-pc-ringed-space-module-stalk-tensor` | 1 | state |
+| `lem-pc-sites-modules-j-shriek-flat` | 1 | state |
+| `lem-pc-sites-modules-sheafification-flat` | 1 | state |
 | `lem-pc-skyscraper-complex` | 1 | state |
 | `lem-pc-stalk-tensor-complex` | 1 | state |
 | `lem-pc-tor-independent-projective-complex-tensor` | 1 | state |
@@ -46,19 +50,16 @@
 | `lem-pur-kinjective-acyclic-quotient-complexes-bounded-size` | 1 | state |
 | `lem-pur-kinjective-homotopy-limit-vanishing` | 1 | state |
 | `lem-pur-kinjective-surjection-bounded-size` | 1 | state |
-| `lem-pur-left-derived-from-kflat-class` | 1 | state |
 | `lem-pur-ringed-site-grothendieck-abelian` | 1 | state |
 | `lem-pur-sheaf-hom-is-sheaf` | 1 | state |
 | `lem-sc-acyclic-comparison-natural` | 1 | state |
 | `lem-sc-affine-finite-module-free-locus` | 1 | state |
 | `lem-sc-affine-finite-projective-prime-membership` | 1 | state |
-| `lem-sc-affine-standard-cover-finite-presentation-flat` | 1 | state |
 | `lem-sc-affine-standard-cover-finite-projective` | 1 | state |
 | `lem-sc-affine-totalquotient-minimal-product` | 1 | state |
 | `lem-sc-affine-weakass-nonzerodivisors` | 1 | state |
 | `lem-sc-ample-proj-canonical-map` | 1 | state |
 | `lem-sc-artin-schreier-k` | 1 | state |
-| `lem-sc-ass-weakass-fg-prime` | 1 | state |
 | `lem-sc-associated-localization-fg` | 1 | state |
 | `lem-sc-bounded-below-injective-resolution` | 1 | state |
 | `lem-sc-closed-affine-union-affine` | 1 | state |
@@ -959,8 +960,12 @@
 | `def-weil-pbc-constructible-torsion` | 2 | state |
 | `lem-exc-coinduced-discrete-embedding` | 2 | state |
 | `lem-kun-etale-lfp` | 2 | state |
+| `lem-pc-bounded-above-flat-kflat` | 2 | state |
 | `lem-pc-finite-projective-cokernel-localization` | 2 | state |
+| `lem-pc-flat-sheaf-stalk-flat` | 2 | state |
+| `lem-pc-kflat-closure` | 2 | state |
 | `lem-pc-ring-pseudo-coherent-summand` | 2 | state |
+| `lem-pc-sites-modules-coproduct-flat` | 2 | state |
 | `lem-sc-hilbert-polynomial` | 2 | state |
 | `lem-sc-mult-n-locally-quasi-finite` | 2 | state |
 | `lem-sc-p1-boundary-connecting-naturality` | 2 | state |
@@ -990,7 +995,7 @@
 | `lem-sc-normalization-properties` | 3 | state |
 | `def-nagata-fixed-base-separated-stage` | 6 | state |
 
-Not open yet: 1042 nodes that wait for a statement dependency, 40 nodes that wait for stage 1.
+Not open yet: 1032 nodes that wait for a statement dependency, 40 nodes that wait for stage 1.
 
 ## Stage 3: modules to prove (0)
 
