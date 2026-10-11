@@ -1,120 +1,139 @@
 {
- "id": "lemma-nagata-directed-finite-upper-bound",
- "blueprint": {
-  "is": "lemma-nagata-directed-finite-upper-bound",
-  "from": null,
-  "same_as": []
- },
- "kind": "statement",
- "title": "Property of the selected finite upper bound",
- "statement": "Let $I$, $d$, $\\prec$ and $u$ be as in [def-nagata-directed-finite-upper-bound]. For every finite subset $F\\subseteq I$, every $i\\in F$ satisfies $i\\leq u(F)$.",
- "source": {
-  "document": "literature/blueprint/master/blueprint/sec-nagata-compactification/sk-prop-nagata-sketch-approximation/lemma-nagata-directed-finite-upper-bound.md",
-  "place": "node lemma-nagata-directed-finite-upper-bound, order 329"
- },
- "stmt_deps": [
-  "def-nagata-directed-finite-upper-bound"
- ],
- "proof": [
-  {
-   "text": "Induct on the number of elements of the finite set $G\\subseteq I$, using the fixed auxiliary order $\\prec$ from [def-nagata-directed-finite-upper-bound]. For $G=\\varnothing$ there is nothing to prove. If $G\\neq\\varnothing$, let $i$ be the $\\prec$-largest element of $G$ and put $F=G\\setminus\\{i\\}$; then $i\\notin F$ and $j\\prec i$ for every $j\\in F$, so by the definition $u(G)=u(F\\cup\\{i\\})=d(u(F),i)$. The selected upper-bound properties of $d$ give $u(F)\\le d(u(F),i)$ and $i\\le d(u(F),i)$. Every $j\\in F$ satisfies $j\\le u(F)$ by the induction hypothesis applied to $F$ (which has fewer elements), hence $j\\le u(G)$ by transitivity of $\\le$; the remaining element $i$ is bounded directly.",
-   "uses": [
+  "id": "lemma-nagata-directed-finite-upper-bound",
+  "blueprint": {
+    "is": "lemma-nagata-directed-finite-upper-bound",
+    "from": null,
+    "same_as": []
+  },
+  "kind": "statement",
+  "title": "Property of the selected finite upper bound",
+  "statement": "Let $I$, $d$, $\\prec$ and $u$ be as in [def-nagata-directed-finite-upper-bound]. For every finite subset $F\\subseteq I$, every $i\\in F$ satisfies $i\\leq u(F)$.",
+  "source": {
+    "document": "literature/blueprint/master/blueprint/sec-nagata-compactification/sk-prop-nagata-sketch-approximation/lemma-nagata-directed-finite-upper-bound.md",
+    "place": "node lemma-nagata-directed-finite-upper-bound, order 329"
+  },
+  "stmt_deps": [
     "def-nagata-directed-finite-upper-bound"
-   ],
-   "elementary": false,
-   "source": {
+  ],
+  "proof": [
+    {
+      "text": "Induct on the number of elements of the finite set $G\\subseteq I$, using the fixed auxiliary order $\\prec$ from [def-nagata-directed-finite-upper-bound]. For $G=\\varnothing$ there is nothing to prove. If $G\\neq\\varnothing$, let $i$ be the $\\prec$-largest element of $G$ and put $F=G\\setminus\\{i\\}$; then $i\\notin F$ and $j\\prec i$ for every $j\\in F$, so by the definition $u(G)=u(F\\cup\\{i\\})=d(u(F),i)$. The selected upper-bound properties of $d$ give $u(F)\\le d(u(F),i)$ and $i\\le d(u(F),i)$. Every $j\\in F$ satisfies $j\\le u(F)$ by the induction hypothesis applied to $F$ (which has fewer elements), hence $j\\le u(G)$ by transitivity of $\\le$; the remaining element $i$ is bounded directly.",
+      "uses": [
+        "def-nagata-directed-finite-upper-bound"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/blueprint/master/blueprint/sec-nagata-compactification/sk-prop-nagata-sketch-approximation/lemma-nagata-directed-finite-upper-bound.md",
+        "place": "## Proof"
+      }
+    }
+  ],
+  "proof_deps": [
+    "def-nagata-directed-finite-upper-bound"
+  ],
+  "proof_origin": {
+    "by": "agent",
     "document": "literature/blueprint/master/blueprint/sec-nagata-compactification/sk-prop-nagata-sketch-approximation/lemma-nagata-directed-finite-upper-bound.md",
     "place": "## Proof"
-   }
-  }
- ],
- "proof_deps": [
-  "def-nagata-directed-finite-upper-bound"
- ],
- "proof_origin": {
-  "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-nagata-compactification/sk-prop-nagata-sketch-approximation/lemma-nagata-directed-finite-upper-bound.md",
-  "place": "## Proof"
- },
- "mathlib_searches": [
-  {
-   "tool": "leanfinder",
-   "query": "Every element of a finite subset of a directed set is below a recursively selected upper bound",
-   "results": "Directed.finset_le; Directed.finite_set_le; Directed.finite_le; Finite.exists_le; Finset.exists_le; Set.Finite.exists_le; Finite.exists_ge; Set.Finite.exists_ge",
-   "date": "2026-10-11",
-   "verdict": "no exact match: these give existence of an upper bound, not the selected recursive function u"
   },
-  {
-   "tool": "loogle",
-   "query": "Finset, Directed, upper bound",
-   "results": "0 hits; loogle reported Unknown identifier upper",
-   "date": "2026-10-11",
-   "verdict": "no match"
+  "mathlib_searches": [
+    {
+      "tool": "leanfinder",
+      "query": "Every element of a finite subset of a directed set is below a recursively selected upper bound",
+      "results": "Directed.finset_le; Directed.finite_set_le; Directed.finite_le; Finite.exists_le; Finset.exists_le; Set.Finite.exists_le; Finite.exists_ge; Set.Finite.exists_ge",
+      "date": "2026-10-11",
+      "verdict": "no exact match: these give existence of an upper bound, not the selected recursive function u"
+    },
+    {
+      "tool": "loogle",
+      "query": "Finset, Directed, upper bound",
+      "results": "0 hits; loogle reported Unknown identifier upper",
+      "date": "2026-10-11",
+      "verdict": "no match"
+    },
+    {
+      "tool": "grep",
+      "query": "Finset.*exists.*upper|Directed.*finset|finite.*upper in Mathlib",
+      "results": "0 hits from msearch grep",
+      "date": "2026-10-11",
+      "verdict": "no match"
+    },
+    {
+      "tool": "leansearch",
+      "query": "Every element of a finite subset of a directed set is below a recursively selected upper bound",
+      "results": "service unavailable: Internal Server Error",
+      "date": "2026-10-11",
+      "verdict": "unavailable"
+    }
+  ],
+  "mathlib_match": null,
+  "status": "split",
+  "merged_into": null,
+  "import_flags": [
+    "bypassed"
+  ],
+  "blueprint_kind": "lemma",
+  "blueprint_order": 329,
+  "blueprint_uses": [
+    "def-nagata-directed-finite-upper-bound"
+  ],
+  "uses_not_cited": [
+    "def-nagata-directed-finite-upper-bound"
+  ],
+  "proof_split_by": "paragraphs",
+  "blueprint_notes": [
+    {
+      "label": "status",
+      "text": "**Status.** Bypassed by the formalized route: the finite-presentation and\nNoetherian descent is done in one step by\n`AlgebraicGeometry.Scheme.exists_isPullback_of_finitePresentation_of_isSeparated`\nand `AlgebraicGeometry.Scheme.nonempty_noetherianApproximation`, so\nthis stage-by-stage bookkeeping is never carried out.",
+      "where": "statement"
+    }
+  ],
+  "lean_audit": {
+    "master": {
+      "state": "none",
+      "decls": [],
+      "missing": []
+    },
+    "slopmaster2": {
+      "state": "none",
+      "decls": [],
+      "missing": []
+    }
   },
-  {
-   "tool": "grep",
-   "query": "Finset.*exists.*upper|Directed.*finset|finite.*upper in Mathlib",
-   "results": "0 hits from msearch grep",
-   "date": "2026-10-11",
-   "verdict": "no match"
+  "chapter": "sec-nagata-compactification",
+  "unit": "sk-prop-nagata-sketch-approximation",
+  "split_report": {
+    "date": "2026-10-11",
+    "item": "lemma-nagata-directed-finite-upper-bound",
+    "worker": "stage1",
+    "summary": "Checked that no project declaration proves this lemma. The proof is split into a fixed-order induction on finite subsets: the empty case is vacuous, and adjoining the largest element uses the selected common upper bound d(u(F),i), the induction hypothesis, and transitivity.",
+    "blueprint": "Realizes the single proof paragraph of blueprint node lemma-nagata-directed-finite-upper-bound (order 329)."
   },
-  {
-   "tool": "leansearch",
-   "query": "Every element of a finite subset of a directed set is below a recursively selected upper bound",
-   "results": "service unavailable: Internal Server Error",
-   "date": "2026-10-11",
-   "verdict": "unavailable"
-  }
- ],
- "mathlib_match": null,
- "status": "split",
- "merged_into": null,
- "import_flags": [
-  "bypassed"
- ],
- "blueprint_kind": "lemma",
- "blueprint_order": 329,
- "blueprint_uses": [
-  "def-nagata-directed-finite-upper-bound"
- ],
- "uses_not_cited": [
-  "def-nagata-directed-finite-upper-bound"
- ],
- "proof_split_by": "paragraphs",
- "blueprint_notes": [
-  {
-   "label": "status",
-   "text": "**Status.** Bypassed by the formalized route: the finite-presentation and\nNoetherian descent is done in one step by\n`AlgebraicGeometry.Scheme.exists_isPullback_of_finitePresentation_of_isSeparated`\nand `AlgebraicGeometry.Scheme.nonempty_noetherianApproximation`, so\nthis stage-by-stage bookkeeping is never carried out.",
-   "where": "statement"
-  }
- ],
- "lean_audit": {
-  "master": {
-   "state": "none",
-   "decls": [],
-   "missing": []
+  "reviewed": {
+    "date": "2026-10-10",
+    "by": "L",
+    "reviewer": "R-dub2804",
+    "group": "J1",
+    "result": "pass",
+    "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-dub2804 (reviewer sub-agent of L); spot-checked: Checked against def-nagata-directed-finite-upper-bound as merged on sheaf-dag (insertion equation u(F∪{i})=d(u(F),i) for i∉F, j≺i ∀j∈F; i,j ≤ d(i,j)); transitivity from the preorder is elementary; no helper node; citers (def-nagata-affine-fp-descent, def-nagata-qc-open-equality-stage, def-nagata-morphism-equality-stage, lemma-nagata-filtered-colimit-finite-data etc.) need exactly: each element of finite F (λ0, stages) ≤ u(F). Not a Mathlib leaf: Directed.finset_le/Finset.exists_le give existence, not this selected u. FIX more, RETURN less: (1) C4: induction step was circular in wording ('let i be the ≺-largest element of F∪{i} not already in F'); rewritten as strong induction on |G| removing the ≺-largest element i, F=G\\{i}, with the def's hypotheses i∉F and j≺i stated explicitly; (2) B3: statement made self-contained (I, d, ≺, u from the def; F an arbitrary finite subset). The second reading by J1 missed (1).; 1 file(s) fixed by the reviewer"
   },
-  "slopmaster2": {
-   "state": "none",
-   "decls": [],
-   "missing": []
+  "lean": {
+    "module": "Sheaf.Order.DirectedFiniteUpperBound",
+    "declaration": "le_directedFiniteUpperBound",
+    "file": "lean/Sheaf/Order/DirectedFiniteUpperBound.lean",
+    "statement": "theorem le_directedFiniteUpperBound {I : Type u} [Preorder I] (i₀ : I) (d : I → I → I) (hd : ∀ i j, i ≤ d i j ∧ j ≤ d i j) (r : LinearOrder I) {F : Finset I} {i : I} (hi : i ∈ F) : i ≤ directedFiniteUpperBound i₀ d r F",
+    "branch": "sheaf-dag",
+    "by": "L",
+    "date": "2026-10-11",
+    "existing": true,
+    "note": "stated with sorry in the module of its definition node def-nagata-directed-finite-upper-bound (one module carries both, as Mathlib would); recorded by L at 05:16 UTC after reviewer R-dub0522 checked it says exactly this node"
+  },
+  "reviewed_lean": {
+    "date": "2026-10-11",
+    "by": "L",
+    "reviewer": "R-dub0522",
+    "group": "L",
+    "result": "pass",
+    "note": "the theorem le_directedFiniteUpperBound in the definition module states this lemma as written"
   }
- },
- "chapter": "sec-nagata-compactification",
- "unit": "sk-prop-nagata-sketch-approximation",
- "split_report": {
-  "date": "2026-10-11",
-  "item": "lemma-nagata-directed-finite-upper-bound",
-  "worker": "stage1",
-  "summary": "Checked that no project declaration proves this lemma. The proof is split into a fixed-order induction on finite subsets: the empty case is vacuous, and adjoining the largest element uses the selected common upper bound d(u(F),i), the induction hypothesis, and transitivity.",
-  "blueprint": "Realizes the single proof paragraph of blueprint node lemma-nagata-directed-finite-upper-bound (order 329)."
- },
- "reviewed": {
-  "date": "2026-10-10",
-  "by": "L",
-  "reviewer": "R-dub2804",
-  "group": "J1",
-  "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-dub2804 (reviewer sub-agent of L); spot-checked: Checked against def-nagata-directed-finite-upper-bound as merged on sheaf-dag (insertion equation u(F∪{i})=d(u(F),i) for i∉F, j≺i ∀j∈F; i,j ≤ d(i,j)); transitivity from the preorder is elementary; no helper node; citers (def-nagata-affine-fp-descent, def-nagata-qc-open-equality-stage, def-nagata-morphism-equality-stage, lemma-nagata-filtered-colimit-finite-data etc.) need exactly: each element of finite F (λ0, stages) ≤ u(F). Not a Mathlib leaf: Directed.finset_le/Finset.exists_le give existence, not this selected u. FIX more, RETURN less: (1) C4: induction step was circular in wording ('let i be the ≺-largest element of F∪{i} not already in F'); rewritten as strong induction on |G| removing the ≺-largest element i, F=G\\{i}, with the def's hypotheses i∉F and j≺i stated explicitly; (2) B3: statement made self-contained (I, d, ≺, u from the def; F an arbitrary finite subset). The second reading by J1 missed (1).; 1 file(s) fixed by the reviewer"
- }
 }

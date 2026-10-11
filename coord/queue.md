@@ -1,15 +1,14 @@
 # Work queue
 
-807 items; claim with `tools/claim.py next <group> [--stage N]`.
+806 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (807)
+## Stage 2: nodes to state (806)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
-| `def-nagata-directed-finite-upper-bound` | 1 | state |
 | `def-pc-dimension` | 1 | state |
 | `def-pc-divisor-line-bundle` | 1 | state |
 | `def-pc-field-tower` | 1 | state |
@@ -817,7 +816,7 @@
 | `lem-sc-normalization-properties` | 3 | state |
 | `def-nagata-fixed-base-separated-stage` | 6 | state |
 
-Not open yet: 1421 nodes that wait for a statement dependency, 40 nodes that wait for stage 1.
+Not open yet: 1420 nodes that wait for a statement dependency, 40 nodes that wait for stage 1.
 
 ## Stage 3: modules to prove (0)
 

@@ -3368,3 +3368,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 05:11 L: claimed def-nagata-basechanged-system for L, worker W-bcs0514 launched (no delivery waits)
 - 05:13 L: def-nagata-basechanged-system: existing source construction AlgebraicGeometry.baseChangeDiagram + baseChangeCone (AffineTransitionLimit.lean:2181/2196, sorry-free) recorded as lean (existing: true) after W-bcs0514 found it and L read it
 - 05:13 L: claimed def-nagata-directed-finite-upper-bound for L, worker W-dub0518 launched (no delivery waits)
+- 05:16 L: stated def-nagata-directed-finite-upper-bound (own item, W-dub0518, R-dub0522 FIX): lean/Sheaf/Order/DirectedFiniteUpperBound.lean (directedFiniteUpperBound + 3 sorry theorems); lemma-nagata-directed-finite-upper-bound recorded as existing (le_directedFiniteUpperBound in the same module); landed
