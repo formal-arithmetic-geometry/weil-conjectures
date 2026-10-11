@@ -1,11 +1,11 @@
 # Work queue
 
-55 items; claim with `tools/claim.py next <group> [--stage N]`.
+53 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (55)
+## Stage 2: nodes to state (53)
 
 | node | distance to Mathlib | kind | blockers |
 |---|---|---|---|
@@ -29,7 +29,6 @@
 | `cor-galois-lisse-representations` | 1 | state | 0 |
 | `lem-pc-affine-morphism-hom-out-of-perfect` | 1 | state | 0 |
 | `lem-pc-global-hom-pullback-adjunction` | 1 | state | 0 |
-| `lem-pc-rf-base-change-single-complex-criterion` | 1 | state | 0 |
 | `lem-sc-affine-koszul-cech-derived-comparison` | 1 | state | 0 |
 | `lem-sc-as-sequence` | 1 | state | 0 |
 | `lem-sc-etale-affine-qcoherent` | 1 | state | 0 |
@@ -60,7 +59,6 @@
 | `lem-weil-pbc-site-restriction-injectives` | 1 | state | 0 |
 | `lem-weil-pbc-site-ses-cech-h1-surjective` | 1 | state | 0 |
 | `lem-weil-pbc-zariski-cohomology-locally-zero` | 1 | state | 0 |
-| `lem-weil-pbc-zariski-extension-by-zero-adjunction` | 1 | state | 0 |
 | `lem-weil-pbc-zariski-extension-by-zero-exact` | 1 | state | 0 |
 | `lem-sc-p1-proj-shifted-free-twist` | 2 | state | 0 |
 | `lem-weil-pbc-constant-sheaf-open-maps-sections` | 2 | state | 0 |
