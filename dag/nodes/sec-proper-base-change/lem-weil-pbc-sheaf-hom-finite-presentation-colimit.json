@@ -140,5 +140,23 @@
   "group": "D1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of D1; spot-checked by L: Repaired as asked at 19:18: the new nodes are now TeX statements with node citations and tags (01AH(2),(3) with 009E for restriction of colimits to an open; 01CO(1),(2) for the left exactness of sheaf Hom in the source, with the correct contravariant variance after D1's own review; 00WY for locality of isomorphisms). The three steps follow 0GMV: localize to a presentation, the kernel presentations of the sheaf Homs, exactness of filtered colimits with lem-weil-pbc-module-sheaves-colimits-forgetful as a tool. The review by D1 is a real review (it caught the variance error)."
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Category.ModuleCat.Sheaf.FinitePresentationHomColimit",
+  "declaration": "SheafOfModules.hom_finitePresentation_colimit",
+  "file": "lean/Sheaf/Algebra/Category/ModuleCat/Sheaf/FinitePresentationHomColimit.lean",
+  "statement": "theorem hom_finitePresentation_colimit (X : Type u) [TopologicalSpace X] (R : Sheaf (Opens.grothendieckTopology X) CommRingCat.{u}) (I : Type u) [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I] (G : SheafOfModules.{u} ((sheafCompose (Opens.grothendieckTopology X) (forget₂ CommRingCat RingCat.{u})).obj R)) [G.IsFinitePresentation] (F : I ⥤ SheafOfModules.{u} ((sheafCompose (Opens.grothendieckTopology X) (forget₂ CommRingCat RingCat.{u})).obj R)) (c : Cocone F) (hc : IsColimit c) : ∃ (cH : Cocone (F ⋙ (SheafOfModules.homFunctor R).obj (op G))), Nonempty (IsColimit cH) ∧ ∃ (u : cH.pt ⟶ SheafOfModules.homObj (R := R) G c.pt), IsIso u ∧ (∀ i : I, cH.ι.app i ≫ u = SheafOfModules.homObjMap (R := R) (𝟙 G) (c.ι.app i)) ∧ (∀ v : cH.pt ⟶ SheafOfModules.homObj (R := R) G c.pt, (∀ i : I, cH.ι.app i ≫ v = SheafOfModules.homObjMap (R := R) (𝟙 G) (c.ι.app i)) → v = u)",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "E1",
+  "result": "pass",
+  "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
  }
 }
