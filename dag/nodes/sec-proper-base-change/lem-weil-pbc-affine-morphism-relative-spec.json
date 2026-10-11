@@ -229,5 +229,24 @@
   "by": "L",
   "result": "accepted",
   "note": "Eight steps: (1) via 01LC (pqf-lem-pushforward-qcoh, imported, in another unit: recorded as a tool use); (2) relative gluing over affine opens (new Mathlib leaf RelativeGluingData with directedAffineCover, RelativeGluing.lean:74/114, Cover/Directed.lean:310, checked); (3) full faithfulness argued locally on affine opens instead of the functor-of-points route of 01LT-01LY (recorded in proof_origin; valid); (4) restriction via isPullback_morphismRestrict (Restrict.lean:586, checked). Leaves lem-weil-pbc-sheaf-morphism-on-basis (restrictHomEquivHom :240, extend_hom_app :246, hom_ext :252, isIso_iff_isIso_basis :258, checked) and lem-weil-pbc-open-preimage-fibre-product verified; lem-weil-pbc-quasi-coherent-algebra-affine-inclusion (01LN/01LO) unsplit."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AffineMorphismRelativeSpec",
+  "declaration": "AlgebraicGeometry.affine_morphism_relative_spec",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineMorphismRelativeSpec.lean",
+  "statement": "theorem affine_morphism_relative_spec (S : Scheme.{u}) : (∀ {X : Scheme.{u}} (f : X ⟶ S), IsAffineHom f → (Scheme.CommAlgebraSheaf.toModule (𝒪⁎ f)).IsQuasicoherent) ∧ ∃ (E : (ObjectProperty.FullSubcategory (fun Y : Over S ↦ IsAffineHom Y.hom))ᵒᵖ ≌ ObjectProperty.FullSubcategory (fun A : S.CommAlgebraSheaf ↦ A.toModule.IsQuasicoherent)) (hobj : ∀ Y, (E.functor.obj (op Y)).obj = 𝒪⁎ Y.obj.hom) (ρ : ∀ (Y : ObjectProperty.FullSubcategory (fun Y : Over S ↦ IsAffineHom Y.hom)) (V : S.Opens), ((Under.post (V.ι.isOpenEmbedding.sheafPullback CommRingCat.{u})).obj (𝒪⁎ Y.obj.hom) : V.toScheme.CommAlgebraSheaf) ≅ 𝒪⁎ (Y.obj.hom ∣_ V)), (∀ (Y Y') (h : Y ⟶ Y') (V : S.Opens), (E.functor.map h.op).hom.right.hom.app (op V) = eqToHom (by rw [hobj Y']; rfl) ≫ h.hom.left.appLE (Y'.obj.hom ⁻¹ᵁ V) (Y.obj.hom ⁻¹ᵁ V) (by rw [← Over.w h.hom, Scheme.Hom.comp_preimage]) ≫ eqToHom (by rw [hobj Y]; rfl)) ∧ (∀ (A) (U : S.Opens), IsAffineOpen U → IsIso (((E.inverse.obj A).unop.obj.hom ⁻¹ᵁ U).toSpecΓ ≫ Spec.map (((E.counitIso.app A).inv.hom ≫ eqToHom (hobj (E.inverse.obj A).unop)).right.hom.app (op U)))) ∧ (∀ (A B) (φ : A ⟶ B) (U : S.Opens), IsAffineOpen U → (E.inverse.map φ).unop.hom.left.resLE ((E.inverse.obj A).unop.obj.hom ⁻¹ᵁ U) ((E.inverse.obj B).unop.obj.hom ⁻¹ᵁ U) (by rw [← Scheme.Hom.comp_preimage, Over.w (E.inverse.map φ).unop.hom]) ≫ ((E.inverse.obj A).unop.obj.hom ⁻¹ᵁ U).toSpecΓ ≫ Spec.map (((E.counitIso.app A).inv.hom ≫ eqToHom (hobj (E.inverse.obj A).unop)).right.hom.app (op U)) = ((E.inverse.obj B).unop.obj.hom ⁻¹ᵁ U).toSpecΓ ≫ Spec.map (((E.counitIso.app B).inv.hom ≫ eqToHom (hobj (E.inverse.obj B).unop)).right.hom.app (op U)) ≫ Spec.map (φ.hom.right.hom.app (op U))) ∧ (∀ (Y : ObjectProperty.FullSubcategory (fun Y : Over S ↦ IsAffineHom Y.hom)) (V : S.Opens) (W : V.toScheme.Opens), (ρ Y V).hom.right.hom.app (op W) = (Y.obj.hom ⁻¹ᵁ V).ι.appLE (Y.obj.hom ⁻¹ᵁ (V.ι ''ᵁ W)) ((Y.obj.hom ∣_ V) ⁻¹ᵁ W) (by rw [← Scheme.Hom.comp_preimage, ← morphismRestrict_ι, Scheme.Hom.comp_preimage, Scheme.Hom.preimage_image_eq])) ∧ (∀ (A) (V : S.Opens), IsPullback (((E.inverse.obj A).unop.obj.hom ⁻¹ᵁ V).ι) ((E.inverse.obj A).unop.obj.hom ∣_ V) (E.inverse.obj A).unop.obj.hom V.ι ∧ IsAffineHom ((E.inverse.obj A).unop.obj.hom ∣_ V) ∧ ∀ W : V.toScheme.Opens, IsAffineOpen W → IsIso ((((E.inverse.obj A).unop.obj.hom ∣_ V) ⁻¹ᵁ W).toSpecΓ ≫ Spec.map (((E.counitIso.app A).inv.hom ≫ eqToHom (hobj (E.inverse.obj A).unop)).right.hom.app (op (V.ι ''ᵁ W)) ≫ (ρ (E.inverse.obj A).unop V).hom.right.hom.app (op W))))",
+  "branch": "sheaf-dag",
+  "by": "M1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-amr1309"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-amr1309",
+  "group": "M1",
+  "result": "fix",
+  "note": "(1) qc of toModule (Under.mk ⟨f.c⟩) for IsAffineHom f; (3) one equivalence E: (Over S on IsAffineHom)ᵒᵖ ≌ qc CommAlgebraSheaf, functor tied by hobj and appLE sections (f'_* h^♯); (2) Spec_S = E.inverse, α = counit, toSpecΓ ≫ Spec.map α_U iso on affine U; Spec φ_U compatibility via resLE; (4) IsPullback (π⁻¹V).ι (π∣_V) π V.ι, π∣_V affine with iso charts for A|_V (Mathlib sheafPullback) and α|_V ≫ ρ, ρ:(f_*O)|_V≅(f∣_V)_*O tied by (f⁻¹V).ι.appLE; dropped duplicate QuasiCoherentOSAlgebra node; dropped duplicate new node(s) def-weil-pbc-quasi-coherent-os-algebra (--drop-nodes; not merged, the item points at the landed declaration)"
  }
 }
