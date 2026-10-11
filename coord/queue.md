@@ -1,11 +1,11 @@
 # Work queue
 
-485 items; claim with `tools/claim.py next <group> [--stage N]`.
+484 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (485)
+## Stage 2: nodes to state (484)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -25,7 +25,6 @@
 | `lem-pc-derived-tensor-localization-cohomology` | 1 | state |
 | `lem-pc-derived-tensor-transitivity` | 1 | state |
 | `lem-pc-dq-coherator-adjunction` | 1 | state |
-| `lem-pc-flf-properties` | 1 | state |
 | `lem-pc-fp-relation-descent` | 1 | state |
 | `lem-pc-module-pullback-identity-composition` | 1 | state |
 | `lem-pc-module-tor-amplitude-flat-model` | 1 | state |
@@ -53,7 +52,6 @@
 | `lem-weil-derived-limit-roos-complex` | 1 | state |
 | `lem-weil-pbc-affine-module-finite-type` | 1 | state |
 | `lem-weil-pbc-affine-morphism-relative-spec` | 1 | state |
-| `lem-weil-pbc-affine-pushforward-base-change` | 1 | state |
 | `lem-weil-pbc-closed-immersion-conormal-functorial` | 1 | state |
 | `lem-weil-pbc-closed-immersion-pushforward-annihilated` | 1 | state |
 | `lem-weil-pbc-coherent-generic-point-ideal-inclusion` | 1 | state |
@@ -446,6 +444,7 @@
 | `lem-kun-etale-lfp` | 2 | state |
 | `lem-pc-bounded-above-flat-kflat` | 2 | state |
 | `lem-pc-brown-representability-right-adjoint` | 2 | state |
+| `lem-pc-degree-zero-properties` | 2 | state |
 | `lem-pc-divisor-line-bundle-agrees-sc` | 2 | state |
 | `lem-pc-finite-projective-cokernel-localization` | 2 | state |
 | `lem-pc-flat-sheaf-stalk-flat` | 2 | state |
@@ -495,7 +494,7 @@
 | `lem-pc-essentially-constant-pro-hom-colimit` | 4 | state |
 | `lem-pur-essential-constant-pro-criterion-05py` | 4 | state |
 
-Not open yet: 40 nodes that wait for stage 1, 598 nodes that wait for a statement dependency.
+Not open yet: 40 nodes that wait for stage 1, 597 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
