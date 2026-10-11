@@ -5139,3 +5139,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 15:06 L: merged deliver/Q1/lem-weil-pbc-zero-dimensional-sections-stalks (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.ZeroDimensionalSectionsStalks AlgebraicGeometry.Scheme.zeroDimensional_sections_stalks)
 - 15:07 L: merged deliver/K1/prop-weil-pbc-inverse-image-modules-exact (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.EtaleInverseImageModulesExact AlgebraicGeometry.etaleInverseImageModulesExact)
 - 15:07 L: merged deliver/Q1/prop-weil-pbc-formal-glueing-equivalence (stage 2; reviewer PASS; first push; Sheaf.RingTheory.FormalGlueingEquivalence FormalGlueing.exists_canonical_equivalence)
+- 15:07 L: merged deliver/R1/lem-wf-mixed-commutator-tangent (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.MixedCommutatorTangent AlgebraicGeometry.GeneralLinearGroup.mixedCommutator_tangent)

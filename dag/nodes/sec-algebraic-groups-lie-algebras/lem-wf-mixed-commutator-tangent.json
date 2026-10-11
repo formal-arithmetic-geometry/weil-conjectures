@@ -114,5 +114,23 @@
   "group": "C1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-mct0024 (reviewer sub-agent of L); spot-checked: Expanded (1+eX)(1+dY)(1-eX)(1-dY) by hand: 1+eX+dY+edXY, then 1+dY+ed(XY-YX), then 1+ed(XY-YX) (step 2 correct, 1-eX inverse by e^2=0); step 1 base change along k[e],k[d]->A and subgroup closure is exactly def-sc-group-scheme-subgroup (C4 ok); step 3 descends membership via defining equations: entries in k+k*ed with (ed)^2=0 give f=c+ed*d, same c,d for eta, linear independence of 1,e,d,ed forces c=d=0, inverse 1-eta Z: closed-subscheme condition used explicitly; citer lem-wf-lie-algebra-derivation-bracket (0645b5857) uses only G(A) membership, the value 1+ed[X,Y], the eta-preimage in G(k[eta]) and the case GL(M) in GL(M), all stated; no duplicate (lem-ag-closure-commutators is a degree-datum statement). Second reading by C1: no missed fault found. No repairs."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.MixedCommutatorTangent",
+  "declaration": "AlgebraicGeometry.GeneralLinearGroup.mixedCommutator_tangent",
+  "file": "lean/Sheaf/AlgebraicGeometry/MixedCommutatorTangent.lean",
+  "statement": "theorem mixedCommutator_tangent {k n : Type u} {V : Type v} [Field k] [AddCommGroup V] [Module k V] [FiniteDimensional k V] [Fintype n] [DecidableEq n] (b : Module.Basis n k V) (G : Over (Spec (.of k))) [GrpObj G] (i : G ⟶ AlgebraicGeometry.GeneralLinearGroup n k) [IsClosedSubgroupScheme i] (X Y : Module.End k V) (x y : AlgebraicGeometry.points G (DualNumber k)) (hx : homMulEquiv n k (DualNumber k) (x ≫ i) = dualUnit (LinearMap.toMatrix b b X)) (hy : homMulEquiv n k (DualNumber k) (y ≫ i) = dualUnit (LinearMap.toMatrix b b Y)) : ∃ p q : AlgebraicGeometry.points G (DualNumber (DualNumber k)), homMulEquiv n k (DualNumber (DualNumber k)) (p ≫ i) = Matrix.GeneralLinearGroup.map (inlHom (DualNumber k) (DualNumber k)) (dualUnit (LinearMap.toMatrix b b X)) ∧ homMulEquiv n k (DualNumber (DualNumber k)) (q ≫ i) = Matrix.GeneralLinearGroup.map (DualNumber.mapRingHom (inlHom k k)) (dualUnit (LinearMap.toMatrix b b Y)) ∧ (homMulEquiv n k (DualNumber (DualNumber k)) ((p * q * p⁻¹ * q⁻¹) ≫ i) : Matrix n n (DualNumber (DualNumber k))) = (1 + (LinearMap.toMatrix b b X).map (fun a ↦ inl (inr a))) * (1 + (LinearMap.toMatrix b b Y).map (fun a ↦ inr (inl a))) * (1 - (LinearMap.toMatrix b b X).map (fun a ↦ inl (inr a))) * (1 - (LinearMap.toMatrix b b Y).map (fun a ↦ inr (inl a))) ∧ (homMulEquiv n k (DualNumber (DualNumber k)) ((p * q * p⁻¹ * q⁻¹) ≫ i) : Matrix n n (DualNumber (DualNumber k))) = 1 + (LinearMap.toMatrix b b (X * Y - Y * X)).map (fun a ↦ inr (inr a)) ∧ Function.Injective (DualNumber.mulRingHom (R := k)) ∧ ∃ z : AlgebraicGeometry.points G (DualNumber k), homMulEquiv n k (DualNumber k) (z ≫ i) = dualUnit (LinearMap.toMatrix b b (X * Y - Y * X))",
+  "branch": "sheaf-dag",
+  "by": "R1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-mct2",
+  "group": "R1",
+  "result": "pass",
+  "note": "field k; f.d. V via arbitrary finite basis b into GeneralLinearGroup n k; closed subgroup = recorded IsClosedSubgroupScheme i on GrpObj G over Spec k; 1+eX,1+dY membership as points x,y with homMulEquiv image = dualUnit; A = DualNumber (DualNumber k), algebraMap = inl∘inl checked rfl; base changes p,q along inlHom / mapRingHom (inlHom) tied by image (i injective on points); commutator = four factors and = 1+ed(XY-YX); mulRingHom eta->ed injective; descended z; no inline instances/let/@toAlgebra; compiled 5.2 s"
  }
 }
