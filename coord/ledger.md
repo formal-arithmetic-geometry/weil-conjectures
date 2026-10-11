@@ -3308,3 +3308,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 02:36 L: accepted lem-pc-genus-agrees-sc (own item, writer W-gen0235, reviewer R-gen0237 PASS; 4 steps, 0 new nodes; both genera are dim H^1(C,O_C), the steps establish each definition's hypotheses; tool uses accepted: prop-pc-xk-integral, lem-sc-proper-dim-one-projective); every other stage-1 queue item is claimed by a remote group, so no lead worker is launched
 - 02:39 L: reviewers R-kda0239 (H1 lem-pc-kflat-derived-tensor-associator, head 6d59968ff) and R-dfl0239 (J1 lem-pc-derived-tensor-flat-second-localization, head b5303c475) launched; Monitor re-armed 02:38
 - 02:39 L: merged deliver/H1/lem-pc-kflat-derived-tensor-associator (reviewer FIX; first push; new nodes: 1)
+- 02:39 L: reviewer R-dek0240 launched (J1 lem-weil-degreewise-epi-kernel-cocone-qis, head 28a89e105); three reviewers in flight
