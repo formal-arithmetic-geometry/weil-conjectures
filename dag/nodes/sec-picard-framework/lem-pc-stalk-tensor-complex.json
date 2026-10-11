@@ -21,7 +21,8 @@
  },
  "stmt_deps": [
   "def-pc-cochain-complex-modules",
-  "def-pc-tensor-complex-sheaves"
+  "def-pc-tensor-complex-sheaves",
+  "def-pc-module-stalk-functor"
  ],
  "proof": [
   {
@@ -130,5 +131,23 @@
   "group": "M1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-stc2114 (reviewer sub-agent of L); spot-checked: Termwise application: step 2 cites new ringed-space 01CB node lem-pc-ringed-space-module-stalk-tensor (a generalization of scheme-only lem-weil-pbc-module-stalk-tensor, not a duplicate or special case; item is for arbitrary ringed spaces); step 1 cites new lem-pc-stalk-direct-sums (009E(5) for module coproducts on a ringed space; not covered by lem-weil-pbc-module-stalk-filtered-colimit (scheme, filtered), lem-weil-pbc-sets-sheaf-colimit-stalks (sets), lem-kun-stalks-commute-colimits (etale)); sign and total-complex terms from def-pc-tensor-complex-sheaves, stalk additivity carries (-1)^p, step 3 elementary OK (C1 satisfied). Own grep of Mathlib AlgebraicGeometry/Modules and ModuleCat for O_x-module stalk of coproduct/tensor: no match. Dropped stale tool_uses entry naming lem-pc-ringed-space-module-stalk-tensor (a new same-unit node, not another unit's tool; left over from the earlier citation of lem-weil-pbc-module-stalk-tensor) - missed by the second reading."
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.StalkTensorComplex",
+  "declaration": "CochainComplex.exists_stalk_tensor_complex_iso",
+  "file": "lean/Sheaf/Algebra/Homology/StalkTensorComplex.lean",
+  "statement": "theorem exists_stalk_tensor_complex_iso : ∃ e : ∀ (F K : CochainComplex (SheafOfModules.{u₁} O) ℤ), (S).obj (mapBifunctor F K (curriedTensor _)) ≅ mapBifunctor ((S).obj F) ((S).obj K) (curriedTensor _), ∀ (F K F' K' : CochainComplex (SheafOfModules.{u₁} O) ℤ) (f : F ⟶ F') (g : K ⟶ K'), (S).map (HomologicalComplex.mapBifunctorMap f g (curriedTensor _) (.up ℤ)) ≫ (e F' K').hom = (e F K).hom ≫ HomologicalComplex.mapBifunctorMap ((S).map f) ((S).map g) (curriedTensor _) (.up ℤ)",
+  "branch": "sheaf-dag",
+  "by": "M1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-stc1131",
+  "group": "M1",
+  "result": "pass",
+  "note": "return R-stc0928 points 1-4 repaired (duplicate node/module dropped, landed RingedSpace.moduleStalkFunctor via mapHomologicalComplex, stmt_dep kept, record verbatim, report fixed); X:RingedSpace, x:X, arbitrary unbounded F K : CochainComplex (SheafOfModules O) Z, LHS stalk of mapBifunctor curriedTensor (SheafOfModules.monoidalCategory, as KFlat), RHS ModuleCat tensor over X.presheaf.stalk x, .up Z signs, one family natural in both variables; same stalk convention as landed KFlatStalkCriterion; recompiled on sheaf-dag 9d4581fb2 clean 4.9 s"
  }
 }
