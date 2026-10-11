@@ -1,15 +1,17 @@
 # Work queue
 
-386 items; claim with `tools/claim.py next <group> [--stage N]`.
+384 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (386)
+## Stage 2: nodes to state (384)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
+| `def-weil-pbc-morphism-to-projective-space-by-sections` | 1 | state |
 | `cor-galois-lisse-representations` | 1 | state |
+| `lem-pc-complete-linear-system-closed` | 1 | state |
 | `lem-pc-derived-qcoh-perfect-generation` | 1 | state |
 | `lem-pc-derived-tensor-transitivity` | 1 | state |
 | `lem-pc-module-pullback-identity-composition` | 1 | state |
@@ -40,16 +42,13 @@
 | `lem-sc-perfect-derived-tensor-perfect` | 1 | state |
 | `lem-sc-perfect-finite-free-residue-model` | 1 | state |
 | `lem-sc-perfect-into-support-on-T` | 1 | state |
-| `lem-sc-perfect-jump-loci` | 1 | state |
 | `lem-sc-picard-kunneth-qcoh` | 1 | state |
 | `lem-sc-pseudo-coherent-support-annihilation` | 1 | state |
-| `lem-sc-smooth-proper-diagonal-koszul-regular` | 1 | state |
 | `lem-sc-valuation-limit-qcoh-section-descent` | 1 | state |
 | `lem-weil-derived-limit-roos-complex` | 1 | state |
 | `lem-weil-pbc-closed-immersion-conormal-flat-base-change` | 1 | state |
 | `lem-weil-pbc-pair-henselization` | 1 | state |
 | `lem-weil-pbc-projective-ample-invertible` | 1 | state |
-| `lem-weil-pbc-projective-space-functor-of-points` | 1 | state |
 | `lem-weil-pbc-projective-space-twisting-sheaf-charts` | 1 | state |
 | `lem-weil-pbc-quasi-coherent-module-colimit-affine-sections` | 1 | state |
 | `lem-weil-pbc-quasi-coherent-symmetric-algebra` | 1 | state |
@@ -57,7 +56,6 @@
 | `lem-weil-pbc-quasi-finite-affine-open-in-finite` | 1 | state |
 | `lem-weil-pbc-quasi-finite-at-finite-subalgebra-away` | 1 | state |
 | `lem-weil-pbc-quasi-finite-at-point-isolated` | 1 | state |
-| `lem-weil-pbc-quasi-finite-at-prime-permanence` | 1 | state |
 | `lem-weil-pbc-quasi-finite-at-prime-principal-localization` | 1 | state |
 | `lem-weil-pbc-quasi-finite-four-rings` | 1 | state |
 | `lem-weil-pbc-quasi-finite-monogenic-integral-closure` | 1 | state |
@@ -396,7 +394,7 @@
 | `lem-pc-essentially-constant-pro-hom-colimit` | 4 | state |
 | `lem-pur-essential-constant-pro-criterion-05py` | 4 | state |
 
-Not open yet: 40 nodes that wait for stage 1, 506 nodes that wait for a statement dependency.
+Not open yet: 40 nodes that wait for stage 1, 504 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
