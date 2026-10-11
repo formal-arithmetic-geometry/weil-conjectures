@@ -9,6 +9,8 @@ public import WeilConjectures.Compactification.BaseChange
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.AffineSpace
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.Deformation
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Smooth
+public import WeilConjectures.SixFunctors.Etale.Derived.LocallyConstantInvertible
+public import WeilConjectures.SixFunctors.Etale.Derived.SmoothDuality
 public import WeilConjectures.SixFunctors.Etale.Derived.TensorStructure
 
 /-!
@@ -83,6 +85,7 @@ variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] [HasTateTwist Λ] {X Y : 
   {d : ℕ} (f : X ⟶ Y) [IsSeparated f] [SmoothOfRelativeDimension d f] [HasCompactification f]
   [HasInvertibleExponent Λ X]
 
+omit [HasTateTwist Λ] [IsSeparated f] in
 include d in
 /-- Blueprint `sk-prop-cohsm`: Cohomological smoothness
 
@@ -91,9 +94,12 @@ include d in
 the form of cohomological smoothness that does not yet name the twist; smooth purity
 identifies `ω_f` with `Λ_X(d)[2d]`. -/
 theorem isInvertible_dualizingComplex :
-    DerivedCategory.isInvertible Λ X (dualizingComplex (ModuleCat.{u + 1} Λ) f) :=
-  sorry
+    DerivedCategory.isInvertible Λ X (dualizingComplex (ModuleCat.{u + 1} Λ) f) := by
+  obtain ⟨L, _, hL, ⟨e⟩, -⟩ := exists_dualizingComplex_iso_and_tensor Λ f d
+  exact DerivedCategory.isInvertible.of_iso e.symm
+    (isInvertible_shift_singleFunctor_obj_of_isLocallyConstantSheaf L hL _)
 
+omit [HasTateTwist Λ] [IsSeparated f] in
 include d in
 /-- Blueprint `sk-prop-cohsm`: Cohomological smoothness
 
@@ -108,13 +114,14 @@ blueprint statement is that the mate `φ_K` of the projection formula is this is
 -- TODO(unify): sk-prop-cohsm — state `IsIso φ_K` once the projection map is available.
 theorem nonempty_iso_rightDerivedUpperShriek_obj_derivedTensor
     (K : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
-    (hK : DerivedCategory.boundedConstructibleFiniteTor Λ Y K) :
+    (_hK : DerivedCategory.boundedConstructibleFiniteTor Λ Y K) :
     Nonempty (((derivedTensor (ModuleCat.{u + 1} Λ) X).obj
         ((L((f)^*[ModuleCat.{u + 1} Λ])).obj K)).obj
           (dualizingComplex (ModuleCat.{u + 1} Λ) f) ≅
       (rightDerivedUpperShriek (ModuleCat.{u + 1} Λ) f).obj K) :=
-  sorry
+  (exists_dualizingComplex_iso_and_tensor Λ f d).choose_spec.2.2.2 K
 
+omit [HasTateTwist Λ] [IsSeparated f] in
 include d in
 /-- Blueprint `sk-prop-cohsm`: Cohomological smoothness
 
@@ -140,7 +147,7 @@ theorem nonempty_iso_leftDerivedUpperStar_comp_rightDerivedUpperShriek {X' Y' : 
         L((g')^*[ModuleCat.{u + 1} Λ]) ≅
       L((g)^*[ModuleCat.{u + 1} Λ]) ⋙
         rightDerivedUpperShriek (ModuleCat.{u + 1} Λ) f') :=
-  sorry
+  nonempty_iso_rightDerivedUpperShriek_comp_leftDerivedUpperStar Λ f d sq
 
 /-! ### The twist reassociation and its compatibility with pullback -/
 
@@ -165,6 +172,7 @@ end Twist
 
 /-! ### The diagonal -/
 
+omit [HasTateTwist Λ] [IsSeparated f] in
 include d in
 /-- Blueprint `lem-pur-diagonal-base-change`: Base change for the dualizing object of a
 projection
@@ -183,6 +191,7 @@ theorem nonempty_iso_dualizingComplex_pullbackFst :
   obtain ⟨ι⟩ := nonempty_iso_leftDerivedUpperStar_unit (ModuleCat.{u + 1} Λ) f
   exact ⟨(rightDerivedUpperShriek _ (pullback.fst f f)).mapIso ι.symm ≪≫ (e.app (𝟙_ _)).symm⟩
 
+omit [HasTateTwist Λ] [IsSeparated f] in
 include d in
 /-- Blueprint `lem-pur-diagonal-base-change`: Base change for the dualizing object of a
 projection
@@ -197,6 +206,7 @@ theorem nonempty_iso_dualizingComplex_pullbackSnd :
   obtain ⟨ι⟩ := nonempty_iso_leftDerivedUpperStar_unit (ModuleCat.{u + 1} Λ) f
   exact ⟨(rightDerivedUpperShriek _ (pullback.snd f f)).mapIso ι.symm ≪≫ (e.app (𝟙_ _)).symm⟩
 
+omit [HasTateTwist Λ] [IsSeparated f] in
 include d in
 /-- Blueprint `lem-pur-diagonal-base-change`: Base change for the dualizing object of a
 projection

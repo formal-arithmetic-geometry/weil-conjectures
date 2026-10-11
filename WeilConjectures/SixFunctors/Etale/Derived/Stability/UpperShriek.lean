@@ -138,6 +138,7 @@ theorem constructibleTorAmplitudeIn_rightDerivedUpperShriek_of_smoothOfRelativeD
     constructibleTorAmplitudeIn (ModuleCat.{u + 1} Λ) X (a - 2 * d) (b - 2 * d)
       ((R(f)^![ModuleCat.{u + 1} Λ]).obj K) := by
   have : IsNoetherianRing Λ := inferInstance
+  have : HasInvertibleExponent Λ X := .of_hom f
   obtain ⟨L, _, hLs, ⟨eω⟩, htens⟩ := exists_dualizingComplex_iso_and_tensor Λ f d
   obtain ⟨_, hLf⟩ := isConstructibleSheaf_and_flat_of_sheafFiber_iso Λ L hLs
   obtain ⟨⟨hbc, -⟩, hta⟩ := hK

@@ -67,6 +67,7 @@ theorem boundedConstructible_rightDerivedUpperShriek_of_smoothOfRelativeDimensio
     (hK : boundedConstructible (ModuleCat.{u + 1} Λ) Y K) :
     boundedConstructible (ModuleCat.{u + 1} Λ) X ((R(f)^![ModuleCat.{u + 1} Λ]).obj K) := by
   have : IsNoetherianRing Λ := inferInstance
+  have : HasInvertibleExponent Λ X := .of_hom f
   obtain ⟨L, _, hLs, ⟨eω⟩, htens⟩ := exists_dualizingComplex_iso_and_tensor Λ f d
   obtain ⟨_, hLf⟩ := isConstructibleSheaf_and_flat_of_sheafFiber_iso Λ L hLs
   have hL₀ := torAmplitudeIn_singleFunctor_zero_of_flat _ L hLf
