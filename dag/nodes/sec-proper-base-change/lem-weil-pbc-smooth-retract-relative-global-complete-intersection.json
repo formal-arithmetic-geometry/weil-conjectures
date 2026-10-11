@@ -201,5 +201,23 @@
   "worker": "stage1",
   "summary": "Not a Mathlib leaf: Mathlib has no relative global complete intersection, and no result giving a smooth A-algebra with a retraction (LeanSearch, LeanFinder, Loogle, grep recorded). Split along Stacks 07CG's proof in the smooth case into six steps: (1) the new node lem-weil-pbc-improve-presentation-smooth-conormal-free (Stacks 07CE clause (1) at a = 1 for smooth A; the existing lem-weil-pbc-improve-presentation states only clause (2), C_a smooth over R with Omega free, and not C smooth over A or the free conormal, so it could not be cited); (2) Huber's lemma 07CF (existing leaf lem-weil-pbc-conormal-free-presentation-basis) gives the presentation with the f_j a basis of J/J^2: clause (2); (3) sigma, pi transported along the isomorphism: clause (3); (4)-(6) fibre dimension n - c: split conormal sequence (existing lem-weil-pbc-smooth-localization-conormal-split, a = 1) gives rank Omega_{C/R} = n - c at every point, base change to the fibre (existing leaves), Algebra 00TT (existing lem-weil-pbc-smooth-over-field-dimension-differentials) gives local dimension n - c, and the new node lem-weil-pbc-dimension-supremum-local-dimensions (Topology 0B7I) gives the dimension of the fibre: clause (1). The source's 00SC route is replaced inside the node by the Omega-rank route (fewer unproved facts; Stacks 00SC needs the conormal base change to the fibres, which no node gives). The three clauses are exactly what step 1 of the citer lem-weil-pbc-smooth-retract-standard-smooth uses. Tags 07CG, 07CE, 07CF, 07D0, 00SC, 00SP, 00TA, 0B7I verified in tags/tags."
  },
- "reviewed": "pass (L, 2026-10-10): 6 steps follow 07CG in the smooth case: 07CE clause (1) (new unsplit node) gives C_0 with retraction and free conormal module, Huber 07CF gives the presentation with conormal basis (clause 2), the maps transfer along the isomorphism (clause 3), and the fibre dimension n - c comes from the rank of Omega (split conormal sequence, 00TT) and dim = sup of local dimensions (new unsplit 0B7I node) rather than 00SC."
+ "reviewed": "pass (L, 2026-10-10): 6 steps follow 07CG in the smooth case: 07CE clause (1) (new unsplit node) gives C_0 with retraction and free conormal module, Huber 07CF gives the presentation with conormal basis (clause 2), the maps transfer along the isomorphism (clause 3), and the fibre dimension n - c comes from the rank of Omega (split conormal sequence, 00TT) and dim = sup of local dimensions (new unsplit 0B7I node) rather than 00SC.",
+ "lean": {
+  "module": "Sheaf.Paper.SmoothRetractRelativeGlobalCompleteIntersection",
+  "declaration": "Algebra.smooth_retract_relative_global_complete_intersection",
+  "file": "lean/Sheaf/Paper/SmoothRetractRelativeGlobalCompleteIntersection.lean",
+  "statement": "theorem smooth_retract_relative_global_complete_intersection (R : Type u) [CommRing R] (A : Type v) [CommRing A] [Algebra R A] [Smooth R A] : ∃ (n c : ℕ) (f : Fin c → MvPolynomial (Fin n) R), IsRelativeGlobalCompleteIntersectionPresentation f ∧ (∃ b : Module.Basis (Fin c) (MvPolynomial (Fin n) R ⧸ Ideal.span (Set.range f)) (Ideal.span (Set.range f)).Cotangent, ∀ j : Fin c, b j = (Ideal.span (Set.range f)).toCotangent ⟨f j, Ideal.subset_span (Set.mem_range_self j)⟩) ∧ (∃ (σ : A →ₐ[R] (MvPolynomial (Fin n) R ⧸ Ideal.span (Set.range f))) (π : (MvPolynomial (Fin n) R ⧸ Ideal.span (Set.range f)) →ₐ[R] A), π.comp σ = AlgHom.id R A ∧ ∃ (_ : Algebra A (MvPolynomial (Fin n) R ⧸ Ideal.span (Set.range f))), (Algebra.ofId A (MvPolynomial (Fin n) R ⧸ Ideal.span (Set.range f))).toRingHom = σ.toRingHom ∧ Smooth A (MvPolynomial (Fin n) R ⧸ Ideal.span (Set.range f)))",
+  "branch": "sheaf-dag",
+  "by": "J1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "J1",
+  "result": "pass",
+  "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
+ }
 }
