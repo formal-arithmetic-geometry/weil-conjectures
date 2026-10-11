@@ -3204,3 +3204,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 01:08 L: merged deliver/G1/lem-sc-coherent-ring-perfect-complex-cohomology (reviewer FIX; first push; new nodes: 1)
 - 01:09 L: merged deliver/M1/lem-pc-finite-flat-pushforward-locally-free (reviewer FIX; first push; new nodes: 3)
 - 01:09 UTC L: G1 coherent-ring-perfect-complex-cohomology FIX cc39d75af (R-crp0108).
+- 01:09 UTC L: M1 finite-flat-pushforward-locally-free FIX 4cfe4826b (R-ffp0108; TAB-corrupted TeX restored, two attached leaves verified).
