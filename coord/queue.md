@@ -10,7 +10,7 @@
 | node | distance to Mathlib | kind |
 |---|---|---|
 | `def-pod-lisse-l-adic-sheaves` | 1 | state |
-| `def-weil-pbc-derived-direct-image-composition` | 1 | state |
+| `def-weil-pbc-finite-etale-trace` | 1 | state |
 | `lem-pc-derived-tensor-transitivity` | 1 | state |
 | `lem-pc-module-pullback-identity-composition` | 1 | state |
 | `lem-pur-derived-functor-shift-05su` | 1 | state |
@@ -22,22 +22,19 @@
 | `lem-sc-hilb-dominating-power` | 1 | state |
 | `lem-weil-derived-limit-roos-complex` | 1 | state |
 | `lem-weil-pbc-derived-square-iso-pasting` | 1 | state |
-| `lem-weil-pbc-etale-inverse-image-algebraic-structures` | 1 | state |
 | `lem-weil-pbc-etale-qcqs-sections-filtered-colimit` | 1 | state |
+| `lem-weil-pbc-exchange-identity-pasting` | 1 | state |
 | `lem-weil-pbc-ext-one-direct-sum` | 1 | state |
 | `lem-weil-pbc-filtered-colimit-algebras-tensor-elementwise` | 1 | state |
 | `lem-weil-pbc-filtered-colimit-flat-modules` | 1 | state |
 | `lem-weil-pbc-filtered-colimit-localization-at-prime` | 1 | state |
-| `lem-weil-pbc-filtered-colimit-normal-ring` | 1 | state |
 | `lem-weil-pbc-finite-after-completion` | 1 | state |
 | `lem-weil-pbc-finite-etale-lifting-limit-descent` | 1 | state |
-| `lem-weil-pbc-finite-etale-trace-exists` | 1 | state |
 | `lem-weil-pbc-finite-galois-receiving-separable-extensions` | 1 | state |
 | `lem-weil-pbc-finite-locally-constant-module-values` | 1 | state |
 | `lem-weil-pbc-finite-locally-free-degree-etale-descent` | 1 | state |
 | `lem-weil-pbc-finite-locally-free-degree-locally-constant` | 1 | state |
 | `lem-weil-pbc-finite-module-complete-over-complete-noetherian` | 1 | state |
-| `lem-weil-pbc-finite-open-cover-degree-sum` | 1 | state |
 | `lem-weil-pbc-finite-over-complete-local-product` | 1 | state |
 | `lem-weil-pbc-finite-over-complete-ring` | 1 | state |
 | `lem-weil-pbc-finite-over-nagata-nagata` | 1 | state |
@@ -192,6 +189,7 @@
 | `lem-weil-pbc-intersection-subfields-differentials` | 1 | state |
 | `lem-weil-pbc-intersection-subfields-subspace` | 1 | state |
 | `lem-weil-pbc-inverse-image-closed-pushforward-constant` | 1 | state |
+| `lem-weil-pbc-inverse-image-module-adjunction` | 1 | state |
 | `lem-weil-pbc-inverse-image-preserves-colimits` | 1 | state |
 | `lem-weil-pbc-inverse-image-stalk-germ` | 1 | state |
 | `lem-weil-pbc-invertible-generating-sections-fibre` | 1 | state |
@@ -455,6 +453,7 @@
 | `lem-weil-pbc-serre-sk-goes-up` | 1 | state |
 | `lem-weil-pbc-ses-cech-h1-surjective` | 1 | state |
 | `lem-weil-pbc-set-cech-nerve-free-resolution` | 1 | state |
+| `lem-weil-pbc-sets-etale-inverse-image-composition-units` | 1 | state |
 | `lem-weil-pbc-sets-etale-inverse-image-constant-base-change` | 1 | state |
 | `lem-weil-pbc-sets-finite-pushforward-stalk` | 1 | state |
 | `lem-weil-pbc-sets-inverse-image-composition` | 1 | state |
@@ -624,6 +623,7 @@
 | `prop-weil-pbc-composition-stability` | 1 | state |
 | `prop-weil-pbc-formal-glueing-equivalence` | 1 | state |
 | `prop-weil-pbc-inverse-image-exact` | 1 | state |
+| `prop-weil-pbc-inverse-image-modules-exact` | 1 | state |
 | `prop-weil-pbc-kinjective-resolutions-exist` | 1 | state |
 | `thm-galois-abstract-equivalence` | 1 | state |
 | `thm-galois-fundamental` | 1 | state |
@@ -679,7 +679,7 @@
 | `lem-pur-essential-constant-pro-criterion-05py` | 4 | state |
 | `def-nagata-fixed-base-separated-stage` | 6 | state |
 
-Not open yet: 40 nodes that wait for stage 1, 816 nodes that wait for a statement dependency.
+Not open yet: 40 nodes that wait for stage 1, 811 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
