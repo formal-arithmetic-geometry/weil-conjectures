@@ -217,5 +217,23 @@
   "by": "L",
   "result": "pass",
   "note": "Eight steps along the proof of Stacks More on Algebra 0A02: the canonical maps pi_C; essential smallness and the colimit (reviewed leaves); directedness via B, tensor products and the coequalizer object, with the reductions mod J written out (Stacks only states etaleness); B/J = B^h/J^h elementwise; the henselian property by checking condition (2) of 09XI for (B^h, J^h) (new nodes lem-weil-pbc-etale-algebra-filtered-colimit-descent (00U2 (9)), lem-weil-pbc-etale-section-idempotent-splitting (09XI proof, 00U7/00U8; nearly a Mathlib leaf per the worker), lem-weil-pbc-etale-section-lifting-henselian-pair (09XI (2) => (4) => (3))). Clause (4) (the adjunction) and its Stacks-only step 9 dropped by the lead: no user needs it and its nodes (09XI (1) => (2), 02FL, 09XF) would be route-irrelevant. Worker finding: def-weil-pbc-henselian-terminology is 09XI (3), not Stacks' definition 09XE; Mathlib's HenselianRing is the standard-etale case of 09XI (2); no henselization in Mathlib or the source repository."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.PairHenselization",
+  "declaration": "RingTheory.pair_henselization",
+  "file": "lean/Sheaf/RingTheory/PairHenselization.lean",
+  "statement": "theorem pair_henselization (B : Type u) [CommRing B] (J : Ideal B) : EssentiallySmall.{u} (ObjectProperty.FullSubcategory (fun C : Under (CommRingCat.of B) ↦ AlgebraicGeometry.Etale (AlgebraicGeometry.Spec.map C.hom) ∧ Function.Bijective (Ideal.quotientMap (J.map C.hom.hom) C.hom.hom (Ideal.le_comap_map)))) ∧ IsFiltered (ObjectProperty.FullSubcategory (fun C : Under (CommRingCat.of B) ↦ AlgebraicGeometry.Etale (AlgebraicGeometry.Spec.map C.hom) ∧ Function.Bijective (Ideal.quotientMap (J.map C.hom.hom) C.hom.hom (Ideal.le_comap_map)))) ∧ ∃ c : Cocone (ObjectProperty.ι (fun C : Under (CommRingCat.of B) ↦ AlgebraicGeometry.Etale (AlgebraicGeometry.Spec.map C.hom) ∧ Function.Bijective (Ideal.quotientMap (J.map C.hom.hom) C.hom.hom (Ideal.le_comap_map)))), Nonempty (IsColimit c) ∧ HenselianRing c.pt.right (J.map c.pt.hom.hom) ∧ Function.Bijective (Ideal.quotientMap (J.map c.pt.hom.hom) c.pt.hom.hom (Ideal.le_comap_map))",
+  "branch": "sheaf-dag",
+  "by": "N1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-phz",
+  "group": "N1",
+  "result": "pass",
+  "note": "B CommRing, J ideal; objects = Under (of B) with Etale (Spec.map C.hom) and bijective canonical B/J -> C/JC (all B-algebra maps as morphisms); (1) EssentiallySmall.{u} + IsFiltered; (2) tied colimit cocone with HenselianRing on (B^h, J B^h); (3) bijective B/J -> B^h/J^h; every conjunct is a node clause, none derivable; no let/inline instances/notation; adjunction clause absent as the node requires"
  }
 }
