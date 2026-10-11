@@ -167,5 +167,24 @@
   "by": "L",
   "result": "accepted",
   "note": "5 steps following Stacks 02LX: (1) by the new 00EU leaf; (2) nonzerodivisors avoid the minimal primes (new 00EW(3) leaf) and the maps out of Q(R); (3) primes of Q(R) are the q_i Q(R), all maximal, by the 00E3 node and the new prime-avoidance leaf (00DS); (4) product decomposition by the existing product-of-localizations-at-maximal leaf with the nil Jacobson radical from zero-locus-eq-iff-radical-eq; (5) factors identified by 00E3 (2). 3 new Mathlib leaves (lines verified by L; the 00EU leaf is a composed match, line field added)."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.ReducedNoetherianTotalRingFractions",
+  "declaration": "reduced_noetherian_total_ring_fractions",
+  "file": "lean/Sheaf/RingTheory/ReducedNoetherianTotalRingFractions.lean",
+  "statement": "theorem reduced_noetherian_total_ring_fractions {R : Type u} [CommRing R] [IsNoetherianRing R] [IsReduced R] : ∃ t : ℕ, ∃ q : Fin t ≃ {p : PrimeSpectrum R // p.asIdeal ∈ minimalPrimes R}, (∀ i : Fin t, IsField (Localization.AtPrime (q i).val.asIdeal)) ∧ (∀ i : Fin t, Ideal.map (algebraMap R (Localization.AtPrime (q i).val.asIdeal)) (q i).val.asIdeal = ⊥) ∧ (∀ i : Fin t, Function.Bijective (algebraMap (Localization.AtPrime (q i).val.asIdeal) (Ideal.ResidueField (q i).val.asIdeal))) ∧ (∀ i : Fin t, ∀ s : R, s ∈ nonZeroDivisors R → s ∉ (q i).val.asIdeal) ∧ (∀ i : Fin t, ∃! φ : FractionRing R →+* Localization.AtPrime (q i).val.asIdeal, φ.comp (algebraMap R (FractionRing R)) = algebraMap R (Localization.AtPrime (q i).val.asIdeal)) ∧ (∀ φ : ∀ i : Fin t, FractionRing R →+* Localization.AtPrime (q i).val.asIdeal, (∀ i : Fin t, (φ i).comp (algebraMap R (FractionRing R)) = algebraMap R (Localization.AtPrime (q i).val.asIdeal)) → Function.Bijective (RingHom.pi φ))",
+  "branch": "sheaf-dag",
+  "by": "J1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-rnt"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-rnt",
+  "group": "J1",
+  "result": "fix",
+  "note": "R CommRing+Noetherian+reduced; Fin t ≃ minimalPrimes subtype; IsField R_qi; qi R_qi = ⊥; R_qi ≅ κ(qi); S avoids qi; ∃! compatible FractionRing R → R_qi; induced RingHom.pi bijective"
  }
 }
