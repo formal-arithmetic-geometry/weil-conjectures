@@ -192,5 +192,24 @@
  "tool_uses": [
   "pqf-lem-coherent-ft-locnoeth"
  ],
- "reviewed": "pass (L, 2026-10-10): 4 steps follow 02O8: the sheaves I^nF are quasi-coherent with explicit affine sections and multiplication maps; the Rees algebra is a graded finite type A-algebra (nagata nodes); the data satisfy the hypotheses of the new 0897 (1) node (graded data written out, finite type generated in degree 0), which gives the B-module structure and finite generation. Tool use pqf-lem-coherent-ft-locnoeth (01XZ) recorded by L."
+ "reviewed": "pass (L, 2026-10-10): 4 steps follow 02O8: the sheaves I^nF are quasi-coherent with explicit affine sections and multiplication maps; the Rees algebra is a graded finite type A-algebra (nagata nodes); the data satisfy the hypotheses of the new 0897 (1) node (graded data written out, finite type generated in degree 0), which gives the B-module structure and finite generation. Tool use pqf-lem-coherent-ft-locnoeth (01XZ) recorded by L.",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.CohomologyPowersIdealReesFinite",
+  "declaration": "AlgebraicGeometry.cohomology_powers_ideal_rees_finite",
+  "file": "lean/Sheaf/AlgebraicGeometry/CohomologyPowersIdealReesFinite.lean",
+  "statement": "theorem cohomology_powers_ideal_rees_finite {A : Type v} [CommRing A] [IsNoetherianRing A] {X : Scheme.{v}} (f : X ⟶ Spec (CommRingCat.of A)) [IsProper f] (I : Ideal A) (J : X.IdealSheafData) (hJ : J = (Scheme.IdealSheafData.ofIdealTop (I.map (Scheme.ΓSpecIso (CommRingCat.of A)).inv.hom)).comap f) (F : X.Modules) (hF : RingedSpace.IsCoherent X.toRingedSpace F) (q : ℕ) : ∃ lam : ∀ (k m : ℕ) (a : A) (_ha : a ∈ I ^ k), Scheme.idealModuleProduct (Scheme.idealSheafPower J.toModulesι m).2 F ⟶ Scheme.idealModuleProduct (Scheme.idealSheafPower J.toModulesι (m + k)).2 F, (∀ (k m : ℕ) (a : A) (ha : a ∈ I ^ k) (U : X.Opens) (s : (Scheme.idealModuleProduct (Scheme.idealSheafPower J.toModulesι m).2 F).val.obj (op U)), ((Scheme.idealModuleProductι (Scheme.idealSheafPower J.toModulesι (m + k)).2 F).app U).hom ((lam k m a ha).app U s) = (((Scheme.ΓSpecIso (CommRingCat.of A)).inv ≫ f.appLE ⊤ U le_top).hom a) • ((Scheme.idealModuleProductι (Scheme.idealSheafPower J.toModulesι m).2 F).app U).hom s) ∧ (∀ (m : ℕ) (a : A) (ha : a ∈ I ^ 0) (x : (ModuleCat.restrictScalars ((Scheme.ΓSpecIso (CommRingCat.of A)).inv ≫ f.appTop).hom).obj ((RingedSpace.moduleCohomology X.toRingedSpace q).obj (Scheme.idealModuleProduct (Scheme.idealSheafPower J.toModulesι m).2 F))), ((RingedSpace.moduleCohomology X.toRingedSpace q).map (lam 0 m a ha)).hom x = a • x) ∧ ∃ mod : Module (reesAlgebra I) (⨁ n : ℕ, (ModuleCat.restrictScalars ((Scheme.ΓSpecIso (CommRingCat.of A)).inv ≫ f.appTop).hom).obj ((RingedSpace.moduleCohomology X.toRingedSpace q).obj (Scheme.idealModuleProduct (Scheme.idealSheafPower J.toModulesι n).2 F))), @Module.Finite (reesAlgebra I) (⨁ n : ℕ, (ModuleCat.restrictScalars ((Scheme.ΓSpecIso (CommRingCat.of A)).inv ≫ f.appTop).hom).obj ((RingedSpace.moduleCohomology X.toRingedSpace q).obj (Scheme.idealModuleProduct (Scheme.idealSheafPower J.toModulesι n).2 F))) _ _ mod ∧ ∀ (b : reesAlgebra I) (x : ⨁ n : ℕ, (ModuleCat.restrictScalars ((Scheme.ΓSpecIso (CommRingCat.of A)).inv ≫ f.appTop).hom).obj ((RingedSpace.moduleCohomology X.toRingedSpace q).obj (Scheme.idealModuleProduct (Scheme.idealSheafPower J.toModulesι n).2 F))), @SMul.smul _ _ mod.toSMul b x = ∑ k ∈ b.val.support, ∑ m ∈ x.support, DirectSum.of (fun n : ℕ ↦ (ModuleCat.restrictScalars ((Scheme.ΓSpecIso (CommRingCat.of A)).inv ≫ f.appTop).hom).obj ((RingedSpace.moduleCohomology X.toRingedSpace q).obj (Scheme.idealModuleProduct (Scheme.idealSheafPower J.toModulesι n).2 F))) (m + k) (((RingedSpace.moduleCohomology X.toRingedSpace q).map (lam k m (b.val.coeff k) (b.property k))).hom (x m))",
+  "branch": "sheaf-dag",
+  "by": "J1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-crf"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-crf",
+  "group": "J1",
+  "result": "fix",
+  "note": "dropped duplicate new node(s) def-weil-pbc-rees-module-cohomology (--drop-nodes; not merged, the item points at the landed declaration)"
+ }
 }
