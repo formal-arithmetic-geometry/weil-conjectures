@@ -52,7 +52,10 @@ total left derived functors `L(g^*)` through the isomorphism
   (blueprint: `lemma:openclosed-vanishing-lowerShriek-derived`).
 - `AlgebraicGeometry.Etale.isZero_mapDerivedCategoryUpperStar_obj_rightDerivedLowerStar_\
   of_disjoint_range`: `j^* (Ri_* N) = 0`.
-- `AlgebraicGeometry.Etale.exists_distTriang_openClosed`: the open–closed triangle
+- `AlgebraicGeometry.Etale.exists_distTriang_openClosed`,
+  `AlgebraicGeometry.Etale.existsUnique_distTriang_openClosed` and
+  `AlgebraicGeometry.Etale.openClosedTriangle_comm₃`: the open–closed triangle, unique and
+  functorial
   `j_! j^* M ⟶ M ⟶ Ri_* i^* M ⟶ (j_! j^* M)[1]`
   (blueprint: `sk-prop-sf-open-closed-triangle`).
 - `AlgebraicGeometry.Etale.isIso_of_isIso_leftDerivedUpperStar_closedComplement_map` and
@@ -303,6 +306,93 @@ theorem exists_distTriang_openClosed (hij : Set.range i.base = (Set.range j.base
   refine ⟨e.inv ≫ h, isomorphic_distinguished _ hT _ ?_⟩
   exact Triangle.isoMk _ _ (Iso.refl _) (Iso.refl _) e.symm (by simp [adj'])
     (by rw [← he]; simp) (by simp)
+
+omit [IsClosedImmersion i] in
+/-- **Hom vanishing** for the open–closed pair: every morphism from a shift of an extension by
+zero `j_! N` to a closed direct image `Ri_* M` vanishes, since by `D(j_!) ⊣ D(j^*)` it corresponds
+to a morphism into `j^* Ri_* M = 0`. -/
+lemma eq_zero_of_shift_openImmersionLowerShriek_to_rightDerivedLowerStar
+    (hij : Set.range i.base = (Set.range j.base)ᶜ)
+    (N : DerivedCategory (Sheaf U.smallEtaleTopology A)) (n : ℤ)
+    (M : DerivedCategory (Sheaf Z.smallEtaleTopology A))
+    (φ : (D((j)_!open[A]).obj N)⟦n⟧ ⟶ R((i)_*[A]).obj M) : φ = 0 := by
+  have hd : Disjoint (Set.range j.base) (Set.range i.base) := by
+    rw [hij]; exact disjoint_compl_right
+  let adj' := derivedOpenImmersionLowerShriekUpperStarAdjunction A j
+  have h₀ : (D((j)_!open[A]).commShiftIso n).hom.app N ≫ φ = 0 := by
+    apply adj'.homEquiv _ _ |>.injective
+    exact (isZero_mapDerivedCategoryUpperStar_obj_rightDerivedLowerStar_of_disjoint_range
+      A j i hd M).eq_of_tgt _ _
+  simpa using (D((j)_!open[A]).commShiftIso n).inv.app N ≫= h₀
+
+open Pretriangulated in
+/-- Blueprint `lem-cbc-open-closed-recollement`: Open–closed recollement
+
+For complementary open and closed immersions `j : U ⟶ X` and `i : Z ⟶ X` and every
+`M ∈ D(X_ét, A)`, the open counit `j_! j^* M ⟶ M` and the closed unit `M ⟶ Ri_* i^* M` extend
+to a distinguished triangle, *uniquely*: the connecting morphism
+`w : Ri_* i^* M ⟶ (j_! j^* M)[1]` is determined by the first two arrows, because
+`Hom((j_! j^* M)[1], Ri_* i^* M) = 0`
+(`AlgebraicGeometry.Etale.eq_zero_of_shift_openImmersionLowerShriek_to_rightDerivedLowerStar`).
+Functoriality of the triangle is `AlgebraicGeometry.Etale.openClosedTriangle_comm₃`. This is
+the open–closed recollement triangle of blueprint `def-weil-open-closed-recollement` on the
+étale site. -/
+theorem existsUnique_distTriang_openClosed (hij : Set.range i.base = (Set.range j.base)ᶜ)
+    (M : DerivedCategory (Sheaf X.smallEtaleTopology A)) :
+    ∃! w, Pretriangulated.Triangle.mk
+      ((derivedOpenImmersionLowerShriekUpperStarAdjunction A j).counit.app M)
+      ((mapDerivedUpperStarLowerStarAdjunction A i).unit.app M) w ∈ distTriang _ := by
+  obtain ⟨w, hw⟩ := exists_distTriang_openClosed A j i hij M
+  refine ⟨w, hw, fun w' hw' ↦ ?_⟩
+  obtain ⟨c, hc₁, hc₂⟩ := complete_distinguished_triangle_morphism _ _ hw hw' (𝟙 _) (𝟙 _)
+    (by simp)
+  obtain ⟨g, hg⟩ := Triangle.yoneda_exact₃ _ hw (c - 𝟙 _) (by
+    rw [Preadditive.comp_sub, hc₁]; simp)
+  rw [eq_zero_of_shift_openImmersionLowerShriek_to_rightDerivedLowerStar A j i hij _ 1 _ g,
+    Limits.comp_zero, sub_eq_zero] at hg
+  rw [hg] at hc₂
+  simpa using hc₂.symm
+
+omit [IsClosedImmersion i] in
+open Pretriangulated in
+/-- Blueprint `lem-cbc-open-closed-recollement`: Open–closed recollement
+
+**Functoriality.** The open–closed triangles are natural in `M`: for `φ : M ⟶ M'` and the
+connecting morphisms `w, w'` of the triangles of `M` and `M'`
+(`AlgebraicGeometry.Etale.existsUnique_distTriang_openClosed`), the square formed by `w`, `w'`,
+`Ri_* i^* φ` and `(j_! j^* φ)[1]` commutes, so that `(j_! j^* φ, φ, Ri_* i^* φ)` is a morphism of
+distinguished triangles. -/
+theorem openClosedTriangle_comm₃ (hij : Set.range i.base = (Set.range j.base)ᶜ)
+    {M M' : DerivedCategory (Sheaf X.smallEtaleTopology A)} (φ : M ⟶ M')
+    {w : R((i)_*[A]).obj (D((i)^*[A]).obj M) ⟶
+      (D((j)_!open[A]).obj (D((j)^*[A]).obj M))⟦(1 : ℤ)⟧}
+    {w' : R((i)_*[A]).obj (D((i)^*[A]).obj M') ⟶
+      (D((j)_!open[A]).obj (D((j)^*[A]).obj M'))⟦(1 : ℤ)⟧}
+    (hw : Pretriangulated.Triangle.mk
+      ((derivedOpenImmersionLowerShriekUpperStarAdjunction A j).counit.app M)
+      ((mapDerivedUpperStarLowerStarAdjunction A i).unit.app M) w ∈ distTriang _)
+    (hw' : Pretriangulated.Triangle.mk
+      ((derivedOpenImmersionLowerShriekUpperStarAdjunction A j).counit.app M')
+      ((mapDerivedUpperStarLowerStarAdjunction A i).unit.app M') w' ∈ distTriang _) :
+    w ≫ (D((j)_!open[A]).map (D((j)^*[A]).map φ))⟦(1 : ℤ)⟧' =
+      R((i)_*[A]).map (D((i)^*[A]).map φ) ≫ w' := by
+  set T := Pretriangulated.Triangle.mk
+    ((derivedOpenImmersionLowerShriekUpperStarAdjunction A j).counit.app M)
+    ((mapDerivedUpperStarLowerStarAdjunction A i).unit.app M) w
+  set T' := Pretriangulated.Triangle.mk
+    ((derivedOpenImmersionLowerShriekUpperStarAdjunction A j).counit.app M')
+    ((mapDerivedUpperStarLowerStarAdjunction A i).unit.app M') w'
+  obtain ⟨c, hc₁, hc₂⟩ := complete_distinguished_triangle_morphism T T' hw hw'
+    (D((j)_!open[A]).map (D((j)^*[A]).map φ)) φ
+    ((derivedOpenImmersionLowerShriekUpperStarAdjunction A j).counit.naturality φ).symm
+  have hu := (mapDerivedUpperStarLowerStarAdjunction A i).unit.naturality φ
+  obtain ⟨g, hg⟩ := Triangle.yoneda_exact₃ _ hw
+    (c - show T.obj₃ ⟶ T'.obj₃ from R((i)_*[A]).map (D((i)^*[A]).map φ)) (by
+    rw [Preadditive.comp_sub, hc₁, sub_eq_zero]; exact hu)
+  rw [eq_zero_of_shift_openImmersionLowerShriek_to_rightDerivedLowerStar A j i hij _ 1 _ g,
+    Limits.comp_zero, sub_eq_zero] at hg
+  rw [hg] at hc₂
+  simpa [T, T'] using hc₂
 
 end Triangle
 

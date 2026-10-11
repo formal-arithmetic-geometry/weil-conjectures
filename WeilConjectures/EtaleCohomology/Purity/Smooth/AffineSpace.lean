@@ -35,8 +35,11 @@ affine line, where the input is `sk-prop-a1` (for clause (i)) and affine-line pu
 
 - `AlgebraicGeometry.Etale.nonempty_iso_rightDerivedUpperShriek_affineSpaceZero`: clause (i),
   `Rz^! Λ(c)[2c] ≅ Λ_B`.
+- `AlgebraicGeometry.Etale.nonempty_adjunction_rightDerivedLowerShriek_affineSpace`: the
+  ambient adjunction `Rp_{d!} ⊣ Lp_d^*(-)(d)[2d]` (`cor-amb-affine-space-adjunction`, stated
+  here as an input from subsection `sk-prop-sf-cbc`).
 - `AlgebraicGeometry.Etale.nonempty_iso_rightDerivedUpperShriek_affineLine`: affine-line purity,
-  `Rp^! K ≅ Lp^* K (1)[2]`.
+  `Rp^! K ≅ Lp^* K (1)[2]`, by uniqueness of right adjoints.
 - `AlgebraicGeometry.Etale.nonempty_iso_rightDerivedUpperShriek_affineSpace`: clause (ii),
   affine-space purity `Rp_c^! K ≅ Lp_c^* K (c)[2c]`.
 - `AlgebraicGeometry.Etale.nonempty_iso_dualizingComplex_affineSpace`: its case `K = Λ_B`,
@@ -267,6 +270,24 @@ theorem nonempty_iso_rightDerivedUpperShriek_affineSpaceZero [HasTateTwist.IsNor
 
 /-! ### The `Rp^!`-form -/
 
+/-- Blueprint `cor-amb-affine-space-adjunction`: affine-space ambient adjunction
+
+For the projection `p_d : 𝔸^d_S → S` of relative affine space over a locally noetherian scheme
+`S` on which the exponent of `Λ` is invertible, on the entire ordinary derived categories of
+étale `Λ`-module sheaves,
+
+`Rp_{d!} ⊣ Lp_d^*(-)(d)[2d]`.
+
+It is obtained by composing `j_! ⊣ j^*` for the open immersion `j : 𝔸¹_S ↪ ℙ¹_S` with the
+explicit projective-line adjunction `Rq_* ⊣ q^*(1)[2]` (`thm-amb-p1-adjunction`), and
+iterating along the tower of affine-line projections, the twists adding up. -/
+theorem nonempty_adjunction_rightDerivedLowerShriek_affineSpace [HasTateTwist.IsNormalized Λ]
+    (d : ℕ) (S : Scheme.{u}) [IsLocallyNoetherian S] [HasInvertibleExponent Λ S] :
+    Nonempty (R((𝔸(ULift.{u} (Fin d); S) ↘ S))_![ModuleCat.{u + 1} Λ] ⊣
+      L(((𝔸(ULift.{u} (Fin d); S) ↘ S))^*[ModuleCat.{u + 1} Λ]) ⋙
+        twistShift Λ 𝔸(ULift.{u} (Fin d); S) d) :=
+  sorry
+
 /-- Blueprint `thm-pur-affine-line-purity`: affine-line purity
 
 For the projection `p : 𝔸¹_Y → Y` of the affine line over a separated scheme of finite type
@@ -277,18 +298,26 @@ over a field, on which the exponent of `Λ` is invertible, and `K ∈ D^b_{ctf}(
 In the blueprint the isomorphism is the comparison `γ_{p,K}`, the transpose under
 `Rp_! ⊣ Rp^!` of the integration map built from the projective-line trace
 (`def-pur-affine-line-purity-comparison`); this comparison is not constructed, so only the
-existence of the isomorphism is recorded. -/
+existence of the isomorphism is recorded.
+
+The proof is the blueprint's: `Rp_!` has the two right adjoints `Rp^!` (by definition) and
+`Lp^*(-)(1)[2]` (the explicit affine-space adjunction, `cor-amb-affine-space-adjunction`), and
+right adjoints are unique up to isomorphism. The hypothesis `K ∈ D^b_{ctf}` of the blueprint is
+not needed for this argument. -/
 theorem nonempty_iso_rightDerivedUpperShriek_affineLine [HasTateTwist.IsNormalized Λ]
     {k : Type u} [Field k]
     (Y : Scheme.{u}) (aY : Y ⟶ Spec (.of k)) [IsSeparated aY] [LocallyOfFiniteType aY]
     [HasInvertibleExponent Λ Y]
     (K : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
-    (hK : DerivedCategory.boundedConstructibleFiniteTor Λ Y K) :
+    (_hK : DerivedCategory.boundedConstructibleFiniteTor Λ Y K) :
     Nonempty ((rightDerivedUpperShriek (ModuleCat.{u + 1} Λ)
           (𝔸(ULift.{u} (Fin 1); Y) ↘ Y)).obj K ≅
       (twistShift Λ 𝔸(ULift.{u} (Fin 1); Y) 1).obj
-        ((L(((𝔸(ULift.{u} (Fin 1); Y) ↘ Y))^*[ModuleCat.{u + 1} Λ])).obj K)) :=
-  sorry
+        ((L(((𝔸(ULift.{u} (Fin 1); Y) ↘ Y))^*[ModuleCat.{u + 1} Λ])).obj K)) := by
+  have : IsLocallyNoetherian Y := LocallyOfFiniteType.isLocallyNoetherian aY
+  obtain ⟨adj⟩ := nonempty_adjunction_rightDerivedLowerShriek_affineSpace Λ 1 Y
+  exact ⟨((rightDerivedUpperShriekAdjunction _ _).rightAdjointUniq adj).app K ≪≫
+    eqToIso (by simp)⟩
 
 omit [HasTateTwist Λ] in
 /-- Blueprint `sk-prop-an`, Step 6: the projection of `𝔸^{d+1}_Y` is that of `𝔸¹_{Y'}`
