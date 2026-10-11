@@ -21,9 +21,61 @@
  "stmt_deps": [
   "def-pc-derived-category"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Choose a K-flat $A$-complex $P^\\bullet\\to M$ and a K-flat $R$-complex $F^\\bullet\\to R'$. By [lem-pc-balanced-derived-tensor-model], $C=\\operatorname{Tot}(P^\\bullet\\otimes_R F^\\bullet)$ represents $M\\otimes_R^{\\mathbf L}R'$ in $D(A)$, with an $A'$-action on its cohomology, not a strict $A'$-complex structure. Regard a ring $\\Lambda$ as a ringed one-point space; for the morphisms of ringed one-point spaces given by $A\\to A_q$ and $R\\to R_p$ the pullback is termwise $-\\otimes_A A_q$, resp. $-\\otimes_R R_p$, so [lem-pc-kflat-pullback-preservation] makes $P_q$ and $F_p$ K-flat over $A_q$ and $R_p$, and exact localization preserves the quasi-isomorphisms $P_q\\to M_q$, $F_p\\to R'_p$ by [lem-weil-pbc-localization-module-exact]. Termwise, $(P\\otimes_R F)_q=P_q\\otimes_R F$ (associativity of $A_q\\otimes_A-$), and since $R\\setminus p$ acts bijectively on the $R_p$-module $P_q$, the tensor-localization formula [lem-weil-pbc-localization-tensor-product] (with $S=R\\setminus p$, $\\ell_{P_q}=\\mathrm{id}$, $\\ell_F:F\\to F_p$) identifies $P_q\\otimes_R F$ with $P_q\\otimes_{R_p}F_p$ by pure tensors; so $C_q\\cong\\operatorname{Tot}(P_q\\otimes_{R_p}F_p)$, which represents $M_q\\otimes_{R_p}^{\\mathbf L}R'_p$ by the same balanced-model lemma (over $R_p$, with $A_q$ and $R'_p$).",
+   "uses": [
+    "lem-pc-balanced-derived-tensor-model",
+    "lem-pc-kflat-pullback-preservation",
+    "lem-weil-pbc-localization-module-exact",
+    "lem-weil-pbc-localization-tensor-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 0DJ8, affine proof, choice of K-flat model and localization of the derived tensor complex"
+   }
+  },
+  {
+   "text": "The pure-tensor identification of Step 1 commutes with differentials and is natural in the second factor (a chain map $F\\to F'$ of $R$-complexes and its localization). By [lem-weil-pbc-localization-module-exact], $H^i(C)\\otimes_A A_q=H^i(C_q)$. This is an identity of $A_q\\otimes_{R_p}R'_p$-modules: the $A$-action is multiplication on $P$, and the action of $b\\in R'$ is the endomorphism of $R'$ in $D(R)$ given by multiplication by $b$, as specified by [lem-pc-derived-tensor-action-naturality]; a roof $F\\leftarrow\\tilde F\\to F$ of K-flat $R$-complexes representing it localizes (exactly, by the same two cited lemmas) to a roof representing multiplication by $b/1$ on $R'_p$ in $D(R_p)$, so the actions correspond. Applying the same identification to $F\\to R'$ shows that the comparison map of [lem-pc-derived-tensor-action-naturality], $P\\otimes_R F\\to P\\otimes_R R'$, localizes at $q$ to the comparison map $P_q\\otimes_{R_p}F_p\\to P_q\\otimes_{R_p}R'_p$ for $R_p\\to A_q$, $R_p\\to R'_p$; naturality in $M$ holds because every map is induced by a chain map $P\\to P'$ of K-flat models.",
+   "uses": [
+    "lem-weil-pbc-localization-tensor-product",
+    "lem-weil-pbc-localization-module-exact",
+    "lem-pc-derived-tensor-action-naturality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 0DJ8, affine proof, displayed localization identity and compatibility with the comparison map"
+   }
+  },
+  {
+   "text": "The map $R'_p\\to R'_{p'}$ is a flat localization. Apply [lem-pc-derived-tensor-flat-second-localization] with base ring $R_p$, first algebra $A_q$, second algebra $R'_p$, and its localization $R'_{p'}$: it identifies $H^i(M_q\\otimes_{R_p}^{\\mathbf L}R'_p)\\otimes_{R'_p}R'_{p'}$ with $H^i(M_q\\otimes_{R_p}^{\\mathbf L}R'_{p'})$ as $A_q\\otimes_{R_p}R'_{p'}$-modules, naturally in $M$ and compatibly with the comparison maps. Since $A'_{q'}$ is a localization of $A_q\\otimes_{R_p}R'_{p'}$, which is a localization of $A'$ (the elements of $A\\setminus q$ and $R'\\setminus p'$ map outside $q'$), transitivity of module localization [lem-weil-pbc-localization-module-exact] gives $H^i(M\\otimes_R^{\\mathbf L}R')\\otimes_{A'}A'_{q'}=(H^i(C)\\otimes_A A_q\\otimes_{R'}R'_{p'})\\otimes_{A_q\\otimes_{R_p}R'_{p'}}A'_{q'}$, and Step 2 with the isomorphism above turns this into the displayed isomorphism. Compatibility with morphisms of $M$ and with the comparison map to $M\\otimes_A^{\\mathbf L}A'$ follows from the naturality and comparison-map clauses of Step 2 and of [lem-pc-derived-tensor-flat-second-localization], localized at $q'$.",
+   "uses": [
+    "lem-weil-pbc-localization-module-exact",
+    "lem-pc-derived-tensor-flat-second-localization",
+    "lem-pc-derived-tensor-action-naturality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 0DJ8, affine proof, localization of cohomology and compatibility"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-balanced-derived-tensor-model",
+  "lem-pc-kflat-pullback-preservation",
+  "lem-weil-pbc-localization-module-exact",
+  "lem-weil-pbc-localization-tensor-product",
+  "lem-pc-derived-tensor-action-naturality",
+  "lem-pc-derived-tensor-flat-second-localization"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 0DJ8, affine proof, displayed localization identities"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -55,12 +107,31 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-pc-affine-derived-base-change-comparison-map",
   "by": "worker",
   "date": "2026-10-11"
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-semicon"
+ "unit": "sk-thm-picard-semicon",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-pc-derived-tensor-localization-cohomology",
+  "worker": "stage1",
+  "summary": "Repaired the invalid model from the returned delivery. The proof now uses a K-flat R-resolution F of R' and the balanced model P tensor_R F for M tensor_R^L R', localizes both K-flat factors, and then passes to cohomology by exact localization. Three statement-only children record the balanced model, localization preservation of K-flatness, and chain-level scalar-action/naturality compatibility.",
+  "blueprint": "Realizes the parent affine proof's displayed localization identity and its compatibility clause.",
+  "tool_uses": []
+ },
+ "tool_uses": [
+  "lem-pc-kflat-pullback-preservation"
+ ],
+ "reviewed": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-dtl0203",
+  "group": "G1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-dtl0203 (reviewer sub-agent of L); spot-checked: Return points of R-dtl0141: 1 repaired (K-flat R-resolution F of R', balanced model P tensor_R F, both factors localized; checked R=k[t], A=R'=R/t); 2 repaired via new node lem-pc-derived-tensor-action-naturality (A-action from P, R'-action through End_{D(R)}(R'), matching the parent 780f1520a clause); 3 repaired by citing that node plus chain-level localization of the comparison map. Statement identical to the returned and base versions. E: balanced tensor true (F K-flat over R, Stacks 064K/06Y6). FIX more, RETURN less: (b) lem-pc-localization-preserves-kflat is the one-point-ringed-space case of lem-pc-kflat-pullback-preservation, dropped and Step 1 cites the existing node (declared tool_use: generic K-flatness under pullback, C7); C4 lem-pc-derived-tensor-flat-second-localization did not state compatibility with the comparison maps used in Step 3, clause added (true by naturality of the comparison map in the second algebra and flatness of A tensor C over A tensor B); action-naturality's undefined 'resulting isomorphisms' made precise (model isomorphisms, comparison map represented by P tensor F -> P tensor R'); Steps 1-3 now spell out (P tensor_R F)_q = P_q tensor_{R_p} F_p via the cited tensor-localization lemma, localization of the R'-action roofs and of the comparison map, and the localization chain A' -> A_q tensor R'_p' -> A'_q'; B3 source document '064K-06Y6' corrected to more-algebra.tex. Second reading missed the duplicate and the comparison-map gap in the flat-localization node.; 4 file(s) fixed by the reviewer"
+ }
 }
