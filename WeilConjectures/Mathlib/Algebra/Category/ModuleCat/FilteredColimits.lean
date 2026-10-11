@@ -11,6 +11,8 @@ public import Mathlib.Algebra.Category.ModuleCat.FilteredColimits
 public import Mathlib.CategoryTheory.Presentable.Adjunction
 public import Mathlib.CategoryTheory.Presentable.Limits
 public import Mathlib.CategoryTheory.Presentable.Type
+public import Mathlib.CategoryTheory.Limits.ConcreteCategory.Basic
+public import Mathlib.CategoryTheory.Limits.Shapes.FiniteLimits
 public import WeilConjectures.Mathlib.SetTheory.Cardinal.HasCardinalLT
 
 /-!
@@ -31,6 +33,8 @@ filtered colimits, so the free module functor, its left adjoint, sends `κ`-pres
   `κ`-presentable.
 - `ModuleCat.isCardinalPresentable_of_hasCardinalLT`: a module of cardinality `< κ` over a ring
   of cardinality `< κ` is `κ`-presentable.
+- `ModuleCat.exists_lift_of_isColimit`: a finite family of elements of a filtered colimit
+  satisfying finitely many linear relations comes from a stage where the relations hold.
 -/
 
 @[expose] public section
@@ -84,5 +88,47 @@ lemma isCardinalPresentable_of_hasCardinalLT {M : ModuleCat.{u} R}
         ((mono_iff_injective (kernel.ι p)).1 inferInstance))
   exact isCardinalPresentable_of_isColimit_cokernelCofork hM hK
     (isCokernelEpiComp (Abelian.epiIsCokernelOfKernel _ (kernelIsKernel p)) q rfl)
+
+section FiniteSystems
+
+universe w r v
+
+variable {J : Type w} [Category.{r} J] [IsFiltered J]
+  {D : J ⥤ ModuleCat.{v} R} [PreservesColimit D (forget (ModuleCat.{v} R))]
+
+/-- **Finite linear systems in filtered colimits of modules.** If `y : Fin s → c.pt` is a finite
+family of elements of a filtered colimit satisfying the linear relations `∑ⱼ eₗⱼ yⱼ = 0`, then
+there is a stage `i` and a lift `y' : Fin s → D.obj i` of `y` satisfying the same relations. -/
+theorem exists_lift_of_isColimit {c : Cocone D} (hc : IsColimit c) {s q : ℕ} (y : Fin s → c.pt)
+    (e : Fin q → Fin s → R) (he : ∀ l, ∑ j, e l j • y j = 0) :
+    ∃ (i : J) (y' : Fin s → D.obj i), (∀ j, c.ι.app i (y' j) = y j) ∧
+      ∀ l, ∑ j, e l j • y' j = 0 := by
+  -- lift every `yⱼ` to some stage, and move all lifts to a common stage `k₀`
+  choose i x hx using fun j ↦ Concrete.isColimit_exists_rep D hc (y j)
+  let c₀ := IsFiltered.cocone (Discrete.functor i)
+  let y₀ : Fin s → D.obj c₀.pt := fun j ↦ D.map (c₀.ι.app ⟨j⟩) (x j)
+  have hy₀ (j : Fin s) : c.ι.app c₀.pt (y₀ j) = y j := by
+    rw [← hx j]
+    exact ConcreteCategory.congr_hom (c.w (c₀.ι.app ⟨j⟩)) (x j)
+  -- each relation becomes true after some map out of `k₀`
+  have hrel (l : Fin q) : ∃ (k : J) (f : c₀.pt ⟶ k), D.map f (∑ j, e l j • y₀ j) = 0 := by
+    have h : c.ι.app c₀.pt (∑ j, e l j • y₀ j) = c.ι.app c₀.pt 0 := by
+      simp only [map_sum, map_smul, hy₀, he, map_zero]
+    obtain ⟨k, f, g, hfg⟩ := Concrete.isColimit_exists_of_rep_eq D hc _ _ h
+    exact ⟨k, f, by rw [hfg, map_zero]⟩
+  choose k f hf using hrel
+  -- a common target of all these maps, through which they agree
+  let c₁ := IsFiltered.cocone (WidePushoutShape.wideSpan c₀.pt k f)
+  refine ⟨c₁.pt, fun j ↦ D.map (c₁.ι.app none) (y₀ j), fun j ↦ ?_, fun l ↦ ?_⟩
+  · rw [← hy₀ j]
+    exact ConcreteCategory.congr_hom (c.w (c₁.ι.app none)) (y₀ j)
+  · have hw : f l ≫ c₁.ι.app (some l) = c₁.ι.app none := c₁.w (WidePushoutShape.Hom.init l)
+    have : ∑ j, e l j • D.map (c₁.ι.app none) (y₀ j) =
+        D.map (c₁.ι.app none) (∑ j, e l j • y₀ j) := by
+      simp only [map_sum, map_smul]
+    rw [this, ← hw, Functor.map_comp, ConcreteCategory.comp_apply]
+    exact (congrArg (D.map (c₁.ι.app (some l))) (hf l)).trans (map_zero _)
+
+end FiniteSystems
 
 end ModuleCat
