@@ -114,19 +114,6 @@ theorem isNonexceptional_iff_isFourierNonexceptional (hD : D.sheaf.IsIrreducible
     D.sheaf.IsNonexceptional ψ D.j ↔ D.IsFourierNonexceptional ψ :=
   ⟨D.isFourierNonexceptional_of_isNonexceptional ψ hD, fun h a ha ↦ h.2 a ⟨hirr, ha⟩⟩
 
--- TODO(adic): needs the geometric fundamental representation `ρ : W(U₀) → GL(V)`
--- (`def-wf-fundamental-representation`); the group theory is
--- `Representation.IsIrreducible.eq_one_of_isConstituent_trivial`.
-/-- If the trivial rank-one sheaf `ℒ_{ψ(0 · x)}` is a geometric constituent of an irreducible
-lisse sheaf `M`, then `M` is geometrically constant. The Weil group `W` acts irreducibly on
-`V = M_η̄`, the geometric fundamental group `G` is normal in `W`, and the trivial representation
-is a constituent of `V|_G`; by `Representation.IsIrreducible.eq_one_of_isConstituent_trivial`,
-`G` acts trivially on `V`. (blueprint: `lem-a1-unramified-nonexceptional`, case `a = 0`) -/
-theorem isGeometricallyConstant_of_hasLinearArtinSchreierConstituent_zero
-    (hD : D.sheaf.IsIrreducibleLisse) (h : D.sheaf.HasLinearArtinSchreierConstituent ψ 0 D.j) :
-    D.IsGeometricallyConstant := by
-  sorry
-
 -- TODO(adic): needs the geometric fundamental representation and the inertia group at `∞`;
 -- the local input is `AlgebraicGeometry.not_isUnramifiedAtInfinity_artinSchreier`.
 /-- A lisse sheaf unramified at infinity has no geometric constituent `ℒ_{ψ(a x)}|_U` with
