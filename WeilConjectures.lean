@@ -19,6 +19,7 @@ public import WeilConjectures.Algebra.Homology.HomotopyCategory.DerivabilityStru
 public import WeilConjectures.Algebra.Homology.HomotopyCategory.InternalHom
 public import WeilConjectures.Algebra.Homology.HomotopyCategory.MapMonoidal
 public import WeilConjectures.Algebra.Homology.HomotopyCategory.OplaxMonoidal
+public import WeilConjectures.Algebra.Homology.HomotopyCategory.OplaxMonoidalComp
 public import WeilConjectures.Algebra.Homology.HomotopyCategory.Products
 public import WeilConjectures.Algebra.Homology.InternalHom
 public import WeilConjectures.Algebra.Homology.ModuleCat.Subcomplex
@@ -461,6 +462,7 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.Complete.TensorQuot
 public import WeilConjectures.CategoryTheory.DerivedCategory.Constructible
 public import WeilConjectures.CategoryTheory.DerivedCategory.FlatModel
 public import WeilConjectures.CategoryTheory.DerivedCategory.HasMonoidalDerivedCategory
+public import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.Counit
 public import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.Defs
 public import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.MapDerivedCategory
 public import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.Closed
@@ -541,6 +543,8 @@ public import WeilConjectures.CategoryTheory.Monoidal.Mod.MapIhom
 public import WeilConjectures.CategoryTheory.Monoidal.Mod.Tensor
 public import WeilConjectures.CategoryTheory.Monoidal.Mod.TensorRegular
 public import WeilConjectures.CategoryTheory.Monoidal.OplaxOfLaxSquare
+public import WeilConjectures.CategoryTheory.Monoidal.OplaxOfLaxSquareComp
+public import WeilConjectures.CategoryTheory.Monoidal.ProjectionMap
 public import WeilConjectures.CategoryTheory.Monoidal.Rigid.Flat
 public import WeilConjectures.CategoryTheory.Monoidal.ShiftProduct
 public import WeilConjectures.CategoryTheory.MorphismProperty.IndSpreads
@@ -1479,6 +1483,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStarCoherence
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperShriek
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperShriekIso
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal
+public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal.Comp
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal.Comparison
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal.Derived
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal.KFlat
@@ -1540,6 +1545,7 @@ public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.GeometricFrobeniu
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.GlobalSections
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.KFlat
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Monoidal
+public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.MonoidalComp
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Stalk
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.StalkMonoidal
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Surjective
