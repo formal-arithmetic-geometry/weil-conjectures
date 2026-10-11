@@ -4284,3 +4284,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 10:40 L: merged deliver/G1/lem-weil-pbc-flat-unramified-formally-etale (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.FlatUnramifiedFormallyEtale AlgebraicGeometry.flat_unramified_formally_etale)
 - 10:40 L: merged deliver/C1/lem-weil-pbc-flat-local-criterion-nonzerodivisor (stage 2; reviewer FIX; first push; Sheaf.Paper.FlatLocalCriterionNonzerodivisor RingTheory.flat_of_localCriterion_nonzerodivisor)
 - 10:40 L: merged deliver/G1/lem-weil-pbc-fpqc-descend-finite (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.IsFiniteOfFpqcCover AlgebraicGeometry.isFinite_of_fpqc_cover)
+- 10:41 L: merged deliver/C1/lem-weil-pbc-fs-adic-lift-into-complete (stage 2; reviewer PASS; first push; Sheaf.RingTheory.FormallySmoothAdicLiftIntoComplete Algebra.FormallySmoothAdic.exists_lift_into_complete)
