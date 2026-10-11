@@ -4669,3 +4669,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 12:46 L: merged deliver/E1/lem-weil-pbc-popescu-resolve-char-p (stage 2; reviewer FIX; first push; Sheaf.RingTheory.PopescuResolveCharP Algebra.canBePopescuResolved_of_char_pos)
 - 12:54 L: merged deliver/F1/lem-weil-pbc-popescu-lift-twice (stage 2; reviewer FIX; first push; Sheaf.RingTheory.PopescuLiftTwice Algebra.exists_smooth_factorization_killing_ideal)
 - 12:54 L: merged deliver/M1/lem-weil-pbc-module-pullback-affine-sections (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.ModulePullbackAffineSections AlgebraicGeometry.Scheme.Modules.exists_tensorPullback_affine_sections)
+- 12:54 L: merged deliver/G1/lem-weil-pbc-popescu-resolve-separable (stage 2; reviewer PASS; first push; Sheaf.RingTheory.PopescuResolveSeparable Algebra.canBePopescuResolved_of_regularLocalRing_separable)

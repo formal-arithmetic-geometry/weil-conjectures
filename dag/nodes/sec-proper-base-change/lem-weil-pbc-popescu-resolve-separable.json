@@ -297,5 +297,23 @@
   "by": "L",
   "result": "pass",
   "note": "Reviewed by the lead (opus-relaunch6). Twelve steps along Stacks 07FE with three new unsplit nodes (07FD find-sequence, Algebra 07DY flat over regular, 00OP regular local ring at the origin of a polynomial ring) and the nodes of the 07FJ split (07F8, 07FA, 07CE, 07EZ(e), 00NQ, 00FP, 00LF) reused; 07CM and 07C3 cited through existing nodes; tool use of 07BV recorded. Gaps in Stacks 07FE repaired by the worker and recorded in the steps: 07FD must be applied with I = H_{A/k}Lambda, the case d = 0, the bridge from R = k[x] to k (H_{D/R} subset H_{D/k}), hypothesis (1) of 07FA checked; typos H_{A/R} for H_{A/k}, pi_ij for lambda_ij, 'there exists an n' in 07FD. Brief errors: 07FC, 07F0 and 07CA are not used directly."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.PopescuResolveSeparable",
+  "declaration": "Algebra.canBePopescuResolved_of_regularLocalRing_separable",
+  "file": "lean/Sheaf/RingTheory/PopescuResolveSeparable.lean",
+  "statement": "theorem canBePopescuResolved_of_regularLocalRing_separable {k : Type u} {A : Type v} {Λ : Type w} [Field k] [CommRing A] [CommRing Λ] [Algebra k A] [Algebra k Λ] [FinitePresentation k A] [IsNoetherianRing Λ] (α : A →ₐ[k] Λ) (q : PrimeSpectrum Λ) (hminimal : q.asIdeal ∈ (popescuIdeal α).minimalPrimes) [IsRegularLocalRing (Localization.AtPrime q.asIdeal)] (hsep : IsSeparableExtension k q.asIdeal.ResidueField) : CanBePopescuResolved α q",
+  "branch": "sheaf-dag",
+  "by": "G1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-prs1253",
+  "group": "G1",
+  "result": "pass",
+  "note": "k field, A fp k-alg, Λ k-alg, α k-alg map, q PrimeSpectrum; (1) IsNoetherianRing Λ; (2) q ∈ (popescuIdeal α).minimalPrimes; (3) IsRegularLocalRing Λ_q; (4) recorded Algebra.IsSeparableExtension k κ(q) with IsScalarTower k Λ κ(q) and algebraMap compatibility checked by rfl; conclusion CanBePopescuResolved α q; same encoding as landed char-p sibling f6ba5389c"
  }
 }
