@@ -1,11 +1,11 @@
 # Work queue
 
-727 items; claim with `tools/claim.py next <group> [--stage N]`.
+722 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (727)
+## Stage 2: nodes to state (722)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -21,19 +21,16 @@
 | `lem-sc-product-tangent-space-direct-sum` | 1 | state |
 | `lem-sp-truncation-couple-exact` | 1 | state |
 | `lem-weil-derived-limit-roos-complex` | 1 | state |
-| `lem-weil-pbc-complex-spectral-sequence-comparison` | 1 | state |
 | `lem-weil-pbc-cotangent-complex-symmetric-algebra` | 1 | state |
 | `lem-weil-pbc-derived-square-iso-pasting` | 1 | state |
 | `lem-weil-pbc-descend-qc-open-fg-subalgebra` | 1 | state |
 | `lem-weil-pbc-directed-colimit-base-change-elementwise` | 1 | state |
-| `lem-weil-pbc-double-complex-cokernel-homology-iso` | 1 | state |
 | `lem-weil-pbc-etale-fibre-specialization-bound` | 1 | state |
 | `lem-weil-pbc-etale-graph-section-extension-map` | 1 | state |
 | `lem-weil-pbc-etale-inverse-image-algebraic-structures` | 1 | state |
 | `lem-weil-pbc-etale-local-ring-triples` | 1 | state |
 | `lem-weil-pbc-etale-qcqs-cofinal-finite-coverings` | 1 | state |
 | `lem-weil-pbc-etale-qcqs-sections-filtered-colimit` | 1 | state |
-| `lem-weil-pbc-etale-residue-polynomial-lift` | 1 | state |
 | `lem-weil-pbc-etale-restriction-pullback-unit` | 1 | state |
 | `lem-weil-pbc-etale-retraction-finite-product-local` | 1 | state |
 | `lem-weil-pbc-etale-retraction-finite-type-splitting` | 1 | state |
@@ -42,8 +39,6 @@
 | `lem-weil-pbc-etale-separated-stratified-finite` | 1 | state |
 | `lem-weil-pbc-etale-sheaf-clopen-product` | 1 | state |
 | `lem-weil-pbc-etale-smooth-zero-dimensional-fibres` | 1 | state |
-| `lem-weil-pbc-etale-splits-off-isolated-points-technical` | 1 | state |
-| `lem-weil-pbc-etale-splits-off-quasi-finite-part` | 1 | state |
 | `lem-weil-pbc-etale-stratification-local-gluing` | 1 | state |
 | `lem-weil-pbc-etale-stratified-finite` | 1 | state |
 | `lem-weil-pbc-etale-subsheaf-final-open` | 1 | state |
