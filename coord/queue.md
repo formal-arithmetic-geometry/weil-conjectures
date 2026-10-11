@@ -1,11 +1,11 @@
 # Work queue
 
-530 items; claim with `tools/claim.py next <group> [--stage N]`.
+525 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (530)
+## Stage 2: nodes to state (525)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -38,24 +38,19 @@
 | `lem-weil-pbc-h1-injective-differentials-injective-char-p` | 1 | state |
 | `lem-weil-pbc-henselian-etale-retraction` | 1 | state |
 | `lem-weil-pbc-henselian-factorization-criterion` | 1 | state |
-| `lem-weil-pbc-henselian-pair-approximation` | 1 | state |
 | `lem-weil-pbc-higher-direct-image-sheafified-presheaf` | 1 | state |
 | `lem-weil-pbc-horseshoe-morphism-lift-exact-source` | 1 | state |
 | `lem-weil-pbc-ideal-module-product-stalk` | 1 | state |
 | `lem-weil-pbc-immersion-affine-constructible-pieces` | 1 | state |
-| `lem-weil-pbc-immersion-fibre-degree-one` | 1 | state |
 | `lem-weil-pbc-improve-presentation` | 1 | state |
 | `lem-weil-pbc-improve-presentation-smooth-conormal-free` | 1 | state |
-| `lem-weil-pbc-injective-module-abelian-acyclic` | 1 | state |
 | `lem-weil-pbc-injective-module-direct-image-acyclic` | 1 | state |
-| `lem-weil-pbc-injective-resolution-ses` | 1 | state |
 | `lem-weil-pbc-injective-resolution-ses-complexes` | 1 | state |
 | `lem-weil-pbc-injective-sheaf-cech-acyclic` | 1 | state |
 | `lem-weil-pbc-integral-closure-finite-fibre-choose-g` | 1 | state |
 | `lem-weil-pbc-integral-closure-finite-fibre-image-clopen` | 1 | state |
 | `lem-weil-pbc-integral-closure-zariski-main-away` | 1 | state |
 | `lem-weil-pbc-integral-extension-dimension` | 1 | state |
-| `lem-weil-pbc-integral-idempotent-annihilating-polynomial` | 1 | state |
 | `lem-weil-pbc-integral-over-henselian-pair` | 1 | state |
 | `lem-weil-pbc-intersection-subfields-differentials` | 1 | state |
 | `lem-weil-pbc-intersection-subfields-subspace` | 1 | state |
