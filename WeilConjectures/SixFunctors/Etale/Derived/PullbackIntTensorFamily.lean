@@ -13,7 +13,8 @@ public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal.Compos
 /-!
 # Coherent integer families pulled back from a base scheme
 
-Let `P` be a coherent integer family in `D(S_ét)` (`CategoryTheory.MonoidalCategory.IntTensorFamily`):
+Let `P` be a coherent integer family in `D(S_ét)`
+(`CategoryTheory.MonoidalCategory.IntTensorFamily`):
 objects `P m`, `m ∈ ℤ`, with identifications `P 0 ≅ Λ_S` and `P a ⊗ᴸ P b ≅ P (a + b)` satisfying
 the unit and associativity laws. Since the derived pullback `Lπ^*` along `π : X ⟶ S` is monoidal,
 the pullbacks `Lπ^* P m` form a coherent family on `X`
@@ -170,14 +171,14 @@ lemma map_addIso_pullbackIntTensorFamilyIso {X Y : Scheme.{u}} (f : X ⟶ Y) (π
             (pullbackIntTensorFamilyIso A P f πX πY h m').hom ≫
             ((pullbackIntTensorFamily A P πX).addIso m m').hom := by
   let := leftDerivedUpperStarOplaxMonoidal A πX
-  letI := leftDerivedUpperStarOplaxMonoidal A πY
-  letI := leftDerivedUpperStarOplaxMonoidal A f
-  haveI := isIso_leftDerivedUpperStarOplaxMonoidal_η A πX
-  haveI := isIso_leftDerivedUpperStarOplaxMonoidal_δ A πX
-  haveI := isIso_leftDerivedUpperStarOplaxMonoidal_η A πY
-  haveI := isIso_leftDerivedUpperStarOplaxMonoidal_δ A πY
-  haveI := isIso_leftDerivedUpperStarOplaxMonoidal_η A f
-  haveI := isIso_leftDerivedUpperStarOplaxMonoidal_δ A f
+  let := leftDerivedUpperStarOplaxMonoidal A πY
+  let := leftDerivedUpperStarOplaxMonoidal A f
+  have := isIso_leftDerivedUpperStarOplaxMonoidal_η A πX
+  have := isIso_leftDerivedUpperStarOplaxMonoidal_δ A πX
+  have := isIso_leftDerivedUpperStarOplaxMonoidal_η A πY
+  have := isIso_leftDerivedUpperStarOplaxMonoidal_δ A πY
+  have := isIso_leftDerivedUpperStarOplaxMonoidal_η A f
+  have := isIso_leftDerivedUpperStarOplaxMonoidal_δ A f
   let c := leftDerivedUpperStarComp A f πY πX h
   have hc : ∀ K M, δ L((πX)^*[A]) K M ≫ (c.hom.app K ⊗ₘ c.hom.app M) =
       c.hom.app (K ⊗ M) ≫ L((f)^*[A]).map (δ L((πY)^*[A]) K M) ≫ δ L((f)^*[A]) _ _ := by
@@ -188,7 +189,7 @@ lemma map_addIso_pullbackIntTensorFamilyIso {X Y : Scheme.{u}} (f : X ⟶ Y) (π
     rw [e]
     simp only [c, leftDerivedUpperStarTensorComparisonComp, Category.assoc,
       tensorHom_comp_tensorHom, Iso.inv_hom_id_app, Functor.comp_obj, tensorHom_id,
-      id_whiskerRight, Category.comp_id]
+      id_whiskerRight]
     erw [Category.comp_id]
     rfl
   have key := IntTensorFamily.map_addIso_comp P L((πY)^*[A]) L((f)^*[A]) L((πX)^*[A]) c hc m m'

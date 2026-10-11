@@ -80,6 +80,8 @@ lemma leftDerivedUpperStarComp_hom_app_comp_counit {T S R : Scheme.{u}} (g₁ : 
     Functor.leftDerivedFunctorCompIso_hom_app_comp_counit,
     Functor.leftDerivedFunctorNatIso_hom_app_comp_counit_assoc, Functor.map_comp]
 
+omit [MonoidalCategory A] [MonoidalPreadditive A] [SymmetricCategory A] [MonoidalClosed A]
+  [Abelian.HasFunctorialFlatResolution A] in
 /-- The associativity law for `AlgebraicGeometry.Etale.upperStarComp` in the form of an
 equality of natural transformations, with all three composites of the morphisms named. -/
 lemma upperStarComp_assoc' {X Y Z W : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) (h : Z ⟶ W)

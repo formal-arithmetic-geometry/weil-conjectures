@@ -81,6 +81,7 @@ variable [NeZero (ringChar Λ)]
 instance etale_tateCover : Etale (tateCover Λ) :=
   etale_primitiveRootsCover _ _ (NeZero.ne _) (isUnit_ringChar_invertibleExponentRing Λ)
 
+omit [NeZero (ringChar Λ)] in
 lemma surjective_tateCover : Function.Surjective (tateCover Λ).base :=
   surjective_primitiveRootsCover _ _ (isUnit_ringChar_invertibleExponentRing Λ)
 
@@ -256,9 +257,11 @@ noncomputable def tateTwistObjectIsoSingleFunctor (m : ℤ) :
       (toInvertibleExponentBase (Λ := Λ) X)).app _
 
 /-- The étale cover `X ×_S V ⟶ X` adjoining a primitive `n`-th root of unity. -/
-noncomputable abbrev tateCoverOf : pullback (toInvertibleExponentBase (Λ := Λ) X) (tateCover Λ) ⟶ X :=
+noncomputable abbrev tateCoverOf :
+    pullback (toInvertibleExponentBase (Λ := Λ) X) (tateCover Λ) ⟶ X :=
   pullback.fst _ _
 
+omit [NeZero (ringChar Λ)] in
 lemma surjective_tateCoverOf : Function.Surjective (tateCoverOf Λ X).base := by
   intro x
   obtain ⟨v, hv⟩ := surjective_tateCover Λ (toInvertibleExponentBase (Λ := Λ) X x)
@@ -305,7 +308,8 @@ lemma isFiniteLocallyConstantSheaf_tateTwistSheaf (m : ℤ) :
         (tateTwistSheaf Λ X m)) := fun _ ↦
       have : IsLocallyConstantSheaf (𝟙_ (Sheaf (pullback (toInvertibleExponentBase (Λ := Λ) X)
           (tateCover Λ)).smallEtaleTopology (ModuleCat.{u + 1} Λ))) :=
-        (isFiniteLocallyConstantSheaf_constantSheaf (𝟙_ (ModuleCat.{u + 1} Λ))).toIsLocallyConstantSheaf
+        (isFiniteLocallyConstantSheaf_constantSheaf
+          (𝟙_ (ModuleCat.{u + 1} Λ))).toIsLocallyConstantSheaf
       IsLocallyConstantSheaf.of_iso (upperStarTateCoverOfTateTwistSheafIso Λ X m).symm
     exact IsLocallyConstantSheaf.of_cover 𝒰 _
   toIsFiniteSheaf := ⟨fun _ _ _ s ↦ ((ModuleCat.isFinitelyGenerated_iff _).2

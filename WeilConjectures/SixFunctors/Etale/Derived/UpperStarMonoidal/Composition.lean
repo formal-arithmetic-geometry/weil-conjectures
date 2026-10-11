@@ -153,6 +153,7 @@ lemma leftDerivedUpperStarTensorComparison_naturality {W V : Scheme.{u}} (h : W 
 variable [NatTrans.IsMonoidal (Etale.upperStarComp A f g fg hfg).hom]
 
 set_option maxHeartbeats 1600000 in
+-- the comparison of the two derived bifunctor transformations unfolds the derived tensor product
 /-- The tensor comparison of `L(fg)^*` is the one obtained through the composition isomorphism
 `L(fg)^* ≅ Lg^* ⋙ Lf^*` (`AlgebraicGeometry.Etale.leftDerivedUpperStarTensorComparisonComp`).
 Both are natural transformations into the left derived bifunctor
@@ -166,7 +167,8 @@ theorem leftDerivedUpperStarTensorComparison_eq_comp :
     (HomotopyCategory.quasiIso _ (.up ℤ)) _ _ _ ?_
   ext K M
   dsimp only [NatTrans.comp_app, Functor.whiskeringLeft₂_obj_obj_map_app_app]
-  rw [derivedTensorLeftDerivedUpperStarCounit_app_app, leftDerivedUpperStarTensorComparison_app_app_comp]
+  rw [derivedTensorLeftDerivedUpperStarCounit_app_app,
+    leftDerivedUpperStarTensorComparison_app_app_comp]
   let X := Functor.mapHomotopyCategoryCompNatTrans (g)^*[A] (f)^*[A] (fg)^*[A]
     (Etale.upperStarComp A f g fg hfg).hom
   have hX (P : HomotopyCategory (Sheaf Z.smallEtaleTopology A) (.up ℤ)) :
@@ -198,7 +200,8 @@ theorem leftDerivedUpperStarTensorComparison_eq_comp :
     simp only [Functor.map_comp]
   have hn : (L((f)^*[A])).map (Qh.map (δ ((g)^*[A].mapHomotopyCategory (.up ℤ)) K M)) ≫
       (f)^*[A].leftDerivedFunctorCounit.app
-        (((g)^*[A].mapHomotopyCategory (.up ℤ)).obj K ⊗ ((g)^*[A].mapHomotopyCategory (.up ℤ)).obj M) =
+        (((g)^*[A].mapHomotopyCategory (.up ℤ)).obj K ⊗
+          ((g)^*[A].mapHomotopyCategory (.up ℤ)).obj M) =
       (f)^*[A].leftDerivedFunctorCounit.app (((g)^*[A].mapHomotopyCategory (.up ℤ)).obj (K ⊗ M)) ≫
         Qh.map (((f)^*[A].mapHomotopyCategory (.up ℤ)).map
           (δ ((g)^*[A].mapHomotopyCategory (.up ℤ)) K M)) :=
@@ -239,6 +242,7 @@ lemma leftDerivedUpperStar_η_eq {W V : Scheme.{u}} (h : W ⟶ V) [(h)^*[A].Pres
   rfl
 
 set_option maxHeartbeats 800000 in
+-- the kernel unfolds the counits of three left derived functors
 /-- The composition isomorphism `L(fg)^* ≅ Lg^* ⋙ Lf^*` is compatible with the counits
 `η : Lh^* Λ ⟶ Λ` of the oplax monoidal derived pullbacks. -/
 theorem leftDerivedUpperStarComp_hom_app_unit :
@@ -246,10 +250,11 @@ theorem leftDerivedUpperStarComp_hom_app_unit :
     letI := leftDerivedUpperStarOplaxMonoidal A g
     letI := leftDerivedUpperStarOplaxMonoidal A fg
     (leftDerivedUpperStarComp A f g fg hfg).hom.app (𝟙_ _) ≫
-        (L((f)^*[A])).map (Functor.OplaxMonoidal.η (L((g)^*[A]))) ≫ Functor.OplaxMonoidal.η (L((f)^*[A])) =
+        (L((f)^*[A])).map (Functor.OplaxMonoidal.η (L((g)^*[A]))) ≫
+          Functor.OplaxMonoidal.η (L((f)^*[A])) =
       Functor.OplaxMonoidal.η (L((fg)^*[A])) := by
   rw [leftDerivedUpperStar_η_eq, leftDerivedUpperStar_η_eq, leftDerivedUpperStar_η_eq]
-  haveI := DerivedCategory.isIso_ε_Qh (Sheaf Y.smallEtaleTopology A)
+  have := DerivedCategory.isIso_ε_Qh (Sheaf Y.smallEtaleTopology A)
   have e₁ : (L((f)^*[A])).map ((L((g)^*[A])).map (Functor.LaxMonoidal.ε Qh) ≫
         (g)^*[A].leftDerivedFunctorCounit.app (𝟙_ _) ≫
           Qh.map (Functor.OplaxMonoidal.η ((g)^*[A].mapHomotopyCategory (.up ℤ))) ≫
