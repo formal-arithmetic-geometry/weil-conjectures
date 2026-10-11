@@ -190,5 +190,23 @@
   "worker": "stage1",
   "summary": "Split following the proof of Stacks 07DZ: induction on m with claim [K_m:k]=p^m for K_m=k(a_1^{1/p},...,a_m^{1/p}); step 2 writes out that K_m is the k-span of the monomials with exponents < p (finite-dimensional domain is a field), which the source uses silently; step 3 is the source's computation (a_m = (sum lambda_I alpha^I)^p = sum lambda_I^p a^I, apply d) giving that a_m is not a p-th power in K_{m-1} (for m=1 the easy direction of 031W); step 4 writes out [K_m:K_{m-1}]=p from the power-basis leaf (minimal polynomial (X-alpha)^e, e=p); step 5 multiplies degrees. The lead's suggested route via the p-th-root presentation of differentials is not the source's and is not used. Statement: algebraic closure and finite-extension notions now cited; content unchanged. No new nodes."
  },
- "reviewed": "Reviewed by L 2026-10-10: faithful to Algebra 07DZ (induction, the source's derivation argument in step 3 written out with the monomial expression of step 2 and the degree-p argument via the power-basis leaf in step 4). Statement gained citations only. No new nodes; no Mathlib match (X_pow_sub_C_irreducible_of_prime is only step 4)."
+ "reviewed": "Reviewed by L 2026-10-10: faithful to Algebra 07DZ (induction, the source's derivation argument in step 3 written out with the monomial expression of step 2 and the degree-p argument via the power-basis leaf in step 4). Statement gained citations only. No new nodes; no Mathlib match (X_pow_sub_C_irreducible_of_prime is only step 4).",
+ "lean": {
+  "module": "Sheaf.FieldTheory.PthRootsExtensionDegree",
+  "declaration": "IntermediateField.finiteDimensional_finrank_adjoin_pth_roots",
+  "file": "lean/Sheaf/FieldTheory/PthRootsExtensionDegree.lean",
+  "statement": "theorem finiteDimensional_finrank_adjoin_pth_roots (p : ℕ) [Fact p.Prime] (k : Type u) [Field k] [CharP k p] (Ω : Type v) [Field Ω] [Algebra k Ω] [IsAlgClosure k Ω] (n : ℕ) (a : Fin n → k) (hind : LinearIndependent k (fun i : Fin n ↦ KaehlerDifferential.D (ZMod p) k (a i))) (α : Fin n → Ω) (hα : ∀ i : Fin n, α i ^ p = algebraMap k Ω (a i)) : FiniteDimensional k (adjoin k (Set.range α)) ∧ Module.finrank k (adjoin k (Set.range α)) = p ^ n",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-pre1403",
+  "group": "E1",
+  "result": "pass",
+  "note": "char p field [Fact p.Prime][CharP k p] + local ZMod.algebra (ExistsPBasis form); Fin n family a; LinearIndependent k of D (ZMod p) k (a i) = da_i indep in Omega_{k/F_p}; IsAlgClosure k Omega; alpha i^p = a i (unique roots, not hollow); adjoin k (range alpha); FiniteDimensional and finrank = p^n; n=0 gives bot, degree 1; #check full name ok"
+ }
 }
