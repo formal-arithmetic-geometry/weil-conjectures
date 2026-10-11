@@ -1,15 +1,14 @@
 # Work queue
 
-808 items; claim with `tools/claim.py next <group> [--stage N]`.
+807 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (808)
+## Stage 2: nodes to state (807)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
-| `def-nagata-basechanged-system` | 1 | state |
 | `def-nagata-directed-finite-upper-bound` | 1 | state |
 | `def-pc-dimension` | 1 | state |
 | `def-pc-divisor-line-bundle` | 1 | state |
