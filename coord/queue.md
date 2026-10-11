@@ -1,11 +1,11 @@
 # Work queue
 
-47 items; claim with `tools/claim.py next <group> [--stage N]`.
+43 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (47)
+## Stage 2: nodes to state (43)
 
 | node | distance to Mathlib | kind | blockers |
 |---|---|---|---|
@@ -30,7 +30,6 @@
 | `lem-sc-closed-pushforward-abelian-stalks` | 1 | state | 0 |
 | `lem-sc-flat-precompose-pus` | 1 | state | 0 |
 | `lem-sc-hilb-dominating-power` | 1 | state | 0 |
-| `lem-sc-irreducible-noetherian-constant-acyclic` | 1 | state | 0 |
 | `lem-sc-picard-cech-cup-pullback-compat` | 1 | state | 0 |
 | `lem-sc-qcoh-complex-alternating-cech-derived-sections` | 1 | state | 0 |
 | `lem-sc-support-dimension-cohomology-vanishing` | 1 | state | 0 |
@@ -40,7 +39,6 @@
 | `lem-sc-torsor-h1-ext-pushforward` | 1 | state | 0 |
 | `lem-sc-torsor-h1-ext-pushout` | 1 | state | 0 |
 | `lem-sc-zariski-contracted-power-extension` | 1 | state | 0 |
-| `lem-sc-zariski-ext-torsor` | 1 | state | 0 |
 | `lem-sc-zariski-module-abelian-cohomology-agree` | 1 | state | 0 |
 | `lem-weil-pbc-affine-etale-site-base-change` | 1 | state | 0 |
 | `lem-weil-pbc-cohomology-colimit-of-sites` | 1 | state | 0 |
@@ -49,13 +47,11 @@
 | `lem-weil-pbc-gabber-strict-henselian-zariski-comparison` | 1 | state | 0 |
 | `lem-weil-pbc-module-injective-open-cover-cech-acyclic` | 1 | state | 0 |
 | `lem-weil-pbc-sets-inverse-image-extension-by-empty-constant` | 1 | state | 0 |
-| `lem-weil-pbc-sheaf-directed-colimit-finite-coequalizers` | 1 | state | 0 |
 | `lem-weil-pbc-site-leray-degenerate` | 1 | state | 0 |
 | `lem-weil-pbc-spectral-finite-coequalizer-embeds-constant` | 1 | state | 0 |
 | `lem-weil-pbc-spectral-finite-coequalizer-from-finite-space` | 1 | state | 0 |
 | `lem-sc-p1-proj-shifted-free-twist` | 2 | state | 0 |
 | `lem-sc-topological-flasque-acyclic` | 2 | state | 0 |
-| `lem-weil-pbc-site-plus-of-separated-is-sheaf` | 2 | state | 0 |
 
 Not open yet: 40 nodes that wait for stage 1, 34 nodes that wait for a statement dependency.
 
