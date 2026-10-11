@@ -3874,3 +3874,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 08:44 L: merged deliver/M1/lem-sp-finite-filtration-induction (stage 2; reviewer PASS; first push; Sheaf.CategoryTheory.FiniteFiltrationInduction CategoryTheory.FilteredObject.finite_filtration_induction)
 - 08:44 L: merged deliver/J1/lem-sc-etale-faithfully-flat-local (stage 2; reviewer PASS; after a return; Sheaf.AlgebraicGeometry.EtaleFaithfullyFlatLocal AlgebraicGeometry.etale_of_faithfullyFlat_fieldExtension)
 - 08:46 L: merged deliver/E1/lem-sc-picard-h1-product-injective (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.PicardH1ProductInjective AlgebraicGeometry.Scheme.picard_h1_product_injective; new nodes: def-sc-structure-sheaf-cohomology-pullback)
+- 08:46 L: merged deliver/C1/lem-weil-pbc-ample-scheme-separated (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.AmpleSeparated AlgebraicGeometry.isSeparated_of_isAmple)
