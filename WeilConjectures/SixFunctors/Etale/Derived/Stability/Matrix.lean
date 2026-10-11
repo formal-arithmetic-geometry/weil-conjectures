@@ -85,28 +85,6 @@ theorem constructibleFiniteTor_derivedHom [HasInvertibleExponent Λ X]
   exact ⟨boundedConstructible_derivedHom Λ aX a b c d hKbc hKt hMbc hMt, _, _,
     torAmplitudeIn_derivedHom Λ aX m hm a b c d hKbc hKt hMbc hMt⟩
 
-/-- Blueprint `rem-sf-proetale-hom-status`: Status of the coefficient-only internal-Hom bound.
-
-The sharp bound `[c - b, d - a]` of
-`AlgebraicGeometry.Etale.torAmplitudeIn_derivedHom_of_isDualizable` requires a site-perfect first
-variable: for arbitrary bounded constructible first variables of finite Tor amplitude it is
-false. For the origin `i : {0} ⟶ 𝔸¹` over an algebraically closed `k` and a nonzero finite `Λ`
-whose exponent is invertible on `k`, both `i_* Λ` and `Λ` have Tor amplitude in `[0, 0]`, while
-`RHom(i_* Λ, Λ) = i_* Λ(-1)[-2]` has nonzero cohomology in degree `2`. The general
-finite-coefficient bound is the dimension-dependent
-`AlgebraicGeometry.Etale.torAmplitudeIn_derivedHom`. -/
-theorem not_forall_torAmplitudeIn_derivedHom [IsAlgClosed k] [Nontrivial Λ] :
-    ¬ ∀ (Z : Scheme.{u}) (aZ : Z ⟶ Spec (.of k)) [LocallyOfFiniteType aZ] [QuasiCompact aZ]
-      (a b c d : ℤ)
-      (K M : _root_.DerivedCategory (Sheaf Z.smallEtaleTopology (ModuleCat.{u + 1} Λ))),
-      boundedConstructible (ModuleCat.{u + 1} Λ) Z K →
-        torAmplitudeIn (ModuleCat.{u + 1} Λ) Z a b K →
-          boundedConstructible (ModuleCat.{u + 1} Λ) Z M →
-            torAmplitudeIn (ModuleCat.{u + 1} Λ) Z c d M →
-              torAmplitudeIn (ModuleCat.{u + 1} Λ) Z (c - b) (d - a)
-                (((RHom(Z)[ModuleCat.{u + 1} Λ]).obj (op K)).obj M) :=
-  sorry
-
 variable (f : X ⟶ Y) (hf : f ≫ aY = aX)
 
 include hf
@@ -212,8 +190,7 @@ results come with these intervals:
    with the same Tor bound, for a constant `D` depending only on `f`
    (`thm-sf-preservation-class`), and the Verdier dual `𝔻_X` preserves `Dctf(X)` and is an
    involution on it (`thm-sf-biduality-class`). Its Tor bound `[-b - 2d, -a]`
-   (`lem-weil-verdier-preservation-strata`, of another subsection) is stated separately as
-   `AlgebraicGeometry.Etale.torAmplitudeIn_verdierDual`.
+   is `lem-weil-verdier-preservation-strata` of another subsection.
 
 The pro-étale and boundary entries are
 `AlgebraicGeometry.ProEtale.DerivedCategory.preservationMatrix_of_isAlgClosure`, and the
@@ -368,8 +345,8 @@ whose exponent is invertible on `k`.
 * Item 4, closed-boundary exchange: for a closed immersion `i : Z ⟶ X` and `L ∈ Dctf(X, Λ)`,
   `i^* 𝔻_X L ≅ 𝔻_Z Ri^! L` (`cor-weil-boundary-duality-discharge`).
 * Item 3, status: for a general constructible first variable the sharp bound `[c - b, d - a]`
-  is false (`rem-sf-proetale-hom-status`, of another subsection); this is stated separately as
-  `AlgebraicGeometry.Etale.not_forall_torAmplitudeIn_derivedHom`. -/
+  is false (`rem-sf-proetale-hom-status`, of another subsection); the dimension-dependent
+  bound of item 3 is what holds in general. -/
 theorem preservationMatrix_of_isAlgClosure {k : Type u} [Field k] {p : ℕ} [Fact p.Prime]
     [Algebra (ZMod p) k] [IsAlgClosure (ZMod p) k] [HasInvertibleExponent Λ (Spec (.of k))]
     {X : Scheme.{u}} (aX : X ⟶ Spec (.of k)) [LocallyOfFiniteType aX] [QuasiCompact aX]

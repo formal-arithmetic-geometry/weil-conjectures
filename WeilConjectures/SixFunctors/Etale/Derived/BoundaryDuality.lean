@@ -11,13 +11,14 @@ public import WeilConjectures.SixFunctors.Etale.Derived.TensorHom
 public import WeilConjectures.SixFunctors.Etale.Derived.TensorStructure
 
 /-!
-# The Verdier dual on `Dctf`: Tor bound and boundary exchange
+# The boundary exchange for the Verdier dual on `Dctf`
 
 For a finite coefficient ring `Λ` whose exponent is invertible on a field `k` and schemes
-separated of finite type over `k`, this file states
+separated of finite type over `k`, this file proves
 
-- `AlgebraicGeometry.Etale.torAmplitudeIn_verdierDual` (`lem-weil-verdier-preservation-strata`):
-  the Verdier dual `𝔻_X` sends Tor amplitude `[a, b]` to `[-b - 2d, -a]` when `dim X ≤ d`;
+- `AlgebraicGeometry.Etale.nonempty_iso_rightDerivedUpperShriek_derivedHom`:
+  `Rf^! RHom(M, N) ≅ RHom(Lf^* M, Rf^! N)`;
+
 - `AlgebraicGeometry.Etale.nonempty_iso_leftDerivedUpperStar_verdierDual`
   (`cor-weil-boundary-duality-discharge`): for a closed immersion `i : Z ⟶ T` the boundary
   exchange `i^* 𝔻_T L ≅ 𝔻_Z Ri^! L` holds on `Dctf(T)`.
@@ -76,23 +77,6 @@ theorem nonempty_iso_rightDerivedUpperShriek_derivedHom {X Y : Scheme.{u}} (f : 
   let e := Functor.isoWhiskerLeft (R(f)_![ModuleCat.{u + 1} Λ]) (βY.app M) ≪≫ P ≪≫
     Functor.isoWhiskerRight (βX.app _).symm (R(f)_![ModuleCat.{u + 1} Λ])
   exact ⟨(adj₁.rightAdjointUniq (adj₂.ofNatIsoLeft e.symm)).app N⟩
-
-/-- Blueprint `lem-weil-verdier-preservation-strata`: Verdier duality preserves `Dctf`.
-
-Let `X` be separated of finite type over `k`, `ω_X = Ra_X^! Λ` and `𝔻_X = RHom(-, ω_X)`. Then
-`𝔻_X` carries `Dctf(X, Λ)` into itself, and more precisely, if `dim X ≤ d` and `K ∈ Dctf(X, Λ)`
-has Tor amplitude in `[a, b]`, then `𝔻_X K` has Tor amplitude in `[-b - 2d, -a]`. The bound is
-independent of the exponent of `Λ`. The first half is
-`AlgebraicGeometry.Etale.constructibleFiniteTor_verdierDual`. -/
-theorem torAmplitudeIn_verdierDual {X : Scheme.{u}} (aX : X ⟶ Spec (.of k)) [IsSeparated aX]
-    [LocallyOfFiniteType aX] [QuasiCompact aX] [HasCompactification aX] (d : ℕ)
-    (hd : topologicalKrullDim X ≤ (d : WithBot ℕ∞)) (a b : ℤ)
-    {K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
-    (hK : boundedConstructible (ModuleCat.{u + 1} Λ) X K)
-    (hKt : torAmplitudeIn (ModuleCat.{u + 1} Λ) X a b K) :
-    torAmplitudeIn (ModuleCat.{u + 1} Λ) X (-b - 2 * (d : ℤ)) (-a)
-      ((verdierDual (ModuleCat.{u + 1} Λ) aX).obj (op K)) :=
-  sorry
 
 /-- Blueprint `cor-weil-boundary-duality-discharge`: Discharge of the boundary duality input.
 
