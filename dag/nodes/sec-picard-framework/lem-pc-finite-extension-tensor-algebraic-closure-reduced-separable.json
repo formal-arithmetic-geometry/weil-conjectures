@@ -128,5 +128,24 @@
   "group": "E1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-fts1745 (reviewer sub-agent of L); spot-checked: Item = Stacks 030W (4)=>(1) via 030V; steps 1-3 sound by contradiction, cited statements match hypotheses (finite K/k, kbar, alpha). Child lem-pc-finite-inseparable-element true (finite => empty transcendence basis => separable means separable algebraic per def-weil-pbc-separable-field-extension/def-weil-pbc-separable-algebraic-extension), real lemma not elementary. Child lem-pc-inseparable-tensor-nilpotent true (k(alpha) tensor kbar = kbar[T]/(P) with repeated root, injects into K tensor kbar by flatness). No duplicate among same-tag nodes (those are general-extension char-p statements). Mathlib: grep RingTheory/Nilpotent/GeometricallyReduced.lean, RingTheory/Unramified/Field.lean, Etale/Field.lean and LeanFinder 'tensor of finite extension with algebraic closure reduced implies separable' -> only isGeometricallyReduced_field_iff and FormallyUnramified.iff_isSeparable (unramified, not reducedness of kbar tensor): no exact match, no leaf, verdict no match."
+ },
+ "lean": {
+  "module": "Sheaf.FieldTheory.FiniteExtensionTensorAlgebraicClosureReduced",
+  "declaration": "Algebra.finiteExtension_tensor_algebraicClosure_reduced_isSeparable",
+  "file": "lean/Sheaf/FieldTheory/FiniteExtensionTensorAlgebraicClosureReduced.lean",
+  "statement": "theorem finiteExtension_tensor_algebraicClosure_reduced_isSeparable (k : Type u) (K : Type v) (kbar : Type w) [Field k] [Field K] [Field kbar] [Algebra k K] [Algebra k kbar] [FiniteDimensional k K] [IsAlgClosure k kbar] [IsReduced (K ⊗[k] kbar)] : Algebra.IsSeparableExtension k K",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-tar0753"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-tar0753",
+  "group": "H1",
+  "result": "fix",
+  "note": "fields k K kbar; [Algebra k K] = def-pc-field-extension; [FiniteDimensional k K] = finite; [Algebra k kbar][IsAlgClosure k kbar] = any algebraic closure; [IsReduced (K ⊗[k] kbar)] = hypothesis; conclusion Algebra.IsSeparableExtension k K = recorded dep decl; one direction as node; universes u v w independent; Mathlib has only isGeometricallyReduced_field_iff / FormallyUnramified.iff_isSeparable, not this statement (existing false right); fix: module docstring blueprint tag split across lines"
  }
 }

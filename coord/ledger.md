@@ -3527,3 +3527,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 06:35 L: merged deliver/H1/lem-pc-derived-module-direct-sums (stage 2; reviewer PASS; first push; Sheaf.CategoryTheory.DerivedModuleDirectSums CategoryTheory.derivedModuleDirectSums)
 - 06:36 L: merged deliver/E1/lem-pc-fp-module-map-descent-affine (stage 2; reviewer PASS; first push; Sheaf.Algebra.FinitePresentationColimit ModuleCat.finitePresentation_descent_directedColimit)
 - 06:36 L: merged deliver/K1/lem-pc-complex-hocolim-colimit (stage 2; reviewer PASS; first push; Sheaf.Algebra.Homology.TelescopeColimit CochainComplex.quasiIso_telescopeColimit)
+- 06:36 L: merged deliver/H1/lem-pc-finite-extension-tensor-algebraic-closure-reduced-separable (stage 2; reviewer FIX; first push; Sheaf.FieldTheory.FiniteExtensionTensorAlgebraicClosureReduced Algebra.finiteExtension_tensor_algebraicClosure_reduced_isSeparable)
