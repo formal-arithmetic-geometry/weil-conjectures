@@ -20,7 +20,8 @@
   "def-weil-pbc-etale-site",
   "def-weil-pbc-geometric-stalks",
   "def-weil-pbc-constant-sheaf",
-  "def-weil-pbc-sheafification"
+  "def-weil-pbc-sheafification",
+  "def-pod-ring-scalar-extension"
  ],
  "proof": [
   {
@@ -168,5 +169,38 @@
   "group": "K1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-lts2812 (reviewer sub-agent of L); spot-checked: Read packet whole; checked lisse vs E1 inline definition, tensor/scalar-extension definitions, citer cor-galois-lisse-representations steps (tensor for commutative Lambda, base change for arbitrary finite rings), Step 1 vs lem-weil-pbc-constant-sheaf-geometric-stalk, Step 2 vs 093V/095D; one Mathlib grep (Sites: no stalk+tensor file). FIX more, RETURN less: (1) C4/E (missed by the second reading): Step 5 applies the new node's scalar-extension clause to possibly non-commutative finite rings Lambda->Lambda' as the citer needs, but the new node was stated after 'a commutative ring Lambda' with def-pur-sheaf-tensor-product (sheaves of commutative rings, F tensor_O O' on the right); restated lem-pod-etale-stalk-tensor-scalar in two clauses with inline definitions: (1) commutative Lambda, F tensor_Lambda G as the sheafification of U->F(U) tensor_Lambda G(U) (same as the item, not tensor over the constant sheaf of rings), (2) arbitrary ring map, Lambda' a (Lambda',Lambda)-bimodule, left Lambda'-modules; stmt_deps now scheme-conventions, geometric-stalks, etale-site, sheafification, constant-sheaf; reviewer grep recorded. (2) C4/class d: item's lisse definition replaced by the E1 (lem-pod-lisse-module-sheaves-as-module-objects) wording verbatim (covering U_i, finite left modules M_i), Lambda finite not necessarily commutative, sheafification cited [def-weil-pbc-sheafification] and restored to stmt_deps. (3) C1: Step 2 text now names the common refinement, restriction commuting with sheafification and Stacks 093V/095D; Steps 1, 3, 5 name the clause used and the underlying-abelian-sheaf identification.; 2 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.LisseTensorScalarExtension",
+  "declaration": "AlgebraicGeometry.Scheme.lisse_tensor_and_scalar_extension",
+  "file": "lean/Sheaf/Paper/LisseTensorScalarExtension.lean",
+  "statement": "theorem lisse_tensor_and_scalar_extension [Finite R] (F G : Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} R)) (hF : IsFiniteLocallyConstantSheaf F) (hG : IsFiniteLocallyConstantSheaf G) : IsFiniteLocallyConstantSheaf (F ⊗ G)",
+  "branch": "sheaf-dag",
+  "by": "G1",
+  "date": "2026-10-11",
+  "existing": false,
+  "declarations": [
+   "AlgebraicGeometry.Scheme.constant_module_stalk_isIso",
+   "AlgebraicGeometry.Scheme.lisse_tensor_and_scalar_extension",
+   "AlgebraicGeometry.Scheme.lisse_tensor_local_iso",
+   "AlgebraicGeometry.Scheme.tensor_stalk_iso",
+   "AlgebraicGeometry.Scheme.tensor_stalk_natural",
+   "AlgebraicGeometry.Scheme.tensor_stalk_coherence",
+   "AlgebraicGeometry.Scheme.lisse_ring_scalar_extension",
+   "AlgebraicGeometry.Scheme.lisse_ring_scalar_extension_local_iso",
+   "AlgebraicGeometry.Scheme.ring_scalar_extension_stalk_iso",
+   "AlgebraicGeometry.Scheme.ring_scalar_extension_stalk_natural",
+   "AlgebraicGeometry.Scheme.ring_scalar_extension_stalk_comp"
+  ],
+  "note": "Eleven sorry-only declarations render clauses (1)-(3). Lisse sheaves of Lambda-modules are the source predicate Scheme.IsFiniteLocallyConstantSheaf at A = ModuleCat Lambda (the module-valued counterpart of def-weil-pbc-etale-sheaves' set-valued IsLisseEtaleSheafOfSets; over a finite ring, local constancy as module sheaves with finitely generated stalks is the node's local finite constant values). Geometric points have IsAlgClosed fields; stalks are the fibres of (pointSmallEtale y).ulift.{u+1} and the tensor product is Sheaf.monoidalCategory, with the canonical Monoidal fibre instance, exactly as in lem-pod-etale-stalk-tensor-scalar. Stalk, naturality and coherence clauses carry the lisse hypotheses of the node. Scalar extension is ModuleCat.ringExtendScalars / Sheaf.ringExtendScalars of def-pod-ring-scalar-extension; its stalk comparison is the canonical inverse fibre comparison, pinned by the pure-germ formula b tensor a_y to (b tensor a)_y.",
+  "fixed_by": "R-lts1006"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-lts1006",
+  "group": "G1",
+  "result": "fix",
+  "note": "Y scheme, geometric point IsAlgClosed via ulift pointSmallEtale stalks (C1 form); lisse = IsFiniteLocallyConstantSheaf over ModuleCat.{u+1}; (1) Ring R, any M, constant germ map IsIso; (2) CommRing+Finite, lisse F G: F⊗G lisse, local iso on F.over U, stalk μ unique pure-germ map + IsIso, naturality, assoc/braid/unit coherence; (3) Ring R,S finite, f: lisse extension, local iso, canonical stalk comparison pure-germ + IsIso, naturality, composite R->S->T square + sectionwise sheaf iso"
  }
 }
