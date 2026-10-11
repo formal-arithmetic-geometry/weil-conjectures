@@ -12,6 +12,7 @@ public import WeilConjectures.DeligneLaumon.AffineLine.TraceEnergy
 public import WeilConjectures.DeligneLaumon.AffineLine.Upper
 public import WeilConjectures.DeligneLaumon.Reduction.RealSheaves
 public import WeilConjectures.DeligneLaumon.Reduction.Weights
+public import WeilConjectures.WeilSheaf.ConstantTwistCohomology
 public import WeilConjectures.Mathlib.AlgebraicGeometry.AffineSpace
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Smooth
 
@@ -167,6 +168,52 @@ theorem WeilSheaf.IsPunctuallyPureOfWeight.exists_units_norm_eq {X : Scheme.{u}}
       neg_div, Real.rpow_neg hq.le, inv_pow]
   · simp only [not_exists] at hex
     exact ⟨0, 1, fun x α hα ↦ (hex x α hα).elim, by simp⟩
+
+namespace WeilSheaf
+
+variable {X : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
+  [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
+
+variable (k₀ l X) in
+/-- The constant twist `F ↦ F ⊗ 𝓑_b` by a unit `b ∈ ℚ̄_ℓˣ`, as an endofunctor of Weil sheaves:
+the twist of pro-étale Weil sheaves (`AlgebraicGeometry.ProEtaleWeilSheaf.constantTwist`), which
+keeps the underlying sheaf, restricted to Weil sheaves. -/
+noncomputable def constantTwistFunctor (b : (PadicAlgCl l)ˣ) :
+    WeilSheaf k₀ l X ⥤ WeilSheaf k₀ l X :=
+  (objectProperty k₀ l X).liftFullSubcategory (objectProperty k₀ l X)
+    (ProEtaleWeilSheaf.constantTwist k₀ l X b) fun _ hK ↦ hK
+
+instance (b : (PadicAlgCl l)ˣ) : (constantTwistFunctor k₀ l X b).Additive :=
+  ObjectProperty.liftFullSubcategory_additive _ _ _ _
+
+instance (b : (PadicAlgCl l)ˣ) : Limits.PreservesFiniteLimits (constantTwistFunctor k₀ l X b) :=
+  preservesFiniteLimits_of_comp_ι _ (ProEtaleWeilSheaf.constantTwist k₀ l X b)
+    (ObjectProperty.liftFullSubcategoryCompιIso _ _ _ _)
+
+instance (b : (PadicAlgCl l)ˣ) : Limits.PreservesFiniteColimits (constantTwistFunctor k₀ l X b) :=
+  preservesFiniteColimits_of_comp_ι _ (ProEtaleWeilSheaf.constantTwist k₀ l X b)
+    (ObjectProperty.liftFullSubcategoryCompιIso _ _ _ _)
+
+/-- The constant twist `F ⊗ 𝓑_b` of a Weil sheaf is the image of `F` under the constant twist
+functor. -/
+noncomputable def constantTwistIsoConstantTwistFunctorObj (F : WeilSheaf k₀ l X)
+    (b : (PadicAlgCl l)ˣ) : F.constantTwist b ≅ (constantTwistFunctor k₀ l X b).obj F :=
+  ObjectProperty.isoMk _ (constantTwistObjIso F b)
+
+variable {ι} in
+/-- The constant twist `G ⊗ 𝓑_b` of a sheaf mixed of weights at most `v` is mixed of weights at
+most `v + c`, where `2 log_q |ι b| = c`: tensoring a mixed filtration with the rank-one sheaf
+`𝓑_b` is exact, and it multiplies the eigenvalues at a closed point of degree `m` by `bᵐ`, so it
+raises every punctual weight by `c` (blueprint: `lem-zl-relative-curve-mixedness`). -/
+theorem IsMixedOfWeightsAtMost.constantTwist {F : WeilSheaf k₀ l X} {w : ℝ}
+    (h : F.IsMixedOfWeightsAtMost ι w) {b : (PadicAlgCl l)ˣ} {c : ℝ}
+    (hb : 2 * Real.logb (Nat.card k₀) ‖ι b‖ = c) :
+    (F.constantTwist b).IsMixedOfWeightsAtMost ι (w + c) :=
+  (h.map_add (constantTwistFunctor k₀ l X b) c fun _ G hG ↦
+    (hG.constantTwist hb).of_epi (constantTwistIsoConstantTwistFunctorObj G b).hom).of_iso
+      (constantTwistIsoConstantTwistFunctorObj F b).symm
+
+end WeilSheaf
 
 section RelativeCurve
 

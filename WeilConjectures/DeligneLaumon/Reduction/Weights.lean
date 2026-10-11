@@ -69,8 +69,8 @@ filtration whose successive quotients are
 
 A mixed sheaf whose local Frobenius eigenvalues are bounded by `q_y ^ (v / 2)` is mixed of
 weights at most `v` (`AlgebraicGeometry.WeilSheaf.IsMixedOfWeightsAtMost.of_hasWeightsAtMost`,
-blueprint `lem-zl-mixed-punctual-cutoff`), and a constant twist shifts mixed weight bounds
-(`AlgebraicGeometry.WeilSheaf.IsMixedOfWeightsAtMost.constantTwist`).
+blueprint `lem-zl-mixed-punctual-cutoff`), and exact functors raising punctual weights by `c` raise
+mixed weight bounds by `c` (`AlgebraicGeometry.WeilSheaf.IsMixedOfWeightsAtMost.map_add`).
 
 ## References
 
@@ -221,7 +221,46 @@ theorem IsMixedOfWeightsAtMost.of_retract (h : Retract G F) (hF : F.IsMixedOfWei
   have : Mono h.i := mono_of_mono_fac h.retract
   hF.of_mono h.i
 
--- TODO(adic): needs exactness of the stalk functor and closed points in the support
+/-- A subobject of a Weil sheaf with weights at most `v` has weights at most `v`: its stalks are
+Frobenius-stable subspaces. -/
+theorem HasWeightsAtMost.of_mono {v : ℝ} (f : F ⟶ G) [Mono f] (h : G.HasWeightsAtMost ι v) :
+    F.HasWeightsAtMost ι v := fun x ↦
+  FrobeniusModule.HasWeightsAtMost.of_injective _ (stalkAtMap_frobenius _ _ _ f)
+    (injective_stalkAtMap _ _ _ f) (h x)
+
+/-- A quotient of a Weil sheaf with weights at most `v` has weights at most `v`: its stalks are
+Frobenius-equivariant quotients. -/
+theorem HasWeightsAtMost.of_epi {v : ℝ} (f : F ⟶ G) [Epi f] (h : F.HasWeightsAtMost ι v) :
+    G.HasWeightsAtMost ι v := fun x ↦
+  FrobeniusModule.HasWeightsAtMost.of_surjective _ (stalkAtMap_frobenius _ _ _ f)
+    (surjective_stalkAtMap _ _ _ f) (h x)
+
+/-- A zero Weil sheaf is punctually pure of every weight: its stalks vanish. -/
+theorem isPunctuallyPureOfWeight_of_isZero (hF : IsZero F) (w : ℝ) :
+    F.IsPunctuallyPureOfWeight ι w := fun x α hα ↦ by
+  have : x ∉ F.support := by rw [support_eq_empty_of_isZero hF]; exact id
+  have : Subsingleton (F.stalk x).carrier := not_nontrivial_iff_subsingleton.1 this
+  obtain ⟨v, hv⟩ := hα.exists_hasEigenvector
+  exact (hv.2 (Subsingleton.elim _ _)).elim
+
+
+/-- A nonzero Weil sheaf punctually pure of weight `u` with weights at most `v` has `u ≤ v`: it has a
+nonzero stalk at some closed point, and an eigenvalue there. -/
+theorem IsPunctuallyPureOfWeight.le_of_hasWeightsAtMost {u v : ℝ}
+    (hu : F.IsPunctuallyPureOfWeight ι u) (hv : F.HasWeightsAtMost ι v) (hF : ¬ IsZero F) :
+    u ≤ v := by
+  obtain ⟨x, hx⟩ := exists_nontrivial_stalk_of_not_isZero F hF
+  have := (F.stalk x).finiteDimensional
+  obtain ⟨α, hα⟩ := Module.End.exists_eigenvalue (F.stalk x).frobeniusEnd
+  have h1 := hu x α hα
+  have h2 := hv x α hα
+  rw [h1] at h2
+  have hq : 1 < ((X ↘ Spec (CommRingCat.of k₀)).residueCard x.1 : ℝ) := by
+    rw [Scheme.Hom.residueCard]
+    exact_mod_cast Nat.one_lt_pow (Scheme.Hom.degreeOver_ne_zero _ x.2) Finite.one_lt_card
+  have := (Real.rpow_le_rpow_left_iff hq).1 h2
+  linarith
+
 /-- **Punctual cutoff for an already mixed sheaf.** Let `G` be a constructible Weil sheaf on a
 separated `k₀`-scheme of finite type, mixed of weights at most some `u`. If every eigenvalue
 `α` of the local Frobenius of `G` at every closed point `y` satisfies `|ι α| ≤ q_y ^ (v / 2)`,
@@ -232,18 +271,18 @@ theorem IsMixedOfWeightsAtMost.of_hasWeightsAtMost
     [IsSeparated (X ↘ Spec (CommRingCat.of k₀))]
     [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))] {u v : ℝ}
     (h : F.IsMixedOfWeightsAtMost ι u) (hv : F.HasWeightsAtMost ι v) :
-    F.IsMixedOfWeightsAtMost ι v :=
-  sorry
-
--- TODO(adic): needs the constant twist as an exact functor and its effect on stalks
-/-- The constant twist `G ⊗ 𝓑_b` of a sheaf mixed of weights at most `v` is mixed of weights at
-most `v + c`, where `2 log_q |ι b| = c`: tensoring a mixed filtration with the rank-one sheaf
-`𝓑_b` is exact, and it multiplies the eigenvalues at a closed point of degree `m` by `bᵐ`, so it
-raises every punctual weight by `c` (blueprint: `lem-zl-relative-curve-mixedness`). -/
-theorem IsMixedOfWeightsAtMost.constantTwist (h : F.IsMixedOfWeightsAtMost ι w)
-    {b : (PadicAlgCl l)ˣ} {c : ℝ} (hb : 2 * Real.logb (Nat.card k₀) ‖ι b‖ = c) :
-    (F.constantTwist b).IsMixedOfWeightsAtMost ι (w + c) :=
-  sorry
+    F.IsMixedOfWeightsAtMost ι v := by
+  rw [isMixedOfWeightsAtMost_iff_filtrationClosure] at h ⊢
+  revert hv
+  induction h with
+  | of_isZero hX => exact fun _ ↦ .of_isZero hX
+  | of_mono i _ hi ih =>
+    intro hv
+    refine .of_mono i (ih (hv.of_mono i)) ?_
+    obtain ⟨w', -, hpure⟩ := hi
+    by_cases hz : IsZero (cokernel i)
+    · exact ⟨v, le_rfl, isPunctuallyPureOfWeight_of_isZero hz v⟩
+    · exact ⟨w', hpure.le_of_hasWeightsAtMost (hv.of_epi (cokernel.π i)) hz, hpure⟩
 
 /-- A sheaf with a finite filtration `0 = G 0 ↪ G 1 ↪ ⋯ ↪ G n ≅ F` whose successive quotients
 `coker φᵢ` are mixed of weights at most `w` is mixed of weights at most `w`: splice the filtrations
@@ -272,6 +311,22 @@ variable {Y : Scheme.{u}} [Y.Over (Spec (CommRingCat.of k₀))]
 
 namespace WeilSheaf
 
+/-- An exact functor between Weil sheaves which raises punctual purity weights by `c` raises
+mixed upper weight bounds by `c`: it carries a mixed filtration to a mixed filtration. -/
+theorem IsMixedOfWeightsAtMost.map_add (Φ : WeilSheaf k₀ l X ⥤ WeilSheaf k₀ l Y) [Φ.Additive]
+    [PreservesFiniteLimits Φ] [PreservesFiniteColimits Φ] (c : ℝ)
+    (hΦ : ∀ (v : ℝ) (G : WeilSheaf k₀ l X), G.IsPunctuallyPureOfWeight ι v →
+      (Φ.obj G).IsPunctuallyPureOfWeight ι (v + c))
+    {w : ℝ} {F : WeilSheaf k₀ l X} (hF : F.IsMixedOfWeightsAtMost ι w) :
+    (Φ.obj F).IsMixedOfWeightsAtMost ι (w + c) := by
+  obtain ⟨n, G, φ, h0, ⟨e⟩, hmono, hpure⟩ := hF
+  refine ⟨n, fun i ↦ Φ.obj (G i), fun i ↦ Φ.map (φ i), Φ.map_isZero h0, ⟨Φ.mapIso e⟩,
+    fun i ↦ ?_, fun i ↦ ?_⟩
+  · have := hmono i
+    infer_instance
+  · obtain ⟨v, hv, h⟩ := hpure i
+    exact ⟨v + c, by linarith, (hΦ v _ h).of_epi (PreservesCokernel.iso Φ (φ i)).hom⟩
+
 /-- An exact functor between Weil sheaves which preserves punctual purity of every weight
 preserves mixed upper weight bounds: it carries a mixed filtration to a mixed filtration. -/
 theorem IsMixedOfWeightsAtMost.map (Φ : WeilSheaf k₀ l X ⥤ WeilSheaf k₀ l Y) [Φ.Additive]
@@ -280,13 +335,7 @@ theorem IsMixedOfWeightsAtMost.map (Φ : WeilSheaf k₀ l X ⥤ WeilSheaf k₀ l
       (Φ.obj G).IsPunctuallyPureOfWeight ι v)
     {w : ℝ} {F : WeilSheaf k₀ l X} (hF : F.IsMixedOfWeightsAtMost ι w) :
     (Φ.obj F).IsMixedOfWeightsAtMost ι w := by
-  obtain ⟨n, G, φ, h0, ⟨e⟩, hmono, hpure⟩ := hF
-  refine ⟨n, fun i ↦ Φ.obj (G i), fun i ↦ Φ.map (φ i), Φ.map_isZero h0, ⟨Φ.mapIso e⟩,
-    fun i ↦ ?_, fun i ↦ ?_⟩
-  · have := hmono i
-    infer_instance
-  · obtain ⟨v, hv, h⟩ := hpure i
-    exact ⟨v, hv, (hΦ v _ h).of_epi (PreservesCokernel.iso Φ (φ i)).hom⟩
+  simpa using hF.map_add Φ 0 (by simpa using hΦ)
 
 end WeilSheaf
 
