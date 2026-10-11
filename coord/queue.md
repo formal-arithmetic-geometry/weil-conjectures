@@ -2,19 +2,18 @@
 
 861 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (24)
+## Stage 1: nodes to split (23)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
 | `lem-weil-derived-limit-roos-complex` | 15 | none |
 | `lem-pc-ringed-space-module-stalk-tensor` | 3013 | none |
-| `lem-pc-ring-derived-map-lift` | 3018 | none |
+| `lem-pc-ring-precise-vanishing` | 3019 | none |
 | `lem-pc-genus-agrees-sc` | 4007 | rests_on_sorry |
 | `prop-av-tate-rank` | 4008 | rests_on_sorry |
 | `cor-pc-sigma-pic-iso` | 4009 | rests_on_sorry |
 | `lem-pc-vanishing-above-dim` | 4009 | rests_on_sorry |
 | `lem-sc-finite-flat-surj-points` | 4009 | none |
-| `lem-sc-strict-henselization-mod-power-free` | 4014 | none |
 | `lem-pc-derived-tensor-transitivity` | 5015 | none |
 | `lem-pc-derived-tensor-localization-cohomology` | 5017 | none |
 | `pqf-lem-serre-criterion` | 6013 | none |
@@ -31,7 +30,7 @@
 | `lem-pur-left-derived-exact-when-defined` | - | none |
 | `lem-pc-finite-flat-restriction-projective` | - | none |
 
-## Stage 2: nodes to state (837)
+## Stage 2: nodes to state (838)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -184,6 +183,7 @@
 | `lem-pc-projective-curve-linear-pair` | 1 | state |
 | `lem-pc-right-derived-functor-triangulated` | 1 | state |
 | `lem-pc-right-localization-hom-colimit` | 1 | state |
+| `lem-pc-ring-derived-map-lift` | 1 | state |
 | `lem-pc-ring-m-pseudo-coherent-vanishing-base` | 1 | state |
 | `lem-pc-ring-pseudo-coherent-distinguished-triangle` | 1 | state |
 | `lem-pc-ring-pseudo-coherent-iff-all-m` | 1 | state |
@@ -873,7 +873,7 @@
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 | `def-nagata-fixed-base-separated-stage` | 6 | state |
 
-Not open yet: 1754 nodes that wait for a statement dependency, 65 nodes that wait for stage 1.
+Not open yet: 1755 nodes that wait for a statement dependency, 64 nodes that wait for stage 1.
 
 ## Stage 3: modules to prove (0)
 
