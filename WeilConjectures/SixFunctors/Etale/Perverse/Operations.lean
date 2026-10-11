@@ -7,6 +7,7 @@ module
 
 public import Mathlib.AlgebraicGeometry.Fiber
 public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
+public import WeilConjectures.AlgebraicGeometry.FiberDimension
 public import WeilConjectures.AlgebraicGeometry.InvertibleExponent
 public import WeilConjectures.CategoryTheory.DerivedCategory.TorAmplitudeHomology
 public import WeilConjectures.SixFunctors.Etale.Derived.Shift
@@ -158,6 +159,7 @@ def IsLisse (L : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)) :
     ∃ L₀ : Sheaf X.smallEtaleTopology A, Scheme.IsLocallyConstantSheaf L₀ ∧
       Nonempty (L ≅ (_root_.DerivedCategory.singleFunctor _ 0).obj L₀)
 
+omit [HasSmallSiteSheafify A] in
 /-- **Permanence under a lisse tensor**, support side: `K ∈ ᵖD^{≤n}` implies
 `K ⊗ᴸ L ∈ ᵖD^{≤n}` for a lisse `L`. (blueprint: `lem-per-lisse-tensor-permanence`) -/
 theorem isPerverseLE_tensor {n : ℤ}
@@ -165,6 +167,7 @@ theorem isPerverseLE_tensor {n : ℤ}
     (hK : IsPerverseLE n K) (hL : IsLisse L) : IsPerverseLE n (K ⊗ L) :=
   (SupportCondition.tensor hK hL.2.2.1).1.of_iso (shiftTensorIso K L n)
 
+omit [HasSmallSiteSheafify A] in
 /-- **Permanence under a lisse tensor**, cosupport side: `K ∈ ᵖD^{≥n}` implies
 `K ⊗ᴸ L ∈ ᵖD^{≥n}` for a lisse `L`: by `lem-per-dual-lisse-tensor` the Verdier dual of
 `K[n] ⊗ᴸ L` is `L^∨ ⊗ᴸ 𝔻(K[n])`, and `L^∨` again has Tor amplitude in `[0, 0]`.
@@ -186,6 +189,8 @@ variable {X Y : Scheme.{u}} (aY : Y ⟶ Spec (.of k)) [LocallyOfFiniteType aY] [
   [QuasiCompact aY] [HasCompactification aY]
 
 include aY in
+omit [Finite Λ] [HasInvertibleExponent Λ (Spec (.of k))] [IsSeparated aY] [QuasiCompact aY]
+  [HasCompactification aY] in
 /-- **Smooth pullback is perverse up to the shift**, support side: for a smooth morphism
 `f : X ⟶ Y` of relative dimension `d` between separated schemes of finite type over `k`, the
 pullback carries `ᵖD^{≤n}(Y)` into `ᵖD^{≤n+d}(X)`; that is, `f^*[d]` preserves `ᵖD^{≤n}`.
@@ -193,9 +198,28 @@ pullback carries `ᵖD^{≤n}(Y)` into `ᵖD^{≤n+d}(X)`; that is, `f^*[d]` pre
 theorem isPerverseLE_upperStar (d : ℕ) (f : X ⟶ Y) [SmoothOfRelativeDimension d f] {n : ℤ}
     {K : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
     (hK : IsPerverseLE n K) :
-    IsPerverseLE (n + d) ((L((f)^*[ModuleCat.{u + 1} Λ])).obj K) :=
-  -- TODO(adic): the support of a pullback is the preimage, of dimension raised by `d`
-  sorry
+    IsPerverseLE (n + d) ((L((f)^*[ModuleCat.{u + 1} Λ])).obj K) := by
+  have := LocallyOfFiniteType.isLocallyNoetherian aY
+  have : Smooth f := SmoothOfRelativeDimension.smooth d f
+  intro i hi
+  set S := sheafSupport ((_root_.DerivedCategory.homologyFunctor _ (-(i - d))).obj (K⟦n⟧))
+  have hsub : sheafSupport ((_root_.DerivedCategory.homologyFunctor _ (-i)).obj
+      (((L((f)^*[ModuleCat.{u + 1} Λ])).obj K)⟦n + d⟧)) ⊆ f ⁻¹' S := by
+    have e := sheafSupport_congr ((leftDerivedUpperStarHomologyFunctorIso _ f (n + d + -i)).app K)
+    rw [Functor.comp_obj, Functor.comp_obj] at e
+    rw [sheafSupport_homology_shift, ← e,
+      show n + d + -i = n + -(i - d) by ring, show S = _ from sheafSupport_homology_shift K n _]
+    exact sheafSupport_upperStar_subset f _
+  obtain ⟨h₀, h₁⟩ := hK (i - d) (by obtain ⟨x, hx⟩ := hi; exact ⟨f x, hsub hx⟩)
+  refine ⟨by omega, ?_⟩
+  calc _ ≤ topologicalKrullDim (f ⁻¹' S) :=
+        (Topology.IsEmbedding.inclusion hsub).isInducing.topologicalKrullDim_le
+    _ ≤ topologicalKrullDim S + (d : ℕ∞) :=
+        f.topologicalKrullDim_preimage_le (isClosed_sheafSupport _) _
+          fun y _ ↦ f.topologicalKrullDim_preimage_singleton_le_of_smooth d y
+    _ ≤ ((i - d).toNat : ℕ∞) + (d : ℕ∞) := add_le_add h₁ le_rfl
+    _ = (i.toNat : ℕ∞) := by
+        rw [← WithBot.coe_add, ← Nat.cast_add, show (i - d).toNat + d = i.toNat by omega]
 
 /-- **Smooth pullback is perverse up to the shift**, cosupport side: for `f` smooth of
 relative dimension `d`, the pullback carries `ᵖD^{≥n}(Y) ∩ Dctf(Y)` into `ᵖD^{≥n+d}(X)`, by

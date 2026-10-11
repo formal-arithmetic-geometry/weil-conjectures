@@ -75,7 +75,34 @@ lemma sheafSupport_subset_of_isZero {F G : Sheaf X.smallEtaleTopology A}
     sheafSupport F ⊆ sheafSupport G :=
   fun _ hx U hU hG ↦ hx U hU (h U hG)
 
+/-- The support of a sheaf is closed. -/
+lemma isClosed_sheafSupport (F : Sheaf X.smallEtaleTopology A) : IsClosed (sheafSupport F) := by
+  rw [← isOpen_compl_iff, isOpen_iff_forall_mem_open]
+  intro x hx
+  simp only [sheafSupport, Set.mem_compl_iff, Set.mem_ofPred_eq, not_forall, not_not] at hx
+  obtain ⟨U, hxU, hU⟩ := hx
+  exact ⟨U, fun y hy hy' ↦ hy' U hy hU, U.isOpen, hxU⟩
+
+/-- The support of a pullback `f^* F` lies in the preimage of the support of `F`: if `F`
+vanishes on an open `V`, then `f^* F` vanishes on `f⁻¹(V)`. -/
+lemma sheafSupport_upperStar_subset (f : X ⟶ S) (F : Sheaf S.smallEtaleTopology A) :
+    sheafSupport (((f)^*[A]).obj F) ⊆ f ⁻¹' sheafSupport F := by
+  intro x hx V hxV hV
+  refine hx (f ⁻¹ᵁ V) hxV ?_
+  have e₁ := (Etale.upperStarComp A (f ⁻¹ᵁ V).ι f).app F
+  have e₂ := (Etale.upperStarComp A (f ∣_ V) V.ι ((f ⁻¹ᵁ V).ι ≫ f)
+    (morphismRestrict_ι f V).symm).app F
+  exact ((((f ∣_ V))^*[A]).map_isZero hV).of_iso (e₁.symm ≪≫ e₂)
+
 namespace DerivedCategory
+
+/-- The support of a cohomology sheaf of a shift: `𝓗ᵐ(K[a]) = 𝓗ᵃ⁺ᵐ(K)`. -/
+lemma sheafSupport_homology_shift (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A))
+    (a m : ℤ) :
+    sheafSupport ((_root_.DerivedCategory.homologyFunctor _ m).obj (K⟦a⟧)) =
+      sheafSupport ((_root_.DerivedCategory.homologyFunctor _ (a + m)).obj K) :=
+  sheafSupport_congr
+    (((_root_.DerivedCategory.homologyFunctor _ 0).shiftIso a m (a + m) rfl).app K)
 
 /-- The *support condition* `SuppCon(K)`: for every `i : ℤ`, the support of the cohomology
 sheaf `𝓗⁻ⁱK` has dimension at most `i`, the empty support having dimension `-∞`. In
