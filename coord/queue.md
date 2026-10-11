@@ -1,8 +1,8 @@
 # Work queue
 
-866 items; claim with `tools/claim.py next <group> [--stage N]`.
+865 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (18)
+## Stage 1: nodes to split (17)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -17,7 +17,6 @@
 | `lem-pc-derived-tensor-localization-cohomology` | 5017 | none |
 | `lem-pqf-quasicompact-h1-zero` | 6014 | none |
 | `lem-sc-picard-cech-cup-pullback-compat` | 6015 | none |
-| `lem-sc-picard-qcoh-finite-cd` | 6015 | none |
 | `lem-sc-picard-qcoh-universal-delta-embedding` | 6015 | none |
 | `lem-sc-pseudo-coherent-lift-stably-free-complex` | 6016 | none |
 | `lem-sc-valuation-limit-affine-pushforward-colimit` | 6016 | none |
@@ -878,7 +877,7 @@
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 | `def-nagata-fixed-base-separated-stage` | 6 | state |
 
-Not open yet: 1764 nodes that wait for a statement dependency, 59 nodes that wait for stage 1.
+Not open yet: 1765 nodes that wait for a statement dependency, 58 nodes that wait for stage 1.
 
 ## Stage 3: modules to prove (0)
 
