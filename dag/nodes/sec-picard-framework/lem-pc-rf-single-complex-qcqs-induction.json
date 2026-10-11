@@ -11,7 +11,7 @@
  },
  "kind": "statement",
  "title": "Quasi-compact quasi-separated derived base change from the single-complex condition",
- "statement": "In a cartesian square of schemes X' \\xrightarrow{g'} X and S' \\xrightarrow{g} S, with f:X\\to S quasi-compact and quasi-separated [def-pc-scheme, def-pc-base-change], write f':X'\\to S' for the base change of f. Let K \\in D_{\\mathrm{QCoh}}(\\mathcal O_X) and let L(g')^*K \\to K' be a map in D_{\\mathrm{QCoh}}(\\mathcal O_{X'}) [def-pc-derived-category]. For x'\\in X', put x=g'(x'), s'=f'(x') and s=f(x)=g(s'). Assume that for every x' and i\\in\\mathbf Z the canonical map H^i(K_x\\otimes^L_{\\mathcal O_{S,s}}\\mathcal O_{S',s'})\\otimes_{\\mathcal O_{X,x}\\otimes_{\\mathcal O_{S,s}}\\mathcal O_{S',s'}}\\mathcal O_{X',x'}\\to H^i(K'_{x'}) is an isomorphism. Then the composite Lg^*Rf_*K \\to Rf'_*L(g')^*K \\to Rf'_*K' is an isomorphism in D(\\mathcal O_{S'}).",
+ "statement": "In a cartesian square of schemes X' \\xrightarrow{g'} X and S' \\xrightarrow{g} S, with f:X\\to S quasi-compact and quasi-separated [def-pc-scheme, def-pc-base-change], write f':X'\\to S' for the base change of f. Let K \\in D_{\\mathrm{QCoh}}(\\mathcal O_X) and let L(g')^*K \\to K' be a map in D_{\\mathrm{QCoh}}(\\mathcal O_{X'}) [def-pc-derived-category]. For x'\\in X', put x=g'(x'), s'=f'(x') and s=f(x)=g(s'). Assume that for every x' and i\\in\\mathbf Z the canonical map H^i(K_x\\otimes^L_{\\mathcal O_{S,s}}\\mathcal O_{S',s'})\\otimes_{\\mathcal O_{X,x}\\otimes_{\\mathcal O_{S,s}}\\mathcal O_{S',s'}}\\mathcal O_{X',x'}\\to H^i(K'_{x'}) is an isomorphism [def-pc-single-complex-base-change-stalk-condition]. Then the composite Lg^*Rf_*K \\to Rf'_*L(g')^*K \\to Rf'_*K' is an isomorphism in D(\\mathcal O_{S'}) [def-pc-derived-base-change-map].",
  "source": {
   "document": "literature/stacks-project/perfect.tex",
   "place": "Tag 0DJ9 (lemma-single-complex-base-change), proof by induction principle and relative Mayer–Vietoris"
@@ -21,7 +21,9 @@
   "def-pc-derived-category",
   "def-pc-derived-direct-image",
   "def-pc-derived-pullback",
-  "def-pc-base-change"
+  "def-pc-base-change",
+  "def-pc-single-complex-base-change-stalk-condition",
+  "def-pc-derived-base-change-map"
  ],
  "proof": [
   {
@@ -184,5 +186,57 @@
    "decls": [],
    "missing": []
   }
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SingleComplexQcqsInduction",
+  "declaration": "AlgebraicGeometry.singleComplexBaseChangeQcqsInduction",
+  "declarations": [
+   "AlgebraicGeometry.singleComplexBaseChangeQcqsInduction"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/SingleComplexQcqsInduction.lean",
+  "statement": "theorem singleComplexBaseChangeQcqsInduction [∀ Y : Scheme.{u}, HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))] {X X' S S' : Scheme.{u}} (f : X ⟶ S) (f' : X' ⟶ S') (g : S' ⟶ S) (g' : X' ⟶ X) (sq : IsPullback g' f' f g) [QuasiCompact f] [QuasiSeparated f] (K : schemeDerivedCategory X) (hK : schemeDerivedQCohProperty X K) (K' : schemeDerivedCategory X') (hK' : schemeDerivedQCohProperty X' K') (φ : (derivedPullback g').obj K ⟶ K') (h_stalk : SingleComplexBaseChange.StalkCondition f f' g g' sq K K' φ) : IsIso (schemeDerivedBaseChangeMap f f' g g' sq.w K ≫ (schemeDerivedDirectImage f').map φ)",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-rsq"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-rsq",
+  "group": "F1",
+  "result": "fix",
+  "note": "cartesian square as IsPullback g' f' f g, QuasiCompact+QuasiSeparated f, K,K' D_QCoh, phi: Lg'^*K->K', conclusion IsIso(landed schemeDerivedBaseChangeMap sq.w K >> Rf'_* phi); new node needed (landed PullbackStalkTensor.IsComparisonIso has no target K'/phi); fixed H5: stalkComparison read Classical.choice of sorried nonempty_coordinates -> comparison takes Coordinates c, new predicate StalkCondition quantifies over all c (as landed IsComparisonIso); stale copy of landed SchemeDerivedBaseChangeMap.lean and def-pc-derived-base-change-map record reverted; check_dag clean; reverted the delivery's change of existing node(s) def-pc-derived-base-change-map (--revert-nodes; kept as on sheaf-dag)",
+  "statement_corrected": true
+ },
+ "statement_change": {
+  "date": "2026-10-11",
+  "by": "F1 stage 2",
+  "old_statement": "In a cartesian square of schemes X' \\xrightarrow{g'} X and S' \\xrightarrow{g} S, with f:X\\to S quasi-compact and quasi-separated [def-pc-scheme, def-pc-base-change], write f':X'\\to S' for the base change of f. Let K \\in D_{\\mathrm{QCoh}}(\\mathcal O_X) and let L(g')^*K \\to K' be a map in D_{\\mathrm{QCoh}}(\\mathcal O_{X'}) [def-pc-derived-category]. For x'\\in X', put x=g'(x'), s'=f'(x') and s=f(x)=g(s'). Assume that for every x' and i\\in\\mathbf Z the canonical map H^i(K_x\\otimes^L_{\\mathcal O_{S,s}}\\mathcal O_{S',s'})\\otimes_{\\mathcal O_{X,x}\\otimes_{\\mathcal O_{S,s}}\\mathcal O_{S',s'}}\\mathcal O_{X',x'}\\to H^i(K'_{x'}) is an isomorphism. Then the composite Lg^*Rf_*K \\to Rf'_*L(g')^*K \\to Rf'_*K' is an isomorphism in D(\\mathcal O_{S'}).",
+  "what": "The canonical stalk map and the derived base-change composite lacked defining statement dependencies. Added explicit definition citations required to type these maps, preserving all mathematical clauses; the original Lean used an arbitrary proposition and arbitrary morphism instead.",
+  "source": {
+   "document": "literature/stacks-project/perfect.tex",
+   "place": "Tag 0DJ9 (lemma-single-complex-base-change), proof by induction principle and relative Mayer–Vietoris"
+  },
+  "citers": [
+   {
+    "id": "lem-pc-tor-independent-perfect-tensor-base-change",
+    "holds": true,
+    "note": "Only canonical-map definition citations were added; the objects, qcqs and stalk hypotheses and comparison conclusion are unchanged, so the cited application still holds."
+   },
+   {
+    "id": "lem-pc-rf-base-change-single-complex-criterion",
+    "holds": true,
+    "note": "Only canonical-map definition citations were added; the objects, qcqs and stalk hypotheses and comparison conclusion are unchanged, so the cited application still holds."
+   }
+  ],
+  "old_stmt_deps": [
+   "def-pc-scheme",
+   "def-pc-derived-category",
+   "def-pc-derived-direct-image",
+   "def-pc-derived-pullback",
+   "def-pc-base-change"
+  ]
  }
 }
