@@ -197,5 +197,24 @@
   "by": "L",
   "result": "pass",
   "note": "Reviewed by the lead (opus-relaunch6). Six steps along the proof of Stacks 02LL (induction on n): base case written out, the unique point x'_n over (x_n, u) with the same residue field (fibre-product-points leaf and the 01JT residue node), lft and isolatedness after base change, the one-point case 02LK (new unsplit node; Mathlib's @[stacks 00UJ] declaration covers clauses (1)-(4) of 00UJ but not (5), so 00UJ stays for the 02LK split) with pasting and composition, V_n works for x_n (written out), the earlier opens persist (new unsplit node for the final assertion of 02LK, stated in the generality Stacks uses without proof). Tags verified (02LL, 02LK, 00UJ). cartesian-square-pasting is a Mathlib leaf (tool)."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.EtaleLocalFiniteMultiplePointsElementary",
+  "declaration": "AlgebraicGeometry.exists_etale_local_finite_multiple_points_elementary",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleLocalFiniteMultiplePointsElementary.lean",
+  "statement": "theorem exists_etale_local_finite_multiple_points_elementary {X S : Scheme.{u}} (f : X ⟶ S) [LocallyOfFiniteType f] (s : S) (n : ℕ) (x : Fin n → X) (hx : ∀ i, f (x i) = s) (hisolated : ∀ i, IsOpen ({f.asFiber (x i)} : Set (f.fiber (f (x i))))) : ∃ (U : Scheme.{u}) (φ : U ⟶ S) (u : U), Etale φ ∧ φ u = s ∧ IsIso (φ.residueFieldMap u) ∧ ∃ (V : Fin n → (pullback f φ).Opens) (v : (i : Fin n) → (V i).toScheme), ∀ i : Fin n, IsFinite ((V i).ι ≫ pullback.snd f φ) ∧ ((V i).ι ≫ pullback.snd f φ) (v i) = u ∧ (∀ w : (V i).toScheme, ((V i).ι ≫ pullback.snd f φ) w = u → w = v i) ∧ ((V i).ι ≫ pullback.fst f φ) (v i) = x i ∧ IsIso (((V i).ι ≫ pullback.fst f φ).residueFieldMap (v i))",
+  "branch": "sheaf-dag",
+  "by": "J1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-elme1001"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-elme1001",
+  "group": "J1",
+  "result": "fix",
+  "note": "f lft, s, Fin n points no distinctness (Stacks 02LL), hx, isolated via f.asFiber in f.fiber (f (x i)) as 2e990db3c; Etale φ, φ u = s, IsIso residueFieldMap as F1 4d326dc08; per i: V i finite over U, unique v i : V i over u, maps to x i, IsIso residue map"
  }
 }
