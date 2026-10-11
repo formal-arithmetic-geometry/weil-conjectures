@@ -585,6 +585,7 @@ public import WeilConjectures.CategoryTheory.Sites.FlatLocalRelations
 public import WeilConjectures.CategoryTheory.Sites.InjectiveSheafSmulEpi
 public import WeilConjectures.CategoryTheory.Sites.MonObj
 public import WeilConjectures.CategoryTheory.Sites.Point.Flat
+public import WeilConjectures.CategoryTheory.Sites.Point.FreeYoneda
 public import WeilConjectures.CategoryTheory.Sites.Point.Linear
 public import WeilConjectures.CategoryTheory.Sites.Point.Torsion
 public import WeilConjectures.CategoryTheory.Sites.PullbackFlat
@@ -697,14 +698,21 @@ public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.Basic
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.Boundary
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.BoundaryConstruction
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.BoundaryInertia
+public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.BoundaryPurity
+public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.CharacterLogarithm
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.Chebotarev
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.Construction
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.Curve
+public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.DetWeightExterior
+public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.DetWeightOperations
+public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.DetWeights
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.FundamentalGroup
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.Jacobian
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.LinearAlgebra
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.LFunction
+public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.LocalPolynomial
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.LocalSystems
+public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.MiddleExtension
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.Operations
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.Purity
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.RankOne
@@ -1186,6 +1194,7 @@ public import WeilConjectures.Mathlib.CategoryTheory.Triangulated.Triangulated
 public import WeilConjectures.Mathlib.CategoryTheory.Whiskering
 public import WeilConjectures.Mathlib.CategoryTheory.Yoneda
 public import WeilConjectures.Mathlib.Data.Fin.Rev
+public import WeilConjectures.Mathlib.Data.Multiset.UnionInter
 public import WeilConjectures.Mathlib.Data.Nat.Choose.Dvd
 public import WeilConjectures.Mathlib.Data.Nat.Factorization.Induction
 public import WeilConjectures.Mathlib.Data.Set.Image
@@ -1372,6 +1381,7 @@ public import WeilConjectures.Mathlib.Topology.Sober
 public import WeilConjectures.Mathlib.Topology.Spectral.Basic
 public import WeilConjectures.Mathlib.Topology.Spectral.ConstructibleTopology
 public import WeilConjectures.Mathlib.Topology.Spectral.Prespectral
+public import WeilConjectures.NumberTheory.Padics.Exponential
 public import WeilConjectures.NumberTheory.Padics.Extension
 public import WeilConjectures.NumberTheory.Padics.IntegersNoetherian
 public import WeilConjectures.NumberTheory.Padics.Logarithm
@@ -1379,8 +1389,11 @@ public import WeilConjectures.NumberTheory.TateModule
 public import WeilConjectures.PointCount
 public import WeilConjectures.PointCountBound
 public import WeilConjectures.RepresentationTheory.Clifford
+public import WeilConjectures.RepresentationTheory.CompositionSeries
+public import WeilConjectures.RepresentationTheory.ExteriorPowerFiltration
 public import WeilConjectures.RepresentationTheory.FiniteMatrixWitness
 public import WeilConjectures.RepresentationTheory.IntegralModel
+public import WeilConjectures.RepresentationTheory.TensorPower
 public import WeilConjectures.RingTheory.BertiniNoether
 public import WeilConjectures.RingTheory.Bialgebra.Frobenius
 public import WeilConjectures.RingTheory.Dehomogenization

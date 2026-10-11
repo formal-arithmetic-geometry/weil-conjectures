@@ -11,6 +11,7 @@ public import Mathlib.Analysis.Complex.Polynomial.Basic
 public import Mathlib.LinearAlgebra.GeneralLinearGroup.Basic
 public import WeilConjectures.AlgebraicGeometry.LinearAlgebraicGroup.Weights
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.Boundary
+public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.BoundaryPurity
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.Chebotarev
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.Curve
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.Operations
@@ -627,44 +628,24 @@ geometrically connected curve `C₀` whose restriction to the open `U₀` is pun
 weight `w` is punctually `ι`-pure of weight `w` on all of `C₀`.
 
 At a closed point of `U₀` this is the hypothesis, the local Frobenius of `C₀` being conjugate to
-the image of that of `U₀`. At a boundary point `s`, inertia acts trivially on `𝒢`, which is lisse
-on `C₀`, so its stalk is the whole local representation, with Frobenius the restriction of the
-residue Frobenius lift; the bound for `j_* ℱ`, applied to `𝒢` and to its dual `𝒢 ^ ∨`, whose
-eigenvalues are the inverses of those of `𝒢`, gives an upper bound `w` and a lower bound `w`
-(`cor-wf-unramified-boundary-purity`,
-`AlgebraicGeometry.BoundaryDatum.frobeniusWeight_eq_of_isPunctuallyPure`). As there, the
-Euler-product form of the trace formula is the hypothesis `hD`. -/
+the image of that of `U₀`. At a boundary point `s` the middle extension of `𝒢|_{U₀}` is `𝒢`
+itself (`lem-a1-lisse-middle-extension`), so the semi-continuity argument runs with the Euler
+product of the lisse sheaf `𝒢` on an affine neighbourhood of `s` (`cor-rp-euler-product`); applied
+to `𝒢` and to its dual `𝒢 ^ ∨`, whose eigenvalues are the inverses of those of `𝒢`, it gives an
+upper bound `w` and a lower bound `w` (`cor-wf-unramified-boundary-purity`,
+`AlgebraicGeometry.WeilGroup.isPunctuallyPure_of_forall_mem_range`). -/
 theorem isPunctuallyPure_of_isPunctuallyPure_restrict [SmoothOfRelativeDimension 1 p]
-    [GeometricallyConnected p] [Fact (ringChar K ≠ l)] (hD : D.HasMiddleExtensionEulerProduct l ι)
+    [GeometricallyConnected p] [Fact (ringChar K ≠ l)]
     (ρ : Representation (PadicAlgCl l) WC.carrier V) {w : ℝ} (hρ : WC.IsLisse l ρ)
     (hpure : WU.IsPunctuallyPure l (ρ.comp D.restrict) ι w) :
     WC.IsPunctuallyPure l ρ ι w := by
-  intro x α hα
-  rw [WeilGroup.localEigenvalues, Polynomial.mem_roots (LinearMap.charpoly_monic _).ne_zero,
-    ← Module.End.hasEigenvalue_iff_isRoot_charpoly] at hα
-  by_cases hx : x.1 ∈ Set.range j.base
-  · -- a closed point of `U₀`
-    obtain ⟨y, hy⟩ := hx
-    have hyfin : y ∈ U.finitePoints :=
-      (Scheme.Hom.mem_finitePoints_iff_of_isIso j y).1 (hy ▸ x.2)
-    have hconj := D.restrict_frobenius ⟨y, hyfin⟩ x hy
-    have hmem : α ∈ WU.localEigenvalues l (ρ.comp D.restrict) ⟨y, hyfin⟩ := by
-      rw [WeilGroup.localEigenvalues, Polynomial.mem_roots (LinearMap.charpoly_monic _).ne_zero]
-      rw [Module.End.hasEigenvalue_iff_isRoot_charpoly,
-        LinearMap.charpoly_of_isConj (ρ.map_isConj hconj)] at hα
-      exact hα
-    have h := hpure ⟨y, hyfin⟩ α hmem
-    rwa [← Scheme.Hom.pointNorm_of_isIso j y, hy] at h
-  · -- a boundary point
-    have hconj := D.restrict_residueFrobenius ⟨x.1, hx⟩
-    have hα' : Module.End.HasEigenvalue ((ρ.comp D.restrict) (D.residueFrobenius ⟨x.1, hx⟩)) α := by
-      rw [Module.End.hasEigenvalue_iff_isRoot_charpoly] at hα ⊢
-      rw [MonoidHom.comp_apply, ← LinearMap.charpoly_of_isConj (ρ.map_isConj hconj)]
-      exact hα
-    exact D.frobeniusWeight_eq_of_isPunctuallyPure l ι hD (ρ.comp D.restrict)
-      (D.isLisse_comp_restrict l hρ) hpure ⟨x.1, hx⟩
-      (fun g hg ↦ by
-        rw [MonoidHom.comp_apply, D.inertia_le_ker_restrict ⟨x.1, hx⟩ hg, map_one]) hα'
+  refine WC.isPunctuallyPure_of_forall_mem_range l ρ ι j hρ fun x hx α hα ↦ ?_
+  obtain ⟨y, hy⟩ := hx
+  have hyfin : y ∈ U.finitePoints :=
+    (Scheme.Hom.mem_finitePoints_iff_of_isIso j y).1 (hy ▸ x.2)
+  have hxy : j.mapFinitePoints ⟨y, hyfin⟩ = x := Subtype.ext hy
+  rw [← hxy] at hα ⊢
+  exact D.toRestriction.frobeniusWeight_eq_of_isPunctuallyPure_comp l ρ ι hpure _ α hα
 
 end BoundaryDatum
 

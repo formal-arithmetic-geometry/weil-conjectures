@@ -157,7 +157,7 @@ noncomputable def picToSheafHTwo (m : ℕ) (hm : (m : k) ≠ 0) :
     Additive X.Pic →+ Sheaf.H (X.rootsOfUnitySheaf m) 2 :=
   (X.kummerδ₁ m (isUnit_natCast_appTop m hm)).comp
     (Pic.toCohomologicalPicardGroupAddEquiv X).toAddMonoidHom
-omit [IsProper (X ↘ Spec (.of k))] in
+
 /-- On a smooth curve over an algebraically closed field the Kummer map to `H²(X, μ_m)` is
 surjective, since the Brauer group vanishes. -/
 lemma surjective_picToSheafHTwo (m : ℕ) (hm : (m : k) ≠ 0) :
@@ -207,9 +207,12 @@ noncomputable def sheafHTwoTrace (m : ℕ) (hm : (m : k) ≠ 0) :
 /-- The trace of the Kummer class of a line bundle is its degree modulo `m`. -/
 @[simp]
 lemma sheafHTwoTrace_picToSheafHTwo (m : ℕ) (hm : (m : k) ≠ 0) (L : Additive X.Pic) :
-    sheafHTwoTrace m hm (picToSheafHTwo m hm L) = picDegreeMod m L := by
-  rw [sheafHTwoTrace, AddMonoidHom.comp_apply, AddEquiv.coe_toAddMonoidHom,
-    (AddEquiv.symm_apply_eq _).2 rfl]
+    sheafHTwoTrace m hm (picToSheafHTwo m hm L) = picDegreeMod (k := k) m L := by
+  have e : (QuotientAddGroup.quotientKerEquivOfSurjective _ (surjective_picToSheafHTwo (X := X) m
+      hm)).symm (picToSheafHTwo m hm L) = (L : Additive X.Pic ⧸ (picToSheafHTwo m hm).ker) := by
+    rw [AddEquiv.symm_apply_eq]
+    rfl
+  rw [sheafHTwoTrace, AddMonoidHom.comp_apply, AddEquiv.coe_toAddMonoidHom, e]
   rfl
 
 /-- The trace `H²(X, μ_m) ⟶ ℤ/m` of a smooth proper connected curve over an algebraically

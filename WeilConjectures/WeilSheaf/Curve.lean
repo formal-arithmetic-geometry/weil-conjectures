@@ -8,7 +8,10 @@ module
 public import Mathlib.AlgebraicGeometry.Geometrically.Connected
 public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
 public import WeilConjectures.WeilSheaf.Dual
+public import WeilConjectures.DeligneLaumon.AffineLine.Endpoints
 public import WeilConjectures.WeilSheaf.LFunction
+public import WeilConjectures.WeilSheaf.LowerStarId
+public import WeilConjectures.WeilSheaf.TateTwistCohomology
 
 /-!
 # Compactly supported cohomology of a lisse Weil sheaf on an affine curve
@@ -71,7 +74,8 @@ theorem nonempty_equiv_compactlySupportedCohomology_two [IsAffine U]
     (hF : F.IsLisse) :
     Nonempty ((F.compactlySupportedCohomology 2).Equiv
       ((F.geometricCoinvariants hF).tateTwist (Nat.card k₀) (-1))) := by
-  sorry
+  obtain ⟨e⟩ := nonempty_equiv_compactlySupportedCohomology_directImage_two (𝟙 U) F hF
+  exact ⟨(compactlySupportedCohomologyEquivOfIso (lowerStarIdIso F).symm 2).trans e⟩
 
 /-- The compactly supported cohomology of a lisse Weil sheaf on a smooth geometrically
 connected affine curve vanishes outside degrees `1` and `2`. -/

@@ -387,4 +387,173 @@ theorem frobeniusWeight_le_add_two_of_isAffine [IsAffine C] [SmoothOfRelativeDim
   rw [Scheme.Hom.pointNorm_eq_pow_degreeOver p s.2]
   exact frobeniusWeight_le_add_two_of_le_norm hα0 he hz hzR
 
+/-- Step 4 of `lem-wf-boundary-semicontinuity` for a lisse sheaf on an affine curve: sharpening by
+tensor powers. Applying `AlgebraicGeometry.WeilGroup.frobeniusWeight_le_add_two_of_isAffine` to
+the iterated tensor squares `ℱ ^ ⊗ 2 ^ k`, of weights at most `2 ^ k β` on `T` and with the local
+eigenvalue `α ^ (2 ^ k)`, gives `wt (α) ≤ β + 2 / 2 ^ k`. -/
+theorem frobeniusWeight_le_add_div_two_pow_of_isAffine [IsAffine C]
+    [SmoothOfRelativeDimension 1 p] [GeometricallyConnected p] [Fact (ringChar K ≠ l)] (k : ℕ) :
+    ∀ {V : Type u} [AddCommGroup V] [Module (PadicAlgCl l) V]
+      [FiniteDimensional (PadicAlgCl l) V] (ρ : Representation (PadicAlgCl l) W.carrier V),
+      W.IsLisse l ρ → ∀ {T : Set C.finitePoints}, Tᶜ.Finite → ∀ {x₀ : C.finitePoints}, x₀ ∈ T →
+      ∀ {β : ℝ}, (∀ x ∈ T, ∀ α ∈ W.localEigenvalues l ρ x,
+        frobeniusWeight ι (C.pointNorm x.1) α ≤ β) →
+      ∀ (s : C.finitePoints) {α : PadicAlgCl l}, α ∈ W.localEigenvalues l ρ s →
+        frobeniusWeight ι (C.pointNorm s.1) α ≤ β + 2 / 2 ^ k := by
+  induction k with
+  | zero =>
+    intro V _ _ _ ρ hρ T hT x₀ hx₀ β hw s α hα
+    simpa using W.frobeniusWeight_le_add_two_of_isAffine l ρ ι hρ hT hx₀ hw s hα
+  | succ k ih =>
+    intro V _ _ _ ρ hρ T hT x₀ hx₀ β hw s α hα
+    have hw2 : ∀ x ∈ T, ∀ γ ∈ W.localEigenvalues l (ρ.tprod ρ) x,
+        frobeniusWeight ι (C.pointNorm x.1) γ ≤ 2 * β := by
+      intro x hx γ hγ
+      rw [localEigenvalues_tprod] at hγ
+      obtain ⟨⟨a, b⟩, hab, rfl⟩ := Multiset.mem_map.1 hγ
+      rw [Multiset.mem_product] at hab
+      rw [frobeniusWeight_mul ι _ (fun h ↦ zero_notMem_localEigenvalues x (h ▸ hab.1))
+        (fun h ↦ zero_notMem_localEigenvalues x (h ▸ hab.2))]
+      linarith [hw x hx a hab.1, hw x hx b hab.2]
+    have h := ih (ρ.tprod ρ) (hρ.tprod hρ) hT hx₀ hw2 s (sq_mem_localEigenvalues_tprod_self hα)
+    rw [frobeniusWeight_pow] at h
+    have h2 : (2 : ℝ) / 2 ^ (k + 1) = 2 / 2 ^ k / 2 := by rw [pow_succ]; ring
+    rw [h2]
+    push_cast at h
+    linarith
+
+/-- `lem-wf-boundary-semicontinuity` for a lisse sheaf on an affine curve: if `ℱ` is lisse on a
+smooth geometrically connected affine curve and has weights at most `β` at the closed points of
+a nonempty set `T` with finite complement, then it has weights at most `β` everywhere. -/
+theorem frobeniusWeight_le_of_isAffine [IsAffine C] [SmoothOfRelativeDimension 1 p]
+    [GeometricallyConnected p] [Fact (ringChar K ≠ l)] (hρ : W.IsLisse l ρ)
+    {T : Set C.finitePoints} (hT : Tᶜ.Finite) {x₀ : C.finitePoints} (hx₀ : x₀ ∈ T) {β : ℝ}
+    (hw : ∀ x ∈ T, ∀ α ∈ W.localEigenvalues l ρ x, frobeniusWeight ι (C.pointNorm x.1) α ≤ β) :
+    W.HasWeightsAtMost l ρ ι β := by
+  intro s α hα
+  refine le_of_forall_pos_lt_add fun ε hε ↦ ?_
+  obtain ⟨k, hk⟩ := exists_pow_lt_of_lt_one (half_pos hε) one_half_lt_one
+  have h := W.frobeniusWeight_le_add_div_two_pow_of_isAffine l ι k ρ hρ hT hx₀ hw s hα
+  have hk' : (2 : ℝ) / 2 ^ k < ε := by
+    rw [one_div_pow] at hk
+    have : (2 : ℝ) / 2 ^ k = 2 * (1 / 2 ^ k) := by ring
+    rw [this]
+    linarith
+  linarith
+
+variable {W l ρ}
+
+omit [FiniteDimensional (PadicAlgCl l) V] in
+/-- If `α` is a local eigenvalue of `ℱ` at `x`, then `α⁻¹` is a local eigenvalue of `ℱ ^ ∨`. -/
+theorem inv_mem_localEigenvalues_dual [FiniteDimensional (PadicAlgCl l) V] {x : C.finitePoints}
+    {α : PadicAlgCl l} (hα : α ∈ W.localEigenvalues l ρ x) :
+    α⁻¹ ∈ W.localEigenvalues l ρ.dual x := by
+  rw [localEigenvalues, Polynomial.mem_roots (LinearMap.charpoly_monic _).ne_zero,
+    ← Module.End.hasEigenvalue_iff_isRoot_charpoly] at hα ⊢
+  rw [Representation.hasEigenvalue_dual_iff]
+  exact ρ.hasEigenvalue_inv hα
+
+/-- If `α` is a local eigenvalue of `ℱ ^ ∨` at `x`, then `α⁻¹` is a local eigenvalue of `ℱ`. -/
+theorem inv_mem_localEigenvalues_of_mem_dual {x : C.finitePoints} {α : PadicAlgCl l}
+    (hα : α ∈ W.localEigenvalues l ρ.dual x) : α⁻¹ ∈ W.localEigenvalues l ρ x := by
+  rw [localEigenvalues, Polynomial.mem_roots (LinearMap.charpoly_monic _).ne_zero,
+    ← Module.End.hasEigenvalue_iff_isRoot_charpoly] at hα ⊢
+  rw [Representation.hasEigenvalue_dual_iff] at hα
+  simpa using ρ.hasEigenvalue_inv hα
+
+variable (W l ρ)
+
+/-- Weights at most `β` on a nonempty open `U₀` of a smooth geometrically connected curve `C₀`
+give weights at most `β` on all of `C₀`, for a lisse sheaf on `C₀`.
+
+Fix a closed point `x` and an affine open neighbourhood `X'₀` of it, a smooth geometrically
+connected affine curve with a restriction of Weil groups `W(X'₀) → W(C₀)`
+(`AlgebraicGeometry.WeilGroup.Restriction.exists_weilGroup`). The closed points of `X'₀` in `U₀`
+form a nonempty set with finite complement, the boundary `C₀ \ U₀` being finite, so the affine case
+(`AlgebraicGeometry.WeilGroup.frobeniusWeight_le_of_isAffine`) applies to the restriction of `ℱ`
+to `X'₀`, whose local eigenvalues at `x` are those of `ℱ`. -/
+theorem hasWeightsAtMost_of_forall_mem_range [SmoothOfRelativeDimension 1 p]
+    [GeometricallyConnected p] [Fact (ringChar K ≠ l)] {U : Scheme.{u}} (j : U ⟶ C)
+    [IsOpenImmersion j] [Nonempty U] (hρ : W.IsLisse l ρ) {β : ℝ}
+    (hw : ∀ x : C.finitePoints, x.1 ∈ Set.range j.base → ∀ α ∈ W.localEigenvalues l ρ x,
+      frobeniusWeight ι (C.pointNorm x.1) α ≤ β) :
+    W.HasWeightsAtMost l ρ ι β := by
+  intro x α hα
+  have := SmoothOfRelativeDimension.smooth 1 p
+  have := W.connectedSpace
+  obtain ⟨X', hX', hxX', -⟩ := exists_isAffineOpen_mem_and_subset (x := x.1) (U := ⊤) trivial
+  have : IsAffine X' := hX'
+  have : Nonempty X' := ⟨⟨x.1, hxX'⟩⟩
+  have : IsCurve (X'.ι ≫ p) := isCurve_comp_of_isAffine X'.ι
+  have : SmoothOfRelativeDimension 1 (X'.ι ≫ p) := by
+    simpa using smoothOfRelativeDimension_comp (n := 0) (m := 1) X'.ι p
+  have : GeometricallyConnected (X'.ι ≫ p) := geometricallyConnected_comp X'.ι
+  obtain ⟨W', ⟨R⟩⟩ := Restriction.exists_weilGroup W X'.ι rfl
+  set T : Set X'.toScheme.finitePoints := {y | (X'.ι.mapFinitePoints y).1 ∈ Set.range j.base}
+  -- the points of `X'₀` outside `U₀` are boundary points of `U₀`
+  have hT : Tᶜ.Finite := by
+    refine ((finite_boundary (p := p) j).preimage
+      (f := fun y : X'.toScheme.finitePoints ↦ X'.ι.base y.1) fun y _ y' _ h ↦ ?_).subset
+      fun y hy ↦ hy
+    exact Subtype.ext (X'.ι.isOpenEmbedding.injective h)
+  -- a closed point of `X'₀` in `U₀`
+  obtain ⟨x₀, hx₀⟩ : T.Nonempty := by
+    have := irreducibleSpace_of_smooth (p := p)
+    have : IsLocallyNoetherian C := LocallyOfFiniteType.isLocallyNoetherian p
+    have : CompactSpace C := QuasiCompact.compactSpace_of_compactSpace p
+    have : IsNoetherian C := {}
+    obtain ⟨u⟩ := (inferInstance : Nonempty U)
+    obtain ⟨y, hyX', hyU⟩ := nonempty_preirreducible_inter X'.isOpen j.opensRange.isOpen
+      ⟨x.1, hxX'⟩ ⟨j.base u, u, rfl⟩
+    set V := X' ⊓ j.opensRange
+    have : Nonempty V := ⟨⟨y, hyX', hyU⟩⟩
+    obtain ⟨v, hv⟩ := (V.ι ≫ p).exists_mem_finitePoints
+    have hvC := (Scheme.Hom.mem_finitePoints_iff_of_isIso V.ι v).2 hv
+    have hvX' : V.ι.base v ∈ X' := v.2.1
+    refine ⟨⟨⟨V.ι.base v, hvX'⟩, (Scheme.Hom.mem_finitePoints_iff_of_isIso X'.ι _).1 hvC⟩, ?_⟩
+    exact v.2.2
+  -- weights at the points of `T`
+  have hw' : ∀ y ∈ T, ∀ γ ∈ W'.localEigenvalues l (ρ.comp R.restrict) y,
+      frobeniusWeight ι (X'.toScheme.pointNorm y.1) γ ≤ β := by
+    intro y hy γ hγ
+    rw [R.localEigenvalues_comp] at hγ
+    rw [← X'.ι.pointNorm_mapFinitePoints]
+    exact hw _ hy γ hγ
+  have hy : (⟨x.1, hxX'⟩ : X') ∈ X'.toScheme.finitePoints :=
+    (Scheme.Hom.mem_finitePoints_iff_of_isIso X'.ι _).1 x.2
+  have hxy : X'.ι.mapFinitePoints ⟨_, hy⟩ = x := Subtype.ext rfl
+  rw [← hxy] at hα ⊢
+  rw [← R.localEigenvalues_comp] at hα
+  rw [X'.ι.pointNorm_mapFinitePoints]
+  exact frobeniusWeight_le_of_isAffine W' l (ρ.comp R.restrict) ι (R.isLisse_comp l hρ) hT hx₀
+    hw' _ α hα
+
+/-- Blueprint `cor-wf-unramified-boundary-purity`: Purity at an unramified boundary point, the
+consequence. Also the second assertion of `sk-p-real-semi`.
+
+A lisse Weil sheaf `𝒢` on a smooth geometrically connected curve `C₀` which is punctually
+`ι`-pure of weight `w` at the closed points of a nonempty open `U₀` is punctually `ι`-pure of
+weight `w` on all of `C₀`: the weights are at most `w`
+(`AlgebraicGeometry.WeilGroup.hasWeightsAtMost_of_forall_mem_range`), and so are those of the
+dual `𝒢 ^ ∨`, which is pure of weight `-w` on `U₀`, whose local eigenvalues are the inverses of
+those of `𝒢`. -/
+theorem isPunctuallyPure_of_forall_mem_range [SmoothOfRelativeDimension 1 p]
+    [GeometricallyConnected p] [Fact (ringChar K ≠ l)] {U : Scheme.{u}} (j : U ⟶ C)
+    [IsOpenImmersion j] [Nonempty U] (hρ : W.IsLisse l ρ) {w : ℝ}
+    (hpure : ∀ x : C.finitePoints, x.1 ∈ Set.range j.base → ∀ α ∈ W.localEigenvalues l ρ x,
+      frobeniusWeight ι (C.pointNorm x.1) α = w) :
+    W.IsPunctuallyPure l ρ ι w := by
+  have hup := W.hasWeightsAtMost_of_forall_mem_range l ρ ι j hρ fun x hx α hα ↦
+    (hpure x hx α hα).le
+  have hdown := W.hasWeightsAtMost_of_forall_mem_range l ρ.dual ι j hρ.dual (β := -w)
+    fun x hx α hα ↦ by
+      have h := hpure x hx _ (inv_mem_localEigenvalues_of_mem_dual hα)
+      rw [frobeniusWeight_inv] at h
+      linarith
+  intro x α hα
+  have h1 := hup x α hα
+  have h2 := hdown x _ (inv_mem_localEigenvalues_dual hα)
+  rw [frobeniusWeight_inv] at h2
+  linarith
+
 end AlgebraicGeometry.WeilGroup

@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.DetWeights
+public import WeilConjectures.Mathlib.Data.Multiset.UnionInter
 public import WeilConjectures.RepresentationTheory.ExteriorPowerFiltration
 
 /-!
@@ -112,6 +113,106 @@ theorem exists_le_rankDetWeightMultiset_of_isIrreducible (hρ : W.IsLisse l ρ)
   · rw [detWeight_of_equiv ι e₀, ← hsum, detWeight_weightCharacter]
     rfl
 
+/-- The constituents of the steps `⋀^j A ⊗ ⋀^{r - j} (ρ / A)` of the filtration of `⋀^r ρ` along
+a subrepresentation `A` of a lisse `ρ` have finite geometric determinant: these steps are
+subquotients of the lisse `⋀^r ρ`. -/
+theorem hasFiniteGeometricDet_subquotient_tprod (hρ : W.IsLisse l ρ) (A : Subrepresentation ρ)
+    {r j : ℕ} (hjr : j ≤ r)
+    (U S : Subrepresentation ((A.toRepresentation.exteriorPower j).tprod
+      (A.quotient.exteriorPower (r - j)))) :
+    (S.subquotient U).HasFiniteGeometricDet W.deg := by
+  obtain ⟨e⟩ := Representation.nonempty_equiv_exteriorPowerFiltration A hjr
+  exact W.finite_range_of_continuous _ (IsLisse.continuous_det_apply
+    ((IsLisse.of_equiv e.symm ((hρ.exteriorPower r).subquotient _ _)).subquotient S U))
+
+/-- The forward induction step for `AlgebraicGeometry.WeilGroup.detWeight_subquotient_exteriorPower`:
+if the constituents of all exterior powers of a subrepresentation `A` and of the quotient `ρ / A`
+have determinant weights which are sums of entries of their rank-counted lists, then so do those
+of `⋀^r ρ`. A constituent of `⋀^r ρ` is a constituent of a step `⋀^j A ⊗ ⋀^{r - j} (ρ / A)` of
+the filtration along `A`, so its weight is a sum `dw_ι(Q₁) + dw_ι(Q₂)` of weights of constituents
+of `⋀^j A` and `⋀^{r - j} (ρ / A)` by the two-factor tensor rule. -/
+theorem exists_le_rankDetWeightMultiset_of_subrepresentation (hρ : W.IsLisse l ρ)
+    (A : Subrepresentation ρ)
+    (hA : ∀ (j : ℕ) (U S : Subrepresentation (A.toRepresentation.exteriorPower j)),
+      (S.subquotient U).IsIrreducible →
+      ∃ T : Multiset ℝ, T ≤ W.rankDetWeightMultiset l A.toRepresentation ι ∧
+        Multiset.card T = j ∧ W.detWeight l (S.subquotient U) ι = T.sum)
+    (hQ : ∀ (j : ℕ) (U S : Subrepresentation (A.quotient.exteriorPower j)),
+      (S.subquotient U).IsIrreducible →
+      ∃ T : Multiset ℝ, T ≤ W.rankDetWeightMultiset l A.quotient ι ∧
+        Multiset.card T = j ∧ W.detWeight l (S.subquotient U) ι = T.sum)
+    {r : ℕ} {U S : Subrepresentation (ρ.exteriorPower r)} (hirr : (S.subquotient U).IsIrreducible) :
+    ∃ T : Multiset ℝ, T ≤ W.rankDetWeightMultiset l ρ ι ∧ Multiset.card T = r ∧
+      W.detWeight l (S.subquotient U) ι = T.sum := by
+  obtain ⟨j, hj, U', S', ⟨e₁⟩⟩ :=
+    Subrepresentation.exists_subquotient_equiv_of_antitone_chain
+      (Representation.exteriorPowerFiltration_eq_bot A (Nat.lt_succ_self r))
+      (fun j _ ↦ Representation.exteriorPowerFiltration_antitone A r (Nat.le_succ j))
+      ((Representation.exteriorPowerFiltration_zero A r).symm ▸ le_top) hirr
+  have hjr : j ≤ r := Nat.lt_succ_iff.1 hj
+  obtain ⟨e⟩ := Representation.nonempty_equiv_exteriorPowerFiltration A hjr
+  obtain ⟨U'', S'', ⟨e₂⟩⟩ := Subrepresentation.exists_subquotient_equiv_of_equiv e U' S'
+  let f := e₂.trans e₁
+  obtain ⟨UV, SV, UE, SE, -, -, hV, hE, -, -, heq⟩ :=
+    Representation.exists_detWeight_eq_add_of_subquotient_tprod
+      (weightCharacter ι (Nat.card K)) W.deg W.frobeniusLift _ _
+      (fun UV SV _ ↦ (hasFiniteGeometricDet_and_detWeight_eq ι
+        (((hρ.subrepresentation A).exteriorPower j).subquotient SV UV)).1)
+      (fun UE SE _ ↦ (hasFiniteGeometricDet_and_detWeight_eq ι
+        (((hρ.quotient A).exteriorPower (r - j)).subquotient SE UE)).1)
+      (f.isIrreducible_iff.2 hirr) (hasFiniteGeometricDet_subquotient_tprod hρ A hjr U'' S'')
+  obtain ⟨T₁, hT₁, hc₁, hs₁⟩ := hA j UV SV hV
+  obtain ⟨T₂, hT₂, hc₂, hs₂⟩ := hQ (r - j) UE SE hE
+  refine ⟨T₁ + T₂, (rankDetWeightMultiset_eq_add ι A) ▸ add_le_add hT₁ hT₂,
+    by rw [Multiset.card_add, hc₁, hc₂]; omega, ?_⟩
+  rw [Multiset.sum_add, ← hs₁, ← hs₂, detWeight_of_equiv ι f,
+    detWeight_eq_detWeight_weightCharacter, heq, detWeight_eq_detWeight_weightCharacter,
+    detWeight_eq_detWeight_weightCharacter]
+
+/-- The converse induction step for
+`AlgebraicGeometry.WeilGroup.detWeight_subquotient_exteriorPower`: if every sum of `j` entries of
+the rank-counted list of a subrepresentation `A`, resp. of the quotient `ρ / A`, is the weight of
+a constituent of `⋀^j A`, resp. `⋀^j (ρ / A)`, then every sum of `r` entries of the list of `ρ` is
+the weight of a constituent of `⋀^r ρ`. Split the entries between `A` and `ρ / A`, and take a
+constituent of `⋀^j A ⊗ ⋀^{r - j} (ρ / A)` given by the converse of the two-factor tensor rule. -/
+theorem exists_detWeight_eq_sum_of_subrepresentation (hρ : W.IsLisse l ρ)
+    (A : Subrepresentation ρ)
+    (hA : ∀ (j : ℕ) (T : Multiset ℝ), T ≤ W.rankDetWeightMultiset l A.toRepresentation ι →
+      Multiset.card T = j → ∃ U S : Subrepresentation (A.toRepresentation.exteriorPower j),
+        (S.subquotient U).IsIrreducible ∧ W.detWeight l (S.subquotient U) ι = T.sum)
+    (hQ : ∀ (j : ℕ) (T : Multiset ℝ), T ≤ W.rankDetWeightMultiset l A.quotient ι →
+      Multiset.card T = j → ∃ U S : Subrepresentation (A.quotient.exteriorPower j),
+        (S.subquotient U).IsIrreducible ∧ W.detWeight l (S.subquotient U) ι = T.sum)
+    {r : ℕ} {T : Multiset ℝ} (hT : T ≤ W.rankDetWeightMultiset l ρ ι) (hcard : Multiset.card T = r) :
+    ∃ U S : Subrepresentation (ρ.exteriorPower r), (S.subquotient U).IsIrreducible ∧
+      W.detWeight l (S.subquotient U) ι = T.sum := by
+  rw [rankDetWeightMultiset_eq_add ι A] at hT
+  set L₁ := W.rankDetWeightMultiset l A.toRepresentation ι
+  have hT₁T : T ∩ L₁ ≤ T := Multiset.inter_le_left
+  have hT₂ : T - T ∩ L₁ ≤ W.rankDetWeightMultiset l A.quotient ι :=
+    Multiset.sub_inter_le_of_le_add hT
+  have hjr : Multiset.card (T ∩ L₁) ≤ r := hcard ▸ Multiset.card_le_card hT₁T
+  have hc₂ : Multiset.card (T - T ∩ L₁) = r - Multiset.card (T ∩ L₁) := by
+    rw [Multiset.card_sub hT₁T, hcard]
+  obtain ⟨UV, SV, hV, hs₁⟩ := hA _ (T ∩ L₁) Multiset.inter_le_right rfl
+  obtain ⟨UE, SE, hE, hs₂⟩ := hQ _ (T - T ∩ L₁) hT₂ hc₂
+  obtain ⟨U'', S'', -, hQ'', heq⟩ :=
+    Representation.exists_isIrreducible_subquotient_tprod_detWeight_eq_add
+      (weightCharacter ι (Nat.card K)) W.deg W.frobeniusLift hV hE
+      (hasFiniteGeometricDet_and_detWeight_eq ι
+        (((hρ.subrepresentation A).exteriorPower _).subquotient SV UV)).1
+      (hasFiniteGeometricDet_and_detWeight_eq ι
+        (((hρ.quotient A).exteriorPower _).subquotient SE UE)).1
+      fun U S _ ↦ hasFiniteGeometricDet_subquotient_tprod hρ A hjr U S
+  obtain ⟨e⟩ := Representation.nonempty_equiv_exteriorPowerFiltration A hjr
+  obtain ⟨U', S', ⟨e₂⟩⟩ := Subrepresentation.exists_subquotient_equiv_of_equiv e.symm U'' S''
+  obtain ⟨U, S, ⟨e₃⟩⟩ := Subrepresentation.exists_subquotient_equiv_of_subquotient U' S'
+  let f := e₃.trans e₂
+  refine ⟨U, S, f.isIrreducible_iff.2 hQ'', ?_⟩
+  rw [← add_tsub_cancel_of_le hT₁T, Multiset.sum_add, ← hs₁, ← hs₂, ← detWeight_of_equiv ι f,
+    detWeight_eq_detWeight_weightCharacter, heq, detWeight_eq_detWeight_weightCharacter,
+    detWeight_eq_detWeight_weightCharacter]
+
 /-- The constituents of an exterior power of a nonzero lisse Weil sheaf, by induction on the rank:
 see `AlgebraicGeometry.WeilGroup.detWeight_subquotient_exteriorPower`. -/
 theorem detWeight_subquotient_exteriorPower_aux (n : ℕ) {V : Type u} [AddCommGroup V]
@@ -131,11 +232,10 @@ theorem detWeight_subquotient_exteriorPower_aux (n : ℕ) {V : Type u} [AddCommG
     have hfwd := fun U S hQ ↦ exists_le_rankDetWeightMultiset_of_isIrreducible ι hρ hirr r
       (U := U) (S := S) hQ
     refine ⟨hfwd, fun T hT hcard ↦ ?_⟩
-    have hrank := rankDetWeightMultiset_of_isIrreducible ι hirr
     have hrep {T' : Multiset ℝ} (hT' : T' ≤ W.rankDetWeightMultiset l ρ ι) :
         T' = Multiset.replicate (Multiset.card T') (W.detWeight l ρ ι) :=
       Multiset.eq_replicate_of_mem fun x hx ↦ by
-        rw [hrank] at hT'
+        rw [rankDetWeightMultiset_of_isIrreducible ι hirr] at hT'
         exact Multiset.eq_of_mem_replicate (Multiset.subset_of_le hT' hx)
     have hr : r ≤ Module.finrank (PadicAlgCl l) V := by
       rw [← hcard, ← card_rankDetWeightMultiset (ρ := ρ) ι]
@@ -162,89 +262,45 @@ theorem detWeight_subquotient_exteriorPower_aux (n : ℕ) {V : Type u} [AddCommG
   have hAtop' : A.toSubmodule ≠ ⊤ := fun h ↦
     hAtop (Subrepresentation.toSubmodule_injective (h.trans Subrepresentation.toSubmodule_top.symm))
   have : Nontrivial A.toSubmodule := Submodule.nontrivial_iff_ne_bot.2 hA0'
-  have : Nontrivial (V ⧸ A.toSubmodule) :=
-    Submodule.Quotient.nontrivial_iff.2 hAtop'
+  have : Nontrivial (V ⧸ A.toSubmodule) := Submodule.Quotient.nontrivial_iff.2 hAtop'
   have hdimA : Module.finrank (PadicAlgCl l) A.toSubmodule < n :=
     hn ▸ Submodule.finrank_lt hAtop'
   have hdimQ : Module.finrank (PadicAlgCl l) (V ⧸ A.toSubmodule) < n := by
     have h := Submodule.finrank_quotient_add_finrank A.toSubmodule
     have h' := Module.finrank_pos (R := PadicAlgCl l) (M := A.toSubmodule)
     omega
-  have hρA := hρ.subrepresentation A
-  have hρQ := hρ.quotient A
-  have ihA := ih _ hdimA hρA rfl
-  have ihQ := ih _ hdimQ hρQ rfl
-  have hadd := rankDetWeightMultiset_eq_add ι A
-  -- the filtration of `⋀^r ρ` with steps `⋀^j A ⊗ ⋀^{r - j} (ρ / A)`
-  let P := Representation.exteriorPowerFiltration A r
-  have hPn : P (r + 1) = ⊥ := Representation.exteriorPowerFiltration_eq_bot A (Nat.lt_succ_self r)
-  have hP (j : ℕ) (_ : j < r + 1) : P (j + 1) ≤ P j :=
-    Representation.exteriorPowerFiltration_antitone A r (Nat.le_succ j)
-  have hP0 : P 0 = ⊤ := Representation.exteriorPowerFiltration_zero A r
-  have hdetV (j : ℕ) (UV SV : Subrepresentation (A.toRepresentation.exteriorPower j)) :
-      (SV.subquotient UV).HasFiniteGeometricDet W.deg :=
-    (hasFiniteGeometricDet_and_detWeight_eq ι ((hρA.exteriorPower j).subquotient SV UV)).1
-  have hdetE (j : ℕ) (UE SE : Subrepresentation (A.quotient.exteriorPower j)) :
-      (SE.subquotient UE).HasFiniteGeometricDet W.deg :=
-    (hasFiniteGeometricDet_and_detWeight_eq ι ((hρQ.exteriorPower j).subquotient SE UE)).1
-  have hdet {j : ℕ} (hjr : j ≤ r)
-      (U S : Subrepresentation ((A.toRepresentation.exteriorPower j).tprod
-        (A.quotient.exteriorPower (r - j)))) :
-      (S.subquotient U).HasFiniteGeometricDet W.deg := by
-    obtain ⟨e⟩ := Representation.nonempty_equiv_exteriorPowerFiltration A hjr
-    exact (hasFiniteGeometricDet_and_detWeight_eq ι
-      ((IsLisse.of_equiv e.symm ((hρ.exteriorPower r).subquotient (P j) (P (j + 1)))).subquotient
-        S U)).1
-  refine ⟨fun U S hQ ↦ ?_, fun T hT hcard ↦ ?_⟩
-  · -- a constituent of `⋀^r ρ` is a constituent of some `⋀^j A ⊗ ⋀^{r - j} (ρ / A)`
-    obtain ⟨j, hj, U', S', ⟨e₁⟩⟩ :=
-      Subrepresentation.exists_subquotient_equiv_of_antitone_chain hPn hP (hP0 ▸ le_top) hQ
-    have hjr : j ≤ r := Nat.lt_succ_iff.1 hj
-    stop
-    obtain ⟨e⟩ := Representation.nonempty_equiv_exteriorPowerFiltration A hjr
-    obtain ⟨U'', S'', ⟨e₂⟩⟩ := Subrepresentation.exists_subquotient_equiv_of_equiv e.symm U' S'
-    let f := e₂.trans e₁
-    obtain ⟨UV, SV, UE, SE, -, -, hV, hE, -, -, heq⟩ :=
-      Representation.exists_detWeight_eq_add_of_subquotient_tprod
-        (weightCharacter ι (Nat.card K)) W.deg W.frobeniusLift _ _
-        (fun UV SV _ ↦ hdetV j UV SV) (fun UE SE _ ↦ hdetE (r - j) UE SE)
-        (f.isIrreducible_iff.2 hQ) (hdet hjr U'' S'')
-    obtain ⟨T₁, hT₁, hc₁, hs₁⟩ := (ihA j).1 UV SV hV
-    obtain ⟨T₂, hT₂, hc₂, hs₂⟩ := (ihQ (r - j)).1 UE SE hE
-    refine ⟨T₁ + T₂, hadd ▸ add_le_add hT₁ hT₂, by rw [Multiset.card_add, hc₁, hc₂]; omega, ?_⟩
-    rw [Multiset.sum_add, ← hs₁, ← hs₂, ← detWeight_of_equiv ι f,
-      detWeight_eq_detWeight_weightCharacter, heq, detWeight_eq_detWeight_weightCharacter,
-      detWeight_eq_detWeight_weightCharacter]
-  · -- split `T` between `A` and `ρ / A`
-    classical
-    stop
-    rw [hadd] at hT
-    have hT₁T : T ∩ W.rankDetWeightMultiset l A.toRepresentation ι ≤ T := Multiset.inter_le_left
-    have hT₂ : T - T ∩ W.rankDetWeightMultiset l A.toRepresentation ι ≤
-        W.rankDetWeightMultiset l A.quotient ι := by
-      refine Multiset.le_iff_count.2 fun a ↦ ?_
-      have h := Multiset.le_iff_count.1 hT a
-      rw [Multiset.count_add] at h
-      rw [Multiset.count_sub, Multiset.count_inter]
-      omega
-    set T₁ := T ∩ W.rankDetWeightMultiset l A.toRepresentation ι
-    have hjr : Multiset.card T₁ ≤ r := hcard ▸ Multiset.card_le_card hT₁T
-    have hc₂ : Multiset.card (T - T₁) = r - Multiset.card T₁ := by
-      rw [Multiset.card_sub hT₁T, hcard]
-    obtain ⟨UV, SV, hV, hs₁⟩ := (ihA (Multiset.card T₁)).2 T₁ Multiset.inter_le_right rfl
-    obtain ⟨UE, SE, hE, hs₂⟩ := (ihQ (r - Multiset.card T₁)).2 (T - T₁) hT₂ hc₂
-    obtain ⟨U'', S'', -, hQ'', heq⟩ :=
-      Representation.exists_isIrreducible_subquotient_tprod_detWeight_eq_add
-        (weightCharacter ι (Nat.card K)) W.deg W.frobeniusLift hV hE (hdetV _ UV SV)
-        (hdetE _ UE SE) fun U S _ ↦ hdet hjr U S
-    obtain ⟨e⟩ := Representation.nonempty_equiv_exteriorPowerFiltration A hjr
-    obtain ⟨U', S', ⟨e₂⟩⟩ := Subrepresentation.exists_subquotient_equiv_of_equiv e U'' S''
-    obtain ⟨U, S, ⟨e₃⟩⟩ := Subrepresentation.exists_subquotient_equiv_of_subquotient U' S'
-    let f := e₃.trans e₂
-    refine ⟨U, S, f.isIrreducible_iff.2 hQ'', ?_⟩
-    rw [← add_tsub_cancel_of_le hT₁T, Multiset.sum_add, ← hs₁, ← hs₂, ← detWeight_of_equiv ι f,
-      detWeight_eq_detWeight_weightCharacter, heq, detWeight_eq_detWeight_weightCharacter,
-      detWeight_eq_detWeight_weightCharacter]
+  have ihA := ih _ hdimA (hρ.subrepresentation A) rfl
+  have ihQ := ih _ hdimQ (hρ.quotient A) rfl
+  exact ⟨fun U S hQ ↦ exists_le_rankDetWeightMultiset_of_subrepresentation ι hρ A
+      (fun j ↦ (ihA j).1) (fun j ↦ (ihQ j).1) hQ,
+    fun T hT hcard ↦ exists_detWeight_eq_sum_of_subrepresentation ι hρ A
+      (fun j ↦ (ihA j).2) (fun j ↦ (ihQ j).2) hT hcard⟩
+
+/-- Blueprint `cor-mg-det-weight-exterior`: Determinant weights of an exterior power.
+
+Let `ρ` be a nonzero lisse Weil sheaf, with composition factors `A_a` of rank `d_a` and
+determinant weights `γ_a`, and let `L` be its rank-counted list of determinant weights
+(`AlgebraicGeometry.WeilGroup.rankDetWeightMultiset`), in which `γ_a` occurs `d_a` times, so that
+every value `γ` occurs `r(γ) = ∑_{γ_a = γ} d_a` times. A sub-multiset `T ≤ L` with `r` elements is
+the same as a tuple `(n_γ)` with `0 ≤ n_γ ≤ r(γ)` and `∑ n_γ = r` (take `n_γ` the multiplicity
+of `γ` in `T`), with `∑ T = ∑ n_γ γ`. In these terms:
+
+* every constituent `S / U` of the exterior power `⋀^r ρ` has determinant weight `∑ T` for a
+  sub-multiset `T ≤ L` with `r` elements;
+* conversely, for every sub-multiset `T ≤ L` with `r` elements, some constituent of `⋀^r ρ` has
+  determinant weight `∑ T`.
+
+The finite geometric determinant hypotheses of `prop-ag-det-weight-exterior` hold by rank-one
+purity (`lem-rp-determinant-weights-agree`); the geometric semisimplicity assumed in the
+blueprint is not needed. -/
+theorem detWeight_subquotient_exteriorPower [Nontrivial V] (hρ : W.IsLisse l ρ) (r : ℕ) :
+    (∀ U S : Subrepresentation (ρ.exteriorPower r), (S.subquotient U).IsIrreducible →
+      ∃ T : Multiset ℝ, T ≤ W.rankDetWeightMultiset l ρ ι ∧ Multiset.card T = r ∧
+        W.detWeight l (S.subquotient U) ι = T.sum) ∧
+    ∀ T : Multiset ℝ, T ≤ W.rankDetWeightMultiset l ρ ι → Multiset.card T = r →
+      ∃ U S : Subrepresentation (ρ.exteriorPower r), (S.subquotient U).IsIrreducible ∧
+        W.detWeight l (S.subquotient U) ι = T.sum :=
+  detWeight_subquotient_exteriorPower_aux ι _ hρ rfl r
 
 end Exterior
 
