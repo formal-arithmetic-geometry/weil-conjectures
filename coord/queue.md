@@ -1,11 +1,11 @@
 # Work queue
 
-983 items; claim with `tools/claim.py next <group> [--stage N]`.
+980 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (983)
+## Stage 2: nodes to state (980)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -34,7 +34,6 @@
 | `lem-pc-very-ample-disjoint-union` | 1 | state |
 | `lem-pc-zero-scheme-pullback` | 1 | state |
 | `lem-pur-derived-change-of-rings` | 1 | state |
-| `lem-sc-ample-proj-local-chart` | 1 | state |
 | `lem-sc-base-change-curve` | 1 | state |
 | `lem-sc-conductor-ideal-zero-intersection` | 1 | state |
 | `lem-sc-conductor-sections` | 1 | state |
@@ -44,7 +43,6 @@
 | `lem-sc-finite-free-internal-hom-exact` | 1 | state |
 | `lem-sc-finite-sheafhom-affine` | 1 | state |
 | `lem-sc-general-theorem-of-cube` | 1 | state |
-| `lem-sc-genus-invariant` | 1 | state |
 | `lem-sc-geometrically-irreducible-product` | 1 | state |
 | `lem-sc-global-generation-nonvanishing-cover` | 1 | state |
 | `lem-sc-global-sections-left-exact` | 1 | state |
@@ -64,7 +62,6 @@
 | `lem-sc-krull-akizuki-noetherian` | 1 | state |
 | `lem-sc-lfp-field-extension-pointwise-descent` | 1 | state |
 | `lem-sc-local-domain-dim-one-principal-localization-fraction-field` | 1 | state |
-| `lem-sc-local-ring-artin-schreier-kernel` | 1 | state |
 | `lem-sc-module-localization-filtered-colimit` | 1 | state |
 | `lem-sc-p1-ext-locally-free-naturality` | 1 | state |
 | `lem-sc-p1-ext-resolution-derived-connecting` | 1 | state |
