@@ -23,9 +23,48 @@
   "def-pc-derived-category",
   "def-pc-perfect-complex"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Choose an affine neighbourhood of s on which K is represented by a bounded complex of finite free modules with one term for each residue-field cohomology rank, using the finite-free residue model (Tag 0BCD). Since K has Tor-amplitude in [0,infinity), the negative-degree ranks are zero, so after shrinking the complex is concentrated in degrees >=0. The given sheaf fibre map becomes the corresponding surjection on H^0 of the localized complex.",
+   "uses": [
+    "lem-sc-perfect-finite-free-residue-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0A1U, proof of Lemma better-cut-complex-in-two"
+   }
+  },
+  {
+   "text": "Apply the affine cut lemma to this finite-free complex at the prime corresponding to s. It gives an element f outside that prime such that after restricting to U = Spec(R_f), K|_U is isomorphic to tau_{<=0}(K|_U) direct-sum tau_{>=1}(K|_U), and the latter is perfect of Tor-amplitude in [1,infinity).",
+   "uses": [
+    "lem-pc-affine-perfect-cut-degree-zero"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0A1U, proof of Lemma better-cut-complex-in-two"
+   }
+  },
+  {
+   "text": "Because K has no negative cohomology, tau_{<=0}(K|_U) is H^0(K)|_U placed in degree zero. Substituting this identification into the splitting gives K|_U isomorphic to H^0(K)|_U direct-sum P, where P=tau_{>=1}(K|_U) has the asserted perfectness and Tor-amplitude.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0A1U, conclusion of Lemma better-cut-complex-in-two"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-perfect-finite-free-residue-model",
+  "lem-pc-affine-perfect-cut-degree-zero"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 0A1U, Lemma better-cut-complex-in-two"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -57,12 +96,27 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sc-perfect-degree-zero-fibre-criterion",
   "by": "worker",
   "date": "2026-10-11"
  },
  "chapter": "sec-abelian-varieties",
- "unit": "sk-prop-av-cube"
+ "unit": "sk-prop-av-cube",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-sc-perfect-cut-complex-degree-zero",
+  "worker": "stage1",
+  "summary": "Split Tag 0A1U into a finite-free local-model step, a statement-only affine cut lemma carrying the localization and truncation splitting, and an elementary identification of the nonpositive truncation with H^0. No Lean attachment exists.",
+  "blueprint": "Realizes the theorem-of-the-cube blueprint proof clause 'cut a perfect complex after the degree-zero fibre map is surjective'."
+ },
+ "reviewed": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-pcc0039",
+  "group": "J1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-pcc0039 (reviewer sub-agent of L); spot-checked: Read Tag 0A1U and 0BCD in full. Step 1: 0BCD node gives finite free model on affine U; Tor-amplitude [0,inf) kills negative fibre ranks (C4 ok). Step 2: new affine node is exactly 0A1U at i=0 for bounded-above finite free complexes (true, self-contained, not a duplicate: only same-tag node is the item; no Mathlib truncation/Tor-amplitude theory, class b/c/d none); passage D(R_f) to D(O_U) and stalk fibre map to module fibre map is bookkeeping. Step 3: no negative cohomology so tau_{<=0}=H^0[0] (E ok). Citer 39b45cf6e step 2 uses only the stated clauses (U, K|_U = H^0(K)|_U + P, P perfect Tor-amp [1,inf)) and supplies the Tor-amplitude hypothesis from its step 1. No fault beyond the second reading."
+ }
 }
