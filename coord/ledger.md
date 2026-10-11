@@ -5572,3 +5572,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 18:35 L: merged deliver/E1/def-weil-pbc-site-plus-construction (stage 2; reviewer FIX; first push; Mathlib.CategoryTheory.Sites.Plus CategoryTheory.GrothendieckTopology.plusObj; existing declaration; dropped files: lean/Sheaf/Paper/SitePlusConstruction.lean)
 - 18:36 L: merged deliver/N1/lem-weil-pbc-site-restriction-injectives (stage 2; reviewer PASS; first push; Sheaf.Paper.SiteRestrictionInjectives CategoryTheory.siteRestriction_injectives)
 - 18:37 L: merged deliver/N1/lem-weil-pbc-site-higher-direct-image-sheafified-presheaf (stage 2; reviewer FIX; first push; Sheaf.Paper.SiteHigherDirectImageSheafifiedPresheaf CategoryTheory.siteHigherDirectImageSheafifiedPresheaf)
+- 18:37 L: merged deliver/M1/lem-sc-zariski-flasque-acyclic (stage 2; reviewer FIX; first push; Sheaf.Topology.FlasqueZariskiAcyclic TopCat.Sheaf.IsFlasque.subsingleton_H'_top)

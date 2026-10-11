@@ -137,5 +137,25 @@
   "group": "K1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-zfa3040 (reviewer sub-agent of L); spot-checked: FIX more, RETURN less: (1) B class (c): lem-sc-zariski-flasque-quotient-sections is Mathlib TopCat.Sheaf.IsFlasque.epi_of_shortExact (Flasque.lean:113) and of_shortExact_of_isFlasque₁₂ (:182), read with sed; made a mathlib leaf, the recorded grep 'no match' was wrong. (2) B class (b): lem-sc-zariski-injective-flasque is the special case O_X=Z_X of lem-sc-ringed-space-injective-restriction-surjective (01EA, generic tool; ringed space need not be locally ringed); Step 1 now cites the existing node with the elementary identification Ab(X)=Mod(Z_X), duplicate dropped. Checked Step 2 dimension shifting (splicing sectionwise short exact sequences) and Step 3 against def-sc-zariski-cohomology; statement unchanged (formatting only) and as used by lem-sc-topological-flasque-acyclic.; 2 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Topology.FlasqueZariskiAcyclic",
+  "declaration": "TopCat.Sheaf.IsFlasque.subsingleton_H'_top",
+  "statement": "theorem IsFlasque.subsingleton_H'_top {X : TopCat.{u}} [HasExt.{u} (CategoryTheory.Sheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u})] (F : CategoryTheory.Sheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u}) [TopCat.Sheaf.IsFlasque F] (q : ℕ) (hq : 0 < q) : Subsingleton (CategoryTheory.Sheaf.H' F q ⊤)",
+  "branch": "sheaf-dag",
+  "by": "M1",
+  "date": "2026-10-11",
+  "existing": false,
+  "note": "Stated with the stmt_dep's recorded cohomology Sheaf.H' F q ⊤ (def-sc-zariski-cohomology) and flasqueness TopCat.Sheaf.IsFlasque (def-sc-zariski-flasque). The upstream TopCat.Sheaf.IsFlasque.subsingleton_H (WeilConjectures.Mathlib.Topology.Sheaves.Flasque) proves the same vanishing for Sheaf.H (Ext from the constant ULift ℤ sheaf), a different encoding; stage 3 proves this from it via the comparison of the constant sheaf with the sheafified free representable of ⊤ (R-zfa).",
+  "file": "lean/Sheaf/Topology/FlasqueZariskiAcyclic.lean",
+  "fixed_by": "R-zfa"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-zfa",
+  "group": "M1",
+  "result": "fix",
+  "note": "X : TopCat.{u} = topological space; F abelian sheaf on Opens.grothendieckTopology X in AddCommGrpCat.{u}; flasque = [TopCat.Sheaf.IsFlasque F] (def-sc-zariski-flasque record); q>0 as (q) (hq : 0 < q); H^q(X_Zar,F) = Sheaf.H' F q ⊤ per def-sc-zariski-cohomology record; delivered existing record used Sheaf.H (Ext from constant sheaf), a different encoding, so restated in a new module; HasExt.{u} binder is a Prop as in the upstream theorem and landed H1 InjectiveModuleAbelianAcyclic, not inferable without it (synth timeout)"
  }
 }
