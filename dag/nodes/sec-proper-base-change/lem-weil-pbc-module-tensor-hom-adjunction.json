@@ -205,5 +205,24 @@
   "worker": "stage1",
   "summary": "Read Modules 01CN (modules.tex line 3534, tag verified tags/tags line 1768) and its proof ('analogue of Algebra 00DE, omitted'), Algebra 00DE (algebra.tex line 1906, tags line 494) and Section 01CA (tensor product = sheafification of the presheaf tensor product). Statement kept; stmt_deps gained def-weil-presheaf-modules-sheafification (the sheafification map t) and def-pur-sheaf-modules-hom-module (the O_X(X)-module structure of the two Hom groups). The omitted proof written in 8 steps: conventions (ringed space as site; components, restriction and O-action of sheaf Hom); 00DE on each W gives psi_W with psi_W(a⊗g)=(phi_W(a))_W(g); psi is a map of presheaves of modules (check on pure tensors); the inverse construction (phi_W(a))_{W'}(g)=psi_{W'}(a|_{W'}⊗g); the two are inverse; sheafification's universal property transports this to A⊗G and gives uniqueness of phi~; O_X(X)-linearity; naturality in A (alpha⊗id defined as the map induced on sheafifications). One new node, the Mathlib leaf lem-weil-pbc-module-tensor-hom-currying (Algebra 00DE, TensorProduct.lift.equiv). Rule 0: no sorry-free slopmaster2 declaration states the sheaf-level adjunction; WeilConjectures/Algebra/Category/ModuleCat/Sheaf/InternalHom.lean has only the internal hom sheaf (homObj, homObjSectionsEquiv, homFunctor), and the presheaf-level adjunction PresheafOfModules.homObjEquiv (Presheaf/InternalHom.lean, natural only in the second factor, for presheaves of modules over a category) is the content of steps 2-5, not of the item.",
   "blueprint": "The item serves thm-weil-pbc-finite-etale-lifting only through the via chain, at the sentence of the proof of Cohomology of Schemes 01YB (lem-weil-pbc-coherent-homs-over-open) 'By Modules, Lemma 01CN phi corresponds to a map phi: I^n tensor G -> F': steps 2-6 give the correspondence phi <-> phi~ with its formula on local sections, step 7 its O_X(X)-linearity and step 8 its naturality in the first factor (used when I^n is replaced by a smaller power). No blueprint node states the underived tensor-Hom adjunction for sheaves of modules (searches: 'tensor hom adjunction', 'internal hom tensor', '00DE', 'bilinear' only found derived-category statements), so same_as is []."
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorHomAdjunction",
+  "declaration": "SheafOfModules.exists_tensorHom_linearEquiv",
+  "file": "lean/Sheaf/Algebra/Category/ModuleCat/Sheaf/TensorHomAdjunction.lean",
+  "statement": "theorem exists_tensorHom_linearEquiv (X : Type u) [TopologicalSpace X] (R : Sheaf (Opens.grothendieckTopology X) CommRingCat.{u}) (G F : SheafOfModules.{u} ((sheafCompose _ (forget₂ CommRingCat RingCat.{u})).obj R)) : letI := monoidalCategory R letI : ∀ M N : SheafOfModules.{u} ((sheafCompose _ (forget₂ CommRingCat RingCat.{u})).obj R), Module (RingCat.sectionsSubring ((sheafCompose _ (forget₂ CommRingCat RingCat.{u})).obj R).obj) (M ⟶ N) := homModule R.obj ((sheafCompose _ (forget₂ CommRingCat RingCat.{u})).obj R).property ∃ e : ∀ A : SheafOfModules.{u} ((sheafCompose _ (forget₂ CommRingCat RingCat.{u})).obj R), (A ⟶ homObj (R := R) G F) ≃ₗ[RingCat.sectionsSubring ((sheafCompose _ (forget₂ CommRingCat RingCat.{u})).obj R).obj] (A ⊗ G ⟶ F), (∀ (A : SheafOfModules.{u} ((sheafCompose _ (forget₂ CommRingCat RingCat.{u})).obj R)) (φ : A ⟶ homObj (R := R) G F), (∀ (W : Opens X) (a : A.val.obj (op W)) (g : G.val.obj (op W)), (e A φ).val.app (op W) ((tensorObjIsoSheafification A G).inv.val.app (op W) (((PresheafOfModules.sheafificationAdjunction.{u} (𝟙 ((sheafCompose _ (forget₂ CommRingCat RingCat.{u})).obj R).obj)).unit.app (A.val ⊗ G.val)).app (op W) (a ⊗ₜ[R.obj.obj (op W)] g))) = (φ.val.app (op W) a).app (op (Over.mk (𝟙 W))) g) ∧ ∀ ψ : A ⊗ G ⟶ F, (∀ (W : Opens X) (a : A.val.obj (op W)) (g : G.val.obj (op W)), ψ.val.app (op W) ((tensorObjIsoSheafification A G).inv.val.app (op W) (((PresheafOfModules.sheafificationAdjunction.{u} (𝟙 ((sheafCompose _ (forget₂ CommRingCat RingCat.{u})).obj R).obj)).unit.app (A.val ⊗ G.val)).app (op W) (a ⊗ₜ[R.obj.obj (op W)] g))) = (φ.val.app (op W) a).app (op (Over.mk (𝟙 W))) g) → ψ = e A φ) ∧ (∀ (A A' : SheafOfModules.{u} ((sheafCompose _ (forget₂ CommRingCat RingCat.{u})).obj R)) (α : A' ⟶ A) (φ : A ⟶ homObj (R := R) G F), e A' (α ≫ φ) = (α ⊗ₘ 𝟙 G) ≫ e A φ)",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-mth1159"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-mth1159",
+  "group": "F1",
+  "result": "fix",
+  "note": "ringed space X,R; A,G,F SheafOfModules; A⊗G now source monoidalCategory R with t_W = tensorObjIsoSheafification.inv ∘ sheafification unit; Hom = homObj; existence+uniqueness of ψ with ψ_W(t_W(a⊗g))=(φ_W a)_W g; e A LinearEquiv over sectionsSubring via homModule; naturality e A'(α≫φ)=(α⊗ₘ𝟙 G)≫e A φ; FIX removed let P/S/T/evaluates/R₀ binders"
  }
 }
