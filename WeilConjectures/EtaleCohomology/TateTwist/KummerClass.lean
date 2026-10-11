@@ -15,7 +15,7 @@ public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.ExtendScalarsComp
 public import WeilConjectures.ConstructibleSheaf.UpperStarConstantSheafComp
 public import WeilConjectures.SixFunctors.Etale.Derived.LeftDerivedUpperStarSingle
 public import WeilConjectures.SixFunctors.Etale.Derived.SingleDelta
-public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal.Composition
+public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal.CompUnit
 
 /-!
 # The Kummer classes
@@ -152,7 +152,14 @@ noncomputable def kummerδ {C : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}
   (shortExact_kummerSequence_pullback_map_extendScalars Λ φ hC).singleδ
 
 /-- The connecting morphisms of pulled back Kummer sequences are compatible with
-precomposition. -/
+precomposition by `ψ : C' ⟶ C`:
+```
+Λ ⊗ C' ──Λ ⊗ ψ──▶ Λ ⊗ C
+    │                 │ ∂(φ)
+    │ ∂(ψ ≫ φ)        ▼
+    └──────────▶ (μₙ ⊗ Λ)[1]
+```
+-/
 lemma kummerδ_comp {C C' : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}} (ψ : C' ⟶ C)
     (φ : C ⟶ X.gmSheaf) (hC) (hC') :
     kummerδ Λ (ψ ≫ φ) hC' =
@@ -376,7 +383,14 @@ noncomputable def upperStarKummerExtendScalarsHom (v : Γ(Y, ⊤)ˣ) :
 
 omit [NeZero (ringChar Λ)] in
 /-- The derived pullback of the connecting morphism of the Kummer sequence pulled back along `v`
-is the connecting morphism of the Kummer sequence pulled back along the pullback of `v`. -/
+is the connecting morphism of the Kummer sequence pulled back along the pullback of `v`:
+```
+Lf^*(Λ ⊗ ℤ_Y) ──Lf^* ∂(v)──▶ Lf^*((μₙ ⊗ Λ)[1]) ≅ (f^*(μₙ ⊗ Λ))[1]
+      │                                           │
+      ▼                                           ▼
+  Λ ⊗ ℤ_X ──────────∂(f^* v)─────────────▶ (μₙ ⊗ Λ)[1]
+```
+-/
 lemma leftDerivedUpperStar_map_kummerδ (v : Γ(Y, ⊤)ˣ) :
     (L((f)^*[ModuleCat.{u + 1} Λ])).map (kummerδ Λ (unitToGmSheaf v)
         (fun y ↦ projective_sheafFiber_constantSheafInt (Y.uliftPointSmallEtale y))) ≫
@@ -497,7 +511,14 @@ lemma leftDerivedUpperStar_map_constantComplexIsoSingleFunctorExtendScalarsInt :
     Functor.comp_map] at hG n ⊢
   rw [reassoc_of% hη, ← reassoc_of% n, ← hG]
 
-/-- The Kummer class is natural under pullback, `Lf^* κ(v) = κ(f^* v)`. -/
+/-- The Kummer class is natural under pullback, `Lf^* κ(v) = κ(f^* v)`:
+```
+Lf^* Λ_Y ──Lf^* κ(v)──▶ Lf^*(Λ(1)[1]) ≅ (Lf^* Λ(1))[1]
+    │                                  │
+    ▼                                  ▼
+   Λ_X ─────────κ(f^* v)──────────▶ Λ(1)[1]
+```
+-/
 lemma leftDerivedUpperStar_map_kummerClassOf (v : Γ(Y, ⊤)ˣ) :
     (L((f)^*[ModuleCat.{u + 1} Λ])).map (kummerClassOf Y Λ v) ≫
         ((L((f)^*[ModuleCat.{u + 1} Λ])).commShiftIso (1 : ℤ)).hom.app (tateTwistObject Λ Y 1) ≫

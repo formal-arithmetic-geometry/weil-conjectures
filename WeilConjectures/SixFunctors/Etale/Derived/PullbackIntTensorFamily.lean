@@ -6,9 +6,9 @@ Authors: Claude
 module
 
 public import WeilConjectures.CategoryTheory.Monoidal.IntTensorFamily
-public import WeilConjectures.SixFunctors.Etale.Derived.LeftDerivedUpperStarCoherence
+public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarCompCoherence
 public import WeilConjectures.SixFunctors.Etale.Derived.TensorStructure
-public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal.Composition
+public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal.Comp
 
 /-!
 # Coherent integer families pulled back from a base scheme
@@ -148,9 +148,8 @@ lemma pullbackIntTensorFamilyIso_comp {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y 
       (leftDerivedUpperStarComp A f g).app _ ≪≫
         L((f)^*[A]).mapIso (pullbackIntTensorFamilyIso A P g πY πZ hY m) ≪≫
           pullbackIntTensorFamilyIso A P f πX πY hX' m := by
-  have key := NatTrans.congr_app
-    (leftDerivedUpperStarComp_assoc A f g πZ (f ≫ g) πY πX rfl hY hX) (P.obj m)
-  simp only [NatTrans.comp_app, Functor.whiskerLeft_app, Functor.whiskerRight_app] at key
+  have key := (leftDerivedUpperStarComp_assoc'_app A f g πZ (f ≫ g) πY πX rfl hY hX
+    (P.obj m)).symm
   ext
   simp only [pullbackIntTensorFamilyIso, Iso.symm_hom, Iso.app_inv, Iso.trans_hom, Iso.app_hom,
     Functor.mapIso_hom, pullbackIntTensorFamily_obj]
@@ -161,8 +160,7 @@ lemma pullbackIntTensorFamilyIso_comp {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y 
 /-- The identifications `Lf^* Lπ_Y^* P m ≅ Lπ_X^* P m` are compatible with the products of the
 families, along the tensor comparison `Lf^*(K ⊗ᴸ M) ≅ Lf^* K ⊗ᴸ Lf^* M`. -/
 lemma map_addIso_pullbackIntTensorFamilyIso {X Y : Scheme.{u}} (f : X ⟶ Y) (πX : X ⟶ S)
-    (πY : Y ⟶ S) (h : πX = f ≫ πY)
-    [NatTrans.IsMonoidal (Etale.upperStarComp A f πY πX h).hom] (m m' : ℤ) :
+    (πY : Y ⟶ S) (h : πX = f ≫ πY) (m m' : ℤ) :
     L((f)^*[A]).map ((pullbackIntTensorFamily A P πY).addIso m m').hom ≫
         (pullbackIntTensorFamilyIso A P f πX πY h (m + m')).hom =
       (leftDerivedUpperStarTensorIso A f _ _).hom ≫
@@ -181,17 +179,8 @@ lemma map_addIso_pullbackIntTensorFamilyIso {X Y : Scheme.{u}} (f : X ⟶ Y) (π
   have := isIso_leftDerivedUpperStarOplaxMonoidal_δ A f
   let c := leftDerivedUpperStarComp A f πY πX h
   have hc : ∀ K M, δ L((πX)^*[A]) K M ≫ (c.hom.app K ⊗ₘ c.hom.app M) =
-      c.hom.app (K ⊗ M) ≫ L((f)^*[A]).map (δ L((πY)^*[A]) K M) ≫ δ L((f)^*[A]) _ _ := by
-    intro K M
-    have e := NatTrans.congr_app (NatTrans.congr_app
-      (leftDerivedUpperStarTensorComparison_eq_comp A f πY πX h) K) M
-    change δ L((πX)^*[A]) K M = _ at e
-    rw [e]
-    simp only [c, leftDerivedUpperStarTensorComparisonComp, Category.assoc,
-      tensorHom_comp_tensorHom, Iso.inv_hom_id_app, Functor.comp_obj, tensorHom_id,
-      id_whiskerRight]
-    erw [Category.comp_id]
-    rfl
+      c.hom.app (K ⊗ M) ≫ L((f)^*[A]).map (δ L((πY)^*[A]) K M) ≫ δ L((f)^*[A]) _ _ :=
+    leftDerivedUpperStarTensorComparison_comp A f πY πX h
   have key := IntTensorFamily.map_addIso_comp P L((πY)^*[A]) L((f)^*[A]) L((πX)^*[A]) c hc m m'
   simp only [pullbackIntTensorFamilyIso, Iso.symm_hom, Iso.app_inv]
   refine key.trans ?_
@@ -235,8 +224,7 @@ lemma pullbackIntTensorFamilyCopyIso_comp {Z : Scheme.{u}}
 /-- `AlgebraicGeometry.Etale.map_addIso_pullbackIntTensorFamilyIso` for families equal to the
 pulled back families. -/
 lemma map_addIso_pullbackIntTensorFamilyCopyIso (f : X ⟶ Y) (πX : X ⟶ S) (πY : Y ⟶ S)
-    (h : πX = f ≫ πY) [NatTrans.IsMonoidal (Etale.upperStarComp A f πY πX h).hom]
-    (hX : FX = (pullbackIntTensorFamily A P πX).obj)
+    (h : πX = f ≫ πY) (hX : FX = (pullbackIntTensorFamily A P πX).obj)
     (hY : FY = (pullbackIntTensorFamily A P πY).obj) (m m' : ℤ) :
     L((f)^*[A]).map
         (((pullbackIntTensorFamily A P πY).copy FY hY).derivedTensorAddIso m m').hom ≫

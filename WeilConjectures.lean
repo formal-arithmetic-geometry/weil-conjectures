@@ -1475,7 +1475,6 @@ public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.Comparisons
 public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.Defs
 public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.Relative
 public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.Shriek
-public import WeilConjectures.SixFunctors.Etale.Derived.LeftDerivedUpperStarCoherence
 public import WeilConjectures.SixFunctors.Etale.Derived.LeftDerivedUpperStarSingle
 public import WeilConjectures.SixFunctors.Etale.Derived.Localization
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
@@ -1544,8 +1543,8 @@ public import WeilConjectures.SixFunctors.Etale.Derived.UpperShriekIso
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarCompCoherence
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal.Comp
+public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal.CompUnit
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal.Comparison
-public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal.Composition
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal.Derived
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal.KFlat
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal.Pairing
