@@ -304,4 +304,45 @@ theorem exact_lTensor_cechDifferential [Finite ι] (H : IsPullback g iY iX f)
 
 end Cech
 
+section Sheaf
+
+open TopCat.Presheaf
+
+variable (ℱ : X.Modules) {ι : Type u} (U : ι → X.Opens) {W₀ : X.Opens} (hU : ⨆ i, U i = W₀)
+
+include hU in
+lemma iInf_le_of_iSup_eq (z : Fin 1 → ι) : ⨅ l, U (z l) ≤ W₀ :=
+  (iInf_le _ 0).trans (hU ▸ le_iSup U (z 0))
+
+include hU in
+/-- The Čech `0`-cochains of a section are determined by the section: two sections over the
+union of a cover with the same restrictions to its members agree. -/
+lemma eq_of_forall_presheaf_map_eq (s t : Γ(ℱ, W₀))
+    (h : ∀ z : Fin 1 → ι, ℱ.presheaf.map (homOfLE (iInf_le_of_iSup_eq U hU z)).op s =
+      ℱ.presheaf.map (homOfLE (iInf_le_of_iSup_eq U hU z)).op t) : s = t :=
+  TopCat.Sheaf.eq_of_locally_eq' ⟨ℱ.presheaf, ℱ.isSheaf⟩ (fun z : Fin 1 → ι ↦ ⨅ l, U (z l)) W₀
+    (fun z ↦ homOfLE (iInf_le_of_iSup_eq U hU z))
+    (fun x hx ↦ by
+      rw [← hU] at hx
+      obtain ⟨i, hi⟩ := TopologicalSpace.Opens.mem_iSup.mp hx
+      exact TopologicalSpace.Opens.mem_iSup.mpr ⟨fun _ ↦ i, by simpa using hi⟩) s t h
+
+include hU in
+/-- **Čech `0`-cocycles glue.** A Čech `0`-cocycle of a cover of `W₀` is the family of
+restrictions of a section over `W₀`. -/
+lemma exists_presheaf_map_eq_of_cechComplex_d_eq_zero (c : CechCochain U ℱ.presheaf 0)
+    (hc : ((cechComplex U).obj ℱ.presheaf).d 0 1 c = 0) :
+    ∃ s : Γ(ℱ, W₀), ∀ z : Fin 1 → ι,
+      ℱ.presheaf.map (homOfLE (iInf_le_of_iSup_eq U hU z)).op s = c z := by
+  obtain ⟨s, hs, -⟩ := TopCat.Sheaf.existsUnique_gluing' ⟨ℱ.presheaf, ℱ.isSheaf⟩
+    (fun z : Fin 1 → ι ↦ ⨅ l, U (z l)) W₀ (fun z ↦ homOfLE (iInf_le_of_iSup_eq U hU z))
+    (fun x hx ↦ by
+      rw [← hU] at hx
+      obtain ⟨i, hi⟩ := TopologicalSpace.Opens.mem_iSup.mp hx
+      exact TopologicalSpace.Opens.mem_iSup.mpr ⟨fun _ ↦ i, by simpa using hi⟩) c
+    (fun z z' ↦ map_inf_eq_of_cechComplex_d_zero U ℱ.presheaf c hc z z')
+  exact ⟨s, hs⟩
+
+end Sheaf
+
 end AlgebraicGeometry.Scheme.Modules
