@@ -41,7 +41,8 @@ variable {X : Scheme.{u}}
 
 /-- The geometric point `u : Spec Ω ⟶ U` of an étale `X`-scheme `U` over the geometric point
 `y` of `X`, as an element of the fibre of `pointSmallEtale y` at `U`. -/
-noncomputable abbrev fiberPt {Ω : Type u} [Field Ω] [IsSepClosed Ω] {y : Spec (.of Ω) ⟶ X} {U : X.Etale}
+noncomputable abbrev fiberPt {Ω : Type u} [Field Ω] [IsSepClosed Ω] {y : Spec (.of Ω) ⟶ X}
+    {U : X.Etale}
     (u : Spec (.of Ω) ⟶ U.left) (hu : u ≫ U.hom = y) : (pointSmallEtale y).fiber.obj U :=
   CategoryTheory.Over.homMk (U := CategoryTheory.Over.mk y) (V := (Etale.forget X).obj U) u hu
 
@@ -60,12 +61,6 @@ lemma toPresheafFiber_fiberPt_eq_of_eq {Ω : Type u} [Field Ω] [IsSepClosed Ω]
   subst h e₁ e₂
   exact H
 
-lemma fiberPt_congr {Ω : Type u} [Field Ω] [IsSepClosed Ω] {y : Spec (.of Ω) ⟶ X}
-    {U : X.Etale} {u u' : Spec (.of Ω) ⟶ U.left} (e : u = u') (hu : u ≫ U.hom = y)
-    (hu' : u' ≫ U.hom = y) : fiberPt u hu = fiberPt u' hu' := by
-  subst e
-  rfl
-
 /-- The morphism from an étale `X`-scheme to the terminal étale `X`-scheme `X`. -/
 noncomputable def toEtaleMkId (V : X.Etale) : V ⟶ Scheme.Etale.mk (𝟙 X) :=
   MorphismProperty.Over.homMk V.hom (Category.comp_id _)
@@ -80,6 +75,8 @@ lemma eq_toEtaleMkId {V : X.Etale} (a : V ⟶ Scheme.Etale.mk (𝟙 X)) : a = to
   have ha : a.left ≫ 𝟙 X = V.hom := MorphismProperty.Over.w a
   exact (Category.comp_id a.left).symm.trans ha
 
+/-- The underlying morphism of a morphism to the terminal étale `X`-scheme is the structure
+morphism. -/
 lemma left_eq_hom_of_etaleMkId {V : X.Etale} (a : V ⟶ Scheme.Etale.mk (𝟙 X)) :
     a.left = V.hom := by
   rw [eq_toEtaleMkId a, toEtaleMkId_left]
@@ -405,7 +402,23 @@ theorem exists_pullSection_eq_of_isFinite_of_surjective {Y Y' : Scheme.{u}} (r :
         ((Category.comp_id _).trans (Category.id_comp _).symm) σ') :
     ∃ σ : G.obj.obj (op (Scheme.Etale.mk (𝟙 Y))),
       pullSection r G (V := Scheme.Etale.mk (𝟙 Y')) (U := Scheme.Etale.mk (𝟙 Y)) r
-        ((Category.comp_id _).trans (Category.id_comp _).symm) σ = σ' :=
-  sorry
+        ((Category.comp_id _).trans (Category.id_comp _).symm) σ = σ' := by
+  choose U g hy hg using fun y : Y ↦ exists_pullSection_eq_map_toEtaleMkId r G σ' h y
+  obtain ⟨σ, hσ⟩ := exists_map_eq_of_compatible G (fun y ↦ toEtaleMkId (U y))
+    (fun y ↦ ⟨y, hy y⟩) g (fun i j ↦ by
+      rw [← sub_eq_zero]
+      refine eq_zero_of_pullSection_eq_zero r G
+        (V := (MorphismProperty.Over.pullback @Etale ⊤ r).obj
+          (overlap (toEtaleMkId (U i)) (toEtaleMkId (U j))))
+        (pullback.fst _ r) pullback.condition (pullback.fst _ r).surjective _ ?_
+      rw [pullSection_sub, sub_eq_zero, pullSection_fst_map, pullSection_fst_map, hg, hg,
+        map_map_toEtaleMkId, map_map_toEtaleMkId])
+  refine ⟨σ, eq_of_forall_exists_map_eq _ _ _ fun x ↦ ?_⟩
+  obtain ⟨w, hw⟩ := hy (r x)
+  obtain ⟨z, -, hz⟩ := Scheme.Pullback.exists_preimage_pullback (f := (U (r x)).hom) (g := r)
+    w x hw
+  refine ⟨(MorphismProperty.Over.pullback @Etale ⊤ r).obj (U (r x)), toEtaleMkId _, ⟨z, hz⟩, ?_⟩
+  rw [← hg (r x), ← hσ (r x), map_pullSection, ← pullSection_comp]
+  exact pullSection_congr _ _ _ (by simp [pullback.condition]) _
 
 end AlgebraicGeometry.Etale
