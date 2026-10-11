@@ -5489,3 +5489,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 18:01 L: merged deliver/V1/lem-sc-smooth-proper-diagonal-basechange-upper-shriek (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.DiagonalBaseChangeUpperShriek AlgebraicGeometry.diagonal_baseChange_upperShriek)
 - 18:01 L: merged deliver/N1/def-weil-pbc-simplicial-hom-object (stage 2; reviewer FIX; first push; Sheaf.AlgebraicGeometry.SimplicialHomObject AlgebraicGeometry.Scheme.simplicialHomFamilyFunctor)
 - 18:01 L: merged deliver/P1/lem-weil-pbc-etale-graph-section-extension-map-linear (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.EtaleGraphSectionExtensionMapLinear AlgebraicGeometry.etale_graph_section_extension_map_linear)
+- 18:01 L: merged deliver/Q1/lem-pc-projection-locality (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.ProjectionFormulaLocality AlgebraicGeometry.projectionFormula_isIso_iff_openCover)
