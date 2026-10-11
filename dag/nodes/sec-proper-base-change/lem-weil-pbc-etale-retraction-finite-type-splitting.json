@@ -152,5 +152,24 @@
   "item": "lem-weil-pbc-etale-retraction-finite-type-splitting",
   "worker": "stage1",
   "summary": "Split along Stacks 04GG (8)=>(11): apply the finite type form of 00UK (new unsplit node lem-weil-pbc-finite-type-etale-finite-factor-decomposition), retract the elementary etale extension, tensor the product decomposition back to R, and write out the source's omitted verification that the bad factor remains non-quasi-finite by identifying its closed fibre with the original bad factor's closed fibre. The source's ill-typed reversed retraction condition is corrected in the proof. No statement change."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.EtaleRetractionFiniteTypeSplitting",
+  "declaration": "Algebra.etale_retraction_finite_type_splitting",
+  "file": "lean/Sheaf/RingTheory/EtaleRetractionFiniteTypeSplitting.lean",
+  "statement": "theorem etale_retraction_finite_type_splitting (R : Type u) [CommRing R] [IsLocalRing R] (hR : ∀ (R' : Type (max u v)) [CommRing R'] [Algebra R R'], Algebra.Etale R R' → ∀ (p : Ideal R') [p.IsPrime], ∀ (hp : p.comap (algebraMap R R') = IsLocalRing.maximalIdeal R), Function.Bijective (Ideal.ResidueField.mapₐ (IsLocalRing.maximalIdeal R) p (Algebra.ofId R R') hp.symm) → ∃ (τ : R' →ₐ[R] R), p = (IsLocalRing.maximalIdeal R).comap τ.toRingHom) (S : Type v) [CommRing S] [Algebra R S] [Algebra.FiniteType R S] : ∃ (A B : Type v) (_ : CommRing A) (_ : CommRing B) (_ : Algebra R A) (_ : Algebra R B) (_ : Algebra.FiniteType R B), (∃ e : S ≃ₐ[R] A × B, Module.Finite R A ∧ (∀ q : PrimeSpectrum B, q.comap (algebraMap R B) = IsLocalRing.maximalIdeal R → ¬ IsQuasiFiniteAtPrime R B q))",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-ert1011"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-ert1011",
+  "group": "E1",
+  "result": "fix",
+  "note": "local R; hR over etale R' : Type (max u v) (M1 c8ddf5893 spelling), prime over m, mapₐ bijective, τ with p = m.comap τ; S FiniteType; ∃ A B : Type v, B FiniteType, S ≃ₐ[R] A × B, Module.Finite R A, no prime of B over m quasi-finite (Algebra.IsQuasiFiniteAtPrime, #check'd); zero factors allowed"
  }
 }
