@@ -42,7 +42,7 @@ lemma Etale.sectionHom_surjective (F : Sheaf X.smallEtaleTopology (ModuleCat.{u 
   intro g
   let φ := ((constantSheafAdj W.smallEtaleTopology (ModuleCat.{u + 1} Λ)
     (MorphismProperty.Over.mkIdTerminal @Etale W)).homEquiv _ _)
-      (((Etale.etaleLowerShriekRestrictionAdjunction v h).homEquiv _ _) g)
+      (((Etale.etaleLowerShriekLocalizationAdjunction v h).homEquiv _ _) g)
   refine ⟨φ.hom 1, ?_⟩
   have : ModuleCat.ofHom (LinearMap.toSpanSingleton Λ _ (φ.hom 1)) = φ := by
     ext; simp

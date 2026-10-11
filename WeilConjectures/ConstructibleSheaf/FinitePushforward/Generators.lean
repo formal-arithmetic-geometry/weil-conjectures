@@ -34,7 +34,7 @@ variable {Λ : Type (u + 1)} [CommRing Λ] {X : Scheme.{u}}
 
 /-- The adjunction `v_! ⊣ v^*` for an étale `X`-scheme `V`, with `v^*` the restriction of
 sections. -/
-noncomputable def Etale.etaleLowerShriekRestrictionAdjunction {W : Scheme.{u}} (v : W ⟶ X)
+noncomputable def Etale.etaleLowerShriekLocalizationAdjunction {W : Scheme.{u}} (v : W ⟶ X)
     (h : Etale v) :
     Etale.etaleLowerShriek (ModuleCat.{u + 1} Λ) v h ⊣
       Etale.localizationRestriction (ModuleCat.{u + 1} Λ) v h :=
@@ -54,7 +54,7 @@ noncomputable def Etale.sectionHom (F : Sheaf X.smallEtaleTopology (ModuleCat.{u
     {W : Scheme.{u}} (v : W ⟶ X) (h : Etale v) (σ : F.obj.obj (op (Etale.self v h))) :
     (Etale.etaleLowerShriek (ModuleCat.{u + 1} Λ) v h).obj
       ((constantSheaf W.smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj (ModuleCat.of Λ Λ)) ⟶ F :=
-  ((Etale.etaleLowerShriekRestrictionAdjunction v h).homEquiv _ _).symm
+  ((Etale.etaleLowerShriekLocalizationAdjunction v h).homEquiv _ _).symm
     (((constantSheafAdj W.smallEtaleTopology (ModuleCat.{u + 1} Λ)
       (MorphismProperty.Over.mkIdTerminal @Etale W)).homEquiv _ _).symm
         (ModuleCat.ofHom (LinearMap.toSpanSingleton Λ _ σ)))
@@ -77,7 +77,7 @@ lemma Etale.sectionHom_injective (F : Sheaf X.smallEtaleTopology (ModuleCat.{u +
   have := congr(ConcreteCategory.hom
     ((((constantSheafAdj W.smallEtaleTopology (ModuleCat.{u + 1} Λ)
       (MorphismProperty.Over.mkIdTerminal @Etale W)).homEquiv _ _)
-        (((Etale.etaleLowerShriekRestrictionAdjunction v h).homEquiv _ _) $hσ))) (1 : Λ))
+        (((Etale.etaleLowerShriekLocalizationAdjunction v h).homEquiv _ _) $hσ))) (1 : Λ))
   simp only [Etale.sectionHom, Equiv.apply_symm_apply, ModuleCat.hom_ofHom] at this
   erw [LinearMap.toSpanSingleton_apply, one_smul, LinearMap.toSpanSingleton_apply, one_smul] at this
   exact this
