@@ -8,6 +8,7 @@ module
 public import Mathlib.Algebra.Homology.DerivedCategory.ShortExact
 public import Mathlib.CategoryTheory.Idempotents.Basic
 public import Mathlib.CategoryTheory.Retract
+public import Mathlib.CategoryTheory.Monoidal.Preadditive
 public import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.Dualizable
 
 /-!
@@ -137,6 +138,98 @@ theorem IsDualizable.of_retract [IsIdempotentComplete C] {R D : C} (h : Retract 
   exact nonempty_hasRightDual_of_retract h
 
 end Retract
+
+section Biprod
+
+variable {C : Type*} [Category C] [MonoidalCategory C]
+
+/-- The composite of a coevaluation and an evaluation along maps through a common object only
+depends on the composite of those maps. -/
+lemma whiskerLeft_coevaluation_evaluation {A B M N N' : C} [HasRightDual A] [HasRightDual B]
+    (i : A ⟶ M) (j : Aᘁ ⟶ N') (q : N ⟶ Bᘁ) (p : M ⟶ B) :
+    N ◁ (η_ A Aᘁ ≫ (i ⊗ₘ j)) ≫ (α_ N M N').inv ≫ ((q ⊗ₘ p) ≫ ε_ B Bᘁ) ▷ N' =
+      q ▷ 𝟙_ C ≫ Bᘁ ◁ η_ A Aᘁ ≫ (α_ Bᘁ A Aᘁ).inv ≫ (Bᘁ ◁ (i ≫ p)) ▷ Aᘁ ≫
+        ε_ B Bᘁ ▷ Aᘁ ≫ 𝟙_ C ◁ j := by
+  have e1 : N ◁ (i ⊗ₘ j) ≫ (α_ N M N').inv ≫ (q ⊗ₘ p) ▷ N' =
+      (α_ N A Aᘁ).inv ≫ ((q ⊗ₘ (i ≫ p)) ⊗ₘ j) := by
+    rw [← id_tensorHom, associator_inv_naturality_assoc, ← tensorHom_id,
+      tensorHom_comp_tensorHom, tensorHom_comp_tensorHom]
+    simp only [Category.comp_id, Category.id_comp]
+  have e2 : (α_ N A Aᘁ).inv ≫ ((q ⊗ₘ (i ≫ p)) ⊗ₘ j) =
+      (q ⊗ₘ (𝟙 A ⊗ₘ 𝟙 Aᘁ)) ≫ (α_ Bᘁ A Aᘁ).inv ≫ ((Bᘁ ◁ (i ≫ p)) ⊗ₘ j) := by
+    rw [associator_inv_naturality_assoc, tensorHom_comp_tensorHom, ← id_tensorHom,
+      tensorHom_comp_tensorHom]
+    simp only [Category.comp_id, Category.id_comp]
+  rw [MonoidalCategory.whiskerLeft_comp, comp_whiskerRight, Category.assoc, reassoc_of% e1,
+    reassoc_of% e2, id_tensorHom_id]
+  rw [tensorHom_id, whisker_exchange_assoc, tensorHom_def, Category.assoc, ← whisker_exchange]
+
+
+/-- The composite of a coevaluation and an evaluation along maps through a common object only
+depends on the composite of those maps. -/
+lemma whiskerRight_coevaluation_evaluation {A B M N M' : C} [HasRightDual A] [HasRightDual B]
+    (i : A ⟶ M) (j : Aᘁ ⟶ N) (q : N ⟶ Bᘁ) (p : M' ⟶ B) :
+    (η_ A Aᘁ ≫ (i ⊗ₘ j)) ▷ M' ≫ (α_ M N M').hom ≫ M ◁ ((q ⊗ₘ p) ≫ ε_ B Bᘁ) =
+      𝟙_ C ◁ p ≫ η_ A Aᘁ ▷ B ≫ (α_ A Aᘁ B).hom ≫ A ◁ ((j ≫ q) ▷ B) ≫
+        A ◁ ε_ B Bᘁ ≫ i ▷ 𝟙_ C := by
+  have e1 : (i ⊗ₘ j) ▷ M' ≫ (α_ M N M').hom ≫ M ◁ (q ⊗ₘ p) =
+      (α_ A Aᘁ M').hom ≫ (i ⊗ₘ ((j ≫ q) ⊗ₘ p)) := by
+    rw [← tensorHom_id, associator_naturality_assoc, ← id_tensorHom,
+      tensorHom_comp_tensorHom, tensorHom_comp_tensorHom]
+    simp only [Category.comp_id, Category.id_comp]
+  have e2 : (α_ A Aᘁ M').hom ≫ (i ⊗ₘ ((j ≫ q) ⊗ₘ p)) =
+      ((𝟙 A ⊗ₘ 𝟙 Aᘁ) ⊗ₘ p) ≫ (α_ A Aᘁ B).hom ≫ (i ⊗ₘ ((j ≫ q) ▷ B)) := by
+    rw [associator_naturality_assoc, tensorHom_comp_tensorHom, ← tensorHom_id,
+      tensorHom_comp_tensorHom]
+    simp only [Category.comp_id, Category.id_comp]
+  rw [comp_whiskerRight, MonoidalCategory.whiskerLeft_comp, Category.assoc, reassoc_of% e1,
+    reassoc_of% e2, id_tensorHom_id, id_tensorHom, ← whisker_exchange_assoc, tensorHom_def',
+    Category.assoc, whisker_exchange]
+
+
+
+variable [Preadditive C] [MonoidalPreadditive C] [HasBinaryBiproducts C]
+
+/-- A binary biproduct of objects with right duals has a right dual, the biproduct of the duals. -/
+theorem nonempty_hasRightDual_biprod {X Y : C} [HasRightDual X] [HasRightDual Y] :
+    Nonempty (HasRightDual (X ⊞ Y)) :=
+  ⟨{ rightDual := Xᘁ ⊞ Yᘁ
+     exact :=
+      { coevaluation' := η_ X Xᘁ ≫ (biprod.inl ⊗ₘ biprod.inl) +
+          η_ Y Yᘁ ≫ (biprod.inr ⊗ₘ biprod.inr)
+        evaluation' := (biprod.fst ⊗ₘ biprod.fst) ≫ ε_ X Xᘁ +
+          (biprod.snd ⊗ₘ biprod.snd) ≫ ε_ Y Yᘁ
+        coevaluation_evaluation' := by
+          simp only [MonoidalPreadditive.whiskerLeft_add, MonoidalPreadditive.add_whiskerRight,
+            Preadditive.add_comp, Preadditive.comp_add, whiskerLeft_coevaluation_evaluation,
+            biprod.inl_fst,
+            biprod.inl_snd, biprod.inr_fst, biprod.inr_snd, MonoidalCategory.whiskerLeft_id,
+            id_whiskerRight, MonoidalPreadditive.whiskerLeft_zero,
+            MonoidalPreadditive.zero_whiskerRight, zero_comp, comp_zero, add_zero, zero_add,
+            Category.id_comp, ExactPairing.coevaluation_evaluation_assoc, whiskerRight_id,
+            id_whiskerLeft, Category.assoc, Iso.inv_hom_id_assoc]
+          rw [← Preadditive.comp_add, ← Category.assoc biprod.fst, ← Category.assoc biprod.snd,
+            ← Preadditive.add_comp, biprod.total, Category.id_comp]
+        evaluation_coevaluation' := by
+          simp only [MonoidalPreadditive.whiskerLeft_add, MonoidalPreadditive.add_whiskerRight,
+            Preadditive.add_comp, Preadditive.comp_add, whiskerRight_coevaluation_evaluation,
+            biprod.inl_fst,
+            biprod.inl_snd, biprod.inr_fst, biprod.inr_snd, MonoidalCategory.whiskerLeft_id,
+            id_whiskerRight, MonoidalPreadditive.whiskerLeft_zero,
+            MonoidalPreadditive.zero_whiskerRight, zero_comp, comp_zero, add_zero, zero_add,
+            Category.id_comp, ExactPairing.evaluation_coevaluation_assoc, whiskerRight_id,
+            id_whiskerLeft, Category.assoc, Iso.inv_hom_id_assoc]
+          rw [← Preadditive.comp_add, ← Category.assoc biprod.fst, ← Category.assoc biprod.snd,
+            ← Preadditive.add_comp, biprod.total, Category.id_comp] } }⟩
+
+/-- A binary biproduct of dualizable objects is dualizable. -/
+theorem IsDualizable.biprod {X Y : C} (hX : IsDualizable X) (hY : IsDualizable Y) :
+    IsDualizable (X ⊞ Y) := by
+  obtain ⟨_⟩ := hX
+  obtain ⟨_⟩ := hY
+  exact nonempty_hasRightDual_biprod
+
+end Biprod
 
 end CategoryTheory
 
