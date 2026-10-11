@@ -27,7 +27,6 @@
 | `lem-pc-derived-mayer-vietoris-triangle` | 1 | state | 2 |
 | `lem-weil-pbc-cohomology-pullback-degree-zero` | 1 | state | 2 |
 | `lem-weil-pbc-higher-direct-image-presheaf` | 1 | state | 2 |
-| `lem-pc-affine-derived-pullback-tensor-tilde` | 1 | state | 1 |
 | `lem-pc-cech-resolution` | 1 | state | 1 |
 | `lem-pc-derived-sections-pushforward-comparison` | 1 | state | 1 |
 | `lem-pc-derived-tensor-transitivity` | 1 | state | 1 |
@@ -42,6 +41,7 @@
 | `lem-pc-rf-base-change-complex` | 1 | state | 0 |
 | `lem-pc-rf-base-change-single-complex-criterion` | 1 | state | 0 |
 | `lem-pc-rf-perfect-base-change` | 1 | state | 0 |
+| `lem-pc-rf-single-complex-affine-base-change` | 1 | state | 0 |
 | `lem-pc-rf-single-complex-qcqs-induction` | 1 | state | 0 |
 | `lem-pc-rf-single-complex-relative-mayer-vietoris` | 1 | state | 0 |
 | `lem-sc-affine-derived-cohomology` | 1 | state | 0 |
@@ -96,7 +96,7 @@
 | `lemma-weil-pbc-hypercohomology-convergence` | 2 | state | 0 |
 | `pqf-lem-leray-lowdegree` | 2 | state | 0 |
 
-Not open yet: 40 nodes that wait for stage 1, 187 nodes that wait for a statement dependency.
+Not open yet: 40 nodes that wait for stage 1, 186 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
