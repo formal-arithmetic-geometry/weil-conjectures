@@ -177,5 +177,23 @@
   "summary": "Lean state none on both branches (no declaration in slopmaster2 for the Koszul differential; grep of WeilConjectures for koszul/contractLeft finds only the P^1 Koszul short complex and tensor contractLeft, unrelated). Split into six steps: existence via a new Mathlib leaf (CliffordAlgebra.contractLeft at Q = 0, with contractLeft_one and contractLeft_ι_mul), uniqueness by induction on products (CliffordAlgebra.left_induction), D(v)=phi(v) and degree -1 by induction on n, the explicit formula (iii) by induction on n, the graded Leibniz rule (iv) by induction on the degree of x, and uniqueness among degree -1 derivations by reduction to the recursion of (i). Statement unchanged; stmt_deps unchanged. Stacks' own existence route (derivation on the tensor algebra killing e tensor e) is replaced by the Mathlib construction, which yields the same map by the uniqueness in step 2.",
   "blueprint": "No blueprint node states this; the steps realize, in the proof of thm-weil-pbc-finite-etale-lifting (via its chain down to def-weil-pbc-koszul-complex), the place recorded in blueprint.from.place: the well-definedness of the Koszul differential (Stacks 0622 (2) and the explicit formula after it): step 1 the existence ('factors through the exterior algebra'), steps 2 and 6 'the unique derivation such that d(e)=phi(e)', steps 3-4 the explicit formula and degree, step 5 'this gives a well defined derivation'."
  },
- "reviewed": "2026-10-10 L: 6 steps: existence from the Mathlib leaf (contractLeft with Q = 0, contractLeft_one, contractLeft_ι_mul: lines read), uniqueness by induction on wedge length, degree and the explicit formula by induction, the Leibniz rule and its uniqueness; 1 new node"
+ "reviewed": "2026-10-10 L: 6 steps: existence from the Mathlib leaf (contractLeft with Q = 0, contractLeft_one, contractLeft_ι_mul: lines read), uniqueness by induction on wedge length, degree and the explicit formula by induction, the Leibniz rule and its uniqueness; 1 new node",
+ "lean": {
+  "module": "Sheaf.Paper.KoszulDifferential",
+  "declaration": "ExteriorAlgebra.koszul_differential",
+  "file": "lean/Sheaf/Paper/KoszulDifferential.lean",
+  "statement": "theorem koszul_differential (R : Type u) [CommRing R] (E : Type v) [AddCommGroup E] [Module R E] (φ : E →ₗ[R] R) : ∃ (D : ExteriorAlgebra R E →ₗ[R] ExteriorAlgebra R E), D 1 = 0 ∧ (∀ (v : E) (x : ExteriorAlgebra R E), D (ExteriorAlgebra.ι R v * x) = algebraMap R (ExteriorAlgebra R E) (φ v) * x - ExteriorAlgebra.ι R v * D x) ∧ (∀ (D' : ExteriorAlgebra R E →ₗ[R] ExteriorAlgebra R E), D' 1 = 0 → (∀ (v : E) (x : ExteriorAlgebra R E), D' (ExteriorAlgebra.ι R v * x) = algebraMap R (ExteriorAlgebra R E) (φ v) * x - ExteriorAlgebra.ι R v * D' x) → D' = D) ∧ (∀ (v : E), D (ExteriorAlgebra.ι R v) = algebraMap R (ExteriorAlgebra R E) (φ v)) ∧ (Submodule.map D (⋀[R]^0 E) ≤ ⊥) ∧ (∀ (n : ℕ), Submodule.map D (⋀[R]^(n + 1) E) ≤ ⋀[R]^n E) ∧ (∀ (n : ℕ) (v : Fin (n + 1) → E), D (ExteriorAlgebra.ιMulti R (n + 1) v) = ∑ i : Fin (n + 1), algebraMap R (ExteriorAlgebra R E) (((-1 : R) ^ (i.1 + 2)) * φ (v i)) * ExteriorAlgebra.ιMulti R n (v ∘ i.succAbove)) ∧ (∀ (m : ℕ) (x : ⋀[R]^m E) (y : ExteriorAlgebra R E), D ((x : ExteriorAlgebra R E) * y) = D (x : ExteriorAlgebra R E) * y + algebraMap R (ExteriorAlgebra R E) ((-1 : R) ^ m) * (x : ExteriorAlgebra R E) * D y) ∧ (∀ (D' : ExteriorAlgebra R E →ₗ[R] ExteriorAlgebra R E), (∀ (m : ℕ) (x : ⋀[R]^m E) (y : ExteriorAlgebra R E), D' ((x : ExteriorAlgebra R E) * y) = D' (x : ExteriorAlgebra R E) * y + algebraMap R (ExteriorAlgebra R E) ((-1 : R) ^ m) * (x : ExteriorAlgebra R E) * D' y) → (∀ (v : E), D' (ExteriorAlgebra.ι R v) = algebraMap R (ExteriorAlgebra R E) (φ v)) → D' = D)",
+  "branch": "sheaf-dag",
+  "by": "M1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-kdf1116",
+  "group": "M1",
+  "result": "pass",
+  "note": "R CommRing, E module, φ →ₗ; (i) D 1=0, recursion, uniqueness; (ii) D(ι v), deg 0 ↦ ⊥, ⋀^(n+1)→⋀^n; (iii) signs (-1)^(i+2) checked n=1,2,3 via ιMulti/succAbove; (iv) Leibniz homogeneous x + uniqueness; Mathlib ExteriorAlgebra/⋀[R]^n, no hollow hyps, u/v independent fine"
+ }
 }

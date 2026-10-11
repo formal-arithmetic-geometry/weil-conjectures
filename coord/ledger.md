@@ -4420,3 +4420,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 11:16 L: merged deliver/C1/lem-weil-pbc-local-artinian-basis-when-flat (stage 2; reviewer PASS; first push; Sheaf.RingTheory.BasisIffBasisQuotientOfNilpotent Module.basis_iff_basisQuotient_of_nilpotent)
 - 11:17 L: merged deliver/G1/lem-weil-pbc-localization-colimit-principal-localizations (stage 2; reviewer FIX; first push; Sheaf.RingTheory.LocalizationColimitPrincipalLocalizations CommRingCat.localization_colimit_principalLocalizations)
 - 11:17 L: merged deliver/K1/lem-weil-pbc-jacobi-zariski-quotient-smooth (stage 2; reviewer PASS; first push; Sheaf.RingTheory.JacobiZariskiQuotientSmooth Algebra.jacobiZariski_quotient_smooth)
+- 11:17 L: merged deliver/M1/lem-weil-pbc-koszul-differential (stage 2; reviewer PASS; first push; Sheaf.Paper.KoszulDifferential ExteriorAlgebra.koszul_differential)
