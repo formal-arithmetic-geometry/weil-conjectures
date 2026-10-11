@@ -144,5 +144,24 @@
   "group": "K1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-cfs (reviewer sub-agent of L); spot-checked: Source: Stacks Tag 0GWM (algebra-lemma-finitely-presented-localization-free: R ring, M finitely presented, M_p free => M_f free for some f not in p) applied on Noetherian affines where finite = finitely presented, with Tag 01XZ (coherent-lemma-coherent-Noetherian) for coherent = quasi-coherent of finite type; item statement unchanged (locally Noetherian X, coherent F, free stalks => finite locally free). New node lem-sc-affine-finite-module-free-locus (Noetherian A, M finite, all M_p finite free => f_1..f_n generating (1) with M_{f_i} free) is true: Tag 0GWM pointwise plus quasi-compactness of Spec A; tested M=A^r, M=0, and M=(x,y) in k[x,y] (not free at the origin, hypothesis fails); no exact Mathlib/slopmaster2 statement (Module.FinitePresentation.exists_free_localizedModule_powers and freeLocus_eq_univ_iff at Mathlib/RingTheory/Spectrum/Prime/FreeLocus.lean:154 are pointwise/projective forms), so unsplit is right. Steps: step 1 carried by pqf-lem-coherent-ft-locnoeth, pqf-def-locnoeth, lem-weil-pbc-quasi-coherent-finite-type-affine(c), lem-weil-pbc-affine-tilde-gamma-adjunction(3); step 2 by lem-weil-pbc-spec-tilde-stalk-localization and the new node; step 3 elementary gluing of covers. Tool uses pqf-lem-coherent-ft-locnoeth and lem-weil-pbc-quasi-coherent-finite-type-affine accepted as generic black boxes (C8). FIX more, RETURN less: (1) dag/nodes/sec-picard-framework/lem-sc-coherent-free-stalks-locally-free.json: proof step 1 text/uses: C4, pqf-def-locnoeth only gives a covering by Noetherian affines, not that every affine open has Noetherian ring; step now works on the covering U_i (step 3 text adjusted to cover by the U_i); C1, F|_U = tilde of Gamma(U,F) used with no node, now cites lem-weil-pbc-affine-tilde-gamma-adjunction(3); (2) same file step 2 uses: C1, stalk F_x = M_p now cites lem-weil-pbc-spec-tilde-stalk-localization; proof_deps updated to the union; (3) dag/nodes/sec-picard-framework/lem-sc-affine-finite-module-free-locus.json: statement/stmt_deps: B3, 'Noetherian ring' cited pqf-def-locnoeth (a scheme definition, absent from stmt_deps) -> def-weil-pbc-noetherian-ring; widetilde M now cites lem-weil-pbc-spec-module-tilde-sections; both added to stmt_deps. Not fixed (maintainer field): new node source.place names 01XZ label as coherent-lemma-quasi-coherent, actual label coherent-lemma-coherent-Noetherian. Start Sat Oct 10 03:43:06 PM UTC 2026, end Sat Oct 10 03:44:34 PM UTC 2026.; 2 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.IsFiniteLocallyFreeOfCoherentFreeStalks",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.isFiniteLocallyFree_of_coherent_free_stalks",
+  "file": "lean/Sheaf/AlgebraicGeometry/IsFiniteLocallyFreeOfCoherentFreeStalks.lean",
+  "statement": "theorem isFiniteLocallyFree_of_coherent_free_stalks {X : Scheme.{u}} [IsLocallyNoetherian X] (F : X.Modules) (hcoherent : RingedSpace.IsCoherent X.toRingedSpace F) (hfree : ∀ x : X, Module.Free (X.presheaf.stalk x) ((RingedSpace.moduleStalkFunctor X.toRingedSpace x).obj F) ∧ Module.Finite (X.presheaf.stalk x) ((RingedSpace.moduleStalkFunctor X.toRingedSpace x).obj F)) : SheafOfModules.IsFiniteLocallyFree.{u, u, u} F",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-cfs1201"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-cfs1201",
+  "group": "E1",
+  "result": "fix",
+  "note": "scheme X; [IsLocallyNoetherian X] = locally Noetherian; IsCoherent X.toRingedSpace F; stalks via landed moduleStalkFunctor (fixed), Module.Free ∧ Module.Finite; conclusion IsFiniteLocallyFree (varying rank per node)"
  }
 }
