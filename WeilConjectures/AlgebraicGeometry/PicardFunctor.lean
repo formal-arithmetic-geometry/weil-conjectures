@@ -330,9 +330,13 @@ lemma isPullback_baseChangeMap_of_isPullback (f : X ⟶ S) {T₁ T₂ T₃ T₄ 
 
 /-- The Picard presheaf of a morphism of schemes `f : X ⟶ S`: it sends a scheme `T` over `S`
 to the Picard group of the fibre product `X_T = X ×[S] T`, and a morphism over `S` to the
-corresponding pullback map on Picard groups.
+corresponding pullback map on Picard groups. Functoriality: pulling back along `X_{T'} ⟶ X_T`
+sends invertible modules to invertible modules and respects isomorphisms
+(`AlgebraicGeometry.Scheme.Pic.map`), and `(g₁ ∘ g₂)^* = g₂^* g₁^*`, `id^* = id`
+(`AlgebraicGeometry.Scheme.Pic.map_comp`, `AlgebraicGeometry.Scheme.Pic.map_id`).
 
-(blueprint: `def-pc-picard-presheaf`) -/
+(blueprint: `def-pc-picard-presheaf`, `lem-pc-pic-presheaf-functorial`,
+`rem-ptr-pc-picard-presheaf-6`) -/
 noncomputable def picardPresheaf (f : X ⟶ S) : (Over S)ᵒᵖ ⥤ Type (u + 1) where
   obj T := (Limits.pullback f T.unop.hom).Pic
   map φ := TypeCat.ofHom (Pic.map (baseChangeMap f φ.unop))

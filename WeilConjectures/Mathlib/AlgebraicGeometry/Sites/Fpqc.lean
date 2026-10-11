@@ -174,6 +174,15 @@ lemma etaleTopology_le_fppfTopology : etaleTopology.{u} ≤ fppfTopology :=
   Precoverage.toGrothendieck_mono
     (precoverage_mono fun _ _ _ _ ↦ ⟨inferInstance, inferInstance⟩)
 
+/-- **Zariski coverings are fppf coverings.** A family of open immersions covering a scheme `T` is
+an fppf covering of `T`: open immersions are flat and locally of finite presentation (on the level
+of covering families this is Mathlib's `zariskiPrecoverage_le_fppfPrecoverage`), so every Zariski
+covering sieve is an fppf covering sieve.
+
+(blueprint: `lem-pc-zariski-coverings-are-fppf`) -/
+lemma zariskiTopology_le_fppfTopology : zariskiTopology.{u} ≤ fppfTopology :=
+  Precoverage.toGrothendieck_mono zariskiPrecoverage_le_fppfPrecoverage
+
 instance : etaleTopology.{u}.Subcanonical :=
   .of_le etaleTopology_le_fppfTopology
 

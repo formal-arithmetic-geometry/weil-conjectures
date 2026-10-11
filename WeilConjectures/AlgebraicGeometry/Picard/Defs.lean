@@ -176,7 +176,7 @@ sheafification of the Picard presheaf `T ↦ Pic (X_T)`, so that on the level of
 The fppf topology on the category `Over S` of schemes over `S` is the localization
 `Scheme.fppfTopology.over S` of the fppf topology on all schemes.
 
-(blueprint: `sk-def-picard-pic`) -/
+(blueprint: `sk-def-picard-pic`, `def-pc-picard-functor`) -/
 noncomputable def picardFunctor (f : X ⟶ S) :
     Sheaf (Scheme.fppfTopology.over S) (Type (u + 1)) :=
   (presheafToSheaf (Scheme.fppfTopology.over S) (Type (u + 1))).obj (picardPresheaf f)
@@ -290,7 +290,7 @@ This is a subfunctor because the base-changed sections are compatible: for `i : 
 
 commutes, so pulling a normalized class back along `baseChangeMap f i` keeps it normalized.
 
-(blueprint: `sk-def-picard-pic`) -/
+(blueprint: `sk-def-picard-pic`, `def-pc-pic-sigma-functor`) -/
 noncomputable def picardFunctorNormalized (f : X ⟶ S) (σ : S ⟶ X) (hσ : σ ≫ f = 𝟙 S) :
     Subfunctor (picardPresheaf f) where
   obj T := {L | Pic.map (sectionBaseChange f σ hσ T.unop) L =
@@ -326,9 +326,61 @@ lemma exists_map_ι_eq_mk_unit (L : Y.Pic) (y : Y) :
   obtain ⟨U, hy, ⟨e⟩⟩ := Modules.exists_mem_over_iso_unit ((fromSkeleton Y.Modules).obj L.val) y
   exact ⟨U, hy, Pic.ext (congr_toSkeleton_of_iso (Modules.pullbackIotaUnitIsoOfOverIso e))⟩
 
+/-- **The Picard group of a field is trivial.** Every invertible module on `Spec k` is isomorphic
+to the structure sheaf: it is trivial on an open neighbourhood of the unique point, which is all
+of `Spec k`.
+
+(blueprint: `lem-pc-pic-of-field`) -/
+instance subsingleton_spec (k : Type u) [Field k] : Subsingleton (Spec (.of k)).Pic := by
+  refine ⟨fun L L' ↦ Pic.eq_iff_nonempty_iso.2 ?_⟩
+  have := L.isInvertible
+  have := L'.isInvertible
+  have := Modules.IsInvertible.of_sheafOfModules ((fromSkeleton (Spec (.of k)).Modules).obj L.val)
+  have := Modules.IsInvertible.of_sheafOfModules
+    ((fromSkeleton (Spec (.of k)).Modules).obj L'.val)
+  obtain ⟨e⟩ := Modules.IsInvertible.nonempty_iso_unit default
+    ((fromSkeleton (Spec (.of k)).Modules).obj L.val)
+  obtain ⟨e'⟩ := Modules.IsInvertible.nonempty_iso_unit default
+    ((fromSkeleton (Spec (.of k)).Modules).obj L'.val)
+  exact ⟨e ≪≫ e'.symm⟩
+
 end Scheme.Pic
 
 end Pic
+
+/-- **`Pic_{X/S,σ}` is a subfunctor of the Picard presheaf.** For a morphism `i : V ⟶ U` of
+`S`-schemes, pulling back a class of `Pic (X_U)` that is trivial along `σ_U` gives a class of
+`Pic (X_V)` that is trivial along `σ_V`, since `σ_U ∘ i = (X ×_S i) ∘ σ_V`.
+
+(blueprint: `lem-pc-sigma-subfunctor`, `rem-ptr-pc-pic-sigma-functor-8`) -/
+theorem picardPresheaf_map_mem_picardFunctorNormalized (f : X ⟶ S) (σ : S ⟶ X)
+    (hσ : σ ≫ f = 𝟙 S) {U V : (Over S)ᵒᵖ} (i : U ⟶ V) {L : (picardPresheaf f).obj U}
+    (hL : L ∈ (picardFunctorNormalized f σ hσ).obj U) :
+    (picardPresheaf f).map i L ∈ (picardFunctorNormalized f σ hσ).obj V :=
+  (picardFunctorNormalized f σ hσ).map i hL
+
+/-- **The `k`-points of `Pic_{X/k,σ}`.** Let `X` be a scheme over a field `k` with a rational
+point `σ`. Then `Pic_{X/k,σ}(k) = Pic (X)`: every class of `Pic (X_k)` is trivial along
+`σ_k : Spec k ⟶ X_k`, the Picard group of `Spec k` being trivial, and `X_k = X ×_k k ≅ X`.
+
+(blueprint: `lem-pc-sigma-k-points`) -/
+theorem nonempty_picardFunctorNormalized_obj_equiv_pic {k : Type u} [Field k]
+    (f : X ⟶ Spec (.of k)) (σ : Spec (.of k) ⟶ X) (hσ : σ ≫ f = 𝟙 _) :
+    Nonempty ((picardFunctorNormalized f σ hσ).obj (Opposite.op (Over.mk (𝟙 _))) ≃ X.Pic) := by
+  let e : Limits.pullback f (Over.mk (𝟙 (Spec (.of k)))).hom ≅ X :=
+    asIso (Limits.pullback.fst f (𝟙 _))
+  have hmem (L : (picardPresheaf f).obj (Opposite.op (Over.mk (𝟙 _)))) :
+      L ∈ (picardFunctorNormalized f σ hσ).obj (Opposite.op (Over.mk (𝟙 _))) :=
+    Subsingleton.elim (α := (Spec (.of k)).Pic) _ _
+  refine ⟨(Equiv.subtypeUnivEquiv hmem).trans
+    { toFun := Pic.map e.inv
+      invFun := Pic.map e.hom
+      left_inv := fun L ↦ ?_
+      right_inv := fun L ↦ ?_ }⟩
+  · change Pic.map e.hom (Pic.map e.inv L) = L
+    rw [← Pic.map_comp, e.hom_inv_id, Pic.map_id]
+  · change Pic.map e.inv (Pic.map e.hom L) = L
+    rw [← Pic.map_comp, e.inv_hom_id, Pic.map_id]
 
 section Exactness
 
