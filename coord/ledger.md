@@ -3457,3 +3457,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 06:09 L: merged deliver/C1/lem-exc-rg-group-algebra-functorial-injective-embeddings (stage 2; reviewer FIX; first push; Sheaf.GroupTheory.GroupAlgebraFunctorialInjectiveEmbeddings ModuleCat.groupAlgebra_functorialInjectiveEmbeddings)
 - 06:09 L: merged deliver/H1/lem-pc-algebraic-dim-zero-affine-finite (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.DimZeroFiniteOverField AlgebraicGeometry.isAffine_and_isFinite_of_dim_le_zero)
 - 06:10 L: merged deliver/H1/lem-galois-fpqc-descend-etale (stage 2; reviewer FIX; first push; Sheaf.AlgebraicGeometry.FpqcDescentEtale AlgebraicGeometry.etale_of_fpqc_cover)
+- 06:10 L: merged deliver/G1/lem-galois-aut-profinite (stage 2; reviewer FIX; first push; Sheaf.CategoryTheory.Galois.AutProfinite CategoryTheory.SetFunctorAut.evaluation_isClosedEmbedding_and_profinite)

@@ -116,5 +116,23 @@
   "group": "C1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of C1; spot-checked by L: L: reviewed in full by a reviewer sub-agent (FIX: a wrong citation of def-galois-aut-topology removed from the new leaf): 0BMR read, 3 steps checked, ProfiniteGrp lines 214/224/249 verified, small cases"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.Galois.AutProfinite",
+  "declaration": "CategoryTheory.SetFunctorAut.evaluation_isClosedEmbedding_and_profinite",
+  "file": "lean/Sheaf/CategoryTheory/Galois/AutProfinite.lean",
+  "statement": "theorem evaluation_isClosedEmbedding_and_profinite {C : Type u} [Category.{v} C] (F : C ⥤ Type w) : IsClosedEmbedding (evaluation F) ∧ ((∀ X : C, Finite (F.obj X)) → CompactSpace (Aut F) ∧ T2Space (Aut F) ∧ TotallyDisconnectedSpace (Aut F) ∧ IsTopologicalGroup (Aut F))",
+  "branch": "sheaf-dag",
+  "by": "G1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-gap0648",
+  "group": "G1",
+  "result": "fix",
+  "note": "FIX: dropped import Mathlib.CategoryTheory.Galois.Topology (unused: file compiles without it, no Galois declaration used; H9). Matched: category with sets of objects/homs = {C : Type u} [Category.{v} C]; F : C ⥤ Type w arbitrary fibres; discrete F(X), pointwise (= compact-open on discrete) topology on Aut(F(X)) = fiberTopology induced along σ.hom into A → A; Aut(F) topology induced by evaluation into the Pi product; closed subgroup = IsClosedEmbedding of the MonoidHom evaluation; finite fibres -> compact, T2, totally disconnected, topological group (profinite). Edge cases: empty C, empty/infinite fibres, universes free. Mathlib's autEmbedding/profinite instances are for C ⥤ FintypeCat only; the node is Stacks 0BMR for arbitrary set-valued F, so no H4. Docstring carries the 3 proof steps."
  }
 }
