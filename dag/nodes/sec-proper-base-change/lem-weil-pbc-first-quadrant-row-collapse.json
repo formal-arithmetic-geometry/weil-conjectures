@@ -18,7 +18,8 @@
  },
  "stmt_deps": [
   "def-sp-abelian",
-  "def-sp-filtration"
+  "def-sp-filtration",
+  "def-sp-spectral-sequence"
  ],
  "proof": [
   {
@@ -155,5 +156,23 @@
   "date": "2026-10-09",
   "by": "L",
   "result": "pass"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.FirstQuadrantRowCollapse",
+  "declaration": "CategoryTheory.first_quadrant_row_collapse",
+  "file": "lean/Sheaf/CategoryTheory/FirstQuadrantRowCollapse.lean",
+  "statement": "theorem first_quadrant_row_collapse {C : Type u} [Category.{v} C] [Abelian C] (E : E₂CohomologicalSpectralSequence C) (hfirst : ∀ p q : ℤ, p < 0 ∨ q < 0 → IsZero ((E.page 2).X (p, q))) (H : ℕ → C) (F : ∀ n : ℕ, DecreasingFiltration (H n)) (htop : ∀ n : ℕ, (F n).step 0 = ⊤) (hbottom : ∀ n : ℕ, (F n).step ((n : ℤ) + 1) = ⊥) (conv : ∀ (n p q : ℕ) (hpq : p + q = n), (F n).gradedPiece p ≅ (E.page ((n : ℤ) + 2)).X (p, q)) (hrow : ∀ p q : ℤ, 0 < q → IsZero ((E.page 2).X (p, q))) : (∃ (a : ∀ n r : ℕ, (E.page 2).X (n, 0) ⟶ (E.page ((r : ℤ) + 2)).X (n, 0)) (b : ∀ n r : ℕ, (E.page 2).X (n, 0) ⟶ (E.page ((r : ℤ) + 2)).cycles (n, 0)), (∀ n : ℕ, a n 0 = 𝟙 _) ∧ (∀ n r : ℕ, b n r ≫ (E.page ((r : ℤ) + 2)).iCycles (n, 0) = a n r ∧ b n r ≫ (E.page ((r : ℤ) + 2)).homologyπ (n, 0) ≫ (E.iso ((r : ℤ) + 2) ((r : ℤ) + 3) (n, 0)).hom = a n (r + 1)) ∧ (∀ n : ℕ, ∃ f : (E.page 2).X (n, 0) ⟶ ((F n).step n : C), f ≫ cokernel.π (Subobject.ofLE ((F n).step ((n : ℤ) + 1)) ((F n).step n) ((F n).antitone_step (by omega))) = a n n ≫ (conv n n 0 (by omega)).inv ∧ IsIso (f ≫ ((F n).step n).arrow))) ∧ ((∀ n : ℕ, 0 < n → IsZero (H n)) → ∀ n : ℕ, 0 < n → IsZero ((E.page 2).X (n, 0)))",
+  "branch": "sheaf-dag",
+  "by": "M1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-fqr1030",
+  "group": "M1",
+  "result": "pass",
+  "note": "E₂CohomologicalSpectralSequence = SpectralSequence C (up' ⟨r,1-r⟩) 2 (d_r:(p,q)->(p+r,q-r+1)); hfirst page-2 first quadrant over all ℤ; F^0=⊤, F^{n+1}=⊥ on recorded DecreasingFiltration; conv gr^p H^n ≅ E_{n+2}^{p,q}, n+2>max(p,q+1); hrow q>0; a/b pinned by a n 0=𝟙, iCycles, homologyπ≫E.iso (unique, canonical bottom-row edge), f unique via cokernel.π, IsIso(f≫arrow) = edge map; vanishing corollary for n>0; names checked by env lookup"
  }
 }
