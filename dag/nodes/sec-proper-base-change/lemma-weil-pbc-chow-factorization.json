@@ -218,5 +218,23 @@
   "group": "C1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of C1; spot-checked by L: Reviewed statement, route, all proof steps, cited reusable nodes, Mathlib searches, and independent review; no private reusable lemma or module."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ChowFactorization",
+  "declaration": "AlgebraicGeometry.exists_chow_factorization_of_isAffine",
+  "file": "lean/Sheaf/AlgebraicGeometry/ChowFactorization.lean",
+  "statement": "theorem exists_chow_factorization_of_isAffine {X Y : Scheme.{u}} (f : X ⟶ Y) [IsProper f] [IsAffine Y] : (∃ (T : Scheme.{u}) (n : ℕ) (π : T ⟶ X) (i : T ⟶ ProjectiveSpace (ULift.{u} (Fin (n + 1))) Y), IsProper π ∧ Surjective π ∧ IsClosedImmersion i ∧ π ≫ f = i ≫ ProjectiveSpace (ULift.{u} (Fin (n + 1))) Y ↘ Y) ∧ (∀ (T : Scheme.{u}) (n : ℕ) (π : T ⟶ X) (i : T ⟶ ProjectiveSpace (ULift.{u} (Fin (n + 1))) Y), IsProper π → Surjective π → IsClosedImmersion i → ∀ (h : π ≫ f = i ≫ ProjectiveSpace (ULift.{u} (Fin (n + 1))) Y ↘ Y) (Y' X' T' : Scheme.{u}) (g : Y' ⟶ Y) (x : X' ⟶ X) (f' : X' ⟶ Y') (t : T' ⟶ T) (b : T' ⟶ Y') (hx : IsPullback x f' f g) (ht : IsPullback t b (π ≫ f) g), IsProper (hx.lift (t ≫ π) b ((Category.assoc t π f).trans ht.w)) ∧ Surjective (hx.lift (t ≫ π) b ((Category.assoc t π f).trans ht.w)) ∧ IsClosedImmersion (ProjectiveSpace.liftBaseChange b (t ≫ i) (ht.w.symm.trans ((congrArg (fun k => t ≫ k) h).trans (Category.assoc t i _).symm))) ∧ hx.lift (t ≫ π) b ((Category.assoc t π f).trans ht.w) ≫ f' = ProjectiveSpace.liftBaseChange b (t ≫ i) (ht.w.symm.trans ((congrArg (fun k => t ≫ k) h).trans (Category.assoc t i _).symm)) ≫ ProjectiveSpace (ULift.{u} (Fin (n + 1))) Y' ↘ Y')",
+  "branch": "sheaf-dag",
+  "by": "T1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "T1",
+  "result": "pass",
+  "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
  }
 }
