@@ -147,5 +147,23 @@
   "group": "K1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-hpc1907 (reviewer sub-agent of L); spot-checked: Checked bidegrees (d_r (r,1-r), g_r (r-2,2-r)), stabilization bound max(q-a+1,p), alpha iso for p<=0 so colimit A^n=D^{0,n} matches def-sp-convergence, image filtration F^p=G_{n-p}, D_r^{u,v} exact sequence with D_r^{p+2,q-1}=0; no cycle (def-sp-convergence/lem-sp-derived-couple-exact do not depend on item). FIX more, RETURN less: (1) B5 Step 3 quoted section numbers 12.21.4/12.23.5, replaced by Tags 011T/012F only (012F marked 'compare', it is about filtered differential objects); (2) E Step 2 identified E_r with G_q/G_{q-1} but not the canonical maps of def-sp-convergence weak convergence: added g_r(alpha^{r-2}y)=[g(y)] from lem-sp-derived-couple-exact, E_infty=E_r, and finiteness => exhaustive/separated/complete; Step 2 opening 'For completeness' renamed.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.HalfPlaneConvergence",
+  "declaration": "CategoryTheory.BigradedExactCouple.halfPlaneConvergence",
+  "file": "lean/Sheaf/CategoryTheory/HalfPlaneConvergence.lean",
+  "statement": "theorem halfPlaneConvergence (X : BigradedExactCouple C 0) (a : ℤ) (hD : ∀ (p q : ℤ), q < a → IsZero (X.D p q)) (hE : ∀ (p q : ℤ), (p < 0 ∨ q < a) → IsZero (X.E p q)) : ∃ L : LimitSubobjects X, ∃ A : ∀ n : ℤ, AlphaColimit X n, ∃ hA : ∀ n : ℤ, (A n).obj = X.D 0 n, (∀ n : ℤ, (A n).ι 0 ≫ eqToHom (hA n) = eqToHom (by congr 1; omega)) ∧ (∀ (r : ℕ) (n p q : ℤ), p + q = n → ¬ IsZero ((X.pageCouple r).E p q) → a ≤ q ∧ q ≤ n) ∧ (∀ (r : ℕ) (p q : ℤ), (r : ℤ) + 2 > max (q - a + 1) p → ∃ e : (X.pageCouple r).E p q ≅ (X.pageCouple (r + 1)).E p q, kernel.ι ((X.pageCouple r).d p q) ≫ e.hom = (X.pageCouple r).derivedEProjection p q) ∧ (∀ (n p : ℤ), p ≤ 0 → (X.imageFiltration n (A n)).step p = ⊤) ∧ (∀ n : ℤ, (X.imageFiltration n (A n)).IsFinite ∧ (X.imageFiltration n (A n)).IsExhaustive ∧ (X.imageFiltration n (A n)).IsSeparated) ∧ (∀ (p q : ℤ), ∃ e : X.pageInfinity L p q ≅ (X.imageFiltration (p + q) (A (p + q))).gradedPiece p, X.toPageInfinity L p q ≫ e.hom = X.toGradedPiece A p q) ∧ X.IsComplete ∧ X.ConvergesTo L A",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-hpc",
+  "group": "E1",
+  "result": "pass",
+  "note": "hD/hE = D^{p,q}=0 for q<a and E_2 vanishing off p>=0,q>=a; A^n=D^{0,n} pinned by iota_0=id so iota_p=alpha^p and imageFiltration step = G_{n-p}, step=top for p<=0; a<=q<=n on all pages; stabilization at R=r+2>max(q-a+1,p) with canonical iso via kernel.iota/derivedEProjection (d_r bidegree (R,1-R), dInto source (p-R,q+R-1)); finite/exhaustive/separated; canonical E_inf=gr^p via toPageInfinity/toGradedPiece; IsComplete and ConvergesTo (includes IsRegular); all clauses true; no Mathlib exact couples"
  }
 }
