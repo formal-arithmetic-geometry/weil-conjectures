@@ -63,12 +63,50 @@
   "master": {
    "state": "none",
    "decls": [],
-   "missing": []
+   "missing": [
+    "IsStrictlyHenselianLocalRing",
+    "HenselianRing",
+    "HenselianLocalRing"
+   ]
   },
   "slopmaster2": {
-   "state": "none",
-   "decls": [],
-   "missing": []
+   "state": "closed",
+   "decls": [
+    {
+     "name": "IsStrictlyHenselianLocalRing",
+     "module": "WeilConjectures.Mathlib.RingTheory.Henselian",
+     "lines": [
+      121,
+      124
+     ],
+     "kind": "structure",
+     "sorry": false
+    },
+    {
+     "name": "HenselianRing",
+     "module": "Mathlib.RingTheory.Henselian",
+     "lines": [
+      0,
+      0
+     ],
+     "kind": "structure",
+     "sorry": false,
+     "library": true
+    },
+    {
+     "name": "HenselianLocalRing",
+     "module": "Mathlib.RingTheory.Henselian",
+     "lines": [
+      0,
+      0
+     ],
+     "kind": "structure",
+     "sorry": false,
+     "library": true
+    }
+   ],
+   "missing": [],
+   "open": []
   }
  },
  "chapter": "sec-proper-base-change",
@@ -88,21 +126,22 @@
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of E1; spot-checked by L: L: definition checked against 09XI (3)/09XE/04GF"
  },
  "lean": {
-  "module": "Sheaf.RingTheory.HenselianTerminology",
+  "module": "WeilConjectures.Mathlib.RingTheory.Henselian",
   "declaration": "IsStrictlyHenselianLocalRing",
   "declarations": [
    "HenselianRing",
    "HenselianLocalRing",
    "IsStrictlyHenselianLocalRing"
   ],
-  "file": "lean/Sheaf/RingTheory/HenselianTerminology.lean",
-  "statement": "def IsStrictlyHenselianLocalRing (A : Type u) [CommRing A] [IsLocalRing A] : Prop",
-  "branch": "sheaf-dag",
-  "by": "H1",
-  "date": "2026-10-11",
-  "existing": false,
-  "note": "Mixed record. The henselian pair (A, I) is Mathlib's HenselianRing A I (Mathlib.RingTheory.Henselian; Stacks 09XE, of which the node's idempotent wording is the equivalent condition 09XI (3)); a henselian local ring is Mathlib's HenselianLocalRing A; both are existing declarations, as the source module WeilConjectures.Mathlib.RingTheory.Henselian fixes for this node. The one new declaration is IsStrictlyHenselianLocalRing A := HenselianLocalRing A ∧ IsSepClosed (IsLocalRing.ResidueField A) (Stacks 04GF). The equivalence of the idempotent wording with Mathlib's root lifting is the content of lem-weil-pbc-henselian-factorization-criterion and lem-weil-pbc-henselian-local-root-lifting; citers stating the idempotent condition state it inline. T0 = Spec(A/I) is notation, no declaration: a citer writes Spec (.of (A ⧸ I)) with the closed immersion Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk I)).",
-  "fixed_by": "R-hen0910"
+  "statement": "class IsStrictlyHenselianLocalRing (R : Type*) [CommRing R] : Prop extends HenselianLocalRing R",
+  "branch": "slopmaster2",
+  "by": "L",
+  "date": "2026-10-12",
+  "existing": true,
+  "note": "Lean refresh 7d675a26 (L), coord/upstream-overlaps.md: upstream 7d675a263 added the class IsStrictlyHenselianLocalRing (WeilConjectures.Mathlib.RingTheory.Henselian:121, extends HenselianLocalRing with isSepClosed_residueField; isStrictlyHenselianLocalRing_iff_henselianLocalRing_and_isSepClosed), the same notion as our def IsStrictlyHenselianLocalRing A := HenselianLocalRing A ∧ IsSepClosed (IsLocalRing.ResidueField A) (H1, fixed by R-hen0910), whose module Sheaf.RingTheory.HenselianTerminology held nothing else and was removed; its 19 importers import the upstream module (land set 20261011T163136-L-2925583). HenselianRing and HenselianLocalRing are Mathlib. Previous record: Mixed record. The henselian pair (A, I) is Mathlib's HenselianRing A I (Mathlib.RingTheory.Henselian; Stacks 09XE, of which the node's idempotent wording is the equivalent condition 09XI (3)); a henselian local ring is Mathlib's HenselianLocalRing A; both are existing declarations, as the source module WeilConjectures.Mathlib.RingTheory.Henselian fixes for this node. The one new declaration is IsStrictlyHenselianLocalRing A := HenselianLocalRing A ∧ IsSepClosed (IsLocalRing.ResidueField A) (Stacks 04GF). The equivalence of the idempotent wording with Mathlib's root lifting is the content of lem-weil-pbc-henselian-factorization-criterion and lem-weil-pbc-henselian-local-root-lifting; citers stating the idempotent condition state it inline. T0 = Spec(A/I) is notation, no declaration: a citer writes Spec (.of (A ⧸ I)) with the closed immersion Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk I)).",
+  "fixed_by": "R-hen0910",
+  "line": 121,
+  "sorry_free": true
  },
  "reviewed_lean": {
   "date": "2026-10-11",

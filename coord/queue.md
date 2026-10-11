@@ -1,14 +1,11 @@
 # Work queue
 
-85 items; claim with `tools/claim.py next <group> [--stage N]`.
+82 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (1)
+## Stage 1: nodes to split (0)
 
-| node | distance to a target | Lean state on the done branch |
-|---|---|---|
-| `lem-pc-localization-preserves-nonzerodivisor` | 3011 | closed_part |
 
-## Stage 2: nodes to state (84)
+## Stage 2: nodes to state (82)
 
 | node | distance to Mathlib | kind | blockers |
 |---|---|---|---|
@@ -88,13 +85,11 @@
 | `lem-weil-pbc-module-cohomology-fmap-functorial` | 1 | state | 0 |
 | `lem-weil-pbc-projective-space-twisting-sheaf-charts` | 1 | state | 0 |
 | `lem-weil-pbc-pullback-cohomology-long-exact-ladder` | 1 | state | 0 |
-| `lem-weil-pbc-strict-henselization-functoriality` | 1 | state | 0 |
 | `lem-weil-pbc-unrestricted-strict-henselization-stalk` | 1 | state | 0 |
 | `prop-weil-pbc-strict-henselization-stalk-formula` | 1 | state | 0 |
 | `thm-sc-constant-invariance` | 1 | state | 0 |
 | `lem-pc-rf-single-complex-inherited-tensor-condition` | 2 | state | 0 |
 | `lem-sc-p1-proj-shifted-free-twist` | 2 | state | 0 |
-| `lemma-weil-pbc-hypercohomology-convergence` | 2 | state | 0 |
 | `pqf-lem-leray-lowdegree` | 2 | state | 0 |
 
 Not open yet: 40 nodes that wait for stage 1, 183 nodes that wait for a statement dependency.
