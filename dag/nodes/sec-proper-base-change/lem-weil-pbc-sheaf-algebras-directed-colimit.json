@@ -23,7 +23,8 @@
  "stmt_deps": [
   "def-weil-sheaf-of-modules-category",
   "def-weil-pbc-sheafification",
-  "def-weil-pbc-category-colimit"
+  "def-weil-pbc-category-colimit",
+  "def-weil-pbc-ringed-space-algebra-module"
  ],
  "proof": [
   {
@@ -204,5 +205,23 @@
   "item": "lem-weil-pbc-sheaf-algebras-directed-colimit",
   "worker": "stage1",
   "summary": "Statement kept (checked against Sheaves 009D/009E(3), 0087, 0089 and Modules 01AH; a directed set is nonempty by Categories 00D3, so the structure map O_X -> P is defined). Proof written in five steps: (1) the presheaf colimit P is a presheaf of commutative rings under O_X (colimit in R-algebras exists, new leaf lem-weil-pbc-commutative-algebras-colimits-exist, and is the ring colimit by lem-weil-pbc-filtered-colimit-algebras-elementwise(1)); (2) P is sectionwise the colimit of O_X(U)-modules (elementwise(2) and filtered-colimit-rings-zero), hence the colimit in PMod(O_X) (presheaf-modules-colimits-sectionwise); (3) the ring sheafification theta (new leaf lem-weil-pbc-ring-sheafification-space-underlying-abelian, Stacks 0087, Mathlib sheafifyComposeIso) with sigma = theta o sigma_P, iota_i = theta o c_i; (4) universal property among sheaves of O_X-algebras via the sectionwise ring colimit and the universal property of theta; (5) the module sheafification of P is a colimit in Mod(O_X) (left adjoint preserves colimits) and is isomorphic to A by comparing the two abelian sheafifications. The brief's suggested lem-weil-pbc-module-sheaves-colimits-forgetful (unit sk-thm-reduction, not on this unit's route) and lem-weil-pbc-ring-sheafification-underlying-sets (stated for the etale site only) are not used; lem-weil-pbc-sheaf-algebraic-structures-objects is not needed. Mathlib: no sheaves of algebras over a sheaf of rings; isColimitSheafifyCocone covers the CommRingCat-valued part only."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.SheafAlgebrasDirectedColimit",
+  "declaration": "CategoryTheory.sheafAlgebras_directed_colimit",
+  "file": "lean/Sheaf/CategoryTheory/SheafAlgebrasDirectedColimit.lean",
+  "statement": "theorem sheafAlgebras_directed_colimit (X : Type u) [TopologicalSpace X] (O : Sheaf (Opens.grothendieckTopology X) CommRingCat.{u}) (I : Type u) [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I] (F : I ⥤ Under O) (p : Cocone (F ⋙ Under.forget O ⋙ sheafToPresheaf (Opens.grothendieckTopology X) CommRingCat)) (hp : ∀ U : Opens X, Nonempty (IsColimit (((evaluation (Opens X)ᵒᵖ CommRingCat).obj (Opposite.op U)).mapCocone p))) : ∃ (σP : O.obj ⟶ p.pt) (σ : O ⟶ (presheafToSheaf (Opens.grothendieckTopology X) CommRingCat).obj p.pt) (ι : F ⟶ (Functor.const I).obj (Under.mk σ)), (∀ i : I, (F.obj i).hom.hom ≫ p.ι.app i = σP) ∧ σ.hom = σP ≫ toSheafify (Opens.grothendieckTopology X) p.pt ∧ (∀ i : I, (ι.app i).right.hom = p.ι.app i ≫ toSheafify (Opens.grothendieckTopology X) p.pt) ∧ Nonempty (IsColimit (Cocone.mk (Under.mk σ) ι)) ∧ Nonempty (IsColimit ((commAlgebraSheafModuleFunctor O).mapCocone (Cocone.mk (Under.mk σ) ι)))",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-sad",
+  "group": "H1",
+  "result": "fix",
+  "note": "X top space, O ring sheaf, Under O = algebra sheaves (general form of landed Scheme.CommAlgebraSheaf, toModule rfl-equal); I Type u directed nonempty; p sectionwise ring colimit cocone (hp per open); sigmaP tied by all stages, sigma = sigmaP >> toSheafify, legs = p.ι >> toSheafify; IsColimit in Under O and of module functor mapCocone; removed unused local HasSheafify instance (global instance exists)"
  }
 }

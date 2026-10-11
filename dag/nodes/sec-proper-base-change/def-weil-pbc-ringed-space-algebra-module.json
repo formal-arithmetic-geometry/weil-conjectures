@@ -1,0 +1,108 @@
+{
+ "id": "def-weil-pbc-ringed-space-algebra-module",
+ "kind": "definition",
+ "title": "Underlying-module functor of commutative algebra sheaves on a ringed space",
+ "status": "split",
+ "statement": "Let $X$ be a topological space, and let $\\mathcal O$ be a sheaf of commutative rings on $X$. Sheaves of commutative $\\mathcal O$-algebras form the under category of $\\mathcal O$ in commutative ring sheaves: an object is a ring sheaf $\\mathcal A$ with a ring-sheaf map $\\sigma:\\mathcal O\\to\\mathcal A$, and a morphism is a ring-sheaf map commuting with the structure maps. The underlying-module functor to sheaves of $\\mathcal O$-modules [def-weil-sheaf-of-modules-category] sends $(\\mathcal A,\\sigma)$ to the unit module over $\\mathcal A$, restricted along $\\sigma$, so $r\\cdot a=\\sigma(r)a$ on each open; it sends a morphism to its same additive section maps, now $\\mathcal O$-linear.",
+ "stmt_deps": [
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sheaves.tex; literature/stacks-project/modules.tex",
+  "place": "Sheaves, Lemma 0087 and Section 009E; Modules, Lemma 01AH: the algebra-sheaf assembly and its underlying module"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "underlying module functor sheaves of commutative algebras over sheaf of rings",
+   "results": "{\"t\": \"2026-10-11T14:03:20Z\", \"tool\": \"leansearch\", \"query\": \"underlying module functor sheaves of commutative algebras over sheaf of rings\", \"sub\": \"\", \"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: Internal Server Error\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-11",
+   "verdict": "unavailable (no mathematical verdict)"
+  },
+  {
+   "tool": "grep",
+   "query": "SheafOfAlgebras|CommAlgebraSheaf|commAlgebraSheafModule",
+   "results": "{\"t\": \"2026-10-11T14:05:12Z\", \"tool\": \"grep\", \"query\": \"SheafOfAlgebras|CommAlgebraSheaf|commAlgebraSheafModule\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-11",
+   "verdict": "ingredients only; no existing general ringed-space underlying-module functor"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "category of sheaves of commutative algebras on a ringed space underlying module restriction of scalars",
+   "results": "{\"t\": \"2026-10-11T14:13:05Z\", \"tool\": \"leanfinder\", \"query\": \"category of sheaves of commutative algebras on a ringed space underlying module restriction of scalars\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.restrictScalars\", \"SheafOfModules.restrictScalars_obj_val\", \"SheafOfModules.forget\", \"AlgebraicGeometry.Scheme.Modules.toPresheaf\", \"AlgebraicGeometry.Scheme.Modules.toPresheafOfModules\", \"ModuleCat.tilde\", \"SheafOfModules.toSheaf\", \"SheafOfModules.val\"], \"digest\": \"05d8c280b8354cc3\"}",
+   "date": "2026-10-11",
+   "verdict": "ingredients only; no existing general ringed-space underlying-module functor"
+  },
+  {
+   "tool": "grep",
+   "query": "SheafOfAlgebras|CommAlgebraSheaf|commAlgebraSheafModule",
+   "results": "{\"t\": \"2026-10-11T14:13:06Z\", \"tool\": \"grep\", \"query\": \"SheafOfAlgebras|CommAlgebraSheaf|commAlgebraSheafModule\", \"sub\": \"Algebra\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-11",
+   "verdict": "ingredients only; no existing general ringed-space underlying-module functor"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-sheaf-algebras-directed-colimit",
+  "date": "2026-10-11",
+  "group": "H1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-injective-restriction-acyclicity",
+   "place": "the algebra sheaf and its underlying module in step 5 of the directed-colimit construction",
+   "via": [
+    "lem-weil-pbc-sheaf-algebras-directed-colimit",
+    "lem-weil-pbc-quasi-coherent-algebra-colimit",
+    "lem-weil-pbc-limit-affine-transition",
+    "lem-weil-pbc-etale-cohomology-limit-of-schemes"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "module": "Sheaf.CategoryTheory.CommAlgebraSheafModule",
+  "declaration": "CategoryTheory.commAlgebraSheafModuleFunctor",
+  "file": "lean/Sheaf/CategoryTheory/CommAlgebraSheafModule.lean",
+  "statement": "def commAlgebraSheafModuleFunctor (O : Sheaf J CommRingCat.{uA}) : Under O ⥤ SheafOfModules.{uA} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj O)",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-11",
+  "existing": false,
+  "declarations": [
+   "CategoryTheory.commAlgebraSheafModule",
+   "CategoryTheory.commAlgebraSheafModuleFunctor"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-sad",
+  "group": "H1",
+  "result": "fix",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-sad",
+  "group": "H1",
+  "result": "fix",
+  "note": "X top space, O ring sheaf, Under O = algebra sheaves (general form of landed Scheme.CommAlgebraSheaf, toModule rfl-equal); I Type u directed nonempty; p sectionwise ring colimit cocone (hp per open); sigmaP tied by all stages, sigma = sigmaP >> toSheafify, legs = p.ι >> toSheafify; IsColimit in Under O and of module functor mapCocone; removed unused local HasSheafify instance (global instance exists)"
+ }
+}
