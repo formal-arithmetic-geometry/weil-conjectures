@@ -1,11 +1,11 @@
 # Work queue
 
-827 items; claim with `tools/claim.py next <group> [--stage N]`.
+823 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (827)
+## Stage 2: nodes to state (823)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -17,7 +17,6 @@
 | `lem-pc-derived-tensor-transitivity` | 1 | state |
 | `lem-pc-module-pullback-identity-composition` | 1 | state |
 | `lem-pc-pre-derived-adjoint-functors-general` | 1 | state |
-| `lem-pc-ringed-space-derived-products` | 1 | state |
 | `lem-pc-ringed-space-product-kinjective` | 1 | state |
 | `lem-pod-adic-limit-finite-modules` | 1 | state |
 | `lem-pod-lattice-stabilizer-open` | 1 | state |
@@ -37,9 +36,7 @@
 | `lem-sc-rational-unramified-cotangent-criterion` | 1 | state |
 | `lem-sc-separated-affine-function-field-surjective` | 1 | state |
 | `lem-sc-smooth-diagonal-regular-immersion` | 1 | state |
-| `lem-sc-standard-smooth-local-relative-dimension` | 1 | state |
 | `lem-sc-vector-bundle-line-subbundle` | 1 | state |
-| `lem-sp-cartan-eilenberg-comparison-homotopy` | 1 | state |
 | `lem-sp-kinjective-comparison-principle` | 1 | state |
 | `lem-sp-kinjective-computes` | 1 | state |
 | `lem-sp-shift-identification` | 1 | state |
@@ -51,7 +48,6 @@
 | `lem-weil-pbc-complex-spectral-sequence-comparison` | 1 | state |
 | `lem-weil-pbc-constant-sheaf-sections-locally-constant` | 1 | state |
 | `lem-weil-pbc-constant-sheaf-set-sections-connected-natural` | 1 | state |
-| `lem-weil-pbc-constructible-module-finite-presentation` | 1 | state |
 | `lem-weil-pbc-coskeleton-free-homology-comparison` | 1 | state |
 | `lem-weil-pbc-cotangent-complex-symmetric-algebra` | 1 | state |
 | `lem-weil-pbc-cover-module-exact` | 1 | state |
