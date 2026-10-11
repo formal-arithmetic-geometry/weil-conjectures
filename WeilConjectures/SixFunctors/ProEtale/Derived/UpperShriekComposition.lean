@@ -48,9 +48,6 @@ adjunction is the restriction of any ambient one.
   `Rg^× ⋙ Rf^× ≅ R(f ≫ g)^×` mate to an ambient composition isomorphism, with its unit and counit
   lemmas; `HasAmbientExceptionalRightAdjoint.nonempty_iso_comp_iff`: it exists exactly when the
   ambient composition law does.
-- `HasAmbientExceptionalRightAdjoint.nonempty_iso_comp`: clause (a), the isomorphism
-  `R(f ≫ g)^× ≅ Rg^× ⋙ Rf^×` of ambient functors, from the ambient composition law
-  `HasAmbientExceptionalRightAdjoint.nonempty_iso_rightDerivedLowerShriek_comp`.
 - `HasAmbientExceptionalRightAdjoint.nonempty_iso_comp_yoneda_comp_whiskeringLeft`: clause (a)
   with the composition law of `sk-thm-sf-comp-composition`.
 - `AlgebraicGeometry.ProEtale.exists_bijective_comp_and_homEquiv_symm_comp_eq`: under the ambient
@@ -62,6 +59,17 @@ The composition law of the pro-étale `Rf_!` is only available through the étal
 `AlgebraicGeometry.Etale.nonempty_iso_rightDerivedLowerShriek_comp`, which asserts that *some*
 isomorphism exists; this is why the mate statements are existential in the isomorphism of left
 adjoints. Being formal, they hold for every such isomorphism.
+
+Clause (a) of `sk-lem-sf-mate` takes the mate of "the composition isomorphism
+`R(gf)_! ≅ Rg_! Rf_!` of `sk-thm-sf-comp-composition`" on the *ambient* functors, but that node
+only gives the composition law on bounded below objects of étale origin. So clause (a) is stated
+for a given ambient composition isomorphism (`HasAmbientExceptionalRightAdjoint.compIso`), and
+`HasAmbientExceptionalRightAdjoint.nonempty_iso_comp_iff` records that the ambient isomorphism
+`R(f ≫ g)^× ≅ Rg^× ⋙ Rf^×` exists exactly when the ambient composition law does. The ambient
+composition law on all of `D(X_proét)` is not stated. Comparing the chosen compactifications
+needs proper base change at the boundary for arbitrary unbounded pro-étale sheaves, which is not
+known. The datum `FullCD` does not help: it bounds only the proper parts of the three chosen
+compactifications, not those of the auxiliary compactifications used in the comparison.
 -/
 
 @[expose] public section
@@ -421,47 +429,6 @@ theorem HasAmbientExceptionalRightAdjoint.nonempty_iso_comp_iff {f : X ⟶ Y} {g
           @Functor.rightAdjoint _ _ _ _ (R(f)_![A]) hf.isLeftAdjoint) :=
   ⟨fun ⟨e⟩ ↦ ⟨(hf.compIso hg hfg e).symm⟩,
     fun ⟨r⟩ ↦ ⟨(conjugateIsoEquiv (hf.adjunction.comp hg.adjunction) hfg.adjunction).symm r.symm⟩⟩
-
-/-- The composition law `R(f ≫ g)_! ≅ Rf_! ⋙ Rg_!` of the pro-étale derived lower shriek on the
-*unbounded* derived categories `D(X_proét)`, for finite coefficients, when `f`, `g` and `f ≫ g`
-carry the ambient exceptional right adjoint datum.
-
-This is not a blueprint node: blueprint `sk-thm-sf-comp-composition` states the composition law
-only on the bounded below objects of étale origin
-(`AlgebraicGeometry.ProEtale.nonempty_iso_ι_comp_rightDerivedLowerShriek_comp`). By
-`HasAmbientExceptionalRightAdjoint.nonempty_iso_comp_iff`, under the ambient datum it is
-equivalent to the isomorphism `R(f ≫ g)^× ≅ Rg^× ⋙ Rf^×` that clause (a) of blueprint
-`sk-lem-sf-mate` asserts. It is left unproved: its proof needs proper base change along closed
-immersions for arbitrary unbounded pro-étale sheaves, which is not available. -/
-theorem HasAmbientExceptionalRightAdjoint.nonempty_iso_rightDerivedLowerShriek_comp
-    {Λ : Type (u + 1)} [CommRing Λ] [Finite Λ] {f : X ⟶ Y} {g : Y ⟶ Z}
-    [HasCompactification f] [HasCompactification g] [HasCompactification (f ≫ g)]
-    (_hf : HasAmbientExceptionalRightAdjoint (ModuleCat.{u + 1} Λ) f)
-    (_hg : HasAmbientExceptionalRightAdjoint (ModuleCat.{u + 1} Λ) g)
-    (_hfg : HasAmbientExceptionalRightAdjoint (ModuleCat.{u + 1} Λ) (f ≫ g)) :
-    Nonempty (R(f ≫ g)_![ModuleCat.{u + 1} Λ] ≅
-      R(f)_![ModuleCat.{u + 1} Λ] ⋙ R(g)_![ModuleCat.{u + 1} Λ]) :=
-  sorry
-
-/-- Blueprint `sk-lem-sf-mate`, clause (a): if `f`, `g` and `f ≫ g` carry the ambient exceptional
-right adjoint datum of blueprint `sk-def-sf-admissible` (1), there is an isomorphism of ambient
-functors `R(f ≫ g)^× ≅ Rg^× ⋙ Rf^× : D(Z_proét) ⥤ D(X_proét)`, for finite coefficients. It is
-`(HasAmbientExceptionalRightAdjoint.compIso e).symm`, the mate of the ambient composition
-isomorphism `e : R(f ≫ g)_! ≅ Rf_! ⋙ Rg_!`
-(`HasAmbientExceptionalRightAdjoint.nonempty_iso_rightDerivedLowerShriek_comp`). Under it the
-unit and counit of `R(f ≫ g)_! ⊣ R(f ≫ g)^×` are the pasted ones
-(`HasAmbientExceptionalRightAdjoint.unit_comp_compIso_hom_app`,
-`HasAmbientExceptionalRightAdjoint.map_compIso_hom_app_counit`). -/
-theorem HasAmbientExceptionalRightAdjoint.nonempty_iso_comp {Λ : Type (u + 1)} [CommRing Λ]
-    [Finite Λ] {f : X ⟶ Y} {g : Y ⟶ Z}
-    [HasCompactification f] [HasCompactification g] [HasCompactification (f ≫ g)]
-    (hf : HasAmbientExceptionalRightAdjoint (ModuleCat.{u + 1} Λ) f)
-    (hg : HasAmbientExceptionalRightAdjoint (ModuleCat.{u + 1} Λ) g)
-    (hfg : HasAmbientExceptionalRightAdjoint (ModuleCat.{u + 1} Λ) (f ≫ g)) :
-    Nonempty (@Functor.rightAdjoint _ _ _ _ (R(f ≫ g)_![ModuleCat.{u + 1} Λ]) hfg.isLeftAdjoint ≅
-      @Functor.rightAdjoint _ _ _ _ (R(g)_![ModuleCat.{u + 1} Λ]) hg.isLeftAdjoint ⋙
-        @Functor.rightAdjoint _ _ _ _ (R(f)_![ModuleCat.{u + 1} Λ]) hf.isLeftAdjoint) :=
-  (hf.nonempty_iso_comp_iff hg hfg).1 (hf.nonempty_iso_rightDerivedLowerShriek_comp hg hfg)
 
 variable [MonoidalCategory A] [MonoidalPreadditive A] [SymmetricCategory A] [MonoidalClosed A]
   [Abelian.HasFunctorialFlatResolution A]
