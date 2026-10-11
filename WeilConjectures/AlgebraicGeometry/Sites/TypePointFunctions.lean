@@ -172,4 +172,23 @@ theorem bijective_typeToSheafify_app_of_connectedSpace (V : X.Etale) [ConnectedS
   funext x
   exact hloc.apply_eq_of_preconnectedSpace x₀ x
 
+/-- On a connected scheme the constant sheaf functor for sets is fully faithful: its unit
+`T ⟶ Γ(X, T_X)` is a bijection. -/
+noncomputable def fullyFaithfulTypeConstantSheaf [ConnectedSpace X] :
+    (constantSheaf X.smallEtaleTopology (Type (u + 1))).FullyFaithful :=
+  let adj := constantSheafAdj X.smallEtaleTopology (Type (u + 1))
+    (MorphismProperty.Over.mkIdTerminal @AlgebraicGeometry.Etale X)
+  have : IsIso adj.unit := by
+    refine @NatIso.isIso_of_isIso_app _ _ _ _ _ _ _ fun T ↦ ?_
+    rw [isIso_iff_bijective]
+    have : ConnectedSpace (Etale.mk (𝟙 X)).left := ‹ConnectedSpace X›
+    exact X.bijective_typeToSheafify_app_of_connectedSpace T (Etale.mk (𝟙 X))
+  adj.fullyFaithfulLOfIsIsoUnit
+
+instance [ConnectedSpace X] : (constantSheaf X.smallEtaleTopology (Type (u + 1))).Full :=
+  (fullyFaithfulTypeConstantSheaf X).full
+
+instance [ConnectedSpace X] : (constantSheaf X.smallEtaleTopology (Type (u + 1))).Faithful :=
+  (fullyFaithfulTypeConstantSheaf X).faithful
+
 end AlgebraicGeometry.Scheme

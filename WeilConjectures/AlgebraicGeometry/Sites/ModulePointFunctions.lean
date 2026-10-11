@@ -194,4 +194,37 @@ theorem surjective_toSheafify_app_of_connectedSpace (V : X.Etale) [ConnectedSpac
   funext x
   exact hloc.apply_eq_of_preconnectedSpace x₀ x
 
+/-- Over a nonempty étale scheme, distinct elements of `M` give distinct constant sections. -/
+theorem injective_toSheafify_app_of_nonempty (V : X.Etale) [Nonempty V.left] :
+    Function.Injective
+      ((CategoryTheory.toSheafify X.smallEtaleTopology ((Functor.const X.Etaleᵒᵖ).obj M)).app
+        (op V)) := by
+  obtain ⟨x₀⟩ := ‹Nonempty V.left›
+  intro m m' h
+  have := congrArg ((X.moduleConstantSheafToPointFunctionSheaf M).hom.app (op V)) h
+  rw [moduleConstantSheafToPointFunctionSheaf_app_toSheafify,
+    moduleConstantSheafToPointFunctionSheaf_app_toSheafify] at this
+  exact congrFun this x₀
+
+/-- On a connected scheme the constant sheaf functor for `Λ`-modules is fully faithful. -/
+noncomputable def fullyFaithfulModuleConstantSheaf (Λ : Type (u + 1)) [CommRing Λ]
+    [ConnectedSpace X] : (constantSheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)).FullyFaithful :=
+  let adj := constantSheafAdj X.smallEtaleTopology (ModuleCat.{u + 1} Λ)
+    (MorphismProperty.Over.mkIdTerminal @AlgebraicGeometry.Etale X)
+  have : IsIso adj.unit := by
+    refine @NatIso.isIso_of_isIso_app _ _ _ _ _ _ _ fun M ↦ ?_
+    have : ConnectedSpace (Etale.mk (𝟙 X)).left := ‹ConnectedSpace X›
+    rw [ConcreteCategory.isIso_iff_bijective]
+    exact ⟨X.injective_toSheafify_app_of_nonempty M (Etale.mk (𝟙 X)),
+      X.surjective_toSheafify_app_of_connectedSpace M (Etale.mk (𝟙 X))⟩
+  adj.fullyFaithfulLOfIsIsoUnit
+
+instance (Λ : Type (u + 1)) [CommRing Λ] [ConnectedSpace X] :
+    (constantSheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)).Full :=
+  (fullyFaithfulModuleConstantSheaf X Λ).full
+
+instance (Λ : Type (u + 1)) [CommRing Λ] [ConnectedSpace X] :
+    (constantSheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)).Faithful :=
+  (fullyFaithfulModuleConstantSheaf X Λ).faithful
+
 end AlgebraicGeometry.Scheme
