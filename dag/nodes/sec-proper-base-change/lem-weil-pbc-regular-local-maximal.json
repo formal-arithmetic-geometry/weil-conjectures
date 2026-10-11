@@ -131,5 +131,23 @@
   "group": "E1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of E1; spot-checked by L: L: 3 steps at the level of the Stacks 07C0 proof (flatness local on the target via a new Mathlib leaf; regularity of the Noetherian fibre rings and their purely inseparable extensions local by a new unsplit node 'Noetherian A regular iff all A_q regular local'); correct. Defect fixed by L after merge: the leaf's line 108 points at RingHom.Flat.localRingHom; propertyIsLocal is at line 85, ofLocalizationPrime at 95."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.RegularLocalMaximal",
+  "declaration": "RingHom.isRegular_iff_localRingHom_prime_and_maximal",
+  "file": "lean/Sheaf/RingTheory/RegularLocalMaximal.lean",
+  "statement": "theorem isRegular_iff_localRingHom_prime_and_maximal {R : Type u} {S : Type v} [CommRing R] [CommRing S] [IsNoetherianRing S] (f : R →+* S) : (f.IsRegular ↔ ∀ (q : Ideal S) [q.IsPrime], (Localization.localRingHom (q.comap f) q f rfl).IsRegular) ∧ (f.IsRegular ↔ ∀ (m : Ideal S) [m.IsMaximal], (Localization.localRingHom (m.comap f) m f rfl).IsRegular)",
+  "branch": "sheaf-dag",
+  "by": "M1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-rlm",
+  "group": "M1",
+  "result": "pass",
+  "note": "R,S CommRing independent universes; Noetherian S only; p = q.comap f; localRingHom = r/s->f(r)/f(s); IsRegular recorded GRing def; (1<->2)/\\(1<->3), maximal only in target"
  }
 }
