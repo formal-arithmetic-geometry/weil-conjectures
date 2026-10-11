@@ -40,8 +40,7 @@ namespace CategoryTheory
 
 open Limits Pretriangulated
 
-variable {C D : Type*} [Category* C] [Category* D] [Abelian C] [HasInjectiveResolutions C]
-  [Abelian D]
+variable {C D : Type*} [Category* C] [Category* D] [Abelian C] [Abelian D]
 
 namespace ShortComplex.ShortExact
 
@@ -125,9 +124,7 @@ noncomputable abbrev rightDerivedTriangle : Triangle (DerivedCategory D) :=
 lemma rightDerivedTriangle_distinguished : hS.rightDerivedTriangle F ∈ distTriang _ :=
   Functor.map_distinguished _ _ hS.plusSingleTriangle_distinguished
 
-lemma natCast_add_one (q : ℕ) : (q : ℤ) + 1 = ((q + 1 : ℕ) : ℤ) := by
-  push_cast
-  rfl
+variable [HasInjectiveResolutions C]
 
 /-- The connecting morphism `R^q F C ⟶ R^{q + 1} F A` of the long exact sequence of right derived
 functors attached to a short exact sequence `0 ⟶ A ⟶ B ⟶ C ⟶ 0`: the connecting morphism of the
@@ -136,41 +133,50 @@ homology long exact sequence of the image under `R⁺F` of the distinguished tri
 noncomputable def rightDerivedδ (q : ℕ) :
     (F.rightDerived q).obj S.X₃ ⟶ (F.rightDerived (q + 1)).obj S.X₁ :=
   (F.singleFunctorCompRightDerivedFunctorPlusCompHomologyFunctorIso q).inv.app S.X₃ ≫
-    DerivedCategory.HomologySequence.δ (hS.rightDerivedTriangle F) q _ (natCast_add_one q) ≫
+    DerivedCategory.HomologySequence.δ (hS.rightDerivedTriangle F) q _ (Nat.cast_succ q).symm ≫
       (F.singleFunctorCompRightDerivedFunctorPlusCompHomologyFunctorIso (q + 1)).hom.app S.X₁
+
+@[reassoc (attr := simp)]
+lemma comp_rightDerivedδ (q : ℕ) : (F.rightDerived q).map S.g ≫ hS.rightDerivedδ F q = 0 := by
+  let e := F.singleFunctorCompRightDerivedFunctorPlusCompHomologyFunctorIso
+  refine ((e q).inv.naturality_assoc S.g _).trans ?_
+  refine (congrArg ((e q).inv.app S.X₂ ≫ ·)
+    (DerivedCategory.HomologySequence.comp_δ_assoc _ (hS.rightDerivedTriangle_distinguished F)
+      q _ (Nat.cast_succ q).symm _)).trans ?_
+  erw [zero_comp, comp_zero]
+
+@[reassoc (attr := simp)]
+lemma rightDerivedδ_comp (q : ℕ) :
+    hS.rightDerivedδ F q ≫ (F.rightDerived (q + 1)).map S.f = 0 := by
+  let e := F.singleFunctorCompRightDerivedFunctorPlusCompHomologyFunctorIso
+  simp only [rightDerivedδ, Category.assoc]
+  refine (congrArg (fun x ↦ (e q).inv.app S.X₃ ≫
+    DerivedCategory.HomologySequence.δ (hS.rightDerivedTriangle F) q _ (Nat.cast_succ q).symm ≫ x)
+    ((e (q + 1)).hom.naturality S.f).symm).trans ?_
+  refine (congrArg ((e q).inv.app S.X₃ ≫ ·)
+    (DerivedCategory.HomologySequence.δ_comp_assoc _ (hS.rightDerivedTriangle_distinguished F)
+      q _ (Nat.cast_succ q).symm _)).trans ?_
+  erw [zero_comp, comp_zero]
 
 /-- The long exact sequence of right derived functors is exact at `R^q F C`. -/
 lemma rightDerivedδ_exact₂ (q : ℕ) :
-    (ShortComplex.mk ((F.rightDerived q).map S.g) (hS.rightDerivedδ F q) (by
-      let e := F.singleFunctorCompRightDerivedFunctorPlusCompHomologyFunctorIso
-      refine ((e q).inv.naturality_assoc S.g _).trans ?_
-      refine (congrArg ((e q).inv.app S.X₂ ≫ ·)
-        (DerivedCategory.HomologySequence.comp_δ_assoc _ (hS.rightDerivedTriangle_distinguished F)
-          q _ (natCast_add_one q) _)).trans ?_
-      erw [zero_comp, comp_zero])).Exact := by
+    (ShortComplex.mk ((F.rightDerived q).map S.g) (hS.rightDerivedδ F q)
+      (hS.comp_rightDerivedδ F q)).Exact := by
   let e := F.singleFunctorCompRightDerivedFunctorPlusCompHomologyFunctorIso
   refine (ShortComplex.exact_iff_of_iso ?_).1
     (DerivedCategory.HomologySequence.exact₃ _ (hS.rightDerivedTriangle_distinguished F) q _
-      (natCast_add_one q))
+      (Nat.cast_succ q).symm)
   exact ShortComplex.isoMk ((e q).app S.X₂) ((e q).app S.X₃) ((e (q + 1)).app S.X₁)
     ((e q).hom.naturality S.g).symm (Iso.hom_inv_id_app_assoc (e q) S.X₃ _)
 
 /-- The long exact sequence of right derived functors is exact at `R^{q + 1} F A`. -/
 lemma rightDerivedδ_exact₃ (q : ℕ) :
-    (ShortComplex.mk (hS.rightDerivedδ F q) ((F.rightDerived (q + 1)).map S.f) (by
-      let e := F.singleFunctorCompRightDerivedFunctorPlusCompHomologyFunctorIso
-      simp only [rightDerivedδ, Category.assoc]
-      refine (congrArg (fun x ↦ (e q).inv.app S.X₃ ≫
-        DerivedCategory.HomologySequence.δ (hS.rightDerivedTriangle F) q _ (natCast_add_one q) ≫ x)
-        ((e (q + 1)).hom.naturality S.f).symm).trans ?_
-      refine (congrArg ((e q).inv.app S.X₃ ≫ ·)
-        (DerivedCategory.HomologySequence.δ_comp_assoc _ (hS.rightDerivedTriangle_distinguished F)
-          q _ (natCast_add_one q) _)).trans ?_
-      erw [zero_comp, comp_zero])).Exact := by
+    (ShortComplex.mk (hS.rightDerivedδ F q) ((F.rightDerived (q + 1)).map S.f)
+      (hS.rightDerivedδ_comp F q)).Exact := by
   let e := F.singleFunctorCompRightDerivedFunctorPlusCompHomologyFunctorIso
   refine (ShortComplex.exact_iff_of_iso ?_).1
     (DerivedCategory.HomologySequence.exact₁ _ (hS.rightDerivedTriangle_distinguished F) q _
-      (natCast_add_one q))
+      (Nat.cast_succ q).symm)
   exact ShortComplex.isoMk ((e q).app S.X₃) ((e (q + 1)).app S.X₁) ((e (q + 1)).app S.X₂)
     (Iso.hom_inv_id_app_assoc (e q) S.X₃ _) ((e (q + 1)).hom.naturality S.f).symm
 
@@ -185,7 +191,7 @@ lemma rightDerivedδ_naturality (q : ℕ) :
   let ψ := (F.rightDerivedFunctorPlus ⋙ DerivedCategory.Plus.ι).mapTriangle.map
     (plusSingleTriangleMap h₁ h₂ φ)
   have hδ := (DerivedCategory.homologyFunctor D 0).homologySequenceδ_naturality _ _ ψ q _
-    (natCast_add_one q)
+    (Nat.cast_succ q).symm
   simp only [rightDerivedδ, Category.assoc]
   rw [← (e (q + 1)).hom.naturality φ.τ₁, (e q).inv.naturality_assoc φ.τ₃]
   congr 1

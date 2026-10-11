@@ -64,6 +64,7 @@ public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.AffineMorphism
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.BaseChange
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Basic
+public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Field
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.FiniteFreeComplex
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.PerfectLocus
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.PerfectLocusOfRank
@@ -451,6 +452,7 @@ public import WeilConjectures.CategoryTheory.Abelian.Flat.ModuleCat
 public import WeilConjectures.CategoryTheory.Abelian.Flat.PreservesFlat
 public import WeilConjectures.CategoryTheory.Abelian.PrimeFactorDevissage
 public import WeilConjectures.CategoryTheory.Abelian.RightDerived.Acyclic
+public import WeilConjectures.CategoryTheory.Abelian.RightDerived.Connecting
 public import WeilConjectures.CategoryTheory.Abelian.RightDerived.LongExactSequence
 public import WeilConjectures.CategoryTheory.Adjunction.ProjectionMap
 public import WeilConjectures.CategoryTheory.Adjunction.ProjectionMapAssoc
