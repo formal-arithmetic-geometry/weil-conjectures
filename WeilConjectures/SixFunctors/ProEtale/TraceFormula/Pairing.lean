@@ -34,6 +34,8 @@ section on the fixed scheme, and integrating over a clopen piece gives a *local 
 
 ## Main results
 
+- `AlgebraicGeometry.ProEtale.GeometricOperations.supportedClass_eq_rhomClass_comp`: the
+  supported class is the class `[u]` read through the Künneth-Verdier isomorphism.
 - `AlgebraicGeometry.ProEtale.GeometricOperations.integral_traceClass_eq_trace`: the point
   normalisation of the pairing.
 - `AlgebraicGeometry.ProEtale.GeometricOperations.integral_eq_sum_localTerm`: the
@@ -144,6 +146,39 @@ noncomputable def exceptionalMate :
       u ≫ (rightDerivedUpperShriekCongr A hX.symm).hom.app M ≫
       ((G.upperShriekComp i pX hi hpX (hi.comp hpX)).hom.app ⟨M, hM⟩).hom) ≫
     G.exceptionalCounit i hi _ (G.ctf_upperShriek pX hpX hM)
+
+/-- The tensor-hom mate of `GeometricOperations.exceptionalMate` is the class `[u]` of `u`:
+the class bijection `GeometricOperations.correspondenceClassEquiv` sends it to `u`
+(part of blueprint `lem-trf-correspondence-class`). -/
+lemma correspondenceClassEquiv_curry_exceptionalMate :
+    haveI : HasCompactification (i ≫ pX) := .of_eq hX.symm
+    G.correspondenceClassEquiv hpX hpY hi hX hY hN hM
+      (curry (G.exceptionalMate i hX hY hi hpX hpY hT hM hN u)) = u := by
+  subst hX hY
+  rw [correspondenceClassEquiv_apply, supportedClassHomEquiv_apply, uncurry_curry]
+  have hE : (G.upperShriekCompIso i pX hi hpX (hi.comp hpX) M hM).inv =
+      ((G.upperShriekComp i pX hi hpX (hi.comp hpX)).hom.app ⟨M, hM⟩).hom := rfl
+  have hS : (leftDerivedUpperStarCompIso i (rfl : i ≫ pY = _) N).hom =
+      ((leftDerivedUpperStarComp A i pY).symm ≪≫ leftDerivedUpperStarCongr A rfl).hom.app N := by
+    simp [leftDerivedUpperStarCompIso]
+  simp only [exceptionalMate, Iso.app_inv, rightDerivedUpperShriekCongr_rfl, Iso.refl_hom,
+    NatTrans.id_app, Category.id_comp, Category.comp_id, ← hE, ← hS]
+  erw [Iso.inv_hom_id_assoc, Iso.inv_hom_id_app_assoc]
+  rw [← Functor.map_comp_assoc]
+  erw [Iso.inv_hom_id_assoc]
+  rw [GeometricCoefficients.exceptionalHomEquiv_naturality_left _ i hi _
+      (G.ctf_upperShriek i hi (G.ctf_upperShriek pX hpX hM))]
+  erw [GeometricCoefficients.exceptionalHomEquiv_exceptionalCounit]
+  simp
+
+/-- The class `[u]` of `u` is the tensor-hom mate of `GeometricOperations.exceptionalMate`
+(part of blueprint `lem-trf-correspondence-class`). -/
+lemma correspondenceClass_eq_curry_exceptionalMate :
+    haveI : HasCompactification (i ≫ pX) := .of_eq hX.symm
+    G.correspondenceClass hpX hpY hi hX hY hN hM u =
+      curry (G.exceptionalMate i hX hY hi hpX hpY hT hM hN u) := by
+  rw [correspondenceClass, Equiv.symm_apply_eq,
+    correspondenceClassEquiv_curry_exceptionalMate]
 
 /-- The Künneth-Verdier class `Ri_! A_T ⟶ pX^* M ⊗ᴸ pY^* D N` of a coefficient map
 `u : cY^* N ⟶ cX^! M` supported on `i : T ⟶ Z`, for a Cartesian square
@@ -277,6 +312,17 @@ noncomputable def supportedClass (c : Correspondence aX aY K L) [IsGeometric c.s
       (by simp [Correspondence.toProd, c.fst_comp]))
     (.mk (aY := aY) rfl) (.mk (aX := pullback.fst aY aX ≫ aY) (aY := aX) pullback.condition.symm)
     (.id c.str) hL hK c.coeff (IsPullback.of_hasPullback aY aX)
+
+/-- The supported class `ũ` of a correspondence is its class
+`[u] ∈ H_C^0(Y × X, RHom(Lp₂^* K, Rp₁^! L))` (`Correspondence.rhomClass`) read through the
+inverse of the Künneth-Verdier isomorphism `L ⊠ D_X K ≃ RHom(Lp₂^* K, Rp₁^! L)`
+(blueprint: `lem-trf-correspondence-class`). -/
+lemma supportedClass_eq_rhomClass_comp (c : Correspondence aX aY K L) [IsGeometric c.str]
+    (hK : G.ctf X K) (hL : G.ctf Y L) [HasCompactification c.toProd] :
+    G.supportedClass c hK hL = c.rhomClass G hK hL ≫
+      (G.kunnethVerdier (IsPullback.of_hasPullback aY aX) L hL K hK).inv := by
+  rw [supportedClass, kunnethClass, Correspondence.rhomClass,
+    correspondenceClass_eq_curry_exceptionalMate]
 
 /-- The supported class `ṽ : Rd̄_! A_D ⟶ K ⊠ D_Y L` on `Y × X` of an opposite correspondence
 `(D, d, v)` from `(Y, L)` to `(X, K)` on geometric schemes: the
