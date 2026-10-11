@@ -750,7 +750,7 @@ def cmd_merge2(o):
                     overrides[path] = dump(nd)
             for fpath, text in texts.items():
                 overrides[fpath] = text
-            owned = {(nd.get("lean") or {}).get("file") for _, nd in nodes.items() if isinstance(nd.get("lean"), dict)}
+            owned = {(nd.get("lean") or {}).get("file") for _, nd in nodes.values() if isinstance(nd.get("lean"), dict)}
             orphan = sorted(added_mods - owned)
             if orphan:
                 raise Fail(f"--apply-fixes: new module(s) {', '.join(orphan)}: no fixed record has it as lean.file "
