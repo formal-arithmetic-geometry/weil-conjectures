@@ -57,6 +57,76 @@ variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] [HasKummerClass Λ] (Y : 
   [HasCompactification (𝔸(ULift.{u} (Fin 1); Y).zeroLocusSubschemeι
     {AffineSpace.coord Y (ULift.up 0)} ≫ (𝔸(ULift.{u} (Fin 1); Y) ↘ Y))]
 
+/-- The derived pullback along an isomorphism of schemes is an equivalence, with inverse the
+derived pullback along the inverse isomorphism. -/
+noncomputable def leftDerivedUpperStarEquivalenceOfIso {X' Y' : Scheme.{u}} (e : X' ≅ Y') :
+    CategoryTheory.Equivalence
+      (_root_.DerivedCategory (Sheaf Y'.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
+      (_root_.DerivedCategory (Sheaf X'.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :=
+  let idIso (T : Scheme.{u}) : L((𝟙 T)^*[ModuleCat.{u + 1} Λ]) ≅ 𝟭 _ :=
+    Functor.leftDerivedFunctorNatIso _ (Etale.upperStarId _ T) ≪≫
+      (𝟭 _).leftDerivedFunctorIsoMapDerivedCategory ≪≫ Functor.mapDerivedCategoryIdIso _
+  CategoryTheory.Equivalence.mk L((e.hom)^*[ModuleCat.{u + 1} Λ]) L((e.inv)^*[ModuleCat.{u + 1} Λ])
+    ((idIso Y').symm ≪≫ leftDerivedUpperStarComp _ e.inv e.hom (𝟙 Y') e.inv_hom_id.symm)
+    ((leftDerivedUpperStarComp _ e.hom e.inv (𝟙 X') e.hom_inv_id.symm).symm ≪≫ idIso X')
+
+/-- For an isomorphism of schemes `e`, the counit of `Re_! ⊣ Re^!` is an isomorphism: `Re^!` is
+the derived pullback `Le^*` (`AlgebraicGeometry.Etale.rightDerivedUpperShriekIsoOfIso`), an
+equivalence. -/
+instance isIso_rightDerivedUpperShriekAdjunction_counit_of_iso {X' Y' : Scheme.{u}}
+    (e : X' ≅ Y') [HasCompactification e.hom] :
+    IsIso (rightDerivedUpperShriekAdjunction (ModuleCat.{u + 1} Λ) e.hom).counit := by
+  have : L((e.hom)^*[ModuleCat.{u + 1} Λ]).IsEquivalence :=
+    (leftDerivedUpperStarEquivalenceOfIso Λ e).isEquivalence_functor
+  have : (R(e.hom)^![ModuleCat.{u + 1} Λ]).IsEquivalence :=
+    Functor.isEquivalence_of_iso (rightDerivedUpperShriekIsoOfIso _ e).symm
+  infer_instance
+
+omit [HasKummerClass Λ] in
+/-- A composite `L ⟶ R(s ≫ p)_! L₀ ≅ Rp_! Rs_! L₀ ⟶ Rp_! Rs_! Rs^! M ⟶ Rp_! M ⟶ Rp_! Rp^! K ⟶ K`
+built from an isomorphism `pur : L₀ ≅ Rs^! M`, the counit of `Rs_! ⊣ Rs^!`, an isomorphism
+`δ : M ≅ Rp^! K` and the counit of `Rp_! ⊣ Rp^!` is an isomorphism as soon as the counit of
+`R(s ≫ p)_! ⊣ R(s ≫ p)^!` at `K` is: through the composition isomorphism conjugate to `α`, it is
+`R(s ≫ p)_!` of an isomorphism followed by that counit. -/
+lemma isIso_comp_counit_comp_counit {Z P B : Scheme.{u}} (s : Z ⟶ P) (p : P ⟶ B)
+    [HasCompactification s] [HasCompactification p] [HasCompactification (s ≫ p)]
+    (α : R(s ≫ p)_![ModuleCat.{u + 1} Λ] ≅
+      R(s)_![ModuleCat.{u + 1} Λ] ⋙ R(p)_![ModuleCat.{u + 1} Λ])
+    {L₀ : _root_.DerivedCategory (Sheaf Z.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
+    {M : _root_.DerivedCategory (Sheaf P.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
+    {K L : _root_.DerivedCategory (Sheaf B.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
+    (ψ : L ⟶ (R(s ≫ p)_![ModuleCat.{u + 1} Λ]).obj L₀) [IsIso ψ]
+    (pur : L₀ ⟶ (R(s)^![ModuleCat.{u + 1} Λ]).obj M) [IsIso pur]
+    (δ : M ⟶ (R(p)^![ModuleCat.{u + 1} Λ]).obj K) [IsIso δ]
+    [IsIso ((rightDerivedUpperShriekAdjunction (ModuleCat.{u + 1} Λ) (s ≫ p)).counit.app K)] :
+    IsIso (ψ ≫ α.hom.app L₀ ≫ (R(p)_![ModuleCat.{u + 1} Λ]).map
+      ((R(s)_![ModuleCat.{u + 1} Λ]).map pur ≫
+        (rightDerivedUpperShriekAdjunction (ModuleCat.{u + 1} Λ) s).counit.app M) ≫
+      (R(p)_![ModuleCat.{u + 1} Λ]).map δ ≫
+      (rightDerivedUpperShriekAdjunction (ModuleCat.{u + 1} Λ) p).counit.app K) := by
+  have hε := (rightDerivedUpperShriekAdjunction (ModuleCat.{u + 1} Λ) s).counit.naturality δ
+  simp only [Functor.comp_obj, Functor.comp_map, Functor.id_obj, Functor.id_map] at hε
+  have hα := α.hom.naturality (pur ≫ (R(s)^![ModuleCat.{u + 1} Λ]).map δ)
+  simp only [Functor.comp_obj, Functor.comp_map] at hα
+  have hc := rightDerivedUpperShriekCompIsoOfLowerShriek_hom_app_counit Λ s p α K
+  have key : ψ ≫ α.hom.app L₀ ≫ (R(p)_![ModuleCat.{u + 1} Λ]).map
+      ((R(s)_![ModuleCat.{u + 1} Λ]).map pur ≫
+        (rightDerivedUpperShriekAdjunction (ModuleCat.{u + 1} Λ) s).counit.app M) ≫
+      (R(p)_![ModuleCat.{u + 1} Λ]).map δ ≫
+      (rightDerivedUpperShriekAdjunction (ModuleCat.{u + 1} Λ) p).counit.app K =
+      ψ ≫ (R(s ≫ p)_![ModuleCat.{u + 1} Λ]).map (pur ≫ (R(s)^![ModuleCat.{u + 1} Λ]).map δ ≫
+        (rightDerivedUpperShriekCompIsoOfLowerShriek Λ s p α).hom.app K) ≫
+      (rightDerivedUpperShriekAdjunction (ModuleCat.{u + 1} Λ) (s ≫ p)).counit.app K := by
+    simp only [Functor.map_comp, Category.assoc, hc]
+    rw [α.hom.naturality_assoc, α.hom.naturality_assoc]
+    simp only [Functor.comp_map]
+    congr 3
+    rw [← Functor.map_comp_assoc, ← Functor.map_comp_assoc]
+    congr 2
+    exact hε.symm
+  rw [key]
+  infer_instance
+
 /-- The identification `Lp^* Λ_Y(1)[2] ≅ Λ_{𝔸¹}(1)[2]` of the source of the smooth trace of the
 affine line with the shifted Tate twist. -/
 noncomputable def affineLineTwistShiftIso :
@@ -94,9 +164,10 @@ noncomputable def affineLineFundamentalClass
 
 **The trace of the fundamental class is invertible.** Over a separably closed field, for every
 purity isomorphism `γ_{p,Λ}` of the affine line, `Tr^sm_{p,Λ} ∘ cl ∘ ψ : Λ ⟶ Λ` is an
-isomorphism: the counit `RΓ_c(𝔸¹, Rp^! Λ) ⟶ Λ` is an isomorphism and the fundamental class
-generates `H²_c(𝔸¹, Λ(1)) ≅ Λ` (the adjoint form of affine-line purity,
-`thm-pur-affine-line-purity`). -/
+isomorphism. Through the composition isomorphism conjugate to `α` it is `R(s ≫ p)_!` of the
+isomorphism `Λ_{V(t)} ≅ Rs^! Λ(1)[2] ≅ Rs^! Rp^! Λ ≅ R(s ≫ p)^! Λ` (the orientation
+`AlgebraicGeometry.Etale.isIso_affineLineOrientation`, then `γ`), followed by the counit of
+`R(s ≫ p)_! ⊣ R(s ≫ p)^!`, an isomorphism because `s ≫ p : V(t) ⟶ Spec k` is one. -/
 theorem isIso_affineLineFundamentalClass_comp_smoothTrace {k : Type u} [Field k]
     [IsSepClosed k] [HasKummerClass.IsNormalized Λ]
     [HasInvertibleExponent Λ (Spec (.of k))]
@@ -122,8 +193,22 @@ theorem isIso_affineLineFundamentalClass_comp_smoothTrace {k : Type u} [Field k]
     IsIso (ψ.hom ≫ affineLineFundamentalClass Λ (Spec (.of k)) α ≫
       (R(𝔸(ULift.{u} (Fin 1); Spec (.of k)) ↘ Spec (.of k))_![ModuleCat.{u + 1} Λ]).map
         (affineLineTwistShiftIso Λ (Spec (.of k))).inv ≫
-      smoothTrace Λ ((1 : ℕ) : ℤ) _ γ) :=
-  sorry
+      smoothTrace Λ ((1 : ℕ) : ℤ) _ γ) := by
+  have := isIso_affineLineOrientation Λ (Spec (.of k))
+  let e := (AffineSpace.zeroSectionIsoZeroLocusSubscheme (ULift.{u} (Fin 1)) (Spec (.of k))
+    (s := {AffineSpace.coord (Spec (.of k)) (ULift.up 0)}) Set.range_unique).symm
+  have : HasCompactification e.hom := ‹_›
+  have := isIso_rightDerivedUpperShriekAdjunction_counit_of_iso Λ e
+  have : IsIso ((rightDerivedUpperShriekAdjunction (ModuleCat.{u + 1} Λ)
+      (𝔸(ULift.{u} (Fin 1); Spec (.of k)).zeroLocusSubschemeι
+        {AffineSpace.coord (Spec (.of k)) (ULift.up 0)} ≫
+          (𝔸(ULift.{u} (Fin 1); Spec (.of k)) ↘ Spec (.of k)))).counit.app
+      (constantComplex Λ (Spec (.of k)))) :=
+    inferInstanceAs (IsIso ((rightDerivedUpperShriekAdjunction (ModuleCat.{u + 1} Λ)
+      e.hom).counit.app _))
+  have h := isIso_comp_counit_comp_counit Λ _ _ α ψ.hom (affineLineOrientation Λ (Spec (.of k)))
+    ((affineLineTwistShiftIso Λ (Spec (.of k))).inv ≫ γ.hom) (K := constantComplex Λ _)
+  simpa only [affineLineFundamentalClass, smoothTrace, Category.assoc, Functor.map_comp] using h
 
 /-- Blueprint `thm-pur-trace-normalization-transitivity`: Trace normalization and transitivity
 
