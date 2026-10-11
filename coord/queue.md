@@ -1,34 +1,50 @@
 # Work queue
 
-503 items; claim with `tools/claim.py next <group> [--stage N]`.
+523 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (503)
+## Stage 2: nodes to state (523)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
-| `def-pc-derived-category` | 1 | state |
+| `def-pc-derived-category-qcoh-algebra` | 1 | state |
+| `def-pc-derived-pullback` | 1 | state |
+| `def-pc-perfect-complex` | 1 | state |
+| `def-pur-pseudo-coherent-complex` | 1 | state |
 | `def-weil-pbc-koszul-complex` | 1 | state |
 | `cor-galois-lisse-representations` | 1 | state |
+| `lem-pc-affine-derived-base-change-comparison-map` | 1 | state |
+| `lem-pc-derived-ambient-direct-sums` | 1 | state |
+| `lem-pc-derived-functor-truncation-stabilization` | 1 | state |
+| `lem-pc-derived-module-free-generation` | 1 | state |
+| `lem-pc-derived-qcoh-compact-generation` | 1 | state |
+| `lem-pc-derived-qcoh-direct-sums` | 1 | state |
+| `lem-pc-derived-tensor-localization-cohomology` | 1 | state |
 | `lem-pc-derived-tensor-transitivity` | 1 | state |
+| `lem-pc-dq-coherator-adjunction` | 1 | state |
 | `lem-pc-finite-flat-pushforward-locally-free` | 1 | state |
 | `lem-pc-flf-properties` | 1 | state |
 | `lem-pc-fp-module-map-descent` | 1 | state |
 | `lem-pc-module-pullback-identity-composition` | 1 | state |
+| `lem-pc-module-tor-amplitude-flat-model` | 1 | state |
 | `lem-pc-picard-functor-agrees-sc` | 1 | state |
-| `lem-pc-relative-kill-by-twisting` | 1 | state |
+| `lem-pc-qcoh-truncation-derived-limit` | 1 | state |
+| `lem-pc-tor-amplitude-qcoh-test` | 1 | state |
+| `lem-pc-unbounded-derived-functor-cohomological-bound` | 1 | state |
 | `lem-pc-zero-support-finite-scheme` | 1 | state |
 | `lem-sc-affine-cap-section-open-dictionary` | 1 | state |
 | `lem-sc-affine-section-localization` | 1 | state |
 | `lem-sc-ample-ideal-section` | 1 | state |
 | `lem-sc-ass-weakass-fg-stalk` | 1 | state |
 | `lem-sc-base-change-curve` | 1 | state |
-| `lem-sc-closed-subset-qc-ideal` | 1 | state |
+| `lem-sc-complex-lift-class-projective` | 1 | state |
+| `lem-sc-derived-open-gluing` | 1 | state |
 | `lem-sc-derived-open-restriction-adjunction-exact` | 1 | state |
 | `lem-sc-ext-evaluation` | 1 | state |
 | `lem-sc-ext-tensor-exact` | 1 | state |
+| `lem-sc-finite-free-complex-homology-upper-semicontinuous` | 1 | state |
 | `lem-sc-finite-locally-free-residue-isomorphism` | 1 | state |
 | `lem-sc-hilb-dominating-power` | 1 | state |
 | `lem-sc-hilb-to-pic-surjective` | 1 | state |
@@ -43,9 +59,11 @@
 | `lem-sc-p1-invertible-section-localization` | 1 | state |
 | `lem-sc-p1-section-clearing-denominators-qcqs` | 1 | state |
 | `lem-sc-p1-section-restriction-s-torsion` | 1 | state |
+| `lem-sc-perfect-local-pseudocoherent-free-model` | 1 | state |
 | `lem-sc-picard-kunneth-qcoh` | 1 | state |
 | `lem-sc-picard-qcoh-finite-cd` | 1 | state |
 | `lem-sc-picard-qcoh-universal-delta-embedding` | 1 | state |
+| `lem-sc-qc-open-derived-lift` | 1 | state |
 | `lem-sc-smooth-omega-finite-locally-free` | 1 | state |
 | `lem-sc-snapper-numerical-polynomial` | 1 | state |
 | `lem-sc-torsion-sections-generic` | 1 | state |
@@ -85,7 +103,6 @@
 | `lem-weil-pbc-module-finite-type-submodule-extension` | 1 | state |
 | `lem-weil-pbc-module-pullback-affine-sections` | 1 | state |
 | `lem-weil-pbc-module-pullback-finite-type` | 1 | state |
-| `lem-weil-pbc-n2-ascends-finite-domain-extension` | 1 | state |
 | `lem-weil-pbc-noetherian-acc-quasi-coherent` | 1 | state |
 | `lem-weil-pbc-normal-nagata-monogenic-n1` | 1 | state |
 | `lem-weil-pbc-normal-ring-integrally-closed-total` | 1 | state |
@@ -466,10 +483,12 @@
 | `lem-exc-etale-algebra-lift` | 2 | state |
 | `lem-kun-etale-lfp` | 2 | state |
 | `lem-pc-bounded-above-flat-kflat` | 2 | state |
+| `lem-pc-brown-representability-right-adjoint` | 2 | state |
 | `lem-pc-divisor-line-bundle-agrees-sc` | 2 | state |
 | `lem-pc-finite-projective-cokernel-localization` | 2 | state |
 | `lem-pc-flat-sheaf-stalk-flat` | 2 | state |
 | `lem-pc-kflat-closure` | 2 | state |
+| `lem-pc-pseudo-coherent-bounded-finite-free-model` | 2 | state |
 | `lem-pc-ring-pseudo-coherent-summand` | 2 | state |
 | `lem-pc-sigma-k-points` | 2 | state |
 | `lem-pc-sites-modules-coproduct-flat` | 2 | state |
@@ -490,6 +509,7 @@
 | `lem-sc-pic-affine-quotient` | 2 | state |
 | `lem-sc-pic-restriction-boundary` | 2 | state |
 | `lem-sc-picard-valuation-probe-closure` | 2 | state |
+| `lem-sc-pseudo-coherent-lift-stably-free-complex` | 2 | state |
 | `lem-sc-valuation-closed-fibre-section-vanishing` | 2 | state |
 | `lem-sc-valuation-proper-coherent-sections` | 2 | state |
 | `lem-sc-very-ample-separation-criterion` | 2 | state |
@@ -513,7 +533,7 @@
 | `lem-pc-essentially-constant-pro-hom-colimit` | 4 | state |
 | `lem-pur-essential-constant-pro-criterion-05py` | 4 | state |
 
-Not open yet: 40 nodes that wait for stage 1, 627 nodes that wait for a statement dependency.
+Not open yet: 40 nodes that wait for stage 1, 603 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
