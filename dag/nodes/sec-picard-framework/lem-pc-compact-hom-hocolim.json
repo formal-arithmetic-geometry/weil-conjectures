@@ -121,5 +121,23 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-chh1937 (reviewer sub-agent of L); spot-checked: Third push: statement at 77e5e80b1 still said 'countable coproducts' (point 1 of 19:01/19:15 returns unrepaired; K1's Second reading restored it and missed the fault). FIX more, RETURN less: E/hypothesis one-word repair 'countable' -> 'arbitrary coproducts' in the statement, so def-pc-compact-object applies; Step 1 then valid for A and A[1] (both coproducts of families). Steps 2-3 and shift as accepted at 19:15, not reopened. Downstream users have set-indexed coproducts.; 1 file(s) fixed by the reviewer"
  },
- "lead_note": "2026-10-10 L (R-chh1937): E7 statement change by reviewer: 'countable coproducts' -> 'arbitrary coproducts' so that def-pc-compact-object (defined only for arbitrary coproducts) applies; Tag 094A assumes only countable sums and countable compactness. Downstream users (lem-pc-brown-cohomological-representability, lem-pc-compact-generators-build-objects) assume set-indexed coproducts. The report at 77e5e80b1 still contradicts itself (Report and Review say arbitrary/strengthened, Second reading says countable restored); the merged statement follows the former."
+ "lead_note": "2026-10-10 L (R-chh1937): E7 statement change by reviewer: 'countable coproducts' -> 'arbitrary coproducts' so that def-pc-compact-object (defined only for arbitrary coproducts) applies; Tag 094A assumes only countable sums and countable compactness. Downstream users (lem-pc-brown-cohomological-representability, lem-pc-compact-generators-build-objects) assume set-indexed coproducts. The report at 77e5e80b1 still contradicts itself (Report and Review say arbitrary/strengthened, Second reading says countable restored); the merged statement follows the former.",
+ "lean": {
+  "module": "Sheaf.CategoryTheory.CompactHomHocolim",
+  "declaration": "CategoryTheory.compact_hom_hocolim",
+  "file": "lean/Sheaf/CategoryTheory/CompactHomHocolim.lean",
+  "statement": "theorem compact_hom_hocolim {C : Type u} [Category.{v} C] [HasZeroObject C] [HasShift C ℤ] [Preadditive C] [∀ n : ℤ, (shiftFunctor C n).Additive] [Pretriangulated C] [IsTriangulated C] [HasCoproducts.{w} C] (K : C) (hK : IsCompactObject K) (X : ℕ ⥤ C) (Y : C) (q : (∐ fun n : ULift.{w} ℕ ↦ X.obj n.down) ⟶ Y) (r : Y ⟶ (∐ fun n : ULift.{w} ℕ ↦ X.obj n.down)⟦(1 : ℤ)⟧) (hT : Triangle.mk (𝟙 (∐ fun n : ULift.{w} ℕ ↦ X.obj n.down) - Sigma.desc (fun n : ULift.{w} ℕ ↦ X.map (homOfLE (Nat.le_succ n.down)) ≫ Sigma.ι (fun k : ULift.{w} ℕ ↦ X.obj k.down) ⟨n.down + 1⟩)) q r ∈ distTriang C) : ∃ φ : colimit (X ⋙ coyoneda.obj (op K)) → (K ⟶ Y), (∀ (n : ℕ) (f : K ⟶ X.obj n), φ (colimit.ι (X ⋙ coyoneda.obj (op K)) n f) = f ≫ Sigma.ι (fun k : ULift.{w} ℕ ↦ X.obj k.down) ⟨n⟩ ≫ q) ∧ Function.Bijective φ",
+  "branch": "sheaf-dag",
+  "by": "G1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-chh0910",
+  "group": "G1",
+  "result": "pass",
+  "note": "C triangulated (Pretriangulated+IsTriangulated, additive Z-shift, zero object) with HasCoproducts.{w}; K with IsCompactObject at the same w (checked with pp.universes; compactness at I = ULift.{w} N gives Step 1 for every w, so free w is neither unprovable nor trivial); X : N ⥤ C; telescope triangle 1 - Sigma.desc(t_n ≫ ι_{n+1}), q, r distinguished, same form as H1 75ca6cbbe; conclusion: phi from colimit (X ⋙ coyoneda K) with phi(ι_n f) = f ≫ ι_n ≫ q (canonical, unique by joint surjectivity) and bijective; no Mathlib hocolim/compact-object statement (grep pinned Mathlib: 0 hits); docstring carries the 3 proof steps"
+ }
 }
