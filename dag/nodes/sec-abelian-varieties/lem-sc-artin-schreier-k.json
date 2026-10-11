@@ -87,5 +87,23 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-ask2644 (reviewer sub-agent of L); spot-checked: Read packet; sed of slopmaster2 IsAlgClosed/Basic.lean:185-197 (surjective_pow_sub_self, sorryfree OK, surjectivity only) and Mathlib IsAlgClosed.exists_root (Basic.lean:78); grep mathlib for ArtinSchreier/artinSchreier/surjective_pow_sub_self: no hits, so no MATHLIB leaf for the whole item. Kernel node lem-sc-field-artin-schreier-kernel (leaf Subfield.mem_bot_iff_pow_eq_self) states the fixed-point clause with p prime, a generic field tool (C7 ok). FIX more, RETURN less: (1) B-class (d)/B10 overreach: new helper lem-sc-artin-schreier-surjective is two lines from the definition of algebraically closed (X^p-X-a nonconstant has a root) and its statement cited [def-weil-field] for 'algebraically closed'; dropped it and folded Step 1 into an elementary step citing def-weil-algebraic-closure and def-pc-field-characteristic. (2) E/C4: Step 2 applied the kernel node, which assumes p prime, without deriving primality from char p>0; added the elementary derivation. proof_deps corrected.; 1 file(s) fixed by the reviewer"
  },
- "lead_note": "2026-10-10 L (R-ask2644): slopmaster2 IsAlgClosed.surjective_pow_sub_self (docstring names this item) is sorry-free but states only the surjectivity clause, so it is not an attachment of the item; no single Mathlib declaration states the item (grep ArtinSchreier/artinSchreier/surjective_pow_sub_self in mathlib: 0 hits)."
+ "lead_note": "2026-10-10 L (R-ask2644): slopmaster2 IsAlgClosed.surjective_pow_sub_self (docstring names this item) is sorry-free but states only the surjectivity clause, so it is not an attachment of the item; no single Mathlib declaration states the item (grep ArtinSchreier/artinSchreier/surjective_pow_sub_self in mathlib: 0 hits).",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ArtinSchreier",
+  "declaration": "IsAlgClosed.artinSchreier_surjective_and_kernel",
+  "file": "lean/Sheaf/AlgebraicGeometry/ArtinSchreier.lean",
+  "statement": "theorem artinSchreier_surjective_and_kernel {k : Type*} [Field k] [IsAlgClosed k] (p : ℕ) [Fact p.Prime] [CharP k p] : Function.Surjective (fun x : k => x ^ p - x) ∧ {x : k | x ^ p - x = 0} = Set.range (ZMod.castHom (dvd_refl p) k)",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-ask0938",
+  "group": "E1",
+  "result": "pass",
+  "note": "Read packet whole; matched [Field k][IsAlgClosed k] = alg. closed field; (p)[Fact p.Prime][CharP k p] = char p>0 (prime automatic for fields, p=0/1 excluded); Surjective (x^p-x) = surjectivity; zero set {x^p-x=0} = range ZMod.castHom (dvd_refl p) k = kernel F_p; slopmaster2 surjective_pow_sub_self is surjectivity only so existing:false right; no other prime-field rendering in lean/Sheaf (H12 ok); proof sorry, compile clean"
+ }
 }
