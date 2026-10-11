@@ -92,5 +92,30 @@
   "group": "H1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-dln2616 (reviewer sub-agent of L); spot-checked: No duplicate: grep of dag/nodes finds no other locally-Noetherian definition node (def-weil-pbc-coherent-formal-module cites this one). Statement is the Stacks cover form; citers needing every-affine-open use the separate lemma node pqf-lem-affine-open-locnoeth, so C4 holds. FIX more, RETURN less: (1) class b / C1: added the missing Noetherian-ring definition citation [def-weil-pbc-noetherian-ring] to the text and stmt_deps, and cited [def-pc-scheme] in the text (covers affine/open subscheme); (2) source fault: the definition was attributed to Tag 01T6 (a finite-type permanence lemma); now attributed to Properties Definition 28.5.1, Tag 01OV (checked in literature/stacks-project tags file), with 01OV added to source.external; (3) B10: the open-subscheme assertion is kept as a labelled elementary remark with its two-step justification via Tags 01T5 and 01T6. Second reading by H1 missed (1) and (2). Mathlib: IsLocallyNoetherian is the every-affine-open form, so split with mathlib_candidate is correct.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Mathlib.AlgebraicGeometry.Noetherian",
+  "declaration": "AlgebraicGeometry.IsLocallyNoetherian",
+  "declarations": [
+   "AlgebraicGeometry.isLocallyNoetherian_of_affine_cover",
+   "AlgebraicGeometry.isLocallyNoetherian_iff_of_iSup_eq_top",
+   "AlgebraicGeometry.isLocallyNoetherian_iff_of_affine_openCover",
+   "AlgebraicGeometry.isLocallyNoetherian_of_isOpenImmersion",
+   "AlgebraicGeometry.LocallyOfFiniteType.isLocallyNoetherian"
+  ],
+  "statement": "class IsLocallyNoetherian (X : Scheme) : Prop",
+  "branch": "mathlib",
+  "by": "E1",
+  "date": "2026-10-11",
+  "existing": true,
+  "note": "The Mathlib class is the every-affine-open presentation of precisely the same notion. Its equivalence with the node’s existence-of-an-affine-Noetherian-cover presentation is already proved by isLocallyNoetherian_of_affine_cover and isLocallyNoetherian_iff_of_affine_openCover; every scheme has an affine cover. The open-subscheme remark is isLocallyNoetherian_of_isOpenImmersion and the Opens instance; LocallyOfFiniteType.isLocallyNoetherian gives the cited permanence result. For a morphism f : X ⟶ Y, the final convention is simply IsLocallyNoetherian Y. No duplicate predicate or new module is needed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-pdl1105",
+  "group": "E1",
+  "result": "pass",
+  "note": "Node = Stacks 01OV existential affine Noetherian cover of an arbitrary scheme; Mathlib class AlgebraicGeometry.IsLocallyNoetherian (every affine open, field component_noetherian) is the same notion: reviewer compiled IsLocallyNoetherian X <-> exists (iota : Type u) (S : iota -> X.affineOpens), iSup S = top and all Gamma(X,S i) Noetherian (via iSup_affineOpens_eq_top, component_noetherian, isLocallyNoetherian_of_affine_cover), no universe restriction; open-subscheme remark = isLocallyNoetherian_of_isOpenImmersion / Opens instance; 01T5+01T6 = immersion LocallyOfFiniteType + LocallyOfFiniteType.isLocallyNoetherian; morphism convention = [IsLocallyNoetherian Y]; deps Scheme and IsNoetherianRing are the recorded Mathlib ones; no private copy in lean/Sheaf; diff only adds the lean record"
  }
 }
