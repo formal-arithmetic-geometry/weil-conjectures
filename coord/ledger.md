@@ -4764,3 +4764,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 13:28 L: merged deliver/K1/lem-pc-perfect-summand (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.PerfectSummand AlgebraicGeometry.Scheme.perfect_of_directSum)
 - 13:29 L: merged deliver/G1/lem-weil-pbc-quasi-coherence-scalar-restriction (stage 2; reviewer FIX; first push; Sheaf.AlgebraicGeometry.QuasiCoherenceScalarRestriction AlgebraicGeometry.Scheme.Modules.quasiCoherent_iff_restrictScalars)
 - 13:29 L: merged deliver/K1/lem-pc-koszul-affine-detection (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.KoszulAffineDetection AlgebraicGeometry.isZero_of_koszul_powers_orthogonal)
+- 13:29 L: merged deliver/J1/lem-pc-ring-pseudo-coherent-finite-tor-perfect (stage 2; reviewer FIX; first push; Sheaf.CategoryTheory.DerivedCategory.RingPseudoCoherentFiniteTorPerfect DerivedCategory.isPerfect_of_pseudoCoherent_finiteTorAmplitude)

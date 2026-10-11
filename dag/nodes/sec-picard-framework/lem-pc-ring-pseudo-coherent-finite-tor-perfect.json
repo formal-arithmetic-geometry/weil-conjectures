@@ -145,5 +145,24 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-pct2726 (reviewer sub-agent of L); spot-checked: Packet read whole; Tag 0658 text vs steps; citer lem-pc-pseudo-coherent-finite-tor-perfect applies item to a bounded-above finite free P with Tor amplitude [a,b] (C4 ok); leaf Module.Flat.projective_of_finitePresentation read at EquationalCriterion.lean:287 (exact, Stacks 00NX); tor amplitude defined inline in the ring statement (E ok, no O_X tor-amplitude node needed); new node not (b)/(c)/(d): real lemma (Stacks 15.64.5), grep of Mathlib for PseudoCoherent 0 hits recorded. FIX more, RETURN less: (1) C4/E steps 3-4: truncation map direction corrected to the canonical surjection P->tau_{>=a}P, Tor_1(E^a,M)=H^{a-1}(P tensor M) derived from the free resolution P^{<=a}->E^a, garbled 'E^a is flat for every M' rewritten; (2) C1 step 1: P tensor M computing the derived tensor now cited from lem-pc-bounded-above-flat-kflat (tool use), proof_deps updated; (3) B4/B3: all steps and the new node statement rewritten in TeX (\\to, \\tau_{\\ge a}, \\otimes^{\\mathbf L}), new node names b.; 2 file(s) fixed by the reviewer"
  },
- "lead_note": "2026-10-10 L (R-pct2726): R-pct2726: steps 3-4 had the truncation map backwards (E->P, triangle E->P->P/E); E=tau_{>=a}P is a quotient of P. Second reading missed it. Cited lem-pc-bounded-above-flat-kflat (unit sk-thm-picard-semicon) as generic tool for P tensor M computing the derived tensor."
+ "lead_note": "2026-10-10 L (R-pct2726): R-pct2726: steps 3-4 had the truncation map backwards (E->P, triangle E->P->P/E); E=tau_{>=a}P is a quotient of P. Second reading missed it. Cited lem-pc-bounded-above-flat-kflat (unit sk-thm-picard-semicon) as generic tool for P tensor M computing the derived tensor.",
+ "lean": {
+  "module": "Sheaf.CategoryTheory.DerivedCategory.RingPseudoCoherentFiniteTorPerfect",
+  "declaration": "DerivedCategory.isPerfect_of_pseudoCoherent_finiteTorAmplitude",
+  "file": "lean/Sheaf/CategoryTheory/DerivedCategory/RingPseudoCoherentFiniteTorPerfect.lean",
+  "statement": "theorem isPerfect_of_pseudoCoherent_finiteTorAmplitude {R : Type u} [CommRing R] [HasDerivedCategory.{w} (ModuleCat.{u} R)] (C : DerivedCategory (ModuleCat.{u} R)) (hPC : IsPseudoCoherent C) (hTor : ∃ a b : ℤ, a ≤ b ∧ torAmplitudeIn (ModuleCat.{u} R) a b C) : ∃ P : CochainComplex (ModuleCat.{u} R) ℤ, (∃ a b : ℤ, ∀ n : ℤ, n < a ∨ b < n → IsZero (P.X n)) ∧ (∀ n : ℤ, Module.Finite R (P.X n)) ∧ (∀ n : ℤ, Module.Projective R (P.X n)) ∧ Nonempty (Q.obj P ≅ C)",
+  "branch": "sheaf-dag",
+  "by": "J1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-rpt1456"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-rpt1456",
+  "group": "J1",
+  "result": "fix",
+  "note": "Tag 0658 vs Lean: R comm ring, C in D(R)=DerivedCategory (ModuleCat.{u} R) [HasDerivedCategory.{w}]; pseudo-coherent = C1 DerivedCategory.IsPseudoCoherent (#check; finite free form, equivalent to node's f.g. projective wording); finite Tor dim = exists a<=b with M1's torAmplitudeIn (all ModuleCat.{u} R test modules, same universe); conclusion inline bounded finite projective model as F1 65ea9cc4f, Q.obj P ≅ C; FIX replaced hand-written PC existential, finiteTorAmplitude (no a<=b) and Weil DerivedCategory.IsPerfect (forced HasDerivedCategory.{u}); compiled clean in L sandbox"
+ }
 }
