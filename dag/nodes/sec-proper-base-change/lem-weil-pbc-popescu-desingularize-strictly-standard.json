@@ -202,5 +202,23 @@
   "by": "L",
   "result": "accepted",
   "note": "7 steps follow Stacks 07CT: base change A' = A tensor_R D over the Noetherian D, hypotheses of 07CR (new unsplit node) verified via the strictly-standard base-change node and the induced section, application of 07CR, the annihilator claim via a new 07T8 node and the support node, smooth => flat leaf (Smooth/Flat.lean:58), the two inclusions via radicals and smooth base change/composition; finite-presentation leaf (FiniteStability.lean:55, FinitePresentation.lean:181). Lines verified; tags 07CT, 07CR, 07CC, 07T8, 00TA, 00SL, 05G5, 00F4 verified."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.DesingularizeStrictlyStandard",
+  "declaration": "Algebra.exists_desingularization_strictlyStandard",
+  "file": "lean/Sheaf/RingTheory/DesingularizeStrictlyStandard.lean",
+  "statement": "theorem exists_desingularization_strictlyStandard (R : Type u) (Λ : Type v) (A : Type w) (D : Type z) [CommRing R] [CommRing Λ] [CommRing A] [CommRing D] [Algebra R Λ] [Algebra R A] [Algebra R D] [IsNoetherianRing R] [FinitePresentation R A] [FinitePresentation R D] (π : R) (α : A →ₐ[R] Λ) (δ : D →ₐ[R] Λ) (hR : ∀ r : R, r * π = 0 ↔ r * π ^ 2 = 0) (hΛ : ∀ l : Λ, l * algebraMap R Λ π = 0 ↔ l * (algebraMap R Λ π) ^ 2 = 0) (hstandard : IsStrictlyStandardElement (R := R) (algebraMap R A π)) (hquot : ∃ φ : (A ⧸ Ideal.span {(algebraMap R A π) ^ 4}) →ₐ[R] (D ⧸ Ideal.span {(algebraMap R D π) ^ 4}), ∀ (a : A) (d : D), φ (Ideal.Quotient.mk _ a) = Ideal.Quotient.mk _ d → Ideal.Quotient.mk (Ideal.span {(algebraMap R Λ π) ^ 4}) (α a) = Ideal.Quotient.mk (Ideal.span {(algebraMap R Λ π) ^ 4}) (δ d)) : ∃ (B : Type (max u v w z)) (_ : CommRing B) (_ : Algebra R B), FinitePresentation R B ∧ ∃ (β : B →ₐ[R] Λ) (aB : A →ₐ[R] B) (dB : D →ₐ[R] B), β.comp aB = α ∧ β.comp dB = δ ∧ Ideal.map dB.toRingHom (singularIdeal R D) ≤ @singularIdeal D B _ _ dB.toRingHom.toAlgebra ∧ Ideal.map dB.toRingHom (singularIdeal R D) ≤ singularIdeal R B",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-pds1346",
+  "group": "H1",
+  "result": "pass",
+  "note": "Noetherian R, fp A,D, pi; hR/hLambda pointwise Ann(pi)=Ann(pi^2) in R and Lambda; strictly standard via landed Algebra.IsStrictlyStandardElement (same form as K1 sibling); hquot representative form = commuting triangle (mk surjective), satisfiable (checked D=A); conclusion tied existential B fp, beta/aB/dB with both composites, H_{D/R}B <= H_{B/D} (dB.toAlgebra) and <= H_{B/R}; universes independent, B : max u v w z; #check names resolve to Algebra.*; Stacks 07CT text matched"
  }
 }
