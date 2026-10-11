@@ -28,7 +28,7 @@ open CategoryTheory Limits
 
 namespace PrimeSpectrum
 
-instance : PreservesFilteredColimitsOfSize.{0, 0} (forget CommRingCat.{u}) :=
+local instance : PreservesFilteredColimitsOfSize.{0, 0} (forget CommRingCat.{u}) :=
   preservesFilteredColimitsOfSize_of_univLE.{u, u} (forget CommRingCat.{u})
 
 variable (G : ℕ ⥤ CommRingCat.{u})
