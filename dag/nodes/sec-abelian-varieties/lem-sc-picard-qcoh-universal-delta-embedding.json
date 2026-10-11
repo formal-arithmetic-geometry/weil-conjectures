@@ -1,71 +1,159 @@
 {
-  "id": "lem-sc-picard-qcoh-universal-delta-embedding",
-  "blueprint": {
-    "is": null,
-    "from": {
-      "node": "thm-sc-theorem-of-cube",
-      "place": "proof of Tag 0BF3: invoke Varieties Lemma varieties-lemma-kunneth on the special fibre",
-      "via": [
-        "lem-sc-picard-kunneth-qcoh"
-      ]
-    },
-    "same_as": []
+ "id": "lem-sc-picard-qcoh-universal-delta-embedding",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-theorem-of-cube",
+   "place": "proof of Tag 0BED (Varieties Lemma varieties-lemma-kunneth): finite-cohomological-dimension reduction and the universal-delta-functor embedding lemma",
+   "via": [
+    "lem-sc-picard-kunneth-qcoh"
+   ]
   },
-  "kind": "statement",
-  "title": "Universal delta-functor embedding for quasi-coherent modules",
-  "statement": "Let X be a quasi-compact scheme over a field k with affine diagonal [def-weil-field] [def-pc-scheme], and let F be a quasi-coherent O_X-module [pqf-def-coherent]. There is a monomorphism F \\to F' of quasi-coherent O_X-modules such that H^p(X,F') = 0 for every p >= 1.",
-  "source": {
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Universal delta-functor embedding for quasi-coherent modules",
+ "statement": "Let X be a quasi-compact scheme over a field k with affine diagonal [def-weil-field] [def-pc-scheme], and let F be a quasi-coherent O_X-module [pqf-def-coherent]. There is a monomorphism F \\to F' of quasi-coherent O_X-modules such that H^p(X,F') = 0 for every p >= 1.",
+ "source": {
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Tag 0BDY, Cohomology of Schemes, Lemma coherent-lemma-affine-diagonal-universal-delta-functor, embedding into a sheaf acyclic for higher cohomology"
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-pc-scheme",
+  "pqf-def-coherent"
+ ],
+ "proof": [
+  {
+   "text": "By quasi-compactness, choose a finite affine open covering $X=U_1\\cup\\cdots\\cup U_t$. Put $U=\\coprod_i U_i$ and let $j:U\\to X$ be induced by the open immersions. The finite disjoint union $U$ is affine.",
+   "uses": [],
+   "elementary": true,
+   "source": {
     "document": "literature/stacks-project/coherent.tex",
-    "place": "Tag 0BDY, Cohomology of Schemes, Lemma coherent-lemma-affine-diagonal-universal-delta-functor, embedding into a sheaf acyclic for higher cohomology"
+    "place": "Tag 0BDY, proof of coherent-lemma-affine-diagonal-universal-delta-functor, first paragraph"
+   }
   },
-  "stmt_deps": [
-    "def-weil-field",
-    "def-pc-scheme",
-    "pqf-def-coherent"
-  ],
-  "proof": [],
-  "proof_deps": [],
-  "proof_origin": null,
-  "mathlib_searches": [
-    {
-      "tool": "leanfinder",
-      "query": "affine diagonal quasi coherent module embeds into acyclic module",
-      "results": "no declaration for the scheme-theoretic universal delta-functor embedding",
-      "date": "2026-10-11",
-      "verdict": "no match"
-    },
-    {
-      "tool": "loogle",
-      "query": "Scheme affine diagonal cohomology vanishing",
-      "results": "0 hits; unknown identifier Scheme",
-      "date": "2026-10-11",
-      "verdict": "no match"
-    },
-    {
-      "tool": "grep",
-      "query": "universal.*delta|affine.*diagonal|cohomological.*dimension in Mathlib/AlgebraicGeometry",
-      "results": "0 hits",
-      "date": "2026-10-11",
-      "verdict": "no match"
-    },
-    {
-      "tool": "leansearch",
-      "query": "finite cohomological dimension quasi coherent sheaves affine diagonal",
-      "results": "service unavailable: Internal Server Error",
-      "date": "2026-10-11",
-      "verdict": "unavailable"
-    }
-  ],
-  "mathlib_match": null,
-  "status": "unsplit",
-  "created": {
-    "item": "lem-sc-picard-kunneth-qcoh",
-    "by": "worker",
-    "date": "2026-10-11"
+  {
+   "text": "For every affine open $V$ of $X$, $j^{-1}(V)$ is the finite disjoint union of the affine intersections $U_i\\cap V$. The intersections are affine by the affine-diagonal intersection lemma, and a finite disjoint union of affine schemes is affine. Hence $j$ is affine.",
+   "uses": [
+    "lem-sc-picard-affine-diagonal-intersections",
+    "lem-weil-pbc-affine-morphism-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Tag 0BDY, proof of coherent-lemma-affine-diagonal-universal-delta-functor, first paragraph; Morphisms Lemma Tag 01S8"
+   }
   },
-  "chapter": "sec-abelian-varieties",
-  "unit": "sk-prop-av-cube",
-  "lead_notes": [
-    "L (02:16 UTC), after H1's abandonment at 02:13 ('unsupported field hypothesis absent from Tag 0BDY'): the hypothesis 'over a field k' is a harmless restriction supplied by the citer lem-sc-picard-kunneth-qcoh; it is not used. Prove the statement as it stands from Stacks Tag 0BDY, which needs only X quasi-compact with affine diagonal; a worker proves the lemma under the stated hypotheses and may note that k is unused. Do not change the statement."
+  {
+   "text": "There is a canonical map $F\\to j_*j^*F$. It is injective on stalks: if $x$ belongs to $U_i$, the stalk map factors through the point $x'$ of the copy $U_i$ and then back to $F_x$, so the composite is the identity. Thus it is a monomorphism. Since $F$ is quasi-coherent, $j^*F$ is quasi-coherent on the affine scheme $U$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Tag 0BDY, proof of coherent-lemma-affine-diagonal-universal-delta-functor, canonical map and stalk-injectivity paragraph"
+   }
+  },
+  {
+   "text": "By affine vanishing, $H^p(U,j^*F)=0$ for every $p>0$. The affine-morphism cohomology edge isomorphism for $j$ identifies $H^p(X,j_*j^*F)$ with $H^p(U,j^*F)$, so $H^p(X,j_*j^*F)=0$ for every $p\\ge1$. Taking $F'=j_*j^*F$, which is quasi-coherent by the affine-morphism higher-direct-image statement, proves the conclusion.",
+   "uses": [
+    "pqf-lem-affine-vanishing",
+    "lem-weil-pbc-affine-morphism-cohomology-edge",
+    "lem-pc-affine-morphism-hi"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Tag 0BDY, proof of coherent-lemma-affine-diagonal-universal-delta-functor, acyclicity paragraph"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-picard-affine-diagonal-intersections",
+  "lem-weil-pbc-affine-morphism-permanence",
+  "pqf-lem-affine-vanishing",
+  "lem-weil-pbc-affine-morphism-cohomology-edge",
+  "lem-pc-affine-morphism-hi"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Tag 0BDY, coherent-lemma-affine-diagonal-universal-delta-functor, part (1)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "affine diagonal quasi coherent module embeds into acyclic module",
+   "results": "no declaration for the scheme-theoretic universal delta-functor embedding",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Scheme affine diagonal cohomology vanishing",
+   "results": "0 hits; unknown identifier Scheme",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "universal.*delta|affine.*diagonal|cohomological.*dimension in Mathlib/AlgebraicGeometry",
+   "results": "0 hits",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "finite cohomological dimension quasi coherent sheaves affine diagonal",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "item": "lem-sc-picard-kunneth-qcoh",
+  "by": "worker",
+  "date": "2026-10-11"
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "lead_notes": [
+  "L (02:16 UTC), after H1's abandonment at 02:13 ('unsupported field hypothesis absent from Tag 0BDY'): the hypothesis 'over a field k' is a harmless restriction supplied by the citer lem-sc-picard-kunneth-qcoh; it is not used. Prove the statement as it stands from Stacks Tag 0BDY, which needs only X quasi-compact with affine diagonal; a worker proves the lemma under the stated hypotheses and may note that k is unused. Do not change the statement."
+ ],
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-sc-picard-qcoh-universal-delta-embedding",
+  "worker": "stage1",
+  "summary": "Split Tag 0BDY part (1) into finite affine-cover selection, affineness of the cover map using affine-diagonal intersections, stalkwise injectivity of the canonical map, and acyclicity via affine vanishing plus the existing affine-morphism cohomology edge comparison. No new nodes were needed; all non-elementary inputs are existing DAG statements.",
+  "blueprint": "Realizes the Tag 0BED Kunneth proof's finite-cohomological-dimension reduction paragraph invoking the Tag 0BDY universal-delta-functor embedding lemma.",
+  "tool_uses": [
+   {
+    "node": "pqf-lem-affine-vanishing",
+    "why": "Step 4 uses affine quasi-coherent cohomology vanishing on the affine cover scheme U."
+   },
+   {
+    "node": "lem-weil-pbc-affine-morphism-cohomology-edge",
+    "why": "Step 4 uses the affine pushforward cohomology comparison to transfer vanishing from U to X."
+   },
+   {
+    "node": "lem-pc-affine-morphism-hi",
+    "why": "Step 4 uses its stated quasi-coherence of pushforward along the affine cover map j."
+   }
   ]
+ },
+ "tool_uses": [
+  "pqf-lem-affine-vanishing",
+  "lem-weil-pbc-affine-morphism-cohomology-edge",
+  "lem-pc-affine-morphism-hi"
+ ],
+ "reviewed": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-ude0254",
+  "group": "J1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-ude0254 (reviewer sub-agent of L); spot-checked: Statement identical to sheaf-dag (json compare; lead note 02:16: field hypothesis unused, kept). Delivery changes 2 files (merge-base diff), no new nodes. Tag 0BDY (coherent.tex lemma-affine-diagonal-universal-delta-functor) part (1) proof vs steps 1-4: step 2 j affine via lem-sc-picard-affine-diagonal-intersections (hypothesis: X over k with affine diagonal over Spec k = item's hypothesis) + permanence (4) and pqf-def-affine-morphism (preimage of affine opens) C4 ok; step 3 stalk injectivity elementary as in Stacks; step 4 pqf-lem-affine-vanishing on U (Tag 01XB), lem-weil-pbc-affine-morphism-cohomology-edge (edge iso H^p(X,j_*G)=H^p(U,G)), lem-pc-affine-morphism-hi (j_* quasi-coherent) C4 ok; tool_uses generic, accepted. No duplicate (grep 0BDY/universal-delta: consumer lem-sc-picard-kunneth-qcoh step 5 only). Mathlib grep AlgebraicGeometry universal delta: none. Second reading's claim of correcting created.item is not reflected in the diff (created unchanged, item = lem-sc-picard-kunneth-qcoh, correct provenance); harmless. No fault found that the second reading missed."
+ }
 }
