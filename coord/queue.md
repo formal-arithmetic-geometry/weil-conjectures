@@ -1,11 +1,11 @@
 # Work queue
 
-963 items; claim with `tools/claim.py next <group> [--stage N]`.
+962 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (963)
+## Stage 2: nodes to state (962)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -40,7 +40,6 @@
 | `lem-pc-flat-tensor-complex-cohom` | 1 | state |
 | `lem-pc-fppf-affine-sheafification-restriction` | 1 | state |
 | `lem-pc-fppf-affine-site-topos-equivalence` | 1 | state |
-| `lem-pc-h0-proper-variety` | 1 | state |
 | `lem-pc-kflat-hocolim-truncations` | 1 | state |
 | `lem-pc-kflat-stalk-criterion` | 1 | state |
 | `lem-pc-kflat-tensor-cone-two-out-of-three` | 1 | state |
