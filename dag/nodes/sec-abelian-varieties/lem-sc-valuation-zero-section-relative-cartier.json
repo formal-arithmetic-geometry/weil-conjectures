@@ -25,9 +25,45 @@
   "def-pc-zero-scheme",
   "def-pc-relative-effective-cartier"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The zero scheme Z(s) is locally principal by [lem-pc-zero-scheme-properties](1): on an affine open U=Spec(B) of X where L is free on e and s|_U=a e, Z(s)\\cap U=Spec(B/(a)). Its closed fibre is therefore affine-locally Spec(B_0/(\\bar a)) with B_0=B\\otimes_A\\kappa and \\bar a the image of a, i.e. Z(s)_0=Z(s|_{X_0}) as closed subschemes of X_0. Since s|_{X_0} is a nonzero section of the invertible module L|_{X_0} on the integral scheme X_0, [lem-pc-nonzero-section-integral-cartier] says that Z(s)_0=Z(s|_{X_0}) is an effective Cartier divisor on X_0. Let x be a point of Z(s), and let C be the closure of x in X; C\\subseteq Z(s) since Z(s) is closed. The image f(C) is closed in Spec(A) by [lem-weil-pbc-proper-closed-image] and nonempty (it contains f(x)); every nonempty closed subset of the local scheme Spec(A) contains the closed point, so some y\\in C lies over the closed point. Thus y\\in Z(s), y lies in the closed fibre, and x specializes to y. By the preceding paragraph Z(s)_0\\subseteq X_0 is an effective Cartier divisor in a neighbourhood of y, and f is flat and locally of finite presentation, so the local fibre-Cartier criterion [lem-pc-recd-fibre-cartier-local] gives an open neighbourhood U_y of y with Z(s)\\cap U_y a relative effective Cartier divisor on U_y over Spec(A). Since x specializes to y, every open containing y contains x, so x\\in U_y. Hence the opens U_y cover Z(s); together with the open X\\setminus Z(s), on which the ideal of Z(s) is the unit ideal, they cover X, and being a relative effective Cartier divisor is local on X (effective Cartier is local, and flatness of Z(s)\\to Spec(A) is local on Z(s)). So Z(s) is a relative effective Cartier divisor on X over Spec(A).",
+   "uses": [
+    "lem-pc-zero-scheme-properties",
+    "lem-weil-pbc-proper-closed-image",
+    "lem-pc-nonzero-section-integral-cartier",
+    "lem-pc-recd-fibre-cartier-local"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-on-morphisms.tex",
+    "place": "More on Morphisms, Lemma 37.33.3 (Tag 0EX8), final paragraph; Divisors Lemma 31.19.9 (Tag 062Y), part (3)"
+   }
+  },
+  {
+   "text": "By the definition [def-pc-relative-effective-cartier], a relative effective Cartier divisor has flat structure morphism to Spec(A). Thus Z(s) → Spec(A) is flat.",
+   "uses": [
+    "def-pc-relative-effective-cartier"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-on-morphisms.tex",
+    "place": "More on Morphisms, Lemma 37.33.3 (Tag 0EX8), sentence after the application of Tag 062Y"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-zero-scheme-properties",
+  "lem-weil-pbc-proper-closed-image",
+  "lem-pc-nonzero-section-integral-cartier",
+  "lem-pc-recd-fibre-cartier-local",
+  "def-pc-relative-effective-cartier"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-on-morphisms.tex",
+  "place": "More on Morphisms, Lemma 37.33.3 (Tag 0EX8), with Divisors Lemma 31.19.9 (Tag 062Y)"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -59,12 +95,43 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sc-picard-locus-closed-valuation-triviality",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-abelian-varieties",
- "unit": "sk-prop-av-cube"
+ "unit": "sk-prop-av-cube",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-sc-valuation-zero-section-relative-cartier",
+  "worker": "stage1",
+  "summary": "Split the Tag 0EX8 fibre-Cartier paragraph. The proof uses local principality of a zero scheme, the existing integral-scheme nonzero-section Cartier lemma on the closed fibre, and a new statement-only node recording Tag 062Y(3); properness over the local valuation base supplies the specialization to the closed fibre.",
+  "blueprint": "Realizes thm-sc-theorem-of-cube proof clause 'after choosing a global generator, its nonzero restriction to the integral closed fibre makes the zero locus a relative effective Cartier divisor'.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-zero-scheme-properties",
+    "why": "The zero scheme's local principality is a generic zero-locus fact from the Picard zero-dictionary unit."
+   },
+   {
+    "node": "lem-pc-nonzero-section-integral-cartier",
+    "why": "The effective Cartier property of the nonzero closed-fibre section is the integral-scheme divisor lemma from the Jacobian unit."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-zero-scheme-properties",
+  "lem-pc-nonzero-section-integral-cartier",
+  "lem-pc-zero-scheme-properties",
+  "lem-pc-nonzero-section-integral-cartier"
+ ],
+ "reviewed": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-zsc0027",
+  "group": "J1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-zsc0027 (reviewer sub-agent of L); spot-checked: Checked step 1 against Tag 0EX8 final paragraph and Tag 062Y(3); new node lem-pc-recd-fibre-cartier-local is the local part (3), not a duplicate of lem-pc-recd-locally-principal (all-fibres) nor of lem-pc-zero-scheme-recd/lem-pc-cartier-criterion; citer 03198bf1b uses exactly this statement; tool_uses accepted (generic zero-scheme and integral-Cartier facts). FIX more, RETURN less: (E/C4) step 1 said the image of x is the generic point - false, f(x) is any point; rewritten: f(closure x) is closed nonempty so contains the closed point of local Spec(A). (C1, elementary) added Z(s)_0 = Z(s|_{X_0}) via the affine description in lem-pc-zero-scheme-properties(1), needed to apply lem-pc-nonzero-section-integral-cartier to the fibre. (D) made explicit that y in Z(s), x in U_y since x specializes to y, and that the U_y with X minus Z(s) cover X so the local conclusions glue.; 1 file(s) fixed by the reviewer"
+ }
 }

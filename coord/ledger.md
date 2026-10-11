@@ -3098,3 +3098,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 00:26 L: returned deliver/H1/lem-pc-derived-mayer-vietoris-functorial (reviewer RETURN: Reviewer R-mvf0025, head afddf232a. 1 (E, statement): the item defines delta_E from the sequence 0->I->j_{U*}I|_U+j_{V*})
 - 00:26 UTC L: returned: H1 derived-mayer-vietoris-functorial 2afcfc7fa (R-mvf0025: delta built from any K-injective though 08BV needs injective terms; h_*I' not a valid representative for non-flat h).
 - 00:27 L: returned deliver/H1/lem-sc-qcoh-complex-alternating-cech-derived-sections (reviewer RETURN: R-qcs0027, head 7d5d69945. 0 (D1, the re-push is not a repair): the committed node's proof is unchanged in substance fro)
+- 00:28 L: merged deliver/J1/lem-sc-valuation-zero-section-relative-cartier (reviewer FIX; first push; new nodes: 1)
