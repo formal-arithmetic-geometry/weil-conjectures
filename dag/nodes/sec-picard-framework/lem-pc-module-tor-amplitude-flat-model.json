@@ -146,5 +146,25 @@
   "group": "K1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-taf3134 (reviewer sub-agent of L); spot-checked: Statement vs Tag 0654 (Tor amplitude as H^i(M (x)^L N)=0 for all N, i outside [a,b]) OK; Step 1 bounded flat => K-flat via lem-pc-module-bounded-flat-kflat OK; Step 2 upper truncation, bounded-above flat replacement (one-point site, accepted generic tool), K-flat computes derived tensor, exactness in degree a-1 OK; new node lem-pc-module-flat-opcycles-tor-criterion checked true (Tor_1(coker,N) is a quotient of H^{a-1}(P(x)N) since P^a flat; Tor-flatness criterion) and is Stacks Tag 0653 lemma-last-one-flat, a real lemma; not a duplicate of lem-sc-affine-truncation-kernel-flat / -finite-locally-free (scheme, finite-free, localized special settings); no other tor-amplitude module node. FIX more, RETURN less: (1) C4 Step 3: def-sbc-standard-tstructure-derived-category describes K/tau_{<=a-1}K (nonzero term im d^{a-1} in degree a-1), not the cokernel truncation; rewrote Step 3 to define E with E^a=coker d^{a-1} and verify the quasi-isomorphism by direct cohomology computation (H^i(P)=0 for i<a from N=A), citing only the new criterion and def-weil-abstract-derived-category; (2) new node source corrected to Tag 0653 (more-algebra-lemma-last-one-flat).; 2 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.TorAmplitudeFlatModel",
+  "declaration": "DerivedCategory.module_torAmplitudeIn_iff_exists_flat_model",
+  "statement": "theorem module_torAmplitudeIn_iff_exists_flat_model {A : Type u} [CommRing A] [HasDerivedCategory.{w} (ModuleCat.{u} A)] (M : CochainComplex (ModuleCat.{u} A) ℤ) (a b : ℤ) (hab : a ≤ b) : torAmplitudeIn (ModuleCat.{u} A) a b (Q.obj M) ↔ ∃ P : CochainComplex (ModuleCat.{u} A) ℤ, (∀ i : ℤ, Module.Flat A (P.X i)) ∧ (∀ i : ℤ, i < a ∨ b < i → IsZero (P.X i)) ∧ Nonempty (Q.obj M ≅ Q.obj P)",
+  "branch": "sheaf-dag",
+  "by": "M1",
+  "date": "2026-10-11",
+  "existing": false,
+  "note": "Specialize C := ModuleCat.{u} A, K := DerivedCategory.Q.obj M. All structural hypotheses are provided by the standard ModuleCat instances and ModuleCat.hasFunctorialFlatResolution; HasDerivedCategory records only the chosen localization universe. ObjectProperty.flat equals Module.Flat by flat_iff_preservesFiniteLimits and Module.Flat.iff_preservesFiniteLimits_tensorLeft. IsStrictlyGE/LE mean zero terms below a/above b. Nonempty (Q.obj P ≅ Q.obj M) is equivalent to the requested isomorphism in the opposite orientation. The theorem covers all a,b, hence in particular a ≤ b. Rings are commutative with 1 by the cited Stacks convention.",
+  "file": "lean/Sheaf/Algebra/Homology/TorAmplitudeFlatModel.lean",
+  "fixed_by": "R-taf1249"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-taf1249",
+  "group": "M1",
+  "result": "fix",
+  "note": "A:Type u CommRing; M:CochainComplex (ModuleCat A) ℤ; a b, a≤b; torAmplitudeIn (Stacks 0651, derived tensor vs every N:ModuleCat A, IsGE a ∧ IsLE b); ∃P, Module.Flat A (P.X i) ∀i, IsZero P.X i for i∉[a,b], Nonempty (Q.obj M ≅ Q.obj P); proved equivalent to generic source theorem in sandbox"
  }
 }
