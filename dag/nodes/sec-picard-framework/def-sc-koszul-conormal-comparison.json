@@ -1,0 +1,106 @@
+{
+ "id": "def-sc-koszul-conormal-comparison",
+ "kind": "definition",
+ "title": "Determinant-normalized Koszul conormal comparison",
+ "status": "split",
+ "statement": "Let $A$ be a commutative ring, $I\\subset A$ an ideal, $r\\geq0$ and $f_1,\\ldots,f_r$ generators of $I$. Put $B=A/I$, $C=I/I^2$, $N=\\operatorname{Hom}_B(C,B)$ and $D=\\bigwedge_B^rN$, using exterior powers [def-weil-pbc-exterior-algebra]. Let $E=A^{\\oplus r}$, let $c_f:E\\to C$ send $e_i$ to the class of $f_i$, and let $L^\\bullet$ be the total dual Koszul complex [def-sc-koszul-dual-complex]. Regard $D$ as an $A$-module by restriction of scalars. A morphism of cochain complexes $\\phi:L^\\bullet\\to D[-r]$ is a determinant-normalized conormal comparison if, for every $x\\in\\operatorname{Hom}_A(K_r,A)$ and $v_1,\\ldots,v_r\\in E$, the determinant pairing satisfies $\\langle\\phi^r(x),c_f(v_1)\\wedge\\cdots\\wedge c_f(v_r)\\rangle=(-1)^{r(r-1)/2}\\overline{x(v_1\\wedge\\cdots\\wedge v_r)}\\in B$. The pairing is the canonical map $\\bigwedge_B^rN\\to\\operatorname{Hom}_B(\\bigwedge_B^rC,B)$, with value on decomposable tensors equal to the determinant of their evaluations. The sign follows Stacks' ordered contraction convention: the composition $\\delta_1\\circ\\cdots\\circ\\delta_r$ evaluates to $(-1)^{r(r-1)/2}$ on the ordered top wedge.",
+ "stmt_deps": [
+  "def-weil-pbc-exterior-algebra",
+  "def-sc-koszul-dual-complex"
+ ],
+ "source": {
+  "document": "literature/stacks-project/duality.tex",
+  "place": "Tag 0BQZ, lemma-regular-immersion-ext, local Koszul-complex computation"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "canonical Koszul dual comparison conormal determinant pairing",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "canonical Koszul dual comparison conormal determinant pairing",
+   "results": "8 hits: exteriorPower.pairingDual_ιMulti_ιMulti, exteriorPower.pairingDual, Algebra.PreSubmersivePresentation.cotangentComplexAux, KaehlerDifferential.endEquivAuxEquiv, KaehlerDifferential.endEquiv, Algebra.Presentation.differentials.comm₂₃, KaehlerDifferential.quotKerTotalEquiv, Algebra.Presentation.differentials.comm₂₃'; no exact match for this notion.",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "koszul.*conormal|conormal.*koszul|koszulComparison",
+   "results": "0 hits: ; no exact match for this notion.",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sc-koszul-regular-sequence-dual-complex",
+  "date": "2026-10-11",
+  "group": "E1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "proof of the diagonal Koszul calculation: the Koszul-complex computation of the derived sheaf Hom; Determinant-normalized Koszul conormal comparison",
+   "via": [
+    "lem-sc-koszul-regular-sequence-dual-complex",
+    "lem-sc-koszul-regular-immersion-derived-hom",
+    "lem-sc-smooth-proper-diagonal-koszul-dual",
+    "lem-sc-smooth-proper-relative-dualizing-general",
+    "lem-sc-smooth-proper-curve-dualizing",
+    "lem-sc-finite-duality-trace"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "module": "Sheaf.RingTheory.KoszulConormalComparison",
+  "declaration": "ExteriorAlgebra.IsKoszulConormalComparison",
+  "declarations": [
+   "ExteriorAlgebra.koszulNormalDeterminant",
+   "ExteriorAlgebra.koszulConormalVector",
+   "ExteriorAlgebra.koszulComparisonValue",
+   "ExteriorAlgebra.IsKoszulConormalComparison"
+  ],
+  "file": "lean/Sheaf/RingTheory/KoszulConormalComparison.lean",
+  "statement": "def IsKoszulConormalComparison (A : Type uC) [CommRing A] (I : Ideal A) (r : ℕ) (f : Fin r → A) (hf : Ideal.span (Set.range f) = I) (φ : koszulDualComplex A r f ⟶ (HomologicalComplex.single (ModuleCat A) (ComplexShape.up ℕ) r).obj (koszulNormalDeterminant A I r)) : Prop",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-kdc",
+  "group": "E1",
+  "result": "fix",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-kdc",
+  "group": "E1",
+  "result": "fix",
+  "note": "A comm ring, f:Fin r->A IsKoszulRegular, I=span f, B=A/I, C=I.Cotangent, N=Dual, D=wedge^r N restricted; exists-unique determinant-normalized quasi-iso Hom(K,A)->D[r] (any sign gives a cochain map: x∘d_r(top) in I); H^i=0 i≠r over Z; H^r≅D as B-modules tied to φ; Ext^r iso chosen per I before f, tied on every roof; change of generators via g∘t=f; localization square. New defs: no landed dual Koszul (shiftedKoszulComplex is K itself in degrees ≤0); dual sign matches Mathlib HomComplex δ. FIX: derived iso was bare Nonempty, now IsIso (Q.map (extendMap φ embeddingUpNat))"
+ }
+}

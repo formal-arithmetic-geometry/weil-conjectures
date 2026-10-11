@@ -21,7 +21,9 @@
  },
  "stmt_deps": [
   "def-weil-pbc-koszul-regular-sequence",
-  "def-weil-pbc-koszul-complex"
+  "def-weil-pbc-koszul-complex",
+  "def-sc-koszul-dual-complex",
+  "def-sc-koszul-conormal-comparison"
  ],
  "proof": [
   {
@@ -138,5 +140,31 @@
   "group": "F1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-krd1952 (reviewer sub-agent of L); spot-checked: Statement vs Tag 0BQZ: shift [-r], cohomology only in degree r, H^r=wedge^r N; consistent with citing lem-sc-koszul-regular-immersion-derived-hom (i_*(wedge^r N_i[-r])). Koszul complex and Koszul-regularity cited from def-weil-pbc-koszul-complex / def-weil-pbc-koszul-regular-sequence, not restated. Leaf exteriorPower.pairingDual read at Pairing.lean:64-74, exact; not in slopmaster2 sorry-free. FIX more, RETURN less: (C4/E) Step 3 sign was wrong: delivery said the evaluation map commutes up to (-1)^r, but under Stacks 0BQZ conventions it commutes exactly for r odd and up to sign for r even (checked r=1: both sides A -(-f_1)-> A, identity map); rewrote the sentence with the convention and the (-1)^n degree-wise correction to an honest complex isomorphism.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.KoszulRegularSequenceDualComplex",
+  "declaration": "ExteriorAlgebra.exists_unique_koszul_conormal_comparison",
+  "declarations": [
+   "ExteriorAlgebra.exists_unique_koszul_conormal_comparison",
+   "ExteriorAlgebra.koszul_conormal_comparison_cohomology",
+   "ExteriorAlgebra.exists_koszul_quotient_augmentation",
+   "ExteriorAlgebra.exists_intrinsic_koszul_ext_determinant",
+   "ExteriorAlgebra.koszul_conormal_comparison_change_generators",
+   "ExteriorAlgebra.koszul_conormal_comparison_localization"
+  ],
+  "file": "lean/Sheaf/RingTheory/KoszulRegularSequenceDualComplex.lean",
+  "statement": "theorem exists_unique_koszul_conormal_comparison (A : Type uT) [CommRing A] (I : Ideal A) (r : ℕ) (f : Fin r → A) (hreg : RingTheory.Sequence.IsKoszulRegular f) (hf : Ideal.span (Set.range f) = I) : ∃! φ : koszulDualComplex A r f ⟶ (HomologicalComplex.single (ModuleCat A) (ComplexShape.up ℕ) r).obj (koszulNormalDeterminant A I r), IsKoszulConormalComparison A I r f hf φ ∧ QuasiIso φ",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-kdc",
+  "group": "E1",
+  "result": "fix",
+  "note": "A comm ring, f:Fin r->A IsKoszulRegular, I=span f, B=A/I, C=I.Cotangent, N=Dual, D=wedge^r N restricted; exists-unique determinant-normalized quasi-iso Hom(K,A)->D[r] (any sign gives a cochain map: x∘d_r(top) in I); H^i=0 i≠r over Z; H^r≅D as B-modules tied to φ; Ext^r iso chosen per I before f, tied on every roof; change of generators via g∘t=f; localization square. New defs: no landed dual Koszul (shiftedKoszulComplex is K itself in degrees ≤0); dual sign matches Mathlib HomComplex δ. FIX: derived iso was bare Nonempty, now IsIso (Q.map (extendMap φ embeddingUpNat))"
  }
 }
