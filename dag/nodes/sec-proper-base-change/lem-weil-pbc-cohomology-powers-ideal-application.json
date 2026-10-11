@@ -30,7 +30,8 @@
   "def-nagata-extended-ideal",
   "pqf-def-coherent",
   "def-weil-pbc-coherent-formal-module",
-  "pqf-def-cohomology"
+  "pqf-def-cohomology",
+  "def-weil-pbc-ideal-power-cohomology-system"
  ],
  "proof": [
   {
@@ -225,5 +226,25 @@
   "by": "L",
   "result": "accepted",
   "note": "8 steps following Cohomology of Schemes 02OA (2), (3): the Rees-module structure on M = (+) H^q(X, I^n F), finitely generated (new unsplit node for 02O8 with the products defined), with four compatibilities from functoriality; generation in bounded degree; the kernels form a graded submodule, finitely generated since the Rees algebra is Noetherian (new leaf, ReesAlgebra.lean:122 verified by L) and submodules of finite modules over Noetherian rings are finite; c = max(c_1, c_2); parts (a) for n >= c and n < c and (b). Statement unchanged; source lines corrected; the source's 'max(d'_i, d'_j)' misprint noted."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.CohomologyPowersIdealApplication",
+  "declaration": "AlgebraicGeometry.cohomology_powers_ideal_application",
+  "declarations": [
+   "AlgebraicGeometry.cohomology_powers_ideal_application"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/CohomologyPowersIdealApplication.lean",
+  "statement": "theorem cohomology_powers_ideal_application (A : Type v) [CommRing A] [IsNoetherianRing A] {X : Scheme.{v}} (I : Ideal A) (f : X ⟶ Spec (CommRingCat.of A)) [IsProper f] (F : X.Modules) (hF : RingedSpace.IsCoherent X.toRingedSpace F) (q : ℕ) : ∃ c : ℕ, (∀ (n m : ℕ), c ≤ n + m → LinearMap.range (idealPowerCohomologyMap f I F q (Nat.le_add_right n m)).hom ≤ I ^ (m - (c - n)) • (⊤ : Submodule A (idealPowerCohomology f I F q n))) ∧ (∀ n : ℕ, c ≤ n → LinearMap.ker (idealPowerCohomologyMap f I F q (Nat.zero_le n)).hom = LinearMap.ker (idealPowerCohomologyMap f I F q (Nat.sub_le n c)).hom)",
+  "branch": "sheaf-dag",
+  "by": "J1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-cpi",
+  "group": "J1",
+  "result": "fix"
  }
 }

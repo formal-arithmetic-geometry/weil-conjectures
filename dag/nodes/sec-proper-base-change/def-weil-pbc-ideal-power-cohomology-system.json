@@ -1,0 +1,112 @@
+{
+ "id": "def-weil-pbc-ideal-power-cohomology-system",
+ "kind": "definition",
+ "title": "Cohomology system of ideal powers",
+ "status": "split",
+ "statement": "Let $X$ be a scheme, $\\mathcal J\\subseteq\\mathcal O_X$ a quasi-coherent ideal and $\\mathcal F$ an $\\mathcal O_X$-module. Using the ideal products and powers of [def-weil-pbc-coherent-formal-module] (0), set $P_0=\\mathcal F$, $P_n=\\mathcal J^n\\mathcal F$ for $n\\ge1$, and let $\\iota_n:P_n\\to\\mathcal F$ be the inclusion (the identity for $n=0$). For $k\\ge n$, the canonical inclusion $P_k\\to P_n$ is the unique map whose composite with $\\iota_n$ is $\\iota_k$. For a commutative ring $A$, an ideal $I\\subseteq A$ and $f:X\\to\\operatorname{Spec}A$, take $\\mathcal J=I\\mathcal O_X$, the extension [def-nagata-extended-ideal] of the ideal sheaf associated to $I$. For $q\\ge0$, define $M_n=H^q(X,P_n)$ using [pqf-def-cohomology], with scalars restricted from $\\Gamma(X,\\mathcal O_X)$ to $A$ along $f^\\sharp$. The transition map $\\mu_{k,n}:M_k\\to M_n$ is $H^q$ of the canonical inclusion $P_k\\to P_n$.",
+ "stmt_deps": [
+  "def-weil-pbc-coherent-formal-module",
+  "def-nagata-extended-ideal",
+  "pqf-def-cohomology"
+ ],
+ "source": {
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Lemma 02OA (lemma-cohomology-powers-ideal-application), setup of the statement and proof; https://stacks.math.columbia.edu/tag/02OA"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "canonical inclusion of powers of an ideal times a sheaf of modules",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "canonical transition maps on cohomology of powers of an ideal sheaf times a module",
+   "results": "Hits: localCohomology, AdicCompletion.transitionMap, Submodule.factorPowSucc, Submodule.factorPow, localCohomology.ofSelfLERadical, Ideal.powQuotSuccInclusion, localCohomology.idealPowersDiagram, Hausdorffification",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "idealModuleProduct|idealSheafPower|idealPowerModule|idealPowerCohomology",
+   "results": "No hits.",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-cohomology-powers-ideal-application",
+  "date": "2026-10-11",
+  "group": "J1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "Canonical ideal-power cohomology transition maps in the application of Stacks 02OA (2) and (3).",
+   "via": [
+    "lem-weil-pbc-cohomology-powers-ideal-application",
+    "lem-weil-pbc-ml-cohomology-powers-ideal",
+    "lem-weil-pbc-theorem-formal-functions",
+    "lem-weil-pbc-formal-systems-push-pull",
+    "prop-weil-pbc-grothendieck-existence",
+    "lem-weil-pbc-algebraize-finite-over-proper",
+    "lem-weil-pbc-finite-etale-lifting-complete",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.IdealPowerCohomology",
+  "declaration": "AlgebraicGeometry.idealPowerCohomologyMap",
+  "declarations": [
+   "AlgebraicGeometry.idealPowerModule",
+   "AlgebraicGeometry.idealPowerModuleι",
+   "AlgebraicGeometry.idealPowerModuleι_mono",
+   "AlgebraicGeometry.idealPowerModuleι_comp_cokernel_π",
+   "AlgebraicGeometry.idealPowerModuleInclusion",
+   "AlgebraicGeometry.idealPowerCohomology",
+   "AlgebraicGeometry.idealPowerCohomologyMap"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/IdealPowerCohomology.lean",
+  "statement": "def idealPowerCohomologyMap {A : Type u} [CommRing A] {X : Scheme.{u}} (f : X ⟶ Spec (CommRingCat.of A)) (I : Ideal A) (F : X.Modules) (q : ℕ) {k n : ℕ} (h : n ≤ k) : idealPowerCohomology f I F q k ⟶ idealPowerCohomology f I F q n",
+  "branch": "sheaf-dag",
+  "by": "J1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-cpi"
+ },
+ "reviewed": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-cpi",
+  "group": "J1",
+  "result": "fix",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-cpi",
+  "group": "J1",
+  "result": "fix"
+ }
+}
