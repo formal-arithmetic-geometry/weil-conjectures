@@ -1,11 +1,11 @@
 # Work queue
 
-463 items; claim with `tools/claim.py next <group> [--stage N]`.
+458 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (463)
+## Stage 2: nodes to state (458)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -82,16 +82,11 @@
 | `lem-weil-pbc-pair-henselization` | 1 | state |
 | `lem-weil-pbc-popescu-desingularize-lifting-apply` | 1 | state |
 | `lem-weil-pbc-popescu-enlarge-solution-modulo` | 1 | state |
-| `lem-weil-pbc-popescu-lift-nilpotent` | 1 | state |
-| `lem-weil-pbc-popescu-lift-solution` | 1 | state |
 | `lem-weil-pbc-popescu-lifting` | 1 | state |
 | `lem-weil-pbc-popescu-reduce-to-field` | 1 | state |
 | `lem-weil-pbc-popescu-solution-modulo-choose` | 1 | state |
 | `lem-weil-pbc-power-in-base-after-localization` | 1 | state |
-| `lem-weil-pbc-power-series-field-cohen-fs-adic` | 1 | state |
 | `lem-weil-pbc-power-series-field-cohen-regular-complete` | 1 | state |
-| `lem-weil-pbc-power-series-normal-domain` | 1 | state |
-| `lem-weil-pbc-power-series-onto-completion` | 1 | state |
 | `lem-weil-pbc-power-series-parameter-quotient` | 1 | state |
 | `lem-weil-pbc-power-series-quotient-variables` | 1 | state |
 | `lem-weil-pbc-power-series-ring-subfields` | 1 | state |
