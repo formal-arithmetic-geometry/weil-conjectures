@@ -1,8 +1,8 @@
 # Work queue
 
-867 items; claim with `tools/claim.py next <group> [--stage N]`.
+869 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (52)
+## Stage 1: nodes to split (53)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -12,9 +12,10 @@
 | `lem-pc-ring-pseudo-coherent-localization-glue` | 3016 | none |
 | `lem-pc-ring-pseudo-coherent-distinguished-triangle` | 3018 | none |
 | `lem-sc-module-extension-by-zero-stalk-maps` | 3018 | none |
-| `lem-pc-tor-independent-projective-complex-tensor` | 3022 | none |
 | `lem-sc-affine-koszul-hom-alternating-cech` | 3022 | none |
 | `lem-sc-qcoh-complex-alternating-cech-derived-sections` | 3022 | none |
+| `lem-pc-finite-projective-tor-acyclic` | 3023 | none |
+| `lem-pc-termwise-tor-acyclic-derived-tensor` | 3023 | none |
 | `lem-sc-perfect-hypercohomology-gap` | 3023 | none |
 | `lem-pc-genus-agrees-sc` | 4007 | rests_on_sorry |
 | `prop-av-tate-rank` | 4008 | rests_on_sorry |
@@ -59,7 +60,7 @@
 | `lem-wf-mixed-commutator-tangent` | - | none |
 | `lem-pur-site-restriction-module-adjunction-exact` | - | none |
 
-## Stage 2: nodes to state (815)
+## Stage 2: nodes to state (816)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -217,6 +218,7 @@
 | `lem-pc-stalk-direct-sums` | 1 | state |
 | `lem-pc-stalk-tensor-complex` | 1 | state |
 | `lem-pc-tensor-mapping-cone-iso` | 1 | state |
+| `lem-pc-tor-independent-projective-complex-tensor` | 1 | state |
 | `lem-pc-tower-enough-injectives` | 1 | state |
 | `lem-pc-tower-injective-embedding` | 1 | state |
 | `lem-pc-tower-limit-left-exact` | 1 | state |
@@ -879,7 +881,7 @@
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 | `def-nagata-fixed-base-separated-stage` | 6 | state |
 
-Not open yet: 1717 nodes that wait for a statement dependency, 93 nodes that wait for stage 1.
+Not open yet: 1717 nodes that wait for a statement dependency, 94 nodes that wait for stage 1.
 
 ## Stage 3: modules to prove (0)
 
