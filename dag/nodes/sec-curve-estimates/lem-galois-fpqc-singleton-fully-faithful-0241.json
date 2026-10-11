@@ -126,5 +126,29 @@
   "group": "H1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-sff (reviewer sub-agent of L); spot-checked: Source: Stacks descent.tex Lemma 0241 (lemma-fully-faithful, line 8561) in the situation of lemma-pullback with S=S' and {f:X'->X} fpqc; the item statement (unchanged) agrees hypothesis by hypothesis (singleton fpqc cover r, X' over S via a.r, DD and pullback as in Remark remark-easier). The route (descend beta by lem-galois-fpqc-morphisms-descend over base X, then check the descent-data equation after pullback) differs from Stacks' pointwise claim on V' x_V V' but is sound. Step 2: lem-galois-fpqc-morphisms-descend with base X, cover {r}, U=V, W=W gives the bijection onto overlap-compatible beta (statement read). FIX more, RETURN less: (1) Step 1 as delivered worked on the wrong overlap T x_S T and did not justify the overlap equation over T x_X T (C1/C4); rewrote it to pull the compatibility of beta back along j:T x_X T->T x_S T, with (r x r).j = Delta.rho, and added the statement-only node lem-galois-descent-datum-diagonal-identity (Delta^*phi = id_V for a descent datum; Stacks descent.tex line 8143 after Definition 023V) which Step 1 now cites; tested on X=Y: phi=phi.phi by the cocycle forces phi=id. (2) Step 3 pulled back along r x r: T x_S T -> X x_S X while lem-galois-fpqc-covering-base-change only gives base changes, not composites (C4); rewrote it to factor r x r = (id_X x r).(r x id_T), each a base change of r (cover fpqc by the base-change node), and apply the injectivity clause of lem-galois-fpqc-morphisms-descend twice; faithfulness via the same injectivity with base X. proof_deps recomputed as the union of uses (adds lem-galois-descent-datum-diagonal-identity); split_report.summary notes the repair. Small cases: r=id_X gives the identity functor; X empty trivial. No Mathlib leaf; no tool_uses (all cited nodes in unit sk-prop-h2 or definitions). Report's mention of citations.json refers to a file not in the delivery (harmless). Start Sat Oct 10 03:34:08 PM UTC 2026, end Sat Oct 10 03:35:50 PM UTC 2026.; 2 file(s) fixed by the reviewer; 1 statement node(s) added by the reviewer (FIX more, RETURN less)"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FpqcSingletonFullyFaithful",
+  "declaration": "CategoryTheory.fpqc_singleton_pullback_fullyFaithful",
+  "declarations": [
+   "CategoryTheory.Over.DescentDataCategory",
+   "CategoryTheory.Over.DescentDataCategory.Hom",
+   "CategoryTheory.fpqc_singleton_pullback_fullyFaithful"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/FpqcSingletonFullyFaithful.lean",
+  "statement": "theorem fpqc_singleton_pullback_fullyFaithful {S X X' : Scheme.{u}} (a : X ⟶ S) (r : X' ⟶ X) (hr : Presieve.singleton r ∈ Scheme.fpqcPrecoverage X) : ∃ (F : Over.DescentDataCategory a ⥤ Over.DescentDataCategory (r ≫ a)) (q : ∀ A : Over.DescentDataCategory a, (F.obj A).V.left ⟶ A.V.left), Nonempty F.FullyFaithful ∧ (∀ A, ∃ hq : q A ≫ A.V.hom = (F.obj A).V.hom ≫ r, IsPullback (q A) (F.obj A).V.hom A.V.hom r ∧ Over.DescentDatum.IsBaseChange rfl hq A.datum (F.obj A).datum) ∧ ∀ A B (f : A ⟶ B), (F.map f).hom.left ≫ q B = q A ≫ f.hom.left",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-sff0724"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-sff0724",
+  "group": "F1",
+  "result": "fix",
+  "note": "Stacks descent.tex 0241 (S=S', {r:X'->X} fpqc): S,X,X',a,r binders; singleton r in Scheme.fpqcPrecoverage X (sibling convention); codomain DD for r>>a; DescentDataCategory objects = (V, Over.DescentDatum a V), Hom.commutes = transport form of psi.pr0*g = pr1*g.phi (023V(3)); F is the pullback functor via q/IsPullback/IsBaseChange rfl hq/map equation (determines F up to iso, so the exists is equivalent); Nonempty F.FullyFaithful; universe u for schemes and test schemes; proof sorry; docstring follows node steps 1-3"
  }
 }
