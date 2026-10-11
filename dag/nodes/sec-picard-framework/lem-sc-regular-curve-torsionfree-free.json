@@ -146,5 +146,24 @@
   "group": "E1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-rtf (reviewer sub-agent of L); spot-checked: Source: Stacks Divisors Tag 0CC4 (divisors.tex:1798, divisors-lemma-torsion-free-over-regular-dim-1): integral, regular, dim <= 1, coherent; torsion free iff finite locally free; the item keeps these hypotheses, the constant-rank/generic-rank clause is the elementary addition. Steps: (1) def-weil-regular-scheme (locally Noetherian, regular local rings), dim O_{X,x} <= dim X, dim 0 regular local = field, lem-sc-regular-dim1-dvr for dim 1, coherence for finite stalks; (2) lem-sc-dvr-fg-torsionfree-free (true: More on Algebra 0AUW(3), DVR is a PID) and lem-sc-coherent-free-stalks-locally-free (true: Algebra 0GWM on affines, coherent = finitely presented on locally Noetherian; Stacks uses 00NX); (3) converse elementary over the domain stalks; (4) rank locally constant on connected X, generic stalk k(X)^r with k(X)=O_{X,eta} from def-sc-function-field. Small cases: field, DVR with R/(t) (excluded), R^2, F=0 (rank 0). No sorry-free slopmaster2 declaration on torsion free (grep), blueprint search 'torsion free' gives no duplicate. FIX more, RETURN less: C1/B3 'torsion-freeness is stalkwise' and the notion of torsion-free sheaf had no node: cited existing lem-sc-torsion-subsheaf-quotient (stalk of F_tors = torsion submodule of F_x) in the statement, steps 2 and 3, stmt_deps and proof_deps. Fixes: lem-sc-regular-curve-torsionfree-free: statement: [def-weil-regular-scheme] cited in text (already in stmt_deps), torsion-free glossed as F_tors=0 with [lem-sc-torsion-subsheaf-quotient] (no change of mathematics); lem-sc-dvr-fg-torsionfree-free: source: algebra.tex/0CC4 -> more-algebra.tex Tag 0AUW; lem-sc-coherent-free-stalks-locally-free: source: modules.tex -> algebra.tex Tag 0GWM (label is algebra-lemma-...), statement/stmt_deps: locally Noetherian cited [pqf-def-locnoeth]. Start 2026-10-10 Sat Oct 10 03:05:57 PM UTC 2026, end Sat Oct 10 03:07:34 PM UTC 2026.; 3 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.RegularCurveTorsionfreeFree",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.regular_curve_torsionfree_iff_finiteLocallyFree",
+  "file": "lean/Sheaf/AlgebraicGeometry/RegularCurveTorsionfreeFree.lean",
+  "statement": "theorem regular_curve_torsionfree_iff_finiteLocallyFree (X : Scheme.{u}) [IsIntegral X] (hregular : ∀ x : X, ∃ U : X.affineOpens, x ∈ U.1 ∧ IsRegularRing Γ(X, U)) (hdim : topologicalKrullDim X ≤ 1) (F : X.Modules) (hcoherent : RingedSpace.IsCoherent X.toRingedSpace F) : ((∀ (x : X) (s : F.presheaf.stalk x) (a : X.presheaf.stalk x), a ≠ 0 → a • s = 0 → s = 0) ↔ F.IsFiniteLocallyFree) ∧ (F.IsFiniteLocallyFree → F.IsFiniteLocallyFreeOfRank (Module.finrank X.functionField (F.presheaf.stalk (genericPoint X))))",
+  "branch": "sheaf-dag",
+  "by": "J1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-rct1256"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-rct1256",
+  "group": "J1",
+  "result": "fix",
+  "note": "X integral [IsIntegral X]; regular = REGULAR SCHEME affine-nbhd IsRegularRing Γ(X,U); dim<=1 topologicalKrullDim X ≤ 1 (ComponentIntersectionsFinite form); coherent RingedSpace.IsCoherent; torsion-free FIXED from IsZero (kernel toSkyscraper) to the stalkwise form of lem-sc-torsion-subsheaf-quotient's quotient clause (F_tors stalks = torsion submodules, so F_tors=0 iff stalks torsion-free); ↔ SheafOfModules.IsFiniteLocallyFree (#check); rank clause IsFiniteLocallyFreeOfRank (finrank k(X) F_η) under local freeness; edge cases field, DVR R/(t), F=0"
  }
 }

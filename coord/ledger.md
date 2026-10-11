@@ -4629,3 +4629,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 12:30 L: merged deliver/F1/lem-pc-unbounded-derived-functor-cohomological-bound (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.UnboundedDerivedFunctorCohomologicalBound AlgebraicGeometry.isZero_homology_rightDerivedFunctor_of_cohomological_bound)
 - 12:31 L: merged deliver/E1/lem-weil-pbc-normalization-in-residue-field-extension (stage 2; reviewer FIX; first push; Sheaf.Paper.WeilPbcNormalizationInResidueFieldExtension normalization_in_finite_residue_field_extension)
 - 12:31 L: merged deliver/G1/lem-weil-pbc-p-basis-exists (stage 2; reviewer FIX; first push; Sheaf.FieldTheory.ExistsPBasis Field.exists_p_basis)
+- 12:32 L: merged deliver/J1/lem-sc-regular-curve-torsionfree-free (stage 2; reviewer FIX; first push; Sheaf.AlgebraicGeometry.RegularCurveTorsionfreeFree AlgebraicGeometry.Scheme.Modules.regular_curve_torsionfree_iff_finiteLocallyFree)
