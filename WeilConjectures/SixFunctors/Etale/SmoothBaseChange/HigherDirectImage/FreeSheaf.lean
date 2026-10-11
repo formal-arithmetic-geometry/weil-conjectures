@@ -8,6 +8,8 @@ module
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.HigherDirectImage.CohomologyPresheaf
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusExact
 public import WeilConjectures.SixFunctors.Etale.LowerShriek.EtaleMap
+public import WeilConjectures.AlgebraicGeometry.Sites.CohomologyFilteredColimitModule
+public import WeilConjectures.CategoryTheory.DerivedCategory.ExtPlus
 
 /-!
 # Free sheaves under extension by zero and pullback, and cohomology
@@ -196,8 +198,14 @@ theorem Etale.preservesColimitsOfShape_shiftedHomFunctor_freeSheaf_finalObject (
     [CompactSpace Z] [QuasiSeparatedSpace Z] (q : ℤ) (J : Type u) [SmallCategory J]
     [IsFiltered J] :
     PreservesColimitsOfShape J
-      (Etale.shiftedHomFunctor Λ ((Etale.freeSheaf Λ Z).obj (Etale.finalObject Z)) q) :=
-  sorry
+      (Etale.shiftedHomFunctor Λ ((Etale.freeSheaf Λ Z).obj (Etale.finalObject Z)) q) := by
+  have := preservesFilteredColimitsOfSize_shrink.{u, u, u + 1, u + 1}
+    (CategoryTheory.forget AddCommGrpCat.{u + 1})
+  have : CompactSpace (Etale.finalObject Z).left := ‹_›
+  have : QuasiSeparatedSpace (Etale.finalObject Z).left := ‹_›
+  exact DerivedCategory.Plus.preservesColimitsOfShape_shiftedHom _ q fun n _ _ hc ↦
+    Scheme.commutesWithColimit_of_isFiltered_moduleCat (T := Etale.finalObject Z) _
+      (Etale.freeSheafHomEquiv Λ _) (fun f g ↦ Etale.freeSheafHomEquiv_comp Λ _ f g) n hc
 
 /-- An isomorphism `A ≅ A'` identifies the functors `N ↦ Hom(A[0], N[0]⟦q⟧)` and
 `N ↦ Hom(A'[0], N[0]⟦q⟧)`. -/
