@@ -1,8 +1,8 @@
 # Work queue
 
-861 items; claim with `tools/claim.py next <group> [--stage N]`.
+863 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (22)
+## Stage 1: nodes to split (23)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -27,9 +27,10 @@
 | `lem-sc-global-functions` | - | rests_on_sorry |
 | `lem-pur-kinjective-homotopy-limit-vanishing` | - | none |
 | `lem-pur-left-derived-exact-when-defined` | - | none |
-| `lem-pc-finite-flat-restriction-projective` | - | none |
+| `lem-pc-module-finite-presentation-transitive` | - | none |
+| `lem-pc-module-flat-transitive` | - | none |
 
-## Stage 2: nodes to state (839)
+## Stage 2: nodes to state (840)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -148,6 +149,7 @@
 | `lem-pc-derived-total-resolution-quasi-iso` | 1 | state |
 | `lem-pc-field-extension-fpqc-cover` | 1 | state |
 | `lem-pc-finite-affine-fibre-sections` | 1 | state |
+| `lem-pc-finite-flat-restriction-projective` | 1 | state |
 | `lem-pc-finite-projective-tor-acyclic` | 1 | state |
 | `lem-pc-flat-pullback-effective-cartier-ideal` | 1 | state |
 | `lem-pc-flat-tensor-complex-cohom` | 1 | state |
@@ -873,7 +875,7 @@
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 | `def-nagata-fixed-base-separated-stage` | 6 | state |
 
-Not open yet: 1755 nodes that wait for a statement dependency, 63 nodes that wait for stage 1.
+Not open yet: 1755 nodes that wait for a statement dependency, 64 nodes that wait for stage 1.
 
 ## Stage 3: modules to prove (0)
 
