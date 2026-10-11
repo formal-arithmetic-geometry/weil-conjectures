@@ -136,6 +136,19 @@ theorem isAdicLisseSheaf_homology_rightDerivedFunctor_lowerStar_of_smooth_of_isP
       ((f)_*ᵃ[l].rightDerivedFunctor.obj ((DerivedCategory.singleFunctor _ 0).obj F))) :=
   sorry
 
+/-- **Local constancy over a point.** Over an algebraically closed field `K` of characteristic
+`≠ ℓ`, the higher direct images of a lisse `ℓ`-adic sheaf along any quasi-compact quasi-separated
+morphism of finite type `f : X ⟶ Spec K` are lisse: they are constructible by the finiteness
+theorem, and a constructible sheaf on the spectrum of a field is lisse. This is the case of the
+point of `isAdicLisseSheaf_homology_rightDerivedFunctor_lowerStar_of_smooth_of_isProper`. -/
+theorem isAdicLisseSheaf_homology_rightDerivedFunctor_lowerStar_of_isField
+    (f : X ⟶ Spec (.of K)) (hK : ringChar K ≠ l) [QuasiCompact f] [QuasiSeparated f]
+    [LocallyOfFiniteType f] {F : AdicSheaf l X} (hF : IsAdicLisseSheaf F) (n : ℤ) :
+    IsAdicLisseSheaf ((DerivedCategory.homologyFunctor _ n).obj
+      ((f)_*ᵃ[l].rightDerivedFunctor.obj ((DerivedCategory.singleFunctor _ 0).obj F))) :=
+  (isAdicConstructibleSheaf_homology_rightDerivedFunctor_lowerStar (𝟙 _) f hK
+    hF.isAdicConstructibleSheaf n).isAdicLisseSheaf_of_isField
+
 end ProEtale
 
 variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime] [Fact (ringChar k₀ ≠ l)]
