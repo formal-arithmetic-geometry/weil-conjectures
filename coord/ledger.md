@@ -4081,3 +4081,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 09:46 L: merged deliver/H1/lem-weil-pbc-dimension-supremum-local-dimensions (stage 2; reviewer PASS; first push; Sheaf.Topology.DimensionSupremumLocalDimensions topologicalKrullDim_eq_iSup_topologicalKrullDimAt)
 - 09:47 L: merged deliver/J1/lem-weil-pbc-dimension-zero-local-strictly-henselian (stage 2; reviewer FIX; first push; Sheaf.RingTheory.StrictlyHenselianOfDimensionZero isStrictlyHenselianLocalRing_of_ringKrullDim_eq_zero)
 - 09:47 L: merged deliver/F1/lem-weil-pbc-derived-functor-truncation-iso (stage 2; reviewer PASS; first push; Sheaf.CategoryTheory.RightDerivedFunctorTruncationIso CategoryTheory.Functor.isIso_homologyFunctor_rightDerivedFunctorPlus_map)
+- 09:47 L: merged deliver/K1/lem-weil-pbc-derived-square-iso-commshift (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.DerivedSquareIsoCommShift AlgebraicGeometry.derivedSquareIso_commShift)
