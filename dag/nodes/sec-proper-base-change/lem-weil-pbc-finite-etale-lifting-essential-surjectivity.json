@@ -144,5 +144,24 @@
   "group": "C",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of C"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FiniteEtaleLiftingEssentialSurjectivity",
+  "declaration": "AlgebraicGeometry.Scheme.essSurj_pullback_finiteEtale_of_henselianRing",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteEtaleLiftingEssentialSurjectivity.lean",
+  "statement": "theorem Scheme.essSurj_pullback_finiteEtale_of_henselianRing {A : Type u} [CommRing A] (I : Ideal A) [HenselianRing A I] {Y : Scheme.{u}} (f : Y ⟶ Spec (.of A)) [IsProper f] (V : (@IsFinite ⊓ @Etale : MorphismProperty Scheme.{u}).Over ⊤ (pullback f (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk I))))) : ∃ U : (@IsFinite ⊓ @Etale : MorphismProperty Scheme.{u}).Over ⊤ Y, Nonempty (Over.mk (pullback.snd U.hom (pullback.fst f (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk I))))) ≅ Over.mk V.hom)",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-fes1015"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-fes1015",
+  "group": "E1",
+  "result": "fix",
+  "note": "HenselianRing A I; IsProper f; Y0 = pullback f (Spec.map Quotient.mk I) with pullback.fst as in K1 bf4691187; FEt as (IsFinite ⊓ Etale).Over ⊤; ∀V ∃U iso in Over Y0 of pullback.snd U.hom (pullback.fst f _); no extra hypotheses, single universe u"
  }
 }
