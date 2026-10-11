@@ -184,5 +184,24 @@
  "lean_candidates": {
   "branch": "slopmaster2",
   "note": "AlgebraicGeometry.Scheme.Modules.isFreeGenerator_app_one_of_le (Modules/ClearDenominators.lean:220) with basicOpen_coeff_eq (:196), sorry-free: a section is a free generator off the support of its zero locus; the identification of that complement with Y_s = {s_y ∉ m_y L_y} is step 2 of this node, not a declaration; uses SheafOfModules.IsInvertible rather than Scheme.Modules.IsInvertible"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.NonvanishingSectionTrivializes",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.nonvanishing_section_trivializes",
+  "file": "lean/Sheaf/Paper/NonvanishingSectionTrivializes.lean",
+  "statement": "theorem nonvanishing_section_trivializes (Y : Scheme.{u}) (L : Y.Modules) [L.IsInvertible] (s : Γ(L, ⊤)) : ∃ U : Y.Opens, (U : Set Y) = nonvanishingLocus L s ∧ IsIso ((SheafOfModules.overFunctor Y.ringCatSheaf U).map (homOfGlobalSection L s)) ∧ ∀ (V : Y.Opens), V ≤ U → ∀ (t : Γ(L, V)), ∃! a : Γ(Y, V), t = a • L.presheaf.map (homOfLE (le_top : V ≤ ⊤)).op s",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-nst1202"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-nst1202",
+  "group": "C1",
+  "result": "fix",
+  "note": "Y scheme, L : Y.Modules [IsInvertible], s : Γ(L,⊤); Y_s = nonvanishingLocus (germ ∉ m_y L_y; delivered germ ≠ 0 was the support, false); a ↦ a s| as IsIso of overFunctor.map (homOfGlobalSection L s) (delivered bare Nonempty iso); unique t/s on V ≤ U"
  }
 }
