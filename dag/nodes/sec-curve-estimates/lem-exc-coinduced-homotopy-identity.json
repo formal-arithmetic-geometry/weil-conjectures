@@ -112,5 +112,23 @@
   "group": "G1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-chi (reviewer sub-agent of L); spot-checked: Source: Stacks Tag 0DVG (etale-cohomology-section-continuous-group-cohomology); the item statement is unchanged, and its differentials, coinduced action (h.f)(x)=f(xh) and h_n formula agree with the cited nodes lem-exc-coinduced-discrete-embedding (action) and lem-exc-coinduced-homotopy-continuous (h_n is an A-linear map into continuous cochains), which carry exactly what step 1 takes from them. I recomputed by hand: d^{n-1}(h_nF)(g)(x)=F(xg_1,g_2..)(1)+sum_{j=1}^{n-1}(-1)^jF(x,..,g_jg_{j+1},..)(1)+(-1)^nF(x,g_1..g_{n-1})(1); h_{n+1}(d^nF)(g)(x)=F(g)(x)-F(xg_1,..)(1)+sum_{j=2}^n(-1)^jF(x,g_1,..,g_{j-1}g_j,..)(1)+(-1)^{n+1}F(x,g_1..g_{n-1})(1); the sum is F(g)(x). Small case n=1: d^0h_1F(g_1)(x)=F(xg_1)(1)-F(x)(1), h_2d^1F(g_1)(x)=F(g_1)(x)-F(xg_1)(1)+F(x)(1), so the sum is F(g_1)(x). Steps 2-3 are elementary substitution and cancellation (C2). No new nodes, no Mathlib leaf, tool_uses empty. Fix: dag/nodes/sec-curve-estimates/lem-exc-coinduced-homotopy-identity.json: proof[0].text: the sign of the final term of d^{n-1}h_nF was the typo (-1)^{n-1}; corrected to (-1)^n (needed for the endpoint cancellation in step 3 against step 2's (-1)^{n+1}). Times: start Sat Oct 10 03:17:09 PM UTC 2026, end Sat Oct 10 03:17:43 PM UTC 2026.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.RepresentationTheory.CoinducedHomotopyIdentity",
+  "declaration": "Rep.coinduced_homotopy_identity",
+  "file": "lean/Sheaf/RepresentationTheory/CoinducedHomotopyIdentity.lean",
+  "statement": "theorem coinduced_homotopy_identity (G : Type u) [TopologicalSpace G] [Group G] [IsTopologicalGroup G] [CompactSpace G] [T2Space G] [TotallyDisconnectedSpace G] (A : Type v) [Ring A] [Finite A] (M : DiscreteContinuousRep.{v, u, w} A G) : ∃ (d : ∀ n : ℕ, LocallyConstant (Fin n → G) (LocallyConstant G M.obj.V) →ₗ[A] LocallyConstant (Fin (n + 1) → G) (LocallyConstant G M.obj.V)) (h : ∀ n : ℕ, LocallyConstant (Fin (n + 1) → G) (LocallyConstant G M.obj.V) →ₗ[A] LocallyConstant (Fin n → G) (LocallyConstant G M.obj.V)), (∀ (n : ℕ) (F : LocallyConstant (Fin n → G) (LocallyConstant G M.obj.V)) (g : Fin (n + 1) → G) (x : G), d n F g x = F (fun i ↦ g i.succ) (x * g 0) + ∑ j : Fin (n + 1), (-1 : ℤ) ^ (j.val + 1) • F (Fin.contractNth j (· * ·) g) x) ∧ (∀ (n : ℕ) (F : LocallyConstant (Fin (n + 1) → G) (LocallyConstant G M.obj.V)) (g : Fin n → G) (x : G), h n F g x = F (Fin.cons x g) 1) ∧ (∀ (n : ℕ) (F : LocallyConstant (Fin (n + 1) → G) (LocallyConstant G M.obj.V)), d n (h n F) + h (n + 1) (d (n + 1) F) = F)",
+  "by": "H1",
+  "date": "2026-10-11",
+  "existing": false,
+  "branch": "sheaf-dag"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-chi",
+  "group": "H1",
+  "result": "pass",
+  "note": "G profinite via compact/T2/totally-disconnected topological group, A finite ring, M : DiscreteContinuousRep; D(M) carrier LocallyConstant G M.obj.V as in homotopy-continuous dep; d formula matches node: leading term F(g_2..)(x*g_1) = (g_1.F)(x) with action f(xh), Fin.contractNth checked (j<n contracts entries j,j+1 with sign (-1)^(j+1), j=n drops last with (-1)^(n+1); n=0 gives g.v - v), same convention as landed continuousCochains_shortExact; h formula verbatim from exists_coinduced_continuous_contraction; identity at h n = h_{n+1} covers every degree >= 1; d,h uniquely determined by pointwise formulas"
  }
 }
