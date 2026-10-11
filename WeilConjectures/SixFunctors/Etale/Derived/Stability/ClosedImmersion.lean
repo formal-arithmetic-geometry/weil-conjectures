@@ -71,6 +71,43 @@ noncomputable def mapDerivedCategoryUpperStarRightDerivedLowerShriekIso {Z T : S
     Functor.mapDerivedCategoryNatIso (asIso (Etale.upperStarLowerStarAdjunction A i).counit) ≪≫
     Functor.mapDerivedCategoryIdIso _
 
+omit [HasSmallSiteSheafify A] [PreservesFiniteLimits (CategoryTheory.forget A)] in
+/-- Extension by zero along a closed immersion `i` preserves Tor amplitude: if the projection
+formula holds for `i` at `P` and `P` has Tor amplitude in `[a, b]`, so does `Ri_! P`, since
+`Ri_! P ⊗ᴸ G ≅ Ri_!(P ⊗ᴸ i^* G)` and `Ri_! = D(i_*)` is exact. -/
+lemma torAmplitudeIn_rightDerivedLowerShriek_of_isClosedImmersion [UpperStarPreservesFlat A]
+    [∀ Z : Scheme.{u}, Z.smallEtaleTopology.HasSheafCompose (CategoryTheory.forget A)]
+    {Z T : Scheme.{u}}
+    (i : Z ⟶ T) [IsClosedImmersion i] [HasCompactification i]
+    {a b : ℤ} {P : _root_.DerivedCategory (Sheaf Z.smallEtaleTopology A)}
+    (hPF : ∀ L, HasProjectionFormula A i P L) (hP : torAmplitudeIn A Z a b P) :
+    torAmplitudeIn A T a b ((R(i)_![A]).obj P) := fun G ↦ by
+  have : IsIso (((projectionMap A i).app P).app
+      ((_root_.DerivedCategory.singleFunctor _ 0).obj G)) :=
+    hPF ((_root_.DerivedCategory.singleFunctor _ 0).obj G)
+  -- `Ri_! (P ⊗ᴸ i^* G) ≅ Ri_! P ⊗ᴸ G` by the projection formula
+  let e : (R(i)_![A]).obj (((-⊗ᴸ-(Z)[A]).obj P).obj
+      ((_root_.DerivedCategory.singleFunctor _ 0).obj ((i)^*[A].obj G))) ≅
+        ((-⊗ᴸ-(T)[A]).obj ((R(i)_![A]).obj P)).obj
+          ((_root_.DerivedCategory.singleFunctor _ 0).obj G) :=
+    (R(i)_![A]).mapIso (((-⊗ᴸ-(Z)[A]).obj P).mapIso
+      ((singleFunctorCompLeftDerivedUpperStarIso A i).app G).symm) ≪≫
+      (asIso (((projectionMap A i).app P).app
+        ((_root_.DerivedCategory.singleFunctor _ 0).obj G))).symm
+  -- `Ri_! ≅ D(i_*)` is exact
+  let e' := (rightDerivedLowerShriekIsoRightDerivedLowerStar A i ≪≫
+    Etale.rightDerivedFunctorLowerStarIsoMapDerivedCategory (FC := FC) A i).app
+      (((-⊗ᴸ-(Z)[A]).obj P).obj
+        ((_root_.DerivedCategory.singleFunctor _ 0).obj ((i)^*[A].obj G)))
+  obtain ⟨h₁, h₂⟩ :=
+    ((i)_*[A]).homologyConcentratedIn_mapDerivedCategory_obj (hP ((i)^*[A].obj G))
+  have : _root_.DerivedCategory.TStructure.t.IsGE (D((i)_*[A]).obj (((-⊗ᴸ-(Z)[A]).obj P).obj
+      ((_root_.DerivedCategory.singleFunctor _ 0).obj ((i)^*[A].obj G)))) a := h₁
+  have : _root_.DerivedCategory.TStructure.t.IsLE (D((i)_*[A]).obj (((-⊗ᴸ-(Z)[A]).obj P).obj
+      ((_root_.DerivedCategory.singleFunctor _ 0).obj ((i)^*[A].obj G)))) b := h₂
+  exact ⟨_root_.DerivedCategory.TStructure.t.isGE_of_iso (e'.symm ≪≫ e) a,
+    _root_.DerivedCategory.TStructure.t.isLE_of_iso (e'.symm ≪≫ e) b⟩
+
 omit [MonoidalCategory A] [MonoidalPreadditive A] [SymmetricCategory A] [MonoidalClosed A]
   [Abelian.HasFunctorialFlatResolution A] [HasSmallSiteSheafify A] in
 /-- Concentration in `[a, b]` is invariant under isomorphism. -/

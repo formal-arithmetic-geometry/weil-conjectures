@@ -4,7 +4,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Claude
 -/
 module
-public import WeilConjectures.AlgebraicGeometry.EtaleFiniteRefinement.FiniteFamily
+public import WeilConjectures.AlgebraicGeometry.Morphisms.QuasiFiniteFactorization
 public import Mathlib.AlgebraicGeometry.Morphisms.IsIso
 
 /-!

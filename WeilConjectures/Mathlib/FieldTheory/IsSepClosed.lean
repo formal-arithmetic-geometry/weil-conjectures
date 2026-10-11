@@ -20,6 +20,8 @@ the directed union of its finite separable subextensions, so that `ks` is their 
 - `IsSepClosure.exists_intermediateField_mem`: every element of a separable closure lies in a
   finite separable subextension (blueprint `def-pd-separable-closure`).
 - `IsSepClosed.instInfinite`: a separably closed field is infinite.
+- `RingHom.exists_comp_eq_of_isSepClosed`: an embedding of a separable extension into a field
+  extension of a separably closed field `L` lands in `L`.
 -/
 
 @[expose] public section
@@ -64,24 +66,24 @@ theorem IsSepClosed.of_ringEquiv {k k' : Type*} [Field k] [Field k']
   have hpush := hsplit.map e.toRingHom
   rwa [Polynomial.map_map, e.toRingHom_comp_symm_toRingHom, Polynomial.map_id] at hpush
 
-/-- **Separable elements land in a separably closed subfield.** Let `K / k` be a separable
-extension, `γ : k →+* Ω₁` an embedding into a separably closed field and `φ : Ω₁ →+* Ω₂`.
-Every embedding `χ : K →+* Ω₂` extending `φ ∘ γ` factors through `φ`: each `χ a` is a root of
-the separable polynomial `(minpoly k a).map γ`, which splits in `Ω₁`. -/
-theorem IsSepClosed.exists_comp_eq {k K Ω₁ Ω₂ : Type*} [Field k] [Field K] [Field Ω₁]
-    [Field Ω₂] [Algebra k K] [Algebra.IsSeparable k K] [IsSepClosed Ω₁] (γ : k →+* Ω₁)
-    (φ : Ω₁ →+* Ω₂) (χ : K →+* Ω₂) (h : χ.comp (algebraMap k K) = φ.comp γ) :
-    ∃ ψ : K →+* Ω₁, φ.comp ψ = χ := by
-  have hrange (a : K) : χ a ∈ φ.range := by
-    have hsep := Algebra.IsSeparable.isSeparable k a
-    have hsplit := IsSepClosed.splits_codomain (f := γ) _ hsep
-    refine hsplit.mem_range_of_isRoot
-      ((Polynomial.map_ne_zero_iff γ.injective).2 (minpoly.ne_zero hsep.isIntegral)) ?_
-    rw [Polynomial.map_map, ← h, ← Polynomial.map_map, Polynomial.IsRoot,
-      Polynomial.eval_map_apply, Polynomial.eval_map_algebraMap, minpoly.aeval, map_zero]
-  let e : Ω₁ ≃+* φ.range := RingEquiv.ofBijective φ.rangeRestrict
-    ⟨fun _ _ hxy ↦ φ.injective congr($hxy.1), φ.rangeRestrict_surjective⟩
-  refine ⟨e.symm.toRingHom.comp (χ.codRestrict φ.range hrange), RingHom.ext fun a ↦ ?_⟩
-  change φ (e.symm _) = χ a
-  have : e (e.symm ⟨χ a, hrange a⟩) = ⟨χ a, hrange a⟩ := e.apply_symm_apply _
-  exact congr($this.1)
+/-- If `E` is separable over `F`, `L` is separably closed and `c : E ⟶ Ω` agrees on `F` with
+`b ≫ β` for `b : F ⟶ L` and `β : L ⟶ Ω`, then `c` factors through `β`. -/
+lemma RingHom.exists_comp_eq_of_isSepClosed {F E L Ω : Type*} [Field F] [Field E] [Field L]
+    [Field Ω] [Algebra F E] [Algebra.IsSeparable F E] [IsSepClosed L] (b : F →+* L)
+    (β : L →+* Ω) (c : E →+* Ω) (h : c.comp (algebraMap F E) = β.comp b) :
+    ∃ c' : E →+* L, β.comp c' = c := by
+  have hsub : ∀ e, c e ∈ β.range := by
+    intro e
+    have hsep : (minpoly F e).Separable := Algebra.IsSeparable.isSeparable F e
+    have hspl : ((minpoly F e).map b).Splits := IsSepClosed.splits_codomain _ hsep
+    have hne : (minpoly F e).map b ≠ 0 :=
+      Polynomial.map_ne_zero (minpoly.ne_zero (Algebra.IsSeparable.isIntegral F e))
+    refine hspl.mem_range_of_isRoot hne ?_
+    rw [Polynomial.map_map, ← h, Polynomial.IsRoot, Polynomial.eval_map, ← Polynomial.hom_eval₂,
+      ← Polynomial.aeval_def, minpoly.aeval, map_zero]
+  let e := RingEquiv.ofBijective β.rangeRestrict ⟨fun a b hab ↦ β.injective
+    (congr_arg Subtype.val hab), β.rangeRestrict_surjective⟩
+  refine ⟨e.symm.toRingHom.comp (c.codRestrict β.range hsub), RingHom.ext fun x ↦ ?_⟩
+  change ((e (e.symm ⟨c x, hsub x⟩)) : Ω) = c x
+  rw [e.apply_symm_apply]
+

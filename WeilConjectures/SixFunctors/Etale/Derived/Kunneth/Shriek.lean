@@ -77,6 +77,7 @@ noncomputable def rightDerivedLowerStarIsoLeftDerivedUpperStarInv {Y Y' : Scheme
 variable {S X₁ X₂ Y₁ Y₂ : Scheme.{u}} (b₁ : Y₁ ⟶ S) (b₂ : Y₂ ⟶ S) (f₁ : X₁ ⟶ Y₁)
   (f₂ : X₂ ⟶ Y₂)
 
+omit [HasSmallSiteSheafify A] in
 /-- Transport of `R(f₁ × f₂)_!` along `pullback.mapOverBaseIso`: for `Z` in
 `D((X₁ ×_S X₂)_ét)`, writing `e : X₁ ×_S X₂ ≅ (X₁ ×_{Y₁} B) ×_B (X₂ ×_{Y₂} B)` with
 `B = Y₁ ×_S Y₂` and `h` for the structure morphism of the fibre product over `B`,
@@ -225,6 +226,8 @@ theorem nonempty_iso_rightDerivedLowerShriek_mapOverBase_externalProduct
     ((HasCompactification.compactification (pullback.mapOverBase f₁ f₂ b₁ b₂)).transport
       e (Iso.refl _) (by rw [Iso.refl_hom, Category.comp_id, he])).hasCompactification
   have : HasCompactification (e.hom ≫ h) := .of_eq he.symm
+  have : QuasiCompact h := by
+    rw [show h = _ from (pullback.fst_comp_eq_toBase _ _).symm]; infer_instance
   have hcongr : ∀ (ψ : _ ⟶ _) [HasCompactification ψ], ψ = pullback.mapOverBase f₁ f₂ b₁ b₂ →
       Nonempty (R(ψ)_![ModuleCat.{u + 1} Λ] ≅
         R(pullback.mapOverBase f₁ f₂ b₁ b₂)_![ModuleCat.{u + 1} Λ]) := by
