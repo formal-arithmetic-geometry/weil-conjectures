@@ -1,22 +1,23 @@
 # Work queue
 
-998 items; claim with `tools/claim.py next <group> [--stage N]`.
+1002 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (998)
+## Stage 2: nodes to state (1002)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
 | `def-nagata-relative-finite-affine-presentation` | 1 | state |
 | `def-pur-sheaf-tensor-product` | 1 | state |
-| `def-sbc-first-order-thickening` | 1 | state |
+| `def-sbc-formally-smooth` | 1 | state |
 | `def-sbc-normal-dominant-galois` | 1 | state |
 | `def-sc-perfect-closed-immersion` | 1 | state |
 | `def-sp-double-complex-total` | 1 | state |
 | `def-sp-exact-couple` | 1 | state |
 | `def-sp-image-filtration` | 1 | state |
+| `def-weil-derived-limit` | 1 | state |
 | `def-weil-extension-by-zero-presheaf` | 1 | state |
 | `def-weil-pbc-associated-graded-ring` | 1 | state |
 | `def-weil-pbc-associated-module` | 1 | state |
@@ -32,7 +33,7 @@
 | `def-weil-pbc-relative-global-complete-intersection` | 1 | state |
 | `def-weil-pbc-serre-conditions-rk-sk` | 1 | state |
 | `def-weil-pbc-torsion-etale-sheaf` | 1 | state |
-| `def-weil-tower-transition-endomorphism` | 1 | state |
+| `def-weil-pbc-universal-first-order-thickening` | 1 | state |
 | `lem-exc-discrete-modules-abelian` | 1 | state |
 | `lem-exc-discrete-modules-abelian-injective-embeddings` | 1 | state |
 | `lem-exc-discrete-modules-abelian-structure` | 1 | state |
@@ -320,6 +321,7 @@
 | `lem-weil-pbc-associated-prime-power-quotient` | 1 | state |
 | `lem-weil-pbc-associated-primes-exact-sequence` | 1 | state |
 | `lem-weil-pbc-associated-primes-flat-base-change` | 1 | state |
+| `lem-weil-pbc-base-change-nilpotent-thickening-idempotents` | 1 | state |
 | `lem-weil-pbc-basis-sheaf-cofinal-coverings` | 1 | state |
 | `lem-weil-pbc-basis-sheaf-sections-germs` | 1 | state |
 | `lem-weil-pbc-cartier-equality` | 1 | state |
@@ -921,6 +923,8 @@
 | `lem-weil-pbc-tate-n2-complete-principal` | 1 | state |
 | `lem-weil-pbc-tensor-field-extension-galois-invariants` | 1 | state |
 | `lem-weil-pbc-tensor-finite-type-limit` | 1 | state |
+| `lem-weil-pbc-thickening-affine-scheme` | 1 | state |
+| `lem-weil-pbc-thickening-integral` | 1 | state |
 | `lem-weil-pbc-topological-inverse-image-stalk` | 1 | state |
 | `lem-weil-pbc-tor-dimension-shift-free` | 1 | state |
 | `lem-weil-pbc-tor-ideal-kernel-naturality` | 1 | state |
@@ -1008,7 +1012,7 @@
 | `lem-sc-normalization-properties` | 3 | state |
 | `def-nagata-fixed-base-separated-stage` | 6 | state |
 
-Not open yet: 1191 nodes that wait for a statement dependency, 40 nodes that wait for stage 1.
+Not open yet: 1185 nodes that wait for a statement dependency, 40 nodes that wait for stage 1.
 
 ## Stage 3: modules to prove (0)
 
