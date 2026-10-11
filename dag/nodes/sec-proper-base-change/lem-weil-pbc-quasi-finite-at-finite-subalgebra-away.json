@@ -215,5 +215,23 @@
   "worker": "stage1",
   "summary": "Split in 5 steps following Stacks 00Q9 and the construction of the proof of 00QA (repeated with 'details omitted' in 00QB (3)): (1) Zariski's main theorem via the existing node lem-weil-pbc-integral-closure-zariski-main-away (whose hypothesis is Stacks 00PL, the same notion as def-weil-pbc-ring-map-quasi-finite-at-prime) gives g in the integral closure S', g not in q, S'_g = S_g; (2) numerators y_i in S' with y_i/g^{n_i} = s_i/1 for R-algebra generators s_i of S; (3) S'' = R[g, y_1..y_m] is finite over R by the leaf lem-weil-pbc-finite-of-integral-generators; (4) S''_g -> S_g injective (g^k y = 0 in S implies it in S''); (5) surjective (image contains 1/g and all s_i/1). No new nodes. Mathlib: Algebra.QuasiFiniteAt.exists_fg_and_exists_notMem_and_awayMap_bijective (ZariskisMainTheorem.lean:703) is kept as mathlib_candidate, not a leaf: Mathlib's QuasiFiniteAt (localization form) agrees with the DAG's isolated-point definition only through quasiFiniteAt_iff_isOpen_singleton_fiber (l.754) and the fibre homeomorphism, and no DAG node matches that identification (B8). Statement unchanged."
  },
- "reviewed": "Reviewed by L 2026-10-10: Zariski's Main Theorem (00Q9 node) at q, then the finite subalgebra of the proof of 00QA/00QB (3) written out ('details omitted' in the source): numerators, integrality, injectivity and surjectivity of S''_g → S_g. No new nodes; Mathlib candidate kept (QuasiFiniteAt is a different notion, B8)."
+ "reviewed": "Reviewed by L 2026-10-10: Zariski's Main Theorem (00Q9 node) at q, then the finite subalgebra of the proof of 00QA/00QB (3) written out ('details omitted' in the source): numerators, integrality, injectivity and surjectivity of S''_g → S_g. No new nodes; Mathlib candidate kept (QuasiFiniteAt is a different notion, B8).",
+ "lean": {
+  "module": "Sheaf.RingTheory.QuasiFiniteAtFiniteSubalgebraAway",
+  "declaration": "Algebra.exists_finite_subalgebra_away_of_isQuasiFiniteAtPrime",
+  "file": "lean/Sheaf/RingTheory/QuasiFiniteAtFiniteSubalgebraAway.lean",
+  "statement": "theorem exists_finite_subalgebra_away_of_isQuasiFiniteAtPrime (R : Type u) (S : Type v) [CommRing R] [CommRing S] [Algebra R S] [Algebra.FiniteType R S] (q : PrimeSpectrum S) (hq : IsQuasiFiniteAtPrime R S q) : ∃ S' : Subalgebra R S, Module.Finite R S' ∧ ∃ g : S', g.1 ∉ q.asIdeal ∧ Function.Bijective (Localization.awayMap S'.val.toRingHom g)",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-qfa",
+  "group": "E1",
+  "result": "pass",
+  "note": "R,S CommRing + Algebra (phi), FiniteType, q : PrimeSpectrum S, hq IsQuasiFiniteAtPrime; ∃ S' Subalgebra with Module.Finite R S', ∃ g : S' ∉ q, Bijective (Localization.awayMap S'.val.toRingHom g) = canonical S'_g → S_g; same form as landed zariskisMainProperty_of_isQuasiFiniteAtPrime"
+ }
 }
