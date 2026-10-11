@@ -183,3 +183,19 @@ noncomputable def extendScalarsCompRestrictScalarsIso :
       | add x y hx hy => simp only [map_add, hx, hy])
 
 end ModuleCat
+
+namespace ModuleCat
+
+variable {R S : Type (u + 1)} [CommRing R] [CommRing S] (φ : R →+* S)
+
+instance : Limits.PreservesLimitsOfSize.{u, u + 1}
+    (ModuleCat.coextendScalars.{u + 1, u + 1, u + 1} φ) :=
+  (ModuleCat.restrictCoextendScalarsAdj.{u + 1} φ).rightAdjoint_preservesLimits
+
+/- Mathlib's instance is stated for `coextendScalars.{u₁, u₂, max u₂ w}`, and unifying
+`u + 1 =?= max (u + 1) ?w` gets stuck, so instance search does not find it for modules in the
+universe of the rings. -/
+instance : (ModuleCat.coextendScalars.{u + 1, u + 1, u + 1} φ).IsRightAdjoint :=
+  (ModuleCat.restrictCoextendScalarsAdj.{u + 1} φ).isRightAdjoint
+
+end ModuleCat

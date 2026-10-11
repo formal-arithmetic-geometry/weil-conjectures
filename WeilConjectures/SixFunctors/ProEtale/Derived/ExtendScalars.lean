@@ -104,4 +104,51 @@ noncomputable def derivedExtendRestrictScalarsAdj :
 
 end
 
+section Pullback
+
+variable {X Y : Scheme.{u}} (f : X ⟶ Y)
+
+/-- The pushforward `f_*` commutes with coextension of scalars, both being computed
+objectwise. -/
+noncomputable def lowerStarCompCoextendScalarsIso :
+    (f)_*[ModuleCat.{u + 1} R] ⋙
+        sheafCompose (ProEt.topology Y)
+          (ModuleCat.coextendScalars.{u + 1, u + 1, u + 1} (algebraMap R S)) ≅
+      sheafCompose (ProEt.topology X)
+          (ModuleCat.coextendScalars.{u + 1, u + 1, u + 1} (algebraMap R S)) ⋙
+        (f)_*[ModuleCat.{u + 1} S] :=
+  Iso.refl _
+
+/-- The pullback `f^*` commutes with restriction of scalars: `Res_X ∘ f^* ≅ f^* ∘ Res_Y`, the
+conjugate of `lowerStarCompCoextendScalarsIso` under `f^* ⊣ f_*` and `Res ⊣ Coext`. -/
+noncomputable def upperStarCompRestrictScalarsIso :
+    (f)^*[ModuleCat.{u + 1} S] ⋙ Sheaf.restrictScalars (ProEt.topology X) (algebraMap R S) ≅
+      Sheaf.restrictScalars (ProEt.topology Y) (algebraMap R S) ⋙ (f)^*[ModuleCat.{u + 1} R] :=
+  (conjugateIsoEquiv
+    ((Sheaf.restrictCoextendScalarsAdj _ _).comp (upperStarLowerStarAdjunction _ f))
+    ((upperStarLowerStarAdjunction _ f).comp (Sheaf.restrictCoextendScalarsAdj _ _))).symm
+    (lowerStarCompCoextendScalarsIso R S f)
+
+/-- Restriction of scalars commutes with the derived pullback:
+`Lf^* ∘ Res_Y ≅ Res_X ∘ Lf^*` on `D(Y_proét, S)`. -/
+noncomputable def derivedRestrictScalarsLeftDerivedUpperStarIso :
+    derivedRestrictScalars R S Y ⋙ L((f)^*[ModuleCat.{u + 1} R]) ≅
+      L((f)^*[ModuleCat.{u + 1} S]) ⋙ derivedRestrictScalars R S X :=
+  Functor.isoWhiskerLeft _ (leftDerivedUpperStarIsoMapDerivedCategory _ f) ≪≫
+    (Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
+    Functor.mapDerivedCategoryNatIso (upperStarCompRestrictScalarsIso R S f).symm ≪≫
+    Functor.mapDerivedCategoryCompIso _ _ ≪≫
+    Functor.isoWhiskerRight (leftDerivedUpperStarIsoMapDerivedCategory _ f).symm _
+
+/-- The base change map `(Lf^* K) ⊗ᴸ_R S ⟶ Lf^*(K ⊗ᴸ_R S)` of derived scalar extension along the
+derived pullback: the mate of `derivedRestrictScalarsLeftDerivedUpperStarIso` under the
+adjunctions `- ⊗ᴸ_R S ⊣ Res` on `X` and on `Y`. -/
+noncomputable def leftDerivedUpperStarExtendScalarsMap :
+    L((f)^*[ModuleCat.{u + 1} R]) ⋙ derivedExtendScalars R S X ⟶
+      derivedExtendScalars R S Y ⋙ L((f)^*[ModuleCat.{u + 1} S]) :=
+  (mateEquiv (derivedExtendRestrictScalarsAdj R S Y) (derivedExtendRestrictScalarsAdj R S X)).symm
+    (derivedRestrictScalarsLeftDerivedUpperStarIso R S f).hom
+
+end Pullback
+
 end AlgebraicGeometry.ProEtale

@@ -10,6 +10,7 @@ public import Mathlib.CategoryTheory.Monoidal.Closed.Basic
 public import Mathlib.CategoryTheory.Monoidal.Rigid.Braided
 public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Closed.InternalCurrying
 public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Rigid.Basic
+public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Rigid.OfEquivalence
 
 /-!
 # The categorical trace, and internal duals of dualizable objects
@@ -26,7 +27,9 @@ and `End (𝟙_ C) = R`.
 ## Main definitions
 
 - `CategoryTheory.MonoidalCategory.trace`: the trace of an endomorphism of a dualizable
-  object.
+  object; it does not depend on the choice of the dual
+  (`CategoryTheory.MonoidalCategory.trace_eq_of_exactPairing`) and is preserved by braided
+  monoidal functors (`CategoryTheory.Functor.map_trace`).
 - `CategoryTheory.MonoidalCategory.ihomUnitIsoRightDual`: in a braided monoidal closed
   category, the internal dual `ihom X (𝟙_ C)` of an object with a right dual `Xᘁ` is `Xᘁ`.
 
@@ -52,6 +55,8 @@ uses, the two agree.
 
 namespace CategoryTheory.MonoidalCategory
 
+open Functor.LaxMonoidal Functor.OplaxMonoidal
+
 variable {C : Type*} [Category C] [MonoidalCategory C] [BraidedCategory C]
 
 /-- The trace of an endomorphism `f : X ⟶ X` of an object with a right dual `Xᘁ` is the
@@ -68,6 +73,48 @@ category `(Perf R, ⊗ᴸ_R, R)` of perfect complexes over a commutative ring `R
 (blueprint: `sk-d-trace`). -/
 noncomputable def trace {X : C} [HasRightDual X] (f : X ⟶ X) : 𝟙_ C ⟶ 𝟙_ C :=
   η_ X Xᘁ ≫ f ▷ Xᘁ ≫ (β_ X Xᘁ).hom ≫ ε_ X Xᘁ
+
+/-- The trace does not depend on the choice of the right dual: it can be computed with any
+exact pairing `X ⊗ Y`. -/
+lemma trace_eq_of_exactPairing {X : C} [HasRightDual X] (Y : C) [ExactPairing X Y]
+    (f : X ⟶ X) :
+    trace f = η_ X Y ≫ f ▷ Y ≫ (β_ X Y).hom ≫ ε_ X Y := by
+  let e := rightDualIso (inferInstance : ExactPairing X Xᘁ) (inferInstance : ExactPairing X Y)
+  have h₁ : η_ X Xᘁ ≫ X ◁ e.hom = η_ X Y := by
+    have := @coevaluation_comp_rightAdjointMate C _ _ X X ⟨Y⟩ ⟨Xᘁ⟩ (𝟙 X)
+    rw [id_whiskerRight, Category.comp_id] at this
+    exact this
+  have h₂ : e.hom ▷ X ≫ ε_ X Y = ε_ X Xᘁ := by
+    have := @rightAdjointMate_comp_evaluation C _ _ X X ⟨Y⟩ ⟨Xᘁ⟩ (𝟙 X)
+    rw [whiskerLeft_id, Category.id_comp] at this
+    exact this
+  rw [trace, ← h₂, ← h₁]
+  simp only [Category.assoc]
+  congr 1
+  rw [BraidedCategory.braiding_naturality_left_assoc,
+    BraidedCategory.braiding_naturality_left_assoc,
+    BraidedCategory.braiding_naturality_right_assoc, whisker_exchange_assoc]
+
+section
+
+variable {D : Type*} [Category D] [MonoidalCategory D] [BraidedCategory D]
+
+/-- **A braided monoidal functor preserves traces.** For a braided monoidal functor `F` and an
+endomorphism `f` of a dualizable object `X` such that `F X` is dualizable,
+`tr(F f) = ε⁻¹ ∘ F(tr f) ∘ ε`, where `ε : 𝟙_ ⟶ F 𝟙_` is the unit of `F`. -/
+lemma _root_.CategoryTheory.Functor.map_trace (F : C ⥤ D) [F.Braided] {X : C} [HasRightDual X]
+    [HasRightDual (F.obj X)] (f : X ⟶ X) :
+    trace (F.map f) = ε F ≫ F.map (trace f) ≫ η F := by
+  let := ExactPairing.map F X Xᘁ
+  rw [trace_eq_of_exactPairing (F.obj Xᘁ), trace]
+  change (ε F ≫ F.map (η_ X Xᘁ) ≫ δ F X Xᘁ) ≫ F.map f ▷ F.obj Xᘁ ≫ (β_ _ _).hom ≫
+    μ F Xᘁ X ≫ F.map (ε_ X Xᘁ) ≫ η F = _
+  simp only [Category.assoc, Functor.map_comp]
+  congr 2
+  rw [Functor.Monoidal.map_whiskerRight, Functor.map_braiding]
+  simp only [Category.assoc, Functor.Monoidal.μ_δ_assoc]
+
+end
 
 /-- In a braided monoidal closed category, the internal hom `[X, 𝟙_ C]` out of an object `X`
 with a right dual `Xᘁ` is isomorphic to `Xᘁ`: both `ihom X` and `tensorRight Xᘁ` are right
