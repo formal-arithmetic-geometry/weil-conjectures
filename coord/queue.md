@@ -1,11 +1,11 @@
 # Work queue
 
-45 items; claim with `tools/claim.py next <group> [--stage N]`.
+46 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (45)
+## Stage 2: nodes to state (46)
 
 | node | distance to Mathlib | kind | blockers |
 |---|---|---|---|
@@ -15,7 +15,6 @@
 | `def-weil-pbc-simplicial-hom-object` | 1 | state | 4 |
 | `def-pc-derived-rhom-algebra-module` | 1 | state | 2 |
 | `lem-sc-etale-qcoherent-presheaf-functorial` | 1 | state | 8 |
-| `lem-weil-pbc-pair-henselization` | 1 | state | 5 |
 | `lem-weil-pbc-etale-graph-section-extension-map-linear` | 1 | state | 3 |
 | `lem-pc-cech-resolution` | 1 | state | 1 |
 | `lem-pc-derived-sections-pushforward-comparison` | 1 | state | 1 |
@@ -23,7 +22,6 @@
 | `lem-pc-perfect-rhom-tensor-comparison` | 1 | state | 1 |
 | `cor-galois-lisse-representations` | 1 | state | 0 |
 | `lem-pc-base-change-rhom-perfect` | 1 | state | 0 |
-| `lem-pc-bounded-coherent-finite-tor-proper-pushforward-perfect` | 1 | state | 0 |
 | `lem-pc-dualizable-evaluation-criterion` | 1 | state | 0 |
 | `lem-pc-noetherian-perfect-direct-image` | 1 | state | 0 |
 | `lem-pc-projection-locality` | 1 | state | 0 |
@@ -44,18 +42,21 @@
 | `lem-sc-koszul-regular-immersion-derived-hom` | 1 | state | 0 |
 | `lem-sc-open-restriction-support-triangle` | 1 | state | 0 |
 | `lem-sc-proper-flat-right-adjoint-basechange` | 1 | state | 0 |
-| `lem-sc-proper-flat-right-adjoint-direct-sums` | 1 | state | 0 |
 | `lem-sc-proper-flat-right-adjoint-restriction-open` | 1 | state | 0 |
 | `lem-sc-smooth-proper-diagonal-basechange-upper-shriek` | 1 | state | 0 |
-| `lem-sc-smooth-proper-relative-dualizing-general` | 1 | state | 0 |
 | `lem-weil-pbc-etale-mayer-vietoris-pullback` | 1 | state | 0 |
+| `lem-weil-pbc-henselization-colimit` | 1 | state | 0 |
+| `lem-weil-pbc-henselization-flat-quotients` | 1 | state | 0 |
+| `lem-weil-pbc-henselization-noetherian-completion` | 1 | state | 0 |
+| `lem-weil-pbc-henselization-universal-property` | 1 | state | 0 |
 | `lem-weil-pbc-projective-space-twisting-sheaf-charts` | 1 | state | 0 |
 | `lem-weil-pbc-unrestricted-strict-henselization-stalk` | 1 | state | 0 |
 | `prop-weil-pbc-strict-henselization-stalk-formula` | 1 | state | 0 |
 | `lem-pc-rf-single-complex-inherited-tensor-condition` | 2 | state | 0 |
 | `lem-sc-p1-proj-shifted-free-twist` | 2 | state | 0 |
+| `lem-weil-pbc-henselization-pair-g-ring` | 2 | state | 0 |
 
-Not open yet: 40 nodes that wait for stage 1, 173 nodes that wait for a statement dependency.
+Not open yet: 40 nodes that wait for stage 1, 168 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
