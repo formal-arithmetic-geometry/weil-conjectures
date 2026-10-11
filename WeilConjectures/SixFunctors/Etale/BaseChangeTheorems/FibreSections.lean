@@ -219,6 +219,108 @@ theorem bijective_restrictAlong_fibreToStrictLocalization [IsProper f] [IsAlgClo
 
 end ClosedFibre
 
+section Neighbourhoods
+
+/-- The projection `S_(y) ×_Y X ⟶ V ×_Y X` for an affine pointed étale neighbourhood `(V, v)`
+of `y`, induced by the leg `S_(y) ⟶ V` of the limit cone of the strict localization. -/
+noncomputable def strictLocalizationPullbackLeg (x : Scheme.AffinePointedEtaleNeighborhood y) :
+    pullback (Scheme.strictLocalizationToBase y) f ⟶ pullback x.obj.1.hom f :=
+  pullback.map _ _ _ _ ((Scheme.strictLocalizationCone y).π.app x) (𝟙 X) (𝟙 Y)
+    (by simp) (by simp)
+
+@[reassoc (attr := simp)]
+lemma strictLocalizationPullbackLeg_fst (x : Scheme.AffinePointedEtaleNeighborhood y) :
+    strictLocalizationPullbackLeg f y x ≫ pullback.fst _ _ =
+      pullback.fst _ _ ≫ (Scheme.strictLocalizationCone y).π.app x :=
+  pullback.lift_fst _ _ _
+
+@[reassoc (attr := simp)]
+lemma strictLocalizationPullbackLeg_snd (x : Scheme.AffinePointedEtaleNeighborhood y) :
+    strictLocalizationPullbackLeg f y x ≫ pullback.snd _ _ = pullback.snd _ _ := by
+  simp [strictLocalizationPullbackLeg]
+
+/-- The morphism `X_y ⟶ V ×_Y X` given by a lift of `y` to an affine pointed étale
+neighbourhood `(V, v)` factors through `S_(y) ×_Y X`. -/
+lemma fibreToStrictLocalization_comp_strictLocalizationPullbackLeg
+    (x : Scheme.AffinePointedEtaleNeighborhood y) :
+    fibreToStrictLocalization f y a b hab ≫ strictLocalizationPullbackLeg f y x =
+      fibreToPullback f y a b hab x.obj.1 x.obj.2 := by
+  apply pullback.hom_ext
+  · rw [Category.assoc, strictLocalizationPullbackLeg_fst, fibreToStrictLocalization_fst_assoc,
+      Scheme.spec_map_strictHenselizationEval_comp_strictLocalizationCone_π_app,
+      fibreToPullback_fst]
+  · rw [Category.assoc, strictLocalizationPullbackLeg_snd, fibreToStrictLocalization_snd,
+      fibreToPullback_snd]
+
+/-- The base change `V ×_Y X ⟶ W ×_Y X` of a morphism of affine étale `Y`-schemes is affine. -/
+lemma isAffineHom_etale_map_left {V W : Y.Etale} [IsAffine V.left] [IsAffine W.left]
+    (φ : V ⟶ W) : IsAffineHom (f.Etale.map φ).left := by
+  have big : IsPullback ((f.Etale.map φ).left ≫ pullback.snd W.hom f) (pullback.fst V.hom f) f
+      (φ.left ≫ W.hom) := by
+    rw [Scheme.Hom.etale_map_left_comp_snd, MorphismProperty.Over.w φ]
+    exact (IsPullback.of_hasPullback V.hom f).flip
+  have sq := big.of_right (Scheme.Hom.etale_map_left_comp_fst f φ)
+    (IsPullback.of_hasPullback W.hom f).flip
+  have : IsAffineHom (show V.left ⟶ W.left from φ.left) := isAffineHom_of_isAffine _
+  exact MorphismProperty.of_isPullback (P := @IsAffineHom) sq.flip this
+
+set_option backward.isDefEq.respectTransparency false in
+/-- **Sections over the base change to the strict localization.** For `f` proper, the sections
+of the pullback of `F` to `S_(y) ×_Y X` are the colimit of the sections of `F` over the
+`V ×_Y X`, for the affine pointed étale neighbourhoods `(V, v)` of `y`: every section over
+`S_(y) ×_Y X` is the pullback of a section over some `V ×_Y X`, and a section over `V ×_Y X`
+whose pullback vanishes already vanishes over `V' ×_Y X` for some `(V', v') ⟶ (V, v)`. This is
+the continuity of sections at inverse limits (`AlgebraicGeometry.Etale.unitComparison_app_isColimit_of_isLimit`)
+for the cofiltered system of the `V ×_Y X` with `V` refining a fixed affine neighbourhood. -/
+theorem strictLocalizationPullback_sections [IsProper f] :
+    (∀ τ : ((pullback.snd (Scheme.strictLocalizationToBase y) f)^*[AddCommGrpCat.{u + 1}].obj
+        F).obj.obj (op (Scheme.Etale.mk (𝟙 _))),
+      ∃ (x : Scheme.AffinePointedEtaleNeighborhood y) (s : F.obj.obj (op (f.Etale.obj x.obj.1))),
+        pullSection (pullback.snd (Scheme.strictLocalizationToBase y) f) F
+          (V := Scheme.Etale.mk (𝟙 _)) (U := f.Etale.obj x.obj.1)
+          (strictLocalizationPullbackLeg f y x)
+          ((strictLocalizationPullbackLeg_snd f y x).trans (Category.id_comp _).symm) s = τ) ∧
+    ∀ (x : Scheme.AffinePointedEtaleNeighborhood y) (s : F.obj.obj (op (f.Etale.obj x.obj.1))),
+      pullSection (pullback.snd (Scheme.strictLocalizationToBase y) f) F
+          (V := Scheme.Etale.mk (𝟙 _)) (U := f.Etale.obj x.obj.1)
+          (strictLocalizationPullbackLeg f y x)
+          ((strictLocalizationPullbackLeg_snd f y x).trans (Category.id_comp _).symm) s = 0 →
+        ∃ (x' : Scheme.AffinePointedEtaleNeighborhood y) (g : x' ⟶ x),
+          F.obj.map (f.Etale.map g.hom.1).op s = 0 := by
+  let D₀ := InitiallySmall.CofilteredInitialModel.{u} (Scheme.AffinePointedEtaleNeighborhood y)
+  let ι₀ := InitiallySmall.fromCofilteredInitialModel.{u}
+    (Scheme.AffinePointedEtaleNeighborhood y)
+  let d₀ : D₀ := (IsCofiltered.nonempty (C := D₀)).some
+  let Φ : CategoryTheory.Over d₀ ⥤ Scheme.AffinePointedEtaleNeighborhood y :=
+    CategoryTheory.Over.forget d₀ ⋙ ι₀
+  let U : CategoryTheory.Over d₀ ⥤ X.Etale :=
+    Φ ⋙ Scheme.AffinePointedEtaleNeighborhood.ι y ⋙ CategoryOfElements.π _ ⋙ f.Etale
+  let cK := (CategoryTheory.Over.forget X).mapCone
+    ((CategoryTheory.Over.pullback f).mapCone (Scheme.strictLocalizationConeOver y))
+  let E : Φ ⋙ (Scheme.affineNeighborhoodDiagramOver y ⋙ CategoryTheory.Over.pullback f) ⋙
+      CategoryTheory.Over.forget X ≅ U ⋙ Scheme.Etale.forget X ⋙ CategoryTheory.Over.forget X :=
+    NatIso.ofComponents (fun _ ↦ Iso.refl _) (fun _ ↦ by
+      apply pullback.hom_ext
+      · simp [U, Scheme.affineNeighborhoodDiagramOver]
+        exact (Scheme.Hom.etale_map_left_comp_fst f _).symm
+      · simp [U, Scheme.affineNeighborhoodDiagramOver]
+        exact (Scheme.Hom.etale_map_left_comp_snd f _).symm)
+  let c := (Cone.postcompose E.hom).obj (cK.whisker Φ)
+  have hc : IsLimit c := (IsLimit.postcomposeHomEquiv E _).symm
+    ((Functor.Initial.isLimitWhiskerEquiv Φ cK).symm
+      (Scheme.isLimitStrictLocalizationConePullback y f))
+  have hcπ (j : CategoryTheory.Over d₀) :
+      c.π.app j = strictLocalizationPullbackLeg f y (Φ.obj j) := by
+    have h₁ : c.π.app j = pullback.lift (f := (Φ.obj j).obj.1.hom) (g := f)
+        (pullback.fst _ _ ≫ (Scheme.strictLocalizationCone y).π.app (Φ.obj j))
+        (pullback.snd (Scheme.strictLocalizationToBase y) f)
+        (by simp [pullback.condition]) ≫ 𝟙 _ := rfl
+    rw [h₁, Category.comp_id]
+    apply pullback.hom_ext <;> simp [strictLocalizationPullbackLeg]
+  sorry
+
+end Neighbourhoods
+
 /-- **Stalks of a proper direct image are sections over the geometric fibre.** Let
 `f : X ⟶ Y` be proper and `y : Spec Ω ⟶ Y` a geometric point with `Ω` algebraically closed,
 with geometric fibre `a : X_y ⟶ X`. For every abelian étale sheaf `F` on `X`, the comparison map
