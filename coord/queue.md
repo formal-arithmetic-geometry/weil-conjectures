@@ -1,18 +1,18 @@
 # Work queue
 
-146 items; claim with `tools/claim.py next <group> [--stage N]`.
+150 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (146)
+## Stage 2: nodes to state (150)
 
 | node | distance to Mathlib | kind | blockers |
 |---|---|---|---|
 | `def-weil-pbc-sites-and-cohomology` | 1 | state | 137 |
 | `pqf-def-cohomology` | 1 | state | 57 |
-| `def-weil-pbc-cohomology-pullback` | 1 | state | 23 |
 | `def-nagata-qc-open-equality-stage` | 1 | state | 13 |
+| `def-sc-field-extension` | 1 | state | 6 |
 | `def-pc-global-derived-rhom` | 1 | state | 4 |
 | `def-weil-pbc-simplicial-hom-object` | 1 | state | 4 |
 | `def-pc-derived-rhom-algebra-module` | 1 | state | 2 |
@@ -20,6 +20,7 @@
 | `lem-pc-module-pullback-identity-composition` | 1 | state | 11 |
 | `lemma-nagata-qc-open-descends` | 1 | state | 10 |
 | `lem-weil-pbc-coherent-formal-modules-abelian` | 1 | state | 9 |
+| `lem-weil-pbc-cohomology-pullback-functorial` | 1 | state | 8 |
 | `lemma-nagata-affine-fp-descends` | 3 | state | 8 |
 | `lem-pc-affine-qcoh-derived-equivalence` | 1 | state | 6 |
 | `lem-pc-ringed-spaces-derived-adjoint` | 1 | state | 6 |
@@ -108,18 +109,22 @@
 | `lem-sc-smooth-proper-tensor-perfect-case` | 1 | state | 0 |
 | `lem-sc-strict-henselization-cotangent-dimension` | 1 | state | 0 |
 | `lem-sc-strict-henselization-dvr` | 1 | state | 0 |
-| `lem-weil-pbc-closed-immersion-pushforward-ideal-powers` | 1 | state | 0 |
 | `lem-weil-pbc-derived-etale-cohomology-limit` | 1 | state | 0 |
+| `lem-weil-pbc-etale-cohomology-limit-of-schemes` | 1 | state | 0 |
 | `lem-weil-pbc-finite-coproduct-cohomology-assembly` | 1 | state | 0 |
 | `lem-weil-pbc-finite-geometric-point-coproduct-cohomology` | 1 | state | 0 |
 | `lem-weil-pbc-gabber-absolutely-algebraically-closed` | 1 | state | 0 |
+| `lem-weil-pbc-gabber-criterion` | 1 | state | 0 |
 | `lem-weil-pbc-geometric-point-cohomology` | 1 | state | 0 |
 | `lem-weil-pbc-gm-pullback-strict-henselization` | 1 | state | 0 |
 | `lem-weil-pbc-gm-strict-henselization-stalk-formula` | 1 | state | 0 |
+| `lem-weil-pbc-hypercohomology-e1-pullback-functorial` | 1 | state | 0 |
+| `lem-weil-pbc-integral-cover-kills-constant-cohomology` | 1 | state | 0 |
 | `lem-weil-pbc-integral-cover-trivial-cohomology` | 1 | state | 0 |
 | `lem-weil-pbc-inverse-image-composition-module-linear` | 1 | state | 0 |
 | `lem-weil-pbc-inverse-image-free-etale-module` | 1 | state | 0 |
 | `lem-weil-pbc-projective-space-twisting-sheaf-charts` | 1 | state | 0 |
+| `lem-weil-pbc-pullback-iso-prime-torsion-devissage` | 1 | state | 0 |
 | `lem-weil-pbc-sets-pushforward-stalk-strict-henselization` | 1 | state | 0 |
 | `lem-weil-pbc-strict-henselization-functoriality` | 1 | state | 0 |
 | `lem-weil-pbc-strictly-henselian-etale-acyclic` | 1 | state | 0 |
@@ -134,6 +139,7 @@
 | `lemma-weil-pbc-fibre-product-limit` | 1 | state | 0 |
 | `prop-weil-pbc-strict-henselization-stalk-formula` | 1 | state | 0 |
 | `sbc-lem-higher-direct-image-presheaf` | 1 | state | 0 |
+| `thm-weil-pbc-universal-homeomorphism-invariance` | 1 | state | 0 |
 | `lem-pc-affine-perfect-hom-colimit` | 2 | state | 0 |
 | `lem-pc-proper-support-perfect-direct-image` | 2 | state | 0 |
 | `lem-pc-rf-base-change-flat-module` | 2 | state | 0 |
@@ -143,7 +149,6 @@
 | `lem-sc-mult-n-tangent-differential` | 2 | state | 0 |
 | `lem-sc-p1-graded-kernel-finite` | 2 | state | 0 |
 | `lem-sc-p1-proj-shifted-free-twist` | 2 | state | 0 |
-| `lem-sc-p1-serre-section-module-finite` | 2 | state | 0 |
 | `lem-sc-p1-twist-multiplication` | 2 | state | 0 |
 | `lem-sc-pic-affine-quotient` | 2 | state | 0 |
 | `lem-sc-picard-valuation-probe-closure` | 2 | state | 0 |
@@ -151,12 +156,11 @@
 | `lem-sc-second-kummer-divisors` | 2 | state | 0 |
 | `lem-sc-supported-derived-generated-perfect` | 2 | state | 0 |
 | `lem-sc-valuation-closed-fibre-section-vanishing` | 2 | state | 0 |
-| `lem-sc-valuation-proper-coherent-sections` | 2 | state | 0 |
 | `lem-sp-derived-couple-functoriality` | 2 | state | 0 |
 | `lem-weil-pbc-etale-cohomology-limit-complex-systems` | 2 | state | 0 |
 | `lemma-weil-pbc-etale-cohomology-continuity` | 2 | state | 0 |
 
-Not open yet: 40 nodes that wait for stage 1, 273 nodes that wait for a statement dependency.
+Not open yet: 40 nodes that wait for stage 1, 265 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
