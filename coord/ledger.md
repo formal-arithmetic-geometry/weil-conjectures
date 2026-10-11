@@ -3815,3 +3815,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 08:23 L: merged deliver/K1/lem-sc-geometrically-irreducible-product (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.GeometricallyIrreducibleProduct AlgebraicGeometry.geometricallyIrreducible_pullback_over_field)
 - 08:23 L: merged deliver/G1/lem-pc-homeo-pure-insep (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.HomeomorphPurelyInseparableBaseChange AlgebraicGeometry.isHomeomorph_baseChange_of_isPurelyInseparable)
 - 08:23 L: merged deliver/K1/lem-sc-general-theorem-of-cube (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.GeneralTheoremOfCube AlgebraicGeometry.nonempty_iso_unit_of_tensorPullback_slices_and_fiber)
+- 08:23 L: merged deliver/G1/lem-pc-sheaf-modules-tensor-closed (stage 2; reviewer PASS; first push; Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorClosed SheafOfModules.tensorClosed)
