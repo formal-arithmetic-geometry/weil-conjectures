@@ -1,11 +1,11 @@
 # Work queue
 
-891 items; claim with `tools/claim.py next <group> [--stage N]`.
+886 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (891)
+## Stage 2: nodes to state (886)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -18,13 +18,11 @@
 | `lem-pc-derived-adjoint-functors` | 1 | state |
 | `lem-pc-derived-tensor-transitivity` | 1 | state |
 | `lem-pc-filtered-colimit-derived-tensor` | 1 | state |
-| `lem-pc-flat-bounded-complex-descent` | 1 | state |
 | `lem-pc-module-pullback-identity-composition` | 1 | state |
 | `lem-pc-pre-derived-adjoint-functors-general` | 1 | state |
 | `lem-pur-rhom-into-kinjective-local` | 1 | state |
 | `lem-pur-rhom-well-defined` | 1 | state |
 | `lem-sc-base-change-curve` | 1 | state |
-| `lem-sc-derived-hom-tensor-total` | 1 | state |
 | `lem-sc-dimension-locally-algebraic` | 1 | state |
 | `lem-sc-fibre-dimension-after-base-change` | 1 | state |
 | `lem-sc-p1-ext-locally-free-naturality` | 1 | state |
@@ -39,17 +37,14 @@
 | `lem-sp-ce-vertical-nullhomotopy` | 1 | state |
 | `lem-weil-derived-limit-roos-complex` | 1 | state |
 | `lem-weil-pbc-affine-formally-smooth-iff-ring-lifting` | 1 | state |
-| `lem-weil-pbc-affine-tilde-tensor` | 1 | state |
 | `lem-weil-pbc-algebraize-finite-over-proper` | 1 | state |
 | `lem-weil-pbc-ample-very-ample-immersion-affine-base` | 1 | state |
 | `lem-weil-pbc-artinian-ideal-length-one-filtration` | 1 | state |
-| `lem-weil-pbc-artinian-local-essentially-finite-type-residue` | 1 | state |
 | `lem-weil-pbc-associated-module-hom` | 1 | state |
 | `lem-weil-pbc-associated-module-pullback` | 1 | state |
 | `lem-weil-pbc-associated-prime-localize-at-prime` | 1 | state |
 | `lem-weil-pbc-associated-primes-exact-sequence` | 1 | state |
 | `lem-weil-pbc-associated-primes-flat-base-change` | 1 | state |
-| `lem-weil-pbc-base-change-nilpotent-thickening-idempotents` | 1 | state |
 | `lem-weil-pbc-basis-sheaf-cofinal-coverings` | 1 | state |
 | `lem-weil-pbc-basis-sheaf-sections-germs` | 1 | state |
 | `lem-weil-pbc-cartesian-eilenberg-functorial` | 1 | state |
