@@ -1,11 +1,11 @@
 # Work queue
 
-376 items; claim with `tools/claim.py next <group> [--stage N]`.
+375 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (376)
+## Stage 2: nodes to state (375)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -49,7 +49,6 @@
 | `lem-weil-pbc-quasi-coherent-module-colimit-affine-sections` | 1 | state |
 | `lem-weil-pbc-quasi-coherent-symmetric-algebra` | 1 | state |
 | `lem-weil-pbc-quasi-coherent-tensor-product-affine-sections` | 1 | state |
-| `lem-weil-pbc-quasi-finite-affine-open-in-finite` | 1 | state |
 | `lem-weil-pbc-quasi-finite-at-finite-subalgebra-away` | 1 | state |
 | `lem-weil-pbc-quasi-finite-at-point-isolated` | 1 | state |
 | `lem-weil-pbc-quasi-finite-over-polynomial-algebra` | 1 | state |
