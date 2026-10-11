@@ -15,18 +15,47 @@
  },
  "proof": [],
  "proof_deps": [],
- "proof_origin": null,
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites.tex",
+  "place": "section-sheaves-algebraic-structures"
+ },
  "mathlib_searches": [
   {
+   "tool": "leanfinder",
+   "query": "sheafification of presheaf of abelian groups or commutative rings underlying presheaf of sets",
+   "results": "CategoryTheory.sheafification_obj; CategoryTheory.sheafToPresheaf_obj; CategoryTheory.sheafToPresheaf; CategoryTheory.Sheaf.val; CategoryTheory.GrothendieckTopology.sheafification_obj",
+   "date": "2026-10-11",
+   "verdict": "generalization: the search returned the generic sheafification and underlying-presheaf declarations; the preservation theorem below supplies the comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "sheafifyComposeIso, PreservesSheafification, forget AddCommGrpCat, forget CommRingCat",
+   "results": "0 hits; unknown identifier 'sheafifyComposeIso' in this query",
+   "date": "2026-10-11",
+   "verdict": "no match (the declaration is found by grep and LeanFinder; Loogle did not resolve the unqualified name)."
+  },
+  {
    "tool": "grep",
-   "query": "grep -rn 'sheafifyComposeIso\\|instance : PreservesSheafification J F' Mathlib/CategoryTheory/Sites/PreservesSheafification.lean",
-   "results": "sheafifyComposeIso (line 233), sheafComposeIso_hom_fac (line 239), instance PreservesSheafification J F for forgetful functors of concrete categories preserving limits and the relevant colimits and reflecting isos (line 298)",
-   "date": "2026-10-10",
-   "verdict": "match: CategoryTheory.sheafifyComposeIso (Mathlib/CategoryTheory/Sites/PreservesSheafification.lean:233); one-line specialization sheafifyComposeIso J (forget AddCommGrpCat) P, resp. (forget CommRingCat), with sheafComposeIso_hom_fac (line 239) for compatibility with the units; PreservesSheafification instance at line 298. General-site version of lem-weil-pbc-ring-sheafification-underlying-sets (etale site, rings) and lem-weil-pbc-module-sheafification-underlying-sets (topological spaces)."
+   "query": "sheafifyComposeIso|PreservesSheafification in Mathlib/CategoryTheory/Sites",
+   "results": "Mathlib/CategoryTheory/Sites/PreservesSheafification.lean:233 sheafifyComposeIso; :239 sheafComposeIso_hom_fac; :298-312 concrete forgetful-functor PreservesSheafification instance",
+   "date": "2026-10-11",
+   "verdict": "match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "sheafification commutes with the forgetful functor from abelian groups or commutative rings to sets",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
   }
  ],
- "mathlib_match": null,
- "status": "unsplit",
+ "mathlib_match": {
+  "declaration": "CategoryTheory.sheafifyComposeIso; CategoryTheory.sheafComposeIso_hom_fac; CategoryTheory.GrothendieckTopology.PreservesSheafification",
+  "file": "Mathlib/CategoryTheory/Sites/PreservesSheafification.lean:233,239,298-312",
+  "how": "specializes in one line with F = forget AddCommGrpCat for the abelian-group case and F = forget CommRingCat for the commutative-ring case. `sheafifyComposeIso` (line 233) identifies sheafification after forgetting with the forgotten sheafification; `sheafComposeIso_hom_fac` (lines 239-242) identifies the comparison isomorphism's composite with the sheafification unit, giving the stated map and its universal factorization. The concrete-category instance `PreservesSheafification` (lines 298-312), together with the standard HasSheafCompose and HasWeakSheafify instances, supplies the hypotheses for both forgetful functors."
+ },
+ "status": "mathlib",
  "created": {
   "item": "lem-pc-sites-module-sheafification-bilinear-extension",
   "by": "reviewer",
@@ -43,5 +72,20 @@
    ]
   },
   "same_as": []
+ },
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-pc-sites-sheafification-underlying-sets",
+  "worker": "stage1",
+  "summary": "The item is a Mathlib leaf. The generic sheafification comparison for a functor preserving sheafification specializes to the forgetful functors from AddCommGrpCat and CommRingCat to Type, and its unit compatibility gives exactly the underlying sheafification map and universal property.",
+  "blueprint": "The item realizes the imported blueprint clause that sheafification of algebraic structures commutes with forgetting to sets (Stacks sites.tex, section-sheaves-algebraic-structures)."
+ },
+ "reviewed": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-sus0000",
+  "group": "H1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-sus0000 (reviewer sub-agent of L); spot-checked: Mathlib leaf delivered by H1: sheafifyComposeIso (PreservesSheafification.lean:233) + sheafComposeIso_hom_fac (:239) with the concrete-category PreservesSheafification instance (:305-312); read with sed by L at 00:01 UTC; reviewer R-sus0000 confirmed the match and found no fault"
  }
 }
