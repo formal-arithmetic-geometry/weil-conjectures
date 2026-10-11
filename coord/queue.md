@@ -1,11 +1,11 @@
 # Work queue
 
-722 items; claim with `tools/claim.py next <group> [--stage N]`.
+719 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (722)
+## Stage 2: nodes to state (719)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -29,7 +29,6 @@
 | `lem-weil-pbc-etale-graph-section-extension-map` | 1 | state |
 | `lem-weil-pbc-etale-inverse-image-algebraic-structures` | 1 | state |
 | `lem-weil-pbc-etale-local-ring-triples` | 1 | state |
-| `lem-weil-pbc-etale-qcqs-cofinal-finite-coverings` | 1 | state |
 | `lem-weil-pbc-etale-qcqs-sections-filtered-colimit` | 1 | state |
 | `lem-weil-pbc-etale-restriction-pullback-unit` | 1 | state |
 | `lem-weil-pbc-etale-retraction-finite-product-local` | 1 | state |
@@ -38,9 +37,7 @@
 | `lem-weil-pbc-etale-ring-map-prescribed-residue-field` | 1 | state |
 | `lem-weil-pbc-etale-separated-stratified-finite` | 1 | state |
 | `lem-weil-pbc-etale-sheaf-clopen-product` | 1 | state |
-| `lem-weil-pbc-etale-smooth-zero-dimensional-fibres` | 1 | state |
 | `lem-weil-pbc-etale-stratification-local-gluing` | 1 | state |
-| `lem-weil-pbc-etale-stratified-finite` | 1 | state |
 | `lem-weil-pbc-etale-subsheaf-final-open` | 1 | state |
 | `lem-weil-pbc-exact-free-complex-last-minors-regular-sequence` | 1 | state |
 | `lem-weil-pbc-exact-sequence-ml` | 1 | state |
