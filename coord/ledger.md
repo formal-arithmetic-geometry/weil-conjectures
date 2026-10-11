@@ -4415,3 +4415,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 11:14 L: merged deliver/F1/lem-weil-pbc-limit-flat-modules (stage 2; reviewer PASS; first push; Sheaf.RingTheory.LimitFlatModules ModuleCat.limit_flat_of_flat_quotients)
 - 11:15 L: merged deliver/F1/lem-weil-pbc-local-ring-colimit-essentially-finite-type-over-z (stage 2; reviewer PASS; first push; Sheaf.RingTheory.LocalRingColimitEssentiallyFiniteType CommRingCat.exists_local_essFiniteType_colimit)
 - 11:15 L: merged deliver/J1/lem-weil-pbc-linear-equation-localization-polynomial (stage 2; reviewer PASS; first push; Sheaf.RingTheory.LinearEquationLocalizationPolynomial MvPolynomial.linearEquationLocalizationPolynomial)
+- 11:16 L: merged deliver/K1/lem-weil-pbc-lft-over-field-isolated-point-residue-finite (stage 2; reviewer FIX; first push; Sheaf.AlgebraicGeometry.LftOverFieldIsolatedPointResidueFinite AlgebraicGeometry.lft_over_field_isolated_point_residue_finite)
