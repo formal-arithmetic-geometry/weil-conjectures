@@ -168,6 +168,30 @@ def Presheaf.HasLocallyTrivialRelations (P : Cᵒᵖ ⥤ ModuleCat.{u + 1} R) : 
         e * b = 0 ∧ ∀ j, P.map f.op (y j) = ∑ m, b j m • z m
 
 omit [EssentiallySmall.{u + 1} C] in
+/-- Locally trivial relations, for families and relations indexed by arbitrary finite types. -/
+lemma Presheaf.HasLocallyTrivialRelations.exists_of_fintype {P : Cᵒᵖ ⥤ ModuleCat.{u + 1} R}
+    (hP : Presheaf.HasLocallyTrivialRelations J P) {V : C} {ι κ : Type} [Fintype ι] [Finite κ]
+    (y : ι → P.obj (op V)) (e : Matrix κ ι R) (he : ∀ l, ∑ j, e l j • y j = 0) :
+    ∃ T ∈ J V, ∀ ⦃W : C⦄ (f : W ⟶ V), T f →
+      ∃ (t : ℕ) (b : Matrix ι (Fin t) R) (z : Fin t → P.obj (op W)),
+        e * b = 0 ∧ ∀ j, P.map f.op (y j) = ∑ m, b j m • z m := by
+  have := Fintype.ofFinite κ
+  let eι := Fintype.equivFin ι
+  let eκ := Fintype.equivFin κ
+  obtain ⟨T, hT, hfac⟩ := hP (y ∘ eι.symm) (fun l n ↦ e (eκ.symm l) (eι.symm n)) (fun l ↦ by
+    rw [← he (eκ.symm l)]
+    exact Fintype.sum_equiv eι.symm _ _ fun _ ↦ rfl)
+  refine ⟨T, hT, fun W f hf ↦ ?_⟩
+  obtain ⟨t, b, z, heb, hyz⟩ := hfac f hf
+  refine ⟨t, fun j m ↦ b (eι j) m, z, ?_, fun j ↦ ?_⟩
+  · ext l m
+    have := congrFun (congrFun heb (eκ l)) m
+    simp only [Matrix.mul_apply, Equiv.symm_apply_apply, Matrix.zero_apply] at this ⊢
+    rw [← this]
+    exact Fintype.sum_equiv eι _ _ fun _ ↦ by simp
+  · simpa using hyz (eι j)
+
+omit [EssentiallySmall.{u + 1} C] in
 /-- **Tensoring with a presheaf with locally trivial relations is locally injective.** If `P`
 has locally trivial relations and `M ⟶ N` is an injection of presheaves of modules, a section
 of `P ⊗ M` killed in `P ⊗ N` vanishes locally. -/
