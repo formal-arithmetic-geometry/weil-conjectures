@@ -121,5 +121,23 @@
   "group": "H1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-itq (reviewer sub-agent of L); spot-checked: Read the whole split (only the item's file and report changed; statement and maintainer fields unchanged, 0 new nodes). Source: Stacks 01CE (modules-lemma-tensor-product-permanence) item (3) read in modules.tex: F, G quasi-coherent on a ringed space gives F tensor G quasi-coherent, no further hypothesis; item statement (scheme, F quasi-coherent, L invertible, n in Z, negative powers via the dual) unchanged. Step 1: def-sc-invertible-module (invertible = quasi-coherent locally free rank one, so O_Y is invertible) and lem-pc-tensor-dual-invertible (dual and tensor product of invertibles invertible, any scheme) carry the induction for n>=0 and for n<0 on L^vee; checked. Step 2: def-sc-invertible-module gives L^n quasi-coherent; lem-weil-pbc-quasi-coherent-tensor-product-affine-sections states F tensor G quasi-coherent for any scheme and quasi-coherent F, G, no finiteness or separation; carries the step. Tool uses accepted as generic black boxes (C8): lem-pc-tensor-dual-invertible, lem-weil-pbc-quasi-coherent-tensor-product-affine-sections; no node of unit sk-thm-curveestimate states either. B10/attachment: pinned Mathlib has no IsQuasicoherent tensor declaration (Mathlib AlgebraicGeometry only Modules/Tilde mentions IsQuasicoherent); slopmaster2 Scheme.Modules.isQuasicoherent_tensorObj (ProjectionFormula.lean:156) treats a single invertible factor and the project has natural tensorPow only, no integer powers, so no exact attachment. Small cases n=0 (F tensor O_Y = F), n=1, n=-1 checked. Start Sat Oct 10 04:43:03 PM UTC 2026, end Sat Oct 10 04:43:24 PM UTC 2026."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.InvertibleTensorQcoherent",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.isQuasicoherent_tensor_integer_power",
+  "file": "lean/Sheaf/AlgebraicGeometry/InvertibleTensorQcoherent.lean",
+  "statement": "theorem isQuasicoherent_tensor_integer_power {X : Scheme.{u}} (F L : X.Modules) [F.IsQuasicoherent] [L.IsInvertible] (n : ℤ) : (tensorObj F (if h : 0 ≤ n then L.tensorPow n.toNat else (dual L).tensorPow (-n).toNat)).IsQuasicoherent",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-itq1215",
+  "group": "H1",
+  "result": "pass",
+  "note": "#check: binders {X : Scheme.{u}} (only universe u, no index types), F with SheafOfModules.IsQuasicoherent (Mathlib, per COHERENT SHEAVES line), L with source Scheme.Modules.IsInvertible, n : ℤ; conclusion tensorObj = monoidal ⊗ on X.Modules (SheafOfModules.monoidalCategory X.sheaf) of F with L.tensorPow n.toNat for n>=0 and (dual L).tensorPow (-n).toNat for n<0 (node's dual convention; same form as landed SnapperNumericalPolynomial/NumericalPolynomialLeadingTerm); n=0 unit, n=-1 dual^1; no let, no existentials, no hollow hypotheses; only the item node changed"
  }
 }
