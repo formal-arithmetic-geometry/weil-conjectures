@@ -1,11 +1,11 @@
 # Work queue
 
-863 items; claim with `tools/claim.py next <group> [--stage N]`.
+859 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (863)
+## Stage 2: nodes to state (859)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -42,8 +42,6 @@
 | `lem-sp-cartan-eilenberg-comparison-independence` | 1 | state |
 | `lem-sp-ce-horizontal-lift` | 1 | state |
 | `lem-weil-derived-limit-roos-complex` | 1 | state |
-| `lem-weil-pbc-associated-module-pullback` | 1 | state |
-| `lem-weil-pbc-change-ideal-completion` | 1 | state |
 | `lem-weil-pbc-closed-pushforward-stalks` | 1 | state |
 | `lem-weil-pbc-cohen-power-series-presentation` | 1 | state |
 | `lem-weil-pbc-colimit-category-fp-algebras` | 1 | state |
@@ -51,10 +49,8 @@
 | `lem-weil-pbc-colimit-flat-ring-map` | 1 | state |
 | `lem-weil-pbc-colimit-surjective-ring-map` | 1 | state |
 | `lem-weil-pbc-complete-local-domain-finite-over-regular` | 1 | state |
-| `lem-weil-pbc-complete-local-g-ring` | 1 | state |
 | `lem-weil-pbc-complete-local-map-cohen-presentation` | 1 | state |
 | `lem-weil-pbc-complete-local-map-regular-presentation` | 1 | state |
-| `lem-weil-pbc-complete-local-nagata` | 1 | state |
 | `lem-weil-pbc-complete-local-quotient` | 1 | state |
 | `lem-weil-pbc-complete-pair-henselian` | 1 | state |
 | `lem-weil-pbc-completed-module-associated-graded-generators` | 1 | state |
