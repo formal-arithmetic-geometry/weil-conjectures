@@ -15,11 +15,11 @@
 | `lem-pc-vanishing-above-dim` | 4009 | rests_on_sorry |
 | `lem-pc-derived-tensor-second-factor-functor` | 5017 | none |
 | `lem-pc-derived-tensor-flat-second-localization` | 5018 | none |
-| `lem-sc-picard-qcoh-universal-delta-embedding` | 6015 | none |
 | `lem-sc-complex-lift-acyclic-projective` | 6018 | none |
 | `lem-sc-base-change-curve` | - | none |
 | `lem-sc-global-functions` | - | rests_on_sorry |
-| `lem-pur-triangle-morphism-category-05r9` | - | none |
+| `lem-pur-triangle-common-refinement-ms3-05r9` | - | none |
+| `lem-pur-triangle-completion-ms6-05r9` | - | none |
 
 ## Stage 2: nodes to state (850)
 
@@ -876,7 +876,7 @@
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 | `def-nagata-fixed-base-separated-stage` | 6 | state |
 
-Not open yet: 1778 nodes that wait for a statement dependency, 55 nodes that wait for stage 1.
+Not open yet: 1780 nodes that wait for a statement dependency, 55 nodes that wait for stage 1.
 
 ## Stage 3: modules to prove (0)
 
