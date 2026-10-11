@@ -152,5 +152,23 @@
   "group": "G1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-paq2750 (reviewer sub-agent of L); spot-checked: Statement identical to the restated one on sheaf-dag (E7 ok); lem-sc-pic-affine step 1 uses it exactly (C4 ok); no excision/restriction-to-open Pic node exists in dag/nodes, so step 2 stays elementary from lem-sc-divisor-class-curve (Hartshorne II.6.5 argument, same function field). FIX more, RETURN less: (1) C4 in step 3: lem-sc-pic-proper-decomposition only gives an unspecified splitting, not one with [P0]=(1,0); rewrote step 3 with the explicit retraction x -> x - deg(x)[P0] (S nonempty from step 1), elementary; (2) B4: steps 1-4 rewritten in TeX, no plain-text arrows. The Second reading by G1 missed fault (1).; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.Curve.PicAffineQuotient",
+  "declaration": "AlgebraicGeometry.IsConnectedCurve.pic_affine_quotient",
+  "file": "lean/Sheaf/AlgebraicGeometry/Curve/PicAffineQuotient.lean",
+  "statement": "theorem IsConnectedCurve.pic_affine_quotient {k : Type u} [Field k] [IsAlgClosed k] {C : Scheme.{u}} (f : C ⟶ Spec (.of k)) [IsConnectedCurve f] [Smooth f] [IsAffine C] (c : Compactification f) [IsConnectedCurve c.g] [Smooth c.g] [hsm : SmoothOfRelativeDimension 1 c.g] [GeometricallyIntegral c.g] (hfin : (Set.range c.i.base)ᶜ.Finite) (hcl : ∀ x ∈ (Set.range c.i.base)ᶜ, IsClosed ({x} : Set c.Z)) (J : Over (Spec (.of k))) [CommGrpObj J] [IsJacobian c.g J] (G : Subgroup c.Z.Pic) (hG : (G : Set c.Z.Pic) = c.g.picZero) (e : G ≃* (𝟙_ (Over (Spec (.of k))) ⟶ J)) : (Set.range c.i.base)ᶜ.Nonempty ∧ ∀ (P₀ : closedPoints c.Z), P₀.val ∉ Set.range c.i.base → Nonempty (Additive C.Pic ≃+ Additive (𝟙_ (Over (Spec (.of k))) ⟶ J) ⧸ AddSubgroup.closure {a | ∃ (P : closedPoints c.Z) (L : G), P.val ∉ Set.range c.i.base ∧ L.val = @Scheme.Pic.ofClosedPoint k _ c.Z ⟨c.g⟩ hsm P / @Scheme.Pic.ofClosedPoint k _ c.Z ⟨c.g⟩ hsm P₀ ∧ a = Additive.ofMul (e L)})",
+  "branch": "sheaf-dag",
+  "by": "R1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "R1",
+  "result": "pass",
+  "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
  }
 }
