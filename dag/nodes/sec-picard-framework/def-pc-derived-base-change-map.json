@@ -78,5 +78,28 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-dbc0019 (reviewer sub-agent of L); spot-checked: Read lem-pc-ringed-spaces-derived-adjoint (Lg^* -| Rg_* Hom bijection on all of D(O); unit is the image of id, elementary), lem-pc-derived-direct-image-composition (canonical natural iso R(f o p)_* = Rf_* Rp_*, C4 ok), def-pc-derived-pullback/-direct-image/-category; restriction clause: W'=(g')^{-1}W = X' x_X W is cartesian over S'->S (elementary); D_QCoh restriction harmless, construction works on all of D(O_X); citer lem-pc-rf-mv-triangle-naturality uses exactly this unit/mate form (merged parent single-complex MV does not cite it directly); no duplicate (sbc-def-base-change-map is etale Lambda-sheaves). FIX more, RETURN less: (1) E/B: composite Rf_*E -> Rf_*Rg_*Rf'_*Lg'^*E was ill-typed, corrected to Rf_*Rg'_*Lg'^*E = R(f o g')_* = R(g o f')_* = Rg_*Rf'_*; (2) B3: g:S'->S, g':X'->X, f' and f o g' = g o f' now named in the statement, and the unit cited to lem-pc-ringed-spaces-derived-adjoint; (3) C/source: etale-cohomology.tex holds neither 07A7 nor 0736 (both sites-cohomology); replaced by the O-module version cohomology.tex Remark 08HY with the unit-form construction of Lemma 02N7; 1 file(s) fixed by the reviewer"
  },
- "lead_note": "2026-10-11 L (R-dbc0019): Second reading by H1 claimed a source correction to sites-cohomology/07A7 that is not in the delivered file and missed the ill-typed composite Rf_*Rg_*Rf'_*; both repaired by reviewer."
+ "lead_note": "2026-10-11 L (R-dbc0019): Second reading by H1 claimed a source correction to sites-cohomology/07A7 that is not in the delivered file and missed the ill-typed composite Rf_*Rg_*Rf'_*; both repaired by reviewer.",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SchemeDerivedBaseChangeMap",
+  "declaration": "AlgebraicGeometry.schemeDerivedBaseChangeMap",
+  "file": "lean/Sheaf/AlgebraicGeometry/SchemeDerivedBaseChangeMap.lean",
+  "statement": "def schemeDerivedBaseChangeMap [∀ Y : Scheme.{uBC}, HasDerivedCategory.{wBC} (SheafOfModules.{uBC} (moduleRings Y.toRingedSpace))] {X S X' S' : Scheme.{uBC}} (f : X ⟶ S) (f' : X' ⟶ S') (g : S' ⟶ S) (g' : X' ⟶ X) (h : g' ≫ f = f' ≫ g) (E : schemeDerivedCategory X) : (derivedPullback g).obj ((schemeDerivedDirectImage f).obj E) ⟶ (schemeDerivedDirectImage f').obj ((derivedPullback g').obj E)",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-11",
+  "existing": false,
+  "note": "The node has no recorded Lean declaration on the base. This dependency module states its scheme O-module notion. Defines the mate of the pullback composition comparison and derived counit (08HY), equivalently the unit/direct-image-composition construction. The constructor accepts any commutative square, so also applies to the restricted-open square. Second reading uses adjunctions pinned to the same left-derived counits as the composition comparisons and the recorded right-derived units; arbitrary independent adjunction choices have been removed.",
+  "declarations": [
+   "AlgebraicGeometry.exists_schemeDerivedAdjunction",
+   "AlgebraicGeometry.schemeDerivedBaseChangeMap"
+  ]
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-tpb",
+  "group": "F1",
+  "result": "fix",
+  "note": "qcqs f, IsAffine S S', X'=pullback f g with fst=g_X snd=f', stalkwise Tor via landed PullbackStalkTensor.IsTorIndependent (all x,t over f x=g t, i>0), Scheme.IsPerfect P, schemeDerivedQCohProperty K, global schemeDerivedTensorMonoidal P ⊗ K, IsIso of canonical 08HY map to Rf'_*Lg_X^*(P⊗K) (079U iso postcomposition keeps IsIso); dep module for def-pc-derived-base-change-map (record null on base, no citer re-pointed): pinned adjunction + leftDerivedLift composition; fixed: body letI of Additive replaced by named instance argument hAdd"
+ }
 }

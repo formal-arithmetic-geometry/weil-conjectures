@@ -11,7 +11,7 @@
  },
  "kind": "statement",
  "title": "Tor-independent base change for a perfect tensor factor",
- "statement": "Let f:X\\to S be a quasi-compact and quasi-separated morphism of schemes [def-pc-scheme], let g:S'\\to S be a morphism with S=\\operatorname{Spec}(R) and S'=\\operatorname{Spec}(R'), and form X'=X\\times_S S' with projection g_X:X'\\to X and f':X'\\to S' [def-pc-fibre-product]. Assume f and g are Tor independent: for every x\\in X and s'\\in S' over the same s\\in S, \\operatorname{Tor}_i^{\\mathcal O_{S,s}}(\\mathcal O_{X,x},\\mathcal O_{S',s'})=0 for i>0. If P is a perfect complex on X [def-pc-perfect-complex] and K\\in D_{\\mathrm{QCoh}}(X) [def-pc-derived-category], then the canonical base-change morphism $$Lg^*Rf_*(P\\mathbin{\\otimes^L_{\\mathcal O_X}}K)\\longrightarrow Rf'_*\\bigl(Lg_X^*P\\mathbin{\\otimes^L_{\\mathcal O_{X'}}}Lg_X^*K\\bigr)$$ [def-pc-derived-pullback, def-pc-derived-direct-image, def-weil-derived-tensor] is an isomorphism in D(\\mathcal O_{S'}).",
+ "statement": "Let f:X\\to S be a quasi-compact and quasi-separated morphism of schemes [def-pc-scheme], let g:S'\\to S be a morphism with S=\\operatorname{Spec}(R) and S'=\\operatorname{Spec}(R'), and form X'=X\\times_S S' with projection g_X:X'\\to X and f':X'\\to S' [def-pc-fibre-product]. Assume f and g are Tor independent: for every x\\in X and s'\\in S' over the same s\\in S, \\operatorname{Tor}_i^{\\mathcal O_{S,s}}(\\mathcal O_{X,x},\\mathcal O_{S',s'})=0 for i>0. If P is a perfect complex on X [def-pc-perfect-complex] and K\\in D_{\\mathrm{QCoh}}(X) [def-pc-derived-category], then the canonical base-change morphism $$Lg^*Rf_*(P\\mathbin{\\otimes^L_{\\mathcal O_X}}K)\\longrightarrow Rf'_*\\bigl(Lg_X^*P\\mathbin{\\otimes^L_{\\mathcal O_{X'}}}Lg_X^*K\\bigr)$$ [def-pc-derived-pullback, def-pc-derived-direct-image, def-pc-scheme-derived-tensor-structure] is an isomorphism in D(\\mathcal O_{S'}). Here Tor independence is the stalkwise predicate of [def-pc-pullback-stalk-tensor-comparison], and the canonical map is that of [def-pc-derived-base-change-map], constructed using the adjunction [lem-pc-ringed-spaces-derived-adjoint] and the canonical derived-pullback composition comparisons [lem-pc-ringed-spaces-derived-pullback-composition]. Its target is identified with Rf'_*Lg_X^*(P\\otimes^L K) by the canonical tensor-pullback isomorphism [lem-pc-derived-pullback-tensor-product].",
  "source": {
   "document": "literature/stacks-project/perfect.tex",
   "place": "Tag 0AVW, lemma-affine-morphism-and-hom-out-of-perfect (proof of case (1), after tensor-Hom identification)"
@@ -23,7 +23,12 @@
   "def-pc-derived-category",
   "def-pc-derived-pullback",
   "def-pc-derived-direct-image",
-  "def-weil-derived-tensor"
+  "def-pc-scheme-derived-tensor-structure",
+  "def-pc-pullback-stalk-tensor-comparison",
+  "def-pc-derived-base-change-map",
+  "lem-pc-ringed-spaces-derived-adjoint",
+  "lem-pc-ringed-spaces-derived-pullback-composition",
+  "lem-pc-derived-pullback-tensor-product"
  ],
  "proof": [
   {
@@ -64,7 +69,7 @@
    "text": "The derived-pullback tensor-product comparison [lem-pc-derived-pullback-tensor-product] identifies Lg_X^*(K\\otimes^L P) with Lg_X^*K\\otimes^L Lg_X^*P. Transporting the isomorphism of Step 3 across this canonical identification and the symmetry of derived tensor gives exactly the displayed base-change morphism.",
    "uses": [
     "lem-pc-derived-pullback-tensor-product",
-    "def-weil-derived-tensor"
+    "def-pc-scheme-derived-tensor-structure"
    ],
    "elementary": true,
    "source": {
@@ -78,7 +83,7 @@
   "lem-pc-rf-single-complex-inherited-tensor-condition",
   "lem-pc-rf-single-complex-qcqs-induction",
   "lem-pc-derived-pullback-tensor-product",
-  "def-weil-derived-tensor",
+  "def-pc-scheme-derived-tensor-structure",
   "lem-pc-derived-pullback-tensor-qcoh"
  ],
  "proof_origin": {
@@ -149,5 +154,106 @@
   "group": "E1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-tpb3026 (reviewer sub-agent of L); spot-checked: Return point 1 (E) repaired: child now targets Lg_X^*P and is true (P_x bounded finite free over O_{X,x}; Tor independence makes P_x(x)^L_{O_S,s}O_{S',s'} termwise; O_{X',x'} a flat localization), not a duplicate of lem-pc-derived-pullback-tor-independent-flat-complex (S-flat terms) nor lem-pc-base-change-map-cech; no sorry-free attachment (B10). Point 2 repaired: Step 2 K'=Lg_X^*P with identity, Step 4 only the 079U monoidal identification plus symmetry. Steps 2-3 cite merged 0DJA(1)/0DJ9 nodes without restating the induction; Tor independence inline as in J1; statement is exactly what lem-pc-affine-morphism-hom-out-of-perfect Step 2 uses (P=M^vee, qcqs over affine S). FIX more, RETURN less: C4 in Step 3, the qcqs criterion needs K and K' in D_QCoh; added that P perfect has quasi-coherent cohomology (Tag 08DB, inline) and cited lem-pc-derived-pullback-tensor-qcoh (generic tool: derived pullback and derived tensor preserve D_QCoh) for K(x)^L P and Lg_X^*K(x)^L Lg_X^*P, with uses/proof_deps updated.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.TorIndependentPerfectTensorBaseChange",
+  "declaration": "AlgebraicGeometry.torIndependent_perfect_tensor_baseChange",
+  "file": "lean/Sheaf/AlgebraicGeometry/TorIndependentPerfectTensorBaseChange.lean",
+  "statement": "theorem torIndependent_perfect_tensor_baseChange [∀ Y : Scheme.{uPT}, HasDerivedCategory.{wPT} (SheafOfModules.{uPT} (moduleRings Y.toRingedSpace))] {X S S' : Scheme.{uPT}} [IsAffine S] [IsAffine S'] (f : X ⟶ S) (g : S' ⟶ S) [QuasiCompact f] [QuasiSeparated f] [∀ U : X.Opens, HasDerivedCategory.{wPT} (SheafOfModules.{uPT} ((moduleRings X.toRingedSpace).over U))] (hTor : PullbackStalkTensor.IsTorIndependent f g) (P K : schemeDerivedCategory X) (hP : Scheme.IsPerfect X P) (hK : schemeDerivedQCohProperty X K) : IsIso (schemeDerivedBaseChangeMap f (pullback.snd f g) g (pullback.fst f g) pullback.condition (P ⊗ K))",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-tpb",
+  "group": "F1",
+  "result": "fix",
+  "note": "qcqs f, IsAffine S S', X'=pullback f g with fst=g_X snd=f', stalkwise Tor via landed PullbackStalkTensor.IsTorIndependent (all x,t over f x=g t, i>0), Scheme.IsPerfect P, schemeDerivedQCohProperty K, global schemeDerivedTensorMonoidal P ⊗ K, IsIso of canonical 08HY map to Rf'_*Lg_X^*(P⊗K) (079U iso postcomposition keeps IsIso); dep module for def-pc-derived-base-change-map (record null on base, no citer re-pointed): pinned adjunction + leftDerivedLift composition; fixed: body letI of Additive replaced by named instance argument hAdd",
+  "statement_corrected": true
+ },
+ "statement_change": {
+  "date": "2026-10-11",
+  "by": "F1 stage 2",
+  "old_statement": "Let f:X\\to S be a quasi-compact and quasi-separated morphism of schemes [def-pc-scheme], let g:S'\\to S be a morphism with S=\\operatorname{Spec}(R) and S'=\\operatorname{Spec}(R'), and form X'=X\\times_S S' with projection g_X:X'\\to X and f':X'\\to S' [def-pc-fibre-product]. Assume f and g are Tor independent: for every x\\in X and s'\\in S' over the same s\\in S, \\operatorname{Tor}_i^{\\mathcal O_{S,s}}(\\mathcal O_{X,x},\\mathcal O_{S',s'})=0 for i>0. If P is a perfect complex on X [def-pc-perfect-complex] and K\\in D_{\\mathrm{QCoh}}(X) [def-pc-derived-category], then the canonical base-change morphism $$Lg^*Rf_*(P\\mathbin{\\otimes^L_{\\mathcal O_X}}K)\\longrightarrow Rf'_*\\bigl(Lg_X^*P\\mathbin{\\otimes^L_{\\mathcal O_{X'}}}Lg_X^*K\\bigr)$$ [def-pc-derived-pullback, def-pc-derived-direct-image, def-weil-derived-tensor] is an isomorphism in D(\\mathcal O_{S'}).",
+  "what": "The cited def-weil-derived-tensor constructs tensor on the pro-etale site with constant coefficients, whereas the displayed expression is tensor over O_X on the Zariski site. Replace that category-mismatched citation with the shared scheme derived tensor and explicitly name the existing nodes specifying the Tor predicate, canonical map, adjunction, composition and tensor identification. No geometric hypothesis or conclusion changes. The same obsolete constant-coefficient tensor citation is replaced in proof Step 4 and proof_deps.",
+  "source": {
+   "document": "literature/stacks-project/cohomology.tex; literature/stacks-project/perfect.tex",
+   "place": "Tags 079U and 08HY; Tags 08IB, 0DJA and 0DJ9"
+  },
+  "citers": [
+   {
+    "id": "lem-pc-affine-morphism-hom-out-of-perfect",
+    "holds": true,
+    "note": "Only the tensor-category reference and the explicit canonical-map dependencies change; the perfect-tensor base-change isomorphism used in Step 2 is unchanged."
+   }
+  ],
+  "old_stmt_deps": [
+   "def-pc-scheme",
+   "def-pc-fibre-product",
+   "def-pc-perfect-complex",
+   "def-pc-derived-category",
+   "def-pc-derived-pullback",
+   "def-pc-derived-direct-image",
+   "def-weil-derived-tensor"
+  ],
+  "old_proof": [
+   {
+    "text": "Apply the stalk comparison [lem-pc-tor-independent-perfect-pullback-comparison] to P. The Tor-independence hypothesis gives, at every x' over x, the required stalkwise isomorphism for the canonical identity map Lg_X^*P\\to Lg_X^*P, so this map satisfies the stalkwise base-change condition of the single-complex criterion.",
+    "uses": [
+     "lem-pc-tor-independent-perfect-pullback-comparison"
+    ],
+    "elementary": false,
+    "source": {
+     "document": "literature/stacks-project/perfect.tex",
+     "place": "Tag 0AVW, lemma-compare-base-change proof: local affine reduction and Tor-independent comparison of derived tensors"
+    }
+   },
+   {
+    "text": "Use tensor inheritance [lem-pc-rf-single-complex-inherited-tensor-condition] with K=P, K'=Lg_X^*P and the identity map Lg_X^*P\\to Lg_X^*P, and E=K (the given quasi-coherent derived object). It gives the stalkwise condition for the induced map Lg_X^*(K\\otimes^L P)\\to Lg_X^*K\\otimes^L Lg_X^*P.",
+    "uses": [
+     "lem-pc-rf-single-complex-inherited-tensor-condition"
+    ],
+    "elementary": false,
+    "source": {
+     "document": "literature/stacks-project/perfect.tex",
+     "place": "Tag 0DJA, part (1), tensor inheritance of the single-complex base-change condition"
+    }
+   },
+   {
+    "text": "Apply the qcqs single-complex base-change theorem [lem-pc-rf-single-complex-qcqs-induction] to the map from Step 2. Its objects lie in the quasi-coherent derived categories, as that theorem requires: P is perfect, hence has quasi-coherent cohomology (Stacks Tag 08DB), so P and K\\otimes^L P lie in D_{\\mathrm{QCoh}}(X), and Lg_X^*P and Lg_X^*K\\otimes^L Lg_X^*P lie in D_{\\mathrm{QCoh}}(X') [lem-pc-derived-pullback-tensor-qcoh]. Since f is quasi-compact and quasi-separated, it yields an isomorphism Lg^*Rf_*(K\\otimes^L P)\\to Rf'_*\\bigl(Lg_X^*K\\otimes^L Lg_X^*P\\bigr).",
+    "uses": [
+     "lem-pc-rf-single-complex-qcqs-induction",
+     "lem-pc-derived-pullback-tensor-qcoh"
+    ],
+    "elementary": false,
+    "source": {
+     "document": "literature/stacks-project/perfect.tex",
+     "place": "Tag 0DJ9, lemma-single-complex-base-change"
+    }
+   },
+   {
+    "text": "The derived-pullback tensor-product comparison [lem-pc-derived-pullback-tensor-product] identifies Lg_X^*(K\\otimes^L P) with Lg_X^*K\\otimes^L Lg_X^*P. Transporting the isomorphism of Step 3 across this canonical identification and the symmetry of derived tensor gives exactly the displayed base-change morphism.",
+    "uses": [
+     "lem-pc-derived-pullback-tensor-product",
+     "def-weil-derived-tensor"
+    ],
+    "elementary": true,
+    "source": {
+     "document": "literature/stacks-project/cohomology.tex",
+     "place": "Tag 079U, lemma-pullback-tensor-product"
+    }
+   }
+  ],
+  "old_proof_deps": [
+   "lem-pc-tor-independent-perfect-pullback-comparison",
+   "lem-pc-rf-single-complex-inherited-tensor-condition",
+   "lem-pc-rf-single-complex-qcqs-induction",
+   "lem-pc-derived-pullback-tensor-product",
+   "def-weil-derived-tensor",
+   "lem-pc-derived-pullback-tensor-qcoh"
+  ]
  }
 }
