@@ -1,23 +1,23 @@
 # Work queue
 
-886 items; claim with `tools/claim.py next <group> [--stage N]`.
+882 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (886)
+## Stage 2: nodes to state (882)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
 | `def-sbc-smooth-morphisms` | 1 | state |
 | `def-sc-function-field` | 1 | state |
 | `def-sc-ringed-space-module-cohomology` | 1 | state |
+| `def-sc-scheme-tangent-space` | 1 | state |
 | `def-sp-kinjective-bridge` | 1 | state |
 | `def-weil-l-adic-coefficient-extension` | 1 | state |
 | `lem-kun-cp-approximation` | 1 | state |
 | `lem-pc-derived-adjoint-functors` | 1 | state |
 | `lem-pc-derived-tensor-transitivity` | 1 | state |
-| `lem-pc-filtered-colimit-derived-tensor` | 1 | state |
 | `lem-pc-module-pullback-identity-composition` | 1 | state |
 | `lem-pc-pre-derived-adjoint-functors-general` | 1 | state |
 | `lem-pur-rhom-into-kinjective-local` | 1 | state |
@@ -29,8 +29,6 @@
 | `lem-sc-picard-h1-multiple-locus` | 1 | state |
 | `lem-sc-picard-product-open` | 1 | state |
 | `lem-sc-smooth-proper-diagonal-conormal-differentials` | 1 | state |
-| `lem-sc-tangent-map-linear` | 1 | state |
-| `lem-sc-valuation-zero-section-relative-cartier` | 1 | state |
 | `lem-sp-cartan-eilenberg-comparison-independence` | 1 | state |
 | `lem-sp-cartan-eilenberg-double-complex-homotopy` | 1 | state |
 | `lem-sp-ce-horizontal-lift` | 1 | state |
@@ -45,11 +43,9 @@
 | `lem-weil-pbc-associated-prime-localize-at-prime` | 1 | state |
 | `lem-weil-pbc-associated-primes-exact-sequence` | 1 | state |
 | `lem-weil-pbc-associated-primes-flat-base-change` | 1 | state |
-| `lem-weil-pbc-basis-sheaf-cofinal-coverings` | 1 | state |
 | `lem-weil-pbc-basis-sheaf-sections-germs` | 1 | state |
 | `lem-weil-pbc-cartesian-eilenberg-functorial` | 1 | state |
 | `lem-weil-pbc-cartier-equality` | 1 | state |
-| `lem-weil-pbc-cauchy-binet` | 1 | state |
 | `lem-weil-pbc-cech-vanishing-criterion` | 1 | state |
 | `lem-weil-pbc-change-ideal-completion` | 1 | state |
 | `lem-weil-pbc-charpoly-locally-free-existence` | 1 | state |
@@ -896,7 +892,7 @@
 | `lem-sc-normalization-properties` | 3 | state |
 | `def-nagata-fixed-base-separated-stage` | 6 | state |
 
-Not open yet: 887 nodes that wait for a statement dependency, 40 nodes that wait for stage 1.
+Not open yet: 886 nodes that wait for a statement dependency, 40 nodes that wait for stage 1.
 
 ## Stage 3: modules to prove (0)
 
