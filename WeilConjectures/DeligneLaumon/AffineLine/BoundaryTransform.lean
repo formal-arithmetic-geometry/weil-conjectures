@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.DeligneLaumon.AffineLine.BoundaryWeights
 public import WeilConjectures.DeligneLaumon.AffineLine.Endpoints
+public import WeilConjectures.WeilSheaf.FiniteEtale
 public import WeilConjectures.WeilSheaf.HomologyShift
 public import WeilConjectures.WeilSheaf.LowerShriekPackage
 
@@ -46,23 +47,6 @@ open CategoryTheory Limits Pretriangulated
 namespace AlgebraicGeometry
 
 variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime] [Fact (ringChar k₀ ≠ l)]
-
-/-- TEMPORARY. -/
-theorem WeilSheaf.isLisse_of_isFinite_of_isReduced {Z : Scheme.{u}}
-    [Z.Over (Spec (CommRingCat.of k₀))] [IsFinite (Z ↘ Spec (CommRingCat.of k₀))] [IsReduced Z]
-    (E : WeilSheaf k₀ l Z) : E.IsLisse :=
-  sorry
-
-/-- TEMPORARY. -/
-theorem WeilSheaf.isLisse_lowerStar_of_isPullback {Z X Y : Scheme.{u}}
-    [Z.Over (Spec (CommRingCat.of k₀))] [IsFinite (Z ↘ Spec (CommRingCat.of k₀))] [IsReduced Z]
-    [X.Over (Spec (CommRingCat.of k₀))] [Y.Over (Spec (CommRingCat.of k₀))]
-    [LocallyOfFiniteType (Y ↘ Spec (CommRingCat.of k₀))]
-    {q : X ⟶ Z} {π : X ⟶ Y} [π.IsOver (Spec (CommRingCat.of k₀))] [QuasiCompact π]
-    [QuasiSeparated π] [LocallyOfFiniteType π]
-    (hP : IsPullback q π (Z ↘ Spec (CommRingCat.of k₀)) (Y ↘ Spec (CommRingCat.of k₀)))
-    (G : WeilSheaf k₀ l X) (hG : G.IsLisse) : ((WeilSheaf.lowerStar π).obj G).IsLisse :=
-  sorry
 
 namespace WeilComplex
 
