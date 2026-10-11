@@ -3757,3 +3757,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 08:05 L: returned deliver/J1/lem-pc-very-ample-disjoint-union (reviewer RETURN: Reviewer R-vad1129, head 21ab0f071. H13/H4: the dependency module Sheaf.AlgebraicGeometry.Modules.VeryAmpleCompleteLinea)
 - 08:06 L: merged deliver/C1/lem-pc-skyscraper-complex (stage 2; reviewer FIX; after a return; Sheaf.Topology.SkyscraperComplex SheafOfModules.skyscraper_complex; new nodes: def-pc-ringed-module-skyscraper)
 - 08:06 L: merged deliver/F1/lem-sc-finite-sections-cover-qc (stage 2; reviewer FIX; first push; Sheaf.AlgebraicGeometry.FiniteSectionsCover AlgebraicGeometry.Scheme.Modules.finite_sections_cover_of_globally_generated)
+- 08:06 L: merged deliver/F1/lem-sc-dvr-valuation-ring-characterization (stage 2; reviewer PASS; after a return; Sheaf.RingTheory.DVRValuationRingCharacterization IsDiscreteValuationRing.dvr_valuation_ring_characterization)
