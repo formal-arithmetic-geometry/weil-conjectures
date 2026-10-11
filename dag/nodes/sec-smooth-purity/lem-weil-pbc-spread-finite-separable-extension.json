@@ -127,5 +127,24 @@
   "group": "H1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-sfe3008 (reviewer sub-agent of L); spot-checked: Math true: primitive element, min poly f, invert denominators and disc(f) so f in S[T] monic with f' unit mod f; S[T]/(f) finite free, domain via embedding in K[T]/(f)=K' (free bases), Frac K'; standard etale leaf gives etale. Noetherian hypothesis unused (harmless; statement is what M1 step 2 uses, C4 ok). Leaf Field.exists_primitive_element read at PrimitiveElement.lean:209, exact ([FiniteDimensional][Algebra.IsSeparable]). FIX more, RETURN less: (1) C1 missed by Second reading: Step 3 surjectivity used uncited 'finite morphisms are closed, etale morphisms are open'; replaced by S->A' injective (free, basis contains 1) and integral, then [pqf-lem-lying-over] (Tag 00GQ); finiteness of A' now explicitly from Step 2. (2) C7: standard-etale, min-poly-quotient leaves (unit sk-thm-p1) and pqf-lem-lying-over (sk-prop-av-pqf-finite) are generic tools, declared via --tool-uses. (3) B: primitive-element node source said Tag 09GN; corrected to Fields Tag 030N (lemma-primitive-element), my grep recorded.; 2 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpreadFiniteSeparableExtension",
+  "declaration": "AlgebraicGeometry.exists_spread_finite_separable_extension",
+  "file": "lean/Sheaf/AlgebraicGeometry/SpreadFiniteSeparableExtension.lean",
+  "statement": "theorem exists_spread_finite_separable_extension (A : Type u) [CommRing A] [IsDomain A] [IsNoetherianRing A] (K : Type v) [Field K] [Algebra A K] [IsFractionRing A K] (L : Type w) [Field L] [Algebra K L] [Algebra A L] [IsScalarTower A K L] [FiniteDimensional K L] [Algebra.IsSeparable K L] : ∃ c : A, c ≠ 0 ∧ ∃ S : Subalgebra A L, IsLocalization.Away c S ∧ ∃ B : Subalgebra S L, Module.Finite S B ∧ Algebra.Etale S B ∧ IsFractionRing B L ∧ IsFinite (Spec.map (CommRingCat.ofHom (algebraMap S B))) ∧ Etale (Spec.map (CommRingCat.ofHom (algebraMap S B))) ∧ Surjective (Spec.map (CommRingCat.ofHom (algebraMap S B)))",
+  "branch": "sheaf-dag",
+  "by": "P1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-sfs"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-sfs",
+  "group": "P1",
+  "result": "fix",
+  "note": "A Noetherian domain, K = Frac A, L/K finite-dim + Algebra.IsSeparable (recorded), c≠0, S ⊆ L with IsLocalization.Away c S (tied), B ⊆ L finite + Algebra.Etale + IsFractionRing B L, Spec map IsFinite/Etale/Surjective; removed tautological IsDomain B"
  }
 }
