@@ -160,5 +160,24 @@
   "item": "lem-weil-pbc-finite-presentation-kernel-surjection-finite-type",
   "worker": "stage1",
   "summary": "Checked the label and proof at literature/stacks-project/modules.tex line 1457 (Lemma 01BP, tag file confirms 01BP = lemma-kernel-surjection-finite-free-onto-finite-presentation; source place corrected from line 1452 to 1457). Proof written in four steps following Stacks' proof of (1): maps out of O^n are n-tuples of sections (Step 1, from the definition of O_X-modules); a presentation near x and lifts alpha, beta with phi alpha = psi, psi beta = phi after shrinking (Step 2); gamma = (beta chi, 1 - beta alpha) lands in Ker psi (Step 3, elementary; implicit in Stacks); gamma is surjective onto Ker psi by exactness at O^n (Step 4; Stacks states this without argument). Surjectivity and exactness in Mod(O_X) are translated into local lifting of sections by a new node lem-weil-pbc-ringed-space-module-exactness-local-lifting (Stacks 01AF/01AG with the stalk criterion; unsplit, no Mathlib match: Mathlib has it for abelian-valued sheaves, TopCat.Sheaf.exact_iff_stalkFunctor_map_exact and Sheaf.isLocallySurjective_iff_epi', not for SheafOfModules). Statement unchanged. Mathlib searches added (leansearch, grep); no Mathlib or slopmaster2 declaration states the item."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FinitePresentationKernelSurjectionFiniteType",
+  "declaration": "AlgebraicGeometry.RingedSpace.finitePresentation_kernel_surjection_finiteType",
+  "file": "lean/Sheaf/AlgebraicGeometry/FinitePresentationKernelSurjectionFiniteType.lean",
+  "statement": "theorem finitePresentation_kernel_surjection_finiteType (X : RingedSpace.{u}) (F : SheafOfModules.{u} (moduleRings X)) [F.IsFinitePresentation] (r : ℕ) (ψ : SheafOfModules.free (R := moduleRings X) (ULift.{u} (Fin r)) ⟶ F) (hψ : Epi ψ) : (kernel ψ).IsFiniteType",
+  "branch": "sheaf-dag",
+  "by": "M1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-fks1216"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-fks1216",
+  "group": "M1",
+  "result": "fix",
+  "note": "X RingedSpace; F SheafOfModules (moduleRings X); finite presentation (01BN) -> Mathlib [F.IsFinitePresentation] replacing inline hF (H4/H12); r : ℕ incl. 0; ψ : free (ULift (Fin r)) ⟶ F with Epi ψ; conclusion (kernel ψ).IsFiniteType = pqf-def-coherent finite-type clause as in landed Coherent.lean"
  }
 }
