@@ -7,6 +7,10 @@ right for ordinary code but not for names produced by macros.
 from __future__ import annotations
 import collections, os, pathlib, re, shlex, unicodedata
 
+import os as _os
+_elan = _os.path.expanduser("~/.elan/bin")
+if _elan not in _os.environ.get("PATH", "").split(":"):
+    _os.environ["PATH"] = _elan + ":" + _os.environ.get("PATH", "")   # non-interactive ssh has no lake (2026-10-11)
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 LEAN = (ROOT / "lean").resolve()
 COMMENT_KINDS = ("line", "block", "doc", "moddoc")

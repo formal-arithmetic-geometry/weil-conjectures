@@ -41,7 +41,7 @@ compile() {
   [ -n "${SHEAF_GROUP:-}" ] && refresh_mirror
   [ ${#OUT[@]} -gt 0 ] && rm -f "${OUT[1]}" "${OUT[3]}"
   ( cd "$SHEAF_LEAN" && LEAN_PATH="$LP" timeout "${SHEAF_FILE_TIMEOUT:-60}" env LEAN_NUM_THREADS=2 nice -n 19 \
-      lean -R "$SHEAF_LEAN" "${OUT[@]}" "$F" )
+      lean "${SHEAF_LEAN_OPTS[@]}" -R "$SHEAF_LEAN" "${OUT[@]}" "$F" )
 }
 T0=$(date +%s.%N); START=$(mktemp); compile; rc=$?
 if [ $rc -ne 0 ] && [ $rc -ne 124 ] && [ "$SHEAF_ROOT/local/builds/published" -nt "$START" ]; then

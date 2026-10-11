@@ -12,4 +12,15 @@ for _f in "$SHEAF_ROOT/coord/sheaf.env" "$SHEAF_ROOT/coord/machines/$(hostname).
 done
 : "${SHEAF_LIB:?set SHEAF_LIB in coord/sheaf.env}"
 SHEAF_BUILD=$SHEAF_LEAN/.lake/build/lib/lean
-export SHEAF_ROOT SHEAF_LEAN SHEAF_LIB SHEAF_BUILD
+# Non-interactive ssh has no lake/lean in PATH (launcher, 2026-10-11 05:30 UTC).
+case ":$PATH:" in *":$HOME/.elan/bin:"*) ;; *) PATH="$HOME/.elan/bin:$PATH";; esac
+# The package's [leanOptions] (lean/lakefile.toml) as -D flags, so that a single-file compile applies the same options
+# as the global build (relaxedAutoImplicit/autoImplicit = false, warn.sorry = false, ...); launcher's finding 05:30 UTC.
+SHEAF_LEAN_OPTS=()
+if [ -f "$SHEAF_LEAN/lakefile.toml" ]; then
+  while IFS= read -r _l; do SHEAF_LEAN_OPTS+=("-D$_l"); done < <(awk '
+    /^\[leanOptions\]/ {on=1; next} /^\[/ {on=0} on && /^[A-Za-z][A-Za-z0-9_.]* *= */ {
+      line=$0; sub(/#.*/, "", line); split(line, kv, "="); k=kv[1]; v=kv[2]; gsub(/[ \t]/, "", k); gsub(/^[ \t]+|[ \t]+$/, "", v);
+      gsub(/"/, "", v); print k "=" v }' "$SHEAF_LEAN/lakefile.toml")
+fi
+export SHEAF_ROOT SHEAF_LEAN SHEAF_LIB SHEAF_BUILD PATH
