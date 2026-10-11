@@ -96,5 +96,24 @@
   "group": "K1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-gsf (reviewer sub-agent of L); spot-checked: Source: blueprint lem-sc-p1-graded-resolution.md, proof sentence 'Noetherianity keeps the successive graded kernels finitely generated'; the item statement (k field, S=k[x_0,x_1] graded per def-sc-p1-standard, N f.g. graded, K graded submodule => K f.g. graded) is unchanged and is what that sentence uses. Step 1 forgets the grading and takes K f.g. from the statement of the new leaf lem-sc-p1-ungraded-submodule-finite (same k, S, N f.g., K submodule; conclusion K f.g.), which says it with all hypotheses (C4 ok). Step 2 is elementary: elements of N have finitely many homogeneous components, which lie in K because K is graded; the components of a finite generating set form a finite homogeneous generating set; K=0 handled. Not relabelling (D1): the leaf is ungraded, strictly smaller. Mathlib lines verified in the pinned Mathlib: Noetherian/Basic.lean:324-328 isNoetherian_of_isNoetherianRing_of_finite (instance), Noetherian/Defs.lean:63-64 IsNoetherian.noetherian, Polynomial/Basic.lean:935 MvPolynomial.isNoetherianRing (Hilbert basis instance); the leaf is a one-line specialization. Mathlib states only the ungraded fact, so the graded item stays split rather than a leaf. No slopmaster2 declaration found (grep for the ids and graded FG keywords). Small cases: K=0, K=N, K=(x_0)S in N=S. Fixes: dag/nodes/sec-picard-framework/lem-sc-p1-ungraded-submodule-finite.json: mathlib_match.how: added the Hilbert-basis instance MvPolynomial.isNoetherianRing (Polynomial/Basic.lean:935) that step 1's 'Hilbert basis theorem' relies on, and the exact lines; stmt_deps: dropped def-weil-pbc-noetherian-ring, which the statement does not cite. Start Sat Oct 10 04:12:23 PM UTC 2026, end Sat Oct 10 04:13:01 PM UTC 2026.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.GradedSubmoduleFinite",
+  "declaration": "MvPolynomial.graded_submodule_finite",
+  "file": "lean/Sheaf/RingTheory/GradedSubmoduleFinite.lean",
+  "statement": "theorem graded_submodule_finite {k : Type u} [Field k] {N : Type v} [AddCommGroup N] [Module (MvPolynomial (Fin 2) k) N] (ℳ : ℤ → AddSubgroup N) (hℳ : DirectSum.IsInternal ℳ) (hsmul : ∀ (n : ℕ) (j : ℤ) (f : MvPolynomial (Fin 2) k) (x : N), f ∈ homogeneousSubmodule (Fin 2) k n → x ∈ ℳ j → f • x ∈ ℳ ((n : ℤ) + j)) (hN : ∃ s : Set N, s.Finite ∧ (∀ x ∈ s, SetLike.IsHomogeneousElem ℳ x) ∧ Submodule.span (MvPolynomial (Fin 2) k) s = ⊤) (K : Submodule (MvPolynomial (Fin 2) k) N) (hK : letI : DirectSum.Decomposition ℳ := hℳ.chooseDecomposition; K.IsHomogeneous ℳ) : ∃ s : Set N, s.Finite ∧ (∀ x ∈ s, SetLike.IsHomogeneousElem ℳ x) ∧ Submodule.span (MvPolynomial (Fin 2) k) s = K",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-psf1156"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-psf1156",
+  "group": "F1",
+  "result": "fix",
+  "note": "k Field; S=MvPolynomial (Fin 2) k with total-degree homogeneousSubmodule; N graded: ℳ:ℤ→AddSubgroup N, IsInternal (FIX from Decomposition, aligned with C1), hsmul S_n•N_j⊆N_{n+j}; hN finite homogeneous generators (node proof's 'f.g. graded'); K Submodule + IsHomogeneous; conclusion finite homogeneous generators spanning K; K=0/N=0 empty set"
  }
 }
