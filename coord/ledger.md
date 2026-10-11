@@ -4995,3 +4995,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 14:38 L: merged deliver/G1/lem-weil-pbc-sets-finite-surjective-descent (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.FiniteSurjectiveSetDescent AlgebraicGeometry.finiteSurjectiveSetDescent)
 - 14:38 L: merged deliver/H1/lem-weil-pbc-spectral-closed-clopen-decomposition-lift (stage 2; reviewer PASS; first push; Sheaf.Topology.SpectralClosedClopenDecompositionLift TopCat.spectral_closed_clopen_decomposition_lift)
 - 14:38 L: merged deliver/H1/lem-weil-pbc-spectral-constructible-topology-hausdorff (stage 2; reviewer PASS; first push; Sheaf.Topology.Spectral.ConstructibleTopologyHausdorff t2Space_constructibleTopology)
+- 14:38 L: merged deliver/K1/lem-weil-pbc-closed-subset-proper-over-base-properties (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.ClosedSubsetProperOverBaseProperties AlgebraicGeometry.Scheme.closed_subset_proper_over_base_properties)

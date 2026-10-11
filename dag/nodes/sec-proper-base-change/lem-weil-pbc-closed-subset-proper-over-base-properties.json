@@ -195,5 +195,23 @@
   "item": "lem-weil-pbc-closed-subset-proper-over-base-properties",
   "worker": "stage1",
   "summary": "Checked the statement against Stacks coherent.tex 0CYL, 0CYN, 0CYQ(1) (tags verified in tags/tags): correct, kept. Proof in six steps following Stacks: (1) via the scheme-theoretic union Z'''=Z' cup Z'' (Morphisms 0C4H/0C4J, new node lem-weil-pbc-scheme-theoretic-union), separatedness of Z'''->S by Morphisms 09MQ(4) (new node lem-weil-pbc-surjective-universally-closed-separated), properness by 03GN (existing leaf lem-weil-pbc-image-universally-closed), closed immersions and compositions by the leaves lem-weil-pbc-proper-fp-permanence and lem-weil-pbc-closed-immersion-integral-separated-uc; (2) (Stacks: proof omitted) written out: closed subscheme structure on Y inside Z_red (leaves lem-weil-pbc-closed-subset-closed-subscheme, lem-weil-pbc-closed-immersion-comp) and (1); (3) by Morphisms 0AH6 for the reduced Z (new node lem-weil-pbc-scheme-theoretic-image-proper, stated for X->S proper and Y->S separated, locally of finite type). The brief's alternative route (Z_red -> Z_1 and Schemes 0356 factorization) is not needed. Mathlib searched with LeanSearch, LeanFinder, Loogle (HTTP) and grep: no notion of closed subsets proper over a base."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ClosedSubsetProperOverBaseProperties",
+  "declaration": "AlgebraicGeometry.Scheme.closed_subset_proper_over_base_properties",
+  "statement": "theorem closed_subset_proper_over_base_properties {X S : Scheme.{u}} (f : X ⟶ S) [LocallyOfFiniteType f] (Z : TopologicalSpace.Closeds X) : (IsClosedSubsetProperOver f Z ↔ ∃ (Z' : Scheme.{u}) (i' : Z' ⟶ X) (_ : IsClosedImmersion i'), Set.range i'.base = (Z : Set X) ∧ IsProper (i' ≫ f)) ∧ (IsClosedSubsetProperOver f Z ↔ ∀ (Z' : Scheme.{u}) (i' : Z' ⟶ X) [IsClosedImmersion i'], Set.range i'.base = (Z : Set X) → IsProper (i' ≫ f)) ∧ (∀ (Y : TopologicalSpace.Closeds X), Y ≤ Z → IsClosedSubsetProperOver f Z → IsClosedSubsetProperOver f Y) ∧ (∀ {X' : Scheme.{u}} (g : X ⟶ X') (f' : X' ⟶ S) [LocallyOfFiniteType f'] [IsSeparated f'], g ≫ f' = f → IsClosedSubsetProperOver f Z → ∃ W : TopologicalSpace.Closeds X', (W : Set X') = g '' (Z : Set X) ∧ IsClosedSubsetProperOver f' W)",
+  "branch": "sheaf-dag",
+  "by": "K1",
+  "date": "2026-10-11",
+  "existing": false,
+  "file": "lean/Sheaf/AlgebraicGeometry/ClosedSubsetProperOverBaseProperties.lean"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "K1",
+  "result": "pass",
+  "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
  }
 }
