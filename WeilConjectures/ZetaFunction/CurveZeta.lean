@@ -12,104 +12,34 @@ public import WeilConjectures.EulerProduct
 public import WeilConjectures.ZetaFunction.CurveFactorDegree
 
 /-!
-# The zeta function counts effective zero-cycles
+# The zeta function of a curve and the degree of its middle factor
 
-The `n`-th coefficient of an Euler product `∏ᵢ (1 - T^{dᵢ})⁻¹` with all `dᵢ ≥ 1` is the number
-of finitely supported families `(mᵢ)` of natural numbers with `∑ mᵢ dᵢ = n`. For the zeta
-function of a scheme of finite type over a finite field this says that `Z_n` is the number of
-effective zero-cycles of degree `n`.
+For a scheme of finite type over a finite field `k` with `q` elements, the `n`-th coefficient of
+the zeta function is the number of effective zero-cycles of degree `n`. For a smooth proper
+integral curve `C` with `H⁰(C, 𝒪_C) = k` and genus `g`, these are the effective divisors of
+degree `n`; grouping them by their class in `Pic(C)` and counting each class with Riemann–Roch
+gives, for `n ≥ 2 g - 1`,
+
+`(q - 1) Z_n = #{c ∈ Pic(C) | deg c = -n} · (q^{n + 1 - g} - 1)`,
+
+where the number of classes is `h = #Pic⁰(C)` if `n` lies in the subgroup `δ ℤ` of degrees of
+line bundles and `0` otherwise. With the Riemann hypothesis for the middle factor `P₁` of a Weil
+factorization `Z = P₁ / ((1 - T) (1 - q T))` this forces `deg P₁ = 2 g`
+(`AlgebraicGeometry.IsWeilFactorization.natDegree_eq_two_mul_of_coeff`). This is
+F. K. Schmidt's argument; it gives Step 4 of the blueprint proof of `cor-zl-hasse-bound`,
+`dim H¹(C ⊗ k̄, ℚ̄_ℓ) = 2 g`, without `ℓ`-adic cohomology.
 
 ## Main statements
 
-- `PowerSeries.coeff_tprod_inv_one_sub_X_pow_eq_natCard`: the coefficients of an Euler product.
+- `AlgebraicGeometry.Scheme.Hom.coeff_zetaSeries_eq_natCard_closedPoints`: `Z_n` is the number of
+  effective zero-cycles of degree `n`.
+- `AlgebraicGeometry.Scheme.Divisor.sub_one_mul_card_effective_eq`: the count of effective
+  divisors of degree `n ≥ 2 g - 1`.
+- `AlgebraicGeometry.Scheme.natDegree_eq_two_mul_arithmeticGenus_of_isWeilFactorization`:
+  `deg P₁ = 2 g`.
 -/
 
 @[expose] public section
-
-open scoped PowerSeries.WithPiTopology
-
-namespace PowerSeries
-
-variable {ι : Type*} {d : ι → ℕ}
-
-/-- **Coefficients of an Euler product.** If `dᵢ ≥ 1` for all `i` and only finitely many `dᵢ`
-are at most any given bound, the `n`-th coefficient of `∏ᵢ (1 - T^{dᵢ})⁻¹` is the number of
-finitely supported `m : ι →₀ ℕ` with `∑ᵢ mᵢ dᵢ = n`. -/
-theorem coeff_tprod_inv_one_sub_X_pow_eq_natCard (hd : ∀ i, d i ≠ 0)
-    (hfin : ∀ n, {i | d i ≤ n}.Finite) (n : ℕ) :
-    coeff n (∏' i, ((1 - X ^ d i)⁻¹ : ℚ⟦X⟧)) =
-      Nat.card {m : ι →₀ ℕ // (m.sum fun i k ↦ k * d i) = n} := by
-  classical
-  set T : Finset ι := (hfin n).toFinset with hT_def
-  have hT : ∀ i, d i ≤ n → i ∈ T := fun i hi ↦ by simpa [hT_def] using hi
-  rw [coeff_tprod_inv_one_sub_X_pow hd hfin n hT, coeff_prod]
-  simp only [inv_one_sub_X_pow_eq_mk (hd _), coeff_mk]
-  rw [Finset.sum_congr rfl fun l _ ↦ Finset.prod_boole, Finset.sum_boole]
-  congr 1
-  -- the families `m` correspond to the `l = m d` in the antidiagonal divisible by `d`
-  -- the support of an admissible `m` lies in `T`
-  have hsupp (m : ι →₀ ℕ) (hm : (m.sum fun i k ↦ k * d i) = n) : m.support ⊆ T := by
-    intro i hi
-    refine hT i ?_
-    have hle : m i * d i ≤ m.sum fun i k ↦ k * d i :=
-      Finset.single_le_sum (f := fun i ↦ m i * d i) (fun _ _ ↦ Nat.zero_le _) hi
-    have : 1 ≤ m i := Nat.one_le_iff_ne_zero.2 (Finsupp.mem_support_iff.1 hi)
-    nlinarith
-  let toL (m : ι →₀ ℕ) : ι →₀ ℕ :=
-    Finsupp.ofSupportFinite (fun i ↦ m i * d i) (m.finite_support.subset fun i hi ↦ by
-      simp only [Function.mem_support, ne_eq, mul_eq_zero, not_or] at hi
-      exact hi.1)
-  let toM (l : ι →₀ ℕ) : ι →₀ ℕ :=
-    Finsupp.ofSupportFinite (fun i ↦ l i / d i) (l.finite_support.subset fun i hi ↦ by
-      simp only [Function.mem_support, ne_eq] at hi ⊢
-      intro h
-      exact hi (by rw [h, Nat.zero_div]))
-  have htoL (m : ι →₀ ℕ) (i : ι) : toL m i = m i * d i := rfl
-  have htoM (l : ι →₀ ℕ) (i : ι) : toM l i = l i / d i := rfl
-  have hsumT (m : ι →₀ ℕ) (hm : m.support ⊆ T) :
-      (m.sum fun i k ↦ k * d i) = ∑ i ∈ T, toL m i := by
-    rw [Finsupp.sum, Finset.sum_subset hm fun i _ hi ↦ by
-      rw [Finsupp.notMem_support_iff.1 hi, zero_mul]]
-    rfl
-  refine (Nat.card_eq_finsetCard _).symm.trans (Nat.card_congr ?_)
-  exact
-    { toFun l := ⟨toM l.1, by
-        obtain ⟨hl, hdvd⟩ := Finset.mem_filter.1 l.2
-        rw [Finset.mem_finsuppAntidiag] at hl
-        have hlm : toL (toM l.1) = l.1 := by
-          ext i
-          rw [htoL, htoM]
-          by_cases hi : i ∈ T
-          · exact Nat.div_mul_cancel (hdvd i hi)
-          · rw [Finsupp.notMem_support_iff.1 fun h ↦ hi (hl.2 h), Nat.zero_div, zero_mul]
-        have hsub : (toM l.1).support ⊆ T := fun i hi ↦ by
-          by_contra hiT
-          apply Finsupp.mem_support_iff.1 hi
-          rw [htoM, Finsupp.notMem_support_iff.1 fun h ↦ hiT (hl.2 h), Nat.zero_div]
-        rw [hsumT _ hsub, hlm, hl.1]⟩
-      invFun m := ⟨toL m.1, by
-        have hsub := hsupp m.1 m.2
-        refine Finset.mem_filter.2 ⟨Finset.mem_finsuppAntidiag.2 ⟨?_, fun i hi ↦ ?_⟩,
-          fun i _ ↦ ⟨m.1 i, by rw [htoL, mul_comm]⟩⟩
-        · rw [← hsumT _ hsub, m.2]
-        · refine hsub (Finsupp.mem_support_iff.2 fun h ↦ ?_)
-          apply Finsupp.mem_support_iff.1 hi
-          rw [htoL, h, zero_mul]⟩
-      left_inv l := by
-        obtain ⟨hl, hdvd⟩ := Finset.mem_filter.1 l.2
-        rw [Finset.mem_finsuppAntidiag] at hl
-        refine Subtype.ext (Finsupp.ext fun i ↦ ?_)
-        change toL (toM l.1) i = l.1 i
-        rw [htoL, htoM]
-        by_cases hi : i ∈ T
-        · exact Nat.div_mul_cancel (hdvd i hi)
-        · rw [Finsupp.notMem_support_iff.1 fun h ↦ hi (hl.2 h), Nat.zero_div, zero_mul]
-      right_inv m := by
-        refine Subtype.ext (Finsupp.ext fun i ↦ ?_)
-        change toM (toL m.1) i = m.1 i
-        rw [htoM, htoL, Nat.mul_div_cancel _ (Nat.pos_of_ne_zero (hd i))] }
-
-end PowerSeries
 
 namespace AlgebraicGeometry.Scheme
 
@@ -130,20 +60,6 @@ theorem Hom.coeff_zetaSeries_eq_natCard {X : Scheme.{u}} (f : X ⟶ Spec (.of k)
   exact PowerSeries.coeff_tprod_inv_one_sub_X_pow_eq_natCard (fun x ↦ f.degreeOver_ne_zero x.2)
     f.finite_setOf_degreeOver_le n
 
-/-- On a scheme locally of finite type over a finite field, the points with finite residue field
-are the closed points. -/
-theorem finitePoints_eq_closedPoints_of_finite {X : Scheme.{u}} (f : X ⟶ Spec (.of k))
-    [LocallyOfFiniteType f] : X.finitePoints = closedPoints X := by
-  let g : ULift.{u} ℤ →+* k := (Int.castRingHom k).comp ULift.ringEquiv.toRingHom
-  have hg : g.FiniteType := by
-    have h₁ : (algebraMap ℤ k).FiniteType :=
-      (RingHom.finite_algebraMap.2 Module.Finite.of_finite).finiteType
-    exact h₁.comp (RingHom.FiniteType.of_surjective _ ULift.ringEquiv.surjective)
-  have : LocallyOfFiniteType (Spec.map (CommRingCat.ofHom g)) := by
-    rw [HasRingHomProperty.Spec_iff (P := @LocallyOfFiniteType)]
-    exact hg
-  exact finitePoints_eq_closedPoints X (f ≫ Spec.map (CommRingCat.ofHom g))
-
 /-- **The zeta function counts effective divisors of a given degree.** For a scheme `X` of
 finite type over a finite field `k`, the `n`-th coefficient of `Z(X, T)` is the number of
 `E : closedPoints X →₀ ℕ` with `∑_P E(P) [κ(P) : k] = n`. -/
@@ -154,7 +70,7 @@ theorem Hom.coeff_zetaSeries_eq_natCard_closedPoints {X : Scheme.{u}} (f : X ⟶
   rw [f.coeff_zetaSeries_eq_natCard]
   congr 1
   let e : X.finitePoints ≃ closedPoints X :=
-    Equiv.setCongr (finitePoints_eq_closedPoints_of_finite f)
+    Equiv.setCongr (f.finitePoints_eq_closedPoints)
   refine Nat.card_congr ((Finsupp.equivCongrLeft e).subtypeEquiv fun m ↦ ?_)
   rw [Finsupp.equivCongrLeft_apply, Finsupp.equivMapDomain_eq_mapDomain,
     Finsupp.sum_mapDomain_index (fun _ ↦ zero_mul _) fun _ _ _ ↦ add_mul _ _ _]
@@ -166,7 +82,7 @@ theorem Hom.finite_setOf_sum_degreeOver_eq {X : Scheme.{u}} (f : X ⟶ Spec (.of
     [LocallyOfFiniteType f] [QuasiCompact f] (n : ℕ) :
     Finite {E : closedPoints X →₀ ℕ // (E.sum fun P i ↦ i * f.degreeOver P.1) = n} := by
   classical
-  have hcl := finitePoints_eq_closedPoints_of_finite f
+  have hcl := f.finitePoints_eq_closedPoints
   have hmem {x : X} : x ∈ X.finitePoints ↔ x ∈ closedPoints X := by rw [hcl]
   set S : Set (closedPoints X) := {P | f.degreeOver P.1 ≤ n} with hS
   have hSfin : S.Finite := by
@@ -266,7 +182,7 @@ theorem Divisor.sub_one_mul_card_idealSheafClass_eq (c : C.Pic) {n : ℕ}
 /-- **Counting effective divisors of large degree.** For `n ≥ 2 g - 1`, the classes of degree
 `-n` in `Pic(C)` are finite in number, and the number `A_n` of effective divisors of degree `n`
 satisfies `(q - 1) A_n = #{c ∈ Pic(C) | deg c = -n} · (q^{n + 1 - g} - 1)`. -/
-theorem Divisor.sub_one_mul_card_eq {n : ℕ} (hn : 2 * (arithmeticGenus k C : ℤ) - 1 ≤ n) :
+theorem Divisor.sub_one_mul_card_effective_eq {n : ℕ} (hn : 2 * (arithmeticGenus k C : ℤ) - 1 ≤ n) :
     Finite {c : C.Pic // picDegreeHom k C c = .ofAdd (-(n : ℤ))} ∧
     (Nat.card k - 1) * Nat.card {E : closedPoints C →₀ ℕ //
         (E.sum fun P i ↦ i * (C ↘ Spec (.of k)).degreeOver P.1) = n} =
@@ -354,7 +270,7 @@ theorem natDegree_eq_two_mul_arithmeticGenus_of_isWeilFactorization
   have hδ : 0 < δ := by
     obtain ⟨x, hx⟩ := (C ↘ Spec (.of k)).exists_mem_finitePoints
     have hcl : x ∈ closedPoints C := by
-      rwa [← finitePoints_eq_closedPoints_of_finite (C ↘ Spec (.of k))]
+      rwa [← (C ↘ Spec (.of k)).finitePoints_eq_closedPoints]
     have h1 := Divisor.picDegreeHom_idealSheafClass (k := k) (Finsupp.single ⟨x, hcl⟩ 1)
     rw [Finsupp.sum_single_index (zero_mul _), one_mul] at h1
     have hd0 := (C ↘ Spec (.of k)).degreeOver_ne_zero hx
@@ -386,7 +302,7 @@ theorem natDegree_eq_two_mul_arithmeticGenus_of_isWeilFactorization
     have hn : 2 * g ≤ n := by
       have : 2 * g + 1 ≤ δ * (2 * g + 1) := Nat.le_mul_of_pos_left _ hδ
       omega
-    obtain ⟨hfin, -⟩ := Divisor.sub_one_mul_card_eq (k := k) (C := C) (n := n) (by push_cast; omega)
+    obtain ⟨hfin, -⟩ := Divisor.sub_one_mul_card_effective_eq (k := k) (C := C) (n := n) (by omega)
     obtain ⟨c₀, hc₀⟩ := (hmem (-(n : ℤ))).2 (by rw [dvd_neg]; exact_mod_cast dvd_mul_right δ _)
     have : Finite {c : C.Pic // picDegreeHom k C c = .ofAdd 0} :=
       Finite.of_equiv _ (hfibre _ c₀ hc₀)
@@ -397,7 +313,8 @@ theorem natDegree_eq_two_mul_arithmeticGenus_of_isWeilFactorization
   have hcoeff (n : ℕ) (hn : 2 * g ≤ n) :
       ((q : ℚ) - 1) * PowerSeries.coeff n (C ↘ Spec (.of k)).zetaSeries =
         if δ ∣ n then (h : ℚ) * ((q : ℚ) ^ (n + 1 - g) - 1) else 0 := by
-    obtain ⟨-, hcount⟩ := Divisor.sub_one_mul_card_eq (k := k) (C := C) (n := n) (by push_cast; omega)
+    obtain ⟨-, hcount⟩ :=
+      Divisor.sub_one_mul_card_effective_eq (k := k) (C := C) (n := n) (by omega)
     rw [hcard n hn] at hcount
     rw [Hom.coeff_zetaSeries_eq_natCard_closedPoints]
     have h1 : ((q - 1 : ℕ) : ℚ) = q - 1 := by rw [Nat.cast_sub hq.le, Nat.cast_one]

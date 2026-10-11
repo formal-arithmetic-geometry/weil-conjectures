@@ -8,6 +8,7 @@ module
 public import Mathlib.Analysis.Complex.Polynomial.Basic
 public import Mathlib.Analysis.SpecialFunctions.Pow.Real
 public import Mathlib.RingTheory.PowerSeries.WellKnown
+public import WeilConjectures.Mathlib.Analysis.Complex.Norm
 public import WeilConjectures.ZetaFunction.WeilFactorization
 
 /-!
@@ -114,26 +115,6 @@ theorem sub_one_mul_coeff_eq (h : IsWeilFactorization q 1 Z P) (hq : q ≠ 0) {n
   field_simp
   ring
 
-/-- A complex number `z` with `‖z‖ = q^{-1/2}` satisfies `‖q⁻¹ - z‖ = q^{-1/2} ‖1 - z‖`: both sides
-squared are `q⁻¹ (q⁻¹ - 2 Re z + 1)`. -/
-theorem _root_.Complex.norm_inv_sub_eq {q : ℝ} (hq : 0 < q) {z : ℂ}
-    (hz : ‖z‖ = q ^ (-(1 : ℝ) / 2)) :
-    ‖(q : ℂ)⁻¹ - z‖ = q ^ (-(1 : ℝ) / 2) * ‖1 - z‖ := by
-  have hs : (q ^ (-(1 : ℝ) / 2)) ^ 2 = q⁻¹ := by
-    rw [← Real.rpow_natCast, ← Real.rpow_mul hq.le]
-    norm_num [Real.rpow_neg_one]
-  have hz2 : z.re ^ 2 + z.im ^ 2 = q⁻¹ := by
-    rw [← hs, ← hz, Complex.sq_norm, Complex.normSq_apply]
-    ring
-  have hpos : 0 ≤ q ^ (-(1 : ℝ) / 2) * ‖1 - z‖ :=
-    mul_nonneg (Real.rpow_nonneg hq.le _) (norm_nonneg _)
-  refine (sq_eq_sq₀ (norm_nonneg _) hpos).1 ?_
-  rw [← Complex.ofReal_inv, mul_pow, hs, Complex.sq_norm, Complex.sq_norm, Complex.normSq_apply,
-    Complex.normSq_apply]
-  simp only [Complex.sub_re, Complex.ofReal_re, Complex.sub_im, Complex.ofReal_im,
-    Complex.one_re, Complex.one_im]
-  linear_combination (1 - q⁻¹) * hz2
-
 /-- **Riemann hypothesis and the values at `1` and `1/q`.** If every complex root of `P₁` has
 absolute value `q^{-1/2}`, then `|P₁(1/q)| = q^{-deg P₁ / 2} |P₁(1)|`. -/
 theorem norm_eval_inv_eq (hrh : WeilRiemannHypothesis q 1 P) (hq : 0 < q) :
@@ -154,8 +135,16 @@ theorem norm_eval_inv_eq (hrh : WeilRiemannHypothesis q 1 P) (hq : 0 < q) :
     congr 1
     exact (map_multiset_prod (normHom (α := ℂ)) _).trans (by simp [Multiset.map_map])
   rw [heval, heval]
-  have hroot : ∀ z ∈ Pc.roots, ‖((q : ℝ) : ℂ)⁻¹ - z‖ = (q : ℝ) ^ (-(1 : ℝ) / 2) * ‖1 - z‖ :=
-    fun z hz ↦ Complex.norm_inv_sub_eq hq' (by simpa using hrh 1 z hz)
+  have hs : ((q : ℝ) ^ (-(1 : ℝ) / 2)) ^ 2 = (q : ℝ)⁻¹ := by
+    rw [← Real.rpow_natCast, ← Real.rpow_mul hq'.le]
+    norm_num [Real.rpow_neg_one]
+  have hroot : ∀ z ∈ Pc.roots, ‖((q : ℝ) : ℂ)⁻¹ - z‖ = (q : ℝ) ^ (-(1 : ℝ) / 2) * ‖1 - z‖ := by
+    intro z hz
+    have hz' : ‖z‖ = (q : ℝ) ^ (-(1 : ℝ) / 2) := by simpa using hrh 1 z hz
+    refine (sq_eq_sq₀ (norm_nonneg _)
+      (mul_nonneg (Real.rpow_nonneg hq'.le _) (norm_nonneg _))).1 ?_
+    rw [mul_pow, hs]
+    exact Complex.sq_norm_inv_sub_eq (by rw [hz', hs])
   have hmap : (Pc.roots.map fun z ↦ ‖((q : ℝ) : ℂ)⁻¹ - z‖) =
       Pc.roots.map fun z ↦ (q : ℝ) ^ (-(1 : ℝ) / 2) * ‖1 - z‖ :=
     Multiset.map_congr rfl hroot

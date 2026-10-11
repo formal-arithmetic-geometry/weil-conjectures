@@ -37,7 +37,7 @@ relative duality `(Rⁱf₀*F)^∨ ≅ R^{2d-i}f₀*(F^∨(d))`: the right-hand 
 - `AlgebraicGeometry.WeilSheaf.isMixedOfWeightsAtMost_higherLowerStar_of_isProper`: the upper
   bound for proper `f`.
 - `AlgebraicGeometry.WeilSheaf.isPunctuallyPureOfWeight_higherLowerStar`: clause (b).
-- `AlgebraicGeometry.WeilSheaf.smoothProperRelativePurity`: clauses (a) and (b) together.
+- `AlgebraicGeometry.WeilSheaf.smooth_proper_relative_purity`: clauses (a) and (b) together.
 - `AlgebraicGeometry.WeilSheaf.isPunctuallyPureOfWeight_higherLowerStar_adicConstant`: the case
   of the constant sheaf.
 
@@ -316,7 +316,7 @@ proper morphism of pure relative dimension `d` between separated `k₀`-schemes 
 
 - (a) `Rⁱf₀!F ≅ Rⁱf₀*F` as Weil sheaves, and this sheaf is lisse;
 - (b) it is punctually `ι`-pure of weight `w + i`. -/
-theorem smoothProperRelativePurity {F : WeilSheaf k₀ l X} (hF : F.IsLisse) {w : ℝ}
+theorem smooth_proper_relative_purity {F : WeilSheaf k₀ l X} (hF : F.IsLisse) {w : ℝ}
     (hw : F.IsPunctuallyPureOfWeight ι w) (i : ℕ) :
     Nonempty ((higherLowerShriek k₀ l f i).obj F ≅ (higherLowerStar f i).obj F) ∧
       ((higherLowerStar f i).obj F).IsLisse ∧

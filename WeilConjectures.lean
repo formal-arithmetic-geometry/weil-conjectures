@@ -89,6 +89,7 @@ public import WeilConjectures.AlgebraicGeometry.Curve.Compactification
 public import WeilConjectures.AlgebraicGeometry.Curve.Divisor
 public import WeilConjectures.AlgebraicGeometry.Curve.DivisorIdealSheaf
 public import WeilConjectures.AlgebraicGeometry.Curve.DivisorSequence
+public import WeilConjectures.AlgebraicGeometry.Curve.EffectiveDivisorCount
 public import WeilConjectures.AlgebraicGeometry.Curve.Estimate
 public import WeilConjectures.AlgebraicGeometry.Curve.FieldExtension
 public import WeilConjectures.AlgebraicGeometry.Curve.GenericComparison
@@ -1014,6 +1015,7 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.Stalk
 public import WeilConjectures.Mathlib.AlgebraicGeometry.ValuativeCriterion
 public import WeilConjectures.Mathlib.AlgebraicGeometry.ZariskisMainTheorem
 public import WeilConjectures.Mathlib.Analysis.Analytic.ConvergenceRadius
+public import WeilConjectures.Mathlib.Analysis.Complex.Norm
 public import WeilConjectures.Mathlib.Analysis.Complex.Polynomial.Basic
 public import WeilConjectures.Mathlib.Analysis.Normed.Field.Basic
 public import WeilConjectures.Mathlib.CategoryTheory.Abelian.CommSq
@@ -1849,6 +1851,8 @@ public import WeilConjectures.ZetaFunction.BettiNumbers
 public import WeilConjectures.ZetaFunction.BettiSymmetry
 public import WeilConjectures.ZetaFunction.ClassicalFunctionalEquation
 public import WeilConjectures.ZetaFunction.CohomologicalFamily
+public import WeilConjectures.ZetaFunction.CurveFactorDegree
+public import WeilConjectures.ZetaFunction.CurveZeta
 public import WeilConjectures.ZetaFunction.DualityReciprocity
 public import WeilConjectures.ZetaFunction.Examples
 public import WeilConjectures.ZetaFunction.ExamplesCohomology

@@ -27,10 +27,10 @@ which are `q`-Weil numbers of weight `i`.
 - `AlgebraicGeometry.Scheme.Hom.existsUnique_isNormalizedIntegralFraction_zetaSeries`: the
   zeta series has a unique normalized reduced integral presentation
   (`prop-weil-zeta-normalized-presentation`).
-- `AlgebraicGeometry.Scheme.integralRecovery`: the integral Frobenius factors and the
+- `AlgebraicGeometry.Scheme.integral_recovery`: the integral Frobenius factors and the
   identification of the normalized presentation with their parity products
   (`prop-integral-recovery`).
-- `AlgebraicGeometry.Scheme.realizationIndependence`: the stratum polynomials `Qᵢ` of the
+- `AlgebraicGeometry.Scheme.realization_independence`: the stratum polynomials `Qᵢ` of the
   normalized presentation are integral, and their scalar extension along every `ℓ`-adic
   realization `ℚ̄ ≃ ℚ̄^{(ℓ)} ⊆ ℚ̄_ℓ` is `P_{i,ℓ}` (`thm-weil-realization-independence`).
 -/
@@ -149,7 +149,7 @@ normalized reduced integral presentation of its zeta series:
 
 The normalized presentation is unique (`prop-weil-zeta-normalized-presentation`), and the parity
 products of the `Pᵢ` are one (`AlgebraicGeometry.Scheme.isNormalizedIntegralFraction_prod`). -/
-theorem integralRecovery {A B : Polynomial ℤ}
+theorem integral_recovery {A B : Polynomial ℤ}
     (hAB : PowerSeries.IsNormalizedIntegralFraction (X ↘ Spec (CommRingCat.of k₀)).zetaSeries A
       B) :
     (∀ i : ℕ, i ≤ 2 * d →
@@ -193,7 +193,7 @@ By `prop-integral-recovery`, `A` and `B` are the parity products of the integral
 `Pⱼ`, whose reciprocal roots are `q`-Weil numbers of weight `j` (`sk-thm-rh`); so the weight-`i`
 stratum of `A` or `B` is the reciprocal-root multiset of `Pᵢ` (`Polynomial.weilStratum_prod`),
 and `Qᵢ = Pᵢ`. -/
-theorem realizationIndependence {A B : Polynomial ℤ}
+theorem realization_independence {A B : Polynomial ℤ}
     (hAB : PowerSeries.IsNormalizedIntegralFraction (X ↘ Spec (CommRingCat.of k₀)).zetaSeries A
       B) {i : ℕ} (hi : i ≤ 2 * d) :
     (∃ Q : Polynomial ℤ, Q.coeff 0 = 1 ∧ Q.map (algebraMap ℤ (AlgebraicClosure ℚ)) =
@@ -207,7 +207,7 @@ theorem realizationIndependence {A B : Polynomial ℤ}
     ∀ (l : ℕ) [Fact l.Prime] [Fact (ringChar k₀ ≠ l)],
       A.map (Int.castRingHom (PadicAlgCl l)) = oddFrobeniusProduct k₀ l X d ∧
       B.map (Int.castRingHom (PadicAlgCl l)) = evenFrobeniusProduct k₀ l X d := by
-  obtain ⟨-, P, hP, rfl, rfl, hNB, hfact, -⟩ := integralRecovery k₀ X d hAB
+  obtain ⟨-, P, hP, rfl, rfl, hNB, hfact, -⟩ := integral_recovery k₀ X d hAB
   obtain ⟨-, -, hrh⟩ := isWeilFactorization_of_isIntegralFrobeniusFactor k₀ X d fun i ↦ (hP i).2
   have hq : 1 < Nat.card k₀ := Finite.one_lt_card
   set j : Fin (2 * d + 1) := ⟨i, by omega⟩

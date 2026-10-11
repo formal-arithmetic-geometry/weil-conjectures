@@ -40,18 +40,18 @@ elementary apart from four points, which are the geometric inputs used here: the
 middle pairing (`AlgebraicGeometry.Scheme.even_finrank_cohomology_middle`), the two endpoint
 computations (`AlgebraicGeometry.Scheme.exists_linearEquiv_cohomology_endpoints`), the embedding
 extension (`PadicAlgCl.exists_ringHom_complex_apply_eq`) and the intrinsic weights and
-integrality of the factors (`AlgebraicGeometry.Scheme.realizationIndependence`).
+integrality of the factors (`AlgebraicGeometry.Scheme.realization_independence`).
 
 ## Main statements
 
 - `AlgebraicGeometry.Scheme.Hom.constantCoeff_zetaSeries_and_X_mul_derivative`: `sk-def-zeta`.
-- `AlgebraicGeometry.Scheme.Hom.eulerProduct`: `sk-prop-euler`, `prop-euler-product`.
-- `AlgebraicGeometry.Scheme.Hom.weilRationality`: `sk-thm-weil1`, `thm-weil-final-rationality`.
-- `AlgebraicGeometry.Scheme.weilIntegralFactors`: `sk-thm-weil2`, `thm-weil-final-integrality`.
-- `AlgebraicGeometry.Scheme.riemannHypothesis`: `sk-thm-rh`, `prop-arithmetic-roots`,
+- `AlgebraicGeometry.Scheme.Hom.euler_product`: `sk-prop-euler`, `prop-euler-product`.
+- `AlgebraicGeometry.Scheme.Hom.weil_rationality`: `sk-thm-weil1`, `thm-weil-final-rationality`.
+- `AlgebraicGeometry.Scheme.weil_integral_factors`: `sk-thm-weil2`, `thm-weil-final-integrality`.
+- `AlgebraicGeometry.Scheme.riemann_hypothesis`: `sk-thm-rh`, `prop-arithmetic-roots`,
   `sk-thm-weil3`, `thm-weil-final-rh`.
-- `AlgebraicGeometry.Scheme.weilBetti`: `sk-thm-weil4`, `thm-weil-final-betti`.
-- `AlgebraicGeometry.Scheme.weilFunctionalEquation`: `sk-thm-weil5`,
+- `AlgebraicGeometry.Scheme.weil_betti`: `sk-thm-weil4`, `thm-weil-final-betti`.
+- `AlgebraicGeometry.Scheme.weil_functional_equation`: `sk-thm-weil5`,
   `thm-weil-final-functional-equation`.
 -/
 
@@ -90,7 +90,7 @@ closed points of degree `r`,
 
 The closed points of `Y₀` are its points with finite residue field (`AlgebraicGeometry.Scheme.
 finitePoints`). -/
-theorem Hom.eulerProduct {k : Type u} [Field k] [Finite k] {X : Scheme.{u}}
+theorem Hom.euler_product {k : Type u} [Field k] [Finite k] {X : Scheme.{u}}
     (f : X ⟶ Spec (.of k)) [LocallyOfFiniteType f] [QuasiCompact f] :
     (∀ m : ℕ, {x : X.finitePoints | f.degreeOver x.1 ≤ m}.Finite) ∧
     (∀ n : ℕ, n ≠ 0 → (f.pointCount n : ℕ) =
@@ -130,7 +130,7 @@ and Euler product): for a scheme `X₀` of finite type over a finite field `k`,
 * there are `A, B ∈ ℤ[T]` with `B(0) = 1` and `B(T) Z(X₀, T) = A(T)` in `ℚ⟦T⟧`;
 * `Z(X₀, T) ∈ 1 + T ℤ⟦T⟧`;
 * `Z(X₀, T) = ∏_{x ∈ |X₀|} (1 - T^{deg x})⁻¹`, the product over the closed points. -/
-theorem Hom.weilRationality {k : Type u} [Field k] [Finite k] {X : Scheme.{u}}
+theorem Hom.weil_rationality {k : Type u} [Field k] [Finite k] {X : Scheme.{u}}
     (f : X ⟶ Spec (.of k)) [LocallyOfFiniteType f] [QuasiCompact f] :
     (∃ A B : Polynomial ℤ, B.coeff 0 = 1 ∧
       f.zetaSeries * (B.map (Int.castRingHom ℚ) : PowerSeries ℚ) =
@@ -154,13 +154,12 @@ Frobenius factors): for `X₀` smooth, proper and geometrically connected of pur
 for every `0 ≤ i ≤ 2d` there is a unique `Pᵢ ∈ ℤ[T]` with `Pᵢ(0) = 1` and
 `Pᵢ^{(ℓ)} = det(1 - T F | Hⁱ(X₀ ⊗ k̄, ℚ̄_ℓ))` for every prime `ℓ ≠ p`, and these satisfy
 `Z(X₀, T) = ∏ᵢ Pᵢ(T)^{(-1)^{i+1}}`, independently of `ℓ`. -/
-theorem weilIntegralFactors :
+theorem weil_integral_factors :
     ∃ P : Fin (2 * d + 1) → Polynomial ℤ,
       (∀ i, (P i).coeff 0 = 1 ∧ IsIntegralFrobeniusFactor k₀ X (i : ℕ) (P i)) ∧
       (∀ (i : Fin (2 * d + 1)) (Q : Polynomial ℤ), Q.coeff 0 = 1 →
         IsIntegralFrobeniusFactor k₀ X (i : ℕ) Q → Q = P i) ∧
-      IsWeilFactorization (Nat.card k₀) d (X ↘ Spec (CommRingCat.of k₀)).zetaSeries P :=
-  by
+      IsWeilFactorization (Nat.card k₀) d (X ↘ Spec (CommRingCat.of k₀)).zetaSeries P := by
   obtain ⟨P, hfact, -, -, hP⟩ := exists_isWeilFactorization_of_smoothProper k₀ X d
   exact ⟨P, fun i ↦ ⟨hfact.coeff_zero_eq_one i, hP i⟩, fun i Q _ hQ ↦ hQ.unique k₀ X (hP i),
     hfact⟩
@@ -175,7 +174,7 @@ dimension `d` and an integral Frobenius factor `P` in degree `i ≤ 2d`:
 * every ordinary root `β` (a root of `P`) is a `q`-Weil number of weight `-i`;
 * for every prime `ℓ ≠ p`, the reciprocal roots of `P` in `ℚ̄_ℓ` are eigenvalues of the
   geometric Frobenius on `Hⁱ(X₀ ⊗ k̄, ℚ̄_ℓ)`. -/
-theorem riemannHypothesis {i : ℕ} (hi : i ≤ 2 * d) {P : Polynomial ℤ}
+theorem riemann_hypothesis {i : ℕ} (hi : i ≤ 2 * d) {P : Polynomial ℤ}
     (hP : IsIntegralFrobeniusFactor k₀ X i P) :
     (∀ α ∈ (P.reverse.map (Int.castRingHom ℂ)).roots,
       _root_.IsIntegral ℤ α ∧ IsWeilNumber (Nat.card k₀) i α) ∧
@@ -223,8 +222,8 @@ symmetry): the integral Frobenius factors `Pᵢ` of `X₀` have degrees
 `P₀ = 1 - T`, `P_{2d} = 1 - qᵈ T`, and the rational function
 `Z(X₀, T) = ∏_{i odd} Pᵢ / ∏_{i even} Pᵢ` has a pole of order exactly one at `T = 1` and, if
 `d ≥ 1`, at `T = q^{-d}`: the denominator vanishes there to order one and the numerator does
-not vanish there (`AlgebraicGeometry.Scheme.bettiSymmetry`). -/
-theorem weilBetti :
+not vanish there (`AlgebraicGeometry.Scheme.betti_symmetry`). -/
+theorem weil_betti :
     ∃ P : Fin (2 * d + 1) → Polynomial ℤ,
       (∀ i : Fin (2 * d + 1), IsIntegralFrobeniusFactor k₀ X (i : ℕ) (P i)) ∧
       IsWeilFactorization (Nat.card k₀) d (X ↘ Spec (CommRingCat.of k₀)).zetaSeries P ∧
@@ -245,7 +244,7 @@ theorem weilBetti :
         ¬ (∏ i ∈ Finset.univ.filter (fun i : Fin (2 * d + 1) ↦ Odd i.1),
           (P i).map (Int.castRingHom ℚ)).IsRoot ((Nat.card k₀ : ℚ) ^ d)⁻¹) := by
   obtain ⟨P, hfact, -, -, hP⟩ := exists_isWeilFactorization_of_smoothProper k₀ X d
-  obtain ⟨h1, h2, h3, h4, h5, h6, h7, h8⟩ := bettiSymmetry k₀ X d hP
+  obtain ⟨h1, h2, h3, h4, h5, h6, h7, h8⟩ := betti_symmetry k₀ X d hP
   exact ⟨P, hP, hfact, h1, h2, h3, h4, h5, h6, h7, h8⟩
 
 /-- Blueprint `sk-thm-weil5` and `thm-weil-final-functional-equation` (Weil conjectures V:
@@ -259,7 +258,7 @@ nonzero `t ∈ ℂ`, the number `d χ` is even, `d χ = 2 m`, the sign `ε`
 `Z(X₀, q^{-d} t⁻¹) = ε q^{m} t^χ Z(X₀, t)`
 
 at every nonzero `t ∈ ℂ` at which no factor vanishes. -/
-theorem weilFunctionalEquation :
+theorem weil_functional_equation :
     ∃ P : Fin (2 * d + 1) → Polynomial ℤ,
       (∀ i : Fin (2 * d + 1), IsIntegralFrobeniusFactor k₀ X (i : ℕ) (P i)) ∧
       (∀ (i : Fin (2 * d + 1)) (t : ℂ), t ≠ 0 →
@@ -273,8 +272,7 @@ theorem weilFunctionalEquation :
               ((Nat.card k₀ : ℂ) ^ (-(d : ℤ)) * t⁻¹) =
             (weilSign (Nat.card k₀) m P : ℂ) * (Nat.card k₀ : ℂ) ^ m *
               t ^ Polynomial.alternatingNatDegreeSum P *
-              Polynomial.alternatingProdEval (fun i ↦ (P i).map (Int.castRingHom ℂ)) t :=
-  by
+              Polynomial.alternatingProdEval (fun i ↦ (P i).map (Int.castRingHom ℂ)) t := by
   obtain ⟨P, hfact, hfe, -, hP⟩ := exists_isWeilFactorization_of_smoothProper k₀ X d
   have hq : 1 < Nat.card k₀ := Finite.one_lt_card
   obtain ⟨hL, -, m, hm⟩ := reciprocity k₀ X d hP

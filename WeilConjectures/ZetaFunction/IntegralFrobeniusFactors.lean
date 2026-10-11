@@ -29,7 +29,7 @@ holds because `ℤ → ℚ̄_ℓ` is injective.
 - `AlgebraicGeometry.Scheme.isWeilFactorization_of_isIntegralFrobeniusFactor`: the integral
   Frobenius factors are a Weil factorization of `Z(X₀, T)`, satisfying the functional equation and
   the Riemann hypothesis.
-- `AlgebraicGeometry.Scheme.integralFrobeniusFactors`: blueprint `sk-thm-intfactors`.
+- `AlgebraicGeometry.Scheme.integral_frobenius_factors`: blueprint `sk-thm-intfactors`.
 -/
 
 @[expose] public section
@@ -98,7 +98,7 @@ geometrically connected of pure dimension `d` over `k₀ = 𝔽_q`,
   `Pᵢ^{(ℓ)} = det(1 - T F | Hⁱ(X₀ ⊗ k̄, ℚ̄_ℓ))` for every prime `ℓ ≠ p`;
 * for this family, `Z(X₀, T) = ∏ᵢ Pᵢ(T)^{(-1)^{i+1}}`, a factorization which does not depend on
   `ℓ`. -/
-theorem integralFrobeniusFactors :
+theorem integral_frobenius_factors :
     (∀ i : ℕ, i ≤ 2 * d →
       ∃! P : Polynomial ℤ, P.coeff 0 = 1 ∧ IsIntegralFrobeniusFactor k₀ X i P) ∧
     ∀ P : Fin (2 * d + 1) → Polynomial ℤ,

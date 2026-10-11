@@ -48,7 +48,7 @@ recovered from it by the flat base change `Hⁱ(X, ℚ_ℓ) ⊗ ℚ̄_ℓ = Hⁱ
 - `AlgebraicGeometry.Scheme.map_zetaSeries_mul_evenFrobeniusProduct`: the trace-to-determinant
   identity (`sk-thm-tracetodeterminant`, `thm-zl-lefschetz-weil-identity`).
 - `LinearMap.inv_alternatingCharpolyRevProd_eq_exp` and
-  `AlgebraicGeometry.Scheme.traceDeterminant`: `prop-trace-determinant`.
+  `AlgebraicGeometry.Scheme.trace_determinant`: `prop-trace-determinant`.
 -/
 
 @[expose] public section
@@ -286,7 +286,7 @@ field `K` of characteristic zero, with `Pᵢ(T) = det(1 - T uᵢ | Vᵢ)` and
 and, for `X₀` smooth and proper of pure dimension `d` over `k₀`,
 `Z(X₀, T) = ∏_{i = 0}^{2d} P_{i,ℓ}(T)^{(-1)^{i+1}}` in `ℚ̄_ℓ⟦T⟧`, with the denominators cleared
 (`AlgebraicGeometry.Scheme.map_zetaSeries_mul_evenFrobeniusProduct`). -/
-theorem traceDeterminant {K : Type*} [Field K] [CharZero K] {W : ℤ → Type*}
+theorem trace_determinant {K : Type*} [Field K] [CharZero K] {W : ℤ → Type*}
     [∀ i, AddCommGroup (W i)] [∀ i, Module K (W i)] [∀ i, FiniteDimensional K (W i)]
     (s : Finset ℤ) (u : ∀ i, Module.End K (W i)) :
     (∀ i, -PowerSeries.logOf ((u i).charpolyRev : PowerSeries K) =

@@ -24,7 +24,7 @@ and `d χ` is even, `χ = ∑ᵢ (-1)ⁱ bᵢ`: for odd `d` the middle pairing i
 
 ## Main statements
 
-- `AlgebraicGeometry.Scheme.dualityReciprocity`: blueprint `prop-duality-reciprocity`.
+- `AlgebraicGeometry.Scheme.duality_reciprocity`: blueprint `prop-duality-reciprocity`.
 - `AlgebraicGeometry.Scheme.reciprocity`: blueprint `sk-prop-reciprocity`.
 -/
 
@@ -88,7 +88,7 @@ factors `P₀, …, P_{2d}`:
 * `P_{2d-i}(q^{-d} t⁻¹) = (-1)^{bᵢ} t^{-bᵢ} Dᵢ⁻¹ Pᵢ(t)` for every `t ≠ 0` (the identity of Laurent
   polynomials, evaluated at all nonzero complex points);
 * for odd `d` the middle Betti number `b_d` is even. -/
-theorem dualityReciprocity (l : ℕ) [Fact l.Prime] [Fact (ringChar k₀ ≠ l)]
+theorem duality_reciprocity (l : ℕ) [Fact l.Prime] [Fact (ringChar k₀ ≠ l)]
     {P : Fin (2 * d + 1) → Polynomial ℤ}
     (hP : ∀ i : Fin (2 * d + 1), IsIntegralFrobeniusFactor k₀ X (i : ℕ) (P i)) :
     (∀ i j : ℤ, i + j = 2 * d →
@@ -145,7 +145,7 @@ theorem reciprocity {P : Fin (2 * d + 1) → Polynomial ℤ}
   obtain ⟨l, hl, hne⟩ := exists_prime_ne_ringChar k₀
   have : Fact l.Prime := ⟨hl⟩
   have : Fact (ringChar k₀ ≠ l) := ⟨hne⟩
-  obtain ⟨-, hrev, hD, hL, hmid⟩ := dualityReciprocity k₀ X d l hP
+  obtain ⟨-, hrev, hD, hL, hmid⟩ := duality_reciprocity k₀ X d l hP
   refine ⟨hL, hD, ?_⟩
   let m : Fin (2 * d + 1) := ⟨d, by omega⟩
   have hm : m.rev = m := Fin.ext (by simp only [Fin.val_rev, m]; omega)

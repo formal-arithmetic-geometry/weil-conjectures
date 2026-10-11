@@ -37,11 +37,10 @@ roots `α` of the `P i`, the shadow of the Lefschetz trace formula.
 
 ## Main statements
 
-- `AlgebraicGeometry.Scheme.exists_linearEquiv_cohomology_endpoints`,
-  `AlgebraicGeometry.Scheme.endpoints_of_isIntegralFrobeniusFactor`: the endpoint cohomology
-  `H⁰ ≅ ℚ̄_ℓ`, `H^{2d} ≅ ℚ̄_ℓ(-d)` and the endpoint factors (`prop-endpoints`).
 - `AlgebraicGeometry.Scheme.abs_pointCount_sub_le_sum_finrank`: the Hasse–Weil bound with the
-  Betti numbers `dim Hⁱ(X₀ ⊗ k̄, ℚ̄_ℓ)` (`cor-zl-hasse-weil-general-bound`).
+  Betti numbers `dim Hⁱ(X₀ ⊗ k̄, ℚ̄_ℓ)` (`cor-zl-hasse-weil-general-bound`), using the endpoint
+  cohomology of `prop-endpoints`
+  (`AlgebraicGeometry.Scheme.endpoints_of_isIntegralFrobeniusFactor`).
 - `AlgebraicGeometry.Scheme.Hom.pointCount_eq_sum_roots`: `N n = ∑ (-1) ^ i ∑ αⁿ`.
 - `AlgebraicGeometry.Scheme.Hom.abs_pointCount_sub_le`: the Hasse–Weil bound over the degree `n`
   extension, `|N n - (q ^ (d n) + 1)| ≤ ∑_{0 < i < 2d} deg (P i) · q ^ (i n / 2)`.

@@ -26,7 +26,7 @@ weight `i`: every eigenvalue `α` of the geometric Frobenius satisfies `|ι α| 
 
 ## Main statements
 
-- `AlgebraicGeometry.WeilComplex.properCompactCoincidence`: `Ra_! ≅ Ra_*` and `H_c^i ≅ Hⁱ` for a
+- `AlgebraicGeometry.WeilComplex.proper_compact_coincidence`: `Ra_! ≅ Ra_*` and `H_c^i ≅ Hⁱ` for a
   proper `k₀`-scheme (`prop-weil-proper-compact-coincidence`).
 - `AlgebraicGeometry.WeilSheaf.isPunctuallyPureOfWeight_adicConstant`: the constant Weil sheaf is
   punctually pure of weight `0` (`lem-zl-constant-sheaf-weight-zero`).
@@ -40,7 +40,7 @@ weight `i`: every eigenvalue `α` of the geometric Frobenius satisfies `|ι α| 
 - `AlgebraicGeometry.WeilSheaf.isPureOfWeightOver_cohomology_adicConstant`: `Hⁱ(X₀ ⊗ k̄, ℚ̄_ℓ)` is
   pure of weight `i` (`prop-weight-purity-ordinary`).
 - `AlgebraicGeometry.WeilSheaf.purity_smoothProper`: `cor-zl-purity-smooth-proper`.
-- `AlgebraicGeometry.WeilSheaf.delignePurity`: the five clauses of `thm-weil-deligne-purity` and
+- `AlgebraicGeometry.WeilSheaf.deligne_purity`: the five clauses of `thm-weil-deligne-purity` and
   of the subsection `sk-input-weights`.
 -/
 
@@ -64,7 +64,7 @@ variable {X : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
 image, `Ra_! K ≅ Ra_* K` (the identity is a compactification of `a`), and hence
 `H_c^i(Y ⊗ k̄, K) ≅ Hⁱ(Y ⊗ k̄, K)` Frobenius-equivariantly for every Weil complex `K` and every
 `i`. -/
-theorem properCompactCoincidence (K : WeilComplex k₀ l X) :
+theorem proper_compact_coincidence (K : WeilComplex k₀ l X) :
     Nonempty ((derivedLowerShriek k₀ l (X ↘ Spec (CommRingCat.of k₀))).obj K ≅
       (derivedLowerStar (X ↘ Spec (CommRingCat.of k₀))).obj K) ∧
     ∀ i : ℤ, Nonempty ((K.compactlySupportedCohomology i).Equiv (K.cohomology i)) :=
@@ -241,7 +241,7 @@ smooth proper varieties): for `X₀` smooth, proper and geometrically connected 
 4. `Hⁱ(X₀ ⊗ k̄, ℚ̄_ℓ)` is `ι`-pure of weight `i`;
 5. every eigenvalue `α` of the geometric Frobenius on `Hⁱ(X₀ ⊗ k̄, ℚ̄_ℓ)` has
    `|ι α| = q^{i/2}`. -/
-theorem delignePurity (ι : PadicAlgCl l →+* ℂ) (i : ℤ) :
+theorem deligne_purity (ι : PadicAlgCl l →+* ℂ) (i : ℤ) :
     (adicConstant k₀ l X).IsPunctuallyPureOfWeight ι 0 ∧
       ((adicConstant k₀ l X).compactlySupportedCohomology i).HasWeightsAtMostOver k₀ ι i ∧
       Nonempty (((adicConstant k₀ l X).compactlySupportedCohomology i).Equiv

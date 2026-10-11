@@ -25,7 +25,7 @@ Then `bᵢ = dim Hⁱ(X₀ ⊗ k̄, ℚ̄_ℓ)` for every `ℓ ≠ p`, `bᵢ = b
   `deg Pᵢ = dim Hⁱ(X₀ ⊗ k̄, ℚ̄_ℓ)` (`prop-weil-realization-independent-degrees`).
 - `AlgebraicGeometry.Scheme.weilBettiNumber_eq_finrank`: `bᵢ = dim Hⁱ(X₀ ⊗ k̄, ℚ̄_ℓ)` for all
   `i ∈ ℤ` (`prop-weil-betti-comparison`).
-- `AlgebraicGeometry.Scheme.bettiSymmetry`: blueprint `sk-thm-betti`.
+- `AlgebraicGeometry.Scheme.betti_symmetry`: blueprint `sk-thm-betti`.
 -/
 
 @[expose] public section
@@ -226,7 +226,7 @@ factors `Pᵢ` and Betti numbers `bᵢ = deg Pᵢ`:
 * `Z(X₀, T) = ∏_{i odd} Pᵢ / ∏_{i even} Pᵢ` has a pole of order exactly one at `T = 1`: the
   denominator vanishes there to order one and the numerator does not vanish there; and, if
   `d ≥ 1`, likewise at `T = q^{-d}`. -/
-theorem bettiSymmetry {P : Fin (2 * d + 1) → Polynomial ℤ}
+theorem betti_symmetry {P : Fin (2 * d + 1) → Polynomial ℤ}
     (hP : ∀ i : Fin (2 * d + 1), IsIntegralFrobeniusFactor k₀ X (i : ℕ) (P i)) :
     (∀ (l : ℕ) [Fact l.Prime] [Fact (ringChar k₀ ≠ l)] (i : Fin (2 * d + 1)),
       (P i).natDegree = Module.finrank (PadicAlgCl l)

@@ -30,9 +30,6 @@ Riemann–Roch into the computation of the zeta function of a curve.
 
 ## Main statements
 
-- `AlgebraicGeometry.Scheme.Modules.Hom.exists_iso_toModules_zeroLocus`: a morphism
-  `ψ : ℒ ⟶ 𝒪_X` from an invertible module whose zero scheme `D` is an effective Cartier divisor
-  factors as an isomorphism `ℒ ≅ 𝒪_X(-D)` followed by the inclusion `𝒪_X(-D) ⟶ 𝒪_X`.
 - `AlgebraicGeometry.Scheme.Modules.Hom.exists_eq_comp_smulHom_of_zeroLocus_eq`: two morphisms
   `ℳ ⟶ 𝒪_C` with the same zero scheme differ by a scalar.
 - `AlgebraicGeometry.Scheme.Divisor.sub_one_mul_card_idealSheaf_iso`: the count
@@ -52,47 +49,6 @@ namespace AlgebraicGeometry.Scheme
 namespace Modules
 
 variable {X : Scheme.{u}}
-
-/-- **A morphism to `𝒪_X` vanishing along an effective Cartier divisor.** If `ψ : L ⟶ 𝒪_X` is a
-morphism from an invertible module whose zero scheme `D = Z(ψ)` is an effective Cartier divisor,
-then `ψ` is an isomorphism `L ≅ 𝒪_X(-D)` followed by the inclusion `𝒪_X(-D) ⟶ 𝒪_X`: locally
-`ψ` sends a free generator of `L` to a non-zerodivisor generating the ideal of `D`. -/
-theorem Hom.exists_iso_toModules_zeroLocus {L : X.Modules}
-    [SheafOfModules.IsInvertible.{u, u, u} L] (ψ : L ⟶ Modules.unit X)
-    (hψ : ψ.zeroLocus.IsInvertible) :
-    ∃ κ : L ≅ ψ.zeroLocus.toModules, κ.hom ≫ ψ.zeroLocus.toModulesι = ψ := by
-  have : SheafOfModules.IsInvertible.{u, u, u} (Modules.unit X) :=
-    IsInvertible.sheafOfModules_isInvertible (𝟙_ X.Modules)
-  have hzero : ψ ≫ ψ.zeroLocus.toPushforwardSubscheme = 0 := by
-    refine Modules.hom_ext _ _ fun W ↦ ?_
-    ext m
-    have key (x : W) : ∃ V : X.affineOpens, x.1 ∈ V.1 ∧ V.1 ≤ W := by
-      obtain ⟨_, ⟨V, hV, rfl⟩, hxV, hVW⟩ :=
-        X.isBasis_affineOpens.exists_subset_of_mem_open x.2 W.2
-      exact ⟨⟨V, hV⟩, hxV, hVW⟩
-    choose V hxV hVW using key
-    let T : X.Modules := (SheafOfModules.pushforward ψ.zeroLocus.subschemeι.toRingCatSheafHom).obj
-      (SheafOfModules.unit ψ.zeroLocus.subscheme.ringCatSheaf)
-    refine TopCat.Sheaf.eq_of_locally_eq' ⟨T.presheaf, T.isSheaf⟩ (fun x ↦ (V x).1) W
-      (fun x ↦ homOfLE (hVW x))
-      (fun x hx ↦ TopologicalSpace.Opens.mem_iSup.mpr ⟨⟨x, hx⟩, hxV _⟩) _ _ fun x ↦ ?_
-    have h1 := Hom.app_presheaf_map (ψ ≫ ψ.zeroLocus.toPushforwardSubscheme) (homOfLE (hVW x)) m
-    have h2 : ψ.zeroLocus.subschemeι.app (V x).1
-        (ψ.app (V x).1 (L.presheaf.map (homOfLE (hVW x)).op m)) = 0 := by
-      rw [← IdealSheafData.mem_idealOfOpens_iff, IdealSheafData.idealOfOpens_eq_ideal]
-      exact ψ.app_mem_ideal_zeroLocus _ _
-    refine h1.symm.trans (h2.trans ?_)
-    exact (map_zero _).symm
-  let κ : L ⟶ ψ.zeroLocus.toModules := kernel.lift _ ψ hzero
-  have hκ (U : X.Opens) (m : Γ(L, U)) : ψ.zeroLocus.toModulesι.app U (κ.app U m) = ψ.app U m :=
-    congrArg (fun f : L ⟶ Modules.unit X ↦ f.app U m) (kernel.lift_ι _ ψ hzero)
-  refine ⟨@asIso _ _ _ _ κ (isIso_of_isFreeGenerator κ fun x ↦ ?_), kernel.lift_ι _ ψ hzero⟩
-  obtain ⟨U, hxU, -, e, he⟩ := exists_isFreeGenerator L (TopologicalSpace.Opens.mem_top x)
-  refine ⟨U.1, e, hxU, he, hψ.isFreeGenerator _ fun V h ↦ ?_⟩
-  rw [hκ]
-  refine Hom.ideal_zeroLocus ψ V (he.map h) (isFreeGenerator_one V.1) ?_
-  exact (Hom.app_presheaf_map ψ (homOfLE h) e).trans
-    (mul_one (X.presheaf.map (homOfLE h).op (ψ.app U.1 e))).symm
 
 /-- **Morphisms to `𝒪_X` with the same zero scheme differ by a function.** If `φ, ψ : M ⟶ 𝒪_X`
 from an invertible module have the same zero scheme, which is an effective Cartier divisor, then
@@ -133,22 +89,15 @@ lemma Divisor.idealSheaf_injective :
   rw [h] at h₁
   exact_mod_cast h₁.symm.trans h₂
 
-/-- The zero scheme of a nonzero morphism `M ⟶ 𝒪_C` from an invertible module on an integral
-scheme is an effective Cartier divisor. -/
-lemma Modules.Hom.isInvertible_zeroLocus {X : Scheme.{u}} [IsIntegral X] {M : X.Modules}
-    [M.IsInvertible] {φ : M ⟶ Modules.unit X} (hφ : φ ≠ 0) : φ.zeroLocus.IsInvertible := by
-  have := Modules.IsInvertible.sheafOfModules_isInvertible M
-  have : SheafOfModules.IsInvertible.{u, u, u} (Modules.unit X) :=
-    Modules.IsInvertible.sheafOfModules_isInvertible (𝟙_ X.Modules)
-  exact (Modules.Hom.isLocallyPrincipal_zeroLocus φ).isInvertible
-    fun h ↦ hφ ((Modules.Hom.zeroLocus_eq_bot_iff φ).mp h)
-
 include k in
 /-- The zero scheme of a nonzero morphism `M ⟶ 𝒪_C` from an invertible module on a smooth
 integral curve is the ideal sheaf of a unique effective divisor. -/
 lemma Modules.Hom.existsUnique_zeroLocus_eq_idealSheaf {M : C.Modules} [M.IsInvertible]
     {φ : M ⟶ Modules.unit C} (hφ : φ ≠ 0) :
     ∃! E : closedPoints C →₀ ℕ, φ.zeroLocus = Divisor.idealSheaf E := by
+  have := Modules.IsInvertible.sheafOfModules_isInvertible M
+  have : SheafOfModules.IsInvertible.{u, u, u} (Modules.unit C) :=
+    Modules.IsInvertible.sheafOfModules_isInvertible (𝟙_ C.Modules)
   obtain ⟨E, hE⟩ := (Modules.Hom.isInvertible_zeroLocus hφ).exists_eq_idealSheaf
     (C ↘ Spec (.of k))
   exact ⟨E, hE, fun E' hE' ↦ Divisor.idealSheaf_injective (k := k) (hE'.symm.trans hE)⟩
@@ -179,6 +128,8 @@ theorem Divisor.sub_one_mul_card_idealSheaf_iso [Finite k] [IsProper (C ↘ Spec
       Nonempty ((Divisor.idealSheaf E).toModules ≅ M)} = Nat.card k ^ Mᵛ.finrankH k 0 - 1 := by
   classical
   have := Modules.IsInvertible.sheafOfModules_isInvertible M
+  have : SheafOfModules.IsInvertible.{u, u, u} (Modules.unit C) :=
+    Modules.IsInvertible.sheafOfModules_isInvertible (𝟙_ C.Modules)
   let V := Mᵛ.H 0
   have : Finite V := Module.finite_of_finite k
   let Φ : V ≃+ (M ⟶ Modules.unit C) := Modules.homObjHZeroAddEquiv M _

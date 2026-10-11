@@ -27,7 +27,7 @@ of the parity of `i` of absolute value `q^{-i/2}`.
   are coprime.
 - `AlgebraicGeometry.Scheme.roots_map_frobeniusCharpolyRev_eq_filter`: the roots of `ι P_{i,ℓ}`
   are the roots of `ι N_ℓ` or `ι D_ℓ` of absolute value `q^{-i/2}`.
-- `AlgebraicGeometry.Scheme.weightSeparation`: blueprint `sk-prop-separation` and
+- `AlgebraicGeometry.Scheme.weight_separation`: blueprint `sk-prop-separation` and
   `prop-weight-separation`.
 -/
 
@@ -126,7 +126,7 @@ parity factorization): for `X₀` smooth, proper and geometrically connected of 
 * `Z(X₀, T) = N_ℓ(T) / D_ℓ(T)` in `ℚ̄_ℓ⟦T⟧`;
 * for every embedding `ι : ℚ̄_ℓ → ℂ` and `i ≤ 2d`, the roots of `ι P_{i,ℓ}` are the roots of
   `ι N_ℓ` (`i` odd) or `ι D_ℓ` (`i` even) of absolute value `q^{-i/2}`. -/
-theorem weightSeparation :
+theorem weight_separation :
     (∀ i j : ℕ, i ≠ j →
       IsCoprime (frobeniusCharpolyRev k₀ l X i) (frobeniusCharpolyRev k₀ l X j)) ∧
     IsCoprime (oddFrobeniusProduct k₀ l X d) (evenFrobeniusProduct k₀ l X d) ∧
