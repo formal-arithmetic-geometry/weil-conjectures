@@ -12,6 +12,10 @@ public import WeilConjectures.SixFunctors.Etale.Derived.Perfect.Dual
 public import WeilConjectures.SixFunctors.Etale.Derived.Coefficients
 public import WeilConjectures.SixFunctors.OpenClosed.Conservative
 public import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.DualizableShortExact
+public import WeilConjectures.SixFunctors.Etale.LowerShriek.EtaleMapProjection
+public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal.Comparison
+public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Closed.IhomUnitTensor
+public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.FlatModuleCat
 
 /-!
 # Perfect complexes on the coefficient site
@@ -246,6 +250,51 @@ theorem isDualizableEtale_of_trivialization {U : Scheme.{u}}
     IsDualizableSheaf.of_retract h.choose_spec.some
       (isDualizableSheaf_constantSheaf_pi h.choose)).of_iso e.symm
 
+section Projection
+
+variable {A : Type*} [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
+  [MonoidalCategory A] [MonoidalPreadditive A] [SymmetricCategory A] [MonoidalClosed A]
+  [Abelian.HasFunctorialFlatResolution A] [HasSmallSiteSheafify A]
+
+/-- The derived adjunction `D(u_!) ⊣ Lu^*` for an étale morphism `u`, with the right adjoint
+the left derived functor `Lu^*` (isomorphic to the levelwise `D(u^*)`, `u^*` being exact). -/
+noncomputable def derivedEtaleLowerShriekLeftDerivedUpperStarAdjunction {U : Scheme.{u}}
+    (f : U ⟶ X) [Etale f] :
+    (Etale.etaleLowerShriek A f inferInstance).mapDerivedCategory ⊣ L((f)^*[A]) :=
+  (Etale.derivedEtaleLowerShriekUpperStarAdjunction A f inferInstance).ofNatIsoRight
+    (leftDerivedUpperStarIsoMapDerivedCategory A f).symm
+
+/-- **Derived projection formula for an étale morphism** `u : U ⟶ X`: the projection map
+`D(u_!)(Lu^*K ⊗ᴸ T) ⟶ K ⊗ᴸ D(u_!)T` of the adjunction `D(u_!) ⊣ Lu^*`, for the monoidal
+structure `leftDerivedUpperStarMonoidal` of `Lu^*`, is an isomorphism. -/
+theorem isIso_projectionMap_derivedEtaleLowerShriek {U : Scheme.{u}} (f : U ⟶ X) [Etale f]
+    [(f)^*[A].PreservesFlat] (K : DerivedCategory (Sheaf X.smallEtaleTopology A)) :
+    letI := leftDerivedUpperStarMonoidal A f
+    IsIso (Functor.Monoidal.projectionMap
+      (derivedEtaleLowerShriekLeftDerivedUpperStarAdjunction (A := A) f) K) :=
+  sorry
+
+/-- For étale `u` and `K` with `Lu^*K` dualizable, `Lu^*` sends the comparison
+`RHom(K, 𝟙) ⊗ᴸ K ⟶ RHom(K, K)` to an isomorphism. By
+`CategoryTheory.Functor.Monoidal.isIso_map_ihomUnitTensorToIhom`, this follows from the derived
+projection formula `isIso_projectionMap_derivedEtaleLowerShriek`. -/
+theorem isIso_leftDerivedUpperStar_map_ihomUnitTensorToIhomEtale_of_isDualizableEtale_general
+    {U : Scheme.{u}} (f : U ⟶ X) [Etale f] [(f)^*[A].PreservesFlat]
+    (K : DerivedCategory (Sheaf X.smallEtaleTopology A))
+    (hK : DerivedCategory.IsDualizableEtale ((L((f)^*[A])).obj K)) :
+    IsIso ((L((f)^*[A])).map (DerivedCategory.ihomUnitTensorToIhomEtale K)) := by
+  let := leftDerivedUpperStarMonoidal A f
+  have := isIso_projectionMap_derivedEtaleLowerShriek (A := A) f K
+  obtain ⟨_⟩ := hK
+  obtain ⟨_⟩ := Etale.DerivedCategory.nonempty_exactPairing_swap ((L((f)^*[A])).obj K)
+    ((L((f)^*[A])).obj K)ᘁ
+  have := MonoidalClosed.isIso_ihomUnitTensorToIhom ((L((f)^*[A])).obj K)ᘁ ((L((f)^*[A])).obj K)
+    ((L((f)^*[A])).obj K)
+  exact Functor.Monoidal.isIso_map_ihomUnitTensorToIhom
+    (derivedEtaleLowerShriekLeftDerivedUpperStarAdjunction (A := A) f) K K
+
+end Projection
+
 /-- For an étale morphism `u : U ⟶ X` and `K` whose derived pullback `Lu^*K` is dualizable, the
 derived pullback of the comparison `RHom(K, Λ_X) ⊗ᴸ K ⟶ RHom(K, K)` is an isomorphism: for
 étale `u` the derived pullback commutes with the internal hom, and the comparison for the
@@ -255,7 +304,7 @@ theorem isIso_leftDerivedUpperStar_map_ihomUnitTensorToIhomEtale_of_isDualizable
     (K : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
     (_hK : DerivedCategory.IsDualizableEtale ((L((f)^*[ModuleCat.{u + 1} Λ])).obj K)) :
     IsIso ((L((f)^*[ModuleCat.{u + 1} Λ])).map (DerivedCategory.ihomUnitTensorToIhomEtale K)) :=
-  sorry
+  isIso_leftDerivedUpperStar_map_ihomUnitTensorToIhomEtale_of_isDualizableEtale_general f K _hK
 
 /-- On a member `u : U ⟶ X` of an étale cover on which `K` is isomorphic to a bounded complex of
 finite projective `Λ_U`-modules, the derived pullback of the comparison
