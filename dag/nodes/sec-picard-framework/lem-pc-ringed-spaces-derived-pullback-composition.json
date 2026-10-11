@@ -116,5 +116,27 @@
   "group": "C1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-dpc1811 (reviewer sub-agent of L); spot-checked: Statement vs Stacks 0D5S (unit/assoc clauses added by E1 review are proved in Step 2 from tensor unitor/associator); new node lem-pc-kflat-pullback-preservation = Stacks 06YC, not a duplicate of lem-pur-kflat-change-of-rings (0G7E, change of rings only), Mathlib has no K-flat complexes; no cycle: def-pc-derived-pullback, the new node, lem-pc-kflat-resolution and lem-pc-ringed-spaces-derived-adjoint / lem-pc-derived-adjoint-functors (09T5) do not depend on the item. FIX more, RETURN less: (1) C1 Step 1 chose a K-flat resolution uncited -> cites lem-pc-kflat-resolution (06YS, declared tool use from sk-thm-picard-semicon), proof_deps updated; (2) split_report stale after the second reading: tool_uses named lem-pc-flat-complex-derived-pullback which no step cites (dropped) and summary said no new node -> rewritten.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.DerivedPullbackComposition",
+  "declaration": "AlgebraicGeometry.exists_derivedPullbackComposition",
+  "declarations": [
+   "AlgebraicGeometry.exists_derivedPullbackComposition"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/DerivedPullbackComposition.lean",
+  "statement": "theorem exists_derivedPullbackComposition [d : ∀ X : Scheme.{u₁}, HasDerivedCategory.{w₁} (SheafOfModules.{u₁} (moduleRings X.toRingedSpace))] : ∃ (_ : ∀ {X Y : Scheme.{u₁}} (f : X ⟶ Y), (Scheme.Modules.tensorPullback f).Additive) (ε : ∀ {X Y : Scheme.{u₁}} (f : X ⟶ Y), DerivedCategory.Qh ⋙ derivedPullback f ⟶ (Scheme.Modules.tensorPullback f).mapHomotopyCategory (ComplexShape.up ℤ) ⋙ DerivedCategory.Qh (C := SheafOfModules.{u₁} (moduleRings X.toRingedSpace))) (_ : ∀ {X Y : Scheme.{u₁}} (f : X ⟶ Y), (derivedPullback f).IsLeftDerivedFunctor (ε f) (HomotopyCategory.quasiIso (SheafOfModules.{u₁} (moduleRings Y.toRingedSpace)) (ComplexShape.up ℤ))), ∃ c : ∀ {X Y Z : Scheme.{u₁}} (f : X ⟶ Y) (g : Y ⟶ Z), derivedPullback g ⋙ derivedPullback f ≅ derivedPullback (f ≫ g), (∀ {X Y Z : Scheme.{u₁}} (f : X ⟶ Y) (g : Y ⟶ Z), (c f g).hom = (derivedPullback (f ≫ g)).leftDerivedLift (ε (f ≫ g)) (HomotopyCategory.quasiIso (SheafOfModules.{u₁} (moduleRings Z.toRingedSpace)) (ComplexShape.up ℤ)) (derivedPullback g ⋙ derivedPullback f) ((Functor.associator DerivedCategory.Qh (derivedPullback g) (derivedPullback f)).inv ≫ Functor.whiskerRight (ε g) (derivedPullback f) ≫ (Functor.associator _ DerivedCategory.Qh (derivedPullback f)).hom ≫ Functor.whiskerLeft _ (ε f) ≫ (Functor.associator _ _ (DerivedCategory.Qh (C := SheafOfModules.{u₁} (moduleRings X.toRingedSpace)))).inv ≫ Functor.whiskerRight (Functor.mapHomotopyCategoryCompIso ((conjugateIsoEquiv (Classical.choose (Scheme.Modules.exists_tensorPullbackAdjunction (f ≫ g))) ((Classical.choose (Scheme.Modules.exists_tensorPullbackAdjunction g)).comp (Classical.choose (Scheme.Modules.exists_tensorPullbackAdjunction f)))).symm (Scheme.Modules.pushforwardComp f g).symm) (ComplexShape.up ℤ)).hom (DerivedCategory.Qh (C := SheafOfModules.{u₁} (moduleRings X.toRingedSpace))))) ∧ ∃ i : ∀ X : Scheme.{u₁}, derivedPullback (𝟙 X) ≅ 𝟭 _, (∀ {X Y : Scheme.{u₁}} (f : X ⟶ Y), c (𝟙 X) f ≪≫ eqToIso (congrArg (fun k : X ⟶ Y => derivedPullback k) (Category.id_comp f)) = Functor.isoWhiskerLeft (derivedPullback f) (i X) ≪≫ Functor.rightUnitor (derivedPullback f)) ∧ (∀ {X Y : Scheme.{u₁}} (f : X ⟶ Y), c f (𝟙 Y) ≪≫ eqToIso (congrArg (fun k : X ⟶ Y => derivedPullback k) (Category.comp_id f)) = Functor.isoWhiskerRight (i Y) (derivedPullback f) ≪≫ Functor.leftUnitor (derivedPullback f)) ∧ (∀ {W X Y Z : Scheme.{u₁}} (h : W ⟶ X) (f : X ⟶ Y) (g : Y ⟶ Z), Functor.isoWhiskerRight (c f g) (derivedPullback h) ≪≫ c h (f ≫ g) = Functor.associator (derivedPullback g) (derivedPullback f) (derivedPullback h) ≪≫ Functor.isoWhiskerLeft (derivedPullback g) (c h f) ≪≫ c (h ≫ f) g ≪≫ eqToIso (congrArg (fun k : W ⟶ Z => derivedPullback k) (Category.assoc h f g)))",
+  "branch": "sheaf-dag",
+  "by": "G1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-dpc1340"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-dpc1340",
+  "group": "G1",
+  "result": "fix",
+  "note": "schemes f:X->Y,g:Y->Z,h:W->X arbitrary; D(O) via recorded derivedPullback/schemeDerivedCategory with HasDerivedCategory family; c f g tied as leftDerivedLift of counits + conjugate of pushforwardComp; unit laws both sides; associativity both paths; ringed-space second derived pullback dropped; dropped duplicate new node(s) def-pc-ringed-space-derived-pullback (--drop-nodes; not merged, the item points at the landed declaration); left out new module(s) lean/Sheaf/AlgebraicGeometry/RingedSpaceDerivedPullback.lean (--drop-files, or a record fixed to existing: true)"
  }
 }
