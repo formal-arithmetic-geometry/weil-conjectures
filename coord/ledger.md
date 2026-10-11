@@ -4051,3 +4051,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 09:37 L: merged deliver/F1/lem-weil-pbc-depth-ext (stage 2; reviewer PASS; first push; Sheaf.RingTheory.DepthExt IsLocalRing.exists_depth_eq_ext_degree)
 - 09:37 L: merged deliver/G1/lem-weil-pbc-colimit-category-fp-algebras (stage 2; reviewer PASS; first push; Sheaf.RingTheory.ColimitCategoryFpAlgebras RingHom.exists_map_of_finitePresentation_colimit)
 - 09:38 L: merged deliver/C1/lem-sp-kinjective-comparison-principle (stage 2; reviewer PASS; first push; Sheaf.Algebra.Homology.KInjectiveComparisonPrinciple CochainComplex.IsKInjective.precomp_bijective_of_quasiIso)
+- 09:38 L: merged deliver/F1/lem-pc-ringed-space-product-kinjective (stage 2; reviewer PASS; first push; Sheaf.Algebra.Homology.KInjectiveProducts CochainComplex.termwise_product_isKInjective_and_isLimit)
