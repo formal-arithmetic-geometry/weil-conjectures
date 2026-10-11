@@ -173,5 +173,23 @@
   "lem-exc-field-sections-stalk-invariants",
   "lem-kun-03qu-sep-closed"
  ],
- "lead_note": "Possible duplication: lem-weil-pbc-strictly-henselian-sections-stalk + lem-weil-pbc-strictly-henselian-etale-acyclic (sk-thm-p1) state this item for a field as a strictly henselian local ring (stage-3 merge candidate)."
+ "lead_note": "Possible duplication: lem-weil-pbc-strictly-henselian-sections-stalk + lem-weil-pbc-strictly-henselian-etale-acyclic (sk-thm-p1) state this item for a field as a strictly henselian local ring (stage-3 merge candidate).",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GeometricPointCohomology",
+  "declaration": "AlgebraicGeometry.geometricPoint_etaleCohomology",
+  "statement": "theorem geometricPoint_etaleCohomology (k : Type u) [Field k] [IsAlgClosed k] (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (cbar : Spec (.of Ω) ⟶ Spec (.of k)) : (∀ (q : ℤ), 0 < q → ∀ (F : Sheaf (Spec (.of k)).smallEtaleTopology AddCommGrpCat), IsZero ((Etale.cohomology AddCommGrpCat (Spec (.of k)) q).obj ((DerivedCategory.singleFunctor _ 0).obj F))) ∧ ∃ α : ∀ F : Sheaf (Spec (.of k)).smallEtaleTopology AddCommGrpCat, (Etale.cohomology AddCommGrpCat (Spec (.of k)) 0).obj ((DerivedCategory.singleFunctor _ 0).obj F) ≅ (Scheme.pointSmallEtale cbar).sheafFiber.obj F, ∀ (F G : Sheaf (Spec (.of k)).smallEtaleTopology AddCommGrpCat) (f : F ⟶ G), (α F).hom ≫ (Scheme.pointSmallEtale cbar).sheafFiber.map f = (Etale.cohomology AddCommGrpCat (Spec (.of k)) 0).map ((DerivedCategory.singleFunctor _ 0).map f) ≫ (α G).hom",
+  "by": "K1",
+  "date": "2026-10-11",
+  "existing": false,
+  "file": "lean/Sheaf/AlgebraicGeometry/GeometricPointCohomology.lean",
+  "branch": "sheaf-dag"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "K1",
+  "result": "pass",
+  "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
+ }
 }
