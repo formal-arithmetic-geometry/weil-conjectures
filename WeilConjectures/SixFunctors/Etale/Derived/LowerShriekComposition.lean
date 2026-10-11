@@ -49,6 +49,9 @@ and `f ≫ g` is the independence of the compactification,
   isomorphism `D((j' ≫ j)_!) ≅ D(j'_!) ⋙ D(j_!)` of derived extensions by zero.
 - `AlgebraicGeometry.Etale.rightDerivedLowerShriekOfCompactificationCompIso`: the isomorphism
   `Rf_!(e.restrict) ⋙ Rg_!(d) ≅ R(f ≫ g)_!(d.comp e)` on the models above.
+- `AlgebraicGeometry.Etale.rightDerivedLowerShriekCompIso`: the composition isomorphism
+  `R(f ≫ g)_! ≅ Rf_! ⋙ Rg_!` on the unbounded derived categories, built from the chosen
+  compactifications.
 
 On the bounded below derived categories, the same construction, carried out in the compact
 support formalism `AlgebraicGeometry.Etale.derivedPlusFormalism`
@@ -152,11 +155,40 @@ noncomputable def rightDerivedLowerShriekOfCompactificationCompIso (d : Compacti
         mapDerivedCategoryOpenImmersionLowerShriekCongr _ e.restrict_i_fst)
       R((e.g ≫ d.g)_*[ModuleCat.{u + 1} Λ])
 
+/-- **The composition isomorphism** `R(f ≫ g)_! ≅ Rf_! ⋙ Rg_!` of the compactly supported direct
+images on the unbounded derived categories of étale sheaves, for composable `f : X ⟶ Y` and
+`g : Y ⟶ S` admitting compactifications, with `f ≫ g` quasi-compact, and torsion coefficients.
+
+It is a definite construction from the compactifications `R(-)_!` is defined with: for the
+chosen compactification `d` of `g` (`AlgebraicGeometry.HasCompactification.compactification`) and
+the compactification `e = (f ≫ g).ofComp d` of `f ≫ d.i`, it is the isomorphism
+`AlgebraicGeometry.Etale.rightDerivedLowerShriekOfCompactificationCompIso` on the models
+`Rf_!(e.restrict) ⋙ Rg_!(d) ≅ R(f ≫ g)_!(d.comp e)`, compared with the chosen compactifications of
+`f` and `f ≫ g` by the compactification-independence isomorphisms
+`AlgebraicGeometry.Etale.rightDerivedLowerShriekIso`. No arbitrary isomorphism is chosen; the
+only choices are those of the compactifications defining `Rf_!`, `Rg_!` and `R(f ≫ g)_!`. On the
+bounded below derived categories the choice-independent version is
+`AlgebraicGeometry.Etale.rightDerivedLowerShriekPlusCompIso`. -/
+noncomputable def rightDerivedLowerShriekCompIso (f : X ⟶ Y) (g : Y ⟶ S)
+    [HasCompactification f] [HasCompactification g] [HasCompactification (f ≫ g)]
+    [QuasiCompact (f ≫ g)] :
+    R(f ≫ g)_![ModuleCat.{u + 1} Λ] ≅ R(f)_![ModuleCat.{u + 1} Λ] ⋙ R(g)_![ModuleCat.{u + 1} Λ] :=
+  have : QuasiCompact f := .of_comp f g
+  (rightDerivedLowerShriekIso Λ ((HasCompactification.compactification g).comp
+      ((HasCompactification.compactification (f ≫ g)).ofComp
+        (HasCompactification.compactification g)))).symm ≪≫
+    (rightDerivedLowerShriekOfCompactificationCompIso Λ (HasCompactification.compactification g)
+      ((HasCompactification.compactification (f ≫ g)).ofComp
+        (HasCompactification.compactification g))).symm ≪≫
+    Functor.isoWhiskerRight (rightDerivedLowerShriekIso Λ
+      ((HasCompactification.compactification (f ≫ g)).ofComp
+        (HasCompactification.compactification g)).restrict) _
+
 /-- Blueprint `sk-thm-sf-comp-composition` (detailed: `thm-sf-comp-composition`): **the
 composition law for `Rf_!`**. For composable `f : X ⟶ Y` and `g : Y ⟶ S` admitting
 compactifications, with `f ≫ g` quasi-compact, and torsion coefficients, there is an
 isomorphism `R(f ≫ g)_! ≅ Rf_! ⋙ Rg_!` of functors between the unbounded derived categories of
-étale sheaves.
+étale sheaves, namely `AlgebraicGeometry.Etale.rightDerivedLowerShriekCompIso`.
 
 It is `AlgebraicGeometry.Etale.rightDerivedLowerShriekOfCompactificationCompIso` for the chosen
 compactification `d` of `g` and the compactification
@@ -168,13 +200,8 @@ theorem nonempty_iso_rightDerivedLowerShriek_comp (f : X ⟶ Y) (g : Y ⟶ S)
     [HasCompactification f] [HasCompactification g] [HasCompactification (f ≫ g)]
     [QuasiCompact (f ≫ g)] :
     Nonempty (R(f ≫ g)_![ModuleCat.{u + 1} Λ] ≅
-      R(f)_![ModuleCat.{u + 1} Λ] ⋙ R(g)_![ModuleCat.{u + 1} Λ]) := by
-  have : QuasiCompact f := .of_comp f g
-  let d := HasCompactification.compactification g
-  let e := (HasCompactification.compactification (f ≫ g)).ofComp d
-  exact ⟨(rightDerivedLowerShriekIso Λ (d.comp e)).symm ≪≫
-    (rightDerivedLowerShriekOfCompactificationCompIso Λ d e).symm ≪≫
-    Functor.isoWhiskerRight (rightDerivedLowerShriekIso Λ e.restrict) _⟩
+      R(f)_![ModuleCat.{u + 1} Λ] ⋙ R(g)_![ModuleCat.{u + 1} Λ]) :=
+  ⟨rightDerivedLowerShriekCompIso Λ f g⟩
 
 end Torsion
 

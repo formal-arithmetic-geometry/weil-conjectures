@@ -32,8 +32,10 @@ on the base.
    pasted ones through the composition isomorphisms
    (`AlgebraicGeometry.Etale.mapDerivedUpperStarLowerStarAdjunction_comp_eq`), and those of the
    exceptional pair are the pasted ones under the mate of the composition isomorphism of `Rf_!`
-   (`AlgebraicGeometry.Etale.exists_rightDerivedUpperShriekAdjunction_comp_eq`, and on the
-   finite-Tor categories `exists_rightDerivedLowerShriekAdjunction_comp_eq` in the namespace
+   `AlgebraicGeometry.Etale.rightDerivedLowerShriekCompIso`, whose mate is
+   `AlgebraicGeometry.Etale.rightDerivedUpperShriekCompIso`
+   (`AlgebraicGeometry.Etale.rightDerivedUpperShriekAdjunction_comp_eq`, and on the
+   finite-Tor categories `rightDerivedLowerShriekAdjunction_comp_eq` in the namespace
    `AlgebraicGeometry.Etale.DerivedCategoryFiniteTor`, which is blueprint `lem-sf-mate`).
 4. The transpose of the compact-support exchange `Ex_!` under the exceptional adjunctions and
    `Lg^* ⊣ Rg_*` is the exceptional-inverse-image identification `Rg'_* Rf'^! ≅ Rf^! Rg_*`
@@ -46,7 +48,7 @@ on the base.
 That `Rf^!` preserves `Dᵇc`, which clause (2) needs, is
 `AlgebraicGeometry.Etale.boundedConstructible_rightDerivedUpperShriek`. Blueprint
 `rem-ptr-sf-datum-1`, that the datum of `def-sf-datum` satisfies axiom (A1), is
-`AlgebraicGeometry.Etale.DerivedCategoryFiniteTor.nonempty_adjunctions_and_exists_comp_eq`.
+`AlgebraicGeometry.Etale.DerivedCategoryFiniteTor.nonempty_adjunctions_and_comp_eq`.
 
 Clause (3) for the derived pullback is stated for `D(g^*)`, the functor induced on derived
 categories by the exact pullback `g^*`, which is the derived pullback
@@ -240,9 +242,10 @@ noncomputable def DerivedCategoryFiniteTor.rightDerivedLowerShriekAdjunction
     (ObjectProperty.fullyFaithfulι _) (ObjectProperty.fullyFaithfulι _)
     (ObjectProperty.liftCompιIso _ _ _).symm (ObjectProperty.liftCompιIso _ _ _).symm
 
-/-- Blueprint `lem-sf-mate`: Mate calculus for a pasted adjunction.
+/-- The existential form of blueprint `lem-sf-mate`, a corollary of
+`AlgebraicGeometry.Etale.DerivedCategoryFiniteTor.rightDerivedLowerShriekAdjunction_comp_eq`.
 
-In the setting of the six-functor datum, let `X ⟶[f] Y ⟶[g] Z` be separated finite-type
+Let `X ⟶[f] Y ⟶[g] Z` be separated finite-type
 morphisms over a finite-type `k`-scheme `Z`, with the adjunctions `Rf_! ⊣ Rf^!`, `Rg_! ⊣ Rg^!`
 and `R(g ∘ f)_! ⊣ R(g ∘ f)^!` on the finite-Tor categories of axiom (A1)
 (`AlgebraicGeometry.Etale.DerivedCategoryFiniteTor.rightDerivedLowerShriekAdjunction`). There is
@@ -285,8 +288,8 @@ noncomputable def DerivedCategoryFiniteTor.leftDerivedUpperStarAdjunction
     (ObjectProperty.fullyFaithfulι _) (ObjectProperty.fullyFaithfulι _)
     (ObjectProperty.liftCompιIso _ _ _).symm (ObjectProperty.liftCompιIso _ _ _).symm
 
-/-- Blueprint `rem-ptr-sf-datum-1`: in the notation of `def-sf-datum`, the properties of
-`def-fix-six-functor-datum` and `fix-prop-adjunctions` hold, i.e. axiom (A1): for separated
+/-- The existential form of blueprint `rem-ptr-sf-datum-1`, a corollary of
+`AlgebraicGeometry.Etale.DerivedCategoryFiniteTor.nonempty_adjunctions_and_comp_eq`: for separated
 finite-type `X ⟶[f] Y ⟶[g] Z` of finite-type `k`-schemes and a finite `Λ` whose exponent is
 invertible on `Z`, there are adjunctions `Lf^* ⊣ Rf_*` and `Rf_! ⊣ Rf^!` on the finite-Tor
 categories, and the units and counits of the exceptional adjunction for `f ≫ g` are the pasted
@@ -317,6 +320,118 @@ theorem DerivedCategoryFiniteTor.nonempty_adjunctions_and_exists_comp_eq
     ⟨DerivedCategoryFiniteTor.rightDerivedLowerShriekAdjunction Λ aY f⟩,
     DerivedCategoryFiniteTor.exists_rightDerivedLowerShriekAdjunction_comp_eq Λ aY aZ f g⟩
 
+
+section Mate
+
+variable (aY : Y ⟶ Spec (.of k)) (aZ : Z ⟶ Spec (.of k)) [LocallyOfFiniteType aY]
+  [QuasiCompact aY] [LocallyOfFiniteType aZ] [QuasiCompact aZ] [HasInvertibleExponent Λ Y]
+  [HasInvertibleExponent Λ Z] (f : X ⟶ Y) (g : Y ⟶ Z) [HasCompactification f] [QuasiCompact f]
+  [HasCompactification g] [QuasiCompact g] [HasCompactification (f ≫ g)]
+
+/-- The composition isomorphism `R(f ≫ g)_! ≅ Rf_! ⋙ Rg_!` of functors between the finite-Tor
+categories: the restriction of the composition isomorphism
+`AlgebraicGeometry.Etale.rightDerivedLowerShriekCompIso` of `sk-thm-sf-comp-composition` on the
+unbounded derived categories. -/
+noncomputable def DerivedCategoryFiniteTor.rightDerivedLowerShriekCompIso :
+    DerivedCategoryFiniteTor.rightDerivedLowerShriek Λ aZ (f ≫ g) ≅
+      DerivedCategoryFiniteTor.rightDerivedLowerShriek Λ aY f ⋙
+        DerivedCategoryFiniteTor.rightDerivedLowerShriek Λ aZ g :=
+  ((ObjectProperty.fullyFaithfulι _).whiskeringRight _).preimageIso
+    (Functor.isoWhiskerLeft (DerivedCategoryFiniteTor.ι _ X)
+      (Etale.rightDerivedLowerShriekCompIso Λ f g))
+
+/-- Blueprint `lem-sf-mate`: the isomorphism `R(f ≫ g)^! ≅ Rg^! ⋙ Rf^!` between the finite-Tor
+categories, the mate of the composition isomorphism
+`AlgebraicGeometry.Etale.DerivedCategoryFiniteTor.rightDerivedLowerShriekCompIso` under the
+adjunction `R(f ≫ g)_! ⊣ R(f ≫ g)^!` and the composite of `Rf_! ⊣ Rf^!` and `Rg_! ⊣ Rg^!` of axiom
+(A1) (`AlgebraicGeometry.Etale.DerivedCategoryFiniteTor.rightDerivedLowerShriekAdjunction`). -/
+noncomputable def DerivedCategoryFiniteTor.rightDerivedUpperShriekCompIso :
+    DerivedCategoryFiniteTor.rightDerivedUpperShriek Λ aZ (f ≫ g) ≅
+      DerivedCategoryFiniteTor.rightDerivedUpperShriek Λ aZ g ⋙
+        DerivedCategoryFiniteTor.rightDerivedUpperShriek Λ aY f :=
+  (conjugateIsoEquiv
+    ((DerivedCategoryFiniteTor.rightDerivedLowerShriekAdjunction Λ aY f).comp
+      (DerivedCategoryFiniteTor.rightDerivedLowerShriekAdjunction Λ aZ g))
+    (DerivedCategoryFiniteTor.rightDerivedLowerShriekAdjunction Λ aZ (f ≫ g))
+    (DerivedCategoryFiniteTor.rightDerivedLowerShriekCompIso Λ aY aZ f g)).symm
+
+/-- Blueprint `lem-sf-mate`: Mate calculus for a pasted adjunction.
+
+In the setting of the six-functor datum, let `X ⟶[f] Y ⟶[g] Z` be separated finite-type
+morphisms over a finite-type `k`-scheme `Z`, with the adjunctions `Rf_! ⊣ Rf^!`, `Rg_! ⊣ Rg^!`
+and `R(g ∘ f)_! ⊣ R(g ∘ f)^!` on the finite-Tor categories of axiom (A1)
+(`AlgebraicGeometry.Etale.DerivedCategoryFiniteTor.rightDerivedLowerShriekAdjunction`). The mate
+of the composition isomorphism `R(f ≫ g)_! ≅ Rf_! ⋙ Rg_!`
+(`AlgebraicGeometry.Etale.DerivedCategoryFiniteTor.rightDerivedLowerShriekCompIso`,
+`sk-thm-sf-comp-composition`) is the isomorphism `R(f ≫ g)^! ≅ Rg^! ⋙ Rf^!`
+(`AlgebraicGeometry.Etale.DerivedCategoryFiniteTor.rightDerivedUpperShriekCompIso`), and
+transporting the adjunction of `f ≫ g` along the two gives the composite adjunction: the units
+and counits of the composite adjunction are the pasted ones. The componentwise forms are
+`DerivedCategoryFiniteTor.unit_comp_rightDerivedUpperShriekCompIso_inv_app` and
+`DerivedCategoryFiniteTor.map_rightDerivedUpperShriekCompIso_inv_app_counit`. -/
+theorem DerivedCategoryFiniteTor.rightDerivedLowerShriekAdjunction_comp_eq :
+    ((DerivedCategoryFiniteTor.rightDerivedLowerShriekAdjunction Λ aZ (f ≫ g)).ofNatIsoLeft
+        (DerivedCategoryFiniteTor.rightDerivedLowerShriekCompIso Λ aY aZ f g)).ofNatIsoRight
+        (DerivedCategoryFiniteTor.rightDerivedUpperShriekCompIso Λ aY aZ f g) =
+      (DerivedCategoryFiniteTor.rightDerivedLowerShriekAdjunction Λ aY f).comp
+        (DerivedCategoryFiniteTor.rightDerivedLowerShriekAdjunction Λ aZ g) :=
+  Adjunction.ofNatIsoLeft_ofNatIsoRight_conjugateIsoEquiv _ _ _
+
+/-- Blueprint `lem-sf-mate`, units: under the mate
+`AlgebraicGeometry.Etale.DerivedCategoryFiniteTor.rightDerivedUpperShriekCompIso`, the pasted unit
+`K ⟶ Rf^! Rg^! Rg_! Rf_! K` corresponds to the unit of `R(f ≫ g)_! ⊣ R(f ≫ g)^!`. -/
+lemma DerivedCategoryFiniteTor.unit_comp_rightDerivedUpperShriekCompIso_inv_app
+    (K : DerivedCategoryFiniteTor (ModuleCat.{u + 1} Λ) X) :
+    ((DerivedCategoryFiniteTor.rightDerivedLowerShriekAdjunction Λ aY f).comp
+        (DerivedCategoryFiniteTor.rightDerivedLowerShriekAdjunction Λ aZ g)).unit.app K ≫
+        (DerivedCategoryFiniteTor.rightDerivedUpperShriekCompIso Λ aY aZ f g).inv.app _ =
+      (DerivedCategoryFiniteTor.rightDerivedLowerShriekAdjunction Λ aZ (f ≫ g)).unit.app K ≫
+        (DerivedCategoryFiniteTor.rightDerivedUpperShriek Λ aZ (f ≫ g)).map
+          ((DerivedCategoryFiniteTor.rightDerivedLowerShriekCompIso Λ aY aZ f g).hom.app K) := by
+  rw [DerivedCategoryFiniteTor.rightDerivedUpperShriekCompIso, Iso.symm_inv,
+    conjugateIsoEquiv_apply_hom]
+  exact unit_conjugateEquiv _ _ _ K
+
+/-- Blueprint `lem-sf-mate`, counits: under the mate
+`AlgebraicGeometry.Etale.DerivedCategoryFiniteTor.rightDerivedUpperShriekCompIso`, the counit of
+`R(f ≫ g)_! ⊣ R(f ≫ g)^!` corresponds to the pasted counit `Rg_! Rf_! Rf^! Rg^! L ⟶ L`. -/
+lemma DerivedCategoryFiniteTor.map_rightDerivedUpperShriekCompIso_inv_app_counit
+    (L : DerivedCategoryFiniteTor (ModuleCat.{u + 1} Λ) Z) :
+    (DerivedCategoryFiniteTor.rightDerivedLowerShriek Λ aZ (f ≫ g)).map
+        ((DerivedCategoryFiniteTor.rightDerivedUpperShriekCompIso Λ aY aZ f g).inv.app L) ≫
+        (DerivedCategoryFiniteTor.rightDerivedLowerShriekAdjunction Λ aZ (f ≫ g)).counit.app L =
+      (DerivedCategoryFiniteTor.rightDerivedLowerShriekCompIso Λ aY aZ f g).hom.app _ ≫
+        ((DerivedCategoryFiniteTor.rightDerivedLowerShriekAdjunction Λ aY f).comp
+          (DerivedCategoryFiniteTor.rightDerivedLowerShriekAdjunction Λ aZ g)).counit.app L := by
+  rw [DerivedCategoryFiniteTor.rightDerivedUpperShriekCompIso, Iso.symm_inv,
+    conjugateIsoEquiv_apply_hom]
+  exact conjugateEquiv_counit _ _ _ L
+
+/-- Blueprint `rem-ptr-sf-datum-1`: in the notation of `def-sf-datum`, the properties of
+`def-fix-six-functor-datum` and `fix-prop-adjunctions` hold, i.e. axiom (A1): for separated
+finite-type `X ⟶[f] Y ⟶[g] Z` of finite-type `k`-schemes and a finite `Λ` whose exponent is
+invertible on `Z`, there are adjunctions `Lf^* ⊣ Rf_*` and `Rf_! ⊣ Rf^!` on the finite-Tor
+categories, and the units and counits of the exceptional adjunction for `f ≫ g` are the pasted
+ones under the composition isomorphism
+`AlgebraicGeometry.Etale.DerivedCategoryFiniteTor.rightDerivedLowerShriekCompIso` and its mate
+`AlgebraicGeometry.Etale.DerivedCategoryFiniteTor.rightDerivedUpperShriekCompIso`. -/
+theorem DerivedCategoryFiniteTor.nonempty_adjunctions_and_comp_eq
+    (aX : X ⟶ Spec (.of k)) [LocallyOfFiniteType aX] [QuasiCompact aX] (hf : f ≫ aY = aX)
+    [IsSeparated f] :
+    Nonempty (DerivedCategoryFiniteTor.leftDerivedUpperStar _ f ⊣
+        DerivedCategoryFiniteTor.rightDerivedLowerStar Λ aX aY f hf) ∧
+      Nonempty (DerivedCategoryFiniteTor.rightDerivedLowerShriek Λ aY f ⊣
+        DerivedCategoryFiniteTor.rightDerivedUpperShriek Λ aY f) ∧
+      ((DerivedCategoryFiniteTor.rightDerivedLowerShriekAdjunction Λ aZ (f ≫ g)).ofNatIsoLeft
+          (DerivedCategoryFiniteTor.rightDerivedLowerShriekCompIso Λ aY aZ f g)).ofNatIsoRight
+          (DerivedCategoryFiniteTor.rightDerivedUpperShriekCompIso Λ aY aZ f g) =
+        (DerivedCategoryFiniteTor.rightDerivedLowerShriekAdjunction Λ aY f).comp
+          (DerivedCategoryFiniteTor.rightDerivedLowerShriekAdjunction Λ aZ g) :=
+  ⟨⟨DerivedCategoryFiniteTor.leftDerivedUpperStarAdjunction Λ aX aY f hf⟩,
+    ⟨DerivedCategoryFiniteTor.rightDerivedLowerShriekAdjunction Λ aY f⟩,
+    DerivedCategoryFiniteTor.rightDerivedLowerShriekAdjunction_comp_eq Λ aY aZ f g⟩
+
+end Mate
 end FiniteTor
 
 section Exchange
