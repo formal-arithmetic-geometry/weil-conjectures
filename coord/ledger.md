@@ -3855,3 +3855,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 08:36 L: merged deliver/C1/lem-sc-tangent-space-vector-space (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.TangentVectorsVectorSpace AlgebraicGeometry.exists_tangentVectors_vectorSpace)
 - 08:36 L: merged deliver/C1/lem-sp-horseshoe-prescribed-resolutions (stage 2; reviewer FIX; first push; Sheaf.CategoryTheory.Abelian.HorseshoePrescribedResolutions CategoryTheory.InjectiveResolution.exists_horseshoe_prescribed_resolutions)
 - 08:37 L: merged deliver/K1/lem-sp-ce-compatible-homotopy-assembly (stage 2; reviewer PASS; first push; Sheaf.CategoryTheory.Abelian.CompatibleNullHomotopyAssembly CategoryTheory.exists_compatible_nullHomotopies)
+- 08:38 L: merged deliver/H1/lem-sc-supported-factor-through-thick (stage 2; reviewer PASS; first push; Sheaf.CategoryTheory.CompactFactorThroughThick CategoryTheory.compact_factorThrough_thickClosure; new nodes: def-pc-thick-closure)

@@ -1,0 +1,117 @@
+{
+ "id": "def-pc-thick-closure",
+ "kind": "definition",
+ "title": "Thick closure of an object",
+ "status": "split",
+ "statement": "Let $\\mathcal C$ be a triangulated category [def-weil-triangulated-category] and $K$ an object. The thick closure $\\langle K\\rangle$ is the smallest full subcategory containing $K$ and closed under isomorphisms, all integer shifts, distinguished cones, and direct summands. Equivalently, an object $Q$ belongs to it if every full triangulated subcategory stable under direct summands and containing $K$ also contains $Q$.",
+ "stmt_deps": [
+  "def-weil-triangulated-category"
+ ],
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Section 13.36, notation <E> and Lemma lemma-find-smallest-containing-E; used in Tag 09SP (lemma-factor-through)"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "smallest thick triangulated subcategory containing an object",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "thick closure smallest subcategory closed under shifts cones and retracts",
+   "results": "8 hits: CategoryTheory.Triangulated.Subcategory.mk', CategoryTheory.Triangulated.Subcategory.ext₁', CategoryTheory.ObjectProperty.instIsTriangulatedClosed₁OfIsTriangulated, CategoryTheory.Triangulated.Subcategory, CategoryTheory.Triangulated.Subcategory.ext₂', CategoryTheory.ObjectProperty.IsTriangulated.toIsTriangulatedClosed₂, CategoryTheory.Triangulated.Subcategory.isoClosure_W, CategoryTheory.ObjectProperty.instIsTriangulatedClosed₂IsoClosure; no thick closure declaration; existing classes are used",
+   "date": "2026-10-11",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "thickClosure|triangulatedClosure|class IsTriangulated|class IsStableUnderRetracts",
+   "results": "9 hits: Mathlib/CategoryTheory/ObjectProperty/Retract.lean, Mathlib/CategoryTheory/Triangulated/Subcategory.lean, Mathlib/CategoryTheory/Triangulated/Subcategory.lean, Mathlib/CategoryTheory/Triangulated/Subcategory.lean, Mathlib/CategoryTheory/Triangulated/Subcategory.lean, Mathlib/CategoryTheory/MorphismProperty/Retract.lean, Mathlib/CategoryTheory/Triangulated/Functor.lean, Mathlib/CategoryTheory/Triangulated/Adjunction.lean; no thick closure declaration; existing classes are used",
+   "date": "2026-10-11",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "thickClosure|ThickClosure in WeilConjectures, lean/Sheaf and dag/nodes; blueprint_refs.py search thick",
+   "results": "No definition node or Lean definition; Stability.lean:127 explicitly notes that Mathlib has no thickClosure. DAG hits are statements about specialized thick subcategories, not definitions. blueprint_refs search returns seven unrelated or specialized statements.",
+   "date": "2026-10-11",
+   "verdict": "no existing definition"
+  },
+  {
+   "tool": "grep",
+   "query": "thick|saturated.*subcategory|compact.*factor|factor.*compact over all WeilConjectures, Mathlib CategoryTheory, and lean/Sheaf; then triangEnvelope in DAG",
+   "results": "WeilConjectures/Mathlib/CategoryTheory/Triangulated/Generators.lean:104 identifies thick generation with Mathlib ObjectProperty.triangEnvelope. Read Mathlib/CategoryTheory/Triangulated/Generators.lean:62-186: retracts, shifts, extension closure, triangulated instance for nonempty P, and universal property triangEnvelope_le_iff. No DAG definition node carries this notion.",
+   "date": "2026-10-11",
+   "verdict": "exact existing match on singleton K"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sc-supported-factor-through-thick",
+  "date": "2026-10-11",
+  "group": "H1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "proper-flat support proof: the finite thick closure in Tag 09SP",
+   "via": [
+    "lem-sc-supported-factor-through-thick",
+    "lem-sc-pseudo-coherent-support-annihilation",
+    "lem-sc-proper-flat-right-adjoint-open-support",
+    "lem-sc-proper-flat-right-adjoint-restriction-open",
+    "lem-sc-proper-flat-right-adjoint-basechange",
+    "lem-sc-smooth-proper-diagonal-basechange-upper-shriek",
+    "lem-sc-smooth-proper-diagonal-pushforward-structure",
+    "lem-sc-smooth-proper-relative-dualizing-general",
+    "lem-sc-smooth-proper-curve-dualizing",
+    "lem-sc-finite-duality-trace"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "module": "Mathlib.CategoryTheory.Triangulated.Generators",
+  "declaration": "CategoryTheory.ObjectProperty.triangEnvelope",
+  "statement": "def triangEnvelope : ObjectProperty C",
+  "branch": "mathlib",
+  "by": "H1",
+  "date": "2026-10-11",
+  "existing": true,
+  "note": "Apply the existing envelope to ObjectProperty.singleton K. The singleton is nonempty; in a triangulated ambient category the envelope is triangulated, stable under retracts, and smallest by triangEnvelope_le_iff. Retracts are direct summands in this setting. No new Lean definition is needed."
+ },
+ "reviewed": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-sft1308",
+  "group": "H1",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-sft1308",
+  "group": "H1",
+  "result": "pass",
+  "note": "Pretriangulated+IsTriangulated = TR1-4; HasCoproducts.{w}; E:I->C compact, no generation; X:N->C, X0 and each Z n ≅ ∐ shifts (J:Type w, free multiplicities/shifts); dist triangles Z n->X n->X(n+1)->Z n[1]; compact C0, any n, f; ∃ Finset S, Q in triangEnvelope(singleton ∐_S E) (= smallest iso/shift/cone/summand-closed, via triangEnvelope_le_iff), a≫b=f; new node def-pc-thick-closure existing:true at triangEnvelope, no DAG duplicate"
+ }
+}
