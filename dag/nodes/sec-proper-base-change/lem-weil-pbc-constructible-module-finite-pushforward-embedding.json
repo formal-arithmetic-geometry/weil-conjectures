@@ -168,5 +168,23 @@
   "by": "L",
   "result": "pass",
   "note": "Five steps along the proof of Stacks 09Z7 (etale-cohomology.tex:13059-13080): Noetherian approximation (new node lem-weil-pbc-constructible-module-noetherian-descent, 01ZA + 09YU(3)), the Noetherian case 09Z6(3) (new node lem-weil-pbc-constructible-module-finite-pushforward-noetherian, Lean exists_mono_biproduct_lowerStar_of_isNoetherian, sorry), finite over Noetherian is of finite presentation (pqf-lem-finite-fp-locnoeth, tool use; Mathlib Noetherian.lean:265), pullback of the embedding (new node lem-weil-pbc-finite-pushforward-embedding-pullback, closed by exists_mono_biproduct_lowerStar_upperStar, attached by the lead), composition (elementary). Lambda: the node's finite Lambda is Noetherian, which Stacks' proof needs. LEAN FINDING verified by the lead: the Lean IsConstructibleSheaf has no constructibility of strata (Topology/Stratification.lean:29), so exists_mono_biproduct_lowerStar, exists_isNoetherian_upperStar_iso and exists_isNoetherian_mono_biproduct_lowerStar are false as stated (worker's counterexample checked); the earlier attachment moved to lean_candidates; reported in coord/HUMAN.md."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ConstructibleModuleFinitePushforwardEmbedding",
+  "declaration": "AlgebraicGeometry.Etale.finite_pushforward_embedding_of_isConstructibleEtaleModuleSheaf",
+  "file": "lean/Sheaf/AlgebraicGeometry/ConstructibleModuleFinitePushforwardEmbedding.lean",
+  "statement": "theorem finite_pushforward_embedding_of_isConstructibleEtaleModuleSheaf (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] {X : Scheme.{u}} [CompactSpace X] [QuasiSeparatedSpace X] (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (hF : Scheme.IsConstructibleEtaleModuleSheaf F) : ∃ (n : ℕ) (Y : Fin n → Scheme.{u}) (f : ∀ i : Fin n, Y i ⟶ X), (∀ i : Fin n, IsFinite (f i)) ∧ (∀ i : Fin n, LocallyOfFinitePresentation (f i)) ∧ ∃ (M : Fin n → ModuleCat.{u + 1} Λ), (∀ i : Fin n, Finite (M i)) ∧ ∃ (φ : F ⟶ ⨁ fun i : Fin n ↦ (lowerStar (ModuleCat.{u + 1} Λ) (f i)).obj ((constantSheaf (Y i).smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj (M i))), Mono φ",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-cfp1530",
+  "group": "C1",
+  "result": "pass",
+  "note": "qcqs X as [CompactSpace][QuasiSeparatedSpace]; finite Λ (Type u+1, CommRing, Finite); F in Sheaf X_et (ModuleCat Λ) with recorded Scheme.IsConstructibleEtaleModuleSheaf; ∃ n, Y, f : Fin n with IsFinite and LocallyOfFinitePresentation; finite M_i (Finite carrier); constantSheaf on (Y i)_et; Etale.lowerStar; finite biproduct ⨁; Mono φ; n=0 allowed"
  }
 }
