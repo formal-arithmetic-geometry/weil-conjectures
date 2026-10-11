@@ -118,5 +118,24 @@
   "group": "F1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-ffh2059 (reviewer sub-agent of L); spot-checked: C1: Step 1 local identification Hom_{O|_V}(O_V^r,A|_V)=A(V)^r is marked elementary (image of the r basis sections), restriction-compatible via def-pur-sheaf-hom (commutative O, matches statement); C4: def-weil-sheaf-of-modules-category gives the abelian category in which the short exact sequence lives; D: exactness not assumed, obtained from coordinatewise exactness of the r-fold direct sum (r=0 included) transported along the isomorphism of sequences in Step 3; E7: stmt_deps change (locally-ringed-space-morphism -> def-pur-sheaf-hom) named in the second reading; no new nodes, no tool_uses. No repairs needed."
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Category.ModuleCat.Sheaf.FiniteFreeInternalHomExact",
+  "declaration": "SheafOfModules.finiteFreeInternalHomExact",
+  "file": "lean/Sheaf/Algebra/Category/ModuleCat/Sheaf/FiniteFreeInternalHomExact.lean",
+  "statement": "theorem finiteFreeInternalHomExact (r : ℕ) (E : SheafOfModules ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R)) (hE : E ≅ SheafOfModules.free (R := (sheafCompose J (forget₂ CommRingCat RingCat)).obj R) (ULift.{u} (Fin r))) (S : ShortComplex (SheafOfModules ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R))) (hS : S.ShortExact) : ∃ hz : SheafOfModules.homObjMap (𝟙 E) S.f ≫ SheafOfModules.homObjMap (𝟙 E) S.g = 0, (ShortComplex.mk (SheafOfModules.homObjMap (𝟙 E) S.f) (SheafOfModules.homObjMap (𝟙 E) S.g) hz).ShortExact ∧ let N : Fin 3 → SheafOfModules ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R) := ![S.X₁, S.X₂, S.X₃] ∃ i : ∀ k : Fin 3, SheafOfModules.homObj E (N k) ≅ ∐ (fun _ : ULift.{u} (Fin r) ↦ N k), (∀ (k : Fin 3) (U : C) (φ : (SheafOfModules.homObj E (N k)).val.obj (Opposite.op U)) (j : ULift.{u} (Fin r)), ((Limits.Sigma.desc (fun l : ULift.{u} (Fin r) ↦ if l = j then 𝟙 (N k) else 0)).val.app (Opposite.op U)) (((i k).hom.val.app (Opposite.op U)) φ) = (φ.app (Opposite.op (Over.mk (𝟙 U)))) ((hE.inv.val.app (Opposite.op U)) (((SheafOfModules.ιFree (R := (sheafCompose J (forget₂ CommRingCat RingCat)).obj R) j).val.app (Opposite.op U)) (1 : R.obj.obj (Opposite.op U))))) ∧ SheafOfModules.homObjMap (𝟙 E) S.f ≫ (i 1).hom = (i 0).hom ≫ Limits.Sigma.map (fun _ ↦ S.f) ∧ SheafOfModules.homObjMap (𝟙 E) S.g ≫ (i 2).hom = (i 1).hom ≫ Limits.Sigma.map (fun _ ↦ S.g)",
+  "branch": "sheaf-dag",
+  "by": "J1",
+  "date": "2026-10-11",
+  "existing": false,
+  "note": "Includes canonical basis-evaluation identifications with finite sums and both sequence-map squares. Common universe realizes the dependency category small relative to module values; standard sheafification instances are synthesized."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-fih1253",
+  "group": "J1",
+  "result": "pass",
+  "note": "ringed site C/J/R:Sheaf J CommRingCat (common universe u, as landed TensorClosed); E with hE : E ≅ free (ULift (Fin r)), r:ℕ incl. r=0; S.ShortExact; conclusion ShortExact of homObjMap (𝟙 E) S.f / S.g (recorded homObj/homObjMap); canonical iso homObj E N_k ≅ ∐ N_k pinned by basis-evaluation coordinate equation via hE.inv ∘ ιFree j 1, plus Sigma.map squares; #check free/ιFree Mathlib, homObjMap upstream; compile clean"
  }
 }

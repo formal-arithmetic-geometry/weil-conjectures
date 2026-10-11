@@ -22,7 +22,7 @@ Usage (from the project root; by the lead, or by a reviewer sub-agent of the lea
       --head SHA            refuse unless the branch head is SHA (the commit the reviewer read)
   tools/merge_delivery.py <group> <item> --stage 2 --reviewer ID --head SHA [--apply-fixes DIR] [--spot-checked NOTE]
                         [--drop-nodes ID[,ID...]] [--revert-nodes ID[,ID...]] [--drop-files PATH[,PATH...]]
-                        [--verdict PASS|FIX] [--dry-run]
+                        [--revert-statement] [--verdict PASS|FIX] [--dry-run]
                                                         a stage-2 delivery (tools/README.md "Stage 2"): the mechanical
                         checks of tools/stage2_delivery.py (item, new definition nodes, dependency nodes: coord/STATE.md
                         "STAGE 2 EXTRA NODES"); with several modules, those importing no sibling are compiled first in
@@ -58,6 +58,13 @@ Usage (from the project root; by the lead, or by a reviewer sub-agent of the lea
                         its delivered module when no kept node owns it. --drop-files PATH[,PATH...] (stage 2): NEW modules
                         lean/Sheaf/<...>.lean of the delivery the fix no longer uses, left out (not landed, not committed);
                         refused if a kept module imports one or a kept record has it as lean.file. Both are named in
+                        reviewed_lean.note, the ledger line and the commit message. --revert-statement (stage 2): the
+                        delivery's statement correction of the ITEM is left out (a wrong correction, H7): its statement,
+                        stmt_deps, proof, proof_deps and statement_change stay as on sheaf-dag (stmt_deps still gain the
+                        kept new nodes), no reviewed_lean.statement_corrected; the delivered `lean` record is kept (fix it
+                        and the module with --apply-fixes to state the sheaf-dag statement; no <item>.statement-change.json
+                        then); the checks run on the result (refused if the branch does not change those fields, if the
+                        item's module uses the declaration of a node the restored stmt_deps lose, or on a cycle); named in
                         reviewed_lean.note, the ledger line and the commit message.
   tools/merge_delivery.py return <group> <item> REASONS write the reasons into coord/returns/<group>.md, the ledger
                                                         line, and commit; the claim and the branch stay with the group
@@ -668,7 +675,8 @@ def cmd_merge2(o):
         drop = [x.strip() for x in (o.drop_nodes or "").split(",") if x.strip()]
         revert = [x.strip() for x in (o.revert_nodes or "").split(",") if x.strip()]
         dfiles = [x.strip() for x in (o.drop_files or "").split(",") if x.strip()]
-        D = s2.read_delivery(G, br, base, group, item, drop=drop, revert=revert, drop_files=dfiles)
+        rstmt = bool(o.revert_statement)
+        D = s2.read_delivery(G, br, base, group, item, drop=drop, revert=revert, drop_files=dfiles, revert_statement=rstmt)
         nfix, fixnotes = 0, []
         if o.apply_fixes:
             # DIR: <basename>.lean for any module of the delivery, <item>.lean-record.json (the item's record),
@@ -736,6 +744,9 @@ def cmd_merge2(o):
                 nodes[nid] = (x["path"], json.loads(json.dumps(x["node"])))
             for nid in nodefix:
                 overrides[nodes[nid][0]] = dump(nodes[nid][1])
+            if scfix is not None and rstmt:
+                raise Fail(f"--apply-fixes: {sc_name} with --revert-statement: the reverted item keeps the statement_change "
+                           f"of {MAIN}")
             if scfix is not None:
                 # the reviewer's statement_change replaces the delivered one (checked again by read_delivery)
                 nodes[item][1]["statement_change"] = scfix
@@ -766,7 +777,8 @@ def cmd_merge2(o):
                            f"(give existing: false, module, file, declaration in DIR/{rec_name} or DIR/<new node id>.json)")
             for r in sorted(added_mods):
                 fixnotes.append(f"new module {r} added by the fix")
-            D = s2.read_delivery(G, br, base, group, item, overrides=overrides, drop=drop, revert=revert, drop_files=dfiles)
+            D = s2.read_delivery(G, br, base, group, item, overrides=overrides, drop=drop, revert=revert, drop_files=dfiles,
+                                 revert_statement=rstmt)
         fails = list(D["fails"])
         if fails:
             raise Fail("stage-2 checks: " + " | ".join(f"({L}) {x}" for L, x in fails))
@@ -820,6 +832,10 @@ def cmd_merge2(o):
                                                   "(--revert-nodes; kept as on sheaf-dag)") if x)
         if dropped_files:
             dnote = "; ".join(x for x in (dnote, f"left out new module(s) {', '.join(dropped_files)} (--drop-files)") if x)
+        rfields = list(D.get("statement_reverted") or [])
+        if rfields:
+            dnote = "; ".join(x for x in (dnote, f"reverted the delivery's statement correction of the item ({', '.join(rfields)} "
+                                                  "kept as on sheaf-dag; --revert-statement)") if x)
         if o.spot_checked or dnote:
             reviewed["note"] = "; ".join(x for x in (o.spot_checked, dnote) if x)
         reviewed_new = {"date": today(), "by": "L", "reviewer": rid, "group": group, "result": verdict.lower(),
@@ -917,7 +933,8 @@ def cmd_merge2(o):
             rec = records[item]
             extra = (f"; new nodes: {', '.join(new)}" if new else "") + (f"; dropped nodes: {', '.join(dropped)}" if dropped else "") \
                 + (f"; reverted nodes: {', '.join(reverted)}" if reverted else "") \
-                + (f"; dropped files: {', '.join(dropped_files)}" if dropped_files else "") + (f"; dependency modules: {', '.join(deps)}" if deps else "") \
+                + (f"; dropped files: {', '.join(dropped_files)}" if dropped_files else "") \
+                + (f"; statement correction reverted ({', '.join(rfields)})" if rfields else "") + (f"; dependency modules: {', '.join(deps)}" if deps else "") \
                 + (f"; statement corrected ({len(D.get('citers') or [])} citers)" if D.get("corrected") else "")
             ltext = (f"merged {br} (stage 2; reviewer {verdict}; {'after a return' if returned else 'first push'}; "
                      f"{rec.get('module')} {rec.get('declaration')}{'; existing declaration' if rec.get('existing') else ''}{extra})")
@@ -928,6 +945,7 @@ def cmd_merge2(o):
                    + (f"; dropped: {', '.join(dropped)}" if dropped else "")
                    + (f"; reverted: {', '.join(reverted)}" if reverted else "")
                    + (f"; dropped files: {', '.join(dropped_files)}" if dropped_files else "")
+                   + ("; statement correction reverted" if rfields else "")
                    + f"\n\nDelivered by group {group} ({br}, {git('rev-parse', '--short', br)}); "
                    f"reviewer {rid}: {verdict}; merged by tools/merge_delivery.py --stage 2 for L."
                    + (("\nDependency modules: " + ", ".join(f"{k} ({records[k].get('module')})" for k in deps) + ".") if deps else ""))
@@ -997,7 +1015,7 @@ def main():
     ap.add_argument("group"); ap.add_argument("item")
     ap.add_argument("--spot-checked"); ap.add_argument("--reviewer", default="reviewer")
     ap.add_argument("--apply-fixes"); ap.add_argument("--tool-uses"); ap.add_argument("--drop-tool-uses"); ap.add_argument("--drop-nodes"); ap.add_argument("--reviewed")
-    ap.add_argument("--revert-nodes"); ap.add_argument("--drop-files")
+    ap.add_argument("--revert-nodes"); ap.add_argument("--drop-files"); ap.add_argument("--revert-statement", action="store_true")
     ap.add_argument("--lead-note"); ap.add_argument("--verdict", choices=["PASS", "FIX", "pass", "fix"])
     ap.add_argument("--head")
     ap.add_argument("--stage", choices=["1", "2"], default="1"); ap.add_argument("--dry-run", action="store_true")
@@ -1007,8 +1025,8 @@ def main():
         print(f"NOT MERGED {a[1] if len(a) > 1 else '?'}: bad arguments (see --help)"); return 1
     if o.dry_run and o.stage != "2":
         print(f"NOT MERGED {o.item}: --dry-run is for --stage 2 only"); return 1
-    if (o.revert_nodes or o.drop_files) and o.stage != "2":
-        print(f"NOT MERGED {o.item}: --revert-nodes / --drop-files are for --stage 2 only"); return 1
+    if (o.revert_nodes or o.drop_files or o.revert_statement) and o.stage != "2":
+        print(f"NOT MERGED {o.item}: --revert-nodes / --drop-files / --revert-statement are for --stage 2 only"); return 1
     try:
         return cmd_merge2(o) if o.stage == "2" else cmd_merge(o)
     except Exception as e:  # noqa: BLE001
