@@ -220,5 +220,23 @@
   "worker": "stage1",
   "summary": "Split along the proof of Stacks 05GH (algebra.tex lines 23022-23063), tags 05GH, 05GG, 00FN verified in tags/tags. Step 1: completeness of R^ w.r.t. IR^ and R^/IR^ = R/I from the existing leaf lem-weil-pbc-adic-completion-mod-ideal (05GG), Noetherianity of R^/IR^ via lem-weil-pbc-surjective-image-noetherian, reduction to a J-adically complete A with J=(g_1..g_t), A/J Noetherian. Step 2: gr_J(A) is a quotient of (A/J)[T_1..T_t] (def-weil-pbc-mv-polynomial-ring), hence Noetherian by lem-weil-pbc-finite-type-algebra-noetherian. Steps 3-6: the initial ideal G(K) of an ideal K has homogeneous generators lifting to h_j in K, the approximation x - sum a_j h_j in K cap J^{n+1}, the iteration, and the convergence of A_j = sum_n a_{j,n} by completeness, with x - sum A_j h_j in the intersection of the J^k, which is 0; written out where Stacks says 'as R is complete'. New node: def-weil-pbc-associated-graded-ring (unsplit, not in Mathlib). Not a Mathlib leaf (LeanSearch, LeanFinder, Loogle, grep). Statement unchanged; stmt_deps unchanged."
  },
- "reviewed": "pass (L, 2026-10-10): 6 steps follow 05GH: completion is J-adically complete with R^/J = R/I (05GG); gr_J is a quotient of a polynomial ring over R/I, hence Noetherian; homogeneous generators of the initial ideal lift to generators of any ideal by successive approximation and convergence in the complete ring. New definition node associated-graded-ring (unsplit; its ring-axiom claim may need a statement node at its split)."
+ "reviewed": "pass (L, 2026-10-10): 6 steps follow 05GH: completion is J-adically complete with R^/J = R/I (05GG); gr_J is a quotient of a polynomial ring over R/I, hence Noetherian; homogeneous generators of the initial ideal lift to generators of any ideal by successive approximation and convergence in the complete ring. New definition node associated-graded-ring (unsplit; its ring-axiom claim may need a statement node at its split).",
+ "lean": {
+  "module": "Sheaf.RingTheory.AdicCompletionNoetherianOfQuotient",
+  "declaration": "AdicCompletion.isNoetherianRing_and_isAdicComplete_of_quotient",
+  "file": "lean/Sheaf/RingTheory/AdicCompletionNoetherianOfQuotient.lean",
+  "statement": "theorem isNoetherianRing_and_isAdicComplete_of_quotient {R : Type u} [CommRing R] (I : Ideal R) [IsNoetherianRing (R ⧸ I)] (hI : I.FG) : IsNoetherianRing (AdicCompletion I R) ∧ IsAdicComplete (I.map (algebraMap R (AdicCompletion I R))) (AdicCompletion I R)",
+  "branch": "sheaf-dag",
+  "by": "G1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-cnq1513",
+  "group": "G1",
+  "result": "pass",
+  "note": "CommRing R, I : Ideal R, [IsNoetherianRing (R ⧸ I)], I.FG; R^ = AdicCompletion I R, IR^ = I.map (algebraMap R R^) (span of image); conclusions IsNoetherianRing R^ ∧ IsAdicComplete IR^ R^; not a duplicate of 478ef90ea (assumes R Noetherian) nor e0f02a157 (Kummer-type finite extension)"
+ }
 }
