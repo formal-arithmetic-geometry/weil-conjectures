@@ -1,11 +1,11 @@
 # Work queue
 
-553 items; claim with `tools/claim.py next <group> [--stage N]`.
+548 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (553)
+## Stage 2: nodes to state (548)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -72,18 +72,15 @@
 | `lem-weil-pbc-coherent-stalk-map-extends` | 1 | state |
 | `lem-weil-pbc-coherent-twist-global-generation` | 1 | state |
 | `lem-weil-pbc-constructible-module-noetherian-descent` | 1 | state |
-| `lem-weil-pbc-curve-assertions-dense-open` | 1 | state |
 | `lem-weil-pbc-descend-closed-immersion` | 1 | state |
 | `lem-weil-pbc-descend-finite` | 1 | state |
 | `lem-weil-pbc-descend-finite-locally-free` | 1 | state |
-| `lem-weil-pbc-descend-separated` | 1 | state |
 | `lem-weil-pbc-etale-finite-data-descent` | 1 | state |
 | `lem-weil-pbc-etale-infinitesimal-neighbourhoods` | 1 | state |
 | `lem-weil-pbc-eventually-affine` | 1 | state |
 | `lem-weil-pbc-finite-presentation-kernel-surjection-finite-type` | 1 | state |
 | `lem-weil-pbc-finite-pushforward-coherent` | 1 | state |
 | `lem-weil-pbc-flat-fp-lqf-bounded-stratification` | 1 | state |
-| `lem-weil-pbc-flat-fp-qf-stratification` | 1 | state |
 | `lem-weil-pbc-formal-fibre-quasi-finite-ascent` | 1 | state |
 | `lem-weil-pbc-ideal-times-quasi-coherent-affine-sections` | 1 | state |
 | `lem-weil-pbc-integral-algebra-directed-colimit-finite` | 1 | state |
@@ -91,13 +88,11 @@
 | `lem-weil-pbc-jacobi-zariski-connecting-map-naturality` | 1 | state |
 | `lem-weil-pbc-koszul-differential-square-zero` | 1 | state |
 | `lem-weil-pbc-lift-projective-module-etale` | 1 | state |
-| `lem-weil-pbc-limit-residue-field` | 1 | state |
-| `lem-weil-pbc-lqf-locally-finite-type` | 1 | state |
+| `lem-weil-pbc-limit-fibre-products` | 1 | state |
 | `lem-weil-pbc-lqf-qc-source-bounded-fibres` | 1 | state |
 | `lem-weil-pbc-lqf-restriction-to-opens` | 1 | state |
 | `lem-weil-pbc-module-base-change-map-pasting` | 1 | state |
 | `lem-weil-pbc-module-directed-colimit-finite-presentation` | 1 | state |
-| `lem-weil-pbc-module-directed-colimit-underlying-sets` | 1 | state |
 | `lem-weil-pbc-module-filtered-colimit-finite-presentation` | 1 | state |
 | `lem-weil-pbc-module-finite-presentation-extension` | 1 | state |
 | `lem-weil-pbc-module-finite-presentation-representatives` | 1 | state |
@@ -563,7 +558,7 @@
 | `lem-pc-essentially-constant-pro-hom-colimit` | 4 | state |
 | `lem-pur-essential-constant-pro-criterion-05py` | 4 | state |
 
-Not open yet: 40 nodes that wait for stage 1, 641 nodes that wait for a statement dependency.
+Not open yet: 40 nodes that wait for stage 1, 640 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
