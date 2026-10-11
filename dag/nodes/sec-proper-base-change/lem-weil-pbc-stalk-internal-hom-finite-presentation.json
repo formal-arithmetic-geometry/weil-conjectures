@@ -173,5 +173,25 @@
   "summary": "Split by one level following Stacks Modules 01CP (lemma-stalk-internal-hom, modules.tex lines 3619-3708), finitely presented part only (the item states only that part; the finite-type injectivity part is not needed). Steps: canonical map well defined and linear (germs, elementary); localization to a finite presentation, with exactness of O^m -> O^n -> F|_U -> 0 obtained from lem-weil-pbc-module-stalk-exact (3),(5) since the definition gives F|_U only as isomorphic to a cokernel; the free case on the sheaf side is the existing lem-weil-pbc-sheaf-hom-finite-presentation-kernel (2) (Stacks 01CO(1) plus Hom(O^n,G)=G^n); stalks via lem-weil-pbc-module-stalk-exact (2),(5), with stalks of finite direct sums written out from the germ description; the stalk side via one new Mathlib leaf lem-weil-pbc-module-hom-left-exact (left exactness of Hom_R(-,N), Hom_R(R^n,N)=N^n); comparison of the two kernels written out. Statement and stmt_deps kept. No slopmaster2 Lean found for the item (grep of id and key words).",
   "blueprint": "The item is not a blueprint node; its ancestor thm-weil-pbc-finite-etale-lifting is served at the place recorded in blueprint.from.place (the coherent stalk-map extension used in the coherent devissage route of the essential-surjectivity paragraphs of Lemma 0GS2). The steps realize that use: they give the stalk isomorphism Hom(F,G)_x -> Hom(F_x,G_x) that lem-weil-pbc-coherent-stalk-map-extends cites. same_as: [] (blueprint_refs search 'stalk internal hom', '01CP', '01CO' found no blueprint node stating it)."
  },
- "reviewed": "2026-10-10 L: 6 steps following 01CP (canonical map; local presentation with exactness from the stalk node; the sheaf-side free case by the 01CO node; stalks with finite sums; the module side by the new leaf (Hom left exact, Hom(R^n, N) = N^n); comparison of kernels); 1 new Mathlib leaf (lines read)"
+ "reviewed": "2026-10-10 L: 6 steps following 01CP (canonical map; local presentation with exactness from the stalk node; the sheaf-side free case by the 01CO node; stalks with finite sums; the module side by the new leaf (Hom left exact, Hom(R^n, N) = N^n); comparison of kernels); 1 new Mathlib leaf (lines read)",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.StalkInternalHomFinitePresentation",
+  "declaration": "AlgebraicGeometry.RingedSpace.exists_stalk_internalHom_linearEquiv_of_finitePresentation",
+  "file": "lean/Sheaf/AlgebraicGeometry/StalkInternalHomFinitePresentation.lean",
+  "statement": "theorem exists_stalk_internalHom_linearEquiv_of_finitePresentation (X : RingedSpace.{u}) (F G : SheafOfModules.{u} ((sheafCompose (Opens.grothendieckTopology X) (forget₂ CommRingCat.{u} RingCat.{u})).obj X.sheaf)) [SheafOfModules.IsFinitePresentation.{u} F] (x : X) : ∃ e : (moduleStalkFunctor X x).obj (F.homObj G) ≃ₗ[ X.presheaf.stalk x] ((moduleStalkFunctor X x).obj F →ₗ[X.presheaf.stalk x] (moduleStalkFunctor X x).obj G), ∀ (U : Opens X) (hxU : x ∈ U) (φ : (SheafOfModules.homObj F G).val.obj (op U)) (V : Opens X) (i : V ⟶ U) (hxV : x ∈ V) (s : F.val.obj (op V)), e (TopCat.Presheaf.germ (SheafOfModules.homObj F G).val.presheaf U x hxU φ) (TopCat.Presheaf.germ F.val.presheaf V x hxV s) = TopCat.Presheaf.germ G.val.presheaf V x hxV ((φ.app (op (Over.mk i))) s)",
+  "branch": "sheaf-dag",
+  "by": "P1",
+  "date": "2026-10-11",
+  "existing": false,
+  "note": "The canonical map is specified by an explicit formula on representative germs; a linear equivalence with this formula states precisely its being an isomorphism.",
+  "fixed_by": "R-sih"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-sih",
+  "group": "P1",
+  "result": "fix",
+  "note": "RingedSpace X; F,G SheafOfModules over X.sheaf; F Mathlib IsFinitePresentation (clause 2); Hom = SheafOfModules.homObj; stalks now RingedSpace.moduleStalkFunctor objects; e tied to canonical map by germ formula phi.app (Over.mk i), unique; no G hypothesis; universes single u"
+ }
 }
