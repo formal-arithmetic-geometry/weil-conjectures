@@ -58,4 +58,60 @@ lemma ihomComparison_ihomUnitTensorToIhom (A Z : C) :
   simp only [comp_whiskerRight, Category.assoc]
   rfl
 
+variable {G} {L : D ⥤ C} (adj : L ⊣ G)
+
+/-- The projection map `L (G A ⊗ T) ⟶ A ⊗ L T` of a left adjoint `L` of a monoidal functor `G`:
+the transpose of `G A ⊗ T ⟶ G A ⊗ G L T ⟶ G (A ⊗ L T)`. -/
+noncomputable def projectionMap (A : C) : tensorLeft (G.obj A) ⋙ L ⟶ L ⋙ tensorLeft A where
+  app T := L.map (G.obj A ◁ adj.unit.app T ≫ μ G A (L.obj T)) ≫ adj.counit.app (A ⊗ L.obj T)
+  naturality T T' g := by
+    dsimp
+    rw [Category.assoc, ← adj.counit_naturality, ← L.map_comp_assoc, ← L.map_comp_assoc]
+    congr 2
+    rw [Category.assoc, ← μ_natural_right, ← MonoidalCategory.whiskerLeft_comp_assoc,
+      ← MonoidalCategory.whiskerLeft_comp_assoc, adj.unit_naturality]
+
+/-- The internal hom comparison `G [A, B] ⟶ [G A, G B]` of a monoidal right adjoint `G` is the
+conjugate of the projection map `L (G A ⊗ T) ⟶ A ⊗ L T` of its left adjoint. -/
+lemma conjugateEquiv_projectionMap (A : C) :
+    conjugateEquiv (adj.comp (ihom.adjunction A)) ((ihom.adjunction (G.obj A)).comp adj)
+      (projectionMap adj A) = (ihomComparison G A).natTrans := by
+  ext B
+  apply uncurry_injective
+  rw [uncurry_eq, uncurry_eq, ihomComparison_ev]
+  simp only [comp_obj, id_obj, conjugateEquiv_apply_app, curriedTensor_obj_obj,
+    Adjunction.comp_unit_app, ihom.ihom_adjunction_unit, comp_map, Adjunction.comp_counit_app,
+    curriedTensor_obj_map, ihom.ihom_adjunction_counit, map_comp, Category.assoc,
+    MonoidalCategory.whiskerLeft_comp, ihom.ev_naturality, ihom.ev_naturality_assoc,
+    ihom.ev_coev_assoc]
+  simp only [projectionMap, Functor.map_comp, Category.assoc]
+  rw [← G.map_comp_assoc, ← L.map_comp, adj.unit_naturality_assoc]
+  rw [adj.right_triangle_components_assoc, Category.assoc, ← μ_natural_right_assoc,
+    ← MonoidalCategory.whiskerLeft_comp_assoc, adj.right_triangle_components,
+    MonoidalCategory.whiskerLeft_id, Category.id_comp]
+
+/-- **Internal homs along a monoidal right adjoint.** If the projection map
+`L (G A ⊗ T) ⟶ A ⊗ L T` of the left adjoint `L` is an isomorphism, then `G` commutes with
+internal homs out of `A`: the comparison `G [A, B] ⟶ [G A, G B]` is an isomorphism. -/
+lemma isIso_ihomComparison_of_isIso_projectionMap (A : C) [IsIso (projectionMap adj A)] :
+    IsIso (ihomComparison G A).natTrans := by
+  rw [← conjugateEquiv_projectionMap adj A]
+  infer_instance
+
+/-- If the projection map of the left adjoint of a monoidal functor `G` is an isomorphism at `A`,
+and the canonical map `[G A, 𝟙] ⊗ G Z ⟶ [G A, G Z]` is an isomorphism (for instance if `G A` is
+dualizable), then `G` sends the canonical map `[A, 𝟙] ⊗ Z ⟶ [A, Z]` to an isomorphism. -/
+lemma isIso_map_ihomUnitTensorToIhom (A Z : C) [IsIso (projectionMap adj A)]
+    [IsIso (ihomUnitTensorToIhom (G.obj A) (G.obj Z))] :
+    IsIso (G.map (ihomUnitTensorToIhom A Z)) := by
+  have := isIso_ihomComparison_of_isIso_projectionMap adj A
+  have h := ihomComparison_ihomUnitTensorToIhom G A Z
+  have h' : IsIso (μ G _ Z ≫ G.map (ihomUnitTensorToIhom A Z) ≫
+      (ihomComparison G A).natTrans.app Z) := by
+    rw [h]
+    infer_instance
+  have := IsIso.of_isIso_comp_left (μ G _ Z)
+    (G.map (ihomUnitTensorToIhom A Z) ≫ (ihomComparison G A).natTrans.app Z)
+  exact IsIso.of_isIso_comp_right _ ((ihomComparison G A).natTrans.app Z)
+
 end CategoryTheory.Functor.Monoidal
