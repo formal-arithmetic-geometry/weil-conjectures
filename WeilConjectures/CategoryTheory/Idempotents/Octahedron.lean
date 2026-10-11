@@ -48,6 +48,10 @@ lemma compl_comp_compl {X : C} {s : X ⟶ X} (hs : s ≫ s = s) :
     (𝟙 _ - s) ≫ (𝟙 _ - s) = 𝟙 _ - s := by
   simp [comp_sub, sub_comp, hs]
 
+lemma comm_of_comp_eq' {X Y : C} {p : X ⟶ X} {q : Y ⟶ Y} (f : X ⟶ Y) (hq : q ≫ q = q)
+    (h : f ≫ q = p ≫ f) : p ≫ (f ≫ q) ≫ q = f ≫ q := by
+  rw [assoc, hq, ← assoc, ← h, assoc, hq]
+
 lemma compl_comp {X Y : C} {w : X ⟶ Y} {s : X ⟶ X} {q : Y ⟶ Y} (h : s ≫ w = w ≫ q) :
     (𝟙 _ - s) ≫ w = w ≫ (𝟙 _ - q) := by
   simp [comp_sub, sub_comp, h]
@@ -178,3 +182,79 @@ lemma s_corrY (hs₁₃ : s₁₃ ≫ s₁₃ = s₁₃) : s₁₃ ≫ corrY s�
 end Algebra
 
 end CategoryTheory.Idempotents.Karoubi.OctahedronAux
+
+namespace CategoryTheory.Idempotents.Karoubi
+
+open Category Limits Preadditive ZeroObject Pretriangulated
+
+variable {C : Type*} [Category* C] [Preadditive C] [HasZeroObject C] [HasShift C ℤ]
+  [∀ (n : ℤ), (shiftFunctor C n).Additive] [Pretriangulated C]
+
+section Raw
+
+variable {X₁ X₂ X₃ : C} (u : X₁ ⟶ X₂) (v : X₂ ⟶ X₃) (w : X₃ ⟶ X₁⟦(1 : ℤ)⟧)
+  (p₁ : X₁ ⟶ X₁) (p₂ : X₂ ⟶ X₂) (p₃ : X₃ ⟶ X₃) (h₁ : p₁ ≫ p₁ = p₁) (h₂ : p₂ ≫ p₂ = p₂)
+  (h₃ : p₃ ≫ p₃ = p₃) (c₁ : u ≫ p₂ = p₁ ≫ u) (c₂ : v ≫ p₃ = p₂ ≫ v)
+  (c₃ : w ≫ p₁⟦(1 : ℤ)⟧' = p₃ ≫ w)
+
+/-- The triangle `(X₁, p₁) ⟶ (X₂, p₂) ⟶ (X₃, p₃) ⟶ (X₁, p₁)⟦1⟧` of the Karoubi envelope
+attached to a triangle of `C` with compatible idempotents. -/
+@[simps!]
+noncomputable def triangleOfIdem' : Triangle (Karoubi C) :=
+  Triangle.mk (X := ⟨X₁, p₁, h₁⟩) (Y := ⟨X₂, p₂, h₂⟩) (Z := ⟨X₃, p₃, h₃⟩)
+    ⟨u ≫ p₂, OctahedronAux.comm_of_comp_eq' u h₂ c₁⟩
+    ⟨v ≫ p₃, OctahedronAux.comm_of_comp_eq' v h₃ c₂⟩
+    ⟨w ≫ p₁⟦(1 : ℤ)⟧', OctahedronAux.comm_of_comp_eq' w
+      (by rw [← Functor.map_comp, h₁]) c₃⟩
+
+lemma triangleOfIdem'_distinguished (hT : Triangle.mk u v w ∈ distTriang C) :
+    triangleOfIdem' u v w p₁ p₂ p₃ h₁ h₂ h₃ c₁ c₂ c₃ ∈ distTriang (Karoubi C) :=
+  triangleOfIdem_distinguished (Triangle.mk u v w) hT
+    (Triangle.homMk _ _ p₁ p₂ p₃ c₁ c₂ c₃) (by ext <;> simp [h₁, h₂, h₃])
+
+include h₁ h₂ h₃ c₁ c₂ c₃ in
+/-- The complement of an idempotent endomorphism of a distinguished triangle whose first
+morphism vanishes on the complement splits. -/
+lemma exists_split_compl (hT : Triangle.mk u v w ∈ distTriang C) (hu : u ≫ (𝟙 _ - p₂) = 0) :
+    ∃ (ρ : X₃ ⟶ X₂) (σ : X₁⟦(1 : ℤ)⟧ ⟶ X₃), (𝟙 _ - p₃) ≫ ρ = ρ ∧
+      ρ ≫ v ≫ (𝟙 _ - p₃) + w ≫ (𝟙 _ - p₁)⟦(1 : ℤ)⟧' ≫ σ = 𝟙 _ - p₃ ∧
+      v ≫ (𝟙 _ - p₃) ≫ ρ = 𝟙 _ - p₂ ∧
+      σ ≫ w ≫ (𝟙 _ - p₁)⟦(1 : ℤ)⟧' = (𝟙 _ - p₁)⟦(1 : ℤ)⟧' := by
+  have hc₁ : u ≫ (𝟙 _ - p₂) = (𝟙 _ - p₁) ≫ u := OctahedronAux.comp_compl c₁
+  have hc₂ : v ≫ (𝟙 _ - p₃) = (𝟙 _ - p₂) ≫ v := OctahedronAux.comp_compl c₂
+  have hc₃ : w ≫ (𝟙 _ - p₁)⟦(1 : ℤ)⟧' = (𝟙 _ - p₃) ≫ w := by
+    rw [Functor.map_sub, Functor.map_id]; exact OctahedronAux.comp_compl c₃
+  let Δ := triangleOfIdem' u v w (𝟙 _ - p₁) (𝟙 _ - p₂) (𝟙 _ - p₃)
+    (OctahedronAux.compl_comp_compl h₁) (OctahedronAux.compl_comp_compl h₂)
+    (OctahedronAux.compl_comp_compl h₃) hc₁ hc₂ hc₃
+  have hΔ : Δ ∈ distTriang (Karoubi C) := triangleOfIdem'_distinguished _ _ _ _ _ _ _ _ _ _ _ _ hT
+  have h0 : Δ.mor₁ = 0 := by
+    ext
+    change u ≫ (𝟙 _ - p₂) = 0
+    exact hu
+  obtain ⟨e₀, he₁, he₂⟩ := exists_iso_binaryBiproduct_of_distTriang _ (rot_of_distTriang _ hΔ)
+    (by simp only [Triangle.rotate_mor₃, h0, Functor.map_zero, neg_zero])
+  let e : Δ.obj₃ ≅ Δ.obj₂ ⊞ Δ.obj₁⟦(1 : ℤ)⟧ := e₀
+  have he₁₀ : Δ.mor₂ ≫ e.hom = biprod.inl := he₁
+  have he₁' : Δ.mor₂ = biprod.inl ≫ e.inv := by rw [← he₁₀]; simp
+  have he₂' : Δ.mor₃ = e.hom ≫ biprod.snd := he₂
+  let ρD : Δ.obj₃ ⟶ Δ.obj₂ := e.hom ≫ biprod.fst
+  let σD : Δ.obj₁⟦(1 : ℤ)⟧ ⟶ Δ.obj₃ := biprod.inr ≫ e.inv
+  refine ⟨ρD.f, σD.f, Karoubi.p_comp ρD, ?_, ?_, ?_⟩
+  · have hD : ρD ≫ Δ.mor₂ + Δ.mor₃ ≫ σD = 𝟙 _ := by
+      rw [he₁', he₂']
+      simp only [ρD, σD, assoc]
+      have : biprod.fst ≫ biprod.inl ≫ e.inv + biprod.snd ≫ biprod.inr ≫ e.inv = e.inv := by
+        rw [← assoc, ← assoc, ← add_comp, biprod.total, id_comp]
+      rw [← comp_add, this, e.hom_inv_id]
+    simpa [Δ] using congrArg Karoubi.Hom.f hD
+  · have hD : Δ.mor₂ ≫ ρD = 𝟙 _ := by
+      rw [he₁']; simp [ρD]
+    simpa [Δ] using congrArg Karoubi.Hom.f hD
+  · have hD : σD ≫ Δ.mor₃ = 𝟙 _ := by
+      rw [he₂']; simp [σD]
+    exact congrArg Karoubi.Hom.f hD
+
+end Raw
+
+end CategoryTheory.Idempotents.Karoubi
