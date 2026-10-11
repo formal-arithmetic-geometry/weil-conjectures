@@ -223,5 +223,24 @@
   "worker": "stage1",
   "summary": "Read Morphisms 01VS/01VT/01VR/01VQ/01VN/01VM, Constructions 01N8/01NA/01NE/01NF/01O3 and Properties 01PW/01Q3/01PS; the proof follows the first paragraph of the proof of 01VS for S = Spec A in six steps: a finite cover by affine X_{a_k} with all a_k in one power L^m (directly from Definition 01PS and quasi-compactness, so 01Q3 is not needed; X separated by the 09MP node), finite generation of O(X_{a_k}) over A (01T2 leaf), clearing denominators (the existing 01PW node lem-pc-section-clearing-denominators) to write the generators as b_kl/b_k with sections of L^d, the morphism j to Proj(A[x_0..x_n]) with j^*O(1) = L^d (new unsplit node for Constructions 01N8 with d = 1, stated directly for the item's P_n and the glued O(1) of def-pc-projective-space-twist, so no identification Proj(A[x]) = Spec A x P^n_Z is needed), and the immersion via factorisation through U = union of the D_+(x_k) and the affine closed-immersion criterion (01QO leaf). The empty X is treated separately. Statement unchanged. Not a Mathlib leaf: Mathlib has no ample or invertible modules; Proj.fromOfGlobalSections is only the structure-sheaf case."
  },
- "reviewed": "pass (L, 2026-10-10): 6 steps follow 01VS over Spec A: finitely many affine loci X_{a_k} of sections of one power of L (quasi-compact, separated), finitely generated rings of sections (01T2), clearing denominators (01PW, picard unit, on the route), the morphism to Proj(A[x]) defined by the sections (new unsplit node 01N8 with d = 1), factoring through the union of the D_+(x_k) as a closed immersion by surjectivity of the affine charts."
+ "reviewed": "pass (L, 2026-10-10): 6 steps follow 01VS over Spec A: finitely many affine loci X_{a_k} of sections of one power of L (quasi-compact, separated), finitely generated rings of sections (01T2), clearing denominators (01PW, picard unit, on the route), the morphism to Proj(A[x]) defined by the sections (new unsplit node 01N8 with d = 1), factoring through the union of the D_+(x_k) as a closed immersion by surjectivity of the affine charts.",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AmpleImmersionAffineBase",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.IsAmple.exists_immersion_affine_base",
+  "file": "lean/Sheaf/AlgebraicGeometry/AmpleImmersionAffineBase.lean",
+  "statement": "theorem IsAmple.exists_immersion_affine_base (A : Type u) [CommRing A] (X : Scheme.{u}) (f : X ⟶ Spec (.of A)) [LocallyOfFiniteType f] (L : X.Modules) [L.IsInvertible] (hL : IsAmple X L) : ∃ (d : ℕ) (hd : 0 < d) (n : ℕ) (i : X ⟶ ℙ(ULift.{u} (Fin (n + 1)); Spec (.of A))), IsImmersion i ∧ i ≫ ℙ(ULift.{u} (Fin (n + 1)); Spec (.of A)) ↘ Spec (.of A) = f ∧ Nonempty (SheafOfModules.positiveTensorPower X.sheaf L d hd ≅ (tensorPullback i).obj (ProjectiveSpace.twist (ULift.{u} (Fin (n + 1))) (Spec (.of A)) 1))",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-avi1412"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-avi1412",
+  "group": "E1",
+  "result": "fix",
+  "note": "A ring, X, f:X->Spec A [LocallyOfFiniteType f], L [IsInvertible], absolute Scheme.Modules.IsAmple X L (#check); exists d>0, n>=0, i:X->P(ULift(Fin(n+1));Spec A) IsImmersion, i ≫ ↘ = f, L^{⊗d} ≅ tensorPullback i (ProjectiveSpace.twist 1); empty X, zero ring, n=0 allowed; reverted the delivery's change of existing node(s) def-pc-projective-space-twist (--revert-nodes; kept as on sheaf-dag); left out new module(s) lean/Sheaf/AlgebraicGeometry/PolynomialProjectiveTwist.lean (--drop-files, or a record fixed to existing: true)"
+ }
 }
