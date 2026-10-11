@@ -186,5 +186,23 @@
   "by": "L",
   "result": "accepted",
   "note": "4 steps following More on Algebra 07PG: the coefficientwise extension of D to R[z] (Leibniz rule checked); D-bar(z^n - f) = -D(f), a unit in the quotient; R[z] regular by the polynomial-smooth leaf and the smooth-ascent node (07NF); the hypersurface node 07PF. Statement unchanged."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.DegreePExtensionRegular",
+  "declaration": "Algebra.isRegularRing_quotient_X_pow_sub_of_isUnit_derivation",
+  "file": "lean/Sheaf/AlgebraicGeometry/DegreePExtensionRegular.lean",
+  "statement": "theorem isRegularRing_quotient_X_pow_sub_of_isUnit_derivation (R : Type u) [CommRing R] [IsRegularRing R] (f : R) (D : Derivation ℤ R R) (hDf : IsUnit (D f)) (n : ℕ) (hn : 1 ≤ n) : IsRegularRing (Polynomial R ⧸ Ideal.span ({Polynomial.X ^ n - Polynomial.C f} : Set (Polynomial R)))",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-dpe0934",
+  "group": "H1",
+  "result": "pass",
+  "note": "IsRegularRing (Mathlib: Noetherian + IsRegularLocalRing at every prime localization) = node's regular ring; f : R; Derivation ℤ R R = additive Leibniz map (map_one field redundant); IsUnit (D f) in R; n : ℕ with 1 ≤ n = integer n ≥ 1; conclusion IsRegularRing (R[X] ⧸ span {X^n - C f}); no char/field/domain hypotheses added; universe u arbitrary; docstring carries the 4 proof steps"
  }
 }
