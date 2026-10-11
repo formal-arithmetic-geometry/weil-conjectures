@@ -261,5 +261,29 @@
   "by": "L",
   "result": "pass",
   "note": "statement completed (RΓ on morphisms via lem-weil-pbc-derived-direct-image-triangulated; equalities after the canonical identifications); eight steps (conventions; computation of Rv on arbitrary K-injective representatives from the Hom lemma; u_* preserves K-injectives (right adjoint of the exact u^{-1}, closed node); λ_L and its independence of the representative; naturality; the derived unit represented by u_*(r) ∘ η at the resolution of K^•, property (2) of the adjunction node applied to K^• rather than to the possibly unbounded I^• as the brief wrongly suggested; the comparison with a ↦ r(η_u(a)); H^q); no new nodes; the generic prop-weil-pbc-inverse-image-exact accepted as a tool use; the source repository has clause 1 only on the unbounded derived category (rightDerivedLowerStarCompRightDerivedGlobalSectionsIso), no attachment"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.CohomologyPullbackDerivedUnit",
+  "declaration": "AlgebraicGeometry.Etale.derivedCohomologyPullback_eq_derivedUnit",
+  "file": "lean/Sheaf/AlgebraicGeometry/CohomologyPullbackDerivedUnit.lean",
+  "statement": "theorem derivedCohomologyPullback_eq_derivedUnit {X Y : Scheme.{v}} (f : Y ⟶ X) (K : DerivedCategory.Plus (Sheaf X.smallEtaleTopology AddCommGrpCat.{v + 1})) : (Functor.rightDerivedDesc _ (Sheaf.Γ X.smallEtaleTopology AddCommGrpCat.{v + 1}).rightDerivedFunctorPlusUnit (HomotopyCategory.Plus.quasiIso _) ((upperStar AddCommGrpCat.{v + 1} f).mapDerivedCategoryPlus ⋙ (Sheaf.Γ Y.smallEtaleTopology AddCommGrpCat.{v + 1}).rightDerivedFunctorPlus) (Functor.whiskerRight (NatTrans.mapHomotopyCategoryPlus ((Functor.leftUnitor _).inv ≫ Functor.whiskerRight (upperStarLowerStarAdjunction AddCommGrpCat.{v + 1} f).unit (Sheaf.Γ X.smallEtaleTopology AddCommGrpCat.{v + 1}) ≫ (Functor.associator _ _ _).hom ≫ Functor.whiskerLeft (upperStar AddCommGrpCat.{v + 1} f) (lowerStarCompGlobalSectionsIso AddCommGrpCat.{v + 1} f).hom)) DerivedCategory.Plus.Qh ≫ Functor.whiskerRight (Functor.mapHomotopyCategoryPlusCompIso (Iso.refl (upperStar AddCommGrpCat.{v + 1} f ⋙ Sheaf.Γ Y.smallEtaleTopology AddCommGrpCat.{v + 1}))).inv DerivedCategory.Plus.Qh ≫ (Functor.associator _ _ _).hom ≫ Functor.whiskerLeft (upperStar AddCommGrpCat.{v + 1} f).mapHomotopyCategoryPlus (Sheaf.Γ Y.smallEtaleTopology AddCommGrpCat.{v + 1}).rightDerivedFunctorPlusUnit ≫ (Functor.associator _ _ _).inv ≫ Functor.whiskerRight (upperStar AddCommGrpCat.{v + 1} f).mapDerivedCategoryPlusFactorsh.inv (Sheaf.Γ Y.smallEtaleTopology AddCommGrpCat.{v + 1}).rightDerivedFunctorPlus ≫ (Functor.associator _ _ _).hom)).app K = (Sheaf.Γ X.smallEtaleTopology AddCommGrpCat.{v + 1}).rightDerivedFunctorPlus.map ((upperStarLowerStarAdjunction AddCommGrpCat.{v + 1} f).derivedPlus.unit.app K) ≫ (@Functor.rightDerivedFunctorPlusCompIso' _ _ _ _ _ _ _ _ _ _ _ _ _ _ (lowerStar AddCommGrpCat.{v + 1} f) (Sheaf.Γ X.smallEtaleTopology AddCommGrpCat.{v + 1}) _ _ _ _ (Functor.preservesInjectiveObjects_of_adjunction_of_preservesMonomorphisms (upperStarLowerStarAdjunction AddCommGrpCat.{v + 1} f)) (lowerStarCompGlobalSectionsIso AddCommGrpCat.{v + 1} f)).hom.app ((upperStar AddCommGrpCat.{v + 1} f).mapDerivedCategoryPlus.obj K)",
+  "branch": "sheaf-dag",
+  "by": "J1",
+  "date": "2026-10-11",
+  "existing": false,
+  "declarations": [
+   "AlgebraicGeometry.Etale.lowerStar_isKInjective_boundedBelow",
+   "AlgebraicGeometry.Etale.lerayPlus_on_kInjective",
+   "AlgebraicGeometry.Etale.derivedCohomologyPullback_eq_derivedUnit"
+  ],
+  "fixed_by": "R-cdu"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-cdu",
+  "group": "J1",
+  "result": "fix",
+  "note": "re-point of def-weil-pbc-cohomology-pullback (cohomologyMap, 12 citers) reverted; derived u^* on D+ spelled inline (rightDerivedDesc of the unit section map, as in the reverted module); tautological conjunct (rightDerivedFunctorPlusCompIso'_fac) and derivable H^q theorem dropped; reverted the delivery's change of existing node(s) def-weil-pbc-cohomology-pullback (--revert-nodes; kept as on sheaf-dag)"
  }
 }
