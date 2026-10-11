@@ -1,11 +1,11 @@
 # Work queue
 
-412 items; claim with `tools/claim.py next <group> [--stage N]`.
+409 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (412)
+## Stage 2: nodes to state (409)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -19,7 +19,6 @@
 | `lem-pc-module-pullback-identity-composition` | 1 | state |
 | `lem-pc-perfect-affine-bounded-projective` | 1 | state |
 | `lem-pc-perfect-complex-descent` | 1 | state |
-| `lem-pc-perfect-complexes-compact-set` | 1 | state |
 | `lem-pc-perfect-descend-morphisms` | 1 | state |
 | `lem-pc-perfect-generation-affine-base` | 1 | state |
 | `lem-pc-perfect-generation-koszul-orthogonal` | 1 | state |
@@ -30,7 +29,6 @@
 | `lem-pc-perfect-summand` | 1 | state |
 | `lem-pc-perfect-tensor-hom-duality` | 1 | state |
 | `lem-pc-perfect-thick-closure` | 1 | state |
-| `lem-pc-perfect-two-out-of-three` | 1 | state |
 | `lem-pc-pseudo-coherent-finite-tor-perfect` | 1 | state |
 | `lem-pc-ring-pseudo-coherent-finite-tor-perfect` | 1 | state |
 | `lem-pc-supported-perfect-generator` | 1 | state |
@@ -64,7 +62,7 @@
 | `lem-sc-picard-kunneth-qcoh` | 1 | state |
 | `lem-sc-pseudo-coherent-support-annihilation` | 1 | state |
 | `lem-sc-smooth-proper-diagonal-koszul-regular` | 1 | state |
-| `lem-sc-valuation-limit-affine-pushforward-colimit` | 1 | state |
+| `lem-sc-valuation-limit-qcoh-section-descent` | 1 | state |
 | `lem-sc-valuation-proper-coherent-higher-direct-images` | 1 | state |
 | `lem-weil-derived-limit-roos-complex` | 1 | state |
 | `lem-weil-pbc-closed-immersion-conormal-flat-base-change` | 1 | state |
@@ -75,7 +73,6 @@
 | `lem-weil-pbc-purely-inseparable-base-change-local-ring` | 1 | state |
 | `lem-weil-pbc-purely-inseparable-pth-root-tower` | 1 | state |
 | `lem-weil-pbc-quasi-coherence-scalar-restriction` | 1 | state |
-| `lem-weil-pbc-quasi-coherent-affine-section-base-change` | 1 | state |
 | `lem-weil-pbc-quasi-coherent-algebra-colimit` | 1 | state |
 | `lem-weil-pbc-quasi-coherent-algebra-kernel-image-ideal` | 1 | state |
 | `lem-weil-pbc-quasi-coherent-finite-type-affine` | 1 | state |
@@ -422,7 +419,7 @@
 | `lem-pc-essentially-constant-pro-hom-colimit` | 4 | state |
 | `lem-pur-essential-constant-pro-criterion-05py` | 4 | state |
 
-Not open yet: 40 nodes that wait for stage 1, 521 nodes that wait for a statement dependency.
+Not open yet: 40 nodes that wait for stage 1, 520 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
