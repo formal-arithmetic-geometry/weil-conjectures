@@ -137,5 +137,24 @@
   "group": "J1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-frd2748 (reviewer sub-agent of L); spot-checked: Statement matches Tag 01ZR(3) and the citer lem-pc-fp-complex-descent step 3 (d^{r+1}d^r=0 on fixed models). FIX more, RETURN less: (1) C1/E: step 2 said the images of generators are 'coefficients zero in the filtered colimit ring R' - they are elements of the target module over an affine coordinate ring, not of R, and R=colim R_j was uncited; rewrote as steps 2-4: finite affine cover, R=colim R_j via lem-weil-pbc-spec-colimit-limit, B=colim B_j by tensor, presentation of the target (finite presentation of G used, only finite generation of F), lifts/vanishing via lem-pc-filtered-colimit-commrings-elementwise (1)(2), common stage; both cross-unit nodes declared as generic tool_uses. (2) E: Noetherian hypothesis now declared unused. Step 1 kept (models are given; part (2) only aligns maps). Hom-colimit 05N7 not needed in the elementwise route.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FiniteRelationDescent",
+  "declaration": "AlgebraicGeometry.finiteRelation_module_map_descent",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteRelationDescent.lean",
+  "statement": "theorem finiteRelation_module_map_descent {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] (R : I ⥤ CommRingCat.{u}) [∀ k : I, IsNoetherianRing (R.obj k)] (c : Cone (R.op ⋙ Scheme.Spec)) (hc : IsLimit c) [IsAffine c.pt] (i : I) {Xi : Scheme.{u}} (f : Xi ⟶ Spec (R.obj i)) [LocallyOfFinitePresentation f] [QuasiCompact f] [QuasiSeparated f] (j : I) (hij : i ≤ j) (M : Type u) [Finite M] (Fj : M → (pullback f (Spec.map (R.map (homOfLE hij)))).Modules) (hFj_fp : ∀ k : M, (Fj k).IsFinitePresentation) (hFj_qc : ∀ k : M, (Fj k).IsQuasicoherent) (n : ℕ) (src tgt : Fin n → M) (lhs rhs : ∀ k : Fin n, Fj (src k) ⟶ Fj (tgt k)) (hrel : ∀ k : Fin n, (Scheme.Modules.moduleBaseChange f (T := Over.mk (Spec.map (R.map (homOfLE hij)))) (T' := Over.mk (c.π.app (op i))) (Over.homMk (c.π.app (op j)) (c.w (homOfLE hij).op))).map (lhs k) = (Scheme.Modules.moduleBaseChange f (T := Over.mk (Spec.map (R.map (homOfLE hij)))) (T' := Over.mk (c.π.app (op i))) (Over.homMk (c.π.app (op j)) (c.w (homOfLE hij).op))).map (rhs k)) : ∃ (j' : I) (hjj' : j ≤ j'), ∀ k : Fin n, (Scheme.Modules.moduleBaseChange f (T := Over.mk (Spec.map (R.map (homOfLE hij)))) (T' := Over.mk (Spec.map (R.map (homOfLE (hij.trans hjj'))))) (Over.homMk (Spec.map (R.map (homOfLE hjj'))) (by dsimp; rw [← Spec.map_comp, ← R.map_comp]; rfl))).map (lhs k) = (Scheme.Modules.moduleBaseChange f (T := Over.mk (Spec.map (R.map (homOfLE hij)))) (T' := Over.mk (Spec.map (R.map (homOfLE (hij.trans hjj'))))) (Over.homMk (Spec.map (R.map (homOfLE hjj'))) (by dsimp; rw [← Spec.map_comp, ← R.map_comp]; rfl))).map (rhs k)",
+  "branch": "sheaf-dag",
+  "by": "J1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-frd1306"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-frd1306",
+  "group": "J1",
+  "result": "fix",
+  "note": "I,R,Noetherian,cone+IsLimit+IsAffine,f lfp/qc/qs, j>=i, models Fj fp+qc, hrel via moduleBaseChange along Over.homMk(c.π.app(op j)) word for word as FpModuleMapDescent, tied ∃ j'≥j ∀k; FIX: [Finite M] for the node's finite collection"
  }
 }
