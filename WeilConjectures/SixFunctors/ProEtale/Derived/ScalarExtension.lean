@@ -129,6 +129,41 @@ instance linear_rightDerivedLowerStar : (R((g)_*[A])).Linear Λ :=
 
 end Linear
 
+section General
+
+variable (A : Type*) [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
+  [MonoidalCategory A] [MonoidalPreadditive A] [SymmetricCategory A] [MonoidalClosed A]
+  [Abelian.HasFunctorialFlatResolution A] [ProEtale.UpperStarPreservesFlat A]
+  (B : Type*) [Category.{u + 1} B] [Abelian B] [IsGrothendieckAbelian.{u + 1} B]
+  [MonoidalCategory B] [MonoidalPreadditive B] [SymmetricCategory B] [MonoidalClosed B]
+  [Abelian.HasFunctorialFlatResolution B] [ProEtale.UpperStarPreservesFlat B]
+  {Z Y : Scheme.{u}} (g : Z ⟶ Y)
+  (E_Y : Sheaf (Scheme.ProEt.topology Y) A ⥤ Sheaf (Scheme.ProEt.topology Y) B) [E_Y.Additive]
+  [PreservesFiniteLimits E_Y] [PreservesFiniteColimits E_Y] [E_Y.PreservesFlat]
+  [E_Y.IsLeftAdjoint] [E_Y.Monoidal]
+  (E_Z : Sheaf (Scheme.ProEt.topology Z) A ⥤ Sheaf (Scheme.ProEt.topology Z) B) [E_Z.Additive]
+  [PreservesFiniteLimits E_Z] [PreservesFiniteColimits E_Z] [E_Z.PreservesFlat]
+  [E_Z.IsLeftAdjoint] [E_Z.Monoidal]
+  (τ : E_Y ⋙ (g)^*[B] ≅ (g)^*[A] ⋙ E_Z) [NatTrans.IsMonoidal τ.hom]
+
+/-- For exact monoidal functors `E` between pro-étale sheaves with coefficients in `A` and in `B`
+commuting monoidally with the pullbacks `g^*`, the tensor comparisons of `Lg^*` and of `LE` are
+compatible with the derived commutation isomorphism `LE ⋙ Lg^* ≅ Lg^* ⋙ LE`. -/
+lemma comparisonCompatible_leftDerivedFunctorCompNatIso :
+    Adjunction.ComparisonCompatible
+      (Functor.leftDerivedFunctorCompNatIso (ProEtale.upperStar A g) E_Z E_Y
+        (ProEtale.upperStar B g) τ)
+      (leftDerivedUpperStarTensorComparison _ g) (leftDerivedUpperStarTensorComparison _ g)
+      (asIso E_Z.leftDerivedTensorComparison) (asIso E_Y.leftDerivedTensorComparison) := by
+  intro a b
+  rw [leftDerivedUpperStarTensorComparison_eq_leftDerivedTensorComparison,
+    leftDerivedUpperStarTensorComparison_eq_leftDerivedTensorComparison,
+    asIso_hom, asIso_hom,
+    Functor.map_leftDerivedTensorComparison_comp_eq_of_iso _ _ _ _ τ, tensorHom_def]
+  rfl
+
+end General
+
 section ScalarExtension
 
 variable {R S : Type (u + 1)} [CommRing R] [CommRing S] [Algebra R S] (X : Scheme.{u})
@@ -175,7 +210,7 @@ theorem isIso_biproductDesc_derivedSheafExtendScalarsAdjunction_unit {ι : Type}
         (ModuleCat.restrictScalars.{u + 1} (algebraMap R S))).map ((b i : S) • 𝟙 _)) := by
   sorry
 
-variable [IsNoetherianRing R] [IsNoetherianRing S] [Module.Finite R S] [Module.Free R S]
+variable [Module.Finite R S] [Module.Free R S]
   [Nontrivial R] {Z Y : Scheme.{u}} (g : Z ⟶ Y)
 
 /-- The isomorphism `L(S ⊗_R -) ⋙ Lg^* ≅ Lg^* ⋙ L(S ⊗_R -)` of derived functors
@@ -212,6 +247,40 @@ theorem isIso_mateEquiv_leftDerivedSheafExtendScalarsCompUpperStarIso_app
   rw [Linear.smul_comp, Category.id_comp, Functor.map_smul, CategoryTheory.Functor.map_id,
     Linear.comp_smul]
   simp
+
+variable [IsNoetherianRing R] [IsNoetherianRing S]
+
+/-- The tensor comparisons of `Lg^*` over `R` and over `S` and those of `L(S ⊗_R -)` are
+compatible with `AlgebraicGeometry.ProEtale.leftDerivedSheafExtendScalarsCompUpperStarIso`. -/
+lemma comparisonCompatible_leftDerivedSheafExtendScalarsCompUpperStarIso :
+    Adjunction.ComparisonCompatible
+      (leftDerivedSheafExtendScalarsCompUpperStarIso (R := R) (S := S) g)
+      (leftDerivedUpperStarTensorComparison _ g) (leftDerivedUpperStarTensorComparison _ g)
+      (asIso (sheafExtendScalars (algebraMap R S) Z).leftDerivedTensorComparison)
+      (asIso (sheafExtendScalars (algebraMap R S) Y).leftDerivedTensorComparison) :=
+  comparisonCompatible_leftDerivedFunctorCompNatIso _ _ g _ _
+    (sheafExtendScalarsCompUpperStarIso (algebraMap R S) g)
+
+/-- **Extension of scalars carries the projection map of `Rg_*` over `R` to the one over `S`.**
+Let `S` be a finite free algebra over a Noetherian ring `R`, both Noetherian, and let
+`N = L(S ⊗_R -)`. If the projection map `Rg_* M ⊗ᴸ L ⟶ Rg_*(M ⊗ᴸ Lg^* L)` of pro-étale complexes
+of `R`-modules is an isomorphism, so is the projection map over `S` at `(N M, N L)`. -/
+theorem isIso_rightDerivedLowerStarProjectionMap_app_app_extendScalars
+    (M : DerivedCategory (Sheaf (Scheme.ProEt.topology Z) (ModuleCat.{u + 1} R)))
+    (L : DerivedCategory (Sheaf (Scheme.ProEt.topology Y) (ModuleCat.{u + 1} R)))
+    [IsIso (((rightDerivedLowerStarProjectionMap _ g).app M).app L)] :
+    IsIso (((rightDerivedLowerStarProjectionMap _ g).app
+      ((L(sheafExtendScalars (algebraMap R S) Z)).obj M)).app
+        ((L(sheafExtendScalars (algebraMap R S) Y)).obj L)) :=
+  have : IsIso ((((derivedUpperStarLowerStarAdjunction _ g).rightAdjointProjectionMap
+      (leftDerivedUpperStarTensorComparison _ g)).app M).app L) :=
+    inferInstanceAs (IsIso (((rightDerivedLowerStarProjectionMap _ g).app M).app L))
+  have := isIso_mateEquiv_leftDerivedSheafExtendScalarsCompUpperStarIso_app (S := S) g M
+  have := isIso_mateEquiv_leftDerivedSheafExtendScalarsCompUpperStarIso_app (S := S) g
+    ((derivedTensor _ Z).obj M |>.obj ((L((g)^*[ModuleCat.{u + 1} R])).obj L))
+  Adjunction.isIso_rightAdjointProjectionMap_of_mateEquiv
+    (derivedUpperStarLowerStarAdjunction _ g) (derivedUpperStarLowerStarAdjunction _ g)
+    (comparisonCompatible_leftDerivedSheafExtendScalarsCompUpperStarIso g) M L
 
 end ScalarExtension
 
