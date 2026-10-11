@@ -192,5 +192,22 @@
   "by": "L",
   "result": "accepted",
   "note": "6 steps by the direct route (the Tor definition resolves the first variable): split free resolutions of the short exact sequence chosen once (new unsplit node for the construction in the proof of 065P); tensoring keeps degreewise split exactness, maps 1 (x) g commute; identifications of Tor_1 and H_0 (new composed leaf for 00LZ: isoLeftDerivedObj_hom_naturality line 123, leftDerived_app_eq line 240, verified by L; consistent with the Tor definition's match); the connecting map by the snake leaf with an explicit exactness chase; exactness by transport and right exactness; naturality of delta in N from the snake formula. Statement unchanged. Stage-3 note: the citer's split_report describes the route as 00M0 + 00M3."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.TorLongExactFirstVariable",
+  "declaration": "CategoryTheory.tor_long_exact_first_variable",
+  "statement": "theorem tor_long_exact_first_variable {R : Type u} [CommRing R] {Q Q' Q'' : Type u} [AddCommGroup Q] [AddCommGroup Q'] [AddCommGroup Q''] [Module R Q] [Module R Q'] [Module R Q''] (u : Q →ₗ[R] Q') (v : Q' →ₗ[R] Q'') (hu : Function.Injective u) (hv : Function.Surjective v) (hExact : Function.Exact u v) : ∃ δ : (∀ (N : Type u) [AddCommGroup N] [Module R N], (((Tor' (ModuleCat R) 1).obj (ModuleCat.of R Q'')).obj (ModuleCat.of R N)) ⟶ ModuleCat.of R (Q ⊗[R] N)), (∀ (N : Type u) [AddCommGroup N] [Module R N], Function.Exact (((Tor' (ModuleCat R) 1).map (ModuleCat.ofHom v)).app (ModuleCat.of R N)).hom (δ N).hom ∧ Function.Exact (δ N).hom (u.rTensor N) ∧ Function.Exact (u.rTensor N) (v.rTensor N) ∧ Function.Surjective (v.rTensor N)) ∧ (∀ (N N' : Type u) [AddCommGroup N] [Module R N] [AddCommGroup N'] [Module R N'] (g : N →ₗ[R] N'), (MonoidalCategory.tensorHom (𝟙 (ModuleCat.of R Q)) (ModuleCat.ofHom g)).hom.comp (δ N).hom = (δ N').hom.comp (((Tor' (ModuleCat R) 1).obj (ModuleCat.of R Q'')).map (ModuleCat.ofHom g)).hom)",
+  "by": "E1",
+  "date": "2026-10-11",
+  "file": "lean/Sheaf/Paper/TorLongExactFirstVariable.lean",
+  "branch": "sheaf-dag",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-tle",
+  "group": "E1",
+  "result": "pass"
  }
 }

@@ -5172,3 +5172,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 15:13 L: merged deliver/N1/thm-sp-spectral-object-yields (stage 2; reviewer FIX; first push; Sheaf.CategoryTheory.BoundedFilteredComplexSpectralSequence CategoryTheory.boundedFilteredComplex_spectralSequence)
 - 15:13 L: merged deliver/N1/def-weil-pbc-etale-cohomology (stage 2; reviewer FIX; first push; WeilConjectures.SixFunctors.Etale.Derived.LowerShriek AlgebraicGeometry.Etale.cohomology; existing declaration; dropped files: lean/Sheaf/AlgebraicGeometry/EtaleCohomology.lean)
 - 15:14 L: merged deliver/G1/lem-weil-pbc-tor-one-surjective-flat-middle (stage 2; reviewer PASS; first push; Sheaf.RingTheory.TorOneSurjectiveFlatMiddle CategoryTheory.torOne_surjective_flat_middle)
+- 15:14 L: merged deliver/E1/lem-weil-pbc-tor-long-exact-first-variable (stage 2; reviewer PASS; first push; Sheaf.Paper.TorLongExactFirstVariable CategoryTheory.tor_long_exact_first_variable)
