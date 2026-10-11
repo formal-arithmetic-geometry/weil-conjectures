@@ -214,20 +214,35 @@ noncomputable def torsionByEquiv (G : Over (Spec (.of K))) [GrpObj G] [IsCommMon
       rw [comp_pow, Category.comp_id]
       rfl).trans (GrpObj.kerRepresentableBy (𝟙 G ^ n)).homEquiv.symm
 
+/-- The inclusion `G[n] ⟶ G` of the `n`-torsion subgroup scheme, that is,
+`CategoryTheory.GrpObj.kerι (𝟙 G ^ n)`. -/
+noncomputable def torsionSubgroupScheme.ι (G : Over (Spec (.of K))) [GrpObj G] (n : ℕ) :
+    torsionSubgroupScheme G n ⟶ G :=
+  GrpObj.kerι (𝟙 G ^ n)
+
+instance (G : Over (Spec (.of K))) [GrpObj G] (n : ℕ) : Mono (torsionSubgroupScheme.ι G n) :=
+  GrpObj.mono_kerι _
+
+/-- The inclusion `G[n] ⟶ G` is killed by `[n]`. -/
+theorem torsionSubgroupScheme.ι_pow (G : Over (Spec (.of K))) [GrpObj G] (n : ℕ) :
+    torsionSubgroupScheme.ι G n ^ n = 1 := by
+  have h := GrpObj.kerι_comp (𝟙 G ^ n)
+  simp only [comp_pow, Category.comp_id] at h
+  exact h
+
 /-- Blueprint `def-sc-mult-n`: the `n`-torsion subgroup scheme `G[n]` of a commutative group
 scheme is a closed subgroup scheme of `G`, being the kernel of the homomorphism `[n] = 𝟙 G ^ n`
 (`AlgebraicGeometry.isMonHom_npow_id`, `AlgebraicGeometry.isClosedSubgroupScheme_kerι`). -/
-instance isClosedSubgroupScheme_torsionSubgroupScheme (G : Over (Spec (.of K))) [GrpObj G]
-    [IsCommMonObj G] (n : ℕ) :
-    IsClosedSubgroupScheme (GrpObj.kerι (𝟙 G ^ n) : torsionSubgroupScheme G n ⟶ G) :=
+instance isClosedSubgroupScheme_torsionSubgroupScheme_ι (G : Over (Spec (.of K))) [GrpObj G]
+    [IsCommMonObj G] (n : ℕ) : IsClosedSubgroupScheme (torsionSubgroupScheme.ι G n) :=
   isClosedSubgroupScheme_kerι _
 
 /-- Blueprint `def-sc-mult-n`: the `T`-points of the `n`-torsion subgroup scheme.
 
 For a commutative group scheme `G` over `K` and a `K`-scheme `T`, the `T`-points of `G[n]` are
 the `n`-torsion of the group `G(T)`, written additively: the `n`-torsion point `x` corresponds to
-the unique point of `G[n]` whose image under `GrpObj.kerι (𝟙 G ^ n)` is `x`. For `T = Spec K`
-this is `AlgebraicGeometry.torsionByEquiv`. -/
+the unique point of `G[n]` whose image under `AlgebraicGeometry.torsionSubgroupScheme.ι` is `x`.
+For `T = Spec K` this is `AlgebraicGeometry.torsionByEquiv`. -/
 noncomputable def torsionByPointsEquiv (G : Over (Spec (.of K))) [GrpObj G] [IsCommMonObj G]
     (n : ℕ) (T : Over (Spec (.of K))) :
     AddSubgroup.torsionBy (Additive (T ⟶ G)) (n : ℤ) ≃ (T ⟶ torsionSubgroupScheme G n) :=
@@ -241,9 +256,10 @@ noncomputable def torsionByPointsEquiv (G : Over (Spec (.of K))) [GrpObj G] [IsC
       rfl).trans (GrpObj.kerRepresentableBy (𝟙 G ^ n)).homEquiv.symm
 
 @[simp]
-theorem torsionByPointsEquiv_comp_kerι (G : Over (Spec (.of K))) [GrpObj G] [IsCommMonObj G]
+theorem torsionByPointsEquiv_comp_ι (G : Over (Spec (.of K))) [GrpObj G] [IsCommMonObj G]
     (n : ℕ) (T : Over (Spec (.of K))) (x : AddSubgroup.torsionBy (Additive (T ⟶ G)) (n : ℤ)) :
-    torsionByPointsEquiv G n T x ≫ GrpObj.kerι (𝟙 G ^ n) = (x : Additive (T ⟶ G)).toMul :=
+    torsionByPointsEquiv G n T x ≫ torsionSubgroupScheme.ι G n =
+      (x : Additive (T ⟶ G)).toMul :=
   GrpObj.kerLift_kerι _ _ _
 
 /-- Blueprint `def-sc-mult-n`: multiplication by `k` maps `G[m]` to `G[n]` when `m = k * n`.
@@ -254,16 +270,15 @@ these are the transition maps of the inverse system defining the Tate module (bl
 `def-wf-abelian-tate-module`). -/
 noncomputable def torsionSubgroupSchemeMul (G : Over (Spec (.of K))) [GrpObj G] {m n : ℕ}
     (k : ℕ) (h : m = k * n) : torsionSubgroupScheme G m ⟶ torsionSubgroupScheme G n :=
-  GrpObj.kerLift (𝟙 G ^ n) (GrpObj.kerι (𝟙 G ^ m) ≫ 𝟙 G ^ k) <| by
-    have h₁ := GrpObj.kerι_comp (𝟙 G ^ m)
-    simp only [comp_pow, Category.comp_id] at h₁ ⊢
-    rw [← pow_mul, ← h]
-    exact h₁
+  GrpObj.kerLift (𝟙 G ^ n) (torsionSubgroupScheme.ι G m ^ k) <| by
+    rw [comp_pow, Category.comp_id, ← pow_mul, ← h, torsionSubgroupScheme.ι_pow]
+    rfl
 
 @[reassoc (attr := simp)]
-theorem torsionSubgroupSchemeMul_kerι (G : Over (Spec (.of K))) [GrpObj G] {m n : ℕ}
+theorem torsionSubgroupSchemeMul_ι (G : Over (Spec (.of K))) [GrpObj G] {m n : ℕ}
     (k : ℕ) (h : m = k * n) :
-    torsionSubgroupSchemeMul G k h ≫ GrpObj.kerι (𝟙 G ^ n) = GrpObj.kerι (𝟙 G ^ m) ≫ 𝟙 G ^ k :=
+    torsionSubgroupSchemeMul G k h ≫ torsionSubgroupScheme.ι G n =
+      torsionSubgroupScheme.ι G m ^ k :=
   GrpObj.kerLift_kerι _ _ _
 
 /-- Blueprint `sk-def-av-isogeny`: Isogenies and their degree.
