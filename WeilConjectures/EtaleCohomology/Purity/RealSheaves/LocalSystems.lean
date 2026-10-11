@@ -533,6 +533,45 @@ instance [ConnectedSpace Y] : (Scheme.galoisRepFunctor (s := s) (G := G) (Λ := 
     ext V v
     exact congr(($h').hom.hom.app V v)
 
+
+omit [PreGaloisCategory.IsNaturalSMul (Scheme.FiniteEtale.fiber s) G] in
+/-- **Equivariant maps of stalks come from morphisms of sheaves.** On a connected scheme, a
+`G`-equivariant map between the stalks of finite locally constant sheaves of sets is the stalk of
+a morphism of sheaves. -/
+lemma Scheme.FiniteLocallyConstant.exists_hom_of_equivariant [ConnectedSpace Y]
+    [TopologicalSpace G]
+    [IsTopologicalGroup G] [CompactSpace G]
+    [PreGaloisCategory.IsFundamentalGroup (Scheme.FiniteEtale.fiber s) G]
+    {S S' : Y.FiniteLocallyConstant}
+    (φ : (Scheme.pointSmallEtale s).sheafFiber.obj S.obj →
+      (Scheme.pointSmallEtale s).sheafFiber.obj S'.obj)
+    (hφ : ∀ g x, φ (galoisSMul s G g S x) = galoisSMul s G g S' (φ x)) :
+    ∃ ψ : S ⟶ S', ∀ x, (Scheme.pointSmallEtale s).sheafFiber.map ψ.hom x = φ x := by
+  set E := Scheme.FiniteEtale.equivalenceFiniteLocallyConstant Y
+  let φ' : (Scheme.FiniteEtale.fiber s).obj (E.inverse.obj S) →
+      (Scheme.FiniteEtale.fiber s).obj (E.inverse.obj S') :=
+    fun a ↦ (stalkEquiv s S' (φ ((stalkEquiv s S).symm ⟨a⟩))).down
+  have hφ' (g : G) (a) : φ' (g • a) = g • φ' a := by
+    have := hφ g ((stalkEquiv s S).symm ⟨a⟩)
+    simp only [galoisSMul, Equiv.apply_symm_apply] at this
+    simp only [φ', this, Equiv.apply_symm_apply]
+  let A := Scheme.FiniteEtale.equivalenceContAction s G
+  let m : A.functor.obj (E.inverse.obj S) ⟶ A.functor.obj (E.inverse.obj S') :=
+    ObjectProperty.homMk ⟨FintypeCat.homMk φ', fun g ↦ by
+      apply FintypeCat.hom_ext
+      intro a
+      rw [ConcreteCategory.comp_apply, ConcreteCategory.comp_apply, FintypeCat.homMk_apply,
+        FintypeCat.homMk_apply]
+      exact hφ' g a⟩
+  have hh : (Scheme.FiniteEtale.fiber s).map (A.functor.preimage m) = FintypeCat.homMk φ' :=
+    congrArg (fun k ↦ k.hom.hom) (A.functor.map_preimage m)
+  refine ⟨E.inverse.preimage (A.functor.preimage m), fun x ↦ (stalkEquiv s S').injective ?_⟩
+  rw [stalkEquiv_naturality, E.inverse.map_preimage, hh, FintypeCat.homMk_apply]
+  simp only [φ']
+  rw [show (⟨(stalkEquiv s S x).down⟩ : ULift _) = stalkEquiv s S x from rfl,
+    Equiv.symm_apply_apply]
+  rfl
+
 end Linear
 
 end GaloisAction
