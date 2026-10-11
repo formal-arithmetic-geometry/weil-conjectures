@@ -19,8 +19,10 @@ public import WeilConjectures.Mathlib.Topology.NoetherianSpace
 
 The function field of an integral curve over an algebraically closed field is `C₁`, so its
 Brauer group vanishes; the Brauer group of a smooth curve over an algebraically closed field
-vanishes, since it injects into that of its function field on each connected component; and the
-Brauer group of every curve over an algebraically closed field vanishes.
+vanishes, since it injects into that of its function field on each connected component. The
+Brauer group of every curve over an algebraically closed field vanishes, see
+`AlgebraicGeometry.IsCurve.subsingleton_cohomologicalBrauerGroup` in
+`WeilConjectures.AlgebraicGeometry.Curve.BrauerNonreduced`.
 
 Curves are given by a structure morphism `f : C ⟶ Spec k` satisfying
 `AlgebraicGeometry.IsCurve`.
@@ -35,8 +37,6 @@ Curves are given by a structure morphism `f : C ⟶ Spec k` satisfying
   Brauer group of a smooth connected curve over an algebraically closed field vanishes.
 - `AlgebraicGeometry.IsCurve.subsingleton_cohomologicalBrauerGroup_of_smooth`: the Brauer group
   of a smooth curve over an algebraically closed field vanishes.
-- `AlgebraicGeometry.IsCurve.subsingleton_cohomologicalBrauerGroup`: the Brauer group of a
-  curve over an algebraically closed field vanishes.
 
 ## Implementation notes
 
@@ -175,19 +175,5 @@ theorem subsingleton_cohomologicalBrauerGroup_of_smooth (f : C ⟶ Spec (.of k))
   let e := Scheme.upperStarGmSheafIso (U c).ι
   exact (Function.LeftInverse.injective (f := Sheaf.H.map e.hom 2) (g := Sheaf.H.map e.inv 2)
     fun x ↦ by rw [← Sheaf.H.map_comp_apply, e.hom_inv_id, Sheaf.H.map_id_apply]).subsingleton
-
-/-- **The Brauer group of a curve vanishes.** For a curve `C` over an algebraically closed
-field `k`, `Br(C) = H²(C_ét, 𝔾ₘ) = 0`. Neither smoothness nor properness is assumed.
-(blueprint: `lem-sc-brauer-zero-all-curves`) -/
-theorem subsingleton_cohomologicalBrauerGroup (f : C ⟶ Spec (.of k)) [IsCurve f] :
-    Subsingleton C.CohomologicalBrauerGroup :=
-  -- Proof sketch.
-  -- * Smooth case: this is `subsingleton_cohomologicalBrauerGroup_of_smooth`.
-  -- * Reduced case: for the normalisation `ν : C̃ ⟶ C` the cokernel `Q` of `𝔾ₘ ⟶ ν_* 𝔾ₘ` is
-  --   supported on the finitely many singular points, so `H¹(C, Q) = 0`, and
-  --   `H²(C, ν_* 𝔾ₘ) = H²(C̃, 𝔾ₘ) = 0` since `ν` is finite and `C̃` is smooth.
-  -- * General case: with `𝒩` the nilradical, `1 + 𝒩` has a finite filtration whose graded
-  --   pieces are coherent, and these have no `H²` on a scheme of dimension at most one.
-  sorry
 
 end AlgebraicGeometry.IsCurve
