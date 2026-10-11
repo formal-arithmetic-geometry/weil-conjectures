@@ -815,6 +815,47 @@ lemma mapDerivedCategoryPlus_map_eTruncLTCompETruncGEIso_hom_app (q : ℤ)
   erw [reassoc_of% key']
   rfl
 
+open DerivedCategory.Plus in
+/-- The identification `τ_{≥ q} τ_{< q + 1} K ≅ H^q(K)[-q]` written with the single functor in
+degree `0` is compatible with the exact functor `F`. -/
+lemma mapDerivedCategoryPlus_eTruncGELTIsoApp_eTruncLTCompETruncGEIso (q : ℤ)
+    (K : DerivedCategory.Plus C) {K' : DerivedCategory.Plus D}
+    (ψ : F.mapDerivedCategoryPlus.obj K ⟶ K') :
+    (F.mapDerivedCategoryPlus.eTruncGELTIsoApp TStructure.t TStructure.t q (q + 1 : ℤ) K).hom ≫
+      (TStructure.t.eTruncGE.obj (q : EInt)).map
+        ((TStructure.t.eTruncLT.obj ((q + 1 : ℤ) : EInt)).map ψ) ≫
+      (eTruncLTCompETruncGEIso q).hom.app K' ≫
+      ((singleFunctors D).shiftIso (-q) q 0 (by simp)).inv.app ((homologyFunctor D q).obj K') =
+    F.mapDerivedCategoryPlus.map ((eTruncLTCompETruncGEIso q).hom.app K) ≫
+      F.mapDerivedCategoryPlus.map
+        (((singleFunctors C).shiftIso (-q) q 0 (by simp)).inv.app ((homologyFunctor C q).obj K)) ≫
+      (F.mapDerivedCategoryPlus.commShiftIso (-q)).hom.app
+        ((singleFunctor C 0).obj ((homologyFunctor C q).obj K)) ≫
+      ((F.mapDerivedCategoryPlusSingleFunctor 0).hom.app ((homologyFunctor C q).obj K))⟦-q⟧' ≫
+      ((singleFunctor D 0).map ((F.mapDerivedCategoryPlusHomologyFunctorIso q).hom.app K ≫
+        (homologyFunctor D q).map ψ))⟦-q⟧' := by
+  have h₁ := (eTruncLTCompETruncGEIso (C := D) q).hom.naturality ψ
+  have h₂ := ((singleFunctors D).shiftIso (-q) q 0 (by simp)).inv.naturality
+    ((F.mapDerivedCategoryPlusHomologyFunctorIso q).hom.app K ≫ (homologyFunctor D q).map ψ)
+  have h₃ := F.mapDerivedCategoryPlus_map_eTruncLTCompETruncGEIso_hom_app q K
+  have h₄ := F.mapDerivedCategoryPlusSingleFunctor_hom_app_shiftIso (-q) q 0 (by simp)
+    ((homologyFunctor C q).obj K)
+  simp only [Functor.comp_obj, Functor.comp_map] at h₁ h₂
+  have h₄' : (F.mapDerivedCategoryPlusSingleFunctor q).hom.app ((homologyFunctor C q).obj K) ≫
+      ((singleFunctors D).shiftIso (-q) q 0 (by simp)).inv.app
+        (F.obj ((homologyFunctor C q).obj K)) =
+      F.mapDerivedCategoryPlus.map
+        (((singleFunctors C).shiftIso (-q) q 0 (by simp)).inv.app ((homologyFunctor C q).obj K)) ≫
+      (F.mapDerivedCategoryPlus.commShiftIso (-q)).hom.app
+        ((singleFunctor C 0).obj ((homologyFunctor C q).obj K)) ≫
+      ((F.mapDerivedCategoryPlusSingleFunctor 0).hom.app ((homologyFunctor C q).obj K))⟦-q⟧' := by
+    rw [← cancel_epi (F.mapDerivedCategoryPlus.map
+      (((singleFunctors C).shiftIso (-q) q 0 (by simp)).hom.app ((homologyFunctor C q).obj K))),
+      reassoc_of% h₄]
+    simp only [← Functor.map_comp_assoc, Iso.hom_inv_id_app, Functor.map_id, Category.id_comp]
+    erw [Category.comp_id]
+  rw [reassoc_of% h₁, ← reassoc_of% h₃, ← Functor.map_comp_assoc, h₂, reassoc_of% h₄']
+
 end Plus
 
 section Identity

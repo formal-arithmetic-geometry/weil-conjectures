@@ -553,6 +553,20 @@ lemma grothendieckSpectralObjectBaseChange_app_hom_app (eF : F ⋙ β ≅ α ⋙
   erw [Category.id_comp, Category.id_comp, Category.id_comp]
   rfl
 
+lemma grothendieckSpectralObjectBaseChange_E₂ (eF : F ⋙ β ≅ α ⋙ F') (eG : G ⋙ γ ≅ β ⋙ G')
+    (p q : ℕ) (X : A) :
+    (((grothendieckSpectralObjectBaseChange F G F' G' eF eG).app X).hom (p + q : ℕ)).app
+        (mk₁ (homOfLE (show ((q : ℤ) : EInt) ≤ ((q + 1 : ℤ) : EInt) by simp))) ≫
+      (F'.grothendieckSpectralObjectHIso G' p q (p + q : ℕ) q (q + 1) (by push_cast; rfl) rfl
+        rfl).hom.app (α.obj X) =
+    γ.map ((F.grothendieckSpectralObjectHIso G p q (p + q : ℕ) q (q + 1) (by push_cast; rfl) rfl
+        rfl).hom.app X) ≫ (grothendieckE₂BaseChange F G F' G' eF eG p q).app X := by
+  rw [grothendieckSpectralObjectBaseChange_app_hom_app, grothendieckSpectralObjectHIso_hom_app,
+    grothendieckSpectralObjectHIso_hom_app]
+  simp only [grothendieckE₂BaseChange, NatTrans.comp_app, Functor.whiskerLeft_app,
+    Functor.whiskerRight_app, rightDerivedBaseChange_app, Functor.map_comp, Category.assoc]
+  done
+
 /-- **Base change for the Grothendieck spectral sequence.** Let `(F, G)` and `(F', G')` be
 composable pairs with acyclicity, related by exact functors `α : A ⥤ A'`, `β : B ⥤ B'`,
 `γ : C ⥤ C'` and isomorphisms `F ⋙ β ≅ α ⋙ F'`, `G ⋙ γ ≅ β ⋙ G'`. Then there is a morphism
