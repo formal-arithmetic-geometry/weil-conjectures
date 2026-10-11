@@ -150,5 +150,23 @@
    "missing": []
   }
  },
- "reviewed": "2026-10-10 L: 6 steps along 017K checked (setup; clause (1) by the nondegenerate decomposition; the pigeonhole step on ascents written out; descent to degree <= 2 m_0 by the new degeneracy-factorization and injectivity leaves; the zigzag; limit comparison by the new initial-functor leaf). Three new Mathlib leaves verified (eq_sigma_comp_of_not_injective 732, delta_comp_sigma_self 156, Functor.Initial 104 / limitIso 712 with isConnected_of_zigzag as the bridge to Stacks explicit zigzags). Stacks 017K writes the arrows of U in the opposite direction (worker note). LeanSearch down."
+ "reviewed": "2026-10-10 L: 6 steps along 017K checked (setup; clause (1) by the nondegenerate decomposition; the pigeonhole step on ascents written out; descent to degree <= 2 m_0 by the new degeneracy-factorization and injectivity leaves; the zigzag; limit comparison by the new initial-functor leaf). Three new Mathlib leaves verified (eq_sigma_comp_of_not_injective 732, delta_comp_sigma_self 156, Functor.Initial 104 / limitIso 712 with isConnected_of_zigzag as the bridge to Stacks explicit zigzags). Stacks 017K writes the arrows of U in the opposite direction (worker note). LeanSearch down.",
+ "lean": {
+  "module": "Sheaf.AlgebraicTopology.SimplicialIndexFiniteInitial",
+  "declaration": "SSet.simplicialIndex_finite_initial",
+  "file": "lean/Sheaf/AlgebraicTopology/SimplicialIndexFiniteInitial.lean",
+  "statement": "theorem simplicialIndex_finite_initial (S : SSet.{u}) [S.Finite] (hfinite : ∀ n : ℕ, Finite (S.obj (op ⦋n⦌))) (hnonempty : ∀ n : ℕ, Nonempty (S.obj (op ⦋n⦌))) (m₀ : ℕ) (hdegenerate : ∀ n : ℕ, m₀ < n → ∀ s : S.obj (op ⦋n⦌), s ∈ S.degenerate n) : Finite (ObjectProperty.FullSubcategory (fun x : S.Elements => x.fst.unop.len ≤ 2 * m₀)) ∧ (∀ y y' : (ObjectProperty.FullSubcategory (fun x : S.Elements => x.fst.unop.len ≤ 2 * m₀)), Finite (y ⟶ y')) ∧ (∀ z : S.Elements, ∃ y : (ObjectProperty.FullSubcategory (fun x : S.Elements => x.fst.unop.len ≤ 2 * m₀)), Nonempty (y.obj ⟶ z)) ∧ (∀ (z : S.Elements) (y y' : (ObjectProperty.FullSubcategory (fun x : S.Elements => x.fst.unop.len ≤ 2 * m₀))) (α : y.obj ⟶ z) (α' : y'.obj ⟶ z), ∃ (r : ℕ) (ys : ℕ → (ObjectProperty.FullSubcategory (fun x : S.Elements => x.fst.unop.len ≤ 2 * m₀))) (a : ∀ i : ℕ, (ys i).obj ⟶ z), ys 0 = y ∧ ys (2 * r) = y' ∧ HEq (a 0) α ∧ HEq (a (2 * r)) α' ∧ ∀ i : ℕ, i < r → ∃ (f : (ys (2 * i + 1)).obj ⟶ (ys (2 * i)).obj) (g : (ys (2 * i + 1)).obj ⟶ (ys (2 * i + 2)).obj), f ≫ a (2 * i) = a (2 * i + 1) ∧ g ≫ a (2 * i + 2) = a (2 * i + 1)) ∧ (ObjectProperty.ι (fun x : S.Elements => x.fst.unop.len ≤ 2 * m₀)).Initial ∧ (∀ (C : Type v) [Category.{w} C] (D : S.Elements ⥤ C), HasLimit D ↔ HasLimit ((ObjectProperty.ι (fun x : S.Elements => x.fst.unop.len ≤ 2 * m₀)) ⋙ D)) ∧ (∀ (C : Type v) [Category.{w} C] (D : S.Elements ⥤ C) [HasLimit D] [HasLimit ((ObjectProperty.ι (fun x : S.Elements => x.fst.unop.len ≤ 2 * m₀)) ⋙ D)], IsIso (limit.pre D (ObjectProperty.ι (fun x : S.Elements => x.fst.unop.len ≤ 2 * m₀))))",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "E1",
+  "result": "pass",
+  "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
+ }
 }
