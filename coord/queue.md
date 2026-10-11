@@ -1,11 +1,11 @@
 # Work queue
 
-519 items; claim with `tools/claim.py next <group> [--stage N]`.
+516 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (519)
+## Stage 2: nodes to state (516)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -91,17 +91,14 @@
 | `lem-weil-pbc-module-finite-type-submodule-extension` | 1 | state |
 | `lem-weil-pbc-module-pullback-affine-sections` | 1 | state |
 | `lem-weil-pbc-module-pullback-finite-type` | 1 | state |
-| `lem-weil-pbc-module-sheaves-grothendieck-abelian` | 1 | state |
 | `lem-weil-pbc-module-stalk-exact` | 1 | state |
 | `lem-weil-pbc-module-stalk-tensor` | 1 | state |
 | `lem-weil-pbc-module-tensor-hom-adjunction` | 1 | state |
 | `lem-weil-pbc-n2-ascends-finite-domain-extension` | 1 | state |
-| `lem-weil-pbc-n2-descends-finite-domain-extension` | 1 | state |
 | `lem-weil-pbc-nakayama-nilpotent` | 1 | state |
 | `lem-weil-pbc-noetherian-acc-quasi-coherent` | 1 | state |
 | `lem-weil-pbc-nonvanishing-section-trivializes` | 1 | state |
 | `lem-weil-pbc-nonzerodivisor-if-maximal-not-associated` | 1 | state |
-| `lem-weil-pbc-normal-extension-purely-inseparable-then-galois` | 1 | state |
 | `lem-weil-pbc-normal-locus-open` | 1 | state |
 | `lem-weil-pbc-normal-nagata-monogenic-n1` | 1 | state |
 | `lem-weil-pbc-normal-ring-integrally-closed-total` | 1 | state |
