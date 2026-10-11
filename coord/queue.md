@@ -1,23 +1,31 @@
 # Work queue
 
-551 items; claim with `tools/claim.py next <group> [--stage N]`.
+544 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (551)
+## Stage 2: nodes to state (544)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
+| `pqf-def-coherent` | 1 | state |
+| `pqf-def-locnoeth` | 1 | state |
+| `def-nagata-glued-limit-comparison` | 2 | state |
+| `def-pc-smooth-projective-curve` | 2 | state |
+| `def-sc-group-scheme` | 2 | state |
+| `def-sp-convergence` | 2 | state |
+| `def-weil-pbc-constructible-torsion` | 2 | state |
+| `pqf-def-quasifinite` | 2 | state |
+| `def-exc-etale-algebra-lift` | 3 | state |
+| `def-nagata-fixed-base-separated-stage` | 6 | state |
 | `cor-galois-lisse-representations` | 1 | state |
 | `lem-pc-derived-tensor-transitivity` | 1 | state |
 | `lem-pc-module-pullback-identity-composition` | 1 | state |
 | `lem-sc-base-change-curve` | 1 | state |
 | `lem-sc-hilb-dominating-power` | 1 | state |
 | `lem-weil-derived-limit-roos-complex` | 1 | state |
-| `lem-weil-pbc-exchange-identity-pasting` | 1 | state |
 | `lem-weil-pbc-finite-etale-trace-degree` | 1 | state |
-| `lem-weil-pbc-fpqc-local-on-base-criterion` | 1 | state |
 | `lem-weil-pbc-free-cech-complex-exact` | 1 | state |
 | `lem-weil-pbc-fs-adic-base-change` | 1 | state |
 | `lem-weil-pbc-fs-adic-lift-over-finite-coefficient-map` | 1 | state |
@@ -25,24 +33,19 @@
 | `lem-weil-pbc-gabber-h0-etale-criterion` | 1 | state |
 | `lem-weil-pbc-generic-finite-algebra-splitting` | 1 | state |
 | `lem-weil-pbc-geometrically-connected-finite-separable-test` | 1 | state |
-| `lem-weil-pbc-geometrically-regular-over-subfields` | 1 | state |
 | `lem-weil-pbc-global-complete-intersection-equidimensional` | 1 | state |
 | `lem-weil-pbc-global-complete-intersection-principal-localization` | 1 | state |
 | `lem-weil-pbc-global-dimension-finite-modules-suffice` | 1 | state |
 | `lem-weil-pbc-glue-sheaves-of-modules` | 1 | state |
 | `lem-weil-pbc-graded-module-away-restriction` | 1 | state |
-| `lem-weil-pbc-grothendieck-regular-sequence-flat` | 1 | state |
 | `lem-weil-pbc-grothendieck-spectral-sequence` | 1 | state |
 | `lem-weil-pbc-h0-spectral-closed-restriction` | 1 | state |
 | `lem-weil-pbc-h1-injective-differentials-injective-char-p` | 1 | state |
 | `lem-weil-pbc-helper-g-ring-char-p` | 1 | state |
 | `lem-weil-pbc-henselian-etale-retraction` | 1 | state |
 | `lem-weil-pbc-henselian-factorization-criterion` | 1 | state |
-| `lem-weil-pbc-henselian-factorization-locally-nilpotent` | 1 | state |
-| `lem-weil-pbc-henselian-finite-etale-equivalence` | 1 | state |
 | `lem-weil-pbc-henselian-local-root-lifting` | 1 | state |
 | `lem-weil-pbc-henselian-pair-approximation` | 1 | state |
-| `lem-weil-pbc-henselian-pair-integral-idempotent-lifting` | 1 | state |
 | `lem-weil-pbc-henselian-pair-prime-connected` | 1 | state |
 | `lem-weil-pbc-henselization-finite-separable-fibres` | 1 | state |
 | `lem-weil-pbc-higher-direct-image-sheafified-presheaf` | 1 | state |
@@ -491,8 +494,6 @@
 | `lemma-weil-pbc-target-locality` | 1 | state |
 | `lemma-weil-pbc-torsion-assembly` | 1 | state |
 | `lemma-weil-pbc-torsion-filtered-union` | 1 | state |
-| `pqf-def-coherent` | 1 | state |
-| `pqf-def-locnoeth` | 1 | state |
 | `pqf-lem-coherent-ft-locnoeth` | 1 | state |
 | `pqf-lem-finite-qf` | 1 | state |
 | `pqf-lem-finite-type-algebra-finite-spectrum` | 1 | state |
@@ -511,11 +512,6 @@
 | `thm-galois-fundamental` | 1 | state |
 | `thm-pqf-zmt-factorization` | 1 | state |
 | `thm-sp-grothendieck` | 1 | state |
-| `def-nagata-glued-limit-comparison` | 2 | state |
-| `def-pc-smooth-projective-curve` | 2 | state |
-| `def-sc-group-scheme` | 2 | state |
-| `def-sp-convergence` | 2 | state |
-| `def-weil-pbc-constructible-torsion` | 2 | state |
 | `lem-exc-coinduced-discrete-embedding` | 2 | state |
 | `lem-kun-etale-lfp` | 2 | state |
 | `lem-pc-bounded-above-flat-kflat` | 2 | state |
@@ -549,17 +545,14 @@
 | `lem-weil-pbc-integral-closure-finite-fibre-part-localization` | 2 | state |
 | `lem-weil-pbc-quotient-henselian-pair` | 2 | state |
 | `lemma-weil-pbc-etale-cohomology-continuity` | 2 | state |
-| `pqf-def-quasifinite` | 2 | state |
 | `pqf-lem-pushforward-qcoh` | 2 | state |
 | `pqf-lem-qf-locqf-qc` | 2 | state |
 | `sbc-lem-higher-direct-image-limit` | 2 | state |
 | `thm-sc-proper-cohomology` | 2 | state |
-| `def-exc-etale-algebra-lift` | 3 | state |
 | `lem-pc-essentially-constant-ind-hom-colimit` | 3 | state |
 | `lem-sc-normalization-properties` | 3 | state |
 | `lem-pc-essentially-constant-pro-hom-colimit` | 4 | state |
 | `lem-pur-essential-constant-pro-criterion-05py` | 4 | state |
-| `def-nagata-fixed-base-separated-stage` | 6 | state |
 
 Not open yet: 40 nodes that wait for stage 1, 808 nodes that wait for a statement dependency.
 
