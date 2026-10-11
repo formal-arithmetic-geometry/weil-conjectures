@@ -212,5 +212,23 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of C1; spot-checked by L: L: 3rd delivery repairs the return: all seven new statement nodes now cite nodes for their notions (ample def-sc-ample, invertible, Coh(X,I), cohomology, graded algebra convention, twisting sheaf) with the Stacks tags. Route along 0885: f-ample L from the closed immersion (01W9/01Q1), 0883 full faithfulness, uniform H^1 vanishing of the successive kernels (0884 via 087Z Rees module and 0897), 01Q3 global generation, compatible lifts, 087Y epimorphism criterion, cokernel presentation in the abelian Coh(X,I), exactness of completion (0881). Correct at the Stacks level of detail."
  },
- "lead_note": "L 2026-10-10 (stage 3): step 1 says 'the f-ample invertible module'; lem-weil-pbc-projective-ample-invertible now asserts absolute ampleness on X (Stacks 01PS), equivalent over the affine base (01VK); read 'ample'."
+ "lead_note": "L 2026-10-10 (stage 3): step 1 says 'the f-ample invertible module'; lem-weil-pbc-projective-ample-invertible now asserts absolute ampleness on X (Stacks 01PS), equivalent over the affine base (01VK); read 'ample'.",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GrothendieckExistenceProjective",
+  "declaration": "AlgebraicGeometry.completion_isEquivalence_of_projective_embedding",
+  "file": "lean/Sheaf/AlgebraicGeometry/GrothendieckExistenceProjective.lean",
+  "statement": "theorem completion_isEquivalence_of_projective_embedding (A : Type u) [CommRing A] [IsNoetherianRing A] (I : Ideal A) [IsAdicComplete I A] (X : Scheme.{u}) (n : ℕ) (i : X ⟶ ProjectiveSpace (ULift.{u} (Fin (n + 1))) (Spec (.of A))) [IsClosedImmersion i] : Functor.IsEquivalence (@completion X { toIsLocallyNoetherian := LocallyOfFiniteType.isLocallyNoetherian (i ≫ (ProjectiveSpace (ULift.{u} (Fin (n + 1))) (Spec (.of A)) ↘ Spec (.of A))) toCompactSpace := QuasiCompact.compactSpace_of_compactSpace (i ≫ (ProjectiveSpace (ULift.{u} (Fin (n + 1))) (Spec (.of A)) ↘ Spec (.of A))) } ((Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk I))).ker.comap (i ≫ (ProjectiveSpace (ULift.{u} (Fin (n + 1))) (Spec (.of A)) ↘ Spec (.of A)))))",
+  "branch": "sheaf-dag",
+  "by": "T1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "T1",
+  "result": "pass",
+  "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
+ }
 }
