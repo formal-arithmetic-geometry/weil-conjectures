@@ -1,11 +1,11 @@
 # Work queue
 
-601 items; claim with `tools/claim.py next <group> [--stage N]`.
+595 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (601)
+## Stage 2: nodes to state (595)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -27,14 +27,8 @@
 | `lem-weil-pbc-flat-unramified-formally-etale` | 1 | state |
 | `lem-weil-pbc-formal-glueing-H0-localization` | 1 | state |
 | `lem-weil-pbc-formal-glueing-canonical-maps` | 1 | state |
-| `lem-weil-pbc-formal-glueing-isogeny` | 1 | state |
-| `lem-weil-pbc-fpqc-descend-affine` | 1 | state |
 | `lem-weil-pbc-fpqc-descend-finite` | 1 | state |
-| `lem-weil-pbc-fpqc-descend-locally-finite-presentation` | 1 | state |
-| `lem-weil-pbc-fpqc-descend-locally-finite-type` | 1 | state |
 | `lem-weil-pbc-fpqc-descend-quasi-compact` | 1 | state |
-| `lem-weil-pbc-fpqc-descend-separated` | 1 | state |
-| `lem-weil-pbc-fpqc-descend-universally-closed` | 1 | state |
 | `lem-weil-pbc-fpqc-finer-than-etale` | 1 | state |
 | `lem-weil-pbc-fpqc-local-on-base-criterion` | 1 | state |
 | `lem-weil-pbc-free-cech-complex-exact` | 1 | state |
