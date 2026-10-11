@@ -108,5 +108,50 @@
   "group": "J1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-dct1934 (reviewer sub-agent of L); spot-checked: Statement checked: d_I+(-1)^p d_II matches Stacks 012Z and Mathlib (ComplexShapeSigns.lean:159 eps2(p,_)=c.eps p, TotalComplex.lean:69); d^2=0 cross-term cancellation, filtrations by subcomplexes, F^0/F^{n+1} bounds and graded pieces ((-1)^p d_II, d_I) correct; citing nodes (thm-sp-double-complex-spectral-sequences, lem-sc-boundary-cech-injective-middle, lem-sc-cech-h1-map-natural, lem-pc-grothendieck-ss-double-complex-model) use the same convention. Not a Mathlib leaf: filtrations/graded pieces absent. FIX more, RETURN less: B3 two grep mathlib_searches records falsely said no hits (HasTotal is at TotalComplex.lean:45; HomologicalComplex2 in 10 files of Algebra/Homology); corrected results/verdicts. Second reading missed this.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.DoubleComplexTotal",
+  "declaration": "HomologicalComplex₂.firstFiltration",
+  "declarations": [
+   "HomologicalComplex₂",
+   "HomologicalComplex₂.total",
+   "HomologicalComplex₂.ιTotal",
+   "HomologicalComplex₂.ιTotalOrZero",
+   "TotalComplexShape",
+   "ComplexShape.ε₂",
+   "HomologicalComplex₂.flip",
+   "HomologicalComplex.homology",
+   "HomologicalComplex.homologyFunctor",
+   "CategoryTheory.Functor.mapHomologicalComplex",
+   "HomologicalComplex₂.hasTotal_of_firstQuadrant",
+   "HomologicalComplex₂.firstFiltration_antitone",
+   "HomologicalComplex₂.firstFiltration",
+   "HomologicalComplex₂.secondFiltration_antitone",
+   "HomologicalComplex₂.secondFiltration",
+   "HomologicalComplex₂.total_isZero_of_neg",
+   "HomologicalComplex₂.firstFiltration_subcomplex",
+   "HomologicalComplex₂.firstFiltration_zero",
+   "HomologicalComplex₂.firstFiltration_finite",
+   "HomologicalComplex₂.firstFiltration_graded",
+   "HomologicalComplex₂.secondFiltration_subcomplex",
+   "HomologicalComplex₂.secondFiltration_zero",
+   "HomologicalComplex₂.secondFiltration_finite",
+   "HomologicalComplex₂.secondFiltration_graded"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/DoubleComplexTotal.lean",
+  "statement": "def firstFiltration (n : ℤ) : DecreasingFiltration ((K.total (ComplexShape.up ℤ)).X n)",
+  "branch": "sheaf-dag",
+  "by": "K1",
+  "date": "2026-10-11",
+  "existing": false,
+  "note": "Mixed record required by reviewer R-dct0742: the first ten declarations are existing Mathlib declarations, not declarations of the delivered module. HomologicalComplex₂ (Mathlib.Algebra.Homology.HomologicalBicomplex) with both shapes up ℤ is exactly the commuting double complex; columns are K.X p and rows K.flip.X q. HomologicalComplex₂.total/ιTotal/ιTotalOrZero (Mathlib.Algebra.Homology.TotalComplex) are reused directly. TotalComplexShape is the actual global class name (not ComplexShape.TotalComplexShape); ComplexShape.ε₂ is in Mathlib.Algebra.Homology.ComplexShapeSigns. Its TensorSigns instance at lines 182-192 and total-shape instance at 156-159 give ε₁=1 and ε₂(p,q)=p.negOnePow=(-1)^p. HomologicalComplex.homology/homologyFunctor are in Mathlib.Algebra.Homology.ShortComplex.HomologicalComplex; Functor.mapHomologicalComplex is in Mathlib.Algebra.Homology.Additive. First quadrant is the Prop hypothesis ∀ p q : ℤ, p < 0 ∨ q < 0 → IsZero ((K.X p).X q); hasTotal_of_firstQuadrant derives the diagonal coproduct existence, so it is not extra input. The source up ℕ version and hasTotal_up_nat are in WeilConjectures.Mathlib.Algebra.Homology.TotalComplex, and use the same signs; restricting an integer first-quadrant bicomplex to nonnegative indices, or extending a natural-indexed bicomplex by zero, gives the forms used by the spectral-sequence citer. Only firstFiltration and secondFiltration are new construction data; other new declarations are theorem statements with sorry."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-dct0900",
+  "group": "K1",
+  "result": "pass",
+  "note": "Abelian C; K : HomologicalComplex2 (up Z)(up Z) recorded with total/iTotalOrZero/eps2=(-1)^p checked in ComplexShapeSigns; first quadrant as IsZero Prop hK; F'/F'' step p = sup over Icc p n of images of iTotalOrZero (i,n-i)/(n-i,i), antitone; subcomplex lifts of total d; step0=top, step(n+1)=bot, Tot^n=0 for n<0; graded via canonical lift of iTotalOrZero and gradedPiece's cokernel.pi, differential (-1)^p d_II resp. d_I, delta^2=0; all R-dct0742 points"
  }
 }
