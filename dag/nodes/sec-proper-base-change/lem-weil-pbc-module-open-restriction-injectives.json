@@ -201,5 +201,24 @@
  "tool_uses": [
   "lem-sp-right-adjoint-preserves-injectives"
  ],
- "reviewed": "Reviewed by L 2026-10-10: faithful to Cohomology 01E1 and 02N5: restriction exact on stalks (step 1, via lem-weil-pbc-module-stalk-exact (5)), injectives preserved by the adjunctions j_! ⊣ (-)|_U (00A7, new unsplit node) and (-)|_U ⊣ j_* with Homology 015Z, used as a tool from unit sk-thm-groth-ss (tool_uses recorded, same precedent as colimit-of-sites-injective-system); exactness of j_! for modules written out on stalks (source gap). No Mathlib match."
+ "reviewed": "Reviewed by L 2026-10-10: faithful to Cohomology 01E1 and 02N5: restriction exact on stalks (step 1, via lem-weil-pbc-module-stalk-exact (5)), injectives preserved by the adjunctions j_! ⊣ (-)|_U (00A7, new unsplit node) and (-)|_U ⊣ j_* with Homology 015Z, used as a tool from unit sk-thm-groth-ss (tool_uses recorded, same precedent as colimit-of-sites-injective-system); exactness of j_! for modules written out on stalks (source gap). No Mathlib match.",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ModuleOpenRestrictionInjectives",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.module_open_restriction_injectives",
+  "file": "lean/Sheaf/AlgebraicGeometry/ModuleOpenRestrictionInjectives.lean",
+  "statement": "theorem module_open_restriction_injectives (X : Scheme.{u}) (U : X.Opens) : (SheafOfModules.overFunctor.{u} X.ringCatSheaf U).Additive ∧ (∀ S : ShortComplex (SheafOfModules.{u} X.ringCatSheaf), S.Exact → (S.map (SheafOfModules.overFunctor.{u} X.ringCatSheaf U)).Exact) ∧ (∀ I : SheafOfModules.{u} X.ringCatSheaf, Injective I → Injective (I.over U)) ∧ (∀ J : SheafOfModules.{u} (X.ringCatSheaf.over U), Injective J → Injective ((SheafOfModules.pushforward.{u} (SheafOfModules.pushforwardOver (R := X.ringCatSheaf) U)).obj J)) ∧ (∀ (F : SheafOfModules.{u} X.ringCatSheaf) (I : InjectiveResolution F), ∃ (J : InjectiveResolution (F.over U)) (h : J.cocomplex = ((SheafOfModules.overFunctor.{u} X.ringCatSheaf U).mapHomologicalComplex (ComplexShape.up ℕ)).obj I.cocomplex), J.ι.f 0 ≫ eqToHom (congrArg (fun K ↦ K.X 0) h) = (I.ι.f 0).over U)",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-mor1148"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-mor1148",
+  "group": "E1",
+  "result": "fix",
+  "note": "X : Scheme, U : X.Opens; (1) overFunctor X.ringCatSheaf U Additive + ShortComplex exactness; (2) Injective I -> Injective (I.over U); (3) j_* = pushforward (pushforwardOver U), right adjoint of overFunctor; consequence in M1 restrict_injectiveResolution form"
+ }
 }
