@@ -345,16 +345,39 @@ theorem exists_isPullback_deformationSpace_baseChange_of_isOpenImmersion [IsOpen
     [IsClosedImmersion s] :
     ∃ φ : (baseChangeSection g s hs b).ker.deformationSpace ⟶ s.ker.deformationSpace,
       IsPullback φ (deformationSpaceProj (pullback.snd g b) (baseChangeSection g s hs b))
-        (deformationSpaceProj g s) (AffineSpace.map _ b) := by
+        (deformationSpaceProj g s) (AffineSpace.map _ b) ∧
+      φ ≫ s.ker.deformationSpaceProj =
+        (baseChangeSection g s hs b).ker.deformationSpaceProj ≫ pullback.fst g b := by
   have key : ∀ J : (pullback g b).IdealSheafData, J = s.ker.comap (pullback.fst g b) →
       ∃ φ : J.deformationSpace ⟶ s.ker.deformationSpace,
         IsPullback φ (J.deformationSpaceToPolynomialSpec ≫
           (pullback g b).polynomialSpecToAffineSpace ≫
             AffineSpace.map (ULift.{u} (Fin 1)) (pullback.snd g b))
-          (deformationSpaceProj g s) (AffineSpace.map _ b) := by
+          (deformationSpaceProj g s) (AffineSpace.map _ b) ∧
+        φ ≫ s.ker.deformationSpaceProj = J.deformationSpaceProj ≫ pullback.fst g b := by
     rintro J rfl
     exact ⟨_, IdealSheafData.isPullback_deformationSpaceComap_proj _ _ g _ b
-      (IsPullback.of_hasPullback g b)⟩
+      (IsPullback.of_hasPullback g b), IdealSheafData.deformationSpaceComap_toBase _ _⟩
   exact key _ (ker_baseChangeSection g s hs b)
+
+/-- Towards the section compatibility in `sk-lem-geometry` (5): for a comparison `φ` as in
+`exists_isPullback_deformationSpace_baseChange_of_isOpenImmersion`, the two maps
+`s̃' ≫ φ` and `b ≫ s̃ : 𝔸¹_{B'} ⟶ D_s V` agree after `D_s V ⟶ V` and after `g̃`. -/
+lemma deformationSpaceSection_comp_eq_of_isPullback [IsClosedImmersion s]
+    (φ : (baseChangeSection g s hs b).ker.deformationSpace ⟶ s.ker.deformationSpace)
+    (h₁ : IsPullback φ (deformationSpaceProj (pullback.snd g b) (baseChangeSection g s hs b))
+      (deformationSpaceProj g s) (AffineSpace.map _ b))
+    (h₂ : φ ≫ s.ker.deformationSpaceProj =
+      (baseChangeSection g s hs b).ker.deformationSpaceProj ≫ pullback.fst g b) :
+    ((baseChangeSection g s hs b).deformationSpaceSection ≫ φ) ≫ s.ker.deformationSpaceProj =
+        (AffineSpace.map _ b ≫ s.deformationSpaceSection) ≫ s.ker.deformationSpaceProj ∧
+      ((baseChangeSection g s hs b).deformationSpaceSection ≫ φ) ≫ deformationSpaceProj g s =
+        (AffineSpace.map _ b ≫ s.deformationSpaceSection) ≫ deformationSpaceProj g s := by
+  constructor
+  · rw [Category.assoc, h₂, deformationSpaceSection_toBase_assoc, baseChangeSection_fst,
+      Category.assoc, deformationSpaceSection_toBase, AffineSpace.map_over_assoc]
+  · rw [Category.assoc, h₁.w, reassoc_of% deformationSpaceSection_deformationSpaceProj
+      (baseChangeSection_snd g s hs b), Category.assoc,
+      deformationSpaceSection_deformationSpaceProj hs, Category.comp_id]
 
 end AlgebraicGeometry.Scheme.Hom
