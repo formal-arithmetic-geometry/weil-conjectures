@@ -154,5 +154,23 @@
   "worker": "stage1",
   "summary": "Followed Stacks 031F: apply the 00PE finite-length bound to S inside L, pass to the finite-dimensional closed fibre S/mS, use the existing finite-algebra/discrete-spectrum and quotient-spectrum nodes to obtain finitely many maximal primes over m, then identify and bound their residue fields. Added only the smaller unsplit 00PE support node; no exact sorry-free slopmaster2 declaration was found for either statement.",
   "blueprint": "The item's four steps realize the finite-residue-extension assertion quoted in step 4 of lem-weil-pbc-normal-constant-generic, through Tate's lemma 032P: 'By Lemma lemma-finite-extension-residue-fields-dimension-1 we see that κ(q)/κ(p) is a finite field extension'."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.DimOneResidueFieldsFinite",
+  "declaration": "Ideal.dim_one_residue_fields_finite",
+  "file": "lean/Sheaf/RingTheory/DimOneResidueFieldsFinite.lean",
+  "statement": "theorem dim_one_residue_fields_finite (R : Type uR) (S : Type uS) (K : Type uK) (L : Type uL) [CommRing R] [IsDomain R] [IsNoetherianRing R] [IsLocalRing R] [CommRing S] [IsDomain S] [Field K] [Field L] [Algebra R K] [IsFractionRing R K] [Algebra S L] [IsFractionRing S L] [Algebra K L] [FiniteDimensional K L] (φ : R →+* S) (hφ : Function.Injective φ) (hcompat : ∀ r : R, algebraMap K L (algebraMap R K r) = algebraMap S L (φ r)) (hdim : ringKrullDim R = 1) : (∀ n : PrimeSpectrum S, n.asIdeal.comap φ = IsLocalRing.maximalIdeal R → n.asIdeal.IsMaximal) ∧ Set.Finite {n : PrimeSpectrum S | n.asIdeal.comap φ = IsLocalRing.maximalIdeal R} ∧ (∀ (n : PrimeSpectrum S) (hn : n.asIdeal.comap φ = IsLocalRing.maximalIdeal R), letI := (Ideal.ResidueField.map (IsLocalRing.maximalIdeal R) n.asIdeal φ hn.symm).toAlgebra FiniteDimensional (IsLocalRing.maximalIdeal R).ResidueField n.asIdeal.ResidueField)",
+  "branch": "sheaf-dag",
+  "by": "K1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-drf0942",
+  "group": "K1",
+  "result": "pass",
+  "note": "domains R,S + injective φ; fraction fields via IsFractionRing; induced K→L as [Algebra K L]+hcompat extending φ; dim_K L<∞ as FiniteDimensional; Noetherian local R, ringKrullDim R = 1; (1) primes over m maximal, (2) Set.Finite of the fibre, (3) FiniteDimensional of Ideal.ResidueField over κ(m) via Ideal.ResidueField.map φ (Localization.AtPrime residue field per def-weil-pbc-localization-at-prime); empty fibre vacuous"
  }
 }
