@@ -42,7 +42,6 @@ variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime] [Fa
   [LocallyOfFiniteType (U ↘ Spec (CommRingCat.of k₀))]
   [QuasiCompact (U ↘ Spec (CommRingCat.of k₀))]
 
--- TODO(adic): prove once Weil sheaves carry genuine `ℓ`-adic coefficients
 /-- Blueprint `lem-a1-affine-hc0`: Vanishing of `H_c⁰` on a nonproper curve.
 
 Let `U₀` be a smooth geometrically connected affine curve and `ℱ` a lisse Weil sheaf on `U₀`.
@@ -51,13 +50,16 @@ Then `H_c⁰ (U, ℱ) = 0`.
 A class in `H_c⁰` is a global section of `ℱ` whose support is proper over the base field. By
 lissity a global section of `ℱ` is locally constant, so on the connected curve `U` it vanishes
 as soon as it vanishes at one geometric point; the support of a nonzero section is therefore
-all of `U`, which is not proper. -/
+all of `U`, which is not proper. Here it is the case `j = 𝟙` of
+`AlgebraicGeometry.subsingleton_compactlySupportedCohomology_directImage_zero`. -/
 theorem subsingleton_compactlySupportedCohomology_zero [IsAffine U]
     [SmoothOfRelativeDimension 1 (U ↘ Spec (CommRingCat.of k₀))]
     [GeometricallyConnected (U ↘ Spec (CommRingCat.of k₀))] (F : WeilSheaf k₀ l U)
     (hF : F.IsLisse) :
-    Subsingleton (F.compactlySupportedCohomology 0).carrier := by
-  sorry
+    Subsingleton (F.compactlySupportedCohomology 0).carrier :=
+  have := subsingleton_compactlySupportedCohomology_directImage_zero (𝟙 U) F hF
+  (compactlySupportedCohomologyEquivOfIso (lowerStarIdIso F).symm 0).toLinearEquiv.toEquiv
+    |>.subsingleton
 
 
 /-- Blueprint `lem-a1-affine-hc2`: Description of `H_c²` on an affine curve.

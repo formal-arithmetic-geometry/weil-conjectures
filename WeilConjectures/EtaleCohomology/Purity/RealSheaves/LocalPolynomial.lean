@@ -56,11 +56,12 @@ theorem exists_equivalence_localPolynomial_stalk :
         (F.obj.stalk x).localPolynomial = ((e.functor.obj F).obj.ρ g).charpolyRev := by
   obtain ⟨e, hst, -, -⟩ := W.exists_equivalence_isLisse l
   refine ⟨e, fun F x g hg ↦ ?_⟩
-  haveI := (e.functor.obj F).property.1
+  have := (e.functor.obj F).property.1
   obtain ⟨f, hf⟩ := hst F x
   rw [← localPolynomial_eq_charpolyRev_of_isConj hg, localPolynomial,
-    FrobeniusModule.localPolynomial, LinearMap.charpolyRev_def, LinearMap.charpolyRev_def,
-    LinearMap.charpoly_eq_of_comp_eq f (LinearMap.ext fun v ↦ hf v)]
+    FrobeniusModule.localPolynomial, LinearMap.charpolyRev_def, LinearMap.charpolyRev_def]
+  exact congrArg Polynomial.reverse
+    (LinearMap.charpoly_eq_of_comp_eq f (LinearMap.ext fun v ↦ hf v))
 
 end WeilGroup
 

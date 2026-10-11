@@ -43,10 +43,11 @@ is used here in its place. The numerator `det (1 - F T ∣ H_c¹ (U, ℱ))` of t
 asserted to be some polynomial, which is all that the Rankin–Selberg argument uses.
 
 The Euler product identity `AlgebraicGeometry.WeilGroup.exists_eulerSeries_mul_eq_coe` is the
-Grothendieck–Lefschetz trace formula for the lisse sheaf attached to a representation of the
-Weil group of the étale fundamental group (`AlgebraicGeometry.WeilGroup`), which is not
-available. It needs `ℓ ≠ char 𝔽_q`: for `ℓ = p` the `L`-function of a `p`-adic character of
-infinite geometric image, such as that of an Artin–Schreier–Witt `ℤ_p`-tower, is not rational.
+Grothendieck–Lefschetz trace formula for the lisse Weil sheaf attached to the representation
+(`AlgebraicGeometry.WeilGroup.exists_weilSheaf_of_isLisse`), in the sheaf form
+`AlgebraicGeometry.WeilSheaf.coeff_prod_inv_localPolynomial_stalk_eq`. It needs `ℓ ≠ char 𝔽_q`:
+for `ℓ = p` the `L`-function of a `p`-adic character of infinite geometric image, such as that
+of an Artin–Schreier–Witt `ℤ_p`-tower, is not rational.
 
 ## Main definitions
 
@@ -460,8 +461,8 @@ is only recorded as some polynomial `P`.
 
 This is the curve case of the Euler-product form of the Grothendieck–Lefschetz trace formula,
 together with `H_c⁰ (U, ℱ) = 0` (`lem-a1-affine-hc0`) and the coinvariant description of
-`H_c²` (`lem-a1-affine-hc2`), for `ℓ ≠ char 𝔽_q`. It needs the trace formula, which is not
-available; see the implementation notes. -/
+`H_c²` (`lem-a1-affine-hc2`), for `ℓ ≠ char 𝔽_q`, applied to the lisse Weil sheaf attached to `ρ`
+(`AlgebraicGeometry.WeilSheaf.coeff_prod_inv_localPolynomial_stalk_eq`). -/
 theorem exists_eulerSeries_mul_eq_coe [IsAffine C] [SmoothOfRelativeDimension 1 p]
     [GeometricallyConnected p] [Fact (ringChar K ≠ l)] (hρ : W.IsLisse l ρ) :
     ∃ P : Polynomial ℂ, W.eulerSeries l ρ ι *

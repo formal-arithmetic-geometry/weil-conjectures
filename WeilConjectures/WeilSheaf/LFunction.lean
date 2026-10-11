@@ -158,7 +158,8 @@ as formal power series over `ℚ̄_ℓ`, the product over the closed points bein
 for every `n`, the coefficient of `T ^ n` of the finite product over any finite set `s` of
 closed points containing those of degree at most `n` is the coefficient of `T ^ n` of the
 right-hand side. Here `S` and `T` are finite sets of degrees outside of which `H_cⁱ(X, K)`,
-respectively the cohomology sheaves `𝓗ʲ(K)`, vanish. -/
+respectively the cohomology sheaves `𝓗ʲ(K)`, vanish. This is assertion (2) of the blueprint
+node, for `Λ = ℚ̄_ℓ`, with the local finiteness of assertion (1). -/
 theorem coeff_prod_inv_alternatingCharpolyRevProd_stalk (K : WeilComplex k₀ l X)
     {S T : Finset ℤ}
     (hS : ∀ i ∉ S, Subsingleton (WeilComplex.compactlySupportedCohomology K i).carrier)
