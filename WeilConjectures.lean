@@ -237,6 +237,7 @@ public import WeilConjectures.AlgebraicGeometry.Modules.HomTensor.Basic
 public import WeilConjectures.AlgebraicGeometry.Modules.HomTensor.Free
 public import WeilConjectures.AlgebraicGeometry.Modules.HomTensor.LocallyFree
 public import WeilConjectures.AlgebraicGeometry.Modules.HomTensor.Presheaf
+public import WeilConjectures.AlgebraicGeometry.Modules.IdealSheafFiniteType
 public import WeilConjectures.AlgebraicGeometry.Modules.Invertible
 public import WeilConjectures.AlgebraicGeometry.Modules.InvertibleSections
 public import WeilConjectures.AlgebraicGeometry.Modules.LocalDerivation
