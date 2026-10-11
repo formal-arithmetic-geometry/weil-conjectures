@@ -1,11 +1,11 @@
 # Work queue
 
-974 items; claim with `tools/claim.py next <group> [--stage N]`.
+971 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (974)
+## Stage 2: nodes to state (971)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -47,21 +47,18 @@
 | `lem-pc-kflat-stalk-criterion` | 1 | state |
 | `lem-pc-kflat-tensor-cone-two-out-of-three` | 1 | state |
 | `lem-pc-kflat-tensor-quasi-iso` | 1 | state |
-| `lem-pc-module-bounded-flat-kflat` | 1 | state |
 | `lem-pc-module-change-of-rings-adjunction` | 1 | state |
 | `lem-pc-module-filtered-colimits-tensor` | 1 | state |
 | `lem-pc-module-pullback-adjunction` | 1 | state |
 | `lem-pc-module-pullback-identity-composition` | 1 | state |
 | `lem-pc-monomial-cech-complex-homology` | 1 | state |
 | `lem-pc-nonzero-section-integral-cartier` | 1 | state |
-| `lem-pc-pic-of-field` | 1 | state |
 | `lem-pc-pre-derived-adjoint-functors-general` | 1 | state |
 | `lem-pc-presheaf-change-of-rings-adjunction` | 1 | state |
 | `lem-pc-presheaf-module-inverse-image-adjunction` | 1 | state |
 | `lem-pc-proper-geometrically-reduced-global-sections-separable` | 1 | state |
 | `lem-pc-right-localization-hom-colimit` | 1 | state |
 | `lem-pc-ring-derived-map-lift` | 1 | state |
-| `lem-pc-ring-m-pseudo-coherent-vanishing-base` | 1 | state |
 | `lem-pc-ring-pseudo-coherent-distinguished-triangle` | 1 | state |
 | `lem-pc-ring-pseudo-coherent-iff-all-m` | 1 | state |
 | `lem-pc-ring-pseudo-coherent-localization-glue` | 1 | state |
