@@ -96,12 +96,6 @@ section KFlat
 
 variable [Abelian.HasFunctorialFlatResolution A]
 
-/-- The comparison pullback `ν^*` preserves flat sheaves of modules over a noetherian ring
-(`AlgebraicGeometry.ProEtale.flat_comparisonUpperStar_obj`). -/
-instance preservesFlat_comparisonUpperStar (Λ : Type (u + 1)) [CommRing Λ] [IsNoetherianRing Λ] :
-    (ν^*(X)[ModuleCat.{u + 1} Λ]).PreservesFlat :=
-  ⟨flat_comparisonUpperStar_obj⟩
-
 omit [Abelian.HasFunctorialFlatResolution A] in
 variable {A X} in
 /-- If `ν^*` preserves flat sheaves, it sends `ℤ`-indexed colimits of bounded above complexes of
