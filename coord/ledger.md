@@ -4974,3 +4974,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 14:32 L: merged deliver/H1/lem-weil-pbc-smooth-fibre-regular-local (stage 2; reviewer PASS; first push; Sheaf.RingTheory.SmoothFibreRegularLocal Algebra.smooth_fibre_regular_local)
 - 14:32 L: merged deliver/H1/lem-weil-pbc-smooth-over-normal-ring-normal (stage 2; reviewer PASS; first push; Sheaf.RingTheory.SmoothNormalRing RingHom.Smooth.isNormalRing)
 - 14:32 L: merged deliver/J1/lem-weil-pbc-smooth-free-differentials-strictly-standard-power (stage 2; reviewer PASS; first push; Sheaf.RingTheory.SmoothFreeDifferentialsStrictlyStandardPower Algebra.smooth_free_differentials_strictly_standard_power)
+- 14:33 L: merged deliver/J1/lem-weil-pbc-smooth-retract-standard-smooth (stage 2; reviewer PASS; first push; Sheaf.RingTheory.SmoothStandardSmoothRetract Algebra.Smooth.exists_standardSmooth_retract)
