@@ -9,6 +9,8 @@ public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
 public import Mathlib.Algebra.Category.ModuleCat.Monoidal.Closed
 public import Mathlib.Algebra.Category.ModuleCat.Limits
 public import Mathlib.LinearAlgebra.Contraction
+public import Mathlib.LinearAlgebra.FreeModule.PID
+public import Mathlib.RingTheory.Algebraic.Integral
 public import Mathlib.CategoryTheory.Sites.Whiskering
 
 /-!
@@ -20,7 +22,7 @@ limits; since `restrictScalars f` preserves and reflects limits, so does `extend
 (`ModuleCat.preservesLimits_extendScalars`).
 -/
 
-@[expose] public section
+@[expose] public noncomputable section
 
 universe u
 
@@ -134,6 +136,51 @@ noncomputable def extendScalarsIsoCoextendScalars :
         rfl)
 
 end Dualizing
+
+/-- If `R → S` is a map of domains making `S` a finite free `R`-module and `S` is a
+principal ideal ring, then `Hom_R(S, R)` is free of rank one over `S`. -/
+theorem nonempty_iso_coextendScalars_obj [IsDomain R] [IsDomain S] [IsPrincipalIdealRing S]
+    [Module.Free R ((restrictScalars f).obj (of S S))] :
+    Nonempty (of S S ≅ (coextendScalars.{u, u, u} f).obj (of R R)) := by
+  let S' := (restrictScalars f).obj (of S S)
+  let D := (coextendScalars.{u, u, u} f).obj (of R R)
+  let : Algebra R S := f.toAlgebra
+  let : Module R D := inferInstanceAs (Module R (Module.Dual R S'))
+  have : Module.Free R S := inferInstanceAs (Module.Free R S')
+  have : Module.Finite R S := inferInstanceAs (Module.Finite R S')
+  have : IsScalarTower R S D := .of_algebraMap_smul fun r φ ↦ by
+    refine CoextendScalars.ext (LinearMap.ext fun x ↦ ?_)
+    let φ' : S →ₗ[R] R := (φ : S' →ₗ[R] R)
+    change φ' ((fun y : S ↦ y * f r) x) = r * φ' x
+    exact (congrArg φ' (mul_comm _ _)).trans (φ'.map_smul r x)
+  have : Module.Finite R D := inferInstanceAs (Module.Finite R (Module.Dual R S'))
+  have : Module.Finite S D := .of_restrictScalars_finite R S D
+  have : Module.IsTorsionFree S D := .of_smul_eq_zero fun s φ h ↦ by
+    by_contra! hne
+    obtain ⟨r, hr, t, ht⟩ :=
+      (Algebra.IsIntegral.isIntegral (R := R) s).isAlgebraic.exists_nonzero_dvd
+      (mem_nonZeroDivisors_of_ne_zero hne.1)
+    let φ' : S →ₗ[R] R := (φ : S' →ₗ[R] R)
+    have key : ∀ y : S, φ' (y * s) = 0 := fun y ↦ by
+      have := congrArg (fun ψ : D ↦ ((ψ : S' →ₗ[R] R) : S →ₗ[R] R) y) h
+      exact this
+    refine hne.2 (CoextendScalars.ext (LinearMap.ext fun x ↦ ?_))
+    change φ' (id x) = 0
+    have hx := key (t * (id x : S))
+    rw [show t * (id x : S) * s = r • (id x : S) by rw [Algebra.smul_def, ht]; ring, map_smul,
+      smul_eq_mul, mul_eq_zero] at hx
+    exact hx.resolve_left hr
+  have : Module.Free S D := Module.free_of_finite_type_torsion_free'
+  have hD : Module.finrank R D = Module.finrank R S :=
+    (Module.finrank_eq_card_basis ((Module.Free.chooseBasis R S').dualBasis)).trans
+      (Module.finrank_eq_card_basis (Module.Free.chooseBasis R S')).symm
+  have hS : 0 < Module.finrank R S := Module.finrank_pos
+  have h1 : Module.finrank S D = 1 := by
+    have := Module.finrank_mul_finrank R S D
+    rw [hD] at this
+    exact (Nat.mul_eq_left hS.ne').mp this
+  exact ⟨((Module.finBasisOfFinrankEq S D h1).equivFun.trans
+    (LinearEquiv.funUnique (Fin 1) S S)).symm.toModuleIso⟩
 end ModuleCat
 
 namespace CategoryTheory
