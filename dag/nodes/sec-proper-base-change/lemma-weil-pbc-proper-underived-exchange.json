@@ -26,60 +26,52 @@
  ],
  "proof": [
   {
-   "text": "Fix a geometric point $\\bar y'=\\operatorname{Spec}\\Omega\\to Y'$ and let $\\bar y$ be its composite with $g:Y'\\to Y$. The morphisms $f$ and $f'$ are quasi-compact and quasi-separated because they are proper (finite type and separated) in the scheme conventions [def-weil-pbc-scheme-conventions]. The base change $f'$ is proper by [lem-weil-pbc-proper-base-change]. The sheaf $g'^{-1}F$ is torsion because inverse image preserves the geometric stalks of $F$ [def-weil-pbc-etale-sheaves]. Thus [prop-weil-pbc-strict-henselization-stalk-formula] applies in degree zero to both maps. It identifies the stalks at $\\bar y'$ of $g^{-1}f_*F$ and $f'_*g'^{-1}F$ with sections over the corresponding strict-henselian base changes. Applying [lemma-weil-pbc-proper-strict-henselian-h0] identifies the first section group with sections on the fibre over $\\kappa(y)^{\\mathrm{sep}}$ and the second with sections on the fibre over $\\kappa(y')^{\\mathrm{sep}}$ (inside $\\Omega$). Finally [lem-weil-pbc-sections-base-field-extension] carries each of these section groups, by restriction of the pullback sheaf, to the corresponding fibre over $\\Omega$.",
+   "text": "For a sheaf F and an algebraic-closure point s of Yprime, form the cartesian base change of fprime along s. The map fprime is proper by [lem-weil-pbc-proper-base-change]. Both that square and its horizontal paste with the given square are geometric-point base changes of proper maps. Their exchange components are isomorphisms by [lem-weil-pbc-proper-geometric-point-exchange].",
    "uses": [
-    "prop-weil-pbc-strict-henselization-stalk-formula",
-    "lemma-weil-pbc-proper-strict-henselian-h0",
-    "lem-weil-pbc-sections-base-field-extension",
     "lem-weil-pbc-proper-base-change",
-    "def-weil-pbc-scheme-conventions",
-    "def-weil-pbc-etale-sheaves"
+    "lem-weil-pbc-proper-geometric-point-exchange"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-iff/lemma-weil-pbc-proper-underived-exchange.md",
-    "place": "proof, first and second paragraphs; Stacks Project Tags 0A3T and 0A3U"
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0A3T (lemma-proper-pushforward-stalk), with the canonical exchange compatibility from Tag 0A3U (lemma-proper-base-change-f-star)"
    }
   },
   {
-   "text": "Use the cartesian identification in [def-weil-pbc-cartesian-square] only after Step 1: it identifies the two fibres over $\\Omega$ with the same scheme $X\\times_Y\\operatorname{Spec}\\Omega$, and identifies the pulled-back coefficient sheaves. To compute the stalk map, represent a germ by $s\\in\\Gamma(X\\times_YW,F|)$ for a pointed etale neighbourhood $W$ of $\\bar y$. Its image under the exchange morphism [def-weil-pbc-underived-exchange] is given explicitly by restriction along $X'\\times_{Y'}V\\to X\\times_YW$, where $V$ is the corresponding pointed etale neighbourhood over $Y'$. By Step 1, both stalk identifications are restriction maps to the same fibre $X\\times_Y\\operatorname{Spec}\\Omega$; therefore both sides send $s$ to the same restricted section. Hence the stalk of the exchange morphism is the identity on the common fibre section group.",
+   "text": "Use the underived horizontal pasting identity [lem-weil-pbc-underived-horizontal-pasting], implemented by Etale.baseChangeMap_paste_horiz_app. The exchange of the outer square is the composite of the upperStar composition isomorphism, s inverse image of the original exchange, the exchange of the second square, and a direct image of the inverse upperStar composition isomorphism. Cancel the three isomorphisms to conclude that s inverse image of the original exchange component is an isomorphism.",
    "uses": [
-    "def-weil-pbc-cartesian-square",
-    "def-weil-pbc-underived-exchange"
+    "lem-weil-pbc-underived-horizontal-pasting"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-iff/lemma-weil-pbc-proper-underived-exchange.md",
-    "place": "proof, final paragraph; Stacks Project Tag 0A3U"
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0A3T (lemma-proper-pushforward-stalk), with the canonical exchange compatibility from Tag 0A3U (lemma-proper-base-change-f-star)"
    }
   },
   {
-   "text": "Thus the exchange morphism induces an isomorphism on every geometric stalk. By [lemma-weil-pbc-geometric-stalk-conservative], geometric stalks are conservative for etale sheaves, so the exchange morphism itself is an isomorphism.",
+   "text": "The natural stalk-pullback comparison of [lemma-openclosed-stalk-upperstar], implemented by upperStarCompSheafFiberIso at the identity geometric point of Spec Omega, identifies the original stalk map with the fibre of s inverse image of that component. A functor preserves isomorphisms; transport across this natural comparison and the universe-lift fibre isomorphism. All algebraic-closure stalks of the original component are isomorphisms, so [lemma-weil-pbc-geometric-stalk-conservative] makes it an isomorphism. NatIso.isIso_of_isIso_app then makes the exchange natural transformation an isomorphism.",
    "uses": [
+    "lemma-openclosed-stalk-upperstar",
     "lemma-weil-pbc-geometric-stalk-conservative"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-iff/lemma-weil-pbc-proper-underived-exchange.md",
-    "place": "proof, final sentence; Stacks Project Tag 0A3U"
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0A3T (lemma-proper-pushforward-stalk), with the canonical exchange compatibility from Tag 0A3U (lemma-proper-base-change-f-star)"
    }
   }
  ],
  "proof_deps": [
-  "prop-weil-pbc-strict-henselization-stalk-formula",
-  "lemma-weil-pbc-proper-strict-henselian-h0",
-  "def-weil-pbc-cartesian-square",
-  "def-weil-pbc-scheme-conventions",
-  "def-weil-pbc-underived-exchange",
-  "lemma-weil-pbc-geometric-stalk-conservative",
-  "lem-weil-pbc-sections-base-field-extension",
   "lem-weil-pbc-proper-base-change",
-  "def-weil-pbc-etale-sheaves"
+  "lem-weil-pbc-proper-geometric-point-exchange",
+  "lem-weil-pbc-underived-horizontal-pasting",
+  "lemma-openclosed-stalk-upperstar",
+  "lemma-weil-pbc-geometric-stalk-conservative"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-iff/lemma-weil-pbc-proper-underived-exchange.md",
-  "place": "## Proof"
+  "place": "Canonical closed-fibre computation retained in geometric-point lemma; general square reduced by underived horizontal pasting and geometric-stalk conservativity."
  },
  "mathlib_searches": [],
  "mathlib_match": null,
@@ -175,5 +167,15 @@
   ],
   "sorry_free": false,
   "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state sorry_here)"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "X-e27ce",
+  "group": "G1",
+  "result": "pass",
+  "landing": "20261011T232136-L-366152",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered files, DAG nodes, report, and declarations match the stage-3 brief; prescribed compilation succeeds without errors or warnings."
  }
 }

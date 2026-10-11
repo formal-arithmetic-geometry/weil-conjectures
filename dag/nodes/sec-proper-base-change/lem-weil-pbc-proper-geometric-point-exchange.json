@@ -1,0 +1,174 @@
+{
+ "id": "lem-weil-pbc-proper-geometric-point-exchange",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-proper-underived-exchange",
+   "place": "Proof: the canonical direct-image stalk to closed geometric fibre section comparison, specialized to base change to a geometric point, before applying conservativity",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Underived proper exchange after base change to a geometric point",
+ "statement": "Let $\\Lambda$ be a commutative ring and $F$ a sheaf of $\\Lambda$-modules on the small etale site of a scheme $X$ [def-weil-pbc-etale-sheaves]. Let $f:X\\to Y$ be a proper morphism [def-weil-pbc-scheme-conventions], and let $s:\\operatorname{Spec}\\Omega\\to Y$ be a geometric point with $\\Omega$ algebraically closed [def-weil-geometric-point]. For any cartesian square [def-weil-pbc-cartesian-square] with horizontal maps $g\\prime:X\\prime\\to X$ and $s$ and vertical maps $f\\prime:X\\prime\\to\\operatorname{Spec}\\Omega$ and $f$, the specified underived exchange component [def-weil-pbc-underived-exchange] $s^{-1}f_*F\\to f\\prime_*g\\prime^{-1}F$ is an isomorphism. There is no torsion hypothesis on $F$ or $\\Lambda$.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 0A3T (lemma-proper-pushforward-stalk), with the canonical exchange compatibility from Tag 0A3U (lemma-proper-base-change-f-star)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-geometric-point",
+  "def-weil-pbc-cartesian-square",
+  "def-weil-pbc-underived-exchange"
+ ],
+ "proof": [
+  {
+   "text": "Forget the module structure. A proper morphism is quasi-compact and quasi-separated. Apply [lem-weil-pbc-sets-pushforward-stalk-strict-henselization] to the underlying sheaf of sets: the stalk at s is canonically the sections over the strict-henselian base change, and the comparison sends every pointed-neighbourhood germ to its restricted section.",
+   "uses": [
+    "lem-weil-pbc-sets-pushforward-stalk-strict-henselization",
+    "def-weil-pbc-scheme-conventions"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0A3T (lemma-proper-pushforward-stalk), with the canonical exchange compatibility from Tag 0A3U (lemma-proper-base-change-f-star)"
+   }
+  },
+  {
+   "text": "The strict-henselian base change of f is proper by [lem-weil-pbc-proper-base-change]. Apply [lemma-weil-pbc-proper-strict-henselian-h0] to restrict to its closed geometric fibre. Then [lem-weil-pbc-sections-base-field-extension] restricts from that separably closed field to Omega. These are canonical restrictions, so their composite sends a section on X times_Y V to its restriction on X times_Y Spec Omega.",
+   "uses": [
+    "lem-weil-pbc-proper-base-change",
+    "lemma-weil-pbc-proper-strict-henselian-h0",
+    "lem-weil-pbc-sections-base-field-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0A3T (lemma-proper-pushforward-stalk), with the canonical exchange compatibility from Tag 0A3U (lemma-proper-base-change-f-star)"
+   }
+  },
+  {
+   "text": "On Spec Omega, the terminal etale object with its identity lift computes the geometric stalk by [lem-weil-pbc-strictly-henselian-sections-stalk]. Identify the source stalk with (f_*F)_s by [lem-weil-pbc-inverse-image-stalk-germ]. For a germ represented by a section over X times_Y V, the defining unit, square comparison, and counit of [def-weil-pbc-underived-exchange] restrict that same section along Xprime times_SpecOmega Vprime to X times_Y V. On the terminal object and its lifted geometric point this is its restriction to Xprime, identified with X times_Y Spec Omega by the cartesian square. Thus the stalk map is exactly the composite canonical restriction in the previous steps. It is bijective, hence an isomorphism of modules.",
+   "uses": [
+    "lem-weil-pbc-strictly-henselian-sections-stalk",
+    "lem-weil-pbc-inverse-image-stalk-germ",
+    "def-weil-pbc-underived-exchange",
+    "def-weil-pbc-cartesian-square"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0A3T (lemma-proper-pushforward-stalk), with the canonical exchange compatibility from Tag 0A3U (lemma-proper-base-change-f-star)"
+   }
+  },
+  {
+   "text": "The points of Spec Omega have the same geometric fibre functor up to the standard universe-lift comparison. Therefore [lemma-weil-pbc-geometric-stalk-conservative] applies and the exchange component is an isomorphism. No torsion hypothesis has been used.",
+   "uses": [
+    "lemma-weil-pbc-geometric-stalk-conservative"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0A3T (lemma-proper-pushforward-stalk), with the canonical exchange compatibility from Tag 0A3U (lemma-proper-base-change-f-star)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-sets-pushforward-stalk-strict-henselization",
+  "def-weil-pbc-scheme-conventions",
+  "lem-weil-pbc-proper-base-change",
+  "lemma-weil-pbc-proper-strict-henselian-h0",
+  "lem-weil-pbc-sections-base-field-extension",
+  "lem-weil-pbc-strictly-henselian-sections-stalk",
+  "lem-weil-pbc-inverse-image-stalk-germ",
+  "def-weil-pbc-underived-exchange",
+  "def-weil-pbc-cartesian-square",
+  "lemma-weil-pbc-geometric-stalk-conservative"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 0A3T (lemma-proper-pushforward-stalk), with the canonical exchange compatibility from Tag 0A3U (lemma-proper-base-change-f-star)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "proper base change to geometric point underived etale sheaf sections",
+   "results": "Service returned Internal Server Error; unavailable, no absence claim.",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "proper base change underived etale sheaves stalk isomorphism",
+   "results": "8 hits: etale morphism stability and topological stalk-pullback statements; no proper etale direct-image exchange.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsIso\", \"baseChange\"",
+   "results": "6 hits: generic TwoSquare Kan-extension GuitartExact results only, no proper geometric-point exchange.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "isIso_baseChangeMap|sheafFiber.*baseChange|strictHenselization",
+   "results": "Search service: 0 Mathlib hits. Local source search found finite base change and pasting, but no proper geometric-point specialization.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.UnderivedExchange",
+  "date": "2026-10-12",
+  "group": "G1"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-iff",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ProperGeometricPointExchange",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProperGeometricPointExchange.lean",
+  "declaration": "AlgebraicGeometry.Etale.isIso_baseChangeMap_app_of_isProper_geometricPoint",
+  "statement": "theorem isIso_baseChangeMap_app_of_isProper_geometricPoint (Λ : Type (u + 1)) [CommRing Λ] {X' X Y : Scheme.{u}} {Ω : Type u} [Field Ω] [IsAlgClosed Ω] {g' : X' ⟶ X} {f' : X' ⟶ Spec (.of Ω)} {f : X ⟶ Y} {s : Spec (.of Ω) ⟶ Y} (sq : IsPullback g' f' f s) [IsProper f] (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) : IsIso ((baseChangeMap (ModuleCat.{u + 1} Λ) sq.toCommSq).app F)",
+  "branch": "sheaf-dag",
+  "by": "G1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "X-e27ce",
+  "group": "G1",
+  "result": "pass",
+  "landing": "20261011T232136-L-366152",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "X-e27ce",
+  "group": "G1",
+  "result": "pass",
+  "landing": "20261011T232136-L-366152",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered files, DAG nodes, report, and declarations match the stage-3 brief; prescribed compilation succeeds without errors or warnings."
+ }
+}

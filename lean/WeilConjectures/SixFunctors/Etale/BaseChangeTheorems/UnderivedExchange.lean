@@ -6,6 +6,9 @@ Authors: Claude
 module
 
 public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.DegreeZero
+import Sheaf.AlgebraicGeometry.ProperGeometricPointExchange
+import WeilConjectures.SixFunctors.BaseChange.Pasting
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Stalk
 
 /-!
 # The underived proper base change
@@ -69,7 +72,33 @@ map of stalks is the identity; geometric stalks are conservative.
 @[stacks 0A3T]
 theorem Etale.isIso_baseChangeMap_of_isProper {X' X Y' Y : Scheme.{u}} {g' : X' ⟶ X}
     {f' : X' ⟶ Y'} {f : X ⟶ Y} {g : Y' ⟶ Y} (sq : IsPullback g' f' f g) [IsProper f] :
-    IsIso (Etale.baseChangeMap (ModuleCat.{u + 1} Λ) sq.toCommSq) :=
-  sorry
+    IsIso (Etale.baseChangeMap (ModuleCat.{u + 1} Λ) sq.toCommSq) := by
+  have hf' : IsProper f' := MorphismProperty.of_isPullback sq (inferInstance : IsProper f)
+  suffices ∀ F, IsIso ((Etale.baseChangeMap (ModuleCat.{u + 1} Λ) sq.toCommSq).app F) from
+    NatIso.isIso_of_isIso_app _
+  intro F
+  refine Scheme.isIso_of_isIso_sheafFiber_map _ fun y ↦ ?_
+  let s := Y'.algClosurePoint y
+  let sq₂ := IsPullback.of_hasPullback f' s
+  have sq₃ := sq₂.paste_horiz sq
+  have h₂ := Etale.isIso_baseChangeMap_app_of_isProper_geometricPoint Λ sq₂
+    ((g')^*[ModuleCat.{u + 1} Λ].obj F)
+  have h₃ := Etale.isIso_baseChangeMap_app_of_isProper_geometricPoint Λ sq₃ F
+  have hp := Etale.baseChangeMap_paste_horiz_app (ModuleCat.{u + 1} Λ)
+    sq.toCommSq sq₂.toCommSq sq₃.toCommSq F
+  have hs : IsIso ((s)^*[ModuleCat.{u + 1} Λ].map
+      ((Etale.baseChangeMap (ModuleCat.{u + 1} Λ) sq.toCommSq).app F)) := by
+    rw [hp] at h₃
+    simpa only [isIso_comp_left_iff, isIso_comp_right_iff] using h₃
+  rw [Scheme.uliftPointSmallEtale,
+    NatIso.isIso_map_iff ((Scheme.pointSmallEtale _).uliftSheafFiberIso _)]
+  have hi := Etale.upperStarCompSheafFiberIso (ModuleCat.{u + 1} Λ) s
+    (𝟙 (Spec (.of (AlgebraicClosure (Y'.residueField y)))))
+  rw [Category.id_comp] at hi
+  rw [← NatIso.isIso_map_iff hi]
+  change IsIso ((Scheme.pointSmallEtale _).sheafFiber.map
+    ((s)^*[ModuleCat.{u + 1} Λ].map
+      ((Etale.baseChangeMap (ModuleCat.{u + 1} Λ) sq.toCommSq).app F)))
+  infer_instance
 
 end AlgebraicGeometry

@@ -5723,3 +5723,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 23:09 L: returned deliver/J1/WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.DegreeZero (reviewer RETURN: (reviewer X-d130d, head d130d4853) C4/C1: In dag/nodes/sec-proper-base-change/lemma-weil-pbc-etale-degree-zero.json, pro)
 - 23:10 L: returned deliver/G1/WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.UnderivedExchange (reviewer RETURN: (reviewer X-41f75, head 41f757ad5) C4 (brief §6): dag/nodes/sec-proper-base-change/lemma-weil-pbc-proper-underived-excha)
 - 23:17 L: merged deliver/J1/WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.DegreeZero (stage 3; reviewer PASS; after a return; landing 20261011T231708-L-352269 (interface); modules 2; new nodes 1)
+- 23:22 L: merged deliver/G1/WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.UnderivedExchange (stage 3; reviewer PASS; after a return; landing 20261011T232136-L-366152 (interface); modules 2; new nodes 2)
