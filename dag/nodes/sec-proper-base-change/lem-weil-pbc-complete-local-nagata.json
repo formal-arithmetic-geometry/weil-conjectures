@@ -200,5 +200,23 @@
   "worker": "stage1",
   "summary": "Read 032W (algebra.tex 45754-45777) and every lemma its proof cites: 0325 quotient-complete-local (line 44811), 032I quasi-finite-over-Noetherian-japanese (45202), 032D complete-local-Noetherian-domain-finite-over-regular (45065), 032Q power-series-over-N-2 (45593), 032P tate-japanese (45535); tags verified in tags/tags. Steps: (1) quotient by a prime via lem-weil-pbc-complete-local-quotient; (2) Cohen structure 032D (existing node) and N-2 ascent along the finite extension (new node, 032I finite case); (3) induction on the number of variables via 032Q (new node), with the regrouping isomorphism written out; (4) a field is N-2 ('This is clear', written out); (5) a Cohen ring is N-2 by Tate 032P (new node) with x = p, normality from a new Mathlib leaf (PID is Noetherian normal). Statement unchanged. No slopmaster2 Lean for the item or any new node (grep of WeilConjectures for Nagata/Japanese/N2). Blueprint search (032W, 032I, 032Q, 032P, Nagata, N-2, Japanese, power series, Tate, Cohen, integrally closed, principal ideal domain, normal domain, integral closure): nothing states these.",
   "blueprint": "No blueprint node states 032W; the blueprint ancestor is lem-weil-pbc-normal-constant-generic, whose step 4 (source 09Z5, proof of (1)) needs Nagata-ness/finiteness of normalization; through the via chain this item supplies the fact 'Noetherian complete local rings are Nagata' used by lem-weil-pbc-analytically-unramified-n1. All six steps realize that single place; no step of the ancestor's proof is realized directly."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.NagataOfCompleteLocal",
+  "declaration": "isNagataRing_of_complete_local",
+  "file": "lean/Sheaf/RingTheory/NagataOfCompleteLocal.lean",
+  "statement": "theorem isNagataRing_of_complete_local (R : Type u) [CommRing R] [IsNoetherianRing R] [IsLocalRing R] [IsAdicComplete (IsLocalRing.maximalIdeal R) R] : IsNagataRing R",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-cln1455",
+  "group": "F1",
+  "result": "pass",
+  "note": "R:Type u CommRing; Noetherian=IsNoetherianRing; local=IsLocalRing (m=maximalIdeal, determined); complete=IsAdicComplete (maximalIdeal R) R as H1 4db477a10; conclusion IsNagataRing R = Noetherian ∧ ∀ prime p, IsN2 (R⧸p) (FractionRing (R⧸p)) (recorded J1/F1 decls, IsN2 composite via IsScalarTower); docstring follows 6 node steps; sorry-only"
  }
 }
