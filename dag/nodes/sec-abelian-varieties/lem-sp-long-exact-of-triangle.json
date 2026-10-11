@@ -127,15 +127,21 @@
     "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-let2004 (reviewer sub-agent of L); spot-checked: Read HomologicalFunctor.lean:82,174,182,218,227,235 and ShiftSequence.lean:65. FIX more, RETURN less: (c) item is Mathlib's long exact sequence of a homological functor; with ShiftSequence.tautological (F.shift n = shift n ⋙ F) the indexed sequence is exactly Phi(K_i[n]), so the worker's 'generalization' verdict was wrong; made a leaf (status mathlib, mathlib_match homologySequence_exact₂ line 218 with exact₃/exact₁/homologySequenceδ_naturality one per clause), proof and proof_deps emptied, grep recorded in mathlib_searches. Second reading missed this; its Step 1 also misdescribed the 'n-fold rotation' as having terms K_i[n] (that is the 3n-fold rotation up to signs), now moot.; 1 file(s) fixed by the reviewer"
   },
   "lean": {
-    "module": "WeilConjectures.DeligneLaumon.Reduction.FormalSteps",
-    "declaration": "AlgebraicGeometry.WeilSheaf.exists_exact_higherLowerShriek_of_openClosed",
-    "branch": "slopmaster2",
-    "line": 283,
+    "module": "Mathlib.CategoryTheory.Triangulated.HomologicalFunctor",
+    "declaration": "CategoryTheory.Functor.homologySequenceδ",
     "declarations": [
-      "AlgebraicGeometry.WeilSheaf.exists_exact_higherLowerShriek_of_openClosed",
-      "AlgebraicGeometry.WeilSheaf.exact_map_higherLowerShriek"
+      "CategoryTheory.Functor.homologySequenceδ",
+      "CategoryTheory.Functor.homologySequenceδ_naturality",
+      "CategoryTheory.Functor.homologySequence_exact₁",
+      "CategoryTheory.Functor.homologySequence_exact₂",
+      "CategoryTheory.Functor.homologySequence_exact₃"
     ],
-    "sorry_free": false,
-    "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state sorry_here)"
-  }
+    "statement": "noncomputable def homologySequenceδ [F.ShiftSequence ℤ] (T : Triangle C) (n₀ n₁ : ℤ) (h : n₀ + 1 = n₁) : (F.shift n₀).obj T.obj₃ ⟶ (F.shift n₁).obj T.obj₁",
+    "branch": "mathlib",
+    "by": "L",
+    "date": "2026-10-11",
+    "existing": true,
+    "note": "Lead note 2026-10-11 10:16 UTC L (via B-1015): record switched from the specialised Weil-sheaf result AlgebraicGeometry.WeilSheaf.exists_exact_higherLowerShriek_of_openClosed (WeilConjectures.DeligneLaumon.Reduction.FormalSteps) to the node's mathlib_match: with `Functor.ShiftSequence.tautological` and `[F.IsHomological]`, the connecting map is `homologySequenceδ` (HomologicalFunctor.lean:174), its naturality `homologySequenceδ_naturality` (:182), exactness `homologySequence_exact₂/₃/₁` (:218/:227/:235); names read in the pinned Mathlib 0df444a360."
+  },
+  "lead_note": "2026-10-11 10:16 UTC L (via B-1015): lean record switched from AlgebraicGeometry.WeilSheaf.exists_exact_higherLowerShriek_of_openClosed to the mathlib_match (Functor.homologySequenceδ and the exactness/naturality lemmas), on the lead's instruction."
 }
