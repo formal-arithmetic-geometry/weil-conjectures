@@ -587,4 +587,27 @@ theorem finrank_eq_of_coe_eq (M : (Spec R).Modules) (p : Submodule R Γ(M, ⊤))
 
 end Scheme.Modules
 
+section AssociatedSections
+
+open TensorProduct
+
+variable {A B : CommRingCat.{u}} [Algebra A B] (M : Type u) [AddCommGroup M] [Module B M]
+  [Module A M] [IsScalarTower A B M]
+
+/-- **Sections of an associated sheaf over a localization.** Let `A → B` be a ring map, `M` a
+`B`-module and `a ∈ A`. The open subscheme `Spec (B ⊗_A A_a)` of `Spec B` is the basic open
+`D(a)`, and the sections of the associated quasi-coherent sheaf `M~` over it are
+`M ⊗_A A_a`, compatibly with `m ↦ 1 ⊗ m`.
+
+(blueprint: `pqf-lem-associated-sections-localize`) -/
+theorem exists_addEquiv_tilde_sections_basicOpen_tensor (a : A) :
+    ∃ e : ((modulesSpecToSheaf.obj (tilde (ModuleCat.of B M))).presheaf.obj
+        (.op (PrimeSpectrum.basicOpen (algebraMap A B a)))) ≃+
+      Localization.Away a ⊗[A] M,
+      ∀ m : M, e ((tilde.toOpen (ModuleCat.of B M)
+        (PrimeSpectrum.basicOpen (algebraMap A B a))).hom m) = 1 ⊗ₜ m :=
+  sorry
+
+end AssociatedSections
+
 end AlgebraicGeometry
