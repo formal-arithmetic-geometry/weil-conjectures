@@ -22,7 +22,8 @@
   "def-pc-scheme",
   "def-pc-derived-category",
   "def-pc-derived-direct-image",
-  "lem-pc-derived-direct-image-preserves-qcoh"
+  "lem-pc-derived-direct-image-preserves-qcoh",
+  "def-pc-derived-open-restriction-maps"
  ],
  "proof": [
   {
@@ -168,5 +169,22 @@
    "decls": [],
    "missing": []
   }
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.DerivedMayerVietorisTriangle",
+  "declaration": "AlgebraicGeometry.schemeDerived_mayerVietoris_triangle",
+  "file": "lean/Sheaf/AlgebraicGeometry/DerivedMayerVietorisTriangle.lean",
+  "statement": "theorem schemeDerived_mayerVietoris_triangle (X : Scheme.{u₁}) [CompactSpace X] [QuasiSeparatedSpace X] (U V : X.Opens) (hU : IsCompact (U : Set X)) (hV : IsCompact (V : Set X)) (hcover : U ⊔ V = ⊤) [HasDerivedCategory.{w₁} (SheafOfModules.{u₁} (moduleRings X.toRingedSpace))] [HasDerivedCategory.{w₁} (SheafOfModules.{u₁} (moduleRings U.toScheme.toRingedSpace))] [HasDerivedCategory.{w₁} (SheafOfModules.{u₁} (moduleRings V.toScheme.toRingedSpace))] [HasDerivedCategory.{w₁} (SheafOfModules.{u₁} (moduleRings (U ⊓ V).toScheme.toRingedSpace))] (E : schemeDerivedCategory X) (hE : schemeDerivedQCohProperty X E) : ∃ (adjU : (schemeOpenRestriction X U).mapDerivedCategory ⊣ schemeDerivedDirectImage U.ι) (adjV : (schemeOpenRestriction X V).mapDerivedCategory ⊣ schemeDerivedDirectImage V.ι) (adjUV : (schemeOpenRestriction X (U ⊓ V)).mapDerivedCategory ⊣ schemeDerivedDirectImage (U ⊓ V).ι) (δ : (schemeDerivedDirectImage (U ⊓ V).ι).obj ((schemeOpenRestriction X (U ⊓ V)).mapDerivedCategory.obj E) ⟶ E⟦(1 : ℤ)⟧), Triangle.mk (biprod.lift (adjU.unit.app E) (adjV.unit.app E)) (biprod.desc (schemeDerivedOpenDirectImageRestriction X (homOfLE inf_le_left) adjU adjUV E) (-(schemeDerivedOpenDirectImageRestriction X (homOfLE inf_le_right) adjV adjUV E))) δ ∈ distTriang (schemeDerivedCategory X) ∧ schemeDerivedQCohProperty X ((schemeDerivedDirectImage U.ι).obj ((schemeOpenRestriction X U).mapDerivedCategory.obj E)) ∧ schemeDerivedQCohProperty X ((schemeDerivedDirectImage V.ι).obj ((schemeOpenRestriction X V).mapDerivedCategory.obj E)) ∧ schemeDerivedQCohProperty X ((schemeDerivedDirectImage (U ⊓ V).ι).obj ((schemeOpenRestriction X (U ⊓ V)).mapDerivedCategory.obj E))",
+  "branch": "sheaf-dag",
+  "by": "U1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-dmv",
+  "group": "U1",
+  "result": "pass"
  }
 }

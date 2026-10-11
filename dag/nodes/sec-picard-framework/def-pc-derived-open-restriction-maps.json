@@ -1,0 +1,121 @@
+{
+ "id": "def-pc-derived-open-restriction-maps",
+ "kind": "definition",
+ "title": "Canonical derived restriction maps for nested open subschemes",
+ "status": "split",
+ "statement": "Let $X$ be a scheme [def-pc-scheme] and let $W\\subseteq U$ be open subschemes. On the derived module categories [def-pc-derived-category], let $r_U:D(\\mathcal O_X)\\to D(\\mathcal O_U)$ be exact restriction, encoded by SheafOfModules.overFunctor followed by Scheme.Modules.overEquiv U, and let $t:D(\\mathcal O_U)\\to D(\\mathcal O_W)$ be restriction between the opens, encoded by the inverse of overEquiv U, overMap for $W\\subseteq U$, and overEquiv W. Let $\\alpha:t\\circ r_U\\xrightarrow{\\sim}r_W$ be the canonical composition isomorphism induced by the unit isomorphism of overEquiv U and overFunctorMap. For adjunctions $a_U:r_U\\dashv Rj_{U*}$ and $a_W:r_W\\dashv Rj_{W*}$ with the derived direct images of [def-pc-derived-direct-image], define $\\rho_{U,W}(E):Rj_{U*}r_U(E)\\to Rj_{W*}r_W(E)$ to be the $a_W$-adjoint of the composite $r_W(Rj_{U*}r_U(E))\\xrightarrow{\\alpha^{-1}}t(r_U(Rj_{U*}r_U(E)))\\xrightarrow{t(\\epsilon_U)}t(r_U(E))\\xrightarrow{\\alpha}r_W(E)$, where $\\epsilon_U$ is the counit of $a_U$. The exactness instances for overFunctor and overMap are those of [lem-sc-derived-hom-mayer-vietoris].",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "def-pc-derived-direct-image",
+  "lem-sc-derived-hom-mayer-vietoris"
+ ],
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 08BV, the restriction maps between the three derived direct-image terms; exact open restriction and its canonical composition identifications"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "derived restriction functor to an open subset and its composition isomorphism",
+   "results": "UNAVAILABLE 0 hit(s) | service unavailable: Internal Server Error",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "canonical restriction map between derived direct images from nested open subschemes",
+   "results": "8 hits: Scheme.homOfLE_appLE, Scheme.Hom.resLE_appLE, morphismRestrict_app, morphismRestrict_appLE, Scheme.Hom.map_resLE, Scheme.Hom.resLE_map, Scheme.homOfLE_app, Scheme.Hom.resLE; none defines the derived direct-image restriction map.",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.overFunctorMap",
+   "results": "1 hit: SheafOfModules.overFunctorMap, the underived over-site composition isomorphism used in the definition.",
+   "date": "2026-10-11",
+   "verdict": "ingredient, not the derived adjoint restriction map"
+  },
+  {
+   "tool": "grep",
+   "query": "schemeOpenRestriction|schemeDerivedOpenDirectImageRestriction|derived.*[Rr]estriction.*[Cc]omp; Mathlib, WeilConjectures, lean/Sheaf; blueprint_refs.py search \"derived open restriction\"; rg restriction.*open|open.*restriction dag/nodes",
+   "results": "No existing declaration for these composites or the adjoint direct-image restriction map. DerivedOpenGluing.lean writes the canonical composite inline. DerivedHomMayerVietoris defines over-site Hom restriction, not this map. blueprint_refs: 0 blueprint nodes match. DAG restriction nodes concern shriek adjunction, K-injective restriction, or base change, not the definition of the direct-image restriction arrow.",
+   "date": "2026-10-11",
+   "verdict": "no matching node or declaration"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-pc-derived-mayer-vietoris-triangle",
+  "date": "2026-10-11",
+  "group": "U1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "derived Mayer–Vietoris gluing over a union of two quasi-compact opens",
+   "via": [
+    "lem-pc-derived-mayer-vietoris-triangle",
+    "lem-pc-perfect-complexes-compact-set",
+    "lem-pc-derived-qcoh-compact-generation",
+    "lem-pc-noetherian-derived-direct-image-right-adjoint",
+    "lem-sc-proper-upper-shriek-composition",
+    "lem-sc-finite-duality-trace"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.DerivedOpenRestrictionMaps",
+  "declaration": "AlgebraicGeometry.schemeDerivedOpenDirectImageRestriction",
+  "file": "lean/Sheaf/AlgebraicGeometry/DerivedOpenRestrictionMaps.lean",
+  "statement": "def schemeDerivedOpenDirectImageRestriction (X : Scheme.{u}) {W U : X.Opens} (i : W ⟶ U) [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))] [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace))] [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings W.toScheme.toRingedSpace))] (adjU : (schemeOpenRestriction X U).mapDerivedCategory ⊣ schemeDerivedDirectImage U.ι) (adjW : (schemeOpenRestriction X W).mapDerivedCategory ⊣ schemeDerivedDirectImage W.ι) (E : schemeDerivedCategory X) : (schemeDerivedDirectImage U.ι).obj ((schemeOpenRestriction X U).mapDerivedCategory.obj E) ⟶ (schemeDerivedDirectImage W.ι).obj ((schemeOpenRestriction X W).mapDerivedCategory.obj E)",
+  "branch": "sheaf-dag",
+  "by": "U1",
+  "date": "2026-10-11",
+  "existing": false,
+  "declarations": [
+   "AlgebraicGeometry.schemeOpenRestriction",
+   "AlgebraicGeometry.schemeOpenRestriction_preservesFiniteLimits",
+   "AlgebraicGeometry.schemeOpenRestriction_preservesFiniteColimits",
+   "AlgebraicGeometry.schemeOpenRestriction_additive",
+   "AlgebraicGeometry.schemeOpenOverlapRestriction",
+   "AlgebraicGeometry.schemeOpenOverlapRestriction_preservesFiniteLimits",
+   "AlgebraicGeometry.schemeOpenOverlapRestriction_preservesFiniteColimits",
+   "AlgebraicGeometry.schemeOpenOverlapRestriction_additive",
+   "AlgebraicGeometry.schemeOpenRestrictionCompIso",
+   "AlgebraicGeometry.schemeDerivedOpenRestrictionCompIso",
+   "AlgebraicGeometry.schemeDerivedOpenDirectImageRestriction"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-dmv",
+  "group": "U1",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-dmv",
+  "group": "U1",
+  "result": "pass"
+ }
+}
