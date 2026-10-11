@@ -5135,3 +5135,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 15:06 L: merged deliver/Q1/prop-weil-pbc-grothendieck-existence (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.GrothendieckExistence AlgebraicGeometry.grothendieck_existence)
 - 15:06 L: merged deliver/S1/thm-galois-abstract-equivalence (stage 2; reviewer PASS; first push; Sheaf.CategoryTheory.Galois.AbstractEquivalence CategoryTheory.stacksGalois_functorToContAction_isEquivalence)
 - 15:06 L: merged deliver/J1/def-weil-pbc-conormal-sheaf-formally-unramified (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.FormallyUnramifiedConormal AlgebraicGeometry.formallyUnramifiedConormal)
+- 15:06 L: merged deliver/P1/lem-weil-pbc-zero-dim-integral-point (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.ZeroDimIntegralPoint AlgebraicGeometry.isIso_structure_of_integral_zero_dim)
