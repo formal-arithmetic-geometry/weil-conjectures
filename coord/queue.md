@@ -1,11 +1,11 @@
 # Work queue
 
-523 items; claim with `tools/claim.py next <group> [--stage N]`.
+520 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (523)
+## Stage 2: nodes to state (520)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -36,7 +36,6 @@
 | `lem-pc-zero-support-finite-scheme` | 1 | state |
 | `lem-sc-affine-cap-section-open-dictionary` | 1 | state |
 | `lem-sc-affine-section-localization` | 1 | state |
-| `lem-sc-ample-ideal-section` | 1 | state |
 | `lem-sc-ass-weakass-fg-stalk` | 1 | state |
 | `lem-sc-base-change-curve` | 1 | state |
 | `lem-sc-complex-lift-class-projective` | 1 | state |
@@ -47,7 +46,6 @@
 | `lem-sc-finite-free-complex-homology-upper-semicontinuous` | 1 | state |
 | `lem-sc-finite-locally-free-residue-isomorphism` | 1 | state |
 | `lem-sc-hilb-dominating-power` | 1 | state |
-| `lem-sc-hilb-to-pic-surjective` | 1 | state |
 | `lem-sc-hilbert-difference` | 1 | state |
 | `lem-sc-hilbert-embedded-points-gluing` | 1 | state |
 | `lem-sc-invertible-tensor-qcoherent` | 1 | state |
@@ -55,7 +53,6 @@
 | `lem-sc-local-splitting-finite-free` | 1 | state |
 | `lem-sc-meromorphic-weakass-generic-product` | 1 | state |
 | `lem-sc-numerical-polynomial-leading-term` | 1 | state |
-| `lem-sc-p1-ext-coherent-dim-one-vanishing` | 1 | state |
 | `lem-sc-p1-invertible-section-localization` | 1 | state |
 | `lem-sc-p1-section-clearing-denominators-qcqs` | 1 | state |
 | `lem-sc-p1-section-restriction-s-torsion` | 1 | state |
