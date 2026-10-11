@@ -3714,3 +3714,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 07:54 L: merged deliver/G1/lem-sc-finite-length-global-submodule (stage 2; reviewer PASS; first push; Sheaf.RingTheory.FiniteLengthGlobalSubmodule Submodule.length_quotSMulTop_lt_top_of_ringKrullDim_eq_one)
 - 07:54 L: merged deliver/E1/lem-constructible-constant-exact (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.ConstantEtaleSheafShortExact AlgebraicGeometry.Scheme.constantEtaleSheaf_shortExact)
 - 07:54 L: merged deliver/K1/lem-sc-finite-discrete-separated-affine (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.FiniteDiscreteSeparatedAffine AlgebraicGeometry.isAffine_of_finite_discrete_of_separated)
+- 07:54 L: merged deliver/F1/lem-sc-finite-integral-conductor (stage 2; reviewer PASS; first push; Sheaf.RingTheory.FiniteIntegralConductor Subalgebra.exists_jacobson_pow_mul_mem_base)
