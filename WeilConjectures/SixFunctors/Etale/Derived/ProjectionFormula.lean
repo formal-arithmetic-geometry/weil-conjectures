@@ -51,7 +51,8 @@ of `AlgebraicGeometry.Etale.projectionMapOfCompactification` is an isomorphism, 
   `AlgebraicGeometry.Etale.nonempty_iso_derivedTensor_obj_rightDerivedLowerShriek` : where the
   projection formula holds, the projection map is a natural isomorphism in either variable.
 - `AlgebraicGeometry.Etale.hasProjectionFormula_id`,
-  `AlgebraicGeometry.Etale.nonempty_iso_rightDerivedLowerShriek_comp`,
+  `AlgebraicGeometry.Etale.nonempty_iso_rightDerivedLowerShriek_comp` (in
+  `WeilConjectures.SixFunctors.Etale.Derived.LowerShriekComp`),
   `AlgebraicGeometry.Etale.hasProjectionFormula_comp`,
   `AlgebraicGeometry.Etale.hasProjectionFormulaOfCompactification_iff`
   (`sk-prop-sf-pf-coherence`) : the coherence of the projection formula.
@@ -346,19 +347,6 @@ end Coherence
 section TorsionCoherence
 
 variable (Λ : Type (u + 1)) [CommRing Λ] {X Y Z : Scheme.{u}}
-
-/-- Blueprint `sk-prop-sf-pf-coherence`: Coherence of the projection formula.
-
-The composition law `R(f ≫ g)_! ≅ Rf_! ⋙ Rg_!` of the compactly supported direct image, for
-torsion coefficients. Comparing the chosen compactification of `f ≫ g` with the one assembled
-from compactifications of `f` and `g` uses the independence of the compactification and
-compact-support base change for the open immersion of the compactification of `g` along the
-proper map of that of `f`; both rest on proper base change, which needs torsion coefficients. -/
-theorem nonempty_iso_rightDerivedLowerShriek_comp [Finite Λ] (f : X ⟶ Y) (g : Y ⟶ Z)
-    [HasCompactification f] [HasCompactification g] [HasCompactification (f ≫ g)] :
-    Nonempty (R(f ≫ g)_![ModuleCat.{u + 1} Λ] ≅
-      R(f)_![ModuleCat.{u + 1} Λ] ⋙ R(g)_![ModuleCat.{u + 1} Λ]) :=
-  sorry
 
 /-- Blueprint `sk-prop-sf-pf-coherence`: Coherence of the projection formula.
 
