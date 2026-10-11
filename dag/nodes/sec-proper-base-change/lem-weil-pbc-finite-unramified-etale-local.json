@@ -182,5 +182,24 @@
   "item": "lem-weil-pbc-finite-unramified-etale-local",
   "worker": "stage1",
   "summary": "Statement corrected: the clause kappa(x) = kappa(u) is not in Stacks 04HJ (which gives only an etale neighbourhood; its proof goes through 04HI/04HH/02LM, and 02LM uses a Galois extension of kappa(s)) and is false: for Y = Spec C -> X = Spec R (finite etale) any etale (U,u) with kappa(u) = R has the point of Y_U over u with residue field C, so the piece through it cannot be a closed immersion into U; dropped it with def-weil-residue-field from stmt_deps (the only citer, lem-weil-pbc-finite-etale-etale-local-split, states it does not use that clause). Proof in five steps following 04HJ: finite fibre and separatedness (new Mathlib leaf lem-weil-pbc-finite-closed-map-finite-fibres), 04HI (new unsplit node lem-weil-pbc-unramified-etale-local-decomposition) giving Y_U = W + coprod V_ij with no point of W over u, closedness of pr_2(W) (finite base change, existing leaf; finite => closed map), shrinking U to U minus pr_2(W) with the open fibre product identification written out, and the closed immersions over U' by base change. Mathlib re-searched with the three kinds (no scheme-level statement)."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FiniteUnramifiedEtaleLocal",
+  "declaration": "AlgebraicGeometry.exists_etale_closed_immersion_decomposition_of_finite_unramified",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteUnramifiedEtaleLocal.lean",
+  "statement": "theorem exists_etale_closed_immersion_decomposition_of_finite_unramified {X Y : Scheme.{u}} (f : Y ⟶ X) [IsFinite f] [LocallyOfFiniteType f] [IsOpenImmersion (pullback.diagonal f)] (x : X) : ∃ (U : Scheme.{u}) (g : U ⟶ X) (u : U), Etale g ∧ g.base u = x ∧ ∃ (J : Type u) (V : J → Scheme.{u}) (ι : ∀ j, V j ⟶ pullback f g), Finite J ∧ Nonempty (IsColimit (Cofan.mk (pullback f g) ι)) ∧ (∀ j, IsOpenImmersion (ι j) ∧ IsClosedImmersion (ι j)) ∧ (∀ j, IsClosedImmersion (ι j ≫ pullback.snd f g))",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-fue1028"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-fue1028",
+  "group": "F1",
+  "result": "fix",
+  "note": "Y,X schemes, f:Y→X; finite=[IsFinite f]; unramified=[LocallyOfFiniteType f][IsOpenImmersion (pullback.diagonal f)] (recorded def-weil-unramified-morphism); x:X; Etale g, g.base u = x, no residue-field equality; finite J:Type u, clopen pieces ι j open+closed immersions with IsColimit (Cofan.mk (pullback f g) ι) = disjoint cover (J1 8bd3b3d6d spelling, replacing Fin n opens form); ι j ≫ pullback.snd f g closed immersion; J empty allowed"
  }
 }
