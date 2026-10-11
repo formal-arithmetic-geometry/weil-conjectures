@@ -210,5 +210,23 @@
   "worker": "stage1",
   "summary": "Split following Stacks 00NT (algebra.tex line 25800): induction on d with the claim quantified over all regular local rings of dimension d; base d = 0 (R a field, vector space free: new leaf lem-weil-pbc-vector-space-free, 09FN); step: x = first element of a regular system of parameters, R/xR regular of dim d-1 (00NQ, existing node); M is Cohen-Macaulay with dim Supp M = d (00LK, existing node) and dim(Supp M ∩ V(x)) = d-1 (upper bound from dim R/xR, lower bound from new leaf lem-weil-pbc-support-dimension-quotient-element-bound = 0B52 second inequality, Mathlib Module.supportDim_le_supportDim_quotSMulTop_succ); x is M-regular and depth(M/xM) = d-1 by the new unsplit node lem-weil-pbc-cm-module-good-element-nonzerodivisor (00N5, the c = 1 case of 00N6 that Stacks cites); depth over R/xR = depth over R written out from the definitions; M free by new leaf lem-weil-pbc-free-mod-nonzerodivisor (00NS, Mathlib Module.free_quotSMulTop_iff_free). Statement kept; def-weil-pbc-free-module added to stmt_deps (the conclusion 'free'). The Stacks proof leaves implicit that M ≠ 0, that the depth of M/xM over R/xR equals its depth over R, and the dimension hypothesis of 00N6; these are written out."
  },
- "reviewed": "Reviewed by L 2026-10-10: faithful to Algebra 00NT (induction on dim R with x a generator of m; R/xR regular by 00NQ; the dimension hypothesis of 00N5 checked via 00LK and the 0B52 leaf; x M-regular and depth drop by 00N5 (new unsplit node); depth over R/xR = depth over R written out; M free by 00NS (new leaf)). Three new Mathlib leaves. No Mathlib match for the item (no Cohen-Macaulay in Mathlib)."
+ "reviewed": "Reviewed by L 2026-10-10: faithful to Algebra 00NT (induction on dim R with x a generator of m; R/xR regular by 00NQ; the dimension hypothesis of 00N5 checked via 00LK and the 0B52 leaf; x M-regular and depth drop by 00N5 (new unsplit node); depth over R/xR = depth over R written out; M free by 00NS (new leaf)). Three new Mathlib leaves. No Mathlib match for the item (no Cohen-Macaulay in Mathlib).",
+ "lean": {
+  "module": "Sheaf.RingTheory.RegularLocalMaximalCohenMacaulayFree",
+  "declaration": "IsRegularLocalRing.free_of_depth_eq_ringKrullDim",
+  "file": "lean/Sheaf/RingTheory/RegularLocalMaximalCohenMacaulayFree.lean",
+  "statement": "theorem free_of_depth_eq_ringKrullDim (R : Type u) [CommRing R] [IsRegularLocalRing R] (M : Type v) [AddCommGroup M] [Module R M] [Module.Finite R M] (d : ℕ) (hdim : ringKrullDim R = (d : WithBot ℕ∞)) (hdepth : IsLocalRing.depth (R := R) M = (d : ℕ∞)) : Module.Free R M ∧ ∃ r : ℕ, Nonempty (M ≃ₗ[R] (Fin r →₀ R))",
+  "branch": "sheaf-dag",
+  "by": "M1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-mcm",
+  "group": "M1",
+  "result": "pass",
+  "note": "IsRegularLocalRing R (local, Noetherian, explicit R as RegularLocalFiniteGlobalDimension); M finite (Module.Finite), Type v independent; dim d via ringKrullDim = d; MCM as depth M = d (node's equality, as J1's landed MCM kernel form); conclusion Free and M ≃ Fin r →₀ R; M=0 excluded by depth ∞; d=0 admitted"
+ }
 }
