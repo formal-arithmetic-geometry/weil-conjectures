@@ -1,11 +1,11 @@
 # Work queue
 
-397 items; claim with `tools/claim.py next <group> [--stage N]`.
+394 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (397)
+## Stage 2: nodes to state (394)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -20,10 +20,8 @@
 | `lem-pc-perfect-generation-koszul-orthogonal` | 1 | state |
 | `lem-pc-perfect-generation-open-induction-step` | 1 | state |
 | `lem-pc-perfect-generator-exists` | 1 | state |
-| `lem-pc-perfect-object-compact` | 1 | state |
 | `lem-pc-perfect-pseudo-coherent-locally-finite-tor` | 1 | state |
 | `lem-pc-perfect-tensor-hom-duality` | 1 | state |
-| `lem-pc-perfect-thick-closure` | 1 | state |
 | `lem-pc-pseudo-coherent-finite-tor-perfect` | 1 | state |
 | `lem-pc-supported-perfect-generator` | 1 | state |
 | `lem-pc-tor-independent-perfect-pullback-comparison` | 1 | state |
@@ -61,7 +59,6 @@
 | `lem-weil-pbc-closed-immersion-conormal-flat-base-change` | 1 | state |
 | `lem-weil-pbc-pair-henselization` | 1 | state |
 | `lem-weil-pbc-projective-space-functor-of-points` | 1 | state |
-| `lem-weil-pbc-purely-inseparable-pth-root-tower` | 1 | state |
 | `lem-weil-pbc-quasi-coherent-algebra-colimit` | 1 | state |
 | `lem-weil-pbc-quasi-coherent-finite-type-affine` | 1 | state |
 | `lem-weil-pbc-quasi-coherent-ideal-zero-set-affine` | 1 | state |
