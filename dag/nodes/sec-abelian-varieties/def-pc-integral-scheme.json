@@ -1,100 +1,100 @@
 {
-  "id": "def-pc-integral-scheme",
-  "blueprint": {
-    "is": null,
-    "from": {
-      "node": "def-pc-geometrically-irreducible",
-      "place": "its statement (a notion the statement uses)",
-      "via": []
-    },
-    "same_as": null
+ "id": "def-pc-integral-scheme",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-pc-geometrically-irreducible",
+   "place": "its statement (a notion the statement uses)",
+   "via": []
   },
-  "kind": "definition",
-  "title": "Integral scheme",
-  "statement": "Let $X$ be a scheme [def-pc-scheme]. $X$ is *integral* if it is nonempty and for every nonempty affine open $U=\\operatorname{Spec}(R)\\subseteq X$ [def-weil-affine-spectrum] the ring $R$ is an integral domain. Equivalently, $X$ is nonempty, reduced [def-pc-reduced-scheme] and irreducible [def-weil-irreducible-components].",
-  "source": {
-    "document": "literature/stacks-project/properties.tex",
-    "place": "Definition Tag 01OK (properties-definition-integral); the equivalence is Lemma Tag 01ON (properties-lemma-characterize-integral)"
+  "same_as": null
+ },
+ "kind": "definition",
+ "title": "Integral scheme",
+ "statement": "Let $X$ be a scheme [def-pc-scheme]. $X$ is *integral* if it is nonempty and for every nonempty affine open $U=\\operatorname{Spec}(R)\\subseteq X$ [def-weil-affine-spectrum] the ring $R$ is an integral domain. Equivalently, $X$ is nonempty, reduced [def-pc-reduced-scheme] and irreducible [def-weil-irreducible-components].",
+ "source": {
+  "document": "literature/stacks-project/properties.tex",
+  "place": "Definition Tag 01OK (properties-definition-integral); the equivalence is Lemma Tag 01ON (properties-lemma-characterize-integral)"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-affine-spectrum",
+  "def-pc-reduced-scheme",
+  "def-weil-irreducible-components"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "grep -n '^class IsIntegral\\|theorem isIntegral_iff_irreducibleSpace_and_isReduced\\|theorem affine_isIntegral_iff\\|instance irreducibleSpace_of_isIntegral\\|isReduced_of_isIntegral' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Properties.lean",
+   "results": "class IsIntegral (X : Scheme) : Prop with fields nonempty : Nonempty X and component_integral : ∀ (U : X.Opens) [Nonempty U], IsDomain Γ(X, U) (Properties.lean:240); isIntegral_iff_irreducibleSpace_and_isReduced (:307); affine_isIntegral_iff (:334): IsIntegral (Spec R) ↔ IsDomain R; instances isReduced_of_isIntegral (:249), irreducibleSpace_of_isIntegral (:264)",
+   "date": "2026-10-09",
+   "verdict": "match"
   },
-  "stmt_deps": [
-    "def-pc-scheme",
-    "def-weil-affine-spectrum",
-    "def-pc-reduced-scheme",
-    "def-weil-irreducible-components"
-  ],
-  "proof": [],
-  "proof_deps": [],
-  "proof_origin": null,
-  "mathlib_searches": [
-    {
-      "tool": "grep",
-      "query": "grep -n '^class IsIntegral\\|theorem isIntegral_iff_irreducibleSpace_and_isReduced\\|theorem affine_isIntegral_iff\\|instance irreducibleSpace_of_isIntegral\\|isReduced_of_isIntegral' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Properties.lean",
-      "results": "class IsIntegral (X : Scheme) : Prop with fields nonempty : Nonempty X and component_integral : ∀ (U : X.Opens) [Nonempty U], IsDomain Γ(X, U) (Properties.lean:240); isIntegral_iff_irreducibleSpace_and_isReduced (:307); affine_isIntegral_iff (:334): IsIntegral (Spec R) ↔ IsDomain R; instances isReduced_of_isIntegral (:249), irreducibleSpace_of_isIntegral (:264)",
-      "date": "2026-10-09",
-      "verdict": "match"
-    },
-    {
-      "tool": "leansearch",
-      "query": "integral scheme: nonempty and sections over every nonempty open are integral domain",
-      "results": "AlgebraicGeometry.IsIntegral, IsIntegral.mk, IsIntegral.component_integral, isIntegral_of_isAffine_of_isDomain (Mathlib.AlgebraicGeometry.Properties)",
-      "date": "2026-10-09",
-      "verdict": "match"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "integral scheme is reduced and irreducible",
-      "results": "isIntegral_iff_irreducibleSpace_and_isReduced, isIntegral_of_irreducibleSpace_of_isReduced, isReduced_of_isIntegral (Mathlib.AlgebraicGeometry.Properties)",
-      "date": "2026-10-09",
-      "verdict": "match (the node's 'equivalently' clause)"
-    },
-    {
-      "tool": "grep",
-      "query": "rg -n '^class IsIntegral|theorem isIntegral_iff_irreducibleSpace_and_isReduced|theorem affine_isIntegral_iff' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Properties.lean",
-      "results": "class IsIntegral (line 240: Nonempty X and ∀ U [Nonempty U], IsDomain Γ(X, U)), isIntegral_iff_irreducibleSpace_and_isReduced (line 307), affine_isIntegral_iff (line 334)",
-      "date": "2026-10-09",
-      "verdict": "confirmed: Mathlib's condition is over all nonempty opens; the node's 'nonempty, reduced and irreducible' is exactly isIntegral_iff_irreducibleSpace_and_isReduced, so the leaf holds by one Mathlib lemma"
-    }
-  ],
-  "mathlib_match": {
-    "declaration": "AlgebraicGeometry.IsIntegral",
-    "file": "Mathlib/AlgebraicGeometry/Properties.lean",
-    "how": "specializes in one line: Mathlib asks `Γ(X, U)` to be a domain for every nonempty open `U` (line 240), not only affine ones; both agree with 'nonempty, reduced and irreducible' by `isIntegral_iff_irreducibleSpace_and_isReduced` (line 307) and Stacks 01ON, and on affine opens by `affine_isIntegral_iff` (line 334)"
+  {
+   "tool": "leansearch",
+   "query": "integral scheme: nonempty and sections over every nonempty open are integral domain",
+   "results": "AlgebraicGeometry.IsIntegral, IsIntegral.mk, IsIntegral.component_integral, isIntegral_of_isAffine_of_isDomain (Mathlib.AlgebraicGeometry.Properties)",
+   "date": "2026-10-09",
+   "verdict": "match"
   },
-  "status": "mathlib",
-  "merged_into": null,
-  "created": {
-    "by": "worker",
-    "item": "def-pc-geometrically-irreducible",
-    "date": "2026-10-09"
+  {
+   "tool": "leanfinder",
+   "query": "integral scheme is reduced and irreducible",
+   "results": "isIntegral_iff_irreducibleSpace_and_isReduced, isIntegral_of_irreducibleSpace_of_isReduced, isReduced_of_isIntegral (Mathlib.AlgebraicGeometry.Properties)",
+   "date": "2026-10-09",
+   "verdict": "match (the node's 'equivalently' clause)"
   },
-  "lean_audit": {
-    "master": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    },
-    "slopmaster2": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    }
-  },
-  "chapter": "sec-abelian-varieties",
-  "unit": "sk-def-av-jacobian",
-  "reviewed": {
-    "date": "2026-10-09",
-    "by": "L",
-    "result": "pass",
-    "note": "Mathlib leaf created by the split of def-pc-geometrically-irreducible; the match was verified by the lead against the Mathlib source at that item's review"
-  },
-  "lean": {
-    "module": "Mathlib.AlgebraicGeometry.Properties",
-    "declaration": "AlgebraicGeometry.IsIntegral",
-    "statement": "class IsIntegral (X : Scheme) : Prop",
-    "branch": "mathlib",
-    "by": "L",
-    "date": "2026-10-11",
-    "existing": true,
-    "note": "Fields: Nonempty X and IsDomain Γ(X, U) for every nonempty open U, which is the node's definition (affine opens suffice; Mathlib also has isIntegral_iff_irreducibleSpace_and_isReduced for the stated equivalence). Names checked with #check in an L sandbox; recorded by a T-leaves bookkeeping agent of L."
+  {
+   "tool": "grep",
+   "query": "rg -n '^class IsIntegral|theorem isIntegral_iff_irreducibleSpace_and_isReduced|theorem affine_isIntegral_iff' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Properties.lean",
+   "results": "class IsIntegral (line 240: Nonempty X and ∀ U [Nonempty U], IsDomain Γ(X, U)), isIntegral_iff_irreducibleSpace_and_isReduced (line 307), affine_isIntegral_iff (line 334)",
+   "date": "2026-10-09",
+   "verdict": "confirmed: Mathlib's condition is over all nonempty opens; the node's 'nonempty, reduced and irreducible' is exactly isIntegral_iff_irreducibleSpace_and_isReduced, so the leaf holds by one Mathlib lemma"
   }
+ ],
+ "mathlib_match": {
+  "declaration": "AlgebraicGeometry.IsIntegral",
+  "file": "Mathlib/AlgebraicGeometry/Properties.lean",
+  "how": "specializes in one line: Mathlib asks `Γ(X, U)` to be a domain for every nonempty open `U` (line 240), not only affine ones; both agree with 'nonempty, reduced and irreducible' by `isIntegral_iff_irreducibleSpace_and_isReduced` (line 307) and Stacks 01ON, and on affine opens by `affine_isIntegral_iff` (line 334)"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "def-pc-geometrically-irreducible",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-def-av-jacobian",
+ "reviewed": {
+  "date": "2026-10-09",
+  "by": "L",
+  "result": "pass",
+  "note": "Mathlib leaf created by the split of def-pc-geometrically-irreducible; the match was verified by the lead against the Mathlib source at that item's review"
+ },
+ "lean": {
+  "module": "Mathlib.AlgebraicGeometry.Properties",
+  "declaration": "AlgebraicGeometry.IsIntegral",
+  "statement": "class IsIntegral (X : Scheme) : Prop",
+  "branch": "mathlib",
+  "by": "L",
+  "date": "2026-10-11",
+  "existing": true,
+  "note": "Fields: Nonempty X and IsDomain Γ(X, U) for every nonempty open U, which is the node's definition (affine opens suffice; Mathlib also has isIntegral_iff_irreducibleSpace_and_isReduced for the stated equivalence). Names checked with #check in an L sandbox; recorded by a T-leaves bookkeeping agent of L."
+ }
 }
