@@ -130,5 +130,24 @@
   "group": "E1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-rdc2209 (reviewer sub-agent of L); spot-checked: Short adjoint-uniqueness route as Stacks 0D5T and the scheme node e6a8c4b1e: adjoint-general (079W) gives the three adjunctions, ringed-space pullback-composition (0D5S) transports, lem-cat-right-adjoint-composition with F=Lg^*, G=Lf^* gives (G F)^! = Rg_* Rf_*, orientation checked; no new nodes, nothing restated, scheme node not cited. FIX more, RETURN less: stmt_deps had the three proof lemmas added though the statement cites only the two defs; restored stmt_deps to [def-weil-locally-ringed-space-morphism, def-pc-ringed-spaces-derived-direct-image] (proof_deps unchanged).; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.RingedSpaceDerivedDirectImageComposition",
+  "declaration": "AlgebraicGeometry.RingedSpace.exists_derivedModuleDirectImageComposition",
+  "file": "lean/Sheaf/AlgebraicGeometry/RingedSpaceDerivedDirectImageComposition.lean",
+  "statement": "theorem exists_derivedModuleDirectImageComposition {X Y Z : RingedSpace.{u}} [HasDerivedCategory.{wX} (SheafOfModules.{u} (moduleRings X))] [HasDerivedCategory.{wY} (SheafOfModules.{u} (moduleRings Y))] [HasDerivedCategory.{wZ} (SheafOfModules.{u} (moduleRings Z))] (f : X ⟶ Y) (g : Y ⟶ Z) : ∃ e : derivedModuleDirectImage f ⋙ derivedModuleDirectImage g ≅ derivedModuleDirectImage (f ≫ g), ∀ K : HomotopyCategory (SheafOfModules.{u} (moduleRings X)) (ComplexShape.up ℤ), (moduleDirectImage (f ≫ g)).rightDerivedFunctorUnit.app K ≫ e.inv.app (DerivedCategory.Qh.obj K) = (moduleDirectImage g).rightDerivedFunctorUnit.app (((moduleDirectImage f).mapHomotopyCategory (ComplexShape.up ℤ)).obj K) ≫ (derivedModuleDirectImage g).map ((moduleDirectImage f).rightDerivedFunctorUnit.app K)",
+  "branch": "sheaf-dag",
+  "by": "U1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-dic"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-dic",
+  "group": "U1",
+  "result": "fix",
+  "note": "statement vs node clause by clause: three RingedSpace.{u}, f ≫ g, landed derivedModuleDirectImage (G1 8dfd8dad2, unchanged), orientation Rf ⋙ Rg ≅ R(f≫g); canonicity = e.inv pinned by the right-derived units (unique by IsRightDerivedFunctor; agrees with upstream rightDerivedFunctorCompUnit); FIX: dependency module RingedSpaceMorphism (abbrev ringedSpaceHom := X ⟶ Y) was a second spelling of the RingedSpace hom the landed derivedModuleDirectImage already uses, and rewrote the record of def-weil-locally-ringed-space-morphism (46 citers) — reverted, module left out, item states f : X ⟶ Y; reverted the delivery's change of existing node(s) def-weil-locally-ringed-space-morphism (--revert-nodes; kept as on sheaf-dag)"
  }
 }
