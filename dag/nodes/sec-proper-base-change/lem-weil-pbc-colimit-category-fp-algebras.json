@@ -155,5 +155,23 @@
   "group": "F1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of F1; spot-checked by L: 05N9 (2),(3): base-changed target as a colimit over the cofinal upper set, maps from a finitely presented algebra descend (05N8), equality descends on generators"
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.ColimitCategoryFpAlgebras",
+  "declaration": "RingHom.exists_map_of_finitePresentation_colimit",
+  "file": "lean/Sheaf/RingTheory/ColimitCategoryFpAlgebras.lean",
+  "statement": "theorem exists_map_of_finitePresentation_colimit {Λ : Type u} [Preorder Λ] [IsDirected Λ (· ≤ ·)] (F : Λ ⥤ CommRingCat.{v}) [HasColimit F] (i : Λ) (A : Type w) (A' : Type z) [CommRing A] [CommRing A'] [Algebra (F.obj i) A] [Algebra (F.obj i) A'] [Algebra.FinitePresentation (F.obj i) A] [Algebra.FinitePresentation (F.obj i) A'] : let S := F.obj i let R := colimit F letI : Algebra S R := (colimit.ι F i).hom.toAlgebra letI : Algebra R (A ⊗[S] R) := Algebra.TensorProduct.rightAlgebra letI : Algebra R (A' ⊗[S] R) := Algebra.TensorProduct.rightAlgebra (∀ u : (A ⊗[S] R) →ₐ[R] (A' ⊗[S] R), ∃ (μ : Λ) (h : i ≤ μ), letI : Algebra S (F.obj μ) := (F.map (homOfLE h)).hom.toAlgebra let t : F.obj μ →ₐ[S] R := { (colimit.ι F μ).hom with commutes' := fun s ↦ congrArg (fun f : F.obj i ⟶ colimit F ↦ f s) (colimit.w F (homOfLE h)) } letI : Algebra (F.obj μ) (A ⊗[S] (F.obj μ)) := Algebra.TensorProduct.rightAlgebra letI : Algebra (F.obj μ) (A' ⊗[S] (F.obj μ)) := Algebra.TensorProduct.rightAlgebra ∃ uμ : (A ⊗[S] (F.obj μ)) →ₐ[F.obj μ] (A' ⊗[S] (F.obj μ)), ∀ x : A ⊗[S] (F.obj μ), Algebra.TensorProduct.map (AlgHom.id S A') t (uμ x) = u (Algebra.TensorProduct.map (AlgHom.id S A) t x)) ∧ (∀ v w : A →ₐ[S] A', Algebra.TensorProduct.map v (AlgHom.id S R) = Algebra.TensorProduct.map w (AlgHom.id S R) → ∃ (μ : Λ) (h : i ≤ μ), letI : Algebra S (F.obj μ) := (F.map (homOfLE h)).hom.toAlgebra Algebra.TensorProduct.map v (AlgHom.id S (F.obj μ)) = Algebra.TensorProduct.map w (AlgHom.id S (F.obj μ)))",
+  "branch": "sheaf-dag",
+  "by": "G1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-ccf0937",
+  "group": "G1",
+  "result": "pass",
+  "note": "directed preorder Λ + F : Λ ⥤ CommRingCat + HasColimit = node's directed system and ring colimit; i, A, A' with Algebra.FinitePresentation (F.obj i) = λ and the two fp R_λ-algebras; rightAlgebra tensors = A_μ, A'_μ, A_R, A'_R; clause (2): ∀u ∃μ≥i ∃uμ with (id⊗t)∘uμ = u∘(id⊗t), equivalent to uμ⊗1_R = u since ι(x)·(1⊗r) span A_R and u is R-linear; clause (3): map v id_R = map w id_R → ∃μ≥i map v id_{R_μ} = map w id_{R_μ}; spellings match F1 6e8479f20; #check and axioms verified"
  }
 }
