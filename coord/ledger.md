@@ -4795,3 +4795,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 13:40 L: merged deliver/M1/lem-weil-pbc-quasi-finite-at-prime-permanence (stage 2; reviewer PASS; first push; Sheaf.RingTheory.QuasiFiniteAtPrimePermanence Algebra.IsQuasiFiniteAtPrime.of_restrictScalars)
 - 13:40 L: merged deliver/F1/lem-sc-smooth-proper-diagonal-koszul-regular (stage 2; reviewer FIX; first push; Sheaf.AlgebraicGeometry.SmoothDiagonalKoszulRegular AlgebraicGeometry.smooth_diagonal_koszul_regular_perfect_proper)
 - 13:40 L: merged deliver/C1/lem-weil-pbc-projective-space-functor-of-points (stage 2; reviewer FIX; first push; Sheaf.AlgebraicGeometry.ProjectiveSpaceFunctorOfPoints AlgebraicGeometry.projectiveSpace_functor_of_points)
+- 13:41 L: merged deliver/H1/lem-sc-perfect-jump-loci (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.PerfectJumpLoci AlgebraicGeometry.Scheme.pseudoCoherent_jump_loci; new nodes: def-sc-derived-fiber-betti)

@@ -23,7 +23,8 @@
   "def-pc-scheme",
   "def-pur-pseudo-coherent-complex",
   "def-pc-derived-category",
-  "def-pc-perfect-complex"
+  "def-pc-perfect-complex",
+  "def-sc-derived-fiber-betti"
  ],
  "proof": [
   {
@@ -135,5 +136,23 @@
   "group": "G1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-pjl0000 (reviewer sub-agent of L); spot-checked: Statement vs Tag 0BDI (pseudo-coherent hypothesis, 3 clauses) OK; Step 1 truncation sigma_{>=i-1} preserves H^i of fibres, termwise pullback cite OK; tool_use lem-pc-flat-complex-derived-pullback accepted as generic; no duplicate (grep jump/semicontin/rank/minor/0BDI; lem-pc-perfect-locus, residue-model 0BCD are different); LeanFinder minors-locus query: no match. FIX more, RETURN less: (1) C4: Step 3 derived local constructibility of level sets from mere openness of {b_i<r}, which fails on non-Noetherian affines (opens need not be retrocompact); strengthened the new unsplit node to say {b_i<r} is a finite union of principal opens D(f) (true by minors), and Step 3 now cites it, with Stacks 054D (qc opens of affine retrocompact) and 005G, elementary:false; (2) E: base-change clause now states the field-extension flatness argument giving dim over kappa(y) = beta_i(x).; 2 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.PerfectJumpLoci",
+  "declaration": "AlgebraicGeometry.Scheme.pseudoCoherent_jump_loci",
+  "file": "lean/Sheaf/AlgebraicGeometry/PerfectJumpLoci.lean",
+  "statement": "theorem pseudoCoherent_jump_loci (X : Scheme.{uX}) [HasDerivedCategory.{wX} (SheafOfModules.{uX} (moduleRings X.toRingedSpace))] [∀ U : X.Opens, HasDerivedCategory.{wX} (SheafOfModules.{uX} ((moduleRings X.toRingedSpace).over U))] [∀ x : X, HasDerivedCategory.{wX} (SheafOfModules.{uX} (moduleRings (Spec (X.residueField x)).toRingedSpace))] (E : schemeDerivedCategory X) (hE : IsPseudoCoherent X E) (i : ℤ) : (∀ (Y : Scheme.{uX}) [HasDerivedCategory.{wX} (SheafOfModules.{uX} (moduleRings Y.toRingedSpace))] [∀ y : Y, HasDerivedCategory.{wX} (SheafOfModules.{uX} (moduleRings (Spec (Y.residueField y)).toRingedSpace))] (g : Y ⟶ X) (y : Y), derivedFiberBetti Y ((derivedPullback g).obj E) i y = derivedFiberBetti X E i (g y)) ∧ UpperSemicontinuous (derivedFiberBetti X E i) ∧ ∀ r : ℕ, Topology.IsLocallyConstructible {x : X | derivedFiberBetti X E i x = r}",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-pjl1540",
+  "group": "H1",
+  "result": "pass",
+  "note": "X:Scheme.{uX}; E:schemeDerivedCategory X + IsPseudoCoherent (perfect only the node's example, no IsPerfect hyp); i:ℤ; β_i = finrank_{κ(x)} of global sections over ⊤ of homologyFunctor i of derivedPullback (X.fromSpecResidueField x) E via ΓSpecIso.inv (C1/E1 fibre form); base change ∀ Y:Scheme.{uX} g y, β'(y)=β(g y); UpperSemicontinuous (= {β<r} open); ∀ r:ℕ IsLocallyConstructible level set; no let/show/existentials; HasDerivedCategory binders only; new def node fields per STAGE 2 EXTRA NODES, no landed duplicate (residueFiber is the module fibre); sandbox compile of both modules clean"
  }
 }

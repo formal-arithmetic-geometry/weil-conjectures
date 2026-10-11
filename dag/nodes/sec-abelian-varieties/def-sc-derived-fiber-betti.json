@@ -1,0 +1,103 @@
+{
+ "id": "def-sc-derived-fiber-betti",
+ "kind": "definition",
+ "title": "Cohomology and Betti numbers of derived residue-field fibres",
+ "status": "split",
+ "statement": "Let $X$ be a scheme [def-pc-scheme], $E\\in D(\\mathcal O_X)$ [def-pc-derived-category], $i\\in\\mathbf Z$ and $x\\in X$. Let $i_x:\\operatorname{Spec}\\kappa(x)\\to X$ be the canonical residue-field morphism. Define the derived-fibre cohomology vector space as the global sections on $\\operatorname{Spec}\\kappa(x)$ of the degree-$i$ cohomology sheaf of $Li_x^*E$, where derived pullback is [def-pc-derived-pullback]; its scalar action is transported along $\\Gamma(\\operatorname{Spec}\\kappa(x),\\mathcal O)\\cong\\kappa(x)$. Define $\\beta_i(E,x)$ to be its finite rank over $\\kappa(x)$, equal to its dimension when finite dimensional, and zero otherwise (Mathlib finrank convention).",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "def-pc-derived-pullback"
+ ],
+ "source": {
+  "document": "Stacks Project, Derived Categories of Schemes",
+  "place": "Tag 0BDI, Lemma 36.31.1, definition of beta_i"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "dimension cohomology derived fibre of a scheme complex",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "dimension cohomology derived fibre of a scheme complex",
+   "results": "8 hits: CategoryTheory.Sheaf.cohomologyPresheaf, CategoryTheory.Sheaf.H, CategoryTheory.Sheaf.instAddCommGroupH, IsLocalRing.finrank_cotangentSpace_eq_zero, CategoryTheory.Sheaf.cohomologyPresheafFunctor, Algebra.IsStandardSmoothOfRelativeDimension.rank_kaehlerDifferential, AlgebraicGeometry.Scheme.Modules.instAbelian, Algebra.SubmersivePresentation.rank_kaehlerDifferential",
+   "date": "2026-10-11",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "derivedFiber|derivedFibre|fiberBetti|fibreBetti",
+   "results": "0 hits: ",
+   "date": "2026-10-11",
+   "verdict": "no exact match"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sc-perfect-jump-loci",
+  "date": "2026-10-11",
+  "group": "H1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-theorem-of-cube",
+   "place": "The fibre dimensions used in the jump-loci lemma for the theorem-of-the-cube loci.",
+   "via": [
+    "lem-sc-perfect-jump-loci",
+    "lem-sc-perfect-h0-locally-closed",
+    "lem-sc-picard-diagonal-locally-closed",
+    "lem-sc-general-theorem-of-cube"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.DerivedFiberBetti",
+  "declaration": "AlgebraicGeometry.Scheme.derivedFiberBetti",
+  "file": "lean/Sheaf/AlgebraicGeometry/DerivedFiberBetti.lean",
+  "statement": "def derivedFiberBetti (X : Scheme.{u}) [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))] [∀ x : X, HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings (Spec (X.residueField x)).toRingedSpace))] (E : schemeDerivedCategory X) (i : ℤ) (x : X) : ℕ",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-11",
+  "existing": false,
+  "declarations": [
+   "AlgebraicGeometry.Scheme.derivedFiberCohomology",
+   "AlgebraicGeometry.Scheme.derivedFiberBetti"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-pjl1540",
+  "group": "H1",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-pjl1540",
+  "group": "H1",
+  "result": "pass",
+  "note": "X:Scheme.{uX}; E:schemeDerivedCategory X + IsPseudoCoherent (perfect only the node's example, no IsPerfect hyp); i:ℤ; β_i = finrank_{κ(x)} of global sections over ⊤ of homologyFunctor i of derivedPullback (X.fromSpecResidueField x) E via ΓSpecIso.inv (C1/E1 fibre form); base change ∀ Y:Scheme.{uX} g y, β'(y)=β(g y); UpperSemicontinuous (= {β<r} open); ∀ r:ℕ IsLocallyConstructible level set; no let/show/existentials; HasDerivedCategory binders only; new def node fields per STAGE 2 EXTRA NODES, no landed duplicate (residueFiber is the module fibre); sandbox compile of both modules clean"
+ }
+}
