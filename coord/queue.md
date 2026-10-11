@@ -1,11 +1,11 @@
 # Work queue
 
-1015 items; claim with `tools/claim.py next <group> [--stage N]`.
+1012 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (1015)
+## Stage 2: nodes to state (1012)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -42,16 +42,14 @@
 | `lem-exc-rg-open-stabilizer-adjoint` | 1 | state |
 | `lem-fin-dense-normal-open` | 1 | state |
 | `lem-galois-aut-profinite` | 1 | state |
-| `lem-galois-axioms` | 1 | state |
 | `lem-galois-constant-sheaf-sets-representable` | 1 | state |
 | `lem-galois-descent` | 1 | state |
 | `lem-galois-descent-datum-diagonal-identity` | 1 | state |
 | `lem-galois-fpqc-descend-etale` | 1 | state |
-| `lem-galois-fpqc-descend-open-immersion` | 1 | state |
 | `lem-galois-fpqc-morphisms-descend` | 1 | state |
 | `lem-galois-fpqc-pullback-canonical-iso` | 1 | state |
-| `lem-galois-fpqc-singleton-affine-refinement` | 1 | state |
 | `lem-galois-fpqc-singleton-fully-faithful-0241` | 1 | state |
+| `lem-galois-object-exists` | 1 | state |
 | `lem-galois-transitive` | 1 | state |
 | `lem-kun-closed-point-field` | 1 | state |
 | `lem-kun-fg-separable-smooth` | 1 | state |
@@ -62,7 +60,6 @@
 | `lem-pc-affine-finite-type-algebra` | 1 | state |
 | `lem-pc-affine-flat-module-descent` | 1 | state |
 | `lem-pc-affine-flat-module-local-criterion` | 1 | state |
-| `lem-pc-affine-flat-module-localization-preserves-flatness` | 1 | state |
 | `lem-pc-affine-nonzerodivisor-complement-dense` | 1 | state |
 | `lem-pc-affine-surjective-structure-map-closed-immersion` | 1 | state |
 | `lem-pc-affine-tilde-kflat` | 1 | state |
@@ -1025,7 +1022,7 @@
 | `lem-sc-normalization-properties` | 3 | state |
 | `def-nagata-fixed-base-separated-stage` | 6 | state |
 
-Not open yet: 1154 nodes that wait for a statement dependency, 40 nodes that wait for stage 1.
+Not open yet: 1153 nodes that wait for a statement dependency, 40 nodes that wait for stage 1.
 
 ## Stage 3: modules to prove (0)
 
