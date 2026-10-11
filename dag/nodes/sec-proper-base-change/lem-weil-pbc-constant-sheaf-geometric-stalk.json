@@ -174,5 +174,24 @@
   "by": "L",
   "result": "pass",
   "note": "three steps (stalk of the sheafification = stalk of the presheaf, Stacks 03PT (2) with the full proof in sites 00Y8; the colimit of a constant diagram over the connected N^op; assembly); 2 new Mathlib leaves verified by the lead (Skyscraper.lean:273/282 with pointSmallEtale, Limits/Connected.lean:83, Filtered/Connected.lean:34, Filtered/Basic.lean:955); the source repository isomorphism recorded as a candidate"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ConstantSheafGeometricStalk",
+  "declaration": "AlgebraicGeometry.Scheme.constantSheaf_geometricStalk_isIso",
+  "file": "lean/Sheaf/AlgebraicGeometry/ConstantSheafGeometricStalk.lean",
+  "statement": "theorem constantSheaf_geometricStalk_isIso (T : Scheme.{u}) (E : AddCommGrpCat.{(max u v) + 1}) {Ω : Type u} [Field Ω] [IsAlgClosed Ω] (t : Spec (.of Ω) ⟶ T) : IsIso ((toSheafify T.smallEtaleTopology ((Functor.const T.Etaleᵒᵖ).obj E)).app (op (Etale.mk (𝟙 T))) ≫ (pointSmallEtale t).toPresheafFiber (Etale.mk (𝟙 T)) (Over.homMk t (Category.comp_id t)) ((constantSheaf T.smallEtaleTopology AddCommGrpCat.{(max u v) + 1}).obj E).obj)",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-csg1530"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-csg1530",
+  "group": "E1",
+  "result": "fix",
+  "note": "T scheme; E arbitrary AddCommGrpCat.{max u v+1}; constant presheaf Functor.const, sheaf = constantSheaf (presheafToSheaf), iota_T = toSheafify.app (Etale.mk (𝟙 T)) as F1 ff58882d1; geometric point Ω alg closed, t : Spec Ω ⟶ T; neighbourhood (T,t); stalk = (pointSmallEtale t) fibre (ulift removed, FIX); IsIso of e ↦ germ of iota_T(e); upstream sheafFiberConstantSheafIso is stalk→E iso, not this map: existing false"
  }
 }
