@@ -122,5 +122,23 @@
   "group": "C1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-eld2313 (reviewer sub-agent of L); spot-checked: Statement matches Stacks 07QP and is exactly what step 2 of lem-sc-strict-henselization-dimension uses (R->S etale, q over m, dim S_q = dim R_m). Step 1: etale-flat, flat-local-ring-maps (A_p->B_q flat local), local flat => faithfully flat, then sibling lem-sc-faithfully-flat-local-dimension (going-down via lem-sc-flat-going-down) gives dim A_p <= dim B_q; hypotheses match, no cycle (sibling does not depend on item). Step 2: etale => finite type and quasi-finite at q, then quasi-finite dimension inequality (Algebra 00OM-type) gives dim B_q <= dim A_p; this covers the fibre-dimension-zero part via a cited node (C1 ok). No new nodes, no restatement (class b n/a). Second reading by C1 complete; no missed fault found."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.Etale.LocalDimension",
+  "declaration": "RingHom.Etale.ringKrullDim_localization_eq",
+  "file": "lean/Sheaf/RingTheory/Etale/LocalDimension.lean",
+  "statement": "theorem ringKrullDim_localization_eq {A : Type u} {B : Type v} [CommRing A] [CommRing B] (f : A →+* B) (hf : f.Etale) (q : Ideal B) [q.IsPrime] : ringKrullDim (Localization.AtPrime (Ideal.comap f q)) = ringKrullDim (Localization.AtPrime q)",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-eld1006",
+  "group": "F1",
+  "result": "pass",
+  "note": "commutative rings A,B (indep. universes) / f : A →+* B with f.Etale (Mathlib RingHom.Etale = Algebra.Etale via toAlgebra, Stacks etale) / q prime of B, p = Ideal.comap f q / ringKrullDim (Localization.AtPrime p) = ringKrullDim (Localization.AtPrime q), WithBot ℕ∞ keeps -∞,∞; vacuous for zero rings; source scheme-level Scheme.Hom.coheight_apply_of_flat is not this ring-level form, existing:false right"
  }
 }
