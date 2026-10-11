@@ -1,11 +1,11 @@
 # Work queue
 
-94 items; claim with `tools/claim.py next <group> [--stage N]`.
+93 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (94)
+## Stage 2: nodes to state (93)
 
 | node | distance to Mathlib | kind | blockers |
 |---|---|---|---|
@@ -82,7 +82,6 @@
 | `lem-weil-pbc-cohomology-pullback-derived-unit` | 1 | state | 0 |
 | `lem-weil-pbc-etale-mayer-vietoris-pullback` | 1 | state | 0 |
 | `lem-weil-pbc-formal-functions-complete-base` | 1 | state | 0 |
-| `lem-weil-pbc-formal-systems-graded-vanishing` | 1 | state | 0 |
 | `lem-weil-pbc-formal-systems-proper-support-serre` | 1 | state | 0 |
 | `lem-weil-pbc-gm-strict-henselization-stalk-formula` | 1 | state | 0 |
 | `lem-weil-pbc-grothendieck-existence-devissage` | 1 | state | 0 |
