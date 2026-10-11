@@ -1,34 +1,112 @@
-Files written:
-- `lem-sc-affine-perfect-support-extension` (statement, split; no Mathlib match).
-- `lem-sc-affine-perfect-plus-shift` (statement-only child; no Mathlib match).
-- `lem-sc-perfect-into-support-on-T` (statement-only child; no Mathlib match).
-- `lem-sc-affine-support-iterated-cones` (statement-only child; no Mathlib match).
+## Worker report
 
-Attachments:
-- `lem-sc-affine-perfect-map-lift` is the existing DAG node for Stacks Tag 08EH and is cited in the final step.
+The module `Sheaf.AlgebraicGeometry.AffinePerfectSupportExtension` states
+`AlgebraicGeometry.Scheme.exists_perfect_supported_extension`, with proof `sorry`.
+The node statement is unchanged. I read the statement and proof of Stacks Project
+[Tag 08EK](https://stacks.math.columbia.edu/tag/08EK), Lemma 36.13.10. The local
+literature checkout is absent on this machine, so the official tag was read online.
+The docstring carries all four steps of the DAG proof, naming their dependencies.
 
-WANTED: `literature/stacks-project/perfect.tex` is not present in this checkout; I used the synchronized Stacks source at `/home/ubuntu/c1-stacks-review/perfect.tex` for Tags 08EI, 08EJ, and 08EK.
+Hypothesis and conclusion correspondence:
 
-No statement error was found. The imported item had no proof; its source proof uses three genuine auxiliary results (08EI, 08EJ, and the iterated cone construction), so I recorded them as unsplit child nodes rather than hiding them in an elementary step. The existing 08EH node supplies the required map-lifting statement.
+- Affine scheme X: `(X : Scheme.{u}) [IsAffine X]`.
+- Closed subset T: `(T : Set X) (hT : IsClosed T)`.
+- Quasi-compact complement: `(hTc : IsCompact Tᶜ)`. Mathlib `IsCompact` means
+  finite-subcover compactness, with no Hausdorff assumption, hence quasi-compactness.
+- Quasi-compact open U: `(U : X.Opens) (hU : IsCompact (U : Set X))`.
+- Every object F of D(O_U): `(F : schemeDerivedCategory U.toScheme)`.
+  The derived-category binders for X and U and all their opens are exactly the
+  infrastructure required by the dependency's perfectness definition; they do not
+  impose boundedness, quasi-coherence, or other mathematical hypotheses on F.
+- Perfect F: `(hF : IsPerfect U.toScheme F)`, the recorded definition, without a copy.
+- Cohomology vanishes on U outside T: `hFT` quantifies over every integer n and
+  every point x of U, and says `Subsingleton` of the underlying additive stalk
+  of `(DerivedCategory.homologyFunctor ... n).obj F` when `U.ι x ∉ T`.
+  Points of U already lie in U, so this is precisely U minus (T intersection U).
+- Existence of E in D(O_X): `∃ E : schemeDerivedCategory X`.
+- Perfect E: the first conjunct `IsPerfect X E`.
+- Cohomology of E vanishes outside T: the second conjunct quantifies over all
+  n and x outside T and requires its additive stalk to be `Subsingleton`.
+  For a stalk module this means the zero module, without a spurious `IsZero`
+  instance on its underlying type.
+- E restricted to U is isomorphic to F direct-sum F[1]: the last conjunct is
+  `Nonempty (... ≅ biprod F ((shiftFunctor (schemeDerivedCategory U.toScheme)
+  (1 : ℤ)).obj F))`. Restriction first uses the recorded
+  `SheafOfModules.overFunctor` on the localized open site, then Mathlib's
+  `U.sheafOfModulesEquivOver` transports to sheaves on the open subscheme U.
+  Both are induced on derived categories by `Functor.mapDerivedCategory`.
+  The `show schemeDerivedCategory U.toScheme from ...` annotation fixes the
+  already shared carrier before elaborating the isomorphism; it adds no data.
 
-## Review by J1
+Dependencies read and used:
 
-I read Tag 08EK and the adjacent proofs of Tags 08EI and 08EJ in `perfect.tex`. Step 1 records the finite affine description of the closed support. Step 2 cites 08EI for extending `F` after adjoining `F[1]`, and 08EJ for replacing the equations by powers that annihilate the restriction. Step 3 cites the new iterated-cone statement, which is exactly the source's repeated cone construction and its binomial decomposition on `U`. Step 4 applies the existing 08EH statement to the endomorphism that is zero on the desired `F` summand and identity on the other summands; its quoted clause supplies the perfect source, the isomorphism on `U`, and preservation of support, after which the cone gives the claimed restriction. All hypotheses (affine X, quasi-compact U, closed T with quasi-compact complement, and support of F) were checked against the source. I also ran LeanFinder, Loogle, grep, and LeanSearch for the item and each child; the first three found no matching Mathlib theorem and LeanSearch was unavailable.
+- `def-pc-scheme`: `Mathlib.AlgebraicGeometry.Scheme`, declarations
+  `AlgebraicGeometry.Scheme` and `Scheme.Hom`; also Mathlib's `IsAffine` and
+  `Scheme.Opens.toScheme` for the affine and open clauses.
+- `def-pc-derived-category`: `Sheaf.AlgebraicGeometry.DerivedCategory`,
+  `AlgebraicGeometry.schemeDerivedCategory`; its module and full signature were read.
+- `def-pc-perfect-complex`: `Sheaf.AlgebraicGeometry.PerfectComplex`,
+  `AlgebraicGeometry.Scheme.IsPerfect`; its full local strictly-perfect definition,
+  open-cover quantification, restriction, and docstrings were read.
+- Additional existing interfaces: Mathlib `TopologicalSpace.Opens.sheafOfModulesEquivOver`,
+  `TopCat.Presheaf.stalk`, `DerivedCategory.homologyFunctor`, `Limits.biprod`,
+  and `CategoryTheory.shiftFunctor`. The canonical equivalence's additivity is
+  supplied locally by `Functor.additive_of_preserves_binary_products`.
+  The local derived-category instance on the restricted sheaf is
+  `inferInstanceAs` of the instance already bound for U, not a new choice of D(O_U).
+  No definitions or theorem proofs were added; the two local infrastructure
+  instances are terms of existing Mathlib constructions.
 
-## Not duplicates
+Edge cases checked: X empty, U empty, F zero, T empty, T=X, and U=X are all
+permitted; no `Nonempty` assumption on schemes/opens and no nonzero assumption
+on F is present. When T is empty, hFT forces all stalks of all cohomology to
+vanish. When T=X, both support conditions are vacuous, as in the source. Cohomology
+is quantified over all integers, and the shift is positive one. Universes u and w
+are explicit and shared with the recorded definitions; no independent test-object
+universe or auto-bound implicit is used. No source or node fault was found.
 
-`lem-sc-affine-support-iterated-cones` vs `lem-sc-affine-perfect-support-extension`: the new node is the intermediate cone construction, asserting support and the full binomial shift decomposition for a chosen list of equations; the item asserts existence of a final supported object restricting specifically to `F \\oplus F[1]`.
+Searches for an existing statement (all through the prescribed search tools):
+
+- msearch leanfinder, `perfect complex on affine scheme with closed support extension
+  direct sum shift`: eight hits on generic derived-category cohomological bounds
+  and injective vanishing, none about perfect extension with closed support.
+- msearch loogle, `AlgebraicGeometry.Scheme.IsPerfect, DerivedCategory`: zero hits,
+  unknown identifier `AlgebraicGeometry.Scheme.IsPerfect` in the indexed Mathlib.
+- msearch grep, `affine.*perfect|perfect.*support|support.*extension`,
+  AlgebraicGeometry: zero hits.
+- msearch leansearch, `perfect complex affine extension supported closed subset`:
+  unavailable, Internal Server Error; no verdict is drawn from this search.
+- Local rg for `perfect|Perfect` in upstream WeilConjectures/AlgebraicGeometry
+  found perfect-field material and perfect loci of coherent sheaves, not this theorem.
+- Local rg for `affine.*perfect|perfect.*support|support.*extension` in Mathlib's
+  AlgebraicGeometry, upstream WeilConjectures/AlgebraicGeometry, and lean/Sheaf/
+  AlgebraicGeometry found no matching statement.
+- rg for `lem-sc-affine-perfect-support-extension` throughout upstream
+  WeilConjectures found no declaration.
+- rg for `exists_perfect_supported_extension` in dag/lean_names_upstream.json,
+  Mathlib, and upstream WeilConjectures found no name collision.
+
+Compiler checking: initial interface errors (underlying presheaf projection,
+explicit stalk coefficient category, open-site carrier instance, and isomorphism
+carrier annotation) were fixed without changing the mathematical statement.
+The final server compile is clean (no errors or warnings). The delivery dry run
+printed OK: it compiles and passes preflight except for the independent second
+reading, which is intentionally left to the second reader. Nothing was pushed.
 
 ## Second reading by J1
 
-- Item statement: checked against Stacks Tag 08EK (Lemma 36.13.10), including affine X, quasi-compact U, quasi-compact complement of T, and support; verdict: agrees.
-- Step 1: checked against the first paragraph of Tag 08EK; finite principal-open cover and replacement by powers are valid on an affine; verdict: elementary and valid.
-- Step 2: checked against Tags 08EI and 08EJ; the power-annihilation lemma applies to the identity of F on U; verdict: cited statements supply the claims.
-- Step 3: checked against the cone construction in Tag 08EK; cone perfection, support, and binomial restriction decomposition agree; verdict: valid.
-- Step 4: checked against Tag 08EH and the final paragraph of 08EK; the lifted endomorphism and its cone isolate F\\oplus F[1]; verdict: valid.
-- `lem-sc-affine-perfect-plus-shift`: checked against Tag 08EI and the zero and field cases; verdict: self-contained and unchanged.
-- `lem-sc-perfect-into-support-on-T`: checked against Tag 08EJ and the affine one-term complex case; verdict: support meaning made explicit.
-- `lem-sc-affine-support-iterated-cones`: rechecked the small cases s=0, s=1, and s=2. The prior formula was false already at s=0; it is now corrected to multiplicity `binom(s+1,j)` for `0 <= j <= s+1`, with the additional hypothesis that every `g_i` kills `F|_U`.
-- Existing `lem-sc-affine-perfect-map-lift`: statement read and matches step 4; no new node needed.
+I independently compared the node statement with `AlgebraicGeometry.Scheme.exists_perfect_supported_extension` in `lean/Sheaf/AlgebraicGeometry/AffinePerfectSupportExtension.lean` and with Stacks Tag 08EK (Lemma 36.13.10). The correspondence is exact, item by item:
 
-Changes: removed the unrelated proper-over-base definition dependency, made support mean vanishing of all cohomology sheaves off the closed set, corrected the iterated-cone multiplicities and added the annihilation hypothesis, and made Step 4 explicitly cite support of `C'` from the last clause of 08EH and support of `Cone(gamma)` by the elementary two-of-three property for cohomology sheaves. The worker's Mathlib searches were checked; no declaration matches these scheme-level results.
+- `X` and `[IsAffine X]` render the affine scheme.
+- `T : Set X`, `hT : IsClosed T`, and `hTc : IsCompact Tᶜ` render a closed subset with quasi-compact complement.
+- `U : X.Opens` and `hU : IsCompact (U : Set X)` render a quasi-compact open.
+- `F : schemeDerivedCategory U.toScheme` and `hF : IsPerfect U.toScheme F` render an arbitrary perfect object of `D(O_U)`.
+- `hFT` quantifies over every integer degree and every point of `U.toScheme`, requiring subsingleton stalks whenever `U.ι x ∉ T`; this is support on `T ∩ U`.
+- The conclusion introduces `E : schemeDerivedCategory X`, requires `IsPerfect X E`, and requires subsingleton cohomology stalks at every `x ∉ T`.
+- The final `Nonempty` is an isomorphism after restriction to `U`, via `SheafOfModules.overFunctor` followed by `U.sheafOfModulesEquivOver`, with target `biprod F ((shiftFunctor ... (1 : ℤ)).obj F)`, exactly `F ⊕ F[1]`.
+
+No hypotheses are stronger than the source and no conclusion clause is weakened or strengthened. The explicit derived-category instance binders are infrastructure required by the recorded `schemeDerivedCategory` and `IsPerfect` declarations; they add no mathematical finiteness, boundedness, or nonzero assumptions. The local additive and carrier instances are ordinary interface instances and do not alter the theorem statement. The source proof's four steps (finite principal description, affine extension and annihilation powers, iterated cones, and the lifted map followed by a cone) are recorded in the theorem docstring.
+
+Edge cases checked: empty `X` or `U`, zero `F`, empty `T`, `T = X`, and `U = X` remain admissible; all integer degrees and positive shift one are explicit; universes `u` and `w` are bound and shared with the dependencies. No statement mismatch was found and no repair was needed.
+
+Searches were reviewed against Mathlib, upstream `WeilConjectures`, and `lean/Sheaf` using concept/name grep plus LeanFinder/Loogle/msearch records in the worker report; no existing declaration states this lemma. The module compiles cleanly with `scompile.py`.

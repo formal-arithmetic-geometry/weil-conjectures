@@ -134,5 +134,24 @@
   "group": "J1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-pse2710 (reviewer sub-agent of L); spot-checked: Re-push after R-pse2648 return: both points repaired. lem-sc-affine-support-iterated-cones now true: cone of the zero map X->X is X+X[1] and g_i (natural scalar) is zero on every C_{i-1}|_U once zero on F, so C_s|_U=F tensor(1+[1])^{s+1}; checked s=0 F+F[1], s=1 F+F[1]^2+F[2], s=2 F+F[1]^3+F[2]^3+F[3]; support: C_i vanishes on D(g_i) and later cones keep this, union D(g_i)=X\\T. Step 2: 08EJ node on qcqs U applied to id_F with V(g_i|_U) containing T cap U. Step 4: 08EH node with A=E'=C_s, alpha=0 on the unique F[0] and id elsewhere; C' support from its last clause, Cone(gamma) support by 2-of-3, Cone(gamma)|_U=Cone(alpha)=F+F[1]. Citer lem-sc-perfect-support-map-lift step 2 uses exactly this statement (V affine, T cap V with qc complement, U cap V qc). No restatement of 09IM/09IR Koszul/08EB nodes; 08EI/08EJ tags have no prior nodes. FIX more, RETURN less: B3 lem-sc-affine-support-iterated-cones statement used F (and 'F|_U') before introducing it and hid the U/F hypotheses in a trailing 'whenever'; rewrote it with g_i in A, support claim unconditional, and the U, F, E|_U=F+F[1], g_i F=0 hypotheses stated before the binomial decomposition (mathematics unchanged). Second reading by J1 missed this ordering fault.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AffinePerfectSupportExtension",
+  "declaration": "AlgebraicGeometry.Scheme.exists_perfect_supported_extension",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffinePerfectSupportExtension.lean",
+  "statement": "theorem exists_perfect_supported_extension (X : Scheme.{u}) [IsAffine X] (T : Set X) (hT : IsClosed T) (hTc : IsCompact Tᶜ) (U : X.Opens) (hU : IsCompact (U : Set X)) [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))] [∀ V : X.Opens, HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over V))] [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace))] [∀ V : U.toScheme.Opens, HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings U.toScheme.toRingedSpace).over V))] (F : schemeDerivedCategory U.toScheme) (hF : IsPerfect U.toScheme F) (hFT : ∀ (n : ℤ) (x : U.toScheme), x.val ∉ T → Subsingleton (↑(TopCat.Presheaf.stalk ((DerivedCategory.homologyFunctor (SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace)) n).obj F).val.presheaf x))) : ∃ E : schemeDerivedCategory X, IsPerfect X E ∧ (∀ (n : ℤ) (x : X), x ∉ T → Subsingleton (↑(TopCat.Presheaf.stalk ((DerivedCategory.homologyFunctor (SheafOfModules.{u} (moduleRings X.toRingedSpace)) n).obj E).val.presheaf x))) ∧ Nonempty (((SheafOfModules.overFunctor.{u} (moduleRings X.toRingedSpace) U) ⋙ Equivalence.functor (C := SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U)) (D := SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace)) (Modules.overEquiv U)).mapDerivedCategory.obj E ≅ F ⊞ F⟦(1 : ℤ)⟧)",
+  "branch": "sheaf-dag",
+  "by": "J1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-ase1348"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-ase1348",
+  "group": "J1",
+  "result": "fix",
+  "note": "IsAffine X; T closed, IsCompact Tᶜ; U quasi-compact; F perfect on U via IsPerfect; support hFT/E as stalkwise Subsingleton of every cohomology sheaf (M1 35947b58d form); restriction (overFunctor ⋙ (Modules.overEquiv U).functor).mapDerivedCategory as F1/M1; F ⊞ F⟦1⟧; removed show…from, two local instances, sheafOfModulesEquivOver second restriction"
  }
 }
