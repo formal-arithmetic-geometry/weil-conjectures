@@ -284,26 +284,6 @@ theorem restrictAffineLineZeroLocusHom_affineLineOrientation (v : Y' ⟶ Y) :
 
 variable (Y)
 
-omit [Finite Λ] in
-/-- Every endomorphism `c` of `Λ_{V(t)}` is the pullback `s^♯ h` of an endomorphism `h` of
-`Λ_{𝔸¹_Y}`: through `Y ≅ V(t)`, take for `h` the pullback of `c` along the projection
-`𝔸¹_Y ⟶ Y`, a retraction of the zero section. -/
-lemma exists_constantComplexEndPullback_zeroLocusSubschemeι_eq
-    (c : constantComplex Λ (𝔸(ULift.{u} (Fin 1); Y).zeroLocusSubscheme
-        {AffineSpace.coord Y (ULift.up 0)}) ⟶
-      constantComplex Λ (𝔸(ULift.{u} (Fin 1); Y).zeroLocusSubscheme
-        {AffineSpace.coord Y (ULift.up 0)})) :
-    ∃ h : constantComplex Λ 𝔸(ULift.{u} (Fin 1); Y) ⟶ constantComplex Λ 𝔸(ULift.{u} (Fin 1); Y),
-      constantComplexEndPullback Λ
-        (𝔸(ULift.{u} (Fin 1); Y).zeroLocusSubschemeι {AffineSpace.coord Y (ULift.up 0)}) h = c := by
-  let e := AffineSpace.zeroSectionIsoZeroLocusSubscheme (ULift.{u} (Fin 1)) Y
-    (s := {AffineSpace.coord Y (ULift.up 0)}) Set.range_unique
-  refine ⟨constantComplexEndPullback Λ (𝔸(ULift.{u} (Fin 1); Y) ↘ Y)
-    (constantComplexEndPullback Λ e.hom c), constantComplexEnd_ext fun Ω _ _ x ↦ ?_⟩
-  rw [constantComplexEndPullback_constantComplexEndPullback _ _ e.inv rfl,
-    constantComplexEndPullback_constantComplexEndPullback x e.inv _ rfl,
-    constantComplexEndPullback_constantComplexEndPullback _ e.hom x (by simp)]
-
 set_option maxHeartbeats 3000000 in
 -- the instance arguments of the derived pullbacks along geometric points of the zero locus are
 -- expensive to unify
@@ -341,6 +321,8 @@ theorem affineLineOrientation_hom_ext_of_restrictAffineLineZeroLocusHom
           (𝔸(ULift.{u} (Fin 1); Y).zeroLocusSubschemeι {AffineSpace.coord Y (ULift.up 0)}) h ≫
             affineLineOrientation Λ Y := fun φ' ↦ by
     obtain ⟨h, hh⟩ := exists_constantComplexEndPullback_zeroLocusSubschemeι_eq Λ Y
+      (ULift.{u} (Fin 1))
+      (s := {AffineSpace.coord Y (ULift.up 0)}) Set.range_unique
       (φ' ≫ inv (affineLineOrientation Λ Y))
     exact ⟨h, by rw [hh, Category.assoc, IsIso.inv_hom_id, Category.comp_id]⟩
   obtain ⟨h₁, rfl⟩ := key φ

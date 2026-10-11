@@ -31,6 +31,7 @@ product* `- ⊗ᴸ -`, the total left derived functor of `- ⊗ -` in two variab
 - `AlgebraicGeometry.Etale.derivedTensorRight` : tensoring on the right with a fixed
   complex, `K ↦ K ⊗ᴸ N`, and `AlgebraicGeometry.Etale.derivedTensorRightFunctor`, the same
   construction read as a functor of `N`.
+- `AlgebraicGeometry.Etale.derivedTensorHom` : the tensor product `f ⊗ g` of two morphisms.
 
 ## Main results
 
@@ -133,6 +134,30 @@ instance isLeftDerivedFunctor₂_derivedTensor :
       (HomotopyCategory.quasiIso (Sheaf X.smallEtaleTopology A) (ComplexShape.up ℤ))
       (HomotopyCategory.quasiIso (Sheaf X.smallEtaleTopology A) (ComplexShape.up ℤ)) :=
   DerivedCategory.isLeftDerivedFunctor₂CurriedTensor (Sheaf X.smallEtaleTopology A)
+
+variable {X} in
+/-- The tensor product `f ⊗ g` of two morphisms of `D(X_ét)`. -/
+noncomputable def derivedTensorHom
+    {K K₁ M M₁ : DerivedCategory (Sheaf X.smallEtaleTopology A)} (f : K ⟶ K₁) (g : M ⟶ M₁) :
+    ((derivedTensor A X).obj K).obj M ⟶ ((derivedTensor A X).obj K₁).obj M₁ :=
+  ((derivedTensor A X).map f).app M ≫ ((derivedTensor A X).obj K₁).map g
+
+variable {A X} in
+/-- Composition of tensor products of morphisms. -/
+@[reassoc]
+lemma derivedTensorHom_comp
+    {K K₁ K₂ M M₁ M₂ : DerivedCategory (Sheaf X.smallEtaleTopology A)}
+    (f : K ⟶ K₁) (g : M ⟶ M₁) (f' : K₁ ⟶ K₂) (g' : M₁ ⟶ M₂) :
+    derivedTensorHom A f g ≫ derivedTensorHom A f' g' = derivedTensorHom A (f ≫ f') (g ≫ g') := by
+  simp only [derivedTensorHom, Category.assoc, Functor.map_comp, NatTrans.comp_app]
+  rw [((derivedTensor A X).map f').naturality_assoc g]
+
+variable {A X} in
+/-- Tensor product of identities. -/
+@[simp]
+lemma derivedTensorHom_id (K M : DerivedCategory (Sheaf X.smallEtaleTopology A)) :
+    derivedTensorHom A (𝟙 K) (𝟙 M) = 𝟙 _ := by
+  simp [derivedTensorHom]
 
 section Linear
 

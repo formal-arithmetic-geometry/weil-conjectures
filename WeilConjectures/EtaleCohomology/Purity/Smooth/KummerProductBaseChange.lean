@@ -58,22 +58,12 @@ lemma leftDerivedUpperStar_map_eqToHom_shift_comp_commShiftIso_hom (e : U' ⟶ U
 
 /-- Shifting a morphism across an equation of shift amounts. -/
 @[reassoc]
-lemma eqToHom_comp_shift_map {X X' Y : DerivedCategory (Sheaf U'.smallEtaleTopology
+private lemma eqToHom_comp_shift_map {X X' Y : DerivedCategory (Sheaf U'.smallEtaleTopology
       (ModuleCat.{u + 1} Λ))} (hX : X = X') {n n' : ℤ} (h : n = n') (f : X' ⟶ Y) :
     (eqToHom (by rw [hX, h]) : X⟦n⟧ ⟶ X'⟦n'⟧) ≫ f⟦n'⟧' =
       (eqToHom hX ≫ f)⟦n⟧' ≫ eqToHom (by rw [h]) := by
   subst hX h
   simp
-
-/-- `K⟦a⟧ ⊗ M⟦b⟧ ≅ (K ⊗ M)⟦a + b⟧` is natural in both factors. -/
-@[reassoc]
-lemma derivedTensorHom_shift_comp_derivedTensorShiftIso_hom {X : Scheme.{u}}
-    {K K' M M' : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
-    (f : K ⟶ K') (g : M ⟶ M') (a b : ℤ) :
-    derivedTensorHom _ (f⟦a⟧') (g⟦b⟧') ≫ (derivedTensorShiftIso _ K' M' a b).hom =
-      (derivedTensorShiftIso _ K M a b).hom ≫ (derivedTensorHom _ f g)⟦a + b⟧' := by
-  simp only [derivedTensorHom, Category.assoc, Functor.map_comp]
-  rw [derivedTensorShiftIso_hom_naturality_right, derivedTensorShiftIso_hom_naturality_left_assoc]
 
 section Twist
 
@@ -152,13 +142,6 @@ lemma leftDerivedUpperStarTateShiftIso_comp {U₂ : Scheme.{u}} (e₁ : U₂ ⟶
 
 end Twist
 
-/-- Tensor product of identities. -/
-@[simp]
-lemma derivedTensorHom_id {X : Scheme.{u}}
-    (K M : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
-    derivedTensorHom _ (𝟙 K) (𝟙 M) = 𝟙 _ := by
-  simp [derivedTensorHom]
-
 section Kummer
 
 variable [Finite Λ] [HasKummerClass Λ]
@@ -209,14 +192,6 @@ lemma constantComplexDiagonal_comp_derivedTensorHom (e : U' ⟶ U) :
     reassoc_of% hc', leftDerivedUpperStar_map_eqToHom_twistObject_assoc Λ e (add_zero 0).symm]
   simp only [Iso.inv_hom_id_assoc, derivedTensorHom_comp]
   rfl
-
-/-- Closed subschemes cut out by global sections pull back to the closed subschemes cut out by the
-pulled back sections. -/
-lemma exists_isPullback_zeroLocusSubschemeι (e : U' ⟶ U) (s : Set Γ(U, ⊤))
-    (s' : Set Γ(U', ⊤)) (hs : e.appTop '' s = s') :
-    ∃ g, IsPullback g (U'.zeroLocusSubschemeι s') (U.zeroLocusSubschemeι s) e := by
-  subst hs
-  exact ⟨_, isPullback_zeroLocusSubschemeι e s⟩
 
 /-- Restriction of supports across an equation of twists. -/
 lemma restrictSupportedClass_comp_eqToHom (e : U' ⟶ U) {Z Z' : Scheme.{u}} (i : Z ⟶ U)
@@ -272,8 +247,8 @@ theorem restrictSupportedClass_kummerBoundaryProduct (e : U' ⟶ U) :
     refine restrictSupportedClass_liftCounitOfRangeEqUniv _ e _ _ _ _ g hg _ _ _ _ ?_
     exact leftDerivedUpperStarConstantComplexIso_inv_comp_map_twistObjectZeroIso_inv Λ e _
   | n + 1, f, f', hf, g, hg => by
-    obtain ⟨g₁, hg₁⟩ := exists_isPullback_zeroLocusSubschemeι e {f 0} {f' 0} (by simp [hf])
-    obtain ⟨g₂, hg₂⟩ := exists_isPullback_zeroLocusSubschemeι e (Set.range (Fin.tail f))
+    have hg₁ := isPullback_zeroLocusSubschemeι e {f 0} {f' 0} (by simp [hf])
+    have hg₂ := isPullback_zeroLocusSubschemeι e (Set.range (Fin.tail f))
       (Set.range (Fin.tail f')) (by
         ext x
         simp only [Set.mem_image, Set.mem_range, Fin.tail]
@@ -283,7 +258,7 @@ theorem restrictSupportedClass_kummerBoundaryProduct (e : U' ⟶ U) :
         · rintro ⟨a, rfl⟩
           exact ⟨_, ⟨a, rfl⟩, hf _⟩)
     have ih := restrictSupportedClass_kummerBoundaryProduct e (Fin.tail f) (Fin.tail f')
-      (fun a ↦ hf _) g₂ hg₂
+      (fun a ↦ hf _) _ hg₂
     rw [kummerBoundaryProduct, kummerBoundaryProduct,
       restrictSupportedClass_comp_eqToHom Λ e _ _ g hg (by push_cast; ring)]
     congr 1
@@ -296,12 +271,12 @@ theorem restrictSupportedClass_kummerBoundaryProduct (e : U' ⟶ U) :
         rw [leftDerivedUpperStar_map_shiftTateObjectAddIso]
         simp only [derivedTensorHom, Iso.trans_hom, Iso.app_hom, Functor.mapIso_hom,
           Category.assoc]; rfl),
-      restrictSupportedClass_cupWithSupports _ e _ _ _ _ _ _ _ _ g₁ g₂ g hg₁ hg₂ hg _ _ _ _ _
+      restrictSupportedClass_cupWithSupports _ e _ _ _ _ _ _ _ _ _ _ g hg₁ hg₂ hg _ _ _ _ _
         (constantComplexDiagonal_comp_derivedTensorHom Λ e), ih]
     · congr 3
       erw [restrictSupportedClass_shiftSupportedClass]
       congr 1
-      exact kummerBoundary_baseChange_of_eq Λ e (f 0) (f' 0) (hf 0) g₁ hg₁
+      exact kummerBoundary_baseChange_of_eq Λ e (f 0) (f' 0) (hf 0) _ hg₁
     · rw [Fin.range_fin_succ, range_zeroLocusSubschemeι_insert]
 
 end Kummer

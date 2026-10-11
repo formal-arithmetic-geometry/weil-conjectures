@@ -76,6 +76,24 @@ lemma derivedTensorShiftIso_hom_naturality_right
     Iso.symm_hom, Iso.app_inv, Category.assoc]
   rw [← reassoc_of% h₁, ← Functor.map_comp_assoc, h₂, Functor.map_comp_assoc, h₃]
 
+/-- `K⟦a⟧ ⊗ᴸ M⟦b⟧ ≅ (K ⊗ᴸ M)⟦a + b⟧` is natural in both factors:
+```
+  K⟦a⟧ ⊗ᴸ M⟦b⟧ -------> (K ⊗ᴸ M)⟦a + b⟧
+       |                       |
+  f⟦a⟧ ⊗ g⟦b⟧             (f ⊗ g)⟦a + b⟧
+       v                       v
+  K'⟦a⟧ ⊗ᴸ M'⟦b⟧ -----> (K' ⊗ᴸ M')⟦a + b⟧
+```
+-/
+@[reassoc]
+lemma derivedTensorHom_shift_comp_derivedTensorShiftIso_hom
+    {K K' M M' : DerivedCategory (Sheaf X.smallEtaleTopology A)}
+    (f : K ⟶ K') (g : M ⟶ M') (a b : ℤ) :
+    derivedTensorHom A (f⟦a⟧') (g⟦b⟧') ≫ (derivedTensorShiftIso A K' M' a b).hom =
+      (derivedTensorShiftIso A K M a b).hom ≫ (derivedTensorHom A f g)⟦a + b⟧' := by
+  simp only [derivedTensorHom, Category.assoc, Functor.map_comp]
+  rw [derivedTensorShiftIso_hom_naturality_right, derivedTensorShiftIso_hom_naturality_left_assoc]
+
 end
 
 section

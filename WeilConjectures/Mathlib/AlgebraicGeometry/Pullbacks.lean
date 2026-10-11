@@ -11,6 +11,7 @@ public import WeilConjectures.Mathlib.CategoryTheory.Limits.Shapes.Pullback.IsPu
 public import WeilConjectures.Mathlib.RingTheory.TensorProduct.Basic
 
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
+public import Mathlib.AlgebraicGeometry.PullbackCarrier
 public import Mathlib.AlgebraicGeometry.Pullbacks
 public import Mathlib.Tactic.CategoryTheory.Reassoc
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme
@@ -647,5 +648,15 @@ lemma Scheme.pullback_fst_toSpecΓ_appTop {U : Scheme.{u}} {R : CommRingCat.{u}}
   rw [reassoc_of% e]
 
 end PullbackSpec
+
+/-- Two points of a pair of schemes over a common base with the same image come from a point of
+any pullback of the pair. -/
+lemma _root_.CategoryTheory.IsPullback.exists_scheme_point {P A B C : Scheme.{u}} {fst : P ⟶ A}
+    {snd : P ⟶ B} {f : A ⟶ C} {g : B ⟶ C} (h : IsPullback fst snd f g) (a : A) (b : B)
+    (hab : f a = g b) : ∃ p, fst p = a ∧ snd p = b := by
+  obtain ⟨p, hp₁, hp₂⟩ := Scheme.Pullback.exists_preimage_pullback a b hab
+  refine ⟨h.isoPullback.inv p, ?_, ?_⟩
+  · rw [← Scheme.Hom.comp_apply, IsPullback.isoPullback_inv_fst, hp₁]
+  · rw [← Scheme.Hom.comp_apply, IsPullback.isoPullback_inv_snd, hp₂]
 
 end AlgebraicGeometry

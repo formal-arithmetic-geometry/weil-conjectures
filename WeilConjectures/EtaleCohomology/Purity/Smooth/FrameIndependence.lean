@@ -9,6 +9,7 @@ public import WeilConjectures.EtaleCohomology.Purity.Smooth.KummerProductBaseCha
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.ThomClass
 public import WeilConjectures.SixFunctors.Etale.Derived.InvertibleRestriction
 public import WeilConjectures.AlgebraicGeometry.AffineSpace.ZeroSection
+public import WeilConjectures.Mathlib.LinearAlgebra.Matrix.Ideal
 public import WeilConjectures.SixFunctors.Etale.Derived.TensorStructure
 
 /-!
@@ -48,23 +49,6 @@ namespace AlgebraicGeometry
 
 open Scheme
 
-/-- Multiplying a vector by an invertible matrix does not change the ideal its entries span. -/
-lemma Ideal.span_range_mulVec_of_isUnit_det {R : Type*} [CommRing R] {c : ℕ}
-    (M : Matrix (Fin c) (Fin c) R) (hM : IsUnit M.det) (v : Fin c → R) :
-    Ideal.span (Set.range (M.mulVec v)) = Ideal.span (Set.range v) := by
-  have key : ∀ (N : Matrix (Fin c) (Fin c) R) (w : Fin c → R),
-      Ideal.span (Set.range (N.mulVec w)) ≤ Ideal.span (Set.range w) := by
-    intro N w
-    rw [Ideal.span_le]
-    rintro _ ⟨a, rfl⟩
-    simp only [Matrix.mulVec, dotProduct]
-    exact Ideal.sum_mem _ fun b _ ↦ Ideal.mul_mem_left _ _ (Ideal.subset_span ⟨b, rfl⟩)
-  refine le_antisymm (key M v) ?_
-  have : v = M⁻¹.mulVec (M.mulVec v) := by
-    rw [Matrix.mulVec_mulVec, Matrix.nonsing_inv_mul _ hM, Matrix.one_mulVec]
-  conv_lhs => rw [this]
-  exact key _ _
-
 /-- Closed subschemes cut out by sets of sections spanning the same ideal agree. -/
 lemma Scheme.exists_isPullback_zeroLocusSubschemeι_of_span_eq {U : Scheme.{u}}
     {s s' : Set Γ(U, ⊤)} (h : Ideal.span s = Ideal.span s') :
@@ -82,7 +66,12 @@ noncomputable def matrixCoord :
   fun a b ↦ AffineSpace.coord S (ULift.up (a, b))
 
 /-- The general linear group `GL_{c,S}`: the open of `𝔸^{c × c}_S` where the determinant is
-invertible. -/
+invertible.
+
+The repository also has `AlgebraicGeometry.GeneralLinearGroup` (`𝔾𝕃(n; k)`), a group scheme over
+an affine base `Spec k`. Here the base `S` is an arbitrary scheme, and only the scheme together
+with its universal matrix and identity section is needed, not the group structure, so the
+relative open model inside `𝔸^{c × c}_S` is used. -/
 noncomputable def generalLinearOpen : 𝔸(ULift.{u} (Fin c × Fin c); S).Opens :=
   𝔸(ULift.{u} (Fin c × Fin c); S).basicOpen (matrixCoord c S).det
 
@@ -227,22 +216,6 @@ namespace Etale
 
 variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] [HasKummerClass Λ]
 
-omit [Finite Λ] in
-/-- Every endomorphism of `Λ` on the zero locus of the coordinates of affine space is pulled back
-from the affine space. -/
-lemma exists_constantComplexEndPullback_zeroLocusSubschemeι_eq' (n : Type u) (Y : Scheme.{u})
-    {s : Set Γ(𝔸(n; Y), ⊤)} (hs : Set.range (AffineSpace.coord Y) = s)
-    (h : constantComplex Λ (𝔸(n; Y).zeroLocusSubscheme s) ⟶
-      constantComplex Λ (𝔸(n; Y).zeroLocusSubscheme s)) :
-    ∃ h' : constantComplex Λ 𝔸(n; Y) ⟶ constantComplex Λ 𝔸(n; Y),
-      constantComplexEndPullback Λ (𝔸(n; Y).zeroLocusSubschemeι s) h' = h := by
-  let e := AffineSpace.zeroSectionIsoZeroLocusSubscheme n Y hs
-  refine ⟨constantComplexEndPullback Λ (𝔸(n; Y) ↘ Y)
-    (constantComplexEndPullback Λ e.hom h), constantComplexEnd_ext fun Ω _ _ x ↦ ?_⟩
-  rw [constantComplexEndPullback_constantComplexEndPullback _ _ e.inv rfl,
-    constantComplexEndPullback_constantComplexEndPullback x e.inv _ rfl,
-    constantComplexEndPullback_constantComplexEndPullback _ e.hom x (by simp)]
-
 variable [HasKummerClass.IsNormalized Λ] [HasInvertibleExponent Λ S]
 
 /-- **Universal frame independence.** On `𝔸^c_{GL_{c,S}}`, with coordinates `t` and universal
@@ -278,18 +251,20 @@ theorem restrictSupportedClass_kummerBoundaryProduct_glMatrix
   set a := supportedClassMap Λ ι (kummerBoundaryProduct Λ (glCoord c S))
   set b := supportedClassMap Λ ι y
   suffices hb : b = a from (supportedClassMap_bijective Λ ι _).1 hb
-  obtain ⟨h', hh'⟩ := exists_constantComplexEndPullback_zeroLocusSubschemeι_eq' Λ _ _
+  obtain ⟨h', hh'⟩ := exists_constantComplexEndPullback_zeroLocusSubschemeι_eq Λ _ _
     range_glCoord (b ≫ inv a)
   -- the pullback squares along the identity section
-  obtain ⟨gε, hgε⟩ := exists_isPullback_zeroLocusSubschemeι glOneAffine
-    (Set.range (glCoord c S)) (Set.range fun a : Fin c ↦ AffineSpace.coord S (ULift.up a)) (by
-      rw [← Set.range_comp]
-      exact congrArg Set.range (funext glOneAffine_appTop_glCoord))
-  obtain ⟨g', hg'⟩ := exists_isPullback_zeroLocusSubschemeι glOneAffine
-    (Set.range ((glMatrix c S).mulVec (glCoord c S)))
-    (Set.range fun a : Fin c ↦ AffineSpace.coord S (ULift.up a)) (by
-      rw [← Set.range_comp]
-      exact congrArg Set.range glOneAffine_appTop_mulVec)
+  obtain ⟨gε, hgε⟩ : ∃ g, IsPullback g _ _ _ :=
+    ⟨_, isPullback_zeroLocusSubschemeι glOneAffine
+      (Set.range (glCoord c S)) (Set.range fun a : Fin c ↦ AffineSpace.coord S (ULift.up a)) (by
+        rw [← Set.range_comp]
+        exact congrArg Set.range (funext glOneAffine_appTop_glCoord))⟩
+  obtain ⟨g', hg'⟩ : ∃ g, IsPullback g _ _ _ :=
+    ⟨_, isPullback_zeroLocusSubschemeι glOneAffine
+      (Set.range ((glMatrix c S).mulVec (glCoord c S)))
+      (Set.range fun a : Fin c ↦ AffineSpace.coord S (ULift.up a)) (by
+        rw [← Set.range_comp]
+        exact congrArg Set.range glOneAffine_appTop_mulVec)⟩
   -- restricting both adjoints along the identity section gives the coordinate class of `𝔸^c_S`
   have hra : restrictSupportedHom Λ glOneAffine ι ιS gε hgε
       (leftDerivedUpperStarTateShiftIso Λ glOneAffine c) a =
@@ -421,12 +396,14 @@ theorem restrictSupportedClass_kummerBoundaryProduct_mulVec {U : Scheme.{u}}
         (leftDerivedUpperStarTateShiftIso Λ (𝟙 _) c) (kummerBoundaryProduct Λ (M.mulVec f)) =
       kummerBoundaryProduct Λ f := by
   obtain ⟨Φ, hΦt, hΦA⟩ := exists_glAffine_point f M hM
-  obtain ⟨g₁, hg₁⟩ := exists_isPullback_zeroLocusSubschemeι Φ
-    (Set.range ((glMatrix c U).mulVec (glCoord c U))) (Set.range (M.mulVec f)) (by
-      rw [← Set.range_comp]; exact congrArg Set.range (funext hΦA))
-  obtain ⟨g₂, hg₂⟩ := exists_isPullback_zeroLocusSubschemeι Φ
-    (Set.range (glCoord c U)) (Set.range f) (by
-      rw [← Set.range_comp]; exact congrArg Set.range (funext hΦt))
+  obtain ⟨g₁, hg₁⟩ : ∃ g, IsPullback g _ _ _ :=
+    ⟨_, isPullback_zeroLocusSubschemeι Φ
+      (Set.range ((glMatrix c U).mulVec (glCoord c U))) (Set.range (M.mulVec f)) (by
+        rw [← Set.range_comp]; exact congrArg Set.range (funext hΦA))⟩
+  obtain ⟨g₂, hg₂⟩ : ∃ g, IsPullback g _ _ _ :=
+    ⟨_, isPullback_zeroLocusSubschemeι Φ
+      (Set.range (glCoord c U)) (Set.range f) (by
+        rw [← Set.range_comp]; exact congrArg Set.range (funext hΦt))⟩
   obtain ⟨gE, hgE⟩ := Scheme.exists_isPullback_zeroLocusSubschemeι_of_span_eq
     (Ideal.span_range_mulVec_of_isUnit_det _ (isUnit_det_glMatrix c U) (glCoord c U))
   have hcomp₁ : Φ = 𝟙 U ≫ Φ := by simp

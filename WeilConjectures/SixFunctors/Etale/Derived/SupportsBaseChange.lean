@@ -85,22 +85,6 @@ lemma isZero_leftDerivedUpperStar_derivedTensor_rightDerivedLowerShriek (i₁ : 
   exact ((L((IsOpenImmersion.lift j w hw)^*[A])).map_isZero hj).of_iso
     ((leftDerivedUpperStarComp A _ j).app _)
 
-/-- The tensor product `f ⊗ g` of two morphisms of `D(X_ét)`. -/
-noncomputable def derivedTensorHom {X : Scheme.{u}}
-    {K K₁ M M₁ : DerivedCategory (Sheaf X.smallEtaleTopology A)} (f : K ⟶ K₁) (g : M ⟶ M₁) :
-    ((derivedTensor A X).obj K).obj M ⟶ ((derivedTensor A X).obj K₁).obj M₁ :=
-  ((derivedTensor A X).map f).app M ≫ ((derivedTensor A X).obj K₁).map g
-
-variable {A} in
-/-- Composition of tensor products of morphisms. -/
-@[reassoc]
-lemma derivedTensorHom_comp {X : Scheme.{u}}
-    {K K₁ K₂ M M₁ M₂ : DerivedCategory (Sheaf X.smallEtaleTopology A)}
-    (f : K ⟶ K₁) (g : M ⟶ M₁) (f' : K₁ ⟶ K₂) (g' : M₁ ⟶ M₂) :
-    derivedTensorHom A f g ≫ derivedTensorHom A f' g' = derivedTensorHom A (f ≫ f') (g ≫ g') := by
-  simp only [derivedTensorHom, Category.assoc, Functor.map_comp, NatTrans.comp_app]
-  rw [((derivedTensor A X).map f').naturality_assoc g]
-
 variable (e : U' ⟶ U) [(e)^*[A].PreservesFlat]
 
 /-- The comparison `Le^*(K ⊗ M) ≅ Le^* K ⊗ Le^* M` is natural in both variables:

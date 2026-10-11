@@ -8,6 +8,7 @@ module
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.KummerClass
 public import WeilConjectures.SixFunctors.Etale.Derived.LocalizationBaseChange
 public import WeilConjectures.SixFunctors.Etale.Derived.GeometricPoint
+public import WeilConjectures.AlgebraicGeometry.AffineSpace.ZeroSection
 
 /-!
 # Base change of the Kummer boundary
@@ -346,6 +347,24 @@ lemma constantComplexEnd_ext {a b : constantComplex Λ X ⟶ constantComplex Λ 
     a = b :=
   constantComplex_hom_ext_of_leftDerivedUpperStar_map_eq (Iso.refl _) fun Ω _ _ x ↦ by
     simpa only [constantComplexEndPullback, cancel_epi, cancel_mono] using h Ω x
+
+variable (Λ Y) in
+/-- Every endomorphism `c` of `Λ` on the zero locus `V(t₁, …)` of the coordinates of the affine
+space `𝔸^n_Y` is the pullback `s^♯ h` of an endomorphism `h` of `Λ_{𝔸^n_Y}`: through
+`Y ≅ V(t₁, …)`, take for `h` the pullback of `c` along the projection `𝔸^n_Y ⟶ Y`, a retraction
+of the zero section. -/
+lemma exists_constantComplexEndPullback_zeroLocusSubschemeι_eq (n : Type u)
+    {s : Set Γ(𝔸(n; Y), ⊤)} (hs : Set.range (AffineSpace.coord Y) = s)
+    (c : constantComplex Λ (𝔸(n; Y).zeroLocusSubscheme s) ⟶
+      constantComplex Λ (𝔸(n; Y).zeroLocusSubscheme s)) :
+    ∃ h : constantComplex Λ 𝔸(n; Y) ⟶ constantComplex Λ 𝔸(n; Y),
+      constantComplexEndPullback Λ (𝔸(n; Y).zeroLocusSubschemeι s) h = c := by
+  let e := AffineSpace.zeroSectionIsoZeroLocusSubscheme n Y hs
+  refine ⟨constantComplexEndPullback Λ (𝔸(n; Y) ↘ Y)
+    (constantComplexEndPullback Λ e.hom c), constantComplexEnd_ext fun Ω _ _ x ↦ ?_⟩
+  rw [constantComplexEndPullback_constantComplexEndPullback _ _ e.inv rfl,
+    constantComplexEndPullback_constantComplexEndPullback x e.inv _ rfl,
+    constantComplexEndPullback_constantComplexEndPullback _ e.hom x (by simp)]
 
 end Restriction
 
