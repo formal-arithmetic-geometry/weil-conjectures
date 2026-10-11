@@ -193,5 +193,23 @@
   "group": "C1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of C1; spot-checked by L: L: 5 steps (unit on sections, direct images of a composite via pasting, composite adjunction, uniqueness by local sections, associativity) read; off-unit uses are sk-def-exchange nodes used as tools"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.EtaleSetInverseImageCompositionUnits",
+  "declaration": "AlgebraicGeometry.etaleSetInverseImageCompositionUnits",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleSetInverseImageCompositionUnits.lean",
+  "statement": "theorem etaleSetInverseImageCompositionUnits : (∀ (S T : Scheme.{u}) (e : T ⟶ S) (G : Sheaf S.smallEtaleTopology (Type (u + 1))) (U U' : S.Etale) (a : U' ⟶ U) (s : G.obj.obj (op U)), ((η[S, T] e).app G).hom.app (op U') (G.obj.map a.op s) = ((L e).obj G).obj.map ((b e).map a).op (((η[S, T] e).app G).hom.app (op U) s)) ∧ (∀ (S T : Scheme.{u}) (e : T ⟶ S) (G G' : Sheaf S.smallEtaleTopology (Type (u + 1))) (ψ : G ⟶ G') (U : S.Etale) (s : G.obj.obj (op U)), ((η[S, T] e).app G').hom.app (op U) (ψ.hom.app (op U) s) = ((L e).map ψ).hom.app (op ((b e).obj U)) (((η[S, T] e).app G).hom.app (op U) s)) ∧ ∃ c : ∀ (X Y W : Scheme.{u}) (f : Y ⟶ X) (g : W ⟶ Y), L f ⋙ L g ≅ L (g ≫ f), (∀ (X Y W : Scheme.{u}) (f : Y ⟶ X) (g : W ⟶ Y) (F : Sheaf X.smallEtaleTopology (Type (u + 1))) (U : X.Etale) (s : F.obj.obj (op U)), ((c X Y W f g).hom.app F).hom.app (op ((b g).obj ((b f).obj U))) (((η[Y, W] g).app ((L f).obj F)).hom.app (op ((b f).obj U)) (((η[X, Y] f).app F).hom.app (op U) s)) = ((L (g ≫ f)).obj F).obj.map ((MorphismProperty.Over.pullbackComp (P := @Etale) (Q := ⊤) g f).inv.app U).op (((η[X, W] (g ≫ f)).app F).hom.app (op U) s)) ∧ (∀ (X Y W : Scheme.{u}) (f : Y ⟶ X) (g : W ⟶ Y) (F : Sheaf X.smallEtaleTopology (Type (u + 1))) (q : (L g).obj ((L f).obj F) ⟶ (L (g ≫ f)).obj F), (∀ (U : X.Etale) (s : F.obj.obj (op U)), q.hom.app (op ((b g).obj ((b f).obj U))) (((η[Y, W] g).app ((L f).obj F)).hom.app (op ((b f).obj U)) (((η[X, Y] f).app F).hom.app (op U) s)) = ((L (g ≫ f)).obj F).obj.map ((MorphismProperty.Over.pullbackComp (P := @Etale) (Q := ⊤) g f).inv.app U).op (((η[X, W] (g ≫ f)).app F).hom.app (op U) s)) → q = (c X Y W f g).hom.app F) ∧ (∀ (X Y W V : Scheme.{u}) (f : Y ⟶ X) (g : W ⟶ Y) (h : V ⟶ W) (F : Sheaf X.smallEtaleTopology (Type (u + 1))), (L h).map ((c X Y W f g).hom.app F) ≫ (c X W V (g ≫ f) h).hom.app F = (c Y W V g h).hom.app ((L f).obj F) ≫ (c X Y V f (h ≫ g)).hom.app F ≫ eqToHom (congrArg (fun k : V ⟶ X ↦ (L k).obj F) (Category.assoc h g f)))",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "C1",
+  "result": "pass",
+  "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
  }
 }

@@ -4894,3 +4894,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 14:17 L: merged deliver/K1/lem-sc-derived-mayer-vietoris-triangle (stage 2; reviewer FIX; first push; Sheaf.Algebra.Homology.DerivedMayerVietorisTriangle AlgebraicGeometry.derived_mayer_vietoris_triangle)
 - 14:17 L: merged deliver/C1/lem-weil-pbc-serre-sk-goes-up (stage 2; reviewer PASS; first push; Sheaf.RingTheory.SerreSkGoesUp RingHom.isSerreS_of_flat)
 - 14:17 L: merged deliver/K1/lem-weil-pbc-separably-generated-separable (stage 2; reviewer PASS; first push; Sheaf.FieldTheory.SeparablyGeneratedSeparable Algebra.isSeparableExtension_of_isSeparablyGenerated)
+- 14:17 L: merged deliver/C1/lem-weil-pbc-sets-etale-inverse-image-composition-units (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.EtaleSetInverseImageCompositionUnits AlgebraicGeometry.etaleSetInverseImageCompositionUnits)

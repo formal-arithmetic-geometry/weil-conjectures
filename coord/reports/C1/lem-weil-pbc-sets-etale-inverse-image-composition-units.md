@@ -1,40 +1,163 @@
-# Worker report: lem-weil-pbc-sets-etale-inverse-image-composition-units
+## Worker report
 
-## Files written
+The module `lean/Sheaf/AlgebraicGeometry/EtaleSetInverseImageCompositionUnits.lean`
+states `AlgebraicGeometry.etaleSetInverseImageCompositionUnits`, with its sole proof
+`sorry`. No definitions, dependency modules, or new nodes are needed. Only the item's
+`lean` field changes. The module imports the recorded dependency module
+`Sheaf.AlgebraicGeometry.EtaleInverseImageAlgebraicStructures`, which in turn imports
+`Sheaf.AlgebraicGeometry.EtaleSheaves`. It reuses the latter's
+`AlgebraicGeometry.Scheme.etaleSetPullback`. The local notations `L`, `b`, and
+`η[S, T] e` only expand existing declarations; they do not introduce private copies.
 
-- `dag/nodes/sec-proper-base-change/lem-weil-pbc-sets-etale-inverse-image-composition-units.json`: split into five proof steps; no new nodes. The prior LeanSearch, LeanFinder, Loogle and Mathlib source searches rule out an exact sheaf-of-sets Mathlib leaf.
-- This report.
+Sources read: [Stacks 03CB](https://stacks.math.columbia.edu/tag/03CB), proof of
+`lemma-composition-morphisms-sites`; [03CC](https://stacks.math.columbia.edu/tag/03CC),
+`definition-composition-morphisms-sites`; and
+[09ZF](https://stacks.math.columbia.edu/tag/09ZF), third paragraph of the proof and
+its following use of compatibility. The repository does not contain the Stacks
+`.tex` files, so the corresponding tag pages were opened instead. 03CB obtains the
+inverse-image comparison by uniqueness of left adjoints of the composite direct
+image. The node explicitly supplies the unit, fixed-object uniqueness, and
+associativity clauses, including the local-representation proof for uniqueness.
+The declaration docstring carries all five proof steps and their dependency ids.
 
-## Attachments
+Hypotheses and clauses, in statement order:
 
-None. Read-only `grep -rn 'lem-weil-pbc-sets-etale-inverse-image-composition-units' /home/ubuntu/weil-src-slopmaster2/WeilConjectures/` found no exact tagged declaration. Concept searches found `AlgebraicGeometry.Etale.upperStarComp` at `WeilConjectures/SixFunctors/Etale/UpperLowerStar/Defs.lean:325`, `Etale.upperStarComp_hom_app_unit_app` at `.../Coherence.lean:163`, and `Etale.upperStarComp_assoc` at `.../Coherence.lean:265`. Their shared parameter `A` has `[Abelian A] [IsGrothendieckAbelian A]`, so these do not state a theorem for sheaves of sets. The committed `local/sorry_map_slopmaster2_71d63dcf.jsonl.gz` records each of these three declarations with `s=false, ts=false` (no direct or reachable sorry), but none belongs to this node.
+- An arbitrary morphism `e : T ⟶ S` of schemes and a sheaf of sets `G` on `S`:
+  binders `(S T : Scheme.{u}) (e : T ⟶ S)` and
+  `(G : Sheaf S.smallEtaleTopology (Type (u + 1)))`. There is no assumption of
+  finite, étale, proper, nonempty, or connected morphisms or schemes.
+- The defining inverse image and its adjunction are the existing `L e =
+  Scheme.etaleSetPullback e` and
+  `Functor.sheafPullbackConstruction.sheafAdjunctionContinuous (b e) _
+  (S.smallGrothendieckTopology @Etale) (T.smallGrothendieckTopology @Etale)`.
+  `L e` is inclusion into presheaves, left Kan extension along `(b e).op`, then
+  sheafification. Thus it is the specified colimit construction, not an arbitrary
+  left adjoint. Its right adjoint is `sheafPushforwardContinuous`, whose underlying
+  presheaf is precomposition with `(b e).op`, hence evaluates at `U ×_S T`.
+  `η[S, T] e` is its actual `Adjunction.unit`; the coefficient placeholder is
+  inferred as `Type (u + 1)` from the explicitly bound sheaf.
+- For `U` in the small étale site and `s ∈ G(U)`, the binders are `(U : S.Etale)`
+  and `(s : G.obj.obj (op U))`. The pulled-back section is exactly
+  `((η[S, T] e).app G).hom.app (op U) s`.
+- Clause (0), restriction: the first conjunct quantifies over both `U U' : S.Etale`,
+  `a : U' ⟶ U`, and every `s`. It equates the unit applied to `G.obj.map a.op s`
+  with restriction of the unit section along `((b e).map a).op` in `(L e).obj G`.
+- Clause (0), sheaf morphisms: the second conjunct binds `G G'`, `ψ : G ⟶ G'`,
+  `U`, and `s`. It equates the unit at `G'` applied to `ψ.hom.app (op U) s`
+  with `((L e).map ψ).hom.app (op ((b e).obj U))` applied to the unit at `G`.
+- Morphisms `f : Y ⟶ X`, `g : W ⟶ Y`, small étale sites, and every sheaf `F`:
+  the existential family `c` quantifies over `X Y W : Scheme.{u}`, `f`, `g` and
+  has type `L f ⋙ L g ≅ L (g ≫ f)`. Its component at each explicitly bound `F`
+  is the required isomorphism. This functor isomorphism encodes naturality in `F`;
+  its source is `g⁻¹ f⁻¹ F` and target is `(f ∘ g)⁻¹ F`. The family is chosen
+  simultaneously so its values can appear in the associativity law.
+- Clause (1), section equation: the first conjunct under `∃ c` binds every `F`,
+  `U : X.Etale`, and `s`. Its left side applies `(c X Y W f g).hom.app F` to the
+  two successive actual unit sections, at `(b g).obj ((b f).obj U)`.
+  The right side restricts the composite unit section along
+  `((MorphismProperty.Over.pullbackComp (P := @Etale) (Q := ⊤) g f).inv.app U).op`.
+  The inverse component goes from the iterated fibre product to the single fibre
+  product. Contravariance therefore transports the single-product section to the
+  iterated-product section set. This is precisely the node's canonical identification.
+- Clause (1), uniqueness for fixed `F`: the next conjunct binds an arbitrary sheaf
+  morphism `q : (L g).obj ((L f).obj F) ⟶ (L (g ≫ f)).obj F`. The premise is the
+  same section equation, for every `U,s`, with `q` in place of the comparison.
+  Its conclusion is `q = (c X Y W f g).hom.app F`. No naturality assumption on
+  `q` as `F` varies is added.
+- Clause (2), associativity: the final conjunct binds arbitrary `V`, `h : V ⟶ W`,
+  and `F`, and equates `(L h).map` of the comparison followed by `c` for `(g ≫ f,h)`
+  with `c` for `(g,h)` at `(L f).obj F` followed by `c` for `(f,h ≫ g)`.
+  `eqToHom (congrArg (fun k : V ⟶ X ↦ (L k).obj F) (Category.assoc h g f))`
+  identifies the two parenthesizations of the triple scheme morphism. This is
+  transport of the same target sheaf, not an extra hypothesis or weakened equality.
 
-## Sources and route
+Dependency declarations inspected and used:
 
-Read the assigned node, `dag/chapters/sec-proper-base-change.json`, `dag/units/sk-thm-iff.json`, its cited definition and lemma nodes, and the parent `lem-weil-pbc-gabber-h0-etale-criterion`. Read the original source at `/tmp/c1-lead-current/literature/stacks-project/sites.tex`: Lemma Tag 03CB, label `lemma-composition-morphisms-sites`, line 2764, and Definition Tag 03CC, label `definition-composition-morphisms-sites`, line 2786; Topologies Tags 021I (`lemma-morphism-big-small-etale`, line 1176) and 021J (`lemma-composition-etale`, line 1250); Sites Tags 00WB (`theorem-plus`, line 1975) and 00WK (`lemma-sections-sheafification`, line 2156); and `etale-cohomology.tex` Tag 09ZF, third paragraph at line 15021, where the section compatibility is left to the reader. The node serves that omitted compatibility in the parent proof. No WANTED document.
+- `def-pc-scheme`: `AlgebraicGeometry.Scheme` and `Scheme.Hom` in
+  `Mathlib.AlgebraicGeometry.Scheme`, including the locally affine field and the
+  locally ringed space morphism definition.
+- `def-weil-pbc-etale-site`: `Scheme.Etale` in
+  `Mathlib.AlgebraicGeometry.Morphisms.Etale` and `Scheme.smallEtaleTopology` in
+  `Mathlib.AlgebraicGeometry.Sites.Etale`, including the covering-family criterion.
+- `def-weil-pbc-etale-sheaf-of-sets`: `CategoryTheory.Sheaf` and
+  `Presheaf.IsSheaf` in `Mathlib.CategoryTheory.Sites.Sheaf`, specialized to this
+  topology and `Type (u + 1)`. The sheaf category is the full subcategory of the
+  contravariant functor category.
+- `def-weil-pbc-inverse-image`: `AlgebraicGeometry.Etale.upperStar` and
+  `Etale.upperStarLowerStarAdjunction` in
+  `WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs`, inspected as the abelian
+  analogue. They are not misapplied to sets. The node explicitly specifies their
+  set-valued version, available through the recorded algebraic-structures dependency.
+- `lem-weil-pbc-etale-inverse-image-algebraic-structures`:
+  `AlgebraicGeometry.etaleInverseImageAlgebraicStructures` in the imported module;
+  its construction uses `Scheme.etaleSetPullback` and the same Mathlib adjunction.
+  The theorem's algebraic-structure comparisons are not copied or redefined.
+- `lem-weil-pbc-continuous-functor-sheaf-pullback-adjunction`:
+  `Functor.sheafPullbackConstruction.sheafAdjunctionContinuous` and its underlying
+  `sheafPullback` in `Mathlib.CategoryTheory.Sites.Pullback`, used directly in
+  the unit notation. `Functor.sheafPushforwardContinuous` in
+  `Mathlib.CategoryTheory.Sites.Continuous` is the right adjoint.
+- `lem-weil-pbc-etale-base-change-finite-limits`:
+  `MorphismProperty.Over.pullback` in
+  `Mathlib.CategoryTheory.MorphismProperty.OverAdjunction` is exactly `b`.
+  The finite-limit instances in `Mathlib.CategoryTheory.Limits.MorphismProperty`
+  justify the dependency; their compiler-generated instance name need not appear
+  in this statement. `MorphismProperty.Over.pullbackComp` gives the comparison
+  of the chosen fibre products with its full signature and docstring inspected.
+- `def-pc-fibre-product`: `Limits.pullback`, `pullback.fst`, `pullback.snd`, and
+  `pullback.lift` in `Mathlib.CategoryTheory.Limits.Shapes.Pullback.HasPullback`.
+  The base-change functor uses these chosen scheme fibre products; its composition
+  isomorphism uses `pullbackLeftPullbackSndIso`, not an unconstrained identification.
 
-The steps compute the unit as the identity-indexed coprojection followed by sheafification; construct the direct-image comparison from the universal property of iterated fibre products; obtain the inverse-image comparison from the composite adjunction and uniqueness of adjoints; show objectwise uniqueness from local representatives of the two sheafifications; and prove associativity by calculating both composites on those representatives. This retains the `sk-thm-iff` unit route to Tag 09ZF through the parent Gabber criterion.
+Edge cases checked mathematically: empty schemes and empty covers add no nonemptiness
+requirements; sheaves on an empty site still satisfy the same equations. The empty
+sheaf and terminal sheaf do not create exceptions to sectionwise uniqueness (the
+local-generation and sheaf arguments still apply). Identity arrows and identity
+restrictions are included, with Mathlib's chosen pullbacks rather than pretending
+those pullbacks are definitionally identities. Arbitrary morphisms, non-affine
+schemes, and all characteristics are included. `universe u` is explicit and the
+sheaf universe matches the existing set-inverse-image construction; the small
+étale objects live in `Type (u + 1)`. All mathematical variables are explicit
+binders, and no `let` binders or hollow hypotheses occur.
 
-The proof initially cited `lem-weil-pbc-site-morphism-composition` (`sk-thm-p1`), whose statement is the general site-theoretic Tag 03CB result. It is a generic tool, but the citation was redundant because Step 3 proves the required special case directly from `def-weil-pbc-composite-adjunction` and `lem-weil-pbc-conjugate-iso-unit-equation`; I removed it. The remaining `lem-weil-pbc-site-sheafification-sections-local` (`sk-thm-p1`) states Tag 00WK for *any site and presheaf of sets*, with no PBC hypotheses. Steps 4-5 specialize it to the presheaf defining etale inverse image, so this is a generic tool used as a black box. It supplies exactly the local-representation fact needed for objectwise uniqueness, without replacing a step of the `sk-thm-iff` unit's proof. The lead accepted this cross-unit tool use and instructed me to record only this id in `tool_uses`.
+Searches actually run (logged by `msearch.py` in `searches.jsonl`):
 
-## Checks and findings
+- LeanFinder: `composition of inverse images of sheaves of sets on small etale
+  sites with adjunction units and associativity`. Eight results, including
+  `sheafComposeNatIso` and equivalence-site unit formulas; these change coefficients
+  or relate equivalent sites, and do not state this composition/uniqueness claim.
+- Loogle: `Functor.sheafPullbackConstruction.sheafPullback, Iso`.
+  The service answered unknown identifier, with zero hits. This query supplies no
+  evidence of absence; the independent LeanFinder and grep searches were used.
+- Mathlib grep: `sheafPullback.*[Cc]omp|pullbackComp|pullback_assoc` in
+  `CategoryTheory/Sites`. Results include `GrothendieckTopology.overMapPullbackComp`
+  and over-site associativity, which concern sheaves on over categories rather
+  than small étale base change. No exact statement found.
+- LeanSearch: `composition of inverse image functors for sheaves on small etale
+  sites compatible with units`. UNAVAILABLE: HTTP Internal Server Error; not
+  recorded as a no-match result.
+- `rg` of the source repository for `upperStarComp`: the existing
+  `Etale.upperStarComp`, unit compatibility and associativity declarations were
+  inspected in `UpperLowerStar/Defs.lean` and `Coherence.lean`. Their coefficient
+  category requires `Abelian` and `IsGrothendieckAbelian`, so sets are excluded.
+  `rg` for the exact node id had no source match.
+- `rg` of `lean/Sheaf` for inverse-image, small-étale, and `etaleSetPullback` terms
+  found the existing set pullback definition in `EtaleSheaves.lean`, reused here,
+  and its algebraic-structures lemma. No existing composition/units theorem found.
+- `rg` for `etaleSetInverseImageCompositionUnits` in Mathlib, the source project,
+  and repository `lean/Sheaf` found no name collision. `dag/lean_names_upstream.json`
+  likewise has no occurrence of this name or the item id.
 
-- `python3 -m json.tool` passed.
-- `python3 tools/review_split.py lem-weil-pbc-sets-etale-inverse-image-composition-units` passes after the lead accepted `lem-weil-pbc-site-sheafification-sections-local` as a generic cross-unit tool.
-- `python3 tools/check_dag.py` reports 4514 nodes, 0 cycles and 0 self-loops; its 7 reach and 11 route warnings are on other nodes already present at this base.
-- Searched the DAG and blueprint index by composition, inverse image, and Tag 03CB; no blueprint node states this sheaf-of-sets unit/coherence result. No new node was needed.
-- The source leaves unit and associativity calculations implicit. The original node's statement is mathematically consistent, including the identity and empty-object cases; no statement change was needed. No Lean files were written or built.
+Validation: remote single-file compilation is clean (no errors or warnings; the
+proof remains `sorry`). The earlier elaboration errors were repaired by explicitly
+specifying the small Grothendieck topologies in the unit notation and using the
+inverse fibre-product comparison for contravariant transport. No statement fault
+or mathematical dispute found.
 
-## Unfinished
+## Second reading by C1
 
-None in the worker's assigned split. The lead's mathematical review and delivery remain separate.
+I reread the node and the Lean theorem clause by clause. The binders `(S T : Scheme.{u})`, `e : T ⟶ S`, and `G : Sheaf S.smallEtaleTopology (Type (u + 1))` render the arbitrary scheme morphism and sheaf of sets. The two initial conjunctions quantify over all étale objects, restriction maps, sections, sheaf morphisms, and sections, and exactly render unit compatibility with restrictions and naturality in the sheaf. The existential `c` is a simultaneous family indexed by `X Y W f g`, with each component an isomorphism `L f ⋙ L g ≅ L (g ≫ f)`, hence includes naturality in `F`. Its first conjunct is the required section equation, using `pullbackComp.inv` for the canonical fibre-product identification. Its second conjunct gives fixed-`F` uniqueness for every sheaf morphism satisfying that equation. The final conjunct is the associativity law for `f,g,h`, with `eqToHom` transporting the associativity parenthesization. Quantifier order and all clauses agree with the node.
 
-## Review by C1
+Edge cases checked: empty schemes/sites and empty sheaves introduce no nonemptiness assumptions; identity arrows and zero/empty sections are included; arbitrary characteristics and non-affine schemes are allowed; the explicit universe `u` and coefficient universe `Type (u + 1)` match the small étale site. No `let`, unconstrained variable, or extra finiteness/étaleness hypothesis occurs.
 
-I read the assigned node's unchanged clauses against pinned Stacks `sites.tex` Lemma 03CB (`lemma-composition-morphisms-sites`) and Definition 03CC (`definition-composition-morphisms-sites`), and the small-etale base-change compatibility in Topologies 021I/021J. Stacks identifies the composite inverse-image functor via left adjoints but leaves the fixed-sheaf unit and associativity calculations implicit; the five steps make those calculations explicit. The source's site and sheaf hypotheses are met by the cited etale-site and sheaf-of-sets nodes. The slopmaster2 declarations found by the worker have abelian coefficient categories, so none is an exact attachment to this sets statement. There are no new nodes, and the worker's DAG/blueprint search found no duplicate.
-
-In step 1 I opened `lem-weil-pbc-etale-inverse-image-algebraic-structures`: it states inverse image as sheafified presheaf pullback and its adjunction. The identity-indexed coprojection followed by sheafification gives the described unit, while naturality supplies the two equations. Step 2 uses the fibre-product universal property in `def-pc-fibre-product`, pasting in `lem-weil-pbc-cartesian-square-pasting`, and etale base change to give the direct-image comparison; equality on both projections proves its naturality and triple associativity. Step 3 uses the formula for the composite unit in `def-weil-pbc-composite-adjunction` and the unique conjugate isomorphism from `lem-weil-pbc-conjugate-iso-unit-equation`. The cited statements say exactly the needed unit equation; evaluating it on a section gives clause (1).
-
-For step 4 I read Stacks Sites Theorem 00WB and Lemma 00WK in `sites.tex` and the statement of `lem-weil-pbc-site-sheafification-sections-local`. It says every section of a sheafification is locally represented by a presheaf section, and gives local equality and gluing for such representations. Applying it successively to the two inverse images proves the fixed-object uniqueness from the unit equation, rather than merely natural-transformation uniqueness. Step 5 evaluates both parenthesized composites on the same locally generating sections; step 2's unique fibre-product comparison identifies their target sections, and step 4's local uniqueness then gives equality of sheaf maps. This also covers identity arrows and empty objects without extra assumptions.
-
-I accepted `lem-weil-pbc-site-sheafification-sections-local` as a generic cross-unit tool and sent the worker back to record it in `tool_uses`; its statement is for any site and presheaf of sets, so it supplies a local sheafification fact and does not replace this unit's etale route. The worker removed a redundant cross-unit site-composition citation. I checked the final proof and report against delivery-errors A-F, including the five step citations, hypotheses, and absence of a cycle.
+I searched Mathlib, `WeilConjectures`, and `lean/Sheaf` for the theorem name and for composition/unit variants, and checked the recorded dependency declarations. Existing abelian-category `upperStarComp` results do not apply to sheaves of sets. No existing exact declaration was found. The worker module compiled cleanly with `scompile.py`; no mismatch was found, so no Lean or statement repair was necessary.
