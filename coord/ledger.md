@@ -3703,3 +3703,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 07:50 L: merged deliver/H1/lem-sc-exterior-top-direct-sum (stage 2; reviewer PASS; first push; Sheaf.LinearAlgebra.ExteriorTopDirectSum exteriorPower.existsUnique_topDirectSum)
 - 07:50 L: merged deliver/C1/lem-exc-continuous-cochains-short-exact (stage 2; reviewer PASS; first push; Sheaf.RepresentationTheory.ContinuousCochainsShortExact Rep.continuousCochains_shortExact)
 - 07:51 L: merged deliver/E1/lem-sc-faithfully-flat-local-dimension (stage 2; reviewer PASS; first push; Sheaf.RingTheory.RingKrullDimLeOfFaithfullyFlatOfIsLocalHom RingHom.ringKrullDim_le_of_faithfullyFlat_of_isLocalHom)
+- 07:51 L: returned deliver/K1/lem-sc-derived-hom-mayer-vietoris (reviewer RETURN: Reviewer R-dmv1022 (stage 2, head b81a92926). The statement correction (exactness at Hom(E,F) and at the direct sum, Tag)
