@@ -119,5 +119,24 @@
  },
  "tool_uses": [
   "lem-weil-pbc-pullback-cohomology-long-exact-ladder"
- ]
+ ],
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SecondKummerDivisors",
+  "declaration": "AlgebraicGeometry.IsCurve.exists_addEquiv_secondKummer_divisors",
+  "file": "lean/Sheaf/AlgebraicGeometry/SecondKummerDivisors.lean",
+  "statement": "theorem exists_addEquiv_secondKummer_divisors {k : Type u} [Field k] [IsAlgClosed k] {C : Scheme.{u}} (f : C ⟶ Spec (.of k)) [IsCurve f] (n : ℕ) (hn : (n : k) ≠ 0) : (∃ e : Sheaf.H (C.rootsOfUnitySheaf n) 2 ≃+ Additive C.Pic ⧸ (zsmulAddGroupHom (α := Additive C.Pic) (n : ℤ)).range, ∀ (hnC : IsUnit (n : Γ(C, ⊤))) (L : Additive C.Pic), e (C.kummerδ₁ n hnC (Scheme.Pic.toCohomologicalPicardGroupAddEquiv C L)) = QuotientAddGroup.mk L) ∧ Subsingleton C.CohomologicalBrauerGroup",
+  "branch": "sheaf-dag",
+  "by": "N1",
+  "date": "2026-10-11",
+  "existing": false,
+  "note": "The upstream Nonempty equivalence omits boundary compatibility and the explicit Brauer-vanishing clause. This statement includes both and uses the actual Picard quotient."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "N1",
+  "result": "pass",
+  "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
+ }
 }
