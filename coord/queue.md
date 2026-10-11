@@ -1,11 +1,11 @@
 # Work queue
 
-143 items; claim with `tools/claim.py next <group> [--stage N]`.
+137 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (143)
+## Stage 2: nodes to state (137)
 
 | node | distance to Mathlib | kind | blockers |
 |---|---|---|---|
@@ -59,11 +59,8 @@
 | `lem-sc-strict-henselization-completion-flat` | 1 | state | 0 |
 | `lem-sc-strict-henselization-completion-noetherian` | 1 | state | 0 |
 | `lem-sc-strict-henselization-faithfully-flat` | 1 | state | 0 |
-| `lem-sc-strict-henselization-mod-power-free` | 1 | state | 0 |
-| `lem-sc-strict-henselization-noetherian` | 1 | state | 0 |
 | `lem-weil-pbc-closed-immersion-coherent-equivalence` | 1 | state | 0 |
 | `lem-weil-pbc-closed-immersion-pushforward-ideal-powers` | 1 | state | 0 |
-| `lem-weil-pbc-coherent-formal-module-kernel` | 1 | state | 0 |
 | `lem-weil-pbc-coherent-formal-modules-isomorphism-local` | 1 | state | 0 |
 | `lem-weil-pbc-coherent-homs-over-open` | 1 | state | 0 |
 | `lem-weil-pbc-coherent-support-power-ideal-kills` | 1 | state | 0 |
@@ -100,7 +97,6 @@
 | `lem-weil-pbc-truncated-coskeleton-finite-limits` | 1 | state | 0 |
 | `lem-weil-pbc-universal-thickening-flat-base-change` | 1 | state | 0 |
 | `lem-weil-pbc-universal-thickening-open-restriction` | 1 | state | 0 |
-| `lem-weil-pbc-vanishing-descends-retract` | 1 | state | 0 |
 | `lem-weil-pbc-zero-dimensional-base-change-points` | 1 | state | 0 |
 | `lem-weil-pbc-zero-dimensional-cohomology` | 1 | state | 0 |
 | `lem-weil-tower-split-envelope` | 1 | state | 0 |
@@ -114,11 +110,9 @@
 | `lem-pc-rf-single-complex-inherited-tensor-condition` | 2 | state | 0 |
 | `lem-pc-ring-pseudo-coherent-summand` | 2 | state | 0 |
 | `lem-sc-hom-etale-locus-translation` | 2 | state | 0 |
-| `lem-sc-p1-boundary-connecting-naturality` | 2 | state | 0 |
 | `lem-sc-p1-boundary-extension-composition` | 2 | state | 0 |
 | `lem-sc-p1-boundary-one-extension-class` | 2 | state | 0 |
 | `lem-sc-p1-coherent-proj-representation` | 2 | state | 0 |
-| `lem-sc-p1-duality-pairing-naturality` | 2 | state | 0 |
 | `lem-sc-p1-finite-homogeneous-generators` | 2 | state | 0 |
 | `lem-sc-p1-graded-kernel-finite` | 2 | state | 0 |
 | `lem-sc-p1-graded-nakayama-generation` | 2 | state | 0 |
