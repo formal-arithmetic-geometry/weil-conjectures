@@ -5284,3 +5284,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 15:42 L: merged deliver/P1/lem-sc-p1-twist-multiplication (stage 2; reviewer FIX; first push; Sheaf.AlgebraicGeometry.ProjectiveLineTwistMultiplication AlgebraicGeometry.projectiveLine_twist_multiplication)
 - 15:46 L: merged deliver/C1/lem-weil-pbc-inverse-image-composition-module-linear (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.EtaleInverseImageCompositionModuleLinear AlgebraicGeometry.etaleInverseImageCompositionModuleLinear)
 - 15:47 L: merged deliver/C1/lem-weil-pbc-inverse-image-free-etale-module (stage 2; reviewer PASS; first push; Sheaf.Paper.InverseImageFreeEtaleModule AlgebraicGeometry.inverseImageFreeEtaleModule)
+- 15:47 L: merged deliver/G1/lem-sc-open-curve-etale-leray-low-degree (stage 2; reviewer PASS; first push; Sheaf.Paper.OpenCurveEtaleLerayLowDegree AlgebraicGeometry.openCurveEtaleLerayLowDegree)

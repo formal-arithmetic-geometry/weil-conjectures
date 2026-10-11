@@ -162,5 +162,24 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-oll1817 (reviewer sub-agent of L); spot-checked: No cycle: thm-sp-grothendieck, lem-sp-grothendieck-edge-maps, lemma-weil-pbc-geometric-stalk-conservative, lem-weil-pbc-direct-image-preserves-injectives are generic (sp/pbc), none depends on the parent. Statement is the q=0,1,2 isomorphism form (not the five-term sequence) and is what the parent needs; edge maps argued in Step 3: rows 1,2 vanish, so E2^{n,0}=Einf^{n,0}=H^n for n<=2 (incoming d_r from row r-1 zero for r=2,3, negative column for r>=4). Step 1 conservativity applied to 0->R^q j_*F correct; Step 2 acyclicity via injectives preserved, Gamma(Cbar,j_*F)=Gamma(C,F) by definition. Tool uses accepted as generic. No repairs."
  },
- "lead_note": "2026-10-10 L (R-oll1817): Second reading's 'Changes' line (created.item set to this item, source replaced by Tag 01F2) is not reflected in the delivered JSON: created.item is still the parent lem-sc-open-curve-gm-direct-image-cohomology (correct, it was created from there) and source still says 'Discussion preceding Tag 03RM'; no mathematical consequence."
+ "lead_note": "2026-10-10 L (R-oll1817): Second reading's 'Changes' line (created.item set to this item, source replaced by Tag 01F2) is not reflected in the delivered JSON: created.item is still the parent lem-sc-open-curve-gm-direct-image-cohomology (correct, it was created from there) and source still says 'Discussion preceding Tag 03RM'; no mathematical consequence.",
+ "lean": {
+  "module": "Sheaf.Paper.OpenCurveEtaleLerayLowDegree",
+  "declaration": "AlgebraicGeometry.openCurveEtaleLerayLowDegree",
+  "file": "lean/Sheaf/Paper/OpenCurveEtaleLerayLowDegree.lean",
+  "statement": "theorem openCurveEtaleLerayLowDegree {C Cbar : Scheme.{u}} (j : C ⟶ Cbar) [IsOpenImmersion j] (F : Sheaf C.smallEtaleTopology AddCommGrpCat.{u + 1}) (hvanish : ∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (x : Spec (.of Ω) ⟶ Cbar) (q : ℤ), (q = 1 ∨ q = 2) → IsZero ((Scheme.pointSmallEtale x).sheafFiber.obj ((DerivedCategory.homologyFunctor (Sheaf Cbar.smallEtaleTopology AddCommGrpCat.{u + 1}) q).obj ((Etale.rightDerivedLowerStar AddCommGrpCat.{u + 1} j).obj ((DerivedCategory.singleFunctor (Sheaf C.smallEtaleTopology AddCommGrpCat.{u + 1}) 0).obj F))))) : ∀ q : ℕ, (q = 0 ∨ q = 1 ∨ q = 2) → Function.Bijective fun x : Sheaf.H ((Etale.lowerStar AddCommGrpCat.{u + 1} j).obj F) q ↦ Sheaf.H.map ((Etale.upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} j).counit.app F) q (Etale.cohomologyMap j _ q x)",
+  "branch": "sheaf-dag",
+  "by": "G1",
+  "date": "2026-10-11",
+  "existing": false,
+  "note": "Second reading: asserts bijectivity of the canonical Leray edge map (cohomologyMap followed by the counit), using the existing Sheaf.H Ext model of abelian sheaf cohomology. The cohomology definition node explicitly permits this model with the derived-global-sections identification deferred to stage 3. Stalkwise vanishing uses the recorded derived direct image on a sheaf in degree zero."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "G1",
+  "result": "pass",
+  "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
+ }
 }
