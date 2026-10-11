@@ -5043,3 +5043,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 14:46 L: merged deliver/U1/lem-weil-pbc-symmetric-algebra-graded (stage 2; reviewer PASS; first push; Sheaf.LinearAlgebra.SymmetricAlgebra.Graded SymmetricAlgebra.graded_by_tensor_images)
 - 14:46 L: merged deliver/V1/lem-weil-pbc-tensor-field-extension-galois-invariants (stage 2; reviewer PASS; first push; Sheaf.FieldTheory.TensorFieldExtensionGaloisInvariants TensorProduct.injective_and_range_eq_invariants)
 - 14:46 L: merged deliver/R1/lem-sc-p1-twist-exists (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.ProjectiveLineTwistExists AlgebraicGeometry.ProjectiveLine.exists_twistData_unique_iso)
+- 14:47 L: merged deliver/F1/lem-weil-pbc-universal-first-order-thickening-exists (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.UniversalFirstOrderThickeningExists AlgebraicGeometry.FormallyUnramified.exists_universalFirstOrderThickening)
