@@ -2,14 +2,13 @@
 
 861 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (25)
+## Stage 1: nodes to split (24)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
 | `lem-weil-derived-limit-roos-complex` | 15 | none |
 | `lem-pc-ringed-space-module-stalk-tensor` | 3013 | none |
 | `lem-pc-ring-derived-map-lift` | 3018 | none |
-| `lem-sc-module-localization-filtered-colimit` | 3023 | none |
 | `lem-pc-genus-agrees-sc` | 4007 | rests_on_sorry |
 | `prop-av-tate-rank` | 4008 | rests_on_sorry |
 | `cor-pc-sigma-pic-iso` | 4009 | rests_on_sorry |
@@ -32,7 +31,7 @@
 | `lem-pur-left-derived-exact-when-defined` | - | none |
 | `lem-pc-finite-flat-restriction-projective` | - | none |
 
-## Stage 2: nodes to state (836)
+## Stage 2: nodes to state (837)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -295,6 +294,7 @@
 | `lem-sc-krull-akizuki-noetherian` | 1 | state |
 | `lem-sc-local-domain-dim-one-principal-localization-fraction-field` | 1 | state |
 | `lem-sc-local-ring-artin-schreier-kernel` | 1 | state |
+| `lem-sc-module-localization-filtered-colimit` | 1 | state |
 | `lem-sc-mult-n-dim-one-closed-subscheme` | 1 | state |
 | `lem-sc-normal-dim1-dvr` | 1 | state |
 | `lem-sc-p1-ext-resolution-derived-connecting` | 1 | state |
@@ -873,7 +873,7 @@
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 | `def-nagata-fixed-base-separated-stage` | 6 | state |
 
-Not open yet: 1754 nodes that wait for a statement dependency, 66 nodes that wait for stage 1.
+Not open yet: 1754 nodes that wait for a statement dependency, 65 nodes that wait for stage 1.
 
 ## Stage 3: modules to prove (0)
 
