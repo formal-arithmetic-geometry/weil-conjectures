@@ -205,6 +205,55 @@ lemma isIso_comp_rightDerivedFunctorPlusUnit_restrictScalars_iff (sq : CommSq g'
   conv_rhs => rw [← Category.assoc]
   exact (isIso_comp_right_iff _ _).symm
 
+/-- **The derived base change map and restriction of scalars.** For a commutative square
+`g' ≫ f = f' ≫ g` and `K ∈ D⁺(X_ét, Λ')`, the derived base change map over `Λ` is an
+isomorphism at the restriction of scalars of `K` along `φ : Λ →+* Λ'` if and only if the derived
+base change map over `Λ'` is an isomorphism at `K`. -/
+theorem isIso_derivedBaseChangeMapPlus_app_restrictScalars_iff (sq : CommSq g' f' f g)
+    (K : DerivedCategory.Plus (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ'))) :
+    IsIso ((derivedBaseChangeMapPlus (ModuleCat.{u + 1} Λ) sq).app
+        ((Sheaf.restrictScalars X.smallEtaleTopology φ).mapDerivedCategoryPlus.obj K)) ↔
+      IsIso ((derivedBaseChangeMapPlus (ModuleCat.{u + 1} Λ') sq).app K) := by
+  let C := Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ')
+  obtain ⟨K₀, ⟨eK⟩⟩ : ∃ K₀ : HomotopyCategory.Plus C,
+      Nonempty (DerivedCategory.Plus.Qh.obj K₀ ≅ K) :=
+    ⟨_, ⟨DerivedCategory.Plus.Qh.objObjPreimageIso K⟩⟩
+  obtain ⟨M, rfl⟩ := HomotopyCategory.Plus.quotient_obj_surjective K₀
+  obtain ⟨a, _⟩ := M.2
+  obtain ⟨T, _, i, hi⟩ := CochainComplex.Plus.exists_quasiIso_injective M a
+  let T' := (InjectiveObject.ι C).mapCochainComplexPlus.obj T
+  have : IsIso (DerivedCategory.Plus.Qh.map ((HomotopyCategory.Plus.quotient C).map i)) :=
+    Localization.inverts DerivedCategory.Plus.Qh (HomotopyCategory.Plus.quasiIso C) _
+      ((HomotopyCategory.quotient_map_mem_quasiIso_iff _).2 hi)
+  let e : DerivedCategory.Plus.Qh.obj ((HomotopyCategory.Plus.quotient C).obj T') ≅ K :=
+    (asIso (DerivedCategory.Plus.Qh.map ((HomotopyCategory.Plus.quotient C).map i))).symm ≪≫ eK
+  rw [← NatTrans.isIso_app_iff_of_iso _ e,
+    ← NatTrans.isIso_app_iff_of_iso _
+      ((Sheaf.restrictScalars X.smallEtaleTopology φ).mapDerivedCategoryPlus.mapIso e),
+    NatTrans.isIso_app_iff_of_iso _
+      (show (Sheaf.restrictScalars X.smallEtaleTopology φ).mapDerivedCategoryPlus.obj
+          (DerivedCategory.Plus.Qh.obj ((HomotopyCategory.Plus.quotient C).obj T')) ≅
+          DerivedCategory.Plus.Qh.obj ((Sheaf.restrictScalars X.smallEtaleTopology φ
+            ).mapHomotopyCategoryPlus.obj ((HomotopyCategory.Plus.quotient C).obj T')) from
+        (Sheaf.restrictScalars X.smallEtaleTopology φ).mapDerivedCategoryPlusFactorsh.app
+          ((HomotopyCategory.Plus.quotient C).obj T'))]
+  set K' := (HomotopyCategory.Plus.quotient C).obj T'
+  have : IsIso (((f)_*[ModuleCat.{u + 1} Λ']).rightDerivedFunctorPlusUnit.app K') :=
+    ((f)_*[ModuleCat.{u + 1} Λ']).isIso_rightDerivedFunctorPlusUnit_app_of_rightAcyclic T'
+      fun n ↦ have : Injective (T'.obj.X n) := (T.obj.X n).2
+        Functor.rightAcyclic_of_injective _
+  let LT : CochainComplex.Plus (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :=
+    ⟨((Sheaf.restrictScalars X.smallEtaleTopology φ).mapHomotopyCategoryPlus.obj K').obj.as,
+      (HomotopyCategory.plus_quotient_obj_iff _).1
+        ((Sheaf.restrictScalars X.smallEtaleTopology φ).mapHomotopyCategoryPlus.obj K').property⟩
+  have : IsIso (((f)_*[ModuleCat.{u + 1} Λ]).rightDerivedFunctorPlusUnit.app
+      ((Sheaf.restrictScalars X.smallEtaleTopology φ).mapHomotopyCategoryPlus.obj K')) :=
+    ((f)_*[ModuleCat.{u + 1} Λ]).isIso_rightDerivedFunctorPlusUnit_app_of_rightAcyclic LT
+      fun n ↦ have : Injective (T'.obj.X n) := (T.obj.X n).2
+        rightAcyclic_lowerStar_restrictScalars_obj φ f (T'.obj.X n)
+  rw [isIso_derivedBaseChangeMapPlus_app_Qh_obj_iff, isIso_derivedBaseChangeMapPlus_app_Qh_obj_iff]
+  exact isIso_comp_rightDerivedFunctorPlusUnit_restrictScalars_iff φ sq K'
+
 end BaseChange
 
 end Etale
