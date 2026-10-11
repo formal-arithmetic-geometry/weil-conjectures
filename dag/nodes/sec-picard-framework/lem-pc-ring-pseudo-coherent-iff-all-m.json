@@ -13,14 +13,15 @@
  },
  "kind": "statement",
  "title": "Pseudo-coherence is equivalent to m-pseudo-coherence for every m",
- "statement": "Let $R$ be a ring and let $D(R)$ be the derived category [def-weil-abstract-derived-category] of the abelian category of $R$-modules. For an integer $m$, call an object $C$ of $D(R)$ $m$-pseudo-coherent if there are a bounded complex $E^\\bullet$ of finite free $R$-modules and a morphism $E^\\bullet\\to C$ in $D(R)$ inducing isomorphisms $H^i(E^\\bullet)\\to H^i(C)$ for $i>m$ and a surjection $H^m(E^\\bullet)\\to H^m(C)$. Call $C$ pseudo-coherent if it is quasi-isomorphic to a bounded-above complex of finite free $R$-modules. Let $C$ be a complex of $R$-modules [def-pc-cochain-complex-modules], viewed as an object of $D(R)$. Then $C$ is pseudo-coherent if and only if $C$ is $m$-pseudo-coherent for every integer $m$.",
+ "statement": "Let $R$ be a ring and let $D(R)$ be the derived category [def-weil-abstract-derived-category] of the abelian category of $R$-modules. For an integer $m$, call an object $C$ of $D(R)$ $m$-pseudo-coherent if there are a bounded complex $E^\\bullet$ of finite free $R$-modules and a morphism $E^\\bullet\\to C$ in $D(R)$ inducing isomorphisms $H^i(E^\\bullet)\\to H^i(C)$ for $i>m$ and a surjection $H^m(E^\\bullet)\\to H^m(C)$. Call $C$ pseudo-coherent if it is quasi-isomorphic to a bounded-above complex of finite free $R$-modules. Let $C$ be a cochain complex of $R$-modules, viewed as an object of $D(R)$. Then $C$ is pseudo-coherent if and only if $C$ is $m$-pseudo-coherent for every integer $m$.",
  "source": {
   "document": "literature/stacks-project/more-algebra.tex",
   "place": "More on Algebra, Lemma 15.66.5 (Tag 064U), equivalence of pseudo-coherence and m-pseudo-coherence for every m"
  },
  "stmt_deps": [
-  "def-pc-cochain-complex-modules",
-  "def-weil-abstract-derived-category"
+  "def-weil-abstract-derived-category",
+  "def-pc-ring-pseudo-coherent-complex",
+  "def-pc-ring-m-pseudo-coherent"
  ],
  "proof": [
   {
@@ -107,5 +108,45 @@
   "group": "G1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-pam0049 (reviewer sub-agent of L); spot-checked: Statement vs Tag 064U (1)<=>(2): agrees; definitions match citer 051657da7, which uses both directions (glue step 4); no leftover duplicate iff-all-m node. Step 1 sigma_{>=m} truncation: H^m surjective, iso above: correct. Step 2: one-step adjunction (cycles of the cone cover both ker H^n and coker H^{n-1}, since F^{n-1}=0 at stage n) checked correct. FIX more, RETURN less: (1) C4: step 2 said the stage-n F is (n-1)-pseudo-coherent, but the first clause of lem-pc-ring-pseudo-coherent-distinguished-triangle with m=n-1 needs A=F to be n-pseudo-coherent; repaired by stating F bounded finite free is k-pc for all k via identity, and naming m=n-1 for both cited nodes; lift through the cone made explicit. Second reading by G1 missed this mismatch. Note: report claims created.item was changed to this item, but head still has localization-glue, which is correct (E1's glue created the node); left as is.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.PseudoCoherentIffAllM",
+  "declaration": "DerivedCategory.isPseudoCoherent_iff_forall_isMPseudoCoherent",
+  "file": "lean/Sheaf/RingTheory/PseudoCoherentIffAllM.lean",
+  "statement": "theorem isPseudoCoherent_iff_forall_isMPseudoCoherent (R : Type u) [CommRing R] [HasDerivedCategory.{w} (ModuleCat.{v} R)] (C : CochainComplex (ModuleCat.{v} R) ℤ) : IsPseudoCoherent (Q.obj C) ↔ ∀ m : ℤ, IsMPseudoCoherent m (Q.obj C)",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-pcm1131",
+  "group": "E1",
+  "result": "pass",
+  "note": "Return points repaired (dup node/PseudoCoherent.lean dropped, landed IsPseudoCoherent/IsMPseudoCoherent imported and cited in stmt_deps, docstring has 0-pc bound + R^r cokernel step, report matches file). R CommRing (Stacks convention), HasDerivedCategory.{w} = D(R) as in both dep defs, C arbitrary cochain complex via Q.obj, IsPseudoCoherent <-> forall m IsMPseudoCoherent m; #check resolves to DerivedCategory.* ; correction (drop sheaf-complex citation) matches Tag 064U, citer glue holds",
+  "statement_corrected": true
+ },
+ "statement_change": {
+  "date": "2026-10-11",
+  "by": "E1 stage 2",
+  "old_statement": "Let $R$ be a ring and let $D(R)$ be the derived category [def-weil-abstract-derived-category] of the abelian category of $R$-modules. For an integer $m$, call an object $C$ of $D(R)$ $m$-pseudo-coherent if there are a bounded complex $E^\\bullet$ of finite free $R$-modules and a morphism $E^\\bullet\\to C$ in $D(R)$ inducing isomorphisms $H^i(E^\\bullet)\\to H^i(C)$ for $i>m$ and a surjection $H^m(E^\\bullet)\\to H^m(C)$. Call $C$ pseudo-coherent if it is quasi-isomorphic to a bounded-above complex of finite free $R$-modules. Let $C$ be a complex of $R$-modules [def-pc-cochain-complex-modules], viewed as an object of $D(R)$. Then $C$ is pseudo-coherent if and only if $C$ is $m$-pseudo-coherent for every integer $m$.",
+  "what": "The statement cited def-pc-cochain-complex-modules, whose node is for sheaves of modules; this item concerns complexes of modules over a commutative ring. The citation was removed while retaining the ring-module complex object required by Tag 064U.",
+  "source": {
+   "document": "literature/stacks-project/more-algebra.tex",
+   "place": "More on Algebra, Lemma 15.66.5 (Tag 064U), equivalence of pseudo-coherence and m-pseudo-coherence for every m"
+  },
+  "citers": [
+   {
+    "id": "lem-pc-ring-pseudo-coherent-localization-glue",
+    "holds": true,
+    "note": "Its proof uses the equivalence for complexes of modules over a ring, so the corrected statement still supplies exactly the needed implication."
+   }
+  ],
+  "old_stmt_deps": [
+   "def-pc-cochain-complex-modules",
+   "def-weil-abstract-derived-category"
+  ]
  }
 }
