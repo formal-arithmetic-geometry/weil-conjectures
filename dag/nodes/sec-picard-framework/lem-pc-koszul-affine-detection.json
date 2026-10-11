@@ -22,7 +22,8 @@
  "stmt_deps": [
   "def-pc-scheme",
   "def-pc-derived-category",
-  "def-pc-perfect-complex"
+  "def-pc-perfect-complex",
+  "def-weil-pbc-koszul-complex"
  ],
  "proof": [
   {
@@ -131,5 +132,24 @@
   "group": "J1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-kad2826 (reviewer sub-agent of L); spot-checked: Statement matches Tag 09IR affine input as used by lem-pc-perfect-generation-koszul-orthogonal Step 2 (C4 ok, D_QCoh present). FIX more, RETURN less: (b/d) new node lem-pc-koszul-derived-module-detection is a few-line consequence of existing lem-sc-affine-perfect-open-represent-cohomology (G1): dropped; proof rewritten to cite it: Hom vanishing + triangle I_e->O->K_e gives H^n(X,E)=colim Hom(I_e,E[n])=H^n(U,E|_U)=0, then lem-pc-affine-qcoh-derived-equivalence gives E=0 (Tag 06Z0); proof_deps/source updated. Second reading by J1 missed this duplicate-route.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.KoszulAffineDetection",
+  "declaration": "AlgebraicGeometry.isZero_of_koszul_powers_orthogonal",
+  "file": "lean/Sheaf/AlgebraicGeometry/KoszulAffineDetection.lean",
+  "statement": "theorem isZero_of_koszul_powers_orthogonal (A : Type u) [CommRing A] (r : ℕ) (f : Fin r → A) [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings (Spec (.of A)).toRingedSpace))] (U : (Spec (.of A)).Opens) (hU : U = ⨆ i : Fin r, PrimeSpectrum.basicOpen (f i)) [HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings (Spec (.of A)).toRingedSpace).over U))] (E : schemeDerivedQCohCategory (Spec (.of A))) (hres : IsZero ((SheafOfModules.overFunctor.{u} (moduleRings (Spec (.of A)).toRingedSpace) U).mapDerivedCategory.obj E.obj)) (horth : ∀ (e : Fin r → ℕ), (∀ i, 0 < e i) → ∀ n : ℤ, Subsingleton (((DerivedCategory.Q.obj ((@Functor.mapHomologicalComplex ℤ (ModuleCat.{u} A) (SheafOfModules.{u} (moduleRings (Spec (.of A)).toRingedSpace)) _ _ _ _ (tilde.functor (.of A)) ⟨fun _ _ ↦ tilde.map_zero⟩ (ComplexShape.up ℤ)).obj ((ExteriorAlgebra.koszulComplex A r (fun i ↦ f i ^ e i)).extend ComplexShape.embeddingDownNat)))⟦n⟧) ⟶ E.obj)) : IsZero E.obj",
+  "branch": "sheaf-dag",
+  "by": "K1",
+  "date": "2026-10-11",
+  "existing": false,
+  "note": "Uses the landed Koszul complex, extended to nonpositive cochain degrees and sheafified termwise with Mathlib tilde. Explicit zero-map preservation is Mathlib tilde.map_zero; it selects the shared sheaf-module category without introducing another derived-category instance."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-kad1456",
+  "group": "K1",
+  "result": "pass",
+  "note": "A,Spec(.of A); f:Fin r->A; U tied by hU to union of basicOpen f_i (=X minus V(f)); E in schemeDerivedQCohCategory; hres via shared overFunctor.mapDerivedCategory; all positive e and all n:Z, Hom(K_e[n],E) subsingleton with K_e = Q(tilde termwise of landed koszulComplex on f^e extended by embeddingDownNat), same form as landed IsKFlatTilde; conclusion IsZero E.obj; Scheme.Modules = SheafOfModules(moduleRings) by rfl; no hollow/let/untied binders; added stmt_dep is landed"
  }
 }
