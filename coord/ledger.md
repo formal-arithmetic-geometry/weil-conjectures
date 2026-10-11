@@ -3140,3 +3140,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 00:42 L: merged deliver/G1/lem-sc-module-extension-by-zero-stalk-maps (reviewer FIX; first push; new nodes: 0)
 - 00:42 L: merged deliver/K1/lem-pur-kinjective-characterize-injective (reviewer FIX; first push; new nodes: 0)
 - 00:42 UTC L: J1 dvr-field-extension-order FIX c889025d0 (R-dfe0041; Noetherian gap in the Tag 00PD use closed by the direct ideal argument).
+- 00:42 UTC L: H1 etale-torsor-inverse-image-extension FIX 4a4203508 (R-tie0041; E7: u^{-1}T stated to be a u^{-1}G-torsor), G1 module-extension-by-zero-stalk-maps FIX d718a1a98 (R-ezs0041; clause (2) reworded, citer's maps unchanged), K1 kinjective-characterize-injective FIX 76e12b9cc (R-cin0041; Mathlib two-declaration composite generatingMonomorphisms_rlp + injective_iff_rlp_monomorphisms_zero recorded).
