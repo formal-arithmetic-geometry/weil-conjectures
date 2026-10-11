@@ -216,5 +216,28 @@
   "by": "L",
   "result": "pass",
   "note": "acyclicity hypothesis clarified (f_* preserves injectives), convergence stated in the form the users need, unused clauses dropped; thm-sp-grothendieck and lem-sp-kinjective-computes (sk-prop-av-pqf-finite) accepted as tool uses; 1 new node"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.EtaleGrothendieckSpectralSequence",
+  "declaration": "AlgebraicGeometry.Etale.exists_module_grothendieck_spectralSequence",
+  "declarations": [
+   "AlgebraicGeometry.Etale.exists_module_grothendieck_spectralSequence",
+   "AlgebraicGeometry.Etale.exists_abelian_grothendieck_spectralSequence",
+   "AlgebraicGeometry.Etale.abelian_rightDerived_iso_higherDirectImage"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleGrothendieckSpectralSequence.lean",
+  "statement": "theorem exists_module_grothendieck_spectralSequence (Λ : Type (u + 1)) [CommRing Λ] {X Y Z : Scheme.{u}} (f : X ⟶ Y) (h : Y ⟶ Z) : let A := Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ) let C := Sheaf Z.smallEtaleTopology (ModuleCat.{u + 1} Λ) let fStar := lowerStar (ModuleCat.{u + 1} Λ) f let hStar := lowerStar (ModuleCat.{u + 1} Λ) h let hfStar := lowerStar (ModuleCat.{u + 1} Λ) (f ≫ h) ∃ E : E₂CohomologicalSpectralSequence (A ⥤ C), (∀ p q : ℕ, Nonempty ((E.page 2).X ((p : ℤ), (q : ℤ)) ≅ fStar.rightDerived q ⋙ hStar.rightDerived p)) ∧ (∀ p q : ℤ, p < 0 ∨ q < 0 → IsZero ((E.page 2).X (p, q))) ∧ (∀ (r : ℤ) (hr : 2 ≤ r) (p q : ℕ), max (p : ℤ) ((q : ℤ) + 1) < r → Nonempty ((E.page (r + 1)).X ((p : ℤ), (q : ℤ)) ≅ (E.page r hr).X ((p : ℤ), (q : ℤ)))) ∧ ∃ filtration : ∀ n : ℕ, DecreasingFiltration (hfStar.rightDerived n), (∀ n : ℕ, (filtration n).step 0 = ⊤ ∧ IsZero ((filtration n).step ((n : ℤ) + 1) : A ⥤ C)) ∧ ∀ (n p : ℕ), p ≤ n → ∀ (r : ℤ) (hr : 2 ≤ r), max (p : ℤ) (((n - p : ℕ) : ℤ) + 1) < r → Nonempty ((filtration n).gradedPiece (p : ℤ) ≅ (E.page r hr).X ((p : ℤ), ((n - p : ℕ) : ℤ)))",
+  "branch": "sheaf-dag",
+  "by": "M1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-gss1100b",
+  "group": "M1",
+  "result": "pass",
+  "note": "X->Y->Z schemes, CommRing Λ:Type(u+1) (STATE Λ-module encoding, six-functor area), lowerStar f/h/(f≫h), Functor.rightDerived (inj. res.), Mathlib E₂CohomologicalSpectralSequence in A⥤C (functorial, no private SS), E2=R^p h_* R^q f_* natural iso, first-quadrant zero, stabilization r>max(p,q+1), DecreasingFiltration F^0=⊤ F^{n+1}=0 gr≅E_r, ZZ version, R^q=H^q(rightDerivedLowerStarPlus); instances canonical (functorCategoryAbelian, sheafIsAbelian, HasDerivedCategory.ofIsGrothendieckAbelian); no hypotheses to be hollow"
  }
 }
