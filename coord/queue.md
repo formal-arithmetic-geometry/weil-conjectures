@@ -1,8 +1,8 @@
 # Work queue
 
-865 items; claim with `tools/claim.py next <group> [--stage N]`.
+866 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (13)
+## Stage 1: nodes to split (12)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -10,7 +10,6 @@
 | `lem-weil-tower-split-envelope` | 16 | none |
 | `lem-pc-ringed-space-module-stalk-tensor` | 3013 | none |
 | `lem-pc-genus-agrees-sc` | 4007 | rests_on_sorry |
-| `prop-av-tate-rank` | 4008 | rests_on_sorry |
 | `lem-pc-vanishing-above-dim` | 4009 | rests_on_sorry |
 | `lem-pc-derived-tensor-flat-second-localization` | 5018 | none |
 | `lem-pc-kflat-tensor-quasi-iso` | 5018 | none |
@@ -20,7 +19,7 @@
 | `lem-pur-triangle-common-refinement-ms3-05r9` | - | none |
 | `lem-pur-triangle-completion-ms6-05r9` | - | none |
 
-## Stage 2: nodes to state (852)
+## Stage 2: nodes to state (854)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -835,6 +834,8 @@
 | `thm-pqf-zmt-factorization` | 1 | state |
 | `cor-pc-sigma-pic-iso` | 2 | state |
 | `def-nagata-glued-limit-comparison` | 2 | state |
+| `lem-av-rational-tate-module-group-rank` | 2 | state |
+| `lem-av-tate-module-group-rank` | 2 | state |
 | `lem-fd-finite-pushforward-cohomology` | 2 | state |
 | `lem-fet-galois-category` | 2 | state |
 | `lem-fet-locally-trivial` | 2 | state |
@@ -877,7 +878,7 @@
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 | `def-nagata-fixed-base-separated-stage` | 6 | state |
 
-Not open yet: 1781 nodes that wait for a statement dependency, 54 nodes that wait for stage 1.
+Not open yet: 1782 nodes that wait for a statement dependency, 53 nodes that wait for stage 1.
 
 ## Stage 3: modules to prove (0)
 
