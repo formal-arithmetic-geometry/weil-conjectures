@@ -1,17 +1,18 @@
 # Work queue
 
-300 items; claim with `tools/claim.py next <group> [--stage N]`.
+295 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (300)
+## Stage 2: nodes to state (295)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
 | `def-weil-pbc-coherent-formal-module` | 1 | state |
 | `cor-galois-lisse-representations` | 1 | state |
 | `def-sc-sheaf-cohomology-functor` | 1 | state |
+| `lem-galois-inverse-image-representable` | 1 | state |
 | `lem-pc-chow-relative-ample` | 1 | state |
 | `lem-pc-coherent-property-devissage` | 1 | state |
 | `lem-pc-coherent-property-irreducible` | 1 | state |
@@ -49,16 +50,12 @@
 | `lem-weil-pbc-pushforward-coherent-on-open` | 1 | state |
 | `lem-weil-pbc-ringed-space-module-exactness-local-lifting` | 1 | state |
 | `lem-weil-pbc-scheme-theoretic-support` | 1 | state |
-| `lem-weil-pbc-scheme-theoretic-union` | 1 | state |
 | `lem-weil-pbc-sections-annihilated-by-ideal` | 1 | state |
 | `lem-weil-pbc-sections-morphism-to-proj-polynomial-ring` | 1 | state |
 | `lem-weil-pbc-sections-over-quasi-compact-open-in-affine` | 1 | state |
 | `lem-weil-pbc-separable-root-pth-power` | 1 | state |
 | `lem-weil-pbc-separable-split-purely-inseparable-residue-fields` | 1 | state |
-| `lem-weil-pbc-separable-tensor-purely-inseparable-field` | 1 | state |
 | `lem-weil-pbc-separably-generated-differentials-dimension` | 1 | state |
-| `lem-weil-pbc-separated-lqf-base-change` | 1 | state |
-| `lem-weil-pbc-separating-transcendence-basis-finite-subextension` | 1 | state |
 | `lem-weil-pbc-serre-criterion-reduced` | 1 | state |
 | `lem-weil-pbc-set-cech-nerve-free-resolution` | 1 | state |
 | `lem-weil-pbc-sets-etale-inverse-image-constant-sheaf` | 1 | state |
@@ -68,7 +65,6 @@
 | `lem-weil-pbc-sets-finite-surjective-descent` | 1 | state |
 | `lem-weil-pbc-sheaf-algebras-directed-colimit` | 1 | state |
 | `lem-weil-pbc-sheaf-cokernel-local-image` | 1 | state |
-| `lem-weil-pbc-sheaf-hom-finite-presentation-kernel` | 1 | state |
 | `lem-weil-pbc-sheaf-isomorphism-local-open-cover` | 1 | state |
 | `lem-weil-pbc-sheaf-of-modules-from-basis` | 1 | state |
 | `lem-weil-pbc-sheaves-directed-colimit-sections` | 1 | state |
@@ -76,7 +72,6 @@
 | `lem-weil-pbc-simplicial-set-add-simplices` | 1 | state |
 | `lem-weil-pbc-simplicial-set-glue-simplex` | 1 | state |
 | `lem-weil-pbc-singular-ideal-localization-smooth` | 1 | state |
-| `lem-weil-pbc-small-etale-representable-presheaf-sheaf` | 1 | state |
 | `lem-weil-pbc-smooth-algebra-filtered-colimit-descent` | 1 | state |
 | `lem-weil-pbc-smooth-artinian-lifting-at-point` | 1 | state |
 | `lem-weil-pbc-smooth-at-maximal-ideal-alg-closed-differentials-bound` | 1 | state |
@@ -310,7 +305,7 @@
 | `lem-pc-essentially-constant-pro-hom-colimit` | 4 | state |
 | `lem-pur-essential-constant-pro-criterion-05py` | 4 | state |
 
-Not open yet: 40 nodes that wait for stage 1, 464 nodes that wait for a statement dependency.
+Not open yet: 40 nodes that wait for stage 1, 463 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
