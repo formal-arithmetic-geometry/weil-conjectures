@@ -35,8 +35,9 @@ runs on.  The *readout* says that a positive central pair `(N, z)` computes the 
 weight of a subquotient on which `z` acts by a scalar `c_Q`: `dw_λ(Q) = λ(c_Q) / N`.  The
 *tensor* and *exterior* propositions say that the determinant weights of the simple constituents
 of `V ⊗ E` and of `⋀^s V` are, respectively, sums `dw_λ(V_i) + dw_λ(E_j)` and `s`-fold subsums of
-the rank-counted weight list of `V`.  None of the three needs `V` or `E` to be semisimple,
-except the exterior statement, which does.
+the rank-counted weight list of `V`.  None of the three needs `V` or `E` to be semisimple: the
+exterior statement is first proved for a semisimple `V` and then transferred along a composition
+series to the semisimplification, whose exterior powers have the same constituents.
 
 Subrepresentations are Mathlib's `Subrepresentation`, so a subquotient is
 `Subrepresentation.subquotient S U` for `U < S`, and semisimplicity is the class
@@ -87,6 +88,12 @@ degree.
   constituents of an exterior power, over an algebraically closed field of characteristic zero.
 * `DegreeDatum.exists_multiset_le_and_detWeight_eq_sum_of_exteriorPower`: the same for a degree
   datum, where the proof happens.
+* `Representation.exists_detWeight_eq_sum_of_exteriorPower` (and its degree-datum version): the
+  converse, every admissible sum of weights occurs.
+* `Representation.CompositionSeries.weightMultiset`: the rank-counted constituent weights of a
+  composition series.
+* `Representation.CompositionSeries.exteriorPower_detWeight`: the weights of the constituents of
+  `⋀^r V` for a not necessarily semisimple `V`, and their converse.
 * `RepresentedDegreeDatum.detWeight_eq_of_isPositiveCentralPair_of_basis`: the readout for any
   representation whose matrices in a basis are those of the datum, and
   `RepresentedDegreeDatum.exists_detWeight_eq_of_isPositiveCentralPair_of_surjective`: the readout
@@ -107,9 +114,9 @@ for a character along a family of Frobenius elements;
 with its converse `Representation.exists_isIrreducible_subquotient_tprod_detWeight_eq_add` the node
 `prop-ag-det-weight-two-factor-tensor`;
 `Representation.exists_multiset_le_and_detWeight_eq_sum_of_exteriorPower` implements
-`sk-p-exterior`.  It is only the forward direction for a semisimple `V`, so it does not implement
-the node `prop-ag-det-weight-exterior`, which allows a non-semisimple `V` and also asserts the
-converse.
+`sk-p-exterior`; `Representation.CompositionSeries.exteriorPower_detWeight` implements
+`prop-ag-det-weight-exterior`, for a non-semisimple `V` and with the converse.
+`Representation.CompositionSeries.weightMultiset` is the list of constituent weights of `d-weights`.
 -/
 
 @[expose] public section
