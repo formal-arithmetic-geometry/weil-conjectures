@@ -162,5 +162,23 @@
   "group": "J1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-pfl2838 (reviewer sub-agent of L); spot-checked: Statement matches 095A/03Q1(3)/03CB, pullback is def-weil-pbc-etale-sheaves' inverse image; C4 OK for lem-weil-pbc-irreducible-lisse-strata step 2 (its use of the item). Steps 1,3 OK (lem-weil-pbc-inverse-image-composition). FIX more, RETURN less: (1) C1 Step 2: identification of the restriction of g^{-1}G to U_i x_Y Y' (restriction along the localization functor, as in the definition) with g_i^{-1}(G|_{U_i}) was uncited; now via lem-weil-pbc-etale-inverse-image-restriction (1) for k_i and j_i plus lem-weil-pbc-inverse-image-composition (2) for g k_i = j_i g_i. (2) C1 Step 2: 'pullback of a constant sheaf is constant because the defining presheaf has the same value on every object' ignores sheafification and the sets/abelian switch (local constancy is defined on sheaves of sets); now cites lem-weil-pbc-etale-inverse-image-algebraic-structures (3) and lem-weil-pbc-sets-etale-inverse-image-constant-sheaf (Stacks 093R). proof_deps updated. Declared tool_use lem-weil-pbc-site-morphism-composition dropped (no longer cited); other-unit generic tools declared. Second reading by J1 missed both.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.PullbackFiniteLocallyConstant",
+  "declaration": "AlgebraicGeometry.Scheme.pullback_finite_locally_constant",
+  "file": "lean/Sheaf/AlgebraicGeometry/PullbackFiniteLocallyConstant.lean",
+  "statement": "theorem pullback_finite_locally_constant {T Y Y' : Scheme.{u}} (g : Y' ⟶ Y) (f : Y ⟶ T) (F : Sheaf T.smallEtaleTopology AddCommGrpCat.{u + 1}) (hF : IsFiniteLocallyConstantEtaleSheafOfSets ((sheafCompose Y.smallEtaleTopology (CategoryTheory.forget AddCommGrpCat.{u + 1})).obj ((Etale.upperStar AddCommGrpCat.{u + 1} f).obj F))) : Nonempty (((Etale.upperStar AddCommGrpCat.{u + 1} (g ≫ f)).obj F) ≅ ((Etale.upperStar AddCommGrpCat.{u + 1} g).obj ((Etale.upperStar AddCommGrpCat.{u + 1} f).obj F))) ∧ IsFiniteLocallyConstantEtaleSheafOfSets ((sheafCompose Y'.smallEtaleTopology (CategoryTheory.forget AddCommGrpCat.{u + 1})).obj ((Etale.upperStar AddCommGrpCat.{u + 1} (g ≫ f)).obj F))",
+  "branch": "sheaf-dag",
+  "by": "G1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-plc1406",
+  "group": "G1",
+  "result": "pass",
+  "note": "T,Y,Y' schemes, g,f arbitrary morphisms; F : Sheaf T_et AddCommGrpCat; h^-1 = recorded AlgebraicGeometry.Etale.upperStar (rfl to sheafPullback along Over.pullback @Etale, the node's sheafified base-change pullback); hF = recorded IsFiniteLocallyConstantEtaleSheafOfSets on sheafCompose forget of f^-1F; conclusion Nonempty ((g≫f)^-1F ≅ g^-1 f^-1 F) in Ab sheaves ∧ FLC of underlying set sheaf of (g≫f)^-1F; no let/hollow hyps, universes shared, names #check-verified"
  }
 }

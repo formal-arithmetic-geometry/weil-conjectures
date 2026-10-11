@@ -4734,3 +4734,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 13:16 L: merged deliver/H1/lem-sc-derived-open-gluing (stage 2; reviewer FIX; first push; Sheaf.AlgebraicGeometry.DerivedOpenGluing AlgebraicGeometry.derived_open_gluing)
 - 13:16 L: merged deliver/E1/lem-weil-pbc-projective-space-standard-charts (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.ProjectiveSpaceStandardCharts AlgebraicGeometry.ProjectiveSpace.projectiveSpace_standardCharts)
 - 13:16 L: merged deliver/E1/lem-pc-derived-pullback-tor-independent-flat-complex (stage 2; reviewer FIX; first push; Sheaf.AlgebraicGeometry.DerivedPullbackTorIndependentFlatComplex AlgebraicGeometry.derivedPullback_torIndependent_flat_complex)
+- 13:17 L: merged deliver/G1/lem-weil-pbc-pullback-finite-locally-constant (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.PullbackFiniteLocallyConstant AlgebraicGeometry.Scheme.pullback_finite_locally_constant)
