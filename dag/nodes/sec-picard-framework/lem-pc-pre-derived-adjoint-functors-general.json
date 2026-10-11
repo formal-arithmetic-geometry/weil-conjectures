@@ -13,14 +13,16 @@
  },
  "kind": "statement",
  "title": "Pre-derived adjunction from essentially constant derived systems",
- "statement": "Let $\\mathcal A$ and $\\mathcal B$ be abelian categories [def-sp-abelian], let $F:\\mathcal A\\to\\mathcal B$ and $G:\\mathcal B\\to\\mathcal A$ be functors with $F$ right adjoint to $G$, and let $K$ be a complex of $\\mathcal A$ and $M$ a complex of $\\mathcal B$. Define $RF$ at $K$ when the ind-system of objects $F(K')$ in $D(\\mathcal B)$, indexed by quasi-isomorphisms $K\\to K'$ in $K(\\mathcal A)$, is essentially constant with value $RF(K)$; define $LG$ at $M$ dually when the pro-system of objects $G(M')$ in $D(\\mathcal A)$, indexed by quasi-isomorphisms $M'\\to M$ in $K(\\mathcal B)$, is essentially constant with value $LG(M)$. If $RF$ is defined at $K$ and $LG$ is defined at $M$, there is a canonical isomorphism $\\operatorname{Hom}_{D(\\mathcal B)}(M,RF(K))\\cong\\operatorname{Hom}_{D(\\mathcal A)}(LG(M),K)$, functorial in $K$ and $M$ on the triangulated subcategories where the respective derived functors are defined.",
+ "statement": "Let $\\mathcal A$ and $\\mathcal B$ be abelian categories [def-sp-abelian], with derived categories $D(\\mathcal A)$ and $D(\\mathcal B)$ and localization functors $Q:K(\\mathcal A)\\to D(\\mathcal A)$, $Q':K(\\mathcal B)\\to D(\\mathcal B)$ [def-weil-abstract-derived-category]. Let $F:\\mathcal A\\to\\mathcal B$ and $G:\\mathcal B\\to\\mathcal A$ be additive functors with $G$ left adjoint to $F$; additivity is automatic for adjoints between abelian categories. Write $F_h,G_h$ for their componentwise induced functors on homotopy categories and $a_h:G_h\\dashv F_h$ for the induced adjunction. Let $K\\in K(\\mathcal A)$ and $M\\in K(\\mathcal B)$. The category of quasi-isomorphisms $s:K\\to I$ with commuting triangles is filtered, and the category of quasi-isomorphisms $t:P\\to M$ is cofiltered. Suppose the diagram $s\\mapsto Q'F_h(I)$ is essentially constant as an ind-object with value $RF(K)$ [def-pc-essentially-constant-ind-diagram], and $t\\mapsto QG_h(P)$ is essentially constant as a pro-object with value $LG(M)$ [def-pc-essentially-constant-pro-diagram]. For any chosen representing cocone $p_s:Q'F_h(I)\\to RF(K)$ and cone $u_t:LG(M)\\to QG_h(P)$ satisfying those essential-constancy conditions, there is a unique canonical bijection $e:\\operatorname{Hom}_{D(\\mathcal B)}(Q'M,RF(K))\\cong\\operatorname{Hom}_{D(\\mathcal A)}(LG(M),QK)$ characterized, for every $s,t$ and $f:P\\to F_h(I)$, by $e(p_s\\circ Q'(f)\\circ Q'(t)^{-1})=Q(s)^{-1}\\circ Q(a_h(f))\\circ u_t$. This bijection is functorial in both localized variables on the subcategories where the partial derived functors are defined: for morphisms $k:QK\\to QK'$ and $m:Q'M'\\to Q'M$, and their induced maps $r:RF(K)\\to RF(K')$, $l:LG(M')\\to LG(M)$, one has $e'(r\\circ h\\circ m)=k\\circ e(h)\\circ l$. The induced maps are characterized by compatibility with all fraction representatives: whenever $Q(s)$ followed by the left fraction $(a,s')$ represents $k$, $p_s$ followed by $r$ equals $Q'F_h(a)$ followed by $p_{s'}$; dually, whenever the right fraction $(t',a)$ followed by $Q'(t)$ represents $m$, $l$ followed by $u_t$ equals $u_{t'}$ followed by $QG_h(a)$.",
  "source": {
   "document": "literature/stacks-project/derived.tex",
   "place": "Derived Categories, Lemma 0DVC (lemma-pre-derived-adjoint-functors, line 9569), the abelian-category case of the general Lemma 0FND (lemma-pre-derived-adjoint-functors-general, line 9516), whose proof it inherits"
  },
  "stmt_deps": [
   "def-sp-abelian",
-  "def-weil-abstract-derived-category"
+  "def-weil-abstract-derived-category",
+  "def-pc-essentially-constant-ind-diagram",
+  "def-pc-essentially-constant-pro-diagram"
  ],
  "proof": [
   {
@@ -164,5 +166,51 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-pda1912 (reviewer sub-agent of L); spot-checked: Item vs Stacks 0DVC/0FND (pointwise Stacks-sense RF/LG; not Mathlib's absolute Adjunction.derived / derivedε_fac_app leaf, which needs globally defined derived functors, so not class c); no cycle: item cites only its own children, none cites lem-pc-derived-adjoint-functors or lem-sc-derived-adjunction-from-underived. Children vs 05PY/05PZ/05Q0/05Q4 orientations OK; Fubini leaf read at Fubini.lean:578 (curried form, one-line). No duplicates among pbc essentially-constant/localization nodes. FIX more, RETURN less: (1) C4 steps 2 and 5 applied the localization Hom-colimit lemmas (hypothesis S multiplicative system) to D(A), D(B) without a cited fact that quasi-isomorphisms in K(A) form a multiplicative system: added node lem-pc-quasi-isomorphisms-multiplicative-system (Stacks 05RT; Mathlib DerivedCategory/Fractions.lean:34,38) and cited it in steps 2 and 5; (2) B3 undefined D, D' in steps 2-5 replaced by K(A), K(B); (3) lem-pc-colimit-fubini statement bracketed def-weil-abstract-derived-category with empty stmt_deps: bracket removed.; 3 file(s) fixed by the reviewer; 1 statement node(s) added by the reviewer (FIX more, RETURN less)"
  },
- "lead_note": "2026-10-10 L (R-pda1912): new node lem-pc-quasi-isomorphisms-multiplicative-system added unsplit (reviewer-added nodes must be); it is a Mathlib leaf: DerivedCategory/Fractions.lean lines 34 and 38 (HasLeft/HasRightCalculusOfFractions for HomotopyCategory.quasiIso), recorded in its mathlib_searches"
+ "lead_note": "2026-10-10 L (R-pda1912): new node lem-pc-quasi-isomorphisms-multiplicative-system added unsplit (reviewer-added nodes must be); it is a Mathlib leaf: DerivedCategory/Fractions.lean lines 34 and 38 (HasLeft/HasRightCalculusOfFractions for HomotopyCategory.quasiIso), recorded in its mathlib_searches",
+ "lean": {
+  "module": "Sheaf.CategoryTheory.PreDerivedAdjointFunctorsGeneral",
+  "declaration": "CategoryTheory.preDerivedAdjunctionGeneral",
+  "file": "lean/Sheaf/CategoryTheory/PreDerivedAdjointFunctorsGeneral.lean",
+  "statement": "theorem preDerivedAdjunctionGeneral {A : Type uA} [Category.{vA} A] [Abelian A] [HasDerivedCategory.{wA} A] {B : Type uB} [Category.{vB} B] [Abelian B] [HasDerivedCategory.{wB} B] (F : A ⥤ B) [F.Additive] (G : B ⥤ A) [G.Additive] (adj : G ⊣ F) (K : HomotopyCategory A (ComplexShape.up ℤ)) (M : HomotopyCategory B (ComplexShape.up ℤ)) (RF : DerivedCategory B) (LG : DerivedCategory A) : let HA := HomotopyCategory A (ComplexShape.up ℤ) let HB := HomotopyCategory B (ComplexShape.up ℤ) let WA := HomotopyCategory.quasiIso A (ComplexShape.up ℤ) let WB := HomotopyCategory.quasiIso B (ComplexShape.up ℤ) let QA := DerivedCategory.Qh (C := A) let QB := DerivedCategory.Qh (C := B) let Fh := F.mapHomotopyCategory (ComplexShape.up ℤ) let Gh := G.mapHomotopyCategory (ComplexShape.up ℤ) let ah := adj.mapHomotopyCategory (ComplexShape.up ℤ) let R (X : HA) := MorphismProperty.Under.forget WA ⊤ X ⋙ Under.forget X ⋙ Fh ⋙ QB let L (Y : HB) := MorphismProperty.Over.forget WB ⊤ Y ⋙ Over.forget Y ⋙ Gh ⋙ QA let left {X Y : HA} (s : WA.Under ⊤ X) (f : Y ⟶ s.right) := (MorphismProperty.LeftFraction.mk f s.hom s.prop).map QA (Localization.inverts QA WA) let right {X Y : HB} (t : WB.Over ⊤ X) (f : t.left ⟶ Y) := (MorphismProperty.RightFraction.mk t.hom t.prop f).map QB (Localization.inverts QB WB) let splitR (X : HA) (V : DerivedCategory B) (p : R X ⟶ (Functor.const _).obj V) := ∃ (s₀ : WA.Under ⊤ X) (a : V ⟶ (R X).obj s₀), a ≫ p.app s₀ = 𝟙 V ∧ ∀ s, ∃ (s₁ : WA.Under ⊤ X) (b : s₀ ⟶ s₁) (c : s ⟶ s₁), (R X).map c = p.app s ≫ a ≫ (R X).map b let splitL (Y : HB) (V : DerivedCategory A) (u : (Functor.const _).obj V ⟶ L Y) := ∃ (t₀ : WB.Over ⊤ Y) (a : (L Y).obj t₀ ⟶ V), u.app t₀ ≫ a = 𝟙 V ∧ ∀ t, ∃ (t₁ : WB.Over ⊤ Y) (b : t₁ ⟶ t₀) (c : t₁ ⟶ t), (L Y).map c = (L Y).map b ≫ a ≫ u.app t let canonical (X : HA) (Y : HB) (V : DerivedCategory B) (U : DerivedCategory A) (p : R X ⟶ (Functor.const _).obj V) (u : (Functor.const _).obj U ⟶ L Y) (e : (QB.obj Y ⟶ V) ≃ (U ⟶ QA.obj X)) := ∀ (s : WA.Under ⊤ X) (t : WB.Over ⊤ Y) (f : t.left ⟶ Fh.obj s.right), e (right t f ≫ p.app s) = u.app t ≫ left s ((ah.homEquiv t.left s.right).symm f) IsEssentiallyConstantIndDiagram (R K) RF → IsEssentiallyConstantProDiagram (L M) LG → ∀ (p : R K ⟶ (Functor.const _).obj RF) (u : (Functor.const _).obj LG ⟶ L M), splitR K RF p → splitL M LG u → ∃! e : (QB.obj M ⟶ RF) ≃ (LG ⟶ QA.obj K), canonical K M RF LG p u e ∧ ∀ (K' : HA) (M' : HB) (RF' : DerivedCategory B) (LG' : DerivedCategory A) (p' : R K' ⟶ (Functor.const _).obj RF') (u' : (Functor.const _).obj LG' ⟶ L M') (e' : (QB.obj M' ⟶ RF') ≃ (LG' ⟶ QA.obj K')), canonical K' M' RF' LG' p' u' e' → ∀ (k : QA.obj K ⟶ QA.obj K') (m : QB.obj M' ⟶ QB.obj M) (r : RF ⟶ RF') (l : LG' ⟶ LG), (∀ (s : WA.Under ⊤ K) (s' : WA.Under ⊤ K') (a : s.right ⟶ s'.right), QA.map s.hom ≫ left s' a = k → p.app s ≫ r = QB.map (Fh.map a) ≫ p'.app s') → (∀ (t : WB.Over ⊤ M) (t' : WB.Over ⊤ M') (a : t'.left ⟶ t.left), right t' a ≫ QB.map t.hom = m → l ≫ u.app t = u'.app t' ≫ QA.map (Gh.map a)) → ∀ h : QB.obj M ⟶ RF, e' (m ≫ h ≫ r) = l ≫ e h ≫ k",
+  "branch": "sheaf-dag",
+  "by": "J1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-pdg0952"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-pdg0952",
+  "group": "J1",
+  "result": "fix",
+  "note": "Abelian A,B + HasDerivedCategory; F,G additive, adj G⊣F, Fh/Gh/ah componentwise; R/L = actual quasi-iso Under/Over diagrams through Qh; landed E1 two-argument predicates with value RF/LG; p/u chosen with splitR/splitL = remaining clauses; ∃! Equiv (Q'M⟶RF)≃(LG⟶QK); canonical formula right t f ≫ p_s = u_t ≫ left s (a_h f) matches; naturality e'(m≫h≫r)=l≫e h≫k with fraction-representative compatibility for r and l, variances checked; reverted the delivery's change of existing node(s) def-pc-essentially-constant-ind-diagram, def-pc-essentially-constant-pro-diagram (--revert-nodes; kept as on sheaf-dag); left out new module(s) lean/Sheaf/CategoryTheory/EssentiallyConstantIndDiagram.lean, lean/Sheaf/CategoryTheory/EssentiallyConstantProDiagram.lean (--drop-files, or a record fixed to existing: true)",
+  "statement_corrected": true
+ },
+ "statement_change": {
+  "date": "2026-10-11",
+  "by": "J1 stage 2",
+  "old_statement": "Let $\\mathcal A$ and $\\mathcal B$ be abelian categories [def-sp-abelian], let $F:\\mathcal A\\to\\mathcal B$ and $G:\\mathcal B\\to\\mathcal A$ be functors with $F$ right adjoint to $G$, and let $K$ be a complex of $\\mathcal A$ and $M$ a complex of $\\mathcal B$. Define $RF$ at $K$ when the ind-system of objects $F(K')$ in $D(\\mathcal B)$, indexed by quasi-isomorphisms $K\\to K'$ in $K(\\mathcal A)$, is essentially constant with value $RF(K)$; define $LG$ at $M$ dually when the pro-system of objects $G(M')$ in $D(\\mathcal A)$, indexed by quasi-isomorphisms $M'\\to M$ in $K(\\mathcal B)$, is essentially constant with value $LG(M)$. If $RF$ is defined at $K$ and $LG$ is defined at $M$, there is a canonical isomorphism $\\operatorname{Hom}_{D(\\mathcal B)}(M,RF(K))\\cong\\operatorname{Hom}_{D(\\mathcal A)}(LG(M),K)$, functorial in $K$ and $M$ on the triangulated subcategories where the respective derived functors are defined.",
+  "what": "The base leaves componentwise action on complexes implicit. Additivity (automatic from the abelian adjunction), homotopy objects, localization, and representing cone/cocone are now explicit. The first worker instead assumed an adjunction after localization and RF=F(K), LG=G(M); that circular correction is rejected and replaced by the source 0DVC construction. Canonicality and functoriality are stated on fraction representatives.",
+  "source": {
+   "document": "literature/stacks-project/derived.tex",
+   "place": "Derived Categories, Lemma 0DVC (lemma-pre-derived-adjoint-functors, line 9569), the abelian-category case of the general Lemma 0FND (lemma-pre-derived-adjoint-functors-general, line 9516), whose proof it inherits"
+  },
+  "citers": [
+   {
+    "id": "lem-pc-derived-adjoint-functors",
+    "holds": true,
+    "note": "The corrected pointwise comparison follows from the underived adjunction and the actual essential-constancy hypotheses; when defined everywhere, its naturality assembles the derived adjunction."
+   },
+   {
+    "id": "lem-pc-rf-mv-triangle-naturality",
+    "holds": true,
+    "note": "The canonical comparison and explicit naturality in both localized variables supply the same derived-adjunction use as before; triangulated shift compatibility is supplied by the derived triangulated functors as in the citer."
+   }
+  ],
+  "old_stmt_deps": [
+   "def-sp-abelian",
+   "def-weil-abstract-derived-category"
+  ]
+ }
 }
