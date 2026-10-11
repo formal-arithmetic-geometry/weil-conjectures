@@ -120,5 +120,38 @@
   "group": "K1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-dgs1814 (reviewer sub-agent of L); spot-checked: Statement read clause by clause (group object/functor of points, commutative, hom, kernel as fibre product over e_H, finite => affine and order dim_k Gamma, etale, finite etale algebra): correct over a field; kernel-closedness and etale criterion are forward pointers to their own lemmas, rightly not stmt_deps. Composite terminology definition: no single Mathlib declaration (components GrpObj/IsFinite/Etale only), no B8 leaf; grep of slopmaster2 WeilConjectures finds no GroupScheme def/class/abbrev, so no B10 attachment. No new nodes, no proof steps. Minor: the recorded grep 'GrpObj|IsFinite|Etale in Mathlib/AlgebraicGeometry: 0 hits' is implausible (AlgebraicGeometry.IsFinite exists) but does not change the verdict."
+ },
+ "lean": {
+  "module": "Mathlib.CategoryTheory.Monoidal.Grp",
+  "declaration": "CategoryTheory.GrpObj",
+  "declarations": [
+   "CategoryTheory.Grp",
+   "CategoryTheory.IsCommMonObj",
+   "CategoryTheory.IsMonHom",
+   "CategoryTheory.Hom.group",
+   "CategoryTheory.GrpObj.ker",
+   "CategoryTheory.GrpObj.kerι",
+   "AlgebraicGeometry.IsFinite",
+   "AlgebraicGeometry.Scheme.Hom.finrankΓ",
+   "AlgebraicGeometry.Etale",
+   "Algebra.Etale.iff_exists_algEquiv_prod",
+   "AlgebraicGeometry.Scheme.FiniteEtale.FiniteEtaleAlgebra",
+   "AlgebraicGeometry.isClosedSubgroupScheme_kerι",
+   "AlgebraicGeometry.Scheme.Hom.etale_iff_etale_ΓAlgebra_of_isFinite"
+  ],
+  "statement": "class GrpObj (X : C) extends MonObj X",
+  "branch": "mathlib",
+  "by": "J1",
+  "date": "2026-10-11",
+  "existing": true,
+  "note": "Use CategoryTheory.GrpObj G for G : Over (Spec (.of k)), with k a field. The complete terminology is already implemented and explicitly documented in WeilConjectures.AlgebraicGeometry.GroupScheme.Defs: commutative = IsCommMonObj G, homomorphism = IsMonHom f, kernel = GrpObj.ker f, finite = IsFinite G.hom, order = G.hom.finrankΓ, etale = Etale G.hom. Its kernel and finite-etale-algebra results supply the two forward references. Finite etale algebras are already characterized as finite products of finite separable field extensions by Algebra.Etale.iff_exists_algEquiv_prod (and bundled by Scheme.FiniteEtale.FiniteEtaleAlgebra). The declarations list records these existing component notions and results; their defining modules and exact specializations are in the worker report. No second definition or module is needed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-dgs1114",
+  "group": "J1",
+  "result": "pass",
+  "note": "existing:true GrpObj on G : Over (Spec (.of k)), k field any universe: mul/one/inv + assoc/unit/inverse laws = node's diagrams (cartesian product in Over = fibre product over Spec k); functor of points = scoped MonObj Hom.group; commutative = IsCommMonObj (mul_comm via braiding swap); homomorphism = IsMonHom; ker = GrpObj.ker f = pullback f eta[H]; finite = IsFinite G.hom; order = G.hom.finrankΓ (finrank over k of Γ(G,⊤) via structure map); etale = Etale G.hom; finite etale algebra = Algebra.Etale.iff_exists_algEquiv_prod. Same representation documented in source GroupScheme/Defs.lean as blueprint def-sc-group-scheme and used by all ~25 recorded citers (IsSubgroupScheme, torsionSubgroupScheme, IsIsogeny, IsAbelianVariety...); no Sheaf GroupScheme duplicate; all 14 names #check'd in the lean/ env"
  }
 }

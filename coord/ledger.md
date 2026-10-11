@@ -4411,3 +4411,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 11:14 L: merged deliver/E1/lem-weil-pbc-local-completion-quotient (stage 2; reviewer PASS; first push; Sheaf.RingTheory.LocalCompletionQuotient AdicCompletion.exists_local_completion_quotient)
 - 11:14 L: merged deliver/F1/lem-weil-pbc-graded-module-away-restriction (stage 2; reviewer PASS; first push; Sheaf.Algebra.Module.GradedModuleAwayRestriction LocalizedModule.gradedModuleAwayRestriction)
 - 11:14 L: merged deliver/G1/lem-weil-pbc-localization-regular (stage 2; reviewer PASS; first push; Sheaf.RingTheory.LocalizationRegular IsLocalization.isRegular_and_fiber)
+- 11:14 L: merged deliver/J1/def-sc-group-scheme (stage 2; reviewer PASS; first push; Mathlib.CategoryTheory.Monoidal.Grp CategoryTheory.GrpObj; existing declaration)
