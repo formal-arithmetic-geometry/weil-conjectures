@@ -96,18 +96,6 @@ end Comparison
 
 section DirectImage
 
-section Unit
-
-variable {k : Type u} [Field k] (N : ℕ) (hN : (N : k) ≠ 0) {Y : Scheme.{u}}
-  (s : Y ⟶ Spec (CommRingCat.of k))
-
-include hN s in
-/-- An integer `N` that is nonzero in a field `k` is invertible on a `k`-scheme. -/
-lemma isUnit_natCast_of_ne_zero : IsUnit (N : Γ(Y, ⊤)) := by
-  simpa using (Ne.isUnit hN).map ((Scheme.ΓSpecIso (.of k)).inv ≫ s.appTop).hom
-
-end Unit
-
 section General
 
 variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
@@ -141,13 +129,16 @@ theorem boundedConstructible_rightDerivedLowerStar
     DerivedCategory.boundedConstructible A Y ((R(ProEtale.lowerStar A f)).obj K) := by
   obtain ⟨K', hK', ⟨e⟩⟩ := hbc
   have : NeZero N := ⟨by rintro rfl; exact hN Nat.cast_zero⟩
+  -- `N` is invertible on the `k`-scheme `Y`
+  have hNY : IsUnit (N : Γ(Y, ⊤)) := by
+    simpa using (Ne.isUnit hN).map ((Scheme.ΓSpecIso (.of k)).inv ≫ s.appTop).hom
   exact (DerivedCategory.boundedConstructible A Y).prop_of_iso
     ((R(ProEtale.lowerStar A f)).mapIso e.symm ≪≫
       rightDerivedLowerStarMapDerivedCategoryObjIso A f K' hK'.1.1).symm
     (DerivedCategory.boundedConstructible_comparisonUpperStar_mapDerivedCategory_obj
       (Etale.boundedConstructible_rightDerivedLowerStar A (f ≫ s) s f rfl N
         (_root_.DerivedCategory.nsmul_id_eq_zero_of_forall
-          (Sheaf.nsmul_id_eq_zero_of_forall hA) K') (isUnit_natCast_of_ne_zero N hN s) hK'))
+          (Sheaf.nsmul_id_eq_zero_of_forall hA) K') hNY hK'))
 
 end General
 
@@ -186,6 +177,9 @@ theorem boundedConstructible_and_torAmplitudeIn_rightDerivedLowerStar_mapDerived
         ((R(ProEtale.lowerStar (ModuleCat.{u + 1} Λ) f)).obj
           (D(ν^*(X)[ModuleCat.{u + 1} Λ]).obj K')) := by
   have : NeZero N := ⟨by rintro rfl; exact hN Nat.cast_zero⟩
+  -- `N` is invertible on the `k`-scheme `Y`
+  have hNY : IsUnit (N : Γ(Y, ⊤)) := by
+    simpa using (Ne.isUnit hN).map ((Scheme.ΓSpecIso (.of k)).inv ≫ s.appTop).hom
   have e := rightDerivedLowerStarMapDerivedCategoryObjIso (ModuleCat.{u + 1} Λ) f K' hbc.1.1
   refine ⟨boundedConstructible_rightDerivedLowerStar (ModuleCat.{u + 1} Λ) N hN hA s f
     (DerivedCategory.boundedConstructible_comparisonUpperStar_mapDerivedCategory_obj hbc),
@@ -194,7 +188,7 @@ theorem boundedConstructible_and_torAmplitudeIn_rightDerivedLowerStar_mapDerived
   exact (DerivedCategory.torAmplitudeIn_mapDerivedCategory_iff _ _ _).2
     (Etale.torAmplitudeIn_rightDerivedLowerStar _ (f ≫ s) s f rfl d hd a b N
       (_root_.DerivedCategory.nsmul_id_eq_zero_of_forall
-        (Sheaf.nsmul_id_eq_zero_of_forall hA) K') (isUnit_natCast_of_ne_zero N hN s) hbc hta)
+        (Sheaf.nsmul_id_eq_zero_of_forall hA) K') hNY hbc hta)
 
 /-- Blueprint `cor-sf-direct-image-ctf-proetale`: The pro-étale direct image for all finite-Tor
 objects.
