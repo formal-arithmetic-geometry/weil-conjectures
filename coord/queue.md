@@ -1,11 +1,11 @@
 # Work queue
 
-63 items; claim with `tools/claim.py next <group> [--stage N]`.
+59 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (63)
+## Stage 2: nodes to state (59)
 
 | node | distance to Mathlib | kind | blockers |
 |---|---|---|---|
@@ -27,7 +27,6 @@
 | `lem-pc-global-hom-pullback-adjunction` | 1 | state | 0 |
 | `lem-sc-abelian-sheaf-short-exact-stalkwise` | 1 | state | 0 |
 | `lem-sc-affine-koszul-cech-derived-comparison` | 1 | state | 0 |
-| `lem-sc-as-sequence` | 1 | state | 0 |
 | `lem-sc-closed-pushforward-abelian-stalks` | 1 | state | 0 |
 | `lem-sc-etale-standard-cover-cech` | 1 | state | 0 |
 | `lem-sc-etale-zariski-qcoh-comparison` | 1 | state | 0 |
@@ -52,9 +51,7 @@
 | `lem-weil-pbc-colimit-of-sites-injective-system` | 1 | state | 0 |
 | `lem-weil-pbc-etale-mayer-vietoris-pullback` | 1 | state | 0 |
 | `lem-weil-pbc-gabber-strict-henselian-zariski-comparison` | 1 | state | 0 |
-| `lem-weil-pbc-gabber-zariski-etale-restriction-injective` | 1 | state | 0 |
 | `lem-weil-pbc-module-injective-open-cover-cech-acyclic` | 1 | state | 0 |
-| `lem-weil-pbc-module-ses-cech-h1-surjective` | 1 | state | 0 |
 | `lem-weil-pbc-sets-inverse-image-extension-by-empty-constant` | 1 | state | 0 |
 | `lem-weil-pbc-sheaf-basis-surjection` | 1 | state | 0 |
 | `lem-weil-pbc-sheaf-directed-colimit-finite-coequalizers` | 1 | state | 0 |
@@ -66,7 +63,6 @@
 | `lem-weil-pbc-spectral-finite-coequalizer-from-finite-space` | 1 | state | 0 |
 | `lem-weil-pbc-zariski-cohomology-locally-zero` | 1 | state | 0 |
 | `lem-sc-p1-proj-shifted-free-twist` | 2 | state | 0 |
-| `lem-sc-rhom-supported-qcoherent` | 2 | state | 0 |
 | `lem-sc-topological-flasque-acyclic` | 2 | state | 0 |
 | `lem-weil-pbc-site-coverings-common-refinement` | 2 | state | 0 |
 | `lem-weil-pbc-site-plus-injective-separated` | 2 | state | 0 |
