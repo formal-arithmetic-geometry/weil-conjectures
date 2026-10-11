@@ -167,5 +167,23 @@
   "group": "F1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of F1; spot-checked by L: 07P2 (a)=>(b): d kills kK^p, presentation K = B[X_i]/(X_i^p - t_i^p) from the p-basis, Jacobi-Zariski with d(X_i^p - t_i^p) = 0 gives Omega_{K/B} free on dt_i, first exact sequence for k -> B -> K with u = 0"
+ },
+ "lean": {
+  "module": "Sheaf.FieldTheory.PBasisDifferentialsBasis",
+  "declaration": "KaehlerDifferential.exists_basis_differentials_of_pBasis",
+  "file": "lean/Sheaf/FieldTheory/PBasisDifferentialsBasis.lean",
+  "statement": "theorem exists_basis_differentials_of_pBasis {k : Type u} {K : Type v} [Field k] [Field K] [Algebra k K] (p : ℕ) [Fact p.Prime] [CharP k p] [CharP K p] {I : Type w} (t : I → K) (hmon : ∃ b : Module.Basis {E : I →₀ ℕ // ∀ i : I, E i < p} (IntermediateField.adjoin k (Set.range (fun x : K => x ^ p))) K, ∀ E, b E = E.val.prod (fun i e => t i ^ e)) : ∃ b : Module.Basis I K (KaehlerDifferential k K), ∀ i : I, b i = D k K (t i)",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-pbd1249",
+  "group": "C1",
+  "result": "pass",
+  "note": "p prime [Fact p.Prime]+CharP k p (+CharP K p, node says both fields; not instance-derivable), K/k as Algebra, kK^p = IntermediateField.adjoin k (range x^p) concrete, p-basis = Module.Basis on {E : I →₀ ℕ // ∀ i, E i < p} with b E = monomial (same inline form as G1/H1 sibling deliveries), conclusion ∃ Basis I K Ω[K/k] with b i = D k K (t i); empty/infinite I fine; compiled in L"
  }
 }
