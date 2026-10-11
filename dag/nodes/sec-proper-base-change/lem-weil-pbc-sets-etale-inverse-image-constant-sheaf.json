@@ -184,5 +184,22 @@
   "group": "J1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-ics1750 (reviewer sub-agent of L); spot-checked: No cycle: transitive deps of the item (171 nodes) exclude the item and its two citers (constant-sheaf-set-sections-connected-natural, etale-geometric-fibre-inverse-image-constant). Steps follow from the cited statements: section compatibility in step 2 via naturality of lem-galois-inverse-image-representable at iota_e plus unit naturality (0) and h_U terminal; uniqueness by the uniqueness clause of the representable lemma for V. New base-change node: not a duplicate (lem-sc-etale-fibre-product-base-change-coproduct is finite I only); Mathlib grep of AlgebraicGeometry gives only finite-coproduct universality (FinitaryPreExtensive, isPullback_inl_inl_coprodMap), no arbitrary-index match; real lemma, kept. FIX more, RETURN less: (1) E/C4: step 2 applies lem-galois-inverse-image-representable to U_E, which requires U_E an object of U_Et, never established (lem-weil-pbc-scheme-coproduct-copies is countable only, lem-sc-etale-coproduct-etale finite only); inserted an elementary step: the codiagonal is an isomorphism on each open summand, etaleness is pointwise on the source (Tag 02GH), so U_E and the iota_e lie in U_Et; added lem-weil-pbc-scheme-coproduct-family and def-weil-pbc-etale-site to proof_deps.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.EtaleSetInverseImageConstantSheaf",
+  "declaration": "AlgebraicGeometry.etaleSetInverseImageConstantSheaf",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleSetInverseImageConstantSheaf.lean",
+  "statement": "theorem etaleSetInverseImageConstantSheaf (U V : Scheme.{u}) (v : V ⟶ U) (E : Type u) : ∃ γ : (Scheme.etaleSetPullback v).obj ((constantSheaf U.smallEtaleTopology (Type (u + 1))).obj (ULift.{u + 1, u} E)) ⟶ (constantSheaf V.smallEtaleTopology (Type (u + 1))).obj (ULift.{u + 1, u} E), (∀ e : E, γ.hom.app (Opposite.op ((MorphismProperty.Over.pullback (P := @AlgebraicGeometry.Etale) (Q := ⊤) v).obj (Scheme.Etale.mk (𝟙 U)))) (((Functor.sheafPullbackConstruction.sheafAdjunctionContinuous (MorphismProperty.Over.pullback (P := @AlgebraicGeometry.Etale) (Q := ⊤) v) (Type (u + 1)) (U.smallGrothendieckTopology @Etale) (V.smallGrothendieckTopology @Etale)).unit.app ((constantSheaf U.smallEtaleTopology (Type (u + 1))).obj (ULift.{u + 1, u} E))).hom.app (Opposite.op (Scheme.Etale.mk (𝟙 U))) (((toSheafify U.smallEtaleTopology ((Functor.const U.Etaleᵒᵖ).obj (ULift.{u + 1, u} E))).app (Opposite.op (Scheme.Etale.mk (𝟙 U))) ⟨e⟩))) = (toSheafify V.smallEtaleTopology ((Functor.const V.Etaleᵒᵖ).obj (ULift.{u + 1, u} E))).app (Opposite.op ((MorphismProperty.Over.pullback (P := @AlgebraicGeometry.Etale) (Q := ⊤) v).obj (Scheme.Etale.mk (𝟙 U)))) ⟨e⟩) ∧ IsIso γ ∧ ∀ γ' : (Scheme.etaleSetPullback v).obj ((constantSheaf U.smallEtaleTopology (Type (u + 1))).obj (ULift.{u + 1, u} E)) ⟶ (constantSheaf V.smallEtaleTopology (Type (u + 1))).obj (ULift.{u + 1, u} E), (∀ e : E, γ'.hom.app (Opposite.op ((MorphismProperty.Over.pullback (P := @AlgebraicGeometry.Etale) (Q := ⊤) v).obj (Scheme.Etale.mk (𝟙 U)))) (((Functor.sheafPullbackConstruction.sheafAdjunctionContinuous (MorphismProperty.Over.pullback (P := @AlgebraicGeometry.Etale) (Q := ⊤) v) (Type (u + 1)) (U.smallGrothendieckTopology @Etale) (V.smallGrothendieckTopology @Etale)).unit.app ((constantSheaf U.smallEtaleTopology (Type (u + 1))).obj (ULift.{u + 1, u} E))).hom.app (Opposite.op (Scheme.Etale.mk (𝟙 U))) (((toSheafify U.smallEtaleTopology ((Functor.const U.Etaleᵒᵖ).obj (ULift.{u + 1, u} E))).app (Opposite.op (Scheme.Etale.mk (𝟙 U))) ⟨e⟩))) = (toSheafify V.smallEtaleTopology ((Functor.const V.Etaleᵒᵖ).obj (ULift.{u + 1, u} E))).app (Opposite.op ((MorphismProperty.Over.pullback (P := @AlgebraicGeometry.Etale) (Q := ⊤) v).obj (Scheme.Etale.mk (𝟙 U)))) ⟨e⟩) → γ' = γ",
+  "branch": "sheaf-dag",
+  "by": "G1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-ics",
+  "group": "G1",
+  "result": "pass"
  }
 }
