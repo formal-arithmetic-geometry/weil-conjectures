@@ -398,4 +398,136 @@ end ExceptionalPushforward
 
 end GeometricOperations
 
+namespace Correspondence
+
+variable [DerivedBraiding A] (G : GeometricOperations A s) {X Y : Scheme.{u}}
+  {aX : X ⟶ s} {aY : Y ⟶ s}
+  {K : DerivedCategory (Sheaf (Scheme.ProEt.topology X) A)}
+  {L : DerivedCategory (Sheaf (Scheme.ProEt.topology Y) A)}
+
+/-- The first half of the global operator is the proper pullback along the ordinary leg. -/
+lemma globalOperatorUnit_eq (c : Correspondence aX aY K L) (hK : G.ctf X K) [IsGeometric aX]
+    [IsGeometric c.str] [HasCompactification aX] [IsProper c.snd] [HasCompactification c.str] :
+    globalOperatorUnit G c hK = G.properPullback c.snd c.snd_comp hK :=
+  rfl
+
+/-- The second half of the global operator is the exceptional pushforward along the exceptional
+leg. -/
+lemma globalOperatorCounit_eq (c : Correspondence aX aY K L) (hL : G.ctf Y L) [IsGeometric aY]
+    [IsGeometric c.str] [HasCompactification aY] [HasCompactification c.str] :
+    globalOperatorCounit G c hL = G.exceptionalPushforward c.fst c.fst_comp hL :=
+  rfl
+
+variable [IsGeometric aX] [HasCompactification aX]
+
+/-- Blueprint `lem-trf-global-operator-naturality`: the global operator `T_c(u)` is natural in
+the pair `(u, K)`. A morphism `φ : K ⟶ K'` of `Dᵇctf(X)` together with a coefficient map
+`u' : Lc₂^* K' ⟶ Rc₁^! K'` on the same support and legs, compatible with `u` along `φ`, induces
+a commutative square
+
+```
+  RΓ_c(X, K) ──T_c(u)──▶ RΓ_c(X, K)
+      │                     │
+    RΓ_c(φ)               RΓ_c(φ)
+      ▼                     ▼
+  RΓ_c(X, K') ──T_c(u')──▶ RΓ_c(X, K')
+``` -/
+theorem globalOperator_naturality (c : Correspondence aX aX K K) [IsGeometric c.str]
+    [IsProper c.snd] [HasCompactification c.str] (hK : G.ctf X K)
+    {K' : DerivedCategory (Sheaf (Scheme.ProEt.topology X) A)} (hK' : G.ctf X K') (φ : K ⟶ K')
+    (u' : ((upperStar A c.snd).leftDerivedFunctor).obj K' ⟶
+      (rightDerivedUpperShriek A c.fst).obj K')
+    (w : c.coeff ≫ (rightDerivedUpperShriek A c.fst).map φ =
+      ((upperStar A c.snd).leftDerivedFunctor).map φ ≫ u') :
+    globalOperator G c hK ≫ (rightDerivedLowerShriek A aX).map φ =
+      (rightDerivedLowerShriek A aX).map φ ≫ globalOperator G { c with coeff := u' } hK' := by
+  simp only [globalOperator, globalOperatorUnit_eq, globalOperatorCounit_eq, Category.assoc]
+  rw [← G.exceptionalPushforward_naturality, ← Functor.map_comp_assoc, w,
+    Functor.map_comp_assoc, G.properPullback_naturality_assoc]
+
+/-- Blueprint `lem-trf-global-operator-perfect`: every intermediate complex of the composite
+defining the global operator `T_c(u)` is compactly supported cohomology of an object of
+`Dᵇctf`: the coefficient complexes `Lc₂^* K`, `Rc₂_* Lc₂^* K`, `Rc₂_! Lc₂^* K`, `Rc₁^! K` and
+`Rc₁_! Rc₁^! K` all lie in `Dᵇctf`. -/
+theorem ctf_globalOperator (c : Correspondence aX aX K K) [IsGeometric c.str] [IsProper c.snd]
+    (hK : G.ctf X K) :
+    G.ctf c.supp (((upperStar A c.snd).leftDerivedFunctor).obj K) ∧
+      G.ctf X (((lowerStar A c.snd).rightDerivedFunctor).obj
+        (((upperStar A c.snd).leftDerivedFunctor).obj K)) ∧
+      G.ctf X ((rightDerivedLowerShriek A c.snd).obj
+        (((upperStar A c.snd).leftDerivedFunctor).obj K)) ∧
+      G.ctf c.supp ((rightDerivedUpperShriek A c.fst).obj K) ∧
+      G.ctf X ((rightDerivedLowerShriek A c.fst).obj ((rightDerivedUpperShriek A c.fst).obj K)) :=
+  have h₂ : IsGeometricHom s c.snd := .mk c.snd_comp
+  have h₁ : IsGeometricHom s c.fst := .mk c.fst_comp
+  ⟨G.ctf_upperStar _ h₂ hK, G.ctf_lowerStar _ h₂ (G.ctf_upperStar _ h₂ hK),
+    G.ctf_lowerShriek _ h₂ (G.ctf_upperStar _ h₂ hK), G.ctf_upperShriek _ h₁ hK,
+    G.ctf_lowerShriek _ h₁ (G.ctf_upperShriek _ h₁ hK)⟩
+
+variable (hK : G.ctf X K)
+
+/-- The ordinary-pullback leg of `ofGraph G aX K hK g hg v` is `g`, proper when `g` is. -/
+instance isProper_snd_ofGraph (g : X ⟶ X) (hg : g ≫ aX = aX) [IsProper g]
+    (v : ((upperStar A g).leftDerivedFunctor).obj K ⟶ K) :
+    IsProper (ofGraph G aX K hK g hg v).snd :=
+  inferInstanceAs (IsProper g)
+
+/-- Blueprint `prop-trf-graph-operator`: the global operator of the graph correspondence `(1, g)`
+of a proper `s`-endomorphism `g : X ⟶ X` with coefficient map `v : Lg^* K ⟶ K` is the composite
+
+```
+  RΓ_c(X, K) ──g^*──▶ RΓ_c(X, Lg^* K) ──RΓ_c(v)──▶ RΓ_c(X, K)
+```
+
+of the proper pullback along `g` (the unit `K ⟶ Rg_* Lg^* K` read through `Rg_* = Rg_!`) and
+`RΓ_c(X, v)`. -/
+theorem globalOperator_ofGraph (g : X ⟶ X) (hg : g ≫ aX = aX) [IsProper g]
+    (v : ((upperStar A g).leftDerivedFunctor).obj K ⟶ K) :
+    globalOperator G (ofGraph G aX K hK g hg v) hK =
+      G.properPullback g hg hK ≫ (rightDerivedLowerShriek A aX).map v := by
+  simp only [globalOperator, globalOperatorUnit_eq, globalOperatorCounit_eq]
+  change G.properPullback g hg hK ≫ (rightDerivedLowerShriek A aX).map
+      (v ≫ (G.upperShriekIdIso X (.id aX) K hK).hom) ≫
+      G.exceptionalPushforward (𝟙 X) (Category.id_comp aX) hK = _
+  rw [Functor.map_comp_assoc, G.exceptionalPushforward_id]
+  simp
+
+
+/-- Blueprint `prop-trf-graph-operator`: the global operator of a graph correspondence is
+functorial in `(K, v)`. A morphism `φ : K ⟶ K'` of `Dᵇctf(X)` compatible with the coefficient
+maps `v : Lg^* K ⟶ K` and `v' : Lg^* K' ⟶ K'` intertwines the global operators. -/
+theorem globalOperator_ofGraph_naturality (g : X ⟶ X) (hg : g ≫ aX = aX) [IsProper g]
+    (v : ((upperStar A g).leftDerivedFunctor).obj K ⟶ K)
+    {K' : DerivedCategory (Sheaf (Scheme.ProEt.topology X) A)} (hK' : G.ctf X K')
+    (v' : ((upperStar A g).leftDerivedFunctor).obj K' ⟶ K') (φ : K ⟶ K')
+    (w : ((upperStar A g).leftDerivedFunctor).map φ ≫ v' = v ≫ φ) :
+    globalOperator G (ofGraph G aX K hK g hg v) hK ≫ (rightDerivedLowerShriek A aX).map φ =
+      (rightDerivedLowerShriek A aX).map φ ≫ globalOperator G (ofGraph G aX K' hK' g hg v') hK' := by
+  rw [globalOperator_ofGraph, globalOperator_ofGraph, Category.assoc, ← Functor.map_comp, ← w,
+    Functor.map_comp, G.properPullback_naturality_assoc]
+
+/-- Blueprint `prop-trf-graph-operator`: the global operator of graph correspondences is
+compatible with composition of proper endomorphisms. For proper `s`-endomorphisms `g` and `h`
+of `X` with coefficient maps `v_g : Lg^* K ⟶ K` and `v_h : Lh^* K ⟶ K`, the graph
+correspondence of `h ≫ g` with the composite coefficient map
+
+```
+  L(h ≫ g)^* K ≃ Lh^* Lg^* K ──Lh^* v_g──▶ Lh^* K ──v_h──▶ K
+```
+
+has global operator `T(v_g)` followed by `T(v_h)`. -/
+theorem globalOperator_ofGraph_comp (g h : X ⟶ X) (hg : g ≫ aX = aX) (hh : h ≫ aX = aX)
+    [IsProper g] [IsProper h] (vg : ((upperStar A g).leftDerivedFunctor).obj K ⟶ K)
+    (vh : ((upperStar A h).leftDerivedFunctor).obj K ⟶ K) :
+    globalOperator G (ofGraph G aX K hK (h ≫ g) (by rw [Category.assoc, hg, hh])
+        ((leftDerivedUpperStarCompIso h rfl K).inv ≫
+          ((upperStar A h).leftDerivedFunctor).map vg ≫ vh)) hK =
+      globalOperator G (ofGraph G aX K hK g hg vg) hK ≫
+        globalOperator G (ofGraph G aX K hK h hh vh) hK := by
+  rw [globalOperator_ofGraph, globalOperator_ofGraph, globalOperator_ofGraph,
+    G.properPullback_comp g h hg hh hK, Category.assoc, Category.assoc, ← Functor.map_comp,
+    Iso.hom_inv_id_assoc, Functor.map_comp, Category.assoc,
+    ← G.properPullback_naturality_assoc]
+end Correspondence
+
 end AlgebraicGeometry.ProEtale
