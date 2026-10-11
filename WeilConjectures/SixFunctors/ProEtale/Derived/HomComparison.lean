@@ -45,7 +45,7 @@ with the internal hom of bounded constructible complexes at a finite coefficient
 
 The canonical comparison map `ν^* RHom(K, M) ⟶ RHom(ν^* K, ν^* M)` needs a monoidal structure
 on the derived `ν^*` compatible with the internal homs, which is not formalised (only the
-tensor comparison `AlgebraicGeometry.ProEtale.leftDerivedComparisonUpperStarTensorNatIso` is);
+tensor comparison `CategoryTheory.Functor.leftDerivedTensorComparison` is);
 the comparison is therefore stated as the existence of an isomorphism.
 
 -/
@@ -142,7 +142,7 @@ comparison.
 The blueprint asserts that canonical comparison maps are isomorphisms. The map
 `ν^* RHom(K, M) ⟶ RHom(ν^* K, ν^* M)` is the adjoint of
 `ν^* RHom(K, M) ⊗ᴸ ν^* K ≅ ν^* (RHom(K, M) ⊗ᴸ K) ⟶ ν^* M`, built from
-`AlgebraicGeometry.ProEtale.leftDerivedComparisonUpperStarTensorNatIso` and the evaluation;
+`CategoryTheory.Functor.leftDerivedTensorComparison` of `ν^*` and the evaluation;
 constructing it and proving it is an isomorphism is left to the subsection of this node. Here
 the existence of isomorphisms is stated, and the identification of evaluations and double-dual
 maps is rendered as clause 3. Clauses 2 and 3 are stated whenever the exceptional inverse image
