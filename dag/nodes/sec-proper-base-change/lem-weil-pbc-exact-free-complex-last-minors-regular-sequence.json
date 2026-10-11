@@ -213,5 +213,24 @@
   "item": "lem-weil-pbc-exact-free-complex-last-minors-regular-sequence",
   "worker": "stage1",
   "summary": "Statement kept (checked against 00N1 (1) => (2)(b) for i = e and against the citer lem-weil-pbc-residue-field-pd-le-krull-dimension step 2, which uses exactly this dichotomy for the maximal minors of the last map). Proof written from the second paragraph of the proof of 00N1, restricted to i = e: induction on e (P(e) stated in step 1); I is not in any associated prime q because, after localizing at q (depth 0, 05BZ), the injective last map has a unit maximal minor (00MY + 00MW for a two-term complex, new node); prime avoidance with Ass(R) finite (00LC) and zerodivisors = union of Ass (00LD) gives a nonzerodivisor x in I inside m; 00MZ (new node) reduces the complex mod x, the induction hypothesis gives a regular sequence of length e-1 in I/xR, and lifting it after x gives length e. Since only the last map is needed and I is the ideal of maximal minors, the rank and I(phi) of Definition 00MV are not needed (the source's rank bookkeeping only serves the other indices i < e) and x is chosen in I rather than in the product of all I(phi_i). Base change of minors, the base case and the lifting of regular sequences are elementary steps. New nodes: three Mathlib leaves (00LC, 00LD, 05BZ) and two unsplit (00MY+00MW for one injective map; 00MZ, with Mathlib candidate QuotSMulTop.map_first_exact_on_four_term_exact_of_isSMulRegular_last). Searched in Mathlib with LeanSearch, Loogle, LeanFinder, grep and local_search."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ExactFreeComplexLastMinors",
+  "declaration": "exact_free_complex_last_minors_regular_sequence",
+  "file": "lean/Sheaf/AlgebraicGeometry/ExactFreeComplexLastMinors.lean",
+  "statement": "theorem exact_free_complex_last_minors_regular_sequence (R : Type u) [CommRing R] [IsNoetherianRing R] [IsLocalRing R] (e : ℕ) (he : 1 ≤ e) (n : ℕ → ℕ) (φ : ∀ i : ℕ, Matrix (Fin (n (i - 1))) (Fin (n i)) R) (hcomplex : ∀ i : ℕ, 1 ≤ i → i + 1 ≤ e → ∀ v : Fin (n (i + 1)) → R, (φ i).mulVec ((φ (i + 1)).mulVec v) = 0) (hexact : ∀ i : ℕ, 1 ≤ i → i + 1 ≤ e → Function.Exact (φ (i + 1)).mulVec (φ i).mulVec) (hinjective : Function.Injective (φ e).mulVec) : let I : Ideal R := Ideal.span {d : R | ∃ r : Fin (n e) → Fin (n (e - 1)), StrictMono r ∧ d = ((φ e).submatrix r id).det} I = ⊤ ∨ ∃ rs : List R, rs.length = e ∧ (∀ x ∈ rs, x ∈ I) ∧ RingTheory.Sequence.IsRegular R rs",
+  "branch": "sheaf-dag",
+  "by": "G1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-efm1013"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-efm1013",
+  "group": "G1",
+  "result": "fix",
+  "note": "Noetherian local R; e>=1; n_i ranks; phi_i matrices on Fin n->R via mulVec with node indexing 1..e; complex phi_i(phi_{i+1}v)=0 for 1<=i<=e-1; Function.Exact at R^{n_i} 1<=i<=e-1; injective phi_e; I = span of det of StrictMono row submatrices of phi_e (empty minor 1, bot if n_{e-1}<n_e); I=top or length-e list in I with RingTheory.Sequence.IsRegular"
  }
 }
