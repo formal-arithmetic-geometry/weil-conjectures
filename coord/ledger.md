@@ -4660,3 +4660,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 12:42 L: merged deliver/G1/lem-weil-pbc-popescu-delocalize-weak (stage 2; reviewer FIX; first push; Sheaf.RingTheory.PopescuDelocalizeWeak Algebra.exists_factorization_singularIdeal_not_le_of_local_popescu_resolution)
 - 12:43 L: merged deliver/E1/lem-weil-pbc-popescu-find-sequence (stage 2; reviewer FIX; first push; Sheaf.RingTheory.ExistsGeneratorsWithControlledAnnihilators Ideal.exists_generators_with_controlled_annihilators)
 - 12:43 L: merged deliver/H1/lem-weil-pbc-integral-algebra-directed-colimit-finite (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.IntegralAlgebraDirectedColimitFinite AlgebraicGeometry.integral_algebra_directed_colimit_finite; new nodes: def-weil-pbc-quasi-coherent-algebra)
+- 12:43 L: merged deliver/C1/lem-weil-pbc-polynomial-ring-n2 (stage 2; reviewer PASS; first push; Sheaf.RingTheory.PolynomialRingN2 isN2_polynomial)

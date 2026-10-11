@@ -254,5 +254,23 @@
   "item": "lem-weil-pbc-polynomial-ring-n2",
   "worker": "stage1",
   "summary": "Read Algebra 032O (algebra.tex 45411-45444) and the lemmas its proof uses: 032K (finite-extension-N-2, proof omitted with a hint), 032M (char zero), 032N (char p: N-2 tested on purely inseparable extensions, used unnamed), 030A (polynomial ring over normal domain), 032L (separable case); tags verified in tags/tags. Not a Mathlib leaf (no N-2 notion in Mathlib; searches recorded). Statement kept (matches the source's second assertion and what the only citer, lem-weil-pbc-nagata-universally-japanese step 0, uses). Proof in 8 steps: reduction to R normal (the N-2 case of 032K written out for R[x] in R'[x], same fraction field, via integral-transitive and finite-module-over-finite-algebra), properties of R[x], characteristic 0 via 032L, characteristic p via a new unsplit node for 032N, the source's 'details omitted' (L inside L'(x^{1/q}) with L'/K finite purely inseparable) written out with the Frobenius, reduction to L'(t) by Noetherianity, the equality C = A[t] via normality of A[t] and transcendence of t, and finiteness of A[t] over R[x]. One new node: lem-weil-pbc-n2-char-p-purely-inseparable-criterion (032N), unsplit, no Mathlib match."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.PolynomialRingN2",
+  "declaration": "isN2_polynomial",
+  "file": "lean/Sheaf/RingTheory/PolynomialRingN2.lean",
+  "statement": "theorem isN2_polynomial (R : Type u) [CommRing R] [IsDomain R] [IsNoetherianRing R] (hR : IsN2 R (FractionRing R)) : IsN2 (Polynomial R) (FractionRing (Polynomial R))",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-prn1334",
+  "group": "C1",
+  "result": "pass",
+  "note": "R:Type u CommRing+IsDomain (integral domain), IsNoetherianRing R (Noetherian, not hollow), hR: IsN2 R (FractionRing R) (N-2, landed J1 def, same FractionRing form as citer IsNagataRing/IsUniversallyJapanese), conclusion IsN2 (Polynomial R) (FractionRing (Polynomial R)) = all finite L/K(x) with composite action, Module.Finite of integralClosure; no extra hypotheses, no let, node statement unchanged"
  }
 }
