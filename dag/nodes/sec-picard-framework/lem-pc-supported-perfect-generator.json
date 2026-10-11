@@ -179,5 +179,27 @@
   "group": "E1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-spg2612 (reviewer sub-agent of L); spot-checked: Read packet, Tag 0A9A source, cited nodes and the C1/K1 neighbours (09IR koszul-orthogonal, 08DP/08DF supported-open-pushforward, open-induction-step, map-lift); 'generates' = def-pc-generators as used by citer lem-sc-supported-derived-generated-perfect. FIX more, RETURN less: (1) C4: Step 2 applied lem-pc-perfect-generation-open-induction-step, whose hypothesis is a generator of all of D_QCoh(O_U) (P only generates the T-supported part) and whose K' is supported on V minus U, not on T; rewrote: Q from lem-sc-perfect-support-map-lift (E=0), K' = Ri_* of Koszul on Z cap T via lem-pc-supported-open-pushforward. (2) C4/C1: Step 3 derived E|_V = pushforward from the affine supported-generator statement (which does not say it) and left the overlap calculation uncited; now 09IR node on V with W, supported-open-pushforward on W, derived-direct-image-composition, restrict-derived-direct-image-open (generic tool use: restriction of Rj_* to an open), open-cover iso; Koszul support by Tag 0663, induction by Tag 08DR. (3) class (d): new lem-pc-affine-supported-perfect-generator is two lines from lem-pc-perfect-generation-koszul-orthogonal + Tag 0663; folded into Step 1, node dropped. The Second reading by E1 missed (1) and (2).; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SupportedPerfectGenerator",
+  "declaration": "AlgebraicGeometry.supported_perfect_generator",
+  "declarations": [
+   "AlgebraicGeometry.supported_perfect_generator"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/SupportedPerfectGenerator.lean",
+  "statement": "theorem supported_perfect_generator (X : Scheme.{u}) [CompactSpace X] [QuasiSeparatedSpace X] [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))] [∀ U : X.Opens, HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))] (T : Set X) (hT : IsClosed T) (hTc : IsCompact Tᶜ) : ObjectProperty.IsTriangulated (fun K : schemeDerivedCategory X ↦ schemeDerivedQCohProperty X K ∧ ∀ (n : ℤ) (x : X), x ∉ T → Subsingleton (↑(TopCat.Presheaf.stalk ((DerivedCategory.homologyFunctor (SheafOfModules.{u} (moduleRings X.toRingedSpace)) n).obj K).val.presheaf x))) ∧ ∃ E : schemeDerivedQCohCategory X, Scheme.IsPerfect X E.obj ∧ (∀ (n : ℤ) (x : X), x ∉ T → Subsingleton (↑(TopCat.Presheaf.stalk ((DerivedCategory.homologyFunctor (SheafOfModules.{u} (moduleRings X.toRingedSpace)) n).obj E.obj).val.presheaf x))) ∧ ∀ K : schemeDerivedQCohCategory X, (∀ (n : ℤ) (x : X), x ∉ T → Subsingleton (↑(TopCat.Presheaf.stalk ((DerivedCategory.homologyFunctor (SheafOfModules.{u} (moduleRings X.toRingedSpace)) n).obj K.obj).val.presheaf x))) → (IsZero K.obj ↔ ∀ n : ℤ, Subsingleton (E.obj⟦n⟧ ⟶ K.obj))",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-spg"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-spg",
+  "group": "E1",
+  "result": "fix",
+  "note": "X qcqs (CompactSpace/QuasiSeparatedSpace), T closed, X\\T qc (IsCompact Tᶜ as landed map-lift); D_QCoh,T = schemeDerivedQCohProperty + STATE stalkwise support; triangulated = ObjectProperty.IsTriangulated of that property (no letI); single E in D_QCoh perfect, supported on T, generator = shifted-Hom zero-detection over supported K (sibling C1 67d66a7a5 form); dropped def-pc-supported-derived-category (second spelling of support: restriction-to-open vs STATE stalkwise); dropped duplicate new node(s) def-pc-supported-derived-category (--drop-nodes; not merged, the item points at the landed declaration)"
  }
 }

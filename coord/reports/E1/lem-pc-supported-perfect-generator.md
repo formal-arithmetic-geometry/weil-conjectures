@@ -1,25 +1,99 @@
-1. Files written:
+## Worker report
 
-- `lem-pc-supported-perfect-generator.json`: statement node split, no Mathlib match.
-- `lem-pc-affine-supported-perfect-generator.json`: statement-only affine input, no Mathlib match.
+The delivery defines `IsSupportedOn` and `supportedDerivedQCohProperty` in
+`Sheaf.AlgebraicGeometry.SupportedDerivedCategory`, then states
+`AlgebraicGeometry.supported_perfect_generator` in
+`Sheaf.AlgebraicGeometry.SupportedPerfectGenerator`. The theorem takes a
+quasi-compact, quasi-separated scheme, a closed subset and quasi-compact open
+complement, and produces the triangulated structure and a perfect weak generator
+of the supported quasi-coherent derived subcategory. The explicit witnesses for
+zero object, shift, preadditivity, additive shifts, pretriangulation, and
+triangulation render the triangulated-category clause; `hsub` renders the
+supported full subcategory's triangulated structure; `Scheme.IsPerfect` renders
+perfectness and `IsWeakTriangulatedGenerator` renders generation. The proof is
+`sorry` as required.
 
-2. Attachments: none.
+Dependencies used: `Sheaf.AlgebraicGeometry.DerivedCategory` declarations
+`schemeDerivedCategory` and `schemeDerivedQCohCategory`; `Sheaf.AlgebraicGeometry.PerfectComplex`
+declaration `AlgebraicGeometry.Scheme.IsPerfect`; `Sheaf.CategoryTheory.WeakTriangulatedGenerator`
+declaration `CategoryTheory.IsWeakTriangulatedGenerator`; Mathlib
+`CategoryTheory.ObjectProperty.FullSubcategory`, `CategoryTheory.Pretriangulated`,
+`CategoryTheory.IsTriangulated`, `Topology.IsClosed`, and `AlgebraicGeometry.QuasiCompact`.
 
-3. WANTED: `literature/stacks-project/perfect.tex`, Tag 0A9A (Lemma 36.15.4), including the affine supported-generation proof and finite affine-cover induction; the repository contains only the citation index, so the proof is recorded from the imported Stacks statement and existing project nodes.
+Edge cases checked include empty support (`T = ∅`, whose complement is all of X),
+full support (`T = Set.univ`, empty complement), and the empty open complement.
+Searches used `rg` over `lean/Sheaf` and the source checkout for support and
+perfect-generator declarations, plus Mathlib grep for supported derived objects;
+no existing declaration matching the theorem was found. The dependency notion
+`def-pc-supported-derived-category` was missing a Lean declaration, so its new
+module is included in this delivery.
 
-4. The imported item was unsplit although its proof requires the affine supported-generator input. I added that strictly smaller statement-only node and kept the item proof at the induction level. I searched the DAG and blueprint for affine supported generation and for the Stacks tag; no duplicate node or blueprint statement exists. The Lean source has no declaration tagged `(blueprint: lem-pc-supported-perfect-generator)` and no declaration with this supported-generation statement.
+## Dependency modules
 
-## Review by E1
+`def-pc-supported-derived-category`: no existing declaration stated the supported
+subcategory notion. The module defines restriction-to-the-open-complement support
+and the corresponding full-subcategory property.
 
-I checked the item statement against its imported source citation and retained its hypotheses: X is qcqs, T is closed, and X minus T is quasi-compact. I read the statements of every cited node. Step 1 uses exactly the new affine child’s conclusion. Step 2 uses the open-induction node for adjoining an affine open, the affine support-extension node for producing a supported perfect object, and the map-lifting node for preserving support; the hypotheses T and T intersect U match those statements. Step 3 uses the induction node’s generator conclusion and the definition of generator to turn finite affine-cover induction into detection of every supported object. Step 4 uses the triangulated-category definition; its support closure argument is elementary from the long exact cohomology sequence. I corrected the child’s statement to introduce the affine scheme and supported subcategory explicitly, and recorded all required Mathlib searches (LeanSearch unavailable, LeanFinder/Loogle/grep no match). The source text itself is absent from this checkout, which is recorded under WANTED rather than treated as a Mathlib result.
+## Earlier second reading (a previous round; superseded)
 
-## Not duplicates
+Read the node and both modules. The hypotheses `X` quasi-compact and
+quasi-separated, `T` closed, and quasi-compact complement are rendered directly.
+The conclusion's triangulated supported subcategory, single perfect object, and
+weak-generator clauses are each present; the explicit categorical witnesses make
+all ambient structures required by the Lean definitions visible.
 
-lem-pc-affine-supported-perfect-generator vs lem-pc-supported-perfect-generator: the new node is the affine specialization X=Spec(A), used as the base case of the finite affine-cover induction; the existing item is the global qcqs theorem for an arbitrary scheme.
+## New nodes
+
+`def-pc-supported-derived-category` adds the missing supported-object notion.
 
 ## Second reading by E1
 
-- Item statement: checked against Stacks Tag 0A9A (Lemma 36.15.4); verdict: hypotheses and conclusion agree.
-- Steps 1-4: checked against the full Tag 0A9A proof and every cited node statement; verdict: affine base, fixed Q plus K' induction, vanishing criterion, and triangulated closure are recorded.
-- Affine child: checked B1-B7 and T empty, T=X, and X=Spec(k); verdict: self-contained and no Mathlib match.
-- Changes: removed undefined `D_QCoh,T`; replaced the per-object lifting argument with fixed-object induction; refreshed citation quotes.
+Step 1 list and verdicts against the node statement:
+
+1. `X` is a scheme, rendered as `X : Scheme.{u'}`; the required quasi-compact and
+   quasi-separated hypotheses are `[CompactSpace X]` and `[QuasiSeparatedSpace X]`.
+   Verdict: same hypotheses (the project convention records these properties this way).
+2. `T` is a closed subset of `X`, rendered as `(T : Set X)` with
+   `hT : IsClosed T`; its quasi-compact open complement is rendered by
+   `hTqc : QuasiCompact (Scheme.Opens.ι ⟨Tᶜ, IsClosed.isOpen_compl⟩)`. Verdict: same
+   closedness and complement hypothesis, with no stronger finiteness condition.
+3. The ambient derived category is `schemeDerivedCategory X`, and the supported
+   quasi-coherent property is `supportedDerivedQCohProperty X T`; the latter is the
+   full subcategory of objects with quasi-coherent cohomology and zero restriction
+   to `Tᶜ`, as defined in `SupportedDerivedCategory.lean`. Verdict: this renders
+   `D_QCoh,T(X)` and the cohomology-support clause of the node.
+4. The triangulated conclusion is
+   `∃ htri : (supportedDerivedQCohProperty X T).IsTriangulated, letI := htri`.
+   Verdict: exactly the assertion that the supported full subcategory is triangulated.
+5. The single generator is
+   `∃ E : (supportedDerivedQCohProperty X T).FullSubcategory`; its underlying object
+   is `E.obj`. Verdict: one object in the supported subcategory, hence its cohomology
+   sheaves are supported on `T`.
+6. Perfectness is `Scheme.IsPerfect X E.obj`. Verdict: the node's perfect-complex
+   clause, using the recorded project definition.
+7. Generation is `IsWeakTriangulatedGenerator E` after installing `htri`. Verdict:
+   the recorded `def-pc-generators` notion is used directly, with the same shift and
+   Hom-detection meaning.
+
+The additional `HasDerivedCategory` binders for `X` and every open are the carrier
+instances required by the dependency definitions (`schemeDerivedCategory` and
+`Scheme.IsPerfect`); they do not add a mathematical hypothesis beyond making the
+node's stated notions well-typed.
+
+Edge cases checked: `T = ∅` gives the full open complement; `T = Set.univ` gives an
+empty complement; an empty complement is still represented by the displayed open;
+zero objects satisfy the support condition and are handled by the weak-generator
+predicate; no index set or natural-number parameter occurs; the statement is
+characteristic-independent; and the universe of `T` is the scheme's universe.
+
+Searches: `rg` over the project and slopmaster2 source for supported-derived,
+perfect-generator, and weak-generator declarations, plus Mathlib searches recorded
+on the node (LeanSearch, Loogle, and grep), found no existing declaration matching
+this theorem or the supported-subcategory notion. The missing notion was therefore
+added as the new definition node `def-pc-supported-derived-category` and its module
+`SupportedDerivedCategory.lean`.
+
+Mismatches found: none. The dependency module's `IsSupportedOn` uses restriction to
+an open equal to `Tᶜ` and vanishing of every homology sheaf, which matches the source
+notation for support. The theorem signature is unchanged from the worker version.
+Both delivery modules compile cleanly with only the intended theorem `sorry`.
