@@ -120,5 +120,23 @@
   "group": "G1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-wal3150 (reviewer sub-agent of L); spot-checked: Statement vs Tag 0566 and parent lem-sc-ass-weakass-fg-prime inline weakly-associated definition (C4 match); all three implications (1)=>(3)=>(2)=>(1) present; mathlib grep 'weakly' in RingTheory/Ideal/AssociatedPrime: no hits; no duplicate (lem-sc-associated-localization-fg is the associated-prime fg analogue, different statement). FIX more, RETURN less: (1) C1 prime correspondence under localization uncited in Steps 1 and 3 -> cite lem-weil-pbc-primes-of-localization (Tag 00E3, generic tool from sk-thm-p1, tool_uses), proof_deps updated; (2) Ann_{R_p}(m/1)=Ann_R(m)R_p asserted without argument -> single-element argument written in Steps 1 and 3; (3) Step 1 had a wrong inference (u(m/1)=0 => u^n m=0) in an unneeded nonzeroness claim and justified radical(I R_p)=pR_p only by 'pR_p is prime' -> removed, radical argued via every prime over I R_p being pR_p; Step 3 now shows p contains Ann_R(m) by contraction. Second reading by G1 missed all three.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.WeakAssLocalization",
+  "declaration": "Module.weakly_associated_atPrime_iff",
+  "file": "lean/Sheaf/RingTheory/WeakAssLocalization.lean",
+  "statement": "theorem weakly_associated_atPrime_iff {R : Type u} [CommRing R] {M : Type v} [AddCommGroup M] [Module R M] (p : Ideal R) [p.IsPrime] : ((∃ m : M, p ∈ ((⊥ : Submodule R M).colon {m}).minimalPrimes) ↔ (∃ x : LocalizedModule.AtPrime p M, p.map (algebraMap R (Localization.AtPrime p)) ∈ ((⊥ : Submodule (Localization.AtPrime p) (LocalizedModule.AtPrime p M)).colon {x}).minimalPrimes)) ∧ ((∃ x : LocalizedModule.AtPrime p M, p.map (algebraMap R (Localization.AtPrime p)) ∈ ((⊥ : Submodule (Localization.AtPrime p) (LocalizedModule.AtPrime p M)).colon {x}).minimalPrimes) ↔ (∃ x : LocalizedModule.AtPrime p M, ((⊥ : Submodule (Localization.AtPrime p) (LocalizedModule.AtPrime p M)).colon {x}).radical = p.map (algebraMap R (Localization.AtPrime p))))",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-wal1301",
+  "group": "H1",
+  "result": "pass",
+  "note": "CommRing R, AddCommGroup/Module M, p prime (no extra hyps); R_p=Localization.AtPrime p, M_p=LocalizedModule.AtPrime p M, pR_p=p.map algebraMap; (1) colon-{m} minimalPrimes over R, (2) same over R_p for x in M_p, (3) radical of R_p-annihilator = pR_p; (1<->2)&(2<->3); L colon convention (Ideal.WeakAss ring-only, not applicable); Mathlib-only imports; docstring = node's 3 steps"
  }
 }
