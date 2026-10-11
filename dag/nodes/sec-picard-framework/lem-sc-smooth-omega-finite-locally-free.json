@@ -22,7 +22,8 @@
   "def-pc-scheme",
   "def-sbc-smooth-morphisms",
   "def-weil-pbc-kahler-differentials",
-  "def-amb-finite-locally-free-module"
+  "def-amb-finite-locally-free-module",
+  "def-sc-relative-differential-sheaf"
  ],
  "proof": [
   {
@@ -130,5 +131,24 @@
   "group": "G1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-sol1750 (reviewer sub-agent of L); spot-checked: Step 1: def-sbc-smooth-morphisms gives dim_x(X_{f(x)})=d at every x; lem-weil-pbc-smooth-differentials-free-rank-fibre-dimension (smooth f, point x) gives affine W∋x, V with Omega_{A/R} free of rank that dimension: hypotheses match (C4). Step 2 elementary: ~(A^d)=O_W^d, cover of X, def-amb-finite-locally-free-module. No cycle (cited lemma is pre-existing, not from this item). No new nodes. Mathlib grep of AlgebraicGeometry: no scheme-level sheaf of Kaehler differentials or rank statement, so no leaf. Second reading: no missed fault."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.IsFiniteLocallyFreeOfRankRelativeDifferentials",
+  "declaration": "AlgebraicGeometry.Scheme.Hom.isFiniteLocallyFreeOfRank_relativeDifferentials",
+  "file": "lean/Sheaf/AlgebraicGeometry/IsFiniteLocallyFreeOfRankRelativeDifferentials.lean",
+  "statement": "theorem isFiniteLocallyFreeOfRank_relativeDifferentials {X S : Scheme.{u}} (f : X ⟶ S) (d : ℕ) [SmoothOfRelativeDimension d f] : SheafOfModules.IsFiniteLocallyFreeOfRank.{u, u, u} (R := X.ringCatSheaf) f.relativeDifferentials d",
+  "branch": "sheaf-dag",
+  "by": "M1",
+  "date": "2026-10-11",
+  "existing": false,
+  "note": "Uses the already landed def-sc-relative-differential-sheaf; adds only that existing recorded node to stmt_deps."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-sof1232",
+  "group": "M1",
+  "result": "pass",
+  "note": "X S : Scheme.{u}, f : X ⟶ S = def-pc-scheme; d : ℕ = integer d≥0 (d=0 etale ok); [SmoothOfRelativeDimension d f] = recorded declaration of def-sbc-smooth-morphisms (no separate Smooth needed); Ω = landed f.relativeDifferentials (def-sc-relative-differential-sheaf, landed stmt_dep added); conclusion IsFiniteLocallyFreeOfRank.{u,u,u} (R := X.ringCatSheaf) _ d = def-amb-finite-locally-free-module with constant rank d, same form as landed FinitePushforwardLocallyFree; #check resolves to AlgebraicGeometry.SmoothOfRelativeDimension; no let, no hollow binder, no new defs"
  }
 }
