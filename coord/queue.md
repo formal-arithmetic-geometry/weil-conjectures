@@ -1,11 +1,11 @@
 # Work queue
 
-590 items; claim with `tools/claim.py next <group> [--stage N]`.
+586 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (590)
+## Stage 2: nodes to state (586)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -20,10 +20,8 @@
 | `lem-weil-pbc-flat-completion` | 1 | state |
 | `lem-weil-pbc-flat-local-completion-iso` | 1 | state |
 | `lem-weil-pbc-flat-mod-injective` | 1 | state |
-| `lem-weil-pbc-flat-smooth-fibre-smooth-at-prime` | 1 | state |
 | `lem-weil-pbc-formal-glueing-H0-localization` | 1 | state |
 | `lem-weil-pbc-formal-glueing-canonical-maps` | 1 | state |
-| `lem-weil-pbc-fpqc-descend-finite` | 1 | state |
 | `lem-weil-pbc-fpqc-descend-quasi-compact` | 1 | state |
 | `lem-weil-pbc-fpqc-finer-than-etale` | 1 | state |
 | `lem-weil-pbc-fpqc-local-on-base-criterion` | 1 | state |
@@ -37,11 +35,9 @@
 | `lem-weil-pbc-fs-adic-complete-source-target` | 1 | state |
 | `lem-weil-pbc-fs-adic-field-differentials-injective` | 1 | state |
 | `lem-weil-pbc-fs-adic-field-geometrically-regular` | 1 | state |
-| `lem-weil-pbc-fs-adic-field-regular-local` | 1 | state |
 | `lem-weil-pbc-fs-adic-flat-geometrically-regular-closed-fibre` | 1 | state |
 | `lem-weil-pbc-fs-adic-lift-derivation` | 1 | state |
 | `lem-weil-pbc-fs-adic-lift-from-residue-field` | 1 | state |
-| `lem-weil-pbc-fs-adic-lift-into-complete` | 1 | state |
 | `lem-weil-pbc-fs-adic-lift-over-finite-coefficient-map` | 1 | state |
 | `lem-weil-pbc-fs-adic-local-flat` | 1 | state |
 | `lem-weil-pbc-g-ring-check-pairs-of-primes` | 1 | state |
