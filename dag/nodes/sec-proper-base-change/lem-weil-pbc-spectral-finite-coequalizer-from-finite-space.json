@@ -217,5 +217,23 @@
   "by": "L",
   "result": "accepted",
   "note": "8 steps following Stacks 0CAK with the two omitted details written out: X = lim of finite sober spaces (new 09XX node) with spectral projections (new 0A2Z node), descent of the finitely many quasi-compact opens (new 0A30 node), maps out of j_{W!}T as maps of sets, the target coproduct comes from stage i_0 (new node: inverse image of j_{V!}T), descent of beta, gamma by 0A32 (new node) with the composition isomorphism of inverse images (new 008I node), G the coequalizer on X_{i_1}, f^{-1}G = F, finite stalks (new 009E (5) leaf, composed; lines verified by L). Tags verified."
+ },
+ "lean": {
+  "module": "Sheaf.Topology.SpectralFiniteCoequalizer",
+  "declaration": "TopCat.spectral_finite_coequalizer_from_finite_space",
+  "file": "lean/Sheaf/Topology/SpectralFiniteCoequalizer.lean",
+  "statement": "theorem spectral_finite_coequalizer_from_finite_space (X : TopCat.{u}) [SpectralSpace X] (n m : ℕ) (U : Fin n → Opens X) (V : Fin m → Opens X) (S : Fin n → Type u) (T : Fin m → Type u) (hU : ∀ a, IsCompact (U a : Set X)) (hV : ∀ b, IsCompact (V b : Set X)) (hS : ∀ a, Finite (S a)) (hT : ∀ b, Finite (T b)) (F : X.Sheaf (Type u)) (hdata : ∃ (H D : X.Sheaf (Type u)), (∃ (ι : ∀ a, extensionByEmptyConstant (U := U a) (S a) ⟶ H), Nonempty (IsColimit (Cofan.mk H ι))) ∧ (∃ (ε : ∀ b, extensionByEmptyConstant (U := V b) (T b) ⟶ D), Nonempty (IsColimit (Cofan.mk D ε))) ∧ ∃ (β γ : D ⟶ H) (q : H ⟶ F), ∃ hEq : β ≫ q = γ ≫ q, Nonempty (IsColimit (Cofork.ofπ q hEq))) : ∃ (Y : TopCat.{u}), Finite Y ∧ QuasiSober Y ∧ ∃ (f : X ⟶ Y), Continuous f ∧ (∀ W : Opens Y, IsCompact (f ⁻¹' (W : Set Y))) ∧ ∃ (G : Y.Sheaf (Type u)), (∀ y : Y, Finite (G.presheaf.stalk y)) ∧ Nonempty ((TopCat.Sheaf.pullback (Type u) f).obj G ≅ F)",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-12",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "H1",
+  "result": "pass",
+  "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
  }
 }
