@@ -15,7 +15,8 @@
  "stmt_deps": [
   "thm-sc-jacobian-representability",
   "def-sc-jacobian",
-  "def-sc-curves"
+  "def-sc-curves",
+  "def-sc-genus"
  ],
  "proof": [
   {
@@ -162,5 +163,23 @@
   "group": "C1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-gin2718 (reviewer sub-agent of L); spot-checked: Checked step against def-sc-genus, lem-sc-flat-base-change-coherent, thm-sc-jacobian-representability, cor-pd-pic0-base-change, prop-pc-xk-integral, lem-sc-pic-proper-ntorsion step 1. FIX more, RETURN less: (1) C4/C1: def-sc-genus applied to C_{k'} without showing C_{k'} proper smooth connected over k' -- new step 1 cites lem-sc-base-change-curve and prop-pc-xk-integral(2) (integrality, hence connectedness); (2) C4: hypotheses of thm-sc-jacobian-representability (projective, geometrically integral, separably closed) unchecked -- step 1 now derives them via lem-sc-proper-dim-one-projective, lem-sc-smooth-regular, lem-weil-pbc-finite-type-over-noetherian, lem-pc-rational-points-dense, prop-pc-xk-integral; (3) C4: the step claimed thm-sc-jacobian-representability states compatibility of the representing identifications, which its statement does not -- step 3 derives it from cor-pd-pic0-base-change (generic Picard base-change tool, declared tool_use) plus fibre-product universal property and Yoneda (elementary). The Second reading by C1 missed all three. Statement unchanged; matches the use in thm-sc-constant-invariance proper case.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GenusInvariant",
+  "declaration": "AlgebraicGeometry.genus_jacobian_invariant",
+  "file": "lean/Sheaf/AlgebraicGeometry/GenusInvariant.lean",
+  "statement": "theorem genus_jacobian_invariant {k K : Type u} [Field k] [Field K] [IsAlgClosed k] [IsAlgClosed K] [Algebra k K] {C : Scheme.{u}} (f : C ⟶ Spec (.of k)) [IsConnectedCurve f] [Smooth f] [IsProper f] : let b := Spec.map (CommRingCat.ofHom (algebraMap k K)) let fK := pullback.snd f b ∃ (_ : GeometricallyIntegral f) (_ : IsConnectedCurve fK) (_ : GeometricallyIntegral fK), fK.genus = f.genus ∧ (∃ (J : Over (Spec (.of k))) (_ : GrpObj J), IsJacobian f J) ∧ (∃ (J : Over (Spec (.of K))) (_ : GrpObj J), IsJacobian fK J) ∧ ∀ (J : Over (Spec (.of k))) [GrpObj J] [IsJacobian f J] (e : (picardFunctorDegree f 0).obj.RepresentableBy J), IsPicardZeroMul f e → ∀ (JK : Over (Spec (.of K))) [GrpObj JK] [IsJacobian fK JK] (eK : (picardFunctorDegree fK 0).obj.RepresentableBy JK), IsPicardZeroMul fK eK → ∃ i : JK ≅ Over.mk (pullback.snd J.hom b), ∀ (T : Over (Spec (.of K))) (L : (pullback f (T.hom ≫ b)).Pic) (hL : L ∈ (picardSubfunctorDegree f 0).obj (.op ((Over.map b).obj T))), ∃ hLK : Pic.map (pullbackLeftPullbackSndIso f b T.hom).hom L ∈ (picardSubfunctorDegree fK 0).obj (.op T), (eK.homEquiv.symm ((toSheafify (Scheme.fppfTopology.over (Spec (.of K))) (picardSubfunctorDegree fK 0).toFunctor).app (.op T) ⟨Pic.map (pullbackLeftPullbackSndIso f b T.hom).hom L, hLK⟩)).left ≫ i.hom.left ≫ pullback.fst J.hom b = (e.homEquiv.symm ((toSheafify (Scheme.fppfTopology.over (Spec (.of k))) (picardSubfunctorDegree f 0).toFunctor).app (.op ((Over.map b).obj T)) ⟨L, hL⟩)).left",
+  "branch": "sheaf-dag",
+  "by": "K1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-gin1146",
+  "group": "K1",
+  "result": "pass",
+  "note": "k,K alg closed + Algebra k K = k⊆k'; IsConnectedCurve/Smooth/IsProper f = proper smooth connected curve (recorded IsCurve family form); fK=pullback.snd f (Spec.map algebraMap); recorded Scheme.Hom.genus fK = f.genus; GeometricallyIntegral/IsConnectedCurve fK as output witnesses to type recorded IsJacobian; ∀ Jacobian pairs (J,e),(JK,eK) with IsPicardZeroMul ∃ i : JK ≅ J_K with classifying maps of L and its pullbackLeftPullbackSndIso transport agreeing after pullback.fst; #check: Over = CategoryTheory.Over"
  }
 }
