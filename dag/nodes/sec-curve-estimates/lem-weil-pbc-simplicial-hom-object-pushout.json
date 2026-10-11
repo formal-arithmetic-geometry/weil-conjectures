@@ -147,5 +147,27 @@
   "group": "K1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of K1; spot-checked by L: L: reviewed in full by a reviewer sub-agent (PASS): 017N read, 4 steps checked, small cases tested"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SimplicialHomObjectPushout",
+  "declaration": "AlgebraicGeometry.Scheme.simplicialHomObject_pushout_isPullback",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.simplicialHomObject_pushout_isPullback",
+   "AlgebraicGeometry.Scheme.simplicialHomObject_pushout_empty_isProduct"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/SimplicialHomObjectPushout.lean",
+  "statement": "theorem simplicialHomObject_pushout_isPullback {X : Scheme.{u₁}} {K : SimplicialObject (FormalCoproduct.{w₁} X.Etale)} {A B C D : SSet.{t₁}} [A.Finite] [B.Finite] [C.Finite] [D.Finite] (hAfin : ∀ n : ℕ, Finite (A.obj (op ⦋n⦌))) (hAne : ∀ n : ℕ, Nonempty (A.obj (op ⦋n⦌))) (hBfin : ∀ n : ℕ, Finite (B.obj (op ⦋n⦌))) (hBne : ∀ n : ℕ, Nonempty (B.obj (op ⦋n⦌))) (hCfin : ∀ n : ℕ, Finite (C.obj (op ⦋n⦌))) (hCne : ∀ n : ℕ, Nonempty (C.obj (op ⦋n⦌))) (hDfin : ∀ n : ℕ, Finite (D.obj (op ⦋n⦌))) (hDne : ∀ n : ℕ, Nonempty (D.obj (op ⦋n⦌))) (p : A ⟶ B) (q : A ⟶ C) (i : B ⟶ D) (j : C ⟶ D) (hpush : CategoryTheory.IsPushout p q i j) {HA : FormalCoproduct.{w₁} X.Etale} (uA : SimplicialHomFamily K A HA) (huA : (simplicialHomFamilyFunctor K A).IsRepresentedBy uA) {HB HC HD : FormalCoproduct.{w₁} X.Etale} (uB : SimplicialHomFamily K B HB) (uC : SimplicialHomFamily K C HC) (uD : SimplicialHomFamily K D HD) (huB : (simplicialHomFamilyFunctor K B).IsRepresentedBy uB) (huC : (simplicialHomFamilyFunctor K C).IsRepresentedBy uC) (huD : (simplicialHomFamilyFunctor K D).IsRepresentedBy uD) (iStar : HD ⟶ HB) (jStar : HD ⟶ HC) (hi : ∀ n s, iStar ≫ uB.val n s = uD.val n (i.app (op ⦋n⦌) s)) (hj : ∀ n s, jStar ≫ uC.val n s = uD.val n (j.app (op ⦋n⦌) s)) (pStar : HB ⟶ HA) (qStar : HC ⟶ HA) (hp : ∀ n s, pStar ≫ uA.val n s = uB.val n (p.app (op ⦋n⦌) s)) (hq : ∀ n s, qStar ≫ uA.val n s = uC.val n (q.app (op ⦋n⦌) s)) : CategoryTheory.IsPullback iStar jStar pStar qStar",
+  "branch": "sheaf-dag",
+  "by": "M1",
+  "date": "2026-10-12",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "M1",
+  "result": "pass",
+  "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
  }
 }
