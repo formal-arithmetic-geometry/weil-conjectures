@@ -1,11 +1,11 @@
 # Work queue
 
-819 items; claim with `tools/claim.py next <group> [--stage N]`.
+812 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (819)
+## Stage 2: nodes to state (812)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -19,9 +19,7 @@
 | `lem-pc-pre-derived-adjoint-functors-general` | 1 | state |
 | `lem-pc-ringed-space-product-kinjective` | 1 | state |
 | `lem-pod-adic-limit-finite-modules` | 1 | state |
-| `lem-pod-lattice-stabilizer-open` | 1 | state |
 | `lem-sc-base-change-curve` | 1 | state |
-| `lem-sc-curve-base-change-relative-dimension-one` | 1 | state |
 | `lem-sc-divisor-module-local` | 1 | state |
 | `lem-sc-finite-flat-unramified-tangent-criterion` | 1 | state |
 | `lem-sc-hilb-dominating-power` | 1 | state |
@@ -32,28 +30,23 @@
 | `lem-sc-rational-tangent-cotangent-duality` | 1 | state |
 | `lem-sc-rational-unramified-cotangent-criterion` | 1 | state |
 | `lem-sc-separated-affine-function-field-surjective` | 1 | state |
-| `lem-sc-smooth-diagonal-regular-immersion` | 1 | state |
 | `lem-sc-vector-bundle-line-subbundle` | 1 | state |
 | `lem-sp-kinjective-comparison-principle` | 1 | state |
 | `lem-sp-kinjective-computes` | 1 | state |
 | `lem-sp-shift-identification` | 1 | state |
 | `lem-weil-derived-limit-roos-complex` | 1 | state |
 | `lem-weil-pbc-charpoly-locally-free-direct-sum` | 1 | state |
-| `lem-weil-pbc-cohen-power-series-presentation` | 1 | state |
 | `lem-weil-pbc-colimit-category-fp-algebras` | 1 | state |
 | `lem-weil-pbc-colimit-surjective-ring-map` | 1 | state |
 | `lem-weil-pbc-complex-spectral-sequence-comparison` | 1 | state |
 | `lem-weil-pbc-constant-sheaf-sections-locally-constant` | 1 | state |
 | `lem-weil-pbc-constant-sheaf-set-sections-connected-natural` | 1 | state |
-| `lem-weil-pbc-coskeleton-free-homology-comparison` | 1 | state |
 | `lem-weil-pbc-cotangent-complex-symmetric-algebra` | 1 | state |
 | `lem-weil-pbc-cover-module-exact` | 1 | state |
 | `lem-weil-pbc-criterion-flatness-fibre-noetherian` | 1 | state |
 | `lem-weil-pbc-curve-assertions-finite-pushforward` | 1 | state |
 | `lem-weil-pbc-cyclic-extension-cocycle` | 1 | state |
 | `lem-weil-pbc-cyclic-extension-flat-descent` | 1 | state |
-| `lem-weil-pbc-degree-p-extension-regular` | 1 | state |
-| `lem-weil-pbc-depth-drops-by-one` | 1 | state |
 | `lem-weil-pbc-depth-ext` | 1 | state |
 | `lem-weil-pbc-depth-in-ses` | 1 | state |
 | `lem-weil-pbc-depth-le-dim-associated-prime` | 1 | state |
