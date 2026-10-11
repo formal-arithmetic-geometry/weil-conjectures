@@ -1,11 +1,11 @@
 # Work queue
 
-39 items; claim with `tools/claim.py next <group> [--stage N]`.
+37 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (39)
+## Stage 2: nodes to state (37)
 
 | node | distance to Mathlib | kind | blockers |
 |---|---|---|---|
@@ -21,11 +21,9 @@
 | `lem-pc-base-change-rhom-perfect` | 1 | state | 0 |
 | `lem-pc-derived-internal-hom-pullback-adjunction` | 1 | state | 0 |
 | `lem-pc-dualizable-evaluation-criterion` | 1 | state | 0 |
-| `lem-pc-proper-derived-direct-image-composition` | 1 | state | 0 |
 | `lem-pc-rf-base-change-complex` | 1 | state | 0 |
 | `lem-pc-rf-base-change-single-complex-criterion` | 1 | state | 0 |
 | `lem-sc-affine-koszul-cech-derived-comparison` | 1 | state | 0 |
-| `lem-sc-affine-projective-complex-derived-hom` | 1 | state | 0 |
 | `lem-sc-derived-internal-hom-stalk-localization` | 1 | state | 0 |
 | `lem-sc-finite-affine-derived-equivalence` | 1 | state | 0 |
 | `lem-sc-finite-duality-derived-hom` | 1 | state | 0 |
