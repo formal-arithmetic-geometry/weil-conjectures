@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.CategoryTheory.Monoidal.TensorInverse
+public import Mathlib.CategoryTheory.Monoidal.Discrete
 public import Mathlib.CategoryTheory.Monoidal.Functor
 
 /-!
@@ -14,7 +15,9 @@ public import Mathlib.CategoryTheory.Monoidal.Functor
 A *coherent integer family* in a monoidal category `C`
 (`CategoryTheory.MonoidalCategory.IntTensorFamily`) is a family of objects `P m`, `m ∈ ℤ`, with
 identifications `P 0 ≅ 𝟙` and `P a ⊗ P b ≅ P (a + b)` satisfying the unit and associativity
-laws; equivalently, a strong monoidal functor out of the discrete monoidal category `ℤ`. The
+laws; equivalently, a strong monoidal functor out of the discrete monoidal category `ℤ`
+(`CategoryTheory.MonoidalCategory.IntTensorFamily.toFunctor`, with its `Functor.Monoidal` structure
+`CategoryTheory.MonoidalCategory.IntTensorFamily.coreMonoidal`). The
 integer tensor powers of an object with a tensor inverse form one
 (`CategoryTheory.MonoidalCategory.TensorInverse.intTensorFamily`), and a functor whose oplax
 monoidal structure is invertible carries coherent families to coherent families
@@ -142,6 +145,48 @@ noncomputable def map (F : C ⥤ D) [F.OplaxMonoidal] [IsIso (η F)]
       IsIso.hom_inv_id, MonoidalCategory.whiskerLeft_id, Category.id_comp,
       δ_natural_right_assoc, IsIso.hom_inv_id_assoc]
     simp only [Functor.map_comp, eqToHom_map]
+
+/-- A coherent family as a functor out of the discrete monoidal category of `(ℤ, +)`. -/
+def toFunctor : Discrete ℤ ⥤ C :=
+  Discrete.functor P.obj
+
+@[simp]
+lemma toFunctor_obj (m : Discrete ℤ) : P.toFunctor.obj m = P.obj m.as :=
+  rfl
+
+/-- The identifications `P 0 ≅ 𝟙` and `P a ⊗ P b ≅ P (a + b)` make `P.toFunctor` a strong monoidal
+functor: the unit and associativity laws of the family are the coherence axioms. -/
+noncomputable def coreMonoidal : P.toFunctor.CoreMonoidal where
+  εIso := P.zeroIso.symm
+  μIso X Y := P.addIso X.as Y.as
+  μIso_hom_natural_left := by
+    rintro ⟨X⟩ ⟨Y⟩ ⟨⟨⟨⟩⟩⟩ ⟨X'⟩
+    simp [toFunctor]
+  μIso_hom_natural_right := by
+    rintro ⟨X⟩ ⟨Y⟩ ⟨X'⟩ ⟨⟨⟨⟩⟩⟩
+    simp [toFunctor]
+  associativity := by
+    rintro ⟨a⟩ ⟨b⟩ ⟨c⟩
+    simp only [toFunctor, Discrete.functor_obj, Discrete.addMonoidal_tensorObj_as,
+      Discrete.addMonoidal_associator, Discrete.eqToIso, eqToIso.hom, eqToHom_map]
+    rw [reassoc_of% (P.assoc a b c)]
+    simp
+  left_unitality := by
+    rintro ⟨m⟩
+    simp only [toFunctor, Discrete.functor_obj, Discrete.addMonoidal_tensorUnit_as,
+      Discrete.addMonoidal_leftUnitor, Discrete.eqToIso, eqToIso.hom, eqToHom_map, Iso.symm_hom]
+    rw [← P.zero_left m]
+    simp
+  right_unitality := by
+    rintro ⟨m⟩
+    simp only [toFunctor, Discrete.functor_obj, Discrete.addMonoidal_tensorUnit_as,
+      Discrete.addMonoidal_rightUnitor, Discrete.eqToIso, eqToIso.hom, eqToHom_map, Iso.symm_hom]
+    rw [← P.zero_right m]
+    simp
+
+/-- `P.toFunctor` is a strong monoidal functor `Discrete ℤ ⥤ C`. -/
+noncomputable instance : P.toFunctor.Monoidal :=
+  P.coreMonoidal.toMonoidal
 
 variable {E : Type u₃} [Category.{v₃} E] [MonoidalCategory E]
 
