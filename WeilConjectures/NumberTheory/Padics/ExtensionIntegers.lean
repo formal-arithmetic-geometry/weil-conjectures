@@ -8,6 +8,8 @@ module
 public import Mathlib.LinearAlgebra.FreeModule.PID
 public import Mathlib.RingTheory.DedekindDomain.IntegralClosure
 public import Mathlib.RingTheory.Polynomial.Subring
+public import Mathlib.RingTheory.TensorProduct.Free
+public import Mathlib.RingTheory.TensorProduct.Quotient
 public import Mathlib.RingTheory.Valuation.LocalSubring
 public import WeilConjectures.NumberTheory.Padics.Extension
 
@@ -136,5 +138,46 @@ theorem free_integers [FiniteDimensional ℚ_[l] E] :
   have : CharZero E := charZero_of_injective_algebraMap (algebraMap ℚ_[l] E).injective
   have : Module.IsTorsionFree (integers l E) L := .trans_faithfulSMul (integers l E) E L
   exact IsIntegralClosure.module_free (integers l E) E L (integers l L)
+
+end PadicAlgCl
+
+open TensorProduct in
+/-- If `B` is a free `A`-algebra, then `B ⧸ I B` is a free `A ⧸ I`-module: it is the base change
+`(A ⧸ I) ⊗[A] B`. -/
+theorem Module.free_quotient_map {A B : Type*} [CommRing A] [CommRing B] [Algebra A B]
+    [Module.Free A B] (I : Ideal A) : Module.Free (A ⧸ I) (B ⧸ I.map (algebraMap A B)) := by
+  let e₀ : (A ⧸ I) ⊗[A] B ≃ₗ[A] B ⧸ I.map (algebraMap A B) :=
+    TensorProduct.comm A (A ⧸ I) B ≪≫ₗ
+      (Algebra.TensorProduct.quotIdealMapEquivTensorQuot B I).symm.toLinearEquiv.restrictScalars A
+  let e : (A ⧸ I) ⊗[A] B ≃ₗ[A ⧸ I] B ⧸ I.map (algebraMap A B) :=
+    { e₀.toAddEquiv with
+      map_smul' := by
+        intro c x
+        obtain ⟨c, rfl⟩ := Ideal.Quotient.mk_surjective c
+        have h1 : (Ideal.Quotient.mk I c) • x = c • x := algebraMap_smul (A ⧸ I) c x
+        have h2 : ∀ z : B ⧸ I.map (algebraMap A B), (Ideal.Quotient.mk I c) • z = c • z :=
+          fun z ↦ algebraMap_smul (A ⧸ I) c z
+        change e₀ _ = _
+        rw [h1, map_smul, RingHom.id_apply, h2]
+        rfl }
+  exact .of_basis ((Algebra.TensorProduct.basis (A ⧸ I) (Module.Free.chooseBasis A B)).map e)
+
+namespace PadicAlgCl
+
+variable (l : ℕ) [Fact l.Prime] (E L : Type*) [Field E] [Field L] [Algebra ℚ_[l] E]
+  [Algebra E (PadicAlgCl l)] [IsScalarTower ℚ_[l] E (PadicAlgCl l)]
+  [Algebra L (PadicAlgCl l)] [Algebra E L] [IsScalarTower E L (PadicAlgCl l)]
+  [FiniteDimensional E L] [FiniteDimensional ℚ_[l] E]
+
+attribute [local instance] integersAlgebra
+
+/-- The finite coefficient ring `𝒪_L ⧸ 𝔪_Eⁿ 𝒪_L` is free over `𝒪_E ⧸ 𝔪_Eⁿ`: the finite-level
+statement "`B` is finite free over `A`" of blueprint `lem-coef-finite-free-extension`. -/
+theorem free_quotient_integers (n : ℕ) :
+    Module.Free (integers l E ⧸ IsLocalRing.maximalIdeal (integers l E) ^ n)
+      (integers l L ⧸ (IsLocalRing.maximalIdeal (integers l E) ^ n).map
+        (algebraMap (integers l E) (integers l L))) :=
+  have := free_integers l E L
+  Module.free_quotient_map _
 
 end PadicAlgCl
