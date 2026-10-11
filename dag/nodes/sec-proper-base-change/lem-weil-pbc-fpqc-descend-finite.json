@@ -187,5 +187,23 @@
   "item": "lem-weil-pbc-fpqc-descend-finite",
   "worker": "stage1",
   "summary": "Split along the source proof of Descent 02LA (descent.tex 6102-6113), which is not the general criterion 02KP: finite = integral + locally of finite type (Morphisms 01WJ, existing Mathlib leaf lem-weil-pbc-finite-iff-integral-lft, IsFinite.iff_isIntegralHom_and_locallyOfFiniteType), and both properties descend along fpqc coverings (02L9, 02KX: two new unsplit nodes lem-weil-pbc-fpqc-descend-integral and lem-weil-pbc-fpqc-descend-locally-finite-type, stated in the same form as the item and its siblings). Tags 02LA, 02L9, 02KX, 02KO, 01WJ checked in tags/tags. Statement unchanged. Point B8: Mathlib has no DescendsAlong for IsFinite, IsIntegralHom or IsAffineHom and no descent along covering families, so the candidate is not a leaf. The citer lem-weil-pbc-finite-locally-free-degree-etale-descent (step 2) uses exactly this statement."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.IsFiniteOfFpqcCover",
+  "declaration": "AlgebraicGeometry.isFinite_of_fpqc_cover",
+  "file": "lean/Sheaf/AlgebraicGeometry/IsFiniteOfFpqcCover.lean",
+  "statement": "theorem isFinite_of_fpqc_cover {X S : Scheme.{u}} (f : X ⟶ S) {I : Type v} (S' : I → Scheme.{u}) (g : ∀ i, S' i ⟶ S) (hg : Presieve.ofArrows S' g ∈ Scheme.fpqcPrecoverage S) (h : ∀ i, IsFinite (pullback.snd f (g i))) : IsFinite f",
+  "branch": "sheaf-dag",
+  "by": "G1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-fdn1040",
+  "group": "G1",
+  "result": "pass",
+  "note": "X S : Scheme.{u}, f; arbitrary I : Type v (empty ok); S' i, g i; hg ofArrows ∈ Scheme.fpqcPrecoverage (family form as H1 f7dc0d331/79955006b); h ∀ i IsFinite (pullback.snd f (g i)); concl IsFinite f; #check: AlgebraicGeometry.IsFinite, Scheme.fpqcPrecoverage; no Mathlib family DescendsAlong for IsFinite so existing:false"
  }
 }
