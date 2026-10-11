@@ -1,11 +1,11 @@
 # Work queue
 
-507 items; claim with `tools/claim.py next <group> [--stage N]`.
+501 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (507)
+## Stage 2: nodes to state (501)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -32,27 +32,21 @@
 | `lem-weil-pbc-higher-direct-image-sheafified-presheaf` | 1 | state |
 | `lem-weil-pbc-horseshoe-morphism-lift-exact-source` | 1 | state |
 | `lem-weil-pbc-ideal-module-product-stalk` | 1 | state |
-| `lem-weil-pbc-improve-presentation-smooth-conormal-free` | 1 | state |
 | `lem-weil-pbc-injective-sheaf-cech-acyclic` | 1 | state |
 | `lem-weil-pbc-integral-closure-finite-fibre-choose-g` | 1 | state |
 | `lem-weil-pbc-integral-closure-finite-fibre-image-clopen` | 1 | state |
 | `lem-weil-pbc-integral-closure-zariski-main-away` | 1 | state |
-| `lem-weil-pbc-integral-over-henselian-pair` | 1 | state |
 | `lem-weil-pbc-intersection-subfields-differentials` | 1 | state |
-| `lem-weil-pbc-inverse-image-closed-pushforward-constant` | 1 | state |
 | `lem-weil-pbc-inverse-image-module-adjunction` | 1 | state |
 | `lem-weil-pbc-inverse-image-preserves-colimits` | 1 | state |
 | `lem-weil-pbc-inverse-image-stalk-germ` | 1 | state |
 | `lem-weil-pbc-invertible-pullback-tensor` | 1 | state |
 | `lem-weil-pbc-irreducible-lisse-strata` | 1 | state |
-| `lem-weil-pbc-isolated-fibre-point-quasi-finite-affine-pairs` | 1 | state |
 | `lem-weil-pbc-isolated-prime-finite-type-algebra-residue-finite` | 1 | state |
 | `lem-weil-pbc-jacobi-zariski-homology-sequence` | 1 | state |
-| `lem-weil-pbc-jacobi-zariski-left-term-vanishing` | 1 | state |
 | `lem-weil-pbc-jacobi-zariski-quotient-smooth` | 1 | state |
 | `lem-weil-pbc-jacobi-zariski-regular-sequence-left-injective` | 1 | state |
 | `lem-weil-pbc-kahler-differentials-mod-power-ideal` | 1 | state |
-| `lem-weil-pbc-kahler-differentials-polynomial-extension` | 1 | state |
 | `lem-weil-pbc-kernel-cokernel-annihilated-mod-ideal` | 1 | state |
 | `lem-weil-pbc-kollar-local-dichotomy` | 1 | state |
 | `lem-weil-pbc-koszul-differential` | 1 | state |
