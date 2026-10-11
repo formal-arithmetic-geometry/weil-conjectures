@@ -143,5 +143,23 @@
   "group": "M1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-fd2c (reviewer sub-agent of L); spot-checked: Repaired re-push after the 15:38 return: point 1 done (lem-pc-fpqc-descend-immersion deleted, on neither branch), point 2 done (route now that of Tag 02L6, descent.tex 5967-5998), point 3 done (report names descent.tex 5967-6000 and 6306-6344). Statement agrees with 02L6 (label lemma-descending-property-closed-immersion) hypothesis by hypothesis (f, fpqc covering, base changes closed immersions). Step 1: clause (b) of lem-weil-pbc-closed-immersion-integral-separated-uc and lem-weil-pbc-fpqc-descend-affine (same covering/base-change setup) give f affine. Step 2: affine => qcqs (affine-morphism-permanence (3)), lem-pc-flat-base-change-cohom i=0 with F=O_X, criterion (1) of lem-weil-pbc-closed-immersion-affine-cover-criterion, stalk of pullback is the tensor, new node for faithful-flat reflection; Mathlib checked: FaithfullyFlat/Algebra.lean:60 of_flat_of_isLocalHom, FaithfullyFlat/Basic.lean:392 lTensor_surjective_iff_surjective; small cases (identity, field extension) fine. Tool uses accepted as generic black boxes. FIX more, RETURN less: (C1) step 3 went from stalkwise surjectivity of O_Y->f_*O_X straight to surjectivity of h^sharp_V on affine V (needs quasi-coherence/exactness of sections on affines, no node); created statement-only node lem-pc-affine-surjective-structure-map-closed-immersion (affine f with surjective stalk maps O_{Y,y}->(f_*O_X)_y is a closed immersion; Morphisms 01QO (3)=>(1) with 01SA; Mathlib isClosedImmersion_iff_isAffineHom ClosedImmersion.lean:370 only a candidate) and rewrote step 3 to cite it, dropping lem-weil-pbc-locally-surjective-iff-stalks and pqf-def-affine-morphism; (C1) step 2: flatness of O_{Y,y}->O_{Y_i,y_i} now cites def-weil-flat-morphism; proof_deps recomputed. FIX: dag/nodes/sec-picard-framework/lem-pc-local-flat-faithful-flat-reflects-surjective.json: stmt_deps: added def-weil-pbc-module-tensor-product (cited in the statement); mathlib_searches: nonexistent name lTensor_reflects_surjective corrected to lTensor_surjective_iff_surjective (Basic.lean:392). blueprint_refs search 'affine closed immersion surjective': no same_as. Start 2026-10-10 16:10:39 UTC (date -u: Sat Oct 10 04:10:39 PM UTC 2026), end Sat Oct 10 04:12:40 PM UTC 2026.; 3 file(s) fixed by the reviewer; 1 statement node(s) added by the reviewer (FIX more, RETURN less)"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FpqcClosedImmersionDescent",
+  "declaration": "AlgebraicGeometry.isClosedImmersion_of_fpqc_cover",
+  "file": "lean/Sheaf/AlgebraicGeometry/FpqcClosedImmersionDescent.lean",
+  "statement": "theorem isClosedImmersion_of_fpqc_cover {X S : Scheme.{u}} (f : X ⟶ S) {I : Type v} (S' : I → Scheme.{u}) (g : ∀ i, S' i ⟶ S) (hg : Presieve.ofArrows S' g ∈ Scheme.fpqcPrecoverage S) (h : ∀ i, IsClosedImmersion (pullback.snd f (g i))) : IsClosedImmersion f",
+  "branch": "sheaf-dag",
+  "by": "K1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-fci0750",
+  "group": "K1",
+  "result": "pass",
+  "note": "f:X->S unrestricted = node f:X->Y; {I:Type v} S' g with Presieve.ofArrows S' g in Scheme.fpqcPrecoverage S = fpqc covering (same form as merged etale sibling etale_of_fpqc_cover, verbatim binders); h: IsClosedImmersion (pullback.snd f (g i)) = each base change f_i closed immersion; conclusion IsClosedImmersion f; universes u,v polymorphic, empty I fine; docstring carries the 3 proof steps; pinned Mathlib has no IsClosedImmersion fpqc/DescendsAlong descent (LocalFlatDescent/FlatDescent cover LOFT/LOFP/smooth/unramified/etale/univ closed/open/injective/iso/open immersion only), existing:false correct; header/tag/lines<=100/imports ok"
  }
 }
