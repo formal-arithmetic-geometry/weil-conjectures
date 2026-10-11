@@ -1,11 +1,11 @@
 # Work queue
 
-52 items; claim with `tools/claim.py next <group> [--stage N]`.
+51 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (52)
+## Stage 2: nodes to state (51)
 
 | node | distance to Mathlib | kind | blockers |
 |---|---|---|---|
@@ -24,7 +24,6 @@
 | `cor-galois-lisse-representations` | 1 | state | 0 |
 | `lem-pc-base-change-rhom-perfect` | 1 | state | 0 |
 | `lem-pc-bounded-coherent-finite-tor-proper-pushforward-perfect` | 1 | state | 0 |
-| `lem-pc-derived-mayer-vietoris-functorial` | 1 | state | 0 |
 | `lem-pc-noetherian-perfect-direct-image` | 1 | state | 0 |
 | `lem-pc-projection-locality` | 1 | state | 0 |
 | `lem-pc-proper-derived-direct-image-composition` | 1 | state | 0 |
