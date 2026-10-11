@@ -152,5 +152,25 @@
   "item": "lem-weil-pbc-directed-colimit-base-change-elementwise",
   "worker": "stage1",
   "summary": "Tags checked against literature/stacks-project/tags/tags: 00D4 definition-directed-system, 00D6 lemma-directed-colimit, 00D7 lemma-zero-directed-limit, 00DD lemma-tensor-products-commute-with-limits, 07RI lemma-colimit-etale (all labels as the node's source says; algebra.tex lines 715, 778, 811, 1934, 47654). Statement kept (correct; the colimit A is taken in commutative rings, so the proof first shows that A is also the colimit of the A_i, i >= 0, as A_0-modules). Split in four steps: (1, elementary) the index set I_0 = {i >= 0} is directed, the transition maps and coprojections are A_0-linear and the M_i form a directed system; (2) A is the colimit of (A_i)_{i in I_0} in A_0-modules, from the elementwise description of the ring colimit (existing Mathlib leaves lem-weil-pbc-filtered-colimit-algebras-elementwise part (2) with R = Z, and lem-weil-pbc-filtered-colimit-rings-zero); (3) tensoring with M_0 preserves this colimit (new Mathlib leaf lem-weil-pbc-tensor-commutes-with-colimits, Stacks 00DD, matched by isColimitOfPreserves (tensorRight N) in ModuleCat); (4) parts (1) and (2) from the existing Mathlib leaf lem-weil-pbc-filtered-colimit-modules-elementwise over I_0. stmt_deps kept. No Lean candidate in slopmaster2 (grep of WeilConjectures and of the sorry map for directLimitLeft / tensor-colimit names: only sheaf-level tensorLeft/tensorRight colimit lemmas, unrelated)."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.DirectedColimitBaseChangeElementwise",
+  "declaration": "TensorProduct.directedColimitBaseChangeElementwise",
+  "file": "lean/Sheaf/Paper/DirectedColimitBaseChangeElementwise.lean",
+  "statement": "theorem directedColimitBaseChangeElementwise {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] (F : I ⥤ CommRingCat.{v}) [HasColimit F] (i₀ : I) (M₀ : Type w) [AddCommGroup M₀] [Module (F.obj i₀) M₀] : let S := F.obj i₀ let R := colimit F letI : Algebra S R := (colimit.ι F i₀).hom.toAlgebra (∀ x : R ⊗[S] M₀, ∃ (i : I) (h : i₀ ≤ i), letI : Algebra S (F.obj i) := (F.map (homOfLE h)).hom.toAlgebra let αᵢ : F.obj i →ₐ[S] R := { (colimit.ι F i).hom with commutes' := fun s ↦ congrArg (fun f : F.obj i₀ ⟶ colimit F ↦ f s) (colimit.w F (homOfLE h)) } ∃ t : F.obj i ⊗[S] M₀, αᵢ.toLinearMap.rTensor M₀ t = x) ∧ (∀ (i : I) (h : i₀ ≤ i), letI : Algebra S (F.obj i) := (F.map (homOfLE h)).hom.toAlgebra let αᵢ : F.obj i →ₐ[S] R := { (colimit.ι F i).hom with commutes' := fun s ↦ congrArg (fun f : F.obj i₀ ⟶ colimit F ↦ f s) (colimit.w F (homOfLE h)) } ∀ t : F.obj i ⊗[S] M₀, αᵢ.toLinearMap.rTensor M₀ t = 0 → ∃ (i' : I) (h' : i ≤ i'), letI : Algebra S (F.obj i') := (F.map (homOfLE (h.trans h'))).hom.toAlgebra let αᵢ'ᵢ : F.obj i →ₐ[S] F.obj i' := { (F.map (homOfLE h')).hom with commutes' := fun s ↦ congrArg (fun f : F.obj i₀ ⟶ F.obj i' ↦ f s) (F.map_comp (homOfLE h) (homOfLE h')).symm } αᵢ'ᵢ.toLinearMap.rTensor M₀ t = 0)",
+  "branch": "sheaf-dag",
+  "by": "G1",
+  "date": "2026-10-11",
+  "existing": false,
+  "note": "Directed-sets form: F : I ⥤ CommRingCat with [HasColimit F], A = colimit F, A₀-structures through colimit.ι F i₀ and F.map (homOfLE _); μ_i, μ_{i'i} are LinearMap.rTensor M₀ of the A₀-algebra maps α_i, α_{i'i}.",
+  "fixed_by": "R-dcb1005"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-dcb1005",
+  "group": "G1",
+  "result": "fix",
+  "note": "directed preorder I, F : I ⥤ CommRingCat + HasColimit (A = colimit F, α_i = colimit.ι), base i₀ arbitrary, M₀ any A₀-module (universe w), A_i/A as A₀-algebras via F.map(homOfLE)/colimit.ι F i₀, M_i/M actual tensors, μ = rTensor of α_i/α_{i'i}; (1) every x lifts to some i ≥ i₀, (2) μ_i t = 0 ⇒ μ_{i'i} t = 0 for some i' ≥ i"
  }
 }
