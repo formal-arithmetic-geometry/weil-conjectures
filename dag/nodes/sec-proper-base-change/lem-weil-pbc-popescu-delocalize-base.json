@@ -247,5 +247,23 @@
   "by": "L",
   "result": "accepted",
   "note": "11 steps follow Stacks 07F4 line by line: reduction to B' standard smooth via a retraction (new 07CH node), a standard smooth presentation containing the generators of A (new 07EY node, stated for a family), rescaling and clearing denominators (polynomial scalar extension and localization base change leaves), the relations with s_0, s_j, s'_j, the algebra B and the factorization, and the check of 'elementary standard' against the definition (with the Jacobian det(F) = prod s'_j Delta). Statement made explicit (S^{-1}A etc.). Tags 07F4, 07CH, 07EY, 07C7 verified."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.PopescuDelocalizeBase",
+  "declaration": "Algebra.exists_factorization_isElementaryStandardElement_of_localized_smooth",
+  "file": "lean/Sheaf/RingTheory/PopescuDelocalizeBase.lean",
+  "statement": "theorem exists_factorization_isElementaryStandardElement_of_localized_smooth {R : Type u} {A : Type v} {Λ : Type w} [CommRing R] [CommRing A] [CommRing Λ] [Algebra R A] [Algebra R Λ] [FinitePresentation R A] (α : A →ₐ[R] Λ) (S : Submonoid R) {B' : Type x} [CommRing B'] [Algebra (Localization S) B'] [Smooth (Localization S) B'] (β' : Localization (algebraMapSubmonoid A S) →ₐ[Localization S] B') (γ' : B' →ₐ[Localization S] Localization (algebraMapSubmonoid Λ S)) (hfactor : γ'.comp β' = IsLocalization.mapₐ S (Localization S) (Localization (algebraMapSubmonoid A S)) (Localization (algebraMapSubmonoid Λ S)) α) : ∃ (B : Type (max u v w x)) (_ : CommRing B) (_ : Algebra R B) (_ : FinitePresentation R B) (β : A →ₐ[R] B) (γ : B →ₐ[R] Λ), γ.comp β = α ∧ ∃ s : S, IsElementaryStandardElement (R := R) (algebraMap R B s.val)",
+  "branch": "sheaf-dag",
+  "by": "K1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-pdb1323",
+  "group": "K1",
+  "result": "pass",
+  "note": "R,A,Λ CommRing+Algebra R; [FinitePresentation R A]; α:A→ₐ[R]Λ; S:Submonoid R; S⁻¹A,S⁻¹Λ = Localization (algebraMapSubmonoid _ S), S⁻¹α = IsLocalization.mapₐ (=IsLocalization.map α, a/u↦α(a)/u); B' with [Smooth (Localization S) B']; β',γ' Localization S-alg homs, hfactor tied; ∃ B:Type(max u v w x) with CommRing/Algebra/FinitePresentation all used (pp.explicit: x_2 is the instance of IsElementaryStandardElement), β,γ with γ∘β=α, s∈S with algebraMap s elementary standard (part (1)); S∋0 case true via c=0; only lean key changed"
  }
 }
