@@ -3100,3 +3100,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 00:27 L: returned deliver/H1/lem-sc-qcoh-complex-alternating-cech-derived-sections (reviewer RETURN: R-qcs0027, head 7d5d69945. 0 (D1, the re-push is not a repair): the committed node's proof is unchanged in substance fro)
 - 00:28 L: merged deliver/J1/lem-sc-valuation-zero-section-relative-cartier (reviewer FIX; first push; new nodes: 1)
 - 00:28 UTC L: returned: H1 qcoh-complex-alternating-cech-derived-sections abb6026a9 second return (R-qcs0027: the head still carries the old proof; the described zigzag repair was never committed).
+- 00:28 UTC L: J1 valuation-zero-section-relative-cartier FIX e7bfdf815 (R-zsc0027).
