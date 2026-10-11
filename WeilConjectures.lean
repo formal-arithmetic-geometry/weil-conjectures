@@ -277,6 +277,8 @@ public import WeilConjectures.AlgebraicGeometry.Morphisms.WeaklyEtale
 public import WeilConjectures.AlgebraicGeometry.NoetherNormalization
 public import WeilConjectures.AlgebraicGeometry.NoetherNormalizationChart
 public import WeilConjectures.AlgebraicGeometry.NoetherianApproximation
+public import WeilConjectures.AlgebraicGeometry.NoetherianApproximationFamily
+public import WeilConjectures.AlgebraicGeometry.NormalizationIntegrallyClosed
 public import WeilConjectures.AlgebraicGeometry.Picard.AffineSpaceRigidity
 public import WeilConjectures.AlgebraicGeometry.Picard.CounitBaseChange
 public import WeilConjectures.AlgebraicGeometry.Picard.Defs
