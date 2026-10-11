@@ -231,5 +231,23 @@
   "lem-weil-pbc-quasi-coherent-finite-type-affine",
   "lem-weil-pbc-finite-proper"
  ],
- "reviewed": "2026-10-10 L: 6 steps along 0AYT checked (Spec A finite discrete Noetherian; Gamma(T,G) finite over A hence over k; L trivial by gluing trivializations over the open points; G tensor L = G; vanishing by lem-pc-affine-vanishing; chi via finite hence proper and the Euler-characteristic node). tool_uses from the declared list (coherent-ft-locnoeth, quasi-coherent-finite-type-affine, finite-proper). Citations of H^q and tensor added to the statement. Worker note: lem-weil-pbc-finite-proper could be a Mathlib leaf (Proper.lean 69). LeanSearch down."
+ "reviewed": "2026-10-10 L: 6 steps along 0AYT checked (Spec A finite discrete Noetherian; Gamma(T,G) finite over A hence over k; L trivial by gluing trivializations over the open points; G tensor L = G; vanishing by lem-pc-affine-vanishing; chi via finite hence proper and the Euler-characteristic node). tool_uses from the declared list (coherent-ft-locnoeth, quasi-coherent-finite-type-affine, finite-proper). Citations of H^q and tensor added to the statement. Worker note: lem-weil-pbc-finite-proper could be a Mathlib leaf (Proper.lean 69). LeanSearch down.",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FiniteSchemeCohomologyTensor",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.finiteSchemeCohomologyTensor",
+  "statement": "theorem finiteSchemeCohomologyTensor {k A : Type u} [Field k] [CommRing A] [Algebra k A] [FiniteDimensional k A] (G L : (Spec (.of A)).Modules) (hG : RingedSpace.IsCoherent (Spec (.of A)).toRingedSpace G) (hL : L.IsInvertible) : (∀ q : ℕ, 0 < q → IsZero ((RingedSpace.moduleCohomology (Spec (.of A)).toRingedSpace q).obj G)) ∧ (∀ q : ℕ, 0 < q → IsZero ((RingedSpace.moduleCohomology (Spec (.of A)).toRingedSpace q).obj (G ⊗ₘ L))) ∧ @FiniteDimensional k Γ(G, ⊤) _ _ (Module.compHom Γ(G, ⊤) ((Scheme.ΓSpecIso (.of A)).inv.hom.comp (algebraMap k A))) ∧ @FiniteDimensional k Γ(G ⊗ₘ L, ⊤) _ _ (Module.compHom Γ(G ⊗ₘ L, ⊤) ((Scheme.ΓSpecIso (.of A)).inv.hom.comp (algebraMap k A))) ∧ @Module.finrank k Γ(G ⊗ₘ L, ⊤) _ _ (Module.compHom Γ(G ⊗ₘ L, ⊤) ((Scheme.ΓSpecIso (.of A)).inv.hom.comp (algebraMap k A))) = @Module.finrank k Γ(G, ⊤) _ _ (Module.compHom Γ(G, ⊤) ((Scheme.ΓSpecIso (.of A)).inv.hom.comp (algebraMap k A))) ∧ @eulerChar k _ (Spec (.of A)) ⟨Spec.map (CommRingCat.ofHom (algebraMap k A))⟩ G = (@Module.finrank k Γ(G, ⊤) _ _ (Module.compHom Γ(G, ⊤) ((Scheme.ΓSpecIso (.of A)).inv.hom.comp (algebraMap k A))) : ℤ) ∧ @eulerChar k _ (Spec (.of A)) ⟨Spec.map (CommRingCat.ofHom (algebraMap k A))⟩ (G ⊗ₘ L) = @eulerChar k _ (Spec (.of A)) ⟨Spec.map (CommRingCat.ofHom (algebraMap k A))⟩ G",
+  "by": "N1",
+  "date": "2026-10-12",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteSchemeCohomologyTensor.lean",
+  "branch": "sheaf-dag",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "N1",
+  "result": "pass",
+  "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
+ }
 }
