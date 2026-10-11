@@ -332,5 +332,23 @@
   "by": "L",
   "result": "accepted",
   "note": "18 steps following Stacks 07CP with two corrections to Stacks noted in the proof (the replacement a_k(a_k^N+b_k) in (3); the typo (I_k/I_k^2) in the relative-dimension step). 5 new nodes: 07C6 with the freeness of Omega recorded, 00ST(3)+00SW equation count, 00TF local form, 00TT (1)=>(3), Kahler differentials of a polynomial extension (00RS/00RV/00RX). Tags verified. Checked: step 6 (Ann condition kills pi Y), step 14 (n+m variables, m relations, fibre dimension n), step 17 (annihilators under the flat local map), step 18 (finite-module localization gives s with s J_k = 0)."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.PopescuLifting",
+  "declaration": "Algebra.popescu_lifting",
+  "file": "lean/Sheaf/RingTheory/PopescuLifting.lean",
+  "statement": "theorem popescu_lifting (R : Type a) (Λ : Type b) (Cbar : Type c) [CommRing R] [CommRing Λ] [CommRing Cbar] [Algebra R Λ] [Algebra R Cbar] [IsNoetherianRing R] (π : R) (hAnnR : Module.annihilator R (Ideal.span ({π} : Set R)) = Module.annihilator R (Ideal.span ({π ^ 2} : Set R))) (hAnnΛ : Module.annihilator Λ (Ideal.span ({algebraMap R Λ π} : Set Λ)) = Module.annihilator Λ (Ideal.span ({algebraMap R Λ (π ^ 2)} : Set Λ))) [Algebra (R ⧸ Ideal.span ({π ^ 2} : Set R)) Cbar] [IsScalarTower R (R ⧸ Ideal.span ({π ^ 2} : Set R)) Cbar] [Algebra.FinitePresentation (R ⧸ Ideal.span ({π ^ 2} : Set R)) Cbar] (j : Cbar →ₐ[R] (Λ ⧸ Ideal.span ({algebraMap R Λ (π ^ 2)} : Set Λ))) : ∃ (D : Type (max a c)) (_ : CommRing D) (_ : Algebra R D) (φ : D →ₐ[R] Λ) (ψ : (D ⧸ Ideal.span ({algebraMap R D π} : Set D)) →+* (Λ ⧸ Ideal.span ({algebraMap R Λ π} : Set Λ))) (red : (Λ ⧸ Ideal.span ({algebraMap R Λ (π ^ 2)} : Set Λ)) →+* (Λ ⧸ Ideal.span ({algebraMap R Λ π} : Set Λ))) (c : Cbar →ₐ[R] (D ⧸ Ideal.span ({algebraMap R D π} : Set D))) (cmod : (Cbar ⧸ Ideal.span ({algebraMap R Cbar π} : Set Cbar)) →+* (D ⧸ Ideal.span ({algebraMap R D π} : Set D))), Algebra.FinitePresentation R D ∧ ψ.comp (Ideal.Quotient.mk _) = (Ideal.Quotient.mk _).comp φ.toRingHom ∧ red.comp (Ideal.Quotient.mk _) = Ideal.Quotient.mk _ ∧ ψ.comp c.toRingHom = red.comp j.toRingHom ∧ cmod.comp (Ideal.Quotient.mk _) = c.toRingHom ∧ (∀ q : PrimeSpectrum D, algebraMap R D π ∉ q.asIdeal → IsSmoothAtPrime R q) ∧ (∀ q : PrimeSpectrum (D ⧸ Ideal.span ({algebraMap R D π} : Set D)), IsSmoothAtPrime (R ⧸ Ideal.span ({π ^ 2} : Set R)) (PrimeSpectrum.comap c.toRingHom q) → IsSmoothAtPrime R (PrimeSpectrum.comap (Ideal.Quotient.mk _) q)) ∧ (∀ q : PrimeSpectrum (D ⧸ Ideal.span ({algebraMap R D π} : Set D)), IsSmoothAtPrime (R ⧸ Ideal.span ({π ^ 2} : Set R)) (PrimeSpectrum.comap c.toRingHom q) → @IsSmoothAtPrime (Cbar ⧸ Ideal.span ({algebraMap R Cbar π} : Set Cbar)) (D ⧸ Ideal.span ({algebraMap R D π} : Set D)) _ _ cmod.toAlgebra q)",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-plg1317",
+  "group": "H1",
+  "result": "pass",
+  "note": "R Noetherian, Λ/Cbar R-algebras (Cbar R/π²-algebra via IsScalarTower, not inferInstance), hAnnR/hAnnΛ = Ann(π)=Ann(π²) (Module.annihilator of span, as AnnihilatorElementFlatBaseChange), FinitePresentation (R/π²) Cbar, j R-alg to Λ/π²Λ; tied ∃ D CommRing Algebra φ, ψ/red/cmod pinned by quotient-mk equations, c R-alg, right square ψ∘c=red∘j; (a) FinitePresentation R D; (b)-(d) Algebra.IsSmoothAtPrime (#check: only declaration), (d) over Cbar/πCbar via cmod.toAlgebra; D : Type (max a c) holds (D is a quotient of R[x,z]); no let, node unchanged vs base"
  }
 }
