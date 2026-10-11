@@ -119,5 +119,23 @@
   "group": "E1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-fic1826 (reviewer sub-agent of L); spot-checked: Statement unchanged from sheaf-dag (corrected 17:57 version, dim B = 1 present) and is what the split proves; dim 1 used in Step 2 (nonzero support primes maximal). Mathlib grep: RingTheory/Conductor.lean conductor is the single-element R<x> conductor, no match. FIX more, RETURN less: C1/E Step 2 claimed 'every maximal ideal contains J', false in general (A/B may be supported at only some maximal ideals); rewritten: V(J) consists of maximal ideals, sqrt J = intersection of V(J) by cited lem-weil-pbc-zero-locus-eq-iff-radical-eq, which contains the Jacobson radical; uses/proof_deps updated. Missed by E1 second reading.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.FiniteIntegralConductor",
+  "declaration": "Subalgebra.exists_jacobson_pow_mul_mem_base",
+  "file": "lean/Sheaf/RingTheory/FiniteIntegralConductor.lean",
+  "statement": "theorem exists_jacobson_pow_mul_mem_base {B : Type u} [CommRing B] [IsDomain B] [IsNoetherianRing B] [Finite (MaximalSpectrum B)] (hdim : ringKrullDim B = 1) {K : Type v} [Field K] [Algebra B K] [IsFractionRing B K] (A : Subalgebra B K) [Module.Finite B A] [IsFractionRing A K] : ∃ n : ℕ, 0 < n ∧ ∀ b : B, b ∈ (Ideal.jacobson (⊥ : Ideal B)) ^ n → ∀ a : A, ∃ c : B, algebraMap B K c = algebraMap B K b * (a : K)",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-fic1043",
+  "group": "F1",
+  "result": "pass",
+  "note": "B: CommRing+IsDomain+IsNoetherianRing+Finite(MaximalSpectrum) (Mathlib semilocal convention, LocalProperties/Semilocal)+ringKrullDim=1; m_B=jacobson ⊥; K IsFractionRing B K; A: Subalgebra B K + Module.Finite B A + IsFractionRing A K (redundant via AsSubring instance, Prop so harmless); conclusion ∃n>0 pointwise m_B^n·A ⊆ image of B, equivalent to the ideal containment. Mathlib Conductor.lean/ZMT conductor is the single-element R<x> conductor, Filtration jacobson is Krull intersection: no existing statement, existing:false right."
  }
 }
