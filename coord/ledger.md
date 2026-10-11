@@ -4010,3 +4010,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 09:25 L: merged deliver/C1/lem-weil-pbc-constant-subsheaf-generic (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.ConstantSubsheafGeneric AlgebraicGeometry.constant_subsheaf_generic)
 - 09:25 L: merged deliver/C1/lem-sc-invertible-module-generic-stalk (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.InvertibleModuleGenericStalk AlgebraicGeometry.Scheme.Modules.invertible_module_generic_stalk)
 - 09:25 L: merged deliver/F1/lem-weil-pbc-constructible-module-support-constructible (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.ConstructibleEtaleModuleSupport AlgebraicGeometry.Scheme.constructibleEtaleModuleSupport)
+- 09:25 L: merged deliver/J1/def-weil-pbc-charpoly-locally-free (stage 2; reviewer PASS; first push; Sheaf.Algebra.LocallyFreeCharpoly Algebra.locallyFreeCharpoly)

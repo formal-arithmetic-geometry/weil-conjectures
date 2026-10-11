@@ -173,5 +173,29 @@
   "item": "def-weil-pbc-charpoly-locally-free",
   "worker": "stage1",
   "summary": "Checked against Stacks 09XI, proof of (3)=>(1), last paragraph (CharPol_A defined by gluing matrix characteristic polynomials over a standard covering, details omitted). The definition takes its data from lem-weil-pbc-charpoly-locally-free-existence (existence, uniqueness, monic of degree n). Statement made self-contained: localizations M_f and A_f, base change M (x)_A A', polynomial ring, determinant over A'[T] of the base-changed endomorphism (matrix form, basis-independent) and the coefficientwise image A[T] -> A'[T] now named with their nodes (stmt_deps added: def-weil-pbc-module-localization-away, def-weil-ring-localization-away, def-weil-module-base-change, def-weil-polynomial-ring, def-weil-endomorphism-determinant, def-weil-matrix). Three proof steps record well-posedness: (1) existence/uniqueness and the monic form from the existence lemma, and the determinant being defined; (2) independence of f_1..f_r from uniqueness (the characterizing property does not mention them); (3) independence of n, which the notation CharPol_A(phi) drops and the users (direct-sum lemma, idempotent splitting) never fix: n is determined by M when A != 0 (common localization A_{f_i g_j} != 0 at a maximal ideal, invariant basis number), and A[T]=0 when A=0. Free case noted (A'=A). Mathlib re-searched three ways: LinearMap.charpoly exists for free finite modules only; nothing for projective or locally free modules. The source repository has no locally free characteristic polynomial."
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.LocallyFreeCharpoly",
+  "declaration": "Algebra.locallyFreeCharpoly",
+  "declarations": [
+   "Algebra.locallyFreeCharpoly",
+   "Algebra.locallyFreeCharpoly_spec",
+   "Algebra.locallyFreeCharpoly_eq",
+   "Algebra.locallyFree_constantRank_eq"
+  ],
+  "file": "lean/Sheaf/Algebra/LocallyFreeCharpoly.lean",
+  "statement": "def locallyFreeCharpoly {n r : ℕ} (f : Fin r → A) (hgen : Ideal.span (Set.range f) = ⊤) (hfree : ∀ i : Fin r, ∃ _e : Module.Basis (Fin n) (Localization.Away (f i)) (LocalizedModule.Away (f i) M), True) (φ : M →ₗ[A] M) : Polynomial A",
+  "branch": "sheaf-dag",
+  "by": "J1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-dcl1534",
+  "group": "J1",
+  "result": "pass",
+  "note": "def = Classical.choose of landed charpoly_locallyFree_exists_unique.{u,v,u} on identical cover/basis/phi binders (one notion, no second def); spec restates its P (max u w), uniqueness, monic Fin n expansion, free case (forall e = Nonempty-guarded form); _eq covers different covers and ranks without Nontrivial (A=0 subsingleton); rank_eq only under [Nontrivial A]; n=0, r=0 checked"
  }
 }
