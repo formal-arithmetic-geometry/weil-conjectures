@@ -147,5 +147,24 @@
   "worker": "stage1",
   "summary": "Split Stacks 065S(1) into the 065R projective-resolution/Ext-vanishing characterization and the 065P contravariant long exact Ext sequence. The middle Ext group in degree m+1 is zero because the adjacent groups for M and M'' vanish. The 065P node is a Mathlib leaf; 065R remains unsplit because Mathlib defines projective dimension by Ext vanishing and has no bounded-resolution equivalence.",
   "blueprint": "Searched all blueprint nodes with tools/blueprint_refs.py for 'projective dimension', 'exact sequence projective', '065S', 'Ext groups vanish', 'projective resolution', and 'long exact sequence Ext'. The item and both new nodes are consequences of step 7 of thm-weil-pbc-finite-etale-lifting through the recorded via chain; no blueprint node states the same algebraic lemma, so same_as is []."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.ProjectiveDimensionSESKernel",
+  "declaration": "Ring.projectiveDimensionLE_of_shortExact",
+  "file": "lean/Sheaf/RingTheory/ProjectiveDimensionSESKernel.lean",
+  "statement": "theorem projectiveDimensionLE_of_shortExact {R : Type u} [CommRing R] (m : ℕ) (S : ShortComplex (ModuleCat.{max u v} R)) (hS : S.ShortExact) (h₂ : ModuleCat.HasProjectiveResolutionLE S.X₂ m) (h₃ : ModuleCat.HasProjectiveResolutionLE S.X₃ (m + 1)) : ModuleCat.HasProjectiveResolutionLE S.X₁ m",
+  "branch": "sheaf-dag",
+  "by": "G1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-pdk1350"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-pdk1350",
+  "group": "G1",
+  "result": "fix",
+  "note": "R comm ring, m : ℕ, ShortComplex+ShortExact = 0→M'→M→M''→0 (mono/epi/Im=Ker), h₂ pd(M)≤m, h₃ pd(M'')≤m+1, concl pd(M')≤m via landed HasProjectiveResolutionLE; universe ModuleCat.{v} → ModuleCat.{max u v} to match landed 065R (E1 afb3fd39a) used by the proof; docstring now carries the node proof"
  }
 }
