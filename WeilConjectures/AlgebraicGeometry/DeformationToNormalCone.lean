@@ -501,30 +501,69 @@ structure DeformationToNormalConeData (d : ℕ) (g : V ⟶ B) (s : B ⟶ V)
 
 attribute [instance] DeformationToNormalConeData.smoothOfRelativeDimension_proj
 
+section Smooth
+
+variable (d : ℕ) (g : V ⟶ B) [SmoothOfRelativeDimension d g] (s : B ⟶ V) [IsClosedImmersion s]
+
+/-- Blueprint `lem-pur-dnc-section-geometry` (2): the coordinates.
+
+**The deformation space is smooth.** If `g` is smooth of relative dimension `d` with closed
+section `s`, then `g̃ : D_s V ⟶ 𝔸¹_B` is smooth of relative dimension `d`: étale-locally there are
+coordinates `x₁, …, x_d` on `V` over `B` in which `s` is `x_i = 0`, and on the chart
+`u_i = x_i / t` the deformation space is étale over `𝔸^d × 𝔸¹` over the base. -/
+theorem smoothOfRelativeDimension_deformationSpaceProj (hs : s ≫ g = 𝟙 B) :
+    SmoothOfRelativeDimension d (deformationSpaceProj g s) :=
+  sorry
+
+variable {g s}
+
+/-- Blueprint `def-pur-normal-bundle`: the normal cone `N_s = Spec (⨁_{r ≥ 0} I^r / I^{r+1})` of
+the closed section `s` of `g`, with its projection to `B` and its zero section, as a normal cone
+datum: it is smooth of relative dimension `d` over `B`, being the fibre of the smooth `g̃` over
+`t = 0`. -/
+noncomputable def normalConeData (hs : s ≫ g = 𝟙 B) : NormalConeData d s where
+  scheme := s.ker.normalCone
+  proj := normalConeProj g s
+  zeroSection := s.normalConeZeroSection
+  zeroSection_comp_proj := normalConeZeroSection_normalConeProj hs
+  isClosedImmersion_zeroSection := inferInstance
+  smoothOfRelativeDimension_proj :=
+    have h := smoothOfRelativeDimension_deformationSpaceProj d g s hs
+    have := smoothOfRelativeDimension_isStableUnderBaseChange (n := d)
+    MorphismProperty.of_isPullback (P := @SmoothOfRelativeDimension d)
+      (isPullback_normalConeToDeformationSpace g s) h
+
+end Smooth
+
 /-- Blueprint `sk-lem-geometry`: Geometry of the deformation of a section
 
 **Existence of the deformation to the normal cone.** Let `g : V ⟶ B` be smooth of pure
 relative dimension `d` with a closed section `s`, and let `N_s ⟶ B` be the normal cone of `s`
-with its zero section. Then the deformation datum of
-`AlgebraicGeometry.Scheme.Hom.DeformationToNormalConeData` exists: étale-locally there are
-relative coordinates `x₁, …, x_d` on `V` in which `s` is `x_i = 0`, and on the deformation
-chart `u_i = x_i / t` the deformation is `𝔸^d × 𝔸¹` over the base, which gives both the
-smoothness of `g̃` and the two cartesian squares.
-
-All of this commutes with base change in `B` and with étale localization.
-
-As long as `AlgebraicGeometry.Scheme.Hom.NormalConeData` is not tied to `s` (see the TODO in the
-module documentation), this statement, which quantifies over every datum `N`, is false. Let `B`
-be a smooth projective curve with a nontrivial line bundle `L`, `V = 𝔸¹_B`, `s` the zero section,
-`d = 1`, and `N` the total space of `L` with its zero section. For a datum `𝒟`, the line bundle
-`s̃^* Ω_{𝒟/𝔸¹_B}` on `𝔸¹_B` restricts to `s^* Ω_{V/B} ≅ 𝒪_B` at `t = 1` and to `L^∨` at `t = 0`,
-contradicting `Pic(𝔸¹_B) = Pic(B)`. It becomes the blueprint lemma once `N` is the normal cone of
-`s`. -/
+(`AlgebraicGeometry.Scheme.Hom.normalConeData`) with its zero section. Then the deformation
+datum of `AlgebraicGeometry.Scheme.Hom.DeformationToNormalConeData` exists, with fibre `N_s`
+over `t = 0`: the deformation space is the relative spectrum `D_s V = Spec_V 𝒪_V[t, I t⁻¹]` of the
+extended Rees algebra of the ideal `I` of `s`. Its fibre over `t = 1` is `V` and over `t = 0` the
+normal cone, over the punctured line it is `V ×_B 𝔾_{m,B}`, and `g̃` is smooth of relative
+dimension `d`. -/
 theorem nonempty_deformationToNormalConeData (d : ℕ) (g : V ⟶ B)
-    [SmoothOfRelativeDimension d g] (s : B ⟶ V) [IsClosedImmersion s] (hs : s ≫ g = 𝟙 B)
-    (N : NormalConeData d s) :
-    Nonempty (DeformationToNormalConeData d g s N) :=
-  sorry
+    [SmoothOfRelativeDimension d g] (s : B ⟶ V) [IsClosedImmersion s] (hs : s ≫ g = 𝟙 B) :
+    Nonempty (DeformationToNormalConeData d g s (normalConeData d hs)) :=
+  have := smoothOfRelativeDimension_deformationSpaceProj d g s hs
+  ⟨{ scheme := s.ker.deformationSpace
+     proj := deformationSpaceProj g s
+     sect := s.deformationSpaceSection
+     sect_comp_proj := deformationSpaceSection_deformationSpaceProj hs
+     smoothOfRelativeDimension_proj := this
+     oneFibre := deformationSpaceOneFibre g s
+     isPullback_oneFibre := isPullback_deformationSpaceOneFibre g s
+     comp_oneFibre := comp_deformationSpaceOneFibre hs
+     zeroFibre := s.ker.normalConeToDeformationSpace
+     isPullback_zeroFibre := isPullback_normalConeToDeformationSpace g s
+     comp_zeroFibre := normalConeZeroSection_comp_normalConeToDeformationSpace
+     puncturedLine := puncturedLine B
+     coe_puncturedLine := coe_puncturedLine B
+     generic := deformationSpaceGeneric g s
+     isPullback_generic := isPullback_deformationSpaceGeneric g s }⟩
 
 end Scheme.Hom
 
