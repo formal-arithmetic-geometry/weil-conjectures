@@ -108,21 +108,19 @@ lemma leftDerivedFunctorCompIso_hom_app_comp_counit (G : D ⥤ E) [G.Additive]
     (F.leftDerivedFunctorCompIso G).hom.app (DerivedCategory.Qh.obj K) ≫
         G.leftDerivedFunctor.map (F.leftDerivedFunctorCounit.app K) ≫
           G.leftDerivedFunctorCounit.app ((F.mapHomotopyCategory (ComplexShape.up ℤ)).obj K) =
-      (F ⋙ G).leftDerivedFunctorCounit.app K ≫
-        DerivedCategory.Qh.map ((Functor.mapHomotopyCategoryCompIso (Iso.refl (F ⋙ G))
-          (ComplexShape.up ℤ)).inv.app K) := by
+      (F ⋙ G).leftDerivedFunctorCounit.app K := by
+  have h := mapDerivedCategoryCompIso_fach F G K
+  rw [mapHomotopyCategoryCompIso_refl_hom_app] at h
+  erw [DerivedCategory.Qh.map_id, Category.comp_id] at h
   rw [← G.leftDerivedFunctorIsoMapDerivedCategory_hom_app_fac,
     ← F.leftDerivedFunctorIsoMapDerivedCategory_hom_app_fac,
-    ← (F ⋙ G).leftDerivedFunctorIsoMapDerivedCategory_hom_app_fac_assoc,
-    ← mapDerivedCategoryCompIso_fach F G K]
+    ← (F ⋙ G).leftDerivedFunctorIsoMapDerivedCategory_hom_app_fac, ← h]
   simp only [leftDerivedFunctorCompIso, Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app,
     isoWhiskerRight_hom, whiskerRight_app, isoWhiskerLeft_hom, whiskerLeft_app, Category.assoc,
     Functor.map_comp]
   rw [← NatTrans.naturality_assoc G.leftDerivedFunctorIsoMapDerivedCategory.inv,
     ← NatTrans.naturality_assoc G.leftDerivedFunctorIsoMapDerivedCategory.inv]
-  simp only [comp_obj, Iso.inv_hom_id_app_assoc, ← G.mapDerivedCategory.map_comp_assoc,
-    Category.comp_id, ← DerivedCategory.Qh.map_comp, Iso.hom_inv_id_app,
-    CategoryTheory.Functor.map_id]
+  simp only [comp_obj, Iso.inv_hom_id_app_assoc, ← G.mapDerivedCategory.map_comp_assoc]
 
 end Composition
 
