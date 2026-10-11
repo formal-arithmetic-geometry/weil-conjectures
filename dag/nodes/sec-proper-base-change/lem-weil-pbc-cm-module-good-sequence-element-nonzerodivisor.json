@@ -246,5 +246,23 @@
   "summary": "Split following the proof of Stacks Algebra 00N4 (lemma-good-element, algebra.tex line 24985; tags 00N4, 00N3, 00LJ, 05BV, 00L3, 0B52, 00LK verified in tags/tags): induction on d, stated as P(e) over all (N, x_1..x_e, y) so that the induction hypothesis applies to M/f_1M; base case d = 1 via the kernel K of g; inductive step: M/f_1M is nonzero CM of dimension d-1 with regular sequence f_2..f_d (0B52 clause (2) leaf, 00LK), g is good for it, the induction hypothesis, then the swap f_1,g -> g,f_1 by 00LJ (leaf), and f_1..f_{d-1} is M/gM-regular, so M/gM is CM by 00LK. Statement corrected: d >= 1 added. SOURCE ERROR: for d = 0 the goodness condition is vacuous and (a) fails (R = k[x]_(x), M = R/(x), d = 0, g = x is good vacuously and kills M; also any field R = k, M = k, g = 0); the source says 'there is no case to which the lemma applies', which is wrong as written. The citer lem-weil-pbc-cm-module-good-element-nonzerodivisor applies the lemma only with d >= 1 (its step 3, after its step 1 shows d >= 1) and with d >= 2 (its step 7), so it is unaffected. Departure inside the node (below the unit): in the case d = 1 the source shows K has finite length (00L5), so f_1K = K and Nakayama gives K = 0; here K = 0 follows from Supp K = {m} and 05BV (m is then associated to K, so f_1 in m kills a nonzero element of M), using the existing Mathlib leaf lem-weil-pbc-minimal-support-prime-associated instead of two new nodes (00L5 is not in Mathlib). Written out where the source is silent: m in Supp of a nonzero finite module; Supp M ∩ V(g) = {m} for d = 1; Supp K ⊆ Supp M ∩ V(g); finiteness of K; that M/f_1M is CM of dimension d-1 and M/gM nonzero; the identification of iterated quotients; that M/(f_1,g)M ≠ 0. No new nodes; every node cited is of unit sk-thm-p1 or a Mathlib leaf. What the citer uses ((a), (b) with depth(M/gM) = dim Supp(M/gM) = d-1) is proved."
  },
  "reviewed": "2026-10-10 L: 8 steps checked against the 00N4 proof (induction on d; d = 1 via the kernel of g supported at m, here using 05BV instead of 00L5 plus Nakayama; d >= 2 via M/f_1M, goodness inherited, swap of f_1, g by 00LJ); hypothesis d >= 1 added: for d = 0 the goodness condition is empty and (a) fails (R = k[x]_(x), M = R/(x), g = x); the citer good-element-nonzerodivisor uses the node only for d >= 1",
- "lead_note": "Hypothesis d >= 1 added by the stage-1 split (2026-10-10): Stacks 00N4 is false for d = 0, see coord/HUMAN.md."
+ "lead_note": "Hypothesis d >= 1 added by the stage-1 split (2026-10-10): Stacks 00N4 is false for d = 0, see coord/HUMAN.md.",
+ "lean": {
+  "module": "Sheaf.RingTheory.IsSMulRegularOfGoodSequence",
+  "declaration": "Module.isSMulRegular_of_good_sequence",
+  "file": "lean/Sheaf/RingTheory/IsSMulRegularOfGoodSequence.lean",
+  "statement": "theorem isSMulRegular_of_good_sequence {R : Type u} [CommRing R] [IsNoetherianRing R] [IsLocalRing R] (M : Type v) [AddCommGroup M] [Module R M] [Module.Finite R M] [Nontrivial M] (d : ℕ) (hd : 1 ≤ d) (hcm : (IsLocalRing.depth (R := R) M : WithBot ℕ∞) = supportDim R M) (hdim : supportDim R M = ((d : ℕ∞) : WithBot ℕ∞)) (fs : List R) (hlen : fs.length = d) (hmem : ∀ f ∈ fs, f ∈ IsLocalRing.maximalIdeal R) (hreg : RingTheory.Sequence.IsRegular M fs) (g : R) (hg : g ∈ IsLocalRing.maximalIdeal R) (hgood : ∀ i : ℕ, i < d → Order.krullDim ((Module.support R M ∩ PrimeSpectrum.zeroLocus {x : R | x ∈ g :: fs.take i}) : Set (PrimeSpectrum R)) = (((d - i - 1 : ℕ) : ℕ∞) : WithBot ℕ∞)) : IsSMulRegular M g ∧ (IsLocalRing.depth (R := R) (QuotSMulTop g M) : WithBot ℕ∞) = supportDim R (QuotSMulTop g M) ∧ IsLocalRing.depth (R := R) (QuotSMulTop g M) = (d - 1 : ℕ) ∧ supportDim R (QuotSMulTop g M) = (((d - 1 : ℕ) : ℕ∞) : WithBot ℕ∞) ∧ RingTheory.Sequence.IsRegular (QuotSMulTop g M) (fs.take (d - 1))",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-cgs1444",
+  "group": "C1",
+  "result": "pass",
+  "note": "Noetherian local R; finite Nontrivial M; CM as depth=supportDim (J1 form); d>=1 nat with supportDim=d; fs length d in m, Mathlib IsRegular; g in m; goodness i<d: krullDim(support ∩ zeroLocus(g::take i))=d-i-1; IsSMulRegular, QuotSMulTop CM, depth=dim=d-1, take (d-1) regular"
+ }
 }
