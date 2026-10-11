@@ -33,6 +33,7 @@ import fcntl, hashlib, json, os, pathlib, re, shutil, signal, subprocess, sys, t
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
 import leanindex as li  # noqa: E402
 import landing as ld  # noqa: E402
+import mergelock  # noqa: E402
 
 CFG = li.config()
 CLONE = ld.LOCAL / "buildtree"
@@ -40,6 +41,7 @@ LOG = ld.B / "build.log"
 THREADS = CFG.get("SHEAF_BUILD_THREADS", "3")
 POLL = float(CFG.get("SHEAF_BUILD_POLL", "10"))
 TOOLS = pathlib.Path(__file__).resolve().parent
+LOCK_SECS = float(CFG.get("SHEAF_BUILD_LOCK_TIMEOUT", "900"))  # wait for a running merge to finish
 
 
 def run(cmd, **kw):
@@ -53,6 +55,21 @@ def commit_tree(inflight: list[dict]):
     if top.returncode != 0:
         return None
     repo = pathlib.Path(top.stdout.strip())
+    # Stage and commit under coord/.merge.lock, as merge_delivery.py writes the tree and commits under it: a build
+    # commit in the middle of a merge would commit the merge's partial tree (2026-10-11 09:58, 2a55d0584).
+    with open(mergelock.LOCK, "a") as f:
+        try:
+            mergelock.acquire(f, mergelock.LOCK, LOCK_SECS)
+        except mergelock.LockTimeout as e:
+            print(f"warning: build commit skipped: {e}")
+            return run(["git", "rev-parse", "HEAD"], cwd=repo).stdout.strip() or None
+        try:
+            return _commit_tree(repo, inflight)
+        finally:
+            fcntl.flock(f, fcntl.LOCK_UN)
+
+
+def _commit_tree(repo: pathlib.Path, inflight: list[dict]):
     run(["git", "add", "-A"], cwd=repo)
     for r in inflight:
         for f in r["files"]:
