@@ -1,13 +1,12 @@
 # Work queue
 
-863 items; claim with `tools/claim.py next <group> [--stage N]`.
+862 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (37)
+## Stage 1: nodes to split (36)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
 | `lem-weil-derived-limit-roos-complex` | 15 | none |
-| `lemma-weil-pbc-prime-torsion-devissage` | 2004 | rests_on_sorry |
 | `lem-pc-ringed-space-module-stalk-tensor` | 3013 | none |
 | `lem-pc-ring-m-pseudo-coherent-vanishing-base` | 3017 | none |
 | `lem-pc-ring-pseudo-coherent-distinguished-triangle` | 3017 | none |
@@ -875,7 +874,7 @@
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 | `def-nagata-fixed-base-separated-stage` | 6 | state |
 
-Not open yet: 1736 nodes that wait for a statement dependency, 78 nodes that wait for stage 1.
+Not open yet: 1737 nodes that wait for a statement dependency, 77 nodes that wait for stage 1.
 
 ## Stage 3: modules to prove (0)
 
