@@ -200,5 +200,24 @@
   "by": "L",
   "result": "pass",
   "note": "Six steps: etale gives flat, lfp, unramified hence locally quasi-finite, with quasi-compactness quasi-finite (01TJ tool); 07RZ as a new unsplit node stated faithfully (checked against more-morphisms.tex); finitely many nonempty strata by universally bounded fibres (new unsplit 03JA node) and the universal property at Spec kappa(y); strata constructible via retrocompact opens of the spectral space Y; subscheme structure; finite locally free + etale base change (new leaf etale_isStableUnderBaseChange Etale.lean:74 verified) = finite etale. Statement corrected: f quasi-compact added (the delivered statement was false). Correct."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.EtaleSeparatedStratifiedFinite",
+  "declaration": "AlgebraicGeometry.Scheme.exists_etale_separated_stratified_finite",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleSeparatedStratifiedFinite.lean",
+  "statement": "theorem exists_etale_separated_stratified_finite {X U : Scheme.{u}} [CompactSpace X] [QuasiSeparatedSpace X] (j : U ⟶ X) [Etale j] [IsSeparated j] [QuasiCompact j] : ∃ S : LocallyClosedStratification X, (∀ i : Fin S.n, Topology.IsConstructible (S.stratum i)) ∧ (∀ i : Fin S.n, IsFinite (pullback.snd j (S.immersion i)) ∧ Etale (pullback.snd j (S.immersion i)))",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-ess1013"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-ess1013",
+  "group": "H1",
+  "result": "fix",
+  "note": "Y qcqs -> [CompactSpace X] [QuasiSeparatedSpace X] (delivered QuasiCompact/QuasiSeparated (𝟙 Y) were vacuous, inferInstance); f etale/separated/qc -> [Etale j] [IsSeparated j] [QuasiCompact j]; finite partition into locally closed subschemes with immersion of image Y_r -> LocallyClosedStratification X (F1/K1 spelling); constructible -> Topology.IsConstructible (S.stratum i); V x_Y Y_r -> Y_r finite etale -> IsFinite ∧ Etale (pullback.snd j (S.immersion i))"
  }
 }
