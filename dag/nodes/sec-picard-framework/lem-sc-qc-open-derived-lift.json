@@ -113,5 +113,24 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-qol3153 (reviewer sub-agent of L); spot-checked: Proof is Rj_*E plus restriction; both cited nodes state the facts (C1); citer lem-sc-affine-pseudo-coherent-lift step 1 matches the statement; no new nodes, no lift/extend duplicates. FIX more, RETURN less: (1) C4 step 2 instantiated V=X (wrong; gives (Rj_*E)|_X), corrected to V=U with j^{-1}(U)=U, g=id_U - the second reading claimed this fix but it was not in the file; (2) C4 step 1 asserted j quasi-compact without reason, added elementary argument (U qc, X affine hence separated so U_i cap W affine) and qs from open immersion separated.; 1 file(s) fixed by the reviewer"
  },
- "lead_note": "2026-10-10 L (R-qol3153): Second reading by K1 claimed V=X->V=U correction but the delivered file still had V=X; reviewer applied it."
+ "lead_note": "2026-10-10 L (R-qol3153): Second reading by K1 claimed V=X->V=U correction but the delivered file still had V=X; reviewer applied it.",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.QcOpenDerivedLift",
+  "declaration": "AlgebraicGeometry.exists_qc_derived_lift_of_isCompact_open",
+  "file": "lean/Sheaf/AlgebraicGeometry/QcOpenDerivedLift.lean",
+  "statement": "theorem exists_qc_derived_lift_of_isCompact_open (X : Scheme.{u}) [IsAffine X] (U : X.Opens) (hU : IsCompact (U : Set X)) [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))] [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace))] (E : schemeDerivedQCohCategory U.toScheme) : ∃ E' : schemeDerivedQCohCategory X, Nonempty (((SheafOfModules.overFunctor.{u} (moduleRings X.toRingedSpace) U) ⋙ Equivalence.functor (C := SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U)) (D := SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace)) (Scheme.Modules.overEquiv U)).mapDerivedCategory.obj E'.obj ≅ E.obj)",
+  "branch": "sheaf-dag",
+  "by": "G1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-qdl1256"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-qdl1256",
+  "group": "G1",
+  "result": "fix",
+  "note": "X affine=[IsAffine X]; U qc open=(U : X.Opens)+IsCompact (U : Set X) (not hollow); E : schemeDerivedQCohCategory U.toScheme; tied ∃E' : schemeDerivedQCohCategory X with Nonempty(restriction ≅ E.obj); restriction = shared overFunctor (moduleRings X) U then Mathlib overEquiv U (overFunctorEquiv = restrictFunctor U.ι), endpoints D(O_X), D(O_U) as E1 form; only lean record added to node. FIX: show..from elaborated as  in the statement (H-let); replaced by Equivalence.functor (C := ..) (D := ..) (overEquiv U), same carriers, no binder"
+ }
 }
