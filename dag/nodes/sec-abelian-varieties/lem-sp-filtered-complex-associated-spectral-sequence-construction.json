@@ -21,9 +21,55 @@
   "def-sp-filtration",
   "def-sp-spectral-sequence"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Place $F^{p+1}K^{p+1+q}$ in bidegree $(p,q)$. Because each $F^{p+1}K^\\bullet$ is a subcomplex, the differential $d$ maps this component to $F^{p+1}K^{p+2+q}$, so it defines a differential of bidegree $(0,1)$; the identity $d^2=0$ is inherited from the cochain complex.",
+   "uses": [
+    "def-sp-abelian",
+    "def-sp-filtration"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Definition 12.18.1 and proof of Lemma 12.19.2, Tag 012K"
+   }
+  },
+  {
+   "text": "The inclusions $F^{p+1}K^{p+1+q}\\hookrightarrow F^pK^{p+1+q}$ define a morphism $\\alpha:A\\to A[-1,1]$ of differential bigraded objects: the filtration inclusions commute with $d$ because the filtration is by subcomplexes. They are monomorphisms because they are inclusions of subobjects. Applying the differential-object self-map construction of Definition 12.18.1 and Remark 12.18.2 therefore gives the associated spectral sequence.",
+   "uses": [
+    "def-sp-abelian",
+    "def-sp-filtration",
+    "def-sp-spectral-sequence"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Remark 12.18.2 and proof of Lemma 12.19.2, Tag 012K"
+   }
+  },
+  {
+   "text": "In bidegree $(p,q)$, the self-map construction uses the shift operators $S=[0,1]$ and $T=[1,-1]$, so $T^rS=[r,1-r]$ and the page-$r$ differential has bidegree $(r,1-r)$. At page zero its term is the cokernel of the shifted inclusion, hence $E_0^{p,q}=\\operatorname{Coker}(F^{p+1}K^{p+q}\\to F^pK^{p+q})=F^pK^{p+q}/F^{p+1}K^{p+q}=\\operatorname{gr}^pK^{p+q}$; the induced differential is the one induced by $d$.",
+   "uses": [
+    "def-sp-filtration",
+    "def-sp-spectral-sequence"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "proof of Lemma 12.19.2 after Remark 12.18.2, Tag 012K"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sp-abelian",
+  "def-sp-filtration",
+  "def-sp-spectral-sequence"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/homology.tex",
+  "place": "Definition 12.18.1, Remark 12.18.2, and proof of Lemma 12.19.2 (Tag 012K)"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -55,12 +101,28 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sp-filtered-complex-ZB-description",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-abelian-varieties",
- "unit": "sk-prop-av-pqf-finite"
+ "unit": "sk-prop-av-pqf-finite",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-sp-filtered-complex-associated-spectral-sequence-construction",
+  "worker": "stage1",
+  "summary": "Checked the Tag 012K filtered-complex construction and split it into the differential-object verification, the injective filtration-shift morphism and associated spectral sequence, and the shift/cokernel calculation of the page bidegree and initial graded object. No new nodes were needed.",
+  "blueprint": "The steps realize Step 3 of thm-sp-spectral-object-yields: the differential-object construction and its bidegree and E_0 calculation.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-ssc0013",
+  "group": "E1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-ssc0013 (reviewer sub-agent of L); spot-checked: Statement vs homology.tex Def 12.18.1/Rem 12.18.2 and proof of Lemma 12.19.2 (Tag 012K): A^{p,q}=F^{p+1}K^{p+1+q}, d of bidegree (0,1), alpha:A->A[-1,1] the inclusion into F^pK^{p+1+q} (=A[-1,1]^{p,q}), S=[0,1], T=[1,-1], T^rS=[r,1-r], E_0=Coker=gr^pK^{p+q} with d_0 induced by d: exact match (C4). Step 2 quotes only Rem 12.18.2, the item's own source construction, not another lemma; steps 1-3 elementary from def-sp-abelian/def-sp-filtration/def-sp-spectral-sequence. Citer lem-sp-filtered-complex-ZB-description step 1 uses exactly this statement; checked its Z_r,B_r against Rem 12.18.2 by hand (r=1: Z_1 from F^pK^{p+q} cap d^{-1}F^{p+1}K^{p+q+1}, B_1 from d(F^pK^{p+q-1}); general r: alpha^r image F^{p+r}, preimage F^{p-r+1}): agree. No new nodes; no duplicate (def-sp-exact-couple has fixed Stacks 12.21 bidegrees, not the self-map couple). No repairs."
+ }
 }
