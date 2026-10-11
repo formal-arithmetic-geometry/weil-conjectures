@@ -194,5 +194,24 @@
   "by": "L",
   "result": "accepted",
   "note": "Agent-written proof in five steps from the unit equations only: the seven fibre products over W′ identified by the monomorphism property of open immersions (new Mathlib leaf IsOpenImmersion.mono, OpenImmersion.lean:546, checked), the units of j_W and j_{W′} are ρ^{-1} by lem-weil-pbc-etale-inverse-image-restriction (2), the two factorizations of h = j_W∘g_W = g∘j_{W′} through lem-weil-pbc-inverse-image-composition (2) evaluated at W, and the definition of κ. Independent of the construction of g^{-1} (def-weil-pbc-inverse-image gives only the adjunction), as it should be. Serves lem-weil-pbc-etale-mayer-vietoris-pullback step 3(c) at the level of sections."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.OpenRestrictionPullbackUnit",
+  "declaration": "AlgebraicGeometry.open_restriction_pullback_unit",
+  "file": "lean/Sheaf/AlgebraicGeometry/OpenRestrictionPullbackUnit.lean",
+  "statement": "theorem open_restriction_pullback_unit {X Y : Scheme.{u}} (g : Y ⟶ X) (W : X.Opens) (F : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) : ((Etale.upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} (morphismRestrict g W)).unit.app ((Etale.upperStar AddCommGrpCat.{u + 1} W.ι).obj F)).hom.app (op (Scheme.Etale.mk (𝟙 W.toScheme))) ≫ ((Etale.upperStar AddCommGrpCat.{u + 1} (morphismRestrict g W)).obj ((Etale.upperStar AddCommGrpCat.{u + 1} W.ι).obj F)).obj.map (MorphismProperty.Over.homMk (pullback.lift (morphismRestrict g W) (𝟙 (g ⁻¹ᵁ W).toScheme) ((Category.comp_id _).trans (Category.id_comp _).symm)) (by simp) : Scheme.Etale.mk (𝟙 (g ⁻¹ᵁ W).toScheme) ⟶ (MorphismProperty.Over.pullback @Etale ⊤ (morphismRestrict g W)).obj (Scheme.Etale.mk (𝟙 W.toScheme))).op ≫ ((Etale.upperStarComp AddCommGrpCat.{u + 1} (morphismRestrict g W) W.ι).inv.app F ≫ (Etale.upperStarComp AddCommGrpCat.{u + 1} (g ⁻¹ᵁ W).ι g (morphismRestrict g W ≫ W.ι) (morphismRestrict_ι g W)).hom.app F).hom.app (op (Scheme.Etale.mk (𝟙 (g ⁻¹ᵁ W).toScheme))) ≫ ((Etale.upperStarIsoLocalizationRestriction AddCommGrpCat.{u + 1} (g ⁻¹ᵁ W).ι inferInstance).hom.app ((Etale.upperStar AddCommGrpCat.{u + 1} g).obj F)).hom.app (op (Scheme.Etale.mk (𝟙 (g ⁻¹ᵁ W).toScheme))) ≫ ((Etale.upperStar AddCommGrpCat.{u + 1} g).obj F).obj.map (MorphismProperty.Over.homMk (𝟙 (g ⁻¹ᵁ W).toScheme) ((Category.id_comp _).trans (Category.id_comp _)) : Scheme.Etale.mk (g ⁻¹ᵁ W).ι ⟶ (MorphismProperty.Over.map ⊤ (inferInstance : Etale (g ⁻¹ᵁ W).ι)).obj (Scheme.Etale.mk (𝟙 (g ⁻¹ᵁ W).toScheme))).op = ((Etale.upperStarIsoLocalizationRestriction AddCommGrpCat.{u + 1} W.ι inferInstance).hom.app F).hom.app (op (Scheme.Etale.mk (𝟙 W.toScheme))) ≫ F.obj.map (MorphismProperty.Over.homMk (𝟙 W.toScheme) ((Category.id_comp _).trans (Category.id_comp _)) : Scheme.Etale.mk W.ι ⟶ (MorphismProperty.Over.map ⊤ (inferInstance : Etale W.ι)).obj (Scheme.Etale.mk (𝟙 W.toScheme))).op ≫ ((Etale.upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} g).unit.app F).hom.app (op (Scheme.Etale.mk W.ι)) ≫ ((Etale.upperStar AddCommGrpCat.{u + 1} g).obj F).obj.map (MorphismProperty.Over.homMk (pullback.lift (morphismRestrict g W) (g ⁻¹ᵁ W).ι (morphismRestrict_ι g W)) (by simp) : Scheme.Etale.mk (g ⁻¹ᵁ W).ι ⟶ (MorphismProperty.Over.pullback @Etale ⊤ g).obj (Scheme.Etale.mk W.ι)).op",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-orp1235"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-orp1235",
+  "group": "C1",
+  "result": "fix",
+  "note": "g:Y->X, open W, W'=g^-1 W, jW=W.ι, jW'=(g⁻¹ᵁW).ι, gW=morphismRestrict; F arbitrary Ab sheaf; units of upperStarLowerStarAdjunction; kappa = upperStarComp(gW,jW).inv ≫ upperStarComp(jW',g).hom (orientation checked vs node c); rho = upperStarIsoLocalizationRestriction (leftAdjointUniq); open-fibre-product identification via pullback.lift (gW,jW'); lets inlined, equivalence to delivered form checked by defeq both ways"
  }
 }
