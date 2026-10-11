@@ -18,12 +18,23 @@ vanishing cohomology in positive degrees, and let `Zᵏ` be its cycles. The shor
 `H^{n+1}(X, Z⁰) ≅ H¹(X, Zⁿ) ≅ Γ(X, Zⁿ⁺¹) / Γ(X, Kⁿ)`; for a resolution `K` of `M` this computes
 `H^{n+1}(X, M)` as the cohomology of the complex of global sections `Γ(X, K)`.
 
+Dually, for a complex `L` whose terms and cohomology sheaves are acyclic, the global sections of
+the cohomology sheaves are the cohomology of the global sections:
+`Γ(X, Hᵠ⁺¹(L)) ≅ Γ(X, Zᵠ⁺¹) / Γ(X, Lᵠ)`. All these identifications are natural in the complex.
+
 ## Main statements
 
 - `AlgebraicGeometry.Scheme.Modules.H.δ_naturality`: the connecting map is natural.
 - `AlgebraicGeometry.Scheme.Modules.H.bijective_δ_of_subsingleton`: the connecting map of a short
   exact sequence whose middle term is acyclic is bijective in positive degrees.
 - `AlgebraicGeometry.Scheme.Modules.H.cyclesShiftAddEquiv`: `H^{m+1}(X, Zᵏ) ≅ H¹(X, Zᵏ⁺ᵐ)`.
+- `AlgebraicGeometry.Scheme.Modules.H.cyclesZeroSuccAddEquiv`:
+  `H^{n+1}(X, Z⁰) ≅ Γ(X, Zⁿ⁺¹) / Γ(X, Kⁿ)`, natural in `K`
+  (`AlgebraicGeometry.Scheme.Modules.H.cyclesZeroSuccAddEquiv_naturality`).
+- `AlgebraicGeometry.Scheme.Modules.homologySectionsAddEquiv`:
+  `Γ(X, Hᵠ⁺¹(L)) ≅ Γ(X, Zᵠ⁺¹) / Γ(X, Lᵠ)`, natural in `L`.
+- `AlgebraicGeometry.Scheme.Modules.cyclesQuotientAddEquiv`: `Γ(X, Zⁿ⁺¹) / Γ(X, Kⁿ)` is the
+  cohomology `ker Γ(d) / im Γ(d)` of the complex of global sections.
 -/
 
 @[expose] public section

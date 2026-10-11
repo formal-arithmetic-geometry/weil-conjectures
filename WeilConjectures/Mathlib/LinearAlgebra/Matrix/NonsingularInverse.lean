@@ -28,7 +28,7 @@ fibre cohomology vanishes.
 open Matrix
 
 variable {R : Type*} [CommRing R] {ι₀ ι₁ ι₂ α β : Type*} [Fintype ι₀] [Fintype ι₁]
-  [Fintype α] [Fintype β] [DecidableEq ι₀] [DecidableEq ι₁] [DecidableEq α] [DecidableEq β]
+  [Fintype α] [Fintype β] [DecidableEq α] [DecidableEq β]
 
 /-- **A complex of free modules with invertible minors of complementary sizes is exact.** Let
 `B * A = 0` for matrices `A : R^{ι₀} → R^{ι₁}` and `B : R^{ι₁} → R^{ι₂}`. If an `a × a` minor of
