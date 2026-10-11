@@ -212,5 +212,23 @@
   "by": "L",
   "result": "pass",
   "note": "Seven steps along Stacks 087W with the implicit parts written out: Gamma is an equivalence Coh(X,I~) -> inverse systems of finite A-modules (tilde/Gamma adjunction, finite type on affines, affine sections of products), generators by Nakayama for the nilpotent ideal I/I^n, surjective kernels and Mittag-Leffler (new unsplit node: limits of towers with surjective kernels, 03CA/02N1) give M finite over A^, M/I^n M = M_n via 05GG, finite modules over a complete Noetherian ring are complete (new unsplit node, 00MA(3)/031B; the converse half Stacks omits), assembly of the equivalence. Checked steps 3-5; correct. pqf-lem-coherent-ft-locnoeth and pqf-def-locnoeth are definitions/notions, no tool_uses needed."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.CoherentFormalModulesAffine",
+  "declaration": "AlgebraicGeometry.coherentFormalModules_affine",
+  "file": "lean/Sheaf/AlgebraicGeometry/CoherentFormalModulesAffine.lean",
+  "statement": "theorem coherentFormalModules_affine (A : Type u) [CommRing A] [IsNoetherianRing A] (I : Ideal A) (J : (Spec (CommRingCat.of A)).IdealSheafData) (hJ : J = Scheme.IdealSheafData.ofIdealTop (I.map (Scheme.ΓSpecIso (CommRingCat.of A)).inv.hom)) : ∃ E : CoherentFormalModule (Spec (CommRingCat.of A)) J ≌ ObjectProperty.FullSubcategory (fun N : ModuleCat.{u} (AdicCompletion I A) ↦ Module.Finite (AdicCompletion I A) N), ∃ p : ∀ F : CoherentFormalModule (Spec (CommRingCat.of A)) J, (Functor.const ℕᵒᵖ).obj ((ModuleCat.restrictScalars (algebraMap A (AdicCompletion I A))).obj (E.functor.obj F).obj) ⟶ F.obj ⋙ moduleSpecΓFunctor (R := CommRingCat.of A), (∀ F, Nonempty (IsLimit (Cone.mk _ (p F)))) ∧ (∀ (F G : CoherentFormalModule (Spec (CommRingCat.of A)) J) (f : F ⟶ G) (n : ℕ), (ModuleCat.restrictScalars (algebraMap A (AdicCompletion I A))).map (E.functor.map f).hom ≫ (p G).app (op n) = (p F).app (op n) ≫ (moduleSpecΓFunctor (R := CommRingCat.of A)).map (f.hom.app (op n))) ∧ (∀ (F : CoherentFormalModule (Spec (CommRingCat.of A)) J) (n : ℕ), Function.Surjective ((p F).app (op n)) ∧ LinearMap.ker ((p F).app (op n)).hom = I ^ (n + 1) • (⊤ : Submodule A ((ModuleCat.restrictScalars (algebraMap A (AdicCompletion I A))).obj (E.functor.obj F).obj))) ∧ (∀ (F : CoherentFormalModule (Spec (CommRingCat.of A)) J) (n : ℕ) (r : AdicCompletion I A) (a : A) (x : (E.functor.obj F).obj), AdicCompletion.evalₐ I (n + 1) r = Ideal.Quotient.mk (I ^ (n + 1)) a → (p F).app (op n) (r • x) = a • (p F).app (op n) x) ∧ Nonempty (E.inverse ⋙ ObjectProperty.ι (IsCoherentFormalModule J) ≅ ObjectProperty.ι (fun N : ModuleCat.{u} (AdicCompletion I A) ↦ Module.Finite (AdicCompletion I A) N) ⋙ ModuleCat.restrictScalars (algebraMap A (AdicCompletion I A)) ⋙ tilde.functor (CommRingCat.of A) ⋙ formalCompletionFunctor J)",
+  "branch": "sheaf-dag",
+  "by": "R1",
+  "date": "2026-10-11",
+  "existing": false,
+  "note": "The equivalence carries limit cones, naturality, componentwise completed scalar action, and surjective projections with the specified ideal-power kernels. Its inverse is naturally the shared formalCompletionFunctor applied to tilde of the restricted completed module: on an affine this is the canonical tilde quotient system, including its reductions."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-cfa",
+  "group": "R1",
+  "result": "pass"
  }
 }
