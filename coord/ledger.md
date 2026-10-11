@@ -3624,3 +3624,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 07:20 L: merged deliver/H1/lem-pc-nonzero-section-integral-cartier (stage 2; reviewer FIX; first push; Sheaf.AlgebraicGeometry.NonzeroSectionIntegralCartier AlgebraicGeometry.Scheme.Modules.nonzero_section_integral_cartier)
 - 07:23 L: merged deliver/M1/lem-exc-discrete-modules-abelian-structure (stage 2; reviewer PASS; after a return; Sheaf.RepresentationTheory.DiscreteRep Rep.discreteRep_abelian_structure)
 - 07:23 L: merged deliver/C1/lem-fin-etale-normal-components (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.EtaleNormalComponents AlgebraicGeometry.Etale.exists_clopen_normal_integral_components)
+- 07:23 L: merged deliver/M1/lem-exc-discrete-modules-abelian (stage 2; reviewer FIX; after a return; Sheaf.CategoryTheory.DiscreteModulesAbelian CategoryTheory.discreteModules_abelian)
