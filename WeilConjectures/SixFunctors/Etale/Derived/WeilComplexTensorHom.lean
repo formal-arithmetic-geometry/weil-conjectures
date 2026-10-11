@@ -23,7 +23,8 @@ Let `Λ` be a finite coefficient ring and `g` an automorphism of a scheme `X`; i
 formalism `X = X₀ ×_{k₀} k̄` and `g` is the geometric Frobenius. A (strict) Weil complex
 `(K, φ_K)` is an object `K` of `Dctf(X, Λ)` with an isomorphism `φ_K : Lg^* K ≅ K`
 (`AlgebraicGeometry.Etale.WeilComplex`). This file shows that the derived tensor product and
-the derived internal hom of `Dctf(X, Λ)` lift to Weil complexes.
+the derived internal hom of `Dctf(X, Λ)` lift to Weil complexes; the internal hom of Weil
+complexes itself is built in `WeilConjectures.SixFunctors.Etale.Derived.WeilComplexInternalHom`.
 
 * The *tensor Frobenius* of `(K, φ_K)` and `(L, φ_L)` is
   `Lg^*(K ⊗ᴸ L) ≅ Lg^* K ⊗ᴸ Lg^* L ⟶ K ⊗ᴸ L`, the second arrow being `φ_K ⊗ φ_L`
@@ -47,8 +48,8 @@ covariant variable. These are the Weil-category bifunctors of the blueprint.
   the derived internal hom of `Dctf(X, Λ)`.
 - `AlgebraicGeometry.Etale.WeilComplex.tensorFrobenius` (`def-wf-tensor-product`) and
   `AlgebraicGeometry.Etale.WeilComplex.tensor` (`lem-wf-tensor-weil`).
-- `AlgebraicGeometry.Etale.WeilComplex.internalHomFrobenius` (`def-wf-internal-hom`) and
-  `AlgebraicGeometry.Etale.WeilComplex.internalHom` (`lem-wf-internal-hom-weil`).
+- `AlgebraicGeometry.Etale.leftDerivedUpperStarDerivedHomComparison`: the comparison
+  `Lg^* RHom(K, M) ⟶ RHom(Lg^* K, Lg^* M)`, used for the internal-Hom Frobenius.
 
 ## Implementation notes
 
@@ -63,9 +64,6 @@ and they are the same at every finite stage.
 -/
 
 @[expose] public section
-
-set_option profiler true
-set_option profiler.threshold 5000
 
 universe u' u
 

@@ -32,9 +32,6 @@ Weil category used here.
 
 @[expose] public section
 
-set_option profiler true
-set_option profiler.threshold 5000
-
 universe u
 
 open CategoryTheory Limits Opposite
