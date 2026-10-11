@@ -154,5 +154,23 @@
   "item": "lem-weil-pbc-scheme-theoretic-union",
   "worker": "stage1",
   "summary": "Checked the statement against Stacks Morphisms 0C4H (definition-scheme-theoretic-intersection-union) and 0C4J (lemma-scheme-theoretic-union), 01QP (lemma-closed-immersion-ideals), Algebra 00E0 (9) (tags verified in tags/tags): correct, kept; stmt_deps kept. Not a Mathlib leaf: Mathlib has IdealSheafData inf and IsClosedImmersion.lift but no support_inf, so (a) is a chain. Proof in three steps following Stacks: (1) quasi-coherence of I' cap I'' (new leaf lem-weil-pbc-quasi-coherent-ideal-intersection, IdealSheafData inf, Stacks 01IC/0BBY) and the closed immersion it defines (existing leaf lem-weil-pbc-quasi-coherent-ideal-closed-subscheme, 01QQ); (2) underlying set on each affine open via the new leaves lem-weil-pbc-closed-immersion-image-zero-locus (01IN + 00E5; Hom.support_ker, coe_support_inter, fromSpec_image_zeroLocus) and lem-weil-pbc-zero-locus-ideal-intersection (00E0 (9), PrimeSpectrum.zeroLocus_inf); (3) the closed immersions a', a'' by the new leaf lem-weil-pbc-closed-immersion-factor-ideal-inclusion (01QP (1); IsClosedImmersion.lift, lift_fac, Hom.le_ker_comp, of_comp_isClosedImmersion). The product node lem-weil-pbc-product-ideal-closed-subscheme-union is not needed on this route."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SchemeTheoreticUnion",
+  "declaration": "AlgebraicGeometry.scheme_theoretic_union",
+  "statement": "theorem scheme_theoretic_union {X Z' Z'' : Scheme.{u}} (i' : Z' ⟶ X) (i'' : Z'' ⟶ X) [IsClosedImmersion i'] [IsClosedImmersion i''] : IsClosedImmersion (i'.ker ⊓ i''.ker).subschemeι ∧ (i'.ker ⊓ i''.ker).subschemeι.ker = i'.ker ⊓ i''.ker ∧ (∀ U : X.affineOpens, IsPullback ((i'.ker ⊓ i''.ker).subschemeCover.f U) (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk ((i'.ker ⊓ i''.ker).ideal U)))) (i'.ker ⊓ i''.ker).subschemeι U.2.fromSpec) ∧ Set.range (i'.ker ⊓ i''.ker).subschemeι.base = Set.range i'.base ∪ Set.range i''.base ∧ (∃ a' : Z' ⟶ (i'.ker ⊓ i''.ker).subscheme, IsClosedImmersion a' ∧ a' ≫ (i'.ker ⊓ i''.ker).subschemeι = i') ∧ (∃ a'' : Z'' ⟶ (i'.ker ⊓ i''.ker).subscheme, IsClosedImmersion a'' ∧ a'' ≫ (i'.ker ⊓ i''.ker).subschemeι = i'')",
+  "branch": "sheaf-dag",
+  "by": "J1",
+  "date": "2026-10-11",
+  "existing": false,
+  "file": "lean/Sheaf/AlgebraicGeometry/SchemeTheoreticUnion.lean"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "J1",
+  "result": "pass",
+  "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
  }
 }
