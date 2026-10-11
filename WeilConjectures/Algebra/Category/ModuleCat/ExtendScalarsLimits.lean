@@ -58,7 +58,7 @@ noncomputable def extendScalarsCompRestrictScalarsIso :
       (homLinearEquiv (M := of R (Module.Dual R ((restrictScalars f).obj (of S S)))) (N := M)
         (S := R)).symm).toModuleIso)
     (fun {M N} g ↦ by
-      ext x
+      refine ModuleCat.hom_ext (LinearMap.ext fun (x : (extendScalars f).obj M) ↦ ?_)
       induction x using TensorProduct.induction_on with
       | zero => simp
       | add x y hx hy => simp only [map_add] at hx hy ⊢; rw [hx, hy]
@@ -77,6 +77,62 @@ instance preservesLimits_extendScalars :
   have : ReflectsLimits (restrictScalars.{u} f) := reflectsLimits_of_reflectsIsomorphisms
   preservesLimits_of_reflects_of_preserves _ (restrictScalars.{u} f)
 
+section Dualizing
+
+variable (δ : of S S ≅ (coextendScalars.{u, u, u} f).obj (of R R))
+
+/-- For `S` finite projective over `R` with an `S`-linear identification
+`δ : S ≅ Hom_R(S, R)`, the identification `S ⊗_R M ≅ Hom_R(S, M)`,
+`s ⊗ m ↦ (x ↦ δ(s)(x) • m)`. -/
+noncomputable def extendScalarsCoextendScalarsEquiv (M : ModuleCat.{u} R) :
+    (extendScalars f).obj M ≃ₗ[S] (coextendScalars f).obj M :=
+  let δR : (restrictScalars f).obj (of S S) ≃ₗ[R] Module.Dual R ((restrictScalars f).obj (of S S)) :=
+      { toFun s := (δ.hom.hom (s : S) : (restrictScalars f).obj (of S S) →ₗ[R] R)
+        invFun φ := (δ.inv.hom φ : S)
+        map_add' := by simp
+        map_smul' r s := by
+          refine LinearMap.ext fun x ↦ ?_
+          change (δ.hom.hom ((f r : S) • (s : S)) : _ →ₗ[R] R) x = r * (δ.hom.hom s : _ →ₗ[R] R) x
+          rw [map_smul]
+          change (δ.hom.hom s : (restrictScalars f).obj (of S S) →ₗ[R] R)
+              (show (restrictScalars f).obj (of S S) from (show S from x) * f r) =
+            r * (δ.hom.hom s : (restrictScalars f).obj (of S S) →ₗ[R] R) x
+          rw [mul_comm]
+          exact (δ.hom.hom s : (restrictScalars f).obj (of S S) →ₗ[R] R).map_smul r x
+        left_inv s := by simp
+        right_inv φ := by simp }
+  let e := (TensorProduct.congr δR (LinearEquiv.refl R M)).trans (dualTensorHomEquiv R _ M)
+  { e.toAddEquiv with
+    map_smul' s x := by
+      change e (s • x) = s • e x
+      induction x using TensorProduct.induction_on with
+      | zero => rw [smul_zero, map_zero, smul_zero]
+      | add x y hx hy => rw [smul_add, map_add, hx, hy, map_add, smul_add]
+      | tmul s' m =>
+        refine CoextendScalars.ext (LinearMap.ext fun x ↦ ?_)
+        change (δ.hom.hom (s * (show S from s')) : (restrictScalars f).obj (of S S) →ₗ[R] R) x • m =
+          (δ.hom.hom s' : (restrictScalars f).obj (of S S) →ₗ[R] R)
+            (show (restrictScalars f).obj (of S S) from (show S from x) * s) • m
+        rw [← smul_eq_mul, map_smul]
+        rfl }
+
+/-- Extension and coextension of scalars agree along `f` when `S` is finite projective over `R`
+and `Hom_R(S, R)` is identified with `S` by `δ`. -/
+noncomputable def extendScalarsIsoCoextendScalars :
+    extendScalars.{u, u, u} f ≅ coextendScalars.{u, u, u} f :=
+  NatIso.ofComponents (fun M ↦ (extendScalarsCoextendScalarsEquiv f δ M).toModuleIso)
+    (fun {M N} g ↦ by
+      refine ModuleCat.hom_ext (LinearMap.ext fun (x : (extendScalars f).obj M) ↦ ?_)
+      induction x using TensorProduct.induction_on with
+      | zero => simp
+      | add x y hx hy => simp only [map_add] at hx hy ⊢; rw [hx, hy]
+      | tmul s m =>
+        refine CoextendScalars.ext (LinearMap.ext fun x ↦ ?_)
+        change (_ : R) • g m = g ((_ : R) • m)
+        rw [map_smul]
+        rfl)
+
+end Dualizing
 end ModuleCat
 
 namespace CategoryTheory
