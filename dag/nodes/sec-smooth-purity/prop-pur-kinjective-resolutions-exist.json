@@ -145,5 +145,23 @@
   "group": "G1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-kre3012 (reviewer sub-agent of L); spot-checked: Item statement vs sheaf-dag: only citations added (E7 ok); small-site hypothesis honest (07A5, 079P); split is real (Grothendieck clause + generic 079P), no cycle; class b checked: lem-weil-pbc-kinjective-functorial-existence lacks injective terms, lem-weil-pbc-module-sheaves-grothendieck-abelian is etale-only, so both new nodes are not duplicates; class c: Mathlib grep IsGrothendieckAbelian/KInjective finds only bounded-below K-injectives, no SheafOfModules Grothendieck instance. FIX more, RETURN less: (1) C4/B3 lem-pur-kinjective-degreewise-existence cited module-only definitions (def-pc-cochain-complex-modules, def-pc-quasi-iso-modules, def-pur-kinjective-complex) for an arbitrary Grothendieck category A: restated with explicit meanings 'as in [..] with A in place of Mod(O)'; (2) C4 item and lem-pur-ringed-site-grothendieck-abelian cited the abelian-group def-weil-pbc-site-extension-by-zero-presheaf for the O-module j_{U!}O_U: now cite def-pur-localized-ringed-site, def-weil-extension-by-zero-presheaf and def-weil-presheaf-modules-sheafification, stmt_deps updated; Mathlib grep recorded on the generic node.; 3 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.RingedSiteKInjectiveResolutions",
+  "declaration": "SheafOfModules.grothendieckAbelian_and_functorial_kInjective_resolutions",
+  "file": "lean/Sheaf/CategoryTheory/RingedSiteKInjectiveResolutions.lean",
+  "statement": "theorem grothendieckAbelian_and_functorial_kInjective_resolutions {C : Type u} [SmallCategory C] (J : GrothendieckTopology C) (O : Sheaf J CommRingCat.{u}) : IsGrothendieckAbelian.{u} (SheafOfModules.{u} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj O)) ∧ IsSeparator (∐ fun U : C ↦ (PresheafOfModules.sheafification.{u} (𝟙 ((sheafCompose J (forget₂ CommRingCat RingCat)).obj O).obj)).obj ((extensionByZeroPresheaf.{u} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj O) U).obj (unit (((sheafCompose J (forget₂ CommRingCat RingCat)).obj O).over U)))) ∧ ∃ (I : CochainComplex (SheafOfModules.{u} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj O)) ℤ ⥤ CochainComplex (SheafOfModules.{u} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj O)) ℤ) (η : 𝟭 (CochainComplex (SheafOfModules.{u} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj O)) ℤ) ⟶ I), ∀ (M : CochainComplex (SheafOfModules.{u} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj O)) ℤ), QuasiIso (η.app M) ∧ (I.obj M).IsKInjective ∧ ∀ n : ℤ, Injective ((I.obj M).X n)",
+  "branch": "sheaf-dag",
+  "by": "J1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "J1",
+  "result": "pass",
+  "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
  }
 }
