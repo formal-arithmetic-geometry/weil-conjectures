@@ -116,5 +116,36 @@
   "group": "H1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-nmd2912 (reviewer sub-agent of L); spot-checked: Typing step by step (E): T_j cover, V_jk over T_j with B_jk fp over R_j, W_jk intersected with the inverse image of T_j (qc, same inverse image W_jk^inf because phi is an S-morphism), U_jkl over T_j,lambda so lifted generators/vanishing relations give R_j-algebra maps B_jk -> Gamma(U_jkl,lambda) and S_lambda-morphisms into V_jk x S_lambda: typechecks; returns 22:28 points (1)-(2) repaired: equality stages applied to the system rebased at lambda' with W1=union, W2=X_lambda' and overlap O (qc open, fp over S_lambda'). Consistent with merged qc-open-descent, qc-open-equality-stage (two opens), morphism-equality-stage, basechanged-system, filtered-colimit-finite-data, upper bound; M1 lemma-nagata-morphism-descends provable (charts base-change to phi|U^inf, U^inf cover X). FIX more, RETURN less: (1) C1: inverse image of the descended open = W_jk^inf, covering at lambda_phi and agreement on overlaps at lambda_phi, and i<=u(F) were used uncited; cited lemma-nagata-qc-open-descends, lemma-nagata-qc-open-eq-eventually, lemma-nagata-morphism-eq-eventually, lemma-nagata-directed-finite-upper-bound (stmt_deps added; qc-open-descent supplies no 'comparison isomorphism', wording corrected); (2) naming/C4: lambda' was 'a common stage', now u(F_0); qc-open-equality-stage applied to the 'finite family' made explicit as W1=union W_jk,lambda', W2=X_lambda'; the unnamed alternative 'or use its elementwise clause' and the unused overlap affine covers removed; witness stages named lambda_cup, lambda_jkl,j'k'l'; literal backslash-n paragraph breaks fixed; (3) uses_not_cited reduced to def-nagata-affine-fp-descent (the only blueprint use still uncited). Second reading missed (1) and (2).; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.NagataMorphismDescent",
+  "declaration": "AlgebraicGeometry.nagataMorphismDescent",
+  "declarations": [
+   "AlgebraicGeometry.NagataMorphismDescentData",
+   "AlgebraicGeometry.NagataMorphismDescentData.stages",
+   "AlgebraicGeometry.NagataMorphismDescentData.stage",
+   "AlgebraicGeometry.NagataMorphismDescentData.coefficient_le_stage",
+   "AlgebraicGeometry.NagataMorphismDescentData.base_le_stage",
+   "AlgebraicGeometry.NagataMorphismDescentData.charts_cover",
+   "AlgebraicGeometry.NagataMorphismDescentData.charts_agree",
+   "AlgebraicGeometry.nagataMorphismDescentGluedMap",
+   "AlgebraicGeometry.nagataMorphismDescentGluedMap_over",
+   "AlgebraicGeometry.nagataMorphismDescent"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/NagataMorphismDescent.lean",
+  "statement": "def nagataMorphismDescent (data : NagataMorphismDescentData D c hc i₀ p q phi d hd r) : Σ' s : I, Σ' hs : i₀ ≤ s, (Over.mk (pullback.snd p (D.map (homOfLE hs).op)) ⟶ Over.mk (pullback.snd q (D.map (homOfLE hs).op)))",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-11",
+  "existing": false,
+  "note": "Full displayed choices in NagataMorphismDescentData; computed finite upper bound and affine-chart gluing. Output is bundled over its selected base stage. Named sorry theorems postpone only upper-bound, cover, overlap and over-base proofs."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-h33e25",
+  "group": "H1",
+  "result": "pass",
+  "note": "headless review: I directed nonempty preorder in Type u; D affine-transition inverse system with limit c/hc; i0 with qcqs base; p,q locally fp+qc+qs (finite presentation); X_λ,Y_λ,X,Y = baseChangeDiagram/baseChangeCone; phi+limitOver = S-morphism; finite affine covers T_j, V_jk over T_j with Algebra.Presentation (finite generators+relations); W_jk = phi^-1(V_jk x S) compact; openSelected = nagataQCOpenDescent; U_jkl affine cover of descended ∩ preimage of T_j; generator lifts, relation stage, localMap fixed uniquely by localGenerators/localOver; F0, prime = directedFiniteUpperBound i0 d r F0; unionStage = nagataQCOpenEqualityStage(unionOpen, top) at base prime; overlapStage = nagataMorphismEqualityStage on overlap opens; stages = F0 ∪ {prime, unionStage} ∪ overlap stages, stage = u(F); glueMorphisms output bundled as Over-morphism at stage ≥ i0; no sorry in data; compile clean"
  }
 }
