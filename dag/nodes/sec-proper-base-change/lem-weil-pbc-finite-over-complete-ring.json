@@ -171,5 +171,23 @@
   "by": "L",
   "result": "pass",
   "note": "Four elementary steps (successive approximation along Stacks 031D/0315(1), with completeness of A replacing 031B): generation modulo every power of I, the inductive approximation with coefficients converging I-adically, limits in the complete ring A, conclusion from the Krull-type hypothesis (2). Correct; 0 new nodes."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.FiniteOverCompleteRing",
+  "declaration": "Module.finite_and_span_eq_top_of_adicComplete",
+  "file": "lean/Sheaf/RingTheory/FiniteOverCompleteRing.lean",
+  "statement": "theorem finite_and_span_eq_top_of_adicComplete {A : Type u} [CommRing A] (I : Ideal A) (M : Type v) [AddCommGroup M] [Module A M] [IsAdicComplete I A] [IsHausdorff I M] [Module.Finite (A ⧸ I) (M ⧸ (I • ⊤ : Submodule A M))] : Module.Finite A M ∧ ∀ (r : ℕ) (x : Fin r → M), Submodule.span (A ⧸ I) (Set.range (fun j ↦ (I • (⊤ : Submodule A M)).mkQ (x j))) = ⊤ → Submodule.span A (Set.range x) = ⊤",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-foc1020",
+  "group": "F1",
+  "result": "pass",
+  "note": "CommRing A, Ideal I, A-module M (indep. universes); (1) IsAdicComplete I A = def-weil-pbc-adically-complete-ring; (2) IsHausdorff I M (n=0 vacuous); (3) Module.Finite (A/I) (M/I•⊤) via canonical quotient action; concl Module.Finite A M and every Fin r family lifting A/I-generators spans M (r=0 ok); no Mathlib lemma (grep IsAdicComplete+finite/span: none)"
  }
 }
