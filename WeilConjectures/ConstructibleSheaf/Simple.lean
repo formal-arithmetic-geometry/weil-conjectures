@@ -26,7 +26,7 @@ TODO
 @[expose] public section
 universe u
 
-open CategoryTheory Limits Opposite
+open CategoryTheory Limits Opposite ZeroObject
 
 namespace AlgebraicGeometry
 
@@ -508,6 +508,123 @@ theorem simple_openImmersionLowerShriek_lowerStar {x : X} (W : X.Opens) (hxW : x
       exact hnat.symm
     rw [this]
     infer_instance
+
+/-- A simple constructible sheaf isomorphic to the image of a constructible sheaf `M` under a
+fully faithful functor which preserves monomorphisms and constructibility makes `M` simple. -/
+lemma simple_of_iso_obj {Z : Scheme.{u}}
+    (H : Sheaf Z.smallEtaleTopology (ModuleCat.{u + 1} Λ) ⥤
+      Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) [H.Full] [H.Faithful]
+    [H.PreservesZeroMorphisms] [H.PreservesMonomorphisms]
+    (hH : ∀ N, IsConstructibleSheaf N → IsConstructibleSheaf (H.obj N))
+    (M : Sheaf Z.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (hM : IsConstructibleSheaf M)
+    (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (hF : IsConstructibleSheaf F)
+    [Simple (⟨F, hF⟩ : (Etale.constructibleSheaf (ModuleCat.{u + 1} Λ) X).FullSubcategory)]
+    (e : F ≅ H.obj M) :
+    Simple (⟨M, hM⟩ : (Etale.constructibleSheaf (ModuleCat.{u + 1} Λ) Z).FullSubcategory) := by
+  obtain ⟨hF₀, hsub⟩ := (simple_iff F hF).1 ‹_›
+  refine (simple_iff M hM).2 ⟨fun h ↦ hF₀ ((H.map_isZero h).of_iso e), fun N ι hι hN ↦ ?_⟩
+  rcases hsub _ (H.map ι ≫ e.inv) inferInstance (hH N hN) with h | h
+  · exact .inl (H.isZero_of_isZero_obj h)
+  · have : IsIso (H.map ι) := IsIso.of_isIso_comp_right _ e.inv
+    exact .inr (isIso_of_fully_faithful H ι)
+
+/-- Blueprint `lem-trf-simple-constructible`, the case of a scheme of finite type over a field:
+the point `x` supporting a simple constructible sheaf `F` is then a closed point (a locally
+closed point of a Jacobson space is closed), and `i_{x!} = i_{x*}`: `F` is the direct image
+`i_{x*} M` along the closed immersion `i_x : Spec κ(x) ⟶ X` of a simple constructible sheaf `M`
+on `Spec κ(x)`. -/
+theorem exists_iso_lowerStar_fromSpecResidueField_of_simple {k : Type u} [Field k]
+    (aX : X ⟶ Spec (.of k)) [LocallyOfFiniteType aX]
+    (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (hF : IsConstructibleSheaf F)
+    [Simple (⟨F, hF⟩ : (Etale.constructibleSheaf (ModuleCat.{u + 1} Λ) X).FullSubcategory)] :
+    ∃ x : X, IsClosed ({x} : Set X) ∧ (stalkZeroLocus F)ᶜ = {x} ∧
+      ∃ (M : Sheaf (Spec (X.residueField x)).smallEtaleTopology (ModuleCat.{u + 1} Λ))
+        (hM : IsConstructibleSheaf M),
+        Simple (⟨M, hM⟩ : (Etale.constructibleSheaf (ModuleCat.{u + 1} Λ) _).FullSubcategory) ∧
+        Nonempty (F ≅ (X.fromSpecResidueField x)_*[ModuleCat.{u + 1} Λ].obj M) := by
+  obtain ⟨x, hlc, hx, -⟩ := exists_iso_openImmersionLowerShriek_lowerStar_of_simple F hF
+  have : JacobsonSpace X := LocallyOfFiniteType.jacobsonSpace aX
+  have hxc : IsClosed ({x} : Set X) := isClosed_singleton_of_isLocallyClosed_singleton hlc
+  set i := X.fromSpecResidueField x
+  have : IsClosedImmersion i := isClosed_singleton_iff_isClosedImmersion.1 hxc
+  have hu := isIso_unit_app_of_compl_subset_stalkZeroLocus i F (by
+    rw [Scheme.range_fromSpecResidueField, ← hx, compl_compl])
+  let e := asIso ((Etale.upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) i).unit.app F)
+  have hM : IsConstructibleSheaf ((i)^*[ModuleCat.{u + 1} Λ].obj F) :=
+    IsConstructibleSheaf.upperStar _ _
+  let W := openComplementOfIsClosedImmersion i
+  have : TopologicalSpace.NoetherianSpace W := W.ι.isOpenEmbedding.isInducing.noetherianSpace
+  have : QuasiCompact W.ι := ⟨fun U _ _ ↦ TopologicalSpace.NoetherianSpace.isCompact _⟩
+  have hij : Set.range i.base = (Set.range W.ι.base)ᶜ := by
+    rw [Scheme.Opens.range_ι]; exact (compl_compl _).symm
+  refine ⟨x, hxc, hx, _, hM, simple_of_iso_obj ((i)_*[ModuleCat.{u + 1} Λ])
+    (fun N hN ↦ IsConstructibleSheaf.lowerStar_of_isClosedImmersion W.ι i hij N) _ hM F hF e,
+    ⟨e⟩⟩
+
+omit [IsNoetherianRing Λ] [TopologicalSpace.NoetherianSpace X] in
+/-- A scheme of positive dimension has a point which is not closed: the generic point of the
+larger member of a chain of length one of irreducible closed subsets. -/
+lemma exists_not_isClosed_singleton (hX : 0 < topologicalKrullDim X) :
+    ∃ y : X, ¬ IsClosed ({y} : Set X) := by
+  obtain ⟨Z₀, Z₁, hZ⟩ := Order.krullDim_pos_iff.1 hX
+  have hη := Z₁.isIrreducible.isGenericPoint_genericPoint Z₁.isClosed
+  set η := Z₁.isIrreducible.genericPoint
+  refine ⟨η, fun hc ↦ ?_⟩
+  have h₁ : (Z₁ : Set X) = {η} := by rw [← hη.def]; exact hc.closure_eq
+  obtain ⟨z, hz⟩ := Z₀.isIrreducible.nonempty
+  have h₀ : (Z₀ : Set X) ⊆ Z₁ := hZ.le
+  have hzη : z = η := by have := h₀ hz; rw [h₁] at this; exact this
+  have : (Z₁ : Set X) ⊆ Z₀ := by
+    rw [h₁, Set.singleton_subset_iff, ← hzη]
+    exact hz
+  exact hZ.ne (SetLike.coe_injective (h₀.antisymm this))
+
+omit [IsNoetherianRing Λ] [TopologicalSpace.NoetherianSpace X] in
+/-- The stalks of the middle term of a short exact sequence vanish where those of the outer
+terms do. -/
+lemma stalkZeroLocus_inter_subset {S : ShortComplex (Sheaf X.smallEtaleTopology
+    (ModuleCat.{u + 1} Λ))} (hS : S.ShortExact) :
+    stalkZeroLocus S.X₁ ∩ stalkZeroLocus S.X₃ ⊆ stalkZeroLocus S.X₂ := by
+  rintro y ⟨h₁, h₃⟩ Ω _ _ s hs
+  have := (pointSmallEtale s).sheafFiber_additive (A := ModuleCat.{u + 1} Λ)
+  have hS' := hS.map_of_exact (pointSmallEtale s).sheafFiber
+  exact hS'.exact.isZero_X₂ ((h₁ Ω s hs).eq_of_src _ _) ((h₃ Ω s hs).eq_of_tgt _ _)
+
+/-- Blueprint `lem-trf-simple-constructible`, last assertion: on a connected scheme `X` of
+positive dimension and of finite type over a field, a nonzero locally constant sheaf `L` is not a
+finite extension of simple constructible sheaves. Stated through the universal property of the
+closure under extensions: there is a property of sheaves containing zero, closed under
+isomorphisms and extensions, holding for every simple constructible sheaf, but not for `L`. The
+property is "the stalks vanish at the non-closed points": a simple constructible sheaf is
+supported at a closed point, while the stalks of `L` vanish on a clopen set, which is empty. -/
+theorem not_forall_prop_of_isLocallyConstantSheaf {k : Type u} [Field k]
+    (aX : X ⟶ Spec (.of k)) [LocallyOfFiniteType aX] [ConnectedSpace X]
+    (hX : 0 < topologicalKrullDim X) (L : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))
+    [IsLocallyConstantSheaf L] (hL : ¬ IsZero L) :
+    ¬ ∀ P : ObjectProperty (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)),
+      P.ContainsZero → P.IsClosedUnderIsomorphisms → P.IsClosedUnderExtensions →
+      (∀ (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (hF : IsConstructibleSheaf F),
+        Simple (⟨F, hF⟩ : (Etale.constructibleSheaf (ModuleCat.{u + 1} Λ) X).FullSubcategory) →
+          P F) → P L := by
+  intro h
+  let Q : ObjectProperty (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :=
+    fun F ↦ ∀ y : X, ¬ IsClosed ({y} : Set X) → y ∈ stalkZeroLocus F
+  have hQ := h Q ⟨⟨0, isZero_zero _, fun y _ ↦
+      (isZero_iff_stalkZeroLocus_eq_univ (0 : Sheaf X.smallEtaleTopology
+        (ModuleCat.{u + 1} Λ))).1 (isZero_zero _) ▸ Set.mem_univ y⟩⟩
+    ⟨fun e hF y hy ↦ stalkZeroLocus_subset_of_mono e.inv (hF y hy)⟩
+    ⟨fun {S} hS h₁ h₃ y hy ↦ stalkZeroLocus_inter_subset hS ⟨h₁ y hy, h₃ y hy⟩⟩
+    (fun F hF _ y hy ↦ by
+      obtain ⟨x, hxc, hx, -⟩ := exists_iso_lowerStar_fromSpecResidueField_of_simple aX F hF
+      by_contra hyF
+      have : y ∈ (stalkZeroLocus F)ᶜ := hyF
+      rw [hx, Set.mem_singleton_iff] at this
+      exact hy (this ▸ hxc))
+  obtain ⟨y, hy⟩ := exists_not_isClosed_singleton hX
+  have hne : stalkZeroLocus L ≠ Set.univ := fun h ↦ hL ((isZero_iff_stalkZeroLocus_eq_univ L).2 h)
+  rcases isClopen_iff.1 (isClopen_stalkZeroLocus L) with h' | h'
+  · exact (h' ▸ hQ y hy : y ∈ (∅ : Set X))
+  · exact hne h'
 
 end Etale
 
