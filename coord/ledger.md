@@ -5689,3 +5689,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 19:56 L: returned deliver/V1/lem-sc-flat-precompose-pus (reviewer RETURN: (reviewer R-sub-D, head 8a39e9f68) The three points of R-fpp2 are repaired in the item's statement: c is dualityEquation)
 - 19:57 L: returned deliver/K1/lem-weil-pbc-hypercover-free-resolution (reviewer RETURN: (reviewer X-18205, head 1820555c4) H3: In lean/Sheaf/Paper/HypercoverFreeResolution.lean, in all four theorem signatures)
 - 19:59 L: merged deliver/T1/def-nagata-morphism-equality-stage (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.NagataMorphismEqualityStage AlgebraicGeometry.nagataMorphismEqualityStage)
+- 20:01 L: returned deliver/H1/lem-sc-boundary-cech-local-lifts (reviewer RETURN: (reviewer R-sub-D, head 4ca752d72) One point, in the new definition; the item's theorem is matched to the node and stays)
