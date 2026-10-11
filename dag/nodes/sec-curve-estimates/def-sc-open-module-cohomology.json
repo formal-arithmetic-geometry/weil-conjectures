@@ -1,0 +1,125 @@
+{
+ "id": "def-sc-open-module-cohomology",
+ "kind": "definition",
+ "title": "Open-set module cohomology and canonical restriction",
+ "status": "split",
+ "statement": "Let $X$ be a ringed space [def-weil-locally-ringed-space-morphism]. For an open $U\\subseteq X$ and an $\\mathcal O_X$-module $F$, define the additive-group-valued sections functor by $\\Gamma_U(F)=F(U)$. Define $H^p(U,F|_U)=R^p\\Gamma_U(F)$ for $p\\in\\mathbb N$, using the injective $\\mathcal O_X$-module resolutions of [def-sc-ringed-space-module-cohomology]. For an inclusion $V\\subseteq U$, define its canonical restriction $H^p(U,F|_U)\\to H^p(V,F|_V)$ as the right derived natural transformation of sectionwise restriction $\\Gamma_U\\to\\Gamma_V$. These are functors in $F$.",
+ "stmt_deps": [
+  "def-weil-locally-ringed-space-morphism",
+  "def-sc-ringed-space-module-cohomology"
+ ],
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tags 01DZ and 01E1: cohomology by injective module resolutions and restriction to opens; Tag 01EB section-complex maps"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "right derived evaluation module sheaf cohomology presheaf open subsets",
+   "results": "[leansearch] UNAVAILABLE 0 hit(s) | service unavailable: Internal Server Error",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "presheaf of right derived evaluation cohomology of modules on open subsets",
+   "results": "[leanfinder] OK 8 hit(s): CategoryTheory.Sheaf.cohomologyPresheaf; CategoryTheory.Sheaf.cohomologyPresheafFunctor; CategoryTheory.Sheaf.H; SheafOfModules.evaluation; SheafOfModules.sectionsFunctor; PresheafOfModules.sheafification; PresheafOfModules.sheafify; SheafOfModules.instAbelian.",
+   "date": "2026-10-11",
+   "verdict": "The cohomology presheaf hits derive abelian-sheaf cohomology via Ext; evaluation is underived. None supplies derived module evaluation with open restriction."
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.evaluation, NatTrans.rightDerived",
+   "results": "[loogle] OK 0 hit(s) | loogle: unknown identifier 'NatTrans.rightDerived'",
+   "date": "2026-10-11",
+   "verdict": "No match; rightDerived exists in local Mathlib and was read directly."
+  },
+  {
+   "tool": "grep",
+   "query": "openModuleCohomology|moduleCohomologyRestriction|cohomologyPresheaf in Mathlib CategoryTheory/Sites/SheafCohomology; rg cohomologyPresheaf in WeilConjectures and lean/Sheaf; rg openModuleCohomology|openModuleSections|openModuleCohomologyRestriction in all three trees",
+   "results": "Mathlib has abelian-sheaf cohomologyPresheaf in Basic.lean and its MayerVietoris uses. Source has only uses in Mathlib/CategoryTheory/Sites/SheafCohomology/Cech.lean. No matching module-cohomology declarations in source or lean/Sheaf. No collisions for new names.",
+   "date": "2026-10-11",
+   "verdict": "No existing module-cohomology restriction API."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -l cohomology presheaf|cohomology on open|derived evaluation dag/nodes; tools/blueprint_refs.py search open module cohomology",
+   "results": "0 blueprint nodes match open module cohomology. Text hits concern higher direct images or abelian/etale cohomology, not derived evaluation of ringed-space modules.",
+   "date": "2026-10-11",
+   "verdict": "No existing node for this additional API."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sc-mayer-vietoris-ringed-space",
+  "date": "2026-10-11",
+  "group": "K1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-pic-proper-ntorsion",
+   "place": "The cohomology of the section complexes on U, V and their intersection, and the restriction maps in the Mayer–Vietoris sequence.",
+   "via": [
+    "lem-sc-mayer-vietoris-ringed-space",
+    "lem-sc-mayer-vietoris-open-cover",
+    "lem-sc-invert-s-cohomology-mayer-vietoris-diagram",
+    "lem-sc-invert-s-cohomology-gluing",
+    "lem-sc-invert-s-cohomology",
+    "lem-sc-section-affine-open-kills-cohomology",
+    "lem-sc-ample-square-zero-thickening",
+    "lem-sc-ample-on-reduction-noetherian",
+    "lem-sc-dim-one-ample-invertible",
+    "lem-sc-dim-one-quasi-projective",
+    "lem-sc-proper-dim-one-projective"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-thm-curveestimate",
+ "lean": {
+  "module": "Sheaf.Topology.OpenModuleCohomology",
+  "declaration": "AlgebraicGeometry.RingedSpace.openModuleCohomology",
+  "declarations": [
+   "AlgebraicGeometry.RingedSpace.openModuleSections",
+   "AlgebraicGeometry.RingedSpace.openModuleSections_additive",
+   "AlgebraicGeometry.RingedSpace.openModuleCohomology",
+   "AlgebraicGeometry.RingedSpace.openModuleCohomologyRestriction"
+  ],
+  "file": "lean/Sheaf/Topology/OpenModuleCohomology.lean",
+  "statement": "def openModuleCohomology (X : RingedSpace.{u}) (p : ℕ) (U : Opens X) : SheafOfModules.{u} (moduleRings X) ⥤ AddCommGrpCat.{u}",
+  "branch": "sheaf-dag",
+  "by": "K1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-mvr0929",
+  "group": "K1",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-mvr0929",
+  "group": "K1",
+  "result": "pass",
+  "note": "X:RingedSpace.{v} (no locality); all U V : Opens X on U⊔V (=⊤ gives X; general pair = node on open subspace via 01E1, true since I(U)->I(U∩V) surjective); F any SheafOfModules (AlgebraicGeometry.moduleRings X); H = new def-sc-open-module-cohomology R^pΓ_U (Stacks 01E1 'by definition' H^p(U,F)), r = rightDerived of section restriction; injective at H^0, three Function.Exact clauses cover every term, maps (res,res) and res-res in (1,-1) order; δ natural transformation = naturality in F; W-square with (U⊓W)⊔(V⊓W)≤U⊔V and (U⊓W)⊓(V⊓W)≤U⊓V, other squares from rightDerived_comp; combined compile clean, #check names resolve"
+ }
+}

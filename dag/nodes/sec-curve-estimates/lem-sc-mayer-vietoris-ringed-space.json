@@ -23,7 +23,8 @@
  },
  "stmt_deps": [
   "def-weil-locally-ringed-space-morphism",
-  "def-sc-ringed-space-module-cohomology"
+  "def-sc-ringed-space-module-cohomology",
+  "def-sc-open-module-cohomology"
  ],
  "proof": [
   {
@@ -167,5 +168,26 @@
   "group": "M1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-mvr1856 (reviewer sub-agent of L); spot-checked: Return of 18:18 repaired: step 1 now follows Stacks 01EB (injective resolution on X; 01E1 node: I|_U injective so Gamma(U,I.) computes H^p(U,F|_U); 01EA node: (1,-1) I(U)+I(V)->I(U∩V) surjective; sheaf condition gives left exactness; degreewise SES of section complexes; complex LES node). Steps 2/3 argued on the complex-level SES: lift of F->F' to resolutions restricted to U,V,U∩V,W' via 01E1 node, derived-functor-lift node removes lift dependence, complex LES naturality node gives connecting maps. Direct-image misidentification removed; item deps no longer cite the sheaf-SES node. New nodes 01DZ/01E1/01EA/01DI ringed-space versions are true, self-contained generalizations of scheme-only nodes (not duplicates). Tool uses accepted: generic homological algebra lemmas."
+ },
+ "lean": {
+  "module": "Sheaf.Topology.ModuleMayerVietoris",
+  "declaration": "AlgebraicGeometry.RingedSpace.module_mayerVietoris",
+  "declarations": [
+   "AlgebraicGeometry.RingedSpace.module_mayerVietoris"
+  ],
+  "file": "lean/Sheaf/Topology/ModuleMayerVietoris.lean",
+  "statement": "theorem module_mayerVietoris (X : RingedSpace.{v}) : let H := openModuleCohomology X let r : ∀ (p : ℕ) {U V : Opens X}, (V ⟶ U) → (H p U ⟶ H p V) := fun p {_ _} i => openModuleCohomologyRestriction X p i ∃ δ : ∀ (U V : Opens X) (p : ℕ), H p (U ⊓ V) ⟶ H (p + 1) (U ⊔ V), (∀ (U V : Opens X) (F : SheafOfModules.{v} (moduleRings X)), Function.Injective (fun x : (H 0 (U ⊔ V)).obj F => ((r 0 (homOfLE (show U ≤ U ⊔ V from le_sup_left))).app F x, (r 0 (homOfLE (show V ≤ U ⊔ V from le_sup_right))).app F x))) ∧ (∀ (U V : Opens X) (F : SheafOfModules.{v} (moduleRings X)) (p : ℕ), Function.Exact (fun x : (H p (U ⊔ V)).obj F => ((r p (homOfLE (show U ≤ U ⊔ V from le_sup_left))).app F x, (r p (homOfLE (show V ≤ U ⊔ V from le_sup_right))).app F x)) (fun x : (H p U).obj F × (H p V).obj F => (r p (homOfLE (show U ⊓ V ≤ U from inf_le_left))).app F x.1 - (r p (homOfLE (show U ⊓ V ≤ V from inf_le_right))).app F x.2) ∧ Function.Exact (fun x : (H p U).obj F × (H p V).obj F => (r p (homOfLE (show U ⊓ V ≤ U from inf_le_left))).app F x.1 - (r p (homOfLE (show U ⊓ V ≤ V from inf_le_right))).app F x.2) ((δ U V p).app F) ∧ Function.Exact ((δ U V p).app F) (fun x : (H (p + 1) (U ⊔ V)).obj F => ((r (p + 1) (homOfLE (show U ≤ U ⊔ V from le_sup_left))).app F x, (r (p + 1) (homOfLE (show V ≤ U ⊔ V from le_sup_right))).app F x))) ∧ (∀ (U V W : Opens X) (p : ℕ), δ U V p ≫ r (p + 1) (homOfLE (sup_le_sup inf_le_left inf_le_left)) = r p (homOfLE (inf_le_inf inf_le_left inf_le_left)) ≫ δ (U ⊓ W) (V ⊓ W) p)",
+  "branch": "sheaf-dag",
+  "by": "K1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-mvr0929",
+  "group": "K1",
+  "result": "pass",
+  "note": "X:RingedSpace.{v} (no locality); all U V : Opens X on U⊔V (=⊤ gives X; general pair = node on open subspace via 01E1, true since I(U)->I(U∩V) surjective); F any SheafOfModules (AlgebraicGeometry.moduleRings X); H = new def-sc-open-module-cohomology R^pΓ_U (Stacks 01E1 'by definition' H^p(U,F)), r = rightDerived of section restriction; injective at H^0, three Function.Exact clauses cover every term, maps (res,res) and res-res in (1,-1) order; δ natural transformation = naturality in F; W-square with (U⊓W)⊔(V⊓W)≤U⊔V and (U⊓W)⊓(V⊓W)≤U⊓V, other squares from rightDerived_comp; combined compile clean, #check names resolve"
  }
 }
