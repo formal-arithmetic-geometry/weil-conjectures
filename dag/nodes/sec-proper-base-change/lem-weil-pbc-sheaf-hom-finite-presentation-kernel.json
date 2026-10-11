@@ -238,5 +238,28 @@
   "by": "L",
   "result": "accepted",
   "note": "7 steps (Modules 01CO (1); the finite-presentation form from the proofs of 01CQ/0GMV): b^*, a^* are O_X-linear and compose to 0; b is an epimorphism and exactness restricts to opens by the local-lifting node applied on X and on U; exactness on sections over each U by the abelian cokernel leaf (b|_U a cokernel of a|_U); exactness of sheaves by the local-lifting node with the trivial covering; Hom(O^n, M) = M^n from the finite-presentation definition; the maps in coordinates; part (2) transported along theta. Statement rewritten: the tag sentence removed (B7), the identifications made explicit with beta and alpha written out, three definitions added to stmt_deps; source place corrected (01CO (2) is about the target variable and unused). Citers checked by the worker against the new form."
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Category.ModuleCat.Sheaf.HomFinitePresentationKernel",
+  "declaration": "SheafOfModules.homObj_precomposition_exact",
+  "declarations": [
+   "SheafOfModules.homObj_precomposition_exact",
+   "SheafOfModules.homObj_finitePresentation_kernel"
+  ],
+  "file": "lean/Sheaf/Algebra/Category/ModuleCat/Sheaf/HomFinitePresentationKernel.lean",
+  "statement": "theorem homObj_precomposition_exact {E₂ E₁ E : SheafOfModules.{u} ((sheafCompose _ (forget₂ CommRingCat RingCat.{u})).obj R)} (a : E₂ ⟶ E₁) (b : E₁ ⟶ E) (h : (ComposableArrows.mk₃ a b (0 : E ⟶ (0 : SheafOfModules.{u} ((sheafCompose _ (forget₂ CommRingCat RingCat.{u})).obj R)))).Exact) (M : SheafOfModules.{u} ((sheafCompose _ (forget₂ CommRingCat RingCat.{u})).obj R)) : (ComposableArrows.mk₃ (0 : (0 : SheafOfModules.{u} ((sheafCompose _ (forget₂ CommRingCat RingCat.{u})).obj R)) ⟶ homObj (R := R) E M) (homObjMap (R := R) b (𝟙 M)) (homObjMap (R := R) a (𝟙 M))).Exact",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-11",
+  "existing": false,
+  "note": "Part (1) is homObj_precomposition_exact; part (2), including both sectionwise coordinate formulas, is homObj_finitePresentation_kernel. Finite direct sums are represented by finite categorical products, which evaluation computes sectionwise."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-shk",
+  "group": "C1",
+  "result": "pass",
+  "note": "ringed space X:Type u + R sheaf of CommRingCat.{u} (sibling form); (1) h = mk3 a b 0 Exact, conclusion mk3 0 (homObjMap b 1) (homObjMap a 1) Exact (precomposition, contravariant slot checked); (2) a: free(Fin m)->free(Fin n), b, h, c with hc a_X(e_k)=sum c_ik e_i, M^n as ∏ᶜ with beta/alpha tied by Pi.π sectionwise formulas, mk3 0 beta alpha Exact; m=n=0 allowed; no new defs"
  }
 }
