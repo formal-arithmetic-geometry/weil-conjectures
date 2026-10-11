@@ -127,5 +127,24 @@
   "group": "K1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-rsp3100 (reviewer sub-agent of L); spot-checked: Statement vs Tag 08DM and H1 Step 1/Step 4 use (U affine open, E strictly perfect = bounded, direct summands of finite free, matching def-pc-perfect-complex local clause): matches. Step 1 cites def-pur-derived-internal-hom K-injective representative; Step 3 canonicity from its functorial/qis clauses; def-pur-hom-complex cited. Exactness of Hom(P^i,-) from lem-sc-finite-free-internal-hom-exact plus direct summand: fine. FIX more, RETURN less: C1 in Step 2 - the cone argument used uncited facts (cone of a qis is acyclic, Hom^bullet(P,Cone f)=Cone(Hom^bullet(P,f)), acyclic cone implies qis; def-pc-quasi-iso-modules says none of these); rewrote Step 2 without cones: Hom(P^i,-) exact so termwise qis, stupid-truncation filtration of bounded P gives termwise split SES of Hom complexes, induction with long exact cohomology sequence (Stacks Tag 0117) and five lemma.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.StrictlyPerfectDerivedInternalHom",
+  "declaration": "AlgebraicGeometry.Scheme.isIso_homComplex_resolution_of_isStrictlyPerfect",
+  "file": "lean/Sheaf/AlgebraicGeometry/StrictlyPerfectDerivedInternalHom.lean",
+  "statement": "theorem isIso_homComplex_resolution_of_isStrictlyPerfect (X : Scheme.{u}) (U : X.Opens) [IsAffine U.toScheme] [HasDerivedCategory.{w} (SheafOfModules.{u} ((sheafCompose ((Opens.grothendieckTopology X).over U) (forget₂ CommRingCat RingCat)).obj (X.sheaf.over U)))] (P M : CochainComplex (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U)) ℤ) (_hP : IsStrictlyPerfect X U P) : Nonempty (DerivedCategory.Q.obj (homComplex (R := X.sheaf.over U) P M) ≅ (derivedInternalHom ((Opens.grothendieckTopology X).over U) (X.sheaf.over U)).obj (op (DerivedCategory.Q.obj P), DerivedCategory.Q.obj M)) ∧ ∀ (I : CochainComplex (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U)) ℤ ⥤ CochainComplex (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U)) ℤ) (η : 𝟭 (CochainComplex (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U)) ℤ) ⟶ I), (∀ N : CochainComplex (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U)) ℤ, QuasiIso (η.app N) ∧ (I.obj N).IsKInjective) → IsIso (DerivedCategory.Q.map (((homComplexFunctor (R := X.sheaf.over U)).obj (op P)).map (η.app M)))",
+  "branch": "sheaf-dag",
+  "by": "K1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-rsp"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-rsp",
+  "group": "K1",
+  "result": "fix",
+  "note": "U affine open (IsAffine U.toScheme), P strictly perfect = IsStrictlyPerfect X U P, M arbitrary unbounded complex on the recorded over-U carrier, RHom = recorded derivedInternalHom on (Q P, Q M); representation conjunct Nonempty(Q Hom(P,M) ≅ RHom); comparison conjunct: for every functorial K-injective replacement, Q(Hom(P, eta_M)) iso. Fixed: dropped the free iso binder e (any iso; untied, the composite ≫ e.inv was not the canonical comparison and added nothing)"
  }
 }
