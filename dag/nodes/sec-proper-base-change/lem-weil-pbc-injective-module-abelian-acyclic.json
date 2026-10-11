@@ -200,5 +200,23 @@
   "by": "L",
   "result": "pass",
   "note": "Stacks 03FD second paragraph through 03FB/03AT/03F9; 4 new nodes, 2 Mathlib leaves; lem-weil-pbc-cech-criterion left aside (finite-refinement hypothesis)"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.InjectiveModuleAbelianAcyclic",
+  "declaration": "AlgebraicGeometry.Scheme.isZero_rightDerived_etale_toSheaf_of_injective",
+  "file": "lean/Sheaf/AlgebraicGeometry/InjectiveModuleAbelianAcyclic.lean",
+  "statement": "theorem isZero_rightDerived_etale_toSheaf_of_injective (X : Scheme.{u}) (R : Type u) [CommRing R] (I : SheafOfModules.{u + 1} ((constantSheaf X.smallEtaleTopology RingCat.{u + 1}).obj (RingCat.of (ULift.{u + 1, u} R)))) [Injective I] (U : X.Etale) (q : ℕ) (hq : 0 < q) : IsZero (((sheafToPresheaf X.smallEtaleTopology AddCommGrpCat.{u + 1} ⋙ (CategoryTheory.evaluation X.Etaleᵒᵖ AddCommGrpCat.{u + 1}).obj (op U)).rightDerived q).obj ((SheafOfModules.toSheaf _).obj I))",
+  "branch": "sheaf-dag",
+  "by": "K1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-ima1057",
+  "group": "K1",
+  "result": "pass",
+  "note": "X:Scheme, R CommRing via constantSheaf RingCat ULift (as landed EtaleShortExactLocalLift), I:SheafOfModules [Injective I] in modules only, I_ab = SheafOfModules.toSheaf, all U:X.Etale, q>0, rightDerived of abelian evaluation formed before applying (same expression as landed EtaleCechVanishingCriterion), IsZero; #check clean"
  }
 }
