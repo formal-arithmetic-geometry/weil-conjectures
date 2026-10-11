@@ -1,8 +1,8 @@
 # Work queue
 
-867 items; claim with `tools/claim.py next <group> [--stage N]`.
+866 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (21)
+## Stage 1: nodes to split (19)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -19,16 +19,14 @@
 | `lem-sc-picard-cech-cup-pullback-compat` | 6015 | none |
 | `lem-sc-picard-qcoh-finite-cd` | 6015 | none |
 | `lem-sc-picard-qcoh-universal-delta-embedding` | 6015 | none |
-| `lem-sc-qcoh-cech-total-tensor-iso` | 6015 | none |
 | `lem-sc-pseudo-coherent-lift-stably-free-complex` | 6016 | none |
 | `lem-sc-valuation-limit-affine-pushforward-colimit` | 6016 | none |
 | `lem-pc-finite-free-map-residue-localization` | 6018 | none |
 | `lem-sc-base-change-curve` | - | none |
 | `lem-sc-global-functions` | - | rests_on_sorry |
-| `lem-pur-derived-functor-morphisms-05sa` | - | none |
 | `lem-pur-derived-functor-triangles-05sc` | - | none |
 
-## Stage 2: nodes to state (846)
+## Stage 2: nodes to state (847)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -317,6 +315,7 @@
 | `lem-sc-product-irreducible-components-bijection` | 1 | state |
 | `lem-sc-proper-affine-finite` | 1 | state |
 | `lem-sc-proper-or-affine` | 1 | state |
+| `lem-sc-qcoh-cech-total-tensor-iso` | 1 | state |
 | `lem-sc-reduced-ideals-zero-intersection` | 1 | state |
 | `lem-sc-regular-connected-integral` | 1 | state |
 | `lem-sc-regular-local-domain` | 1 | state |
@@ -879,7 +878,7 @@
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 | `def-nagata-fixed-base-separated-stage` | 6 | state |
 
-Not open yet: 1763 nodes that wait for a statement dependency, 62 nodes that wait for stage 1.
+Not open yet: 1764 nodes that wait for a statement dependency, 60 nodes that wait for stage 1.
 
 ## Stage 3: modules to prove (0)
 
