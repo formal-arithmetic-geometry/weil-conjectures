@@ -13,7 +13,7 @@
  },
  "kind": "statement",
  "title": "Tor-amplitude gap forces derived tensor cohomology to vanish",
- "statement": "Let X be a scheme [def-pc-scheme], let P be a perfect object of D(\\mathcal O_X) [def-pc-derived-category, def-pc-perfect-complex] with Tor amplitude in [u,v], and let L be a complex with quasi-coherent cohomology [def-pc-derived-category]. For every integer j, if H^q(L)=0 for all q in [j-v,j-u], then H^j(P\\otimes^{\\mathbf L}_{\\mathcal O_X}L)=0.",
+ "statement": "Let X be a scheme [def-pc-scheme], let P be a perfect object of D(\\mathcal O_X) [def-pc-derived-category, def-pc-perfect-complex] with Tor amplitude in [u,v], meaning that H^i(P\\otimes^{\\mathbf L}_{\\mathcal O_X}\\mathcal G)=0 for every \\mathcal O_X-module \\mathcal G and every i\\notin[u,v], and let L be a complex with quasi-coherent cohomology [def-pc-derived-category]. For every integer j, if H^q(L)=0 for all q in [j-v,j-u], then H^j(P\\otimes^{\\mathbf L}_{\\mathcal O_X}L)=0.",
  "source": {
   "document": "literature/stacks-project/perfect.tex",
   "place": "Tag 09M4, proof, spectral sequence after the sentence 'Say K^\\vee has tor amplitude in [a,b]'"
@@ -23,9 +23,56 @@
   "def-pc-derived-category",
   "def-pc-perfect-complex"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Let U be an affine open of X on which P|_U is isomorphic in D(\\mathcal O_U) to a strictly perfect complex Q^\\bullet [def-pc-perfect-complex]. Each Q^p is a direct summand of a finite free \\mathcal O_U-module, hence flat [def-pc-flat-sheaf-modules] (elementary), and Q^\\bullet is bounded, so Q^\\bullet is K-flat [lem-pc-bounded-above-flat-kflat, def-pc-kflat-complex]. Derived tensor product commutes with restriction to the open U, and restriction preserves K-flatness (elementary: for an acyclic complex \\mathcal F^\\bullet on U the extension by zero j_!\\mathcal F^\\bullet is acyclic and \\mathrm{Tot}(j_!\\mathcal F^\\bullet\\otimes K^\\bullet)|_U=\\mathrm{Tot}(\\mathcal F^\\bullet\\otimes K^\\bullet|_U)). Hence for every complex M of \\mathcal O_X-modules, (P\\otimes^{\\mathbf L}M)|_U is represented by the total tensor complex \\mathrm{Tot}(Q^\\bullet\\otimes M|_U) [def-pc-tensor-complex-sheaves]. In particular (P\\otimes^{\\mathbf L}L)|_U\\cong\\mathrm{Tot}(Q^\\bullet\\otimes L|_U), and, applying the Tor-amplitude hypothesis to the \\mathcal O_X-module \\mathcal G=H^q(L), H^p(Q^\\bullet\\otimes H^q(L)|_U)=0 for every q and every p\\notin[u,v].",
+   "uses": [
+    "def-pc-perfect-complex",
+    "def-pc-flat-sheaf-modules",
+    "lem-pc-bounded-above-flat-kflat",
+    "def-pc-kflat-complex",
+    "def-pc-tensor-complex-sheaves"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 09M4, proof, spectral sequence after the sentence 'Say K^\\vee has tor amplitude in [a,b]'"
+   }
+  },
+  {
+   "text": "Filter K^\\bullet=\\mathrm{Tot}(Q^\\bullet\\otimes L|_U) by Q-degree: F^pK^n=\\bigoplus_{i\\ge p}Q^i\\otimes L^{n-i}|_U. These are subcomplexes, and the filtration is bounded because Q^\\bullet is bounded; \\mathrm{gr}^pK^\\bullet=Q^p\\otimes L|_U[-p]. The bounded filtered-complex spectral sequence [thm-sp-spectral-object-yields] has E_1^{p,q}=H^{p+q}(\\mathrm{gr}^pK^\\bullet)=H^q(Q^p\\otimes L|_U)=Q^p\\otimes H^q(L)|_U, the last equality because Q^p is flat so Q^p\\otimes- is exact (elementary). The differential d_1, the connecting map of 0\\to\\mathrm{gr}^{p+1}\\to F^p/F^{p+2}\\to\\mathrm{gr}^p\\to0, is induced by the differential of Q^\\bullet, so E_2^{p,q}=H^p(Q^\\bullet\\otimes H^q(L)|_U), which vanishes for p\\notin[u,v] by Step 1. Now assume H^q(L)=0 for every q in [j-v,j-u]. For p+q=j, either p\\notin[u,v] and E_2^{p,q}=0, or p\\in[u,v], so q=j-p\\in[j-v,j-u] and already E_1^{p,q}=0. Later pages are subquotients, so E_\\infty^{p,j-p}=0 for all p, and by the convergence clause of [thm-sp-spectral-object-yields] all graded pieces of the finite filtration on H^j(K^\\bullet) vanish.",
+   "uses": [
+    "thm-sp-spectral-object-yields"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 09M4, proof, spectral sequence vanishing in the Tor-amplitude gap"
+   }
+  },
+  {
+   "text": "A finite filtration whose associated graded objects are all zero is zero, so H^j((P\\otimes^{\\mathbf L}_{\\mathcal O_X}L)|_U)=H^j(P\\otimes^{\\mathbf L}_{\\mathcal O_X}L)|_U=0. Such affine opens U cover X and vanishing of a sheaf is local, so H^j(P\\otimes^{\\mathbf L}_{\\mathcal O_X}L)=0.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 09M4, proof, final spectral-sequence conclusion"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-perfect-complex",
+  "def-pc-flat-sheaf-modules",
+  "lem-pc-bounded-above-flat-kflat",
+  "def-pc-kflat-complex",
+  "def-pc-tensor-complex-sheaves",
+  "thm-sp-spectral-object-yields"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 09M4, proof, spectral sequence after the sentence 'Say K^\\vee has tor amplitude in [a,b]'"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -50,12 +97,38 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sc-perfect-ext-bounded-qcoh-vanishing",
   "by": "worker",
   "date": "2026-10-11"
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-duality"
+ "unit": "sk-thm-picard-duality",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-sc-perfect-hypercohomology-gap",
+  "worker": "stage1",
+  "summary": "Checked the item against Stacks Tag 09M4. No sorry-free project declaration states it and no child node is appropriate because the only substantive lemma is the item's own spectral-sequence gap. The proof uses a local bounded finite-projective model of a perfect complex, the existing double-complex spectral-sequence theorem, vanishing of all terms in the relevant total degree from the Tor-amplitude interval, and the finite-filtration conclusion.",
+  "blueprint": "Realizes the ancestor lem-sc-finite-duality proof place 'proper-flat support proof: choose the truncation index sufficiently negative so the extension class into the bounded quasi-coherent tail vanishes' through the hypercohomology spectral-sequence gap used by lem-sc-perfect-ext-bounded-qcoh-vanishing.",
+  "tool_uses": [
+   {
+    "node": "thm-sp-spectral-object-yields",
+    "why": "The proof needs the generic bounded filtered-complex spectral sequence and its finite convergence filtration; this Picard unit has no replacement."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-bounded-above-flat-kflat",
+  "thm-sp-spectral-object-yields"
+ ],
+ "reviewed": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-phg0033",
+  "group": "M1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-phg0033 (reviewer sub-agent of L); spot-checked: Index bookkeeping E_1^{p,q}=Q^p(x)H^q(L), p+q=j, p in [u,v] => q in [j-v,j-u] checked by hand; citer lem-sc-perfect-ext-bounded-qcoh-vanishing uses exactly this statement (C4 ok); no duplicate (lem-pc-tor-amplitude-*, lem-pc-module-tor-amplitude-flat-model are different statements). FIX more, RETURN less: (1) C1: computing P(x)^L L by the total tensor complex of the local strictly perfect model was uncited; now cites lem-pc-bounded-above-flat-kflat (tool use), def-pc-kflat-complex, def-pc-tensor-complex-sheaves, def-pc-flat-sheaf-modules; restriction to U compatibility and flat-tensor exactness folded as elementary; spurious Cartan-Eilenberg resolution removed and Q-degree filtration, E_1/E_2 written out. (2) B3: statement used Tor amplitude without a definition; meaning inlined. (3) Steps 2-3 rewritten with explicit interval arithmetic; proof_deps synchronized.; 1 file(s) fixed by the reviewer"
+ },
+ "lead_note": "2026-10-11 L (R-phg0033): Statement now spells out the Tor-amplitude meaning (E7: clarification, same content, as in lem-pc-affine-tor-amplitude-criterion). Tool use lem-pc-bounded-above-flat-kflat: generic K-flatness of bounded flat complexes."
 }
