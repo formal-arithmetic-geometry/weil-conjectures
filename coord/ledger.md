@@ -3087,3 +3087,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 00:20 UTC L: J1 valuation-proper-coherent-sections PASS 62557e2cd (R-vcs0018); M1 delivery of the attached node lem-sc-picard-closure-specialization returned as unneeded, branch deleted with a notice.
 - 00:20 L: merged deliver/H1/def-pc-derived-base-change-map (reviewer FIX; first push; new nodes: 0)
 - 00:20 UTC L: H1 def-pc-derived-base-change-map FIX f3c938956 (R-dbc0019; composite retyped, source moved to cohomology.tex Remark 08HY).
+- 00:21 L: merged deliver/H1/lem-sc-pic-restriction-boundary (reviewer FIX; first push; new nodes: 0)
