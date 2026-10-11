@@ -16,7 +16,10 @@
   "document": "literature/stacks-project/etale-cohomology.tex",
   "place": "Lemma 0DV5 (etale-cohomology, Section 59.65), proof of parts (2)-(3): 'The equivalence in (1) sends products to products and hence sends + to an addition on the corresponding finite pi_1-set. Since pi_1-modules are the same thing as pi_1-sets with a compatible abelian group structure we obtain (2). Part (3) is proved in exactly the same way.'"
  },
- "stmt_deps": [],
+ "stmt_deps": [
+  "def-pod-internal-module",
+  "def-pod-finite-continuous-module"
+ ],
  "proof": [
   {
    "text": "An equivalence of categories preserves all finite limits up to canonical isomorphism, hence it carries the chosen binary products and final object to products and a final object. Apply the functor to each operation map of a Lambda-module object and conjugate by these canonical isomorphisms. Applying the functor to each commutative diagram expressing a module axiom gives the corresponding diagram in the target, and the quasi-inverse transports structures back; naturality shows that maps commuting with the operations are carried precisely to maps commuting with the transported operations. Thus the induced functor on Lambda-module objects is an equivalence and its underlying functor is Phi.",
@@ -96,5 +99,27 @@
   "group": "C1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-eim2544 (reviewer sub-agent of L); spot-checked: Statement fixes the structure: Lambda-module objects defined via finite products/final object (cartesian), which any equivalence preserves, so no monoidal hypothesis needed (E/C4 ok). Step 1 (transport along canonical product/terminal isos, counit naturality for essential surjectivity) and step 2 (equivariance of +,0,-,lambda iff G acts Lambda-linearly; 0 fixed automatic; continuity on discrete finite sets) are elementary, matching Stacks 0DV5 proof. Mathlib record honest: Equivalence.mapCommGrp at CommGrp_.lean:297 confirmed (commutative group objects only, needs Braided); grep 'equivalence' in Monoidal/Mod_.lean finds nothing, and Mod_ is modules over a monoid object, not a Lambda-action. No new nodes, no restatement (class b n/a). Second reading: no missed fault found. No repairs."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.EquivalenceInternalModule",
+  "declaration": "CategoryTheory.equivalence_induces_internalModules",
+  "declarations": [
+   "CategoryTheory.equivalence_induces_internalModules",
+   "CategoryTheory.internalModules_finiteContAction"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/EquivalenceInternalModule.lean",
+  "statement": "theorem equivalence_induces_internalModules (R : Type r) [Ring R] {C : Type u₁} [Category.{v₁} C] [HasFiniteProducts C] {D : Type u₂} [Category.{v₂} D] [HasFiniteProducts D] (e : C ≌ D) : PreservesFiniteProducts e.functor ∧ PreservesLimit (Functor.empty.{0} C) e.functor ∧ ∃ E : InternalModule R C ≌ InternalModule R D, E.functor ⋙ InternalModule.forget R D = InternalModule.forget R C ⋙ e.functor ∧ (∀ A : InternalModule R C, HEq (E.functor.obj A).add (inv (prodComparison e.functor A.X A.X) ≫ e.functor.map A.add) ∧ HEq (E.functor.obj A).zero (inv (terminalComparison e.functor) ≫ e.functor.map A.zero) ∧ HEq (E.functor.obj A).neg (e.functor.map A.neg) ∧ ∀ a : R, HEq ((E.functor.obj A).smul a) (e.functor.map (A.smul a))) ∧ ∀ (A B : InternalModule R C) (f : A ⟶ B), HEq (E.functor.map f).val (e.functor.map f.val)",
+  "branch": "sheaf-dag",
+  "by": "K1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-emo0938",
+  "group": "K1",
+  "result": "fix",
+  "note": "Ring R arbitrary; C,D HasFiniteProducts (terminal = empty product); e : C ≌ D; preserves finite products + terminal; E over e with forget-equality and add/zero via inv prodComparison/terminalComparison, neg/smul via e.map, maps via e.map; InternalModule's 11 axioms on generalized elements, smul (a*b) = smul b ≫ smul a; IsHom on all four ops; part 2: arbitrary topological group, ContAction FintypeCat G vs finite full subcategory of DiscreteContinuousRep (open stabilizers = joint continuity for discrete M), iso of categories (fixed), i on G-sets + four ops pointwise; no Mathlib/DAG duplicate (Mod_/CommGrp_ are monoid-object notions)"
  }
 }
