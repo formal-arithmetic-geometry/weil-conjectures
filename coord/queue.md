@@ -1,11 +1,11 @@
 # Work queue
 
-240 items; claim with `tools/claim.py next <group> [--stage N]`.
+236 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (240)
+## Stage 2: nodes to state (236)
 
 | node | distance to Mathlib | kind | blockers |
 |---|---|---|---|
@@ -62,7 +62,6 @@
 | `lem-weil-pbc-etale-geometric-fibre-constant-sections` | 1 | state | 0 |
 | `lem-weil-pbc-finite-surjective-coherent-generic-support` | 1 | state | 0 |
 | `lem-weil-pbc-matching-object-proper-faces` | 1 | state | 0 |
-| `lem-weil-pbc-module-support-proper-over-base` | 1 | state | 0 |
 | `lem-weil-pbc-projective-space-twisting-sheaf-charts` | 1 | state | 0 |
 | `lem-weil-pbc-pushforward-coherent-on-open` | 1 | state | 0 |
 | `lem-weil-pbc-scheme-theoretic-support` | 1 | state | 0 |
@@ -77,15 +76,12 @@
 | `lem-weil-pbc-spec-finite-product-fields` | 1 | state | 0 |
 | `lem-weil-pbc-spec-map-residue-field-naturality` | 1 | state | 0 |
 | `lem-weil-pbc-spectral-closed-clopen-decomposition-lift` | 1 | state | 0 |
-| `lem-weil-pbc-spectral-constructible-clopen-constructible-topology` | 1 | state | 0 |
-| `lem-weil-pbc-spectral-constructible-finite-intersection` | 1 | state | 0 |
 | `lem-weil-pbc-spectral-constructible-topology-hausdorff` | 1 | state | 0 |
 | `lem-weil-pbc-spectral-generalizations-of-quasi-compact` | 1 | state | 0 |
 | `lem-weil-pbc-spectral-limit-constructible-closed-nonempty` | 1 | state | 0 |
 | `lem-weil-pbc-spectral-limit-constructible-closed-quasi-compact` | 1 | state | 0 |
 | `lem-weil-pbc-spectral-limit-descend-opens` | 1 | state | 0 |
 | `lem-weil-pbc-spectral-limit-pullback-sections` | 1 | state | 0 |
-| `lem-weil-pbc-spectral-map-constructible-continuous` | 1 | state | 0 |
 | `lem-weil-pbc-spectral-proconstructible-closure-specialization` | 1 | state | 0 |
 | `lem-weil-pbc-spectral-sheaf-colimit-constant-embeddings` | 1 | state | 0 |
 | `lem-weil-pbc-split-extension-free-presentation` | 1 | state | 0 |
