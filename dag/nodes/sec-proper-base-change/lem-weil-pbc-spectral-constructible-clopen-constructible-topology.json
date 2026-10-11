@@ -138,5 +138,23 @@
   "by": "L",
   "result": "pass",
   "note": "Reviewed by the lead (opus-relaunch6). Three steps (Stacks gives the fact after 08YG without proof): retrocompact iff quasi-compact for opens of a spectral space (new Mathlib leaf QuasiSeparatedSpace.isRetrocompact_iff_isCompact, Topology/Constructible.lean:336 @[stacks 0069], verified) so constructible sets are finite unions of U cap (X minus V) with U, V quasi-compact open; subbase elements and their complements are clopen; finite unions and intersections. Tags verified by the worker (005G, 005H, 0069, 08YG)."
+ },
+ "lean": {
+  "module": "WeilConjectures.Mathlib.Topology.Spectral.ConstructibleTopology",
+  "declaration": "Topology.IsConstructible.isClopen_constructibleTopology",
+  "statement": "lemma Topology.IsConstructible.isClopen_constructibleTopology [CompactSpace X] {s : Set X}\n    (hs : IsConstructible s) : @IsClopen X (constructibleTopology X) s",
+  "branch": "slopmaster2",
+  "by": "G1",
+  "date": "2026-10-11",
+  "existing": true,
+  "note": "Existing source theorem applies directly to the spectral spaces of this node: SpectralSpace extends CompactSpace. The source theorem is more general in its ambient-space hypothesis; at the node's stated objects it gives exactly the same constructibility hypothesis and clopen conclusion. Server-compiled scratch example checks this specialization. No node statement or dependencies changed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-scc",
+  "group": "G1",
+  "result": "pass",
+  "note": "X: {X} [TopologicalSpace X]; spectral = SpectralSpace X supplies the only needed instance CompactSpace X (more general existing source theorem, proved, axioms std); E constructible = Topology.IsConstructible (Mathlib Constructible.lean:178, recorded on def-weil-constructible-subset); constructible topology = Mathlib constructibleTopology X (generateFrom compact opens and closed sets with compact complement, :36-43); clopen = @IsClopen X (constructibleTopology X) E, both clauses in the new topology; [SpectralSpace X] specialization compiled clean on L; node diff only adds lean (no H7)"
  }
 }
