@@ -201,5 +201,23 @@
   "worker": "stage1",
   "summary": "Proof written from Stacks 07PL (more-algebra.tex line 12003) in six steps: the dual numbers S[eps] and the square-zero ideal J = eps S (elementary, from the polynomial ring and quotient definitions); the ring map psi(r) = phi(r) + eps phi(D r) and q psi = phi; S[eps] is nS[eps]-adically complete since (nS[eps])^m = n^m + eps n^m and the canonical map is c x c; J is closed (intersection of n^m is 0) with J^2 = 0, and id_S maps n into q(I); the lift sigma: S -> S[eps] from Lemma 07NJ, which the DAG lacked: new unsplit node lem-weil-pbc-fs-adic-lift-into-complete stated with the DAG's (discrete-R) adic formal smoothness, A I-adically complete, J closed with J^t in I, g(n^r) in q(I); sigma = id + eps D' is a ring map iff D' is a derivation, and sigma phi = psi gives D' phi = phi D. Checked that only the stated hypotheses are used (no locality, no Noetherian hypothesis): 07NJ's proof uses only completeness of A, closedness of J, J^t in I, and lifts along square-zero kernels of discrete quotients. The DAG's definition of formal smoothness is the discrete-target lifting property (07NI (2)(b)), so 07NJ is needed and is not a consequence of the definition alone. Statement unchanged. Mathlib: no adic formal smoothness; searches recorded."
  },
- "reviewed": "Reviewed by L 2026-10-10: faithful to More on Algebra 07PL in the generality of the statement (no locality/Noetherian hypothesis used): dual numbers, the ring map psi, completeness of S[eps] and closedness of eps S written out (steps 1-4), the lift by 07NJ (new unsplit node lem-weil-pbc-fs-adic-lift-into-complete, which is genuinely needed since id_S kills no power of n), the derivation read off (step 6). Mathlib candidate recorded (B8). The parenthetical remark in the statement is explanatory and was left."
+ "reviewed": "Reviewed by L 2026-10-10: faithful to More on Algebra 07PL in the generality of the statement (no locality/Noetherian hypothesis used): dual numbers, the ring map psi, completeness of S[eps] and closedness of eps S written out (steps 1-4), the lift by 07NJ (new unsplit node lem-weil-pbc-fs-adic-lift-into-complete, which is genuinely needed since id_S kills no power of n), the derivation read off (step 6). Mathlib candidate recorded (B8). The parenthetical remark in the statement is explanatory and was left.",
+ "lean": {
+  "module": "Sheaf.RingTheory.Derivation.FormallySmoothAdicExtension",
+  "declaration": "Derivation.exists_extension_of_formallySmoothAdic",
+  "file": "lean/Sheaf/RingTheory/Derivation/FormallySmoothAdicExtension.lean",
+  "statement": "theorem exists_extension_of_formallySmoothAdic {R : Type u} {S : Type v} [CommRing R] [CommRing S] [Algebra R S] (n : Ideal S) [IsAdicComplete n S] (h : Algebra.FormallySmoothAdic R S n) (D : Derivation ℤ R R) : ∃ D' : Derivation ℤ S S, ∀ r : R, D' (algebraMap R S r) = algebraMap R S (D r)",
+  "branch": "sheaf-dag",
+  "by": "K1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-fld1043",
+  "group": "K1",
+  "result": "pass",
+  "note": "CommRing R,S (no local/Noetherian, as node); phi = algebraMap; ideal n; IsAdicComplete n S = recorded dep; h : Algebra.FormallySmoothAdic R S n (recorded, tests in Type (max u v)); D : Derivation ℤ R R = additive+Leibniz; ∃ D' : Derivation ℤ S S with D'(φ r)=φ(D r) ∀ r; docstring carries 6 proof steps + blueprint id"
+ }
 }
