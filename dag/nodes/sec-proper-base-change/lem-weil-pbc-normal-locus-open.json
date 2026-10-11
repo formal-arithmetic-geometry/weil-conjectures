@@ -249,5 +249,23 @@
   "worker": "stage1",
   "summary": "Read Stacks 0332 (algebra.tex 45442-45480) and the lemmas its proof cites, 031S (lemma-criterion-normal, line 43977) and 00LC (lemma-finite-ass, line 15176); tags verified in tags/tags (0332, 031S, 00LC, 0310). Statement kept (agrees with 0332; 'normal' for R_f and R_p read as normal domain, as R is a domain). Nine steps follow the proof: D(f) in U written out via localization of localization (the source's 'clear'); Serre's criterion applied to R_p gives q in p with R_q in Case I or II; R_q not normal (Serre again for the normal ring R_q), so f in q; depth(R_q) <= 1 in both cases (Case II via depth <= dim(R/p) for the associated prime (0)); depth drops by one gives depth(R_q/fR_q)=0, hence qR_q associated to R_q/fR_q (nonzerodivisor lemma), hence q in Ass_R(R/fR) (0310 (2)); E = {q in Ass(R/fR): R_q not normal} is finite by 00LC and the complement of U is the union of the V(q), q in E, the reverse inclusion (left implicit in the source) by localization of normal domains. The source's E (embedded associated primes in Case I, height-one associated primes in Case II) is replaced by this E, which contains exactly the primes the source's argument produces and makes the reverse inclusion immediate. No new nodes: every fact used is an existing node (all of unit sk-thm-p1, or definitions/Mathlib leaves).",
   "blueprint": "The steps realize Lemma 0332 as invoked at the place of lem-weil-pbc-normal-constant-generic named in from.place (via lem-weil-pbc-n1-local-characterization, the proof of 0333 (1)+(2) => N-1: 'Hence by Lemma [0332] the set of primes p' in Spec(R') with R'_{p'} non-normal is closed in Spec(R')'): steps 1-9 together prove that closedness; no blueprint node states 0332 itself (blueprint_refs search 'normal locus open', 'normal open', 'normal localization', '0332': none)."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.NormalLocusOpen",
+  "declaration": "AlgebraicGeometry.normal_locus_isOpen",
+  "file": "lean/Sheaf/Paper/NormalLocusOpen.lean",
+  "statement": "theorem normal_locus_isOpen {R : Type u} [CommRing R] [IsNoetherianRing R] [IsDomain R] (f : R) (hf : f ≠ 0) (hf_normal : IsDomain (Localization.Away f) ∧ IsIntegrallyClosed (Localization.Away f)) : IsOpen {p : PrimeSpectrum R | IsDomain (Localization.AtPrime p.asIdeal) ∧ IsIntegrallyClosed (Localization.AtPrime p.asIdeal)}",
+  "branch": "sheaf-dag",
+  "by": "J1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-nlo1158",
+  "group": "J1",
+  "result": "pass",
+  "note": "R: CommRing+IsNoetherianRing+IsDomain; f≠0; R_f normal domain inline IsDomain∧IsIntegrallyClosed (Localization.Away f); U = {p : PrimeSpectrum R | IsDomain∧IsIntegrallyClosed (Localization.AtPrime p.asIdeal)}; IsOpen in Zariski topology; names #check'd outside AlgebraicGeometry ns; no dup in lean/Sheaf; only item files in diff"
  }
 }
