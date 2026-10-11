@@ -142,5 +142,24 @@
   "group": "G1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-tg2 (reviewer sub-agent of L); spot-checked: Repaired re-push after the 16:31 return, both points checked: (1) lem-sc-tensor-epi-finite-free is gone (diff touches only the item node and the report) and the argument is in four steps citing existing nodes; (2) proof_origin now reads 'Modules, Lemma 01AO (proof omitted); stalkwise argument', and the report says the source proof is omitted (modules.tex l.380-395 read: 01AO, proof 'Omitted'). Statement agrees with 01AO (iterated to n factors, finite generating families) for X a scheme. Step 1: def-weil-pbc-generating-sections (surjectivity of the finite direct-sum map) plus lem-weil-pbc-locally-surjective-iff-stalks (holds for presheaves of modules) give stalkwise generation by germs (stalk of a finite direct sum is the direct sum). Step 2: induction on k with base k=1, step lem-weil-pbc-module-stalk-tensor (scheme X, O_X-modules, germ of s(x)t to s_x(x)t_x) applied to (F_1..F_{k-1}) tensor F_k, matching the iterated definition in def-pur-sheaf-tensor-product. Step 3 elementary (pure tensors span, multilinear expansion). Step 4: converse of the stalk criterion for the tuple-indexed direct-sum map, then the definition. Tags checked in tags/tags: 01AO, 01CB (stalk-tensor-product), 0H7H, 007U. Tool uses accepted as generic black boxes: lem-weil-pbc-locally-surjective-iff-stalks, lem-weil-pbc-module-stalk-tensor. Small cases: n=1 (step 2 trivial, statement tautological), all m_i=0 (single section s_{1,0}(x)...(x)s_{n,0} generates, e.g. F_i=O_X with s=1), X a point (finitely generated modules over a ring). Note: the report lists a citations.json not in the commit (worker-local file; harmless). Start Sat Oct 10 04:46:57 PM UTC 2026, end Sat Oct 10 04:47:22 PM UTC 2026."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.TensorGeneratingSections",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.tensor_generating_sections",
+  "file": "lean/Sheaf/AlgebraicGeometry/TensorGeneratingSections.lean",
+  "statement": "theorem tensor_generating_sections {X : Scheme.{u}} (n : ℕ) (M : Fin (n + 1) → X.Modules) (m : Fin (n + 1) → ℕ) (s : ∀ i, ULift.{u} (Fin (m i + 1)) → (M i).sections) (hs : ∀ i, Epi ((M i).freeHomEquiv.symm (s i))) : Epi ((positiveTensorFamily n M).freeHomEquiv.symm (fun j : (∀ i, ULift.{u} (Fin (m i + 1))) ↦ positiveTensorFamilySection n M (fun i ↦ s i (j i))))",
+  "branch": "sheaf-dag",
+  "by": "G1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-tgs1322"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-tgs1322",
+  "group": "G1",
+  "result": "fix",
+  "note": "FIX: replaced the delivery's local Nat.rec right-associated tensor family T (with unit factor) and morphism-built pure tensors p by landed def-sc-positive-tensor-family (positiveTensorFamily / positiveTensorFamilySection, as H1 dd2dcde36); n+1 factors (node F_1..F_n, n>=1; the delivery's n=0 empty-product case dropped); X scheme; M i : X.Modules; generating family s i : ULift (Fin (m i+1)) -> sections with Epi freeHomEquiv.symm (= GeneratingSections.epi); conclusion Epi of the free map on all tuples (j_i) of the pure tensor sections; compiled clean in L sandbox"
  }
 }
