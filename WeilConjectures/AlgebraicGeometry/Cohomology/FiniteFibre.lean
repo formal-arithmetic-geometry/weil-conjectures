@@ -9,6 +9,7 @@ public import WeilConjectures.AlgebraicGeometry.Cohomology.Affine.Cech
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.AffineMorphism
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Sections
 public import WeilConjectures.AlgebraicGeometry.Modules.Coherent
+public import WeilConjectures.AlgebraicGeometry.Modules.LocalPresentation
 public import WeilConjectures.AlgebraicGeometry.Modules.QcqsSections
 public import WeilConjectures.AlgebraicGeometry.Morphisms.ProperQuasiFinite
 
@@ -65,8 +66,26 @@ class IsCoherent (ℱ : X.Modules) : Prop where
 (blueprint: `pqf-lem-coherent-ft-locnoeth`) -/
 theorem isCoherent_iff [IsLocallyNoetherian X] (ℱ : X.Modules) :
     ℱ.IsCoherent ↔ SheafOfModules.IsQuasicoherent (R := X.ringCatSheaf) ℱ ∧
-      SheafOfModules.IsFiniteType (R := X.ringCatSheaf) ℱ :=
-  sorry
+      SheafOfModules.IsFiniteType (R := X.ringCatSheaf) ℱ := by
+  refine ⟨fun h ↦ ⟨?_, h.isFiniteType⟩, fun ⟨h₁, h₂⟩ ↦ ⟨h₂, fun U ι _ φ ↦ ?_⟩⟩
+  · obtain ⟨σ, hσ⟩ := SheafOfModules.IsFiniteType.exists_localGeneratorsData
+      (R := X.ringCatSheaf) (self := h.isFiniteType) ℱ
+    have hcov := (Opens.coversTop_iff _ σ.X).mp σ.coversTop
+    have key (x : X) : ∃ V : X.Opens, x ∈ V ∧ Nonempty (ℱ.restrict V.ι).Presentation := by
+      obtain ⟨i, hi⟩ := hcov.exists_mem x
+      let U : X.Opens := σ.X i
+      let G := generatingSectionsRestrictOfOver U (σ.generators i)
+      have : Finite G.I := (hσ.isFiniteType i).finite
+      have := h.isFiniteType_kernel U G.I G.π
+      obtain ⟨W, hW, ⟨P⟩⟩ := exists_presentation_restrict_of_epi G.π (⟨x, hi⟩ : U)
+      exact ⟨(W.ι ≫ U.ι).opensRange, ⟨⟨⟨x, hi⟩, hW⟩, rfl⟩, ⟨presentationRestrictOpensRange _
+        (P.ofIsIso (restrictCompIso ℱ U.ι W.ι (W.ι ≫ U.ι) rfl).inv)⟩⟩
+    choose V hV P using key
+    exact isQuasicoherent_of_isOpenCover ℱ (U := V)
+      (eq_top_iff.mpr fun x _ ↦ TopologicalSpace.Opens.mem_iSup.mpr ⟨x, hV x⟩) fun x ↦ (P x).some
+  · have := isFinitePresentation_free (X := U.toScheme) ι
+    have := isFinitePresentation_kernel φ
+    infer_instance
 
 /-- **A sheaf with vanishing stalks is zero.** If all stalks of the underlying abelian sheaf of an
 `𝒪_X`-module `ℱ` vanish, then `ℱ = 0`.

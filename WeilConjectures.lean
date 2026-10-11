@@ -239,6 +239,7 @@ public import WeilConjectures.AlgebraicGeometry.Modules.HomTensor.Presheaf
 public import WeilConjectures.AlgebraicGeometry.Modules.Invertible
 public import WeilConjectures.AlgebraicGeometry.Modules.InvertibleSections
 public import WeilConjectures.AlgebraicGeometry.Modules.LocalDerivation
+public import WeilConjectures.AlgebraicGeometry.Modules.LocalPresentation
 public import WeilConjectures.AlgebraicGeometry.Modules.LocallyFreeAffine
 public import WeilConjectures.AlgebraicGeometry.Modules.LocallyFreeRank
 public import WeilConjectures.AlgebraicGeometry.Modules.PicardAffine
