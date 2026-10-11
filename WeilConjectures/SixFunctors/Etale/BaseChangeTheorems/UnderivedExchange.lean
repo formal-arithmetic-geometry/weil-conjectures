@@ -106,11 +106,15 @@ lemma Etale.bijective_sheafFiber_map_baseChangeMap_of_isProper {X' X Y' Y : Sche
       CategoryTheory.Over.OverMorphism.ext hl
     rw [← hv, ← GrothendieckTopology.Point.toPresheafFiber_w_apply]
     erw [hσ]
-    simp only [BC, ζ, ζ', e, c]
-    erw [GrothendieckTopology.Point.toPresheafFiber_naturality_apply, baseChangeMap_app_pullSection,
-      toPresheafFiber_stalkToFibreSections, fibreRestriction_apply,
-      upperStarCompSheafFiberIso_hom_toPresheafFiber_pullSection,
-      toPresheafFiber_stalkToFibreSections, fibreRestriction_apply]
+    have h₁ := GrothendieckTopology.Point.toPresheafFiber_naturality_apply (pointSmallEtale y')
+      ((Etale.baseChangeMap AddCommGrpCat.{u + 1} sq.toCommSq).app F).hom V₁ (fiberPt l hl₁)
+      (pullSection g ((f)_*[AddCommGrpCat.{u + 1}].obj F) φ hφ s)
+    rw [baseChangeMap_app_pullSection] at h₁
+    have h₃ := upperStarCompSheafFiberIso_hom_toPresheafFiber_pullSection g
+      ((f)_*[AddCommGrpCat.{u + 1}].obj F) y' φ hφ s (fiberPt l hl₁)
+    erw [h₁, h₃, toPresheafFiber_stalkToFibreSections, toPresheafFiber_stalkToFibreSections]
+    rw [fibreRestriction_apply, fibreRestriction_apply]
+    simp only [c]
     rw [← restrictAlong_apply, restrictAlong_pullSection]
     refine pullSection_congr _ _ _ ?_ _
     apply pullback.hom_ext <;> simp
@@ -139,7 +143,19 @@ map of stalks is the identity; geometric stalks are conservative.
 @[stacks 0A3T]
 theorem Etale.isIso_baseChangeMap_of_isProper {X' X Y' Y : Scheme.{u}} {g' : X' ⟶ X}
     {f' : X' ⟶ Y'} {f : X ⟶ Y} {g : Y' ⟶ Y} (sq : IsPullback g' f' f g) [IsProper f] :
-    IsIso (Etale.baseChangeMap (ModuleCat.{u + 1} Λ) sq.toCommSq) :=
-  sorry
+    IsIso (Etale.baseChangeMap (ModuleCat.{u + 1} Λ) sq.toCommSq) := by
+  rw [NatTrans.isIso_iff_isIso_app]
+  intro F
+  rw [isIso_baseChangeMap_app_iff_forget₂]
+  refine Scheme.isIso_of_isIso_sheafFiber_map _ fun y' ↦ ?_
+  have : IsIso ((pointSmallEtale (Y'.algClosurePoint y')).sheafFiber.map
+      ((Etale.baseChangeMap AddCommGrpCat.{u + 1} sq.toCommSq).app
+        ((sheafCompose _ (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj F))) :=
+    (ConcreteCategory.isIso_iff_bijective _).2
+      (Etale.bijective_sheafFiber_map_baseChangeMap_of_isProper sq _ _)
+  change IsIso (((pointSmallEtale (Y'.algClosurePoint y')).ulift.{u + 1}).sheafFiber.map _)
+  rw [← NatIso.naturality_2 ((pointSmallEtale (Y'.algClosurePoint y')).uliftSheafFiberIso
+    AddCommGrpCat.{u + 1})]
+  infer_instance
 
 end AlgebraicGeometry
