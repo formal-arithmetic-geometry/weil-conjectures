@@ -141,5 +141,24 @@
   "group": "C1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-bcr1842 (reviewer sub-agent of L); spot-checked: Statement vs Tag 0A8F (compactly generated, set-indexed coproducts, cohomological H sending coproducts to products); no cycle (item does not cite lem-pc-brown-representability-right-adjoint); Neeman argument carried in 3 steps (X_1, kernel-killing cones, telescope hocolim, D' closure + Tag 09SN); new nodes match 07LS/09SQ/09SJ/094A/09SN; Mathlib grep for Brown representability: no match. FIX more, RETURN less: C1/C4 step 3 five-lemma closure needs exactness of contravariant Hom(-,X) on triangles, but only the covariant lem-weil-pbc-hom-into-triangle-exact was cited -> added lem-weil-pbc-hom-out-of-triangle-exact; steps 2-3 use H cohomological -> added def-sp-homological-functor to uses; proof_deps updated.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.BrownCohomologicalRepresentability",
+  "declaration": "CategoryTheory.brownCohomologicalRepresentability",
+  "file": "lean/Sheaf/CategoryTheory/BrownCohomologicalRepresentability.lean",
+  "statement": "theorem brownCohomologicalRepresentability (hC : IsCompactlyGeneratedTriangulated.{v} C) (H : Cᵒᵖ ⥤ AddCommGrpCat.{v}) [H.IsHomological] (hH : ∀ (I : Type v), PreservesLimitsOfShape (Discrete I) H) : ∃ G : C, Nonempty (H ≅ preadditiveYoneda.obj G)",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-brn0730"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-brn0730",
+  "group": "E1",
+  "result": "fix",
+  "note": "C triangulated with HasCoproducts.{v} (set = Type v, fixed from free w); hC IsCompactlyGeneratedTriangulated.{v}; H : Cᵒᵖ ⥤ AddCommGrpCat.{v} IsHomological (implies Additive); hH Type v discrete limits = coproducts to products; conclusion ∃ G, H ≅ preadditiveYoneda.obj G; no Brown in Mathlib/source"
  }
 }
