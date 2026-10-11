@@ -13,19 +13,81 @@
  },
  "kind": "statement",
  "title": "Bounded-size generators for acyclic complexes",
- "statement": "Let $\\mathcal A$ be a Grothendieck abelian category [def-sp-grothendieck-abelian]. For an object $M$ of $\\mathcal A$ its *size* $|M|$ is the cardinality of the set of subobjects of $M$. There exists a cardinal $\\kappa$ such that for every acyclic (as in [def-pc-acyclic-complex-modules] with $\\mathcal A$ in place of $\\Mod(\\mathcal O)$) cochain complex $M^\\bullet$ in $\\mathcal A$ (cochain complexes defined as in [def-pc-cochain-complex-modules] with $\\mathcal A$ in place of $\\Mod(\\mathcal O)$): (1) if $M^\\bullet\\neq0$, there is a nonzero subcomplex $N^\\bullet\\subset M^\\bullet$ which is bounded above, acyclic, and has $|N^n|\\le\\kappa$ for all $n$; (2) there is a surjection of complexes $\\bigoplus_{i\\in I}M_i^\\bullet\\to M^\\bullet$ with each $M_i^\\bullet$ bounded above, acyclic, and $|M_i^n|\\le\\kappa$ for all $n$.",
+ "statement": "Let $\\mathcal A$ be a Grothendieck abelian category [def-sp-grothendieck-abelian]. For an object $M$ of $\\mathcal A$ its *size* $|M|$ is the cardinality of the set of subobjects of $M$ [lem-pur-kinjective-set-iso-classes-bounded-size]. There exists a cardinal $\\kappa$ such that for every acyclic (as in [def-pc-acyclic-complex-modules] with $\\mathcal A$ in place of $\\Mod(\\mathcal O)$) cochain complex $M^\\bullet$ in $\\mathcal A$ (cochain complexes defined as in [def-pc-cochain-complex-modules] with $\\mathcal A$ in place of $\\Mod(\\mathcal O)$): (1) if $M^\\bullet\\neq0$, there is a nonzero subcomplex $N^\\bullet\\subset M^\\bullet$ which is bounded above, acyclic, and has $|N^n|\\le\\kappa$ for all $n$; (2) there is a surjection of complexes $\\bigoplus_{i\\in I}M_i^\\bullet\\to M^\\bullet$ with each $M_i^\\bullet$ bounded above, acyclic, and $|M_i^n|\\le\\kappa$ for all $n$.",
  "source": {
   "document": "literature/stacks-project/injectives.tex",
   "place": "Lemma lemma-acyclic-quotient-complexes-bounded-size"
  },
  "stmt_deps": [
   "def-sp-grothendieck-abelian",
+  "lem-pur-kinjective-set-iso-classes-bounded-size",
   "def-pc-acyclic-complex-modules",
   "def-pc-cochain-complex-modules"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Choose a generator $U$ and let $c(\\lambda)=|\\bigoplus_{\\lambda}U|$. Set $\\kappa=\\sup_{n\\ge1}c^n(|U|)$. For a morphism $\\psi:U\\to M^n$ it is enough to construct a bounded-above acyclic subcomplex through which $\\psi$ factors, with the stated termwise bounds.",
+   "uses": [
+    "def-sp-grothendieck-abelian",
+    "def-pc-acyclic-complex-modules",
+    "def-pc-cochain-complex-modules"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/injectives.tex",
+    "place": "Lemma lemma-acyclic-quotient-complexes-bounded-size, proof"
+   }
+  },
+  {
+   "text": "Start with $N^n=\\operatorname{Im}(\\psi)$, $N^{n+1}=\\operatorname{Im}(U\\xrightarrow{\\psi}M^n\\to M^{n+1})$, and $N^m=0$ for $m\\ge n+2$; images of $U$ have size at most $|U|$. Inductively, for some $k\\le n$ suppose subobjects $N^m\\subset M^m$ for $m\\ge k$ have been constructed with (i) $d(N^m)\\subset N^{m+1}$ for $m\\ge k$, (ii) $\\operatorname{Im}(N^{m-1}\\to N^m)=\\Ker(N^m\\to N^{m+1})$ for $m\\ge k+1$ (exactness of $N^\\bullet$, not of $M^\\bullet$), and (iii) $|N^m|\\le c^{\\max\\{n-m,0\\}}(|U|)$ for $m\\ge k$. Because $M^\\bullet$ is acyclic, $d\\circ d=0$ and $\\Ker(N^k\\to N^{k+1})\\subset\\Ker(d^k_M)=\\operatorname{Im}(d^{k-1}_M)$, the subobject $d^{-1}(\\Ker(N^k\\to N^{k+1}))\\subset M^{k-1}$ surjects onto that kernel. Apply [lem-pur-kinjective-surjection-bounded-size] to this surjection to choose $N^{k-1}\\subset d^{-1}(\\Ker(N^k\\to N^{k+1}))$ surjecting onto $\\Ker(N^k\\to N^{k+1})$; since $|\\Ker(N^k\\to N^{k+1})|\\le|N^k|$ and $c$ is monotone, $|N^{k-1}|\\le c^{n-k+1}(|U|)$. Then (i), (ii), (iii) hold with $k-1$ in place of $k$ (exactness at $n+1$ and $n$ holds by construction of $N^{n+1}$ and at $k$ by the choice of $N^{k-1}$). Descending induction over all $k\\le n$ produces a subcomplex $N^\\bullet$, bounded above, exact in every degree (hence acyclic), with all terms of size at most $\\kappa$, through which $\\psi$ factors.",
+   "uses": [
+    "lem-pur-kinjective-surjection-bounded-size",
+    "def-pc-acyclic-complex-modules",
+    "def-pc-cochain-complex-modules"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/injectives.tex",
+    "place": "Lemma lemma-acyclic-quotient-complexes-bounded-size, proof"
+   }
+  },
+  {
+   "text": "If $M^\\bullet\\ne0$, choose a degree and a morphism from the generator whose image is nonzero. The construction in the preceding step then gives a nonzero bounded-above acyclic subcomplex with $|N^m|\\le\\kappa$, proving clause (1).",
+   "uses": [
+    "def-sp-grothendieck-abelian",
+    "def-pc-acyclic-complex-modules"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/injectives.tex",
+    "place": "Lemma lemma-acyclic-quotient-complexes-bounded-size, proof"
+   }
+  },
+  {
+   "text": "Apply the construction to every morphism $U\\to M^n$ in every degree. Since $U$ is a generator, these images jointly generate each term, and the resulting bounded-above acyclic subcomplexes map to $M^\\bullet$. Taking their coproduct gives an epimorphism $\\bigoplus_{i\\in I}M_i^\\bullet\\twoheadrightarrow M^\\bullet$; each $M_i^\\bullet$ is bounded above, acyclic, and has all terms of size at most $\\kappa$. This proves clause (2).",
+   "uses": [
+    "def-sp-grothendieck-abelian",
+    "def-pc-acyclic-complex-modules",
+    "def-pc-cochain-complex-modules"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/injectives.tex",
+    "place": "Lemma lemma-acyclic-quotient-complexes-bounded-size, proof"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sp-grothendieck-abelian",
+  "def-pc-acyclic-complex-modules",
+  "def-pc-cochain-complex-modules",
+  "lem-pur-kinjective-surjection-bounded-size"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/injectives.tex",
+  "place": "Lemma lemma-acyclic-quotient-complexes-bounded-size"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -50,12 +112,27 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-pur-kinjective-degreewise-existence",
   "by": "worker",
   "date": "2026-10-11"
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-def-sf-operations"
+ "unit": "sk-def-sf-operations",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-pur-kinjective-acyclic-quotient-complexes-bounded-size",
+  "worker": "stage1",
+  "summary": "Checked the target against Stacks Lemma lemma-acyclic-quotient-complexes-bounded-size. Split out only the non-elementary bounded-size surjection lemma; the remaining generator construction, descending induction, nonzero specialization, and coproduct epimorphism are recorded as complete proof steps.",
+  "blueprint": "The steps realize the ancestor's Theorem 079P clause selecting kappa and constructing bounded-size acyclic subcomplexes and quotient presentations."
+ },
+ "reviewed": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-aqb0033",
+  "group": "J1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-aqb0033 (reviewer sub-agent of L); spot-checked: Read Stacks lemma-acyclic-quotient-complexes-bounded-size and lemma-surjection-bounded-size: kappa=sup c^n(|U|) from generator U defined (C4); new node lem-pur-kinjective-surjection-bounded-size matches Stacks verbatim, no duplicate in DAG (only set-iso-classes node shares the bounded-size area, different content); citers lem-pur-kinjective-degreewise-existence and lem-pur-kinjective-characterize-K-injective use exactly clauses (1),(2) with this kappa. FIX more, RETURN less: Step 2 stated the inductive hypothesis as 'exactness in M^bullet' (E, missed by the second reading); rewrote it with the Stacks invariants (i) d(N^m) in N^{m+1}, (ii) Im(N^{m-1}->N^m)=Ker(N^m->N^{m+1}) i.e. exactness of N, (iii) size bound, with N^{k-1} chosen inside d^{-1}(Ker), size bound via monotonicity of c, and exactness at n+1, n checked.; 1 file(s) fixed by the reviewer"
+ }
 }
