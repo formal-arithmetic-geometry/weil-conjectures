@@ -1,6 +1,6 @@
 # Work queue
 
-84 items; claim with `tools/claim.py next <group> [--stage N]`.
+85 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (1)
 
@@ -8,7 +8,7 @@
 |---|---|---|
 | `lem-pc-localization-preserves-nonzerodivisor` | 3011 | closed_part |
 
-## Stage 2: nodes to state (83)
+## Stage 2: nodes to state (84)
 
 | node | distance to Mathlib | kind | blockers |
 |---|---|---|---|
@@ -24,22 +24,23 @@
 | `lem-weil-pbc-pair-henselization` | 1 | state | 5 |
 | `lem-sc-derived-internal-hom-adjunction` | 1 | state | 4 |
 | `lem-weil-pbc-etale-graph-section-extension-map-linear` | 1 | state | 3 |
-| `lem-pc-derived-mayer-vietoris-triangle` | 1 | state | 2 |
-| `lem-weil-pbc-cohomology-pullback-degree-zero` | 1 | state | 2 |
 | `lem-weil-pbc-higher-direct-image-presheaf` | 1 | state | 2 |
 | `lem-pc-cech-resolution` | 1 | state | 1 |
 | `lem-pc-derived-sections-pushforward-comparison` | 1 | state | 1 |
 | `lem-pc-derived-tensor-transitivity` | 1 | state | 1 |
+| `lem-sc-h1-gm-pic-pullback` | 1 | state | 1 |
 | `lem-sc-affine-unit-divisor-base-change` | 2 | state | 1 |
 | `cor-galois-lisse-representations` | 1 | state | 0 |
 | `lem-pc-base-change-rhom-perfect` | 1 | state | 0 |
 | `lem-pc-bounded-coherent-finite-tor-proper-pushforward-perfect` | 1 | state | 0 |
+| `lem-pc-derived-mayer-vietoris-functorial` | 1 | state | 0 |
 | `lem-pc-noetherian-perfect-direct-image` | 1 | state | 0 |
 | `lem-pc-projection-locality` | 1 | state | 0 |
 | `lem-pc-proper-derived-direct-image-composition` | 1 | state | 0 |
 | `lem-pc-qcqs-sheaf-rhom-adjunction` | 1 | state | 0 |
 | `lem-pc-rf-base-change-complex` | 1 | state | 0 |
 | `lem-pc-rf-base-change-single-complex-criterion` | 1 | state | 0 |
+| `lem-pc-rf-mv-triangle-naturality` | 1 | state | 0 |
 | `lem-pc-rf-perfect-base-change` | 1 | state | 0 |
 | `lem-pc-rf-single-complex-affine-base-change` | 1 | state | 0 |
 | `lem-pc-rf-single-complex-qcqs-induction` | 1 | state | 0 |
@@ -96,7 +97,7 @@
 | `lemma-weil-pbc-hypercohomology-convergence` | 2 | state | 0 |
 | `pqf-lem-leray-lowdegree` | 2 | state | 0 |
 
-Not open yet: 40 nodes that wait for stage 1, 186 nodes that wait for a statement dependency.
+Not open yet: 40 nodes that wait for stage 1, 183 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
