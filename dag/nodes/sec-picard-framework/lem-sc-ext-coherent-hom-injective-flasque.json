@@ -172,5 +172,24 @@
   "group": "J1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-hif1748 (reviewer sub-agent of L); spot-checked: Read 01EA and all cited statements; no cycle with parent lem-sc-ext-coherent-hom-injective-acyclic (parent cites item, item does not cite parent; flasque vs H^p=0, no restatement); tool uses accepted (generic ringed-space j_! and stalk exactness). FIX more, RETURN less: (1) C4 Step 2 cited lem-weil-pbc-module-stalk-exact (1), which goes sectionwise->stalkwise; replaced by clause (5) applied to 0->j_{U'!}->j_{U!}, and said how the map is built on j_{p!}; (2) C4 Step 1 'naturally in V' is not in the adjunction node (natural only in F,G); replaced by the explicit bijection of clause (2) and made the Step 3 compatibility with restriction an explicit elementary check.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.IsFlasqueHomObjOfInjective",
+  "declaration": "AlgebraicGeometry.isFlasque_homObj_of_coherent_injective",
+  "file": "lean/Sheaf/AlgebraicGeometry/IsFlasqueHomObjOfInjective.lean",
+  "statement": "theorem isFlasque_homObj_of_coherent_injective (X : Scheme.{u}) [IsNoetherian X] (F I : SheafOfModules.{u} (moduleRings X.toRingedSpace)) (hF : RingedSpace.IsCoherent X.toRingedSpace F) [Injective I] : TopCat.Sheaf.IsFlasque ((SheafOfModules.toSheaf (moduleRings X.toRingedSpace)).obj (SheafOfModules.homObj (R := X.sheaf) F I))",
+  "branch": "sheaf-dag",
+  "by": "J1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-ecf1200"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-ecf1200",
+  "group": "J1",
+  "result": "fix",
+  "note": "Noetherian X -> [IsNoetherian X] (STATE NOETHERIAN SCHEME, fixed from split CompactSpace+IsLocallyNoetherian); F coherent = RingedSpace.IsCoherent X.toRingedSpace F (C1 def, not hollow); I injective = Injective in SheafOfModules (moduleRings X); Hom = SheafOfModules.homObj (R := X.sheaf), moduleRings X defeq checked by rfl; conclusion TopCat.Sheaf.IsFlasque of toSheaf (Epi in AddCommGrpCat = surjective); no let, one universe u, no new definitions"
  }
 }
