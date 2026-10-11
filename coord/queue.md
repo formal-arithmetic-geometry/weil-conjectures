@@ -1,11 +1,11 @@
 # Work queue
 
-707 items; claim with `tools/claim.py next <group> [--stage N]`.
+704 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (707)
+## Stage 2: nodes to state (704)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -21,7 +21,6 @@
 | `lem-pur-triangle-morphism-category-05r9` | 1 | state |
 | `lem-sc-base-change-curve` | 1 | state |
 | `lem-sc-hilb-dominating-power` | 1 | state |
-| `lem-sc-product-tangent-space-direct-sum` | 1 | state |
 | `lem-sp-truncation-couple-exact` | 1 | state |
 | `lem-weil-derived-limit-roos-complex` | 1 | state |
 | `lem-weil-pbc-derived-square-iso-pasting` | 1 | state |
@@ -37,8 +36,6 @@
 | `lem-weil-pbc-exact-sequence-ml` | 1 | state |
 | `lem-weil-pbc-ext-one-direct-sum` | 1 | state |
 | `lem-weil-pbc-fibre-dimension-bounded-open-upstairs` | 1 | state |
-| `lem-weil-pbc-fibre-ring-local-ring-natural-iso` | 1 | state |
-| `lem-weil-pbc-fibre-ring-noetherian` | 1 | state |
 | `lem-weil-pbc-fibre-ring-primes-residue-fields` | 1 | state |
 | `lem-weil-pbc-field-char-p-h1-cotangent-vanishing` | 1 | state |
 | `lem-weil-pbc-field-char-p-nilpotent-lifting` | 1 | state |
