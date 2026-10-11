@@ -1,11 +1,11 @@
 # Work queue
 
-28 items; claim with `tools/claim.py next <group> [--stage N]`.
+27 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (28)
+## Stage 2: nodes to state (27)
 
 | node | distance to Mathlib | kind | blockers |
 |---|---|---|---|
@@ -19,7 +19,6 @@
 | `lem-sc-affine-koszul-cech-derived-comparison` | 1 | state | 0 |
 | `lem-sc-boundary-cech-local-lifts` | 1 | state | 0 |
 | `lem-sc-closed-pushforward-boundary-naturality` | 1 | state | 0 |
-| `lem-sc-constant-subsheaf-finite-filtration` | 1 | state | 0 |
 | `lem-sc-flat-precompose-pus` | 1 | state | 0 |
 | `lem-sc-hilb-dominating-power` | 1 | state | 0 |
 | `lem-sc-noetherian-extension-by-zero-reduction` | 1 | state | 0 |
