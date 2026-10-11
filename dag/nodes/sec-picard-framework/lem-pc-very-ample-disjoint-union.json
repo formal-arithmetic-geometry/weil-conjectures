@@ -196,5 +196,27 @@
   "lem-weil-pbc-proj-polynomial-twist-chart",
   "lem-weil-pbc-nonvanishing-section-trivializes"
  ],
- "reviewed": "2026-10-10 L: 6 steps checked (def-sc-ample read as a closed immersion from some basis of H^0; sections split over the pieces by the sheaf axiom; each section is nonzero only on its piece, the quotients computed by uniqueness; the morphism to P^N from the generating sections; surjectivity on every standard chart by the affine-cover criterion; closed immersion). tool_uses from the declared list (sections-to-Proj, Proj chart, nonvanishing-section trivializes). No new nodes. Worker note: def-sc-ample leaves open whether the immersion comes from some or every basis."
+ "reviewed": "2026-10-10 L: 6 steps checked (def-sc-ample read as a closed immersion from some basis of H^0; sections split over the pieces by the sheaf axiom; each section is nonzero only on its piece, the quotients computed by uniqueness; the morphism to P^N from the generating sections; surjectivity on every standard chart by the affine-cover criterion; closed immersion). tool_uses from the declared list (sections-to-Proj, Proj chart, nonvanishing-section trivializes). No new nodes. Worker note: def-sc-ample leaves open whether the immersion comes from some or every basis.",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.Modules.VeryAmpleDisjointUnion",
+  "declaration": "AlgebraicGeometry.isVeryAmple_of_finite_disjoint_union",
+  "file": "lean/Sheaf/AlgebraicGeometry/Modules/VeryAmpleDisjointUnion.lean",
+  "statement": "theorem isVeryAmple_of_finite_disjoint_union {K : Type w} [Field K] {Y : Scheme.{w}} (f : Y ⟶ Spec (.of K)) [IsProper f] (I : Type v) [Finite I] [Nonempty I] (U : I → Y.Opens) (hclosed : ∀ j : I, IsClosed (U j : Set Y)) (hdisjoint : Pairwise (fun j k : I => Disjoint (U j) (U k))) (hcover : iSup U = ⊤) (hproper : ∀ j : I, IsProper ((U j).ι ≫ f)) (M : Y.Modules) (hM : M.IsInvertible) (hvery : ∀ j : I, IsVeryAmple ((U j).ι ≫ f) ((Scheme.Modules.tensorPullback (U j).ι).obj M)) : IsVeryAmple f M",
+  "branch": "sheaf-dag",
+  "by": "J1",
+  "date": "2026-10-11",
+  "existing": false,
+  "declarations": [
+   "AlgebraicGeometry.isVeryAmple_of_finite_disjoint_union"
+  ],
+  "fixed_by": "R-vad1252"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-vad1252",
+  "group": "J1",
+  "result": "fix",
+  "note": "K field, f proper to Spec K, I finite nonempty (r>=1), U opens clopen (hclosed), pairwise disjoint, iSup U = top, hproper per piece, M invertible, hvery: IsVeryAmple ((U j).ι ≫ f) (tensorPullback (U j).ι).obj M, conclusion IsVeryAmple f M; return points (drop def-sc-ample change and private module, use IsVeryAmple) applied by reviewer since head 186fe32b7 had not applied them; reverted the delivery's change of existing node(s) def-sc-ample (--revert-nodes; kept as on sheaf-dag); left out new module(s) lean/Sheaf/AlgebraicGeometry/Modules/VeryAmpleCompleteLinearSystem.lean (--drop-files)"
+ }
 }
