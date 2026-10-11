@@ -1,11 +1,11 @@
 # Work queue
 
-202 items; claim with `tools/claim.py next <group> [--stage N]`.
+196 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (202)
+## Stage 2: nodes to state (196)
 
 | node | distance to Mathlib | kind | blockers |
 |---|---|---|---|
@@ -23,7 +23,6 @@
 | `lem-pc-module-pullback-identity-composition` | 1 | state | 11 |
 | `lem-weil-pbc-coherent-formal-modules-abelian` | 1 | state | 9 |
 | `lem-weil-pbc-strict-henselization-triples` | 1 | state | 7 |
-| `lem-sc-divisor-class-curve` | 2 | state | 7 |
 | `thm-sp-half-plane-convergence` | 2 | state | 6 |
 | `lem-weil-pbc-pair-henselization` | 1 | state | 5 |
 | `lem-weil-pbc-truncation-descends` | 1 | state | 5 |
@@ -74,18 +73,14 @@
 | `lem-weil-pbc-spec-algebraically-closed-etale-sheaf-constant` | 1 | state | 0 |
 | `lem-weil-pbc-spectral-limit-pullback-sections` | 1 | state | 0 |
 | `lem-weil-pbc-stalk-change-of-rings-tensor` | 1 | state | 0 |
-| `lem-weil-pbc-standard-smooth-over-field-dimension-at-points` | 1 | state | 0 |
 | `lem-weil-pbc-stein-universally-closed-factor` | 1 | state | 0 |
 | `lem-weil-pbc-strictly-henselian-sections-stalk` | 1 | state | 0 |
 | `lem-weil-pbc-support-pullback-finite-type` | 1 | state | 0 |
-| `lem-weil-pbc-symmetric-algebra-base-change` | 1 | state | 0 |
 | `lem-weil-pbc-symmetric-degree-exact` | 1 | state | 0 |
 | `lem-weil-pbc-symmetric-projective-presentation-conormal` | 1 | state | 0 |
-| `lem-weil-pbc-tensor-finite-type-limit` | 1 | state | 0 |
 | `lem-weil-pbc-thickening-affine-scheme` | 1 | state | 0 |
 | `lem-weil-pbc-thickening-systems-dictionary` | 1 | state | 0 |
 | `lem-weil-pbc-topological-inverse-image-stalk` | 1 | state | 0 |
-| `lem-weil-pbc-tor-dimension-shift-free` | 1 | state | 0 |
 | `lem-weil-pbc-tor-ideal-kernel-naturality` | 1 | state | 0 |
 | `lem-weil-pbc-tor-long-exact-first-variable` | 1 | state | 0 |
 | `lem-weil-pbc-tor-one-surjective-change-rings` | 1 | state | 0 |
@@ -113,7 +108,6 @@
 | `lem-weil-pbc-unramified-base-change-open` | 1 | state | 0 |
 | `lem-weil-pbc-unramified-etale-local-decomposition` | 1 | state | 0 |
 | `lem-weil-pbc-unramified-fibre-point-isolated` | 1 | state | 0 |
-| `lem-weil-pbc-unramified-over-field-discrete` | 1 | state | 0 |
 | `lem-weil-pbc-unramified-quasi-finite-at-points` | 1 | state | 0 |
 | `lem-weil-pbc-valuation-ring-normal` | 1 | state | 0 |
 | `lem-weil-pbc-vanishing-descends-retract` | 1 | state | 0 |
