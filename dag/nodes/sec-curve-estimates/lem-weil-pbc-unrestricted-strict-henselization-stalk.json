@@ -27,7 +27,9 @@
   "def-weil-pbc-direct-image",
   "def-weil-pbc-geometric-stalks",
   "def-weil-pbc-strict-henselization-limit",
-  "def-weil-pbc-etale-cohomology"
+  "def-weil-pbc-etale-cohomology",
+  "def-weil-pbc-strict-henselization-restriction",
+  "def-weil-pbc-strict-henselization-structural-map"
  ],
  "proof": [
   {
@@ -187,5 +189,24 @@
    "decls": [],
    "missing": []
   }
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.UnrestrictedStrictHenselizationStalk",
+  "declaration": "AlgebraicGeometry.Etale.unrestricted_strictHenselization_stalk",
+  "file": "lean/Sheaf/AlgebraicGeometry/UnrestrictedStrictHenselizationStalk.lean",
+  "statement": "theorem unrestricted_strictHenselization_stalk {X S : Scheme.{w}} (f : X ⟶ S) [QuasiCompact f] [QuasiSeparated f] {Ω : Type w} [Field Ω] [IsAlgClosed Ω] (xbar : Spec (.of Ω) ⟶ S) (F : Sheaf X.smallEtaleTopology AddCommGrpCat.{w + 1}) (q : ℕ) : ∃ r : (Scheme.pointSmallEtale xbar).sheafFiber.obj ((DerivedCategory.Plus.homologyFunctor _ (q : ℤ)).obj ((rightDerivedLowerStarPlus AddCommGrpCat.{w + 1} f).obj ((DerivedCategory.Plus.singleFunctor _ 0).obj F))) ⟶ (Sheaf.Γ (Scheme.strictHenselizationScheme xbar).smallEtaleTopology AddCommGrpCat.{w + 1}).obj ((upperStar AddCommGrpCat.{w + 1} (Scheme.strictHenselizationStructuralMap xbar)).obj ((DerivedCategory.Plus.homologyFunctor _ (q : ℤ)).obj ((rightDerivedLowerStarPlus AddCommGrpCat.{w + 1} f).obj ((DerivedCategory.Plus.singleFunctor _ 0).obj F)))), IsStrictHenselizationStalkRestriction xbar ((DerivedCategory.Plus.homologyFunctor _ (q : ℤ)).obj ((rightDerivedLowerStarPlus AddCommGrpCat.{w + 1} f).obj ((DerivedCategory.Plus.singleFunctor _ 0).obj F))) r ∧ IsIso (r ≫ strictHenselizationCohomologyComparison xbar f F q)",
+  "branch": "sheaf-dag",
+  "by": "V1",
+  "date": "2026-10-11",
+  "existing": false,
+  "note": "The canonical map is the germ restriction r characterized by IsStrictHenselizationStalkRestriction, followed by the already-landed strictHenselizationCohomologyComparison; existence and uniqueness of r are already stated in StrictHenselizationRestriction."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-uss",
+  "group": "V1",
+  "result": "pass",
+  "note": "qcqs f, abelian F on X_et (AddCommGrpCat w+1), geometric point Ω alg. closed same universe, S_(x̄)=strictHenselizationScheme, p=pullback.fst along strictHenselizationStructuralMap, all q:ℕ, stalk via pointSmallEtale.sheafFiber of R^q f_*F, canonical map = r ≫ strictHenselizationCohomologyComparison with r tied by IsStrictHenselizationStalkRestriction (unique by existsUnique_), conclusion IsIso; stmt_deps gain two landed used nodes, check_dag 0 cycles"
  }
 }
