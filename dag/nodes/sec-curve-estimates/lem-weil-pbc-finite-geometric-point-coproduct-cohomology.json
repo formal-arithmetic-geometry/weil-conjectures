@@ -114,5 +114,23 @@
   "group": "E1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-gpc (reviewer sub-agent of L); spot-checked: Source: Stacks etale-cohomology.tex Theorem 03QT (equivalence-sheaves-point), Lemma 03QU (compare-cohomology-point: H^0=M^G, H^q=H^q(G,M)), proof of 0A5B (reduction over the finite disjoint union of curves and points, higher cohomology of a point trivial); item statement unchanged, item fields changed only status/proof/proof_deps/proof_origin/split_report. Step 1 carried by new node lem-weil-pbc-geometric-point-cohomology (Spec k, k algebraically closed hence separably closed, so G trivial: H^q=0 for q>0 and H^0=stalk; true). Step 2 carried by new node lem-weil-pbc-finite-coproduct-cohomology-assembly (H^q of a finite coproduct with clopen summands is the product of the summand cohomologies; true) plus Step 1 per summand. No existing node states either (checked lem-exc-etale-sheaves-gsets-point, lem-exc-abelian-sheaves-gmodules, prop-weil-pbc-geometric-stalks-exact, which a later split may use). Cited definitions read: def-weil-algebraic-closure, lem-weil-pbc-scheme-coproduct-family, def-weil-pbc-abelian-etale-sheaves, def-weil-pbc-geometric-stalks, def-weil-pbc-etale-cohomology. Small cases: I empty (C empty, all groups 0, empty product 0), |I|=1 (single-point node). FIX more, RETURN less: (1) dag/nodes/sec-curve-estimates/lem-weil-pbc-finite-coproduct-cohomology-assembly.json: statement/stmt_deps: cite [lem-weil-pbc-scheme-coproduct-family] for the coproduct and [def-weil-pbc-inverse-image] for F|_{C_i}=iota_i^{-1}F (B3); (2) dag/nodes/sec-curve-estimates/lem-weil-pbc-finite-geometric-point-coproduct-cohomology.json: step 2 text/uses and proof_deps: the identification of the stalk of F|_{C_i} at c_i with F_{c_i} now cited to [lem-weil-pbc-inverse-image-stalk-germ] (C1), recorded as a generic tool use (off-unit sk-thm-p1, also used by the parent). Mathlib: no leaf, searches recorded (no match). Start Sat Oct 10 03:37:15 PM UTC 2026, end Sat Oct 10 03:38:08 PM UTC 2026.; 2 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.FiniteGeometricPointCoproductCohomology",
+  "file": "lean/Sheaf/Paper/FiniteGeometricPointCoproductCohomology.lean",
+  "declaration": "AlgebraicGeometry.finite_geometric_point_coproduct_cohomology",
+  "statement": "theorem finite_geometric_point_coproduct_cohomology (k : Type u) [Field k] [IsAlgClosed k] (I : Type u) [Finite I] (F : Sheaf (∐ fun _ : I => Spec (.of k)).smallEtaleTopology AddCommGrpCat.{u + 1}) (c : ∀ i : I, Spec (.of k) ⟶ ∐ fun _ : I => Spec (.of k)) (hc : ∀ i : I, c i = Sigma.ι (fun _ : I => Spec (.of k)) i) : (∀ q : ℕ, q > 0 → IsZero ((Etale.cohomology AddCommGrpCat.{u + 1} (∐ fun _ : I => Spec (.of k)) (q : ℤ)).obj ((DerivedCategory.singleFunctor _ 0).obj F))) ∧ IsIso ((Functor.homologyRightDerivedFunctorObjSingleFunctorIso (Sheaf.Γ (∐ fun _ : I => Spec (.of k)).smallEtaleTopology AddCommGrpCat.{u + 1}) F 0).hom ≫ (Functor.rightDerivedZeroIsoSelf (Sheaf.Γ (∐ fun _ : I => Spec (.of k)).smallEtaleTopology AddCommGrpCat.{u + 1})).hom.app F ≫ F.ΓRes (op (Scheme.Etale.mk (𝟙 (∐ fun _ : I => Spec (.of k))))) ≫ Pi.lift (fun i : I => (pointSmallEtale (c i)).toPresheafFiber (Scheme.Etale.mk (𝟙 (∐ fun _ : I => Spec (.of k)))) (Over.homMk (c i) (Category.comp_id (c i))) F.obj))",
+  "branch": "sheaf-dag",
+  "by": "J1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "J1",
+  "result": "pass",
+  "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
  }
 }
