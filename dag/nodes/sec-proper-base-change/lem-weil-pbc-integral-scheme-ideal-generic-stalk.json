@@ -155,5 +155,24 @@
   "group": "H1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of H1; spot-checked by L: the four equivalences for a quasi-coherent ideal on an integral scheme: affine opens give domains, I(U) != 0 iff I_eta = O_eta, nonzero sheaf iff some nonzero section, ideals of a field"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.IntegralIdealGenericStalk",
+  "declaration": "AlgebraicGeometry.Scheme.integral_ideal_generic_stalk",
+  "file": "lean/Sheaf/AlgebraicGeometry/IntegralIdealGenericStalk.lean",
+  "statement": "theorem integral_ideal_generic_stalk (X : Scheme.{u}) [IsIntegral X] (J : X.IdealSheafData) : IsField (X.presheaf.stalk (genericPoint X)) ∧ Function.Injective ((RingedSpace.moduleStalkFunctor X.toRingedSpace (genericPoint X)).map J.toModulesι).hom ∧ (J ≠ ⊥ ↔ ∀ U : X.affineOpens, Nonempty U.1 → J.ideal U ≠ ⊥) ∧ (J ≠ ⊥ ↔ Nontrivial ((RingedSpace.moduleStalkFunctor X.toRingedSpace (genericPoint X)).obj J.toModules)) ∧ (J ≠ ⊥ ↔ Function.Surjective ((RingedSpace.moduleStalkFunctor X.toRingedSpace (genericPoint X)).map J.toModulesι).hom)",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-igs1221"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-igs1221",
+  "group": "E1",
+  "result": "fix",
+  "note": "Read packet whole; matched integral Z = [IsIntegral X], eta = genericPoint X, O_{Z,eta} field = IsField (X.presheaf.stalk eta), quasi-coherent ideal sheaf; FIX (H4/H12): abstract (I : X.Modules) [IsQuasicoherent] (iota) [Mono iota] and TopCat abelian stalks restated in the shared forms: (J : X.IdealSheafData) with J.toModules/J.toModulesι (G1 e9aa3e2d8, C1 7f9de320b) and RingedSpace.moduleStalkFunctor; injective generic stalk map of toModulesι; (a) J != bot (ideal_bot checked), (b) J.ideal U != bot for every nonempty affine U, (c) nontrivial generic module stalk, (d) surjective generic stalk map; compiled as L"
  }
 }
