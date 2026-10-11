@@ -1,11 +1,11 @@
 # Work queue
 
-57 items; claim with `tools/claim.py next <group> [--stage N]`.
+55 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (57)
+## Stage 2: nodes to state (55)
 
 | node | distance to Mathlib | kind | blockers |
 |---|---|---|---|
@@ -25,13 +25,11 @@
 | `cor-galois-lisse-representations` | 1 | state | 0 |
 | `lem-pc-affine-morphism-hom-out-of-perfect` | 1 | state | 0 |
 | `lem-pc-global-hom-pullback-adjunction` | 1 | state | 0 |
-| `lem-sc-abelian-sheaf-short-exact-stalkwise` | 1 | state | 0 |
 | `lem-sc-affine-koszul-cech-derived-comparison` | 1 | state | 0 |
 | `lem-sc-cech-comparison-map-iso-affine` | 1 | state | 0 |
 | `lem-sc-closed-pushforward-abelian-stalks` | 1 | state | 0 |
 | `lem-sc-etale-zariski-qcoh-comparison` | 1 | state | 0 |
 | `lem-sc-flat-precompose-pus` | 1 | state | 0 |
-| `lem-sc-ga-cohomology` | 1 | state | 0 |
 | `lem-sc-hilb-dominating-power` | 1 | state | 0 |
 | `lem-sc-irreducible-noetherian-constant-acyclic` | 1 | state | 0 |
 | `lem-sc-leray-closed-pushforward-cohomology` | 1 | state | 0 |
