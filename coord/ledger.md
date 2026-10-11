@@ -4494,3 +4494,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 11:44 L: merged deliver/J1/lem-weil-pbc-flat-fp-qf-stratification (stage 2; reviewer FIX; first push; Sheaf.AlgebraicGeometry.FlatQuasiFiniteStratification AlgebraicGeometry.Scheme.Hom.exists_closed_stratification_of_flat_quasiFinite)
 - 11:44 L: merged deliver/E1/lem-weil-pbc-module-directed-colimit-underlying-sets (stage 2; reviewer FIX; first push; Sheaf.CategoryTheory.ModuleDirectedColimitUnderlyingSets SheafOfModules.underlying_directed_colimit_isColimit)
 - 11:44 L: merged deliver/M1/lem-weil-pbc-limit-residue-field (stage 2; reviewer FIX; first push; Sheaf.AlgebraicGeometry.LimitResidueField AlgebraicGeometry.exists_isColimit_residueField_of_isLimit)
+- 11:45 L: merged deliver/K1/lem-weil-pbc-descend-separated (stage 2; reviewer FIX; first push; Sheaf.AlgebraicGeometry.ExistsIsSeparatedOverPullbackMap AlgebraicGeometry.Scheme.exists_isSeparated_overPullbackMap)
