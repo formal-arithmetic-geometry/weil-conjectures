@@ -119,5 +119,23 @@
   "group": "H1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-tdr2356 (reviewer sub-agent of L); spot-checked: Read packet, Tag 0BES/0BEN source, def-sc-intersection-number (Z nonempty, d=dim Z; hypotheses met for Z and each Z_j), lem-sc-snapper-numerical-polynomial, lem-pc-euler-additive, lem-sc-hilbert-embedded-points; no existing node states 0BEN (grep). FIX more, RETURN less: (1) C1: step 1 was marked elementary with uses [] but rests on Tag 0BEN (leading term of chi via lengths at generic points of top-dim components, a devissage proof), missed by the second reading; added statement-only node lem-sc-numerical-polynomial-leading-term (unsplit, one LeanFinder search, no match), stated with pushforwards to match def-sc-intersection-number and including positivity of m_i; step 1 rewritten to apply it to i_*O_Z, identify lengths over O_{X,xi} and O_{Z,xi}, and compare n_1...n_d coefficients via def-sc-intersection-number; (2) C1: step 2 finiteness/positivity of m_j now cited from the new node; (3) B3: 'dimension d' now cites def-kun-topological-krull-dimension; proof_deps filled. Statement change (exact 0BES formula instead of self-intersection sum) is named in the report (E7) and agrees with the source; restates nothing (class b none).; 2 file(s) fixed by the reviewer; 1 statement node(s) added by the reviewer (FIX more, RETURN less)"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.TopDimensionalReductionIntersection",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.intersectionNumber_topDimensionalReduction",
+  "file": "lean/Sheaf/AlgebraicGeometry/TopDimensionalReductionIntersection.lean",
+  "statement": "theorem intersectionNumber_topDimensionalReduction (k : Type u) [Field k] (X : Scheme.{u}) [X.Over (Spec (.of k))] [IsProper (X ↘ Spec (.of k))] (Z : Scheme.{u}) [Nonempty Z] (i : Z ⟶ X) [IsClosedImmersion i] (d : ℕ) (hd : topologicalKrullDim Z = ((d : ℕ∞) : WithBot ℕ∞)) (r : ℕ) (components : Fin r ≃ {C : Set Z // C ∈ irreducibleComponents Z ∧ topologicalKrullDim C = ((d : ℕ∞) : WithBot ℕ∞)}) (Y : Fin r → Scheme.{u}) [∀ j, IsIntegral (Y j)] (c : ∀ j, Y j ⟶ Z) [∀ j, IsClosedImmersion (c j)] (hc : ∀ j, Set.range (c j) = (components j).val) (hY : ∀ j, topologicalKrullDim (Y j) = ((d : ℕ∞) : WithBot ℕ∞)) (ξ : Fin r → Z) (hξ : ∀ j, IsGenericPoint (ξ j) (Set.range (c j))) (L : Fin d → X.Modules) [∀ a : Fin d, (L a).IsInvertible] : ∃ m : Fin r → ℕ, (∀ j, Module.length (Z.presheaf.stalk (ξ j)) (Z.presheaf.stalk (ξ j)) = (m j : ℕ∞) ∧ 0 < m j) ∧ intersectionNumber k X Z i d hd L = ∑ j : Fin r, (m j : ℚ) * intersectionNumber k X (Y j) (c j ≫ i) d (hY j) L ∧ (∀ (A : X.Modules) [A.IsInvertible], IsAmple (X ↘ Spec (.of k)) A → (∀ j, 0 < selfIntersectionNumber k X (Y j) (c j ≫ i) d (hY j) A) → 0 < selfIntersectionNumber k X Z i d hd A)",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-tdr1300",
+  "group": "H1",
+  "result": "pass",
+  "note": "k field, X proper k-scheme (Over+IsProper), Z nonempty closed immersion, d via topologicalKrullDim; components Fin r ≃ top-dim irreducibleComponents (no omission/duplicate); reduced induced = IsIntegral Y j + IsClosedImmersion + range (matches landed NumericalPolynomialLeadingTerm form); hY derivable, needed by intersectionNumber; ξ IsGenericPoint; m_j tied by Module.length of O_{Z,ξ} with positivity; formula via landed intersectionNumber; ample clause via selfIntersectionNumber + IsAmple (implies invertible); #check: IsIntegral = AlgebraicGeometry.IsIntegral, all schemes in universe u, no let, no hollow binder"
  }
 }
