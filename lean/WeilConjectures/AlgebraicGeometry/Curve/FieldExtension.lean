@@ -8,6 +8,8 @@ module
 public import Mathlib.FieldTheory.IsAlgClosed.Basic
 public import Mathlib.FieldTheory.IsSepClosed
 public import WeilConjectures.AlgebraicGeometry.Curve
+import WeilConjectures.AlgebraicGeometry.Curve.Reductions
+import Sheaf.AlgebraicGeometry.Curve.AlgebraicallyClosedCohomologyInvariant
 public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.TorsionSheaf
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
 
@@ -91,8 +93,10 @@ theorem bijective_cohomologyMap_of_isAlgClosed {k k' : Type u} [Field k] [IsAlgC
     (h : IsPullback ι' f' f ι) (F : Sheaf C.smallEtaleTopology (ModuleCat.{u + 1} Λ))
     [Scheme.IsTorsionSheaf F] (q : ℕ) :
     Function.Bijective (Etale.cohomologyMap ι'
-      ((sheafCompose _ (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj F) q) :=
-  sorry
+      ((sheafCompose _ (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj F) q) := by
+  refine bijective_cohomologyMap_of_forall_isReduced Λ ?_ f k' h F q
+  intro X X' g _ _ _ K _ _ ι g' ι' h r _ G _ q
+  exact algebraicallyClosedCohomologyInvariant g K h G q
 
 /-- **Passage between separably closed fields.** Let `k ⊆ k'` be separably closed fields, `C`
 a proper curve over `k` and `F` a torsion étale sheaf of `Λ`-modules on `C`. If the cohomology

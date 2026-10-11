@@ -1,326 +1,173 @@
 {
-  "id": "prop-weil-pbc-algebraically-closed-extension",
-  "blueprint": {
-    "is": "prop-weil-pbc-algebraically-closed-extension",
-    "from": null,
-    "same_as": null
-  },
-  "kind": "statement",
-  "title": "Algebraically closed extension for proper curves",
-  "statement": "Let $k\\subseteq k'$ be an extension of algebraically closed fields [def-weil-algebraic-closure], and let $\\iota:\\operatorname{Spec}k'\\to\\operatorname{Spec}k$ be the induced morphism of spectra [def-weil-affine-spectrum]. Let $C$ be a scheme over $k$ [def-weil-scheme-over-base] whose structure morphism $f:C\\to\\operatorname{Spec}k$ is proper [def-weil-proper-morphism] and whose underlying topological space has Krull dimension $\\dim C\\le1$ [def-kun-topological-krull-dimension] (the empty scheme is allowed). Let $C_{k'}=C\\times_{\\operatorname{Spec}k}\\operatorname{Spec}k'$ be the base change of $C$ along $\\iota$ [def-pc-base-change], with projection $\\pi:C_{k'}\\to C$. Let $F$ be a torsion abelian sheaf on the small etale site $C_{\\Et}$ [def-weil-pbc-torsion-etale-sheaf], and write $F|_{C_{k'}}=\\pi^{-1}F$ for its inverse image [def-weil-pbc-inverse-image]. Then for every $q\\ge0$ the pullback map along $\\pi$ [def-weil-pbc-cohomology-pullback]\n\n$$\n \\pi^*:H^q(C_{\\Et},F)\\longrightarrow H^q((C_{k'})_{\\Et},\\pi^{-1}F)\n$$\n\nbetween the etale cohomology groups [def-weil-pbc-etale-cohomology] is an isomorphism. (This is item (7) of Stacks Theorem 03SC.)",
-  "source": {
-    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-p1/prop-weil-pbc-algebraically-closed-extension.md",
-    "place": "node prop-weil-pbc-algebraically-closed-extension, order 1178"
-  },
-  "stmt_deps": [
-    "def-weil-algebraic-closure",
-    "def-weil-affine-spectrum",
-    "def-weil-scheme-over-base",
-    "def-weil-proper-morphism",
-    "def-kun-topological-krull-dimension",
-    "def-pc-base-change",
-    "def-weil-pbc-torsion-etale-sheaf",
-    "def-weil-pbc-inverse-image",
-    "def-weil-pbc-cohomology-pullback",
-    "def-weil-pbc-etale-cohomology"
-  ],
-  "proof": [
-    {
-      "text": "Translation into the curve assertions. A proper morphism is separated and of finite type, so $C$ is a separated $k$-scheme of finite type with $\\dim C\\le1$. The sheaf $F$ is torsion in the sense of [def-weil-pbc-torsion-etale-sheaf] (the map $\\varinjlim_nF[n]\\to F$ is an isomorphism); by [lem-weil-pbc-torsion-sheaf-characterizations] ((1)$\\Leftrightarrow$(2)) this is equivalent to every local section being locally killed by a positive integer, which is the torsion condition of [def-weil-pbc-curve-setting]. Hence $(C,F)$ is a curve coefficient pair over the algebraically closed field $k$. The map $\\rho^q_{k'/k}(C,F)$ of [def-weil-pbc-extension-pullback] is the pullback map in degree $q$ along the projection $\\pi_{k'}=\\pi:C_{k'}=C\\times_kk'\\to C$ with $F_{k'}=\\pi^{-1}F$, i.e. the map $\\pi^*$ of [def-weil-pbc-cohomology-pullback]. So the claim is exactly assertion $\\mathcal C_7(C,F)$ of [def-weil-pbc-C7] for the extension $k'/k$, i.e. the seventh conjunct of $\\mathcal C(C,F)$ in [def-weil-pbc-eight-curve-assertions]. Throughout, as in Stacks, for a curve coefficient pair $(X,G)$ over $k$ 'the assertions $\\mathcal C(X,G)$ hold' means that those of the eight implications whose hypotheses (affine, proper, constructible, prime to $p$, $p$-primary) are met are true; and $\\mathcal C(X,G)$ depends only on the isomorphism class of $G$.",
-      "uses": [
-        "lem-weil-pbc-torsion-sheaf-characterizations",
-        "def-weil-pbc-curve-setting",
-        "def-weil-pbc-extension-pullback",
-        "def-weil-pbc-cohomology-pullback",
-        "def-weil-pbc-C7",
-        "def-weil-pbc-eight-curve-assertions"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/etale-cohomology.tex",
-        "place": "Section 03SB, Situation 0A52 and the list of statements (1)-(8) after it; Theorem 03SC, item (7)"
-      }
-    },
-    {
-      "text": "Zero-dimensional schemes (Stacks, proof of Lemma 0A5B, first paragraph: higher etale cohomology of any sheaf on a point vanishes). Let $Z$ be a separated finite-type $k$-scheme of dimension $\\le0$ and $G$ a torsion sheaf on $Z_{\\Et}$. By [lem-weil-pbc-zero-dimensional-cohomology], $H^q(Z,G)=0$ for $q>0$ and $H^0(Z,G)=\\prod_{z\\in|Z|}G_{\\bar z}$, a finite product; this gives (C1), (C2), (C3) (all groups in degrees $\\ge2$ vanish), and (C4), (C5): if $G$ is constructible its restriction to each stratum of a finite partition is locally constant with finite stalks, so each $G_{\\bar z}$ is finite. Every open $U\\subseteq Z$ is again of dimension $\\le0$, so $H^2(U,G|_U)=0$ and the restriction in (C8) is surjective. (C6) and (C7) are [lem-weil-pbc-zero-dimensional-field-extension]. Hence $\\mathcal C(Z,G)$ holds [def-weil-pbc-eight-curve-assertions].",
-      "uses": [
-        "lem-weil-pbc-zero-dimensional-cohomology",
-        "lem-weil-pbc-zero-dimensional-field-extension",
-        "def-weil-pbc-eight-curve-assertions"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/etale-cohomology.tex",
-        "place": "Section 03SB, proof of Lemma 0A5B (lemma-constant-smooth-statements), first paragraph"
-      }
-    },
-    {
-      "text": "Smooth case (Stacks Lemma 03SG, with Lemma 0A5B). Claim: if $X$ is a separated finite-type $k$-scheme with $\\dim X\\le1$ which is smooth over $k$ [def-sbc-smooth-morphisms], $j:U\\hookrightarrow X$ is an open immersion and $\\ell$ is a prime, then $\\mathcal C(X,j_!\\underline{\\mathbf Z/\\ell})$ holds. Proof. $X$ is Noetherian, so it has finitely many connected components $X_1,\\dots,X_m$, each open and closed; each $X_i$ is smooth and connected, hence normal with integral local rings, hence irreducible. If $\\dim X_i=0$, then $X_i$ is etale over $k$ and connected, so $X_i\\cong\\operatorname{Spec}k$; if $\\dim X_i=1$, $X_i$ is a smooth separated connected curve over $k$ in the sense of [def-sc-curves]. Let $\\iota_i:X_i\\hookrightarrow X$ be the inclusions (open and closed immersions, hence finite) and $j_i:U_i=U\\cap X_i\\hookrightarrow X_i$. Comparing geometric stalks (the stalk formula of [def-weil-pbc-extension-by-zero]), $j_!\\underline{\\mathbf Z/\\ell}\\cong\\bigoplus_i\\iota_{i,*}j_{i,!}\\underline{\\mathbf Z/\\ell}$. A finite direct sum is an iterated extension by the split sequences $0\\to A\\to A\\oplus B\\to B\\to0$, so by [lemma-weil-pbc-eight-curve-devissage] it suffices to prove $\\mathcal C(X,\\iota_{i,*}j_{i,!}\\underline{\\mathbf Z/\\ell})$ for each $i$, and by [lem-weil-pbc-curve-assertions-finite-pushforward] (for the finite $\\iota_i$) it suffices to prove $\\mathcal C(X_i,j_{i,!}\\underline{\\mathbf Z/\\ell})$. If $X_i$ is a point this is step 2. If $X_i$ is a curve and $U_i=\\emptyset$ the sheaf is $0$, all its cohomology groups and pullback maps are zero, and every assertion holds trivially. Otherwise $U_i$ is a nonempty open of the irreducible $X_i$, hence dense. By [thm-sc-main] the constant sheaf $\\mathbf F_\\ell=\\underline{\\mathbf Z/\\ell}$ [def-sc-constant-sheaves] satisfies $\\mathcal C(X_i,\\mathbf F_\\ell)$: part (a) if $\\ell\\neq\\operatorname{char}k$ ((C3) is then vacuous: $\\mathbf F_\\ell$ is nonzero and not $p$-primary), part (b) if $\\ell=\\operatorname{char}k=p$ ((C4) and (C6) are then vacuous: $\\mathbf F_p$ is not prime to $p$), the conditional assertions (C2), (C5), (C7) being asserted there exactly under their hypotheses. The constant sheaf is constructible (one stratum, [def-weil-pbc-constructible-torsion]), so [lem-weil-pbc-curve-assertions-dense-open] for the dense open $j_i$ gives $\\mathcal C(X_i,j_{i,!}j_i^{-1}\\mathbf F_\\ell)=\\mathcal C(X_i,j_{i,!}\\mathbf F_\\ell)$.",
-      "uses": [
-        "def-sbc-smooth-morphisms",
-        "def-sc-curves",
-        "def-weil-pbc-extension-by-zero",
-        "lemma-weil-pbc-eight-curve-devissage",
-        "lem-weil-pbc-curve-assertions-finite-pushforward",
-        "thm-sc-main",
-        "def-sc-constant-sheaves",
-        "def-weil-pbc-constructible-torsion",
-        "lem-weil-pbc-curve-assertions-dense-open"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/etale-cohomology.tex",
-        "place": "Section 03SB, Lemma 03SG (lemma-even-easier) and its proof, and Lemma 0A5B (lemma-constant-smooth-statements)"
-      }
-    },
-    {
-      "text": "Reduced case for $j_!\\mathbf F_\\ell$ (Stacks Lemma 0A3Q). Claim: if $X$ is a reduced separated finite-type $k$-scheme with $\\dim X\\le1$, $j:U\\hookrightarrow X$ an open immersion and $\\ell$ a prime, then $\\mathcal C(X,j_!\\underline{\\mathbf Z/\\ell})$ holds. Proof. By [lem-weil-pbc-reduced-curve-normalization] there are a smooth separated finite-type $k$-scheme $X^\\nu$ of dimension $\\le1$, a finite morphism $\\nu:X^\\nu\\to X$ and a dense open $j':X'\\hookrightarrow X$ with $\\nu^{-1}(X')\\to X'$ an isomorphism. Let $j^\\nu:U^\\nu=\\nu^{-1}(U)\\hookrightarrow X^\\nu$. By step 3, $\\mathcal C(X^\\nu,j^\\nu_!\\underline{\\mathbf Z/\\ell})$ holds, hence by [lem-weil-pbc-curve-assertions-finite-pushforward] so does $\\mathcal C(X,\\nu_*j^\\nu_!\\underline{\\mathbf Z/\\ell})$. Over $X'$ the two sheaves agree: for $W\\to X'$ etale, $(\\nu_*E)(W)=E(W\\times_X X^\\nu)$ [def-weil-pbc-direct-image] and $W\\times_XX^\\nu=W\\times_{X'}\\nu^{-1}(X')\\cong W$, while extension by zero commutes with restriction to opens (stalk formula of [def-weil-pbc-extension-by-zero]); hence $j'^{-1}\\nu_*j^\\nu_!\\underline{\\mathbf Z/\\ell}\\cong j'^{-1}j_!\\underline{\\mathbf Z/\\ell}$ (both are the extension by zero of $\\underline{\\mathbf Z/\\ell}$ from $U\\cap X'$). Both sheaves are constructible [def-weil-pbc-constructible-torsion]: $j_!\\underline{\\mathbf Z/\\ell}$ and $j^\\nu_!\\underline{\\mathbf Z/\\ell}$ are constant on the strata $U$ and its closed complement (constructible in a Noetherian scheme), and $\\nu_*j^\\nu_!\\underline{\\mathbf Z/\\ell}$ is then constructible by [lem-weil-pbc-finite-pushforward-constructible-noetherian]. Applying [lem-weil-pbc-curve-assertions-dense-open] twice for the dense open $j'$: $\\mathcal C(X,\\nu_*j^\\nu_!\\underline{\\mathbf Z/\\ell})$ gives $\\mathcal C(X,j'_!j'^{-1}\\nu_*j^\\nu_!\\underline{\\mathbf Z/\\ell})=\\mathcal C(X,j'_!j'^{-1}j_!\\underline{\\mathbf Z/\\ell})$, which gives $\\mathcal C(X,j_!\\underline{\\mathbf Z/\\ell})$.",
-      "uses": [
-        "lem-weil-pbc-reduced-curve-normalization",
-        "lem-weil-pbc-curve-assertions-finite-pushforward",
-        "def-weil-pbc-direct-image",
-        "def-weil-pbc-extension-by-zero",
-        "def-weil-pbc-constructible-torsion",
-        "lem-weil-pbc-finite-pushforward-constructible-noetherian",
-        "lem-weil-pbc-curve-assertions-dense-open"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/etale-cohomology.tex",
-        "place": "Section 03SB, Lemma 0A3Q (lemma-somewhat-easier) and its proof"
-      }
-    },
-    {
-      "text": "Locally constant coefficients on an irreducible open, trace reduction (Stacks Lemma 03SD, first paragraph). Let $X$ be a reduced separated finite-type $k$-scheme with $\\dim X\\le1$, $j:U\\hookrightarrow X$ an open immersion with $U$ irreducible, $\\ell$ a prime and $G$ a finite locally constant sheaf of $\\mathbf F_\\ell$-vector spaces on $U$; we prove $\\mathcal C(X,j_!G)$ in this and the next three steps. By [lemma-weil-pbc-curve-locally-constant-reduction] there is a connected finite etale $v:V\\to U$ of degree prime to $\\ell$ such that $v^{-1}G$ has a finite filtration with quotients $\\underline{\\mathbf Z/\\ell}_V$, and the unit and trace $G\\xrightarrow{\\eta}v_*v^{-1}G\\xrightarrow{\\operatorname{tr}}G$ compose to $\\deg(v)\\cdot\\mathrm{id}_G$, an automorphism since $\\ell\\nmid\\deg v$ and $\\ell G=0$. Applying the additive functor $j_!$, the maps $a=j_!\\eta:j_!G\\to H:=j_!v_*v^{-1}G$ and $b=j_!\\operatorname{tr}$ satisfy $b\\circ a=\\deg(v)\\,\\mathrm{id}$. Both sheaves are killed by $\\ell$, so each is torsion prime to $p=\\operatorname{char}k$ if $\\ell\\neq p$ and $p$-primary if $\\ell=p$ [def-weil-pbc-primary-torsion]; and $H$ is constructible: $v^{-1}G$ is finite locally constant on the Noetherian $V$ (one stratum), $v_*v^{-1}G$ is constructible on $U$ by [lem-weil-pbc-finite-pushforward-constructible-noetherian] ($v$ is finite), and its extension by zero is constructible on $X$ (the strata of $U$ together with the closed complement $X\\setminus U$, on which it is $0$) [def-weil-pbc-constructible-torsion]. By [lem-weil-pbc-curve-assertions-retract] it suffices to prove $\\mathcal C(X,j_!v_*v^{-1}G)$.",
-      "uses": [
-        "lemma-weil-pbc-curve-locally-constant-reduction",
-        "def-weil-pbc-primary-torsion",
-        "lem-weil-pbc-finite-pushforward-constructible-noetherian",
-        "def-weil-pbc-constructible-torsion",
-        "lem-weil-pbc-curve-assertions-retract"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/etale-cohomology.tex",
-        "place": "Section 03SB, proof of Lemma 03SD (lemma-vanishing-easier), first paragraph; Lemma 0A3R (lemma-pullback-filtered); Section 03SH (section-trace-method)"
-      }
-    },
-    {
-      "text": "Compactifying $V$ over $X$ (Stacks Lemma 03SD, Zariski's main theorem). The composite $j\\circ v:V\\to X$ is quasi-finite (finite etale followed by an open immersion), separated (finite morphisms and immersions are separated) and of finite type, and $X$ is quasi-compact and quasi-separated (Noetherian). By [thm-pqf-zmt-factorization] it factors as $V\\xrightarrow{j_0}T\\xrightarrow{p}X$ with $j_0$ a quasi-compact open immersion and $p$ finite. Let $Y\\subseteq T$ be the closure of $j_0(V)$ with its reduced induced structure; $Y$ is closed in $T$, so $\\bar f=p|_Y:Y\\to X$ is finite, and $Y$ is a separated finite-type $k$-scheme of dimension $\\le\\dim X\\le1$ (finite morphisms are integral, so they do not raise dimension). $V$ is reduced (etale over the reduced $U$), so $j_0$ factors through an open immersion $j':V\\hookrightarrow Y$ with dense image, and $\\bar f\\circ j'=j\\circ v$. The square with sides $j',v,\\bar f,j$ is cartesian: $j'(V)\\subseteq\\bar f^{-1}(U)$ is open; the $U$-morphism $V\\to\\bar f^{-1}(U)$ goes from a finite $U$-scheme to a separated $U$-scheme, so it is finite, in particular closed; its image is open, closed and dense in $\\bar f^{-1}(U)$, hence all of it, and as both are reduced open subschemes of $Y$ with the same underlying set, $V=U\\times_XY$.",
-      "uses": [
-        "thm-pqf-zmt-factorization"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/etale-cohomology.tex",
-        "place": "Section 03SB, proof of Lemma 03SD, second paragraph (More on Morphisms, Lemma 05K0, lemma-quasi-finite-separated-pass-through-finite, in literature/stacks-project/more-morphisms.tex)"
-      }
-    },
-    {
-      "text": "Exchange of $j_!$ and finite direct image (Stacks Lemma 0GJ1, as used in 03SD). For the cartesian square of step 6 (open immersions $j'$, $j$; $\\bar f$ finite; $v$ its base change), [lemma-weil-pbc-finite-pushforward-extension-zero] says that the comparison morphism $\\beta:j_!v_*E\\to\\bar f_*j'_!E$ of [def-weil-pbc-finite-open-comparison] is an isomorphism for every abelian sheaf $E$ on $V_{\\Et}$. With $E=v^{-1}G$ this gives $j_!v_*v^{-1}G\\cong\\bar f_*j'_!v^{-1}G$. By [lem-weil-pbc-curve-assertions-finite-pushforward] for the finite $\\bar f:Y\\to X$, it suffices to prove $\\mathcal C(Y,j'_!v^{-1}G)$.",
-      "uses": [
-        "lemma-weil-pbc-finite-pushforward-extension-zero",
-        "def-weil-pbc-finite-open-comparison",
-        "lem-weil-pbc-curve-assertions-finite-pushforward"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/etale-cohomology.tex",
-        "place": "Section 03SB, proof of Lemma 03SD, third paragraph; Lemma 0GJ1 (lemma-compatible-shriek-push-finite)"
-      }
-    },
-    {
-      "text": "Filtration and reduction to the constant sheaf (Stacks Lemma 03SD, end). Let $0=E_0\\subset E_1\\subset\\cdots\\subset E_m=v^{-1}G$ be the filtration of step 5, with $E_i/E_{i-1}\\cong\\underline{\\mathbf Z/\\ell}_V$. Since $j'_!$ is exact [def-weil-pbc-extension-by-zero], $0=j'_!E_0\\subset\\cdots\\subset j'_!E_m=j'_!v^{-1}G$ is a filtration with quotients $j'_!\\underline{\\mathbf Z/\\ell}$, i.e. there are short exact sequences $0\\to j'_!E_{i-1}\\to j'_!E_i\\to j'_!\\underline{\\mathbf Z/\\ell}\\to0$. Step 4, applied to the reduced curve $Y$ and the open immersion $j'$, gives $\\mathcal C(Y,j'_!\\underline{\\mathbf Z/\\ell})$, and induction on $i$ with [lemma-weil-pbc-eight-curve-devissage] gives $\\mathcal C(Y,j'_!E_i)$ for all $i$, in particular $\\mathcal C(Y,j'_!v^{-1}G)$. By steps 7 and 5, $\\mathcal C(X,j_!G)$ holds.",
-      "uses": [
-        "def-weil-pbc-extension-by-zero",
-        "lemma-weil-pbc-eight-curve-devissage"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/etale-cohomology.tex",
-        "place": "Section 03SB, proof of Lemma 03SD, last paragraph; Lemma 0A5C (lemma-ses-statements)"
-      }
-    },
-    {
-      "text": "Constructible $\\mathbf F_\\ell$-coefficients on a reduced curve (Stacks Theorem 03SC, proof, third and fourth paragraphs). Let $X$ be a reduced separated finite-type $k$-scheme with $\\dim X\\le1$, $\\ell$ a prime and $G$ a constructible sheaf of $\\mathbf F_\\ell$-vector spaces on $X_{\\Et}$. By [lem-weil-pbc-curve-dense-open-localization] there is a dense open $U=\\coprod_aU_a\\subseteq X$, a finite disjoint union of irreducible open subschemes $j_a:U_a\\hookrightarrow X$, on which $G$ is finite locally constant, such that $\\mathcal C(X,G)$ holds if and only if $\\mathcal C(X,j_{a,!}(G|_{U_a}))$ holds for every $a$. Each $G|_{U_a}$ is a finite locally constant sheaf of $\\mathbf F_\\ell$-vector spaces on the irreducible $U_a$, so steps 5 to 8 give $\\mathcal C(X,j_{a,!}(G|_{U_a}))$. Hence $\\mathcal C(X,G)$ holds; in particular, when $X$ is proper over $k$, its seventh conjunct $\\mathcal C_7(X,G)$ [def-weil-pbc-eight-curve-assertions] holds.",
-      "uses": [
-        "lem-weil-pbc-curve-dense-open-localization",
-        "def-weil-pbc-eight-curve-assertions"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/etale-cohomology.tex",
-        "place": "Section 03SB, proof of Theorem 03SC (theorem-vanishing-affine-curves), third and fourth paragraphs"
-      }
-    },
-    {
-      "text": "Reduction to reduced curves and constructible $\\mathbf F_r$-coefficients, and conclusion (Stacks Theorem 03SC, proof, first two paragraphs: replace $X$ by $X_{red}$ by topological invariance 03SI, write $F$ as a filtered colimit of constructible sheaves 03SA, cohomology commutes with filtered colimits 03Q5 and pullback commutes with colimits, split off primary parts and devisse along $0\\to F[\\ell]\\to F\\to F/F[\\ell]\\to0$ by 0A5C). These reductions for assertion (7) are [lem-weil-pbc-curve-constructible-reduction]: for the proper curve $C$ and the torsion sheaf $F$, $\\mathcal C_7(C,F)$ follows from the instances $\\mathcal C_7(X,G)$ for reduced proper curves $X$ over $k$, primes $r$ and constructible $\\mathbf F_r$-sheaves $G$. Those instances hold by step 9. Hence $\\mathcal C_7(C,F)$ holds for every algebraically closed extension $k'/k$, which by step 1 is the statement: $\\pi^*:H^q(C_{\\Et},F)\\to H^q((C_{k'})_{\\Et},\\pi^{-1}F)$ is an isomorphism for every $q\\ge0$. (Bridge, added by the lead 2026-10-09: step 9 delivers constructibility in the curve sense of [def-weil-pbc-constructible-torsion]; [lem-weil-pbc-curve-constructible-reduction] asks for constructible sheaves of $\\mathbf F_r$-modules in the sense of [def-weil-pbc-etale-constructible-sheaf]; the two notions agree for sheaves killed by $r$ by [lem-weil-pbc-constructible-torsion-modules-agree], applied on the reduced proper curves $X$ of step 9 with $n=r$.)",
-      "uses": [
-        "lem-weil-pbc-curve-constructible-reduction",
-        "lem-weil-pbc-constructible-torsion-modules-agree"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/etale-cohomology.tex",
-        "place": "Section 03SB, proof of Theorem 03SC, first and second paragraphs"
-      }
-    }
-  ],
-  "proof_deps": [
-    "lem-weil-pbc-torsion-sheaf-characterizations",
-    "def-weil-pbc-curve-setting",
-    "def-weil-pbc-extension-pullback",
-    "def-weil-pbc-cohomology-pullback",
-    "def-weil-pbc-C7",
-    "def-weil-pbc-eight-curve-assertions",
-    "lem-weil-pbc-zero-dimensional-cohomology",
-    "lem-weil-pbc-zero-dimensional-field-extension",
-    "def-sbc-smooth-morphisms",
-    "def-sc-curves",
-    "def-weil-pbc-extension-by-zero",
-    "lemma-weil-pbc-eight-curve-devissage",
-    "lem-weil-pbc-curve-assertions-finite-pushforward",
-    "thm-sc-main",
-    "def-sc-constant-sheaves",
-    "def-weil-pbc-constructible-torsion",
-    "lem-weil-pbc-curve-assertions-dense-open",
-    "lem-weil-pbc-reduced-curve-normalization",
-    "def-weil-pbc-direct-image",
-    "lem-weil-pbc-finite-pushforward-constructible-noetherian",
-    "lemma-weil-pbc-curve-locally-constant-reduction",
-    "def-weil-pbc-primary-torsion",
-    "lem-weil-pbc-curve-assertions-retract",
-    "thm-pqf-zmt-factorization",
-    "lemma-weil-pbc-finite-pushforward-extension-zero",
-    "def-weil-pbc-finite-open-comparison",
-    "lem-weil-pbc-curve-dense-open-localization",
+ "id": "prop-weil-pbc-algebraically-closed-extension",
+ "blueprint": {
+  "is": "prop-weil-pbc-algebraically-closed-extension",
+  "from": null,
+  "same_as": null
+ },
+ "kind": "statement",
+ "title": "Algebraically closed extension for proper curves",
+ "statement": "Let $k\\subseteq k'$ be an extension of algebraically closed fields [def-weil-algebraic-closure], and let $\\iota:\\operatorname{Spec}k'\\to\\operatorname{Spec}k$ be the induced morphism of spectra [def-weil-affine-spectrum]. Let $C$ be a scheme over $k$ [def-weil-scheme-over-base] whose structure morphism $f:C\\to\\operatorname{Spec}k$ is proper [def-weil-proper-morphism] and whose underlying topological space has Krull dimension $\\dim C\\le1$ [def-kun-topological-krull-dimension] (the empty scheme is allowed). Let $C_{k'}=C\\times_{\\operatorname{Spec}k}\\operatorname{Spec}k'$ be the base change of $C$ along $\\iota$ [def-pc-base-change], with projection $\\pi:C_{k'}\\to C$. Let $F$ be a torsion abelian sheaf on the small etale site $C_{\\Et}$ [def-weil-pbc-torsion-etale-sheaf], and write $F|_{C_{k'}}=\\pi^{-1}F$ for its inverse image [def-weil-pbc-inverse-image]. Then for every $q\\ge0$ the pullback map along $\\pi$ [def-weil-pbc-cohomology-pullback]\n\n$$\n \\pi^*:H^q(C_{\\Et},F)\\longrightarrow H^q((C_{k'})_{\\Et},\\pi^{-1}F)\n$$\n\nbetween the etale cohomology groups [def-weil-pbc-etale-cohomology] is an isomorphism. (This is item (7) of Stacks Theorem 03SC.)",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-p1/prop-weil-pbc-algebraically-closed-extension.md",
+  "place": "node prop-weil-pbc-algebraically-closed-extension, order 1178"
+ },
+ "stmt_deps": [
+  "def-weil-algebraic-closure",
+  "def-weil-affine-spectrum",
+  "def-weil-scheme-over-base",
+  "def-weil-proper-morphism",
+  "def-kun-topological-krull-dimension",
+  "def-pc-base-change",
+  "def-weil-pbc-torsion-etale-sheaf",
+  "def-weil-pbc-inverse-image",
+  "def-weil-pbc-cohomology-pullback",
+  "def-weil-pbc-etale-cohomology"
+ ],
+ "proof": [
+  {
+   "text": "Apply AlgebraicGeometry.IsCurve.bijective_cohomologyMap_of_forall_isReduced to reduce to reduced proper curves with constructible ULift(F_r)-module coefficients, and supply its hypothesis by algebraicallyClosedCohomologyInvariant for each prime r.",
+   "uses": [
     "lem-weil-pbc-curve-constructible-reduction",
-    "lem-weil-pbc-constructible-torsion-modules-agree"
-  ],
-  "proof_origin": {
-    "by": "document",
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Etale Cohomology, Section 03SB (section-vanishing-torsion): Theorem 03SC item (7) with the proofs of Theorem 03SC and Lemmas 03SD, 0A3Q, 03SG, 0A5B (the eight statements propagated together, as in Stacks)"
-  },
-  "mathlib_searches": [
-    {
-      "tool": "leansearch",
-      "query": "etale cohomology of a proper curve is invariant under extension of algebraically closed base field",
-      "results": "Algebra.Etale.baseChange (Mathlib.RingTheory.Etale.Basic), IsEtale.instIsStableUnderBaseChangeScheme (Mathlib.AlgebraicGeometry.Morphisms.Etale), RingHom.Etale.isStableUnderBaseChange, IsProper.isStableUnderBaseChange, sourceLocalClosure...IsStableUnderBaseChange, RingHom.Etale.respectsIso: stability of etale/proper morphisms under base change only",
-      "date": "2026-10-09",
-      "verdict": "no match"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "étale cohomology of a torsion sheaf on a curve over an algebraically closed field does not change under algebraically closed field extension",
-      "results": "Algebra.FormallyEtale.subsingleton_h1Cotangent, Algebra.etaleLocus_eq_compl_support, Algebra.formallyEtale_iff, FormallyEtale.iff_exists_algEquiv_prod, FormallyEtale.of_isSeparable_aux, FormallyEtale.of_restrictScalars: etale algebras only",
-      "date": "2026-10-09",
-      "verdict": "no match"
-    },
-    {
-      "tool": "loogle",
-      "query": "\"smallEtale\"",
-      "results": "Scheme.smallEtaleTopology, smallEtalePretopology, ofArrows_mem_smallEtaleTopology_iff (Mathlib.AlgebraicGeometry.Sites.Etale); AffineEtale dense-subsite and sheafification instances (Mathlib.AlgebraicGeometry.Sites.AffineEtale): the small etale site exists, no etale cohomology theory of schemes",
-      "date": "2026-10-09",
-      "verdict": "no match"
-    },
-    {
-      "tool": "loogle",
-      "query": "CategoryTheory.Sheaf.H",
-      "results": "Sheaf.H, Sheaf.H.map, subsingleton_H_of_isZero, functorH, H.equiv0 (Mathlib.CategoryTheory.Sites.SheafCohomology.Basic): generic sheaf cohomology of a site as Ext from the constant sheaf; no pullback along morphisms of schemes, nothing on curves",
-      "date": "2026-10-09",
-      "verdict": "no match (generic ingredient)"
-    },
-    {
-      "tool": "grep",
-      "query": "grep -rln 'smallEtale\\|Etale.*cohomology\\|étale cohomology' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/; grep -rln 'IsAlgClosed.*Scheme\\|baseChange.*IsAlgClosed' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/",
-      "results": "Sites/BigZariski.lean, Sites/EtalePoint.lean, Sites/ElladicCohomology.lean (pro-etale ell-adic sheaf and EllAdicCohomology as a definition only, no theorems on curves), Sites/Etale.lean, Sites/AffineEtale.lean; second pattern: none",
-      "date": "2026-10-09",
-      "verdict": "no match: Mathlib has no etale cohomology of curves (confirmed)"
-    }
-  ],
-  "mathlib_match": null,
-  "status": "split",
-  "merged_into": null,
-  "import_flags": [],
-  "blueprint_kind": "theorem",
-  "blueprint_order": 1178,
-  "blueprint_uses": [
-    "def-weil-pbc-eight-curve-assertions",
-    "def-weil-pbc-etale-sheaves",
-    "def-weil-pbc-scheme-conventions",
-    "lem-weil-pbc-curve-constructible-reduction",
-    "lem-weil-pbc-curve-dense-open-localization",
-    "lem-weil-pbc-zero-dimensional-field-extension",
-    "lemma-weil-pbc-curve-filtered-cohomology",
-    "lemma-weil-pbc-curve-locally-constant-reduction",
-    "lemma-weil-pbc-eight-curve-devissage",
-    "lemma-weil-pbc-finite-l-group-filtration",
-    "lemma-weil-pbc-finite-pushforward-extension-zero",
-    "lemma-weil-pbc-normalization-exact-sequence",
-    "thm-sc-main"
-  ],
-  "blueprint_tags": [
-    "latex:proposition"
-  ],
-  "uses_not_cited": [
-    "def-weil-pbc-etale-sheaves",
-    "def-weil-pbc-scheme-conventions"
-  ],
-  "proof_split_by": "paragraphs",
-  "lean_audit": {
-    "master": {
-      "state": "none",
-      "decls": [],
-      "missing": [
-        "AlgebraicGeometry.IsCurve.bijective_cohomologyMap_of_isAlgClosed"
-      ]
-    },
-    "slopmaster2": {
-      "state": "sorry_here",
-      "decls": [
-        {
-          "name": "AlgebraicGeometry.IsCurve.bijective_cohomologyMap_of_isAlgClosed",
-          "module": "WeilConjectures.AlgebraicGeometry.Curve.FieldExtension",
-          "lines": [
-            69,
-            95
-          ],
-          "kind": "theorem",
-          "sorry": true
-        }
-      ],
-      "missing": [],
-      "open": []
-    }
-  },
-  "chapter": "sec-proper-base-change",
-  "unit": "sk-thm-p1",
-  "lean": {
-    "module": "WeilConjectures.AlgebraicGeometry.Curve.FieldExtension",
-    "declaration": "AlgebraicGeometry.IsCurve.bijective_cohomologyMap_of_isAlgClosed",
-    "branch": "slopmaster2",
-    "line": 69,
-    "declarations": [
-      "AlgebraicGeometry.IsCurve.bijective_cohomologyMap_of_isAlgClosed"
-    ],
-    "sorry_free": false,
-    "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state sorry_here)"
-  },
-  "split_report": {
-    "date": "2026-10-09",
-    "item": "prop-weil-pbc-algebraically-closed-extension",
-    "worker": "stage1",
-    "summary": "Statement made precise in the form of the reviewed prop-weil-pbc-proper-curve-sepclosed-invariance (proper structure morphism, topological Krull dimension <= 1, base change along Spec k' -> Spec k, torsion per def-weil-pbc-torsion-etale-sheaf, map = pullback of def-weil-pbc-cohomology-pullback); grab-bag stmt_deps def-weil-pbc-etale-sheaves and def-weil-pbc-scheme-conventions repointed. The imported one-paragraph proof (11 citations, partly not Stacks' order: zero-dimensional split, normalization exact sequence) is replaced by ten steps following Stacks Section 03SB: Theorem 03SC item (7), whose proof propagates the eight statements together through Lemmas 0A5C, 0A5D, 0GJA, 03SG/0A5B, 0A3Q, 03SD; Lemmas 03SD, 0A3Q, 03SG are written out as steps 3-8 (they are short and only used here), so that thm-sc-main, the trace/filtration node and the 0GJ1 node stay reached. Kept as real dependencies: def-weil-pbc-eight-curve-assertions, lem-weil-pbc-curve-constructible-reduction, lem-weil-pbc-zero-dimensional-field-extension, lem-weil-pbc-curve-dense-open-localization, lemma-weil-pbc-finite-pushforward-extension-zero, thm-sc-main, lemma-weil-pbc-curve-locally-constant-reduction, lemma-weil-pbc-eight-curve-devissage. Dropped: lemma-weil-pbc-finite-l-group-filtration and lemma-weil-pbc-curve-filtered-cohomology (used inside cited nodes, pointers here), lemma-weil-pbc-normalization-exact-sequence (Stacks 0A3Q uses the dense-open lemma twice instead; now unreached). New nodes: lem-weil-pbc-curve-assertions-dense-open (0GJA), lem-weil-pbc-curve-assertions-finite-pushforward (0A5D), lem-weil-pbc-reduced-curve-normalization (Varieties 0BXR/0B8Y), lem-weil-pbc-curve-assertions-retract (summand step of 03SD). Existing nodes newly cited: lem-weil-pbc-torsion-sheaf-characterizations (was flagged unreachable, reached again), lem-weil-pbc-zero-dimensional-cohomology, thm-pqf-zmt-factorization (Stacks 05K0; unit sk-prop-nagata-sketch-zmt outside the route, a tool use), lem-weil-pbc-finite-pushforward-constructible-noetherian (Stacks 095R; unit sk-prop-sf-cbc outside the route, a tool use). None of the five unreachable curve-reduction nodes is cited. No Mathlib match (three kinds of search)."
-  },
-  "tool_uses": [
-    "lem-weil-pbc-finite-pushforward-constructible-noetherian",
-    "thm-pqf-zmt-factorization"
-  ],
-  "reviewed": {
-    "date": "2026-10-09",
-    "by": "L",
-    "result": "pass",
-    "note": "Stacks 03SC (7) through the dévissage of Section 03SB in ten steps (03SD, 0A3Q, 03SG written out as steps); 4 new nodes; thm-pqf-zmt-factorization (sk-prop-nagata-sketch-zmt) and lem-weil-pbc-finite-pushforward-constructible-noetherian (sk-prop-sf-cbc) accepted as tool uses; the Lean attachment stays (Lambda-modules, any pullback square, IsCurve + IsProper) 2026-10-09 L: step 10 now cites lem-weil-pbc-constructible-torsion-modules-agree (the bridge between the two constructibility notions; known-defect entry of 14:45 resolved)."
+    "e1-algebraically-closed-cohomology-invariant"
+   ],
+   "elementary": false
   }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-curve-constructible-reduction",
+  "e1-algebraically-closed-cohomology-invariant"
+ ],
+ "proof_origin": "Stage 3 E1: existing constructible/reduced reduction followed by the smaller split core (Stacks 03SC).",
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "etale cohomology of a proper curve is invariant under extension of algebraically closed base field",
+   "results": "Algebra.Etale.baseChange (Mathlib.RingTheory.Etale.Basic), IsEtale.instIsStableUnderBaseChangeScheme (Mathlib.AlgebraicGeometry.Morphisms.Etale), RingHom.Etale.isStableUnderBaseChange, IsProper.isStableUnderBaseChange, sourceLocalClosure...IsStableUnderBaseChange, RingHom.Etale.respectsIso: stability of etale/proper morphisms under base change only",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "étale cohomology of a torsion sheaf on a curve over an algebraically closed field does not change under algebraically closed field extension",
+   "results": "Algebra.FormallyEtale.subsingleton_h1Cotangent, Algebra.etaleLocus_eq_compl_support, Algebra.formallyEtale_iff, FormallyEtale.iff_exists_algEquiv_prod, FormallyEtale.of_isSeparable_aux, FormallyEtale.of_restrictScalars: etale algebras only",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"smallEtale\"",
+   "results": "Scheme.smallEtaleTopology, smallEtalePretopology, ofArrows_mem_smallEtaleTopology_iff (Mathlib.AlgebraicGeometry.Sites.Etale); AffineEtale dense-subsite and sheafification instances (Mathlib.AlgebraicGeometry.Sites.AffineEtale): the small etale site exists, no etale cohomology theory of schemes",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Sheaf.H",
+   "results": "Sheaf.H, Sheaf.H.map, subsingleton_H_of_isZero, functorH, H.equiv0 (Mathlib.CategoryTheory.Sites.SheafCohomology.Basic): generic sheaf cohomology of a site as Ext from the constant sheaf; no pullback along morphisms of schemes, nothing on curves",
+   "date": "2026-10-09",
+   "verdict": "no match (generic ingredient)"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rln 'smallEtale\\|Etale.*cohomology\\|étale cohomology' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/; grep -rln 'IsAlgClosed.*Scheme\\|baseChange.*IsAlgClosed' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/",
+   "results": "Sites/BigZariski.lean, Sites/EtalePoint.lean, Sites/ElladicCohomology.lean (pro-etale ell-adic sheaf and EllAdicCohomology as a definition only, no theorems on curves), Sites/Etale.lean, Sites/AffineEtale.lean; second pattern: none",
+   "date": "2026-10-09",
+   "verdict": "no match: Mathlib has no etale cohomology of curves (confirmed)"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "import_flags": [],
+ "blueprint_kind": "theorem",
+ "blueprint_order": 1178,
+ "blueprint_uses": [
+  "def-weil-pbc-eight-curve-assertions",
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-pbc-scheme-conventions",
+  "lem-weil-pbc-curve-constructible-reduction",
+  "lem-weil-pbc-curve-dense-open-localization",
+  "lem-weil-pbc-zero-dimensional-field-extension",
+  "lemma-weil-pbc-curve-filtered-cohomology",
+  "lemma-weil-pbc-curve-locally-constant-reduction",
+  "lemma-weil-pbc-eight-curve-devissage",
+  "lemma-weil-pbc-finite-l-group-filtration",
+  "lemma-weil-pbc-finite-pushforward-extension-zero",
+  "lemma-weil-pbc-normalization-exact-sequence",
+  "thm-sc-main"
+ ],
+ "blueprint_tags": [
+  "latex:proposition"
+ ],
+ "uses_not_cited": [
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-pbc-scheme-conventions"
+ ],
+ "proof_split_by": "paragraphs",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.IsCurve.bijective_cohomologyMap_of_isAlgClosed"
+   ]
+  },
+  "slopmaster2": {
+   "state": "sorry_here",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.IsCurve.bijective_cohomologyMap_of_isAlgClosed",
+     "module": "WeilConjectures.AlgebraicGeometry.Curve.FieldExtension",
+     "lines": [
+      69,
+      95
+     ],
+     "kind": "theorem",
+     "sorry": true
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "module": "WeilConjectures.AlgebraicGeometry.Curve.FieldExtension",
+  "declaration": "AlgebraicGeometry.IsCurve.bijective_cohomologyMap_of_isAlgClosed",
+  "branch": "slopmaster2",
+  "line": 69,
+  "declarations": [
+   "AlgebraicGeometry.IsCurve.bijective_cohomologyMap_of_isAlgClosed"
+  ],
+  "sorry_free": false,
+  "note": "E1 stage-3 proof has no local sorry; rests on the constructible/reduced reduction and the reduced prime-coefficient split core."
+ },
+ "split_report": {
+  "date": "2026-10-09",
+  "item": "prop-weil-pbc-algebraically-closed-extension",
+  "worker": "stage1",
+  "summary": "Statement made precise in the form of the reviewed prop-weil-pbc-proper-curve-sepclosed-invariance (proper structure morphism, topological Krull dimension <= 1, base change along Spec k' -> Spec k, torsion per def-weil-pbc-torsion-etale-sheaf, map = pullback of def-weil-pbc-cohomology-pullback); grab-bag stmt_deps def-weil-pbc-etale-sheaves and def-weil-pbc-scheme-conventions repointed. The imported one-paragraph proof (11 citations, partly not Stacks' order: zero-dimensional split, normalization exact sequence) is replaced by ten steps following Stacks Section 03SB: Theorem 03SC item (7), whose proof propagates the eight statements together through Lemmas 0A5C, 0A5D, 0GJA, 03SG/0A5B, 0A3Q, 03SD; Lemmas 03SD, 0A3Q, 03SG are written out as steps 3-8 (they are short and only used here), so that thm-sc-main, the trace/filtration node and the 0GJ1 node stay reached. Kept as real dependencies: def-weil-pbc-eight-curve-assertions, lem-weil-pbc-curve-constructible-reduction, lem-weil-pbc-zero-dimensional-field-extension, lem-weil-pbc-curve-dense-open-localization, lemma-weil-pbc-finite-pushforward-extension-zero, thm-sc-main, lemma-weil-pbc-curve-locally-constant-reduction, lemma-weil-pbc-eight-curve-devissage. Dropped: lemma-weil-pbc-finite-l-group-filtration and lemma-weil-pbc-curve-filtered-cohomology (used inside cited nodes, pointers here), lemma-weil-pbc-normalization-exact-sequence (Stacks 0A3Q uses the dense-open lemma twice instead; now unreached). New nodes: lem-weil-pbc-curve-assertions-dense-open (0GJA), lem-weil-pbc-curve-assertions-finite-pushforward (0A5D), lem-weil-pbc-reduced-curve-normalization (Varieties 0BXR/0B8Y), lem-weil-pbc-curve-assertions-retract (summand step of 03SD). Existing nodes newly cited: lem-weil-pbc-torsion-sheaf-characterizations (was flagged unreachable, reached again), lem-weil-pbc-zero-dimensional-cohomology, thm-pqf-zmt-factorization (Stacks 05K0; unit sk-prop-nagata-sketch-zmt outside the route, a tool use), lem-weil-pbc-finite-pushforward-constructible-noetherian (Stacks 095R; unit sk-prop-sf-cbc outside the route, a tool use). None of the five unreachable curve-reduction nodes is cited. No Mathlib match (three kinds of search)."
+ },
+ "tool_uses": [
+  "lem-weil-pbc-finite-pushforward-constructible-noetherian",
+  "thm-pqf-zmt-factorization"
+ ],
+ "reviewed": {
+  "date": "2026-10-09",
+  "by": "L",
+  "result": "pass",
+  "note": "Stacks 03SC (7) through the dévissage of Section 03SB in ten steps (03SD, 0A3Q, 03SG written out as steps); 4 new nodes; thm-pqf-zmt-factorization (sk-prop-nagata-sketch-zmt) and lem-weil-pbc-finite-pushforward-constructible-noetherian (sk-prop-sf-cbc) accepted as tool uses; the Lean attachment stays (Lambda-modules, any pullback square, IsCurve + IsProper) 2026-10-09 L: step 10 now cites lem-weil-pbc-constructible-torsion-modules-agree (the bridge between the two constructibility notions; known-defect entry of 14:45 resolved)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "X-0f9c1",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261011T234426-L-429530",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered files compile cleanly; target and existing declaration signatures are unchanged; proof, new statement, DAG metadata, imports, report, and prior-return repairs satisfy the stage-3 brief."
+ }
 }
