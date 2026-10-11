@@ -5,6 +5,8 @@ Authors: Claude
 -/
 module
 
+public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.CompConjugate
+public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekComparison.CompositionLaw
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekIndependenceUnbounded
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekProjection
 
@@ -43,6 +45,25 @@ variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{
 namespace Etale
 
 variable {X Y : Scheme.{u}} {f : X ⟶ Y} {c d : Compactification f} (r : c.Refinement d)
+
+omit [MonoidalCategory A] [MonoidalPreadditive A] [SymmetricCategory A] [MonoidalClosed A]
+  [Abelian.HasFunctorialFlatResolution A] [Etale.UpperStarPreservesFlat A] in
+/-- The composition isomorphism `Rq_* ⋙ R(d.g)_* ≅ R(c.g)_*` of a refinement is the conjugate of
+the composition isomorphism `D((c.g)^*) ≅ D((d.g)^*) ⋙ D(q^*)` under the derived adjunctions. -/
+lemma rightDerivedFunctorCompIso'_refinementLowerStarComp_hom :
+    (Functor.rightDerivedFunctorCompIso' (r.hom)_*[A] (d.g)_*[A]
+        (refinementLowerStarComp A r)).hom =
+      conjugateEquiv ((mapDerivedUpperStarLowerStarAdjunction A d.g).comp
+          (mapDerivedUpperStarLowerStarAdjunction A r.hom))
+        (mapDerivedUpperStarLowerStarAdjunction A c.g)
+        (Functor.mapDerivedCategoryNatIso (Etale.upperStarComp A r.hom d.g c.g r.hom_g.symm) ≪≫
+          Functor.mapDerivedCategoryCompIso _ _).hom :=
+  Adjunction.rightDerivedFunctorCompIso'_hom_eq_conjugateEquiv
+    (Etale.upperStarLowerStarAdjunction A r.hom) (Etale.upperStarLowerStarAdjunction A d.g)
+    (Etale.upperStarLowerStarAdjunction A c.g) _ _ (by
+      rw [refinementLowerStarComp_eq]
+      exact (congrArg Iso.hom
+        (Etale.conjugateIsoEquiv_upperStarComp A r.hom d.g c.g r.hom_g.symm)).symm)
 
 /-- The comparison `Rf_!(d) ⟶ Rf_!(c)` along a refinement intertwines the projection maps. -/
 lemma projectionMapOfCompactification_comparison (hcart : IsPullback c.i (𝟙 X) r.hom d.i)
