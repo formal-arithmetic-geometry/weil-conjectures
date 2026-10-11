@@ -136,5 +136,23 @@
   "group": "G1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-dfl2603 (reviewer sub-agent of L); spot-checked: Read packet; checked 08U1 hypotheses (Mod(O_X) Grothendieck, Ab exact countable products, countable-product preservation), derived limit cited from def-weil-derived-limit (not redefined), product preservation is the countable one 08U1 needs and that IsHomotopyLimit.map takes (PreservesLimit of the tower's discrete product); no triangle restatement (cone transport is the attached lemma); no duplicate of the tower nodes; lem-pc-ringed-space-derived-products only gives existence, so the K-injective product node is not a duplicate; Stacks derived.tex 0BK6 read, statement true; sorryfree.py OK on IsHomotopyLimit.map and both rightDerivedFunctor instances, Lean statements read at HomotopyLimit.lean 187-215 and Triangulated.lean 94-99. FIX more, RETURN less: (1) E7/C4: item statement and Step 3 claimed a 'canonical comparison' RF(K)->Rlim RF(K_n) is an iso, but def-weil-derived-limit says derived limits are non-canonical; reworded to 'RF(K) is a derived limit, RF(K)=Rlim RF(K_n)', dropped the uniqueness appeal and lem-weil-derived-limit-existence from Step 3 uses, noted products in D(O_X) come from Step 2; (2) B: lem-pc-ringed-space-product-kinjective cited Tag 070L (that is lemma-limit-K-injectives) with the label of a different lemma; corrected to derived.tex Tag 0BK6, label lemma-product-K-injective; (3) B10: lem-pc-homotopy-limit-map and lem-pc-right-derived-functor-triangulated are stated exactly by sorry-free slopmaster2 declarations but carried no lean_audit; recorded the attachments.; 4 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.Triangulated.DerivedFunctorDerivedLimit",
+  "declaration": "AlgebraicGeometry.Scheme.rightDerivedFunctor_isDerivedLimitTriangle",
+  "file": "lean/Sheaf/CategoryTheory/Triangulated/DerivedFunctorDerivedLimit.lean",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-11",
+  "existing": false,
+  "statement": "theorem rightDerivedFunctor_isDerivedLimitTriangle (X : Scheme.{u}) (F : X.Modules ⥤ AddCommGrpCat.{u}) [F.Additive] [PreservesLimitsOfShape (Discrete ℕ) F] [Abelian.HasKInjectiveResolutions X.Modules] [Abelian.HasKInjectiveResolutions AddCommGrpCat.{u}] [HasDerivedCategory X.Modules] [HasDerivedCategory AddCommGrpCat.{u}] {K : ℕ → DerivedCategory X.Modules} (f : ∀ n, K (n + 1) ⟶ K n) (L : DerivedCategory X.Modules) (p : L ⟶ ∏ᶜ K) (δ : ∏ᶜ K ⟶ L⟦(1 : ℤ)⟧) (h : CategoryTheory.IsDerivedLimitTriangle f L p δ) : ∃ e : F.rightDerivedFunctor.obj (∏ᶜ K) ≅ ∏ᶜ (fun n => F.rightDerivedFunctor.obj (K n)), (∀ n, e.hom ≫ Pi.π _ n = F.rightDerivedFunctor.map (Pi.π K n)) ∧ CategoryTheory.IsDerivedLimitTriangle (fun n => F.rightDerivedFunctor.map (f n)) (F.rightDerivedFunctor.obj L) (F.rightDerivedFunctor.map p ≫ e.hom) (e.inv ≫ F.rightDerivedFunctor.map δ ≫ (F.rightDerivedFunctor.commShiftIso (1 : ℤ)).hom.app L)"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-dcl0905",
+  "group": "F1",
+  "result": "pass",
+  "note": "X:Scheme.{u}; F:X.Modules⥤AddCommGrpCat.{u} Additive + PreservesLimitsOfShape (Discrete ℕ) = countable products; HasKInjectiveResolutions X.Modules = RF exists, target binder needed (no synthesized instance for either, tested); h:IsDerivedLimitTriangle f L p δ = given Roos triangle (recorded def-weil-derived-limit module, not source IsHomotopyLimit); conclusion: canonical product comparison e (e.hom≫π_n=RF.map π_n) and image triangle with commShiftIso is IsDerivedLimitTriangle of RF(f) in D(Ab) = node's 'RF of a Roos triangle is a Roos triangle'; true by Stacks 08U1 (Ab exact countable products); IsHomotopyLimit.map is the general triangulated-functor lemma assuming RF preserves the product, not this node (product preservation of RF is the content), existing:false correct; docstring has the 3 proof steps; lines<=100; proof sorry"
  }
 }
