@@ -8,7 +8,7 @@ module
 public import Mathlib.LinearAlgebra.ExteriorAlgebra.Grading
 public import Mathlib.LinearAlgebra.ExteriorPower.Basic
 public import WeilConjectures.Mathlib.RepresentationTheory.Basic
-public import WeilConjectures.RepresentationTheory.Constituents
+public import WeilConjectures.RepresentationTheory.Filtration
 
 /-!
 # The exterior powers of a filtered representation
@@ -423,15 +423,6 @@ namespace Subrepresentation
 variable {k : Type*} [Field k] {W : Type*} [Group W] {V : Type*} [AddCommGroup V] [Module k V]
   {ρ : Representation k W V}
 
-/-- A subrepresentation `P ≤ A`, seen as a subrepresentation of `A`, is equivalent to `P`. -/
-noncomputable def comapSubtypeEquiv {P A : Subrepresentation ρ} (h : P ≤ A) :
-    (comap A.subtype P).toRepresentation.Equiv P.toRepresentation :=
-  .mk (Submodule.comapSubtypeEquivOfLe (p := P.toSubmodule) (q := A.toSubmodule) h) fun _ ↦ rfl
-
-/-- For `P ≤ A`, the quotient of `A` by `P` is the subquotient `A / P`. -/
-noncomputable def quotientComapSubtypeEquiv (P A : Subrepresentation ρ) :
-    (comap A.subtype P).quotient.Equiv (A.subquotient P) :=
-  .mk (LinearEquiv.refl k _) fun _ ↦ Submodule.linearMap_qext _ (LinearMap.ext fun _ ↦ rfl)
 
 end Subrepresentation
 
@@ -481,16 +472,6 @@ noncomputable def Equiv.exteriorPower (e : ρ.Equiv σ) (n : ℕ) :
     rw [← _root_.exteriorPower.map_comp, ← _root_.exteriorPower.map_comp]
     congr 1
     exact e.isIntertwining' w
-
-/-- Tensor products of equivalent representations are equivalent. -/
-noncomputable def Equiv.tprodCongr (e : ρ.Equiv σ) (e₁ : ρ₁.Equiv σ₁) :
-    (ρ.tprod ρ₁).Equiv (σ.tprod σ₁) :=
-  .mk (TensorProduct.congr e.toLinearEquiv e₁.toLinearEquiv) fun w ↦ by
-    refine TensorProduct.ext' fun x y ↦ ?_
-    simp only [LinearMap.coe_comp, LinearEquiv.coe_coe, Function.comp_apply, tprod_apply,
-      TensorProduct.map_tmul, TensorProduct.congr_tmul]
-    rw [e.toLinearEquiv_apply, e₁.toLinearEquiv_apply, e.toLinearEquiv_apply,
-      e₁.toLinearEquiv_apply, e.isIntertwining, e₁.isIntertwining]
 
 namespace ConstituentsLE
 
