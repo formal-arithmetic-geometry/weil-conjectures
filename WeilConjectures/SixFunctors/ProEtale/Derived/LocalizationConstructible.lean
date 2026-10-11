@@ -250,6 +250,72 @@ theorem isZero_boundedConstructibleClosedUpperShriek_obj
   IsZero.of_full_of_faithful_of_isZero (DerivedCategory.boundedConstructible _ Z).ι _
     (isZero_closedUpperShriek_rightDerivedFunctor_obj_rightDerivedFunctor_lowerStar i j hij G)
 
+omit hN hΛ s in
+/-- The bijection `Hom(P, Ri^! K) ≃ Hom(P, Rᵉˣi^! K)` between maps into the right adjoint of
+`Ri_*` (`AlgebraicGeometry.ProEtale.derivedLowerStarClosedUpperShriekAdjunction`) and maps into
+the exceptional inverse image `Rᵉˣi^!` of blueprint `sk-def-sf-operations` (vi)
+(`AlgebraicGeometry.ProEtale.rightDerivedUpperShriek`), for `P` bounded below of étale origin and
+`K` bounded below: both are `Hom(Ri_! P, K)`, as `Ri_! = Ri_*` for a closed immersion
+(`AlgebraicGeometry.ProEtale.rightDerivedLowerShriekIsoRightDerivedFunctorLowerStar`). -/
+noncomputable def closedUpperShriekHomEquivRightDerivedUpperShriek [HasCompactification i]
+    [Etale.HasBoundedBelowUpperShriek (ModuleCat.{u + 1} Λ) i]
+    (hij : IsCompl (Set.range i.base) (Set.range j.base))
+    {P : _root_.DerivedCategory (Sheaf (ProEt.topology Z) (ModuleCat.{u + 1} Λ))}
+    (hP : DerivedCategory.plusEtaleOrigin (ModuleCat.{u + 1} Λ) Z P)
+    {K : _root_.DerivedCategory (Sheaf (ProEt.topology X) (ModuleCat.{u + 1} Λ))}
+    (hK : _root_.DerivedCategory.TStructure.t.plus K) :
+    (P ⟶ (closedUpperShriek (ModuleCat.{u + 1} Λ) i j).rightDerivedFunctor.obj K) ≃
+      (P ⟶ (R(i)^![ModuleCat.{u + 1} Λ]).obj K) :=
+  ((derivedLowerStarClosedUpperShriekAdjunction i j hij).homEquiv P K).symm.trans <|
+    ((rightDerivedLowerShriekIsoRightDerivedFunctorLowerStar _ i).app P).homFromEquiv.symm.trans
+      (rightDerivedUpperShriekHomEquiv i hP hK)
+
+omit [Finite Λ] hN hΛ s in
+lemma closedUpperShriekHomEquivRightDerivedUpperShriek_naturality [HasCompactification i]
+    [Etale.HasBoundedBelowUpperShriek (ModuleCat.{u + 1} Λ) i]
+    (hij : IsCompl (Set.range i.base) (Set.range j.base))
+    {P P' : _root_.DerivedCategory (Sheaf (ProEt.topology Z) (ModuleCat.{u + 1} Λ))}
+    (hP : DerivedCategory.plusEtaleOrigin (ModuleCat.{u + 1} Λ) Z P)
+    (hP' : DerivedCategory.plusEtaleOrigin (ModuleCat.{u + 1} Λ) Z P')
+    {K : _root_.DerivedCategory (Sheaf (ProEt.topology X) (ModuleCat.{u + 1} Λ))}
+    (hK : _root_.DerivedCategory.TStructure.t.plus K) (φ : P ⟶ P')
+    (x : P' ⟶ (closedUpperShriek (ModuleCat.{u + 1} Λ) i j).rightDerivedFunctor.obj K) :
+    closedUpperShriekHomEquivRightDerivedUpperShriek i j hij hP hK (φ ≫ x) =
+      φ ≫ closedUpperShriekHomEquivRightDerivedUpperShriek i j hij hP' hK x := by
+  simp only [closedUpperShriekHomEquivRightDerivedUpperShriek, Equiv.trans_apply,
+    Iso.homFromEquiv_symm_apply, Adjunction.homEquiv_naturality_left_symm]
+  rw [← rightDerivedUpperShriekHomEquiv_naturality_left i hP hP' hK]
+  have hθ := ((rightDerivedLowerShriekIsoRightDerivedFunctorLowerStar
+    (ModuleCat.{u + 1} Λ) i).hom.naturality φ)
+  simp only [Iso.app_hom]
+  rw [← reassoc_of% hθ]
+
+/-- Blueprint `prop-sf-localization-all-stages`, clause (2) at the finite stage `A_{E,n}`: on
+`Dᵇc_proét(X, Λ)` the right adjoint `Ri^!` of `Ri_*` is the exceptional inverse image of
+blueprint `def-weil-exceptional-inverse-image` (`sk-def-sf-operations` (vi),
+`AlgebraicGeometry.ProEtale.rightDerivedUpperShriek`), by uniqueness of right adjoints: both
+represent `P ↦ Hom(Ri_* P, K)` on the complexes `P` bounded below of étale origin
+(`AlgebraicGeometry.ProEtale.closedUpperShriekHomEquivRightDerivedUpperShriek`), and both objects
+are of this kind. -/
+theorem nonempty_iso_closedUpperShriek_rightDerivedFunctor_obj_rightDerivedUpperShriek_obj
+    [HasCompactification i] [Etale.HasBoundedBelowUpperShriek (ModuleCat.{u + 1} Λ) i]
+    (hij : IsCompl (Set.range i.base) (Set.range j.base))
+    {K : _root_.DerivedCategory (Sheaf (ProEt.topology X) (ModuleCat.{u + 1} Λ))}
+    (hK : DerivedCategory.boundedConstructible (ModuleCat.{u + 1} Λ) X K) :
+    Nonempty ((closedUpperShriek (ModuleCat.{u + 1} Λ) i j).rightDerivedFunctor.obj K ≅
+      (R(i)^![ModuleCat.{u + 1} Λ]).obj K) := by
+  have hE := (boundedConstructible_closedUpperShriek_rightDerivedFunctor_obj i j N hN hΛ s hij
+    hK).plusEtaleOrigin
+  have hE' := plusEtaleOrigin_rightDerivedUpperShriek_obj i hK.plusEtaleOrigin.plus
+  set e := fun {P} (hP : DerivedCategory.plusEtaleOrigin (ModuleCat.{u + 1} Λ) Z P) ↦
+    closedUpperShriekHomEquivRightDerivedUpperShriek i j hij hP hK.plusEtaleOrigin.plus
+  refine ⟨⟨e hE (𝟙 _), (e hE').symm (𝟙 _), (e hE).injective ?_, ?_⟩⟩
+  · rw [closedUpperShriekHomEquivRightDerivedUpperShriek_naturality i j hij hE hE',
+      Equiv.apply_symm_apply, Category.comp_id]
+  · rw [← closedUpperShriekHomEquivRightDerivedUpperShriek_naturality i j hij hE' hE,
+      Category.comp_id]
+    exact Equiv.apply_symm_apply (e hE') _
+
 end Finite
 
 end ProEtale
