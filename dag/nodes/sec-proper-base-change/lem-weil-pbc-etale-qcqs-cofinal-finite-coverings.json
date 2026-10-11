@@ -200,5 +200,24 @@
   "by": "L",
   "result": "pass",
   "note": "Reviewed by the lead (opus-relaunch6). Node created by F1. Six steps, no new nodes: finite affine open cover of the qcqs U, base change of the covering to each affine piece, 0218 (lem-weil-pbc-etale-covering-affine-refinement) on each piece, composites etale and jointly surjective, pairwise fibre products quasi-compact since U is quasi-separated (lem-weil-pbc-qcqs-morphism-permanence), cofinality. The worker correctly notes that 03Q4 only states the hypothesis of 0738; the qcqs assembly is agent-written. Kept as a split node; the Mathlib route (QuasiCompactCover.exists_hom with Etale, Cover/QuasiCompact.lean:183, and CompactSpace of pullbacks) recorded in the split report as a possible leaf for stage 3. def-pc-fibre-product added to stmt_deps."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.EtaleQcqsCofinalFiniteCoverings",
+  "declaration": "AlgebraicGeometry.etale_qcqs_cofinal_finite_affine_coverings",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleQcqsCofinalFiniteCoverings.lean",
+  "statement": "theorem etale_qcqs_cofinal_finite_affine_coverings {U : Scheme.{u}} [CompactSpace U] [QuasiSeparatedSpace U] {A : Type v} (T : A → U.Etale) (f : ∀ a, T a ⟶ Scheme.Etale.mk (𝟙 U)) (hf : Sieve.ofArrows T f ∈ U.smallEtaleTopology (Scheme.Etale.mk (𝟙 U))) : ∃ (B : Type w) (_ : Finite B) (a : B → A) (V : B → U.Etale) (v : ∀ b, V b ⟶ Scheme.Etale.mk (𝟙 U)), (∀ b, IsAffine (V b).left) ∧ (∀ b, ∃ h : V b ⟶ T (a b), h ≫ f (a b) = v b) ∧ Sieve.ofArrows V v ∈ U.smallEtaleTopology (Scheme.Etale.mk (𝟙 U)) ∧ (∀ b b', CompactSpace (pullback (C := Scheme.{u}) (V b).hom (V b').hom))",
+  "branch": "sheaf-dag",
+  "by": "J1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-eqc1001"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-eqc1001",
+  "group": "J1",
+  "result": "fix",
+  "note": "FIX: covering restated in the recorded site U.smallEtaleTopology (T : A -> U.Etale, Sieve.ofArrows ... in U.smallEtaleTopology (Etale.mk (𝟙 U))) for hypothesis and refinement covering; factorization as U.Etale morphisms V b ⟶ T (a b); IsAffine (V b).left; Finite B; CompactSpace of scheme pullback of structure maps; qcqs as CompactSpace+QuasiSeparatedSpace; empty A/B and universes checked"
  }
 }
