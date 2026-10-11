@@ -158,5 +158,24 @@
   "group": "E1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of E1; spot-checked by L: four steps: affine identification via tilde and the tensor-product-sections node, image/cokernel node for quasi-coherence and sections on affines, induction for powers, restriction commutes with image sheaves; terse but each claim cites a node"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.Modules.IdealTimesQuasiCoherentAffineSections",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.ideal_times_quasiCoherent_affine_sections",
+  "file": "lean/Sheaf/AlgebraicGeometry/Modules/IdealTimesQuasiCoherentAffineSections.lean",
+  "statement": "theorem ideal_times_quasiCoherent_affine_sections {X : Scheme.{u}} (J : X.IdealSheafData) (F : X.Modules) [F.IsQuasicoherent] : (idealModuleProduct J.toModulesι F).IsQuasicoherent ∧ (cokernel (idealModuleProductι J.toModulesι F)).IsQuasicoherent ∧ (∀ n : ℕ, 0 < n → (idealSheafPower J.toModulesι n).1.IsQuasicoherent) ∧ (∀ U : X.affineOpens, Set.range ((idealModuleProductι J.toModulesι F).app U.1) = {s | s ∈ J.ideal U • (⊤ : Submodule Γ(X, U.1) Γ(F, U.1))} ∧ Function.Surjective ((cokernel.π (idealModuleProductι J.toModulesι F)).app U.1) ∧ (∀ s : Γ(F, U.1), (cokernel.π (idealModuleProductι J.toModulesι F)).app U.1 s = 0 ↔ s ∈ J.ideal U • (⊤ : Submodule Γ(X, U.1) Γ(F, U.1))) ∧ (∀ n : ℕ, 0 < n → Set.range ((idealSheafPower J.toModulesι n).2.app U.1) = {a | a ∈ J.ideal U ^ n})) ∧ (∀ V : X.Opens, Subobject.mk (image.ι ((restrictFunctor V.ι).map (idealModuleProductι J.toModulesι F))) = Subobject.mk (image.ι (idealModuleProductι (J.comap V.ι).toModulesι ((restrictFunctor V.ι).obj F))))",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-iqa1228"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-iqa1228",
+  "group": "C1",
+  "result": "fix",
+  "note": "J qc ideal = IdealSheafData; F qc; JF/F/JF/J^n via landed idealModuleProduct(ι)/idealSheafPower on J.toModulesι (was private μ notation + IdealSheafData pow, making J^n(U)=J(U)^n tautological); affine sections, surjectivity, kernel, powers n>=1; (3) restricted via restrictFunctor V.ι and J.comap V.ι (was overFunctor restriction of the same map, never the product of J|_V and F|_V)"
  }
 }
