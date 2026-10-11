@@ -4223,3 +4223,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 10:24 L: merged deliver/M1/lem-weil-pbc-finite-product-functor-left-exact (stage 2; reviewer FIX; first push; Sheaf.CategoryTheory.FiniteProductFunctorLeftExact CategoryTheory.finite_product_functor_left_exact)
 - 10:24 L: merged deliver/J1/lem-weil-pbc-finite-t0-space-sober (stage 2; reviewer PASS; first push; Sheaf.Topology.ExistsUniqueIsGenericPointOfFinite existsUnique_isGenericPoint_of_finite)
 - 10:25 L: merged deliver/J1/lem-weil-pbc-finite-separable-multiplication-etale (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.FiniteSeparableMultiplicationEtale AlgebraicGeometry.finite_separable_multiplication_etale)
+- 10:25 L: merged deliver/F1/lem-weil-pbc-finite-over-complete-local-product (stage 2; reviewer FIX; first push; Sheaf.RingTheory.FiniteOverCompleteLocalProduct Algebra.finite_over_complete_local_product)
