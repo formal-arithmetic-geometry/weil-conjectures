@@ -120,6 +120,7 @@ abbrev kFlatComparisonUpperStar :
   (HomotopyCategory.quasiIso _ (.up ℤ)).kFlat.inverseImage
     ((ν^*(X)[A]).mapHomotopyCategory (.up ℤ))
 
+omit [Abelian.HasFunctorialFlatResolution A] in
 /-- The comparison pullbacks of the functorial flat resolutions of complexes of étale sheaves are
 K-flat. -/
 lemma kFlatComparisonUpperStar_quotient_obj_resolutionFunctor_obj
