@@ -234,5 +234,25 @@
   "by": "L",
   "result": "accepted",
   "note": "9 steps following Stacks 00OF then 00OC: finite free resolution of kappa (00LP) truncated at d = dim S with the d = 0 case written out; tensoring with the flat S; K (x) S projective over the regular S by 00O7 and the new unsplit 00O5 node (independence of resolution); K finite free by the new composed 00O1 leaf (FaithfullyFlat.of_flat_of_isLocalHom, Flat.of_flat_tensorProduct, free_of_flat_of_isLocalRing; lines 60/588/304 verified by L); pd kappa finite; then the 00OB, 00OA, Nakayama steps as in finite-gl-dim-regular-local. Not in Mathlib."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.FlatUnderRegular",
+  "declaration": "IsRegularLocalRing.of_ringHom_flat",
+  "branch": "sheaf-dag",
+  "existing": false,
+  "by": "C1",
+  "date": "2026-10-11",
+  "note": "Reviewer FIX (R-fur1035): the source IsRegularLocalRing.of_flat (slopmaster2) states 00OF only for R S in one universe u and with Algebra/Module.Flat instead of the node's map phi and the recorded RingHom.Flat; restated with phi : R →+* S, IsLocalHom phi, phi.Flat, universes u v, as sibling lem-weil-pbc-flat-over-regular. Stage 3 can prove it from of_flat (verified in a common universe).",
+  "statement": "theorem of_ringHom_flat {R : Type u} {S : Type v} [CommRing R] [CommRing S] [IsLocalRing R] [IsNoetherianRing R] [IsRegularLocalRing S] (φ : R →+* S) [IsLocalHom φ] (hφ : φ.Flat) : IsRegularLocalRing R",
+  "file": "lean/Sheaf/RingTheory/FlatUnderRegular.lean",
+  "fixed_by": "R-fur1035"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-fur1035",
+  "group": "C1",
+  "result": "fix",
+  "note": "R:Type u, S:Type v CommRing; IsLocalRing R, IsNoetherianRing R; S Noetherian local regular = IsRegularLocalRing S; phi : R →+* S, IsLocalHom phi; flat = phi.Flat (RingHom.Flat, recorded dep); conclusion IsRegularLocalRing R; d=0 fine; no hollow hyps; equals source of_flat in a common universe (checked by compile)"
  }
 }
