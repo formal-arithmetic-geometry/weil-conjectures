@@ -25,7 +25,9 @@
   "def-pc-kflat-complex",
   "lem-pc-kflat-resolution",
   "def-pc-tensor-complex-sheaves",
-  "def-weil-abstract-derived-category"
+  "def-weil-abstract-derived-category",
+  "def-pc-module-kflat-complex",
+  "def-pc-mixed-total-tensor"
  ],
  "proof": [
   {
@@ -143,5 +145,24 @@
   "group": "C1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-dsf0254 (reviewer sub-agent of L); spot-checked: Statement unchanged word for word vs sheaf-dag (citers balanced-derived-tensor-model, action-naturality, kflat-derived-tensor-associator, transitivity rely on it; OK). Step 1 vs Tag 064L OK; new node not a duplicate (lem-kun-derived-tensor-well-defined/06YT is etale-only, lem-weil-...-resolution-independent pro-etale only) nor elementary. Mathlib grep KFlat|derivedTensor: 0. FIX more, RETURN less: (1) C1 Step 2 derived the everywhere-defined exact left derived functor from the bare localization definition; now cites lem-pur-left-derived-from-kflat-class (P = K-flat, hyp (1) lem-pc-kflat-resolution, hyp (2) Step 1), with the homotopy/cone/shift computation for Phi on K(R) as elementary Step 2 and canonical comparison maps via epsilon; (2) C4 Step 4 applied the K-flat definition with F in the wrong slot (def gives Tot(acyclic x K-flat)); added the sign swap and derived the transformation from the universal property; (3) B4 new node lem-pc-kflat-tensor-quasi-iso rewritten in TeX, one-point site made explicit, stmt_deps add def-pc-cochain-complex-modules, def-pc-quasi-iso-modules. Tool use: lem-pur-left-derived-from-kflat-class (generic derived-functor existence).; 2 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.DerivedTensorSecondFactorFunctor",
+  "declaration": "DerivedCategory.exists_derivedTensor_second_factor_functor",
+  "file": "lean/Sheaf/Algebra/Homology/DerivedTensorSecondFactorFunctor.lean",
+  "statement": "theorem exists_derivedTensor_second_factor_functor (f : R →+* A) : let B := (ModuleCat.mixedTensor f).flip.map₂CochainComplex (∀ (N : CochainComplex (ModuleCat.{u} A) ℤ) (E E' : CochainComplex (ModuleCat.{u} R) ℤ) (a : E ⟶ E'), QuasiIso a → (W).kFlat E → (W).kFlat E' → QuasiIso ((B.map a).app N)) ∧ ∃ T : CochainComplex (ModuleCat.{u} A) ℤ ⥤ (DerivedCategory (ModuleCat.{u} R) ⥤ DerivedCategory (ModuleCat.{u} A)), ∃ ε : ∀ N : CochainComplex (ModuleCat.{u} A) ℤ, QR ⋙ T.obj N ⟶ B.flip.obj N ⋙ QA, (∀ N, (T.obj N).IsLeftDerivedFunctor (ε N) W) ∧ (∀ N, ∃ c : (T.obj N).CommShift ℤ, letI := c (T.obj N).IsTriangulated) ∧ (∀ (N : CochainComplex (ModuleCat.{u} A) ℤ) (F : CochainComplex (ModuleCat.{u} R) ℤ), (W).kFlat F → IsIso ((ε N).app F)) ∧ (∀ (N : CochainComplex (ModuleCat.{u} A) ℤ) (E F : CochainComplex (ModuleCat.{u} R) ℤ) (s : F ⟶ E), QuasiIso s → (W).kFlat F → ∃! e : (T.obj N).obj ((QR).obj E) ≅ (QA).obj ((B.obj F).obj N), (T.obj N).map ((QR).map s) ≫ e.hom = (ε N).app F) ∧ (∀ (N : CochainComplex (ModuleCat.{u} A) ℤ) (E F₁ F₂ F₃ : CochainComplex (ModuleCat.{u} R) ℤ) (e₁ : (T.obj N).obj ((QR).obj E) ≅ (QA).obj ((B.obj F₁).obj N)) (e₂ : (T.obj N).obj ((QR).obj E) ≅ (QA).obj ((B.obj F₂).obj N)) (e₃ : (T.obj N).obj ((QR).obj E) ≅ (QA).obj ((B.obj F₃).obj N)), (e₁.symm ≪≫ e₂) ≪≫ (e₂.symm ≪≫ e₃) = e₁.symm ≪≫ e₃) ∧ (∀ (N N' : CochainComplex (ModuleCat.{u} A) ℤ) (u : N ⟶ N') (F : CochainComplex (ModuleCat.{u} R) ℤ), (T.map u).app ((QR).obj F) ≫ (ε N').app F = (ε N).app F ≫ (QA).map ((B.obj F).map u)) ∧ (∀ (N : CochainComplex (ModuleCat.{u} A) ℤ), T.map (𝟙 N) = 𝟙 (T.obj N)) ∧ (∀ (N N' N'' : CochainComplex (ModuleCat.{u} A) ℤ) (u : N ⟶ N') (v : N' ⟶ N''), T.map (u ≫ v) = T.map u ≫ T.map v) ∧ (∀ (N N' : CochainComplex (ModuleCat.{u} A) ℤ) (u : N ⟶ N'), QuasiIso u → (∀ F : CochainComplex (ModuleCat.{u} R) ℤ, (W).kFlat F → QuasiIso ((B.obj F).map u)) ∧ IsIso (T.map u))",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-11",
+  "existing": false,
+  "note": "Ordinary-module K-flatness and mixed coefficient tensor use the already landed def-pc-module-kflat-complex and def-pc-mixed-total-tensor; both are added to stmt_deps. The flipped module bifunctor is totalized in the order (E,N), retaining the A-action through N."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-dts1255",
+  "group": "H1",
+  "result": "pass",
+  "note": "f:R→+*A arbitrary ring map (commutative R,A, no extra hyps); N arbitrary A-complex; B=(mixedTensor f).flip.map₂CochainComplex = Tot(E⊗_R N) in node order, A-action via N (mixedTotalTensor is mixedTensor.map₂CochainComplex, so no new notion); (W).kFlat = def-pc-module-kflat-complex, same as balanced-model sibling and = CochainComplex.KFlat of K1 associator; (1) QuasiIso a, K-flat E,E' → QuasiIso (B.map a).app N; (2) T.obj N everywhere-defined IsLeftDerivedFunctor (ε N) W, CommShift+IsTriangulated, ε iso on K-flat, ∃! e with T(Qs)≫e.hom=ε_F = node's ε_F∘LΦ(Qs)⁻¹, cocycle conjunct (tautological, canonicity carried by ∃!); (3) T.map u with naturality square vs Q(Tot(1_F⊗u)), identities/composition, QuasiIso u → Tot(1_F⊗u) qis on K-flat F and IsIso (T.map u). Compile clean."
  }
 }
