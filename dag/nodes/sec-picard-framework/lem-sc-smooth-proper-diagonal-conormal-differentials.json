@@ -22,7 +22,9 @@
   "def-pc-scheme",
   "def-pc-base-change",
   "def-pc-module-pullback",
-  "def-weil-pbc-kahler-differentials"
+  "def-weil-pbc-kahler-differentials",
+  "def-sc-diagonal-conormal",
+  "def-sc-relative-differential-sheaf"
  ],
  "proof": [
   {
@@ -114,5 +116,23 @@
   "group": "H1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-dcd1745 (reviewer sub-agent of L); spot-checked: Statement vs Stacks 08S2 (morphisms lemma-differentials-diagonal): general f, conormal of the diagonal immersion via W, Omega_{X/S} affine-locally Omega_{A/R}; statement change (closed-immersion assumption removed, curve-only def replaced) named with reason (E7 ok). No cycle: item cites only defs, affine-conormal (pbc unit, generic tool accepted) and new node; parent relative-dualizing-general not cited. affine-conormal hypotheses: Delta over U x_V U = Spec(A ox_R A) closed immersion with ideal ker(mu), sections over Z cap U = U. FIX more, RETURN less: (1) C1 step 1: Omega_{A/R} = I/I^2 with da -> 1ox a - a ox1 (Algebra 00RW) was argued inline, not a cited statement; added statement-only node lem-sc-kahler-differentials-diagonal-ideal (unsplit; Mathlib candidate leaf recorded: KaehlerDifferential := (ideal R S).Cotangent, Kaehler/Basic.lean 64/153, D_apply line 218 rfl), cited in step 1 and proof_deps; (2) step 1 now fixes W = union of U x_V U (Stacks 01KJ) so the affine-conormal lemma applies; (3) B4: plain '->' arrows in steps 1 and 2 rewritten as \\to, O_X as \\mathcal O_X; step 2 restriction compatibility stated via generators. Second reading by H1 missed the C1 fault (it called the generator calculation non-elementary but cited no statement for it). Small cases: A=R gives I=0=Omega; R[x]: 1ox x - x ox1 -> dx.; 2 file(s) fixed by the reviewer; 1 statement node(s) added by the reviewer (FIX more, RETURN less)"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.DiagonalConormalDifferentials",
+  "declaration": "AlgebraicGeometry.diagonalConormal_iso_relativeDifferentials",
+  "file": "lean/Sheaf/AlgebraicGeometry/DiagonalConormalDifferentials.lean",
+  "statement": "theorem diagonalConormal_iso_relativeDifferentials (f : X ⟶ S) : Nonempty (diagonalConormal f ≅ f.relativeDifferentials)",
+  "branch": "sheaf-dag",
+  "by": "K1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-dcd1410",
+  "group": "K1",
+  "result": "pass",
+  "note": "f : X ⟶ S arbitrary (no separatedness, as 08S2); Δ = pullback.diagonal f; C_Δ = tensorPullback Δ of the actual kernel of unitToPushforwardObjUnit O→Δ_*O (= Δ^*(I/I²) on any W; Hom.ker avoided since only QC-well-behaved and Δ need not be quasi-compact); no landed conormal declaration on sheaf-dag (def-weil-pbc-conormal-sheaf-formally-unramified unrecorded, different thickening construction); Ω = source Scheme.Hom.relativeDifferentials (the one Hom.genus uses), existing:true, no other def node records it; conclusion Nonempty (C_Δ ≅ Ω) in X.Modules"
  }
 }
