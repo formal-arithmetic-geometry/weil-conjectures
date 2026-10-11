@@ -1,0 +1,110 @@
+{
+ "id": "def-sc-ring-strict-henselization",
+ "kind": "definition",
+ "title": "Ring strict henselization relative to a chosen separable residue closure",
+ "status": "split",
+ "statement": "Let $A$ be a local commutative ring with residue field $k=A/\\mathfrak m_A$, and let $K$ be a separable algebraic extension of $k$ that is separably closed [def-pc-separably-closed], regarded as an $A$-algebra via $A\\to k\\to K$. An $A$-algebra $C$ is a strict henselization of $A$ relative to $K$ if it is isomorphic as an $A$-algebra to the vertex of a universal colimit cocone [def-weil-pbc-category-colimit] for the forgetful diagram from the category of pairs $(S,\\chi)$, where $S$ is an etale $A$-algebra (that is, $\\operatorname{Spec}S\\to\\operatorname{Spec}A$ is etale [def-weil-etale-morphism]) and $\\chi:S\\to K$ is an $A$-algebra map. A morphism $(S,\\chi)\\to(S^{\\prime},\\chi^{\\prime})$ is an $A$-algebra map $\\beta:S\\to S^{\\prime}$ satisfying $\\chi^{\\prime}\\circ\\beta=\\chi$. The diagram takes $(S,\\chi)$ to $S$ and takes $\\beta$ to itself. All algebras are in a common arbitrary universe; the etale category is essentially small by finite presentation.",
+ "stmt_deps": [
+  "def-pc-separably-closed",
+  "def-weil-pbc-category-colimit",
+  "def-weil-etale-morphism"
+ ],
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 04GW (lemma-strict-henselization-different), colimit of triples and its pointed-algebra description; specialized to the maximal ideal of a local ring"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "StrictHenselization|strict.henselization|PointedEtale",
+   "results": "0 hits: ",
+   "date": "2026-10-11",
+   "verdict": "no ring strict-henselization definition"
+  },
+  {
+   "tool": "leansearch",
+   "query": "strict henselization ring characterized as colimit of pointed etale algebras",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "strict henselization ring characterized as colimit of pointed etale algebras",
+   "results": "8 hits: HenselianLocalRing, StandardEtalePair.instFormallyEtaleRing, StandardEtalePair.existsUnique_hasMap_of_hasMap_quotient_of_sq_eq_bot, IsAdicComplete.henselianRing, HenselianLocalRing.TFAE, HenselianRing, Algebra.IsEtaleAt, HenselianLocalRing.toIsLocalRing",
+   "date": "2026-10-11",
+   "verdict": "no ring strict-henselization definition"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n IsStrictHenselization|StrictHenselization|PointedEtale /home/ubuntu/weil-src-slopmaster2/WeilConjectures /home/ubuntu/weil-conjectures-sheaf-F1/lean/Sheaf; python3 tools/blueprint_refs.py search \"strict henselization\"",
+   "results": "No matching declarations in either Lean tree or upstream name index. DAG has the scheme definition def-weil-pbc-strict-henselization-limit and the theorem lem-weil-pbc-strict-henselization-triples, but no ring predicate specifying its universal cocone.",
+   "date": "2026-10-11",
+   "verdict": "new ring predicate required; no second construction or theorem"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sc-strict-henselization-completion-flat-over-base",
+  "date": "2026-10-11",
+  "group": "F1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-brauer-zero",
+   "place": "boundary-stalk completion flatness argument: the ring strict henselization appearing in Tag 06LJ(c)",
+   "via": [
+    "lem-sc-strict-henselization-completion-flat-over-base",
+    "lem-sc-etale-triple-to-sh-completion-flat",
+    "lem-sc-strict-henselization-completion-flat",
+    "lem-sc-strict-henselization-completion-noetherian",
+    "lem-sc-strict-henselization-noetherian",
+    "lem-sc-strict-henselization-dvr",
+    "lem-sc-open-curve-boundary-higher-direct-image-vanishing",
+    "lem-sc-open-curve-gm-direct-image-cohomology"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-thm-br",
+ "lean": {
+  "module": "Sheaf.RingTheory.IsStrictHenselization",
+  "declaration": "Algebra.IsStrictHenselization",
+  "file": "lean/Sheaf/RingTheory/IsStrictHenselization.lean",
+  "statement": "def IsStrictHenselization (A K C : Type u) [CommRing A] [IsLocalRing A] [Field K] [Algebra (IsLocalRing.ResidueField A) K] [IsSepClosure (IsLocalRing.ResidueField A) K] [Algebra A K] [IsScalarTower A (IsLocalRing.ResidueField A) K] [CommRing C] [Algebra A C] : Prop",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-shc1307",
+  "group": "F1",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-shc1307",
+  "group": "F1",
+  "result": "pass",
+  "note": "A: CommRing+IsLocalRing+IsNoetherianRing; n=maximalIdeal A; K: IsSepClosure of ResidueField with A-action through k (IsScalarTower); A^sh: Algebra.IsStrictHenselization = colimit cocone of pointed etale A-algebras (S, S->K) in Over (CommAlgCat.of A K) = 04GW triples; T: AdicCompletion (n.map algebraMap A C) C; canonical map algebraMap A T = A->C->T (rfl); flat: RingHom.Flat; combined compile clean; no Mathlib/source strict henselization"
+ }
+}

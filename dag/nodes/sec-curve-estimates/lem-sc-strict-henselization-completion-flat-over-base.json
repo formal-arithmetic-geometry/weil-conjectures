@@ -21,7 +21,8 @@
  "stmt_deps": [
   "def-weil-pbc-noetherian-ring",
   "def-weil-pbc-adic-completion",
-  "def-weil-pbc-flat-ring-map"
+  "def-weil-pbc-flat-ring-map",
+  "def-sc-ring-strict-henselization"
  ],
  "proof": [
   {
@@ -116,5 +117,23 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-shc0055 (reviewer sub-agent of L); spot-checked: Read packet; transitive dep closure of item has no lem-sc-etale-triple-to-sh-completion-flat / lem-sc-strict-henselization-completion-flat(-noetherian) (completion-flat cites the parent, so the direct route was a cycle, correctly avoided); citer da75371d4 uses exactly A Noetherian local, completion at qA^sh = max ideal; new node mod-power-free is Tag 07QM(4)+limit, true, not a duplicate of the 8 same-tag nodes, searches recorded 2026-10-11; noetherian-completion-flat and flat-ring-map-comp are mathlib leaves with no deps. FIX more, RETURN less: (1) C/D: Step 1 (A->A^sh flat via faithfully-flat) was unused by the argument; removed with its proof_dep; (2) C4: Step 2 now states the identification T = completion of free F as Ahat-modules compatible with the ring map Ahat->T, so flat-module-completion-flat yields flatness of the ring map; (3) split_report tool_uses dropped the cyclic lem-sc-strict-henselization-completion-flat and the unused faithfully-flat, summary/blueprint rewritten; 1 file(s) fixed by the reviewer"
  },
- "lead_note": "2026-10-11 L (R-shc0055): group report and 'Review by E1' are stale (describe the cyclic completion-flat route); the merged proof is the completed-free-module route"
+ "lead_note": "2026-10-11 L (R-shc0055): group report and 'Review by E1' are stale (describe the cyclic completion-flat route); the merged proof is the completed-free-module route",
+ "lean": {
+  "module": "Sheaf.RingTheory.StrictHenselizationCompletionFlatOverBase",
+  "declaration": "Algebra.strictHenselization_completion_flat_over_base",
+  "file": "lean/Sheaf/RingTheory/StrictHenselizationCompletionFlatOverBase.lean",
+  "statement": "theorem strictHenselization_completion_flat_over_base (A K C : Type v) [CommRing A] [IsLocalRing A] [IsNoetherianRing A] [Field K] [Algebra (IsLocalRing.ResidueField A) K] [IsSepClosure (IsLocalRing.ResidueField A) K] [Algebra A K] [IsScalarTower A (IsLocalRing.ResidueField A) K] [CommRing C] [Algebra A C] (hC : IsStrictHenselization A K C) : (algebraMap A (AdicCompletion ((IsLocalRing.maximalIdeal A).map (algebraMap A C)) C)).Flat",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-shc1307",
+  "group": "F1",
+  "result": "pass",
+  "note": "A: CommRing+IsLocalRing+IsNoetherianRing; n=maximalIdeal A; K: IsSepClosure of ResidueField with A-action through k (IsScalarTower); A^sh: Algebra.IsStrictHenselization = colimit cocone of pointed etale A-algebras (S, S->K) in Over (CommAlgCat.of A K) = 04GW triples; T: AdicCompletion (n.map algebraMap A C) C; canonical map algebraMap A T = A->C->T (rfl); flat: RingHom.Flat; combined compile clean; no Mathlib/source strict henselization"
+ }
 }
