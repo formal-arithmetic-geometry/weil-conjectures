@@ -1,6 +1,6 @@
 # Work queue
 
-862 items; claim with `tools/claim.py next <group> [--stage N]`.
+863 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (27)
 
@@ -18,23 +18,23 @@
 | `lem-sc-strict-henselization-mod-power-free` | 4014 | none |
 | `lem-pc-derived-tensor-transitivity` | 5015 | none |
 | `lem-pc-derived-tensor-localization-cohomology` | 5017 | none |
-| `lem-pc-derived-functor-termwise-split-ses-triangle` | 5018 | none |
 | `pqf-lem-serre-criterion` | 6013 | none |
 | `lem-sc-picard-kunneth-qcoh` | 6014 | none |
-| `lem-sc-valuation-closed-fibre-section-vanishing` | 6014 | none |
 | `lem-sc-perfect-local-pseudocoherent-free-model` | 6015 | none |
 | `lem-sc-perfect-pullback-perfect-residue` | 6015 | none |
+| `lem-sc-valuation-limit-qcoh-section-descent` | 6015 | none |
 | `lem-pc-affine-perfect-cut-degree-zero` | 6016 | none |
-| `lem-sc-coherent-ring-perfect-complex-cohomology` | 6016 | none |
+| `lem-sc-coherent-ring-fp-kernel-cokernel` | 6017 | none |
 | `lem-sc-base-change-curve` | - | none |
 | `lem-sc-global-functions` | - | rests_on_sorry |
 | `lem-pur-kinjective-homotopy-exact-injective-target` | - | none |
 | `lem-pur-kinjective-homotopy-limit-vanishing` | - | none |
-| `lem-pc-finite-flat-pushforward-locally-free` | - | none |
 | `lem-pur-left-derived-exact-when-defined` | - | none |
-| `lem-pur-homotopy-category-triangulated` | - | none |
+| `lem-pc-affine-sections-finite-locally-free-criterion` | - | none |
+| `lem-pc-finite-flat-affine-sections-projective` | - | none |
+| `lem-pc-finite-flat-restriction-projective` | - | none |
 
-## Stage 2: nodes to state (835)
+## Stage 2: nodes to state (836)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -221,6 +221,7 @@
 | `lem-pur-kinjective-functorial-injective` | 1 | state |
 | `lem-pur-kinjective-set-iso-classes-bounded-size` | 1 | state |
 | `lem-pur-left-derived-from-kflat-class` | 1 | state |
+| `lem-pur-quasi-isos-saturated-triangulated` | 1 | state |
 | `lem-sc-affine-cap-section-open-algebra` | 1 | state |
 | `lem-sc-affine-finite-module-free-locus` | 1 | state |
 | `lem-sc-affine-finite-projective-prime-membership` | 1 | state |
@@ -874,7 +875,7 @@
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 | `def-nagata-fixed-base-separated-stage` | 6 | state |
 
-Not open yet: 1747 nodes that wait for a statement dependency, 68 nodes that wait for stage 1.
+Not open yet: 1750 nodes that wait for a statement dependency, 68 nodes that wait for stage 1.
 
 ## Stage 3: modules to prove (0)
 
