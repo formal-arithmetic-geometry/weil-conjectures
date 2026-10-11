@@ -15,7 +15,7 @@ Source: Stacks Project, Algebra, Lemma 10.168.1 (Tag 02JO), part (3)
 (blueprint: lem-pc-affine-flat-module-descent).
 -/
 
-universe u v w
+universe v w
 
 open CategoryTheory CategoryTheory.Limits
 open scoped TensorProduct
@@ -52,7 +52,7 @@ Source: Stacks Project, Algebra, Lemma 10.168.1 (Tag 02JO), part (3)
    those isomorphisms to every later prescribed module.
 -/
 theorem exists_eventually_flat_of_finitePresentation
-    {I : Type u} [Preorder I] [IsDirectedOrder I]
+    {I : Type v} [Preorder I] [IsDirectedOrder I]
     (F : I ⥤ CommRingCat.{v}) (c : Cocone F) (hc : IsColimit c)
     {i : I} {Ai Bi Ni : Type w}
     [CommRing Ai] [CommRing Bi] [AddCommMonoid Ni]

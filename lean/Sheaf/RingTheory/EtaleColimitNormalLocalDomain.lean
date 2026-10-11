@@ -17,7 +17,7 @@ with Tags 033C, 037D, 00GV, 00U2 and 00D7
 (blueprint: lem-weil-pbc-etale-colimit-normal-local-domain).
 -/
 
-universe u v w
+universe u v
 
 open CategoryTheory CategoryTheory.Limits
 
@@ -50,7 +50,7 @@ theorem isDomain_isIntegrallyClosed_injective_of_etale_colimit
     (A : Type u) [CommRing A] [IsDomain A]
     (hA : ∀ (p : Ideal A) [p.IsPrime],
       IsDomain (Localization.AtPrime p) ∧ IsIntegrallyClosed (Localization.AtPrime p))
-    {I : Type w} [SmallCategory I] [IsFiltered I]
+    {I : Type v} [SmallCategory I] [IsFiltered I]
     (B : I ⥤ CommAlgCat.{v} A) [HasColimit B]
     (hB : ∀ i : I, Algebra.Etale A (B.obj i)) [IsLocalRing ↥(colimit B)] :
     (IsDomain ↥(colimit B) ∧ IsIntegrallyClosed ↥(colimit B)) ∧

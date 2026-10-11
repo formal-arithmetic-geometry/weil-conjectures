@@ -16,7 +16,7 @@ Source: Stacks Project, `literature/stacks-project/limits.tex`, Lemmas 32.10.2
 and 32.10.4 (Tags 01ZR and 05LY) (blueprint: lem-pc-flat-bounded-complex-descent).
 -/
 
-universe u v
+universe u
 
 open CategoryTheory CategoryTheory.Limits Opposite
 
@@ -46,7 +46,7 @@ Proof:
    boundedness, finite presentation and the identification with `G`.
 3. Rename `j'` as `j` and the base-changed complex as `G_j`. -/
 theorem flat_bounded_complex_descent
-    {I : Type v} [PartialOrder I] [IsDirectedOrder I]
+    {I : Type u} [PartialOrder I] [IsDirectedOrder I]
     (R : I ⥤ CommRingCat.{u}) [∀ k : I, IsNoetherianRing (R.obj k)]
     (c : Cone (R.op ⋙ Scheme.Spec)) (hc : IsLimit c) [IsAffine c.pt]
     (i : I) {Xi : Scheme.{u}} (f : Xi ⟶ Spec (R.obj i))

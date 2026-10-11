@@ -17,7 +17,7 @@ Source: Stacks Project, Algebra, Tags 00D6, 00D7, 00DD, as used in Tag 07RI
 (blueprint: lem-weil-pbc-directed-colimit-base-change-elementwise).
 -/
 
-universe u v w
+universe v w
 
 open CategoryTheory CategoryTheory.Limits
 open scoped TensorProduct
@@ -53,7 +53,7 @@ Proof:
    colimit. Tag 00D6 gives representatives, and Tag 00D7 gives eventual vanishing.
 -/
 theorem directedColimitBaseChangeElementwise
-    {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)]
+    {I : Type v} [Preorder I] [IsDirected I (· ≤ ·)]
     (F : I ⥤ CommRingCat.{v}) [HasColimit F]
     (i₀ : I) (M₀ : Type w) [AddCommGroup M₀] [Module (F.obj i₀) M₀] :
     let S := F.obj i₀

@@ -14,7 +14,7 @@ Source: Stacks Project, Algebra, proof of Lemma Tag 037D (blueprint:
 lem-weil-pbc-filtered-colimit-localization-at-prime).
 -/
 
-universe u v
+universe v
 
 open CategoryTheory CategoryTheory.Limits
 
@@ -51,7 +51,7 @@ at the contracted primes, with the canonical maps.
 The compatibility equations on the original rings uniquely determine the
 localized maps: denominators are units, so they imply the stated fraction formulas. -/
 theorem filteredColimitLocalizationAtPrime
-    {I : Type u} [SmallCategory I] [IsFiltered I]
+    {I : Type v} [SmallCategory I] [IsFiltered I]
     (F : I ⥤ CommRingCat.{v}) [HasColimit F]
     (p : Ideal ((colimit F : CommRingCat) : Type v)) [hp : p.IsPrime] :
     let ι : ∀ i : I, (F.obj i) ⟶ colimit F := fun i => colimit.ι F i

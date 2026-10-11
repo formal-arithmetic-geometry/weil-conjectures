@@ -13,7 +13,7 @@ Source: Stacks Project, Algebra, Lemma Tag 00U2 (9), and more-algebra.tex,
 proof of Lemma Tag 0A02 (blueprint: lem-weil-pbc-etale-algebra-filtered-colimit-descent).
 -/
 
-universe u w
+universe u
 
 open CategoryTheory CategoryTheory.Limits
 open scoped TensorProduct
@@ -36,7 +36,7 @@ Proof, following the node:
    with the model isomorphism from step 1 to obtain the asserted A-algebra isomorphism.
 -/
 theorem exists_etale_algebra_of_filteredColimit
-    {I : Type w} [SmallCategory I] [IsFiltered I]
+    {I : Type u} [SmallCategory I] [IsFiltered I]
     (F : I ⥤ CommRingCat.{u}) [HasColimit F]
     (B : Type u) [CommRing B]
     (f : (colimit F : CommRingCat.{u}) ⟶ CommRingCat.of B)

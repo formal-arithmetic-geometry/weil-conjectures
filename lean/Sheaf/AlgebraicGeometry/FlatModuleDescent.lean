@@ -15,7 +15,7 @@ Source: Stacks Project, Lemma 32.10.4 (Tag 05LY), with the target equal to the b
 (blueprint: lem-pc-flat-module-descent).
 -/
 
-universe u v
+universe u
 
 open CategoryTheory CategoryTheory.Limits Opposite
 
@@ -43,7 +43,7 @@ its limit projections. An affine limit is written as `IsAffine c.pt`, allowing a
 of its isomorphism with a spectrum; affine stages are quasi-compact and quasi-separated,
 and all their transition morphisms are affine. -/
 theorem exists_eventually_isFlatOver_of_limit
-    {I : Type v} [PartialOrder I] [IsDirectedOrder I]
+    {I : Type u} [PartialOrder I] [IsDirectedOrder I]
     (R : I ⥤ CommRingCat.{u}) [∀ k : I, IsNoetherianRing (R.obj k)]
     (c : Cone (R.op ⋙ Scheme.Spec)) (hc : IsLimit c) [IsAffine c.pt]
     (i : I) {Xi : Scheme.{u}} (f : Xi ⟶ Spec (R.obj i))

@@ -15,7 +15,7 @@ Source: Stacks Project, Algebra, Lemma Tag 05N9, parts (2) and (3)
 (blueprint: lem-weil-pbc-colimit-category-fp-algebras).
 -/
 
-universe u v w z
+universe v w z
 
 open CategoryTheory CategoryTheory.Limits
 open scoped TensorProduct
@@ -45,7 +45,7 @@ each difference vanishes at a stage. A common upper bound kills them all, so the
 agree there. If there are no generators, take `μ = i`.
 -/
 theorem exists_map_of_finitePresentation_colimit
-    {Λ : Type u} [Preorder Λ] [IsDirected Λ (· ≤ ·)]
+    {Λ : Type v} [Preorder Λ] [IsDirected Λ (· ≤ ·)]
     (F : Λ ⥤ CommRingCat.{v}) [HasColimit F]
     (i : Λ) (A : Type w) (A' : Type z) [CommRing A] [CommRing A']
     [Algebra (F.obj i) A] [Algebra (F.obj i) A']

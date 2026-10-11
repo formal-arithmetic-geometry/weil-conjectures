@@ -14,7 +14,7 @@ Source: Stacks Project, Algebra, Lemma 10.168.7 (Tag 07RI)
 (blueprint: lem-weil-pbc-colimit-etale-ring-map).
 -/
 
-universe w u v
+universe u v
 
 open CategoryTheory CategoryTheory.Limits
 open scoped TensorProduct
@@ -46,7 +46,7 @@ Proof:
    composite on the free basis and the other on the generating relation classes.
    The conormal criterion then gives etaleness at this stage. -/
 theorem Etale.exists_stage_of_directedColimit
-    {I : Type w} [Preorder I] [IsDirected I (· ≤ ·)]
+    {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)]
     (F : I ⥤ CommRingCat.{u}) [HasColimit F] (i₀ : I)
     (B₀ C₀ : Type v) [CommRing B₀] [CommRing C₀]
     [Algebra (F.obj i₀) B₀] [Algebra (F.obj i₀) C₀]

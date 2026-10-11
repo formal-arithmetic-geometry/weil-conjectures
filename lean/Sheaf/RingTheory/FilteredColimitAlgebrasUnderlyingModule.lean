@@ -14,7 +14,7 @@ used implicitly in Tag 07RI (lemma-colimit-etale).
 (blueprint: lem-weil-pbc-filtered-colimit-algebras-underlying-module)
 -/
 
-universe u v w t
+universe u v w
 
 open CategoryTheory CategoryTheory.Limits
 
@@ -44,7 +44,7 @@ Proof, following the node's five steps:
    with the descended map on every element, proving uniqueness and the universal property.
 -/
 theorem filtered_colimit_algebras_underlying_module
-    {R : Type u} [CommRing R] {I : Type t} [SmallCategory I] [IsFiltered I]
+    {R : Type u} [CommRing R] {I : Type v} [SmallCategory I] [IsFiltered I]
     (F : I ⥤ CommAlgCat.{v} R) [HasColimit F]
     (P : Type w) [AddCommGroup P] [Module R P]
     (f : ∀ i : I, F.obj i →ₗ[R] P)

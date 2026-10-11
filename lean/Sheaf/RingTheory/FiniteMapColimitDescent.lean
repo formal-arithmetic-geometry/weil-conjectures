@@ -14,7 +14,7 @@ Source: Stacks Project, Algebra, Lemma 10.168.3 (Tag 07RG)
 (blueprint: lem-weil-pbc-colimit-finite-ring-map).
 -/
 
-universe w u v t
+universe u v t
 
 open CategoryTheory CategoryTheory.Limits
 
@@ -37,7 +37,7 @@ Proof:
 5. Apply `lem-weil-pbc-finite-of-integral-generators`: a finite type algebra generated
    by integral elements is finite as a module. -/
 theorem exists_finite_tensorProductMap_of_colimit
-    {I : Type w} [Preorder I] [IsDirected I (· ≤ ·)]
+    {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)]
     (F : I ⥤ CommRingCat.{u}) [HasColimit F] (i₀ : I)
     (B₀ : Type v) (C₀ : Type t) [CommRing B₀] [CommRing C₀]
     [Algebra (F.obj i₀) B₀] [Algebra (F.obj i₀) C₀]

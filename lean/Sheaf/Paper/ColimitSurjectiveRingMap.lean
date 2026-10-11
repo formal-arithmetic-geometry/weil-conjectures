@@ -16,7 +16,7 @@ Source: Stacks Project, Algebra, Tag 07RH, Lemma `lemma-colimit-surjective`
 (blueprint: lem-weil-pbc-colimit-surjective-ring-map).
 -/
 
-universe u v w x
+universe v w x
 
 open CategoryTheory CategoryTheory.Limits
 
@@ -45,7 +45,7 @@ Proof:
    tensors span the tensor product additively [def-weil-module-base-change]. Hence the
    stage map is surjective. With no generators, take the initial stage. -/
 theorem exists_surjective_tensorProduct_map_of_surjective
-    (I : Type u) [Preorder I] [IsDirected I (· ≤ ·)]
+    (I : Type v) [Preorder I] [IsDirected I (· ≤ ·)]
     (F : I ⥤ CommRingCat.{v}) [HasColimit F] (i₀ : I)
     (B₀ : Type w) (C₀ : Type x) [CommRing B₀] [CommRing C₀]
     [Algebra (F.obj i₀) B₀] [Algebra (F.obj i₀) C₀]

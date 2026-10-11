@@ -14,7 +14,7 @@ Source: Stacks Project, Algebra, Tag 05UU (1), with the module equal to the targ
 Categories, Tag 0032, for filtered reindexing (blueprint: lem-weil-pbc-colimit-rings-flat).
 -/
 
-universe w u v
+universe u v
 
 open CategoryTheory CategoryTheory.Limits
 
@@ -45,7 +45,7 @@ Proof:
 7. By `lem-weil-pbc-filtered-colimit-abelian-groups-exact`, their colimit map is injective.
    The tensor comparison identifies this map with the multiplication map in step 2,
    proving flatness. -/
-theorem flat_of_flat_comp_colimit_ι {I : Type w} [SmallCategory I] [IsFiltered I]
+theorem flat_of_flat_comp_colimit_ι {I : Type u} [SmallCategory I] [IsFiltered I]
     (F : I ⥤ CommRingCat.{u}) [HasColimit F] {S : Type v} [CommRing S]
     (ψ : ↥(colimit F) →+* S)
     (hψ : ∀ i : I, (ψ.comp (colimit.ι F i).hom).Flat) : ψ.Flat := by

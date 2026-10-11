@@ -13,7 +13,7 @@ Source: literature/stacks-project/algebra.tex, Algebra, Lemma Tag 05UT
 (blueprint: lem-weil-pbc-filtered-colimit-flat-modules).
 -/
 
-universe u v w
+universe u v
 
 open CategoryTheory CategoryTheory.Limits
 
@@ -39,7 +39,7 @@ Proof:
    becomes zero at `k`, so `x = 0`. Thus `f` is injective and `colimit F` is flat. -/
 theorem filteredColimit_flat
     {R : Type u} [CommRing R]
-    {I : Type w} [SmallCategory I] [IsFiltered I]
+    {I : Type v} [SmallCategory I] [IsFiltered I]
     (F : I ⥤ ModuleCat.{v} R) [HasColimit F]
     (hflat : ∀ i : I, Module.Flat R (F.obj i)) :
     Module.Flat R (colimit F : ModuleCat.{v} R) := by

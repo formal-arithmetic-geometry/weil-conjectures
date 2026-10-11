@@ -18,7 +18,7 @@ Source: Stacks Project, More on Algebra, Lemma Tag 0AH1
 (blueprint: lem-weil-pbc-henselization-finite-separable-fibres).
 -/
 
-universe u v w
+universe u v
 
 open CategoryTheory CategoryTheory.Limits
 
@@ -62,7 +62,7 @@ Proof:
    `def-weil-pbc-separable-algebraic-extension`. -/
 theorem finite_separable_fibers_of_etale_colimit
     (A : Type u) [CommRing A]
-    {I : Type w} [SmallCategory I] [IsFiltered I]
+    {I : Type v} [SmallCategory I] [IsFiltered I]
     (D : I ⥤ CommAlgCat.{v} A) [HasColimit D]
     (hD : ∀ i : I, Algebra.Etale A (D.obj i))
     [IsNoetherianRing ↥(colimit D)] (p : PrimeSpectrum A) :

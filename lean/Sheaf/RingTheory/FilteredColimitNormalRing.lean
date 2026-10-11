@@ -16,7 +16,7 @@ Source: Stacks Project, Algebra, Lemma Tag 037D (lemma-colimit-normal-ring)
 (blueprint: lem-weil-pbc-filtered-colimit-normal-ring).
 -/
 
-universe u w
+universe u
 
 open CategoryTheory CategoryTheory.Limits
 
@@ -35,7 +35,7 @@ stage, normality of that stage puts the root back in the colimit.  This proves e
 localization is a normal domain.
 -/
 theorem isNormal_of_filtered_colimit
-    {I : Type w} [SmallCategory I] [IsFiltered I]
+    {I : Type u} [SmallCategory I] [IsFiltered I]
     (F : I ⥤ CommRingCat.{u}) [HasColimit F]
     (hF : ∀ i : I, ∀ (p : Ideal (F.obj i)) [p.IsPrime],
       IsDomain (Localization.AtPrime p) ∧

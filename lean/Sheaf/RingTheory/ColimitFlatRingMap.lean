@@ -11,7 +11,7 @@ Lemma Tags 02JO and 04AI (blueprint: lem-weil-pbc-colimit-flat-ring-map).
 
 open CategoryTheory CategoryTheory.Limits
 
-universe u v w x
+universe v w x
 
 namespace RingHom
 
@@ -60,7 +60,7 @@ Proof (the nine steps of the node, following 02JO (1), (3), with M = S):
    `lem-weil-pbc-flat-module-base-change` and the isomorphisms of steps 1, 8.
 -/
 theorem exists_eventually_flat_of_colimit_flat
-    {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)]
+    {I : Type v} [Preorder I] [IsDirected I (· ≤ ·)]
     (F : I ⥤ CommRingCat.{v}) [HasColimit F]
     (i₀ : I)
     (B₀ : Type w) (C₀ : Type x) [CommRing B₀] [CommRing C₀]

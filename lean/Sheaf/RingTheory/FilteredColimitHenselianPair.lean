@@ -16,7 +16,7 @@ Source: Stacks Project, More on Algebra, Lemma 0FWT (blueprint:
 lem-weil-pbc-filtered-colimit-henselian-pair).
 -/
 
-universe w u
+universe u
 
 open CategoryTheory CategoryTheory.Limits
 
@@ -43,7 +43,7 @@ Proof sketch:
 5. Lift the factorization at that stage and map it to the colimit; by the factorization
    criterion `(colimit F, I)` is henselian. -/
 theorem filteredColimit_henselianPair
-    {Λ : Type w} [Preorder Λ] [IsDirected Λ (· ≤ ·)] [Nonempty Λ]
+    {Λ : Type u} [Preorder Λ] [IsDirected Λ (· ≤ ·)] [Nonempty Λ]
     (F : Λ ⥤ CommRingCat.{u}) [HasColimit F]
     (J : ∀ i : Λ, Ideal (F.obj i))
     (hJ : ∀ {i j : Λ} (f : i ⟶ j),

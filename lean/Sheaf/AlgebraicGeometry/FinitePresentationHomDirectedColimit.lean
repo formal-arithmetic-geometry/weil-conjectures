@@ -16,7 +16,7 @@ Source: Stacks Project, Modules, Lemma 01BS, specialized to qcqs schemes
 (blueprint: lem-weil-pbc-finite-presentation-hom-directed-colimit).
 -/
 
-universe u w
+universe u
 
 open CategoryTheory CategoryTheory.Limits
 
@@ -45,7 +45,7 @@ Proof:
    so injectivity gives the second clause. -/
 theorem hom_directedColimit_of_isFinitePresentation
     (X : Scheme.{u}) [CompactSpace X] [QuasiSeparatedSpace X]
-    (I : Type w) [Preorder I] [Nonempty I] [IsDirected I (· ≤ ·)]
+    (I : Type u) [Preorder I] [Nonempty I] [IsDirected I (· ≤ ·)]
     (D : I ⥤ X.Modules) (c : Cocone D) (hc : IsColimit c)
     (G : X.Modules)
     [SheafOfModules.IsFinitePresentation.{u} (R := X.ringCatSheaf) G] :
