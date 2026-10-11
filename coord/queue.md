@@ -1,11 +1,11 @@
 # Work queue
 
-504 items; claim with `tools/claim.py next <group> [--stage N]`.
+501 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (504)
+## Stage 2: nodes to state (501)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -47,7 +47,6 @@
 | `lem-sc-hilb-dominating-power` | 1 | state |
 | `lem-sc-hilbert-difference` | 1 | state |
 | `lem-sc-hilbert-embedded-points-gluing` | 1 | state |
-| `lem-sc-invertible-tensor-qcoherent` | 1 | state |
 | `lem-sc-local-section-quotient-finite-free` | 1 | state |
 | `lem-sc-local-splitting-finite-free` | 1 | state |
 | `lem-sc-perfect-local-pseudocoherent-free-model` | 1 | state |
@@ -67,11 +66,9 @@
 | `lem-weil-pbc-coherent-generic-point-ideal-inclusion` | 1 | state |
 | `lem-weil-pbc-coherent-local-isomorphism` | 1 | state |
 | `lem-weil-pbc-coherent-modules-kernel-cokernel-sum` | 1 | state |
-| `lem-weil-pbc-coherent-sheaf-hom-coherent` | 1 | state |
 | `lem-weil-pbc-coherent-stalk-map-extends` | 1 | state |
 | `lem-weil-pbc-coherent-twist-global-generation` | 1 | state |
 | `lem-weil-pbc-finite-presentation-kernel-surjection-finite-type` | 1 | state |
-| `lem-weil-pbc-finite-pushforward-coherent` | 1 | state |
 | `lem-weil-pbc-ideal-times-quasi-coherent-affine-sections` | 1 | state |
 | `lem-weil-pbc-integral-algebra-directed-colimit-finite` | 1 | state |
 | `lem-weil-pbc-integral-scheme-ideal-generic-stalk` | 1 | state |
