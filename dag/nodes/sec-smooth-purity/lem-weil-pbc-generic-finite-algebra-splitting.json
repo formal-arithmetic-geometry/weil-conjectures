@@ -132,5 +132,24 @@
   "group": "M1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-gfs2738 (reviewer sub-agent of L); spot-checked: Re-push after R-gfs2656 return. Point 1 (E) repaired: spread-purely-inseparable-factors now takes a finite domain E over A' with Frac L purely inseparable over K'; true (after localizing, finitely many generators x with x^{p^n} in A' (or E=A' if L=K'), so A'->E injective integral, surjective by 00GQ, radicial; finite+surjective+radicial = universal homeo); substitution L=K', A'=A now says only E=A[1/c] after localizing, true. Point 2 (C4/D) repaired: Step 4 takes D_j as factors of (B tensor A')_red after torsion-free localization, generic fibre is (C tensor K')_red = prod L_j since reduction commutes with localization, D_j finite domains with Frac L_j, matches child hypotheses; no integral closure. Children 1 and 2 byte-unchanged since baf297894 and true. Item statement unchanged vs base; citer lem-weil-pbc-finite-pushforward-generic-constructible uses it as stated (C4 ok). No fault beyond the two Second readings (stale 'integral closure' wording in a search query only)."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GenericFiniteAlgebraSplitting",
+  "declaration": "exists_generic_finite_algebra_splitting",
+  "file": "lean/Sheaf/AlgebraicGeometry/GenericFiniteAlgebraSplitting.lean",
+  "statement": "theorem exists_generic_finite_algebra_splitting (A : Type u) [CommRing A] [IsNoetherianRing A] [IsDomain A] (B : Type v) [CommRing B] [Algebra A B] [Module.Finite A B] : ∃ (c : A) (A' : Type u) (_ : CommRing A') (_ : Algebra (Localization.Away c) A') (_ : Algebra A A') (_ : IsScalarTower A (Localization.Away c) A'), c ≠ 0 ∧ Module.Finite (Localization.Away c) A' ∧ Algebra.Etale (Localization.Away c) A' ∧ Surjective (Spec.map (CommRingCat.ofHom (algebraMap (Localization.Away c) A'))) ∧ ∃ (r : ℕ) (D : Fin r → Type u) (_ : ∀ j, CommRing (D j)) (_ : ∀ j, Algebra A' (D j)), (∀ j, Module.Finite A' (D j) ∧ IsDomain (D j) ∧ IsFinite (Spec.map (CommRingCat.ofHom (algebraMap A' (D j)))) ∧ Surjective (Spec.map (CommRingCat.ofHom (algebraMap A' (D j)))) ∧ (topologically IsHomeomorph).universally (Spec.map (CommRingCat.ofHom (algebraMap A' (D j))))) ∧ letI := Algebra.TensorProduct.rightAlgebra (R := A) (A := B) (B := A') Nonempty (((B ⊗[A] A') ⧸ nilradical (B ⊗[A] A')) ≃ₐ[A'] (∀ j, D j))",
+  "branch": "sheaf-dag",
+  "by": "G1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-gfa1058"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-gfa1058",
+  "group": "G1",
+  "result": "fix",
+  "note": "A Noetherian domain, B finite A-algebra (Type v); c≠0; A' finite, Algebra.Etale, Spec-surjective over A[1/c] with IsScalarTower A; r, D j finite A'-domains, Spec(D j)→Spec A' IsFinite+Surjective+(topologically IsHomeomorph).universally; (B⊗A')/nilradical ≃ₐ[A'] ∏ D j via rightAlgebra as M1 c3aa8ce20; K dropped (named only)"
  }
 }

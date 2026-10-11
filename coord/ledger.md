@@ -4359,3 +4359,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 11:00 L: merged deliver/H1/lem-weil-pbc-invertible-generating-sections-fibre (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.InvertibleGeneratingSectionsFibre AlgebraicGeometry.Scheme.Modules.invertible_generating_sections_fibre_criterion)
 - 11:00 L: merged deliver/M1/lem-weil-pbc-h0-spectral-closed-restriction (stage 2; reviewer PASS; first push; Sheaf.Topology.SpectralClosedRestriction TopCat.spectral_closed_restriction)
 - 11:00 L: merged deliver/M1/lem-weil-pbc-injective-module-direct-image-acyclic (stage 2; reviewer FIX; first push; Sheaf.AlgebraicGeometry.InjectiveModuleDirectImageAcyclic AlgebraicGeometry.Etale.isZero_higherDirectImage_of_injective_module)
+- 11:00 L: merged deliver/G1/lem-weil-pbc-generic-finite-algebra-splitting (stage 2; reviewer FIX; first push; Sheaf.AlgebraicGeometry.GenericFiniteAlgebraSplitting exists_generic_finite_algebra_splitting)
