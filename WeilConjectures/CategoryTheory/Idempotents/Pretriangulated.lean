@@ -8,7 +8,7 @@ module
 public import WeilConjectures.CategoryTheory.Idempotents.Shift
 public import Mathlib.CategoryTheory.Triangulated.Functor
 public import Mathlib.CategoryTheory.Retract
-public import Mathlib.Tactic.NoncommRing
+public import WeilConjectures.Mathlib.Algebra.Ring.Idempotent
 
 /-!
 # The Karoubi envelope of a pretriangulated category
@@ -37,24 +37,6 @@ is idempotent.
 namespace CategoryTheory
 
 open Category Limits Preadditive ZeroObject Pretriangulated Idempotents
-
-section Ring
-
-/-- If `(x² - x)² = 0` in a ring, then `3x² - 2x³` is idempotent (written without numerals). -/
-lemma idem_of_sub_mul_sub_eq_zero {R : Type*} [Ring R] (x : R)
-    (h : (x * x - x) * (x * x - x) = 0) :
-    (x * x + x * x + x * x - x * x * x - x * x * x) *
-      (x * x + x * x + x * x - x * x * x - x * x * x) =
-      x * x + x * x + x * x - x * x * x - x * x * x := by
-  have key : (x * x + x * x + x * x - x * x * x - x * x * x) *
-      (x * x + x * x + x * x - x * x * x - x * x * x) -
-      (x * x + x * x + x * x - x * x * x - x * x * x) =
-      (x * x - x) * (x * x - x) * (x * x + x * x + x * x + x * x - x - x - x - x - 1 - 1 - 1) := by
-    noncomm_ring
-  rw [h, zero_mul, sub_eq_zero] at key
-  exact key
-
-end Ring
 
 namespace Pretriangulated
 
@@ -97,7 +79,18 @@ lemma idemPoly_idem {X : C} (x : X ⟶ X) (h : (x ≫ x - x) ≫ (x ≫ x - x) =
 
 /-- **Lifting of idempotents along a distinguished triangle**: a pair of idempotents on the first
 two terms of a distinguished triangle, compatible with its first morphism, extends to an
-idempotent endomorphism of the triangle. -/
+idempotent endomorphism of the triangle:
+
+```
+  T.obj₁ ──T.mor₁──▶ T.obj₂ ──T.mor₂──▶ T.obj₃ ──T.mor₃──▶ T.obj₁⟦1⟧
+    │                  │                  ┊                   │
+    a                  b                  c                 a⟦1⟧
+    ▼                  ▼                  ▼                   ▼
+  T.obj₁ ──T.mor₁──▶ T.obj₂ ──T.mor₂──▶ T.obj₃ ──T.mor₃──▶ T.obj₁⟦1⟧
+```
+
+If `x` is any completion given by the axioms, then `(x² - x)² = 0`, and `c = 3x² - 2x³` is an
+idempotent completion. -/
 lemma exists_idempotent_of_distTriang (T : Triangle C) (hT : T ∈ distTriang C)
     (a : T.obj₁ ⟶ T.obj₁) (b : T.obj₂ ⟶ T.obj₂) (ha : a ≫ a = a) (hb : b ≫ b = b)
     (hab : T.mor₁ ≫ b = a ≫ T.mor₁) :
@@ -354,17 +347,6 @@ lemma Karoubi.mem_distTriang_iff (T : Triangle (Karoubi C)) :
 category into its Karoubi envelope is a triangulated functor. -/
 instance toKaroubi.isTriangulated : (toKaroubi C).IsTriangulated where
   map_distinguished T hT := ⟨T, hT, ⟨Retract.refl _⟩⟩
-
-/-- Blueprint `lem-weil-karoubi-envelope-triangulated`, octahedral axiom: the Karoubi envelope of
-a triangulated category satisfies the octahedral axiom (Balmer–Schlichting).
-
-Unfinished: the difficulty is to choose, for a composable pair of morphisms of the envelope,
-an octahedron in `C` together with idempotent endomorphisms of its four triangles which are
-compatible with each other; the idempotents of the three cone triangles can be chosen by
-`CategoryTheory.Pretriangulated.exists_idempotent_of_distTriang`, but their compatibility with
-the morphisms `m₁`, `m₃` of the octahedron is not automatic. -/
-theorem Karoubi.isTriangulated [IsTriangulated C] : IsTriangulated (Karoubi C) :=
-  sorry
 
 end Idempotents
 

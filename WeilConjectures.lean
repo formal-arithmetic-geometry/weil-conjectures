@@ -513,6 +513,7 @@ public import WeilConjectures.CategoryTheory.HomotopyCategory.Adjunction
 public import WeilConjectures.CategoryTheory.Idempotents.Pretriangulated
 public import WeilConjectures.CategoryTheory.Idempotents.Shift
 public import WeilConjectures.CategoryTheory.Idempotents.TStructure
+public import WeilConjectures.CategoryTheory.Idempotents.Triangulated
 public import WeilConjectures.CategoryTheory.Monoidal.Closed.Preadditive
 public import WeilConjectures.CategoryTheory.Monoidal.Closed.ProjectionPairing
 public import WeilConjectures.CategoryTheory.Monoidal.Conjugate
@@ -867,6 +868,7 @@ public import WeilConjectures.Mathlib.Algebra.Polynomial.FieldDivision
 public import WeilConjectures.Mathlib.Algebra.Polynomial.Laurent
 public import WeilConjectures.Mathlib.Algebra.Polynomial.Reverse
 public import WeilConjectures.Mathlib.Algebra.Polynomial.Splits
+public import WeilConjectures.Mathlib.Algebra.Ring.Idempotent
 public import WeilConjectures.Mathlib.Algebra.Ring.Subring.Basic
 public import WeilConjectures.Mathlib.AlgebraicGeometry.AffineOpenAlgebra
 public import WeilConjectures.Mathlib.AlgebraicGeometry.AffineScheme
@@ -1107,10 +1109,12 @@ public import WeilConjectures.Mathlib.CategoryTheory.Triangulated.TStructure.ETr
 public import WeilConjectures.Mathlib.CategoryTheory.Triangulated.TStructure.Heart
 public import WeilConjectures.Mathlib.CategoryTheory.Triangulated.TStructure.SpectralObject
 public import WeilConjectures.Mathlib.CategoryTheory.Triangulated.TriangleShift
+public import WeilConjectures.Mathlib.CategoryTheory.Triangulated.Triangulated
 public import WeilConjectures.Mathlib.CategoryTheory.Whiskering
 public import WeilConjectures.Mathlib.CategoryTheory.Yoneda
 public import WeilConjectures.Mathlib.Data.Fin.Rev
 public import WeilConjectures.Mathlib.Data.Nat.Choose.Dvd
+public import WeilConjectures.Mathlib.Data.Nat.Factorization.Induction
 public import WeilConjectures.Mathlib.Data.Set.Image
 public import WeilConjectures.Mathlib.FieldTheory.Finite.Basic
 public import WeilConjectures.Mathlib.FieldTheory.Finite.Polynomial
