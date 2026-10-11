@@ -1,0 +1,113 @@
+{
+ "id": "def-weil-pbc-flat-base-change-open-choices",
+ "kind": "definition",
+ "title": "Restricted resolution and section identifications for the flat base-change map",
+ "status": "split",
+ "statement": "Let $f:X\\to S$ and $g:S\\prime\\to S$ be morphisms of schemes [def-pc-scheme], with $X\\prime=S\\prime\\times_S X$ and projections $f\\prime,g\\prime$ [def-pc-fibre-product]. Let $F$ be an $\\mathcal O_X$-module, $F\\prime=(g\\prime)^*F$ [def-pc-module-pullback], and let $I,J$ be nonnegative injective resolutions of $F,F\\prime$ [def-sp-injective-resolutions]. For an open $V\\subseteq S$ put $U=f^{-1}V$, $W=(g\\prime)^{-1}U=(f\\prime)^{-1}(g^{-1}V)$ and $h=g\\prime|_W:W\\to U$. A restricted-resolution section identification consists of an injective resolution of $F|_U$, an augmentation-preserving isomorphism to $I|_U$, and the corresponding isomorphism of additive section complexes to $I(U)$, whose components are restriction identification of sections composed with the resolution isomorphism; similarly for $F\\prime|_W$ and $J(W)$. The flat-base-change open choices consist of these source and target identifications and the restricted $h$-map $\\psi:F|_U\\to h_*(F\\prime|_W)$ of [def-weil-pbc-module-cohomology-fmap], characterized by the commuting restriction-unit square for the original pullback adjunction unit $F\\to g\\prime_*F\\prime$. The associated class maps use the resolution comparison on cohomology, exact evaluation, and the canonical cocycle-to-cohomology-sheaf map of [lem-weil-pbc-higher-direct-image-presheaf].",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-fibre-product",
+  "def-pc-module-pullback",
+  "def-sp-injective-resolutions",
+  "def-weil-pbc-module-cohomology-fmap",
+  "lem-weil-pbc-higher-direct-image-presheaf"
+ ],
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tags 01FB (restricted h-map and resolution computation), 01E4 (section complexes and canonical cocycle-to-sheaf map), and 01E1 (restriction preserves injectives); the explicit bundle is the bookkeeping in steps 2–3 of lem-weil-pbc-flat-base-change-map-sections."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "restricted injective resolution section complexes cohomology map flat base change",
+   "results": "Service unavailable: Internal Server Error.",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "injective resolution restriction to open subscheme comparison section complex canonical cohomology maps",
+   "results": "Eight hits: PresheafOfModules.Sheafify.app_eq_of_isLocallyInjective; CategoryTheory.InjectiveResolution.Hom.ι'_comp_hom'; CategoryTheory.Sheaf.ΓRes_map; AlgebraicGeometry.Scheme.Opens.ι_app; AlgebraicGeometry.Scheme.ofRestrict_app; AlgebraicGeometry.Scheme.Opens.ι_appLE; CategoryTheory.InjectiveResolution.Hom.ι_comp_hom; AlgebraicGeometry.Scheme.homOfLE_appLE. No bundle of the restricted-unit h-map and augmentation-preserving resolution/section identifications.",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "RestrictedResolutionSections|FlatBaseChangeOpenChoices|sectionCohomologyTheta (Mathlib/CategoryTheory); rg of these names in Mathlib, WeilConjectures and lean/Sheaf; tools/blueprint_refs.py search \"restricted resolution\"; rg \"restriction.*resolution|resolution.*restriction\" dag/nodes/sec-proper-base-change",
+   "results": "msearch grep: 0 hits. rg of declaration names: no hits. Blueprint search: 0 blueprint nodes. DAG search includes module-open-restriction-injectives and module-cohomology-fmap: these supply the ingredients but do not bundle the restricted unit and pinned section identifications.",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-flat-base-change-map-sections",
+  "date": "2026-10-11",
+  "group": "R1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-henselian-idempotent-lifting",
+   "place": "The restrictions U and W and their canonical section identifications in steps 2–3 of the flat-base-change-on-sections calculation.",
+   "via": [
+    "lem-weil-pbc-flat-base-change-map-sections",
+    "lem-weil-pbc-formal-functions-stalk",
+    "lem-weil-pbc-stein-fibre-idempotent-image",
+    "lem-weil-pbc-stein-normalized-fibre-idempotent",
+    "lem-weil-pbc-stein-factorization-affine",
+    "lem-weil-pbc-zariski-h0-proper-henselian-pair"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FlatBaseChangeOpenChoices",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.FlatBaseChangeOpenChoices",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.Modules.sectionCohomologyPresheaf",
+   "AlgebraicGeometry.Scheme.Modules.sectionCohomologyComparison",
+   "AlgebraicGeometry.Scheme.Modules.sectionCohomologyTheta",
+   "AlgebraicGeometry.Scheme.Modules.RestrictedResolutionSections",
+   "AlgebraicGeometry.Scheme.Modules.FlatBaseChangeOpenChoices",
+   "AlgebraicGeometry.Scheme.Modules.flatBaseChangeOpenEquality",
+   "AlgebraicGeometry.Scheme.Modules.resolutionSectionClass"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/FlatBaseChangeOpenChoices.lean",
+  "statement": "structure FlatBaseChangeOpenChoices {X S S' : Scheme.{uOpen}} (f : X ⟶ S) (g : S' ⟶ S) (F : X.Modules) (I : InjectiveResolution F) (J : InjectiveResolution ((tensorPullback (pullback.snd g f)).obj F)) (V : S.Opens)",
+  "branch": "sheaf-dag",
+  "by": "R1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-fbs",
+  "group": "R1",
+  "result": "fix",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-fbs",
+  "group": "R1",
+  "result": "fix",
+  "note": "f,g,[Flat g],[Flat g'] with X'=pullback g f; F'=tensorPullback g'; beta tied to H^p(c) for every I,J,t with t a = g'_*(b) eta; beta-flat via the exists_tensorPullbackAdjunction homEquiv; open choices pinned (psi by restriction-unit square, sections by restrictAppIso); section formula with moduleCohomologyFMap of g'.resLE and psi; theta moved into the new node's module, dependency record reverted; reverted the delivery's change of existing node(s) lem-weil-pbc-higher-direct-image-presheaf (--revert-nodes; kept as on sheaf-dag)"
+ }
+}
