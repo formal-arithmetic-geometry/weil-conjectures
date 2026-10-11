@@ -3239,3 +3239,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 01:36 UTC L: E1 perfect-local-pseudocoherent-free-model FIX 63561530d (R-lpf0132; duplicate of the Qh_map_bijective leaf dropped, ring wording of pseudo-coherence written in).
 - 01:36 L: returned deliver/E1/lem-pc-module-finite-presentation-transitive (reviewer RETURN: Not a fault: the node has been a Mathlib leaf since 01:27 UTC (commit 9d860ced5: Module.FinitePresentation.trans, Mathli)
 - 01:37 UTC L: session restarted on a fresh account (limit hit ~01:37; reviewer R-kun0132 on K1 picard-kunneth-qcoh died before touching the repository); E1's unneeded split of the Mathlib leaf lem-pc-module-finite-presentation-transitive returned (01ff66756), branch deleted with a notice.
+- 01:40 L: returned deliver/E1/lem-pc-module-flat-transitive (reviewer RETURN: Not a fault: the node has been a Mathlib leaf since 01:27 UTC (commit 9d860ced5: Module.Flat.trans, Mathlib/RingTheory/F)
