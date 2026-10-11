@@ -160,5 +160,23 @@
   "group": "J1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-fdm (reviewer sub-agent of L); spot-checked: Source: Stacks descent.tex 02W3 (lemma-descending-types-morphisms, l.9028) with its proof l.9047-9135, 02W0 (lemma-refine-coverings-fully-faithful, l.8858), topologies.tex 022E (lemma-fpqc-affine, l.3151) read locally. Item statement agrees with 02W3 for tau=fpqc hypothesis by hypothesis ((1) any base change, (2) finite coproducts, (3) flat surjective affines), conclusion read for one-member coverings; (2) is unused on the singleton route, harmless. Step 1: lem-galois-fpqc-covering-base-change gives X_A->A fpqc, (1) gives P for V_A->X_A. Step 2: new lem-galois-fpqc-singleton-affine-refinement (022E plus finite coproduct; X' affine as finite coproduct of affines, g flat as open immersion then flat, surjective from the fpqc definition with V=S; m=0 for S empty fine) and (3) applied to V_A x_{X_A} X'_A which has P by (1). Step 3: new lem-galois-fpqc-refinement-fully-faithful (02W0 specialised to singletons and a map h over S, true) descends psi'_A and its inverse, faithfulness makes the composites identities. Step 4: lem-galois-fpqc-morphisms-descend applied to (psi_A|_B)^{-1} psi_B gives rho^A_B and its inverse, cocycle by uniqueness; lem-weil-pbc-relative-glueing-affine-opens (a),(b) met; lem-weil-pbc-scheme-morphism-gluing glues psi_A and checks the compatibility equation locally on X_2, as in the Stacks proof. Off-unit citations are Mathlib leaves (relative glueing, morphism gluing, coproduct) and the definition def-pd-descent-datum: generic tools, no tool_uses needed. Slopmaster2 searched (EffectiveDescent.lean, DescentDatum.lean, EtaleTopologicalInvariance/Descent.lean): no declaration of 02W3/02W0/022E, so no B10 attachment. Small cases: S empty (m=0), identity refinement h=id, trivial cover X=S. 14:34-14:35 UTC"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FpqcDescendingTypesMorphisms",
+  "declaration": "AlgebraicGeometry.fpqcDescentEffective_of_affine",
+  "file": "lean/Sheaf/AlgebraicGeometry/FpqcDescendingTypesMorphisms.lean",
+  "statement": "theorem fpqcDescentEffective_of_affine (P : MorphismProperty Scheme.{u}) (hbase : ∀ {Y V V' : Scheme.{u}} (g : Y ⟶ V) (h : V' ⟶ V), P g → P (pullback.snd g h)) (hcoprod : ∀ (m : ℕ) (Y V : Fin m → Scheme.{u}) (g : ∀ i, Y i ⟶ V i), (∀ i, P (g i)) → P (Limits.Sigma.map g)) (haffine : ∀ {X S : Scheme.{u}} [IsAffine X] [IsAffine S] (f : X ⟶ S), Flat f → Surjective f → ∀ {V : Over X} (D : Over.DescentDatum f V), P V.hom → D.IsEffective) {X S : Scheme.{u}} (f : X ⟶ S) (hfpqc : Presieve.singleton f ∈ Scheme.fpqcPrecoverage S) {V : Over X} (D : Over.DescentDatum f V) (hV : P V.hom) : D.IsEffective",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-dtm0636",
+  "group": "E1",
+  "result": "pass",
+  "note": "P:MorphismProperty Scheme.{u}; (1) hbase = P g -> P (pullback.snd g h) for any V'->V; (2) hcoprod over Fin m incl. m=0 via Sigma.map; (3) haffine IsAffine X,S + Flat + Surjective + P V.hom -> D.IsEffective; conclusion: singleton f in Scheme.fpqcPrecoverage S (propQCPrecoverage Flat, F1/M1 convention), P V.hom -> D.IsEffective (recorded def-pd-descent-datum decl); single universe u; docstring carries 4-step proof; no Mathlib/slopmaster2 restatement (Mathlib Morphisms/Descent is property descent, EffectiveDescent.isEffective_of_isFinite is 0CCJ)"
  }
 }
