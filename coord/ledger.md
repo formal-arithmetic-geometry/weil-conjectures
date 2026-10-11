@@ -5686,3 +5686,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 19:52 L: returned deliver/U1/lem-sc-picard-h1-restriction-compatibility (reviewer RETURN: (reviewer R-sub-D, head 4b5d3f88e) One point; nothing else is to change. H10 (the new node's module does not compile alo)
 - 19:54 L: merged deliver/F1/lem-weil-pbc-colimit-of-sites-injective-system (stage 2; reviewer PASS; after a return; Sheaf.Paper.ColimitSitesInjectiveSystem CategoryTheory.exists_compatible_injective_system)
 - 19:55 L: merged deliver/C1/lem-sc-cech-comparison-map-naturality (stage 2; reviewer PASS; after a return; Sheaf.Paper.CechComparisonMapNaturality AlgebraicGeometry.Scheme.Modules.cechComparisonMapNaturality)
+- 19:56 L: returned deliver/V1/lem-sc-flat-precompose-pus (reviewer RETURN: (reviewer R-sub-D, head 8a39e9f68) The three points of R-fpp2 are repaired in the item's statement: c is dualityEquation)
