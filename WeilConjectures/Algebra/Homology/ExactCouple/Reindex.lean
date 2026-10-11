@@ -70,12 +70,17 @@ def reindex (e : κ ≃+ κ') (a' b' c' : κ') (ha : e a = a') (hb : e b = b') (
 
 variable (e : κ ≃+ κ') (a' b' c' : κ') (ha : e a = a') (hb : e b = b') (hc : e c = c')
 
+/-- The `D`-objects of a reindexed couple. -/
 @[simp] lemma reindex_D (i : κ') : (X.reindex e a' b' c' ha hb hc).D i = X.D (e.symm i) := rfl
+/-- The `E`-objects of a reindexed couple. -/
 @[simp] lemma reindex_E (i : κ') : (X.reindex e a' b' c' ha hb hc).E i = X.E (e.symm i) := rfl
+/-- The maps `α` of a reindexed couple. -/
 @[simp] lemma reindex_α (i j : κ') :
     (X.reindex e a' b' c' ha hb hc).α i j = X.α (e.symm i) (e.symm j) := rfl
+/-- The maps `f` of a reindexed couple. -/
 @[simp] lemma reindex_f (i j : κ') :
     (X.reindex e a' b' c' ha hb hc).f i j = X.f (e.symm i) (e.symm j) := rfl
+/-- The maps `g` of a reindexed couple. -/
 @[simp] lemma reindex_g (i j : κ') :
     (X.reindex e a' b' c' ha hb hc).g i j = X.g (e.symm i) (e.symm j) := rfl
 
