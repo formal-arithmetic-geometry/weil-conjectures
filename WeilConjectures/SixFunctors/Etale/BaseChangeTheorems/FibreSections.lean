@@ -380,7 +380,63 @@ fields (`AlgebraicGeometry.Etale.isIso_globalSectionsUpperStarMap_of_isAlgClosed
 @[stacks 0A3S]
 theorem bijective_stalkToFibreSections_of_isProper [IsProper f] [IsAlgClosed Ω]
     (h : IsPullback a b f y) :
-    Function.Bijective (stalkToFibreSections f y a b h.w F) :=
-  sorry
+    Function.Bijective (stalkToFibreSections f y a b h.w F) := by
+  have : PreservesFilteredColimitsOfSize.{u, u} (forget AddCommGrpCat.{u + 1}) :=
+    preservesFilteredColimitsOfSize_shrink.{u, u + 1, u, u + 1} _
+  obtain ⟨hsurj, hinj⟩ := strictLocalizationPullback_sections f y F
+  have hfib := bijective_restrictAlong_fibreToStrictLocalization f y a b F h
+  -- the image of a germ over an affine neighbourhood factors through `S_(y) ×_Y X`
+  have key (x : Scheme.AffinePointedEtaleNeighborhood y)
+      (s : F.obj.obj (op (f.Etale.obj x.obj.1))) :
+      stalkToFibreSections f y a b h.w F
+          ((pointSmallEtale y).toPresheafFiber x.obj.1 x.obj.2
+            ((f)_*[AddCommGrpCat.{u + 1}].obj F).obj s) =
+        restrictAlong (pullback.snd (Scheme.strictLocalizationToBase y) f) F
+          (fibreToStrictLocalization f y a b h.w) a
+          (fibreToStrictLocalization_snd f y a b h.w).symm
+          (V := Scheme.Etale.mk (𝟙 _)) (V' := Scheme.Etale.mk (𝟙 Xy))
+          (fibreToStrictLocalization f y a b h.w)
+          ((Category.comp_id _).trans (Category.id_comp _).symm)
+          (pullSection (pullback.snd (Scheme.strictLocalizationToBase y) f) F
+            (V := Scheme.Etale.mk (𝟙 _)) (U := f.Etale.obj x.obj.1)
+            (strictLocalizationPullbackLeg f y x)
+            ((strictLocalizationPullbackLeg_snd f y x).trans (Category.id_comp _).symm) s) := by
+    rw [toPresheafFiber_stalkToFibreSections, fibreRestriction_apply, restrictAlong_pullSection]
+    exact pullSection_congr _ _ _
+      (fibreToStrictLocalization_comp_strictLocalizationPullbackLeg f y a b h.w x).symm _
+  -- every germ is represented over an affine neighbourhood
+  have germ (z : ToType ((pointSmallEtale y).presheafFiber.obj
+      ((f)_*[AddCommGrpCat.{u + 1}].obj F).obj)) :
+      ∃ (x : Scheme.AffinePointedEtaleNeighborhood y) (s : F.obj.obj (op (f.Etale.obj x.obj.1))),
+        (pointSmallEtale y).toPresheafFiber x.obj.1 x.obj.2
+          ((f)_*[AddCommGrpCat.{u + 1}].obj F).obj s = z := by
+    obtain ⟨V, v, s, rfl⟩ := (pointSmallEtale y).toPresheafFiber_jointly_surjective z
+    obtain ⟨x, ⟨g⟩⟩ := Scheme.AffinePointedEtaleNeighborhood.exists_hom y ⟨V, v⟩
+    refine ⟨x, ((f)_*[AddCommGrpCat.{u + 1}].obj F).obj.map g.1.op s, ?_⟩
+    exact (GrothendieckTopology.Point.toPresheafFiber_w_apply _ g.1 x.obj.2 _ s).trans
+      (congrArg (fun w ↦ (pointSmallEtale y).toPresheafFiber V w
+        ((f)_*[AddCommGrpCat.{u + 1}].obj F).obj s) g.2)
+  refine ⟨fun z₁ z₂ e ↦ ?_, fun σ ↦ ?_⟩
+  · rw [← sub_eq_zero]
+    have hz : stalkToFibreSections f y a b h.w F (z₁ - z₂) = 0 := by
+      rw [map_sub, e, sub_self]
+    obtain ⟨x, s, hs⟩ := germ (z₁ - z₂)
+    rw [← hs] at hz ⊢
+    rw [key] at hz
+    obtain ⟨x', g, hg⟩ := hinj x s (hfib.1 (hz.trans (map_zero _).symm))
+    have e₁ : (pointSmallEtale y).toPresheafFiber x.obj.1 x.obj.2
+        ((f)_*[AddCommGrpCat.{u + 1}].obj F).obj s =
+        (pointSmallEtale y).toPresheafFiber x'.obj.1 x'.obj.2
+          ((f)_*[AddCommGrpCat.{u + 1}].obj F).obj
+          (((f)_*[AddCommGrpCat.{u + 1}].obj F).obj.map g.hom.1.op s) := by
+      exact ((GrothendieckTopology.Point.toPresheafFiber_w_apply _ g.hom.1 x'.obj.2
+        ((f)_*[AddCommGrpCat.{u + 1}].obj F).obj s).trans
+        (congrArg (fun w ↦ (pointSmallEtale y).toPresheafFiber x.obj.1 w
+          ((f)_*[AddCommGrpCat.{u + 1}].obj F).obj s) g.hom.2)).symm
+    have e₂ : ((f)_*[AddCommGrpCat.{u + 1}].obj F).obj.map g.hom.1.op s = 0 := hg
+    rw [e₁, e₂, map_zero]
+  · obtain ⟨τ, rfl⟩ := hfib.2 σ
+    obtain ⟨x, s, rfl⟩ := hsurj τ
+    exact ⟨_, key x s⟩
 
 end AlgebraicGeometry.Etale
