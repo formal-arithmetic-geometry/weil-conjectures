@@ -290,5 +290,24 @@
   "by": "L",
   "result": "accepted",
   "note": "12 steps following Stacks 07CR with the implicit arguments written out: the presentation and the translation of variables preserving the strictly standard conditions; the linear coefficients and the unit u; the matrix (s_ik) via the 07DQ node; elimination and the g_j; B and the factorization (Ann(pi^k) = Ann(pi)); B_pi = A_pi[v] smooth via a new unsplit node (A_a smooth for a strictly standard, from the first paragraph of Elkik 07CA) and the polynomial/composition nodes; B = B'/K with the degree-two relation; R -> B' smooth and flat at primes containing pi (standard smooth fibre, 00T7/00ST/00TF nodes); the local claim via Krull intersection and the 07T8 annihilator node; spreading out to a principal open; aB in H_{B/R}. Dimension notions def-kun-dimension and def-kun-topological-dimension-at-point identified in step 9 (same number)."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.PopescuDesingularize",
+  "declaration": "Algebra.exists_desingularization",
+  "file": "lean/Sheaf/RingTheory/PopescuDesingularize.lean",
+  "statement": "theorem exists_desingularization (R : Type u) (Λ : Type v) (A : Type w) [CommRing R] [CommRing Λ] [CommRing A] [Algebra R Λ] [Algebra R A] [IsNoetherianRing R] [FinitePresentation R A] (π : R) (α : A →ₐ[R] Λ) (hΛ : ∀ l : Λ, l * algebraMap R Λ π = 0 ↔ l * (algebraMap R Λ π) ^ 2 = 0) (hstandard : IsStrictlyStandardElement (R := R) (algebraMap R A π)) (hρ : ∃ ρ : (A ⧸ Ideal.span {(algebraMap R A π) ^ 4}) →ₐ[R] (R ⧸ Ideal.span {π ^ 4}), ∀ (a : A) (r : R), ρ (Ideal.Quotient.mk _ a) = Ideal.Quotient.mk _ r → Ideal.Quotient.mk (Ideal.span {(algebraMap R Λ π) ^ 4}) (α a) = Ideal.Quotient.mk (Ideal.span {(algebraMap R Λ π) ^ 4}) (algebraMap R Λ r)) : ∃ (B : Type (max u w)) (_ : CommRing B) (_ : Algebra R B), FinitePresentation R B ∧ ∃ (β : B →ₐ[R] Λ) (aB : A →ₐ[R] B), β.comp aB = α ∧ Ideal.span ((algebraMap R B) '' {r : R | ∀ x : R, π ^ 2 * x = 0 → r * π * x = 0}) ≤ singularIdeal R B",
+  "branch": "sheaf-dag",
+  "by": "K1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-pdz1258"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-pdz1258",
+  "group": "K1",
+  "result": "fix",
+  "note": "R Noetherian, A f.p. instance, pi, alpha; Ann_Lambda(pi)=Ann_Lambda(pi^2) as hLambda iff; pi strictly standard via recorded IsStrictlyStandardElement; rho R-alg A/pi^4 -> R/pi^4 tied to alpha via representatives; exists f.p. B, aB, beta with beta.comp aB = alpha, span(algebraMap '' {r | pi^2 x=0 -> r pi x=0}) <= singularIdeal R B; sibling H1 676cafafb form"
  }
 }
