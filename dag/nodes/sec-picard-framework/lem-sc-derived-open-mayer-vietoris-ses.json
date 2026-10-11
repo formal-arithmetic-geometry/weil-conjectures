@@ -140,5 +140,23 @@
   "group": "K1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-mvs0012 (reviewer sub-agent of L); spot-checked: Read packet whole, Tag 08BU (cohomology.tex 8083, label lemma-exact-sequence-lower-shriek) and Sheaves Tag 00A7 (lemma-j-shriek-modules); signs checked by hand (s->(s,-s), (a,b)->a+b, composite 0; stalk cases U∩V, U\\V, V\\U, outside exact); stalkwise exactness cited via lem-weil-pbc-module-stalk-exact (5); citer lem-sc-derived-mayer-vietoris-triangle uses the same SES with difference map and counits; no duplicate SES node (grep mayer-vietoris). FIX more, RETURN less: (1) step 1 first arrow was ill-typed '(s,t)->s-t' and composite-zero reason garbled; rewritten as s->(iota(s),-iota(s)), composite zero by transitivity (E/C1); (2) step 2 applied the abelian-sheaf stalk lemma lem-sc-topological-extension-by-zero-stalks to the module j_! of lem-sc-derived-open-restriction-adjunction-exact, whose statement gives no construction, and the stalks of the first arrow were uncited (C4); added statement-only node lem-sc-module-extension-by-zero-stalk-maps (ringed-space Stacks 00A7 with the maps iota_{W,W'}; lem-weil-pbc-module-extension-by-zero-adjunction covers schemes only, so not a duplicate; leanfinder no match) and dropped the topological tool use; (3) the second reading's 'correction' of the source label to lemma-unbounded-mayer-vietoris was wrong (that is Tag 08BX); step sources and proof_origin restored to Tag 08BU cohomology-lemma-exact-sequence-lower-shriek. End Sun Oct 11 12:13:13 AM UTC 2026.; 2 file(s) fixed by the reviewer; 1 statement node(s) added by the reviewer (FIX more, RETURN less)"
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.OpenExtensionMayerVietorisShortExact",
+  "declaration": "AlgebraicGeometry.open_extension_mayer_vietoris_shortExact",
+  "file": "lean/Sheaf/Algebra/Homology/OpenExtensionMayerVietorisShortExact.lean",
+  "statement": "theorem open_extension_mayer_vietoris_shortExact (X : RingedSpace.{u}) (U V : Opens X) (hcover : U ⊔ V = ⊤) (F : SheafOfModules.{u} (moduleRings X)) : ∃ (iU : ((SheafOfModules.extensionByZeroPresheaf.{u} (moduleRings X) (U ⊓ V) ⋙ PresheafOfModules.sheafification.{u} (𝟙 (moduleRings X).obj)).obj ((SheafOfModules.overFunctor.{u} (moduleRings X) (U ⊓ V)).obj F)) ⟶ ((SheafOfModules.extensionByZeroPresheaf.{u} (moduleRings X) U ⋙ PresheafOfModules.sheafification.{u} (𝟙 (moduleRings X).obj)).obj ((SheafOfModules.overFunctor.{u} (moduleRings X) U).obj F))) (iV : ((SheafOfModules.extensionByZeroPresheaf.{u} (moduleRings X) (U ⊓ V) ⋙ PresheafOfModules.sheafification.{u} (𝟙 (moduleRings X).obj)).obj ((SheafOfModules.overFunctor.{u} (moduleRings X) (U ⊓ V)).obj F)) ⟶ ((SheafOfModules.extensionByZeroPresheaf.{u} (moduleRings X) V ⋙ PresheafOfModules.sheafification.{u} (𝟙 (moduleRings X).obj)).obj ((SheafOfModules.overFunctor.{u} (moduleRings X) V).obj F))), iU ≫ ((Classical.choice (open_restriction_adjunction_exact X U).2.2.2.2).counit.app F) = ((Classical.choice (open_restriction_adjunction_exact X (U ⊓ V)).2.2.2.2).counit.app F) ∧ iV ≫ ((Classical.choice (open_restriction_adjunction_exact X V).2.2.2.2).counit.app F) = ((Classical.choice (open_restriction_adjunction_exact X (U ⊓ V)).2.2.2.2).counit.app F) ∧ ∃ (hzero : biprod.lift iU (-iV) ≫ biprod.desc ((Classical.choice (open_restriction_adjunction_exact X U).2.2.2.2).counit.app F) ((Classical.choice (open_restriction_adjunction_exact X V).2.2.2.2).counit.app F) = 0), (ShortComplex.mk (biprod.lift iU (-iV)) (biprod.desc ((Classical.choice (open_restriction_adjunction_exact X U).2.2.2.2).counit.app F) ((Classical.choice (open_restriction_adjunction_exact X V).2.2.2.2).counit.app F)) hzero).ShortExact",
+  "branch": "sheaf-dag",
+  "by": "K1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-dmv1337",
+  "group": "K1",
+  "result": "pass",
+  "note": "X:RingedSpace.{u}, U V:Opens X, hcover U⊔V=⊤ (needed for epi), F:SheafOfModules (moduleRings X); j_! = extensionByZeroPresheaf ⋙ sheafification and restriction overFunctor as in landed open_restriction_adjunction_exact (dependency unchanged since base); iU,iV tied by iU≫ε_U=ε_UV, iV≫ε_V=ε_UV with ε monic (stalks id/0), = ι_{UV,U} of lem-sc-module-extension-by-zero-stalk-maps (2); first map biprod.lift iU (-iV) = difference, second biprod.desc ε_U ε_V = pair of counits; ShortExact gives mono/epi/exactness; local HasFiniteBiproducts.of_hasFiniteProducts per E1 45deb4957; all binders used, no let, no hollow instance, single universe"
  }
 }

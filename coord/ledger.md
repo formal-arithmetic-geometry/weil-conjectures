@@ -4715,3 +4715,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 13:08 L: merged deliver/J1/lem-weil-pbc-power-set-complex-contractible (stage 2; reviewer FIX; first push; Sheaf.Paper.PowerSetComplexContractible Algebra.powerSetComplex_contractible)
 - 13:08 L: merged deliver/C1/lem-pc-derived-pullback-tensor-qcoh (stage 2; reviewer FIX; first push; Sheaf.AlgebraicGeometry.DerivedPullbackTensorQCoh AlgebraicGeometry.derivedPullback_tensor_preserve_QCoh; dropped nodes: def-pc-scheme-derived-tensor)
 - 13:09 L: merged deliver/G1/lem-pc-flat-complex-derived-pullback (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.FlatComplexDerivedPullback AlgebraicGeometry.flatComplexDerivedPullback)
+- 13:09 L: merged deliver/K1/lem-sc-derived-open-mayer-vietoris-ses (stage 2; reviewer PASS; first push; Sheaf.Algebra.Homology.OpenExtensionMayerVietorisShortExact AlgebraicGeometry.open_extension_mayer_vietoris_shortExact)
