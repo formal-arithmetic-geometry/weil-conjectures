@@ -145,5 +145,23 @@
    "decls": [],
    "missing": []
   }
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Category.ModuleCat.Presheaf.SheafificationBilinearExtension",
+  "declaration": "PresheafOfModules.existsUnique_bilinear_sheafification_extension",
+  "file": "lean/Sheaf/Algebra/Category/ModuleCat/Presheaf/SheafificationBilinearExtension.lean",
+  "statement": "theorem existsUnique_bilinear_sheafification_extension {C : Type u} [Category.{v} C] {J : GrothendieckTopology C} [HasWeakSheafify J AddCommGrpCat.{max u v w}] [J.WEqualsLocallyBijective AddCommGrpCat.{max u v w}] (O : Cᵒᵖ ⥤ CommRingCat.{max u v w}) (R : Sheaf J CommRingCat.{max u v w}) (α : (O ⋙ forget₂ CommRingCat.{max u v w} RingCat.{max u v w}) ⟶ ((sheafCompose J (forget₂ CommRingCat.{max u v w} RingCat.{max u v w})).obj R).obj) [Presheaf.IsLocallyInjective J α] [Presheaf.IsLocallySurjective J α] (F G : PresheafOfModules.{max u v w} (O ⋙ forget₂ CommRingCat.{max u v w} RingCat.{max u v w})) (H : SheafOfModules.{max u v w} ((sheafCompose J (forget₂ CommRingCat.{max u v w} RingCat.{max u v w})).obj R)) (β : ∀ X : Cᵒᵖ, F.obj X →ₗ[O.obj X] G.obj X →ₗ[O.obj X] ((restrictScalars α).obj H.val).obj X) (hβ : ∀ {X Y : Cᵒᵖ} (f : X ⟶ Y) (x : F.obj X) (y : G.obj X), β Y (F.map f x) (G.map f y) = H.val.map f (β X x y)) : ∃! γ : ∀ X : Cᵒᵖ, ((sheafification α).obj F).val.obj X →ₗ[R.obj.obj X] ((sheafification α).obj G).val.obj X →ₗ[R.obj.obj X] H.val.obj X, (∀ {X Y : Cᵒᵖ} (f : X ⟶ Y) (x : ((sheafification α).obj F).val.obj X) (y : ((sheafification α).obj G).val.obj X), γ Y (((sheafification α).obj F).val.map f x) (((sheafification α).obj G).val.map f y) = H.val.map f (γ X x y)) ∧ (∀ (X : Cᵒᵖ) (x : F.obj X) (y : G.obj X), γ X (((sheafificationAdjunction α).unit.app F).app X x) (((sheafificationAdjunction α).unit.app G).app X y) = β X x y)",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "H1",
+  "result": "pass",
+  "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
  }
 }
