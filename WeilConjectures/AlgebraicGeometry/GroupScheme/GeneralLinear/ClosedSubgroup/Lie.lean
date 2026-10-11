@@ -174,6 +174,34 @@ theorem dualUnit_mem_zeroLocus_identityComponent [IsAlgClosed k] [CharZero k] {X
   rw [map_mul, map_zero] at h
   exact (hunit.mul_right_eq_zero).1 h
 
+set_option synthInstance.maxHeartbeats 400000 in
+-- the group structure on points of the quotient scheme makes instance search slow
+/-- A tangent vector of `V(I)` whose matrix satisfies the equations of `J ≥ I` is tangent to
+`V(J)`. -/
+theorem exists_kerPost_eq_of_mem_zeroLocus {J : Ideal (CoordinateRing n k)} [J.IsHopfIdeal k]
+    (h : I ≤ J) (p : GrpObj.pointsKer (subgroupScheme I) GrpObj.aug₁)
+    (hp : GeneralLinearGroup.homMulEquiv n k (DualNumber k) (p.1 ≫ subgroupSchemeι I) ∈
+      zeroLocus J (DualNumber k)) :
+    ∃ q : GrpObj.pointsKer (subgroupScheme J) GrpObj.aug₁,
+      GrpObj.kerPost (subgroupSchemeHom h) q = p := by
+  set q₀ := zeroLocusMulEquiv J (DualNumber k) ⟨_, hp⟩
+  have hq₀ : q₀ ≫ subgroupSchemeHom h = p.1 := by
+    rw [zeroLocusMulEquiv_comp_subgroupSchemeHom]
+    apply injective_homMulEquiv_comp I (DualNumber k)
+    dsimp only
+    rw [homMulEquiv_zeroLocusMulEquiv_comp]
+  have hmem : q₀ ∈ GrpObj.pointsKer (subgroupScheme J) (GrpObj.aug₁ (k := k)) := by
+    rw [GrpObj.mem_pointsKer]
+    apply (cancel_mono (subgroupSchemeHom h)).1
+    rw [MonObj.one_comp]
+    change (_ ≫ q₀) ≫ subgroupSchemeHom h = 1
+    rw [Category.assoc, hq₀]
+    exact GrpObj.mem_pointsKer.1 p.2
+  exact ⟨⟨q₀, hmem⟩, Subtype.ext hq₀⟩
+
+set_option synthInstance.maxHeartbeats 400000 in
+-- the group structure on points of the quotient scheme makes instance search slow
+
 /-- In characteristic zero, every tangent vector of `G = V(I)` is tangent to the reduced identity
 component `V(identityComponent I)`: the differential `Lie(G°) → Lie(G)` is bijective.
 
@@ -187,7 +215,23 @@ closed subscheme on the connected component of the identity, that is `V(identity
 (`range_subgroupSchemeHom_le_identityComponent`). (blueprint: `sk-i-cartier`) -/
 theorem lieAlgebraMap_identityComponent_bijective [IsAlgClosed k] [CharZero k] :
     Function.Bijective (lieAlgebraMap (le_identityComponent I)) := by
-  sorry
+  refine ⟨lieAlgebraMap_injective _, fun x ↦ ?_⟩
+  obtain ⟨p, hpx⟩ : ∃ p, GrpObj.lieEquivTangent _ x = p := ⟨_, rfl⟩
+  obtain ⟨X, hXp⟩ : ∃ X, tangentMatrix n k (GrpObj.kerPost (subgroupSchemeι I) p) = X :=
+    ⟨_, rfl⟩
+  have hX : GeneralLinearGroup.homMulEquiv n k (DualNumber k) (p.1 ≫ subgroupSchemeι I) =
+      dualUnit X :=
+    Units.ext (by
+      rw [show p.1 ≫ subgroupSchemeι I = (GrpObj.kerPost (subgroupSchemeι I) p).1 from rfl,
+        coe_homMulEquiv_tangent, hXp, coe_dualUnit])
+  have hI : dualUnit X ∈ zeroLocus I (DualNumber k) := by
+    rw [← hX, ← SetLike.mem_coe, ← range_homMulEquiv_comp I (DualNumber k)]
+    exact Set.mem_range_self p.1
+  have hI' := dualUnit_mem_zeroLocus_identityComponent I hI
+  rw [← hX] at hI'
+  obtain ⟨q, hq⟩ := exists_kerPost_eq_of_mem_zeroLocus I (le_identityComponent I) p hI'
+  refine ⟨(GrpObj.lieEquivTangent _).symm q, (GrpObj.lieEquivTangent _).injective ?_⟩
+  rw [GrpObj.lieEquivTangent_differential, Equiv.apply_symm_apply, hq, hpx]
 
 /-- Over an algebraically closed field of characteristic zero, the Lie algebra of an algebraic
 group is the Lie algebra of its reduced identity component. (blueprint: `sk-i-cartier`) -/
@@ -387,7 +431,18 @@ theorem lie_mem_range_lieAlgebraMap_identityComponent [IsAlgClosed k] [CharZero 
     [IsMonHom.ContainsCommutators (subgroupSchemeHom h)]
     (X Y : GrpObj.Lie (subgroupScheme (identityComponent I))) :
     ⁅X, Y⁆ ∈ (lieAlgebraMap (identityComponent_mono I h)).range := by
-  sorry
+  have hcomm (w : GrpObj.Lie (subgroupScheme (identityComponent J))) :
+      lieAlgebraMap (le_identityComponent I) (lieAlgebraMap (identityComponent_mono I h) w) =
+        lieAlgebraMap h (lieAlgebraMap (le_identityComponent J) w) := by
+    rw [lieAlgebraMap, lieAlgebraMap, lieAlgebraMap, lieAlgebraMap, ← LieHom.comp_apply,
+      ← LieHom.comp_apply, ← GrpObj.differential_comp, ← GrpObj.differential_comp,
+      GrpObj.differential_congr (subgroupSchemeHom_comp _ _),
+      GrpObj.differential_congr (subgroupSchemeHom_comp _ _)]
+  obtain ⟨z, hz⟩ := (LieHom.mem_range _ _).1 (lie_mem_range_lieAlgebraMap h
+    (lieAlgebraMap (le_identityComponent I) X) (lieAlgebraMap (le_identityComponent I) Y))
+  obtain ⟨w, rfl⟩ := (lieAlgebraMap_identityComponent_bijective J).2 z
+  refine (LieHom.mem_range _ _).2 ⟨w, (lieAlgebraMap_identityComponent_bijective I).1 ?_⟩
+  rw [hcomm, hz, LieHom.map_lie]
 
 /-- The standard representation of the `k`-points of `V(I)` on `kⁿ`: a point `Spec k ⟶ V(I)` acts
 through its image in `GL_n(k)` under the closed immersion `V(I) ⟶ GL_n`: the algebraic-group
