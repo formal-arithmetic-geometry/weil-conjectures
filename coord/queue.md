@@ -1,11 +1,11 @@
 # Work queue
 
-48 items; claim with `tools/claim.py next <group> [--stage N]`.
+45 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (48)
+## Stage 2: nodes to state (45)
 
 | node | distance to Mathlib | kind | blockers |
 |---|---|---|---|
@@ -14,7 +14,7 @@
 | `def-pc-global-derived-rhom` | 1 | state | 4 |
 | `def-weil-pbc-simplicial-hom-object` | 1 | state | 4 |
 | `def-pc-derived-rhom-algebra-module` | 1 | state | 2 |
-| `lem-pc-module-pullback-identity-composition` | 1 | state | 9 |
+| `lem-sc-etale-qcoherent-presheaf-functorial` | 1 | state | 8 |
 | `lem-weil-pbc-pair-henselization` | 1 | state | 5 |
 | `lem-weil-pbc-etale-graph-section-extension-map-linear` | 1 | state | 3 |
 | `lem-pc-cech-resolution` | 1 | state | 1 |
@@ -30,7 +30,6 @@
 | `lem-pc-proper-derived-direct-image-composition` | 1 | state | 0 |
 | `lem-pc-rf-base-change-complex` | 1 | state | 0 |
 | `lem-pc-rf-base-change-single-complex-criterion` | 1 | state | 0 |
-| `lem-sc-affine-derived-cohomology` | 1 | state | 0 |
 | `lem-sc-affine-derived-pushforward-t-exact` | 1 | state | 0 |
 | `lem-sc-affine-koszul-cech-derived-comparison` | 1 | state | 0 |
 | `lem-sc-affine-perfect-derived-tensor-hom` | 1 | state | 0 |
@@ -40,7 +39,6 @@
 | `lem-sc-finite-duality-derived-hom` | 1 | state | 0 |
 | `lem-sc-finite-flat-duality-evaluation` | 1 | state | 0 |
 | `lem-sc-finite-sheafhom-affine-adjoint` | 1 | state | 0 |
-| `lem-sc-finite-twisted-inverse-bounded-below` | 1 | state | 0 |
 | `lem-sc-hilb-dominating-power` | 1 | state | 0 |
 | `lem-sc-hilbert-embedded-points-gluing` | 1 | state | 0 |
 | `lem-sc-koszul-regular-immersion-derived-hom` | 1 | state | 0 |
@@ -48,7 +46,6 @@
 | `lem-sc-proper-flat-right-adjoint-basechange` | 1 | state | 0 |
 | `lem-sc-proper-flat-right-adjoint-direct-sums` | 1 | state | 0 |
 | `lem-sc-proper-flat-right-adjoint-restriction-open` | 1 | state | 0 |
-| `lem-sc-qcoh-acyclic-derived-pushforward-cohomology` | 1 | state | 0 |
 | `lem-sc-smooth-proper-diagonal-basechange-upper-shriek` | 1 | state | 0 |
 | `lem-sc-smooth-proper-relative-dualizing-general` | 1 | state | 0 |
 | `lem-weil-pbc-etale-mayer-vietoris-pullback` | 1 | state | 0 |
@@ -58,7 +55,7 @@
 | `lem-pc-rf-single-complex-inherited-tensor-condition` | 2 | state | 0 |
 | `lem-sc-p1-proj-shifted-free-twist` | 2 | state | 0 |
 
-Not open yet: 40 nodes that wait for stage 1, 174 nodes that wait for a statement dependency.
+Not open yet: 40 nodes that wait for stage 1, 173 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
