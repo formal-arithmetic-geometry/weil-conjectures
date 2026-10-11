@@ -133,5 +133,24 @@
   "group": "K1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-fpi (reviewer sub-agent of L); spot-checked: Delivery = item node only (no new nodes), one commit, report with Review by K1. Statement unchanged: finite product of abelian categories with enough injectives is abelian, has enough injectives, injectives are componentwise, componentwise injective resolutions are resolutions; elementary (Hom in the product is the product of Homs, kernels/cokernels componentwise); no Stacks statement for product categories (homology.tex Tag 0137 lemma-product-injectives, line 7118, is a product inside one category); Mathlib has no Abelian/EnoughInjectives instance for Pi categories (grep of pinned Mathlib). Steps checked against def-sp-abelian (structural conditions componentwise, step 1) and def-sp-injective-resolutions (Hom-extension along monos, step 2; enough injectives, step 3; bounded-below complex of injectives with cohomology X in degree 0, step 4). Small cases: I empty (zero category), I singleton, two factors with a zero object. FIX more, RETURN less (C4): dag/nodes/sec-curve-estimates/lem-weil-pbc-finite-product-injective-resolutions.json: proof[1].text/uses: the forward direction cited lem-weil-pbc-product-injectives, which states a product inside one category and does not apply as written ((J_i) is the product of the objects e_i(J_i) whose injectivity is not given); replaced by the one-line componentwise argument from def-sp-injective-resolutions (Hom(N,J)->Hom(M,J) is the product of the componentwise restrictions, monos componentwise by step 1); proof_deps and split_report.tool_uses: lem-weil-pbc-product-injectives removed (--drop-tool-uses); proof[*].elementary set true (each step is a few lines from the two definitions); proof[0].source.place, proof[1].source.place, proof_origin.place: no longer attribute the product-category argument to Tag 0137. Start 16:52:24 UTC, end Sat Oct 10 04:52:56 PM UTC 2026 (date -u).; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.FiniteProductInjectiveResolutions",
+  "declaration": "CategoryTheory.finiteProduct_injectiveResolutions",
+  "file": "lean/Sheaf/CategoryTheory/FiniteProductInjectiveResolutions.lean",
+  "statement": "theorem finiteProduct_injectiveResolutions (I : Type w) [Finite I] (C : I → Type u) [∀ i, Category.{v} (C i)] [∀ i, Abelian (C i)] [∀ i, HasInjectiveResolutions (C i)] : ∃ abelian : Abelian (∀ i, C i), letI := abelian HasInjectiveResolutions (∀ i, C i) ∧ (∀ J : ∀ i, C i, Injective J ↔ ∀ i, Injective (J i)) ∧ (∀ (A : ∀ i, C i) (R : ∀ i, InjectiveResolution (A i)), ∃ K : InjectiveResolution A, (∀ n : ℕ, K.cocomplex.X n = fun i ↦ (R i).cocomplex.X n) ∧ (∀ n m : ℕ, HEq (K.cocomplex.d n m) (fun i ↦ (R i).cocomplex.d n m)) ∧ HEq (K.ι.f 0) (fun i ↦ (R i).ι.f 0))",
+  "branch": "sheaf-dag",
+  "by": "M1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-fir1021"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-fir1021",
+  "group": "M1",
+  "result": "fix",
+  "note": "Finite I, C i Category/Abelian, enough injectives now HasInjectiveResolutions (H1 6a6d5fc0b form, stmt_dep def-sp-injective-resolutions) in hypothesis and conclusion; existential Abelian on Pi category as H1; Injective J iff componentwise; prescribed componentwise resolution pinned by X, HEq d, HEq iota.f 0"
  }
 }
