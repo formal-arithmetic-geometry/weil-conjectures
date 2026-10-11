@@ -257,5 +257,23 @@
   "item": "lem-weil-pbc-module-cech-vanishing-criterion",
   "worker": "stage1",
   "summary": "Proof written from Stacks Cohomology Lemma 01EV (lemma-cech-vanish) and its proof, adapted to the node's formulation (every open U, every open covering of U, Cech cohomology on X_Zar, H^p(U, F|_U) as cohomology of the scheme U via 01E1 (2)), on the template of the reviewed site version lem-weil-pbc-site-cech-vanishing-criterion (03F9). Nine steps: induction set-up over all Cech-acyclic O_X-modules; embedding into an injective (scheme-modules-enough-injectives); injectives Cech-acyclic (module-injective-open-cover-cech-acyclic, 01EP); sectionwise exactness of 0->G->I->Q->0 (kernels sectionwise; surjectivity from the new node lem-weil-pbc-module-ses-cech-h1-surjective, Stacks 01EU for O_X-modules, with the cofinal system of all coverings); short exact sequence of Cech complexes (site-cech-complex (e), cochain-complexes-degreewise-exact; the content of 01EK); Q Cech-acyclic (complex-ses-homology-long-exact); restriction to U (module-open-restriction-injectives (1),(2)); H^p(U,-) as derived functors of Gamma(U,-) on Mod(O_U) (pqf-def-cohomology); dimension shifting (derived-functor-long-exact, derived-functor-injective-vanishing = 015B, right-derived-universal-delta-functor for R^0 v = v). Statement unchanged. Not a Mathlib leaf: searches of three kinds recorded."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ModuleCechVanishingCriterion",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.module_cohomology_isZero_of_cech_vanishing",
+  "file": "lean/Sheaf/AlgebraicGeometry/ModuleCechVanishingCriterion.lean",
+  "statement": "theorem module_cohomology_isZero_of_cech_vanishing (X : Scheme.{u}) (F : X.Modules) (hcech : ∀ (U : X.Opens) (I : Type (max u w)) (V : I → X.Opens) (hom : ∀ i, V i ⟶ U), (⨆ i, V i) = U → ∀ (S : SiteCechComplex V hom) (p : ℕ), 0 < p → IsZero ((S.cohomologyFunctor p).obj ((toPresheaf X).obj F))) : ∀ (U : X.Opens) (p : ℕ), 0 < p → IsZero ((RingedSpace.moduleCohomology U.toScheme.toRingedSpace p).obj ((restrictFunctor U.ι).obj F))",
+  "branch": "sheaf-dag",
+  "by": "G1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "G1",
+  "result": "pass",
+  "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
  }
 }
