@@ -9,7 +9,6 @@ public import WeilConjectures.AlgebraicGeometry.Modules.FreeGenerator
 public import WeilConjectures.AlgebraicGeometry.Modules.PullbackTilde
 public import WeilConjectures.AlgebraicGeometry.Modules.FiniteDescent
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Tilde
-public import WeilConjectures.AlgebraicGeometry.Modules.FiniteDescent
 
 /-!
 # Sections of the pullback of a quasi-coherent module over an affine open
