@@ -1,11 +1,11 @@
 # Work queue
 
-911 items; claim with `tools/claim.py next <group> [--stage N]`.
+945 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (911)
+## Stage 2: nodes to state (945)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -16,21 +16,16 @@
 | `def-sbc-normal-dominant-galois` | 1 | state |
 | `def-sc-perfect-closed-immersion` | 1 | state |
 | `def-sc-rational-functions` | 1 | state |
-| `def-sp-composite-acyclicity` | 1 | state |
 | `def-sp-exact-couple` | 1 | state |
 | `def-sp-filtration` | 1 | state |
 | `def-weil-extension-by-zero-presheaf` | 1 | state |
 | `def-weil-pbc-associated-graded-ring` | 1 | state |
 | `def-weil-pbc-associated-module` | 1 | state |
 | `def-weil-pbc-constant-group-scheme` | 1 | state |
-| `def-weil-pbc-delta-functor` | 1 | state |
-| `def-weil-pbc-depth` | 1 | state |
 | `def-weil-pbc-double-complex-zigzag-module` | 1 | state |
 | `def-weil-pbc-etale-sheaves` | 1 | state |
-| `def-weil-pbc-fibre-degree-bound` | 1 | state |
 | `def-weil-pbc-finite-global-dimension` | 1 | state |
 | `def-weil-pbc-formal-glueing-data` | 1 | state |
-| `def-weil-pbc-formally-smooth-adic` | 1 | state |
 | `def-weil-pbc-g-ring` | 1 | state |
 | `def-weil-pbc-generating-sections` | 1 | state |
 | `def-weil-pbc-henselian-terminology` | 1 | state |
@@ -38,8 +33,8 @@
 | `def-weil-pbc-popescu-resolution` | 1 | state |
 | `def-weil-pbc-proetale-site` | 1 | state |
 | `def-weil-pbc-relative-global-complete-intersection` | 1 | state |
+| `def-weil-pbc-serre-conditions-rk-sk` | 1 | state |
 | `def-weil-pbc-strictly-standard-element` | 1 | state |
-| `def-weil-pbc-symmetric-product-morphism` | 1 | state |
 | `def-weil-pbc-torsion-etale-sheaf` | 1 | state |
 | `def-weil-tower-transition-endomorphism` | 1 | state |
 | `lem-exc-discrete-modules-abelian` | 1 | state |
@@ -334,9 +329,17 @@
 | `lem-weil-pbc-closed-immersion-residue-field-iso` | 1 | state |
 | `lem-weil-pbc-closed-point-dimension-local-ring` | 1 | state |
 | `lem-weil-pbc-closed-pushforward-constant-restriction` | 1 | state |
+| `lem-weil-pbc-cm-local-associated-prime-minimal` | 1 | state |
+| `lem-weil-pbc-cm-local-dimension-drop-regular-sequence` | 1 | state |
+| `lem-weil-pbc-cm-local-free-resolution-to-mcm` | 1 | state |
+| `lem-weil-pbc-cm-local-maximal-chain-length` | 1 | state |
+| `lem-weil-pbc-cm-local-quotient-nonzerodivisor-cm` | 1 | state |
+| `lem-weil-pbc-cm-module-good-element-nonzerodivisor` | 1 | state |
+| `lem-weil-pbc-cm-module-good-sequence-element-nonzerodivisor` | 1 | state |
 | `lem-weil-pbc-codimension-one-analytically-unramified` | 1 | state |
 | `lem-weil-pbc-cohen-coefficient-ring-exists` | 1 | state |
 | `lem-weil-pbc-cohen-power-series-presentation` | 1 | state |
+| `lem-weil-pbc-cohen-ring-mod-pn-formally-smooth` | 1 | state |
 | `lem-weil-pbc-cohen-rings-exist` | 1 | state |
 | `lem-weil-pbc-cohen-structure-power-series-surjection` | 1 | state |
 | `lem-weil-pbc-colimit-category-fp-algebras` | 1 | state |
@@ -361,6 +364,7 @@
 | `lem-weil-pbc-completion-regular-local` | 1 | state |
 | `lem-weil-pbc-complex-injective-resolution-mono` | 1 | state |
 | `lem-weil-pbc-complex-mapping-cylinder-split-factorization` | 1 | state |
+| `lem-weil-pbc-composition-fibre-degree-bound` | 1 | state |
 | `lem-weil-pbc-conormal-intersection-regular-quotient` | 1 | state |
 | `lem-weil-pbc-conormal-module-principal-localization` | 1 | state |
 | `lem-weil-pbc-constant-group-scheme-multiplication` | 1 | state |
@@ -381,6 +385,12 @@
 | `lem-weil-pbc-cyclic-extension-cocycle` | 1 | state |
 | `lem-weil-pbc-cyclic-extension-flat-descent` | 1 | state |
 | `lem-weil-pbc-degree-p-extension-regular` | 1 | state |
+| `lem-weil-pbc-depth-drops-by-one` | 1 | state |
+| `lem-weil-pbc-depth-ext` | 1 | state |
+| `lem-weil-pbc-depth-in-ses` | 1 | state |
+| `lem-weil-pbc-depth-le-dim-associated-prime` | 1 | state |
+| `lem-weil-pbc-depth-le-support-dimension` | 1 | state |
+| `lem-weil-pbc-depth-over-quotient-ring` | 1 | state |
 | `lem-weil-pbc-depth-zero-injective-free-map-unit-minor` | 1 | state |
 | `lem-weil-pbc-derivation-extends` | 1 | state |
 | `lem-weil-pbc-derivation-extends-finite-type-extension` | 1 | state |
@@ -405,6 +415,7 @@
 | `lem-weil-pbc-directed-union-subrings-flat-module` | 1 | state |
 | `lem-weil-pbc-domains-strongly-transcendental-not-quasi-finite` | 1 | state |
 | `lem-weil-pbc-double-complex-cokernel-homology-iso` | 1 | state |
+| `lem-weil-pbc-effaceable-delta-functor-universal` | 1 | state |
 | `lem-weil-pbc-elementary-etale-finite-piece-persistence` | 1 | state |
 | `lem-weil-pbc-equation-count-fibre-dimension-flat` | 1 | state |
 | `lem-weil-pbc-essentially-constant-splitting` | 1 | state |
@@ -447,6 +458,8 @@
 | `lem-weil-pbc-exact-sequence-ml` | 1 | state |
 | `lem-weil-pbc-ext-one-direct-sum` | 1 | state |
 | `lem-weil-pbc-factorization-criterion-filtered-colimit` | 1 | state |
+| `lem-weil-pbc-fibre-degree-base-change` | 1 | state |
+| `lem-weil-pbc-fibre-degree-bound-field-points` | 1 | state |
 | `lem-weil-pbc-fibre-dimension-bounded-open-upstairs` | 1 | state |
 | `lem-weil-pbc-fibre-dimension-neighborhood` | 1 | state |
 | `lem-weil-pbc-fibre-product-affine-transition` | 1 | state |
@@ -456,6 +469,7 @@
 | `lem-weil-pbc-fibre-ring-primes-residue-fields` | 1 | state |
 | `lem-weil-pbc-field-char-p-h1-cotangent-vanishing` | 1 | state |
 | `lem-weil-pbc-field-char-p-nilpotent-lifting` | 1 | state |
+| `lem-weil-pbc-field-cohen-power-series-formally-smooth` | 1 | state |
 | `lem-weil-pbc-field-extension-complete-intersection-subalgebras` | 1 | state |
 | `lem-weil-pbc-field-injective-matrix-nonzero-maximal-minor` | 1 | state |
 | `lem-weil-pbc-field-point-factors-through-closed-immersion` | 1 | state |
@@ -509,9 +523,11 @@
 | `lem-weil-pbc-flat-another-variant-local-criterion` | 1 | state |
 | `lem-weil-pbc-flat-completion` | 1 | state |
 | `lem-weil-pbc-flat-fibres-irreducible` | 1 | state |
+| `lem-weil-pbc-flat-formally-smooth-closed-fibre-adic` | 1 | state |
 | `lem-weil-pbc-flat-iso-mod-ideal-powers` | 1 | state |
 | `lem-weil-pbc-flat-local-completion-iso` | 1 | state |
 | `lem-weil-pbc-flat-local-criterion-nonzerodivisor` | 1 | state |
+| `lem-weil-pbc-flat-local-depth-formula` | 1 | state |
 | `lem-weil-pbc-flat-local-extension-given-residue-field` | 1 | state |
 | `lem-weil-pbc-flat-mod-injective` | 1 | state |
 | `lem-weil-pbc-flat-module-completion-flat` | 1 | state |
@@ -545,6 +561,16 @@
 | `lem-weil-pbc-free-complex-unit-entry-splits` | 1 | state |
 | `lem-weil-pbc-free-resolution-ses-split` | 1 | state |
 | `lem-weil-pbc-free-sheaf-flat` | 1 | state |
+| `lem-weil-pbc-fs-adic-base-change` | 1 | state |
+| `lem-weil-pbc-fs-adic-complete-source-target` | 1 | state |
+| `lem-weil-pbc-fs-adic-completion` | 1 | state |
+| `lem-weil-pbc-fs-adic-field-differentials-injective` | 1 | state |
+| `lem-weil-pbc-fs-adic-field-regular-local` | 1 | state |
+| `lem-weil-pbc-fs-adic-lift-derivation` | 1 | state |
+| `lem-weil-pbc-fs-adic-lift-from-residue-field` | 1 | state |
+| `lem-weil-pbc-fs-adic-lift-into-complete` | 1 | state |
+| `lem-weil-pbc-fs-adic-lift-over-finite-coefficient-map` | 1 | state |
+| `lem-weil-pbc-fs-adic-local-flat` | 1 | state |
 | `lem-weil-pbc-gabber-finite-etale-section` | 1 | state |
 | `lem-weil-pbc-gabber-h0-etale-criterion` | 1 | state |
 | `lem-weil-pbc-gabber-root-criterion-etale-section-lifting` | 1 | state |
@@ -569,6 +595,7 @@
 | `lem-weil-pbc-idempotent-splitting-monic-factorization` | 1 | state |
 | `lem-weil-pbc-idempotents-determined-modulo-radical` | 1 | state |
 | `lem-weil-pbc-immersion-affine-constructible-pieces` | 1 | state |
+| `lem-weil-pbc-immersion-fibre-degree-one` | 1 | state |
 | `lem-weil-pbc-improve-presentation` | 1 | state |
 | `lem-weil-pbc-improve-presentation-smooth-conormal-free` | 1 | state |
 | `lem-weil-pbc-injective-resolution-ses` | 1 | state |
@@ -595,6 +622,7 @@
 | `lem-weil-pbc-kahler-differentials-mod-power-ideal` | 1 | state |
 | `lem-weil-pbc-kahler-differentials-polynomial-extension` | 1 | state |
 | `lem-weil-pbc-kernel-cokernel-annihilated-mod-ideal` | 1 | state |
+| `lem-weil-pbc-kollar-local-dichotomy` | 1 | state |
 | `lem-weil-pbc-koszul-differential` | 1 | state |
 | `lem-weil-pbc-krull-intersection-localization` | 1 | state |
 | `lem-weil-pbc-lci-conormal-free-rank-codimension` | 1 | state |
@@ -625,6 +653,7 @@
 | `lem-weil-pbc-make-separable` | 1 | state |
 | `lem-weil-pbc-make-separably-generated` | 1 | state |
 | `lem-weil-pbc-matrix-left-inverse-minors` | 1 | state |
+| `lem-weil-pbc-miracle-flatness` | 1 | state |
 | `lem-weil-pbc-mittag-leffler-complex-limit-homology` | 1 | state |
 | `lem-weil-pbc-mittag-leffler-limit-exact` | 1 | state |
 | `lem-weil-pbc-ml-sets-tower-limit-nonempty` | 1 | state |
@@ -662,6 +691,7 @@
 | `lem-weil-pbc-p-independent-differentials-independent` | 1 | state |
 | `lem-weil-pbc-p-independent-extends-to-p-basis` | 1 | state |
 | `lem-weil-pbc-polynomial-ideal-coefficients-monomial` | 1 | state |
+| `lem-weil-pbc-polynomial-local-completion-formally-smooth` | 1 | state |
 | `lem-weil-pbc-polynomial-quotient-dimension-at-point-height-difference` | 1 | state |
 | `lem-weil-pbc-polynomial-quotient-dimension-lower-bound` | 1 | state |
 | `lem-weil-pbc-polynomial-ring-maximal-chain-height-difference` | 1 | state |
@@ -679,7 +709,9 @@
 | `lem-weil-pbc-popescu-product` | 1 | state |
 | `lem-weil-pbc-power-in-base-after-localization` | 1 | state |
 | `lem-weil-pbc-power-series-adic-evaluation` | 1 | state |
+| `lem-weil-pbc-power-series-cohen-formally-smooth-adic` | 1 | state |
 | `lem-weil-pbc-power-series-complete-over-complete-base` | 1 | state |
+| `lem-weil-pbc-power-series-field-cohen-fs-adic` | 1 | state |
 | `lem-weil-pbc-power-series-field-cohen-regular-complete` | 1 | state |
 | `lem-weil-pbc-power-series-normal-domain` | 1 | state |
 | `lem-weil-pbc-power-series-onto-completion` | 1 | state |
@@ -723,6 +755,7 @@
 | `lem-weil-pbc-regular-local-dim-one-iff-normal` | 1 | state |
 | `lem-weil-pbc-regular-local-generators-regular-sequence` | 1 | state |
 | `lem-weil-pbc-regular-local-localization` | 1 | state |
+| `lem-weil-pbc-regular-local-mcm-free` | 1 | state |
 | `lem-weil-pbc-regular-local-quotient-kernel-parameters` | 1 | state |
 | `lem-weil-pbc-regular-local-separable-residue-smooth` | 1 | state |
 | `lem-weil-pbc-regular-quotient-ideal-intersection` | 1 | state |
@@ -735,6 +768,7 @@
 | `lem-weil-pbc-regular-sequence-powers` | 1 | state |
 | `lem-weil-pbc-regular-sequence-short-exact-sequence` | 1 | state |
 | `lem-weil-pbc-regular-sequence-swap-two` | 1 | state |
+| `lem-weil-pbc-right-derived-universal-delta-functor` | 1 | state |
 | `lem-weil-pbc-ring-quasi-finite-locus-open` | 1 | state |
 | `lem-weil-pbc-ring-universal-first-order-thickening` | 1 | state |
 | `lem-weil-pbc-ringed-space-colimit-restriction` | 1 | state |
@@ -921,7 +955,7 @@
 | `lem-sc-normalization-properties` | 3 | state |
 | `def-nagata-fixed-base-separated-stage` | 6 | state |
 
-Not open yet: 1292 nodes that wait for a statement dependency, 40 nodes that wait for stage 1.
+Not open yet: 1252 nodes that wait for a statement dependency, 40 nodes that wait for stage 1.
 
 ## Stage 3: modules to prove (0)
 
