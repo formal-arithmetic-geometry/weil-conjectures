@@ -1,11 +1,11 @@
 # Work queue
 
-156 items; claim with `tools/claim.py next <group> [--stage N]`.
+150 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (156)
+## Stage 2: nodes to state (150)
 
 | node | distance to Mathlib | kind | blockers |
 |---|---|---|---|
@@ -30,7 +30,6 @@
 | `lem-sc-p1-ext-yoneda-functoriality` | 1 | state | 2 |
 | `thm-sp-grothendieck` | 1 | state | 2 |
 | `lem-pc-derived-tensor-transitivity` | 1 | state | 1 |
-| `lem-sc-base-change-curve` | 1 | state | 1 |
 | `lem-weil-pbc-formal-systems-pullback` | 1 | state | 1 |
 | `thm-sp-spectral-object-yields` | 1 | state | 1 |
 | `lem-exc-coinduced-homotopy-continuous` | 2 | state | 1 |
@@ -51,7 +50,6 @@
 | `lem-sc-strict-henselization-faithfully-flat` | 1 | state | 0 |
 | `lem-sc-strict-henselization-mod-power-free` | 1 | state | 0 |
 | `lem-sc-strict-henselization-noetherian` | 1 | state | 0 |
-| `lem-weil-derived-limit-roos-complex` | 1 | state | 0 |
 | `lem-weil-pbc-closed-immersion-coherent-equivalence` | 1 | state | 0 |
 | `lem-weil-pbc-closed-immersion-pushforward-ideal-powers` | 1 | state | 0 |
 | `lem-weil-pbc-coherent-artin-rees` | 1 | state | 0 |
@@ -89,7 +87,6 @@
 | `lem-weil-pbc-truncation-step-ses` | 1 | state | 0 |
 | `lem-weil-pbc-unramified-base-change-open` | 1 | state | 0 |
 | `lem-weil-pbc-vanishing-descends-retract` | 1 | state | 0 |
-| `lem-weil-pbc-zariski-pair-rank-one-propagation` | 1 | state | 0 |
 | `lem-weil-pbc-zero-dim-integral-point` | 1 | state | 0 |
 | `lem-weil-pbc-zero-dimensional-base-change-points` | 1 | state | 0 |
 | `lem-weil-pbc-zero-dimensional-sections-stalks` | 1 | state | 0 |
@@ -99,8 +96,6 @@
 | `lemma-weil-pbc-chow-factorization` | 1 | state | 0 |
 | `lemma-weil-pbc-torsion-assembly` | 1 | state | 0 |
 | `lemma-weil-pbc-torsion-filtered-union` | 1 | state | 0 |
-| `pqf-lem-qs-intersection-qc` | 1 | state | 0 |
-| `prop-pur-kinjective-objects-small` | 1 | state | 0 |
 | `prop-weil-pbc-composition-stability` | 1 | state | 0 |
 | `prop-weil-pbc-formal-glueing-equivalence` | 1 | state | 0 |
 | `prop-weil-pbc-grothendieck-existence` | 1 | state | 0 |
@@ -118,7 +113,6 @@
 | `lem-pc-finite-projective-cokernel-localization` | 2 | state | 0 |
 | `lem-pc-flat-sheaf-stalk-flat` | 2 | state | 0 |
 | `lem-pc-kflat-closure` | 2 | state | 0 |
-| `lem-pc-pseudo-coherent-bounded-finite-free-model` | 2 | state | 0 |
 | `lem-pc-rf-single-complex-inherited-tensor-condition` | 2 | state | 0 |
 | `lem-pc-ring-pseudo-coherent-summand` | 2 | state | 0 |
 | `lem-pc-sigma-k-points` | 2 | state | 0 |
