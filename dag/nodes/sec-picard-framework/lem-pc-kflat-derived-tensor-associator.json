@@ -13,7 +13,7 @@
  },
  "kind": "statement",
  "title": "Associativity of K-flat total tensor complexes across a ring tower",
- "statement": "Let R be a commutative ring, let A and B be commutative R-algebras, and let E and K be complexes of A-modules [def-pc-cochain-complex-modules]. Choose K-flat resolutions P_E \\to E and P_K \\to K over A and Q \\to B over R [def-pc-kflat-complex, lem-pc-kflat-resolution]. The canonical rebracketing map of total tensor complexes [def-pc-tensor-complex-sheaves] from Tot((P_E tensor_A P_K) tensor_R Q) to Tot(P_E tensor_A (P_K tensor_R Q)) is a natural chain isomorphism. After passage to D(A) it commutes with the endomorphisms of both sides induced by any endomorphism of B in D(R) (transported along Q \\to B; in particular with the action of each b in B by multiplication on B), and after passage to the derived category D(A) [def-weil-abstract-derived-category] it is independent of the chosen resolutions and natural in E, K and morphisms.",
+ "statement": "Let $R$ be a commutative ring, let $A$ and $B$ be commutative $R$-algebras, and let $E$ and $K$ be complexes of $A$-modules [def-pc-cochain-complex-modules]. Choose K-flat resolutions $P_E \\to E$ and $P_K \\to K$ over $A$ and $Q \\to B$ over $R$ [def-pc-kflat-complex, lem-pc-kflat-resolution]. The canonical rebracketing map of total tensor complexes [def-pc-tensor-complex-sheaves] $$\\operatorname{Tot}((P_E \\otimes_A P_K) \\otimes_R Q) \\longrightarrow \\operatorname{Tot}(P_E \\otimes_A (P_K \\otimes_R Q))$$ is a natural chain isomorphism. After passage to $D(A)$ it commutes with the endomorphisms of both sides induced by any endomorphism of $B$ in $D(R)$ (transported along $Q \\to B$; in particular with the action of each $b \\in B$ by multiplication on $B$), and after passage to the derived category $D(A)$ [def-weil-abstract-derived-category] it is independent of the chosen resolutions and natural in $E$, $K$, and morphisms.",
  "source": {
   "document": "literature/stacks-project/more-algebra.tex",
   "place": "Tag 0BYJ (more-algebra-lemma-triple-tensor-product), proof by K-flat resolutions and associativity of total tensor products"
@@ -23,13 +23,81 @@
   "def-pc-kflat-complex",
   "lem-pc-kflat-resolution",
   "def-pc-tensor-complex-sheaves",
-  "def-weil-abstract-derived-category"
+  "def-weil-abstract-derived-category",
+  "lem-pc-balanced-derived-tensor-model"
  ],
  "chapter": "sec-picard-framework",
  "unit": "sk-thm-picard-semicon",
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Choose the K-flat resolutions P_E → E and P_K → K over A and Q → B over R supplied by [lem-pc-kflat-resolution]. By the definitions of K-flat derived tensor and total tensor complexes [def-pc-kflat-complex, def-pc-tensor-complex-sheaves, def-weil-abstract-derived-category], the two displayed derived tensor expressions are represented by Tot((P_E tensor_A P_K) tensor_R Q) and Tot(P_E tensor_A (P_K tensor_R Q)), with the A-action through P_E.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "def-pc-kflat-complex",
+    "def-pc-tensor-complex-sheaves",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0BYJ, construction using K-flat resolutions"
+   }
+  },
+  {
+   "text": "Apply the Mathlib associator [lem-pc-kflat-total-tensor-associativity] to the tensor bifunctors over A and R and their canonical associativity comparison. It supplies the natural chain isomorphism between these two total complexes, hence an isomorphism in D(A).",
+   "uses": [
+    "lem-pc-kflat-total-tensor-associativity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0BYJ, associativity of total tensor products"
+   }
+  },
+  {
+   "text": "Write $X=\\operatorname{Tot}(P_E\\otimes_A P_K)$, a complex of $A$-modules. The endomorphisms of the two sides induced by $\\varphi\\in\\operatorname{End}_{D(R)}(B)$ are, by definition, the values on $\\varphi$ of the functors $D(R)\\to D(A)$ given by $-\\otimes_R^{\\mathbf L}X$ and by $P_E\\otimes_A(-\\otimes_R^{\\mathbf L}P_K)$ [lem-pc-derived-tensor-second-factor-functor, (2)], evaluated through the K-flat model $Q$ of $B$; the second is a functor because $P_E\\otimes_A-$ preserves quasi-isomorphisms ($P_E$ is K-flat over $A$ [def-pc-kflat-complex]). The swap $q\\otimes x\\mapsto(-1)^{|q||x|}x\\otimes q$ identifies $\\operatorname{Tot}(Q\\otimes_R X)$ with $\\operatorname{Tot}(X\\otimes_R Q)$ naturally in both variables (elementary sign check with the convention of [def-pc-tensor-complex-sheaves]), and likewise for $P_K$. A chain endomorphism of $Q$ representing $\\varphi$ need not exist ($Q$ is only K-flat), so argue with roofs: $\\varphi$ (transported to $Q$ along the quasi-isomorphism $Q\\to B$) is represented by $Q\\xleftarrow{s}Q''\\xrightarrow{g}Q$ with $s$ a quasi-isomorphism, and replacing $Q''$ by a K-flat resolution of it [lem-pc-kflat-resolution] we may take $Q''$ K-flat. By [lem-pc-derived-tensor-second-factor-functor, (1) and (2)] both functors send $s$ to a quasi-isomorphism and send $\\varphi$ to the roof formed by the images of $s$ and $g$ under the respective chain-level constructions. The chain associator is natural in $Q$ [lem-pc-kflat-total-tensor-associativity], so it commutes with the images of $s$ and of $g$, hence with the image of $\\varphi$ in $D(A)$. For $\\varphi$ multiplication by $b\\in B$ this is the stated action of $b$.",
+   "uses": [
+    "lem-pc-derived-tensor-second-factor-functor",
+    "lem-pc-kflat-total-tensor-associativity",
+    "lem-pc-kflat-resolution",
+    "def-pc-kflat-complex",
+    "def-pc-tensor-complex-sheaves"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0BYJ, equivariance under endomorphisms of B"
+   }
+  },
+  {
+   "text": "The comparison isomorphisms between the models for different K-flat resolutions $P_E,P_K$ over $A$ and $Q$ over $R$, and the identifications of the models with the derived tensor objects, are the canonical ones of [lem-pc-balanced-derived-tensor-model] and [lem-pc-derived-tensor-second-factor-functor, (2)]; each is represented by a roof of chain maps between K-flat resolutions (a common K-flat resolution of the fibre data maps to both by [lem-pc-kflat-resolution]), whose legs are quasi-isomorphisms preserved by $P_E\\otimes_A-$, $-\\otimes_A P_K$ and $-\\otimes_R Q$ on K-flat complexes. The chain associator is natural in all three variables [lem-pc-kflat-total-tensor-associativity], so it commutes with each leg of these roofs; hence its class in $D(A)$ is independent of $P_E$, $P_K$ and $Q$. A morphism $E\\to E'$ or $K\\to K'$ is likewise represented by a roof of chain maps between K-flat resolutions, and the same naturality gives naturality in $E$, $K$. These identifications are chain-level constructions in the $Q$-variable compatible with the roofs of Step 3, so the commutation with the transported $B$-endomorphisms is preserved, and so is its effect on cohomology.",
+   "uses": [
+    "lem-pc-balanced-derived-tensor-model",
+    "lem-pc-derived-tensor-second-factor-functor",
+    "lem-pc-kflat-resolution",
+    "lem-pc-kflat-total-tensor-associativity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0BYJ, independence of resolutions and functoriality"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-kflat-resolution",
+  "def-pc-kflat-complex",
+  "def-pc-tensor-complex-sheaves",
+  "def-weil-abstract-derived-category",
+  "lem-pc-kflat-total-tensor-associativity",
+  "lem-pc-balanced-derived-tensor-model",
+  "lem-pc-derived-tensor-second-factor-functor"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 0BYJ (more-algebra-lemma-triple-tensor-product)"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -68,10 +136,26 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-pc-derived-tensor-transitivity",
   "by": "worker",
   "date": "2026-10-11"
+ },
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-pc-kflat-derived-tensor-associator",
+  "worker": "stage1",
+  "summary": "Split Tag 0BYJ into resolution construction, the mixed-bifunctor total-complex associator (a Mathlib leaf), scalar equivariance, and resolution independence/naturality. Existing balanced-model and action/naturality nodes supply the derived-model compatibility; no duplicate non-Mathlib lemma was created.",
+  "blueprint": "The four steps realize the ancestor blueprint's transitivity-of-tensor-product step: K-flat models, total-tensor associativity, equivariance, and resolution-independent naturality.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-kda0239",
+  "group": "H1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-kda0239 (reviewer sub-agent of L); spot-checked: Leaf lem-pc-kflat-total-tensor-associativity: read HomologicalComplex.mapBifunctorAssociator (BifunctorAssociator.lean:812), one-line specialization with AlgebraTensorModule.assoc; up-Z epsilon signs match def-pc-tensor-complex-sheaves (d = dp + (-1)^a p dp' + (-1)^{a+b} p p' dq on both sides). No duplicate among balanced-model/second-factor-functor/flat-second-localization; grep: no derived tensor associator in Mathlib DerivedCategory. FIX more, RETURN less: (1) C1/C4 Step 3 claimed the D(R)-endomorphism of B is represented by a chain endomorphism of Q (false for K-flat Q, and the action was uncited; the second reading cited action-naturality, which the step does not use): rewrote with the action defined via lem-pc-derived-tensor-second-factor-functor (1),(2), roofs through a K-flat Q'' and chain naturality in Q, plus the Koszul swap. (2) C1 Step 4 resolution independence: made explicit the roofs of K-flat resolutions and naturality in all three variables, citing second-factor-functor and lem-pc-kflat-resolution; proof_deps updated.; 1 file(s) fixed by the reviewer"
  }
 }
