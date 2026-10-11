@@ -17,7 +17,8 @@
   "place": "Tag 04JF, label lemma-G-modules: functorial injective embeddings in Mod_{R,G}, followed by the open-stabilizer (discrete-action) subcategory specialization"
  },
  "stmt_deps": [
-  "def-sp-injective-resolutions"
+  "def-sp-injective-resolutions",
+  "def-exc-discrete-modules-category"
  ],
  "proof": [
   {
@@ -127,5 +128,24 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-rgd (reviewer sub-agent of L); spot-checked: Source: Stacks Tag 04JF (injectives.tex, label lemma-G-modules) and Homology Tag 0161 (homology.tex, label lemma-adjoint-functorial-injectives), read in literature/stacks-project (the files are present; the report's WANTED lines are unnecessary). Item statement agrees with 04JF hypothesis by hypothesis: G topological group, R any ring, R-G-modules in the sense of Etale Cohomology Definition definition-G-module-continuous (R-linear action, continuous for the discrete topology = open stabilizers), conclusion functorial injective embeddings; unchanged from sheaf-dag. Step 1 is carried by lem-exc-rg-group-algebra-functorial-injective-embeddings (the remark before 04JF: modules over an algebra, here R[G], have functorial injective embeddings). Step 2 by lem-exc-rg-open-stabilizer-adjoint (v forgetful, fully faithful, mono-preserving, right adjoint u(M) = open-stabilizer elements; checked u(M) is an R[G]-submodule: Stab(x+y) contains Stab(x) cap Stab(y), Stab(rx) contains Stab(x) as G acts R-linearly, Stab(gx)=g Stab(x) g^-1). Step 3 by lem-exc-rg-adjoint-transfer-functorial-injectives, whose hypotheses (fully faithful hence faithful so vB=0 implies B=0; mono-preserving; right adjoint; target has functorial embeddings, hence enough injectives; a left adjoint is additive) give 0161's (1)-(5); construction B -> uJ(vB) as in 0161. Tool use def-sp-injective-resolutions (generic definition of injective object) accepted. No Mathlib leaf; no slopmaster2 declaration states these (grep of WeilConjectures for EnoughInjectives/functorial gives only Grothendieck-category infrastructure). Small cases: G trivial (D = R-modules, u = id), G finite discrete (D = R[G]-modules, u = id), M = 0. Wording note: the transfer node says 'module categories' where Stacks says abelian categories; D_{R,G} is the category of R-G-modules so the application is within its scope, and the proof of 0161 works for abelian categories. Start 2026-10-10 15:13:17 UTC (Sat Oct 10 03:13:17 PM UTC 2026), end Sat Oct 10 03:14:19 PM UTC 2026."
  },
- "lead_note": "2026-10-10 L (R-rgd): lem-exc-rg-adjoint-transfer-functorial-injectives says 'module categories'; it is applied with D = category of R-G-modules (open stabilizers), and Stacks 0161 is for abelian categories: its splitter should prove it for abelian categories (or at least cover D_{R,G})."
+ "lead_note": "2026-10-10 L (R-rgd): lem-exc-rg-adjoint-transfer-functorial-injectives says 'module categories'; it is applied with D = category of R-G-modules (open stabilizers), and Stacks 0161 is for abelian categories: its splitter should prove it for abelian categories (or at least cover D_{R,G}).",
+ "lean": {
+  "module": "Sheaf.RepresentationTheory.DiscreteContinuousFunctorialInjectives",
+  "declaration": "Rep.discreteContinuousRep_functorialInjectiveEmbeddings_of_topologicalGroup",
+  "file": "lean/Sheaf/RepresentationTheory/DiscreteContinuousFunctorialInjectives.lean",
+  "statement": "theorem discreteContinuousRep_functorialInjectiveEmbeddings_of_topologicalGroup (R : Type u) [Ring R] (G : Type v) [Group G] [TopologicalSpace G] [IsTopologicalGroup G] : ∃ (J : DiscreteContinuousRep.{u, v, max u v w} R G ⥤ DiscreteContinuousRep.{u, v, max u v w} R G) (j : 𝟭 (DiscreteContinuousRep.{u, v, max u v w} R G) ⟶ J), (∀ M, Mono (j.app M)) ∧ ∀ M, Injective (J.obj M)",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-dfi0928"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-dfi0928",
+  "group": "C1",
+  "result": "fix",
+  "note": "R any Ring (Type u), G any topological group (no profinite/compact/T2), category = landed Rep.DiscreteContinuousRep.{u,v,max u v w} R G (carrier universe checked = max u v w; stmt_dep cited), conclusion ∃ J : C ⥤ C, ∃ j : 𝟭 C ⟶ J, (∀ M, Mono (j.app M)) ∧ ∀ M, Injective (J.obj M) (FIX: conjuncts split to the c39dcdb01/transfer-lemma form), distinct from M1's finite-A profinite-G + EnoughInjectives theorem (both land), docstring = node's 3 steps, no Mathlib statement"
+ }
 }
