@@ -1,8 +1,8 @@
 # Work queue
 
-864 items; claim with `tools/claim.py next <group> [--stage N]`.
+865 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (14)
+## Stage 1: nodes to split (13)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -11,7 +11,6 @@
 | `lem-pc-ringed-space-module-stalk-tensor` | 3013 | none |
 | `lem-pc-genus-agrees-sc` | 4007 | rests_on_sorry |
 | `prop-av-tate-rank` | 4008 | rests_on_sorry |
-| `cor-pc-sigma-pic-iso` | 4009 | rests_on_sorry |
 | `lem-pc-vanishing-above-dim` | 4009 | rests_on_sorry |
 | `lem-pc-derived-tensor-flat-second-localization` | 5018 | none |
 | `lem-pc-kflat-tensor-quasi-iso` | 5018 | none |
@@ -21,7 +20,7 @@
 | `lem-pur-triangle-common-refinement-ms3-05r9` | - | none |
 | `lem-pur-triangle-completion-ms6-05r9` | - | none |
 
-## Stage 2: nodes to state (850)
+## Stage 2: nodes to state (852)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -216,6 +215,7 @@
 | `lem-pur-kinjective-homotopy-limit-vanishing` | 1 | state |
 | `lem-pur-kinjective-set-iso-classes-bounded-size` | 1 | state |
 | `lem-pur-left-derived-from-kflat-class` | 1 | state |
+| `lem-pur-quasi-iso-cone-acyclic` | 1 | state |
 | `lem-pur-quasi-isos-saturated-triangulated` | 1 | state |
 | `lem-sc-affine-cap-section-open-algebra` | 1 | state |
 | `lem-sc-affine-finite-module-free-locus` | 1 | state |
@@ -833,6 +833,7 @@
 | `pqf-lem-sheaf-zero-stalks` | 1 | state |
 | `prop-pur-kinjective-objects-small` | 1 | state |
 | `thm-pqf-zmt-factorization` | 1 | state |
+| `cor-pc-sigma-pic-iso` | 2 | state |
 | `def-nagata-glued-limit-comparison` | 2 | state |
 | `lem-fd-finite-pushforward-cohomology` | 2 | state |
 | `lem-fet-galois-category` | 2 | state |
@@ -876,7 +877,7 @@
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 | `def-nagata-fixed-base-separated-stage` | 6 | state |
 
-Not open yet: 1781 nodes that wait for a statement dependency, 55 nodes that wait for stage 1.
+Not open yet: 1781 nodes that wait for a statement dependency, 54 nodes that wait for stage 1.
 
 ## Stage 3: modules to prove (0)
 
