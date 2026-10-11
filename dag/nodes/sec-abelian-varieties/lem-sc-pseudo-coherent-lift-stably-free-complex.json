@@ -1,107 +1,146 @@
 {
-  "id": "lem-sc-pseudo-coherent-lift-stably-free-complex",
-  "blueprint": {
-    "is": null,
-    "from": {
-      "node": "thm-sc-theorem-of-cube",
-      "place": "proof: construct the locally closed loci on which degree-zero direct images are finite locally free",
-      "via": [
-        "lem-sc-perfect-h0-locally-closed",
-        "lem-sc-perfect-local-pseudocoherent-free-model"
-      ]
-    },
-    "same_as": []
+ "id": "lem-sc-pseudo-coherent-lift-stably-free-complex",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-theorem-of-cube",
+   "place": "proof: construct the locally closed loci on which degree-zero direct images are finite locally free",
+   "via": [
+    "lem-sc-perfect-h0-locally-closed",
+    "lem-sc-perfect-local-pseudocoherent-free-model"
+   ]
   },
-  "kind": "statement",
-  "title": "Lifting a stably-free complex from a residue quotient",
-  "statement": "Let $R$ be a ring and $I\\subseteq R$ an ideal such that every element of $1+I$ is invertible in $R$. Call a module $M$ over a ring $A$ finite stably free if $M\\oplus A^{\\oplus m}\\cong A^{\\oplus n}$ for some integers $m,n\\ge0$. Let $K$ be an object of $D(R)$ [def-pc-derived-category] that is pseudo-coherent, that is, isomorphic in $D(R)$ to a bounded-above complex of finite free $R$-modules. Let $E^\\bullet$ be a bounded-above complex of finite stably free $R/I$-modules representing $K\\otimes_R^{\\mathbf L}R/I$ in $D(R/I)$. Then $K$ is represented in $D(R)$ by a bounded-above complex $P^\\bullet$ of finite stably free $R$-modules such that $P^\\bullet\\otimes_RR/I$ is isomorphic to $E^\\bullet$ as a complex; moreover, $P^i$ is free for every $i$ such that $E^i$ is free.",
-  "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "More on Algebra, Lemma 15.75.6, Tag 0BCB (lemma-lift-complex-stably-frees)"
-  },
-  "stmt_deps": [
-    "def-pc-derived-category"
-  ],
-  "proof": [
-    {
-      "text": "Apply [lem-sc-complex-lift-class-projective] with $\\mathcal P$ the finite stably free $R$-modules. A finite stably free module is finite projective. The class is closed under direct summands and finite direct sums, and the short-exact two-out-of-three property follows because projective short exact sequences split. If a map in the class is surjective modulo $I$, its cokernel is finitely generated and vanishes modulo $I$, so Nakayama's lemma and the hypothesis that every element of $1+I$ is a unit make it zero. Every finite stably free $R/I$-module lifts to a finite stably free $R$-module by lifting a stable presentation $E\\oplus(R/I)^m\\cong(R/I)^n$ and taking the kernel of the lifted split projection. Finally, pseudo-coherence supplies a bounded-above finite-free representative of $K$, whose terms lie in $\\mathcal P$. Thus the general lemma gives a bounded-above complex of finite stably free $R$-modules representing $K$ and reducing termwise to $E^\\bullet$. For the final assertion (More on Algebra, Tag 0BC6), let $E^i\\cong(R/I)^{\\oplus n}$. Since $P^i$ is finite projective with $P^i/IP^i\\cong E^i$, lift the resulting surjection $R^{\\oplus n}\\to(R/I)^{\\oplus n}\\cong P^i/IP^i$ to a map $\\varphi:R^{\\oplus n}\\to P^i$. It is surjective modulo $I$, hence surjective by Nakayama's lemma (the cokernel is finite and vanishes modulo $I$), hence split as $P^i$ is projective: $R^{\\oplus n}\\cong P^i\\oplus N$ with $N=\\operatorname{Ker}\\varphi$ finite. Reducing modulo $I$, $(R/I)^{\\oplus n}\\cong P^i/IP^i\\oplus N/IN$ with $\\varphi$ modulo $I$ an isomorphism, so $N/IN=0$ and $N=0$ by Nakayama. Hence $P^i\\cong R^{\\oplus n}$ is free; this holds for every such $i$ simultaneously, with no further choice.",
-      "uses": [
-        "lem-sc-complex-lift-class-projective"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/more-algebra.tex",
-        "place": "More on Algebra, Lemma 15.75.6, proof of lemma-lift-complex-stably-frees"
-      }
-    }
-  ],
-  "proof_deps": [
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Lifting a stably-free complex from a residue quotient",
+ "statement": "Let $R$ be a ring and $I\\subseteq R$ an ideal such that every element of $1+I$ is invertible in $R$. Call a module $M$ over a ring $A$ finite stably free if $M\\oplus A^{\\oplus m}\\cong A^{\\oplus n}$ for some integers $m,n\\ge0$. Let $K$ be an object of $D(R)$ [def-weil-abstract-derived-category] that is pseudo-coherent [def-pc-ring-pseudo-coherent-complex], that is, isomorphic in $D(R)$ to a bounded-above complex of finite free $R$-modules. Let $E^\\bullet$ be a bounded-above complex of finite stably free $R/I$-modules representing $K\\otimes_R^{\\mathbf L}R/I$ in $D(R/I)$. Then $K$ is represented in $D(R)$ by a bounded-above complex $P^\\bullet$ of finite stably free $R$-modules such that $P^\\bullet\\otimes_RR/I$ is isomorphic to $E^\\bullet$ as a complex; moreover, $P^i$ is free for every $i$ such that $E^i$ is free.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "More on Algebra, Lemma 15.75.6, Tag 0BCB (lemma-lift-complex-stably-frees)"
+ },
+ "stmt_deps": [
+  "def-weil-abstract-derived-category",
+  "def-pc-ring-pseudo-coherent-complex"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-sc-complex-lift-class-projective] with $\\mathcal P$ the finite stably free $R$-modules. A finite stably free module is finite projective. The class is closed under direct summands and finite direct sums, and the short-exact two-out-of-three property follows because projective short exact sequences split. If a map in the class is surjective modulo $I$, its cokernel is finitely generated and vanishes modulo $I$, so Nakayama's lemma and the hypothesis that every element of $1+I$ is a unit make it zero. Every finite stably free $R/I$-module lifts to a finite stably free $R$-module by lifting a stable presentation $E\\oplus(R/I)^m\\cong(R/I)^n$ and taking the kernel of the lifted split projection. Finally, pseudo-coherence supplies a bounded-above finite-free representative of $K$, whose terms lie in $\\mathcal P$. Thus the general lemma gives a bounded-above complex of finite stably free $R$-modules representing $K$ and reducing termwise to $E^\\bullet$. For the final assertion (More on Algebra, Tag 0BC6), let $E^i\\cong(R/I)^{\\oplus n}$. Since $P^i$ is finite projective with $P^i/IP^i\\cong E^i$, lift the resulting surjection $R^{\\oplus n}\\to(R/I)^{\\oplus n}\\cong P^i/IP^i$ to a map $\\varphi:R^{\\oplus n}\\to P^i$. It is surjective modulo $I$, hence surjective by Nakayama's lemma (the cokernel is finite and vanishes modulo $I$), hence split as $P^i$ is projective: $R^{\\oplus n}\\cong P^i\\oplus N$ with $N=\\operatorname{Ker}\\varphi$ finite. Reducing modulo $I$, $(R/I)^{\\oplus n}\\cong P^i/IP^i\\oplus N/IN$ with $\\varphi$ modulo $I$ an isomorphism, so $N/IN=0$ and $N=0$ by Nakayama. Hence $P^i\\cong R^{\\oplus n}$ is free; this holds for every such $i$ simultaneously, with no further choice.",
+   "uses": [
     "lem-sc-complex-lift-class-projective"
-  ],
-  "proof_origin": {
-    "by": "document",
+   ],
+   "elementary": false,
+   "source": {
     "document": "literature/stacks-project/more-algebra.tex",
-    "place": "More on Algebra, Lemma 15.75.6, Tag 0BCB"
-  },
-  "mathlib_searches": [
-    {
-      "tool": "leanfinder",
-      "query": "complex of stably free modules lifts from quotient by an ideal to a ps",
-      "results": "ModuleCat.projectiveResolution and ModuleCat.free_shortExact, but no lifting theorem for derived complexes",
-      "date": "2026-10-11",
-      "verdict": "no match"
-    },
-    {
-      "tool": "loogle",
-      "query": "Module.Free CochainComplex",
-      "results": "0 hits; application type mismatch for CochainComplex",
-      "date": "2026-10-11",
-      "verdict": "no match"
-    },
-    {
-      "tool": "grep",
-      "query": "stably.free|pseudo.coherent",
-      "results": "0 hits",
-      "date": "2026-10-11",
-      "verdict": "no match"
-    },
-    {
-      "tool": "leansearch",
-      "query": "complex of finite stably free modules lifting pseudo-coherent derived ",
-      "results": "service unavailable: Internal Server Error",
-      "date": "2026-10-11",
-      "verdict": "unavailable"
-    }
-  ],
-  "mathlib_match": null,
-  "status": "split",
-  "created": {
-    "item": "lem-sc-perfect-local-pseudocoherent-free-model",
-    "by": "worker",
-    "date": "2026-10-11"
-  },
-  "chapter": "sec-abelian-varieties",
-  "unit": "sk-prop-av-cube",
-  "split_report": {
-    "date": "2026-10-11",
-    "item": "lem-sc-pseudo-coherent-lift-stably-free-complex",
-    "worker": "stage1",
-    "summary": "Read More on Algebra Tag 0BCB and its general Lemma 15.75.2. Added the general projective-class complex lifting statement as the only strict sublemma, then applied it to finite stably free modules, checking projectivity, closure under split exact sequences, Nakayama surjectivity, lifting of stable presentations, and the bounded-above finite-free pseudo-coherent model. No exact Lean declaration exists.",
-    "blueprint": "Realizes the theorem-of-the-cube route's locally free model construction through the general complex lifting argument.",
-    "tool_uses": []
-  },
-  "reviewed": {
-    "date": "2026-10-11",
-    "by": "L",
-    "reviewer": "R-lsf0206",
-    "group": "H1",
-    "result": "pass",
-    "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-lsf0206 (reviewer sub-agent of L); spot-checked: Item statement vs Tag 0BCB, new node vs Tag 0BC2 (lemma-lift-complex) hypothesis by hypothesis, proof of 0BCB and auxiliary 0BC3/0BC4/0BC6, parent lem-sc-perfect-local-pseudocoherent-free-model step 2 (C4: needs P^i free for all i at once), duplicates (stably free grep: none), Mathlib grep StablyFree (only IsStablyFree basics, no lifting lemma). FIX more, RETURN less: (1) D/C1 item proof: the free-term clause was justified by 'choose the lifted term free in the same stable presentation', but P^i is output by the general lemma, not chosen; replaced by the Tag 0BC6 Nakayama argument (lift R^n -> P^i, surjective, split, kernel zero mod I hence zero). (2) C4/E7 item statement: 'P^i may be chosen free' (ambiguous, per-i choice) restated as source's 'P^i is free for every i with E^i free', which the parent's step uses for all i simultaneously. (3) B3 new node: K and E were used in hypothesis (4) before being introduced; restated with K, E declared up front, wording otherwise Stacks 15.75.2.; 2 file(s) fixed by the reviewer"
-  },
-  "statement_change": {
-    "date": "2026-10-11",
-    "by": "R-lsf0206 (reviewer), recorded by L at 02:06 UTC",
-    "what": "the clause \"for every i with E^i free, P^i may be chosen free\" became \"P^i is free for every i such that E^i is free\" (Stacks Tag 0BCB wording: P^i is free, not chosen free; the parent lem-sc-perfect-local-pseudocoherent-free-model uses it for all i at once)",
-    "old_statement": "Let $R$ be a ring and $I\\subseteq R$ an ideal such that every element of $1+I$ is invertible in $R$. Call a module $M$ over a ring $A$ finite stably free if $M\\oplus A^{\\oplus m}\\cong A^{\\oplus n}$ for some integers $m,n\\ge0$. Let $K$ be an object of $D(R)$ [def-pc-derived-category] that is pseudo-coherent, that is, isomorphic in $D(R)$ to a bounded-above complex of finite free $R$-modules. Let $E^\\bullet$ be a bounded-above complex of finite stably free $R/I$-modules representing $K\\otimes_R^{\\mathbf L}R/I$ in $D(R/I)$. Then $K$ is represented in $D(R)$ by a bounded-above complex $P^\\bullet$ of finite stably free $R$-modules such that $P^\\bullet\\otimes_RR/I$ is isomorphic to $E^\\bullet$ as a complex; moreover, for every $i$ with $E^i$ free, $P^i$ may be chosen free."
+    "place": "More on Algebra, Lemma 15.75.6, proof of lemma-lift-complex-stably-frees"
+   }
   }
+ ],
+ "proof_deps": [
+  "lem-sc-complex-lift-class-projective"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "More on Algebra, Lemma 15.75.6, Tag 0BCB"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "complex of stably free modules lifts from quotient by an ideal to a ps",
+   "results": "ModuleCat.projectiveResolution and ModuleCat.free_shortExact, but no lifting theorem for derived complexes",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.Free CochainComplex",
+   "results": "0 hits; application type mismatch for CochainComplex",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "stably.free|pseudo.coherent",
+   "results": "0 hits",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "complex of finite stably free modules lifting pseudo-coherent derived ",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "item": "lem-sc-perfect-local-pseudocoherent-free-model",
+  "by": "worker",
+  "date": "2026-10-11"
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-sc-pseudo-coherent-lift-stably-free-complex",
+  "worker": "stage1",
+  "summary": "Read More on Algebra Tag 0BCB and its general Lemma 15.75.2. Added the general projective-class complex lifting statement as the only strict sublemma, then applied it to finite stably free modules, checking projectivity, closure under split exact sequences, Nakayama surjectivity, lifting of stable presentations, and the bounded-above finite-free pseudo-coherent model. No exact Lean declaration exists.",
+  "blueprint": "Realizes the theorem-of-the-cube route's locally free model construction through the general complex lifting argument.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-lsf0206",
+  "group": "H1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-lsf0206 (reviewer sub-agent of L); spot-checked: Item statement vs Tag 0BCB, new node vs Tag 0BC2 (lemma-lift-complex) hypothesis by hypothesis, proof of 0BCB and auxiliary 0BC3/0BC4/0BC6, parent lem-sc-perfect-local-pseudocoherent-free-model step 2 (C4: needs P^i free for all i at once), duplicates (stably free grep: none), Mathlib grep StablyFree (only IsStablyFree basics, no lifting lemma). FIX more, RETURN less: (1) D/C1 item proof: the free-term clause was justified by 'choose the lifted term free in the same stable presentation', but P^i is output by the general lemma, not chosen; replaced by the Tag 0BC6 Nakayama argument (lift R^n -> P^i, surjective, split, kernel zero mod I hence zero). (2) C4/E7 item statement: 'P^i may be chosen free' (ambiguous, per-i choice) restated as source's 'P^i is free for every i with E^i free', which the parent's step uses for all i simultaneously. (3) B3 new node: K and E were used in hypothesis (4) before being introduced; restated with K, E declared up front, wording otherwise Stacks 15.75.2.; 2 file(s) fixed by the reviewer"
+ },
+ "statement_change": {
+  "date": "2026-10-11",
+  "by": "S1 stage 2",
+  "old_statement": "Let $R$ be a ring and $I\\subseteq R$ an ideal such that every element of $1+I$ is invertible in $R$. Call a module $M$ over a ring $A$ finite stably free if $M\\oplus A^{\\oplus m}\\cong A^{\\oplus n}$ for some integers $m,n\\ge0$. Let $K$ be an object of $D(R)$ [def-pc-derived-category] that is pseudo-coherent, that is, isomorphic in $D(R)$ to a bounded-above complex of finite free $R$-modules. Let $E^\\bullet$ be a bounded-above complex of finite stably free $R/I$-modules representing $K\\otimes_R^{\\mathbf L}R/I$ in $D(R/I)$. Then $K$ is represented in $D(R)$ by a bounded-above complex $P^\\bullet$ of finite stably free $R$-modules such that $P^\\bullet\\otimes_RR/I$ is isomorphic to $E^\\bullet$ as a complex; moreover, $P^i$ is free for every $i$ such that $E^i$ is free.",
+  "what": "The citation def-pc-derived-category defines the derived category of sheaves on a scheme, not D(R) of ordinary R-modules. Replace it by the abstract derived-category construction and cite the existing ring pseudo-coherence definition. No mathematical hypothesis or conclusion changes.",
+  "source": {
+   "document": "Stacks Project, More on Algebra",
+   "place": "Tag 0BCB, lemma-lift-complex-stably-frees; https://stacks.math.columbia.edu/tag/0BCB"
+  },
+  "citers": [
+   {
+    "id": "lem-sc-perfect-local-pseudocoherent-free-model",
+    "holds": true,
+    "note": "The application over a local ring to its residue quotient is unchanged; the correction only uses the ring-derived category and the existing ring pseudo-coherence definition."
+   }
+  ],
+  "old_stmt_deps": [
+   "def-pc-derived-category"
+  ],
+  "previous": {
+   "date": "2026-10-11",
+   "by": "R-lsf0206 (reviewer), recorded by L at 02:06 UTC",
+   "what": "the clause \"for every i with E^i free, P^i may be chosen free\" became \"P^i is free for every i such that E^i is free\" (Stacks Tag 0BCB wording: P^i is free, not chosen free; the parent lem-sc-perfect-local-pseudocoherent-free-model uses it for all i at once)",
+   "old_statement": "Let $R$ be a ring and $I\\subseteq R$ an ideal such that every element of $1+I$ is invertible in $R$. Call a module $M$ over a ring $A$ finite stably free if $M\\oplus A^{\\oplus m}\\cong A^{\\oplus n}$ for some integers $m,n\\ge0$. Let $K$ be an object of $D(R)$ [def-pc-derived-category] that is pseudo-coherent, that is, isomorphic in $D(R)$ to a bounded-above complex of finite free $R$-modules. Let $E^\\bullet$ be a bounded-above complex of finite stably free $R/I$-modules representing $K\\otimes_R^{\\mathbf L}R/I$ in $D(R/I)$. Then $K$ is represented in $D(R)$ by a bounded-above complex $P^\\bullet$ of finite stably free $R$-modules such that $P^\\bullet\\otimes_RR/I$ is isomorphic to $E^\\bullet$ as a complex; moreover, for every $i$ with $E^i$ free, $P^i$ may be chosen free."
+  }
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.StablyFreeComplexLift",
+  "declaration": "DerivedCategory.exists_stablyFree_lift_mod_ideal",
+  "file": "lean/Sheaf/RingTheory/StablyFreeComplexLift.lean",
+  "statement": "theorem exists_stablyFree_lift_mod_ideal {R : Type u} [CommRing R] (I : Ideal R) (hunits : ∀ x : I, IsUnit (1 + (x : R))) [HasDerivedCategory.{w} (ModuleCat.{max u v} R)] [HasDerivedCategory.{w'} (ModuleCat.{max u v} (R ⧸ I))] (K : DerivedCategory (ModuleCat.{max u v} R)) (hK : IsPseudoCoherent K) (E : CochainComplex (ModuleCat.{max u v} (R ⧸ I)) ℤ) (hEbound : ∃ b : ℤ, E.IsStrictlyLE b) (hEterms : ∀ i : ℤ, Module.Finite (R ⧸ I) (E.X i) ∧ Module.IsStablyFree (R ⧸ I) (E.X i)) (hE : Nonempty (Q.obj (((ModuleCat.extendScalars (Ideal.Quotient.mk I)).mapHomologicalComplex (ComplexShape.up ℤ)).obj (Classical.choose hK)) ≅ Q.obj E)) : ∃ P : CochainComplex (ModuleCat.{max u v} R) ℤ, (∃ b : ℤ, P.IsStrictlyLE b) ∧ (∀ i : ℤ, Module.Finite R (P.X i) ∧ Module.IsStablyFree R (P.X i)) ∧ Nonempty (Q.obj P ≅ K) ∧ Nonempty (((ModuleCat.extendScalars (Ideal.Quotient.mk I)).mapHomologicalComplex (ComplexShape.up ℤ)).obj P ≅ E) ∧ (∀ i : ℤ, Module.Free (R ⧸ I) (E.X i) → Module.Free R (P.X i))",
+  "branch": "sheaf-dag",
+  "by": "S1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-psl",
+  "group": "S1",
+  "result": "pass",
+  "statement_corrected": true
+ }
 }

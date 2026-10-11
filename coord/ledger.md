@@ -5202,3 +5202,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 15:20 L: merged deliver/Q1/lem-weil-pbc-tower-limit-exact-surjective-kernels (stage 2; reviewer PASS; first push; Sheaf.Algebra.Category.ModuleCat.TowerLimitExactSurjectiveKernels CategoryTheory.tower_limit_exact_surjective_kernels)
 - 15:21 L: merged deliver/H1/def-pur-derived-internal-hom (stage 2; reviewer FIX; first push; Sheaf.Algebra.Homology.DerivedInternalHom CategoryTheory.derivedInternalHom)
 - 15:21 L: merged deliver/P1/def-nagata-qc-open-descent (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.NagataQCOpenDescent AlgebraicGeometry.nagataQCOpenDescent)
+- 15:21 L: merged deliver/S1/lem-sc-pseudo-coherent-lift-stably-free-complex (stage 2; reviewer PASS; first push; Sheaf.RingTheory.StablyFreeComplexLift DerivedCategory.exists_stablyFree_lift_mod_ideal; statement corrected (1 citers))
