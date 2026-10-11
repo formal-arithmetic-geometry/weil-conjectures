@@ -80,4 +80,30 @@ theorem isConstructibleSheaf_etaleLowerShriek_constantSheaf_SpecMap {Λ : Type (
     (Etale.etaleLowerShriek _ _ inferInstance).mapIso
       ((upperStarConstantSheafIso (ModuleCat.{u + 1} Λ) _).app M))
 
+/-- **Stacks 03SA for étale maps between affine schemes.** -/
+theorem isConstructibleSheaf_etaleLowerShriek_constantSheaf_of_isAffine {Λ : Type (u + 1)}
+    [CommRing Λ] {V Y : Scheme.{u}} (v : V ⟶ Y) [Etale v] [IsAffine V] [IsAffine Y]
+    (M : ModuleCat.{u + 1} Λ) [Module.Finite Λ M] :
+    IsConstructibleSheaf ((Etale.etaleLowerShriek (ModuleCat.{u + 1} Λ) v inferInstance).obj
+      ((constantSheaf V.smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj M)) := by
+  let : Algebra Γ(Y, ⊤) Γ(V, ⊤) := v.appTop.hom.toAlgebra
+  have : Algebra.Etale Γ(Y, ⊤) Γ(V, ⊤) := HasRingHomProperty.appTop @Etale v inferInstance
+  have hv : Spec.map (CommRingCat.ofHom (algebraMap Γ(Y, ⊤) Γ(V, ⊤))) = Spec.map v.appTop := rfl
+  have sq : IsPullback v V.isoSpec.hom Y.isoSpec.hom
+      (Spec.map (CommRingCat.ofHom (algebraMap Γ(Y, ⊤) Γ(V, ⊤)))) :=
+    IsPullback.of_vert_isIso ⟨by rw [hv, Scheme.isoSpec_hom_naturality]⟩
+  have := isConstructibleSheaf_etaleLowerShriek_constantSheaf_SpecMap (Λ := Λ) Γ(Y, ⊤) Γ(V, ⊤) M
+  have := IsConstructibleSheaf.upperStar (A := ModuleCat.{u + 1} Λ) Y.isoSpec.hom
+    ((Etale.etaleLowerShriek (ModuleCat.{u + 1} Λ)
+      (Spec.map (CommRingCat.ofHom (algebraMap Γ(Y, ⊤) Γ(V, ⊤)))) inferInstance).obj
+        ((constantSheaf (Spec (.of Γ(V, ⊤))).smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj M))
+  have : IsConstructibleSheaf ((Etale.etaleLowerShriek (ModuleCat.{u + 1} Λ)
+      (Spec.map (CommRingCat.ofHom (algebraMap Γ(Y, ⊤) Γ(V, ⊤)))) inferInstance ⋙
+        Etale.upperStar _ Y.isoSpec.hom).obj
+        ((constantSheaf (Spec (.of Γ(V, ⊤))).smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj M)) :=
+    this
+  exact IsConstructibleSheaf.of_iso (((Etale.etaleLowerShriekBaseChangeIso Λ sq).app _) ≪≫
+    (Etale.etaleLowerShriek _ _ inferInstance).mapIso
+      ((upperStarConstantSheafIso (ModuleCat.{u + 1} Λ) _).app M))
+
 end AlgebraicGeometry.Scheme
