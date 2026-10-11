@@ -170,5 +170,24 @@
   "group": "M1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-ots0016 (reviewer sub-agent of L); spot-checked: Proof by hand (kernel identification via Tor sequence, lift via right exactness); citer lem-pc-module-flat-opcycles-tor-criterion uses exactly the stated surjection; one-point-site phrasing matches the citer; def-weil-pbc-flat-ring-map defines flat modules; no duplicate Tor node (grep dag/nodes for tor/opcycles); Mathlib grep Tor in RingTheory/Flat: only a TODO. FIX more, RETURN less: (1) C1/E Step 1: Tor_1(P^a,N)=0 was argued from a resolution of P^a, which flatness of P^a does not control; now via lem-weil-pbc-tor-symmetry, a free resolution of N tensored with P^a, right exactness and flatness (tool use added); (2) C4 Steps 2-3: wrong justifications ('because d^a d^{a-1}=0', 'since K->P^a is injective') replaced by the factorisation d^{a-1} tensor 1 = (iota tensor 1)(pi tensor 1) and pi d^{a-2}=0; (3) B4 all steps rewritten in TeX (plain arrows removed).; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.OpcyclesTorSurjection",
+  "declaration": "CategoryTheory.exists_epi_homology_tensor_to_tor_opcycles",
+  "file": "lean/Sheaf/CategoryTheory/OpcyclesTorSurjection.lean",
+  "statement": "theorem exists_epi_homology_tensor_to_tor_opcycles (A : Type u) [CommRing A] (P : CochainComplex (ModuleCat.{u} A) ℤ) (a : ℤ) (hflat : ∀ i : ℤ, Module.Flat A (P.X i)) : ∃ τ : (CochainComplex.singleFunctor (ModuleCat.{u} A) 0 ⋙ ((MonoidalCategory.curriedTensor (ModuleCat.{u} A)).map₂CochainComplex).obj P ⋙ HomologicalComplex.homologyFunctor (ModuleCat.{u} A) (.up ℤ) (a - 1)) ⟶ (Tor' (ModuleCat.{u} A) 1).obj (P.opcycles a), ∀ N : ModuleCat.{u} A, Epi (τ.app N)",
+  "branch": "sheaf-dag",
+  "by": "G1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-ots0815"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-ots0815",
+  "group": "G1",
+  "result": "fix",
+  "note": "A:Type u CommRing; P:CochainComplex (ModuleCat.{u} A) Z; hflat all terms Module.Flat; a:Z arbitrary; Q=P.opcycles a; P(x)N = total complex map2CochainComplex(curriedTensor) of P with N in degree 0 (single, no extra signs); H^(a-1) homologyFunctor; Tor' derives first argument so Tor_1(Q,N) with N variable (Mathlib Monoidal/Tor.lean l.50); NatTrans + Epi components = natural surjection; math checked by hand. FIX H9: unused import Mathlib.Algebra.Homology.Monoidal dropped, BifunctorShift narrowed to Bifunctor (where map2CochainComplex lives); recompiled clean"
  }
 }
