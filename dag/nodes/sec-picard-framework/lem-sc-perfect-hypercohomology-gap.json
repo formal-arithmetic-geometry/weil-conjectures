@@ -21,7 +21,8 @@
  "stmt_deps": [
   "def-pc-scheme",
   "def-pc-derived-category",
-  "def-pc-perfect-complex"
+  "def-pc-perfect-complex",
+  "def-pc-derived-tensor-complex-cohomology-vanishes"
  ],
  "proof": [
   {
@@ -130,5 +131,23 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-phg0033 (reviewer sub-agent of L); spot-checked: Index bookkeeping E_1^{p,q}=Q^p(x)H^q(L), p+q=j, p in [u,v] => q in [j-v,j-u] checked by hand; citer lem-sc-perfect-ext-bounded-qcoh-vanishing uses exactly this statement (C4 ok); no duplicate (lem-pc-tor-amplitude-*, lem-pc-module-tor-amplitude-flat-model are different statements). FIX more, RETURN less: (1) C1: computing P(x)^L L by the total tensor complex of the local strictly perfect model was uncited; now cites lem-pc-bounded-above-flat-kflat (tool use), def-pc-kflat-complex, def-pc-tensor-complex-sheaves, def-pc-flat-sheaf-modules; restriction to U compatibility and flat-tensor exactness folded as elementary; spurious Cartan-Eilenberg resolution removed and Q-degree filtration, E_1/E_2 written out. (2) B3: statement used Tor amplitude without a definition; meaning inlined. (3) Steps 2-3 rewritten with explicit interval arithmetic; proof_deps synchronized.; 1 file(s) fixed by the reviewer"
  },
- "lead_note": "2026-10-11 L (R-phg0033): Statement now spells out the Tor-amplitude meaning (E7: clarification, same content, as in lem-pc-affine-tor-amplitude-criterion). Tool use lem-pc-bounded-above-flat-kflat: generic K-flatness of bounded flat complexes."
+ "lead_note": "2026-10-11 L (R-phg0033): Statement now spells out the Tor-amplitude meaning (E7: clarification, same content, as in lem-pc-affine-tor-amplitude-criterion). Tool use lem-pc-bounded-above-flat-kflat: generic K-flatness of bounded flat complexes.",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.PerfectHypercohomologyGap",
+  "declaration": "AlgebraicGeometry.perfect_hypercohomology_gap",
+  "file": "lean/Sheaf/AlgebraicGeometry/PerfectHypercohomologyGap.lean",
+  "statement": "theorem perfect_hypercohomology_gap (X : Scheme.{uG}) [HasDerivedCategory.{wG} (SheafOfModules.{uG} (moduleRings X.toRingedSpace))] [∀ U : X.Opens, HasDerivedCategory.{wG} (SheafOfModules.{uG} ((moduleRings X.toRingedSpace).over U))] (P L : schemeDerivedCategory X) (hP : X.IsPerfect P) (a b : ℤ) (hTor : ∀ G : SheafOfModules.{uG} (moduleRings X.toRingedSpace), ∀ i : ℤ, i < a ∨ b < i → schemeDerivedTensorCohomologyVanishes X P G i) (hL : schemeDerivedQCohProperty X L) (j : ℤ) (hgap : ∀ q : ℤ, j - b ≤ q → q ≤ j - a → IsZero ((DerivedCategory.homologyFunctor (SheafOfModules.{uG} (moduleRings X.toRingedSpace)) q).obj L)) : schemeDerivedTensorComplexCohomologyVanishes X P L j",
+  "branch": "sheaf-dag",
+  "by": "J1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-phg1530",
+  "group": "J1",
+  "result": "pass",
+  "note": "X scheme, P with X.IsPerfect, hTor over every O_X-module G and i<a or b<i via landed schemeDerivedTensorCohomologyVanishes (same form as TorAmplitudeQCohTest), L with schemeDerivedQCohProperty, hgap q in [j-b,j-a] IsZero of homology sheaf (object, not Type), conclusion H^j(P tensor^L L)=0 via new existential K-flat-representative predicate (consistent with DerivedPullbackTensorQCoh convention; no landed two-object predicate); no qcqs/extra hypotheses, no let in statement, universes shared"
+ }
 }
