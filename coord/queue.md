@@ -1,11 +1,11 @@
 # Work queue
 
-148 items; claim with `tools/claim.py next <group> [--stage N]`.
+145 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (148)
+## Stage 2: nodes to state (145)
 
 | node | distance to Mathlib | kind | blockers |
 |---|---|---|---|
@@ -63,7 +63,6 @@
 | `lem-pc-rf-perfect-base-change` | 1 | state | 0 |
 | `lem-pc-rf-single-complex-qcqs-induction` | 1 | state | 0 |
 | `lem-pc-rf-single-complex-relative-mayer-vietoris` | 1 | state | 0 |
-| `lem-pc-rhom-strict-perfect-hom` | 1 | state | 0 |
 | `lem-pc-ringed-space-sheafification-cohomology` | 1 | state | 0 |
 | `lem-pc-tor-independent-perfect-tensor-base-change` | 1 | state | 0 |
 | `lem-sc-affine-derived-cohomology` | 1 | state | 0 |
@@ -89,7 +88,6 @@
 | `lem-sc-open-curve-etale-leray-low-degree` | 1 | state | 0 |
 | `lem-sc-open-curve-gm-direct-image-cohomology` | 1 | state | 0 |
 | `lem-sc-open-restriction-support-triangle` | 1 | state | 0 |
-| `lem-sc-p1-proj-sheafification-exact` | 1 | state | 0 |
 | `lem-sc-proper-flat-right-adjoint-basechange` | 1 | state | 0 |
 | `lem-sc-proper-flat-right-adjoint-direct-sums` | 1 | state | 0 |
 | `lem-sc-proper-flat-right-adjoint-open-support` | 1 | state | 0 |
@@ -155,7 +153,6 @@
 | `lem-sc-supported-derived-generated-perfect` | 2 | state | 0 |
 | `lem-sc-valuation-closed-fibre-section-vanishing` | 2 | state | 0 |
 | `lem-sp-derived-couple-functoriality` | 2 | state | 0 |
-| `lem-weil-pbc-etale-cohomology-limit-complex-systems` | 2 | state | 0 |
 | `lemma-weil-pbc-etale-cohomology-continuity` | 2 | state | 0 |
 
 Not open yet: 40 nodes that wait for stage 1, 265 nodes that wait for a statement dependency.
