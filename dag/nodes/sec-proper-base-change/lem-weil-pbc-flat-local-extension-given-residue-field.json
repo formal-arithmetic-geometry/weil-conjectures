@@ -275,5 +275,23 @@
   "worker": "stage1",
   "summary": "Read Stacks Algebra 03C3 (lemma-flat-local-given-residue-field, tag verified in tags/tags) and its proof, and the citer lem-weil-pbc-cohen-rings-exist step 2 (uses: R local, flat local Z_p -> R, m_R = pR, R/m_R = k; the statement gives exactly this, kept unchanged). Not a Mathlib leaf (LeanSearch, LeanFinder, grep, recorded). Nine steps following the four paragraphs of the proof, phrased with 'R-towers' (local A with maximal ideal mA, flat R -> A, phi: A -> K with kernel mA): Claim M (monogenic step; transcendental case via R[x] localized at mR[x], algebraic case via R[T]/(monic lift of the minimal polynomial), with locality, kernel and image checked), Claim C (directed colimit of towers is a tower: locality from elementwise description, flatness by showing the ring colimit is the module colimit), the well-ordering and subfields K(x), the transfinite recursion with an explicit rule G_x and induction for coherence, and the final colimit over all of K. Existing nodes cited: flat-ring-map, free-module, projective-module-flat, localization-flat, flat-ring-map-comp, monic-quotient-free, finite-algebra-local-radical, simple-algebraic-extension-power-basis, separable-algebraic-extension (minimal polynomial), commutative-algebras-colimits-exist, filtered-colimit-algebras-elementwise, filtered-colimit-rings-zero, filtered-colimit-flat-modules, well-ordering-theorem, and definitions. One new Mathlib leaf: lem-weil-pbc-transfinite-recursion (WellFoundedLT.fix / fix_eq). Gaps of the source filled: the source's recursion takes at the least element a colimit over the empty set (which would be Z, not R); it ends at 'R(x)' for each x without the final colimit over all x (needed when K has no largest element); and it does not check that its two monogenic rings are local with residue field k(alpha)."
  },
- "reviewed": "pass (L, 2026-10-10): 9 steps follow 03C3: R-towers (flat local A with m_A = mA and A -> K with kernel mA), the monogenic step (localized polynomial ring in the transcendental case, A[T]/(f) in the algebraic case), directed colimits of towers (locality, flatness via filtered colimits of flat modules), a well-ordering of K and transfinite recursion (new leaf), final colimit. Source gaps filled: start of the recursion at R, final colimit, locality checks."
+ "reviewed": "pass (L, 2026-10-10): 9 steps follow 03C3: R-towers (flat local A with m_A = mA and A -> K with kernel mA), the monogenic step (localized polynomial ring in the transcendental case, A[T]/(f) in the algebraic case), directed colimits of towers (locality, flatness via filtered colimits of flat modules), a well-ordering of K and transfinite recursion (new leaf), final colimit. Source gaps filled: start of the recursion at R, final colimit, locality checks.",
+ "lean": {
+  "module": "Sheaf.RingTheory.FlatLocalExtensionGivenResidueField",
+  "declaration": "IsLocalRing.exists_flat_local_extension_given_residue_field",
+  "file": "lean/Sheaf/RingTheory/FlatLocalExtensionGivenResidueField.lean",
+  "statement": "theorem exists_flat_local_extension_given_residue_field (R : Type u) [CommRing R] [IsLocalRing R] (K : Type v) [Field K] (ι : ResidueField R →+* K) : ∃ (S : Type (max u v)) (_ : CommRing S) (_ : IsLocalRing S) (φ : R →+* S) (_ : IsLocalHom φ), φ.Flat ∧ (maximalIdeal R).map φ = maximalIdeal S ∧ ∃ e : ResidueField S ≃+* K, e.toRingHom.comp (ResidueField.map φ) = ι",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-fle1029",
+  "group": "F1",
+  "result": "pass",
+  "note": "local R (CommRing+IsLocalRing), K field, ι : κ →+* K; ∃ S : Type (max u v) local, φ flat (RingHom.Flat per def-weil-pbc-flat-ring-map) + IsLocalHom, m.map φ = m', e : κ' ≃+* K with e ∘ ResidueField.map φ = ι; no Mathlib 03C3 lemma"
+ }
 }
