@@ -3047,3 +3047,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 00:07 L: merged deliver/K1/lem-sc-pic-affine-base-change-compatibility (reviewer FIX; first push; new nodes: 1)
 - 00:07 L: merged deliver/G1/lem-pc-rf-mv-triangle-naturality (reviewer FIX; after a return; new nodes: 2)
 - 00:07 UTC L: reviewed under the lock since 00:05: J1 pur-rhom-into-kinjective-local FIX afc3cf391 (R-rkl0004; j_U! defined in the new adjunction node), H1 picard-h1-multiple-locus FIX de27caabe (R-pml0004; chain map between fixed models). Second readings missed a fault in 2 of 2.
+- 00:08 UTC L: K1 pic-affine-base-change-compatibility FIX 3c25723de (R-pab0004; new node lem-sc-pic-restriction-boundary), G1 rf-mv-triangle-naturality FIX 5cedfa5c9 re-push (R-mvn0004; lem-pc-derived-mayer-vietoris-functorial restated, def-pc-derived-base-change-map now exists). Second readings missed a fault in 2 of 2.
