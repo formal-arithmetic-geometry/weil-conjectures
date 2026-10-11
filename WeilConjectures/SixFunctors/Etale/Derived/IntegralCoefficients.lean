@@ -123,7 +123,17 @@ theorem derivedComplete_derivedHom {K L : 𝐃(X, Λ)}
     (hL : DerivedCategory.derivedComplete X.smallEtaleTopology I L) :
     DerivedCategory.derivedComplete X.smallEtaleTopology I
       (((derivedHom (ModuleCat.{u + 1} Λ) X).obj (op K)).obj L) :=
-  sorry
+  by
+  rw [DerivedCategory.derivedComplete_iff_rightOrthogonal hϖ hI] at hL ⊢
+  intro Z φ (hZ : IsIso (ϖ • 𝟙 Z))
+  let adj := derivedTensorHomAdjunction (ModuleCat.{u + 1} Λ) K
+  have hZ' : DerivedCategory.smulInvertible X.smallEtaleTopology ϖ
+      (((derivedTensor (ModuleCat.{u + 1} Λ) X).obj K).obj Z) := by
+    change IsIso (ϖ • 𝟙 _)
+    rw [← ((derivedTensor (ModuleCat.{u + 1} Λ) X).obj K).map_id, ← Functor.map_smul]
+    infer_instance
+  rw [← (adj.homEquiv Z L).apply_symm_apply φ, hL ((adj.homEquiv Z L).symm φ) hZ',
+    Adjunction.homEquiv_unit, Functor.map_zero, comp_zero]
 
 end HomReduction
 
@@ -272,6 +282,72 @@ theorem NormalizedTower.isDerivedBaseChange_of_isHomotopyLimit (M : NormalizedTo
   sorry
 
 end Tower
+
+section Matrix
+
+variable [IsDomain Λ] [IsNoetherianRing Λ] [IsAdicComplete I Λ] [Finite (Λ ⧸ I)]
+  {ϖ : Λ} (hϖ : ϖ ∈ nonZeroDivisors Λ) (hI : I = Ideal.span {ϖ})
+  {k : Type u} [Field k] [HasInvertibleExponent (Λ ⧸ I) (Spec (.of k))]
+
+include hϖ hI in
+/-- Blueprint `rem-sf-preservation-matrix`: Preservation results and their actual hypotheses,
+the integral entries (item 5).
+
+At the integral stage (`Λ` a Noetherian domain complete for `I = (ϖ)`, `Λ ⧸ I` finite of
+exponent invertible on `k`), for a separated finite-type morphism `f : X ⟶ Y` of separated
+finite-type `k`-schemes:
+
+* the internal hom commutes with reduction and preserves derived completeness
+  (`lem-coef-integral-hom-reduction`), and preserves `Dᵇc(-, Λ)`
+  (`cor-coef-integral-internal-hom`);
+* the derived limit `G_f L` of the reduced exceptional inverse images lies in `Dᵇc(X, Λ)` and
+  is right adjoint to `Rf_!` on the constructible categories
+  (`prop-coef-integral-exceptional-adjoint`);
+* a normalized tower is the tower of reductions of its derived limit, which is derived complete
+  (`lem-coef-normalized-dvr-effectivity`).
+
+The scope of other tower shapes (`rem-sf-tower-shapes-occurring`) is a remark without a
+statement of its own. -/
+theorem preservationMatrix_integral {X Y : Scheme.{u}}
+    (aX : X ⟶ Spec (.of k)) (aY : Y ⟶ Spec (.of k)) [LocallyOfFiniteType aX] [QuasiCompact aX]
+    [LocallyOfFiniteType aY] [QuasiCompact aY] [IsSeparated aX] [IsSeparated aY]
+    [HasCompactification aX] [HasCompactification aY]
+    [(R(aX)_![ModuleCat.{u + 1} Λ]).IsLeftAdjoint] [(R(aY)_![ModuleCat.{u + 1} Λ]).IsLeftAdjoint]
+    (f : X ⟶ Y) (hf : f ≫ aY = aX) [IsSeparated f] [QuasiCompact f] [HasCompactification f]
+    [(R(f)_![ModuleCat.{u + 1} Λ]).IsLeftAdjoint] :
+    (∀ (n : ℕ) (K L : 𝐃(X, Λ)) (Kn Ln : 𝐃(X, Λ ⧸ I ^ n))
+      (η : K ⟶ (derivedRestrictScalars (Ideal.Quotient.mk (I ^ n)) X).obj Kn)
+      (η' : L ⟶ (derivedRestrictScalars (Ideal.Quotient.mk (I ^ n)) X).obj Ln),
+      IsDerivedBaseChange η → IsDerivedBaseChange η' →
+        Nonempty ((reductionModIdeal Λ X (I ^ n)).obj
+            (((derivedHom (ModuleCat.{u + 1} Λ) X).obj (op K)).obj L) ≅
+          (derivedRestrictScalars (Ideal.Quotient.mk (I ^ n)) X).obj
+            (((derivedHom (ModuleCat.{u + 1} (Λ ⧸ I ^ n)) X).obj (op Kn)).obj Ln))) ∧
+    (∀ K L : 𝐃(X, Λ), DerivedCategory.derivedComplete X.smallEtaleTopology I L →
+      DerivedCategory.derivedComplete X.smallEtaleTopology I
+        (((derivedHom (ModuleCat.{u + 1} Λ) X).obj (op K)).obj L)) ∧
+    (∀ K L : 𝐃(X, Λ), DerivedCategory.boundedConstructibleIntegral I X K →
+      DerivedCategory.boundedConstructibleIntegral I X L →
+        DerivedCategory.boundedConstructibleIntegral I X
+          (((derivedHom (ModuleCat.{u + 1} Λ) X).obj (op K)).obj L)) ∧
+    (∀ L : 𝐃(Y, Λ), DerivedCategory.boundedConstructibleIntegral I Y L →
+      ∀ c : Cone (DerivedCategory.derivedCompletionDiagram Y.smallEtaleTopology I L ⋙
+        R(f)^![ModuleCat.{u + 1} Λ]), Pretriangulated.IsHomotopyLimit c →
+        DerivedCategory.boundedConstructibleIntegral I X c.pt ∧
+          ∀ K : 𝐃(X, Λ), DerivedCategory.boundedConstructibleIntegral I X K →
+            Nonempty (((R(f)_![ModuleCat.{u + 1} Λ]).obj K ⟶ L) ≃ (K ⟶ c.pt))) ∧
+    ∀ (M : NormalizedTower I X) (c : Cone M.restrict), Pretriangulated.IsHomotopyLimit c →
+      (∀ n : ℕ, IsDerivedBaseChange (φ := Ideal.Quotient.mk (I ^ (n + 1))) (c.π.app (op n))) ∧
+        DerivedCategory.derivedComplete X.smallEtaleTopology I c.pt :=
+  ⟨fun n _ _ _ _ _ _ hη hη' ↦ nonempty_iso_reductionModIdeal_derivedHom I hϖ hI n hη hη',
+    fun _ _ hL ↦ derivedComplete_derivedHom I hϖ hI hL,
+    fun _ _ hK hL ↦ (boundedConstructibleIntegral_derivedHom I hϖ hI aX hK hL).1,
+    fun _ hL _ hc ↦
+      have h := boundedConstructibleIntegral_exceptionalAdjoint I hϖ hI aX aY f hf hL hc
+      ⟨h.1.1, h.2.1⟩,
+    fun M _ hc ↦ M.isDerivedBaseChange_of_isHomotopyLimit hϖ hI hc⟩
+
+end Matrix
 
 end Etale
 

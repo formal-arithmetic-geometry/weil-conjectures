@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.FiniteType
+public import WeilConjectures.SixFunctors.Etale.Derived.BoundaryDuality
 public import WeilConjectures.SixFunctors.Etale.Derived.Dualizing
 public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.DirectImage
 public import WeilConjectures.SixFunctors.Etale.Derived.Stability.DirectImage
@@ -184,10 +185,13 @@ results come with these intervals:
    sharper interval `[c - b, d - a]` when `K` is dualizable (`thm-sf-hom-ctf`);
 4. `Rf^!` sends `D_c^[a, b]` with Tor amplitude in `[a, b]` into `D_c^[a - 2D, b + 2 dim Y + 1]`
    with the same Tor bound, for a constant `D` depending only on `f`
-   (`thm-sf-preservation-class`), and the Verdier dual `𝔻_X` preserves `Dctf(X)` and is an
-   involution on it (`thm-sf-biduality-class`).
+   (`thm-sf-preservation-class`); if `dim X ≤ d` the Verdier dual `𝔻_X` sends Tor amplitude
+   `[a, b]` to `[-b - 2d, -a]` (`lem-weil-verdier-preservation-strata`), and it preserves
+   `Dctf(X)` and is an involution on it (`thm-sf-biduality-class`).
 
-The integral-coefficient entries of the remark only cite results of other subsections. -/
+The pro-étale and boundary entries are
+`AlgebraicGeometry.ProEtale.DerivedCategory.preservationMatrix_of_isAlgClosure`, and the
+integral entries (item 5) are `AlgebraicGeometry.Etale.preservationMatrix_integral`. -/
 theorem torAmplitudeIn_preservation [IsSeparated f] [QuasiCompact f] [HasCompactification f]
     [IsSeparated aX] [HasCompactification aX] :
     (∀ (a b : ℤ) (K : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))),
@@ -228,6 +232,12 @@ theorem torAmplitudeIn_preservation [IsSeparated f] [QuasiCompact f] [HasCompact
       constructibleTorAmplitudeIn (ModuleCat.{u + 1} Λ) Y a b K →
         constructibleTorAmplitudeIn (ModuleCat.{u + 1} Λ) X (a - 2 * D) (b + 2 * d + 1)
           ((R(f)^![ModuleCat.{u + 1} Λ]).obj K)) ∧
+    (∀ d : ℕ, topologicalKrullDim X ≤ (d : WithBot ℕ∞) → ∀ (a b : ℤ)
+      (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))),
+      boundedConstructible (ModuleCat.{u + 1} Λ) X K →
+        torAmplitudeIn (ModuleCat.{u + 1} Λ) X a b K →
+          torAmplitudeIn (ModuleCat.{u + 1} Λ) X (-b - 2 * (d : ℤ)) (-a)
+            ((verdierDual (ModuleCat.{u + 1} Λ) aX).obj (op K))) ∧
     (∀ K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)),
       constructibleFiniteTor (ModuleCat.{u + 1} Λ) X K →
         constructibleFiniteTor (ModuleCat.{u + 1} Λ) X
@@ -257,6 +267,7 @@ theorem torAmplitudeIn_preservation [IsSeparated f] [QuasiCompact f] [HasCompact
     fun a b c d K M hK hKt hKd hM hMt ↦
       torAmplitudeIn_derivedHom_of_isDualizable Λ aX a b c d hK hKt hKd hM hMt,
     exists_constructibleTorAmplitudeIn_rightDerivedUpperShriek_of_topologicalKrullDim_le Λ aY f,
+    fun d hd a b K hK hKt ↦ torAmplitudeIn_verdierDual Λ aX d hd a b hK hKt,
     fun K hK ↦ ⟨constructibleFiniteTor_verdierDual Λ aX hK,
       nonempty_iso_verdierDual_verdierDual Λ aX hK⟩⟩
 
@@ -287,6 +298,85 @@ theorem constructibleFiniteTor_derivedHom_mapDerivedCategory {k : Type u} [Field
   exact (constructibleFiniteTor _ X).prop_of_iso e
     (constructibleFiniteTor_mapDerivedCategory Λ
       (Etale.constructibleFiniteTor_derivedHom Λ aX hK hM))
+
+/-- Blueprint `cor-sf-hom-ctf-proetale-unconditional`: The pro-étale internal Hom for a
+site-perfect first variable.
+
+Let `X` be of finite type over an algebraic closure `k` of `𝔽_p` and `Λ` a finite ring whose
+exponent is invertible on `X`. Let `K', M' ∈ Dᵇc(X_ét, Λ)` have Tor amplitude in `[a, b]` and
+`[c, d]`, with `K'` site-perfect (dualizable). Then `RHom(ν^* K', ν^* M')` is bounded
+constructible with Tor amplitude in `[c - b, d - a]`: it is `ν^* RHom(K', M')`
+(`thm-sf-hom-comparison-constructible`), and `RHom(K', M')` has these properties on the étale
+site (`thm-sf-hom-ctf`), which `ν^*` preserves (`lem-sf-comparison-tor-amplitude`). -/
+theorem boundedConstructible_derivedHom_mapDerivedCategory_of_isDualizable {k : Type u}
+    [Field k] {p : ℕ} [Fact p.Prime] [Algebra (ZMod p) k] [IsAlgClosure (ZMod p) k]
+    {X : Scheme.{u}} (aX : X ⟶ Spec (.of k)) [LocallyOfFiniteType aX] [QuasiCompact aX]
+    [HasInvertibleExponent Λ X] {a b c d : ℤ}
+    {K M : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
+    (hK : Etale.DerivedCategory.boundedConstructible (ModuleCat.{u + 1} Λ) X K)
+    (hKt : Etale.DerivedCategory.torAmplitudeIn (ModuleCat.{u + 1} Λ) X a b K)
+    (hKd : IsDualizable K)
+    (hM : Etale.DerivedCategory.boundedConstructible (ModuleCat.{u + 1} Λ) X M)
+    (hMt : Etale.DerivedCategory.torAmplitudeIn (ModuleCat.{u + 1} Λ) X c d M) :
+    boundedConstructible (ModuleCat.{u + 1} Λ) X
+        (((ProEtale.derivedHom (ModuleCat.{u + 1} Λ) X).obj
+          (op (D(ν^*(X)[ModuleCat.{u + 1} Λ]).obj K))).obj
+            (D(ν^*(X)[ModuleCat.{u + 1} Λ]).obj M)) ∧
+      torAmplitudeIn (ModuleCat.{u + 1} Λ) X (c - b) (d - a)
+        (((ProEtale.derivedHom (ModuleCat.{u + 1} Λ) X).obj
+          (op (D(ν^*(X)[ModuleCat.{u + 1} Λ]).obj K))).obj
+            (D(ν^*(X)[ModuleCat.{u + 1} Λ]).obj M)) := by
+  obtain ⟨e⟩ := nonempty_iso_mapDerivedCategory_derivedHom Λ (p := p) aX ⟨hK, a, b, hKt⟩ hM
+  exact ⟨(boundedConstructible _ X).prop_of_iso e
+      (boundedConstructible_comparisonUpperStar_mapDerivedCategory_obj
+        (Etale.boundedConstructible_derivedHom Λ aX a b c d hK hKt hM hMt)),
+    (torAmplitudeIn _ X _ _).prop_of_iso e (torAmplitudeIn_mapDerivedCategory Λ
+      (Etale.torAmplitudeIn_derivedHom_of_isDualizable Λ aX a b c d hK hKt hKd hM hMt))⟩
+
+/-- Blueprint `rem-sf-preservation-matrix`: Preservation results and their actual hypotheses,
+the entries over `k = 𝔽̄_p`.
+
+Let `X` be separated of finite type over an algebraic closure `k` of `𝔽_p` and `Λ` a finite ring
+whose exponent is invertible on `k`.
+
+* Item 3, pro-étale: for `K', M' ∈ Dᵇc(X_ét, Λ)` of Tor amplitude `[a, b]` and `[c, d]` with
+  `K'` site-perfect, `RHom(ν^* K', ν^* M')` is bounded constructible of Tor amplitude
+  `[c - b, d - a]` (`cor-sf-hom-ctf-proetale-unconditional`); for a general first variable
+  this sharp bound fails, see `AlgebraicGeometry.Etale.torAmplitudeIn_derivedHom_of_isDualizable`.
+* Item 4, closed-boundary exchange: for a closed immersion `i : Z ⟶ X` and `L ∈ Dctf(X, Λ)`,
+  `i^* 𝔻_X L ≅ 𝔻_Z Ri^! L` (`cor-weil-boundary-duality-discharge`). -/
+theorem preservationMatrix_of_isAlgClosure {k : Type u} [Field k] {p : ℕ} [Fact p.Prime]
+    [Algebra (ZMod p) k] [IsAlgClosure (ZMod p) k] [HasInvertibleExponent Λ (Spec (.of k))]
+    {X : Scheme.{u}} (aX : X ⟶ Spec (.of k)) [LocallyOfFiniteType aX] [QuasiCompact aX]
+    [IsSeparated aX] [HasCompactification aX] :
+    (∀ (a b c d : ℤ)
+      (K M : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))),
+      Etale.DerivedCategory.boundedConstructible (ModuleCat.{u + 1} Λ) X K →
+        Etale.DerivedCategory.torAmplitudeIn (ModuleCat.{u + 1} Λ) X a b K → IsDualizable K →
+          Etale.DerivedCategory.boundedConstructible (ModuleCat.{u + 1} Λ) X M →
+            Etale.DerivedCategory.torAmplitudeIn (ModuleCat.{u + 1} Λ) X c d M →
+              boundedConstructible (ModuleCat.{u + 1} Λ) X
+                  (((ProEtale.derivedHom (ModuleCat.{u + 1} Λ) X).obj
+                    (op (D(ν^*(X)[ModuleCat.{u + 1} Λ]).obj K))).obj
+                      (D(ν^*(X)[ModuleCat.{u + 1} Λ]).obj M)) ∧
+                torAmplitudeIn (ModuleCat.{u + 1} Λ) X (c - b) (d - a)
+                  (((ProEtale.derivedHom (ModuleCat.{u + 1} Λ) X).obj
+                    (op (D(ν^*(X)[ModuleCat.{u + 1} Λ]).obj K))).obj
+                      (D(ν^*(X)[ModuleCat.{u + 1} Λ]).obj M))) ∧
+    ∀ {Z : Scheme.{u}} (i : Z ⟶ X) [IsClosedImmersion i] [HasCompactification i]
+      [HasCompactification (i ≫ aX)]
+      (L : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))),
+      Etale.DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} Λ) X L →
+        Nonempty ((Etale.upperStar (ModuleCat.{u + 1} Λ) i).leftDerivedFunctor.obj
+            ((Etale.verdierDual (ModuleCat.{u + 1} Λ) aX).obj (op L)) ≅
+          (Etale.verdierDual (ModuleCat.{u + 1} Λ) (i ≫ aX)).obj
+            (op ((Etale.rightDerivedUpperShriek (ModuleCat.{u + 1} Λ) i).obj L))) := by
+  have : HasInvertibleExponent Λ X := .of_hom aX
+  have : IsAlgClosed k := ‹IsAlgClosure (ZMod p) k›.isAlgClosed
+  exact ⟨fun a b c d K M hK hKt hKd hM hMt ↦
+      boundedConstructible_derivedHom_mapDerivedCategory_of_isDualizable Λ (p := p) aX hK hKt
+        hKd hM hMt,
+    fun i _ _ _ L hL ↦ Etale.nonempty_iso_leftDerivedUpperStar_verdierDual Λ aX i hL⟩
 
 end ProEtale.DerivedCategory
 
