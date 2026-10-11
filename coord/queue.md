@@ -14,7 +14,6 @@
 | `def-weil-pbc-derived-categories` | 1 | state |
 | `def-weil-pbc-etale-constructible-sheaf` | 1 | state |
 | `def-weil-pbc-finite-torsors` | 1 | state |
-| `def-weil-pbc-formal-glueing-data` | 1 | state |
 | `lem-constructible-constant-exact` | 1 | state |
 | `lem-constructible-shortexact-local-lift` | 1 | state |
 | `lem-exc-abelian-sheaves-gmodules` | 1 | state |
@@ -41,7 +40,6 @@
 | `lem-pc-zero-scheme-pullback` | 1 | state |
 | `lem-pc-zero-scheme-pullback-local-coefficient` | 1 | state |
 | `lem-pod-lisse-module-sheaves-as-module-objects` | 1 | state |
-| `lem-pod-lisse-tensor-and-scalar-extension` | 1 | state |
 | `lem-pur-kinjective-acyclic-quotient-complexes-bounded-size` | 1 | state |
 | `lem-pur-kinjective-surjection-bounded-size` | 1 | state |
 | `lem-sc-affine-cap-section-open` | 1 | state |
@@ -441,6 +439,7 @@
 | `lem-weil-pbc-flat-tor-ideal-criterion` | 1 | state |
 | `lem-weil-pbc-flat-under-regular` | 1 | state |
 | `lem-weil-pbc-flat-unramified-formally-etale` | 1 | state |
+| `lem-weil-pbc-formal-glueing-H0-localization` | 1 | state |
 | `lem-weil-pbc-formal-glueing-canonical-maps` | 1 | state |
 | `lem-weil-pbc-formal-glueing-complex-exact` | 1 | state |
 | `lem-weil-pbc-formal-glueing-finite-modules` | 1 | state |
@@ -948,6 +947,7 @@
 | `prop-pur-kinjective-objects-small` | 1 | state |
 | `prop-pur-kinjective-resolutions-exist` | 1 | state |
 | `prop-weil-pbc-composition-stability` | 1 | state |
+| `prop-weil-pbc-formal-glueing-equivalence` | 1 | state |
 | `prop-weil-pbc-inverse-image-exact` | 1 | state |
 | `thm-galois-abstract-equivalence` | 1 | state |
 | `thm-pqf-zmt-factorization` | 1 | state |
@@ -994,7 +994,7 @@
 | `lem-sc-normalization-properties` | 3 | state |
 | `def-nagata-fixed-base-separated-stage` | 6 | state |
 
-Not open yet: 989 nodes that wait for a statement dependency, 40 nodes that wait for stage 1.
+Not open yet: 987 nodes that wait for a statement dependency, 40 nodes that wait for stage 1.
 
 ## Stage 3: modules to prove (0)
 
