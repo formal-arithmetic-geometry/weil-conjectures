@@ -113,5 +113,24 @@
   "group": "K1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-pga2503 (reviewer sub-agent of L); spot-checked: C1: proof is the short Tag 09IS/06Z0 argument: Step 1 transports via cited lem-pc-affine-qcoh-derived-equivalence (equivalence D(A)->D_QCoh, A[k]->O_Y[k], statement read); Step 2 O_X strictly perfect (degree-0 finite free, def-pc-perfect-complex) and Hom_{D(A)}(A[n],M)=H^{-n}(M) spelled inline, standard. C4: statement's criterion (E=0 iff Hom(O_X[n],E)=0 all n) is exactly what citer lem-pc-derived-qcoh-perfect-generation Step 1/4 uses and converts to def-pc-generators' weak-generator notion. No new nodes; nothing restates the citer (no cycle). tool_uses lem-pc-affine-qcoh-derived-equivalence accepted as generic tool. Second reading: no missed fault found."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.PerfectGenerationAffineBase",
+  "declaration": "AlgebraicGeometry.perfectGeneration_affine_base",
+  "file": "lean/Sheaf/AlgebraicGeometry/PerfectGenerationAffineBase.lean",
+  "statement": "theorem perfectGeneration_affine_base (X : Scheme.{u}) [IsAffine X] [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))] [∀ U : X.Opens, HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))] : schemeDerivedQCohProperty X ((DerivedCategory.singleFunctor (SheafOfModules.{u} (moduleRings X.toRingedSpace)) 0).obj (SheafOfModules.unit (moduleRings X.toRingedSpace))) ∧ Scheme.IsPerfect X ((DerivedCategory.singleFunctor (SheafOfModules.{u} (moduleRings X.toRingedSpace)) 0).obj (SheafOfModules.unit (moduleRings X.toRingedSpace))) ∧ ∀ E : schemeDerivedQCohCategory X, IsZero E.obj ↔ ∀ n : ℤ, Subsingleton (((DerivedCategory.singleFunctor (SheafOfModules.{u} (moduleRings X.toRingedSpace)) 0).obj (SheafOfModules.unit (moduleRings X.toRingedSpace)))⟦n⟧ ⟶ E.obj)",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-pga1445"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-pga1445",
+  "group": "C1",
+  "result": "fix",
+  "note": "affine X = [IsAffine X] (was literal hX : X = Spec A); O_X = singleFunctor 0 of SheafOfModules.unit as in DQCoheratorAdjunction; QCoh membership schemeDerivedQCohProperty; Scheme.IsPerfect with its two HasDerivedCategory.{w} binders; E : schemeDerivedQCohCategory X, IsZero E.obj iff all n:ℤ Subsingleton (O_X⟦n⟧ ⟶ E.obj) = def-pc-generators inline; no let"
  }
 }
