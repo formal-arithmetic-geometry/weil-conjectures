@@ -25,6 +25,12 @@ which it is used for the continuity of étale sections
   étale algebra over `Γ(X) = colim Γ(Dⱼ)`, whose finitely many coefficients come from a stage.
 - `AlgebraicGeometry.exists_etale_refinement_of_isLimit`: the same for a scheme étale over the
   base change `V ×_{Dₖ} X` of a scheme `V` étale over a stage `Dₖ`.
+- `AlgebraicGeometry.exists_etale_isPullback_of_isLimit`: if the `Dⱼ` are moreover quasi-compact
+  and quasi-separated, every quasi-compact quasi-separated étale `X`-scheme is the base change
+  of a quasi-compact quasi-separated scheme étale over some stage.
+- `AlgebraicGeometry.etale_finite_data_descent_of_isLimit`: the descent of étale objects,
+  morphisms, equalities and coverings, bundled (blueprint
+  `lem-weil-pbc-etale-finite-data-descent`).
 -/
 
 @[expose] public section
@@ -38,7 +44,7 @@ namespace AlgebraicGeometry
 /-- **Étale schemes over an affine limit are locally dominated by base changes from a stage.**
 Let `X = lim Aᵢ` be a cofiltered limit of affine schemes and `β : Z ⟶ X` étale. Every point of
 `Z` lies in the image of a morphism `γ : E ×_{Aᵢ} X ⟶ Z` over `X` from the base change of an
-affine scheme `E` étale over some `Aᵢ`. -/
+affine scheme `E` étale over some `Aᵢ`; the morphism `γ` is an open immersion. -/
 theorem exists_etale_isPullback_of_isAffine {I : Type u} [Category.{u} I] [IsCofiltered I]
     (A : I ⥤ Scheme.{u}) [∀ i, IsAffine (A.obj i)] (c : Cone A) (hc : IsLimit c)
     {Z : Scheme.{u}} (β : Z ⟶ c.pt) [Etale β] (z : Z) :
@@ -119,7 +125,7 @@ include hc in
 stage.** Let `X = lim Dⱼ` be a cofiltered limit with affine transition maps, `p : V ⟶ Dₖ` étale
 and `β : Z ⟶ V ×_{Dₖ} X` étale. Every point of `Z` lies in the image of a morphism
 `γ : E ×_{Dₖ'} X ⟶ Z` over `V ×_{Dₖ} X` from the base change of an affine scheme `E` étale over
-a later stage `Dₖ'` and mapping to `V`. -/
+a later stage `Dₖ'` and mapping to `V`; the morphism `γ` is an open immersion. -/
 theorem exists_etale_refinement_of_isLimit {k : J} {V : Scheme.{u}} (p : V ⟶ D.obj k)
     [Etale p] {Z : Scheme.{u}} (β : Z ⟶ pullback p (c.π.app k)) [Etale β] (z : Z) :
     ∃ (k' : J) (f : k' ⟶ k) (E : Scheme.{u}) (_ : IsAffine E) (q : E ⟶ D.obj k') (_ : Etale q)
@@ -464,25 +470,29 @@ end Global
 include hc in
 /-- **Finite-presentation data at an inverse limit.** Let `X = lim Dⱼ` be a cofiltered limit of
 quasi-compact quasi-separated schemes over `R` with affine transition maps. Then:
-1. *(étale objects)* every scheme `Z` étale over the base change `V ×_{Dₖ} X` of a scheme `V`
-   étale over a stage is, around each of its points, dominated over `V ×_{Dₖ} X` by the base
-   change `E ×_{Dₖ'} X` of an affine scheme `E` étale over a later stage `Dₖ'` and mapping to
-   `V` (`AlgebraicGeometry.exists_etale_refinement_of_isLimit`);
-2. *(morphisms)* for `E` quasi-compact and quasi-separated over a stage `Dₖ` and `U` locally of
-   finite presentation over `R`, every `R`-morphism `E ×_{Dₖ} X ⟶ U` descends to
-   `E ×_{Dₖ} Dₖ'` for some `k' ⟶ k` (`AlgebraicGeometry.exists_hom_descent_of_isLimit`);
+0. *(étale objects)* every quasi-compact quasi-separated étale `X`-scheme `V` is the base
+   change `V ≅ Y ×_{Dⱼ} X` of a quasi-compact quasi-separated scheme `Y` étale over some stage
+   `Dⱼ` (`AlgebraicGeometry.exists_etale_isPullback_of_isLimit`);
+1. *(étale objects, local form)* every scheme `Z` étale over the base change `V ×_{Dₖ} X` of a
+   scheme `V` étale over a stage is, around each of its points, the open subscheme
+   `E ×_{Dₖ'} X ⊆ Z` (over `V ×_{Dₖ} X`) for an affine scheme `E` étale over a later stage
+   `Dₖ'` and mapping to `V` (`AlgebraicGeometry.exists_etale_refinement_of_isLimit`);
+2. *(morphisms, hence finite diagrams)* for `E` quasi-compact and quasi-separated over a stage
+   `Dₖ` and `U` locally of finite presentation over `R`, every `R`-morphism `E ×_{Dₖ} X ⟶ U`
+   descends to `E ×_{Dₖ} Dₖ'` for some `k' ⟶ k`
+   (`AlgebraicGeometry.exists_hom_descent_of_isLimit`);
 3. *(equalities)* two `R`-morphisms `E ⟶ U` from a quasi-compact scheme over a stage `Dₖ` to a
    scheme locally of finite type over `R` which agree on `E ×_{Dₖ} X` agree on `E ×_{Dₖ} Dₖ'`
    for some `k' ⟶ k` (`AlgebraicGeometry.exists_eq_descent_of_isLimit`);
 4. *(coverings)* étale morphisms `Eᵢ ⟶ V` to a quasi-compact scheme over a stage `Dₖ` which
    are jointly surjective after base change to `X` are jointly surjective after base change to
    every late enough stage (`AlgebraicGeometry.exists_forall_mem_range_of_isLimit`).
-
-The descent of étale objects is stated in the local form in which it is used: global étale
-schemes of finite presentation over `X` are glued from such local pieces.
 (blueprint: `lem-weil-pbc-etale-finite-data-descent`) -/
 theorem etale_finite_data_descent_of_isLimit [∀ j, CompactSpace (D.obj j)]
     [∀ j, QuasiSeparatedSpace (D.obj j)] {R : Scheme.{u}} (π : D ⟶ (Functor.const J).obj R) :
+    (∀ {V : Scheme.{u}} (g : V ⟶ c.pt) [Etale g] [QuasiCompact g] [QuasiSeparated g],
+      ∃ (j : J) (Y : Scheme.{u}) (p : Y ⟶ D.obj j) (_ : Etale p) (_ : CompactSpace Y)
+        (_ : QuasiSeparatedSpace Y) (h : V ⟶ Y), IsPullback h g p (c.π.app j)) ∧
     (∀ {k : J} {V : Scheme.{u}} (p : V ⟶ D.obj k) [Etale p] {Z : Scheme.{u}}
       (β : Z ⟶ pullback p (c.π.app k)) [Etale β] (z : Z),
       ∃ (k' : J) (f : k' ⟶ k) (E : Scheme.{u}) (_ : IsAffine E) (q : E ⟶ D.obj k')
@@ -509,7 +519,8 @@ theorem etale_finite_data_descent_of_isLimit [∀ j, CompactSpace (D.obj j)]
       (∀ x : ↥(pullback p (c.π.app k)), ∃ i, pullback.fst p (c.π.app k) x ∈ Set.range (e i)) →
       ∃ (k' : J) (f : k' ⟶ k), ∀ (k'' : J) (g : k'' ⟶ k') (x : ↥(pullback p (D.map (g ≫ f)))),
         ∃ i, pullback.fst p (D.map (g ≫ f)) x ∈ Set.range (e i)) :=
-  ⟨fun p _ _ β _ z ↦ exists_etale_refinement_of_isLimit D c hc p β z,
+  ⟨fun g _ _ _ ↦ exists_etale_isPullback_of_isLimit D c hc g,
+    fun p _ _ β _ z ↦ exists_etale_refinement_of_isLimit D c hc p β z,
     fun q _ _ _ u _ φ hφ ↦ exists_hom_descent_of_isLimit D c hc π q u φ hφ,
     fun q _ _ u _ ψ₁ ψ₂ h₁ h₂ h ↦ exists_eq_descent_of_isLimit D c hc π q u ψ₁ ψ₂ h₁ h₂ h,
     fun p _ _ _ e _ h ↦ exists_forall_mem_range_of_isLimit D c hc p e h⟩
