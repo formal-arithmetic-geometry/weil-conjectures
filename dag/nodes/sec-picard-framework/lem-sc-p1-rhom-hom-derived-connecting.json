@@ -123,5 +123,23 @@
   "group": "M1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-prh2203 (reviewer sub-agent of L); spot-checked: Sign conventions: cone with -p (def-weil-abstract-derived-category), delta^n = shifted H^0 of third map (Mathlib HomologySequence.delta, leaf of lem-sf-derived-homology-long-exact), f[n]^r=f^{r+n} unsigned, (K[1])[n]=K[n+1], sigma identity for I_X[1]: no sign, consistent with lem-sf-derived-ses-triangle / def-sc-ext-sheaf; Hom_D(M[0],I[n]) = H^n via lem-weil-pbc-kinjective-hom-derived cited; no new nodes, nothing restated (class b vacuous). FIX more, RETURN less: (1) C1 Step 1/2: I must be K-injective for the localization bijection; cite lem-weil-pbc-bounded-below-injectives-kinjective. (2) C1 Step 3: Rv triangulated was used uncited; cite lem-weil-pbc-derived-direct-image-triangulated (generic tool, tool_uses). (3) C4 Step 3: 'same cone boundary' is not a cited statement; replaced by naturality of psi (Step 2, now written out) applied to w:Z->X[1], with delta^n = H^n(Rv w) and psi_{X[1]}^n = psi_X^{n+1} made explicit.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.Abelian.RHomDerivedConnecting",
+  "declaration": "CategoryTheory.Functor.exists_rhom_hom_derived_connecting",
+  "file": "lean/Sheaf/CategoryTheory/Abelian/RHomDerivedConnecting.lean",
+  "statement": "theorem exists_rhom_hom_derived_connecting {C : Type u} [Category.{v} C] [Abelian C] [EnoughInjectives C] [HasDerivedCategory.{w} C] [HasDerivedCategory.{w₂} AddCommGrpCat.{v}] (M : C) : let V := preadditiveCoyoneda.obj (op M) let RV := V.rightDerivedFunctorPlus let H (n : ℤ) := DerivedCategory.Plus.homologyFunctor AddCommGrpCat.{v} n let S := (DerivedCategory.singleFunctor C 0).obj M let Φ := preadditiveCoyoneda.obj (op S) letI := Functor.ShiftSequence.tautological Φ ℤ ∃ ψ : ∀ (X : DerivedCategory.Plus C) (n : ℤ), (H n).obj (RV.obj X) ≃+ (S ⟶ X.obj⟦n⟧), (∀ (X Y : DerivedCategory.Plus C) (g : X ⟶ Y) (n : ℤ) (a : (H n).obj (RV.obj X)), ψ Y n ((H n).map (RV.map g) a) = ψ X n a ≫ ((DerivedCategory.Plus.ι (C := C)).map g)⟦n⟧') ∧ (∀ (K : CochainComplex.Plus C) (r : CochainComplex.KInjectiveResolutionChoice K.obj) (hb : CochainComplex.plus C r.complex) (_hi : ∀ k : ℤ, Injective (r.complex.X k)) (n : ℤ) (f : M ⟶ r.complex.X n) (hf : f ≫ r.complex.d n (n + 1) = 0), let I : CochainComplex.Plus C := ⟨r.complex, hb⟩ letI := r.quasiIso let e : (DerivedCategory.Plus.Q (C := C)).obj K ≅ (DerivedCategory.Plus.Q (C := C)).obj I := (DerivedCategory.Plus.ι (C := C)).preimageIso ((DerivedCategory.quotientCompQhIso C).symm.app K.obj ≪≫ asIso (DerivedCategory.Q.map r.map) ≪≫ (DerivedCategory.quotientCompQhIso C).app r.complex) let J := V.rightDerivedComplexWithResolution K r let a := J.homologyπ n ((J.sc n).abCyclesIso.inv ⟨f, by change f ≫ r.complex.d n ((ComplexShape.up ℤ).next n) = 0 rw [CochainComplex.next] exact hf⟩) let b := (DerivedCategory.Plus.homologyFunctorObjQIso (V.mapCochainComplexPlus.obj I) n).inv a let η := V.rightDerivedFunctorPlusUnit.app ((HomotopyCategory.Plus.quotient C).obj I) ψ ((DerivedCategory.Plus.Q (C := C)).obj K) n ((H n).map (RV.map e.inv) ((H n).map η b)) = ShiftedHom.map (Cocycle.equivHomShift.symm (Cocycle.fromSingleMk f (zero_add n) (n + 1) rfl hf)) DerivedCategory.Q ≫ (CategoryTheory.inv (DerivedCategory.Q.map r.map))⟦n⟧' ≫ ((DerivedCategory.quotientCompQhIso C).hom.app K.obj)⟦n⟧') ∧ (∀ (T : Triangle (DerivedCategory.Plus C)) (_hT : T ∈ distTriang _) (n : ℤ) (a : (H n).obj (RV.obj T.obj₃)), ψ T.obj₁ (n + 1) (DerivedCategory.HomologySequence.δ ((RV ⋙ DerivedCategory.Plus.ι).mapTriangle.obj T) n (n + 1) rfl a) = Φ.homologySequenceδ ((DerivedCategory.Plus.ι (C := C)).mapTriangle.obj T) n (n + 1) rfl (ψ T.obj₃ n a))",
+  "branch": "sheaf-dag",
+  "by": "M1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-prc0957",
+  "group": "M1",
+  "result": "pass",
+  "note": "A abelian+EnoughInjectives; M:C; v=preadditiveCoyoneda (op M) into Ab; Rv=rightDerivedFunctorPlus; psi X n : H^n(Rv X) ≃+ (M[0] ⟶ X[n]) for all X in D+, n in Z; naturality via Plus.ι.map g shifted; cocycle formula for every bounded-below injective K-injective choice r (bridge rightDerivedComplexWithResolution, unit η, e from r.map), RHS fromSingleMk/equivHomShift then inv(Q r.map)[n] (unsigned rightShift), independence by single global psi; dist triangle clause HomologySequence.δ of (RV⋙ι) image = homologySequenceδ of Hom(M[0],-) with tautological ShiftSequence (= Mathlib's global instance, Triangulated/Yoneda:65)"
  }
 }
