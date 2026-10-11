@@ -345,18 +345,6 @@ identity component. (blueprint: `sk-i-cartier`) -/
 noncomputable def lieEquivIdentityComponent : Lie (identityComponent G) ≃ₗ⁅k⁆ Lie G :=
   lieEquivOfIsOpenImmersion (identityComponentι G)
 
-/-- Cartier's theorem, Lie algebra form: over a field of characteristic zero, the Lie algebra of a
-group scheme `G` of finite type has dimension the dimension of `G`.
-
-Proof sketch (not formalised): `Lie(G)` is the tangent space at the identity; in characteristic
-zero `G` is smooth (`AlgebraicGeometry.GrpObj.isReduced_of_charZero`), so this tangent space has
-the dimension of `G` at the identity, which is the dimension of `G` since the connected components
-of `G` are translates of `G°` after base change to the algebraic closure.
-(blueprint: `sk-i-cartier`) -/
-theorem finrank_lie_eq_topologicalKrullDim [CharZero k] :
-    (Module.finrank k (Lie G) : WithBot ℕ∞) = topologicalKrullDim G.left := by
-  sorry
-
 end GrpObj
 
 end Field
