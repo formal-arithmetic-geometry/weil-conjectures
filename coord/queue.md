@@ -1,17 +1,16 @@
 # Work queue
 
-810 items; claim with `tools/claim.py next <group> [--stage N]`.
+816 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (810)
+## Stage 2: nodes to state (816)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
 | `def-pc-compactly-generated` | 1 | state |
 | `def-pc-field-tower` | 1 | state |
-| `def-pc-kflat-complex` | 1 | state |
 | `def-pur-sheaf-modules-hom-module` | 1 | state |
 | `def-pur-sheaf-tensor-product` | 1 | state |
 | `def-sbc-first-order-thickening` | 1 | state |
@@ -95,8 +94,10 @@
 | `lem-pc-affine-flat-module-localization-preserves-flatness` | 1 | state |
 | `lem-pc-affine-nonzerodivisor-complement-dense` | 1 | state |
 | `lem-pc-affine-surjective-structure-map-closed-immersion` | 1 | state |
+| `lem-pc-affine-tilde-kflat` | 1 | state |
 | `lem-pc-algebraic-dim-zero-affine-finite` | 1 | state |
 | `lem-pc-ample-affine-loci-criterion` | 1 | state |
+| `lem-pc-balanced-derived-tensor-model` | 1 | state |
 | `lem-pc-cartier-divisor-finite-over-field` | 1 | state |
 | `lem-pc-cartier-divisor-nowhere-dense` | 1 | state |
 | `lem-pc-compact-generators-build-objects` | 1 | state |
@@ -128,9 +129,14 @@
 | `lem-pc-h0-geom-connected` | 1 | state |
 | `lem-pc-injective-split-tower-injective` | 1 | state |
 | `lem-pc-inseparable-tensor-nilpotent` | 1 | state |
+| `lem-pc-kflat-cone-direct-sum` | 1 | state |
 | `lem-pc-kflat-hocolim-truncations` | 1 | state |
+| `lem-pc-kflat-stalk-criterion` | 1 | state |
 | `lem-pc-kflat-tensor-cone-two-out-of-three` | 1 | state |
+| `lem-pc-kflat-tensor-product` | 1 | state |
+| `lem-pc-kflat-tensor-quasi-iso` | 1 | state |
 | `lem-pc-left-localization-hom-colimit` | 1 | state |
+| `lem-pc-module-bounded-flat-kflat` | 1 | state |
 | `lem-pc-module-flat-opcycles-tor-criterion` | 1 | state |
 | `lem-pc-module-opcycles-tor-surjection` | 1 | state |
 | `lem-pc-monomial-cech-complex-homology` | 1 | state |
@@ -820,7 +826,7 @@
 | `lem-sc-normalization-properties` | 3 | state |
 | `def-nagata-fixed-base-separated-stage` | 6 | state |
 
-Not open yet: 1409 nodes that wait for a statement dependency, 40 nodes that wait for stage 1.
+Not open yet: 1402 nodes that wait for a statement dependency, 40 nodes that wait for stage 1.
 
 ## Stage 3: modules to prove (0)
 
