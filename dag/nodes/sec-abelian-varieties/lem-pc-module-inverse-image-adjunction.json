@@ -144,5 +144,24 @@
   "summary": "Read Stacks 008Y and 008X and every lemma their proofs cite (008T, 008S, 008U, 0089, 008W, 008D; tags verified in tags/tags). Checked rule 0: no slopmaster2 declaration names this node or states a topological inverse-image module adjunction (grep of WeilConjectures, Comparator). Mathlib: SheafOfModules.pullbackPushforwardAdjunction / PullbackConstruction.adjunction give an adjunction whose left adjoint is abstract (or presheaf-module pullback then sheafification), not the topological f^{-1}M with its 008X module structure, so the item is not a leaf. Split following 008Y: step 1 the 008X module structure (008T presheaf structure, then 0089 sheafification), step 2 the first equality by 0089, step 3 the second by 008U, step 4 the composite equals the abelian adjunction formula. Statement made precise: the f^{-1}A-module structure on f^{-1}M is now stated as the 008X one (sheafification of the f_pA-module f_pM), instead of 'the inverse image of the action', which would need f^{-1}(A x M) = f^{-1}A x f^{-1}M, proved nowhere in the node; the A-module structure of f_*N is unchanged (through eta_A), and the conclusion now says explicitly that the abelian adjunction restricts. New nodes: lem-pc-presheaf-module-inverse-image-adjunction (008T+008S+008U, unsplit) and lem-pc-presheaf-module-sheafification-ring (0089, Mathlib leaf PresheafOfModules.sheafificationAdjunction). The etale analogue lem-weil-pbc-inverse-image-module-adjunction (Stacks 03D3, unit sk-def-exchange) is not used: it is for morphisms of schemes on etale sites, not continuous maps.",
   "blueprint": "The item serves def-pc-base-change, statement, module base-change clause (the inverse-image/direct-image step of the adjunction for g_X^*), via lem-pc-module-pullback-adjunction and def-pc-module-pullback; steps 1-4 realize that inverse-image/direct-image step completely (module structure on g^{-1}G and the bijection Hom_{g^{-1}O}(g^{-1}G,F) = Hom_O(G,g_*F) used in step 2 of lem-pc-module-pullback-adjunction)."
  },
- "reviewed": "2026-10-10 L: 4 steps following 008Y/008X (the module structure on f^{-1}M as the sheafification of f_pM, the two adjunction equalities 0089 (Mathlib leaf, new) and 008U (new node), the composite restricting the abelian adjunction); statement corrected to Stacks' definition of the module structure; 2 new nodes"
+ "reviewed": "2026-10-10 L: 4 steps following 008Y/008X (the module structure on f^{-1}M as the sheafification of f_pM, the two adjunction equalities 0089 (Mathlib leaf, new) and 008U (new node), the composite restricting the abelian adjunction); statement corrected to Stacks' definition of the module structure; 2 new nodes",
+ "lean": {
+  "module": "Sheaf.Algebra.Category.ModuleCat.Sheaf.TopologicalPullback",
+  "declaration": "SheafOfModules.moduleInverseImageAdjunction",
+  "file": "lean/Sheaf/Algebra/Category/ModuleCat/Sheaf/TopologicalPullback.lean",
+  "statement": "theorem moduleInverseImageAdjunction {X Y : TopCat.{u}} (f : X ⟶ Y) (A : Y.Sheaf CommRingCat.{u}) : moduleInverseImageAdjunctionSpec f A",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-mia1050"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-mia1050",
+  "group": "E1",
+  "result": "fix",
+  "note": "f continuous, A sheaf of comm rings, M/N arbitrary modules; f^-1 M = landed TopCat.Sheaf.inverseImageModule (008X structure), f_*N = pushforward eta_A with eta_A the CommRing sheaf unit; Equiv on linear Homs whose sections are psi_{f^-1V} o eta_M (abelian adjunction formula), natural in M (inverseImageModuleMap) and N"
+ }
 }
