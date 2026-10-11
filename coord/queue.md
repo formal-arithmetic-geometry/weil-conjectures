@@ -1,11 +1,11 @@
 # Work queue
 
-37 items; claim with `tools/claim.py next <group> [--stage N]`.
+36 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (37)
+## Stage 2: nodes to state (36)
 
 | node | distance to Mathlib | kind | blockers |
 |---|---|---|---|
@@ -31,7 +31,6 @@
 | `lem-sc-finite-flat-duality-evaluation` | 1 | state | 0 |
 | `lem-sc-finite-sheafhom-affine-adjoint` | 1 | state | 0 |
 | `lem-sc-hilb-dominating-power` | 1 | state | 0 |
-| `lem-sc-proper-flat-right-adjoint-restriction-open` | 1 | state | 0 |
 | `lem-weil-pbc-etale-mayer-vietoris-pullback` | 1 | state | 0 |
 | `lem-weil-pbc-henselization-colimit` | 1 | state | 0 |
 | `lem-weil-pbc-henselization-noetherian-completion` | 1 | state | 0 |
