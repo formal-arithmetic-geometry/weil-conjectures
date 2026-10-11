@@ -9,6 +9,7 @@ public import WeilConjectures.AlgebraicGeometry.Cohomology.AcyclicResolution
 public import WeilConjectures.AlgebraicGeometry.Cohomology.InjectiveFlasque
 public import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentKernel
 public import WeilConjectures.Mathlib.CategoryTheory.Abelian.Injective.Resolution
+public import WeilConjectures.AlgebraicGeometry.Cohomology.Affine.Cech
 
 /-!
 # Restricting resolutions to open subschemes
@@ -144,5 +145,28 @@ lemma H.restrictSucc_apply (I : InjectiveResolution ℱ) (n : ℕ)
       (H.map I.isoCyclesZero.inv (n + 1) _))))) = _
   rw [← H.map_comp_apply, Iso.inv_hom_id, H.map_id_apply, AddEquiv.apply_symm_apply,
     QuotientAddGroup.map_mk]
+/-- **Lifting cocycles over an affine open.** For a quasi-coherent `ℱ` with injective resolution
+`I` and an affine open `U`, every section over `U` of the cycles `Z¹` of `I` comes from `I⁰`,
+since `H¹(U, ℱ|_U) = 0` (`AlgebraicGeometry.Scheme.Modules.subsingleton_H_succ_of_isAffine`). -/
+lemma surjective_app_toCycles_restrict_of_isAffineOpen [ℱ.IsQuasicoherent]
+    (I : InjectiveResolution ℱ) {U : Y.Opens} (hU : IsAffineOpen U) :
+    Function.Surjective
+      (((restrictComplex U.ι I.cocomplex).toCycles 0 (0 + 1)).app ⊤).hom := by
+  have : IsAffine U.toScheme := hU
+  have hK' : ∀ j, (restrictComplex U.ι I.cocomplex).ExactAt (j + 1) := fun j ↦
+    exactAt_restrict U.ι (I.cocomplex_exactAt_succ j)
+  have hacyc' : ∀ j m, Subsingleton (((restrictComplex U.ι I.cocomplex).X j).H (m + 1)) :=
+    fun j m ↦ subsingleton_H_restrict_of_injective U.ι (I.cocomplex.X j) m
+  -- `H¹(U, Z⁰|_U) = H¹(U, ℱ|_U) = 0`
+  have : Subsingleton ((ℱ.restrict U.ι).H (0 + 1)) := subsingleton_H_succ_of_isAffine _ 0
+  have : Subsingleton (((restrictComplex U.ι I.cocomplex).cycles 0).H (0 + 1)) :=
+    subsingleton_H_of_iso ((restrictCyclesIso U.ι I.cocomplex 0) ≪≫
+      (restrictFunctor U.ι).mapIso I.isoCyclesZero.symm).symm (0 + 1)
+  have hq := (H.cyclesZeroSuccAddEquiv (restrictComplex U.ι I.cocomplex) hK' hacyc' 0).symm
+  intro s
+  have h0 : (QuotientAddGroup.mk s : _ ⧸ ((((restrictComplex U.ι I.cocomplex).toCycles 0
+      (0 + 1)).app ⊤).hom.range)) = 0 :=
+    hq.injective (Subsingleton.elim _ _)
+  exact (QuotientAddGroup.eq_zero_iff s).mp h0
 
 end AlgebraicGeometry.Scheme.Modules
