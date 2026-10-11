@@ -145,5 +145,23 @@
   "group": "C1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-poc2103 (reviewer sub-agent of L); spot-checked: Read packet whole; checked Step 1 against lem-pc-perfect-tensor-hom-duality (A=O_X), Step 2 tensor/direct-sum argument, Step 3 against lem-pc-derived-direct-image-preserves-direct-sums; accepted tool_uses kflat-resolution, tensor-complex-sheaves; no new nodes, no merged node restated (class b n/a). FIX more, RETURN less: (1) C4 Step 2: lem-pc-derived-qcoh-direct-sums only gives existence of sums, not termwise representatives; now also cites lem-pc-derived-ambient-direct-sums for the termwise sum. (2) C1 Step 3: 'H^0(X,-) = degree-zero cohomology of Ra_* commutes with direct sums' was asserted, not derived (H^0(X,-)=Hom(O_X,-) via composite with Gamma(Spec Z) and sums on the affine target uncited); rewrote via lem-pc-ringed-spaces-derived-adjoint (Hom(O_X,N)=Hom(O_Y,Ra_*N)), lem-pc-derived-direct-image-preserves-direct-sums, and lem-pc-affine-qcoh-derived-equivalence (Hom(O_Y,L)=H^0(RGamma(Y,L)), equivalence preserves sums), plus naturality to get the canonical map; Step 1 no longer appeals to 'definition of derived global sections'. Added tool_use lem-pc-affine-qcoh-derived-equivalence (unit sk-thm-picard-f-representable, generic affine comparison).; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.PerfectObjectCompact",
+  "declaration": "AlgebraicGeometry.perfectObjectCompact",
+  "file": "lean/Sheaf/AlgebraicGeometry/PerfectObjectCompact.lean",
+  "statement": "theorem perfectObjectCompact (X : Scheme.{u}) [CompactSpace X] [QuasiSeparatedSpace X] [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))] [∀ U : X.Opens, HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))] : letI : HasCoproducts.{u} (schemeDerivedQCohCategory X) := derivedQCohDirectSums X ∀ (P : schemeDerivedQCohCategory X), Scheme.IsPerfect X P.1 → IsCompactObject P",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-poc1501",
+  "group": "H1",
+  "result": "pass",
+  "note": "Read packet whole; X Scheme.{u} qcqs as [CompactSpace X][QuasiSeparatedSpace X] (as C1 3bbef0713); D(O_X) HasDerivedCategory.{w} binder + per-open binder required by recorded Scheme.IsPerfect (not inferInstance-derivable, not hollow); P : schemeDerivedQCohCategory X with Scheme.IsPerfect X P.1 (M1 def); conclusion recorded IsCompactObject (def-pc-compact-object, same notion as IsCompactlyGeneratedTriangulated.{u} uses), #check: index universe u (IsCompactObject.{u,w,u+1}), HasCoproducts instance = derivedQCohDirectSums X, letI inlined (no let_fun in #print); empty family covered; only the item's lean record changed"
  }
 }
