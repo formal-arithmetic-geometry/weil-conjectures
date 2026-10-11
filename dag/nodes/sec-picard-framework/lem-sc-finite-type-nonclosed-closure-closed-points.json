@@ -100,5 +100,23 @@
   "group": "C1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-ncc (reviewer sub-agent of L); spot-checked: Source: Stacks varieties.tex Tag 0478 (lemma-locally-finite-type-Jacobson) and Tag 0A21 (lemma-dimension-locally-algebraic), both located in tags. Item statement unchanged (k algebraically closed, X locally finite type, z nonclosed => closure has infinitely many closed points of X). Step 1 (elementary): closure of z irreducible closed, nonclosed gives y != z in it, closure(y) strictly smaller by uniqueness of generic points, so dim Z >= 1 per def-kun-topological-krull-dimension. Step 2 cites new node lem-sc-positive-dimensional-locally-algebraic-closed-points, whose hypotheses (field, X locally finite type, Z irreducible closed, dim Z > 0) are exactly what step 1 and the item supply; the item's algebraically closed hypothesis is stronger than needed. New node checked true: Z with reduced structure is locally finite type, irreducible, dim Z = trdeg finite; by 0A21 (lem-sc-dimension-locally-algebraic) an affine open U meeting Z has dim >= 1, its finitely generated domain has infinitely many maximal ideals (else semilocal Jacobson hence dim 0), and closed points of U are closed in X by 0478. Small cases: A^1 over any field (infinitely many irreducible polynomials), closed point (hypothesis fails). Stmt_deps of new node read (def-weil-finite-type-morphism, def-weil-irreducible-components, def-kun-topological-krull-dimension, def-weil-closed-points). Mathlib searches three kinds recorded; no Mathlib leaf; no slopmaster2 declaration about infinitely many closed points (grep of WeilConjectures), so no B10 attachment. Fix: dag/nodes/sec-picard-framework/lem-sc-finite-type-nonclosed-closure-closed-points.json: proof[0].text: spelled out the strict chain closure(y) < Z via uniqueness of generic points (was 'strict chain z<y in the specialization order'), no change of mathematics. Start Sat Oct 10 04:24:42 PM UTC 2026, end Sat Oct 10 04:25:16 PM UTC 2026.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.InfiniteClosedPointsInterClosureSingleton",
+  "declaration": "AlgebraicGeometry.infinite_closedPoints_inter_closure_singleton",
+  "file": "lean/Sheaf/AlgebraicGeometry/InfiniteClosedPointsInterClosureSingleton.lean",
+  "statement": "theorem infinite_closedPoints_inter_closure_singleton (k : Type u) [Field k] [IsAlgClosed k] (X : Scheme.{u}) (f : X ⟶ Spec (CommRingCat.of k)) [LocallyOfFiniteType f] (z : X) (hz : ¬ IsClosed ({z} : Set X)) : (closure ({z} : Set X) ∩ closedPoints X).Infinite",
+  "branch": "sheaf-dag",
+  "by": "G1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-ncc1056",
+  "group": "G1",
+  "result": "pass",
+  "note": "k alg. closed = [Field k] [IsAlgClosed k]; X lft over k = f : X ⟶ Spec (CommRingCat.of k) [LocallyOfFiniteType f] (same form as E1 d74407fbc), no qc added; z not closed = ¬ IsClosed {z}; conclusion (closure {z} ∩ closedPoints X).Infinite, ambient closed points; no Mathlib/upstream statement of it (JacobsonSpace gives density only); docstring carries both proof steps"
  }
 }

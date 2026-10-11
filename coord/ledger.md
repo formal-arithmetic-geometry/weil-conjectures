@@ -3722,3 +3722,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 07:55 L: returned deliver/G1/def-weil-pbc-finite-torsors (reviewer RETURN: Reviewer R-ftr1046, head b443ddb19. H4 (a second definition of a notion): the node's M-torsors on Y_et and Tor^1(Y,M) ex)
 - 07:56 L: merged deliver/C1/lem-pc-kflat-resolution (stage 2; reviewer PASS; first push; Sheaf.Algebra.Homology.KFlatResolution CochainComplex.exists_isKFlatResolution)
 - 07:56 L: merged deliver/C1/lem-pc-bounded-above-flat-kflat-site (stage 2; reviewer PASS; first push; Sheaf.Algebra.Homology.BoundedAboveFlatSheafKFlat CochainComplex.isKFlat_of_boundedAbove_flat)
+- 07:56 L: merged deliver/G1/lem-sc-finite-type-nonclosed-closure-closed-points (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.InfiniteClosedPointsInterClosureSingleton AlgebraicGeometry.infinite_closedPoints_inter_closure_singleton)
