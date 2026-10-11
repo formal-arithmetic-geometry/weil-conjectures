@@ -4056,3 +4056,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 09:39 L: merged deliver/K1/lem-sc-rational-tangent-cotangent-duality (stage 2; reviewer FIX; first push; Sheaf.AlgebraicGeometry.RationalTangentCotangentDuality AlgebraicGeometry.rational_tangent_cotangent_duality)
 - 09:39 L: merged deliver/J1/lem-weil-pbc-constant-sheaf-set-sections-connected-natural (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.ConstantSheafSetSectionsConnectedNatural AlgebraicGeometry.Scheme.constantSheaf_set_sections_connected_natural)
 - 09:39 L: merged deliver/C1/lem-weil-pbc-depth-over-quotient-ring (stage 2; reviewer FIX; first push; Sheaf.RingTheory.DepthOverQuotientRing IsLocalRing.depth_over_quotient_ring)
+- 09:39 L: merged deliver/F1/lem-weil-pbc-cyclic-extension-cocycle (stage 2; reviewer FIX; first push; Sheaf.Paper.CyclicExtensionCocycle Paper.cyclic_extension_cocycle)
