@@ -24,7 +24,9 @@
   "def-sc-invertible-module",
   "def-pc-module-pullback",
   "def-weil-residue-field",
-  "def-pc-representable-functor"
+  "def-pc-representable-functor",
+  "def-weil-pbc-ample-invertible-module",
+  "lem-pc-module-pullback-adjunction"
  ],
  "proof": [
   {
@@ -242,5 +244,25 @@
   "by": "L",
   "result": "pass",
   "note": "nine steps along the proof of Stacks 01N8 (d = 1): charts, the opens Y_{s_j} and quotients, local morphisms into Spec S_{(T_j)}, agreement on overlaps by images of generators (in place of separatedness), gluing, the isomorphism α glued as sections of the sheaf Hom, uniqueness, equivalent pairs and surjectivity, pullback compatibility and representability; 2 new Mathlib leaves verified by the lead (GammaSpecAdjunction, Scheme.lean preimage_basicOpen, Gluing.lean glueMorphisms/hom_ext); the generic prop-nagata-proj-standard-open (cover of Proj) and lem-pur-sheaf-hom-is-sheaf accepted as tool uses; three duplicate nodes of the worker removed on the lead's note"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProjectiveSpaceFunctorOfPoints",
+  "declaration": "AlgebraicGeometry.projectiveSpace_functor_of_points",
+  "statement": "theorem projectiveSpace_functor_of_points (n : ℕ) : (∀ (Y : Scheme.{u}) (ψ : Y ⟶ P n), ((Scheme.Modules.tensorPullback ψ).obj (O n)).IsInvertible ∧ ∀ y : Y, ∃ i : Fin (n + 1), y ∈ Scheme.Modules.nonvanishingLocus ((Scheme.Modules.tensorPullback ψ).obj (O n)) (pb ψ (O n) (T n i))) ∧ (∀ (Y : Scheme.{u}) (L : Y.Modules) [L.IsInvertible] (s : Fin (n + 1) → (Γ(L, ⊤) : Type u)), (∀ y : Y, ∃ i, y ∈ Scheme.Modules.nonvanishingLocus L (s i)) → ∃! ψ : Y ⟶ P n, ∃ e : (Scheme.Modules.tensorPullback ψ).obj (O n) ≅ L, ∀ i, e.hom.app ⊤ (pb ψ (O n) (T n i)) = s i) ∧ (∀ (Y Y' : Scheme.{u}) (h : Y' ⟶ Y) (ψ : Y ⟶ P n) (L : Y.Modules) (s : Fin (n + 1) → (Γ(L, ⊤) : Type u)) (e : (Scheme.Modules.tensorPullback ψ).obj (O n) ≅ L), (∀ i, e.hom.app ⊤ (pb ψ (O n) (T n i)) = s i) → ∃ e' : (Scheme.Modules.tensorPullback (h ≫ ψ)).obj (O n) ≅ (Scheme.Modules.tensorPullback h).obj L, ∀ i, e'.hom.app ⊤ (pb (h ≫ ψ) (O n) (T n i)) = pb h L (s i))",
+  "by": "C1",
+  "date": "2026-10-11",
+  "existing": false,
+  "file": "lean/Sheaf/AlgebraicGeometry/ProjectiveSpaceFunctorOfPoints.lean",
+  "branch": "sheaf-dag",
+  "note": "Universal-pair characterization on P^n_Z = ℙ(Fin (n+1); Spec ℤ) with the recorded O(1) = ProjectiveSpace.twist _ _ 1 and T_i = twistOneSection: all morphisms pull back to generating invertible pairs; unique classification; pullback compatibility. P, O, T, pb are local notation only, expanded in the elaborated signature. Reviewer R-pfp1537 replaced the integral-model Proj.twist/Proj.unitToTwist by the recorded twist/twistOneSection (H4/H12).",
+  "fixed_by": "R-pfp1537"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-pfp1537",
+  "group": "C1",
+  "result": "fix",
+  "note": "n:ℕ incl n=0; P^n_Z=ℙ(Fin(n+1);Spec ℤ); O(1)=twist _ _ 1, T_i=twistOneSection (fixed from Proj.twist/unitToTwist); invertible L via IsInvertible; generation via nonvanishingLocus; pullbacks via tensorPullback and exists_tensorPullbackAdjunction unit; ∃! ψ with section-carrying iso; every ψ gives invertible generating pair; pullback compatibility along h; universes all u"
  }
 }
