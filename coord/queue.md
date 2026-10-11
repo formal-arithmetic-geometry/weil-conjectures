@@ -1,11 +1,11 @@
 # Work queue
 
-67 items; claim with `tools/claim.py next <group> [--stage N]`.
+65 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (67)
+## Stage 2: nodes to state (65)
 
 | node | distance to Mathlib | kind | blockers |
 |---|---|---|---|
@@ -22,7 +22,6 @@
 | `lem-pc-cech-resolution` | 1 | state | 1 |
 | `lem-pc-derived-sections-pushforward-comparison` | 1 | state | 1 |
 | `lem-pc-derived-tensor-transitivity` | 1 | state | 1 |
-| `lem-sc-h1-gm-pic-pullback` | 1 | state | 1 |
 | `lem-sc-affine-unit-divisor-base-change` | 2 | state | 1 |
 | `cor-galois-lisse-representations` | 1 | state | 0 |
 | `lem-pc-base-change-rhom-perfect` | 1 | state | 0 |
@@ -36,7 +35,6 @@
 | `lem-pc-rf-mv-triangle-naturality` | 1 | state | 0 |
 | `lem-pc-rf-perfect-base-change` | 1 | state | 0 |
 | `lem-pc-rf-single-complex-affine-base-change` | 1 | state | 0 |
-| `lem-pc-rf-single-complex-qcqs-induction` | 1 | state | 0 |
 | `lem-pc-rf-single-complex-relative-mayer-vietoris` | 1 | state | 0 |
 | `lem-sc-affine-derived-cohomology` | 1 | state | 0 |
 | `lem-sc-affine-derived-pushforward-t-exact` | 1 | state | 0 |
@@ -45,7 +43,6 @@
 | `lem-sc-affine-projective-complex-derived-hom` | 1 | state | 0 |
 | `lem-sc-affine-truncation-kernel-flat` | 1 | state | 0 |
 | `lem-sc-derived-internal-hom-stalk-localization` | 1 | state | 0 |
-| `lem-sc-etale-torsor-h1-functoriality` | 1 | state | 0 |
 | `lem-sc-finite-affine-derived-equivalence` | 1 | state | 0 |
 | `lem-sc-finite-duality-derived-hom` | 1 | state | 0 |
 | `lem-sc-finite-flat-duality-evaluation` | 1 | state | 0 |
@@ -74,10 +71,11 @@
 | `lem-weil-pbc-unrestricted-strict-henselization-stalk` | 1 | state | 0 |
 | `prop-weil-pbc-strict-henselization-stalk-formula` | 1 | state | 0 |
 | `lem-pc-rf-single-complex-inherited-tensor-condition` | 2 | state | 0 |
+| `lem-sc-kummer-base-change-compatibility` | 2 | state | 0 |
 | `lem-sc-p1-proj-shifted-free-twist` | 2 | state | 0 |
 | `lemma-weil-pbc-exact-couple-abutment` | 2 | state | 0 |
 
-Not open yet: 40 nodes that wait for stage 1, 179 nodes that wait for a statement dependency.
+Not open yet: 40 nodes that wait for stage 1, 178 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
