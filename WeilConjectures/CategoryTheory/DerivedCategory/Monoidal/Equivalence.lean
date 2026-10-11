@@ -72,6 +72,12 @@ lemma preservesFlat_of_isEquivalence (F : C ⥤ D) [F.Monoidal] [F.IsEquivalence
         Functor.associator _ _ _ ≪≫ isoWhiskerLeft F.inv (Monoidal.commTensorRight F X)).symm
       ((exactFunctor_iff _).2 ⟨inferInstance, inferInstance⟩)⟩
 
+/-- The quasi-inverse of an additive equivalence of preadditive categories is additive. -/
+instance additive_inv {C D : Type*} [Category C] [Category D] [Preadditive C] [Preadditive D]
+    (F : C ⥤ D) [F.IsEquivalence] [F.Additive] : F.inv.Additive :=
+  have : F.asEquivalence.functor.Additive := ‹F.Additive›
+  F.asEquivalence.inverse_additive
+
 end CategoryTheory.Functor
 
 namespace DerivedCategory
@@ -91,8 +97,6 @@ local instance hasColimitsOfSize_monoidalEquivalence₂ : HasColimitsOfSize.{0, 
 variable (F : C₁ ⥤ C₂) [F.Monoidal] [F.IsEquivalence] [F.Additive]
 
 local instance additive_asEquivalence_functor : F.asEquivalence.functor.Additive := ‹F.Additive›
-
-local instance additive_inv : F.inv.Additive := F.asEquivalence.inverse_additive
 
 /-- For a complex `P` of `C₁` such that both `P` and `F(P)` are K-flat, the functor `D(F)`
 commutes with tensoring by `Qh P`: `D(F)(Qh P ⊗ᴸ M) ≅ D(F)(Qh P) ⊗ᴸ D(F) M`, naturally in `M`. -/
