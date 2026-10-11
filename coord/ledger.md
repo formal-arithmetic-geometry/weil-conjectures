@@ -4941,3 +4941,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 14:24 L: merged deliver/M1/lem-weil-pbc-sheaf-of-modules-from-basis (stage 2; reviewer PASS; first push; Sheaf.Topology.SheafOfModulesFromBasis TopologicalSpace.Opens.exists_sheafOfModules_from_basis)
 - 14:24 L: merged deliver/H1/lem-weil-pbc-smooth-over-field-local-complete-intersection (stage 2; reviewer PASS; first push; Sheaf.RingTheory.SmoothLocalCompleteIntersection Algebra.isLocalCompleteIntersection_of_smooth)
 - 14:25 L: merged deliver/M1/lem-weil-pbc-smooth-algebra-filtered-colimit-descent (stage 2; reviewer PASS; first push; Sheaf.RingTheory.SmoothAlgebraFilteredColimitDescent Algebra.exists_smooth_algebra_of_filteredColimit)
+- 14:25 L: merged deliver/G1/lem-weil-pbc-sections-annihilated-by-ideal (stage 2; reviewer FIX; first push; Sheaf.AlgebraicGeometry.SectionsAnnihilatedByIdeal AlgebraicGeometry.sections_annihilated_by_ideal)

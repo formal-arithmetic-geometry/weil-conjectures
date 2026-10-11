@@ -178,5 +178,23 @@
  },
  "tool_uses": [
   "pqf-def-coherent"
- ]
+ ],
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SectionsAnnihilatedByIdeal",
+  "declaration": "AlgebraicGeometry.sections_annihilated_by_ideal",
+  "file": "lean/Sheaf/AlgebraicGeometry/SectionsAnnihilatedByIdeal.lean",
+  "statement": "theorem sections_annihilated_by_ideal (X : Scheme.{u}) (J : X.IdealSheafData) [J.toModules.IsFiniteType] (F : X.Modules) [F.IsQuasicoherent] : ∃ (G : X.Modules) (ι : G ⟶ F), Mono ι ∧ G.IsQuasicoherent ∧ (∀ (U : X.Opens) (s : Γ(F, U)), s ∈ Set.range (ι.app U) ↔ ∀ (V : X.Opens) (h : V ≤ U), ∀ a ∈ J.idealOfOpens V, a • F.presheaf.map (homOfLE h).op s = 0) ∧ (∀ (U : X.affineOpens) (s : Γ(F, U.1)), s ∈ Set.range (ι.app U.1) ↔ ∀ a ∈ J.ideal U, a • s = 0) ∧ (∀ x : X, Function.Injective ((RingedSpace.moduleStalkFunctor X.toRingedSpace x).map J.toModulesι).hom ∧ Function.Injective ((RingedSpace.moduleStalkFunctor X.toRingedSpace x).map ι).hom ∧ ∀ s : (RingedSpace.moduleStalkFunctor X.toRingedSpace x).obj F, s ∈ Set.range ((RingedSpace.moduleStalkFunctor X.toRingedSpace x).map ι).hom ↔ ∀ (U : X.Opens) (hx : x ∈ U), ∀ a ∈ J.idealOfOpens U, X.presheaf.germ U x hx a • s = 0)",
+  "branch": "sheaf-dag",
+  "by": "G1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-sai"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-sai",
+  "group": "G1",
+  "result": "fix"
+ }
 }
