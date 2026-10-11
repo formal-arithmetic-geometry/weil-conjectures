@@ -214,5 +214,23 @@
  "lead_note": "2026-10-10 L: reviewer found WeilConjectures/AlgebraicGeometry/ProjectiveSpace/OfInvertible.lean (homOfIsFreeGenerator, exists_hom_twistRestrict line 291, sorry-free) stating the same construction for P(n;S) with Proj's twist; not an exact match (Proj(A[x]) with the glued O(1) here); candidate for the Lean stage.",
  "tool_uses": [
   "lem-weil-pbc-nonvanishing-section-trivializes"
- ]
+ ],
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SectionsMorphismToProjPolynomialRing",
+  "declaration": "AlgebraicGeometry.sections_morphism_to_proj_polynomial_ring",
+  "file": "lean/Sheaf/AlgebraicGeometry/SectionsMorphismToProjPolynomialRing.lean",
+  "statement": "theorem sections_morphism_to_proj_polynomial_ring (A : Type u) [CommRing A] (m : ℕ) (Y : Scheme.{u}) (g : Y ⟶ Spec (.of A)) (M : Y.Modules) [M.IsInvertible] (s : Fin (m + 1) → Γ(M, ⊤)) (hcover : ((⊤ : Y.Opens) : Set Y) = ⋃ k : Fin (m + 1), Scheme.Modules.nonvanishingLocus M (s k)) : ∃ j : Y ⟶ Proj (MvPolynomial.homogeneousSubmodule (Fin (m + 1)) A), ∃ α : Scheme.Modules.tensorPullbackObj j (Proj.twist (MvPolynomial.homogeneousSubmodule (Fin (m + 1)) A) 1) ≅ M, ∃ q : Proj (MvPolynomial.homogeneousSubmodule (Fin (m + 1)) A) ⟶ Spec (.of A), (∀ k : Fin (m + 1), Proj.awayι (MvPolynomial.homogeneousSubmodule (Fin (m + 1)) A) (MvPolynomial.X k) (MvPolynomial.isHomogeneous_X A k) Nat.one_pos ≫ q = Spec.map (CommRingCat.ofHom (algebraMap A (HomogeneousLocalization.Away (MvPolynomial.homogeneousSubmodule (Fin (m + 1)) A) (MvPolynomial.X k))))) ∧ j ≫ q = g ∧ (∀ k : Fin (m + 1), (j ⁻¹ᵁ Proj.basicOpen (MvPolynomial.homogeneousSubmodule (Fin (m + 1)) A) (MvPolynomial.X k) : Set Y) = Scheme.Modules.nonvanishingLocus M (s k)) ∧ (∀ k l : Fin (m + 1), ∃! a : Γ(Y, j ⁻¹ᵁ Proj.basicOpen (MvPolynomial.homogeneousSubmodule (Fin (m + 1)) A) (MvPolynomial.X k)), a = (j.app (Proj.basicOpen (MvPolynomial.homogeneousSubmodule (Fin (m + 1)) A) (MvPolynomial.X k))).hom ((Proj.awayToSection (MvPolynomial.homogeneousSubmodule (Fin (m + 1)) A) (MvPolynomial.X k)).hom (MvPolynomial.awayXRatio A k l)) ∧ (M.presheaf.map (homOfLE (le_top : (j ⁻¹ᵁ Proj.basicOpen (MvPolynomial.homogeneousSubmodule (Fin (m + 1)) A) (MvPolynomial.X k)) ≤ ⊤)).op (s l)) = a • M.presheaf.map (homOfLE (le_top : (j ⁻¹ᵁ Proj.basicOpen (MvPolynomial.homogeneousSubmodule (Fin (m + 1)) A) (MvPolynomial.X k)) ≤ ⊤)).op (s k)) ∧ (∀ k : Fin (m + 1), α.hom.val.app (op (j ⁻¹ᵁ Proj.basicOpen (MvPolynomial.homogeneousSubmodule (Fin (m + 1)) A) (MvPolynomial.X k))) (((Classical.choose (Scheme.Modules.exists_tensorPullbackAdjunction j)).unit.app (Proj.twist (MvPolynomial.homogeneousSubmodule (Fin (m + 1)) A) 1)).val.app (op (Proj.basicOpen (MvPolynomial.homogeneousSubmodule (Fin (m + 1)) A) (MvPolynomial.X k))) (Proj.twistPowSection 1 (MvPolynomial.isHomogeneous_X A k))) = M.presheaf.map (homOfLE (le_top : (j ⁻¹ᵁ Proj.basicOpen (MvPolynomial.homogeneousSubmodule (Fin (m + 1)) A) (MvPolynomial.X k)) ≤ ⊤)).op (s k))",
+  "branch": "sheaf-dag",
+  "by": "M1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "M1",
+  "result": "pass",
+  "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
+ }
 }
