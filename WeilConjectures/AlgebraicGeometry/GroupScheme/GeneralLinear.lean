@@ -28,6 +28,7 @@ group object in `Over (Spec k)`. Its points with values in a `k`-algebra `R` are
 ## Blueprint
 
 - `sk-d-geometry`: the ambient group `GL(V)` of the algebraic groups block, as a group scheme.
+- `def-sc-general-linear-group`: the general linear group scheme `GL_{c,k}`.
 -/
 
 @[expose] public section
@@ -42,9 +43,17 @@ namespace AlgebraicGeometry
 
 variable (n : Type u) [Fintype n] [DecidableEq n] (k : Type u) [CommRing k]
 
-/-- The general linear group scheme `𝔾𝕃(n; k)` over a commutative ring `k`: the affine group
-scheme `Spec k[x_ij, det⁻¹]` over `Spec k`, the spectrum of the Hopf algebra
-`Matrix.GeneralLinearGroup.CoordinateRing n k`. (blueprint: `sk-d-geometry`) -/
+/-- Blueprint `def-sc-general-linear-group`: The general linear group scheme `𝔾𝕃(n; k)` over a
+commutative ring `k` (also blueprint: `sk-d-geometry`).
+
+It is the affine group scheme `Spec k[x_ij, det⁻¹]` over `Spec k`, the spectrum of the Hopf
+algebra `Matrix.GeneralLinearGroup.CoordinateRing n k`, whose comultiplication, counit and
+antipode are given by `x_ij ↦ ∑ₗ x_il ⊗ x_lj` (`Matrix.GeneralLinearGroup.comul_coord`),
+`x_ij ↦ δ_ij` (`Matrix.GeneralLinearGroup.counit_coord`) and `x_ij ↦ (-1)^(i+j) M_ji / det`
+(`Matrix.GeneralLinearGroup.antipode_coord`). Its `R`-points are the group `GL n R`
+(`AlgebraicGeometry.GeneralLinearGroup.homMulEquiv`). The special linear group scheme is
+`AlgebraicGeometry.SpecialLinearGroup` and the determinant homomorphism to `𝔾ₘ` is
+`AlgebraicGeometry.GeneralLinearGroup.det`. -/
 noncomputable def GeneralLinearGroup : Over (Spec (.of k)) :=
   (Spec (.of (CoordinateRing n k))).asOver (Spec (.of k))
 

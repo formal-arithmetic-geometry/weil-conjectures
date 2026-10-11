@@ -44,6 +44,7 @@ The part of the additive group structure of relative affine space that is used e
 - `AlgebraicGeometry.AffineSpace.add`: the addition `𝔸(n; S) ×_S 𝔸(n; S) ⟶ 𝔸(n; S)`.
 - `AlgebraicGeometry.AffineSpace.smul`: the scaling `x ↦ c x` by a global function `c`.
 - `AlgebraicGeometry.AffineSpace.translation`: the translation `x ↦ x + a`.
+- `AlgebraicGeometry.AffineSpace.linearMap`: the linear map `x ↦ A x` given by a matrix `A`.
 - `AlgebraicGeometry.AffineSpace.stdPairing`: the standard pairing on `𝔸(n; S) ×_S 𝔸(n; S)`.
 - `AlgebraicGeometry.AffineSpace.reindexIso`: relabelling the coordinates along a bijection.
 - `AlgebraicGeometry.AffineSpace.sumIso`: `𝔸(n ⊕ m; S) ≅ 𝔸(m; 𝔸(n; S))`.
@@ -463,6 +464,14 @@ lemma AffineSpace.homOfVector_coord_comp_map {σ : Type u} {S T Z : Scheme.{u}} 
   · rw [Scheme.Hom.comp_appTop, CommRingCat.comp_apply, AffineSpace.map_appTop_coord,
       AffineSpace.homOfVector_appTop_coord]
 
+/-- An isomorphism of base schemes `S ≅ T` induces an isomorphism `𝔸(n; S) ≅ 𝔸(n; T)`. -/
+@[simps]
+def AffineSpace.mapIso (n : Type u) {S T : Scheme.{u}} (e : S ≅ T) : 𝔸(n; S) ≅ 𝔸(n; T) where
+  hom := AffineSpace.map n e.hom
+  inv := AffineSpace.map n e.inv
+  hom_inv_id := by rw [← AffineSpace.map_comp, e.hom_inv_id, AffineSpace.map_id]
+  inv_hom_id := by rw [← AffineSpace.map_comp, e.inv_hom_id, AffineSpace.map_id]
+
 namespace AffineSpace
 
 section GroupLaw
@@ -574,6 +583,67 @@ lemma translation_add (a b : n → Γ(S, ⊤)) :
   simp only [Scheme.Hom.comp_appTop, CommRingCat.comp_apply, translation_appTop_coord, map_add,
     Pi.add_apply, add_assoc]
   rw [← CommRingCat.comp_apply, ← Scheme.Hom.comp_appTop, translation_over]
+
+/-- The linear endomorphism `x ↦ A x` of `𝔸(n; S)` given by a square matrix `A` of global
+functions on `S`: the `i`-th coordinate of the image is `∑ⱼ Aᵢⱼ xⱼ`. -/
+def linearMap [Fintype n] (A : Matrix n n Γ(S, ⊤)) : 𝔸(n; S) ⟶ 𝔸(n; S) :=
+  homOfVector (𝔸(n; S) ↘ S) fun i ↦ ∑ j, (𝔸(n; S) ↘ S).appTop (A i j) * coord S j
+
+section LinearMap
+
+variable [Fintype n]
+
+@[reassoc (attr := simp)]
+lemma linearMap_over (A : Matrix n n Γ(S, ⊤)) : linearMap A ≫ 𝔸(n; S) ↘ S = 𝔸(n; S) ↘ S :=
+  homOfVector_over _ _
+
+@[simp]
+lemma linearMap_appTop_coord (A : Matrix n n Γ(S, ⊤)) (i : n) :
+    (linearMap A).appTop (coord S i) = ∑ j, (𝔸(n; S) ↘ S).appTop (A i j) * coord S j :=
+  homOfVector_appTop_coord _ _ _
+
+@[simp]
+lemma linearMap_one [DecidableEq n] : linearMap (1 : Matrix n n Γ(S, ⊤)) = 𝟙 𝔸(n; S) :=
+  hom_ext (by simp) fun i ↦ by simp [Matrix.one_apply]
+
+/-- The linear map of a product of matrices is the composite of the linear maps. -/
+@[reassoc]
+lemma linearMap_mul (A B : Matrix n n Γ(S, ⊤)) :
+    linearMap (A * B) = linearMap B ≫ linearMap A := by
+  refine hom_ext (by simp) fun i ↦ ?_
+  have h (c : Γ(S, ⊤)) : (linearMap B).appTop ((𝔸(n; S) ↘ S).appTop c) =
+      (𝔸(n; S) ↘ S).appTop c := by
+    rw [← CommRingCat.comp_apply, ← Scheme.Hom.comp_appTop, linearMap_over]
+  simp only [Scheme.Hom.comp_appTop, CommRingCat.comp_apply, linearMap_appTop_coord, map_sum,
+    map_mul, h, Matrix.mul_apply, Finset.mul_sum, Finset.sum_mul, mul_assoc]
+  exact Finset.sum_comm
+
+/-- A linear map fixes the zero section. -/
+@[reassoc (attr := simp)]
+lemma zeroSection_comp_linearMap (A : Matrix n n Γ(S, ⊤)) :
+    zeroSection n S ≫ linearMap A = zeroSection n S :=
+  hom_ext (by simp) fun i ↦ by simp
+
+/-- Linear maps are compatible with base change. -/
+@[reassoc]
+lemma map_comp_linearMap {T : Scheme.{u}} (f : T ⟶ S) (A : Matrix n n Γ(S, ⊤)) :
+    map n f ≫ linearMap A = linearMap (A.map f.appTop) ≫ map n f := by
+  refine hom_ext (by simp) fun i ↦ ?_
+  have h (c : Γ(S, ⊤)) : (map n f).appTop ((𝔸(n; S) ↘ S).appTop c) =
+      (𝔸(n; T) ↘ T).appTop (f.appTop c) := by
+    rw [← CommRingCat.comp_apply, ← Scheme.Hom.comp_appTop, map_over, Scheme.Hom.comp_appTop,
+      CommRingCat.comp_apply]
+  simp [h]
+
+/-- The linear automorphism `x ↦ A x` of `𝔸(n; S)` given by an invertible matrix `A`. -/
+@[simps]
+def linearMapIso [DecidableEq n] (A : (Matrix n n Γ(S, ⊤))ˣ) : 𝔸(n; S) ≅ 𝔸(n; S) where
+  hom := linearMap A
+  inv := linearMap ↑A⁻¹
+  hom_inv_id := by rw [← linearMap_mul, Units.inv_mul, linearMap_one]
+  inv_hom_id := by rw [← linearMap_mul, Units.mul_inv, linearMap_one]
+
+end LinearMap
 
 variable (n S)
 

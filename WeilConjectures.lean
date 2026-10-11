@@ -158,6 +158,7 @@ public import WeilConjectures.AlgebraicGeometry.GeometricFrobenius
 public import WeilConjectures.AlgebraicGeometry.GeometricFrobenius.Points
 public import WeilConjectures.AlgebraicGeometry.GeometricallyConnected
 public import WeilConjectures.AlgebraicGeometry.GlobalSectionsBijective
+public import WeilConjectures.AlgebraicGeometry.GroupScheme.Additive
 public import WeilConjectures.AlgebraicGeometry.GroupScheme.AmpleFamily
 public import WeilConjectures.AlgebraicGeometry.GroupScheme.AmpleFamilySmooth
 public import WeilConjectures.AlgebraicGeometry.GroupScheme.Basic
@@ -170,6 +171,7 @@ public import WeilConjectures.AlgebraicGeometry.GroupScheme.GeneralLinear.Closed
 public import WeilConjectures.AlgebraicGeometry.GroupScheme.GeneralLinear.ClosedSubgroup.Lie
 public import WeilConjectures.AlgebraicGeometry.GroupScheme.GeneralLinear.Lie
 public import WeilConjectures.AlgebraicGeometry.GroupScheme.GeneralLinear.Representation
+public import WeilConjectures.AlgebraicGeometry.GroupScheme.GeneralLinear.Special
 public import WeilConjectures.AlgebraicGeometry.GroupScheme.Image
 public import WeilConjectures.AlgebraicGeometry.GroupScheme.Lie
 public import WeilConjectures.AlgebraicGeometry.GroupScheme.Lie.Basic
@@ -179,6 +181,7 @@ public import WeilConjectures.AlgebraicGeometry.GroupScheme.Lie.InfPoints
 public import WeilConjectures.AlgebraicGeometry.GroupScheme.Lie.InfPointsEquiv
 public import WeilConjectures.AlgebraicGeometry.GroupScheme.Lie.PointOfDerivation
 public import WeilConjectures.AlgebraicGeometry.GroupScheme.Lie.Ring
+public import WeilConjectures.AlgebraicGeometry.GroupScheme.Multiplicative
 public import WeilConjectures.AlgebraicGeometry.GroupScheme.QuasiProjective
 public import WeilConjectures.AlgebraicGeometry.GroupScheme.Reduced
 public import WeilConjectures.AlgebraicGeometry.GroupScheme.Separated
@@ -397,6 +400,8 @@ public import WeilConjectures.AlgebraicGeometry.Sites.UnitsTorsor
 public import WeilConjectures.AlgebraicGeometry.SpecAlgebraicClosure
 public import WeilConjectures.AlgebraicGeometry.TangentSpace
 public import WeilConjectures.AlgebraicGeometry.TheoremOfCube
+public import WeilConjectures.AlgebraicGeometry.VectorBundle
+public import WeilConjectures.AlgebraicGeometry.VectorBundle.Trivialization
 public import WeilConjectures.AnalyticAux
 public import WeilConjectures.Blowup.AdmissibleBlowup
 public import WeilConjectures.Blowup.Affine.BaseChange
@@ -934,6 +939,7 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.AffineTransitionLimit
 public import WeilConjectures.Mathlib.AlgebraicGeometry.AlgClosed.Basic
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Birational.RationalMap
 public import WeilConjectures.Mathlib.AlgebraicGeometry.ColimitsOver
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Cover.Directed
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Cover.Open
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Cover.QuasiCompact
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Fiber
@@ -1205,6 +1211,7 @@ public import WeilConjectures.Mathlib.LinearAlgebra.Matrix.GeneralLinearGroup.De
 public import WeilConjectures.Mathlib.LinearAlgebra.Matrix.Rank
 public import WeilConjectures.Mathlib.LinearAlgebra.Matrix.SchurComplement
 public import WeilConjectures.Mathlib.LinearAlgebra.Matrix.ToLin
+public import WeilConjectures.Mathlib.LinearAlgebra.SymmetricAlgebra.Basic
 public import WeilConjectures.Mathlib.LinearAlgebra.TensorProduct.Associator
 public import WeilConjectures.Mathlib.LinearAlgebra.TensorProduct.Basic
 public import WeilConjectures.Mathlib.LinearAlgebra.TensorProduct.Basis
@@ -1258,6 +1265,7 @@ public import WeilConjectures.Mathlib.RingTheory.GradedAlgebra.Homogeneous.Maps
 public import WeilConjectures.Mathlib.RingTheory.GradedAlgebra.HomogeneousLocalization
 public import WeilConjectures.Mathlib.RingTheory.GradedAlgebra.RingHom
 public import WeilConjectures.Mathlib.RingTheory.Henselian
+public import WeilConjectures.Mathlib.RingTheory.HopfAlgebra.MonoidAlgebra
 public import WeilConjectures.Mathlib.RingTheory.HopfAlgebra.Quotient
 public import WeilConjectures.Mathlib.RingTheory.Ideal.Colon
 public import WeilConjectures.Mathlib.RingTheory.Ideal.Cotangent
@@ -1385,10 +1393,12 @@ public import WeilConjectures.RingTheory.GradedAlgebra.Standard
 public import WeilConjectures.RingTheory.HopfAlgebra.Cartier
 public import WeilConjectures.RingTheory.HopfAlgebra.Etale
 public import WeilConjectures.RingTheory.HopfAlgebra.GeneralLinearGroup
+public import WeilConjectures.RingTheory.HopfAlgebra.GeneralLinearGroup.Determinant
 public import WeilConjectures.RingTheory.HopfAlgebra.GeneralLinearGroup.ExteriorPower
 public import WeilConjectures.RingTheory.HopfAlgebra.GeneralLinearGroup.HopfIdeal
 public import WeilConjectures.RingTheory.HopfAlgebra.GeneralLinearGroup.IdentityComponent
 public import WeilConjectures.RingTheory.HopfAlgebra.GeneralLinearGroup.Kronecker
+public import WeilConjectures.RingTheory.HopfAlgebra.Polynomial
 public import WeilConjectures.RingTheory.MvPolynomial.ArtinSchreier
 public import WeilConjectures.RingTheory.MvPolynomial.QuotientBasis
 public import WeilConjectures.RingTheory.MvPolynomial.QuotientSpan

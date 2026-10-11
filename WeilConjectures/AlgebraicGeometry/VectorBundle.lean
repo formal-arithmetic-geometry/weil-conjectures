@@ -14,6 +14,10 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.AffineScheme
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Cover.Directed
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Tilde
 public import WeilConjectures.Mathlib.LinearAlgebra.SymmetricAlgebra.Basic
+public import Mathlib.LinearAlgebra.SymmetricAlgebra.Basis
+public import Mathlib.RingTheory.TensorProduct.IsBaseChangeFree
+public import WeilConjectures.AlgebraicGeometry.Modules.LocallyFreeAffine
+public import WeilConjectures.AlgebraicGeometry.VectorBundle.Trivialization
 
 /-!
 # The vector bundle of a quasi-coherent module
@@ -27,19 +31,33 @@ the symmetric algebra commutes with base change. It comes with the projection `V
 the zero section `X ⟶ V(M)`, given by the augmentation `Sym M ⟶ 𝒪_X`.
 
 When `M` is locally free of constant rank `d`, this is the vector bundle of
-blueprint `def-asd-vector-bundle-zero-section`; over an open on which `M` is free the pieces are
-`Spec Γ(X, U)[x₁, …, x_d]`, the affine space of dimension `d`.
+blueprint `def-asd-vector-bundle-zero-section`. A basis `b` of `Γ(M, U)` over an affine open `U`
+identifies the piece over `U` with the affine space `𝔸(ι; U)` (`affineSpaceIso`), compatibly with
+the zero sections; two bases differ by the linear automorphism of `𝔸(ι; U)` given by their
+change-of-basis matrix (`affineSpaceIso_inv_linearMap`). Hence `V(M)` is a vector bundle of rank
+`d` in the sense of `AlgebraicGeometry.IsVectorBundleOfRank` (`isVectorBundleOfRank_vectorBundle`),
+which is stable under base change and has a smooth projection of relative dimension `d`.
+
+## Main definitions
+
+- `AlgebraicGeometry.Scheme.Modules.vectorBundle`, `vectorBundleProj`, `vectorBundleZeroSection`:
+  `V(M)`, its projection and its zero section.
+- `AlgebraicGeometry.Scheme.Modules.affineSpaceIso`: `Spec (Sym Γ(M, U)) ≅ 𝔸(ι; U)` for a basis.
+- `AlgebraicGeometry.Scheme.Modules.vectorBundleTrivialization`: the corresponding
+  trivialisation `V(M)|_U ≅ 𝔸^d_U`.
+- `AlgebraicGeometry.Scheme.Modules.transitionMatrix`: the matrix of a change of trivialisation.
 
 ## Blueprint
 
 - `def-amb-finite-locally-free-module`: `AlgebraicGeometry.Scheme.Modules.IsLocallyFreeOfRank`.
 - `def-asd-vector-bundle-zero-section`: `AlgebraicGeometry.Scheme.Modules.vectorBundle`,
   `AlgebraicGeometry.Scheme.Modules.vectorBundleProj`,
-  `AlgebraicGeometry.Scheme.Modules.vectorBundleZeroSection`.
-- `rem-asd-vector-bundle-comparison`: the purity chapter's vector bundles (relative spectra of
-  symmetric algebras of locally free modules of constant rank, with their zero sections) are
-  the same construction: `vectorBundle` is the coordinate-free form, and it assumes nothing
-  about `f^!`.
+  `AlgebraicGeometry.Scheme.Modules.vectorBundleZeroSection`, with trivialisations
+  `AlgebraicGeometry.Scheme.Modules.vectorBundleTrivialization` and transition matrices
+  `AlgebraicGeometry.Scheme.Modules.transitionMatrix`.
+- `rem-asd-vector-bundle-comparison`:
+  `AlgebraicGeometry.Scheme.Modules.isVectorBundleOfRank_vectorBundle`: the coordinate-free
+  `vectorBundle` is a vector bundle in the local sense used by the purity chapter.
 -/
 
 @[expose] public section
@@ -113,11 +131,11 @@ lemma isBaseChange_sectionsRes_basicOpen [M.IsQuasicoherent] (hV : IsAffineOpen 
     letI := resModule M h
     haveI := resIsScalarTower M h
     IsBaseChange Γ(X, X.basicOpen g) (M.sectionsRes h) := by
-  letI := resModule M h
-  haveI := resIsScalarTower M h
+  let := resModule M h
+  have := resIsScalarTower M h
   have : IsLocalizedModule (Submonoid.powers g) (M.sectionsRes h) :=
     isLocalizedModule_basicOpen M hV g
-  haveI := hV.isLocalization_basicOpen g
+  have := hV.isLocalization_basicOpen g
   exact IsLocalizedModule.isBaseChange (Submonoid.powers g) Γ(X, X.basicOpen g) _
 
 /-- For a quasi-coherent module `M`, an affine open `V` and a basic open `U = D(g)` of `V`, the
@@ -163,7 +181,8 @@ lemma symAlgebraAugmentation_surjective (U : X.Opens) :
 
 lemma symAlgebra_hom_ext {U : X.Opens} {A : CommRingCat.{u}} {f g : M.symAlgebra U ⟶ A}
     (h₁ : M.toSymAlgebra U ≫ f = M.toSymAlgebra U ≫ g)
-    (h₂ : ∀ x : Γ(M, U), f.hom (SymmetricAlgebra.ι _ _ x) = g.hom (SymmetricAlgebra.ι _ _ x)) :
+    (h₂ : ∀ x : Γ(M, U),
+      f.hom (SymmetricAlgebra.ι _ _ x) = g.hom (SymmetricAlgebra.ι _ _ x)) :
     f = g := by
   ext x
   induction x using SymmetricAlgebra.induction with
@@ -183,10 +202,11 @@ noncomputable def symAlgebraMap : M.symAlgebra V ⟶ M.symAlgebra U :=
 
 @[reassoc]
 lemma toSymAlgebra_symAlgebraMap :
-    M.toSymAlgebra V ≫ M.symAlgebraMap h = X.presheaf.map (homOfLE h).op ≫ M.toSymAlgebra U := by
-  letI := resAlgebra h
-  letI := resModule M h
-  haveI := resIsScalarTower M h
+    M.toSymAlgebra V ≫ M.symAlgebraMap h =
+      X.presheaf.map (homOfLE h).op ≫ M.toSymAlgebra U := by
+  let := resAlgebra h
+  let := resModule M h
+  have := resIsScalarTower M h
   ext r
   exact (SymmetricAlgebra.mapOfIsScalarTower Γ(X, U) (M.sectionsRes h)).commutes r
 
@@ -213,8 +233,8 @@ lemma symAlgebraMap_symAlgebraAugmentation :
 
 lemma symAlgebraMap_id : M.symAlgebraMap (le_refl U) = 𝟙 _ := by
   refine M.symAlgebra_hom_ext ?_ fun x ↦ ?_
-  · rw [toSymAlgebra_symAlgebraMap, Category.comp_id, Subsingleton.elim (homOfLE (le_refl U)) (𝟙 U), op_id,
-      X.presheaf.map_id, Category.id_comp]
+  · rw [toSymAlgebra_symAlgebraMap, Category.comp_id,
+      Subsingleton.elim (homOfLE (le_refl U)) (𝟙 U), op_id, X.presheaf.map_id, Category.id_comp]
   · rw [symAlgebraMap_ι, CommRingCat.hom_id, RingHom.id_apply,
       Subsingleton.elim (homOfLE (le_refl U)) (𝟙 U), op_id,
       CategoryTheory.Functor.map_id]
@@ -232,17 +252,17 @@ lemma symAlgebraMap_comp {W : X.Opens} (hUV : U ≤ V) (hVW : V ≤ W) :
     exact (congr($(M.presheaf.map_comp (homOfLE hVW).op (homOfLE hUV).op) x)).symm
 
 /-- For a quasi-coherent `M`, an affine open `V` and a basic open `U = D(g)` of `V`, the square of
-rings `Γ(V) ⟶ Γ(U)`, `Γ(V) ⟶ Sym Γ(M, V)`, `Sym Γ(M, V) ⟶ Sym Γ(M, U)`, `Γ(U) ⟶ Sym Γ(M, U)` is
-a pushout: `Sym_{Γ(U)} Γ(M, U) = Γ(U) ⊗_{Γ(V)} Sym_{Γ(V)} Γ(M, V)`. -/
+rings `Γ(V) ⟶ Γ(U)`, `Γ(V) ⟶ Sym Γ(M, V)`, `Sym Γ(M, V) ⟶ Sym Γ(M, U)`, `Γ(U) ⟶ Sym Γ(M, U)`
+is a pushout: `Sym_{Γ(U)} Γ(M, U) = Γ(U) ⊗_{Γ(V)} Sym_{Γ(V)} Γ(M, V)`. -/
 lemma isPushout_symAlgebraMap [M.IsQuasicoherent] (hV : IsAffineOpen V) (g : Γ(X, V))
     (hg : X.basicOpen g = U) :
     IsPushout (M.toSymAlgebra V) (X.presheaf.map (homOfLE h).op)
       (M.symAlgebraMap h) (M.toSymAlgebra U) := by
-  letI := resAlgebra h
-  letI := resModule M h
-  haveI := resIsScalarTower M h
+  let := resAlgebra h
+  let := resModule M h
+  have := resIsScalarTower M h
   have := SymmetricAlgebra.isPushout_of_isBaseChange (M.isBaseChange_sectionsRes h hV g hg)
-  letI := (SymmetricAlgebra.mapOfIsScalarTower Γ(X, U) (M.sectionsRes h)).toAlgebra
+  let := (SymmetricAlgebra.mapOfIsScalarTower Γ(X, U) (M.sectionsRes h)).toAlgebra
   have : IsScalarTower Γ(X, V) (SymmetricAlgebra Γ(X, V) Γ(M, V))
       (SymmetricAlgebra Γ(X, U) Γ(M, U)) :=
     .of_algebraMap_eq fun r ↦
@@ -287,6 +307,7 @@ noncomputable def symSpecNatTrans :
     dsimp only [symSpecFunctor]
     rw [← Spec.map_comp_assoc, ← Spec.map_comp_assoc, toSymAlgebra_symAlgebraMap]
 
+omit [M.IsQuasicoherent] in
 lemma symSpecNatTrans_app (U : X.BasicAffineOpens) :
     M.symSpecNatTrans.app U = Spec.map (M.toSymAlgebra U.opens) ≫ U.isAffineOpen.isoSpec.inv :=
   rfl
@@ -318,13 +339,9 @@ relative spectrum of its symmetric algebra, glued from the affine pieces
 `Spec (Sym_{Γ(X, U)} Γ(M, U))` over the affine opens `U ⊆ X`. Its projection is
 `vectorBundleProj`, its zero section (given by the augmentation `Sym M → 𝒪_X`) is
 `vectorBundleZeroSection`, a closed immersion. When `M` is locally free of constant rank `d`
-(`IsLocallyFreeOfRank`), over an affine open `U` on which `M` is free the bundle is
-`Spec Γ(X, U)[x₁, …, x_d]` (`vectorBundleι`, `isPullback_vectorBundleι` and
-`SymmetricAlgebra.equivMvPolynomial`); changes of trivialization are invertible matrices.
-
-This construction is also the vector bundle of the purity chapter
-(blueprint `rem-asd-vector-bundle-comparison`): the two definitions agree, and neither assumes
-anything about `f^!`. -/
+(`IsLocallyFreeOfRank`), a basis of `Γ(M, U)` over an affine open `U` trivialises the bundle over
+`U` as `𝔸^d_U` (`vectorBundleTrivialization`), and changes of trivialisation are the invertible
+matrices `transitionMatrix` (`affineSpaceIso_inv_linearMap`). -/
 noncomputable def vectorBundle : Scheme.{u} :=
   M.symSpecGluingData.glued
 
@@ -372,6 +389,7 @@ noncomputable def localZeroSection (U : X.BasicAffineOpens) :
     (U.opens : Scheme.{u}) ⟶ Spec (M.symAlgebra U.opens) :=
   U.isAffineOpen.isoSpec.hom ≫ Spec.map (M.symAlgebraAugmentation U.opens)
 
+omit [M.IsQuasicoherent] in
 @[reassoc (attr := simp)]
 lemma localZeroSection_comp (U : X.BasicAffineOpens) :
     M.localZeroSection U ≫ Spec.map (M.toSymAlgebra U.opens) ≫ U.isAffineOpen.isoSpec.inv =
@@ -399,7 +417,8 @@ noncomputable def vectorBundleZeroSection : X ⟶ M.vectorBundle :=
           Iso.hom_inv_id_assoc]
       rw [directedBasicAffineCover_trans, localZeroSection, localZeroSection, Category.assoc,
         reassoc_of% h, ← Spec.map_comp_assoc, ← M.symAlgebraMap_symAlgebraAugmentation,
-        Spec.map_comp_assoc, specMap_symAlgebraMap_vectorBundleι]
+        Spec.map_comp_assoc, M.specMap_symAlgebraMap_vectorBundleι (leOfHom f),
+        Category.assoc]
 
 @[reassoc (attr := simp)]
 lemma ι_vectorBundleZeroSection (U : X.BasicAffineOpens) :
@@ -467,5 +486,265 @@ lemma locallyOfFiniteType_vectorBundleProj
   infer_instance
 
 end Gluing
+/-! ### Trivialisations over affine opens on which the module is free -/
+
+section Trivialization
+
+variable (M : X.Modules)
+
+/-- A basis `b` of `Γ(M, U)` over an affine open `U` identifies the affine piece
+`Spec (Sym_{Γ(X, U)} Γ(M, U))` of `V(M)` with the affine space `𝔸(ι; U)`: the coordinate `xᵢ`
+corresponds to `bᵢ ∈ Γ(M, U) ⊆ Sym Γ(M, U)` (`SymmetricAlgebra.equivMvPolynomial`). -/
+noncomputable def affineSpaceIso (U : X.BasicAffineOpens) {ι : Type u}
+    (b : Module.Basis ι Γ(X, U.opens) Γ(M, U.opens)) :
+    𝔸(ι; U.opens) ≅ Spec (M.symAlgebra U.opens) :=
+  AffineSpace.mapIso ι U.isAffineOpen.isoSpec ≪≫ AffineSpace.SpecIso ι Γ(X, U.opens) ≪≫
+    Scheme.Spec.mapIso (SymmetricAlgebra.equivMvPolynomial b).toRingEquiv.toCommRingCatIso.op
+
+lemma symAlgebraAugmentation_ι (U : X.Opens) (x : Γ(M, U)) :
+    M.symAlgebraAugmentation U (SymmetricAlgebra.ι _ _ x) = 0 :=
+  SymmetricAlgebra.algebraMapInv_ι x
+
+variable {M} {U : X.BasicAffineOpens} {ι : Type u}
+  (b : Module.Basis ι Γ(X, U.opens) Γ(M, U.opens))
+
+@[reassoc (attr := simp)]
+lemma affineSpaceIso_inv_over :
+    (M.affineSpaceIso U b).inv ≫ 𝔸(ι; U.opens) ↘ U.opens =
+      Spec.map (M.toSymAlgebra U.opens) ≫ U.isAffineOpen.isoSpec.inv := by
+  simp only [affineSpaceIso, Iso.trans_inv, Category.assoc, AffineSpace.mapIso_inv,
+    AffineSpace.map_over, AffineSpace.SpecIso_inv_over_assoc]
+  rw [Functor.mapIso_inv, Scheme.Spec_map, Iso.op_inv, Quiver.Hom.unop_op,
+    ← Spec.map_comp_assoc]
+  congr 2
+  ext r
+  exact (SymmetricAlgebra.equivMvPolynomial b).symm.commutes r
+
+@[reassoc (attr := simp)]
+lemma affineSpaceIso_hom_comp :
+    (M.affineSpaceIso U b).hom ≫ Spec.map (M.toSymAlgebra U.opens) ≫
+      U.isAffineOpen.isoSpec.inv = 𝔸(ι; U.opens) ↘ U.opens := by
+  rw [← affineSpaceIso_inv_over, Iso.hom_inv_id_assoc]
+
+lemma affineSpaceIso_inv_appTop_coord (i : ι) :
+    (M.affineSpaceIso U b).inv.appTop (AffineSpace.coord U.opens i) =
+      (Scheme.ΓSpecIso (M.symAlgebra U.opens)).inv (SymmetricAlgebra.ι _ _ (b i)) := by
+  simp only [affineSpaceIso, Iso.trans_inv, Scheme.Hom.comp_appTop, CommRingCat.comp_apply,
+    AffineSpace.mapIso_inv, AffineSpace.map_appTop_coord, AffineSpace.SpecIso_inv_appTop_coord]
+  rw [Functor.mapIso_inv, Scheme.Spec_map, Iso.op_inv, Quiver.Hom.unop_op,
+    ← CommRingCat.comp_apply, ← Scheme.ΓSpecIso_inv_naturality, CommRingCat.comp_apply]
+  congr 1
+  exact SymmetricAlgebra.equivMvPolynomial_symm_X b i
+
+/-- Under a trivialisation, the zero section of `V(M)` over `U` is the zero section of the affine
+space. -/
+@[reassoc (attr := simp)]
+lemma zeroSection_affineSpaceIso_hom :
+    AffineSpace.zeroSection ι U.opens ≫ (M.affineSpaceIso U b).hom = M.localZeroSection U := by
+  rw [← Iso.eq_comp_inv]
+  refine AffineSpace.hom_ext ?_ fun i ↦ ?_
+  · rw [AffineSpace.zeroSection_over, Category.assoc, affineSpaceIso_inv_over,
+      localZeroSection_comp]
+  · rw [AffineSpace.zeroSection_appTop_coord, Scheme.Hom.comp_appTop, CommRingCat.comp_apply,
+      affineSpaceIso_inv_appTop_coord, localZeroSection, Scheme.Hom.comp_appTop,
+      CommRingCat.comp_apply, ← CommRingCat.comp_apply (Scheme.ΓSpecIso _).inv,
+      ← Scheme.ΓSpecIso_inv_naturality, CommRingCat.comp_apply, symAlgebraAugmentation_ι,
+      map_zero, map_zero]
+
+variable [Fintype ι]
+
+/-- The matrix of the change of trivialisation from a basis `b` to a basis `b'` of `Γ(M, U)`:
+`b' i = ∑ⱼ Aᵢⱼ b j`, as functions on `U`. It is invertible (`Module.Basis.toMatrix`). -/
+noncomputable def transitionMatrix (b' : Module.Basis ι Γ(X, U.opens) Γ(M, U.opens)) :
+    Matrix ι ι Γ(U.opens, ⊤) :=
+  (b.toMatrix b').transpose.map U.opens.topIso.inv
+
+/-- Changes of trivialisation are linear: they are given by the invertible matrix
+`transitionMatrix b b'`. -/
+lemma affineSpaceIso_inv_linearMap (b' : Module.Basis ι Γ(X, U.opens) Γ(M, U.opens)) :
+    (M.affineSpaceIso U b).inv ≫ AffineSpace.linearMap (transitionMatrix b b') =
+      (M.affineSpaceIso U b').inv := by
+  refine AffineSpace.hom_ext (by simp) fun i ↦ ?_
+  have h (c : Γ(X, U.opens)) : (M.affineSpaceIso U b).inv.appTop
+      ((𝔸(ι; U.opens) ↘ U.opens).appTop (U.opens.topIso.inv c)) =
+      (Scheme.ΓSpecIso (M.symAlgebra U.opens)).inv (M.toSymAlgebra U.opens c) := by
+    rw [← CommRingCat.comp_apply, ← Scheme.Hom.comp_appTop, affineSpaceIso_inv_over,
+      Scheme.Hom.comp_appTop, CommRingCat.comp_apply, IsAffineOpen.isoSpec_inv_appTop,
+      CommRingCat.comp_apply, Iso.inv_hom_id_apply, ← CommRingCat.comp_apply,
+      ← Scheme.ΓSpecIso_inv_naturality, CommRingCat.comp_apply]
+  rw [Scheme.Hom.comp_appTop, CommRingCat.comp_apply, AffineSpace.linearMap_appTop_coord,
+    map_sum]
+  simp only [map_mul, transitionMatrix, Matrix.map_apply, Matrix.transpose_apply, h,
+    affineSpaceIso_inv_appTop_coord]
+  simp only [← map_mul, ← map_sum]
+  refine congrArg _ ?_
+  have hb := congrArg (SymmetricAlgebra.ι Γ(X, U.opens) Γ(M, U.opens)) (b.sum_repr (b' i))
+  rw [map_sum] at hb
+  rw [← hb]
+  refine Finset.sum_congr rfl fun j _ ↦ ?_
+  rw [_root_.map_smul, Algebra.smul_def, Module.Basis.toMatrix_apply]
+  rfl
+
+/-- Changes of trivialisation are linear. -/
+@[reassoc]
+lemma linearMap_affineSpaceIso_hom (b' : Module.Basis ι Γ(X, U.opens) Γ(M, U.opens)) :
+    AffineSpace.linearMap (transitionMatrix b b') ≫ (M.affineSpaceIso U b').hom =
+      (M.affineSpaceIso U b).hom := by
+  rw [← cancel_epi (M.affineSpaceIso U b).inv, reassoc_of% (affineSpaceIso_inv_linearMap b b'),
+    Iso.inv_hom_id, Iso.inv_hom_id]
+
+end Trivialization
+/-! ### The vector bundle atlas of a locally free module -/
+
+section Atlas
+
+variable {M : X.Modules} [M.IsQuasicoherent] {U D : X.BasicAffineOpens} {ι : Type u}
+
+/-- The restriction to a basic open `D ≤ U` of a basis of `Γ(M, U)`: a basis of
+`Γ(M, D) = Γ(X, D) ⊗_{Γ(X, U)} Γ(M, U)`. -/
+noncomputable def basisRes (h : D ≤ U) (b : Module.Basis ι Γ(X, U.opens) Γ(M, U.opens)) :
+    Module.Basis ι Γ(X, D.opens) Γ(M, D.opens) :=
+  letI := resAlgebra (BasicAffineOpens.opens_le_opens h)
+  letI := resModule M (BasicAffineOpens.opens_le_opens h)
+  haveI := resIsScalarTower M (BasicAffineOpens.opens_le_opens h)
+  (M.isBaseChange_sectionsRes (BasicAffineOpens.opens_le_opens h) U.isAffineOpen h.choose
+    h.choose_spec).basis b
+
+lemma basisRes_apply (h : D ≤ U) (b : Module.Basis ι Γ(X, U.opens) Γ(M, U.opens)) (i : ι) :
+    basisRes h b i = M.presheaf.map (homOfLE (BasicAffineOpens.opens_le_opens h)).op (b i) :=
+  letI := resAlgebra (BasicAffineOpens.opens_le_opens h)
+  letI := resModule M (BasicAffineOpens.opens_le_opens h)
+  haveI := resIsScalarTower M (BasicAffineOpens.opens_le_opens h)
+  IsBaseChange.basis_apply _ _ i
+
+/-- The trivialisations over `U` and over a basic open `D ≤ U` are compatible. -/
+lemma specMap_symAlgebraMap_affineSpaceIso_inv (h : D ≤ U)
+    (b : Module.Basis ι Γ(X, U.opens) Γ(M, U.opens)) :
+    Spec.map (M.symAlgebraMap (BasicAffineOpens.opens_le_opens h)) ≫
+        (M.affineSpaceIso U b).inv =
+      (M.affineSpaceIso D (basisRes h b)).inv ≫
+        AffineSpace.map ι (X.homOfLE (BasicAffineOpens.opens_le_opens h)) := by
+  refine AffineSpace.hom_ext ?_ fun i ↦ ?_
+  · rw [Category.assoc, affineSpaceIso_inv_over, ← Spec.map_comp_assoc,
+      toSymAlgebra_symAlgebraMap, Spec.map_comp_assoc,
+      BasicAffineOpens.specMap_res_isoSpec_inv, Category.assoc, AffineSpace.map_over,
+      affineSpaceIso_inv_over_assoc]
+  · rw [Scheme.Hom.comp_appTop, CommRingCat.comp_apply, affineSpaceIso_inv_appTop_coord,
+      ← CommRingCat.comp_apply, ← Scheme.ΓSpecIso_inv_naturality, CommRingCat.comp_apply,
+      Scheme.Hom.comp_appTop, CommRingCat.comp_apply, AffineSpace.map_appTop_coord,
+      affineSpaceIso_inv_appTop_coord, basisRes_apply, symAlgebraMap_ι]
+
+@[reassoc]
+lemma map_affineSpaceIso_hom_vectorBundleι (h : D ≤ U)
+    (b : Module.Basis ι Γ(X, U.opens) Γ(M, U.opens)) :
+    AffineSpace.map ι (X.homOfLE (BasicAffineOpens.opens_le_opens h)) ≫
+        (M.affineSpaceIso U b).hom ≫ M.vectorBundleι U =
+      (M.affineSpaceIso D (basisRes h b)).hom ≫ M.vectorBundleι D := by
+  rw [← cancel_epi (M.affineSpaceIso D (basisRes h b)).inv, ← Category.assoc,
+    ← specMap_symAlgebraMap_affineSpaceIso_inv, Category.assoc, Iso.inv_hom_id_assoc,
+    Iso.inv_hom_id_assoc, M.specMap_symAlgebraMap_vectorBundleι h]
+
+variable (M) {d : ℕ}
+
+/-- Blueprint `def-asd-vector-bundle-zero-section` (trivialisations): a basis `b` of `Γ(M, U)`
+of size `d` over an affine open `U` trivialises the vector bundle over `U`:
+`V(M)|_U ≅ 𝔸^d_U`, compatibly with the projections and the zero sections. -/
+@[simps V j]
+noncomputable def vectorBundleTrivialization (U : X.BasicAffineOpens)
+    (b : Module.Basis (ULift.{u} (Fin d)) Γ(X, U.opens) Γ(M, U.opens)) :
+    VectorBundleTrivialization d M.vectorBundleProj M.vectorBundleZeroSection where
+  V := U.opens
+  j := U.opens.ι
+  ι := (M.affineSpaceIso U b).hom ≫ M.vectorBundleι U
+  isPullback := by
+    have := (IsPullback.of_horiz_isIso (fst := (M.affineSpaceIso U b).hom)
+      (snd := 𝔸(ULift.{u} (Fin d); U.opens) ↘ U.opens)
+      (f := Spec.map (M.toSymAlgebra U.opens) ≫ U.isAffineOpen.isoSpec.inv) (g := 𝟙 _)
+      ⟨by simp⟩).paste_horiz (M.isPullback_vectorBundleι U).flip
+    rwa [Category.id_comp] at this
+  zeroSection_ι := by
+    rw [zeroSection_affineSpaceIso_hom_assoc, ι_vectorBundleZeroSection]
+
+lemma vectorBundleTrivialization_ι (U : X.BasicAffineOpens)
+    (b : Module.Basis (ULift.{u} (Fin d)) Γ(X, U.opens) Γ(M, U.opens)) :
+    (M.vectorBundleTrivialization U b).ι = (M.affineSpaceIso U b).hom ≫ M.vectorBundleι U :=
+  rfl
+
+/-- The trivialisations of `V(M)` given by bases over affine opens are linearly compatible: on
+the overlap, the change of trivialisation is given by `transitionMatrix`. -/
+lemma isLinearlyCompatible_vectorBundleTrivialization {U U' : X.BasicAffineOpens}
+    (b : Module.Basis (ULift.{u} (Fin d)) Γ(X, U.opens) Γ(M, U.opens))
+    (b' : Module.Basis (ULift.{u} (Fin d)) Γ(X, U'.opens) Γ(M, U'.opens)) :
+    (M.vectorBundleTrivialization U b).IsLinearlyCompatible
+      (M.vectorBundleTrivialization U' b') := by
+  intro w
+  obtain ⟨D, hDU, hDU', y, hy⟩ :=
+    Scheme.Cover.LocallyDirected.directed (𝒰 := X.directedBasicAffineCover) (i := U) (j := U') w
+  let D' : X.BasicAffineOpens := D
+  have hD : D' ≤ U := leOfHom hDU
+  have hD' : D' ≤ U' := leOfHom hDU'
+  let h : (D'.opens : Scheme.{u}) ⟶ Limits.pullback (M.vectorBundleTrivialization U b).j
+      (M.vectorBundleTrivialization U' b').j :=
+    pullback.lift (X.homOfLE (BasicAffineOpens.opens_le_opens hD))
+      (X.homOfLE (BasicAffineOpens.opens_le_opens hD')) (by simp [vectorBundleTrivialization_j])
+  have : IsOpenImmersion (h ≫ pullback.fst _ _) := by
+    rw [pullback.lift_fst]
+    infer_instance
+  have : IsOpenImmersion h := IsOpenImmersion.of_comp _ (pullback.fst _ _)
+  refine ⟨D'.opens, h, this, ⟨y, hy⟩, transitionMatrix (basisRes hD b) (basisRes hD' b'), ?_⟩
+  simp only [vectorBundleTrivialization_ι, h, pullback.lift_fst,
+    pullback.lift_snd]
+  rw [map_affineSpaceIso_hom_vectorBundleι hD' b', map_affineSpaceIso_hom_vectorBundleι hD b,
+    linearMap_affineSpaceIso_hom_assoc]
+
+variable {M} in
+/-- The vector bundle atlas of `V(M)` given by all bases of size `d` of the sections over affine
+opens, provided they cover `X`. -/
+noncomputable def vectorBundleAtlas
+    (hM : ∀ x : X, ∃ (U : X.BasicAffineOpens) (_ : x ∈ U.opens),
+      Nonempty (Module.Basis (ULift.{u} (Fin d)) Γ(X, U.opens) Γ(M, U.opens))) :
+    VectorBundleAtlas d M.vectorBundleProj M.vectorBundleZeroSection where
+  I := Σ U : X.BasicAffineOpens, Module.Basis (ULift.{u} (Fin d)) Γ(X, U.opens) Γ(M, U.opens)
+  trivialization i := M.vectorBundleTrivialization i.1 i.2
+  exists_mem_range x := by
+    obtain ⟨U, hx, ⟨b⟩⟩ := hM x
+    exact ⟨⟨U, b⟩, ⟨x, hx⟩, rfl⟩
+  isLinearlyCompatible i k := M.isLinearlyCompatible_vectorBundleTrivialization i.2 k.2
+
+omit [M.IsQuasicoherent] in
+/-- If `M` is locally free of rank `d`, every point of `X` has an affine open neighbourhood `U`
+over which `Γ(M, U)` is free of rank `d`. -/
+lemma exists_basis_of_isLocallyFreeOfRank [M.IsLocallyFreeOfRank d] (x : X) :
+    ∃ (U : X.BasicAffineOpens) (_ : x ∈ U.opens),
+      Nonempty (Module.Basis (ULift.{u} (Fin d)) Γ(X, U.opens) Γ(M, U.opens)) := by
+  obtain ⟨I, Y, hY, he⟩ :=
+    SheafOfModules.isFiniteLocallyFreeOfRank_iff_exists_over_iso_free.{u, u, u}.1
+      ‹M.IsLocallyFreeOfRank d›
+  obtain ⟨i, hi⟩ := TopologicalSpace.Opens.mem_iSup.1
+    (((Opens.coversTop_iff _ _).1 hY).ge (Set.mem_univ x) : x ∈ ⨆ i, Y i)
+  obtain ⟨V, hV, hxV, hVY⟩ := TopologicalSpace.Opens.isBasis_iff_nbhd.mp X.isBasis_affineOpens hi
+  classical
+  exact ⟨BasicAffineOpens.ofAffineOpens ⟨V, hV⟩, hxV,
+    ⟨Module.Basis.ofEquivFun (sectionsLinearEquivOfOverIsoFree (he i).some hVY)⟩⟩
+
+/-- Blueprint `rem-asd-vector-bundle-comparison`: Relation to the purity chapter's vector bundles.
+
+The coordinate-free vector bundle `V(M) = Spec_X (Sym M)` of a locally free module of rank `d`,
+with its zero section given by the augmentation, is a vector bundle of rank `d` in the local
+sense (`AlgebraicGeometry.IsVectorBundleOfRank`) in which the purity chapter uses vector bundles:
+Zariski locally `𝔸^d` with its zero section, with linear transition maps. In particular it is
+stable under base change (`AlgebraicGeometry.IsVectorBundleOfRank.baseChange`). Neither notion
+involves `f^!`. -/
+instance isVectorBundleOfRank_vectorBundle [M.IsLocallyFreeOfRank d] :
+    IsVectorBundleOfRank d M.vectorBundleProj M.vectorBundleZeroSection :=
+  ⟨⟨vectorBundleAtlas M.exists_basis_of_isLocallyFreeOfRank⟩⟩
+
+/-- The projection of the vector bundle of a locally free module of rank `d` is smooth of
+relative dimension `d`. -/
+instance smoothOfRelativeDimension_vectorBundleProj [M.IsLocallyFreeOfRank d] :
+    SmoothOfRelativeDimension d M.vectorBundleProj :=
+  IsVectorBundleOfRank.smoothOfRelativeDimension (z := M.vectorBundleZeroSection)
+
+end Atlas
 
 end AlgebraicGeometry.Scheme.Modules
