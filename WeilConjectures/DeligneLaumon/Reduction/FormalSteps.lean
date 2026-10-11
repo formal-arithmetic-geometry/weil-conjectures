@@ -7,6 +7,7 @@ module
 
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiFinite
+public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusCompatibility
 public import WeilConjectures.DeligneLaumon.Reduction.Weights
 
 /-!
@@ -541,6 +542,39 @@ theorem WeilSheaf.isMixedOfWeightsAtMost_higherLowerShriek_of_shortExact {X Y : 
 
 end OpenClosed
 
+section NegativeDegrees
+
+variable {X Y : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
+  [Y.Over (Spec (CommRingCat.of k₀))] {f : X ⟶ Y} [f.IsOver (Spec (CommRingCat.of k₀))]
+  [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]
+  [LocallyOfFiniteType (Y ↘ Spec (CommRingCat.of k₀))]
+  [QuasiCompact (Y ↘ Spec (CommRingCat.of k₀))] [QuasiSeparated (Y ↘ Spec (CommRingCat.of k₀))]
+
+attribute [local instance] Compactification.over in
+/-- The direct image with compact support `Rf₀!G` of a Weil sheaf is concentrated in degrees
+`≥ 0`: it is `Rḡ_*` applied to the extension by zero of `G`, a sheaf. -/
+theorem WeilSheaf.isZero_homologySheaf_derivedLowerShriek_of_neg (G : WeilSheaf k₀ l X) {n : ℤ}
+    (hn : n < 0) :
+    IsZero ((WeilComplex.homologySheaf n).obj
+      ((WeilComplex.derivedLowerShriek k₀ l f).obj (WeilSheaf.toComplex.obj G))) := by
+  rw [WeilComplex.isZero_homologySheaf_obj_iff]
+  let c := HasCompactification.compactification f (hf := hasCompactification_of_over (k₀ := k₀) f)
+  have e := (Functor.mapDerivedCategorySingleFunctor
+    (ProEtaleWeilSheaf.extensionByZero k₀ l c.i) 0).app G.obj
+  have h := (ProEtaleWeilSheaf.lowerStar k₀ l c.g).isGE_rightDerivedFunctor_obj_singleFunctor
+    ((ProEtaleWeilSheaf.extensionByZero k₀ l c.i).obj G.obj)
+  have : _root_.DerivedCategory.TStructure.t.IsGE
+      ((ProEtaleWeilSheaf.lowerStar k₀ l c.g).rightDerivedFunctor.obj
+        ((ProEtaleWeilSheaf.extensionByZero k₀ l c.i ⋙ _root_.DerivedCategory.singleFunctor _ 0).obj
+          G.obj)) 0 := h
+  have h' := _root_.DerivedCategory.TStructure.t.isGE_of_iso
+    ((ProEtaleWeilSheaf.lowerStar k₀ l c.g).rightDerivedFunctor.mapIso e.symm) 0
+  have h'' : ((WeilComplex.derivedLowerShriek k₀ l f).obj
+      (WeilSheaf.toComplex.obj G)).obj.IsGE 0 := h'
+  exact _root_.DerivedCategory.isZero_of_isGE _ 0 n hn
+
+end NegativeDegrees
+
 /-- If the direct-image weight assertion holds for `f : X ⟶ Y`, then `Rf₀!` carries bounded
 constructible Weil complexes mixed of weights at most `w` to complexes mixed of weights at most
 `w` (blueprint: `lem-zl-sheaves-to-complexes`).
@@ -557,8 +591,15 @@ theorem HasDirectImageWeightBound.isMixedOfWeightsAtMost_derivedLowerShriek
     [QuasiSeparated (Y ↘ Spec (CommRingCat.of k₀))]
     (hf : HasDirectImageWeightBound k₀ ι f) {w : ℝ} {K : WeilComplex k₀ l X}
     (hK : K.IsMixedOfWeightsAtMost ι w) :
-    ((WeilComplex.derivedLowerShriek k₀ l f).obj K).IsMixedOfWeightsAtMost ι w :=
-  sorry
+    ((WeilComplex.derivedLowerShriek k₀ l f).obj K).IsMixedOfWeightsAtMost ι w := by
+  refine WeilComplex.IsMixedOfWeightsAtMost.map_of_forall_toComplex _ (fun v G hG n ↦ ?_) hK
+  obtain ⟨r, rfl⟩ | hn : (∃ r : ℕ, n = r) ∨ n < 0 := by
+    rcases le_or_gt 0 n with h | h
+    · exact Or.inl ⟨n.toNat, (Int.toNat_of_nonneg h).symm⟩
+    · exact Or.inr h
+  · exact hf v G hG r
+  · exact WeilSheaf.isMixedOfWeightsAtMost_of_isZero
+      (WeilSheaf.isZero_homologySheaf_derivedLowerShriek_of_neg G hn) _
 
 section QuasiFinite
 

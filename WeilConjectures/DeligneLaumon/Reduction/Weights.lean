@@ -10,6 +10,7 @@ public import WeilConjectures.Mathlib.CategoryTheory.ObjectProperty.Extensions
 public import WeilConjectures.WeilSheaf.Defs
 public import WeilConjectures.WeilSheaf.StalkFunctor
 public import WeilConjectures.WeilSheaf.Tensor
+public import WeilConjectures.WeilSheaf.Triangle
 
 /-!
 # Mixed weight bounds for constructible Weil sheaves and complexes
@@ -81,7 +82,7 @@ blueprint `lem-zl-mixed-punctual-cutoff`), and a constant twist shifts mixed wei
 
 universe u
 
-open CategoryTheory Limits
+open CategoryTheory Limits Pretriangulated
 
 namespace AlgebraicGeometry
 
@@ -203,6 +204,23 @@ theorem IsMixedOfWeightsAtMost.of_exact {S : ShortComplex (WeilSheaf k₀ l X)} 
   (h₁.of_epi (kernel.lift S.g S.f S.zero)).of_mono_cokernel (kernel.ι S.g)
     (h₃.of_mono (Abelian.factorThruCoimage S.g))
 
+
+/-- The middle term of a short exact sequence `0 ⟶ G' ⟶ G ⟶ G'' ⟶ 0` of Weil sheaves whose outer
+terms are mixed of weights at most `w` is mixed of weights at most `w`: splice the filtration of
+`G'` with the inverse image of that of `G''` (blueprint: `lem-a1-mixed-direct-summand`, part 2). -/
+theorem IsMixedOfWeightsAtMost.of_shortExact {S : ShortComplex (WeilSheaf k₀ l X)}
+    (hS : S.ShortExact) (h₁ : S.X₁.IsMixedOfWeightsAtMost ι w)
+    (h₃ : S.X₃.IsMixedOfWeightsAtMost ι w) : S.X₂.IsMixedOfWeightsAtMost ι w :=
+  .of_exact hS.exact h₁ h₃
+
+/-- A direct summand, more generally a retract, of a Weil sheaf mixed of weights at most `w` is
+mixed of weights at most `w`: it is a Weil subsheaf (blueprint: `lem-a1-mixed-direct-summand`,
+part 3). -/
+theorem IsMixedOfWeightsAtMost.of_retract (h : Retract G F) (hF : F.IsMixedOfWeightsAtMost ι w) :
+    G.IsMixedOfWeightsAtMost ι w :=
+  have : Mono h.i := mono_of_mono_fac h.retract
+  hF.of_mono h.i
+
 -- TODO(adic): needs exactness of the stalk functor and closed points in the support
 /-- **Punctual cutoff for an already mixed sheaf.** Let `G` be a constructible Weil sheaf on a
 separated `k₀`-scheme of finite type, mixed of weights at most some `u`. If every eigenvalue
@@ -263,6 +281,88 @@ theorem WeilComplex.IsMixedOfWeightsAtMost.of_iso {ι : PadicAlgCl l →+* ℂ}
     L.IsMixedOfWeightsAtMost ι w :=
   fun b ↦ (h b).of_iso ((WeilComplex.homologySheaf b).mapIso e)
 
+namespace WeilComplex
+
+variable {ι : PadicAlgCl l →+* ℂ} {K L : WeilComplex k₀ l X} {w : ℝ}
+
+/-- Mixed upper bounds of Weil complexes are monotone in the bound
+(blueprint: `sk-d-dl-general-weights`). -/
+theorem IsMixedOfWeightsAtMost.mono_weight {w' : ℝ} (h : K.IsMixedOfWeightsAtMost ι w)
+    (hw : w ≤ w') : K.IsMixedOfWeightsAtMost ι w' :=
+  fun b ↦ (h b).mono_weight (by linarith)
+
+/-- The cohomology sheaves of a distinguished triangle `K₁ ⟶ K₂ ⟶ K₃ ⟶ K₁[1]` of Weil complexes
+form exact sequences `𝓗ᵇK₁ ⟶ 𝓗ᵇK₂ ⟶ 𝓗ᵇK₃` of Weil sheaves: the cohomology functors on the
+derived category are homological, and Weil sheaves are an exact subcategory of pro-étale Weil
+sheaves (blueprint: `lem-sp-long-exact-of-triangle`). -/
+theorem homologySheaf_exact₂ (T : Triangle (WeilComplex k₀ l X)) (hT : T ∈ distTriang _)
+    (b : ℤ) :
+    (ShortComplex.mk ((homologySheaf b).map T.mor₁) ((homologySheaf b).map T.mor₂)
+      (by rw [← Functor.map_comp, comp_distTriang_mor_zero₁₂ _ hT, Functor.map_zero])).Exact := by
+  have hT' := (WeilComplex.objectProperty k₀ l X).ι.map_distinguished T hT
+  have h := (_root_.DerivedCategory.homologyFunctor _ b).map_distinguished_exact _ hT'
+  have : (WeilSheaf.objectProperty k₀ l X).ι.Faithful := ObjectProperty.faithful_ι _
+  exact (ShortComplex.exact_map_iff_of_faithful (ShortComplex.mk ((homologySheaf b).map T.mor₁)
+    ((homologySheaf b).map T.mor₂) _) (WeilSheaf.objectProperty k₀ l X).ι).1 h
+
+/-- **Extension stability of complex weights.** If `K₁ ⟶ K₂ ⟶ K₃ ⟶ K₁[1]` is a distinguished
+triangle of Weil complexes and `K₁`, `K₃` are mixed of weights at most `w`, then so is `K₂`: in
+each degree `j` the exact sequence `𝓗ʲK₁ ⟶ 𝓗ʲK₂ ⟶ 𝓗ʲK₃` exhibits `𝓗ʲK₂` as an extension of a
+subsheaf of `𝓗ʲK₃` by a quotient of `𝓗ʲK₁` (blueprint: `lem-zl-complex-extension`). -/
+theorem IsMixedOfWeightsAtMost.of_distTriang (T : Triangle (WeilComplex k₀ l X))
+    (hT : T ∈ distTriang _) (h₁ : T.obj₁.IsMixedOfWeightsAtMost ι w)
+    (h₃ : T.obj₃.IsMixedOfWeightsAtMost ι w) : T.obj₂.IsMixedOfWeightsAtMost ι w :=
+  fun b ↦ WeilSheaf.IsMixedOfWeightsAtMost.of_exact (homologySheaf_exact₂ T hT b) (h₁ b) (h₃ b)
+
+/-- **Retract stability of complex weights.** A direct summand, more generally a retract, of a
+Weil complex mixed of weights at most `w` is mixed of weights at most `w`: its cohomology sheaves
+are retracts of those of the ambient complex (blueprint: `lem-zl-complex-retract`). -/
+theorem IsMixedOfWeightsAtMost.of_retract (h : Retract K L) (hL : L.IsMixedOfWeightsAtMost ι w) :
+    K.IsMixedOfWeightsAtMost ι w :=
+  fun b ↦ (hL b).of_retract (h.map (homologySheaf b))
+
+/-- The cohomology sheaves of a shifted Weil complex: `𝓗ᵃ(K[n]) ≅ 𝓗ⁿ⁺ᵃK`. -/
+noncomputable def homologySheafShiftIso (K : WeilComplex k₀ l X) (n a a' : ℤ) (h : n + a = a') :
+    (homologySheaf a).obj (K⟦n⟧) ≅ (homologySheaf a').obj K :=
+  ObjectProperty.isoMk _
+    ((_root_.DerivedCategory.homologyFunctor _ a).mapIso
+        (((WeilComplex.objectProperty k₀ l X).ι.commShiftIso n).app K) ≪≫
+      ((_root_.DerivedCategory.homologyFunctor _ 0).shiftIso n a a' h).app K.obj)
+
+/-- A shift `K[n]` of a Weil complex mixed of weights at most `w` is mixed of weights at most
+`w + n`. -/
+theorem IsMixedOfWeightsAtMost.shift (hK : K.IsMixedOfWeightsAtMost ι w) (n : ℤ) :
+    (K⟦n⟧).IsMixedOfWeightsAtMost ι (w + n) := fun a ↦
+  ((hK (n + a)).of_iso (homologySheafShiftIso K n a (n + a) rfl).symm).mono_weight
+    (by push_cast; linarith)
+
+/-- A Weil complex `K` is mixed of weights at most `w` as soon as `K[n]` is mixed of weights at
+most `w + n`. -/
+theorem IsMixedOfWeightsAtMost.of_shift {n : ℤ} (hK : (K⟦n⟧).IsMixedOfWeightsAtMost ι (w + n)) :
+    K.IsMixedOfWeightsAtMost ι w := fun a ↦
+  ((hK (a - n)).of_iso (homologySheafShiftIso K n (a - n) a (by lia))).mono_weight
+    (by push_cast; linarith)
+
+/-- A Weil sheaf placed in degree `a` is mixed of weights at most `w` as a complex if and only if
+the sheaf is mixed of weights at most `w + a` (blueprint: `def-weil-complex-weights`). -/
+theorem isMixedOfWeightsAtMost_singleComplex_iff (a : ℤ) (G : WeilSheaf k₀ l X) :
+    (singleComplex a G).IsMixedOfWeightsAtMost ι w ↔ G.IsMixedOfWeightsAtMost ι (w + a) := by
+  refine ⟨fun h ↦ (h a).of_iso (homologySheafSingleComplexIso a G), fun h b ↦ ?_⟩
+  by_cases hb : b = a
+  · subst hb
+    exact h.of_iso (homologySheafSingleComplexIso b G).symm
+  · exact WeilSheaf.isMixedOfWeightsAtMost_of_isZero
+      (isZero_homologySheaf_singleComplex hb G) _
+
+/-- A Weil sheaf, viewed as a complex in degree zero, is mixed of weights at most `w` if and only
+if the sheaf is (blueprint: `def-weil-complex-weights`). -/
+theorem isMixedOfWeightsAtMost_toComplex_iff (G : WeilSheaf k₀ l X) :
+    (WeilSheaf.toComplex.obj G).IsMixedOfWeightsAtMost ι w ↔ G.IsMixedOfWeightsAtMost ι w := by
+  rw [WeilSheaf.toComplex_obj, isMixedOfWeightsAtMost_singleComplex_iff]
+  simp
+
+end WeilComplex
+
 /-- The direct-image weight assertion of the blueprint theorem `sk-thm-dl-general-sheaf`, for a
 single morphism `f : X ⟶ Y` of `k₀`-schemes: every constructible Weil sheaf `F` on `X` that is
 mixed of weights at most `w` has `Rʳf₀!F` mixed of weights at most `w + r`, for every `r`. The
@@ -297,5 +397,137 @@ def HasDirectImageComplexWeightBound (k₀ : Type u) [Field k₀] [Finite k₀] 
     rw [← CategoryTheory.comp_over f (Spec (CommRingCat.of k₀))]; infer_instance
   ∀ (w : ℝ) (K : WeilComplex k₀ l X), K.IsMixedOfWeightsAtMost ι w →
     ((WeilComplex.derivedLowerShriek k₀ l f).obj K).IsMixedOfWeightsAtMost ι w
+
+
+/-! ### Passage from sheaves to complexes -/
+
+section Devissage
+
+variable {Y : Scheme.{u}} [Y.Over (Spec (CommRingCat.of k₀))]
+  [LocallyOfFiniteType (Y ↘ Spec (CommRingCat.of k₀))]
+
+namespace WeilComplex
+
+variable {ι : PadicAlgCl l →+* ℂ}
+open _root_.DerivedCategory in
+/-- A Weil sheaf placed in degree `b` is the shift by `-b` of the sheaf placed in degree `0`. -/
+noncomputable def singleComplexIsoShift (b : ℤ) (G : WeilSheaf k₀ l X) :
+    singleComplex b G ≅ (WeilSheaf.toComplex.obj G)⟦-b⟧ :=
+  ObjectProperty.isoMk _
+    ((((singleFunctors (ProEtaleWeilSheaf k₀ l X)).shiftIso (-b) b 0 (by lia)).app G.obj).symm ≪≫
+      (((WeilComplex.objectProperty k₀ l X).ι.commShiftIso (-b)).app
+        (WeilSheaf.toComplex.obj G)).symm)
+
+/-- A triangulated functor `Φ` between Weil complexes that carries every Weil sheaf mixed of
+weights at most `v`, placed in degree zero, to a complex mixed of weights at most `v`, carries a
+Weil sheaf mixed of weights at most `w + b`, placed in degree `b`, to a complex mixed of weights
+at most `w`. -/
+theorem IsMixedOfWeightsAtMost.map_singleComplex
+    (Φ : WeilComplex k₀ l X ⥤ WeilComplex k₀ l Y) [Φ.CommShift ℤ]
+    (hΦ : ∀ (v : ℝ) (G : WeilSheaf k₀ l X), G.IsMixedOfWeightsAtMost ι v →
+      (Φ.obj (WeilSheaf.toComplex.obj G)).IsMixedOfWeightsAtMost ι v)
+    {w : ℝ} (b : ℤ) {G : WeilSheaf k₀ l X} (hG : G.IsMixedOfWeightsAtMost ι (w + b)) :
+    (Φ.obj (singleComplex b G)).IsMixedOfWeightsAtMost ι w := by
+  have := ((hΦ _ G hG).shift (-b)).of_iso
+    ((Φ.commShiftIso (-b)).app (WeilSheaf.toComplex.obj G)).symm
+  refine (this.of_iso (Φ.mapIso (singleComplexIsoShift b G)).symm).mono_weight ?_
+  push_cast
+  linarith
+
+set_option maxHeartbeats 2000000 in
+open _root_.DerivedCategory in
+/-- **Passage from sheaves to complexes.** Let `Φ` be a triangulated functor between Weil
+complexes which carries every Weil sheaf mixed of weights at most `v`, placed in degree zero, to a
+Weil complex mixed of weights at most `v`, for every `v`. Then `Φ` carries every Weil complex
+mixed of weights at most `w` to a Weil complex mixed of weights at most `w`: by induction on the
+length of a bounded complex `K`, using the truncation triangle `τ_{<b}K ⟶ K ⟶ 𝓗ᵇ(K)[-b] ⟶`
+and the extension stability of complex weights. This is the output of the hypercohomology
+spectral sequence `E₂^{a,b} = 𝓗ᵃ(Φ 𝓗ᵇ(K)) ⇒ 𝓗ᵃ⁺ᵇ(Φ K)` used in the blueprint
+(blueprint: `lem-zl-sheaves-to-complexes`). -/
+theorem IsMixedOfWeightsAtMost.map_of_forall_toComplex
+    (Φ : WeilComplex k₀ l X ⥤ WeilComplex k₀ l Y) [Φ.CommShift ℤ] [Φ.IsTriangulated]
+    (hΦ : ∀ (v : ℝ) (G : WeilSheaf k₀ l X), G.IsMixedOfWeightsAtMost ι v →
+      (Φ.obj (WeilSheaf.toComplex.obj G)).IsMixedOfWeightsAtMost ι v)
+    {w : ℝ} {K : WeilComplex k₀ l X} (hK : K.IsMixedOfWeightsAtMost ι w) :
+    (Φ.obj K).IsMixedOfWeightsAtMost ι w := by
+  let P := WeilComplex.objectProperty k₀ l X
+  suffices H : ∀ (n : ℕ) (a : ℤ) (K : WeilComplex k₀ l X), K.obj.IsGE a →
+      K.obj.IsLE (a + n - 1) → K.IsMixedOfWeightsAtMost ι w →
+        (Φ.obj K).IsMixedOfWeightsAtMost ι w by
+    obtain ⟨⟨a, ha⟩, ⟨b, hb⟩⟩ := K.property.1
+    have : K.obj.IsLE (a + ↑(b - a + 1).toNat - 1) := TStructure.t.isLE_of_le _ b _ (by lia)
+    exact H _ a K ha this hK
+  intro n
+  induction n with
+  | zero =>
+    intro a K _ _ _
+    have : K.obj.IsLE (a - 1) := by simpa using ‹K.obj.IsLE (a + ↑(0 : ℕ) - 1)›
+    have hK0 : IsZero K := by
+      refine IsZero.of_full_of_faithful_of_isZero P.ι _ ?_
+      exact TStructure.t.isZero K.obj (a - 1) a (by lia)
+    exact fun b ↦ WeilSheaf.isMixedOfWeightsAtMost_of_isZero
+      ((homologySheaf b).map_isZero (Φ.map_isZero hK0)) _
+  | succ n ih =>
+    intro a K _ _ hK
+    set b : ℤ := a + n
+    let T := (TStructure.t.triangleLTGE b).obj K.obj
+    have hT : T ∈ distTriang _ := TStructure.t.triangleLTGE_distinguished b K.obj
+    have : T.obj₃.IsLE b := by
+      have : K.obj.IsLE b := TStructure.t.isLE_of_le _ (a + ↑(n + 1) - 1) _ (by lia)
+      exact inferInstanceAs (TStructure.t.IsLE ((TStructure.t.truncGE b).obj K.obj) b)
+    have : T.obj₃.IsGE b := inferInstanceAs (TStructure.t.IsGE ((TStructure.t.truncGE b).obj K.obj) b)
+    obtain ⟨Z, ⟨e⟩⟩ := exists_iso_singleFunctor_obj_of_isGE_of_isLE T.obj₃ b
+    have h₁ : IsZero ((homologyFunctor _ (b + 1)).obj T.obj₁) :=
+      isZero_of_isLE _ (b - 1) _ (by lia)
+    have h₀ : IsZero ((homologyFunctor _ b).obj T.obj₁) := isZero_of_isLE _ (b - 1) _ (by lia)
+    have := isIso_homologyMap_mor₂ _ hT b (b + 1) rfl h₀ h₁
+    -- `𝓗ᵇK ≅ Z`
+    let eZ : (homologyFunctor _ b).obj K.obj ≅ Z :=
+      asIso ((homologyFunctor _ b).map T.mor₂) ≪≫ (homologyFunctor _ b).mapIso e ≪≫
+        (singleFunctorCompHomologyFunctorIso _ b).app Z
+    let G : WeilSheaf k₀ l X := ⟨Z, (WeilSheaf.objectProperty k₀ l X).prop_of_iso eZ (K.2.2 b)⟩
+    have hP₃ : P T.obj₃ := P.prop_of_iso e.symm (singleComplex b G).2
+    have hP₁ : P T.obj₁ := P.ext_of_isTriangulatedClosed₁ T hT K.2 hP₃
+    let T' : Triangle (WeilComplex k₀ l X) :=
+      Triangle.mk (X := ⟨T.obj₁, hP₁⟩) (Y := K) (Z := ⟨T.obj₃, hP₃⟩)
+        (ObjectProperty.homMk T.mor₁) (ObjectProperty.homMk T.mor₂)
+        (P.fullyFaithfulι.preimage (T.mor₃ ≫ (P.ι.commShiftIso (1 : ℤ)).inv.app ⟨T.obj₁, hP₁⟩))
+    have hT' : T' ∈ distTriang _ := by
+      refine isomorphic_distinguished _ hT _ (Triangle.isoMk _ _ (Iso.refl _) (Iso.refl _)
+        (Iso.refl _) ?_ ?_ ?_)
+      · simp only [Iso.refl_hom, Category.id_comp, Category.comp_id]; rfl
+      · simp only [Iso.refl_hom, Category.id_comp, Category.comp_id]; rfl
+      · simp only [Iso.refl_hom, Category.id_comp]
+        erw [CategoryTheory.Functor.map_id, Category.comp_id]
+        change P.ι.map (P.fullyFaithfulι.preimage _) ≫ (P.ι.commShiftIso (1 : ℤ)).hom.app _ = _
+        rw [Functor.FullyFaithful.map_preimage, Category.assoc, Iso.inv_hom_id_app]
+        exact Category.comp_id _
+    have hT'' := Φ.map_distinguished T' hT'
+    refine IsMixedOfWeightsAtMost.of_distTriang (Φ.mapTriangle.obj T') hT'' ?_ ?_
+    · -- the truncation `τ_{<b}K` is handled by induction
+      have hGE : T.obj₁.IsGE a :=
+        inferInstanceAs (TStructure.t.IsGE ((TStructure.t.truncLT b).obj K.obj) a)
+      have hLE : T.obj₁.IsLE (a + n - 1) := TStructure.t.isLE_truncLT_obj _ _ _ (by lia)
+      refine ih a ⟨T.obj₁, hP₁⟩ hGE hLE fun q ↦ ?_
+      · have : T.obj₁.IsLE (b - 1) := TStructure.t.isLE_truncLT_obj _ _ _ (by lia)
+        by_cases hq : q < b
+        · have : IsIso ((homologyFunctor _ q).map T.mor₁) :=
+            isIso_homologyMap_mor₁ _ hT (q - 1) q (by lia)
+              (isZero_of_isGE _ b _ (by lia)) (isZero_of_isGE _ b _ (by lia))
+          let e' : (homologySheaf q).obj K ≅
+              (homologySheaf q).obj (⟨T.obj₁, hP₁⟩ : WeilComplex k₀ l X) :=
+            ObjectProperty.isoMk _ (asIso ((homologyFunctor _ q).map T.mor₁)).symm
+          exact (hK q).of_iso e'
+        · exact WeilSheaf.isMixedOfWeightsAtMost_of_isZero
+            ((isZero_homologySheaf_obj_iff q (⟨T.obj₁, hP₁⟩ : WeilComplex k₀ l X)).2
+              (isZero_of_isLE T.obj₁ (b - 1) q (by lia))) _
+    · -- the last term is `𝓗ᵇ(K)` placed in degree `b`
+      have hG : G.IsMixedOfWeightsAtMost ι (w + b) := (hK b).of_iso (ObjectProperty.isoMk _ eZ)
+      exact (IsMixedOfWeightsAtMost.map_singleComplex Φ hΦ b hG).of_iso
+        (Φ.mapIso (ObjectProperty.isoMk _ e.symm))
+
+end WeilComplex
+
+end Devissage
 
 end AlgebraicGeometry
