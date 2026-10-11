@@ -17,14 +17,14 @@ adjoint projection map `π_{M, L} : G M ⊗ L ⟶ G (M ⊗ F L)` of
 with the associativity of the tensor products: the two maps
 `(G M ⊗ L) ⊗ L' ⟶ G (M ⊗ (F L ⊗ F L'))` obtained from `π_{M, L ⊗ L'}` and from
 `π_{M, L}` followed by `π_{M ⊗ F L, L'}` agree
-(`CategoryTheory.Adjunction.rightAdjointProjectionMap_assoc`).
+(`CategoryTheory.Adjunction.rightAdjointProjectionMap_assoc_of_δ`).
 
 Dually, the left adjoint projection map `F (K ⊗ G' M) ⟶ F K ⊗ M` of
 `CategoryTheory.Adjunction.projectionMap` is associative as soon as its comparison
 `δ : G X ⊗ G' Y ⟶ G (X ⊗ Y)` is compatible with an oplax monoidal structure on `G'`
-(`CategoryTheory.Adjunction.projectionMap_assoc`); this holds for the comparison obtained from
-an isomorphism `G' ≅ G` and the inverse of the comonoidal structure of `G'`
-(`CategoryTheory.Adjunction.projectionMapComparison_assoc`).
+(`CategoryTheory.Adjunction.projectionMap_assoc_of_projectionComparisonAssoc`); this holds for
+the comparison obtained from an isomorphism `G' ≅ G` and the inverse of the comonoidal
+structure of `G'` (`CategoryTheory.Adjunction.projectionComparisonAssoc_of_iso`).
 
 Finally, for a composite `Rf_! = R ∘ I` of two functors equipped with associative projection
 maps, the composite projection map, transported along a monoidal isomorphism of pullbacks
@@ -68,7 +68,7 @@ and `π_{M, L} : G M ⊗ L ⟶ G (M ⊗ F L)` the right adjoint projection map f
 G M ⊗ (L ⊗ L') ------π-----> G (M ⊗ F (L ⊗ L')) --G (M ◁ δ)--> G (M ⊗ (F L ⊗ F L'))
 ```
 commutes. -/
-lemma rightAdjointProjectionMap_assoc (M : C) (L L' : D) :
+lemma rightAdjointProjectionMap_assoc_of_δ (M : C) (L L' : D) :
     ((adj.rightAdjointProjectionMap φ).app M).app L ▷ L' ≫
         ((adj.rightAdjointProjectionMap φ).app (M ⊗ F.obj L)).app L' ≫
           G.map (α_ M (F.obj L) (F.obj L')).hom =
@@ -111,7 +111,8 @@ F (K ⊗ G' (M ⊗ M')) --F (K ◁ δ)--> F (K ⊗ (G' M ⊗ G' M')) --F α⁻¹
         v                                                                     v
 F K ⊗ (M ⊗ M') <-------α-------- (F K ⊗ M) ⊗ M' <-------p ▷ M'------- F (K ⊗ G' M) ⊗ M'
 ``` -/
-lemma projectionMap_assoc (hδ' : ProjectionComparisonAssoc G' δ') (K : C) (M M' : D) :
+lemma projectionMap_assoc_of_projectionComparisonAssoc (hδ' : ProjectionComparisonAssoc G' δ')
+    (K : C) (M M' : D) :
     F.map (K ◁ δ G' M M') ≫ F.map (α_ K (G'.obj M) (G'.obj M')).inv ≫
         ((adj.projectionMap G' (curriedTensor C) (curriedTensor D) δ').app
           (K ⊗ G'.obj M)).app M' ≫
