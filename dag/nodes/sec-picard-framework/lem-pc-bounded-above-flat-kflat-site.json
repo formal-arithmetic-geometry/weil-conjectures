@@ -123,5 +123,23 @@
   "group": "M1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-bfs2341 (reviewer sub-agent of L); spot-checked: Read packet whole; checked Stacks lemma-bounded-flat-K-flat text. Cycle: lem-pc-kflat-closure step 1 cites this node, and this node does not cite kflat-closure (its new children are unsplit with empty proofs), so no cycle. Tensor/colimit inputs cited via lem-pc-module-filtered-colimits-tensor and lem-pc-bounded-above-flat-tensor-acyclic (C1 ok); both new nodes are real lemmas, no same-tag duplicate. FIX more, RETURN less: (1) C4/E in Step 1, missed by the second reading: the reduction used brutal truncations sigma_{<=m}A, which are not acyclic, so the reduction failed; replaced by the good truncations tau_{<=m}A as in Stacks, with the one-line acyclicity check made explicit and exactness of filtered colimits used for the colimit of acyclic Tot's; Step 2 text tightened accordingly and step source places corrected from the stale stupid-truncation-induction wording. (2) B3: statement cites def-pc-cochain-complex-modules but stmt_deps lacked it; added.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.BoundedAboveFlatSheafKFlat",
+  "declaration": "CochainComplex.isKFlat_of_boundedAbove_flat",
+  "file": "lean/Sheaf/Algebra/Homology/BoundedAboveFlatSheafKFlat.lean",
+  "statement": "theorem isKFlat_of_boundedAbove_flat {C : Type u} [Category.{u} C] {J : GrothendieckTopology C} [J.WEqualsLocallyBijective AddCommGrpCat.{u}] [HasWeakSheafify J AddCommGrpCat.{u}] {R : Sheaf J CommRingCat.{u}} (P : CochainComplex (SheafOfModules.{u} ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj R)) ℤ) (hbounded : ∃ b : ℤ, ∀ i : ℤ, b < i → IsZero (P.X i)) (hflat : ∀ i : ℤ, SheafOfModules.IsFlat (P.X i)) : P.IsKFlat",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-bfs1050",
+  "group": "C1",
+  "result": "pass",
+  "note": "Packet read whole. Site C:Type u/Category.{u}, J, the two sheafification instances exactly IsFlat's (no geometric hypothesis); R : Sheaf J CommRingCat = O commutative; P : CochainComplex (SheafOfModules R) Z = def-pc-cochain-complex-modules; bounded above = exists b, forall i>b, IsZero (P.X i), same encoding as C1 ring analogue 1c4e1c614; terms flat = landed SheafOfModules.IsFlat (tensorRight, G (x) F as node); conclusion = landed CochainComplex.IsKFlat (Tot(F (x) P), F acyclic, unbounded), no private copy. Verified in local Stacks tags: lemma-bounded-flat-K-flat is 06YQ, 06YS is K-flat-resolution; module cites 06YQ correctly, node source field still says 06YS. Docstring proof follows node steps 1-3 (good truncations)."
  }
 }
