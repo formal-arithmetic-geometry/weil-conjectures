@@ -21,9 +21,49 @@
  "stmt_deps": [
   "def-pc-derived-category"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Because $K$ is bounded and each term is finite free, choose bases of $K^{i-1},K^i,K^{i+1}$; the differentials $d^{i-1}$ and $d^i$ are represented by finite matrices $M_{i-1},M_i$ over $A$, and $K\\otimes_A\\kappa(\\mathfrak p)$ in these degrees is the complex of finite-dimensional $\\kappa(\\mathfrak p)$-vector spaces with matrices $M_{i-1}(\\mathfrak p),M_i(\\mathfrak p)$ (entries reduced at $\\mathfrak p$). Put $c=\\operatorname{rank}K^i$ and $r_j(\\mathfrak p)=\\operatorname{rank}M_j(\\mathfrak p)$ [def-weil-matrix-rank]. By [lem-weil-pbc-idempotent-charpoly-rank-nullity] applied to $d^i\\otimes\\kappa(\\mathfrak p)$, $\\dim\\ker=c-r_i(\\mathfrak p)$; the image of $d^{i-1}\\otimes\\kappa(\\mathfrak p)$ is a subspace of this kernel of dimension $r_{i-1}(\\mathfrak p)$, and applying the same rank-nullity statement to the quotient map from the kernel onto $H^i$ gives $b_i(\\mathfrak p)=c-r_i(\\mathfrak p)-r_{i-1}(\\mathfrak p)$.",
+   "uses": [
+    "def-weil-matrix-rank",
+    "lem-weil-pbc-idempotent-charpoly-rank-nullity"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Derived Categories of Schemes, Lemma jump-loci, Tag 0BDI"
+   }
+  },
+  {
+   "text": "Fix a matrix $M$ over $A$ and an integer $s\\ge0$. By [def-weil-matrix-rank], $\\operatorname{rank}M(\\mathfrak p)$ is the largest $k$ with a nonzero $k\\times k$ minor of $M(\\mathfrak p)$; since a nonzero $k\\times k$ minor with $k\\ge s$ has, by Laplace expansion, a nonzero $s\\times s$ sub-minor, $\\operatorname{rank}M(\\mathfrak p)\\ge s$ iff some $s\\times s$ minor of $M(\\mathfrak p)$ is nonzero (the $0\\times0$ minor is $1$). The determinant commutes with the ring map $A\\to\\kappa(\\mathfrak p)$, so an $s\\times s$ minor $\\Delta$ of $M$ reduces to a nonzero element iff $\\Delta\\notin\\mathfrak p$, i.e. $\\mathfrak p\\in D(\\Delta)$. Hence $\\{\\mathfrak p:\\operatorname{rank}M(\\mathfrak p)\\ge s\\}$ is the finite union of $D(\\Delta)$ over the $s\\times s$ minors $\\Delta$ of $M$ (empty if there are none). Intersections of two such finite unions are finite unions of principal opens since $D(f)\\cap D(g)=D(fg)$.",
+   "uses": [
+    "def-weil-matrix-rank"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Derived Categories of Schemes, Lemma jump-loci, Tag 0BDI"
+   }
+  },
+  {
+   "text": "By Step 1, $b_i(\\mathfrak p)<r$ iff $r_i(\\mathfrak p)+r_{i-1}(\\mathfrak p)>c-r$. Each $r_j(\\mathfrak p)$ lies in $\\{0,\\dots,N_j\\}$ with $N_j$ the smaller dimension of $M_j$, so $\\{\\mathfrak p:b_i(\\mathfrak p)<r\\}$ is the finite union over pairs $(a,b)$ with $0\\le a\\le N_i$, $0\\le b\\le N_{i-1}$, $a+b>c-r$ of $\\{r_i\\ge a\\}\\cap\\{r_{i-1}\\ge b\\}$ (take $(a,b)=(r_i(\\mathfrak p),r_{i-1}(\\mathfrak p))$ for one inclusion). By Step 2 each term, hence the union, is a finite union of principal opens $D(f)$; such a set is open, and quasi-compact because each $D(f)$ is. Thus $b_i$ is upper semicontinuous.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Derived Categories of Schemes, Lemma jump-loci, Tag 0BDI"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-matrix-rank",
+  "lem-weil-pbc-idempotent-charpoly-rank-nullity"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Derived Categories of Schemes, Lemma jump-loci, Tag 0BDI"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -55,12 +95,31 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sc-perfect-jump-loci",
   "by": "worker",
   "date": "2026-10-11"
  },
  "chapter": "sec-abelian-varieties",
- "unit": "sk-prop-av-cube"
+ "unit": "sk-prop-av-cube",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-sc-finite-free-complex-homology-upper-semicontinuous",
+  "worker": "stage1",
+  "summary": "Added two statement-only dependencies: the determinantal rank-locus description and the finite-dimensional complex homology rank formula. The proof chooses matrices for the two adjacent differentials, expresses fibre homology dimension by their ranks, and uses finite unions/intersections of principal opens to obtain each sublevel set. The source theorem and affine specialization were checked against Tag 0BDI; no exact closed declaration exists for this affine statement. Reviewer R-hus0037: both new nodes were class (d), two lines from existing leaves def-weil-matrix-rank and lem-weil-pbc-idempotent-charpoly-rank-nullity; folded into elementary steps citing those and dropped.",
+  "blueprint": "The three steps realize the blueprint ancestor's clause constructing locally closed loci from finite-free fibre complexes."
+ },
+ "tool_uses": [
+  "def-weil-matrix-rank",
+  "lem-weil-pbc-idempotent-charpoly-rank-nullity"
+ ],
+ "reviewed": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-hus0037",
+  "group": "M1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-hus0037 (reviewer sub-agent of L); spot-checked: Checked by hand Tag 0BDI bookkeeping: b_i=c-r_i-r_{i-1}; {b_i<r}=union over bounded (a,b), a+b>c-r of {r_i>=a}∩{r_{i-1}>=b}; D(f)∩D(g)=D(fg); r<=0 and empty-minor cases. Citer lem-sc-perfect-jump-loci (a35974ef8) uses exactly upper semicontinuity and quasi-compact open {b_i<r}. Mathlib grep fittingIdeal/rank_le_iff: no matrix-minor-locus declaration. FIX more, RETURN less: (1) B class (d) lem-sc-matrix-rank-minor-locus: two lines from existing leaf def-weil-matrix-rank (rank = largest nonzero minor) plus Laplace expansion and det commuting with A->kappa(p); folded into elementary Step 2, node dropped. (2) B class (d) lem-sc-finite-dimensional-complex-homology-rank: two lines from existing leaf lem-weil-pbc-idempotent-charpoly-rank-nullity; folded into elementary Step 1, node dropped. Both cited leaves are generic linear-algebra tools (C7/C8).; 1 file(s) fixed by the reviewer"
+ }
 }
