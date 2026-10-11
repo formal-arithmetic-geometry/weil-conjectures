@@ -163,5 +163,23 @@
   "by": "L",
   "result": "accepted",
   "note": "3 steps: the last step of the p-th-root tower node (09HI, unsplit, created by another item), M/K finite purely inseparable from the definition, [M:K] < [L:K] by the degree-multiplicativity leaf. Statement strengthened by 'M/K finite purely inseparable', which the citer's induction uses. Stage-3 note: the item duplicates the 'in particular' clause of lem-weil-pbc-purely-inseparable-pth-root-tower; the two could be merged."
+ },
+ "lean": {
+  "module": "Sheaf.FieldTheory.PurelyInseparableDegreePIntermediate",
+  "declaration": "IsPurelyInseparable.exists_degree_p_intermediate",
+  "file": "lean/Sheaf/FieldTheory/PurelyInseparableDegreePIntermediate.lean",
+  "statement": "theorem exists_degree_p_intermediate (K : Type u) (L : Type v) [Field K] [Field L] [Algebra K L] [Module.Finite K L] [IsPurelyInseparable K L] (p : ℕ) [CharP K p] (hp : 0 < p) (hdeg : 1 < Module.finrank K L) : ∃ (M : IntermediateField K L) (z : L), Module.Finite K M ∧ IsPurelyInseparable K M ∧ Module.finrank K M < Module.finrank K L ∧ IntermediateField.adjoin M ({z} : Set L) = ⊤ ∧ (∃ f : M, z ^ p = (f : L)) ∧ Module.finrank M L = p",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-fpi1020",
+  "group": "H1",
+  "result": "pass",
+  "note": "K L fields+Algebra (extension), Module.Finite+IsPurelyInseparable (finite p.i.), CharP K p + 0<p (char p>0, primality derivable, checked), 1<finrank (degree>1); conclusion M:IntermediateField, z:L, M/K finite p.i., [M:K]<[L:K], M⟮z⟯=⊤, ∃f:M z^p=f, finrank M L = p; #check clean"
  }
 }
