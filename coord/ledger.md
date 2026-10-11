@@ -4972,3 +4972,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 14:32 L: merged deliver/F1/lem-weil-pbc-etale-sections-flat-qc-connected-fibres (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.EtaleSetSectionsFlatConnectedFibres AlgebraicGeometry.etaleSet_sections_bijective_of_flat_qc_connected_geometricFibres)
 - 14:32 L: merged deliver/G1/lem-weil-pbc-sets-etale-inverse-image-restriction (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.EtaleSetInverseImageRestriction AlgebraicGeometry.etaleSetInverseImageRestriction)
 - 14:32 L: merged deliver/H1/lem-weil-pbc-smooth-fibre-regular-local (stage 2; reviewer PASS; first push; Sheaf.RingTheory.SmoothFibreRegularLocal Algebra.smooth_fibre_regular_local)
+- 14:32 L: merged deliver/H1/lem-weil-pbc-smooth-over-normal-ring-normal (stage 2; reviewer PASS; first push; Sheaf.RingTheory.SmoothNormalRing RingHom.Smooth.isNormalRing)
