@@ -4103,3 +4103,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 09:53 L: merged deliver/C1/lem-weil-pbc-essentially-constant-splitting (stage 2; reviewer FIX; first push; Sheaf.CategoryTheory.EssentiallyConstantSplitting CategoryTheory.Functor.essentiallyConstant_splitting)
 - 09:53 L: merged deliver/M1/lem-weil-pbc-effaceable-delta-functor-universal (stage 2; reviewer PASS; first push; Sheaf.CategoryTheory.EffaceableDeltaFunctorUniversal CategoryTheory.effaceable_deltaFunctor_isUniversal)
 - 09:53 L: merged deliver/E1/lem-weil-pbc-equation-count-fibre-dimension-flat (stage 2; reviewer PASS; first push; Sheaf.RingTheory.EquationCountFibreDimensionFlat MvPolynomial.exists_flat_away_of_fibre_dimension_eq)
+- 09:53 L: merged deliver/H1/lem-weil-pbc-etale-affine-cover-gluing (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.EtaleAffineCoverStratification AlgebraicGeometry.exists_etale_affine_cover_stratification)
