@@ -222,6 +222,61 @@ lemma exists_galoisPointAct_galoisPointFiberSpec_eq
   ext x
   exact (φ.liftNormal_commutes Ω x).trans rfl
 
+variable {K} in
+/-- The residue fields of an étale `K`-scheme are finite over `K`. -/
+lemma finite_residueFieldAlgebraMap_of_etale {Y : Scheme.{u}} (f : Y ⟶ Spec (.of K)) [Etale f]
+    (p : Y) : (f.residueFieldAlgebraMap p).Finite := by
+  have hq : IsClosed {f.base p} := by
+    rw [show ({f.base p} : Set (Spec (.of K))) = Set.univ from
+      Set.eq_univ_of_forall fun y ↦ Subsingleton.elim _ _]
+    exact isClosed_univ
+  have h₁ : (Hom.residueFieldAlgebraMap (𝟙 (Spec (.of K))) (f.base p)).Finite :=
+    Hom.finite_residueField_of_isClosed (𝟙 (Spec (.of K))) _ hq
+  have h₂ := f.finite_residueFieldMap p
+  have h := Hom.residueFieldAlgebraMap_comp f (𝟙 (Spec (.of K))) p
+  rw [Category.comp_id] at h
+  rw [h]
+  exact h₂.comp h₁
+
+variable {K Ω} in
+/-- Every element of the fibre of `galoisPoint K Ω` at an étale `K`-scheme `X` is the image of
+`x_E` under a morphism `Spec E ⟶ X`, for some finite subextension `E` of `Ω / K`: namely the
+image of the residue field at the corresponding point of `X`. -/
+lemma exists_galoisPoint_fiber_map_eq (X : (Spec (.of K)).Etale)
+    (x : (galoisPoint K Ω).fiber.obj X) :
+    ∃ (E : IntermediateField K Ω) (_ : FiniteDimensional K E) (g : etaleSpec K Ω E ⟶ X),
+      (galoisPoint K Ω).fiber.map g (galoisPointFiberSpec K Ω E) = x := by
+  obtain ⟨⟨p, φ⟩, hφ⟩ := (SpecToEquivOfField Ω X.left).symm.surjective x.down.left
+  change Spec.map φ ≫ X.left.fromSpecResidueField p = x.down.left at hφ
+  have ha : Spec.map (CommRingCat.ofHom (X.hom.residueFieldAlgebraMap p)) =
+      X.left.fromSpecResidueField p ≫ X.hom :=
+    X.hom.specMap_residueFieldAlgebraMap p
+  have hw : CommRingCat.ofHom (X.hom.residueFieldAlgebraMap p) ≫ φ =
+      CommRingCat.ofHom (algebraMap K Ω) := by
+    rw [← Spec.map_inj, Spec.map_comp, ha, ← Category.assoc, hφ]
+    exact Over.w x.down
+  let : Algebra K (X.left.residueField p) := (X.hom.residueFieldAlgebraMap p).toAlgebra
+  have : Module.Finite K (X.left.residueField p) := finite_residueFieldAlgebraMap_of_etale X.hom p
+  let φ' : X.left.residueField p →ₐ[K] Ω := { φ.hom with commutes' r := congr($(hw).hom r) }
+  let ψ : X.left.residueField p →ₐ[K] φ'.fieldRange :=
+    φ'.codRestrict φ'.fieldRange.toSubalgebra fun c ↦ ⟨c, rfl⟩
+  have hψ : Function.Surjective ψ := by
+    rintro ⟨_, c, rfl⟩
+    exact ⟨c, rfl⟩
+  have : FiniteDimensional K φ'.fieldRange := Module.Finite.of_surjective ψ.toLinearMap hψ
+  refine ⟨φ'.fieldRange, this, MorphismProperty.Over.homMk
+    (Spec.map (CommRingCat.ofHom ψ.toRingHom) ≫ X.left.fromSpecResidueField p) ?_ trivial, ?_⟩
+  · change _ ≫ X.hom = specAlgebraMap K φ'.fieldRange
+    rw [Category.assoc, ← ha, ← Spec.map_comp]
+    congr 1
+    ext r
+    exact congrArg Subtype.val (ψ.commutes r)
+  · refine ULift.ext _ _ (Over.OverMorphism.ext ?_)
+    change Spec.map (CommRingCat.ofHom (algebraMap φ'.fieldRange Ω)) ≫
+      Spec.map (CommRingCat.ofHom ψ.toRingHom) ≫ X.left.fromSpecResidueField p = x.down.left
+    rw [← hφ, ← Category.assoc, ← Spec.map_comp]
+    congr 2
+
 end finite
 
 end AlgebraicGeometry.Scheme
