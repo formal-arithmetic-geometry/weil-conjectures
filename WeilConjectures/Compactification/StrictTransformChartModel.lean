@@ -421,7 +421,8 @@ theorem comap_strictTransformChartModel (c : I.StrictTransformChart f) :
 overlap. Hence the chart models glue (to `strictTransformChartModel`).
 (blueprint: `lemma-nagata-strict-transform-chart-cocycle`) -/
 theorem StrictTransformChart.comap_ker_strictι_fst_eq (c c' : I.StrictTransformChart f) :
-    c.strictι.ker.comap (pullback.fst c.ι c'.ι) = c'.strictι.ker.comap (pullback.snd c.ι c'.ι) := by
+    c.strictι.ker.comap (pullback.fst c.ι c'.ι) =
+      c'.strictι.ker.comap (pullback.snd c.ι c'.ι) := by
   rw [← c.comap_ker_strictTransformι, ← c'.comap_ker_strictTransformι, ← comap_comp,
     ← comap_comp, pullback.condition]
 

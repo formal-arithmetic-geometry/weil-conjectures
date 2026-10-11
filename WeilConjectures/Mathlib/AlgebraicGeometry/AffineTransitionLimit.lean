@@ -4571,7 +4571,7 @@ closed immersions.
 
 The system is that of the closed subschemes of a finite presentation model `Y` of `X` over `S`
 cut out by the subideal sheaves of finite type of the kernel of the closed immersion `X ⟶ Y`.
-(Blueprint: `lemma:nagata-finite-type-fp-model-system`.) -/
+(Blueprint: `lemma:nagata-finite-type-fp-model-system`, `sk-prop-nagata-sketch-fp-models`.) -/
 @[stacks 09ZQ]
 theorem Scheme.Hom.nonempty_finitePresentationApproximation {X S : Scheme.{u}} (f : X ⟶ S)
     [CompactSpace X] [QuasiSeparatedSpace X] [CompactSpace S] [QuasiSeparatedSpace S]
@@ -5123,6 +5123,42 @@ theorem Scheme.exists_isClosedImmersion_of_isOpenImmersion_of_isLimit [IsCofilte
       (c.π.app i₁ ⁻¹ᵁ V₁).ι ≫ c.π.app j.left :=
     opensCone_π_ι D c i₁ V₁ j
   rw [Category.assoc, h₂, reassoc_of% hg₀]
+
+/-- **Quasi-compact opens of a cofiltered limit descend** (Stacks Project Tag 01Z4, parts (1)
+and (3); blueprint `pqf-lem-limit-qc-open-descends`, items 1 and 3). Let `{Dᵢ}` be a cofiltered
+system of quasi-compact schemes with affine transition morphisms and limit `S = lim Dᵢ`, and let
+`V ⊆ S` be a quasi-compact open. Then `V = fᵢ⁻¹(Vᵢ)` for a quasi-compact open `Vᵢ` of some
+stage; the preimages `Vⱼ` of `Vᵢ` at later stages are quasi-compact, their transition morphisms
+are affine, and the projections exhibit `V = fᵢ⁻¹(Vᵢ)` as the limit `lim_{j ≥ i} Vⱼ`. -/
+theorem Scheme.exists_preimage_eq_and_isLimit_opensCone [IsCofiltered I]
+    [∀ {i j} (f : i ⟶ j), IsAffineHom (D.map f)] (hc : IsLimit c) (V : c.pt.Opens)
+    (hV : IsCompact (V : Set c.pt)) :
+    ∃ (i : I) (Vᵢ : (D.obj i).Opens), IsCompact (Vᵢ : Set (D.obj i)) ∧ c.π.app i ⁻¹ᵁ Vᵢ = V ∧
+      (∀ j : Over i, IsCompact ((D.map j.hom ⁻¹ᵁ Vᵢ : (D.obj j.left).Opens) : Set (D.obj j.left))) ∧
+      (∀ {j k : Over i} (f : j ⟶ k), IsAffineHom ((opensDiagram D i Vᵢ).map f)) ∧
+      Nonempty (IsLimit (opensCone D c i Vᵢ)) := by
+  obtain ⟨i, Vᵢ, hVᵢ, hVᵢV⟩ := exists_preimage_eq D c hc V hV
+  exact ⟨i, Vᵢ, hVᵢ, hVᵢV, fun j ↦ QuasiCompact.isCompact_preimage _ Vᵢ.2 hVᵢ,
+    fun f ↦ inferInstance, ⟨isLimitOpensCone D c hc i Vᵢ⟩⟩
+
+/-- **Two descents of a quasi-compact open eventually agree** (Stacks Project Tag 01Z4, part
+(2); blueprint `pqf-lem-limit-qc-open-descends`, item 2). If quasi-compact opens `Vᵢ ⊆ Dᵢ` and
+`Vᵢ' ⊆ Dᵢ'` have the same preimage in the limit, then their preimages agree at some stage
+`i'' ≥ i, i'`. -/
+theorem Scheme.exists_map_preimage_eq_map_preimage_of_isLimit [IsCofiltered I]
+    [∀ {i j} (f : i ⟶ j), IsAffineHom (D.map f)] (hc : IsLimit c) {i i' : I}
+    {V : (D.obj i).Opens} {V' : (D.obj i').Opens} (hV : IsCompact (V : Set (D.obj i)))
+    (hV' : IsCompact (V' : Set (D.obj i'))) (H : c.π.app i ⁻¹ᵁ V = c.π.app i' ⁻¹ᵁ V') :
+    ∃ (i'' : I) (f : i'' ⟶ i) (f' : i'' ⟶ i'), D.map f ⁻¹ᵁ V = D.map f' ⁻¹ᵁ V' := by
+  obtain ⟨k, g, g'⟩ : ∃ (k : I) (_ : k ⟶ i), Nonempty (k ⟶ i') :=
+    ⟨IsCofiltered.min i i', IsCofiltered.minToLeft i i', ⟨IsCofiltered.minToRight i i'⟩⟩
+  obtain ⟨g'⟩ := g'
+  obtain ⟨l, h, hl⟩ := exists_map_preimage_eq_map_preimage D c hc (i := k)
+    (U := D.map g ⁻¹ᵁ V) (V := D.map g' ⁻¹ᵁ V') (QuasiCompact.isCompact_preimage _ V.2 hV)
+    (QuasiCompact.isCompact_preimage _ V'.2 hV')
+    (by rw [← Scheme.Hom.comp_preimage, ← Scheme.Hom.comp_preimage, c.w, c.w, H])
+  refine ⟨l, h ≫ g, h ≫ g', ?_⟩
+  rw [Functor.map_comp, Functor.map_comp, Scheme.Hom.comp_preimage, Scheme.Hom.comp_preimage, hl]
 
 end ClosedImmersionDescent
 
