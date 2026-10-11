@@ -206,6 +206,51 @@ theorem dualizingComplex_purity_all_stages {k : Type u} [Field k]
   ⟨fun _ ↦ exists_counit_eq_smoothTrace _ a,
     exists_iso_fromIntegral_realization_twistShiftPullbackLevel l E d a K S T eS eT γ hγ hcS hcT⟩
 
+/-- Blueprint `sk-thm-purity-transport`: Smooth purity over `𝒪_E`, `E` and `ℚ̄_ℓ`
+
+Let `f : X ⟶ Y` be smooth separated of relative dimension `d`, `K = (K_n)_n` a normalized
+system over `𝒪_E` on `Y`, and let the finite-coefficient purity isomorphisms `γ_{f,K_n}` be
+compatible with the finite reductions (`thm-pur-finite-reduction-of-purity`,
+`AlgebraicGeometry.Etale.map_smoothPurityIso_hom_comp`). Then the purity map extends to the three
+remaining stages:
+* over `𝒪_E`, `Lf^* K(d)[2d] ≅ Rf^! K` between the (derived complete) realizations, with
+  reduction `γ_{f,K_n}` at every level;
+* over `E`, its image in `D_comp(X, E)` is an isomorphism;
+* over `ℚ̄_ℓ`, its image under the functor `ι : D_comp(X, E) ⥤ D(X, ℚ̄_ℓ)` into the colimit is an
+  isomorphism.
+The compatibilities with composition, base change, finite reduction and scalar extension and
+the counit normalization are `AlgebraicGeometry.Etale.smoothTrace_comp`,
+`AlgebraicGeometry.Etale.smoothTrace_baseChange`, `AlgebraicGeometry.Etale.map_smoothTrace`,
+`AlgebraicGeometry.Etale.map_map_hom_comp_eq` and
+`AlgebraicGeometry.Etale.dualizingComplex_purity_all_stages`. -/
+theorem exists_iso_smoothPurity_transport (d : ℤ) {X Y : Scheme.{u}} (f : X ⟶ Y)
+    [HasCompactification f] (K : NormalizedTower (PadicAlgCl.maximalIdealShrink l E) Y)
+    (S T : NormalizedTower (PadicAlgCl.maximalIdealShrink l E) X)
+    (eS : ∀ n : ℕ, S.obj n ≅ twistShiftPullbackLevel d f K n)
+    (eT : ∀ n : ℕ, T.obj n ≅ upperShriekLevel f K n)
+    (γ : ∀ n : ℕ, twistShiftPullbackLevel d f K n ≅ upperShriekLevel f K n)
+    (hγ : ∀ n : ℕ, S.map n ≫ (derivedRestrictScalars (quotientPowSuccFactor _ n) X).map
+        (eS n ≪≫ γ n ≪≫ (eT n).symm).hom =
+      (eS (n + 1) ≪≫ γ (n + 1) ≪≫ (eT (n + 1)).symm).hom ≫ T.map n)
+    {cS : Cone S.restrict} (hcS : Pretriangulated.IsHomotopyLimit cS)
+    {cT : Cone T.restrict} (hcT : Pretriangulated.IsHomotopyLimit cT) {Q : Type*} [Category Q]
+    (ι : DerivedCategoryDerivedCompleteRational X.smallEtaleTopology l E ⥤ Q) :
+    ∃ (hS : DerivedCategory.derivedCompleteIntegral X.smallEtaleTopology l E cS.pt)
+      (hT : DerivedCategory.derivedCompleteIntegral X.smallEtaleTopology l E cT.pt)
+      (e : cS.pt ≅ cT.pt),
+      (∀ n : ℕ, e.hom ≫ cT.π.app (Opposite.op n) =
+        cS.π.app (Opposite.op n) ≫
+          (derivedRestrictScalars (Ideal.Quotient.mk (PadicAlgCl.maximalIdealShrink l E ^ (n + 1)))
+            X).map (eS n ≪≫ γ n ≪≫ (eT n).symm).hom) ∧
+      IsIso ((DerivedCategoryDerivedCompleteRational.fromIntegral X.smallEtaleTopology l E).map
+        (X := ⟨cS.pt, hS⟩) (Y := ⟨cT.pt, hT⟩) (ObjectProperty.homMk e.hom)) ∧
+      IsIso (ι.map ((DerivedCategoryDerivedCompleteRational.fromIntegral
+        X.smallEtaleTopology l E).map
+        (X := ⟨cS.pt, hS⟩) (Y := ⟨cT.pt, hT⟩) (ObjectProperty.homMk e.hom))) := by
+  obtain ⟨hS, hT, e, he, hE⟩ :=
+    exists_iso_fromIntegral_realization_twistShiftPullbackLevel l E d f K S T eS eT γ hγ hcS hcT
+  exact ⟨hS, hT, e, he, hE, inferInstance⟩
+
 end Rational
 
 end Etale
