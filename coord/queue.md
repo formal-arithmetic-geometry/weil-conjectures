@@ -1,11 +1,11 @@
 # Work queue
 
-817 items; claim with `tools/claim.py next <group> [--stage N]`.
+824 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (817)
+## Stage 2: nodes to state (824)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -21,12 +21,10 @@
 | `def-weil-pbc-analytically-unramified` | 1 | state |
 | `def-weil-pbc-associated-graded-ring` | 1 | state |
 | `def-weil-pbc-associated-module` | 1 | state |
-| `def-weil-pbc-complete-intersection-over-field` | 1 | state |
 | `def-weil-pbc-constant-group-scheme` | 1 | state |
 | `def-weil-pbc-delta-functor` | 1 | state |
 | `def-weil-pbc-depth` | 1 | state |
 | `def-weil-pbc-double-complex-zigzag-module` | 1 | state |
-| `def-weil-pbc-essentially-constant-system` | 1 | state |
 | `def-weil-pbc-essentially-smooth-ring-map` | 1 | state |
 | `def-weil-pbc-fibre-degree-bound` | 1 | state |
 | `def-weil-pbc-finite-global-dimension` | 1 | state |
@@ -385,6 +383,7 @@
 | `lem-weil-pbc-double-complex-cokernel-homology-iso` | 1 | state |
 | `lem-weil-pbc-elementary-etale-finite-piece-persistence` | 1 | state |
 | `lem-weil-pbc-equation-count-fibre-dimension-flat` | 1 | state |
+| `lem-weil-pbc-essentially-constant-splitting` | 1 | state |
 | `lem-weil-pbc-essentially-finite-presentation-over-intermediate` | 1 | state |
 | `lem-weil-pbc-etale-algebra-filtered-colimit-descent` | 1 | state |
 | `lem-weil-pbc-etale-colimit-normal-local-domain` | 1 | state |
@@ -409,6 +408,7 @@
 | `lem-weil-pbc-etale-sheaf-clopen-product` | 1 | state |
 | `lem-weil-pbc-etale-subsheaf-final-open` | 1 | state |
 | `lem-weil-pbc-exact-free-complex-last-minors-regular-sequence` | 1 | state |
+| `lem-weil-pbc-exact-sequence-ml` | 1 | state |
 | `lem-weil-pbc-ext-one-direct-sum` | 1 | state |
 | `lem-weil-pbc-factorization-criterion-filtered-colimit` | 1 | state |
 | `lem-weil-pbc-fibre-dimension-bounded-open-upstairs` | 1 | state |
@@ -508,6 +508,7 @@
 | `lem-weil-pbc-generic-separable-algebra-splitting` | 1 | state |
 | `lem-weil-pbc-global-complete-intersection-equidimensional` | 1 | state |
 | `lem-weil-pbc-global-complete-intersection-local-regular-sequence` | 1 | state |
+| `lem-weil-pbc-global-complete-intersection-principal-localization` | 1 | state |
 | `lem-weil-pbc-glue-sheaves-of-modules` | 1 | state |
 | `lem-weil-pbc-graded-module-away-restriction` | 1 | state |
 | `lem-weil-pbc-grothendieck-regular-sequence-flat` | 1 | state |
@@ -549,6 +550,10 @@
 | `lem-weil-pbc-kernel-cokernel-annihilated-mod-ideal` | 1 | state |
 | `lem-weil-pbc-koszul-differential` | 1 | state |
 | `lem-weil-pbc-krull-intersection-localization` | 1 | state |
+| `lem-weil-pbc-lci-conormal-free-rank-codimension` | 1 | state |
+| `lem-weil-pbc-lci-conormal-generators-global-complete-intersection` | 1 | state |
+| `lem-weil-pbc-lci-field-change` | 1 | state |
+| `lem-weil-pbc-lci-regular-sequence-global-complete-intersection` | 1 | state |
 | `lem-weil-pbc-lft-over-field-isolated-point-residue-finite` | 1 | state |
 | `lem-weil-pbc-lift-coprime-factorization-etale` | 1 | state |
 | `lem-weil-pbc-lift-idempotent-upstairs` | 1 | state |
@@ -569,6 +574,7 @@
 | `lem-weil-pbc-localization-prime-residue-field-iso` | 1 | state |
 | `lem-weil-pbc-locally-constant-germ-evaluation` | 1 | state |
 | `lem-weil-pbc-matrix-left-inverse-minors` | 1 | state |
+| `lem-weil-pbc-mittag-leffler-complex-limit-homology` | 1 | state |
 | `lem-weil-pbc-mittag-leffler-limit-exact` | 1 | state |
 | `lem-weil-pbc-ml-sets-tower-limit-nonempty` | 1 | state |
 | `lem-weil-pbc-module-directed-colimit-underlying-sets` | 1 | state |
@@ -706,6 +712,7 @@
 | `lem-weil-pbc-smooth-conormal-sequence-exact` | 1 | state |
 | `lem-weil-pbc-smooth-fibre-regular-local` | 1 | state |
 | `lem-weil-pbc-smooth-localization-conormal-split` | 1 | state |
+| `lem-weil-pbc-smooth-over-field-local-complete-intersection` | 1 | state |
 | `lem-weil-pbc-smooth-over-field-regular-local` | 1 | state |
 | `lem-weil-pbc-smooth-over-normal-ring-normal` | 1 | state |
 | `lem-weil-pbc-smooth-over-product-ring` | 1 | state |
@@ -827,7 +834,7 @@
 | `lem-sc-normalization-properties` | 3 | state |
 | `def-nagata-fixed-base-separated-stage` | 6 | state |
 
-Not open yet: 1399 nodes that wait for a statement dependency, 40 nodes that wait for stage 1.
+Not open yet: 1390 nodes that wait for a statement dependency, 40 nodes that wait for stage 1.
 
 ## Stage 3: modules to prove (0)
 
