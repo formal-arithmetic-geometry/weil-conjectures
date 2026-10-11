@@ -61,6 +61,9 @@ resolutions.
   law of `Rf_!`, compact-support base change and the projection formula.
 - `AlgebraicGeometry.Etale.nonempty_iso_kernelTransform_diagonal`: the kernel transform of a
   kernel supported on the diagonal is a tensor product.
+- `AlgebraicGeometry.Etale.nonempty_iso_kernelTransform_tensor_of_hasProjectionFormula`: kernel
+  transforms are linear over the base on full subcategories where the projection formula for
+  the second projection holds.
 - `AlgebraicGeometry.Etale.nonempty_iso_kernelTransform_tensor`: kernel transforms are linear
   over the base, given the projection formula for the second projection.
 
@@ -89,12 +92,15 @@ compactifiable morphisms is compactifiable by Nagata's theorem, which needs a qu
 and quasi-separated base), so it is a hypothesis.
 
 `AlgebraicGeometry.Etale.nonempty_iso_kernelTransform_diagonal` is the projection formula for
-the closed immersion `Δ`, followed by `Δ_* = Δ_!` and the composition law of `Rf_!` for
-`Δ ≫ p₂ = 𝟙`, which needs torsion coefficients.
+the closed immersion `Δ`, followed by `Δ_* = Δ_!` and `Δ ≫ p₂ = 𝟙`. Since `R(f)_!` is computed
+with a chosen compactification, the last two steps use independence of the compactification
+(`AlgebraicGeometry.Etale.rightDerivedLowerShriekIso`), which needs `π` quasi-compact and
+torsion coefficients.
 
 `AlgebraicGeometry.Etale.nonempty_iso_kernelTransform_shift` is formal: the shift isomorphism
-of the derived tensor product in its second variable is natural in the first
-(`AlgebraicGeometry.Etale.derivedTensorRightShiftIso`), since the derived tensor product
+of the derived tensor product in its second variable is natural in the first,
+`derivedTensorRight A X (𝒦⟦a⟧) ≅ derivedTensorRight A X 𝒦 ⋙ shiftFunctor _ a`
+(`AlgebraicGeometry.Etale.derivedTensorRightShiftIso`), because the derived tensor product
 commutes with shifts as a bifunctor.
 
 `AlgebraicGeometry.Etale.nonempty_iso_kernelTransform_tensor` moves the shift into the kernel

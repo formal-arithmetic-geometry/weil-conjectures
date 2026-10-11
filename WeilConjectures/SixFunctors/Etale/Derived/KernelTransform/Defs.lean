@@ -89,38 +89,30 @@ instance isTriangulated_kernelTransform [HasCompactification (pullback.snd π π
   inferInstanceAs ((D((pullback.fst π π')^*[A]) ⋙ derivedTensorRight A (pullback π π') 𝒦 ⋙
     R(pullback.snd π π')_![A] ⋙ shiftFunctor _ a).IsTriangulated)
 
-/-- Tensoring on the right with a shifted complex is tensoring and then shifting,
-`- ⊗ᴸ 𝒦⟦a⟧ ≅ (- ⊗ᴸ 𝒦)⟦a⟧`, naturally in the first variable: the components are the
-commutation isomorphisms of `K ⊗ᴸ -` with the shift, natural in `K` because the derived tensor
-product commutes with shifts as a bifunctor (`DerivedCategory.commShift₂CurriedTensor`). -/
-noncomputable def derivedTensorRightShiftIso (X : Scheme.{u})
-    (𝒦 : DerivedCategory (Sheaf X.smallEtaleTopology A)) (a : ℤ) :
-    derivedTensorRight A X ((shiftFunctor _ a).obj 𝒦) ≅
-      derivedTensorRight A X 𝒦 ⋙ shiftFunctor _ a :=
-  NatIso.ofComponents (fun K ↦ (((derivedTensor A X).obj K).commShiftIso a).app 𝒦)
-    fun {K K'} f ↦ by
-      have := Functor.CommShift₂.commShift_map
-        (G := curriedTensor (DerivedCategory (Sheaf X.smallEtaleTopology A))) (h := .int) f
-      have : NatTrans.CommShift ((derivedTensor A X).map f) ℤ := this
-      exact (NatTrans.shift_app_comm ((derivedTensor A X).map f) a 𝒦).symm
-
 /-- Shifting the kernel shifts the kernel transform: the kernel transform of `𝒦[a]` with shift
 `c` is the kernel transform of `𝒦` with shift `a + c`.
+
+The shift is moved out of the kernel
+(`AlgebraicGeometry.Etale.derivedTensorRightShiftIso`), past `Rp₂,!` and composed with the shift
+by `c`.
 
 Class: general; decided by formal six-functor yoga (shifts commute with the derived tensor
 product and `Rf_!`), so it holds at every coefficient category `A`. -/
 theorem nonempty_iso_kernelTransform_shift [HasCompactification (pullback.snd π π')]
     (𝒦 : DerivedCategory (Sheaf (pullback π π').smallEtaleTopology A)) (a c : ℤ) :
     Nonempty (kernelTransform A π π' ((shiftFunctor _ a).obj 𝒦) c ≅
-        kernelTransform A π π' 𝒦 (a + c)) :=
-  ⟨Functor.isoWhiskerLeft D((pullback.fst π π')^*[A])
-    (Functor.isoWhiskerRight (derivedTensorRightShiftIso A _ 𝒦 a) _ ≪≫
+        kernelTransform A π π' 𝒦 (a + c)) := by
+  let R := R(pullback.snd π π')_![A]
+  let e₁ : derivedTensorRight A (pullback π π') (𝒦⟦a⟧) ⋙ R ⋙ shiftFunctor _ c ≅
+      derivedTensorRight A (pullback π π') 𝒦 ⋙ shiftFunctor _ a ⋙ R ⋙ shiftFunctor _ c :=
+    Functor.isoWhiskerRight (derivedTensorRightShiftIso A 𝒦 a) _ ≪≫ Functor.associator _ _ _
+  let e₂ : shiftFunctor _ a ⋙ R ⋙ shiftFunctor _ c ≅ R ⋙ shiftFunctor _ (a + c) :=
+    (Functor.associator _ _ _).symm ≪≫
+      Functor.isoWhiskerRight (R.commShiftIso a) (shiftFunctor _ c) ≪≫
       Functor.associator _ _ _ ≪≫
-      Functor.isoWhiskerLeft _ ((Functor.associator _ _ _).symm ≪≫
-        Functor.isoWhiskerRight ((R(pullback.snd π π')_![A]).commShiftIso a) _ ≪≫
-        Functor.associator _ _ _ ≪≫
-        Functor.isoWhiskerLeft _ (shiftFunctorAdd _ a c).symm) ≪≫
-      (Functor.associator _ _ _).symm)⟩
+      Functor.isoWhiskerLeft R (shiftFunctorAdd' _ a c (a + c) rfl).symm
+  exact ⟨Functor.isoWhiskerLeft D((pullback.fst π π')^*[A])
+    (e₁ ≪≫ Functor.isoWhiskerLeft (derivedTensorRight A (pullback π π') 𝒦) e₂)⟩
 
 /-- The convolution `𝒦' ∗ 𝒦 = r₁₃,!(r₁₂^* 𝒦 ⊗ᴸ r₂₃^* 𝒦')` of a kernel `𝒦` on `V ×_S V'`
 with a kernel `𝒦'` on `V' ×_S V''`, a kernel on `V ×_S V''`.

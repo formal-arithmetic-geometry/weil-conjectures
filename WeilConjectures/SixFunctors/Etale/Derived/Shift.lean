@@ -41,6 +41,8 @@ product with supports compatible with the degree shifts in which cohomology clas
 - `AlgebraicGeometry.Etale.commShiftDerivedTensorObj`,
   `AlgebraicGeometry.Etale.commShiftDerivedTensorFlipObj`
 - `AlgebraicGeometry.Etale.derivedTensorShiftIso`: `K⟦a⟧ ⊗ᴸ M⟦b⟧ ≅ (K ⊗ᴸ M)⟦a + b⟧`.
+- `AlgebraicGeometry.Etale.derivedTensorRightShiftIso`: `M ⊗ᴸ K⟦a⟧ ≅ (M ⊗ᴸ K)⟦a⟧`, naturally
+  in `M`.
 -/
 
 @[expose] public section
@@ -122,6 +124,22 @@ noncomputable def derivedTensorShiftIso (K M : DerivedCategory (Sheaf X.smallEta
   (((derivedTensor A X).flip.obj (M⟦b⟧)).commShiftIso a).app K ≪≫
     (shiftFunctor _ a).mapIso ((((derivedTensor A X).obj K).commShiftIso b).app M) ≪≫
       ((shiftFunctorAdd' _ b a (a + b) (add_comm b a)).app _).symm
+
+attribute [local instance] Sheaf.monoidalCategory in
+/-- Tensoring with a shifted complex shifts the tensor product, `M ⊗ᴸ K⟦a⟧ ≅ (M ⊗ᴸ K)⟦a⟧`,
+naturally in `M`. The components are the commutation of `M ⊗ᴸ -` with the shift
+(`AlgebraicGeometry.Etale.commShiftDerivedTensorObj`); they are natural in `M` because the
+derived tensor product commutes with shifts as a bifunctor
+(`DerivedCategory.commShift₂CurriedTensor`). -/
+noncomputable def derivedTensorRightShiftIso
+    (K : DerivedCategory (Sheaf X.smallEtaleTopology A)) (a : ℤ) :
+    derivedTensorRight A X (K⟦a⟧) ≅ derivedTensorRight A X K ⋙ shiftFunctor _ a :=
+  NatIso.ofComponents (fun M ↦ (((derivedTensor A X).obj M).commShiftIso a).app K)
+    (fun f ↦
+      have : NatTrans.CommShift ((derivedTensor A X).map f) ℤ :=
+        Functor.CommShift₂.commShift_map (h := .int)
+          (G := curriedTensor (DerivedCategory (Sheaf X.smallEtaleTopology A))) f
+      (NatTrans.shift_app_comm ((derivedTensor A X).map f) a K).symm)
 
 end Monoidal
 
