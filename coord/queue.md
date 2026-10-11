@@ -1,11 +1,11 @@
 # Work queue
 
-30 items; claim with `tools/claim.py next <group> [--stage N]`.
+28 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (30)
+## Stage 2: nodes to state (28)
 
 | node | distance to Mathlib | kind | blockers |
 |---|---|---|---|
@@ -14,11 +14,11 @@
 | `def-pc-derived-rhom-algebra-module` | 1 | state | 2 |
 | `def-weil-pbc-etale-shriek-to-star-map` | 1 | state | 2 |
 | `lem-sc-etale-qcoherent-descent` | 1 | state | 6 |
-| `lem-pc-cech-resolution` | 1 | state | 1 |
 | `lem-pc-perfect-rhom-tensor-comparison` | 1 | state | 1 |
 | `lem-pc-global-hom-adjunction` | 2 | state | 1 |
 | `cor-galois-lisse-representations` | 1 | state | 0 |
 | `lem-pc-affine-morphism-hom-out-of-perfect` | 1 | state | 0 |
+| `lem-pc-base-change-map-cech` | 1 | state | 0 |
 | `lem-pc-base-change-rhom-perfect` | 1 | state | 0 |
 | `lem-pc-derived-internal-hom-pullback-adjunction` | 1 | state | 0 |
 | `lem-pc-global-hom-pullback-adjunction` | 1 | state | 0 |
@@ -32,15 +32,13 @@
 | `lem-sc-finite-sheafhom-affine-adjoint` | 1 | state | 0 |
 | `lem-sc-hilb-dominating-power` | 1 | state | 0 |
 | `lem-weil-pbc-etale-mayer-vietoris-pullback` | 1 | state | 0 |
-| `lem-weil-pbc-henselization-noetherian-completion` | 1 | state | 0 |
-| `lem-weil-pbc-henselization-universal-property` | 1 | state | 0 |
 | `lem-weil-pbc-projective-space-twisting-sheaf-charts` | 1 | state | 0 |
 | `lem-weil-pbc-simplicial-hom-object-pushout` | 1 | state | 0 |
 | `lem-weil-pbc-simplicial-hom-object-standard-simplex` | 1 | state | 0 |
 | `prop-weil-pbc-strict-henselization-stalk-formula` | 1 | state | 0 |
 | `lem-sc-p1-proj-shifted-free-twist` | 2 | state | 0 |
 
-Not open yet: 40 nodes that wait for stage 1, 156 nodes that wait for a statement dependency.
+Not open yet: 40 nodes that wait for stage 1, 155 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
