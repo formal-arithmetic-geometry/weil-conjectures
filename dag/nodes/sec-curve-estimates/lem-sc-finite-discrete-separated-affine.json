@@ -100,5 +100,23 @@
   "group": "F1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-fds (reviewer sub-agent of L); spot-checked: Source: Stacks 0CKV (properties.tex label lemma-dimension-zero, line 1303), final assertion 'if X is quasi-compact (and separated, dimension zero) then X is affine'; the item's statement is unchanged and is the finite-discrete special case (finite discrete => dimension zero), hypotheses quasi-compact, separated over Spec Z, |Y| finite discrete, conclusion affine. Delivery touches only the item node and the report, one commit, no new nodes; only proof/proof_deps/proof_origin/status/split_report changed. Step 1 is carried entirely by the statement of lem-weil-pbc-finite-discrete-scheme-affine (sec-proper-base-change, status mathlib): any scheme with finite discrete underlying space is affine; its hypothesis is exactly the item's finite-discrete hypothesis, the quasi-compact and separated hypotheses are unused, and its conclusion (X -> Spec Gamma iso, def-weil-affine-spectrum) is the item's 'affine'. This is the expected specialization of the Mathlib instance AlgebraicGeometry.instIsAffineOfFiniteOfDiscreteTopologyCarrierCarrierCommRingCat, verified at Mathlib/AlgebraicGeometry/Limits.lean:700 ([Finite X] [DiscreteTopology X] : IsAffine X); no re-proof from scratch, so not B10-like. The cited node is off-unit (sk-thm-p1) but a generic Mathlib leaf used as a black box (C8 acceptable, no tool_uses needed). Small cases: empty scheme, Spec of a local Artinian ring, finite disjoint union of such: all affine, consistent. Report names the source and checked statements (F); it mentions a citations.json not in the commit, harmless. Start Sat Oct 10 03:22:06 PM UTC 2026, end Sat Oct 10 03:22:34 PM UTC 2026."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FiniteDiscreteSeparatedAffine",
+  "declaration": "AlgebraicGeometry.isAffine_of_finite_discrete_of_separated",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteDiscreteSeparatedAffine.lean",
+  "statement": "theorem isAffine_of_finite_discrete_of_separated (Y : Scheme.{u}) [CompactSpace Y] [IsSeparated (terminal.from Y)] [Finite Y] [DiscreteTopology Y] : IsAffine Y",
+  "branch": "sheaf-dag",
+  "by": "K1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-fds1040",
+  "group": "K1",
+  "result": "pass",
+  "note": "Y : Scheme.{u} = scheme; [CompactSpace Y] = quasi-compact; [IsSeparated (terminal.from Y)] = structure morphism to Spec Z (terminal = Spec of lifted Z) separated, same as Mathlib Scheme.IsSeparated field; [Finite Y] [DiscreteTopology Y] = |Y| finite discrete; IsAffine Y = affine; empty scheme and universes fine; Limits.lean:700 instance is stronger (no qc/sep), so existing:false correct"
  }
 }
