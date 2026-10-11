@@ -57,15 +57,18 @@ normalization at `t = 1` of the family comparison, and its uniqueness, are state
 
 ## Main statements
 
+In the list below, `DeformationToNormalConeData` abbreviates
+`AlgebraicGeometry.Scheme.Hom.DeformationToNormalConeData`.
+
 - `AlgebraicGeometry.Etale.exists_nonempty_iso_twistShift_of_leftDerivedUpperStar_iso`: an
   object which is étale-locally `Λ(m)[2m]` is a lisse rank-one sheaf, twisted and shifted.
 - `AlgebraicGeometry.Etale.nonempty_iso_leftDerivedUpperStar_sectionInvariant`: base change
   of section invariants.
-- `AlgebraicGeometry.Scheme.Hom.DeformationToNormalConeData.exists_nonempty_iso_familyObject_twistShift`,
-  `AlgebraicGeometry.Scheme.Hom.DeformationToNormalConeData.exists_nonempty_iso_sectionInvariant_twistShift`:
+- `DeformationToNormalConeData.exists_nonempty_iso_familyObject_twistShift`,
+  `DeformationToNormalConeData.exists_nonempty_iso_sectionInvariant_twistShift`:
   the family object and the section invariant are lisse rank-one sheaves, twisted and shifted.
-- `AlgebraicGeometry.Scheme.Hom.DeformationToNormalConeData.nonempty_iso_familyObject_leftDerivedUpperStar`,
-  `AlgebraicGeometry.Scheme.Hom.DeformationToNormalConeData.existsUnique_familyObject_iso`:
+- `DeformationToNormalConeData.nonempty_iso_familyObject_leftDerivedUpperStar`,
+  `DeformationToNormalConeData.existsUnique_familyObject_iso`:
   the family is constant along `𝔸¹_B`, by a comparison that is unique once normalized at
   `t = 1`.
 - `AlgebraicGeometry.Etale.nonempty_iso_sectionInvariant_normalCone`: DNC invariance.
@@ -310,7 +313,7 @@ affine line
 étale cover of `lem-pur-dnc-section-geometry` (2) the family is the pullback of the standard
 section invariant `Λ(d)[2d]` (`sk-prop-an`), and `lem-pur-concentrated-complex-shift`
 applies. The same statement for `𝒞(g, s)` is
-`AlgebraicGeometry.Scheme.Hom.DeformationToNormalConeData.exists_nonempty_iso_sectionInvariant_twistShift`. -/
+`exists_nonempty_iso_sectionInvariant_twistShift`. -/
 theorem exists_nonempty_iso_familyObject_twistShift :
     ∃ L : Sheaf 𝔸(ULift.{u} (Fin 1); B).smallEtaleTopology (ModuleCat.{u + 1} Λ),
       IsFiniteLocallyConstantSheaf L ∧
@@ -390,7 +393,7 @@ affine line
 *Clause (3), normalization and uniqueness.* For every identification
 `θ : i₁^* F ≅ 𝒞(g, s)` of the fibre of the family at `t = 1` (for instance the base change
 identification of `lem-pur-dnc-section-geometry` (1), see
-`AlgebraicGeometry.Scheme.Hom.DeformationToNormalConeData.nonempty_iso_leftDerivedUpperStar_oneSection_familyObject`)
+`nonempty_iso_leftDerivedUpperStar_oneSection_familyObject`)
 there is a unique isomorphism `κ : F ≅ La^* 𝒞(g, s)` restricting to `θ` at `t = 1`, under
 `i₁^* a^* ≅ 𝟭`.
 

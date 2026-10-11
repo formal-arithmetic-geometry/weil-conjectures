@@ -150,6 +150,7 @@ theorem nonempty_iso_sectionInvariant_diagonal :
     (Functor.leftDerivedFunctorNatIso _ (Etale.upperStarId _ X) ≪≫
       (𝟭 _).leftDerivedFunctorIsoMapDerivedCategory ≪≫ Functor.mapDerivedCategoryIdIso _).app _⟩
 
+/-- Blueprint `sk-thm-smooth-purity`: Finite-coefficient smooth purity
 
 **Smooth purity, finite coefficients.** For `f : X ⟶ Y` smooth separated of pure relative
 dimension `d`, `Y` separated of finite type over a field, and a finite coefficient ring `Λ`
@@ -184,8 +185,9 @@ theorem nonempty_iso_dualizingComplex_twistShift [HasTateTwist.IsNormalized Λ]
       (twistShift Λ X d).obj (constantComplex Λ X)) := by
   -- TODO: the normal cone datum of `Δ` should be its normal bundle `T_{X/Y}`, as in blueprint
   -- `thm-pur-dnc-invariance`, and step 3 vector-bundle purity for it. `NormalConeData` does not
-  -- tie the datum to the immersion, so the trivial bundle `𝔸^d_X` is accepted here; undo this
-  -- shortcut once the datum is pinned down.
+  -- tie the datum to the immersion, so the trivial bundle `𝔸^d_X` is accepted here, together
+  -- with a deformation datum of `sk-lem-geometry` for it; undo this shortcut once the datum is
+  -- pinned down.
   let N : (pullback.diagonal f).NormalConeData d :=
     { scheme := 𝔸(ULift.{u} (Fin d); X)
       proj := 𝔸(ULift.{u} (Fin d); X) ↘ X
@@ -197,8 +199,11 @@ theorem nonempty_iso_dualizingComplex_twistShift [HasTateTwist.IsNormalized Λ]
         rwa [show Nat.card (ULift.{u} (Fin d)) = d by simp] at this }
   have : HasCompactification N.proj := HasCompactification.affineSpace_over _ X
   obtain ⟨e₁⟩ := nonempty_iso_sectionInvariant_diagonal Λ (d := d) f
-  obtain ⟨e₂⟩ := nonempty_iso_sectionInvariant_normalCone Λ d (pullback.fst f f)
+  -- the deformation to the normal cone of `Δ`, a closed section of the separated `p₁`
+  obtain ⟨D⟩ := Scheme.Hom.nonempty_deformationToNormalConeData d (pullback.fst f f)
     (pullback.diagonal f) (pullback.diagonal_fst f) N
+  obtain ⟨e₂⟩ := nonempty_iso_sectionInvariant_normalCone Λ d (pullback.fst f f)
+    (pullback.diagonal f) N D (f ≫ aY)
   obtain ⟨e₃⟩ := nonempty_iso_sectionInvariant_affineSpace Λ d X (f ≫ aY)
   exact ⟨e₁.symm ≪≫ e₂ ≪≫ e₃⟩
 
