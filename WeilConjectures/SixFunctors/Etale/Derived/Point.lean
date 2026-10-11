@@ -9,6 +9,7 @@ public import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
 public import WeilConjectures.AlgebraicGeometry.Sites.PointConstantSheaf
 public import WeilConjectures.AlgebraicGeometry.Sites.PointCohomology
 public import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.Equivalence
+public import WeilConjectures.CategoryTheory.DerivedCategory.HomSingleProjective
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.MapDerivedCategory
 public import WeilConjectures.CategoryTheory.Sites.ConstantSheafMonoidal
 public import WeilConjectures.SixFunctors.Etale.Derived.Coefficients
@@ -31,11 +32,13 @@ shifts `Λ_s[r]` of the constant complex therefore detect isomorphisms.
 - `AlgebraicGeometry.Etale.nonempty_iso_rightDerivedGlobalSections_coefficientDual`
   (`lem-sf-point`): evaluation at the point carries the dual `RHom_s(C, Λ_s)` of an object of
   `D^b_c(s, Λ)` to the dual `RHom_Λ(RΓ(s, C), Λ)`.
-- `AlgebraicGeometry.Etale.isEquivalence_rightDerivedGlobalSections_of_isSepClosed`
-  (`lem-sf-point`): evaluation at the point `RΓ(s, -)` is an equivalence of categories.
 - `AlgebraicGeometry.Etale.nonempty_iso_rightDerivedGlobalSections_coefficientDual_of_isEquivalence`
   : the same for any coefficient category `A` and scheme `X` for which the constant sheaf functor
   `A ⥤ Sheaf X_ét A` is an equivalence of categories.
+- `AlgebraicGeometry.Etale.isEquivalence_rightDerivedGlobalSections_of_isSepClosed`
+  (`lem-sf-point`): evaluation at the point `RΓ(s, -)` is an equivalence of categories.
+- `AlgebraicGeometry.Etale.homSingleShiftEquivOfIsSepClosed` (`lem-sf-point`): morphisms
+  `Λ_s[-r] ⟶ C` are the global sections of the `r`-th cohomology sheaf of `C`.
 -/
 
 @[expose] public section
@@ -146,6 +149,26 @@ theorem isIso_iff_bijective_comp_of_isSepClosed
         ((Functor.map_isZero _ (isZero_zero _)).isoZero)
     exact IsZero.of_iso (isZero_zero _) (asIso (0 : C ⟶ 0))
   exact (Triangle.isZero₃_iff_isIso₁ _ hT).1 hC
+
+/-- Blueprint `lem-sf-point` (cohomology at the point): `H^r(-) = Hom_s(Λ[-r], -)`.
+
+Let `k` be a separably closed field and `s = Spec k`. For an object `C` of the point category
+and `r : ℤ`, morphisms `Λ_s[-r] ⟶ C` correspond to elements of the fibre at the geometric point
+(the global sections) of the `r`-th cohomology sheaf of `C`. The constant sheaf `Λ_s` is
+projective, so morphisms `Λ_s[-r] ⟶ C` are morphisms `Λ_s ⟶ H^r(C)`
+(`DerivedCategory.homSingleEquivOfProjective`), and those are global sections of `H^r(C)`. -/
+noncomputable def homSingleShiftEquivOfIsSepClosed
+    (C : DerivedCategory (Sheaf (Spec (.of k)).smallEtaleTopology (ModuleCat.{u + 1} Λ)))
+    (r : ℤ) :
+    (((DerivedCategory.singleFunctor _ 0).obj ((constantSheaf
+      (Spec (.of k)).smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj (ModuleCat.of Λ Λ)))⟦-r⟧ ⟶ C) ≃
+      ((DerivedCategory.homologyFunctor _ r).obj C).obj.obj (op (etalePoint k)) :=
+  have := projective_constantSheaf_moduleCat_of_iso (Iso.refl (Spec (.of k))) Λ
+  ((((DerivedCategory.singleFunctors _).shiftIso (-r) r 0 (by omega)).app _).homCongr
+      (Iso.refl C)).trans <|
+    (DerivedCategory.homSingleEquivOfProjective _ r C).trans <|
+      ((constantSheafAdj _ _ isTerminalEtalePoint).homEquiv _ _).trans <|
+        ModuleCat.homEquiv.trans (LinearMap.ringLmapEquivSelf Λ ℕ _).toEquiv
 
 section Duality
 
