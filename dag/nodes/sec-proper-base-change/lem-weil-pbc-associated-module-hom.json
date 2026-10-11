@@ -190,5 +190,28 @@
   "by": "L",
   "result": "pass",
   "note": "Five steps: reduction to presheaf maps by the universal property of sheafification, the bijection between presheaf-module maps P_M -> G and R-linear maps M -> Gamma(X,G) in both directions (semilinearity of restrictions, universal property of the base change), composite, naturality via F_{u,X} c_M = c_{M'} u from the definition. Correct; 0 new nodes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AssociatedModuleHom",
+  "declaration": "AlgebraicGeometry.associatedModuleHom_bijective",
+  "declarations": [
+   "AlgebraicGeometry.associatedModuleHom_bijective",
+   "AlgebraicGeometry.associatedModuleHom_natural"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/AssociatedModuleHom.lean",
+  "statement": "theorem associatedModuleHom_bijective (M : ModuleCat (X.presheaf.obj (op (⊤ : Opens (X : Type u))))) (G : SheafOfModules.{u} ((sheafCompose (Opens.grothendieckTopology (X : Type u)) (forget₂ CommRingCat RingCat)).obj X.sheaf)) : Function.Bijective (fun (φ : associatedModule X M ⟶ G) => associatedModuleCanonicalSection X M ≫ φ.val.app (op (⊤ : Opens (X : Type u))))",
+  "branch": "sheaf-dag",
+  "by": "J1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-amh1405"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-amh1405",
+  "group": "J1",
+  "result": "fix",
+  "note": "X: SheafedSpace CommRingCat = ringed space, R = Γ(X,O_X) top sections; M: ModuleCat R; G: SheafOfModules over O_X; F_M/c_M/F_u = landed associatedModule/associatedModuleCanonicalSection/associatedModuleFunctor.map; Bijective (φ ↦ c_M ≫ φ_X) into R-linear M ⟶ Γ(X,G); naturality in β (G→G') and u (M'→M) both clauses; no extra hypotheses; docstrings given the node's proof in words"
  }
 }
