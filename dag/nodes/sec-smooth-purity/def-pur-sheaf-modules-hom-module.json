@@ -105,5 +105,28 @@
   "group": "F1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-shm2541 (reviewer sub-agent of L); spot-checked: Statement vs Stacks 04TT (pre/postcomposition by f agree, O commutative) and 03DD global sections: correct, generalised from O(U) on C/U to Gamma(C,O), final-object case O(T) matches use in lem-pur-sheaf-hom-is-sheaf step 1. Class (b): not a restatement of def-pur-sheaf-hom (global Hom module vs sheaf Hom); def-pur-sheaf-hom and lem-pur-sheaf-hom-is-sheaf stmt_dep on this item, so citing them here would be a cycle; correctly cites only def-weil-sheaf-of-modules-category. C4 vs citers lem-pur-sheaf-hom-is-sheaf, lem-pur-sheaf-hom-cover-gluing, lem-sc-ext-evaluation, lem-weil-pbc-module-tensor-hom-adjunction: formula (s phi)_V = s_V phi_V is what they use. Definition has no proof steps; parenthetical agreement/bilinearity remarks are elementary (Stacks 'it gives the same result'). Mathlib: no match recorded honestly (SheafOfModules AddCommGroup Hom only, no Module over Gamma); mathlib_match null. No fault found beyond F1 second reading."
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Category.ModuleCat.Sheaf.HomModule",
+  "declaration": "SheafOfModules.homModule",
+  "declarations": [
+   "SheafOfModules.homModule",
+   "SheafOfModules.homLinear"
+  ],
+  "file": "lean/Sheaf/Algebra/Category/ModuleCat/Sheaf/HomModule.lean",
+  "statement": "instance homModule : Module (RingCat.sectionsSubring (R ⋙ forget₂ CommRingCat RingCat.{u})) (M ⟶ N)",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-hmm0547"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-hmm0547",
+  "group": "C1",
+  "result": "fix",
+  "note": "site C/J any (no final object); O = R : Cᵒᵖ ⥤ CommRingCat + hR sheaf; Γ = RingCat.sectionsSubring = Functor.sections (all restriction maps); (s•φ)_V x = s_V • φ_V x by rfl and = sectionsSMul M ≫ φ (checked); compHom/AddEquiv.module proofs real, no sorry; homLinear = bilinear composition; no existing instance in Mathlib/source; fix: removed unused import Sites.Whiskering"
  }
 }
