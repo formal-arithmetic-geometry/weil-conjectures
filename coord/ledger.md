@@ -3673,3 +3673,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 07:43 L: merged deliver/C1/lem-sc-bounded-below-injective-resolution (stage 2; reviewer PASS; first push; Sheaf.Algebra.Homology.BoundedBelowInjectiveResolution SheafOfModules.exists_boundedBelow_injective_resolution; statement corrected (1 citers))
 - 07:43 L: merged deliver/M1/lem-pur-kinjective-homotopy-limit-vanishing (stage 2; reviewer FIX; first push; Sheaf.CategoryTheory.HomotopyLimitVanishing CategoryTheory.homotopyLimitVanishing)
 - 07:43 L: merged deliver/H1/lem-sc-acyclic-comparison-natural (stage 2; reviewer PASS; first push; Sheaf.CategoryTheory.Abelian.RightDerived.AcyclicComparisonNatural CategoryTheory.acyclicComparison_naturality)
+- 07:44 L: merged deliver/H1/lem-sc-affine-weakass-nonzerodivisors (stage 2; reviewer FIX; first push; Sheaf.RingTheory.WeakAssZeroDivisors Ideal.zeroDivisors_eq_iUnion_weakAss; new nodes: def-sc-weakly-associated-primes)

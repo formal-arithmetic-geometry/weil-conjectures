@@ -1,0 +1,104 @@
+{
+ "id": "def-sc-weakly-associated-primes",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-hilbert-polynomial",
+   "place": "statement: the set WeakAss(A) of primes minimal over annihilators of elements",
+   "via": [
+    "lem-sc-affine-weakass-nonzerodivisors",
+    "lem-sc-meromorphic-weakass-generic-product",
+    "lem-sc-meromorphic-sheaf-generic-product",
+    "lem-sc-regular-meromorphic-section-exists"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "definition",
+ "title": "Weakly associated prime ideals",
+ "status": "split",
+ "statement": "Let $A$ be a commutative ring [def-weil-affine-spectrum]. The set $\\operatorname{WeakAss}(A)$ consists of the prime ideals $\\mathfrak p$ of $A$ for which some $x\\in A$ has $\\mathfrak p$ minimal among prime ideals containing $\\operatorname{Ann}(x)=\\{a\\in A : ax=0\\}$.",
+ "stmt_deps": [
+  "def-weil-affine-spectrum"
+ ],
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Definition 10.66.1, tag 0547"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "weakly associated primes of a commutative ring detect zero divisors",
+   "results": "8 hits: biUnion_associatedPrimes_eq_compl_nonZeroDivisors, biUnion_associatedPrimes_eq_zero_divisors, IsAssociatedPrime.isPrime, AssociatePrimes.mem_iff, Ideal.disjoint_nonZeroDivisors_of_mem_minimalPrimes, associatedPrimes, IsAssociatedPrime, biUnion_associatedPrimes_eq_compl_regular",
+   "date": "2026-10-11",
+   "verdict": "no exact match; associated primes require Noetherianity"
+  },
+  {
+   "tool": "loogle",
+   "query": "WeakAss, Ideal.IsMinimalPrime",
+   "results": "0 hits: . loogle: unknown identifier 'WeakAss'",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "WeakAss|weakly associated",
+   "results": "0 hits: ",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "weakly associated primes minimal over annihilator of an element",
+   "results": "0 hits: . service unavailable: Internal Server Error",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sc-affine-weakass-nonzerodivisors",
+  "date": "2026-10-11",
+  "group": "H1"
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-def-av-ample-degree",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.WeaklyAssociated",
+  "declaration": "Ideal.WeakAss",
+  "file": "lean/Sheaf/RingTheory/WeaklyAssociated.lean",
+  "statement": "def WeakAss (A : Type u) [CommRing A] : Set (Ideal A)",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-wnz0955",
+  "group": "H1",
+  "result": "fix",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-wnz0955",
+  "group": "H1",
+  "result": "fix",
+  "note": "CommRing A only (no Noetherian/nontrivial); WeakAss = primes in ((⊥ : Submodule A A).colon {x}).minimalPrimes for some x (refit from span-annihilator/IsMinimalPrime to the C1/F1 colon form); zero-divisors {a | ∃ b ≠ 0, a*b=0} = ⋃ WeakAss; nonZeroDivisors A = complement; zero ring and x=0 edge cases"
+ }
+}
