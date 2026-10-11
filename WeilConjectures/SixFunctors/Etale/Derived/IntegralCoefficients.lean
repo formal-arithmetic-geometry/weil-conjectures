@@ -333,35 +333,30 @@ theorem NormalizedTower.isDerivedBaseChange_of_isHomotopyLimit (M : NormalizedTo
       DerivedCategory.derivedComplete X.smallEtaleTopology I c.pt :=
   sorry
 
-include hϖ hI in
 /-- Blueprint `rem-sf-tower-shapes-occurring`: Tower shapes that occur.
 
 1. The derived reductions `K_n = K ⊗ᴸ_Λ Λ ⧸ Iⁿ⁺¹` of any `K ∈ D(X_ét, Λ)` form a normalized
    tower (`AlgebraicGeometry.Etale.NormalizedTower.ofIsDerivedBaseChange`).
-2. Conversely, a normalized tower is the tower of reductions of its derived limit, which is
-   derived complete (`lem-coef-normalized-dvr-effectivity`); no common stratification or lisse
-   local model is needed.
-3. Membership in `Dᵇc(X, Λ)` is derived completeness together with finite-level
+2. Membership in `Dᵇc(X, Λ)` is derived completeness together with finite-level
    constructibility of the reductions and a uniform Tor bound.
 
 The common Tor interval of the reductions of an integral object is
-`lem-coef-integral-residue-tor`, and the compact-support and exceptional versions are
-`prop-coef-integral-exceptional-adjoint`. -/
-theorem exists_normalizedTower_and_effective :
+`lem-coef-integral-residue-tor`. The converse, that a normalized tower is the tower of
+reductions of its derived limit, is the separate effectivity theorem
+`AlgebraicGeometry.Etale.NormalizedTower.isDerivedBaseChange_of_isHomotopyLimit`
+(`lem-coef-normalized-dvr-effectivity`), which the remark cites; the compact-support and
+exceptional versions are `prop-coef-integral-exceptional-adjoint`. -/
+theorem exists_normalizedTower_and_boundedConstructibleIntegral_iff :
     (∀ (K : 𝐃(X, Λ)) (Kn : ∀ n : ℕ, 𝐃(X, Λ ⧸ I ^ (n + 1)))
       (η : ∀ n : ℕ, K ⟶ (derivedRestrictScalars (Ideal.Quotient.mk (I ^ (n + 1))) X).obj (Kn n)),
       (∀ n : ℕ, IsDerivedBaseChange (η n)) → ∃ M : NormalizedTower I X, M.obj = Kn) ∧
-    (∀ (M : NormalizedTower I X) (c : Cone M.restrict), Pretriangulated.IsHomotopyLimit c →
-      (∀ n : ℕ, IsDerivedBaseChange (φ := Ideal.Quotient.mk (I ^ (n + 1))) (c.π.app (op n))) ∧
-        DerivedCategory.derivedComplete X.smallEtaleTopology I c.pt) ∧
     ∀ K : 𝐃(X, Λ), DerivedCategory.boundedConstructibleIntegral I X K ↔
       DerivedCategory.derivedComplete X.smallEtaleTopology I K ∧ ∃ a b : ℤ, ∀ n : ℕ,
         DerivedCategory.boundedConstructible (ModuleCat.{u + 1} Λ) X
             ((reductionModIdeal Λ X (I ^ (n + 1))).obj K) ∧
           DerivedCategory.torAmplitudeIn (ModuleCat.{u + 1} Λ) X a b
             ((reductionModIdeal Λ X (I ^ (n + 1))).obj K) :=
-  ⟨fun _ Kn η hη ↦ ⟨NormalizedTower.ofIsDerivedBaseChange Kn η hη, rfl⟩,
-    fun M _ hc ↦ M.isDerivedBaseChange_of_isHomotopyLimit hϖ hI hc, fun _ ↦ Iff.rfl⟩
+  ⟨fun _ Kn η hη ↦ ⟨NormalizedTower.ofIsDerivedBaseChange Kn η hη, rfl⟩, fun _ ↦ Iff.rfl⟩
 
 end Tower
 
@@ -428,7 +423,7 @@ theorem preservationMatrix_integral {X Y : Scheme.{u}}
     fun _ hL _ hc ↦
       have h := boundedConstructibleIntegral_exceptionalAdjoint I hϖ hI aX aY f hf hL hc
       ⟨h.1.1, h.2.1⟩,
-    (exists_normalizedTower_and_effective hϖ hI).1,
+    (exists_normalizedTower_and_boundedConstructibleIntegral_iff (I := I) (X := X)).1,
     fun M _ hc ↦ M.isDerivedBaseChange_of_isHomotopyLimit hϖ hI hc⟩
 
 end Matrix
