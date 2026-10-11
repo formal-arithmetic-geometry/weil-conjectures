@@ -28,7 +28,7 @@ map `Γ(Y, G) ⟶ Γ(X, f^* G)` on global sections, and shows that it is an isom
 
 universe u' u
 
-open CategoryTheory Limits Opposite
+open CategoryTheory Limits Opposite Abelian
 
 namespace AlgebraicGeometry.Etale
 
@@ -85,5 +85,50 @@ lemma isIso_terminal_hom (X : Scheme.{u}) : IsIso (⊤_ X.Etale).hom := by
     (Category.comp_id _).symm.trans (MorphismProperty.Over.w e.hom)
   rw [← h]
   exact this
+
+/-- In degree zero the comparison map `AlgebraicGeometry.Etale.cohomologyMap` on étale
+cohomology is bijective if and only if the pullback map on global sections
+`AlgebraicGeometry.Etale.globalSectionsUpperStarMap` is an isomorphism: under
+`H⁰(Y, G) ≅ Hom(ℤ_Y, G)` and `ℤ_X ≅ f^* ℤ_Y`, the comparison map becomes postcomposition with
+the unit `G ⟶ f_* f^* G` of `f^* ⊣ f_*` followed by bijections, and under
+`Hom(ℤ_Y, -) ≅ Γ(Y, -)` this postcomposition is the unit on global sections. -/
+lemma bijective_cohomologyMap_zero_iff {X Y : Scheme.{u}} (f : X ⟶ Y)
+    (G : Sheaf Y.smallEtaleTopology AddCommGrpCat.{u + 1}) :
+    Function.Bijective (cohomologyMap f G 0) ↔
+      IsIso (globalSectionsUpperStarMap AddCommGrpCat.{u + 1} f G) := by
+  let adj := upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} f
+  let η : G ⟶ (f)_*[AddCommGrpCat.{u + 1}].obj ((f)^*[AddCommGrpCat.{u + 1}].obj G) :=
+    adj.unit.app G
+  let ι := (upperStarConstantSheafIso AddCommGrpCat.{u + 1} f).app
+    (AddCommGrpCat.of (ULift ℤ))
+  let Ψ : Sheaf.H ((f)_*[AddCommGrpCat.{u + 1}].obj ((f)^*[AddCommGrpCat.{u + 1}].obj G)) 0 →
+      Sheaf.H ((f)^*[AddCommGrpCat.{u + 1}].obj G) 0 :=
+    fun y ↦ Ext.mk₀ (ι.inv ≫ (adj.homEquiv _ _).symm (Ext.addEquiv₀ y))
+  have hι : Function.Bijective (fun g : _ ⟶ (f)^*[AddCommGrpCat.{u + 1}].obj G ↦ ι.inv ≫ g) :=
+    ⟨fun a b h ↦ (cancel_epi ι.inv).1 h, fun g ↦ ⟨ι.hom ≫ g, by simp⟩⟩
+  have hΨ : Function.Bijective Ψ :=
+    (Ext.mk₀_bijective _ _).comp (hι.comp
+      ((adj.homEquiv _ _).symm.bijective.comp Ext.addEquiv₀.bijective))
+  let e := Sheaf.H.equiv₀ G (terminalIsTerminal (C := Y.Etale))
+  let e' := Sheaf.H.equiv₀ ((f)_*[AddCommGrpCat.{u + 1}].obj
+    ((f)^*[AddCommGrpCat.{u + 1}].obj G)) (terminalIsTerminal (C := Y.Etale))
+  have hfac : (cohomologyMap f G 0 : _ → _) =
+      Ψ ∘ e'.symm ∘ η.hom.app (op (⊤_ Y.Etale)) ∘ e := by
+    funext x
+    obtain ⟨a, rfl⟩ := (Ext.mk₀_bijective _ _).2 x
+    have h₁ : e'.symm (η.hom.app (op (⊤_ Y.Etale)) (e (Ext.mk₀ a))) =
+        Sheaf.H.map η 0 (Ext.mk₀ a) := by
+      rw [show e (Ext.mk₀ a) = Sheaf.H.equiv₀ G terminalIsTerminal (Ext.mk₀ a) from rfl,
+        Sheaf.H.equiv₀_naturality]
+      exact e'.symm_apply_apply _
+    simp only [Function.comp_apply, h₁, Ψ, cohomologyMap_apply,
+      Ext.mapExactFunctor_mk₀, Ext.mk₀_comp_mk₀]
+    congr 1
+    rw [Sheaf.H.addEquiv₀_map, ← Ext.addEquiv₀_symm_apply, AddEquiv.apply_symm_apply]
+    simp [ι, adj, η, Adjunction.homEquiv_counit]
+  rw [hfac, Function.Bijective.of_comp_iff' hΨ, Function.Bijective.of_comp_iff' e'.symm.bijective,
+    Function.Bijective.of_comp_iff _ e.bijective, globalSectionsUpperStarMap,
+    isIso_comp_left_iff, isIso_comp_right_iff, ConcreteCategory.isIso_iff_bijective]
+  rfl
 
 end AlgebraicGeometry.Etale
