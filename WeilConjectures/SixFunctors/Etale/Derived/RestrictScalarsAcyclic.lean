@@ -5,6 +5,7 @@ Authors: Claude
 -/
 module
 
+public import Mathlib.Algebra.Category.ModuleCat.FilteredColimits
 public import WeilConjectures.CategoryTheory.Abelian.RightDerived.Acyclic
 public import WeilConjectures.CategoryTheory.Sites.CechComplexModule
 public import WeilConjectures.SixFunctors.Etale.Derived.CoextendScalars
@@ -32,21 +33,26 @@ open CategoryTheory
 
 namespace AlgebraicGeometry.Etale
 
-set_option synthInstance.maxHeartbeats 400000 in
--- the instance `WEqualsLocallyBijective` on the small étale site takes long to synthesize
+
 /-- The restriction of scalars along `φ : Λ →+* Λ'` of an injective étale sheaf of `Λ'`-modules
 on `T` is acyclic for the direct image `g_*` on étale sheaves of `Λ`-modules. -/
 theorem rightAcyclic_lowerStar_restrictScalars_obj_of_injective
     {Λ Λ' : Type (u + 1)} [CommRing Λ] [CommRing Λ'] (φ : Λ →+* Λ') {T S : Scheme.{u}}
     (g : T ⟶ S) (I : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ')) [Injective I] :
     ((g)_*[ModuleCat.{u + 1} Λ]).rightAcyclic
-      ((Sheaf.restrictScalars T.smallEtaleTopology φ).obj I) :=
-  Functor.rightAcyclic_of_epi_map_g ((g)_*[ModuleCat.{u + 1} Λ])
+      ((Sheaf.restrictScalars T.smallEtaleTopology φ).obj I) := by
+  -- the underlying abelian presheaf does not see the change of rings
+  let e : ((Sheaf.restrictScalars T.smallEtaleTopology φ).obj I).obj ⋙
+      forget₂ _ AddCommGrpCat ≅ I.obj ⋙ forget₂ _ AddCommGrpCat :=
+    NatIso.ofComponents (fun _ ↦ Iso.refl _) (fun _ ↦ rfl)
+  have hI := Sheaf.isCechAcyclic_of_injective I
+  refine Functor.rightAcyclic_of_epi_map_g ((g)_*[ModuleCat.{u + 1} Λ])
     (fun A ↦ Presheaf.IsCechAcyclic T.smallEtaleTopology (A.obj ⋙ forget₂ _ AddCommGrpCat))
     (fun A _ ↦ Sheaf.isCechAcyclic_of_injective A)
     (fun _ hS h₁ h₂ ↦ Sheaf.isCechAcyclic_X₃ hS h₁ h₂)
     (fun _ hS h₁ ↦ Sheaf.epi_of_surjective_app _ fun _ ↦
-      Sheaf.surjective_app_of_isCechAcyclic hS h₁ _)
-    (Sheaf.isCechAcyclic_of_injective I)
+      Sheaf.surjective_app_of_isCechAcyclic hS h₁ _) ?_
+  intro V ι U hU q
+  exact Presheaf.exactAt_cechComplex_of_retract U e.hom e.inv e.hom_inv_id q (hI V ι U hU q)
 
 end AlgebraicGeometry.Etale

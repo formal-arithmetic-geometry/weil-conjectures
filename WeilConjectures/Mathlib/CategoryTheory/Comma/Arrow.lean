@@ -39,6 +39,17 @@ def isoMapApp {D E : Type*} [Category* D] [Category* E] {P Q : C ⥤ D} (α : P 
     simp only [Arrow.mk_left, Arrow.mk_right, Functor.mapIso_hom, Arrow.mk_hom, ← H.map_comp,
       α.naturality])
 
+/-- If `f₁ ≫ δ = a ≫ m ≫ b` and a functor `H` sends `f₁`, `a` and `b` to isomorphisms, then
+the arrows `H δ` and `H m` are isomorphic. -/
+noncomputable def isoOfFac {D E : Type*} [Category* D] [Category* E] (H : D ⥤ E)
+    {P₀ P P' Q Q' : D} (δ : P ⟶ Q) (m : P' ⟶ Q') (f₁ : P₀ ⟶ P) (a : P₀ ⟶ P') (b : Q' ⟶ Q)
+    (w : f₁ ≫ δ = a ≫ m ≫ b) [IsIso (H.map f₁)] [IsIso (H.map a)] [IsIso (H.map b)] :
+    Arrow.mk (H.map δ) ≅ Arrow.mk (H.map m) :=
+  Arrow.isoMk ((asIso (H.map f₁)).symm ≪≫ asIso (H.map a)) (asIso (H.map b)).symm (by
+    simp only [Arrow.mk_left, Arrow.mk_right, Iso.trans_hom, Iso.symm_hom, asIso_inv,
+      asIso_hom, Arrow.mk_hom, Category.assoc, IsIso.inv_comp_eq, IsIso.eq_comp_inv,
+      ← H.map_comp, w])
+
 /-- The component of a whiskered natural transformation `E ◁ (α ▷ H)` at `x` is, as an arrow,
 `H (α_{E x})`. Stated for abstract functors, this identification is checked syntactically
 when the functors are instantiated. -/

@@ -10,6 +10,10 @@ public import WeilConjectures.AlgebraicGeometry.Morphisms.SlicingFlat
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.LocallyBijective
 public import WeilConjectures.SixFunctors.BaseChange.Square
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Defs
+public import WeilConjectures.SixFunctors.BaseChange.DerivedComparison
+public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusHomologyZero
+public import WeilConjectures.Mathlib.Algebra.Homology.SingleHomology
+public import WeilConjectures.Mathlib.CategoryTheory.Comma.Arrow
 
 /-!
 # Degree-zero flat base change
@@ -318,8 +322,39 @@ of the derived adjunctions restrict in degree zero to those of the underived adj
 theorem Etale.nonempty_arrowIso_baseChangeHomologyMap_zero (sq : IsPullback e h g p)
     (F : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :
     Nonempty (Arrow.mk (Etale.baseChangeHomologyMap Λ sq 0 F) ≅
-      Arrow.mk ((Etale.baseChangeMap _ sq.toCommSq).app F)) :=
-  sorry
+      Arrow.mk ((Etale.baseChangeMap _ sq.toCommSq).app F)) := by
+  rw [Etale.baseChangeHomologyMap, Etale.baseChangeHomologyNatTrans_eq,
+    Arrow.mk_whiskerLeft_whiskerRight_app, Etale.baseChange_eq_derivedBaseChangeMapPlus]
+  let A := ModuleCat.{u + 1} Λ
+  let K₀ : CochainComplex.Plus (Sheaf T.smallEtaleTopology A) :=
+    ⟨(CochainComplex.singleFunctor _ 0).obj F, 0, inferInstance⟩
+  let Kh := (HomotopyCategory.Plus.quotient _).obj K₀
+  let e₀ : (DerivedCategory.Plus.singleFunctor _ 0).obj F ≅ DerivedCategory.Plus.Qh.obj Kh :=
+    DerivedCategory.Plus.ι.preimageIso ((DerivedCategory.singleFunctorIsoCompQ _ 0).app F ≪≫
+      (DerivedCategory.quotientCompQhIso (Sheaf T.smallEtaleTopology A)).symm.app
+        ((CochainComplex.singleFunctor _ 0).obj F))
+  let H := DerivedCategory.Plus.homologyFunctor (Sheaf X.smallEtaleTopology A) 0
+  have : K₀.obj.IsStrictlyGE 0 := (inferInstance :
+    ((CochainComplex.singleFunctor (Sheaf T.smallEtaleTopology A) 0).obj F).IsStrictlyGE 0)
+  have : ((e)^*[A].mapCochainComplexPlus.obj K₀).obj.IsStrictlyGE 0 :=
+    inferInstanceAs (CochainComplex.IsStrictlyGE
+      (((e)^*[A].mapHomologicalComplex _).obj K₀.obj) 0)
+  have h₁ : IsIso (H.map (((p)^*[A]).mapDerivedCategoryPlus.map
+      (((g)_*[A]).rightDerivedFunctorPlusUnit.app Kh))) := by
+    have := ((g)_*[A]).isIso_homologyFunctor_zero_map_rightDerivedFunctorPlusUnit_app K₀
+    exact (NatIso.isIso_map_iff (((p)^*[A]).mapDerivedCategoryPlusHomologyFunctorIso 0) _).1
+      (inferInstanceAs (IsIso ((p)^*[A].map _)))
+  have h₂ : IsIso (H.map (((h)_*[A]).rightDerivedFunctorPlusUnit.app
+      (((e)^*[A]).mapHomotopyCategoryPlus.obj Kh) ≫ ((h)_*[A]).rightDerivedFunctorPlus.map
+        ((((e)^*[A]).mapDerivedCategoryPlusFactorsh).inv.app Kh))) := by
+    rw [H.map_comp]
+    have := ((h)_*[A]).isIso_homologyFunctor_zero_map_rightDerivedFunctorPlusUnit_app
+      ((e)^*[A].mapCochainComplexPlus.obj K₀)
+    exact @IsIso.comp_isIso _ _ _ _ _ _ _ this (by infer_instance)
+  exact ⟨Arrow.isoMapApp _ H e₀ ≪≫
+    Arrow.isoOfFac H _ _ _ _ _ (Etale.derivedBaseChangeMapPlus_fac_app A sq.toCommSq Kh) ≪≫
+    NatTrans.homologyFunctorMapQhMapArrowIso _ K₀ 0 ≪≫
+    NatTrans.homologyMapMapHomologicalComplexSingleArrowIso _ F⟩
 
 end DegreeZero
 

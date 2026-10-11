@@ -142,8 +142,9 @@ theorem bijective_mk₀_comp_mapExactFunctor [EnoughInjectives C] (E : C ⥤ D) 
           rw [mapExactFunctor_comp, mapExactFunctor_mk₀, comp_assoc_of_third_deg_zero])
         (by
           ext x
-          simp only [AddMonoidHom.coe_comp, Function.comp_apply, AddMonoidHom.flip_apply,
-            bilinearComp_apply_apply, hc]
+          change ((mk₀ e).comp (x.mapExactFunctor E) (zero_add n)).comp
+              (hT.map_of_exact E).extClass rfl =
+            (mk₀ e).comp ((x.comp hT.extClass rfl).mapExactFunctor E) (zero_add (n + 1))
           rw [mapExactFunctor_comp, mapExactFunctor_extClass,
             comp_assoc _ _ _ (zero_add n) rfl (by omega)])
         ((ShortComplex.ab_exact_iff_function_exact _).mp

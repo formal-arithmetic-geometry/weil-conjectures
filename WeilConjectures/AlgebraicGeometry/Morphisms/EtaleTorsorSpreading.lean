@@ -10,7 +10,8 @@ public import Mathlib.AlgebraicGeometry.Geometrically.Connected
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
 public import WeilConjectures.AlgebraicGeometry.Morphisms.EtaleTorsor
-public import WeilConjectures.AlgebraicGeometry.Morphisms.EtaleTorsorSpreading.GenericFibre
+public import WeilConjectures.AlgebraicGeometry.Morphisms.EtaleTorsorSpreading.Limit
+public import WeilConjectures.AlgebraicGeometry.Morphisms.EtaleTorsorSpreading.Noetherian
 
 /-!
 # Spreading a finite étale Galois cover out from the generic fibre
@@ -47,8 +48,10 @@ Normality of `S` is spelled out as integral closedness of all the stalks, there 
 Stacks `0EZJ` itself, for an arbitrary finite group `G`, is recorded as
 `AlgebraicGeometry.Scheme.GaloisCover.exists_isPullback_of_genericFibre`, for Galois covers in
 the sense of `AlgebraicGeometry.Scheme.GaloisCover` (finite étale `G`-torsors, following the
-blueprint definition `def-sbc-normal-dominant-galois`). It is a classical input whose proof
-(tame ramification, purity, and extension in depth two) is not formalised here. Only the
+blueprint definition `def-sbc-normal-dominant-galois`). The extension is the relative
+normalization of `C` in the cover; its proof is assembled in the files
+`WeilConjectures.AlgebraicGeometry.Morphisms.EtaleTorsorSpreading.*` from separately stated
+steps (limit reduction, generic point, trait case, depth at least two). Only the
 abelian case is used by smooth base change; it is the statement
 `AlgebraicGeometry.Scheme.EtaleTorsor.exists_isPullback_of_genericFibre` about `M`-torsors,
 deduced by viewing an `M`-torsor as a Galois cover with group `Multiplicative M`.
@@ -83,12 +86,15 @@ space `Z.P ⟶ C_η` of the Galois cover is the restriction to the generic fibre
 `C`-scheme `p : Y ⟶ C`, that is, there is `ψ : Z.P ⟶ Y` making the square over `j : C_η ⟶ C`
 cartesian.
 
-Equivalently, the relative normalization of `C` in `Z.P` is étale over `C`. This is the
-mathematical content of [Stacks 0EZJ]; its proof (limit reduction to a Noetherian base, the
-trait case through tame ramification and Abhyankar's lemma, purity across a regular divisor,
-and the extension over a base of depth at least two through the formal neighbourhood of the
-section) is not formalised. The equivariance and torsor structure of the extension are then
-formal: `AlgebraicGeometry.Scheme.GaloisCover.exists_of_isPullback_isFinite_etale`. -/
+The extension is the relative normalization of `C` in `Z.P`. The statement is reduced to a
+Noetherian base by a limit argument
+(`AlgebraicGeometry.Scheme.SpreadingDatum.exists_isFinite_etale_isPullback_of_isNoetherian`),
+where it is [Stacks 0EYJ]
+(`AlgebraicGeometry.Scheme.SpreadingDatum.exists_isFinite_etale_isPullback`): an induction over
+the points of the base through the trait case (tame ramification, Abhyankar's lemma and purity)
+and the case of depth at least two (the formal neighbourhood of the section). The equivariance
+and torsor structure of the extension are then formal:
+`AlgebraicGeometry.Scheme.GaloisCover.exists_of_isPullback_isFinite_etale`. -/
 @[stacks 0EZJ]
 theorem GaloisCover.exists_isFinite_etale_isPullback_of_genericFibre {S C : Scheme.{u}}
     [CompactSpace S] [QuasiSeparatedSpace S] [IsIntegral S]
@@ -104,7 +110,11 @@ theorem GaloisCover.exists_isFinite_etale_isPullback_of_genericFibre {S C : Sche
     (Z : GaloisCover G Cη) (hZ : ∃ z : Spec S.functionField ⟶ Z.P, z ≫ Z.π = sη) :
     ∃ (Y : Scheme.{u}) (p : Y ⟶ C) (_ : IsFinite p) (_ : Etale p) (ψ : Z.P ⟶ Y),
       IsPullback ψ Z.π p j :=
-  sorry
+  SpreadingDatum.exists_isFinite_etale_isPullback_of_isNoetherian
+    (fun D _ ↦ D.exists_isFinite_etale_isPullback)
+    { S := S, isIntegrallyClosed_stalk := hS, C := C, c := c, σ := σ, σ_c := hσ,
+      isUnit_card := hG, Cη := Cη, q := q, j := j, isPullback := hCη, sη := sη, sη_q := hsq,
+      sη_j := hsj, Z := Z, exists_point := hZ }
 
 /-- Blueprint `sbc-thm-spreading-finite-etale-galois`: Spreading a finite étale Galois cover
 
