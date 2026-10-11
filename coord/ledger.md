@@ -3328,3 +3328,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 02:54 L: reviewers R-dsf0254 (C1 lem-pc-derived-tensor-second-factor-functor, d461d00eb) and R-ude0254 (J1 lem-sc-picard-qcoh-universal-delta-embedding, e6a3f3582) launched
 - 02:55 L: merged deliver/J1/lem-sc-picard-qcoh-universal-delta-embedding (reviewer PASS; first push; new nodes: 0)
 - 02:55 L: merged deliver/C1/lem-pc-derived-tensor-second-factor-functor (reviewer FIX; first push; new nodes: 1)
+- 02:56 L: merged by reviewers: J1 lem-sc-picard-qcoh-universal-delta-embedding (R-ude0254 PASS, 93cd051e7; second reading missed nothing but claimed a created.item change it did not make), C1 lem-pc-derived-tensor-second-factor-functor (R-dsf0254 FIX 295e0cf95: derived functor via lem-pur-left-derived-from-kflat-class as a tool use, tensor-slot swap, new node lem-pc-kflat-tensor-quasi-iso in TeX; second reading by C1 missed three faults)
