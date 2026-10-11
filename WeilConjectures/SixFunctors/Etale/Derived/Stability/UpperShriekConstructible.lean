@@ -68,12 +68,13 @@ theorem boundedConstructible_rightDerivedUpperShriek_of_smoothOfRelativeDimensio
     boundedConstructible (ModuleCat.{u + 1} Λ) X ((R(f)^![ModuleCat.{u + 1} Λ]).obj K) := by
   have : IsNoetherianRing Λ := inferInstance
   have : HasInvertibleExponent Λ X := .of_hom f
-  obtain ⟨L, _, hLs, ⟨eω⟩, htens⟩ := exists_dualizingComplex_iso_and_tensor Λ f d
+  obtain ⟨L, _, hLs, ⟨eω⟩, -⟩ := exists_dualizingComplex_iso_and_tensor Λ f d
+  obtain ⟨et⟩ := nonempty_iso_derivedTensor_leftDerivedUpperStar_obj_dualizingComplex Λ f d K
   obtain ⟨_, hLf⟩ := isConstructibleSheaf_and_flat_of_sheafFiber_iso Λ L hLs
   have hL₀ := torAmplitudeIn_singleFunctor_zero_of_flat _ L hLf
   have hMbc := boundedConstructible_tensor Λ X (boundedConstructible_leftDerivedUpperStar _ f hK)
     (DerivedCategory.boundedConstructible_singleFunctor_obj L 0) ⟨0, 0, hL₀⟩
-  exact (boundedConstructible _ X).prop_of_iso ((htens K).some.symm ≪≫
+  exact (boundedConstructible _ X).prop_of_iso (et.symm ≪≫
     ((-⊗ᴸ-(X)[ModuleCat.{u + 1} Λ]).obj _).mapIso eω ≪≫
     ((((-⊗ᴸ-(X)[ModuleCat.{u + 1} Λ]).obj _).commShiftIso (2 * d : ℤ)).app _)).symm
     ((boundedConstructible _ X).le_shift _ _ hMbc)

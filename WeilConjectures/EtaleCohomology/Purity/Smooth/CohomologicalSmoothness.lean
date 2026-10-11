@@ -9,6 +9,7 @@ public import WeilConjectures.EtaleCohomology.Purity.Smooth.Basic
 public import WeilConjectures.SixFunctors.Etale.Derived.Composition
 public import WeilConjectures.SixFunctors.Etale.Derived.EtaleLocalization
 public import WeilConjectures.SixFunctors.Etale.Derived.Stability.Basic
+public import WeilConjectures.SixFunctors.Etale.Derived.UpperShriekCanonicalMaps
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperShriekInvertible
 
 /-!
@@ -16,29 +17,40 @@ public import WeilConjectures.SixFunctors.Etale.Derived.UpperShriekInvertible
 
 A morphism `f : X ⟶ Y` admitting a compactification is *cohomologically smooth*
 (blueprint `def-pur-co-smoothness`) if its dualizing complex `ω_f = Rf^! Λ_Y` is ⊗-invertible,
-`Rf^! K ≅ Lf^* K ⊗ᴸ ω_f` for every `K ∈ D^b_{ctf}(Y, Λ)`, and the formation of `ω_f` commutes
-with arbitrary base change. This file proves the structural results of the blueprint subsection
-`sk-prop-cohsm` about this notion:
+the canonical map `θ_{f,K} : ω_f ⊗ᴸ Lf^* K ⟶ Rf^! K` is an isomorphism for every
+`K ∈ D^b_{ctf}(Y, Λ)`, and the canonical base change map `Lg'^* ω_f ⟶ ω_{f'}` is an
+isomorphism for every cartesian square. This file proves the structural results of the
+blueprint subsection `sk-prop-cohsm` about this notion:
 
 * smooth morphisms are cohomologically smooth (`thm-pur-cohomological-smoothness`), and the
   dualizing complexes of smooth morphisms are multiplicative under composition;
-* cohomologically smooth morphisms are stable under composition, with
-  `ω_{f ≫ g} ≅ ω_f ⊗ᴸ Lf^* ω_g` (`lem-pur-co-smooth-composition`);
-* étale morphisms are cohomologically smooth with `ω_u ≅ Λ`, and cohomological smoothness
-  descends along surjective étale morphisms of the source (`lem-pur-co-smooth-etale-locality`).
+* `ω_{f ≫ g} ≅ ω_f ⊗ᴸ Lf^* ω_g` for cohomologically smooth `g`, and the dualizing complex of a
+  composite of cohomologically smooth morphisms is invertible
+  (`lem-pur-co-smooth-composition`);
+* étale morphisms are cohomologically smooth with `ω_u ≅ Λ`
+  (`lem-pur-co-smooth-etale-locality`).
 
 ## Implementation notes
 
-The blueprint asks for the *canonical* maps — the mate `θ_{f,K}` of the projection formula and
-the base change map `Lg'^* ω_f ⟶ ω_{f'}` — to be isomorphisms. Neither map, nor the canonical
-composition isomorphism `R(f ≫ g)^! ≅ Rf^! ⋙ Rg^!` of which the blueprint's proofs make use, is
-available in the library (`AlgebraicGeometry.Etale.nonempty_iso_rightDerivedUpperShriek_comp`
-records its existence only). As for the statements of `sk-prop-cohsm` in
-`WeilConjectures.EtaleCohomology.Purity.Smooth.Basic`, the definition records the existence of
-the isomorphisms.
+The canonical maps are `AlgebraicGeometry.Etale.dualizingComplexTensorMap` and
+`AlgebraicGeometry.Etale.dualizingComplexBaseChangeMap`. The base change map is the mate of the
+compact-support base change `Ex_!`, which is only constructed for a quasi-compact base change
+`f'`; the third clause of the definition is asked for such squares.
 
-The composition law needs no tensor formula for the base change: an invertible tensor factor
-passes through every `Rf^!`
+The composition law for the canonical maps (`lem-pur-co-smooth-composition`) and their descent
+along surjective étale maps (`lem-pur-co-smooth-etale-locality`) compare the canonical maps of
+`f`, `g` and `f ≫ g`. This needs a canonical composition isomorphism
+`R(f ≫ g)_! ≅ Rf_! ⋙ Rg_!` compatible with the projection maps and with `Ex_!`
+(`sk-thm-sf-comp-composition`, `sk-prop-sf-pf-coherence`), and, for descent, the canonical
+étale localization `Lu^* Rf^! ≅ R(u ≫ f)^!` (`lem-amb-etale-adjoint-locality`), the mate of the
+composition isomorphism with `Ru_! ⊣ Lu^*`. None of these is available in the library: even
+the existence of a composition isomorphism for `R_!`
+(`AlgebraicGeometry.Etale.nonempty_iso_rightDerivedLowerShriek_comp`) is not proved there, and
+the extension by zero `u_!` along an étale `u` that is not an open immersion is not defined.
+These parts are left as `sorry`.
+
+The invertibility of `ω_{f ≫ g}` needs no canonical map: an invertible tensor factor passes
+through every `Rf^!`
 (`AlgebraicGeometry.Etale.nonempty_iso_rightDerivedUpperShriek_comp_derivedTensorRight`), so
 `ω_{f ≫ g} ≅ Rf^! ω_g ≅ ω_f ⊗ᴸ Lf^* ω_g` as soon as `ω_g` is invertible.
 
@@ -49,7 +61,7 @@ passes through every `Rf^!`
 ## Main statements
 
 - `AlgebraicGeometry.Etale.isCohomologicallySmooth_of_smoothOfRelativeDimension`
-- `AlgebraicGeometry.Etale.nonempty_iso_leftDerivedUpperStar_obj_rightDerivedUpperShriek_obj`
+- `AlgebraicGeometry.Etale.isIso_rightDerivedUpperShriekBaseChangeMap_app`
 - `AlgebraicGeometry.Etale.IsCohomologicallySmooth.comp`,
   `AlgebraicGeometry.Etale.IsCohomologicallySmooth.nonempty_iso_dualizingComplex_comp`
 - `AlgebraicGeometry.Etale.isCohomologicallySmooth_of_etale`,
@@ -76,7 +88,9 @@ variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
 
 A morphism `f : X ⟶ Y` admitting a compactification is *cohomologically smooth* if
 1. its dualizing complex `ω_f = Rf^! Λ_Y` is ⊗-invertible;
-2. for every `K ∈ D^b_{ctf}(Y, Λ)`, `Lf^* K ⊗ᴸ ω_f ≅ Rf^! K`;
+2. for every `K ∈ D^b_{ctf}(Y, Λ)`, the canonical map `θ_{f,K} : ω_f ⊗ᴸ Lf^* K ⟶ Rf^! K`
+   (`AlgebraicGeometry.Etale.dualizingComplexTensorMap`, the mate of the projection formula) is
+   an isomorphism;
 3. for every cartesian square
    ```
      X' --g'--> X
@@ -85,25 +99,37 @@ A morphism `f : X ⟶ Y` admitting a compactification is *cohomologically smooth
      ↓          ↓
      Y' --g---> Y
    ```
-   with `f'` admitting a compactification, `Lg'^* ω_f ≅ ω_{f'}`.
+   with `f'` quasi-compact and admitting a compactification, the canonical base change map
+   `Lg'^* ω_f ⟶ ω_{f'}` (`AlgebraicGeometry.Etale.dualizingComplexBaseChangeMap`) is an
+   isomorphism.
 
-The blueprint asks for the canonical maps (the mate of the projection formula, the base change
-map) to be isomorphisms; they are not available in the library, and the existence of
-isomorphisms is recorded instead (see the module docstring). -/
+The blueprint asks for clause 3 for every cartesian square; the base change map, the mate of the
+compact-support base change `Ex_!`, is only constructed for quasi-compact `f'`. The blueprint
+writes the tensor factors of clause 2 in the other order. -/
 structure IsCohomologicallySmooth {X Y : Scheme.{u}} (f : X ⟶ Y) [HasCompactification f] :
     Prop where
   isInvertible_dualizingComplex :
     DerivedCategory.isInvertible Λ X (dualizingComplex (ModuleCat.{u + 1} Λ) f)
-  nonempty_iso_rightDerivedUpperShriek_obj
+  isIso_dualizingComplexTensorMap
+    (K : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
+    (hK : DerivedCategory.boundedConstructibleFiniteTor Λ Y K) :
+    IsIso (dualizingComplexTensorMap Λ f K)
+  isIso_dualizingComplexBaseChangeMap {X' Y' : Scheme.{u}} {g : Y' ⟶ Y} {f' : X' ⟶ Y'}
+    {g' : X' ⟶ X} (sq : IsPullback g' f' f g) [HasCompactification f'] [QuasiCompact f'] :
+    IsIso (dualizingComplexBaseChangeMap Λ sq)
+
+variable {Λ} in
+/-- The tensor formula of a cohomologically smooth morphism: `ω_f ⊗ᴸ Lf^* K ≅ Rf^! K` for
+`K ∈ D^b_{ctf}(Y, Λ)`, by the canonical map. -/
+theorem IsCohomologicallySmooth.nonempty_iso_rightDerivedUpperShriek_obj {X Y : Scheme.{u}}
+    {f : X ⟶ Y} [HasCompactification f] (hf : IsCohomologicallySmooth Λ f)
     (K : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
     (hK : DerivedCategory.boundedConstructibleFiniteTor Λ Y K) :
     Nonempty (((derivedTensor (ModuleCat.{u + 1} Λ) X).obj
-        ((L((f)^*[ModuleCat.{u + 1} Λ])).obj K)).obj (dualizingComplex (ModuleCat.{u + 1} Λ) f) ≅
-      (R(f)^![ModuleCat.{u + 1} Λ]).obj K)
-  nonempty_iso_dualizingComplex_of_isPullback {X' Y' : Scheme.{u}} {g : Y' ⟶ Y}
-    {f' : X' ⟶ Y'} {g' : X' ⟶ X} (sq : IsPullback g' f' f g) [HasCompactification f'] :
-    Nonempty ((L((g')^*[ModuleCat.{u + 1} Λ])).obj (dualizingComplex (ModuleCat.{u + 1} Λ) f) ≅
-      dualizingComplex (ModuleCat.{u + 1} Λ) f')
+        (dualizingComplex (ModuleCat.{u + 1} Λ) f)).obj ((L((f)^*[ModuleCat.{u + 1} Λ])).obj K) ≅
+      (R(f)^![ModuleCat.{u + 1} Λ]).obj K) :=
+  have := hf.isIso_dualizingComplexTensorMap K hK
+  ⟨asIso (dualizingComplexTensorMap Λ f K)⟩
 
 omit [Finite Λ] in
 /-- The unit `Λ_X` of `D(X_ét, Λ)` is invertible. -/
@@ -138,7 +164,7 @@ variable {Λ}
 
 /-- Blueprint `lem-pur-co-smooth-composition`: Composition.
 
-For cohomologically smooth `f : X ⟶ Y` and `g : Y ⟶ Z`,
+For cohomologically smooth `g : Y ⟶ Z` and any `f : X ⟶ Y` admitting a compactification,
 `ω_{f ≫ g} ≅ ω_f ⊗ᴸ Lf^* ω_g`. -/
 theorem IsCohomologicallySmooth.nonempty_iso_dualizingComplex_comp {X Y Z : Scheme.{u}}
     {f : X ⟶ Y} {g : Y ⟶ Z} [HasCompactification f] [HasCompactification g]
@@ -150,53 +176,36 @@ theorem IsCohomologicallySmooth.nonempty_iso_dualizingComplex_comp {X Y Z : Sche
 
 /-- Blueprint `lem-pur-co-smooth-composition`: Composition.
 
+If `f : X ⟶ Y` and `g : Y ⟶ Z` are cohomologically smooth, the dualizing complex
+`ω_{f ≫ g} ≅ ω_f ⊗ᴸ Lf^* ω_g` of `f ≫ g` is invertible, as a tensor product of invertible
+objects. -/
+theorem IsCohomologicallySmooth.isInvertible_dualizingComplex_comp {X Y Z : Scheme.{u}}
+    {f : X ⟶ Y} {g : Y ⟶ Z} [HasCompactification f] [HasCompactification g]
+    [HasCompactification (f ≫ g)] (hf : IsCohomologicallySmooth Λ f)
+    (hg : IsCohomologicallySmooth Λ g) :
+    DerivedCategory.isInvertible Λ X (dualizingComplex (ModuleCat.{u + 1} Λ) (f ≫ g)) := by
+  obtain ⟨e⟩ := hg.nonempty_iso_dualizingComplex_comp (f := f)
+  exact .of_iso e.symm (hf.isInvertible_dualizingComplex.derivedTensor
+    (hg.isInvertible_dualizingComplex.leftDerivedUpperStar f))
+
+/-- Blueprint `lem-pur-co-smooth-composition`: Composition.
+
 If `f : X ⟶ Y` and `g : Y ⟶ Z` are cohomologically smooth, then so is `f ≫ g`:
-* `ω_{f ≫ g} ≅ ω_f ⊗ᴸ Lf^* ω_g` is a tensor product of invertible objects;
-* for `K ∈ D^b_{ctf}(Z, Λ)`, with `Lg^* K ∈ D^b_{ctf}(Y, Λ)`,
-  `R(f ≫ g)^! K ≅ Rf^!(Lg^* K ⊗ᴸ ω_g) ≅ Rf^!(Lg^* K) ⊗ᴸ Lf^* ω_g
-    ≅ (L(f ≫ g)^* K ⊗ᴸ ω_f) ⊗ᴸ Lf^* ω_g ≅ L(f ≫ g)^* K ⊗ᴸ ω_{f ≫ g}`;
-* a cartesian square over `f ≫ g` is the composite of a cartesian square over `f` and one over
-  `g`, and `Lg''^* ω_{f ≫ g} ≅ Lg''^* ω_f ⊗ᴸ Lg''^* Lf^* ω_g ≅ ω_{f'} ⊗ᴸ Lf'^* ω_{g'}
-  ≅ ω_{f' ≫ g'}`, the last step because `ω_{g'} ≅ Lv^* ω_g` is invertible. -/
+* `ω_{f ≫ g} ≅ ω_f ⊗ᴸ Lf^* ω_g` is invertible
+  (`AlgebraicGeometry.Etale.IsCohomologicallySmooth.isInvertible_dualizingComplex_comp`);
+* the blueprint factors `θ_{f ≫ g, K}` through `θ_{f, Lg^* K}` and `Rf^! θ_{g, K}`, and the base
+  change map of `f ≫ g` through those of `f` and `g`. Both factorizations are identities between
+  canonical maps built from a canonical composition isomorphism `R(f ≫ g)_! ≅ Rf_! ⋙ Rg_!`
+  compatible with the projection maps and with `Ex_!` (`sk-thm-sf-comp-composition`,
+  `sk-prop-sf-pf-coherence`), which is not available in the library (see the module
+  docstring); these two clauses are left as `sorry`. -/
 theorem IsCohomologicallySmooth.comp {X Y Z : Scheme.{u}} {f : X ⟶ Y} {g : Y ⟶ Z}
     [HasCompactification f] [HasCompactification g] [HasCompactification (f ≫ g)]
     (hf : IsCohomologicallySmooth Λ f) (hg : IsCohomologicallySmooth Λ g) :
     IsCohomologicallySmooth Λ (f ≫ g) where
-  isInvertible_dualizingComplex := by
-    obtain ⟨e⟩ := hg.nonempty_iso_dualizingComplex_comp (f := f)
-    exact .of_iso e.symm (hf.isInvertible_dualizingComplex.derivedTensor
-      (hg.isInvertible_dualizingComplex.leftDerivedUpperStar f))
-  nonempty_iso_rightDerivedUpperShriek_obj K hK := by
-    obtain ⟨e⟩ := hg.nonempty_iso_dualizingComplex_comp (f := f)
-    obtain ⟨c⟩ := nonempty_iso_rightDerivedUpperShriek_comp Λ f g
-    obtain ⟨t⟩ := nonempty_iso_rightDerivedUpperShriek_comp_derivedTensorRight Λ f
-      hg.isInvertible_dualizingComplex
-    obtain ⟨eg⟩ := hg.nonempty_iso_rightDerivedUpperShriek_obj K hK
-    obtain ⟨ef⟩ := hf.nonempty_iso_rightDerivedUpperShriek_obj _
-      (constructibleFiniteTor_leftDerivedUpperStar _ g hK)
-    exact ⟨((derivedTensor _ X).obj _).mapIso e ≪≫ (derivedTensorAssociator _ X _ _ _).symm ≪≫
-      ((derivedTensor _ X).flip.obj _).mapIso
-        (((derivedTensor _ X).flip.obj _).mapIso ((leftDerivedUpperStarComp _ f g).app K) ≪≫
-          ef) ≪≫
-      (t.app _).symm ≪≫ (R(f)^![ModuleCat.{u + 1} Λ]).mapIso eg ≪≫ (c.app K).symm⟩
-  nonempty_iso_dualizingComplex_of_isPullback {X' Z'} w h' g'' sq _ := by
-    have sqY := IsPullback.of_hasPullback g w
-    let f' : X' ⟶ pullback g w := pullback.lift (g'' ≫ f) h' (by rw [Category.assoc, sq.w])
-    have hcomp : f' ≫ pullback.snd g w = h' := pullback.lift_snd _ _ _
-    have sqX : IsPullback g'' f' f (pullback.fst g w) :=
-      IsPullback.of_bot (by rw [hcomp]; exact sq) (pullback.lift_fst _ _ _).symm sqY
-    have : HasCompactification f' := .of_isPullback sqX
-    have : HasCompactification (pullback.snd g w) := .of_isPullback sqY
-    obtain ⟨e⟩ := hg.nonempty_iso_dualizingComplex_comp (f := f)
-    obtain ⟨ef⟩ := hf.nonempty_iso_dualizingComplex_of_isPullback sqX
-    obtain ⟨eg⟩ := hg.nonempty_iso_dualizingComplex_of_isPullback sqY
-    obtain ⟨e'⟩ := nonempty_iso_dualizingComplex_comp_of_isInvertible Λ f' (pullback.snd g w) h'
-      hcomp (.of_iso eg (hg.isInvertible_dualizingComplex.leftDerivedUpperStar _))
-    exact ⟨(L((g'')^*[ModuleCat.{u + 1} Λ])).mapIso e ≪≫ leftDerivedUpperStarTensorIso _ g'' _ _ ≪≫
-      ((derivedTensor _ X').mapIso ef).app _ ≪≫ ((derivedTensor _ X').obj _).mapIso
-        (((leftDerivedUpperStarComp _ g'' f).app _).symm ≪≫
-          (leftDerivedUpperStarComp _ f' (pullback.fst g w) (g'' ≫ f) sqX.w).app _ ≪≫
-          (L((f')^*[ModuleCat.{u + 1} Λ])).mapIso eg) ≪≫ e'.symm⟩
+  isInvertible_dualizingComplex := hf.isInvertible_dualizingComplex_comp hg
+  isIso_dualizingComplexTensorMap K hK := sorry
+  isIso_dualizingComplexBaseChangeMap sq _ _ := sorry
 
 /-! ### Smooth morphisms -/
 
@@ -214,12 +223,28 @@ For a cartesian square
   Y' --v--> Y
 ```
 
-in which `f` is smooth of pure relative dimension `d`, `v` is arbitrary and `f'` admits a
-compactification, and every `K ∈ D^b_{ctf}(Y, Λ)`, the comparison
-`Lu^* Rf^! K ≅ Rf'^! Lv^* K` is an isomorphism. This is the component at `K` of smooth base
-change for `R^!`
-(`AlgebraicGeometry.Etale.nonempty_iso_leftDerivedUpperStar_comp_rightDerivedUpperShriek`),
+in which `f` is smooth of pure relative dimension `d`, `v` is arbitrary and `f'` is quasi-compact
+and admits a compactification, and every `K ∈ D^b_{ctf}(Y, Λ)`, the canonical comparison
+`Lu^* Rf^! K ⟶ Rf'^! Lv^* K` (`AlgebraicGeometry.Etale.rightDerivedUpperShriekBaseChangeMap`)
+is an isomorphism. This is the component at `K` of smooth base change for `R^!`
+(`AlgebraicGeometry.Etale.isIso_rightDerivedUpperShriekBaseChangeMap_of_smoothOfRelativeDimension`),
 which holds for every `K`. -/
+theorem isIso_rightDerivedUpperShriekBaseChangeMap_app
+    {X Y X' Y' : Scheme.{u}} (f : X ⟶ Y) [HasCompactification f] (d : ℕ)
+    [SmoothOfRelativeDimension d f] [HasInvertibleExponent Λ X] {v : Y' ⟶ Y} {f' : X' ⟶ Y'}
+    {u : X' ⟶ X} (sq : IsPullback u f' f v) [HasCompactification f'] [QuasiCompact f']
+    (K : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
+    (_hK : DerivedCategory.boundedConstructibleFiniteTor Λ Y K) :
+    IsIso ((rightDerivedUpperShriekBaseChangeMap Λ sq).app K) :=
+  have := isIso_rightDerivedUpperShriekBaseChangeMap_of_smoothOfRelativeDimension Λ f d sq
+  inferInstance
+
+/-- Blueprint `lem-pur-smb-extraordinary`: Smooth base change for the exceptional inverse image.
+
+The form of `AlgebraicGeometry.Etale.isIso_rightDerivedUpperShriekBaseChangeMap_app`
+for a base change `f'` that need not be quasi-compact, for which the canonical comparison is not
+constructed: `Lu^* Rf^! K ≅ Rf'^! Lv^* K`. This is the component at `K` of
+`AlgebraicGeometry.Etale.nonempty_iso_leftDerivedUpperStar_comp_rightDerivedUpperShriek`. -/
 theorem nonempty_iso_leftDerivedUpperStar_obj_rightDerivedUpperShriek_obj {X Y X' Y' : Scheme.{u}}
     (f : X ⟶ Y) [HasCompactification f] (d : ℕ) [SmoothOfRelativeDimension d f]
     [HasInvertibleExponent Λ X] {v : Y' ⟶ Y} {f' : X' ⟶ Y'} {u : X' ⟶ X}
@@ -235,22 +260,23 @@ theorem nonempty_iso_leftDerivedUpperStar_obj_rightDerivedUpperShriek_obj {X Y X
 
 A smooth morphism `f : X ⟶ Y` of pure relative dimension `d` admitting a compactification, with
 the exponent of `Λ` invertible on `X`, is cohomologically smooth: `ω_f` is invertible
-(`AlgebraicGeometry.Etale.isInvertible_dualizingComplex`), the tensor formula holds
-(`AlgebraicGeometry.Etale.nonempty_iso_rightDerivedUpperShriek_obj_derivedTensor`) and the
-formation of `ω_f` commutes with arbitrary base change, by smooth base change for `R^!`
-(`AlgebraicGeometry.Etale.nonempty_iso_leftDerivedUpperStar_comp_rightDerivedUpperShriek`).
+(`AlgebraicGeometry.Etale.isInvertible_dualizingComplex`), the canonical tensor map is an
+isomorphism
+(`AlgebraicGeometry.Etale.isIso_dualizingComplexTensorMap_of_smoothOfRelativeDimension`) and the
+canonical base change map is an isomorphism, by smooth base change for `R^!`
+(`AlgebraicGeometry.Etale.isIso_rightDerivedUpperShriekBaseChangeMap_of_smoothOfRelativeDimension`).
 The compatibility with composition is
 `AlgebraicGeometry.Etale.nonempty_iso_dualizingComplex_comp_of_smoothOfRelativeDimension`. -/
 theorem isCohomologicallySmooth_of_smoothOfRelativeDimension {X Y : Scheme.{u}} (f : X ⟶ Y)
     [HasCompactification f] (d : ℕ) [SmoothOfRelativeDimension d f]
     [HasInvertibleExponent Λ X] : IsCohomologicallySmooth Λ f where
   isInvertible_dualizingComplex := isInvertible_dualizingComplex Λ (d := d) f
-  nonempty_iso_rightDerivedUpperShriek_obj K hK :=
-    nonempty_iso_rightDerivedUpperShriek_obj_derivedTensor Λ (d := d) f K hK
-  nonempty_iso_dualizingComplex_of_isPullback {X' Y'} g f' g' sq _ := by
-    obtain ⟨e⟩ := nonempty_iso_leftDerivedUpperStar_comp_rightDerivedUpperShriek Λ (d := d) f sq
-    exact ⟨e.app (𝟙_ _) ≪≫
-      (R(f')^![ModuleCat.{u + 1} Λ]).mapIso (leftDerivedUpperStarUnitIso _ g)⟩
+  isIso_dualizingComplexTensorMap K _ :=
+    isIso_dualizingComplexTensorMap_of_smoothOfRelativeDimension Λ (d := d) f K
+  isIso_dualizingComplexBaseChangeMap sq _ _ := by
+    have := isIso_rightDerivedUpperShriekBaseChangeMap_of_smoothOfRelativeDimension Λ f d sq
+    rw [isIso_dualizingComplexBaseChangeMap_iff]
+    infer_instance
 
 /-- Blueprint `thm-pur-cohomological-smoothness`: Cohomological smoothness of smooth morphisms.
 
@@ -288,29 +314,15 @@ theorem nonempty_iso_dualizingComplex_of_etale {U X : Scheme.{u}} (u : U ⟶ X) 
 
 /-- Blueprint `lem-pur-co-smooth-etale-locality`: Source-étale locality.
 
-Every separated quasi-compact étale morphism `u` admitting a compactification is
-cohomologically smooth, with `ω_u ≅ Λ`
-(`AlgebraicGeometry.Etale.nonempty_iso_dualizingComplex_of_etale`): `Ru^! ≅ Lu^*` is preserved by
-base change, the base change of `u` being again étale. -/
+Every étale morphism `u` admitting a compactification, with the exponent of `Λ` invertible on
+`U`, is cohomologically smooth: it is smooth of relative dimension `0`
+(`AlgebraicGeometry.Etale.isCohomologicallySmooth_of_smoothOfRelativeDimension`). For separated
+quasi-compact `u`, moreover `ω_u ≅ Λ`
+(`AlgebraicGeometry.Etale.nonempty_iso_dualizingComplex_of_etale`). -/
 theorem isCohomologicallySmooth_of_etale {U X : Scheme.{u}} (u : U ⟶ X) [Etale u]
-    [IsSeparated u] [QuasiCompact u] [HasCompactification u] :
-    IsCohomologicallySmooth Λ u where
-  isInvertible_dualizingComplex := by
-    obtain ⟨e⟩ := nonempty_iso_dualizingComplex_of_etale Λ u
-    exact .of_iso e.symm (DerivedCategory.isInvertible_constantComplex Λ U)
-  nonempty_iso_rightDerivedUpperShriek_obj K _ := by
-    obtain ⟨e⟩ := nonempty_iso_dualizingComplex_of_etale Λ u
-    obtain ⟨ι⟩ := nonempty_iso_rightDerivedUpperShriek_of_etale Λ u
-    exact ⟨((derivedTensor _ U).obj _).mapIso e ≪≫ derivedTensorRightUnitor _ U _ ≪≫
-      (ι.app K).symm⟩
-  nonempty_iso_dualizingComplex_of_isPullback {U' X'} g u' g' sq _ := by
-    have : Etale u' := MorphismProperty.of_isPullback sq ‹Etale u›
-    have : IsSeparated u' := MorphismProperty.of_isPullback sq ‹IsSeparated u›
-    have : QuasiCompact u' := MorphismProperty.of_isPullback sq ‹QuasiCompact u›
-    obtain ⟨e⟩ := nonempty_iso_dualizingComplex_of_etale Λ u
-    obtain ⟨e'⟩ := nonempty_iso_dualizingComplex_of_etale Λ u'
-    exact ⟨(L((g')^*[ModuleCat.{u + 1} Λ])).mapIso e ≪≫ leftDerivedUpperStarUnitIso _ g' ≪≫
-      e'.symm⟩
+    [HasCompactification u] [HasInvertibleExponent Λ U] :
+    IsCohomologicallySmooth Λ u :=
+  isCohomologicallySmooth_of_smoothOfRelativeDimension Λ u 0
 
 variable {Λ}
 
@@ -319,34 +331,17 @@ variable {Λ}
 Let `u : U ⟶ X` be a surjective étale morphism of separated schemes of finite type and
 `f : X ⟶ Y`. If `u ≫ f` is cohomologically smooth, then so is `f`.
 
-The blueprint's argument pulls back the canonical maps of `def-pur-co-smoothness` along `u`,
-identifies them with those of `u ≫ f` and concludes by
-`AlgebraicGeometry.Etale.isIso_of_isIso_leftDerivedUpperStar_map_of_surjective`. This needs the
-canonical maps and their compatibility with the canonical identification `Lu^* Rf^! ≅ R(u ≫ f)^!`;
-neither is available in the library, and isomorphisms whose existence alone is known cannot be
-descended along `u`: objects of `D(X_ét, Λ)` that become isomorphic after `Lu^*` need not be
-isomorphic, so clauses 2 and 3 of the definition can only be descended through a morphism
-between the two sides that is defined on `X`. The routes that were tried:
-* the canonical tensor map `ω_f ⊗ᴸ Lf^* K ⟶ Rf^! K`, the adjunct of the inverse projection
-  formula followed by the counit, can be defined; but identifying `Lu^*` of it (or `Ru^!` of it,
-  `Ru^! ≅ Lu^*` being natural) with the map of `u ≫ f` needs the projection formula to be
-  compatible with the composition `R(u ≫ f)_! ≅ Rf_! ⋙ Ru_!`, which the library only records
-  objectwise (`sk-prop-sf-pf-coherence`);
-* a canonical `Lu^* Rf^! ⟶ R(u ≫ f)^!` is the adjunct of `R(u ≫ f)_! Lu^* ⟶ Rf_! Ru_! Lu^* ⟶ Rf_!`,
-  which needs a canonical composition isomorphism for `R_!` and the adjunction `Ru_! ⊣ Lu^*`
-  for an étale `u` that is not an open immersion; neither exists;
-* for clause 1 alone, invertibility descends through the evaluation `L ⊗ᴸ RHom(L, Λ) ⟶ Λ`,
-  but this needs the derived internal hom to commute with `Lu^*`, which is not available on the
-  étale site either;
-* even with all canonical maps available, the hypothesis on `u ≫ f` would only give the existence
-  of isomorphisms on `U`, not the invertibility of the canonical map of `u ≫ f`; so descent
-  needs the definition itself to be stated with canonical maps;
-* for clause 1 through the generic comparison `Functor.LaxMonoidal.ihomComparison` of `Lu^*`
-  (compatible with evaluation by `ihomComparison_ev`): it is the mate of the tensorator and is
-  invertible only if `Lu^*` satisfies a projection formula with a left adjoint `Ru_!`, known in
-  the library only for open immersions, which are never surjective étale covers in general;
-* stating the definition with the canonical maps instead makes the composition law and the
-  smooth case depend on the same missing coherences. -/
+The blueprint pulls the canonical maps of `f` back along `u`, identifies them with those of
+`u ≫ f` and concludes by
+`AlgebraicGeometry.Etale.isIso_of_isIso_leftDerivedUpperStar_map_of_surjective`. The
+identification needs the canonical étale localization `Lu^* Rf^! ≅ R(u ≫ f)^!`
+(`lem-amb-etale-adjoint-locality`), the mate of a canonical composition isomorphism
+`R(u ≫ f)_! ≅ Ru_! ⋙ Rf_!` under `Ru_! ⊣ Lu^*`, and its compatibility with the projection maps
+and with `Ex_!`. None of these is available in the library (see the module docstring), and
+the hypothesis on `u ≫ f` says nothing about `f` without such a comparison of `R(u ≫ f)^!` with
+`Rf^!`. Clause 1 alone could be descended through the evaluation `ω_f ⊗ᴸ RHom(ω_f, Λ) ⟶ Λ`, but
+this needs the *derived* internal hom to commute with `Lu^*`; only its sheaf-level form
+`AlgebraicGeometry.Etale.isIso_ihomComparison_upperStar` is available. -/
 theorem IsCohomologicallySmooth.of_comp_of_surjective {U X Y : Scheme.{u}} (u : U ⟶ X)
     [Etale u] [Surjective u] [IsSeparated u] [QuasiCompact u] (f : X ⟶ Y)
     [HasCompactification f] [HasCompactification (u ≫ f)]

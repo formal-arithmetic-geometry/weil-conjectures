@@ -139,13 +139,14 @@ theorem constructibleTorAmplitudeIn_rightDerivedUpperShriek_of_smoothOfRelativeD
       ((R(f)^![ModuleCat.{u + 1} Λ]).obj K) := by
   have : IsNoetherianRing Λ := inferInstance
   have : HasInvertibleExponent Λ X := .of_hom f
-  obtain ⟨L, _, hLs, ⟨eω⟩, htens⟩ := exists_dualizingComplex_iso_and_tensor Λ f d
+  obtain ⟨L, _, hLs, ⟨eω⟩, -⟩ := exists_dualizingComplex_iso_and_tensor Λ f d
+  obtain ⟨et⟩ := nonempty_iso_derivedTensor_leftDerivedUpperStar_obj_dualizingComplex Λ f d K
   obtain ⟨_, hLf⟩ := isConstructibleSheaf_and_flat_of_sheafFiber_iso Λ L hLs
   obtain ⟨⟨hbc, -⟩, hta⟩ := hK
   have hL₀ := torAmplitudeIn_singleFunctor_zero_of_flat _ L hLf
   have hMbc := boundedConstructible_tensor Λ X (boundedConstructible_leftDerivedUpperStar _ f hbc)
     (DerivedCategory.boundedConstructible_singleFunctor_obj L 0) ⟨0, 0, hL₀⟩
-  exact constructibleTorAmplitudeIn_of_iso_tensor_shift _ (htens K).some.symm eω
+  exact constructibleTorAmplitudeIn_of_iso_tensor_shift _ et.symm eω
     (torAmplitudeIn_leftDerivedUpperStar _ f a b hta) hL₀
     ((boundedConstructible _ X).le_shift _ _ hMbc)
 

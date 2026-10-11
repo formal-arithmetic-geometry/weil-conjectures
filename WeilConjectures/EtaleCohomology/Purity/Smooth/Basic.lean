@@ -123,8 +123,8 @@ include d in
 
 Equivalently, `Rf^!` is `Lf^*` twisted by the invertible object `ω_f` of clause (a); this is
 what turns the computation of `ω_f` into a computation of `Rf^!` on all coefficients. The
-blueprint statement is that the mate `φ_K` of the projection formula is this isomorphism. -/
--- TODO(unify): sk-prop-cohsm — state `IsIso φ_K` once the projection map is available.
+blueprint statement is that the mate `φ_K` of the projection formula is this isomorphism, which
+is `AlgebraicGeometry.Etale.isIso_dualizingComplexTensorMap_of_smoothOfRelativeDimension`. -/
 theorem nonempty_iso_rightDerivedUpperShriek_obj_derivedTensor
     (K : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
     (_hK : DerivedCategory.boundedConstructibleFiniteTor Λ Y K) :
@@ -132,6 +132,18 @@ theorem nonempty_iso_rightDerivedUpperShriek_obj_derivedTensor
         ((L((f)^*[ModuleCat.{u + 1} Λ])).obj K)).obj
           (dualizingComplex (ModuleCat.{u + 1} Λ) f) ≅
       (rightDerivedUpperShriek (ModuleCat.{u + 1} Λ) f).obj K) :=
+  nonempty_iso_derivedTensor_leftDerivedUpperStar_obj_dualizingComplex Λ f d K
+
+omit [HasTateTwist Λ] [IsSeparated f] in
+include d in
+/-- Blueprint `sk-prop-cohsm`: Cohomological smoothness
+
+*Clause (b), the tensor formula, canonical form.* For `f` smooth of pure relative dimension `d`,
+the mate of the projection formula, `θ_{f,K} : ω_f ⊗ᴸ Lf^* K ⟶ Rf^! K`
+(`AlgebraicGeometry.Etale.dualizingComplexTensorMap`), is an isomorphism for every `K`. -/
+theorem isIso_dualizingComplexTensorMap_of_smoothOfRelativeDimension
+    (K : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
+    IsIso (dualizingComplexTensorMap Λ f K) :=
   (exists_dualizingComplex_iso_and_tensor Λ f d).choose_spec.2.2.2 K
 
 omit [HasTateTwist Λ] [IsSeparated f] in
@@ -152,7 +164,9 @@ include d in
 with `f` smooth and `f'` its base change along `g`, the formation of `Rf^!` commutes with base
 change. Applied to the diagonal square `W = X ×_Y X` this gives `ω_{p₁} ≅ Lp₂^* ω_f` and
 `ω_{p₂} ≅ Lp₁^* ω_f`, which is what makes the diagonal computation of the purity theorem
-possible. -/
+possible. For quasi-compact `f'` the canonical base change map is an isomorphism
+(`AlgebraicGeometry.Etale.isIso_rightDerivedUpperShriekBaseChangeMap_of_smoothOfRelativeDimension`).
+-/
 theorem nonempty_iso_leftDerivedUpperStar_comp_rightDerivedUpperShriek {X' Y' : Scheme.{u}}
     {g : Y' ⟶ Y} {f' : X' ⟶ Y'} {g' : X' ⟶ X} (sq : IsPullback g' f' f g)
     [HasCompactification f'] :
