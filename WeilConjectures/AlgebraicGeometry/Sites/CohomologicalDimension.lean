@@ -6,7 +6,7 @@ Authors: Claude
 module
 
 public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
-public import WeilConjectures.AlgebraicGeometry.Sites.PointCohomology
+public import WeilConjectures.AlgebraicGeometry.Sites.FiniteSupport
 
 /-!
 # Torsion cohomological dimension of a scheme of finite type over a field
@@ -16,7 +16,8 @@ Let `K` be a field whose torsion étale cohomological dimension is at most `c`, 
 `K`-scheme of finite type of dimension at most `d`. Then `H^q(X_ét, F) = 0` for every torsion
 abelian sheaf `F` on `X_ét` and every `q > 2d + c`
 (`AlgebraicGeometry.Scheme.subsingleton_H_of_two_mul_add_lt`). For `K` separably closed one may
-take `c = 0` (`AlgebraicGeometry.Scheme.subsingleton_H_of_isSepClosed`).
+take `c = 0` (`AlgebraicGeometry.Scheme.subsingleton_H_of_isSepClosed`), so that `H^q(X_ét, F) = 0`
+for `q > 2d` (`AlgebraicGeometry.Scheme.subsingleton_H_of_two_mul_lt_of_isSepClosed`).
 
 This is the cohomological-dimension bound of the blueprint statement `sk-prop-sf-finiteness`;
 it is the node `thm-sc-finite-type-torsion-cd` of the blueprint subsection `sk-prop-sf-cbc`, where
@@ -48,5 +49,25 @@ theorem subsingleton_H_of_two_mul_add_lt {K : Type u} [Field K] (c d : ℕ)
     (F : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) (hF : F.IsTorsion) (q : ℕ)
     (hq : 2 * d + c < q) : Subsingleton (Sheaf.H F q) :=
   sorry
+
+/-- Blueprint `sk-prop-sf-finiteness`: Finiteness and constructibility, the
+cohomological-dimension bound over a separably closed field.
+
+Let `K` be a separably closed field and let `X` be a finite-type `K`-scheme of dimension at most
+`d`. Then `cd_tor(X) ≤ 2d`: `H^q(X_ét, F) = 0` for every torsion abelian étale sheaf `F` on `X`
+and every `q > 2d`. This is the bound `cd_tor(X) ≤ 2d + c` of
+`AlgebraicGeometry.Scheme.subsingleton_H_of_two_mul_add_lt` (`thm-sc-finite-type-torsion-cd`)
+with `c = 0`, which is allowed since `cd_tor(Spec K) = 0`
+(`AlgebraicGeometry.Scheme.subsingleton_H_of_isSepClosed`, `lem-kun-cd-sep-closed-point`). -/
+theorem subsingleton_H_of_two_mul_lt_of_isSepClosed {K : Type u} [Field K] [IsSepClosed K]
+    (d : ℕ) {X : Scheme.{u}} (a : X ⟶ Spec (.of K)) [LocallyOfFiniteType a] [QuasiCompact a]
+    (hX : topologicalKrullDim X ≤ (d : WithBot ℕ∞))
+    (F : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) (hF : F.IsTorsion) (q : ℕ)
+    (hq : 2 * d < q) : Subsingleton (Sheaf.H F q) :=
+  subsingleton_H_of_two_mul_add_lt 0 d
+    (fun G _ q hq ↦ by
+      obtain ⟨n, rfl⟩ := Nat.exists_eq_add_of_lt hq
+      simpa using subsingleton_H_of_isSepClosed K G n)
+    a hX F hF q hq
 
 end AlgebraicGeometry.Scheme
