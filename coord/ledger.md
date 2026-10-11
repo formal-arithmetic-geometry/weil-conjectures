@@ -4061,3 +4061,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 09:39 L: merged deliver/C1/lem-weil-pbc-cover-module-exact (stage 2; reviewer PASS; first push; Sheaf.RingTheory.CoverModuleExact RingTheory.coverModuleExact)
 - 09:40 L: merged deliver/F1/lem-sc-rational-section-order (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.RationalSectionOrder AlgebraicGeometry.Scheme.Modules.rational_section_order)
 - 09:40 L: merged deliver/E1/lem-weil-pbc-charpoly-locally-free-direct-sum (stage 2; reviewer PASS; first push; Sheaf.Algebra.LocallyFreeCharpolyProdMap Algebra.locallyFreeCharpoly_prodMap)
+- 09:40 L: merged deliver/E1/lem-sc-separated-affine-function-field-surjective (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.SeparatedAffineFunctionFieldSurjective AlgebraicGeometry.Scheme.separated_affine_functionField_surjective)
