@@ -121,5 +121,24 @@
   "group": "F1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-znf (reviewer sub-agent of L); spot-checked: Source: Stacks 0AAX (properties-lemma-locally-Noetherian-dimension-0, properties.tex:1286) read; its conclusion (dimension 0 locally Noetherian => discrete, disjoint union of Artinian spectra) contains the item (Noetherian, dim<=0, includes empty) hypothesis by hypothesis. Step 1 carried by lem-weil-pbc-noetherian-scheme-closed-subsets-minimal (minimal condition = Noetherian space), lem-weil-pbc-locally-noetherian-quasi-separated, lem-weil-pbc-qcqs-scheme-spectral (spectral, hence sober by def-weil-spectral-space); step 2 by the new node; step 3 elementary (finite union of closed singletons). New node checked against slopmaster2 IsClosed.finite_and_isClosed_singleton_of_topologicalKrullDim_le_zero, KrullDimension.lean:236-279, [NoetherianSpace X][T0Space X], IsClosed Z, topologicalKrullDim Z<=0 => Z.Finite and closed singletons; sorryfree.py OK; Mathlib has none. Small cases: empty space, one-point Spec k, Spec of k x k, Spec k[x]/x^2 (one point) all finite discrete; a non-T0 two-point indiscrete space shows T0 is needed for the new node. FIX more, RETURN less (B3): lem-sc-zero-dim-noetherian-closed-finite: statement: Noetherian and T0 were cited to def-weil-spectral-space, which defines neither; both now defined inline (as in lem-sc-noetherian-topological-cohomology-vanishing and lem-weil-pbc-finite-t0-space-sober), citation removed; stmt_deps: was empty although the statement cites def-kun-topological-krull-dimension, now [def-kun-topological-krull-dimension]; lean_candidates: added the attachment named in the report (it was only in the report). lem-sc-zero-dim-noetherian-finite-discrete: proof step 1: text: added the line sober => T0 (unique generic point of the closure) and def-weil-spectral-space to uses/proof_deps, since qcqs-scheme-spectral gives spectral, not T0; proof_origin: by agent, place 0AAX statement only, since the route is the topological one, not 0AAX's Artinian-ring proof. Start Sat Oct 10 03:40:52 PM UTC 2026, end Sat Oct 10 03:42:07 PM UTC 2026.; 2 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ZeroDimensionalNoetherianFiniteDiscrete",
+  "declaration": "AlgebraicGeometry.finite_and_discreteTopology_of_topologicalKrullDim_le_zero",
+  "file": "lean/Sheaf/AlgebraicGeometry/ZeroDimensionalNoetherianFiniteDiscrete.lean",
+  "statement": "theorem finite_and_discreteTopology_of_topologicalKrullDim_le_zero (Y : Scheme.{u}) [IsLocallyNoetherian Y] [CompactSpace Y] (hdim : topologicalKrullDim Y ≤ 0) : Finite Y ∧ DiscreteTopology Y",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-zdn1132"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-zdn1132",
+  "group": "C1",
+  "result": "fix",
+  "note": "Y : Scheme.{u}; Noetherian = [IsLocallyNoetherian Y][CompactSpace Y] (sc-family form, not hollow by inferInstance); dim<=0 = topologicalKrullDim Y <= 0 (cited def-kun-topological-krull-dimension, WithBot so empty included); finite discrete = Finite Y ∧ DiscreteTopology Y (fixed from open/closed singleton clauses to the shared notion used by consumer FiniteDiscreteSeparatedAffine); not a Mathlib verbatim statement"
  }
 }
