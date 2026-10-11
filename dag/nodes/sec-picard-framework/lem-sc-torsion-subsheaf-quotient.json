@@ -139,5 +139,23 @@
   "group": "K1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-tsq (reviewer sub-agent of L); spot-checked: Source: Stacks divisors.tex lemma-torsion-sections (0AXR) and lemma-torsion (0AXT) read; the new node lem-sc-torsion-sections-generic reproduces 0AXR clause by clause (X integral with generic point eta, F quasi-coherent, U nonempty open, (1)-(4)), with stalk torsion defined inline as annihilation by a nonzero element of O_{X,x}; the item statement keeps the imported statement and adds only the explicit meaning of torsion/torsion-free (named in the report, E7), agreeing with 0AXT read stalkwise. Blueprint lem-sc-riemann-roch.md 'The torsion part' paragraph (lines 79-86) read. Step 1: T = sectionwise kernel of F -> j_*F_eta, a submodule; j: Spec k(X) -> X is qcqs (source affine), so pqf-lem-pushforward-qcoh (01LC) gives j_*F_eta quasi-coherent and lem-weil-pbc-quasi-coherent-module-kernel gives T quasi-coherent, hypotheses checked. Step 2: 0AXR (1)<->(3) both directions. Step 3 rewritten (no change of argument) to cite what it used silently. Fixes: dag/nodes/sec-picard-framework/lem-sc-torsion-subsheaf-quotient.json: blueprint.from.place: restored the exact sentences quoted on sheaf-dag (the delivery had replaced them by a vaguer paraphrase, B9); stmt_deps: removed lem-sc-torsion-sections-generic (the statement does not cite it; it stays in proof_deps); proof step 2: added [lem-weil-pbc-module-stalk-exact] (1) for T_x in F_x; proof step 3: added [lem-weil-pbc-quasi-coherent-module-cokernel-image] (2) for quasi-coherence of F/T (needed to apply the 0AXR node to F/T, C4) and [lem-weil-pbc-module-stalk-exact] (3) for (F/T)_y = F_y/T_y and the local lift of the germ, and wrote out the lift s, s_eta=0, s in T(V); proof_deps updated to the union. Tool uses accepted as generic black-box sheaf facts of other units (C8): pqf-lem-pushforward-qcoh, lem-weil-pbc-quasi-coherent-module-kernel, lem-weil-pbc-module-stalk-exact, lem-weil-pbc-quasi-coherent-module-cokernel-image. No Mathlib leaf; no slopmaster2 declaration found by grep (B10). Small cases: F=O_X on Spec Z (T=0, quotient O_X), F=k(p) skyscraper at a closed point of Spec Z (T=F, quotient 0), F=O_X+k(p) (T=k(p)); 0AXR checked on each. Start Sat Oct 10 02:48:55 PM UTC 2026, end Sat Oct 10 02:50:32 PM UTC 2026.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.TorsionSubsheafQuotient",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.torsion_subsheaf_quotient",
+  "file": "lean/Sheaf/AlgebraicGeometry/TorsionSubsheafQuotient.lean",
+  "statement": "theorem torsion_subsheaf_quotient (X : Scheme.{u}) [IsIntegral X] (F : X.Modules) [F.IsQuasicoherent] : ∃ (T : X.Modules) (i : T ⟶ F), Mono i ∧ T.IsQuasicoherent ∧ (∀ (U : X.Opens) (s : Γ(F, U)), (∃ t : Γ(T, U), i.app U t = s) ↔ ∀ hη : genericPoint X ∈ U, F.presheaf.germ U (genericPoint X) hη s = 0) ∧ (∀ (x : X) (s : F.presheaf.stalk x), s ∈ Set.range (i.stalkLinearMap x) ↔ ∃ a : X.presheaf.stalk x, a ≠ 0 ∧ a • s = 0) ∧ (∀ (x : X) (s : (cokernel i).presheaf.stalk x) (a : X.presheaf.stalk x), a ≠ 0 → a • s = 0 → s = 0) ∧ ∃ h : i ≫ toSkyscraper (LinearMap.id : F.presheaf.stalk (genericPoint X) →ₗ[X.functionField] F.presheaf.stalk (genericPoint X)) = 0, Nonempty (IsLimit (KernelFork.ofι i h))",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-tsq1205",
+  "group": "C1",
+  "result": "pass",
+  "note": "X Scheme.{u} [AlgebraicGeometry.IsIntegral X] (#print full names), F X.Modules (= SheafOfModules (moduleRings X)) [IsQuasicoherent]; T,i existential with Mono, T quasi-coherent; sections of T = sections with zero generic germ (empty open vacuous); stalk image of i.stalkLinearMap = torsion of F_x over O_{X,x}; cokernel i stalks torsion-free; kernel of toSkyscraper id at eta, upstream skyscraper sections PLift(eta in U) -> F_eta with germ action = j_*F_eta; functionField = generic stalk; no extra hypotheses, one universe, no let, no new definitions; node diff adds only lean record"
  }
 }
