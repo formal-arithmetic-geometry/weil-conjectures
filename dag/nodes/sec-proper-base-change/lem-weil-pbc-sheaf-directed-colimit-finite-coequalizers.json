@@ -143,5 +143,23 @@
   "group": "G1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of G1; spot-checked by L: L: 4 steps along Stacks 0CAI (0CAH surjection, kernel pair coequalizer, finite support of the relation maps via 009F on quasi-compact V_b, colimit of finite truncations); 4 new unsplit nodes are genuine lemmas (basis surjection 0CAH, regular-epi/kernel-pair coequalizer, finite support, colimit of truncations = colimits commute with colimits). Correct. Trailing proof-hint sentences in two new statements removed by L after merge."
+ },
+ "lean": {
+  "module": "Sheaf.Topology.SheafDirectedColimitFiniteCoequalizers",
+  "declaration": "TopCat.exists_directedColimit_finiteCoequalizers",
+  "file": "lean/Sheaf/Topology/SheafDirectedColimitFiniteCoequalizers.lean",
+  "statement": "theorem exists_directedColimit_finiteCoequalizers (X : TopCat.{u}) (B : Set (Opens X)) (hBasis : IsTopologicalBasis ((fun U : Opens X ↦ (U : Set X)) '' B)) (hCompact : ∀ U ∈ B, IsCompact (U : Set X)) (F : X.Sheaf (Type u)) : ∃ (I : Type u) (_ : Preorder I) (_ : Nonempty I) (_ : IsDirected I (· ≤ ·)) (D : I ⥤ X.Sheaf (Type u)) (c : D ⟶ (Functor.const I).obj F), Nonempty (IsColimit (Cocone.mk F c)) ∧ ∀ i : I, ∃ (m n : ℕ) (U : Fin n → Opens X) (V : Fin m → Opens X) (S : Fin n → Type u) (T : Fin m → Type u), (∀ a : Fin n, U a ∈ B) ∧ (∀ b : Fin m, V b ∈ B) ∧ (∀ a : Fin n, Finite (S a)) ∧ (∀ b : Fin m, Finite (T b)) ∧ ∃ (β γ : (sigmaObj (C := CategoryTheory.Sheaf (Opens.grothendieckTopology X) (Type u)) (fun b : Fin m ↦ extensionByEmptyConstant (V b) (T b))) ⟶ (sigmaObj (C := CategoryTheory.Sheaf (Opens.grothendieckTopology X) (Type u)) (fun a : Fin n ↦ extensionByEmptyConstant (U a) (S a)))) (q : (sigmaObj (C := CategoryTheory.Sheaf (Opens.grothendieckTopology X) (Type u)) (fun a : Fin n ↦ extensionByEmptyConstant (U a) (S a))) ⟶ D.obj i) (h : β ≫ q = γ ≫ q), Nonempty (IsColimit (Cofork.ofπ q h))",
+  "branch": "sheaf-dag",
+  "by": "G1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "G1",
+  "result": "pass",
+  "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
  }
 }

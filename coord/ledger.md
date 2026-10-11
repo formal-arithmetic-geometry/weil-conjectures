@@ -5613,3 +5613,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 18:50 L: merged deliver/G1/lem-weil-pbc-sheaf-basis-surjection (stage 2; reviewer PASS; first push; Sheaf.Topology.SheafBasisSurjection TopCat.exists_epi_extensionByEmptyConstant)
 - 18:51 L: merged deliver/U1/lem-sc-etale-zariski-qcoh-comparison (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.EtaleZariskiQcohComparison AlgebraicGeometry.Scheme.Modules.etale_zariski_qcoh_comparison)
 - 18:51 L: merged deliver/E1/lem-sc-zariski-ext-torsor (stage 2; reviewer PASS; first push; Sheaf.CategoryTheory.Sites.ZariskiExtTorsor CategoryTheory.Sheaf.zariskiExtTorsor)
+- 18:52 L: merged deliver/G1/lem-weil-pbc-sheaf-directed-colimit-finite-coequalizers (stage 2; reviewer PASS; first push; Sheaf.Topology.SheafDirectedColimitFiniteCoequalizers TopCat.exists_directedColimit_finiteCoequalizers)
