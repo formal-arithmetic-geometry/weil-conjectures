@@ -120,5 +120,23 @@
   "group": "J1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-fgs1704 (reviewer sub-agent of L); spot-checked: Source Stacks 04JM (lemma-global-sections-point, finite Galois descent) with the 03SF decomposition E (x)_L E = prod_{q in Q} E; item statement agrees (L field, E/L finite Galois, F sheaf of sets on Spec L_et, F(Spec L) = Q-invariants of F(Spec E)). Step 1: lem-weil-pbc-finite-separable-extension-etale (finite + separable exactly its hypotheses) gives Spec E -> Spec L etale, surjective since one-point spectra, so a covering in def-weil-pbc-etale-sheaf-of-sets. Step 2: equalizer condition of def-weil-pbc-etale-sheaf-of-sets for the one-member covering, plus the new node; checked that under a(x)b -> (a q(b))_q the q-th summand composed with p1 is id and with p2 is Spec q, so the equalizer is the Q-invariants; Aut of Spec E over Spec L = {Spec q} from def-weil-affine-spectrum. Step 3 elementary. Small cases: E=L (Q trivial), E=C over R ((x)-product C x C, a(x)b -> (ab, a bbar)). Mathlib: own LeanFinder query (E (x)_L E = product over Galois group), Loogle 'IsGalois, TensorProduct' (no results), grep of RingTheory/TensorProduct, LinearAlgebra/TensorProduct, RingTheory/Etale for IsGalois/EquivPi: no Mathlib statement (only piScalarRight, A (x) (iota -> R)), so unsplit node accepted; slopmaster2 grep for IsGalois with tensor: none. FIX more, RETURN less: dag/nodes/sec-curve-estimates/lem-exc-finite-galois-tensor-decomposition.json: statement: clause 'the two projections identify the restriction maps on sections with the identity and q^*' named no sheaf (B2) and hid the fibre-product and disjoint-union facts (C4); rewritten as (1) the ring isomorphism and (2) for a sheaf F a bijection beta: F(Spec E x_{Spec L} Spec E) -> prod_q F(Spec E) with beta(s|p1)=(s)_q, beta(s|p2)=((Spec q)^* s)_q; the derived clause 'Consequently Spec E -> Spec L is a finite etale covering' removed (proof content in a statement, B1; step 1 gets it from its own citation); stmt_deps += def-pc-fibre-product, def-weil-pbc-etale-sheaf-of-sets; mathlib_searches += my three queries. dag/nodes/sec-curve-estimates/lem-exc-finite-galois-sections-descent.json: steps 1-2 text rewritten to use clause (2) via beta, step 1 uses += def-weil-pbc-etale-sheaf-of-sets, step 2 uses += def-weil-affine-spectrum (automorphisms of Spec E over Spec L are the Spec q), proof_deps updated. Report mentions a citations.json not in the commit (harmless). Start Sat Oct 10 05:00:55 PM UTC 2026, end Sat Oct 10 05:02:35 PM UTC 2026.; 2 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.Sites.FiniteGaloisSectionsDescent",
+  "declaration": "AlgebraicGeometry.Scheme.finiteGaloisSectionsDescent",
+  "file": "lean/Sheaf/AlgebraicGeometry/Sites/FiniteGaloisSectionsDescent.lean",
+  "statement": "theorem finiteGaloisSectionsDescent (L E : Type u) [Field L] [Field E] [Algebra L E] [FiniteDimensional L E] [IsGalois L E] (F : Sheaf (Spec (.of L)).smallEtaleTopology (Type v)) : Set.BijOn (F.obj.map (etaleSpecMap (Algebra.ofId L E)).op) Set.univ {s | ∀ q : E ≃ₐ[L] E, F.obj.map (etaleSpecMap q).op s = s}",
+  "branch": "sheaf-dag",
+  "by": "J1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-fgs0626",
+  "group": "J1",
+  "result": "pass",
+  "note": "L,E:Type u fields, [Algebra L E] = extension, [FiniteDimensional][IsGalois] = finite separable normal, q : E ≃ₐ[L] E = Q=Aut_L(E), F : Sheaf (Spec L).smallEtaleTopology (Type v) = sheaf of sets on (Spec L)_et, etaleSpecMap (Algebra.ofId L E) = pullback along Spec E -> Spec L (direction checked in Hilbert90 source), invariants {s | all q, (Spec q)^* s = s}, Set.BijOn univ = bijection onto invariants; E=L and every characteristic allowed; no notion defined inline (etaleSpec/etaleSpecMap imported from source Hilbert90)"
  }
 }
