@@ -134,5 +134,23 @@
   "group": "F1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-ngc2842 (reviewer sub-agent of L); spot-checked: def-sbc-normal-dominant-galois does define integral (via def-pc-integral-scheme) and normal; statement matches citers (lem-fin-finite-type-pushforward-embedding, lem-sc-affine-generic-second) and existing 09Z5 node lem-weil-pbc-normal-constant-generic part 1; direct image sections (e_*F)(W)=F(W x_V Spec K) per def-weil-pbc-direct-image; connected-etale-over-normal decomposition via existing lem-fin-etale-normal-components. FIX more, RETURN less: (1) C1: integrality/connectedness of the generic fibre of each component was asserted without citation; now restricted to affine W over an affine open Spec A, flatness gives A\\{0} -> C_a injective, and the generic fibre Spec(K (x)_A C_a) is nonempty and connected by existing lem-weil-pbc-generic-fibre-localization-domain-irreducible (added to uses/proof_deps/tool_uses); (2) E: Noetherianity of W (hypothesis of lem-fin-etale-normal-components) and the basis-of-site reduction now stated; (3) dropped declared tool_use lem-weil-pbc-normal-constant-generic, which no step uses.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.NormalGenericConstant",
+  "declaration": "AlgebraicGeometry.Etale.isIso_constantSheaf_to_generic_lowerStar",
+  "file": "lean/Sheaf/AlgebraicGeometry/NormalGenericConstant.lean",
+  "statement": "theorem Etale.isIso_constantSheaf_to_generic_lowerStar (V : Scheme.{u}) [IsNoetherian V] [IsIntegral V] (hV : IsNormalScheme V) (M : AddCommGrpCat.{u + 1}) [Finite M] : IsIso (((Etale.upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} (V.fromSpecResidueField (genericPoint V))).unit.app ((constantSheaf V.smallEtaleTopology AddCommGrpCat.{u + 1}).obj M)) ≫ (Etale.lowerStar AddCommGrpCat.{u + 1} (V.fromSpecResidueField (genericPoint V))).map ((Scheme.upperStarConstantSheafIso AddCommGrpCat.{u + 1} (V.fromSpecResidueField (genericPoint V))).app M).hom)",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-ngc0940",
+  "group": "E1",
+  "result": "pass",
+  "note": "V Noetherian=[IsNoetherian V]; integral=[IsIntegral V] (needed for genericPoint) + normal=IsNormalScheme (J1, as C1); eta=genericPoint, K=residueField, e=fromSpecResidueField; M finite AddCommGrpCat.{u+1}; natural map = unit then e_* of canonical upperStarConstantSheafIso; IsIso; source 09Z5 theorem has ModuleCat/fromSpecStalk + open-immersion conjunct so not exact (H4 ok); docstring = node proof"
  }
 }
