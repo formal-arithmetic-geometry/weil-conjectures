@@ -23,9 +23,10 @@ BRANCH = "slopmaster2"
 
 
 def load():
-    maps = sorted(glob.glob(str(ROOT / "local" / f"sorry_map_{BRANCH}_*.jsonl.gz")), key=lambda p: pathlib.Path(p).stat().st_mtime)
-    maps = [m for m in maps if "_full" not in m] or maps
-    if not maps: raise SystemExit("REFUSED: no sorry map of slopmaster2 in local/")
+    sys.path.insert(0, str(ROOT / "tools")); from lean_status import newest_map   # newest committed map (git time, then mtime)
+    m = newest_map(BRANCH)
+    if m is None: raise SystemExit("REFUSED: no sorry map of slopmaster2 in local/")
+    maps = [str(m)]
     with gzip.open(maps[-1], "rt") as fh: rows = [json.loads(l) for l in fh]
     owner = {r["n"]: r["o"] for r in rows}; own = {}; deps = collections.defaultdict(set)
     for r in rows:

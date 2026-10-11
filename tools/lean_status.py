@@ -2,7 +2,7 @@
 """Where each node stands in Lean, read from the compiled project and written into the nodes.
 
 Usage:
-  tools/lean_status.py <branch>=<sorry map> [<branch>=<sorry map> ...] [--extra <branch>=dag/lean_names_upstream.json]
+  tools/lean_status.py <branch>=<sorry map>|<branch>=latest [<branch>=<sorry map> ...] [--extra <branch>=dag/lean_names_upstream.json]
                        [--library <branch>=local/library_names_mathlib.tsv.gz]
 
 --library (2026-10-10): the declarations of the libraries the project imports (Mathlib, Lean core, ...; one line
@@ -16,6 +16,10 @@ carries `(blueprint: <node id>)`. A declaration whose tag is qualified ("the imp
 part of that file) is listed in decls with `partial: <tag text>` and never closes the node: a node with only such
 declarations is at best `closed_part` (an attachment-check item for a worker). When the current blueprint has a list for the node, an old `blueprint_lean` name that is not
 on the branch is recorded under `superseded` (renamed or dropped by the humans) instead of `missing`.
+
+`<branch>=latest` (2026-10-11) takes the newest committed map local/sorry_map_<branch>_<base sha>.jsonl.gz (newest_map below:
+the map whose last commit in git is the most recent, by file mtime when not committed; the old `_full` map is skipped);
+tools/attach.py reads the same one.
 
 A sorry map is the output of tools/sorry_map.lean for one branch (read plain or gzip-compressed, `.jsonl` or `.jsonl.gz`): every declaration of the project, whether its
 own term contains `sorry`, and the project declarations it uses. Auxiliary declarations are merged into their owner.
@@ -40,6 +44,20 @@ import collections, json, pathlib, re, sys
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 TEX = ROOT / "literature/blueprint/slopmaster2/src/version"
+
+
+def newest_map(branch="slopmaster2"):
+    """The newest sorry map of a branch in local/: by the time of its last commit in git (file mtime when not committed)."""
+    import subprocess
+    maps = [p for p in (ROOT / "local").glob(f"sorry_map_{branch}_*.jsonl.gz") if "_full" not in p.name]
+    if not maps:
+        return None
+
+    def when(p):
+        t = subprocess.run(["git", "log", "-1", "--format=%ct", "--", str(p.relative_to(ROOT))], cwd=ROOT,
+                           capture_output=True, text=True).stdout.strip()
+        return (int(t) if t else 1 << 62, p.stat().st_mtime)
+    return max(maps, key=when)
 
 
 def load_map(path):
@@ -133,6 +151,9 @@ def main():
         d["lean_audit"] = {}
     for arg in argv:
         branch, path = arg.split("=", 1)
+        if path == "latest":
+            path = newest_map(branch)
+            print(branch, "sorry map", path.relative_to(ROOT))
         ex = extra_by_branch.get(branch)
         lib = lib_by_branch.get(branch, {})
         own, deps = load_map(path)
