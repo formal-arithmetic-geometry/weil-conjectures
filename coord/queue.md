@@ -12,8 +12,8 @@
 | `def-sbc-smooth-morphisms` | 1 | state |
 | `def-sc-function-field` | 1 | state |
 | `def-sc-ringed-space-module-cohomology` | 1 | state |
+| `def-sp-kinjective-bridge` | 1 | state |
 | `def-weil-l-adic-coefficient-extension` | 1 | state |
-| `def-weil-pbc-kinjective-resolutions` | 1 | state |
 | `lem-kun-04ca` | 1 | state |
 | `lem-pc-derived-adjoint-functors` | 1 | state |
 | `lem-pc-derived-tensor-transitivity` | 1 | state |
@@ -30,7 +30,6 @@
 | `lem-sc-fibre-dimension-after-base-change` | 1 | state |
 | `lem-sc-p1-ext-locally-free-naturality` | 1 | state |
 | `lem-sc-picard-h1-multiple-locus` | 1 | state |
-| `lem-sc-picard-locus-closed` | 1 | state |
 | `lem-sc-picard-product-open` | 1 | state |
 | `lem-sc-smooth-proper-diagonal-conormal-differentials` | 1 | state |
 | `lem-sc-tangent-map-linear` | 1 | state |
@@ -40,20 +39,17 @@
 | `lem-sp-ce-horizontal-lift` | 1 | state |
 | `lem-sp-ce-vertical-nullhomotopy` | 1 | state |
 | `lem-weil-derived-limit-existence` | 1 | state |
-| `lem-weil-pbc-adjunction-lifts-group-ring-objects` | 1 | state |
-| `lem-weil-pbc-affine-basic-set-difference` | 1 | state |
+| `lem-weil-derived-limit-roos-complex` | 1 | state |
 | `lem-weil-pbc-affine-formally-smooth-iff-ring-lifting` | 1 | state |
 | `lem-weil-pbc-affine-tilde-tensor` | 1 | state |
 | `lem-weil-pbc-algebraize-finite-over-proper` | 1 | state |
 | `lem-weil-pbc-ample-very-ample-immersion-affine-base` | 1 | state |
-| `lem-weil-pbc-annihilator-localization-finite` | 1 | state |
 | `lem-weil-pbc-arbitrary-ring-torsion-sheaf-base-change` | 1 | state |
 | `lem-weil-pbc-artinian-ideal-length-one-filtration` | 1 | state |
 | `lem-weil-pbc-artinian-local-essentially-finite-type-residue` | 1 | state |
 | `lem-weil-pbc-associated-module-hom` | 1 | state |
 | `lem-weil-pbc-associated-module-pullback` | 1 | state |
 | `lem-weil-pbc-associated-prime-localize-at-prime` | 1 | state |
-| `lem-weil-pbc-associated-prime-power-quotient` | 1 | state |
 | `lem-weil-pbc-associated-primes-exact-sequence` | 1 | state |
 | `lem-weil-pbc-associated-primes-flat-base-change` | 1 | state |
 | `lem-weil-pbc-base-change-nilpotent-thickening-idempotents` | 1 | state |
@@ -156,6 +152,8 @@
 | `lem-weil-pbc-derivation-extends` | 1 | state |
 | `lem-weil-pbc-derivation-extends-finite-type-extension` | 1 | state |
 | `lem-weil-pbc-derivation-nonzero-on-non-pth-power` | 1 | state |
+| `lem-weil-pbc-derived-adjunction-commshift` | 1 | state |
+| `lem-weil-pbc-derived-exchange-termwise` | 1 | state |
 | `lem-weil-pbc-derived-finite-product` | 1 | state |
 | `lem-weil-pbc-derived-functor-long-exact` | 1 | state |
 | `lem-weil-pbc-derived-inverse-image-composition` | 1 | state |
@@ -612,6 +610,7 @@
 | `lem-weil-pbc-purely-inseparable-integral-prime-unique` | 1 | state |
 | `lem-weil-pbc-purely-inseparable-pth-root-tower` | 1 | state |
 | `lem-weil-pbc-pushout-short-exact-sequence` | 1 | state |
+| `lem-weil-pbc-qcqs-higher-direct-image` | 1 | state |
 | `lem-weil-pbc-qcqs-scheme-cofinal-finite-coverings` | 1 | state |
 | `lem-weil-pbc-quasi-finite-at-finite-subalgebra-away` | 1 | state |
 | `lem-weil-pbc-quasi-finite-at-prime-permanence` | 1 | state |
@@ -857,6 +856,7 @@
 | `prop-weil-pbc-composition-stability` | 1 | state |
 | `prop-weil-pbc-formal-glueing-equivalence` | 1 | state |
 | `prop-weil-pbc-inverse-image-exact` | 1 | state |
+| `prop-weil-pbc-kinjective-resolutions-exist` | 1 | state |
 | `thm-galois-abstract-equivalence` | 1 | state |
 | `thm-galois-fundamental` | 1 | state |
 | `thm-pqf-zmt-factorization` | 1 | state |
@@ -904,7 +904,7 @@
 | `lem-sc-normalization-properties` | 3 | state |
 | `def-nagata-fixed-base-separated-stage` | 6 | state |
 
-Not open yet: 894 nodes that wait for a statement dependency, 40 nodes that wait for stage 1.
+Not open yet: 888 nodes that wait for a statement dependency, 40 nodes that wait for stage 1.
 
 ## Stage 3: modules to prove (0)
 
