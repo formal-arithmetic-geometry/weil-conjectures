@@ -1,11 +1,11 @@
 # Work queue
 
-93 items; claim with `tools/claim.py next <group> [--stage N]`.
+91 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (93)
+## Stage 2: nodes to state (91)
 
 | node | distance to Mathlib | kind | blockers |
 |---|---|---|---|
@@ -16,7 +16,6 @@
 | `def-pc-derived-rhom-algebra-module` | 1 | state | 2 |
 | `def-sc-duality-equation-base-change-map` | 1 | state | 2 |
 | `def-weil-pbc-truncation-exact-couples` | 1 | state | 2 |
-| `def-pc-derived-base-change-map` | 1 | state | 1 |
 | `def-weil-pbc-etale-shriek-base-change-map` | 1 | state | 1 |
 | `def-pc-upper-shriek-right-adjoint` | 1 | state | 0 |
 | `lem-pc-module-pullback-identity-composition` | 1 | state | 10 |
@@ -46,7 +45,6 @@
 | `lem-pc-rf-perfect-base-change` | 1 | state | 0 |
 | `lem-pc-rf-single-complex-qcqs-induction` | 1 | state | 0 |
 | `lem-pc-rf-single-complex-relative-mayer-vietoris` | 1 | state | 0 |
-| `lem-pc-tor-independent-perfect-tensor-base-change` | 1 | state | 0 |
 | `lem-sc-affine-derived-cohomology` | 1 | state | 0 |
 | `lem-sc-affine-derived-pushforward-t-exact` | 1 | state | 0 |
 | `lem-sc-affine-koszul-cech-derived-comparison` | 1 | state | 0 |
