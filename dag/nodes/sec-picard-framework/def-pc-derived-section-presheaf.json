@@ -1,0 +1,116 @@
+{
+ "id": "def-pc-derived-section-presheaf",
+ "kind": "definition",
+ "title": "Unbounded derived section cohomology presheaf on a scheme",
+ "status": "split",
+ "statement": "Let $f:X\\to Y$ be a morphism of schemes [def-pc-scheme], with derived category $D(\\mathcal O_X)$ [def-pc-derived-category] of module sheaves [def-weil-sheaf-of-modules-category]. For $i\\in\\mathbf Z$ define $\\mathcal P_f^i:D(\\mathcal O_X)\\to\\mathrm{PMod}(\\mathcal O_Y)$ by $\\mathcal P_f^i(E)(V)=H^i(R\\Gamma(f^{-1}V,E))$, with its $\\mathcal O_Y(V)$-module structure induced by $f$ and restriction maps induced by section restriction. Equivalently, derive the composite of the module direct image underlying [def-pc-derived-direct-image] with the inclusion of module sheaves into module presheaves, and take degree-$i$ cohomology in the presheaf category. On a K-injective representative $I$ of $E$, this is $V\\mapsto H^i(\\Gamma(f^{-1}V,I))$, with the same restriction maps; morphisms are induced by maps of K-injective representatives.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "def-weil-sheaf-of-modules-category",
+  "def-pc-derived-direct-image"
+ ],
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 0D5X (cohomology-lemma-unbounded-describe-higher-direct-images), the presheaf in its statement and K-injective computation"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "unbounded derived sections cohomology presheaf of modules",
+   "results": "[leansearch] UNAVAILABLE 0 hit(s) | service unavailable: Internal Server Error",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "cohomology presheaf of unbounded derived direct image modules on a scheme",
+   "results": "[leanfinder] OK 8 hit(s): CategoryTheory.Sheaf.cohomologyPresheafFunctor, CategoryTheory.Sheaf.cohomologyPresheaf, CategoryTheory.Sheaf.H, AlgebraicGeometry.Scheme.Modules.instAbelian, AlgebraicGeometry.Scheme.Modules.pushforward, AlgebraicGeometry.Scheme.Modules.isSheaf, SheafOfModules.instAbelian, SheafOfModules.over. These are Ext-based ordinary sheaf cohomology or underived module declarations, not this unbounded O_X-module construction.",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Functor.rightDerivedFunctor, HomologicalComplex.homologyFunctor",
+   "results": "[loogle] OK 0 hit(s) | loogle: unknown identifier 'Functor.rightDerivedFunctor'",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "derived.*[Pp]resheaf|[Pp]resheaf.*derived in Mathlib/AlgebraicGeometry, Mathlib/Algebra/Category/ModuleCat, WeilConjectures/CategoryTheory, lean/Sheaf/AlgebraicGeometry and lean/Sheaf/Topology; derivedSectionPresheaf|schemeDerivedSectionPresheaf in WeilConjectures and lean/Sheaf",
+   "results": "msearch grep: [grep] OK 0 hit(s) in both Mathlib subdirectories. rg: QcqsHigherDirectImage and AbelianHigherDirectImagePresheaf discuss etale cohomology. No declaration of the Zariski unbounded O_X-module section cohomology presheaf. Source Etale.higherDirectImagePresheaf is D+ of etale constant-coefficient sheaves, not O_X-modules. No name collision.",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -l presheaf.*R\\Gamma|presheaf.*K-injective|presheaf.*derived section dag/nodes; tools/blueprint_refs.py search cohomology presheaf",
+   "results": "Existing nodes discuss etale D+ cohomology or statements concerning sectionwise cohomology, but none defines this functor on unbounded D(O_X). blueprint_refs gives only sbc-lem-higher-direct-image-presheaf (etale).",
+   "date": "2026-10-11",
+   "verdict": "no existing definition node"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sc-qcoh-acyclic-derived-sections-comparison",
+  "date": "2026-10-11",
+  "group": "N1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "proof passage from derived sections on inverse images of affine opens to a restriction-compatible cohomology presheaf",
+   "via": [
+    "lem-sc-qcoh-acyclic-derived-sections-comparison",
+    "lem-sc-qcoh-acyclic-derived-pushforward-cohomology",
+    "lem-sc-affine-derived-cohomology",
+    "lem-sc-affine-derived-pushforward-t-exact",
+    "lem-sc-affine-derived-concentration",
+    "lem-sc-finite-flat-duality-evaluation",
+    "lem-sc-finite-duality-trace"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.DerivedSectionPresheaf",
+  "declaration": "AlgebraicGeometry.schemeDerivedSectionPresheaf",
+  "file": "lean/Sheaf/AlgebraicGeometry/DerivedSectionPresheaf.lean",
+  "statement": "def schemeDerivedSectionPresheaf {X Y : Scheme.{a}} [HasDerivedCategory.{b} (SheafOfModules.{a} (moduleRings X.toRingedSpace))] (f : X ⟶ Y) (i : ℤ) : schemeDerivedCategory X ⥤ PresheafOfModules.{a} (moduleRings Y.toRingedSpace).obj",
+  "branch": "sheaf-dag",
+  "by": "N1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-qad",
+  "group": "N1",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-qad",
+  "group": "N1",
+  "result": "pass"
+ }
+}

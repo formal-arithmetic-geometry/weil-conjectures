@@ -22,7 +22,9 @@
   "def-pc-scheme",
   "def-pc-derived-category",
   "def-pc-derived-direct-image",
-  "def-weil-pbc-sheafification"
+  "def-weil-pbc-sheafification",
+  "def-pc-derived-section-presheaf",
+  "def-weil-presheaf-modules-sheafification"
  ],
  "proof": [
   {
@@ -193,5 +195,22 @@
    "decls": [],
    "missing": []
   }
+ },
+ "lean": {
+  "module": "Sheaf.Paper.QCohAcyclicDerivedSectionsComparison",
+  "declaration": "AlgebraicGeometry.qcoh_acyclic_derived_sections_comparison",
+  "file": "lean/Sheaf/Paper/QCohAcyclicDerivedSectionsComparison.lean",
+  "statement": "theorem qcoh_acyclic_derived_sections_comparison {X Y : Scheme.{u}} [HasDerivedCategory.{wX} (SheafOfModules.{u} (moduleRings X.toRingedSpace))] [HasDerivedCategory.{wY} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))] (f : X ⟶ Y) [QuasiCompact f] [QuasiSeparated f] (hacyc : ∀ (F : SheafOfModules.{u} (moduleRings X.toRingedSpace)), F.IsQuasicoherent → ∀ (p : ℤ), 0 < p → IsZero ((schemeModuleHigherDirectImage f p).obj F)) (i : ℤ) : Nonempty ((schemeDerivedQCohProperty X).ι ⋙ schemeDerivedSectionPresheaf f i ⋙ PresheafOfModules.pushforward₀ (ObjectProperty.ι (fun V : Y.Opens ↦ IsAffineOpen V)) (moduleRings Y.toRingedSpace).obj ≅ (schemeDerivedQCohProperty X).ι ⋙ DerivedCategory.homologyFunctor (SheafOfModules.{u} (moduleRings X.toRingedSpace)) i ⋙ RingedSpace.moduleDirectImage f.toLRSHom.toShHom ⋙ SheafOfModules.forget (moduleRings Y.toRingedSpace) ⋙ PresheafOfModules.pushforward₀ (ObjectProperty.ι (fun V : Y.Opens ↦ IsAffineOpen V)) (moduleRings Y.toRingedSpace).obj) ∧ Nonempty ((schemeDerivedQCohProperty X).ι ⋙ schemeDerivedSectionPresheaf f i ⋙ PresheafOfModules.sheafification.{u} (𝟙 (moduleRings Y.toRingedSpace).obj) ≅ (schemeDerivedQCohProperty X).ι ⋙ schemeHigherDirectImage f i)",
+  "branch": "sheaf-dag",
+  "by": "N1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-qad",
+  "group": "N1",
+  "result": "pass"
  }
 }
