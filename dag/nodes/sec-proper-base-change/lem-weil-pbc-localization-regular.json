@@ -172,5 +172,23 @@
   "by": "L",
   "result": "pass",
   "note": "Reviewed by the lead (opus-relaunch6). Six steps (Stacks 07PT asserts the fact without proof): flat (new Mathlib leaf IsLocalization.flat, Flat/Localization.lean:37, verified), fibre ring a localization of kappa(p) at the image of W (00DK leaf), kernel of S -> kappa(p) is p (elementary), fibre = kappa(p) or 0 (new leaf of two declarations: IsLocalization.subsingleton_iff Localization/Defs.lean:222 and IsLocalization.atUnits Basic.lean:309, verified), geometric regularity of a field and of the zero ring (new leaf by an instance chain: IsDedekindDomain gives IsRegularRing RegularLocalRing/Defs.lean:120, a field is a PID hence Dedekind DedekindDomain/Basic.lean:171; accepted as a few declarations), conclusion. Statement rewritten to define the localization by its conditions (a)-(c) instead of citing the localization-at-a-prime node; content unchanged; the citer's use (A^ -> (A^)_{p'}) still fits."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.LocalizationRegular",
+  "declaration": "IsLocalization.isRegular_and_fiber",
+  "file": "lean/Sheaf/RingTheory/LocalizationRegular.lean",
+  "statement": "theorem isRegular_and_fiber {S : Type u} {T : Type v} [CommRing S] [CommRing T] [Algebra S T] (W : Submonoid S) [IsLocalization W T] : RingHom.IsRegular (algebraMap S T) ∧ ∀ (p : Ideal S) [p.IsPrime], ((∀ w : W, (w : S) ∉ p) → Nonempty (p.Fiber T ≃ₐ[p.ResidueField] p.ResidueField)) ∧ ((∃ w : W, (w : S) ∈ p) → Subsingleton (p.Fiber T))",
+  "branch": "sheaf-dag",
+  "by": "G1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-lre1113",
+  "group": "G1",
+  "result": "pass",
+  "note": "S,T CommRing + Algebra S T = lambda; W Submonoid; (a)-(c) = IsLocalization W T (isLocalization_iff, (c) via s-t); regular = RingHom.IsRegular (algebraMap S T) of def-weil-pbc-g-ring (k' in Type (max u v), not vacuous); fibre = p.Fiber T over p.ResidueField (FIBRE RING line); p∩W=∅ -> Nonempty AlgEquiv over kappa(p); meets W -> Subsingleton; #check on L clean"
  }
 }
