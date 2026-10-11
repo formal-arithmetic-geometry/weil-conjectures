@@ -1,11 +1,11 @@
 # Work queue
 
-1000 items; claim with `tools/claim.py next <group> [--stage N]`.
+998 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (1000)
+## Stage 2: nodes to state (998)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -40,12 +40,10 @@
 | `lem-pc-affine-flat-module-descent` | 1 | state |
 | `lem-pc-affine-tilde-kflat` | 1 | state |
 | `lem-pc-balanced-derived-tensor-model` | 1 | state |
-| `lem-pc-cartier-divisor-finite-over-field` | 1 | state |
 | `lem-pc-compact-hom-hocolim` | 1 | state |
 | `lem-pc-complex-hocolim-colimit` | 1 | state |
 | `lem-pc-derived-adjoint-functors` | 1 | state |
 | `lem-pc-derived-filtered-free-resolution` | 1 | state |
-| `lem-pc-derived-free-complex-cover` | 1 | state |
 | `lem-pc-derived-functor-commutes-derived-limit` | 1 | state |
 | `lem-pc-derived-limit-milnor-sequence` | 1 | state |
 | `lem-pc-derived-limit-roos-abelian-groups` | 1 | state |
