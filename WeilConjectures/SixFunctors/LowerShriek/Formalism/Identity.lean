@@ -196,4 +196,70 @@ lemma exchange_id_vert (g : X ⟶ Y) (w : g ≫ 𝟙 Y = 𝟙 X ≫ g)
 
 end IdentitySquares
 
+
+section PushforwardUnit
+
+variable {X Y : Scheme.{u}}
+
+lemma pfId_hom : (F.pfId X).hom = conjugateEquiv (F.adj (𝟙 X)) Adjunction.id (F.pbId X).inv :=
+  rfl
+
+lemma pfId_inv : (F.pfId X).inv = conjugateEquiv Adjunction.id (F.adj (𝟙 X)) (F.pbId X).hom :=
+  rfl
+
+/-- The left unit law for the composition isomorphisms of the pushforwards. -/
+lemma pfComp'_id_left (f : X ⟶ Y) :
+    (F.pfComp' (𝟙 X) f f (Category.id_comp f)).hom ≫
+        Functor.whiskerRight (F.pfId X).hom (F.pf f) ≫ (Functor.leftUnitor (F.pf f)).hom =
+      𝟙 _ := by
+  have hl : conjugateEquiv ((F.adj f).comp Adjunction.id) (F.adj f)
+      (Functor.rightUnitor (F.pb f)).inv = (Functor.leftUnitor (F.pf f)).hom :=
+    congrArg Iso.inv (conjugateIsoEquiv_rightUnitor (F.adj f))
+  have hpb : (Functor.rightUnitor (F.pb f)).inv ≫
+      Functor.whiskerLeft (F.pb f) (F.pbId X).inv ≫
+        (F.pbComp' (𝟙 X) f f (Category.id_comp f)).inv = 𝟙 _ := by
+    ext M
+    simp [pbComp'_id_left_inv_app]
+  rw [pfComp'_hom, pfId_hom, ← conjugateEquiv_whiskerLeft _ _ (F.adj f), ← hl,
+    conjugateEquiv_comp, conjugateEquiv_comp, Category.assoc, hpb, conjugateEquiv_id]
+
+/-- The right unit law for the composition isomorphisms of the pushforwards. -/
+lemma pfComp'_id_right (f : X ⟶ Y) :
+    (F.pfComp' f (𝟙 Y) f (Category.comp_id f)).hom ≫
+        Functor.whiskerLeft (F.pf f) (F.pfId Y).hom ≫ (Functor.rightUnitor (F.pf f)).hom =
+      𝟙 _ := by
+  have hr : conjugateEquiv (Adjunction.id.comp (F.adj f)) (F.adj f)
+      (Functor.leftUnitor (F.pb f)).inv = (Functor.rightUnitor (F.pf f)).hom :=
+    congrArg Iso.inv (conjugateIsoEquiv_leftUnitor (F.adj f))
+  have hpb : (Functor.leftUnitor (F.pb f)).inv ≫
+      Functor.whiskerRight (F.pbId Y).inv (F.pb f) ≫
+        (F.pbComp' f (𝟙 Y) f (Category.comp_id f)).inv = 𝟙 _ := by
+    ext M
+    simp [pbComp'_id_right_inv_app, ← Functor.map_comp]
+  rw [pfComp'_hom, pfId_hom, ← conjugateEquiv_whiskerRight _ _ (F.adj f), ← hr,
+    conjugateEquiv_comp, conjugateEquiv_comp, Category.assoc, hpb, conjugateEquiv_id]
+
+
+lemma pfComp'_id_left_inv_app (f : X ⟶ Y) (M : F.obj X) :
+    (F.pfComp' (𝟙 X) f f (Category.id_comp f)).inv.app M =
+      (F.pf f).map ((F.pfId X).hom.app M) := by
+  rw [← cancel_epi ((F.pfComp' (𝟙 X) f f (Category.id_comp f)).hom.app M), Iso.hom_inv_id_app]
+  simpa using (congr_app (F.pfComp'_id_left f) M).symm
+
+lemma pfComp'_id_right_inv_app (f : X ⟶ Y) (M : F.obj X) :
+    (F.pfComp' f (𝟙 Y) f (Category.comp_id f)).inv.app M =
+      (F.pfId Y).hom.app ((F.pf f).obj M) := by
+  rw [← cancel_epi ((F.pfComp' f (𝟙 Y) f (Category.comp_id f)).hom.app M), Iso.hom_inv_id_app]
+  simpa using (congr_app (F.pfComp'_id_right f) M).symm
+
+
+lemma pfComp'_id_left_hom_app (f : X ⟶ Y) (M : F.obj X) :
+    (F.pfComp' (𝟙 X) f f (Category.id_comp f)).hom.app M =
+      (F.pf f).map ((F.pfId X).inv.app M) := by
+  rw [← cancel_mono ((F.pfComp' (𝟙 X) f f (Category.id_comp f)).inv.app M), Iso.hom_inv_id_app,
+    pfComp'_id_left_inv_app, ← Functor.map_comp, Iso.inv_hom_id_app]
+  exact (CategoryTheory.Functor.map_id _ _).symm
+
+end PushforwardUnit
+
 end AlgebraicGeometry.CompactSupportFormalism
