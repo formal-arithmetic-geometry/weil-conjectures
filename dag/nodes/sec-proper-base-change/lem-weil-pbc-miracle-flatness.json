@@ -261,5 +261,23 @@
   "worker": "stage1",
   "summary": "Statement checked against Stacks 00R4 (kept; only the inline citation of def-weil-pbc-regular-sequence added for the parenthetical 'regular sequence', and that node added to stmt_deps). Proof written from the Stacks proof in 10 steps: induction on dim R stated as P(n); base case R a field (module-over-field-flat leaf); minimal primes q_i of S have dim S/q_i = dim S by 00N9 (new unsplit node lem-weil-pbc-cm-local-maximal-chain-length) via a longest chain above q_i, hence m_R S is in no q_i by (3) and p_i = phi^{-1}(q_i) != m_R; x chosen by prime avoidance (00DS leaf) outside m_R^2 and the p_i; R/xR regular of dim n-1 and x a nonzerodivisor on R by extending x to a regular system of parameters (cotangent-dimension and Nakayama leaves, as in the proof of lem-weil-pbc-regular-local-hypersurface-criterion) and 00NQ; dim S/xS = dim S - 1 by 0B52 (new Mathlib leaf lem-weil-pbc-noetherian-local-dim-drop-outside-minimal-primes), x regular on S by the existing 00N6 node (the step Stacks cites as 02JN), S/xS Cohen-Macaulay by 02JN's last assertion (new unsplit node lem-weil-pbc-cm-local-quotient-nonzerodivisor-cm); hypothesis (3) descends since S/xS / m_{R/xR}(S/xS) = S/m_R S; conclusion by the existing 00ML-with-nonzerodivisor node lem-weil-pbc-flat-local-criterion-nonzerodivisor. Stacks leaves implicit that dim S/xS = dim S - 1 needs 0B52 before 02JN applies, that x is a nonzerodivisor on R (needed for the remark after 00ML), and that (3) passes to the quotients; these are written out. Mathlib: no Cohen-Macaulay notion, no miracle flatness (searches of the item kept, two added)."
  },
- "reviewed": "Reviewed by L 2026-10-10: faithful to Algebra 00R4 (induction on dim R): minimal primes and prime avoidance for x (00DS), R/xR regular via the cotangent dimension + 00NQ, dim S/xS = dim S − 1 (0B52, new leaf), x a nonzerodivisor on S by 00N6, S/xS Cohen-Macaulay (02JN, new node), the hypotheses checked for the quotients, conclusion by the local criterion 00ML (existing node). Statement gained a citation only. No Mathlib match (no Cohen-Macaulay in Mathlib)."
+ "reviewed": "Reviewed by L 2026-10-10: faithful to Algebra 00R4 (induction on dim R): minimal primes and prime avoidance for x (00DS), R/xR regular via the cotangent dimension + 00NQ, dim S/xS = dim S − 1 (0B52, new leaf), x a nonzerodivisor on S by 00N6, S/xS Cohen-Macaulay (02JN, new node), the hypotheses checked for the quotients, conclusion by the local criterion 00ML (existing node). Statement gained a citation only. No Mathlib match (no Cohen-Macaulay in Mathlib).",
+ "lean": {
+  "module": "Sheaf.RingTheory.MiracleFlatness",
+  "declaration": "RingHom.flat_of_regular_of_depth_ge",
+  "file": "lean/Sheaf/RingTheory/MiracleFlatness.lean",
+  "statement": "theorem flat_of_regular_of_depth_ge {R : Type u} {S : Type v} [CommRing R] [CommRing S] [IsRegularLocalRing R] [IsLocalRing S] [IsNoetherianRing S] (φ : R →+* S) [IsLocalHom φ] (e : ℕ) (hdim : ringKrullDim S = (e : WithBot ℕ∞)) (hdepth : (e : ℕ∞) ≤ IsLocalRing.depth (R := S) S) (hdim_add : ringKrullDim S = ringKrullDim R + ringKrullDim (S ⧸ (IsLocalRing.maximalIdeal R).map φ)) : φ.Flat",
+  "branch": "sheaf-dag",
+  "by": "J1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-mfl1119",
+  "group": "J1",
+  "result": "pass",
+  "note": "R,S CommRing u/v; IsRegularLocalRing R (extends local+Noetherian, spanFinrank=dim) = Noetherian local + (1); IsLocalRing S + IsNoetherianRing S; phi with IsLocalHom; (2) CM inline exactly as mem_minimalPrimes_of_depth_ge (e, ringKrullDim S = e, e <= IsLocalRing.depth S); (3) ringKrullDim S = dim R + dim (S / (maxIdeal R).map phi); conclusion phi.Flat (RingHom.Flat); no Mathlib CM/miracle flatness in pinned Mathlib; no new defs; no hollow hypotheses"
+ }
 }
