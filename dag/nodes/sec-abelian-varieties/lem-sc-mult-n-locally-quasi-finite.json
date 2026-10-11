@@ -163,5 +163,22 @@
   "group": "F1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-mlq2108 (reviewer sub-agent of L); spot-checked: Statement unchanged from base (alg. closed was the original statement; consumer lem-sc-mult-n-finite-kernel does the base change to an algebraic closure itself, so no E7). Steps 1-4 checked against cited statements; new node lem-sc-mult-n-dim-one-closed-subscheme true and stated exactly by sorry-free project declaration Scheme.exists_isClosedImmersion_topologicalKrullDim_eq_one (sorryfree.py OK). FIX more, RETURN less: (1) C1 step 3: existence of an ample L on A was not cited (lem-sc-ample-tensor only builds N from a given ample L) - cited lem-sc-abelian-variety-projective; (2) C1 step 3: 'pullback of ampleness along j is ample by the definition' is not definitional - cited lem-weil-pbc-pullback-ample-invertible (closed immersion affine; def-sc-ample identifies notions, Tag 01Q3); (3) C4 step 3/4: lem-sc-ample-positive-degree needs C a proper curve over algebraically closed K in the sense of def-sc-curves - stated that y is closed with residue field K so C is a closed subscheme of A, cited def-sc-curves. proof_deps updated. Second reading by F1 missed (1)-(3).; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "WeilConjectures.AlgebraicGeometry.AbelianVariety.Isogeny",
+  "declaration": "AlgebraicGeometry.locallyQuasiFinite_npow_id_of_isAlgClosed",
+  "statement": "theorem locallyQuasiFinite_npow_id_of_isAlgClosed [IsAlgClosed K] (A : Over (Spec (.of K)))\n    [GrpObj A] [IsAbelianVariety A] (n : ℕ) (hn : 0 < n) :\n    LocallyQuasiFinite (𝟙 A ^ n).left",
+  "branch": "slopmaster2",
+  "by": "H1",
+  "date": "2026-10-11",
+  "existing": true,
+  "note": "Existing source theorem, Isogeny.lean lines 73–75. Its implicit K : Type u and Field K are declared at line 60. Mathlib LocallyQuasiFinite has the Stacks meaning here because multiplication is locally of finite type: A.hom is proper, (𝟙 A ^ n).left ≫ A.hom = A.hom, and locallyOfFiniteType_of_comp applies."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-mnq",
+  "group": "H1",
+  "result": "pass"
  }
 }
