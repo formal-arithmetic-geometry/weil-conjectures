@@ -8,6 +8,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.Morphisms.RegularImmersion
 public import WeilConjectures.Mathlib.AlgebraicGeometry.AffineSpace
 public import WeilConjectures.AlgebraicGeometry.DeformationSpace
+public import WeilConjectures.AlgebraicGeometry.DeformationSpace.Smooth
 public import Mathlib.AlgebraicGeometry.Morphisms.Separated
 
 /-!
@@ -500,6 +501,63 @@ structure DeformationToNormalConeData (d : ℕ) (g : V ⟶ B) (s : B ⟶ V)
   isPullback_generic : IsPullback generic (pullback.snd _ _) proj puncturedLine.ι
 
 attribute [instance] DeformationToNormalConeData.smoothOfRelativeDimension_proj
+
+section Charts
+
+open Polynomial
+
+open AffineZariskiSite
+
+variable (g : V ⟶ B) (s : B ⟶ V)
+
+/-- The chart `Spec Γ(B, W)[t] ⟶ 𝔸¹_B` of the affine line over an affine open `W ⊆ B`. -/
+noncomputable def affineLineChart {W : B.Opens} (hW : IsAffineOpen W) :
+    Spec (.of Γ(B, W)[X]) ⟶ 𝔸(ULift.{u} (Fin 1); B) :=
+  AffineSpace.homOfVector (Spec.map (CommRingCat.ofHom Polynomial.C) ≫ hW.fromSpec)
+    fun _ ↦ (ΓSpecIso (.of Γ(B, W)[X])).inv Polynomial.X
+
+instance {W : B.Opens} (hW : IsAffineOpen W) : IsOpenImmersion (affineLineChart hW) := by
+  rw [affineLineChart, ← AffineSpace.homOfVector_map]
+  have := isIso_homOfVector_specPolynomial Γ(B, W)
+  infer_instance
+
+set_option backward.isDefEq.respectTransparency false in
+/-- Over an affine open `U ⊆ g⁻¹ W`, the projection of the deformation space is
+`Spec (Γ(W)[t] ⟶ Γ(U)[t, I(U) t⁻¹])` followed by the chart of `𝔸¹_B` over `W`. -/
+lemma ι_deformationSpaceProj (U : V.AffineZariskiSite) {W : B.Opens} (hW : IsAffineOpen W)
+    (hUW : U.1 ≤ g ⁻¹ᵁ W) :
+    colimit.ι (relativeGluingData s.ker.coequifibered_toReesPresheaf).functor U ≫
+      deformationSpaceProj g s =
+      Spec.map (CommRingCat.ofHom ((s.ker.siteIdeal U).toExtendedReesAlgebra.comp
+        (mapRingHom (g.appLE W U.1 hUW).hom))) ≫ affineLineChart hW := by
+  refine AffineSpace.hom_ext ?_ fun i ↦ ?_
+  · rw [deformationSpaceProj, Category.assoc, Category.assoc, Category.assoc,
+      AffineSpace.map_over, polynomialSpecToAffineSpace_over_assoc,
+      IdealSheafData.deformationSpaceToPolynomialSpec,
+      relativeGluingMap_toBase_assoc _ _ _ s.ker.toPolynomialPresheaf_comp_polynomialToRees,
+      ι_toBase_assoc, affineLineChart, Category.assoc, AffineSpace.homOfVector_over,
+      ← Spec.map_comp_assoc, ← CommRingCat.ofHom_comp, ← IsAffineOpen.SpecMap_appLE_fromSpec g hW U.2 hUW,
+      ← Spec.map_comp_assoc]
+    congr 2
+    ext x
+    change _ = (s.ker.siteIdeal U).toExtendedReesAlgebra
+      (Polynomial.map (g.appLE W U.1 hUW).hom (Polynomial.C x))
+    rw [Polynomial.map_C]
+    exact (Ideal.toExtendedReesAlgebra_C (I := s.ker.siteIdeal U) _).symm
+  · rw [deformationSpaceProj, IdealSheafData.deformationSpaceToPolynomialSpec,
+      ι_relativeGluingMap_assoc, ι_polynomialSpecToAffineSpace_assoc, polynomialSpecChart,
+      AffineSpace.homOfVector_map, AffineSpace.comp_homOfVector,
+      AffineSpace.homOfVector_appTop_coord, Function.comp_apply, affineLineChart,
+      AffineSpace.comp_homOfVector, AffineSpace.homOfVector_appTop_coord, Function.comp_apply,
+      ← CommRingCat.comp_apply, ← Scheme.ΓSpecIso_inv_naturality, CommRingCat.comp_apply,
+      ← CommRingCat.comp_apply _ (Spec.map _).appTop, ← Scheme.ΓSpecIso_inv_naturality,
+      CommRingCat.comp_apply]
+    congr 1
+    change (s.ker.siteIdeal U).toExtendedReesAlgebra Polynomial.X =
+      (s.ker.siteIdeal U).toExtendedReesAlgebra (Polynomial.map _ Polynomial.X)
+    rw [Polynomial.map_X]
+
+end Charts
 
 section Smooth
 
