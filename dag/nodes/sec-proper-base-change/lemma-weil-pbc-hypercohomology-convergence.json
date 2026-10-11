@@ -221,5 +221,28 @@
   "by": "L",
   "result": "pass",
   "note": "statement made explicit for the three couples of def-weil-pbc-hypercohomology-filtrations; thm-sp-half-plane-convergence and lem-sp-kinjective-computes (sk-prop-av-pqf-finite) accepted as tool uses; the citations of this lemma from other chapters (lem-zl-*, sbc-thm-bounded-derived-smooth-base-change, lem-kun-*) are outside the target reach and left to their own splits"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.HypercohomologyConvergence",
+  "declaration": "AlgebraicGeometry.Etale.hypercohomology_convergence_first",
+  "declarations": [
+   "AlgebraicGeometry.Etale.hypercohomology_convergence_first",
+   "AlgebraicGeometry.Etale.hypercohomology_convergence_baseChange",
+   "AlgebraicGeometry.Etale.hypercohomology_convergence_second"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/HypercohomologyConvergence.lean",
+  "statement": "theorem hypercohomology_convergence_first {X X' Y Y' : Scheme.{u}} (f : X ⟶ Y) (f' : X' ⟶ Y') (g : Y' ⟶ Y) (g' : X' ⟶ X) (sq : IsPullback g' f' f g) (K : CochainComplex.Plus (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1})) (L : DerivedCategory.Plus (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1})) (e : DerivedCategory.Q.obj K.obj ≅ L.obj) (hT : ∀ q : ℤ, CategoryTheory.Sheaf.IsTorsion ((DerivedCategory.homologyFunctor _ q).obj L.obj)) (a : ℤ) (ha : ∀ q : ℤ, q < a → IsZero ((DerivedCategory.homologyFunctor _ q).obj L.obj)) (hterms : ∀ i : ℤ, i < a → IsZero (K.obj.X i)) : (∀ p q : ℤ, q < a → IsZero ((hypercohomologyCouple (hypercohomologyFirstFunctor f) K).D p q)) ∧ (∀ (r : ℕ) (p q : ℤ), (p < 0 ∨ q < a) → IsZero (((hypercohomologyCouple (hypercohomologyFirstFunctor f) K).pageCouple r).E p q)) ∧ (∀ (r : ℕ) (n p q : ℤ), p + q = n → ¬ IsZero (((hypercohomologyCouple (hypercohomologyFirstFunctor f) K).pageCouple r).E p q) → a ≤ q ∧ q ≤ n ∧ 0 ≤ p ∧ p ≤ n - a) ∧ (∀ (r : ℕ) (n : ℤ), Set.Finite {pq : ℤ × ℤ | pq.1 + pq.2 = n ∧ ¬ IsZero (((hypercohomologyCouple (hypercohomologyFirstFunctor f) K).pageCouple r).E pq.1 pq.2)} ∧ Set.ncard {pq : ℤ × ℤ | pq.1 + pq.2 = n ∧ ¬ IsZero (((hypercohomologyCouple (hypercohomologyFirstFunctor f) K).pageCouple r).E pq.1 pq.2)} ≤ (n - a + 1).toNat) ∧ (∀ (r : ℕ) (n p q : ℤ), p + q = n → n < a → IsZero (((hypercohomologyCouple (hypercohomologyFirstFunctor f) K).pageCouple r).E p q)) ∧ (∀ (r : ℕ) (p q : ℤ), max (q - a + 1) p < (r : ℤ) + 2 → ((hypercohomologyCouple (hypercohomologyFirstFunctor f) K).pageCouple r).d p q = 0 ∧ ((hypercohomologyCouple (hypercohomologyFirstFunctor f) K).pageCouple r).dInto p q = 0) ∧ (∀ (r : ℕ) (p q : ℤ), max (q - a + 1) p < (r : ℤ) + 2 → (hypercohomologyCouple (hypercohomologyFirstFunctor f) K).cycleBoundaryTower.Z r p q = (hypercohomologyCouple (hypercohomologyFirstFunctor f) K).cycleBoundaryTower.Z (max (q - a) (p - 1)).toNat p q ∧ (hypercohomologyCouple (hypercohomologyFirstFunctor f) K).cycleBoundaryTower.B r p q = (hypercohomologyCouple (hypercohomologyFirstFunctor f) K).cycleBoundaryTower.B (max (q - a) (p - 1)).toNat p q) ∧ (∀ n : ℤ, (∀ p : ℤ, p ≤ 0 → (hypercohomologyFiltration (hypercohomologyFirstFunctor f) K n).step p = ⊤) ∧ (∀ p : ℤ, n - a + 1 ≤ p → ((hypercohomologyFiltration (hypercohomologyFirstFunctor f) K n).step p).arrow = 0) ∧ (hypercohomologyFiltration (hypercohomologyFirstFunctor f) K n).IsFinite ∧ (hypercohomologyFiltration (hypercohomologyFirstFunctor f) K n).IsExhaustive ∧ (hypercohomologyFiltration (hypercohomologyFirstFunctor f) K n).IsSeparated ∧ BigradedExactCouple.IsInverseLimit (hypercohomologyFiltration (hypercohomologyFirstFunctor f) K n)) ∧ (hypercohomologyCouple (hypercohomologyFirstFunctor f) K).IsRegular ∧ (hypercohomologyCouple (hypercohomologyFirstFunctor f) K).IsComplete ∧ ∃ Z : (hypercohomologyCouple (hypercohomologyFirstFunctor f) K).LimitSubobjects, ∃ A : ∀ n : ℤ, (hypercohomologyCouple (hypercohomologyFirstFunctor f) K).AlphaColimit n, ∃ hA : ∀ n : ℤ, (A n).obj = (DerivedCategory.homologyFunctor _ n).obj ((hypercohomologyFirstFunctor f).obj (DerivedCategory.Q.obj K.obj)), (hypercohomologyCouple (hypercohomologyFirstFunctor f) K).ConvergesTo Z A ∧ (∀ n p : ℤ, (A n).ι p ≫ eqToHom (hA n) = eqToHom (congrArg (fun m : ℤ ↦ (DerivedCategory.homologyFunctor (Sheaf Y.smallEtaleTopology AddCommGrpCat.{u + 1}) m).obj ((hypercohomologyFirstFunctor f).obj (DerivedCategory.Q.obj (TruncationCouple.truncation K (n - p)).obj))) (by omega : p + (n - p) = n)) ≫ hypercohomologyAbutmentMap (hypercohomologyFirstFunctor f) K n (n - p)) ∧ (∀ n p : ℤ, (Subobject.«exists» (eqToHom (hA n))).obj (((hypercohomologyCouple (hypercohomologyFirstFunctor f) K).imageFiltration n (A n)).step p) = (hypercohomologyFiltration (hypercohomologyFirstFunctor f) K n).step p) ∧ (∀ p q : ℤ, (p < 0 ∨ q < a) → IsZero ((hypercohomologyCouple (hypercohomologyFirstFunctor f) K).pageInfinity Z p q)) ∧ (∀ p q : ℤ, Nonempty ((hypercohomologyCouple (hypercohomologyFirstFunctor f) K).pageInfinity Z p q ≅ ((hypercohomologyCouple (hypercohomologyFirstFunctor f) K).pageCouple (max (q - a) (p - 1)).toNat).E p q)) ∧ (∀ (r : ℕ) (n p q : ℤ), p + q = n → n - a + 2 ≤ (r : ℤ) + 2 → Nonempty (((hypercohomologyCouple (hypercohomologyFirstFunctor f) K).pageCouple r).E p q ≅ (hypercohomologyCouple (hypercohomologyFirstFunctor f) K).pageInfinity Z p q)) ∧ (∀ p q : ℤ, Nonempty ((hypercohomologyCouple (hypercohomologyFirstFunctor f) K).pageInfinity Z p q ≅ (hypercohomologyFiltration (hypercohomologyFirstFunctor f) K (p + q)).gradedPiece p))",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-hcc"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-hcc",
+  "group": "F1",
+  "result": "fix"
  }
 }
