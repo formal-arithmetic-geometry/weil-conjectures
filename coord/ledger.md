@@ -5125,3 +5125,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 15:04 L: merged deliver/J1/pqf-lem-proper-basic (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.ProperBasic AlgebraicGeometry.proper_basic)
 - 15:04 L: merged deliver/K1/pqf-lem-qf-finitefibres (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.QuasiFiniteIffFiniteFibres AlgebraicGeometry.Scheme.Hom.isQuasiFinite_iff_finiteFibres)
 - 15:04 L: merged deliver/M1/lem-weil-pbc-torsion-extension-flat-descent (stage 2; reviewer PASS; first push; Sheaf.RingTheory.TorsionExtensionFlatDescent LinearMap.exists_torsion_extension_flat_descent)
+- 15:04 L: merged deliver/M1/pqf-lem-qs-intersection-qc (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.QuasiCompactOpenIntersection AlgebraicGeometry.compactSpace_inter_of_quasiSeparated)
