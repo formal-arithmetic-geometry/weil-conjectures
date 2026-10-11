@@ -5286,3 +5286,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 15:47 L: merged deliver/C1/lem-weil-pbc-inverse-image-free-etale-module (stage 2; reviewer PASS; first push; Sheaf.Paper.InverseImageFreeEtaleModule AlgebraicGeometry.inverseImageFreeEtaleModule)
 - 15:47 L: merged deliver/G1/lem-sc-open-curve-etale-leray-low-degree (stage 2; reviewer PASS; first push; Sheaf.Paper.OpenCurveEtaleLerayLowDegree AlgebraicGeometry.openCurveEtaleLerayLowDegree)
 - 15:47 L: merged deliver/G1/lem-sc-open-curve-gm-direct-image-cohomology (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.Curve.OpenCurveGmDirectImageCohomology AlgebraicGeometry.Etale.bijective_openCurve_gm_directImage_cohomology)
+- 15:47 L: merged deliver/H1/lem-weil-pbc-finite-coproduct-cohomology-assembly (stage 2; reviewer PASS; first push; Sheaf.Paper.FiniteCoproductCohomologyAssembly AlgebraicGeometry.Etale.finiteCoproductCohomologyAssembly)

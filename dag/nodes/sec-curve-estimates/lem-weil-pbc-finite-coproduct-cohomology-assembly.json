@@ -139,5 +139,23 @@
   "group": "K1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-fca (reviewer sub-agent of L); spot-checked: Source: Stacks 0A5B (etale-cohomology-lemma-constant-smooth-statements), proof first paragraph (X a finite disjoint union of curves and points); the item statement is unchanged and the route (clopen decomposition of Ab(C_Et), then derived functors of a finite product) is the standard one. New nodes: lem-weil-pbc-etale-sheaf-clopen-product (true: a sheaf on the small etale site of a finite clopen coproduct is the family of its restrictions, glued uniquely since distinct summands are disjoint; Gamma is the product) and lem-weil-pbc-derived-finite-product (true: products of injectives are injective in the product category, so injective resolutions and R^q are componentwise; hypotheses finite I, enough injectives, additive left exact present); both tested on I empty (zero category, zero) and I singleton (identity). Step 1 carried by lem-weil-pbc-scheme-coproduct-family (open immersions, disjoint, covering, clopen); Step 2 by the clopen-product node and def-weil-pbc-inverse-image. FIX more, RETURN less: Step 3 (C4/C1): def-weil-pbc-etale-cohomology defines H^q by K-injective resolutions and does not say it is R^q Gamma via injective resolutions, which lem-weil-pbc-derived-finite-product uses, and the enough-injectives hypothesis of that node was not cited; repaired by citing lem-weil-pbc-bounded-below-injectives-kinjective (injective resolution is K-injective, so H^q = R^q Gamma of def-sp-left-exact-additive), lem-weil-pbc-module-sheaves-enough-injectives (Ab(T_Et) has enough injectives; off-unit sk-thm-reduction, generic tool, recorded in tool_uses), def-weil-pbc-global-sections-functor (Gamma a right adjoint, hence additive left exact). dag/nodes/sec-curve-estimates/lem-weil-pbc-finite-coproduct-cohomology-assembly.json: proof[2].text and uses, proof_deps: these four nodes added. No Mathlib leaf. Start Sat Oct 10 04:14:11 PM UTC 2026, end Sat Oct 10 04:15:28 PM UTC 2026.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.FiniteCoproductCohomologyAssembly",
+  "declaration": "AlgebraicGeometry.Etale.finiteCoproductCohomologyAssembly",
+  "statement": "theorem finiteCoproductCohomologyAssembly {I : Type u} [Finite I] (X : I → Scheme.{u}) (C : Scheme.{u}) (ι : ∀ i : I, X i ⟶ C) (hc : IsColimit (Cofan.mk C ι)) (F : Sheaf C.smallEtaleTopology AddCommGrpCat.{u + 1}) (q : ℕ) : Function.Bijective (fun x : Sheaf.H F q => fun i : I => cohomologyMap (ι i) F q x)",
+  "by": "H1",
+  "date": "2026-10-11",
+  "existing": false,
+  "file": "lean/Sheaf/Paper/FiniteCoproductCohomologyAssembly.lean",
+  "branch": "sheaf-dag"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "H1",
+  "result": "pass",
+  "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
  }
 }
