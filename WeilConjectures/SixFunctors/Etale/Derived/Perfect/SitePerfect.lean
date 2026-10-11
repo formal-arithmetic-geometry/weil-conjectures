@@ -10,6 +10,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStar
 public import WeilConjectures.SixFunctors.Etale.Derived.Perfect.Dual
 public import WeilConjectures.SixFunctors.Etale.Derived.Coefficients
 public import WeilConjectures.SixFunctors.OpenClosed.Conservative
+public import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.DualizableShortExact
 
 /-!
 # Perfect complexes on the coefficient site
@@ -116,6 +117,43 @@ noncomputable abbrev DerivedCategory.ihomUnitTensorToIhomEtale
     (K : DerivedCategory (Sheaf Y.smallEtaleTopology A)) :
     (ihom K).obj (𝟙_ _) ⊗ K ⟶ (ihom K).obj K :=
   MonoidalClosed.ihomUnitTensorToIhom K K
+
+/-- Dualizability of an étale sheaf, with the monoidal structure of a general coefficient
+category (compare `AlgebraicGeometry.Etale.DerivedCategory.IsDualizableEtale`). -/
+abbrev IsDualizableSheaf (F : Sheaf Y.smallEtaleTopology A) : Prop :=
+  IsDualizable F
+
+/-- A bounded complex of dualizable sheaves is dualizable in `D(Y_ét)`
+(`DerivedCategory.isDualizable_Q_obj`). -/
+theorem DerivedCategory.isDualizableEtale_Q_obj
+    (P : CochainComplex (Sheaf Y.smallEtaleTopology A) ℤ) (a b : ℤ) [P.IsStrictlyGE a]
+    [P.IsStrictlyLE b] (hP : ∀ n, IsDualizableSheaf (P.X n)) :
+    DerivedCategory.IsDualizableEtale (_root_.DerivedCategory.Q.obj P) :=
+  _root_.DerivedCategory.isDualizable_Q_obj P a b hP
+
+omit [MonoidalPreadditive A] [Abelian.HasFunctorialFlatResolution A] in
+lemma IsDualizableSheaf.of_retract {F G : Sheaf Y.smallEtaleTopology A} (h : Retract F G)
+    (hG : IsDualizableSheaf G) : IsDualizableSheaf F :=
+  IsDualizable.of_retract h hG
+
+omit [MonoidalPreadditive A] [Abelian.HasFunctorialFlatResolution A] in
+lemma IsDualizableSheaf.of_iso {F G : Sheaf Y.smallEtaleTopology A} (e : F ≅ G)
+    (hF : IsDualizableSheaf F) : IsDualizableSheaf G :=
+  IsDualizable.of_iso e hF
+
+omit [Abelian.HasFunctorialFlatResolution A] in
+lemma IsDualizableSheaf.biprod {F G : Sheaf Y.smallEtaleTopology A} (hF : IsDualizableSheaf F)
+    (hG : IsDualizableSheaf G) : IsDualizableSheaf (F ⊞ G) :=
+  IsDualizable.biprod hF hG
+
+omit [MonoidalPreadditive A] [Abelian.HasFunctorialFlatResolution A] in
+lemma isDualizableSheaf_of_isZero {F : Sheaf Y.smallEtaleTopology A} (hF : IsZero F) :
+    IsDualizableSheaf F :=
+  CategoryTheory.IsZero.isDualizable hF
+
+omit [MonoidalPreadditive A] [Abelian.HasFunctorialFlatResolution A] in
+lemma isDualizableSheaf_unit : IsDualizableSheaf (𝟙_ (Sheaf Y.smallEtaleTopology A)) :=
+  isDualizable_unit
 
 /-- An object `K` of `D(Y_ét)` is dualizable as soon as the comparison
 `RHom(K, Λ_Y) ⊗ᴸ K ⟶ RHom(K, K)` is an isomorphism: `RHom(K, Λ_Y)` is then a left dual of `K`
