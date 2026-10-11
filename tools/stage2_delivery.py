@@ -993,14 +993,15 @@ def read_delivery(git: Git, ref: str, base: str, group: str, item: str, max_comm
     if D["statement_reverted"]:
         # --revert-statement: the item's module uses no declaration of a node the restored stmt_deps lose
         for x in D["stmt_deps_reverted"]:
-            xd = D["new"].get(x, {}).get("node") if x in D["new"] else None
-            if xd is None and x in base_paths:
+            # its declarations as recorded on the base, or on sheaf-dag now (a node landed since the base)
+            names = []
+            for at in (base, "sheaf-dag") if x in base_paths else ():
                 try:
-                    xd = json.loads(git.show(base, base_paths[x]) or "{}")
-                except ValueError:
-                    xd = {}
-            r = (xd or {}).get("lean")
-            names = [r.get("declaration")] + list(r.get("declarations") or []) if isinstance(r, dict) else []
+                    r = json.loads(git.show(at, base_paths[x]) or "{}").get("lean")
+                except (ValueError, AttributeError):
+                    r = None
+                if isinstance(r, dict):
+                    names += [r.get("declaration")] + list(r.get("declarations") or [])
             for nm in {str(n).split(".")[-1] for n in names if n}:
                 if D["lean_text"] and re.search(rf"(?<![\w']){re.escape(nm)}(?![\w'])", D["lean_text"]):
                     f("b", f"--revert-statement: the item's module {D['lean_path']} uses {nm}, the declaration of {x}, which "
