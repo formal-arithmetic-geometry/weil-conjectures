@@ -75,6 +75,7 @@ lemma rightDerivedFunctorCompIso'_refinementLowerStarComp_hom_eq :
   rw [rightDerivedFunctorCompIso'_refinementLowerStarComp_hom, rightDerivedLowerStarCompHom,
     conjugateEquiv_leftDerivedUpperStarComp_hom]
 
+omit [Etale.UpperStarPreservesFlat A] in
 /-- The comparison along a refinement, through the derived pullback `Lq^*`: it is the unit of
 `Lq^* ⊣ Rq_*`, the inverse of the base change `D(c.i)_! ≅ D(d.i)_! ⋙ Lq^*` and the composition
 map `Rq_* ⋙ R(d.g)_* ⟶ R(c.g)_*`. -/
@@ -95,6 +96,33 @@ lemma rightDerivedLowerShriekOfCompactificationComparison_app
     mapDerivedUpperStarLowerStarAdjunction_eq,
     Adjunction.ofNatIsoLeft_unit, Functor.map_comp, Category.assoc]
 
+/-- The key square for `projectionMapOfCompactification_comparison`: on `Z_c`, the derived
+pullback along `q = r.hom` of the projection formula for `d.i` matches the projection formula
+for `c.i` through the base change `D(c.i)_! ≅ D(d.i)_! ⋙ Lq^*`. -/
+lemma refinement_projection_key (hcart : IsPullback c.i (𝟙 X) r.hom d.i)
+    (K : DerivedCategory (Sheaf X.smallEtaleTopology A))
+    (L : DerivedCategory (Sheaf Y.smallEtaleTopology A)) :
+    L((r.hom)^*[A]).map (((derivedOpenImmersionLowerShriekProjectionIso A d.i).inv.app K).app
+        (L((d.g)^*[A]).obj L)) ≫
+      L((r.hom)^*[A]).map (D((d.i)_!open[A]).map (((-⊗ᴸ-(X)[A]).obj K).map
+        ((leftDerivedUpperStarCompactificationIso A d).hom.app L))) ≫
+      (leftDerivedUpperStarIsoMapDerivedCategory A r.hom).hom.app _ ≫
+      (refinementLowerShriekBaseChangeDerivedIso A r hcart).inv.app
+        (((-⊗ᴸ-(X)[A]).obj K).obj (L((f)^*[A]).obj L)) =
+    ((leftDerivedUpperStarTensorComparison A r.hom).app (D((d.i)_!open[A]).obj K)).app
+        (L((d.g)^*[A]).obj L) ≫
+      ((-⊗ᴸ-(c.Z)[A]).map ((leftDerivedUpperStarIsoMapDerivedCategory A r.hom).hom.app
+        (D((d.i)_!open[A]).obj K))).app (L((r.hom)^*[A]).obj (L((d.g)^*[A]).obj L)) ≫
+      ((-⊗ᴸ-(c.Z)[A]).map ((refinementLowerShriekBaseChangeDerivedIso A r hcart).inv.app K)).app
+        (L((r.hom)^*[A]).obj (L((d.g)^*[A]).obj L)) ≫
+      ((-⊗ᴸ-(c.Z)[A]).obj (D((c.i)_!open[A]).obj K)).map
+        ((leftDerivedUpperStarComp A r.hom d.g c.g r.hom_g.symm).inv.app L) ≫
+      ((derivedOpenImmersionLowerShriekProjectionIso A c.i).inv.app K).app
+        (L((c.g)^*[A]).obj L) ≫
+      D((c.i)_!open[A]).map (((-⊗ᴸ-(X)[A]).obj K).map
+        ((leftDerivedUpperStarCompactificationIso A c).hom.app L)) := by
+  sorry
+
 /-- The comparison `Rf_!(d) ⟶ Rf_!(c)` along a refinement intertwines the projection maps. -/
 lemma projectionMapOfCompactification_comparison (hcart : IsPullback c.i (𝟙 X) r.hom d.i)
     (K : DerivedCategory (Sheaf X.smallEtaleTopology A))
@@ -106,10 +134,50 @@ lemma projectionMapOfCompactification_comparison (hcart : IsPullback c.i (𝟙 X
           K)).app L ≫
         ((projectionMapOfCompactification A c).app K).app L := by
   rw [rightDerivedLowerShriekOfCompactificationComparison_app,
-    rightDerivedLowerShriekOfCompactificationComparison_app, projectionMapOfCompactification_app_app,
+    rightDerivedLowerShriekOfCompactificationComparison_app,
+    projectionMapOfCompactification_app_app,
     projectionMapOfCompactification_app_app]
-  trace_state
-  sorry
+  simp only [Functor.map_comp, NatTrans.comp_app, Category.assoc]
+  rw [rightDerivedLowerStarProjectionMap_comp'_assoc,
+    rightDerivedLowerStarProjectionMap_naturality_left_assoc,
+    rightDerivedLowerStarProjectionMap_naturality_left_assoc,
+    rightDerivedLowerStarProjectionMap_naturality_left_assoc]
+  erw [← (rightDerivedLowerStarCompHom A r.hom d.g c.g r.hom_g.symm).naturality_assoc,
+    ← (rightDerivedLowerStarCompHom A r.hom d.g c.g r.hom_g.symm).naturality_assoc,
+    ← (rightDerivedLowerStarCompHom A r.hom d.g c.g r.hom_g.symm).naturality]
+  simp only [Functor.comp_map, ← Functor.map_comp_assoc]
+  congr 2
+  refine congrArg (fun t ↦ R((d.g)_*[A]).map t) ?_
+  have hη₁ := (derivedUpperStarLowerStarAdjunction A r.hom).unit.naturality
+    (D((d.i)_!open[A]).map (((-⊗ᴸ-(X)[A]).obj K).map
+      ((leftDerivedUpperStarCompactificationIso A d).hom.app L)))
+  have hη₂ : ((derivedOpenImmersionLowerShriekProjectionIso A d.i).inv.app K).app
+        (L((d.g)^*[A]).obj L) ≫
+      (derivedUpperStarLowerStarAdjunction A r.hom).unit.app (D((d.i)_!open[A]).obj
+        (((-⊗ᴸ-(X)[A]).obj K).obj (L((d.i)^*[A]).obj (L((d.g)^*[A]).obj L)))) =
+      (derivedUpperStarLowerStarAdjunction A r.hom).unit.app
+        (((-⊗ᴸ-(d.Z)[A]).obj (D((d.i)_!open[A]).obj K)).obj (L((d.g)^*[A]).obj L)) ≫
+      R((r.hom)_*[A]).map (L((r.hom)^*[A]).map
+        (((derivedOpenImmersionLowerShriekProjectionIso A d.i).inv.app K).app
+          (L((d.g)^*[A]).obj L))) :=
+    (derivedUpperStarLowerStarAdjunction A r.hom).unit.naturality _
+  dsimp only [Functor.id_map, Functor.id_obj, Functor.comp_map, Functor.comp_obj] at hη₁
+  simp only [reassoc_of% hη₁, reassoc_of% hη₂]
+  have hR3 : ((-⊗ᴸ-(d.Z)[A]).map ((derivedUpperStarLowerStarAdjunction A r.hom).unit.app
+        (D((d.i)_!open[A]).obj K))).app (L((d.g)^*[A]).obj L) ≫
+      ((rightDerivedLowerStarProjectionMap A r.hom).app
+        (L((r.hom)^*[A]).obj (D((d.i)_!open[A]).obj K))).app (L((d.g)^*[A]).obj L) =
+      (derivedUpperStarLowerStarAdjunction A r.hom).unit.app
+          (((-⊗ᴸ-(d.Z)[A]).obj (D((d.i)_!open[A]).obj K)).obj (L((d.g)^*[A]).obj L)) ≫
+        R((r.hom)_*[A]).map (((leftDerivedUpperStarTensorComparison A r.hom).app
+          (D((d.i)_!open[A]).obj K)).app (L((d.g)^*[A]).obj L)) :=
+    (Adjunction.unit_app_comp_map_rightAdjointProjectionMap
+      (derivedUpperStarLowerStarAdjunction A r.hom) (leftDerivedUpperStarTensorComparison A r.hom)
+      (D((d.i)_!open[A]).obj K) (L((d.g)^*[A]).obj L)).symm
+  simp only [rightDerivedLowerStarProjectionMap_naturality_left_assoc, reassoc_of% hR3]
+  simp only [← Functor.map_comp]
+  refine congrArg (fun t ↦ _ ≫ R((r.hom)_*[A]).map t) ?_
+  simpa only [Category.assoc] using refinement_projection_key A r hcart K L
 
 
 end Etale
