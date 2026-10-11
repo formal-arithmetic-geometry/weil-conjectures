@@ -268,5 +268,24 @@
   "by": "L",
   "result": "accepted",
   "note": "10 steps following Stacks 07RY: base change keeps hypotheses and fibre degrees (new nodes for 01KU(3)/01TM(2) and for 03J7 as fibre-degree invariance); the claim (S_m open, X over S_m finite locally free of degree m) via the elementary etale neighbourhood splitting off the finite part (new unsplit 02LP node), local constancy of the degree (04MH node), additivity of fibre degrees forcing W = 0 and openness (03WT), etale descent of 'finite locally free of degree d' (new unsplit 02VO node); Z_r closed by induction on n with the reduced induced structure; universal property both ways by applying the claim to the base change f_T (L checked: the claim is proved for arbitrary f with the hypotheses, so this replaces Stacks' route through T_red and 02LS). Statement gained the citation of def-weil-pbc-fibre-degree-bound. Stacks misprint S \\ S_d for S \\ S_n."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FlatFpLqfBoundedStratification",
+  "declaration": "AlgebraicGeometry.Scheme.Hom.exists_flat_fp_lqf_bounded_stratification",
+  "file": "lean/Sheaf/AlgebraicGeometry/FlatFpLqfBoundedStratification.lean",
+  "statement": "theorem exists_flat_fp_lqf_bounded_stratification {X S : Scheme.{u}} (f : X ⟶ S) [Flat f] [LocallyOfFinitePresentation f] [IsSeparated f] (h_lqf : IsLocallyQuasiFinite f) (n : ℕ) (hn : BoundsFiberDegrees f n) : ∃ Z : ℕ → Set S, Z 0 = ∅ ∧ (∀ r : ℕ, IsClosed (Z r)) ∧ Monotone Z ∧ Z (n + 1) = Set.univ ∧ Pairwise (fun r t : ℕ => Disjoint (Z (r + 1) \\ Z r) (Z (t + 1) \\ Z t)) ∧ (⋃ r : ℕ, Z (r + 1) \\ Z r) = Set.univ ∧ (∀ (T : Scheme.{u}) (g : T ⟶ S) (r : ℕ), (pullback.snd f g).IsFiniteLocallyFreeOfDegree r ↔ Set.range g ⊆ Z (r + 1) \\ Z r)",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-fls1149"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-fls1149",
+  "group": "F1",
+  "result": "fix",
+  "note": "Flat/LocallyOfFinitePresentation/IsSeparated instances, IsLocallyQuasiFinite (01TD), bound tied as (n) BoundsFiberDegrees f n with Z (n+1)=univ, Z 0=∅ shift as J1 sibling, strata Z(r+1)\\Z r written out, disjoint+cover, universal property over Scheme.{u} via pullback.snd IsFiniteLocallyFreeOfDegree"
  }
 }
