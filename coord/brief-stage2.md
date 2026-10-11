@@ -50,6 +50,9 @@ Claim with `tools/claim.py next <G> --stage 2` (nearest to Mathlib first).
 - General-site restriction of module sheaves to U is `SheafOfModules.overFunctor` on `J.over U`; cite H1's `CategoryTheory.module_overFunctor_preservesZero` (lem-pur-rhom-into-kinjective-local, 38d166329) for zero preservation, never restate; ringed-space `moduleOverFunctor_*` instances are separate (STATE line GENERAL-SITE RESTRICTION).
 - Cohen–Macaulay: no Mathlib declaration; state CM local rings inline exactly as `Ideal.mem_minimalPrimes_of_depth_ge` (lem-weil-pbc-cm-local-associated-prime-minimal, e10ccd492): `ringKrullDim T = (e : WithBot ℕ∞)` and `(e : ℕ∞) ≤ IsLocalRing.depth (R := T) T`; maximal CM modules analogously; no private CM definition (STATE line COHEN–MACAULAY).
 - π₁ via abstract models `G : Type u` with `[IsFundamentalGroup (fiber s) G]` as `fundamentalGroupMap` requires (lem-galois-pi1-finite-etale-image-stabilizer, 7d4a5b1c8), identified with `Aut F` via `CategoryTheory.PreGaloisCategory.toAutContinuousMulEquiv`; not literally `Aut (fiber s)` (STATE line FUNDAMENTAL GROUP).
+- Module-pullback unit: the unit of `Classical.choose (Scheme.Modules.exists_tensorPullbackAdjunction g)` (lem-pc-module-pullback-adjunction); `Classical.choice (nonempty_tensorPullbackAdjunction g)` (C1, M1, H1 landed) is the older form, bridged in stage 3, not restated; new statements use `exists_tensorPullbackAdjunction` (STATE line TENSOR-PULLBACK UNIT).
+- Étale: morphism of schemes `AlgebraicGeometry.Etale (Spec.map (CommRingCat.ofHom φ))` (def-weil-etale-morphism) or ring map `Algebra.Etale`/`RingHom.Etale`, as the node speaks; both acceptable, no conversion; bridge `HasRingHomProperty @Etale RingHom.Etale` (STATE line ÉTALE RING MAPS).
+- Directed set (Stacks 00D3): `[Preorder I] [IsDirected I (· ≤ ·)]`; landed `[PartialOrder I]` modules are not rewritten (STATE line DIRECTED SETS).
 
 ## 4. Compiling
 
