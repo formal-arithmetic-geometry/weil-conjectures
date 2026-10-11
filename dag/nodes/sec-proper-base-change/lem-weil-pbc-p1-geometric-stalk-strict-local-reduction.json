@@ -1,0 +1,214 @@
+{
+ "id": "lem-weil-pbc-p1-geometric-stalk-strict-local-reduction",
+ "kind": "statement",
+ "title": "Reduce projective-line geometric-stalk exchange to strict-local exchange",
+ "statement": "Let Lambda be a commutative ring. Assume the strict-local exchange statement [prop-weil-pbc-strict-local-exchange] for every local homomorphism A to B of strictly henselian local rings, every torsion Lambda-module sheaf on the projective line over A and every q >= 0. Let S and T be schemes, g:T -> S, and let X′ with maps g′:X′ -> P1_S and f′:X′ -> T form a pullback square [def-weil-pbc-cartesian-square]. Let sigma:Spec k -> S and tau:Spec k′ -> T be points with separably closed fields, algebraic over the residue fields of their images [def-weil-geometric-point], and let iota:Spec k′ -> Spec k satisfy iota;sigma = tau;g. For every torsion Lambda-module sheaf F on P1_S [def-weil-pbc-torsion-etale-sheaf] and q >= 0, the stalk at tau of the degree-q exchange [def-weil-pbc-derived-exchange] is conjugate by additive equivalences to the cohomology pullback [def-weil-pbc-cohomology-pullback] along P1_{k′} -> P1_k. The source cohomology is H^q(P1_k,sigma_P1^* F) after forgetting to abelian groups, and the target is H^q(P1_{k′},iota_P1^*(sigma_P1^* F)). This is a conditional reduction: it does not assert or prove the strict-local premise.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "proof of Theorem Tag 095T, paragraphs 3--4; the strict-henselization stalk formula followed by identification of the exchange on stalks"
+ },
+ "stmt_deps": [
+  "def-nagata-projective-space-base-change",
+  "def-weil-pbc-cartesian-square",
+  "def-weil-pbc-derived-exchange",
+  "def-weil-pbc-direct-image",
+  "def-weil-pbc-inverse-image",
+  "def-weil-pbc-torsion-etale-sheaf",
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-geometric-point",
+  "def-weil-pbc-geometric-stalks",
+  "def-weil-pbc-strict-henselization-limit",
+  "lem-weil-pbc-strict-henselization-functoriality",
+  "def-weil-pbc-cohomology-pullback",
+  "def-weil-pbc-etale-cohomology",
+  "prop-weil-pbc-strict-local-exchange"
+ ],
+ "proof": [
+  {
+   "text": "Fix the commutative geometric-point square and the integral residue-field factorizations in the statement. Choose a common algebraic closure extending the field homomorphism corresponding to iota. Form the strict henselizations A and B at the resulting geometric points of S and T. Strict-henselization functoriality gives a local homomorphism A to B. Its residue map and the embeddings of the two residue fields in the common closure commute with the original field map. Base change identifies the relevant schemes with the projective lines over A and B; uniqueness of pullbacks identifies the arbitrary X′ with the projective line over T.",
+   "uses": [
+    "lem-weil-pbc-strict-henselization-functoriality",
+    "lemma-nagata-projective-space-base-change-pullback",
+    "def-nagata-projective-space-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "proof of Theorem Tag 095T, paragraphs 3--4; the strict-henselization stalk formula followed by identification of the exchange on stalks"
+   }
+  },
+  {
+   "text": "The source stalk is unchanged by inverse image at the corresponding geometric point. Properness of the projective line gives the qcqs hypotheses for the strict-henselization stalk formula. This formula identifies the original higher-direct-image stalk and the stalk for the restricted strict-local projective line with the same cohomology over the strict henselization: their maps are the colimit of the same pointed-neighbourhood restriction maps. Do this also for the target. To pass between module-valued derived homology and the abelian computation, use the acyclicity of injective module sheaves after forgetting coefficients, rather than falsely assuming that the forgetful functor preserves injective objects. Inverse image preserves torsion, since it preserves geometric stalks. Use the generic ringed-site version of this acyclicity theorem at the coefficient universe u+1 (the site hom universe), with the constant ring sheaf of Lambda. The scheme-specific recorded version with coefficient R:Type u is not sufficient for arbitrary Lambda:Type (u+1).",
+   "uses": [
+    "lemma-openclosed-stalk-upperstar",
+    "lemma-nagata-projective-space-base-change-proper",
+    "def-weil-pbc-scheme-conventions",
+    "prop-weil-pbc-strict-henselization-stalk-formula",
+    "lem-weil-pbc-higher-direct-image-sheafified-presheaf",
+    "lem-sc-injective-module-abelian-acyclic-zariski",
+    "def-weil-pbc-torsion-etale-sheaf"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Lemma Tag 03FD (lemma-cohomology-modules-abelian-agree), comparison of module and underlying abelian cohomology; combined with Stacks Tag 03Q9 for the stalk comparison"
+   }
+  },
+  {
+   "text": "The two stalk isomorphisms commute with the degree-q exchange. Represent the derived exchange by the termwise underived exchange followed by the comparison into a resolution. On a pointed etale neighbourhood this map pulls a section back along the base-changed neighbourhood. The functorial strict-henselization projections identify its composite into the target strict-local projective line with restriction to A followed by restriction along A to B. Thus the two maps of section complexes agree on neighbourhood representatives and in the filtered colimit. Exactness of stalks and inverse image allows taking degree-q homology. This establishes the canonical conjugacy between the arbitrary-base stalk exchange and the strict-local stalk exchange, without using proper base change itself.",
+   "uses": [
+    "lem-weil-pbc-derived-exchange-termwise",
+    "def-weil-pbc-derived-exchange",
+    "def-weil-pbc-underived-exchange",
+    "prop-weil-pbc-geometric-stalks-exact",
+    "prop-weil-pbc-inverse-image-exact",
+    "lem-weil-pbc-exact-functor-complex-cohomology",
+    "lem-weil-pbc-strict-henselization-functoriality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "proof of Theorem Tag 095T, paragraphs 3--4; the strict-henselization stalk formula followed by identification of the exchange on stalks"
+   }
+  },
+  {
+   "text": "Apply the explicit hypothesis hLocal to the local map A to B, the restriction of F, and q. It supplies additive equivalences identifying the strict-local exchange with the residue-field cohomology pullback. This is an application of a hypothesis, not another invocation of the arbitrary-base geometric-stalk lemma.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "proof of Theorem Tag 095T, paragraphs 3--4; the strict-henselization stalk formula followed by identification of the exchange on stalks"
+   }
+  },
+  {
+   "text": "The residue fields of A and B are the relative separable closures of the image residue fields in the common algebraic closure. Since k and k′ are separably closed and algebraic over those image residue fields by the integral hypotheses, their extensions of these separable closures are purely inseparable. Their spectra, and their projective-line base changes, are universal homeomorphisms. Topological invariance gives cohomology isomorphisms to the chosen closed fibres over k and k′. The compatible field square and functoriality of cohomological inverse image show that these isomorphisms conjugate the residue-field pullback to the specified pullback along iota, including the composite inverse-image identification of its target sheaf.",
+   "uses": [
+    "lem-weil-pbc-strict-henselization-functoriality",
+    "prop-weil-pbc-universal-homeomorphism-topos",
+    "lem-weil-pbc-cohomology-pullback-functorial",
+    "def-weil-pbc-cohomology-pullback",
+    "def-weil-pbc-strict-henselian-setup"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "proof of Theorem Tag 095T, paragraphs 3--4; the strict-henselization stalk formula followed by identification of the exchange on stalks"
+   }
+  },
+  {
+   "text": "Compose the source stalk comparison, the source equivalence supplied by hLocal, and the source closed-fibre cohomology equivalence; do the same for the target. The commutative squares of Steps 3--5 give the required identity for every element. Composites of additive equivalences are additive equivalences. No positive-degree restriction is used, and for the zero sheaf all maps are the unique zero-group maps.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "proof of Theorem Tag 095T, paragraphs 3--4; the strict-henselization stalk formula followed by identification of the exchange on stalks"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-strict-henselization-functoriality",
+  "lemma-nagata-projective-space-base-change-pullback",
+  "def-nagata-projective-space-base-change",
+  "lemma-openclosed-stalk-upperstar",
+  "lemma-nagata-projective-space-base-change-proper",
+  "def-weil-pbc-scheme-conventions",
+  "prop-weil-pbc-strict-henselization-stalk-formula",
+  "lem-weil-pbc-higher-direct-image-sheafified-presheaf",
+  "lem-sc-injective-module-abelian-acyclic-zariski",
+  "def-weil-pbc-torsion-etale-sheaf",
+  "lem-weil-pbc-derived-exchange-termwise",
+  "def-weil-pbc-derived-exchange",
+  "def-weil-pbc-underived-exchange",
+  "prop-weil-pbc-geometric-stalks-exact",
+  "prop-weil-pbc-inverse-image-exact",
+  "lem-weil-pbc-exact-functor-complex-cohomology",
+  "prop-weil-pbc-universal-homeomorphism-topos",
+  "lem-weil-pbc-cohomology-pullback-functorial",
+  "def-weil-pbc-cohomology-pullback",
+  "def-weil-pbc-strict-henselian-setup"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "proof of Theorem Tag 095T, paragraphs 3--4; the strict-henselization stalk formula followed by identification of the exchange on stalks"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Reduce the geometric stalk of projective line base change to a local morphism of strict henselizations",
+   "results": "Service unavailable: Internal Server Error; no results.",
+   "date": "2026-10-12",
+   "verdict": "unavailable; no absence verdict from this service"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "geometric stalk of higher direct image proper base change projective line is cohomology of geometric fiber",
+   "results": "Eight hits concerning structure-sheaf stalks on Proj and Spec and TopCat.Presheaf.stalkPullbackHom; none states this reduction.",
+   "date": "2026-10-12",
+   "verdict": "no matching reduction"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Sheaf.H",
+   "results": "Cohomology functor, functorial maps, H.equiv0 and naturality, and vanishing of injective cohomology; no strict-local reduction.",
+   "date": "2026-10-12",
+   "verdict": "no matching reduction"
+  },
+  {
+   "tool": "grep",
+   "query": "sheafFiber.*homology|homology.*sheafFiber|exists_addEquiv.*baseChange; strictHenselization|StrictHenselization|geometric.*strict.local",
+   "results": "msearch grep returned no hits. Local searches found StrictHenselizationStalkFormula, its unrestricted variant, StrictHenselizationFunctoriality, and the existing strict-local exchange. None contains the conditional reduction stated here.",
+   "date": "2026-10-12",
+   "verdict": "existing strict-local theorem supplies the premise; arbitrary-base reduction is missing"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.ProjectiveLine.GeometricStalk",
+  "date": "2026-10-12",
+  "group": "E1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-p1-exchange-geometric-stalk",
+   "place": "proof, upper square: reducing the stalk exchange to the strict-local square through the maps Phi_S and Phi_T",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ProjectiveLineGeometricStalkReduction",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProjectiveLineGeometricStalkReduction.lean",
+  "declaration": "AlgebraicGeometry.Etale.geometricStalk_projectiveLine_of_strictLocal",
+  "statement": "theorem Etale.geometricStalk_projectiveLine_of_strictLocal (Λ : Type (u + 1)) [CommRing Λ] (hLocal : ∀ (A B : Type u) [CommRing A] [HenselianLocalRing A] [IsSepClosed (IsLocalRing.ResidueField A)] [CommRing B] [HenselianLocalRing B] [IsSepClosed (IsLocalRing.ResidueField B)] (φ : A →+* B) [IsLocalHom φ] (F : Sheaf (ProjectiveLine (Spec (.of A))).smallEtaleTopology (ModuleCat.{u + 1} Λ)) [IsTorsionSheaf F] (q : ℕ), ∃ (e₁ : ((pointSmallEtale (Spec.map (CommRingCat.ofHom (IsLocalRing.residue B)))).sheafFiber (A := ModuleCat.{u + 1} Λ)).obj ((Etale.baseChangeSourceFunctor Λ (Spec.map (CommRingCat.ofHom φ)) (ProjectiveLine (Spec (.of A)) ↘ Spec (.of A)) q).obj F) ≃+ Sheaf.H ((sheafCompose _ (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj ((ProjectiveSpace.map _ (Spec.map (CommRingCat.ofHom (IsLocalRing.residue A))))^*[ModuleCat.{u + 1} Λ].obj F)) q) (e₂ : ((pointSmallEtale (Spec.map (CommRingCat.ofHom (IsLocalRing.residue B)))).sheafFiber (A := ModuleCat.{u + 1} Λ)).obj ((Etale.baseChangeTargetFunctor Λ (ProjectiveSpace.map _ (Spec.map (CommRingCat.ofHom φ))) (ProjectiveLine (Spec (.of B)) ↘ Spec (.of B)) q).obj F) ≃+ Sheaf.H ((ProjectiveSpace.map _ (Spec.map (CommRingCat.ofHom (IsLocalRing.ResidueField.map φ))))^*[AddCommGrpCat.{u + 1}].obj ((sheafCompose _ (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj ((ProjectiveSpace.map _ (Spec.map (CommRingCat.ofHom (IsLocalRing.residue A))))^*[ModuleCat.{u + 1} Λ].obj F))) q), ∀ x, e₂ ((((pointSmallEtale (Spec.map (CommRingCat.ofHom (IsLocalRing.residue B)))).sheafFiber (A := ModuleCat.{u + 1} Λ)).map (Etale.baseChangeHomologyMap Λ (ProjectiveSpace.isPullback_map _ (Spec.map (CommRingCat.ofHom φ))) q F)).hom x) = Etale.cohomologyMap (ProjectiveSpace.map _ (Spec.map (CommRingCat.ofHom (IsLocalRing.ResidueField.map φ)))) ((sheafCompose _ (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj ((ProjectiveSpace.map _ (Spec.map (CommRingCat.ofHom (IsLocalRing.residue A))))^*[ModuleCat.{u + 1} Λ].obj F)) q (e₁ x)) {S T X' : Scheme.{u}} {g : T ⟶ S} {f' : X' ⟶ T} {g' : X' ⟶ ProjectiveLine S} (sq : IsPullback g' f' (ProjectiveLine S ↘ S) g) {k k' : Type u} [Field k] [IsSepClosed k] [Field k'] [IsSepClosed k'] (σ : Spec (.of k) ⟶ S) (τ : Spec (.of k') ⟶ T) (ι : Spec (.of k') ⟶ Spec (.of k)) (hι : ι ≫ σ = τ ≫ g) (hσ : ∃ (s : S) (φ : S.residueField s ⟶ .of k), φ.hom.IsIntegral ∧ Spec.map φ ≫ S.fromSpecResidueField s = σ) (hτ : ∃ (t : T) (φ : T.residueField t ⟶ .of k'), φ.hom.IsIntegral ∧ Spec.map φ ≫ T.fromSpecResidueField t = τ) (F : Sheaf (ProjectiveLine S).smallEtaleTopology (ModuleCat.{u + 1} Λ)) [IsTorsionSheaf F] (q : ℕ) : ∃ (e₁ : ((pointSmallEtale τ).sheafFiber (A := ModuleCat.{u + 1} Λ)).obj ((Etale.baseChangeSourceFunctor Λ g (ProjectiveLine S ↘ S) q).obj F) ≃+ Sheaf.H ((sheafCompose _ (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj ((ProjectiveSpace.map _ σ)^*[ModuleCat.{u + 1} Λ].obj F)) q) (e₂ : ((pointSmallEtale τ).sheafFiber (A := ModuleCat.{u + 1} Λ)).obj ((Etale.baseChangeTargetFunctor Λ g' f' q).obj F) ≃+ Sheaf.H ((ProjectiveSpace.map _ ι)^*[AddCommGrpCat.{u + 1}].obj ((sheafCompose _ (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj ((ProjectiveSpace.map _ σ)^*[ModuleCat.{u + 1} Λ].obj F))) q), ∀ x, e₂ ((((pointSmallEtale τ).sheafFiber (A := ModuleCat.{u + 1} Λ)).map (Etale.baseChangeHomologyMap Λ sq q F)).hom x) = Etale.cohomologyMap (ProjectiveSpace.map _ ι) ((sheafCompose _ (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj ((ProjectiveSpace.map _ σ)^*[ModuleCat.{u + 1} Λ].obj F)) q (e₁ x)",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "X-95158",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261011T232327-L-371913",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "X-95158",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261011T232327-L-371913",
+  "kind": "interface",
+  "note": "independent Codex review: Matched the unchanged target signature, strict-local premise, new reduction theorem and node, proof dependencies, and unit route; both delivered modules compile without warnings, and axiom checks show only permitted axioms plus sorryAx from unproved dependencies."
+ }
+}

@@ -15,6 +15,7 @@ public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Curve
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.RightDerivedFunctorPlus
 public import WeilConjectures.Mathlib.Topology.KrullDimension
 public import Mathlib.RingTheory.KrullDimension.Polynomial
+import Sheaf.AlgebraicGeometry.ProjectiveLineGeometricStalkReduction
 
 /-!
 # The exchange morphism of the projective line at a geometric point
@@ -155,8 +156,11 @@ theorem Etale.exists_addEquiv_sheafFiber_baseChangeHomologyMap_projectiveLine
           (Etale.baseChangeHomologyMap Λ sq q F)).hom x) =
         Etale.cohomologyMap (ProjectiveSpace.map _ ι)
           ((sheafCompose _ (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj
-            ((ProjectiveSpace.map _ σ)^*[ModuleCat.{u + 1} Λ].obj F)) q (e₁ x) :=
-  sorry
+            ((ProjectiveSpace.map _ σ)^*[ModuleCat.{u + 1} Λ].obj F)) q (e₁ x) := by
+  exact Etale.geometricStalk_projectiveLine_of_strictLocal Λ
+    (fun A B _ _ _ _ _ _ φ _ F _ q =>
+      Etale.exists_addEquiv_sheafFiber_baseChangeHomologyMap_strictLocal Λ φ F q)
+    sq σ τ ι hι hσ hτ F q
 
 /-- **The exchange morphism of `ℙ¹` is an isomorphism on torsion sheaves.** For every
 cartesian square
