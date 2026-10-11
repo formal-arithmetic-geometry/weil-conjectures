@@ -1,0 +1,105 @@
+{
+ "id": "def-sc-locally-ranked-exterior-complex",
+ "kind": "definition",
+ "title": "Exterior power shifted by a locally constant rank function",
+ "status": "split",
+ "statement": "Let $X$ be a scheme [def-pc-scheme], $M$ a sheaf of $\\mathcal O_X$-modules [def-weil-sheaf-of-modules-category], and $r:X\\to\\mathbf N$ a locally constant function. For $n\\geq0$, put $X_n=\\{x:r(x)=n\\}$, an open and closed subscheme, and let $j_n:X_n\\to X$ be its inclusion. Define the cochain complex [def-pc-cochain-complex-modules] $L(M,r)$ by $L^n=j_{n*}(\\bigwedge^n(M|_{X_n}))$ for $n\\geq0$, $L^n=0$ for $n<0$, with all differentials zero. Here the exterior sheaf is that of [def-sc-sheaf-exterior-power], restriction is the usual restriction of module sheaves to an open subscheme, and $j_{n*}F$ has sections $F(V\\cap X_n)$ on each open $V$ of $X$, with scalars restricted from $\\mathcal O_X(V)$. Since $X_n$ is clopen, this direct image is extension by zero. Thus on $X_n$ the complex is $\\bigwedge^n(M|_{X_n})[-n]$; it represents the expression $\\bigwedge^r M[-r]$ with varying locally constant $r$.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-sheaf-of-modules-category",
+  "def-pc-cochain-complex-modules",
+  "def-sc-sheaf-exterior-power"
+ ],
+ "source": {
+  "document": "literature/stacks-project/duality.tex",
+  "place": "Tag 0BR0, Lemma 48.15.6, exterior power and shift by the locally constant rank function"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Exterior power sheaf shifted by a locally constant rank function",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "sheaf exterior power complex with degree equal to locally constant rank zero differentials",
+   "results": "8 hits: ModuleCat.exteriorPower.functor_obj, ModuleCat.exteriorPower.functor, ModuleCat.exteriorPower, ChainComplex.alternatingConst_obj, ModuleCat.exteriorPower.mk, ModuleCat.exteriorPower.iso₀, CategoryTheory.Sheaf.H, ModuleCat.exteriorPower.functor_map; no declaration for the rank-stratified exterior complex.",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "locallyRankedExterior|rank.*strat.*complex|locally.*rank.*shift",
+   "results": "0 hits: ; no declaration for the rank-stratified exterior complex.",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sc-smooth-proper-diagonal-koszul-dual",
+  "date": "2026-10-11",
+  "group": "R1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "diagonal Koszul calculation: the normal determinant shifted by its locally constant rank",
+   "via": [
+    "lem-sc-smooth-proper-diagonal-koszul-dual",
+    "lem-sc-smooth-proper-relative-dualizing-general",
+    "lem-sc-smooth-proper-curve-dualizing",
+    "lem-sc-finite-duality-trace"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.LocallyRankedExteriorComplex",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.locallyRankedExteriorComplex",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.Modules.exteriorRankOpen",
+   "AlgebraicGeometry.Scheme.Modules.locallyRankedExteriorTerm",
+   "AlgebraicGeometry.Scheme.Modules.locallyRankedExteriorComplex"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/LocallyRankedExteriorComplex.lean",
+  "statement": "def locallyRankedExteriorComplex {X : Scheme.{uE}} (M : X.Modules) (r : LocallyConstant X ℕ) : CochainComplex X.Modules ℤ",
+  "branch": "sheaf-dag",
+  "by": "R1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-dkd",
+  "group": "R1",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-dkd",
+  "group": "R1",
+  "result": "pass",
+  "note": "Statement matches 0BR0 clause by clause: Noetherian Y, closed immersion, local Koszul-regular generation of i.ker.ideal on affine opens near Z, conormal tensorPullback i (ker), normal via landed homObj, r tied by hr to stalk finrank, a tied by adj to the QCoh restriction of schemeDerivedDirectImage (landed hpres pattern), OY tied by hOY; hdet is a Prop witness. New node def-sc-locally-ranked-exterior-complex genuinely new (no DAG/lean/Mathlib match), fully constructed. stmt_deps gains justified."
+ }
+}

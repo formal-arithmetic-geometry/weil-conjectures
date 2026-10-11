@@ -26,7 +26,9 @@
   "def-pc-module-pullback",
   "def-pc-derived-category",
   "def-pc-derived-direct-image",
-  "def-pur-sheaf-hom"
+  "def-pur-sheaf-hom",
+  "def-sc-locally-ranked-exterior-complex",
+  "def-pc-module-stalk-functor"
  ],
  "proof": [
   {
@@ -134,5 +136,26 @@
    "decls": [],
    "missing": []
   }
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.KoszulRegularImmersionDualizing",
+  "declaration": "AlgebraicGeometry.koszulRegularImmersion_dualizing",
+  "declarations": [
+   "AlgebraicGeometry.koszulRegularImmersion_dualizing"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/KoszulRegularImmersionDualizing.lean",
+  "statement": "theorem koszulRegularImmersion_dualizing {Z Y : Scheme.{u}} (i : Z ⟶ Y) [IsNoetherian Y] [IsClosedImmersion i] [HasDerivedCategory.{wZ} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))] [HasDerivedCategory.{wY} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))] (hregular : ∀ z : Z, ∃ U : Y.affineOpens, i z ∈ U.1 ∧ ∃ (n : ℕ) (f : Fin n → Γ(Y, U.1)), Ideal.span (Set.range f) = i.ker.ideal U ∧ RingTheory.Sequence.IsKoszulRegular f) (r : LocallyConstant Z ℕ) (hr : ∀ z : Z, r z = Module.finrank (Z.presheaf.stalk z) ((RingedSpace.moduleStalkFunctor Z.toRingedSpace z).obj ((Scheme.Modules.tensorPullback i).obj i.ker.toModules))) (hpres : ∀ E : schemeDerivedCategory Z, schemeDerivedQCohProperty Z E → schemeDerivedQCohProperty Y ((schemeDerivedDirectImage i).obj E)) (a : schemeDerivedQCohCategory Y ⥤ schemeDerivedQCohCategory Z) (adj : (schemeDerivedQCohProperty Y).lift ((schemeDerivedQCohProperty Z).ι ⋙ schemeDerivedDirectImage i) (fun E => hpres E.obj E.property) ⊣ a) (OY : schemeDerivedQCohCategory Y) (hOY : OY.obj = (DerivedCategory.singleFunctor (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) 0).obj (SheafOfModules.unit Y.ringCatSheaf)) : ∃ hdet : schemeDerivedQCohProperty Z ((DerivedCategory.Q (C := SheafOfModules.{u} (moduleRings Z.toRingedSpace))).obj (Scheme.Modules.locallyRankedExteriorComplex (SheafOfModules.homObj (R := Z.sheaf) ((Scheme.Modules.tensorPullback i).obj i.ker.toModules) (SheafOfModules.unit Z.ringCatSheaf)) r)), Nonempty ((⟨(DerivedCategory.Q (C := SheafOfModules.{u} (moduleRings Z.toRingedSpace))).obj (Scheme.Modules.locallyRankedExteriorComplex (SheafOfModules.homObj (R := Z.sheaf) ((Scheme.Modules.tensorPullback i).obj i.ker.toModules) (SheafOfModules.unit Z.ringCatSheaf)) r), hdet⟩ : schemeDerivedQCohCategory Z) ≅ a.obj OY)",
+  "branch": "sheaf-dag",
+  "by": "R1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-dkd",
+  "group": "R1",
+  "result": "pass",
+  "note": "Statement matches 0BR0 clause by clause: Noetherian Y, closed immersion, local Koszul-regular generation of i.ker.ideal on affine opens near Z, conormal tensorPullback i (ker), normal via landed homObj, r tied by hr to stalk finrank, a tied by adj to the QCoh restriction of schemeDerivedDirectImage (landed hpres pattern), OY tied by hOY; hdet is a Prop witness. New node def-sc-locally-ranked-exterior-complex genuinely new (no DAG/lean/Mathlib match), fully constructed. stmt_deps gains justified."
  }
 }
