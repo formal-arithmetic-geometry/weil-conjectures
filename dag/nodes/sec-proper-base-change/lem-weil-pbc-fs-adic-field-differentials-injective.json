@@ -183,5 +183,23 @@
   "summary": "Read More on Algebra 07EL (theorem-regular-fs) and its proof, 07E5 (proposition-characterization-geometrically-regular) and its proof, 07NQ (proposition-fs-flat-fibre-fs) last paragraph, Algebra 0322, 0321, 031Y and 031K; tags verified in tags/tags. Statement kept. The proof splits by characteristic (step 1). Characteristic 0 (steps 2-3), following the remark in 07NQ: K/k is formally smooth [char-zero node, Mathlib leaf], so K (x)_k Omega_{k/Z} -> Omega_{K/Z} is injective by the new node 031K, and it factors through the item's map; formal smoothness of C is not used. Characteristic p (steps 4-7), following 07EL: (2) => (1) is the existing node lem-weil-pbc-fs-adic-field-geometrically-regular; (1) => (3) of 07E5 is the existing node lem-weil-pbc-geometrically-regular-h1-injective; (3) => (4) of 07E5 is the new node lem-weil-pbc-h1-injective-differentials-injective-char-p (stated without regularity, which its argument does not use); the identification Omega_{-/Z} = Omega_{-/F_p} for F_p-algebras is written out (step 7). No Lean on slopmaster2 for the item or the new nodes (grep of ids, tags 07EL/07E5/031K/0322 and key words). Blueprint search: no blueprint node states the item or the new nodes (tools/blueprint_refs.py search 07EL, 07E5, 0322, 'formally smooth', 'geometrically regular', 'Kahler differentials injective', 'separable field extension differentials').",
   "blueprint": "The item serves thm-weil-pbc-finite-etale-lifting, at its from.place (step 7 of its split (Lemma 0GS2 essential-surjectivity paragraphs): residue-field differential injection in the Stacks 07NQ formal-smoothness input): it is the injectivity of Omega_{k/Z} (x) K -> Omega_{closed fibre/Z} (x) K used in the 07NQ formal-smoothness argument. Steps 2-3 realize the characteristic-zero parenthesis of that 07NQ paragraph; steps 4-7 realize the citation 'by Theorem 07EL' of the same paragraph (07EL (2) => (5)). No blueprint node states the item (same_as [])."
  },
- "reviewed": "2026-10-10 L: 7 steps: characteristic 0 by formal smoothness of K/k and the 031K injectivity (new node), characteristic p by 07EL (2) => (1), 07E5 (1) => (3) and the new node for 07E5 (3) => (4), with Omega over Z = Omega over F_p; 2 new nodes"
+ "reviewed": "2026-10-10 L: 7 steps: characteristic 0 by formal smoothness of K/k and the 031K injectivity (new node), characteristic p by 07EL (2) => (1), 07E5 (1) => (3) and the new node for 07E5 (3) => (4), with Omega over Z = Omega over F_p; 2 new nodes",
+ "lean": {
+  "module": "Sheaf.RingTheory.AdicFieldDifferentialsInjective",
+  "declaration": "KaehlerDifferential.residueField_mapBaseChange_injective_of_formallySmoothAdic",
+  "file": "lean/Sheaf/RingTheory/AdicFieldDifferentialsInjective.lean",
+  "statement": "theorem residueField_mapBaseChange_injective_of_formallySmoothAdic (k : Type u) (C : Type v) [Field k] [CommRing C] [Algebra k C] [IsLocalRing C] [IsNoetherianRing C] (h : Algebra.FormallySmoothAdic k C (IsLocalRing.maximalIdeal C)) : let K := IsLocalRing.ResidueField C let iota := ((mapBaseChange ℤ k C).baseChange K).comp (TensorProduct.AlgebraTensorModule.cancelBaseChange k C K K (KaehlerDifferential ℤ k)).symm.toLinearMap Function.Injective iota ∧ (∀ [CharZero k], Function.Injective ((mapBaseChange ℤ C K).comp iota)) ∧ (∀ (p : ℕ) [Fact p.Prime] [CharP k p], letI : CharP C p := charP_of_injective_algebraMap (algebraMap k C).injective p letI := ZMod.algebra k p letI := ZMod.algebra C p Function.Bijective (map ℤ (ZMod p) k k) ∧ Function.Bijective (map ℤ (ZMod p) C C))",
+  "branch": "sheaf-dag",
+  "by": "G1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-fdi1044",
+  "group": "G1",
+  "result": "pass",
+  "note": "Field k, CommRing C k-algebra, IsLocalRing+IsNoetherianRing, FormallySmoothAdic k C m (test rings max u v), iota = cancelBaseChange.symm then (mapBaseChange Z k C).baseChange K sends x(x)da to x(x)d(a) (simp-checked), injective; char 0 composite with mapBaseChange Z C K; char p bijective map Z (ZMod p) for k and C; #check'd all names"
+ }
 }
