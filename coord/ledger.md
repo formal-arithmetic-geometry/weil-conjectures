@@ -3148,3 +3148,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 00:44 L: returned deliver/K1/lem-pur-kinjective-surjection-bounded-size (reviewer RETURN: 1. E (Step 1, wrong mathematics): 'lift u_{N'} through pi to phi_{N'}:U->M' is false in general: U is only a generator, )
 - 00:44 UTC L: returned: K1 kinjective-surjection-bounded-size 8f88ca421 (R-sbs0044: lifts U -> N through pi as if U were projective; |M'| bound for a quotient of the direct sum).
 - 00:44 L: merged deliver/F1/lem-sc-valuation-proper-coherent-higher-direct-images (reviewer FIX; first push; new nodes: 1)
+- 00:44 UTC L: F1 valuation-proper-coherent-higher-direct-images FIX a72195463 (R-vhd0043).
