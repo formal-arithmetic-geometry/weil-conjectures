@@ -135,5 +135,23 @@
    "decls": [],
    "missing": []
   }
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProperFlatRightAdjointDirectSums",
+  "declaration": "AlgebraicGeometry.proper_flat_rightAdjoint_preservesDirectSums",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProperFlatRightAdjointDirectSums.lean",
+  "statement": "theorem proper_flat_rightAdjoint_preservesDirectSums {X Y : Scheme.{u}} [CompactSpace Y] [QuasiSeparatedSpace Y] (f : X ⟶ Y) [IsProper f] [Flat f] [LocallyOfFinitePresentation f] [HasDerivedCategory.{wX} (SheafOfModules.{u} (moduleRings X.toRingedSpace))] [HasDerivedCategory.{wY} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))] (F : schemeDerivedQCohCategory X ⥤ schemeDerivedQCohCategory Y) (hF : F ⋙ ObjectProperty.ι (schemeDerivedQCohProperty Y) ≅ ObjectProperty.ι (schemeDerivedQCohProperty X) ⋙ schemeDerivedDirectImage f) (a : schemeDerivedQCohCategory Y ⥤ schemeDerivedQCohCategory X) (adj : F ⊣ a) : ∀ I : Type u, PreservesColimitsOfShape (Discrete I) a",
+  "branch": "sheaf-dag",
+  "by": "U1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-fds",
+  "group": "U1",
+  "result": "pass",
+  "note": "qcqs Y=CompactSpace+QuasiSeparatedSpace; proper/flat/fp=IsProper+Flat+LFP (qcqs f from proper); Rf_* on D_QCoh = F with hF iso to schemeDerivedDirectImage on schemeDerivedQCohProperty; a right adjoint via adj; all set-indexed sums = forall I : Type u, PreservesColimitsOfShape (Discrete I) a; only the item's node changed"
  }
 }

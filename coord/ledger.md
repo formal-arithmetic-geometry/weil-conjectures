@@ -5476,3 +5476,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 17:57 L: merged deliver/Q1/lem-pc-bounded-coherent-finite-tor-proper-pushforward-perfect (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.BoundedCoherentFiniteTorDirectImagePerfect AlgebraicGeometry.Scheme.isPerfect_schemeDerivedDirectImage_of_bounded_coherent_finiteTor)
 - 17:57 L: merged deliver/N1/lem-weil-pbc-pair-henselization (stage 2; reviewer PASS; first push; Sheaf.RingTheory.PairHenselization RingTheory.pair_henselization)
 - 17:57 L: merged deliver/V1/lem-sc-smooth-proper-relative-dualizing-general (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.SmoothProperRelativeDualizing AlgebraicGeometry.smoothProper_dualizing)
+- 17:57 L: merged deliver/U1/lem-sc-proper-flat-right-adjoint-direct-sums (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.ProperFlatRightAdjointDirectSums AlgebraicGeometry.proper_flat_rightAdjoint_preservesDirectSums)
