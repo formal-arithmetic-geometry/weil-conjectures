@@ -1,11 +1,11 @@
 # Work queue
 
-51 items; claim with `tools/claim.py next <group> [--stage N]`.
+50 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (51)
+## Stage 2: nodes to state (50)
 
 | node | distance to Mathlib | kind | blockers |
 |---|---|---|---|
@@ -51,7 +51,6 @@
 | `lem-sc-smooth-proper-diagonal-basechange-upper-shriek` | 1 | state | 0 |
 | `lem-sc-smooth-proper-relative-dualizing-general` | 1 | state | 0 |
 | `lem-weil-pbc-etale-mayer-vietoris-pullback` | 1 | state | 0 |
-| `lem-weil-pbc-flat-base-change-map-sections` | 1 | state | 0 |
 | `lem-weil-pbc-formal-functions-complete-base` | 1 | state | 0 |
 | `lem-weil-pbc-formal-functions-stalk` | 1 | state | 0 |
 | `lem-weil-pbc-projective-space-twisting-sheaf-charts` | 1 | state | 0 |
