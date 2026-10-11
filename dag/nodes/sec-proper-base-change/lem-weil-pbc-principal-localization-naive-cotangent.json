@@ -210,5 +210,25 @@
   "by": "L",
   "result": "accepted",
   "note": "8 steps following Stacks 08JZ: beta surjective with J = (I, fx-1) (existing coefficient-map leaf, new leaf for R[x]/(rx-1) = R_r, MvPolynomial/Localization.lean:117 verified by L); clause (2) from the polynomial-extension node; generators of J/J^2; iota injective (new leaf, Extension/Cotangent/LocalizationAway.lean:128, tagged @[stacks 08JZ], verified); the differential on the generators; clause (1) by the dx-coordinate; clause (3) with the complement g^{-2}df + dx; the 'in particular'. Stacks' diagram with 00S2 replaced by the direct generation argument since the 00S2 node is for canonical presentations. Statement gained two definition citations."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.PrincipalLocalizationNaiveCotangent",
+  "declaration": "Algebra.Generators.principal_localization_naive_cotangent",
+  "file": "lean/Sheaf/AlgebraicGeometry/PrincipalLocalizationNaiveCotangent.lean",
+  "statement": "theorem principal_localization_naive_cotangent {A : Type u} {B : Type v} [CommRing A] [CommRing B] [Algebra A B] {S : Type w} (P : Generators A B S) (g : B) (f : P.Ring) (hf : algebraMap P.Ring B f = g) {Bg : Type z} [CommRing Bg] [Algebra B Bg] [Algebra A Bg] [IsScalarTower A B Bg] [IsLocalization.Away g Bg] : Function.Surjective (aeval (R := A) ((localizationAway Bg g).comp P).val) ∧ ((localizationAway Bg g).comp P).ker = Ideal.map ((localizationAway Bg g).toComp P).toAlgHom.toRingHom P.ker ⊔ Ideal.span {rename Sum.inr f * X (Sum.inl ()) - 1} ∧ ∃ (r : ((localizationAway Bg g).comp P).ker), r.val = rename Sum.inr f * X (Sum.inl ()) - 1 ∧ ∃ (e1 : ((localizationAway Bg g).comp P).toExtension.Cotangent ≃ₗ[Bg] (Bg ⊗[B] P.toExtension.Cotangent) × Bg) (e2 : ((localizationAway Bg g).comp P).toExtension.CotangentSpace ≃ₗ[Bg] (Bg ⊗[B] P.toExtension.CotangentSpace) × Bg) (e0 : ((localizationAway Bg g).comp P).toExtension.CotangentSpace ≃ₗ[Bg] (Bg ⊗[B] P.toExtension.CotangentSpace) × Bg), (∀ a b, e1.symm (a, b) = LinearMap.liftBaseChange Bg (Extension.Cotangent.map ((localizationAway Bg g).toComp P).toExtensionHom) a + b • Extension.Cotangent.mk r) ∧ (∀ a b, e2.symm (a, b) = LinearMap.liftBaseChange Bg (Extension.CotangentSpace.map ((localizationAway Bg g).toComp P).toExtensionHom) a + b • ((1 : Bg) ⊗ₜ[((localizationAway Bg g).comp P).toExtension.Ring] KaehlerDifferential.D A ((localizationAway Bg g).comp P).toExtension.Ring (X (Sum.inl ())))) ∧ (∀ a, e0.symm (a, 0) = LinearMap.liftBaseChange Bg (Extension.CotangentSpace.map ((localizationAway Bg g).toComp P).toExtensionHom) a) ∧ (∀ a b, ((localizationAway Bg g).comp P).toExtension.cotangentComplex (e1.symm (a, b)) = e0.symm (P.toExtension.cotangentComplex.baseChange Bg a, algebraMap B Bg g * b)) ∧ (Function.Injective (P.toExtension.cotangentComplex.baseChange Bg) ↔ Function.Injective ((localizationAway Bg g).comp P).toExtension.cotangentComplex) ∧ Nonempty (((Bg ⊗[B] P.toExtension.CotangentSpace) ⧸ LinearMap.range (P.toExtension.cotangentComplex.baseChange Bg)) ≃ₗ[Bg] (((localizationAway Bg g).comp P).toExtension.CotangentSpace ⧸ LinearMap.range ((localizationAway Bg g).comp P).toExtension.cotangentComplex))",
+  "branch": "sheaf-dag",
+  "by": "K1",
+  "date": "2026-10-11",
+  "existing": false,
+  "note": "Uses Mathlib presentation cotangent modules and their linear differential; no arbitrary complex data.",
+  "fixed_by": "R-pnc1409"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-pnc1409",
+  "group": "K1",
+  "result": "fix",
+  "note": "A->B rings, P=Generators A B S (alpha, ker I), g, f with alpha f = g (hf), Bg IsLocalization.Away g; beta = (localizationAway Bg g).comp P (x->invSelf g, toComp = rename inr); beta surjective; J = I P[x] + (fx-1); (1) e1 inverse = liftBaseChange Cotangent.map + b[fx-1]; (2) e2 with 1⊗dx; (3) e0 fixing old summand, delta_beta∘e1.symm = e0.symm∘(delta_alpha⊗Bg, g·); injectivity iff and cokernel iso; NL(alpha) = P.toExtension.cotangentComplex; dropped duplicate new node(s) def-weil-pbc-naive-cotangent-complex (--drop-nodes; not merged, the item points at the landed declaration)"
  }
 }
