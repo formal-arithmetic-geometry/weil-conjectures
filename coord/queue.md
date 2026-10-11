@@ -1,29 +1,32 @@
 # Work queue
 
-462 items; claim with `tools/claim.py next <group> [--stage N]`.
+463 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (462)
+## Stage 2: nodes to state (463)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
 | `def-pc-derived-category-qcoh-algebra` | 1 | state |
-| `def-pc-derived-pullback` | 1 | state |
 | `def-pc-perfect-complex` | 1 | state |
 | `def-weil-pbc-koszul-complex` | 1 | state |
 | `cor-galois-lisse-representations` | 1 | state |
-| `lem-pc-affine-derived-base-change-comparison-map` | 1 | state |
 | `lem-pc-derived-module-free-generation` | 1 | state |
+| `lem-pc-derived-pullback-tensor-product` | 1 | state |
+| `lem-pc-derived-pullback-tensor-qcoh` | 1 | state |
+| `lem-pc-derived-pullback-tor-independent-flat-complex` | 1 | state |
 | `lem-pc-derived-tensor-localization-cohomology` | 1 | state |
 | `lem-pc-derived-tensor-transitivity` | 1 | state |
 | `lem-pc-dq-coherator-adjunction` | 1 | state |
+| `lem-pc-flat-complex-derived-pullback` | 1 | state |
 | `lem-pc-fp-relation-descent` | 1 | state |
 | `lem-pc-module-pullback-identity-composition` | 1 | state |
 | `lem-pc-noetherian-bounded-coherent-pseudo-coherent` | 1 | state |
 | `lem-pc-pseudo-coherent-distinguished-triangle` | 1 | state |
 | `lem-pc-pseudo-coherent-summand` | 1 | state |
+| `lem-pc-ringed-spaces-derived-pullback-composition` | 1 | state |
 | `lem-pc-tor-amplitude-qcoh-test` | 1 | state |
 | `lem-sc-affine-pseudo-coherent-lift` | 1 | state |
 | `lem-sc-ass-weakass-fg-stalk` | 1 | state |
@@ -35,7 +38,6 @@
 | `lem-sc-ext-evaluation` | 1 | state |
 | `lem-sc-finite-free-complex-homology-upper-semicontinuous` | 1 | state |
 | `lem-sc-hilb-dominating-power` | 1 | state |
-| `lem-sc-hilbert-difference` | 1 | state |
 | `lem-sc-hilbert-embedded-points-gluing` | 1 | state |
 | `lem-sc-intersection-effective-cartier` | 1 | state |
 | `lem-sc-picard-kunneth-qcoh` | 1 | state |
@@ -47,12 +49,10 @@
 | `lem-weil-pbc-affine-morphism-relative-spec` | 1 | state |
 | `lem-weil-pbc-closed-immersion-conormal-functorial` | 1 | state |
 | `lem-weil-pbc-coherent-generic-point-ideal-inclusion` | 1 | state |
-| `lem-weil-pbc-coherent-stalk-map-extends` | 1 | state |
 | `lem-weil-pbc-integral-algebra-directed-colimit-finite` | 1 | state |
 | `lem-weil-pbc-module-pullback-affine-sections` | 1 | state |
 | `lem-weil-pbc-noetherian-acc-quasi-coherent` | 1 | state |
 | `lem-weil-pbc-p-independent-differentials-independent` | 1 | state |
-| `lem-weil-pbc-p-independent-extends-to-p-basis` | 1 | state |
 | `lem-weil-pbc-p1-power-affine-charts` | 1 | state |
 | `lem-weil-pbc-pair-henselization` | 1 | state |
 | `lem-weil-pbc-polynomial-complete-local-formal-fibres` | 1 | state |
@@ -428,6 +428,7 @@
 | `lem-pc-flat-sheaf-stalk-flat` | 2 | state |
 | `lem-pc-kflat-closure` | 2 | state |
 | `lem-pc-pseudo-coherent-bounded-finite-free-model` | 2 | state |
+| `lem-pc-rf-single-complex-inherited-tensor-condition` | 2 | state |
 | `lem-pc-ring-pseudo-coherent-summand` | 2 | state |
 | `lem-pc-sigma-k-points` | 2 | state |
 | `lem-pc-sites-modules-coproduct-flat` | 2 | state |
@@ -472,7 +473,7 @@
 | `lem-pc-essentially-constant-pro-hom-colimit` | 4 | state |
 | `lem-pur-essential-constant-pro-criterion-05py` | 4 | state |
 
-Not open yet: 40 nodes that wait for stage 1, 589 nodes that wait for a statement dependency.
+Not open yet: 40 nodes that wait for stage 1, 583 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
