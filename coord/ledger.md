@@ -5241,3 +5241,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 15:29 L: merged deliver/F1/lem-exc-coinduced-continuous-acyclic (stage 2; reviewer PASS; first push; Sheaf.RepresentationTheory.CoinducedContinuousAcyclic Rep.coinducedContinuousCochains_isZero)
 - 15:29 L: merged deliver/Q1/lem-sc-perfect-pullback-perfect-residue (stage 2; reviewer FIX; first push; Sheaf.CategoryTheory.DerivedCategory.PerfectScalarExtension DerivedCategory.IsPerfect.scalarExtension; statement corrected (1 citers))
 - 15:30 L: merged deliver/S1/def-pc-derived-direct-image (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage AlgebraicGeometry.schemeDerivedDirectImage)
+- 15:30 L: merged deliver/F1/lem-pc-essentially-constant-ind-hom-colimit (stage 2; reviewer PASS; first push; Sheaf.CategoryTheory.DerivedCategory.EssentiallyConstantIndHomColimit CategoryTheory.essentiallyConstantInd_hom_colimit_bijective)

@@ -140,5 +140,24 @@
   "group": "G1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-eci2032 (reviewer sub-agent of L); spot-checked: New def checked against Categories Def 05PU(1) word for word (cocone, section, retraction, factorization j->k, j0->k); not a duplicate of def-weil-pbc-essentially-constant-system (inverse systems of abelian groups only). Injectivity steps 3-4 verified (common stage via filteredness, coequalizing the two j0->k maps). FIX more, RETURN less: (1) B3/C4 new def statement and stmt_deps still cited the unrelated def-weil-abstract-derived-category although the second reading claims it was removed; citation and stmt_dep dropped; (2) new def source pointed at Lemma 05PY, corrected to Definition 05PU part (1); (3) E7 item statement text still cited [def-weil-abstract-derived-category] while stmt_deps named the new def, and called the cocone maps 'isomorphisms'; citation changed to [def-pc-essentially-constant-ind-diagram] and wording to 'cocone maps p_j' (named change, reason: wrong citation and false wording; mathematics unchanged).; 2 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.DerivedCategory.EssentiallyConstantIndHomColimit",
+  "declaration": "CategoryTheory.essentiallyConstantInd_hom_colimit_bijective",
+  "file": "lean/Sheaf/CategoryTheory/DerivedCategory/EssentiallyConstantIndHomColimit.lean",
+  "statement": "theorem essentiallyConstantInd_hom_colimit_bijective {J : Type uJ} {C : Type uC} [Category.{vJ} J] [Category.{vC} C] (F : J ⥤ C) (X : C) (h : IsEssentiallyConstantIndDiagram F X) (Y : C) : Function.Bijective ((F ⋙ coyoneda.obj (op Y)).descColimitType ((F ⋙ coyoneda.obj (op Y)).coconeTypesEquiv.symm ((coyoneda.obj (op Y)).mapCocone { pt := X, ι := h.2.choose })))",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-11",
+  "existing": false,
+  "note": "The cocone maps are selected from h.2 by Classical.choose. Mathlib Functor.ColimitType realizes the set colimit in Type (max uJ vC), avoiding any smallness or HasColimit hypothesis."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "F1",
+  "result": "pass",
+  "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
  }
 }
