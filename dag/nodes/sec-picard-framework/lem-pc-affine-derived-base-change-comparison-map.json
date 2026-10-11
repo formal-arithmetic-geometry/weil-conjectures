@@ -13,14 +13,15 @@
  },
  "kind": "statement",
  "title": "Affine derived base-change comparison map and its localization",
- "statement": "Let R\\to A and R\\to R' be ring maps and put A'=A\\otimes_R R'. For a complex M^\\bullet of A-modules [def-pc-derived-category] there is a canonical comparison morphism c:M^\\bullet\\otimes_R^{\\mathbf L}R'\\to M^\\bullet\\otimes_A^{\\mathbf L}A' in D(R') (Stacks, More on Algebra, equation comparison-map): it is E^\\bullet\\otimes_R R'\\to P^\\bullet\\otimes_A A' for a K-flat complex P^\\bullet of A-modules representing M^\\bullet and a quasi-isomorphism E^\\bullet\\to P^\\bullet from a K-flat complex E^\\bullet of R-modules [def-pc-kflat-complex]. For every i, H^i(M^\\bullet\\otimes_A^{\\mathbf L}A') has its evident A'-module structure, while H^i(M^\\bullet\\otimes_R^{\\mathbf L}R') is an A'-module as follows: a in A acts by H^i(a\\otimes_R^{\\mathbf L}\\operatorname{id}_{R'}) through End_{D(A)}(M^\\bullet)\\to End_{D(R)}(M^\\bullet)\\to End_{D(R')}(M^\\bullet\\otimes_R^{\\mathbf L}R'), and this action commutes with R', hence combines to an A'=A\\otimes_R R' action. With these structures H^i(c) is A'-linear. For every prime \\mathfrak q' of A', with images \\mathfrak q of A and \\mathfrak p',\\mathfrak p of R',R, there are natural isomorphisms H^i(M^\\bullet\\otimes_R^{\\mathbf L}R')\\otimes_{A'}A'_{\\mathfrak q'}\\cong H^i(M^\\bullet_{\\mathfrak q}\\otimes^{\\mathbf L}_{R_{\\mathfrak p}}R'_{\\mathfrak p'})\\otimes_{A_{\\mathfrak q}\\otimes_{R_{\\mathfrak p}}R'_{\\mathfrak p'}}A'_{\\mathfrak q'} and H^i(M^\\bullet\\otimes_A^{\\mathbf L}A')\\otimes_{A'}A'_{\\mathfrak q'}\\cong H^i(M^\\bullet_{\\mathfrak q}\\otimes^{\\mathbf L}_{A_{\\mathfrak q}}A'_{\\mathfrak q'}), under which H^i(c)\\otimes_{A'}A'_{\\mathfrak q'} is the map induced by the comparison morphism for R_{\\mathfrak p}\\to A_{\\mathfrak q}, R_{\\mathfrak p}\\to R'_{\\mathfrak p'} followed by scalar extension along A_{\\mathfrak q}\\otimes_{R_{\\mathfrak p}}R'_{\\mathfrak p'}\\to A'_{\\mathfrak q'}.",
+ "statement": "Let R\\to A and R\\to R' be ring maps and put A'=A\\otimes_R R'. For a complex M^\\bullet of A-modules [def-weil-abstract-derived-category] there is a canonical comparison morphism [def-pc-ring-tensor-cohomology] c:M^\\bullet\\otimes_R^{\\mathbf L}R'\\to M^\\bullet\\otimes_A^{\\mathbf L}A' in D(R') (Stacks, More on Algebra, equation comparison-map): it is E^\\bullet\\otimes_R R'\\to P^\\bullet\\otimes_A A' for a K-flat complex P^\\bullet of A-modules representing M^\\bullet and a quasi-isomorphism E^\\bullet\\to P^\\bullet from a K-flat complex E^\\bullet of R-modules [def-pc-module-kflat-complex]. For every i, H^i(M^\\bullet\\otimes_A^{\\mathbf L}A') has its evident A'-module structure, while H^i(M^\\bullet\\otimes_R^{\\mathbf L}R') is an A'-module as follows: a in A acts by H^i(a\\otimes_R^{\\mathbf L}\\operatorname{id}_{R'}) through End_{D(A)}(M^\\bullet)\\to End_{D(R)}(M^\\bullet)\\to End_{D(R')}(M^\\bullet\\otimes_R^{\\mathbf L}R'), and this action commutes with R', hence combines to an A'=A\\otimes_R R' action. With these structures H^i(c) is A'-linear. For every prime \\mathfrak q' of A', with images \\mathfrak q of A and \\mathfrak p',\\mathfrak p of R',R, there are natural isomorphisms H^i(M^\\bullet\\otimes_R^{\\mathbf L}R')\\otimes_{A'}A'_{\\mathfrak q'}\\cong H^i(M^\\bullet_{\\mathfrak q}\\otimes^{\\mathbf L}_{R_{\\mathfrak p}}R'_{\\mathfrak p'})\\otimes_{A_{\\mathfrak q}\\otimes_{R_{\\mathfrak p}}R'_{\\mathfrak p'}}A'_{\\mathfrak q'} and H^i(M^\\bullet\\otimes_A^{\\mathbf L}A')\\otimes_{A'}A'_{\\mathfrak q'}\\cong H^i(M^\\bullet_{\\mathfrak q}\\otimes^{\\mathbf L}_{A_{\\mathfrak q}}A'_{\\mathfrak q'}), under which H^i(c)\\otimes_{A'}A'_{\\mathfrak q'} is the map induced by the comparison morphism for R_{\\mathfrak p}\\to A_{\\mathfrak q}, R_{\\mathfrak p}\\to R'_{\\mathfrak p'} followed by scalar extension along A_{\\mathfrak q}\\otimes_{R_{\\mathfrak p}}R'_{\\mathfrak p'}\\to A'_{\\mathfrak q'}.",
  "source": {
   "document": "literature/stacks-project/perfect.tex",
   "place": "Tag 0DJ8, affine proof, displayed localization identity before the equivalence of conditions"
  },
  "stmt_deps": [
-  "def-pc-derived-category",
-  "def-pc-kflat-complex"
+  "def-weil-abstract-derived-category",
+  "def-pc-module-kflat-complex",
+  "def-pc-ring-tensor-cohomology"
  ],
  "proof": [
   {
@@ -144,5 +145,50 @@
   "group": "F1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-cmp0042 (reviewer sub-agent of L); spot-checked: Re-push after R-cmp0008: (1) A'-action on H^i(M⊗^L_R R') now defined in the statement via End_D(A)(M)->End_D(R')(M⊗^L R') and used in Step 2; (2) new node lem-pc-derived-tensor-localization-cohomology checked true by hand (M=A: Tor^R(A,R')⊗_A A_q = Tor^R(A_q,R'), then ⊗R'_{p'} gives Tor over R_p), cited in Step 3, no same-tag duplicate; (3) citer lem-pc-rf-single-complex-affine-base-change (face02e5e) steps 2-3 use the A'-linearity and both localization clauses, all still stated (C4 ok). FIX more, RETURN less: (a) class (b): lem-pc-kflat-quasiiso-tensor is clause (1) of existing lem-pur-derived-change-of-rings (one-point site); cited that as generic tool, dropped the duplicate; Step 1 now also derives choice-independence and naturality of c in M from its clause (2) (C1, Tag 064K/06YG); (b) Step 3 rewritten: source identity only from the new node, only the A-complex P localized (P_q K-flat over A_q, one line); (c) stmt_deps: removed lem-pc-derived-tensor-localization-cohomology (not cited in the statement; kept in proof_deps); split_report summary corrected. Second reading by F1 missed the duplicate K-flat node.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.AffineDerivedBaseChangeComparison",
+  "declaration": "RingTensorCohomology.exists_affineDerivedBaseChangeComparison",
+  "declarations": [
+   "RingTensorCohomology.exists_affineDerivedBaseChangeComparison",
+   "RingTensorCohomology.exists_affineDerivedBaseChangeLocalization"
+  ],
+  "file": "lean/Sheaf/Algebra/Homology/AffineDerivedBaseChangeComparison.lean",
+  "statement": "theorem exists_affineDerivedBaseChangeComparison (R A B : Type u) [CommRing R] [CommRing A] [CommRing B] [Algebra R A] [Algebra R B] [HasDerivedCategory.{w} (ModuleCat.{u} B)] : IsIso (Functor.whiskerRight (spanLeft R A B) DerivedCategory.Q) ∧ ∃! c : sourceComplex R A B ⋙ DerivedCategory.Q ⟶ targetComplex R A B ⋙ DerivedCategory.Q, Functor.whiskerRight (spanLeft R A B) DerivedCategory.Q ≫ c = Functor.whiskerRight (spanRight R A B) DerivedCategory.Q ∧ (∀ i : ℤ, Functor.whiskerRight c (DerivedCategory.homologyFunctor (ModuleCat.{u} B) i) ≫ (Functor.isoWhiskerLeft (targetComplex R A B) (DerivedCategory.homologyFunctorFactors (ModuleCat.{u} B) i)).hom = (Functor.isoWhiskerLeft (sourceComplex R A B) (DerivedCategory.homologyFunctorFactors (ModuleCat.{u} B) i)).hom ≫ comparison R A B i) ∧ ∀ (M P : CochainComplex (ModuleCat.{u} A) ℤ) (E : CochainComplex (ModuleCat.{u} R) ℤ) (p : P ⟶ M) (e : E ⟶ (restrict R A).obj P), QuasiIso p → QuasiIso e → (HomologicalComplex.quasiIso (ModuleCat.{u} A) (.up ℤ)).kFlat P → (HomologicalComplex.quasiIso (ModuleCat.{u} R) (.up ℤ)).kFlat E → ∃ (es : DerivedCategory.Q.obj ((extend R B).obj E) ≅ DerivedCategory.Q.obj ((sourceComplex R A B).obj M)) (et : DerivedCategory.Q.obj ((extend R B).obj ((restrict R A).obj P)) ≅ DerivedCategory.Q.obj ((targetComplex R A B).obj M)), DerivedCategory.Q.map ((extend R B).map ((augmentation R).app E)) ≫ es.hom = DerivedCategory.Q.map ((extend R B).map ((resolution R).map (e ≫ (restrict R A).map p))) ∧ DerivedCategory.Q.map ((extend R B).map ((restrict R A).map ((augmentation A).app P))) ≫ et.hom = DerivedCategory.Q.map ((targetComplex R A B).map p) ∧ es.hom ≫ c.app M = DerivedCategory.Q.map ((extend R B).map e) ≫ et.hom",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-11",
+  "existing": false,
+  "note": "The two declarations together give the comparison on arbitrary K-flat models, its cohomology tensor-algebra actions and linearity, and both natural localization identities with their comparison square. B denotes the node's R′. Local rings are arbitrary models of the indicated prime localizations with their canonical compatible algebra maps."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-dbc1256",
+  "group": "C1",
+  "result": "pass",
+  "note": "R->A,R->R'(=B) as Algebra; c is the unique Q-nat-trans through the K-flat span (IsIso spanLeft, tied), H^i(c)=comparison via homologyFunctorFactors; arbitrary K-flat P->M, E->P (MorphismProperty.kFlat, #check) with es/et pinned by augmentations; A'-lifts S,T pinned by eS/eT and a•1 action equations, c A'-linear restricting to comparison; q' with comaps, localization models tied by scalar towers/_hB/_hfA/_hfB; alpha,beta square = node's existential natural isos (final Nonempty equivalent to canonical flat map since alpha/beta untied in node); citation-only statement correction needed (def-pc-derived-category/def-pc-kflat-complex are scheme/site-only)",
+  "statement_corrected": true
+ },
+ "statement_change": {
+  "date": "2026-10-11",
+  "by": "C1 stage 2",
+  "old_statement": "Let R\\to A and R\\to R' be ring maps and put A'=A\\otimes_R R'. For a complex M^\\bullet of A-modules [def-pc-derived-category] there is a canonical comparison morphism c:M^\\bullet\\otimes_R^{\\mathbf L}R'\\to M^\\bullet\\otimes_A^{\\mathbf L}A' in D(R') (Stacks, More on Algebra, equation comparison-map): it is E^\\bullet\\otimes_R R'\\to P^\\bullet\\otimes_A A' for a K-flat complex P^\\bullet of A-modules representing M^\\bullet and a quasi-isomorphism E^\\bullet\\to P^\\bullet from a K-flat complex E^\\bullet of R-modules [def-pc-kflat-complex]. For every i, H^i(M^\\bullet\\otimes_A^{\\mathbf L}A') has its evident A'-module structure, while H^i(M^\\bullet\\otimes_R^{\\mathbf L}R') is an A'-module as follows: a in A acts by H^i(a\\otimes_R^{\\mathbf L}\\operatorname{id}_{R'}) through End_{D(A)}(M^\\bullet)\\to End_{D(R)}(M^\\bullet)\\to End_{D(R')}(M^\\bullet\\otimes_R^{\\mathbf L}R'), and this action commutes with R', hence combines to an A'=A\\otimes_R R' action. With these structures H^i(c) is A'-linear. For every prime \\mathfrak q' of A', with images \\mathfrak q of A and \\mathfrak p',\\mathfrak p of R',R, there are natural isomorphisms H^i(M^\\bullet\\otimes_R^{\\mathbf L}R')\\otimes_{A'}A'_{\\mathfrak q'}\\cong H^i(M^\\bullet_{\\mathfrak q}\\otimes^{\\mathbf L}_{R_{\\mathfrak p}}R'_{\\mathfrak p'})\\otimes_{A_{\\mathfrak q}\\otimes_{R_{\\mathfrak p}}R'_{\\mathfrak p'}}A'_{\\mathfrak q'} and H^i(M^\\bullet\\otimes_A^{\\mathbf L}A')\\otimes_{A'}A'_{\\mathfrak q'}\\cong H^i(M^\\bullet_{\\mathfrak q}\\otimes^{\\mathbf L}_{A_{\\mathfrak q}}A'_{\\mathfrak q'}), under which H^i(c)\\otimes_{A'}A'_{\\mathfrak q'} is the map induced by the comparison morphism for R_{\\mathfrak p}\\to A_{\\mathfrak q}, R_{\\mathfrak p}\\to R'_{\\mathfrak p'} followed by scalar extension along A_{\\mathfrak q}\\otimes_{R_{\\mathfrak p}}R'_{\\mathfrak p'}\\to A'_{\\mathfrak q'}.",
+  "what": "The statement uses ordinary complexes of A- and R-modules, but def-pc-derived-category defines D(O_X) for a scheme, and def-pc-kflat-complex takes complexes of sheaves on a site. Neither recorded declaration accepts ModuleCat complexes. Replace these citations by the existing abstract derived category and ordinary-module K-flat specialization; cite the existing ring-tensor-cohomology model for the canonical comparison. No mathematical hypothesis or conclusion changes.",
+  "source": {
+   "document": "literature/stacks-project/more-algebra.tex; literature/stacks-project/perfect.tex",
+   "place": "equation-comparison-map in section-tor-independence; Tag 0DJ8, proof of lemma-single-complex-base-change-condition, affine case"
+  },
+  "citers": [
+   {
+    "id": "lem-pc-rf-single-complex-affine-base-change",
+    "holds": true,
+    "note": "Only the two sheaf-specific notion citations are replaced by their ordinary-module counterparts; comparison, tensor-algebra actions, localization formulas and compatibility are unchanged."
+   }
+  ],
+  "old_stmt_deps": [
+   "def-pc-derived-category",
+   "def-pc-kflat-complex"
+  ]
  }
 }
