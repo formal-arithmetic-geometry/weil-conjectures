@@ -50,6 +50,25 @@ lemma mapDerivedUpperStarLowerStarAdjunction_eq :
   rw [← (g)^*[A].leftDerivedFunctorIsoMapDerivedCategory_hom_fac]
   rw [NatTrans.comp_app, Functor.whiskerLeft_app, Iso.inv_hom_id_app_assoc]
 
+
+/-- Under the derived adjunctions `Lg^* ⊣ Rg_*`, the composition isomorphism of the derived
+pullbacks has the same conjugate as the composition isomorphism `D(g₁₂^*) ≅ D(g₂^*) ⋙ D(g₁^*)`
+under the adjunctions `D(g^*) ⊣ Rg_*`. -/
+lemma conjugateEquiv_leftDerivedUpperStarComp_hom {T S R : Scheme.{u}} (g₁ : T ⟶ S)
+    (g₂ : S ⟶ R) (g₁₂ : T ⟶ R) (hg : g₁₂ = g₁ ≫ g₂) :
+    conjugateEquiv ((derivedUpperStarLowerStarAdjunction A g₂).comp
+        (derivedUpperStarLowerStarAdjunction A g₁)) (derivedUpperStarLowerStarAdjunction A g₁₂)
+        (leftDerivedUpperStarComp A g₁ g₂ g₁₂ hg).hom =
+      conjugateEquiv ((mapDerivedUpperStarLowerStarAdjunction A g₂).comp
+          (mapDerivedUpperStarLowerStarAdjunction A g₁))
+        (mapDerivedUpperStarLowerStarAdjunction A g₁₂)
+        (Functor.mapDerivedCategoryNatIso (Etale.upperStarComp A g₁ g₂ g₁₂ hg) ≪≫
+          Functor.mapDerivedCategoryCompIso _ _).hom := by
+  rw [mapDerivedUpperStarLowerStarAdjunction_eq, mapDerivedUpperStarLowerStarAdjunction_eq,
+    mapDerivedUpperStarLowerStarAdjunction_eq]
+  ext K
+  simp [conjugateEquiv_apply_app, leftDerivedUpperStarComp, Functor.leftDerivedFunctorNatIso,
+    Functor.leftDerivedFunctorCompIso, leftDerivedUpperStarIsoMapDerivedCategory]
 end Etale
 
 end AlgebraicGeometry
