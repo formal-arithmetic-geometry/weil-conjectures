@@ -240,7 +240,8 @@ noncomputable abbrev polynomialToPolynomialZero : X.polynomialPresheaf ⟶ X.pol
   toQuotientPresheaf _ _
 
 /-- The structure map `𝒪_X ⟶ 𝒪_X[t] / t`. -/
-noncomputable abbrev toPolynomialZeroPresheaf : X.affineStructurePresheaf ⟶ X.polynomialZeroPresheaf :=
+noncomputable abbrev toPolynomialZeroPresheaf :
+    X.affineStructurePresheaf ⟶ X.polynomialZeroPresheaf :=
   X.toPolynomialPresheaf ≫ X.polynomialToPolynomialZero
 
 lemma coequifibered_toPolynomialZeroPresheaf : X.toPolynomialZeroPresheaf.Coequifibered :=
@@ -280,8 +281,8 @@ noncomputable def reesPresheaf : X.AffineZariskiSiteᵒᵖ ⥤ CommRingCat.{u} w
 /-- The structure map `𝒪_X ⟶ 𝒪_X[t, I t⁻¹]`. -/
 @[simps]
 noncomputable def toReesPresheaf : X.affineStructurePresheaf ⟶ I.reesPresheaf where
-  app U := CommRingCat.ofHom (algebraMap _ _)
-  naturality U V i := CommRingCat.hom_ext (RingHom.ext fun x ↦
+  app _ := CommRingCat.ofHom (algebraMap _ _)
+  naturality _ _ i := CommRingCat.hom_ext (RingHom.ext fun x ↦
     (Ideal.extendedReesAlgebraMap_algebraMap _ _ (I.map_siteIdeal i).le x).symm)
 
 set_option backward.isDefEq.respectTransparency false in
@@ -371,7 +372,8 @@ noncomputable def polynomialZeroToNormalCone :
     exact Ideal.subset_span (Set.mem_singleton_iff.mpr Ideal.toExtendedReesAlgebra_X)))
   naturality U V i := by
     refine CommRingCat.hom_ext (Ideal.Quotient.ringHom_ext (RingHom.ext fun x ↦ ?_))
-    change Ideal.Quotient.mk _ ((I.polynomialToRees.app V).hom ((X.polynomialPresheaf.map i).hom x)) =
+    change Ideal.Quotient.mk _
+        ((I.polynomialToRees.app V).hom ((X.polynomialPresheaf.map i).hom x)) =
       Ideal.Quotient.mk _ ((I.reesPresheaf.map i).hom ((I.polynomialToRees.app U).hom x))
     exact congrArg _ (I.polynomialToRees.naturality_apply i x)
 
@@ -433,7 +435,6 @@ lemma toExtendedReesAlgebraT_mem_tIdeal (U : X.AffineZariskiSiteᵒᵖ) :
   Ideal.subset_span rfl
 
 /-- The projection `⨁_{r ≥ 0} I^r / I^{r+1} ⟶ 𝒪_X / I` to the degree-zero part. -/
-
 noncomputable def normalConeToQuotient : I.normalConePresheaf ⟶ I.quotientAlgebra where
   app U := CommRingCat.ofHom (Ideal.Quotient.lift _
     ((Polynomial.evalRingHom 0).comp (I.reesToQuotientPolynomial.app U).hom)
@@ -441,7 +442,8 @@ noncomputable def normalConeToQuotient : I.normalConePresheaf ⟶ I.quotientAlge
       Ideal.mk_ker.ge ha)
   naturality U V i := by
     refine CommRingCat.hom_ext (Ideal.Quotient.ringHom_ext (RingHom.ext fun x ↦ ?_))
-    change Polynomial.eval 0 ((I.reesToQuotientPolynomial.app V).hom ((I.reesPresheaf.map i).hom x)) =
+    change Polynomial.eval 0
+        ((I.reesToQuotientPolynomial.app V).hom ((I.reesPresheaf.map i).hom x)) =
       (I.quotientAlgebra.map i).hom (Polynomial.eval 0 ((I.reesToQuotientPolynomial.app U).hom x))
     exact (congrArg (Polynomial.eval 0) (I.reesToQuotientPolynomial.naturality_apply i x)).trans
       (Polynomial.eval_zero_map _ _)
@@ -471,7 +473,8 @@ lemma toPolynomialPresheaf_comp_polynomialToLaurent :
   ext U x
   exact Polynomial.toLaurent_C x
 
-lemma toReesPresheaf_comp_reesToLaurent : I.toReesPresheaf ≫ I.reesToLaurent = X.toLaurentPresheaf := by
+lemma toReesPresheaf_comp_reesToLaurent :
+    I.toReesPresheaf ≫ I.reesToLaurent = X.toLaurentPresheaf := by
   ext U x
   exact Ideal.coe_algebraMap_extendedReesAlgebra (I := I.siteIdeal U.unop) x
 
@@ -603,7 +606,8 @@ lemma map_comp_polynomialSpecChart {U V : X.AffineZariskiSite} (i : U ⟶ V) :
   rw [polynomialSpecChart, polynomialSpecChart, AffineSpace.comp_homOfVector]
   congr 1
   · rw [natTrans_app_comp_ι, natTrans_app_comp_ι]
-    change Spec.map (X.polynomialPresheaf.map i.op) ≫ Spec.map (X.toPolynomialPresheaf.app (.op V)) ≫
+    change Spec.map (X.polynomialPresheaf.map i.op) ≫
+      Spec.map (X.toPolynomialPresheaf.app (.op V)) ≫
       V.2.fromSpec = _
     rw [← Spec.map_comp_assoc, ← X.toPolynomialPresheaf.naturality, Spec.map_comp_assoc]
     exact congrArg (Spec.map (X.toPolynomialPresheaf.app (.op U)) ≫ ·)
@@ -645,11 +649,13 @@ set_option backward.isDefEq.respectTransparency false in
 instance (U : X.AffineZariskiSite) :
     IsIso (AffineSpace.homOfVector
       ((relativeGluingData X.coequifibered_toPolynomialPresheaf).natTrans.app U)
-      fun _ : ULift.{u} (Fin 1) ↦ (ΓSpecIso (X.polynomialPresheaf.obj (.op U))).inv Polynomial.X) := by
+      fun _ : ULift.{u} (Fin 1) ↦
+        (ΓSpecIso (X.polynomialPresheaf.obj (.op U))).inv Polynomial.X) := by
   have : (relativeGluingData X.coequifibered_toPolynomialPresheaf).natTrans.app U =
       Spec.map (CommRingCat.ofHom (C : Γ(X, U.1) →+* Γ(X, U.1)[X])) ≫ U.2.isoSpec.inv := rfl
   rw [this, ← AffineSpace.homOfVector_map]
-  have : IsIso (AffineSpace.homOfVector (Spec.map (CommRingCat.ofHom (Polynomial.C : Γ(X, U.1) →+* _)))
+  have : IsIso (AffineSpace.homOfVector
+      (Spec.map (CommRingCat.ofHom (Polynomial.C : Γ(X, U.1) →+* _)))
       fun _ : ULift.{u} (Fin 1) ↦
         (ΓSpecIso (X.polynomialPresheaf.obj (.op U))).inv Polynomial.X) :=
     isIso_homOfVector_specPolynomial Γ(X, U.1)
@@ -778,7 +784,8 @@ lemma _root_.CategoryTheory.IsPullback.range_snd_scheme {P X' Y Z : Scheme.{u}} 
 set_option backward.isDefEq.respectTransparency false in
 /-- The punctured line `𝔾_{m,X} ⊆ 𝔸¹_X` is the locus where the coordinate `t` is invertible. -/
 lemma opensRange_laurentSpecToPolynomialSpec :
-    X.laurentSpecToPolynomialSpec.opensRange = X.polynomialSpec.basicOpen X.polynomialSpecCoord := by
+    X.laurentSpecToPolynomialSpec.opensRange =
+      X.polynomialSpec.basicOpen X.polynomialSpecCoord := by
   refine opens_ext _ fun U ↦ TopologicalSpace.Opens.ext ?_
   have h := isPullback_ι_relativeGluingMap X.coequifibered_toPolynomialPresheaf
     X.coequifibered_toLaurentPresheaf _

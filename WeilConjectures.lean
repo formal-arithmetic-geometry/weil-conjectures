@@ -98,6 +98,8 @@ public import WeilConjectures.AlgebraicGeometry.Curve.Reductions
 public import WeilConjectures.AlgebraicGeometry.Curve.RiemannRoch
 public import WeilConjectures.AlgebraicGeometry.Curve.SerreDuality
 public import WeilConjectures.AlgebraicGeometry.Curve.SmoothCalculations
+public import WeilConjectures.AlgebraicGeometry.DeformationSpace
+public import WeilConjectures.AlgebraicGeometry.DeformationSpace.Smooth
 public import WeilConjectures.AlgebraicGeometry.DeformationToNormalCone
 public import WeilConjectures.AlgebraicGeometry.DensePoints
 public import WeilConjectures.AlgebraicGeometry.Descent
@@ -1310,6 +1312,7 @@ public import WeilConjectures.Mathlib.RingTheory.TotallySplit
 public import WeilConjectures.Mathlib.RingTheory.Trace.Basic
 public import WeilConjectures.Mathlib.RingTheory.UniqueFactorizationDomain.Ideal
 public import WeilConjectures.Mathlib.RingTheory.UniqueFactorizationDomain.Kaplansky
+public import WeilConjectures.Mathlib.RingTheory.Unramified.Basic
 public import WeilConjectures.Mathlib.RingTheory.Unramified.Finite
 public import WeilConjectures.Mathlib.RingTheory.Unramified.LocalStructure
 public import WeilConjectures.Mathlib.RingTheory.Valuation.LocalSubring

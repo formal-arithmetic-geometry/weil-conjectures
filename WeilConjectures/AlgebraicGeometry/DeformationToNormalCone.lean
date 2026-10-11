@@ -31,28 +31,26 @@ normal cone.
 
 ## Implementation notes
 
-The pinned Mathlib has no relative `Spec` of a quasi-coherent graded algebra and the project's
-blow-up is not yet available along an arbitrary closed subscheme of a non-affine scheme, so the
-deformation space cannot be constructed here. As for the normal cone in
-`WeilConjectures.AlgebraicGeometry.Morphisms.RegularImmersion`, it is carried as *data*: the
-structure `AlgebraicGeometry.Scheme.Hom.DeformationToNormalConeData` bundles the deformation
-space, the two structure morphisms and the four clauses of `sk-lem-geometry`, and the
-blueprint lemma is the statement that such a datum exists.
+The deformation space is constructed as the relative spectrum `D_s V = Spec_V 𝒪_V[t, I t⁻¹]`
+of the extended Rees algebra of the ideal `I` of `s(B)`
+(`AlgebraicGeometry.Scheme.IdealSheafData.deformationSpace`), and the normal cone `N_s` as the
+relative spectrum of `𝒪_V[t, I t⁻¹] / t = ⨁_{r ≥ 0} I^r / I^{r+1}`, which lies over `s(B) ≅ B`
+(`AlgebraicGeometry.Scheme.Hom.normalConeData`). The fibre squares come from pushout squares of
+quasi-coherent algebras. Smoothness of `g̃` is proved on charts: near `s(B)` there are étale
+coordinates in which `s` is the origin, and there the deformation space is étale over
+`𝔸^d × 𝔸¹` (`AlgebraicGeometry.exists_smoothOfRelativeDimension_extendedReesAlgebra_of_section`).
 
-The punctured trivialisation `κ°` of `sk-lem-geometry` (3) — the identification of the
-deformation over `𝔾_{m,B}` with `V ×_B 𝔾_{m,B}` — is a field. `𝔾_m` is not a Mathlib scheme,
-so `𝔾_{m,B}` is carried as an open subscheme of `𝔸¹_B` whose underlying set is the complement of
-the zero section, as in `WeilConjectures.EtaleCohomology.Purity.Smooth.AffineLine`.
-
-TODO: nothing ties the normal cone datum `N` to the section `s`: the structure
-`AlgebraicGeometry.Scheme.Hom.NormalConeData` is not yet the normal cone of `s` (see its TODO), so
-the fibre over `t = 0` is only some vector bundle with a zero section. Tying `NormalConeData` to
-the conormal sheaf of the immersion is the subject of the smooth-purity follow-up (branch
-`prove2/sk-thm-smooth-purity-2`); once it lands, `N` in `DeformationToNormalConeData d g s N`
-becomes the normal cone of `s` and no field needs to be added here.
+The structure `AlgebraicGeometry.Scheme.Hom.DeformationToNormalConeData` records the clauses of
+`sk-lem-geometry` about the deformation; the blueprint lemma is the statement that such a datum
+exists with the normal cone of `s` as fibre over `t = 0`. The punctured trivialisation `κ°` of
+`sk-lem-geometry` (3) — the identification of the deformation over `𝔾_{m,B}` with
+`V ×_B 𝔾_{m,B}` — is a field. `𝔾_m` is not a Mathlib scheme, so `𝔾_{m,B}` is carried as an open
+subscheme of `𝔸¹_B` whose underlying set is the complement of the zero section, as in
+`WeilConjectures.EtaleCohomology.Purity.Smooth.AffineLine`.
 
 ## Main definitions
 
+- `AlgebraicGeometry.Scheme.Hom.normalConeData`: the normal cone of a closed section.
 - `AlgebraicGeometry.Scheme.Hom.DeformationToNormalConeData`: the deformation space `𝒟_s V`
   together with `g̃`, `s̃` and the properties characterising them.
 
@@ -93,7 +91,6 @@ noncomputable def toQuotientSpec : B ⟶ s.ker.quotientSpec :=
     (s.ker.ker_quotientSpec_toBase).le
 
 @[reassoc (attr := simp)]
-
 lemma toQuotientSpec_toBase :
     s.toQuotientSpec ≫ (relativeGluingData s.ker.coequifibered_toQuotientAlgebra).toBase = s :=
   IsClosedImmersion.lift_fac _ _ _
@@ -456,10 +453,8 @@ complement of the zero section, there is a cartesian square
 
 identifying `g̃⁻¹(𝔾_{m,B})` with `V ×_B 𝔾_{m,B}` over `𝔾_{m,B}`.
 
-The normal cone datum `N` is not yet tied to `s`; see the TODO in the module documentation.
-
-Mathlib has neither the relative `Spec` of the extended Rees algebra nor a blow-up along an
-arbitrary closed subscheme, so the datum cannot be constructed here; existence is
+The fibre over `t = 0` is the normal cone datum `N`; existence of the datum with `N` the normal
+cone of `s` (`AlgebraicGeometry.Scheme.Hom.normalConeData`) is
 `AlgebraicGeometry.Scheme.Hom.nonempty_deformationToNormalConeData`. -/
 -- TODO(unify): sk-def-purity-conv
 structure DeformationToNormalConeData (d : ℕ) (g : V ⟶ B) (s : B ⟶ V)
@@ -536,7 +531,8 @@ lemma ι_deformationSpaceProj (U : V.AffineZariskiSite) {W : B.Opens} (hW : IsAf
       IdealSheafData.deformationSpaceToPolynomialSpec,
       relativeGluingMap_toBase_assoc _ _ _ s.ker.toPolynomialPresheaf_comp_polynomialToRees,
       ι_toBase_assoc, affineLineChart, Category.assoc, AffineSpace.homOfVector_over,
-      ← Spec.map_comp_assoc, ← CommRingCat.ofHom_comp, ← IsAffineOpen.SpecMap_appLE_fromSpec g hW U.2 hUW,
+      ← Spec.map_comp_assoc, ← CommRingCat.ofHom_comp,
+      ← IsAffineOpen.SpecMap_appLE_fromSpec g hW U.2 hUW,
       ← Spec.map_comp_assoc]
     congr 2
     ext x
@@ -576,7 +572,7 @@ lemma smoothOfRelativeDimension_ι_deformationSpaceProj (d : ℕ) (U : V.AffineZ
 opens. -/
 lemma exists_isStandardSmooth_appLE_basicOpen (d : ℕ) [SmoothOfRelativeDimension d g] (v : V)
     (O : V.Opens) (hvO : v ∈ O) :
-    ∃ (W : B.Opens) (hW : IsAffineOpen W) (U : V.Opens) (hU : IsAffineOpen U) (_ : v ∈ U)
+    ∃ (W : B.Opens) (_ : IsAffineOpen W) (U : V.Opens) (_ : IsAffineOpen U) (_ : v ∈ U)
       (_ : U ≤ O) (hUW : U ≤ g ⁻¹ᵁ W),
       (g.appLE W U hUW).hom.IsStandardSmoothOfRelativeDimension d := by
   obtain ⟨W, hW, U₀, hU₀, hvU₀, e, hQ⟩ :=

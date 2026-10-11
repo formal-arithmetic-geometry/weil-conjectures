@@ -66,8 +66,8 @@ theorem smoothOfRelativeDimension_extendedReesAlgebra_of_etale {d : ℕ} (f : C 
     infer_instance
   have h₂ : SmoothOfRelativeDimension d (Spec.map (CommRingCat.ofHom
       (J.toExtendedReesAlgebra.comp (mapRingHom (MvPolynomial.C : C →+* P))))) := by
-    have : IsIso (CommRingCat.ofHom (Ideal.mvPolynomialExtendedReesAlgebraEquiv C (Fin d)).toRingHom) :=
-      inferInstanceAs (IsIso (Ideal.mvPolynomialExtendedReesAlgebraEquiv C (Fin d)).toCommRingCatIso.hom)
+    let e := Ideal.mvPolynomialExtendedReesAlgebraEquiv C (Fin d)
+    have : IsIso (CommRingCat.ofHom e.toRingHom) := inferInstanceAs (IsIso e.toCommRingCatIso.hom)
     rw [← Ideal.mvPolynomialExtendedReesAlgebraEquiv_comp_C, CommRingCat.ofHom_comp,
       Spec.map_comp, MorphismProperty.cancel_left_of_respectsIso
         (P := @SmoothOfRelativeDimension d)]
@@ -122,9 +122,11 @@ theorem exists_smoothOfRelativeDimension_extendedReesAlgebra_of_section {d : ℕ
     fun i ↦ MvPolynomial.X i - MvPolynomial.C (c i)
   let τ' : MvPolynomial (Fin d) C →+* MvPolynomial (Fin d) C := MvPolynomial.eval₂Hom MvPolynomial.C
     fun i ↦ MvPolynomial.X i + MvPolynomial.C (c i)
-  have hτ : τ.comp τ' = RingHom.id (MvPolynomial (Fin d) C) := MvPolynomial.ringHom_ext (fun x ↦ by simp [τ, τ'])
+  have hτ : τ.comp τ' = RingHom.id (MvPolynomial (Fin d) C) :=
+    MvPolynomial.ringHom_ext (fun x ↦ by simp [τ, τ'])
     fun i ↦ by simp [τ, τ']
-  have hτ' : τ'.comp τ = RingHom.id (MvPolynomial (Fin d) C) := MvPolynomial.ringHom_ext (fun x ↦ by simp [τ, τ'])
+  have hτ' : τ'.comp τ = RingHom.id (MvPolynomial (Fin d) C) :=
+    MvPolynomial.ringHom_ext (fun x ↦ by simp [τ, τ'])
     fun i ↦ by simp [τ, τ']
   let eτ : MvPolynomial (Fin d) C ≃+* MvPolynomial (Fin d) C := RingEquiv.ofRingHom τ τ' hτ hτ'
   let ψ : MvPolynomial (Fin d) C →+* A := φ.comp τ

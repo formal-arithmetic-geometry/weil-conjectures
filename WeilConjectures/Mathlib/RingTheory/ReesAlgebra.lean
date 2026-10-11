@@ -286,7 +286,8 @@ theorem isBaseChange_extendedReesAlgebraAlgHom [Module.Flat R S] :
           rw [map_add, add_mul]; exact K.add_mem hy hz
         | smul a y _ hy =>
           change LaurentPolynomial.C (a • y) * T (-1) ∈ K
-          rw [smul_eq_mul, map_mul, mul_assoc, LaurentPolynomial.C_eq_algebraMap, ← Algebra.smul_def]
+          rw [smul_eq_mul, map_mul, mul_assoc, LaurentPolynomial.C_eq_algebraMap,
+            ← Algebra.smul_def]
           exact K.smul_mem hy a
     intro z
     obtain ⟨_, ⟨w, rfl⟩, hw⟩ := hK z.2
@@ -297,7 +298,8 @@ theorem isBaseChange_extendedReesAlgebraAlgHom [Module.Flat R S] :
   rfl
 
 /-- The extended Rees algebra of `I S` as an algebra over that of `I`, along an `R`-algebra `S`. -/
-noncomputable instance : Algebra I.extendedReesAlgebra (I.map (algebraMap R S)).extendedReesAlgebra :=
+noncomputable instance :
+    Algebra I.extendedReesAlgebra (I.map (algebraMap R S)).extendedReesAlgebra :=
   (I.extendedReesAlgebraAlgHom S).toRingHom.toAlgebra
 
 instance : IsScalarTower R I.extendedReesAlgebra (I.map (algebraMap R S)).extendedReesAlgebra :=
@@ -405,7 +407,8 @@ variable (I) in
 `x ∈ I` and `r ↦ φ r`: it is induced by `R[t, t⁻¹] ⟶ S[t, t⁻¹]`, which lands in `S[t]`. -/
 noncomputable def extendedReesAlgebraToPolynomial (φ : R →+* S) (h : I ≤ RingHom.ker φ) :
     I.extendedReesAlgebra →+* S[X] :=
-  (RingEquiv.ofLeftInverse (f := toLaurent (R := S)) leftInverse_trunc_toLaurent).symm.toRingHom.comp
+  (RingEquiv.ofLeftInverse (f := toLaurent (R := S))
+    leftInverse_trunc_toLaurent).symm.toRingHom.comp
     (((laurentMap φ).comp I.extendedReesAlgebra.val.toRingHom).codRestrict _
       fun x ↦ laurentMap_mem_range_toLaurent φ h x.2)
 
