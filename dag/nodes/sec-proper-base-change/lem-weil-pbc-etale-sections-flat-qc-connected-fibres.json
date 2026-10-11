@@ -149,5 +149,23 @@
   "group": "J1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-efc (reviewer sub-agent of L); spot-checked: Source: Stacks etale-cohomology.tex Lemma 0A3H (lemma-sections-upstairs, l.5030-5068) and 09XN (lemma-describe-pullback, l.4960-5027) read; item statement agrees with 0A3H hypothesis by hypothesis (flat, quasi-compact via def-weil-finite-type-morphism, geometric fibres connected, connected includes nonempty in def-weil-connected-scheme as in Stacks, arbitrary sheaf of sets). Step 1: surjectivity from nonempty geometric fibres, fpqc covering checked against def-weil-pbc-fpqc-covering (flat + finite affine cover of f^{-1}V, images cover V by surjectivity). Step 2: constant-section node (true: inverse image from Spec Omega is the constant sheaf of the stalk, sections on connected nonempty U are the value set, naturality) carries it. Step 3: every geometric point of TxT factors through a product fibre over the chosen algebraic closure; sheaf axiom; singleton case of the 09XN node (true: fpqc sheaf condition of pi_S^{-1}F applied to a covering of S). Tool use def-weil-pbc-fpqc-covering (definition, generic) accepted. Lean: isIso_upperStarSectionsMap is SORRY (sorryfree.py), no B10. Blueprint search 'fpqc descent sections', 'constant sheaf geometric fibre connected': 0 hits. Small cases: T=S identity; disconnected fibre excluded. FIX more, RETURN less: (1) item statement and both new nodes: B3, inverse image f^{-1}F had no defining node: cite lem-weil-pbc-sets-etale-inverse-image-composition-units (stmt_deps added), item statement also cites def-weil-pbc-etale-sheaf-of-sets in text; fpqc-descent node: F|_{T_i x_S T_j} replaced by g_ij^{-1}F with the projection identifications via the composition isomorphisms. (2) Step 2: C1, identification of p^{-1}f^{-1}F with (sbar o h)^{-1}F and of the projection pullbacks restricted to the product fibre used the composition isomorphisms uncited: cite lem-weil-pbc-sets-etale-inverse-image-composition-units. (3) Step 3: C1, equality on the fibre giving equal germs at geometric points of TxT uses stalk of inverse image with germs: cite lem-weil-pbc-sets-etale-inverse-image-stalk-germ. uses/proof_deps updated. Started Sat Oct 10 04:15:10 PM UTC 2026, ended Sat Oct 10 04:18:16 PM UTC 2026.; 3 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.EtaleSetSectionsFlatConnectedFibres",
+  "declaration": "AlgebraicGeometry.etaleSet_sections_bijective_of_flat_qc_connected_geometricFibres",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleSetSectionsFlatConnectedFibres.lean",
+  "statement": "theorem etaleSet_sections_bijective_of_flat_qc_connected_geometricFibres {S T : Scheme.{u}} (f : T ⟶ S) [Flat f] [QuasiCompact f] (hconn : ∀ s : S, ConnectedSpace (pullback f (Spec.map (CommRingCat.ofHom (algebraMap (S.residueField s) (AlgebraicClosure (S.residueField s)))) ≫ S.fromSpecResidueField s) : Scheme.{u})) (F : Sheaf S.smallEtaleTopology (Type (u + 1))) : Function.Bijective (((Functor.sheafPullbackConstruction.sheafAdjunctionContinuous (MorphismProperty.Over.pullback @Etale ⊤ f) (Type (u + 1)) (S.smallGrothendieckTopology @Etale) (T.smallGrothendieckTopology @Etale)).unit.app F).hom.app (op (Scheme.Etale.mk (𝟙 S))))",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "F1",
+  "result": "pass",
+  "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
  }
 }
