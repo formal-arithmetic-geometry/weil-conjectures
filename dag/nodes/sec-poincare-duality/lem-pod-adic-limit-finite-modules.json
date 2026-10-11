@@ -154,5 +154,30 @@
   "group": "M1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-alm2744 (reviewer sub-agent of L); spot-checked: Return point 1 (E) repaired: lem-pod-adic-tower-reconstruction now assumes I finitely generated, matching Stacks 09B8; Step 1 applies it with I=(varpi_E) principal (C4 met). Item statement, title, source and stmt_deps unchanged from base (E7); O_E, varpi_E, A_{E,n} still cite def-weil-l-adic-coefficient-extension. Steps 2-3 hypotheses (completeness of O_E, separatedness, Noetherian) checked against 031D/031B nodes. FIX more, RETURN less: (1) class (d) new node lem-pod-adic-hom-limit-finite folded into Step 4, which now derives continuity and the Hom bijection from lem-weil-pbc-finite-module-complete-over-complete-noetherian applied to N (with coefficient-extension and completeness leaf for its hypotheses), node dropped; (2) Steps 4 and 5 had '\\to' JSON-escaped as a tab character ('\\t'+'o'), repaired to '\\\\to'.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.NumberTheory.Padics.AdicLimitFiniteModules",
+  "declaration": "Padic.adicLimit_finite_modules",
+  "declarations": [
+   "Padic.adicLimit_finite_modules",
+   "Padic.finite_module_adic_complete_and_hom",
+   "Padic.finite_module_tensor_reductions",
+   "Padic.finite_extension_scalar_reductions"
+  ],
+  "file": "lean/Sheaf/NumberTheory/Padics/AdicLimitFiniteModules.lean",
+  "statement": "theorem adicLimit_finite_modules (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] : let R := coefficientExtensionIntegers l E let I := Ideal.span ({coefficientExtensionUniformizer l E} : Set R) ∀ (F : ℕᵒᵖ ⥤ ModuleCat.{v} R), (∀ n : ℕ, Module.Finite R (F.obj (op n))) → (∀ n : ℕ, I ^ (n + 1) • (⊤ : Submodule R (F.obj (op n))) = ⊥) → (∀ n : ℕ, Function.Surjective (F.map (homOfLE (Nat.le_succ n)).op).hom ∧ LinearMap.ker (F.map (homOfLE (Nat.le_succ n)).op).hom = I ^ (n + 1) • (⊤ : Submodule R (F.obj (op (n + 1))))) → let S := ModuleCat.sectionsSubmodule F Module.Finite R S ∧ (∀ n : ℕ, let p := (LinearMap.proj (op n)).comp S.subtype Function.Surjective p ∧ LinearMap.ker p = I ^ (n + 1) • (⊤ : Submodule R S)) ∧ (letI : ∀ j : ℕᵒᵖ, TopologicalSpace (F.obj j) := fun _ ↦ ⊥ TopologicalSpace.induced (fun x : S ↦ x.val) inferInstance = (coefficientExtensionMaximalIdeal l E).adicModuleTopology S)",
+  "branch": "sheaf-dag",
+  "by": "K1",
+  "date": "2026-10-11",
+  "existing": false,
+  "note": "The four declarations jointly state parts (1), (2), and the two identities of (3). Positive levels are indexed by n + 1. Coefficient modules in (1) are represented as valuation-ring modules annihilated by the corresponding coefficient ideal; canonical quotient isomorphisms are rendered by surjectivity and the exact kernel."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-alf0935",
+  "group": "K1",
+  "result": "pass",
+  "note": "Part 1: F:ℕᵒᵖ⥤ModuleCat R, Module.Finite + I^(n+1) annihilation = finite A_{E,n+1}-module, transition surj with ker I^(n+1)•⊤ (factor direction checked), sectionsSubmodule limit finite, projections surj ker I^(n+1)•⊤, induced discrete-product topology = m_E-adic; Part 2: IsAdicComplete J, AdicCompletion.of I bijective, factorPow tower, continuity, ∃! f with reduceModIdeal = compatible R/I^(n+1)-linear g; Part 3: canonical e n with pure-tensor formula and factorPow compatibility for M⊗N and M⊗O_L, α = restriction of E→L, E-uniformizer powers in O_L"
  }
 }
