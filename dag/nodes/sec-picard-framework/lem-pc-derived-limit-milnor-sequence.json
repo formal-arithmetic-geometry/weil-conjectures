@@ -20,7 +20,8 @@
  },
  "stmt_deps": [
   "def-weil-abstract-derived-category",
-  "def-weil-derived-limit"
+  "def-weil-derived-limit",
+  "lem-pc-derived-limit-roos-abelian-groups"
  ],
  "proof": [
   {
@@ -140,5 +141,24 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-dlm2309 (reviewer sub-agent of L); spot-checked: Read packet whole; checked Step 1/2 against 08TC Roos triangle, 07KC products, 07KY long exact segment (i-1 shift correct), new node against 07KW. FIX more, RETURN less: (1) C4: item's R^1 lim is the right derived functor of lim on Ab(N), but new node lem-pc-derived-limit-roos-abelian-groups identified coker(1-s) with R^1 lim only 'in the derived-limit sense of def-weil-derived-limit' (in that sense an elementary special case of the item itself); restated the new node in the derived-functor sense of Tag 07KW (Ab(N) abelian with enough injectives, lim = ker, R^1 lim = coker(1-s) naturally, R^q=0 q>=2), stmt_deps def-weil-inverse-system, def-sp-abelian, def-sp-left-exact-additive; one Mathlib grep recorded, no match. (2) C1: exactness of countable products in Ab (hypothesis of lem-weil-derived-limit-existence (2)) was uncited; added statement node lem-pc-abelian-groups-exact-products (Mathlib AB4Star AddCommGrpCat recorded) and cited it in Step 1. (3) Step texts now state the compatibility of H^i(prod)=prod H^i with 1-s via pr_n and apply the Roos node to (H^{i-1}(K_n)) and (H^i(K_n)); proof_deps updated. No restatement of lem-pc-derived-functor-commutes-derived-limit (08U1) (class b clear); tool_uses accepted as generic tools. Second reading by H1 missed (1) and (2).; 3 file(s) fixed by the reviewer; 1 statement node(s) added by the reviewer (FIX more, RETURN less)"
  },
- "lead_note": "2026-10-10 L (R-dlm2309): new node lem-pc-abelian-groups-exact-products is a Mathlib fact (AB4Star AddCommGrpCat, Grp/AB.lean:98); merge tool requires reviewer-added nodes unsplit, so attach it as a leaf"
+ "lead_note": "2026-10-10 L (R-dlm2309): new node lem-pc-abelian-groups-exact-products is a Mathlib fact (AB4Star AddCommGrpCat, Grp/AB.lean:98); merge tool requires reviewer-added nodes unsplit, so attach it as a leaf",
+ "lean": {
+  "module": "Sheaf.CategoryTheory.Triangulated.MilnorSequence",
+  "declaration": "CategoryTheory.milnor_shortExact",
+  "file": "lean/Sheaf/CategoryTheory/Triangulated/MilnorSequence.lean",
+  "statement": "theorem milnor_shortExact [HasDerivedCategory.{v} AddCommGrpCat.{u}] (i : ℤ) : ∃ (a : ∀ (K : ℕᵒᵖ ⥤ DerivedCategory AddCommGrpCat.{u}) [HasProduct (fun n : ℕ => K.obj (Opposite.op n))] (L : DerivedCategory AddCommGrpCat.{u}) (_p : L ⟶ ∏ᶜ fun n : ℕ => K.obj (Opposite.op n)) (_δ : (∏ᶜ fun n : ℕ => K.obj (Opposite.op n)) ⟶ L⟦(1 : ℤ)⟧), ((lim : (ℕᵒᵖ ⥤ AddCommGrpCat.{u}) ⥤ AddCommGrpCat.{u}).rightDerived 1).obj (K ⋙ DerivedCategory.homologyFunctor AddCommGrpCat.{u} (i - 1)) ⟶ (DerivedCategory.homologyFunctor AddCommGrpCat.{u} i).obj L) (b : ∀ (K : ℕᵒᵖ ⥤ DerivedCategory AddCommGrpCat.{u}) [HasProduct (fun n : ℕ => K.obj (Opposite.op n))] (L : DerivedCategory AddCommGrpCat.{u}) (_p : L ⟶ ∏ᶜ fun n : ℕ => K.obj (Opposite.op n)) (_δ : (∏ᶜ fun n : ℕ => K.obj (Opposite.op n)) ⟶ L⟦(1 : ℤ)⟧), (DerivedCategory.homologyFunctor AddCommGrpCat.{u} i).obj L ⟶ limit (K ⋙ DerivedCategory.homologyFunctor AddCommGrpCat.{u} i)), (∀ (K : ℕᵒᵖ ⥤ DerivedCategory AddCommGrpCat.{u}) [HasProduct (fun n : ℕ => K.obj (Opposite.op n))] (L : DerivedCategory AddCommGrpCat.{u}) (p : L ⟶ ∏ᶜ fun n : ℕ => K.obj (Opposite.op n)) (δ : (∏ᶜ fun n : ℕ => K.obj (Opposite.op n)) ⟶ L⟦(1 : ℤ)⟧), IsDerivedLimitTriangle (fun n => K.map (homOfLE (Nat.le_succ n)).op) L p δ → (∃ hz : a K L p δ ≫ b K L p δ = 0, (ShortComplex.mk (a K L p δ) (b K L p δ) hz).ShortExact) ∧ ∀ n : ℕ, b K L p δ ≫ limit.π (K ⋙ DerivedCategory.homologyFunctor AddCommGrpCat.{u} i) (Opposite.op n) = (DerivedCategory.homologyFunctor AddCommGrpCat.{u} i).map (p ≫ Pi.π (fun n : ℕ => K.obj (Opposite.op n)) n)) ∧ ∀ (K K' : ℕᵒᵖ ⥤ DerivedCategory AddCommGrpCat.{u}) [HasProduct (fun n : ℕ => K.obj (Opposite.op n))] [HasProduct (fun n : ℕ => K'.obj (Opposite.op n))] (L L' : DerivedCategory AddCommGrpCat.{u}) (p : L ⟶ ∏ᶜ fun n : ℕ => K.obj (Opposite.op n)) (p' : L' ⟶ ∏ᶜ fun n : ℕ => K'.obj (Opposite.op n)) (δ : (∏ᶜ fun n : ℕ => K.obj (Opposite.op n)) ⟶ L⟦(1 : ℤ)⟧) (δ' : (∏ᶜ fun n : ℕ => K'.obj (Opposite.op n)) ⟶ L'⟦(1 : ℤ)⟧), IsDerivedLimitTriangle (fun n => K.map (homOfLE (Nat.le_succ n)).op) L p δ → IsDerivedLimitTriangle (fun n => K'.map (homOfLE (Nat.le_succ n)).op) L' p' δ' → ∀ (φ : K ⟶ K') (g : L ⟶ L'), p ≫ Limits.Pi.map (fun n : ℕ => φ.app (Opposite.op n)) = g ≫ p' → δ ≫ (shiftFunctor _ (1 : ℤ)).map g = Limits.Pi.map (fun n : ℕ => φ.app (Opposite.op n)) ≫ δ' → ((lim : (ℕᵒᵖ ⥤ AddCommGrpCat.{u}) ⥤ AddCommGrpCat.{u}).rightDerived 1).map (Functor.whiskerRight φ (DerivedCategory.homologyFunctor AddCommGrpCat.{u} (i - 1))) ≫ a K' L' p' δ' = a K L p δ ≫ (DerivedCategory.homologyFunctor AddCommGrpCat.{u} i).map g ∧ (DerivedCategory.homologyFunctor AddCommGrpCat.{u} i).map g ≫ b K' L' p' δ' = b K L p δ ≫ limMap (Functor.whiskerRight φ (DerivedCategory.homologyFunctor AddCommGrpCat.{u} i))",
+  "branch": "sheaf-dag",
+  "by": "K1",
+  "date": "2026-10-11",
+  "existing": false,
+  "note": "The maps are a simultaneous family natural for morphisms of specified Roos triangles. End terms are Mathlib limit and lim.rightDerived 1, with the landed Roos structural theorems as local instances. No private kernel/cokernel substitutes or chosen functorial derived-limit object."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-mil0940",
+  "group": "K1",
+  "result": "pass",
+  "note": "Read packet whole; matched D(Ab)=DerivedCategory AddCommGrpCat.{u} with explicit HasDerivedCategory.{v}, tower K : Nat^op => D(Ab) with successor transitions, derived limit as landed IsDerivedLimitTriangle (p, delta) with its HasProduct, i : Int, ends lim.rightDerived 1 of K⋙H^{i-1} (landed Roos M1 local instances, no private copies) and limit of K⋙H^i, ShortExact incl. mono/epi, b pinned by H^i(p≫pr_n), naturality squares for morphisms of Roos triangles; docstring = node proof; H4: no Milnor in pinned Mathlib, source HomotopyLimit(/Basic) has only IsHomotopyLimit/isIso_of_proIso; existing false correct"
+ }
 }
