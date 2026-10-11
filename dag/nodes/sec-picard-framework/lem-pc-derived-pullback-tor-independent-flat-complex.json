@@ -19,7 +19,11 @@
  "stmt_deps": [
   "def-pc-scheme",
   "def-pc-base-change",
-  "def-pc-derived-pullback"
+  "def-pc-derived-pullback",
+  "def-pc-module-stalk-functor",
+  "def-pc-base-derived-tensor-cohomology-model",
+  "def-pc-scheme-module-flat-over",
+  "def-pc-cochain-complex-modules"
  ],
  "proof": [
   {
@@ -126,5 +130,24 @@
   "group": "C1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-dpt2512 (reviewer sub-agent of L); spot-checked: Read packet; checked cited statements and lem-pc-module-bounded-flat-kflat, lem-pur-derived-change-of-rings, lem-weil-pbc-module-stalk-pullback, lem-weil-pbc-localization-module-exact. Hypothesis used is flatness over S (stalks flat over O_{S,s}), correct. FIX more, RETURN less: (1) C4 Step 1 applied the sheaf lemma on 'one-point ringed space Spec(R)' (Spec R is not a point) -> cite lem-pc-module-bounded-flat-kflat directly; (2) C4 Step 2 applied scheme-level lem-pc-flat-complex-derived-pullback to a ring map R->B -> cite lem-pur-derived-change-of-rings on the one-point site (K-flat representative computes the module derived tensor); (3) C1 Step 3 asserted ((g')^*G)_{x'}=G_x tensor_A C 'by definition' -> cite lem-weil-pbc-module-stalk-pullback, plus lem-weil-pbc-localization-module-exact; fibre-product local-ring localization kept elementary with its affine reason. proof_deps updated. Tool uses lem-pur-derived-change-of-rings (generic derived change of rings, already used by def-pc-derived-pullback) and lem-weil-pbc-module-stalk-pullback (generic stalk of pullback) accepted as generic tools (C7/C8). Stalk lemmas lem-pc-stalk-tensor-complex/flat-sheaf-stalk-flat/kflat-stalk-criterion not needed on this module-level route. Second reading by C1 missed faults (2) and (3).; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.DerivedPullbackTorIndependentFlatComplex",
+  "declaration": "AlgebraicGeometry.derivedPullback_torIndependent_flat_complex",
+  "file": "lean/Sheaf/AlgebraicGeometry/DerivedPullbackTorIndependentFlatComplex.lean",
+  "statement": "theorem derivedPullback_torIndependent_flat_complex {S T X : Scheme.{u}} (g : T ⟶ S) (f : X ⟶ S) (G : CochainComplex X.Modules ℤ) (hbounded : ∃ b : ℤ, ∀ i : ℤ, b < i → IsZero (G.X i)) (hqc : ∀ i : ℤ, (G.X i).IsQuasicoherent) (hflat : ∀ i : ℤ, (G.X i).IsFlatOver f) (x' : ↥(pullback f g)) [Algebra (S.presheaf.stalk (f ((pullback.fst f g) x'))) (X.presheaf.stalk ((pullback.fst f g) x'))] [Algebra (S.presheaf.stalk (f ((pullback.fst f g) x'))) (T.presheaf.stalk ((pullback.snd f g) x'))] [Algebra ((X.presheaf.stalk ((pullback.fst f g) x')) ⊗[(S.presheaf.stalk (f ((pullback.fst f g) x')))] (T.presheaf.stalk ((pullback.snd f g) x'))) ((pullback f g).presheaf.stalk x')] (hRA : algebraMap (S.presheaf.stalk (f ((pullback.fst f g) x'))) (X.presheaf.stalk ((pullback.fst f g) x')) = (f.stalkMap ((pullback.fst f g) x')).hom) (hRB : algebraMap (S.presheaf.stalk (f ((pullback.fst f g) x'))) (T.presheaf.stalk ((pullback.snd f g) x')) = (g.stalkMap ((pullback.snd f g) x')).hom.comp (S.presheaf.stalkCongr (Inseparable.of_eq (congrArg (fun φ : pullback f g ⟶ S => φ x') pullback.condition))).hom.hom) (hAC : (algebraMap ((X.presheaf.stalk ((pullback.fst f g) x')) ⊗[(S.presheaf.stalk (f ((pullback.fst f g) x')))] (T.presheaf.stalk ((pullback.snd f g) x'))) ((pullback f g).presheaf.stalk x')).comp (algebraMap (X.presheaf.stalk ((pullback.fst f g) x')) ((X.presheaf.stalk ((pullback.fst f g) x')) ⊗[(S.presheaf.stalk (f ((pullback.fst f g) x')))] (T.presheaf.stalk ((pullback.snd f g) x')))) = ((pullback.fst f g).stalkMap x').hom) (hBC : (algebraMap ((X.presheaf.stalk ((pullback.fst f g) x')) ⊗[(S.presheaf.stalk (f ((pullback.fst f g) x')))] (T.presheaf.stalk ((pullback.snd f g) x'))) ((pullback f g).presheaf.stalk x')).comp Algebra.TensorProduct.includeRight.toRingHom = ((pullback.snd f g).stalkMap x').hom) [HasDerivedCategory.{w} (ModuleCat.{u} (S.presheaf.stalk (f ((pullback.fst f g) x'))))] [HasDerivedCategory.{w} (ModuleCat.{u} (T.presheaf.stalk ((pullback.snd f g) x')))] (M : ModuleCat.BaseDerivedTensorCohomologyModel (S.presheaf.stalk (f ((pullback.fst f g) x'))) (X.presheaf.stalk ((pullback.fst f g) x')) (T.presheaf.stalk ((pullback.snd f g) x')) (((RingedSpace.moduleStalkFunctor X.toRingedSpace ((pullback.fst f g) x')).mapHomologicalComplex (.up ℤ)).obj G) ((pullback f g).presheaf.stalk x')) : ∀ i : ℤ, IsIso (M.localizedComparison i)",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-dti1359"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-dti1359",
+  "group": "E1",
+  "result": "fix",
+  "note": "Read packet, Stacks perfect.tex 0A1D/0DJ8 equation-bc and the BaseDerivedTensorCohomologyModel fields. Matched S,T,X, g, f, X_T=pullback f g with fst=g', G bounded above, termwise quasi-coherent (IsQuasicoherent) and flat over S (IsFlatOver f), every x' and i; R,A,B,C actual stalks with hRA/hRB/hAC/hBC pinning the scheme stalk maps; source C tensor H^i(G_x tensor^L_R B) via universal counit (comparison_eq, localized_eq determine localizedComparison, so universal M is equivalent to the chosen model); target H^i(G_x tensor_A C) is Stacks' K'=(g')^*G termwise (not Lg'^*), identified with ((g')^*G)_{x'} by an iso, IsIso invariant. FIX: dropped hollow binder h (always true: pullback.condition) and inlined it in hRB."
  }
 }
