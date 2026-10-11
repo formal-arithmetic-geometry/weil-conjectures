@@ -129,5 +129,24 @@
   "group": "G1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-dpt1907 (reviewer sub-agent of L); spot-checked: Steps 1-2 against Stacks 08DW/08DX proofs and 06Z0; no cycle with parent lem-pc-projection-formula (cited lem-pc-affine-qcoh-derived-equivalence has no proof deps; new node depends only on definitions). FIX more, RETURN less: (1) C1 step 1: the affine identification Lf^*(M~)=(M tensor^L_A B)~ (08DW(2)) was asserted as 'the definition of derived pullback on affine charts' and restriction compatibility of Lf^* was uncited; (2) C1/C4 step 2: 08DX(2) uncited, and the underived tensor node lem-weil-pbc-quasi-coherent-tensor-product-affine-sections does not supply it (tool_use dropped); repair: new statement-only node lem-pc-affine-derived-pullback-tensor-tilde (08DW(2), 08DX(2), restriction to opens; LeanFinder no match), steps rewritten to cite it, proof_deps updated. Second reading missed faults (1)-(2).; 2 file(s) fixed by the reviewer; 1 statement node(s) added by the reviewer (FIX more, RETURN less)"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.DerivedPullbackTensorQCoh",
+  "declaration": "AlgebraicGeometry.derivedPullback_tensor_preserve_QCoh",
+  "file": "lean/Sheaf/AlgebraicGeometry/DerivedPullbackTensorQCoh.lean",
+  "statement": "theorem derivedPullback_tensor_preserve_QCoh {X Y : Scheme.{uX}} (f : X ⟶ Y) [HasDerivedCategory.{wD} (SheafOfModules.{uX} (moduleRings X.toRingedSpace))] [HasDerivedCategory.{wD} (SheafOfModules.{uX} (moduleRings Y.toRingedSpace))] : (∀ E : schemeDerivedCategory Y, schemeDerivedQCohProperty Y E → schemeDerivedQCohProperty X ((derivedPullback f).obj E)) ∧ (∀ P N : CochainComplex (SheafOfModules.{uX} (moduleRings X.toRingedSpace)) ℤ, CochainComplex.IsKFlat (R := X.sheaf) P → schemeDerivedQCohProperty X (DerivedCategory.Q.obj P) → schemeDerivedQCohProperty X (DerivedCategory.Q.obj N) → schemeDerivedQCohProperty X (DerivedCategory.Q.obj (CochainComplex.mapBifunctor P N (curriedTensor _))))",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-dpt1330"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-dpt1330",
+  "group": "C1",
+  "result": "fix",
+  "note": "f:X⟶Y arbitrary (no qc/qs), same-universe schemes and one wD as derivedPullback requires; clause 1 = Lf^* maps schemeDerivedQCohProperty into itself; clause 2 restated without the dropped choice-based schemeDerivedTensor (no derived tensor on schemeDerivedCategory; K1 def-pc-scheme-derived-tensor-product competes): forall P K-flat (IsKFlat R:=X.sheaf), N, QCoh(Q P), QCoh(Q N) -> QCoh(Q Tot(P⊗N)), equivalent to 08DX(1) via lem-pc-kflat-resolution and ess. surjectivity of Q; compiled; dropped duplicate new node(s) def-pc-scheme-derived-tensor (--drop-nodes; not merged, the item points at the landed declaration)"
  }
 }
