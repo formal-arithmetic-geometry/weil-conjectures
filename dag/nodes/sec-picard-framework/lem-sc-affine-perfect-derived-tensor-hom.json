@@ -113,5 +113,23 @@
    "decls": [],
    "missing": []
   }
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.PerfectDerivedTensorHom",
+  "declaration": "AlgebraicGeometry.exists_perfectDerivedTensorHomEquiv",
+  "file": "lean/Sheaf/AlgebraicGeometry/PerfectDerivedTensorHom.lean",
+  "statement": "theorem exists_perfectDerivedTensorHomEquiv (X : Scheme.{u}) [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))] [∀ U : X.Opens, HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))] : ∃ e : ∀ (A I : schemeDerivedCategory X), Scheme.IsPerfect X A → Scheme.IsPerfect X I → ∀ E : schemeDerivedCategory X, (I ⟶ (derivedInternalHom (Opens.grothendieckTopology X) X.sheaf).obj (op A, E)) ≃ (A ⊗ I ⟶ E), ∀ (A A' I I' E E' : schemeDerivedCategory X) (hA : Scheme.IsPerfect X A) (hA' : Scheme.IsPerfect X A') (hI : Scheme.IsPerfect X I) (hI' : Scheme.IsPerfect X I') (f : A' ⟶ A) (g : I' ⟶ I) (h : E ⟶ E') (t : I ⟶ (derivedInternalHom (Opens.grothendieckTopology X) X.sheaf).obj (op A, E)), e A' I' hA' hI' E' (g ≫ t ≫ (derivedInternalHom (Opens.grothendieckTopology X) X.sheaf).map (f.op, h)) = (f ⊗ₘ g) ≫ e A I hA hI E t ≫ h",
+  "branch": "sheaf-dag",
+  "by": "S1",
+  "date": "2026-10-12",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-apd",
+  "group": "S1",
+  "result": "pass",
+  "note": "X : Scheme (no affine hyp; node is general), A I perfect via Scheme.IsPerfect with its open-cover HasDerivedCategory binder, E arbitrary in schemeDerivedCategory X, RHom = derivedInternalHom (Opens site, X.sheaf) as sibling 08DJ node, A ⊗ I = global schemeDerivedTensorMonoidal, existential e tied by three-variable naturality equation matching landed scheme_derivedInternalHom_adjunction (K=I, L=A, symmetric order); only the item node changed, no other record re-pointed"
  }
 }
