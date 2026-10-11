@@ -151,5 +151,24 @@
   "group": "E1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-rdp2509 (reviewer sub-agent of L); spot-checked: C4: item gives set-indexed products in D(O_X), which covers prod_n tau>=-n E used by lem-pc-ringed-space-truncation-derived-limit. FIX more, RETURN less: (1) D2/C1 (missed by the second reading): step 2 moved the whole conclusion into new node lem-pc-derived-products-grothendieck-abelian, the item's generalization (Stacks 07D9 itself); dropped it and rewrote the proof along 07D9: K-injective resolutions from prop-pur-kinjective-resolutions-exist, termwise product of K-injectives is K-injective (elementary from Hom characterization, Stacks 070L), Hom_D=Hom_K into K-injectives by lem-weil-pbc-kinjective-hom-derived (generic tool, Stacks 070I) giving the product's universal property; proof_deps and tool_uses updated.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.Triangulated.RingedSpaceDerivedProducts",
+  "declaration": "AlgebraicGeometry.RingedSpace.derivedProducts",
+  "file": "lean/Sheaf/CategoryTheory/Triangulated/RingedSpaceDerivedProducts.lean",
+  "statement": "theorem derivedProducts (X : RingedSpace.{u}) [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X))] : HasProducts.{u} (DerivedCategory (SheafOfModules.{u} (moduleRings X)))",
+  "branch": "sheaf-dag",
+  "by": "M1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-rdp0929"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-rdp0929",
+  "group": "M1",
+  "result": "fix",
+  "note": "ringed space X : RingedSpace.{u}; Mod(O_X) = SheafOfModules (moduleRings X) with Mathlib's instAbelian (FIX: dropped letI Abelian := (moduleSheaves_abelian_enoughInjectives X).1.some, a second abelian structure, H4); D(O_X) = DerivedCategory under [HasDerivedCategory.{w}] as DerivedHomMayerVietoris; every set-indexed family has a product = HasProducts.{u} (empty I included), countable = specialization"
  }
 }
