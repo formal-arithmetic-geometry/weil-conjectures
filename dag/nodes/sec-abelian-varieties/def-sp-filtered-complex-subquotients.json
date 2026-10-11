@@ -1,0 +1,103 @@
+{
+ "id": "def-sp-filtered-complex-subquotients",
+ "kind": "definition",
+ "title": "Filtered-complex subquotients and graded cycle-boundary subobjects",
+ "status": "split",
+ "statement": "Let $\\mathcal A$ be an abelian category [def-sp-abelian], let $K^\\bullet$ be an integer-indexed cochain complex, and let $F$ be a decreasing filtration of $K^\\bullet$ by subcomplexes [def-sp-filtration], equivalently a decreasing filtration of $K^\\bullet$ as an object of the abelian category of cochain complexes. Write $F^pK^n=\\operatorname{im}((F^pK^\\bullet\\hookrightarrow K^\\bullet)^n)$. For integers $a\\le b$, define $X^{[a,b]}=\\operatorname{coker}(F^bK^\\bullet\\hookrightarrow F^aK^\\bullet)$ with quotient projection $\\pi_{a,b}:F^aK^\\bullet\\to X^{[a,b]}$. Put $\\operatorname{gr}^pK=X^{[p,p+1]}$. For integers $p,n,r$, define $\\widetilde Z_r^{p,n}=F^pK^n\\cap d^{-1}(F^{p+r}K^{n+1})$, viewed as a subobject of $(F^pK)^n$. Define subobjects $Z_r^{p,n}$ and $B_r^{p,n}$ of $(\\operatorname{gr}^pK)^n$ by the images under $\\pi_{p,p+1}^n$ of $((F^pK^n\\cap d^{-1}(F^{p+r}K^{n+1}))+F^{p+1}K^n)$ and $((F^pK^n\\cap d(F^{p-r+1}K^{n-1}))+F^{p+1}K^n)$, respectively, restricted to $(F^pK)^n$. Thus $Z_r^{p,n}=((F^pK^n\\cap d^{-1}(F^{p+r}K^{n+1}))+F^{p+1}K^n)/F^{p+1}K^n$ and $B_r^{p,n}=((F^pK^n\\cap d(F^{p-r+1}K^{n-1}))+F^{p+1}K^n)/F^{p+1}K^n$.",
+ "stmt_deps": [
+  "def-sp-abelian",
+  "def-sp-filtration"
+ ],
+ "source": {
+  "document": "Stacks Project, Homology (https://stacks.math.columbia.edu/tag/012K)",
+  "place": "Tag 012K, Definition 12.24.1 and displayed cycle and boundary formulas before Lemma 12.24.2"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "quotients of subcomplex filtrations and cycle boundary subobjects of the graded complex",
+   "results": "{\"t\": \"2026-10-11T08:26:02Z\", \"tool\": \"leansearch\", \"query\": \"quotients of subcomplex filtrations and cycle boundary subobjects of the graded complex\", \"sub\": \"\", \"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: Internal Server Error\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "quotients of subcomplex filtrations and cycle boundary subobjects of the graded complex",
+   "results": "{\"t\": \"2026-10-11T08:26:03Z\", \"tool\": \"leanfinder\", \"query\": \"quotients of subcomplex filtrations and cycle boundary subobjects of the graded complex\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomologicalComplex.i_cyclesMk\", \"HomologicalComplex.toCycles_i\", \"HomologicalComplex.truncGE'.X\", \"HomologicalComplex.cyclesMk\", \"HomologicalComplex.image_to_eq_image\", \"AlgebraicTopology.NormalizedMooreComplex.objX_add_one\", \"HomologicalComplex.toCycles_i_assoc\", \"HomologicalComplex.truncLE'_d_eq_toCycles\"], \"digest\": \"a8e75a2c6d724453\"}",
+   "date": "2026-10-11",
+   "verdict": "no exact match: ordinary homological-complex API only"
+  },
+  {
+   "tool": "grep",
+   "query": "filteredComplex|FilteredComplex|cycleNumerator|boundaryNumerator",
+   "results": "{\"t\": \"2026-10-11T08:26:03Z\", \"tool\": \"grep\", \"query\": \"filteredComplex|FilteredComplex|cycleNumerator|boundaryNumerator\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sp-filtered-complex-ZB-description",
+  "date": "2026-10-11",
+  "group": "E1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sp-spectral-object-yields",
+   "place": "Step 3: quotient-complex notation and the Tag 012K cycle and boundary calculation",
+   "via": [
+    "lem-sp-filtered-complex-ZB-description"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-pqf-finite",
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.FilteredComplexSubquotients",
+  "declaration": "CategoryTheory.DecreasingFiltration.complexCycles",
+  "file": "lean/Sheaf/Algebra/Homology/FilteredComplexSubquotients.lean",
+  "statement": "def complexCycles (p n r : ℤ) : Subobject ((F.gradedPiece p).X n)",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-11",
+  "existing": false,
+  "declarations": [
+   "CategoryTheory.DecreasingFiltration.complexStep",
+   "CategoryTheory.DecreasingFiltration.complexQuotient",
+   "CategoryTheory.DecreasingFiltration.complexQuotientπ",
+   "CategoryTheory.DecreasingFiltration.complexCycleRepresentatives",
+   "CategoryTheory.DecreasingFiltration.complexCycles",
+   "CategoryTheory.DecreasingFiltration.complexBoundaries"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-fzb1318",
+  "group": "E1",
+  "result": "fix",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-fzb1318",
+  "group": "E1",
+  "result": "fix",
+  "note": "abelian C (both universes); K : CochainComplex C ℤ; F : DecreasingFiltration K (subcomplexes); finite -> F.IsFinite (FIX, was degreewise hfinite); Z_r/B_r defs: tails p+r, p-r+1, degrees n+1/n-1, quotient by F^{p+1} via exists along pi_{p,p+1}; B<=Z and E_r≅coker(ofLE B Z); image of H(F^p/F^{p+r})->H(F^{p-r+1}/F^{p+1}) with phi pinned by projection square and e pinned on representatives; r=1 kernel/image and E_1≅H(gr); per-(p,q) stabilization; M1 restriction/gradedMap not applicable (no maps between filtered objects)"
+ }
+}

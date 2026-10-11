@@ -19,7 +19,8 @@
  "stmt_deps": [
   "def-sp-abelian",
   "def-sp-filtration",
-  "def-sp-spectral-sequence"
+  "def-sp-spectral-sequence",
+  "def-sp-filtered-complex-subquotients"
  ],
  "proof": [
   {
@@ -134,5 +135,24 @@
   "group": "K1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-zbd3152 (reviewer sub-agent of L); spot-checked: Z_r,B_r, E_0, bidegree checked verbatim against homology.tex 6013-6105 (Lemma 12.19.2, Tag 012K) and the proof's A=(F^{p+1}K^{p+1+q}), alpha, E_0=Coker(alpha)[0,-1]; statement matches parent thm-sp-spectral-object-yields (target X^[p-r+1,p+1]; bounded->finite is the defined term of def-sp-filtration, named in E7); image formula checked by hand on K=A deg 0 d=0 F^0=F^1=A F^2=0 (p=0: 0=0; p=1: A=A) and on A->A identity with F^1=A in degree 1 (E_1^{0,0}=A, E_2^{0,0}=0, E_2^{1,0}=0, both sides); new construction node is the Stacks proof construction, not a duplicate of any filtered/spectral node on sheaf-dag, not elementary. FIX more, RETURN less: Step 3 (elementary) proved only that coboundary changes stay in B_r; it omitted the kernel direction (x=dy+f gives dy=x-f in F^p cap d(F^{p-r+1})) and the cocycle check dx in F^{p+r} subset F^{p+1}; rewrote Step 3 with both, giving the exact kernel and surjectivity onto Z_r/B_r.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.FilteredComplexZBDescription",
+  "declaration": "CategoryTheory.DecreasingFiltration.filteredComplex_ZB_description",
+  "file": "lean/Sheaf/Algebra/Homology/FilteredComplexZBDescription.lean",
+  "statement": "theorem filteredComplex_ZB_description {C : Type uZ} [Category.{vZ} C] [Abelian C] (K : CochainComplex C ℤ) (F : DecreasingFiltration K) (hF : F.IsFinite) : ∃ E : CohomologicalSpectralSequence C 0, (∀ p n : ℤ, F.complexCycles p n 1 = kernelSubobject ((F.gradedPiece p).d n (n + 1)) ∧ F.complexBoundaries p n 1 = imageSubobject ((F.gradedPiece p).d (n - 1) n)) ∧ (∀ p q : ℤ, Nonempty ((E.page 1).X (p, q) ≅ (F.gradedPiece p).homology (p + q))) ∧ (∀ (p q r : ℤ) (hr : 1 ≤ r), let n := p + q let Z := F.complexCycles p n r let B := F.complexBoundaries p n r ∃ hBZ : B ≤ Z, Nonempty ((E.page r (le_trans (show 0 ≤ 1 from zero_le_one) hr)).X (p, q) ≅ cokernel (Subobject.ofLE B Z hBZ)) ∧ ∃ (ha : p - r + 1 ≤ p) (hb : p + 1 ≤ p + r), let hs := (Int.le_add_one (show p ≤ p from le_rfl)).trans hb let ht := ha.trans (Int.le_add_one (show p ≤ p from le_rfl)) let S := F.complexQuotient p (p + r) hs let T := F.complexQuotient (p - r + 1) (p + 1) ht ∃ φ : S ⟶ T, F.complexQuotientπ p (p + r) hs ≫ φ = Subobject.ofLE (F.step p) (F.step (p - r + 1)) (F.antitone_step ha) ≫ F.complexQuotientπ (p - r + 1) (p + 1) ht ∧ let R := F.complexCycleRepresentatives p n r let Hφ := HomologicalComplex.homologyMap φ n ∃ (z : (R : C) ⟶ (Z : C)) (g : (R : C) ⟶ S.cycles n), z ≫ Z.arrow = R.arrow ≫ (F.complexQuotientπ p (p + 1) (Int.le_add_one (show p ≤ p from le_rfl))).f n ∧ g ≫ S.iCycles n = R.arrow ≫ (F.complexQuotientπ p (p + r) hs).f n ∧ ∃ e : cokernel (Subobject.ofLE B Z hBZ) ≅ image Hφ, z ≫ cokernel.π (Subobject.ofLE B Z hBZ) ≫ e.hom ≫ image.ι Hφ = g ≫ S.homologyπ n ≫ Hφ) ∧ (∀ p q : ℤ, ∃ (R : ℤ) (hR : 1 ≤ R), ∀ (r : ℤ) (hr : R ≤ r), F.complexCycles p (p + q) r = F.complexCycles p (p + q) R ∧ F.complexBoundaries p (p + q) r = F.complexBoundaries p (p + q) R ∧ Nonempty ((E.page r (le_trans (le_trans (show 0 ≤ 1 from zero_le_one) hR) hr)).X (p, q) ≅ (E.page R (le_trans (show 0 ≤ 1 from zero_le_one) hR)).X (p, q)))",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-fzb1318"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-fzb1318",
+  "group": "E1",
+  "result": "fix",
+  "note": "abelian C (both universes); K : CochainComplex C ℤ; F : DecreasingFiltration K (subcomplexes); finite -> F.IsFinite (FIX, was degreewise hfinite); Z_r/B_r defs: tails p+r, p-r+1, degrees n+1/n-1, quotient by F^{p+1} via exists along pi_{p,p+1}; B<=Z and E_r≅coker(ofLE B Z); image of H(F^p/F^{p+r})->H(F^{p-r+1}/F^{p+1}) with phi pinned by projection square and e pinned on representatives; r=1 kernel/image and E_1≅H(gr); per-(p,q) stabilization; M1 restriction/gradedMap not applicable (no maps between filtered objects)"
  }
 }
