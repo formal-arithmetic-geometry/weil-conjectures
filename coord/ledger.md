@@ -5017,3 +5017,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 14:42 L: merged deliver/G1/lem-weil-pbc-scheme-theoretic-support (stage 2; reviewer PASS; first push; Sheaf.Paper.SchemeTheoreticSupport AlgebraicGeometry.Scheme.schemeTheoreticSupport)
 - 14:42 L: merged deliver/M1/lem-weil-pbc-spec-map-residue-field-naturality (stage 2; reviewer PASS; first push; WeilConjectures.AlgebraicGeometry.Sites.EtaleTopologicalInvariance.PropertyC AlgebraicGeometry.Spec.residueFieldMap_residueFieldIso_hom; existing declaration)
 - 14:42 L: merged deliver/M1/lem-weil-pbc-spectral-limit-descend-opens (stage 2; reviewer PASS; first push; Sheaf.Topology.SpectralLimitDescendOpens Topology.spectralLimit_descend_opens)
+- 14:42 L: merged deliver/N1/lem-weil-pbc-split-extension-free-presentation (stage 2; reviewer PASS; first push; Sheaf.LinearAlgebra.SplitExtensionFreePresentation LinearMap.exists_retraction_iff_relation_factors)
