@@ -10,6 +10,7 @@ public import WeilConjectures.AlgebraicGeometry.Hilbert.Curve
 public import WeilConjectures.AlgebraicGeometry.Hilbert.Defs
 public import WeilConjectures.AlgebraicGeometry.Modules.ProjectionFormula
 public import WeilConjectures.AlgebraicGeometry.Modules.ZeroLocus
+public import WeilConjectures.AlgebraicGeometry.Picard.CounitBaseChange
 public import WeilConjectures.AlgebraicGeometry.Picard.Representability
 public import WeilConjectures.AlgebraicGeometry.RelativeEffectiveCartier
 public import WeilConjectures.Mathlib.CategoryTheory.Adjunction.MatesArrow
@@ -193,12 +194,64 @@ theorem nonempty_arrowIso_pullback_directImageCounit
   -- change morphism `i^* f_{T,*} ℒ ⟶ f_{T',*} i'^* ℒ`, the mate of `α`, is an isomorphism
   have : IsIso ((mateEquiv (Modules.pullbackPushforwardAdjunction sT)
       (Modules.pullbackPushforwardAdjunction sT') α).app d) := by
-    -- Cohomology and base change in degree `0` for the canonical map: `ℒ` and `ℒ_{T'}` lie in
-    -- `F`, so `i` maps into the perfect locus `U_{0,1}` of `ℒ`
-    -- (`Modules.range_subset_perfectLocusOfRank_iff`). That the canonical base change map is then
-    -- invertible is the clause "the base-change maps are isomorphisms" of `sk-thm-picard-perfect`
-    -- for this specific map; the Lean statements of that node only give abstract isomorphisms.
-    sorry
+    -- Cohomology and base change in degree `0` for the canonical map: both sides are invertible,
+    -- and the map is nonzero on every fibre, since the adjunction morphism of `ℒ` is
+    -- (`AlgebraicGeometry.pullback_baseChangeMap_map_counit_ne_zero`).
+    let adj := Modules.pullbackPushforwardAdjunction sT
+    let adj' := Modules.pullbackPushforwardAdjunction sT'
+    let β := (mateEquiv adj adj' α).app d
+    have hL' := IsInvertibleDirectImage.map_of_isProper (X ↘ Spec (.of k)) i ℒ.2
+    have hN : SheafOfModules.IsInvertible.{u, u, u} ((Modules.pushforward sT).obj d) :=
+      have := ℒ.2.1
+      SheafOfModules.IsInvertible.of_iso.{u, u, u}
+        ((Functor.rightDerivedZeroIsoSelf (Modules.pushforward _)).app _)
+    have : SheafOfModules.IsInvertible.{u, u, u}
+        ((Modules.pushforward sT ⋙ Modules.pullback i.left).obj d) := hN.pullback
+    have : SheafOfModules.IsInvertible.{u, u, u}
+        ((Modules.pullback i' ⋙ Modules.pushforward sT').obj d) :=
+      have : SheafOfModules.IsInvertible.{u, u, u} (((Modules.pushforward sT').rightDerived 0).obj
+          ((fromSkeleton _).obj (toSkeleton ((Modules.pullback i').obj d)))) := hL'.1
+      SheafOfModules.IsInvertible.of_iso.{u, u, u}
+        (((Functor.rightDerivedZeroIsoSelf (Modules.pushforward _)).app _) ≪≫
+          (Modules.pushforward sT').mapIso (fromSkeletonToSkeletonIso _))
+    refine Modules.Hom.isIso_of_forall_pullback_ne_zero β fun t' h0 ↦ ?_
+    obtain ⟨V, htV, -, s, hs⟩ :=
+      Modules.exists_isFreeGenerator ((Modules.pushforward sT).obj d) (x := i.left t')
+        (TopologicalSpace.Opens.mem_top _)
+    let T₀ : Over (Spec (.of k)) := Over.mk (T'.left.fromSpecResidueField t' ≫ T'.hom)
+    let p : T₀ ⟶ T' := Over.homMk (T'.left.fromSpecResidueField t')
+    have hq : ⊤ ≤ (p ≫ i).left ⁻¹ᵁ V.1 := by
+      rintro y -
+      change i.left (T'.left.fromSpecResidueField t' y) ∈ V.1
+      rw [Scheme.fromSpecResidueField_apply]
+      exact htV
+    have : IsAffine T₀.left := inferInstanceAs (IsAffine (Spec _))
+    have : Nontrivial Γ(T₀.left, ⊤) :=
+      (Scheme.ΓSpecIso (T'.left.residueField t')).commRingCatIsoToRingEquiv.nontrivial
+    refine pullback_baseChangeMap_map_counit_ne_zero (X ↘ Spec (.of k)) ℒ.2 V.2 hs (p ≫ i) hq ?_
+    -- the adjunction morphism pulled back to `X_{T₀}` factors through the fibre of `β`
+    let p' := baseChangeMap (X ↘ Spec (.of k)) p
+    have hw : p' ≫ sT' = Limits.pullback.snd (X ↘ Spec (.of k)) T₀.hom ≫ p.left :=
+      (isPullback_baseChangeMap (X ↘ Spec (.of k)) p).w
+    let γ : Modules.pullback sT' ⋙ Modules.pullback p' ≅
+        Modules.pullback p.left ⋙ Modules.pullback
+          (Limits.pullback.snd (X ↘ Spec (.of k)) T₀.hom) :=
+      Modules.pullbackComp p' sT' ≪≫ Modules.pullbackCongr hw ≪≫
+        (Modules.pullbackComp _ p.left).symm
+    have hβ : (Modules.pullback p').map ((Modules.pullback sT').map β) = 0 := by
+      rw [← Functor.comp_map, ← NatIso.naturality_2 γ β, Functor.comp_map]
+      erw [h0]
+      rw [Functor.map_zero, zero_comp, comp_zero]
+    have hc := mateEquiv_counit adj adj' α d
+    have hφ : (Modules.pullback p').map ((Modules.pullback i').map (adj.counit.app d)) = 0 := by
+      have : (Modules.pullback i').map (adj.counit.app d) =
+          inv (α.app ((Modules.pushforward sT).obj d)) ≫
+            (Modules.pullback sT').map β ≫ adj'.counit.app _ := by
+        rw [hc, IsIso.inv_hom_id_assoc]
+      rw [this, Functor.map_comp, Functor.map_comp, hβ, zero_comp, comp_zero]
+    rw [baseChangeMap_comp, ← NatIso.naturality_1 (Modules.pullbackComp p' i'), Functor.comp_map]
+    erw [hφ]
+    rw [zero_comp, comp_zero]
   -- identify `i'^* ℒ` with the representative of its class
   let e : (Modules.pullback i').obj d ≅ (fromSkeleton _).obj (Pic.map i' ℒ.1.1).val :=
     (fromSkeletonToSkeletonIso _).symm
