@@ -131,5 +131,24 @@
   "group": "G1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-fut1937 (reviewer sub-agent of L); spot-checked: Steps 1-3 against cited statements: duality node needs kappa(x)=kappa(y)=k (given); dual injective iff surjective; new node's hypotheses met (finite locally free gives locally finite type; k-rational points are closed); Step 3 elementary: f flat+lfp everywhere so etale at x iff unramified at x. New node lem-sc-rational-unramified-cotangent-criterion true (coker(m_y/m_y^2->m_x/m_x^2)=Omega_{X_y/k}(x)=Omega_{X/Y}(x), Nakayama; Stacks 0B2G/02GF), a real lemma, Omega/fibre steps live inside it not assumed in item (C1 ok); no duplicate in DAG (finite-etale-algebra-criterion differs); grep Mathlib FormallyUnramified x cotangent: only Ideal.cotangent_subsingleton_iff, no scheme-point criterion (verdict no match). No fault beyond the second reading."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FiniteFlatUnramifiedTangentCriterion",
+  "declaration": "AlgebraicGeometry.finiteLocallyFree_etale_iff_tangentMap_injective",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteFlatUnramifiedTangentCriterion.lean",
+  "statement": "theorem finiteLocallyFree_etale_iff_tangentMap_injective (k : Type u) [Field k] (X Y : Scheme.{u}) (pX : X ⟶ Spec (.of k)) (pY : Y ⟶ Spec (.of k)) (f : X ⟶ Y) (hf : f ≫ pY = pX) [f.IsFiniteLocallyFree] (x : X) (hκx : Function.Bijective (pX.residueFieldMap x).hom) (hκy : Function.Bijective (pY.residueFieldMap (f x)).hom) : (∃ U : X.Opens, x ∈ U ∧ Etale (U.ι ≫ f)) ↔ ∃ he : Function.Bijective (f.residueFieldMap x).hom, Function.Injective (schemeTangentMap k X Y pX pY f hf x he)",
+  "branch": "sheaf-dag",
+  "by": "K1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-ffu0937"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-ffu0937",
+  "group": "K1",
+  "result": "fix",
+  "note": "k field, pX/pY/hf over k, IsFiniteLocallyFree f, x and f x k-rational (hκx,hκy residueFieldMap bijective), etale at x = ∃ U ∋ x open, Etale (U.ι ≫ f), iff ∃ he, Injective schemeTangentMap; delivered target-nbhd EtaleAt false (Spec k ⊔ Spec k[t]/t² → Spec k); dropped duplicate new node(s) def-sc-etale-at-point (--drop-nodes; not merged, the item points at the landed declaration); left out new module(s) lean/Sheaf/AlgebraicGeometry/EtaleAtPoint.lean (--drop-files, or a record fixed to existing: true); reverted the delivery's statement correction of the item (statement, statement_change kept as on sheaf-dag; --revert-statement)"
  }
 }
