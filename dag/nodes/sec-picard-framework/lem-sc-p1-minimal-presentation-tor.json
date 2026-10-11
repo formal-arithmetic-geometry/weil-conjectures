@@ -18,7 +18,8 @@
  },
  "stmt_deps": [
   "def-weil-pbc-tor-modules",
-  "def-sc-p1-standard"
+  "def-sc-p1-standard",
+  "def-sc-p1-minimal-graded-presentation"
  ],
  "proof": [
   {
@@ -125,5 +126,23 @@
   "group": "E1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-mpt (reviewer sub-agent of L); spot-checked: Source: Stacks Algebra Section 00LY (algebra-section-tor) and Lemma 00M0 (algebra-lemma-long-exact-sequence-tor); blueprint lem-sc-p1-graded-resolution proof (graded Nakayama on K_2). Item statement unchanged. Step 1: lem-weil-pbc-tor-long-exact-first-variable (R=S commutative, Q=K, Q'=F, Q''=N, second variable k) gives exactly Tor_1(F,k)->Tor_1(N,k)->K(x)k->F(x)k->N(x)k->0; accepted as generic tool (C8). Step 2: Tor_1(F,k)=0 by the new leaf; exactness plus F(x)k->N(x)k iso gives K(x)k->F(x)k zero and Tor_1(N,k)=K(x)k. Step 3 elementary. Small cases: N=0 (F=0,K=0), N=S (F=S,K=0), N=k (F=S, K=S_+, K/S_+K=k^2=Tor_1(k,k)) all agree. Def-weil-pbc-tor-modules is Tor' (resolution of the first variable). FIX more, RETURN less (C1): step 2 used the identification M(x)_S S/S_+ = M/S_+M with no node; cited existing Mathlib leaf lem-weil-pbc-tensor-over-quotient-ring (1) in step 2 uses, proof_deps and split_report.tool_uses (generic tool). FIX: dag/nodes/sec-picard-framework/lem-sc-p1-tor-free-vanishing.json: mathlib_match: declaration Rep.isZero_Tor_succ_of_projective (which is about Rep k G, GroupHomology/Basic.lean 111) replaced by CategoryTheory.isZero_Tor'_succ_of_projective, Mathlib/CategoryTheory/Monoidal/Tor.lean line 61 (verified with sed: [Projective X], IsZero ((Tor' C (n+1)).obj X).obj Y), matching the first-variable Tor of def-weil-pbc-tor-modules; free implies projective in ModuleCat R. Start Sat Oct 10 04:17:34 PM UTC 2026, end Sat Oct 10 04:18:54 PM UTC 2026.; 2 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.MinimalPresentationTor",
+  "declaration": "MvPolynomial.exists_minimalPresentationTor_equiv",
+  "file": "lean/Sheaf/RingTheory/MinimalPresentationTor.lean",
+  "statement": "theorem exists_minimalPresentationTor_equiv (k : Type v) [Field k] : let S := MvPolynomial (Fin 2) k let I : Ideal S := Ideal.span (Set.range (X : Fin 2 → S)) let residue : ModuleCat.{v} S := (ModuleCat.restrictScalars (constantCoeff : S →+* k)).obj (ModuleCat.of k k) let T := Tor' (ModuleCat.{v} S) 1 ∃ e : ∀ P : MinimalGradedPresentation k, (LinearMap.ker P.q ⧸ (I • (⊤ : Submodule S (LinearMap.ker P.q)))) ≃ₗ[S] ((T.obj P.N).obj residue), (∀ P : MinimalGradedPresentation k, Subsingleton ((T.obj P.N).obj residue) → Subsingleton (LinearMap.ker P.q ⧸ (I • (⊤ : Submodule S (LinearMap.ker P.q))))) ∧ (∀ (P Q : MinimalGradedPresentation k) (a : P.F →ₗ[S] Q.F) (b : P.N →ₗ[S] Q.N) (c : LinearMap.ker P.q →ₗ[S] LinearMap.ker Q.q), (∀ (j : ℤ) (x : P.F), x ∈ P.fGrading j → a x ∈ Q.fGrading j) → (∀ (j : ℤ) (x : P.N), x ∈ P.nGrading j → b x ∈ Q.nGrading j) → Q.q.comp a = b.comp P.q → (∀ x : LinearMap.ker P.q, (c x : Q.F) = a (x : P.F)) → ∀ x : LinearMap.ker P.q, ((T.map (ModuleCat.ofHom b)).app residue).hom (e P ((I • (⊤ : Submodule S (LinearMap.ker P.q))).mkQ x)) = e Q ((I • (⊤ : Submodule S (LinearMap.ker Q.q))).mkQ (c x)))",
+  "branch": "sheaf-dag",
+  "by": "M1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-mpt1219",
+  "group": "M1",
+  "result": "fix",
+  "note": "field k; S=MvPolynomial (Fin 2) k; total-degree grading (homogeneousSubmodule hsmul, F1 form); S_+=span X; N f.g. graded (now F1 homogeneous-span form); F finite graded free (homogeneous basis, Z shifts); q graded surjection; F/S+F->N/S+N iso = surjective + q^-1(IN)<=IF; K=ker q; K/IK by I•⊤ inside K; k = restrictScalars constantCoeff; Tor_1 = CategoryTheory.Tor' (no MvPolynomial.Tor', #check); natural family e over graded squares (a,b,c); Tor_1=0 -> K/IK=0 as Subsingleton"
  }
 }
