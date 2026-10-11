@@ -1,117 +1,136 @@
 {
-  "id": "lem-sc-finite-sheafhom-affine",
-  "blueprint": {
-    "is": null,
-    "from": {
-      "node": "lem-sc-finite-duality",
-      "place": "proof, affine sheaf-Hom adjunction underlying the derived adjunction",
-      "via": [
-        "lem-sc-finite-duality-derived-hom"
-      ]
-    },
-    "same_as": []
+ "id": "lem-sc-finite-sheafhom-affine",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "proof, affine sheaf-Hom adjunction underlying the derived adjunction",
+   "via": [
+    "lem-sc-finite-duality-derived-hom"
+   ]
   },
-  "kind": "statement",
-  "title": "Affine sheaf-Hom is right adjoint to restriction",
-  "statement": "Let f:Y \\to X be an affine morphism of schemes [def-pc-scheme] and let A=f_*O_Y. The sheaf-Hom functor Hom_{O_X}(A,-) [def-pur-sheaf-hom] from O_X-modules to A-modules is right adjoint to restriction of scalars from A-modules to O_X-modules. On an affine open U=Spec(R) of X, with f^{-1}(U)=Spec(S), its sections are Hom_R(S,F(U)) for every O_X-module F, and the counit is evaluation at the unit 1 in S.",
-  "source": {
-    "document": "literature/stacks-project/duality.tex",
-    "place": "Tag 0BUZ, lemma-compute-sheafhom-affine (duality.tex line 2488)"
-  },
-  "stmt_deps": [
-    "def-pc-scheme",
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Affine sheaf-Hom is right adjoint to restriction",
+ "statement": "Let f:Y \\to X be an affine morphism of schemes [def-pc-scheme] and let A=f_*O_Y. The sheaf-Hom functor Hom_{O_X}(A,-) [def-pur-sheaf-hom] from O_X-modules to A-modules is right adjoint to restriction of scalars from A-modules to O_X-modules. On an affine open U=Spec(R) of X, with f^{-1}(U)=Spec(S), its sections are Hom_R(S,F(U)) for every O_X-module F, and the counit is evaluation at the unit 1 in S.",
+ "source": {
+  "document": "literature/stacks-project/duality.tex",
+  "place": "Tag 0BUZ, lemma-compute-sheafhom-affine (duality.tex line 2488)"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pur-sheaf-hom"
+ ],
+ "proof": [
+  {
+   "text": "Adjunction (Stacks, Modules, lemma-adjoint-tensor-restrict, the sheaf analogue of Algebra 05DQ, proved openwise). Let $\\mathcal G$ be an $A$-module and $\\mathcal F$ an $\\mathcal O_X$-module. To an $A$-linear $\\psi:\\mathcal G\\to\\mathcal Hom_{\\mathcal O_X}(A,\\mathcal F)$ assign the $\\mathcal O_X$-linear map $g:\\mathcal G\\to\\mathcal F$, $g_V(m)=\\psi_V(m)_V(1)$ on each open $V$; conversely to $g$ assign $\\psi_V(m)$ = the $\\mathcal O_V$-linear map $A|_V\\to\\mathcal F|_V$ given on $W\\subseteq V$ by $s\\mapsto g_W(s\\cdot m|_W)$. By [def-pur-sheaf-hom] sections of the sheaf Hom over $V$ are $\\mathcal O|_V$-linear maps on $V$ with restriction by restriction, so both assignments are defined open by open, are compatible with restriction, and are mutually inverse and natural in $\\mathcal G$ and $\\mathcal F$ by the same two-line computation as for modules ($\\psi(m)(s)=\\psi(sm)(1)$ by $A$-linearity). No localization of Hom is used. Taking $\\mathcal G=\\mathcal Hom_{\\mathcal O_X}(A,\\mathcal F)$ and $\\psi=\\mathrm{id}$ shows the counit is $\\varphi\\mapsto\\varphi(1)$, evaluation at the unit.",
+   "uses": [
     "def-pur-sheaf-hom"
-  ],
-  "proof": [
-    {
-      "text": "Adjunction (Stacks, Modules, lemma-adjoint-tensor-restrict, the sheaf analogue of Algebra 05DQ, proved openwise). Let $\\mathcal G$ be an $A$-module and $\\mathcal F$ an $\\mathcal O_X$-module. To an $A$-linear $\\psi:\\mathcal G\\to\\mathcal Hom_{\\mathcal O_X}(A,\\mathcal F)$ assign the $\\mathcal O_X$-linear map $g:\\mathcal G\\to\\mathcal F$, $g_V(m)=\\psi_V(m)_V(1)$ on each open $V$; conversely to $g$ assign $\\psi_V(m)$ = the $\\mathcal O_V$-linear map $A|_V\\to\\mathcal F|_V$ given on $W\\subseteq V$ by $s\\mapsto g_W(s\\cdot m|_W)$. By [def-pur-sheaf-hom] sections of the sheaf Hom over $V$ are $\\mathcal O|_V$-linear maps on $V$ with restriction by restriction, so both assignments are defined open by open, are compatible with restriction, and are mutually inverse and natural in $\\mathcal G$ and $\\mathcal F$ by the same two-line computation as for modules ($\\psi(m)(s)=\\psi(sm)(1)$ by $A$-linearity). No localization of Hom is used. Taking $\\mathcal G=\\mathcal Hom_{\\mathcal O_X}(A,\\mathcal F)$ and $\\psi=\\mathrm{id}$ shows the counit is $\\varphi\\mapsto\\varphi(1)$, evaluation at the unit.",
-      "uses": [
-        "def-pur-sheaf-hom"
-      ],
-      "elementary": true,
-      "source": {
-        "document": "literature/stacks-project/duality.tex",
-        "place": "Tag 0AX2, lemma-compute-sheafhom-affine"
-      }
-    },
-    {
-      "text": "Sections over an affine open $U=\\operatorname{Spec}(R)$ with $f^{-1}(U)=\\operatorname{Spec}(S)$. Since $f$ is affine, $A=f_*\\mathcal O_Y$ is quasi-coherent [lem-pc-affine-morphism-hi, applied to the quasi-coherent $\\mathcal O_Y$], hence so is $A|_U$, and by [lem-weil-pbc-affine-tilde-gamma-adjunction] (3) $A|_U\\cong\\widetilde S$ with $S=\\Gamma(U,A)=\\mathcal O_Y(f^{-1}(U))$. By [def-pur-sheaf-hom] and [lem-weil-pbc-affine-tilde-gamma-adjunction] (1), which holds for every $\\mathcal O_U$-module (no quasi-coherence or finite presentation of $\\mathcal F$ is needed), $\\Gamma(U,\\mathcal Hom_{\\mathcal O_X}(A,\\mathcal F))=\\operatorname{Hom}_{\\mathcal O_U}(\\widetilde S,\\mathcal F|_U)\\cong\\operatorname{Hom}_R(S,\\mathcal F(U))$, $\\alpha\\mapsto\\alpha_U\\circ\\tau_U$; under it the counit of Step 1 is $\\varphi\\mapsto\\varphi(1)$, $1\\in S$.",
-      "uses": [
-        "lem-pc-affine-morphism-hi",
-        "lem-weil-pbc-affine-tilde-gamma-adjunction",
-        "def-pur-sheaf-hom"
-      ],
-      "source": {
-        "document": "literature/stacks-project/duality.tex",
-        "place": "Tag 0AX2, lemma-compute-sheafhom-affine"
-      },
-      "elementary": false
-    }
-  ],
-  "proof_deps": [
-    "def-pur-sheaf-hom",
-    "lem-pc-affine-morphism-hi",
-    "lem-weil-pbc-affine-tilde-gamma-adjunction"
-  ],
-  "proof_origin": {
-    "by": "document",
+   ],
+   "elementary": true,
+   "source": {
     "document": "literature/stacks-project/duality.tex",
     "place": "Tag 0AX2, lemma-compute-sheafhom-affine"
+   }
   },
-  "mathlib_searches": [
-    {
-      "tool": "leanfinder",
-      "query": "for an affine morphism the sheaf Hom from f star O is right adjoint to restriction of scalars",
-      "results": "AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward and pullbackPushforwardAdjunction for ordinary pushforward/pullback; no sheaf-Hom restriction formula",
-      "date": "2026-10-11",
-      "verdict": "no match"
-    },
-    {
-      "tool": "loogle",
-      "query": "AlgebraicGeometry.Scheme.Modules, SheafHom, Adjunction",
-      "results": "0 hits; unknown identifier SheafHom",
-      "date": "2026-10-11",
-      "verdict": "no match"
-    },
-    {
-      "tool": "grep",
-      "query": "SheafHom|restrict.*adjoint|Hom.*f_* in AlgebraicGeometry/Modules CategoryTheory",
-      "results": "Mathlib/AlgebraicGeometry/Modules/Sheaf.lean has pushforward/pullback adjunctions but no sheaf-Hom formula",
-      "date": "2026-10-11",
-      "verdict": "no match"
-    }
-  ],
-  "mathlib_match": null,
-  "status": "split",
-  "created": {
-    "item": "lem-sc-finite-sheafhom-affine-adjoint",
-    "by": "worker",
-    "date": "2026-10-10"
-  },
-  "chapter": "sec-picard-framework",
-  "unit": "sk-thm-picard-duality",
-  "split_report": {
-    "date": "2026-10-11",
-    "item": "lem-sc-finite-sheafhom-affine",
-    "worker": "stage1",
-    "summary": "Split the affine sheaf-Hom adjunction into the elementary affine-module Hom bijection. The explicit inverse maps and localization compatibility give the sheaf adjunction and identify the counit with evaluation at 1; no new dependency node is needed.",
-    "blueprint": "The step realizes the ancestor blueprint proof of lem-sc-finite-duality at the clause 'For an affine open U=Spec R ... restriction of scalars has the explicit adjunction ... These maps commute with localization, so they give the corresponding sheaf adjunction.'",
-    "tool_uses": [
-      "lem-pc-affine-morphism-hi",
-      "lem-weil-pbc-affine-tilde-gamma-adjunction"
-    ]
-  },
-  "tool_uses": [
+  {
+   "text": "Sections over an affine open $U=\\operatorname{Spec}(R)$ with $f^{-1}(U)=\\operatorname{Spec}(S)$. Since $f$ is affine, $A=f_*\\mathcal O_Y$ is quasi-coherent [lem-pc-affine-morphism-hi, applied to the quasi-coherent $\\mathcal O_Y$], hence so is $A|_U$, and by [lem-weil-pbc-affine-tilde-gamma-adjunction] (3) $A|_U\\cong\\widetilde S$ with $S=\\Gamma(U,A)=\\mathcal O_Y(f^{-1}(U))$. By [def-pur-sheaf-hom] and [lem-weil-pbc-affine-tilde-gamma-adjunction] (1), which holds for every $\\mathcal O_U$-module (no quasi-coherence or finite presentation of $\\mathcal F$ is needed), $\\Gamma(U,\\mathcal Hom_{\\mathcal O_X}(A,\\mathcal F))=\\operatorname{Hom}_{\\mathcal O_U}(\\widetilde S,\\mathcal F|_U)\\cong\\operatorname{Hom}_R(S,\\mathcal F(U))$, $\\alpha\\mapsto\\alpha_U\\circ\\tau_U$; under it the counit of Step 1 is $\\varphi\\mapsto\\varphi(1)$, $1\\in S$.",
+   "uses": [
     "lem-pc-affine-morphism-hi",
-    "lem-weil-pbc-affine-tilde-gamma-adjunction"
-  ],
-  "reviewed": {
-    "date": "2026-10-10",
-    "by": "L",
-    "reviewer": "R-fsh1830",
-    "group": "K1",
-    "result": "pass",
-    "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-fsh1830 (reviewer sub-agent of L); spot-checked: Statement vs Stacks duality.tex lemma-compute-sheafhom-affine (l.2488): agrees; no cycle (item cites no node created from lem-sc-finite-sheafhom-affine-adjoint). FIX more, RETURN less: (1) E/C1 the step glued an affine-module bijection by claiming Hom_R(S,N) commutes with localization on basic opens, false for non-finitely-presented S and arbitrary F; replaced by the openwise elementary proof of Modules lemma-adjoint-tensor-restrict (no localization of Hom). (2) C1 the section formula Gamma(U,Hom(A,F))=Hom_R(S,F(U)) was not derived; new step cites lem-pc-affine-morphism-hi (A quasi-coherent) and lem-weil-pbc-affine-tilde-gamma-adjunction (1),(3) (A|_U = S~, Hom(M~,F)=Hom_R(M,F(U)) for every O_U-module, so no finite-presentation hypothesis needed); both as generic tool_uses. Packet section 5 quoted lemma-finite-twisted under Tag 0AX2, not the item's lemma.; 1 file(s) fixed by the reviewer"
+    "lem-weil-pbc-affine-tilde-gamma-adjunction",
+    "def-pur-sheaf-hom"
+   ],
+   "source": {
+    "document": "literature/stacks-project/duality.tex",
+    "place": "Tag 0AX2, lemma-compute-sheafhom-affine"
+   },
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pur-sheaf-hom",
+  "lem-pc-affine-morphism-hi",
+  "lem-weil-pbc-affine-tilde-gamma-adjunction"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/duality.tex",
+  "place": "Tag 0AX2, lemma-compute-sheafhom-affine"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "for an affine morphism the sheaf Hom from f star O is right adjoint to restriction of scalars",
+   "results": "AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward and pullbackPushforwardAdjunction for ordinary pushforward/pullback; no sheaf-Hom restriction formula",
+   "date": "2026-10-11",
+   "verdict": "no match"
   },
-  "lead_note": " source.place tag corrected by L (18:32 UTC) per reviewer R-fsh1830: lemma-compute-sheafhom-affine is Tag 0BUZ, not 0AX2."
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.Modules, SheafHom, Adjunction",
+   "results": "0 hits; unknown identifier SheafHom",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "SheafHom|restrict.*adjoint|Hom.*f_* in AlgebraicGeometry/Modules CategoryTheory",
+   "results": "Mathlib/AlgebraicGeometry/Modules/Sheaf.lean has pushforward/pullback adjunctions but no sheaf-Hom formula",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "item": "lem-sc-finite-sheafhom-affine-adjoint",
+  "by": "worker",
+  "date": "2026-10-10"
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-sc-finite-sheafhom-affine",
+  "worker": "stage1",
+  "summary": "Split the affine sheaf-Hom adjunction into the elementary affine-module Hom bijection. The explicit inverse maps and localization compatibility give the sheaf adjunction and identify the counit with evaluation at 1; no new dependency node is needed.",
+  "blueprint": "The step realizes the ancestor blueprint proof of lem-sc-finite-duality at the clause 'For an affine open U=Spec R ... restriction of scalars has the explicit adjunction ... These maps commute with localization, so they give the corresponding sheaf adjunction.'",
+  "tool_uses": [
+   "lem-pc-affine-morphism-hi",
+   "lem-weil-pbc-affine-tilde-gamma-adjunction"
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-affine-morphism-hi",
+  "lem-weil-pbc-affine-tilde-gamma-adjunction"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-fsh1830",
+  "group": "K1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-fsh1830 (reviewer sub-agent of L); spot-checked: Statement vs Stacks duality.tex lemma-compute-sheafhom-affine (l.2488): agrees; no cycle (item cites no node created from lem-sc-finite-sheafhom-affine-adjoint). FIX more, RETURN less: (1) E/C1 the step glued an affine-module bijection by claiming Hom_R(S,N) commutes with localization on basic opens, false for non-finitely-presented S and arbitrary F; replaced by the openwise elementary proof of Modules lemma-adjoint-tensor-restrict (no localization of Hom). (2) C1 the section formula Gamma(U,Hom(A,F))=Hom_R(S,F(U)) was not derived; new step cites lem-pc-affine-morphism-hi (A quasi-coherent) and lem-weil-pbc-affine-tilde-gamma-adjunction (1),(3) (A|_U = S~, Hom(M~,F)=Hom_R(M,F(U)) for every O_U-module, so no finite-presentation hypothesis needed); both as generic tool_uses. Packet section 5 quoted lemma-finite-twisted under Tag 0AX2, not the item's lemma.; 1 file(s) fixed by the reviewer"
+ },
+ "lead_note": " source.place tag corrected by L (18:32 UTC) per reviewer R-fsh1830: lemma-compute-sheafhom-affine is Tag 0BUZ, not 0AX2.",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FiniteSheafHomAffine",
+  "declaration": "AlgebraicGeometry.sheafHom_affine_rightAdjoint",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteSheafHomAffine.lean",
+  "statement": "theorem sheafHom_affine_rightAdjoint {X Y : Scheme.{u}} (f : Y ⟶ X) [IsAffineHom f] : let A := ((TopologicalSpace.Opens.map f.base).sheafPushforwardContinuous RingCat.{u} _ _).obj Y.ringCatSheaf let T := SheafOfModules.restrictScalars.{u} f.toRingCatSheafHom let M := T.obj (SheafOfModules.unit A) let K := (SheafOfModules.homFunctor X.sheaf).obj (op M) ∃ H : SheafOfModules.{u} X.ringCatSheaf ⥤ SheafOfModules.{u} A, ∃ i : H ⋙ T ≅ K, ∃ adj : T ⊣ H, (∀ (F : SheafOfModules.{u} X.ringCatSheaf) (U : X.Opens) (a : A.obj.obj (op U)) (φ : (H.obj F).val.obj (op U)) (W : Over U) (b : A.obj.obj (op W.left)), (((i.hom.app F).val.app (op U)).hom (a • φ)).app (op W) b = (((i.hom.app F).val.app (op U)).hom φ).app (op W) (A.obj.map W.hom.op a * b)) ∧ (∀ (F : SheafOfModules.{u} X.ringCatSheaf) (U : X.Opens) (φ : (H.obj F).val.obj (op U)), ((adj.counit.app F).val.app (op U)).hom φ = ((((i.hom.app F).val.app (op U)).hom φ).app (op (Over.mk (𝟙 U)))) (1 : A.obj.obj (op U))) ∧ (∀ (F : SheafOfModules.{u} X.ringCatSheaf) (U : X.Opens), IsAffineOpen U → ∃ e : (SheafOfModules.homObj M F).val.obj (op U) ≃ₗ[X.presheaf.obj (op U)] (M.val.obj (op U) →ₗ[X.presheaf.obj (op U)] F.val.obj (op U)), ∀ (φ : (SheafOfModules.homObj M F).val.obj (op U)) (s : M.val.obj (op U)), e φ s = (φ.app (op (Over.mk (𝟙 U)))).hom s)",
+  "branch": "sheaf-dag",
+  "by": "M1",
+  "date": "2026-10-11",
+  "existing": false,
+  "note": "Second reading replaced the assumed module adjunction and vacuous conclusions with the actual sheaf adjunction, canonical A-action, affine section linear equivalence, and evaluation counit; uses the existing SheafOfModules.homObj."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-fsa1216",
+  "group": "M1",
+  "result": "pass",
+  "note": "Scheme X Y, f:Y->X [IsAffineHom f] = affine morphism; A = sheafPushforwardContinuous of Y.ringCatSheaf (f_*O_Y), T = restrictScalars f.toRingCatSheafHom; K = homFunctor (recorded homObj) of A; conclusion ∃H, H⋙T≅K with canonical A-action (aφ)(b)=φ(a|_W b), ∃ T⊣H (not assumed), counit = evaluation at 1, and on IsAffineOpen U a R-linear equiv Hom(A,F)(U) ≃ Hom_R(S,F(U)) by component at U, for all F (no qcoh/f.p.); node JSON unchanged except lean; edge cases empty/zero ok"
+ }
 }
