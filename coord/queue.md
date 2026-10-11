@@ -1,15 +1,15 @@
 # Work queue
 
-79 items; claim with `tools/claim.py next <group> [--stage N]`.
+77 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (79)
+## Stage 2: nodes to state (77)
 
 | node | distance to Mathlib | kind | blockers |
 |---|---|---|---|
-| `def-weil-pbc-sites-and-cohomology` | 1 | state | 135 |
+| `def-weil-pbc-sites-and-cohomology` | 1 | state | 134 |
 | `def-nagata-qc-open-equality-stage` | 1 | state | 13 |
 | `def-pc-global-derived-rhom` | 1 | state | 4 |
 | `def-weil-pbc-simplicial-hom-object` | 1 | state | 4 |
@@ -79,12 +79,10 @@
 | `lem-weil-pbc-grothendieck-existence-easy` | 1 | state | 0 |
 | `lem-weil-pbc-hypercohomology-e1-pullback-functorial` | 1 | state | 0 |
 | `lem-weil-pbc-module-cohomology-fmap-basic-properties` | 1 | state | 0 |
-| `lem-weil-pbc-module-cohomology-fmap-functorial` | 1 | state | 0 |
 | `lem-weil-pbc-projective-space-twisting-sheaf-charts` | 1 | state | 0 |
 | `lem-weil-pbc-pullback-cohomology-long-exact-ladder` | 1 | state | 0 |
 | `lem-weil-pbc-unrestricted-strict-henselization-stalk` | 1 | state | 0 |
 | `prop-weil-pbc-strict-henselization-stalk-formula` | 1 | state | 0 |
-| `thm-sc-constant-invariance` | 1 | state | 0 |
 | `lem-pc-rf-single-complex-inherited-tensor-condition` | 2 | state | 0 |
 | `lem-sc-p1-proj-shifted-free-twist` | 2 | state | 0 |
 | `pqf-lem-leray-lowdegree` | 2 | state | 0 |
