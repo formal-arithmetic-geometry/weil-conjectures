@@ -1,11 +1,11 @@
 # Work queue
 
-193 items; claim with `tools/claim.py next <group> [--stage N]`.
+189 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (193)
+## Stage 2: nodes to state (189)
 
 | node | distance to Mathlib | kind | blockers |
 |---|---|---|---|
@@ -16,13 +16,13 @@
 | `def-nagata-qc-open-descent` | 1 | state | 11 |
 | `def-weil-pbc-strict-henselization-limit` | 1 | state | 9 |
 | `def-nagata-affine-fp-descent` | 2 | state | 9 |
-| `def-weil-pbc-semi-representable-object` | 1 | state | 8 |
 | `def-weil-pbc-conormal-sheaf-formally-unramified` | 1 | state | 2 |
 | `lem-weil-pbc-site-morphism-composition` | 1 | state | 138 |
 | `prop-weil-pbc-inverse-image-modules-exact` | 1 | state | 46 |
 | `lem-pc-module-pullback-identity-composition` | 1 | state | 11 |
 | `lem-weil-pbc-coherent-formal-modules-abelian` | 1 | state | 9 |
 | `lem-weil-pbc-pair-henselization` | 1 | state | 5 |
+| `lem-weil-pbc-simplicial-hom-object-exists` | 1 | state | 5 |
 | `lem-weil-pbc-truncation-triangle` | 1 | state | 4 |
 | `lem-sp-exact-functor-couple` | 1 | state | 3 |
 | `lem-weil-pbc-coherent-formal-modules-affine` | 1 | state | 3 |
@@ -74,9 +74,9 @@
 | `lem-weil-pbc-local-ring-spec-limit-affine-neighbourhoods` | 1 | state | 0 |
 | `lem-weil-pbc-module-pullback-ideal-quotient` | 1 | state | 0 |
 | `lem-weil-pbc-projective-space-twisting-sheaf-charts` | 1 | state | 0 |
+| `lem-weil-pbc-semi-representable-covering-permanence` | 1 | state | 0 |
 | `lem-weil-pbc-spec-algebraically-closed-etale-sheaf-constant` | 1 | state | 0 |
 | `lem-weil-pbc-spectral-limit-pullback-sections` | 1 | state | 0 |
-| `lem-weil-pbc-stalk-change-of-rings-tensor` | 1 | state | 0 |
 | `lem-weil-pbc-stein-universally-closed-factor` | 1 | state | 0 |
 | `lem-weil-pbc-strictly-henselian-sections-stalk` | 1 | state | 0 |
 | `lem-weil-pbc-symmetric-degree-exact` | 1 | state | 0 |
@@ -85,8 +85,6 @@
 | `lem-weil-pbc-tor-long-exact-first-variable` | 1 | state | 0 |
 | `lem-weil-pbc-tor-one-surjective-change-rings` | 1 | state | 0 |
 | `lem-weil-pbc-tor-one-surjective-flat-middle` | 1 | state | 0 |
-| `lem-weil-pbc-tor-symmetry` | 1 | state | 0 |
-| `lem-weil-pbc-torsion-cyclic-presentation` | 1 | state | 0 |
 | `lem-weil-pbc-torsion-extension-flat-descent` | 1 | state | 0 |
 | `lem-weil-pbc-torsion-hom-flat-comparison` | 1 | state | 0 |
 | `lem-weil-pbc-torsion-module-flat-base-change-iso` | 1 | state | 0 |
@@ -110,7 +108,6 @@
 | `lem-weil-pbc-well-ordered-union-projective-dimension` | 1 | state | 0 |
 | `lem-weil-pbc-z-localizations-dvr` | 1 | state | 0 |
 | `lem-weil-pbc-zariski-h0-proper-henselian-pair` | 1 | state | 0 |
-| `lem-weil-pbc-zariski-pair-finite-gabber-polynomial` | 1 | state | 0 |
 | `lem-weil-pbc-zariski-pair-flat-integral-isomorphism` | 1 | state | 0 |
 | `lem-weil-pbc-zariski-pair-rank-one-propagation` | 1 | state | 0 |
 | `lem-weil-pbc-zero-dim-integral-point` | 1 | state | 0 |
@@ -124,7 +121,6 @@
 | `lemma-weil-pbc-target-locality` | 1 | state | 0 |
 | `lemma-weil-pbc-torsion-assembly` | 1 | state | 0 |
 | `lemma-weil-pbc-torsion-filtered-union` | 1 | state | 0 |
-| `pqf-lem-associated-sections-localize` | 1 | state | 0 |
 | `pqf-lem-coherent-ft-locnoeth` | 1 | state | 0 |
 | `pqf-lem-finite-fp-locnoeth` | 1 | state | 0 |
 | `pqf-lem-finite-qf` | 1 | state | 0 |
@@ -203,7 +199,7 @@
 | `lem-pc-essentially-constant-pro-hom-colimit` | 4 | state | 0 |
 | `lem-pur-essential-constant-pro-criterion-05py` | 4 | state | 0 |
 
-Not open yet: 40 nodes that wait for stage 1, 409 nodes that wait for a statement dependency.
+Not open yet: 40 nodes that wait for stage 1, 407 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
