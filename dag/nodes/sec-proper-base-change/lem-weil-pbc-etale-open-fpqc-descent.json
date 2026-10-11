@@ -116,5 +116,23 @@
   "group": "M1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-eod1745 (reviewer sub-agent of L); spot-checked: Packet read whole. D: base change of the fpqc covering to V (lem-galois-fpqc-covering-base-change, Mathlib leaf in unit sk-prop-h2, accepted as generic tool and declared via --tool-uses) then Tag 03N0 on the base-changed family; compatibility on (T_i x_S V) x_V (T_j x_S V) = T_i x_S T_j x_S V is correct; the etale hypothesis is unused but harmless. New node lem-weil-pbc-open-subscheme-fpqc-descent matches Tag 03N0 statement exactly (pr0^-1 W_i = pr1^-1 W_j, unique W); it is the general lemma, the item its base-changed special case, not a restatement or cycle. Nearby G1 node lem-weil-pbc-etale-sections-fpqc-descent (09XN) cites the item, does not restate it. Mathlib: leanfinder 'flat quasi-compact surjective morphism of schemes is a quotient map; open subset whose preimage is open descends along fpqc cover' -> Flat.isQuotientMap_of_surjective (single qc morphism) and descendsAlong_isOpenImmersion, no family-level fpqc open descent; verdict no exact match. No repairs."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.EtaleOpenFpqcDescent",
+  "declaration": "AlgebraicGeometry.existsUnique_open_of_etale_fpqc_baseChange",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleOpenFpqcDescent.lean",
+  "statement": "theorem existsUnique_open_of_etale_fpqc_baseChange {S V : Scheme.{u}} {I : Type v} (T : I → Scheme.{u}) (g : ∀ i, T i ⟶ S) (hcover : Presieve.ofArrows T g ∈ Scheme.fpqcPrecoverage S) (f : V ⟶ S) [Etale f] (W : ∀ i, (pullback (g i) f).Opens) (hcompat : ∀ i j, (pullback.fst (pullback.snd (g i) f) (pullback.snd (g j) f)) ⁻¹ᵁ W i = (pullback.snd (pullback.snd (g i) f) (pullback.snd (g j) f)) ⁻¹ᵁ W j) : ∃! U : V.Opens, ∀ i, (pullback.snd (g i) f) ⁻¹ᵁ U = W i",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-eod0957",
+  "group": "F1",
+  "result": "pass",
+  "note": "Matched: S,V arbitrary schemes; I : Type v arbitrary (empty I forces S, V empty, unique open); T_i, g_i; fpqc covering = recorded Mathlib leaf Scheme.fpqcPrecoverage on Presieve.ofArrows (flat + QuasiCompactCover, not generated topology); V->S etale = [Etale f] (recorded leaf, kept though unused); W_i opens of pullback (g i) f (T_i x_S V, STATE BASE CHANGE); compatibility on (T_i x_S V) x_V (T_j x_S V) via pullback.fst/snd of the pullback.snd maps = canonical T_i x_S T_j x_S V with its two projections, all ordered pairs; conclusion exists-unique U : V.Opens with pullback.snd preimage = W_i for every i (equality of opens, U bound before i). Not literally a Mathlib MorphismProperty descent (opens, not a property), so existing:false correct; general 03N0 sibling node has no Lean record, no duplicate. Docstring has blueprint tag + proof (022D base change, then 03N0). Compile clean."
  }
 }
