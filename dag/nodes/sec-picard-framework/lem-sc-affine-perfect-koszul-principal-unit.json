@@ -21,7 +21,8 @@
  "stmt_deps": [
   "def-pc-scheme",
   "def-pc-perfect-complex",
-  "def-weil-pbc-koszul-complex"
+  "def-weil-pbc-koszul-complex",
+  "def-pc-shifted-koszul-augmentation"
  ],
  "proof": [
   {
@@ -113,5 +114,27 @@
   "group": "G1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-kpu3058 (reviewer sub-agent of L); spot-checked: Statement matches siblings lem-sc-affine-perfect-open-represent-cohomology word for word (I^i=K^{i-1}, i<=0, negated differential, u_e); compatible system over e is defined in that sibling and not needed here; Tag 08CX verified; Step 1 elementary from def-pc-perfect-complex/def-weil-pbc-koszul-complex; Step 3 elementary. FIX more, RETURN less: C4/E Step 2 described the homotopy as contraction with the dual basis vector (wrong direction, lowers degree); replaced by exterior multiplication by f_i^{-e}e_i with Dh+hD=id derived from the node's own D(v^x) formula, citing Stacks 0626/0663 in the step source; missed by the second reading.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.AffinePerfectKoszulPrincipalUnit",
+  "declaration": "AlgebraicGeometry.affine_perfect_koszul_principal_unit",
+  "declarations": [
+   "AlgebraicGeometry.affine_perfect_koszul_principal_unit"
+  ],
+  "file": "lean/Sheaf/Paper/AffinePerfectKoszulPrincipalUnit.lean",
+  "statement": "theorem affine_perfect_koszul_principal_unit (A : Type a) [CommRing A] (r : ℕ) (f : Fin r → A) (e : ℕ) (he : 1 ≤ e) [HasDerivedCategory.{b} (SheafOfModules.{a} (moduleRings (Spec (.of A)).toRingedSpace))] [∀ U : (Spec (.of A)).Opens, HasDerivedCategory.{b} (SheafOfModules.{a} ((moduleRings (Spec (.of A)).toRingedSpace).over U))] : Scheme.IsPerfect (Spec (.of A)) (DerivedCategory.Q.obj ((@Functor.mapHomologicalComplex ℤ (ModuleCat.{a} A) (SheafOfModules.{a} (moduleRings (Spec (.of A)).toRingedSpace)) _ _ _ _ (tilde.functor (.of A)) ⟨fun _ _ ↦ tilde.map_zero⟩ (ComplexShape.up ℤ)).obj (shiftedKoszulComplex A r (fun i ↦ f i ^ e)))) ∧ IsIso (((SheafOfModules.overFunctor (moduleRings (Spec (.of A)).toRingedSpace) (⨆ i : Fin r, (Spec (.of A)).basicOpen ((Scheme.ΓSpecIso (.of A)).inv (f i)))).mapDerivedCategory).map (affineKoszulAugmentation A r (fun i ↦ f i ^ e)))",
+  "branch": "sheaf-dag",
+  "by": "M1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-kpu"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-kpu",
+  "group": "M1",
+  "result": "fix",
+  "note": "A comm ring, r,f:Fin r→A arbitrary (r=0 ok), e≥1, X=Spec A, U=⨆ basicOpen(f i); I=K_(n+1) at degree -n via embeddingDownNat with -koszulBoundary, augmentation d_1 then zeroEquiv; conclusion IsPerfect ∧ IsIso of overFunctor.mapDerivedCategory image; FIX H4: removed adapter affineAssociatedSheaf/_map_zero/affineAssociatedComplex (second spelling of termwise tilde, sorried map_zero) in favour of the landed inline @Functor.mapHomologicalComplex (tilde.functor) ⟨tilde.map_zero⟩ form (KoszulOpenOrthogonality, PerfectAffineBoundedProjective)"
  }
 }

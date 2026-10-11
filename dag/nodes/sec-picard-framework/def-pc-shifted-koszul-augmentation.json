@@ -1,0 +1,117 @@
+{
+ "id": "def-pc-shifted-koszul-augmentation",
+ "kind": "definition",
+ "title": "Shifted Koszul complex and its canonical affine augmentation",
+ "status": "split",
+ "statement": "Let $A$ be a commutative ring, $r\\geq0$, and $f_1,\\ldots,f_r\\in A$. For the Koszul chain complex $K_\\bullet(f)$ [def-weil-pbc-koszul-complex], define $I^{-n}=K_{n+1}$ for $n\\geq0$, $I^i=0$ for $i>0$, and $d_I^{-n}=-d_{n+1}$ for $n>0$. The canonical augmentation $I^\\bullet\\to A[0]$ has degree-zero component $d_1:K_1\\to K_0=A$ and zero components in all other degrees. On $X=\\operatorname{Spec}(A)$ [def-pc-scheme], apply the associated sheaf functor degreewise and then localization to $D(\\mathcal O_X)$ [def-pc-derived-category] to obtain $u:I\\to\\mathcal O_X$.",
+ "stmt_deps": [
+  "def-weil-pbc-koszul-complex",
+  "def-pc-scheme",
+  "def-pc-derived-category"
+ ],
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 08CX, Section 36.9: definition of I^bullet and its augmentation; associated sheaves as in Tag 01I6"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "truncated Koszul complex with negative differential and canonical augmentation",
+   "results": "Service unavailable: Internal Server Error.",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Koszul complex delete degree zero negative differential augmentation to ring",
+   "results": "Eight hits on ChainComplex.augment, its term/differential equations, and simplicial augmentation. None constructs the shifted negative Koszul complex or its affine augmentation.",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "shiftedKoszul|koszulAugmentation|KoszulComplex; shifted Koszul; negative of the Koszul",
+   "results": "Mathlib search via msearch: 0 hits. Source WeilConjectures: no matches for shiftedKoszul or koszul augmentation (only the unrelated P1 Koszul exact sequence). Sheaf: no existing shiftedKoszul or affineKoszulAugmentation. DAG mentions I in statement nodes but has no definition node for it; blueprint_refs search shifted Koszul returned 0 nodes. Mathlib Tilde has tilde.functor; Single and Extend have general construction APIs, reused here.",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sc-affine-perfect-koszul-principal-unit",
+  "date": "2026-10-11",
+  "group": "M1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "proper-flat support proof: the Koszul perfect object on powers of the principal-open equations",
+   "via": [
+    "lem-sc-affine-perfect-koszul-principal-unit",
+    "lem-sc-affine-perfect-open-represent-cohomology",
+    "lem-sc-affine-perfect-map-lift",
+    "lem-sc-perfect-support-map-lift",
+    "lem-sc-proper-flat-right-adjoint-open-support",
+    "lem-sc-proper-flat-right-adjoint-restriction-open",
+    "lem-sc-proper-flat-right-adjoint-basechange",
+    "lem-sc-smooth-proper-diagonal-basechange-upper-shriek",
+    "lem-sc-smooth-proper-diagonal-pushforward-structure",
+    "lem-sc-smooth-proper-relative-dualizing-general",
+    "lem-sc-smooth-proper-curve-dualizing",
+    "lem-sc-finite-duality-trace"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "module": "Sheaf.Paper.ShiftedKoszulAugmentation",
+  "declaration": "AlgebraicGeometry.shiftedKoszulComplex",
+  "declarations": [
+   "AlgebraicGeometry.shiftedKoszul_square",
+   "AlgebraicGeometry.shiftedKoszulChain",
+   "AlgebraicGeometry.shiftedKoszulComplex",
+   "AlgebraicGeometry.shiftedKoszul_augmentation_comp",
+   "AlgebraicGeometry.shiftedKoszulChainAugmentation",
+   "AlgebraicGeometry.shiftedKoszulAugmentation",
+   "AlgebraicGeometry.affineKoszulAugmentation"
+  ],
+  "file": "lean/Sheaf/Paper/ShiftedKoszulAugmentation.lean",
+  "statement": "def shiftedKoszulComplex (A : Type u) [CommRing A] (r : ℕ) (f : Fin r → A) : CochainComplex (ModuleCat.{u} A) ℤ",
+  "branch": "sheaf-dag",
+  "by": "M1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-kpu"
+ },
+ "reviewed": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-kpu",
+  "group": "M1",
+  "result": "fix",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-kpu",
+  "group": "M1",
+  "result": "fix",
+  "note": "A comm ring, r,f:Fin r→A arbitrary (r=0 ok), e≥1, X=Spec A, U=⨆ basicOpen(f i); I=K_(n+1) at degree -n via embeddingDownNat with -koszulBoundary, augmentation d_1 then zeroEquiv; conclusion IsPerfect ∧ IsIso of overFunctor.mapDerivedCategory image; FIX H4: removed adapter affineAssociatedSheaf/_map_zero/affineAssociatedComplex (second spelling of termwise tilde, sorried map_zero) in favour of the landed inline @Functor.mapHomologicalComplex (tilde.functor) ⟨tilde.map_zero⟩ form (KoszulOpenOrthogonality, PerfectAffineBoundedProjective)"
+ }
+}
