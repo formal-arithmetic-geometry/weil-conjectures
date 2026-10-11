@@ -3169,3 +3169,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 00:51 L: merged deliver/M1/lem-sp-ce-vertical-nullhomotopy (reviewer FIX; after a return; new nodes: 1)
 - 00:51 UTC L: M1 ce-vertical-nullhomotopy FIX 0d5ef1832 re-push (R-cvn0049; induction on p written out, duplicate row-comparison node dropped).
 - 00:52 L: merged deliver/K1/lem-pur-kinjective-surjection-bounded-size (reviewer PASS; after a return; new nodes: 0)
+- 00:53 UTC L: K1 kinjective-surjection-bounded-size PASS 90ea1ee4e re-push (R-sbs0052).
