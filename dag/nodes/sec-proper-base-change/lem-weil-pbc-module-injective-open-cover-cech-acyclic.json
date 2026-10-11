@@ -183,5 +183,23 @@
   "item": "lem-weil-pbc-module-injective-open-cover-cech-acyclic",
   "worker": "stage1",
   "summary": "Checked Cohomology 01EP and its source route 01EL, 01EM and 01EN. Constructed the free presheaf Cech chain complex on intersections of opens; used exact sheafification and its adjunction to prove injectivity in presheaves; identified its Hom complex with the Cech complex via the existing free-Yoneda Mathlib leaf; computed each chain complex on an arbitrary open W as the power-set complex for I_W, including I_W empty; and expanded the exact Hom argument. No new nodes or Lean code."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ModuleInjectiveOpenCoverCechAcyclic",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.module_injective_open_cover_cech_acyclic",
+  "statement": "theorem module_injective_open_cover_cech_acyclic {X : Scheme.{u}} (I : X.Modules) [Injective I] (U : X.Opens) (ι : Type w) (V : ι → X.Opens) (hV : ∀ i, V i ≤ U) (hcover : ⨆ i, V i = U) (S : CategoryTheory.SiteCechComplex V (fun i => homOfLE (hV i))) : ∀ p : ℕ, 0 < p → IsZero ((S.cohomologyFunctor p).obj (((PresheafOfModules.forgetToPresheafModuleCat (op ⊤) isTerminalTop.op).obj ((SheafOfModules.forget X.ringCatSheaf).obj I)) ⋙ (forget₂ (ModuleCat Γ(X, ⊤)) AddCommGrpCat)))",
+  "by": "G1",
+  "date": "2026-10-11",
+  "file": "lean/Sheaf/AlgebraicGeometry/ModuleInjectiveOpenCoverCechAcyclic.lean",
+  "branch": "sheaf-dag",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "G1",
+  "result": "pass",
+  "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
  }
 }

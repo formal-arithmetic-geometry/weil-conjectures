@@ -5644,3 +5644,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 19:29 L: merged deliver/E1/lem-sc-cech-h1-map-natural (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.CechH1MapNatural AlgebraicGeometry.Scheme.Modules.cechH1Map_natural)
 - 19:30 L: merged deliver/F1/def-pc-derived-rhom-algebra-module (stage 2; reviewer PASS; after a return; Sheaf.AlgebraicGeometry.DerivedRHomAlgebraModule AlgebraicGeometry.derivedRHomAlgebraModule)
 - 19:30 L: merged deliver/E1/lem-weil-pbc-colimit-of-sites-sections (stage 2; reviewer PASS; first push; Sheaf.CategoryTheory.ColimitSiteSections CategoryTheory.colimitSite_sections_bijective)
+- 19:30 L: merged deliver/G1/lem-weil-pbc-module-injective-open-cover-cech-acyclic (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.ModuleInjectiveOpenCoverCechAcyclic AlgebraicGeometry.Scheme.Modules.module_injective_open_cover_cech_acyclic)
