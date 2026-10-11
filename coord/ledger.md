@@ -4212,3 +4212,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 10:21 L: merged deliver/C1/lem-weil-pbc-finite-product-integral-closure (stage 2; reviewer PASS; first push; Sheaf.RingTheory.IntegralClosureFinitePi integralClosure_finite_pi)
 - 10:21 L: merged deliver/J1/lem-weil-pbc-finite-projective-standard-free-cover (stage 2; reviewer PASS; first push; Sheaf.RingTheory.FiniteProjectiveStandardFreeCover Module.exists_standardFreeCover_of_finite_projective)
 - 10:22 L: merged deliver/K1/lem-weil-pbc-finite-purely-inseparable-scalar-descent (stage 2; reviewer PASS; first push; Sheaf.FieldTheory.FinitePurelyInseparableScalarDescent Algebra.TensorProduct.finite_purelyInseparable_of_tensorProduct)
+- 10:22 L: merged deliver/E1/lem-weil-pbc-finite-projective-prime-local-free (stage 2; reviewer PASS; first push; Sheaf.RingTheory.FiniteProjectivePrimeLocalFree Module.exists_localizationAway_equiv_finsupp_of_finite_projective)
