@@ -76,5 +76,35 @@
   "group": "E1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-rdi1939 (reviewer sub-agent of L); spot-checked: Checked statement against cited nodes (all general-site/ringed-space, no scheme-only node cited; def-pc-derived-direct-image is the scheme special case, not a duplicate; the two sec-curve-estimates ringed-space nodes are not used, injective resolutions of single modules being unneeded). FIX more, RETURN less: (1) B3: 'morphism of ringed spaces' was cited to def-weil-sheaf-of-modules-category, which does not define it; now cites def-weil-locally-ringed-space-morphism (commutative rings, as prop-pur-kinjective-resolutions-exist needs). (2) B3: the module direct image g_* (sections over g^{-1}V, B-action through g^sharp) was used undefined; now stated inline. (3) C1: well-definedness on unbounded D(O_X) (independence of resolution, inverting quasi-isomorphisms) had no cited statement (lem-sp-kinjective-computes covers only Ch^+); now built from the functorial choice in prop-pur-kinjective-resolutions-exist plus lem-weil-pbc-kinjective-hom-derived (Mathlib leaf, general abelian category: quasi-iso of K-injectives is a homotopy equivalence), cited as a generic tool. Second reading by E1 missed all three.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.RingedSpaceDerivedDirectImage",
+  "declaration": "AlgebraicGeometry.RingedSpace.derivedModuleDirectImage",
+  "declarations": [
+   "AlgebraicGeometry.RingedSpace.moduleGrothendieckAbelian",
+   "AlgebraicGeometry.RingedSpace.moduleDirectImage",
+   "AlgebraicGeometry.RingedSpace.moduleDirectImage_additive_proof",
+   "AlgebraicGeometry.RingedSpace.moduleDirectImage_additive",
+   "AlgebraicGeometry.RingedSpace.resolvedModuleDirectImage",
+   "AlgebraicGeometry.RingedSpace.resolvedModuleDirectImage_inverts",
+   "AlgebraicGeometry.RingedSpace.derivedModuleDirectImage",
+   "AlgebraicGeometry.RingedSpace.derivedModuleDirectImageFactorization",
+   "AlgebraicGeometry.RingedSpace.derivedModuleDirectImage_computed_by_resolution"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/RingedSpaceDerivedDirectImage.lean",
+  "statement": "abbrev derivedModuleDirectImage (g : X ⟶ Y) : DerivedCategory (SheafOfModules.{u} (moduleRings X)) ⥤ DerivedCategory (SheafOfModules.{u} (moduleRings Y))",
+  "branch": "sheaf-dag",
+  "by": "G1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-ddi2"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-ddi2",
+  "group": "G1",
+  "result": "fix",
+  "note": "H7 node unchanged; H4: Rg_* re-spelled as the landed upstream unbounded right derived functor (moduleDirectImage g).rightDerivedFunctor (WeilConjectures RightDerivedFunctor.Defs, already used in lean/) instead of a new Localization.lift construction; factorization Q ⋙ Rg_* ≅ Q∘g_*∘I(-) now a Nonempty theorem (no sorried data); g_* = SheafOfModules.pushforward specialization checked against node; universes match schemeDerivedCategory citers"
  }
 }
