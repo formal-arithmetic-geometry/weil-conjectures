@@ -227,5 +227,24 @@
   "lem-sp-kinjective-computes",
   "lem-weil-pbc-right-derived-universal-delta-functor"
  ],
- "reviewed": "2026-10-10 L: 7 steps (the long exact sequence of Artin–Schreier, q >= 3 from H^j(G_a) = 0, the affine case, the k-structure on H^1(G_a) with Frobenius p-linear (written out), the proper case by finiteness and the Zariski/etale comparison (new node 03DW (2) with naturality), Lang–Steinberg); 7 tool uses accepted; 1 new node"
+ "reviewed": "2026-10-10 L: 7 steps (the long exact sequence of Artin–Schreier, q >= 3 from H^j(G_a) = 0, the affine case, the k-structure on H^1(G_a) with Frobenius p-linear (written out), the proper case by finiteness and the Zariski/etale comparison (new node 03DW (2) with naturality), Lang–Steinberg); 7 tool uses accepted; 1 new node",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.Curve.ArtinSchreierDimension",
+  "declaration": "AlgebraicGeometry.isZero_etaleCohomology_constantZMod_of_one_lt_of_charP",
+  "file": "lean/Sheaf/AlgebraicGeometry/Curve/ArtinSchreierDimension.lean",
+  "statement": "theorem isZero_etaleCohomology_constantZMod_of_one_lt_of_charP {k : Type u} [Field k] [IsAlgClosed k] {C : Scheme.{u}} (f : C ⟶ Spec (.of k)) [IsConnectedCurve f] [Smooth f] (p : ℕ) [Fact p.Prime] [CharP k p] (q : ℕ) (hq : 1 < q) : IsZero ((Etale.cohomology AddCommGrpCat.{u + 1} C (q : ℤ)).obj ((DerivedCategory.singleFunctor (Sheaf C.smallEtaleTopology AddCommGrpCat.{u + 1}) 0).obj (C.constantZMod p)))",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-asd"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-asd",
+  "group": "E1",
+  "result": "fix",
+  "note": "alg. closed k; IsConnectedCurve f (separated, finite type, connected, dim 1) + Smooth f; char p as [Fact p.Prime] [CharP k p] (fixed from hp : 0 < p per STATE CHARACTERISTIC p); F_p = C.constantZMod p; H^q via Etale.cohomology on singleFunctor 0; all q > 1; IsZero"
+ }
 }
