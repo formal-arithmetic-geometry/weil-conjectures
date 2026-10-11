@@ -135,5 +135,23 @@
    "decls": [],
    "missing": []
   }
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.Sites.CohomologySiteEquivalence",
+  "declaration": "CategoryTheory.cohomology_site_equivalence",
+  "file": "lean/Sheaf/CategoryTheory/Sites/CohomologySiteEquivalence.lean",
+  "statement": "theorem cohomology_site_equivalence {C D : Type u} [SmallCategory C] [SmallCategory D] (J : Precoverage C) (K : Precoverage D) [J.HasIsos] [J.IsStableUnderComposition] [J.IsStableUnderBaseChange] [J.HasPullbacks] [K.HasIsos] [K.IsStableUnderComposition] [K.IsStableUnderBaseChange] [K.HasPullbacks] [HasSheafify J.toGrothendieck AddCommGrpCat.{u}] [HasSheafify K.toGrothendieck AddCommGrpCat.{u}] [HasExt.{u} (Sheaf J.toGrothendieck AddCommGrpCat.{u})] [HasExt.{u} (Sheaf K.toGrothendieck AddCommGrpCat.{u})] (e : C ≌ D) (hcover : ∀ (W : C) (R : Presieve W), R ∈ J W → R.map e.functor ∈ K (e.functor.obj W)) (hcover_inv : ∀ (V : D) (R : Presieve V), R ∈ K V → R.map e.inverse ∈ J (e.inverse.obj V)) : ∃ (hi : e.inverse.IsContinuous K.toGrothendieck J.toGrothendieck), ∀ q : ℕ, Nonempty (Sheaf.cohomologyPresheafFunctor J.toGrothendieck q ≅ e.inverse.sheafPushforwardContinuous AddCommGrpCat.{u} K.toGrothendieck J.toGrothendieck ⋙ Sheaf.cohomologyPresheafFunctor K.toGrothendieck q ⋙ (Functor.whiskeringLeft Cᵒᵖ Dᵒᵖ AddCommGrpCat.{u}).obj e.functor.op)",
+  "branch": "sheaf-dag",
+  "by": "K1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "K1",
+  "result": "pass",
+  "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
  }
 }
