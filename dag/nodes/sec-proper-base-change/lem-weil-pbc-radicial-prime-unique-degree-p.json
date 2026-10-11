@@ -200,5 +200,23 @@
   "by": "L",
   "result": "accepted",
   "note": "5 steps (proof_origin agent; 0BR8 and 00GQ for clause (3)): C free over R with basis 1..z^{p-1} (leaf), injective and integral; the Frobenius identity written out; c^p = phi(sum b_i^p f^i); uniqueness by the power argument; existence by the lying-over leaf (repointed by L from pqf-lem-lying-over). Statement unchanged; the domain hypotheses are unused, kept for the citer."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.RadicialPrimeUniqueDegreeP",
+  "declaration": "AdjoinRoot.radicial_prime_unique_degree_p",
+  "file": "lean/Sheaf/RingTheory/RadicialPrimeUniqueDegreeP.lean",
+  "statement": "theorem radicial_prime_unique_degree_p (R : Type u) [CommRing R] [IsDomain R] (p : ℕ) (hp : p.Prime) (hchar : (p : R) = 0) (f : R) [IsDomain (AdjoinRoot (X ^ p - C f))] : Function.Injective (of (X ^ p - C f)) ∧ (∀ c : AdjoinRoot (X ^ p - C f), IsIntegral R c) ∧ (∀ c : AdjoinRoot (X ^ p - C f), c ^ p ∈ (of (X ^ p - C f)).range) ∧ (∀ P : Ideal R, P.IsPrime → ∃! Q : Ideal (AdjoinRoot (X ^ p - C f)), Q.IsPrime ∧ Q.comap (of (X ^ p - C f)) = P)",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-rpu1547",
+  "group": "H1",
+  "result": "pass",
+  "note": "p prime (hp), R CommRing+IsDomain, p=0 in R (hchar, literal; = CharP for a domain, landed precedent ArtinSchreierKernel), f : R, C = AdjoinRoot (X^p - C f) (rfl = R[X]/span{X^p-C f}), C domain instance; (1) of injective + IsIntegral R c via algebraMap = of (rfl); (2) c^p in of.range; (3) every prime P has ∃! prime Q with comap = P; #check: X/C resolve to Polynomial.X/C, of to AdjoinRoot.of; no let/show, universe u only; node record-only diff"
  }
 }
