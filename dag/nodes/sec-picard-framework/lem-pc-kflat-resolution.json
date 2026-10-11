@@ -157,5 +157,23 @@
   "group": "M1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-kfr1904 (reviewer sub-agent of L); spot-checked: No cycle: item cites only its three new nodes, none of def-pc-derived-pullback / lem-pc-ringed-spaces-derived-pullback-composition. Existing 06YD (lem-pc-bounded-above-flat-kflat) and 06YB (lem-pc-kflat-stalk-criterion) are ringed-space statements, not usable on an arbitrary site, so lem-pc-kflat-closure is not a duplicate (it is the site version incl. 06Y5-type closure); lem-kun-* are etale-site only. New statements true (functorial bounded-above flat replacement via Tot of functorial j_! resolutions; K-flat closed under cones/sums; hocolim of truncations). Mathlib grep KFlat: no hit. FIX more, RETURN less: (1) Step 3 (C1) applied the filtered-colimit clause directly to a homotopy colimit, which is not a filtered colimit; rewritten: direct sums as filtered colimits of finite sums, then map of cones + five lemma, then the truncation comparison; (2) Step 2 surjectivity argument was muddled (attributed surjectivity onto hocolim of truncations to eventual identity, and never argued hocolim tau->G surjective); rewritten with explicit degreewise components; Step 4 restated accordingly.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.KFlatResolution",
+  "declaration": "CochainComplex.exists_isKFlatResolution",
+  "file": "lean/Sheaf/Algebra/Homology/KFlatResolution.lean",
+  "statement": "theorem exists_isKFlatResolution {C : Type u} [Category.{u} C] {J : GrothendieckTopology C} {R : Sheaf J CommRingCat.{u}} (G : CochainComplex (SheafOfModules.{u} ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj R)) ℤ) : ∃ (K : CochainComplex (SheafOfModules.{u} ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj R)) ℤ) (f : K ⟶ G), K.IsKFlat ∧ (∀ i : ℤ, SheafOfModules.IsFlat (K.X i)) ∧ QuasiIso f ∧ (∀ i : ℤ, Epi (f.f i))",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-kfr1050",
+  "group": "C1",
+  "result": "pass",
+  "note": "site (C,J) small as IsKFlat; R sheaf of comm rings via sheafCompose forget2; arbitrary G: CochainComplex SheafOfModules Z; exists K, f:K->G; K.IsKFlat (landed def, = QuasiIso f ∧ IsKFlat of landed IsKFlatResolution); all K.X i SheafOfModules.IsFlat; QuasiIso f; Epi (f.f i) = sheaf surjectivity; FromJoel kFlat_resolutionFunctor needs flat left resolution input + different predicate, so existing:false correct"
  }
 }
