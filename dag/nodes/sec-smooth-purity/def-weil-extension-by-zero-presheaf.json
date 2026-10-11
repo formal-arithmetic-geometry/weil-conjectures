@@ -104,5 +104,23 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-ebz3016 (reviewer sub-agent of L); spot-checked: E: direct sum over Mor(V,U), O(V)-action via O_U(V->U)=O(V), restriction a:V'->V to summand of phi a, functoriality, at-most-one-map special case (zero restriction from P(V)=0) all agree with Tag 03DI proof para 1 and 0F6Z; stmt_deps cite def-pur-localized-ringed-site and def-weil-sheaf-of-modules-category (class b ok); no smuggled adjunction/exactness claims (03DI/03DJ live in lem-weil-extension-by-zero-adjunction/-exact); no duplicate: def-weil-pbc-site-extension-by-zero-presheaf is the abelian-presheaf variant and cites this node; C4: citers def-weil-extension-by-zero, lem-pc-sites-modules-j-shriek-flat, def-weil-pbc-site-extension-by-zero-presheaf use exactly this formula; Mathlib grep extensionByZero|extension by zero: only MulChar hit, no match. No repairs."
  },
- "lead_note": "2026-10-10 L (R-ebz3016): Second reading claims it corrected created.item; the diff leaves created.item = def-weil-extension-by-zero (correct for this pre-existing node), so that claim is inaccurate but harmless."
+ "lead_note": "2026-10-10 L (R-ebz3016): Second reading claims it corrected created.item; the diff leaves created.item = def-weil-extension-by-zero (correct for this pre-existing node), so that claim is inaccurate but harmless.",
+ "lean": {
+  "module": "Sheaf.CategoryTheory.ExtensionByZeroPresheaf",
+  "declaration": "SheafOfModules.extensionByZeroPresheaf",
+  "file": "lean/Sheaf/CategoryTheory/ExtensionByZeroPresheaf.lean",
+  "statement": "def extensionByZeroPresheaf : SheafOfModules.{v} (R.over U) ⥤ PresheafOfModules.{max v v₁} R.obj",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-ezp0636",
+  "group": "E1",
+  "result": "fix",
+  "note": "C,J,R:Sheaf J RingCat,U,G:SheafOfModules (R.over U) = node's site, O, U, G over (C/U,O_U) via Mathlib J.over/Sheaf.over; section = DirectSum over (V.unop ⟶ U) of G(Over.mk φ), componentwise R(V)-action; restriction along a: G.map (Over.homMk a.unop) into summand a.unop≫φ; functor via DirectSum.lmap of α.app; empty/unique special cases; no sorry in data (only Prop laws); universes max v v₁; no Mathlib explicit form (Lan not available for PresheafOfModules over varying rings). FIX H9: dropped unused import ModuleCat.Products"
+ }
 }
