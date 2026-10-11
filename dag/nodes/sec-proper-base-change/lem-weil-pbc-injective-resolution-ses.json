@@ -145,5 +145,23 @@
   "group": "C",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of C"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.Abelian.HorseshoeResolutions",
+  "declaration": "CategoryTheory.InjectiveResolution.exists_horseshoe_resolutions",
+  "file": "lean/Sheaf/CategoryTheory/Abelian/HorseshoeResolutions.lean",
+  "statement": "theorem exists_horseshoe_resolutions {C : Type u} [Category.{v} C] [Abelian C] [EnoughInjectives C] (S : ShortComplex C) (hS : S.ShortExact) : ∃ (IA : InjectiveResolution S.X₁) (IB : InjectiveResolution S.X₂) (IC : InjectiveResolution S.X₃) (α : IA.cocomplex ⟶ IB.cocomplex) (β : IB.cocomplex ⟶ IC.cocomplex), IA.ι ≫ α = (CochainComplex.single₀ C).map S.f ≫ IB.ι ∧ IB.ι ≫ β = (CochainComplex.single₀ C).map S.g ≫ IC.ι ∧ ∃ (hαβ : α ≫ β = 0), ∀ n : ℕ, ((ShortComplex.mk α β hαβ).map (HomologicalComplex.eval C (ComplexShape.up ℕ) n)).ShortExact ∧ ∃ e : IB.cocomplex.X n ≅ IA.cocomplex.X n ⊞ IC.cocomplex.X n, α.f n ≫ e.hom = biprod.inl ∧ β.f n = e.hom ≫ biprod.snd",
+  "branch": "sheaf-dag",
+  "by": "M1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-irs1057",
+  "group": "M1",
+  "result": "pass",
+  "note": "abelian C [Abelian C], enough injectives [EnoughInjectives C], SES S+hS; existential IA/IB/IC InjectiveResolution (N-indexed = zero below 0), alpha/beta complex maps, single0 augmentation squares, degreewise ShortExact for all n:N, biproduct iso with inl/snd; spellings identical to landed exists_horseshoe_prescribed_resolutions; no hollow binders, universes u v both used"
  }
 }
