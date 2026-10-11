@@ -25,7 +25,8 @@
   "def-weil-sheaf-of-modules-category",
   "def-weil-geometric-point",
   "def-weil-pbc-geometric-stalks",
-  "def-weil-constructible-subset"
+  "def-weil-constructible-subset",
+  "def-kun-support"
  ],
  "proof": [
   {
@@ -215,5 +216,23 @@
   "item": "lem-weil-pbc-constructible-module-support-constructible",
   "worker": "stage1",
   "summary": "Stacks 09YS(3) omits the proof; written in six steps after the proof of 09YS(1) and Remark 04FN. (i) for any scheme and abelian sheaf: both geometric points over x receive a morphism of geometric points from the one given by an algebraic closure of kappa(x) (embedding by IsAlgClosed.lift), and a morphism of geometric points induces an isomorphism of stalks (04FN). (ii): constructibility data; stalks along a stratum by the inverse-image stalk isomorphism; on each stratum the support is the union of the images of the trivializing etale maps with nonzero value and its complement the union of the others, both open since etale maps are open, so the support meets each stratum in a clopen subset; a clopen subset of a constructible set in a spectral space is constructible by the finite intersection property of constructible sets; finite union. New nodes: the 04FN stalk bijection (unsplit), the algebraic-extension embedding (Mathlib leaf IsAlgClosed.lift) and openness of etale morphisms (Mathlib leaf Scheme.Hom.isOpenMap). The existing lem-kun-support-geometric-point-independent states clause (i) but lies in unit sk-prop-sf-kunneth-ordinary, outside the route of sk-thm-p1, and is imported (unchecked); not cited. Statement and stmt_deps unchanged."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ConstructibleEtaleModuleSupport",
+  "declaration": "AlgebraicGeometry.Scheme.constructibleEtaleModuleSupport",
+  "file": "lean/Sheaf/AlgebraicGeometry/ConstructibleEtaleModuleSupport.lean",
+  "statement": "theorem constructibleEtaleModuleSupport {X : Scheme.{u}} [CompactSpace X] [QuasiSeparatedSpace X] {Λ : Type (u + 1)} [CommRing Λ] [Finite Λ] (G : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (hG : IsConstructibleEtaleModuleSheaf G) : let F := (sheafCompose X.smallEtaleTopology (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj G (∀ (x : X) (Ω Ω' : Type u) [Field Ω] [IsAlgClosed Ω] [Field Ω'] [IsAlgClosed Ω'] (s : Spec (.of Ω) ⟶ X) (s' : Spec (.of Ω') ⟶ X), s default = x → s' default = x → (IsZero (((pointSmallEtale s).sheafFiber).obj F) ↔ IsZero (((pointSmallEtale s').sheafFiber).obj F))) ∧ (∀ (x : X) (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ X), s default = x → IsZero (((pointSmallEtale s).sheafFiber).obj F) → x ∉ etaleSheafSupport F) ∧ Topology.IsConstructible (etaleSheafSupport F)",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-csc1534",
+  "group": "F1",
+  "result": "pass",
+  "note": "qcqs = CompactSpace+QuasiSeparatedSpace (QuasiSeparated terminal.from inferred); Λ Type(u+1) CommRing Finite; G on ModuleCat Λ with landed IsConstructibleEtaleModuleSheaf; underlying abelian sheaf via sheafCompose forget₂ as landed DerivedCategories; Supp = landed etaleSheafSupport; (i) iff over two independent geometric points + one-zero-stalk ⇒ x∉Supp; (ii) Mathlib Topology.IsConstructible; #check resolves all names"
  }
 }
