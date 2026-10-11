@@ -36,7 +36,10 @@ variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime] [Fa
 quasi-compact open immersion with dense image and `F` a lisse Weil sheaf on `C₀`. Then
 `F ≅ j_* j^* F`: on `U₀` this is clear, and at a removed point `x` the stalk of `j_* j^* F` is
 the inertia invariants `(F_η̄)^{I_x} = F_x̄`, the inertia acting trivially since `F` is lisse at
-`x`. (blueprint: `lem-a1-lisse-middle-extension`) -/
+`x`. (blueprint: `lem-a1-lisse-middle-extension`)
+
+This is a weakening of the blueprint node, which asks for the adjunction unit
+`F ⟶ j_* j^* F` to be an isomorphism; here only some isomorphism is asserted. -/
 theorem WeilSheaf.IsLisse.nonempty_iso_directImage_upperStar {U C : Scheme.{u}}
     [U.Over (Spec (CommRingCat.of k₀))] [C.Over (Spec (CommRingCat.of k₀))]
     [SmoothOfRelativeDimension 1 (C ↘ Spec (CommRingCat.of k₀))]

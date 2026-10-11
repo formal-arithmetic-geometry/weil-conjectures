@@ -257,7 +257,7 @@ theorem WeilSheaf.nonempty_equiv_compactlySupportedCohomology_upperStar_higherLo
       · obtain ⟨n, rfl⟩ : ∃ n : ℕ, b = n := ⟨b.toNat, (Int.toNat_of_nonneg hb.le).symm⟩
         exact isZero_higherLowerShriek_of_quasiFinite f n (by exact_mod_cast hb) F
   obtain ⟨e₃⟩ := WeilComplex.nonempty_upperStar_derivedLowerShriek_iso (k₀ := k₀) (l := l) hH
-  obtain ⟨e₅⟩ := WeilComplex.nonempty_derivedLowerShriekCompIso (k₀ := k₀) (l := l) f'
+  obtain ⟨e₅⟩ := WeilComplex.nonempty_derivedLowerShriek_comp_iso (k₀ := k₀) (l := l) f'
     (Y' ↘ Spec (CommRingCat.of k₀))
   -- the identification of the complexes on `Y'`
   let E : WeilSheaf.toComplex.obj ((WeilSheaf.upperStar h).obj

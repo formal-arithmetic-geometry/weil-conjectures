@@ -8,7 +8,7 @@ module
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiFinite
 public import WeilConjectures.DeligneLaumon.Reduction.Weights
 public import WeilConjectures.Mathlib.AlgebraicGeometry.AffineSpace
-public import WeilConjectures.Mathlib.AlgebraicGeometry.AffineSpace.Fiber
+public import WeilConjectures.AlgebraicGeometry.AffineSpace.Fiber
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Noetherian
 public import WeilConjectures.WeilSheaf.LisseLocus

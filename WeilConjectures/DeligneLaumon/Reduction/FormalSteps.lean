@@ -227,16 +227,6 @@ variable {X Z Y : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
   [QuasiCompact (Y ↘ Spec (CommRingCat.of k₀))]
   [QuasiSeparated (Y ↘ Spec (CommRingCat.of k₀))]
 
-/-- **Composition of exceptional direct images** (blueprint: `lem-zl-shriek-composition`): for
-composable separated morphisms of finite type `X ⟶[f] Z ⟶[g] Y` of `k₀`-schemes,
-`R(f ≫ g)₀! ≅ Rg₀! ∘ Rf₀!`. This is the composition constraint of the six-operation formalism,
-`prop-functor-package`, clause 3
-(`AlgebraicGeometry.WeilComplex.nonempty_derivedLowerShriekCompIso`). -/
-theorem WeilComplex.nonempty_derivedLowerShriek_comp_iso :
-    Nonempty (WeilComplex.derivedLowerShriek k₀ l (f ≫ g) ≅
-      WeilComplex.derivedLowerShriek k₀ l f ⋙ WeilComplex.derivedLowerShriek k₀ l g) :=
-  WeilComplex.nonempty_derivedLowerShriekCompIso f g
-
 /-- Let `F` be a Weil sheaf on `X` such that `Rᵇf₀!F` is mixed of weights at most `w + b` for every
 `b`, and suppose the direct-image weight assertion holds for `g`. Then `Rⁿ(f ≫ g)₀!F` is mixed of
 weights at most `w + n` for every `n` (blueprint: `lem-zl-composition-weight-bound`, for a single
@@ -676,7 +666,7 @@ theorem WeilSheaf.isZero_higherLowerShriek_and_isMixedOfWeightsAtMost_of_quasiFi
   have : QuasiSeparated (T ↘ Spec (CommRingCat.of k₀)) :=
     inferInstanceAs (QuasiSeparated (p ≫ _))
   subst hjp
-  obtain ⟨e⟩ := WeilComplex.nonempty_derivedLowerShriekCompIso (k₀ := k₀) (l := l) j p
+  obtain ⟨e⟩ := WeilComplex.nonempty_derivedLowerShriek_comp_iso (k₀ := k₀) (l := l) j p
   obtain ⟨e'⟩ := WeilComplex.nonempty_derivedLowerShriek_toComplex_iso_of_isOpenImmersion j F
   let E := e.app (WeilSheaf.toComplex.obj F) ≪≫ (WeilComplex.derivedLowerShriek k₀ l p).mapIso e' ≪≫
     WeilComplex.derivedLowerShriekObjIsoDerivedLowerStar p _

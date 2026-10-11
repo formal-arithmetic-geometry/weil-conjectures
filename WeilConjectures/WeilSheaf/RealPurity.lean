@@ -40,7 +40,10 @@ variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime] [Fa
 `sk-p-real-purity`, of the section `sec-purity-real-sheaves`). Let `C₀` be a smooth geometrically
 connected curve over `k₀` and `𝒢₀` an `ι`-real lisse Weil sheaf on `C₀`. Every irreducible
 constituent of `𝒢₀`, that is, every irreducible lisse quotient `𝒢₂ / 𝒢₁` of lisse Weil subsheaves
-`𝒢₁ ⊆ 𝒢₂ ⊆ 𝒢₀`, is punctually `ι`-pure (of its determinant weight). -/
+`𝒢₁ ⊆ 𝒢₂ ⊆ 𝒢₀`, is punctually `ι`-pure (of its determinant weight).
+
+This is a weakening of the blueprint node: the weight is only asserted to exist, not to be the
+determinant weight `wt_ι(det 𝒢₂/𝒢₁) / rank(𝒢₂/𝒢₁)`. -/
 theorem IsReal.exists_isPunctuallyPureOfWeight_cokernel {ι : PadicAlgCl l →+* ℂ}
     {C : Scheme.{u}} [C.Over (Spec (CommRingCat.of k₀))]
     [SmoothOfRelativeDimension 1 (C ↘ Spec (CommRingCat.of k₀))]

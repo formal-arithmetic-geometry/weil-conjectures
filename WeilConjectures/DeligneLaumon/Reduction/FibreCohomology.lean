@@ -301,7 +301,7 @@ theorem WeilSheaf.nonempty_equiv_compactlySupportedCohomology_fiber
     ((WeilComplex.upperStar t).obj L) i
   -- base change and composition
   obtain ⟨e₃⟩ := WeilComplex.nonempty_upperStar_derivedLowerShriek_iso (k₀ := k₀) (l := l) hH
-  obtain ⟨e₅⟩ := WeilComplex.nonempty_derivedLowerShriekCompIso (k₀ := k₀) (l := l) f'
+  obtain ⟨e₅⟩ := WeilComplex.nonempty_derivedLowerShriek_comp_iso (k₀ := k₀) (l := l) f'
     (T ↘ Spec (CommRingCat.of k₀))
   let E : (WeilComplex.upperStar t).obj L ≅ (WeilComplex.derivedLowerShriek k₀ l f').obj
       (WeilSheaf.toComplex.obj ((WeilSheaf.upperStar g).obj F)) :=
