@@ -4070,3 +4070,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 09:41 L: merged deliver/K1/lem-weil-pbc-dim-one-residue-field-extensions-finite (stage 2; reviewer PASS; first push; Sheaf.RingTheory.DimOneResidueFieldsFinite Ideal.dim_one_residue_fields_finite)
 - 09:42 L: merged deliver/C1/lem-weil-pbc-dimension-inequality-quasi-finite (stage 2; reviewer PASS; first push; Sheaf.RingTheory.QuasiFiniteLocalDimension Algebra.ringKrullDim_le_of_isQuasiFiniteAtPrime)
 - 09:42 L: merged deliver/G1/lem-sc-vector-bundle-line-subbundle (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.VectorBundleLineSubbundle AlgebraicGeometry.exists_saturated_line_subbundle)
+- 09:42 L: merged deliver/K1/lem-weil-pbc-differentials-dimension-bound-smooth-at-prime (stage 2; reviewer PASS; first push; Sheaf.RingTheory.SmoothAtPrimeOfDifferentialsDimensionBound Algebra.isSmoothAtPrime_of_finrank_kaehlerDifferential_le)
