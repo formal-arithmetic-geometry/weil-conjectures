@@ -178,5 +178,24 @@
   "result": "accepted",
   "note": "5 steps: the choice g = g_0 j with 1 = j + k from J + K = B' (00E0 leaf), D(g) in U, phi^{-1}(D(g)) = D(g) via the morphism-into-affine leaf, sections over D(g) are the localizations, the isomorphism of locally ringed spaces restricted to D(g). No new nodes. Tag 09XH verified. Stage-3 note (worker): stmt_deps lists three nodes the statement text does not use; the hypotheses on B, C_1, C_2 are unused."
  },
- "lead_note": "L 2026-10-10: removed the unused hypothesis '(with C'_1 -> C_1 an isomorphism)' from the statement (the proof never uses it; it is the conclusion of lem-weil-pbc-integral-closure-finite-fibre-image-clopen, whose steps 8-9 repeat this node's argument and may now cite it instead)."
+ "lead_note": "L 2026-10-10: removed the unused hypothesis '(with C'_1 -> C_1 an isomorphism)' from the statement (the proof never uses it; it is the conclusion of lem-weil-pbc-integral-closure-finite-fibre-image-clopen, whose steps 8-9 repeat this node's argument and may now cite it instead).",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.IntegralClosureFiniteFibreChooseG",
+  "declaration": "AlgebraicGeometry.integralClosure_finite_fibre_choose_g",
+  "file": "lean/Sheaf/AlgebraicGeometry/IntegralClosureFiniteFibreChooseG.lean",
+  "statement": "theorem integralClosure_finite_fibre_choose_g (A : Type v) (B : Type u) (C₁ : Type w₁) (C₂ : Type w₂) (C₁' : Type w₃) (C₂' : Type w₄) [CommRing A] [CommRing B] [CommRing C₁] [CommRing C₂] [CommRing C₁'] [CommRing C₂'] [Algebra A B] [Algebra.FiniteType A B] (I : Ideal A) [Algebra (A ⧸ I) C₁] [Algebra (A ⧸ I) C₂] [Algebra (A ⧸ I) C₁'] [Algebra (A ⧸ I) C₂'] [Module.Finite (A ⧸ I) C₁] (eB : (B ⧸ Ideal.map (algebraMap A B) I) ≃+* C₁ × C₂) (eB' : (integralClosure A B ⧸ Ideal.map (algebraMap A (integralClosure A B)) I) ≃+* C₁' × C₂') (heB : ∀ a : A, eB (Ideal.Quotient.mk _ (algebraMap A B a)) = algebraMap (A ⧸ I) (C₁ × C₂) (Ideal.Quotient.mk I a)) (heB' : ∀ a : A, eB' (Ideal.Quotient.mk _ (algebraMap A (integralClosure A B) a)) = algebraMap (A ⧸ I) (C₁' × C₂') (Ideal.Quotient.mk I a)) (f₁ : C₁' →ₐ[A ⧸ I] C₁) (f₂ : C₂' →ₐ[A ⧸ I] C₂) (hprod : ∀ b : integralClosure A B, eB (Ideal.Quotient.mk _ (algebraMap (integralClosure A B) B b)) = (f₁ (eB' (Ideal.Quotient.mk _ b)).1, f₂ (eB' (Ideal.Quotient.mk _ b)).2)) (U : (Spec (.of (integralClosure A B))).Opens) (hU : ∀ p : PrimeSpectrum C₁', (PrimeSpectrum.comap (Ideal.Quotient.mk _) (PrimeSpectrum.comap ((RingHom.fst C₁' C₂').comp eB'.toRingHom) p) : PrimeSpectrum (integralClosure A B)) ∈ U) (hIso : IsIso (Spec.map (CommRingCat.ofHom (algebraMap (integralClosure A B) B)) ∣_ U)) : ∃ g : integralClosure A B, Ideal.Quotient.mk (Ideal.map (algebraMap A (integralClosure A B)) I) g = eB'.symm (1, 0) ∧ (∀ p : PrimeSpectrum (integralClosure A B), g ∉ (p.1 : Set (integralClosure A B)) → (p : Spec (.of (integralClosure A B))) ∈ U) ∧ Function.Bijective (Localization.awayMap (algebraMap (integralClosure A B) B) g)",
+  "branch": "sheaf-dag",
+  "by": "J1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-icg1124"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-icg1124",
+  "group": "J1",
+  "result": "fix",
+  "note": "A, I, finite-type A->B, B/IB=C1xC2 (eB, heB), C1 finite (Module.Finite), B'=integralClosure A B (fix: was abstract IsIntegralClosure B' A B + IsScalarTower), B'/IB'=C1'xC2' A/I-algebras (eB', heB'), factors map to C1,C2 (f1,f2,hprod), U ⊇ Spec C1' (hU via two comaps), phi^-1(U)->U iso (hIso, morphismRestrict); conclusion: g lifts eB'.symm(1,0), D(g) ⊆ U, awayMap bijective"
+ }
 }
