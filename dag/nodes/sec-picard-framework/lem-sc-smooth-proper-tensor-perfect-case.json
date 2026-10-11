@@ -117,5 +117,23 @@
   "group": "E1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-spp1953 (reviewer sub-agent of L); spot-checked: Read packet whole; checked Step 1 against lem-pc-projection-formula (proper Noetherian gives qcqs) and Step 2's Hom chain against Tag 0A9T and the cited statements; no generation/shift argument here, so the sibling direct-sums slip does not recur and the sibling is not used or restated. FIX more, RETURN less: (1) C1: Step 2's first identification needs Lf^*K perfect with dual Lf^*K^vee, which no cited statement gave; added a pullback clause to new node lem-pc-perfect-tensor-hom-duality (Lg^*K perfect, Lg^*(K^vee) a dual; Stacks Cohomology dual-perfect-complex + pullback) and named it in Step 2. (2) C4: last identification used a double dual K^vee^vee=K that the new node does not state; replaced by the node's second isomorphism on Y with A=Rf_*E, B=O_Y directly. New node not class b/c/d (Mathlib searches recorded, no same-tag duplicate). Report's claimed created.item correction was not actually made; left as is (existing node's field). tool_use lem-pc-projection-formula accepted as generic.; 2 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SmoothProperTensorPerfectCase",
+  "declaration": "AlgebraicGeometry.smoothProper_tensor_perfect_case",
+  "file": "lean/Sheaf/AlgebraicGeometry/SmoothProperTensorPerfectCase.lean",
+  "statement": "theorem smoothProper_tensor_perfect_case {X Y : Scheme.{u}} [IsNoetherian X] [IsNoetherian Y] (f : X ⟶ Y) [IsProper f] [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))] [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))] [∀ U : Y.Opens, HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings Y.toRingedSpace).over U))] (hTor : ∀ x : X, ∃ n : ℕ, ∀ (M : ModuleCat.{u} (Y.presheaf.stalk (f x))) (i : ℕ), n < i → IsZero (((Tor' (ModuleCat.{u} (Y.presheaf.stalk (f x))) i).obj ((ModuleCat.restrictScalars (f.stalkMap x).hom).obj (ModuleCat.of (X.presheaf.stalk x) (X.presheaf.stalk x)))).obj M)) : ∃ (hRf : ∀ E : schemeDerivedQCohCategory X, schemeDerivedQCohProperty Y ((schemeDerivedDirectImage f).obj E.obj)) (hO : schemeDerivedQCohProperty Y (𝟙_ (schemeDerivedCategory Y))) (hTensor : ∀ (K : schemeDerivedQCohCategory Y) (E : schemeDerivedQCohCategory X), schemeDerivedQCohProperty X (((derivedPullback f).obj K.obj) ⊗ E.obj)), Nonempty (Functor.Monoidal (derivedPullback f)) ∧ Nonempty (derivedPullback f ⊣ schemeDerivedDirectImage f) ∧ ∀ (_ : Functor.Monoidal (derivedPullback f)) (a : derivedPullback f ⊣ schemeDerivedDirectImage f) (c : schemeDerivedQCohCategory Y ⥤ schemeDerivedQCohCategory X) (adj : (schemeDerivedQCohProperty Y).lift ((schemeDerivedQCohProperty X).ι ⋙ schemeDerivedDirectImage f) hRf ⊣ c) (K : schemeDerivedQCohCategory Y), Scheme.IsPerfect Y K.obj → ∃ pf : (schemeDerivedDirectImage f).obj (((derivedPullback f).obj K.obj) ⊗ (c.obj ⟨𝟙_ _, hO⟩).obj) ≅ K.obj ⊗ (schemeDerivedDirectImage f).obj (c.obj ⟨𝟙_ _, hO⟩).obj, pf.inv = (a.homEquiv _ _) ((Functor.Monoidal.μIso (derivedPullback f) K.obj ((schemeDerivedDirectImage f).obj (c.obj ⟨𝟙_ _, hO⟩).obj)).inv ≫ (derivedPullback f).obj K.obj ◁ a.counit.app (c.obj ⟨𝟙_ _, hO⟩).obj) ∧ IsIso ((adj.homEquiv ⟨((derivedPullback f).obj K.obj) ⊗ (c.obj ⟨𝟙_ _, hO⟩).obj, hTensor K (c.obj ⟨𝟙_ _, hO⟩)⟩ K) (ObjectProperty.homMk (pf.hom ≫ K.obj ◁ (adj.counit.app ⟨𝟙_ _, hO⟩).hom ≫ (ρ_ K.obj).hom)))",
+  "branch": "sheaf-dag",
+  "by": "J1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "J1",
+  "result": "pass",
+  "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
  }
 }
