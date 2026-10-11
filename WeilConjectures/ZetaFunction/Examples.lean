@@ -213,6 +213,37 @@ theorem pointCount_multiplicativeGroup [Finite k] {n : ℕ} (hn : n ≠ 0) :
     ← Nat.card_congr unitsEquivNeZero, Nat.card_units,
     FiniteField.nat_card_galoisExtension k n hn]
 
+/-- The affine line `𝔸¹_k` is smooth of relative dimension one over `k`. -/
+instance : SmoothOfRelativeDimension 1 (affineLine k ↘ Spec (.of k)) := by
+  simpa using AffineSpace.smoothOfRelativeDimension_over PUnit.{u + 1} (Spec (.of k))
+
+/-- The multiplicative group `𝔾_{m,k}` is locally of finite type over `k`. -/
+instance : LocallyOfFiniteType (multiplicativeGroup k ↘ Spec (.of k)) := by
+  rw [multiplicativeGroup_over]
+  infer_instance
+
+/-- The multiplicative group `𝔾_{m,k}`, an open subscheme of `𝔸¹_k`, is smooth of relative
+dimension one over `k`. -/
+instance : SmoothOfRelativeDimension 1 (multiplicativeGroup k ↘ Spec (.of k)) := by
+  rw [multiplicativeGroup_over]
+  exact inferInstanceAs (SmoothOfRelativeDimension (0 + 1) _)
+
+/-- The multiplicative group `𝔾_{m,k}` is geometrically connected: it is a nonempty open
+subscheme of the geometrically irreducible `𝔸¹_k`, nonempty since it has the `k`-point `1`. -/
+instance : GeometricallyConnected (multiplicativeGroup k ↘ Spec (.of k)) := by
+  rw [multiplicativeGroup_over]
+  set U := (affineLine k).basicOpen (AffineSpace.coord (Spec (.of k)) PUnit.unit)
+  have : Surjective (U.ι ≫ affineLine k ↘ Spec (.of k)) := by
+    let g := ((multiplicativeGroupFieldPointsEquiv k k).symm ⟨1, one_ne_zero⟩).1
+    have hg : g ≫ (U.ι ≫ affineLine k ↘ Spec (.of k)) = 𝟙 _ := by
+      rw [← multiplicativeGroup_over]
+      exact ((multiplicativeGroupFieldPointsEquiv k k).symm ⟨1, one_ne_zero⟩).2.trans (by simp)
+    have : Surjective (g ≫ (U.ι ≫ affineLine k ↘ Spec (.of k))) := by
+      rw [hg]
+      infer_instance
+    exact Surjective.of_comp g _
+  infer_instance
+
 end PointCounts
 
 end AlgebraicGeometry

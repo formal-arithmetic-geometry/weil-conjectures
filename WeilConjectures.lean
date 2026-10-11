@@ -1815,6 +1815,7 @@ public import WeilConjectures.WeilSheaf.LocalFrobenius
 public import WeilConjectures.WeilSheaf.LowerShriek
 public import WeilConjectures.WeilSheaf.LowerStar
 public import WeilConjectures.WeilSheaf.LowerStarComp
+public import WeilConjectures.WeilSheaf.LowerStarId
 public import WeilConjectures.WeilSheaf.OpenImmersion
 public import WeilConjectures.WeilSheaf.Operations
 public import WeilConjectures.WeilSheaf.PoincareDuality
@@ -1843,6 +1844,7 @@ public import WeilConjectures.ZetaFunction.ClassicalFunctionalEquation
 public import WeilConjectures.ZetaFunction.CohomologicalFamily
 public import WeilConjectures.ZetaFunction.DualityReciprocity
 public import WeilConjectures.ZetaFunction.Examples
+public import WeilConjectures.ZetaFunction.ExamplesCohomology
 public import WeilConjectures.ZetaFunction.FinalTheorems
 public import WeilConjectures.ZetaFunction.HasseWeil
 public import WeilConjectures.ZetaFunction.IntegralFactors
