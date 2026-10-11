@@ -125,6 +125,16 @@ noncomputable abbrev mapHomotopyCategoryCompHom (X : HomotopyCategory C (.up ℤ
   (NatTrans.mapHomotopyCategory e.hom (.up ℤ)).app X ≫
     (mapHomotopyCategoryCompIso (Iso.refl (G₁ ⋙ G₂)) (.up ℤ)).inv.app X
 
+instance (X : HomotopyCategory C (.up ℤ)) : IsIso (mapHomotopyCategoryCompHom G₁ G₂ G₁₂ e X) := by
+  have : IsIso ((NatTrans.mapHomotopyCategory e.hom (.up ℤ)).app X) :=
+    ⟨(NatTrans.mapHomotopyCategory e.inv (.up ℤ)).app X, by
+      rw [← NatTrans.comp_app, ← NatTrans.mapHomotopyCategory_comp, e.hom_inv_id,
+        NatTrans.mapHomotopyCategory_id, NatTrans.id_app], by
+      rw [← NatTrans.comp_app, ← NatTrans.mapHomotopyCategory_comp, e.inv_hom_id,
+        NatTrans.mapHomotopyCategory_id, NatTrans.id_app]⟩
+  dsimp only [mapHomotopyCategoryCompHom]
+  infer_instance
+
 include e in
 /-- If `e : G₁₂ ≅ G₁ ⋙ G₂` is compatible with the comparison maps `δ`, then so is the induced
 isomorphism of functors on homotopy categories. -/
