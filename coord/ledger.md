@@ -4233,3 +4233,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 10:26 L: merged deliver/K1/lem-weil-pbc-finite-type-domain-dimension-local-ring (stage 2; reviewer PASS; first push; Sheaf.RingTheory.FiniteTypeDomainDimensionLocalRing finiteTypeDomain_ringKrullDim_localizationAtMaximal)
 - 10:26 L: merged deliver/J1/lem-weil-pbc-finite-locally-free-degree-locally-constant (stage 2; reviewer FIX; first push; Sheaf.AlgebraicGeometry.FiniteLocallyFreeDegreeLocallyConstant AlgebraicGeometry.finiteLocallyFree_fiberDimension_isLocallyConstant)
 - 10:26 L: merged deliver/C1/lem-weil-pbc-finite-type-over-g-ring (stage 2; reviewer PASS; first push; Sheaf.RingTheory.FiniteTypeGRing isGRing_of_finiteType)
+- 10:27 L: merged deliver/H1/lem-weil-pbc-flat-iso-mod-ideal-powers (stage 2; reviewer PASS; first push; Sheaf.RingTheory.BijectiveQuotientMapPowOfFlat RingHom.bijective_quotientMap_pow_of_flat)

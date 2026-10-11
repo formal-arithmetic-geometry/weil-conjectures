@@ -161,5 +161,23 @@
   "by": "L",
   "result": "pass",
   "note": "Reviewed by the lead (opus-relaunch6). No new node: the induction of the proof of 051H written out for the single element 1 in four steps (set-up with the two short exact sequences of graded pieces, alpha_n surjective from B = phi(A) + IB, alpha_n injective by flatness of B and the section built from beta_1^{-1} plus the tensor-quotient leaf, induction by the short five lemma leaf). The short five lemma node sits in unit sk-thm-properbasechange but is a Mathlib leaf (a tool); accepted. proof_origin agent (Stacks only says 'for example by 051H'). Tags verified by the worker (0AGU, 051H)."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.BijectiveQuotientMapPowOfFlat",
+  "declaration": "RingHom.bijective_quotientMap_pow_of_flat",
+  "file": "lean/Sheaf/RingTheory/BijectiveQuotientMapPowOfFlat.lean",
+  "statement": "theorem bijective_quotientMap_pow_of_flat {A : Type u} {B : Type v} [CommRing A] [CommRing B] (φ : A →+* B) (hφ : φ.Flat) (I : Ideal A) (hI : Function.Bijective (Ideal.quotientMap (I.map φ) φ Ideal.le_comap_map)) : ∀ n : ℕ, 1 ≤ n → Function.Bijective (Ideal.quotientMap ((I ^ n).map φ) φ Ideal.le_comap_map)",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-fim1027",
+  "group": "H1",
+  "result": "pass",
+  "note": "CommRing A B independent universes; phi : A ->+* B; flatness = recorded RingHom.Flat (Module.Flat A B via toAlgebra); I : Ideal A; IB, I^nB = Ideal.map phi; hyp = Bijective of Ideal.quotientMap (I.map phi) phi (A/I -> B/IB, domain checked by ascription); concl forall n, 1<=n -> Bijective of induced A/I^n -> B/I^nB; n=1 is hI, n=0 excluded; docstring carries 4 proof steps"
  }
 }
