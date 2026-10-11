@@ -4182,3 +4182,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 10:12 L: merged deliver/G1/lem-weil-pbc-finite-length-module-simple-filtration (stage 2; reviewer PASS; first push; Sheaf.RingTheory.SimpleFiltration Module.exists_simple_filtration_of_length_lt_top)
 - 10:13 L: merged deliver/M1/lem-weil-pbc-descend-qc-open-fg-subalgebra (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.DescendQCOpenFGSubalgebra AlgebraicGeometry.descend_qc_open_fg_subalgebra)
 - 10:13 L: merged deliver/G1/lem-weil-pbc-exact-free-complex-last-minors-regular-sequence (stage 2; reviewer FIX; first push; Sheaf.AlgebraicGeometry.ExactFreeComplexLastMinors exact_free_complex_last_minors_regular_sequence)
+- 10:13 L: merged deliver/E1/lem-weil-pbc-field-cohen-power-series-formally-smooth (stage 2; reviewer PASS; first push; Sheaf.RingTheory.FieldCohenPowerSeriesFormallySmooth MvPowerSeries.field_cohen_power_series_formally_smooth)

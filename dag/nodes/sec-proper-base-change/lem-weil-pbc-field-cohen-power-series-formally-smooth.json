@@ -170,5 +170,23 @@
   "summary": "Read 07NL (more-algebra.tex, lemma-power-series-ring-over-Cohen-fs) and its proof, 07EB, 07EF (lemma-compose-formally-smooth, proof omitted) and Algebra 04EG (lemma-localization-formally-etale); tags verified in tags/tags. Statement kept. As the lead_note says, the item is lem-weil-pbc-power-series-cohen-formally-smooth-adic (07NL (1),(3), split and reviewed) except that case (i) is over Z: Step 1 unpacks def-weil-pbc-formally-smooth-adic for Z -> R (Z-algebra maps = ring maps); Step 2 is case (ii) = part (2) of the split node verbatim; Step 3 makes D a Q-algebra compatibly with g by the square-zero lifting for the localization Z -> Q (lem-weil-pbc-localization-square-zero-lifting, Mathlib leaf; 04EG), checking the three localization axioms for Q; Step 4 applies part (1) of the split node over Q (this is the composition 07EF written out); Step 5 proves the extra clause h(m^{2r})=0 of the explicit form (h(m^r) in J, J^2=0). No new node. No slopmaster2 Lean (grep of node ids, 07NL, Cohen, PowerSeries+smooth: none). Blueprint search (07NL, 'power series formally smooth', 'Cohen ring', 'formally smooth adic', 'localization formally etale'): no blueprint node.",
   "blueprint": "No blueprint node is the item; its ancestor thm-weil-pbc-finite-etale-lifting (step 7, essential surjectivity via complete-local algebraization, Stacks 07NN Cohen presentation) uses it through blueprint.from.via. Steps 1-5 realize the adic formal smoothness of Z -> Lambda[[X]] needed there to lift the Cohen presentation; the blueprint proof does not spell it out."
  },
- "reviewed": "2026-10-10 L: 5 steps; case (ii) is the split node lem-weil-pbc-power-series-cohen-formally-smooth-adic (2); case (i) passes from Z to Q through the localization lifting leaf (04EG) and that node (1), the composition 07EF written out; the bound h(m^{2r}) = 0 from J^2 = 0; 0 new nodes"
+ "reviewed": "2026-10-10 L: 5 steps; case (ii) is the split node lem-weil-pbc-power-series-cohen-formally-smooth-adic (2); case (i) passes from Z to Q through the localization lifting leaf (04EG) and that node (1), the composition 07EF written out; the bound h(m^{2r}) = 0 from J^2 = 0; 0 new nodes",
+ "lean": {
+  "module": "Sheaf.RingTheory.FieldCohenPowerSeriesFormallySmooth",
+  "declaration": "MvPowerSeries.field_cohen_power_series_formally_smooth",
+  "file": "lean/Sheaf/RingTheory/FieldCohenPowerSeriesFormallySmooth.lean",
+  "statement": "theorem field_cohen_power_series_formally_smooth {Λ : Type u} [CommRing Λ] (n : ℕ) (m : Ideal (MvPowerSeries (Fin n) Λ)) (hΛ : (IsField Λ ∧ CharZero Λ ∧ m = Ideal.span (Set.range (fun i : Fin n ↦ (MvPowerSeries.X i : MvPowerSeries (Fin n) Λ)))) ∨ (∃ p : ℕ, IsCohenRing p Λ ∧ m = Ideal.span (insert (MvPowerSeries.C (p : Λ)) (Set.range (fun i : Fin n ↦ (MvPowerSeries.X i : MvPowerSeries (Fin n) Λ)))))) : Algebra.FormallySmoothAdic ℤ (MvPowerSeries (Fin n) Λ) m ∧ ∀ (D : Type v) [CommRing D] (J : Ideal D), J ^ 2 = ⊥ → ∀ (g : MvPowerSeries (Fin n) Λ →+* D ⧸ J) (r : ℕ), 1 ≤ r → (∀ x ∈ m ^ r, g x = 0) → ∃ h : MvPowerSeries (Fin n) Λ →+* D, (Ideal.Quotient.mk J).comp h = g ∧ ∀ x ∈ m ^ (2 * r), h x = 0",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-fcp1014",
+  "group": "E1",
+  "result": "pass",
+  "note": "n:ℕ/Fin n; R=MvPowerSeries (Fin n) Λ; (i) IsField Λ ∧ CharZero Λ, m=span X_i; (ii) ∃p, IsCohenRing p Λ (Nat.Prime incl.), m=span(C p, X_i); FormallySmoothAdic ℤ R m plus explicit ring-map lift over any D:Type v, J^2=⊥, g killing m^r (1≤r), h with mk∘h=g and h(m^(2r))=0; n=0 gives m=⊥ / (p); #check resolves root IsCohenRing, Algebra.FormallySmoothAdic"
+ }
 }
