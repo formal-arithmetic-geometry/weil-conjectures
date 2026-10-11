@@ -179,5 +179,23 @@
   "item": "lem-weil-pbc-sheaf-on-basis-extends",
   "worker": "stage1",
   "summary": "Decided not a Mathlib leaf. The comparison-lemma route was read in the source: Functor.sheafInducedTopologyEquivOfIsCoverDense (InducedTopology.lean:159) is IsDenseSubsite.sheafEquiv = (sheafPushforwardContinuous ..).asEquivalence.symm (DenseSubsite/Basic.lean:797), so with G = inducedFunctor of B (cover dense by TopCat.Opens.coverDense_inducedFunctor, Sites.lean:135) and A = AddCommGrpCat its functor gives F^ext and the component at U of the isomorphism inverse.obj (functor.obj F) ≅ F (inverse = restriction along G) gives iota_U, naturality giving compatibility: one declaration per clause there. But the hypothesis is not yet Presheaf.IsSheaf (G.inducedTopology _) F: it needs isSheaf_iff_isSheaf_forget (Sheaf.lean:730), isSheaf_iff_isSheaf_of_type, mem_inducedTopology_iff_of_isCoverDense with Opens.mem_grothendieckTopology (a sieve S on U in B covers iff its members cover U), and then an argument that a compatible family for S is a family agreeing on pairwise intersections (V ∩ V' in B and in S) and conversely, for which there is no single declaration (isSheafFor_arrows_iff_pullbacks needs HasPairwisePullbacks in the category of members of B, which no instance gives; Precoverage.toGrothendieck_comap_eq_restrictedTopology needs a precoverage presentation of the topology of X). So, as instructed, the item is split along Stacks 009N/009Q: (1) stalks on B (new def-weil-pbc-basis-presheaf-stalk, Mathlib leaf: a colimit in AddCommGrpCat) and Lemma 009M (new lem-weil-pbc-basis-sheaf-sections-germs, unsplit); (2) F^ext(W) = families of germs satisfying (*), a local predicate, hence a sheaf by Stacks 007Y = TopCat.subpresheafToTypes.isSheaf (new lem-weil-pbc-local-predicate-sections-sheaf, Mathlib leaf); (3) F^ext(W) is a subgroup of the product of stalks (Stacks 009Q, details written out); (4) iota_U = inverse of s ↦ (s_x), bijective by 009M, compatible with restrictions. The comparison-lemma route stays recorded in mathlib_searches as a generalization candidate. Statement unchanged; lean_audit none on both branches; the source repository has no extension-from-basis declaration (inducedTopology occurs only in hasSheafify_inducedTopology_equivSmallModel and the small-model sheafification instances, all sorry-free and unrelated)."
+ },
+ "lean": {
+  "module": "Sheaf.Topology.SheafOnBasisExtends",
+  "declaration": "TopologicalSpace.Opens.exists_sheaf_extension_of_basis_gluing",
+  "file": "lean/Sheaf/Topology/SheafOnBasisExtends.lean",
+  "statement": "theorem exists_sheaf_extension_of_basis_gluing (X : TopCat.{u}) (B : Set (Opens X)) (hB : IsBasis B) (hcap : ∀ U V : B, U.val ⊓ V.val ∈ B) (F : Bᵒᵖ ⥤ AddCommGrpCat.{max u v}) (hglue : ∀ (U : B) (I : Type (max u v w)) (V : I → {W : B // W ≤ U}), (⨆ i, (V i).val.val) = U.val → ∀ s : ∀ i, F.obj (op (V i).val), (∀ i j, (F.map (homOfLE (show (⟨(V i).val.val ⊓ (V j).val.val, hcap (V i).val (V j).val⟩ : B) ≤ (V i).val from inf_le_left (a := (V i).val.val) (b := (V j).val.val))).op).hom (s i) = (F.map (homOfLE (show (⟨(V i).val.val ⊓ (V j).val.val, hcap (V i).val (V j).val⟩ : B) ≤ (V j).val from inf_le_right (a := (V i).val.val) (b := (V j).val.val))).op).hom (s j)) → ∃! t : F.obj (op U), ∀ i, (F.map (homOfLE (V i).property).op).hom t = s i) : ∃ Fext : TopCat.Sheaf AddCommGrpCat.{max u v} X, ∃ iota : ∀ U : B, Fext.presheaf.obj (op U.val) ≅ F.obj (op U), ∀ (U V : B) (hVU : V ≤ U) (t : Fext.presheaf.obj (op U.val)), (iota V).hom.hom ((Fext.presheaf.map (homOfLE (show V.val ≤ U.val from hVU)).op).hom t) = (F.map (homOfLE hVU).op).hom ((iota U).hom.hom t)",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "E1",
+  "result": "pass",
+  "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
  }
 }

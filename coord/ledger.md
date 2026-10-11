@@ -4899,3 +4899,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 14:18 L: merged deliver/E1/lem-weil-pbc-scheme-clopen-idempotent (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.SchemeClopenIdempotent AlgebraicGeometry.scheme_clopen_idempotent)
 - 14:18 L: merged deliver/E1/lem-weil-pbc-sets-etale-inverse-image-constant-base-change (stage 2; reviewer PASS; first push; Sheaf.Paper.SetsEtaleInverseImageConstantBaseChange AlgebraicGeometry.baseChange_sigmaScheme_iso)
 - 14:18 L: merged deliver/E1/lem-weil-pbc-sheaf-hom-finite-presentation-colimit (stage 2; reviewer PASS; first push; Sheaf.Algebra.Category.ModuleCat.Sheaf.FinitePresentationHomColimit SheafOfModules.hom_finitePresentation_colimit)
+- 14:18 L: merged deliver/E1/lem-weil-pbc-sheaf-on-basis-extends (stage 2; reviewer PASS; first push; Sheaf.Topology.SheafOnBasisExtends TopologicalSpace.Opens.exists_sheaf_extension_of_basis_gluing)
