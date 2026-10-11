@@ -1,46 +1,92 @@
-Files written:
+## Worker report
 
-- `lem-pc-sites-modules-sheafification-flat.json` (repaired split; two new statement-only nodes; no Mathlib leaves).
-- `lem-pc-sites-module-sheafification-interface.json` (statement-only Stacks site-level presheaf-ring interface; Mathlib generalization only).
-- `lem-pc-sites-module-sheafification-tensor.json` (statement-only Stacks Tag 0GMW tensor/sheafification comparison; Mathlib generalization only).
-- `citations.json` (verbatim quotes for every proof dependency used by every step).
+The module states `PresheafOfModules.isFlat_sheafification_obj`, with only `sorry` as its
+proof. No definitions or additional nodes are needed. The source was opened at
+https://stacks.math.columbia.edu/tag/03ET (local Stacks sources are absent on this machine).
+The node's commutative-ring version and its finite-limit formulation agree with that lemma.
 
-Attachments: none. The abstract monoidal declaration `CategoryTheory.GrothendieckTopology.flat_presheafToSheaf_obj` remains non-applicable to the ringed-site statement.
+Hypotheses and clauses:
+- The site is `{C : Type u} [Category.{u} C] {J : GrothendieckTopology C}`.
+- The presheaf of commutative rings is `O : Cᵒᵖ ⥤ CommRingCat.{u}`. The category of its
+  modules uses the underlying ring presheaf `O ⋙ forget₂ CommRingCat RingCat`.
+- The associated ring sheaf is represented by `R : Sheaf J CommRingCat.{u}` and a map
+  `α` to its underlying ring presheaf, with `Presheaf.IsLocallyInjective J α` and
+  `Presheaf.IsLocallySurjective J α`. As the full Mathlib sheafification docstring explains,
+  a locally bijective map to a sheaf identifies that sheaf with the associated sheaf.
+  Thus these binders specify the associated sheaf, rather than assuming any extra
+  property of O. Any choice of its associated sheaf is allowed.
+- The presheaf of modules is `F : PresheafOfModules.{u} (O ⋙ forget₂ CommRingCat RingCat)`.
+- Tensoring on the right with F preserves finite limits: `hF : PreservesFiniteLimits
+  (tensorRight F)`. The monoidal structure here is Mathlib's sectionwise tensor product.
+- The associated module sheaf with induced R-action is `(sheafification α).obj F`.
+  Mathlib's definition uses sheafification of the underlying abelian presheaf and the
+  induced scalar action, not sectionwise tensor extension alone.
+- The first conjunct is `PreservesFiniteLimits (tensorRight ((sheafification α).obj F))`,
+  with `SheafOfModules.monoidalCategory R` installed explicitly.
+- The equivalent flatness conclusion is the second conjunct `SheafOfModules.IsFlat
+  ((sheafification α).obj F)`, exactly the dependency's definition. Including both gives
+  the two descriptions in the node without introducing a new notion of flatness.
 
-WANTED: none.
+Dependency used: `Sheaf.Algebra.Category.ModuleCat.Sheaf.Flat`, `SheafOfModules.IsFlat`;
+its full definition is exactFunctor of tensorRight for `SheafOfModules.monoidalCategory R`.
+That module imports the recorded sheaf tensor module
+`Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProduct`. Other existing APIs used are
+`PresheafOfModules.sheafification` (Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification)
+and `PresheafOfModules.monoidalCategory` (Mathlib.Algebra.Category.ModuleCat.Presheaf.Monoidal).
+Their full signatures and docstrings were read. The site's weak abelian sheafification and
+WEqualsLocallyBijective instances are the infrastructure required by the recorded flatness
+and tensor definitions, with no algebraic hypothesis imposed on O or F. All universes and
+variables are explicit. The common universe can be chosen large enough for the site, its
+morphisms, rings, and modules; no finite, countable, or nonempty restriction is imposed.
 
-The item follows Stacks Project `sites-modules.tex`, Lemma 18.28.3 (Tag 03ET). The returned version incorrectly used a topological-space module interface, applied the sheaf-of-rings exactness node to a presheaf ring, treated the tensor comparison as elementary, and asserted that the presheaf ring was already a sheaf. I repaired each point by adding the arbitrary-site interface node, citing underlying abelian sheaf exactness, adding Tag 0GMW as a node, and removing the false sentence.
+Edge cases: zero module, zero ring, empty category/site, and the empty finite limit diagram
+are all included. No nonzero-ring hypothesis, sectionwise-flatness hypothesis, or point/stalk
+hypothesis is imposed. The hypothesis concerns the entire presheaf tensor functor, and the
+conclusion the sheaf tensor functor, rather than the presheaf of sections of its output.
 
-## Not duplicates
+Searches:
+- msearch leansearch `Sheafification preserves flatness of presheaves of modules`: unavailable,
+  Internal Server Error; recorded as unavailable, without a no-match verdict.
+- msearch leanfinder `sheafification of a flat presheaf of modules preserves finite limits`:
+  eight hits, including module sheafification preserving finite limits, but no flatness
+  preservation theorem for the tensor functor.
+- msearch loogle `PresheafOfModules.sheafification, SheafOfModules.IsFlat`: zero hits;
+  unknown identifier SheafOfModules.IsFlat (the project-local definition is not indexed).
+- msearch grep `flat.*sheafification|sheafification.*flat`: zero hits.
+- rg in WeilConjectures and lean/Sheaf for the item id and
+  `sheafification.*flat|flat.*sheafification`: the upstream
+  CategoryTheory.GrothendieckTopology.flat_presheafToSheaf_obj in FlatResolution.lean is
+  for a fixed coefficient category and objectwise flatness; its full signature was read,
+  and it does not state the varying-ring module theorem. No project-local duplicate.
+- rg of Mathlib, WeilConjectures and lean/Sheaf for `isFlat_sheafification_obj`: no hits.
+  The upstream node-name index contains no such declaration either.
 
-- `lem-pc-sites-module-sheafification-interface` vs `lem-pc-presheaf-module-sheafification-ring`: the existing node is only for opens of a topological space, while the new node is for an arbitrary site and states the restriction-of-scalars adjunction for a presheaf ring.
-- `lem-pc-sites-module-sheafification-tensor` vs `def-pur-sheaf-tensor-product`: the definition gives the tensor construction for a sheaf of rings; the new node compares that tensor over the sheafified presheaf ring with sheafification of the presheaf-ring tensor.
-- `lem-pc-sites-module-sheafification-tensor` vs `lem-pc-presheaf-module-sheafification-ring`: the latter gives the module-sheafification interface, while Tag 0GMW gives the tensor comparison.
-- `lem-pc-sites-module-sheafification-interface` vs `lem-weil-pbc-module-presheaf-sheafification-exact`: the existing node is for presheaves on the open subsets of a scheme with its fixed sheaf $\mathcal O_X$; the new node is for an arbitrary site and a genuinely presheaf ring $\mathcal O$.
-- `lem-pc-sites-module-sheafification-interface` vs `lem-weil-pbc-sheaf-tensor-closed`: the existing node assumes a sheaf of rings and states monoidal closedness; the new node constructs the $\mathcal O^#$-module structure and restriction-of-scalars adjunction from a presheaf ring.
-- `lem-pc-sites-module-sheafification-interface` vs `lem-weil-pbc-site-r-module-presheaf-sheafification-exact`: the existing node is for a constant ring $R$ and ordinary $R$-module presheaves; the new node handles a variable presheaf of rings and semilinear module sheafification.
-- `lem-pc-sites-module-sheafification-interface` vs `lem-pc-sheaf-modules-tensor-closed`: the existing node starts with a sheaf of rings and only gives tensor closedness; the new node gives the presheaf-ring-to-sheaf-ring module interface.
-- `lem-pc-sites-module-sheafification-interface` vs `def-pur-sheaf-tensor-product`: the existing definition assumes $\mathcal O$ is a sheaf; the new statement applies when $\mathcal O$ is only a presheaf and identifies the induced $\mathcal O^#$-module category.
-- `lem-pc-sites-module-sheafification-interface` vs `def-pur-presheaf-tensor-product`: the existing definition only defines sectionwise tensor; the new statement gives the sheafified module adjunction.
-- `lem-pc-sites-module-sheafification-tensor` vs `lem-weil-pbc-free-sheaf-flat`: the existing item concerns flatness of a specific free sheaf and does not state the Tag 0GMW comparison for an arbitrary presheaf ring and arbitrary module.
-- `lem-pc-sites-module-sheafification-tensor` vs `lem-weil-pbc-sheaf-tensor-closed`: the existing node assumes a sheaf of rings and its presheaf tensor is in a fixed coefficient category; the new node compares tensor over $\mathcal O^#$ with tensor over a presheaf $\mathcal O$.
-
-## Review by F1
-
-I reread the item source, Stacks Tag 03ET, and the cited tensor/sheafification source, Tag 0GMW (Lemma 18.26.2). I also read the statements of every existing node used by the repaired steps: `lem-weil-pbc-site-module-presheaf-sheafification-exact` supplies exactness of ordinary abelian module sheafification on an arbitrary site; `lem-weil-pbc-sheafification-exact` supplies finite-limit preservation by the sheaf inclusion and finite-colimit preservation by sheafification; `def-pur-sheaf-tensor-product` supplies the sheafified tensor construction; and `def-pc-flat-sheaf-modules` supplies the flatness criterion.
-
-Step 1 now uses the new arbitrary-site presheaf-ring adjunction node for the actual scalar interface, then applies the two underlying abelian-sheaf finite-limit statements. The hypotheses match: $\mathcal O$ is only a presheaf, while $\mathcal O^#$ is the sheaf of rings used for the target module category. Step 2 cites the new Tag 0GMW node verbatim for the natural isomorphism $\mathcal G\otimes_{\mathcal O^#}\mathcal F^#\cong(\iota\mathcal G\otimes_{p,\mathcal O}\mathcal F)^#$, and the tensor definition identifies the right side with the composite from Step 1; this step is no longer marked elementary. Step 3 removes the incorrect claim that $\mathcal O$ is already a sheaf. It uses finite-colimit preservation of sheafification together with sectionwise right exactness of module tensor, then states the standard additive right-exact equivalence between finite-limit preservation and exactness before applying the flatness definition.
-
-For both new nodes I searched the whole DAG and blueprint for the site-level interface and Tag 0GMW statement before creating them. I ran the required `leansearch`, `loogle`, `leanfinder`, and Mathlib `grep` searches; the two LeanSearch services were unavailable, and the records in `searches.jsonl` and the node `mathlib_searches` fields preserve that result. I checked the one-object identity-cover site, the zero module, and the unit module: sheafification is identity there and all comparisons reduce to the ordinary module tensor identities.
+Server compile: clean, 1.5 seconds, exit 0. There are no statement corrections, dependency
+faults, or disputed statements. The docstring carries all three proof steps and their nodes.
 
 ## Second reading by F1
 
-The four returned points are repaired as follows: (1) the new interface node is arbitrary-site and presheaf-ring; (2) Step 1 uses the underlying abelian sheaf exactness and sheaf inclusion finite-limit nodes, not the sheaf-of-rings exactness node; (3) the new Tag 0GMW tensor node is cited by Step 2; (4) the false “$\mathcal O$ is already a sheaf” sentence is gone and Step 3 explicitly records the right-exact additive equivalence. The item, both new node statements, all step uses, and every citation quote were reread after these edits.
+I read the node statement, the Lean file, the dependency declaration, and Stacks Tag 03ET.
+The site is rendered by `{C : Type u} [Category.{u} C] {J : GrothendieckTopology C}`;
+the technical typeclass assumptions on additive-group sheafification are explicit in the Lean
+context and are required by the imported Mathlib sheafification and module-sheaf APIs. The
+presheaf ring is `O : Cᵒᵖ ⥤ CommRingCat`, the associated ring sheaf is `R : Sheaf J
+CommRingCat`, and `α` is the map from the underlying presheaf of `O` to the underlying
+presheaf of `R`; its locally injective and locally surjective instances render the associated
+sheaf identification. The presheaf module is `F : PresheafOfModules (O ⋙ forget₂
+CommRingCat RingCat)`, and `hF : PreservesFiniteLimits (tensorRight F)` renders the flatness
+hypothesis. The conclusion is the conjunction whose first clause is finite-limit preservation
+by `tensorRight ((sheafification α).obj F)` under `SheafOfModules.monoidalCategory R`, and
+whose second clause is exactly `SheafOfModules.IsFlat ((sheafification α).obj F)`. Quantifier
+order and both conclusion clauses match the node's intended statement; no mismatch was found
+and no code change was necessary.
 
-Step 1: checked against Stacks Tags 03CX/03CN/03CO and the cited ringed-site exactness statement; verdict: corrected the variable-presheaf-of-rings citation.
-Step 2: checked against Tag 0GMW and the sectionwise tensor definition; verdict: the natural comparison has the required hypotheses and is non-elementary.
-Step 3: checked against Tag 03ER and the flatness definition; verdict: conclusion is valid, but the right-exactness/finite-limits equivalence is theorem-level, so the step is marked non-elementary.
-Node `lem-pc-sites-module-sheafification-interface`: checked against Section 03EK and all definition dependencies; verdict: self-contained arbitrary-site presheaf-ring interface.
-Node `lem-pc-sites-module-sheafification-tensor`: checked against Tag 0GMW and the presheaf/sheaf tensor definitions; verdict: exact comparison statement, no Mathlib exact match.
-
-Changes in this second reading: replaced the incorrect constant-ring exactness dependency with `lem-weil-pbc-ringed-site-module-sheafification-exact` and its exact quotation; changed Step 3's `elementary` flag to false because its categorical exactness criterion is not a two-line definition check; recorded these checks explicitly here.
+The edge cases remain included: zero modules and zero rings, empty sites or categories, and
+the empty finite-limit diagram. No nonzero, finiteness, characteristic, point, or stalk
+hypothesis is introduced, and the universe is shared explicitly without a smallness restriction.
+The source search at Stacks Tag 03ET confirms the lemma's hypotheses and conclusion. LeanSearch,
+LeanFinder/Loogle, grep of Mathlib, grep of the upstream `WeilConjectures` tree, and grep of
+`lean/Sheaf` found no existing declaration for this varying-ring sheafification-flatness
+statement; the only related upstream result concerns fixed-coefficient objectwise flatness.
+The dependency `SheafOfModules.IsFlat` was read in full and is used directly, rather than
+redefined. Compilation with `scompile.py` completed successfully with no warnings.

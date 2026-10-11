@@ -123,5 +123,23 @@
   "group": "F1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-smf2740 (reviewer sub-agent of L); spot-checked: Return 21:12 points 1-4 checked. New interface node true, not a duplicate (no site-level presheaf-ring 03CY node in DAG; lem-pc-presheaf-module-sheafification-ring is opens-only), Mathlib only a generalization (PresheafOfModules.sheafificationAdjunction needs locally bijective alpha). Tensor node = Tag 0GMW specialised to a sheaf G, true, not a duplicate of lem-weil-pbc-sheaf-tensor-closed. Hypothesis 'T_F preserves finite limits in PMod(O)' used exactly in Step 1 (E ok). FIX more, RETURN less: (1) C4 Step 1 uses still listed lem-weil-pbc-ringed-site-module-sheafification-exact (sheaf of rings, the point-2 fault) while its text named a constant-ring node; rewrote Step 1 through underlying abelian (pre)sheaves citing lem-weil-pbc-module-sheaves-colimits-forgetful (generic tool: limits in Mod(O) sectionwise, forget commutes) and lem-weil-pbc-sheafification-exact; (2) C4 interface node did not state that the underlying abelian sheaf of a is the abelian sheafification, which Step 1 uses: restated it as Stacks Lemma 18.11.1 (Tag 03CY) with source corrected from Section 03EK; recorded my Mathlib grep; (3) C1 Step 3 cited sheafification finite-colimits for right exactness; now cites the left adjoint of lem-pc-sheaf-modules-tensor-closed; uses/proof_deps corrected, def-weil-presheaf-modules-sheafification (sheaf-ring) dropped.; 2 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Category.ModuleCat.Presheaf.SheafificationFlat",
+  "declaration": "PresheafOfModules.isFlat_sheafification_obj",
+  "file": "lean/Sheaf/Algebra/Category/ModuleCat/Presheaf/SheafificationFlat.lean",
+  "statement": "theorem isFlat_sheafification_obj (α : (O ⋙ forget₂ CommRingCat.{u} RingCat.{u}) ⟶ ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj R).obj) [Presheaf.IsLocallyInjective J α] [Presheaf.IsLocallySurjective J α] (F : PresheafOfModules.{u} (O ⋙ forget₂ CommRingCat.{u} RingCat.{u})) (hF : PreservesFiniteLimits (tensorRight F)) : (letI := SheafOfModules.monoidalCategory R PreservesFiniteLimits (tensorRight ((sheafification α).obj F))) ∧ SheafOfModules.IsFlat ((sheafification α).obj F)",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-ssf1106",
+  "group": "F1",
+  "result": "pass",
+  "note": "C:Type u/Category.{u} site with E1's two sheafify instances; O: Cop=>CommRingCat presheaf; O#,F# as Mathlib sheafification alpha with alpha locally injective+surjective onto sheaf R (any associated sheaf); hF = PreservesFiniteLimits (tensorRight F) in PresheafOfModules.monoidalCategory = node's flat-presheaf hypothesis; conclusion: finite-limit preservation of tensorRight F# under SheafOfModules.monoidalCategory R AND landed SheafOfModules.IsFlat (both clauses of the node); no new definitions; existing false correct: source flat_presheafToSheaf_obj is fixed monoidal coefficient category A with objectwise ObjectProperty.flat, not the varying-ring module statement; docstring blueprint + 3 proof steps match node proof"
  }
 }
