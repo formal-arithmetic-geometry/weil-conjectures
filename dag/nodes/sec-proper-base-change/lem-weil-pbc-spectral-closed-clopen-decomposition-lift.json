@@ -148,5 +148,23 @@
   "item": "lem-weil-pbc-spectral-closed-clopen-decomposition-lift",
   "worker": "stage1",
   "summary": "Checked the statement against Stacks 0CAM (etale-cohomology.tex line 15071; tag verified in tags/tags as 0CAM,etale-cohomology-lemma-connected-topological): it agrees; statement and stmt_deps kept. Wrote the proof in five steps following the Stacks proof, spelling out the terse parts: Z_i closed hence quasi-compact; W_i (points specializing to Z_i) is an intersection of quasi-compact opens by Topology 0A31 (3)=>(4) (tag verified: 0A31,topology-lemma-make-spectral-space), and quasi-compact opens of a quasi-separated space are constructible, so W_i is closed in the constructible topology; X = W_1 disjoint union W_2 from the connectedness hypothesis; W_i closed via Topology 0903 (1) (tag verified: 0903,topology-lemma-constructible-stable-specialization-closed), where the Stacks phrase 'thus closure{x} in closure{x_1} and we see x in W_1' is written out (it needs a point of Z in closure{x} and x_1 not in W_2); Z cap W_i = Z_i. Created two unsplit nodes for the cited topology lemmas: lem-weil-pbc-spectral-generalizations-of-quasi-compact (0A31 (3)=>(4) with quasi-compactness of W) and lem-weil-pbc-spectral-proconstructible-closure-specialization (0903 (1), stated for intersections of constructible sets so as not to need a node for the constructible topology; its proof will use lem-weil-pbc-spectral-constructible-finite-intersection). Mathlib (Topology/Spectral/*, Topology/Constructible.lean, Topology/Inseparable.lean) has neither; no Lean in the source repository."
+ },
+ "lean": {
+  "module": "Sheaf.Topology.SpectralClosedClopenDecompositionLift",
+  "declaration": "TopCat.spectral_closed_clopen_decomposition_lift",
+  "statement": "theorem spectral_closed_clopen_decomposition_lift (X : TopCat.{u}) [SpectralSpace X] (Z : Set X) (hZ : IsClosed Z) (hconn : ∀ x : X, ConnectedSpace (↥(Z ∩ closure ({x} : Set X)))) (Z₁ Z₂ : Set (↥Z)) (hZ₁ : IsClosed Z₁) (hZ₂ : IsClosed Z₂) (hpart : Z₁ ∪ Z₂ = Set.univ) (hdisj : Disjoint Z₁ Z₂) : ∃ X₁ X₂ : Set X, IsClosed X₁ ∧ IsClosed X₂ ∧ Disjoint X₁ X₂ ∧ X₁ ∪ X₂ = Set.univ ∧ (Subtype.val '' Z₁) = Z ∩ X₁ ∧ (Subtype.val '' Z₂) = Z ∩ X₂",
+  "by": "H1",
+  "date": "2026-10-11",
+  "existing": false,
+  "file": "lean/Sheaf/Topology/SpectralClosedClopenDecompositionLift.lean",
+  "branch": "sheaf-dag"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "H1",
+  "result": "pass",
+  "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
  }
 }

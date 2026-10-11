@@ -4993,3 +4993,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 14:37 L: merged deliver/J1/lem-weil-pbc-matching-object-coskeleton (stage 2; reviewer PASS; first push; Sheaf.CategoryTheory.MatchingObjectCoskeleton CategoryTheory.matching_object_coskeleton)
 - 14:38 L: merged deliver/G1/lem-pc-noetherian-approximation-data (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.NoetherianApproximationData AlgebraicGeometry.noetherian_approximation_data)
 - 14:38 L: merged deliver/G1/lem-weil-pbc-sets-finite-surjective-descent (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.FiniteSurjectiveSetDescent AlgebraicGeometry.finiteSurjectiveSetDescent)
+- 14:38 L: merged deliver/H1/lem-weil-pbc-spectral-closed-clopen-decomposition-lift (stage 2; reviewer PASS; first push; Sheaf.Topology.SpectralClosedClopenDecompositionLift TopCat.spectral_closed_clopen_decomposition_lift)
