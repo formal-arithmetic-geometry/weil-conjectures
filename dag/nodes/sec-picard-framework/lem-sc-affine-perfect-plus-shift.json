@@ -121,5 +121,23 @@
   "group": "H1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-aps2758 (reviewer sub-agent of L); spot-checked: Item statement vs Stacks 08EI; Step 1 vs new node (08ED statement, r sign immaterial); Step 2 hypotheses of lem-sc-affine-perfect-map-lift; Step 3 cone computation. FIX more, RETURN less: (1) C1 Step 3: perfectness of Cone(gamma) was marked elementary; now cites lem-pc-perfect-two-out-of-three (added to uses/proof_deps, elementary false). (2) C4 Step 2: map-lift needs E' in D_QCoh(O_X); added the elementary reason that a perfect object has quasi-coherent cohomology (locally strictly perfect). Also spelled out C|_U = Cone(gamma|_U) = Cone(id)+Cone(0). New node lem-sc-affine-perfect-plus-locally-free: not a duplicate, not Mathlib, not elementary.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AffinePerfectPlusShift",
+  "declaration": "AlgebraicGeometry.exists_perfect_restrict_iso_directSum_shift",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffinePerfectPlusShift.lean",
+  "statement": "theorem exists_perfect_restrict_iso_directSum_shift (X : Scheme.{u}) [IsAffine X] (U : X.Opens) (hU : IsCompact (U : Set X)) [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))] [∀ V : X.Opens, HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over V))] [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace))] [∀ V : U.toScheme.Opens, HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings U.toScheme.toRingedSpace).over V))] (F : schemeDerivedCategory U.toScheme) (hF : Scheme.IsPerfect U.toScheme F) : ∃ E : schemeDerivedCategory X, Scheme.IsPerfect X E ∧ Nonempty (((SheafOfModules.overFunctor.{u} (moduleRings X.toRingedSpace) U) ⋙ Equivalence.functor (C := SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U)) (D := SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace)) (Scheme.Modules.overEquiv U)).mapDerivedCategory.obj E ≅ F ⊞ F⟦(1 : ℤ)⟧)",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-aps1517",
+  "group": "F1",
+  "result": "pass",
+  "note": "X affine [IsAffine], U qc open (IsCompact), F perfect on U (Scheme.IsPerfect U.toScheme), ∃ perfect E on X with restriction via overFunctor⋙overEquiv (same form as landed E1 sibling, QcOpenDerivedLift, AffinePseudoCoherentLift) ≅ F ⊞ F⟦1⟧; HasDerivedCategory binders exactly those IsPerfect needs; no let, no extra universe, node diff only adds lean record"
  }
 }
