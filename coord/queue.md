@@ -1,11 +1,11 @@
 # Work queue
 
-5 items; claim with `tools/claim.py next <group> [--stage N]`.
+4 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (5)
+## Stage 2: nodes to state (4)
 
 | node | distance to Mathlib | kind | blockers |
 |---|---|---|---|
@@ -13,7 +13,6 @@
 | `lem-sc-boundary-cech-injective-middle` | 1 | state | 1 |
 | `lem-sc-hilb-dominating-power` | 1 | state | 0 |
 | `lem-sc-qcoh-complex-alternating-cech-derived-sections` | 1 | state | 0 |
-| `lem-weil-pbc-etale-mayer-vietoris-pullback` | 1 | state | 0 |
 
 Not open yet: 40 nodes that wait for stage 1, 6 nodes that wait for a statement dependency.
 
