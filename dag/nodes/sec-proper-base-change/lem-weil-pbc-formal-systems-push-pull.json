@@ -304,5 +304,23 @@
   "by": "L",
   "result": "pass",
   "note": "Reviewed by the lead (opus-relaunch6). Eleven steps along Stacks 088B: setting, f_*F coherent (tool use lem-pc-coherent-hi, 02O5), the maps gamma_n and kappa_n, the claim on affine Y via the theorem on formal functions (new unsplit node for the general 02OC; the 087U node created by the fully-faithful item is its complete-base form and should cite it) and 087W, globalization and reduction of the annihilation to affine Y (new unsplit node for Remark 0888 with a condition (4) for the kernel and cokernel objects of Coh(Y,J), the bridge the item needs), base change to the completion (00MB, 05GG, 0316, 0887 nodes), phi unchanged by flat base change (tool use lem-pc-flat-base-change-cohom, 02KH), algebraization in the complete case via 0883 (fully-faithful node), alpha' the completion of the adjunction map, the adjunction map an isomorphism over V' so its kernel and cokernel are killed by a power of K' (new unsplit node for 01Y9), conclusion via Remark 0888 (1)=>(2). Two tool uses recorded by L. Tags verified by the worker (088B, 0888, 02O5, 02OB, 02OC, 087U, 087W, 087X, 0883, 01Y9, 00L6, 02KH, 00MB, 05EC, 0887)."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FormalSystemsPushPull",
+  "declaration": "AlgebraicGeometry.exists_formalSystemsPushPull",
+  "file": "lean/Sheaf/AlgebraicGeometry/FormalSystemsPushPull.lean",
+  "statement": "theorem exists_formalSystemsPushPull {X Y : Scheme.{u}} [IsNoetherian Y] (J K : Y.IdealSheafData) (f : X ⟶ Y) [IsProper f] (_hV : IsIso (pullback.snd f (Scheme.Opens.ι K.support.compl))) (G : CoherentFormalModule Y J) (F : CoherentModules X) (_β : G.obj ⋙ Scheme.Modules.tensorPullback f ≅ formalCompletionSystem (J.comap f) F.obj) : ∃ h : RingedSpace.IsCoherent Y.toRingedSpace ((Scheme.Modules.pushforward f).obj F.obj), ∃ α : G ⟶ (completion Y J).obj ⟨(Scheme.Modules.pushforward f).obj F.obj, h⟩, ∃ (t : ℕ) (k : KernelFork α) (c : CokernelCofork α), 1 ≤ t ∧ Nonempty (IsLimit k) ∧ Nonempty (IsColimit c) ∧ (∀ n : ℕ, IsZero (Scheme.idealModuleProduct (Scheme.idealSheafPower K.toModulesι t).2 (k.pt.obj.obj (op n)))) ∧ (∀ n : ℕ, IsZero (Scheme.idealModuleProduct (Scheme.idealSheafPower K.toModulesι t).2 (c.pt.obj.obj (op n))))",
+  "branch": "sheaf-dag",
+  "by": "Q1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-fpp",
+  "group": "Q1",
+  "result": "pass",
+  "note": "Y Noetherian, J K IdealSheafData, f proper, iso over V = K.support.compl via pullback.snd, I = J.comap f, G in Coh(Y,J), F coherent, beta ambient iso to formalCompletionSystem; f_*F coherent, alpha to completion of Scheme.Modules.pushforward, t>=1, kernel/cokernel via universal fork/cofork in Coh(Y,J), all terms killed by idealSheafPower K t (STATE IDEAL-POWER ANNIHILATION)"
  }
 }
