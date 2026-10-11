@@ -225,5 +225,23 @@
   "by": "L",
   "result": "accepted",
   "note": "6 steps following the third paragraph of the proof of 04F3: the dictionary Mor(Y, Spec B) = Hom(B, Gamma(Y)) (01I1 leaf of sk-thm-reduction, a tool) with its two compatibilities (new leaf for the global sections of Spec psi: GammaSpecIso_naturality, Scheme.lean:609 verified by L); Z in Z' a first order thickening (closed immersion by the affine-cover criterion leaf, ideal sheaf K with square zero); the universal property for affine T' is the ring-level one; restriction of the lifting problem to opens (thickening-open-restriction leaf); gluing over an affine cover (gluing leaf) with the compatibilities and uniqueness written out. Statement: definition citations added (B3)."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.UniversalThickeningAffineCase",
+  "declaration": "AlgebraicGeometry.isUniversalFirstOrderThickening_spec",
+  "file": "lean/Sheaf/AlgebraicGeometry/UniversalThickeningAffineCase.lean",
+  "statement": "theorem isUniversalFirstOrderThickening_spec (R S S' : Type u) [CommRing R] [CommRing S] [CommRing S'] (φ : R →+* S) [Algebra R S] [Algebra R S'] (π : S' →ₐ[R] S) (hφ : algebraMap R S = φ) (hπ : Function.Surjective π) (hK : RingHom.ker π.toRingHom ^ 2 = ⊥) (hUniversal : ∀ (A : Type u) [CommRing A] [Algebra R A] (I : Ideal A), I ^ 2 = ⊥ → ∀ a : S →ₐ[R] A ⧸ I, ∃! a' : S' →ₐ[R] A, (Ideal.Quotient.mkₐ R I).comp a' = a.comp π) : IsUniversalFirstOrderThickening (Spec.map (CommRingCat.ofHom φ)) (Spec.map (CommRingCat.ofHom π.toRingHom)) (Spec.map (CommRingCat.ofHom (algebraMap R S')))",
+  "branch": "sheaf-dag",
+  "by": "V1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "V1",
+  "result": "pass",
+  "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
  }
 }

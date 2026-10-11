@@ -5104,3 +5104,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 14:59 L: merged deliver/U1/lem-weil-pbc-two-term-complex-kernel-base-change (stage 2; reviewer PASS; first push; Sheaf.RingTheory.TwoTermKernelBaseChange LinearMap.exists_twoTermKernelBaseChange_equiv)
 - 14:59 L: merged deliver/M1/lem-weil-pbc-zariski-pair-flat-integral-isomorphism (stage 2; reviewer PASS; first push; Sheaf.RingTheory.ZariskiPairFlatIntegralIsomorphism RingHom.zariskiPair_flat_integral_finitePresentation_isIso)
 - 14:59 L: merged deliver/V1/lem-weil-pbc-two-term-homotopy-equivalence-direct-sum (stage 2; reviewer PASS; first push; Sheaf.Algebra.TwoTermHomotopyEquivalenceDirectSum Module.prod_linearEquiv_of_twoTermHomotopy)
+- 14:59 L: merged deliver/V1/lem-weil-pbc-universal-thickening-affine-case (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.UniversalThickeningAffineCase AlgebraicGeometry.isUniversalFirstOrderThickening_spec)
