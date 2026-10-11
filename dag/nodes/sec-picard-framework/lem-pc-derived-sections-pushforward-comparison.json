@@ -14,7 +14,7 @@
  },
  "kind": "statement",
  "title": "Derived global sections of a derived direct image",
- "statement": "Let $f:X\\to Y$ be a morphism of schemes [def-pc-scheme] and $E\\in D(\\mathcal O_X)$ [def-pc-derived-category]. For every open subscheme $U\\subseteq Y$, with $f_U:f^{-1}U\\to U$, there is a natural isomorphism $R\\Gamma(U,R(f_U)_*(E|_{f^{-1}U}))\\cong R\\Gamma(f^{-1}U,E|_{f^{-1}U})$ of complexes of abelian groups; $R(f_U)_*$ is the derived direct image [def-pc-derived-direct-image] and $R\\Gamma$ is the derived global-sections functor [def-sc-sheaf-cohomology-functor].",
+ "statement": "Let $f:X\\to Y$ be a morphism of schemes [def-pc-scheme] and $E\\in D(\\mathcal O_X)$ [def-pc-derived-category]. For every open subscheme $U\\subseteq Y$, with $f_U:f^{-1}U\\to U$ and exact restriction $E|_{f^{-1}U}$ [def-pc-derived-open-restriction-maps], there is a natural isomorphism $R\\Gamma(U,R(f_U)_*(E|_{f^{-1}U}))\\cong R\\Gamma(f^{-1}U,E|_{f^{-1}U})$ in the unbounded derived category of abelian groups; $R(f_U)_*$ is the derived direct image [def-pc-derived-direct-image] and $R\\Gamma$ is the derived global-sections functor [def-pc-open-module-derived-sections].",
  "source": {
   "document": "literature/stacks-project/perfect.tex",
   "place": "Tag 08D5 (perfect-lemma-quasi-coherence-direct-image), proof of part (2), displayed identity RΓ(U,Rf_*E)=RΓ(f^{-1}U,E)"
@@ -23,7 +23,8 @@
   "def-pc-scheme",
   "def-pc-derived-category",
   "def-pc-derived-direct-image",
-  "def-sc-sheaf-cohomology-functor"
+  "def-pc-derived-open-restriction-maps",
+  "def-pc-open-module-derived-sections"
  ],
  "proof": [
   {
@@ -135,5 +136,51 @@
    "decls": [],
    "missing": []
   }
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.DerivedSectionsPushforwardComparison",
+  "declaration": "AlgebraicGeometry.derivedSectionsPushforwardComparison",
+  "file": "lean/Sheaf/AlgebraicGeometry/DerivedSectionsPushforwardComparison.lean",
+  "statement": "theorem derivedSectionsPushforwardComparison {X Y : Scheme.{u}} (f : X ⟶ Y) (U : Y.Opens) [HasDerivedCategory.{wX} (SheafOfModules.{u} (moduleRings X.toRingedSpace))] [HasDerivedCategory.{wV} (SheafOfModules.{u} (moduleRings (f ⁻¹ᵁ U).toScheme.toRingedSpace))] [HasDerivedCategory.{wU} (SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace))] [HasDerivedCategory.{wAb} AddCommGrpCat.{u}] : Nonempty (((schemeOpenRestriction X (f ⁻¹ᵁ U)).mapDerivedCategory ⋙ schemeDerivedDirectImage (morphismRestrict f U) ⋙ RingedSpace.openModuleDerivedSections U.toScheme.toRingedSpace ⊤) ≅ ((schemeOpenRestriction X (f ⁻¹ᵁ U)).mapDerivedCategory ⋙ RingedSpace.openModuleDerivedSections (f ⁻¹ᵁ U).toScheme.toRingedSpace ⊤))",
+  "branch": "sheaf-dag",
+  "by": "P1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-dsp",
+  "group": "P1",
+  "result": "pass",
+  "statement_corrected": true
+ },
+ "statement_change": {
+  "date": "2026-10-11",
+  "by": "P1 stage 2",
+  "old_statement": "Let $f:X\\to Y$ be a morphism of schemes [def-pc-scheme] and $E\\in D(\\mathcal O_X)$ [def-pc-derived-category]. For every open subscheme $U\\subseteq Y$, with $f_U:f^{-1}U\\to U$, there is a natural isomorphism $R\\Gamma(U,R(f_U)_*(E|_{f^{-1}U}))\\cong R\\Gamma(f^{-1}U,E|_{f^{-1}U})$ of complexes of abelian groups; $R(f_U)_*$ is the derived direct image [def-pc-derived-direct-image] and $R\\Gamma$ is the derived global-sections functor [def-sc-sheaf-cohomology-functor].",
+  "what": "The cited def-sc-sheaf-cohomology-functor defines individual right derived functors H^i on module sheaves, not the unbounded derived-global-sections functor RΓ on D(O_X). Replace that citation by the existing unbounded definition, explicitly cite exact open restriction, and clarify that the comparison is in D(Ab), rather than a strict isomorphism of chosen complexes. There is no change to the mathematical comparison or its hypotheses.",
+  "source": {
+   "document": "literature/stacks-project/perfect.tex",
+   "place": "Tag 08D5, proof of (2), displayed RΓ(U,Rf_*E)=RΓ(f^{-1}U,E); Cohomology Tag 0D5T for its functorial composition construction"
+  },
+  "citers": [
+   {
+    "id": "lem-pc-derived-internal-hom-pullback-adjunction",
+    "holds": true,
+    "note": "The derived-sections comparison and its degree-zero specialization are unchanged; the correction identifies the actual unbounded RΓ definition."
+   },
+   {
+    "id": "lem-pc-derived-direct-image-uniform-truncation-bound",
+    "holds": true,
+    "note": "The comparison on each affine open is unchanged; its proof already identifies restriction of Rf_*E with R(f_U)_*(E|_V)."
+   }
+  ],
+  "old_stmt_deps": [
+   "def-pc-scheme",
+   "def-pc-derived-category",
+   "def-pc-derived-direct-image",
+   "def-sc-sheaf-cohomology-functor"
+  ]
  }
 }
