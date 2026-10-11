@@ -139,6 +139,13 @@ lemma projectionMapOfCompactification_baseChange_aux
 
 end
 
+/-- The component `Lg'^* Lf^* L ⟶ Lf'^* Lg^* L` of the inverse of the square isomorphism of the
+derived pullbacks of a commutative square, with source and target written without composite
+functors. -/
+noncomputable def derivedSquareUpperStarIsoInvApp (L : DerivedCategory (Sheaf Y.smallEtaleTopology A)) :
+    L((g')^*[A]).obj (L((f)^*[A]).obj L) ⟶ L((f')^*[A]).obj (L((g)^*[A]).obj L) :=
+  (derivedSquareUpperStarIso A sq).inv.app L
+
 /-- The compactly supported base change map `Lg^* Rf_!(c) ⟶ Rf'_!(c') Lg'^*` for a compactification
 `c'` of the base change `f'` lying over `c` through `q`: the derived base change map of the square
 `q ≫ c.g = c'.g ≫ g`, whiskered by `Di_!`, followed by the inverse of the base change isomorphism
@@ -239,6 +246,25 @@ theorem projectionMapOfCompactification_baseChange'
   simp only [← Functor.map_comp]
   rw [aux]
   rfl
+
+/-- `projectionMapOfCompactification_baseChange'` with the square isomorphism written through
+`derivedSquareUpperStarIsoInvApp`, so that both sides end at the same object syntactically. -/
+theorem projectionMapOfCompactification_baseChange
+    (K : DerivedCategory (Sheaf X.smallEtaleTopology A))
+    (L : DerivedCategory (Sheaf Y.smallEtaleTopology A)) :
+    L((g)^*[A]).map (((projectionMapOfCompactification A c).app K).app L) ≫
+        (rightDerivedLowerShriekOfCompactificationBaseChangeMap' A c c' q hi hp).app
+          (((-⊗ᴸ-(X)[A]).obj K).obj (L((f)^*[A]).obj L)) ≫
+        (Rf_!(c')[A]).map (((leftDerivedUpperStarTensorComparison A g').app K).app
+          (L((f)^*[A]).obj L)) ≫
+        (Rf_!(c')[A]).map (((-⊗ᴸ-(X')[A]).obj (L((g')^*[A]).obj K)).map
+          (derivedSquareUpperStarIsoInvApp A sq L)) =
+      ((leftDerivedUpperStarTensorComparison A g).app ((Rf_!(c)[A]).obj K)).app L ≫
+        ((-⊗ᴸ-(Y')[A]).map ((rightDerivedLowerShriekOfCompactificationBaseChangeMap' A c c' q hi
+          hp).app K)).app (L((g)^*[A]).obj L) ≫
+        ((projectionMapOfCompactification A c').app (L((g')^*[A]).obj K)).app
+          (L((g)^*[A]).obj L) :=
+  projectionMapOfCompactification_baseChange' A sq c c' q hi hp K L
 
 end
 

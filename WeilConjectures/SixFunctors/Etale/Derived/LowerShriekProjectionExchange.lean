@@ -99,7 +99,7 @@ theorem projectionMapOfCompactification_rightDerivedLowerShriekBaseChangeMap'
             (L((f)^*[ModuleCat.{u + 1} Λ]).obj L)) ≫
         (R(f')_![ModuleCat.{u + 1} Λ]).map
           (((-⊗ᴸ-(X')[ModuleCat.{u + 1} Λ]).obj (L((g')^*[ModuleCat.{u + 1} Λ]).obj K)).map
-            ((derivedSquareUpperStarIso _ sq).inv.app L)) =
+            (derivedSquareUpperStarIsoInvApp _ sq L)) =
       ((leftDerivedUpperStarTensorComparison _ g).app
           ((Rf_!(c)[ModuleCat.{u + 1} Λ]).obj K)).app L ≫
         ((-⊗ᴸ-(Y')[ModuleCat.{u + 1} Λ]).map
@@ -107,7 +107,7 @@ theorem projectionMapOfCompactification_rightDerivedLowerShriekBaseChangeMap'
             (L((g)^*[ModuleCat.{u + 1} Λ]).obj L) ≫
         ((projectionMap _ f').app (L((g')^*[ModuleCat.{u + 1} Λ]).obj K)).app
           (L((g)^*[ModuleCat.{u + 1} Λ]).obj L) := by
-  have thm := projectionMapOfCompactification_baseChange' (ModuleCat.{u + 1} Λ) sq c c' q hi hp
+  have thm := projectionMapOfCompactification_baseChange (ModuleCat.{u + 1} Λ) sq c c' q hi hp
     K L
   have hD' : ((projectionMapOfCompactification (ModuleCat.{u + 1} Λ) c').app
         (L((g')^*[ModuleCat.{u + 1} Λ]).obj K)).app (L((g)^*[ModuleCat.{u + 1} Λ]).obj L) ≫
@@ -131,9 +131,7 @@ theorem projectionMapOfCompactification_rightDerivedLowerShriekBaseChangeMap'
   erw [reassoc_of% thm]
   rw [show rightDerivedLowerShriekIso Λ c' = rightDerivedLowerShriekOfCompactificationIso Λ c'
       (HasCompactification.compactification f') from rfl]
-  dsimp only [Functor.comp_obj]
-  -- TODO: `rw [hD']` here blows up memory (instance mismatch between the generic theorem
-  -- specialised at `ModuleCat Λ` and directly elaborated terms), see the memory notes.
+  -- TODO: `rw [hD']` here blows up memory (> 10 GB); see the memory notes of 2026-10-11.
   sorry
 
 /-- **The projection map commutes with the exchange map `Ex_!`**: for a cartesian square
@@ -158,7 +156,7 @@ theorem projectionMap_rightDerivedLowerShriekBaseChangeMap [HasCompactification 
             (L((f)^*[ModuleCat.{u + 1} Λ]).obj L)) ≫
         (R(f')_![ModuleCat.{u + 1} Λ]).map
           (((-⊗ᴸ-(X')[ModuleCat.{u + 1} Λ]).obj (L((g')^*[ModuleCat.{u + 1} Λ]).obj K)).map
-            ((derivedSquareUpperStarIso _ sq.toCommSq).inv.app L)) =
+            (derivedSquareUpperStarIsoInvApp _ sq.toCommSq L)) =
       ((leftDerivedUpperStarTensorComparison _ g).app
           ((R(f)_![ModuleCat.{u + 1} Λ]).obj K)).app L ≫
         ((-⊗ᴸ-(Y')[ModuleCat.{u + 1} Λ]).map
