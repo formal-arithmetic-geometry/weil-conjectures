@@ -750,6 +750,36 @@ instance [ConnectedSpace Y] [TopologicalSpace G] [IsTopologicalGroup G] [Compact
     rw [← Scheme.IsFiniteLocallyConstantSheaf.sheafFiber_map_stalkEquiv s F.2 F'.2 f v, ← hψ]
     rfl
 
+
+open scoped PreGaloisCategory in
+/-- The stalk of a finite locally constant sheaf is a finite continuous representation. -/
+lemma Scheme.galoisRepFunctor_obj_isFiniteContinuous [ConnectedSpace Y] [TopologicalSpace G]
+    [IsTopologicalGroup G]
+    [CompactSpace G] [PreGaloisCategory.IsFundamentalGroup (Scheme.FiniteEtale.fiber s) G]
+    (F : ObjectProperty.FullSubcategory
+      (fun F : Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ) ↦ IsFiniteLocallyConstantSheaf F)) :
+    Rep.IsFiniteContinuous ((Scheme.galoisRepFunctor (s := s) (G := G) (Λ := Λ)).obj F) := by
+  refine ⟨?_, fun x ↦ ?_⟩
+  · have hfg := F.2.toIsFiniteSheaf.isFinitelyGenerated_sheafFiber Ω s
+    exact ConcreteCategory.FiniteOfIsFinitelyGenerated.finite_of_isFinitelyGenerated
+      (C := ModuleCat.{u + 1} Λ) _ hfg
+  · let a : (Scheme.FiniteEtale.fiber s).obj
+        ((Scheme.FiniteEtale.equivalenceFiniteLocallyConstant Y).inverse.obj F.2.toFLC) :=
+      (Scheme.FiniteLocallyConstant.stalkEquiv s F.2.toFLC (F.2.stalkEquiv s x)).down
+    have : {g : G | ((Scheme.galoisRepFunctor (s := s) (G := G) (Λ := Λ)).obj F).ρ g x = x} =
+        {g : G | g • a = a} := by
+      ext g
+      change F.2.galoisAct s G g x = x ↔ _
+      simp only [Scheme.IsFiniteLocallyConstantSheaf.galoisAct,
+        Scheme.FiniteLocallyConstant.galoisSMul, Equiv.symm_apply_eq]
+      constructor
+      · intro h
+        exact congrArg ULift.down h
+      · intro h
+        exact ULift.ext _ _ h
+    rw [this]
+    exact (isOpen_discrete {a}).preimage (continuous_id.smul continuous_const)
+
 end Linear
 
 end GaloisAction
