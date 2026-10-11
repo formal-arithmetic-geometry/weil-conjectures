@@ -6,7 +6,10 @@ Authors: Claude
 module
 
 public import WeilConjectures.AlgebraicGeometry.Sites.EtaleVanishingLocus
+public import WeilConjectures.AlgebraicGeometry.Sites.EtaleSectionContinuity
 public import WeilConjectures.AlgebraicGeometry.Sites.StrictHenselizationLocal
+public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.DegreeZero
+public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.SeparablyClosed
 
 /-!
 # Stalks of a direct image and sections over the geometric fibre
@@ -126,6 +129,95 @@ lemma toPresheafFiber_stalkToFibreSections (V : Y.Etale) (v : (pointSmallEtale y
   rw [← ConcreteCategory.comp_apply, stalkToFibreSections,
     GrothendieckTopology.Point.toPresheafFiber_presheafFiberDesc _ _
       (fun _ _ φ v ↦ fibreRestriction_comp f y a b hab F φ v)]
+
+section ClosedFibre
+
+/-- The morphism `X_y ⟶ S_(y) ×_Y X` from the geometric fibre to the base change of `X` to the
+strict localization `S_(y)`, given by the factorization `Spec Ω ⟶ S_(y) ⟶ Y` of `y`. -/
+noncomputable def fibreToStrictLocalization :
+    Xy ⟶ pullback (Scheme.strictLocalizationToBase y) f :=
+  pullback.lift (b ≫ Spec.map (Scheme.strictHenselizationEval y)) a (by
+    rw [Category.assoc, Scheme.spec_map_strictHenselizationEval_comp_strictLocalizationToBase,
+      hab])
+
+@[reassoc (attr := simp)]
+lemma fibreToStrictLocalization_fst :
+    fibreToStrictLocalization f y a b hab ≫ pullback.fst _ _ =
+      b ≫ Spec.map (Scheme.strictHenselizationEval y) :=
+  pullback.lift_fst _ _ _
+
+@[reassoc (attr := simp)]
+lemma fibreToStrictLocalization_snd :
+    fibreToStrictLocalization f y a b hab ≫ pullback.snd _ _ = a :=
+  pullback.lift_snd _ _ _
+
+set_option backward.isDefEq.respectTransparency false in
+/-- **Sections over the base change to the strict localization are sections over the geometric
+fibre.** For `f` proper and `Ω` algebraically closed, restriction of sections of the pullback of
+`F` along `X_y ⟶ S_(y) ×_Y X` is bijective. The ring of `S_(y)` is strictly henselian, so these
+sections are those over the closed geometric fibre over an algebraic closure `κ̄` of the residue
+field (`AlgebraicGeometry.Etale.isIso_globalSectionsUpperStarMap_addCommGrpCat_geometricFibre`),
+and `X_y` is the base change of the closed geometric fibre along an embedding `κ̄ ⟶ Ω`
+(`AlgebraicGeometry.Etale.isIso_globalSectionsUpperStarMap_addCommGrpCat_of_isAlgClosed`). -/
+theorem bijective_restrictAlong_fibreToStrictLocalization [IsProper f] [IsAlgClosed Ω]
+    (h : IsPullback a b f y) :
+    Function.Bijective (restrictAlong (pullback.snd (Scheme.strictLocalizationToBase y) f) F
+      (fibreToStrictLocalization f y a b h.w) a
+      (fibreToStrictLocalization_snd f y a b h.w).symm
+      (V := Scheme.Etale.mk (𝟙 _)) (V' := Scheme.Etale.mk (𝟙 Xy))
+      (fibreToStrictLocalization f y a b h.w)
+      ((Category.comp_id _).trans (Category.id_comp _).symm)) := by
+  let A := Scheme.strictHenselization y
+  let κ := IsLocalRing.ResidueField A
+  let κb := AlgebraicClosure κ
+  letI : Algebra κ Ω := (Scheme.strictHenselizationResidueFieldEmb y).toAlgebra
+  have : Module.IsTorsionFree κ Ω := DivisionSemiring.to_moduleIsTorsionFree
+  let ψ : κb →ₐ[κ] Ω := IsAlgClosed.lift
+  letI : Algebra κb Ω := ψ.toRingHom.toAlgebra
+  let tS := pullback.snd (Scheme.strictLocalizationToBase y) f
+  let p := pullback.fst (Scheme.strictLocalizationToBase y) f
+  let sκ : Spec (.of κb) ⟶ Spec A := Spec.map (CommRingCat.ofHom (algebraMap A κb))
+  let i := pullback.fst p sκ
+  let q := pullback.snd p sκ
+  let ω : Spec (.of Ω) ⟶ Spec (.of κb) := Spec.map (CommRingCat.ofHom (algebraMap κb Ω))
+  let pr := pullback.fst q ω
+  let q' := pullback.snd q ω
+  have hω : ω ≫ sκ = Spec.map (Scheme.strictHenselizationEval y) := by
+    rw [← Spec.map_comp]
+    congr 1
+    ext z
+    change ψ (algebraMap A κb z) = _
+    rw [IsScalarTower.algebraMap_apply A κ κb, ψ.commutes]
+    exact Scheme.strictHenselizationResidueFieldEmb_residue z
+  have sq : IsPullback (pr ≫ i ≫ tS) q' f y := by
+    have := (IsPullback.of_hasPullback q ω).paste_horiz ((IsPullback.of_hasPullback p sκ).paste_horiz
+      (IsPullback.of_hasPullback (Scheme.strictLocalizationToBase y) f).flip)
+    rwa [← Category.assoc ω, hω,
+      Scheme.spec_map_strictHenselizationEval_comp_strictLocalizationToBase] at this
+  let e := h.isoIsPullback _ _ sq
+  have he₁ : e.hom ≫ pr ≫ i ≫ tS = a := h.isoIsPullback_hom_fst _ _ sq
+  have he₂ : e.hom ≫ q' = b := h.isoIsPullback_hom_snd _ _ sq
+  have hc : fibreToStrictLocalization f y a b h.w = e.hom ≫ pr ≫ i := by
+    apply pullback.hom_ext
+    · rw [fibreToStrictLocalization_fst, Category.assoc, Category.assoc,
+        show i ≫ p = q ≫ sκ from pullback.condition, ← Category.assoc pr,
+        show pr ≫ q = q' ≫ ω from pullback.condition, Category.assoc, ← reassoc_of% he₂, hω]
+    · rw [fibreToStrictLocalization_snd, Category.assoc, Category.assoc, he₁]
+  have b₁ := (bijective_restrictAlong_iff_isIso_globalSectionsUpperStarMap tS F i (i ≫ tS)
+    rfl).2 (Etale.isIso_globalSectionsUpperStarMap_addCommGrpCat_geometricFibre A p _)
+  have b₂ := (bijective_restrictAlong_iff_isIso_globalSectionsUpperStarMap (i ≫ tS) F pr
+    (pr ≫ i ≫ tS) rfl).2 (Etale.isIso_globalSectionsUpperStarMap_addCommGrpCat_of_isAlgClosed
+      (K := Ω) q _)
+  have b₃ := (bijective_restrictAlong_iff_isIso_globalSectionsUpperStarMap (pr ≫ i ≫ tS) F e.hom
+    a he₁.symm).2 inferInstance
+  convert b₃.comp (b₂.comp b₁) using 1
+  funext s
+  simp only [Function.comp_apply]
+  rw [restrictAlong_restrictAlong, restrictAlong_restrictAlong]
+  exact ConcreteCategory.congr_hom (restrictAlong_congr' tS F a hc _ _
+    (V := Scheme.Etale.mk (𝟙 _)) (V' := Scheme.Etale.mk (𝟙 Xy)) hc _ _) s
+
+end ClosedFibre
 
 /-- **Stalks of a proper direct image are sections over the geometric fibre.** Let
 `f : X ⟶ Y` be proper and `y : Spec Ω ⟶ Y` a geometric point with `Ω` algebraically closed,

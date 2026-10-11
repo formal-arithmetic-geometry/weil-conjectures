@@ -403,6 +403,28 @@ instance isSepClosed_residueField_strictHenselization :
 end Henselian
 
 set_option backward.isDefEq.respectTransparency false in
+/-- The lift `v : Spec Ω ⟶ V` of the geometric point to an affine pointed étale neighbourhood
+`(V, v)` is the composite of `Spec` of the evaluation map `𝒪^{sh}_{S,s} ⟶ Ω` with the leg
+`S_(s) ⟶ V` of the limit cone. -/
+@[reassoc]
+lemma spec_map_strictHenselizationEval_comp_strictLocalizationCone_π_app
+    (x : AffinePointedEtaleNeighborhood s) :
+    Spec.map (strictHenselizationEval s) ≫ (strictLocalizationCone s).π.app x =
+      x.obj.2.left := by
+  let y : Spec (CommRingCat.of Ω) ⟶ x.obj.1.left := x.obj.2.left
+  have hy : Spec.map (Scheme.Γ.map y.op ≫ (Scheme.ΓSpecIso (.of Ω)).hom) =
+      y ≫ x.obj.1.left.toSpecΓ := by
+    rw [Spec.map_comp, SpecMap_ΓSpecIso_hom, Scheme.Γ_map_op, Scheme.toSpecΓ_naturality]
+  rw [strictLocalizationCone_π_app]
+  change Spec.map (strictHenselizationEval s) ≫
+    Spec.map (colimit.ι (strictHenselizationDiagram s) (op x)) ≫
+      inv x.obj.1.left.toSpecΓ = y
+  rw [← Spec.map_comp_assoc, ι_strictHenselizationEval]
+  change Spec.map (Scheme.Γ.map y.op ≫ (Scheme.ΓSpecIso (.of Ω)).hom) ≫
+    inv x.obj.1.left.toSpecΓ = y
+  rw [hy, Category.assoc, IsIso.hom_inv_id, Category.comp_id]
+
+set_option backward.isDefEq.respectTransparency false in
 /-- The geometric point `s` is the composite of `Spec` of the evaluation map
 `𝒪^{sh}_{S,s} ⟶ Ω` with the structure morphism `S_(s) ⟶ S`. -/
 lemma spec_map_strictHenselizationEval_comp_strictLocalizationToBase :
