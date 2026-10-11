@@ -220,5 +220,23 @@
   "worker": "stage1",
   "summary": "Checked against Stacks Morphisms Lemma 03J5 (morphisms.tex 15322, proof 15339; tag verified in tags/tags) and Definition 03J4. Statement unchanged (it is (1)<=>(2) of 03J5; the trailing claims of 03J5 on points and residue degrees are not part of this node). Six steps: (2)=>(1) by K = kappa(y), j_y canonical, X_K = X_y by def-pc-scheme-fibre (choice of fibre product handled by isomorphism-finite + finite-composition); (1)=>(2): Spec K has one point xi, and by spec-residue-field-identification j_xi = Spec(phi) with phi: K -> kappa(xi) an isomorphism; lem-weil-pbc-fibre-degree-base-change with T = Spec K, t = xi, s = y gives F = (X_K)_xi finite over kappa(xi) of degree d = deg X_y <= n; F -> X_K is an isomorphism since j_xi is (universal property, elementary); X_K -> Spec K = j_xi o q o p^{-1} is finite (isomorphism-finite, finite-composition); the degree is transported by the phi-semilinear ring isomorphism p^* (elementary). The specialization of the base-change node is exact up to the canonical isomorphisms K = kappa(xi) and (X_K)_xi = X_K, written out in steps 2 and 4. No new nodes. Mathlib: no match (searches added: LeanSearch, Loogle, LeanFinder, local_search, grep)."
  },
- "reviewed": "Reviewed by L 2026-10-10: faithful to Morphisms 03J5 (the equivalence only); (1)=>(2) via lem-weil-pbc-fibre-degree-base-change and the identification of the fibre over the unique point of Spec K (steps 2, 4, 6 written out). No new nodes; no Mathlib match."
+ "reviewed": "Reviewed by L 2026-10-10: faithful to Morphisms 03J5 (the equivalence only); (1)=>(2) via lem-weil-pbc-fibre-degree-base-change and the identification of the fibre over the unique point of Spec K (steps 2, 4, 6 written out). No new nodes; no Mathlib match.",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.BoundsFiberDegreesFieldPoints",
+  "declaration": "AlgebraicGeometry.Scheme.Hom.boundsFiberDegrees_iff_fieldPoints",
+  "file": "lean/Sheaf/AlgebraicGeometry/BoundsFiberDegreesFieldPoints.lean",
+  "statement": "theorem boundsFiberDegrees_iff_fieldPoints {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ) : BoundsFiberDegrees f n ↔ ∀ (K : Type u) [Field K] (g : Spec (CommRingCat.of K) ⟶ Y), IsFinite (pullback.snd f g) ∧ (pullback.snd f g).finrankΓ ≤ n",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-fdf1006",
+  "group": "E1",
+  "result": "pass",
+  "note": "f:X⟶Y arbitrary, n:ℕ (n=0 ok); (1)=BoundsFiberDegrees f n (H1 dep, fiberToSpecResidueField/finrankΓ as M1 9a8fc0675); (2) ∀ K:Type u [Field K] (g:Spec (.of K)⟶Y), IsFinite (pullback.snd f g) ∧ (pullback.snd f g).finrankΓ ≤ n = X×_Y Spec K over K via 2nd projection; ↔; #check: IsFinite=AlgebraicGeometry.IsFinite, finrankΓ=Scheme.Hom.finrankΓ; no statement change"
+ }
 }
