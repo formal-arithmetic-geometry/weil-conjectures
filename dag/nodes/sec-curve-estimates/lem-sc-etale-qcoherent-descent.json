@@ -163,5 +163,23 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-eqd (reviewer sub-agent of L); spot-checked: Source: Stacks Descent Section 35.8, equation (35.8.1) (Tag 03DR, label equation-quasi-coherent-presheaf) and Lemma 35.8.1 (Tag 03DT, label lemma-sheaf-condition-holds), read in literature/stacks-project/descent.tex 2138-2180: S scheme, F quasi-coherent, presheaf (f:T->S) |-> Gamma(T,f^*F), sheaf condition for tau-coverings incl. etale, proof via etale coverings being fpqc and fpqc descent 023T; the item statement (X scheme, F quasi-coherent, presheaf on X_Et) agrees hypothesis by hypothesis, and the new node fpqc-sections is the fpqc case of 03DT for arbitrary f:T->S, true as stated. Step 1 carried by lem-weil-pbc-fpqc-finer-than-etale (any covering in a small etale site is fpqc per def-weil-pbc-fpqc-covering) with def-weil-pbc-etale-site; step 2 by the new node with S=X, T=U, f=u, g_i the etale cover; step 3 elementary from lem-sc-etale-qcoherent-presheaf-functorial (restrictions rho_g = c(g^*s)) and def-weil-pbc-etale-site (fibre products in X_Et are scheme fibre products), giving the equalizer condition. Tool uses: lem-weil-pbc-fpqc-finer-than-etale (unit sk-thm-p1) accepted as a generic topology comparison; lem-pc-fpqc-descent dropped, no step cites it. No Mathlib leaf; B10: slopmaster2 FpqcSections.lean exists_sections_of_mem_fpqcTopology / sections_ext_of_mem_fpqcTopology (sorryfree.py OK) are in sieve form for N on X, not the node's statement exactly, so the unsplit node stands (lead note). Small cases: singleton cover {id_T} gives s=s_1; empty T with empty cover gives the unique zero section. Fixes: dag/nodes/sec-curve-estimates/lem-sc-etale-qcoherent-descent-fpqc-sections.json: source.place: label corrected lemma-quasi-coherent-sheaf -> lemma-sheaf-condition-holds; statement + stmt_deps: cited lem-sc-etale-qcoherent-presheaf-functorial for pullback of sections and the composition isomorphisms used in the compatibility condition (B3). Time: start Sat Oct 10 02:49:27 PM UTC 2026, end Sat Oct 10 02:50:51 PM UTC 2026.; 1 file(s) fixed by the reviewer"
  },
- "lead_note": "2026-10-10 L (R-eqd): fpqc-sections node (unsplit): slopmaster2 has sorry-free AlgebraicGeometry.Scheme.Modules.exists_sections_of_mem_fpqcTopology and sections_ext_of_mem_fpqcTopology (WeilConjectures/AlgebraicGeometry/Modules/FpqcSections.lean 199-295), sieve form for N on X over an open O; not an exact match (family/fibre-product form, f^*F on T) but the next worker should split onto them; the worker's grep missed this file."
+ "lead_note": "2026-10-10 L (R-eqd): fpqc-sections node (unsplit): slopmaster2 has sorry-free AlgebraicGeometry.Scheme.Modules.exists_sections_of_mem_fpqcTopology and sections_ext_of_mem_fpqcTopology (WeilConjectures/AlgebraicGeometry/Modules/FpqcSections.lean 199-295), sieve form for N on X over an open O; not an exact match (family/fibre-product form, f^*F on T) but the next worker should split onto them; the worker's grep missed this file.",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.EtaleQuasiCoherentDescent",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.isSheaf_etaleTensorSectionsPresheaf",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleQuasiCoherentDescent.lean",
+  "statement": "theorem isSheaf_etaleTensorSectionsPresheaf {X : Scheme.{u}} (F : X.Modules) [F.IsQuasicoherent] : Presheaf.IsSheaf X.smallEtaleTopology (etaleTensorSectionsPresheaf F)",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "E1",
+  "result": "pass",
+  "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
+ }
 }
