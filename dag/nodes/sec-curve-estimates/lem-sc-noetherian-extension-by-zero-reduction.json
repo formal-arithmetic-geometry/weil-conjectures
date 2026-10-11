@@ -153,5 +153,23 @@
   "group": "J1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-ebr1836 (reviewer sub-agent of L); spot-checked: Item statement vs Stacks 02UX (hypotheses 1-4, p>d) with only the extension-by-zero citation changed (reason given); steps 1-5 vs 02UX proof: Step 1 uses 01FF node with U=X (needs qc basis, qc intersections, X qc: all hypotheses of the item); Step 3 colim of j_!Z_U/K_lambda via exactness of filtered colimits, LES degree shift H^p(F)<-H^{p+1}(K) correct; Step 4 Q LES with both outer terms from hypothesis (4). New nodes: lem-sc-topological-filtered-cohomology = 01FF for abelian sheaves (not a dup of the scheme O_X-module 01FF nodes nor of etale lem-weil-pbc-cohomology-filtered-colimit); lem-sc-constant-subsheaf-finite-filtration = 0A38 with its hypothesis. No cycle: lem-sc-topological-extension-by-zero-stalks was created by lem-sc-noetherian-open-closed-cohomology-sequence and depends only on sheafification/stalks; only the parent lem-sc-noetherian-topological-cohomology-vanishing cites the item; no family node restates it. No repairs."
+ },
+ "lean": {
+  "module": "Sheaf.Topology.NoetherianExtensionByZeroReduction",
+  "declaration": "TopCat.noetherian_extensionByZero_reduction",
+  "file": "lean/Sheaf/Topology/NoetherianExtensionByZeroReduction.lean",
+  "statement": "theorem noetherian_extensionByZero_reduction (X : TopCat.{u}) [CompactSpace X] (d : ℕ) (hbas : ∀ (U : Set X), IsOpen U → ∀ x ∈ U, ∃ V : Set X, IsOpen V ∧ IsCompact V ∧ x ∈ V ∧ V ⊆ U) (hint : ∀ (U V : Set X), IsOpen U → IsOpen V → IsCompact U → IsCompact V → IsCompact (U ∩ V)) (hvanish : ∀ (p : ℕ), d < p → ∀ (U : Opens X), IsCompact (U : Set X) → IsZero (CategoryTheory.Sheaf.H' ((TopCat.Sheaf.abelianOpenExtensionByZero U).obj ((constantSheaf (Opens.grothendieckTopology ((Opens.toTopCat X).obj U)) AddCommGrpCat.{u}).obj (AddCommGrpCat.of (ULift.{u} ℤ)))) p (⊤ : Opens X))) (F : CategoryTheory.Sheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u}) (p : ℕ) (hp : d < p) : IsZero (CategoryTheory.Sheaf.H' F p (⊤ : Opens X))",
+  "branch": "sheaf-dag",
+  "by": "T1",
+  "date": "2026-10-12",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "T1",
+  "result": "pass",
+  "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
  }
 }
