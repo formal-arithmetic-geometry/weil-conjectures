@@ -29,7 +29,8 @@
   "def-sbc-closed-immersion-ideal-sheaf",
   "def-pc-module-pullback",
   "def-weil-affine-spectrum",
-  "pqf-def-coherent"
+  "pqf-def-coherent",
+  "lem-pc-module-pullback-adjunction"
  ],
  "proof": [
   {
@@ -194,5 +195,23 @@
   "worker": "stage1",
   "summary": "Checked against Morphisms 01R2/01R3 (tags verified in literature/stacks-project/tags/tags). Not a Mathlib leaf: Mathlib has Scheme.Modules.pullback and IdealSheafData but no conormal sheaf of a closed immersion (LeanSearch, LeanFinder, Loogle, grep recorded). Statement kept. The proof Stacks omits is written in five steps: the affine data and I(U)=I, I|_U=I~ (def-sbc-closed-immersion-ideal-sheaf, lem-weil-pbc-closed-immersion-affine-cover-criterion); quasi-coherence of i^*I (lem-weil-pbc-module-pullback-quasi-coherent, Lean closed); Gamma(Z cap U, i^*I) = I (x)_R R/I (lem-weil-pbc-module-pullback-affine-sections, Schemes 01I9); I (x)_R R/I = I/I^2 (Mathlib leaf lem-weil-pbc-tensor-over-quotient-ring, Algebra 00DF); the composite a mod I^2 -> i^*a. No new node; all cited statements are in unit sk-thm-p1 or are definitions."
  },
- "reviewed": "pass (L, 2026-10-10): 5 steps follow 01R3 (2): the ideal sheaf restricts to I~ on U, i^*I is quasi-coherent, its sections over Z cap U are I tensor_R R/I (affine pullback sections), which is I/I^2 (tensor over quotient leaf). No new nodes."
+ "reviewed": "pass (L, 2026-10-10): 5 steps follow 01R3 (2): the ideal sheaf restricts to I~ on U, i^*I is quasi-coherent, its sections over Z cap U are I tensor_R R/I (affine pullback sections), which is I/I^2 (tensor over quotient leaf). No new nodes.",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AffineConormalSections",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.affine_conormal_sections",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineConormalSections.lean",
+  "statement": "theorem affine_conormal_sections {X Z : Scheme.{u}} (i : Z ⟶ X) [IsClosedImmersion i] : ((tensorPullback i).obj i.ker.toModules).IsQuasicoherent ∧ ∀ (U : X.affineOpens) (R : Type v) [CommRing R] (r : R ≃+* Γ(X, U.1)) (I : Ideal R), I = RingHom.ker ((i.app U.1).hom.comp (r : R →+* Γ(X, U.1))) → ∃ e : LinearEquiv (r : R →+* Γ(X, U.1)) (σ' := (r.symm : Γ(X, U.1) →+* R)) I.Cotangent Γ((pushforward i).obj ((tensorPullback i).obj i.ker.toModules), U.1), ∀ (a : I) (s : Γ(i.ker.toModules, U.1)), i.ker.toModulesι.app U.1 s = r (a : R) → e (I.toCotangent a) = ((Classical.choose (exists_tensorPullbackAdjunction i)).unit.app i.ker.toModules).app U.1 s",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-acs1210b",
+  "group": "C1",
+  "result": "pass",
+  "note": "IsClosedImmersion i; ideal sheaf i.ker.toModules (G1 form); U : X.affineOpens with R ≃+* Γ(X,U) and I = ker(i.app U ∘ r) equivalent to Z∩U=Spec(R/I) over U; conormal tensorPullback i of i.ker.toModules; Mathlib IsQuasicoherent (pqf-def-coherent quasi-coherent clause); Γ(pushforward i C, U) rfl= Γ(C, i⁻¹U); I.Cotangent = I/I²; semilinear equiv along r pinned to exists_tensorPullbackAdjunction unit; no hollow hyps, no let, universe v harmless"
+ }
 }
