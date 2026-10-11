@@ -160,5 +160,23 @@
   "group": "C",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of C; spot-checked by L: L read the five steps against Stacks 03AW/03F6/03AT/03AS: I injective in PAb (sheafification exact left adjoint), the free Cech complex K_* contractible in positive degrees by the (s, s_0, ..., s_p) homotopy on each summand, Hom(K, I) = Cech complex by Yoneda, cocycles factor through the image and extend by injectivity, degree 0 = sheaf condition. Correct; C's review says what it checked."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.SiteInjectiveCechAcyclic",
+  "declaration": "CategoryTheory.site_injective_cech_acyclic",
+  "file": "lean/Sheaf/CategoryTheory/SiteInjectiveCechAcyclic.lean",
+  "statement": "theorem site_injective_cech_acyclic {C : Type u} [Category.{v} C] {J : Precoverage C} [J.HasIsos] [J.IsStableUnderComposition] [J.IsStableUnderBaseChange] [J.HasPullbacks] {T : Type w} {U : C} (f : T → C) (hom : ∀ t, f t ⟶ U) (hcover : Presieve.ofArrows f hom ∈ J U) (S : SiteCechComplex f hom) (I : Sheaf J.toGrothendieck AddCommGrpCat.{w}) [Injective I] : (∀ p : ℕ, 0 < p → IsZero ((S.cohomologyFunctor p).obj I.obj)) ∧ Nonempty (((S.cohomologyFunctor 0).obj I.obj) ≅ I.obj.obj (op U))",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "F1",
+  "result": "pass",
+  "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
  }
 }
