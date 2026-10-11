@@ -176,7 +176,7 @@ theorem nonempty_iso_rightDerivedUpperShriek_affineLineZero [HasTateTwist.IsNorm
     AffineSpace.zeroSectionIsoZeroLocusSubscheme_hom_zeroLocusSubschemeι _ _ _
   have : HasCompactification (e.hom ≫ ι) := .of_eq he.symm
   -- the normalisation: the Kummer boundary of `t` is a fundamental class `Λ_{V(t)} ≅ Rι^! Λ(1)[2]`
-  have hφ := hN.isIso_supportedClassMap_kummerBoundary_coord Y
+  have hφ := hN.isIso_supportedClassMap_kummerBoundary_coord Y aY
   obtain ⟨heq⟩ := nonempty_iso_rightDerivedUpperShriek_of_eq (ModuleCat.{u + 1} Λ) he.symm
   obtain ⟨comp⟩ := nonempty_iso_rightDerivedUpperShriek_comp Λ e.hom ι
   exact ⟨heq.app _ ≪≫ comp.app _ ≪≫ (rightDerivedUpperShriekIsoOfIso _ e).app _ ≪≫

@@ -129,33 +129,37 @@ class HasTateTwist where
   twistObject (X : Scheme.{u}) (m : ℤ) :
     DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))
   /-- `Λ_X(0)` is the constant complex. -/
-  twistObjectZeroIso (X : Scheme.{u}) : twistObject X 0 ≅ constantComplex Λ X
+  twistObjectZeroIso (X : Scheme.{u}) [HasInvertibleExponent Λ X] :
+    twistObject X 0 ≅ constantComplex Λ X
   /-- `Λ_X(m) ⊗^L Λ_X(m') ≅ Λ_X(m + m')`, which is what makes `Λ(c)[2c]` the `c`-th tensor
   power of `Λ(1)[2]` in the Künneth iteration of `sk-prop-an`. -/
-  twistObjectAddIso (X : Scheme.{u}) (m m' : ℤ) :
+  twistObjectAddIso (X : Scheme.{u}) [HasInvertibleExponent Λ X] (m m' : ℤ) :
     ((derivedTensor (ModuleCat.{u + 1} Λ) X).obj (twistObject X m)).obj (twistObject X m') ≅
       twistObject X (m + m')
   /-- The twist is compatible with pullback, `Lf^* Λ_Y(m) ≅ Λ_X(m)`; this is what makes the
   purity isomorphisms compatible with base change. -/
-  leftDerivedUpperStarTwistObjectIso {X Y : Scheme.{u}} (f : X ⟶ Y) (m : ℤ) :
+  leftDerivedUpperStarTwistObjectIso {X Y : Scheme.{u}} [HasInvertibleExponent Λ X]
+      [HasInvertibleExponent Λ Y] (f : X ⟶ Y) (m : ℤ) :
     (L((f)^*[ModuleCat.{u + 1} Λ])).obj (twistObject Y m) ≅ twistObject X m
   /-- Every twisting object is ⊗-invertible, with inverse `Λ_X(-m)`. Mathematically this is
   a consequence of `twistObjectZeroIso` and `twistObjectAddIso`; it is a field of its own
   because deriving it forces the kernel to unfold `AlgebraicGeometry.Etale.derivedTensor`,
   which is prohibitively expensive. -/
-  isInvertible_twistObject (X : Scheme.{u}) (m : ℤ) :
+  isInvertible_twistObject (X : Scheme.{u}) [HasInvertibleExponent Λ X] (m : ℤ) :
     DerivedCategory.isInvertible Λ X (twistObject X m)
   /-- Every twisting object lies in `D^b_{ctf}(X, Λ)`: in the concrete model `Λ_X(m)` is a lisse
   sheaf of free `Λ`-modules of rank one placed in degree zero. This is what lets the twists pass
   through the co-projection formula and the other finiteness statements of the chapter, all of
   which are stated on `D^b_{ctf}`. -/
-  boundedConstructibleFiniteTor_twistObject (X : Scheme.{u}) (m : ℤ) :
+  boundedConstructibleFiniteTor_twistObject (X : Scheme.{u}) [HasInvertibleExponent Λ X]
+      (m : ℤ) :
     DerivedCategory.boundedConstructibleFiniteTor Λ X (twistObject X m)
   /-- Every twisting object is locally constant of rank one (`def-coefficient-twists-detailed`):
   `Λ_X(m)` is a locally constant sheaf `L` of `Λ`-modules placed in degree zero, every stalk of
   which at a geometric point is free of rank one. In the concrete model
   `L = (μ_{ℓ^N} ⊗ Λ)^{⊗ m}`, respectively its `Λ`-dual for `m < 0`. -/
-  exists_isLocallyConstantSheaf_twistObject (X : Scheme.{u}) (m : ℤ) :
+  exists_isLocallyConstantSheaf_twistObject (X : Scheme.{u}) [HasInvertibleExponent Λ X]
+      (m : ℤ) :
     ∃ L : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ), IsLocallyConstantSheaf L ∧
       (∀ (Ω : Type u) [Field Ω] [IsSepClosed Ω] (s : Spec (.of Ω) ⟶ X),
         Nonempty ((pointSmallEtale s).sheafFiber.obj L ≅ ModuleCat.of Λ Λ)) ∧
@@ -170,7 +174,7 @@ class HasTateTwist where
          ▼                                     ‖
    Λ_X ⊗ Λ_X(m) ───────────λ──────────────▶ Λ_X(m)
   ``` -/
-  twistObjectAddIso_zero_left (X : Scheme.{u}) (m : ℤ) :
+  twistObjectAddIso_zero_left (X : Scheme.{u}) [HasInvertibleExponent Λ X] (m : ℤ) :
     ((derivedTensor (ModuleCat.{u + 1} Λ) X).map (twistObjectZeroIso X).hom).app
         (twistObject X m) ≫ (λ_ (twistObject X m)).hom =
       (twistObjectAddIso X 0 m).hom ≫ eqToHom (by rw [zero_add])
@@ -184,7 +188,7 @@ class HasTateTwist where
          ▼                                     ‖
    Λ_X(m) ⊗ Λ_X ───────────ρ──────────────▶ Λ_X(m)
   ``` -/
-  twistObjectAddIso_zero_right (X : Scheme.{u}) (m : ℤ) :
+  twistObjectAddIso_zero_right (X : Scheme.{u}) [HasInvertibleExponent Λ X] (m : ℤ) :
     ((derivedTensor (ModuleCat.{u + 1} Λ) X).obj (twistObject X m)).map
         (twistObjectZeroIso X).hom ≫ (ρ_ (twistObject X m)).hom =
       (twistObjectAddIso X m 0).hom ≫ eqToHom (by rw [add_zero])
@@ -199,7 +203,7 @@ class HasTateTwist where
           ▼                                      ▼
    Λ((a + b) + c) ════════════════════════ Λ(a + (b + c))
   ``` -/
-  twistObjectAddIso_assoc (X : Scheme.{u}) (a b c : ℤ) :
+  twistObjectAddIso_assoc (X : Scheme.{u}) [HasInvertibleExponent Λ X] (a b c : ℤ) :
     ((derivedTensor (ModuleCat.{u + 1} Λ) X).map (twistObjectAddIso X a b).hom).app
         (twistObject X c) ≫ (twistObjectAddIso X (a + b) c).hom =
       (α_ (twistObject X a) (twistObject X b) (twistObject X c)).hom ≫
@@ -214,8 +218,8 @@ class HasTateTwist where
   ```
 
   through `AlgebraicGeometry.Etale.leftDerivedUpperStarComp`. -/
-  leftDerivedUpperStarTwistObjectIso_comp {X Y S : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ S)
-      (m : ℤ) :
+  leftDerivedUpperStarTwistObjectIso_comp {X Y S : Scheme.{u}} [HasInvertibleExponent Λ X]
+      [HasInvertibleExponent Λ Y] [HasInvertibleExponent Λ S] (f : X ⟶ Y) (g : Y ⟶ S) (m : ℤ) :
     leftDerivedUpperStarTwistObjectIso (f ≫ g) m =
       (leftDerivedUpperStarComp (ModuleCat.{u + 1} Λ) f g).app (twistObject S m) ≪≫
         (L((f)^*[ModuleCat.{u + 1} Λ])).mapIso (leftDerivedUpperStarTwistObjectIso g m) ≪≫
@@ -230,7 +234,8 @@ class HasTateTwist where
             ▼                                                               ▼
      Lf^* Λ_Y(m + m') ──────────────────────≅──────────────────────▶ Λ_X(m + m')
   ``` -/
-  leftDerivedUpperStar_map_twistObjectAddIso {X Y : Scheme.{u}} (f : X ⟶ Y) (m m' : ℤ) :
+  leftDerivedUpperStar_map_twistObjectAddIso {X Y : Scheme.{u}} [HasInvertibleExponent Λ X]
+      [HasInvertibleExponent Λ Y] (f : X ⟶ Y) (m m' : ℤ) :
     (L((f)^*[ModuleCat.{u + 1} Λ])).map (twistObjectAddIso Y m m').hom ≫
         (leftDerivedUpperStarTwistObjectIso f (m + m')).hom =
       (leftDerivedUpperStarTensorIso (ModuleCat.{u + 1} Λ) f _ _).hom ≫
@@ -247,12 +252,12 @@ noncomputable def tateObject (m : ℤ) :
   HasTateTwist.twistObject (Λ := Λ) X m
 
 /-- Every Tate twisting object is ⊗-invertible, `Λ_X(m) ⊗^L Λ_X(-m) ≅ Λ_X`. -/
-theorem isInvertible_tateObject (m : ℤ) :
+theorem isInvertible_tateObject [HasInvertibleExponent Λ X] (m : ℤ) :
     DerivedCategory.isInvertible Λ X (tateObject Λ X m) :=
   HasTateTwist.isInvertible_twistObject X m
 
 /-- Every Tate twisting object lies in `D^b_{ctf}(X, Λ)`. -/
-theorem boundedConstructibleFiniteTor_tateObject (m : ℤ) :
+theorem boundedConstructibleFiniteTor_tateObject [HasInvertibleExponent Λ X] (m : ℤ) :
     DerivedCategory.boundedConstructibleFiniteTor Λ X (tateObject Λ X m) :=
   HasTateTwist.boundedConstructibleFiniteTor_twistObject X m
 
@@ -273,7 +278,7 @@ noncomputable def twistShift (m : ℤ) :
 moved out of the tensor product (`AlgebraicGeometry.Etale.derivedTensorShiftIso`) and the
 twisting objects multiplied with `HasTateTwist.twistObjectAddIso`. All shifts are even, so no
 sign is involved. -/
-noncomputable def shiftTateObjectAddIso (m m' : ℤ) :
+noncomputable def shiftTateObjectAddIso [HasInvertibleExponent Λ X] (m m' : ℤ) :
     ((derivedTensor (ModuleCat.{u + 1} Λ) X).obj ((tateObject Λ X m)⟦2 * m⟧)).obj
         ((tateObject Λ X m')⟦2 * m'⟧) ≅
       (tateObject Λ X (m + m'))⟦2 * (m + m')⟧ :=
@@ -284,27 +289,31 @@ noncomputable def shiftTateObjectAddIso (m m' : ℤ) :
 variable {Λ X} {Y : Scheme.{u}}
 
 /-- The identification `Lf^* Λ_Y(m) ≅ Λ_X(m)` of the Tate twist datum. -/
-noncomputable def leftDerivedUpperStarTateObjectIso (f : X ⟶ Y) (m : ℤ) :
+noncomputable def leftDerivedUpperStarTateObjectIso [HasInvertibleExponent Λ X]
+    [HasInvertibleExponent Λ Y] (f : X ⟶ Y) (m : ℤ) :
     (L((f)^*[ModuleCat.{u + 1} Λ])).obj (tateObject Λ Y m) ≅ tateObject Λ X m :=
   HasTateTwist.leftDerivedUpperStarTwistObjectIso f m
 
+omit [HasTateTwist Λ] in
 variable (Λ) in
-/-- The identification `Lf^* Λ_Y ≅ Λ_X` of the constant complexes, through
-`Λ_Y ≅ Λ_Y(0)` and `Lf^* Λ_Y(0) ≅ Λ_X(0)` of the Tate twist datum. -/
+/-- The identification `Lf^* Λ_Y ≅ Λ_X` of the constant complexes: the canonical identification
+`AlgebraicGeometry.Etale.leftDerivedUpperStarUnitIso` of the derived pullback of the monoidal
+unit. It does not depend on a Tate twist datum. -/
 noncomputable def leftDerivedUpperStarConstantComplexIso (f : X ⟶ Y) :
     (L((f)^*[ModuleCat.{u + 1} Λ])).obj (constantComplex Λ Y) ≅ constantComplex Λ X :=
-  (L((f)^*[ModuleCat.{u + 1} Λ])).mapIso (HasTateTwist.twistObjectZeroIso (Λ := Λ) Y).symm ≪≫
-    HasTateTwist.leftDerivedUpperStarTwistObjectIso f 0 ≪≫ HasTateTwist.twistObjectZeroIso X
+  leftDerivedUpperStarUnitIso (ModuleCat.{u + 1} Λ) f
 
 variable (Λ) in
 /-- The identification `Le^* (Λ_X(m)[2m]) ≅ Λ_U(m)[2m]`, through the shift compatibility of
 `Le^*` and the identification `Le^* Λ_X(m) ≅ Λ_U(m)` of the Tate twist datum. -/
-noncomputable def leftDerivedUpperStarTateShiftIso (f : X ⟶ Y) (m : ℤ) :
+noncomputable def leftDerivedUpperStarTateShiftIso [HasInvertibleExponent Λ X]
+    [HasInvertibleExponent Λ Y] (f : X ⟶ Y) (m : ℤ) :
     (L((f)^*[ModuleCat.{u + 1} Λ])).obj ((tateObject Λ Y m)⟦2 * m⟧) ≅
       (tateObject Λ X m)⟦2 * m⟧ :=
   ((L((f)^*[ModuleCat.{u + 1} Λ])).commShiftIso (2 * m)).app _ ≪≫
     (shiftFunctor _ (2 * m)).mapIso (leftDerivedUpperStarTateObjectIso f m)
 
+omit [HasTateTwist Λ] in
 variable (Λ) in
 /-- The identification `Lc^* Lg^* Λ_Y ≅ Λ_X` for the chosen compactification `(c, g)` of
 `f : X ⟶ Y`, through `AlgebraicGeometry.Etale.leftDerivedUpperStarConstantComplexIso`. -/
