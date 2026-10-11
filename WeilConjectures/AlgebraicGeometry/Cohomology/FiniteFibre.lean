@@ -9,6 +9,7 @@ public import WeilConjectures.AlgebraicGeometry.Cohomology.Affine.Cech
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.AffineMorphism
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Sections
 public import WeilConjectures.AlgebraicGeometry.Modules.Coherent
+public import WeilConjectures.AlgebraicGeometry.Modules.QcqsSections
 public import WeilConjectures.AlgebraicGeometry.Morphisms.ProperQuasiFinite
 
 /-!
@@ -94,8 +95,23 @@ theorem subsingleton_H_restrict_of_isAffineOpen (ℱ : X.Modules)
 (blueprint: `pqf-lem-pushforward-qcoh`) -/
 theorem isQuasicoherent_pushforward {S : Scheme.{u}} (f : X ⟶ S) [QuasiCompact f]
     [QuasiSeparated f] (ℱ : X.Modules) [SheafOfModules.IsQuasicoherent (R := X.ringCatSheaf) ℱ] :
-    SheafOfModules.IsQuasicoherent (R := S.ringCatSheaf) ((pushforward f).obj ℱ) :=
-  sorry
+    SheafOfModules.IsQuasicoherent (R := S.ringCatSheaf) ((pushforward f).obj ℱ) := by
+  refine isQuasicoherent_of_forall_isAffineOpen _ (fun W hW g s ↦ ?_) (fun W hW g t ht ↦ ?_)
+  · obtain ⟨n, t, ht⟩ := exists_map_eq_pow_smul_of_isCompact_of_isQuasiSeparated_of_basicOpen_eq
+      ℱ (f.isCompact_preimage hW.isCompact) (f.isQuasiSeparated_preimage hW.isQuasiSeparated)
+      (f.app W g) (f.preimage_basicOpen g).symm (f.preimage_mono (S.basicOpen_le g)) s
+    refine ⟨n, t, ht.trans ?_⟩
+    have h : f.app (S.basicOpen g) (S.presheaf.map (homOfLE (S.basicOpen_le g)).op g) =
+        X.presheaf.map (homOfLE (f.preimage_mono (S.basicOpen_le g))).op (f.app W g) := by
+      rw [← ConcreteCategory.comp_apply, f.naturality]
+      rfl
+    rw [← h, ← map_pow]
+    rfl
+  · obtain ⟨n, hn⟩ := exists_pow_smul_eq_zero_of_isCompact_of_basicOpen_eq ℱ
+      (f.isCompact_preimage hW.isCompact) (f.app W g) (f.preimage_basicOpen g).symm
+      (f.preimage_mono (S.basicOpen_le g)) t ht
+    rw [← map_pow] at hn
+    exact ⟨n, hn⟩
 
 /-- **Higher direct images along a proper morphism vanish at points with finite fibre.** Let
 `f : X ⟶ Y` be proper with `Y` locally noetherian, and let `y : Y` have a finite fibre

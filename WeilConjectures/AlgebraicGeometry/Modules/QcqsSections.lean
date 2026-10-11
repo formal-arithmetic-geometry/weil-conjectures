@@ -168,4 +168,22 @@ theorem exists_map_eq_pow_smul_of_isCompact_of_isQuasiSeparated {U : X.Opens}
   rw [map_map_homOfLE, ← map_map_homOfLE M (hle i) (X.basicOpen_le (fi i)), hu, map_smul,
     map_pow, hfi, ht', map_smul, map_pow, hf, smul_smul, ← pow_add, add_comm m']
 
+/-- A variant of `exists_pow_smul_eq_zero_of_isCompact` for an open `O` equal to `D(f)`. -/
+theorem exists_pow_smul_eq_zero_of_isCompact_of_basicOpen_eq {U O : X.Opens}
+    (hU : IsCompact (U : Set X)) (f : Γ(X, U)) (hO : X.basicOpen f = O) (hOU : O ≤ U)
+    (t : Γ(M, U)) (ht : M.presheaf.map (homOfLE hOU).op t = 0) :
+    ∃ n : ℕ, f ^ n • t = 0 := by
+  subst hO
+  exact exists_pow_smul_eq_zero_of_isCompact M hU f t ht
+
+/-- A variant of `exists_map_eq_pow_smul_of_isCompact_of_isQuasiSeparated` for an open `O` equal
+to `D(f)`. -/
+theorem exists_map_eq_pow_smul_of_isCompact_of_isQuasiSeparated_of_basicOpen_eq {U O : X.Opens}
+    (hU : IsCompact (U : Set X)) (hU' : IsQuasiSeparated (U : Set X)) (f : Γ(X, U))
+    (hO : X.basicOpen f = O) (hOU : O ≤ U) (s : Γ(M, O)) :
+    ∃ (n : ℕ) (t : Γ(M, U)), M.presheaf.map (homOfLE hOU).op t =
+      X.presheaf.map (homOfLE hOU).op f ^ n • s := by
+  subst hO
+  exact exists_map_eq_pow_smul_of_isCompact_of_isQuasiSeparated M hU hU' f s
+
 end AlgebraicGeometry.Scheme.Modules
