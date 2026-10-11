@@ -106,5 +106,24 @@
   "group": "C1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-pm2 (reviewer sub-agent of L); spot-checked: Repaired re-push after the 16:43 return; each point checked. (1) lem-sc-projective-summand-prime-membership deleted (on neither branch); step 2 now carries the argument itself, elementary, citing lem-sc-free-prime-membership and def-weil-pbc-projective-module: s/1 in pN_p, apply i_p (R_p-linear) to get i(s)/1 in p(R^n)_p, free criterion gives i(s) in pR^n, pi maps pR^n into pN so s=pi(i(s)) in pN; converse by R-linearity of N->N_p. Correct. (2) step 1 now takes R^n->>N from finiteness and lifts id_N by the lifting clause of def-weil-pbc-projective-module (read: it states lifting along every surjection). (3) lem-sc-free-prime-membership in TeX, F_p=S^{-1}F inline, coordinate clause a separate sentence; true (pR_p cap R = p for p prime, coordinatewise). (4) report review now names the sources and statements checked, though it still mentions a citations.json not in the delivery (not a node fault; accepted). Item statement change is notational only (N_p=S^{-1}N made explicit, stmt_dep def-weil-pbc-module-localization-away dropped, which only covered S={f^k}); mathematics unchanged. Audit 16:50: elementary three-line fact, short split accepted, one new statement-only node. FIX more, RETURN less (B3): the module localization S^{-1}N, S^{-1}F and the localized maps i_p, pi_p were cited by no node; def-weil-pbc-module-localization (mathlib) defines S^{-1}M and S^{-1}h exactly. Fixes: dag/nodes/sec-curve-estimates/lem-sc-affine-finite-projective-prime-membership.json: statement: cite [def-weil-pbc-module-localization] at N_p; stmt_deps, step 1 text+uses, proof_deps: add def-weil-pbc-module-localization. dag/nodes/sec-curve-estimates/lem-sc-free-prime-membership.json: statement: cite [def-weil-pbc-module-localization] at F_p; stmt_deps: add it; mathlib_searches: added my leanfinder query (results Submodule.mem_of_isLocalized_span, mem_localized', mem_of_localization_maximal, mem_localized0, IsLocalization.mem_span_iff; verdict no match). Small cases: N=0, N=R (pR_p cap R=p), R=Z p=(2) N=Z^2 s=(2,3): s/1 not in 2Z_(2)^2 and s not in 2Z^2. Start 16:56:28 end 16:57:33 UTC (date -u: start Sat Oct 10 04:56:28 PM UTC 2026).; 2 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.AffineFiniteProjectivePrimeMembership",
+  "declaration": "Module.prime_mem_localized_iff",
+  "file": "lean/Sheaf/RingTheory/AffineFiniteProjectivePrimeMembership.lean",
+  "statement": "theorem prime_mem_localized_iff {R : Type u} [CommRing R] {N : Type v} [AddCommGroup N] [Module R N] [Module.Finite R N] [Module.Projective R N] (s : N) (p : Ideal R) [p.IsPrime] : LocalizedModule.mk s 1 ∈ (Ideal.map (algebraMap R (Localization.AtPrime p)) p) • (⊤ : Submodule (Localization.AtPrime p) (LocalizedModule p.primeCompl N)) ↔ s ∈ p • (⊤ : Submodule R N)",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-fpm0944"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-fpm0944",
+  "group": "C1",
+  "result": "fix",
+  "note": "R CommRing; N finite (Module.Finite) projective (Module.Projective); s:N; p prime; N_p=LocalizedModule p.primeCompl N, s/1=mk s 1; pN_p=map p to R_p • ⊤, pN=p • ⊤; iff both directions; true (direct summand of free, pR_p∩R=p); edge N=0,p=⊥. FIX: R_p now Localization.AtPrime p with [p.IsPrime] (recorded notion of def-weil-pbc-localization-at-prime, sibling form), docstring carries node proof steps."
  }
 }

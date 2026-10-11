@@ -1,16 +1,73 @@
-1. Files written:
+## Worker report
 
-- `dag/nodes/sec-curve-estimates/lem-sc-affine-finite-projective-prime-membership.json` (statement, split into two proof steps).
-- `dag/nodes/sec-curve-estimates/lem-sc-free-prime-membership.json` (statement-only child; Mathlib searches found no exact match).
+The module states the prime-membership criterion for a finite projective module. It uses
+`Module.Finite` and `Module.Projective` as the finiteness and projectivity hypotheses,
+`Ideal.IsPrime` for the prime ideal, `LocalizedModule.mk s 1` for the canonical image of
+`s`, and the submodule scalar products `p • (⊤ : Submodule R N)` and
+`Ideal.map (algebraMap R (Localization p.primeCompl)) p • ⊤` for `pN` and its localized
+counterpart. The theorem is `Module.prime_mem_localized_iff` in
+`Sheaf.RingTheory.AffineFiniteProjectivePrimeMembership`.
 
-2. Attachments: no Lean declaration matched the item tag or statement in `/home/ubuntu/weil-src-slopmaster2/WeilConjectures`.
+The Lean binders render every hypothesis: `R` is a commutative ring; `N` is an additive
+commutative group with an `R`-module structure; `[Module.Finite R N]` says `N` is finite;
+`[Module.Projective R N]` says it is projective; `s : N`; `p : Ideal R`; and
+`hp : p.IsPrime`. The left clause is membership of the canonical fraction `s/1` in the
+extension of `p` to `Localization p.primeCompl`, acting on the top localized submodule.
+The right clause is membership of `s` in `p` acting on the top submodule of `N`; the `↔`
+connects the two clauses exactly.
 
-3. WANTED: none.
+Dependencies used are Mathlib declarations recorded by the dependency nodes:
+`Module.Projective` (`Mathlib.Algebra.Module.Projective`), `Localization.AtPrime` /
+`Ideal.ResidueField` (`Mathlib.RingTheory.Localization.AtPrime.Basic`), and
+`LocalizedModule` (`Mathlib.Algebra.Module.LocalizedModule.Basic`). No project module
+was needed. Searches recorded by stage 1 found no exact existing theorem: LeanSearch
+(`finite projective module s in pN iff s/1 in p N_p`) and LeanFinder
+(`prime ideal membership detected after localization for finite projective module`) found
+only component lemmas; grep of Mathlib RingTheory/LinearAlgebra found no exact criterion.
+The source is Stacks Project, algebra.tex, Lemma Tag 00NX.
 
-4. What was checked and corrected: the item statement was read together with its blueprint ancestor `lem-sc-pic-proper-ntorsion` and the existing projective-module and localization definition nodes. I searched the whole DAG and blueprint for the localization membership criterion and found no existing node. The returned direct-summand child was deleted because it restated the item and was conditional on the item. The free child was rewritten with TeX and with an explicit module localization $F_{\\mathfrak p}=S^{-1}F$, $S=R\\setminus\\mathfrak p$; its statement is now self-contained. Step 1 now says that finiteness gives a surjection $R^n\\twoheadrightarrow N$ and that the lifting clause of `def-weil-pbc-projective-module` gives $i$ with $\\pi i=1$. Step 2 explicitly applies $i_{\\mathfrak p}$, invokes the free criterion, applies $\\pi$, and proves the converse by the canonical localization map. I checked edge cases $N=0$, $N=R$, $N=R^2$, and $s=0$; all give the stated equivalence. `citations.json` records verbatim quotes for every cited node in each step.
+Edge cases checked include `N = 0`, `s = 0`, `p = ⊥` when prime, and rank-zero/free
+specializations; the scalar-product submodule formulation handles these without extra
+nonemptiness assumptions. The theorem proof is intentionally `sorry` at stage 2.
 
-5. What I could not finish: the two child statements remain unsplit natural-language leaves because no single Mathlib declaration states either combined criterion; they are queued for later proof work as required by stage 1.
+## Earlier second reading (a previous round; superseded)
 
-## Review by C1
+Independent rereading of the node and module found no mismatch. The commutative-ring, finite-projective, element, and prime-ideal hypotheses all occur explicitly, and the two membership clauses use the canonical localization fraction and the corresponding extended ideal submodule. No statement correction or dependency module is needed.
 
-I checked the Stacks source cited for Tag 00NX and the blueprint ancestor route, and opened the exact statements of `def-weil-pbc-projective-module` and `def-weil-pbc-localization-at-prime`. The item has no declaration or sorry-free attachment in the Lean checkout. For step 1, the projective definition says every map from a projective module lifts along a surjection; together with finite generation this gives $R^n\\twoheadrightarrow N$, and the resulting $i$ and $\\pi$ are the maps used later. For step 2, the projective definition's direct-summand clause supplies $\\pi i=1$, while `lem-sc-free-prime-membership` says exactly that free-module membership in $\\mathfrak pR^n$ is equivalent before and after localization. I verified that each cited statement contains the quoted fact in `citations.json`, and that the hypotheses (commutative ring, prime ideal, finite projective module, and finite free presentation) match at the relevant step. The projection calculation is elementary once those statements are available; the only non-elementary input is the free criterion. I checked $N=0$, $N=R$, $N=R^2$, and $s=0$. The repair specifically removes the item-restating child, adds the missing finite-generation/lifting explanation, fixes the module-localization notation and TeX, and records the actual citation review.
+## Second reading by C1
+
+I reread the node, its source place, all three dependency records, and the Lean file
+independently. The node introduces: a commutative ring `R`; a finite projective
+`R`-module `N`; an element `s : N`; a prime ideal `p ⊂ R`; the complement
+`S = R \ p`; the module localization `N_p = S⁻¹N`; and the canonical fraction `s/1`.
+The Lean renders these respectively as `{R : Type u} [CommRing R]`, `{N : Type v}`
+with `[AddCommGroup N] [Module R N] [Module.Finite R N] [Module.Projective R N]`,
+`s : N`, `p : Ideal R`, `hp : p.IsPrime`, `LocalizedModule p.primeCompl N`, and
+`LocalizedModule.mk s 1`. The conclusion has exactly the two node clauses and the
+same order: membership of `s/1` in the extension of `p` to the localized top
+submodule iff membership of `s` in `p • (⊤ : Submodule R N)`. `Ideal.map` along
+`algebraMap R (Localization p.primeCompl)` renders the extended ideal, so no
+additional Noetherian, nonzero, rank, or universe restriction is present.
+
+The source is Stacks, Algebra, Tag 00NX (finite projective modules), whose direct
+summand characterization supplies the finite-free splitting used by the blueprint;
+the membership criterion is the stated localization/direct-summand consequence.
+Dependency declarations are `Module.Projective` (Mathlib.Algebra.Module.Projective),
+`Localization.AtPrime` (Mathlib.RingTheory.Localization.AtPrime.Basic), and
+`LocalizedModule` (Mathlib.Algebra.Module.LocalizedModule.Basic); each has the
+notion recorded by its dependency node. Searches found no existing exact theorem:
+LeanSearch query `finite projective module s in pN iff s/1 in p N_p`, LeanFinder query
+`prime ideal membership detected after localization for finite projective module`,
+and grep for `pN|Prime.*LocalizedModule|projective.*torsion` in Mathlib and
+WeilConjectures. All returned only component declarations.
+
+Edge cases checked are `N = 0`, `s = 0`, `p = ⊥` when prime, rank-zero/free modules,
+the empty index set in a free presentation, and arbitrary universe levels `u,v`.
+The scalar-product formulation handles zero modules and empty presentations without
+extra assumptions; `n = 0` is included by the finite-free surjection argument.
+
+The only mismatch found was documentary: the theorem docstring summarized the proof
+without carrying its individual steps and dependency citations as required by H8.
+I expanded it to state the finite surjection, projective lift, localized splitting,
+forward projection through `i` and `π` using `lem-sc-free-prime-membership`, and the
+converse by localization. The statement and node record were otherwise unchanged.

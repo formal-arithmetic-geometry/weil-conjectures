@@ -3667,3 +3667,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 07:41 L: merged deliver/K1/def-weil-pbc-ample-invertible-module (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.Ample AlgebraicGeometry.Scheme.Modules.IsAmple)
 - 07:42 L: merged deliver/G1/lem-sc-coherent-ring-fp-kernel-cokernel (stage 2; reviewer PASS; first push; Sheaf.RingTheory.FinitePresentationKerRangeCokernel Module.finitePresentation_ker_range_cokernel_of_fg_ideals)
 - 07:42 L: merged deliver/K1/lem-pod-equivalence-induces-module-objects (stage 2; reviewer FIX; first push; Sheaf.CategoryTheory.EquivalenceInternalModule CategoryTheory.equivalence_induces_internalModules; new nodes: def-pod-finite-continuous-module, def-pod-internal-module)
+- 07:42 L: merged deliver/C1/lem-sc-affine-finite-projective-prime-membership (stage 2; reviewer FIX; first push; Sheaf.RingTheory.AffineFiniteProjectivePrimeMembership Module.prime_mem_localized_iff)
