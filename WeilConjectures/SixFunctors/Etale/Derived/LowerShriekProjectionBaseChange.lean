@@ -82,6 +82,63 @@ lemma compactification_derivedSquareUpperStarIso
     Iso.inv_hom_id_app]
   erw [Category.comp_id]
 
+section
+
+variable [Etale.UpperStarPreservesFlat A] [HasSmallSiteSheafify A]
+  {FC : A → A → Type*} {CC : A → Type (u + 1)}
+  [∀ (P Q : A), FunLike (FC P Q) (CC P) (CC Q)] [ConcreteCategory.{u + 1} A FC]
+  [(CategoryTheory.forget A).ReflectsIsomorphisms]
+  [PreservesFilteredColimitsOfSize.{u + 1, u + 1} (CategoryTheory.forget A)]
+  [∀ Z : Scheme.{u}, Z.smallEtaleTopology.HasSheafCompose (CategoryTheory.forget A)]
+
+/-- The open part of the compatibility of the projection map with the compactly supported base
+change map, inside the compactification `c'` of the base change. -/
+lemma projectionMapOfCompactification_baseChange_aux
+    (K : DerivedCategory (Sheaf X.smallEtaleTopology A))
+    (L : DerivedCategory (Sheaf Y.smallEtaleTopology A)) :
+    ((-⊗ᴸ-(c'.Z)[A]).obj (L((q)^*[A]).obj (D((c.i)_!open[A]).obj K))).map
+        ((derivedSquareUpperStarIso A hp).hom.app L) ≫
+      (leftDerivedUpperStarTensorIso A q (D((c.i)_!open[A]).obj K) (L((c.g)^*[A]).obj L)).inv ≫
+      L((q)^*[A]).map (((derivedOpenImmersionLowerShriekProjectionIso A c.i).inv.app K).app
+        (L((c.g)^*[A]).obj L)) ≫
+      L((q)^*[A]).map (D((c.i)_!open[A]).map (((-⊗ᴸ-(X)[A]).obj K).map
+        ((leftDerivedUpperStarCompactificationIso A c).hom.app L))) ≫
+      (derivedOpenImmersionLowerShriekBaseChangeIso A hi).inv.app
+        (((-⊗ᴸ-(X)[A]).obj K).obj (L((f)^*[A]).obj L)) ≫
+      D((c'.i)_!open[A]).map
+        (((leftDerivedUpperStarTensorComparison A g').app K).app (L((f)^*[A]).obj L)) ≫
+      D((c'.i)_!open[A]).map (((-⊗ᴸ-(X')[A]).obj (L((g')^*[A]).obj K)).map
+        ((derivedSquareUpperStarIso A sq).inv.app L)) =
+    ((-⊗ᴸ-(c'.Z)[A]).map ((derivedOpenImmersionLowerShriekBaseChangeIso A hi).inv.app K)).app
+        (L((c'.g)^*[A]).obj (L((g)^*[A]).obj L)) ≫
+      ((derivedOpenImmersionLowerShriekProjectionIso A c'.i).inv.app (L((g')^*[A]).obj K)).app
+        (L((c'.g)^*[A]).obj (L((g)^*[A]).obj L)) ≫
+      D((c'.i)_!open[A]).map (((-⊗ᴸ-(X')[A]).obj (L((g')^*[A]).obj K)).map
+        ((leftDerivedUpperStarCompactificationIso A c').hom.app (L((g)^*[A]).obj L))) := by
+  have oi := derivedOpenImmersionLowerShriekProjectionIso_inv_baseChange A hi K
+    (L((c.g)^*[A]).obj L)
+  have n₁ := (derivedOpenImmersionLowerShriekBaseChangeIso A hi).inv.naturality
+    (((-⊗ᴸ-(X)[A]).obj K).map ((leftDerivedUpperStarCompactificationIso A c).hom.app L))
+  dsimp only [Functor.comp_map] at n₁
+  rw [reassoc_of% n₁, reassoc_of% oi]
+  have e₁ := ((-⊗ᴸ-(c'.Z)[A]).map ((derivedOpenImmersionLowerShriekBaseChangeIso A hi).inv.app
+    K)).naturality ((derivedSquareUpperStarIso A hp).hom.app L)
+  have e₂ := ((derivedOpenImmersionLowerShriekProjectionIso A c'.i).inv.app
+    (L((g')^*[A]).obj K)).naturality ((derivedSquareUpperStarIso A hp).hom.app L)
+  have e₃ := ((leftDerivedUpperStarTensorComparison A g').app K).naturality
+    ((leftDerivedUpperStarCompactificationIso A c).hom.app L)
+  have hC := compactification_derivedSquareUpperStarIso A sq c c' q hi hp L
+  dsimp at e₁ e₂ e₃
+  rw [reassoc_of% e₁, reassoc_of% e₂]
+  simp only [← Functor.map_comp]
+  congr 2
+  congr 1
+  rw [reassoc_of% e₃, ← leftDerivedUpperStarTensorIso_hom, Iso.inv_hom_id_assoc]
+  simp only [← Functor.map_comp, Category.assoc]
+  rw [hC]
+
+end
+
 end Etale
 
 end AlgebraicGeometry
