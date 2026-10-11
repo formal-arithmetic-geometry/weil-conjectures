@@ -201,5 +201,23 @@
   "by": "L",
   "result": "accepted",
   "note": "7 steps following Algebra 00NG: e <= d by a new unsplit node for 00LK (depth <= dim Supp); free modules have depth >= d (written out); the inductive claim P(k) stated with base; the first syzygy nonzero and finite (Noetherian leaf); depth K_1 = e' + 1 by a new unsplit node for 00LX (parts (2) and (3); 00NE alone gives only the inequality); splicing with exactness checked; conclusion. The proof shows K != 0, so the 'K = 0 or' clause never occurs (statement kept as is). Statement unchanged except def-weil-pbc-free-module added to stmt_deps."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.CohenMacaulayFreeResolution",
+  "declaration": "IsLocalRing.exists_finite_free_resolution_to_maximalCohenMacaulay",
+  "file": "lean/Sheaf/RingTheory/CohenMacaulayFreeResolution.lean",
+  "statement": "theorem exists_finite_free_resolution_to_maximalCohenMacaulay {R : Type u} [CommRing R] [IsNoetherianRing R] [IsLocalRing R] (M : Type v) [AddCommGroup M] [Module R M] [Module.Finite R M] [Nontrivial M] (d : ℕ) (hdim : ringKrullDim R = (d : WithBot ℕ∞)) (hcm : (d : ℕ∞) ≤ depth (R := R) R) : ∃ e : ℕ, depth (R := R) M = (e : ℕ∞) ∧ e ≤ d ∧ ∃ S : ComposableArrows (ModuleCat.{max u v} R) (d - e + 3), S.Exact ∧ IsZero (S.obj' 0) ∧ IsZero (S.obj' (d - e + 3)) ∧ Nonempty ((S.obj' (d - e + 2)) ≃ₗ[R] M) ∧ (∀ i : Fin (d - e), Module.Free R (S.obj' (i.val + 2) (by omega)) ∧ Module.Finite R (S.obj' (i.val + 2) (by omega))) ∧ (let K := S.obj' 1 ∃ hK : Module.Finite R K, letI := hK Subsingleton K ∨ depth (R := R) K = (d : ℕ∞))",
+  "branch": "sheaf-dag",
+  "by": "J1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-cfm1426",
+  "group": "J1",
+  "result": "pass",
+  "note": "Noetherian local R, ringKrullDim R = d, d <= IsLocalRing.depth R (H1 form); M finite nontrivial; e : N with depth M = e, e <= d; ComposableArrows of length d-e+3 exact, zero ends, obj (d-e+2) ≃ M, obj 2..d-e+1 Module.Free+Module.Finite, obj 1 finite and Subsingleton or depth = d; e=d case gives K≅M; #check confirms IsLocalRing.depth"
  }
 }
