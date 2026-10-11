@@ -1,11 +1,11 @@
 # Work queue
 
-380 items; claim with `tools/claim.py next <group> [--stage N]`.
+376 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (380)
+## Stage 2: nodes to state (376)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -17,7 +17,6 @@
 | `lem-pc-perfect-complex-descent` | 1 | state |
 | `lem-pc-perfect-descend-morphisms` | 1 | state |
 | `lem-pc-perfect-generator-pullback` | 1 | state |
-| `lem-pc-perfect-pseudo-coherent-locally-finite-tor` | 1 | state |
 | `lem-pc-perfect-tensor-hom-duality` | 1 | state |
 | `lem-pc-pseudo-coherent-finite-tor-perfect` | 1 | state |
 | `lem-pc-supported-perfect-generator` | 1 | state |
@@ -38,8 +37,6 @@
 | `lem-sc-perfect-cut-complex-degree-zero` | 1 | state |
 | `lem-sc-perfect-derived-tensor-perfect` | 1 | state |
 | `lem-sc-perfect-finite-free-residue-model` | 1 | state |
-| `lem-sc-perfect-h0-locally-closed` | 1 | state |
-| `lem-sc-perfect-hypercohomology-gap` | 1 | state |
 | `lem-sc-perfect-into-support-on-T` | 1 | state |
 | `lem-sc-perfect-jump-loci` | 1 | state |
 | `lem-sc-picard-kunneth-qcoh` | 1 | state |
@@ -50,7 +47,6 @@
 | `lem-weil-pbc-closed-immersion-conormal-flat-base-change` | 1 | state |
 | `lem-weil-pbc-pair-henselization` | 1 | state |
 | `lem-weil-pbc-projective-space-functor-of-points` | 1 | state |
-| `lem-weil-pbc-quasi-coherent-module-cokernel-image` | 1 | state |
 | `lem-weil-pbc-quasi-coherent-module-colimit-affine-sections` | 1 | state |
 | `lem-weil-pbc-quasi-coherent-symmetric-algebra` | 1 | state |
 | `lem-weil-pbc-quasi-coherent-tensor-product-affine-sections` | 1 | state |
