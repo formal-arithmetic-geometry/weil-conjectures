@@ -1,7 +1,7 @@
 /-
-Copyright (c) 2026 Claude. All rights reserved.
+Copyright (c) 2026 Christian Merten. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Claude
+Authors: Christian Merten, Claude
 -/
 module
 
@@ -23,6 +23,9 @@ For an ideal `I` of a commutative ring `R`, the *extended Rees algebra* is the s
 is the affine piece of the deformation to the normal cone of `V(I) ⊆ Spec R`: inverting `t` gives
 `R[t, t⁻¹]`, and setting `t = 0` gives the associated graded ring `⨁_{r ≥ 0} I^r / I^{r+1}`.
 
+Mathlib records `Algebra.FiniteType R (reesAlgebra I)` only as an instance under
+`[IsNoetherianRing R]`; `reesAlgebra.finiteType` states it for finitely generated `I`.
+
 ## Main definitions
 
 - `Ideal.extendedReesAlgebra`: the extended Rees algebra `R[t, I t⁻¹] ⊆ R[t, t⁻¹]`.
@@ -33,11 +36,23 @@ is the affine piece of the deformation to the normal cone of `V(I) ⊆ Spec R`: 
 
 - `Ideal.isLocalization_extendedReesAlgebra`: `R[t, t⁻¹]` is the localization of the extended
   Rees algebra at `t`.
-- `Ideal.isBaseChange_extendedReesAlgebraMap`: along a flat `R ⟶ S`, the extended Rees algebra
+- `reesAlgebra.finiteType`: the Rees algebra of a finitely generated ideal is of finite type.
+- `Ideal.isBaseChange_extendedReesAlgebraAlgHom`: along a flat `R ⟶ S`, the extended Rees algebra
   of `I S` is the base change of that of `I`.
 -/
 
 @[expose] public section
+
+section FiniteType
+
+variable {R : Type*} [CommRing R] {I : Ideal R}
+
+/-- The Rees algebra of a finitely generated ideal is of finite type over the base ring.
+This generalizes the `IsNoetherianRing` instance in Mathlib. -/
+theorem reesAlgebra.finiteType (hI : I.FG) : Algebra.FiniteType R (reesAlgebra I) :=
+  ⟨(reesAlgebra I).fg_top.mpr (reesAlgebra.fg hI)⟩
+
+end FiniteType
 
 open LaurentPolynomial Polynomial
 
