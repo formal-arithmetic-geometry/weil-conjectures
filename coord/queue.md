@@ -2,7 +2,7 @@
 
 869 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (21)
+## Stage 1: nodes to split (20)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -14,7 +14,6 @@
 | `prop-av-tate-rank` | 4008 | rests_on_sorry |
 | `cor-pc-sigma-pic-iso` | 4009 | rests_on_sorry |
 | `lem-pc-vanishing-above-dim` | 4009 | rests_on_sorry |
-| `lem-sc-finite-flat-surj-points` | 4009 | none |
 | `lem-pc-kflat-derived-tensor-associator` | 5016 | none |
 | `lem-pc-derived-tensor-action-naturality` | 5018 | none |
 | `lem-pc-derived-tensor-flat-second-localization` | 5018 | none |
@@ -28,7 +27,7 @@
 | `lem-pur-essential-constant-pro-criterion-05py` | - | none |
 | `lem-pur-triangle-morphism-category-05r9` | - | none |
 
-## Stage 2: nodes to state (848)
+## Stage 2: nodes to state (849)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -855,6 +854,7 @@
 | `lem-sc-c1-brauer-trivial` | 2 | state |
 | `lem-sc-c1-finite-extension` | 2 | state |
 | `lem-sc-degree-2g1-very-ample` | 2 | state |
+| `lem-sc-finite-flat-surj-points` | 2 | state |
 | `lem-sc-hilbert-polynomial` | 2 | state |
 | `lem-sc-positive-degree-ample` | 2 | state |
 | `lem-sc-regular-dim1-dvr` | 2 | state |
@@ -881,7 +881,7 @@
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 | `def-nagata-fixed-base-separated-stage` | 6 | state |
 
-Not open yet: 1772 nodes that wait for a statement dependency, 62 nodes that wait for stage 1.
+Not open yet: 1772 nodes that wait for a statement dependency, 61 nodes that wait for stage 1.
 
 ## Stage 3: modules to prove (0)
 
