@@ -22,6 +22,11 @@ the directed union of its finite separable subextensions, so that `ks` is their 
 - `IsSepClosed.instInfinite`: a separably closed field is infinite.
 - `RingHom.exists_comp_eq_of_isSepClosed`: an embedding of a separable extension into a field
   extension of a separably closed field `L` lands in `L`.
+- `IsSepClosed.iff_exists_root`, `IsSepClosed.iff_forall_finrank_eq_one`: a field is separably
+  closed iff every nonconstant separable polynomial has a root iff it has no nontrivial finite
+  separable extension (blueprint `def-pc-separably-closed`).
+- `IsSepClosed.finrank_eq_one_of_isSeparable`: separable extensions of a separably closed field
+  are trivial (blueprint `lem-pc-sepclosed-finite-sep-trivial`).
 -/
 
 @[expose] public section
@@ -87,3 +92,59 @@ lemma RingHom.exists_comp_eq_of_isSepClosed {F E L Ω : Type*} [Field F] [Field 
   change ((e (e.symm ⟨c x, hsub x⟩)) : Ω) = c x
   rw [e.apply_symm_apply]
 
+
+/-! ### Characterisations of separably closed fields -/
+
+namespace IsSepClosed
+
+open Polynomial
+
+variable (k : Type u) [Field k]
+
+/-- **Separably closed fields.** A field `k` is separably closed (Mathlib's `IsSepClosed k`, every
+separable polynomial splits) if and only if every nonconstant separable polynomial over `k` has a
+root in `k`.
+
+(blueprint: `def-pc-separably-closed`) -/
+theorem iff_exists_root :
+    IsSepClosed k ↔ ∀ p : k[X], p.degree ≠ 0 → p.Separable → ∃ x, p.IsRoot x :=
+  ⟨fun _ p hp hsep ↦ exists_root p hp hsep, fun h ↦ of_exists_root k fun _ _ hirr hsep ↦
+    h _ (degree_pos_of_irreducible hirr).ne' hsep⟩
+
+/-- **A separably closed field has no nontrivial separable extension.** If `k` is separably
+closed, every separable field extension `K / k`, in particular every finite one, is trivial:
+`[K : k] = 1`.
+
+(blueprint: `lem-pc-sepclosed-finite-sep-trivial`) -/
+theorem finrank_eq_one_of_isSeparable [IsSepClosed k] (K : Type v) [Field K] [Algebra k K]
+    [Algebra.IsSeparable k K] : Module.finrank k K = 1 :=
+  ((AlgEquiv.ofBijective (Algebra.ofId k K) (algebraMap_bijective k K)).toLinearEquiv.finrank_eq
+    ).symm.trans (Module.finrank_self k)
+
+/-- **The two formulations of separable closedness agree.** A field `k` is separably closed if and
+only if it has no nontrivial finite separable field extension. One direction is
+`IsSepClosed.finrank_eq_one_of_isSeparable`; conversely, for a separable irreducible polynomial `p`
+with a root `α` in an algebraic closure, `k⟮α⟯` is a finite separable extension of degree
+`deg p`, so `deg p = 1` and `p` has a root in `k`.
+
+(blueprint: `rem-ptr-pc-separably-closed-1`, `def-pc-separably-closed`) -/
+theorem iff_forall_finrank_eq_one :
+    IsSepClosed k ↔ ∀ (K : Type u) [Field K] [Algebra k K] [FiniteDimensional k K]
+      [Algebra.IsSeparable k K], Module.finrank k K = 1 := by
+  refine ⟨fun _ K _ _ _ _ ↦ finrank_eq_one_of_isSeparable k K, fun h ↦ ?_⟩
+  refine of_exists_root k fun p _ hirr hsep ↦ ?_
+  obtain ⟨α, hα⟩ := IsAlgClosed.exists_aeval_eq_zero (AlgebraicClosure k) p
+    (degree_pos_of_irreducible hirr).ne'
+  have hp0 : p ≠ 0 := hirr.ne_zero
+  have hint : IsIntegral k α := ⟨p * C p.leadingCoeff⁻¹, monic_mul_leadingCoeff_inv hp0, by
+    simp [eval₂_mul, ← aeval_def, hα]⟩
+  have hαsep : IsSeparable k α := hsep.of_dvd (minpoly.dvd k α hα)
+  have : FiniteDimensional k k⟮α⟯ := adjoin.finiteDimensional hint
+  have : Algebra.IsSeparable k k⟮α⟯ := (isSeparable_adjoin_simple_iff_isSeparable k _).mpr hαsep
+  have h1 := h k⟮α⟯
+  rw [adjoin.finrank hint, minpoly.natDegree_eq_one_iff] at h1
+  obtain ⟨a, ha⟩ := h1
+  refine ⟨a, (algebraMap k (AlgebraicClosure k)).injective ?_⟩
+  rw [map_zero, ← hα, ← ha, ← eval₂_at_apply, aeval_def]
+
+end IsSepClosed

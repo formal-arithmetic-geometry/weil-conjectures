@@ -104,7 +104,9 @@ right-hand side carries the `Γ(X, ⊤)`-module structure
 The isomorphism ought to be the edge map of the Čech-to-derived spectral sequence
 `CategoryTheory.Sheaf.exists_cechToDerivedSpectralSequence`, which is an isomorphism because
 the higher rows of that spectral sequence vanish by `subsingleton_H_succ_of_isAffine`; see the
-implementation notes of this module for what is lost by not naming it. -/
+implementation notes of this module for what is lost by not naming it.
+
+(blueprint: `lem-pc-cech-computes`) -/
 @[stacks 01XD]
 theorem nonempty_cechComplex_linearEquiv_H {ι : Type u} (U : ι → X.Opens)
     (hU : ∀ s : Finset ι, s.Nonempty → IsAffineOpen (⨅ i ∈ s, U i)) (hU' : iSup U = ⊤)

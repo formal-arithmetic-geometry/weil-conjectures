@@ -24,6 +24,8 @@ connected (Stacks, Algebra, Lemma 10.48.4).
 - `IsSepClosed.eq_zero_or_eq_one_of_isIdempotentElem_tensorProduct`: if `k` is separably
   closed, `A` has no nontrivial idempotents and `L` is a `k`-domain, then `A ⊗[k] L` has no
   nontrivial idempotents.
+- `IsSepClosed.exists_isSeparable_pow_and_isPurelyInseparable`: an algebraic extension of a
+  separably closed field is purely inseparable (blueprint `lem-pc-kbar-pure-insep`).
 -/
 
 @[expose] public section
@@ -142,3 +144,24 @@ theorem eq_zero_or_eq_one_of_isIdempotentElem_tensorProduct
   · simp [h]
 
 end IsSepClosed
+
+section KBar
+
+universe u v
+
+variable (k : Type u) [Field k]
+
+/-- **The algebraic closure of a separably closed field is purely inseparable.** Let `k` be
+separably closed of exponential characteristic `p` and `K / k` algebraic (for instance
+`K = k̄`). Every `α ∈ K` has a power `α ^ p ^ n` which is separable over `k` (it even lies in
+`k`), hence `K / k` is purely inseparable.
+
+(blueprint: `lem-pc-kbar-pure-insep`) -/
+theorem IsSepClosed.exists_isSeparable_pow_and_isPurelyInseparable [IsSepClosed k] (p : ℕ)
+    [ExpChar k p] (K : Type v) [Field K] [Algebra k K] [Algebra.IsAlgebraic k K] :
+    (∀ α : K, ∃ n : ℕ, IsSeparable k (α ^ p ^ n)) ∧ IsPurelyInseparable k K := by
+  refine ⟨fun α ↦ ?_, inferInstance⟩
+  obtain ⟨n, a, ha⟩ := IsPurelyInseparable.pow_mem k p α
+  exact ⟨n, ha ▸ isSeparable_algebraMap a⟩
+
+end KBar

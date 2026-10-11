@@ -29,6 +29,7 @@ public import WeilConjectures.AlgebraicGeometry.Modules.Dual
 public import WeilConjectures.AlgebraicGeometry.Modules.AffineHom
 public import WeilConjectures.AlgebraicGeometry.Modules.GeneratingLocus
 public import WeilConjectures.AlgebraicGeometry.Modules.HomObjSections
+public import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentCokernel
 public import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentKernel
 public import WeilConjectures.AlgebraicGeometry.Modules.ZeroLocus
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.OfInvertible
@@ -231,31 +232,51 @@ section Curve
 variable {k : Type u} [Field k] {X : Scheme.{u}} [X.Over (Spec (.of k))]
   [SmoothOfRelativeDimension 1 (X ↘ Spec (.of k))] [IsProper (X ↘ Spec (.of k))]
 
-/-- **`χ = h⁰ - h¹` on a curve.** On a smooth proper curve `X` over `k`, the Euler
-characteristic of every `𝒪_X`-module `M` is `χ(M) = h⁰(M) - h¹(M)`, since `H^q(X, M) = 0` for
-`q ≥ 2` by Grothendieck vanishing. -/
-theorem Modules.eulerChar_eq_finrankH_zero_sub_finrankH_one (M : X.Modules) :
-    M.eulerChar k = M.finrankH k 0 - M.finrankH k 1 := by
-  have := isNoetherian_of_locallyOfFiniteType (X ↘ Spec (.of k))
-  rw [Modules.eulerChar_eq_sum_range k M
-    (topologicalKrullDim_le_of_smoothOfRelativeDimension (X ↘ Spec (.of k)) 1)]
-  simp [Finset.sum_range_succ]
-  ring
-
 variable (k) in
 include k in
 /-- **Vanishing above the dimension of a curve.** On a smooth proper curve `X` over `k`,
-`H^q(X, ℱ) = 0` for every sheaf of modules `ℱ` and every `q ≥ 2`: `X` is noetherian of
-dimension at most one, so this is Grothendieck vanishing
-`AlgebraicGeometry.Scheme.Modules.subsingleton_H_of_topologicalKrullDim_lt`.
+`H^q(X, ℱ) = 0` for every quasi-coherent `𝒪_X`-module `ℱ` and every `q ≥ 2`.
+
+Choose a finite morphism `π : X ⟶ ℙ¹_k` (`exists_isFinite_flat_hom_projectiveLine`). As `π` is
+affine, `H^q(X, ℱ) ≅ H^q(ℙ¹_k, π_* ℱ)` with `π_* ℱ` quasi-coherent
+(`nonempty_cohomologyFunctor_iso_pushforward_of_isAffineHom`), and the cohomology of a
+quasi-coherent module on `ℙ¹_k`, which is computed by the Čech complex of the two standard affine
+opens, vanishes in degrees `q ≥ 2` (`ProjectiveLine.subsingleton_H_of_two_le`). The blueprint
+uses instead a cover of `X` by two affine opens.
 
 (blueprint: `lem-pc-vanishing-above-dim`) -/
-theorem Modules.subsingleton_H_of_two_le (ℱ : X.Modules) {q : ℕ} (hq : 2 ≤ q) :
+theorem Modules.subsingleton_H_of_two_le (ℱ : X.Modules)
+    [SheafOfModules.IsQuasicoherent (R := X.ringCatSheaf) ℱ] {q : ℕ} (hq : 2 ≤ q) :
     Subsingleton (ℱ.H q) := by
-  have := isNoetherian_of_locallyOfFiniteType (X ↘ Spec (.of k))
-  refine subsingleton_H_of_topologicalKrullDim_lt ℱ
-    ((topologicalKrullDim_le_of_smoothOfRelativeDimension (X ↘ Spec (.of k)) 1).trans_lt ?_)
-  exact_mod_cast hq
+  obtain ⟨π, hπ, hfin, -, -⟩ := exists_isFinite_flat_hom_projectiveLine (k := k) (X := X)
+  obtain ⟨e⟩ := Modules.nonempty_cohomologyFunctor_iso_pushforward_of_isAffineHom k π q
+  have := Modules.isQuasicoherent_pushforward_of_isAffineHom π ℱ
+  have h := ProjectiveLine.subsingleton_H_of_two_le (k := k) ((Modules.pushforward π).obj ℱ) hq
+  have h' : Subsingleton ((Modules.cohomologyFunctor k q).obj ((Modules.pushforward π).obj ℱ)) := h
+  exact @Equiv.subsingleton _ _ (e.app ⟨ℱ, ‹_›⟩).toLinearEquiv.toEquiv h'
+
+/-- **`χ = h⁰ - h¹` on a curve.** On a smooth proper curve `X` over `k`, the Euler
+characteristic of every quasi-coherent `𝒪_X`-module `M` is `χ(M) = h⁰(M) - h¹(M)`, since
+`H^q(X, M) = 0` for `q ≥ 2` (`AlgebraicGeometry.Scheme.Modules.subsingleton_H_of_two_le`). -/
+theorem Modules.eulerChar_eq_finrankH_zero_sub_finrankH_one (M : X.Modules)
+    [SheafOfModules.IsQuasicoherent (R := X.ringCatSheaf) M] :
+    M.eulerChar k = M.finrankH k 0 - M.finrankH k 1 := by
+  rw [Modules.eulerChar_eq_sum_range_of_finrankH_eq_zero k M (n := 1) fun q hq ↦
+    have := Modules.subsingleton_H_of_two_le k M hq
+    Module.finrank_zero_of_subsingleton]
+  simp [Finset.sum_range_succ]
+  ring
+
+/-- For an ideal sheaf `J` and an invertible module `M`, the cokernel `M|_D` of
+`J ⊗ M ⟶ 𝒪_X ⊗ M` is quasi-coherent. -/
+lemma IdealSheafData.isQuasicoherent_cokernel_whiskerRight (J : X.IdealSheafData)
+    (M : X.Modules) [M.IsInvertible] :
+    SheafOfModules.IsQuasicoherent (R := X.ringCatSheaf) (cokernel (J.toModulesι ▷ M)) := by
+  have := Modules.isQuasicoherent_toModules J
+  have := SheafOfModules.isQuasicoherent_unit (R := X.ringCatSheaf)
+  have := Modules.isQuasicoherent_tensorObj J.toModules M
+  have := Modules.isQuasicoherent_tensorObj (𝟙_ X.Modules) M
+  exact Modules.isQuasicoherent_cokernel _
 
 /-- **Effective divisors on curves are finite.** Let `D` be an effective Cartier divisor on a
 smooth proper curve `X` over `k`, with invertible ideal sheaf `J`. Then `D` is finite over `k`:
@@ -323,6 +344,7 @@ theorem IdealSheafData.IsInvertible.eulerChar_cokernel_whiskerRight {J : X.Ideal
     exact Modules.finrankH_zero_eq_finrankΓ_of_isFinite _
   have h₁ : Modules.finrankH k (cokernel (J.toModulesι ▷ M)) 1 = 0 :=
     Module.finrank_zero_of_subsingleton
+  have := J.isQuasicoherent_cokernel_whiskerRight M
   rw [Modules.eulerChar_eq_finrankH_zero_sub_finrankH_one, h₀, h₁]
   simp
 
@@ -350,6 +372,12 @@ theorem IdealSheafData.IsInvertible.eulerChar_tensorObj_dual_toModules {J : X.Id
   have e₂ : S.X₂ ≅ M := λ_ M
   have : S.X₂.IsInvertible := Modules.IsInvertible.of_iso e₂.symm
   have := hJ.finiteDimensional_H_cokernel_whiskerRight (k := k) M
+  have := J.isQuasicoherent_cokernel_whiskerRight M
+  have := Modules.isQuasicoherent_toModules J
+  have : SheafOfModules.IsQuasicoherent (R := X.ringCatSheaf) S.X₁ :=
+    Modules.isQuasicoherent_tensorObj J.toModules M
+  have : SheafOfModules.IsQuasicoherent (R := X.ringCatSheaf) S.X₂ :=
+    Modules.IsInvertible.isQuasicoherent _
   have h := Modules.eulerChar_eq_add_of_shortExact k hS 1
     (fun q hq ↦ Modules.subsingleton_H_of_two_le k _ (by omega))
     (fun q hq ↦ Modules.subsingleton_H_of_two_le k _ (by omega))
@@ -427,6 +455,8 @@ theorem Modules.exists_finrankH_zero_pos_tensorObj_dual_pow (ℒ : X.Modules) [�
   have hd := Hom.finrankΓ_pos_of_isFinite (J.subschemeι ≫ X ↘ Spec (.of k))
   refine ⟨(1 - ℒ.eulerChar k).toNat, fun n hn ↦ ?_⟩
   have h₁ := (hJ.pow n).eulerChar_tensorObj_dual_toModules (k := k) ℒ
+  have := (hJ.pow n).isInvertible_dual_toModules
+  have := Modules.IsInvertible.isQuasicoherent (ℒ ⊗ (J ^ n).toModulesᵛ)
   have h₂ := Modules.eulerChar_eq_finrankH_zero_sub_finrankH_one (k := k)
     (ℒ ⊗ (J ^ n).toModulesᵛ)
   have h₃ := (hJ.finrankΓ_subschemeι_pow_comp (k := k) n).ge.trans'
@@ -674,6 +704,7 @@ Without the hypothesis `H⁰(X, 𝒪_X) = k` the statement fails, as for `ℙ¹_
 theorem eulerChar_unit_eq :
     Modules.eulerChar (X := X) k (SheafOfModules.unit X.ringCatSheaf) =
       1 - (arithmeticGenus k X : ℤ) := by
+  have := SheafOfModules.isQuasicoherent_unit (R := X.ringCatSheaf)
   refine (Modules.eulerChar_eq_finrankH_zero_sub_finrankH_one
     (SheafOfModules.unit X.ringCatSheaf)).trans ?_
   rw [Modules.finrankH_unit_zero]
@@ -693,6 +724,8 @@ theorem eulerChar_free_eq (r : ℕ) :
     Modules.eulerChar (X := X) k (SheafOfModules.free (ULift.{u} (Fin r))) =
       r * (1 - (arithmeticGenus k X : ℤ)) := by
   let O : X.Modules := SheafOfModules.unit X.ringCatSheaf
+  have := SheafOfModules.isQuasicoherent_unit (R := X.ringCatSheaf)
+  have := SheafOfModules.isQuasicoherent_free (R := X.ringCatSheaf) (ULift.{u} (Fin r))
   have hb := biconeIsBilimitOfColimitCoconeOfIsColimit
     (colimit.isColimit (Discrete.functor fun _ : ULift.{u} (Fin r) ↦ O))
   have (q : ℕ) : FiniteDimensional k (O.H q) :=
@@ -1063,6 +1096,7 @@ lemma Modules.exists_app_cokernel_π_ne_zero (N : X.Modules) [N.IsInvertible]
     have h := hJ.eulerChar_cokernel_whiskerRight (k := k) N
     have h1 : Modules.finrankH k (cokernel (x.1.ker.toModulesι ▷ N)) 1 = 0 :=
       Module.finrank_zero_of_subsingleton
+    have := x.1.ker.isQuasicoherent_cokernel_whiskerRight N
     rw [Hom.finrankΓ_subschemeι_ker_fieldPoints,
       Modules.eulerChar_eq_finrankH_zero_sub_finrankH_one, h1] at h
     simp only [Nat.cast_zero, sub_zero, Nat.cast_one, Nat.cast_eq_one] at h
@@ -1263,6 +1297,11 @@ theorem degree_relativeDifferentials [GlobalSectionsBijective k X] :
   have h1 : Modules.finrankH k (X ↘ Spec (.of k)).relativeDifferentials 1 = 1 := by
     rw [← Modules.finrankH_congr k (whiskerRightIso d _ ≪≫ λ_ _) 1, ← h]
     exact Modules.finrankH_unit_zero
+  have := Hom.isInvertible_relativeDifferentials (X ↘ Spec (.of k))
+  have := Modules.IsInvertible.of_sheafOfModules (X ↘ Spec (.of k)).relativeDifferentials
+  have : SheafOfModules.IsQuasicoherent (R := X.ringCatSheaf)
+      (X ↘ Spec (.of k)).relativeDifferentials :=
+    Modules.IsInvertible.isQuasicoherent _
   rw [Modules.degree, Modules.eulerChar_eq_finrankH_zero_sub_finrankH_one,
     finrankH_relativeDifferentials_zero_eq_arithmeticGenus, h1, eulerChar_unit_eq]
   push_cast
@@ -1764,6 +1803,7 @@ theorem finrankH_zero_tensorObj_pullback_toModules_ker_add_one
     have h := hJ.eulerChar_cokernel_whiskerRight (k := K) L
     have h1 : Modules.finrankH K (cokernel ((x.1.ker.comap 𝔭).toModulesι ▷ L)) 1 = 0 :=
       Module.finrank_zero_of_subsingleton
+    have := (x.1.ker.comap 𝔭).isQuasicoherent_cokernel_whiskerRight L
     rw [finrankΓ_subschemeι_comap_ker_fieldPoints,
       Modules.eulerChar_eq_finrankH_zero_sub_finrankH_one, h1] at h
     simp only [Nat.cast_zero, sub_zero, Nat.cast_one, Nat.cast_eq_one] at h
