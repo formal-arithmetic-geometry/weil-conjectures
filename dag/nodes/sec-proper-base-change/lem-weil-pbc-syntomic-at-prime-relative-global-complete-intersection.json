@@ -281,5 +281,23 @@
   "worker": "stage1",
   "summary": "Not a Mathlib leaf (Mathlib has no complete-intersection or fibre-dimension notion for presentations; earlier leansearch/leanfinder/grep records kept, loogle and a second leansearch added). Split following the proof of Stacks 00SY (3) => (2) in eleven steps: reduction to S finitely presented (fibre hypothesis transported to S_g via the new node for 00SA (1)); presentation S = R[x]/I and fibre k[x]/I-bar with the prime q-bar'; freeness of rank c of the conormal module of the fibre at the point from the existing 00SC (1) => (4) node (which is what 00SG (3) => (4) amounts to); choice of f_1..f_c among the generators of I and Nakayama; S' = R[x]/(f), J = ker(S' -> S); flatness of S_q over R_p and 00HL; the source's 'by construction S'_{q'} (x) k maps isomorphically to S_q (x) k' written out by the reduction map P_{q'} -> k[x]_{q-bar'} (kernel pP_{q'}, surjective); Nakayama gives u not in q' with J_u = 0; the fibre-dimension hypothesis of 00ST (3) for S', which the source uses without comment, proved by comparing heights through 00P2; new node for 00ST (3) (relative global complete intersection conclusion) and for 00SS (2) to localize further at u; return to S. The statement is unchanged; the citer lem-weil-pbc-flat-smooth-fibre-smooth-at-prime uses it exactly as stated."
  },
- "reviewed": "pass (L, 2026-10-10): 11 steps follow 00SY (3)=>(2) with the gaps written out: reduction to S finitely presented (new 00SA(1) node), the conormal module of the fibre free of rank c (00SC node), choice of f_1..f_c by Nakayama, the comparison ring S' agreeing with S near q by flatness (00HL) and Nakayama, the fibre dimension n - c of S' (00P2 height comparison), and the localization to a relative global complete intersection (new 00ST(3) and 00SS(2) nodes)."
+ "reviewed": "pass (L, 2026-10-10): 11 steps follow 00SY (3)=>(2) with the gaps written out: reduction to S finitely presented (new 00SA(1) node), the conormal module of the fibre free of rank c (00SC node), choice of f_1..f_c by Nakayama, the comparison ring S' agreeing with S near q by flatness (00HL) and Nakayama, the fibre dimension n - c of S' (00P2 height comparison), and the localization to a relative global complete intersection (new 00ST(3) and 00SS(2) nodes).",
+ "lean": {
+  "module": "Sheaf.RingTheory.SyntomicAtPrimeRelativeGlobalCompleteIntersection",
+  "declaration": "Algebra.exists_relativeGlobalCompleteIntersection_of_syntomicAtPrime",
+  "file": "lean/Sheaf/RingTheory/SyntomicAtPrimeRelativeGlobalCompleteIntersection.lean",
+  "statement": "theorem exists_relativeGlobalCompleteIntersection_of_syntomicAtPrime {R : Type u} {S : Type v} [CommRing R] [CommRing S] [Algebra R S] (q : PrimeSpectrum S) (hfp : ∃ g : S, g ∉ q.asIdeal ∧ FinitePresentation R (Localization.Away g)) (hflat : (Localization.localRingHom (q.asIdeal.comap (algebraMap R S)) q.asIdeal (algebraMap R S) rfl).Flat) (hci : ∃ h : (q.asIdeal.comap (algebraMap R S)).Fiber S, h ∉ (PrimeSpectrum.preimageEquivFiber R S (q.comap (algebraMap R S)) ⟨q, rfl⟩).asIdeal ∧ IsGlobalCompleteIntersection (q.asIdeal.comap (algebraMap R S)).ResidueField (Localization.Away h)) : ∃ (g' : S), g' ∉ q.asIdeal ∧ ∃ (n c : ℕ) (f : Fin c → MvPolynomial (Fin n) R), IsRelativeGlobalCompleteIntersectionPresentation f ∧ Nonempty (Localization.Away g' ≃ₐ[R] (MvPolynomial (Fin n) R ⧸ Ideal.span (Set.range f)))",
+  "branch": "sheaf-dag",
+  "by": "V1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-sgc",
+  "group": "V1",
+  "result": "pass",
+  "note": "q : PrimeSpectrum S, p = q.asIdeal.comap algebraMap; (1) ∃ g ∉ q, FinitePresentation R (Away g); (2) localRingHom p q (algebraMap) rfl Flat = R_p→S_q; (3) h : p.Fiber S outside preimageEquivFiber ⟨q,rfl⟩ (kernel of F→κ(q), checked in Mathlib Fiber.lean) with IsGlobalCompleteIntersection κ(p) (Away h); conclusion ∃ g' ∉ q, n c f, landed IsRelativeGlobalCompleteIntersectionPresentation f ∧ Nonempty (Away g' ≃ₐ[R] R[x]/span(range f)); FIBRE RING and FLAT conventions followed, no let/letI/notation/local instance, no GCI copy"
+ }
 }
