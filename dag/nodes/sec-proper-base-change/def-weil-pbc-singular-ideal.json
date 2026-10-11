@@ -145,5 +145,33 @@
   "by": "L",
   "result": "pass",
   "note": "Reviewed by the lead (opus-relaunch6). Definition node (07C5 with 00TB) split into four elementary steps: well-formedness and presentation-independence of G and H_{A/R}; the smooth locus is the open union of the D(g), g in G, with complement V(H_{A/R}); uniqueness of the radical ideal with this zero locus via the new Mathlib leaf lem-weil-pbc-zero-locus-eq-iff-radical-eq (00E0 (6),(7); PrimeSpectrum.zeroLocus_eq_iff Spectrum/Prime/Topology.lean:190, verified, with Ideal.radical_eq_sInf), so the node agrees with Stacks' definition; the rest of Section 07C4 left to the nodes that use it. Noted for the split of lem-weil-pbc-popescu-final-solve: 'A_f smooth for every f in H_{A/R}' (00TC locality) needs its own node there."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.SingularIdeal",
+  "declaration": "Algebra.singularIdeal",
+  "declarations": [
+   "Algebra.IsSmoothAtPrime",
+   "Algebra.smoothElements",
+   "Algebra.singularIdeal",
+   "Algebra.singularIdeal_isRadical",
+   "Algebra.smoothAtPrime_locus_eq",
+   "Algebra.isOpen_smoothAtPrime_locus",
+   "Algebra.singularIdeal_zeroLocus",
+   "Algebra.singularIdeal_unique"
+  ],
+  "file": "lean/Sheaf/RingTheory/SingularIdeal.lean",
+  "statement": "def singularIdeal (R : Type u) (A : Type v) [CommRing R] [CommRing A] [Algebra R A] : Ideal A",
+  "branch": "sheaf-dag",
+  "by": "K1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-sgi0558",
+  "group": "K1",
+  "result": "pass",
+  "note": "commutative R->A as [CommRing R][CommRing A][Algebra R A], two universes, no added hypotheses; A_g = Localization.Away g with induced R-algebra; 00TB smooth-at-q = exists g notin q with Smooth R A_g (Mathlib IsSmoothAt is formal smoothness of A_q, differs without FP, so new def justified); G = smoothElements; H = (span G).radical, real data; locus = union of basicOpen g, open; V(H) = nonsmooth locus = intersection V(g); uniqueness among radical J with that zero locus"
  }
 }
