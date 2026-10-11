@@ -3084,3 +3084,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 00:19 UTC L: F1 tor-independent-projective-complex-tensor FIX d5288863c (R-tpt0018).
 - 00:19 L: merged deliver/J1/lem-sc-valuation-proper-coherent-sections (reviewer PASS; first push; new nodes: 1)
 - 00:20 L: returned deliver/M1/lem-sc-picard-closure-specialization (reviewer RETURN: Not a fault: the node was attached by L at 23:56 UTC (commit becdd3ebc) to the sorry-free slopmaster2 declaration Algebr)
+- 00:20 UTC L: J1 valuation-proper-coherent-sections PASS 62557e2cd (R-vcs0018); M1 delivery of the attached node lem-sc-picard-closure-specialization returned as unneeded, branch deleted with a notice.
