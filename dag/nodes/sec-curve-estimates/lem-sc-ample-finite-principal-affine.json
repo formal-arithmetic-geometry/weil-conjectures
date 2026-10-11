@@ -121,5 +121,23 @@
   "group": "J1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-af2 (reviewer sub-agent of L); spot-checked: Repaired re-push after the 15:13 return: point 1 (false product argument) repaired by following Stacks 09NV's proof (properties.tex 5304: 01ZY, Gamma_* graded ring, 00JS, 01PV); point 2 repaired (01J3 place, vanishingIdeal candidate recorded; created.by/date are stamped at merge); point 3 repaired (report names the TeX read, step places now describe 09NV's proof). Statement agrees with 09NV hypothesis by hypothesis (scheme, ample L, E finite subset W open; n>0, X_s affine, E in X_s in W). New statements checked true against sources: lem-sc-ample-finite-set-affine = 01ZY case (3); lem-sc-graded-prime-avoidance = 00JS (algebra.tex 13630); lem-sc-closed-subset-qc-ideal = reduced induced structure 01J3. Cited statements read: lem-sc-ample-ideal-section (01Q3, needs Y qc: given by ampleness), lem-sc-affine-cap-section-open (01PV). Small case: P^1, O(1), E={0,inf}: the return's counterexample no longer applies, s is a single avoiding section (e.g. x^2+y^2 type). FIX more, RETURN less: (1) C4 dag/nodes/sec-curve-estimates/lem-sc-ample-finite-principal-affine.json: proof step 1: applied 01ZY to W claiming M|_W ample, false when W is not quasi-compact; now 01ZY on Y gives affine U' containing E, U = U' cap W, and step 3 gets Y_s affine as U' cap Y_s by 01PV (Y_s in U in U'); (2) C1 same file: step 2: I not in p_e used the ideal of Y minus U without a node; now cites lem-sc-closed-subset-qc-ideal (added to uses and proof_deps; the node was otherwise unused) and writes out why u vanishes on V(J); (3) B3 dag/nodes/sec-curve-estimates/lem-sc-graded-prime-avoidance.json: statement/stmt_deps: graded ring was cited as def-pc-standard-graded-algebra (standard graded k-algebra, which Gamma_* is not); now nonnegatively graded commutative ring [def-pc-proj] with graded ideal and S_+ spelled out; also dag/nodes/sec-curve-estimates/lem-sc-closed-subset-qc-ideal.json: statement: added [pqf-def-coherent] at quasi-coherent (already in stmt_deps) and spelled out V(J). Start Sat Oct 10 03:42:33 PM UTC 2026, end Sat Oct 10 03:44:15 PM UTC 2026.; 3 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AmpleFinitePrincipalAffine",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.exists_affine_section_neighbourhood_of_finite",
+  "file": "lean/Sheaf/AlgebraicGeometry/AmpleFinitePrincipalAffine.lean",
+  "statement": "theorem exists_affine_section_neighbourhood_of_finite (Y : Scheme.{u}) (M : Y.Modules) [M.IsInvertible] (hM : IsAmple Y M) (E : Set Y) (hE : E.Finite) (W : Y.Opens) (hEW : E ⊆ (W : Set Y)) : ∃ n : ℕ, 0 < n ∧ ∃ s : (M.tensorPow n).val.presheaf.obj (Opposite.op ⊤), ∃ U : Y.Opens, E ⊆ (U : Set Y) ∧ U ≤ W ∧ IsAffineOpen U ∧ ∀ y : Y, y ∈ U ↔ (TopCat.Presheaf.germ (M.tensorPow n).val.presheaf ⊤ y trivial) s ∉ (IsLocalRing.maximalIdeal (Y.presheaf.stalk y)) • (⊤ : Submodule (Y.presheaf.stalk y) ↑(TopCat.Presheaf.stalk (M.tensorPow n).val.presheaf y))",
+  "branch": "sheaf-dag",
+  "by": "K1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-fpa1108",
+  "group": "K1",
+  "result": "pass",
+  "note": "Y:Scheme.{u}; M:Y.Modules [IsInvertible] with IsAmple (resolves to Scheme.Modules.IsAmple, #check confirmed); E:Set Y finite; W:Y.Opens, E sub W; exists n>0, s global section of tensorPow n, U:Y.Opens pinned to Y_s by IsAmple's germ condition verbatim; E sub U, U<=W, IsAffineOpen U; empty E/empty Y/non-qc W allowed; forms identical to sibling 348414c3b"
  }
 }
