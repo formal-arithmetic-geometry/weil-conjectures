@@ -117,6 +117,9 @@ instance isMonoidal_lowerStarCompComparisonLowerStarIso_hom :
   rw [h]
   infer_instance
 
+/-- The isomorphism `g^* ν_X^* ≅ ν_Y^* g^*` of
+`AlgebraicGeometry.ProEtale.comparisonUpperStarCompUpperStarIso` is monoidal, being the
+conjugate of the monoidal isomorphism `g_* ⋙ ν_{X,*} ≅ ν_{Y,*} ⋙ g_*` of the right adjoints. -/
 instance isMonoidal_comparisonUpperStarCompUpperStarIso_hom :
     NatTrans.IsMonoidal (comparisonUpperStarCompUpperStarIso A g).hom := by
   have : NatTrans.IsMonoidal (lowerStarCompComparisonLowerStarIso g A).symm.hom :=

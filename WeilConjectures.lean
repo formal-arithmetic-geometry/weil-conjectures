@@ -453,6 +453,7 @@ public import WeilConjectures.CategoryTheory.Abelian.RightDerived.Acyclic
 public import WeilConjectures.CategoryTheory.Abelian.RightDerived.LongExactSequence
 public import WeilConjectures.CategoryTheory.Adjunction.ProjectionMap
 public import WeilConjectures.CategoryTheory.Adjunction.ProjectionMapCompat
+public import WeilConjectures.CategoryTheory.Adjunction.ProjectionMapMate
 public import WeilConjectures.CategoryTheory.Comma.ArrowRefinement
 public import WeilConjectures.CategoryTheory.Comma.Over.DescentDatum
 public import WeilConjectures.CategoryTheory.ConcreteCategory.FinitelyGenerated
@@ -473,6 +474,7 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.FlatModelOfClass
 public import WeilConjectures.CategoryTheory.DerivedCategory.HasMonoidalDerivedCategory
 public import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.Defs
 public import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.MapDerivedCategory
+public import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.Monoidal
 public import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryMate
 public import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.Closed
 public import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.Dualizable
@@ -1649,6 +1651,7 @@ public import WeilConjectures.SixFunctors.ProEtale.Comparison.Flat
 public import WeilConjectures.SixFunctors.ProEtale.Comparison.FullyFaithful
 public import WeilConjectures.SixFunctors.ProEtale.Comparison.LowerStar
 public import WeilConjectures.SixFunctors.ProEtale.Comparison.LowerStarAcyclic
+public import WeilConjectures.SixFunctors.ProEtale.Comparison.Monoidal
 public import WeilConjectures.SixFunctors.ProEtale.ConstructibleSheaf
 public import WeilConjectures.SixFunctors.ProEtale.Derived.AlgClosedField
 public import WeilConjectures.SixFunctors.ProEtale.Derived.ClopenIdempotent
@@ -1665,6 +1668,7 @@ public import WeilConjectures.SixFunctors.ProEtale.Derived.LowerShriek
 public import WeilConjectures.SixFunctors.ProEtale.Derived.LowerShriekComparison
 public import WeilConjectures.SixFunctors.ProEtale.Derived.LowerShriekProjection
 public import WeilConjectures.SixFunctors.ProEtale.Derived.LowerStarProjection
+public import WeilConjectures.SixFunctors.ProEtale.Derived.LowerStarProjectionComparison
 public import WeilConjectures.SixFunctors.ProEtale.Derived.OpenImmersionLowerShriek
 public import WeilConjectures.SixFunctors.ProEtale.Derived.OpenImmersionLowerShriekProjection
 public import WeilConjectures.SixFunctors.ProEtale.Derived.Perfect
@@ -1707,6 +1711,7 @@ public import WeilConjectures.SixFunctors.ProEtale.UpperLowerStar.ClosedImmersio
 public import WeilConjectures.SixFunctors.ProEtale.UpperLowerStar.Coherence
 public import WeilConjectures.SixFunctors.ProEtale.UpperLowerStar.Defs
 public import WeilConjectures.SixFunctors.ProEtale.UpperLowerStar.Detection
+public import WeilConjectures.SixFunctors.ProEtale.UpperLowerStar.FlatModuleCat
 public import WeilConjectures.SixFunctors.ProEtale.UpperLowerStar.GlobalSections
 public import WeilConjectures.SixFunctors.ProEtale.UpperLowerStar.GlobalSectionsMonoidal
 public import WeilConjectures.SixFunctors.ProEtale.UpperLowerStar.InternalHom

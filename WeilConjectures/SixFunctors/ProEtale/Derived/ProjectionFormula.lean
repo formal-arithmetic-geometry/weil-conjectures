@@ -5,6 +5,7 @@ Authors: Claude
 -/
 module
 
+public import WeilConjectures.Mathlib.CategoryTheory.NatIso
 public import WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormula
 public import WeilConjectures.SixFunctors.ProEtale.Comparison.Flat
 public import WeilConjectures.SixFunctors.ProEtale.Derived.LowerShriekProjection
@@ -39,7 +40,10 @@ of `AlgebraicGeometry.ProEtale.projectionMapOfCompactification` is an isomorphis
 ## Main statements
 
 - `AlgebraicGeometry.ProEtale.hasProjectionFormula_of_constructibleFiniteTor`
-  (`sk-thm-sf-pf-proetale`) : the projection formula for objects of `Dctf`.
+  (`sk-thm-sf-pf-proetale`) : the projection formula for objects of `Dctf` at a finite
+  coefficient ring `Λ`, and its version
+  `AlgebraicGeometry.ProEtale.hasProjectionFormulaOfCompactification_of_constructibleFiniteTor`
+  for an arbitrary compactification.
 
 ## Implementation notes
 
@@ -51,15 +55,17 @@ projection formula asserts that the former is an isomorphism on the relevant obj
 The blueprint's "étale-origin witnesses" for `K` and `L` are built into
 `AlgebraicGeometry.ProEtale.DerivedCategory.constructibleFiniteTor`, since pro-étale bounded
 constructibility is defined as étale origin. For the same reason this notion agrees with the
-blueprint's `Dctf(X_proét, A)` only at the finite coefficient stages; the `𝒪_E`, `E` and
-`ℚ̄_ℓ` stages of `sk-thm-sf-pf-proetale` are not covered by this statement. Accordingly the
-coefficient category is assumed torsion: `N • 𝟙 M = 0` for some `N ≠ 0` and every `M : A`.
-At these stages the torsion projection formula (SGA 4 XVII 5.2.9) holds without the finite Tor
-amplitude assumption; it is kept to match the blueprint's `Dctf` statement.
+blueprint's `Dctf(X_proét, A)` only at the finite coefficient stages `A = ModuleCat Λ`, `Λ` a
+finite ring; the `𝒪_E`, `E` and `ℚ̄_ℓ` stages of `sk-thm-sf-pf-proetale` are not covered by
+this statement.
 
-The blueprint proves this by reduction to the étale torsion projection formula along `ν^*`. That
-needs the étale torsion projection formula and the compatibility of `D(ν^*)` with `Rf_!`, `Lf^*`
-and `⊗ᴸ`, none of which is in the repository yet.
+As in the blueprint, the proof reduces to the étale projection formula along `ν^*`: the
+comparison carries the étale projection map of `Rg_*` to the pro-étale one
+(`WeilConjectures.SixFunctors.ProEtale.Derived.LowerStarProjectionComparison`), `ν^*` commutes
+with extension by zero, and the étale projection formula for the proper `g` at finite
+coefficients is `AlgebraicGeometry.Etale.isIso_rightDerivedLowerStarProjectionMap_of_finite`.
+The finite Tor amplitude of `L` keeps `i_! K ⊗ᴸ Lg^* L` bounded below, where `ν^*` is known to
+commute with `Rg_*`.
 
 -/
 
@@ -152,28 +158,6 @@ end ProEtale
 
 end AlgebraicGeometry
 
-namespace CategoryTheory.NatTrans
-
-variable {C D E : Type*} [Category* C] [Category* D] [Category* E]
-
-/-- A component `(τ.app M').app L'` of a natural transformation of bifunctors is an isomorphism
-if the component at isomorphic arguments `(M, L)` is. -/
-lemma isIso_app_app_of_iso {F G : C ⥤ D ⥤ E} (τ : F ⟶ G) {M M' : C} {L L' : D}
-    (eM : M ≅ M') (eL : L ≅ L') [IsIso ((τ.app M).app L)] : IsIso ((τ.app M').app L') := by
-  have h₁ := (τ.app M).naturality eL.hom
-  have h₂ := congr_app (τ.naturality eM.hom) L'
-  dsimp at h₂
-  have : IsIso ((F.obj M).map eL.hom ≫ (τ.app M).app L') := by
-    rw [h₁]
-    infer_instance
-  have : IsIso ((τ.app M).app L') := IsIso.of_isIso_comp_left ((F.obj M).map eL.hom) _
-  have : IsIso ((F.map eM.hom).app L' ≫ (τ.app M').app L') := by
-    rw [h₂]
-    infer_instance
-  exact IsIso.of_isIso_comp_left ((F.map eM.hom).app L') _
-
-end CategoryTheory.NatTrans
-
 namespace AlgebraicGeometry.ProEtale
 
 open Scheme
@@ -188,7 +172,8 @@ Bounded constructibility on the pro-étale site is étale origin, so `K ≅ ν^*
 `L ≅ ν^* L₀` for étale complexes `K₀` and `L₀`. For the compactification `X ⟶[i] Z ⟶[g] Y` the
 projection map is the one of `Rg_*` at `(i_! K, L)` followed by isomorphisms, and
 `i_! ν^* K₀ ≅ ν^* i_! K₀`. The comparison `ν^*` carries the étale projection map of `Rg_*` to
-the pro-étale one (`AlgebraicGeometry.ProEtale.isIso_rightDerivedLowerStarProjectionMap_app_app_leftDerived`),
+the pro-étale one
+(`AlgebraicGeometry.ProEtale.isIso_rightDerivedLowerStarProjectionMap_app_app_leftDerived`),
 and the étale projection formula for the proper `g` at finite coefficients is
 `AlgebraicGeometry.Etale.isIso_rightDerivedLowerStarProjectionMap_of_finite`. The finite Tor
 amplitude of `L` makes `i_! K₀ ⊗ᴸ Lg^* L₀` bounded below, where `ν^*` commutes with `Rg_*`. -/
@@ -232,12 +217,6 @@ theorem hasProjectionFormulaOfCompactification_of_constructibleFiniteTor [Finite
   have := NatTrans.isIso_app_app_of_iso
     (rightDerivedLowerStarProjectionMap (ModuleCat.{u + 1} Λ) c.g) eM.symm eL'.symm
   infer_instance
-
-end AlgebraicGeometry.ProEtale
-
-namespace AlgebraicGeometry.ProEtale
-
-variable (Λ : Type (u + 1)) [CommRing Λ] {X Y : Scheme.{u}}
 
 /-- Blueprint `sk-thm-sf-pf-proetale`: Projection formula: the pro-étale realization.
 
