@@ -118,5 +118,24 @@
   "group": "J1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-sdd1740 (reviewer sub-agent of L); spot-checked: Steps 1-3 prove the statement (Jacobson both directions via intersection then contraction); leaf lem-sc-dedekind-localization-dvr read at Dvr.lean:128, one-line specialization (maximal ideal of dim-1 domain is nonzero prime). FIX more, RETURN less: B class (c) lem-sc-dedekind-intersection-localizations is Mathlib, one declaration per clause: MaximalSpectrum.iInf_localization_eq_bot (Spectrum/Maximal/Localization.lean:35) and IsLocalization.AtPrime.to_map_mem_maximal_iff (Localization/AtPrime/Basic.lean:165); made it a mathlib leaf with mathlib_match and a recorded grep search.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.SemilocalDedekindDvrReduction",
+  "declaration": "MaximalSpectrum.semilocal_dedekind_dvr_reduction",
+  "file": "lean/Sheaf/RingTheory/SemilocalDedekindDvrReduction.lean",
+  "statement": "theorem semilocal_dedekind_dvr_reduction (B : Type u) [CommRing B] [IsDedekindDomain B] [Finite (MaximalSpectrum B)] (hdim : ringKrullDim B = 1) (K : Type v) [Field K] [Algebra B K] [IsFractionRing B K] : let a := fun m : MaximalSpectrum B => IsLocalization.localizationAlgebraOfSubmonoidLe (Localization.AtPrime m.asIdeal) K m.asIdeal.primeCompl (nonZeroDivisors B) m.asIdeal.primeCompl_le_nonZeroDivisors Finite (MaximalSpectrum B) ∧ (∀ m : MaximalSpectrum B, letI := a m IsDiscreteValuationRing (Localization.AtPrime m.asIdeal) ∧ IsFractionRing (Localization.AtPrime m.asIdeal) K) ∧ (∀ x : K, (∃ b : B, b ∈ Ideal.jacobson (⊥ : Ideal B) ∧ algebraMap B K b = x) ↔ ∀ m : MaximalSpectrum B, letI := a m ∃ y : Localization.AtPrime m.asIdeal, y ∈ IsLocalRing.maximalIdeal (Localization.AtPrime m.asIdeal) ∧ algebraMap (Localization.AtPrime m.asIdeal) K y = x)",
+  "branch": "sheaf-dag",
+  "by": "J1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-sdd1254"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-sdd1254",
+  "group": "J1",
+  "result": "fix",
+  "note": "B CommRing+IsDedekindDomain (H4 fix: was IsDomain+IsNoetherianRing+IsIntegrallyClosed written out, as K1 6c72e167a), Finite MaximalSpectrum, ringKrullDim B = 1, arbitrary K IsFractionRing; conj1 finite maxspec; conj2 per m Localization.AtPrime DVR + IsFractionRing K via canonical localizationAlgebraOfSubmonoidLe; conj3 forall x:K, image of jacobson bot iff for all m image of maximalIdeal of B_m"
  }
 }
