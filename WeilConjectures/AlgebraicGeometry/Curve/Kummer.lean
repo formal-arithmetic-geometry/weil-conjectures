@@ -30,10 +30,9 @@ scheme on which `n` is invertible.
 - `AlgebraicGeometry.IsCurve.sheafH_rootsOfUnitySheaf_of_subsingleton`: the cohomology of `μₙ`
   in degrees `0`, `1`, `2` for a curve with vanishing Brauer group.
 - `AlgebraicGeometry.IsCurve.nonempty_addEquiv_sheafH_rootsOfUnitySheaf_two_of_smooth`:
-  `H²(C, μₙ) ≅ Pic(C)/n·Pic(C)` for smooth `C`.
-- `AlgebraicGeometry.IsCurve.nonempty_addEquiv_sheafH_rootsOfUnitySheaf_two`:
-  `H²(C, μₙ) ≅ Pic(C)/n·Pic(C)` for every curve, using that the Brauer group of every curve
-  vanishes.
+  `H²(C, μₙ) ≅ Pic(C)/n·Pic(C)` for smooth `C`; for an arbitrary curve see
+  `AlgebraicGeometry.IsCurve.nonempty_addEquiv_sheafH_rootsOfUnitySheaf_two` in
+  `WeilConjectures.AlgebraicGeometry.Curve.BrauerNonreduced`.
 -/
 
 @[expose] public section
@@ -136,30 +135,6 @@ theorem nonempty_addEquiv_sheafH_rootsOfUnitySheaf_two_of_smooth [IsAlgClosed k]
     simpa using hn.isUnit.map ((Scheme.ΓSpecIso (.of k)).inv ≫ f.appTop).hom
   obtain ⟨α, β, hα, hαβ, -⟩ := C.exists_exact_sheafH_rootsOfUnitySheaf_two n hn'
   have := subsingleton_cohomologicalBrauerGroup_of_smooth f
-  rw [← hα]
-  exact ⟨(QuotientAddGroup.quotientKerEquivOfSurjective α
-    fun y ↦ (hαβ y).1 (Subsingleton.elim _ _)).symm⟩
-
-/-- **`H²` via the Kummer sequence.** For a curve `C` over an algebraically closed field `k`
-(not necessarily smooth) and every `n ≥ 1` prime to `char k`,
-
-`H²(C, μₙ) ≅ Pic(C)/n·Pic(C)`.
-
-This is the remark of blueprint `sk-prop-h2` that the identity holds for every curve, since
-the Brauer group of every curve vanishes
-(`AlgebraicGeometry.IsCurve.subsingleton_cohomologicalBrauerGroup`, blueprint
-`lem-sc-brauer-zero-all-curves`); for smooth curves see
-`AlgebraicGeometry.IsCurve.nonempty_addEquiv_sheafH_rootsOfUnitySheaf_two_of_smooth`.
-(blueprint: `sk-prop-h2`) -/
-theorem nonempty_addEquiv_sheafH_rootsOfUnitySheaf_two [IsAlgClosed k] (f : C ⟶ Spec (.of k))
-    [IsCurve f] (n : ℕ) (hn : (n : k) ≠ 0) :
-    Nonempty (Sheaf.H (C.rootsOfUnitySheaf n) 2 ≃+
-      C.CohomologicalPicardGroup ⧸
-        (zsmulAddGroupHom (α := C.CohomologicalPicardGroup) (n : ℤ)).range) := by
-  have hn' : IsUnit (n : Γ(C, ⊤)) := by
-    simpa using hn.isUnit.map ((Scheme.ΓSpecIso (.of k)).inv ≫ f.appTop).hom
-  obtain ⟨α, β, hα, hαβ, -⟩ := C.exists_exact_sheafH_rootsOfUnitySheaf_two n hn'
-  have := subsingleton_cohomologicalBrauerGroup f
   rw [← hα]
   exact ⟨(QuotientAddGroup.quotientKerEquivOfSurjective α
     fun y ↦ (hαβ y).1 (Subsingleton.elim _ _)).symm⟩

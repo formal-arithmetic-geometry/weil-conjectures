@@ -228,10 +228,11 @@ theorem Etale.exists_pullback_hom_of_isClosedImmersion {X Z W : Scheme.{u}} (i :
 point `w` of `W`, there is a standard étale `B`-algebra `P.Ring` and a morphism
 `Spec P.Ring ⟶ W` over `Spec B` whose image contains `w`: the restriction of `q` to an affine
 open `Spec C` around `w` is given by an étale `B`-algebra `C`, which is standard étale after
-inverting an element not in the prime of `w` (`Algebra.IsEtaleAt.exists_isStandardEtale`). -/
-theorem Etale.exists_standardEtalePair {B : CommRingCat.{u}} {W : Scheme.{u}} (q : W ⟶ Spec B)
-    [Etale q] (w : W) :
-    ∃ (P : StandardEtalePair B) (e : Spec (.of P.Ring) ⟶ W),
+inverting an element not in the prime of `w` (`Algebra.IsEtaleAt.exists_isStandardEtale`).
+The morphism `Spec P.Ring ⟶ W` is an open immersion onto a basic open of the affine open. -/
+theorem Etale.exists_standardEtalePair_isOpenImmersion {B : CommRingCat.{u}} {W : Scheme.{u}}
+    (q : W ⟶ Spec B) [Etale q] (w : W) :
+    ∃ (P : StandardEtalePair B) (e : Spec (.of P.Ring) ⟶ W), IsOpenImmersion e ∧
       e ≫ q = Spec.map (CommRingCat.ofHom (algebraMap B P.Ring)) ∧ w ∈ Set.range e := by
   obtain ⟨W', hW', hwW', -⟩ := exists_isAffineOpen_mem_and_subset (X := W) (x := w) (U := ⊤) trivial
   let _ : Algebra B Γ(W, W') := (hW'.ringHomOfSpec q).toAlgebra
@@ -241,7 +242,13 @@ theorem Etale.exists_standardEtalePair {B : CommRingCat.{u}} {W : Scheme.{u}} (q
   let Pr := hst.nonempty_standardEtalePresentation.some
   let φ : Γ(W, W') →+* Pr.P.Ring :=
     Pr.equivRing.toRingEquiv.toRingHom.comp (algebraMap Γ(W, W') (Localization.Away a))
-  refine ⟨Pr.P, Spec.map (CommRingCat.ofHom φ) ≫ hW'.fromSpec, ?_, ?_⟩
+  refine ⟨Pr.P, Spec.map (CommRingCat.ofHom φ) ≫ hW'.fromSpec, ?_, ?_, ?_⟩
+  · have : IsIso (Spec.map (CommRingCat.ofHom Pr.equivRing.toRingEquiv.toRingHom)) :=
+      inferInstanceAs (IsIso (Spec.map Pr.equivRing.toRingEquiv.toCommRingCatIso.hom))
+    have : IsOpenImmersion (Spec.map (CommRingCat.ofHom φ)) := by
+      simp only [φ, CommRingCat.ofHom_comp, Spec.map_comp]
+      infer_instance
+    infer_instance
   · rw [Category.assoc, ← hW'.SpecMap_ringHomOfSpec q, ← Spec.map_comp, ← CommRingCat.ofHom_comp]
     congr 2
     ext b
@@ -257,6 +264,17 @@ theorem Etale.exists_standardEtalePair {B : CommRingCat.{u}} {W : Scheme.{u}} (q
     rw [← hr]
     refine PrimeSpectrum.ext (Ideal.ext fun x ↦ ?_)
     simp [φ]
+
+/-- **Étale morphisms are locally standard étale.** For an étale morphism `q : W ⟶ Spec B` and a
+point `w` of `W`, there is a standard étale `B`-algebra `P.Ring` and a morphism
+`Spec P.Ring ⟶ W` over `Spec B` whose image contains `w`
+(`AlgebraicGeometry.Etale.exists_standardEtalePair_isOpenImmersion`). -/
+theorem Etale.exists_standardEtalePair {B : CommRingCat.{u}} {W : Scheme.{u}} (q : W ⟶ Spec B)
+    [Etale q] (w : W) :
+    ∃ (P : StandardEtalePair B) (e : Spec (.of P.Ring) ⟶ W),
+      e ≫ q = Spec.map (CommRingCat.ofHom (algebraMap B P.Ring)) ∧ w ∈ Set.range e := by
+  obtain ⟨P, e, -, he, hw⟩ := Etale.exists_standardEtalePair_isOpenImmersion q w
+  exact ⟨P, e, he, hw⟩
 
 /-- An étale morphism `p : V ⟶ S` into an integral normal scheme `S` with separably closed
 function field is a local isomorphism: every point of `V` has an open neighbourhood mapping
