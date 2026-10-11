@@ -117,5 +117,23 @@
    "decls": [],
    "missing": []
   }
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.QCohAcyclicDerivedPushforwardCohomology",
+  "declaration": "AlgebraicGeometry.qcoh_acyclic_derived_pushforward_cohomology",
+  "file": "lean/Sheaf/AlgebraicGeometry/QCohAcyclicDerivedPushforwardCohomology.lean",
+  "statement": "theorem qcoh_acyclic_derived_pushforward_cohomology {X Y : Scheme.{u}} [HasDerivedCategory.{wX} (SheafOfModules.{u} (moduleRings X.toRingedSpace))] [HasDerivedCategory.{wY} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))] (f : X ⟶ Y) [QuasiCompact f] [QuasiSeparated f] (hacyc : ∀ (F : SheafOfModules.{u} (moduleRings X.toRingedSpace)), F.IsQuasicoherent → ∀ (p : ℤ), 0 < p → IsZero ((schemeModuleHigherDirectImage f p).obj F)) (i : ℤ) : Nonempty ((schemeDerivedQCohProperty X).ι ⋙ schemeHigherDirectImage f i ≅ (schemeDerivedQCohProperty X).ι ⋙ DerivedCategory.homologyFunctor (SheafOfModules.{u} (moduleRings X.toRingedSpace)) i ⋙ RingedSpace.moduleDirectImage f.toLRSHom.toShHom)",
+  "branch": "sheaf-dag",
+  "by": "V1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-qdp",
+  "group": "V1",
+  "result": "pass",
+  "note": "qcqs f as instances; hacyc over IsQuasicoherent F, p:ℤ, 0<p, IsZero schemeModuleHigherDirectImage; E over schemeDerivedQCohProperty ι (unbounded); H^i(Rf_*E)=schemeHigherDirectImage f i ≅ homologyFunctor i ⋙ moduleDirectImage; natural iso of functors, same form as sibling 96e503971"
  }
 }
