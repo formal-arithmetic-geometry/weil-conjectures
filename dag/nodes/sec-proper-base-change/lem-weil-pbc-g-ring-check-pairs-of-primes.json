@@ -208,5 +208,24 @@
   "by": "L",
   "result": "accepted",
   "note": "7 steps: fibres Noetherian; (R/q)_p^ = R_p^/qR_p^ via localization-of-quotient and local-completion-quotient; Stacks' identity via tensor-quotient-base-change and cancel base change; fibres over q not in p vanish; R_p -> R_p^ regular iff R -> R_p^ regular (localization-regular, regular-composition, regular-through-localization); flatness; conclusion. No new nodes. Tags 07PN, 07GH verified. def-weil-pbc-g-ring quantifies over all primes, as Stacks 07GH."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.GRingPairsOfPrimes",
+  "declaration": "isGRing_iff_pairsOfPrimes",
+  "file": "lean/Sheaf/RingTheory/GRingPairsOfPrimes.lean",
+  "statement": "theorem isGRing_iff_pairsOfPrimes (R : Type u) [CommRing R] [IsNoetherianRing R] : IsGRing R ↔ ∀ (q p : Ideal R) [q.IsPrime] [p.IsPrime] (hqp : q ≤ p), let pbar := p.map (Ideal.Quotient.mk q) letI : pbar.IsPrime := Ideal.isPrime_map_quotientMk_of_isPrime hqp let L := Localization.AtPrime pbar let C := AdicCompletion (IsLocalRing.maximalIdeal L) L let F := TensorProduct (R ⧸ q) q.ResidueField C IsNoetherianRing F ∧ Algebra.IsGeometricallyRegular q.ResidueField F",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-gcp1045"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-gcp1045",
+  "group": "H1",
+  "result": "fix",
+  "note": "R CommRing Noetherian; IsGRing R iff for all primes q<=p: B=R/q, pbar=p.map mk q (prime via isPrime_map_quotientMk_of_isPrime), L=Localization.AtPrime pbar, C=AdicCompletion (maximalIdeal L) L, F=kappa(q) ⊗[B] C (FIBRE RING order, fixed), IsNoetherianRing F ∧ IsGeometricallyRegular kappa(q) F"
  }
 }
