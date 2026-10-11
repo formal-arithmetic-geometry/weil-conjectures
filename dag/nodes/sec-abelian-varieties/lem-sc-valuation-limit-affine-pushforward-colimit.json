@@ -24,7 +24,11 @@
   "pqf-def-affine-morphism",
   "pqf-def-coherent",
   "lem-weil-pbc-affine-morphism-relative-spec",
-  "lem-weil-pbc-spec-colimit-limit"
+  "lem-weil-pbc-spec-colimit-limit",
+  "def-weil-pbc-comm-algebra-sheaf",
+  "def-pc-module-pullback",
+  "lem-pc-module-pullback-adjunction",
+  "def-pur-sheaf-tensor-product"
  ],
  "proof": [
   {
@@ -238,5 +242,24 @@
   "group": "G1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-vlp0211 (reviewer sub-agent of L); spot-checked: Statement matches parent lem-sc-valuation-limit-qcoh-section-descent Steps 1/3 (g_*F=M, (g_j)_*F_j=M_j, M=colim M_j in O-modules) and Limits 01Z0/01YX; Step 1 (limit node + relative Spec + algebra colimit + Spec-colimit-limit) and g_i affine as transition maps, g affine by limit node: ok. FIX more, RETURN less: (1) C1 Step 2 used (F_0 tensor A_i)(U)=F_0(U) tensor B_i on affines without citation: now cites lem-weil-pbc-quasi-coherent-tensor-product-affine-sections, assembly on affine basis spelled out; (2) C1 Step 3 concluded colimit in O-modules from affine sections without a statement: now cites lem-weil-pbc-quasi-coherent-module-colimit-affine-sections (colimit C quasi-coherent with affine sections = colim), comparison map C -> F_0 tensor A bijective on affines by tensor-colimit node; also covers the statement's parenthetical that A's underlying module is the module colimit. Second reading by G1 missed both. Mathlib: no packaged statement (grep recorded in node).; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AffinePushforwardColimit",
+  "declaration": "AlgebraicGeometry.affine_pushforward_colimit",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffinePushforwardColimit.lean",
+  "statement": "theorem affine_pushforward_colimit (I : Type u) [Preorder I] [IsDirected I (· ≤ ·)] (i₀ : I) (D : Iᵒᵖ ⥤ Scheme.{u}) (s : Cone D) (hs : IsLimit s) [∀ i : I, CompactSpace (D.obj (op i))] [∀ i : I, QuasiSeparatedSpace (D.obj (op i))] (haff : ∀ {i j : I} (f : i ⟶ j), IsAffineHom (D.map f.op)) (gᵢ : ∀ i : {i : I // i₀ ≤ i}, D.obj (op i.val) ⟶ D.obj (op i₀)) (hgᵢ : ∀ i, gᵢ i = D.map (homOfLE i.property).op) (F : (D.obj (op i₀)).Modules) [F.IsQuasicoherent] (A : {i : I // i₀ ≤ i} ⥤ (D.obj (op i₀)).CommAlgebraSheaf) (hA : ∀ i, A.obj i = 𝒪⁎ (gᵢ i)) (hAm : ∀ {i j : {i : I // i₀ ≤ i}} (f : i ⟶ j) (U : (D.obj (op i₀)).Opens), (A.map f).right.hom.app (op U) = eqToHom (by rw [hA i]; rfl) ≫ (D.map (homOfLE (x := i.val) (y := j.val) (leOfHom f)).op).appLE ((gᵢ i) ⁻¹ᵁ U) ((gᵢ j) ⁻¹ᵁ U) (by rw [hgᵢ i, hgᵢ j, ← Scheme.Hom.comp_preimage, ← D.map_comp]; rfl) ≫ eqToHom (by rw [hA j]; rfl)) (c : Cocone A) (hc : IsColimit c) (B : {i : I // i₀ ≤ i} ⥤ (D.obj (op i₀)).Modules) (hB : ∀ i, B.obj i = (A.obj i).toModule) (hBm : ∀ {i j : {i : I // i₀ ≤ i}} (f : i ⟶ j) (U : (D.obj (op i₀)).Opens) (a : (A.obj i).right.obj.obj (op U)), ((eqToHom (hB i).symm ≫ B.map f ≫ eqToHom (hB j)).val.app (op U)) a = (A.map f).right.hom.app (op U) a) (b : Cocone B) (hbp : b.pt = c.pt.toModule) (hbm : ∀ (i) (U : (D.obj (op i₀)).Opens) (a : (A.obj i).right.obj.obj (op U)), ((eqToHom (hB i).symm ≫ b.ι.app i ≫ eqToHom hbp).val.app (op U)) a = (c.ι.app i).right.hom.app (op U) a) : c.pt.toModule.IsQuasicoherent ∧ (∀ i, (A.obj i).toModule.IsQuasicoherent) ∧ IsAffineHom (s.π.app (op i₀)) ∧ ∃ α : c.pt ≅ 𝒪⁎ (s.π.app (op i₀)), (∀ (i) (U : (D.obj (op i₀)).Opens), (c.ι.app i ≫ α.hom).right.hom.app (op U) = eqToHom (by rw [hA i]; rfl) ≫ (s.π.app (op i.val)).appLE ((gᵢ i) ⁻¹ᵁ U) ((s.π.app (op i₀)) ⁻¹ᵁ U) (by rw [hgᵢ i, ← Scheme.Hom.comp_preimage, s.w (homOfLE i.property).op])) ∧ (∀ (U : (D.obj (op i₀)).Opens), IsAffineOpen U → IsIso (((s.π.app (op i₀)) ⁻¹ᵁ U).toSpecΓ ≫ Spec.map (α.hom.right.hom.app (op U)))) ∧ ∃ (eᵢ : ∀ i, F ⊗ (A.obj i).toModule ≅ (pushforward (gᵢ i)).obj ((tensorPullback (gᵢ i)).obj F)) (e : F ⊗ c.pt.toModule ≅ (pushforward (s.π.app (op i₀))).obj ((tensorPullback (s.π.app (op i₀))).obj F)), (∀ (i) (U : (D.obj (op i₀)).Opens) (t : Γ(F, U)) (a : (A.obj i).right.obj.obj (op U)), (eᵢ i).hom.app U (tmulSection t a) = ((eqToHom (by rw [hA i]; rfl : (A.obj i).right.obj.obj (op U) = Γ(D.obj (op i.val), (gᵢ i) ⁻¹ᵁ U))) a) • (@id Γ((tensorPullback (gᵢ i)).obj F, (gᵢ i) ⁻¹ᵁ U) (((Classical.choose (exists_tensorPullbackAdjunction (gᵢ i))).unit.app F).app U t))) ∧ (∀ (U : (D.obj (op i₀)).Opens) (t : Γ(F, U)) (a : c.pt.right.obj.obj (op U)), e.hom.app U (tmulSection t a) = (@id Γ(s.pt, (s.π.app (op i₀)) ⁻¹ᵁ U) (α.hom.right.hom.app (op U) a)) • (@id Γ((tensorPullback (s.π.app (op i₀))).obj F, (s.π.app (op i₀)) ⁻¹ᵁ U) (((Classical.choose (exists_tensorPullbackAdjunction (s.π.app (op i₀)))).unit.app F).app U t))) ∧ (∀ {i j : {i : I // i₀ ≤ i}} (f : i ⟶ j) (U : (D.obj (op i₀)).Opens) (t : Γ(F, U)) (a : (A.obj i).right.obj.obj (op U)), ((eᵢ i).inv ≫ (F ◁ (eqToHom (hB i).symm ≫ B.map f ≫ eqToHom (hB j))) ≫ (eᵢ j).hom).app U ((eᵢ i).hom.app U (tmulSection t a)) = ((eqToHom (by rw [hA j]; rfl : (A.obj j).right.obj.obj (op U) = Γ(D.obj (op j.val), (gᵢ j) ⁻¹ᵁ U))) ((A.map f).right.hom.app (op U) a)) • (@id Γ((tensorPullback (gᵢ j)).obj F, (gᵢ j) ⁻¹ᵁ U) (((Classical.choose (exists_tensorPullbackAdjunction (gᵢ j))).unit.app F).app U t))) ∧ (∀ (i) (U : (D.obj (op i₀)).Opens) (t : Γ(F, U)) (a : (A.obj i).right.obj.obj (op U)), ((eᵢ i).inv ≫ (F ◁ (eqToHom (hB i).symm ≫ b.ι.app i ≫ eqToHom hbp)) ≫ e.hom).app U ((eᵢ i).hom.app U (tmulSection t a)) = (@id Γ(s.pt, (s.π.app (op i₀)) ⁻¹ᵁ U) ((c.ι.app i ≫ α.hom).right.hom.app (op U) a)) • (@id Γ((tensorPullback (s.π.app (op i₀))).obj F, (s.π.app (op i₀)) ⁻¹ᵁ U) (((Classical.choose (exists_tensorPullbackAdjunction (s.π.app (op i₀)))).unit.app F).app U t))) ∧ Nonempty (IsColimit b) ∧ Nonempty (IsColimit ((tensorLeft F).mapCocone b))",
+  "branch": "sheaf-dag",
+  "by": "M1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-vlp1433"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-vlp1433",
+  "group": "M1",
+  "result": "fix",
+  "note": "I:Type u Preorder+IsDirected fixed i0; D:Iop=>Scheme.{u} cone+IsLimit; CompactSpace/QuasiSeparatedSpace stages; IsAffineHom transitions; F qcoh; A pinned to (g_i)_*O by hA/hAm; c IsColimit; B,b pinned sectionwise; (1) alpha + coprojection compat + toSpecGamma IsIso on affines; (2) e_i,e via s(x)a -> a.eta(s) with exists_tensorPullbackAdjunction unit; (3) IsColimit b and tensorLeft F mapCocone b; FIX: 9 show-from (have) replaced by ascriptions/@id"
  }
 }
