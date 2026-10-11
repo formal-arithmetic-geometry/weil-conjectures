@@ -109,4 +109,79 @@ theorem IsFiniteSheaf.of_shortExact
     exact (ModuleCat.isFinitelyGenerated_iff _).2
       (Module.Finite.of_exact (f := (Φ.map S.f).hom) (g := (Φ.map S.g).hom) hex hepi)
 
+section Lift
+
+variable {X : Scheme.{u}} {Λ : Type (u + 1)} [Ring Λ] [IsNoetherianRing Λ]
+
+open Limits in
+/-- If, in a short exact sequence `0 ⟶ F₁ ⟶ F₂ ⟶ F₃ ⟶ 0` of sheaves of modules over a
+noetherian ring with `F₁` and `F₃` finite locally constant, the quotient map has a "partial
+section" `s : P ⟶ F₂` out of a finite locally constant sheaf `P` with `s ≫ (F₂ ⟶ F₃)` an
+epimorphism, then `F₂` is locally constant: it is the cokernel of the kernel of the
+epimorphism `F₁ ⊞ P ⟶ F₂`, and this kernel is identified with the kernel of `P ⟶ F₃`. -/
+theorem IsLocallyConstantSheaf.of_shortExact_of_lift
+    {S : ShortComplex (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))} (hS : S.ShortExact)
+    [IsFiniteLocallyConstantSheaf (FA := fun M N : ModuleCat.{u + 1} Λ ↦ M →ₗ[Λ] N)
+      (CA := fun M : ModuleCat.{u + 1} Λ ↦ M) S.X₁]
+    [IsFiniteLocallyConstantSheaf (FA := fun M N : ModuleCat.{u + 1} Λ ↦ M →ₗ[Λ] N)
+      (CA := fun M : ModuleCat.{u + 1} Λ ↦ M) S.X₃]
+    {P : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)}
+    [IsFiniteLocallyConstantSheaf (FA := fun M N : ModuleCat.{u + 1} Λ ↦ M →ₗ[Λ] N)
+      (CA := fun M : ModuleCat.{u + 1} Λ ↦ M) P]
+    (s : P ⟶ S.X₂) [Epi (s ≫ S.g)] :
+    IsLocallyConstantSheaf S.X₂ := by
+  have := hS.mono_f
+  have := hS.epi_g
+  let θ : S.X₁ ⊞ P ⟶ S.X₂ := biprod.desc S.f s
+  have hθ : Epi θ := by
+    rw [Preadditive.epi_iff_cancel_zero]
+    intro Z h hh
+    have hf : S.f ≫ h = 0 := by simpa [θ] using congrArg (biprod.inl ≫ ·) hh
+    have hd := hS.exact.g_desc h hf
+    have h0 : (s ≫ S.g) ≫ hS.exact.desc h hf = 0 := by
+      rw [Category.assoc, hd]
+      simpa [θ] using congrArg (biprod.inr ≫ ·) hh
+    rw [← hd, (cancel_epi (s ≫ S.g)).1 (h0.trans comp_zero.symm), comp_zero]
+  have hθ' : θ = biprod.fst ≫ S.f + biprod.snd ≫ s :=
+    biprod.hom_ext' _ _ (by simp [θ]) (by simp [θ])
+  let σ : kernel (s ≫ S.g) ⟶ S.X₁ := hS.exact.lift (kernel.ι (s ≫ S.g) ≫ s) (by simp)
+  have hσ : σ ≫ S.f = kernel.ι (s ≫ S.g) ≫ s := hS.exact.lift_f _ _
+  let e : kernel θ ≅ kernel (s ≫ S.g) :=
+    { hom := kernel.lift _ (kernel.ι θ ≫ biprod.snd) (by
+        have : biprod.snd ≫ s = θ - biprod.fst ≫ S.f := by rw [hθ']; abel
+        rw [Category.assoc, ← Category.assoc biprod.snd, this, Preadditive.sub_comp,
+          Preadditive.comp_sub, ← Category.assoc, kernel.condition, zero_comp]
+        simp)
+      inv := kernel.lift θ (biprod.lift (-σ) (kernel.ι (s ≫ S.g))) (by
+        rw [hθ', Preadditive.comp_add, biprod.lift_fst_assoc, biprod.lift_snd_assoc,
+          Preadditive.neg_comp, hσ, neg_add_cancel])
+      hom_inv_id := by
+        refine equalizer.hom_ext (biprod.hom_ext _ _ ?_ ?_)
+        · rw [← cancel_mono S.f]
+          simp only [Category.assoc, kernel.lift_ι, biprod.lift_fst, Preadditive.comp_neg,
+            Preadditive.neg_comp, hσ, Category.id_comp, kernel.lift_ι_assoc]
+          have h : kernel.ι θ ≫ (biprod.fst ≫ S.f + biprod.snd ≫ s) = 0 := by
+            rw [← hθ']; exact kernel.condition θ
+          rw [Preadditive.comp_add] at h
+          rw [neg_eq_iff_add_eq_zero, add_comm]
+          exact h
+        · simp
+      inv_hom_id := by
+        refine equalizer.hom_ext ?_
+        simp }
+  have := IsFiniteLocallyConstantSheaf.kernel (s ≫ S.g)
+  have : IsFiniteLocallyConstantSheaf (FA := fun M N : ModuleCat.{u + 1} Λ ↦ M →ₗ[Λ] N)
+      (CA := fun M : ModuleCat.{u + 1} Λ ↦ M) (kernel θ) :=
+    IsFiniteLocallyConstantSheaf.of_iso e.symm
+  have := IsFiniteLocallyConstantSheaf.biprod (FA := fun M N : ModuleCat.{u + 1} Λ ↦ M →ₗ[Λ] N)
+    (CA := fun M : ModuleCat.{u + 1} Λ ↦ M) S.X₁ P
+  have := (IsLocallyConstantSheaf.kernel_and_cokernel (kernel.ι θ)).2
+  let e₂ : cokernel (kernel.ι θ) ≅ S.X₂ :=
+    (cokernelIsCokernel (kernel.ι θ)).coconePointUniqueUpToIso
+      (Abelian.epiIsCokernelOfKernel (KernelFork.ofι _ (kernel.condition θ)) (kernelIsKernel θ))
+  exact IsLocallyConstantSheaf.of_iso e₂
+
+
+end Lift
+
 end AlgebraicGeometry.Scheme
