@@ -219,5 +219,23 @@
   "worker": "stage1",
   "summary": "Statement and stmt_deps kept (checked against Stacks 00SJ; S (x)_k K for K (x)_k S is the swap). Proof written in 5 steps following the 00SI/00SC route named first by the source, made uniform by the conormal identification of the source's second proof: (1) presentation S = k[x]/I, I finitely generated (P Noetherian), base change S' = K[x]/I' with I' = I K[x] (existing Mathlib leaf presentation-base-change), giving finite type; (2) I'/I'^2 = I/I^2 (x)_S S' as S'-modules, proved from the exactness of - (x)_k K (existing leaf lem-weil-field-scalar-extension-exact) and k[x] (x)_k K = K[x] (the source cites 00S4, NL base change; only its H_{-1}-level piece is needed); (3) dim at a point preserved (new node, 00P4), localization and fibre identities of the conormal modules; (4) only if: 00SC (1)=>(4) (existing node lci-conormal-free-rank-codimension) at p, transported to q, then 00SC (3)=>(1) (new node) over K; (5) if: a prime q over every p (existing node spec-surjective-base-change, Spec K -> Spec k surjective), 00SC (1)=>(4) over K, fibre dimension count and Nakayama (existing leaf) give n - d generators of (I/I^2)_p, then 00SC (3)=>(1) over k. Working at all primes avoids the Nullstellensatz/finite-fibre argument of the source's second proof, and the regular-sequence/flatness route of its 'only if' paragraph. Two new unsplit nodes (00SC (3)=>(1); 00P4), searched with leansearch, leanfinder, loogle and grep: Mathlib has no complete intersections and no dimension at a point. The citer lem-weil-pbc-smooth-over-field-local-complete-intersection uses the 'if' direction (step 5)."
  },
- "reviewed": "Reviewed by L 2026-10-10: faithful to Algebra 00SJ (first proof via 00SI/00SC, conormal identification from the second proof), done at every prime: dimension at a point preserved under field extension (00P4, new node), conormal module commutes with the field change (step 2, written out), both directions via lem-weil-pbc-lci-conormal-free-rank-codimension and 00SC (3)=>(1) (new node). No Mathlib match (no complete intersections in Mathlib). Tool use: lem-weil-field-scalar-extension-exact is a Mathlib leaf."
+ "reviewed": "Reviewed by L 2026-10-10: faithful to Algebra 00SJ (first proof via 00SI/00SC, conormal identification from the second proof), done at every prime: dimension at a point preserved under field extension (00P4, new node), conormal module commutes with the field change (step 2, written out), both directions via lem-weil-pbc-lci-conormal-free-rank-codimension and 00SC (3)=>(1) (new node). No Mathlib match (no complete intersections in Mathlib). Tool use: lem-weil-field-scalar-extension-exact is a Mathlib leaf.",
+ "lean": {
+  "module": "Sheaf.RingTheory.LocalCompleteIntersectionFieldChange",
+  "declaration": "Algebra.isLocalCompleteIntersection_fieldChange",
+  "file": "lean/Sheaf/RingTheory/LocalCompleteIntersectionFieldChange.lean",
+  "statement": "theorem isLocalCompleteIntersection_fieldChange (k : Type u) (K : Type v) (S : Type w) [Field k] [Field K] [CommRing S] [Algebra k K] [Algebra k S] [Algebra.FiniteType k S] : letI := Algebra.TensorProduct.rightAlgebra (R := k) (A := S) (B := K) ∃ h : Algebra.FiniteType K (S ⊗[k] K), letI := h IsLocalCompleteIntersection k S ↔ IsLocalCompleteIntersection K (S ⊗[k] K)",
+  "branch": "sheaf-dag",
+  "by": "G1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-lfc1106",
+  "group": "G1",
+  "result": "pass",
+  "note": "k,K fields=[Field k][Field K]; iota=[Algebra k K]; S f.t. k-alg=[CommRing S][Algebra k S][Algebra.FiniteType k S]; S⊗[k]K K-alg via lambda->1⊗lambda = letI rightAlgebra (pp.explicit: rightAlgebra is the instance in both FiniteType and LCI, algebraMap = 1⊗ₜ rfl, incl. k=K=S); concl. finite type as ∃ h (Prop), LCI iff both sides with landed Algebra.IsLocalCompleteIntersection (F1, no private copy); no hollow hyps, no test-object universes; zero ring allowed; docstring 5 steps + blueprint"
+ }
 }
