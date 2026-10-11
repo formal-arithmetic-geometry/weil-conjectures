@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.CategoryTheory.DerivedCategory.FlatModel
+public import WeilConjectures.CategoryTheory.Sites.ReductionFlatModel
 public import WeilConjectures.SixFunctors.ProEtale.Derived.TorAmplitude
 
 /-!
@@ -71,5 +72,80 @@ theorem torAmplitudeIn_iff_exists_flatModel (a b : ℤ) (_hab : a ≤ b)
     exact fun q hq ↦ h₁ q (.inr hq)
 
 end ProEtale.DerivedCategory
+
+namespace ProEtale
+
+variable {A} in
+/-- For a bounded complex `P` of flat pro-étale sheaves, the derived tensor product
+`P ⊗ᴸ F[0]` is computed by the tensor product of complexes `P ⊗ F`
+(`DerivedCategory.QObjTensorSingleFunctorObjIso`, stated with
+`AlgebraicGeometry.ProEtale.derivedTensor`). -/
+noncomputable def derivedTensorQObjSingleFunctorObjIso {a b : ℤ}
+    (P : CochainComplex (Sheaf (Scheme.ProEt.topology X) A) ℤ) [P.IsStrictlyGE a]
+    [P.IsStrictlyLE b] (hP : ∀ n, ObjectProperty.flat (P.X n))
+    (F : Sheaf (Scheme.ProEt.topology X) A) :
+    ((derivedTensor A X).obj ((_root_.DerivedCategory.Q).obj P)).obj
+        ((_root_.DerivedCategory.singleFunctor _ 0).obj F) ≅
+      (_root_.DerivedCategory.Q).obj (((tensorRight F).mapHomologicalComplex _).obj P) :=
+  _root_.DerivedCategory.QObjTensorSingleFunctorObjIso P
+    (CochainComplex.kFlat_of_bounded_of_flat P a b hP) F
+
+variable {Λ : Type (u + 1)} [CommRing Λ] [IsNoetherianRing Λ]
+
+set_option synthInstance.maxHeartbeats 400000 in
+-- the instances `WEqualsLocallyBijective` and `HasSheafCompose` on the small pro-étale site
+-- take long to synthesize
+/-- Blueprint `lem-sf-reduction-flat-model`: Reduction of the flat model, on the small
+pro-étale site.
+
+Let `Λ` be Noetherian (for instance `Λ = A_{E,n}`), `I` an ideal (for instance `ϖ^m`, so that
+`Λ ⧸ I = A_{E,m}`), `K ∈ D^b_c(X_proét, Λ)` and `P ≅ K` a complex of flat pro-étale sheaves
+with `P^q = 0` for `q ∉ [a, b]`. Its termwise reduction `P' = P / I P` is a complex of flat
+sheaves of `Λ ⧸ I`-modules vanishing outside `[a, b]`; the reduction
+`K_m = K ⊗ᴸ (Λ ⧸ I)` is computed by `P ⊗ (Λ ⧸ I)` and is the restriction of scalars of
+`Q(P') ∈ D(X_proét, Λ ⧸ I)`; and `Q(P')` has Tor amplitude in `[a, b]` over `Λ ⧸ I`. -/
+theorem flatModel_reduction (I : Ideal Λ) {a b : ℤ}
+    (K : _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} Λ)))
+    (_hK : DerivedCategory.boundedConstructible (ModuleCat.{u + 1} Λ) X K)
+    {P : CochainComplex (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} Λ)) ℤ}
+    (hP : (∀ q : ℤ, q < a ∨ b < q → IsZero (P.X q)) ∧ ∀ q : ℤ, ObjectProperty.flat (P.X q))
+    (e : K ≅ (_root_.DerivedCategory.Q).obj P) :
+    ((∀ q : ℤ, q < a ∨ b < q →
+        IsZero ((((Sheaf.quotSMulTop _ I).mapHomologicalComplex _).obj P).X q)) ∧
+      ∀ q : ℤ, ObjectProperty.flat ((((Sheaf.quotSMulTop _ I).mapHomologicalComplex _).obj P).X q)) ∧
+      Nonempty (((derivedTensor (ModuleCat.{u + 1} Λ) X).obj K).obj
+          ((_root_.DerivedCategory.singleFunctor _ 0).obj
+            ((constantSheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} Λ)).obj
+              (ModuleCat.of Λ (Λ ⧸ I)))) ≅
+        (_root_.DerivedCategory.Q).obj
+          (((tensorRight ((constantSheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} Λ)).obj
+            (ModuleCat.of Λ (Λ ⧸ I)))).mapHomologicalComplex _).obj P)) ∧
+      Nonempty ((Sheaf.restrictScalars (Scheme.ProEt.topology X)
+          (Ideal.Quotient.mk I)).mapDerivedCategory.obj ((_root_.DerivedCategory.Q).obj
+            (((Sheaf.quotSMulTop _ I).mapHomologicalComplex _).obj P)) ≅
+        ((derivedTensor (ModuleCat.{u + 1} Λ) X).obj K).obj
+          ((_root_.DerivedCategory.singleFunctor _ 0).obj
+            ((constantSheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} Λ)).obj
+              (ModuleCat.of Λ (Λ ⧸ I))))) ∧
+      DerivedCategory.torAmplitudeIn (ModuleCat.{u + 1} (Λ ⧸ I)) X a b
+        ((_root_.DerivedCategory.Q).obj (((Sheaf.quotSMulTop _ I).mapHomologicalComplex _).obj P)) := by
+  obtain ⟨h₁, h₂⟩ := hP
+  have : P.IsStrictlyGE a := by
+    rw [CochainComplex.isStrictlyGE_iff]
+    exact fun q hq ↦ h₁ q (.inl hq)
+  have : P.IsStrictlyLE b := by
+    rw [CochainComplex.isStrictlyLE_iff]
+    exact fun q hq ↦ h₁ q (.inr hq)
+  obtain ⟨hGE, hLE, hflat, htor, ⟨e'⟩⟩ := Sheaf.flatModel_quotSMulTop I (a := a) (b := b) P h₂
+  have e₂ := ((derivedTensor _ X).mapIso e).app _ ≪≫
+    derivedTensorQObjSingleFunctorObjIso (a := a) (b := b) P h₂
+      ((constantSheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} Λ)).obj
+        (ModuleCat.of Λ (Λ ⧸ I)))
+  refine ⟨⟨fun q hq ↦ ?_, hflat⟩, ⟨e₂⟩, ⟨e' ≪≫ e₂.symm⟩, htor⟩
+  rcases hq with hq | hq
+  · exact CochainComplex.isZero_of_isStrictlyGE _ a q hq
+  · exact CochainComplex.isZero_of_isStrictlyLE _ b q hq
+
+end ProEtale
 
 end AlgebraicGeometry
