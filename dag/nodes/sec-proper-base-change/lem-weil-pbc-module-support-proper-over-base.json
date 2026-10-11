@@ -166,5 +166,23 @@
   "item": "lem-weil-pbc-module-support-proper-over-base",
   "worker": "stage1",
   "summary": "Checked the statement against Stacks 0CYS, 056J, 05JU/05JV and 01QY (tags verified in tags/tags: 0CYS coherent-lemma-module-support-proper-over-base, 056J morphisms-lemma-support-finite-type, 05JU morphisms-lemma-scheme-theoretic-support, 05JV morphisms-definition-scheme-theoretic-support, 01QY morphisms-lemma-i-star-equivalence, 0CYN, 0CYL, 0CYM). Statement kept (correct); stmt_deps gained def-pc-module-pullback for i_*. Proof in five steps following the proof of 0CYS: closedness (new node lem-weil-pbc-finite-type-module-support-closed), the scheme-theoretic support (new node lem-weil-pbc-scheme-theoretic-support), the two directions of (2) via the existing lem-weil-pbc-closed-subset-proper-over-base-properties (1),(2), with the inclusion Supp(F) in Z (left implicit in Stacks) written out from the definition of the ideal sheaf, and the equivalence I_Z F=0 <=> F = i_*G (new node lem-weil-pbc-closed-immersion-pushforward-annihilated). Mathlib has no support, annihilator ideal sheaf or closed-immersion pushforward theory for Scheme.Modules (three kinds of search recorded on the new nodes); the ring-level facts Module.support_eq_zeroLocus / Module.isClosed_support exist. No Lean candidate in slopmaster2."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ModuleSupportProperOverBase",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.module_support_proper_over_base",
+  "file": "lean/Sheaf/AlgebraicGeometry/ModuleSupportProperOverBase.lean",
+  "statement": "theorem module_support_proper_over_base {X S : Scheme.{u}} (f : X ⟶ S) [LocallyOfFiniteType f] (F : X.Modules) [F.IsQuasicoherent] [F.IsFiniteType] : (∃ Z : TopologicalSpace.Closeds X, (Z : Set X) = {x : X | ¬ Subsingleton (F.presheaf.stalk x)}) ∧ (HasSupportProperOver f F ↔ ∃ (Z : Scheme.{u}) (i : Z ⟶ X) (_ : IsClosedImmersion i), IsProper (i ≫ f) ∧ (∀ (V : X.Opens) (a : Γ(X, V)), a ∈ i.ker.idealOfOpens V → ∀ s : Γ(F, V), a • s = 0) ∧ ∃ (G : Z.Modules) (_ : G.IsQuasicoherent) (_ : G.IsFiniteType), Nonempty (F ≅ (pushforward i).obj G)) ∧ (∃ (Z : Scheme.{u}) (i : Z ⟶ X) (_ : IsClosedImmersion i), (∀ U : X.affineOpens, i.ker.ideal U = Module.annihilator Γ(X, U) Γ(F, U)) ∧ Set.range i = {x : X | ¬ Subsingleton (F.presheaf.stalk x)} ∧ (∀ (V : X.Opens) (a : Γ(X, V)), a ∈ i.ker.idealOfOpens V → ∀ s : Γ(F, V), a • s = 0) ∧ (∃ (G : Z.Modules) (_ : G.IsQuasicoherent) (_ : G.IsFiniteType), Nonempty (F ≅ (pushforward i).obj G)) ∧ (HasSupportProperOver f F ↔ IsProper (i ≫ f)))",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "E1",
+  "result": "pass",
+  "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
  }
 }
