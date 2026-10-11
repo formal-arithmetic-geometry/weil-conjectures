@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.AlgebraicGeometry.EtaleFiniteRefinement.FiniteFamily
+public import WeilConjectures.AlgebraicGeometry.Morphisms.Integral.FinitePresentationApproximation
 
 /-!
 # Finite refinements of finite presentation
