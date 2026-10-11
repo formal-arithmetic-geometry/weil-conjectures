@@ -15,6 +15,7 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.PullbackCarrier
 public import WeilConjectures.SixFunctors.Etale.Derived.GeometricPoint
 public import WeilConjectures.SixFunctors.Etale.Derived.SupportsOpenImmersion
 public import WeilConjectures.SixFunctors.Integral.Exact
+public import WeilConjectures.EtaleCohomology.Purity.Smooth.KummerProductBaseChange
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperShriekOpenRestriction
 
 /-!
@@ -159,6 +160,19 @@ theorem exists_etaleFrame_isOpenImmersion (c : ℕ) (i : Z ⟶ X)
   rw [← Scheme.Hom.comp_apply, ← Category.assoc, IsIso.hom_inv_id, Category.id_comp]
   rfl
 
+
+/-- A frame of the base change `i'` of `i` along an étale `e` is a frame of `i`, through the
+composite étale map. -/
+@[simps]
+noncomputable def EtaleFrame.ofIsPullback {c : ℕ} {i : Z ⟶ X} {X' Z' : Scheme.{u}} {i' : Z' ⟶ X'}
+    {e : X' ⟶ X} [AlgebraicGeometry.Etale e] {g : Z' ⟶ Z} (hg : IsPullback g i' i e)
+    (F : i'.EtaleFrame c) : i.EtaleFrame c where
+  U := F.U
+  e := F.e ≫ e
+  etale := inferInstance
+  f := F.f
+  toZ := F.toZ ≫ g
+  isPullback := F.isPullback.paste_horiz hg
 end Scheme.Hom
 
 namespace Etale
@@ -523,6 +537,12 @@ noncomputable def fundamentalClass (aX : X ⟶ Spec (.of k)) [Smooth aX]
       ((R(i)^![ModuleCat.{u + 1} Λ]).obj ((tateObject Λ X c)⟦2 * (c : ℤ)⟧)) :=
   (existsUnique_fundamentalClass Λ c i aX hZ).exists.choose
 
+/-- The fundamental class restricts to the frame class on every frame. -/
+theorem frameRestriction_fundamentalClass (aX : X ⟶ Spec (.of k)) [Smooth aX]
+    (hZ : ∀ z : Z, IsRegularLocalRing (Z.presheaf.stalk z)) (F : i.EtaleFrame c) :
+    frameRestriction Λ F (fundamentalClass Λ c i aX hZ) = frameClass Λ F :=
+  (existsUnique_fundamentalClass Λ c i aX hZ).exists.choose_spec F
+
 /-- Blueprint `sk-thm-regular`: Purity for regular closed immersions
 
 The morphism `cl_i : Λ_Z ⟶ Ri^! (Λ_X(c)[2c])`, `1 ↦ [Z ⊂ X]`: the adjoint
@@ -580,8 +600,25 @@ theorem restrictSupportedClass_fundamentalClass (aX : X ⟶ Spec (.of k)) [Smoot
       fundamentalClass Λ c i' (e ≫ aX)
         (haveI : AlgebraicGeometry.Etale g :=
           MorphismProperty.of_isPullback (P := @AlgebraicGeometry.Etale) hg.flip inferInstance
-        isRegularLocalRing_stalk_of_etale g hZ) :=
-  sorry
+        isRegularLocalRing_stalk_of_etale g hZ) := by
+  have := IsRegularImmersion.of_isPullback c hg
+  have : HasInvertibleExponent Λ X' := .of_hom e
+  have : AlgebraicGeometry.Etale g :=
+    MorphismProperty.of_isPullback (P := @AlgebraicGeometry.Etale) hg.flip inferInstance
+  refine eq_of_frameRestriction_eq Λ c i' (e ≫ aX) (isRegularLocalRing_stalk_of_etale g hZ)
+    fun F _ ↦ ?_
+  rw [frameRestriction_fundamentalClass]
+  have h : restrictSupportedClass (ModuleCat.{u + 1} Λ) (F.e ≫ e) i _ (F.toZ ≫ g)
+      (F.isPullback.paste_horiz hg) (leftDerivedUpperStarConstantComplexIso Λ (F.e ≫ e)).inv
+      (leftDerivedUpperStarTateShiftIso Λ (F.e ≫ e) c) (fundamentalClass Λ c i aX hZ) =
+        frameClass Λ F :=
+    frameRestriction_fundamentalClass Λ c i aX hZ (Scheme.Hom.EtaleFrame.ofIsPullback hg F)
+  rw [leftDerivedUpperStarConstantComplexIso_comp Λ F.e e _ rfl,
+    leftDerivedUpperStarTateShiftIso_comp Λ F.e e _ rfl] at h
+  simp only [Iso.trans_inv, Functor.mapIso_inv, Iso.app_inv, Category.assoc] at h
+  rw [restrictSupportedClass_restrictSupportedClass (ModuleCat.{u + 1} Λ) e F.e (F.e ≫ e) rfl i
+    i' _ g hg F.toZ F.isPullback (F.toZ ≫ g) (F.isPullback.paste_horiz hg)] at h
+  exact h
 
 end FundamentalClass
 

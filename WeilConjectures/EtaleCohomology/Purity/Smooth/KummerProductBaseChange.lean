@@ -132,6 +132,24 @@ lemma leftDerivedUpperStar_map_eqToHom_twistObject (e : U' ⟶ U) {m m' : ℤ} (
   subst h
   simp
 
+/-- The identifications `Le^* (Λ(m)[2m]) ≅ Λ(m)[2m]` are compatible with composition. -/
+lemma leftDerivedUpperStarTateShiftIso_comp {U₂ : Scheme.{u}} (e₁ : U₂ ⟶ U') (e : U' ⟶ U)
+    (e' : U₂ ⟶ U) (he : e' = e₁ ≫ e) (m : ℤ) :
+    leftDerivedUpperStarTateShiftIso Λ e' m =
+      (leftDerivedUpperStarComp _ e₁ e e' he).app _ ≪≫
+        (L((e₁)^*[ModuleCat.{u + 1} Λ])).mapIso (leftDerivedUpperStarTateShiftIso Λ e m) ≪≫
+          leftDerivedUpperStarTateShiftIso Λ e₁ m := by
+  have h₁ := NatTrans.shift_app_comm (leftDerivedUpperStarComp (ModuleCat.{u + 1} Λ) e₁ e e' he).hom
+    (2 * m) (tateObject Λ U m)
+  rw [Functor.commShiftIso_comp_hom_app] at h₁
+  ext
+  simp only [leftDerivedUpperStarTateShiftIso, Iso.trans_hom, Iso.app_hom, Functor.mapIso_hom,
+    Functor.map_comp, Category.assoc, leftDerivedUpperStarTateObjectIso_comp e₁ e e' he m]
+  rw [reassoc_of% h₁]
+  simp only [← Functor.map_comp]
+  erw [Functor.commShiftIso_hom_naturality_assoc]
+  rw [Functor.map_comp]
+
 end Twist
 
 /-- Tensor product of identities. -/

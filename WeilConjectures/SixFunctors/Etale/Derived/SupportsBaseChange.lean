@@ -338,6 +338,58 @@ theorem restrictSupportedClass_liftCounitOfRangeEqUniv (i : Z ⟶ U) (i' : Z' �
   erw [h₁]
   exact hφ
 
+omit [(e)^*[A].PreservesFlat] in
+/-- **Transitivity of the restriction of supports** along a composite `e₁ ≫ e₀`. -/
+theorem supportedRestriction_trans {U₂ Z₂ : Scheme.{u}} (e₁ : U₂ ⟶ U') (e' : U₂ ⟶ U)
+    (he : e' = e₁ ≫ e) (i : Z ⟶ U) (i' : Z' ⟶ U') (i₂ : Z₂ ⟶ U₂) [IsClosedImmersion i]
+    [(R(i)_![A]).IsLeftAdjoint] [IsClosedImmersion i'] [(R(i')_![A]).IsLeftAdjoint]
+    [IsClosedImmersion i₂] [(R(i₂)_![A]).IsLeftAdjoint] (g : Z' ⟶ Z) (hg : IsPullback g i' i e)
+    (g₂ : Z₂ ⟶ Z') (hg₂ : IsPullback g₂ i₂ i' e₁) (g' : Z₂ ⟶ Z) (hg' : IsPullback g' i₂ i e')
+    (L : DerivedCategory (Sheaf U.smallEtaleTopology A))
+    (L' : DerivedCategory (Sheaf U'.smallEtaleTopology A))
+    (L₂ : DerivedCategory (Sheaf U₂.smallEtaleTopology A))
+    (τ : (L((e)^*[A])).obj L ≅ L') (τ₂ : (L((e₁)^*[A])).obj L' ≅ L₂) :
+    supportedRestriction A e' i i₂ g' hg' L L₂
+        ((leftDerivedUpperStarComp A e₁ e e' he).app L ≪≫ (L((e₁)^*[A])).mapIso τ ≪≫ τ₂) =
+      (leftDerivedUpperStarComp A e₁ e e' he).hom.app _ ≫
+        (L((e₁)^*[A])).map (supportedRestriction A e i i' g hg L L' τ) ≫
+          supportedRestriction A e₁ i' i₂ g₂ hg₂ L' L₂ τ₂ := by
+  have hψ := (existsUnique_supportedRestriction A e i i' g hg L L' τ).exists.choose_spec
+  have hψ₂ := (existsUnique_supportedRestriction A e₁ i' i₂ g₂ hg₂ L' L₂ τ₂).exists.choose_spec
+  refine (existsUnique_supportedRestriction A e' i i₂ g' hg' L L₂ _).unique
+    (existsUnique_supportedRestriction A e' i i₂ g' hg' L L₂ _).exists.choose_spec ?_
+  simp only [Category.assoc]
+  erw [hψ₂]
+  rw [← Functor.map_comp_assoc]
+  erw [hψ]
+  simp only [Functor.map_comp, Iso.trans_hom, Iso.app_hom, Functor.mapIso_hom, Category.assoc]
+  erw [(leftDerivedUpperStarComp A e₁ e e' he).hom.naturality_assoc]
+  rfl
+
+omit [(e)^*[A].PreservesFlat] in
+/-- **Transitivity of the restriction of classes with supports** along a composite. -/
+theorem restrictSupportedClass_restrictSupportedClass {U₂ Z₂ : Scheme.{u}} (e₁ : U₂ ⟶ U')
+    (e' : U₂ ⟶ U)
+    (he : e' = e₁ ≫ e) (i : Z ⟶ U) (i' : Z' ⟶ U') (i₂ : Z₂ ⟶ U₂) [IsClosedImmersion i]
+    [(R(i)_![A]).IsLeftAdjoint] [IsClosedImmersion i'] [(R(i')_![A]).IsLeftAdjoint]
+    [IsClosedImmersion i₂] [(R(i₂)_![A]).IsLeftAdjoint] (g : Z' ⟶ Z) (hg : IsPullback g i' i e)
+    (g₂ : Z₂ ⟶ Z') (hg₂ : IsPullback g₂ i₂ i' e₁) (g' : Z₂ ⟶ Z) (hg' : IsPullback g' i₂ i e')
+    {K L : DerivedCategory (Sheaf U.smallEtaleTopology A)}
+    {K' L' : DerivedCategory (Sheaf U'.smallEtaleTopology A)}
+    {K₂ L₂ : DerivedCategory (Sheaf U₂.smallEtaleTopology A)}
+    (σ : K' ⟶ (L((e)^*[A])).obj K) (σ₂ : K₂ ⟶ (L((e₁)^*[A])).obj K')
+    (τ : (L((e)^*[A])).obj L ≅ L') (τ₂ : (L((e₁)^*[A])).obj L' ≅ L₂)
+    (γ : K ⟶ (R(i)_![A]).obj ((R(i)^![A]).obj L)) :
+    restrictSupportedClass A e' i i₂ g' hg'
+        (σ₂ ≫ (L((e₁)^*[A])).map σ ≫ (leftDerivedUpperStarComp A e₁ e e' he).inv.app K)
+        ((leftDerivedUpperStarComp A e₁ e e' he).app L ≪≫ (L((e₁)^*[A])).mapIso τ ≪≫ τ₂) γ =
+      restrictSupportedClass A e₁ i' i₂ g₂ hg₂ σ₂ τ₂
+        (restrictSupportedClass A e i i' g hg σ τ γ) := by
+  simp only [restrictSupportedClass, supportedRestriction_trans A e e₁ e' he i i' i₂ g hg g₂ hg₂ g'
+    hg', Functor.map_comp, Category.assoc]
+  erw [(leftDerivedUpperStarComp A e₁ e e' he).hom.naturality_assoc, Iso.inv_hom_id_app_assoc]
+  rfl
+
 end Etale
 
 end AlgebraicGeometry
