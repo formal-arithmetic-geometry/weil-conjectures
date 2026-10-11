@@ -1,11 +1,11 @@
 # Work queue
 
-990 items; claim with `tools/claim.py next <group> [--stage N]`.
+986 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (990)
+## Stage 2: nodes to state (986)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -39,24 +39,20 @@
 | `lem-pc-affine-tilde-kflat` | 1 | state |
 | `lem-pc-balanced-derived-tensor-model` | 1 | state |
 | `lem-pc-compact-hom-hocolim` | 1 | state |
-| `lem-pc-complex-hocolim-colimit` | 1 | state |
 | `lem-pc-derived-adjoint-functors` | 1 | state |
 | `lem-pc-derived-functor-commutes-derived-limit` | 1 | state |
 | `lem-pc-derived-limit-milnor-sequence` | 1 | state |
 | `lem-pc-derived-limit-roos-abelian-groups` | 1 | state |
 | `lem-pc-derived-lower-truncation-step-triangle` | 1 | state |
-| `lem-pc-derived-module-direct-sums` | 1 | state |
 | `lem-pc-derived-splitting-unique` | 1 | state |
 | `lem-pc-derived-tensor-flat-second-localization` | 1 | state |
 | `lem-pc-derived-total-resolution-quasi-iso` | 1 | state |
 | `lem-pc-dim-zero-finite-over-field` | 1 | state |
 | `lem-pc-finite-affine-fibre-sections` | 1 | state |
-| `lem-pc-finite-extension-tensor-algebraic-closure-reduced-separable` | 1 | state |
 | `lem-pc-finite-flat-restriction-projective` | 1 | state |
 | `lem-pc-finite-free-map-residue-localization` | 1 | state |
 | `lem-pc-finite-projective-tor-acyclic` | 1 | state |
 | `lem-pc-flat-tensor-complex-cohom` | 1 | state |
-| `lem-pc-fp-module-map-descent-affine` | 1 | state |
 | `lem-pc-fppf-affine-sheafification-restriction` | 1 | state |
 | `lem-pc-fppf-affine-site-topos-equivalence` | 1 | state |
 | `lem-pc-h0-proper-variety` | 1 | state |
