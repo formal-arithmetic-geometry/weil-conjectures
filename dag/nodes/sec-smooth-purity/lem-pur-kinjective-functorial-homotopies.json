@@ -132,5 +132,23 @@
   "group": "K1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-kfh0054 (reviewer sub-agent of L); spot-checked: Read Stacks lemma-functorial-homotopies (injectives.tex 1704-1741): statement matches clause by clause; Mathlib homotopyToZeroOfId at Pretriangulated.lean:93 exact (variable K, Homotopy (1 (mappingCone (1 K))) 0); citer lem-pur-kinjective-degreewise-existence uses the functor M, termwise-mono j and clause (2) only; no duplicate functorial-homotopies/cone-contractible node. FIX more, RETURN less: (1) C1 step 3 used the long exact cohomology sequence uncited (Q_i acyclic; acyclic cokernel => j quasi-iso): cited Mathlib leaf lem-weil-pbc-complex-ses-homology-long-exact; (2) C1 step 1 'contractible hence acyclic' uncited: cited Mathlib leaf lem-weil-pbc-homotopic-maps-equal-cohomology (b); (3) B3 new leaf lem-pur-kinjective-cone-contractible had stmt_deps [] while citing three nodes: set to def-sp-abelian, def-pc-cochain-complex-modules, def-pur-kinjective-complex. Both added citations are mathlib-status nodes of unit sk-thm-p1 (generic tools). The K1 second reading missed (1) and (2).; 2 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.FunctorialHomotopies",
+  "declaration": "CochainComplex.exists_functorial_homotopies",
+  "file": "lean/Sheaf/Algebra/Homology/FunctorialHomotopies.lean",
+  "statement": "theorem exists_functorial_homotopies {A : Type u} [Category.{v} A] [Abelian A] [IsGrothendieckAbelian.{v} A] {I : Type v} (K : I → CochainComplex A ℤ) (hK : ∀ i : I, (K i).Acyclic) : ∃ (F : CochainComplex A ℤ ⥤ CochainComplex A ℤ) (j : 𝟭 (CochainComplex A ℤ) ⟶ F), (∀ M : CochainComplex A ℤ, (∀ n : ℤ, Mono ((j.app M).f n)) ∧ QuasiIso (j.app M)) ∧ (∀ (M : CochainComplex A ℤ) (i : I) (w : K i ⟶ M), Nonempty (Homotopy (w ≫ j.app M) 0))",
+  "branch": "sheaf-dag",
+  "by": "G1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-kfh0925",
+  "group": "G1",
+  "result": "pass",
+  "note": "Stacks injectives.tex 1705-1717 matched: Grothendieck abelian A (Category.{v}, IsGrothendieckAbelian.{v}), set I : Type v of acyclic K i; exists endofunctor F and j : 𝟭 ⟶ F; (1) termwise Mono and QuasiIso; (2) Nonempty (Homotopy (w ≫ j.app M) 0) for all i, w; docstring = node's 3 proof steps; no functorial-homotopies decl in Mathlib KInjective.lean or source library (only mappingCone.homotopyIdZeroOfId/quasiIso_inr_id, proof ingredients)"
  }
 }
