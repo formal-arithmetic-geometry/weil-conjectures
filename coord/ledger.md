@@ -3695,3 +3695,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 07:48 L: merged deliver/K1/lem-sc-effective-cartier-dimension-drop (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.EffectiveCartierDimensionDrop AlgebraicGeometry.topologicalKrullDim_subscheme_of_isInvertible)
 - 07:48 L: merged deliver/H1/lem-sc-effective-cartier-affine-dimension-drop (stage 2; reviewer FIX; first push; Sheaf.AlgebraicGeometry.EffectiveCartierAffineDimensionDrop AlgebraicGeometry.effective_cartier_affine_dimension_drop; statement corrected (1 citers))
 - 07:48 L: merged deliver/M1/lem-sc-dvr-saturation-line (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.DvrSaturationLine Module.dvr_saturation_line)
+- 07:48 L: returned deliver/G1/lem-pc-pre-derived-adjoint-functors-general (reviewer RETURN: (reviewer R-pda1014, head 6a3c662ea) H7: this item was un-parked as a STAGE 2 STATEMENT CORRECTION (coord/stage2-parked.)
