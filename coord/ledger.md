@@ -4767,3 +4767,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 13:29 L: merged deliver/J1/lem-pc-ring-pseudo-coherent-finite-tor-perfect (stage 2; reviewer FIX; first push; Sheaf.CategoryTheory.DerivedCategory.RingPseudoCoherentFiniteTorPerfect DerivedCategory.isPerfect_of_pseudoCoherent_finiteTorAmplitude)
 - 13:29 L: merged deliver/M1/lem-weil-pbc-quasi-coherent-algebra-kernel-image-ideal (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.QuasiCoherentAlgebraKernelImageIdeal AlgebraicGeometry.Scheme.CommAlgebraSheaf.kernel_image_quasiCoherent)
 - 13:29 L: merged deliver/M1/lem-weil-pbc-purely-inseparable-pth-root-tower (stage 2; reviewer PASS; first push; Sheaf.FieldTheory.PurelyInseparablePthRootTower IsPurelyInseparable.exists_pth_root_tower)
+- 13:30 L: merged deliver/F1/lem-pc-perfect-thick-closure (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.PerfectThickClosure AlgebraicGeometry.Scheme.perfect_thick_closure)

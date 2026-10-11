@@ -100,5 +100,23 @@
   "group": "C1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-ptc2656 (reviewer sub-agent of L); spot-checked: Packet read whole. Step 1 cites new statement-only lem-pc-perfect-two-out-of-three (08CR, exact clause 1, hypotheses intact); Step 2 cites new lem-pc-perfect-summand (08CS, K=L+M gives both summands, matches clause 2); Step 3 elementary from def-pc-perfect-complex (08CM): common refinement, restriction/shift/termwise finite sum of strictly perfect complexes stays strictly perfect; zero object fine. Duplicates: git grep sheaf-dag dag/nodes for 08CR/08CS/064W/066T/summand-perfect/perfect two-out-of-three: none. E1 lem-pc-pseudo-coherent-distinguished-triangle covers only pseudo-coherence of the middle term and no perfect=>finite-Tor or Tor-amplitude-cone node exists, so 08CR cannot be assembled from existing nodes; delivery does not duplicate E1's argument (class b/d: no). 08CS is a real lemma (summand of a strictly perfect complex), not elementary. Mathlib: grep Mathlib for IsPerfect/PerfectComplex finds only IsPerfectClosure (fields): no match (class c: no). No fault beyond the Second reading."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.PerfectThickClosure",
+  "declaration": "AlgebraicGeometry.Scheme.perfect_thick_closure",
+  "file": "lean/Sheaf/AlgebraicGeometry/PerfectThickClosure.lean",
+  "statement": "theorem perfect_thick_closure (X : Scheme.{u}) [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))] [∀ U : X.Opens, HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))] : (∀ (T : Triangle (schemeDerivedCategory X)), T ∈ distTriang (schemeDerivedCategory X) → (IsPerfect X T.obj₁ → IsPerfect X T.obj₂ → IsPerfect X T.obj₃) ∧ (IsPerfect X T.obj₂ → IsPerfect X T.obj₃ → IsPerfect X T.obj₁) ∧ (IsPerfect X T.obj₁ → IsPerfect X T.obj₃ → IsPerfect X T.obj₂)) ∧ (∀ (K L : schemeDerivedCategory X), IsPerfect X (K ⊞ L) → IsPerfect X K ∧ IsPerfect X L) ∧ (∀ (K : schemeDerivedCategory X) (n : ℤ), IsPerfect X K → IsPerfect X (K⟦n⟧)) ∧ (∀ (I : Type v) [Finite I] (K : I → schemeDerivedCategory X), (∀ i : I, IsPerfect X (K i)) → IsPerfect X (⨁ K))",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-ptc1501",
+  "group": "F1",
+  "result": "pass",
+  "note": "Packet and diff read: node json only adds lean record (no statement change, no other node); X:Scheme.{u} + the two HasDerivedCategory carriers of Scheme.IsPerfect (no hollow/geometric extras); (1) T in distTriang, three two-of-three implications, verbatim G1 isPerfect_two_out_of_three; (2) IsPerfect X (K ⊞ L) -> both, consistent with K1 perfect_of_directSum; (3) all n:ℤ shifts and ⨁ over arbitrary Finite I : Type v (finite index, universe not vacuous; empty I = zero object); no let/existentials; docstring carries all three node proof steps; uses recorded IsPerfect/schemeDerivedCategory; no new definitions."
  }
 }
