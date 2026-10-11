@@ -4094,3 +4094,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 09:50 L: merged deliver/E1/def-sp-truncation-couple (stage 2; reviewer FIX; first push; Sheaf.CategoryTheory.TruncationCouple CategoryTheory.truncationCouple)
 - 09:50 L: merged deliver/C1/lem-sp-shift-identification (stage 2; reviewer PASS; first push; Sheaf.CategoryTheory.DerivedCategory.ShiftIdentification CategoryTheory.Functor.exists_rightDerived_shift_identification)
 - 09:51 L: merged deliver/H1/lem-weil-pbc-derived-inverse-image-composition (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.DerivedInverseImageComposition AlgebraicGeometry.Etale.derivedInverseImageComposition)
+- 09:51 L: merged deliver/F1/lem-weil-pbc-elementary-etale-finite-piece-persistence (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.FinitePiecePersistence AlgebraicGeometry.finitePiece_persistence_of_isIso_residueFieldMap)
