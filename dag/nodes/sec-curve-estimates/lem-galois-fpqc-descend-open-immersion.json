@@ -175,5 +175,23 @@
   "group": "C1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-doi (reviewer sub-agent of L); spot-checked: Source: Stacks Descent 02L3 (descent-lemma-descending-property-open-immersion, descent.tex 5862-5912) read in full, with 02KO (line 5310) and 02KP (line 5407); the item statement is unchanged and is the descent direction of 02L3 for an fpqc covering. Steps 1-3 verify conditions (0)-(2) of lem-weil-pbc-fpqc-local-on-base-criterion from def-weil-open-immersion and def-pc-fibre-product (iso invariance; base change of an open immersion is the preimage open subscheme, Schemes 01JY, elementary from the universal property; Zariski locality, which Stacks calls obvious); Step 4 gives condition (3) exactly from the new leaf lem-galois-open-immersion-affine-descent (affine S, S', g flat surjective, base change open immersion); Step 5 applies the criterion statement, hypotheses (0)-(3) and the fpqc covering, with condition (0) absorbing the choice of fibre product (Y_i,p_i,varphi_i). Tool use lem-weil-pbc-fpqc-local-on-base-criterion (unit sk-thm-p1) accepted: the generic 02KP criterion used as a black box, as in the last line of Stacks' proof. Mathlib leaf verified: FlatDescent.lean line 133 is instance descendsAlong_isOpenImmersion_surjective_inf_flat_inf_quasicompact' (@[stacks 02L3] on 132), IsOpenImmersion.DescendsAlong (Surjective inf Flat inf QuasiCompact); a morphism of affine schemes is affine hence quasi-compact, so the node is a one-line specialization; three search kinds recorded. Only split-owned fields of the item changed; new node has created.item = the item, blueprint.from complete, same_as []. Small cases: empty S (affine, f from empty X trivially an open immersion) and g an isomorphism (statement trivial) consistent. Start Sat Oct 10 02:48:20 PM UTC 2026, end Sat Oct 10 02:48:51 PM UTC 2026."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.Morphisms.FpqcOpenImmersionDescent",
+  "declaration": "AlgebraicGeometry.isOpenImmersion_of_fpqcPrecoverage_pullback",
+  "file": "lean/Sheaf/AlgebraicGeometry/Morphisms/FpqcOpenImmersionDescent.lean",
+  "statement": "theorem isOpenImmersion_of_fpqcPrecoverage_pullback {T Y : Scheme.{u}} (φ : Y ⟶ T) {I : Type v} (T' : I → Scheme.{u}) (h : ∀ i, T' i ⟶ T) (hh : Presieve.ofArrows T' h ∈ Scheme.fpqcPrecoverage T) (Y' : I → Scheme.{u}) (p : ∀ i, Y' i ⟶ Y) (φ' : ∀ i, Y' i ⟶ T' i) (hp : ∀ i, IsPullback (p i) (φ' i) φ (h i)) (hφ' : ∀ i, IsOpenImmersion (φ' i)) : IsOpenImmersion φ",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-doi0641",
+  "group": "H1",
+  "result": "fix",
+  "note": "phi:Y->T over Scheme.{u}; index I:Type v (empty allowed); cover as Presieve.ofArrows T' h in Scheme.fpqcPrecoverage T (C1 UnramifiedDescent convention); Y_i,p_i,phi_i with IsPullback (p i) (phi' i) phi (h i) = chosen fibre product of phi and h_i; forall i IsOpenImmersion (phi' i) => IsOpenImmersion phi; Mathlib has only the single-morphism instance descendsAlong_isOpenImmersion_surjective_inf_flat_inf_quasicompact' (FlatDescent.lean 133), WeilConjectures only the generic of_isPullback_of_ofArrows_mem_fpqcTopology, so existing:false right; docstring covers proof steps 1-5; fix: dropped redundant import Mathlib.AlgebraicGeometry.Morphisms.OpenImmersion (Sites.Fpqc already provides IsOpenImmersion; recompiled clean)"
  }
 }
