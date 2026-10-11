@@ -4062,3 +4062,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 09:40 L: merged deliver/F1/lem-sc-rational-section-order (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.RationalSectionOrder AlgebraicGeometry.Scheme.Modules.rational_section_order)
 - 09:40 L: merged deliver/E1/lem-weil-pbc-charpoly-locally-free-direct-sum (stage 2; reviewer PASS; first push; Sheaf.Algebra.LocallyFreeCharpolyProdMap Algebra.locallyFreeCharpoly_prodMap)
 - 09:40 L: merged deliver/E1/lem-sc-separated-affine-function-field-surjective (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.SeparatedAffineFunctionFieldSurjective AlgebraicGeometry.Scheme.separated_affine_functionField_surjective)
+- 09:40 L: merged deliver/H1/lem-weil-pbc-derived-functor-long-exact (stage 2; reviewer PASS; first push; Sheaf.CategoryTheory.Abelian.RightDerived.FullLongExactSequence CategoryTheory.ShortComplex.ShortExact.exists_rightDerived_full_long_exact)

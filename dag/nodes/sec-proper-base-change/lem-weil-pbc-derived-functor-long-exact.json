@@ -195,5 +195,23 @@
   "by": "L",
   "result": "pass",
   "note": "five steps along the horseshoe route (Stacks 013T, 0136, 0117): compatible resolutions, degreewise split so v keeps them exact (written out), the long exact cohomology sequence leaf, the start in degree 0, identification with R^n v by the new leaf (rightDerived_map_eq, RightDerived.lean:114/126/164, verified); 2 new nodes; the source repository has exists_rightDerived_δ_exact (LongExactSequence.lean:58, sorry-free) for exactness at R^q v(C) and R^{q+1} v(A) only, no attachment"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.Abelian.RightDerived.FullLongExactSequence",
+  "declaration": "CategoryTheory.ShortComplex.ShortExact.exists_rightDerived_full_long_exact",
+  "file": "lean/Sheaf/CategoryTheory/Abelian/RightDerived/FullLongExactSequence.lean",
+  "statement": "theorem exists_rightDerived_full_long_exact {A : Type u₁} {B : Type u₂} [Category.{v₁} A] [Category.{v₂} B] [Abelian A] [EnoughInjectives A] [Abelian B] (F : A ⥤ B) [F.Additive] [PreservesFiniteLimits F] {S : ShortComplex A} (hS : S.ShortExact) : ∃ δ : ∀ n : ℕ, (F.rightDerived n).obj S.X₃ ⟶ (F.rightDerived (n + 1)).obj S.X₁, Mono ((F.rightDerived 0).map S.f) ∧ ∀ n : ℕ, (S.map (F.rightDerived n)).Exact ∧ ∃ (w₁ : (F.rightDerived n).map S.g ≫ δ n = 0) (w₂ : δ n ≫ (F.rightDerived (n + 1)).map S.f = 0), (ShortComplex.mk _ _ w₁).Exact ∧ (ShortComplex.mk _ _ w₂).Exact",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-dfl0941",
+  "group": "H1",
+  "result": "pass",
+  "note": "Abelian A + EnoughInjectives A, Abelian B (independent universes); F Additive + PreservesFiniteLimits (= left exact per def-sp-left-exact-additive mathlib_match); R^n = Mathlib Functor.rightDerived n; SES = ShortComplex.ShortExact; ∃ δ family R^n C -> R^{n+1} A; Mono R^0 f (initial 0), exact at every R^n B (S.map), at R^n C and R^{n+1} A via ShortComplex.mk Exact: covers whole sequence. #check'd elaborated statement. Not in Mathlib (no rightDerived LES); source exists_rightDerived_δ_exact is partial (no B-exactness, no initial mono) so existing:false correct; no duplicate node on sheaf-dag"
  }
 }
