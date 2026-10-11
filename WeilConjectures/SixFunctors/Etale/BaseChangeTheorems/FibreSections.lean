@@ -108,7 +108,7 @@ lemma fibreRestriction_map {V W : Y.Etale} (φ : V ⟶ W) (v : (pointSmallEtale 
   rw [fibreRestriction_apply, fibreRestriction_apply]
   change pullSection a F _ _ (F.obj.map (f.Etale.map φ).op s) = _
   rw [← pullSection_comp]
-  exact pullSection_congr _ _ _ (by apply pullback.hom_ext <;> simp [Scheme.Hom.Etale] <;> rfl) _
+  exact pullSection_congr _ _ _ (by apply pullback.hom_ext <;> simp [Scheme.Hom.Etale]; rfl) _
 
 lemma fibreRestriction_comp {V W : Y.Etale} (φ : V ⟶ W) (v : (pointSmallEtale y).fiber.obj V) :
     ((f)_*[AddCommGrpCat.{u + 1}].obj F).obj.map φ.op ≫ fibreRestriction f y a b hab F V v =
