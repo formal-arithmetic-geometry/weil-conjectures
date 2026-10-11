@@ -140,5 +140,24 @@
   "group": "E1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of E1; spot-checked by L: L: 05EC: the torsion case by the base-change isomorphism and 05DQ, the general case through the torsion submodule; 0 new"
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.TorsionHomFlatComparison",
+  "declaration": "LinearMap.baseChange_bijective_of_ideal_power_torsion",
+  "file": "lean/Sheaf/RingTheory/TorsionHomFlatComparison.lean",
+  "statement": "theorem baseChange_bijective_of_ideal_power_torsion {R : Type u} {S : Type v} [CommRing R] [CommRing S] [Algebra R S] (_hflat : (algebraMap R S).Flat) (I : Ideal R) (_hI : I.FG) (_hquot : Function.Bijective (Ideal.quotientMap (I.map (algebraMap R S)) (algebraMap R S) Ideal.le_comap_map)) {K : Type w} {N : Type x} [AddCommGroup K] [AddCommGroup N] [Module R K] [Module R N] (_hK : ∀ k : K, ∃ n : ℕ, ∀ r ∈ I ^ n, r • k = 0) : Function.Bijective (LinearMap.baseChange S : (K →ₗ[R] N) → (S ⊗[R] K →ₗ[S] S ⊗[R] N))",
+  "branch": "sheaf-dag",
+  "by": "N1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-thf"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-thf",
+  "group": "N1",
+  "result": "fix",
+  "note": "flat RingHom.Flat on algebraMap; FG I; R/I->S/IS via Ideal.quotientMap bijective (as landed sibling CyclicExtensionFlatDescent); elementwise I^n-torsion K; bijectivity of LinearMap.baseChange S; dropped tautological naturality conjunct (= LinearMap.baseChange_comp)"
  }
 }
