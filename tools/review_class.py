@@ -49,7 +49,9 @@ def classify(g: str, item: str):
     lean = d.get("lean") or {}
     if lean.get("existing") or not mods: return "FULL", "existing: true record (no module)", head
     rep = show(br, f"coord/reports/{g}/{item}.md") or ""
-    if "STATEMENT-DISPUTED" in rep: return "FULL", "STATEMENT-DISPUTED", head
+    import re
+    if any(not re.match(r"\s*`?\s*(none|no\b|n/a|not applicable|nothing)", m, re.I) for m in re.findall(r"STATEMENT-DISPUTED:(.{0,40})", rep)):
+        return "FULL", "STATEMENT-DISPUTED", head
     ret = ROOT / "coord" / "returns" / f"{g}.md"
     if ret.exists() and f"## {item} (" in ret.read_text(): return "FULL", "repair of a returned delivery", head
     if int(hashlib.sha1(item.encode()).hexdigest(), 16) % SAMPLE == 0: return "FULL", f"sample (1 in {SAMPLE})", head
