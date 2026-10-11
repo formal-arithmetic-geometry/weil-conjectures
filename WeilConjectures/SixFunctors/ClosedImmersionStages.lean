@@ -540,4 +540,37 @@ end Adic
 
 end BoundedConstructible
 
+/-- The formal step of the `ℚ̄_ℓ` stage of blueprint `prop-sf-closed-unit-all-stages`: if the
+`Hom` sets of two categories are filtered colimits of the `Hom` sets of stages (for `ℚ̄_ℓ`: the
+finite extensions `E ⊆ ℚ̄_ℓ`), and a functor `T` is induced by stagewise maps `α` compatible with
+the colimit presentations, then `T` is bijective on morphisms as soon as every `α` is: a filtered
+colimit of bijections is a bijection. At the stage `E` the bijectivity of `α` is
+`AlgebraicGeometry.Etale.full_boundedConstructibleRationalLowerStar`. -/
+lemma _root_.CategoryTheory.Functor.map_bijective_of_isColimit {C D : Type*} [Category C]
+    [Category D] (T : C ⥤ D) {J : Type*} [Category J] {P Q : C} {F G : J ⥤ Type w}
+    {cF : Cocone F} {cG : Cocone G} (hF : IsColimit cF) (hG : IsColimit cG)
+    (eF : cF.pt ≃ (P ⟶ Q)) (eG : cG.pt ≃ (T.obj P ⟶ T.obj Q)) (α : F ⟶ G)
+    (hα : ∀ j, Function.Bijective (α.app j))
+    (hT : ∀ j x, T.map (eF (cF.ι.app j x)) = eG (cG.ι.app j (α.app j x))) :
+    Function.Bijective (T.map : (P ⟶ Q) → (T.obj P ⟶ T.obj Q)) := by
+  have : IsIso α := by
+    rw [NatTrans.isIso_iff_isIso_app]
+    exact fun j ↦ (isIso_iff_bijective _).2 (hα j)
+  let φ : cF.pt ⟶ cG.pt := hF.desc ⟨cG.pt, α ≫ cG.ι⟩
+  have hφ : IsIso φ := by
+    let ψ : cG.pt ⟶ cF.pt := hG.desc ⟨cF.pt, inv α ≫ cF.ι⟩
+    refine ⟨ψ, hF.hom_ext fun j ↦ ?_, hG.hom_ext fun j ↦ ?_⟩
+    · simp [φ, ψ]
+    · simp [φ, ψ]
+  have hcomp : (T.map : (P ⟶ Q) → _) = eG ∘ φ ∘ eF.symm := by
+    funext f
+    obtain ⟨j, x, hx⟩ := Types.jointly_surjective_of_isColimit hF (eF.symm f)
+    have hx' : eF (cF.ι.app j x) = f := by rw [hx, Equiv.apply_symm_apply]
+    rw [← hx', hT, Function.comp_apply, Function.comp_apply, Equiv.symm_apply_apply]
+    congr 1
+    have h := hF.fac ⟨cG.pt, α ≫ cG.ι⟩ j
+    exact (ConcreteCategory.congr_hom h x).symm
+  rw [hcomp]
+  exact eG.bijective.comp (((isIso_iff_bijective φ).1 hφ).comp eF.symm.bijective)
+
 end AlgebraicGeometry
