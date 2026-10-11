@@ -126,6 +126,24 @@ theorem projectionMapOfCompactification_assoc (M : DerivedCategory (Sheaf X.smal
           ((projectionMapOfCompactification A c).app (M ⊗ L((f)^*[A]).obj L)).app L' := by
   letI := leftDerivedUpperStarOplaxMonoidal A f
   simp only [projectionMapOfCompactification_app_app]
+  have hnat {M₁ M₂ : DerivedCategory (Sheaf c.Z.smallEtaleTopology A)} (x : M₁ ⟶ M₂)
+      {W : DerivedCategory (Sheaf Y.smallEtaleTopology A)}
+      (h : R((c.g)_*[A]).obj (M₂ ⊗ L((c.g)^*[A]).obj L') ⟶ W) :
+      R((c.g)_*[A]).map x ▷ L' ≫ ((rightDerivedLowerStarProjectionMap A c.g).app M₂).app L' ≫ h =
+        ((rightDerivedLowerStarProjectionMap A c.g).app M₁).app L' ≫
+          R((c.g)_*[A]).map (x ▷ L((c.g)^*[A]).obj L') ≫ h := by
+    rw [← Category.assoc, ← Category.assoc]
+    exact congr_arg (· ≫ h)
+      (congr_app ((rightDerivedLowerStarProjectionMap A c.g).naturality x) L')
+  simp only [comp_whiskerRight, Category.assoc]
+  erw [hnat, hnat]
+  have ha := rightDerivedLowerStarProjectionMap_assoc A c.g (D((c.i)_!open[A]).obj M) L L'
+  erw [← reassoc_of% ha]
+  congr 1
+  change R((c.g)_*[A]).map _ ≫ R((c.g)_*[A]).map _ ≫ R((c.g)_*[A]).map (D((c.i)_!open[A]).map _) ≫
+    R((c.g)_*[A]).map (D((c.i)_!open[A]).map _) = _
+  simp only [← Functor.map_comp]
+  congr 1
   trace_state
   sorry
 
