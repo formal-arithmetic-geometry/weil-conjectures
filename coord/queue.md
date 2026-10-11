@@ -2,7 +2,7 @@
 
 862 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (31)
+## Stage 1: nodes to split (30)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -19,7 +19,6 @@
 | `lem-sc-strict-henselization-mod-power-free` | 4014 | none |
 | `lem-pc-derived-tensor-transitivity` | 5015 | none |
 | `lem-pc-derived-tensor-localization-cohomology` | 5017 | none |
-| `lem-pc-affine-flat-module-localization-preserves-flatness` | 5018 | none |
 | `lem-pc-derived-functor-termwise-split-ses-triangle` | 5018 | none |
 | `lem-sp-ce-compatible-homotopy-assembly` | 6009 | none |
 | `pqf-lem-serre-criterion` | 6013 | none |
@@ -38,7 +37,7 @@
 | `lem-pur-left-derived-exact-when-defined` | - | none |
 | `lem-pur-quasi-isos-saturated-triangulated` | - | none |
 
-## Stage 2: nodes to state (831)
+## Stage 2: nodes to state (832)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -139,6 +138,7 @@
 | `lem-pc-affine-finite-type-algebra` | 1 | state |
 | `lem-pc-affine-flat-module-descent` | 1 | state |
 | `lem-pc-affine-flat-module-local-criterion` | 1 | state |
+| `lem-pc-affine-flat-module-localization-preserves-flatness` | 1 | state |
 | `lem-pc-affine-nonzerodivisor-complement-dense` | 1 | state |
 | `lem-pc-affine-surjective-structure-map-closed-immersion` | 1 | state |
 | `lem-pc-alg-closed-reduced-algebra-no-idempotents-dim-one` | 1 | state |
@@ -874,7 +874,7 @@
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 | `def-nagata-fixed-base-separated-stage` | 6 | state |
 
-Not open yet: 1743 nodes that wait for a statement dependency, 72 nodes that wait for stage 1.
+Not open yet: 1743 nodes that wait for a statement dependency, 71 nodes that wait for stage 1.
 
 ## Stage 3: modules to prove (0)
 
