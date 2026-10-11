@@ -162,6 +162,7 @@ lemma derivedTensorHom_id {X : Scheme.{u}}
 section Kummer
 
 variable [Finite Λ] [HasKummerClass Λ]
+
 omit [Finite Λ] in
 /-- The diagonal `Λ_U ⟶ Λ_U ⊗ Λ_U` along which classes are multiplied
 (`AlgebraicGeometry.Etale.constantComplexDiagonal`) is compatible with pullback. -/
@@ -208,6 +209,7 @@ lemma constantComplexDiagonal_comp_derivedTensorHom (e : U' ⟶ U) :
     reassoc_of% hc', leftDerivedUpperStar_map_eqToHom_twistObject_assoc Λ e (add_zero 0).symm]
   simp only [Iso.inv_hom_id_assoc, derivedTensorHom_comp]
   rfl
+
 /-- Closed subschemes cut out by global sections pull back to the closed subschemes cut out by the
 pulled back sections. -/
 lemma exists_isPullback_zeroLocusSubschemeι (e : U' ⟶ U) (s : Set Γ(U, ⊤))

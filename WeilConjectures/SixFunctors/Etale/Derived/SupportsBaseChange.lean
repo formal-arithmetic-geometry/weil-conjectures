@@ -103,7 +103,14 @@ lemma derivedTensorHom_comp {X : Scheme.{u}}
 
 variable (e : U' ⟶ U) [(e)^*[A].PreservesFlat]
 
-/-- The comparison `Le^*(K ⊗ M) ≅ Le^* K ⊗ Le^* M` is natural in both variables. -/
+/-- The comparison `Le^*(K ⊗ M) ≅ Le^* K ⊗ Le^* M` is natural in both variables:
+```
+  Le^*(K ⊗ M) ----------> Le^*(K₁ ⊗ M₁)
+       |                        |
+       v                        v
+  Le^*K ⊗ Le^*M -------> Le^*K₁ ⊗ Le^*M₁
+```
+-/
 @[reassoc]
 lemma leftDerivedUpperStarTensorIso_hom_naturality
     {K K₁ M M₁ : DerivedCategory (Sheaf U.smallEtaleTopology A)} (f : K ⟶ K₁) (g : M ⟶ M₁) :
@@ -198,8 +205,7 @@ theorem supportedProduct_baseChange (i₁ : Z₁ ⟶ U) (i₂ : Z₂ ⟶ U) (i :
   erw [hψ]
   rw [hP₁', derivedTensorHom_comp]
   erw [hψ₁, hψ₂]
-  rw [← Functor.map_comp_assoc, hP₁, hτ,
-    ]
+  rw [← Functor.map_comp_assoc, hP₁, hτ]
   erw [leftDerivedUpperStarTensorIso_hom_naturality_assoc, Iso.inv_hom_id_assoc]
   rw [derivedTensorHom_comp]
 
@@ -270,7 +276,16 @@ omit [(e)^*[A].PreservesFlat] in
 /-- **Naturality of the restriction of supports in the coefficients.** For `φ : L₁ ⟶ L₂` on `U`
 and `φ' : L₁' ⟶ L₂'` on `U'` compatible with identifications `τ₁ : Le^* L₁ ≅ L₁'` and
 `τ₂ : Le^* L₂ ≅ L₂'`, restricting `γ ≫ Ri_! Ri^! φ` gives the restriction of `γ` followed by
-`Ri'_! Ri'^! φ'`. -/
+`Ri'_! Ri'^! φ'`:
+```
+  K' --- restriction of γ ---> Ri'_! Ri'^! L₁'
+     \                               |
+      \                              | Ri'_! Ri'^! φ'
+       \                             v
+        ------------------->  Ri'_! Ri'^! L₂'
+       restriction of γ ≫ Ri_! Ri^! φ
+```
+-/
 theorem restrictSupportedClass_map (i : Z ⟶ U) (i' : Z' ⟶ U') [IsClosedImmersion i]
     [(R(i)_![A]).IsLeftAdjoint] [IsClosedImmersion i'] [(R(i')_![A]).IsLeftAdjoint]
     (g : Z' ⟶ Z) (hg : IsPullback g i' i e)
@@ -339,7 +354,14 @@ theorem restrictSupportedClass_liftCounitOfRangeEqUniv (i : Z ⟶ U) (i' : Z' �
   exact hφ
 
 omit [(e)^*[A].PreservesFlat] in
-/-- **Transitivity of the restriction of supports** along a composite `e₁ ≫ e₀`. -/
+/-- **Transitivity of the restriction of supports** along a composite `e' = e₁ ≫ e`:
+```
+  Le'^* Ri_! Ri^! L ------------------------------> Ri₂_! Ri₂^! L₂
+          |                                                ^
+          v                                                |
+  Le₁^* Le^* Ri_! Ri^! L ---> Le₁^* Ri'_! Ri'^! L' --------+
+```
+-/
 theorem supportedRestriction_trans {U₂ Z₂ : Scheme.{u}} (e₁ : U₂ ⟶ U') (e' : U₂ ⟶ U)
     (he : e' = e₁ ≫ e) (i : Z ⟶ U) (i' : Z' ⟶ U') (i₂ : Z₂ ⟶ U₂) [IsClosedImmersion i]
     [(R(i)_![A]).IsLeftAdjoint] [IsClosedImmersion i'] [(R(i')_![A]).IsLeftAdjoint]

@@ -406,7 +406,6 @@ lemma exists_glAffine_point {U : Scheme.{u}} (f : Fin c → Γ(U, ⊤))
     simp [matrixCoord, AffineSpace.homOfVector_appTop_coord]
   simp only [Matrix.mulVec, dotProduct, map_sum, map_mul, hM', h₁]
 
-
 /-- **Frame independence.** For functions `f₁, …, f_c` on `U` and an invertible matrix `M`, the
 frames `f` and `M f` cut out the same closed subscheme and have the same class: restricting
 `∂κ((Mf)₁) ∪ ⋯ ∪ ∂κ((Mf)_c)` to the support `V(f)` gives `∂κ(f₁) ∪ ⋯ ∪ ∂κ(f_c)`. This is the

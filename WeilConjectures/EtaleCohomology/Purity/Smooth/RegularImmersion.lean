@@ -170,7 +170,6 @@ theorem exists_etaleFrame_isOpenImmersion (c : ℕ) (i : Z ⟶ X)
   rw [← Scheme.Hom.comp_apply, ← Category.assoc, IsIso.hom_inv_id, Category.id_comp]
   rfl
 
-
 /-- A frame of the base change `i'` of `i` along an étale `e` is a frame of `i`, through the
 composite étale map. -/
 @[simps]
@@ -436,8 +435,17 @@ lemma frameRestriction_kummerBoundaryProduct [HasKummerClass Λ] {U W : Scheme.{
       frameClass Λ (Scheme.Hom.EtaleFrame.ofFunctions f j) :=
   restrictSupportedClass_kummerBoundaryProduct Λ j f _ (fun _ ↦ rfl) _ _
 
-/-- Restriction of classes with supports along a composite, with the standard identifications
-of the constant and Tate complexes. -/
+/-- Restriction of classes with supports along a composite `e' = e₁ ≫ e`, with the standard
+identifications of the constant and Tate complexes: restricting `γ` along `e'` is restricting it
+along `e` and then along `e₁`.
+```
+  H^{2c}_Z(U, Λ(c)) ---- e^* ----> H^{2c}_{Z'}(U', Λ(c))
+          \                               |
+           \ e'^*                         | e₁^*
+            \                             v
+             ------------------> H^{2c}_{Z₂}(U₂, Λ(c))
+```
+-/
 lemma restrictSupportedClass_comp_tateShift [HasKummerClass Λ] {U U' U₂ Z Z' Z₂ : Scheme.{u}}
     (e₁ : U₂ ⟶ U') (e : U' ⟶ U)
     (e' : U₂ ⟶ U) (he : e' = e₁ ≫ e)
@@ -461,7 +469,15 @@ lemma restrictSupportedClass_comp_tateShift [HasKummerClass Λ] {U U' U₂ Z Z' 
     i' i₂ g hg g₂ hg₂ g' hg' _ _ _ _ γ
 
 /-- A local class `δ : Le^* Λ_X ⟶ Le^* (Ri_! Ri^! Λ(c)[2c])` corresponding to the class `β` with
-supports on `U` restricts along `a : W ⟶ U` to the restriction of `β`. -/
+supports on `U` restricts along `a : W ⟶ U` to the restriction of `β`:
+```
+  Λ_W ≅ Lw^* Λ_X ≅ La^* Le^* Λ_X --La^* δ--> La^* Le^* Ri_! Ri^! Λ(c)[2c]
+     \                                                  |
+      \                                                 | ≅ Lw^*, restriction of supports
+       \                                                v
+        ------ restriction of β along a ------> Ri'_! Ri'^! Λ(c)[2c]
+```
+-/
 lemma constantComplexIso_inv_comp_leftDerivedUpperStarComp_map_supportedRestriction
     [HasKummerClass Λ]
     {U W X Z Z₁ Z' : Scheme.{u}} (e : U ⟶ X) (a : W ⟶ U) (w : W ⟶ X) (hw : w = a ≫ e)
@@ -778,8 +794,6 @@ theorem restrictSupportedClass_frameClass_eq (aX : X ⟶ Spec (.of k)) [Smooth a
     rw [frameClass, restrictSupportedClass_kummerBoundaryProduct Λ _ F₂.f w' (fun _ ↦ rfl) _ _]
     exact key w' hw' g₀ hg₀
   rw [h₁, h₂]
-
-
 
 /-- Blueprint `sk-thm-regular`: Purity for regular closed immersions
 
