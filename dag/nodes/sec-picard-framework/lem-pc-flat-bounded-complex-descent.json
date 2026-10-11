@@ -120,5 +120,24 @@
   "group": "E1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-fbd2519 (reviewer sub-agent of L); spot-checked: Checked step 1 against lem-pc-fp-complex-descent (01ZR termwise plus maps and relations; no geometric 01ZR node exists, not class b/d), hypotheses bounded/fp/flat match citers lem-pc-finite-flat-proper-support-descent and lem-pc-noetherian-approximation-data; no duplicate of lem-weil-pbc-colimit-flat-ring-map (ring maps only). FIX more, RETURN less: C4 in step 2 - lem-pc-flat-module-descent as delivered produced some new F_j with base change iso F, which does not make the already descended terms H_j^r flat (their differentials would be lost); restated it in the Tag 05LY form (given F_i fp with flat pullback to X, its pullback to X_j' is flat over S_j' for j' >= some j) and rewrote step 2 to apply it to H_j^r; added one grep Mathlib search.; 2 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FlatBoundedComplexDescent",
+  "declaration": "AlgebraicGeometry.flat_bounded_complex_descent",
+  "file": "lean/Sheaf/AlgebraicGeometry/FlatBoundedComplexDescent.lean",
+  "statement": "theorem flat_bounded_complex_descent {I : Type v} [PartialOrder I] [IsDirectedOrder I] (R : I ⥤ CommRingCat.{u}) [∀ k : I, IsNoetherianRing (R.obj k)] (c : Cone (R.op ⋙ Scheme.Spec)) (hc : IsLimit c) [IsAffine c.pt] (i : I) {Xi : Scheme.{u}} (f : Xi ⟶ Spec (R.obj i)) [LocallyOfFinitePresentation f] [QuasiCompact f] [QuasiSeparated f] (G : CochainComplex (pullback f (c.π.app (op i))).Modules ℤ) (hG_bounded : ∃ a b : ℤ, ∀ n : ℤ, n < a ∨ b < n → IsZero (G.X n)) (hG_fp : ∀ n : ℤ, (G.X n).IsFinitePresentation) (hG_flat : ∀ n : ℤ, (G.X n).IsFlatOver (pullback.snd f (c.π.app (op i)))) : ∃ (j : I) (hij : i ≤ j) (Gj : CochainComplex (pullback f (Spec.map (R.map (homOfLE hij)))).Modules ℤ), (∃ a b : ℤ, ∀ n : ℤ, n < a ∨ b < n → IsZero (Gj.X n)) ∧ (∀ n : ℤ, (Gj.X n).IsFinitePresentation) ∧ (∀ n : ℤ, (Gj.X n).IsFlatOver (pullback.snd f (Spec.map (R.map (homOfLE hij))))) ∧ ∃ e : ∀ n : ℤ, (Scheme.Modules.moduleBaseChange f (T := Over.mk (Spec.map (R.map (homOfLE hij)))) (T' := Over.mk (c.π.app (op i))) (Over.homMk (c.π.app (op j)) (c.w (homOfLE hij).op))).obj (Gj.X n) ≅ G.X n, ∀ n m : ℤ, (Scheme.Modules.moduleBaseChange f (T := Over.mk (Spec.map (R.map (homOfLE hij)))) (T' := Over.mk (c.π.app (op i))) (Over.homMk (c.π.app (op j)) (c.w (homOfLE hij).op))).map (Gj.d n m) ≫ (e m).hom = (e n).hom ≫ G.d n m",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-fbd1356"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-fbd1356",
+  "group": "F1",
+  "result": "fix",
+  "note": "Directed I, Noetherian R_k, affine stages Spec R_k (transitions Spec.map, affine automatically), limit S = c.pt affine via IsLimit; Xi fp over S_i (lfp+qc+qs); G on X = Xi x_{S_i} S bounded (∃ a b), termwise IsFinitePresentation, IsFlatOver pullback.snd; conclusion j >= i, Gj on X_j bounded/fp/flat over S_j, base change iso via moduleBaseChange termwise commuting with d. Replaced free baseChangeIso predicate, unused R, non-limit S, free X/f."
  }
 }
