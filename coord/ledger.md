@@ -3335,3 +3335,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 03:02 L: reviewer R-spi0304 launched (K1 cor-pc-sigma-pic-iso, head 650b7fdfd; one of the five items unblocked at 02:31)
 - 03:03 L: merged deliver/K1/cor-pc-sigma-pic-iso (reviewer FIX; first push; new nodes: 0)
 - 03:03 L: cor-pc-sigma-pic-iso merged by R-spi0304 (FIX 702744054: representability both ways; false split_report summary); second reading by K1 missed the false summary
+- 03:07 L: reviewer R-atr0306 launched (K1 prop-av-tate-rank, head c7f4f81ff; second of the items unblocked at 02:31)
