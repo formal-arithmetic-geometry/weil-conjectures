@@ -18,7 +18,9 @@
  },
  "stmt_deps": [
   "def-sp-filtration",
-  "def-sp-convergence"
+  "def-sp-convergence",
+  "def-sp-filtered-page-two-model",
+  "def-sp-filtered-complex-subquotients"
  ],
  "proof": [
   {
@@ -117,5 +119,23 @@
   "group": "G1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-fhs2601 (reviewer sub-agent of L); spot-checked: Read whole packet; statement vs 012O/012U and vs citer lem-sp-cartan-eilenberg-comparison-independence (one-step shift h(F^p)<=F^{p-1}, equality from E_2, abutment graded maps: C4 OK); def-sp-filtration and def-sp-convergence cited not restated (class b OK); no new nodes, so no helper overlap with J1 (class d n/a). FIX more, RETURN less: (1) E/C4 Step 2 claimed 'modulo F^{p+1} the equality identifies d(hx) with -h(dx)', which is false (a-b)x need not lie in F^{p+1}) - rewrote Step 2: by boundedness take Z_r representatives as genuine cocycles x in F^p, then (a-b)x=d(hx) with hx in F^{p-1} in F^{p-r+1}, so its class is a coboundary in B_r for every r>=2; the Second reading by G1 missed this. (2) E7 statement: def-sp-filtration is a filtration of an object, so added 'by subcomplexes (d(F^pC^n) in F^pC^{n+1})', needed for the spectral sequence of thm-sp-spectral-object-yields to exist; no change of meaning for the citer, whose filtrations are by subcomplexes.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.FilteredHomotopySpectralSequence",
+  "declaration": "CategoryTheory.filteredHomotopy_spectralSequence_map_eq",
+  "file": "lean/Sheaf/CategoryTheory/FilteredHomotopySpectralSequence.lean",
+  "statement": "theorem filteredHomotopy_spectralSequence_map_eq (K L : CochainComplex C ℤ) (F : DecreasingFiltration K) (G : DecreasingFiltration L) (hKF : ∀ n : ℤ, ∃ pmin : ℤ, ∃ pmax : ℤ, F.complexStep pmin n = ⊤ ∧ F.complexStep pmax n = ⊥) (hLG : ∀ n : ℤ, ∃ pmin : ℤ, ∃ pmax : ℤ, G.complexStep pmin n = ⊤ ∧ G.complexStep pmax n = ⊥) (a b : FilteredObject.Hom ⟨K, F⟩ ⟨L, G⟩) (H : Homotopy a.hom b.hom) (hshift : ∀ (p n : ℤ), ∃ ℓ : (F.complexStep p n : C) ⟶ (G.complexStep (p - 1) (n - 1) : C), ℓ ≫ (G.complexStep (p - 1) (n - 1)).arrow = (F.complexStep p n).arrow ≫ H.hom n (n - 1)) : (∀ (M : FilteredPageTwoModel C), M.S.map a = M.S.map b) ∧ (∀ (n : ℤ) (AF : DecreasingFiltration (K.homology n)) (BF : DecreasingFiltration (L.homology n)), (∀ p : ℤ, AF.step p = imageSubobject (HomologicalComplex.homologyMap (F.step p).arrow n)) → (∀ p : ℤ, BF.step p = imageSubobject (HomologicalComplex.homologyMap (G.step p).arrow n)) → ∃ t : FilteredObject.Hom ⟨K.homology n, AF⟩ ⟨L.homology n, BF⟩, t.hom = HomologicalComplex.homologyMap a.hom n ∧ t.hom = HomologicalComplex.homologyMap b.hom n ∧ ∀ p : ℤ, ∃ g : AF.gradedPiece p ⟶ BF.gradedPiece p, cokernel.π (Subobject.ofLE (AF.step (p + 1)) (AF.step p) (AF.antitone_step (by omega))) ≫ g = Classical.choose (t.preserves p) ≫ cokernel.π (Subobject.ofLE (BF.step (p + 1)) (BF.step p) (BF.antitone_step (by omega))))",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-fhs",
+  "group": "E1",
+  "result": "pass",
+  "note": "C,D abelian Abelian C; filtrations DecreasingFiltration by subcomplexes; degreewise finiteness hKF/hLG via complexStep top/bottom; a,b FilteredObject.Hom; a-b=dh+hd via Mathlib Homotopy (a = dh+hd+b); h^n(F^p)<=F^(p-1) via hshift factorization through complexStep (p-1)(n-1); E_r r>=2 equality as M.S.map a = M.S.map b for every FilteredPageTwoModel; abutment as image filtration of H^n(F^p) (same form as landed citer CartanEilenbergComparisonIndependence), common filtered map t = H(a) = H(b) and common graded map pinned by cokernel projection; added stmt_deps page-two-model and filtered-complex-subquotients are used (FilteredPageTwoModel, complexStep)"
  }
 }
