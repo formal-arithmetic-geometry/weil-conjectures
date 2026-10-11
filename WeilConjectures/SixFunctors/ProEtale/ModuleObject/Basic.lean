@@ -10,8 +10,8 @@ public import Mathlib.AlgebraicGeometry.Morphisms.WeaklyEtale
 public import Mathlib.Topology.LocallyConstant.Algebra
 public import WeilConjectures.CategoryTheory.ModuleObjects.MapMod
 public import WeilConjectures.CategoryTheory.RingObjects.Condensed.ContinuousMap
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteExtension.ContinuousMap
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteExtension.UpperLowerStar.Monoidal
+public import WeilConjectures.FromJoel.CategoryTheory.Abelian.Flat.Basic
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.Monoidal
 
 /-!
 
@@ -72,17 +72,15 @@ objects is the canonical isomorphism `X ×_Y Y[S] ≅ X[S]` of the notes
 ## The canonical coefficient morphisms
 
 * `α_f : f^* Λ_Y ⟶ Λ_X` (`AlgebraicGeometry.ProEtale.condensedPullbackHom`): the component at
-  `Λ` of the comparison `f^* ∘ p_Y^* ≅ p_X^*`. It is a morphism of ring objects, and, unlike for
-  the coefficient sheaves of `WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteExtension`,
-  it is an isomorphism for *every* `f`: the coefficients pulled back from the point form a
+  `Λ` of the comparison `f^* ∘ p_Y^* ≅ p_X^*`. It is a morphism of ring objects, and an
+  isomorphism for *every* `f`: the coefficients pulled back from the point form a
   Cartesian system. As a morphism of bundled ring objects it is
   `AlgebraicGeometry.ProEtale.coefficientPullbackIso`.
 * `η_f : Λ_Y ⟶ f_* Λ_X` (`AlgebraicGeometry.ProEtale.condensedPushforwardHom`): the mate of
   `α_f` under the adjunction `f^* ⊣ f_*`, i.e. the unit `Λ_Y ⟶ f_* f^* Λ_Y` followed by `f_* α_f`.
 
-The import of `WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteExtension.ContinuousMap`
-is only for the instance `AddCommGrpCat.hasFunctorialFlatResolution`, which the derived functors
-need and which lives there for now.
+This file also records the instance `AddCommGrpCat.hasFunctorialFlatResolution`, which the
+derived functors on module objects need.
 
 ## Main definitions
 
@@ -100,6 +98,8 @@ need and which lives there for now.
 
 ## Sorried input
 
+* `AddCommGrpCat.hasFunctorialFlatResolution`: abelian groups admit functorial flat resolutions,
+  by free abelian groups; it is what makes the derived functors with values in `Ab` available.
 * `AlgebraicGeometry.ProEtale.weaklyEtale_toSpecZ_profiniteToScheme`: `Spec LC(S, ℤ) ⟶ Spec ℤ`
   is weakly étale, `LC(S, ℤ)` being ind-Zariski over `ℤ` (the filtered colimit of the finite
   products `ℤ^{S_i}`), and ind-Zariski algebras being weakly étale.
@@ -136,6 +136,12 @@ need and which lives there for now.
 universe u
 
 open CategoryTheory Limits MonoidalCategory Opposite Functor.LaxMonoidal Functor.OplaxMonoidal
+
+/-- Abelian groups admit functorial flat resolutions, by free abelian groups: the free abelian
+group on the underlying set of `M` is flat, and surjects functorially onto `M`. -/
+instance AddCommGrpCat.hasFunctorialFlatResolution :
+    Abelian.HasFunctorialFlatResolution Ab.{u} :=
+  sorry
 
 namespace AlgebraicGeometry.ProEtale
 

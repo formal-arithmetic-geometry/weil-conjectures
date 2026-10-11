@@ -57,7 +57,7 @@ and `f^*` on module objects is exact.
 ## Sorried input
 
 - `ProEtale.isMonoidal_lowerStarComp` (in
-  `WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteExtension.UpperLowerStar.Monoidal`):
+  `WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.Monoidal`):
   the composition isomorphism of pushforwards of sheaves is monoidal; it enters
   `ProEtale.CondensedRing.lowerStarComp`.
 
