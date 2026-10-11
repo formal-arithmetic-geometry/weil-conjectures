@@ -1,11 +1,11 @@
 # Work queue
 
-972 items; claim with `tools/claim.py next <group> [--stage N]`.
+966 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (972)
+## Stage 2: nodes to state (966)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -27,17 +27,13 @@
 | `lem-galois-fpqc-pullback-canonical-iso` | 1 | state |
 | `lem-pc-affine-tilde-kflat` | 1 | state |
 | `lem-pc-balanced-derived-tensor-model` | 1 | state |
-| `lem-pc-compact-hom-hocolim` | 1 | state |
 | `lem-pc-derived-adjoint-functors` | 1 | state |
-| `lem-pc-derived-functor-commutes-derived-limit` | 1 | state |
 | `lem-pc-derived-limit-milnor-sequence` | 1 | state |
 | `lem-pc-derived-lower-truncation-step-triangle` | 1 | state |
 | `lem-pc-derived-tensor-flat-second-localization` | 1 | state |
 | `lem-pc-finite-projective-tor-acyclic` | 1 | state |
 | `lem-pc-flat-tensor-complex-cohom` | 1 | state |
 | `lem-pc-fppf-affine-sheafification-restriction` | 1 | state |
-| `lem-pc-fppf-affine-site-topos-equivalence` | 1 | state |
-| `lem-pc-kflat-hocolim-truncations` | 1 | state |
 | `lem-pc-kflat-pullback-preservation` | 1 | state |
 | `lem-pc-kflat-stalk-criterion` | 1 | state |
 | `lem-pc-kflat-tensor-cone-two-out-of-three` | 1 | state |
@@ -49,13 +45,11 @@
 | `lem-pc-monomial-cech-complex-homology` | 1 | state |
 | `lem-pc-nonzero-section-integral-cartier` | 1 | state |
 | `lem-pc-pre-derived-adjoint-functors-general` | 1 | state |
-| `lem-pc-presheaf-change-of-rings-adjunction` | 1 | state |
 | `lem-pc-presheaf-module-inverse-image-adjunction` | 1 | state |
 | `lem-pc-right-localization-hom-colimit` | 1 | state |
 | `lem-pc-ring-pseudo-coherent-distinguished-triangle` | 1 | state |
 | `lem-pc-ring-pseudo-coherent-iff-all-m` | 1 | state |
 | `lem-pc-ringed-space-module-stalk-tensor` | 1 | state |
-| `lem-pc-separable-tensor-algebraic-closure` | 1 | state |
 | `lem-pc-sites-modules-quotient-j-shriek` | 1 | state |
 | `lem-pc-skyscraper-complex` | 1 | state |
 | `lem-pc-stalk-direct-sums` | 1 | state |
