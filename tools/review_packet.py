@@ -19,7 +19,10 @@ recorded declaration, that node's statement; the compile (on the server only); f
 delivery (coord/STATE.md, STAGE 2 EXTRA NODES) its statement, source, searches, the node in full, the nodes with the
 same title or Stacks tag, the Stacks text of its tags and its module in full; for each DEPENDENCY module the dependency
 node's statement, its old record (lean, mathlib_match), the delivered record and the module in full; the report;
-earlier returns.
+earlier returns. When the item is CORRECTED (coord/STATE.md, STAGE 2 STATEMENT CORRECTION) a section `## Statement
+corrected` before the Lean: old and new statement verbatim, what, source, the base->head diff of stmt_deps, proof and
+proof_deps, the citers table (base nodes citing the item, with the delivered holds/note) and the statements of two
+citers (those marked holds:false first).
 """
 from __future__ import annotations
 import json, pathlib, re, subprocess, sys
@@ -107,6 +110,9 @@ def main_stage2(g, item) -> int:
         w(f"**This delivery has {len(new)} new definition node(s) and {len(deps)} dependency module(s)** (coord/STATE.md, STAGE 2 "
           "EXTRA NODES): read sections 7 and 8; a new node that exists in Mathlib, the source or the DAG, or whose fields break "
           "the rule, is H12; a dependency module that does not state the dependency node's notion is H13.\n")
+    if D.get("corrected"):
+        w(f"**The item's statement is CORRECTED by this delivery** (statement_change; {len(D.get('citers') or [])} citer(s)): read "
+          "the section `Statement corrected` before the Lean.\n")
     d = D["node"] or nodes.get(item) or {}
     w(f"## 1. The node\n\n- kind {d.get('kind')}, status {d.get('status')}, chapter {d.get('chapter')}, unit {d.get('unit')}\n"
       f"- source: {json.dumps(d.get('source'), ensure_ascii=False)}\n- stmt_deps: {d.get('stmt_deps')}"
@@ -149,6 +155,46 @@ def main_stage2(g, item) -> int:
         if c["status"] in ("ok", "fail"): w("```\n" + c["out"][-6000:] + f"\n```\nexit code {c['rc']}\n")
         else: w(c["out"] + "\n")
 
+    if D.get("corrected"):
+        b, sc = D.get("base_node") or {}, d.get("statement_change") if isinstance(d.get("statement_change"), dict) else {}
+        w("## Statement corrected\n\nThe delivery CORRECTS the item's statement (coord/STATE.md, STAGE 2 STATEMENT CORRECTION). "
+          "Read the corrected statement against the source first (a correction that makes the node easier than the source is "
+          "H7), then the Lean against the corrected statement, and check the two citers below.\n")
+        w("**Old statement (base, verbatim).**\n\n" + str(b.get("statement")) + "\n")
+        w("**New statement (delivered, verbatim).**\n\n" + str(d.get("statement")) + "\n")
+        w(f"**What was wrong.** {sc.get('what')}\n\n**Source the correction follows.** {json.dumps(sc.get('source'), ensure_ascii=False)}\n"
+          f"\n- by {sc.get('by')}, {sc.get('date')}" + ("; it replaces an earlier statement_change (kept under `previous`)" if "previous" in sc else "") + "\n")
+        for k in ("stmt_deps", "proof_deps"):
+            bo, he = list(b.get(k) or []), list(d.get(k) or [])
+            if bo != he:
+                w(f"- {k}: base {bo} -> head {he} (lost {[x for x in bo if x not in he]}, gained {[x for x in he if x not in bo]})")
+            else:
+                w(f"- {k}: unchanged")
+        if b.get("proof") != d.get("proof"):
+            w("\nproof, base:\n\n```json\n" + json.dumps(b.get("proof"), indent=1, ensure_ascii=False) + "\n```\n"
+              "proof, head:\n\n```json\n" + json.dumps(d.get("proof"), indent=1, ensure_ascii=False) + "\n```\n")
+        else:
+            w("- proof: unchanged\n")
+        marks = D.get("citer_marks") or []
+        byid = {c.get("id"): c for c in marks}
+        w(f"\n**Citers** (base nodes whose stmt_deps or proof_deps name the item: {len(D.get('citers') or [])}):\n")
+        w("| citer | holds | note |\n|---|---|---|")
+        for cid in D.get("citers") or []:
+            c = byid.get(cid)
+            w(f"| {cid} | {c.get('holds') if c else '**not listed**'} | {str(c.get('note')).replace('|', '/') if c else ''} |")
+        for c in marks:
+            if c.get("id") not in (D.get("citers") or []):
+                w(f"| {c.get('id')} (does not cite the item on the base) | {c.get('holds')} | {str(c.get('note')).replace('|', '/')} |")
+        pick = [c for c in D.get("citers") or [] if (byid.get(c) or {}).get("holds") is False]
+        pick += [c for c in D.get("citers") or [] if c not in pick]
+        w("\nTwo citers to check (holds:false first):\n")
+        for cid in pick[:2]:
+            n = nodes.get(cid) or {}
+            how = ("stmt_deps" if item in (n.get("stmt_deps") or []) else "") + (" proof_deps" if item in (n.get("proof_deps") or []) else "")
+            w(f"- **[{cid}]** ({n.get('kind')}; cites the item in {how.strip()}): {n.get('statement')}\n"
+              f"  - its line: {json.dumps(byid.get(cid), ensure_ascii=False)}\n")
+        if not pick:
+            w("none (no node cites the item)\n")
     w("## 4. The Lean file\n")
     text = D["lean_text"]
     if text is None:
