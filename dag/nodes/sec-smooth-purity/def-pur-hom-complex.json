@@ -119,5 +119,29 @@
   "group": "F1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-dhc3038 (reviewer sub-agent of L); spot-checked: Statement vs Stacks 0A8X: index change q=-p gives prod_p Hom(L^p,M^{p+n}); sign d(f)=d_M f-(-1)^n f d_L matches Stacks; d^2=0 expansion verified term by term (elementary, inline); stmt_deps cite def-pc-cochain-complex-modules, def-weil-sheaf-of-modules-category, def-pur-sheaf-hom; no smuggled H^n=Hom_K or adjunction claims; no duplicate Hom-complex definition in dag/nodes (grep); citers def-pur-derived-internal-hom and lem-pur-rhom-well-defined use the same terms and sign; Mathlib grep: CochainComplex.HomComplex is group-valued over a preadditive category, no sheaf-valued version, so no attachment. No repairs."
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.HomComplex",
+  "declaration": "CategoryTheory.homComplex",
+  "file": "lean/Sheaf/Algebra/Homology/HomComplex.lean",
+  "statement": "def homComplex (L M : CochainComplex (SheafOfModules.{w} ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R)) ℤ) : CochainComplex (SheafOfModules.{max u v w} ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R)) ℤ",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-11",
+  "existing": false,
+  "declarations": [
+   "CategoryTheory.homComplex_exists",
+   "CategoryTheory.homComplexFunctor",
+   "CategoryTheory.homComplex"
+  ],
+  "fixed_by": "R-dhc1248"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-dhc1248",
+  "group": "E1",
+  "result": "fix",
+  "note": "site C/J, R : Sheaf J CommRingCat, L M : CochainComplex (SheafOfModules) ℤ; degree-n term is a limit Fan over p∈ℤ of homObj (L.X p) (M.X (p+n)); d component = π≫homObjMap 𝟙 d_M − n.negOnePow•π_{p+1}≫homObjMap d_L 𝟙 (Stacks sign); bifunctor Lᵒᵖ×M with componentwise homObjMap; homObj is the dep's record; source CochainComplex.internalHomObj needs MonoidalClosed, one universe, sign (-1)^p: not the node; data via Classical.choose of named sorry theorem (AGENTS §5); dropped unused Sheaf.Limits import"
  }
 }
