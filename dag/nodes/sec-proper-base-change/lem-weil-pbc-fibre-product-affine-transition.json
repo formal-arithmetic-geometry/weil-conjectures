@@ -144,5 +144,23 @@
   "by": "L",
   "result": "accepted",
   "note": "4 steps: S'->S affine hence separated (01S7 leaf); X' x_{S'} T' -> X' x_S T' is a closed immersion (new 01KR leaf, Separated.lean:130 verified) hence affine (01SE leaf); a x_S c affine (new leaf: MorphismProperty.pullbackMap with IsAffineHom stable under base change and composition, Limits.lean:254, Affine.lean:172/69 verified); the induced map is the composite (new 01SC leaf, Affine.lean:61 verified). Only separatedness of S'->S is used; the affine hypothesis on it is stronger than needed (kept)."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AffineFibreProductTransition",
+  "declaration": "AlgebraicGeometry.isAffineHom_pullback_map",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineFibreProductTransition.lean",
+  "statement": "theorem isAffineHom_pullback_map {X' S' T' X S T : Scheme.{u}} (f' : X' ⟶ S') (g' : T' ⟶ S') (f : X ⟶ S) (g : T ⟶ S) (a : X' ⟶ X) (h : S' ⟶ S) (c : T' ⟶ T) (ha : f' ≫ h = a ≫ f) (hc : g' ≫ h = c ≫ g) [IsAffineHom a] [IsAffineHom h] [IsAffineHom c] : IsAffineHom (pullback.map f' g' f g a c h ha hc)",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-fpa1005",
+  "group": "F1",
+  "result": "pass",
+  "note": "six schemes/two cospans, comparisons a,h,c in node direction, ha/hc = node squares (sides swapped), three IsAffineHom instances, no extra hypotheses; conclusion IsAffineHom of pullback.map f' g' f g a c h (arg order checked against HasPullback); no Mathlib/landed duplicate"
  }
 }
