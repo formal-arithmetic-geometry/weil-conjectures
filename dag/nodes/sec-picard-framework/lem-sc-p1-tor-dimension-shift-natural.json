@@ -171,5 +171,23 @@
   "group": "M1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-tds1735 (reviewer sub-agent of L); spot-checked: Checked splice indices (P_{n+1}=G_n, d_1=j eta; for i>=1 both differentials around degree i+1 are e_{i+1},e_i so H_{i+1}(P⊗N)=H_i(G⊗N)); exactness at splice; naturality via fixed resolutions and literal equality of 1⊗g chain maps; tool_use lem-weil-pbc-free-resolution-ses-split accepted as generic resolution existence (applied to 0->K->K->0->0); def-weil-pbc-tor-modules states resolution-independence and functoriality in N (C4 ok). Mathlib grep: CategoryTheory/Monoidal/Tor.lean has only Tor, Tor', isZero_Tor_succ_of_projective; no dimension-shift declaration, split justified. Statement change limited to TeX backslash encoding, named in report (E7). No new nodes. PASS."
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.TorDimensionShiftNatural",
+  "declaration": "CategoryTheory.tor_dimension_shift_natural",
+  "file": "lean/Sheaf/Algebra/TorDimensionShiftNatural.lean",
+  "statement": "theorem tor_dimension_shift_natural {R : Type u} [CommRing R] (S : ShortComplex (ModuleCat.{u} R)) (hS : S.ShortExact) [Module.Free R S.X₂] (i : ℕ) (hi : 1 ≤ i) : ∃ θ : ∀ N : ModuleCat.{u} R, (((Tor' (ModuleCat.{u} R) (i + 1)).obj S.X₃).obj N) ≅ (((Tor' (ModuleCat.{u} R) i).obj S.X₁).obj N), ∀ (N N' : ModuleCat.{u} R) (g : N ⟶ N'), ((Tor' (ModuleCat.{u} R) (i + 1)).obj S.X₃).map g ≫ (θ N').hom = (θ N).hom ≫ ((Tor' (ModuleCat.{u} R) i).obj S.X₁).map g",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-tds1236",
+  "group": "F1",
+  "result": "pass",
+  "note": "comm ring R (Type u); 0->K->F->M->0 as S : ShortComplex (ModuleCat R) + S.ShortExact (mono/epi/exact); F free = Module.Free R S.X2; i>=1 as hi : 1<=i; theta_N : Tor'_{i+1}(S.X3,N) iso Tor'_i(S.X1,N) for all N (Tor' resolves first variable, as M1); naturality Tor_{i+1}(M,g) >> theta N' = theta N >> Tor_i(K,g) for all g : N -> N', matches node order"
  }
 }

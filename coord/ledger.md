@@ -3824,3 +3824,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 08:24 L: merged deliver/C1/lem-sc-lfp-field-extension-pointwise-descent (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.LocallyOfFinitePresentationNearOfFieldExtension AlgebraicGeometry.locallyOfFinitePresentation_near_of_fieldExtension)
 - 08:25 L: merged deliver/C1/lem-sc-reduced-ideals-zero-intersection (stage 2; reviewer PASS; first push; Sheaf.RingTheory.ReducedIdealsZeroIntersection Ideal.reduced_ideals_zero_intersection)
 - 08:25 L: merged deliver/F1/lem-pc-hilb-containment-locus (stage 2; reviewer PASS; first push; WeilConjectures.AlgebraicGeometry.Hilbert.Curve AlgebraicGeometry.exists_idealSheafData_le_ker_iff_comap_le; existing declaration)
+- 08:25 L: merged deliver/F1/lem-sc-p1-tor-dimension-shift-natural (stage 2; reviewer PASS; first push; Sheaf.Algebra.TorDimensionShiftNatural CategoryTheory.tor_dimension_shift_natural)
