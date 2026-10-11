@@ -68,9 +68,15 @@ exhibiting `W = X ×_k Y`, the exterior-product map
 
 is an isomorphism for all `E ∈ D(X_ét, Λ)` and `K ∈ D(Y_ét, Λ)` — unbounded, and with no
 properness hypothesis. Without the cartesian hypothesis the statement is false: for `W = ∅`
-and `X = Y = Spec k` the right-hand side is `0` and the left-hand side is `Λ`. -/
-theorem nonempty_iso_kunneth {W : Scheme.{u}} (p₁ : W ⟶ X) (p₂ : W ⟶ Y)
-    (sq : IsPullback p₁ p₂ aX aY)
+and `X = Y = Spec k` the right-hand side is `0` and the left-hand side is `Λ`.
+
+The schemes have to be quasi-compact, as in Stacks 0F1P (blueprint `thm-kun-0f1p`), which
+asks for `X` and `Y` of finite type: for `X` the disjoint union of countably many copies of
+`Spec k`, `Y = Spec k`, `Λ = 𝔽_ℓ`, `E = Λ` and `K` a vector space `V` in degree `0`, the
+left-hand side is `(∏ 𝔽_ℓ) ⊗ V` and the right-hand side is `∏ V`; for `dim V = ℶ_ω` the
+second has dimension `ℶ_ω ^ ℵ₀ > ℶ_ω`, the dimension of the first. -/
+theorem nonempty_iso_kunneth [QuasiCompact aX] [QuasiCompact aY] {W : Scheme.{u}} (p₁ : W ⟶ X)
+    (p₂ : W ⟶ Y) (sq : IsPullback p₁ p₂ aX aY)
     (E : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
     (K : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
     Nonempty ((rightDerivedGlobalSections (ModuleCat.{u + 1} Λ) X).obj E ⊗

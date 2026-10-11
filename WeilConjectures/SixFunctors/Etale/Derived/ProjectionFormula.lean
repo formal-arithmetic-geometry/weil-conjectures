@@ -392,8 +392,13 @@ theorem hasProjectionFormulaOfCompactification_iff [Finite Λ] {f : X ⟶ Y}
     (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
     (L : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
     HasProjectionFormulaOfCompactification (ModuleCat.{u + 1} Λ) c K L ↔
-      HasProjectionFormula (ModuleCat.{u + 1} Λ) f K L :=
-  sorry
+      HasProjectionFormula (ModuleCat.{u + 1} Λ) f K L := by
+  have h (c : Compactification f) :
+      HasProjectionFormulaOfCompactification (ModuleCat.{u + 1} Λ) c K L := by
+    have := isIso_rightDerivedLowerStarProjectionMap_of_finite Λ c.g
+    rw [HasProjectionFormulaOfCompactification, projectionMapOfCompactification_app_app]
+    infer_instance
+  exact iff_of_true (h c) (h _)
 
 end TorsionCoherence
 
