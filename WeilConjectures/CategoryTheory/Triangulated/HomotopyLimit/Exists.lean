@@ -1,0 +1,99 @@
+/-
+Copyright (c) 2026 Claude. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Claude
+-/
+module
+
+public import Mathlib.CategoryTheory.Functor.OfSequence
+public import WeilConjectures.CategoryTheory.Triangulated.HomotopyLimit.Basic
+
+/-!
+# Existence of homotopy limits and levelwise isomorphisms of towers
+
+Let `F : ℕᵒᵖ ⥤ C` be a tower in a pretriangulated category `C` with countable products. This
+file shows that `F` has a homotopy limit cone
+(`CategoryTheory.Pretriangulated.exists_isHomotopyLimit`): complete `1 - t : ∏ₙ Fₙ ⟶ ∏ₙ Fₙ` to a
+distinguished triangle `X ⟶ ∏ₙ Fₙ ⟶ ∏ₙ Fₙ ⟶ X⟦1⟧`; the components of the first map are
+compatible with the transition maps because the first map is killed by `1 - t`.
+
+It also records that a morphism of towers which is an isomorphism at every level induces an
+isomorphism on homotopy limits, whatever the choice of the map completing the morphism of Milnor
+triangles (`CategoryTheory.Pretriangulated.isIso_of_isIso_app`), and the corresponding statement
+for homotopy limit cones (`CategoryTheory.Pretriangulated.IsHomotopyLimit.exists_iso_of_iso`).
+-/
+
+@[expose] public section
+
+namespace CategoryTheory.Pretriangulated
+
+open Category Limits Opposite
+
+variable {C : Type*} [Category C] [HasZeroObject C] [HasShift C ℤ] [Preadditive C]
+  [∀ n : ℤ, (shiftFunctor C n).Additive] [Pretriangulated C]
+
+/-- The cone over a tower `F` whose legs are the components of a map `c : X ⟶ ∏ₙ Fₙ` fixed by the
+transition endomorphism `t` of the product. -/
+noncomputable def coneOfComp {F : ℕᵒᵖ ⥤ C} {P : Fan fun n : ℕ ↦ F.obj (op n)} (hP : IsLimit P)
+    {X : C} (c : X ⟶ P.pt) (hc : c ≫ towerShift hP = c) : Cone F where
+  pt := X
+  π := NatTrans.ofOpSequence (F := (Functor.const ℕᵒᵖ).obj X) (fun n ↦ c ≫ P.proj n)
+    (fun n ↦ by
+      dsimp
+      rw [id_comp, assoc, ← towerShift_proj hP, ← assoc, hc])
+
+omit [HasZeroObject C] [∀ n : ℤ, (shiftFunctor C n).Additive] [Pretriangulated C] in
+@[simp]
+lemma coneOfComp_π_app {F : ℕᵒᵖ ⥤ C} {P : Fan fun n : ℕ ↦ F.obj (op n)} (hP : IsLimit P)
+    {X : C} (c : X ⟶ P.pt) (hc : c ≫ towerShift hP = c) (n : ℕ) :
+    (coneOfComp hP c hc).π.app (op n) = c ≫ P.proj n :=
+  rfl
+
+/-- Every tower in a pretriangulated category with countable products has a homotopy limit
+cone. -/
+lemma exists_isHomotopyLimit (F : ℕᵒᵖ ⥤ C) [HasProduct fun n : ℕ ↦ F.obj (op n)] :
+    ∃ c : Cone F, IsHomotopyLimit c := by
+  let P : Fan fun n : ℕ ↦ F.obj (op n) := Fan.mk _ (Pi.π _)
+  let hP : IsLimit P := productIsProduct _
+  obtain ⟨X, c, δ, hT⟩ := distinguished_cocone_triangle₁ (𝟙 P.pt - towerShift hP)
+  have hc : c ≫ towerShift hP = c := by
+    have : c ≫ (𝟙 P.pt - towerShift hP) = 0 := comp_distTriang_mor_zero₁₂ _ hT
+    rw [Preadditive.comp_sub, comp_id, sub_eq_zero] at this
+    exact this.symm
+  refine ⟨coneOfComp hP c hc, P, hP, δ, ?_⟩
+  have : Fan.IsLimit.lift hP (fun n ↦ (coneOfComp hP c hc).π.app (op n)) = c :=
+    Fan.IsLimit.hom_ext hP _ _ fun n ↦ by simp
+  rw [this]
+  exact hT
+
+/-- A morphism of towers `a : F ⟶ G` which is an isomorphism at every level induces an
+isomorphism on homotopy limits: if `X ⟶ ∏ Fₙ ⟶ ∏ Fₙ ⟶ X⟦1⟧` and `Y ⟶ ∏ Gₙ ⟶ ∏ Gₙ ⟶ Y⟦1⟧` are
+Milnor triangles and `u : X ⟶ Y` completes the morphism of triangles induced by `a`, then `u` is
+an isomorphism. -/
+theorem isIso_of_isIso_app {F G : ℕᵒᵖ ⥤ C} {PF : Fan fun n : ℕ ↦ F.obj (op n)}
+    (hPF : IsLimit PF) {PG : Fan fun n : ℕ ↦ G.obj (op n)} (hPG : IsLimit PG) {X Y : C}
+    {cX : X ⟶ PF.pt} {δX : PF.pt ⟶ X⟦(1 : ℤ)⟧} {cY : Y ⟶ PG.pt} {δY : PG.pt ⟶ Y⟦(1 : ℤ)⟧}
+    (hX : Triangle.mk cX (𝟙 _ - towerShift hPF) δX ∈ distTriang C)
+    (hY : Triangle.mk cY (𝟙 _ - towerShift hPG) δY ∈ distTriang C) (a : F ⟶ G)
+    [∀ n, IsIso (a.app n)] (u : X ⟶ Y)
+    (hu₁ : cX ≫ productTowerMap (PF := PF) hPG a = u ≫ cY)
+    (hu₃ : δX ≫ u⟦(1 : ℤ)⟧' = productTowerMap (PF := PF) hPG a ≫ δY) : IsIso u :=
+  isIso_of_proIso hPF hPG hX hY a (fun n ↦ G.map (homOfLE n.le_succ).op ≫ inv (a.app (op n)))
+    (fun n ↦ by simp) (fun n ↦ by simp [← NatTrans.naturality_assoc]) u hu₁ hu₃
+
+/-- A morphism of towers `a : F ⟶ G` which is an isomorphism at every level induces an
+isomorphism between the points of any homotopy limit cones of `F` and `G`, compatible with the
+legs and with `a`. -/
+theorem IsHomotopyLimit.exists_iso_of_iso {F G : ℕᵒᵖ ⥤ C} (a : F ⟶ G) [IsIso a] {c : Cone F}
+    {c' : Cone G} (hc : IsHomotopyLimit c) (hc' : IsHomotopyLimit c') :
+    ∃ e : c.pt ≅ c'.pt, ∀ n : ℕ, e.hom ≫ c'.π.app (op n) = c.π.app (op n) ≫ a.app (op n) := by
+  let c'' : Cone F := { pt := c'.pt, π := c'.π ≫ inv a }
+  have hc'' : IsHomotopyLimit c'' :=
+    hc'.of_iso (asIso a).symm _ (Iso.refl _) fun n ↦ by simp [c'']
+  obtain ⟨e, he⟩ := hc.exists_iso hc''
+  refine ⟨e, fun n ↦ ?_⟩
+  have := he n
+  simp only [c'', NatTrans.comp_app, NatIso.isIso_inv_app] at this
+  rw [← this, assoc, assoc, IsIso.inv_hom_id, comp_id]
+
+end CategoryTheory.Pretriangulated
