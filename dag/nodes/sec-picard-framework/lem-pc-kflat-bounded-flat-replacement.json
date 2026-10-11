@@ -117,5 +117,23 @@
   "group": "F1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-kbf2246 (reviewer sub-agent of L); spot-checked: Return of 19:46 repaired: (1) P^i=F^i x_{F^{i+1}} Z(E^{i+1}) so E^i lands in cycles and d o d=0, map of complexes by the fibre square; Z(E^{i+1})->Z(F^{i+1}) epi by lifting (z,0) in P^{i+1}, hence P^i->F^i and E^i->F^i epi; (2) K^i->Z(K^{i+1}) epi via (0,kappa), K acyclic, quasi-iso; (3) generators now O-module nodes 03EW(3)/03EV(2) checked against Stacks text; (4) direct-sum flatness cited via 03EU(2) node; (5) Step 3 no longer mentions free sheafification. Coproduct-flat node is a possible special case of lem-weil-pbc-flat-coproduct but the earlier return allowed a statement-only node; kept. FIX more, RETURN less: C4, lem-pc-sites-modules-quotient-j-shriek asserted only existence of some epimorphism while Steps 1 and 3 use the canonical (U,s)-indexed one (needed for functoriality); restated it as Stacks 03EW proves it (canonical map is epi), and corrected j_U to C/U->C.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.BoundedFlatReplacement",
+  "declaration": "CochainComplex.exists_functorial_boundedAbove_flat_replacement",
+  "file": "lean/Sheaf/Algebra/Homology/BoundedFlatReplacement.lean",
+  "statement": "theorem exists_functorial_boundedAbove_flat_replacement {C : Type u} [Category.{u} C] (J : GrothendieckTopology C) (R : Sheaf J CommRingCat.{u}) (N : ℤ) : let A := SheafOfModules.{u} ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj R) let P : ObjectProperty (CochainComplex A ℤ) := fun F => ∀ (i : ℤ), N < i → IsZero (F.X i) ∃ Q : P.FullSubcategory ⥤ CochainComplex A ℤ, ∃ ε : Q ⟶ P.ι, ∀ F : P.FullSubcategory, (∀ (i : ℤ), SheafOfModules.IsFlat ((Q.obj F).X i)) ∧ (∀ (i : ℤ), N < i → IsZero ((Q.obj F).X i)) ∧ (∀ (i : ℤ), Epi ((ε.app F).f i)) ∧ QuasiIso (ε.app F)",
+  "branch": "sheaf-dag",
+  "by": "M1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-kbr1118",
+  "group": "M1",
+  "result": "pass",
+  "note": "site (C,J) small universe u, R : Sheaf J CommRingCat = O, Mod(O) via SheafOfModules of forget2 R; N : Z any sign; P = terms IsZero above N (landed inline bounded convention); IsFlat = recorded def-pc-flat-sheaf-modules; E zero above same N; Epi termwise = local surjectivity; Mathlib QuasiIso; functor Q on P.FullSubcategory + natural ε : Q -> P.ι = functoriality for maps with common bound N (node proof step 3)"
  }
 }
