@@ -1,11 +1,11 @@
 # Work queue
 
-882 items; claim with `tools/claim.py next <group> [--stage N]`.
+877 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (882)
+## Stage 2: nodes to state (877)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -34,14 +34,11 @@
 | `lem-sp-ce-horizontal-lift` | 1 | state |
 | `lem-sp-ce-vertical-nullhomotopy` | 1 | state |
 | `lem-weil-derived-limit-roos-complex` | 1 | state |
-| `lem-weil-pbc-affine-formally-smooth-iff-ring-lifting` | 1 | state |
-| `lem-weil-pbc-algebraize-finite-over-proper` | 1 | state |
 | `lem-weil-pbc-ample-very-ample-immersion-affine-base` | 1 | state |
 | `lem-weil-pbc-artinian-ideal-length-one-filtration` | 1 | state |
 | `lem-weil-pbc-associated-module-hom` | 1 | state |
 | `lem-weil-pbc-associated-module-pullback` | 1 | state |
 | `lem-weil-pbc-associated-prime-localize-at-prime` | 1 | state |
-| `lem-weil-pbc-associated-primes-exact-sequence` | 1 | state |
 | `lem-weil-pbc-associated-primes-flat-base-change` | 1 | state |
 | `lem-weil-pbc-basis-sheaf-sections-germs` | 1 | state |
 | `lem-weil-pbc-cartesian-eilenberg-functorial` | 1 | state |
@@ -51,9 +48,7 @@
 | `lem-weil-pbc-charpoly-locally-free-existence` | 1 | state |
 | `lem-weil-pbc-chow-finite-type` | 1 | state |
 | `lem-weil-pbc-clopen-open-cover-section` | 1 | state |
-| `lem-weil-pbc-closed-immersion-products` | 1 | state |
 | `lem-weil-pbc-closed-immersion-pushforward-fully-faithful` | 1 | state |
-| `lem-weil-pbc-closed-immersion-residue-field-iso` | 1 | state |
 | `lem-weil-pbc-closed-immersion-unit-quotient` | 1 | state |
 | `lem-weil-pbc-closed-point-dimension-local-ring` | 1 | state |
 | `lem-weil-pbc-closed-pushforward-constant-restriction` | 1 | state |
