@@ -139,5 +139,23 @@
   "group": "C",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of C"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ConstructibleModuleSheafColimit",
+  "declaration": "AlgebraicGeometry.Scheme.exists_filtered_colimit_constructible",
+  "file": "lean/Sheaf/AlgebraicGeometry/ConstructibleModuleSheafColimit.lean",
+  "statement": "theorem exists_filtered_colimit_constructible {X : Scheme.{u}} [CompactSpace X] [QuasiSeparatedSpace X] {Λ : Type (u + 1)} [CommRing Λ] [Finite Λ] (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) : ∃ (A : Type (u + 1)) (_ : SmallCategory A) (_ : IsFiltered A) (D : A ⥤ Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)), (∀ a : A, IsConstructibleEtaleModuleSheaf (D.obj a)) ∧ ∃ ι : D ⟶ (Functor.const A).obj F, Nonempty (IsColimit (Cocone.mk F ι))",
+  "branch": "sheaf-dag",
+  "by": "J1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-mcc1152",
+  "group": "J1",
+  "result": "pass",
+  "note": "qcqs X = [CompactSpace X][QuasiSeparatedSpace X] (not inferable, inferInstance fails); finite comm Λ : Type (u+1); F : Sheaf X.smallEtaleTopology (ModuleCat.{u+1} Λ) (constructible encoding); A : Type (u+1) SmallCategory IsFiltered = objects' universe; stages landed IsConstructibleEtaleModuleSheaf (#check unique); cocone D ⟶ const F with IsColimit; same shape as landed lem-kun-03sa"
  }
 }
