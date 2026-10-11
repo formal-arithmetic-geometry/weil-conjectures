@@ -1,19 +1,17 @@
 # Work queue
 
-794 items; claim with `tools/claim.py next <group> [--stage N]`.
+798 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (794)
+## Stage 2: nodes to state (798)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
-| `def-galois-category` | 1 | state |
 | `def-kun-topological-dimension-at-point` | 1 | state |
 | `def-nagata-basechanged-system` | 1 | state |
 | `def-nagata-directed-finite-upper-bound` | 1 | state |
-| `def-pc-compact-object` | 1 | state |
 | `def-pc-dimension` | 1 | state |
 | `def-pc-divisor-line-bundle` | 1 | state |
 | `def-pc-field-tower` | 1 | state |
@@ -74,8 +72,10 @@
 | `lem-exc-rg-group-algebra-functorial-injective-embeddings` | 1 | state |
 | `lem-exc-rg-open-stabilizer-adjoint` | 1 | state |
 | `lem-galois-aut-profinite` | 1 | state |
+| `lem-galois-axioms` | 1 | state |
 | `lem-galois-constant-sheaf-sets-representable` | 1 | state |
 | `lem-galois-coproduct-copies-morphisms-clopen` | 1 | state |
+| `lem-galois-coproduct-morphism-components` | 1 | state |
 | `lem-galois-descent` | 1 | state |
 | `lem-galois-descent-datum-diagonal-identity` | 1 | state |
 | `lem-galois-flc-set-stalk-finite` | 1 | state |
@@ -89,6 +89,7 @@
 | `lem-galois-fpqc-refinement-fully-faithful` | 1 | state |
 | `lem-galois-fpqc-singleton-affine-refinement` | 1 | state |
 | `lem-galois-fpqc-singleton-fully-faithful-0241` | 1 | state |
+| `lem-galois-transitive` | 1 | state |
 | `lem-kun-fg-separable-smooth` | 1 | state |
 | `lem-kun-fibre-product-limits` | 1 | state |
 | `lem-kun-finite-closed-subscheme` | 1 | state |
@@ -103,6 +104,7 @@
 | `lem-pc-affine-surjective-structure-map-closed-immersion` | 1 | state |
 | `lem-pc-ample-affine-loci-criterion` | 1 | state |
 | `lem-pc-cartier-divisor-nowhere-dense` | 1 | state |
+| `lem-pc-compact-hom-hocolim` | 1 | state |
 | `lem-pc-complex-hocolim-colimit` | 1 | state |
 | `lem-pc-derived-acyclic-resolution` | 1 | state |
 | `lem-pc-derived-adjoint-functors` | 1 | state |
@@ -274,6 +276,7 @@
 | `lem-sc-strict-henselization-completion-flat-over-base` | 1 | state |
 | `lem-sc-strict-henselization-dimension` | 1 | state |
 | `lem-sc-strict-henselization-regular` | 1 | state |
+| `lem-sc-supported-factor-through-thick` | 1 | state |
 | `lem-sc-weakass-localization` | 1 | state |
 | `lem-sc-zariski-contracted-power-torsor` | 1 | state |
 | `lem-sp-cart-eilenberg-left-exact-cohomology` | 1 | state |
@@ -779,6 +782,7 @@
 | `prop-pur-kinjective-objects-small` | 1 | state |
 | `prop-weil-pbc-composition-stability` | 1 | state |
 | `prop-weil-pbc-inverse-image-exact` | 1 | state |
+| `thm-galois-abstract-equivalence` | 1 | state |
 | `thm-pqf-zmt-factorization` | 1 | state |
 | `def-nagata-glued-limit-comparison` | 2 | state |
 | `lem-kun-etale-lfp` | 2 | state |
@@ -804,7 +808,7 @@
 | `lem-sc-normalization-properties` | 3 | state |
 | `def-nagata-fixed-base-separated-stage` | 6 | state |
 
-Not open yet: 1438 nodes that wait for a statement dependency, 40 nodes that wait for stage 1.
+Not open yet: 1432 nodes that wait for a statement dependency, 40 nodes that wait for stage 1.
 
 ## Stage 3: modules to prove (0)
 

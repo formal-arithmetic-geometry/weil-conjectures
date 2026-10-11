@@ -1,116 +1,134 @@
 {
- "id": "def-galois-category",
- "blueprint": {
-  "is": "def-galois-category",
-  "from": null,
-  "same_as": []
- },
- "kind": "definition",
- "title": "Galois category",
- "statement": "Let $\\mathcal C$ be a category and $F:\\mathcal C\\to\\mathbf{Sets}$ a\nfunctor. The pair $(\\mathcal C,F)$ is a *Galois category* if\n\n1. $\\mathcal C$ has finite limits and finite colimits [def-galois-finite-limits-colimits];\n1. every object of $\\mathcal C$ is a finite (possibly empty) coproduct [def-galois-finite-coproduct] of\n*connected* objects [def-galois-connected-object], where $X$ is connected if it is not initial and\nevery monomorphism $Y\\to X$ is either an isomorphism or has initial\nsource (initial objects and monomorphisms as in [def-galois-initial-mono]);\n1. $F(X)$ is finite for every object $X$;\n1. $F$ is exact [def-galois-exact-functor] (it commutes with finite limits and finite colimits)\nand reflects isomorphisms [def-galois-reflects-isomorphisms] (if $F(f)$ is bijective then $f$ is an\nisomorphism).\n\nFor a functor with all $F(X)$ finite, $\\operatorname{Aut}(F)$ is\nidentified with the subgroup of\n$\\prod_X\\operatorname{Aut}(F(X))$ formed by the tuples induced by the\nnatural automorphisms of $F$, and carries the topology induced from the\nproduct of the discrete topologies [def-galois-aut-topology].",
- "source": {
-  "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-h2/def-galois-category.md",
-  "place": "node def-galois-category, order 967"
- },
- "stmt_deps": [
-  "def-galois-finite-limits-colimits",
-  "def-galois-finite-coproduct",
-  "def-galois-connected-object",
-  "def-galois-initial-mono",
-  "def-galois-exact-functor",
-  "def-galois-reflects-isomorphisms",
-  "def-galois-aut-topology"
- ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": {
-  "by": "document",
-  "document": "literature/stacks-project/pione.tex",
-  "place": "Fundamental Groups of Schemes, Definition 0BMY (label definition-galois-category); topology on Aut(F): Section 0BMQ before Lemma 0BMR"
- },
- "mathlib_searches": [
-  {
-   "tool": "leansearch",
-   "query": "Galois category: category with finite limits and colimits and exact conservative functor to finite sets",
-   "results": "PreGaloisCategory.GaloisCategory.getFiberFunctor; GaloisCategory; PreGaloisCategory.instHasFiniteLimits; IsGalois; GaloisCategory.mk; PreGaloisCategory (Mathlib.CategoryTheory.Galois.Basic)",
-   "date": "2026-10-10",
-   "verdict": "no exact match: candidate PreGaloisCategory + PreGaloisCategory.FiberFunctor (SGA1/Lenstra axioms G1-G6), compared below"
+  "id": "def-galois-category",
+  "blueprint": {
+    "is": "def-galois-category",
+    "from": null,
+    "same_as": []
   },
-  {
-   "tool": "leanfinder",
-   "query": "Galois category with fiber functor: finite limits, finite colimits, every object finite coproduct of connected objects, exact functor reflecting isomorphisms",
-   "results": "GaloisCategory.toPreGaloisCategory; GaloisCategory; IsGalois; PreGaloisCategory.FiberFunctor; PointedGaloisObject.isGalois; GaloisCategory.hasFiberFunctor (Mathlib.CategoryTheory.Galois.Basic, Prorepresentability)",
-   "date": "2026-10-10",
-   "verdict": "no exact match: same candidate"
+  "kind": "definition",
+  "title": "Galois category",
+  "statement": "Let $\\mathcal C$ be a category and $F:\\mathcal C\\to\\mathbf{Sets}$ a\nfunctor. The pair $(\\mathcal C,F)$ is a *Galois category* if\n\n1. $\\mathcal C$ has finite limits and finite colimits [def-galois-finite-limits-colimits];\n1. every object of $\\mathcal C$ is a finite (possibly empty) coproduct [def-galois-finite-coproduct] of\n*connected* objects [def-galois-connected-object], where $X$ is connected if it is not initial and\nevery monomorphism $Y\\to X$ is either an isomorphism or has initial\nsource (initial objects and monomorphisms as in [def-galois-initial-mono]);\n1. $F(X)$ is finite for every object $X$;\n1. $F$ is exact [def-galois-exact-functor] (it commutes with finite limits and finite colimits)\nand reflects isomorphisms [def-galois-reflects-isomorphisms] (if $F(f)$ is bijective then $f$ is an\nisomorphism).\n\nFor a functor with all $F(X)$ finite, $\\operatorname{Aut}(F)$ is\nidentified with the subgroup of\n$\\prod_X\\operatorname{Aut}(F(X))$ formed by the tuples induced by the\nnatural automorphisms of $F$, and carries the topology induced from the\nproduct of the discrete topologies [def-galois-aut-topology].",
+  "source": {
+    "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-h2/def-galois-category.md",
+    "place": "node def-galois-category, order 967"
   },
-  {
-   "tool": "grep",
-   "query": "sed -n 60,115p ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Galois/Basic.lean; grep -rn '0BMY|Galois categor' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib; sed -n 119,129p ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Galois/Decomposition.lean",
-   "results": "Basic.lean:66 class PreGaloisCategory: hasTerminal, hasPullbacks (G1), hasFiniteCoproducts, hasQuotientsByFiniteGroups (colimits of shape SingleObj G, G finite) (G2), monoInducesIsoOnDirectSummand (G3); :83 class FiberFunctor (F : C ⥤ FintypeCat): preservesTerminalObjects, preservesPullbacks (G4), preservesFiniteCoproducts, preservesEpis, preservesQuotientsByFiniteGroups (G5), reflectsIsos (G6); :102 IsConnected; Decomposition.lean:119 has_decomp_connected_components (a theorem for GaloisCategory C); no Mathlib file cites Stacks 0BMY",
-   "date": "2026-10-10",
-   "verdict": "no match clause by clause; see split_report.mathlib_comparison"
-  },
-  {
-   "tool": "local_search",
-   "query": "PreGaloisCategory (project root ~/weil-conjectures-slopmaster2); grep -rn 'def-galois-category|GaloisCategory' ~/weil-conjectures-slopmaster2/WeilConjectures",
-   "results": "Mathlib CategoryTheory.PreGaloisCategory, GaloisCategory, FiberFunctor only; the source repository defines no Stacks-style Galois category and uses Mathlib's classes (FundamentalGroup/Basic.lean: FiniteEtale.preGaloisCategory, fiberFunctor, galoisCategory)",
-   "date": "2026-10-10",
-   "verdict": "no Lean declaration states this node"
-  }
- ],
- "mathlib_match": null,
- "status": "split",
- "merged_into": null,
- "import_flags": [],
- "blueprint_kind": "definition",
- "blueprint_order": 967,
- "blueprint_uses": [
-  "def-galois-fibre-functor"
- ],
- "uses_not_cited": [
-  "def-galois-fibre-functor"
- ],
- "lean_audit": {
-  "master": {
-   "state": "none",
-   "decls": [],
-   "missing": []
-  },
-  "slopmaster2": {
-   "state": "none",
-   "decls": [],
-   "missing": []
-  }
- },
- "chapter": "sec-curve-estimates",
- "unit": "sk-prop-h2",
- "mathlib_candidate": {
-  "declaration": "CategoryTheory.PreGaloisCategory; CategoryTheory.PreGaloisCategory.FiberFunctor; CategoryTheory.GaloisCategory",
-  "file": "Mathlib/CategoryTheory/Galois/Basic.lean",
-  "lines": [
-   66,
-   83,
-   412
+  "stmt_deps": [
+    "def-galois-finite-limits-colimits",
+    "def-galois-finite-coproduct",
+    "def-galois-connected-object",
+    "def-galois-initial-mono",
+    "def-galois-exact-functor",
+    "def-galois-reflects-isomorphisms",
+    "def-galois-aut-topology"
   ],
-  "reason": "Mathlib follows SGA1 V.4 / Lenstra Def. 3.1 (axioms G1-G6), Stacks 0BMY its own stronger axioms; the two agree only through the main theorem (Stacks' Warning after 0BMY). Stacks => Mathlib needs an argument for G3 (mono induces iso onto a summand), which Stacks does not assume; Mathlib => Stacks needs all finite colimits (coequalizers) in C and exactness of F on them, which Mathlib does not assume (only finite coproducts and quotients by finite groups, and F preserving those and epimorphisms), and the decomposition into connected objects, which Mathlib derives (has_decomp_connected_components, Decomposition.lean 119). Also F lands in FintypeCat, not Sets with finite values."
- },
- "split_report": {
-  "date": "2026-10-10",
-  "item": "def-galois-category",
-  "worker": "stage1",
-  "summary": "Definition split against Stacks 0BMY (pione.tex, definition-galois-category), read with Categories 002C, 002J, 003B, 0034, 04AS and the paragraph of Section 0BMQ before Lemma 0BMR. The statement agrees with 0BMY clause by clause (it omitted '(possibly empty)', now added; trailing ';' fixed); every notion now cites a node, all seven new nodes Mathlib leaves: finite limits/colimits (HasFiniteLimits/HasFiniteColimits), initial object and monomorphism (IsInitial, Mono), connected object (PreGaloisCategory.IsConnected, which assumes only a category), finite coproduct (Cofan + IsColimit, Finite index), exact functor (PreservesFiniteLimits/PreservesFiniteColimits), reflects isomorphisms (Functor.ReflectsIsomorphisms), topology on Aut(F) (PreGaloisCategory.instTopologicalSpaceAutFunctorFintypeCat). The finiteness of F(X) needs no node. The imported stmt_dep def-galois-fibre-functor was removed: it is the etale fibre functor of FEt(Y) and the abstract definition does not use it. The item is not a Mathlib leaf: Mathlib's PreGaloisCategory + FiberFunctor are the SGA1/Lenstra axioms G1-G6, which do not agree with 0BMY clause by clause (see mathlib_comparison); the candidate is recorded in mathlib_candidate.",
-  "mathlib_comparison": [
-   "0BMY(1) finite limits: Mathlib assumes terminal + pullbacks (G1, Basic.lean 68-70), equivalent to finite limits (instance HasFiniteLimits, Basic.lean 125). Agree.",
-   "0BMY(1) finite colimits: Mathlib assumes only finite coproducts and colimits of shape SingleObj G for finite G (G2, Basic.lean 72-76); coequalizers and pushouts are not assumed (they follow only from the equivalence with finite Aut F-sets). Mathlib assumes less.",
-   "0BMY(2) every object a finite coproduct of connected objects: not assumed by Mathlib; derived for GaloisCategory C as has_decomp_connected_components (Decomposition.lean 119), using the fibre functor.",
-   "Mathlib G3 monoInducesIsoOnDirectSummand (Basic.lean 77): not an axiom of 0BMY; for a Stacks Galois category it is a consequence (via 0BMY(2), Lemma 0BN0 and exactness of F), not stated in 0BMY.",
-   "0BMY(3) F(X) finite: Mathlib's F lands in FintypeCat (Basic.lean 84); agrees after composing with FintypeCat.incl, which creates finite limits (Limits/FintypeCat.lean 45).",
-   "0BMY(4) exact: Mathlib's FiberFunctor assumes preservation of terminal object, pullbacks (G4), finite coproducts, epimorphisms and quotients by finite groups (G5) (Basic.lean 86-96); left exactness agrees, right exactness is weaker in Mathlib (coequalizers not assumed preserved).",
-   "0BMY(4) reflects isomorphisms: Mathlib G6 reflectsIsos (Basic.lean 98). Agree.",
-   "Connected: Stacks' definition = Mathlib PreGaloisCategory.IsConnected (Basic.lean 102). Agree.",
-   "Topology on Aut(F): Mathlib Galois/Topology.lean 78, same as Stacks 0BMQ. Agree."
+  "proof": [],
+  "proof_deps": [],
+  "proof_origin": {
+    "by": "document",
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Fundamental Groups of Schemes, Definition 0BMY (label definition-galois-category); topology on Aut(F): Section 0BMQ before Lemma 0BMR"
+  },
+  "mathlib_searches": [
+    {
+      "tool": "leansearch",
+      "query": "Galois category: category with finite limits and colimits and exact conservative functor to finite sets",
+      "results": "PreGaloisCategory.GaloisCategory.getFiberFunctor; GaloisCategory; PreGaloisCategory.instHasFiniteLimits; IsGalois; GaloisCategory.mk; PreGaloisCategory (Mathlib.CategoryTheory.Galois.Basic)",
+      "date": "2026-10-10",
+      "verdict": "no exact match: candidate PreGaloisCategory + PreGaloisCategory.FiberFunctor (SGA1/Lenstra axioms G1-G6), compared below"
+    },
+    {
+      "tool": "leanfinder",
+      "query": "Galois category with fiber functor: finite limits, finite colimits, every object finite coproduct of connected objects, exact functor reflecting isomorphisms",
+      "results": "GaloisCategory.toPreGaloisCategory; GaloisCategory; IsGalois; PreGaloisCategory.FiberFunctor; PointedGaloisObject.isGalois; GaloisCategory.hasFiberFunctor (Mathlib.CategoryTheory.Galois.Basic, Prorepresentability)",
+      "date": "2026-10-10",
+      "verdict": "no exact match: same candidate"
+    },
+    {
+      "tool": "grep",
+      "query": "sed -n 60,115p ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Galois/Basic.lean; grep -rn '0BMY|Galois categor' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib; sed -n 119,129p ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Galois/Decomposition.lean",
+      "results": "Basic.lean:66 class PreGaloisCategory: hasTerminal, hasPullbacks (G1), hasFiniteCoproducts, hasQuotientsByFiniteGroups (colimits of shape SingleObj G, G finite) (G2), monoInducesIsoOnDirectSummand (G3); :83 class FiberFunctor (F : C ⥤ FintypeCat): preservesTerminalObjects, preservesPullbacks (G4), preservesFiniteCoproducts, preservesEpis, preservesQuotientsByFiniteGroups (G5), reflectsIsos (G6); :102 IsConnected; Decomposition.lean:119 has_decomp_connected_components (a theorem for GaloisCategory C); no Mathlib file cites Stacks 0BMY",
+      "date": "2026-10-10",
+      "verdict": "no match clause by clause; see split_report.mathlib_comparison"
+    },
+    {
+      "tool": "local_search",
+      "query": "PreGaloisCategory (project root ~/weil-conjectures-slopmaster2); grep -rn 'def-galois-category|GaloisCategory' ~/weil-conjectures-slopmaster2/WeilConjectures",
+      "results": "Mathlib CategoryTheory.PreGaloisCategory, GaloisCategory, FiberFunctor only; the source repository defines no Stacks-style Galois category and uses Mathlib's classes (FundamentalGroup/Basic.lean: FiniteEtale.preGaloisCategory, fiberFunctor, galoisCategory)",
+      "date": "2026-10-10",
+      "verdict": "no Lean declaration states this node"
+    }
   ],
-  "blueprint": "def-galois-category is a definition node with no proof; the split realizes its four clauses and its last paragraph: clause 1 -> def-galois-finite-limits-colimits; clause 2 -> def-galois-finite-coproduct, def-galois-connected-object, def-galois-initial-mono; clause 4 -> def-galois-exact-functor, def-galois-reflects-isomorphisms; final paragraph (topology on Aut(F)) -> def-galois-aut-topology; clause 3 needs no node."
- },
- "reviewed": "2026-10-10 L: definition split into 7 Mathlib-leaf definitions (finite limits/colimits, initial and mono, connected object, finite coproduct, exact functor, reflects isomorphisms, the topology on Aut F); not a leaf itself since Mathlib's GaloisCategory follows SGA1 (G1-G6), weaker in the assumed colimits and exactness, stronger in G3, with 0BMY (2) a theorem; the Stacks/SGA1 bridge recorded in HUMAN.md; 7 new nodes"
+  "mathlib_match": null,
+  "status": "split",
+  "merged_into": null,
+  "import_flags": [],
+  "blueprint_kind": "definition",
+  "blueprint_order": 967,
+  "blueprint_uses": [
+    "def-galois-fibre-functor"
+  ],
+  "uses_not_cited": [
+    "def-galois-fibre-functor"
+  ],
+  "lean_audit": {
+    "master": {
+      "state": "none",
+      "decls": [],
+      "missing": []
+    },
+    "slopmaster2": {
+      "state": "none",
+      "decls": [],
+      "missing": []
+    }
+  },
+  "chapter": "sec-curve-estimates",
+  "unit": "sk-prop-h2",
+  "mathlib_candidate": {
+    "declaration": "CategoryTheory.PreGaloisCategory; CategoryTheory.PreGaloisCategory.FiberFunctor; CategoryTheory.GaloisCategory",
+    "file": "Mathlib/CategoryTheory/Galois/Basic.lean",
+    "lines": [
+      66,
+      83,
+      412
+    ],
+    "reason": "Mathlib follows SGA1 V.4 / Lenstra Def. 3.1 (axioms G1-G6), Stacks 0BMY its own stronger axioms; the two agree only through the main theorem (Stacks' Warning after 0BMY). Stacks => Mathlib needs an argument for G3 (mono induces iso onto a summand), which Stacks does not assume; Mathlib => Stacks needs all finite colimits (coequalizers) in C and exactness of F on them, which Mathlib does not assume (only finite coproducts and quotients by finite groups, and F preserving those and epimorphisms), and the decomposition into connected objects, which Mathlib derives (has_decomp_connected_components, Decomposition.lean 119). Also F lands in FintypeCat, not Sets with finite values."
+  },
+  "split_report": {
+    "date": "2026-10-10",
+    "item": "def-galois-category",
+    "worker": "stage1",
+    "summary": "Definition split against Stacks 0BMY (pione.tex, definition-galois-category), read with Categories 002C, 002J, 003B, 0034, 04AS and the paragraph of Section 0BMQ before Lemma 0BMR. The statement agrees with 0BMY clause by clause (it omitted '(possibly empty)', now added; trailing ';' fixed); every notion now cites a node, all seven new nodes Mathlib leaves: finite limits/colimits (HasFiniteLimits/HasFiniteColimits), initial object and monomorphism (IsInitial, Mono), connected object (PreGaloisCategory.IsConnected, which assumes only a category), finite coproduct (Cofan + IsColimit, Finite index), exact functor (PreservesFiniteLimits/PreservesFiniteColimits), reflects isomorphisms (Functor.ReflectsIsomorphisms), topology on Aut(F) (PreGaloisCategory.instTopologicalSpaceAutFunctorFintypeCat). The finiteness of F(X) needs no node. The imported stmt_dep def-galois-fibre-functor was removed: it is the etale fibre functor of FEt(Y) and the abstract definition does not use it. The item is not a Mathlib leaf: Mathlib's PreGaloisCategory + FiberFunctor are the SGA1/Lenstra axioms G1-G6, which do not agree with 0BMY clause by clause (see mathlib_comparison); the candidate is recorded in mathlib_candidate.",
+    "mathlib_comparison": [
+      "0BMY(1) finite limits: Mathlib assumes terminal + pullbacks (G1, Basic.lean 68-70), equivalent to finite limits (instance HasFiniteLimits, Basic.lean 125). Agree.",
+      "0BMY(1) finite colimits: Mathlib assumes only finite coproducts and colimits of shape SingleObj G for finite G (G2, Basic.lean 72-76); coequalizers and pushouts are not assumed (they follow only from the equivalence with finite Aut F-sets). Mathlib assumes less.",
+      "0BMY(2) every object a finite coproduct of connected objects: not assumed by Mathlib; derived for GaloisCategory C as has_decomp_connected_components (Decomposition.lean 119), using the fibre functor.",
+      "Mathlib G3 monoInducesIsoOnDirectSummand (Basic.lean 77): not an axiom of 0BMY; for a Stacks Galois category it is a consequence (via 0BMY(2), Lemma 0BN0 and exactness of F), not stated in 0BMY.",
+      "0BMY(3) F(X) finite: Mathlib's F lands in FintypeCat (Basic.lean 84); agrees after composing with FintypeCat.incl, which creates finite limits (Limits/FintypeCat.lean 45).",
+      "0BMY(4) exact: Mathlib's FiberFunctor assumes preservation of terminal object, pullbacks (G4), finite coproducts, epimorphisms and quotients by finite groups (G5) (Basic.lean 86-96); left exactness agrees, right exactness is weaker in Mathlib (coequalizers not assumed preserved).",
+      "0BMY(4) reflects isomorphisms: Mathlib G6 reflectsIsos (Basic.lean 98). Agree.",
+      "Connected: Stacks' definition = Mathlib PreGaloisCategory.IsConnected (Basic.lean 102). Agree.",
+      "Topology on Aut(F): Mathlib Galois/Topology.lean 78, same as Stacks 0BMQ. Agree."
+    ],
+    "blueprint": "def-galois-category is a definition node with no proof; the split realizes its four clauses and its last paragraph: clause 1 -> def-galois-finite-limits-colimits; clause 2 -> def-galois-finite-coproduct, def-galois-connected-object, def-galois-initial-mono; clause 4 -> def-galois-exact-functor, def-galois-reflects-isomorphisms; final paragraph (topology on Aut(F)) -> def-galois-aut-topology; clause 3 needs no node."
+  },
+  "reviewed": "2026-10-10 L: definition split into 7 Mathlib-leaf definitions (finite limits/colimits, initial and mono, connected object, finite coproduct, exact functor, reflects isomorphisms, the topology on Aut F); not a leaf itself since Mathlib's GaloisCategory follows SGA1 (G1-G6), weaker in the assumed colimits and exactness, stronger in G3, with 0BMY (2) a theorem; the Stacks/SGA1 bridge recorded in HUMAN.md; 7 new nodes",
+  "lean": {
+    "module": "Sheaf.CategoryTheory.Galois.StacksGaloisCategory",
+    "declaration": "CategoryTheory.IsStacksGaloisCategory",
+    "file": "lean/Sheaf/CategoryTheory/Galois/StacksGaloisCategory.lean",
+    "statement": "structure IsStacksGaloisCategory {C : Type u} [Category.{v} C] (F : C ⥤ Type w) : Prop",
+    "branch": "sheaf-dag",
+    "by": "L",
+    "date": "2026-10-11",
+    "existing": false
+  },
+  "reviewed_lean": {
+    "date": "2026-10-11",
+    "by": "L",
+    "reviewer": "R-gal0511",
+    "group": "L",
+    "result": "pass",
+    "note": "lead item, worker W-gal0508; the Stacks Tag 0BMY axioms as a structure on F : C ⥤ Type w (finite limits/colimits, finite coproducts of PreGaloisCategory.IsConnected objects, finite fibres, exact and reflecting isos); Mathlib GaloisCategory is a different axiomatization (SGA1 G1-G6) with no equivalence theorem, so a separate predicate; the Aut(F) topology paragraph is a construction realized by Mathlib instTopologicalSpaceAutFunctorFintypeCat (docstring); landed 05:08 UTC"
+  }
 }
