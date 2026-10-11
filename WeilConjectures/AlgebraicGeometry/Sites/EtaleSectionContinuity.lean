@@ -123,6 +123,7 @@ noncomputable def toTerminal :
     change (U.map g).left ≫ (U.map (hj₀.from k)).left = (U.map (hj₀.from j)).left ≫ 𝟙 _
     rw [Category.comp_id, ← etale_comp_left, ← U.map_comp, hj₀.hom_ext (g ≫ hj₀.from k)]
 
+/-- The components of `toTerminal`. -/
 lemma toTerminal_app (j : J) : (toTerminal U j₀ hj₀).app j = (U.map (hj₀.from j)).left := rfl
 
 /-- The étale `D_{j₀}`-scheme `D_{j₀} ×_{D_{j₀}} Dⱼ`, isomorphic to `Dⱼ`. -/
@@ -131,6 +132,7 @@ noncomputable def auxObj (j : J) : (U.obj j₀).left.Etale :=
     (U.map (hj₀.from j)).left)).obj ((MorphismProperty.Over.pullback @AlgebraicGeometry.Etale ⊤
       (U.map (hj₀.from j)).left).obj (Scheme.Etale.mk (𝟙 (U.obj j₀).left)))
 
+/-- The structure morphism of `auxObj`. -/
 lemma auxObj_hom (j : J) : (auxObj U j₀ hj₀ j).hom =
     pullback.snd (Scheme.Etale.mk (𝟙 (U.obj j₀).left)).hom (U.map (hj₀.from j)).left ≫
       (U.map (hj₀.from j)).left :=
@@ -151,9 +153,12 @@ noncomputable def aux (j : J) (s : F.obj.obj (op (U.obj j))) :
       (pullback.snd (Scheme.Etale.mk (𝟙 (U.obj j₀).left)).hom (U.map (hj₀.from j)).left)
       (by rw [auxObj_hom, Category.assoc, MorphismProperty.Over.w (U.map (hj₀.from j))]) s)
 
+/-- `aux` sends zero to zero. -/
 lemma aux_zero (j : J) : aux F U j₀ hj₀ j 0 = 0 := by
   rw [aux, pullSection_zero, pullSection_zero]
 
+/-- `aux` is bijective: both pullbacks of sections in it are along étale morphisms and
+isomorphisms. -/
 lemma bijective_aux (j : J) : Function.Bijective (aux F U j₀ hj₀ j) := by
   have : IsIso (pullback.snd (Scheme.Etale.mk (𝟙 (U.obj j₀).left)).hom
       (U.map (hj₀.from j)).left) := inferInstanceAs (IsIso (pullback.snd (𝟙 _) _))
@@ -176,6 +181,7 @@ noncomputable def limitProjInv : Scheme.Etale.mk (𝟙 c.pt) ⟶
     ((Category.comp_id _).trans (Category.id_comp _).symm))
     (pullback.lift_snd _ _ _)
 
+/-- `limitProjInv` is a section of `limitProj`. -/
 lemma limitProjInv_limitProj : limitProjInv U c j₀ ≫ limitProj U c j₀ = 𝟙 _ :=
   MorphismProperty.Over.Hom.ext (pullback.lift_snd _ _ _)
 

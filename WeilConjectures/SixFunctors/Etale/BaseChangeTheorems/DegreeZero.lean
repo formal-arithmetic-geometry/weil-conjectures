@@ -38,6 +38,9 @@ and are the input of the underived proper base change
   over a henselian pair.
 - `AlgebraicGeometry.Etale.isIso_globalSectionsUpperStarMap_geometricFibre`: the comparison
   with the closed geometric fibre over a strictly henselian local ring.
+- `AlgebraicGeometry.Etale.isIso_globalSectionsUpperStarMap_addCommGrpCat_of_henselianRing`,
+  `AlgebraicGeometry.Etale.isIso_globalSectionsUpperStarMap_addCommGrpCat_geometricFibre`: the
+  same for abelian sheaves.
 
 ## References
 

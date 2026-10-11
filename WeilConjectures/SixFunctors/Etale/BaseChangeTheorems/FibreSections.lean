@@ -32,11 +32,16 @@ extension of algebraically closed base fields).
 ## Main definitions
 
 - `AlgebraicGeometry.Etale.stalkToFibreSections`: the comparison map.
+- `AlgebraicGeometry.Etale.fibreToStrictLocalization`: the morphism `X_ȳ ⟶ S_(ȳ) ×_Y X`.
 
 ## Main statements
 
 - `AlgebraicGeometry.Etale.bijective_stalkToFibreSections_of_isProper`: it is bijective for
   proper `f` and algebraically closed `Ω`.
+- `AlgebraicGeometry.Etale.strictLocalizationPullback_sections`: the sections over
+  `S_(ȳ) ×_Y X` are the colimit of the sections of `F` over the `V ×_Y X`.
+- `AlgebraicGeometry.Etale.bijective_restrictAlong_fibreToStrictLocalization`: restriction of
+  sections from `S_(ȳ) ×_Y X` to `X_ȳ` is bijective.
 
 ## References
 
@@ -140,12 +145,14 @@ noncomputable def fibreToStrictLocalization :
     rw [Category.assoc, Scheme.spec_map_strictHenselizationEval_comp_strictLocalizationToBase,
       hab])
 
+/-- The first projection of `fibreToStrictLocalization`. -/
 @[reassoc (attr := simp)]
 lemma fibreToStrictLocalization_fst :
     fibreToStrictLocalization f y a b hab ≫ pullback.fst _ _ =
       b ≫ Spec.map (Scheme.strictHenselizationEval y) :=
   pullback.lift_fst _ _ _
 
+/-- The second projection of `fibreToStrictLocalization`. -/
 @[reassoc (attr := simp)]
 lemma fibreToStrictLocalization_snd :
     fibreToStrictLocalization f y a b hab ≫ pullback.snd _ _ = a :=
@@ -170,10 +177,10 @@ theorem bijective_restrictAlong_fibreToStrictLocalization [IsProper f] [IsAlgClo
   let A := Scheme.strictHenselization y
   let κ := IsLocalRing.ResidueField A
   let κb := AlgebraicClosure κ
-  letI : Algebra κ Ω := (Scheme.strictHenselizationResidueFieldEmb y).toAlgebra
+  let : Algebra κ Ω := (Scheme.strictHenselizationResidueFieldEmb y).toAlgebra
   have : Module.IsTorsionFree κ Ω := DivisionSemiring.to_moduleIsTorsionFree
   let ψ : κb →ₐ[κ] Ω := IsAlgClosed.lift
-  letI : Algebra κb Ω := ψ.toRingHom.toAlgebra
+  let : Algebra κb Ω := ψ.toRingHom.toAlgebra
   let tS := pullback.snd (Scheme.strictLocalizationToBase y) f
   let p := pullback.fst (Scheme.strictLocalizationToBase y) f
   let sκ : Spec (.of κb) ⟶ Spec A := Spec.map (CommRingCat.ofHom (algebraMap A κb))
@@ -190,8 +197,9 @@ theorem bijective_restrictAlong_fibreToStrictLocalization [IsProper f] [IsAlgClo
     rw [IsScalarTower.algebraMap_apply A κ κb, ψ.commutes]
     exact Scheme.strictHenselizationResidueFieldEmb_residue z
   have sq : IsPullback (pr ≫ i ≫ tS) q' f y := by
-    have := (IsPullback.of_hasPullback q ω).paste_horiz ((IsPullback.of_hasPullback p sκ).paste_horiz
-      (IsPullback.of_hasPullback (Scheme.strictLocalizationToBase y) f).flip)
+    have := (IsPullback.of_hasPullback q ω).paste_horiz
+      ((IsPullback.of_hasPullback p sκ).paste_horiz
+        (IsPullback.of_hasPullback (Scheme.strictLocalizationToBase y) f).flip)
     rwa [← Category.assoc ω, hω,
       Scheme.spec_map_strictHenselizationEval_comp_strictLocalizationToBase] at this
   let e := h.isoIsPullback _ _ sq
@@ -228,12 +236,14 @@ noncomputable def strictLocalizationPullbackLeg (x : Scheme.AffinePointedEtaleNe
   pullback.map _ _ _ _ ((Scheme.strictLocalizationCone y).π.app x) (𝟙 X) (𝟙 Y)
     (by simp) (by simp)
 
+/-- The first projection of `strictLocalizationPullbackLeg`. -/
 @[reassoc (attr := simp)]
 lemma strictLocalizationPullbackLeg_fst (x : Scheme.AffinePointedEtaleNeighborhood y) :
     strictLocalizationPullbackLeg f y x ≫ pullback.fst _ _ =
       pullback.fst _ _ ≫ (Scheme.strictLocalizationCone y).π.app x :=
   pullback.lift_fst _ _ _
 
+/-- The second projection of `strictLocalizationPullbackLeg`. -/
 @[reassoc (attr := simp)]
 lemma strictLocalizationPullbackLeg_snd (x : Scheme.AffinePointedEtaleNeighborhood y) :
     strictLocalizationPullbackLeg f y x ≫ pullback.snd _ _ = pullback.snd _ _ := by
@@ -270,7 +280,8 @@ of the pullback of `F` to `S_(y) ×_Y X` are the colimit of the sections of `F` 
 `V ×_Y X`, for the affine pointed étale neighbourhoods `(V, v)` of `y`: every section over
 `S_(y) ×_Y X` is the pullback of a section over some `V ×_Y X`, and a section over `V ×_Y X`
 whose pullback vanishes already vanishes over `V' ×_Y X` for some `(V', v') ⟶ (V, v)`. This is
-the continuity of sections at inverse limits (`AlgebraicGeometry.Etale.unitComparison_app_isColimit_of_isLimit`)
+the continuity of sections at inverse limits
+(`AlgebraicGeometry.Etale.unitComparison_app_isColimit_of_isLimit`)
 for the cofiltered system of the `V ×_Y X` with `V` refining a fixed affine neighbourhood. -/
 theorem strictLocalizationPullback_sections [IsProper f] :
     (∀ τ : ((pullback.snd (Scheme.strictLocalizationToBase y) f)^*[AddCommGrpCat.{u + 1}].obj
@@ -301,10 +312,16 @@ theorem strictLocalizationPullback_sections [IsProper f] :
       CategoryTheory.Over.forget X ≅ U ⋙ Scheme.Etale.forget X ⋙ CategoryTheory.Over.forget X :=
     NatIso.ofComponents (fun _ ↦ Iso.refl _) (fun _ ↦ by
       apply pullback.hom_ext
-      · simp [U, Scheme.affineNeighborhoodDiagramOver]
-        exact (Scheme.Hom.etale_map_left_comp_fst f _).symm
-      · simp [U, Scheme.affineNeighborhoodDiagramOver]
-        exact (Scheme.Hom.etale_map_left_comp_snd f _).symm)
+      · simp only [Functor.comp_obj, CategoryTheory.Over.forget_obj,
+          CategoryTheory.Over.pullback_obj_left, Functor.comp_map,
+          CategoryTheory.Over.forget_map, CategoryTheory.Over.pullback_map_left, Iso.refl_hom,
+          Category.comp_id, Category.id_comp]
+        erw [pullback.lift_fst]
+      · simp only [Functor.comp_obj, CategoryTheory.Over.forget_obj,
+          CategoryTheory.Over.pullback_obj_left, Functor.comp_map,
+          CategoryTheory.Over.forget_map, CategoryTheory.Over.pullback_map_left, Iso.refl_hom,
+          Category.comp_id, Category.id_comp]
+        erw [pullback.lift_snd])
   let c := (Cone.postcompose E.hom).obj (cK.whisker Φ)
   have hc : IsLimit c := (IsLimit.postcomposeHomEquiv E _).symm
     ((Functor.Initial.isLimitWhiskerEquiv Φ cK).symm
@@ -371,11 +388,11 @@ with geometric fibre `a : X_y ⟶ X`. For every abelian étale sheaf `F` on `X`,
 The stalk is the colimit of the sections of `F` over the `V ×_Y X` for the affine pointed étale
 neighbourhoods `(V, v)` of `y`, which is the group of sections over `S_(y) ×_Y X` for the strict
 localization `S_(y)` by continuity of sections at inverse limits
-(`AlgebraicGeometry.Etale.unitComparison_app_isColimit_of_isLimit`); the ring of `S_(y)` is
+(`AlgebraicGeometry.Etale.strictLocalizationPullback_sections`); the ring of `S_(y)` is
 strictly henselian, so these are the sections over the closed geometric fibre
-(`AlgebraicGeometry.Etale.isIso_globalSectionsUpperStarMap_geometricFibre`), which are the
+(`AlgebraicGeometry.Etale.bijective_restrictAlong_fibreToStrictLocalization`), which are the
 sections over `X_y` by the invariance of sections under extension of algebraically closed base
-fields (`AlgebraicGeometry.Etale.isIso_globalSectionsUpperStarMap_of_isAlgClosed`).
+fields.
 (blueprint: `lemma-weil-pbc-proper-underived-exchange`, the stalk formula) -/
 @[stacks 0A3S]
 theorem bijective_stalkToFibreSections_of_isProper [IsProper f] [IsAlgClosed Ω]
