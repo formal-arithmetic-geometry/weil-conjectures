@@ -7,7 +7,7 @@
  },
  "kind": "statement",
  "title": "Perfectness of $Rf_*\\mathcal{G}$ and base change",
- "statement": "Let $S$ be a scheme, $f:X\\to S$ a proper morphism of finite\npresentation, and let $\\mathcal{G}$ be an $\\mathcal{O}_X$-module of finite presentation\nand flat over $S$. Then $Rf_*\\mathcal{G}$ is a perfect object of $D(\\mathcal{O}_S)$,\nand its formation commutes with arbitrary base change: for every\nmorphism $g:T\\to S$ the canonical map\n\n$$\nLg^*(Rf_*\\mathcal{G})\\;\\longrightarrow\\;Rf_{T,*}\\mathcal{G}_T\n$$\n\nis an isomorphism in $D(\\mathcal{O}_T)$.",
+ "statement": "Let $S$ be a scheme, $f:X\\to S$ a proper morphism of finite\npresentation, and let $\\mathcal{G}$ be an $\\mathcal{O}_X$-module of finite presentation\nand flat over $S$. Then $Rf_*\\mathcal{G}$ is a perfect object of $D(\\mathcal{O}_S)$,\nand its formation commutes with arbitrary base change: for every\nmorphism $g:T\\to S$ the canonical map\n\n$$\nLg^*(Rf_*\\mathcal{G})\\;\\longrightarrow\\;Rf_{T,*}\\mathcal{G}_T\n$$\n\nis an isomorphism in $D(\\mathcal{O}_T)$.\nHere the canonical map is [def-pc-derived-module-base-change-map]: it is the map of [def-pc-derived-base-change-map] followed by derived direct image of the derived-to-ordinary module pullback comparison, constructed using the adjunction [lem-pc-ringed-spaces-derived-adjoint].",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-semicon/lem-pc-rf-perfect-base-change.md",
   "place": "node lem-pc-rf-perfect-base-change, order 675",
@@ -28,7 +28,10 @@
   "def-pc-derived-direct-image",
   "def-pc-derived-pullback",
   "def-pc-morphism-conventions",
-  "def-pc-perfect-complex"
+  "def-pc-perfect-complex",
+  "def-pc-derived-module-base-change-map",
+  "def-pc-derived-base-change-map",
+  "lem-pc-ringed-spaces-derived-adjoint"
  ],
  "proof": [
   {
@@ -186,5 +189,80 @@
   "group": "H1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-rpb1841 (reviewer sub-agent of L); spot-checked: Statement = Tag 0B91(2) verbatim. Step 1: proper => separated + finite type (qc), fp module => qcoh; lem-pc-rf-base-change-flat-module hypotheses met. Step 2: new node = Tag 0A1H exact (perfect representation carried by it), E=O_X, G in degree 0; support closed (finite type) and proper over S via properties lemma (1),(2). No cycle: flat-module deps (cech-resolution, flat-complex-derived-pullback, base-change-map-cech, pbc affine sections) do not reach the item; new node unsplit, created from item but strictly broader (0A1H), not a restatement. Cross-unit pbc nodes are generic tools, accepted. No fault missed by the second reading."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.PerfectDirectImageBaseChange",
+  "declaration": "AlgebraicGeometry.perfect_derivedDirectImage_baseChange",
+  "file": "lean/Sheaf/AlgebraicGeometry/PerfectDirectImageBaseChange.lean",
+  "statement": "theorem perfect_derivedDirectImage_baseChange [∀ Y : Scheme.{uPF}, HasDerivedCategory.{wPF} (SheafOfModules.{uPF} (moduleRings Y.toRingedSpace))] {X S : Scheme.{uPF}} (f : X ⟶ S) [IsProper f] [LocallyOfFinitePresentation f] [QuasiCompact f] [QuasiSeparated f] [∀ U : S.Opens, HasDerivedCategory.{wPF} (SheafOfModules.{uPF} ((moduleRings S.toRingedSpace).over U))] [∀ {Y Z : Scheme.{uPF}} (k : Y ⟶ Z), (Scheme.Modules.tensorPullback k).Additive] (G : X.Modules) [SheafOfModules.IsFinitePresentation (R := X.ringCatSheaf) G] (hG : G.IsFlatOver f) : Scheme.IsPerfect S ((schemeDerivedDirectImage f).obj ((DerivedCategory.singleFunctor (SheafOfModules.{uPF} (moduleRings X.toRingedSpace)) 0).obj G)) ∧ ∀ {T : Scheme.{uPF}} (g : T ⟶ S) φ, IsDerivedModuleBaseChangeMap f g G φ → IsIso φ",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-rpb"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-rpb",
+  "group": "F1",
+  "result": "fix",
+  "note": "R-rpb: statement = Tag 0B91(2) (proper + LocallyOfFinitePresentation/QC/QS, G finite presentation, IsFlatOver f; Scheme.IsPerfect of Rf_*(G[0]); base change along every g via Limits.pullback f g, G_T = tensorPullback (pullback.fst f g) G); correction only names the canonical map, not easier (no H7). New node def-pc-derived-module-base-change-map kept: no landed derived-to-ordinary pullback comparison; schemeDerivedBaseChangeMap lands in Rf'_*(Lg_X^*G), not Rf'_*((g_X^*G)[0]). Fixed: (1) the delivery re-pointed the landed lem-pc-ringed-spaces-derived-adjoint record to a new SchemeDerivedAdjunction module and rewrote the landed SchemeDerivedBaseChangeMap.lean (reintroducing body letI of Additive that R-tpb had removed) -> both reverted (--revert-nodes), modules left out; (2) derivedModulePullbackComparison/derivedModuleBaseChangeMap were data by Classical.choose of sorried existence theorems with letI (H5) -> replaced by predicates IsDerivedModulePullbackComparison (exists a left-derived counit eps of La^* with c = eps.app(G[0]) >> Qh.map(singleMapHomologicalComplex)) and IsDerivedModuleBaseChangeMap (phi = landed schemeDerivedBaseChangeMap of the pullback square >> Rf_T*.map c); item now: for all g phi, IsDerivedModuleBaseChangeMap f g G phi -> IsIso phi, with a true Prop binder [forall k, (tensorPullback k).Additive]; node text gains the equivalent left-derived-counit sentence. check_dag clean (0 cycles); combined compile green.; reverted the delivery's change of existing node(s) def-pc-derived-base-change-map, lem-pc-ringed-spaces-derived-adjoint (--revert-nodes; kept as on sheaf-dag)",
+  "statement_corrected": true
+ },
+ "statement_change": {
+  "date": "2026-10-11",
+  "by": "F1 stage 2",
+  "old_statement": "Let $S$ be a scheme, $f:X\\to S$ a proper morphism of finite\npresentation, and let $\\mathcal{G}$ be an $\\mathcal{O}_X$-module of finite presentation\nand flat over $S$. Then $Rf_*\\mathcal{G}$ is a perfect object of $D(\\mathcal{O}_S)$,\nand its formation commutes with arbitrary base change: for every\nmorphism $g:T\\to S$ the canonical map\n\n$$\nLg^*(Rf_*\\mathcal{G})\\;\\longrightarrow\\;Rf_{T,*}\\mathcal{G}_T\n$$\n\nis an isomorphism in $D(\\mathcal{O}_T)$.",
+  "what": "The original dependency list specifies the two functors but no construction of the canonical comparison or its target using ordinary module pullback. An arbitrary isomorphism between the two objects does not specify invertibility of this map. Name the existing general canonical-map/adjunction nodes and the degree-zero ordinary-pullback specialization; the mathematical hypotheses and conclusion are unchanged.",
+  "source": {
+   "document": "literature/stacks-project/perfect.tex; literature/stacks-project/cohomology.tex",
+   "place": "Tag 0B91 clause (2); Remark 08HY"
+  },
+  "citers": [
+   {
+    "id": "lem-pd-degree-locally-constant",
+    "holds": true,
+    "note": "The proper finite-presentation, relatively flat module, perfectness and arbitrary canonical base-change conclusions are unchanged; only the previously unnamed comparison construction is specified."
+   },
+   {
+    "id": "thm-pc-semicontinuity-base-change",
+    "holds": true,
+    "note": "The proper finite-presentation, relatively flat module, perfectness and arbitrary canonical base-change conclusions are unchanged; only the previously unnamed comparison construction is specified."
+   },
+   {
+    "id": "lem-pc-flat-rf-open",
+    "holds": true,
+    "note": "The proper finite-presentation, relatively flat module, perfectness and arbitrary canonical base-change conclusions are unchanged; only the previously unnamed comparison construction is specified."
+   },
+   {
+    "id": "lem-sc-picard-h1-multiple-locus",
+    "holds": true,
+    "note": "The proper finite-presentation, relatively flat module, perfectness and arbitrary canonical base-change conclusions are unchanged; only the previously unnamed comparison construction is specified."
+   },
+   {
+    "id": "lem-sc-proper-flat-global-sections-criterion",
+    "holds": true,
+    "note": "The proper finite-presentation, relatively flat module, perfectness and arbitrary canonical base-change conclusions are unchanged; only the previously unnamed comparison construction is specified."
+   },
+   {
+    "id": "lem-sc-picard-diagonal-locally-closed",
+    "holds": true,
+    "note": "The proper finite-presentation, relatively flat module, perfectness and arbitrary canonical base-change conclusions are unchanged; only the previously unnamed comparison construction is specified."
+   },
+   {
+    "id": "lem-sc-valuation-proper-coherent-higher-direct-images",
+    "holds": true,
+    "note": "The proper finite-presentation, relatively flat module, perfectness and arbitrary canonical base-change conclusions are unchanged; only the previously unnamed comparison construction is specified."
+   }
+  ],
+  "old_stmt_deps": [
+   "def-pc-base-change",
+   "def-pc-derived-category",
+   "def-pc-derived-direct-image",
+   "def-pc-derived-pullback",
+   "def-pc-morphism-conventions",
+   "def-pc-perfect-complex"
+  ]
  }
 }
