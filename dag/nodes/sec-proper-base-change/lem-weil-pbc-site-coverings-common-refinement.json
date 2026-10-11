@@ -136,5 +136,28 @@
   "group": "F1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of F1; spot-checked by L: 4 elementary steps following Sites 00W6: pull back the second covering along each member of the first (axiom (iii)), compose (axiom (ii)), the projections are morphisms of coverings over id_U, finite lists by iteration. Correct."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.SiteCoveringsCommonRefinement",
+  "declaration": "CategoryTheory.Precoverage.siteCoverings_common_refinement",
+  "declarations": [
+   "CategoryTheory.Precoverage.siteCoverings_common_refinement",
+   "CategoryTheory.Precoverage.siteCoverings_finite_common_refinement"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/SiteCoveringsCommonRefinement.lean",
+  "statement": "theorem siteCoverings_common_refinement {C : Type u} [SmallCategory C] (J : Precoverage C) [J.HasIsos] [J.IsStableUnderComposition] [J.IsStableUnderBaseChange] [J.HasPullbacks] {U : C} (E : ZeroHypercover.{w} J U) (F : ZeroHypercover.{w'} J U) (W : E.I₀ × F.I₀ → C) (q : ∀ ij : E.I₀ × F.I₀, W ij ⟶ E.X ij.1) (p : ∀ ij : E.I₀ × F.I₀, W ij ⟶ F.X ij.2) (h : ∀ ij : E.I₀ × F.I₀, IsPullback (p ij) (q ij) (F.f ij.2) (E.f ij.1)) : Presieve.ofArrows W (fun ij => q ij ≫ E.f ij.1) ∈ J U ∧ (∃ r : PreZeroHypercover.Hom { I₀ := E.I₀ × F.I₀, X := W, f := fun ij => q ij ≫ E.f ij.1 } E.toPreZeroHypercover, r.s₀ = _root_.Prod.fst ∧ HEq r.h₀ q) ∧ (∃ r : PreZeroHypercover.Hom { I₀ := E.I₀ × F.I₀, X := W, f := fun ij => q ij ≫ E.f ij.1 } F.toPreZeroHypercover, r.s₀ = _root_.Prod.snd ∧ HEq r.h₀ p)",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-11",
+  "existing": false,
+  "note": "The module also states the finite-family conclusion as siteCoverings_finite_common_refinement. The binary clause quantifies over arbitrary fibre products via IsPullback, rather than fixing Mathlib’s chosen pullbacks."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "F1",
+  "result": "pass",
+  "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
  }
 }
