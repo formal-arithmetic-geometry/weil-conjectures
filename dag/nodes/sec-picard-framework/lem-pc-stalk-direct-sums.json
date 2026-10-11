@@ -150,5 +150,23 @@
   "group": "E1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-sds2334 (reviewer sub-agent of L); spot-checked: FIX more, RETURN less: (1) C1/C4: steps 1 and 3 treated sections of the sheaf coproduct as finitely supported families (false for infinite I; second reading repaired only step 2) -> proof rewritten along Stacks 009E (3),(5): coproduct in Mod(O_X) = sheafification of sectionwise direct sum [lem-weil-pbc-presheaf-modules-colimits-sectionwise, lem-weil-pbc-module-sheaves-colimits-forgetful (2) as generic tool use C7, def-weil-presheaf-modules-sheafification], theta_x iso and O_x-linear [lem-weil-pbc-stalk-sheafification-space], germ-level direct-sum/stalk interchange for the presheaf (elementary), identification with the canonical map; (2) class (b)/(d): new unsplit node lem-pc-stalk-direct-sum-local-support is a consequence of those existing nodes -> dropped; (3) Mathlib grep Stalks.lean/ModuleCat/Stalk.lean: no leaf.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Topology.StalkDirectSums",
+  "declaration": "SheafOfModules.exists_stalk_directSum_linearEquiv",
+  "file": "lean/Sheaf/Topology/StalkDirectSums.lean",
+  "statement": "theorem exists_stalk_directSum_linearEquiv {X : TopCat.{u}} (R : X.Sheaf RingCat.{u}) (I : Type u) (_hcomm : ∀ (U : Opens X) (r s : R.obj.obj (op U)), r * s = s * r) (F : I → SheafOfModules.{u} R) (x : X) : ∃ e : (stalk (C := AddCommGrpCat.{u}) (X := X) (∐ F).val.presheaf x) ≃ₗ[stalk (C := RingCat.{u}) (X := X) R.obj x] (⨁ i : I, (stalk (C := AddCommGrpCat.{u}) (X := X) (F i).val.presheaf x)), ∀ (i : I) (U : Opens X) (hx : x ∈ U) (s : (F i).val.obj (op U)), e (germ (∐ F).val.presheaf U x hx ((Sigma.ι F i).val.app (op U) s)) = DirectSum.lof (stalk (C := RingCat.{u}) (X := X) R.obj x) I (fun j : I => ↑(stalk (C := AddCommGrpCat.{u}) (X := X) (F j).val.presheaf x)) i (germ (F i).val.presheaf U x hx s)",
+  "branch": "sheaf-dag",
+  "by": "G1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-sds0915",
+  "group": "G1",
+  "result": "pass",
+  "note": "ringed space = TopCat X + R : X.Sheaf RingCat with sectionwise commutativity (_hcomm, per def-weil-locally-ringed-space-morphism); I : Type u arbitrary, no finiteness; F : I -> SheafOfModules R; every x; coproduct ∐ F in SheafOfModules (existence from Sheaf.Colimits); stalks TopCat.Presheaf.stalk with Mathlib ModuleCat/Stalk RingCat module instance; ⨁ direct sum; ∃ linear equiv in node direction with e ∘ (ι_i)_x = lof i, so e⁻¹ is the canonical map; docstring carries the 4 proof steps; not H4: J1 lem-kun-stalks-commute-colimits is abelian sheaves on small étale site, Mathlib has only presheaf stalkFunctor adjunction/finite-limit preservation, no module-sheaf coproduct stalk statement"
  }
 }
