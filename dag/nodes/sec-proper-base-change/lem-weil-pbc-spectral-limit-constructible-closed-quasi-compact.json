@@ -230,5 +230,23 @@
   "worker": "stage1",
   "summary": "Not a Mathlib leaf (B8): the statement composes Tychonoff, closedness of the compatible families in a product of Hausdorff spaces, the Hausdorff property of the constructible topology (a TODO in Mathlib's ConstructibleTopology.lean) and the comparison of the constructible with the given topology; searched with LeanSearch, LeanFinder, Loogle (earlier record) and grep. Split in 8 steps following the proof of Stacks 0A2V with the proof of 08ZV written out for the subsets Z_i (no directedness needed): constructible topologies quasi-compact (existing leaf 0901) and Hausdorff (sibling node from 0A2W's split), spectral maps continuous for them (sibling node, 0A2S (1)), the identity X_i' -> X_i continuous (elementary from the definitions), Tychonoff (new leaf, Pi.compactSpace), the set L of compatible families in the Z_i closed in the product (new leaf isClosed_eq for coincidence sets), L quasi-compact (existing leaf 005C), the bijection L -> Z (elementary), its continuity via the initial topology of X (new leaf continuous_iInf_rng + continuous_induced_rng), and Z quasi-compact as a continuous image (new leaf isCompact_range, 04Z9 (1)). Statement unchanged; the hypothesis f_{ii'}(Z_{i'}) subset Z_i is not used by the proof (Stacks needs it only to form lim Z_i as a diagram), harmless. The citer lem-weil-pbc-spectral-directed-limit-spectral (Step 2) applies the statement as written."
  },
- "reviewed": "pass (L, 2026-10-10): 8 steps follow 0A2V with 08ZV written out: compatible families with components in the Z_i form a closed subset of the Tychonoff product of the constructible topologies (new leaves 08ZU, 08ZE), hence quasi-compact; the bijection onto Z is continuous by the initial-topology property (new leaf) since the constructible topology is finer, and the image is quasi-compact (new leaf 04Z9). Reuses the sibling's Hausdorff and continuity nodes."
+ "reviewed": "pass (L, 2026-10-10): 8 steps follow 0A2V with 08ZV written out: compatible families with components in the Z_i form a closed subset of the Tychonoff product of the constructible topologies (new leaves 08ZU, 08ZE), hence quasi-compact; the bijection onto Z is continuous by the initial-topology property (new leaf) since the constructible topology is finer, and the image is quasi-compact (new leaf 04Z9). Reuses the sibling's Hausdorff and continuity nodes.",
+ "lean": {
+  "module": "Sheaf.Topology.SpectralLimitConstructibleClosed",
+  "declaration": "Topology.isCompact_limit_constructibleClosed",
+  "file": "lean/Sheaf/Topology/SpectralLimitConstructibleClosed.lean",
+  "statement": "theorem isCompact_limit_constructibleClosed {I : Type u} [Preorder I] (Y : I → Type v) [tY : ∀ i : I, TopologicalSpace (Y i)] [∀ i : I, SpectralSpace (Y i)] (f : ∀ (i j : I), i ≤ j → Y j → Y i) (hf : ∀ (i j : I) (h : i ≤ j), IsSpectralMap (f i j h)) (hf_id : ∀ (i : I) (x : Y i), f i i le_rfl x = x) (hf_comp : ∀ (i j k : I) (hij : i ≤ j) (hjk : j ≤ k) (x : Y k), f i j hij (f j k hjk x) = f i k (le_trans hij hjk) x) {X : Type w} [tX : TopologicalSpace X] (p : ∀ i : I, X → Y i) (hp : ∀ i : I, Continuous (p i)) (hp_compat : ∀ (i j : I) (h : i ≤ j) (x : X), f i j h (p j x) = p i x) (hlimit : ∀ y : (∀ i : I, Y i), (∀ (i j : I) (h : i ≤ j), f i j h (y j) = y i) → ∃! x : X, ∀ i : I, p i x = y i) (htop : tX = ⨅ i : I, TopologicalSpace.induced (p i) (tY i)) (Z : ∀ i : I, Set (Y i)) (hZ : ∀ i : I, IsClosed[constructibleTopology (Y i)] (Z i)) (hZ_compat : ∀ (i j : I) (h : i ≤ j), f i j h '' Z j ⊆ Z i) : IsCompact {x : X | ∀ i : I, p i x ∈ Z i} ∧ CompactSpace X",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "F1",
+  "result": "pass",
+  "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
+ }
 }

@@ -5013,3 +5013,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 14:41 L: merged deliver/E1/lem-weil-pbc-pushforward-coherent-on-open (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.PushforwardCoherentOnOpen AlgebraicGeometry.Scheme.Modules.pushforward_coherent_on_open)
 - 14:41 L: merged deliver/G1/lem-weil-pbc-sets-etale-inverse-image-constant-sheaf (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.EtaleSetInverseImageConstantSheaf AlgebraicGeometry.etaleSetInverseImageConstantSheaf)
 - 14:41 L: merged deliver/E1/lem-weil-pbc-spec-finite-product-fields (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.SpecFiniteProductFields AlgebraicGeometry.spec_finite_product_fields)
+- 14:41 L: merged deliver/F1/lem-weil-pbc-spectral-limit-constructible-closed-quasi-compact (stage 2; reviewer PASS; first push; Sheaf.Topology.SpectralLimitConstructibleClosed Topology.isCompact_limit_constructibleClosed)
