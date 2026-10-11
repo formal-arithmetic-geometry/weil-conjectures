@@ -27,8 +27,21 @@ compatibly with each other (`Profinite.padicSubfieldRingObjMap_comp_toPadicAlgCl
 are morphisms of ring objects. Their pullbacks along `p_X` are the coefficient changes
 `E_X ⟶ F_X ⟶ ℚ̄_ℓ,X` on a scheme `X`.
 
-By Proposition 3.8 of `WeilConjectures/RefactorInstruction.tex`, these inclusions exhibit
-`ℚ̲̄_ℓ` as the filtered colimit of the `E̲`; this comparison is not formalized here.
+## `ℚ̲̄_ℓ` as the colimit of the `E̲`
+
+The inclusions `E̲ ⟶ ℚ̲̄_ℓ` form a cocone `Profinite.padicAlgClRingObjCocone` over the diagram
+`E ↦ E̲` (`Profinite.padicSubfieldRingObjFunctor`) of condensed abelian groups, indexed by the
+filtered poset of finite subextensions, and this cocone is a colimit
+(`Profinite.isColimitPadicAlgClRingObjCocone`): `ℚ̲̄_ℓ = colim_E E̲`. This is the comparison
+identity `eq:Qbar-comparison` of `WeilConjectures/RefactorInstruction.tex` (Proposition
+`prop:comparison-only`); it is a theorem, not the definition of `ℚ̲̄_ℓ`, which is defined by its
+sections. It holds because filtered colimits of condensed abelian groups are computed
+sectionwise on profinite sets (the coverings of `*_proét` being refined by finite ones), and
+sectionwise `ℚ̲̄_ℓ(S)` is the union of the subgroups `C(S, E)` of `C(S, ℚ̄_ℓ)` by definition.
+
+## Sorried input
+
+* `Profinite.isColimitPadicAlgClRingObjCocone`: `ℚ̲̄_ℓ = colim_E E̲`, see above.
 
 -/
 
@@ -36,7 +49,7 @@ By Proposition 3.8 of `WeilConjectures/RefactorInstruction.tex`, these inclusion
 
 universe u
 
-open CategoryTheory
+open CategoryTheory Limits
 
 namespace PadicAlgCl
 
@@ -131,5 +144,33 @@ lemma padicSubfieldRingObjMap_comp_toPadicAlgCl {E F : FiniteIntermediateField �
   rw [padicSubfieldRingObjMap, padicSubfieldRingObjToPadicAlgCl,
     padicSubfieldRingObjToPadicAlgCl, ← Functor.map_comp]
   rfl
+
+/-! ### `ℚ̲̄_ℓ` as the colimit of the `E̲` -/
+
+/-- The diagram `E ↦ E̲` of ring objects of condensed abelian groups, indexed by the finite
+subextensions `E ⊆ ℚ̄_ℓ` of `ℚ_ℓ` ordered by inclusion. -/
+noncomputable def padicSubfieldRingObjFunctor :
+    FiniteIntermediateField ℓ ⥤ Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1} where
+  obj E := padicSubfieldRingObj ℓ E
+  map f := padicSubfieldRingObjMap ℓ (leOfHom f)
+  map_id _ := rfl
+  map_comp _ _ := rfl
+
+/-- The cocone over the diagram `E ↦ E̲` with vertex `ℚ̲̄_ℓ`, given by the inclusions
+`E̲ ⟶ ℚ̲̄_ℓ`. -/
+noncomputable def padicAlgClRingObjCocone : Cocone (padicSubfieldRingObjFunctor.{u} ℓ) where
+  pt := padicAlgClRingObj ℓ
+  ι :=
+    { app E := padicSubfieldRingObjToPadicAlgCl ℓ E
+      naturality _ _ f :=
+        (padicSubfieldRingObjMap_comp_toPadicAlgCl ℓ (leOfHom f)).trans
+          (Category.comp_id _).symm }
+
+/-- **`ℚ̲̄_ℓ = colim_E E̲`**: the inclusions `E̲ ⟶ ℚ̲̄_ℓ` exhibit the condensed ring `ℚ̲̄_ℓ` as the
+filtered colimit of the condensed rings `E̲` of the finite subextensions `E ⊆ ℚ̄_ℓ` of `ℚ_ℓ`, in
+condensed abelian groups. See the module docstring. -/
+noncomputable def isColimitPadicAlgClRingObjCocone :
+    IsColimit (padicAlgClRingObjCocone.{u} ℓ) :=
+  sorry
 
 end Profinite

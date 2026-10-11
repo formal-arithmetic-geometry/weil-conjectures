@@ -27,6 +27,8 @@ The comparisons (Pull), (Push) and (Shriek) between these and the derived functo
 `WeilConjectures.SixFunctors.ProEtale.ModuleObject.ChangeOfCoefficients`, for these two
 coefficient changes. This file supplies the coefficient-specific input:
 
+* `ℚ̄_ℓ,X = colim_E E_X` (`ProEtale.isColimitPadicAlgClRingObjCocone`), the pullback along the
+  left adjoint `p_X^*` of `ℚ̲̄_ℓ = colim_E E̲` (`Profinite.isColimitPadicAlgClRingObjCocone`);
 * both coefficient changes are flat, so that (Pull) and (Push) are defined on the unbounded
   derived categories, and (Pull) is an isomorphism there;
 * for a finite extension `F/E`, (Push) is an isomorphism on all unbounded objects, hence so is
@@ -45,8 +47,8 @@ coefficient changes. This file supplies the coefficient-specific input:
 * **(A0.2)**
   `ProEtale.CondensedRing.preservesFiniteLimits_extendScalars_padicSubfieldRingObjToPadicAlgCl`:
   for a finite subextension `E`, the extension of scalars `ℚ̄_ℓ,X ⊗_{E_X} -` is exact, i.e.
-  `ℚ̄_ℓ,X` is flat over `E_X`: `ℚ̲̄_ℓ` is the filtered colimit of the `F̲`, `F ≥ E`, each of which
-  is finite free over `E̲`, and `p_X^*` preserves colimits.
+  `ℚ̄_ℓ,X` is flat over `E_X`: it is the filtered colimit of the `F_X`, `F ≥ E`
+  (`ProEtale.isColimitPadicAlgClRingObjCocone`), each of which is finite free over `E_X`.
 * `ProEtale.CondensedRing.isIso_derivedPushHom_padicSubfieldRingObjMap`: for a finite extension
   `F/E`, (Push) is an isomorphism on all unbounded objects, since `F_X ≅ E_X^n` reduces it to
   the compatibility of `Rf_*` with finite direct sums.
@@ -106,6 +108,25 @@ lemma padicSubfieldRingObjMap_comp_toPadicAlgCl {E F : FiniteIntermediateField �
     padicSubfieldRingObjMap X ℓ h ≫ padicSubfieldRingObjToPadicAlgCl X ℓ F =
       padicSubfieldRingObjToPadicAlgCl X ℓ E := by
   rw [← coefficientMap_comp, Profinite.padicSubfieldRingObjMap_comp_toPadicAlgCl]
+
+/-- The inverse image `p_X^*` from condensed abelian groups is a left adjoint, being the
+composite `π_X^* ∘ p^*` of two left adjoints. -/
+instance isLeftAdjoint_upperStarFromPoint : (upperStarFromPoint X).IsLeftAdjoint :=
+  (pointUpperStarLowerStarAdjunction.comp
+    (ProEtale.upperStarLowerStarAdjunction Ab.{u + 1} (toSpecZ X))).isLeftAdjoint
+
+/-- The cocone over the diagram `E ↦ E_X` with vertex `ℚ̄_ℓ,X`, given by the inclusions
+`E_X ⟶ ℚ̄_ℓ,X`: the image under `p_X^*` of `Profinite.padicAlgClRingObjCocone`. -/
+noncomputable abbrev padicAlgClRingObjCocone :
+    Cocone (Profinite.padicSubfieldRingObjFunctor ℓ ⋙ upperStarFromPoint X) :=
+  (upperStarFromPoint X).mapCocone (Profinite.padicAlgClRingObjCocone ℓ)
+
+/-- **`ℚ̄_ℓ,X = colim_E E_X`**: the inclusions `E_X ⟶ ℚ̄_ℓ,X` exhibit `ℚ̄_ℓ,X` as the filtered
+colimit of the `E_X` in abelian pro-étale sheaves on `X`. This is the image of
+`ℚ̲̄_ℓ = colim_E E̲` (`Profinite.isColimitPadicAlgClRingObjCocone`) under the left adjoint
+`p_X^*`. -/
+noncomputable def isColimitPadicAlgClRingObjCocone : IsColimit (padicAlgClRingObjCocone X ℓ) :=
+  isColimitOfPreserves (upperStarFromPoint X) (Profinite.isColimitPadicAlgClRingObjCocone ℓ)
 
 end RingObj
 

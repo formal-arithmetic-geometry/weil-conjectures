@@ -55,10 +55,10 @@ categories. By `CategoryTheory.CategoryCocone.IsFilteredTwoColimit` this is the 
 These are stated for a topologically noetherian `X`, the setting in which the bounded
 constructible complexes form a triangulated subcategory
 (`ProEtale.isTriangulated_boundedConstructible`). They are *not* formal consequences of the
-identification `ℚ̲̄_ℓ ≃ colim_E E̲` of the condensed coefficient rings (a comparison identity
-of `WeilConjectures/RefactorInstruction.tex`), and they are false for the unbounded derived
-categories; see the module docstring of `WeilConjectures.CategoryTheory.FilteredTwoColimit` for
-the ordinary-category model of the 2-colimit that they describe.
+identification `ℚ̄_ℓ,X ≃ colim_E E_X` of `ProEtale.isColimitPadicAlgClRingObjCocone`, and they
+are false for the unbounded derived categories; see the module docstring of
+`WeilConjectures.CategoryTheory.FilteredTwoColimit` for the ordinary-category model of the
+2-colimit that they describe.
 
 ## Sorried input
 
@@ -74,9 +74,9 @@ the ordinary-category model of the 2-colimit that they describe.
   constructible `ℚ̄_ℓ,X`-complex has finitely many constructible cohomology sheaves; each is
   locally, on the strata of a stratification, finitely presented, and a finite presentation
   involves finitely many sections of `ℚ̄_ℓ,X`, which are defined over a finite subextension since
-  `ℚ̲̄_ℓ = colim_E E̲` and `p_X^*` preserves colimits. A finite Postnikov induction on the
-  length of the complex then descends the complex itself, the gluing data being morphisms which
-  descend by (Hom).
+  `ℚ̄_ℓ,X = colim_E E_X` (`ProEtale.isColimitPadicAlgClRingObjCocone`). A finite Postnikov
+  induction on the length of the complex then descends the complex itself, the gluing data being
+  morphisms which descend by (Hom).
 * **(Hom)** `ProEtale.constructibleCocone_homSurj` and `ProEtale.constructibleCocone_homInj`:
   continuity of the derived hom. For a bounded constructible first argument `K_E` and a
   bounded below second argument, `Hom_{D(Mod_{ℚ̄_ℓ,X})}(T_{E,Ω} K_E, T_{E,Ω} L_E)` is the filtered
