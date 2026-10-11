@@ -149,5 +149,24 @@
   "group": "G1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-pdl2958 (reviewer sub-agent of L); spot-checked: Item statement unchanged vs Tag 0BDP; citers lem-sc-general-theorem-of-cube and lem-sc-picard-locus-closed use exactly its universal factorization clause; new node lem-sc-perfect-h0-locally-closed matches Tag 0BDL (no other 0BDL node, not in Mathlib per recorded searches); tool_uses rf-perfect-base-change and projection-formula accepted as generic tools. FIX more, RETURN less: (1) C4: step 3 cited lem-sc-proper-flat-global-sections, whose geometrically reduced/connected fibre hypothesis the item does not supply; the identity O_T=p_*O_{X_T} is the item's own hypothesis, so the citation and proof_dep are dropped. (2) C4/E: step 2 applied Tag 0BDL without checking its tor-amplitude [0,b] hypothesis; added the local tor-amplitude argument and the identification p_*q^*E=H^0(Lg^*E). (3) step 1 union=S needs nonempty fibres (added); steps 2-4 rewritten in TeX, step 3 now shows the forward direction persists after base change (needed to replace S by ZxZ'), step 4 states the determinant locus is pulled back and retrocompact.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.PicardDiagonalLocallyClosed",
+  "declaration": "AlgebraicGeometry.Scheme.picard_diagonal_locally_closed",
+  "file": "lean/Sheaf/AlgebraicGeometry/PicardDiagonalLocallyClosed.lean",
+  "statement": "theorem picard_diagonal_locally_closed {X S : Scheme.{u}} (f : X ⟶ S) [Flat f] [IsProper f] [LocallyOfFinitePresentation f] (hO : ∀ {T : Scheme.{u}} (g : T ⟶ S), IsIso ((Scheme.Modules.pullbackPushforwardAdjunction (pullback.snd f g)).unit.app (SheafOfModules.unit T.ringCatSheaf))) (E : X.Modules) [E.IsFiniteLocallyFree] : ∃ (Z : Scheme.{u}) (j : Z ⟶ S), IsImmersion j ∧ LocallyOfFinitePresentation j ∧ QuasiCompact j ∧ QuasiSeparated j ∧ ∀ {T : Scheme.{u}} (g : T ⟶ S), (∃ (h : T ⟶ Z), h ≫ j = g) ↔ ∃ (N : T.Modules) (_ : N.IsFiniteLocallyFree), Nonempty (((Scheme.Modules.pullback (pullback.fst f g)).obj E) ≅ ((Scheme.Modules.pullback (pullback.snd f g)).obj N))",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-pdl1230"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-pdl1230",
+  "group": "C1",
+  "result": "fix",
+  "note": "f flat/proper/LFP (proper gives qc+qs, so FP); hO = unit of pullback-pushforward adjunction at O_T for p=pullback.snd f g, all g; E finite locally free; q=pullback.fst, p=pullback.snd; FIX: j immersion of finite presentation now IsImmersion+LFP+QuasiCompact+QuasiSeparated (QC was dropped; downstream valuative criterion 943c44448 needs QuasiCompact j); factorization iff exists N finite locally free with q*E iso p*N"
  }
 }
