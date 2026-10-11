@@ -137,5 +137,23 @@
   "group": "J1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-fat2217 (reviewer sub-agent of L); spot-checked: Read Stacks 021V/021P against steps 1-4; open-cover leaf matches Scheme.affineOpenCover Open.lean:140; refinement node is a real lemma (021P), no DAG duplicate (only etale variant); no restatement of merged lem-pc-fppf-affine-sheafification-restriction or lem-pc-dense-subsite-sheafification-compatibility. FIX more, RETURN less: lem-pc-fppf-dense-sheaf-equivalence cited IsDenseSubsite.sheafEquiv (Basic.lean:797), which assumes [IsEquivalence (sheafPushforwardContinuous G A J K)], i.e. the very conclusion (C4/B leaf mismatch, missed by the second reading); repointed the leaf to the proved instance SheafEquiv.lean:107 and replaced the vague coefficient hypothesis by its actual one (limits of shape StructuredArrow X u^op, e.g. sets/abelian groups on small sites).; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FppfAffineSiteToposEquivalence",
+  "declaration": "AlgebraicGeometry.Scheme.fppf_affine_site_topos_equivalence",
+  "file": "lean/Sheaf/AlgebraicGeometry/FppfAffineSiteToposEquivalence.lean",
+  "statement": "theorem fppf_affine_site_topos_equivalence (S : Scheme.{u}) : (fun (G : CostructuredArrow Scheme.Spec S ⥤ Over S) (K : GrothendieckTopology (Over S)) (J : GrothendieckTopology (CostructuredArrow Scheme.Spec S)) ↦ G.IsDenseSubsite J K ∧ ∀ [h : G.IsDenseSubsite J K], (G.sheafPushforwardContinuous (Type (max u v)) J K).IsEquivalence ∧ (G.sheafPushforwardContinuous AddCommGrpCat.{max u v} J K).IsEquivalence) (CostructuredArrow.toOver Scheme.Spec S) (fppfTopology.over S) ((fppfPrecoverage.comap (CostructuredArrow.toOver Scheme.Spec S ⋙ Over.forget S)).toGrothendieck)",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-fat0905",
+  "group": "E1",
+  "result": "pass",
+  "note": "S arbitrary Scheme.{u}; D = Over S with fppfTopology.over S (Mathlib fppfPrecoverage.toGrothendieck, over-topology); C = CostructuredArrow Spec S (all affine S-schemes, unrestricted structure maps), J = toGrothendieck of fppfPrecoverage.comap along toOver⋙forget (Precoverage.comap = image presieve is fppf); density+refinement = IsDenseSubsite (cover-dense, locally full/faithful, functorPushforward_mem_iff) as conclusion; sets/abelian clause = IsEquivalence of sheafPushforwardContinuous (restriction G.op) for Type (max u v) and AddCommGrpCat; no Mathlib/WeilConjectures/proetale fppf-affine sheafEquiv instance (only AffineEtale, SmallAffineZariski, EtaleOver); consistent with merged lem-pc-fppf-affine-refinement fppfPrecoverage form"
  }
 }

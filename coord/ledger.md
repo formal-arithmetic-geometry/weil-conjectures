@@ -3590,3 +3590,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 07:00 L: merged deliver/H1/lem-pc-presheaf-change-of-rings-adjunction (stage 2; reviewer PASS; first push; Sheaf.CategoryTheory.PresheafChangeOfRingsAdjunction PresheafOfModules.changeOfRingsAdjunction)
 - 07:00 L: merged deliver/F1/lem-pc-derived-functor-commutes-derived-limit (stage 2; reviewer PASS; first push; Sheaf.CategoryTheory.Triangulated.DerivedFunctorDerivedLimit AlgebraicGeometry.Scheme.rightDerivedFunctor_isDerivedLimitTriangle)
 - 07:00 L: merged deliver/J1/lem-pc-kflat-hocolim-truncations (stage 2; reviewer PASS; first push; Sheaf.Algebra.Homology.TruncationTelescope CochainComplex.quasiIso_hocolim_truncLE_and_filtered_colimit)
+- 07:00 L: merged deliver/E1/lem-pc-fppf-affine-site-topos-equivalence (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.FppfAffineSiteToposEquivalence AlgebraicGeometry.Scheme.fppf_affine_site_topos_equivalence)
