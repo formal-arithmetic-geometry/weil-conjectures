@@ -250,5 +250,23 @@
   "by": "L",
   "result": "pass",
   "note": "Statement rewritten as a conditional (hypothesis (H) = lem-weil-pbc-finite-etale-lifting-approximation; the descent-of-isomorphisms clause dropped, unused by the parent); eight steps along the 'general case' paragraph of Stacks 0GS2: Noetherian approximation of the proper morphism (new node lem-weil-pbc-proper-limit-noetherian, Limits 0A0P with the affine clause from its proof), the ideals and the closed fibres as a limit (written out; Stacks says 'the same thing is true'), descent of V to a stage (tool use thm-pd-spreading-out, lem-weil-pbc-descend-finite, lem-weil-pbc-descend-etale), the henselization of the stage (lem-weil-pbc-pair-henselization; new nodes lem-weil-pbc-finite-type-z-g-ring (07PX (3),(5)), lem-weil-pbc-henselization-pair-g-ring (0AH3), lem-weil-pbc-henselization-colimit (0A04 with the left-adjoint property of 0A02, which lem-weil-pbc-pair-henselization dropped as clause (4): the adjoint clause now lives in this node)), the lift at the stage by (H), base change to Y, the closed fibre by pasting. Cites lem-weil-pbc-proper-base-change (imported, not flagged) and pqf-def-affine-morphism (imported)."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FiniteEtaleLiftingLimitDescent",
+  "declaration": "AlgebraicGeometry.Scheme.exists_finiteEtale_lift_of_henselianPair_of_gRing_lifting",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteEtaleLiftingLimitDescent.lean",
+  "statement": "theorem exists_finiteEtale_lift_of_henselianPair_of_gRing_lifting (H : ∀ (B : Type u) [CommRing B], IsGRing B → ∀ (J : Ideal B) [HenselianRing B J] (Z : Scheme.{u}) (g : Z ⟶ Spec (.of B)) [IsProper g] (W : (@IsFinite ⊓ @Etale : MorphismProperty Scheme.{u}).Over ⊤ (pullback g (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk J))))), ∃ U' : (@IsFinite ⊓ @Etale : MorphismProperty Scheme.{u}).Over ⊤ Z, Nonempty (Over.mk (pullback.snd U'.hom (pullback.fst g (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk J))))) ≅ Over.mk W.hom)) {A : Type u} [CommRing A] (I : Ideal A) [HenselianRing A I] {Y : Scheme.{u}} (f : Y ⟶ Spec (.of A)) [IsProper f] (V : (@IsFinite ⊓ @Etale : MorphismProperty Scheme.{u}).Over ⊤ (pullback f (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk I))))) : ∃ U : (@IsFinite ⊓ @Etale : MorphismProperty Scheme.{u}).Over ⊤ Y, Nonempty (Over.mk (pullback.snd U.hom (pullback.fst f (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk I))))) ≅ Over.mk V.hom)",
+  "branch": "sheaf-dag",
+  "by": "J1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-fll1027",
+  "group": "J1",
+  "result": "pass",
+  "note": "H = approximation theorem verbatim over B:Type u (checked: landed exists_finiteEtale_lift_of_henselianPair_of_isGRing instantiates H); arbitrary (A,I) HenselianRing, no G-ring/Noetherian on A; IsProper f; Y0 = pullback f (Spec.map (ofHom (Quotient.mk I))); V in (IsFinite⊓Etale).Over ⊤ Y0; conclusion U with Over-iso pullback.snd U.hom (pullback.fst f _) ≅ V.hom; IsGRing/HenselianRing #check root namespace"
  }
 }
