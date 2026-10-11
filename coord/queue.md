@@ -1,11 +1,11 @@
 # Work queue
 
-391 items; claim with `tools/claim.py next <group> [--stage N]`.
+387 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (391)
+## Stage 2: nodes to state (387)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -14,11 +14,8 @@
 | `lem-pc-derived-qcoh-perfect-generation` | 1 | state |
 | `lem-pc-derived-tensor-transitivity` | 1 | state |
 | `lem-pc-module-pullback-identity-composition` | 1 | state |
-| `lem-pc-perfect-affine-bounded-projective` | 1 | state |
 | `lem-pc-perfect-complex-descent` | 1 | state |
 | `lem-pc-perfect-descend-morphisms` | 1 | state |
-| `lem-pc-perfect-generation-koszul-orthogonal` | 1 | state |
-| `lem-pc-perfect-generation-open-induction-step` | 1 | state |
 | `lem-pc-perfect-generator-pullback` | 1 | state |
 | `lem-pc-perfect-pseudo-coherent-locally-finite-tor` | 1 | state |
 | `lem-pc-perfect-tensor-hom-duality` | 1 | state |
@@ -29,7 +26,6 @@
 | `lem-sc-affine-perfect-koszul-principal-unit` | 1 | state |
 | `lem-sc-affine-perfect-map-lift` | 1 | state |
 | `lem-sc-affine-perfect-open-represent-cohomology` | 1 | state |
-| `lem-sc-affine-perfect-plus-locally-free` | 1 | state |
 | `lem-sc-affine-perfect-plus-shift` | 1 | state |
 | `lem-sc-affine-perfect-support-extension` | 1 | state |
 | `lem-sc-affine-support-iterated-cones` | 1 | state |
