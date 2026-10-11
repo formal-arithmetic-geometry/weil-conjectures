@@ -1,18 +1,18 @@
 # Work queue
 
-39 items; claim with `tools/claim.py next <group> [--stage N]`.
+35 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (39)
+## Stage 2: nodes to state (35)
 
 | node | distance to Mathlib | kind | blockers |
 |---|---|---|---|
-| `def-nagata-qc-open-equality-stage` | 1 | state | 13 |
+| `def-nagata-morphism-equality-stage` | 1 | state | 11 |
+| `lemma-nagata-qc-open-eq-eventually` | 3 | state | 10 |
 | `lem-sc-topological-extension-by-zero-stalks` | 1 | state | 2 |
 | `lem-sc-boundary-cech-injective-middle` | 1 | state | 1 |
-| `lem-weil-pbc-colimit-of-sites-sections` | 1 | state | 1 |
 | `cor-galois-lisse-representations` | 1 | state | 0 |
 | `lem-pc-affine-morphism-hom-out-of-perfect` | 1 | state | 0 |
 | `lem-pc-global-hom-pullback-adjunction` | 1 | state | 0 |
@@ -21,7 +21,6 @@
 | `lem-sc-boundary-cech-local-lifts` | 1 | state | 0 |
 | `lem-sc-cech-comparison-map-iso-affine` | 1 | state | 0 |
 | `lem-sc-cech-h1-injective` | 1 | state | 0 |
-| `lem-sc-closed-pushforward-abelian-stalks` | 1 | state | 0 |
 | `lem-sc-closed-pushforward-boundary-naturality` | 1 | state | 0 |
 | `lem-sc-finite-pushforward-derived-hom-qcoherent` | 1 | state | 0 |
 | `lem-sc-flat-precompose-pus` | 1 | state | 0 |
@@ -34,22 +33,19 @@
 | `lem-sc-support-dimension-cohomology-vanishing` | 1 | state | 0 |
 | `lem-sc-zariski-contracted-power-extension` | 1 | state | 0 |
 | `lem-weil-pbc-cohomology-colimit-of-sites` | 1 | state | 0 |
+| `lem-weil-pbc-colimit-of-sites-cech-complex` | 1 | state | 0 |
 | `lem-weil-pbc-colimit-of-sites-injective-system` | 1 | state | 0 |
 | `lem-weil-pbc-etale-mayer-vietoris-pullback` | 1 | state | 0 |
-| `lem-weil-pbc-gabber-strict-henselian-zariski-comparison` | 1 | state | 0 |
 | `lem-weil-pbc-hypercover-free-resolution` | 1 | state | 0 |
 | `lem-weil-pbc-hypercover-product` | 1 | state | 0 |
 | `lem-weil-pbc-hypercover-refinement` | 1 | state | 0 |
 | `lem-weil-pbc-matching-object-fibre-product` | 1 | state | 0 |
-| `lem-weil-pbc-module-injective-open-cover-cech-acyclic` | 1 | state | 0 |
-| `lem-weil-pbc-spectral-finite-coequalizer-embeds-constant` | 1 | state | 0 |
 | `lem-weil-pbc-sr-matching-object-one-member` | 1 | state | 0 |
 | `lemma-weil-pbc-finite-hypercover-descent` | 1 | state | 0 |
 | `thm-weil-pbc-hypercover-cohomology` | 1 | state | 0 |
 | `lem-sc-p1-proj-shifted-free-twist` | 2 | state | 0 |
-| `lem-sc-topological-flasque-acyclic` | 2 | state | 0 |
 
-Not open yet: 40 nodes that wait for stage 1, 15 nodes that wait for a statement dependency.
+Not open yet: 40 nodes that wait for stage 1, 12 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
