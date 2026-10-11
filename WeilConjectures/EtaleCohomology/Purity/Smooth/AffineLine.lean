@@ -52,11 +52,12 @@ transported along the identification of the zero section with `V(t)`.
 
 Two clauses of the blueprint are stated only in part, and are TODOs.
 
-* The Kummer class `κ(t) ∈ H¹(𝔾_{m,Y}, Λ(1))` generating `R¹π_*Λ(1)` is not named — the sheaf
-  of roots of unity and the Kummer sequence are the Kummer block's — so `sk-prop-a1-kummer`
-  is recorded as what the cohomology sheaves *are* rather than as a statement about the
-  generator, and `sk-prop-a1` correspondingly records only that `Rs^!Λ(1)[2] ≅ Λ_Y`, not that
-  the boundary of `κ(t)` is that isomorphism.
+* `sk-prop-a1-kummer` is recorded as what the cohomology sheaves *are* rather than as a
+  statement about the generator `κ(t)` of `R¹π_*Λ(1)`. Here `sk-prop-a1` records that
+  `Rs^!Λ(1)[2] ≅ Λ_Y`; that the boundary `∂κ(t)` of the Kummer class
+  (`AlgebraicGeometry.Etale.kummerBoundary`) is this isomorphism is the orientation
+  `AlgebraicGeometry.Etale.affineLineOrientation` of
+  `WeilConjectures.EtaleCohomology.Purity.Smooth.Orientation`.
 * Of `sk-prop-a1-inv` (ii) only the uniqueness half is stated; the gluing half — that
   normalized local comparisons over an étale cover of `Y` glue — needs a formalisation of
   étale-local data on `Y` that this file does not set up.
@@ -158,7 +159,13 @@ subscheme `V(t)` cut out by the coordinate
 (`AlgebraicGeometry.AffineSpace.zeroSectionIsoZeroLocusSubscheme`), and the adjoint of the
 Kummer boundary `∂κ(t)` is an isomorphism `Λ_{V(t)} ≅ Rs^! Λ(1)[2]`. The blueprint proves the
 normalisation for the concrete twist by applying `Rp_*` to the localization triangle of the
-closed–open pair `(s, j)` and reading off the long exact sequence with `sk-prop-a1-kummer`. -/
+closed–open pair `(s, j)` and reading off the long exact sequence with `sk-prop-a1-kummer`.
+
+The orientation itself, `1 ↦ ∂κ(t)`, is `AlgebraicGeometry.Etale.affineLineOrientation`; that
+it is an isomorphism is `AlgebraicGeometry.Etale.isIso_affineLineOrientation`, the
+identification of `Hom(Λ_Y, Rs^! Λ(1)[2])` with `H²_{s(Y)}(𝔸¹_Y, Λ(1))` is
+`AlgebraicGeometry.Etale.supportedClassMap_bijective`, and its uniqueness is
+`AlgebraicGeometry.Etale.affineLineOrientation_hom_ext`. -/
 theorem nonempty_iso_rightDerivedUpperShriek_affineLineZero [HasTateTwist.IsNormalized Λ] :
     Nonempty ((rightDerivedUpperShriek (ModuleCat.{u + 1} Λ)
           (AffineSpace.zeroSection (ULift.{u} (Fin 1)) Y)).obj
