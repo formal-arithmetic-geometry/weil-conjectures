@@ -226,3 +226,58 @@ lemma derivedCompletionCone_π_app_naturality
 end Reduction'
 
 end DerivedCategory
+
+namespace CochainComplex.IsNormalizedAdicTower
+
+open ConeCoimage
+
+variable {R : Type*} [Ring R] {𝒜 : Type*} [Category 𝒜] [Abelian 𝒜] [Linear R 𝒜]
+  {ϖ : R} {T : ℕᵒᵖ ⥤ CochainComplex 𝒜 ℤ}
+
+lemma mappingCone_hom_ext {F G Z : CochainComplex 𝒜 ℤ} {φ : F ⟶ G}
+    {a b : mappingCone φ ⟶ Z}
+    (h₁ : ∀ p q (hpq : p + (-1) = q),
+      (mappingCone.inl φ).v p q hpq ≫ a.f q = (mappingCone.inl φ).v p q hpq ≫ b.f q)
+    (h₂ : mappingCone.inr φ ≫ a = mappingCone.inr φ ≫ b) : a = b := by
+  ext j
+  refine mappingCone.ext_from φ (j + 1) j rfl (h₁ _ _ _) ?_
+  rw [← HomologicalComplex.comp_f, h₂, HomologicalComplex.comp_f]
+
+lemma smul_comp_map_eq_zero (hT : IsNormalizedAdicTower ϖ T) {k n N : ℕ} (hk : k ≤ n)
+    (hN : k ≤ N) : (ϖ ^ n • 𝟙 (T.obj (op N))) ≫ T.map (homOfLE hN).op = 0 := by
+  rw [Linear.smul_comp, id_comp, ← comp_id (T.map _), ← Linear.comp_smul,
+    show ϖ ^ n = ϖ ^ (n - k) * ϖ ^ k by rw [← pow_add, Nat.sub_add_cancel hk], ← smul_smul,
+    hT.smul_eq_zero, smul_zero, comp_zero]
+
+/-- The map `cone(ϖⁿ on T_N) ⟶ T_k`, for `k ≤ n` and `k ≤ N`, which vanishes on the shifted copy
+of `T_N` and is the transition on the other one. -/
+noncomputable def coneToLevel (hT : IsNormalizedAdicTower ϖ T) {k n N : ℕ} (hk : k ≤ n)
+    (hN : k ≤ N) : mappingCone (ϖ ^ n • 𝟙 (T.obj (op N))) ⟶ T.obj (op k) :=
+  mappingCone.desc _ 0 (T.map (homOfLE hN).op) (by
+    simp [hT.smul_comp_map_eq_zero hk hN])
+
+@[reassoc (attr := simp)]
+lemma inr_coneToLevel (hT : IsNormalizedAdicTower ϖ T) {k n N : ℕ} (hk : k ≤ n) (hN : k ≤ N) :
+    mappingCone.inr _ ≫ hT.coneToLevel hk hN = T.map (homOfLE hN).op := by
+  simp [coneToLevel]
+
+@[reassoc (attr := simp)]
+lemma inl_v_coneToLevel_f (hT : IsNormalizedAdicTower ϖ T) {k n N : ℕ} (hk : k ≤ n)
+    (hN : k ≤ N) (p q : ℤ) (hpq : p + (-1) = q) :
+    (mappingCone.inl (ϖ ^ n • 𝟙 (T.obj (op N)))).v p q hpq ≫ (hT.coneToLevel hk hN).f q = 0 := by
+  simp [coneToLevel]
+
+lemma ρ_desc_cokerIso_hom (hT : IsNormalizedAdicTower ϖ T) (n : ℕ) :
+    ρ.app _ ≫ desc.app _ ≫ (hT.cokerIso n (op 0)).hom =
+      hT.coneToLevel (k := n) (n := n) (N := 0 + n) le_rfl (by omega) := by
+  refine mappingCone_hom_ext (fun p q hpq ↦ ?_) ?_
+  · simp only [HomologicalComplex.comp_f]
+    rw [← assoc, inl_v_ρ_app_f, assoc]
+    simp only [desc_app, mappingCone.descShortComplex]
+    erw [mappingCone.inl_v_desc_f_assoc]
+    simp
+  · erw [inr_coneToLevel, reassoc_of% (inr_ρ_desc ((arrowTower (ϖ := ϖ) (T := T) n).obj (op 0))),
+      π_cokerIso_hom]
+    rfl
+
+end CochainComplex.IsNormalizedAdicTower
