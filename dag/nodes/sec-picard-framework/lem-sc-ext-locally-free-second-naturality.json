@@ -175,5 +175,22 @@
   "group": "E1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-eln1753 (reviewer sub-agent of L); spot-checked: Checked statements of lem-sc-ext-derived-composite-natural, lem-sc-acyclic-comparison-natural, lem-sc-ext-locally-free (and its construction), lem-sc-ext-derived-composite, lem-weil-pbc-ext-via-injective-resolution, lemma-weil-pbc-leray-acyclicity. FIX more, RETURN less: (1) C4 Step 3: lem-sc-ext-derived-composite-natural is naturality in a transformation alpha:T->T' at one fixed object M, so 'T=T', alpha with component 1 tensor phi' is ill-typed (1 tensor phi goes between different objects); replaced by lem-sc-acyclic-comparison-natural with v=Gamma, r=T(eps), r'=T(eps'), h=1 tensor phi, morphism T(psi). (2) C1: the lift psi of phi to injective resolutions and the correspondence Ext(F,phi) <-> H^i Hom(F,psi) were asserted; added as elementary Step 3 from the explicit formula of lem-weil-pbc-ext-via-injective-resolution. (3) C5: Gamma-acyclicity of T(I) and exactness of T were taken from lem-sc-ext-locally-free's proof; now a cited step, and the enough-injectives node the second reading claimed to add (absent at b58fd40e6) is cited in Step 1. Tool uses (generic, C7/C8, both already used by lem-sc-ext-locally-free): lem-weil-pbc-scheme-modules-enough-injectives (Mod(O_X) has enough injectives), lem-weil-pbc-module-tensor-hom-adjunction (tensor-Hom adjunction). proof_deps recomputed.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.LocallyFreeExtSecondNaturality",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.locallyFreeExtAddEquivH_second_naturality",
+  "file": "lean/Sheaf/AlgebraicGeometry/LocallyFreeExtSecondNaturality.lean",
+  "statement": "theorem locallyFreeExtAddEquivH_second_naturality {X : Scheme.{u}} [HasExt.{u} X.Modules] (F G G' : X.Modules) [F.IsFiniteLocallyFree] (φ : G ⟶ G') (i : ℕ) (z : Ext F G i) : locallyFreeExtAddEquivH F G' i (z.comp (Abelian.Ext.mk₀ φ) (Nat.add_zero i)) = H.map (Fᵛ ◁ φ) i (locallyFreeExtAddEquivH F G i z)",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-eln",
+  "group": "E1",
+  "result": "pass"
  }
 }
