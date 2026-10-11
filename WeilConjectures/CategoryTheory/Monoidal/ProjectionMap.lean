@@ -180,8 +180,10 @@ section Composite
 
 variable {CX CZ CY : Type*} [Category* CX] [Category* CZ] [Category* CY] [MonoidalCategory CX]
   [MonoidalCategory CZ] [MonoidalCategory CY] {I : CX ⥤ CZ} {R : CZ ⥤ CY}
-  {Pi : CZ ⥤ CX} {Pg : CY ⥤ CZ} {Pf : CY ⥤ CX} [Pi.OplaxMonoidal] [Pg.OplaxMonoidal]
-  [Pf.OplaxMonoidal] (e : Pg ⋙ Pi ≅ Pf)
+  {Pi : CZ ⥤ CX} {Pg : CY ⥤ CZ} {Pf : CY ⥤ CX} (e : Pg ⋙ Pi ≅ Pf)
+  {δi : ∀ M M', Pi.obj (M ⊗ M') ⟶ Pi.obj M ⊗ Pi.obj M'}
+  {δg : ∀ L L', Pg.obj (L ⊗ L') ⟶ Pg.obj L ⊗ Pg.obj L'}
+  {δf : ∀ L L', Pf.obj (L ⊗ L') ⟶ Pf.obj L ⊗ Pf.obj L'}
   (πg : ∀ M L, R.obj M ⊗ L ⟶ R.obj (M ⊗ Pg.obj L))
   (q : ∀ K M, I.obj K ⊗ M ⟶ I.obj (K ⊗ Pi.obj M))
 
@@ -194,25 +196,25 @@ variable {e πg q}
 
 /-- **Associativity of a composite projection map.** Let `πg : R M ⊗ L ⟶ R (M ⊗ P_g L)` and
 `q : I K ⊗ M ⟶ I (K ⊗ P_i M)` be natural projection maps satisfying the associativity laws for
-`δ P_g` and `δ P_i`, and let `e : P_g ⋙ P_i ≅ P_f` be compatible with the comonoidal
-structures. Then the composite projection map `R (I K) ⊗ L ⟶ R (I (K ⊗ P_f L))` satisfies the
-associativity law for `δ P_f`. -/
+comparisons `δg : P_g (L ⊗ L') ⟶ P_g L ⊗ P_g L'` and `δi`, and let `e : P_g ⋙ P_i ≅ P_f` carry
+`δg` and `δi` to a comparison `δf` for `P_f`. Then the composite projection map
+`R (I K) ⊗ L ⟶ R (I (K ⊗ P_f L))` satisfies the associativity law for `δf`. -/
 lemma compProjectionMap_assoc
-    (he : ∀ L L', e.hom.app (L ⊗ L') ≫ δ Pf L L' =
-      Pi.map (δ Pg L L') ≫ δ Pi (Pg.obj L) (Pg.obj L') ≫ (e.hom.app L ⊗ₘ e.hom.app L'))
+    (he : ∀ L L', e.hom.app (L ⊗ L') ≫ δf L L' =
+      Pi.map (δg L L') ≫ δi (Pg.obj L) (Pg.obj L') ≫ (e.hom.app L ⊗ₘ e.hom.app L'))
     (hπnat : ∀ {M M'} (f : M ⟶ M') L, R.map f ▷ L ≫ πg M' L = πg M L ≫ R.map (f ▷ Pg.obj L))
     (hπ : ∀ M L L', πg M L ▷ L' ≫ πg (M ⊗ Pg.obj L) L' ≫ R.map (α_ M (Pg.obj L) (Pg.obj L')).hom =
-      (α_ (R.obj M) L L').hom ≫ πg M (L ⊗ L') ≫ R.map (M ◁ δ Pg L L'))
+      (α_ (R.obj M) L L').hom ≫ πg M (L ⊗ L') ≫ R.map (M ◁ δg L L'))
     (hqnat₁ : ∀ {K K'} (f : K ⟶ K') M, I.map f ▷ M ≫ q K' M = q K M ≫ I.map (f ▷ Pi.obj M))
     (hqnat₂ : ∀ K {M M'} (g : M ⟶ M'), I.obj K ◁ g ≫ q K M' = q K M ≫ I.map (K ◁ Pi.map g))
-    (hq : ∀ K M M', q K (M ⊗ M') ≫ I.map (K ◁ δ Pi M M') =
+    (hq : ∀ K M M', q K (M ⊗ M') ≫ I.map (K ◁ δi M M') =
       (α_ (I.obj K) M M').inv ≫ q K M ▷ M' ≫ q (K ⊗ Pi.obj M) M' ≫
         I.map (α_ K (Pi.obj M) (Pi.obj M')).hom)
     (K : CX) (L L' : CY) :
     compProjectionMap e πg q K L ▷ L' ≫ compProjectionMap e πg q (K ⊗ Pf.obj L) L' ≫
         R.map (I.map (α_ K (Pf.obj L) (Pf.obj L')).hom) =
       (α_ (R.obj (I.obj K)) L L').hom ≫ compProjectionMap e πg q K (L ⊗ L') ≫
-        R.map (I.map (K ◁ δ Pf L L')) := by
+        R.map (I.map (K ◁ δf L L')) := by
   dsimp only [compProjectionMap]
   have h₂ : q K (Pg.obj L) ▷ Pg.obj L' ≫ I.map (K ◁ e.hom.app L) ▷ Pg.obj L' ≫
       q (K ⊗ Pf.obj L) (Pg.obj L') ≫ I.map ((K ⊗ Pf.obj L) ◁ e.hom.app L') ≫
@@ -224,18 +226,18 @@ lemma compProjectionMap_assoc
       ← I.map_comp]
     congr 3
     simp [tensorHom_def]
-  have h₃ := hqnat₂ K (δ Pg L L')
+  have h₃ := hqnat₂ K (δg L L')
   have h₄ := hq K (Pg.obj L) (Pg.obj L')
   have h₅ := he L L'
   simp only [comp_whiskerRight, assoc, ← R.map_comp]
   have hπ' : πg (I.obj K) L ▷ L' ≫ πg (I.obj K ⊗ Pg.obj L) L' = (α_ _ _ _).hom ≫
-      πg (I.obj K) (L ⊗ L') ≫ R.map (I.obj K ◁ δ Pg L L') ≫ R.map (α_ _ _ _).inv := by
+      πg (I.obj K) (L ⊗ L') ≫ R.map (I.obj K ◁ δg L L') ≫ R.map (α_ _ _ _).inv := by
     rw [← reassoc_of% (hπ (I.obj K) L L'), ← R.map_comp, Iso.hom_inv_id, R.map_id, comp_id]
   rw [reassoc_of% (hπnat (q K (Pg.obj L) ≫ I.map (K ◁ e.hom.app L)) L'), reassoc_of% hπ']
   simp only [← R.map_comp]
   congr 3
-  have h₆ : I.map (K ◁ e.hom.app (L ⊗ L')) ≫ I.map (K ◁ δ Pf L L') =
-      I.map (K ◁ Pi.map (δ Pg L L')) ≫ I.map (K ◁ δ Pi (Pg.obj L) (Pg.obj L')) ≫
+  have h₆ : I.map (K ◁ e.hom.app (L ⊗ L')) ≫ I.map (K ◁ δf L L') =
+      I.map (K ◁ Pi.map (δg L L')) ≫ I.map (K ◁ δi (Pg.obj L) (Pg.obj L')) ≫
         I.map (K ◁ (e.hom.app L ⊗ₘ e.hom.app L')) := by
     rw [← I.map_comp, ← MonoidalCategory.whiskerLeft_comp, h₅]
     simp only [MonoidalCategory.whiskerLeft_comp, I.map_comp]
