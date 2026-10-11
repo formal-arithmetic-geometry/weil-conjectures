@@ -214,8 +214,44 @@ theorem etaleOrigin_of_shortExact {X : Scheme.{u}}
     {S : ShortComplex (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} Λ))} (hS : S.ShortExact)
     (h₁ : etaleOrigin (ModuleCat.{u + 1} Λ) X S.X₁)
     (h₃ : etaleOrigin (ModuleCat.{u + 1} Λ) X S.X₃) :
-    etaleOrigin (ModuleCat.{u + 1} Λ) X S.X₂ :=
-  sorry
+    etaleOrigin (ModuleCat.{u + 1} Λ) X S.X₂ := by
+  obtain ⟨G₁, ⟨e₁⟩⟩ := h₁
+  obtain ⟨G₃, ⟨e₃⟩⟩ := h₃
+  let F := comparisonUpperStar (ModuleCat.{u + 1} Λ) X
+  let α₁ : F.mapDerivedCategory.obj ((DerivedCategory.singleFunctor _ 0).obj G₁) ≅
+      (DerivedCategory.singleFunctor _ 0).obj S.X₁ :=
+    (F.mapDerivedCategorySingleFunctor 0).app G₁ ≪≫ (DerivedCategory.singleFunctor _ 0).mapIso e₁
+  let α₃ : F.mapDerivedCategory.obj ((DerivedCategory.singleFunctor _ 0).obj G₃) ≅
+      (DerivedCategory.singleFunctor _ 0).obj S.X₃ :=
+    (F.mapDerivedCategorySingleFunctor 0).app G₃ ≪≫ (DerivedCategory.singleFunctor _ 0).mapIso e₃
+  have hplus : DerivedCategory.TStructure.t.plus
+      (((DerivedCategory.singleFunctor _ 0).obj G₁)⟦(1 : ℤ)⟧) :=
+    ⟨-1, DerivedCategory.TStructure.t.isGE_shift _ 0 1 (-1)⟩
+  obtain ⟨δ, hδ : F.mapDerivedCategory.map δ = _⟩ :=
+    (bijective_comparisonUpperStar_mapDerivedCategory_map _ _ hplus).2
+      (α₃.hom ≫ hS.singleTriangle.mor₃ ≫ α₁.inv⟦(1 : ℤ)⟧' ≫
+        (F.mapDerivedCategory.commShiftIso (1 : ℤ)).inv.app _)
+  obtain ⟨C, f, g, hT⟩ := Pretriangulated.distinguished_cocone_triangle₂ δ
+  have hcomm : (F.mapDerivedCategory.map δ ≫
+      (F.mapDerivedCategory.commShiftIso (1 : ℤ)).hom.app _) ≫ α₁.hom⟦(1 : ℤ)⟧' =
+      α₃.hom ≫ hS.singleTriangle.mor₃ := by
+    rw [hδ]
+    simp [← Functor.map_comp]
+  let e₂ := Pretriangulated.Triangle.π₂.mapIso (Pretriangulated.isoTriangleOfIso₁₃ _ _
+    (F.mapDerivedCategory.map_distinguished _ hT) hS.singleTriangle_distinguished α₁ α₃ hcomm)
+  have hC (n : ℤ) (hn : IsZero ((DerivedCategory.homologyFunctor _ n).obj
+      ((DerivedCategory.singleFunctor _ 0).obj S.X₂))) :
+      IsZero ((DerivedCategory.homologyFunctor _ n).obj C) :=
+    F.isZero_homologyFunctor_of_isZero_homologyFunctor_mapDerivedCategory_obj
+      (hn.of_iso ((DerivedCategory.homologyFunctor _ n).mapIso e₂))
+  have : C.IsGE 0 := (DerivedCategory.isGE_iff C 0).2 fun i hi ↦
+    hC i (DerivedCategory.isZero_of_isGE _ 0 i hi)
+  have : C.IsLE 0 := (DerivedCategory.isLE_iff C 0).2 fun i hi ↦
+    hC i (DerivedCategory.isZero_of_isLE _ 0 i hi)
+  obtain ⟨E, ⟨eE⟩⟩ := DerivedCategory.exists_iso_singleFunctor_obj_of_isGE_of_isLE C 0
+  exact ⟨E, ⟨(DerivedCategory.singleFunctor _ 0).preimageIso
+    (((F.mapDerivedCategorySingleFunctor 0).app E).symm ≪≫
+      F.mapDerivedCategory.mapIso eE.symm ≪≫ e₂)⟩⟩
 
 variable [Finite Λ] {k : Type u} [Field k] [IsSepClosed k] {X Y : Scheme.{u}} (p : X ⟶ Y)
   [IsProper p] (aX : X ⟶ Spec (.of k)) (aY : Y ⟶ Spec (.of k)) [LocallyOfFiniteType aX]
