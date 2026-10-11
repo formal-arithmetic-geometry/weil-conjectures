@@ -77,8 +77,10 @@ The blueprint's "étale-origin witnesses" are explicit: at the finite stages the
 constructibility is étale origin); at the `ℓ`-adic stages they are isomorphisms `ν^* K₀ ≅ K` with
 `K₀` a bounded constructible, derived complete étale complex of finite Tor amplitude. As in the
 étale model (`WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormula.Rational`), the stage
-`ℚ̄_ℓ` is covered through the finite stages `E` at which its objects are represented: the
-`2`-colimit over `E` and the scalar extensions `E ⟶ E'` are not constructed in the repository.
+`ℚ̄_ℓ` is covered through the finite stages `E` at which its objects are represented. The
+compatibility with the scalar extensions `𝒪_E ⟶ 𝒪_{E'}` (the projection map over `E'` at scalar
+extensions of `𝒪_E`-objects is an isomorphism) is
+`WeilConjectures.SixFunctors.ProEtale.Derived.ProjectionFormulaExtendScalars`.
 The statement cannot be made directly with the discrete coefficients
 `AlgebraicGeometry.WeilCoefficients` (`ℚ̄_ℓ`-modules): there `ν^*` commutes with `Rg_*` on
 bounded below complexes, so the projection formula for objects of étale origin would be the
