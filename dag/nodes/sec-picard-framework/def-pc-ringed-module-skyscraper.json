@@ -1,0 +1,151 @@
+{
+ "id": "def-pc-ringed-module-skyscraper",
+ "kind": "definition",
+ "title": "Skyscraper functor for modules on a ringed space",
+ "status": "split",
+ "statement": "Let $(X,\\mathcal O_X)$ be a ringed space (a topological space with a sheaf of commutative rings $\\mathcal O_X$ on its site of opens), and $x\\in X$, with stalk ring $\\mathcal O_{X,x}$ [def-pc-module-stalk-functor]. For an $\\mathcal O_{X,x}$-module $M$, define $i_{x,*}M$ in $\\Mod(\\mathcal O_X)$ [def-weil-sheaf-of-modules-category] by $(i_{x,*}M)(U)=M$ if $x\\in U$, and $0$ otherwise. Sections are equivalently functions from the proposition $x\\in U$ to $M$; restrictions are precomposition with the inclusion of membership proofs. A scalar $a\\in\\mathcal O_X(U)$ acts by its germ at $x$ whenever $x\\in U$. Module morphisms act pointwise on sections. This defines an additive functor, extended termwise to cochain complexes [def-pc-cochain-complex-modules].",
+ "stmt_deps": [
+  "def-pc-module-stalk-functor",
+  "def-weil-sheaf-of-modules-category",
+  "def-pc-cochain-complex-modules"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sheaves.tex",
+  "place": "Tag 009A (definition-skyscraper-sheaf), case (4); termwise extension"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "skyscraper sheaf of modules on ringed space stalk acyclic cochain complex",
+   "results": "8 hits: CategoryTheory.Sheaf.H, CochainComplex.isKInjective_of_injective, skyscraperSheaf, DerivedCategory.to_singleFunctor_obj_eq_zero_of_injective, CochainComplex.IsKInjective, CochainComplex.cm5b.instInjectiveXIntI, CochainComplex.cm5b.instIsStrictlyGEI, CochainComplex.cm5b.I",
+   "date": "2026-10-11",
+   "verdict": "No exact general ringed-space module construction or skyscraper-complex theorem; generic categorical or specialized scheme results only."
+  },
+  {
+   "tool": "loogle",
+   "query": "TopCat.skyscraperSheafFunctor, HomologicalComplex.Acyclic",
+   "results": "loogle: unknown identifier 'TopCat.skyscraperSheafFunctor'",
+   "date": "2026-10-11",
+   "verdict": "No exact general ringed-space module construction or skyscraper-complex theorem; generic categorical or specialized scheme results only."
+  },
+  {
+   "tool": "grep",
+   "query": "skyscraper|Skyscraper",
+   "results": "0 hits: ",
+   "date": "2026-10-11",
+   "verdict": "No exact general ringed-space module construction or skyscraper-complex theorem; generic categorical or specialized scheme results only."
+  },
+  {
+   "tool": "leansearch",
+   "query": "skyscraper complex sheaf of modules and stalk complex ringed topological space",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "stalk functor sheaves of modules over sheaf of rings on topological space",
+   "results": "8 hits: ModuleCat.Tilde.toStalk, ModuleCat.Tilde.stalkToFiberLinearMap, ModuleCat.Tilde.stalkIso_hom, smoothSheafCommRing.forgetStalk, ModuleCat.Tilde.stalkToFiberLinearMap_germ, TopCat.Presheaf.algebra_section_stalk, ModuleCat.Tilde.stalkToFiberLinearMap_toStalk, ModuleCat.Tilde.localizationToStalk",
+   "date": "2026-10-11",
+   "verdict": "No exact general ringed-space module construction or skyscraper-complex theorem; generic categorical or specialized scheme results only."
+  },
+  {
+   "tool": "grep",
+   "query": "stalkFunctor|skyscraper",
+   "results": "0 hits: ",
+   "date": "2026-10-11",
+   "verdict": "No exact general ringed-space module construction or skyscraper-complex theorem; generic categorical or specialized scheme results only."
+  },
+  {
+   "tool": "grep",
+   "query": "skyscraper.*(acyclic|complex)|stalk.*skyscraper|skyscraper.*stalk",
+   "results": "5 hits: Mathlib/Topology/Sheaves/Skyscraper.lean, Mathlib/Topology/Sheaves/Skyscraper.lean, Mathlib/Topology/Sheaves/Skyscraper.lean, Mathlib/Topology/Sheaves/Skyscraper.lean, Mathlib/Topology/Sheaves/Skyscraper.lean",
+   "date": "2026-10-11",
+   "verdict": "No exact general ringed-space module construction or skyscraper-complex theorem; generic categorical or specialized scheme results only."
+  },
+  {
+   "tool": "loogle",
+   "query": "HomologicalComplex.Acyclic",
+   "results": "12 hits: HomologicalComplex.Acyclic, HomologicalComplex.acyclic_iff, HomologicalComplex.acyclic_of_isZero, HomotopyCategory.quotient_obj_mem_subcategoryAcyclic_iff_acyclic, HomologicalComplex.Acyclic.op, HomologicalComplex.acyclic_op_iff, HomologicalComplex.Acyclic.unop, HomologicalComplex.Acyclic.truncGE",
+   "date": "2026-10-11",
+   "verdict": "No exact general ringed-space module construction or skyscraper-complex theorem; generic categorical or specialized scheme results only."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-pc-skyscraper-complex",
+  "date": "2026-10-11",
+  "group": "C1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "the derived pullback composition proof needs the converse stalk test for K-flatness, using skyscraper complexes to test arbitrary stalk complexes",
+   "via": [
+    "lem-pc-skyscraper-complex",
+    "lem-pc-kflat-stalk-criterion",
+    "lem-pc-kflat-pullback-preservation",
+    "lem-pc-ringed-spaces-derived-pullback-composition",
+    "lem-pc-proper-derived-direct-image-composition",
+    "lem-sc-proper-upper-shriek-composition",
+    "lem-sc-finite-duality-trace"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "module": "Sheaf.Topology.RingedModuleSkyscraper",
+  "declaration": "SheafOfModules.ringedModuleSkyscraperFunctor",
+  "declarations": [
+   "SheafOfModules.RingedSkyscraperSections",
+   "SheafOfModules.ringedSkyscraperSectionsModule",
+   "SheafOfModules.ringedSkyscraperPresheafAb",
+   "SheafOfModules.ringedSkyscraperPresheafAb_module",
+   "SheafOfModules.ringedSkyscraperPresheafAb_smul",
+   "SheafOfModules.ringedSkyscraperPresheafAb_isSheaf",
+   "SheafOfModules.ringedModuleSkyscraper",
+   "SheafOfModules.ringedModuleSkyscraperMap",
+   "SheafOfModules.ringedModuleSkyscraperMap_id",
+   "SheafOfModules.ringedModuleSkyscraperMap_comp",
+   "SheafOfModules.ringedModuleSkyscraperFunctor",
+   "SheafOfModules.ringedModuleSkyscraperFunctor_additive"
+  ],
+  "file": "lean/Sheaf/Topology/RingedModuleSkyscraper.lean",
+  "statement": "def ringedModuleSkyscraperFunctor : ModuleCat.{u_sky} (X.presheaf.stalk x) ⥤ SheafOfModules.{u_sky} ((sheafCompose (Opens.grothendieckTopology X) (forget₂ CommRingCat.{u_sky} RingCat.{u_sky})).obj X.sheaf)",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-skc1131",
+  "group": "C1",
+  "result": "fix",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-skc1131",
+  "group": "C1",
+  "result": "fix",
+  "note": "X : RingedSpace (arbitrary ringed space), x : X, M : CochainComplex (ModuleCat (X.presheaf.stalk x)) Z; skyscraper = termwise ringedModuleSkyscraperFunctor (PLift (x in U) -> M, germ action, coefficient sheaf = landed Modules X); conj1 Nonempty (landed RingedSpace.moduleStalkFunctor termwise of skyscraper complex = M) in complexes over O_{X,x}; conj2 M.Acyclic -> skyscraper complex Acyclic; all 5 return points of R-skc0933 repaired; new node statement aligned to ringed space (commutative O_X) as in the Lean; compiled with #check, clean 2.3 s"
+ }
+}

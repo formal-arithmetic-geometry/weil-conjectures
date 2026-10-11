@@ -21,7 +21,9 @@
  },
  "stmt_deps": [
   "def-pc-cochain-complex-modules",
-  "def-pc-acyclic-complex-modules"
+  "def-pc-acyclic-complex-modules",
+  "def-pc-module-stalk-functor",
+  "def-pc-ringed-module-skyscraper"
  ],
  "proof": [
   {
@@ -110,5 +112,26 @@
   "group": "G1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-skc2026 (reviewer sub-agent of L); spot-checked: Read packet whole. Step 1: sectionwise exactness (x in U gives M's exact sequence, x not in U the zero sequence) implies sheaf exactness, hence acyclic by def-pc-acyclic-complex-modules; correct, elementary. Step 2: stalk is constant colimit M^i over neighbourhoods, compatible with differentials and germ action; correct, elementary. Grepped dag/nodes for skyscraper: only lem-weil-pbc-module-skyscraper-stalk-adjunction (schemes only, not used; item is for ringed spaces); no skyscraper fact restated, no class (b). FIX more, RETURN less: B4 plain-text arrows and plain-text math in both step texts rewritten in TeX (\\to, \\cong, M^\\bullet); no mathematical change. Second reading by G1 missed only the B4 TeX fault.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Topology.SkyscraperComplex",
+  "declaration": "SheafOfModules.skyscraper_complex",
+  "declarations": [
+   "SheafOfModules.skyscraper_complex"
+  ],
+  "file": "lean/Sheaf/Topology/SkyscraperComplex.lean",
+  "statement": "theorem skyscraper_complex (X : RingedSpace.{u_complex}) (x : X) (M : CochainComplex (ModuleCat.{u_complex} (X.presheaf.stalk x)) ℤ) : Nonempty (((RingedSpace.moduleStalkFunctor X x).mapHomologicalComplex (ComplexShape.up ℤ)).obj (((ringedModuleSkyscraperFunctor X x).mapHomologicalComplex (ComplexShape.up ℤ)).obj M) ≅ M) ∧ (M.Acyclic → (((ringedModuleSkyscraperFunctor X x).mapHomologicalComplex (ComplexShape.up ℤ)).obj M).Acyclic)",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-skc1131",
+  "group": "C1",
+  "result": "fix",
+  "note": "X : RingedSpace (arbitrary ringed space), x : X, M : CochainComplex (ModuleCat (X.presheaf.stalk x)) Z; skyscraper = termwise ringedModuleSkyscraperFunctor (PLift (x in U) -> M, germ action, coefficient sheaf = landed Modules X); conj1 Nonempty (landed RingedSpace.moduleStalkFunctor termwise of skyscraper complex = M) in complexes over O_{X,x}; conj2 M.Acyclic -> skyscraper complex Acyclic; all 5 return points of R-skc0933 repaired; new node statement aligned to ringed space (commutative O_X) as in the Lean; compiled with #check, clean 2.3 s"
  }
 }
