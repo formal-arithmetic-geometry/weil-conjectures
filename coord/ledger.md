@@ -5253,3 +5253,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 15:31 L: merged deliver/F1/lem-sp-half-plane-graded-canonical (stage 2; reviewer PASS; first push; Sheaf.CategoryTheory.HalfPlaneGradedCanonical CategoryTheory.BigradedExactCouple.halfPlaneGradedCanonical)
 - 15:31 L: merged deliver/T1/lem-weil-pbc-formal-systems-pullback (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.FormalSystemsPullback AlgebraicGeometry.exists_formalSystemsPullback)
 - 15:32 L: merged deliver/G1/lem-pc-essentially-constant-pro-hom-colimit (stage 2; reviewer PASS; first push; Sheaf.CategoryTheory.DerivedCategory.EssentiallyConstantProHomColimit CategoryTheory.essentiallyConstantPro_hom_colimit)
+- 15:32 L: merged deliver/G1/lem-weil-pbc-cohomology-filtered-colimit (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.EtaleCohomologyFilteredColimit AlgebraicGeometry.Scheme.etaleCohomology_isColimit_of_isFiltered)

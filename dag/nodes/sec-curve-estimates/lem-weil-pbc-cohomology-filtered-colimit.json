@@ -252,5 +252,28 @@
   "lem-weil-pbc-module-sheaves-colimits-forgetful",
   "lem-weil-pbc-module-sheaves-enough-injectives"
  ],
- "reviewed": "2026-10-10 L: 8 steps following Cohomology on Sites 0739 on the qcqs objects of the small etale site (03Q5): functorial injective embeddings (new Mathlib leaf, EnoughInjectives.lean:356), the cofinal finite coverings in B, degree 0 from the sections node, the colimit of injectives has no higher cohomology on B by the Cech criterion, induction by the long exact sequences and the five lemma, identification with the K-injective definition, the module clause; 10 tool uses accepted (site and derived-functor tools of sk-thm-p1 and sk-thm-reduction); source tag corrected 09Z1 -> 03Q5"
+ "reviewed": "2026-10-10 L: 8 steps following Cohomology on Sites 0739 on the qcqs objects of the small etale site (03Q5): functorial injective embeddings (new Mathlib leaf, EnoughInjectives.lean:356), the cofinal finite coverings in B, degree 0 from the sections node, the colimit of injectives has no higher cohomology on B by the Cech criterion, induction by the long exact sequences and the five lemma, identification with the K-injective definition, the module clause; 10 tool uses accepted (site and derived-functor tools of sk-thm-p1 and sk-thm-reduction); source tag corrected 09Z1 -> 03Q5",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.EtaleCohomologyFilteredColimit",
+  "declaration": "AlgebraicGeometry.Scheme.etaleCohomology_isColimit_of_isFiltered",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.etaleCohomology_isColimit_of_isFiltered",
+   "AlgebraicGeometry.Scheme.etaleModuleCohomology_isColimit_of_isFiltered"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleCohomologyFilteredColimit.lean",
+  "statement": "theorem etaleCohomology_isColimit_of_isFiltered (Y : Scheme.{u}) [CompactSpace Y] [QuasiSeparatedSpace Y] {I : Type u} [SmallCategory I] [IsFiltered I] {F : I ⥤ Sheaf Y.smallEtaleTopology AddCommGrpCat.{u + 1}} {c : Cocone F} (hc : IsColimit c) (q : ℕ) : Nonempty (IsColimit ((DerivedCategory.singleFunctor (Sheaf Y.smallEtaleTopology AddCommGrpCat.{u + 1}) 0 ⋙ Etale.cohomology AddCommGrpCat.{u + 1} Y (q : ℤ)).mapCocone c))",
+  "branch": "sheaf-dag",
+  "by": "G1",
+  "date": "2026-10-11",
+  "existing": false,
+  "note": "Both clauses use the recorded Etale.cohomology composed with DerivedCategory.singleFunctor in degree zero. Nonempty IsColimit of the image cocone is precisely the canonical comparison isomorphism. The module clause uses the accepted constant-coefficient Sheaf ModuleCat encoding."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "G1",
+  "result": "pass",
+  "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
+ }
 }
