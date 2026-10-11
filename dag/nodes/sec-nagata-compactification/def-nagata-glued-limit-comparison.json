@@ -97,5 +97,23 @@
   "group": "K1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-ngl2402 (reviewer sub-agent of L); spot-checked: Statement word for word as blueprint order 342 (B3 ok); stmt_deps [def-nagata-noetherian-inverse-system] = blueprint uses, defines S_lambda/I_S; no proof steps; class (b): no existing node defines kappa_S (def-nagata-final-noetherian-base-system only retains it, prop/lemma use it). FIX more, RETURN less: blueprint.same_as [] -> null; mathlib_searches dates and split_report.date 2026-10-11 -> 2026-10-10 (UTC, commit 20:45 UTC). Second reading by K1 missed both.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GluedLimitComparison",
+  "declaration": "AlgebraicGeometry.Scheme.NoetherianApproximation.gluedLimitComparison",
+  "file": "lean/Sheaf/AlgebraicGeometry/GluedLimitComparison.lean",
+  "statement": "def gluedLimitComparison {S : Scheme.{u}} (N : S.NoetherianApproximation) [HasLimit N.D] : S ⟶ limit N.D",
+  "branch": "sheaf-dag",
+  "by": "K1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-ngl1107",
+  "group": "K1",
+  "result": "pass",
+  "note": "S binder = original scheme; N : S.NoetherianApproximation = recorded dep (I_S, S_λ, affine transitions); compatible maps S→S_λ = N.π (naturality = compatibility); κ_S = limit.lift N.D (Cone.mk S N.π) : S ⟶ limit N.D; [HasLimit N.D] always satisfiable by ⟨⟨⟨_, N.isLimit⟩⟩⟩ (not inferred automatically), not a restriction; limit.lift_π and IsIso via conePointUniqueUpToIso checked; no existing comparison in slopmaster2/lean/Sheaf"
  }
 }
