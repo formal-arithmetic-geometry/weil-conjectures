@@ -131,7 +131,8 @@ theorem projectionMapOfCompactification_rightDerivedLowerShriekBaseChangeMap'
   erw [reassoc_of% thm]
   rw [show rightDerivedLowerShriekIso Λ c' = rightDerivedLowerShriekOfCompactificationIso Λ c'
       (HasCompactification.compactification f') from rfl]
-  -- TODO: `rw [hD']` here blows up memory (> 10 GB); see the memory notes of 2026-10-11.
+  -- TODO: finishing with `rw [hD']` (or `slice_lhs 3 4 => rw [hD']`) elaborates quickly but the
+  -- KERNEL check then needs > 10 GB; see the memory notes of 2026-10-11.
   sorry
 
 /-- **The projection map commutes with the exchange map `Ex_!`**: for a cartesian square
