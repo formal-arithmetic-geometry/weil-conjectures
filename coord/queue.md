@@ -1,11 +1,11 @@
 # Work queue
 
-863 items; claim with `tools/claim.py next <group> [--stage N]`.
+861 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (863)
+## Stage 2: nodes to state (861)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -15,6 +15,7 @@
 | `def-sc-scheme-tangent-space` | 1 | state |
 | `def-sp-kinjective-bridge` | 1 | state |
 | `def-weil-l-adic-coefficient-extension` | 1 | state |
+| `def-weil-pbc-charpoly-locally-free` | 1 | state |
 | `lem-kun-cp-approximation` | 1 | state |
 | `lem-pc-derived-adjoint-functors` | 1 | state |
 | `lem-pc-derived-tensor-transitivity` | 1 | state |
@@ -32,7 +33,6 @@
 | `lem-sp-cartan-eilenberg-comparison-independence` | 1 | state |
 | `lem-sp-cartan-eilenberg-double-complex-homotopy` | 1 | state |
 | `lem-sp-ce-horizontal-lift` | 1 | state |
-| `lem-sp-ce-vertical-nullhomotopy` | 1 | state |
 | `lem-weil-derived-limit-roos-complex` | 1 | state |
 | `lem-weil-pbc-associated-module-pullback` | 1 | state |
 | `lem-weil-pbc-associated-prime-localize-at-prime` | 1 | state |
@@ -40,11 +40,9 @@
 | `lem-weil-pbc-cartesian-eilenberg-functorial` | 1 | state |
 | `lem-weil-pbc-cech-vanishing-criterion` | 1 | state |
 | `lem-weil-pbc-change-ideal-completion` | 1 | state |
-| `lem-weil-pbc-charpoly-locally-free-existence` | 1 | state |
 | `lem-weil-pbc-closed-immersion-unit-quotient` | 1 | state |
 | `lem-weil-pbc-closed-pushforward-stalks` | 1 | state |
 | `lem-weil-pbc-cm-local-quotient-nonzerodivisor-cm` | 1 | state |
-| `lem-weil-pbc-cm-module-good-element-nonzerodivisor` | 1 | state |
 | `lem-weil-pbc-cm-module-good-sequence-element-nonzerodivisor` | 1 | state |
 | `lem-weil-pbc-codimension-one-analytically-unramified` | 1 | state |
 | `lem-weil-pbc-cohen-coefficient-ring-exists` | 1 | state |
@@ -873,7 +871,7 @@
 | `lem-sc-normalization-properties` | 3 | state |
 | `def-nagata-fixed-base-separated-stage` | 6 | state |
 
-Not open yet: 878 nodes that wait for a statement dependency, 40 nodes that wait for stage 1.
+Not open yet: 877 nodes that wait for a statement dependency, 40 nodes that wait for stage 1.
 
 ## Stage 3: modules to prove (0)
 
