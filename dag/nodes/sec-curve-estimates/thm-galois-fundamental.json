@@ -168,5 +168,29 @@
    "note": "sorry-free on 71d63dcf; states clause (1) only (FEt(Y) equivalent to finite continuous G-sets for a fundamental group G of the fibre functor, G = Aut(F) by toAutContinuousMulEquiv); the FLC, limits and base-change clauses are the other steps (L, 2026-10-10)"
   }
  ],
- "reviewed": "2026-10-10 L: 5 steps following 0BND (the Galois-category equivalence on FEt from lem-fet-galois-category, now closed on slopmaster2, and the abstract theorem; FLC by thm-galois-lc-etale; limits by a Mathlib leaf; base change by the new functoriality node, closed; the finite etale case by the injectivity node (closed) and the image-stabilizer node). Statement corrected: the blueprint claimed an open image for every connected base change, false (Spec of an algebraic closure); the open subgroup holds for finite etale Y' -> Y. 4 new nodes"
+ "reviewed": "2026-10-10 L: 5 steps following 0BND (the Galois-category equivalence on FEt from lem-fet-galois-category, now closed on slopmaster2, and the abstract theorem; FLC by thm-galois-lc-etale; limits by a Mathlib leaf; base change by the new functoriality node, closed; the finite etale case by the injectivity node (closed) and the image-stabilizer node). Statement corrected: the blueprint claimed an open image for every connected base change, false (Spec of an algebraic closure); the open subgroup holds for finite etale Y' -> Y. 4 new nodes",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FundamentalGroup.FiberEquivalence",
+  "declaration": "AlgebraicGeometry.Scheme.FiniteEtale.exists_fiber_flc_equivalence",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.FiniteEtale.exists_fiber_flc_equivalence",
+   "AlgebraicGeometry.Scheme.FiniteEtale.fiber_equivalence_baseChange",
+   "AlgebraicGeometry.Scheme.FiniteEtale.fiber_equivalence_finiteEtale_baseChange"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/FundamentalGroup/FiberEquivalence.lean",
+  "statement": "theorem exists_fiber_flc_equivalence {Y : Scheme.{w}} [ConnectedSpace Y] {Ω : Type w} [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ Y) (G : Type w) [Group G] [TopologicalSpace G] [IsTopologicalGroup G] [CompactSpace G] [∀ P, MulAction G ((fiber s).obj P)] [IsFundamentalGroup (fiber s) G] : ∃ (Φ : Y.FiniteEtale ≌ Y.FLC) (E : Y.FLC ≌ ContAction FintypeCat.{w} G) (γ : G ≃ₜ* Aut (ObjectProperty.ι (IsFiniteLocallyConstantEtaleSheafOfSets (T := Y)) ⋙ (pointSmallEtale s).sheafFiber (A := Type (w + 1)))), Nonempty (Φ.functor ⋙ ObjectProperty.ι _ ≅ ObjectProperty.ι _ ⋙ Y.smallEtaleTopology.uliftYoneda.{w + 1}) ∧ Nonempty (Φ.functor ⋙ E.functor ≅ (equivalenceContAction s G).functor) ∧ (∃ τ : E.functor ⋙ forget₂ (ContAction FintypeCat.{w} G) FintypeCat.{w} ⋙ CategoryTheory.forget FintypeCat.{w} ⋙ uliftFunctor.{w + 1, w} ≅ ObjectProperty.ι _ ⋙ (pointSmallEtale s).sheafFiber (A := Type (w + 1)), ∀ (F : Y.FLC) (g : G) (z : ULift.{w + 1} (E.functor.obj F).obj.V), τ.hom.app F ⟨((E.functor.obj F).obj.ρ g).hom z.down⟩ = (γ g).hom.app F (τ.hom.app F z)) ∧ PreservesFiniteLimits (equivalenceContAction s G).functor ∧ PreservesFiniteColimits (equivalenceContAction s G).functor ∧ PreservesFiniteLimits E.functor ∧ PreservesFiniteColimits E.functor",
+  "branch": "sheaf-dag",
+  "by": "S1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-gfu"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-gfu",
+  "group": "S1",
+  "result": "fix",
+  "note": "Y connected + geometric point (IsAlgClosed); G model per FUNDAMENTAL GROUP tied to Aut of the FLC stalk functor by γ (G1 topology); FEt equivalence = equivalenceContAction; FLC equivalence E tied via Φ (Yoneda) and τ/γ action equation; finite limits/colimits; base change h = fundamentalGroupMap with η components = pullbackFiberIso; finite etale: injective, range = stabilizer of fiberMk, open, finite index; reverted the delivery's change of existing node(s) def-galois-fibre-functor (--revert-nodes; kept as on sheaf-dag)"
+ }
 }
