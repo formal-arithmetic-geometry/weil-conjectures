@@ -150,5 +150,28 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-pev (reviewer sub-agent of L); spot-checked: Start Sat Oct 10 03:51:32 PM UTC 2026. Source: Stacks equiv.tex lemma-Ext-0-regular (Tag 0FZ3) (1) and its proof, read at line 1645: the item agrees hypothesis by hypothesis (regular Noetherian X, dim d finite, F,G coherent, Ext^n=0 for n>d); the P^1 clause is the case d=1. True under the correct Ext (R^i Hom(F,-)(G), injective resolutions of G; def-sc-ext-sheaf ill-posed, lead note added). Steps: 1 and 4 carried by lem-sc-ext-sheaf-to-global-spectral-sequence (first-quadrant local-to-global spectral sequence, Cohomology section-ext; vanishing of E_2 for p+q>d gives Ext^n=0 for n>d); 2 by lem-sc-ext-stalk-localization (0GM8 with pseudo-coherence) and lem-sc-regular-local-ext-vanishing (00O7, gl.dim of a regular local ring = dim); 3 by lem-sc-ext-support-cohomology-vanishing (support of Ext^q in points with dim O_{X,x}>=q, dim closure(x)+dim O_{X,x}<=d, Grothendieck vanishing 02UZ); 5 by lem-sc-p1-regular-dimension-one. All five new statements true; small cases: d=0 (X finite discrete regular = finite product of fields, all higher Ext vanish), q>d (support empty), P^1_k (covered by two Spec k[t], PID, dim 1). Blueprint search (blueprint_refs search on spectral sequence Ext / global dimension regular / projective line regular / stalk Ext / support dimension cohomology vanishing) found no node: same_as [] correct. No Mathlib leaf. FIX more, RETURN less (B3/B4/C2 citation and TeX repairs, no mathematical change): all six files: statement: plain text rewritten in TeX and every notion cited by its existing definition node (pqf-def-coherent, pqf-def-locnoeth, def-weil-pbc-quasi-compact-scheme, pqf-def-cohomology, def-pc-ext, def-pc-dimension, def-kun-topological-krull-dimension, def-weil-pbc-krull-dimension-ring, def-weil-regular-scheme, def-sc-p1-standard), stmt_deps set to exactly the cited nodes (regular-local and P^1 nodes had [] though citing nodes; support node listed two lemmas instead of the definitions it uses; item listed lem-sc-p1-regular-dimension-one, a proof dependency); lem-sc-ext-stalk-localization: statement: misplaced [def-weil-pbc-sheaf-ext] after 'Noetherian scheme' moved to the sheaf Ext; item proof steps 1-5: text rewritten in TeX, step 2 no longer asserts the support-dimension bound unproved from its cited statements (that bound is the statement of lem-sc-ext-support-cohomology-vanishing cited in step 3) and records that F_x is finitely generated. End Sat Oct 10 03:54:00 PM UTC 2026.; 6 file(s) fixed by the reviewer"
  },
- "lead_note": "2026-10-10 L (R-pev): R-pev: the item and lem-sc-ext-sheaf-to-global-spectral-sequence take Ext from def-sc-ext-sheaf, ill-posed as written (see its lead_note); both statements are true (Stacks 0FZ3 (1); Cohomology section-ext spectral sequence) once Ext^i_X(F,G) = R^i Hom(F,-)(G) via injective resolutions of G, the definition the split of def-sc-ext-sheaf must state."
+ "lead_note": "2026-10-10 L (R-pev): R-pev: the item and lem-sc-ext-sheaf-to-global-spectral-sequence take Ext from def-sc-ext-sheaf, ill-posed as written (see its lead_note); both statements are true (Stacks 0FZ3 (1); Cohomology section-ext spectral sequence) once Ext^i_X(F,G) = R^i Hom(F,-)(G) via injective resolutions of G, the definition the split of def-sc-ext-sheaf must state.",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.CoherentExtVanishing",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.coherent_ext_subsingleton_of_regular",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.Modules.coherent_ext_subsingleton_of_regular",
+   "AlgebraicGeometry.Scheme.Modules.projectiveLine_coherent_ext_subsingleton"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/CoherentExtVanishing.lean",
+  "statement": "theorem coherent_ext_subsingleton_of_regular (X : Scheme.{u}) [CompactSpace X] [IsLocallyNoetherian X] [HasExt.{u} X.Modules] (hregular : ∀ x : X, ∃ U : X.affineOpens, x ∈ U.1 ∧ IsRegularRing Γ(X, U)) (d : ℕ) (hdim : X.dim = (d : WithBot ℕ∞)) (F G : X.Modules) (hF : RingedSpace.IsCoherent X.toRingedSpace F) (hG : RingedSpace.IsCoherent X.toRingedSpace G) (i : ℕ) (hi : d < i) : Subsingleton (Ext F G i)",
+  "branch": "sheaf-dag",
+  "by": "M1",
+  "date": "2026-10-11",
+  "existing": false,
+  "note": "The first declaration states the general finite-dimensional regular Noetherian case; the second states the explicit projective-line specialization. Regularity uses the affine-neighbourhood specialization recorded by def-weil-regular-scheme; HasExt is the size infrastructure required by Scheme.Modules.Ext."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-pev1204",
+  "group": "M1",
+  "result": "pass",
+  "note": "regular = recorded affine-nbhd IsRegularRing Γ(X,U) (Noetherian via extends); Noetherian = [CompactSpace X][IsLocallyNoetherian X]; dim d = Scheme.dim = (d:WithBot ℕ∞) (empty excluded, as node's nonempty convention); F,G coherent = RingedSpace.IsCoherent X.toRingedSpace (C1 form); Ext = upstream Scheme.Modules.Ext with its own [HasExt.{u} X.Modules] variable binder (landed LocallyFreeExt* form, derivable via IsGrothendieckAbelian.hasExt, not hollow); vanishing Subsingleton (Ext F G i) for d<i; P1 clause ProjectiveLine (Spec (CommRingCat.of k)), any field, 2≤i; #check confirmed Ext resolves to Scheme.Modules.Ext; no let, no extra universe, only the item's lean record changed"
+ }
 }
