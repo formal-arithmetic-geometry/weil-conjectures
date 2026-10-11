@@ -5,10 +5,9 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.RestrictScalars
 public import WeilConjectures.CategoryTheory.Abelian.RightDerived.Acyclic
 public import WeilConjectures.CategoryTheory.Sites.CechComplexModule
-public import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStar
+public import WeilConjectures.SixFunctors.Etale.Derived.CoextendScalars
 
 /-!
 # Restriction of scalars of injective étale sheaves is acyclic for the direct image
@@ -33,6 +32,8 @@ open CategoryTheory
 
 namespace AlgebraicGeometry.Etale
 
+set_option synthInstance.maxHeartbeats 400000 in
+-- the instance `WEqualsLocallyBijective` on the small étale site takes long to synthesize
 /-- The restriction of scalars along `φ : Λ →+* Λ'` of an injective étale sheaf of `Λ'`-modules
 on `T` is acyclic for the direct image `g_*` on étale sheaves of `Λ`-modules. -/
 theorem rightAcyclic_lowerStar_restrictScalars_obj_of_injective

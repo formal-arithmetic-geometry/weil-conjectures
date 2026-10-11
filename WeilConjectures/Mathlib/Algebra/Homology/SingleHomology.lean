@@ -80,4 +80,38 @@ lemma mapHomologicalComplexHomologyIso_hom_app_single (A : C) :
 
 end Functor
 
+namespace NatTrans
+
+/-- For a natural transformation `τ : Φ ⟶ Ψ` of additive functors and an object `F`, the map
+induced by `τ` on `H⁰` of the single complex `F[0]` is, as an arrow, `τ.app F`. -/
+noncomputable def homologyMapMapHomologicalComplexSingleArrowIso {Φ Ψ : C ⥤ D}
+    [Φ.Additive] [Ψ.Additive] (τ : Φ ⟶ Ψ) (F : C) :
+    Arrow.mk (HomologicalComplex.homologyMap ((NatTrans.mapHomologicalComplex τ
+      (ComplexShape.up ℤ)).app ((HomologicalComplex.single C (ComplexShape.up ℤ) 0).obj F)) 0) ≅
+      Arrow.mk (τ.app F) := by
+  have w : (NatTrans.mapHomologicalComplex τ (ComplexShape.up ℤ)).app
+      ((HomologicalComplex.single C (ComplexShape.up ℤ) 0).obj F) ≫
+        (HomologicalComplex.singleMapHomologicalComplex Ψ (ComplexShape.up ℤ) 0).hom.app F =
+      (HomologicalComplex.singleMapHomologicalComplex Φ (ComplexShape.up ℤ) 0).hom.app F ≫
+        (HomologicalComplex.single D (ComplexShape.up ℤ) 0).map (τ.app F) := by
+    ext i
+    by_cases hi : i = 0
+    · subst hi
+      simp [HomologicalComplex.singleMapHomologicalComplex_hom_app_self,
+        HomologicalComplex.single_map_f_self]
+    · simp [HomologicalComplex.singleMapHomologicalComplex_hom_app_ne _ _ hi]
+  refine Arrow.isoMk
+    ((HomologicalComplex.homologyFunctor D _ 0).mapIso
+      ((HomologicalComplex.singleMapHomologicalComplex Φ (ComplexShape.up ℤ) 0).app F) ≪≫
+      HomologicalComplex.singleObjHomologySelfIso _ _ _)
+    ((HomologicalComplex.homologyFunctor D _ 0).mapIso
+      ((HomologicalComplex.singleMapHomologicalComplex Ψ (ComplexShape.up ℤ) 0).app F) ≪≫
+      HomologicalComplex.singleObjHomologySelfIso _ _ _) ?_
+  simp only [Arrow.mk_left, Arrow.mk_right, Iso.trans_hom, Functor.mapIso_hom, Iso.app_hom,
+    HomologicalComplex.homologyFunctor_map, Arrow.mk_hom, Category.assoc,
+    ← HomologicalComplex.singleObjHomologySelfIso_hom_naturality,
+    ← HomologicalComplex.homologyMap_comp_assoc, w]
+
+end NatTrans
+
 end CategoryTheory
