@@ -1,11 +1,11 @@
 # Work queue
 
-953 items; claim with `tools/claim.py next <group> [--stage N]`.
+950 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (953)
+## Stage 2: nodes to state (950)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -28,7 +28,6 @@
 | `lem-pc-module-pullback-identity-composition` | 1 | state |
 | `lem-pc-pre-derived-adjoint-functors-general` | 1 | state |
 | `lem-pc-projective-base-change` | 1 | state |
-| `lem-pc-proper-descends-field` | 1 | state |
 | `lem-pc-sheaf-modules-tensor-closed` | 1 | state |
 | `lem-pc-very-ample-disjoint-union` | 1 | state |
 | `lem-pur-derived-change-of-rings` | 1 | state |
@@ -44,8 +43,6 @@
 | `lem-sc-local-domain-dim-one-principal-localization-fraction-field` | 1 | state |
 | `lem-sc-p1-ext-locally-free-naturality` | 1 | state |
 | `lem-sc-p1-ext-yoneda-associativity` | 1 | state |
-| `lem-sc-p1-minimal-presentation-tor` | 1 | state |
-| `lem-sc-p1-proj-degreezero-localization-exact` | 1 | state |
 | `lem-sc-p1-tor-dimension-shift-natural` | 1 | state |
 | `lem-sc-p1-tor-dimension-shifting` | 1 | state |
 | `lem-sc-picard-diagonal-locally-closed` | 1 | state |
