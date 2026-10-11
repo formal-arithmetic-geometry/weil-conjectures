@@ -228,6 +228,35 @@ theorem nonempty_iso_externalProduct_rightDerivedUpperShriek_of_isOpenImmersion
     ((derivedTensor _ _).obj _).mapIso ((L((pullback.snd (f₁ ≫ b₁) (f₂ ≫ b₂))^*[_])).mapIso
       ((e _ _ f₂).app N₂)) ≪≫ p.symm ≪≫ ((e _ _ ψ).app _).symm⟩
 
+omit [HasSmallSiteSheafify A] in
+/-- The Künneth–Verdier map `κ` of `AlgebraicGeometry.Etale.HasKunnethComparisons` for a
+**dualizable** `N` reduces to the case `N = Λ_Y`: given `M ⊠ ω_Y ≅ Rp_X^! M`,
+`M ⊠ 𝔻_Y N ≅ RHom(p_Y^* N, Rp_X^! M)`. Indeed `𝔻_Y N = RHom(N, ω_Y) ≅ N^∨ ⊗ ω_Y` and
+`RHom(p_Y^* N, -) ≅ p_Y^* N^∨ ⊗ -` (`CategoryTheory.nonempty_iso_tensorObj_map_ihom_obj_right`).
+The remaining case `M ⊠ ω_Y ≅ Rp_X^! M` is the exceptional Künneth map for `𝟙_X × b`, which
+is how the blueprint proof of `thm-trf-kunneth-verdier` uses `prop-trf-exceptional-kunneth`. -/
+theorem nonempty_iso_externalProduct_verdierDual_of_isDualizable [UpperStarPreservesFlat A]
+    {S : Scheme.{u}} (a : X ⟶ S) (b : Y ⟶ S) [HasCompactification b]
+    [(R(b)_![A]).IsLeftAdjoint] [HasCompactification (pullback.fst a b)]
+    [(R(pullback.fst a b)_![A]).IsLeftAdjoint]
+    (M : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A))
+    {N : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology A)} (hN : IsDualizable N)
+    (h : Nonempty (externalProduct A a b M (dualizingComplex A b) ≅
+      (R(pullback.fst a b)^![A]).obj M)) :
+    Nonempty (externalProduct A a b M ((verdierDual A b).obj (Opposite.op N)) ≅
+      (RHom(pullback a b)[A].obj (Opposite.op ((L((pullback.snd a b)^*[A])).obj N))).obj
+        ((R(pullback.fst a b)^![A]).obj M)) := by
+  obtain ⟨_⟩ := _root_.DerivedCategory.nonempty_braidedCategory (Sheaf X.smallEtaleTopology A)
+  obtain ⟨_⟩ := _root_.DerivedCategory.nonempty_braidedCategory (Sheaf Y.smallEtaleTopology A)
+  obtain ⟨_⟩ := _root_.DerivedCategory.nonempty_braidedCategory
+    (Sheaf (pullback a b).smallEtaleTopology A)
+  let _ := leftDerivedUpperStarMonoidal A (pullback.fst a b)
+  let _ := leftDerivedUpperStarMonoidal A (pullback.snd a b)
+  obtain ⟨e⟩ := nonempty_iso_tensorObj_map_ihom_obj_right (L((pullback.fst a b)^*[A]))
+    (L((pullback.snd a b)^*[A])) M (dualizingComplex A b) hN
+  obtain ⟨h⟩ := h
+  exact ⟨e ≪≫ (ihom ((L((pullback.snd a b)^*[A])).obj N)).mapIso h⟩
+
 /-- Blueprint `sk-thm-sf-kunneth-verdier`: Künneth–Verdier isomorphism.
 
 The four product comparison maps of `AlgebraicGeometry.Etale.HasKunnethComparisons` are

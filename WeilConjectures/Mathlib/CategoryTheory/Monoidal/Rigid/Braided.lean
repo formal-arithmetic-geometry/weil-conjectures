@@ -267,6 +267,22 @@ theorem nonempty_iso_tensorObj_map_ihom_obj {E₁ N₁ : C₁} {E₂ N₂ : C₂
     tensorTensorRearrangeIso _ _ _ _ ≪≫
     (MonoidalClosed.ihomObjIsoTensor (F₂.obj E₂ᘁ ⊗ F₁.obj E₁ᘁ) _ _).symm⟩
 
+omit [MonoidalCategory C₁] [BraidedCategory C₁] [MonoidalClosed C₁] [F₁.Monoidal] in
+/-- **The Künneth–Verdier map for a dualizable second factor.** For monoidal functors
+`F₁ : C₁ ⥤ C`, `F₂ : C₂ ⥤ C` into a braided monoidal closed category and a dualizable `N`,
+`F₁ M ⊗ F₂ [N, ω] ≅ [F₂ N, F₁ M ⊗ F₂ ω]`: both sides are `F₂ Nᘁ ⊗ F₁ M ⊗ F₂ ω`. -/
+theorem nonempty_iso_tensorObj_map_ihom_obj_right (M : C₁) {N : C₂} (ω : C₂)
+    (hN : IsDualizable N) :
+    Nonempty (F₁.obj M ⊗ F₂.obj ((ihom N).obj ω) ≅
+      (ihom (F₂.obj N)).obj (F₁.obj M ⊗ F₂.obj ω)) := by
+  obtain ⟨_⟩ := hN
+  let _ : ExactPairing Nᘁ N := BraidedCategory.exactPairing_swap N Nᘁ
+  let _ : ExactPairing (F₂.obj Nᘁ) (F₂.obj N) := ExactPairing.map F₂ Nᘁ N
+  exact ⟨whiskerLeftIso (F₁.obj M) (F₂.mapIso (MonoidalClosed.ihomObjIsoTensor Nᘁ N ω) ≪≫
+      (Functor.Monoidal.μIso F₂ _ _).symm) ≪≫ (α_ _ _ _).symm ≪≫
+    whiskerRightIso (β_ _ _) _ ≪≫ α_ _ _ _ ≪≫
+    (MonoidalClosed.ihomObjIsoTensor (F₂.obj Nᘁ) (F₂.obj N) _).symm⟩
+
 end ExternalHom
 
 end CategoryTheory
