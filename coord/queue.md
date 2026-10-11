@@ -1,11 +1,11 @@
 # Work queue
 
-196 items; claim with `tools/claim.py next <group> [--stage N]`.
+194 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (196)
+## Stage 2: nodes to state (194)
 
 | node | distance to Mathlib | kind | blockers |
 |---|---|---|---|
@@ -23,9 +23,9 @@
 | `lem-pc-module-pullback-identity-composition` | 1 | state | 11 |
 | `lem-weil-pbc-coherent-formal-modules-abelian` | 1 | state | 9 |
 | `lem-weil-pbc-strict-henselization-triples` | 1 | state | 7 |
-| `thm-sp-half-plane-convergence` | 2 | state | 6 |
 | `lem-weil-pbc-pair-henselization` | 1 | state | 5 |
-| `lem-weil-pbc-truncation-descends` | 1 | state | 5 |
+| `lem-weil-pbc-truncation-triangle` | 1 | state | 4 |
+| `lem-sp-exact-functor-couple` | 1 | state | 3 |
 | `lem-weil-pbc-coherent-formal-modules-affine` | 1 | state | 3 |
 | `lem-weil-pbc-symmetric-product-properties` | 1 | state | 3 |
 | `thm-sp-if-e1` | 1 | state | 3 |
@@ -40,9 +40,9 @@
 | `lem-sc-group-addition-tangent-differential` | 2 | state | 1 |
 | `lem-sc-hilbert-polynomial` | 2 | state | 1 |
 | `lem-sc-pic-restriction-boundary` | 2 | state | 1 |
+| `lem-sp-couple-morphism` | 2 | state | 1 |
 | `lem-sp-edge-collapse` | 2 | state | 1 |
 | `cor-galois-lisse-representations` | 1 | state | 0 |
-| `lem-pc-coherent-property-devissage` | 1 | state | 0 |
 | `lem-pc-ringed-space-rgamma-derived-limit` | 1 | state | 0 |
 | `lem-pur-derived-functor-triangles-05sc` | 1 | state | 0 |
 | `lem-sc-affine-koszul-cech-derived-comparison` | 1 | state | 0 |
@@ -77,8 +77,6 @@
 | `lem-weil-pbc-strictly-henselian-sections-stalk` | 1 | state | 0 |
 | `lem-weil-pbc-support-pullback-finite-type` | 1 | state | 0 |
 | `lem-weil-pbc-symmetric-degree-exact` | 1 | state | 0 |
-| `lem-weil-pbc-symmetric-projective-presentation-conormal` | 1 | state | 0 |
-| `lem-weil-pbc-thickening-affine-scheme` | 1 | state | 0 |
 | `lem-weil-pbc-thickening-systems-dictionary` | 1 | state | 0 |
 | `lem-weil-pbc-topological-inverse-image-stalk` | 1 | state | 0 |
 | `lem-weil-pbc-tor-ideal-kernel-naturality` | 1 | state | 0 |
@@ -112,7 +110,6 @@
 | `lem-weil-pbc-valuation-ring-normal` | 1 | state | 0 |
 | `lem-weil-pbc-vanishing-descends-retract` | 1 | state | 0 |
 | `lem-weil-pbc-well-ordered-union-projective-dimension` | 1 | state | 0 |
-| `lem-weil-pbc-z-g-ring` | 1 | state | 0 |
 | `lem-weil-pbc-z-localizations-dvr` | 1 | state | 0 |
 | `lem-weil-pbc-zariski-h0-proper-henselian-pair` | 1 | state | 0 |
 | `lem-weil-pbc-zariski-pair-finite-gabber-polynomial` | 1 | state | 0 |
@@ -190,6 +187,7 @@
 | `lem-sc-very-ample-separation-criterion` | 2 | state | 0 |
 | `lem-sp-derived-couple-functoriality` | 2 | state | 0 |
 | `lem-sp-filtered-homotopy-spectral-sequence` | 2 | state | 0 |
+| `lem-sp-half-plane-graded-canonical` | 2 | state | 0 |
 | `lem-weil-pbc-finite-type-lift-nilpotent` | 2 | state | 0 |
 | `lem-weil-pbc-finite-type-z-g-ring` | 2 | state | 0 |
 | `lem-weil-pbc-henselian-finite-type-product-decomposition` | 2 | state | 0 |
@@ -206,7 +204,7 @@
 | `lem-pc-essentially-constant-pro-hom-colimit` | 4 | state | 0 |
 | `lem-pur-essential-constant-pro-criterion-05py` | 4 | state | 0 |
 
-Not open yet: 40 nodes that wait for stage 1, 423 nodes that wait for a statement dependency.
+Not open yet: 40 nodes that wait for stage 1, 419 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
