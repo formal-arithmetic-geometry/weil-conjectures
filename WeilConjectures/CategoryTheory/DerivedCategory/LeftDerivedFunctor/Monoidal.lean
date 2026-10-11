@@ -55,10 +55,10 @@ open scoped CategoryTheory.Functor
 namespace CategoryTheory.Functor
 
 variable {C : Type u₁} [Category.{u + 1} C] [Abelian C] [IsGrothendieckAbelian.{u + 1} C]
-  [MonoidalCategory C] [MonoidalPreadditive C] [MonoidalClosed C] [SymmetricCategory C]
+  [MonoidalCategory C] [MonoidalPreadditive C] [MonoidalClosed C] [BraidedCategory C]
   [HasFunctorialFlatResolution C]
   {D : Type u₂} [Category.{u + 1} D] [Abelian D] [IsGrothendieckAbelian.{u + 1} D]
-  [MonoidalCategory D] [MonoidalPreadditive D] [MonoidalClosed D] [SymmetricCategory D]
+  [MonoidalCategory D] [MonoidalPreadditive D] [MonoidalClosed D] [BraidedCategory D]
   [HasFunctorialFlatResolution D]
 
 section
@@ -220,7 +220,7 @@ section ComplexLevel
 open OplaxMonoidal LaxMonoidal
 
 variable {E : Type u₃} [Category.{u + 1} E] [Abelian E] [IsGrothendieckAbelian.{u + 1} E]
-  [MonoidalCategory E] [MonoidalPreadditive E] [MonoidalClosed E] [SymmetricCategory E]
+  [MonoidalCategory E] [MonoidalPreadditive E] [MonoidalClosed E] [BraidedCategory E]
   [HasFunctorialFlatResolution E]
 
 open HomologicalComplex in
@@ -276,7 +276,7 @@ section Compatibility
 open OplaxMonoidal LaxMonoidal
 
 variable {E : Type u₃} [Category.{u + 1} E] [Abelian E] [IsGrothendieckAbelian.{u + 1} E]
-  [MonoidalCategory E] [MonoidalPreadditive E] [MonoidalClosed E] [SymmetricCategory E]
+  [MonoidalCategory E] [MonoidalPreadditive E] [MonoidalClosed E] [BraidedCategory E]
   [HasFunctorialFlatResolution E]
 
 /-- The composition isomorphism `L(F ⋙ G) ≅ LF ⋙ LG` is compatible with the counits. -/
@@ -370,7 +370,7 @@ section Derived
 open OplaxMonoidal LaxMonoidal
 
 variable {E : Type u₃} [Category.{u + 1} E] [Abelian E] [IsGrothendieckAbelian.{u + 1} E]
-  [MonoidalCategory E] [MonoidalPreadditive E] [MonoidalClosed E] [SymmetricCategory E]
+  [MonoidalCategory E] [MonoidalPreadditive E] [MonoidalClosed E] [BraidedCategory E]
   [HasFunctorialFlatResolution E]
 
 section
@@ -435,6 +435,19 @@ lemma leftDerivedTensorComparison_naturality (τ : F ≅ F') [NatTrans.IsMonoida
     ← Qh.map_comp, ← mapHomotopyCategoryδNatTrans_naturality, Qh.map_comp,
     ← leftDerivedFunctorNatIso_hom_app_comp_counit_assoc]
   erw [← NatTrans.naturality_assoc]
+/-- The componentwise form of `CategoryTheory.Functor.leftDerivedTensorComparison_naturality`:
+a monoidal natural isomorphism `τ : F ≅ F'` carries the tensor comparison of `LF` at `(K, M)` to
+the one of `LF'`. -/
+@[reassoc]
+lemma leftDerivedTensorComparison_naturality_app (τ : F ≅ F') [NatTrans.IsMonoidal τ.hom]
+    (K M : DerivedCategory C) :
+    (F.leftDerivedFunctorNatIso τ).hom.app (K ⊗ M) ≫
+        (F'.leftDerivedTensorComparison.app K).app M =
+      (F.leftDerivedTensorComparison.app K).app M ≫
+        ((F.leftDerivedFunctorNatIso τ).hom.app K ⊗ₘ (F.leftDerivedFunctorNatIso τ).hom.app M) := by
+  have h := congr_app (congr_app (leftDerivedTensorComparison_naturality τ) K) M
+  dsimp at h
+  rw [h, tensorHom_def]
 
 end NatIso
 
@@ -506,6 +519,24 @@ lemma leftDerivedTensorComparison_comp :
     Functor.map_comp, Functor.map_comp, Category.assoc, Category.assoc, reassoc_of% nG,
     ← reassoc_of% ne, leftDerivedFunctorCompIso_hom_app_comp_counit_assoc,
     mapHomotopyCategoryδNatTrans_comp, Qh.map_comp]
+/-- The componentwise form of `CategoryTheory.Functor.leftDerivedTensorComparison_comp`: the
+tensor comparison of `LF` followed by the one of `LG` is the tensor comparison of `L(F ⋙ G)`,
+through `L(F ⋙ G) ≅ LF ⋙ LG`. -/
+@[reassoc]
+lemma map_leftDerivedTensorComparison_app_app_comp (K M : DerivedCategory C) :
+    G.leftDerivedFunctor.map ((F.leftDerivedTensorComparison.app K).app M) ≫
+        (G.leftDerivedTensorComparison.app (F.leftDerivedFunctor.obj K)).app
+          (F.leftDerivedFunctor.obj M) =
+      (F.leftDerivedFunctorCompIso G).inv.app (K ⊗ M) ≫
+        ((F ⋙ G).leftDerivedTensorComparison.app K).app M ≫
+        ((F.leftDerivedFunctorCompIso G).hom.app K ⊗ₘ
+          (F.leftDerivedFunctorCompIso G).hom.app M) := by
+  have h := congr_app (congr_app (leftDerivedTensorComparison_comp F G) K) M
+  dsimp at h
+  rw [h]
+  simp only [Category.assoc, Iso.inv_hom_id_app_assoc]
+  rw [← tensorHom_def_assoc, tensorHom_comp_tensorHom]
+  simp
 
 end Comp
 
