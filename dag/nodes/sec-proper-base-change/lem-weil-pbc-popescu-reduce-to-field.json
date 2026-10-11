@@ -257,5 +257,24 @@
   "by": "L",
   "result": "pass",
   "note": "Reviewed by the lead (opus-relaunch6). Ten steps along Stacks 07F5 (smoothing.tex 2011-2064), split by one level with seven new unsplit nodes (tags verified: 07C7 strictly standard elements, 07F3 product, 07F4 delocalize-base, 07CM lift along nilpotent ideals, 07CP lifting, 07CT desingularize strictly standard, 02LX total ring of fractions of a reduced Noetherian ring): base change along quotients (07C1), Noetherian induction (zero ring written out), R reduced (07CM), factorization criterion 07C3, PT over Q = prod K_i (regularity of K_i -> Lambda_i written out, 07F3 stated without the Situation 07F2 hypotheses it does not use), smooth factorization over Q, delocalization with a strictly standard nonzerodivisor pi, annihilators (elementary), lifting modulo pi^8 by 07CP, 07CT then H_{B/R} = B and the final solve node (07EU) instead of a 'smooth at every prime => smooth' node (acceptable, below the unit). No cycle with popescu-final-solve."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.PopescuReduceToField",
+  "declaration": "popescu_reduce_to_field",
+  "file": "lean/Sheaf/RingTheory/PopescuReduceToField.lean",
+  "statement": "theorem popescu_reduce_to_field (h : ∀ (k : Type u) (Λ : Type (max u v)) [Field k] [CommRing Λ] [Algebra k Λ] [IsNoetherianRing Λ], RingHom.IsRegular (algebraMap k Λ) → ObjectProperty.ind.{max u v} (fun B : CommAlgCat.{max u v} k ↦ Algebra.Smooth k B) (CommAlgCat.of k Λ)) : ∀ (R : Type u) (Λ : Type (max u v)) [CommRing R] [CommRing Λ] [Algebra R Λ] [IsNoetherianRing R] [IsNoetherianRing Λ], RingHom.IsRegular (algebraMap R Λ) → ObjectProperty.ind.{max u v} (fun B : CommAlgCat.{max u v} R ↦ Algebra.Smooth R B) (CommAlgCat.of R Λ)",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-prf1317"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-prf1317",
+  "group": "C1",
+  "result": "fix",
+  "note": "h: all fields k:u, Noetherian Λ:max u v, regular algebraMap k Λ -> ind smooth; concl: Noetherian R:u, Λ:max u v, [Algebra R Λ], regular algebraMap -> ind smooth CommAlgCat.{max u v} R; universes fixed from uk/ur/v, letI removed"
  }
 }
