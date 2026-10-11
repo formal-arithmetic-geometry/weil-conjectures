@@ -86,7 +86,8 @@ variable (δ : of S S ≅ (coextendScalars.{u, u, u} f).obj (of R R))
 `s ⊗ m ↦ (x ↦ δ(s)(x) • m)`. -/
 noncomputable def extendScalarsCoextendScalarsEquiv (M : ModuleCat.{u} R) :
     (extendScalars f).obj M ≃ₗ[S] (coextendScalars f).obj M :=
-  let δR : (restrictScalars f).obj (of S S) ≃ₗ[R] Module.Dual R ((restrictScalars f).obj (of S S)) :=
+  let δR : (restrictScalars f).obj (of S S) ≃ₗ[R]
+      Module.Dual R ((restrictScalars f).obj (of S S)) :=
       { toFun s := (δ.hom.hom (s : S) : (restrictScalars f).obj (of S S) →ₗ[R] R)
         invFun φ := (δ.inv.hom φ : S)
         map_add' := by simp
