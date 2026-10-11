@@ -1569,6 +1569,7 @@ public import WeilConjectures.SixFunctors.ProEtale.Derived.UpperStarMonoidal.Com
 public import WeilConjectures.SixFunctors.ProEtale.Derived.UpperStarMonoidal.Derived
 public import WeilConjectures.SixFunctors.ProEtale.Derived.UpperStarMonoidal.KFlat
 public import WeilConjectures.SixFunctors.ProEtale.Derived.UpperStarMonoidal.Vanishing
+public import WeilConjectures.SixFunctors.ProEtale.Derived.WeilComplex
 public import WeilConjectures.SixFunctors.ProEtale.ExceptionalAdjoint
 public import WeilConjectures.SixFunctors.ProEtale.GeometricFrobenius
 public import WeilConjectures.SixFunctors.ProEtale.LowerShriek.Comparison
