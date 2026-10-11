@@ -3103,3 +3103,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 00:28 UTC L: J1 valuation-zero-section-relative-cartier FIX e7bfdf815 (R-zsc0027).
 - 00:29 L: merged deliver/C1/prop-pur-kinjective-objects-small (reviewer PASS; first push; new nodes: 0)
 - 00:29 L: merged deliver/E1/lem-pur-site-restriction-module-adjunction-exact (reviewer FIX; first push; new nodes: 0)
+- 00:29 UTC L: C1 prop-pur-kinjective-objects-small PASS d122c35e7 (R-kos0028).
