@@ -95,6 +95,7 @@ instance isLeftDerivabilityStructure_kFlatMap :
     (F.kFlatMap_quotient_obj_resolutionFunctor_obj Λ.reduced)
 
 end
+
 /-- The lax monoidal structure `Qh K ⊗ᴸ Qh M ⟶ Qh (K ⊗ M)` of `Qh : K(C) ⥤ D(C)` is an
 isomorphism when `M` is K-flat. -/
 lemma isIso_μNatTrans_Qh_app_app_of_kFlat (K M : HomotopyCategory C (.up ℤ))
@@ -216,6 +217,7 @@ instance isIso_leftDerivedTensorComparison : IsIso F.leftDerivedTensorComparison
   infer_instance
 
 end Comparison
+
 section ComplexLevel
 
 open OplaxMonoidal LaxMonoidal
@@ -275,6 +277,7 @@ lemma mapHomologicalComplexδNatTrans_naturality {F F' : C ⥤ D} [F.Additive] [
   rfl
 
 end ComplexLevel
+
 section Compatibility
 
 open OplaxMonoidal LaxMonoidal
@@ -377,6 +380,7 @@ lemma mapHomotopyCategoryδNatTrans_comp (F : C ⥤ D) (G : D ⥤ E) [F.Additive
   rfl
 
 end Compatibility
+
 section Derived
 
 open OplaxMonoidal LaxMonoidal
@@ -389,6 +393,8 @@ section
 
 variable (F : C ⥤ D) [F.Additive] [PreservesFiniteLimits F] [PreservesFiniteColimits F]
 
+/-- The component of `derivedTensorLeftDerivedCounit F` at `(X₁, X₂)` is the tensor product of
+the counits of `LF`, followed by the lax monoidal structure of `Qh`. -/
 lemma derivedTensorLeftDerivedCounit_app_app (X₁ X₂ : HomotopyCategory C (.up ℤ)) :
     ((derivedTensorLeftDerivedCounit F).app X₁).app X₂ =
       (F.leftDerivedFunctorCounit.app X₁ ⊗ₘ F.leftDerivedFunctorCounit.app X₂) ≫
@@ -397,6 +403,8 @@ lemma derivedTensorLeftDerivedCounit_app_app (X₁ X₂ : HomotopyCategory C (.u
 
 omit [MonoidalCategory D] [MonoidalPreadditive D] [MonoidalClosed D] [BraidedCategory D]
   [HasFunctorialFlatResolution D] in
+/-- The component of `leftDerivedDerivedTensorCounit F` at `(X₁, X₂)` is `LF` applied to the
+lax monoidal structure of `Qh`, followed by the counit of `LF` at `X₁ ⊗ X₂`. -/
 lemma leftDerivedDerivedTensorCounit_app_app (X₁ X₂ : HomotopyCategory C (.up ℤ)) :
     ((leftDerivedDerivedTensorCounit F).app X₁).app X₂ =
       F.leftDerivedFunctor.map (μ Qh X₁ X₂) ≫ F.leftDerivedFunctorCounit.app (X₁ ⊗ X₂) := by
@@ -449,6 +457,7 @@ lemma leftDerivedTensorComparison_naturality (τ : F ≅ F') [NatTrans.IsMonoida
     ← Qh.map_comp, ← mapHomotopyCategoryδNatTrans_naturality, Qh.map_comp,
     ← leftDerivedFunctorNatIso_hom_app_comp_counit_assoc]
   erw [← NatTrans.naturality_assoc]
+
 /-- The componentwise form of `CategoryTheory.Functor.leftDerivedTensorComparison_naturality`:
 a monoidal natural isomorphism `τ : F ≅ F'` carries the tensor comparison of `LF` at `(K, M)` to
 the one of `LF'`. -/
@@ -533,6 +542,7 @@ lemma leftDerivedTensorComparison_comp :
     Functor.map_comp, Functor.map_comp, Category.assoc, Category.assoc, reassoc_of% nG,
     ← reassoc_of% ne, leftDerivedFunctorCompIso_hom_app_comp_counit_assoc,
     mapHomotopyCategoryδNatTrans_comp, Qh.map_comp]
+
 /-- The componentwise form of `CategoryTheory.Functor.leftDerivedTensorComparison_comp`: the
 tensor comparison of `LF` followed by the one of `LG` is the tensor comparison of `L(F ⋙ G)`,
 through `L(F ⋙ G) ≅ LF ⋙ LG`. -/
