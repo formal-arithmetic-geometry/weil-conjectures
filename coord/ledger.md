@@ -4887,3 +4887,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 14:14 L: merged deliver/E1/lem-weil-pbc-separate-image-closed-from-closed (stage 2; reviewer PASS; first push; Sheaf.RingTheory.SeparateImageClosedFromClosed PrimeSpectrum.exists_one_mod_mem_of_disjoint_closure_image_zeroLocus)
 - 14:15 L: merged deliver/F1/lem-weil-pbc-scheme-modules-functorial-injective-embeddings (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.SchemeModulesFunctorialInjectiveEmbeddings AlgebraicGeometry.Scheme.Modules.exists_functorialInjectiveEmbeddings)
 - 14:15 L: merged deliver/G1/lem-weil-pbc-ringed-space-open-restriction-adjunction (stage 2; reviewer FIX; first push; Sheaf.Topology.OpenRestrictionAdjunction TopologicalSpace.Opens.exists_openRestrictionAdjunction)
+- 14:15 L: merged deliver/C1/lem-weil-pbc-schanuel (stage 2; reviewer FIX; first push; Sheaf.Algebra.Schanuel Module.schanuel)
