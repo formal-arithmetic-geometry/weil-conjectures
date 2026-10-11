@@ -13,14 +13,16 @@
  },
  "kind": "statement",
  "title": "Affine perfect-complex cut after a surjective fibre map",
- "statement": "Let R be a ring, let p be a prime ideal of R, and let K be a bounded-above complex of finite free R-modules. Assume that the canonical map H^0(K) tensor_R kappa(p) to H^0(K tensor_R^L kappa(p)) is surjective. Then there is f not in p such that, in the derived category D(R_f), K tensor_R R_f is isomorphic to tau_{<=0}(K tensor_R R_f) direct-sum tau_{>=1}(K tensor_R R_f), and tau_{>=1}(K tensor_R R_f) is represented by a bounded complex of finite projective R_f-modules in degrees at least 1; in particular tau_{>=1}(K tensor_R R_f) is perfect [def-pc-perfect-complex] of Tor-amplitude in [1,infinity).",
+ "statement": "Let R be a commutative ring, let p be a prime ideal of R, and let K be a bounded-above complex of finite free R-modules. Assume that the canonical map H^0(K) tensor_R kappa(p) to H^0(K tensor_R^L kappa(p)) [def-pc-module-cohomology-base-change] is surjective. Then there is f not in p such that, in the derived category D(R_f), K tensor_R R_f is isomorphic to tau_{<=0}(K tensor_R R_f) direct-sum tau_{>=1}(K tensor_R R_f), and tau_{>=1}(K tensor_R R_f) is represented by a bounded complex of finite projective R_f-modules in degrees at least 1; in particular tau_{>=1}(K tensor_R R_f) is perfect [def-pc-perfect-ring-complex] of Tor-amplitude in [1,infinity).",
  "source": {
   "document": "literature/stacks-project/more-algebra.tex",
   "place": "Tag 0A1U, Lemma better-cut-complex-in-two"
  },
  "stmt_deps": [
   "def-weil-abstract-derived-category",
-  "def-pc-perfect-complex"
+  "def-pc-perfect-ring-complex",
+  "def-pc-module-cohomology-base-change",
+  "def-pc-ring-tensor-cohomology"
  ],
  "proof": [
   {
@@ -139,5 +141,45 @@
   "group": "C1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-apc0116 (reviewer sub-agent of L); spot-checked: Read Tags 0A1U, 00O0, 0BCG; Steps 1-3 follow the 0A1U proof at i=0; hypotheses of 00O0 (1),(3) and 0BCG (2) with a=1 checked; citer 8b5e8f6cd Step 2 uses 'perfect of Tor-amplitude in [1,infinity)'; no duplicate (lem-sc-finite-locally-free-residue-isomorphism is the global sheaf iso version, lem-weil-pbc-flat-mod-injective local-ring flat version). FIX more, RETURN less: (1) E7/C4: the item's conclusion was silently changed from 'perfect of Tor-amplitude in [1,infinity)' (which the citer lem-sc-perfect-cut-complex-degree-zero uses) to 'represented by a bounded finite projective complex in degrees >=1', unnamed in the report; restored the original clause as a consequence of the stronger one, stmt_deps def-pc-perfect-complex restored, Step 2 ends with the elementary deduction (strictly perfect on Spec R_f, flat terms in degrees [1,b] give Tor-amplitude [1,infinity)); (2) B3: Step 2 TeX had lost all backslashes; restored; (3) B3: lem-pc-finite-projective-cokernel-localization cited [def-pc-perfect-complex] in its statement with empty stmt_deps; the definition is inline, so the bracket reference was dropped.; 2 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.AffinePerfectCutDegreeZero",
+  "declaration": "DerivedCategory.affine_perfect_cut_degree_zero",
+  "statement": "theorem affine_perfect_cut_degree_zero {R : Type v} [CommRing R] [∀ f : R, HasDerivedCategory.{v} (ModuleCat.{v} (Localization.Away f))] (p : Ideal R) [p.IsPrime] (K : CochainComplex (ModuleCat.{v} R) ℤ) (hbounded : ∃ b : ℤ, K.IsStrictlyLE b) (hfree : ∀ i : ℤ, Module.Free R (K.X i) ∧ Module.Finite R (K.X i)) (hsurj : Epi (ModuleCat.cohomologyBaseChange (B := p.ResidueField) K 0)) : ∃ f : R, f ∉ p ∧ Nonempty (Q.obj ((RingTensorCohomology.extend R (Localization.Away f)).obj K) ≅ Q.obj (((RingTensorCohomology.extend R (Localization.Away f)).obj K).truncLE 0) ⊞ Q.obj (((RingTensorCohomology.extend R (Localization.Away f)).obj K).truncGE 1)) ∧ (∃ (P : CochainComplex (ModuleCat.{v} (Localization.Away f)) ℤ) (b : ℤ), P.IsStrictlyGE 1 ∧ P.IsStrictlyLE b ∧ (∀ i : ℤ, Module.Projective (Localization.Away f) (P.X i) ∧ Module.Finite (Localization.Away f) (P.X i)) ∧ Nonempty (Q.obj (((RingTensorCohomology.extend R (Localization.Away f)).obj K).truncGE 1) ≅ Q.obj P)) ∧ (Q.obj (((RingTensorCohomology.extend R (Localization.Away f)).obj K).truncGE 1)).IsPerfect ∧ ∀ N : ModuleCat.{v} (Localization.Away f), (Q.obj (((RingTensorCohomology.extend R (Localization.Away f)).obj K).truncGE 1) ⊗ (singleFunctor (ModuleCat.{v} (Localization.Away f)) 0).obj N).IsGE 1",
+  "branch": "sheaf-dag",
+  "by": "J1",
+  "date": "2026-10-11",
+  "existing": false,
+  "file": "lean/Sheaf/Algebra/Homology/AffinePerfectCutDegreeZero.lean"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-apz1456",
+  "group": "J1",
+  "result": "pass",
+  "note": "Both modules compiled combined in L sandbox, #check matches record; R CommRing Type v; p prime; K bounded-above (IsStrictlyLE) finite free termwise; hsurj Epi of new cohomologyBaseChange (adjoint of H(unit), B=p.ResidueField); f∉p; split via Q.obj truncLE 0 ⊞ truncGE 1 of extend R R_f; bounded finite projective rep in [1,b]; upstream IsPerfect (HasDerivedCategory.{v}, ModuleCat.{v}, matches TorAmplitudeFlatModel universe); Tor-amp [1,∞) as ∀ N, IsGE 1 of ⊗ single N (half of upstream torAmplitudeIn); no let/notation; correction def-pc-perfect-complex (D(O_X)) -> ring perfect justified; no DAG node of general ring perfectness (def-pod-perfect-point-complex is fixed-setting); cohomology base-change map not in landed RingTensorCohomology (flat-only) or BaseDerivedTensorCohomologyModel",
+  "statement_corrected": true
+ },
+ "statement_change": {
+  "date": "2026-10-11",
+  "by": "J1 stage 2",
+  "old_statement": "Let R be a ring, let p be a prime ideal of R, and let K be a bounded-above complex of finite free R-modules. Assume that the canonical map H^0(K) tensor_R kappa(p) to H^0(K tensor_R^L kappa(p)) is surjective. Then there is f not in p such that, in the derived category D(R_f), K tensor_R R_f is isomorphic to tau_{<=0}(K tensor_R R_f) direct-sum tau_{>=1}(K tensor_R R_f), and tau_{>=1}(K tensor_R R_f) is represented by a bounded complex of finite projective R_f-modules in degrees at least 1; in particular tau_{>=1}(K tensor_R R_f) is perfect [def-pc-perfect-complex] of Tor-amplitude in [1,infinity).",
+  "what": "The conclusion lies in D(R_f) but cited a definition in D(O_X), which cannot be applied to a ring-module derived object. Replace that reference by the existing general ring-perfectness definition, record the canonical cohomology base-change map, and make explicit the commutative-ring convention of Stacks. No mathematical hypothesis or conclusion is strengthened or weakened.",
+  "source": {
+   "document": "literature/stacks-project/more-algebra.tex",
+   "place": "Tag 0A1U, Lemma better-cut-complex-in-two"
+  },
+  "citers": [
+   {
+    "id": "lem-sc-perfect-cut-complex-degree-zero",
+    "holds": true,
+    "note": "The affine application uses commutative coordinate rings; ring-perfectness and its scheme-sheaf counterpart are related by the affine comparison already used in the proof. All conclusions are retained."
+   }
+  ],
+  "old_stmt_deps": [
+   "def-weil-abstract-derived-category",
+   "def-pc-perfect-complex"
+  ]
  }
 }
