@@ -10,7 +10,7 @@ public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.RestrictScalars
 public import WeilConjectures.CategoryTheory.DerivedCategory.Complete.RationalCoefficient
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Triangulated
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.KInjectiveResolution
-public import WeilConjectures.CategoryTheory.Triangulated.HomotopyLimit
+public import WeilConjectures.CategoryTheory.Triangulated.HomotopyLimit.Tower
 public import WeilConjectures.EulerProduct
 public import WeilConjectures.SixFunctors.ProEtale.TraceFormula.Main
 public import WeilConjectures.ZetaLinearAlgebra.DetTrace
@@ -254,39 +254,59 @@ theorem isHomotopyLimit_derivedCompletionCone :
     Category.id_comp]
 
 include hI hK hc in
-/-- Adic realization, compact cohomology: `RΓ_c(X, -)` commutes with realization for a
-normalized system of bounded constructible complexes of finite Tor amplitude on a geometric
-scheme over a field, `RΓ_c(X, R lim_n K_n) ≅ R lim_n RΓ_c(X, K_n)`
-(blueprint: `sk-prop-trace-adic`). -/
-theorem isHomotopyLimit_mapCone_rightDerivedLowerShriek [s.IsSpecOfField] (aX : X ⟶ s)
-    [IsGeometric aX] [HasCompactification aX]
-    (hctf : ∀ n : ℕ,
-      DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} (R ⧸ I ^ n)) X (L n)) :
-    IsHomotopyLimit ((rightDerivedLowerShriek (ModuleCat.{u + 1} R) aX).mapCone c) := by
-  -- `Rf_! = Di_! ⋙ Rg_*` for the chosen compactification `aX = i ≫ g`. The right adjoint `Rg_*`
-  -- is triangulated and preserves products, so it preserves homotopy limits.
-  let cX := HasCompactification.compactification aX
-  -- The remaining step: the extension by zero `Di_!` commutes with `R lim` on towers of `Dctf`
-  -- objects. Countable products in `D(X_proét)` exist
-  -- (`DerivedCategory.hasLimitsOfShape_discrete`), but `Di_!` is a left adjoint and its
-  -- commutation with them needs repleteness of the pro-étale topos, which is not available.
-  have hi : IsHomotopyLimit ((cX.i)_!open[ModuleCat.{u + 1} R].mapDerivedCategory.mapCone c) :=
-    sorry
-  have :=
-    (derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} R) cX.g).rightAdjoint_preservesLimits
-  exact hi.map ((cX.g)_*[ModuleCat.{u + 1} R].rightDerivedFunctor)
+/-- Adic realization, compact cohomology (blueprint: `sk-prop-trace-adic` (ii)): compactly
+supported cohomology commutes with the realization, `RΓ_c(X, K_{𝒪_E}) ≅ R lim_n RΓ_c(X, K_n)`.
+
+At the integral stage `RΓ_c(X, -)` is the compact-support functor of
+`def-weil-integral-rational-qbar-compact-support`, defined levelwise: `RΓ_c(X, K_{𝒪_E})` is the
+derived limit `R lim_n RΓ_c(X, K_{𝒪_E} ⊗ᴸ R/Iⁿ)`, the point of a homotopy limit cone `d` of the
+tower `n ↦ Ra_{X!}(K_{𝒪_E} ⊗ᴸ R/Iⁿ)`. The statement is that this point is the derived limit of
+the `RΓ_c(X, K_n)` (the point of a homotopy limit cone `d'`), compatibly with the levelwise
+identifications `K_{𝒪_E} ⊗ᴸ R/Iⁿ ≅ K_n` of `exists_derivedCompletionDiagram_iso`. -/
+theorem exists_iso_rightDerivedLowerShriek_realization (aX : X ⟶ s) [HasCompactification aX]
+    {d : Cone (DerivedCategory.derivedCompletionDiagram (Scheme.ProEt.topology X) I c.pt ⋙
+      rightDerivedLowerShriek (ModuleCat.{u + 1} R) aX)} (hd : IsHomotopyLimit d)
+    {d' : Cone (K ⋙ rightDerivedLowerShriek (ModuleCat.{u + 1} R) aX)}
+    (hd' : IsHomotopyLimit d') :
+    ∃ e : DerivedCategory.derivedCompletionDiagram (Scheme.ProEt.topology X) I c.pt ≅ K,
+      (∀ n : ℕ, c.π.app (Opposite.op n) =
+        (DerivedCategory.derivedCompletionCone (Scheme.ProEt.topology X) I c.pt).π.app
+          (Opposite.op n) ≫ e.hom.app (Opposite.op n)) ∧
+      ∃ f : d.pt ≅ d'.pt, ∀ n : ℕ, f.hom ≫ d'.π.app (Opposite.op n) =
+        d.π.app (Opposite.op n) ≫
+          (rightDerivedLowerShriek (ModuleCat.{u + 1} R) aX).map (e.hom.app (Opposite.op n)) := by
+  obtain ⟨e, he⟩ := exists_derivedCompletionDiagram_iso I hI hK c hc
+  obtain ⟨f, hf⟩ := hd.exists_iso_of_iso
+    (Functor.isoWhiskerRight e (rightDerivedLowerShriek (ModuleCat.{u + 1} R) aX)) hd'
+  exact ⟨e, he, f, hf⟩
 
 include hI hK hc in
-/-- Adic realization, geometric stalks: the stalk at a geometric point `x̄ : s ⟶ X` commutes
-with realization for a normalized system of bounded constructible complexes of finite Tor
-amplitude on a geometric scheme over a field, `(R lim_n K_n)_x̄ ≅ R lim_n (K_n)_x̄`
-(blueprint: `sk-prop-trace-adic`). -/
-theorem isHomotopyLimit_mapCone_leftDerivedUpperStar [s.IsSpecOfField] (aX : X ⟶ s)
-    [IsGeometric aX] (x : s ⟶ X) (hx : x ≫ aX = 𝟙 s)
-    (hctf : ∀ n : ℕ,
-      DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} (R ⧸ I ^ n)) X (L n)) :
-    IsHomotopyLimit (((upperStar (ModuleCat.{u + 1} R) x).leftDerivedFunctor).mapCone c) :=
-  sorry
+/-- Adic realization, geometric stalks (blueprint: `sk-prop-trace-adic` (ii)): the stalk at a
+geometric point commutes with the realization, `(K_{𝒪_E})_x̄ ≅ R lim_n (K_n)_x̄`.
+
+At the integral stage the stalk at `x̄ : s ⟶ X` is the completed stalk
+`Lx̄^*_comp K_{𝒪_E} = R lim_n Lx̄^*(K_{𝒪_E} ⊗ᴸ R/Iⁿ)` of `def-weil-pbc-completed-pullback`, the
+point of a homotopy limit cone `d` of the tower `n ↦ Lx̄^*(K_{𝒪_E} ⊗ᴸ R/Iⁿ)`. The statement is
+that this point is the derived limit of the `(K_n)_x̄` (the point of a homotopy limit cone `d'`),
+compatibly with the levelwise identifications `K_{𝒪_E} ⊗ᴸ R/Iⁿ ≅ K_n` of
+`exists_derivedCompletionDiagram_iso`. -/
+theorem exists_iso_leftDerivedUpperStar_realization (x : s ⟶ X)
+    {d : Cone (DerivedCategory.derivedCompletionDiagram (Scheme.ProEt.topology X) I c.pt ⋙
+      (upperStar (ModuleCat.{u + 1} R) x).leftDerivedFunctor)} (hd : IsHomotopyLimit d)
+    {d' : Cone (K ⋙ (upperStar (ModuleCat.{u + 1} R) x).leftDerivedFunctor)}
+    (hd' : IsHomotopyLimit d') :
+    ∃ e : DerivedCategory.derivedCompletionDiagram (Scheme.ProEt.topology X) I c.pt ≅ K,
+      (∀ n : ℕ, c.π.app (Opposite.op n) =
+        (DerivedCategory.derivedCompletionCone (Scheme.ProEt.topology X) I c.pt).π.app
+          (Opposite.op n) ≫ e.hom.app (Opposite.op n)) ∧
+      ∃ f : d.pt ≅ d'.pt, ∀ n : ℕ, f.hom ≫ d'.π.app (Opposite.op n) =
+        d.π.app (Opposite.op n) ≫
+          ((upperStar (ModuleCat.{u + 1} R) x).leftDerivedFunctor).map
+            (e.hom.app (Opposite.op n)) := by
+  obtain ⟨e, he⟩ := exists_derivedCompletionDiagram_iso I hI hK c hc
+  obtain ⟨f, hf⟩ := hd.exists_iso_of_iso
+    (Functor.isoWhiskerRight e (upperStar (ModuleCat.{u + 1} R) x).leftDerivedFunctor) hd'
+  exact ⟨e, he, f, hf⟩
 
 end AdicRealization
 
