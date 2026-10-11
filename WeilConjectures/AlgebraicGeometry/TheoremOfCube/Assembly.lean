@@ -216,6 +216,99 @@ theorem exists_section_isFreeGenerator (x : 𝟙_ _ ⟶ X) (y : 𝟙_ _ ⟶ Y)
   rw [Scheme.Modules.presheaf_map_homOfLE_map_homOfLE]
   exact hWgen
 
+
+/-- **Triviality on a fibre spreads out** (Stacks, Tag 0BF3), in terms of one invertible module.
+Let `X`, `Y` be proper and geometrically integral over `K` with `K`-points `x`, `y`, and let `L`
+be an invertible module on `X ×_K Y ×_K Z` which is trivial on the slices `{x} × Y × Z` and
+`X × {y} × Z` and on the fibre over `t ∈ Z`. Then `L` has a free generator over the preimage of
+an open neighbourhood of `t`. -/
+theorem exists_mem_isFreeGenerator [IsProper X.hom] [GeometricallyIntegral X.hom]
+    [IsProper Y.hom] [GeometricallyIntegral Y.hom] (x : 𝟙_ _ ⟶ X) (y : 𝟙_ _ ⟶ Y)
+    (L : ((X ⊗ Y) ⊗ Z).left.Modules) [L.IsInvertible]
+    (hx : Nonempty ((Scheme.Modules.pullback (sliceX X Y Z x)).obj L ≅ 𝟙_ _))
+    (hy : Nonempty ((Scheme.Modules.pullback (sliceY X Y Z y)).obj L ≅ 𝟙_ _)) (t : Z.left)
+    (ht : Nonempty ((Scheme.Modules.pullback ((snd (X ⊗ Y) Z).left.fiberι t)).obj L ≅
+      𝟙_ ((snd (X ⊗ Y) Z).left.fiber t).Modules)) :
+    ∃ U : Z.left.Opens, t ∈ U ∧ ∃ m : Γ(L, (snd (X ⊗ Y) Z).left ⁻¹ᵁ U),
+      Scheme.Modules.IsFreeGenerator m := by
+  have : IsProper (X ⊗ Y).hom :=
+    inferInstanceAs (IsProper (Limits.pullback.fst X.hom Y.hom ≫ X.hom))
+  have : GeometricallyIntegral (X ⊗ Y).hom :=
+    GeometricallyIntegral.comp_of_flat (Limits.pullback.fst X.hom Y.hom) X.hom
+  have : IsProper (snd (X ⊗ Y) Z).left :=
+    inferInstanceAs (IsProper (Limits.pullback.snd (X ⊗ Y).hom Z.hom))
+  have : LocallyOfFinitePresentation (snd (X ⊗ Y) Z).left :=
+    inferInstanceAs (LocallyOfFinitePresentation (Limits.pullback.snd (X ⊗ Y).hom Z.hom))
+  have : GeometricallyIntegral (snd (X ⊗ Y) Z).left :=
+    inferInstanceAs (GeometricallyIntegral (Limits.pullback.snd (X ⊗ Y).hom Z.hom))
+  have : SheafOfModules.IsInvertible.{u, u, u} L :=
+    Scheme.Modules.IsInvertible.sheafOfModules_isInvertible L
+  -- the twist `𝒢` has vanishing `H¹` over affine opens near `t`
+  have := isFinitePresentation_crossIdeal X Y x y
+  have := Scheme.Modules.isQuasicoherent_toModules (crossIdeal X Y x y)
+  have : (twist X Y Z x y L).IsFinitePresentation :=
+    Scheme.Modules.isFinitePresentation_tensorObj _ L
+  have hflat : (twist X Y Z x y L).IsFlatOver (snd (X ⊗ Y) Z).left :=
+    Scheme.Modules.isFlatOver_pullback_fst_tensorObj (X ⊗ Y).hom Z.hom _ L
+  obtain ⟨U₁, htU₁, hU₁⟩ := Scheme.Modules.exists_subsingleton_H_preimage_of_hFiber_eq_zero
+    (snd (X ⊗ Y) Z).left (twist X Y Z x y L) hflat 1 t (hFiber_twist_eq_zero X Y Z x y L t ht)
+  obtain ⟨V, hV, htV, hVU₁⟩ := exists_isAffineOpen_mem_and_subset htU₁
+  -- a section generating along the slice `{x} × Y × Z` over `V`
+  obtain ⟨ex, ey, hex, -, hC⟩ := exists_isFreeGenerator_slices X Y Z x y L hx hy
+  obtain ⟨s, hs⟩ := exists_section_isFreeGenerator X Y Z x y L hex hC hV (hU₁ V hV hVU₁)
+  -- pass to the open subscheme `S = f⁻¹ V` over `V`
+  let S := (snd (X ⊗ Y) Z).left ⁻¹ᵁ V
+  let f' := (snd (X ⊗ Y) Z).left ∣_ V
+  have : (L.restrict S.ι).IsInvertible :=
+    Scheme.Modules.IsInvertible.of_iso ((Scheme.Modules.restrictFunctorIsoPullback S.ι).app L).symm
+  let t' : V.toScheme := ⟨t, htV⟩
+  have ht' : Nonempty ((Scheme.Modules.pullback (f'.fiberι t')).obj (L.restrict S.ι) ≅
+      𝟙_ (f'.fiber t').Modules) := by
+    obtain ⟨e⟩ := Scheme.Modules.nonempty_iso_unit_fiber_morphismRestrict
+      (snd (X ⊗ Y) Z).left L V t' ht
+    exact ⟨(Scheme.Modules.pullback _).mapIso
+      ((Scheme.Modules.restrictFunctorIsoPullback S.ι).app L) ≪≫ e⟩
+  have hSS : S.ι ''ᵁ ⊤ = S := Scheme.Opens.ι_image_top S
+  let s' : Γ(L.restrict S.ι, ⊤) := L.presheaf.map (homOfLE hSS.le).op s
+  -- the point `(x, y, t)`
+  set q₀ := (slicePt Z y).base t
+  have hq₀ : sliceX X Y Z x q₀ ∈ S := by
+    change (snd (X ⊗ Y) Z).left (sliceX X Y Z x ((slicePt Z y) t)) ∈ V
+    rw [← Scheme.Hom.comp_apply, ← Scheme.Hom.comp_apply, ← Over.comp_left, ← Over.comp_left]
+    simpa using htV
+  obtain ⟨W, hWS, hqW, hWgen⟩ := hs q₀ hq₀
+  obtain ⟨p', hp'⟩ : sliceX X Y Z x q₀ ∈ Set.range S.ι := by
+    have h := Scheme.Opens.range_ι S
+    exact (Set.ext_iff.mp h _).mpr hq₀
+  have hgen : Scheme.Modules.GeneratesAt s' p' := by
+    refine ⟨S.ι ⁻¹ᵁ W, show S.ι p' ∈ W from hp' ▸ hqW, ?_⟩
+    rw [Scheme.Modules.isFreeGenerator_restrict_iff]
+    have hWeq : S.ι ''ᵁ (S.ι ⁻¹ᵁ W) = W := by
+      rw [Scheme.Hom.image_preimage_eq_opensRange_inf, Scheme.Opens.opensRange_ι,
+        inf_eq_right.mpr hWS]
+    have h := hWgen.map hWeq.le
+    rw [Scheme.Modules.presheaf_map_homOfLE_map_homOfLE] at h
+    convert h using 1
+    rw [Scheme.Modules.restrict_map]
+    exact Scheme.Modules.presheaf_map_presheaf_map_apply _ _ _ _ _
+  have hfp' : f' p' = t' := by
+    refine Subtype.ext ?_
+    rw [morphismRestrict_base_coe]
+    change (snd (X ⊗ Y) Z).left (S.ι p') = t
+    rw [hp']
+    have hcomp : slicePt Z y ≫ sliceX X Y Z x ≫ (snd (X ⊗ Y) Z).left = 𝟙 Z.left := by
+      rw [← Over.comp_left, ← Over.comp_left]
+      simp
+    change (slicePt Z y ≫ sliceX X Y Z x ≫ (snd (X ⊗ Y) Z).left) t = t
+    rw [hcomp]
+    rfl
+  obtain ⟨U', htU', hU'⟩ := Scheme.Modules.exists_isFreeGenerator_preimage_of_generatesAt f'
+    (L.restrict S.ι) t' ht' s' hfp' hgen
+  refine ⟨V.ι ''ᵁ U', ⟨t', htU', rfl⟩, ?_⟩
+  have heq := image_morphismRestrict_preimage (snd (X ⊗ Y) Z).left V U'
+  rw [Scheme.Modules.isFreeGenerator_restrict_iff] at hU'
+  exact ⟨_, hU'.map heq.ge⟩
+
 end TheoremOfCube
 
 end AlgebraicGeometry
