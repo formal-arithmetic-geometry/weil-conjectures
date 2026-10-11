@@ -626,7 +626,8 @@ lemma restrictAlong_restrictAlong {V : T.Etale} {V' : T'.Etale} {V'' : T''.Etale
     ← restrictAlong_map _ _ _ _ _ (V' := pullbackObj (m' ≫ m) a) (pullbackObjFst m a) δ hδ,
     map_restrictAlong,
     restrictAlong_congr (h := show (pullbackObjFst m a).left ≫ m =
-      pullback.snd m a.left ≫ a.left from pullback.condition), ← restrictAlong_map _ _ _ _ _ (V' := pullbackObj m a) a
+      pullback.snd m a.left ≫ a.left from pullback.condition),
+    ← restrictAlong_map _ _ _ _ _ (V' := pullbackObj m a) a
       (pullback.snd m a.left) hsnd, e₀, restrictAlong_pullSection,
     restrictAlong_congr (h := show (pullbackObjFst (m' ≫ m) a).left ≫ m' ≫ m =
       pullback.snd (m' ≫ m) a.left ≫ a.left by simp [pullback.condition]),

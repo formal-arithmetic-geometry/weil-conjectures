@@ -202,6 +202,7 @@ noncomputable def baseChangeDiagramToBase {k : J} {E : Scheme.{u}} (q : E ⟶ D.
     simp only [Functor.const_obj_obj, Functor.const_obj_map, Category.comp_id] at h ⊢
     rw [baseChangeDiagram_map_snd_assoc, h]
 
+omit [∀ j, CompactSpace (D.obj j)] [∀ j, QuasiSeparatedSpace (D.obj j)] in
 include hc in
 /-- **Morphisms to a scheme of finite presentation over the base descend to a stage.** Let
 `q : E ⟶ Dₖ` with `E` quasi-compact and quasi-separated, and let `u : U ⟶ R` be locally of
@@ -248,6 +249,7 @@ section Cover
 
 variable [∀ j, CompactSpace (D.obj j)]
 
+omit [∀ j, CompactSpace (D.obj j)] in
 include hc in
 /-- **Coverings descend to a stage.** Let `p : V ⟶ Dₖ` with `V` quasi-compact and let
 `eᵢ : Eᵢ ⟶ V` be finitely many étale morphisms. If every point of `V ×_{Dₖ} X` maps into one of
