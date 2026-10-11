@@ -138,5 +138,24 @@
   "group": "K1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-dkr1813 (reviewer sub-agent of L); spot-checked: FIX more, RETURN less: (1) C1/C4/C7 Step 1 marked elementary with no uses, and its tool lem-pur-diagonal-regular-immersion lives in the purity conventions (finite-type k-schemes over the finite-field datum), not over a general Noetherian base S; tool use dropped, new statement-only node lem-sc-smooth-diagonal-regular-immersion (Stacks 067U applied to the diagonal as a section of smooth p_1; LeanFinder no match) cited instead. (2) C4 new child lem-sc-koszul-regular-closed-immersion-perfect required a Koszul-regular generating sequence on EVERY affine open (false for the diagonal, e.g. non-principal ideals of points on affine opens of curves); weakened to an affine open neighbourhood of each point, matching 068C and what Step 2 delivers. (3) Step 3 now states X x_S X Noetherian (finite type over S) for the child's hypothesis; dropped the lemma from the item's stmt_deps. Checked no cycle with parent lem-sc-smooth-proper-relative-dualizing-general; def-weil-pbc-koszul-regular-sequence cited; regular->Koszul via lem-weil-pbc-regular-sequence-koszul-regular statement.; 3 file(s) fixed by the reviewer; 1 statement node(s) added by the reviewer (FIX more, RETURN less)"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SmoothDiagonalKoszulRegular",
+  "declaration": "AlgebraicGeometry.smooth_diagonal_koszul_regular_perfect_proper",
+  "file": "lean/Sheaf/AlgebraicGeometry/SmoothDiagonalKoszulRegular.lean",
+  "statement": "theorem smooth_diagonal_koszul_regular_perfect_proper {X S : Scheme.{u}} (d : ℕ) (f : X ⟶ S) [IsNoetherian S] [SmoothOfRelativeDimension d f] [LocallyOfFiniteType f] [QuasiCompact f] [IsClosedImmersion (pullback.diagonal f)] [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings (pullback f f).toRingedSpace))] [∀ U : (pullback f f).Opens, HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings (pullback f f).toRingedSpace).over U))] : (∀ y : (pullback f f : Scheme.{u}), ∃ U : (pullback f f).Opens, y ∈ U ∧ IsAffineOpen U ∧ ∃ (I : Ideal (Γ(pullback f f, U))) (r : ℕ) (g : Fin r → Γ(pullback f f, U)), I = Ideal.span (Set.range g) ∧ RingTheory.Sequence.IsKoszulRegular g ∧ (∃ e : Scheme.Opens.toScheme ((pullback.diagonal f) ⁻¹ᵁ U) ≅ Spec (CommRingCat.of (Γ(pullback f f, U) ⧸ I)), (pullback.diagonal f) ∣_ U ≫ U.toSpecΓ = e.hom ≫ Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk I))) ∧ (I = ⊤ ∨ r = d)) ∧ Scheme.IsPerfect (pullback f f) ((DerivedCategory.singleFunctor (SheafOfModules.{u} (moduleRings (pullback f f).toRingedSpace)) 0).obj ((Scheme.Modules.pushforward (pullback.diagonal f)).obj (SheafOfModules.unit X.ringCatSheaf))) ∧ IsProper (pullback.diagonal f)",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-spd1534"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-spd1534",
+  "group": "F1",
+  "result": "fix",
+  "note": "S Noetherian=IsNoetherian; smooth pure rel dim d=SmoothOfRelativeDimension d f; finite type=LocallyOfFiniteType+QuasiCompact; separated=IsClosedImmersion (pullback.diagonal f) (none hollow: inferInstance fails); Koszul-regular immersion clause restated in K1 8c2dfdd21 affine quotient-presentation form (Opens+IsAffineOpen, I=Ideal.span (Set.range g), IsKoszulRegular g, e : Delta^-1 U = Spec(Gamma/I) over U) plus codimension (I = top or r = d), tested to feed koszulRegular_closedImmersion_perfect's h directly; perfect = Scheme.IsPerfect of singleFunctor 0 of pushforward Delta of unit as K1; IsProper Delta; universes u,w as K1"
  }
 }
