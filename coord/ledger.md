@@ -3222,3 +3222,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 01:19 UTC L: J1 ring-derived-map-lift FIX 4db9a2f32 (R-rml0118; the second reading's silent statement change reverted to the D(R) form the citer uses).
 - 01:20 L: returned deliver/C1/lem-pur-homotopy-category-triangulated (reviewer RETURN: Not a fault: the node has been a Mathlib leaf since 01:08 UTC (commit b127e0c5a: the instance IsTriangulated (HomotopyCa)
 - 01:21 UTC L: C1 delivery of the Mathlib leaf lem-pur-homotopy-category-triangulated returned as unneeded (1f67a0a23), branch deleted with a notice.
+- 01:23 L: merged deliver/J1/lem-sc-strict-henselization-mod-power-free (reviewer FIX; first push; new nodes: 0)

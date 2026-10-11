@@ -13,7 +13,7 @@
  },
  "kind": "statement",
  "title": "Strict henselization quotients are free over base quotients",
- "statement": "Let A be a Noetherian local commutative ring [def-weil-pbc-noetherian-ring] with maximal ideal n, and let A^{\\mathrm{sh}} be its strict henselization with respect to a separable closure of the residue field [lem-weil-pbc-strict-henselization-triples]. There is a set X such that, for every r\\ge1, the A/n^r-module A^{\\mathrm{sh}}/(nA^{\\mathrm{sh}})^r is free on the images of X; consequently the inverse limit T=\\varprojlim_r A^{\\mathrm{sh}}/(nA^{\\mathrm{sh}})^r is the n-adic completion [def-weil-pbc-adic-completion] of the free A-module \\bigoplus_{x\\in X}A.",
+ "statement": "Let A be a Noetherian local commutative ring [def-weil-pbc-noetherian-ring] with maximal ideal n, and let A^{\\mathrm{sh}} be its strict henselization with respect to a separable closure of the residue field [lem-weil-pbc-strict-henselization-triples]. There is a set X such that, for every r\\ge1, the A/n^r-module A^{\\mathrm{sh}}/(nA^{\\mathrm{sh}})^r is free on the images of X; consequently the inverse limit T=\\varprojlim_r A^{\\mathrm{sh}}/(nA^{\\mathrm{sh}})^r is canonically isomorphic to \\varprojlim_r ((\\bigoplus_{x\\in X}A)/n^r(\\bigoplus_{x\\in X}A)), the n-adic module completion of the free A-module \\bigoplus_{x\\in X}A (where this completion is defined by the displayed inverse limit), and T is the n-adic ring completion [def-weil-pbc-adic-completion] of A^{\\mathrm{sh}}.",
  "source": {
   "document": "literature/stacks-project/more-algebra.tex",
   "place": "Lemma Tag 07QM (lemma-dumb-properties-henselization), part (4), and the completion identification in Lemma Tag 06LJ(c)"
@@ -23,9 +23,54 @@
   "lem-weil-pbc-strict-henselization-triples",
   "def-weil-pbc-adic-completion"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Choose a basis of the separable closure K of the residue field A/n over A/n, and choose lifts X in A^{\\mathrm{sh}}. By [lem-sc-strict-henselization-faithfully-flat] the map A\\to A^{\\mathrm{sh}} is flat, while [lem-weil-pbc-strict-henselization-triples] identifies the maximal ideal of A^{\\mathrm{sh}} with nA^{\\mathrm{sh}} and its residue field with K. For each r\\ge1 we have (nA^{\\mathrm{sh}})^r=n^rA^{\\mathrm{sh}}, so A^{\\mathrm{sh}}/(nA^{\\mathrm{sh}})^r=A^{\\mathrm{sh}}\\otimes_A A/n^r is a flat A/n^r-module, as a base change of a flat module (Algebra, Tag 00HI). The ring A/n^r is local with nilpotent maximal ideal n/n^r, and the reduction of A^{\\mathrm{sh}}/(nA^{\\mathrm{sh}})^r modulo n/n^r is A^{\\mathrm{sh}}/nA^{\\mathrm{sh}}=K, an A/n-vector space with basis the images of X. Thus the hypotheses of [lem-weil-pbc-local-artinian-basis-when-flat], condition (1), hold for R=A/n^r, M=A^{\\mathrm{sh}}/(nA^{\\mathrm{sh}})^r and the images of X.",
+   "uses": [
+    "lem-sc-strict-henselization-faithfully-flat",
+    "lem-weil-pbc-strict-henselization-triples",
+    "lem-weil-pbc-local-artinian-basis-when-flat"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Lemma Tag 07QM (lemma-dumb-properties-henselization), part (4), using Algebra Tag 051F"
+   }
+  },
+  {
+   "text": "Applying [lem-weil-pbc-local-artinian-basis-when-flat] at each r gives that A^{\\mathrm{sh}}/(nA^{\\mathrm{sh}})^r is free over A/n^r on the images of X. This is exactly the quotient assertion, including the same set X for every r because the chosen lifts are fixed in A^{\\mathrm{sh}}.",
+   "uses": [
+    "lem-weil-pbc-local-artinian-basis-when-flat"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Lemma Tag 07QM (lemma-dumb-properties-henselization), part (4)"
+   }
+  },
+  {
+   "text": "Let F=\\bigoplus_{x\\in X}A. The basis isomorphisms F/n^rF \\cong A^{\\mathrm{sh}}/(nA^{\\mathrm{sh}})^r commute with the reduction maps because every basis vector is sent to the fixed image of x. Taking inverse limits therefore identifies the n-adic completion of F, namely \\varprojlim_r F/n^rF, with T=\\varprojlim_r A^{\\mathrm{sh}}/(nA^{\\mathrm{sh}})^r. Hence T is the n-adic completion of F. Finally, since nA^{\\mathrm{sh}} is an ideal of A^{\\mathrm{sh}}, the ring T=\\varprojlim_r A^{\\mathrm{sh}}/(nA^{\\mathrm{sh}})^r is by [def-weil-pbc-adic-completion] (with ideal nA^{\\mathrm{sh}}) the n-adic ring completion of A^{\\mathrm{sh}}; the identification above is one of A-modules.",
+   "uses": [
+    "def-weil-pbc-adic-completion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Lemma Tag 06LJ (lemma-henselization-noetherian), proof part (c), paragraph beginning 'To finish the proof of (c)'"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-strict-henselization-faithfully-flat",
+  "lem-weil-pbc-strict-henselization-triples",
+  "lem-weil-pbc-local-artinian-basis-when-flat",
+  "def-weil-pbc-adic-completion"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Lemma Tag 07QM (lemma-dumb-properties-henselization), part (4), and Lemma Tag 06LJ(c) completion identification"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -50,12 +95,43 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sc-strict-henselization-completion-flat-over-base",
   "by": "worker",
   "date": "2026-10-11"
  },
  "chapter": "sec-curve-estimates",
- "unit": "sk-thm-br"
+ "unit": "sk-thm-br",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-sc-strict-henselization-mod-power-free",
+  "worker": "stage1",
+  "summary": "Split Tag 07QM(4) using the existing local Artinian flat-basis criterion. The item proof specializes strict-henselization flatness and the maximal-ideal/residue-field clauses to each quotient, applies the criterion, and identifies the inverse limit with the completion of the free direct sum by compatible basis isomorphisms.",
+  "blueprint": "Realizes the boundary-stalk completion flatness argument inherited through lem-sc-strict-henselization-completion-flat-over-base: strict henselization quotients are free on fixed residue-field lifts, and the completion is the inverse limit of the resulting free quotients.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-strict-henselization-triples",
+    "why": "The strict-henselization triples construction supplies the residue-field and maximal-ideal identifications needed by the quotient argument; the sk-thm-br route has no replacement for this ring-level construction."
+   },
+   {
+    "node": "lem-weil-pbc-local-artinian-basis-when-flat",
+    "why": "The generic flat local Artinian basis criterion is the exact algebraic tool needed for each quotient; the sk-thm-br route has no replacement for it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-strict-henselization-triples",
+  "lem-weil-pbc-local-artinian-basis-when-flat",
+  "lem-weil-pbc-strict-henselization-triples",
+  "lem-weil-pbc-local-artinian-basis-when-flat"
+ ],
+ "reviewed": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-shm0122",
+  "group": "J1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-shm0122 (reviewer sub-agent of L); spot-checked: Statement vs Stacks 07QM(4) and 06LJ(c): agrees; statement change (module completion made explicit, since def-weil-pbc-adic-completion is ring-level; ring-completion clause added) is named in the second reading (E7). Step 1 hypotheses vs faithfully-flat, triples (m_C = nA^sh, residue K) and 051F node (nilpotent max ideal, flat, residue basis): hold. Step 3 inverse-limit identification compatible in r; matches citer da814487e step 2 usage (C4). No duplicate (checked henselization nodes incl. henselization-flat-quotients, etale-triple-to-sh-completion-flat). Tool uses accepted (generic pbc ring lemmas). FIX more, RETURN less: (1) B4 step 1 plain-text arrows -> and >= rewritten in TeX; (2) step 1 made explicit (nA^sh)^r = n^rA^sh and flat base change (Tag 00HI) and the 051F instantiation R, M; (3) step 3 now proves the added statement clause that T is the ring completion of A^sh (definitional by def-weil-pbc-adic-completion with ideal nA^sh), which the second reading missed.; 1 file(s) fixed by the reviewer"
+ }
 }
