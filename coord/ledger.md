@@ -5501,3 +5501,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 18:08 L: merged deliver/E1/lem-weil-pbc-henselization-pair-g-ring (stage 2; reviewer PASS; first push; Sheaf.RingTheory.HenselizationPairGRing RingTheory.isGRing_of_pair_henselization)
 - 18:08 L: merged deliver/C1/lem-pc-dualizable-evaluation-criterion (stage 2; reviewer FIX; first push; Sheaf.AlgebraicGeometry.DualizableEvaluationCriterion AlgebraicGeometry.dualizable_evaluation_criterion)
 - 18:08 L: merged deliver/C1/lem-pc-rf-single-complex-inherited-tensor-condition (stage 2; reviewer FIX; first push; Sheaf.AlgebraicGeometry.SingleComplexInheritedTensorCondition AlgebraicGeometry.singleComplexInheritedTensorCondition)
+- 18:09 L: merged deliver/C1/lem-pc-derived-tensor-action-naturality (stage 2; reviewer PASS; first push; Sheaf.Algebra.Homology.DerivedTensorActionNaturality DerivedCategory.exists_derivedTensor_action_naturality)
