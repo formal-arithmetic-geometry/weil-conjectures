@@ -1,0 +1,66 @@
+/-
+Copyright (c) 2026 The SHEAF contributors. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: SHEAF group H1
+-/
+import Mathlib.Algebra.Category.ModuleCat.Abelian
+import Mathlib.Algebra.Category.ModuleCat.Projective
+import Mathlib.Algebra.Category.ModuleCat.Monoidal.Basic
+import Mathlib.Algebra.Homology.ShortComplex.ShortExact
+import Mathlib.CategoryTheory.Abelian.Projective.Dimension
+import Mathlib.CategoryTheory.Monoidal.Tor
+
+/-!
+# Two-step dimension shifting for Tor
+
+Source: blueprint, `lem-sc-p1-graded-resolution`, proof; Stacks Project,
+Algebra, proof of Lemma Tag 00S2 and Section Tag 00LY
+(blueprint: lem-sc-p1-tor-dimension-shifting).
+-/
+
+universe u
+
+open CategoryTheory
+open CategoryTheory.Limits
+
+namespace CategoryTheory
+
+/--
+Two-step dimension shifting for Tor. The short exact sequence `E₀` is
+`0 → K₁ → F₀ → M → 0` and `E₁` is `0 → K₂ → F₁ → K₁ → 0`, glued along
+`hK₁ : E₁.X₃ = E₀.X₁`. The first clause is the isomorphism
+`θ k : Tor₁(K₂,k) ≅ Tor₃(M,k)` of a family natural in the second module;
+the second is the vanishing when `M` has projective dimension at most two.
+
+Source: blueprint, `lem-sc-p1-graded-resolution`, proof; Stacks Project, Algebra,
+proof of Lemma Tag 00S2 (dimension shifting), and Section Tag 00LY (Tor).
+
+Step 1. Apply `lem-sc-p1-tor-dimension-shift-natural` to `E₁` (`F₁` free)
+with `i = 1`: isomorphisms `Tor₂(K₁,N) ≅ Tor₁(K₂,N)`, natural in `N`.
+Step 2. Apply the same lemma to `E₀` (`F₀` free) with `i = 2`: isomorphisms
+`Tor₃(M,N) ≅ Tor₂(K₁,N)`, natural in `N`. Compose the inverse of the Step 1
+isomorphism with the inverse of this one (transporting along `hK₁`) to obtain
+`θ N : Tor₁(K₂,N) ≅ Tor₃(M,N)`; inverses and composites of natural
+isomorphisms are natural, which gives the naturality equation. Take `N = k`.
+Step 3. If `M` has a projective resolution of length at most two, choose one
+concentrated in degrees 0, 1, and 2. By `def-weil-pbc-tor-modules`, `Tor₃(M,k)`
+is its third homology after tensoring with `k`; the degree-3 and degree-4 terms
+vanish, so this homology is zero. Transport the vanishing across `θ k`.
+(blueprint: lem-sc-p1-tor-dimension-shifting)
+-/
+theorem tor_dimension_shifting
+    {S : Type u} [CommRing S] (k : ModuleCat.{u} S)
+    (E₀ E₁ : ShortComplex (ModuleCat.{u} S))
+    (hE₀ : E₀.ShortExact) (hE₁ : E₁.ShortExact) (hK₁ : E₁.X₃ = E₀.X₁)
+    [Module.Free S E₀.X₂] [Module.Free S E₁.X₂] :
+    (∃ θ : ∀ N : ModuleCat.{u} S,
+        (((Tor' (ModuleCat.{u} S) 1).obj E₁.X₁).obj N) ≅
+          (((Tor' (ModuleCat.{u} S) 3).obj E₀.X₃).obj N),
+      ∀ (N N' : ModuleCat.{u} S) (g : N ⟶ N'),
+        ((Tor' (ModuleCat.{u} S) 1).obj E₁.X₁).map g ≫ (θ N').hom =
+          (θ N).hom ≫ ((Tor' (ModuleCat.{u} S) 3).obj E₀.X₃).map g) ∧
+    (HasProjectiveDimensionLE E₀.X₃ 2 →
+      IsZero (((Tor' (ModuleCat.{u} S) 1).obj E₁.X₁).obj k)) := by
+  sorry
+
+end CategoryTheory

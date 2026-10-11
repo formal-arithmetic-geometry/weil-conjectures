@@ -3828,3 +3828,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 08:26 L: merged deliver/E1/lem-sc-etale-base-change-geometric (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.EtaleAtFieldExtension AlgebraicGeometry.etaleAt_iff_fieldExtension)
 - 08:26 L: merged deliver/M1/def-galois-categories (stage 2; reviewer FIX; first push; Sheaf.AlgebraicGeometry.GaloisCategories AlgebraicGeometry.Scheme.FLC)
 - 08:27 L: merged deliver/M1/lem-pc-projective-base-change (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.Morphisms.ProjectiveBaseChange AlgebraicGeometry.projective_base_change)
+- 08:27 L: merged deliver/H1/lem-sc-p1-tor-dimension-shifting (stage 2; reviewer FIX; first push; Sheaf.Algebra.TorDimensionShifting CategoryTheory.tor_dimension_shifting)
