@@ -48,7 +48,7 @@ vanishing criterion for `R^q h_* (Λ/dΛ)`.
 
 @[expose] public section
 
-universe u
+universe w u
 
 open CategoryTheory Limits
 
@@ -715,7 +715,7 @@ the restriction to `V` computed on the site of `Y` as in
 `AlgebraicGeometry.Etale.higherDirectImagePresheaf`, commutes with filtered colimits of sheaves
 of `Λ`-modules. -/
 theorem Etale.preservesColimitsOfShape_cohomology {Y : Scheme.{u}} (V : Y.Etale)
-    [CompactSpace V.left] [QuasiSeparatedSpace V.left] (q : ℤ) (J : Type) [SmallCategory J]
+    [CompactSpace V.left] [QuasiSeparatedSpace V.left] (q : ℤ) (J : Type w) [SmallCategory J]
     [IsFiltered J] :
     PreservesColimitsOfShape J
       (DerivedCategory.Plus.singleFunctor (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)) 0 ⋙

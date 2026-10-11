@@ -31,36 +31,6 @@ section FreeSheaf
 
 variable {X Y : Scheme.{u}}
 
-/-- Maps out of `h^* Λ[W]` are maps out of `Λ[W ×_X Y]`: both are sections over `W ×_X Y`. -/
-noncomputable def Etale.upperStarFreeSheafHomEquiv (h : Y ⟶ X) (W : X.Etale)
-    (G : Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :
-    ((h)^*[ModuleCat.{u + 1} Λ].obj ((Etale.freeSheaf Λ X).obj W) ⟶ G) ≃
-      ((Etale.freeSheaf Λ Y).obj ((MorphismProperty.Over.pullback @Etale ⊤ h).obj W) ⟶ G) :=
-  (((Etale.upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) h).homEquiv _ _).trans
-    (Etale.freeSheafHomEquiv Λ W _)).trans (Etale.freeSheafHomEquiv Λ _ G).symm
-
-lemma Etale.upperStarFreeSheafHomEquiv_comp (h : Y ⟶ X) (W : X.Etale)
-    {G G' : Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)}
-    (f : (h)^*[ModuleCat.{u + 1} Λ].obj ((Etale.freeSheaf Λ X).obj W) ⟶ G) (g : G ⟶ G') :
-    Etale.upperStarFreeSheafHomEquiv Λ h W G' (f ≫ g) =
-      Etale.upperStarFreeSheafHomEquiv Λ h W G f ≫ g := by
-  apply (Etale.freeSheafHomEquiv Λ _ G').injective
-  simp only [Etale.upperStarFreeSheafHomEquiv, Equiv.trans_apply,
-    Etale.freeSheafHomEquiv_comp, Adjunction.homEquiv_naturality_right]
-  erw [Equiv.apply_symm_apply, Equiv.apply_symm_apply]
-  rfl
-
-/-- The pullback of a free sheaf is free: `h^* Λ[W] ≅ Λ[W ×_X Y]`, both corepresenting the
-functor `G ↦ G(W ×_X Y)`. -/
-noncomputable def Etale.upperStarFreeSheafIso (h : Y ⟶ X) (W : X.Etale) :
-    (h)^*[ModuleCat.{u + 1} Λ].obj ((Etale.freeSheaf Λ X).obj W) ≅
-      (Etale.freeSheaf Λ Y).obj ((MorphismProperty.Over.pullback @Etale ⊤ h).obj W) :=
-  (Coyoneda.fullyFaithful.preimageIso (NatIso.ofComponents
-    (fun G ↦ (Etale.upperStarFreeSheafHomEquiv Λ h W G).toIso)
-    (fun g ↦ by
-      ext f
-      exact Etale.upperStarFreeSheafHomEquiv_comp Λ h W f g))).unop.symm
-
 /-- Maps out of `v_! Λ[T]` are maps out of `Λ[T → V → Y]`, for `v : V ⟶ Y` étale. -/
 noncomputable def Etale.etaleLowerShriekFreeSheafHomEquiv {V : Scheme.{u}} (v : V ⟶ Y)
     (hv : Etale v) (T : V.Etale) (G : Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :
@@ -195,12 +165,10 @@ end Restriction
 /-- The final object of the small étale site of `Z`, the identity of `Z`. -/
 noncomputable abbrev Etale.finalObject (Z : Scheme.{u}) : Z.Etale :=
   MorphismProperty.Over.mk ⊤ (𝟙 Z) (inferInstance : Etale (𝟙 Z))
-
-/-- Blueprint `lem-weil-pbc-cohomology-filtered-colimit` (a node of `sk-prop-h2`), for sheaves
-of modules over a fixed constant ring: étale cohomology of a quasi-compact and quasi-separated
-scheme commutes with filtered colimits. Here the cohomology `Hᵠ(Z, N)` of a sheaf `N` of
-`Λ`-modules on `Z_ét` is `Hom(Λ_Z[0], N[0]⟦q⟧)` in `D⁺(Z_ét, Λ)`, where `Λ_Z` is the free sheaf
-on the final object of `Z_ét`, i.e. the constant sheaf `Λ`. The abelian version is
+/-- Étale cohomology `Hᵠ(Z, N) = Hom(Λ_Z[0], N[0]⟦q⟧)` of a quasi-compact and quasi-separated
+scheme commutes with filtered colimits: the case of the final object of
+`AlgebraicGeometry.Etale.preservesColimitsOfShape_cohomology` (blueprint
+`lem-weil-pbc-cohomology-filtered-colimit`, a node of `sk-prop-h2`). The abelian version is
 `AlgebraicGeometry.Scheme.H_map_isColimit_of_isFiltered`. -/
 @[stacks 03Q6]
 theorem Etale.preservesColimitsOfShape_shiftedHomFunctor_freeSheaf_finalObject (Z : Scheme.{u})
@@ -208,7 +176,9 @@ theorem Etale.preservesColimitsOfShape_shiftedHomFunctor_freeSheaf_finalObject (
     [IsFiltered J] :
     PreservesColimitsOfShape J
       (Etale.shiftedHomFunctor Λ ((Etale.freeSheaf Λ Z).obj (Etale.finalObject Z)) q) :=
-  sorry
+  have : CompactSpace (Etale.finalObject Z).left := ‹CompactSpace Z›
+  have : QuasiSeparatedSpace (Etale.finalObject Z).left := ‹QuasiSeparatedSpace Z›
+  Etale.preservesColimitsOfShape_cohomology Λ (Etale.finalObject Z) q J
 
 /-- An isomorphism `A ≅ A'` identifies the functors `N ↦ Hom(A[0], N[0]⟦q⟧)` and
 `N ↦ Hom(A'[0], N[0]⟦q⟧)`. -/
