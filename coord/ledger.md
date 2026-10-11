@@ -4881,3 +4881,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 14:13 L: merged deliver/K1/lem-weil-pbc-right-derived-universal-delta-functor (stage 2; reviewer PASS; first push; Sheaf.CategoryTheory.RightDerivedUniversalDeltaFunctor CategoryTheory.Functor.exists_universal_rightDerived_deltaFunctor)
 - 14:13 L: merged deliver/E1/lem-weil-pbc-scheme-modules-enough-injectives (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.SchemeModulesEnoughInjectives AlgebraicGeometry.Scheme.Modules.enoughInjectives)
 - 14:13 L: merged deliver/H1/lem-pc-complete-linear-system-closed (stage 2; reviewer FIX; first push; Sheaf.AlgebraicGeometry.CompleteLinearSystemClosed AlgebraicGeometry.completeLinearSystem_isClosedImmersion)
+- 14:13 L: merged deliver/K1/lem-weil-pbc-root-lifting-etale-retraction (stage 2; reviewer PASS; first push; Sheaf.RingTheory.RootLiftingEtaleRetraction IsLocalRing.existsUnique_algHom_of_monic_simple_root_lifting_etale)
