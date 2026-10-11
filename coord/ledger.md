@@ -3313,3 +3313,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 02:41 L: merged deliver/J1/lem-weil-degreewise-epi-kernel-cocone-qis (reviewer FIX; first push; new nodes: 0)
 - 02:41 L: read the rewritten steps of lem-weil-degreewise-epi-kernel-cocone-qis (R-dek0240 FIX, merged d787c26d7): 0 -> K -> Cone(f)[-1] -> Cone(id_Q)[-1] -> 0 termwise exact with contractible third term: sound; second reading by J1 missed the unforced TR3 component. Reviewer R-ccp0242 launched (J1 lem-sc-picard-cech-cup-pullback-compat, head 14f02be87, the lead's restatement kept word for word)
 - 02:43 L: merged deliver/J1/lem-sc-picard-cech-cup-pullback-compat (reviewer FIX; first push; new nodes: 0)
+- 02:44 L: reviewers R-ecc0244 (J1 lem-pur-essential-constant-cofinal-0a1s, 202d1aa84) and R-epc0244 (J1 lem-pur-essential-constant-pro-criterion-05py, f23063834) launched; three reviewers in flight
