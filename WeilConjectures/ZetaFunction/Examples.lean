@@ -372,6 +372,43 @@ theorem zetaSeries_projectiveLine :
       ring
   simpa using h
 
+open _root_.Polynomial in
+/-- The Weil factorization of the projective line (blueprint `ex-weil-projective-line-endpoints`):
+`Z(ℙ¹, T) = P₁ / (P₀ P₂)` with the endpoint factors `P₀ = 1 - T`, `P₂ = 1 - qT` and `P₁ = 1`; in
+particular the Betti numbers are `b₀ = b₂ = 1` and `b₁ = 0`. -/
+theorem isWeilFactorization_projectiveLine :
+    IsWeilFactorization (Nat.card k) 1 (ProjectiveLine (Spec (.of k)) ↘ Spec (.of k)).zetaSeries
+      ![1 - X, 1, 1 - C (Nat.card k : ℤ) * X] ∧
+    weilBettiNumber ![1 - X, 1, 1 - C (Nat.card k : ℤ) * X] 0 = 1 ∧
+    weilBettiNumber ![1 - X, 1, 1 - C (Nat.card k : ℤ) * X] 1 = 0 ∧
+    weilBettiNumber ![1 - X, 1, 1 - C (Nat.card k : ℤ) * X] 2 = 1 := by
+  have he : Finset.univ.filter (fun i : Fin (2 * 1 + 1) ↦ Even i.1) = {0, Fin.last (2 * 1)} := by
+    decide
+  have ho : Finset.univ.filter (fun i : Fin (2 * 1 + 1) ↦ Odd i.1) = {1} := by
+    decide
+  have hq : (Nat.card k : ℤ) ≠ 0 := by exact_mod_cast Nat.card_pos.ne'
+  have h1 : (1 - Polynomial.X : Polynomial ℤ).natDegree = 1 := by
+    rw [Polynomial.natDegree_sub_eq_right_of_natDegree_lt (by simp), Polynomial.natDegree_X]
+  have h2 : (1 - Polynomial.C (Nat.card k : ℤ) * Polynomial.X).natDegree = 1 := by
+    rw [Polynomial.natDegree_sub_eq_right_of_natDegree_lt (by
+      rw [Polynomial.natDegree_one, Polynomial.natDegree_C_mul_X _ hq]; norm_num),
+      Polynomial.natDegree_C_mul_X _ hq]
+  refine ⟨⟨fun i ↦ ?_, rfl, ?_, ?_⟩, ?_, ?_, ?_⟩
+  · fin_cases i <;> simp
+  · simp [Fin.last]
+  · rw [he, ho, Finset.prod_singleton, Finset.prod_pair (by decide)]
+    have := zetaSeries_projectiveLine k
+    simp only [Nat.reduceMul, Fin.isValue, Matrix.cons_val_zero, Polynomial.map_sub,
+      Polynomial.map_one, Polynomial.map_X, Polynomial.coe_sub, Polynomial.coe_one,
+      Polynomial.coe_X, Fin.reduceLast, Matrix.cons_val, Polynomial.map_mul,
+      Polynomial.map_natCast, Polynomial.coe_mul, Matrix.cons_val_one, map_natCast] at this ⊢
+    convert this using 4
+    exact congrArg (· * PowerSeries.X)
+      (map_natCast (Polynomial.coeToPowerSeries.ringHom (R := ℚ)) _)
+  · simpa [weilBettiNumber] using h1
+  · simp [weilBettiNumber]
+  · simpa [weilBettiNumber] using h2
+
 end Zeta
 
 end AlgebraicGeometry
