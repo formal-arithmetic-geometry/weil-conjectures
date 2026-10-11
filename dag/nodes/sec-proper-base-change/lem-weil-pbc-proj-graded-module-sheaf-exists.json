@@ -24,7 +24,8 @@
   "def-nagata-homogeneous-localization-degree-zero",
   "pqf-def-coherent",
   "def-weil-sheaf-of-modules-category",
-  "def-weil-pbc-module-stalk"
+  "def-weil-pbc-module-stalk",
+  "def-sc-degree-zero-module-fractions"
  ],
  "proof": [
   {
@@ -215,5 +216,25 @@
   "by": "L",
   "result": "pass",
   "note": "Eight steps along Stacks Constructions 01M3/01M4/01M6/01M7/01MB: standard opens (new node lem-weil-pbc-proj-standard-open-inclusion), the restriction maps rho and the localization identifications (new node lem-weil-pbc-graded-module-away-restriction), the presheaf on the basis with its identification with O_X via germs (new Mathlib leaf lem-weil-pbc-proj-structure-sheaf-standard-sections: basicOpenIsoAway Basic.lean:176, awayToSection_germ Scheme.lean:611, stalkIso' StructureSheaf.lean:354; verified), the sheaf condition on finite standard coverings via Algebra 00EK (new node lem-weil-pbc-cover-module-exact), extension from the basis (new node lem-weil-pbc-sheaf-of-modules-from-basis, Sheaves 009H-009U), quasi-coherence via Spec S_(f) and the Mathlib leaf lem-weil-pbc-spec-module-tilde-sections (tilde Tilde.lean:150, toOpen :170, toOpen_res :175, IsLocalizedModule.Away :179, IsQuasicoherent :465; verified), stalks written out, the global sections map. stmt_deps completed. Worker note: lem-pc-affine-cech-complex (imported, sec-picard-framework) implies 00EK; link/merge candidate for stage 3."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProjGradedModuleSheafExists",
+  "declaration": "AlgebraicGeometry.Proj.gradedModuleSheaf_exists",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProjGradedModuleSheafExists.lean",
+  "statement": "theorem gradedModuleSheaf_exists (𝓜 : ℤ → AddSubgroup M) (h𝓜 : DirectSum.IsInternal 𝓜) (hsmul : ∀ (n : ℕ) (z : ℤ) (a : S) (y : M), a ∈ 𝒜 n → y ∈ 𝓜 z → a • y ∈ 𝓜 (n + z)) : ∃ (Z : ∀ f : Fidx, Submodule R[f] N[f]), (∀ f : Fidx, (Z f : Set N[f]) = degreeZeroFractions (fun n : ℕ ↦ (𝒜 n : Set S)) (fun n : ℕ ↦ (𝓜 n : Set M)) (Submonoid.powers f.val.1)) ∧ ∃ (rhoS : ∀ (f g : Fidx), D[g] ≤ D[f] → R[f] →+* R[g]) (rho : ∀ (f g : Fidx), D[g] ≤ D[f] → Z f →+ Z g), (∀ (f g : Fidx) (i : D[g] ≤ D[f]), (∃ (e k : ℕ) (a : S), 0 < e ∧ a ∈ 𝒜 k ∧ g.val.1 ^ e = a * f.val.1) ∧ (∀ (r : R[f]) (q : Z f), rho f g i (r • q) = rhoS f g i r • rho f g i q) ∧ (∀ (e k : ℕ) (a : S), 0 < e → a ∈ 𝒜 k → g.val.1 ^ e = a * f.val.1 → ∀ (m : ℕ) (y : M) (q : Z f), (q : N[f]) = mk y (⟨f.val.1 ^ m, ⟨m, rfl⟩⟩ : Submonoid.powers f.val.1) → (rho f g i q : N[g]) = mk (a ^ m • y) (⟨g.val.1 ^ (e * m), ⟨e * m, rfl⟩⟩ : Submonoid.powers g.val.1))) ∧ (∀ (f : Fidx) (i : D[f] ≤ D[f]) (q : Z f), rho f f i q = q) ∧ (∀ (f g h : Fidx) (i : D[g] ≤ D[f]) (j : D[h] ≤ D[g]) (q : Z f), rho g h j (rho f g i q) = rho f h (j.trans i) q) ∧ (∀ (f g : Fidx) (i : D[g] ≤ D[f]), D[f] = D[g] → Function.Bijective (rho f g i)) ∧ ∃ (F : ModX) (alpha : ∀ f : Fidx, F.val.obj (op D[f]) ≃+ Z f), (∀ (f : Fidx) (r : R[f]) (s : F.val.obj (op D[f])), alpha f ((awayToSection 𝒜 f.val.1 r) • s) = r • alpha f s) ∧ (∀ (f g : Fidx) (i : D[g] ≤ D[f]) (s : F.val.obj (op D[f])), alpha g (F.val.map (homOfLE i).op s) = rho f g i (alpha f s)) ∧ (∀ (f g : Fidx) (i : D[g] ≤ D[f]) (r : R[f]), (Proj 𝒜).presheaf.map (homOfLE i).op (awayToSection 𝒜 f.val.1 r) = awayToSection 𝒜 g.val.1 (rhoS f g i r)) ∧ (∀ (G : ModX) (beta : ∀ f : Fidx, G.val.obj (op D[f]) ≃+ Z f), (∀ (f : Fidx) (r : R[f]) (s : G.val.obj (op D[f])), beta f ((awayToSection 𝒜 f.val.1 r) • s) = r • beta f s) → (∀ (f g : Fidx) (i : D[g] ≤ D[f]) (s : G.val.obj (op D[f])), beta g (G.val.map (homOfLE i).op s) = rho f g i (beta f s)) → ∃! phi : F ⟶ G, IsIso phi ∧ ∀ (f : Fidx) (s : F.val.obj (op D[f])), beta f (phi.val.app (op D[f]) s) = alpha f s) ∧ F.IsQuasicoherent ∧ ∃ (Zp : ∀ x : Proj 𝒜, Submodule Rp[x] Np[x]), (∀ x : Proj 𝒜, (Zp x : Set Np[x]) = degreeZeroFractions (fun n : ℕ ↦ (𝒜 n : Set S)) (fun n : ℕ ↦ (𝓜 n : Set M)) T[x]) ∧ ∃ (mu : ∀ x : Proj 𝒜, (RingedSpace.moduleStalkFunctor (Proj 𝒜).toRingedSpace x).obj F ≃+ Zp x), (∀ (x : Proj 𝒜) (r : (Proj 𝒜).presheaf.stalk x) (s : (RingedSpace.moduleStalkFunctor (Proj 𝒜).toRingedSpace x).obj F), mu x (r • s) = (stalkIso 𝒜 x).hom r • mu x s) ∧ (∀ (x : Proj 𝒜) (f : Fidx) (hx : x ∈ D[f]) (m : ℕ) (y : M) (q : Z f) (t : T[x]), (q : N[f]) = mk y (⟨f.val.1 ^ m, ⟨m, rfl⟩⟩ : Submonoid.powers f.val.1) → (t : S) = f.val.1 ^ m → (mu x (TopCat.Presheaf.germ F.val.presheaf D[f] x hx ((alpha f).symm q)) : Np[x]) = mk y t) ∧ ∃ (eta : 𝒜 0 →+* (Proj 𝒜).presheaf.obj (op ⊤)) (gamma : 𝓜 0 →+ F.val.obj (op ⊤)), (∀ (r : 𝒜 0) (f : Fidx), (Proj 𝒜).presheaf.map (homOfLE (le_top : D[f] ≤ ⊤)).op (eta r) = awayToSection 𝒜 f.val.1 (fromZeroRingHom 𝒜 _ r)) ∧ (∀ (r : 𝒜 0) (m : 𝓜 0), gamma ⟨(r : S) • (m : M), hsmul 0 0 r m r.property m.property⟩ = eta r • gamma m) ∧ (∀ (m : 𝓜 0) (f : Fidx), (alpha f (F.val.map (homOfLE (le_top : D[f] ≤ ⊤)).op (gamma m)) : N[f]) = mk (m : M) 1) ∧ (∀ (m : 𝓜 0) (f g : Fidx) (i : D[g] ≤ D[f]), rho f g i (alpha f (F.val.map (homOfLE (le_top : D[f] ≤ ⊤)).op (gamma m))) = alpha g (F.val.map (homOfLE (le_top : D[g] ≤ ⊤)).op (gamma m))) ∧ (∀ (m : 𝓜 0) (s : F.val.obj (op ⊤)), (∀ f : Fidx, (alpha f (F.val.map (homOfLE (le_top : D[f] ≤ ⊤)).op s) : N[f]) = mk (m : M) 1) → s = gamma m)",
+  "branch": "sheaf-dag",
+  "by": "K1",
+  "date": "2026-10-11",
+  "existing": false,
+  "note": "All four clauses; chart and prime modules use the landed degreeZeroFractions definition. Additive equivalences with explicit scalar laws express the module identifications, and the global-section map has its S_0 scalar law. Local notation only abbreviates the existing carriers and standard opens.",
+  "fixed_by": "R-pgm1359"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-pgm1359",
+  "group": "K1",
+  "result": "fix",
+  "note": "S/𝒜 GradedRing, M with ℤ-grading 𝓜 IsInternal + hsmul (landed sibling form); Fidx positive homogeneous; Z f carrier = landed degreeZeroFractions over powers f; (a) relation g^e=af, rho semilinear over rhoS pinned to O_X restriction via awayToSection, formula a^m y/g^(em) for all witnesses, id/comp/bijective; (b) F : SheafOfModules (moduleRings), alpha tied by scalar law (rfl-checked ModuleCat smul) and restrictions, unique compatible iso; IsQuasicoherent; (c) stalk via moduleStalkFunctor ≃+ degreeZeroFractions at primeCompl, semilinear over stalkIso, germ formula (carrier rfl = TopCat stalk); (d) eta/gamma pinned on charts, S_0 law, uniqueness. FIX: 7 'show … from le_top' in statement -> '(le_top : D[f] ≤ ⊤)'."
  }
 }
