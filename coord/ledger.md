@@ -5101,3 +5101,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 14:58 L: merged deliver/T1/lem-weil-pbc-etale-geometric-fibre-constant-sections (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.EtaleGeometricFibreConstantSections AlgebraicGeometry.etaleGeometricFibreConstantSections)
 - 14:58 L: merged deliver/N1/lem-weil-pbc-torsion-hom-flat-comparison (stage 2; reviewer FIX; first push; Sheaf.RingTheory.TorsionHomFlatComparison LinearMap.baseChange_bijective_of_ideal_power_torsion)
 - 14:58 L: merged deliver/M1/lem-pc-brown-representability-right-adjoint (stage 2; reviewer PASS; first push; Sheaf.CategoryTheory.BrownRepresentabilityRightAdjoint CategoryTheory.brownRepresentabilityRightAdjoint; statement corrected (3 citers))
+- 14:59 L: merged deliver/U1/lem-weil-pbc-two-term-complex-kernel-base-change (stage 2; reviewer PASS; first push; Sheaf.RingTheory.TwoTermKernelBaseChange LinearMap.exists_twoTermKernelBaseChange_equiv)

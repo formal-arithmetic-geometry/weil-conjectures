@@ -162,5 +162,28 @@
   "by": "L",
   "result": "accepted",
   "note": "5 steps following the last paragraph of the proof of Algebra 00S2: delta split into two short exact sequences; I (x) C -> N_0 (x) C injective by the Tor long exact sequence node (now split) and Tor_1(H_0, C) = 0; Tor_1(I, C) = Tor_2(H_0, C) = 0 by a new unsplit dimension-shifting node (N_0 free); the first sequence gives H_1 (x) C = ker(delta' (x) 1); conclusion and C-linearity. Statement unchanged."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.TwoTermKernelBaseChange",
+  "declaration": "LinearMap.exists_twoTermKernelBaseChange_equiv",
+  "declarations": [
+   "LinearMap.exists_twoTermKernelBaseChange_equiv",
+   "LinearMap.bijective_twoTermKernelBaseChange_algebra"
+  ],
+  "file": "lean/Sheaf/RingTheory/TwoTermKernelBaseChange.lean",
+  "statement": "theorem exists_twoTermKernelBaseChange_equiv (B C N₁ N₀ : Type u) [CommRing B] [AddCommGroup C] [Module B C] [AddCommGroup N₁] [Module B N₁] [AddCommGroup N₀] [Module B N₀] [Module.Free B N₀] (δ : N₁ →ₗ[B] N₀) (hTor₁ : IsZero (((Tor' (ModuleCat B) 1).obj (ModuleCat.of B (N₀ ⧸ LinearMap.range δ))).obj (ModuleCat.of B C))) (hTor₂ : IsZero (((Tor' (ModuleCat B) 2).obj (ModuleCat.of B (N₀ ⧸ LinearMap.range δ))).obj (ModuleCat.of B C))) : ∃ e : (LinearMap.ker δ ⊗[B] C) ≃ₗ[B] LinearMap.ker (δ.rTensor C), ∀ x : LinearMap.ker δ ⊗[B] C, (e x : N₁ ⊗[B] C) = (LinearMap.ker δ).subtype.rTensor C x",
+  "branch": "sheaf-dag",
+  "by": "U1",
+  "date": "2026-10-11",
+  "existing": false,
+  "note": "The second declaration gives the algebra-linearity clause using tensor symmetry to place C first; tensorKer is the existing C-linear canonical map."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "U1",
+  "result": "pass",
+  "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
  }
 }
