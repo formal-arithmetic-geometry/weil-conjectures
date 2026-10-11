@@ -192,5 +192,24 @@
   "by": "L",
   "result": "pass",
   "note": "six steps along Stacks 03DA/03DB/03DI/03EW; the generator j_{U!}Λ_U made explicit as a sheafified free presheaf module (the brief had pointed at the open-immersion extension by zero, which does not apply); 4 new nodes, three Mathlib leaves verified by the lead (freeYonedaEquiv Generator.lean:58, AffineEtale.lean:71/91/149, Grp/AB.lean:109); the cover-dense-to-covering-family step of lem-weil-pbc-affine-etale-essentially-small-cover accepted as a one-line specialization"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.EtaleModuleSheavesGrothendieckAbelian",
+  "declaration": "AlgebraicGeometry.Scheme.etaleModuleSheaves_grothendieckAbelian",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleModuleSheavesGrothendieckAbelian.lean",
+  "statement": "theorem etaleModuleSheaves_grothendieckAbelian (T : Scheme.{u}) (Λ : Type u) [CommRing Λ] : IsGrothendieckAbelian.{u + 1} (SheafOfModules.{u + 1} ((constantSheaf T.smallEtaleTopology RingCat.{u + 1}).obj (RingCat.of (ULift.{u + 1, u} Λ)))) ∧ (∃ (I : Type (u + 1)) (U : I → T.Etale), (∀ i : I, IsAffine (U i).left) ∧ (∀ V : T.Etale, ∃ (K : Type (u + 1)) (i : K → I) (f : ∀ k : K, U (i k) ⟶ V), Sieve.ofArrows (fun k : K ↦ U (i k)) f ∈ T.smallEtaleTopology V) ∧ ∃ c : Cofan (fun i : I ↦ (PresheafOfModules.sheafification.{u + 1} (𝟙 ((constantSheaf T.smallEtaleTopology RingCat.{u + 1}).obj (RingCat.of (ULift.{u + 1, u} Λ))).obj)).obj ((PresheafOfModules.free ((constantSheaf T.smallEtaleTopology RingCat.{u + 1}).obj (RingCat.of (ULift.{u + 1, u} Λ))).obj).obj (uliftYoneda.{u + 1}.obj (U i)))), Nonempty (IsColimit c) ∧ IsSeparator c.pt) ∧ IsGrothendieckAbelian.{u + 1} (Sheaf T.smallEtaleTopology AddCommGrpCat.{u + 1})",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-mga1156"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-mga1156",
+  "group": "C1",
+  "result": "fix",
+  "note": "T:Scheme.{u}, Λ:Type u CommRing, Λ_T = constantSheaf RingCat.{u+1} of ULift Λ (inlined, was let=have), Mod = SheafOfModules.{u+1} with Mathlib instAbelian (show_term), IsGrothendieckAbelian.{u+1} not inferable (substantive); ∃ affine family I:Type(u+1) covering every V via Sieve.ofArrows ∈ smallEtaleTopology; Cofan of sheafification(𝟙) of free(uliftYoneda U i), IsColimit ∧ IsSeparator; Ab(T_et) conjunct = instance"
  }
 }

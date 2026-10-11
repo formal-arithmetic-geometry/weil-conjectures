@@ -4538,3 +4538,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 11:58 L: merged deliver/E1/def-amb-finite-locally-free-module (stage 2; reviewer PASS; first push; WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree SheafOfModules.IsFiniteLocallyFreeOfRank; existing declaration)
 - 11:58 L: merged deliver/G1/lem-weil-pbc-n2-descends-finite-domain-extension (stage 2; reviewer FIX; first push; Sheaf.RingTheory.IsN2OfFiniteExtension isN2_of_finite_extension)
 - 11:59 L: merged deliver/H1/lem-weil-pbc-normal-extension-purely-inseparable-then-galois (stage 2; reviewer FIX; first push; Sheaf.FieldTheory.NormalExtensionFixedField Normal.fixedField_purelyInseparable_and_galois)
+- 11:59 L: merged deliver/C1/lem-weil-pbc-module-sheaves-grothendieck-abelian (stage 2; reviewer FIX; first push; Sheaf.AlgebraicGeometry.EtaleModuleSheavesGrothendieckAbelian AlgebraicGeometry.Scheme.etaleModuleSheaves_grothendieckAbelian)
