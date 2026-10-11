@@ -104,14 +104,20 @@ section Commutator
 
 variable {n : Type*} [Fintype n] [DecidableEq n] {R : Type*} [CommRing R]
 
+omit [DecidableEq n] in
+/-- A square-zero scalar multiple of a matrix squares to zero. -/
+theorem smul_mul_smul_eq_zero (e : R) (he : e * e = 0) (X : Matrix n n R) :
+    (e • X) * (e • X) = 0 := by
+  rw [Matrix.smul_mul, Matrix.mul_smul, smul_smul, he, zero_smul]
+
 /-- The commutator of `1 + eX` and `1 + dY` for `e² = d² = 0` is `1 + ed(XY - YX)`. -/
 theorem one_add_smul_mul_one_add_smul_mul_one_sub_smul_mul_one_sub_smul (e d : R)
     (he : e * e = 0) (hd : d * d = 0) (X Y : Matrix n n R) :
     (1 + e • X) * (1 + d • Y) * (1 - e • X) * (1 - d • Y) = 1 + (e * d) • (X * Y - Y * X) := by
   set a := e • X
   set b := d • Y
-  have haa : a * a = 0 := by simp [a, Matrix.smul_mul, Matrix.mul_smul, smul_smul, he]
-  have hbb : b * b = 0 := by simp [b, Matrix.smul_mul, Matrix.mul_smul, smul_smul, hd]
+  have haa : a * a = 0 := smul_mul_smul_eq_zero e he X
+  have hbb : b * b = 0 := smul_mul_smul_eq_zero d hd Y
   have haba : a * b * a = 0 := by
     simp only [a, b, Matrix.smul_mul, Matrix.mul_smul, smul_smul]
     rw [show e * (d * e) = e * e * d by ring, he, zero_mul, zero_smul]
@@ -129,10 +135,6 @@ theorem one_add_smul_mul_one_add_smul_mul_one_sub_smul_mul_one_sub_smul (e d : R
     rw [show d * (e * d) = d * d * e by ring, hd, zero_mul, zero_smul]
   rw [h₁, haa, haba, sub_zero, sub_zero, h₂, hbb, mul_zero, hbab, sub_zero, sub_zero, add_zero,
     add_sub_assoc, hab, hba, ← smul_sub]
-
-theorem smul_mul_smul_eq_zero (e : R) (he : e * e = 0) (X : Matrix n n R) :
-    (e • X) * (e • X) = 0 := by
-  rw [Matrix.smul_mul, Matrix.mul_smul, smul_smul, he, zero_smul]
 
 end Commutator
 
@@ -206,6 +208,7 @@ theorem coe_homMulEquiv_inv {A : Type u} [CommRing A] (g : GL n A) (N : Matrix n
     _ = 1 - N := by rw [← mul_assoc, Units.inv_mul, one_mul]
 
 set_option maxHeartbeats 1000000 in
+-- the matrix computation over `k[ε, δ]` unfolds several dual-number layers
 open scoped commutatorElement in
 theorem tangentMatrix_tangentBracket (p q : GrpObj.pointsKer 𝔾𝕃(n; k) GrpObj.aug₁) :
     tangentMatrix n k (GrpObj.tangentBracket p q) =
