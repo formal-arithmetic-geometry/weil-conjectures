@@ -27,7 +27,8 @@
  },
  "stmt_deps": [
   "def-weil-pbc-localization-at-prime",
-  "def-weil-pbc-module-localization"
+  "def-weil-pbc-module-localization",
+  "def-weil-pbc-annihilator-associated-primes"
  ],
  "proof": [
   {
@@ -137,5 +138,23 @@
   "worker": "stage1",
   "summary": "Read Stacks 0310 (algebra.tex 15393-15418; tag verified, tags line 3967: 0310,algebra-lemma-associated-primes-localize) and 00CS (tags line 472: proposition-localization-exact). The statement is part (1) of 0310 for an arbitrary ring with the annihilator notion of associated prime; part (2) (the converse, needing p finitely generated) is not part of the node and is not used. The proof of (1) needs no finiteness: steps follow the source: z with Ann(z)=q gives an injection T/q -> P (step 1), exactness of localization [lem-weil-pbc-localization-module-exact, a Mathlib leaf for 00CS] keeps it injective after localizing at q (step 2), the computation of Ann(z/1) = qT_q written out (step 3, the source's 'we see'), and qT_q prime as the maximal ideal (step 4). Statement unchanged; stmt_deps unchanged. Mathlib: Module.associatedPrimes.mem_associatedPrimes_of_comap_mem_associatedPrimes_of_isLocalizedModule (Mathlib/RingTheory/Ideal/AssociatedPrime/Localization.lean:40, tagged stacks 0310 (1)) is for Mathlib's radical notion (Basic.lean: IsAssociatedPrime has I = (colon N {x}).radical), which agrees with the annihilator notion only over Noetherian rings (isAssociatedPrime_iff); no leaf. No slopmaster2 declaration (grep of WeilConjectures for the id and for associatedPrime/annihilator localization: none). Compared with lem-weil-pbc-associated-prime-localization-depth-zero: that node is the special case P=T over a Noetherian ring T (a Mathlib leaf); this node is the general one, not a duplicate.",
   "blueprint": "The steps realize, in lem-weil-pbc-normal-constant-generic's proof (step 4 of its split, Lemma 09Z5 proof of (1)) through the equality case of Lemma 0312, the sentence of 0312's third paragraph 'First we observe that qS_q in Ass_{S_q}((M ⊗_R N)_q), see Lemma 0310': steps 1-4 prove that cited fact (0310 (1)) for an arbitrary ring."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.AssociatedPrimeLocalizeAtPrime",
+  "declaration": "Module.associated_prime_localize_at_prime",
+  "statement": "theorem associated_prime_localize_at_prime {T : Type u} [CommRing T] {P : Type v} [AddCommGroup P] [Module T P] {q : Ideal T} [hq : q.IsPrime] (hqmem : q ∈ RingTheory.annihilatorAssociatedPrimes T P) : q.map (algebraMap T (Localization.AtPrime q)) ∈ RingTheory.annihilatorAssociatedPrimes (Localization.AtPrime q) (LocalizedModule.AtPrime q P) ∧ ∀ z : P, (⊥ : Submodule T P).colon {z} = q → (⊥ : Submodule (Localization.AtPrime q) (LocalizedModule.AtPrime q P)).colon {LocalizedModule.mk z 1} = q.map (algebraMap T (Localization.AtPrime q))",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-11",
+  "existing": false,
+  "file": "lean/Sheaf/RingTheory/AssociatedPrimeLocalizeAtPrime.lean"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-apl1446",
+  "group": "E1",
+  "result": "pass",
+  "note": "T CommRing, P T-module (indep. universes), q prime instance; hyp q in landed K1 RingTheory.annihilatorAssociatedPrimes (no Noetherian); concl q.map algebraMap T T_q in annihilatorAssociatedPrimes T_q (LocalizedModule.AtPrime q P) and forall z, colon bot {z}=q -> colon bot {mk z 1} = q.map; Localization.AtPrime/LocalizedModule.AtPrime used; no private copy"
  }
 }
