@@ -160,5 +160,23 @@
   "by": "L",
   "result": "accepted",
   "note": "5 steps following Topology 0A30 with 0A2Y and 0A2X written out: the basis of pulled-back quasi-compact opens, closed under finite unions and intersections (0A2P in the directed case); part (1) by quasi-compactness; parts (2): the constructibly closed Z_k = f_ik^{-1}(U_i) minus f_jk^{-1}(U_j) over the cofinal directed set K, some Z_k empty by a new node for 0A2W (1) (compatible points in nonempty constructibly closed sets; candidate via Konig.lean recorded, B8) and the extension of the family to I; parts (3), (4) from (2) applied twice. Statement unchanged; 0A2Z not needed."
+ },
+ "lean": {
+  "module": "Sheaf.Topology.SpectralLimitDescendOpens",
+  "declaration": "Topology.spectralLimit_descend_opens",
+  "file": "lean/Sheaf/Topology/SpectralLimitDescendOpens.lean",
+  "statement": "theorem spectralLimit_descend_opens {I : Type u} [Preorder I] [Nonempty I] [IsDirected I (· ≤ ·)] (S : I → Type u) [∀ i : I, TopologicalSpace (S i)] [∀ i : I, SpectralSpace (S i)] (f : ∀ (i j : I), i ≤ j → S j → S i) (hf : ∀ (i j : I) (h : i ≤ j), IsSpectralMap (f i j h)) (hfid : ∀ (i : I) (x : S i), f i i le_rfl x = x) (hfcomp : ∀ (i j k : I) (hij : i ≤ j) (hjk : j ≤ k) (x : S k), f i j hij (f j k hjk x) = f i k (hij.trans hjk) x) (X : Type v) [TopologicalSpace X] (p : ∀ i : I, X → S i) (hp : ∀ i : I, Continuous (p i)) (hpcomp : ∀ (i j : I) (h : i ≤ j) (x : X), f i j h (p j x) = p i x) (hlimit : ∀ a : ∀ i : I, S i, (∀ (i j : I) (h : i ≤ j), f i j h (a j) = a i) → ∃! x : X, ∀ i : I, p i x = a i) (htop : ‹TopologicalSpace X› = ⨅ i : I, TopologicalSpace.induced (p i) inferInstance) : (∀ U : Set X, IsOpen U → IsCompact U → ∃ (i : I) (V : Set (S i)), IsOpen V ∧ IsCompact V ∧ p i ⁻¹' V = U) ∧ (∀ (i j : I) (U : Set (S i)) (V : Set (S j)), IsOpen U → IsCompact U → IsOpen V → IsCompact V → p i ⁻¹' U ⊆ p j ⁻¹' V → ∃ (k : I) (hik : i ≤ k) (hjk : j ≤ k), f i k hik ⁻¹' U ⊆ f j k hjk ⁻¹' V) ∧ (∀ (i : I) (n : ℕ) (U : Set (S i)) (V : Fin n → Set (S i)), IsOpen U → IsCompact U → (∀ l : Fin n, IsOpen (V l) ∧ IsCompact (V l)) → p i ⁻¹' U = ⋃ l : Fin n, p i ⁻¹' V l → ∃ (j : I) (hij : i ≤ j), f i j hij ⁻¹' U = ⋃ l : Fin n, f i j hij ⁻¹' V l) ∧ (∀ (i : I) (n : ℕ) (U : Set (S i)) (V : Fin n → Set (S i)), IsOpen U → IsCompact U → (∀ l : Fin n, IsOpen (V l) ∧ IsCompact (V l)) → p i ⁻¹' U = ⋂ l : Fin n, p i ⁻¹' V l → ∃ (j : I) (hij : i ≤ j), f i j hij ⁻¹' U = ⋂ l : Fin n, f i j hij ⁻¹' V l)",
+  "branch": "sheaf-dag",
+  "by": "M1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "M1",
+  "result": "pass",
+  "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
  }
 }
