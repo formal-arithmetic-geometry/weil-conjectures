@@ -129,5 +129,24 @@
   "group": "J1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-aci2532 (reviewer sub-agent of L); spot-checked: Statement matches Tag 0B97 affine step and citer lem-pc-hilb-containment-locus Step 1/3 (B finite projective, J ideal, arbitrary R->R'), C4 ok; Step 1 dual system from def-weil-pbc-projective-module (direct summand of free, finite generation) ok C1; Steps 2-4 elementary and correct; no new nodes, nothing restated (class b none). FIX more, RETURN less: split_report.tool_uses still declared lem-sc-ext-evaluation after J1's second reading removed its use from the proof; dropped with --drop-tool-uses."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AffineContainmentIdeal",
+  "declaration": "AlgebraicGeometry.affine_containment_ideal",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineContainmentIdeal.lean",
+  "statement": "theorem affine_containment_ideal {R : Type u} {B : Type v} [CommRing R] [CommRing B] [Algebra R B] [Module.Finite R B] [Module.Projective R B] (J : Ideal B) : ∀ (S : Type w) [CommRing S] [Algebra R S], J.map (Algebra.TensorProduct.includeLeftRingHom (R := R) (A := B) (B := S)) = ⊥ ↔ (J.restrictScalars R).dualContent.map (algebraMap R S) = ⊥",
+  "branch": "sheaf-dag",
+  "by": "M1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-aci0718"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-aci0718",
+  "group": "M1",
+  "result": "fix",
+  "note": "R CommRing, B CommRing R-algebra Module.Finite+Projective, J Ideal B, K = span of phi j (now source Submodule.dualContent of J over R), forall S CommRing R-algebra, image of J in B⊗S zero (Ideal.map includeLeftRingHom = ⊥) iff image of K in S zero (map algebraMap = ⊥); iff, universes u v w free; edge cases J=⊥/⊤, B=0, S=0 ok"
  }
 }
