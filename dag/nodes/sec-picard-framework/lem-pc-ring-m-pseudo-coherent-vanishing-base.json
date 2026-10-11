@@ -19,7 +19,8 @@
   "place": "More on Algebra, Lemma 15.66.5 (Tag 064W), base case of the m-pseudo-coherence induction"
  },
  "stmt_deps": [
-  "def-weil-abstract-derived-category"
+  "def-weil-abstract-derived-category",
+  "def-pc-ring-m-pseudo-coherent"
  ],
  "proof": [
   {
@@ -85,5 +86,23 @@
   "group": "G1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-pvb0049 (reviewer sub-agent of L); spot-checked: Statement is Tag 064W(1) with the inline 064N m-pseudo-coherence wording, unchanged (C4). Proof is the zero-complex witness: E=0 bounded finite free, zero map gives 0=H^i(C) isos for i>m and surjection onto H^m(C)=0; elementary, no citations, D complete. Preflight '! step 1 quotes 064W' fine: 064W is the item's own source. Only citer (grep): lem-pc-ring-pseudo-coherent-localization-glue, case n<m uses exactly H^j(K)=0 for all j>=m => m-pc (C4 ok). No duplicate among 21 pseudo-coherent nodes (class b/d none). Second reading missed nothing."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.MPseudoCoherentVanishingBase",
+  "declaration": "DerivedCategory.isMPseudoCoherent_of_homology_vanishes",
+  "file": "lean/Sheaf/RingTheory/MPseudoCoherentVanishingBase.lean",
+  "statement": "theorem isMPseudoCoherent_of_homology_vanishes {R : Type u₁} [CommRing R] [HasDerivedCategory.{w₁} (ModuleCat.{v₁} R)] (m : ℤ) (C : DerivedCategory (ModuleCat.{v₁} R)) (hC : ∀ i : ℤ, m ≤ i → IsZero ((homologyFunctor (ModuleCat.{v₁} R) i).obj C)) : IsMPseudoCoherent m C",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-mpc0853",
+  "group": "C1",
+  "result": "fix",
+  "note": "Theorem: R CommRing, m:Z, C in DerivedCategory (ModuleCat R) (Mathlib leaf), hC IsZero H^i(C) for all i>=m (incl. m) => IsMPseudoCoherent m C, exact; new def node = Stacks 064Q(1) verbatim: E strictly bounded [a,b], each E^i Module.Free+Finite, f: Q.obj E -> C in D(R), IsIso H^i f for i>m, Epi H^m f (=surjective); Q/homologyFunctor as G1 precise_vanishing; not in Mathlib/source/DAG (def-pur-pseudo-coherent-complex is schemes, all m); node fields per STAGE 2 EXTRA NODES OK; universes independent; fix: dropped unused import ModuleCat.EpiMono (compiles without)"
  }
 }

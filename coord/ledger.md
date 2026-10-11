@@ -3571,3 +3571,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 06:53 L: merged deliver/G1/lem-pc-separable-polynomial-alg-closed-quotient-product (stage 2; reviewer PASS; first push; Sheaf.FieldTheory.SeparableQuotientProduct Polynomial.exists_eval_quotient_algEquiv_pi_of_separable)
 - 06:53 L: returned deliver/M1/lem-pc-kflat-tensor-quasi-iso (reviewer RETURN: Review R-ktq0853 of head 594c0a3a2. H13: the dependency module KFlatModules.lean (CochainComplex.IsKFlatModule over Modu)
 - 06:53 L: returned deliver/C1/lem-pc-flat-tensor-complex-cohom (reviewer RETURN: Reviewer R-ftc0853, head 1d02e40e3. H4 (the node exists in Mathlib; existing: true): the delivered theorem is closed by )
+- 06:54 L: merged deliver/C1/lem-pc-ring-m-pseudo-coherent-vanishing-base (stage 2; reviewer FIX; first push; Sheaf.RingTheory.MPseudoCoherentVanishingBase DerivedCategory.isMPseudoCoherent_of_homology_vanishes; new nodes: def-pc-ring-m-pseudo-coherent)

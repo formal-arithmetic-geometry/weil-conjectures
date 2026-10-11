@@ -1,0 +1,110 @@
+{
+ "id": "def-pc-ring-m-pseudo-coherent",
+ "kind": "definition",
+ "title": "m-pseudo-coherent object of the derived category of a ring",
+ "status": "split",
+ "statement": "Let $R$ be a ring, $m\\in\\mathbf Z$, and $C\\in D(R)$ [def-weil-abstract-derived-category]. The object $C$ is $m$-pseudo-coherent if there exist a bounded complex $E^\\bullet$ of finite free $R$-modules and a morphism $E^\\bullet\\to C$ in $D(R)$ inducing isomorphisms $H^i(E^\\bullet)\\to H^i(C)$ for every $i>m$ and a surjection $H^m(E^\\bullet)\\to H^m(C)$.",
+ "stmt_deps": [
+  "def-weil-abstract-derived-category"
+ ],
+ "source": {
+  "document": "Stacks Project, More on Algebra",
+  "place": "Definition 15.66.1 (Tag 064Q), part (1)"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "m pseudo coherent derived category bounded finite free complex cohomology isomorphism surjective",
+   "results": "Service unavailable: Internal Server Error.",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "m-pseudo-coherent object derived category bounded finite free complex cohomology isomorphisms above m epimorphism at m",
+   "results": "Eight results on T-structures and complex factorizations; none defines m-pseudo-coherence.",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsMPseudoCoherent, MPseudoCoherent",
+   "results": "No hits; unknown identifier IsMPseudoCoherent.",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "IsMPseudoCoherent|MPseudoCoherent|pseudo.?coheren in Mathlib/Algebra/Homology, WeilConjectures, lean/Sheaf",
+   "results": "No definition in Mathlib/Algebra/Homology, WeilConjectures or lean/Sheaf; one unrelated prose occurrence in the source repository.",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-pc-ring-m-pseudo-coherent-vanishing-base",
+  "date": "2026-10-11",
+  "group": "C1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Definition needed by the m-pseudo-coherence vanishing base case",
+   "via": [
+    "lem-pc-ring-m-pseudo-coherent-vanishing-base",
+    "lem-pc-ring-pseudo-coherent-localization-glue",
+    "lem-pc-affine-pseudo-coherent-criterion",
+    "lem-pc-perfect-affine-bounded-projective",
+    "lem-pc-perfect-complexes-compact-set",
+    "lem-pc-derived-qcoh-compact-generation",
+    "lem-pc-noetherian-derived-direct-image-right-adjoint",
+    "lem-sc-proper-upper-shriek-composition",
+    "lem-sc-finite-duality-trace"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "module": "Sheaf.RingTheory.MPseudoCoherent",
+  "declaration": "DerivedCategory.IsMPseudoCoherent",
+  "file": "lean/Sheaf/RingTheory/MPseudoCoherent.lean",
+  "statement": "def IsMPseudoCoherent {R : Type u} [CommRing R] [HasDerivedCategory.{w} (ModuleCat.{v} R)] (m : ℤ) (C : DerivedCategory (ModuleCat.{v} R)) : Prop",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-mpc0853"
+ },
+ "reviewed": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-mpc0853",
+  "group": "C1",
+  "result": "fix",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-mpc0853",
+  "group": "C1",
+  "result": "fix",
+  "note": "Theorem: R CommRing, m:Z, C in DerivedCategory (ModuleCat R) (Mathlib leaf), hC IsZero H^i(C) for all i>=m (incl. m) => IsMPseudoCoherent m C, exact; new def node = Stacks 064Q(1) verbatim: E strictly bounded [a,b], each E^i Module.Free+Finite, f: Q.obj E -> C in D(R), IsIso H^i f for i>m, Epi H^m f (=surjective); Q/homologyFunctor as G1 precise_vanishing; not in Mathlib/source/DAG (def-pur-pseudo-coherent-complex is schemes, all m); node fields per STAGE 2 EXTRA NODES OK; universes independent; fix: dropped unused import ModuleCat.EpiMono (compiles without)"
+ }
+}
