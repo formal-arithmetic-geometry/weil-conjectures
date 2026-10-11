@@ -180,5 +180,24 @@
  "tool_uses": [
   "lem-weil-pbc-constant-sheaf-geometric-stalk"
  ],
- "reviewed": "2026-10-10 L: 4 steps (the maps; epimorphism by the standard etale cover T^p - T - f as in 03PL; the kernel on geometric stalks by the new local-ring node (a^p = a in a local ring of characteristic p forces a in F_p); conservativity of stalks); statement made precise; the blueprint's residue-field/Krull argument replaced (wrong at the generic point); 1 tool use accepted; 1 new node"
+ "reviewed": "2026-10-10 L: 4 steps (the maps; epimorphism by the standard etale cover T^p - T - f as in 03PL; the kernel on geometric stalks by the new local-ring node (a^p = a in a local ring of characteristic p forces a in F_p); conservativity of stalks); statement made precise; the blueprint's residue-field/Krull argument replaced (wrong at the generic point); 1 tool use accepted; 1 new node",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ArtinSchreierSequence",
+  "declaration": "AlgebraicGeometry.artinSchreier_shortExact",
+  "file": "lean/Sheaf/AlgebraicGeometry/ArtinSchreierSequence.lean",
+  "statement": "theorem artinSchreier_shortExact {k : Type u} [Field k] [IsAlgClosed k] {C : Scheme.{u}} (f : C ⟶ Spec (.of k)) [IsCurve f] (p : ℕ) [CharP k p] (hp : 0 < p) : ∃ (G : Sheaf C.smallEtaleTopology AddCommGrpCat.{u + 1}) (_ : G ≅ (sheafCompose C.smallEtaleTopology AddCommGrpCat.uliftFunctor.{u + 1, u}).obj (Scheme.Modules.etaleTensorSectionsSheaf (Scheme.Modules.unitObj C))) (a : ∀ U : C.Etaleᵒᵖ, G.obj.obj U ≃+ Γ(U.unop.left, ⊤)) (wp : G ⟶ G) (iota : C.constantZMod p ⟶ G) (hzero : iota ≫ wp = 0), (∀ (U V : C.Etaleᵒᵖ) (g : U ⟶ V) (x : G.obj.obj U), a V (G.obj.map g x) = g.unop.left.appTop (a U x)) ∧ (∀ (U : C.Etaleᵒᵖ) (x : G.obj.obj U), a U (wp.hom.app U x) = (a U x) ^ p - a U x) ∧ (∀ (U : C.Etaleᵒᵖ) (c : ZMod p), a U (iota.hom.app U ((toSheafify C.smallEtaleTopology ((Functor.const C.Etaleᵒᵖ).obj (AddCommGrpCat.of (ULift.{u + 1} (ZMod p))))).app U (ULift.up c))) = (c.val : Γ(U.unop.left, ⊤))) ∧ ShortComplex.ShortExact (ShortComplex.mk iota wp hzero)",
+  "branch": "sheaf-dag",
+  "by": "U1",
+  "date": "2026-10-12",
+  "existing": false,
+  "note": "The existential representation is fixed by an isomorphism to the lifted recorded structure-module sheaf and natural section equivalences. Both maps are specified componentwise; the constant map is specified on the sheafification unit."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "U1",
+  "result": "pass",
+  "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
+ }
 }
