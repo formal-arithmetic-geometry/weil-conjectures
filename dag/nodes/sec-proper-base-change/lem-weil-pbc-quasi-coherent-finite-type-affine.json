@@ -257,5 +257,23 @@
   "item": "lem-weil-pbc-quasi-coherent-finite-type-affine",
   "worker": "stage1",
   "summary": "Split along Stacks Properties 01PB/01PC and Modules 01BO into nine steps: setup on an affine open (Spec R ≅ U, maps out of O^n = n-tuples of sections), two consequences of the tilde-Gamma counit (Schemes 01IB), generation by sections over an affine open via the (unsplit, same-day) cokernel/image node, (0) via the cokernel node (needed because pqf-def-coherent defines quasi-coherence as locally M~, not by local presentations as Stacks 01BD does), (a) both directions (the 'only if' along Stacks with standard opens D(r), quasi-compactness and Algebra 00EO(2), new Mathlib leaf), (b) both directions (Stacks' use of the exactness of tilde replaced by the kernel node; Modules 01BP(1) as a new unsplit node), (c) by locality of the definitions. New nodes: lem-weil-pbc-module-finite-of-localization-span (leaf Module.Finite.of_localizationSpan_finite), lem-weil-pbc-spec-tilde-free-module (leaf tildeFinsupp/tildeSelf), lem-weil-pbc-finite-presentation-kernel-surjection-finite-type (unsplit). Statement unchanged except a parenthetical definition of 'finitely presented R-module' and def-weil-finitely-generated-module added to stmt_deps."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.QuasicoherentFiniteTypeAffine",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.quasicoherent_finite_type_affine",
+  "file": "lean/Sheaf/AlgebraicGeometry/QuasicoherentFiniteTypeAffine.lean",
+  "statement": "theorem quasicoherent_finite_type_affine (X : Scheme.{u}) : (∀ G : X.Modules, G.IsFinitePresentation → G.IsQuasicoherent) ∧ (∀ F : X.Modules, F.IsQuasicoherent → (∀ U : X.Opens, IsAffineOpen U → ((F.over U).IsFiniteType ↔ Module.Finite Γ(X, U) Γ(F, U)) ∧ ((F.over U).IsFinitePresentation ↔ Module.FinitePresentation Γ(X, U) Γ(F, U))) ∧ (∀ (I : Type v) (U : I → X.Opens), (⨆ i, U i) = ⊤ → (∀ i, IsAffineOpen (U i)) → (∀ i, Module.Finite Γ(X, U i) Γ(F, U i)) → F.IsFiniteType ∧ ∀ V : X.Opens, IsAffineOpen V → Module.Finite Γ(X, V) Γ(F, V)) ∧ (F.IsFinitePresentation → ∀ U : X.Opens, IsAffineOpen U → Module.FinitePresentation Γ(X, U) Γ(F, U)))",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-qfa1527",
+  "group": "E1",
+  "result": "pass",
+  "note": "X:Scheme; (0) all G finite presentation -> IsQuasicoherent (outside F's qc hypothesis); qc F; affine U via IsAffineOpen, R=Γ(X,U), F|_U = F.over U as in Coherent.lean; (a) IsFiniteType iff Module.Finite Γ(F,U); (b) IsFinitePresentation iff Module.FinitePresentation; (c) arbitrary affine cover sup=⊤ with finite sections -> F.IsFiniteType and finite on every affine; F fin.pres. -> fin.pres. sections on every affine; #check full names resolve outside namespace; node change only the lean record"
  }
 }
