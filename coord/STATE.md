@@ -29,23 +29,23 @@ Written by the launcher at the start (`1-dag`), then kept current by the maintai
 - **Imported statement false in general (2026-10-09 15:05):** lem-fet-locally-trivial (sec-curve-estimates, imported, unit of the finite-etale points) asks for one surjective etale Y' → Y and one finite set S trivializing a finite etale P → Y; false for disconnected Y (Y = pt ⊔ pt, P one point over one component), true for connected Y. Found by the worker of lem-weil-pbc-finite-etale-trace-degree, which used Stacks 04HN instead. To be corrected at its own split (add 'Y connected' or allow S to vary with the component).
 - **Gap in a reviewed proof (node level, 2026-10-09 14:45):** prop-weil-pbc-algebraically-closed-extension step 10 feeds step 9 (constructibility in the curve sense, def-weil-pbc-constructible-torsion) into lem-weil-pbc-curve-constructible-reduction, whose hypothesis is constructibility as a sheaf of Z/r-modules (def-weil-pbc-etale-constructible-sheaf); the bridge is the new node lem-weil-pbc-constructible-torsion-modules-agree (unsplit): to be cited at step 10 when that node is split (the lead will add the pointer then). RESOLVED 2026-10-09 15:45: lem-weil-pbc-constructible-torsion-modules-agree split and reviewed; step 10 cites it.
 
-**Remote groups** (`tools/group_stats.py`, updated with each progress row; 2026-10-10 01:29 UTC):
+**Remote groups** (`tools/group_stats.py`, updated with each progress row; 2026-10-10 01:37 UTC):
 | group | merged | returned | abandoned (distinct items) | claims held (age, h) |
 |---|---|---|---|---|
 | C | 19 | 20 | 0 | 0: none |
-| C1 | 202 | 56 | 21 | 3: lem-pur-left-derived-exact-when-defined (0.8), lem-sc-coherent-ring-fp-kernel-cokernel (0.3), lem-sc-valuation-limit-qcoh-section-descent (0.3) |
+| C1 | 203 | 56 | 21 | 2: lem-sc-coherent-ring-fp-kernel-cokernel (0.5), lem-sc-valuation-limit-qcoh-section-descent (0.5) |
 | D | 2 | 8 | 0 | 0: none |
 | D1 | 3 | 4 | 2 | 0: none |
 | E | 1 | 5 | 0 | 0: none |
-| E1 | 208 | 66 | 22 | 4: lem-pc-module-finite-presentation-transitive (0.0), lem-pc-module-flat-transitive (0.0), lem-sc-perfect-local-pseudocoherent-free-model (0.6), pqf-lem-serre-criterion (0.2) |
+| E1 | 209 | 67 | 22 | 6: def-pur-saturated-triangulated-localization (0.0), lem-pc-module-finite-presentation-transitive (0.2), lem-pc-module-flat-transitive (0.2), lem-pur-derived-functor-inverts-05sb (0.0), lem-pur-derived-functor-morphisms-05sa (0.0), pqf-lem-serre-criterion (0.3) |
 | F | 1 | 4 | 0 | 0: none |
-| F1 | 193 | 60 | 34 | 2: lem-pc-derived-splitting-unique (0.2), lem-pc-finite-projective-cokernel-localization (0.2) |
+| F1 | 193 | 60 | 34 | 4: lem-pc-derived-splitting-unique (0.3), lem-pc-finite-projective-cokernel-localization (0.3), lem-pur-derived-functor-shift-05su (0.0), lem-pur-derived-functor-triangles-05sc (0.0) |
 | G | 0 | 2 | 0 | 0: none |
-| G1 | 165 | 43 | 18 | 1: lem-pc-derived-tensor-localization-cohomology (0.0) |
-| H1 | 155 | 47 | 17 | 1: lem-pc-derived-tensor-transitivity (1.0) |
-| J1 | 150 | 38 | 21 | 0: none |
-| K1 | 157 | 37 | 16 | 3: lem-pc-ring-precise-vanishing (0.1), lem-sc-picard-kunneth-qcoh (1.8), lem-weil-derived-limit-roos-complex (0.2) |
-| M1 | 150 | 32 | 19 | 1: lem-pur-kinjective-ML-ordinals (0.0) |
+| G1 | 165 | 43 | 18 | 1: lem-pc-derived-tensor-localization-cohomology (0.2) |
+| H1 | 155 | 47 | 18 | 0: none |
+| J1 | 150 | 38 | 21 | 1: lem-pc-derived-tensor-transitivity (0.1) |
+| K1 | 157 | 37 | 17 | 2: lem-pc-ring-precise-vanishing (0.2), lem-sc-picard-kunneth-qcoh (1.9) |
+| M1 | 150 | 32 | 19 | 2: lem-pur-kinjective-ML-ordinals (0.1), lem-weil-derived-limit-roos-complex (0.1) |
 
 REMOTE LAUNCHER READY (2026-10-09 16:22: `roles/remote-launcher.md` committed; `AGENTS.md` §1, `roles/remote-lead.md`, `SETUP.md`, `roles/maintainer.md` §7, `tools/README.md` tied in; the tools take any group name `C1`, `C2`, …; the old group `C` keeps its claims until the human says its session is stopped).
 
@@ -377,6 +377,7 @@ Oldest delivery awaiting review: 4 min deliver/F1/lem-sc-p1-boundary-extension-c
 | 2026-10-10 01:13 | 862 | 2967 | 1144 | 352 | packet review: 0 reviewers in flight, 0 wait (queue drained at 01:13; 6 returned branches await their groups); since 01:06: 8 merged (6 FIX: C1 quasi-isos-saturated-triangulated (MS1-MS6 inline), G1 coherent-ring-perfect-complex-cohomology, M1 finite-flat-pushforward-locally-free, J1 derived-functor-termwise-split-ses-triangle (narrowed to g_*), E1 perfect-pullback-perfect-residue, E1 termwise-tor-acyclic-derived-tensor re-push counted at 01:06; 2 PASS: K1 kinjective-characterize-K-injective re-push, K1 valuation-closed-fibre-section-vanishing re-push), 0 returned; by L: lem-pur-homotopy-category-triangulated set to mathlib (K(A) triangulated + Qh exact instances), field-case line added to lem-sc-picard-locus-closed-valuation-triviality step 1, C1 attachment of lem-pc-affine-sections-finite-locally-free-criterion verified; second readings: 6 of 8 had a missed fault |
 | 2026-10-10 01:21 | 861 | 2970 | 1145 | 352 | packet review: 0 reviewers in flight, 0 wait (4 returned branches await their groups); since 01:13: 4 merged (all FIX: C1 affine-perfect-cut-degree-zero, E1 module-localization-filtered-colimit, J1 ring-derived-map-lift (a second reading's silent statement change reverted), and lem-sc-perfect-pullback-perfect-residue counted at 01:13), 1 returned (H1 derived-tensor-transitivity: the push replaced L's restatement with the old statement), 1 unneeded C1 split of the Mathlib leaf lem-pur-homotopy-category-triangulated returned with its branch deleted; 2 stale branches deleted with notices and claims released (C1 pqf-lem-affine-open-locnoeth, a Mathlib leaf since 22:03; J1 pqf-lem-serre-criterion, 5 h without re-push); 2 attachments by groups verified by L (lem-pc-affine-sections-finite-locally-free-criterion, lem-pc-finite-flat-affine-sections-projective); second readings: 4 of 5 had a missed fault |
 | 2026-10-10 01:29 | 862 | 2976 | 1147 | 352 | packet review: 0 reviewers in flight, 0 wait (queue drained at 01:29; 4 returned branches await their groups); since 01:21: 6 merged (all FIX: J1 strict-henselization-mod-power-free, H1 kinjective-homotopy-exact-injective-target, E1 finite-flat-restriction-projective (a wrongly filed Mathlib leaf turned into a proof), H1 kinjective-homotopy-limit-vanishing (new ML-over-ordinals node), and two counted earlier), 0 returned; by L: two Mathlib leaves (lem-pc-module-finite-presentation-transitive = FinitePresentation.trans, lem-pc-module-flat-transitive = Flat.trans), C1's second re-push of the Mathlib leaf pqf-lem-affine-open-locnoeth deleted (claim.py's refusal of status-mathlib nodes to be verified at stage 3), F1's stale branch of derived-tensor-localization-cohomology (claim now G1's) deleted with a notice quoting the pruned return; second readings: 4 of 4 had a missed fault |
+| 2026-10-10 01:37 | 866 | 2978 | 1148 | 352 | RESTART on a fresh account at 01:37 (limit hit ~01:37; the K1 picard-kunneth-qcoh reviewer died before touching the repository and was relaunched; nothing was left uncommitted except the E1 branch-deletion notice, now committed); 1 reviewer in flight (K1 lem-sc-picard-kunneth-qcoh third push), 0 wait; since 01:29: 2 merged (FIX: C1 left-derived-exact-when-defined re-push with 05R2/05SA/05SB/05SC/05R6 nodes, E1 perfect-local-pseudocoherent-free-model), 0 returned, 1 unneeded E1 split of the Mathlib leaf lem-pc-module-finite-presentation-transitive returned with its branch deleted; second readings: 2 of 2 had a missed fault |
 
 **LEAN REFRESH DONE** (2026-10-10 10:53 UTC; the human's decision relayed at 09:47, commit 6fde5cb5d). The done-branch checkout `~/weil-conjectures-slopmaster2` is at `71d63dcf` (from `1ad77be9`, 882 commits; same Mathlib, lake-manifest unchanged; `.lake/build` seeded from the other session's worktree, 10116 jobs built with 12 threads by 10:12). New sorry map `local/sorry_map_slopmaster2_71d63dcf.jsonl.gz`: 32094 declarations (21984 owners after merging auxiliaries; 420 with `sorry`, 271 of them named by no node), made with the `Weil` root included; the first run died with the session at the 21st account limit and was rerun detached (10:30–10:47). Names added to the audit: the `lean = [...]` lists of `upstream-blueprint-main` (849 lists, 508 for DAG nodes, 754 names; an old `blueprint_lean` name absent from the branch is `superseded` when the current list exists) and the docstring tags `(blueprint: <id>)`: 1438 tag ids; **822 declarations with such a tag matched a node** (exact tags for 473 nodes; qualified tags such as "the implication (1) ⇒ (2)" for 78 nodes, which count as partial and never close a node); 182 tagged ids are no DAG node, 75 tags sit outside a declaration docstring. Also a list of every declaration of the imported libraries (`local/library_names_mathlib.tsv.gz`, 473131 names, `tools/library_names.lean`), so that a Mathlib declaration named by the blueprint counts as found and sorry-free. The lean-lsp server already serves the new checkout (it finds the new declarations), no restart needed.
 
@@ -523,6 +524,7 @@ Numbers (the DAG as of the refresh, 4471 nodes; the "before" is the same DAG und
 | 2026-10-10 01:13 | 169 of 787 | 17 |
 | 2026-10-10 01:21 | 169 of 787 | 17 |
 | 2026-10-10 01:29 | 169 of 787 | 17 |
+| 2026-10-10 01:37 | 169 of 787 | 17 |
 
 Review lag (10:12 UTC): 11 deliveries waiting, the oldest since 09:36 UTC (about 35 minutes), more than the twenty minutes the human set; the lead missed them while the delivery watch slept (10-minute polling) during the Lean refresh. Working through them now; the watch is now checked at every review.
 
