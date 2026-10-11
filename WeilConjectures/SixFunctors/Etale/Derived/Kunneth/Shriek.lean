@@ -274,6 +274,8 @@ theorem nonempty_iso_rightDerivedLowerShriek_mapOverBase_externalProduct
     ((HasCompactification.compactification (pullback.mapOverBase f₁ f₂ b₁ b₂)).transport
       e (Iso.refl _) (by rw [Iso.refl_hom, Category.comp_id, he])).hasCompactification
   have : HasCompactification (e.hom ≫ h) := .of_eq he.symm
+  have : QuasiCompact h := by
+    rw [show h = _ from (pullback.fst_comp_eq_toBase _ _).symm]; infer_instance
   have hcongr : ∀ (ψ : _ ⟶ _) [HasCompactification ψ], ψ = pullback.mapOverBase f₁ f₂ b₁ b₂ →
       Nonempty (R(ψ)_![ModuleCat.{u + 1} Λ] ≅
         R(pullback.mapOverBase f₁ f₂ b₁ b₂)_![ModuleCat.{u + 1} Λ]) := by
