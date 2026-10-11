@@ -3208,3 +3208,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 01:09 L: merged deliver/J1/lem-pc-derived-functor-termwise-split-ses-triangle (reviewer FIX; first push; new nodes: 0)
 - 01:10 UTC L: J1 derived-functor-termwise-split-ses-triangle FIX a90a2a882 (R-tst0107; narrowed to g_*, E7).
 - 01:12 L: merged deliver/E1/lem-sc-perfect-pullback-perfect-residue (reviewer FIX; first push; new nodes: 0)
+- 01:12 UTC L: E1 perfect-pullback-perfect-residue FIX 147593d1b (R-ppp0109; cites lem-pc-perfect-affine-bounded-projective and lem-pc-termwise-tor-acyclic-derived-tensor).
