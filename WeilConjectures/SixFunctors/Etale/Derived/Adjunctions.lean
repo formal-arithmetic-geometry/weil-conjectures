@@ -7,7 +7,8 @@ module
 
 public import WeilConjectures.SixFunctors.Etale.Derived.Exchange
 public import WeilConjectures.SixFunctors.Etale.Derived.Stability.Basic
-public import WeilConjectures.SixFunctors.Etale.Derived.Stability.UpperShriek
+public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.DirectImage
+public import WeilConjectures.SixFunctors.Etale.Derived.Stability.UpperShriekConstructible
 
 /-!
 # The adjunctions of the six-functor datum
@@ -21,8 +22,12 @@ on the base.
 
 1. The derived adjunction `Lf^* ⊣ Rf_*` restricts to the bounded constructible categories
    (`AlgebraicGeometry.Etale.DerivedCategoryBoundedConstructible.leftDerivedUpperStarAdjunction`).
-2. The exceptional adjunction `Rf_! ⊣ Rf^!` restricts to the finite-Tor categories
-   (`AlgebraicGeometry.Etale.DerivedCategoryFiniteTor.rightDerivedLowerShriekAdjunction`).
+2. The exceptional adjunction `Rf_! ⊣ Rf^!` restricts to the bounded constructible categories
+   (`AlgebraicGeometry.Etale.DerivedCategoryBoundedConstructible.rightDerivedLowerShriekAdjunction`)
+   and to the finite-Tor categories
+   (`AlgebraicGeometry.Etale.DerivedCategoryFiniteTor.rightDerivedLowerShriekAdjunction`), and its
+   unit and counit agree for the refinement comparisons
+   (`AlgebraicGeometry.Etale.rightDerivedUpperShriekAdjunctionOfCompactification_comparison`).
 3. For composable `f` and `g`, the unit and counit of `D((g ∘ f)^*) ⊣ R(g ∘ f)_*` are the
    pasted ones through the composition isomorphisms
    (`AlgebraicGeometry.Etale.mapDerivedUpperStarLowerStarAdjunction_comp_eq`), and those of the
@@ -38,13 +43,11 @@ on the base.
 
 ## Implementation notes
 
-The blueprint states clause (2) on the bounded constructible categories `Dᵇc`. That `Rf^!`
-preserves `Dᵇc` is not available: the blueprint proves the preservation only for the
-constructible interval categories with a Tor-amplitude condition
-(`sk-prop-sf-rf-shriek-preservation`), that is for `Dctf`
-(`AlgebraicGeometry.Etale.constructibleFiniteTor_rightDerivedUpperShriek`). Clause (2) is
-therefore stated on `Dctf`, the category on which the six-functor datum of `def-sf-datum` and
-blueprint `lem-sf-mate` are typed.
+That `Rf^!` preserves `Dᵇc`, which clause (2) needs, is
+`AlgebraicGeometry.Etale.boundedConstructible_rightDerivedUpperShriek`. Blueprint
+`rem-ptr-sf-datum-1` records that the datum of `def-sf-datum` has these adjunctions; on its
+finite-Tor categories they are
+`AlgebraicGeometry.Etale.DerivedCategoryFiniteTor.rightDerivedLowerShriekAdjunction`.
 
 Clause (3) for the derived pullback is stated for `D(g^*)`, the functor induced on derived
 categories by the exact pullback `g^*`, which is the derived pullback
@@ -140,7 +143,84 @@ noncomputable def DerivedCategoryBoundedConstructible.leftDerivedUpperStarAdjunc
     (ObjectProperty.fullyFaithfulι _) (ObjectProperty.fullyFaithfulι _)
     (ObjectProperty.liftCompιIso _ _ _).symm (ObjectProperty.liftCompιIso _ _ _).symm
 
+/-- Blueprint `fix-prop-adjunctions` (2): the restriction `Rf_! : Dᵇc(X, Λ) ⥤ Dᵇc(Y, Λ)` of the
+compactly supported direct image to the bounded constructible categories, for a separated
+finite-type `f` between finite-type `k`-schemes and a finite `Λ` whose exponent is invertible on
+`Y` (finiteness theorem, `AlgebraicGeometry.Etale.boundedConstructible_rightDerivedLowerShriek`). -/
+noncomputable def DerivedCategoryBoundedConstructible.rightDerivedLowerShriek
+    (aX : X ⟶ Spec (.of k)) (aY : Y ⟶ Spec (.of k)) [LocallyOfFiniteType aX]
+    [LocallyOfFiniteType aY] [HasInvertibleExponent Λ Y] (f : X ⟶ Y) (hf : f ≫ aY = aX)
+    [HasCompactification f] :
+    DerivedCategoryBoundedConstructible (ModuleCat.{u + 1} Λ) X ⥤
+      DerivedCategoryBoundedConstructible (ModuleCat.{u + 1} Λ) Y :=
+  have : HasInvertibleExponent Λ X := HasInvertibleExponent.of_hom f
+  ObjectProperty.lift _
+    (DerivedCategoryBoundedConstructible.ι (ModuleCat.{u + 1} Λ) X ⋙
+      R(f)_![ModuleCat.{u + 1} Λ])
+    fun K ↦ boundedConstructible_rightDerivedLowerShriek Λ f aX aY hf _ K.property
+
+/-- Blueprint `fix-prop-adjunctions` (2): the restriction `Rf^! : Dᵇc(Y, Λ) ⥤ Dᵇc(X, Λ)` of the
+exceptional inverse image to the bounded constructible categories
+(`AlgebraicGeometry.Etale.boundedConstructible_rightDerivedUpperShriek`). -/
+noncomputable def DerivedCategoryBoundedConstructible.rightDerivedUpperShriek
+    (aY : Y ⟶ Spec (.of k)) [LocallyOfFiniteType aY] [QuasiCompact aY]
+    [HasInvertibleExponent Λ Y] (f : X ⟶ Y) [HasCompactification f] [QuasiCompact f] :
+    DerivedCategoryBoundedConstructible (ModuleCat.{u + 1} Λ) Y ⥤
+      DerivedCategoryBoundedConstructible (ModuleCat.{u + 1} Λ) X :=
+  ObjectProperty.lift _
+    (DerivedCategoryBoundedConstructible.ι (ModuleCat.{u + 1} Λ) Y ⋙
+      R(f)^![ModuleCat.{u + 1} Λ])
+    fun K ↦ boundedConstructible_rightDerivedUpperShriek Λ aY f K.property
+
+/-- Blueprint `fix-prop-adjunctions` (2): the exceptional adjunction `Rf_! ⊣ Rf^!` restricts to an
+adjunction between the bounded constructible categories `Dᵇc(X, Λ)` and `Dᵇc(Y, Λ)`, for a
+separated finite-type `f` between finite-type `k`-schemes and a finite `Λ` whose exponent is
+invertible on `Y`; its unit and counit (and hence its triangle identities) are those of
+`AlgebraicGeometry.Etale.rightDerivedUpperShriekAdjunction`. Its further restriction to the
+finite-Tor categories is
+`AlgebraicGeometry.Etale.DerivedCategoryFiniteTor.rightDerivedLowerShriekAdjunction`. -/
+noncomputable def DerivedCategoryBoundedConstructible.rightDerivedLowerShriekAdjunction
+    (aX : X ⟶ Spec (.of k)) (aY : Y ⟶ Spec (.of k)) [LocallyOfFiniteType aX]
+    [LocallyOfFiniteType aY] [QuasiCompact aY] [HasInvertibleExponent Λ Y] (f : X ⟶ Y)
+    (hf : f ≫ aY = aX) [HasCompactification f] [QuasiCompact f] :
+    DerivedCategoryBoundedConstructible.rightDerivedLowerShriek Λ aX aY f hf ⊣
+      DerivedCategoryBoundedConstructible.rightDerivedUpperShriek Λ aY f :=
+  (rightDerivedUpperShriekAdjunction _ f).restrictFullyFaithful
+    (ObjectProperty.fullyFaithfulι _) (ObjectProperty.fullyFaithfulι _)
+    (ObjectProperty.liftCompιIso _ _ _).symm (ObjectProperty.liftCompιIso _ _ _).symm
+
 end BoundedConstructible
+
+section Refinement
+
+variable {X Y : Scheme.{u}} {f : X ⟶ Y} [HasCompactification f] [QuasiCompact f]
+
+/-- Blueprint `fix-prop-adjunctions` (2): the exceptional adjunction `Rf_!(c) ⊣ Rf^!` for the
+compactly supported direct image `Rf_!(c)` computed with an arbitrary compactification `c` of `f`,
+transported from `AlgebraicGeometry.Etale.rightDerivedUpperShriekAdjunction` along the
+compactification-independence isomorphism `Rf_!(c) ≅ Rf_!`
+(`AlgebraicGeometry.Etale.rightDerivedLowerShriekIso`). -/
+noncomputable def rightDerivedUpperShriekAdjunctionOfCompactification (c : Compactification f) :
+    Rf_!(c)[ModuleCat.{u + 1} Λ] ⊣ R(f)^![ModuleCat.{u + 1} Λ] :=
+  (rightDerivedUpperShriekAdjunction _ f).ofNatIsoLeft (rightDerivedLowerShriekIso Λ c).symm
+
+/-- Blueprint `fix-prop-adjunctions` (2): the units and counits of the exceptional adjunctions
+agree for the refinement comparisons. For a refinement `r : c.Refinement d` of compactifications
+of `f` whose square over `X` is cartesian, transporting the adjunction `Rf_!(d) ⊣ Rf^!` along the
+refinement comparison `Rf_!(d) ≅ Rf_!(c)`
+(`AlgebraicGeometry.Etale.rightDerivedLowerShriekOfCompactificationComparison`) and along its
+conjugate automorphism of `Rf^!` gives the adjunction `Rf_!(c) ⊣ Rf^!`. -/
+theorem rightDerivedUpperShriekAdjunctionOfCompactification_comparison {c d : Compactification f}
+    (r : c.Refinement d) (hcart : IsPullback c.i (𝟙 X) r.hom d.i) :
+    ((rightDerivedUpperShriekAdjunctionOfCompactification Λ d).ofNatIsoLeft
+        (asIso (rightDerivedLowerShriekOfCompactificationComparison _ r hcart))).ofNatIsoRight
+        (conjugateIsoEquiv (rightDerivedUpperShriekAdjunctionOfCompactification Λ c)
+          (rightDerivedUpperShriekAdjunctionOfCompactification Λ d)
+          (asIso (rightDerivedLowerShriekOfCompactificationComparison _ r hcart))).symm =
+      rightDerivedUpperShriekAdjunctionOfCompactification Λ c :=
+  Adjunction.ofNatIsoLeft_ofNatIsoRight_conjugateIsoEquiv _ _ _
+
+end Refinement
 
 section FiniteTor
 
@@ -151,7 +231,7 @@ adjunction between the finite-Tor categories `Dctf(X, Λ)` and `Dctf(Y, Λ)`, fo
 finite-type `f` over a finite-type `k`-scheme `Y` and a finite `Λ` whose exponent is invertible on
 `Y`; its unit and counit are those of
 `AlgebraicGeometry.Etale.rightDerivedUpperShriekAdjunction`. This is the adjunction of axiom
-(A1) of `def-sf-datum`. -/
+(A1) of `def-sf-datum`, which blueprint `rem-ptr-sf-datum-1` points to. -/
 noncomputable def DerivedCategoryFiniteTor.rightDerivedLowerShriekAdjunction
     (aY : Y ⟶ Spec (.of k)) [LocallyOfFiniteType aY] [QuasiCompact aY]
     [HasInvertibleExponent Λ Y] (f : X ⟶ Y) [HasCompactification f] [QuasiCompact f] :
