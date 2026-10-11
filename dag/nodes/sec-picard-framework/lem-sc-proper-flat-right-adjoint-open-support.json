@@ -155,5 +155,23 @@
   "group": "K1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-pfo2242 (reviewer sub-agent of L); spot-checked: Item statement vs Stacks 0E4G(1) (unbounded D_QCoh is faithful); Step 3 vs cited nodes; 09IM/0A9C child statements vs perfect.tex; no new node restates restriction-open (citing it would be circular: the item was created from it); projection formula hypotheses. FIX more, RETURN less: (1) C4/E: after the second reading broadened Q to all of D_QCoh, Step 3 still used pseudo-coherence of Rf_*P (0CSD) and so needed case (ii) of 0A9C, which requires Q bounded below; repaired by citing existing lem-pc-proper-support-perfect-direct-image (0A1H, G=O_X[0]) for Rf_*P perfect and using case (i); declared it in tool_uses; dropped the now-unused child lem-sc-proper-flat-pseudo-coherent-direct-image. (2) B4: lem-sc-perfect-support-map-lift rewritten in TeX (\\to, T\\cap U, D_{\\mathrm{QCoh}}) and typed to match 09IM. (3) Steps 1 and 5 made explicit: perfect generation on U, lift with closed subset X, nonvanishing via the direct-summand compatibility.; 2 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProperFlatRightAdjointOpenSupport",
+  "declaration": "AlgebraicGeometry.proper_flat_rightAdjoint_open_support",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProperFlatRightAdjointOpenSupport.lean",
+  "statement": "theorem proper_flat_rightAdjoint_open_support {X Y : Scheme.{uT}} [CompactSpace Y] [QuasiSeparatedSpace Y] (f : X ⟶ Y) [IsProper f] [Flat f] [LocallyOfFinitePresentation f] [HasDerivedCategory.{wXT} (SheafOfModules.{uT} (moduleRings X.toRingedSpace))] [HasDerivedCategory.{wYT} (SheafOfModules.{uT} (moduleRings Y.toRingedSpace))] (F : schemeDerivedQCohCategory X ⥤ schemeDerivedQCohCategory Y) (hF : F ⋙ ObjectProperty.ι (schemeDerivedQCohProperty Y) ≅ ObjectProperty.ι (schemeDerivedQCohProperty X) ⋙ schemeDerivedDirectImage f) (a : schemeDerivedQCohCategory Y ⥤ schemeDerivedQCohCategory X) (adj : F ⊣ a) (V : Y.Opens) (hV : IsCompact (V : Set Y)) (Q : schemeDerivedQCohCategory Y) (hQ : ∀ (n : ℤ) (y : Y), y ∈ V → Subsingleton (↑(TopCat.Presheaf.stalk ((DerivedCategory.homologyFunctor (SheafOfModules.{uT} (moduleRings Y.toRingedSpace)) n).obj Q.obj).val.presheaf y))) : ∀ (n : ℤ) (x : X), x ∈ f ⁻¹ᵁ V → Subsingleton (↑(TopCat.Presheaf.stalk ((DerivedCategory.homologyFunctor (SheafOfModules.{uT} (moduleRings X.toRingedSpace)) n).obj (a.obj Q).obj).val.presheaf x))",
+  "branch": "sheaf-dag",
+  "by": "M1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-fos",
+  "group": "M1",
+  "result": "pass",
+  "note": "reverted the delivery's change of existing node(s) def-pc-derived-direct-image (--revert-nodes; kept as on sheaf-dag)"
  }
 }
