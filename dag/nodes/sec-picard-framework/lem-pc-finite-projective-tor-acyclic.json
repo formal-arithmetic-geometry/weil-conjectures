@@ -108,5 +108,23 @@
   "group": "C1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-fpt0039 (reviewer sub-agent of L); spot-checked: Proof is the two-line argument: Step 1 additivity of Tor over finite direct sums derived elementarily from the resolution definition in def-weil-pbc-tor-modules (C1 ok: finite sum of projective resolutions, tensor/homology commute with finite sums); Step 2 split retract via functoriality clause of the same node. Statement gloss matches def-weil-pbc-tor-modules (projective-resolution homology, C4 ok). Citer lem-pc-tor-independent-projective-complex-tensor step 1 uses exactly this (Q^n finite projective summand of A^m, Tor_i^R(Q^n,B)=0). Duplicate check (class d): grepped tor node names; lem-sc-p1-tor-free-vanishing is the free/arbitrary-R case, not this; no duplicate. Mathlib: grep for Tor with biprod/sum, no single declaration. FIX more, RETURN less: B4 step 2 plain-text arrows rewritten in TeX (s: P to A^m, r: A^m to P, r s = id), with explicit citation of def-weil-pbc-tor-modules and Step 1.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.FiniteProjectiveTorAcyclic",
+  "declaration": "CategoryTheory.finiteProjective_tor_acyclic",
+  "file": "lean/Sheaf/Algebra/FiniteProjectiveTorAcyclic.lean",
+  "statement": "theorem finiteProjective_tor_acyclic {R : Type u} [CommRing R] {A : Type u} [CommRing A] [Algebra R A] {B : Type u} [CommRing B] [Algebra R B] {P : Type u} [AddCommGroup P] [Module A P] (hTor : ∀ (i : ℕ), 0 < i → IsZero (((Tor' (ModuleCat R) i).obj (ModuleCat.of R A)).obj (ModuleCat.of R B))) (m : ℕ) (s : P →ₗ[A] (Fin m → A)) (r : (Fin m → A) →ₗ[A] P) (hsplit : r.comp s = LinearMap.id) : ∀ (i : ℕ), 0 < i → IsZero (((Tor' (ModuleCat R) i).obj (@ModuleCat.of R _ P inferInstance (Module.compHom P (algebraMap R A)))).obj (ModuleCat.of R B))",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-fpt0932",
+  "group": "H1",
+  "result": "pass",
+  "note": "R,A,B CommRing + Algebra R A/B; P A-module with R-action Module.compHom(algebraMap R A); finite summand as m, s, r, r∘s=id; hTor and conclusion IsZero Tor' (ModuleCat R) i, 0<i; Mathlib only isZero_Tor'_succ_of_projective (projective over R), not the node"
  }
 }
