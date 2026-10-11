@@ -438,6 +438,59 @@ lemma injective_pullSection_of_henselianRing :
   rw [← hr] at this
   exact this
 
+set_option backward.isDefEq.respectTransparency false in
+include h in
+/-- **Surjectivity of restriction to the closed fibre over a henselian pair**, first step: the
+local representatives of a section `t` over `Y₀` assemble to a section `g` over a surjective
+étale `U ⟶ Y` whose restriction to `U ×_Y Y₀` is the restriction of `t`. -/
+lemma exists_surjective_etale_pullSection_eq
+    (t : ((i)^*[AddCommGrpCat.{u + 1}].obj G).obj.obj (op (Scheme.Etale.mk (𝟙 Y₀)))) :
+    ∃ (U : Y.Etale) (_ : Surjective U.hom) (g : G.obj.obj (op U)),
+      pullSection i G (V := (MorphismProperty.Over.pullback @Etale ⊤ i).obj U)
+          (pullback.fst U.hom i) pullback.condition g =
+        ((i)^*[AddCommGrpCat.{u + 1}].obj G).obj.map (toTerminalOfPullback i U).op t := by
+  have : IsClosedImmersion i := isClosedImmersion_of_isPullback I p i p₀ h
+  choose U g hy hg using exists_pullSection_eq_map i G t
+  have : CompactSpace Y := QuasiCompact.compactSpace_of_compactSpace p
+  have : CompactSpace Y₀ := i.isClosedEmbedding.compactSpace
+  obtain ⟨K, hK⟩ := isCompact_univ.elim_finite_subcover
+    (fun y₀ : Y₀ ↦ Set.range (pullback.snd (U y₀).hom i))
+    (fun y₀ ↦ (pullback.snd (U y₀).hom i).isOpenMap.isOpen_range)
+    (fun y₀ _ ↦ Set.mem_iUnion.2 ⟨y₀, hy y₀⟩)
+  let Yc : Y.Opens := ⟨(Set.range i)ᶜ, i.isClosedEmbedding.isClosed_range.isOpen_compl⟩
+  let E : Option K → Y.Etale := fun o ↦ Option.elim o (Scheme.Etale.mk Yc.ι) (fun k ↦ U k.1)
+  let gE : ∀ o, G.obj.obj (op (E o)) := fun o ↦ match o with
+    | none => 0
+    | some k => g k.1
+  obtain ⟨gt, hgt⟩ := exists_map_sigmaEtaleι_eq G E gE
+  have hι : ∀ o, Sigma.ι (fun o ↦ (E o).left) o ≫ (sigmaEtale E).hom = (E o).hom :=
+    fun o ↦ Sigma.ι_desc _ _
+  refine ⟨sigmaEtale E, ⟨fun y ↦ ?_⟩, gt, pullSection_sigmaEtale_eq i G t E gE (fun o ↦ ?_) gt hgt⟩
+  · by_cases hyi : y ∈ Set.range i
+    · obtain ⟨y₀, rfl⟩ := hyi
+      obtain ⟨k, hk, z, hz⟩ := Set.mem_iUnion₂.1 (hK (Set.mem_univ y₀))
+      refine ⟨Sigma.ι (fun o ↦ (E o).left) (some ⟨k, hk⟩) (pullback.fst (U k).hom i z), ?_⟩
+      change (Sigma.ι (fun o ↦ (E o).left) (some ⟨k, hk⟩) ≫ (sigmaEtale E).hom) _ = _
+      rw [hι]
+      change ((pullback.fst (U k).hom i ≫ (U k).hom) z) = _
+      rw [pullback.condition, Scheme.Hom.comp_apply, hz]
+      rfl
+    · refine ⟨Sigma.ι (fun o ↦ (E o).left) none ⟨y, hyi⟩, ?_⟩
+      change (Sigma.ι (fun o ↦ (E o).left) none ≫ (sigmaEtale E).hom) _ = _
+      rw [hι]
+      rfl
+  · cases o with
+    | none =>
+      have : IsEmpty ((MorphismProperty.Over.pullback @Etale ⊤ i).obj (E none)).left :=
+        ⟨fun w ↦ by
+        have h₁ : ((E none).hom ((pullback.fst (E none).hom i) w)) ∈ (Set.range i)ᶜ :=
+          ((pullback.fst (E none).hom i) w).2
+        apply h₁
+        rw [← Scheme.Hom.comp_apply, pullback.condition, Scheme.Hom.comp_apply]
+        exact ⟨_, rfl⟩⟩
+      exact eq_of_isEmpty _ _ _
+    | some k => exact hg k.1
+
 end Main
 
 end AlgebraicGeometry.Etale
