@@ -5019,3 +5019,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 14:42 L: merged deliver/M1/lem-weil-pbc-spectral-limit-descend-opens (stage 2; reviewer PASS; first push; Sheaf.Topology.SpectralLimitDescendOpens Topology.spectralLimit_descend_opens)
 - 14:42 L: merged deliver/N1/lem-weil-pbc-split-extension-free-presentation (stage 2; reviewer PASS; first push; Sheaf.LinearAlgebra.SplitExtensionFreePresentation LinearMap.exists_retraction_iff_relation_factors)
 - 14:42 L: merged deliver/G1/lem-weil-pbc-thickening-lft-cartesian (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.LocallyOfFiniteTypeThickening AlgebraicGeometry.locallyOfFiniteType_iff_of_finiteOrderThickening)
+- 14:42 L: merged deliver/Q1/lem-weil-pbc-stein-factorization-affine (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.SteinFactorizationAffine AlgebraicGeometry.Scheme.Hom.steinFactorization_affine)
