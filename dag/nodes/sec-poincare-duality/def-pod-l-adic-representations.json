@@ -76,5 +76,32 @@
   "group": "F1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-lar2523 (reviewer sub-agent of L); spot-checked: Read Weil II (1.1.1) and (1.1.6) pp.146-148 from the PDF: clause 3 matches (1.1.6) (E-structure stable under sigma(pi) = factorisation; finite-dim implicit; profinite-only restriction fine); continuity via joint action on finite-dim V_E with l-adic topology is equivalent to continuity into GL(V_E). Parent cor-galois-lisse-representations (only citer) uses the same three notions. No duplicate node. Mathlib grep: ContRepresentation/TopRep only, mathlib_match null honest. No proof steps. FIX more, RETURN less: B3 source.place cited only (1.1.6) though clauses 1-2 are not in (1.1.6) nor (1.1.1) (sheaves, not representations); place now says so and points to (1.1.6) para 2 and Milne LEC 19 p.125. Second reading by F1 missed this and claimed a source-metadata change that is not in the diff.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.RepresentationTheory.LAdic",
+  "declaration": "Representation.IsLAdic",
+  "declarations": [
+   "Representation.IsContinuousIntegral",
+   "Representation.IsContinuousCoefficient",
+   "Representation.IsLAdic",
+   "Representation.IsEquivariant",
+   "Representation.tensorDiagonal",
+   "Representation.coefficientScalarExtension"
+  ],
+  "file": "lean/Sheaf/RepresentationTheory/LAdic.lean",
+  "statement": "def IsLAdic (l : ℕ) [Fact l.Prime] (Ω : Type u) [Field Ω] [Algebra ℚ_[l] Ω] [IsAlgClosure ℚ_[l] Ω] (G : ProfiniteGrp.{v}) (V : Type w) [AddCommGroup V] [Module Ω V] (ρ : G →* (V ≃ₗ[Ω] V)) : Prop",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-dlr0935"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-dlr0935",
+  "group": "F1",
+  "result": "fix",
+  "note": "pi profinite = ProfiniteGrp; O_E/m_E recorded Padic decls with m_E-adic module topology; clause 2 FiniteDimensional + spectralNorm.nontriviallyNormedField + moduleTopology + joint continuity; clause 3 IntermediateField E finite, W : Submodule E V stable with tau restriction, canonical Omega-tensor-W iso; FIX: actions to pod form G →* (V ≃ₗ[R] V), nontriviallyNormedField, explicit equivariance/diagonal tensor/base change"
  }
 }
