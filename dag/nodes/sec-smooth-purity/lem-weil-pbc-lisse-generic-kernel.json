@@ -15,7 +15,8 @@
  "stmt_deps": [
   "def-weil-pbc-etale-sheaves",
   "def-weil-pbc-geometric-stalks",
-  "def-weil-pbc-scheme-conventions"
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-abelian-etale-sheaves"
  ],
  "proof": [
   {
@@ -137,5 +138,24 @@
   "group": "C1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-lgk2934 (reviewer sub-agent of L); spot-checked: Checked both steps and every cited statement; citer lem-weil-pbc-constructible-noetherian-finite-selection uses it on irreducible lisse strata as stated (C4 ok). FIX more, RETURN less: (1) C1: the stalk of a constant sheaf (germ of iota(m) is m, nonzero) was used in both steps uncited; now cites lem-weil-pbc-constant-sheaf-geometric-stalk (generic tool from sk-def-pbc, C7 ok) and def-weil-pbc-constant-sheaf. (2) C1: lifting the geometric point to the constant-cover member V and the identification of stalks of F|_V with stalks of F were implicit; now spelled out as elementary cofinality from def-weil-pbc-geometric-stalks, plus the filtered-colimit shrinking that makes the image constantly m. Note: the report's Second reading says step 2 was changed to cite lem-weil-pbc-inverse-image-stalk-germ, but the delivered node at 118f7472b does not contain that change (stale report claim); not needed after the fix.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.LisseGenericKernel",
+  "declaration": "AlgebraicGeometry.Scheme.mono_of_mono_generic_stalk",
+  "file": "lean/Sheaf/AlgebraicGeometry/LisseGenericKernel.lean",
+  "statement": "theorem mono_of_mono_generic_stalk (X : Scheme.{u₂}) (hX : IsIrreducible (Set.univ : Set X)) (hne : Nonempty X) (η : X) (hη : IsGenericPoint η (Set.univ : Set X)) (Ω : Type u₂) [Field Ω] [IsAlgClosed Ω] (barη : Spec (.of Ω) ⟶ X) (hbarη : barη default = η) (F G : Sheaf X.smallEtaleTopology AddCommGrpCat.{u₂ + 1}) (hF : IsLocallyConstantEtaleSheafOfSets ((sheafCompose X.smallEtaleTopology (CategoryTheory.forget AddCommGrpCat.{u₂ + 1})).obj F)) (φ : F ⟶ G) (hφ : Mono ((pointSmallEtale barη).sheafFiber.map φ)) : Mono φ",
+  "branch": "sheaf-dag",
+  "by": "K1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-lgk1129"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-lgk1129",
+  "group": "K1",
+  "result": "fix",
+  "note": "S nonempty irreducible (hX,hne), generic point eta (IsGenericPoint univ), geometric point over eta (Omega alg. closed, barη default = η), F,G abelian etale sheaves (Sheaf smallEtaleTopology AddCommGrpCat.{u+1}, def-weil-pbc-abelian-etale-sheaves), F locally constant = recorded def-weil-pbc-etale-sheaves IsLocallyConstantEtaleSheafOfSets of the underlying set sheaf (FIX: was source IsLocallyConstantSheaf of def-constructible-locally-constant, not a stmt_dep, H4; G1 faa2456ba form), phi_etabar injective = Mono of sheafFiber.map (AddCommGrpCat), conclusion Mono phi; theorem true in the set-sheaf reading (compare germs of s and 0 in the constant set M)"
  }
 }
