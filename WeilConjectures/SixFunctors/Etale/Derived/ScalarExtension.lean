@@ -118,6 +118,7 @@ instance isPrincipalIdealRing_shrink_integers :
   IsPrincipalIdealRing.of_surjective (shrinkRingEquiv l L).toRingHom
     (shrinkRingEquiv l L).surjective
 
+omit [Algebra ℚ_[l] L] [IsScalarTower ℚ_[l] L (PadicAlgCl l)] [FiniteDimensional ℚ_[l] L] in
 lemma maximalIdeal_shrink_integers :
     IsLocalRing.maximalIdeal (Shrink.{u + 1} (integers l L)) = maximalIdealShrink l L :=
   (IsLocalRing.map_ringEquiv_maximalIdeal (shrinkRingEquiv l L)).symm
@@ -733,16 +734,43 @@ theorem derivedCompleteIntegral_rightDerivedFunctor_coextendScalars
 end Completeness
 
 variable (Y) in
+/-- The derived base change `K ⊗ᴸ_{𝒪_E} 𝒪_L` is a retract, up to a nonzero scalar of `𝒪_L`, of
+the derived coextension `RHom_{𝒪_E}(𝒪_L, K)`: there are maps `β : K ⊗ᴸ 𝒪_L ⟶ RHom(𝒪_L, K)` and
+`α : RHom(𝒪_L, K) ⟶ K ⊗ᴸ 𝒪_L` with `β ≫ α = c`. On sections, `β(x ⊗ k) = (y ↦ τ(xy) k)` for an
+`𝒪_E`-linear form `τ : 𝒪_L ⟶ 𝒪_E` and `α(f) = Σ aᵢ ⊗ f(bᵢ)` for a Casimir element
+`Σ aᵢ ⊗ bᵢ` of `𝒪_L ⊗_{𝒪_E} 𝒪_L` (a multiple of the separability idempotent of `L/E`). -/
+theorem exists_derivedBaseChange_retract_rightDerivedFunctor_coextendScalars
+    (K : 𝐃(Y, Shrink.{u + 1} (PadicAlgCl.integers l E))) :
+    ∃ (c : Shrink.{u + 1} (PadicAlgCl.integers l L)) (_ : c ≠ 0)
+      (β : (derivedBaseChange (PadicAlgCl.integersShrinkMap l E L) Y
+        (exists_isDerivedBaseChange_integers l E L Y)).obj K ⟶
+        (coextendScalars (PadicAlgCl.integersShrinkMap l E L) Y).rightDerivedFunctor.obj K)
+      (α : (coextendScalars (PadicAlgCl.integersShrinkMap l E L) Y).rightDerivedFunctor.obj K ⟶
+        (derivedBaseChange (PadicAlgCl.integersShrinkMap l E L) Y
+          (exists_isDerivedBaseChange_integers l E L Y)).obj K), β ≫ α = c • 𝟙 _ :=
+  sorry
+
+variable (Y) in
 /-- Derived base change along `𝒪_E ⟶ 𝒪_L` carries derived complete objects to derived complete
-objects. This is the completeness part of the definition of the scalar extension
-(`def-weil-rationalization-karoubi`); see the implementation notes of this file for its status. -/
+objects: it is a retract, up to a nonzero scalar, of the derived coextension
+(`AlgebraicGeometry.Etale.exists_derivedBaseChange_retract_rightDerivedFunctor_coextendScalars`),
+which preserves derived completeness
+(`AlgebraicGeometry.Etale.derivedCompleteIntegral_rightDerivedFunctor_coextendScalars`). -/
 theorem derivedCompleteIntegral_derivedBaseChange_integers
     (K : 𝐃(Y, Shrink.{u + 1} (PadicAlgCl.integers l E)))
     (hK : _root_.DerivedCategory.derivedCompleteIntegral Y.smallEtaleTopology l E K) :
     _root_.DerivedCategory.derivedCompleteIntegral Y.smallEtaleTopology l L
       ((derivedBaseChange (PadicAlgCl.integersShrinkMap l E L) Y
-        (exists_isDerivedBaseChange_integers l E L Y)).obj K) :=
-  sorry
+        (exists_isDerivedBaseChange_integers l E L Y)).obj K) := by
+  obtain ⟨c, hc, β, α, h⟩ := exists_derivedBaseChange_retract_rightDerivedFunctor_coextendScalars
+    l E L Y K
+  obtain ⟨ϖL, hϖL, hIL⟩ :=
+    PadicAlgCl.exists_mem_nonZeroDivisors_maximalIdealShrink_eq_span.{w, u} l L
+  have hN := derivedCompleteIntegral_rightDerivedFunctor_coextendScalars l E L Y K hK
+  change _root_.DerivedCategory.derivedComplete _ (PadicAlgCl.maximalIdealShrink l L) _ at hN ⊢
+  obtain ⟨n, v, hnv⟩ := PadicAlgCl.exists_pow_eq_mul l L hϖL hIL hc
+  exact _root_.DerivedCategory.derivedComplete_of_comp_eq_smul hϖL hIL hN β α c h
+    fun _ hZ ↦ isIso_smul_id_of_pow_eq_mul hZ hnv
 
 variable (Y) in
 /-- The scalar extension `- ⊗_E L : D_comp(Y_ét, E) ⥤ D_comp(Y_ét, L)` of blueprint
