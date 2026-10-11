@@ -81,6 +81,33 @@ noncomputable abbrev derivedRestrictScalars : 𝐃(X, Λ') ⥤ 𝐃(X, Λ) :=
 
 variable {φ X}
 
+/-- Every element of `J` acts by zero on a restriction of scalars along `Λ →+* Λ ⧸ J`. -/
+lemma smul_id_derivedRestrictScalars_obj {J : Ideal Λ} {r : Λ} (hr : r ∈ J)
+    (N : 𝐃(X, Λ ⧸ J)) :
+    r • 𝟙 ((derivedRestrictScalars (Ideal.Quotient.mk J) X).obj N) = 0 := by
+  let F := Sheaf.restrictScalars X.smallEtaleTopology (Ideal.Quotient.mk J)
+  let P := (_root_.DerivedCategory.Q).objPreimage N
+  let e : (derivedRestrictScalars (Ideal.Quotient.mk J) X).obj N ≅
+      (_root_.DerivedCategory.Q).obj ((F.mapHomologicalComplex (ComplexShape.up ℤ)).obj P) :=
+    (derivedRestrictScalars _ X).mapIso ((_root_.DerivedCategory.Q).objObjPreimageIso N).symm ≪≫
+      F.mapDerivedCategoryFactors.app P
+  have h₀ : r • 𝟙 ((F.mapHomologicalComplex (ComplexShape.up ℤ)).obj P) = 0 := by
+    refine HomologicalComplex.hom_ext _ _ fun i ↦ ?_
+    simp only [HomologicalComplex.smul_f_apply, HomologicalComplex.id_f,
+      HomologicalComplex.zero_f]
+    change r • 𝟙 (F.obj (P.X i)) = 0
+    ext U x
+    have hr' : Ideal.Quotient.mk J r = 0 := Ideal.Quotient.eq_zero_iff_mem.mpr hr
+    change r • x = 0
+    rw [ModuleCat.restrictScalars.smul_def, hr', zero_smul]
+  have h₁ : r • 𝟙 ((_root_.DerivedCategory.Q).obj
+      ((F.mapHomologicalComplex (ComplexShape.up ℤ)).obj P)) = 0 := by
+    rw [← CategoryTheory.Functor.map_id, ← Functor.map_smul, h₀, Functor.map_zero]
+  have : r • 𝟙 ((derivedRestrictScalars (Ideal.Quotient.mk J) X).obj N) =
+      e.hom ≫ (r • 𝟙 _) ≫ e.inv := by
+    rw [Linear.smul_comp, Linear.comp_smul, Category.id_comp, Iso.hom_inv_id]
+  rw [this, h₁, zero_comp, comp_zero]
+
 /-- A morphism `η : K ⟶ Res K'` from `K ∈ D(X_ét, Λ)` to the restriction of scalars of
 `K' ∈ D(X_ét, Λ')` *exhibits `K'` as the derived base change `K ⊗ᴸ_Λ Λ'`* if it is universal
 among morphisms from `K` to restrictions of scalars: derived base change is left adjoint to
@@ -431,6 +458,22 @@ lemma NormalizedTower.ofIsDerivedBaseChange_obj {K : 𝐃(X, Λ)}
 variable {ϖ : Λ} (hϖ : ϖ ∈ nonZeroDivisors Λ) (hI : I = Ideal.span {ϖ})
 
 include hϖ hI in
+/-- The derived limit of a normalized tower is derived complete: each `Res M_n` is killed by
+`ϖⁿ⁺¹`, so it receives no nonzero map from an object on which `ϖ` acts invertibly, and neither
+does the homotopy limit (`CategoryTheory.Pretriangulated.IsHomotopyLimit.hom_ext_zero`). -/
+theorem NormalizedTower.derivedComplete_of_isHomotopyLimit (M : NormalizedTower I X)
+    {c : Cone M.restrict} (hc : Pretriangulated.IsHomotopyLimit c) :
+    DerivedCategory.derivedComplete X.smallEtaleTopology I c.pt := by
+  subst hI
+  rw [DerivedCategory.derivedComplete_iff_rightOrthogonal hϖ rfl]
+  intro Z f hZ
+  have hF (n : ℕ) : ϖ ^ (n + 1) • 𝟙 (M.restrict.obj (op n)) = 0 :=
+    smul_id_derivedRestrictScalars_obj
+      (Ideal.pow_mem_pow (Ideal.mem_span_singleton_self ϖ) _) (M.obj n)
+  exact hc.hom_ext_zero (fun n g ↦ DerivedCategory.smulInvertible.hom_eq_zero hZ (hF n) g)
+    (fun n g ↦ (ObjectProperty.le_shift _ 1 Z hZ).hom_eq_zero (hF n) g) f
+
+include hϖ hI in
 /-- Blueprint `lem-coef-normalized-dvr-effectivity`: Effectivity of a normalized DVR tower.
 
 For a normalized tower `M_n` and its derived limit `M = R lim_n Res M_n` (the point of a
@@ -442,7 +485,7 @@ theorem NormalizedTower.isDerivedBaseChange_of_isHomotopyLimit (M : NormalizedTo
     {c : Cone M.restrict} (hc : Pretriangulated.IsHomotopyLimit c) :
     (∀ n : ℕ, IsDerivedBaseChange (φ := Ideal.Quotient.mk (I ^ (n + 1))) (c.π.app (op n))) ∧
       DerivedCategory.derivedComplete X.smallEtaleTopology I c.pt :=
-  sorry
+  ⟨sorry, M.derivedComplete_of_isHomotopyLimit hϖ hI hc⟩
 
 /-- Blueprint `rem-sf-tower-shapes-occurring`: Tower shapes that occur.
 
