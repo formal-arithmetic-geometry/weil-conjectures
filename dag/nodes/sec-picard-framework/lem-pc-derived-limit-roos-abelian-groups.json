@@ -153,5 +153,31 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-rag2445 (reviewer sub-agent of L); spot-checked: Packet read whole; item statement checked against Stacks 07KW (1),(2) incl. indexing; steps 1-2 and the three new statement-only nodes fine (no duplicate: lem-weil-pbc-mittag-leffler is finite towers/Milnor map, prop-weil-pbc-roos-triangle is pro-etale). C4: the citer lem-pc-derived-limit-milnor-sequence uses R^1 lim as the first right derived functor of lim on Ab towers, which is the item's sense via def-sp-left-exact-additive; nothing restated (class b none). FIX more, RETURN less: (1) C1 in step 3, missed by the second reading: the claim that the two-term complex prod A_n -1-s-> prod A_n computes R lim 'by the injective-resolution definition' was uncited (that complex is no injective resolution); replaced by Stacks' proof: new elementary step 3 (towers B_n=A_n+...+A_1, C_n=A_{n-1}+...+A_1 with projections, levelwise-exact 0->A->B->C->0, lim B=lim C=prod A_n with lim(B->C)=1-s, naturality) and non-elementary step 4 citing the new statement-only node lem-pc-tower-surjective-lim-acyclic (Stacks 07KW(3) for surjective towers; Mathlib grep recorded, no match) and the long exact sequence (2) and naturality (1) of lem-weil-pbc-horseshoe-delta-functor (tool use) to get coker(1-s)=R^1 lim and R^q lim=0 for q>=2; proof_deps updated. Small case: constant tower id gives 1-s surjective, R^1=0, consistent. Note: the second reading's claim to have changed created.item is not reflected at head (created.item remains the Milnor item, which is correct).; 2 file(s) fixed by the reviewer; 1 statement node(s) added by the reviewer (FIX more, RETURN less)"
  },
- "lead_note": "2026-10-10 L (R-rag2445): Tool use lem-weil-pbc-horseshoe-delta-functor (sk-thm-p1): generic long exact sequence of right derived functors; the picard-duality unit has only lem-sc-p1-right-derived-triangle-connecting, which compares connecting maps but does not state exactness. Mathlib has no lim^1 / derived inverse limit for AddCommGrp (grep recorded)."
+ "lead_note": "2026-10-10 L (R-rag2445): Tool use lem-weil-pbc-horseshoe-delta-functor (sk-thm-p1): generic long exact sequence of right derived functors; the picard-duality unit has only lem-sc-p1-right-derived-triangle-connecting, which compares connecting maps but does not state exactness. Mathlib has no lim^1 / derived inverse limit for AddCommGrp (grep recorded).",
+ "lean": {
+  "module": "Sheaf.CategoryTheory.DerivedLimitRoosAbelianGroups",
+  "declaration": "CategoryTheory.derivedLimitRoosAbelianGroups",
+  "file": "lean/Sheaf/CategoryTheory/DerivedLimitRoosAbelianGroups.lean",
+  "statement": "theorem derivedLimitRoosAbelianGroups : PreservesFiniteLimits (lim : (ℕᵒᵖ ⥤ AddCommGrpCat.{u}) ⥤ AddCommGrpCat.{u}) ∧ ∃ (e₀ : ∀ A : ℕᵒᵖ ⥤ AddCommGrpCat.{u}, limit A ≅ kernel (roosMap A)) (e₁ : ∀ A : ℕᵒᵖ ⥤ AddCommGrpCat.{u}, ((lim : (ℕᵒᵖ ⥤ AddCommGrpCat.{u}) ⥤ AddCommGrpCat.{u}).rightDerived 1).obj A ≅ cokernel (roosMap A)), (∀ (A B : ℕᵒᵖ ⥤ AddCommGrpCat.{u}) (φ : A ⟶ B), ∃ h : roosMap A ≫ Limits.Pi.map (fun n : ℕ => φ.app (Opposite.op n)) = Limits.Pi.map (fun n : ℕ => φ.app (Opposite.op n)) ≫ roosMap B, limMap φ ≫ (e₀ B).hom = (e₀ A).hom ≫ kernel.map (roosMap A) (roosMap B) (Limits.Pi.map (fun n : ℕ => φ.app (Opposite.op n))) (Limits.Pi.map (fun n : ℕ => φ.app (Opposite.op n))) h ∧ ((lim : (ℕᵒᵖ ⥤ AddCommGrpCat.{u}) ⥤ AddCommGrpCat.{u}).rightDerived 1).map φ ≫ (e₁ B).hom = (e₁ A).hom ≫ cokernel.map (roosMap A) (roosMap B) (Limits.Pi.map (fun n : ℕ => φ.app (Opposite.op n))) (Limits.Pi.map (fun n : ℕ => φ.app (Opposite.op n))) h) ∧ ∀ (A : ℕᵒᵖ ⥤ AddCommGrpCat.{u}) (q : ℕ), 2 ≤ q → IsZero (((lim : (ℕᵒᵖ ⥤ AddCommGrpCat.{u}) ⥤ AddCommGrpCat.{u}).rightDerived q).obj A)",
+  "branch": "sheaf-dag",
+  "by": "M1",
+  "date": "2026-10-11",
+  "existing": false,
+  "declarations": [
+   "CategoryTheory.roosMap",
+   "CategoryTheory.roosTowerEnoughInjectives",
+   "CategoryTheory.roosLimitAdditive",
+   "CategoryTheory.derivedLimitRoosAbelianGroups"
+  ],
+  "note": "The main theorem and its two structural clauses jointly render the node. Abelian structure is Mathlib functorCategoryAbelian. The named enough-injectives and additive clauses are local instances only to elaborate the actual lim.rightDerived; they are conclusions with no hypotheses, not assumptions on arbitrary functors.",
+  "fixed_by": "R-rla0826"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-rla0826",
+  "group": "M1",
+  "result": "fix",
+  "note": "Node is abelian R^q lim on Ab towers (not the triangulated IsDerivedLimit): tower category = N^op => AddCommGrpCat.{u} (reindex n+1), abelian via functorCategoryAbelian, enough injectives and lim.Additive as unconditional sorry'd Prop theorems used as local instances, left exact as PreservesFiniteLimits lim, e0: limit A = kernel(1-s), e1: (lim.rightDerived 1).obj A = cokernel(1-s), both natural via kernel.map/cokernel.map of Pi.map, R^q = 0 for q>=2; transition direction A_{n+1}->A_n checked; docstring carries node steps 1-4; Mathlib/source grep: no lim^1/Roos for abelian towers (source towerShift/IsHomotopyLimit are triangulated). FIX H4: roosMap was a private copy of the landed towerTransitionEndomorphism (def-weil-tower-transition-endomorphism); now an abbrev of it, import added, recompiled clean."
+ }
 }
