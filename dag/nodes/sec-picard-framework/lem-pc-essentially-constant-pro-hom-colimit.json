@@ -1,115 +1,133 @@
 {
-  "id": "lem-pc-essentially-constant-pro-hom-colimit",
-  "blueprint": {
-    "is": null,
-    "from": {
-      "node": "lem-sc-finite-duality",
-      "place": "the pro-system Hom computation in the proof of the pre-derived adjunction",
-      "via": [
-        "lem-pc-pre-derived-adjoint-functors-general"
-      ]
-    },
-    "same_as": []
+ "id": "lem-pc-essentially-constant-pro-hom-colimit",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "the pro-system Hom computation in the proof of the pre-derived adjunction",
+   "via": [
+    "lem-pc-pre-derived-adjoint-functors-general"
+   ]
   },
-  "kind": "statement",
-  "title": "Hom out of an essentially constant pro-system value is the colimit of Hom sets",
-  "statement": "Let $J$ be a cofiltered category, $\\mathcal C$ a category, and $G:J\\to\\mathcal C$ a diagram that is essentially constant as a pro-object with value $X$ in the sense of [def-pc-essentially-constant-pro-diagram] (Stacks, Categories, Definition Tag 05PU(2)), with cone maps $u_j:X\\to G(j)$. For every object $Y$ of $\\mathcal C$, the canonical map $\\varinjlim_{j\\in J}\\operatorname{Hom}_{\\mathcal C}(G(j),Y)\\to\\operatorname{Hom}_{\\mathcal C}(X,Y)$ induced by the cone maps $u_j$ is a bijection.",
-  "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Stacks Tag 0FND, label lemma-pre-derived-adjoint-functors-general, proof line 9515, sixth equality; Categories Tag 05PZ, label categories-lemma-characterize-essentially-constant-pro"
-  },
-  "stmt_deps": [
-    "def-pc-essentially-constant-pro-diagram"
-  ],
-  "proof": [
-    {
-      "text": "By Stacks Definition Tag 05PU(2), choose the cone maps $u_j:X\\to G(j)$, an index $j_0$ and $r:G(j_0)\\to X$ with $r\\circ u_{j_0}=\\operatorname{id}_X$; for every transition $a:j'\\to j$, $u_j=G(a)\\circ u_{j'}$. Define $[f:G(j)\\to Y]\\mapsto f\\circ u_j$. Since $(f\\circ G(a))\\circ u_{j'}=f\\circ u_j$, this is independent of the representative in the colimit (filtered, as $J$ is cofiltered).",
-      "uses": [],
-      "elementary": true,
-      "source": {
-        "document": "literature/stacks-project/categories.tex",
-        "place": "Categories, Definition Tag 05PU (label categories-definition-essentially-constant-diagram), part (2); Lemma Tag 05PZ"
-      }
-    },
-    {
-      "text": "For $h:X\\to Y$, take the representative $h\\circ r:G(j_0)\\to Y$. Its image is $(h\\circ r)\\circ u_{j_0}=h\\circ(r\\circ u_{j_0})=h$, so every morphism $X\\to Y$ lies in the image.",
-      "uses": [],
-      "elementary": true,
-      "source": {
-        "document": "literature/stacks-project/categories.tex",
-        "place": "Categories, Lemma Tag 05PZ, condition (4) and the surjectivity calculation"
-      }
-    },
-    {
-      "text": "If $f:G(j)\\to Y$ and $g:G(k)\\to Y$ satisfy $f\\circ u_j=g\\circ u_k$, choose by cofilteredness $l$ with transitions $a:l\\to j$ and $b:l\\to k$. By the factorization clause of Stacks Definition Tag 05PU(2) applied to $l$, there are $m$ and transitions $c:m\\to l$, $d:m\\to j_0$ with $G(c)=u_l\\circ r\\circ G(d)$. Then $f\\circ G(a)\\circ G(c)=f\\circ G(a)\\circ u_l\\circ r\\circ G(d)=f\\circ u_j\\circ r\\circ G(d)=g\\circ u_k\\circ r\\circ G(d)=g\\circ G(b)\\circ G(c)$, so the two representatives agree at $m$ and define the same class in the filtered colimit, proving injectivity.",
-      "uses": [],
-      "elementary": true,
-      "source": {
-        "document": "literature/stacks-project/categories.tex",
-        "place": "Categories, Definition Tag 05PU (label categories-definition-essentially-constant-diagram), part (2), clause (b)"
-      }
-    }
-  ],
-  "proof_deps": [],
-  "proof_origin": {
-    "by": "document",
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Hom out of an essentially constant pro-system value is the colimit of Hom sets",
+ "statement": "Let $J$ be a cofiltered category, $\\mathcal C$ a category, and $G:J\\to\\mathcal C$ a diagram that is essentially constant as a pro-object with value $X$ in the sense of [def-pc-essentially-constant-pro-diagram] (Stacks, Categories, Definition Tag 05PU(2)), with cone maps $u_j:X\\to G(j)$. For every object $Y$ of $\\mathcal C$, the canonical map $\\varinjlim_{j\\in J}\\operatorname{Hom}_{\\mathcal C}(G(j),Y)\\to\\operatorname{Hom}_{\\mathcal C}(X,Y)$ induced by the cone maps $u_j$ is a bijection.",
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Stacks Tag 0FND, label lemma-pre-derived-adjoint-functors-general, proof line 9515, sixth equality; Categories Tag 05PZ, label categories-lemma-characterize-essentially-constant-pro"
+ },
+ "stmt_deps": [
+  "def-pc-essentially-constant-pro-diagram"
+ ],
+ "proof": [
+  {
+   "text": "By Stacks Definition Tag 05PU(2), choose the cone maps $u_j:X\\to G(j)$, an index $j_0$ and $r:G(j_0)\\to X$ with $r\\circ u_{j_0}=\\operatorname{id}_X$; for every transition $a:j'\\to j$, $u_j=G(a)\\circ u_{j'}$. Define $[f:G(j)\\to Y]\\mapsto f\\circ u_j$. Since $(f\\circ G(a))\\circ u_{j'}=f\\circ u_j$, this is independent of the representative in the colimit (filtered, as $J$ is cofiltered).",
+   "uses": [],
+   "elementary": true,
+   "source": {
     "document": "literature/stacks-project/categories.tex",
-    "place": "Categories, Lemma Tag 05PZ, implication (1) to (4), specialized to the Hom-colimit conclusion"
+    "place": "Categories, Definition Tag 05PU (label categories-definition-essentially-constant-diagram), part (2); Lemma Tag 05PZ"
+   }
   },
-  "mathlib_searches": [
-    {
-      "tool": "leanfinder",
-      "query": "pro-system essentially constant Hom equals colimit over localization morphisms",
-      "results": "no theorem for Hom out of an essentially constant pro-object",
-      "date": "2026-10-11",
-      "verdict": "no exact match"
-    },
-    {
-      "tool": "loogle",
-      "query": "CategoryTheory.Localization, colimit, Hom",
-      "results": "0 hits; unknown identifier",
-      "date": "2026-10-11",
-      "verdict": "no match"
-    },
-    {
-      "tool": "grep",
-      "query": "localization.*morphism|essentially constant",
-      "results": "generic hits only; no pro Hom formula",
-      "date": "2026-10-11",
-      "verdict": "no exact match"
-    },
-    {
-      "tool": "leansearch",
-      "query": "Hom out of an essentially constant pro-system is a colimit of Hom sets",
-      "results": "service unavailable: Internal Server Error",
-      "date": "2026-10-11",
-      "verdict": "unavailable"
-    }
-  ],
-  "mathlib_match": null,
-  "status": "split",
-  "created": {
-    "item": "lem-pc-pre-derived-adjoint-functors-general",
-    "by": "worker",
-    "date": "2026-10-10"
+  {
+   "text": "For $h:X\\to Y$, take the representative $h\\circ r:G(j_0)\\to Y$. Its image is $(h\\circ r)\\circ u_{j_0}=h\\circ(r\\circ u_{j_0})=h$, so every morphism $X\\to Y$ lies in the image.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Categories, Lemma Tag 05PZ, condition (4) and the surjectivity calculation"
+   }
   },
-  "chapter": "sec-picard-framework",
-  "unit": "sk-thm-picard-duality",
-  "split_report": {
-    "date": "2026-10-11",
-    "item": "lem-pc-essentially-constant-pro-hom-colimit",
-    "worker": "stage1",
-    "summary": "Read Categories Lemma 05PZ and Derived Categories Lemma 0FND. The attempted auxiliary node was rejected as a clause-level restatement, so the cone, surjectivity, and injectivity arguments are written directly as three elementary proof steps. No exact project declaration exists.",
-    "blueprint": "Realizes the pro-system Hom computation clause in the proof of the pre-derived adjunction.",
-    "tool_uses": []
+  {
+   "text": "If $f:G(j)\\to Y$ and $g:G(k)\\to Y$ satisfy $f\\circ u_j=g\\circ u_k$, choose by cofilteredness $l$ with transitions $a:l\\to j$ and $b:l\\to k$. By the factorization clause of Stacks Definition Tag 05PU(2) applied to $l$, there are $m$ and transitions $c:m\\to l$, $d:m\\to j_0$ with $G(c)=u_l\\circ r\\circ G(d)$. Then $f\\circ G(a)\\circ G(c)=f\\circ G(a)\\circ u_l\\circ r\\circ G(d)=f\\circ u_j\\circ r\\circ G(d)=g\\circ u_k\\circ r\\circ G(d)=g\\circ G(b)\\circ G(c)$, so the two representatives agree at $m$ and define the same class in the filtered colimit, proving injectivity.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Categories, Definition Tag 05PU (label categories-definition-essentially-constant-diagram), part (2), clause (b)"
+   }
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/categories.tex",
+  "place": "Categories, Lemma Tag 05PZ, implication (1) to (4), specialized to the Hom-colimit conclusion"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "pro-system essentially constant Hom equals colimit over localization morphisms",
+   "results": "no theorem for Hom out of an essentially constant pro-object",
+   "date": "2026-10-11",
+   "verdict": "no exact match"
   },
-  "reviewed": {
-    "date": "2026-10-10",
-    "by": "L",
-    "reviewer": "R-ecp2049",
-    "group": "H1",
-    "result": "pass",
-    "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-ecp2049 (reviewer sub-agent of L); spot-checked: Steps 1-3 checked against Categories Def 05PU(2) and Lemma 05PZ: well-definedness via cone identity, surjectivity via h∘r, injectivity via factorization G(c)=u_l∘r∘G(d) at a common refinement (verified). No def-pc-essentially-constant-pro-* node exists (the merge tool refuses a reviewer-added definition node with empty stmt_deps), so the pro definition is cited as Stacks Tag 05PU(2). FIX more, RETURN less: (1) B3/E7 item statement cited the unrelated def-weil-abstract-derived-category (the second reading missed this, calling it 'the only cited definition') and called the cone maps 'isomorphisms'; citation replaced by 'in the sense of Stacks, Categories, Definition Tag 05PU(2), with cone maps u_j', stmt_deps emptied (mathematics unchanged); (2) C1 steps used the definition with no citation; steps 1 and 3 now name Stacks Definition 05PU(2) in text and source (elementary: true); (3) C1 step 3 said vaguely 'both maps factor via X'; rewritten with the explicit factorization clause (b) G(c)=u_l∘r∘G(d) and the chain of equalities.; 1 file(s) fixed by the reviewer"
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Localization, colimit, Hom",
+   "results": "0 hits; unknown identifier",
+   "date": "2026-10-11",
+   "verdict": "no match"
   },
-  "lead_note": "2026-10-10 L (R-ecp2049): Lead may want a def-pc-essentially-constant-pro-diagram node (dual of def-pc-essentially-constant-ind-diagram, Stacks 05PU(2)); merge tool refused it as a reviewer-added node because it has no stmt_deps. L (19:47 UTC): statement now cites def-pc-essentially-constant-pro-diagram, added at the reviewer's request."
+  {
+   "tool": "grep",
+   "query": "localization.*morphism|essentially constant",
+   "results": "generic hits only; no pro Hom formula",
+   "date": "2026-10-11",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Hom out of an essentially constant pro-system is a colimit of Hom sets",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "item": "lem-pc-pre-derived-adjoint-functors-general",
+  "by": "worker",
+  "date": "2026-10-10"
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-pc-essentially-constant-pro-hom-colimit",
+  "worker": "stage1",
+  "summary": "Read Categories Lemma 05PZ and Derived Categories Lemma 0FND. The attempted auxiliary node was rejected as a clause-level restatement, so the cone, surjectivity, and injectivity arguments are written directly as three elementary proof steps. No exact project declaration exists.",
+  "blueprint": "Realizes the pro-system Hom computation clause in the proof of the pre-derived adjunction.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-ecp2049",
+  "group": "H1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-ecp2049 (reviewer sub-agent of L); spot-checked: Steps 1-3 checked against Categories Def 05PU(2) and Lemma 05PZ: well-definedness via cone identity, surjectivity via h∘r, injectivity via factorization G(c)=u_l∘r∘G(d) at a common refinement (verified). No def-pc-essentially-constant-pro-* node exists (the merge tool refuses a reviewer-added definition node with empty stmt_deps), so the pro definition is cited as Stacks Tag 05PU(2). FIX more, RETURN less: (1) B3/E7 item statement cited the unrelated def-weil-abstract-derived-category (the second reading missed this, calling it 'the only cited definition') and called the cone maps 'isomorphisms'; citation replaced by 'in the sense of Stacks, Categories, Definition Tag 05PU(2), with cone maps u_j', stmt_deps emptied (mathematics unchanged); (2) C1 steps used the definition with no citation; steps 1 and 3 now name Stacks Definition 05PU(2) in text and source (elementary: true); (3) C1 step 3 said vaguely 'both maps factor via X'; rewritten with the explicit factorization clause (b) G(c)=u_l∘r∘G(d) and the chain of equalities.; 1 file(s) fixed by the reviewer"
+ },
+ "lead_note": "2026-10-10 L (R-ecp2049): Lead may want a def-pc-essentially-constant-pro-diagram node (dual of def-pc-essentially-constant-ind-diagram, Stacks 05PU(2)); merge tool refused it as a reviewer-added node because it has no stmt_deps. L (19:47 UTC): statement now cites def-pc-essentially-constant-pro-diagram, added at the reviewer's request.",
+ "lean": {
+  "module": "Sheaf.CategoryTheory.DerivedCategory.EssentiallyConstantProHomColimit",
+  "declaration": "CategoryTheory.essentiallyConstantPro_hom_colimit",
+  "file": "lean/Sheaf/CategoryTheory/DerivedCategory/EssentiallyConstantProHomColimit.lean",
+  "statement": "theorem essentiallyConstantPro_hom_colimit {J : Type uJ} {C : Type uC} [Category.{vJ} J] [Category.{vC} C] (D : J ⥤ C) (X : C) (h : IsEssentiallyConstantProDiagram D X) : ∀ u : (Functor.const J).obj X ⟶ D, (∃ j₀ : J, ∃ r : D.obj j₀ ⟶ X, u.app j₀ ≫ r = 𝟙 X ∧ ∀ j : J, ∃ k : J, ∃ a : k ⟶ j₀, ∃ b : k ⟶ j, D.map b = D.map a ≫ r ≫ u.app j) → ∀ Y : C, ∃ φ : (D.op ⋙ yoneda.obj Y).ColimitType → (X ⟶ Y), Function.Bijective φ ∧ ∀ (j : J) (f : D.obj j ⟶ Y), φ ((D.op ⋙ yoneda.obj Y).ιColimitType (Opposite.op j) f) = u.app j ≫ f",
+  "branch": "sheaf-dag",
+  "by": "G1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "G1",
+  "result": "pass",
+  "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
+ }
 }
