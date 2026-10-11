@@ -23,7 +23,8 @@
   "def-pc-scheme",
   "def-pc-derived-category",
   "lem-pc-affine-qcoh-derived-equivalence",
-  "def-pur-pseudo-coherent-complex"
+  "def-pur-pseudo-coherent-complex",
+  "def-pc-ring-pseudo-coherent-complex"
  ],
  "proof": [
   {
@@ -150,5 +151,23 @@
   "group": "F1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-apc2954 (reviewer sub-agent of L); spot-checked: Statement vs Tag 08E7 (pseudo-coherent clause, D(A) side = bounded-above finite free as in lem-pc-perfect-affine-bounded-projective step 2): correct. FIX more, RETURN less: (1) C1: old Step 4 took pc <=> m-pc for all m as elementary for A-module complexes (Tag 064Z, uncited) and for E (def-pur's parenthetical justifies it by 08E7 itself, circular); proof rewritten to use def-pur's local finite-free definition directly, no m-pseudo-coherence. (2) C1: identifying M_{f_i} from the local model needed tilde restricted to D(f) = tilde of M_f and finite-free complexes on D(f) = tilde of A_f-complexes, uncited; now cites lem-weil-pbc-spec-module-tilde-sections, lem-weil-pbc-affine-tilde-gamma-adjunction (1),(2),(4), lem-pc-affine-qcoh-derived-equivalence over A_f (tool_uses declared). (3) B3: glue node used undefined m-pseudo-coherence of module complexes citing a scheme definition with empty stmt_deps; restated self-contained (bounded-above finite-free clause only, Tags 066D+064Z; E7 change named), Mathlib grep recorded. Dropped lem-pc-affine-local-derived-map (Tag 08C9), unused after the rewrite. Second reading by F1 missed (1)-(3).; 2 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AffinePseudoCoherentCriterion",
+  "declaration": "AlgebraicGeometry.isPseudoCoherent_affine_iff",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffinePseudoCoherentCriterion.lean",
+  "statement": "theorem isPseudoCoherent_affine_iff (A : Type u) [CommRing A] [HasDerivedCategory.{wA} (ModuleCat.{u} A)] [HasDerivedCategory.{wX} (SheafOfModules.{u} (moduleRings (Spec (.of A)).toRingedSpace))] [∀ U : (Spec (.of A)).Opens, HasDerivedCategory.{wX} (SheafOfModules.{u} ((moduleRings (Spec (.of A)).toRingedSpace).over U))] (M : CochainComplex (ModuleCat.{u} A) ℤ) : Scheme.IsPseudoCoherent (Spec (.of A)) (DerivedCategory.Q.obj ((@Functor.mapHomologicalComplex ℤ (ModuleCat.{u} A) (SheafOfModules.{u} (moduleRings (Spec (.of A)).toRingedSpace)) _ _ _ _ (tilde.functor (.of A)) ⟨fun _ _ ↦ tilde.map_zero⟩ (ComplexShape.up ℤ)).obj M)) ↔ DerivedCategory.IsPseudoCoherent (DerivedCategory.Q.obj M)",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-11",
+  "existing": false,
+  "note": "Uses the landed ring-level pseudo-coherence definition, whose bounded-above finite-free representative is exactly the right-hand clause; stmt_deps gains def-pc-ring-pseudo-coherent-complex under brief-stage2 section 5 (STMT_DEPS MAY GAIN LANDED NODES). The corresponding affine derived object is written directly as Q of termwise tilde, as identified by exists_affineQCohDerivedEquivalence."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-apc",
+  "group": "F1",
+  "result": "pass"
  }
 }
