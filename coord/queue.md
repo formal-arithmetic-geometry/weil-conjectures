@@ -1,11 +1,11 @@
 # Work queue
 
-998 items; claim with `tools/claim.py next <group> [--stage N]`.
+997 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (998)
+## Stage 2: nodes to state (997)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -43,7 +43,6 @@
 | `lem-pc-compact-hom-hocolim` | 1 | state |
 | `lem-pc-complex-hocolim-colimit` | 1 | state |
 | `lem-pc-derived-adjoint-functors` | 1 | state |
-| `lem-pc-derived-filtered-free-resolution` | 1 | state |
 | `lem-pc-derived-functor-commutes-derived-limit` | 1 | state |
 | `lem-pc-derived-limit-milnor-sequence` | 1 | state |
 | `lem-pc-derived-limit-roos-abelian-groups` | 1 | state |
