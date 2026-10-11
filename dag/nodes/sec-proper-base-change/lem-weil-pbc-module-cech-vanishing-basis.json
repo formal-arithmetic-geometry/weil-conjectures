@@ -237,5 +237,23 @@
   "summary": "Split following the proof of Stacks 01EW line by line (read cohomology.tex lines 1696-1776, with 01EP line 1408, 01EU line 1593 and 01EV line 1631; tags 01EW, 01EU, 01EP verified in tags/tags). Nine steps, parallel to the split of the sibling lem-weil-pbc-module-cech-vanishing-criterion (01EV), with every assertion restricted to the members of B and the coverings in Cov: the induction is quantified over all Cov-acyclic modules (Step 1); embedding into an injective (enough injectives node); the injective is Cov-acyclic by 01EP; the sequence 0->G->I->Q->0 is exact on sections over every W in B by 01EU applied to the coverings of W in Cov, cofinal by hypothesis (2) (Step 4); for U in Cov the Cech complexes form a short exact sequence because every U_{j0..jp} lies in B by hypothesis (1) (Step 5); hence Q is Cov-acyclic (Step 6); restriction to U in B is exact and preserves injectives, and dimension shifting in H^*(U,-) finishes the induction (Steps 7-9). No new nodes were needed: every fact the proof uses is an existing node. The passage from Stacks' H^p(U,F) (derived functors on Mod(O_X)) to H^p(U,F|_U) (cohomology of the scheme U) is made by Steps 7-8 as in the sibling. Statement, stmt_deps and Mathlib searches kept (statement checked against the source: it is Stacks 01EW specialized to schemes). Rule 0: no sorry-free slopmaster2 declaration states this node; WeilConjectures/Topology/Sheaves/CechCriterion.lean, TopCat.Sheaf.subsingleton_H_succ_of_exactAt_cechComplex (@[stacks 01EV], line 324) is a related basis variant for abelian sheaves on a topological space with finite families, concluding only H^{q+1}(X,F)=0 for X itself (hypothesis B X), so it does not state this node (O_X-modules, H^p(U) for every U in B) exactly and was not attached.",
   "blueprint": "No blueprint node is this item; its blueprint ancestor thm-weil-pbc-finite-etale-lifting is reached through the via chain, and the place served is the one in from.place: the sentence of the proof of Stacks 01FF 'Thus the assumptions of Lemma 01EW are satisfied and the claim follows', which the item's statement is; Steps 1-9 realize the whole proof of 01EW that this sentence invokes. same_as kept: lem-weil-pbc-cech-criterion (sk-thm-properbasechange), which states the same criterion for a site with a basis closed under fibre products and finite basis coverings, with cohomology as derived sections; search 'tools/blueprint_refs.py search 01EW' found no node, 'Cech vanishing basis' found only that node."
  },
- "reviewed": "2026-10-10 L: 9 steps following 01EW with every claim on B and Cov (injective embedding, 01EP, exactness on sections of members of B by 01EU with the cofinal coverings, the short exact sequence of Cech complexes by (1), Q acyclic, restriction to U via 01E1 (2), dimension shifting); parallel to the 01EV node; 0 new nodes"
+ "reviewed": "2026-10-10 L: 9 steps following 01EW with every claim on B and Cov (injective embedding, 01EP, exactness on sections of members of B by 01EU with the cofinal coverings, the short exact sequence of Cech complexes by (1), Q acyclic, restriction to U via 01E1 (2), dimension shifting); parallel to the 01EV node; 0 new nodes",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ModuleCechVanishingBasis",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.isZero_moduleCohomology_restrict_of_cech_basis",
+  "file": "lean/Sheaf/AlgebraicGeometry/ModuleCechVanishingBasis.lean",
+  "statement": "theorem isZero_moduleCohomology_restrict_of_cech_basis (X : Scheme.{u}) (F : X.Modules) (B : Set X.Opens) (hB : IsTopologicalBasis ((fun W : X.Opens => (W : Set X)) '' B)) (K : Type w) (J : K → Type (max u v)) (U : K → X.Opens) (V : ∀ c : K, J c → X.Opens) (hom : ∀ (c : K) (j : J c), V c j ⟶ U c) (S : ∀ c : K, SiteCechComplex (V c) (hom c)) (hcover : ∀ c : K, iSup (V c) = U c) (hbase : ∀ c : K, U c ∈ B ∧ (∀ j : J c, V c j ∈ B) ∧ ∀ (p : ℕ) (t : Fin (p + 1) → J c), (⨅ k, V c (t k)) ∈ B) (hcofinal : ∀ (W : X.Opens), W ∈ B → ∀ (A : Type (max u v)) (Z : A → X.Opens), iSup Z = W → ∃ c : K, U c = W ∧ ∀ j : J c, ∃ a : A, V c j ≤ Z a) (hvanish : ∀ (c : K) (p : ℕ), 0 < p → IsZero (((S c).cohomologyFunctor p).obj F.val.presheaf)) : ∀ (p : ℕ), 0 < p → ∀ W : X.Opens, W ∈ B → IsZero ((RingedSpace.moduleCohomology W.toScheme.toRingedSpace p).obj ((restrictFunctor W.ι).obj F))",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "F1",
+  "result": "pass",
+  "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
+ }
 }
