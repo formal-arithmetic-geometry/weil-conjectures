@@ -1,0 +1,113 @@
+{
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "canonical comparison used in the compatibility statement",
+   "via": [
+    "lem-sc-flat-precompose-pus",
+    "lem-sc-proper-flat-right-adjoint-affine-basechange",
+    "lem-sc-proper-flat-right-adjoint-basechange",
+    "lem-sc-smooth-proper-diagonal-basechange-upper-shriek",
+    "lem-sc-smooth-proper-diagonal-pushforward-structure",
+    "lem-sc-smooth-proper-relative-dualizing-general",
+    "lem-sc-smooth-proper-curve-dualizing",
+    "lem-sc-finite-duality-trace"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "definition",
+ "status": "split",
+ "source": {
+  "document": "literature/stacks-project/duality.tex",
+  "place": "Tag 0AA8, final compatibility sentence"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "derived Hom compatibility base change adjunction mate",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "service unavailable; no conclusion drawn"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "canonical scalar restriction global derived Hom pullback evaluation",
+   "results": "8 hits; PresheafOfModules.restrictScalars_map_app, PresheafOfModules.restrictScalarsObj_map, SheafOfModules.restrictScalars_map_val, PresheafOfModules.restriction, ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.evalAt, ModuleCat.RestrictionCoextensionAdj.HomEquiv.fromRestriction_hom_apply_apply, PresheafOfModules.restrictScalars, PresheafOfModules.restrictScalarsObj",
+   "date": "2026-10-12",
+   "verdict": "no exact scheme global RHom pullback comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "global.*hom.*pullback|rhom.*base.change",
+   "results": "0 hits; ",
+   "date": "2026-10-12",
+   "verdict": "no exact scheme global RHom pullback comparison"
+  }
+ ],
+ "created": {
+  "item": "lem-sc-flat-precompose-pus",
+  "by": "worker",
+  "date": "2026-10-12",
+  "group": "V1"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "id": "def-pc-global-hom-pullback-comparison",
+ "title": "Pullback comparison for global derived Hom",
+ "statement": "For a morphism of schemes $h:T\\to S$ [def-pc-scheme] and $P,Q\\in D(\\mathcal O_S)$ [def-pc-derived-category], define the canonical pullback-induced map $R\\operatorname{Hom}_S(P,Q)\\to h_\\Gamma^*R\\operatorname{Hom}_T(Lh^*P,Lh^*Q)$ [def-pc-global-derived-rhom] [def-pc-derived-pullback], where $h_\\Gamma^*$ is exact restriction of scalars along $\\Gamma(S,\\mathcal O_S)\\to\\Gamma(T,\\mathcal O_T)$. Pull back the internal-Hom evaluation, use the canonical pullback tensor comparison [def-pc-derived-pullback-tensor-comparison], transpose under tensor/internal-Hom [lem-sc-derived-internal-hom-adjunction] and the pullback/direct-image adjunction, and apply derived global sections with its canonical Leray comparison (the one used in [lem-pc-global-hom-adjunction]). The restriction of scalars composition identification is the identity on modules; it identifies the two scalar paths in any commutative square. No arbitrary morphism is part of the input. The tensor/internal-Hom bijection is the pinned canonical family of [def-pc-canonical-derived-tensor-hom-bijection].",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "def-pc-global-derived-rhom",
+  "def-pc-derived-pullback",
+  "def-pc-derived-pullback-tensor-comparison",
+  "lem-sc-derived-internal-hom-adjunction",
+  "lem-pc-global-hom-adjunction",
+  "def-pc-canonical-derived-tensor-hom-bijection"
+ ],
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GlobalHomPullbackComparison",
+  "declaration": "AlgebraicGeometry.schemeGlobalDerivedHom_pullback_comparison",
+  "file": "lean/Sheaf/AlgebraicGeometry/GlobalHomPullbackComparison.lean",
+  "statement": "def schemeGlobalDerivedHom_pullback_comparison {S T : Scheme.{uP}} (h : T ⟶ S) (P Q : schemeDerivedCategory S) : (schemeGlobalDerivedHom S).obj (op P, Q) ⟶ (schemeGlobalScalarRestriction h).obj ((schemeGlobalDerivedHom T).obj (op ((derivedPullback h).obj P), (derivedPullback h).obj Q))",
+  "branch": "sheaf-dag",
+  "by": "V1",
+  "date": "2026-10-12",
+  "existing": false,
+  "declarations": [
+   "AlgebraicGeometry.schemeGlobalDerivedHom_pullback_comparison",
+   "AlgebraicGeometry.schemeGlobalScalarRestrictionCompIso",
+   "AlgebraicGeometry.schemeGlobalScalarSquareIso"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "X-b2c81",
+  "group": "V1",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "X-b2c81",
+  "group": "V1",
+  "result": "pass",
+  "note": "independent Codex review: Matched the item’s hypotheses, objects, c-map, and both explicit A-linear composite factors to the node; verified the pinned tensor–Hom family replaces prior arbitrary choices and all four modules compile together cleanly."
+ }
+}

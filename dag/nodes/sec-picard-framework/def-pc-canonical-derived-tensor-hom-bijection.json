@@ -1,0 +1,142 @@
+{
+ "id": "def-pc-canonical-derived-tensor-hom-bijection",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "canonical tensor/internal-Hom bijection used by global Hom comparison",
+   "via": [
+    "lem-sc-flat-precompose-pus",
+    "lem-sc-proper-flat-right-adjoint-affine-basechange",
+    "lem-sc-proper-flat-right-adjoint-basechange",
+    "lem-sc-smooth-proper-diagonal-basechange-upper-shriek",
+    "lem-sc-smooth-proper-diagonal-pushforward-structure",
+    "lem-sc-smooth-proper-relative-dualizing-general",
+    "lem-sc-smooth-proper-curve-dualizing",
+    "lem-sc-finite-duality-trace"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "definition",
+ "title": "Canonical derived tensor internal-Hom bijection",
+ "statement": "Let $X$ be a scheme [def-pc-scheme], with $D(\\mathcal O_X)$ [def-pc-derived-category] and its shared derived tensor [def-pc-scheme-derived-tensor-structure]. Define the canonical family $e_{K,L,M}:\\operatorname{Hom}(K,R\\mathcal Hom(L,M))\\simeq\\operatorname{Hom}(K\\otimes^L L,M)$, natural in all three variables [lem-sc-derived-internal-hom-adjunction], as follows. Fix the same functorial K-injective resolution $\\eta_M:M\\to I(M)$ as the recorded derived internal Hom [def-pur-derived-internal-hom] [prop-pur-kinjective-resolutions-exist]. Let $j_{L,M}:R\\mathcal Hom(QL,QM)\\simeq Q\\mathcal Hom^\\bullet(L,I(M))$ be its localization factorization. For a K-flat complex $P$ [def-pc-kflat-complex], arbitrary complexes $L,M$, and every chain map $\\phi:P\\to\\mathcal Hom^\\bullet(L,I(M))$ [def-pur-hom-complex], require a chain map $\\psi:\\operatorname{Tot}(P\\otimes L)\\to I(M)$ [def-pc-tensor-complex-sheaves] whose restriction to each summand $P^p\\otimes L^q$ is the uncurrying of $\\phi^p$ projected to $\\mathcal Hom(L^q,I(M)^{p+q})$, with tensor symmetry restoring the order [lem-pc-sheaf-modules-tensor-closed]. This is the componentwise evaluation construction underlying [lem-sc-derived-hom-tensor-total]. Require $e_{QP,QL,QM}(Q\\phi;j_{L,M}^{-1})=\\mu_X(P,L);Q\\psi;(Q\\eta_M)^{-1}$, where $\\mu_X$ is the actual localization tensor model map [def-pc-derived-pullback-tensor-comparison]. Naturality and this equation determine the family uniquely; choose the family supplied by the named existence theorem.",
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 08DJ (lemma-internal-hom), via componentwise tensor-Hom evaluation"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "def-pc-scheme-derived-tensor-structure",
+  "lem-sc-derived-internal-hom-adjunction",
+  "def-pur-derived-internal-hom",
+  "prop-pur-kinjective-resolutions-exist",
+  "def-pc-kflat-complex",
+  "def-pur-hom-complex",
+  "def-pc-tensor-complex-sheaves",
+  "lem-pc-sheaf-modules-tensor-closed",
+  "lem-sc-derived-hom-tensor-total",
+  "def-pc-derived-pullback-tensor-comparison"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "canonical derived tensor internal hom bijection",
+   "results": "no exact declaration",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "derivedInternalHom tensor equivalence",
+   "results": "generic adjunction only",
+   "date": "2026-10-12",
+   "verdict": "no pinned scheme family"
+  },
+  {
+   "tool": "grep",
+   "query": "canonical.*derived.*tensor.*hom",
+   "results": "none in Mathlib and source repository",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "schemeDerivedTensorHom",
+   "results": "none before this node",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "canonical tensor Hom adjunction in derived category of sheaves",
+   "results": "Service unavailable: HTTP Internal Server Error (second reader).",
+   "date": "2026-10-12",
+   "verdict": "Unavailable; no mathematical search verdict inferred."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "canonical derived tensor internal Hom evaluation on complexes",
+   "results": "Eight generic hits, including HomologicalComplex.tensorHom and ModuleCat.ihom_ev_app; no scheme derived-Hom family pinned on representatives.",
+   "date": "2026-10-12",
+   "verdict": "No exact match"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "item": "lem-sc-flat-precompose-pus",
+  "by": "worker",
+  "date": "2026-10-12",
+  "group": "V1"
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.CanonicalDerivedTensorHom",
+  "declaration": "AlgebraicGeometry.schemeDerivedTensorHomEquiv",
+  "file": "lean/Sheaf/AlgebraicGeometry/CanonicalDerivedTensorHom.lean",
+  "statement": "def schemeDerivedTensorHomEquiv (X : Scheme.{uCD}) [HasDerivedCategory.{wCD} (SheafOfModules.{uCD} (moduleRings X.toRingedSpace))] : ∀ K L M : schemeDerivedCategory X, (K ⟶ (derivedInternalHom (Opens.grothendieckTopology X.toRingedSpace) X.toRingedSpace.sheaf).obj (op L, M)) ≃ (K ⊗ L ⟶ M)",
+  "branch": "sheaf-dag",
+  "by": "V1",
+  "date": "2026-10-12",
+  "existing": false,
+  "declarations": [
+   "AlgebraicGeometry.schemeHomKInjectiveResolution",
+   "AlgebraicGeometry.schemeHomResolutionInverse",
+   "AlgebraicGeometry.schemeDerivedInternalHomResolutionIso",
+   "AlgebraicGeometry.IsCanonicalDerivedTensorHom",
+   "AlgebraicGeometry.exists_canonicalDerivedTensorHom",
+   "AlgebraicGeometry.IsCanonicalDerivedTensorHom.unique",
+   "AlgebraicGeometry.schemeDerivedTensorHomEquiv"
+  ]
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "X-b2c81",
+  "group": "V1",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "X-b2c81",
+  "group": "V1",
+  "result": "pass",
+  "note": "independent Codex review: Matched the item’s hypotheses, objects, c-map, and both explicit A-linear composite factors to the node; verified the pinned tensor–Hom family replaces prior arbitrary choices and all four modules compile together cleanly."
+ }
+}

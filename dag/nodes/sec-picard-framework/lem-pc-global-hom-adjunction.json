@@ -128,21 +128,35 @@
   }
  },
  "lean": {
-  "module": "Sheaf.AlgebraicGeometry.GlobalHomAdjunction",
-  "declaration": "AlgebraicGeometry.schemeGlobalDerivedHom_adjunction",
-  "file": "lean/Sheaf/AlgebraicGeometry/GlobalHomAdjunction.lean",
-  "statement": "theorem schemeGlobalDerivedHom_adjunction (X Y : Scheme.{u}) [CompactSpace X] [QuasiSeparatedSpace X] [CompactSpace Y] [QuasiSeparatedSpace Y] [HasDerivedCategory.{wX} (SheafOfModules.{u} (moduleRings X.toRingedSpace))] [HasDerivedCategory.{wY} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))] [HasDerivedCategory.{wAX} (ModuleCat.{u} ((moduleRings X.toRingedSpace).obj.obj (op ⊤)))] [HasDerivedCategory.{wAY} (ModuleCat.{u} ((moduleRings Y.toRingedSpace).obj.obj (op ⊤)))] (f : X ⟶ Y) [QuasiCompact f] [QuasiSeparated f] (hpres : ∀ E : schemeDerivedCategory X, schemeDerivedQCohProperty X E → schemeDerivedQCohProperty Y ((schemeDerivedDirectImage f).obj E)) (a : schemeDerivedQCohCategory Y ⥤ schemeDerivedQCohCategory X) (_adj : (schemeDerivedQCohProperty Y).lift ((schemeDerivedQCohProperty X).ι ⋙ schemeDerivedDirectImage f) (fun E ↦ hpres E.obj E.property) ⊣ a) : Nonempty (((schemeDerivedQCohProperty X).ι.op.prod (a ⋙ (schemeDerivedQCohProperty X).ι) ⋙ schemeGlobalDerivedHom X ⋙ (ModuleCat.restrictScalars.{u} (R := (moduleRings Y.toRingedSpace).obj.obj (op ⊤)) (S := (moduleRings X.toRingedSpace).obj.obj (op ⊤)) f.appTop.hom).mapDerivedCategory.{wAX, wAY}) ≅ (((schemeDerivedQCohProperty X).ι ⋙ schemeDerivedDirectImage f).op.prod (schemeDerivedQCohProperty Y).ι ⋙ schemeGlobalDerivedHom Y))",
+  "module": "Sheaf.AlgebraicGeometry.GlobalHomAdjunctionIso",
+  "declaration": "AlgebraicGeometry.schemeGlobalHomAdjunctionMap_isIso",
+  "file": "lean/Sheaf/AlgebraicGeometry/GlobalHomAdjunctionIso.lean",
+  "statement": "theorem schemeGlobalHomAdjunctionMap_isIso {X Y : Scheme.{u}} [CompactSpace X] [QuasiSeparatedSpace X] [CompactSpace Y] [QuasiSeparatedSpace Y] (f : X ⟶ Y) (a : schemeDerivedQCohCategory Y ⥤ schemeDerivedQCohCategory X) (adj : (schemeDerivedQCohProperty Y).lift ((schemeDerivedQCohProperty X).ι ⋙ schemeDerivedDirectImage f) (fun E ↦ (schemeDerivedDirectImage_qcqs_hasRightAdjoint X Y f).fst E.obj E.property) ⊣ a) : (∀ (P : schemeDerivedQCohCategory X) (K : schemeDerivedQCohCategory Y), IsIso (schemeGlobalHomAdjunctionMap f a adj P K)) ∧ (∀ (P P' : schemeDerivedQCohCategory X) (K K' : schemeDerivedQCohCategory Y) (s : P' ⟶ P) (t : K ⟶ K'), (schemeGlobalScalarRestriction f).map ((schemeGlobalDerivedHom X).map (s.hom.op, (a.map t).hom)) ≫ schemeGlobalHomAdjunctionMap f a adj P' K' = schemeGlobalHomAdjunctionMap f a adj P K ≫ (schemeGlobalDerivedHom Y).map (((schemeDerivedDirectImage f).map s.hom).op, t.hom))",
   "branch": "sheaf-dag",
-  "by": "C1",
-  "date": "2026-10-11",
-  "existing": false
+  "by": "V1",
+  "date": "2026-10-12",
+  "existing": false,
+  "note": "The former Nonempty natural iso supplies no canonical component map, and the first worker replaced it with data assuming the iso. This module constructs the evaluation-mate comparison and counit-induced global Hom map, proves its invertibility and naturality as the dependency states, and defines its iso using that proof. Derived Leray and pullback tensor helpers specify its construction; no arbitrary iso is an input. Morphism qcqs properties are derivable from the two qcqs schemes, as in the recorded right-adjoint definition.",
+  "declarations": [
+   "AlgebraicGeometry.schemeGlobalScalarRestriction",
+   "AlgebraicGeometry.exists_schemeGlobalSectionsDirectImageIso",
+   "AlgebraicGeometry.schemeGlobalSectionsDirectImageIso",
+   "AlgebraicGeometry.schemeHomPullbackAdjunction",
+   "AlgebraicGeometry.exists_schemeHomTensorPullbackIso",
+   "AlgebraicGeometry.schemeHomTensorPullbackIso",
+   "AlgebraicGeometry.exists_schemeHomDirectImageComparison",
+   "AlgebraicGeometry.schemeGlobalHomDirectImageMap",
+   "AlgebraicGeometry.schemeGlobalHomAdjunctionMap",
+   "AlgebraicGeometry.schemeGlobalHomAdjunctionMap_isIso",
+   "AlgebraicGeometry.schemeGlobalHomAdjunctionIso"
+  ]
  },
  "reviewed_lean": {
   "date": "2026-10-11",
   "by": "L",
-  "reviewer": "AUTO",
-  "group": "C1",
+  "reviewer": "X-b2c81",
+  "group": "V1",
   "result": "pass",
-  "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
+  "note": "independent Codex review: Matched the item’s hypotheses, objects, c-map, and both explicit A-linear composite factors to the node; verified the pinned tensor–Hom family replaces prior arbitrary choices and all four modules compile together cleanly."
  }
 }
