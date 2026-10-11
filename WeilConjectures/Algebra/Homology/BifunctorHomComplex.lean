@@ -276,8 +276,8 @@ lemma δ_bifunctorHomMapLeftCochain {K' : CochainComplex C ℤ} (a b : ℤ) (hab
     reassoc_of% e4, reassoc_of% e5]
   simp only [Units.smul_def, op_comp, op_add, Functor.map_comp, Functor.map_add,
     NatTrans.comp_app, NatTrans.app_add, NatTrans.naturality, Preadditive.comp_add,
-    Preadditive.comp_zsmul, smul_sub, smul_add, smul_smul, op_zsmul, Functor.map_zsmul, NatTrans.app_zsmul, ← Units.val_mul,
-    ← Int.negOnePow_add]
+    Preadditive.comp_zsmul, smul_sub, smul_add, smul_smul, op_zsmul, Functor.map_zsmul,
+    NatTrans.app_zsmul, ← Units.val_mul, ← Int.negOnePow_add]
   have h₁ : (a + 1 + (p' * a + (p' + a))).negOnePow = -(p' + p' * a).negOnePow := by
     rw [← Int.negOnePow_succ]
     exact (Int.negOnePow_eq_iff _ _).2 ⟨a, by ring⟩
