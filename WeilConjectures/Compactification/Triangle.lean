@@ -282,6 +282,50 @@ noncomputable def infSnd [QuasiCompact (f ≫ g)] : (T₁.inf T₂).Hom T₂ :=
 
 end Inf
 
+
+section Canonical
+
+variable (f g) in
+/-- The triangle of compactifications attached to the chosen compactifications of `g` and of
+`f ≫ g` (`AlgebraicGeometry.HasCompactification.compactification`): `ofRestrict d e` for the
+chosen compactification `d` of `g` and `e = Compactification.ofComp` of `f ≫ d.i`. -/
+noncomputable def ofHasCompactification [HasCompactification g] [HasCompactification (f ≫ g)]
+    [QuasiCompact (f ≫ g)] : Triangle f g :=
+  ofRestrict (HasCompactification.compactification g)
+    ((HasCompactification.compactification (f ≫ g)).ofComp _)
+
+/-- The triangle `(𝟙 X, f)`: the trivial compactification of `𝟙 X`, a compactification `c` of `f`
+and `c` itself as a compactification of `𝟙 X ≫ f`, with `q = c.i` and `p = 𝟙`. -/
+@[simps]
+def unitLeft (c : Compactification f) : Triangle (𝟙 X) f where
+  cf := ofIsProper (𝟙 X)
+  cg := c
+  cfg := c.copy (Category.id_comp f)
+  q := c.i
+  p := 𝟙 c.Z
+  i_q := Category.id_comp _
+  p_g := Category.id_comp _
+  isPullback := by
+    change IsPullback (𝟙 X) c.i c.i (𝟙 c.Z)
+    exact IsPullback.of_horiz_isIso ⟨by simp⟩
+
+/-- The triangle `(f, 𝟙 Y)`: a compactification `c` of `f`, the trivial compactification of
+`𝟙 Y` and `c` itself as a compactification of `f ≫ 𝟙 Y`, with `q = 𝟙` and `p = c.g`. -/
+@[simps]
+def unitRight (c : Compactification f) : Triangle f (𝟙 Y) where
+  cf := c
+  cg := ofIsProper (𝟙 Y)
+  cfg := c.copy (Category.comp_id f)
+  q := 𝟙 c.Z
+  p := c.g
+  i_q := Category.comp_id _
+  p_g := Category.comp_id _
+  isPullback := by
+    change IsPullback c.g (𝟙 c.Z) (𝟙 Y) c.g
+    exact IsPullback.of_vert_isIso ⟨by simp⟩
+
+end Canonical
+
 end Triangle
 
 end AlgebraicGeometry.Compactification

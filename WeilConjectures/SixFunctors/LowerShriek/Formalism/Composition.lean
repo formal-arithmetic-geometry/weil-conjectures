@@ -169,4 +169,68 @@ theorem compIso_hom_eq [QuasiCompact f] [QuasiCompact g] [QuasiCompact (f ≫ g)
     ext; simp
   rw [hid, Category.id_comp, ← reassoc_of% h₁, IsIso.hom_inv_id, Category.comp_id]
 
+
+section Unit
+
+/-- The identification `(𝟙 X)_! ⋙ (𝟙 X)_* ≅ 𝟭` of the compactly supported direct image along the
+trivial compactification of `𝟙 X`. -/
+noncomputable def shriekOfIsProperIdIso (X : Scheme.{u}) :
+    F.shriek (Compactification.ofIsProper (𝟙 X)) ≅ 𝟭 _ :=
+  Functor.isoWhiskerRight (F.shId X) (F.pf (𝟙 X)) ≪≫ Functor.leftUnitor _ ≪≫ F.pfId X
+
+/-- The composition isomorphism of the triangle `(𝟙 X, f)` is the identity, up to
+`F.shriekOfIsProperIdIso`. -/
+lemma compIso_unitLeft (c : Compactification f) :
+    (F.compIso (Compactification.Triangle.unitLeft c)).hom =
+      Functor.whiskerRight (F.shriekOfIsProperIdIso X).hom (F.shriek c) ≫
+        (Functor.leftUnitor _).hom := by
+  have hw : 𝟙 X ≫ c.i = c.i ≫ 𝟙 c.Z := by rw [Category.id_comp, Category.comp_id]
+  have : IsIso (F.baseChange (𝟙 X) c.i c.i (𝟙 c.Z) hw).natTrans :=
+    HasBaseChange.isIso_baseChange (F := F) (IsPullback.of_horiz_isIso ⟨hw⟩)
+  ext K
+  have h₁ := congr_app (F.exchange_id_horiz c.i hw) ((F.sh (𝟙 X)).obj K)
+  have h₂ := congr_app (F.shComp'_id_left c.i) K
+  simp only [TwoSquare.whiskerTop, TwoSquare.whiskerBottom, NatTrans.comp_app,
+    Functor.whiskerRight_app, Functor.whiskerLeft_app, Functor.leftUnitor_hom_app,
+    Functor.rightUnitor_inv_app, Category.comp_id, Functor.comp_obj, Functor.id_obj] at h₁ h₂
+  rw [compIso_hom_app]
+  dsimp only [Compactification.Triangle.unitLeft, Compactification.ofIsProper,
+    Compactification.copy]
+  have hSC : (F.shComp' (𝟙 X) c.i c.i (Category.id_comp _)).inv.app K =
+      (F.sh c.i).map ((F.shId X).hom.app K) := by
+    rw [← cancel_epi ((F.shComp' (𝟙 X) c.i c.i (Category.id_comp _)).hom.app K),
+      Iso.hom_inv_id_app]
+    exact h₂.symm
+  rw [h₁, hSC, F.pfComp'_id_left_inv_app]
+  simp [← Functor.map_comp, shriekOfIsProperIdIso, shriek]
+
+
+/-- The composition isomorphism of the triangle `(f, 𝟙 Y)` is the identity, up to
+`F.shriekOfIsProperIdIso`. -/
+lemma compIso_unitRight (c : Compactification f) :
+    (F.compIso (Compactification.Triangle.unitRight c)).hom =
+      Functor.whiskerLeft (F.shriek c) (F.shriekOfIsProperIdIso Y).hom ≫
+        (Functor.rightUnitor _).hom := by
+  have hw : c.g ≫ 𝟙 Y = 𝟙 c.Z ≫ c.g := by rw [Category.id_comp, Category.comp_id]
+  have : IsIso (F.baseChange c.g (𝟙 c.Z) (𝟙 Y) c.g hw).natTrans :=
+    HasBaseChange.isIso_baseChange (F := F) (IsPullback.of_vert_isIso ⟨hw⟩)
+  ext K
+  have h₁ := congr_app (F.exchange_id_vert c.g hw) ((F.sh c.i).obj K)
+  have h₂ := congr_app (F.shComp'_id_right c.i) K
+  simp only [TwoSquare.whiskerLeft, TwoSquare.whiskerRight, NatTrans.comp_app,
+    Functor.whiskerRight_app, Functor.whiskerLeft_app, Functor.leftUnitor_inv_app,
+    Functor.rightUnitor_hom_app, Category.comp_id, Functor.comp_obj, Functor.id_obj] at h₁ h₂
+  rw [compIso_hom_app]
+  dsimp only [Compactification.Triangle.unitRight, Compactification.ofIsProper,
+    Compactification.copy]
+  have hSC : (F.shComp' c.i (𝟙 c.Z) c.i (Category.comp_id _)).inv.app K =
+      (F.shId c.Z).hom.app ((F.sh c.i).obj K) := by
+    rw [← cancel_epi ((F.shComp' c.i (𝟙 c.Z) c.i (Category.comp_id _)).hom.app K),
+      Iso.hom_inv_id_app]
+    exact h₂.symm
+  rw [h₁, hSC, F.pfComp'_id_right_inv_app]
+  simp [← Functor.map_comp, shriekOfIsProperIdIso, shriek]
+
+end Unit
+
 end AlgebraicGeometry.CompactSupportFormalism

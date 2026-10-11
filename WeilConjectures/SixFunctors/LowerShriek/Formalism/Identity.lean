@@ -270,4 +270,47 @@ lemma pfComp'_id_right_hom_app (f : X ⟶ Y) (M : F.obj X) :
 
 end PushforwardUnit
 
+
+section ExtensionByZeroUnit
+
+variable {X Y : Scheme.{u}}
+
+/-- The left unit law for the composition isomorphisms of the extensions by zero. -/
+lemma shComp'_id_left (j : X ⟶ Y) [IsOpenImmersion j] :
+    (F.shComp' (𝟙 X) j j (Category.id_comp j)).hom ≫
+        Functor.whiskerRight (F.shId X).hom (F.sh j) ≫ (Functor.leftUnitor (F.sh j)).hom =
+      𝟙 _ := by
+  apply (conjugateEquiv (F.shAdj j) (F.shAdj j)).injective
+  have h₁ : conjugateEquiv ((F.shAdj (𝟙 X)).comp (F.shAdj j)) (F.shAdj j)
+      (F.shComp' (𝟙 X) j j (Category.id_comp j)).hom =
+        (F.pbComp' (𝟙 X) j j (Category.id_comp j)).inv := by
+    simp [shComp', conjugateIsoEquiv]
+  have h₂ : conjugateEquiv Adjunction.id (F.shAdj (𝟙 X)) (F.shId X).hom = (F.pbId X).inv := by
+    simp [shId, conjugateIsoEquiv]
+  rw [conjugateEquiv_id, ← conjugateEquiv_comp _ ((F.shAdj (𝟙 X)).comp (F.shAdj j)),
+    ← conjugateEquiv_comp _ (Adjunction.id.comp (F.shAdj j)), conjugateEquiv_leftUnitor_hom,
+    conjugateEquiv_whiskerRight, h₁, h₂]
+  ext M
+  simp [pbComp'_id_left_inv_app]
+
+/-- The right unit law for the composition isomorphisms of the extensions by zero. -/
+lemma shComp'_id_right (j : X ⟶ Y) [IsOpenImmersion j] :
+    (F.shComp' j (𝟙 Y) j (Category.comp_id j)).hom ≫
+        Functor.whiskerLeft (F.sh j) (F.shId Y).hom ≫ (Functor.rightUnitor (F.sh j)).hom =
+      𝟙 _ := by
+  apply (conjugateEquiv (F.shAdj j) (F.shAdj j)).injective
+  have h₁ : conjugateEquiv ((F.shAdj j).comp (F.shAdj (𝟙 Y))) (F.shAdj j)
+      (F.shComp' j (𝟙 Y) j (Category.comp_id j)).hom =
+        (F.pbComp' j (𝟙 Y) j (Category.comp_id j)).inv := by
+    simp [shComp', conjugateIsoEquiv]
+  have h₂ : conjugateEquiv Adjunction.id (F.shAdj (𝟙 Y)) (F.shId Y).hom = (F.pbId Y).inv := by
+    simp [shId, conjugateIsoEquiv]
+  rw [conjugateEquiv_id, ← conjugateEquiv_comp _ ((F.shAdj j).comp (F.shAdj (𝟙 Y))),
+    ← conjugateEquiv_comp _ ((F.shAdj j).comp Adjunction.id), conjugateEquiv_rightUnitor_hom,
+    conjugateEquiv_whiskerLeft, h₁, h₂]
+  ext M
+  simp [pbComp'_id_right_inv_app]
+
+end ExtensionByZeroUnit
+
 end AlgebraicGeometry.CompactSupportFormalism
