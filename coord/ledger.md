@@ -5290,3 +5290,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 15:48 L: merged deliver/J1/lem-pc-affine-perfect-hom-colimit (stage 2; reviewer FIX; first push; Sheaf.AlgebraicGeometry.AffinePerfectHomColimit CochainComplex.affine_perfect_hom_colimit; new nodes: def-pc-complex-scalar-extension-hom)
 - 15:48 L: merged deliver/J1/lem-weil-pbc-finite-geometric-point-coproduct-cohomology (stage 2; reviewer PASS; first push; Sheaf.Paper.FiniteGeometricPointCoproductCohomology AlgebraicGeometry.finite_geometric_point_coproduct_cohomology)
 - 15:48 L: merged deliver/J1/lem-weil-pbc-gabber-absolutely-algebraically-closed (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.GabberAbsolutelyAlgebraicallyClosed AlgebraicGeometry.gabber_absolutely_algebraically_closed)
+- 15:49 L: merged deliver/K1/lem-sc-p1-graded-kernel-finite (stage 2; reviewer PASS; first push; Sheaf.RingTheory.GradedKernelFinite MvPolynomial.graded_kernel_finite)
