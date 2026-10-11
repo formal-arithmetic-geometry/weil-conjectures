@@ -112,7 +112,7 @@ lemma IsCurve.isIso_of_connectedSpace [IsAlgClosed k] [IsCurve f] [Smooth f] [Co
 /-- **Invariance of the cohomology of a connected smooth curve.** Let `k ⊆ k'` be algebraically
 closed fields, `C` a connected smooth curve over `k` (possibly a point) and `n` prime to
 `char k`. Then the pullback `Hᵠ(C, ℤ/n) ⟶ Hᵠ(C_{k'}, ℤ/n)` is bijective for every `q`.
-`Hᵠ(C, ℤ/n)` is finite. If `C` has dimension one, this is
+If `C` has dimension one, this is
 `AlgebraicGeometry.IsConnectedCurve.bijective_fieldExtensionCohomologyMap`; otherwise `C` and
 `C_{k'}` are the points `Spec k` and `Spec k'`, with cohomology `ℤ/n` in degree zero only
 (`AlgebraicGeometry.Scheme.subsingleton_H_of_isSepClosed`).
@@ -207,5 +207,92 @@ theorem IsCurve.finite_sheafH_constantZMod_of_connectedSpace [IsAlgClosed k] [Is
     have := (Etale.injective_cohomologyMap_of_comp_eq_id (inv f) f (IsIso.hom_inv_id _)
       (C.constantZMod n) (q + 1)).subsingleton
     infer_instance
+
+/-- **Invariance of the cohomology of a smooth curve.** Let `k ⊆ k'` be algebraically closed
+fields, `C` a smooth separated curve over `k` and `n` prime to `char k`. Then the pullback
+`Hᵠ(C, ℤ/n) ⟶ Hᵠ(C_{k'}, ℤ/n)` is bijective for every `q`.
+
+It is injective (`AlgebraicGeometry.injective_cohomologyMap_pullback_fst_of_isAlgClosed`). The
+finitely many connected components `Cᵢ` of `C` are clopen, and so are their preimages `C'ᵢ` in
+`C_{k'}`, with `C'ᵢ ≅ (Cᵢ)_{k'}`; cohomology takes these decompositions to products
+(`AlgebraicGeometry.Etale.nonempty_equiv_pi_H_of_isClopen`). Each `Hᵠ(Cᵢ, ℤ/n)` is finite
+(`AlgebraicGeometry.IsCurve.finite_sheafH_constantZMod_of_connectedSpace`) and in bijection with
+`Hᵠ((Cᵢ)_{k'}, ℤ/n)` (`AlgebraicGeometry.IsCurve.bijective_fieldExtensionCohomologyMap_of_connectedSpace`),
+so both sides are finite of the same order.
+(blueprint: `sk-prop-ext-invariance`) -/
+theorem IsCurve.bijective_fieldExtensionCohomologyMap [IsAlgClosed k] [IsCurve f] [Smooth f]
+    [IsAlgClosed k'] (n : ℕ) (hn : (n : k) ≠ 0) (q : ℕ) :
+    Function.Bijective (f.fieldExtensionCohomologyMap k' (C.constantZMod n) q) := by
+  classical
+  have : IsLocallyNoetherian C := LocallyOfFiniteType.isLocallyNoetherian f
+  have : CompactSpace C := (quasiCompact_iff_compactSpace f).mp inferInstance
+  have : IsNoetherian C := ⟨⟩
+  have : QuasiSeparatedSpace C := (quasiSeparated_iff_quasiSeparatedSpace f).mp inferInstance
+  have hinj := injective_cohomologyMap_pullback_fst_of_isAlgClosed f k' (C.constantZMod n) q
+  set φ := Spec.map (CommRingCat.ofHom (algebraMap k k'))
+  set C' := pullback f φ
+  -- the connected components of `C`, indexed by `_root_.ConnectedComponents C`
+  choose x hx using _root_.ConnectedComponents.surjective_coe (α := C)
+  let U (c : _root_.ConnectedComponents C) : C.Opens :=
+    ⟨connectedComponent (x c), TopologicalSpace.NoetherianSpace.isOpen_connectedComponent _⟩
+  have hU (y : C) : y ∈ U y := by
+    change y ∈ connectedComponent (x y)
+    rw [_root_.ConnectedComponents.coe_eq_coe.mp (hx y)]
+    exact mem_connectedComponent
+  have hdisj : Pairwise fun c d ↦ Disjoint (U c : Set C) (U d) := fun c d hcd ↦ by
+    refine Set.disjoint_left.mpr fun y (hyc : y ∈ connectedComponent (x c))
+      (hyd : y ∈ connectedComponent (x d)) ↦ hcd ?_
+    rw [← hx c, ← hx d, _root_.ConnectedComponents.coe_eq_coe,
+      connectedComponent_eq hyc, connectedComponent_eq hyd]
+  have : Fintype (_root_.ConnectedComponents C) := Fintype.ofFinite _
+  -- their preimages in `C_{k'}`
+  let U' (c : _root_.ConnectedComponents C) : C'.Opens := (pullback.fst f φ) ⁻¹ᵁ U c
+  obtain ⟨eC⟩ := Etale.nonempty_equiv_pi_H_of_isClopen U (fun c ↦ isClosed_connectedComponent)
+    hdisj (fun y ↦ ⟨y, hU y⟩) (C.constantZMod n) q
+  obtain ⟨eC'⟩ := Etale.nonempty_equiv_pi_H_of_isClopen U'
+    (fun c ↦ isClosed_connectedComponent.preimage (pullback.fst f φ).continuous)
+    (fun c d hcd ↦ (hdisj hcd).preimage (pullback.fst f φ)) (fun z ↦ ⟨pullback.fst f φ z, hU (pullback.fst f φ z)⟩) (C'.constantZMod n) q
+  -- each component
+  have key (c : _root_.ConnectedComponents C) : Finite (Sheaf.H ((U c).toScheme.constantZMod n) q) ∧
+      ∃ ψ : Sheaf.H ((U' c).toScheme.constantZMod n) q →
+        Sheaf.H ((U c).toScheme.constantZMod n) q, Function.Injective ψ := by
+    have : ConnectedSpace (U c) :=
+      isConnected_iff_connectedSpace.mp isConnected_connectedComponent
+    have : IsCurve ((U c).ι ≫ f) :=
+      { krullDim_le_one :=
+          (topologicalKrullDim_subspace_le C (U c)).trans (IsCurve.krullDim_le_one f) }
+    refine ⟨IsCurve.finite_sheafH_constantZMod_of_connectedSpace ((U c).ι ≫ f) n hn q, ?_⟩
+    have hbij := IsCurve.bijective_fieldExtensionCohomologyMap_of_connectedSpace
+      ((U c).ι ≫ f) k' n hn q
+    let e := (Equiv.ofBijective _ hbij).trans
+      (((U c).ι ≫ f).sheafHBaseChangeConstantZModAddEquiv k' n q).toEquiv
+    let j : pullback ((U c).ι ≫ f) φ ≅ U' c :=
+      (pullbackRightPullbackFstIso f φ (U c).ι).symm ≪≫
+        pullbackSymmetry (U c).ι (pullback.fst f φ) ≪≫
+        pullbackRestrictIsoRestrict (pullback.fst f φ) (U c)
+    exact ⟨e.symm ∘ (j.hom.sheafHUpperStarConstantZModAddEquiv n q) ∘
+      Etale.cohomologyMap j.hom ((U' c).toScheme.constantZMod n) q,
+      e.symm.injective.comp ((AddEquiv.injective _).comp
+        (Etale.injective_cohomologyMap_of_comp_eq_id j.hom j.inv j.inv_hom_id _ q))⟩
+  choose hfin ψ hψ using key
+  have hfin' (c) : Finite (Sheaf.H ((U' c).toScheme.constantZMod n) q) :=
+    Finite.of_injective _ (hψ c)
+  let E := f.sheafHBaseChangeConstantZModAddEquiv k' n q
+  have (c : _root_.ConnectedComponents C) : Finite (Sheaf.H
+      ((Etale.upperStar AddCommGrpCat.{u + 1} (U c).ι).obj (C.constantZMod n)) q) :=
+    Finite.of_equiv _ ((U c).ι.sheafHUpperStarConstantZModAddEquiv n q).symm.toEquiv
+  have (c : _root_.ConnectedComponents C) : Finite (Sheaf.H
+      ((Etale.upperStar AddCommGrpCat.{u + 1} (U' c).ι).obj
+      (C'.constantZMod n)) q) :=
+    Finite.of_equiv _ ((U' c).ι.sheafHUpperStarConstantZModAddEquiv n q).symm.toEquiv
+  have : Finite (Sheaf.H (C'.constantZMod n) q) := Finite.of_equiv _ eC'.symm
+  have := Finite.of_equiv _ E.symm.toEquiv
+  refine hinj.bijective_of_nat_card_le ?_
+  rw [Nat.card_congr E.toEquiv, Nat.card_congr eC', Nat.card_congr eC,
+    Nat.card_pi, Nat.card_pi]
+  refine Finset.prod_le_prod (fun _ _ ↦ Nat.zero_le _) fun c _ ↦ ?_
+  rw [Nat.card_congr ((U' c).ι.sheafHUpperStarConstantZModAddEquiv n q).toEquiv,
+    Nat.card_congr ((U c).ι.sheafHUpperStarConstantZModAddEquiv n q).toEquiv]
+  exact Nat.card_le_card_of_injective _ (hψ c)
 
 end AlgebraicGeometry
