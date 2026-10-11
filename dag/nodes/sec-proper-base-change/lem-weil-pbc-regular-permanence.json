@@ -144,5 +144,24 @@
   "group": "E1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of E1; spot-checked by L: L: 3 steps along Stacks 07NT: B -> C faithfully flat (flat + Spec surjective, new unsplit 00HQ node), A -> B flat by flat permanence (new unsplit 039V node), fibres: base change keeps flatness and Spec-surjectivity (new unsplit node), geometric regularity (with Noetherianity in def-weil-pbc-g-ring) descends along faithfully flat maps (new unsplit 07NH node). Correct."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.RegularPermanence",
+  "declaration": "RingHom.isRegular_of_isRegular_comp",
+  "file": "lean/Sheaf/RingTheory/RegularPermanence.lean",
+  "statement": "theorem isRegular_of_isRegular_comp {A : Type u} {B : Type v} {C : Type w} [CommRing A] [CommRing B] [CommRing C] [Algebra A B] [Algebra B C] [Algebra A C] [IsScalarTower A B C] (hcomp : (algebraMap A C).IsRegular) (hflat : (algebraMap B C).Flat) (hsurj : Function.Surjective (PrimeSpectrum.comap (algebraMap B C))) : (algebraMap A B).IsRegular",
+  "branch": "sheaf-dag",
+  "by": "G1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-rpe"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-rpe",
+  "group": "G1",
+  "result": "fix",
+  "note": "node unchanged (diff adds lean only); A,B,C comm rings; composite A->C regular = (algebraMap A C).IsRegular with IsScalarTower; B->C flat = RingHom.Flat; Spec C->Spec B surjective = Surjective (PrimeSpectrum.comap); conclusion (algebraMap A B).IsRegular; no added hypotheses; bare f/g.comp form restated to the landed algebraMap+IsScalarTower form"
  }
 }
