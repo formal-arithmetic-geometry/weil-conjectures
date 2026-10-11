@@ -8,6 +8,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.Curve.GenericRestriction
 public import WeilConjectures.AlgebraicGeometry.Sites.ConstantSheafSections
 public import WeilConjectures.AlgebraicGeometry.Sites.Kummer
+public import WeilConjectures.AlgebraicGeometry.Sites.PointCohomology
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.ConstantSheafOver
 public import Mathlib.GroupTheory.FiniteAbelian.Basic
 
@@ -134,16 +135,10 @@ lemma map_eq_map_of_forall_map_etaleSpecMap_eq [IsGalois F L]
   rw [FieldTrace.map_map_apply N.obj (pointι Z v) g₂, hσ,
     ← FieldTrace.map_map_apply N.obj (pointι Z v ≫ g₁), hx]
 
-variable (F) in
-/-- The terminal object `Spec F` of the small étale site of `Spec F`. -/
-noncomputable abbrev etaleTerminal : (Spec (.of F)).Etale :=
-  MorphismProperty.Over.mk ⊤ (𝟙 (Spec (.of F)))
-    (MorphismProperty.id_mem @AlgebraicGeometry.Etale (Spec (CommRingCat.of F)))
-
 /-- The morphism `Spec L ⟶ Spec F` to the terminal object. -/
 noncomputable abbrev etaleSpecToTerminal (L : Type u) [Field L] [Algebra F L]
-    [Algebra.Etale F L] : etaleSpec F L ⟶ etaleTerminal F :=
-  GaloisCech.isTerminal.from _
+    [Algebra.Etale F L] : etaleSpec F L ⟶ etalePoint F :=
+  isTerminalEtalePoint.from _
 
 /-- **Galois descent.** A section over `Spec L`, for `L / F` Galois, which is invariant under
 `Gal(L / F)` comes from a global section. -/
@@ -208,10 +203,10 @@ def IsSplitBy : Prop :=
 
 variable {N L}
 
-instance : Subsingleton (etaleTerminal F : (Spec (.of F)).Etale).left :=
+instance : Subsingleton (etalePoint F : (Spec (.of F)).Etale).left :=
   inferInstanceAs (Subsingleton (PrimeSpectrum F))
 
-instance : Nonempty (etaleTerminal F : (Spec (.of F)).Etale).left :=
+instance : Nonempty (etalePoint F : (Spec (.of F)).Etale).left :=
   inferInstanceAs (Nonempty (PrimeSpectrum F))
 
 instance : Subsingleton (etaleSpec F L).left :=
@@ -220,11 +215,11 @@ instance : Subsingleton (etaleSpec F L).left :=
 instance : Nonempty (etaleSpec F L).left :=
   inferInstanceAs (Nonempty (PrimeSpectrum L))
 
-variable (ℓ : ℕ) {z : N.obj.obj (op (etaleTerminal F))} (hz : (ℓ : ℤ) • z = 0)
+variable (ℓ : ℕ) {z : N.obj.obj (op (etalePoint F))} (hz : (ℓ : ℤ) • z = 0)
 
 /-- The morphism `ℤ/ℓ → N(Spec F)` sending `1` to `z`. -/
 noncomputable def zmodHom :
-    AddCommGrpCat.of (ULift.{u + 1} (ZMod ℓ)) ⟶ N.obj.obj (op (etaleTerminal F)) :=
+    AddCommGrpCat.of (ULift.{u + 1} (ZMod ℓ)) ⟶ N.obj.obj (op (etalePoint F)) :=
   AddCommGrpCat.ofHom ((ZMod.lift ℓ ⟨zmultiplesHom _ z, by simpa using hz⟩).comp
     AddEquiv.ulift.toAddMonoidHom)
 
@@ -259,14 +254,14 @@ noncomputable def constantZModHom : (Spec (.of F)).constantZMod ℓ ⟶ N :=
 lemma constantZModHom_app_toSheafify (W : (Spec (.of F)).Etale) (b : ULift.{u + 1} (ZMod ℓ)) :
     (constantZModHom ℓ hz).hom.app (op W) ((CategoryTheory.toSheafify _
       ((Functor.const _).obj (AddCommGrpCat.of (ULift.{u + 1} (ZMod ℓ))))).app (op W) b) =
-      N.obj.map (GaloisCech.isTerminal.from W).op (zmodHom ℓ hz b) := by
+      N.obj.map (isTerminalEtalePoint.from W).op (zmodHom ℓ hz b) := by
   have h := constantSheafAdj_homEquiv_apply (Spec (.of F)).smallEtaleTopology AddCommGrpCat.{u + 1}
     GaloisCech.isTerminal
     (AddCommGrpCat.of (ULift.{u + 1} (ZMod ℓ))) N (constantZModHom ℓ hz)
   rw [constantZModHom, Equiv.apply_symm_apply] at h
   have h₁ := NatTrans.naturality_apply (CategoryTheory.toSheafify (Spec (.of F)).smallEtaleTopology
     ((Functor.const _).obj (AddCommGrpCat.of (ULift.{u + 1} (ZMod ℓ)))))
-      (GaloisCech.isTerminal.from W).op b
+      (isTerminalEtalePoint.from W).op b
   refine (congrArg _ h₁).trans ?_
   exact (NatTrans.naturality_apply (constantZModHom ℓ hz).hom _ _).trans
     (congrArg _ (ConcreteCategory.congr_hom h b).symm)
@@ -445,7 +440,7 @@ lemma exists_addOrderOf_eq (hP : IsPGroup ℓ (L ≃ₐ[F] L))
     [Finite (N.obj.obj (op (etaleSpec F L)))]
     (hN : ∀ x : N.obj.obj (op (etaleSpec F L)), ∃ k : ℕ, ℓ ^ k • x = 0)
     (x₀ : N.obj.obj (op (etaleSpec F L))) (hx₀ : x₀ ≠ 0) :
-    ∃ z : N.obj.obj (op (etaleTerminal F)), addOrderOf z = ℓ := by
+    ∃ z : N.obj.obj (op (etalePoint F)), addOrderOf z = ℓ := by
   let := galAction (N := N) (L := L)
   let S : AddSubgroup (N.obj.obj (op (etaleSpec F L))) :=
     { carrier := MulAction.fixedPoints (L ≃ₐ[F] L) _
@@ -488,7 +483,7 @@ theorem IsSplitBy.induction (hP : IsPGroup ℓ (L ≃ₐ[F] L))
     (P : Sheaf (Spec (.of F)).smallEtaleTopology AddCommGrpCat.{u + 1} → Prop)
     (h₀ : ∀ N, IsZero N → P N)
     (h₁ : ∀ (N : Sheaf (Spec (.of F)).smallEtaleTopology AddCommGrpCat.{u + 1})
-      (z : N.obj.obj (op (etaleTerminal F))) (hz : (ℓ : ℤ) • z = 0), addOrderOf z = ℓ →
+      (z : N.obj.obj (op (etalePoint F))) (hz : (ℓ : ℤ) • z = 0), addOrderOf z = ℓ →
         P (cokernel (constantZModHom ℓ hz)) → P N)
     (hN : IsSplitBy N L) [Finite (N.obj.obj (op (etaleSpec F L)))]
     (hNℓ : ∀ x : N.obj.obj (op (etaleSpec F L)), ∃ k : ℕ, ℓ ^ k • x = 0) : P N := by
@@ -521,7 +516,7 @@ theorem IsSplitBy.induction (hP : IsPGroup ℓ (L ≃ₐ[F] L))
     change (constantZModHom ℓ hzℓ).hom.app _ _ ≠ 0
     rw [constantZModHom_app_toSheafify, zmodHom_apply, one_zsmul]
     intro h0
-    have := (injective_map_of_subsingleton N (GaloisCech.isTerminal.from (etaleSpec F L)))
+    have := (injective_map_of_subsingleton N (isTerminalEtalePoint.from (etaleSpec F L)))
       (h0.trans (map_zero _).symm)
     rw [this, addOrderOf_zero] at hz
     exact (Fact.out (p := ℓ.Prime)).one_lt.ne hz
