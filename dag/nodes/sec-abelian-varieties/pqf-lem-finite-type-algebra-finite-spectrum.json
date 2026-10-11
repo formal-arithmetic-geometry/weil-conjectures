@@ -125,5 +125,23 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-fta2525 (reviewer sub-agent of L); spot-checked: Packet read whole. Step 1 cites new child exactly (C4 ok); step 2 hypotheses (finite type over field, all primes maximal, zero ring allowed) match lem-weil-pbc-finite-type-algebra-dim-zero-finite; step 3 finite T1 => discrete is elementary; no cycle (child created from item but states only the 0ALW (2)=>(1) direction, a real lemma). New node true (Stacks 0ALW), self-contained; my grep of Mathlib RingTheory/QuasiFinite, Spectrum/Prime, Topology/JacobsonSpace: no single declaration (chain of three), so unsplit is right, not class (c). Second reading: no missed fault. No repairs."
  },
- "lead_note": "2026-10-10 L (R-fta2525): New node lem-pqf-finite-spectrum-maximal-primes has no one-declaration Mathlib match but a short Mathlib chain proves it: isJacobsonRing_of_finiteType + Topology/JacobsonSpace.lean:165 (Finite+JacobsonSpace => DiscreteTopology) + PrimeSpectrum.discreteTopology_iff_finite_and_krullDimLE_zero (RingTheory/Spectrum/Prime/Topology.lean:301); cf. Algebra.QuasiFinite.iff_finite_comap_preimage_singleton (RingTheory/QuasiFinite/Basic.lean:287) whose proof does exactly this. Useful when the child is split."
+ "lead_note": "2026-10-10 L (R-fta2525): New node lem-pqf-finite-spectrum-maximal-primes has no one-declaration Mathlib match but a short Mathlib chain proves it: isJacobsonRing_of_finiteType + Topology/JacobsonSpace.lean:165 (Finite+JacobsonSpace => DiscreteTopology) + PrimeSpectrum.discreteTopology_iff_finite_and_krullDimLE_zero (RingTheory/Spectrum/Prime/Topology.lean:301); cf. Algebra.QuasiFinite.iff_finite_comap_preimage_singleton (RingTheory/QuasiFinite/Basic.lean:287) whose proof does exactly this. Useful when the child is split.",
+ "lean": {
+  "module": "Sheaf.RingTheory.FiniteTypeAlgebraFiniteSpectrum",
+  "declaration": "Algebra.finiteType_finiteSpectrum",
+  "file": "lean/Sheaf/RingTheory/FiniteTypeAlgebraFiniteSpectrum.lean",
+  "statement": "theorem finiteType_finiteSpectrum (k : Type u) (B : Type v) [Field k] [CommRing B] [Algebra k B] [Algebra.FiniteType k B] (hfin : Finite (PrimeSpectrum B)) : (∀ p : PrimeSpectrum B, p.asIdeal.IsMaximal) ∧ Module.Finite k B ∧ DiscreteTopology (PrimeSpectrum B)",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "F1",
+  "result": "pass",
+  "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
+ }
 }
