@@ -18,6 +18,8 @@ public import WeilConjectures.SixFunctors.ProEtale.Comparison.Flat
 public import WeilConjectures.CategoryTheory.DerivedCategory.FlatModel
 public import WeilConjectures.SixFunctors.Etale.Derived.Stability.DirectImage
 public import WeilConjectures.SixFunctors.ProEtale.Derived.OpenCover
+public import WeilConjectures.SixFunctors.ProEtale.Derived.Duality
+public import WeilConjectures.SixFunctors.Etale.Derived.Dualizing
 
 /-!
 
@@ -124,27 +126,50 @@ theorem torAmplitudeIn_of_mapDerivedCategory {X : Scheme.{u}} [HasInvertibleExpo
   sorry
 
 /-- Blueprint `lem-weil-finite-duality-site-comparison`: Finite-stage duality under the site
-comparison, first assertion.
+comparison.
 
 Let `X` be a separated scheme of finite type over an algebraic closure `k` of `𝔽_p`, let `Λ` be
-a finite ring whose exponent is invertible on `X`, let `K ∈ Dctf(X_ét, Λ)` and
-`M ∈ Dᵇc(X_ét, Λ)`. Then `ν^* RHom(K, M) ≅ RHom(ν^* K, ν^* M)`. The blueprint asserts that the
-canonical comparison map is an isomorphism; that map needs a monoidal structure on `ν^*`
-compatible with the internal homs, so the existence of an isomorphism is stated. The further
-assertions of the blueprint lemma, `ν^* ω_X ≅ ω_{X, proét}` and the compatibility with
-evaluations, are not stated here. -/
+a finite ring whose exponent is invertible on `X`, and let `ν : X_proét ⟶ X_ét` be the site
+comparison.
+
+1. For `K ∈ Dctf(X_ét, Λ)` and `M ∈ Dᵇc(X_ét, Λ)`, `ν^* RHom(K, M) ≅ RHom(ν^* K, ν^* M)`.
+2. Moreover `ν^* ω_X ≅ ω_{X, proét}` for the dualizing complexes `Ra_X^! Λ` of the two sites.
+3. These comparisons identify the Verdier duals and the double-dual maps: for
+   `K ∈ Dctf(X_ét, Λ)`, `ν^* 𝔻_X K ≅ 𝔻_{X, proét} (ν^* K)`, and `ν^* K ≅ 𝔻 𝔻 (ν^* K)` on the
+   pro-étale site. In particular finite-stage Verdier duality on the pro-étale constructible
+   category is transported from étale Verdier duality.
+
+The blueprint asserts that canonical comparison maps are isomorphisms; these maps need a
+monoidal structure on `ν^*` compatible with the internal homs, which is not formalised, so the
+existence of isomorphisms is stated, and the identification of evaluations and double-dual maps
+is rendered as clause 3. Clauses 2 and 3 are stated whenever the exceptional inverse image
+along `a_X` defining the dualizing complexes is available. -/
 theorem nonempty_iso_mapDerivedCategory_derivedHom_of_isSeparated {k : Type u} [Field k]
     {p : ℕ} [Fact p.Prime] [Algebra (ZMod p) k] [IsAlgClosure (ZMod p) k]
     {X : Scheme.{u}} (aX : X ⟶ Spec (.of k)) [IsSeparated aX] [LocallyOfFiniteType aX]
-    [QuasiCompact aX] [HasInvertibleExponent Λ X]
-    {K M : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
-    (hK : Etale.DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} Λ) X K)
-    (hM : Etale.DerivedCategory.boundedConstructible (ModuleCat.{u + 1} Λ) X M) :
-    Nonempty (D(ν^*(X)[ModuleCat.{u + 1} Λ]).obj
-        (((Etale.derivedHom (ModuleCat.{u + 1} Λ) X).obj (op K)).obj M) ≅
-      ((ProEtale.derivedHom (ModuleCat.{u + 1} Λ) X).obj
-        (op (D(ν^*(X)[ModuleCat.{u + 1} Λ]).obj K))).obj
-          (D(ν^*(X)[ModuleCat.{u + 1} Λ]).obj M)) :=
+    [QuasiCompact aX] [HasInvertibleExponent Λ X] :
+    (∀ {K M : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))},
+      Etale.DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} Λ) X K →
+      Etale.DerivedCategory.boundedConstructible (ModuleCat.{u + 1} Λ) X M →
+      Nonempty (D(ν^*(X)[ModuleCat.{u + 1} Λ]).obj
+          (((Etale.derivedHom (ModuleCat.{u + 1} Λ) X).obj (op K)).obj M) ≅
+        ((ProEtale.derivedHom (ModuleCat.{u + 1} Λ) X).obj
+          (op (D(ν^*(X)[ModuleCat.{u + 1} Λ]).obj K))).obj
+            (D(ν^*(X)[ModuleCat.{u + 1} Λ]).obj M))) ∧
+    ∀ [HasCompactification aX] [Etale.HasBoundedBelowUpperShriek (ModuleCat.{u + 1} Λ) aX],
+      Nonempty (D(ν^*(X)[ModuleCat.{u + 1} Λ]).obj
+          (Etale.dualizingComplex (ModuleCat.{u + 1} Λ) aX) ≅
+        ProEtale.dualizingComplex (ModuleCat.{u + 1} Λ) aX) ∧
+      ∀ {K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))},
+        Etale.DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} Λ) X K →
+        Nonempty (D(ν^*(X)[ModuleCat.{u + 1} Λ]).obj
+            ((Etale.verdierDual (ModuleCat.{u + 1} Λ) aX).obj (op K)) ≅
+          (ProEtale.verdierDual (ModuleCat.{u + 1} Λ) aX).obj
+            (op (D(ν^*(X)[ModuleCat.{u + 1} Λ]).obj K))) ∧
+        Nonempty (D(ν^*(X)[ModuleCat.{u + 1} Λ]).obj K ≅
+          (ProEtale.verdierDual (ModuleCat.{u + 1} Λ) aX).obj
+            (op ((ProEtale.verdierDual (ModuleCat.{u + 1} Λ) aX).obj
+              (op (D(ν^*(X)[ModuleCat.{u + 1} Λ]).obj K))))) :=
   sorry
 
 /-- Blueprint `thm-sf-hom-comparison-constructible`: Internal-Hom comparison for finite-Tor
@@ -220,8 +245,8 @@ theorem nonempty_iso_mapDerivedCategory_derivedHom {k : Type u} [Field k] {p : �
         (D(ν^*(X)[ModuleCat.{u + 1} Λ]).obj M)
     let eK := (mapDerivedCategoryComparisonUpperStarCompUpperStarIso (ModuleCat.{u + 1} Λ) j).app K
     let eM := (mapDerivedCategoryComparisonUpperStarCompUpperStarIso (ModuleCat.{u + 1} Λ) j).app M
-    obtain ⟨e₃⟩ := nonempty_iso_mapDerivedCategory_derivedHom_of_isSeparated Λ (j ≫ aX)
-      (p := p) (Etale.constructibleFiniteTor_mapDerivedCategory_upperStar Λ j hK)
+    obtain ⟨e₃⟩ := (nonempty_iso_mapDerivedCategory_derivedHom_of_isSeparated Λ (j ≫ aX)
+      (p := p)).1 (Etale.constructibleFiniteTor_mapDerivedCategory_upperStar Λ j hK)
       (hM.mapDerivedCategory_upperStar j)
     exact ⟨_, ⟨e₂ ≪≫ ((ProEtale.derivedHom (ModuleCat.{u + 1} Λ) (U i)).mapIso eK.op.symm).app _ ≪≫
       ((ProEtale.derivedHom (ModuleCat.{u + 1} Λ) (U i)).obj _).mapIso eM ≪≫ e₃.symm⟩⟩
