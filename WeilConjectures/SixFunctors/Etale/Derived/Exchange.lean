@@ -10,6 +10,8 @@ public import WeilConjectures.SixFunctors.Etale.Derived.Coefficients
 public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.Proper
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekBaseChange
 public import WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormula
+public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal.Comparison
+public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.FlatModuleCat
 
 /-!
 # Compact-support base change, the projection formula and finite reduction
@@ -138,6 +140,42 @@ theorem isIso_rightDerivedLowerShriekBaseChangeMap [Finite Λ] [HasCompactificat
 
 end Exchange
 
+section Constant
+
+variable {Λ}
+
+/-- The base change `Y ×_Y Z` of the terminal object `Y` of `Y.Etale` along `g : Z ⟶ Y` is a
+terminal object of `Z.Etale`. -/
+noncomputable def isTerminalOverPullbackObjMkId {Z : Scheme.{u}} (g : Z ⟶ Y) :
+    IsTerminal ((MorphismProperty.Over.pullback @Etale ⊤ g).obj (Scheme.Etale.mk (𝟙 Y))) :=
+  IsTerminal.ofIso (MorphismProperty.Over.mkIdTerminal @AlgebraicGeometry.Etale Z)
+    (MorphismProperty.Over.isoMk (asIso (pullback.snd (𝟙 Y) g)) (Category.comp_id _)).symm
+
+variable (Λ) in
+/-- The pullback of a constant étale sheaf is the constant sheaf: `g^* M_Y ≅ M_Z`. Both functors
+are left adjoint to taking global sections, since `Γ(Y, g_* G) = G(Y ×_Y Z) = Γ(Z, G)`. -/
+noncomputable def constantSheafCompUpperStarIso {Z : Scheme.{u}} (g : Z ⟶ Y) :
+    constantSheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ) ⋙ (g)^*[ModuleCat.{u + 1} Λ] ≅
+      constantSheaf Z.smallEtaleTopology (ModuleCat.{u + 1} Λ) :=
+  (((constantSheafAdj _ _ (MorphismProperty.Over.mkIdTerminal @AlgebraicGeometry.Etale Y)).comp
+    (upperStarLowerStarAdjunction _ g)).ofNatIsoRight
+    (NatIso.ofComponents (fun _ ↦ Iso.refl _))).leftAdjointUniq
+    (constantSheafAdj _ _ (isTerminalOverPullbackObjMkId g))
+
+variable (Λ) in
+/-- The derived pullback of a constant sheaf placed in degree zero is the constant sheaf placed
+in degree zero: `Lg^* (M_Y[0]) ≅ M_Z[0]`. -/
+noncomputable def leftDerivedUpperStarSingleConstantSheafIso {Z : Scheme.{u}} (g : Z ⟶ Y)
+    (M : ModuleCat.{u + 1} Λ) :
+    L((g)^*[ModuleCat.{u + 1} Λ]).obj ((_root_.DerivedCategory.singleFunctor _ 0).obj
+        ((constantSheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj M)) ≅
+      (_root_.DerivedCategory.singleFunctor _ 0).obj
+        ((constantSheaf Z.smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj M) :=
+  (singleFunctorCompLeftDerivedUpperStarIso _ g).app _ ≪≫
+    (_root_.DerivedCategory.singleFunctor _ 0).mapIso ((constantSheafCompUpperStarIso Λ g).app M)
+
+end Constant
+
 section Projection
 
 variable (f : X ⟶ Y) [HasCompactification f]
@@ -179,6 +217,7 @@ theorem nonempty_iso_reductionModIdeal_rightDerivedLowerShriek (J : Ideal Λ) :
       reductionModIdeal Λ X J ⋙ R(f)_![ModuleCat.{u + 1} Λ]) :=
   sorry
 
+omit [HasCompactification f] in
 /-- Blueprint `sk-prop-sf-pf-reduction`: Projection formula: compatibility with finite
 reduction
 
@@ -193,7 +232,9 @@ makes the comparison square of the blueprint commute. -/
 theorem nonempty_iso_reductionModIdeal_leftDerivedUpperStar (J : Ideal Λ) :
     Nonempty (reductionModIdeal Λ Y J ⋙ L((f)^*[ModuleCat.{u + 1} Λ]) ≅
       L((f)^*[ModuleCat.{u + 1} Λ]) ⋙ reductionModIdeal Λ X J) :=
-  sorry
+  ⟨derivedTensorRightCompLeftDerivedUpperStarIso _ f _ ≪≫
+    Functor.isoWhiskerLeft _ ((-⊗ᴸ-(X)[ModuleCat.{u + 1} Λ]).flip.mapIso
+      (leftDerivedUpperStarSingleConstantSheafIso Λ f (ModuleCat.of Λ (Λ ⧸ J))))⟩
 
 end Projection
 
