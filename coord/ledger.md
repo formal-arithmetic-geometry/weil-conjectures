@@ -3768,3 +3768,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 08:08 L: merged deliver/G1/def-weil-pbc-finite-torsors (stage 2; reviewer PASS; after a return; WeilConjectures.CategoryTheory.Sites.Torsor CategoryTheory.Sheaf.Torsor; existing declaration)
 - 08:08 L: merged deliver/C1/lem-sc-ample-proj-local-chart (stage 2; reviewer FIX; first push; Sheaf.AlgebraicGeometry.AmpleProjLocalChart AlgebraicGeometry.Scheme.Modules.exists_sectionRing_proj_affine_charts)
 - 08:09 L: merged deliver/K1/lem-sc-local-ring-artin-schreier-kernel (stage 2; reviewer PASS; first push; Sheaf.RingTheory.LocalRing.ArtinSchreierKernel IsLocalRing.pow_eq_self_iff_existsUnique_zmod)
+- 08:09 L: merged deliver/K1/lem-sc-genus-invariant (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.GenusInvariant AlgebraicGeometry.genus_jacobian_invariant)
