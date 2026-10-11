@@ -177,6 +177,104 @@ noncomputable abbrev twist (x : 𝟙_ _ ⟶ X) (y : 𝟙_ _ ⟶ Y) (L : ((X ⊗ 
     ((X ⊗ Y) ⊗ Z).left.Modules :=
   (Scheme.Modules.pullback (fst (X ⊗ Y) Z).left).obj (crossIdeal X Y x y).toModules ⊗ L
 
+/-- The slice `{x} × Y × Z ⟶ X × Y × Z`. -/
+noncomputable abbrev sliceX (x : 𝟙_ _ ⟶ X) : (Y ⊗ Z).left ⟶ ((X ⊗ Y) ⊗ Z).left :=
+  (lift (lift (toUnit _ ≫ x) (fst Y Z)) (snd Y Z)).left
+
+/-- The slice `X × {y} × Z ⟶ X × Y × Z`. -/
+noncomputable abbrev sliceY (y : 𝟙_ _ ⟶ Y) : (X ⊗ Z).left ⟶ ((X ⊗ Y) ⊗ Z).left :=
+  (lift (lift (fst X Z) (toUnit _ ≫ y)) (snd X Z)).left
+
+/-- The slice `Z ⟶ Y × Z`, `z ↦ (y, z)`. -/
+noncomputable abbrev slicePt {A : Over (Spec (.of K))} (a : 𝟙_ _ ⟶ A) : Z.left ⟶ (A ⊗ Z).left :=
+  (lift (toUnit Z ≫ a) (𝟙 Z)).left
+
+/-- The two ways of including `{x} × {y} × Z` agree. -/
+lemma slicePt_sliceX (x : 𝟙_ _ ⟶ X) (y : 𝟙_ _ ⟶ Y) :
+    slicePt Z y ≫ sliceX X Y Z x = slicePt Z x ≫ sliceY X Y Z y := by
+  rw [← Over.comp_left, ← Over.comp_left]
+  congr 1
+  ext <;> simp
+
+/-- The identification `Z ×_{X × Y × Z} ... `: pulling back to `{x} × {y} × Z` through either
+slice. -/
+noncomputable abbrev sliceComparison (x : 𝟙_ _ ⟶ X) (y : 𝟙_ _ ⟶ Y)
+    (L : ((X ⊗ Y) ⊗ Z).left.Modules) :
+    (Scheme.Modules.pullback (slicePt Z y)).obj
+        ((Scheme.Modules.pullback (sliceX X Y Z x)).obj L) ≅
+      (Scheme.Modules.pullback (slicePt Z x)).obj
+        ((Scheme.Modules.pullback (sliceY X Y Z y)).obj L) :=
+  (Scheme.Modules.pullbackComp _ _).app L ≪≫
+    (Scheme.Modules.pullbackCongr (slicePt_sliceX X Y Z x y)).app L ≪≫
+    ((Scheme.Modules.pullbackComp _ _).app L).symm
+
+set_option maxHeartbeats 1000000 in
+/-- **Compatibility of the coefficients of rigidified slice trivialisations.** Let `ex`, `ey`
+be global sections of `L` on the two slices which agree on `{x} × {y} × Z`, and `ℓ` a free
+generator of `L` on `O`. Then the coefficients of `ex` and `ey` with respect to `ℓ` agree on
+`{x} × {y} × Z`. -/
+lemma app_coeff_eq (x : 𝟙_ _ ⟶ X) (y : 𝟙_ _ ⟶ Y) (L : ((X ⊗ Y) ⊗ Z).left.Modules)
+    {O : ((X ⊗ Y) ⊗ Z).left.Opens} {ℓ : Γ(L, O)} (hℓ : Scheme.Modules.IsFreeGenerator ℓ)
+    (ex : Γ((Scheme.Modules.pullback (sliceX X Y Z x)).obj L, ⊤))
+    (ey : Γ((Scheme.Modules.pullback (sliceY X Y Z y)).obj L, ⊤))
+    (hC : (sliceComparison X Y Z x y L).hom.app ⊤ (Scheme.Modules.pullbackSection _ ex) =
+      Scheme.Modules.pullbackSection _ ey)
+    {g₁ : Γ((Y ⊗ Z).left, sliceX X Y Z x ⁻¹ᵁ O)} {g₂ : Γ((X ⊗ Z).left, sliceY X Y Z y ⁻¹ᵁ O)}
+    (hg₁ : g₁ • Scheme.Modules.pullbackSection (sliceX X Y Z x) ℓ =
+      ((Scheme.Modules.pullback (sliceX X Y Z x)).obj L).presheaf.map (homOfLE le_top).op ex)
+    (hg₂ : g₂ • Scheme.Modules.pullbackSection (sliceY X Y Z y) ℓ =
+      ((Scheme.Modules.pullback (sliceY X Y Z y)).obj L).presheaf.map (homOfLE le_top).op ey) :
+    (slicePt Z y).app _ g₁ = Z.left.presheaf.map (homOfLE
+      (congrArg (· ⁻¹ᵁ O) (slicePt_sliceX X Y Z x y)).le).op ((slicePt Z x).app _ g₂) := by
+  have hW : (slicePt Z y ≫ sliceX X Y Z x) ⁻¹ᵁ O = (slicePt Z x ≫ sliceY X Y Z y) ⁻¹ᵁ O :=
+    congrArg (· ⁻¹ᵁ O) (slicePt_sliceX X Y Z x y)
+  have hT := (hℓ.pullback_unit_app (sliceY X Y Z y)).pullback_unit_app (slicePt Z x)
+  have hT' := hT.map hW.le
+  have h1 := congrArg (fun s ↦ (sliceComparison X Y Z x y L).hom.app _
+    (Scheme.Modules.pullbackSection (slicePt Z y) s)) hg₁
+  simp only [sliceComparison] at h1
+  rw [Scheme.Modules.pullbackSection_smul, Scheme.Modules.Hom.app_smul] at h1
+  erw [Scheme.Modules.pullbackComp_congr_hom_app_pullbackSection' (slicePt_sliceX X Y Z x y) L ℓ]
+    at h1
+  rw [Scheme.Modules.pullbackSection_map, Scheme.Modules.Hom.app_presheaf_map] at h1
+  erw [hC] at h1
+  have h4 : (slicePt Z x).app _ g₂ • Scheme.Modules.pullbackSection (slicePt Z x)
+      (Scheme.Modules.pullbackSection (sliceY X Y Z y) ℓ) =
+      ((Scheme.Modules.pullback (slicePt Z x)).obj
+        ((Scheme.Modules.pullback (sliceY X Y Z y)).obj L)).presheaf.map
+        (homOfLE ((slicePt Z x).preimage_mono le_top)).op
+        (Scheme.Modules.pullbackSection (slicePt Z x) ey) := by
+    rw [← Scheme.Modules.pullbackSection_smul, hg₂, Scheme.Modules.pullbackSection_map]
+  have h5 : Z.left.presheaf.map (homOfLE hW.le).op ((slicePt Z x).app _ g₂) •
+      ((Scheme.Modules.pullback (slicePt Z x)).obj
+        ((Scheme.Modules.pullback (sliceY X Y Z y)).obj L)).presheaf.map (homOfLE hW.le).op
+        (Scheme.Modules.pullbackSection (slicePt Z x)
+          (Scheme.Modules.pullbackSection (sliceY X Y Z y) ℓ)) =
+      ((Scheme.Modules.pullback (slicePt Z x)).obj
+        ((Scheme.Modules.pullback (sliceY X Y Z y)).obj L)).presheaf.map
+        (homOfLE (hW.le.trans ((slicePt Z x).preimage_mono
+          (le_top : sliceY X Y Z y ⁻¹ᵁ O ≤ ⊤)))).op
+        (Scheme.Modules.pullbackSection (slicePt Z x) ey) := by
+    rw [← Scheme.Modules.map_smul, h4]
+    exact Scheme.Modules.presheaf_map_presheaf_map_apply _ _ _ _ _
+  have h1' : (show Γ(Z.left, (slicePt Z y ≫ sliceX X Y Z x) ⁻¹ᵁ O) from
+      (slicePt Z y).app _ g₁) •
+      ((Scheme.Modules.pullback (slicePt Z x)).obj
+        ((Scheme.Modules.pullback (sliceY X Y Z y)).obj L)).presheaf.map (homOfLE hW.le).op
+        (Scheme.Modules.pullbackSection (slicePt Z x)
+          (Scheme.Modules.pullbackSection (sliceY X Y Z y) ℓ)) =
+      ((Scheme.Modules.pullback (slicePt Z x)).obj
+        ((Scheme.Modules.pullback (sliceY X Y Z y)).obj L)).presheaf.map
+        (homOfLE (hW.le.trans ((slicePt Z x).preimage_mono
+          (le_top : sliceY X Y Z y ⁻¹ᵁ O ≤ ⊤)))).op
+        (Scheme.Modules.pullbackSection (slicePt Z x) ey) := by
+    convert h1 using 2
+    all_goals first | rfl | exact Scheme.Modules.presheaf_map_apply_congr _ _ _ _
+  exact hT'.smul_left_injective (h1'.trans h5.symm)
+
+
+
+
 variable [IsProper X.hom] [GeometricallyIntegral X.hom] [IsProper Y.hom]
   [GeometricallyIntegral Y.hom]
 
