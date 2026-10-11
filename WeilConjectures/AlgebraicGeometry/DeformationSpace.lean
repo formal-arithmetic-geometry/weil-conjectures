@@ -214,8 +214,15 @@ noncomputable abbrev polynomialZeroPresheaf : X.AffineZariskiSiteᵒᵖ ⥤ Comm
     rw [Ideal.map_span, Set.image_singleton]
     exact congrArg (fun p ↦ Ideal.span {p}) (Polynomial.map_X _)
 
-lemma coequifibered_toPolynomialZeroPresheaf : (X.toPolynomialPresheaf ≫
-    toQuotientPresheaf _ _ : _ ⟶ X.polynomialZeroPresheaf).Coequifibered :=
+/-- The quotient map `𝒪_X[t] ⟶ 𝒪_X[t] / t`. -/
+noncomputable abbrev polynomialToPolynomialZero : X.polynomialPresheaf ⟶ X.polynomialZeroPresheaf :=
+  toQuotientPresheaf _ _
+
+/-- The structure map `𝒪_X ⟶ 𝒪_X[t] / t`. -/
+noncomputable abbrev toPolynomialZeroPresheaf : X.affineStructurePresheaf ⟶ X.polynomialZeroPresheaf :=
+  X.toPolynomialPresheaf ≫ X.polynomialToPolynomialZero
+
+lemma coequifibered_toPolynomialZeroPresheaf : X.toPolynomialZeroPresheaf.Coequifibered :=
   coequifibered_comp_toQuotientPresheaf X.coequifibered_toPolynomialPresheaf _ _
 
 /-! ### The deformation space and the normal cone -/
@@ -653,5 +660,101 @@ instance : IsIso X.polynomialSpecToAffineSpace := by
     rfl
   rw [MorphismProperty.isomorphisms.iff, this]
   infer_instance
+
+/-! ### The zero section -/
+
+set_option backward.isDefEq.respectTransparency false in
+instance : IsIso (relativeGluingData X.coequifibered_toPolynomialZeroPresheaf).toBase := by
+  refine toBase_of_forall _ (.isomorphisms _) fun U ↦ ?_
+  have : IsIso (X.toPolynomialZeroPresheaf.app (.op U)) := by
+    rw [ConcreteCategory.isIso_iff_bijective]
+    have h : Ideal.span {Polynomial.X - Polynomial.C (0 : Γ(X, U.1))} =
+        Ideal.span {(Polynomial.X : Γ(X, U.1)[X])} := by simp
+    let e := (Polynomial.quotientSpanXSubCAlgEquiv (0 : Γ(X, U.1))).symm.toRingEquiv.trans
+      (Ideal.quotEquivOfEq h)
+    exact ⟨fun a b hab ↦ e.injective hab, fun y ↦ ⟨e.symm y, e.apply_symm_apply y⟩⟩
+  exact (MorphismProperty.isomorphisms.iff _).mpr inferInstance
+
+/-- The zero section `X ⟶ Spec_X 𝒪_X[t]`. -/
+noncomputable def polynomialSpecZeroSection : X ⟶ X.polynomialSpec :=
+  inv (relativeGluingData X.coequifibered_toPolynomialZeroPresheaf).toBase ≫
+    X.polynomialZeroSpecToPolynomialSpec
+
+lemma polynomialZeroSpecToPolynomialSpec_comp_polynomialSpecToAffineSpace :
+    X.polynomialZeroSpecToPolynomialSpec ≫ X.polynomialSpecToAffineSpace =
+      (relativeGluingData X.coequifibered_toPolynomialZeroPresheaf).toBase ≫
+        AffineSpace.zeroSection (ULift.{u} (Fin 1)) X := by
+  refine colimit.hom_ext fun U ↦ AffineSpace.hom_ext ?_ fun i ↦ ?_
+  · simp only [Category.assoc, polynomialSpecToAffineSpace_over, AffineSpace.zeroSection_over,
+      Category.comp_id, polynomialZeroSpecToPolynomialSpec]
+    rw [relativeGluingMap_toBase _ _ _ rfl]
+  · rw [polynomialZeroSpecToPolynomialSpec, ι_relativeGluingMap_assoc,
+      ι_polynomialSpecToAffineSpace, polynomialSpecChart, AffineSpace.comp_homOfVector,
+      AffineSpace.homOfVector_appTop_coord, Function.comp_apply, Scheme.Hom.comp_appTop,
+      CommRingCat.comp_apply, Scheme.Hom.comp_appTop, CommRingCat.comp_apply,
+      AffineSpace.zeroSection_appTop_coord, map_zero, map_zero]
+    have := congr($(Scheme.ΓSpecIso_inv_naturality (X.polynomialToPolynomialZero.app (.op U)))
+      Polynomial.X)
+    refine this.symm.trans ?_
+    change (ΓSpecIso (X.polynomialZeroPresheaf.obj (.op U))).inv
+      (Ideal.Quotient.mk (Ideal.span {(Polynomial.X : Γ(X, U.1)[X])}) Polynomial.X) = 0
+    have h0 : Ideal.Quotient.mk (Ideal.span {(Polynomial.X : Γ(X, U.1)[X])}) Polynomial.X = 0 :=
+      Ideal.Quotient.eq_zero_iff_mem.mpr (Ideal.subset_span rfl)
+    rw [h0, map_zero]
+
+lemma polynomialSpecZeroSection_comp_polynomialSpecToAffineSpace :
+    X.polynomialSpecZeroSection ≫ X.polynomialSpecToAffineSpace =
+      AffineSpace.zeroSection (ULift.{u} (Fin 1)) X := by
+  rw [polynomialSpecZeroSection, Category.assoc,
+    polynomialZeroSpecToPolynomialSpec_comp_polynomialSpecToAffineSpace, IsIso.inv_hom_id_assoc]
+
+/-! ### The punctured line -/
+
+/-- The coordinate `t` on `Spec_X 𝒪_X[t]`. -/
+noncomputable def polynomialSpecCoord : Γ(X.polynomialSpec, ⊤) :=
+  X.polynomialSpecToAffineSpace.appTop (AffineSpace.coord X 0)
+
+lemma ι_appTop_polynomialSpecCoord (U : X.AffineZariskiSite) :
+    (colimit.ι (relativeGluingData X.coequifibered_toPolynomialPresheaf).functor U).appTop
+      X.polynomialSpecCoord = (ΓSpecIso (X.polynomialPresheaf.obj (.op U))).inv Polynomial.X := by
+  rw [polynomialSpecCoord, ← CommRingCat.comp_apply, ← Scheme.Hom.comp_appTop,
+    ι_polynomialSpecToAffineSpace, polynomialSpecChart, AffineSpace.homOfVector_appTop_coord]
+
+set_option backward.isDefEq.respectTransparency false in
+instance : IsOpenImmersion X.laurentSpecToPolynomialSpec := by
+  refine relativeGluingMap_of_forall _ @IsOpenImmersion _ _
+    IdealSheafData.toPolynomialPresheaf_comp_polynomialToLaurent fun U ↦ ?_
+  change IsOpenImmersion (Spec.map (CommRingCat.ofHom
+    (algebraMap Γ(X, U.1)[X] Γ(X, U.1)[T;T⁻¹])))
+  exact IsOpenImmersion.of_isLocalization (Polynomial.X : Γ(X, U.1)[X])
+
+set_option backward.isDefEq.respectTransparency false in
+lemma _root_.CategoryTheory.IsPullback.range_snd_scheme {P X' Y Z : Scheme.{u}} {fst : P ⟶ X'}
+    {snd : P ⟶ Y} {f : X' ⟶ Z} {g : Y ⟶ Z} (h : IsPullback fst snd f g) :
+    Set.range snd = g ⁻¹' Set.range f := by
+  rw [← h.isoPullback_hom_snd, Scheme.Hom.comp_base, TopCat.coe_comp, Set.range_comp,
+    Set.range_eq_univ.mpr (ConcreteCategory.bijective_of_isIso h.isoPullback.hom.base).2,
+    Set.image_univ,
+    Scheme.Pullback.range_snd]
+
+set_option backward.isDefEq.respectTransparency false in
+/-- The punctured line `𝔾_{m,X} ⊆ 𝔸¹_X` is the locus where the coordinate `t` is invertible. -/
+lemma opensRange_laurentSpecToPolynomialSpec :
+    X.laurentSpecToPolynomialSpec.opensRange = X.polynomialSpec.basicOpen X.polynomialSpecCoord := by
+  refine opens_ext _ fun U ↦ TopologicalSpace.Opens.ext ?_
+  have h := isPullback_ι_relativeGluingMap X.coequifibered_toPolynomialPresheaf
+    X.coequifibered_toLaurentPresheaf _
+    IdealSheafData.toPolynomialPresheaf_comp_polynomialToLaurent U
+  have e1 := h.range_snd_scheme
+  have e2 : Set.range (Spec.map (CommRingCat.ofHom
+      (algebraMap Γ(X, U.1)[X] Γ(X, U.1)[T;T⁻¹]))) =
+      (PrimeSpectrum.basicOpen (Polynomial.X : Γ(X, U.1)[X]) : Set (PrimeSpectrum Γ(X, U.1)[X])) :=
+    PrimeSpectrum.localization_away_comap_range _ _
+  have e3 : ((Spec (.of Γ(X, U.1)[X])).basicOpen ((ΓSpecIso (.of Γ(X, U.1)[X])).inv Polynomial.X) :
+      Set (Spec (.of Γ(X, U.1)[X]))) =
+      (PrimeSpectrum.basicOpen (Polynomial.X : Γ(X, U.1)[X]) : Set (PrimeSpectrum Γ(X, U.1)[X])) :=
+    congrArg _ (basicOpen_eq_of_affine _)
+  rw [Scheme.preimage_basicOpen_top, ι_appTop_polynomialSpecCoord]
+  exact e1.symm.trans (e2.trans e3.symm)
 
 end AlgebraicGeometry.Scheme
