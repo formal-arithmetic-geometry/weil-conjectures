@@ -1,11 +1,11 @@
 # Work queue
 
-470 items; claim with `tools/claim.py next <group> [--stage N]`.
+468 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (470)
+## Stage 2: nodes to state (468)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -13,7 +13,6 @@
 | `def-pc-derived-pullback` | 1 | state |
 | `def-pc-perfect-complex` | 1 | state |
 | `def-pur-pseudo-coherent-complex` | 1 | state |
-| `def-sc-intersection-number` | 1 | state |
 | `def-weil-pbc-koszul-complex` | 1 | state |
 | `cor-galois-lisse-representations` | 1 | state |
 | `lem-pc-affine-derived-base-change-comparison-map` | 1 | state |
@@ -35,14 +34,15 @@
 | `lem-sc-derived-open-restriction-adjunction-exact` | 1 | state |
 | `lem-sc-ext-evaluation` | 1 | state |
 | `lem-sc-finite-free-complex-homology-upper-semicontinuous` | 1 | state |
-| `lem-sc-finite-locally-free-residue-isomorphism` | 1 | state |
 | `lem-sc-hilb-dominating-power` | 1 | state |
 | `lem-sc-hilbert-difference` | 1 | state |
 | `lem-sc-hilbert-embedded-points-gluing` | 1 | state |
+| `lem-sc-intersection-effective-cartier` | 1 | state |
 | `lem-sc-perfect-local-pseudocoherent-free-model` | 1 | state |
 | `lem-sc-picard-kunneth-qcoh` | 1 | state |
 | `lem-sc-qc-open-derived-lift` | 1 | state |
 | `lem-sc-regular-curve-torsionfree-free` | 1 | state |
+| `lem-sc-top-dimensional-reduction-intersection` | 1 | state |
 | `lem-sc-valuation-proper-coherent-higher-direct-images` | 1 | state |
 | `lem-weil-derived-limit-roos-complex` | 1 | state |
 | `lem-weil-pbc-affine-module-finite-type` | 1 | state |
@@ -51,9 +51,7 @@
 | `lem-weil-pbc-coherent-generic-point-ideal-inclusion` | 1 | state |
 | `lem-weil-pbc-coherent-stalk-map-extends` | 1 | state |
 | `lem-weil-pbc-integral-algebra-directed-colimit-finite` | 1 | state |
-| `lem-weil-pbc-module-finite-type-submodule-extension` | 1 | state |
 | `lem-weil-pbc-module-pullback-affine-sections` | 1 | state |
-| `lem-weil-pbc-module-pullback-finite-type` | 1 | state |
 | `lem-weil-pbc-noetherian-acc-quasi-coherent` | 1 | state |
 | `lem-weil-pbc-normalization-in-residue-field-extension` | 1 | state |
 | `lem-weil-pbc-openness-of-flatness` | 1 | state |
@@ -480,7 +478,7 @@
 | `lem-pc-essentially-constant-pro-hom-colimit` | 4 | state |
 | `lem-pur-essential-constant-pro-criterion-05py` | 4 | state |
 
-Not open yet: 40 nodes that wait for stage 1, 597 nodes that wait for a statement dependency.
+Not open yet: 40 nodes that wait for stage 1, 595 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
