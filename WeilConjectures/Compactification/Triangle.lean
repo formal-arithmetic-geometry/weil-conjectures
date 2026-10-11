@@ -236,7 +236,8 @@ instance [QuasiCompact (f ≫ g)] : QuasiCompact (T₁.infLift T₂) :=
 
 /-- The compactification of `f ≫ d.i`, for `d` the common refinement of `T₁.cg` and `T₂.cg`:
 the closure of `X` in `(T₁.cfg.Z ×_{T₁.cg.Z} d.Z) ×_{d.Z} (T₂.cfg.Z ×_{T₂.cg.Z} d.Z)`. -/
-noncomputable def infCompactification [QuasiCompact (f ≫ g)] : Compactification (f ≫ (inf T₁.cg T₂.cg).i) :=
+noncomputable def infCompactification [QuasiCompact (f ≫ g)] :
+    Compactification (f ≫ (inf T₁.cg T₂.cg).i) :=
   (Compactification.ofIsImmersion (T₁.infLift T₂)
     (pullback.fst _ _ ≫ pullback.snd T₁.p (infFst T₁.cg T₂.cg).hom)).copy
     (by rw [infLift_fst_snd])
