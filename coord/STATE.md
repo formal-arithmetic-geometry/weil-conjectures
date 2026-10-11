@@ -29,11 +29,11 @@ Written by the launcher at the start (`1-dag`), then kept current by the maintai
 - **Imported statement false in general (2026-10-09 15:05):** lem-fet-locally-trivial (sec-curve-estimates, imported, unit of the finite-etale points) asks for one surjective etale Y' → Y and one finite set S trivializing a finite etale P → Y; false for disconnected Y (Y = pt ⊔ pt, P one point over one component), true for connected Y. Found by the worker of lem-weil-pbc-finite-etale-trace-degree, which used Stacks 04HN instead. To be corrected at its own split (add 'Y connected' or allow S to vary with the component).
 - **Gap in a reviewed proof (node level, 2026-10-09 14:45):** prop-weil-pbc-algebraically-closed-extension step 10 feeds step 9 (constructibility in the curve sense, def-weil-pbc-constructible-torsion) into lem-weil-pbc-curve-constructible-reduction, whose hypothesis is constructibility as a sheaf of Z/r-modules (def-weil-pbc-etale-constructible-sheaf); the bridge is the new node lem-weil-pbc-constructible-torsion-modules-agree (unsplit): to be cited at step 10 when that node is split (the lead will add the pointer then). RESOLVED 2026-10-09 15:45: lem-weil-pbc-constructible-torsion-modules-agree split and reviewed; step 10 cites it.
 
-**Remote groups** (`tools/group_stats.py`, updated with each progress row; 2026-10-11 02:44 UTC):
+**Remote groups** (`tools/group_stats.py`, updated with each progress row; 2026-10-11 02:51 UTC):
 | group | merged | returned | abandoned (distinct items) | claims held (age, h) |
 |---|---|---|---|---|
 | C | 19 | 20 | 0 | 0: none |
-| C1 | 205 | 56 | 21 | 1: lem-pc-derived-tensor-second-factor-functor (0.3) |
+| C1 | 205 | 56 | 21 | 1: lem-pc-derived-tensor-second-factor-functor (0.5) |
 | D | 2 | 8 | 0 | 0: none |
 | D1 | 3 | 4 | 2 | 0: none |
 | E | 1 | 5 | 0 | 0: none |
@@ -42,9 +42,9 @@ Written by the launcher at the start (`1-dag`), then kept current by the maintai
 | F1 | 197 | 61 | 34 | 0: none |
 | G | 0 | 2 | 0 | 0: none |
 | G1 | 168 | 44 | 18 | 0: none |
-| H1 | 159 | 47 | 20 | 1: lem-sc-complex-lift-class-projective (0.6) |
-| J1 | 155 | 39 | 21 | 5: lem-pc-derived-tensor-flat-second-localization (0.7), lem-pur-essential-constant-cofinal-0a1s (0.2), lem-pur-essential-constant-pro-criterion-05py (0.2), lem-pur-triangle-morphism-category-05r9 (0.2), lem-sc-picard-qcoh-universal-delta-embedding (0.5) |
-| K1 | 159 | 37 | 17 | 3: cor-pc-sigma-pic-iso (0.2), lem-pc-vanishing-above-dim (0.2), prop-av-tate-rank (0.2) |
+| H1 | 160 | 47 | 20 | 0: none |
+| J1 | 157 | 39 | 21 | 4: lem-pc-derived-tensor-flat-second-localization (0.8), lem-pur-triangle-morphism-category-05r9 (0.4), lem-sc-complex-lift-acyclic-projective (0.0), lem-sc-picard-qcoh-universal-delta-embedding (0.6) |
+| K1 | 159 | 37 | 17 | 3: cor-pc-sigma-pic-iso (0.3), lem-pc-vanishing-above-dim (0.3), prop-av-tate-rank (0.3) |
 | M1 | 151 | 32 | 20 | 0: none |
 
 REMOTE LAUNCHER READY (2026-10-09 16:22: `roles/remote-launcher.md` committed; `AGENTS.md` §1, `roles/remote-lead.md`, `SETUP.md`, `roles/maintainer.md` §7, `tools/README.md` tied in; the tools take any group name `C1`, `C2`, …; the old group `C` keeps its claims until the human says its session is stopped).
@@ -386,6 +386,7 @@ Oldest delivery awaiting review: 4 min deliver/F1/lem-sc-p1-boundary-extension-c
 | 2026-10-11 02:30 | 869 | 3001 | 1153 | 353 | packet review: 0 reviewers in flight, 0 wait; 1 lead worker in flight (W-glf0231 on lem-sc-global-functions; the imported statement is false for non-reduced curves, restatement expected); since 02:22: 2 remote merged (both FIX: J1 balanced-derived-tensor-model (C4 misuse of lem-pur-derived-change-of-rings; new node lem-pc-derived-tensor-second-factor-functor), F1 derived-functor-triangles-05sc second push (point 3 of the return only half repaired; steps 1, 3, 4 rewritten in review as the LF dual of Stacks' proof)), 0 returned; lead items accepted: lem-weil-tower-split-envelope (R-env0222 PASS), lem-sc-base-change-curve (R-bcc0229 PASS; E7: smoothness claimed only for smooth C, the blueprint's clause was false for a nodal cubic); second readings: 2 of 2 had a missed fault |
 | 2026-10-11 02:37 | 868 | 3002 | 1153 | 353 | packet review: 0 reviewers in flight, 0 wait, 0 lead workers (every other stage-1 queue item is claimed by a remote group); since 02:30: 1 remote merged (FIX: J1 derived-tensor-action-naturality, C4 miscitation of transitivity), 0 returned; lead items accepted: lem-sc-global-functions (R-glf0233 FIX; E7: false for non-reduced curves, restated for reduced C), lem-pc-genus-agrees-sc (R-gen0237 PASS); attachments: lem-sc-finite-flat-surj-points attached (sorry-free), four releases of 2026-10-10 17h28-17h29 refused (rest on sorry) after sitting unverified nine hours; LEAN MISMATCH noted on def-sc-genus (Omega^1 form vs dim H^1(O)); second readings: 1 of 1 had a missed fault |
 | 2026-10-11 02:44 | 866 | 3005 | 1154 | 353 | packet review: 2 reviewers in flight (J1 essential-constant-cofinal-0a1s (delivery dropped the cone-map clauses the 05SC proof uses; reviewer told to restore the statement), J1 essential-constant-pro-criterion-05py), 0 wait, 0 lead workers (nothing claimable); since 02:37: 3 merged (all FIX: H1 kflat-derived-tensor-associator (B-action on a K-flat Q undefined), J1 degreewise-epi-kernel-cocone-qis (unforced TR3 component; route via the contractible Cone(id)), J1 picard-cech-cup-pullback-compat (on the lead's restatement; step-3 non-sequitur)), 1 returned (J1 derived-tensor-flat-second-localization: ill-typed F ⊗_B C node); second readings: 4 of 4 had a missed fault |
+| 2026-10-11 02:51 | 864 | 3008 | 1154 | 353 | packet review: 1 reviewer in flight (J1 triangle-morphism-category-05r9), 0 wait (1 returned branch: J1 derived-tensor-flat-second-localization), 0 lead workers (nothing claimable); since 02:44: 3 merged (1 PASS: J1 essential-constant-pro-criterion-05py; 2 FIX: J1 essential-constant-cofinal-0a1s (delivery had dropped the cone-map clauses the 05SC proof uses; statement restored, source Tag 0A1T), H1 complex-lift-class-projective (statement reworded without record, restored; homotopy-only lift, cokernel shift)), 0 returned; pattern: two groups weakened or reworded a statement without statement_change tonight; second readings: 2 of 3 had a missed fault |
 
 **LEAN REFRESH DONE** (2026-10-10 10:53 UTC; the human's decision relayed at 09:47, commit 6fde5cb5d). The done-branch checkout `~/weil-conjectures-slopmaster2` is at `71d63dcf` (from `1ad77be9`, 882 commits; same Mathlib, lake-manifest unchanged; `.lake/build` seeded from the other session's worktree, 10116 jobs built with 12 threads by 10:12). New sorry map `local/sorry_map_slopmaster2_71d63dcf.jsonl.gz`: 32094 declarations (21984 owners after merging auxiliaries; 420 with `sorry`, 271 of them named by no node), made with the `Weil` root included; the first run died with the session at the 21st account limit and was rerun detached (10:30–10:47). Names added to the audit: the `lean = [...]` lists of `upstream-blueprint-main` (849 lists, 508 for DAG nodes, 754 names; an old `blueprint_lean` name absent from the branch is `superseded` when the current list exists) and the docstring tags `(blueprint: <id>)`: 1438 tag ids; **822 declarations with such a tag matched a node** (exact tags for 473 nodes; qualified tags such as "the implication (1) ⇒ (2)" for 78 nodes, which count as partial and never close a node); 182 tagged ids are no DAG node, 75 tags sit outside a declaration docstring. Also a list of every declaration of the imported libraries (`local/library_names_mathlib.tsv.gz`, 473131 names, `tools/library_names.lean`), so that a Mathlib declaration named by the blueprint counts as found and sorry-free. The lean-lsp server already serves the new checkout (it finds the new declarations), no restart needed.
 
@@ -541,6 +542,7 @@ Numbers (the DAG as of the refresh, 4471 nodes; the "before" is the same DAG und
 | 2026-10-11 02:30 | 170 of 789 | 17 |
 | 2026-10-11 02:37 | 170 of 789 | 17 |
 | 2026-10-11 02:44 | 170 of 789 | 17 |
+| 2026-10-11 02:51 | 170 of 789 | 17 |
 
 Review lag (10:12 UTC): 11 deliveries waiting, the oldest since 09:36 UTC (about 35 minutes), more than the twenty minutes the human set; the lead missed them while the delivery watch slept (10-minute polling) during the Lean refresh. Working through them now; the watch is now checked at every review.
 
