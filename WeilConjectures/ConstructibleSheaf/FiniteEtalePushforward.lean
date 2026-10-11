@@ -86,11 +86,12 @@ lemma exists_comp_eq_of_etale {U X : Scheme.{u}} (g : U ⟶ X) [Etale g] {Ω : T
   exact ψ.commutes a
 
 /-- Limits of size `u` exist in `ModuleCat.{u + 1} Λ`. -/
-local instance {Λ : Type (u + 1)} [CommRing Λ] : HasLimitsOfSize.{u, u} (ModuleCat.{u + 1} Λ) :=
+local instance hasLimitsOfSizeModuleCat_finiteEtale {Λ : Type (u + 1)} [CommRing Λ] :
+    HasLimitsOfSize.{u, u} (ModuleCat.{u + 1} Λ) :=
   hasLimitsOfSizeShrink.{u, u, u + 1, u + 1} _
 
 /-- The forgetful functor of `ModuleCat.{u + 1} Λ` preserves filtered colimits of size `u`. -/
-local instance {Λ : Type (u + 1)} [CommRing Λ] :
+local instance preservesFilteredColimits_finiteEtale {Λ : Type (u + 1)} [CommRing Λ] :
     PreservesFilteredColimitsOfSize.{u, u} (CategoryTheory.forget (ModuleCat.{u + 1} Λ)) :=
   preservesFilteredColimitsOfSize_shrink.{u, u + 1, u, u + 1} _
 
@@ -121,6 +122,22 @@ theorem isFiniteLocallyConstantSheaf_lowerStar_constantSheaf {V X : Scheme.{u}}
       ModuleCat.piIsoPi.{u + 1, u, u + 1} (fun _ : S ↦ M)
     have : Module.Finite Λ (S → M) := Module.Finite.pi
     exact ((ModuleCat.isFinitelyGenerated_iff (ModuleCat.of Λ (S → M))).2 this).of_iso e.symm⟩
+
+
+/-- **Extensions by zero of finite constant sheaves along finite étale morphisms are
+constructible**, indeed finite locally constant: for finite étale `v`, the extension by zero
+`v_!` and the pushforward `v_*` are both left adjoint to `v^*`. This is the finite case of
+[Stacks 03SA]. -/
+theorem isFiniteLocallyConstantSheaf_etaleLowerShriek_constantSheaf {V X : Scheme.{u}}
+    {Λ : Type (u + 1)} [CommRing Λ] (v : V ⟶ X) [IsFinite v] [Etale v]
+    (M : ModuleCat.{u + 1} Λ) [Module.Finite Λ M] :
+    IsFiniteLocallyConstantSheaf
+      ((Etale.etaleLowerShriek (ModuleCat.{u + 1} Λ) v inferInstance).obj
+      ((constantSheaf V.smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj M)) := by
+  have := isFiniteLocallyConstantSheaf_lowerStar_constantSheaf v M
+  exact IsFiniteLocallyConstantSheaf.of_iso
+    (((Etale.etaleLowerShriekUpperStarAdjunction _ v inferInstance).leftAdjointUniq
+      (Etale.lowerStarUpperStarAdjunctionOfIsFinite _ v)).app _).symm
 
 
 end AlgebraicGeometry.Scheme

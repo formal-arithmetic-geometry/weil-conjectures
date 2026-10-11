@@ -178,7 +178,8 @@ noncomputable def lowerStarTrivialCoverFoldToRestriction
        exact (trivialCoverSectionHom_naturality g.unop s).symm }⟩
 
 /-- Limits of size `u` exist in `ModuleCat.{u + 1} Λ`. -/
-local instance : HasLimitsOfSize.{u, u} (ModuleCat.{u + 1} Λ) :=
+local instance hasLimitsOfSizeModuleCat_trivialCover :
+    HasLimitsOfSize.{u, u} (ModuleCat.{u + 1} Λ) :=
   hasLimitsOfSizeShrink.{u, u, u + 1, u + 1} _
 
 /-- **The pushforward along a trivial cover is the product of the restrictions to the copies.**
