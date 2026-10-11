@@ -4098,3 +4098,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 09:52 L: merged deliver/F1/lem-weil-pbc-essentially-smooth-composition (stage 2; reviewer PASS; first push; Sheaf.RingTheory.EssentiallySmoothComp RingHom.essentiallySmooth_comp)
 - 09:52 L: merged deliver/F1/lem-weil-pbc-double-complex-zigzag-module-functorial (stage 2; reviewer PASS; first push; Sheaf.Algebra.Homology.ZigzagModuleFunctorial HomologicalComplex₂.zigzagModule_functorial)
 - 09:52 L: merged deliver/C1/lem-weil-pbc-criterion-flatness-fibre-noetherian (stage 2; reviewer FIX; first push; Sheaf.RingTheory.FlatAndFlatOfFlatFibreNoetherian Module.flat_and_flat_of_flat_fibre_noetherian)
+- 09:52 L: merged deliver/G1/lem-weil-pbc-derived-exchange-termwise (stage 2; reviewer FIX; first push; Sheaf.AlgebraicGeometry.DerivedExchangeTermwise AlgebraicGeometry.derivedExchangeTermwise)
