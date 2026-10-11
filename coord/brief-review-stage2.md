@@ -50,6 +50,8 @@ You are the independent reviewer of one stage-2 delivery (a Lean statement or de
 - A dead inflight landing record (merging process gone): `tools/landing.py abort <id>` (C1 2556ce25a).
 - ⨁ on sheaves of modules needs a local `HasFiniteBiproducts.of_hasFiniteProducts` instance (`Abelian.hasFiniteBiproducts` is a theorem, not an instance) (E1 45deb4957).
 - Support of a module is inline `{x | ¬ Subsingleton (F.presheaf.stalk x)}` (C1 14e331910; STATE line SUPPORT OF A MODULE); stalks as objects/maps `RingedSpace.moduleStalkFunctor` (STATE line MODULE STALKS).
+- RULING 14:36: an `existing: true` record may point at a strictly more general proved theorem whose conclusion is identical (G1 7c2126497, precedent R-pbc1540).
+- A compile time claimed by a group is measured, not trusted (G1 2903b73a1 claimed 30 s, took 100 s); a node rewrite (H7) or a re-pointed definition record (H13) in a delivery is reverted (G1 a92d806c5).
 - No `show … from` in statements: it elaborates as a hidden `have`; name equivalences with `Equivalence.functor (C := …) (D := …)` and cast sections with `@id T x` (G1 ce180b4c0, M1 991a80c11).
 - No file-local `notation`, `local instance`, `private` definition or abbreviation in a statement module; a statement must read outside its file and namespace (`Module.Basis`, not `Basis`) (F1 91b674ef5, J1 f048a280a, E1 b5d12a0ed; STATE line FILE-LOCAL NOTATION).
 - Derived tensor on schemes: new statements use the global `schemeDerivedTensorMonoidal` (def-pc-scheme-derived-tensor-structure, M1 0ec9b24af) with `⊗`, `▷`, `𝟙_`; landed K-flat-representative statements stay valid; never a second derived-tensor definition (STATE line DERIVED TENSOR ON SCHEMES).
