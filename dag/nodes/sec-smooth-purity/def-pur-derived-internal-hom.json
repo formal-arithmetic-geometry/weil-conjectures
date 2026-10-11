@@ -77,5 +77,30 @@
   "result": "pass"
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-def-sf-operations"
+ "unit": "sk-def-sf-operations",
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.DerivedInternalHom",
+  "declaration": "CategoryTheory.derivedInternalHom",
+  "file": "lean/Sheaf/Algebra/Homology/DerivedInternalHom.lean",
+  "statement": "def derivedInternalHom {C : Type u} [SmallCategory C] (J : GrothendieckTopology C) (R : Sheaf J CommRingCat.{u}) [HasDerivedCategory.{w} (SheafOfModules.{u} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R))] : (DerivedCategory (SheafOfModules.{u} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R)))ᵒᵖ × DerivedCategory (SheafOfModules.{u} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R)) ⥤ DerivedCategory (SheafOfModules.{u} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R))",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-11",
+  "existing": false,
+  "declarations": [
+   "CategoryTheory.derivedInternalHom_inverts",
+   "CategoryTheory.derivedInternalHom",
+   "CategoryTheory.derivedInternalHom_comparison",
+   "CategoryTheory.derivedInternalHom_obj_iso"
+  ],
+  "fixed_by": "R-dih"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-dih",
+  "group": "H1",
+  "result": "fix",
+  "note": "small site C/J, commutative R, SheafOfModules over sheafCompose forget₂, D(O) via HasDerivedCategory.{w}, D^op×D⥤D via Localization.lift over Q.op.prod Q of (L,M)↦Q Hom^•(L,I(M)) with upstream kInjectiveResolutionFunctor, homComplexFunctor of def-pur-hom-complex, qis-invariance from lem-pur-rhom-well-defined, comparison for any functorial K-inj replacement, representative independence"
+ }
 }
