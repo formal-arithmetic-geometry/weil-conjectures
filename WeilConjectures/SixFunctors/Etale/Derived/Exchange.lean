@@ -10,6 +10,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.Coefficients
 public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.Proper
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekBaseChange
 public import WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormula
+public import WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormula.Reduction
 
 /-!
 # Compact-support base change, the projection formula and finite reduction
@@ -171,14 +172,19 @@ reduction
 
 `Rf_!(K ⊗^L (Λ/J)_X) ≅ (Rf_! K) ⊗^L (Λ/J)_Y`.
 
-This is one of the three compatibilities out of which the comparison square of
-`sk-prop-sf-pf-reduction` is built, and the only one that is not formal; it is what reduces
-the projection formula at level `n` to the projection formula at level `m ≤ n`. -/
-theorem nonempty_iso_reductionModIdeal_rightDerivedLowerShriek (J : Ideal Λ) :
+For a finite coefficient ring `Λ` (the blueprint's `A_{E,n}`). This is one of the three
+compatibilities out of which the comparison square of `sk-prop-sf-pf-reduction`
+(`AlgebraicGeometry.Etale.projectionMapOfCompactification_constantSingle`) is built, and the only
+one that is not formal. The isomorphism is the comparison
+`AlgebraicGeometry.Etale.rightDerivedLowerShriekReductionModIdealMap`, the projection map at
+`(K, (Λ/J)_Y)`, invertible by the projection formula at finite coefficients. -/
+theorem nonempty_iso_reductionModIdeal_rightDerivedLowerShriek [Finite Λ] (J : Ideal Λ) :
     Nonempty (R(f)_![ModuleCat.{u + 1} Λ] ⋙ reductionModIdeal Λ Y J ≅
       reductionModIdeal Λ X J ⋙ R(f)_![ModuleCat.{u + 1} Λ]) :=
-  sorry
+  ⟨asIso (rightDerivedLowerShriekReductionModIdealMap Λ J
+    (HasCompactification.compactification f))⟩
 
+omit [HasCompactification f] in
 /-- Blueprint `sk-prop-sf-pf-reduction`: Projection formula: compatibility with finite
 reduction
 
@@ -193,13 +199,14 @@ makes the comparison square of the blueprint commute. -/
 theorem nonempty_iso_reductionModIdeal_leftDerivedUpperStar (J : Ideal Λ) :
     Nonempty (reductionModIdeal Λ Y J ⋙ L((f)^*[ModuleCat.{u + 1} Λ]) ≅
       L((f)^*[ModuleCat.{u + 1} Λ]) ⋙ reductionModIdeal Λ X J) :=
-  sorry
+  ⟨leftDerivedUpperStarReductionModIdealIso Λ J f⟩
 
 end Projection
 
 section LowerStar
 
-/-- Used in blueprint `sk-lem-finite`.
+/-- Blueprint `lem-fix-operation-reduction`: Basic operations and coefficient reduction; the
+ordinary direct image. Used in blueprint `sk-lem-finite`.
 
 **`Rf_*` commutes with reduction modulo a principal ideal.** For `f : X ⟶ Y` arbitrary and a
 principal ideal `J` of a domain `Λ`, the square
@@ -217,20 +224,30 @@ commutes up to isomorphism:
 `R(f)_* ⋙ reductionModIdeal Λ Y J ≅ reductionModIdeal Λ X J ⋙ R(f)_*`.
 
 The hypotheses only serve to make `Λ/J` a perfect `Λ`-module, which is all the proof uses:
-for `J = (π)` with `π ≠ 0`, the module `Λ/J` is the cone of `π : Λ → Λ`, and for `J = 0` it
-is `Λ`. This is the reduction `𝒪_E → 𝒪_E/𝔪_Eⁿ` that carries `sk-lem-finite` from the finite
-stages to the integral stage `𝒪_E`, and the input of
+for `J = (π)` with `π ≠ 0`, the module `Λ/J` is the cokernel of `π : Λ → Λ`, and for `J = 0` it
+is `Λ`. So the constant complex `(Λ/J)_Y` is dualizable, and the comparison
+`AlgebraicGeometry.Etale.rightDerivedLowerStarReductionModIdealMap` (the projection map of `Rf_*`
+at `(Λ/J)_Y`) is an isomorphism
+(`AlgebraicGeometry.Etale.isIso_rightDerivedLowerStarReductionModIdealMap_span_pow`).
+This is the reduction `𝒪_E → 𝒪_E/𝔪_Eⁿ` that carries `sk-lem-finite` from the finite stages to the integral stage `𝒪_E`, and the input of
 `AlgebraicGeometry.Etale.derivedComplete_rightDerivedLowerStar`. -/
 theorem nonempty_iso_reductionModIdeal_rightDerivedLowerStar (f : X ⟶ Y) [IsDomain Λ]
     (J : Ideal Λ) (hJ : J.IsPrincipal) :
     Nonempty (R((f)_*[ModuleCat.{u + 1} Λ]) ⋙ reductionModIdeal Λ Y J ≅
-      reductionModIdeal Λ X J ⋙ R((f)_*[ModuleCat.{u + 1} Λ])) :=
-  -- Proof sketch: for `J = (π)` with `π ≠ 0`, `π` is a nonzerodivisor, so the constant
-  -- complex `(Λ/J)_Z` is the cone of `π : Λ_Z → Λ_Z` and `– ⊗ᴸ (Λ/J)_Z` is the cone of
-  -- multiplication by `π`, naturally on `D(Z_ét, Λ)`. The triangulated functor `Rf_*` is
-  -- `Λ`-linear, so it commutes with multiplication by `π` and hence with its cone. For
-  -- `J = 0` both reductions are isomorphic to the identity.
-  sorry
+      reductionModIdeal Λ X J ⋙ R((f)_*[ModuleCat.{u + 1} Λ])) := by
+  obtain ⟨π, rfl⟩ := hJ.principal
+  by_cases hπ : π = 0
+  · have hbot : (Submodule.span Λ {π} : Ideal Λ) = ⊥ := by
+      rw [hπ]
+      exact Ideal.span_singleton_eq_bot.mpr rfl
+    rw [hbot]
+    have := isIso_rightDerivedLowerStarReductionModIdealMap_bot Λ f
+    exact ⟨asIso (rightDerivedLowerStarReductionModIdealMap Λ ⊥ f)⟩
+  · have hpow : (Submodule.span Λ {π} : Ideal Λ) = Ideal.span {π} ^ 1 := (pow_one _).symm
+    rw [hpow]
+    have := isIso_rightDerivedLowerStarReductionModIdealMap_span_pow
+      (mem_nonZeroDivisors_of_ne_zero hπ) 1 f
+    exact ⟨asIso (rightDerivedLowerStarReductionModIdealMap Λ (Ideal.span {π} ^ 1) f)⟩
 
 end LowerStar
 

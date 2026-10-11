@@ -70,9 +70,9 @@ end CategoryTheory
 
 namespace DerivedCategory
 
-variable {A : Type u} [Category.{v} A] [Abelian A] [IsGrothendieckAbelian.{v} A]
-  [MonoidalCategory A] [MonoidalPreadditive A] [MonoidalClosed A] [BraidedCategory A]
-  [HasDerivedCategory.{v} A] [Abelian.HasFunctorialFlatResolution A]
+section
+
+variable {A : Type u} [Category.{v} A] [Abelian A] [MonoidalCategory A]
 
 /-- The mapping cone of a morphism `X₁[0] ⟶ X₂[0]` of complexes concentrated in degree zero
 has its terms of degree `-1` and `0` dualizable as soon as `X₁` and `X₂` are, and all other
@@ -97,6 +97,12 @@ lemma isDualizable_mappingCone_single_X {X₁ X₂ : A} (h₁ : IsDualizable X�
   · refine IsDualizable.biprod_of_isZero_left (IsZero.isDualizable ?_) ?_
     · exact HomologicalComplex.isZero_single_obj_X _ _ _ _ hn'
     · exact HomologicalComplex.isZero_single_obj_X _ _ _ _ (by lia)
+
+end
+
+variable {A : Type u} [Category.{v} A] [Abelian A] [IsGrothendieckAbelian.{v} A]
+  [MonoidalCategory A] [MonoidalPreadditive A] [MonoidalClosed A] [BraidedCategory A]
+  [HasDerivedCategory.{v} A] [Abelian.HasFunctorialFlatResolution A]
 
 /-- **The cokernel of a monomorphism between dualizable objects is dualizable in `D(A)`.** For
 a short exact sequence `0 ⟶ X₁ ⟶ X₂ ⟶ X₃ ⟶ 0` in `A` with `X₁` and `X₂` dualizable, the complex
