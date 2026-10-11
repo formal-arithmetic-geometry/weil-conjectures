@@ -3901,3 +3901,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 08:52 L: merged deliver/H1/lem-weil-pbc-annihilator-localization-finite (stage 2; reviewer PASS; first push; Sheaf.RingTheory.AnnihilatorLocalizationAway Module.annihilator_localization_away_of_finite)
 - 08:52 L: merged deliver/H1/lem-weil-pbc-adjunction-lifts-group-ring-objects (stage 2; reviewer PASS; first push; Sheaf.CategoryTheory.Adjunction.LiftsGroupRingObjects CategoryTheory.Adjunction.liftsGroupRingObjects)
 - 08:53 L: merged deliver/K1/lem-weil-derived-limit-existence (stage 2; reviewer PASS; first push; Sheaf.CategoryTheory.Triangulated.DerivedLimitExistence CategoryTheory.exists_isDerivedLimit_and_iso)
+- 08:53 L: merged deliver/F1/lem-kun-04ca (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.EtaleClosedImmersionEssentialImage AlgebraicGeometry.Etale.lowerStar_closedImmersion_fullyFaithful_leftInverse_essImage)
