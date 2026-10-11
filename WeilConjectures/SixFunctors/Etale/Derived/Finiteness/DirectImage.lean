@@ -12,13 +12,12 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.Constructible
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.KInjective
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Triangulated
 public import WeilConjectures.ConstructibleSheaf.OpenClosed
-public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.Basic
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.TStructure
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme
-public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Etale
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
 public import WeilConjectures.SixFunctors.Etale.Derived.Shift
+public import WeilConjectures.SixFunctors.Etale.Derived.Supports
 public import WeilConjectures.SixFunctors.Etale.Derived.Triangulated
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStar
 public import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.FullyFaithful
@@ -147,20 +146,6 @@ lemma boundedConstructible_of_isZero
   exact ⟨⟨⟨0, (_root_.DerivedCategory.isGE_iff K 0).2 fun i _ ↦ h i⟩,
     ⟨0, (_root_.DerivedCategory.isLE_iff K 0).2 fun i _ ↦ h i⟩⟩,
     fun n ↦ IsConstructibleSheaf.of_isZero (h n)⟩
-
-omit [Finite Λ] in
-/-- Every object of the derived category of étale sheaves on an empty scheme is zero. -/
-lemma isZero_of_isEmpty [IsEmpty X]
-    (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
-    IsZero K :=
-  _root_.DerivedCategory.isZero_of_forall_isZero (Scheme.Etale.isZero_sheaf_of_isEmpty ·) K
-
-omit [Finite Λ] in
-/-- An open immersion into a scheme whose underlying space is noetherian is quasi-compact. -/
-lemma quasiCompact_of_isOpenImmersion_of_noetherianSpace (j : X ⟶ Y) [IsOpenImmersion j]
-    [TopologicalSpace.NoetherianSpace Y] : QuasiCompact j :=
-  have : TopologicalSpace.NoetherianSpace X := j.isOpenEmbedding.isInducing.noetherianSpace
-  ⟨fun _ _ _ ↦ TopologicalSpace.NoetherianSpace.isCompact _⟩
 
 omit [Finite Λ] in
 /-- Extension by zero along a quasi-compact open immersion `j` preserves bounded
@@ -336,7 +321,7 @@ theorem boundedConstructible_rightDerivedLowerStar_of_hasInvertibleExponent (f :
   cases isEmpty_or_nonempty X with
   | inl hX =>
     exact boundedConstructible_of_isZero Λ
-      ((R((f)_*[ModuleCat.{u + 1} Λ])).map_isZero (isZero_of_isEmpty Λ K))
+      ((R((f)_*[ModuleCat.{u + 1} Λ])).map_isZero (isZero_derivedCategory_of_isEmpty _ X K))
   | inr hX =>
     have := HasInvertibleExponent.of_hom_of_nonempty (Λ := Λ) aX
     have : QuasiCompact aX := hf ▸ inferInstance
@@ -363,7 +348,7 @@ theorem boundedConstructible_rightDerivedLowerShriek (f : X ⟶ Y) [HasCompactif
   cases isEmpty_or_nonempty X with
   | inl hX =>
     exact boundedConstructible_of_isZero Λ
-      ((R(f)_![ModuleCat.{u + 1} Λ]).map_isZero (isZero_of_isEmpty Λ K))
+      ((R(f)_![ModuleCat.{u + 1} Λ]).map_isZero (isZero_derivedCategory_of_isEmpty _ X K))
   | inr hX =>
     have := HasInvertibleExponent.of_hom_of_nonempty (Λ := Λ) (f ≫ aY)
     let c := HasCompactification.compactification f
@@ -371,7 +356,7 @@ theorem boundedConstructible_rightDerivedLowerShriek (f : X ⟶ Y) [HasCompactif
     have : CompactSpace Y := QuasiCompact.compactSpace_of_compactSpace aY
     have : CompactSpace c.Z := QuasiCompact.compactSpace_of_compactSpace c.g
     have : IsNoetherian c.Z := { __ := LocallyOfFiniteType.isLocallyNoetherian (c.g ≫ aY) }
-    have := quasiCompact_of_isOpenImmersion_of_noetherianSpace c.i
+    have : TopologicalSpace.NoetherianSpace X := c.i.isOpenEmbedding.isInducing.noetherianSpace
     exact boundedConstructible_rightDerivedLowerStar_of_hasInvertibleExponent Λ c.g (c.g ≫ aY) aY
       rfl _ (boundedConstructible_mapDerivedCategory_openImmersionLowerShriek Λ c.i hK)
 
@@ -421,7 +406,7 @@ theorem isZero_homology_rightDerivedLowerShriek (f : X ⟶ Y) [HasCompactificati
   cases isEmpty_or_nonempty X with
   | inl hX =>
     exact (_root_.DerivedCategory.homologyFunctor _ q).map_isZero
-      ((R(f)_![ModuleCat.{u + 1} Λ]).map_isZero (isZero_of_isEmpty Λ K))
+      ((R(f)_![ModuleCat.{u + 1} Λ]).map_isZero (isZero_derivedCategory_of_isEmpty _ X K))
   | inr hX =>
     have := HasInvertibleExponent.of_hom_of_nonempty (Λ := Λ) aX
     let c := HasCompactification.compactification f
@@ -429,7 +414,6 @@ theorem isZero_homology_rightDerivedLowerShriek (f : X ⟶ Y) [HasCompactificati
     have : CompactSpace c.Z := QuasiCompact.compactSpace_of_compactSpace c.g
     have : IsNoetherian c.Z := { __ := LocallyOfFiniteType.isLocallyNoetherian (c.g ≫ aY) }
     have : TopologicalSpace.NoetherianSpace X := c.i.isOpenEmbedding.isInducing.noetherianSpace
-    have : QuasiCompact aX := ⟨fun _ _ _ ↦ TopologicalSpace.NoetherianSpace.isCompact _⟩
     -- the sheaf case
     have h (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (hF : IsConstructibleSheaf F) :
         _root_.DerivedCategory.TStructure.t.IsLE ((R(f)_![ModuleCat.{u + 1} Λ]).obj
