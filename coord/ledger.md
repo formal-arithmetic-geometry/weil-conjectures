@@ -4270,3 +4270,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 10:37 L: merged deliver/C1/lem-weil-pbc-flat-module-completion-flat (stage 2; reviewer PASS; first push; Sheaf.RingTheory.FlatModuleCompletion Module.flat_adicCompletion)
 - 10:37 L: merged deliver/G1/lem-pur-left-derived-exact-when-defined (stage 2; reviewer PASS; first push; Sheaf.CategoryTheory.LeftDerivedExactWhenDefined CategoryTheory.Functor.leftDerived_exact_when_defined)
 - 10:37 L: merged deliver/J1/lem-weil-pbc-flat-permanence (stage 2; reviewer PASS; first push; Sheaf.RingTheory.FlatPermanence RingHom.flat_of_flat_module_of_faithfullyFlat_module)
+- 10:38 L: merged deliver/F1/lem-weil-pbc-finite-type-domain-dimension-trdeg (stage 2; reviewer FIX; first push; Sheaf.RingTheory.FiniteTypeDomainDimensionTrdeg finiteType_domain_ringKrullDim_eq_trdeg; dropped files: lean/Sheaf/Paper/FiniteTypeDomainDimensionTrdeg.lean)
