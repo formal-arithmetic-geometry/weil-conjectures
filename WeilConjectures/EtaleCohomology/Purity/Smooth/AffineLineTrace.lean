@@ -8,6 +8,8 @@ module
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Line
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.Orientation
 public import WeilConjectures.SixFunctors.Etale.Derived.Composition
+public import WeilConjectures.Mathlib.CategoryTheory.Triangulated.Pretriangulated
+public import WeilConjectures.SixFunctors.Etale.Derived.Triangulated
 public import WeilConjectures.SixFunctors.OpenClosed.Derived
 
 /-!
@@ -280,6 +282,88 @@ lemma affineLineZeroClass_affineLineTrace :
     affineLineZeroClass Λ Y ≫ affineLineTrace Λ Y = 𝟙 _ := by
   rw [affineLineTrace, ← Category.assoc, ← projectiveLineHyperplaneClass,
     projectiveLineHyperplaneClass_projectiveLineTrace]
+
+instance : IsClosedImmersion (ProjectiveLine.infinity Y) := by
+  have : IsClosedImmersion (ProjectiveLine.infinity Y ≫ ProjectiveLine Y ↘ Y) := by
+    rw [ProjectiveLine.infinity_over]
+    infer_instance
+  exact IsClosedImmersion.of_comp _ (ProjectiveLine Y ↘ Y)
+
+omit [HasKummerClass.IsNormalized Λ] [HasInvertibleExponent Λ Y] in
+/-- Restricting a class pulled back from the base to the section at infinity gives the class
+back: `Λ_Y(1)[2] ⟶ Rq_* Λ(1)[2] ⟶ Rq_* R∞_* ∞^* Λ(1)[2]` is an isomorphism, `q ∘ ∞` being the
+identity. -/
+lemma isIso_projectiveLinePullback_comp_unit_infinity :
+    IsIso (projectiveLinePullback Λ Y ≫ R((ProjectiveLine Y ↘ Y)_*[ModuleCat.{u + 1} Λ]).map
+      ((mapDerivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ)
+        (ProjectiveLine.infinity Y)).unit.app ((tateObject Λ (ProjectiveLine Y) 1)⟦(2 : ℤ)⟧))) := by
+  -- the left adjoint `Lq^* ⋙ ∞^*` of the composite adjunction is `L(∞ ≫ q)^* = L(𝟙)^* ≅ 𝟭`
+  have hff := (Functor.FullyFaithful.id _).ofIso
+    (Functor.isoWhiskerLeft L(((ProjectiveLine Y ↘ Y))^*[ModuleCat.{u + 1} Λ])
+        (leftDerivedUpperStarIsoMapDerivedCategory _ (ProjectiveLine.infinity Y)).symm ≪≫
+      (leftDerivedUpperStarComp _ (ProjectiveLine.infinity Y) (ProjectiveLine Y ↘ Y) (𝟙 Y)
+        (by simp)).symm ≪≫
+      leftDerivedUpperStarIsoMapDerivedCategory _ (𝟙 Y) ≪≫
+      Functor.mapDerivedCategoryNatIso (Etale.upperStarId _ Y) ≪≫
+      Functor.mapDerivedCategoryIdIso _).symm
+  have := hff.full
+  have := hff.faithful
+  have hu : IsIso (((derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ)
+      (ProjectiveLine Y ↘ Y)).comp (mapDerivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ)
+        (ProjectiveLine.infinity Y))).unit.app ((tateObject Λ Y 1)⟦(2 : ℤ)⟧)) :=
+    inferInstance
+  rw [Adjunction.comp_unit_app] at hu
+  have hη := (mapDerivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ)
+    (ProjectiveLine.infinity Y)).unit.naturality
+      (leftDerivedUpperStarTateShiftIso Λ (ProjectiveLine Y ↘ Y) 1).hom
+  dsimp at hη
+  rw [projectiveLinePullback, Category.assoc, ← Functor.map_comp, hη, Functor.map_comp,
+    ← Category.assoc]
+  infer_instance
+
+/-- Blueprint `lem-amb-affine-space-top-trace`: The affine-space trace is an isomorphism
+
+*The case of the affine line.* The integration map `∫_p : Rp_! Λ(1)[2] ⟶ Λ_Y` of
+`p : 𝔸¹_Y ⟶ Y` is an isomorphism. Push forward the open–closed triangle
+`j_! Λ(1)[2] ⟶ Λ(1)[2] ⟶ ∞_* Λ(1)[2]` of `(j, ∞)` along `q`: its second map is `(1, 0)` in the
+decomposition `Rq_* Λ(1)[2] ≅ Λ_Y(1)[2] ⊕ Λ_Y` (restricting to `∞` is inverse to the pullback
+and kills `h`, which comes from `j_!`), so its first map is the inclusion of `Λ_Y`. -/
+theorem isIso_affineLineTrace : IsIso (affineLineTrace Λ Y) := by
+  obtain ⟨w, hw⟩ := exists_distTriang_openClosed (ModuleCat.{u + 1} Λ) (affineLineChart Y)
+    (ProjectiveLine.infinity Y) (range_infinity_eq_compl_range_affineLineChart Y)
+    ((tateObject Λ (ProjectiveLine Y) 1)⟦(2 : ℤ)⟧)
+  have hT := R((ProjectiveLine Y ↘ Y)_*[ModuleCat.{u + 1} Λ]).map_distinguished _ hw
+  have := isIso_projectiveLineDecomposition Λ Y
+  have h0 : (derivedOpenImmersionLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} Λ)
+        (affineLineChart Y)).counit.app ((tateObject Λ (ProjectiveLine Y) 1)⟦(2 : ℤ)⟧) ≫
+      (mapDerivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ)
+        (ProjectiveLine.infinity Y)).unit.app ((tateObject Λ (ProjectiveLine Y) 1)⟦(2 : ℤ)⟧) =
+      0 :=
+    comp_distTriang_mor_zero₁₂ _ hw
+  have hB : IsIso (biprod.inl ≫ projectiveLineDecomposition Λ Y ≫
+      R((ProjectiveLine Y ↘ Y)_*[ModuleCat.{u + 1} Λ]).map
+        ((mapDerivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ)
+          (ProjectiveLine.infinity Y)).unit.app
+            ((tateObject Λ (ProjectiveLine Y) 1)⟦(2 : ℤ)⟧))) := by
+    rw [projectiveLineDecomposition, biprod.inl_desc_assoc]
+    exact isIso_projectiveLinePullback_comp_unit_infinity Λ Y
+  have hD : biprod.inr ≫ projectiveLineDecomposition Λ Y ≫
+      R((ProjectiveLine Y ↘ Y)_*[ModuleCat.{u + 1} Λ]).map
+        ((mapDerivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ)
+          (ProjectiveLine.infinity Y)).unit.app
+            ((tateObject Λ (ProjectiveLine Y) 1)⟦(2 : ℤ)⟧)) = 0 := by
+    rw [projectiveLineDecomposition, biprod.inr_desc_assoc, projectiveLineHyperplaneClass,
+      affineLineForgetSupports]
+    simp only [Category.assoc, ← Functor.map_comp, h0, comp_zero, Functor.map_zero]
+  have key := Pretriangulated.isIso_comp_inv_comp_biprod_snd hT
+    (projectiveLineDecomposition Λ Y) hB hD
+  have key' : IsIso (R((ProjectiveLine Y ↘ Y)_*[ModuleCat.{u + 1} Λ]).map
+      ((derivedOpenImmersionLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} Λ)
+        (affineLineChart Y)).counit.app ((tateObject Λ (ProjectiveLine Y) 1)⟦(2 : ℤ)⟧)) ≫
+      inv (projectiveLineDecomposition Λ Y) ≫ biprod.snd) := key
+  rw [affineLineTrace, affineLineForgetSupports, projectiveLineTrace]
+  simp only [Functor.map_comp, Category.assoc]
+  infer_instance
 
 end Trace
 

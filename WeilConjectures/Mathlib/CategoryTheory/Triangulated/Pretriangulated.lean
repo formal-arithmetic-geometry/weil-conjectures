@@ -222,6 +222,45 @@ theorem exists_distTriang_counit_of_subsingleton {F : D ⥤ C} {G : C ⥤ D} (ad
 
 end Adjunction
 
+section Biproduct
+
+variable [HasBinaryBiproducts C]
+
+/-- Let `X ⟶[a] M ⟶[b] N` be a distinguished triangle and `φ : B ⊞ D ≅ M` a decomposition of its
+middle term such that `b` is invertible on `B` and zero on `D`. Then `a` followed by the
+projection onto `D` is an isomorphism `X ≅ D`. -/
+lemma isIso_comp_inv_comp_biprod_snd {T : Triangle C} (hT : T ∈ distTriang C) {B D : C}
+    (φ : B ⊞ D ⟶ T.obj₂) [IsIso φ] (hB : IsIso (biprod.inl ≫ φ ≫ T.mor₂))
+    (hD : biprod.inr ≫ φ ≫ T.mor₂ = 0) :
+    IsIso (T.mor₁ ≫ inv φ ≫ biprod.snd) := by
+  have hT₁ : Triangle.mk (biprod.inr : D ⟶ B ⊞ D) (biprod.fst ≫ biprod.inl ≫ φ ≫ T.mor₂) 0 ∈
+      distTriang C := by
+    refine isomorphic_distinguished _ (binaryBiproductTriangle_distinguished D B) _ ?_
+    refine Triangle.isoMk _ _ (Iso.refl _) (biprod.braiding B D)
+      (asIso (biprod.inl ≫ φ ≫ T.mor₂)).symm ?_ ?_ ?_
+    · apply biprod.hom_ext <;> simp
+    · dsimp
+      erw [Category.assoc, IsIso.hom_inv_id, Category.comp_id, biprod.lift_snd]
+    · simp
+  have hcomm : (biprod.fst ≫ biprod.inl ≫ φ ≫ T.mor₂) ≫ 𝟙 _ = φ ≫ T.mor₂ := by
+    apply biprod.hom_ext'
+    · simp
+    · simp [hD]
+  obtain ⟨θ, hθ, hθ₃⟩ := complete_distinguished_triangle_morphism₁ _ T hT₁ hT φ (𝟙 _) hcomm
+  have : IsIso θ := isIso₁_of_isIso₂₃ (Triangle.homMk _ T θ φ (𝟙 _) hθ hcomm hθ₃) hT₁ hT
+    (inferInstanceAs (IsIso φ)) (inferInstanceAs (IsIso (𝟙 _)))
+  have hθ' : (biprod.inr : D ⟶ B ⊞ D) ≫ φ = θ ≫ T.mor₁ := by simpa using hθ
+  have h : θ ≫ T.mor₁ ≫ inv φ ≫ biprod.snd = 𝟙 D := by
+    rw [← reassoc_of% hθ']
+    simp
+  have h' : T.mor₁ ≫ inv φ ≫ biprod.snd = inv θ := by
+    rw [← cancel_epi θ, h, IsIso.hom_inv_id]
+    rfl
+  rw [h']
+  infer_instance
+
+end Biproduct
+
 end Pretriangulated
 
 end CategoryTheory
