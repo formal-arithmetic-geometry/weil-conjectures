@@ -31,7 +31,7 @@ namespace AlgebraicGeometry
 
 /-- The structure sheaf viewed as a sheaf of rings, as in the module-stalk siblings.
 Source: Stacks, Tag 08BW (blueprint: lem-sc-derived-hom-mayer-vietoris). -/
-private abbrev moduleRings (X : RingedSpace.{u}) :=
+abbrev moduleRings (X : RingedSpace.{u}) :=
   (sheafCompose (Opens.grothendieckTopology X)
     (forget₂ CommRingCat.{u} RingCat.{u})).obj X.sheaf
 

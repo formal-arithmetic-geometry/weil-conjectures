@@ -24,7 +24,8 @@
   "def-pc-scheme",
   "def-pc-reduced-scheme",
   "def-weil-closed-immersion",
-  "def-sc-invertible-module"
+  "def-sc-invertible-module",
+  "def-weil-pbc-ample-invertible-module"
  ],
  "proof": [
   {
@@ -126,5 +127,24 @@
   "group": "E1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-gcl (reviewer sub-agent of L); spot-checked: Source Varieties Lemma 09NE (varieties-lemma-glue-invertible-sheaves, varieties.tex 7990-8088) read in full; the item statement agrees hypothesis by hypothesis (X reduced, set-theoretic cover by closed subschemes, discrete pairwise intersections; both conclusions, sections nonvanishing at points of Z_i cap Z_j). Step 1 carried by lem-sc-glue-component-reduced-cover-sections, which I checked true: T is closed (finite union of closed sets), the Z_i minus T are finitely many disjoint closed sets covering X minus T hence clopen, and a closed subscheme with full support in a reduced scheme is the whole open, giving the product of sections. Step 2 elementary (local triviality, discreteness of T, shrinking U_t away from Z_k not containing t and to where s_i is nonvanishing, possible since t in T lies in two components). Step 3: overlaps U_t cap U_ij and U_t cap U_t' lie in X minus T so the reduced-cover node turns component transition functions into units of O_X; cocycle holds componentwise; glued by lem-sc-glue-component-transition-cocycle (true: standard Cech gluing, convention g_ac=g_ab g_bc consistent with g_ab = phi_a phi_b^-1). Step 4 sheaf axiom, as in the source. Cited defs def-sc-invertible-module, def-pc-reduced-scheme, def-weil-closed-immersion read. Small cases: T empty, r=1. No Mathlib leaves; blueprint_refs search cocycle/glue found no same_as. FIX: dag/nodes/sec-curve-estimates/lem-sc-glue-component-transition-cocycle.json: source: Schemes Lemma 01JB is gluing of schemes, replaced by Sheaves Lemma 00AM (gluing sheaves of O-modules, sheaves.tex). Start Sat Oct 10 03:13:42 PM UTC 2026, end Sat Oct 10 03:14:35 PM UTC 2026.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GlueComponentLineBundles",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.glueComponentLineBundles",
+  "file": "lean/Sheaf/AlgebraicGeometry/GlueComponentLineBundles.lean",
+  "statement": "theorem glueComponentLineBundles {Y : Scheme.{u}} [IsReduced Y] {ι : Type v} [Finite ι] (Z : ι → Scheme.{u}) (i : ∀ a : ι, Z a ⟶ Y) [∀ a : ι, IsClosedImmersion (i a)] (hcover : (⋃ a : ι, Set.range (i a)) = Set.univ) (hdiscrete : ∀ a b : ι, a ≠ b → DiscreteTopology ↥(Set.range (i a) ∩ Set.range (i b))) (M : ∀ a : ι, (Z a).Modules) [∀ a : ι, (M a).IsInvertible] : let res : ∀ (N : Y.Modules) (a : ι), Γ(N, ⊤) → Γ((tensorPullback (i a)).obj N, ⊤) := fun N a t ↦ ((Classical.choose (exists_tensorPullbackAdjunction (i a))).unit.app N).val.app (op ⊤) t (∃ N : Y.Modules, N.IsInvertible ∧ ∀ a : ι, Nonempty ((tensorPullback (i a)).obj N ≅ M a)) ∧ ∀ s : ∀ a : ι, Γ(M a, ⊤), (∀ a b : ι, a ≠ b → Set.range (i a) ∩ Set.range (i b) ⊆ i a '' nonvanishingLocus (M a) (s a)) → ∃ (N : Y.Modules) (t : Γ(N, ⊤)), N.IsInvertible ∧ ∀ a : ι, ∃ e : (tensorPullback (i a)).obj N ≅ M a, e.hom.val.app (op ⊤) (res N a t) = s a",
+  "branch": "sheaf-dag",
+  "by": "K1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-gcl1201"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-gcl1201",
+  "group": "K1",
+  "result": "fix",
+  "note": "Y reduced [IsReduced Y]; finite family {ι : Type v} [Finite ι] of closed immersions i a; set cover via Set.range union = univ; DiscreteTopology of range(i a) ∩ range(i b) for a≠b; M a invertible; conj 1: ∃ invertible N with tensorPullback (i a) N ≅ M a; conj 2: sections with range∩range ⊆ i a '' nonvanishingLocus give one t : Γ(N,⊤) whose canonical-adjunction restriction maps to s a under e; edge cases ι empty (Y empty), single component. FIX: Mathlib Scheme.Modules.pullback/pullbackPushforwardAdjunction replaced by project tensorPullback + exists_tensorPullbackAdjunction (H4/H12); binders aligned with M1/H1 siblings; declaration moved to namespace Scheme.Modules"
  }
 }
