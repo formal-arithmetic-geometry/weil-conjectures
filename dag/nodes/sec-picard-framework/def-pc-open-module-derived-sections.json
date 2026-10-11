@@ -1,0 +1,118 @@
+{
+ "id": "def-pc-open-module-derived-sections",
+ "kind": "definition",
+ "title": "Unbounded derived sections of modules over an open",
+ "status": "split",
+ "statement": "Let $(X,\\mathcal O_X)$ be a ringed space and $U\\subseteq X$ open. The category $\\operatorname{Mod}(\\mathcal O_X)$ of module sheaves [def-weil-sheaf-of-modules-category] and the category $\\operatorname{Ab}$ admit K-injective resolutions [prop-pur-kinjective-resolutions-exist] [def-pur-kinjective-complex]. Define $R\\Gamma(U,-):D(\\mathcal O_X)\\to D(\\operatorname{Ab})$ [def-weil-abstract-derived-category] as the unbounded right derived functor of the sections functor $\\Gamma(U,-)$ [def-sc-open-module-cohomology], computed by K-injective resolutions: for a K-injective representative $I^\\bullet$ it is represented by the complex of termwise sections $\\Gamma(U,I^\\bullet)$. Define $H^m(U,K)=H^m(R\\Gamma(U,K))$ for every $m\\in\\mathbf Z$.",
+ "stmt_deps": [
+  "def-weil-sheaf-of-modules-category",
+  "prop-pur-kinjective-resolutions-exist",
+  "def-pur-kinjective-complex",
+  "def-weil-abstract-derived-category",
+  "def-sc-open-module-cohomology"
+ ],
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 0D60, setup of lemma-RGamma-commutes-with-Rlim; Injectives, Tag 079P"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "unbounded derived sections of modules on an open subset of a ringed space",
+   "results": "[leansearch] UNAVAILABLE 0 hit(s) | service unavailable: Internal Server Error",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.evaluation, Functor.rightDerivedFunctor",
+   "results": "[loogle] OK 0 hit(s) | loogle: unknown identifier 'Functor.rightDerivedFunctor'",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "unbounded derived sections functor of module sheaves on an open of a ringed space defined by K-injective resolutions",
+   "results": "[leanfinder] OK 8 hit(s): SheafOfModules.sectionsFunctor, PresheafOfModules.sheafification, ModuleCat.tilde, PresheafOfModules.sheafify, SheafOfModules.sections, SheafOfModules.sectionsFunctor_obj, CategoryTheory.Sheaf.H, ModuleCat.tildeInModuleCat; none is unbounded derived sections on an open.",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "openModuleDerivedSections|moduleSheaves_hasKInjectiveResolutions|abelianGroups_hasKInjectiveResolutions|rgamma_derivedLimit; rg openModuleSections, rightDerivedFunctor in Mathlib, WeilConjectures and lean/Sheaf; blueprint_refs.py search derived sections",
+   "results": "No existing specialization. OpenModuleCohomology gives openModuleSections; source RightDerivedFunctor.Defs gives generic rightDerivedFunctor. No node defines unbounded derived sections on an open of a general ringed space.",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-pc-ringed-space-rgamma-derived-limit",
+  "date": "2026-10-11",
+  "group": "M1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "derived cohomology on an open in the derived-limit calculation",
+   "via": [
+    "lem-pc-ringed-space-rgamma-derived-limit",
+    "lem-pc-ringed-space-pointwise-truncation-limit",
+    "lem-pc-ringed-space-truncation-derived-limit",
+    "lem-pc-qcoh-truncation-derived-limit",
+    "lem-pc-unbounded-derived-functor-cohomological-bound",
+    "lem-pc-derived-direct-image-uniform-truncation-bound",
+    "lem-pc-derived-direct-image-preserves-direct-sums",
+    "lem-pc-noetherian-derived-direct-image-right-adjoint",
+    "lem-sc-proper-upper-shriek-composition",
+    "lem-sc-finite-duality-trace"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "module": "Sheaf.Topology.OpenModuleDerivedSections",
+  "declaration": "AlgebraicGeometry.RingedSpace.openModuleDerivedSections",
+  "file": "lean/Sheaf/Topology/OpenModuleDerivedSections.lean",
+  "statement": "abbrev openModuleDerivedSections (X : RingedSpace.{a}) (U : Opens X) [HasDerivedCategory.{b} (SheafOfModules.{a} (moduleRings X))] [HasDerivedCategory.{c} AddCommGrpCat.{a}] : DerivedCategory (SheafOfModules.{a} (moduleRings X)) ⥤ DerivedCategory AddCommGrpCat.{a}",
+  "branch": "sheaf-dag",
+  "by": "M1",
+  "date": "2026-10-11",
+  "existing": false,
+  "declarations": [
+   "AlgebraicGeometry.RingedSpace.openModuleDerivedSections"
+  ],
+  "fixed_by": "R-rdl"
+ },
+ "reviewed": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-rdl",
+  "group": "M1",
+  "result": "fix",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-rdl",
+  "group": "M1",
+  "result": "fix",
+  "note": "ringed space X, open U, tower K : ℕᵒᵖ ⥤ D(O_X) with transitions K.map (n ≤ n+1), any derived limit (L,p,δ) via IsDerivedLimitTriangle; (1) RΓ(U,∏K) ≅ ∏RΓ(U,K_n) with projection equations and image Roos triangle (shape of landed rightDerivedFunctor_isDerivedLimitTriangle); (2) ∀ m:ℤ SES R¹lim H^{m-1} → H^m(U,L) → lim H^m with right map H^m(pr_n∘p); RΓ = (openModuleSections X U).rightDerivedFunctor; fixed: dropped two sorried HasKInjectiveResolutions instances (Mathlib/upstream + G1 moduleGrothendieckAbelian give them) and the inferable HasProduct binder"
+ }
+}

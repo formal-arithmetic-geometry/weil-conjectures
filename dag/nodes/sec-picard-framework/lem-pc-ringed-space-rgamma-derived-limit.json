@@ -26,7 +26,10 @@
   "def-weil-abstract-derived-category",
   "prop-pur-kinjective-resolutions-exist",
   "def-pur-kinjective-complex",
-  "def-weil-derived-limit"
+  "def-weil-derived-limit",
+  "def-sc-open-module-cohomology",
+  "def-pc-open-module-derived-sections",
+  "lem-pc-derived-limit-roos-abelian-groups"
  ],
  "proof": [
   {
@@ -186,5 +189,24 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-rdl2706 (reviewer sub-agent of L); spot-checked: Read all cited statements; G1 node hypothesis is X a scheme (C4 if cited), Milnor node statement does not name its maps. FIX more, RETURN less: (1) statement (C4/E7): RGamma(U,-) and H^m(U,-) defined for complexes via K-injective resolutions (def-sc-ringed-space-module-cohomology covers only modules on X); derived limit (K,p,delta) taken as any one, non-canonical per def-weil-derived-limit; unsupported 'natural in the system' removed; right map named as (H^m(U,pr_n o p))_n as F1's stalk node needs; part (1) states the Roos-triangle form; stmt_deps deduplicated. (2) Step 1-2 (C1): K-injective resolutions from prop-pur-kinjective-resolutions-exist (Tag 079P) not from enough injectives; triangulated structure from lem-pc-right-derived-functor-triangulated; Roos triangle image via lem-pc-homotopy-limit-map; products in D(Ab) via lem-weil-derived-limit-existence(2)+lem-pc-abelian-groups-exact-products; uses now match text. (3) Step 3 (C4): pqf-def-cohomology (schemes) removed; sequence derived from lem-sf-derived-homology-long-exact + lem-pc-derived-limit-roos-abelian-groups with the maps named, Milnor node cited; tool_uses updated, enough-injectives tool use dropped. Milnor sequence cites def-weil-derived-limit and the Roos/lim^1 node; no canonical-limit language.; 1 file(s) fixed by the reviewer"
  },
- "lead_note": "2026-10-10 L (R-rdl2706): Second reading by J1 missed: Step 3 still cited scheme-only pqf-def-cohomology; 'added derived-limit-existence citation' was not done; Step 2 got K-injective resolutions of unbounded complexes from enough injectives. G1 node lem-pc-derived-functor-commutes-derived-limit is stated for schemes only, so it cannot be cited for a ringed space; generalizing G1 to ringed spaces would let Step 2 cite it."
+ "lead_note": "2026-10-10 L (R-rdl2706): Second reading by J1 missed: Step 3 still cited scheme-only pqf-def-cohomology; 'added derived-limit-existence citation' was not done; Step 2 got K-injective resolutions of unbounded complexes from enough injectives. G1 node lem-pc-derived-functor-commutes-derived-limit is stated for schemes only, so it cannot be cited for a ringed space; generalizing G1 to ringed spaces would let Step 2 cite it.",
+ "lean": {
+  "module": "Sheaf.Topology.RingedSpaceRGammaDerivedLimit",
+  "declaration": "AlgebraicGeometry.RingedSpace.rgamma_derivedLimit",
+  "file": "lean/Sheaf/Topology/RingedSpaceRGammaDerivedLimit.lean",
+  "statement": "theorem rgamma_derivedLimit (X : RingedSpace.{u}) (U : TopologicalSpace.Opens X) [HasDerivedCategory.{v} (SheafOfModules.{u} (moduleRings X))] [HasDerivedCategory.{w} AddCommGrpCat.{u}] (K : ℕᵒᵖ ⥤ DerivedCategory (SheafOfModules.{u} (moduleRings X))) (L : DerivedCategory (SheafOfModules.{u} (moduleRings X))) (p : L ⟶ ∏ᶜ (fun n : ℕ => K.obj (Opposite.op n))) (δ : (∏ᶜ (fun n : ℕ => K.obj (Opposite.op n))) ⟶ L⟦(1 : ℤ)⟧) (hK : IsDerivedLimitTriangle (fun n : ℕ => K.map (homOfLE (Nat.le_succ n)).op) L p δ) : (∃ e : (openModuleDerivedSections X U).obj (∏ᶜ (fun n : ℕ => K.obj (Opposite.op n))) ≅ ∏ᶜ (fun n : ℕ => (openModuleDerivedSections X U).obj (K.obj (Opposite.op n))), (∀ n, e.hom ≫ Pi.π _ n = (openModuleDerivedSections X U).map (Pi.π _ n)) ∧ IsDerivedLimitTriangle (fun n => (openModuleDerivedSections X U).map (K.map (homOfLE (Nat.le_succ n)).op)) ((openModuleDerivedSections X U).obj L) ((openModuleDerivedSections X U).map p ≫ e.hom) (e.inv ≫ (openModuleDerivedSections X U).map δ ≫ ((openModuleDerivedSections X U).commShiftIso (1 : ℤ)).hom.app L)) ∧ (∀ m : ℤ, ∃ (a : (@Functor.rightDerived _ _ _ _ _ (@InjectiveResolution.instHasInjectiveResolutions _ _ _ roosTowerEnoughInjectives) _ (lim : (ℕᵒᵖ ⥤ AddCommGrpCat.{u}) ⥤ AddCommGrpCat.{u}) roosLimitAdditive 1).obj (K ⋙ (openModuleDerivedSections X U) ⋙ DerivedCategory.homologyFunctor AddCommGrpCat.{u} (m - 1)) ⟶ (DerivedCategory.homologyFunctor AddCommGrpCat.{u} m).obj ((openModuleDerivedSections X U).obj L)) (b : (DerivedCategory.homologyFunctor AddCommGrpCat.{u} m).obj ((openModuleDerivedSections X U).obj L) ⟶ limit (K ⋙ (openModuleDerivedSections X U) ⋙ DerivedCategory.homologyFunctor AddCommGrpCat.{u} m)), ∃ hz : a ≫ b = 0, (ShortComplex.mk a b hz).ShortExact ∧ ∀ n, b ≫ limit.π (K ⋙ (openModuleDerivedSections X U) ⋙ DerivedCategory.homologyFunctor AddCommGrpCat.{u} m) (Opposite.op n) = (DerivedCategory.homologyFunctor AddCommGrpCat.{u} m).map ((openModuleDerivedSections X U).map (p ≫ Pi.π _ n)))",
+  "branch": "sheaf-dag",
+  "by": "M1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-rdl"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-rdl",
+  "group": "M1",
+  "result": "fix",
+  "note": "ringed space X, open U, tower K : ℕᵒᵖ ⥤ D(O_X) with transitions K.map (n ≤ n+1), any derived limit (L,p,δ) via IsDerivedLimitTriangle; (1) RΓ(U,∏K) ≅ ∏RΓ(U,K_n) with projection equations and image Roos triangle (shape of landed rightDerivedFunctor_isDerivedLimitTriangle); (2) ∀ m:ℤ SES R¹lim H^{m-1} → H^m(U,L) → lim H^m with right map H^m(pr_n∘p); RΓ = (openModuleSections X U).rightDerivedFunctor; fixed: dropped two sorried HasKInjectiveResolutions instances (Mathlib/upstream + G1 moduleGrothendieckAbelian give them) and the inferable HasProduct binder"
+ }
 }
