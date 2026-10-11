@@ -229,5 +229,23 @@
   "worker": "stage1",
   "summary": "Split along Stacks 0334 (1)=>(2)=>(3), whose proof shows that every finite type algebra over a Nagata ring is Nagata; (2)=>(3) is S = S/(0). Steps follow the source's Steps 3, 4, 2, 1 in forward order: transcendental monogenic case via 032O (new node lem-weil-pbc-polynomial-ring-n2), algebraic monogenic case by passing to the integral closure R' of A in M (finite by N-2, normal with fraction field M by the leaf lem-weil-pbc-integral-closure-finite-extension-normal, Nagata by 032T, new node lem-weil-pbc-finite-over-nagata-nagata in its finite case) and identifying the integral closure of B in M with that of R'[x] (integral-transitive), then (***) (new node lem-weil-pbc-normal-nagata-monogenic-n1, the source's Step 5 with the analytically-unramified criterion 0330, 0333, 032Y, 0331; left unsplit); claim (M) for a monogenic algebra over a Nagata ring (quotients A/p Nagata by 032T); induction on generators. The source's Step 4 assumes R normal without reason; normality of the base is not needed there (R' is normal), and the split does not assume it. Mathlib has no Nagata or Japanese rings (three kinds of search recorded); no mathlib_candidate. Statement unchanged."
  },
- "reviewed": "Reviewed by L 2026-10-10: faithful to Algebra 0334 (1)=>(2)=>(3) in the source's order (claim (*) for a one-generator domain extension: transcendental case by 032O, algebraic case through the integral closure R' of A in M and the claim (***) of the source, both new unsplit nodes; claim (M) and the induction on generators). Finite over Nagata ⇒ Nagata is the finite case of 032T (new node). No Mathlib match (no Nagata rings in Mathlib)."
+ "reviewed": "Reviewed by L 2026-10-10: faithful to Algebra 0334 (1)=>(2)=>(3) in the source's order (claim (*) for a one-generator domain extension: transcendental case by 032O, algebraic case through the integral closure R' of A in M and the claim (***) of the source, both new unsplit nodes; claim (M) and the induction on generators). Finite over Nagata ⇒ Nagata is the finite case of 032T (new node). No Mathlib match (no Nagata rings in Mathlib).",
+ "lean": {
+  "module": "Sheaf.RingTheory.NagataUniversallyJapanese",
+  "declaration": "isUniversallyJapanese_of_isNagataRing",
+  "file": "lean/Sheaf/RingTheory/NagataUniversallyJapanese.lean",
+  "statement": "theorem isUniversallyJapanese_of_isNagataRing (R : Type u) [CommRing R] (hR : IsNagataRing R) : IsUniversallyJapanese R",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-nuj1156",
+  "group": "H1",
+  "result": "pass",
+  "note": "R:Type u CommRing; sole hyp hR = recorded root IsNagataRing (Noetherian + IsN2 of R/p); conclusion = recorded root IsUniversallyJapanese (S:Type u, CommRing, IsDomain, Algebra.FiniteType R S, IsN2 S (FractionRing S)), unfolds by Iff.rfl; #check root names; S universe = R's, not below; no hollow hyps; sorry only"
+ }
 }
