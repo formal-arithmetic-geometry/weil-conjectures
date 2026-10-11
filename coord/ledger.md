@@ -3067,3 +3067,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 00:13 L: merged deliver/K1/lem-sc-derived-open-mayer-vietoris-ses (reviewer FIX+NODE(1); first push; new nodes: 1)
 - 00:13 L: merged deliver/E1/lem-sp-filtered-complex-associated-spectral-sequence-construction (reviewer PASS; first push; new nodes: 0)
 - 00:13 UTC L: K1 derived-open-mayer-vietoris-ses FIX fc4269c2e (R-mvs0012; source label restored to 08BU, new node lem-sc-module-extension-by-zero-stalk-maps).
+- 00:13 UTC L: E1 filtered-complex-associated-spectral-sequence-construction PASS c396c8215 (R-ssc0013).
