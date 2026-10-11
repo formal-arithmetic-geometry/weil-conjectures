@@ -42,7 +42,7 @@ lemma leftDerivedUpperStarComp_hom_app_singleFunctor {X Y Z : Scheme.{u}} (g : X
         (singleFunctorCompLeftDerivedUpperStarIso A g).hom.app ((h)^*[A].obj W) =
       (singleFunctorCompLeftDerivedUpperStarIso A gh).hom.app W ≫
         (DerivedCategory.singleFunctor _ 0).map ((upperStarComp A g h gh hgh).hom.app W) := by
-  have key := Functor.mapDerivedCategoryNatIso_hom_app_singleFunctor (h)^*[A] (g)^*[A]
+  have key := Functor.mapDerivedCategoryNatIso_comp_hom_app_singleFunctor (h)^*[A] (g)^*[A]
     (gh)^*[A] (upperStarComp A g h gh hgh) W
   have hε := ((g)^*[A].leftDerivedFunctorIsoMapDerivedCategory).hom.naturality
     ((h)^*[A].leftDerivedFunctorIsoMapDerivedCategory.hom.app
