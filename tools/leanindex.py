@@ -177,6 +177,19 @@ _HEAD = re.compile(rf"^((?:@\[[^\]]*\]\s*)*)((?:{_MODS}\s+)*)({_KW})\b\s*(.*)$")
 _CONT = re.compile(r"^(?:\||where\b|termination_by\b|decreasing_by\b|deriving\b|with\b|[)}\]⟩])")
 
 
+def signature(rest: str) -> str:
+    """The binders and type at the start of `rest`, a declaration's text after its name, whitespace collapsed: up to
+    the `:=`, `where` or `|` that ends the type. Found by stage2_delivery's signature parser, which skips brackets and
+    the `:=` of a `let`/`have`-style binder in the type (`theorem foo : let I := j.ker; P I := …`)."""
+    import sys
+    if str(pathlib.Path(__file__).resolve().parent) not in sys.path:
+        sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
+    import stage2_delivery as sd  # late: most users of this module do not need it
+    pre = "theorem _x "
+    d = next((x for x in sd.declarations(pre + rest) if x["kw_pos"] == 0), None)
+    return " ".join((rest[: d["sig_end"] - len(pre)] if d else rest).split())
+
+
 def commands(text: str) -> list[dict]:
     """The top-level commands of a source text, in order. Each is a dict with
     kind: a declaration keyword, or 'other' (`variable`, `open`, `notation`, `attribute`, `set_option`, …);
@@ -189,11 +202,11 @@ def commands(text: str) -> list[dict]:
     def close():
         nonlocal cur
         if cur is not None:
-            body = " ".join(" ".join(cur.pop("lines")).split())
+            lines = cur.pop("lines")
+            body = " ".join(" ".join(lines).split())
             cur["text"] = body
             if cur["kind"] != "other":
-                cut = re.search(r"\s:=|\swhere\b|\s\|\s|:=\s*$", " " + body)
-                cur["statement"] = (body[: cut.start() - 1] if cut else body).strip()
+                cur["statement"] = signature("\n".join(lines))
             out.append(cur)
         cur = None
 
