@@ -15,6 +15,7 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Affine
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Smooth
 public import WeilConjectures.WeilSheaf.CohomologicalRange
 public import WeilConjectures.WeilSheaf.CohomologySequence
+public import WeilConjectures.WeilSheaf.ConstantTwistWeight
 public import WeilConjectures.WeilSheaf.CurveTopCohomology
 public import WeilConjectures.WeilSheaf.GeometricCoinvariants
 public import WeilConjectures.WeilSheaf.OpenClosedTriangle
@@ -68,23 +69,79 @@ local instance : LocallyOfFiniteType (C ↘ Spec (CommRingCat.of k₀)) :=
 
 namespace WeilSheaf
 
+/-- If `G` is a lisse Weil sheaf on a smooth affine curve `C₀`, punctually `ι`-pure of weight `v`,
+and `b` is a unit with `|ι b| = q ^ (-v / 2)`, then `H_c^2(C, G)` is `ι`-pure of weight `v + 2`:
+the constant twist `G ⊗ 𝓑_b` is punctually pure of weight `0`, so its `H_c^2` is pure of weight
+`2` (`AlgebraicGeometry.isPureOfWeightOver_compactlySupportedCohomology_two_of_isAffine`, blueprint
+`lem-zl-affine-curve-hc2-purity`), and it is `H_c^2(C, G)` with the Frobenius multiplied by `b`.
+-/
+theorem isPureOfWeightOver_compactlySupportedCohomology_two_of_norm_eq
+    (ι : PadicAlgCl l →+* ℂ) (G : WeilSheaf k₀ l C) (hG : G.IsLisse) {v : ℝ}
+    (hv : G.IsPunctuallyPureOfWeight ι v) {b : (PadicAlgCl l)ˣ}
+    (hb : ‖ι b‖ = (Nat.card k₀ : ℝ) ^ (-v / 2)) :
+    (G.compactlySupportedCohomology 2).IsPureOfWeightOver k₀ ι (v + 2) := by
+  have h0 := isPureOfWeightOver_compactlySupportedCohomology_two_of_isAffine ι
+    (G.constantTwist b) hG.constantTwist (hv.constantTwist_zero hb)
+  obtain ⟨e⟩ := nonempty_equiv_compactlySupportedCohomology_constantTwist G b 2
+  have hq : (0 : ℝ) < Nat.card k₀ := by exact_mod_cast Nat.card_pos
+  intro α hα
+  have h1 := h0 (b * α) (e.symm.hasEigenvalue
+    ((FrobeniusModule.hasEigenvalue_frobeniusEnd_rescale_iff b.ne_zero α).2 hα))
+  rw [map_mul, norm_mul, hb] at h1
+  calc ‖ι α‖ = ((Nat.card k₀ : ℝ) ^ (v / 2) * (Nat.card k₀ : ℝ) ^ (-v / 2)) * ‖ι α‖ := by
+        rw [← Real.rpow_add hq, neg_div, add_neg_cancel, Real.rpow_zero, one_mul]
+    _ = (Nat.card k₀ : ℝ) ^ (v / 2) * (Nat.card k₀ : ℝ) ^ ((2 : ℝ) / 2) := by
+        rw [mul_assoc, h1]
+    _ = (Nat.card k₀ : ℝ) ^ ((v + 2) / 2) := by
+        rw [← Real.rpow_add hq, add_div]
+
+-- the proof does not use that `C₀` is not geometrically connected
+set_option linter.unusedVariables false in
 /-- The case of `AlgebraicGeometry.WeilSheaf.hasWeightsAtMostOver_compactlySupportedCohomology_two`
 of a smooth affine curve which is not geometrically connected: then `H_c^2(C, G)` still has
 weights at most `w + 2`.
 
 The blueprint proof splits `C₀` into its connected components, and a connected component with
 field of constants `k₁ = 𝔽_{q^d}` into the `d` geometrically connected curves over `k₁` which make
-up its geometric fibre, permuted cyclically by the Frobenius; on each of them `F^d` is the
-Frobenius of a geometrically connected curve over `k₁`, to which the geometrically connected case
-applies. Weil sheaves over a finite extension `k₁` of `k₀`, with the comparison of the geometric
-fibres over `k₀` and `k₁` and of their compactly supported cohomology, are not available yet, so
-this case is stated separately, with `sorry`. -/
+up its geometric fibre, permuted cyclically by the Frobenius. Weil sheaves over a finite extension
+`k₁` of `k₀` are not available, so we use instead the purity of `H_c^2` of a sheaf punctually pure
+of weight zero on a smooth affine curve, not necessarily geometrically connected (blueprint
+`lem-zl-affine-curve-hc2-purity`), after a constant twist normalizing the weight to zero
+(`AlgebraicGeometry.WeilSheaf.isPureOfWeightOver_compactlySupportedCohomology_two_of_norm_eq`).
+If `G` has no local Frobenius eigenvalue at all, it is punctually pure of the weights `0` and
+`-2` at once, so `H_c^2(C, G)` is pure of the weights `2` and `0` at once and has no Frobenius
+eigenvalue. -/
 theorem hasWeightsAtMostOver_compactlySupportedCohomology_two_of_not_geometricallyConnected
     (hC : ¬ GeometricallyConnected (C ↘ Spec (CommRingCat.of k₀)))
     (ι : PadicAlgCl l →+* ℂ) (G : WeilSheaf k₀ l C) (hG : G.IsLisse) {w : ℝ}
     (hw : G.IsPunctuallyPureOfWeight ι w) :
     (G.compactlySupportedCohomology 2).HasWeightsAtMostOver k₀ ι (w + 2) := by
-  sorry
+  have hq : (1 : ℝ) < Nat.card k₀ := by exact_mod_cast Finite.one_lt_card
+  by_cases hex : ∃ (x : C.finitePoints) (α : PadicAlgCl l),
+      (G.stalk x).frobeniusEnd.HasEigenvalue α
+  · obtain ⟨x, α, hα⟩ := hex
+    obtain ⟨w', b, hw', hb⟩ := hw.exists_units_norm_eq ι
+    -- the weight `w'` of the normalization is `w`, as seen on the eigenvalue `α`
+    have hqx : (1 : ℝ) < (C ↘ Spec (CommRingCat.of k₀)).residueCard x.1 := by
+      rw [Scheme.Hom.residueCard, Nat.cast_pow]
+      exact one_lt_pow₀ hq (Scheme.Hom.degreeOver_ne_zero _ x.2)
+    have hww' : w' / 2 = w / 2 :=
+      (Real.rpow_right_inj (by linarith) hqx.ne').1 ((hw' x α hα).symm.trans (hw x α hα))
+    obtain rfl : w' = w := by linarith
+    exact (isPureOfWeightOver_compactlySupportedCohomology_two_of_norm_eq ι G hG hw'
+      hb).hasWeightsAtMostOver
+  · simp only [not_exists] at hex
+    have hp (v : ℝ) : G.IsPunctuallyPureOfWeight ι v := fun x α hα ↦ (hex x α hα).elim
+    have hq0 : (Nat.card k₀ : PadicAlgCl l) ≠ 0 := Nat.cast_ne_zero.2 Nat.card_pos.ne'
+    have h₂ := isPureOfWeightOver_compactlySupportedCohomology_two_of_norm_eq ι G hG (hp 0)
+      (b := 1) (by simp)
+    have h₀ := isPureOfWeightOver_compactlySupportedCohomology_two_of_norm_eq ι G hG (hp (-2))
+      (b := Units.mk0 _ hq0) (by simp)
+    intro α hα
+    have h := (h₂ α hα).symm.trans (h₀ α hα)
+    norm_num at h
+    rw [h, Nat.cast_one] at hq
+    exact (lt_irrefl _ hq).elim
 
 end WeilSheaf
 

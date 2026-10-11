@@ -358,40 +358,6 @@ theorem IsLisse.realEnvelope {F : WeilSheaf k₀ l X} (hF : F.IsLisse) (b : (Pad
     (F.realEnvelope hF b).IsLisse :=
   (hF.constantTwist (b := b)).biprod (hF.constantTwist (b := b)).dual
 
-/-- If `F` is lisse and punctually `ι`-pure of weight `w` and `2 log_q |ι b| = c`, then the
-constant twist `F ⊗ 𝓑_b` is punctually `ι`-pure of weight `w + c`: at a closed point of degree
-`m` every eigenvalue `α` of the local Frobenius becomes `bᵐ α`, of absolute value
-`q^{mc/2} q^{mw/2}`. (blueprint: `lem-wf-constant-twist-weight`) -/
-theorem IsPunctuallyPureOfWeight.constantTwist {ι : PadicAlgCl l →+* ℂ} {F : WeilSheaf k₀ l X}
-    {w : ℝ} (h : F.IsPunctuallyPureOfWeight ι w) {b : (PadicAlgCl l)ˣ} {c : ℝ}
-    (hb : 2 * Real.logb (Nat.card k₀) ‖ι b‖ = c) :
-    (F.constantTwist b).IsPunctuallyPureOfWeight ι (w + c) := by
-  intro x
-  obtain ⟨e⟩ := F.nonempty_equiv_stalk_constantTwist b x
-  have hq : (1 : ℝ) < Nat.card k₀ := by exact_mod_cast Finite.one_lt_card
-  have hb0 : (b : PadicAlgCl l) ≠ 0 := b.ne_zero
-  have hnorm : ‖ι b‖ = (Nat.card k₀ : ℝ) ^ (c / 2) := by
-    rw [← hb, mul_div_cancel_left₀ _ two_ne_zero, Real.rpow_logb (by positivity) hq.ne'
-      (norm_pos_iff.2 ((map_ne_zero ι).2 hb0))]
-  refine FrobeniusModule.IsPureOfWeight.of_equiv e ((h x).rescale (pow_pos Nat.card_pos _)
-    (pow_ne_zero _ hb0) ?_)
-  rw [map_pow, norm_pow, hnorm, Nat.cast_pow, ← Real.rpow_natCast,
-    ← Real.rpow_mul (by positivity), ← Real.rpow_natCast (Nat.card k₀ : ℝ),
-    ← Real.rpow_mul (by positivity)]
-  ring_nf
-
-/-- The constant twist `F ⊗ 𝓑_b` with `|ι b| = q^{-w/2}` of a sheaf punctually `ι`-pure of
-weight `w` is punctually `ι`-pure of weight `0`. -/
-theorem IsPunctuallyPureOfWeight.constantTwist_zero {ι : PadicAlgCl l →+* ℂ}
-    {F : WeilSheaf k₀ l X} {w : ℝ} (h : F.IsPunctuallyPureOfWeight ι w) {b : (PadicAlgCl l)ˣ}
-    (hb : ‖ι b‖ = (Nat.card k₀ : ℝ) ^ (-w / 2)) :
-    (F.constantTwist b).IsPunctuallyPureOfWeight ι 0 := by
-  have hq : (1 : ℝ) < Nat.card k₀ := by exact_mod_cast Finite.one_lt_card
-  have h' := h.constantTwist (b := b) (c := -w) (by
-    rw [hb, Real.logb_rpow (by positivity) hq.ne']
-    ring)
-  rwa [add_neg_cancel] at h'
-
 /-- The envelope `Env_ι(F; b)` of a lisse sheaf `F` punctually `ι`-pure of weight `w`, with
 `|ι b| = q^{-w/2}`, is `ι`-real: at a closed point the eigenvalues `β_j` of `F⁰` have
 `|ι β_j| = 1`, so those of the dual summand are `ι(β_j⁻¹) = conj (ι β_j)`, and the local

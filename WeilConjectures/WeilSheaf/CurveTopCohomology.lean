@@ -28,6 +28,10 @@ The geometric coinvariants are `AlgebraicGeometry.WeilSheaf.geometricCoinvariant
 - `AlgebraicGeometry.WeilSheaf.nonempty_equiv_compactlySupportedCohomology_two`
   (`lem-a1-affine-hc2`), stated with `sorry`: Verdier duality for Weil complexes is not
   available yet.
+- `AlgebraicGeometry.isPureOfWeightOver_compactlySupportedCohomology_two_of_isAffine`
+  (`lem-zl-affine-curve-hc2-purity`, from `sec-deligne-laumon-general`), stated with `sorry`:
+  purity of `H_c²` on a smooth affine curve which need not be geometrically connected. It is
+  stated here, below `WeilConjectures.DeligneLaumon.AffineLine.Endpoints`, which uses it.
 -/
 
 @[expose] public section
@@ -80,5 +84,23 @@ theorem isPureOfWeightOver_compactlySupportedCohomology_two [IsAffine U]
   exact FrobeniusModule.IsPureOfWeight.of_equiv e h
 
 end WeilSheaf
+
+variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime] [Fact (ringChar k₀ ≠ l)]
+
+variable (ι : PadicAlgCl l →+* ℂ) in
+/-- **Purity of the top affine-curve factor.** Let `C` be a smooth affine curve over `k₀` and let
+`E` be a lisse Weil sheaf on `C`, punctually `ι`-pure of weight `0`. Then `H_c^2(C, E)` is
+`ι`-pure of weight `2`: on each geometrically connected component, defined over a finite
+extension of `k₀`, this is the degree-two endpoint estimate, and purity descends along the
+finite constant extension (blueprint: `lem-zl-affine-curve-hc2-purity`). -/
+theorem isPureOfWeightOver_compactlySupportedCohomology_two_of_isAffine {C : Scheme.{u}}
+    [C.Over (Spec (CommRingCat.of k₀))] [IsAffine C]
+    [SmoothOfRelativeDimension 1 (C ↘ Spec (CommRingCat.of k₀))] (E : WeilSheaf k₀ l C)
+    (hE : E.IsLisse) (hpure : E.IsPunctuallyPureOfWeight ι 0) :
+    -- `C ↘ Spec k₀` is locally of finite type, being smooth
+    haveI := SmoothOfRelativeDimension.smooth 1 (C ↘ Spec (CommRingCat.of k₀))
+    (E.compactlySupportedCohomology 2).IsPureOfWeightOver k₀ ι 2 :=
+  -- TODO(adic): needs the endpoint lemma on each geometric component and descent of weights
+  sorry
 
 end AlgebraicGeometry
