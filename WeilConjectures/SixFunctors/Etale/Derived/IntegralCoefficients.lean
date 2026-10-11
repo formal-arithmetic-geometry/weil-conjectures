@@ -9,6 +9,7 @@ public import Mathlib.CategoryTheory.Functor.OfSequence
 public import WeilConjectures.EtaleCohomology.PoincareDuality.PointPerfect
 public import WeilConjectures.SixFunctors.Etale.Derived.CoextendScalars
 public import WeilConjectures.SixFunctors.Etale.Derived.Dualizing
+public import WeilConjectures.SixFunctors.Etale.Derived.ReductionConservative
 
 /-!
 # Integral coefficients: internal hom, exceptional adjoint and normalized towers
@@ -92,6 +93,49 @@ def IsDerivedBaseChange {K : 𝐃(X, Λ)} {K' : 𝐃(X, Λ')}
 end RestrictScalars
 
 variable {Λ : Type (u + 1)} [CommRing Λ] (I : Ideal Λ)
+
+section Reduction
+
+variable {X Y : Scheme.{u}}
+
+/-- **Triangulated linear functors commute with reduction modulo a power of a nonzerodivisor.**
+For a nonzerodivisor `ϖ` of `Λ`, `n : ℕ` and a triangulated `Λ`-linear functor
+`Φ : D(X_ét, Λ) ⥤ D(Y_ét, Λ)`, there is an isomorphism `Φ(K ⊗ᴸ Λ/(ϖⁿ)) ≅ Φ(K) ⊗ᴸ Λ/(ϖⁿ)`:
+both are cones of the multiplication by `ϖⁿ`, on `Φ(K)`. -/
+theorem nonempty_iso_map_reductionModIdeal (Φ : 𝐃(X, Λ) ⥤ 𝐃(Y, Λ)) [Φ.CommShift ℤ]
+    [Φ.IsTriangulated] [Φ.Linear Λ] {ϖ : Λ} (hϖ : ϖ ∈ nonZeroDivisors Λ) (n : ℕ)
+    (K : 𝐃(X, Λ)) :
+    Nonempty (Φ.obj ((reductionModIdeal Λ X (Ideal.span {ϖ} ^ n)).obj K) ≅
+      (reductionModIdeal Λ Y (Ideal.span {ϖ} ^ n)).obj (Φ.obj K)) := by
+  let FX := (derivedTensor (ModuleCat.{u + 1} Λ) X).obj K
+  let FY := (derivedTensor (ModuleCat.{u + 1} Λ) Y).obj (Φ.obj K)
+  let TX := _root_.DerivedCategory.quotPowTriangle X.smallEtaleTopology hϖ rfl n
+  let TY := _root_.DerivedCategory.quotPowTriangle Y.smallEtaleTopology hϖ rfl n
+  have h₁ : Φ.mapTriangle.obj (FX.mapTriangle.obj TX) ∈ distTriang _ :=
+    Φ.map_distinguished _ (FX.map_distinguished _
+      (_root_.DerivedCategory.quotPowTriangle_distinguished _ hϖ rfl n))
+  have h₂ : FY.mapTriangle.obj TY ∈ distTriang _ :=
+    FY.map_distinguished _ (_root_.DerivedCategory.quotPowTriangle_distinguished _ hϖ rfl n)
+  have hX : (Φ.mapTriangle.obj (FX.mapTriangle.obj TX)).mor₁ =
+      ϖ ^ n • 𝟙 (Φ.obj (FX.obj TX.obj₁)) := by
+    change Φ.map (FX.map TX.mor₁) = _
+    rw [_root_.DerivedCategory.quotPowTriangle_mor₁, Functor.map_smul,
+      CategoryTheory.Functor.map_id, Functor.map_smul, CategoryTheory.Functor.map_id]
+  have hY : (FY.mapTriangle.obj TY).mor₁ = ϖ ^ n • 𝟙 (FY.obj TY.obj₁) := by
+    change FY.map TY.mor₁ = _
+    rw [_root_.DerivedCategory.quotPowTriangle_mor₁, Functor.map_smul,
+      CategoryTheory.Functor.map_id]
+  let u : Φ.obj (FX.obj TX.obj₁) ≅ FY.obj TY.obj₁ :=
+    Φ.mapIso (derivedTensorSingleUnitIso K) ≪≫ (derivedTensorSingleUnitIso (Φ.obj K)).symm
+  obtain ⟨e, -, -⟩ := Pretriangulated.exists_iso_of_arrow_iso _ _ h₁ h₂
+    (Arrow.isoMk u u (by
+      change u.hom ≫ (FY.mapTriangle.obj TY).mor₁ =
+        (Φ.mapTriangle.obj (FX.mapTriangle.obj TX)).mor₁ ≫ u.hom
+      rw [hX, hY, Linear.comp_smul, Category.comp_id]
+      erw [Linear.smul_comp, Category.id_comp]))
+  exact ⟨Pretriangulated.Triangle.π₃.mapIso e⟩
+
+end Reduction
 
 section HomReduction
 
