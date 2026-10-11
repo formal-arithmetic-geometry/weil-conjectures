@@ -59,7 +59,7 @@ namespace AlgebraicGeometry
 open Scheme Etale
 
 /-- The étale `X`-scheme `X` is terminal. -/
-noncomputable def _root_.AlgebraicGeometry.Scheme.Etale.isTerminalMkId (X : Scheme.{u}) :
+noncomputable def _root_.AlgebraicGeometry.Scheme.Etale.mkIdIsTerminal (X : Scheme.{u}) :
     IsTerminal (Scheme.Etale.mk (𝟙 X)) :=
   IsTerminal.ofUniqueHom (fun V ↦ MorphismProperty.Over.homMk V.hom (Category.comp_id _))
     (fun _ _ ↦ Scheme.Etale.hom_ext_mk_id _ _)
@@ -80,8 +80,8 @@ lemma isIso_globalSectionsUpperStarMap_iff_bijective_pullSection {X Y : Scheme.{
     IsIso (globalSectionsUpperStarMap AddCommGrpCat.{u + 1} f G) ↔
       Function.Bijective (pullSection f G (V := Scheme.Etale.mk (𝟙 X))
         (U := Scheme.Etale.mk (𝟙 Y)) f ((Category.comp_id _).trans (Category.id_comp _).symm)) := by
-  let eY := terminalIsoIsTerminal (Scheme.Etale.isTerminalMkId Y)
-  let eX := terminalIsoIsTerminal (Scheme.Etale.isTerminalMkId X)
+  let eY := terminalIsoIsTerminal (Scheme.Etale.mkIdIsTerminal Y)
+  let eX := terminalIsoIsTerminal (Scheme.Etale.mkIdIsTerminal X)
   let F := (f)^*[AddCommGrpCat.{u + 1}].obj G
   let η := (upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} f).unit.app G
   let P : G.obj.obj (op (Scheme.Etale.mk (𝟙 Y))) ⟶ F.obj.obj (op (Scheme.Etale.mk (𝟙 X))) :=
