@@ -1,11 +1,11 @@
 # Work queue
 
-151 items; claim with `tools/claim.py next <group> [--stage N]`.
+149 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (151)
+## Stage 2: nodes to state (149)
 
 | node | distance to Mathlib | kind | blockers |
 |---|---|---|---|
@@ -18,10 +18,10 @@
 | `def-pc-derived-rhom-algebra-module` | 1 | state | 2 |
 | `def-weil-pbc-hypercohomology-filtrations` | 1 | state | 2 |
 | `def-weil-pbc-etale-shriek-base-change-map` | 1 | state | 1 |
+| `def-pc-upper-shriek-right-adjoint` | 1 | state | 0 |
 | `lem-pc-module-pullback-identity-composition` | 1 | state | 10 |
 | `lem-weil-pbc-cohomology-pullback-functorial` | 1 | state | 8 |
 | `lem-pc-ringed-spaces-derived-adjoint` | 1 | state | 6 |
-| `lem-pc-qcqs-derived-direct-image-right-adjoint` | 1 | state | 5 |
 | `lem-weil-pbc-pair-henselization` | 1 | state | 5 |
 | `lem-pc-derived-direct-image-composition` | 1 | state | 4 |
 | `lem-sc-derived-internal-hom-adjunction` | 1 | state | 4 |
@@ -29,14 +29,12 @@
 | `lem-weil-pbc-etale-graph-section-extension-map-linear` | 1 | state | 3 |
 | `lem-weil-pbc-truncation-couple-morphism` | 1 | state | 3 |
 | `lem-pc-affine-tor-amplitude-criterion` | 1 | state | 2 |
-| `lem-pc-noetherian-derived-direct-image-right-adjoint` | 1 | state | 2 |
 | `lem-weil-pbc-formal-systems-annihilated-by-power` | 1 | state | 2 |
 | `lem-pc-affine-derived-pullback-tensor-tilde` | 1 | state | 1 |
 | `lem-pc-cech-resolution` | 1 | state | 1 |
 | `lem-pc-derived-sections-pushforward-comparison` | 1 | state | 1 |
 | `lem-pc-derived-tensor-transitivity` | 1 | state | 1 |
 | `lem-pc-restrict-derived-direct-image-open` | 1 | state | 1 |
-| `lem-sc-affine-pseudo-coherent-rhom-qcoherent` | 1 | state | 1 |
 | `lem-sc-cech-comparison-natural` | 1 | state | 1 |
 | `lem-sc-derived-internal-hom-restrict-open` | 1 | state | 1 |
 | `pqf-lem-leray` | 1 | state | 1 |
@@ -44,9 +42,7 @@
 | `lem-pc-affine-pseudo-coherent-criterion` | 1 | state | 0 |
 | `lem-pc-base-change-rhom-perfect` | 1 | state | 0 |
 | `lem-pc-bounded-coherent-finite-tor-proper-pushforward-perfect` | 1 | state | 0 |
-| `lem-pc-coherent-support-proper-higher-direct-image` | 1 | state | 0 |
 | `lem-pc-derived-direct-image-direct-sums` | 1 | state | 0 |
-| `lem-pc-derived-direct-image-preserves-direct-sums` | 1 | state | 0 |
 | `lem-pc-derived-direct-image-uniform-truncation-bound` | 1 | state | 0 |
 | `lem-pc-direct-image-bounded-coherent` | 1 | state | 0 |
 | `lem-pc-direct-image-qc-support-reduction` | 1 | state | 0 |
@@ -60,6 +56,7 @@
 | `lem-pc-proper-derived-direct-image-composition` | 1 | state | 0 |
 | `lem-pc-proper-direct-image-finite-tor` | 1 | state | 0 |
 | `lem-pc-proper-perfect-direct-image-perfect` | 1 | state | 0 |
+| `lem-pc-qcqs-sheaf-rhom-adjunction` | 1 | state | 0 |
 | `lem-pc-rf-base-change-complex` | 1 | state | 0 |
 | `lem-pc-rf-base-change-single-complex-criterion` | 1 | state | 0 |
 | `lem-pc-rf-perfect-base-change` | 1 | state | 0 |
@@ -112,6 +109,7 @@
 | `lem-sc-smooth-proper-diagonal-basechange-upper-shriek` | 1 | state | 0 |
 | `lem-sc-smooth-proper-diagonal-koszul-dual` | 1 | state | 0 |
 | `lem-sc-smooth-proper-diagonal-pushforward-structure` | 1 | state | 0 |
+| `lem-sc-smooth-proper-diagonal-tensor-formula` | 1 | state | 0 |
 | `lem-sc-smooth-proper-relative-dualizing-general` | 1 | state | 0 |
 | `lem-sc-smooth-proper-tensor-direct-sums` | 1 | state | 0 |
 | `lem-sc-smooth-proper-tensor-perfect-case` | 1 | state | 0 |
@@ -161,7 +159,7 @@
 | `lem-sc-right-adjoint-open-support-criterion` | 2 | state | 0 |
 | `pqf-lem-affine-vanishing` | 2 | state | 0 |
 
-Not open yet: 40 nodes that wait for stage 1, 215 nodes that wait for a statement dependency.
+Not open yet: 40 nodes that wait for stage 1, 212 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
