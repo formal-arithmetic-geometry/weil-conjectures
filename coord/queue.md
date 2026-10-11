@@ -1,11 +1,11 @@
 # Work queue
 
-318 items; claim with `tools/claim.py next <group> [--stage N]`.
+316 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (318)
+## Stage 2: nodes to state (316)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -37,9 +37,7 @@
 | `lem-weil-pbc-relative-global-complete-intersection-noetherian-approximation` | 1 | state |
 | `lem-weil-pbc-relative-global-complete-intersection-partial-local-flat` | 1 | state |
 | `lem-weil-pbc-relative-global-complete-intersection-principal-localization` | 1 | state |
-| `lem-weil-pbc-relative-global-complete-intersection-smooth-jacobian` | 1 | state |
 | `lem-weil-pbc-relative-spec-base-change` | 1 | state |
-| `lem-weil-pbc-residue-field-pd-ge-embedding-dimension` | 1 | state |
 | `lem-weil-pbc-residue-field-pd-le-krull-dimension` | 1 | state |
 | `lem-weil-pbc-right-derived-universal-delta-functor` | 1 | state |
 | `lem-weil-pbc-ring-quasi-finite-locus-open` | 1 | state |
