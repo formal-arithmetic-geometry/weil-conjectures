@@ -46,6 +46,10 @@ MAINTAINER_BLUEPRINT = ("is",)
 # Stage 2 (stages/2-statements.md; format of the lead, 2026-10-11): a stage-2 delivery sets the field `lean` of its node
 # and nothing else. `lean` stays in MAINTAINER for stage 1: a split never sets it.
 STAGE2_OWNS = ("lean",)
+# STAGE 2 EXTRA NODES (decision of the human, 2026-10-11 05:55 UTC): on the ITEM only, `stmt_deps` may also change, and
+# only by ADDING new definition nodes of the same delivery (tools/stage2_delivery.py read_delivery enforces it); a
+# dependency node changes only in STAGE2_OWNS; a new definition node is written whole (stage2_delivery.check_new_node).
+STAGE2_ITEM_ALSO = ("stmt_deps",)
 
 
 def changed_maintainer_fields(base: dict, head: dict) -> list[str]:
@@ -71,4 +75,5 @@ def changed_fields_except(base: dict, head: dict, owns=STAGE2_OWNS) -> list[str]
 if __name__ == "__main__":
     print("a split sets:", ", ".join(SPLIT_OWNS), "; in blueprint:", ", ".join(SPLIT_OWNS_BLUEPRINT))
     print("the maintainer's:", ", ".join(MAINTAINER), "; in blueprint:", ", ".join(MAINTAINER_BLUEPRINT))
-    print("a stage-2 delivery sets:", ", ".join(STAGE2_OWNS), "(nothing else)")
+    print("a stage-2 delivery sets:", ", ".join(STAGE2_OWNS), "; on the item also", ", ".join(STAGE2_ITEM_ALSO),
+          "(only adding new definition nodes of the delivery)")

@@ -42,15 +42,21 @@ Stage 2 (stages/2-statements.md; the format is in tools/stage2_delivery.py and t
     python3 tools/preflight_delivery.py <group> <item> --stage 2 [--base origin/sheaf-dag] [--branch <ref>]
 
 checks the branch <ref> (default HEAD; the lead passes deliver/<group>/<item>) against the base:
-  a. one commit on top of the base with only lean/Sheaf/<Topic>/<Name>.lean, the node file and the report;
-  b. the node changed only in `lean`, a record {module, declaration, [declarations], [file], statement, branch, by,
-     date, existing} with the module matching the file and by = <group>;
-  c. the Lean file: imports of Mathlib.*, WeilConjectures.*, Sheaf.* only; lines of at most 100 characters; the
-     declaration defined, its docstring with `(blueprint: <item>)`, its name not already in Mathlib or the source;
+  a. one commit on top of the base with only modules lean/Sheaf/**/*.lean, node files and the report;
+  b. the item changed only in `lean` (and in `stmt_deps` by adding new nodes of the delivery), a record {module,
+     declaration, [declarations], [file], statement, branch, by, date, existing} with the module matching the file and
+     by = <group>; each other node file classified (printed) as a NEW definition node (absent on the base; the field
+     rule of tools/stage2_delivery.py check_new_node, coord/STATE.md "STAGE 2 EXTRA NODES") or a DEPENDENCY node (in
+     the item's stmt_deps on the base, changed only in `lean`, existing false, with lean.note); every module the
+     lean.file of exactly one node, every node with existing false with its module;
+  c. each module, with its own node's id: imports of Mathlib.*, WeilConjectures.*, Sheaf.* only; lines of at most 100
+     characters; the declaration defined, its docstring with `(blueprint: <node id>)`, its name not already in Mathlib or the source;
      every theorem/lemma proved by `sorry`, no `sorry` in a definition; the recorded statement equal to the file's;
   d. an existing declaration (existing: true): no Lean file, module Mathlib.* or WeilConjectures.*, declared there;
-  e. the report with non-empty `## Worker report` and `## Second reading by <group>`;
-  f. the compile with tools/lean_file.sh in lean/.sandbox/<group>/<item>.lean, on the server only
+  e. the report with non-empty `## Worker report` and `## Second reading by <group>`, and `## New nodes` /
+     `## Dependency modules` naming each new node / dependency node when there are any;
+  f. the compile of each module with tools/lean_file.sh in lean/.sandbox/<group>/<node>.lean, in dependency order;
+     a module importing a sibling module not yet in the library prints "compile: deferred"; on the server only
      (SHEAF_COMPILE_ROOT names another project directory to compile in).
 Prints "preflight OK (stage 2)" or every failure with its letter, exit code 1.
 """
@@ -135,19 +141,22 @@ def main_stage2(argv: list[str]) -> int:
         if dirty:
             fails.insert(0, ("a", "uncommitted changes in the working tree (commit them into the one delivery commit, or stash):\n   "
                              + "\n   ".join(dirty.splitlines()[:10])))
-    compiled = None
-    if D["lean_text"] is not None:
-        ran, rc, out = s2.compile_text(D["lean_text"], group, item)
-        if not ran:
-            compiled = out
-        elif rc != 0:
-            fails.append(("f", f"the module does not compile (exit {rc}):\n   " + "\n   ".join(out.splitlines()[-40:])))
+    print(f"delivery of {item} by {group}: the item ({D['node_path']})")
+    for r in D.get("roles") or []:
+        print(f"   {r}")
+    compiled = []
+    for c in s2.compile_modules(D, group):
+        where = f"{c['file']} ({c['node']})"
+        if c["status"] == "fail":
+            fails.append(("f", f"{where} does not compile (exit {c['rc']}):\n   " + "\n   ".join(c["out"].splitlines()[-40:])))
+        elif c["status"] == "ok":
+            compiled.append(f"{where}: compile: OK\n   " + "\n   ".join(c["out"].splitlines()[-15:]))
         else:
-            compiled = "compile: OK\n   " + "\n   ".join(out.splitlines()[-15:])
+            compiled.append(f"{where}: {c['out']}")
     for n in D["notes"]:
         print(f" ! {n}")
-    if compiled:
-        print(compiled)
+    for c in compiled:
+        print(c)
     if not fails:
         print("preflight OK (stage 2)")
         return 0

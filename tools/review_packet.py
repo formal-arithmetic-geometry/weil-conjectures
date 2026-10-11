@@ -15,7 +15,11 @@ opens other files only to follow a doubt.
 Stage 2 (a statement delivery, tools/README.md "Stage 2"): the node (statement, kind, chapter, unit, stmt_deps); each
 stmt_dep with its statement and its recorded `lean`; the delivered `lean` record and the result of the mechanical
 checks of tools/stage2_delivery.py; the Lean file in full; for every identifier of the file that is some node's
-recorded declaration, that node's statement; the compile (on the server only); the report; earlier returns.
+recorded declaration, that node's statement; the compile (on the server only); for each NEW definition node of the
+delivery (coord/STATE.md, STAGE 2 EXTRA NODES) its statement, source, searches, the node in full, the nodes with the
+same title or Stacks tag, the Stacks text of its tags and its module in full; for each DEPENDENCY module the dependency
+node's statement, its old record (lean, mathlib_match), the delivered record and the module in full; the report;
+earlier returns.
 """
 from __future__ import annotations
 import json, pathlib, re, subprocess, sys
@@ -70,6 +74,15 @@ def stacks(tag, tagmap, cap=9000):
     return f"{f.name} lines {a+1}-{b+1} ({lab})\n{txt}"
 
 
+def stacks_tagmap():
+    tagmap = {}
+    tf = ROOT / "literature" / "stacks-project" / "tags" / "tags"
+    if tf.exists():
+        for l in tf.read_text().split("\n"):
+            if l and not l.startswith("#") and "," in l: a, b = l.split(",", 1); tagmap[a] = b
+    return tagmap
+
+
 def main_stage2(g, item) -> int:
     import stage2_delivery as s2
     br = f"deliver/{g}/{item}"
@@ -79,31 +92,63 @@ def main_stage2(g, item) -> int:
     base = git("merge-base", "sheaf-dag", br).strip()
     D = s2.read_delivery(G, br, base, g, item)
     nodes = s2.nodes_at(G, "sheaf-dag")
+    new, deps = D.get("new") or {}, D.get("deps") or {}
+    # the declarations of the delivery's own nodes resolve too (new nodes, dependency nodes as delivered)
+    dnodes = dict(nodes); dnodes.update({k: v["node"] for k, v in new.items()}); dnodes.update({k: v["node"] for k, v in deps.items()})
+    comp = {c["file"]: c for c in s2.compile_modules(D, g)}
     o = []; w = o.append
     w(f"# Review packet (stage 2): {item} (group {g})\n")
     files = git("diff", "--name-status", f"{base}..{br}").strip()
     w(f"Branch {br} at {head}, on base {base[:9]} (sheaf-dag is at {git('rev-parse', '--short', 'sheaf-dag').strip()}). "
       f"Files:\n\n```\n{files}\n```\n")
+    if D.get("roles"):
+        w("Classification: the item; " + "; ".join(D["roles"]) + "\n")
+    if new or deps:
+        w(f"**This delivery has {len(new)} new definition node(s) and {len(deps)} dependency module(s)** (coord/STATE.md, STAGE 2 "
+          "EXTRA NODES): read sections 7 and 8; a new node that exists in Mathlib, the source or the DAG, or whose fields break "
+          "the rule, is H12; a dependency module that does not state the dependency node's notion is H13.\n")
     d = D["node"] or nodes.get(item) or {}
     w(f"## 1. The node\n\n- kind {d.get('kind')}, status {d.get('status')}, chapter {d.get('chapter')}, unit {d.get('unit')}\n"
-      f"- source: {json.dumps(d.get('source'), ensure_ascii=False)}\n- stmt_deps: {d.get('stmt_deps')}\n")
+      f"- source: {json.dumps(d.get('source'), ensure_ascii=False)}\n- stmt_deps: {d.get('stmt_deps')}"
+      + (f" (added by the delivery: {D.get('added_deps')})" if D.get("added_deps") else "") + "\n")
     w(f"**Statement.** {d.get('statement')}\n")
     w("## 2. The statement dependencies and their recorded declarations\n")
     for u in d.get("stmt_deps") or []:
+        if u in new:
+            w(f"- **[{u}]** NEW definition node of this delivery: see section 7\n"); continue
         n = nodes.get(u)
         if n is None: w(f"- **[{u}]** DOES NOT EXIST on sheaf-dag\n"); continue
         l = n.get("lean") if isinstance(n.get("lean"), dict) else None
         lean = (f"convention node, no Lean notion (L): {l.get('note')}" if l and l.get("convention") else (f"`{l.get('module')}` / `{l.get('declaration')}`" + (f"\n  - statement: `{l.get('statement')}`" if l.get("statement") else "")
                 + (f"\n  - branch {l.get('branch')}" if l.get("branch") else "")) if l else "**no Lean declaration recorded**")
+        if u in deps:
+            lean += "\n  - **the delivery replaces this record by a dependency module: see section 8**"
         w(f"- **[{u}]** ({n.get('kind')}): {n.get('statement')}\n  - lean: {lean}\n")
     w("## 3. The delivered `lean` record\n\n```json\n" + json.dumps(D["rec"], indent=1, ensure_ascii=False) + "\n```\n")
     if D["fails"] or D["notes"]:
-        w("**Mechanical checks (tools/stage2_delivery.py) found:**\n")
+        w("**Mechanical checks (tools/stage2_delivery.py) found** (on the whole delivery):\n")
         for L, x in D["fails"]: w(f"- ({L}) {x}")
         for x in D["notes"]: w(f"- note: {x}")
         w("")
     else:
-        w("Mechanical checks (a)-(e) of tools/stage2_delivery.py: nothing found.\n")
+        w("Mechanical checks (a)-(e) of tools/stage2_delivery.py on the whole delivery: nothing found.\n")
+
+    def used_section(text, nid, sdeps):
+        used = [u for u in s2.used_recorded(text, s2.declaration_map(dnodes)) if u[2] != nid]
+        if not used: w("none found (the file uses no declaration that a node records)\n")
+        for tok, full, uid in used:
+            n = dnodes.get(uid) or {}
+            tagn = " (NEW in this delivery)" if uid in new else (" (dependency module of this delivery)" if uid in deps else "")
+            w(f"- `{tok}` = `{full}` is the declaration of **[{uid}]**{tagn}{' (a stmt_dep)' if uid in sdeps else ' (NOT a stmt_dep of the node)'}: {n.get('statement')}\n")
+        undeclared = [u for u in sdeps if u not in {x[2] for x in used}]
+        if undeclared: w(f"stmt_deps whose recorded declaration the file does not visibly use: {undeclared}\n")
+
+    def compile_section(path):
+        c = comp.get(path)
+        if c is None: w("not compiled (the module is not among the checked modules)\n"); return
+        if c["status"] in ("ok", "fail"): w("```\n" + c["out"][-6000:] + f"\n```\nexit code {c['rc']}\n")
+        else: w(c["out"] + "\n")
+
     w("## 4. The Lean file\n")
     text = D["lean_text"]
     if text is None:
@@ -111,21 +156,65 @@ def main_stage2(g, item) -> int:
     else:
         w(f"`{D['lean_path']}`\n\n```lean\n{text.rstrip()}\n```\n")
         w("## 5. Recorded declarations the file uses, with the statements of their nodes\n")
-        used = [u for u in s2.used_recorded(text, s2.declaration_map(nodes)) if u[2] != item]
-        if not used: w("none found (the file uses no declaration that a node records)\n")
-        for tok, full, nid in used:
-            n = nodes.get(nid) or {}
-            w(f"- `{tok}` = `{full}` is the declaration of **[{nid}]**{' (a stmt_dep)' if nid in (d.get('stmt_deps') or []) else ' (NOT a stmt_dep of the node)'}: {n.get('statement')}\n")
-        undeclared = [u for u in (d.get("stmt_deps") or []) if u not in {x[2] for x in used}]
-        if undeclared: w(f"stmt_deps whose recorded declaration the file does not visibly use: {undeclared}\n")
+        used_section(text, item, d.get("stmt_deps") or [])
         w("## 6. The compile\n")
-        ran, rc, out = s2.compile_text(text, g, item)
-        w(("```\n" + out[-6000:] + f"\n```\nexit code {rc}\n") if ran else out + "\n")
-    w("## 7. The group's report\n\n" + (D["report"] or "**no report in the delivery**") + "\n")
+        compile_section(D["lean_path"])
+    if [m for m in D.get("modules") or [] if m["siblings"]]:
+        w("Compile order of the delivery's modules (sibling imports first): " + ", ".join(f"`{m['module']}`" for m in D["modules"]) + "\n")
+    tagmap = None
+    mods = {m["node"]: m for m in D.get("modules") or []}
+    w("## 7. New definition nodes\n")
+    if not new: w("none\n")
+    for nid, x in new.items():
+        n = x["node"]
+        w(f"### {nid} (`{x['path']}`)\n\n**Statement.** {n.get('statement')}\n\n- source: {json.dumps(n.get('source'), ensure_ascii=False)}\n"
+          f"- stmt_deps: {n.get('stmt_deps')}\n")
+        for u in n.get("stmt_deps") or []:
+            m = dnodes.get(u) or {}
+            w(f"  - [{u}]{' (NEW)' if u in new else ''}: {str(m.get('statement'))[:800]}")
+        w("\nMathlib searches recorded:\n")
+        for s in n.get("mathlib_searches") or []:
+            w("- " + (json.dumps(s, ensure_ascii=False)[:900] if isinstance(s, dict) else str(s)[:900]))
+        w("\nThe node in full:\n\n```json\n" + json.dumps(n, indent=1, ensure_ascii=False) + "\n```\n")
+        hits = [(h, e) for h, e in nodes.items() if h != nid and str(e.get("title") or "").strip().lower() == str(n.get("title") or "").strip().lower()]
+        if hits:
+            w("Nodes on sheaf-dag with the same title (is the new node one of them?): " + ", ".join(f"[{h}]" for h, _ in hits[:10]) + "\n")
+        tg = tags_of(n.get("source"))
+        if tg:
+            if tagmap is None: tagmap = stacks_tagmap()
+            same = [(h, t) for t in tg for h, e in nodes.items() if t in json.dumps(e.get("source"), ensure_ascii=False)]
+            if same:
+                w("Nodes on sheaf-dag with the same Stacks tag in their source (is the new node one of them?): "
+                  + ", ".join(f"[{h}] ({t})" for h, t in same[:12]) + "\n")
+            for t in tg[:6]:
+                sx = stacks(t, tagmap)
+                w(f"Stacks tag {t}:\n\n" + (f"```\n{sx}\n```\n" if sx else "not found in literature/stacks-project (open the source named in the node)\n"))
+        m = mods.get(nid)
+        if m:
+            w(f"Its module `{m['file']}`:\n\n```lean\n{m['text'].rstrip()}\n```\n")
+            w("Recorded declarations it uses:\n"); used_section(m["text"], nid, n.get("stmt_deps") or [])
+            w("Compile:\n"); compile_section(m["file"])
+        else:
+            w("No module (lean record: " + json.dumps(n.get("lean"), ensure_ascii=False) + ")\n")
+    w("## 8. Dependency modules\n")
+    if not deps: w("none\n")
+    for nid, x in deps.items():
+        n, b = x["node"], x["base_node"]
+        w(f"### {nid} (`{x['path']}`)\n\n**Statement of the dependency node.** {n.get('statement')}\n\n- source: {json.dumps(n.get('source'), ensure_ascii=False)}\n"
+          f"- its old record on the base: lean = {json.dumps(b.get('lean'), ensure_ascii=False)}; mathlib_match = {json.dumps(b.get('mathlib_match'), ensure_ascii=False)}\n"
+          f"- the delivered record: {json.dumps(n.get('lean'), ensure_ascii=False)}\n")
+        m = mods.get(nid)
+        if m:
+            w(f"The module `{m['file']}`:\n\n```lean\n{m['text'].rstrip()}\n```\n")
+            w("Recorded declarations it uses:\n"); used_section(m["text"], nid, n.get("stmt_deps") or [])
+            w("Compile:\n"); compile_section(m["file"])
+        else:
+            w("**No module in the delivery for this dependency node.**\n")
+    w("## 9. The group's report\n\n" + (D["report"] or "**no report in the delivery**") + "\n")
     ret = ROOT / "coord" / "returns" / f"{g}.md"
     if ret.exists():
         ent = [e for e in re.split(r"\n(?=## )", ret.read_text()) if item in e.split("\n")[0]]
-        if ent: w("## 8. Earlier returns of this item (check that every point was repaired)\n\n" + "\n\n".join(ent)[-8000:] + "\n")
+        if ent: w("## 10. Earlier returns of this item (check that every point was repaired)\n\n" + "\n\n".join(ent)[-8000:] + "\n")
     out = pathlib.Path(sys.argv[sys.argv.index("--out") + 1]) if "--out" in sys.argv else pathlib.Path("/tmp/review-packets") / f"{g}__{item}.md"
     out.parent.mkdir(parents=True, exist_ok=True); out.write_text("\n".join(o))
     print(out, f"({len(out.read_text())} characters)")

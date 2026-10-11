@@ -6,9 +6,20 @@ A delivery branch deliver/<G>/<item> is ONE commit on top of sheaf-dag with only
   (1) the module lean/Sheaf/<Topic>/<Name>.lean (module Sheaf.<Topic>.<Name>; the declarations inside carry no
       `Sheaf.` prefix), or no Lean file when the node is an existing declaration of Mathlib or of the source;
   (2) the node file dag/nodes/<chapter>/<item>.json, changed only in `lean`:
-      {module, declaration, declarations?, file?, statement, branch, by, date, existing} (`fixed_by`, the reviewer's
-      id, is added by merge_delivery.py when a reviewer's fix changed the record);
-  (3) coord/reports/<G>/<item>.md with `## Worker report` and `## Second reading by <G>`.
+      {module, declaration, declarations?, file?, statement, branch, by, date, existing, note?} (`fixed_by`, the
+      reviewer's id, is added by merge_delivery.py when a reviewer's fix changed the record), and in `stmt_deps` only by
+      adding new definition nodes of the delivery;
+  (3) coord/reports/<G>/<item>.md with `## Worker report` and `## Second reading by <G>`, plus `## New nodes` and
+      `## Dependency modules` when the delivery has them;
+and, by the rule STAGE 2 EXTRA NODES (decision of the human, 2026-10-11 05:55 UTC; coord/STATE.md):
+  (A) NEW DEFINITION NODES dag/nodes/<chapter of the item>/<id>.json, absent on the base, with the fields of
+      check_new_node (kind definition, status split, created.item = the item, created.group = G, ...), each with its
+      own module and `lean` record (or `existing: true` and no module), cited by the item;
+  (B) DEPENDENCY MODULES: for a node in the item's stmt_deps on the base, its node file changed only in `lean` (the
+      module's record, with `lean.note` saying why the recorded declaration or mathlib_match was unusable) and its
+      module.
+Every module is the lean.file of exactly one of these nodes; a module may import a sibling module of the delivery
+(compile_modules defers it until the sibling is in the library; the merge lands the modules in dependency order).
 
 Failures are (letter, text) pairs; the letters are the ones of the stage-2 preflight:
   a commit and files, b node and record, c the Lean file, d an existing declaration, e the report, f the compile.
@@ -20,12 +31,12 @@ from __future__ import annotations
 import gzip, json, os, pathlib, re, shutil, subprocess, sys
 
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
-from node_fields import changed_fields_except, STAGE2_OWNS  # noqa: E402
+from node_fields import changed_fields_except, STAGE2_OWNS, STAGE2_ITEM_ALSO  # noqa: E402
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 SOURCE = pathlib.Path(os.environ.get("SHEAF_SOURCE_REPO", str(pathlib.Path.home() / "weil-conjectures-slopmaster2")))
 KEYS = ("module", "declaration", "statement", "branch", "by", "date", "existing")
-OPTIONAL = ("declarations", "file", "fixed_by")
+OPTIONAL = ("declarations", "file", "fixed_by", "note")
 DATE = re.compile(r"^\d{4}-\d{2}-\d{2}$")
 MODULE = re.compile(r"^Sheaf(\.[A-Za-z_][A-Za-z0-9_']*){2,}$")
 IMPORT_OK = ("Mathlib.", "WeilConjectures.", "Sheaf.")
@@ -338,11 +349,11 @@ def report_sections(text: str, group: str) -> tuple[str, str]:
     return worker, second
 
 
-def check_record(rec, group) -> list[tuple[str, str]]:
+def check_record(rec, group, where: str = "lean") -> list[tuple[str, str]]:
     fails = []
-    f = lambda s: fails.append(("b", s))  # noqa: E731
+    f = lambda s: fails.append(("b", f"{where}: {s}" if where != "lean" else s))  # noqa: E731
     if not isinstance(rec, dict):
-        return [("b", f"the node's `lean` is {type(rec).__name__}, not a record {{{', '.join(KEYS)}, ...}}")]
+        return [("b", f"{where}: the node's `lean` is {type(rec).__name__}, not a record {{{', '.join(KEYS)}, ...}}")]
     for k in KEYS:
         if k not in rec or rec[k] in (None, ""):
             f(f"lean has no {k}")
@@ -375,13 +386,171 @@ def check_record(rec, group) -> list[tuple[str, str]]:
     return fails
 
 
-def read_delivery(git: Git, ref: str, base: str, group: str, item: str, max_commits: int = 1) -> dict:
+# The fields of a new definition node (STAGE 2 EXTRA NODES, decision of the human, 2026-10-11 05:55 UTC).
+NEW_NODE_KEYS = ("id", "kind", "title", "statement", "source", "stmt_deps", "proof", "proof_deps", "proof_origin",
+                 "mathlib_searches", "mathlib_match", "status", "created", "blueprint", "lean_audit", "chapter", "unit",
+                 "lean")
+SEARCH_KEYS = ("tool", "query", "results", "date", "verdict")
+CITE = re.compile(r"\[([a-z][a-z0-9]*(?:-[a-z][a-z0-9]*)+)\]")
+
+
+def search_kind(tool) -> str | None:
+    t = str(tool or "").lower().replace(" ", "")
+    if "leansearch" in t:
+        return "leansearch"
+    if "loogle" in t or "leanfinder" in t:
+        return "loogle/leanfinder"
+    if "grep" in t or t in ("rg", "ripgrep"):
+        return "grep"
+    return None
+
+
+def check_new_node(nid: str, d: dict, path: str, item: str, item_node: dict, item_dir: str, group: str,
+                   known_ids: set, new_ids: set, base_nodes: dict | None) -> list[tuple[str, str]]:
+    """The field rule of a new definition node (coord/STATE.md, STAGE 2 EXTRA NODES). Failures are (b)."""
+    fails = []
+    f = lambda s: fails.append(("b", f"new node {nid}: {s}"))  # noqa: E731
+    if not isinstance(d, dict):
+        return [("b", f"new node {nid}: not a JSON object")]
+    if pathlib.PurePosixPath(path).parent.as_posix() != item_dir:
+        f(f"file {path}: a new node goes into the item's chapter directory {item_dir}/")
+    if d.get("id") != nid:
+        f(f"id is {d.get('id')!r}, the file name says {nid!r}")
+    if not nid.startswith("def-"):
+        f("the id of a new definition node has the form def-<chapter prefix>-<short-name>")
+    extra = [k for k in d if k not in NEW_NODE_KEYS]
+    if extra:
+        f(f"key(s) outside the rule: {', '.join(extra)} (the maintainer's fields come with the merge)")
+    missing = [k for k in NEW_NODE_KEYS if k not in d]
+    if missing:
+        f(f"missing key(s): {', '.join(missing)}")
+    if d.get("kind") != "definition":
+        f(f"kind is {d.get('kind')!r}; a new node of a stage-2 delivery is a \"definition\"")
+    if d.get("status") != "split":
+        f(f"status is {d.get('status')!r}; \"split\" (a definition needs no proof)")
+    if not str(d.get("title") or "").strip():
+        f("no title")
+    stmt = str(d.get("statement") or "")
+    if not stmt.strip():
+        f("empty statement")
+    if "\\\\" in stmt and re.search(r"\\\\[A-Za-z]", stmt):
+        f("the statement has doubled backslashes (\\\\cmd): TeX is written once")
+    src = d.get("source")
+    if not (isinstance(src, dict) and str(src.get("document") or "").strip() and str(src.get("place") or "").strip()):
+        f("source is not {document, place} with both non-empty")
+    sd = d.get("stmt_deps")
+    if not isinstance(sd, list):
+        f("stmt_deps is not a list"); sd = []
+    for c in sd:
+        if c not in known_ids and c not in new_ids:
+            f(f"stmt_deps names {c}, which is no node (neither on the base nor new in the delivery)")
+        if c == nid:
+            f("stmt_deps names the node itself")
+    cited = CITE.findall(stmt)
+    for c in cited:
+        if c not in sd:
+            f(f"the statement cites [{c}], which is not in stmt_deps")
+    for c in sd:
+        if c not in cited:
+            f(f"stmt_deps has {c}, which the statement does not cite as [{c}]")
+    if d.get("proof") != [] or d.get("proof_deps") != [] or d.get("proof_origin") is not None:
+        f("proof and proof_deps must be [] and proof_origin null (a definition has no proof)")
+    if d.get("mathlib_match") is not None:
+        f("mathlib_match is not null: a notion of Mathlib or the source is no new node (record it as an "
+          "`existing: true` lean record, and only when no DAG node carries it)")
+    ms = d.get("mathlib_searches")
+    kinds = set()
+    if not isinstance(ms, list):
+        f("mathlib_searches is not a list"); ms = []
+    for k, s in enumerate(ms, 1):
+        if not isinstance(s, dict):
+            f(f"mathlib_searches[{k}] is not an object"); continue
+        miss = [x for x in SEARCH_KEYS if not str(s.get(x) or "").strip()]
+        if miss:
+            f(f"mathlib_searches[{k}] has no {', '.join(miss)}")
+        kd = search_kind(s.get("tool"))
+        if kd:
+            kinds.add(kd)
+    want = {"leansearch", "loogle/leanfinder", "grep"}
+    if kinds != want:
+        f(f"mathlib_searches lack the kind(s) {', '.join(sorted(want - kinds))} (LeanSearch; Loogle or LeanFinder; grep of "
+          "Mathlib, of the source repository and of lean/Sheaf)")
+    cr = d.get("created")
+    if not isinstance(cr, dict):
+        f("no created record"); cr = {}
+    if cr.get("by") != "worker":
+        f(f"created.by is {cr.get('by')!r}, not \"worker\"")
+    if cr.get("item") != item:
+        f(f"created.item is {cr.get('item')!r}, not the item {item!r}")
+    if cr.get("group") != group:
+        f(f"created.group is {cr.get('group')!r}, not {group!r}")
+    if not DATE.match(str(cr.get("date") or "")):
+        f(f"created.date {cr.get('date')!r} is not YYYY-MM-DD")
+    bp = d.get("blueprint")
+    if not isinstance(bp, dict):
+        f("no blueprint field {is, from, same_as}")
+    else:
+        if bp.get("is") is not None:
+            f(f"blueprint.is is {bp.get('is')!r}; null for a new node")
+        fr = bp.get("from") if isinstance(bp.get("from"), dict) else None
+        if fr is None:
+            f("blueprint.from is not {node, place, via}")
+        else:
+            if not str(fr.get("place") or "").strip() or fr.get("place") == "unspecified":
+                f("blueprint.from.place is empty or \"unspecified\": name the place of the blueprint proof the notion serves")
+            if base_nodes is not None:
+                try:
+                    import blueprint_refs as brf
+                    tmp = dict(base_nodes)
+                    tmp[item] = item_node
+                    tmp[nid] = d
+                    anc, chain_ = brf.chain(nid, tmp)
+                    via = chain_[1:]
+                    if fr.get("node") != anc:
+                        f(f"blueprint.from.node is {fr.get('node')!r}; `tools/blueprint_refs.py ancestor {item}` gives {anc!r}")
+                    if fr.get("via") != via:
+                        f(f"blueprint.from.via is {fr.get('via')!r}; the item's via with the item in front is {via!r}")
+                except Exception as e:  # noqa: BLE001
+                    f(f"blueprint.from not checked ({e})")
+        if not isinstance(bp.get("same_as"), list):
+            f("blueprint.same_as is not a list (the search for the same notion in the blueprint)")
+    la = d.get("lean_audit")
+    if la != {"master": {"state": "none"}, "slopmaster2": {"state": "none"}}:
+        f(f"lean_audit is {json.dumps(la)}; {{\"master\": {{\"state\": \"none\"}}, \"slopmaster2\": {{\"state\": \"none\"}}}}")
+    for k in ("chapter", "unit"):
+        if d.get(k) != item_node.get(k):
+            f(f"{k} is {d.get(k)!r}; the item's is {item_node.get(k)!r}")
+    fails.extend(check_record(d.get("lean"), group, f"new node {nid}"))
+    return fails
+
+
+def section_text(text: str | None, title: str) -> str:
+    for s in re.split(r"(?m)^## ", text or "")[1:]:
+        head, _, body = s.partition("\n")
+        if head.strip() == title:
+            return body.strip()
+    return ""
+
+
+def module_path(rec: dict) -> str | None:
+    m = rec.get("module") if isinstance(rec, dict) else None
+    return "lean/" + m.replace(".", "/") + ".lean" if isinstance(m, str) and m else None
+
+
+def read_delivery(git: Git, ref: str, base: str, group: str, item: str, max_commits: int = 1,
+                  overrides: dict | None = None) -> dict:
     """Checks (a), (b), (c) without the compile, (d), (e) of the delivery `ref` against `base`.
-    Returns {fails: [(letter, text)], notes, node_path, node, base_node, rec, lean_path, lean_text, report, decl}."""
+    `overrides` {path: text} replaces the text of a delivered file (a reviewer's fix, merge_delivery.py).
+    Returns {fails: [(letter, text)], notes, node_path, node, base_node, rec, lean_path, lean_text, report, decl,
+    commits, base, new: {id: {path, node}}, deps: {id: {path, node, base_node}}, modules: [{file, node, role, rec,
+    text, decl, module, siblings}] in dependency order (a module after the sibling modules it imports), roles}."""
     D = {"fails": [], "notes": [], "node_path": None, "node": None, "base_node": None, "rec": None,
-         "lean_path": None, "lean_text": None, "report": None, "decl": None, "commits": []}
+         "lean_path": None, "lean_text": None, "report": None, "decl": None, "commits": [],
+         "new": {}, "deps": {}, "modules": [], "roles": [], "report_path": f"coord/reports/{group}/{item}.md"}
     fails = D["fails"]
+    over = overrides or {}
     f = lambda L, s: fails.append((L, s))  # noqa: E731
+    show = lambda p: over[p] if p in over else git.show(ref, p)  # noqa: E731
     if not git.ok("rev-parse", "--verify", "-q", ref):
         f("a", f"no ref {ref}"); return D
     if not git.ok("rev-parse", "--verify", "-q", base):
@@ -404,31 +573,40 @@ def read_delivery(git: Git, ref: str, base: str, group: str, item: str, max_comm
         f("a", f"{len(commits)} commits beyond {base}: deliver one item as exactly one commit (squash with `git reset --soft {base}` and commit again)")
     node_path = git.node_path(ref, item)
     D["node_path"] = node_path
-    report = f"coord/reports/{group}/{item}.md"
+    report = D["report_path"]
     if node_path is None:
         f("b", f"no node file for {item} on {ref}"); return D
+    item_dir = pathlib.PurePosixPath(node_path).parent.as_posix()
+    base_paths = {pathlib.PurePosixPath(p).stem: p for p in
+                  git.run("ls-tree", "-r", "--name-only", base, "--", "dag/nodes", check=False).splitlines() if p.endswith(".json")}
     status = [l.split("\t") for l in git.run("diff", "--name-status", base, ref).splitlines() if l] if commits else []
-    lean_files = []
+    lean_files, node_files = [], []
     for st in status:
         code, p = st[0], st[-1]
         if code.startswith("D"):
             f("a", f"{p}: the delivery deletes a file"); continue
-        if p in (node_path, report):
+        if code.startswith("R"):
+            f("a", f"{st[1]} -> {p}: the delivery renames a file"); continue
+        if p == report:
             continue
-        if p.startswith("lean/") and p.endswith(".lean"):
-            lean_files.append(p); continue
+        if p.startswith("dag/nodes/") and p.endswith(".json"):
+            node_files.append((code, p)); continue
+        if p.startswith("lean/Sheaf/") and p.endswith(".lean"):
+            lean_files.append(p)
+            if not code.startswith("A"):
+                D["notes"].append(f"{p} exists on the base: the delivery changes a module of the library")
+            continue
         if p.startswith("coord/claims/"):
             f("a", f"{p}: a claim lock file is in the delivery; claims are made with tools/claim.py on the server, never pushed")
         else:
-            f("a", f"{p}: file outside the delivery (allowed: lean/Sheaf/<Topic>/<Name>.lean, {node_path}, {report})")
+            f("a", f"{p}: file outside the delivery (allowed: modules lean/Sheaf/<Topic>/<Name>.lean, {node_path}, new "
+                   f"definition nodes {item_dir}/<id>.json, dependency node files changed in `lean`, {report})")
     changed = {st[-1] for st in status}
     if commits and node_path not in changed:
         f("b", "the node file is unchanged (the delivery sets its field `lean`)")
-    if len(lean_files) > 1:
-        f("a", f"{len(lean_files)} Lean files: one module per node ({', '.join(lean_files)})")
-    # (b) the node
+    # (b) the item
     try:
-        node = json.loads(git.show(ref, node_path) or "")
+        node = json.loads(show(node_path) or "")
     except ValueError as e:
         f("b", f"{node_path}: not valid JSON ({e})"); return D
     D["node"] = node
@@ -439,47 +617,172 @@ def read_delivery(git: Git, ref: str, base: str, group: str, item: str, max_comm
     else:
         bnode = json.loads(base_text)
     D["base_node"] = bnode
-    ch = changed_fields_except(bnode, node, STAGE2_OWNS) if base_text is not None else []
+    base_deps = list(bnode.get("stmt_deps") or [])
+    # classify the other node files: new definition nodes and dependency nodes
+    for code, p in node_files:
+        if p == node_path:
+            continue
+        nid = pathlib.PurePosixPath(p).stem
+        try:
+            nd = json.loads(show(p) or "")
+        except ValueError as e:
+            f("b", f"{p}: not valid JSON ({e})"); continue
+        if nid in base_paths:
+            if base_paths[nid] != p:
+                f("b", f"{p}: the node {nid} is {base_paths[nid]} on the base"); continue
+            if nid not in base_deps:
+                f("b", f"{p}: the node {nid} exists on the base and is not in the item's stmt_deps there: a delivery changes "
+                       "only the item, new definition nodes and dependency nodes of the item")
+                continue
+            bd = json.loads(git.show(base, p) or "{}")
+            D["deps"][nid] = {"path": p, "node": nd, "base_node": bd}
+        else:
+            D["new"][nid] = {"path": p, "node": nd}
+    new_ids = set(D["new"])
+    for nid in D["new"]:
+        D["roles"].append(f"new definition node {nid} ({D['new'][nid]['path']})")
+    for nid in D["deps"]:
+        D["roles"].append(f"dependency node {nid} ({D['deps'][nid]['path']}), changed in `lean`")
+    ch = changed_fields_except(bnode, node, STAGE2_OWNS + STAGE2_ITEM_ALSO) if base_text is not None else []
     if ch:
-        f("b", f"the node changed in field(s) {', '.join(ch)}; a stage-2 delivery takes the node as it is on {base} and sets only `lean`")
+        f("b", f"the node changed in field(s) {', '.join(ch)}; a stage-2 delivery takes the node as it is on {base} and sets "
+               "only `lean` (and adds the new definition nodes to stmt_deps)")
+    hd = node.get("stmt_deps") if isinstance(node.get("stmt_deps"), list) else []
+    gone = [x for x in base_deps if x not in hd]
+    added = [x for x in hd if x not in base_deps]
+    if gone:
+        f("b", f"the item's stmt_deps lost {', '.join(gone)}: a delivery only adds the new definition nodes to it")
+    bad = [x for x in added if x not in new_ids]
+    if bad:
+        f("b", f"the item's stmt_deps gained {', '.join(bad)}, which are not new nodes of the delivery (only new definition "
+               "nodes may be added)")
+    D["added_deps"] = added
     rec = node.get("lean")
     D["rec"] = rec
-    rf = check_record(rec, group)
-    fails.extend(rf)
+    fails.extend(check_record(rec, group))
     if not isinstance(rec, dict):
         rec = {}
-    # (c) / (d)
-    lf = rec.get("file")
-    if rec.get("existing") is True:
-        if lean_files:
-            f("d", f"lean.existing is true but the commit has Lean file(s) {', '.join(lean_files)}")
-        df, notes = check_existing(rec)
-        fails.extend(df); D["notes"] += notes
-    elif lf:
-        if lean_files and lf not in lean_files:
-            f("c", f"lean.file is {lf} but the commit's Lean file is {lean_files[0]}")
+    # (b) the new nodes and the dependency nodes
+    base_nodes = nodes_at(git, base) if D["new"] else None
+    known = set(base_paths)
+    for nid, x in D["new"].items():
+        fails.extend(check_new_node(nid, x["node"], x["path"], item, node, item_dir, group, known, new_ids, base_nodes))
+    # every new node is cited by the item, directly or through another new node
+    reach, todo = set(), [x for x in hd if x in new_ids]
+    while todo:
+        u = todo.pop()
+        if u in reach:
+            continue
+        reach.add(u)
+        todo += [v for v in (D["new"][u]["node"].get("stmt_deps") or []) if v in new_ids]
+    for nid in D["new"]:
+        if nid not in reach:
+            f("b", f"new node {nid}: not cited by the item (add it to the item's stmt_deps, or cite it from a new node the "
+                   "item cites)")
+    if D["new"] and base_nodes is not None:
+        pre = {n.split("-")[1] for n, d in base_nodes.items() if d.get("chapter") == node.get("chapter") and n.count("-") >= 2}
+        for nid in D["new"]:
+            if nid.count("-") < 2 or nid.split("-")[1] not in pre:
+                D["notes"].append(f"new node {nid}: the prefix {nid.split('-')[1] if nid.count('-') >= 1 else nid!r} is not "
+                                  f"used by any node of the chapter {node.get('chapter')} on the base")
+    for nid, x in D["deps"].items():
+        nd, bd = x["node"], x["base_node"]
+        ch = changed_fields_except(bd, nd, STAGE2_OWNS)
+        if ch:
+            f("b", f"dependency node {nid}: changed in field(s) {', '.join(ch)}; a dependency node changes only in `lean` "
+                   "(its mathlib_match stays)")
+        r = nd.get("lean")
+        fails.extend(check_record(r, group, f"dependency node {nid}"))
+        if isinstance(r, dict):
+            if r.get("existing") is not False:
+                f("b", f"dependency node {nid}: lean.existing must be false (a dependency module states the notion)")
+            if not str(r.get("note") or "").strip():
+                f("b", f"dependency node {nid}: lean.note missing: why the recorded declaration or mathlib_match is unusable "
+                       "and what the module states")
+    # (c) / (d): the modules
+    owners: dict[str, list[str]] = {}
+    recs = [(item, "item", rec)] + [(n, "new", x["node"].get("lean")) for n, x in D["new"].items()] \
+        + [(n, "dependency", x["node"].get("lean")) for n, x in D["deps"].items()]
+    mods = []
+    for nid, role, r in recs:
+        if not isinstance(r, dict):
+            continue
+        who = "the item" if role == "item" else f"{role} node {nid}"
+        if r.get("existing") is True:
+            if role == "item" and lean_files and not D["new"] and not D["deps"]:
+                f("d", f"lean.existing is true but the commit has Lean file(s) {', '.join(lean_files)}")
+            df, notes = check_existing(r)
+            fails.extend((L, x if role == "item" else f"{who}: {x}") for L, x in df)
+            D["notes"] += [x if role == "item" else f"{who}: {x}" for x in notes]
+            continue
+        lf = r.get("file")
+        if not lf:
+            if role == "item" and lean_files and not D["new"] and not D["deps"]:
+                f("c", f"the commit has {lean_files[0]} but lean.file is not set")
+            continue
+        owners.setdefault(lf, []).append(nid)
         if not lf.startswith("lean/Sheaf/"):
-            f("c", f"lean.file {lf}: a module of the library is under lean/Sheaf/")
-        text = git.show(ref, lf)
+            f("c", f"{who}: lean.file {lf}: a module of the library is under lean/Sheaf/")
+        text = show(lf)
         if text is None:
-            f("c", f"no file {lf} in {ref}")
-        else:
-            if lf not in lean_files:
-                f("c", f"{lf} is not changed by the commit (the module is part of the delivery)")
-            D["lean_path"], D["lean_text"] = lf, text
-            cf, decl = check_lean_text(text, rec, item)
-            fails.extend(cf); D["decl"] = decl
-    elif lean_files:
-        f("c", f"the commit has {lean_files[0]} but lean.file is not set")
+            f("c", f"{who}: no file {lf} in {ref}"); continue
+        if lf not in lean_files and lf not in over:
+            f("c", f"{who}: {lf} is not changed by the commit (the module is part of the delivery)")
+        cf, decl = check_lean_text(text, r, nid)
+        fails.extend((L, x if role == "item" else f"{lf} ({nid}): {x}") for L, x in cf)
+        mods.append({"file": lf, "node": nid, "role": role, "rec": r, "text": text, "decl": decl,
+                     "module": r.get("module")})
+        if role == "item":
+            D["lean_path"], D["lean_text"], D["decl"] = lf, text, decl
+    for lf in lean_files:
+        o = owners.get(lf, [])
+        if not o:
+            f("c", f"{lf}: no node of the delivery has it as lean.file (every module is the module of the item, of a new "
+                   "definition node or of a dependency node)")
+    for lf, o in owners.items():
+        if len(o) > 1:
+            f("c", f"{lf} is the lean.file of several nodes ({', '.join(o)}): one module per node")
+    seen: dict[str, str] = {}
+    for m in mods:
+        for d in declarations(m["text"]):
+            if d["name"] and d["name"] in seen and seen[d["name"]] != m["file"]:
+                f("c", f"{d['name']} is declared in {seen[d['name']]} and in {m['file']}")
+            elif d["name"]:
+                seen[d["name"]] = m["file"]
+    # dependency order: a module after the sibling modules it imports
+    names = {m["module"]: m for m in mods if m["module"]}
+    for m in mods:
+        m["siblings"] = [i for i in imports(m["text"]) if i in names and i != m["module"]]
+    order, state = [], {}
+
+    def visit(m, stack):
+        k = m["file"]
+        if state.get(k) == 2:
+            return
+        if state.get(k) == 1:
+            f("c", f"the modules import each other in a cycle: {' -> '.join(stack + [m['module']])}")
+            return
+        state[k] = 1
+        for s in m["siblings"]:
+            visit(names[s], stack + [m["module"]])
+        state[k] = 2
+        order.append(m)
+    for m in mods:
+        visit(m, [])
+    D["modules"] = order
+    for m in order:
+        D["roles"].append(f"module {m['file']} of {m['role']} {m['node']}"
+                          + (f" (imports the delivery's {', '.join(m['siblings'])})" if m["siblings"] else ""))
     # (e) the report
-    rt = git.show(ref, report)
+    rt = show(report)
     D["report"] = rt
-    fails.extend(check_report(rt, group, report))
+    fails.extend(check_report(rt, group, report, list(D["new"]), list(D["deps"])))
     return D
 
 
-def check_report(rt: str | None, group: str, where: str) -> list[tuple[str, str]]:
-    """Check (e) on the text of the report."""
+def check_report(rt: str | None, group: str, where: str, new_ids=(), dep_ids=()) -> list[tuple[str, str]]:
+    """Check (e) on the text of the report: the two sections, and `## New nodes` / `## Dependency modules` naming every
+    new node / dependency node of the delivery."""
     if rt is None:
         return [("e", f"no report {where}")]
     out = []
@@ -488,6 +791,16 @@ def check_report(rt: str | None, group: str, where: str) -> list[tuple[str, str]
         out.append(("e", "the report has no non-empty section '## Worker report'"))
     if not s:
         out.append(("e", f"the report has no non-empty section '## Second reading by {group}'"))
+    for title, ids in (("New nodes", new_ids), ("Dependency modules", dep_ids)):
+        if not ids:
+            continue
+        body = section_text(rt, title)
+        if not body:
+            out.append(("e", f"the report has no non-empty section '## {title}' (the delivery has {', '.join(ids)})"))
+            continue
+        for i in ids:
+            if i not in body:
+                out.append(("e", f"the section '## {title}' does not name {i}"))
     return out
 
 
@@ -564,6 +877,38 @@ def compile_text(text: str, group: str, item: str, root: pathlib.Path | None = N
     env.pop("SHEAF_TREE", None)
     r = subprocess.run(["bash", str(root / "tools" / "lean_file.sh"), str(p)], cwd=root, env=env, capture_output=True, text=True)
     return True, r.returncode, f"$ SHEAF_GROUP={group} SHEAF_FILE_TIMEOUT={timeout} tools/lean_file.sh {p}\n" + (r.stdout + r.stderr).strip()
+
+
+def landed_same(root: pathlib.Path, module: str, text: str) -> bool:
+    """Whether the library of `root` already has `module` with exactly `text` (a sibling that has landed)."""
+    p = root / "lean" / (module.replace(".", "/") + ".lean")
+    try:
+        return p.read_text() == text
+    except OSError:
+        return False
+
+
+def compile_modules(D: dict, group: str, root: pathlib.Path | None = None, timeout: int = 120) -> list[dict]:
+    """Compile every module of the delivery in dependency order, each on its own in lean/.sandbox/<group>/<node>.lean.
+    A module that imports a sibling module of the delivery which is not yet in the library is not compiled: its status
+    is "deferred" (the merge lands the modules in order, and each landing compiles in the library, where the sibling then
+    exists). Returns [{file, node, status: ok|fail|deferred|not run, rc, out}]."""
+    root = root or compile_root()
+    texts = {m["module"]: m["text"] for m in D.get("modules") or []}
+    res, bad = [], set()
+    for m in D.get("modules") or []:
+        pend = [s for s in m.get("siblings") or [] if s in bad or not landed_same(root, s, texts.get(s, ""))]
+        if pend:
+            res.append({"file": m["file"], "node": m["node"], "status": "deferred", "rc": None,
+                        "out": f"compile: deferred: imports sibling {', '.join(pend)} (not yet in the library; the merge "
+                               "lands the modules in dependency order and each landing compiles in the library)"})
+            continue
+        ran, rc, out = compile_text(m["text"], group, m["node"], root, timeout)
+        st = "not run" if not ran else ("ok" if rc == 0 else "fail")
+        if st == "fail":
+            bad.add(m["module"])
+        res.append({"file": m["file"], "node": m["node"], "status": st, "rc": rc, "out": out})
+    return res
 
 
 # ---------------------------------------------------------------- declaration -> node

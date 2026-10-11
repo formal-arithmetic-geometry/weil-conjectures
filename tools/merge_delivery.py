@@ -23,17 +23,24 @@ Usage (from the project root; by the lead, or by a reviewer sub-agent of the lea
   tools/merge_delivery.py <group> <item> --stage 2 --reviewer ID --head SHA [--apply-fixes DIR] [--spot-checked NOTE]
                         [--verdict PASS|FIX] [--dry-run]
                                                         a stage-2 delivery (tools/README.md "Stage 2"): the mechanical
-                        checks of tools/stage2_delivery.py; the module (DIR/<basename>.lean replaces it) written to
-                        lean/.sandbox/L/<item>.lean and landed with `SHEAF_GROUP=L tools/land.sh` (a failure aborts,
-                        nothing changed); the node's `lean` set to the delivered record (statement re-read from the
-                        landed file) and `reviewed_lean`; the report; the same bookkeeping as stage 1; one commit
-                        "State <item> (<group>, reviewed by <ID>)". --dry-run prints what it would do (with the
-                        resulting record), changes nothing. A stage-2 DIR holds any of: <basename>.lean (the fixed module;
-                        lean.statement re-read from it, lean.declarations filtered to the names it declares, the dropped
-                        ones printed; refused if lean.declaration is not in it, unless the record file renames it),
-                        <item>.lean-record.json (keys merged over the delivered `lean`, theirs winning; `by`, `date`
-                        stay), <item>.report.md (replaces the report). A changed record gets `fixed_by: <ID>`; the
-                        record, the module and the report are checked again on the fixed versions.
+                        checks of tools/stage2_delivery.py (item, new definition nodes, dependency nodes: coord/STATE.md
+                        "STAGE 2 EXTRA NODES"); with several modules, those importing no sibling are compiled first in
+                        lean/.sandbox/L/ (a failure aborts, nothing landed); then every module, in dependency order
+                        (sibling imports first), written to lean/.sandbox/L/<node>.lean and landed with
+                        `SHEAF_GROUP=L tools/land.sh` (the first failing: nothing changed; a later one: the tool STOPS,
+                        commits nothing and prints the landings to revert with `tools/landing.py revert <id> <reason>`);
+                        `lean` (statement re-read from the landed file) and `reviewed_lean` set on the item (and its
+                        stmt_deps gain the new nodes) and on each dependency node; each new node written whole with
+                        `reviewed` {date, by L, reviewer, group, result, note: "new definition node of a stage-2
+                        delivery, read against its source by the reviewer"} and `reviewed_lean`; the report; the same
+                        bookkeeping as stage 1; one commit "State <item> (<group>, reviewed by <ID>); new nodes: <ids>".
+                        --dry-run prints what it would do, changes nothing. A stage-2 DIR holds any of: <basename>.lean
+                        (a fixed module of the delivery, any of them; its node's lean.statement re-read from it,
+                        lean.declarations filtered to the names it declares; refused if lean.declaration is not in it,
+                        unless the record file renames it), <item>.lean-record.json (keys merged over the item's `lean`,
+                        theirs winning; `by`, `date` stay), <new node id>.json (replaces that new node file whole),
+                        <item>.report.md (replaces the report). A changed record gets `fixed_by: <ID>`; the whole
+                        delivery is checked again on the fixed versions.
   tools/merge_delivery.py return <group> <item> REASONS write the reasons into coord/returns/<group>.md, the ledger
                                                         line, and commit; the claim and the branch stay with the group
 
@@ -610,7 +617,9 @@ def cmd_return(group, item, reasons):
 # ---------------------------------------------------------------- stage 2
 
 def cmd_merge2(o):
-    """A stage-2 delivery: land the module, record `lean` and `reviewed_lean`, the report, the bookkeeping."""
+    """A stage-2 delivery: land the modules in dependency order, record `lean` and `reviewed_lean` on the item, on the
+    new definition nodes (written whole, with `reviewed`) and on the dependency nodes, the item's added stmt_deps, the
+    report, the bookkeeping (coord/STATE.md, STAGE 2 EXTRA NODES)."""
     import stage2_delivery as s2
     group, item = o.group, o.item
     br = branch_of(group, item)
@@ -631,69 +640,106 @@ def cmd_merge2(o):
         age = time.time() - int(git("show", "-s", "--format=%ct", base))
         if age > MAX_AGE:
             raise Fail(f"base {base[:7]} is {age/3600:.0f} h behind {MAIN}: pull {MAIN}, rebase, push again")
-        D = s2.read_delivery(s2.Git(ROOT), br, base, group, item)
-        rec = D["rec"] if isinstance(D["rec"], dict) else None
-        text, report = D["lean_text"], D["report"]
-        nfix, override, text_fixed, fixnotes = 0, None, False, []
+        G = s2.Git(ROOT)
+        D = s2.read_delivery(G, br, base, group, item)
+        nfix, fixnotes = 0, []
         if o.apply_fixes:
+            # DIR: <basename>.lean for any module of the delivery, <item>.lean-record.json (the item's record),
+            # <new node id>.json (a new node file, replaced whole), <item>.report.md. The delivery is then read and
+            # checked again on the fixed versions.
             fixdir = pathlib.Path(o.apply_fixes).resolve()
             if not fixdir.is_dir():
                 raise Fail(f"--apply-fixes {fixdir}: no such directory")
-            want = pathlib.PurePosixPath(D["lean_path"]).name if D["lean_path"] else None
+            bybase = {}
+            for m in D["modules"]:
+                bybase.setdefault(pathlib.PurePosixPath(m["file"]).name, []).append(m)
             rec_name, rep_name = f"{item}.lean-record.json", f"{item}.report.md"
+            texts, override, nodefix, overrides = {}, None, {}, {}
             for p in sorted(x for x in fixdir.rglob("*") if x.is_file()):
                 r = p.relative_to(fixdir).as_posix()
-                if r == want:
-                    text, text_fixed = p.read_text(), True
-                elif r == rec_name:
+                if r in bybase:
+                    if len(bybase[r]) > 1:
+                        raise Fail(f"--apply-fixes: {r}: several modules of the delivery have this basename")
+                    texts[bybase[r][0]["file"]] = p.read_text()
+                elif r == rec_name or (r.endswith(".json") and r[:-5] in D["new"]):
                     try:
-                        override = json.loads(p.read_text())
+                        x = json.loads(p.read_text())
                     except ValueError as e:
                         raise Fail(f"--apply-fixes: {r}: not valid JSON ({e})")
-                    if not isinstance(override, dict):
-                        raise Fail(f"--apply-fixes: {r}: not a JSON object (the keys of `lean` to replace)")
+                    if not isinstance(x, dict):
+                        raise Fail(f"--apply-fixes: {r}: not a JSON object")
+                    if r == rec_name:
+                        override = x
+                    else:
+                        nodefix[r[:-5]] = x
                 elif r == rep_name:
-                    report = p.read_text()
+                    overrides[D["report_path"]] = p.read_text()
                 else:
-                    raise Fail(f"--apply-fixes: {r}: a stage-2 fix is only DIR/{want or '<the module>.lean'}, "
-                               f"DIR/{rec_name} or DIR/{rep_name}")
+                    raise Fail(f"--apply-fixes: {r}: a stage-2 fix is only DIR/<basename of a module>.lean "
+                               f"({', '.join(sorted(bybase)) or 'no module'}), DIR/{rec_name}, DIR/<new node id>.json "
+                               f"({', '.join(D['new']) or 'no new node'}) or DIR/{rep_name}")
                 nfix += 1
-        # the static checks; with a fix the record is refitted to the fixed file (and DIR/<item>.lean-record.json)
-        # and the record, the Lean file and the report are checked again on the fixed versions
+            # the node files with their refitted records
+            nodes = {item: (D["node_path"], json.loads(json.dumps(D["node"])))}
+            for nid, x in D["new"].items():
+                nodes[nid] = (x["path"], nodefix.get(nid) or json.loads(json.dumps(x["node"])))
+            for nid, x in D["deps"].items():
+                nodes[nid] = (x["path"], json.loads(json.dumps(x["node"])))
+            for nid in nodefix:
+                overrides[nodes[nid][0]] = dump(nodes[nid][1])
+            for nid, (path, nd) in nodes.items():
+                rec = nd.get("lean")
+                if not isinstance(rec, dict):
+                    continue
+                f = rec.get("file")
+                fixed = f in texts
+                ov = override if nid == item else None
+                if not fixed and ov is None:
+                    continue
+                text = texts.get(f) if fixed else (G.show(br, f) if f else None)
+                newrec, notes, refuse = s2.refit_record(text, rec, ov, o.reviewer, fixed)
+                if refuse:
+                    raise Fail(f"stage-2 fix of {nid}: " + " | ".join(refuse))
+                fixnotes += [f"{nid}: {x}" for x in notes]
+                if newrec != rec:
+                    nd["lean"] = newrec
+                    overrides[path] = dump(nd)
+            for fpath, text in texts.items():
+                overrides[fpath] = text
+            D = s2.read_delivery(G, br, base, group, item, overrides=overrides)
         fails = list(D["fails"])
-        decl = D["decl"]
-        record = dict(rec) if rec is not None else None
-        if nfix and rec is not None and (text_fixed or override is not None):
-            record, fixnotes, refuse = s2.refit_record(text, rec, override, o.reviewer, text_fixed)
-            if refuse:
-                raise Fail("stage-2 fix: " + " | ".join(refuse))
-            old = set(s2.check_record(rec, group))
-            if D["lean_text"] is not None:
-                old |= set(s2.check_lean_text(D["lean_text"], rec, item)[0])
-            if rec.get("existing") is True:
-                old |= set(s2.check_existing(rec)[0])
-            fails = [x for x in fails if x not in old] + s2.check_record(record, group)
-            if record.get("existing") is True:
-                fails += s2.check_existing(record)[0]
-            elif text is not None:
-                cf, decl = s2.check_lean_text(text, record, item)
-                fails += cf
-        if report is not D["report"]:
-            fails = [x for x in fails if x[0] != "e"] + s2.check_report(report, group, f"{o.apply_fixes}/{item}.report.md")
         if fails:
             raise Fail("stage-2 checks: " + " | ".join(f"({L}) {x}" for L, x in fails))
-        if record is None:
+        if not isinstance(D["rec"], dict):
             raise Fail("the node has no `lean` record")
-        if text is not None and decl is not None:
-            record["statement"] = decl["statement"]
         node_rel = node_path(item)
         if node_rel is None or node_rel != D["node_path"]:
             raise Fail(f"the node file of {item} is {node_rel} on {MAIN}, {D['node_path']} on the branch")
-        lib_rel = record.get("file")
-        report_rel = f"coord/reports/{group}/{item}.md"
+        new, deps, mods = D["new"], D["deps"], D["modules"]
+        for nid, x in new.items():
+            if node_path(nid) is not None or exists_at("HEAD", x["path"]):
+                raise Fail(f"the new node {nid} exists on {MAIN} now (another delivery created it): return the delivery")
+        for nid, x in deps.items():
+            if node_path(nid) != x["path"]:
+                raise Fail(f"the dependency node {nid} is not {x['path']} on {MAIN}")
+            cur = json.loads((ROOT / x["path"]).read_text())
+            if cur.get("lean") != x["base_node"].get("lean"):
+                raise Fail(f"the dependency node {nid}: its `lean` changed on {MAIN} since the delivery's base "
+                           f"({json.dumps(cur.get('lean'), ensure_ascii=False)[:200]}); the reviewer decides and the group re-pushes")
+        # the records: statement re-read from each module (refreshed after its landing)
+        records = {}
+        for nid, rec in [(item, D["rec"])] + [(k, v["node"].get("lean")) for k, v in new.items()] + [(k, v["node"].get("lean")) for k, v in deps.items()]:
+            records[nid] = dict(rec)
+        for m in mods:
+            if m["decl"] is not None:
+                records[m["node"]]["statement"] = m["decl"]["statement"]
+        report = D["report"]
+        report_rel = D["report_path"]
         if dry:
             print(f"DRY RUN {item} (stage 2): branch {br} at {git('rev-parse', '--short', br)}, base {base[:9]}; checks (a)-(e) pass"
                   + (f"; {nfix} file(s) fixed by the reviewer" if nfix else ""))
+            for r in D.get("roles") or []:
+                print(f"  delivery: {r}")
             for n in D["notes"] + fixnotes:
                 print(f"  note: {n}")
         rid = o.reviewer
@@ -701,52 +747,97 @@ def cmd_merge2(o):
         reviewed = {"date": today(), "by": "L", "reviewer": rid, "group": group, "result": verdict.lower()}
         if o.spot_checked:
             reviewed["note"] = o.spot_checked
+        reviewed_new = {"date": today(), "by": "L", "reviewer": rid, "group": group, "result": verdict.lower(),
+                        "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"}
         tree = Tree()
         book = {"group": group, "item": item}
-        landed = None
-        try:
-            # (3) the node: `lean` and `reviewed_lean` on the current version of the node file
-            cur = json.loads((ROOT / node_rel).read_text())
-            cur["lean"] = record
-            cur["reviewed_lean"] = reviewed
-            say(f"set {node_rel}: lean = {json.dumps(record, ensure_ascii=False)}")
-            say(f"set {node_rel}: reviewed_lean = {json.dumps(reviewed, ensure_ascii=False)}")
+        landed = []   # (module, landing id)
+        paths_nodes = {item: node_rel}
+        docs = {}
+
+        def put(nid):
+            say(f"set {paths_nodes[nid]}: lean = {json.dumps(docs[nid].get('lean'), ensure_ascii=False)}")
             if not dry:
-                tree.write(node_rel, dump(cur))
+                tree.write(paths_nodes[nid], dump(docs[nid]))
+        try:
+            # (3) the nodes: `lean` and `reviewed_lean` on the current version of the item and of each dependency node;
+            # the new nodes written whole with `reviewed` and `reviewed_lean`; the item's stmt_deps gain the new nodes
+            cur = json.loads((ROOT / node_rel).read_text())
+            cur["lean"] = records[item]
+            cur["reviewed_lean"] = reviewed
+            if D.get("added_deps"):
+                sd = list(cur.get("stmt_deps") or [])
+                cur["stmt_deps"] = sd + [x for x in D["added_deps"] if x not in sd]
+                say(f"set {node_rel}: stmt_deps = {cur['stmt_deps']} (added {D['added_deps']})")
+            docs[item] = cur
+            say(f"set {node_rel}: reviewed_lean = {json.dumps(reviewed, ensure_ascii=False)}")
+            put(item)
+            for nid, x in new.items():
+                nd = dict(x["node"])
+                nd["lean"] = records[nid]
+                nd["reviewed"] = reviewed_new
+                nd["reviewed_lean"] = reviewed
+                docs[nid] = nd; paths_nodes[nid] = x["path"]
+                say(f"write the new node {x['path']} with reviewed = {json.dumps(reviewed_new, ensure_ascii=False)} and reviewed_lean")
+                put(nid)
+            for nid, x in deps.items():
+                nd = json.loads((ROOT / x["path"]).read_text())
+                nd["lean"] = records[nid]
+                nd["reviewed_lean"] = reviewed
+                docs[nid] = nd; paths_nodes[nid] = x["path"]
+                say(f"set the dependency node {x['path']}: lean (mathlib_match kept) and reviewed_lean")
+                put(nid)
             # (4) the report
             say(f"write {report_rel} ({len(report or '')} characters) "
-                + ("from the reviewer's fix" if report is not D["report"] else "from the branch"))
+                + ("from the reviewer's fix" if nfix and report != G.show(br, report_rel) else "from the branch"))
             if not dry:
                 tree.write(report_rel, report)
-            # (2) the landing, last before the bookkeeping: a failure aborts with nothing changed
-            if text is not None:
-                sand = ROOT / "lean" / ".sandbox" / "L" / f"{item}.lean"
-                cmd = ["bash", str(ROOT / "tools" / "land.sh"), str(sand), str(ROOT / lib_rel)]
-                say(f"write {sand.relative_to(ROOT)} ({len(text.splitlines())} lines) and run SHEAF_GROUP=L tools/land.sh {sand.relative_to(ROOT)} {lib_rel}")
+            # (2) the landings, in dependency order, last before the bookkeeping. With several modules, every module
+            # that imports no sibling is compiled first in lean/.sandbox/L/, so that a failure aborts before any landing.
+            if len(mods) > 1:
+                say(f"compile first, in lean/.sandbox/L/: {', '.join(m['file'] for m in mods if not m['siblings'])}")
                 if not dry:
-                    sand.parent.mkdir(parents=True, exist_ok=True)
-                    sand.write_text(text)
-                    r = subprocess.run(cmd, cwd=ROOT, env=dict(_os.environ, SHEAF_GROUP="L"), text=True, capture_output=True)
-                    if r.returncode != 0:
-                        raise Fail(f"land.sh exit {r.returncode}: " + " | ".join((r.stdout + r.stderr).strip().splitlines()[-25:]))
-                    landed = (r.stdout.strip().splitlines() or [""])[-1]
-                    got = next((d for d in s2.declarations((ROOT / lib_rel).read_text()) if d["name"] == record["declaration"]), None)
-                    if got is None:
-                        raise Fail(f"{record['declaration']} not found in the landed {lib_rel}")
-                    if got["statement"] != record["statement"]:
-                        record["statement"] = got["statement"]; cur["lean"] = record
-                        tree.write(node_rel, dump(cur))
+                    for c in s2.compile_modules(D, "L", ROOT):
+                        if c["status"] == "fail":
+                            raise Fail(f"{c['file']} ({c['node']}) does not compile; nothing landed: "
+                                       + " | ".join(c["out"].splitlines()[-25:]))
+            for m in mods:
+                lib_rel = m["file"]
+                sand = ROOT / "lean" / ".sandbox" / "L" / f"{m['node']}.lean"
+                cmd = ["bash", str(ROOT / "tools" / "land.sh"), str(sand), str(ROOT / lib_rel)]
+                say(f"write {sand.relative_to(ROOT)} ({len(m['text'].splitlines())} lines) and run SHEAF_GROUP=L tools/land.sh "
+                    f"{sand.relative_to(ROOT)} {lib_rel}  [{m['role']} {m['node']}]")
+                if dry:
+                    continue
+                sand.parent.mkdir(parents=True, exist_ok=True)
+                sand.write_text(m["text"])
+                r = subprocess.run(cmd, cwd=ROOT, env=dict(_os.environ, SHEAF_GROUP="L"), text=True, capture_output=True)
+                if r.returncode != 0:
+                    raise Fail(f"land.sh {lib_rel} exit {r.returncode}: " + " | ".join((r.stdout + r.stderr).strip().splitlines()[-25:]))
+                mm = re.search(r"as landing (\S+)", r.stdout)
+                landed.append((m["module"], mm.group(1) if mm else (r.stdout.strip().splitlines() or ["?"])[-1]))
+                rec = records[m["node"]]
+                got = next((d for d in s2.declarations((ROOT / lib_rel).read_text()) if d["name"] == rec["declaration"]), None)
+                if got is None:
+                    raise Fail(f"{rec['declaration']} not found in the landed {lib_rel}")
+                if got["statement"] != rec["statement"]:
+                    rec["statement"] = got["statement"]; docs[m["node"]]["lean"] = rec
+                    tree.write(paths_nodes[m["node"]], dump(docs[m["node"]]))
             # (5) bookkeeping as in stage 1: the return entry, the claim, the ledger line, the commit
             rp, rtext, parts = return_entries(group, item)
             keep = [x for x in parts if not x.startswith(f"## {item} (")]
             returned = rtext is not None and len(keep) != len(parts)
             claim = ROOT / "coord" / "claims" / (item.replace("/", "__") + ".lock")
+            rec = records[item]
+            extra = (f"; new nodes: {', '.join(new)}" if new else "") + (f"; dependency modules: {', '.join(deps)}" if deps else "")
             ltext = (f"merged {br} (stage 2; reviewer {verdict}; {'after a return' if returned else 'first push'}; "
-                     f"{record.get('module')} {record.get('declaration')}{'; existing declaration' if record.get('existing') else ''})")
+                     f"{rec.get('module')} {rec.get('declaration')}{'; existing declaration' if rec.get('existing') else ''}{extra})")
             author = git("show", "-s", "--format=%an <%ae>", D["commits"][-1]) if D["commits"] else "L"
-            paths = [node_rel, report_rel, "coord/ledger.md", "coord/deliveries.log"] + ([lib_rel] if text is not None else [])
-            msg = (f"State {item} ({group}, reviewed by {rid})\n\nDelivered by group {group} ({br}, {git('rev-parse', '--short', br)}); "
-                   f"reviewer {rid}: {verdict}; merged by tools/merge_delivery.py --stage 2 for L.")
+            paths = list(paths_nodes.values()) + [report_rel, "coord/ledger.md", "coord/deliveries.log"] + [m["file"] for m in mods]
+            msg = (f"State {item} ({group}, reviewed by {rid})" + (f"; new nodes: {', '.join(new)}" if new else "")
+                   + f"\n\nDelivered by group {group} ({br}, {git('rev-parse', '--short', br)}); "
+                   f"reviewer {rid}: {verdict}; merged by tools/merge_delivery.py --stage 2 for L."
+                   + (("\nDependency modules: " + ", ".join(f"{k} ({records[k].get('module')})" for k in deps) + ".") if deps else ""))
             if dry:
                 if returned:
                     print(f"  would drop the return entry of {item} from {rp.relative_to(ROOT)}")
@@ -777,12 +868,14 @@ def cmd_merge2(o):
             tree.restore()
             unbook(book)
             if landed and isinstance(e, Fail):
-                raise Fail(f"{e} (the module was landed: {landed}; revert it with tools/landing.py revert <id> <reason>)")
+                raise Fail(f"{e}. STOPPED AFTER PARTIAL LANDING, NOTHING COMMITTED: landed {', '.join(f'{m} as landing {i}' for m, i in landed)}; "
+                           f"revert each with `tools/landing.py revert <id> <reason>` "
+                           f"({'; '.join(f'tools/landing.py revert {i} merge of {item} failed' for _, i in landed)}) before merging again")
             raise
         sha = git("rev-parse", "--short", "HEAD")
         git("branch", "-D", br, check=False)
         refresh_queue(item)
-    print(f"MERGED {item} {sha}")
+    print(f"MERGED {item} {sha}" + (f" (new nodes: {', '.join(new)})" if new else ""))
     return 0
 
 
