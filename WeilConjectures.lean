@@ -239,6 +239,7 @@ public import WeilConjectures.AlgebraicGeometry.Morphisms.EtaleTorsorSpreading
 public import WeilConjectures.AlgebraicGeometry.Morphisms.FiberDegree
 public import WeilConjectures.AlgebraicGeometry.Morphisms.Finite.Chart
 public import WeilConjectures.AlgebraicGeometry.Morphisms.Finite.GeometricFiber
+public import WeilConjectures.AlgebraicGeometry.Morphisms.Finite.Limit
 public import WeilConjectures.AlgebraicGeometry.Morphisms.Finite.PieceEqualizer
 public import WeilConjectures.AlgebraicGeometry.Morphisms.Finite.PieceRefine
 public import WeilConjectures.AlgebraicGeometry.Morphisms.Finite.PieceRing
@@ -247,6 +248,8 @@ public import WeilConjectures.AlgebraicGeometry.Morphisms.Finite.PieceSections
 public import WeilConjectures.AlgebraicGeometry.Morphisms.Finite.SplitExists
 public import WeilConjectures.AlgebraicGeometry.Morphisms.Finite.SplitNeighborhood
 public import WeilConjectures.AlgebraicGeometry.Morphisms.Integral.DisjointCover
+public import WeilConjectures.AlgebraicGeometry.Morphisms.Integral.FiniteApproximation
+public import WeilConjectures.AlgebraicGeometry.Morphisms.Integral.FinitePresentationApproximation
 public import WeilConjectures.AlgebraicGeometry.Morphisms.ProAffineEtale
 public import WeilConjectures.AlgebraicGeometry.Morphisms.QuasiFiniteFactorization
 public import WeilConjectures.AlgebraicGeometry.Morphisms.RegularImmersion
@@ -924,6 +927,7 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Fpqc
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Proetale
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Representability
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Small
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.SmallAffineZariski
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Stalk
 public import WeilConjectures.Mathlib.AlgebraicGeometry.ValuativeCriterion
 public import WeilConjectures.Mathlib.AlgebraicGeometry.ZariskisMainTheorem
