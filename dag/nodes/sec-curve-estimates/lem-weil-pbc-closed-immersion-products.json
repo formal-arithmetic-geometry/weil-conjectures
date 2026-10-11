@@ -138,5 +138,23 @@
   "group": "C1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-cip (reviewer sub-agent of L); spot-checked: Source: blueprint master sk-thm-br/lem-weil-pbc-closed-immersion-products.md (order 904) and Stacks 01QS/01QR/01T0/01T2. The imported final clause 'an open immersion is of finite type' is false without quasi-compactness (the blueprint proof itself restricts to quasi-compact source); the corrected statement adds that hypothesis and the report names the change (E7); the imported dependents (lem-chow-graph etc.) will be split later against the corrected statement. Step 1 is exactly lem-weil-pbc-closed-immersion-comp (IsClosedImmersion.comp). Step 2: Z1xZ2->W1xZ2 and W1xZ2->W1xW2 are base changes of Z1->W1 along W1xZ2->W1 and of Z2->W2 along W1xW2->W2, carried by lem-weil-pbc-closed-immersion-base-change (projection Z x_X X' -> X', any g) up to the elementary pullback-pasting identification; step 3 composes via lem-weil-pbc-closed-immersion-comp. Step 4 is the new leaf lem-weil-pbc-qc-open-immersion-finite-type, whose finite-type notion is def-weil-finite-type-morphism (LFT + QC). Mathlib verified: Immersion.lean:190 instance [IsImmersion f] : LocallyOfFiniteType f, Immersion.lean:132 open immersion is immersion, FiniteType.lean:60 locallyOfFiniteType_of_isOpenImmersion, FiniteType.lean:21 docstring finite type = LFT + QC. Small cases: empty open and D(f) in Spec A (qc, finite type), infinite union of D(f_i) in Spec k[x_1,x_2,...] (not qc, not finite type). FIXES: dag/nodes/sec-curve-estimates/lem-weil-pbc-qc-open-immersion-finite-type.json: statement: JSON escape '\\to' had been written as '\\t'+'o' (a TAB character), restored to TeX \\to; same file: mathlib_match: pointed at the direct named instance AlgebraicGeometry.locallyOfFiniteType_of_isOpenImmersion, FiniteType.lean:60, instead of the class names with Immersion.lean:190. The report mentions a citations.json not in the delivery (harmless). Start Sat Oct 10 03:36:07 PM UTC 2026, end Sat Oct 10 03:36:48 PM UTC 2026.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ClosedImmersionProducts",
+  "declaration": "AlgebraicGeometry.closedImmersion_comp_products_and_finiteType_openImmersion",
+  "file": "lean/Sheaf/AlgebraicGeometry/ClosedImmersionProducts.lean",
+  "statement": "theorem closedImmersion_comp_products_and_finiteType_openImmersion : (∀ {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z), IsClosedImmersion f → IsClosedImmersion g → IsClosedImmersion (f ≫ g)) ∧ (∀ {Z₁ Z₂ W₁ W₂ S : Scheme.{u}} (a₁ : Z₁ ⟶ S) (a₂ : Z₂ ⟶ S) (b₁ : W₁ ⟶ S) (b₂ : W₂ ⟶ S) (i₁ : Z₁ ⟶ W₁) (i₂ : Z₂ ⟶ W₂) (h₁ : a₁ ≫ 𝟙 S = i₁ ≫ b₁) (h₂ : a₂ ≫ 𝟙 S = i₂ ≫ b₂), IsClosedImmersion i₁ → IsClosedImmersion i₂ → IsClosedImmersion (pullback.map a₁ a₂ b₁ b₂ i₁ i₂ (𝟙 S) h₁ h₂)) ∧ (∀ {U Y : Scheme.{u}} (j : U ⟶ Y), IsOpenImmersion j → QuasiCompact j → (LocallyOfFiniteType j ∧ QuasiCompact j))",
+  "branch": "sheaf-dag",
+  "by": "K1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-cip1405",
+  "group": "K1",
+  "result": "pass",
+  "note": "clause 1: X,Y,Z, f,g, IsClosedImmersion f,g -> IsClosedImmersion (f ≫ g) = g∘f; clause 2: Z1,Z2,W1,W2,S with structure maps a_i,b_i, i_k over S (h_k with 𝟙 S), closed immersions -> IsClosedImmersion (pullback.map ... (𝟙 S)) = Z1×_S Z2 -> W1×_S W2 (Limits.pullback, as H1 FpqcMorphismsDescend/landed form); clause 3: IsOpenImmersion j, QuasiCompact j -> LocallyOfFiniteType j ∧ QuasiCompact j = finite type per def-weil-finite-type-morphism (as landed AffineFiniteTypeAlgebra etc.); only Mathlib imports so no shadowed names; existing false correct (Mathlib has only components: IsClosedImmersion.comp, base-change stability, locallyOfFiniteType_of_isOpenImmersion)"
  }
 }
