@@ -31,6 +31,8 @@ dualizability; see `WeilConjectures.SixFunctors.Etale.Derived.Perfect` for the c
   `RHom(K, M ⊗ᴸ T) ≅ RHom(K, M) ⊗ᴸ T` for an invertible `T`.
 - `AlgebraicGeometry.Etale.DerivedCategory.derivedHomIsoCoefficientDualTensor`:
   `RHom(K, T) ≅ K^∨ ⊗ᴸ T` for an invertible `T`.
+- `AlgebraicGeometry.Etale.DerivedCategory.coefficientDualDoubleDual`: the coefficient biduality
+  `K ⟶ K^∨∨`, natural in `K`.
 
 ## Main statements
 
@@ -38,6 +40,9 @@ dualizability; see `WeilConjectures.SixFunctors.Etale.Derived.Perfect` for the c
   (`sk-prop-sf-dualizable-biduality`, `prop-sf-dualizable`)
 - `AlgebraicGeometry.Etale.DerivedCategory.nonempty_iso_coefficientDual_coefficientDual`
   (`sk-prop-sf-dualizable-biduality`)
+- `AlgebraicGeometry.Etale.DerivedCategory.isIso_coefficientDualDoubleDual_app`
+  (`sk-prop-sf-dualizable-biduality`, `thm-sf-dual-perfect`): the biduality `K ⟶ K^∨∨` of a
+  perfect `K` is an isomorphism.
 - `AlgebraicGeometry.Etale.DerivedCategory.nonempty_iso_coefficientDual_tensor`
   (`sk-prop-sf-dualizable-biduality`, `prop-sf-dualizable-hom`)
 - `AlgebraicGeometry.Etale.DerivedCategory.isIso_derivedHomTensorMap`
@@ -238,6 +243,7 @@ lemma coefficientDualDoubleDual_app (K : _root_.DerivedCategory (Sheaf X.smallEt
   rfl
 
 /-- Blueprint `sk-prop-sf-dualizable-biduality`: Biduality of a perfect complex.
+This is also the biduality clause of blueprint `thm-sf-dual-perfect`.
 
 For a dualizable `K` the coefficient biduality `K ⟶ K^∨∨` is an isomorphism. -/
 theorem isIso_coefficientDualDoubleDual_app

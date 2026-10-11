@@ -37,6 +37,15 @@ perfect complex into its coefficient dual, twisted and shifted.
 - `AlgebraicGeometry.Etale.Orientation.twistShiftIso` (`rem-ptr-sf-orientation-2`): the purity
   isomorphism in the twist conventions of `def-coefficient-twists-detailed`,
   `(twistShift Λ X d).obj Λ_X ≅ Rf^! Λ_Y`.
+- `AlgebraicGeometry.Etale.Orientation.verdierDualIso` (`sk-thm-sf-dual-perfect`): the natural
+  isomorphism `θ_f : 𝔻_{X/Y} K = RHom(K, Rf^! Λ_Y) ≅ K^∨ ⊗ᴸ Λ_X(d)[2d]`, the composite of
+  `RHom(K, γ_f⁻¹)` and of the twist interchange; it is the case `T = Λ_X(d)[2d]` of
+  `AlgebraicGeometry.Etale.verdierDualIsoCoefficientDualTensor`, defined for any
+  `γ : T ≅ Rf^! Λ_Y` with `T` invertible.
+- `AlgebraicGeometry.Etale.Orientation.verdierDualEquivalence` (`sk-thm-sf-dual-perfect`): the
+  anti-equivalence of the perfect objects given by `𝔻_{X/Y}`.
+- `AlgebraicGeometry.Etale.Orientation.verdierDualVerdierDualIso`: the isomorphism
+  `𝔻_{X/Y} 𝔻_{X/Y} K ≅ K^∨∨` induced by `θ_f`.
 
 ## Main statements
 
@@ -50,6 +59,15 @@ perfect complex into its coefficient dual, twisted and shifted.
   (`sk-thm-sf-dual-perfect`): `𝔻_X K ≅ K^∨(d)[2d]` for a perfect `K`.
 - `AlgebraicGeometry.Etale.Orientation.isDualizable_verdierDual`
   (`sk-thm-sf-dual-perfect`): `𝔻_X` preserves the perfect objects.
+- `…Etale.Orientation.verdierDualDoubleDual_app_comp_verdierDualVerdierDualIso_hom`
+  (`sk-thm-sf-dual-perfect`): under `θ_f` the Verdier biduality `K ⟶ 𝔻_{X/Y} 𝔻_{X/Y} K` is
+  the coefficient-dual biduality `K ⟶ K^∨∨`; hence it is an isomorphism for perfect `K`
+  (`AlgebraicGeometry.Etale.Orientation.isIso_verdierDualDoubleDual_app_of_isDualizable`).
+- `AlgebraicGeometry.Etale.whiskerLeft_verdierDualIsoCoefficientDualTensor_hom_app_comp`
+  (`thm-sf-dual-perfect`): `θ` is compatible with the evaluations. The compatibility with a
+  change of coefficients is `CategoryTheory.MonoidalClosed.map_ihomIsoIhomUnitTensor_hom`, and
+  the pro-étale coefficient stages are
+  `WeilConjectures.SixFunctors.ProEtale.Derived.DualPerfect`.
 
 ## Implementation notes
 
@@ -66,10 +84,10 @@ an isomorphism `T⟦2d⟧ ≅ ω_X` as an argument instead.
 Perfectness is `CategoryTheory.IsDualizable`; see the implementation note of
 `WeilConjectures.SixFunctors.Etale.Derived.Perfect`.
 
-
-Biduality of the Verdier dual on `Dctf(X, Λ)` is *not* restated here: it is
+The general biduality of the Verdier dual on `Dctf(X, Λ)` is
 `AlgebraicGeometry.Etale.nonempty_iso_verdierDual_verdierDual` of
-`WeilConjectures.SixFunctors.Etale.Derived.Dualizing`.
+`WeilConjectures.SixFunctors.Etale.Derived.Dualizing`; for perfect objects and an oriented
+morphism it is proved here, without the constructibility hypotheses.
 
 -/
 

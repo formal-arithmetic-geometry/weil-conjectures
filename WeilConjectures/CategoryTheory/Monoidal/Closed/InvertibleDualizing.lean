@@ -38,11 +38,15 @@ dualizable `X`, and `[-, W]` restricts to an anti-equivalence of the dualizable 
   `[[X, W], W] ≅ [[X, 𝟙_ C], 𝟙_ C]` induced by `θ_X`.
 - `CategoryTheory.MonoidalClosed.dualizableIhomEquivalence`: the anti-equivalence of the
   dualizable objects given by `[-, W]`.
+- `CategoryTheory.MonoidalClosed.ihomUnitComparison`: the comparison `F [X, 𝟙_ C] ⟶ [F X, 𝟙_ D]`
+  of coefficient duals along a monoidal functor `F`.
 
 ## Main statements
 
 - `CategoryTheory.MonoidalClosed.whiskerLeft_ihomIsoIhomUnitTensor_hom_comp`: `θ` is compatible
   with the evaluations `X ⊗ [X, W] ⟶ W` and `X ⊗ [X, 𝟙_ C] ⟶ 𝟙_ C`.
+- `CategoryTheory.MonoidalClosed.map_ihomIsoIhomUnitTensor_hom`: `θ` is compatible with monoidal
+  functors, such as a change of coefficients (blueprint `thm-sf-dual-perfect`).
 - `CategoryTheory.MonoidalClosed.toIhomIhom_comp_ihomIhomIsoIhomIhomUnit_hom`: under `θ` the
   double-dual map into `[[X, W], W]` is the coefficient biduality.
 - `CategoryTheory.MonoidalClosed.isIso_toIhomIhom_of_isDualizable`: biduality relative to `W`
@@ -162,7 +166,10 @@ noncomputable def ihomUnitComparison (X : C) :
 variable {T W : C} (γ : T ≅ W) (hT : IsInvertible T) {T' W' : D} (γ' : T' ≅ W')
   (hT' : IsInvertible T') (e : F.obj T ≅ T') (eW : F.obj W ≅ W')
 
-/-- The twist interchange `θ_X : [X, W] ≅ [X, 𝟙_ C] ⊗ T` is compatible with a monoidal functor
+/-- Blueprint `thm-sf-dual-perfect`: The dual of a perfect complex (compatibility with finite
+reduction and scalar extension).
+
+The twist interchange `θ_X : [X, W] ≅ [X, 𝟙_ C] ⊗ T` is compatible with a monoidal functor
 `F` (for instance a change of coefficients: finite reduction or extension of scalars), given
 compatible identifications `F T ≅ T'` and `F W ≅ W'`: the square
 ```
