@@ -3252,3 +3252,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 01:45 L: merged deliver/M1/lem-pur-kinjective-ML-ordinals (reviewer FIX; first push; new nodes: 0)
 - 01:46 UTC L: M1 kinjective-ML-ordinals FIX 76e5a14a0 (R-mlo0144).
 - 01:46 L: merged deliver/F1/lem-pc-finite-projective-cokernel-localization (reviewer PASS; first push; new nodes: 1)
+- 01:46 UTC L: F1 finite-projective-cokernel-localization PASS 112103637 (R-pcl0145).
