@@ -3133,3 +3133,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 00:39 UTC L: M1 finite-free-complex-homology-upper-semicontinuous FIX 897c3bbc1 (R-hus0037; two class-(d) nodes folded), C1 finite-projective-tor-acyclic FIX 484f27475 (R-fpt0039), M1 left-derived-from-kflat-class FIX 1b8c1d0bb third push (R-ldk0037; bridge node cut to the used direction). lem-sc-etale-torsor-h1-functoriality step 4 read by L against the strengthened pushout node: it uses the morphism of extensions and the fibre, both still supplied; no change.
 - 00:39 L: merged deliver/J1/lem-sc-perfect-cut-complex-degree-zero (reviewer PASS; first push; new nodes: 1)
 - 00:40 L: merged deliver/C1/lem-pc-affine-flat-module-local-criterion (reviewer PASS; first push; new nodes: 1)
+- 00:41 UTC L: J1 perfect-cut-complex-degree-zero PASS 8b5e8f6cd (R-pcc0039).
