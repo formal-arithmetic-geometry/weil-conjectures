@@ -22,9 +22,70 @@
   "def-sp-grothendieck-abelian",
   "def-sp-injective-resolutions"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The forward implication is immediate from the definition of an injective object [def-sp-injective-resolutions]: for every monomorphism $M\\hookrightarrow N$ every morphism $M\\to I$ extends to $N$, in particular for every monomorphism $M\\hookrightarrow U$ from a subobject $M\\subset U$.",
+   "uses": [
+    "def-sp-injective-resolutions"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/injectives.tex",
+    "place": "Lemma 19.11.6 (Tag 079G), proof, first sentence"
+   }
+  },
+  {
+   "text": "For the converse, fix a monomorphism $A\\hookrightarrow B$ and a morphism $\\varphi:A\\to I$. Partially order the set $S$ of pairs $(A',\\varphi')$ consisting of a subobject $A\\subset A'\\subset B$ and a morphism $\\varphi':A'\\to I$ extending $\\varphi$, by $(A'_1,\\varphi'_1)\\le(A'_2,\\varphi'_2)$ if $A'_1\\subset A'_2$ and $\\varphi'_2|_{A'_1}=\\varphi'_1$. A totally ordered subset $T\\subset S$ has an upper bound: $A'=\\operatorname{colim}_{t\\in T}A'_t$ with the induced morphism $\\operatorname{colim}_t\\varphi'_t:A'\\to I$. Since filtered colimits in $\\mathcal A$ are exact (AB5, [def-sp-grothendieck-abelian]), the colimit of the monomorphisms $A'_t\\hookrightarrow B$ is a monomorphism $A'\\hookrightarrow B$, so $A'$ is a subobject of $B$ containing each $A'_t$, and the colimit map restricts to $\\varphi'_t$ on each $A'_t$, hence to $\\varphi$ on $A$. By Zorn's lemma $S$ has a maximal element $(A',\\varphi')$.",
+   "uses": [
+    "def-sp-grothendieck-abelian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/injectives.tex",
+    "place": "Lemma 19.11.6 (Tag 079G), proof, construction of S and Zorn upper bound"
+   }
+  },
+  {
+   "text": "Suppose $A'\\neq B$. Then the quotient map $B\\to B/A'$ is nonzero, so since $U$ is a generator (separator, [def-sp-grothendieck-abelian]) there is $\\psi:U\\to B$ whose composite $U\\to B\\to B/A'$ is nonzero, i.e. $\\psi$ does not factor through $A'\\hookrightarrow B$ (this is the generator condition of Stacks Tag 079B). Let $N=A'\\cap\\operatorname{Im}(\\psi)$ and $M=\\psi^{-1}(N)\\subset U$; then $\\psi$ restricts to an epimorphism $M\\to N$. By the assumed condition the composite $M\\to N\\hookrightarrow A'\\xrightarrow{\\varphi'}I$ extends to a morphism $\\chi:U\\to I$.",
+   "uses": [
+    "def-sp-grothendieck-abelian"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/injectives.tex",
+    "place": "Lemma 19.11.6 (Tag 079G), proof, choice of psi and definitions of N and M; generator as in Definition 19.11.1 (Tag 079B)"
+   }
+  },
+  {
+   "text": "Since $\\operatorname{Ker}(\\psi)=\\psi^{-1}(0)\\subset M$ and $\\chi|_M$ factors through $\\psi|_M:M\\to N$, we get $\\chi|_{\\operatorname{Ker}(\\psi)}=0$. Hence $\\chi$ factors as $U\\to\\operatorname{Im}(\\psi)\\xrightarrow{\\varphi''}I$. Because $M\\to N$ is an epimorphism, $\\varphi''$ and $\\varphi'$ agree on $N=A'\\cap\\operatorname{Im}(\\psi)$, so they glue to a morphism $A'+\\operatorname{Im}(\\psi)\\to I$ (the sum is the pushout of $A'\\leftarrow N\\to\\operatorname{Im}(\\psi)$) extending $\\varphi'$, hence $\\varphi$. Since $\\psi$ does not factor through $A'$, the subobject $A'+\\operatorname{Im}(\\psi)$ strictly contains $A'$, contradicting maximality.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/injectives.tex",
+    "place": "Lemma 19.11.6 (Tag 079G), proof, factorization through image and gluing"
+   }
+  },
+  {
+   "text": "Thus $A'=B$, so $\\varphi':B\\to I$ extends $\\varphi$. Since the monomorphism $A\\hookrightarrow B$ and the morphism $\\varphi:A\\to I$ were arbitrary, $I$ is injective [def-sp-injective-resolutions].",
+   "uses": [
+    "def-sp-injective-resolutions"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/injectives.tex",
+    "place": "Lemma 19.11.6 (Tag 079G), proof, final contradiction and conclusion"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sp-grothendieck-abelian",
+  "def-sp-injective-resolutions"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/injectives.tex",
+  "place": "Lemma 19.11.6 (Tag 079G)"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -46,15 +107,46 @@
    "results": "none",
    "date": "2026-10-11",
    "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Baer criterion for injectivity using a generator in a Grothendieck abelian category",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "injective|Baer|rlp in Mathlib/CategoryTheory/Abelian/GrothendieckCategory and CategoryTheory/Generator",
+   "results": "CategoryTheory.IsGrothendieckAbelian.generatingMonomorphisms_rlp (GrothendieckCategory/EnoughInjectives.lean:311) gives (generatingMonomorphisms G).rlp = (monomorphisms C).rlp; with injective_iff_rlp_monomorphisms_zero this yields the item, but no single declaration states it",
+   "date": "2026-10-11",
+   "verdict": "partial match (two declarations)"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-pur-kinjective-degreewise-existence",
   "by": "worker",
   "date": "2026-10-11"
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-def-sf-operations"
+ "unit": "sk-def-sf-operations",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-pur-kinjective-characterize-injective",
+  "worker": "stage1",
+  "summary": "Split the generator form of the injectivity criterion into the Stacks 079G Zorn argument. No new nodes were needed: the proof uses only the existing Grothendieck-abelian and injective definitions; the chain upper bound uses exact filtered colimits and the maximality contradiction uses the generator property, inverse image, image, and gluing in the abelian category.",
+  "blueprint": "The steps realize the ancestor blueprint clause 'Theorem lemma-theorem construction, use of the Baer criterion for injectivity'.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-cin0041",
+  "group": "K1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-cin0041 (reviewer sub-agent of L); spot-checked: Statement vs Tag 079G; Zorn chain bound uses AB5 from def-sp-grothendieck-abelian (C1); maximality step written out; def-sp-injective-resolutions is the right injective definition (C4); citer lem-pur-kinjective-degreewise-existence uses exactly the converse (C4); no baer/characterize-injective duplicate. FIX more, RETURN less: (1) B3: all five steps rewritten in TeX (plain-text arrows, incl. step 5); (2) class (d): dropped new node lem-pur-kinjective-generator-detects-proper-subobject (generator detecting proper subobjects is the Stacks 079B definition / two lines from the separator via B->B/A' nonzero), folded into step 3 as elementary citing def-sp-grothendieck-abelian, proof_deps updated; (3) E: step 4 now states M->N is an epimorphism, which justifies agreement of phi'' and phi' on N. Mathlib grep recorded on the item (generatingMonomorphisms_rlp, two declarations).; 1 file(s) fixed by the reviewer"
+ },
+ "lead_note": "2026-10-11 L (R-cin0041): Mathlib near-match: IsGrothendieckAbelian.generatingMonomorphisms_rlp (EnoughInjectives.lean:311) + injective_iff_rlp_monomorphisms_zero (Preadditive/Injective/LiftingProperties.lean:59) give the item in two declarations; kept split"
 }

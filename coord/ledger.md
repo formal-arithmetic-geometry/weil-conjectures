@@ -3138,3 +3138,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 00:41 L: merged deliver/J1/lem-sc-dvr-field-extension-order (reviewer FIX; first push; new nodes: 0)
 - 00:42 L: merged deliver/H1/lem-sc-etale-torsor-inverse-image-extension (reviewer FIX; first push; new nodes: 0)
 - 00:42 L: merged deliver/G1/lem-sc-module-extension-by-zero-stalk-maps (reviewer FIX; first push; new nodes: 0)
+- 00:42 L: merged deliver/K1/lem-pur-kinjective-characterize-injective (reviewer FIX; first push; new nodes: 0)
