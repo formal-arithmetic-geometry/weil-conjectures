@@ -28,7 +28,9 @@
   "def-weil-sheaf-of-modules-category",
   "lem-weil-pbc-module-pullback-structure-sheaf",
   "lem-weil-pbc-module-pullback-tensor",
-  "lem-weil-pbc-cartesian-square-pasting"
+  "lem-weil-pbc-cartesian-square-pasting",
+  "lem-weil-pbc-module-base-change-map-open-restriction",
+  "lem-pc-module-pullback-adjunction"
  ],
  "proof": [
   {
@@ -218,5 +220,30 @@
   "item": "lem-weil-pbc-affine-pushforward-base-change",
   "worker": "stage1",
   "summary": "Checked the source: Stacks tag 02KG is coherent-lemma-affine-base-change (coherent.tex:907), with the base change diagram 02KF before it; its proof says the statement is local on S and S', reduces to spectra and cites Schemes 01I9. Split in six steps: (1) quasi-coherence of f_*F via lem-weil-pbc-affine-morphism-permanence(3) and pqf-lem-pushforward-qcoh (01LC, another unit; same tool use as the reviewed lem-weil-pbc-affine-morphism-relative-spec); (2) the locality claim written out with the new unsplit node lem-weil-pbc-module-base-change-map-open-restriction, the leaves lem-weil-pbc-open-fibre-product, lem-weil-pbc-open-immersion-module-pullback-restriction, lem-weil-pbc-module-restriction-open-immersion-colimits and lem-weil-pbc-sheaf-morphism-on-basis; (3) passage to spectra (lem-weil-pbc-morphism-into-affine-scheme, lem-weil-pbc-fibre-product-affine-spectra, transport along isomorphisms by the same new node); (4) the computation: F = M~ (lem-weil-pbc-affine-tilde-gamma-adjunction(3)), f_* of tilde by the new Mathlib leaf lem-weil-pbc-pushforward-tilde-spec (01I9(2); isIso_fromTildeΓ_pushforward), g^* of tilde by lem-weil-pbc-tilde-pullback-base-change (01I9(1)), and the base change map is shown to be tilde of r'(x)m -> (r'(x)1)(x)m by evaluating on 1(x)m through the unit formulas; (5) part (2): the module isomorphism of (1) for O_X, composed with g'^*O_X = O_X' (new Mathlib leaf lem-weil-pbc-module-pullback-structure-sheaf, pullbackObjUnitToUnit), is an algebra map by the new unsplit node lem-weil-pbc-module-base-change-map-algebra (stated for any commutative square: the adjoint of the base change map for O_X is f_*(g'^#), a ring map; its split will need lem-weil-pbc-module-pullback-tensor of unit sk-thm-reduction as a tool use); (6) part (3) from the new unsplit node lem-weil-pbc-module-base-change-map-pasting (Stacks 0ATM for modules) and lem-weil-pbc-cartesian-square-pasting. Statement kept; clauses (2),(3) made explicit (the identification g'^*O_X = O_X', the tensor isomorphism, the composition isomorphisms and X'' = X x_S S''), stmt_deps extended accordingly. Mathlib: no base change map for modules on schemes; searches recorded."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AffinePushforwardBaseChange",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.affinePushforward_baseChange",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.Modules.affinePushforward_baseChange",
+   "AlgebraicGeometry.Scheme.Modules.affinePushforward_baseChange_affine_formula",
+   "AlgebraicGeometry.Scheme.Modules.affinePushforward_baseChange_algebra",
+   "AlgebraicGeometry.Scheme.Modules.affinePushforward_baseChange_comp"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/AffinePushforwardBaseChange.lean",
+  "statement": "theorem affinePushforward_baseChange {X S X' S' : Scheme.{u}} (f : X ⟶ S) (f' : X' ⟶ S') (g : S' ⟶ S) (g' : X' ⟶ X) (sq : IsPullback g' f' f g) [IsAffineHom f] (F : X.Modules) [F.IsQuasicoherent] : ((pushforward f).obj F).IsQuasicoherent ∧ IsIso (moduleBaseChangeMap f f' g g' sq.w F)",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-apb1225"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-apb1225",
+  "group": "F1",
+  "result": "fix",
+  "note": "f,f',g,g' + IsPullback g' f' f g (fibre product), [IsAffineHom f], F QC via IsQuasicoherent; (1) f_*F QC and IsIso of canonical moduleBaseChangeMap sq.w; affine formula pinned a,b on generators with beta(r⊗m)=(r⊗1)⊗m; (2) mu,mu' tied by section multiplication, gamma=beta;f'_*(tensorPullbackObjUnitToUnit g'), mult via module_pullback_tensor, unit via tensorPullbackObjUnitToUnit g; (3) = pasting composite with conjugateIsoEquiv comparisons; reverted the delivery's change of existing node(s) lem-weil-pbc-module-pullback-structure-sheaf (--revert-nodes; kept as on sheaf-dag)"
  }
 }
