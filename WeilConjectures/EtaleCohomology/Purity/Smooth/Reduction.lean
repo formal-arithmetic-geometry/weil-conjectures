@@ -145,7 +145,18 @@ through `ψ : Rf_! ⋙ Ψ_Y ≅ Ψ_X ⋙ Rf_!`, and let `vS : Ψ(Rf^! K) ≅ Rf^
 adjunction `Rf_! ⊣ Rf^!` (`hS`: the counit of the reduced adjunction is the reduction of the
 counit). If the purity square of `γ_{f,K}` commutes (`hγ`,
 `AlgebraicGeometry.Etale.map_smoothPurityIso_hom_comp`), then the reduction of the smooth trace
-`Tr^sm_{f,K}` is the smooth trace `Tr^sm_{f,Ψ K}`, read through `ψ` and `v₀`. -/
+`Tr^sm_{f,K}` is the smooth trace `Tr^sm_{f,Ψ K}`, read through `ψ` and `v₀`:
+
+```
+Ψ_Y Rf_! Lf^* K(d)[2d] ──Ψ_Y Tr^sm_{f,K}──▶ Ψ_Y K
+        │ ψ                                   ‖
+        ▼                                     ‖
+Rf_! Ψ_X Lf^* K(d)[2d]                        ‖
+        │ Rf_! v₀                             ‖
+        ▼                                     ‖
+Rf_! Lf^* (Ψ_Y K)(d)[2d] ──Tr^sm_{f,Ψ K}──▶ Ψ_Y K
+```
+-/
 theorem map_smoothTrace {d : ℤ} (ΨX : 𝐃(X, Λ) ⥤ 𝐃(X, Λ')) (ΨY : 𝐃(Y, Λ) ⥤ 𝐃(Y, Λ'))
     (ψ : R(f)_![ModuleCat.{u + 1} Λ] ⋙ ΨY ≅ ΨX ⋙ R(f)_![ModuleCat.{u + 1} Λ'])
     {K : 𝐃(Y, Λ)}
@@ -178,7 +189,16 @@ coefficients commuting with `Rf_!` through `ψ`, for instance the restriction of
 transition maps `v₀` of the sources `Lf^* K(d)[2d]` and `vS` of the targets `Rf^! K`. If `vS`
 is compatible with the counits (`hS`) and the purity maps commute with the transitions (`hγ`,
 the finite reduction of purity), then so do the smooth traces:
-`u ∘ Tr^sm_{f,K'} = Ψ(Tr^sm_{f,K}) ∘ ψ⁻¹ ∘ Rf_! v₀`. Hence the levelwise traces are a morphism
+`v ∘ Tr^sm_{f,K'} = Ψ(Tr^sm_{f,K}) ∘ ψ⁻¹ ∘ Rf_! v₀`:
+
+```
+Rf_! Lf^* K'(d)[2d] ──────Tr^sm_{f,K'}──────▶ K'
+        │ Rf_! v₀                              │ v
+        ▼                                      ▼
+Rf_! Ψ_X Lf^* K(d)[2d] ──ψ⁻¹──▶ Ψ_Y Rf_! Lf^* K(d)[2d] ──Ψ_Y Tr^sm_{f,K}──▶ Ψ_Y K
+```
+
+Hence the levelwise traces are a morphism
 of normalized systems, which is what the uniform-tower reconstruction realizes at the adic
 stage. -/
 theorem smoothTrace_comp_eq_of_transition {d : ℤ} (ΨX : 𝐃(X, Λ) ⥤ 𝐃(X, Λ'))

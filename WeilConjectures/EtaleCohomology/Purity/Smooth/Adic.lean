@@ -77,23 +77,29 @@ noncomputable abbrev upperShriekLevel (K : NormalizedTower I Y) (n : ℕ) :
     𝐃(X, R ⧸ I ^ (n + 1)) :=
   (R(f)^![ModuleCat.{u + 1} (R ⧸ I ^ (n + 1))]).obj (K.obj n)
 
-/-- Blueprint `thm-pur-adic-reconstruction`: Adic reconstruction
+/-- Blueprint `thm-pur-adic-reconstruction`: Adic reconstruction (reconstruction step only)
 
 Let `K = (K_n)_n` be a normalized system on `Y` (`AlgebraicGeometry.Etale.NormalizedTower`,
-levels `K_n ∈ D(Y_ét, A_n)`, `A_n = R ⧸ Iⁿ⁺¹`, the intended case being `R = 𝒪_E`), and let
-`f : X ⟶ Y` be smooth separated of relative dimension `d`. Let `S` and `T` be normalized
-systems on `X` with levels identified with `Lf^* K_n(d)[2d]` (by `eS`) and `Rf^! K_n` (by `eT`),
-and let `γ_{f,K_n}` be the finite-coefficient purity isomorphisms
-(`thm-pur-finite-coefficient-smooth-purity`). If they commute with the transition
-maps — the finite reduction of purity, `thm-pur-finite-reduction-of-purity`
-(`AlgebraicGeometry.Etale.map_smoothPurityIso_hom_comp`) — they form a morphism of normalized
-systems, and they induce an isomorphism
+levels `K_n ∈ D(Y_ét, A_n)`, `A_n = R ⧸ Iⁿ⁺¹`, the intended case being `R = 𝒪_E`). Let `S` and
+`T` be normalized systems on `X` with levels identified with `Lf^* K_n(d)[2d]` (by `eS`) and
+`Rf^! K_n` (by `eT`), and let `γ_n : Lf^* K_n(d)[2d] ≅ Rf^! K_n` be isomorphisms forming a
+morphism of normalized systems (`hγ`). Then for any homotopy limits `cS`, `cT` of `S` and `T`
+there is an isomorphism `e : cS.pt ≅ cT.pt` reducing to `γ_n` at every level `n`:
 
-`Lf^* K(d)[2d] = R lim_n Lf^* K_n(d)[2d] ≅ R lim_n Rf^! K_n = Rf^! K`
+```
+  cS.pt --------- e ---------> cT.pt
+    |                            |
+   π_n                          π_n
+    v                            v
+   S_n -- eS ≫ γ_n ≫ eT⁻¹ --> T_n
+```
 
-of the derived limits (the points of homotopy limit cones `cS`, `cT`) whose reduction at every
-level `n` is exactly `γ_{f,K_n}`. Both derived limits are derived complete for `I = (ϖ)`, i.e.
-the isomorphism lives at the integral stage. -/
+This is only the reconstruction step of the blueprint statement: that the finite-coefficient
+purity maps `γ_{f,K_n}` form a morphism of normalized systems (the finite reduction of purity,
+`thm-pur-finite-reduction-of-purity`) is assumed as `hγ`, although it is the first half of the
+blueprint's conclusion; the points `cS.pt`, `cT.pt` are arbitrary homotopy limits of `S` and
+`T`, not identified with `Lf^* K(d)[2d]` and `Rf^! K`; and `f` enters only through the levels.
+The proof is `AlgebraicGeometry.Etale.NormalizedTower.exists_iso_of_isHomotopyLimit`. -/
 theorem exists_iso_realization_twistShiftPullbackLevel (K : NormalizedTower I Y)
     (S T : NormalizedTower I X) (eS : ∀ n : ℕ, S.obj n ≅ twistShiftPullbackLevel d f K n)
     (eT : ∀ n : ℕ, T.obj n ≅ upperShriekLevel f K n)

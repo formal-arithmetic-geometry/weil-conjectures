@@ -94,13 +94,20 @@ noncomputable def NormalizedTower.restrictIsoOfIso (M N : NormalizedTower I X)
     M.restrict ≅ N.restrict :=
   asIso (NormalizedTower.restrictHomOfHom M N (fun n ↦ (e n).hom) he)
 
-
 /-- **Realization of an isomorphism of normalized towers.** Let `e_n : M_n ≅ N_n` be
 isomorphisms between the levels of two normalized towers commuting with the transition maps,
 and let `R lim_n Res M_n` and `R lim_n Res N_n` be derived limits (the points of homotopy limit
 cones `cM` and `cN`). Then there is an isomorphism `R lim_n Res M_n ≅ R lim_n Res N_n` whose
-reduction at every level `n` is `e_n`: it commutes with the projections to `Res M_n` and
-`Res N_n`. -/
+reduction at every level `n` is `e_n`: it commutes with the projections `π^M_n`, `π^N_n` to
+`Res M_n` and `Res N_n`, that is `φ ≫ π^N_n = π^M_n ≫ Res(e_n)`:
+
+```
+R lim_n Res M_n ──── φ ────▶ R lim_n Res N_n
+      │ π^M_n                      │ π^N_n
+      ▼                            ▼
+   Res M_n ─────── Res e_n ─────▶ Res N_n
+```
+-/
 theorem NormalizedTower.exists_iso_of_isHomotopyLimit (M N : NormalizedTower I X)
     (e : ∀ n : ℕ, M.obj n ≅ N.obj n)
     (he : ∀ n : ℕ, M.map n ≫ (derivedRestrictScalars (quotientPowSuccFactor I n) X).map (e n).hom =

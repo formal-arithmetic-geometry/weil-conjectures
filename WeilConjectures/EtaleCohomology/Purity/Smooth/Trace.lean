@@ -40,8 +40,9 @@ respect to the composition isomorphism `R(f ≫ g)^! ≅ Rg^! ⋙ Rf^!` conjugat
 - `AlgebraicGeometry.Etale.homEquiv_smoothTrace`: the purity map is the adjoint of the trace.
 - `AlgebraicGeometry.Etale.smoothTrace_naturality`: the trace of a natural purity map is natural.
 - `AlgebraicGeometry.Etale.smoothTrace_comp`: transitivity of the smooth traces.
-- `AlgebraicGeometry.Etale.rightDerivedUpperShriekAdjunction_counit_app_eq_smoothTrace`: under
-  a purity isomorphism, the counit of `Rf_! ⊣ Rf^!` is the smooth trace
+- `AlgebraicGeometry.Etale.smoothTrace_baseChange`: the smooth trace commutes with base change.
+- `AlgebraicGeometry.Etale.exists_counit_eq_smoothTrace`: the counit `Ra_! ω_X ⟶ Λ` of a smooth
+  `a : X ⟶ Spec k` is the smooth trace under a purity identification `Λ_X(d)[2d] ≅ ω_X`
   (blueprint `cor-pur-finite-stage-smooth-dualizing-complex`).
 
 ## Implementation notes

@@ -54,16 +54,21 @@ variable (l : ℕ) [Fact l.Prime] (E : Type w) [Field E] [Algebra E (PadicAlgCl 
     PadicAlgCl.maximalIdealShrink l E ^ (n + 1))]
   {X Y : Scheme.{u}} (d : ℤ) (f : X ⟶ Y) [HasCompactification f]
 
-/-- Blueprint `thm-pur-rational-and-qbar-purity`: Rational and `ℚ̄_ℓ` purity
+/-- Blueprint `thm-pur-rational-and-qbar-purity`: Rational and `ℚ̄_ℓ` purity (`E`-stage
+packaging only)
 
-**The `E`-stage.** Let `K = (K_n)_n` be a normalized system over `𝒪_E` on `Y` (a lattice of an
-`E`-object), and `S`, `T` normalized systems on `X` with levels identified with
-`Lf^* K_n(d)[2d]` and `Rf^! K_n`, on which the finite-level purity isomorphisms `γ_{f,K_n}` are
-compatible with the transitions. Then the realizations `Lf^* K(d)[2d]` and `Rf^! K` are objects of
-`D_comp(X, 𝒪_E)`, and the adic purity isomorphism between them — the one whose reduction at
-every level `n` is `γ_{f,K_n}` — is carried by the exact functor `- ⊗ᴸ_{𝒪_E} E`
-(`DerivedCategoryDerivedCompleteRational.fromIntegral`) to an isomorphism
-`γ_{f,K_E} : Lf^* K_E(d)[2d] ≅ Rf^! K_E` in `D_comp(X, E)`. -/
+Let `K = (K_n)_n` be a normalized system over `𝒪_E` on `Y`, `S`, `T` normalized systems on `X`
+with levels identified with `Lf^* K_n(d)[2d]` and `Rf^! K_n`, and `γ_n` isomorphisms between
+these levels forming a morphism of normalized systems (`hγ`). Then any homotopy limits of `S`
+and `T` are derived complete, so they are objects of `D_comp(X, 𝒪_E)`; the isomorphism `e`
+between them of `AlgebraicGeometry.Etale.exists_iso_realization_twistShiftPullbackLevel`
+reduces to `γ_n` at every level, and its image under the exact functor `- ⊗ᴸ_{𝒪_E} E`
+(`DerivedCategoryDerivedCompleteRational.fromIntegral`) is an isomorphism in `D_comp(X, E)`.
+
+This is the `E`-stage packaging of the realized isomorphism, not the `E`-part of the
+blueprint statement: `hγ` is assumed, the objects are arbitrary homotopy limits rather than
+`Lf^* K_E(d)[2d]` and `Rf^! K_E`, and the `IsIso` conclusion follows formally from `e` being an
+isomorphism. -/
 theorem exists_iso_fromIntegral_realization_twistShiftPullbackLevel
     (K : NormalizedTower (PadicAlgCl.maximalIdealShrink l E) Y)
     (S T : NormalizedTower (PadicAlgCl.maximalIdealShrink l E) X)
