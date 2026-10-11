@@ -158,5 +158,23 @@
   "item": "lem-weil-pbc-etale-near-point-smooth-zero-fibre-dimension",
   "worker": "stage1",
   "summary": "Statement kept (correct against Stacks: smooth of relative dimension 0 at x gives etale near x); stmt_deps kept. Tags checked in literature/stacks-project/tags/tags: 0A43 = more-morphisms-lemma-check-smoothness-on-infinitesimal-nbhds, 02GI = definition-etale, 02G1 = lemma-smooth-omega-finite-locally-free, 02G2 = definition-smooth-relative-dimension, 02GK = lemma-etale-smooth-unramified, 02GU = lemma-etale-at-point (not used: it is the standard-etale local structure, not 'etale = smooth of relative dimension 0'), 01UT = lemma-differentials-affine, 01V6 = lemma-smooth-characterize, 02G5 = lemma-unramified-omega-zero, 01VF = lemma-smooth-flat, 00U1 = algebra-definition-etale, 07BK/00RO Kahler differentials, 0055 topology-definition-Krull, 01K1 schemes-lemma-fibre-topological. Stacks states 'etale iff smooth of relative dimension 0' as a remark without proof, so the proof is agent-written from its ingredients: (1) the fibre of f|_U at x is an open of the fibre of f (lem-weil-pbc-open-fibre-product, a Mathlib leaf) so its dimension at x is 0 (new lem-weil-pbc-dimension-at-point-open-subspace); (2) 02G1 read on an affine open gives Omega_{A/R} free of rank 0 (new lem-weil-pbc-smooth-differentials-free-rank-fibre-dimension); (3) smooth with Omega_{A/R}=0 on an affine open is etale there (new lem-weil-pbc-smooth-zero-differentials-affine-open-etale). New definition def-weil-pbc-kahler-differentials (Mathlib leaf KaehlerDifferential with linearMapEquivDerivation); no DAG node defined Kahler differentials of a ring map (def-sc-kahler-differentials is the sheaf on a smooth curve). All new nodes are in unit sk-thm-p1; the only cited node of another unit is the Mathlib leaf lem-weil-pbc-open-fibre-product (sk-thm-reduction)."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.EtaleOpenOfSmoothZeroFibreDimension",
+  "declaration": "AlgebraicGeometry.exists_etale_open_of_smooth_of_fibre_dimension_zero",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleOpenOfSmoothZeroFibreDimension.lean",
+  "statement": "theorem exists_etale_open_of_smooth_of_fibre_dimension_zero {X S : Scheme.{u}} (f : X ⟶ S) (x : X) (U : X.Opens) (hx : x ∈ U) (hSmooth : Smooth (U.ι ≫ f)) (hDim : topologicalKrullDimAt (f.asFiber x) = 0) : ∃ U' : X.Opens, U' ≤ U ∧ x ∈ U' ∧ Etale (U'.ι ≫ f)",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-esz0958",
+  "group": "E1",
+  "result": "pass",
+  "note": "X S f arbitrary; x; U parameter with hx (U' ≤ U needs it); Smooth (U.ι ≫ f) = f|_U smooth; fibre X_s = f.fiber (f x) = pullback f (fromSpecResidueField) rfl, point f.asFiber x; topologicalKrullDimAt = inf over open nbhds = node dim_x, = 0; conclusion ∃ U' ≤ U, x ∈ U', Etale (U'.ι ≫ f); math true via Omega rank = fibre dim (02G1)"
  }
 }
