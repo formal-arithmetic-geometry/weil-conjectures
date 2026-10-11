@@ -100,5 +100,36 @@
   "group": "J1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-shlim (reviewer sub-agent of L); spot-checked: Re-push after the 13:32 return (C4/B3/E1, non-small index). Repair checked point by point: the colimit is now over I=J^op with J a small full subcategory of affine pointed etale neighbourhoods, built from the set of lem-weil-pbc-affine-etale-essentially-small-cover (T=S; affine etale U->S iso in S_Et to a member Spec A of the set) with pairs (Spec A, vbar), vbar in the set Hom_S(Spec Omega, Spec A); every affine (V',v') is isomorphic to such a pair via phi with v=phi v', so J is small and each affine object receives a morphism from J. Existence: lem-weil-pbc-commutative-algebras-colimits-exist (R=Z, small diagram) with def-weil-pbc-category-colimit. Independence and cofilteredness: lem-weil-pbc-pointed-etale-neighbourhoods-cofiltered (N_sbar cofiltered), lemma-weil-pbc-affine-neighbourhood-cofinal (affine full subcategory initial, so each object receives a morphism from an affine one), then lem-weil-pbc-colimit-initial-full-subcategory (1) applied to N_sbar > N^aff and to N^aff > J, hypotheses (cofiltered, full, every object receives a morphism) met; two choices J, J' both map isomorphically to the same colimit. Spec leaf lem-weil-pbc-spec-small-colimit-limit now applied to the small diagram J^op -> CRing only, within its smallness hypothesis. E7: change named in the report and split_report. Statement against literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-h2/def-weil-pbc-strict-henselization-limit.md (order 944; the file is in the repository, the report's WANTED for it is mistaken): opposite index, contravariant coordinate-ring diagram (arrow represented by a:(V,v)->(W,w) to a^#:A_W->A_V), ring colimit, Spec, inverse-limit identification all retained. Leaf lines verified in pinned Mathlib: GammaSpecAdjunction.lean:600 Spec.reflective, Scheme.lean:470 Spec, :479 Spec.map, Morphisms/Affine.lean:181 isAffineHom_of_isAffine. Changed fields of the item are split-owned only (statement, stmt_deps, mathlib_searches, status, split_report, blueprint.same_as null->[]). Small case S=Spec Omega' with Omega' separably closed: (S, sbar) is in J up to iso and initial-ish, colimit is Omega'-coordinate ring, S_(sbar)=S. 13:59-14:01 UTC."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.StrictHenselization",
+  "declaration": "AlgebraicGeometry.Scheme.strictHenselizationRing",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.strictHenselizationNeighbourhoods",
+   "AlgebraicGeometry.Scheme.strictHenselizationAffineInclusion",
+   "AlgebraicGeometry.Scheme.strictHenselizationAffineInclusion_isEquivalence",
+   "AlgebraicGeometry.Scheme.strictHenselizationCoordinateRings",
+   "AlgebraicGeometry.Scheme.strictHenselizationDiagram",
+   "AlgebraicGeometry.Scheme.strictHenselizationRing",
+   "AlgebraicGeometry.Scheme.strictHenselizationScheme",
+   "AlgebraicGeometry.Scheme.strictHenselizationCone",
+   "AlgebraicGeometry.Scheme.strictHenselization_properties",
+   "AlgebraicGeometry.Scheme.strictHenselizationRepresentativeIso"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/StrictHenselization.lean",
+  "statement": "def strictHenselizationRing {S : Scheme.{u}} {Ω : Type u} [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ S) : CommRingCat.{u}",
+  "branch": "sheaf-dag",
+  "by": "G1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-shl"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-shl",
+  "group": "G1",
+  "result": "fix",
+  "note": "No H7 (node diff adds lean only). Not a third spelling: IsStrictHenselization is a Prop on a local A-algebra, strictHenselization_triples an existential cocone at Spec R/p; citers (stalk-formula, unrestricted-stalk, functoriality, dvr) need the named ring O^sh_{S,sbar} for a scheme and geometric point with canonical maps; no Mathlib/upstream declaration. Matched S, (Omega alg closed, s), pointed etale category (pointSmallEtale fiber Elements), affine full subcategory (AffineEtale.Spec elements, equivalence theorem), small J (SmallModel, choice from Mathlib EssentiallySmall), I=J^op, D=Gamma contravariant, colimit in CommRingCat, Spec, cone = Spec.mapCone of colimit cocone + IsLimit, independence via HasColimit.isoOfEquivalence. FIX: removed strictHenselizationRepresentativeEquivalence (asEquivalence = Classical choice from the sorried isEquivalence theorem, data on sorry); the Initial clause now uses (equivSmallModel _).inverse ⋙ strictHenselizationAffineInclusion s ⋙ ObjectProperty.ι _ (same functor, sorry-free)."
  }
 }
