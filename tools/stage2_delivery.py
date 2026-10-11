@@ -386,14 +386,22 @@ def read_delivery(git: Git, ref: str, base: str, group: str, item: str, max_comm
         f("a", f"no ref {ref}"); return D
     if not git.ok("rev-parse", "--verify", "-q", base):
         f("a", f"no ref {base}: run `git fetch origin` (or pass --base <ref>)"); return D
+    # A delivery built on an older tip of sheaf-dag is checked against the commit it was built on (the merge-base),
+    # as the stage-1 tools do: sheaf-dag moves on every minute and the merge is by files on the current tip (lead,
+    # 2026-10-11 05:47 UTC, after C1's def-pc-compactly-generated failed (a) only because of the moved tip).
+    mb = git.run("merge-base", base, ref).strip()
+    if not mb:
+        f("a", f"{ref} has no common history with {base}: rebuild the branch on {base}"); return D
+    if mb != git.run("rev-parse", base).strip():
+        D["notes"].append(f"{ref} is based on {mb[:9]} (sheaf-dag has moved on); checked against that base")
+        base = mb
+    D["base"] = base
     commits = git.run("rev-list", "--reverse", f"{base}..{ref}").split()
     D["commits"] = commits
     if not commits:
         f("a", f"{ref} has no commit beyond {base} (the branch would deliver nothing)")
     elif len(commits) > max_commits:
         f("a", f"{len(commits)} commits beyond {base}: deliver one item as exactly one commit (squash with `git reset --soft {base}` and commit again)")
-    if not git.ok("merge-base", "--is-ancestor", base, ref):
-        f("a", f"{ref} is not on top of {base}: fetch, rebase onto {base}, and run again")
     node_path = git.node_path(ref, item)
     D["node_path"] = node_path
     report = f"coord/reports/{group}/{item}.md"
