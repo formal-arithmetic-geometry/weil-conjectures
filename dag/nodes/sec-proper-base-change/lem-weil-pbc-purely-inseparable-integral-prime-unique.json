@@ -174,5 +174,23 @@
   "by": "L",
   "result": "accepted",
   "note": "3 steps (07PR with the argument of 0BR8): some e^n-th power of every b in B lies in K, is integral over A, hence in A by normality (the gap of 07PR written out); existence by a new lying-over leaf for 00GQ (RingHom.IsIntegral.comap_surjective, Topology.lean:1226 verified by L); uniqueness by the power argument, no incomparability needed. Statement: 'finite integral' made 'finitely generated A-module', lying over written out. Stage-3 note: pqf-lem-lying-over (sk-prop-av-pqf-finite, unsplit) duplicates the new leaf."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.PurelyInseparableIntegralPrimeUnique",
+  "declaration": "purelyInseparable_integral_prime_unique",
+  "file": "lean/Sheaf/RingTheory/PurelyInseparableIntegralPrimeUnique.lean",
+  "statement": "theorem purelyInseparable_integral_prime_unique (A : Type u) (B : Type v) [CommRing A] [CommRing B] [IsDomain A] [IsDomain B] [Algebra A B] (hA : IsIntegrallyClosed A) [Module.Finite A B] (K : Type w) (L : Type x) [Field K] [Field L] [Algebra A K] [IsFractionRing A K] [Algebra B L] [IsFractionRing B L] [Algebra A L] [Algebra K L] [IsScalarTower A K L] [IsScalarTower A B L] [Module.Finite K L] [IsPurelyInseparable K L] (p : Ideal A) [p.IsPrime] : ∃! q : Ideal B, q.IsPrime ∧ q.comap (algebraMap A B) = p",
+  "branch": "sheaf-dag",
+  "by": "M1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-pip1427",
+  "group": "M1",
+  "result": "pass",
+  "note": "domains A,B [IsDomain]; normal domain A = IsDomain + IsIntegrallyClosed (NORMAL RING line); B f.g. A-module = Module.Finite A B; K,L via IsFractionRing with towers A-K-L, A-B-L (forces A->B injective and K->L the induced map); finite purely inseparable = Module.Finite K L + IsPurelyInseparable K L (leaf form, siblings); every prime p; ∃! prime q with comap = p; 4 independent universes not vacuous"
  }
 }
