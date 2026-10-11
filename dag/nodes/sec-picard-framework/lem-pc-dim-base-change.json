@@ -153,5 +153,23 @@
  "tool_uses": [
   "lem-weil-pbc-dimension-preserved-field-extension"
  ],
- "reviewed": "2026-10-10 L: 3 steps checked (affine statement by the 00P3 node of sk-thm-p1 used as a tool, with the swap A tensor K = K tensor A; finite affine cover of X and its base change by 01JR/01JQ leaves; conclusion by the new node lem-pc-dimension-affine-open-cover, 04MU with 00KG). tool_uses recorded (the 00P3 node lists this item as same_as; the blueprint proof via going-down 00HS was incomplete, worker). same_as lem-kun-dimension-extension. stmt_deps corrected."
+ "reviewed": "2026-10-10 L: 3 steps checked (affine statement by the 00P3 node of sk-thm-p1 used as a tool, with the swap A tensor K = K tensor A; finite affine cover of X and its base change by 01JR/01JQ leaves; conclusion by the new node lem-pc-dimension-affine-open-cover, 04MU with 00KG). tool_uses recorded (the 00P3 node lists this item as same_as; the blueprint proof via going-down 00HS was incomplete, worker). same_as lem-kun-dimension-extension. stmt_deps corrected.",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.DimensionBaseChange",
+  "declaration": "AlgebraicGeometry.dim_base_change",
+  "file": "lean/Sheaf/AlgebraicGeometry/DimensionBaseChange.lean",
+  "statement": "theorem dim_base_change : (∀ (k : Type u) (K : Type v) (A : Type w) [Field k] [Field K] [CommRing A] [Algebra k K] [Algebra k A] [Algebra.FiniteType k A], ringKrullDim (A ⊗[k] K) = ringKrullDim A) ∧ (∀ (k K : Type z) [Field k] [Field K] [Algebra k K] {X : Scheme.{z}} (f : X ⟶ Spec (.of k)) [f.IsCurveOverField], Scheme.dim (Limits.pullback f (Spec.map (CommRingCat.ofHom (algebraMap k K)))) = 1)",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-dbc1229",
+  "group": "H1",
+  "result": "pass",
+  "note": "field k; A comm k-algebra with Algebra.FiniteType (n=0, zero ring allowed); K/k as [Field K][Algebra k K]; ringKrullDim (A ⊗[k] K) = ringKrullDim A; curve as explicit f with [f.IsCurveOverField] (integral, separated, LOFT+QC, X.dim=1); X_K = Limits.pullback f (Spec.map (ofHom (algebraMap k K))); Scheme.dim = 1; conjuncts independently quantified; #check resolves all names, clean compile"
+ }
 }
