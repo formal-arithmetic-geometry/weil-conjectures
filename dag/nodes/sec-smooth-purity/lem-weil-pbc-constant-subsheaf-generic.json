@@ -129,5 +129,23 @@
   "group": "G1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-csg2744 (reviewer sub-agent of L); spot-checked: Statement matches citer lem-weil-pbc-constructible-subobjects-noetherian Steps 1-2 (nonempty open W°, H|W° = constant M'; C4 ok). Step 1: W_m open via germ represented on etale nbhd refined to constant section m, open image by lem-weil-pbc-flat-lfp-open (etale = lfp+flat+unramified per def-weil-pbc-scheme-conventions). Step 2: nonempty W_m contain eta, finite intersection over M'=H_eta nonempty open, stalks there exactly M'; M' subset H and equality inside underline M by geometric-stalk conservativity (Lambda-modules as abelian sheaves). Open is only a dense open, honestly stated (E ok). No locally-constant-subsheaf fact (095N) or sections-over-connected fact needed; no new nodes. No fault missed by second reading."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ConstantSubsheafGeneric",
+  "declaration": "AlgebraicGeometry.constant_subsheaf_generic",
+  "file": "lean/Sheaf/AlgebraicGeometry/ConstantSubsheafGeneric.lean",
+  "statement": "theorem constant_subsheaf_generic (W : Scheme.{u}) [Nonempty W] [IrreducibleSpace W] (η : W) (_hη : IsGenericPoint η Set.univ) (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] (M : ModuleCat.{u + 1} Λ) [Finite M] (H : Sheaf W.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (hH : H ⟶ (constantSheaf W.smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj M) [Mono hH] : ∃ (U : W.Opens) (_hU : (U : Set W).Nonempty) (M' : Submodule Λ M), ∃ (e : ((Etale.upperStar (ModuleCat.{u + 1} Λ) U.ι).obj H) ≅ (constantSheaf U.toScheme.smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj (ModuleCat.of Λ M')), e.hom ≫ (constantSheaf U.toScheme.smallEtaleTopology (ModuleCat.{u + 1} Λ)).map (ModuleCat.ofHom (Submodule.subtype M')) = (Etale.upperStar (ModuleCat.{u + 1} Λ) U.ι).map hH ≫ (Scheme.upperStarConstantSheafIso (ModuleCat.{u + 1} Λ) U.ι).hom.app M",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-csu1532",
+  "group": "C1",
+  "result": "pass",
+  "note": "W nonempty irreducible = [Nonempty W][IrreducibleSpace W], eta via IsGenericPoint eta univ (unused in conclusion, harmless); Lambda finite comm ring Type(u+1); M finite = [Finite M] (equiv. f.g. over finite Lambda); constant sheaf = Mathlib constantSheaf on smallEtaleTopology as E1/F1; subsheaf = Mono hH; H|W° = Etale.upperStar along U.ι; equality as subsheaves = iso e commuting with constantSheaf.map subtype and upperStar.map hH ≫ upperStarConstantSheafIso; U nonempty open, M' Submodule"
  }
 }
