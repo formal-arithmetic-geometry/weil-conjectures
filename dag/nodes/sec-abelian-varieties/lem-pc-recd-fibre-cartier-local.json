@@ -113,5 +113,23 @@
   "group": "G1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-rfc0056 (reviewer sub-agent of L); spot-checked: Read Tag 062Y(3) and proof, Fiber.lean lines 969-1035 (both declarations, sorryfree.py OK for line 981), def-pc-relative-effective-cartier, def-sc-effective-cartier-divisor, citer lem-sc-valuation-zero-section-relative-cartier (uses exactly this; weaker local-principality hypothesis harmless). Not a duplicate of lem-pc-recd-locally-principal (all fibres, global). FIX more, RETURN less: (1) E/C4 missed by the second reading: step 1 asserted B/I flat over A, which is not a hypothesis of part (3) but part of its conclusion, and the leaf pointed to Algebra.exists_notMem_isRegularPrincipal_of_flat_of_fiber (line 1024) which assumes C=B/I flat; repointed the leaf to Algebra.exists_notMem_isRegularPrincipal_and_flat_of_fiber (line 981: principal I, concludes regular principal and flat quotient) and restated it exactly; (2) B3: leaf cited def-sc-effective-cartier-divisor for 'commutative rings'; removed; (3) C4: 'locally principal' was cited to def-sc-effective-cartier-divisor, which does not define it; spelled out inline. Step 1 rewritten (shrink so I=(f) and the fibre condition holds at every prime of B⊗κ(p)), elementary; step 2 now gets flatness from the leaf; leaf moved from stmt_deps to proof_deps only.; 2 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FibreCartierLocal",
+  "declaration": "AlgebraicGeometry.Scheme.IdealSheafData.fibre_cartier_local",
+  "file": "lean/Sheaf/AlgebraicGeometry/FibreCartierLocal.lean",
+  "statement": "theorem fibre_cartier_local {X S : Scheme.{u}} (π : X ⟶ S) [Flat π] [LocallyOfFinitePresentation π] (J : X.IdealSheafData) (x : X) (hx : x ∈ J.support) (hprincipal : ∃ V : X.Opens, x ∈ V ∧ (J.comap V.ι).IsLocallyPrincipal) (hfibre : ∃ V : X.Opens, x ∈ V ∧ ((J.comap (π.fiberι (π x))).comap ((π.fiberι (π x) ⁻¹ᵁ V).ι)).IsInvertible) : ∃ U : X.Opens, x ∈ U ∧ (J.comap U.ι).IsRelativeEffectiveCartier (U.ι ≫ π)",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-rfc0822",
+  "group": "C1",
+  "result": "pass",
+  "note": "Matched Tag 062Y(3) clause by clause: Flat+LocallyOfFinitePresentation pi; Z as J.IdealSheafData, x in J.support; locally principal on open V (source IsLocallyPrincipal, Invertible.lean:134); fibre Z_s Cartier near x as IsInvertible of J.comap (pi.fiberI (pi x)) restricted to preimage of V (same fibre form as source isInvertible_and_flat:620); conclusion exists U, x in U, IsRelativeEffectiveCartier (U.I >> pi) = IsInvertible and Flat (RelativeEffectiveCartier.lean:94, H12 record on sheaf-dag); docstring carries both proof steps; no duplicate in source (only global all-fibres isInvertible_and_flat) or Mathlib"
  }
 }
