@@ -23,24 +23,115 @@
   "def-weil-abstract-derived-category",
   "def-weil-triangulated-category"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For each complex $X$, consider the category of quasi-isomorphisms into $X$. By (1), the full subcategory of arrows $X'\\to X$ with $X'\\in\\mathcal P$ is cofinal; by (2), $F$ is constant up to canonical isomorphism on this subcategory. Hence the pro-object used in the resolving-class criterion (Tag 05S9) is essentially constant with value $F(X')$ (and for $X\\in\\mathcal P$ the identity resolution may be used). Thus a pointwise left derived functor exists at every $X$, and every $X\\in\\mathcal P$ computes it.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Lemma Tag 06XN proof, dual resolving-class argument"
+   }
+  },
+  {
+   "text": "By the Stacks-to-Kan bridge, the essentially constant pro-object in Definition 05S9 obtained in Step 1 is exactly a pointwise right Kan extension at $QX$, with the same value and comparison map.",
+   "uses": [
+    "lem-pur-left-derived-defined-pointwise-kan-bridge"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Definition Tag 05S9 and Lemma Tag 05SA, pointwise reformulation in Situation Tag 05S8"
+   }
+  },
+  {
+   "text": "Apply the pointwise-to-global derived-functor construction: the pointwise existence from Step 2 and the localization $Q$ give a left derived functor $LF:D(\\mathcal A)\\to\\mathcal D'$ with a natural transformation $LF\\circ Q\\to F$ exhibiting the right Kan extension and universal property.",
+   "uses": [
+    "lem-pur-total-left-derived-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "Mathlib/CategoryTheory/Functor/Derived/PointwiseLeftDerived.lean",
+    "place": "hasLeftDerivedFunctor_of_hasPointwiseLeftDerivedFunctor, line 86; isPointwiseRightKanExtensionOfHasPointwiseLeftDerivedFunctor, line 98"
+   }
+  },
+  {
+   "text": "The quasi-isomorphisms in $K(\\mathcal A)$ satisfy the saturated multiplicative-system and triangulation-compatibility hypotheses of Situation 05S8. Together with the bridge, the pointwise Kan-extension functor just constructed is the Stacks left derived functor defined everywhere, so Proposition Tag 05SE (LF part), as stated in the exactness node, makes $LF$ exact. For $X\\in\\mathcal P$, the component of the canonical transformation is an isomorphism by the identity resolution in Step 1 and the comparison clause of the bridge; therefore $LF(QX)\\cong F(X)$.",
+   "uses": [
+    "lem-pur-quasi-isos-saturated-triangulated",
+    "lem-pur-left-derived-defined-pointwise-kan-bridge",
+    "lem-pur-left-derived-exact-when-defined"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Lemma Tag 05RT; Proposition Tag 05SE, LF part; Lemma Tag 06XN computation clause"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-left-derived-defined-pointwise-kan-bridge",
+  "lem-pur-total-left-derived-localization",
+  "lem-pur-quasi-isos-saturated-triangulated",
+  "lem-pur-left-derived-exact-when-defined"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tags 06XN and 05SE in Situation 05S8"
+ },
  "mathlib_searches": [
   {
+   "tool": "leanfinder",
+   "query": "everywhere defined left derived functor from a class of complexes with resolutions and quasi-isomorphism invariance",
+   "results": "CategoryTheory.Functor.HasLeftDerivedFunctor and CategoryTheory.Functor.totalLeftDerived; no declaration for the full resolving-class criterion",
+   "date": "2026-10-11",
+   "verdict": "generalization: Mathlib supplies the Kan-extension construction once HasLeftDerivedFunctor is established"
+  },
+  {
+   "tool": "loogle",
+   "query": "Functor totalLeftDerived HasLeftDerivedFunctor IsLeftDerivabilityStructure",
+   "results": "Unknown identifier totalLeftDerived",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
+  },
+  {
    "tool": "grep",
-   "query": "grep -rln IsLeftDerivabilityStructure ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib; grep -rn 'totalLeftDerived' Mathlib | grep -i 'commshift\\|triangulated'",
-   "results": "LocalizerMorphism.IsLeftDerivabilityStructure.mk' (Localization/DerivabilityStructure/Constructor.lean:127) needs a localized-equivalence localizer morphism with connected resolution categories and arrow resolutions; Functor.totalLeftDerived (Functor/Derived/LeftDerived.lean:193) assumes HasLeftDerivedFunctor; no result deriving these from a resolving class on K(A), and no CommShift/IsTriangulated statement for totalLeftDerived",
-   "date": "2026-10-10",
-   "verdict": "no match: abstract pieces only, not the triangulated resolving-class criterion"
+   "query": "totalLeftDerived|HasLeftDerivedFunctor|IsLeftDerivabilityStructure",
+   "results": "Functor.totalLeftDerived and HasLeftDerivedFunctor in Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean; IsLeftDerivabilityStructure in Mathlib/CategoryTheory/Localization/DerivabilityStructure/Basic.lean",
+   "date": "2026-10-11",
+   "verdict": "generalization: abstract constructions only; no full resolving-class criterion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "left derived functor computed by resolving class exact triangulated functor",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "item": "lem-pur-derived-change-of-rings"
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-def-sf-operations"
+ "unit": "sk-def-sf-operations",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-pur-left-derived-from-kflat-class",
+  "worker": "stage1",
+  "summary": "Split the item into the Stacks resolving-class argument, recording the Mathlib total-left-derived construction as the only new leaf. The project Lean contains a specialized K-flat implementation but no declaration matching the item's arbitrary resolving-class statement.",
+  "blueprint": "Realizes the ancestor blueprint clause describing the everywhere-defined exact left derived functor from K-flat complexes (Stacks Tags 06XN and 05SE).",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-ldk0037",
+  "group": "M1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-ldk0037 (reviewer sub-agent of L); spot-checked: All four R-ldk0010 points checked against derived.tex 05S8/05S9/05SA/05SE/05RT/06XN and PointwiseLeftDerived.lean 60-110: (1) bridge node now links 05S9 essential constancy to the Kan-extension limit over StructuredArrow (QX) Q, cited in Steps 2 and 4; LF of Step 3 is a right Kan extension, hence the LF of the exactness node by uniqueness; (2) lem-pur-quasi-isos-saturated-triangulated states 05RT saturation and triangulation compatibility, cited in Step 4, not a duplicate of lem-pc-quasi-isomorphisms-multiplicative-system or def-weil-abstract-derived-category (Mathlib has only pieces: quasiIso_eq_trW_subcategoryAcyclic, no single declaration); (3) exactness node now has exact F, saturated compatible S, 05S9 everywhere-defined, equation-everywhere LF; (4) NOT repaired, fixed here. Preflight '05S9 quoted by item only' fine: 05S9 is a definition, now carried by the bridge node. Citer lem-pur-derived-change-of-rings (ddb16112d) uses exactly everywhere-defined, exact, component iso on P. No duplicate. FIX more, RETURN less: (a) B leaf lem-pur-total-left-derived-localization source.document LeftDerived.lean -> PointwiseLeftDerived.lean (return point 4 left unrepaired), grep verdict 'no match' -> match, my grep recorded; (b) C4 leaf statement 'L o LF -> F' -> 'LF o L -> F' (matches item's LF o Q); (c) E/C4 bridge node claimed an equivalence, but the converse (limit exists => pro-object essentially constant) is not true in general (essential constancy is strictly stronger than limit existence, cf. Stacks 05SA proof remark); weakened to the used direction (i)=>(ii) plus the comparison-map clause, title adjusted.; 2 file(s) fixed by the reviewer"
+ }
 }

@@ -3128,3 +3128,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 00:38 L: returned deliver/H1/lem-sc-affine-koszul-hom-alternating-cech (reviewer RETURN: R-kha0036 on bb6cb1cb9. 1. E7/E (return point 1 not repaired in the statement): the statement now says only 'form shifte)
 - 00:38 L: merged deliver/M1/lem-sc-finite-free-complex-homology-upper-semicontinuous (reviewer FIX; first push; new nodes: 0)
 - 00:39 L: merged deliver/C1/lem-pc-finite-projective-tor-acyclic (reviewer FIX; first push; new nodes: 0)
+- 00:39 L: merged deliver/M1/lem-pur-left-derived-from-kflat-class (reviewer FIX; after a return; new nodes: 4)
