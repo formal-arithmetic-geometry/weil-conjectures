@@ -125,5 +125,23 @@
   "group": "G1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-ndd2553 (reviewer sub-agent of L); spot-checked: Math checked: component C of Z lies in component W of X (lem-sc-irreducible-components-cover); local finiteness gives open nbhd of generic point of W inside W, so C=W contradicts nowhere density; chain extension gives dim C+1<=d; empty and d=0 cases fine. C4: consumer lem-sc-hilbert-difference uses def-kun-topological-krull-dimension, same notion as item. No existing node states local finiteness of components (grep dag; same-tag nodes 0052 are global Noetherian/open-subscheme facts), no overlap with the merged denominator nodes; Mathlib grep 0 hits. FIX more, RETURN less: B3 new node lem-sc-locnoeth-components-locally-finite statement made TeX and cites [def-weil-irreducible-components] (was in stmt_deps only); reviewer grep recorded in mathlib_searches.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.NowhereDenseDimensionDrop",
+  "declaration": "AlgebraicGeometry.Scheme.topologicalKrullDim_lt_of_isNowhereDense",
+  "file": "lean/Sheaf/AlgebraicGeometry/NowhereDenseDimensionDrop.lean",
+  "statement": "theorem Scheme.topologicalKrullDim_lt_of_isNowhereDense (X : Scheme.{u}) [Nonempty X] [IsLocallyNoetherian X] (d : ℕ) (hX : topologicalKrullDim X = (d : WithBot ℕ∞)) (Z : Set X) (hZ : IsClosed Z) (hnow : IsNowhereDense Z) : topologicalKrullDim Z < (d : WithBot ℕ∞)",
+  "branch": "sheaf-dag",
+  "by": "G1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-hnd1127",
+  "group": "G1",
+  "result": "pass",
+  "note": "Matched X:Scheme.{u}, [Nonempty X], [IsLocallyNoetherian X] (pqf-def-locnoeth), d:ℕ with topologicalKrullDim X = d (finite dim; ⊥/⊤ excluded), Z:Set X, IsClosed Z, IsNowhereDense Z, conclusion topologicalKrullDim Z < d on subspace; #check: names resolve to root Mathlib topologicalKrullDim/IsNowhereDense, no shadow; math true (component chain extension via locally finite components; Z empty / d=0 fine); Nonempty X redundant given hX but stated by node, not hollow; diff only adds lean record"
  }
 }
