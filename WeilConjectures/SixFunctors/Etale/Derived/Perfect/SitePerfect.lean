@@ -261,8 +261,16 @@ the left derived functor `Lu^*` (isomorphic to the levelwise `D(u^*)`, `u^*` bei
 noncomputable def derivedEtaleLowerShriekLeftDerivedUpperStarAdjunction {U : Scheme.{u}}
     (f : U ⟶ X) [Etale f] :
     (Etale.etaleLowerShriek A f inferInstance).mapDerivedCategory ⊣ L((f)^*[A]) :=
-  (Etale.derivedEtaleLowerShriekUpperStarAdjunction A f inferInstance).ofNatIsoRight
-    (leftDerivedUpperStarIsoMapDerivedCategory A f).symm
+  let _ : CatCommSq ((Etale.etaleLowerShriek A f inferInstance).mapHomotopyCategory (.up ℤ))
+      DerivedCategory.Qh DerivedCategory.Qh
+      (Etale.etaleLowerShriek A f inferInstance).mapDerivedCategory :=
+    ⟨(Etale.etaleLowerShriek A f inferInstance).mapDerivedCategoryFactorsh.symm⟩
+  let _ : CatCommSq (((f)^*[A]).mapHomotopyCategory (.up ℤ)) DerivedCategory.Qh
+      DerivedCategory.Qh L((f)^*[A]) :=
+    ⟨(asIso ((f)^*[A]).leftDerivedFunctorCounit).symm⟩
+  ((Etale.etaleLowerShriekUpperStarAdjunction A f inferInstance).mapHomotopyCategory
+    (.up ℤ)).localization DerivedCategory.Qh (HomotopyCategory.quasiIso _ _)
+      DerivedCategory.Qh (HomotopyCategory.quasiIso _ _) _ _
 
 /-- **Derived projection formula for an étale morphism** `u : U ⟶ X`: the projection map
 `D(u_!)(Lu^*K ⊗ᴸ T) ⟶ K ⊗ᴸ D(u_!)T` of the adjunction `D(u_!) ⊣ Lu^*`, for the monoidal
