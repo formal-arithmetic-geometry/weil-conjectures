@@ -4,7 +4,7 @@
   "is": null,
   "from": {
    "node": "lem-sc-finite-duality",
-   "place": "proper-flat support proof: compare the Koszul Hom complexes with the alternating Cech complex on the principal-open cover",
+   "place": "compare Koszul Hom complexes with alternating Cech complex",
    "via": [
     "lem-sc-affine-perfect-open-represent-cohomology"
    ]
@@ -13,32 +13,90 @@
  },
  "kind": "statement",
  "title": "Koszul Hom colimit is the alternating Cech complex",
- "statement": "Let $A$ be a commutative ring, let $f_1,\\ldots,f_r\\in A$, and let $M^\\bullet$ be a cochain complex of $A$-modules [def-pc-cochain-complex-modules]. For $e\\ge1$ form the shifted negative Koszul complex $I^\\bullet(f_1^e,\\ldots,f_r^e)$ [def-weil-pbc-koszul-complex] with $I^i=K^{i-1}(f_1^e,\\ldots,f_r^e)$ for $i\\le0$ and $I^i=0$ for $i>0$. The canonical map from the filtered colimit over $e$ of the Hom complexes $\\operatorname{Hom}_A^\\bullet(I^\\bullet(f_1^e,\\ldots,f_r^e),M^\\bullet)$ [def-pur-hom-complex] to the alternating Cech total complex [def-weil-pbc-site-cech-complex], whose $p$-th row is $\\prod_{i_0<\\cdots<i_p}M^\\bullet_{f_{i_0}\\cdots f_{i_p}}$, is a quasi-isomorphism.",
+ "statement": "Let $A$ be a commutative ring, let $f_1,\\ldots,f_r\\in A$, and let $M^\\bullet$ be a cochain complex of $A$-modules [def-pc-cochain-complex-modules]. For each $e\\ge1$ let $K_\\bullet(f_1^e,\\ldots,f_r^e)$ be the Koszul chain complex [def-weil-pbc-koszul-complex], with differential $d_n:K_n\\to K_{n-1}$, and for $1\\le i_0<\\cdots<i_p\\le r$ write $[i_0,\\ldots,i_p]=e_{i_0}\\wedge\\cdots\\wedge e_{i_p}$ for the corresponding basis vector of $K_{p+1}$, so that $d_{p+2}([i_0,\\ldots,i_{p+1}])=\\sum_{j=0}^{p+1}(-1)^jf_{i_j}^e[i_0,\\ldots,\\widehat{i_j},\\ldots,i_{p+1}]$. Define the shifted negative cochain complex $I^\\bullet=I^\\bullet(f_1^e,\\ldots,f_r^e)$ by $I^i=K_{1-i}(f_1^e,\\ldots,f_r^e)$ for $i\\le0$, $I^i=0$ for $i>0$, with differential $d_I^i=-d_{1-i}:I^i\\to I^{i+1}$ for $i<0$ and $d_I^i=0$ for $i\\ge0$. The transition $I^\\bullet(f_1^{e+1},\\ldots,f_r^{e+1})\\to I^\\bullet(f_1^e,\\ldots,f_r^e)$ is the map of complexes sending $[i_0,\\ldots,i_p]$ to $f_{i_0}\\cdots f_{i_p}[i_0,\\ldots,i_p]$; precomposition with it makes $e\\mapsto\\operatorname{Hom}_A^\\bullet(I^\\bullet(f_1^e,\\ldots,f_r^e),M^\\bullet)$ a directed system of Hom complexes [def-pur-hom-complex] (taken for $A$-modules, i.e. on the one-point site), whose degree-$n$ term is $\\prod_{p}\\operatorname{Hom}_A(I^{-p},M^{n+p})$; call $\\operatorname{Hom}_A(I^{-p},M^q)=\\operatorname{Hom}_A(K_{p+1},M^q)$ its bidegree $(p,q)$ part. Let $T^\\bullet$ be the total complex of the alternating (ordered) Cech double complex of $M^\\bullet$ for $f_1,\\ldots,f_r$ (the module form of the alternating Cech complex of [lem-pc-alternating-cech-computes] for the covering of $D(f_1)\\cup\\cdots\\cup D(f_r)$ by the $D(f_i)$): its bidegree $(p,q)$ part is $C^{p,q}=\\prod_{i_0<\\cdots<i_p}M^q_{f_{i_0}\\cdots f_{i_p}}$ for $p\\ge0$ (zero for $p<0$), $T^n=\\bigoplus_{p+q=n}C^{p,q}$, and for $s\\in C^{p,q}$ the differential is $d_T(s)=\\delta(s)+(-1)^pd_M(s)$, where $\\delta(s)_{i_0\\ldots i_{p+1}}=\\sum_{j=0}^{p+1}(-1)^j\\,s_{i_0\\ldots\\widehat{i_j}\\ldots i_{p+1}}$ (each term mapped into $M^q_{f_{i_0}\\cdots f_{i_{p+1}}}$ by the localization map) and $d_M$ acts entrywise. Then the map $\\Phi:\\varinjlim_e\\operatorname{Hom}_A^\\bullet(I^\\bullet(f_1^e,\\ldots,f_r^e),M^\\bullet)\\to T^\\bullet$ which on bidegree $(p,q)$ is the fraction map $t\\mapsto\\big(t([i_0,\\ldots,i_p])/(f_{i_0}\\cdots f_{i_p})^e\\big)_{i_0<\\cdots<i_p}$ multiplied by $(-1)^{pq+p(p-1)/2}$ is well defined and is an isomorphism of complexes of $A$-modules; in particular it is a quasi-isomorphism.",
  "source": {
   "document": "literature/stacks-project/perfect.tex",
   "place": "Tags 08D1 and 08D2, Koszul-to-alternating-Cech comparison"
  },
  "stmt_deps": [
   "def-weil-pbc-koszul-complex",
-  "def-weil-pbc-site-cech-complex",
+  "lem-pc-alternating-cech-computes",
   "def-pc-cochain-complex-modules",
   "def-pur-hom-complex"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The transition is a map of complexes: for $J=\\{i_0<\\cdots<i_{p+1}\\}$ and $f_J=f_{i_0}\\cdots f_{i_{p+1}}$, applying $d_{p+2}$ at exponent $e$ to $f_J[J]$ gives $\\sum_j(-1)^jf_J f_{i_j}^e[J\\setminus i_j]=\\sum_j(-1)^jf_{i_j}^{e+1}f_{J\\setminus i_j}[J\\setminus i_j]$, which is the transition applied to $d_{p+2}[J]$ at exponent $e+1$. For $t\\in\\operatorname{Hom}_A(K_{p+1},M^q)$ at exponent $e$ define the unsigned fraction map $\\psi(t)_{i_0\\ldots i_p}=t([i_0,\\ldots,i_p])/(f_{i_0}\\cdots f_{i_p})^e$ on the Koszul basis [def-weil-pbc-koszul-complex]. The transition sends $t$ to $t'$ with $t'([J])=f_Jt([J])$, and $f_Jt([J])/f_J^{e+1}=t([J])/f_J^e$, so $\\psi$ is compatible with the transitions and descends to the filtered colimit (elementary).",
+   "uses": [
+    "def-weil-pbc-koszul-complex",
+    "def-pur-hom-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 0911, construction of Psi"
+   }
+  },
+  {
+   "text": "In each total degree $n$ only $0\\le p\\le r-1$ contribute, so $\\operatorname{Hom}^n$ [def-pur-hom-complex] is a finite product, and filtered colimits of $A$-modules commute with finite products (elementary). Since $K_{p+1}$ is free with basis the $[i_0,\\ldots,i_p]$, $i_0<\\cdots<i_p$ [def-weil-pbc-koszul-complex], $t\\mapsto(t([J]))_J$ identifies $\\operatorname{Hom}_A(K_{p+1},M^q)$ with $\\prod_JM^q$ (universal property of a free module, elementary), and under this identification the transition is multiplication by $f_J$ in the $J$-entry. By [lem-sc-module-localization-filtered-colimit] applied to $f=f_J$ (indexing from $e=1$ is cofinal), the colimit of $M^q\\xrightarrow{f_J}M^q\\to\\cdots$ maps isomorphically to $M^q_{f_J}$ by $m\\mapsto m/f_J^e$ at stage $e$. Hence $\\psi$ is an isomorphism $\\varinjlim_e\\operatorname{Hom}_A(K_{p+1},M^q)\\to C^{p,q}=\\prod_{i_0<\\cdots<i_p}M^q_{f_{i_0}\\cdots f_{i_p}}$, the bidegree $(p,q)$ term of the alternating Cech complex of the statement [lem-pc-alternating-cech-computes].",
+   "uses": [
+    "lem-sc-module-localization-filtered-colimit",
+    "def-weil-pbc-koszul-complex",
+    "def-pur-hom-complex",
+    "lem-pc-alternating-cech-computes"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00CM; perfect.tex Tag 0911"
+   }
+  },
+  {
+   "text": "Let $t\\in\\operatorname{Hom}_A(K_{p+1},M^q)=\\operatorname{Hom}_A(I^{-p},M^q)$, of total degree $n=p+q$. By [def-pur-hom-complex], $d(t)=d_M\\circ t-(-1)^n t\\circ d_I^{-p-1}$, and $d_I^{-p-1}=-d_{p+2}$ [def-weil-pbc-koszul-complex], so $d(t)=d_M\\circ t+(-1)^{p+q}\\,t\\circ d_{p+2}$, with $d_M\\circ t$ in bidegree $(p,q+1)$ and $t\\circ d_{p+2}$ in bidegree $(p+1,q)$. Clearly $\\psi(d_M\\circ t)=d_M\\psi(t)$. For $J=\\{i_0<\\cdots<i_{p+1}\\}$, $\\psi(t\\circ d_{p+2})_J=\\sum_j(-1)^jf_{i_j}^et([J\\setminus i_j])/f_J^e=\\sum_j(-1)^jt([J\\setminus i_j])/f_{J\\setminus i_j}^e=\\delta(\\psi t)_J$, with $\\delta$ the alternating face differential of the statement [lem-pc-alternating-cech-computes]. So $\\psi(d t)=d_M\\psi t+(-1)^{p+q}\\delta\\psi t$, while $d_T=\\delta+(-1)^pd_M$ on $C^{p,q}$. Hence $\\Phi=\\epsilon_{p,q}\\psi$ is a map of complexes iff $\\epsilon_{p,q+1}=(-1)^p\\epsilon_{p,q}$ and $(-1)^{p+q}\\epsilon_{p+1,q}=\\epsilon_{p,q}$. For $\\epsilon_{p,q}=(-1)^{pq+p(p-1)/2}$: $\\epsilon_{p,q+1}/\\epsilon_{p,q}=(-1)^p$ and $\\epsilon_{p+1,q}/\\epsilon_{p,q}=(-1)^{q+(p+1)p/2-p(p-1)/2}=(-1)^{p+q}$, as required. Check $r=2$, $M$ in degree $0$, $t:K_1\\to M^0$: $d(t)=t\\circ d_2$, $d(t)(e_1\\wedge e_2)=f_1^et(e_2)-f_2^et(e_1)$, so $\\Phi(dt)_{12}=t(e_2)/f_2^e-t(e_1)/f_1^e=\\delta(\\Phi t)_{12}$ ($\\epsilon_{0,0}=\\epsilon_{1,0}=1$). By Step 2, $\\Phi$ is bijective in each bidegree, hence an isomorphism of complexes.",
+   "uses": [
+    "def-weil-pbc-koszul-complex",
+    "def-pur-hom-complex",
+    "lem-pc-alternating-cech-computes"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tags 0911 and 08D1, signs"
+   }
+  },
+  {
+   "text": "An isomorphism of complexes is a quasi-isomorphism. For $r=0$ both sides are zero; for $r=1$ both sides are $M^\\bullet_{f_1}$ with $\\epsilon_{0,q}=1$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tags 0911 and 08D1"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-koszul-complex",
+  "lem-pc-alternating-cech-computes",
+  "def-pur-hom-complex",
+  "lem-sc-module-localization-filtered-colimit"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tags 0911 and 08D1; lines 1911-2052"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
    "query": "Filtered colimit of Hom from shifted Koszul complexes is the alternating Cech complex of localizations",
-   "results": "8 hits including localCohomology and generic HomologicalComplex colimits; no Koszul-Cech comparison",
+   "results": "generic filtered-colimit hits; no comparison",
    "date": "2026-10-11",
    "verdict": "no match"
   },
   {
    "tool": "loogle",
    "query": "Koszul Cech localization",
-   "results": "0 hits; loogle: Unknown identifier `Koszul`",
+   "results": "0 hits",
    "date": "2026-10-11",
    "verdict": "no match"
   },
@@ -52,18 +110,43 @@
   {
    "tool": "leansearch",
    "query": "Filtered colimit of Hom from shifted Koszul complexes is the alternating Cech complex of localizations",
-   "results": "service unavailable: Internal Server Error",
+   "results": "service unavailable",
    "date": "2026-10-11",
    "verdict": "unavailable"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sc-affine-koszul-cech-derived-comparison",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-duality"
+ "unit": "sk-thm-picard-duality",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-sc-affine-koszul-hom-alternating-cech",
+  "worker": "stage1",
+  "summary": "Repaired returned split: direct Stacks 0911 fraction map, localization colimit 00CM, negative sign (-1)^p, and total twist (-1)^(pq+p(p-1)/2); proves an isomorphism of complexes.",
+  "blueprint": "Realizes lem-sc-finite-duality comparison clause.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-alternating-cech-computes",
+    "why": "The item needs the established identification of full ordered Cech cochains with the strictly increasing alternating rows; this generic Cech tool is not supplied by the Koszul duality unit."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-alternating-cech-computes",
+  "lem-pc-alternating-cech-computes"
+ ],
+ "reviewed": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-kha0056",
+  "group": "H1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-kha0056 (reviewer sub-agent of L); spot-checked: Returns R-kha0007/R-kha0036 points: (1) I^i=K_{1-i}, d_I=-d_K, transition present; (2) unsigned fraction map times (-1)^{pq+p(p-1)/2} is correct (hand-checked r=1; r=2 with M in degree 0 and in degrees 0,1 at bidegrees (0,0),(0,1),(1,0)); (3) alternating rows cited via lem-pc-alternating-cech-computes. Citer lem-sc-affine-koszul-cech-derived-comparison uses I^i=K^{i-1} with negative differential and the alternating total complex: consistent. New node lem-sc-module-localization-filtered-colimit not a duplicate (grep for M_f colimit nodes; lem-weil-pbc-localization-colimit-principal-localizations is S^{-1}P=colim P_f). FIX more, RETURN less: (a) E/statement: d_I^0=-d_1 was ill-typed (target I^1=0) -> d_I^i=-d_{1-i} for i<0, 0 for i>=0; basis [i_0..i_p] and d_K formula defined; (b) statement did not define the total complex sign convention, which the signed map needs -> T^bullet with rows prod M^q_{f_J}, delta and d_T=delta+(-1)^p d_M written out, conclusion strengthened to isomorphism (hence quasi-iso); (c) Step 3 sign equation eps_{p+1,q}(-(-1)^{p+q})=eps_{p,q} was false for the stated eps (it fits (-1)^{pq+p(p+1)/2}) -> rewrote with d(t)=d_M t+(-1)^{p+q} t d_K, psi(t d_K)=delta psi t, equations eps_{p,q+1}=(-1)^p eps, (-1)^{p+q}eps_{p+1,q}=eps verified, r=2 check written; (d) C1: Step 2 now states finite product, free-basis evaluation (Hom(K_{p+1},M)=prod_J M), filtered colimits commute with finite products, and the localization-colimit node with f=f_J; Step 1 checks the transition is a chain map. Dropped def-weil-pbc-site-cech-complex from stmt/proof deps (no longer cited).; 1 file(s) fixed by the reviewer"
+ }
 }

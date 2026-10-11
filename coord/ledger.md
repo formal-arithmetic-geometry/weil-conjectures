@@ -3182,3 +3182,5 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 00:58 UTC L: C1 affine-flat-module-localization-preserves-flatness PASS 530d2102c (R-lpf0056).
 - 00:58 L: merged deliver/G1/lem-pc-recd-fibre-cartier-local (reviewer FIX; first push; new nodes: 1)
 - 00:58 UTC L: lem-pc-derived-tensor-transitivity RESTATED by L (via R-dtr0054, commits 02df7db2c and 5972cd31d): D(A) form (E ⊗^L_A K) ⊗^L_R B ≅ E ⊗^L_A (K ⊗^L_R B), T=A⊗_R B-linear on H^i, plus a flat-C clause for the citer; citer lem-pc-rf-single-complex-inherited-tensor-condition step 2 aligned; notice to H1 (claim holder). The flat-C clause goes beyond Tag 0BYJ (needs a localizing-subcategory argument, hint in the lead note).
+- 00:58 UTC L: G1 recd-fibre-cartier-local FIX 4df7c822f (R-rfc0056; leaf pointed at the sorry-free exists_notMem_isRegularPrincipal_and_flat_of_fiber).
+- 00:58 L: merged deliver/H1/lem-sc-affine-koszul-hom-alternating-cech (reviewer FIX; after a return; new nodes: 1)
