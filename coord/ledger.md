@@ -3851,3 +3851,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 08:35 L: merged deliver/M1/lem-sc-picard-locus-closed-valuation-triviality (stage 2; reviewer FIX; first push; Sheaf.AlgebraicGeometry.PicardLocusClosedValuationTriviality generic_fibre_triviality_over_valuation_ring)
 - 08:36 L: merged deliver/E1/lem-sc-regular-local-ext-vanishing (stage 2; reviewer PASS; first push; Sheaf.RingTheory.RegularLocalExtVanishing IsRegularLocalRing.subsingleton_ext_of_ringKrullDim_lt)
 - 08:36 L: merged deliver/K1/lem-sc-semilocal-dim-one-conductor (stage 2; reviewer FIX; first push; Sheaf.AlgebraicGeometry.SemilocalDimOneConductor semilocal_dim_one_conductor)
+- 08:36 L: merged deliver/H1/lem-weil-common-extension-fields (stage 2; reviewer PASS; first push; Sheaf.FieldTheory.CommonExtensionFields Field.exists_common_extension)
