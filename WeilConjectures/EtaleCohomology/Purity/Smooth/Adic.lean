@@ -11,7 +11,23 @@ public import WeilConjectures.SixFunctors.Etale.Derived.NormalizedTowerRealizati
 /-!
 # Adic reconstruction of smooth purity
 
-ADICDOC
+At the integral stage `Λ = 𝒪_E` an object is a normalized system `K = (K_n)_n` of finite-level
+objects `K_n ∈ D(Y_ét, 𝒪_E ⧸ 𝔪ⁿ⁺¹)` (`AlgebraicGeometry.Etale.NormalizedTower`), realized as the
+derived limit `R lim_n K_n`. The adic purity isomorphism is the realization of the
+finite-level purity isomorphisms `γ_{f,K_n}`, which form a morphism of normalized systems by
+the finite reduction of purity (blueprint `thm-pur-adic-reconstruction`).
+
+## Main statements
+
+- `AlgebraicGeometry.Etale.exists_iso_realization_twistShiftPullbackLevel`: adic reconstruction.
+
+## Implementation notes
+
+The normalized-system structures of `n ↦ Lf^* K_n(d)[2d]` and `n ↦ Rf^! K_n` (the transition
+maps exhibiting each level as the derived base change of the next) need the compatibility of
+`Lf^*`, of the twist and of `Rf^!` with a change of coefficient ring, which the repository
+does not construct; they are therefore given as normalized systems `S` and `T` together with
+identifications `eS`, `eT` of their levels.
 -/
 
 @[expose] public section
@@ -65,10 +81,9 @@ noncomputable abbrev upperShriekLevel (K : NormalizedTower I Y) (n : ℕ) :
 
 Let `K = (K_n)_n` be a normalized system on `Y` (`AlgebraicGeometry.Etale.NormalizedTower`,
 levels `K_n ∈ D(Y_ét, A_n)`, `A_n = R ⧸ Iⁿ⁺¹`, the intended case being `R = 𝒪_E`), and let
-`f : X ⟶ Y` be smooth separated of relative dimension `d`. Let the levels `Lf^* K_n(d)[2d]` and
-`Rf^! K_n` carry their normalized-system structures (transition maps `tS`, `tT` exhibiting each
-level as the derived base change of the next), and let `γ_{f,K_n}` be the finite-coefficient
-purity isomorphisms (`thm-pur-finite-coefficient-smooth-purity`). If they commute with the
+`f : X ⟶ Y` be smooth separated of relative dimension `d`. Let `S` and `T` be normalized
+systems on `X` with levels identified with `Lf^* K_n(d)[2d]` (by `eS`) and `Rf^! K_n` (by `eT`),
+and let `γ_{f,K_n}` be the finite-coefficient purity isomorphisms (`thm-pur-finite-coefficient-smooth-purity`). If they commute with the
 transition maps — the finite reduction of purity, `thm-pur-finite-reduction-of-purity`
 (`AlgebraicGeometry.Etale.map_smoothPurityIso_hom_comp`) — they form a morphism of normalized
 systems, and they induce an isomorphism
