@@ -315,6 +315,29 @@ theorem restrictSupportedClass_map (i : Z ⟶ U) (i' : Z' ⟶ U') [IsClosedImmer
     rfl
   simp only [restrictSupportedClass, Functor.map_comp, Category.assoc, key]
 
+omit [(e)^*[A].PreservesFlat] in
+/-- Restricting a class supported everywhere (`AlgebraicGeometry.Etale.liftCounitOfRangeEqUniv`)
+gives the class supported everywhere lifting the restricted morphism. -/
+theorem restrictSupportedClass_liftCounitOfRangeEqUniv (i : Z ⟶ U) (i' : Z' ⟶ U')
+    [IsClosedImmersion i] [(R(i)_![A]).IsLeftAdjoint] [IsClosedImmersion i']
+    [(R(i')_![A]).IsLeftAdjoint] (hi : Set.range i.base = Set.univ)
+    (hi' : Set.range i'.base = Set.univ) (g : Z' ⟶ Z) (hg : IsPullback g i' i e)
+    {K L : DerivedCategory (Sheaf U.smallEtaleTopology A)}
+    {K' L' : DerivedCategory (Sheaf U'.smallEtaleTopology A)}
+    (σ : K' ⟶ (L((e)^*[A])).obj K) (τ : (L((e)^*[A])).obj L ≅ L') (φ : K ⟶ L) (φ' : K' ⟶ L')
+    (hφ : σ ≫ (L((e)^*[A])).map φ ≫ τ.hom = φ') :
+    restrictSupportedClass A e i i' g hg σ τ (liftCounitOfRangeEqUniv A i hi φ) =
+      liftCounitOfRangeEqUniv A i' hi' φ' := by
+  have h₁ := (existsUnique_comp_counit_of_range_eq_univ A i hi φ).exists.choose_spec
+  have hψ := (existsUnique_supportedRestriction A e i i' g hg L L' τ).exists.choose_spec
+  refine (existsUnique_comp_counit_of_range_eq_univ A i' hi' φ').unique ?_
+    (existsUnique_comp_counit_of_range_eq_univ A i' hi' φ').exists.choose_spec
+  simp only [restrictSupportedClass, Category.assoc]
+  erw [hψ]
+  rw [← Functor.map_comp_assoc]
+  erw [h₁]
+  exact hφ
+
 end Etale
 
 end AlgebraicGeometry

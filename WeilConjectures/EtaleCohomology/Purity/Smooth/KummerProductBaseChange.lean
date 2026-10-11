@@ -42,9 +42,8 @@ open Scheme
 
 namespace Etale
 
-variable (Λ : Type (u + 1)) [CommRing Λ] [HasTateTwist Λ] {U U' : Scheme.{u}}
+variable (Λ : Type (u + 1)) [CommRing Λ] {U U' : Scheme.{u}}
 
-omit [HasTateTwist Λ] in
 /-- Pullback along a shift of an equation of shift amounts. -/
 @[reassoc]
 lemma leftDerivedUpperStar_map_eqToHom_shift_comp_commShiftIso_hom (e : U' ⟶ U)
@@ -57,7 +56,6 @@ lemma leftDerivedUpperStar_map_eqToHom_shift_comp_commShiftIso_hom (e : U' ⟶ U
   subst hK h
   simp
 
-omit [HasTateTwist Λ] in
 /-- Shifting a morphism across an equation of shift amounts. -/
 @[reassoc]
 lemma eqToHom_comp_shift_map {X X' Y : DerivedCategory (Sheaf U'.smallEtaleTopology
@@ -67,7 +65,6 @@ lemma eqToHom_comp_shift_map {X X' Y : DerivedCategory (Sheaf U'.smallEtaleTopol
   subst hX h
   simp
 
-omit [HasTateTwist Λ] in
 /-- `K⟦a⟧ ⊗ M⟦b⟧ ≅ (K ⊗ M)⟦a + b⟧` is natural in both factors. -/
 @[reassoc]
 lemma derivedTensorHom_shift_comp_derivedTensorShiftIso_hom {X : Scheme.{u}}
@@ -77,6 +74,10 @@ lemma derivedTensorHom_shift_comp_derivedTensorShiftIso_hom {X : Scheme.{u}}
       (derivedTensorShiftIso _ K M a b).hom ≫ (derivedTensorHom _ f g)⟦a + b⟧' := by
   simp only [derivedTensorHom, Category.assoc, Functor.map_comp]
   rw [derivedTensorShiftIso_hom_naturality_right, derivedTensorShiftIso_hom_naturality_left_assoc]
+
+section Twist
+
+variable [HasTateTwist Λ]
 
 /-- **The Tate twist identifications are compatible with pullback**:
 `Le^* (Λ(m)[2m] ⊗ Λ(m')[2m'] ≅ Λ(m + m')[2(m + m')])` is the corresponding identification
@@ -119,6 +120,171 @@ lemma leftDerivedUpperStar_map_shiftTateObjectAddIso (e : U' ⟶ U) (m m' : ℤ)
   rw [Functor.commShiftIso_hom_naturality_assoc, ← Functor.map_comp, hc, Functor.map_comp,
     Functor.map_comp, reassoc_of% hd, ← derivedTensorHom_comp_assoc,
     derivedTensorHom_shift_comp_derivedTensorShiftIso_hom_assoc]
+
+/-- The Tate twist datum on pulled back twisting objects, `Le^* Λ_U(m) ≅ Λ_{U'}(m)`, across an
+equation of twists. -/
+@[reassoc]
+lemma leftDerivedUpperStar_map_eqToHom_twistObject (e : U' ⟶ U) {m m' : ℤ} (h : m = m') :
+    (L((e)^*[ModuleCat.{u + 1} Λ])).map (eqToHom (by rw [h]) :
+        HasTateTwist.twistObject (Λ := Λ) U m ⟶ HasTateTwist.twistObject U m') ≫
+      (HasTateTwist.leftDerivedUpperStarTwistObjectIso e m').hom =
+        (HasTateTwist.leftDerivedUpperStarTwistObjectIso e m).hom ≫ eqToHom (by rw [h]) := by
+  subst h
+  simp
+
+end Twist
+
+/-- Tensor product of identities. -/
+@[simp]
+lemma derivedTensorHom_id {X : Scheme.{u}}
+    (K M : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
+    derivedTensorHom _ (𝟙 K) (𝟙 M) = 𝟙 _ := by
+  simp [derivedTensorHom]
+
+section Kummer
+
+variable [Finite Λ] [HasKummerClass Λ]
+omit [Finite Λ] in
+/-- The diagonal `Λ_U ⟶ Λ_U ⊗ Λ_U` along which classes are multiplied
+(`AlgebraicGeometry.Etale.constantComplexDiagonal`) is compatible with pullback. -/
+lemma constantComplexDiagonal_comp_derivedTensorHom (e : U' ⟶ U) :
+    constantComplexDiagonal Λ U' ≫
+        derivedTensorHom _ (leftDerivedUpperStarConstantComplexIso Λ e).inv
+          (leftDerivedUpperStarConstantComplexIso Λ e).inv =
+      (leftDerivedUpperStarConstantComplexIso Λ e).inv ≫
+        (L((e)^*[ModuleCat.{u + 1} Λ])).map (constantComplexDiagonal Λ U) ≫
+          (leftDerivedUpperStarTensorIso _ e _ _).hom := by
+  have hdiag : ∀ X : Scheme.{u}, constantComplexDiagonal Λ X =
+      (HasTateTwist.twistObjectZeroIso (Λ := Λ) X).inv ≫ eqToHom (by rw [add_zero]) ≫
+        (HasTateTwist.twistObjectAddIso X 0 0).inv ≫
+          derivedTensorHom _ (HasTateTwist.twistObjectZeroIso X).hom
+            (HasTateTwist.twistObjectZeroIso X).hom := fun X ↦ by
+    simp [constantComplexDiagonal, derivedTensorHom]
+  set p := HasTateTwist.leftDerivedUpperStarTwistObjectIso (Λ := Λ) e 0
+  have hc : (L((e)^*[ModuleCat.{u + 1} Λ])).map (HasTateTwist.twistObjectAddIso U 0 0).hom ≫
+      (HasTateTwist.leftDerivedUpperStarTwistObjectIso e (0 + 0)).hom =
+        (leftDerivedUpperStarTensorIso _ e _ _).hom ≫ derivedTensorHom _ p.hom p.hom ≫
+          (HasTateTwist.twistObjectAddIso U' 0 0).hom := by
+    rw [HasTateTwist.leftDerivedUpperStar_map_twistObjectAddIso]
+    simp only [derivedTensorHom, Category.assoc, p]
+  have h₁ : (leftDerivedUpperStarTensorIso _ e _ _).hom ≫ derivedTensorHom _ p.hom p.hom =
+      (L((e)^*[ModuleCat.{u + 1} Λ])).map (HasTateTwist.twistObjectAddIso U 0 0).hom ≫
+        (HasTateTwist.leftDerivedUpperStarTwistObjectIso e (0 + 0)).hom ≫
+          (HasTateTwist.twistObjectAddIso U' 0 0).inv := by
+    rw [reassoc_of% hc, Iso.hom_inv_id, Category.comp_id]
+  have hc' : (L((e)^*[ModuleCat.{u + 1} Λ])).map (HasTateTwist.twistObjectAddIso U 0 0).inv ≫
+      (leftDerivedUpperStarTensorIso _ e _ _).hom =
+        (HasTateTwist.leftDerivedUpperStarTwistObjectIso e (0 + 0)).hom ≫
+          (HasTateTwist.twistObjectAddIso U' 0 0).inv ≫ derivedTensorHom _ p.inv p.inv := by
+    have : (leftDerivedUpperStarTensorIso _ e _ _).hom =
+        (leftDerivedUpperStarTensorIso _ e _ _).hom ≫ derivedTensorHom _ p.hom p.hom ≫
+          derivedTensorHom _ p.inv p.inv := by
+      rw [derivedTensorHom_comp, Iso.hom_inv_id, derivedTensorHom_id, Category.comp_id]
+    rw [this, reassoc_of% h₁, ← Functor.map_comp_assoc, Iso.inv_hom_id,
+      CategoryTheory.Functor.map_id, Category.id_comp]
+  rw [hdiag, hdiag]
+  simp only [leftDerivedUpperStarConstantComplexIso, Iso.trans_inv, Functor.mapIso_inv,
+    Iso.symm_inv, Category.assoc, Functor.map_comp]
+  rw [derivedTensorHom_comp, Iso.hom_inv_id_assoc, ← Functor.map_comp_assoc, Iso.hom_inv_id,
+    CategoryTheory.Functor.map_id, Category.id_comp, leftDerivedUpperStarTensorIso_hom_naturality,
+    reassoc_of% hc', leftDerivedUpperStar_map_eqToHom_twistObject_assoc Λ e (add_zero 0).symm]
+  simp only [Iso.inv_hom_id_assoc, derivedTensorHom_comp]
+  rfl
+/-- Closed subschemes cut out by global sections pull back to the closed subschemes cut out by the
+pulled back sections. -/
+lemma exists_isPullback_zeroLocusSubschemeι (e : U' ⟶ U) (s : Set Γ(U, ⊤))
+    (s' : Set Γ(U', ⊤)) (hs : e.appTop '' s = s') :
+    ∃ g, IsPullback g (U'.zeroLocusSubschemeι s') (U.zeroLocusSubschemeι s) e := by
+  subst hs
+  exact ⟨_, isPullback_zeroLocusSubschemeι e s⟩
+
+/-- Restriction of supports across an equation of twists. -/
+lemma restrictSupportedClass_comp_eqToHom (e : U' ⟶ U) {Z Z' : Scheme.{u}} (i : Z ⟶ U)
+    (i' : Z' ⟶ U') [IsClosedImmersion i] [IsClosedImmersion i'] (g : Z' ⟶ Z)
+    (hg : IsPullback g i' i e) {k k' : ℤ} (h : k = k')
+    (γ : constantComplex Λ U ⟶ (R(i)_![ModuleCat.{u + 1} Λ]).obj
+      ((R(i)^![ModuleCat.{u + 1} Λ]).obj ((tateObject Λ U k)⟦2 * k⟧))) :
+    restrictSupportedClass (ModuleCat.{u + 1} Λ) e i i' g hg
+        (leftDerivedUpperStarConstantComplexIso Λ e).inv (leftDerivedUpperStarTateShiftIso Λ e k')
+        (γ ≫ eqToHom (by rw [h])) =
+      restrictSupportedClass (ModuleCat.{u + 1} Λ) e i i' g hg
+          (leftDerivedUpperStarConstantComplexIso Λ e).inv (leftDerivedUpperStarTateShiftIso Λ e k)
+          γ ≫ eqToHom (by rw [h]) := by
+  subst h
+  simp
+
+omit [Finite Λ] in
+/-- The unit class `Λ_U ≅ Λ_U(0)[0]` is compatible with pullback. -/
+lemma leftDerivedUpperStarConstantComplexIso_inv_comp_map_twistObjectZeroIso_inv (e : U' ⟶ U)
+    {a : ℤ} (ha : a = 0) :
+    (leftDerivedUpperStarConstantComplexIso Λ e).inv ≫
+        (L((e)^*[ModuleCat.{u + 1} Λ])).map ((HasTateTwist.twistObjectZeroIso (Λ := Λ) U).inv ≫
+          (shiftFunctorZero' _ a ha).inv.app _) ≫
+        ((L((e)^*[ModuleCat.{u + 1} Λ])).commShiftIso a).hom.app _ ≫
+          ((HasTateTwist.leftDerivedUpperStarTwistObjectIso (Λ := Λ) e 0).hom)⟦a⟧' =
+      (HasTateTwist.twistObjectZeroIso U').inv ≫ (shiftFunctorZero' _ a ha).inv.app _ := by
+  subst ha
+  simp only [shiftFunctorZero', eqToIso_refl, Iso.refl_trans]
+  simp only [leftDerivedUpperStarConstantComplexIso, Functor.commShiftIso_zero, Iso.trans_inv,
+    Functor.mapIso_inv, Iso.symm_inv, Category.assoc, Functor.CommShift.isoZero_hom_app,
+    Functor.map_comp, Functor.comp_obj]
+  rw [← Functor.map_comp_assoc _ (HasTateTwist.twistObjectZeroIso U).hom, Iso.hom_inv_id,
+    CategoryTheory.Functor.map_id, Category.id_comp, ← Functor.map_comp_assoc, Iso.inv_hom_id_app]
+  erw [CategoryTheory.Functor.map_id]
+  rw [Category.id_comp, ← (shiftFunctorZero _ ℤ).inv.naturality, Functor.id_map,
+    Iso.inv_hom_id_assoc]
+
+/-- **Base change of products of Kummer boundaries.** For `e : U' ⟶ U` and global functions
+`f₁, …, f_n` on `U` with pullbacks `f'_a = e^* f_a`, restricting
+`∂κ(f₁) ∪ ⋯ ∪ ∂κ(f_n) ∈ H^{2n}_{V(f)}(U, Λ(n))` along `e` gives
+`∂κ(f'₁) ∪ ⋯ ∪ ∂κ(f'_n) ∈ H^{2n}_{V(f')}(U', Λ(n))`. -/
+theorem restrictSupportedClass_kummerBoundaryProduct (e : U' ⟶ U) :
+    ∀ {n : ℕ} (f : Fin n → Γ(U, ⊤)) (f' : Fin n → Γ(U', ⊤)) (_ : ∀ a, e.appTop (f a) = f' a)
+      (g : U'.zeroLocusSubscheme (Set.range f') ⟶ U.zeroLocusSubscheme (Set.range f))
+      (hg : IsPullback g (U'.zeroLocusSubschemeι (Set.range f'))
+        (U.zeroLocusSubschemeι (Set.range f)) e),
+      restrictSupportedClass (ModuleCat.{u + 1} Λ) e _ _ g hg
+          (leftDerivedUpperStarConstantComplexIso Λ e).inv
+          (leftDerivedUpperStarTateShiftIso Λ e n) (kummerBoundaryProduct Λ f) =
+        kummerBoundaryProduct Λ f'
+  | 0, f, f', hf, g, hg => by
+    rw [kummerBoundaryProduct, kummerBoundaryProduct]
+    refine restrictSupportedClass_liftCounitOfRangeEqUniv _ e _ _ _ _ g hg _ _ _ _ ?_
+    exact leftDerivedUpperStarConstantComplexIso_inv_comp_map_twistObjectZeroIso_inv Λ e _
+  | n + 1, f, f', hf, g, hg => by
+    obtain ⟨g₁, hg₁⟩ := exists_isPullback_zeroLocusSubschemeι e {f 0} {f' 0} (by simp [hf])
+    obtain ⟨g₂, hg₂⟩ := exists_isPullback_zeroLocusSubschemeι e (Set.range (Fin.tail f))
+      (Set.range (Fin.tail f')) (by
+        ext x
+        simp only [Set.mem_image, Set.mem_range, Fin.tail]
+        constructor
+        · rintro ⟨_, ⟨a, rfl⟩, rfl⟩
+          exact ⟨a, (hf _).symm⟩
+        · rintro ⟨a, rfl⟩
+          exact ⟨_, ⟨a, rfl⟩, hf _⟩)
+    have ih := restrictSupportedClass_kummerBoundaryProduct e (Fin.tail f) (Fin.tail f')
+      (fun a ↦ hf _) g₂ hg₂
+    rw [kummerBoundaryProduct, kummerBoundaryProduct,
+      restrictSupportedClass_comp_eqToHom Λ e _ _ g hg (by push_cast; ring)]
+    congr 1
+    simp only [cupWithSupportsTateObject]
+    rw [restrictSupportedClass_map _ e _ _ g hg _
+      (leftDerivedUpperStarTensorIso _ e _ _ ≪≫
+        ((derivedTensor _ U').mapIso (leftDerivedUpperStarTateShiftIso Λ e 1)).app _ ≪≫
+          ((derivedTensor _ U').obj _).mapIso (leftDerivedUpperStarTateShiftIso Λ e n))
+      _ _ _ (by
+        rw [leftDerivedUpperStar_map_shiftTateObjectAddIso]
+        simp only [derivedTensorHom, Iso.trans_hom, Iso.app_hom, Functor.mapIso_hom,
+          Category.assoc]; rfl),
+      restrictSupportedClass_cupWithSupports _ e _ _ _ _ _ _ _ _ g₁ g₂ g hg₁ hg₂ hg _ _ _ _ _
+        (constantComplexDiagonal_comp_derivedTensorHom Λ e), ih]
+    · congr 3
+      erw [restrictSupportedClass_shiftSupportedClass]
+      congr 1
+      exact kummerBoundary_baseChange_of_eq Λ e (f 0) (f' 0) (hf 0) g₁ hg₁
+    · rw [Fin.range_fin_succ, range_zeroLocusSubschemeι_insert]
+
+end Kummer
 
 end Etale
 
