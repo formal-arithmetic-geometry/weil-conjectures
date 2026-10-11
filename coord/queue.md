@@ -1,11 +1,11 @@
 # Work queue
 
-556 items; claim with `tools/claim.py next <group> [--stage N]`.
+551 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (556)
+## Stage 2: nodes to state (551)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -17,21 +17,16 @@
 | `lem-weil-derived-limit-roos-complex` | 1 | state |
 | `lem-weil-pbc-exchange-identity-pasting` | 1 | state |
 | `lem-weil-pbc-finite-etale-trace-degree` | 1 | state |
-| `lem-weil-pbc-flat-completion` | 1 | state |
 | `lem-weil-pbc-fpqc-local-on-base-criterion` | 1 | state |
 | `lem-weil-pbc-free-cech-complex-exact` | 1 | state |
-| `lem-weil-pbc-free-complex-mod-nonzerodivisor-exact` | 1 | state |
 | `lem-weil-pbc-fs-adic-base-change` | 1 | state |
 | `lem-weil-pbc-fs-adic-lift-over-finite-coefficient-map` | 1 | state |
 | `lem-weil-pbc-g-ring-maximal-ideal-criterion` | 1 | state |
 | `lem-weil-pbc-gabber-h0-etale-criterion` | 1 | state |
 | `lem-weil-pbc-generic-finite-algebra-splitting` | 1 | state |
-| `lem-weil-pbc-geometric-point-morphism-stalk-bijection` | 1 | state |
 | `lem-weil-pbc-geometrically-connected-finite-separable-test` | 1 | state |
-| `lem-weil-pbc-geometrically-regular-over-field-flat` | 1 | state |
 | `lem-weil-pbc-geometrically-regular-over-subfields` | 1 | state |
 | `lem-weil-pbc-global-complete-intersection-equidimensional` | 1 | state |
-| `lem-weil-pbc-global-complete-intersection-local-regular-sequence` | 1 | state |
 | `lem-weil-pbc-global-complete-intersection-principal-localization` | 1 | state |
 | `lem-weil-pbc-global-dimension-finite-modules-suffice` | 1 | state |
 | `lem-weil-pbc-glue-sheaves-of-modules` | 1 | state |
