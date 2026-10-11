@@ -182,5 +182,23 @@
   "worker": "stage1",
   "summary": "Split the statement using Algebra 0CXF (7): the d=0 case is finite projective and hence finite free over the local ring; for d>=1, build the infinite finite-free resolution (00LP), use the existing independent-resolution syzygy node (00O5) and Noetherian submodule finiteness to make the d-th syzygy finite projective, convert it to finite free by local freeness (00NX), then repeatedly remove unit differential entries by the new 00MT cancellation node until all differentials land in the maximal ideal. Mathlib searches found no minimal-resolution or unit-entry cancellation theorem.",
   "blueprint": "The five steps supply the local-algebra resolution used along the dependency chain of the final sentence of the proof of thm-weil-pbc-finite-etale-lifting: 'Every finite etale $Y_0$-scheme is the restriction of a finite etale $Y$-scheme'. Steps 1-3 establish a bounded finite free resolution; Steps 4-5 establish its minimality. These are not claims made directly in that blueprint sentence."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.MinimalFiniteFreeResolutionLocal",
+  "declaration": "ModuleCat.exists_minimal_finite_free_resolution",
+  "file": "lean/Sheaf/RingTheory/MinimalFiniteFreeResolutionLocal.lean",
+  "statement": "theorem exists_minimal_finite_free_resolution {R : Type u} [CommRing R] [IsNoetherianRing R] [IsLocalRing R] (M : ModuleCat.{max u v} R) [Module.Finite R M] (d : ℕ) (h : HasProjectiveResolutionLE M d) : ∃ P : ProjectiveResolution M, (∀ i : ℕ, d < i → IsZero (P.complex.X i)) ∧ (∀ i : ℕ, Module.Finite R (P.complex.X i) ∧ Module.Free R (P.complex.X i)) ∧ (∀ i : ℕ, i < d → LinearMap.range (P.complex.d (i + 1) i).hom ≤ IsLocalRing.maximalIdeal R • (⊤ : Submodule R (P.complex.X i)))",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-mfr1122",
+  "group": "F1",
+  "result": "pass",
+  "note": "R CommRing+IsNoetherianRing+IsLocalRing; M ModuleCat.{max u v} R, Module.Finite; d:ℕ; h = landed HasProjectiveResolutionLE (stmt_dep def); output ProjectiveResolution M (exact incl. injectivity at F_d, ε=π.f 0 epi), IsZero above d, every term Finite∧Free (finite basis over nontrivial local R), range d(i+1)i ≤ maximalIdeal•⊤ for i<d = node's 1≤i≤d; #check names resolve to ModuleCat.HasProjectiveResolutionLE; spelling matches def-weil-pbc-finite-global-dimension and C1 UnitEntrySplits ModuleCat.{max u v}"
  }
 }
