@@ -1614,6 +1614,7 @@ public import WeilConjectures.Topology.Sheaves.Cech
 public import WeilConjectures.Topology.Sheaves.CechCohomology
 public import WeilConjectures.Topology.Sheaves.CechComparison
 public import WeilConjectures.Topology.Sheaves.CechCriterion
+public import WeilConjectures.Topology.Sheaves.CechFlasque
 public import WeilConjectures.Topology.Sheaves.PushforwardCohomology
 public import WeilConjectures.Topology.Sheaves.SpectralRestriction
 public import WeilConjectures.Topology.SpectralSpace.ConnectedComponent
