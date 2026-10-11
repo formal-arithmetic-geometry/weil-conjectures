@@ -143,6 +143,12 @@ instance commShift_leftDerivedUpperStarComp_hom {T S R : Scheme.{u}}
         Functor.whiskerLeft L((g₂)^*[A]) (g₁)^*[A].leftDerivedFunctorIsoMapDerivedCategory.inv := by
     simp [leftDerivedUpperStarComp, Functor.leftDerivedFunctorNatIso,
       Functor.leftDerivedFunctorCompIso]
+  have : NatTrans.CommShift (g₁)^*[A].leftDerivedFunctorIsoMapDerivedCategory.hom ℤ :=
+    commShift_leftDerivedUpperStarIsoMapDerivedCategory_hom A g₁
+  have : NatTrans.CommShift (g₂)^*[A].leftDerivedFunctorIsoMapDerivedCategory.hom ℤ :=
+    commShift_leftDerivedUpperStarIsoMapDerivedCategory_hom A g₂
+  have : NatTrans.CommShift (g₁₂)^*[A].leftDerivedFunctorIsoMapDerivedCategory.hom ℤ :=
+    commShift_leftDerivedUpperStarIsoMapDerivedCategory_hom A g₁₂
   have : NatTrans.CommShift (g₁)^*[A].leftDerivedFunctorIsoMapDerivedCategory.inv ℤ :=
     NatTrans.CommShift.of_iso_inv _ ℤ
   have : NatTrans.CommShift (g₂)^*[A].leftDerivedFunctorIsoMapDerivedCategory.inv ℤ :=
