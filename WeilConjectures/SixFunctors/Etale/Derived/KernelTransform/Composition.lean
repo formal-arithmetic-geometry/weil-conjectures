@@ -86,8 +86,9 @@ theorem nonempty_iso_kernelTransform_comp_of_nonempty_iso
     [HasCompactification (pullback.snd π π')] [HasCompactification (pullback.snd π' π'')]
     [HasCompactification (pullback.snd π π'')]
     [HasCompactification (pullback.tripleProj₁₃ π π' π'' ≫ pullback.snd π π'')]
+    [QuasiCompact (pullback.snd (pullback.snd π π') (pullback.fst π' π'') ≫ pullback.snd π' π'')]
     (hcomp : ∀ {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) [HasCompactification f]
-      [HasCompactification g] [HasCompactification (f ≫ g)],
+      [HasCompactification g] [HasCompactification (f ≫ g)] [QuasiCompact (f ≫ g)],
       Nonempty (R(f ≫ g)_![A] ≅ R(f)_![A] ⋙ R(g)_![A]))
     (hbc : Nonempty (R(pullback.snd π π')_![A] ⋙ L((pullback.fst π' π'')^*[A]) ≅
       L((pullback.fst (pullback.snd π π') (pullback.fst π' π''))^*[A]) ⋙
@@ -123,6 +124,7 @@ theorem nonempty_iso_kernelTransform_comp_of_nonempty_iso
   have : HasCompactification
       (pullback.snd (pullback.snd π π') (pullback.fst π' π'') ≫ pullback.snd π' π'') :=
     .of_eq hc
+  have : QuasiCompact (pullback.tripleProj₁₃ π π' π'' ≫ pullback.snd π π'') := hc ▸ inferInstance
   -- the inputs from the six-functor formalism
   obtain ⟨β₁₃⟩ := nonempty_iso_derivedTensor_flip A (pullback π π'')
   obtain ⟨βP⟩ := nonempty_iso_derivedTensor_flip A
