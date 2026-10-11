@@ -242,5 +242,24 @@
   "group": "G1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-pid2644 (reviewer sub-agent of L); spot-checked: Read packet whole; Mathlib leaf IsImmersion.isImmersion_iff_exists_of_quasiCompact at Immersion.lean:267 exact; no existing Tag 01QV node (no duplicate). FIX more, RETURN less: (1) C5 Step 3: quasi-compactness of j was taken from the construction inside the proof of Tag 01QV (X = T x U base change), not from the cited factorization statement; replaced by X qc + T qs via lem-weil-pbc-qcqs-morphism-permanence (1),(2); h qc likewise (pqf-lem-qs-intersection-qc no longer needed). (2) C4/C1 Step 1: V qc was inferred from iota_f being a qc open immersion (wrong reason); now X qc since f qc over qc S (permanence (2)); stages qcqs via finite=>affine=>qc+separated (Tag 01S7) and permanence (2); the limit presentation now cites lem-weil-pbc-integral-morphism-limit-of-finite (tool use). (3) B3/class b statement: relative normalization, qc open immersion and limit presentation now cite lem-weil-pbc-relative-normalization, pqf-lem-normalization-open, lem-weil-pbc-integral-morphism-limit-of-finite (stmt_deps updated); the compatibility i o j = p_{lambda0} o iota_f, which thm-pqf-zmt-factorization step 3 relies on, made explicit (E7: clarification, proved in Steps 2-3). Second reading by G1 missed (1)-(3).; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.NormalizationImmersionFiniteStage",
+  "declaration": "AlgebraicGeometry.Scheme.Hom.exists_normalization_immersion_at_finite_stage",
+  "file": "lean/Sheaf/AlgebraicGeometry/NormalizationImmersionFiniteStage.lean",
+  "statement": "theorem exists_normalization_immersion_at_finite_stage {X S : AlgebraicGeometry.Scheme.{u}} (f : X ⟶ S) [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f] (_hf : f.IsLocallyQuasiFinite) [CompactSpace S] [QuasiSeparatedSpace S] (F : f.fromNormalization.FiniteApproximation) : ∃ (l₀ : F.I) (T : AlgebraicGeometry.Scheme.{u}) (j : X ⟶ T) (i : T ⟶ F.D.obj l₀), IsOpenImmersion j ∧ QuasiCompact j ∧ IsClosedImmersion i ∧ j ≫ i = f.toNormalization ≫ F.π.app l₀ ∧ (IsLocallyNoetherian S → LocallyOfFinitePresentation (F.p l₀))",
+  "branch": "sheaf-dag",
+  "by": "U1",
+  "date": "2026-10-11",
+  "existing": false,
+  "note": "Specializes the existing general finite-approximation immersion theorem to the canonical relative normalization and retains exactly the node’s separated finite-type, everywhere-quasi-finite, and qcqs-base hypotheses. The canonical normalization immersion is a consequence supplied by the normalization-open dependency, not an additional hypothesis. Finite stages are inherent in FiniteApproximation; the last clause uses local finite presentation since finite stages are automatically quasi-compact and quasi-separated."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "U1",
+  "result": "pass",
+  "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
  }
 }
