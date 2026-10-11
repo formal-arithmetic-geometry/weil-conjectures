@@ -136,5 +136,23 @@
   "group": "G1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of G1; spot-checked by L: three steps: the categorical comparison (lem-kun-fibre-product-limits, imported, recorded in tool_uses by G1), affine transition morphisms via a new node (01SD/01SC/01SG, diagonal of an affine map), fibres via the residue-field node; tags verified"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.LimitFibreProducts",
+  "declaration": "AlgebraicGeometry.limit_fibre_products_of_affine_transition",
+  "file": "lean/Sheaf/AlgebraicGeometry/LimitFibreProducts.lean",
+  "statement": "theorem limit_fibre_products_of_affine_transition {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I] (X S T : Iᵒᵖ ⥤ Scheme.{u}) (f : X ⟶ S) (g : T ⟶ S) [∀ {i j : Iᵒᵖ} (h : i ⟶ j), IsAffineHom (X.map h)] [∀ {i j : Iᵒᵖ} (h : i ⟶ j), IsAffineHom (S.map h)] [∀ {i j : Iᵒᵖ} (h : i ⟶ j), IsAffineHom (T.map h)] (cX : Cone X) (hcX : IsLimit cX) (cS : Cone S) (hcS : IsLimit cS) (cT : Cone T) (hcT : IsLimit cT) (F : cX.pt ⟶ cS.pt) (G : cT.pt ⟶ cS.pt) (hF : ∀ i : Iᵒᵖ, F ≫ cS.π.app i = cX.π.app i ≫ f.app i) (hG : ∀ i : Iᵒᵖ, G ≫ cS.π.app i = cT.π.app i ≫ g.app i) : (∃ (P : Iᵒᵖ ⥤ Scheme.{u}) (a : P ⟶ X) (b : P ⟶ T) (cP : Cone P), (∀ i : Iᵒᵖ, P.obj i = pullback (f.app i) (g.app i)) ∧ (∀ i : Iᵒᵖ, HEq (a.app i) (pullback.fst (f.app i) (g.app i))) ∧ (∀ i : Iᵒᵖ, HEq (b.app i) (pullback.snd (f.app i) (g.app i))) ∧ (∀ {i j : Iᵒᵖ} (h : i ⟶ j), IsAffineHom (P.map h)) ∧ cP.pt = pullback F G ∧ (∀ i : Iᵒᵖ, HEq (cP.π.app i ≫ a.app i) (pullback.fst F G ≫ cX.π.app i)) ∧ (∀ i : Iᵒᵖ, HEq (cP.π.app i ≫ b.app i) (pullback.snd F G ≫ cT.π.app i)) ∧ Nonempty (IsLimit cP)) ∧ (∀ s : cS.pt, ∃ (Q : Iᵒᵖ ⥤ Scheme.{u}) (a : Q ⟶ X) (cQ : Cone Q), (∀ i : Iᵒᵖ, Q.obj i = (f.app i).fiber (cS.π.app i s)) ∧ (∀ i : Iᵒᵖ, HEq (a.app i) ((f.app i).fiberι (cS.π.app i s))) ∧ (∀ {i j : Iᵒᵖ} (h : i ⟶ j), IsAffineHom (Q.map h)) ∧ cQ.pt = F.fiber s ∧ (∀ i : Iᵒᵖ, HEq (cQ.π.app i ≫ a.app i) (F.fiberι s ≫ cX.π.app i)) ∧ Nonempty (IsLimit cQ))",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-lfp1232",
+  "group": "F1",
+  "result": "pass",
+  "note": "I:Type u nonempty directed, Scheme.{u}; X,S,T functors with f,g nat (commuting with f_i,g_i); three IsAffineHom transition instances; cones+IsLimit for X,S,T; F,G tied by hF/hG; P.obj=pullback(f_i,g_i), a,b HEq fst/snd (jointly mono => P.map = pullback.map), IsAffineHom P.map, cP.pt=pullback F G with tied projections, IsLimit; fibre clause Q.obj=(f_i).fiber s_i, a=fiberι (mono, checked inferInstance) ties Q.map, cQ.pt=F.fiber s, IsLimit; no let, no hollow hyp"
  }
 }
