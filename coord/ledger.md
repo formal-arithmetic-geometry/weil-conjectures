@@ -5549,3 +5549,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 18:26 L: merged deliver/G1/lem-weil-pbc-site-restriction-exact (stage 2; reviewer PASS; first push; Sheaf.Paper.SiteRestrictionExact CategoryTheory.siteRestriction_exact)
 - 18:27 L: merged deliver/N1/lem-weil-pbc-site-sheafification-sections-local (stage 2; reviewer PASS; first push; Sheaf.Paper.SiteSheafificationSectionsLocal CategoryTheory.sheafification_sections_local)
 - 18:27 L: merged deliver/F1/def-weil-pbc-site-extension-by-zero-presheaf (stage 2; reviewer FIX; first push; Sheaf.CategoryTheory.SiteExtensionByZeroPresheaf CategoryTheory.siteExtensionByZeroPresheaf)
+- 18:27 L: merged deliver/H1/lem-sc-injective-module-abelian-acyclic-zariski (stage 2; reviewer FIX; first push; Sheaf.CategoryTheory.Sites.InjectiveModuleAbelianAcyclic CategoryTheory.injective_module_abelian_acyclic)
