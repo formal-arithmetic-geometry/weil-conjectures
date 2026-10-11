@@ -191,5 +191,24 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of F1; spot-checked by L: L: 6 steps, 0 new nodes: stalkwise criteria; outside i(Z) the pushforward stalk is zero and J_x = O_{Y,x}; at i(z) the local map is surjective with kernel J_x (stalks node, exactness of stalks), the unit on stalks is m -> m tensor 1 via the stalk-of-pullback node (generic, unit sk-thm-reduction: tool use recorded by L), M -> M tensor_R R/K surjective with kernel KM, conclusion by the stalk criteria; naturality. Correct."
  },
- "lead_note": "Off-route tool use recorded by L (2026-10-10): lem-weil-pbc-module-stalk-pullback (Sheaves 0098, unit sk-thm-reduction) in step 4, as a black box."
+ "lead_note": "Off-route tool use recorded by L (2026-10-10): lem-weil-pbc-module-stalk-pullback (Sheaves 0098, unit sk-thm-reduction) in step 4, as a black box.",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ClosedImmersionUnitQuotient",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.closedImmersion_unit_quotient",
+  "file": "lean/Sheaf/AlgebraicGeometry/ClosedImmersionUnitQuotient.lean",
+  "statement": "theorem closedImmersion_unit_quotient {Y Z : Scheme.{w}} (i : Z ⟶ Y) [IsClosedImmersion i] : let adj : tensorPullback i ⊣ pushforward i := Classical.choice (nonempty_tensorPullbackAdjunction i) let J : Y.IdealSheafData := i.ker let μ : ∀ F : Y.Modules, J.toModules ⊗ F ⟶ F := fun F => J.toModulesι ▷ F ≫ (λ_ F).hom ∃ η' : ∀ F : Y.Modules, cokernel (image.ι (μ F)) ⟶ (pushforward i).obj ((tensorPullback i).obj F), (∀ F : Y.Modules, Epi (adj.unit.app F) ∧ (∃ w : image.ι (μ F) ≫ adj.unit.app F = 0, Nonempty (IsLimit (KernelFork.ofι (image.ι (μ F)) w))) ∧ cokernel.π (image.ι (μ F)) ≫ η' F = adj.unit.app F ∧ IsIso (η' F)) ∧ ∀ (F G : Y.Modules) (a : F ⟶ G), ∃ q : cokernel (image.ι (μ F)) ⟶ cokernel (image.ι (μ G)), cokernel.π (image.ι (μ F)) ≫ q = a ≫ cokernel.π (image.ι (μ G)) ∧ q ≫ η' G = η' F ≫ (pushforward i).map ((tensorPullback i).map a)",
+  "branch": "sheaf-dag",
+  "by": "M1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-ciq1437"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-ciq1437",
+  "group": "M1",
+  "result": "fix",
+  "note": "Y Z schemes, i closed immersion (IsClosedImmersion), J = i.ker (IdealSheafData), adjunction via nonempty_tensorPullbackAdjunction, JF = image of J.toModulesι ▷ F ≫ λ_F (H1 convention), unit epi, kernel fork of image.ι μ_F is a limit, F/JF = cokernel (image.ι μ_F) with π ≫ η' = unit and IsIso η', naturality square with q induced on quotients; all F, no extra hypotheses"
+ }
 }
