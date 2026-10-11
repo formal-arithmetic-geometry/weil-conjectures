@@ -206,5 +206,51 @@
   "by": "L",
   "result": "accepted",
   "note": "Definition node split into its verification (fibre products by site axiom (iii) and induction, index maps, d∘d=0 via the cosimplicial identity δ_iδ_j=δ_{j+1}δ_i with the (i,j)↔(j+1,i) pairing, independence of choices, functoriality, exactness 03AQ via sectionwise exactness and products of exact sequences). Read fully; the pairing argument is correct. Mathlib has no Čech complex of a covering on a general site (cechComplexFunctor needs HasFiniteProducts); recorded. Leaf lem-weil-pbc-abelian-presheaves-evaluation-exact verified (FunctorCategory.lean:96, FunctorCategory/Basic.lean:225,319, ExactFunctor.lean:220, Exact.lean:227)."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.SiteCechComplex",
+  "declaration": "CategoryTheory.SiteCechComplex",
+  "file": "lean/Sheaf/CategoryTheory/SiteCechComplex.lean",
+  "statement": "structure SiteCechComplex {C : Type u} [Category.{v} C] {T : Type w} {U : C} (f : T → C) (hom : ∀ t, f t ⟶ U)",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-12",
+  "existing": false,
+  "declarations": [
+   "CategoryTheory.SiteCechComplex",
+   "CategoryTheory.SiteCechComplex.exists_of_covering",
+   "CategoryTheory.SiteCechComplex.fibreIso_exists_unique",
+   "CategoryTheory.SiteCechComplex.cochains",
+   "CategoryTheory.SiteCechComplex.differentialValue",
+   "CategoryTheory.SiteCechComplex.differentialValue_zero",
+   "CategoryTheory.SiteCechComplex.differentialValue_add",
+   "CategoryTheory.SiteCechComplex.differential",
+   "CategoryTheory.SiteCechComplex.differential_squared",
+   "CategoryTheory.SiteCechComplex.complex",
+   "CategoryTheory.SiteCechComplex.cochainsMap",
+   "CategoryTheory.SiteCechComplex.cochainsMap_comm",
+   "CategoryTheory.SiteCechComplex.complexMap",
+   "CategoryTheory.SiteCechComplex.complexMap_id",
+   "CategoryTheory.SiteCechComplex.complexMap_comp",
+   "CategoryTheory.SiteCechComplex.complexFunctor",
+   "CategoryTheory.SiteCechComplex.complexFunctor_additive",
+   "CategoryTheory.SiteCechComplex.integerComplexFunctor",
+   "CategoryTheory.SiteCechComplex.integerComplexFunctor_additive",
+   "CategoryTheory.SiteCechComplex.cohomologyFunctor",
+   "CategoryTheory.SiteCechComplex.cohomologyFunctor_additive",
+   "CategoryTheory.SiteCechComplex.degreewise_exact",
+   "CategoryTheory.SiteCechComplex.comparison_exists",
+   "CategoryTheory.SiteCechComplex.shortExact_map"
+  ],
+  "note": "Not existing: Mathlib's cechComplexFunctor (and upstream Presheaf.cechComplex) need HasFiniteProducts (Over U); a Precoverage site has only pullbacks along covering arrows, so neither states this node (the etale case is def-weil-pbc-cech-complex on cechComplexFunctor). SiteCechComplex f hom is the chosen fibre-product data pinned by its universal properties; citers take S : SiteCechComplex f hom as a binder (any choice; exists_of_covering gives existence from the site axioms, comparison_exists the canonical independence). Reviewer R-scc fix (H5): dropped ofCovering (Classical.choice of the sorried exists_of_covering) and fibreIso (Classical.choose of the sorried fibreIso_exists_unique); comparison_exists now states its components as restriction along any projection-compatible map i : S'.W p t ⟶ S.W p t. The complex is complexFunctor (ℕ-indexed), integerComplexFunctor its zero extension to ℤ, cohomologyFunctor its homology.",
+  "fixed_by": "R-scc"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-scc",
+  "group": "E1",
+  "result": "fix",
+  "note": "H5: dropped ofCovering/fibreIso (choice of sorried theorems), comparison_exists restated; not existing (cechComplexFunctor needs HasFiniteProducts (Over U))"
  }
 }
