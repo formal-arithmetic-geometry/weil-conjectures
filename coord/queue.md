@@ -1,11 +1,11 @@
 # Work queue
 
-520 items; claim with `tools/claim.py next <group> [--stage N]`.
+517 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (520)
+## Stage 2: nodes to state (517)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -34,7 +34,6 @@
 | `lem-pc-tor-amplitude-qcoh-test` | 1 | state |
 | `lem-pc-unbounded-derived-functor-cohomological-bound` | 1 | state |
 | `lem-pc-zero-support-finite-scheme` | 1 | state |
-| `lem-sc-affine-cap-section-open-dictionary` | 1 | state |
 | `lem-sc-affine-section-localization` | 1 | state |
 | `lem-sc-ass-weakass-fg-stalk` | 1 | state |
 | `lem-sc-base-change-curve` | 1 | state |
@@ -58,13 +57,11 @@
 | `lem-sc-p1-section-restriction-s-torsion` | 1 | state |
 | `lem-sc-perfect-local-pseudocoherent-free-model` | 1 | state |
 | `lem-sc-picard-kunneth-qcoh` | 1 | state |
-| `lem-sc-picard-qcoh-finite-cd` | 1 | state |
-| `lem-sc-picard-qcoh-universal-delta-embedding` | 1 | state |
 | `lem-sc-qc-open-derived-lift` | 1 | state |
+| `lem-sc-regular-curve-torsionfree-free` | 1 | state |
 | `lem-sc-smooth-omega-finite-locally-free` | 1 | state |
 | `lem-sc-snapper-numerical-polynomial` | 1 | state |
 | `lem-sc-torsion-sections-generic` | 1 | state |
-| `lem-sc-torsion-subsheaf-quotient` | 1 | state |
 | `lem-sc-valuation-proper-coherent-higher-direct-images` | 1 | state |
 | `lem-weil-derived-limit-roos-complex` | 1 | state |
 | `lem-weil-pbc-affine-conormal-sections` | 1 | state |
@@ -530,7 +527,7 @@
 | `lem-pc-essentially-constant-pro-hom-colimit` | 4 | state |
 | `lem-pur-essential-constant-pro-criterion-05py` | 4 | state |
 
-Not open yet: 40 nodes that wait for stage 1, 603 nodes that wait for a statement dependency.
+Not open yet: 40 nodes that wait for stage 1, 602 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
