@@ -235,5 +235,23 @@
  "tool_uses": [
   "lem-sp-right-adjoint-preserves-injectives"
  ],
- "reviewed": "pass (L, 2026-10-10): 6 steps, direct argument without the spectral sequence: f_* I is an injective resolution of f_* F (injectivity via the exact left adjoint f^{-1} and lem-sp-right-adjoint-preserves-injectives, recorded in tool_uses by L; exactness from the vanishing hypothesis), the pullback and the counit map are computed via lifts, psi beta is homotopic to the counit of the complex by uniqueness up to homotopy, and the triangle identity makes the composite chain map the identity. Statement unchanged."
+ "reviewed": "pass (L, 2026-10-10): 6 steps, direct argument without the spectral sequence: f_* I is an injective resolution of f_* F (injectivity via the exact left adjoint f^{-1} and lem-sp-right-adjoint-preserves-injectives, recorded in tool_uses by L; exactness from the vanishing hypothesis), the pullback and the counit map are computed via lifts, psi beta is homotopic to the counit of the complex by uniqueness up to homotopy, and the triangle identity makes the composite chain map the identity. Statement unchanged.",
+ "lean": {
+  "module": "Sheaf.CategoryTheory.SiteLerayDegenerate",
+  "declaration": "CategoryTheory.siteLeray_degenerate",
+  "statement": "theorem siteLeray_degenerate {C D : Type u} [SmallCategory C] [SmallCategory D] (J : Precoverage C) (K : Precoverage D) [J.HasIsos] [J.IsStableUnderComposition] [J.IsStableUnderBaseChange] [J.HasPullbacks] [K.HasIsos] [K.IsStableUnderComposition] [K.IsStableUnderBaseChange] [K.HasPullbacks] (U : D ⥤ C) [U.IsContinuous K.toGrothendieck J.toGrothendieck] [PreservesFiniteLimits (Functor.sheafPullbackConstruction.sheafPullback U (Type u) K.toGrothendieck J.toGrothendieck)] [PreservesFiniteColimits (Functor.sheafPullbackConstruction.sheafPullback U (Type u) K.toGrothendieck J.toGrothendieck)] [(Functor.sheafPullbackConstruction.sheafPullback U AddCommGrpCat.{u} K.toGrothendieck J.toGrothendieck).Additive] [(Functor.sheafPushforwardContinuous U AddCommGrpCat.{u} K.toGrothendieck J.toGrothendieck).Additive] [HasExt (Sheaf K.toGrothendieck AddCommGrpCat.{u})] [HasExt (Sheaf J.toGrothendieck AddCommGrpCat.{u})] [HasInjectiveResolutions (Sheaf J.toGrothendieck AddCommGrpCat.{u})] [HasInjectiveResolutions (Sheaf K.toGrothendieck AddCommGrpCat.{u})] (F : Sheaf J.toGrothendieck AddCommGrpCat.{u}) (he : ∀ (q : ℕ), 0 < q → IsZero (((Functor.sheafPushforwardContinuous U AddCommGrpCat.{u} K.toGrothendieck J.toGrothendieck).rightDerived q).obj F)) : ∃ e : ∀ (p : ℕ) (V : D), Sheaf.H' ((Functor.sheafPushforwardContinuous U AddCommGrpCat.{u} K.toGrothendieck J.toGrothendieck).obj F) p V ⟶ Sheaf.H' F p (U.obj V), ∀ (p : ℕ) (V : D), IsIso (e p V)",
+  "by": "Q1",
+  "date": "2026-10-12",
+  "existing": false,
+  "file": "lean/Sheaf/CategoryTheory/SiteLerayDegenerate.lean",
+  "branch": "sheaf-dag"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "Q1",
+  "result": "pass",
+  "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
+ }
 }
