@@ -105,5 +105,23 @@
   "group": "F1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-pqc1750 (reviewer sub-agent of L); spot-checked: Read all four kept leaves with sed in slopmaster2 mathlib: pairwise_coprime_X_sub_C RingDivision:287, iInf_span_singleton Operations:651, quotientInfRingEquivPiQuotient Quotient/Operations:248, quotientSpanXSubCAlgEquiv Polynomial/Quotient:32 (exact); no single Mathlib declaration for the whole item. FIX more, RETURN less: (1) dropped lem-pc-crt-ideal-product-inf (product ideal never needed: iInf_span_singleton gives inf = (Q) directly); (2) B8: lem-pc-crt-ideal-quotient-product restated as one clause (the canonical map [a]->([a] mod I_i) is a ring iso, the definition of the Mathlib equiv), spurious def-weil-field/polynomial-ring refs and stmt_deps removed, reviewer grep recorded; (3) item proof rewritten as two steps citing leaves, Omega-linearity of the composite stated (constants go to diagonal).; 2 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.PolynomialDistinctLinearCRT",
+  "declaration": "Polynomial.quotient_prod_X_sub_C_algEquiv_pi",
+  "file": "lean/Sheaf/RingTheory/PolynomialDistinctLinearCRT.lean",
+  "statement": "theorem quotient_prod_X_sub_C_algEquiv_pi {Ω : Type u} [Field Ω] (n : ℕ) (ρ : Fin n → Ω) (hρ : Function.Injective ρ) : ∃ e : (Ω[X] ⧸ Ideal.span ({∏ i : Fin n, (X - C (ρ i))} : Set Ω[X])) ≃ₐ[Ω] (Fin n → Ω), ∀ (p : Ω[X]) (i : Fin n), e (Ideal.Quotient.mk _ p) i = p.eval (ρ i)",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-crt0815",
+  "group": "E1",
+  "result": "pass",
+  "note": "Field Ω (Type u) = def-weil-field; ρ : Fin n → Ω with Function.Injective = pairwise distinct; Ideal.span {∏ i, (X - C (ρ i))} = (Q); ∃ e ≃ₐ[Ω] (Fin n → Ω) with e [p] i = p.eval (ρ i) = evaluation-induced Ω-algebra iso; n=0 (zero quotient ≅ Unit-like Fin 0 → Ω) ok; H4 grep of slopmaster2 Mathlib (quotientInfRingEquivPiQuotient, X_sub_C with Pi/∏, ⧸ with ∏, Lagrange funEquivDegreeLT is linear on degreeLT only): no exact declaration, existing false right; docstring carries both node proof steps"
  }
 }
