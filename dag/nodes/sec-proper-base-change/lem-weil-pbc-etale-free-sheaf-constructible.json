@@ -166,5 +166,23 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of F1; spot-checked by L: Fourth delivery: step 2 now cites a module-form 03S6 node (shriek base change along an etale map, general M), step 3 a module-form 03S7 node (pi_! = pi_* for finite etale pi), plus the 03S9 stratification and the 03RU module-clause nodes; all four new nodes unsplit with exact tags. Accepted by L."
  },
- "lead_note": "Tag corrected by L on 2026-10-10 in step 4: the pushforward lemma is 095B, not 03RU (the definition)."
+ "lead_note": "Tag corrected by L on 2026-10-10 in step 4: the pushforward lemma is 095B, not 03RU (the definition).",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.EtaleLowerShriekConstantConstructible",
+  "declaration": "AlgebraicGeometry.Scheme.isConstructibleEtaleModuleSheaf_etaleLowerShriek_constant",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleLowerShriekConstantConstructible.lean",
+  "statement": "theorem isConstructibleEtaleModuleSheaf_etaleLowerShriek_constant {X U : Scheme.{u}} [CompactSpace X] [QuasiSeparatedSpace X] [CompactSpace U] [QuasiSeparatedSpace U] {Λ : Type (u + 1)} [CommRing Λ] [Finite Λ] (j : U ⟶ X) [Etale j] (M : ModuleCat.{u + 1} Λ) [Finite M] : IsConstructibleEtaleModuleSheaf ((Etale.etaleLowerShriek Λ j inferInstance).obj ((constantSheaf U.smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj M))",
+  "branch": "sheaf-dag",
+  "by": "K1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-efc0955",
+  "group": "K1",
+  "result": "pass",
+  "note": "X,U qcqs = CompactSpace+QuasiSeparatedSpace on both; finite comm ring Λ:Type(u+1) [Finite Λ]; M finite as set = ModuleCat Λ [Finite M]; j etale = [AlgebraicGeometry.Etale j] (#check: not Scheme.Etale); j_! M_U = recorded dep etaleLowerShriek (def-weil-pbc-etale-sum-extension, sums M_U(V,s) ≅ M_X(V) as the node itself notes) of constantSheaf U; conclusion recorded Scheme.IsConstructibleEtaleModuleSheaf in ModuleCat encoding; general M so M1's free-Yoneda spelling not applicable"
+ }
 }
