@@ -5,6 +5,7 @@ Authors: Claude
 -/
 module
 
+public import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Over
 public import WeilConjectures.AlgebraicGeometry.Sites.CohomologyColimit
 public import WeilConjectures.AlgebraicGeometry.Sites.CohomologyContinuityCech
 public import WeilConjectures.AlgebraicGeometry.Sites.EtaleLimitDescent
@@ -18,7 +19,8 @@ Let `X = lim Dⱼ` be a cofiltered limit of quasi-compact quasi-separated scheme
 `R`, with affine transition maps, and let `G` be an abelian étale sheaf on `R` whose inverse
 images to all the stages `Dⱼ` are injective (for instance an injective sheaf, when all the
 `Dⱼ ⟶ R` are étale). Then the inverse image of `G` to `X` has no cohomology in positive degrees.
-
+We apply the Čech criterion
+`CategoryTheory.Sheaf.subsingleton_H_succ_of_exactAt_cechComplex_of_good`
 We apply the Čech criterion `CategoryTheory.Sheaf.subsingleton_H_succ_of_exactAt_cechComplex_of_good`
 to the étale `X`-schemes which are base changes `V' ×_{Dₘ} X` of quasi-compact quasi-separated
 étale schemes `V'` over a stage, and to the finite families which are base changes of finite
@@ -58,17 +60,22 @@ noncomputable def limitFamilyFunctorForgetIso {m : J} {W : c.pt.Etale} {V' : (D.
     simp only [Iso.refl_hom, Category.comp_id, Category.id_comp]
     rfl)
 
+instance {m : J} {W : c.pt.Etale} {V' : (D.obj m).Etale} (e : W ≅ (c.π.app m).Etale.obj V') :
+    PreservesFiniteProducts (limitFamilyFunctor D c e) := by
+  dsimp only [limitFamilyFunctor]
+  infer_instance
+
 variable [∀ j, CompactSpace (D.obj j)] [∀ j, QuasiSeparatedSpace (D.obj j)]
   [∀ {j k : J} (f : j ⟶ k), IsAffineHom (D.map f)]
 
-include c in
 /-- (Implementation) A base change of a quasi-compact quasi-separated étale scheme over a stage
 along an affine morphism is quasi-compact and quasi-separated. -/
 lemma compactSpace_and_quasiSeparatedSpace_pullback {Y Z T : Scheme.{u}} (p : Y ⟶ T)
     (g : Z ⟶ T) [IsAffineHom g] [CompactSpace Y] [QuasiSeparatedSpace Y] :
-    CompactSpace (pullback p g) ∧ QuasiSeparatedSpace (pullback p g) :=
+    CompactSpace ↥(pullback p g) ∧ QuasiSeparatedSpace ↥(pullback p g) :=
   ⟨inferInstance, quasiSeparatedSpace_of_quasiSeparated (pullback.fst p g)⟩
 
+omit [∀ j, CompactSpace (D.obj j)] [∀ j, QuasiSeparatedSpace (D.obj j)] in
 /-- **Coverings of base changes are refined by base changes of affine families.** Let `W` be
 isomorphic to the base change `V' ×_{Dₘ} X` of a quasi-compact quasi-separated étale scheme `V'`
 over a stage. Every covering sieve of `W` contains a finite covering family which, up to the
@@ -92,7 +99,7 @@ theorem exists_limitFamily (hc : IsLimit c) {m : J} (V' : (D.obj m).Etale) [Comp
       γ ≫ (g ≫ e.hom).left = pullback.lift (π₁ ≫ eE) π₂
         (by rw [Category.assoc, he, reassoc_of% hπ.w, c.w f]) ∧
       x ∈ Set.range (γ ≫ g.left) := by
-    obtain ⟨Z, g, hg, z, hz⟩ := (mem_smallEtaleTopology_iff R).1 hR x
+    obtain ⟨Z, g, hg, z, hz⟩ := (Scheme.mem_smallEtaleTopology_iff R).1 hR x
     obtain ⟨k', f, E, hE, q, hq, eE, he, E', π₁, π₂, hπ, γ, hγ, ε, hε⟩ :=
       exists_etale_refinement_of_isLimit D c hc V'.hom (g ≫ e.hom).left z
     refine ⟨Z, g, hg, k', f, E, hE, q, hq, eE, he, E', π₁, π₂, hπ, γ, hγ, ε, ?_⟩
@@ -100,7 +107,7 @@ theorem exists_limitFamily (hc : IsLimit c) {m : J} (V' : (D.obj m).Etale) [Comp
   choose Z g hg k' f E hE q hq eE he E' π₁ π₂ hπ γ hγ hx using hpt
   -- the images are open
   have hopen (x : W.left) : IsOpen (Set.range (γ x ≫ (g x).left)) := by
-    have : AlgebraicGeometry.Etale (π₂ x) := MorphismProperty.of_isPullback (hπ x).flip (hq x)
+    have : AlgebraicGeometry.Etale (π₂ x) := MorphismProperty.of_isPullback (hπ x) (hq x)
     have hcomm : (γ x ≫ (g x).left) ≫ W.hom = π₂ x := by
       rw [Category.assoc, MorphismProperty.Over.w (g x),
         ← MorphismProperty.Over.w (g x ≫ e.hom), ← Category.assoc, hγ x]
@@ -112,7 +119,9 @@ theorem exists_limitFamily (hc : IsLimit c) {m : J} (V' : (D.obj m).Etale) [Comp
     exact (γ x ≫ (g x).left).isOpenMap.isOpen_range
   -- finitely many suffice
   have hWc : CompactSpace W.left := by
-    have := compactSpace_and_quasiSeparatedSpace_pullback c V'.hom (c.π.app m)
+    have : CompactSpace ((𝟭 Scheme).obj V'.left) := ‹CompactSpace V'.left›
+    have : QuasiSeparatedSpace ((𝟭 Scheme).obj V'.left) := ‹QuasiSeparatedSpace V'.left›
+    have := compactSpace_and_quasiSeparatedSpace_pullback V'.hom (c.π.app m)
     exact (Scheme.compactSpace_and_quasiSeparatedSpace_of_iso e.symm this).1
   obtain ⟨s, hs⟩ := isCompact_univ.elim_finite_subcover
     (fun x ↦ Set.range (γ x ≫ (g x).left)) hopen
@@ -123,14 +132,16 @@ theorem exists_limitFamily (hc : IsLimit c) {m : J} (V' : (D.obj m).Etale) [Comp
   -- a common stage
   obtain ⟨K, h, gK, hgK⟩ := exists_comp_eq_of_finite_aux (fun a ↦ k' (xa a)) (fun a ↦ f (xa a))
   let V'' : (D.obj K).Etale := (D.map h).Etale.obj V'
-  have hV'' := compactSpace_and_quasiSeparatedSpace_pullback c V'.hom (D.map h)
+  have : CompactSpace ((𝟭 Scheme).obj V'.left) := ‹CompactSpace V'.left›
+  have : QuasiSeparatedSpace ((𝟭 Scheme).obj V'.left) := ‹QuasiSeparatedSpace V'.left›
+  have hV'' := compactSpace_and_quasiSeparatedSpace_pullback V'.hom (D.map h)
   have : CompactSpace V''.left := hV''.1
   have : QuasiSeparatedSpace V''.left := hV''.2
   let e' : W ≅ (c.π.app K).Etale.obj V'' :=
     e ≪≫ (MorphismProperty.Over.pullbackComp (c.π.app K) (D.map h) (c.π.app m) (c.w h).symm).app
       V'
   -- the family over `V''`
-  let Ea (a : Fin n) : (D.obj K).Etale := Etale.mk (pullback.snd (q (xa a)) (D.map (gK a)))
+  let Ea (a : Fin n) : (D.obj K).Etale := Scheme.Etale.mk (pullback.snd (q (xa a)) (D.map (gK a)))
   have hEa (a : Fin n) : pullback.fst (q (xa a)) (D.map (gK a)) ≫ eE (xa a) ≫ V'.hom =
       pullback.snd (q (xa a)) (D.map (gK a)) ≫ D.map h := by
     rw [he, pullback.condition_assoc, ← D.map_comp, hgK]
@@ -152,13 +163,15 @@ theorem exists_limitFamily (hc : IsLimit c) {m : J} (V' : (D.obj m).Etale) [Comp
       rwa [c.w] at this
     let φ := hpaste.isoIsPullback _ _ (hπ x)
     have hφ₂ : φ.hom ≫ π₂ x = pullback.snd (Ea a).hom (c.π.app K) :=
-      IsPullback.isoIsPullback_hom_snd _ _ _
+      IsPullback.isoIsPullback_hom_snd _ _ hpaste (hπ x)
     have hφ₁ : φ.hom ≫ π₁ x = pullback.fst (Ea a).hom (c.π.app K) ≫
         pullback.fst (q x) (D.map (gK a)) :=
-      IsPullback.isoIsPullback_hom_fst _ _ _
+      IsPullback.isoIsPullback_hom_fst _ _ hpaste (hπ x)
     have hw : (φ.hom ≫ γ x) ≫ (Z x).hom = ((limitFamilyFunctor D c e').obj (U' a)).left.hom := by
       rw [← MorphismProperty.Over.w (g x ≫ e.hom), Category.assoc, reassoc_of% (hγ x)]
-      exact (pullback.lift_snd _ _ _).trans hφ₂
+      change φ.hom ≫ pullback.lift _ _ _ ≫ pullback.snd V'.hom (c.π.app m) = _
+      rw [pullback.lift_snd]
+      exact hφ₂
     let δ : ((limitFamilyFunctor D c e').obj (U' a)).left ⟶ Z x :=
       MorphismProperty.Over.homMk (φ.hom ≫ γ x) hw
     have hfac : δ ≫ g x = ((limitFamilyFunctor D c e').obj (U' a)).hom := by
@@ -171,17 +184,26 @@ theorem exists_limitFamily (hc : IsLimit c) {m : J} (V' : (D.obj m).Etale) [Comp
             (c.w h).symm).inv.app V').left := by
         simp [e', ← MorphismProperty.Comma.comp_left]
       rw [he']
+      change _ = ((MorphismProperty.Over.pullback @AlgebraicGeometry.Etale ⊤ (c.π.app K)).map
+        (U' a).hom).left ≫ _
       apply pullback.hom_ext
-      · simp [U', Ea, reassoc_of% hφ₁]
-      · simp [U', Ea, hφ₂]
+      · simp [U', Ea, reassoc_of% hφ₁, Scheme.Hom.Etale,
+          MorphismProperty.Over.pullback_map_left]
+        erw [pullback.lift_fst_assoc, Category.assoc, pullback.lift_fst]
+      · simp [U', Ea, hφ₂, Scheme.Hom.Etale,
+          MorphismProperty.Over.pullback_map_left]
+        erw [pullback.lift_snd]
     refine ⟨δ, hfac, ?_⟩
     rintro _ ⟨ε, rfl⟩
     refine ⟨φ.inv ε, ?_⟩
     rw [← hfac, MorphismProperty.Comma.comp_left]
     change (g x).left (γ x (φ.hom (φ.inv ε))) = (g x).left (γ x ε)
-    rw [← Scheme.Hom.comp_apply φ.inv φ.hom, Iso.inv_hom_id, Scheme.Hom.id_apply]
+    rw [← Scheme.Hom.comp_apply φ.inv φ.hom, Iso.inv_hom_id]
+    rfl
   refine ⟨n, K, V'', ‹_›, ‹_›, e', U', fun a ↦ ?_, fun a ↦ ?_, ?_⟩
   · have := hE (xa a)
+    have : IsAffineHom (pullback.fst (q (xa a)) (D.map (gK a))) :=
+      MorphismProperty.pullback_fst (P := @IsAffineHom) _ _ inferInstance
     exact isAffine_of_isAffineHom (pullback.fst (q (xa a)) (D.map (gK a)))
   · obtain ⟨δ, hδ₁, -⟩ := hδ a
     rw [← hδ₁]
@@ -208,7 +230,7 @@ theorem subsingleton_H_succ_upperStar_of_isLimit (hc : IsLimit c)
   classical
   have hπaff (i : J) : IsAffineHom (c.π.app i) := isAffineHom_π_app D c hc i
   obtain ⟨m₀⟩ : Nonempty J := IsCofiltered.nonempty
-  let T : c.pt.Etale := (c.π.app m₀).Etale.obj (Etale.mk (𝟙 (D.obj m₀)))
+  let T : c.pt.Etale := (c.π.app m₀).Etale.obj (Scheme.Etale.mk (𝟙 (D.obj m₀)))
   have hT : IsTerminal T :=
     IsTerminal.isTerminalObj _ _ (MorphismProperty.Over.mkIdTerminal _ (D.obj m₀))
   let B : c.pt.Etale → Prop := fun W ↦ ∃ (m : J) (V' : (D.obj m).Etale),
@@ -230,12 +252,12 @@ theorem subsingleton_H_succ_upperStar_of_isLimit (hc : IsLimit c)
       have := hU' (y l)
       ⟨inferInstance, inferInstance⟩
   refine Sheaf.subsingleton_H_succ_of_exactAt_cechComplex_of_good hT B
-    ⟨m₀, Etale.mk (𝟙 _), inferInstanceAs (CompactSpace (D.obj m₀)),
+    ⟨m₀, Scheme.Etale.mk (𝟙 _), inferInstanceAs (CompactSpace (D.obj m₀)),
       inferInstanceAs (QuasiSeparatedSpace (D.obj m₀)), ⟨Iso.refl _⟩⟩ good ?_ ?_ _ ?_ q
   · rintro W ⟨m, V', hV'c, hV'q, ⟨e⟩⟩ R hR
     obtain ⟨n, K, V'', h₁, h₂, e', U', hU'aff, hUR, hUcov⟩ := exists_limitFamily D c hc V' e R hR
     exact ⟨n, _, ⟨K, V'', e', U', h₁, h₂, hU'aff,
-      (ofArrows_mem_smallEtaleTopology_iff _).2 hUcov, rfl⟩, hUR⟩
+      (Scheme.ofArrows_mem_smallEtaleTopology_iff _).2 hUcov, rfl⟩, hUR⟩
   · rintro W - n U ⟨m, V', e, U', h₁, h₂, hU'aff, hcov, rfl⟩
     exact ⟨fun k y ↦ ⟨m, (cechNerveObj U' y).left, (hnerve U' hU'aff k y).1,
       (hnerve U' hU'aff k y).2,
@@ -269,6 +291,7 @@ theorem subsingleton_H_succ_upperStar_of_isLimit (hc : IsLimit c)
           ((π'.app j)^*[AddCommGrpCat.{u + 1}].obj
             ((π.app m)^*[AddCommGrpCat.{u + 1}].obj G))) :=
         (upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} (π'.app j)).map_injective _
+          inferInstance
       exact Sheaf.exactAt_cechComplex_of_injective _ U q
     have key := exactAt_cechComplex_lowerStar_upperStar_of_isLimit (Over.forget m ⋙ D) π'
       (c.whisker (Over.forget m)) (c.π.app m) hP' hc' ((π.app m)^*[AddCommGrpCat.{u + 1}].obj G)
