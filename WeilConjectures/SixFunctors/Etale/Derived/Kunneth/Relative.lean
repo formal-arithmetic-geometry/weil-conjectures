@@ -18,6 +18,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormula
 public import WeilConjectures.SixFunctors.Etale.Derived.Stability
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStar
 public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.Defs
+public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.ClosedImmersion
 
 /-!
 
@@ -234,11 +235,19 @@ theorem nonempty_iso_leftDerivedUpperStar_externalProduct [UpperStarPreservesFla
   exact ⟨leftDerivedUpperStarTensorIso A e _ _ ≪≫ ((derivedTensor A _).mapIso pb₁).app _ ≪≫
     ((derivedTensor A _).obj _).mapIso pb₂⟩
 
+omit [HasSmallSiteSheafify A] in
 /-- The external product is compatible with restriction to closed subschemes: for closed
 immersions `i : Z ⟶ X`, `j : W ⟶ Y` over `B`, with product `i ×_B j : Z ×_B W ⟶ X ×_B Y`,
 
-`(i ×_B j)_* (i ×_B j)^* (K ⊠ L) ≅ i_* i^* K ⊠ j_* j^* L`. -/
-theorem nonempty_iso_externalProduct_closedImmersion (f : X ⟶ B) (g : Y ⟶ B)
+`(i ×_B j)_* (i ×_B j)^* (K ⊠ L) ≅ i_* i^* K ⊠ j_* j^* L`.
+
+The pullbacks are assumed to preserve flat sheaves
+(`AlgebraicGeometry.Etale.UpperStarPreservesFlat`, true for `ModuleCat Λ`), which makes the
+derived pullback monoidal. This is
+`AlgebraicGeometry.Etale.nonempty_iso_externalProduct_closedImmersion_of_flat`: both sides are
+supported on `Z ×_B W` and agree there. -/
+theorem nonempty_iso_externalProduct_closedImmersion [UpperStarPreservesFlat A]
+    (f : X ⟶ B) (g : Y ⟶ B)
     {Z W : Scheme.{u}} (i : Z ⟶ X) (j : W ⟶ Y) [IsClosedImmersion i] [IsClosedImmersion j]
     (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A))
     (L : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology A)) :
@@ -246,11 +255,7 @@ theorem nonempty_iso_externalProduct_closedImmersion (f : X ⟶ B) (g : Y ⟶ B)
         ((L((pullback.mapOverBase i j f g)^*[A])).obj (externalProduct A f g K L)) ≅
       externalProduct A f g ((R((i)_*[A])).obj ((L((i)^*[A])).obj K))
         ((R((j)_*[A])).obj ((L((j)^*[A])).obj L))) :=
-  -- Proof sketch: both sides are `K ⊠ L` tensored with the constant sheaf of the closed
-  -- subscheme `Z ×_B W = p⁻¹ Z ∩ q⁻¹ W`, by the projection formula for closed immersions and
-  -- proper base change along the projections `p`, `q`.
-  sorry
-
+  nonempty_iso_externalProduct_closedImmersion_of_flat A f g i j K L
 /-- Blueprint `sk-thm-product`: Supported product over a relative base.
 
 Let `f : X ⟶ B` and `g : Y ⟶ B` be separated of finite type, `h = f ×_B g`, and let
