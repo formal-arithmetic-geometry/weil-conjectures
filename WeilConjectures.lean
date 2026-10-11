@@ -451,6 +451,7 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.Complete.Principal
 public import WeilConjectures.CategoryTheory.DerivedCategory.Complete.QuotPowTriangle
 public import WeilConjectures.CategoryTheory.DerivedCategory.Complete.RationalCoefficient
 public import WeilConjectures.CategoryTheory.DerivedCategory.Complete.Rationalization
+public import WeilConjectures.CategoryTheory.DerivedCategory.Complete.RationalizationFunctoriality
 public import WeilConjectures.CategoryTheory.DerivedCategory.Complete.RationalizationMap
 public import WeilConjectures.CategoryTheory.DerivedCategory.Complete.SmulInvertible
 public import WeilConjectures.CategoryTheory.DerivedCategory.Complete.TensorQuotPow
