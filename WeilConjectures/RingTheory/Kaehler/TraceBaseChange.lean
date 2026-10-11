@@ -113,6 +113,40 @@ lemma finite_baseChange [Module.Free R B] [Module.Finite R B] :
   haveI := Classical.decEq (Module.Free.ChooseBasisIndex R B)
   .of_basis (baseChangeBasis (Module.Free.chooseBasis R B))
 
+
+/-- Two `k' ⊗[k] R`-linear maps out of `k' ⊗[k] B` agree if they agree on `1 ⊗ B`. -/
+lemma baseChange_linearMap_ext {M : Type*} [AddCommGroup M] [Module (k' ⊗[k] R) M]
+    {f g : (k' ⊗[k] B) →ₗ[k' ⊗[k] R] M} (h : ∀ c : B, f (1 ⊗ₜ c) = g (1 ⊗ₜ c)) : f = g := by
+  refine LinearMap.ext fun y ↦ ?_
+  induction y with
+  | zero => simp
+  | add y y' hy hy' => rw [map_add, map_add, hy, hy']
+  | tmul x c =>
+    have : x ⊗ₜ[k] c = (x ⊗ₜ[k] (1 : R)) • ((1 : k') ⊗ₜ[k] c) := by
+      rw [baseChangeAlgebra_smul_tmul, mul_one, one_smul]
+    rw [this, LinearMap.map_smul, LinearMap.map_smul, h]
+
+/-- The base change `k' ⊗[k] B → k' ⊗[k] R` of an `R`-linear map `B → R`. -/
+noncomputable def baseChangeLinearMap (φ : B →ₗ[R] R) :
+    (k' ⊗[k] B) →ₗ[k' ⊗[k] R] (k' ⊗[k] R) where
+  toFun := (φ.restrictScalars k).baseChange k'
+  map_add' := map_add _
+  map_smul' r y := by
+    induction r with
+    | zero => simp
+    | add r r' hr hr' => simp only [add_smul, map_add, hr, hr', RingHom.id_apply]
+    | tmul x r =>
+      induction y with
+      | zero => simp
+      | add y y' hy hy' => simp only [smul_add, map_add, hy, hy']
+      | tmul x' c =>
+        rw [baseChangeAlgebra_smul_tmul, LinearMap.baseChange_tmul, LinearMap.baseChange_tmul,
+          RingHom.id_apply, smul_eq_mul, tmul_mul_tmul, LinearMap.restrictScalars_apply,
+          LinearMap.restrictScalars_apply, LinearMap.map_smul, smul_eq_mul]
+
+@[simp]
+lemma baseChangeLinearMap_tmul (φ : B →ₗ[R] R) (x : k') (c : B) :
+    baseChangeLinearMap φ (x ⊗ₜ[k] c) = x ⊗ₜ φ c := rfl
 end Algebra.TensorProduct
 
 namespace Derivation
@@ -179,3 +213,73 @@ lemma traceDeriv_baseChange (a c : B) :
   rfl
 
 end Algebra
+
+namespace KaehlerDifferential
+
+open Algebra
+
+attribute [local instance] TensorProduct.baseChangeAlgebra
+  TensorProduct.baseChangeAlgebra_isScalarTower TensorProduct.free_baseChange
+  TensorProduct.finite_baseChange TensorProduct.rightAlgebra precompModule
+  precompModule_isScalarTower
+
+variable {k R B : Type*} [CommRing k] [CommRing R] [Algebra k R] [CommRing B] [Algebra R B]
+  [Algebra k B] [IsScalarTower k R B] [Module.Free R B] [Module.Finite R B]
+  (k' : Type*) [CommRing k'] [Algebra k k'] (D : Derivation k R R)
+
+/-- The isomorphism `Ω ≅ Hom_R(-, R)` induced by the trace derivation commutes with base change
+along `k → k'`. -/
+lemma liftKaehlerDifferential_traceDerivation_map (ω : Ω[B⁄k]) (c : B) :
+    (traceDerivation (B := k' ⊗[k] B) (D.baseChange k')).liftKaehlerDifferential
+      (KaehlerDifferential.map k k' B (k' ⊗[k] B) ω) (1 ⊗ₜ[k] c) =
+      1 ⊗ₜ (traceDerivation D).liftKaehlerDifferential ω c := by
+  have hω : ω ∈ (⊤ : Submodule B Ω[B⁄k]) := Submodule.mem_top
+  rw [← KaehlerDifferential.span_range_derivation] at hω
+  induction hω using Submodule.span_induction generalizing c with
+  | mem x hx =>
+    obtain ⟨a, rfl⟩ := hx
+    rw [KaehlerDifferential.map_D, Derivation.liftKaehlerDifferential_comp_D,
+      Derivation.liftKaehlerDifferential_comp_D, traceDerivation_apply, traceDerivation_apply,
+      TensorProduct.right_algebraMap_apply, traceDeriv_baseChange]
+  | zero => simp
+  | add x y _ _ hx hy => simp only [map_add, LinearMap.add_apply, hx, hy, TensorProduct.tmul_add]
+  | smul b x _ hx =>
+    rw [LinearMap.map_smul, LinearMap.map_smul, precompModule_smul_apply, ← hx,
+      ← algebraMap_smul (k' ⊗[k] B) b, LinearMap.map_smul, precompModule_smul_apply,
+      TensorProduct.right_algebraMap_apply, Algebra.TensorProduct.tmul_mul_tmul, one_mul]
+
+/-- **Duality for the trace of differentials descends along base change.** If `k → k'` has a
+`k`-linear retraction and the trace derivation of `k' ⊗[k] B` over `k' ⊗[k] R` induces an
+isomorphism `Ω ≅ Hom(-, k' ⊗[k] R)`, then so does the trace derivation of `B` over `R`. -/
+theorem bijective_liftKaehlerDifferential_traceDerivation_of_baseChange (l : k' →ₗ[k] k)
+    (hl : l 1 = 1)
+    (h : Function.Bijective
+      (traceDerivation (B := k' ⊗[k] B) (D.baseChange k')).liftKaehlerDifferential) :
+    Function.Bijective (traceDerivation (B := B) D).liftKaehlerDifferential := by
+  set Ψ := (traceDerivation (B := B) D).liftKaehlerDifferential
+  set Ψ' := (traceDerivation (B := k' ⊗[k] B) (D.baseChange k')).liftKaehlerDifferential
+  let L : k' ⊗[k] Ω[B⁄k] →ₗ[k] Ω[B⁄k] := (TensorProduct.lid k _).toLinearMap ∘ₗ l.rTensor _
+  let Λ : k' ⊗[k] R →ₗ[k] R := (TensorProduct.lid k R).toLinearMap ∘ₗ l.rTensor R
+  have hL (x : k') (ω : Ω[B⁄k]) : L (x ⊗ₜ ω) = l x • ω := by simp [L]
+  have hΛ (x : k') (r : R) : Λ (x ⊗ₜ r) = l x • r := by simp [Λ]
+  let E := tensorKaehlerEquivBase k k' B (k' ⊗[k] B)
+  have hE (x : k') (ω : Ω[B⁄k]) (c : B) : Ψ' (E (x ⊗ₜ ω)) (1 ⊗ₜ c) = x ⊗ₜ Ψ ω c := by
+    rw [tensorKaehlerEquivBase_tmul, LinearMap.map_smul_of_tower, LinearMap.smul_apply,
+      liftKaehlerDifferential_traceDerivation_map, TensorProduct.smul_tmul', smul_eq_mul, mul_one]
+  have key (z : k' ⊗[k] Ω[B⁄k]) (c : B) : Λ (Ψ' (E z) (1 ⊗ₜ c)) = Ψ (L z) c := by
+    induction z with
+    | zero => simp
+    | add z z' hz hz' => simp only [map_add, LinearMap.add_apply, hz, hz']
+    | tmul x ω =>
+      rw [hE, hΛ, hL, LinearMap.map_smul_of_tower, LinearMap.smul_apply]
+  refine ⟨fun ω ω' hωω' ↦ ?_, fun φ ↦ ?_⟩
+  · have h1 : Ψ' (E (1 ⊗ₜ ω)) = Ψ' (E (1 ⊗ₜ ω')) :=
+      TensorProduct.baseChange_linearMap_ext fun c ↦ by rw [hE, hE, hωω']
+    have h2 := congrArg L (E.injective (h.1 h1))
+    rwa [hL, hL, hl, one_smul, one_smul] at h2
+  · obtain ⟨m, hm⟩ := h.2 (TensorProduct.baseChangeLinearMap (k' := k') φ)
+    obtain ⟨z, rfl⟩ := E.surjective m
+    refine ⟨L z, LinearMap.ext fun c ↦ ?_⟩
+    rw [← key z c, hm, TensorProduct.baseChangeLinearMap_tmul, hΛ, hl, one_smul]
+
+end KaehlerDifferential
