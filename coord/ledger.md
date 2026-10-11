@@ -4546,3 +4546,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 12:01 L: merged deliver/M1/lem-pc-quasi-coherent-extension (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.Modules.QuasicoherentExtension AlgebraicGeometry.Scheme.Modules.isQuasicoherent_of_shortExact)
 - 12:01 L: merged deliver/G1/lem-pc-fp-complex-descent (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.FinitelyPresentedComplexDescent AlgebraicGeometry.exists_finitelyPresented_complex_of_limit)
 - 12:01 L: merged deliver/J1/lem-sc-ext-coherent-hom-injective-flasque (stage 2; reviewer FIX; first push; Sheaf.AlgebraicGeometry.IsFlasqueHomObjOfInjective AlgebraicGeometry.isFlasque_homObj_of_coherent_injective)
+- 12:01 L: merged deliver/H1/lem-weil-pbc-nakayama-nilpotent (stage 2; reviewer FIX; first push; Sheaf.RingTheory.NakayamaNilpotent RingTheory.surjective_of_surjective_mod_nilpotent)

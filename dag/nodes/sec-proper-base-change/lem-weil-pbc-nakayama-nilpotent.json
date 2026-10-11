@@ -143,5 +143,24 @@
   "item": "lem-weil-pbc-nakayama-nilpotent",
   "worker": "stage1",
   "summary": "Checked the statement and proof against Stacks Algebra Lemma 00DV (9)-(11). Split the proof into the nilpotent-power argument for Q = IQ, its application to M/L for the submodule form, and its application with L = u(N) for surjectivity. All transitions are elementary module identities, so no new DAG nodes are needed; the prior three-kind Mathlib search correctly finds no matching no-finiteness theorem."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.NakayamaNilpotent",
+  "declaration": "RingTheory.surjective_of_surjective_mod_nilpotent",
+  "file": "lean/Sheaf/RingTheory/NakayamaNilpotent.lean",
+  "statement": "theorem surjective_of_surjective_mod_nilpotent (R : Type u) [CommRing R] (N : Type v) (M : Type w) [AddCommGroup N] [AddCommGroup M] [Module R N] [Module R M] (I : Ideal R) (u : N →ₗ[R] M) (hI : ∃ k : ℕ, 0 < k ∧ I ^ k = ⊥) (h : Function.Surjective ((I • ⊤ : Submodule R N).mapQ (I • ⊤ : Submodule R M) u (Submodule.smul_top_le_comap_smul_top I u))) : Function.Surjective u",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-nkn1200"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-nkn1200",
+  "group": "H1",
+  "result": "fix",
+  "note": "R CommRing; I : Ideal R with ∃ k>0, I^k=⊥ (node I^k=0, k≥1); N M arbitrary R-modules, no finiteness; u linear; hypothesis now surjectivity of the induced N/IN→M/IM as Submodule.mapQ with smul_top_le_comap_smul_top (STATE REDUCTION MOD IDEAL) instead of range u ⊔ I•⊤ = ⊤; conclusion Function.Surjective u; not Mathlib verbatim (Mathlib's Nakayama needs Module.Finite/jacobson)"
  }
 }
