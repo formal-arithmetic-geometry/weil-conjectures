@@ -3672,3 +3672,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 07:42 L: merged deliver/H1/lem-pc-module-filtered-colimits-tensor (stage 2; reviewer PASS; first push; Sheaf.Algebra.Homology.FilteredColimitsTensor SheafOfModules.filteredColimitsTensorComplex)
 - 07:43 L: merged deliver/C1/lem-sc-bounded-below-injective-resolution (stage 2; reviewer PASS; first push; Sheaf.Algebra.Homology.BoundedBelowInjectiveResolution SheafOfModules.exists_boundedBelow_injective_resolution; statement corrected (1 citers))
 - 07:43 L: merged deliver/M1/lem-pur-kinjective-homotopy-limit-vanishing (stage 2; reviewer FIX; first push; Sheaf.CategoryTheory.HomotopyLimitVanishing CategoryTheory.homotopyLimitVanishing)
+- 07:43 L: merged deliver/H1/lem-sc-acyclic-comparison-natural (stage 2; reviewer PASS; first push; Sheaf.CategoryTheory.Abelian.RightDerived.AcyclicComparisonNatural CategoryTheory.acyclicComparison_naturality)

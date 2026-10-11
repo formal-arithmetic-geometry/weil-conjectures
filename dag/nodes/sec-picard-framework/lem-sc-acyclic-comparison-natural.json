@@ -182,5 +182,23 @@
   "group": "H1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-acn1708 (reviewer sub-agent of L); spot-checked: Source: Stacks Tag 015E (derived-lemma-leray-acyclicity, derived.tex line 5717; the file is present locally, contrary to the report's WANTED) and the item's statement as imported, unchanged. Step 1: b from lem-weil-pbc-injective-resolution-lift-exists (both J, J' injective resolutions); c_I, c_I' as in item 2 of lemma-weil-pbc-leray-acyclicity. Step 2: b.a and a'.phi agree after r (both s'.h, using phi^0 r = r' h and a' r' = s'), r: F[0] -> I a quasi-iso, J' bounded-below injective: lem-weil-pbc-lift-to-injective-unique-up-to-homotopy gives the homotopy. Step 3: lem-weil-pbc-homotopic-maps-equal-cohomology (b) for the additive v. Step 4: lem-weil-pbc-derived-functor-map-via-lift gives R^nv(h) = iota_J'^{-1} H^n(vb) iota_J; with c_I = iota_J^{-1} H^n(va) the square follows in two lines. Cases n=0, h=id, phi=id checked. No new nodes, so no Mathlib query needed. FIX more, RETURN less (C4): dag/nodes/sec-picard-framework/lem-sc-acyclic-comparison-natural.json: proof[0].text: the lifts a, a' out of the ACYCLIC resolutions I, I' were attributed to lem-weil-pbc-injective-resolution-lift-exists, whose source must be an injective resolution; now obtained from lem-weil-pbc-lift-along-injective-quasi-iso (mathlib leaf) applied to the degreewise-monic quasi-iso r: F[0] -> I and s, added to proof[0].uses, proof_deps and split_report.tool_uses; also added J^q=J'^q=0 for q<0 needed by the lift and map-via-lift nodes. Tool uses accepted: all are generic homological-algebra facts used as black boxes. Times: start Sat Oct 10 05:02:33 PM UTC 2026, end Sat Oct 10 05:03:32 PM UTC 2026.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.Abelian.RightDerived.AcyclicComparisonNatural",
+  "declaration": "CategoryTheory.acyclicComparison_naturality",
+  "file": "lean/Sheaf/CategoryTheory/Abelian/RightDerived/AcyclicComparisonNatural.lean",
+  "statement": "theorem acyclicComparison_naturality (F : C ⥤ D) [F.Additive] [PreservesFiniteLimits F] {X X' : C} {I I' : CochainComplex C ℕ} (ι : (CochainComplex.single₀ C).obj X ⟶ I) (ι' : (CochainComplex.single₀ C).obj X' ⟶ I') [QuasiIso ι] [QuasiIso ι'] (hI : ∀ n, F.rightAcyclic (I.X n)) (hI' : ∀ n, F.rightAcyclic (I'.X n)) (h : X ⟶ X') (φ : I ⟶ I') (w : ι ≫ φ = (CochainComplex.single₀ C).map h ≫ ι') (n : ℕ) : HomologicalComplex.homologyMap ((F.mapHomologicalComplex _).map φ) n ≫ (F.rightDerivedObjIsoOfResolution ι' hI' n).inv = (F.rightDerivedObjIsoOfResolution ι hI n).inv ≫ (F.rightDerived n).map h",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-acn0955",
+  "group": "H1",
+  "result": "pass",
+  "note": "C,D abelian + HasInjectiveResolutions C; F additive + PreservesFiniteLimits; ι,ι' single₀→I,I' QuasiIso over CochainComplex C ℕ; hI,hI' rightAcyclic termwise; w = degree-0 compatibility; c = (rightDerivedObjIsoOfResolution _).inv (iso is R→H, so inv is H→R, item 2 identity lift); square Hφ≫c' = c≫R h, all n:ℕ"
  }
 }
