@@ -407,27 +407,50 @@ noncomputable def constantSheafEquivalenceOfIsSepClosed :
   (constantSheafAdj (Spec (.of k)).smallEtaleTopology (ModuleCat.{u + 1} Λ)
     isTerminalEtalePoint).toEquivalence
 
-end Point
-/-- Over a separably closed field `k`, every object `C` of `D((Spec k)_ét, Λ)` is the constant
-complex on its derived global sections: `C ≅ RΓ(Spec k, C)_{Spec k}`. -/
-theorem nonempty_iso_constantFunctor_rightDerivedGlobalSections_of_isSepClosed {k : Type u}
-    [Field k] [IsSepClosed k]
-    (C : DerivedCategory (Sheaf (Spec (.of k)).smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
-    Nonempty (C ≅ (constantFunctor Λ (Spec (.of k))).obj
-      ((rightDerivedGlobalSections (ModuleCat.{u + 1} Λ) (Spec (.of k))).obj C)) := by
-  let E := constantSheafEquivalenceOfIsSepClosed Λ (k := k)
+instance isEquivalence_sheafSections_etalePoint :
+    ((sheafSections (Spec (.of k)).smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj
+      (op (etalePoint k))).IsEquivalence :=
+  (constantSheafEquivalenceOfIsSepClosed Λ (k := k)).isEquivalence_inverse
+
+/-- Over a separably closed field `k`, the derived global sections on `Spec k` are induced by the
+exact global sections functor: `RΓ(Spec k, -) ≅ D(Γ(Spec k, -))`. -/
+noncomputable def rightDerivedGlobalSectionsIsoOfIsSepClosed :
+    rightDerivedGlobalSections (ModuleCat.{u + 1} Λ) (Spec (.of k)) ≅
+      ((sheafSections (Spec (.of k)).smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj
+        (op (etalePoint k))).mapDerivedCategory :=
+  Functor.rightDerivedFunctorNatIso (Sheaf.ΓNatIsoSheafSections _ _ isTerminalEtalePoint) ≪≫
+    Functor.rightDerivedFunctorIsoMapDerivedCategory _
+
+/-- Blueprint `lem-kun-0ezp` (cohomology of a separably closed point, for sheaves of
+`Λ`-modules): over a separably closed field `k`, `H^q(Spec k, F) = 0` for every étale sheaf `F`
+of `Λ`-modules on `Spec k` and every `q ≠ 0`. -/
+theorem isZero_cohomology_of_isSepClosed
+    (F : Sheaf (Spec (.of k)).smallEtaleTopology (ModuleCat.{u + 1} Λ)) {q : ℤ} (hq : q ≠ 0) :
+    IsZero ((cohomology (ModuleCat.{u + 1} Λ) (Spec (.of k)) q).obj
+      ((DerivedCategory.singleFunctor _ 0).obj F)) := by
   let Γ := (sheafSections (Spec (.of k)).smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj
     (op (etalePoint k))
-  have : Γ.IsEquivalence := E.isEquivalence_inverse
-  have : E.functor.Additive := additive_constantSheaf Λ _
-  have : E.inverse.Additive := additive_sheafSections_obj Λ _
-  let e : rightDerivedGlobalSections (ModuleCat.{u + 1} Λ) (Spec (.of k)) ≅
-      Γ.mapDerivedCategory :=
-    Functor.rightDerivedFunctorNatIso
-      (Sheaf.ΓNatIsoSheafSections _ _ isTerminalEtalePoint) ≪≫
-      Γ.rightDerivedFunctorIsoMapDerivedCategory
-  exact ⟨(E.mapDerivedCategory.counitIso.app C).symm ≪≫
-    (constantFunctor Λ _).mapIso (e.app C).symm⟩
+  refine IsZero.of_iso ?_ ((DerivedCategory.homologyFunctor _ q).mapIso
+    ((rightDerivedGlobalSectionsIsoOfIsSepClosed Λ).app _ ≪≫
+      (Γ.mapDerivedCategorySingleFunctor 0).app F ≪≫
+        (DerivedCategory.singleFunctorIsoCompQ (ModuleCat.{u + 1} Λ) 0).app (Γ.obj F)) ≪≫
+    (DerivedCategory.homologyFunctorFactors _ q).app _)
+  exact HomologicalComplex.isZero_single_obj_homology _ _ _ _ hq
+
+/-- Over a separably closed field `k`, every object `C` of `D((Spec k)_ét, Λ)` is the constant
+complex on its derived global sections: `C ≅ RΓ(Spec k, C)_{Spec k}`. -/
+theorem nonempty_iso_constantFunctor_rightDerivedGlobalSections_of_isSepClosed
+    (C : DerivedCategory (Sheaf (Spec (.of k)).smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
+    Nonempty (C ≅ (constantFunctor Λ (Spec (.of k))).obj
+      ((rightDerivedGlobalSections (ModuleCat.{u + 1} Λ) (Spec (.of k))).obj C)) :=
+  letI : (constantSheafEquivalenceOfIsSepClosed Λ (k := k)).functor.Additive :=
+    additive_constantSheaf Λ _
+  letI : (constantSheafEquivalenceOfIsSepClosed Λ (k := k)).inverse.Additive :=
+    additive_sheafSections_obj Λ _
+  ⟨((constantSheafEquivalenceOfIsSepClosed Λ).mapDerivedCategory.counitIso.app C).symm ≪≫
+    (constantFunctor Λ _).mapIso ((rightDerivedGlobalSectionsIsoOfIsSepClosed Λ).app C).symm⟩
+
+end Point
 
 end Inputs
 
