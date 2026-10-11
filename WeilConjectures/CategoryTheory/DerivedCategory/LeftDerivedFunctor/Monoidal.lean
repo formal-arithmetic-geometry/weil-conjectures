@@ -506,7 +506,6 @@ lemma leftDerivedTensorComparison_comp :
     Functor.map_comp, Functor.map_comp, Category.assoc, Category.assoc, reassoc_of% nG,
     ← reassoc_of% ne, leftDerivedFunctorCompIso_hom_app_comp_counit_assoc,
     mapHomotopyCategoryδNatTrans_comp, Qh.map_comp]
-  rfl
 
 end Comp
 
