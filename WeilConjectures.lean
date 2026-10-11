@@ -265,6 +265,7 @@ public import WeilConjectures.AlgebraicGeometry.Morphisms.Finite.PieceSections
 public import WeilConjectures.AlgebraicGeometry.Morphisms.Finite.SplitExists
 public import WeilConjectures.AlgebraicGeometry.Morphisms.Finite.SplitNeighborhood
 public import WeilConjectures.AlgebraicGeometry.Morphisms.Frobenius
+public import WeilConjectures.AlgebraicGeometry.Morphisms.GenericFiniteness
 public import WeilConjectures.AlgebraicGeometry.Morphisms.Integral.DisjointCover
 public import WeilConjectures.AlgebraicGeometry.Morphisms.Integral.FiniteApproximation
 public import WeilConjectures.AlgebraicGeometry.Morphisms.Integral.FinitePresentationApproximation
@@ -673,6 +674,7 @@ public import WeilConjectures.DeligneLaumon.AffineLine.ZeroExtension
 public import WeilConjectures.DeligneLaumon.Reduction.AffineCurve
 public import WeilConjectures.DeligneLaumon.Reduction.DirectImage
 public import WeilConjectures.DeligneLaumon.Reduction.FibreCohomology
+public import WeilConjectures.DeligneLaumon.Reduction.FiniteDirectImage
 public import WeilConjectures.DeligneLaumon.Reduction.FiniteMiddleExtension
 public import WeilConjectures.DeligneLaumon.Reduction.FormalSteps
 public import WeilConjectures.DeligneLaumon.Reduction.OpenLine
@@ -1682,6 +1684,7 @@ public import WeilConjectures.SixFunctors.ProEtale.Adic.ConstantSheaf
 public import WeilConjectures.SixFunctors.ProEtale.Adic.Constructible
 public import WeilConjectures.SixFunctors.ProEtale.Adic.Extension
 public import WeilConjectures.SixFunctors.ProEtale.Adic.ExtensionByZero
+public import WeilConjectures.SixFunctors.ProEtale.Adic.FiniteEtaleCounit
 public import WeilConjectures.SixFunctors.ProEtale.Adic.ForgetCoherence
 public import WeilConjectures.SixFunctors.ProEtale.Adic.GeometricFrobenius
 public import WeilConjectures.SixFunctors.ProEtale.Adic.GlobalSectionsHom

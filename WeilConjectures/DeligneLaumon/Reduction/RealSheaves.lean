@@ -6,8 +6,12 @@ Authors: Claude
 module
 
 public import WeilConjectures.AlgebraicGeometry.Bertini
+public import WeilConjectures.AlgebraicGeometry.AffineSpace.Line
+public import WeilConjectures.DeligneLaumon.Reduction.QuasiFiniteMixed
 public import WeilConjectures.DeligneLaumon.Reduction.QuasiFiniteStalk
+public import WeilConjectures.DeligneLaumon.Reduction.RealCurve
 public import WeilConjectures.DeligneLaumon.Reduction.TraceReality
+public import WeilConjectures.WeilSheaf.LisseLocus
 
 /-!
 # Real Weil sheaves on an arbitrary base are mixed
@@ -120,6 +124,90 @@ theorem IsReal.upperStar {X Y : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))
     ← pow_mul]
   exact LinearMap.conj_trace_pow_of_charpolyRev ι _ (hF _) _
 
+/-- Every Weil sheaf on a nonempty open of `𝔸⁰ = Spec k₀` is mixed. -/
+theorem exists_isMixed_upperStar_opensι_of_isEmpty {n : Type u} [IsEmpty n]
+    (O : 𝔸(n; Spec (CommRingCat.of k₀)).Opens) [Nonempty O] (G : WeilSheaf k₀ l O) :
+    ∃ O' : O.toScheme.Opens, (O' : Set O).Nonempty ∧
+      ((WeilSheaf.upperStar O'.ι).obj G).IsMixed ι := by
+  have hO : IsOpenImmersion (O.toScheme ↘ Spec (CommRingCat.of k₀)) := by
+    rw [← comp_over O.ι]; infer_instance
+  have : LocallyQuasiFinite ((⊤ : O.toScheme.Opens).toScheme ↘ Spec (CommRingCat.of k₀)) := by
+    rw [← comp_over (⊤ : O.toScheme.Opens).ι]; infer_instance
+  have : IsSeparated ((⊤ : O.toScheme.Opens).toScheme ↘ Spec (CommRingCat.of k₀)) := by
+    rw [← comp_over (⊤ : O.toScheme.Opens).ι]; infer_instance
+  have : LocallyOfFiniteType ((⊤ : O.toScheme.Opens).toScheme ↘ Spec (CommRingCat.of k₀)) := by
+    rw [← comp_over (⊤ : O.toScheme.Opens).ι]; infer_instance
+  have : QuasiCompact ((⊤ : O.toScheme.Opens).toScheme ↘ Spec (CommRingCat.of k₀)) := by
+    rw [← comp_over (⊤ : O.toScheme.Opens).ι]; infer_instance
+  obtain ⟨o⟩ := ‹Nonempty O›
+  exact ⟨⊤, ⟨o, trivial⟩, isMixed_of_locallyQuasiFinite ι _⟩
+
+/-- An `ι`-real Weil sheaf on a nonempty open of the affine line `𝔸¹` (with any one-element index
+type) is `ι`-mixed on a nonempty open:
+it is lisse on a dense open, a smooth geometrically connected curve. -/
+theorem IsReal.exists_isMixed_upperStar_opensι_of_card_eq_one {n : Type u} [Finite n]
+    (hn : Nat.card n = 1) (O : 𝔸(n; Spec (CommRingCat.of k₀)).Opens) [Nonempty O]
+    {G : WeilSheaf k₀ l O}
+    (hG : G.IsReal ι) :
+    ∃ O' : O.toScheme.Opens, (O' : Set O).Nonempty ∧
+      ((WeilSheaf.upperStar O'.ι).obj G).IsMixed ι := by
+  have := isNoetherian_of_locallyOfFiniteType
+    (𝔸(n; Spec (CommRingCat.of k₀)) ↘ Spec (CommRingCat.of k₀))
+  have : LocallyOfFiniteType (O.toScheme ↘ Spec (CommRingCat.of k₀)) := by
+    rw [← comp_over O.ι]; infer_instance
+  have : QuasiCompact (O.toScheme ↘ Spec (CommRingCat.of k₀)) := by
+    rw [← comp_over O.ι]; infer_instance
+  obtain ⟨U, hU, hlisse⟩ := exists_dense_isLisse_upperStar G
+  have hne : (U : Set O).Nonempty := hU.nonempty
+  have : Nonempty U := hne.to_subtype
+  have hv : U.toScheme ↘ Spec (CommRingCat.of k₀) =
+      (U.ι ≫ O.ι) ≫ 𝔸(n; Spec (CommRingCat.of k₀)) ↘ Spec (CommRingCat.of k₀) := by
+    rw [Category.assoc, comp_over O.ι, comp_over U.ι]
+  have : SmoothOfRelativeDimension 1 (U.toScheme ↘ Spec (CommRingCat.of k₀)) := by
+    have := AffineSpace.smoothOfRelativeDimension_over n (Spec (CommRingCat.of k₀))
+    rw [hn] at this
+    rw [hv, show 1 = 0 + 1 from rfl]; infer_instance
+  have : GeometricallyConnected (U.toScheme ↘ Spec (CommRingCat.of k₀)) := by
+    have := GeometricallyIrreducible.comp_of_isOpenImmersion (U.ι ≫ O.ι)
+      (𝔸(n; Spec (CommRingCat.of k₀)) ↘ Spec (CommRingCat.of k₀))
+    rw [hv]; exact GeometricallyConnected.of_geometricallyIrreducible _
+  have : IsSeparated (U.toScheme ↘ Spec (CommRingCat.of k₀)) := by
+    rw [hv]; infer_instance
+  have : LocallyOfFiniteType (U.toScheme ↘ Spec (CommRingCat.of k₀)) := by
+    rw [hv]; infer_instance
+  have : QuasiCompact (U.toScheme ↘ Spec (CommRingCat.of k₀)) := by
+    rw [hv]; infer_instance
+  exact ⟨U, hne, (hG.upperStar U.ι).isMixed_of_isLisse hlisse⟩
+
+
+/-- **Real sheaves on open subschemes of affine space of dimension at least two are mixed on a
+nonempty open** (blueprint: `thm-zl-real-mixed-by-curves`, the curve argument in dimension
+`d ≥ 2`). Let `O` be a nonempty open subscheme of `𝔸ᵈ` over `k₀`, `d ≥ 2`, and `G` an `ι`-real
+Weil sheaf on `O`. Then `G` is `ι`-mixed on a nonempty open of `O`: after shrinking, `G` is lisse,
+its constituents become geometrically irreducible after a finite constant extension, curve
+testing (`lem-zl-curve-testing-irreducibility`) produces curves through any two closed points on
+which they stay irreducible, and purity of real lisse sheaves on curves
+(`thm-rp-real-lisse-purity-affine`) gives each constituent a weight independent of the point. -/
+theorem IsReal.exists_isMixed_upperStar_opensι_of_two_le {d : ℕ} (hd : 2 ≤ d)
+    (O : 𝔸(ULift.{u} (Fin d); Spec (CommRingCat.of k₀)).Opens) [Nonempty O]
+    {G : WeilSheaf k₀ l O} (hG : G.IsReal ι) :
+    ∃ O' : O.toScheme.Opens, (O' : Set O).Nonempty ∧
+      ((WeilSheaf.upperStar O'.ι).obj G).IsMixed ι :=
+  sorry
+
+/-- An `ι`-real Weil sheaf on a nonempty open subscheme of `𝔸ᵈ` over `k₀` is `ι`-mixed on a
+nonempty open: for `d = 0` every Weil sheaf on a point is mixed, for `d = 1` this is the curve
+case, and `d ≥ 2` is `AlgebraicGeometry.WeilSheaf.IsReal.exists_isMixed_upperStar_opensι_of_two_le`.
+-/
+theorem IsReal.exists_isMixed_upperStar_opensι_of_affineSpace {d : ℕ}
+    (O : 𝔸(ULift.{u} (Fin d); Spec (CommRingCat.of k₀)).Opens) [Nonempty O]
+    {G : WeilSheaf k₀ l O} (hG : G.IsReal ι) :
+    ∃ O' : O.toScheme.Opens, (O' : Set O).Nonempty ∧
+      ((WeilSheaf.upperStar O'.ι).obj G).IsMixed ι := by
+  rcases d with _ | _ | d
+  · exact exists_isMixed_upperStar_opensι_of_isEmpty O G
+  · exact hG.exists_isMixed_upperStar_opensι_of_card_eq_one (by simp) O
+  · exact hG.exists_isMixed_upperStar_opensι_of_two_le (by omega) O
 open ZeroObject in
 /-- A Weil sheaf on a scheme without points is mixed of weights at most `w`, for every `w`: the
 filtration `0 ⊆ F` has the single quotient `F`, which is punctually pure of weight `w` since
