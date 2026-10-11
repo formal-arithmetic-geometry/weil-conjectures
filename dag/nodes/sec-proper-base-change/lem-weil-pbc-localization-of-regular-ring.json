@@ -150,5 +150,23 @@
   "by": "L",
   "result": "accepted",
   "note": "4 steps: Noetherian via the localization-noetherian leaf (abstract characterization), R_q = R'_{q'} via lem-weil-pbc-localization-prime-residue-field-iso (1),(2) (unsplit, same unit), regular local ring transported along a ring isomorphism, definition. No new nodes. Tags 0381, 00OD, 00FN, 00E3, 00C9 verified."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.LocalizationOfRegularRing",
+  "declaration": "RingTheory.isRegularRing_of_localization",
+  "file": "lean/Sheaf/RingTheory/LocalizationOfRegularRing.lean",
+  "statement": "theorem isRegularRing_of_localization (R : Type u) (R' : Type v) [CommRing R] [CommRing R'] [IsRegularRing R] (M : Submonoid R) (φ : R →+* R') (hunit : ∀ s : M, IsUnit (φ s.1)) (hsurj : ∀ y : R', ∃ r : R, ∃ s : M, ∃ u : R', IsUnit u ∧ φ s.1 * u = 1 ∧ y = φ r * u) (hzero : ∀ r : R, φ r = 0 → ∃ s : M, s.1 * r = 0) : IsRegularRing R'",
+  "branch": "sheaf-dag",
+  "by": "K1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-lrr1117",
+  "group": "K1",
+  "result": "pass",
+  "note": "R regular=[IsRegularRing R] (Mathlib class, Noetherian+regular local at primes); M=Submonoid R; φ:R→+*R'; (a)=hunit; (b)=hsurj (u inverse of φ s, IsUnit u redundant but equivalent); (c)=hzero, direction checked; conclusion IsRegularRing R'; independent universes; hypotheses satisfied by Localization M (tested), no Nontrivial binder, zero ring allowed"
  }
 }

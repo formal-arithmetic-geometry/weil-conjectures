@@ -4421,3 +4421,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 11:17 L: merged deliver/G1/lem-weil-pbc-localization-colimit-principal-localizations (stage 2; reviewer FIX; first push; Sheaf.RingTheory.LocalizationColimitPrincipalLocalizations CommRingCat.localization_colimit_principalLocalizations)
 - 11:17 L: merged deliver/K1/lem-weil-pbc-jacobi-zariski-quotient-smooth (stage 2; reviewer PASS; first push; Sheaf.RingTheory.JacobiZariskiQuotientSmooth Algebra.jacobiZariski_quotient_smooth)
 - 11:17 L: merged deliver/M1/lem-weil-pbc-koszul-differential (stage 2; reviewer PASS; first push; Sheaf.Paper.KoszulDifferential ExteriorAlgebra.koszul_differential)
+- 11:17 L: merged deliver/K1/lem-weil-pbc-localization-of-regular-ring (stage 2; reviewer PASS; first push; Sheaf.RingTheory.LocalizationOfRegularRing RingTheory.isRegularRing_of_localization)
