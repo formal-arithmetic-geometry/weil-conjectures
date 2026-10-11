@@ -90,5 +90,28 @@
   "by": "L",
   "result": "accepted",
   "note": "Mathlib leaf: pullbackObjUnitToUnit (Sheaf/PullbackFree.lean:86), IsIso instance under [F.Final] (:101), homEquiv lemma (:96); the Final instance for Opens.map of a scheme morphism is supplied in the source repo by inferInstance (pullbackObjUnitIso, WeilConjectures Modules/Sheaf.lean:115, sorry-free): acceptable, stage 2 to confirm the instance name."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.TensorPullbackStructureSheaf",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.tensorPullbackObjUnitToUnit_isIso",
+  "file": "lean/Sheaf/AlgebraicGeometry/TensorPullbackStructureSheaf.lean",
+  "statement": "theorem tensorPullbackObjUnitToUnit_isIso {X Y : Scheme.{u}} (g : X ⟶ Y) : IsIso (tensorPullbackObjUnitToUnit g) ∧ (Classical.choose (exists_tensorPullbackAdjunction g)).unit.app (SheafOfModules.unit Y.ringCatSheaf) ≫ (pushforward g).map (tensorPullbackObjUnitToUnit g) = SheafOfModules.unitToPushforwardObjUnit g.toRingCatSheafHom",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-11",
+  "existing": false,
+  "declarations": [
+   "AlgebraicGeometry.Scheme.Modules.tensorPullbackObjUnitToUnit",
+   "AlgebraicGeometry.Scheme.Modules.tensorPullbackObjUnitToUnit_isIso"
+  ],
+  "note": "The Mathlib match uses the abstract chosen Scheme.Modules.pullback, not the tensorPullback required by def-pc-module-pullback. This module defines the structure-sheaf morphism adjoint to g sharp under the canonical tensorPullback adjunction, states its isomorphism property and its unit characterization. The Mathlib match is retained unchanged."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-api1208",
+  "group": "E1",
+  "result": "pass",
+  "note": "IsAffineHom f; F quasi-coherent Y.Modules; I quasi-coherent with Mono ι into unit (K1 form); f^{-1}I·F = idealModuleProduct (tensorPullback.map ι ≫ ε) F, verified by compile to equal image of f*ι▷F ≫ ε▷F ≫ λ (node's 3-arrow composite); (1) IsQuasicoherent; (2) Subobject equality in f_*F of downstairs product and f_* of upstairs inclusion; ε = homEquiv.symm of unitToPushforwardObjUnit under exists_tensorPullbackAdjunction (TENSOR-PULLBACK UNIT line), IsIso + unit characterization; no let, no hollow binder, one universe"
  }
 }

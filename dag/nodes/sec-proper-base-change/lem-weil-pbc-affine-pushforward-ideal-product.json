@@ -30,7 +30,8 @@
   "pqf-def-coherent",
   "def-pc-module-pullback",
   "lem-weil-pbc-module-pullback-structure-sheaf",
-  "def-pur-sheaf-tensor-product"
+  "def-pur-sheaf-tensor-product",
+  "lem-weil-pbc-ideal-module-product-stalk"
  ],
  "proof": [
   {
@@ -217,5 +218,23 @@
  },
  "tool_uses": [
   "pqf-lem-pushforward-qcoh"
- ]
+ ],
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AffinePushforwardIdealProduct",
+  "declaration": "AlgebraicGeometry.Scheme.affine_pushforward_ideal_product",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffinePushforwardIdealProduct.lean",
+  "statement": "theorem affine_pushforward_ideal_product {X Y : Scheme.{v}} (f : Y ⟶ X) [IsAffineHom f] (F : Y.Modules) [F.IsQuasicoherent] {I : X.Modules} [I.IsQuasicoherent] (ι : I ⟶ SheafOfModules.unit X.ringCatSheaf) [Mono ι] : (idealModuleProduct ((Modules.tensorPullback f).map ι ≫ Modules.tensorPullbackObjUnitToUnit f) F).IsQuasicoherent ∧ Subobject.mk (image.ι (idealModuleProductι ι ((Modules.pushforward f).obj F))) = Subobject.mk (image.ι ((Modules.pushforward f).map (idealModuleProductι ((Modules.tensorPullback f).map ι ≫ Modules.tensorPullbackObjUnitToUnit f) F)))",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-api1208",
+  "group": "E1",
+  "result": "pass",
+  "note": "IsAffineHom f; F quasi-coherent Y.Modules; I quasi-coherent with Mono ι into unit (K1 form); f^{-1}I·F = idealModuleProduct (tensorPullback.map ι ≫ ε) F, verified by compile to equal image of f*ι▷F ≫ ε▷F ≫ λ (node's 3-arrow composite); (1) IsQuasicoherent; (2) Subobject equality in f_*F of downstairs product and f_* of upstairs inclusion; ε = homEquiv.symm of unitToPushforwardObjUnit under exists_tensorPullbackAdjunction (TENSOR-PULLBACK UNIT line), IsIso + unit characterization; no let, no hollow binder, one universe"
+ }
 }
