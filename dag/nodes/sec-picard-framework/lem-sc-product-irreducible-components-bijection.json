@@ -119,5 +119,23 @@
   "group": "M1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-pic (reviewer sub-agent of L); spot-checked: Source read: Stacks Varieties Lemma 038F (lemma-bijection-irreducible-components, varieties.tex, present in the checkout contrary to the report); the item statement (K field, U geometrically irreducible, V any K-scheme, projection U x_K V -> V bijective on irreducible components) agrees with it hypothesis by hypothesis and is unchanged. The delivered steps were agent-written and used three non-elementary facts with no node (C1): openness of the projection (Morphisms 0383), the set-theoretic fibre being the scheme fibre (Schemes 01K1), and the topological component bijection (Topology 037A); step 1's claim that the closure of the generic fibre is a component and step 2's 'the preceding construction contains W' were unjustified without them. FIX more, RETURN less: dag/nodes/sec-picard-framework/lem-sc-product-irreducible-components-bijection.json: proof, proof_deps, proof_origin, split_report.summary: steps replaced by the Stacks route: step 1 (p open by new node lem-sc-scheme-over-field-universally-open applied with S=V via def-pc-base-change; fibre over y is U_{kappa(y)} by pasting fibre squares [def-pc-fibre-product], irreducible by def-pc-geometrically-irreducible, homeomorphic to p^{-1}(y) by the existing def-pc-scheme-fibre which states 01K1), step 2 (new node lem-sc-open-map-irreducible-fibres-components gives T -> p^{-1}(T) with inverse W -> p(W)); proof_origin now by=document, Varieties 038F proof. NEW NODE lem-sc-scheme-over-field-universally-open (Morphisms 0383, statement-only, Mathlib grep: no direct lemma, only UniversallyOpen.of_flat UniversallyOpen.lean:147). NEW NODE lem-sc-open-map-irreducible-fibres-components (Topology 037A, statement-only; Mathlib irreducibleComponentsEquivOfIsPreirreducibleFiber Topology/Irreducible.lean:506 with @[stacks 037A], recorded as candidate leaf for the splitter, preirreducible fibres + surjective = irreducible fibres). Small cases: U=Spec K (identity), U=A^1 and V two points (two lines, two components), V empty (both sides empty); U nonempty since irreducible, so fibres nonempty and p surjective as 037A needs. Report faults noted, not fixed: it says varieties.tex is unavailable and lists a citations.json that is not in the commit. No tool_uses. Start Sat Oct 10 04:09:48 PM UTC 2026, end Sat Oct 10 04:11:43 PM UTC 2026.; 3 file(s) fixed by the reviewer; 2 statement node(s) added by the reviewer (FIX more, RETURN less)"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProductIrreducibleComponentsBijection",
+  "declaration": "AlgebraicGeometry.product_irreducibleComponents_bijOn_image",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProductIrreducibleComponentsBijection.lean",
+  "statement": "theorem product_irreducibleComponents_bijOn_image (K : Type u) [Field K] (U V : Scheme.{u}) [U.Over (Spec (CommRingCat.of K))] [V.Over (Spec (CommRingCat.of K))] [GeometricallyIrreducible (U ↘ Spec (CommRingCat.of K))] : let f := U ↘ Spec (CommRingCat.of K) let g := V ↘ Spec (CommRingCat.of K) Set.BijOn (Set.image (pullback.snd f g)) (irreducibleComponents ↥(pullback f g)) (irreducibleComponents V)",
+  "branch": "sheaf-dag",
+  "by": "M1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-pic1233",
+  "group": "M1",
+  "result": "pass",
+  "note": "K field=(K:Type u)[Field K]; U,V schemes over K=[_.Over (Spec (.of K))]; U geom. irreducible=[GeometricallyIrreducible (U ↘ Spec)]; V unrestricted; U x_K V=pullback of structure maps; projection=pullback.snd; bijection on components=Set.BijOn (Set.image pullback.snd) irreducibleComponents(pullback) irreducibleComponents V (explicit induced map; true by 038F since p surjective, image of p^-1(Z) is Z); forms match E1/K1; Mathlib only has irreducibleComponentsEquiv with IsOpenMap hyp, so existing:false right"
  }
 }

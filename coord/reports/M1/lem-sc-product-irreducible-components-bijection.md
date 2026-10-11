@@ -1,17 +1,122 @@
-# Delivery report
+## Worker report
 
-1. Files written:
-   - `dag/nodes/sec-picard-framework/lem-sc-product-irreducible-components-bijection.json`: statement node, split into two proof steps; Mathlib searches remain no-match.
-   - `citations.json`: six verbatim node-statement citations for the two steps.
-2. Attachments: none. No sorry-free declaration for the item was found in `WeilConjectures/`.
-3. WANTED: `literature/stacks-project/varieties.tex`, Tag 038F full proof text; the repository contains the citation index but not the source file, so the proof expansion is recorded as agent-written from the cited lemma.
-4. The imported node was unsplit and had no proof. I preserved its statement, dependencies, source tag, and blueprint reference, and added the forward component construction and inverse maximality argument from Tag 038F. Searches across the DAG and blueprint found no duplicate theorem or smaller node to cite; the Lean source has no matching declaration.
-5. Nothing remains unfinished in the split; the external Stacks proof text is unavailable in this checkout (reported above).
+The module `Sheaf.AlgebraicGeometry.ProductIrreducibleComponentsBijection` states
+`AlgebraicGeometry.product_irreducibleComponents_bijOn_image`, with its sole proof `sorry`.
+No definitions, new nodes, dependency modules, or statement corrections are needed.
 
-## Review by M1
+Hypothesis and clause correspondence:
 
-I read the target node, its blueprint ancestor `thm-sc-jacobian-representability`, the unit record `sk-prop-jacobian`, and the neighboring consumers `lem-sc-irreducible-product-over-field` and `lem-sc-geometrically-irreducible-product`. I searched the whole DAG and blueprint for Tag 038F, the component-bijection wording, and likely Lean names; only this unsplit item and its consumers appeared. I also searched `WeilConjectures/` for the item id, the blueprint tag, and product/component terminology; no declaration states it.
+- “K a field”: `(K : Type u) [Field K]`.
+- “U a scheme over K”: `(U : Scheme.{u})` and
+  `[U.Over (Spec (CommRingCat.of K))]`; its structure morphism is `f := U ↘ Spec ...`.
+- “U geometrically irreducible”: `[GeometricallyIrreducible (U ↘ Spec ...)]`.
+- “V any scheme over K”: `(V : Scheme.{u})` and `[V.Over (Spec ...)]`.
+  There is no finiteness, separation, reducedness, or irreducibility hypothesis on V.
+- “U times over Spec K V”: `pullback f g`, for the two structure morphisms.
+- “projection to V”: `pullback.snd f g`.
+- “induces a bijection between irreducible components”: `Set.BijOn`
+  `(Set.image (pullback.snd f g))` from `irreducibleComponents ↥(pullback f g)`
+  to `irreducibleComponents V`. `BijOn` asserts that images are components,
+  the image assignment is injective on components, and every component of V
+  is such an image. This specifies the projection-induced map, rather than merely
+  asserting that the two component sets admit an arbitrary equivalence.
 
-Step 1 uses the exact statements of `def-pc-geometrically-irreducible` (irreducibility after every field extension), `def-weil-scheme-over-base` (schemes and structure morphisms), `def-pc-fibre-product` (the product and projections), and `def-weil-irreducible-components` (maximal irreducible closed subsets). These citations support forming the inverse image over a component and taking its irreducible closure. Step 2 uses the component maximality statement and the fibre-product projection; it identifies the image component and proves the two constructions are inverse. The steps are non-elementary because they are the substance of Tag 038F, rather than one-line consequences of the definitions. Every cited node is listed in `proof_deps`, and every citation quote is copied verbatim into `citations.json`.
+Dependency declarations read and used:
 
-I checked the hypotheses explicitly: `K` is a field, `U` is geometrically irreducible, `V` is an arbitrary `K`-scheme, and the product is over `Spec K`; no quasi-compactness, separatedness, or nonemptiness hypothesis was added. The edge cases `U = Spec K` and `V = Spec K` reduce to the identity correspondence on components, while an empty `V` has no irreducible components on either side. The only correction to the imported node was adding the missing proof and its dependency accounting; the statement and blueprint fields were unchanged.
+- `def-pc-geometrically-irreducible`: `AlgebraicGeometry.GeometricallyIrreducible`,
+  Mathlib.AlgebraicGeometry.Geometrically.Irreducible, defining geometrically
+  irreducible fibres after arbitrary field-valued base change.
+- `def-weil-scheme-over-base`: `AlgebraicGeometry.Scheme.Over`,
+  Mathlib.AlgebraicGeometry.Over, with structure morphism notation `↘`.
+- `def-pc-fibre-product`: `CategoryTheory.Limits.pullback` and `pullback.snd`,
+  Mathlib.CategoryTheory.Limits.Shapes.Pullback.HasPullback; existence for schemes
+  is supplied by Mathlib.AlgebraicGeometry.Pullbacks, transitively imported.
+- `def-weil-irreducible-components`: `irreducibleComponents`,
+  Mathlib.Topology.Irreducible, the set of maximal nonempty irreducible subsets.
+
+The dependencies are Mathlib leaves with `mathlib_match` records, which are usable
+as written. Their signatures and docstrings were read in the pinned Mathlib source.
+The declaration docstring carries both DAG proof steps and the nodes each uses.
+
+Source checked: https://stacks.math.columbia.edu/tag/038F, Lemma 33.8.4 and its proof.
+The local literature/stacks-project/varieties.tex is absent on this machine;
+the authoritative online tag agrees with the node, hypothesis by hypothesis.
+
+Edge cases checked: V empty gives an empty product and empty component sets;
+U empty is excluded by geometric irreducibility, since irreducibility is nonempty;
+U = Spec K gives the identity correspondence; V reducible or non-Noetherian is
+allowed. No restriction on characteristic occurs. The explicit arbitrary universe
+u accommodates the field and both schemes together (raising the common universe
+allows arbitrary sizes); there are no auto-bound variables.
+
+Searches for an existing declaration:
+
+- msearch.py leanfinder, “projection from product with geometrically irreducible
+  scheme over field induces bijection on irreducible components”: eight related
+  results, principally PointsPi and Pullback.carrierEquiv, no exact statement.
+- msearch.py loogle, `AlgebraicGeometry.Scheme.Hom.irreducibleComponentsEquiv`:
+  three results (the equivalence and image/preimage formulas). Its full signature
+  requires an explicit `IsOpenMap` hypothesis for a general geometrically
+  irreducible morphism, and does not state this field-product specialization.
+- msearch.py grep, `irreducibleComponentsEquiv|irreducible.*product`,
+  AlgebraicGeometry: only the general equivalence in Geometrically/Irreducible.lean.
+- rg in WeilConjectures and lean/Sheaf for
+  `irreducibleComponentsEquiv|product.*[Ii]rreducible|[Ii]rreducible.*[Pp]roduct`:
+  unrelated polynomial/representation/tensor-product hits in WeilConjectures,
+  none matching this statement, and no matching declaration in lean/Sheaf.
+- grep for the item id in WeilConjectures: no result.
+- rg for the item id or irreducibleComponentsEquiv in dag/lean_names_upstream.json:
+  no result. The proposed declaration name is new in the sources.
+
+Validation: server single-file compilation and deliver2.py --no-push dry run
+are performed before handoff. No mathematical node fault or disputed statement found.
+
+## Second reading by M1
+
+I reread the node and the Lean file line by line against Stacks Tag 038F (Lemma 33.8.4).
+The source says: a field `k`; schemes `X`, `Y` over `k`; `X` geometrically
+irreducible; and the projection `X ×ₖ Y → Y` induces a bijection on irreducible
+components. The node instantiates these as follows, and the Lean renders each item:
+
+- `K` is `(K : Type u) [Field K]`.
+- `U` and `V` are `(U V : Scheme.{u})`, with
+  `[U.Over (Spec (CommRingCat.of K))]` and
+  `[V.Over (Spec (CommRingCat.of K))]`; these are exactly schemes over `Spec K`.
+- Geometric irreducibility is the hypothesis
+  `[GeometricallyIrreducible (U ↘ Spec (CommRingCat.of K))]`.
+- The structure maps are `f := U ↘ Spec (CommRingCat.of K)` and
+  `g := V ↘ Spec (CommRingCat.of K)`.
+- The fibre product is `pullback f g`, and its projection to `V` is
+  `pullback.snd f g`.
+- The conclusion is
+  `Set.BijOn (Set.image (pullback.snd f g))
+  (irreducibleComponents ↥(pullback f g)) (irreducibleComponents V)`,
+  which says precisely that projection carries the product's irreducible
+  components bijectively onto those of `V`.
+
+No hypothesis is added: `V` has no finiteness, separation, reducedness, or
+irreducibility assumption. The conclusion has the same direction and quantifier
+content as the source. The common universe parameter is harmless: any given
+objects can be lifted to a common universe, and the statement does not restrict
+characteristic.
+
+I checked edge cases. If `V` is empty, both component sets are empty. If
+`U = Spec K`, the projection is the identity correspondence. Geometric
+irreducibility supplies nonemptiness of `U`; no separate nonemptiness assumption
+is present. Reducible or non-Noetherian `V` remains allowed, and characteristic
+is unrestricted.
+
+Searches found no existing project or source declaration: LeanFinder found only
+related `pointsPi` and pullback carrier results; Loogle found the general
+`AlgebraicGeometry.Scheme.Hom.irreducibleComponentsEquiv`, which requires an
+explicit open-map hypothesis; grep found only that general theorem in
+`Mathlib/AlgebraicGeometry/Geometrically/Irreducible.lean`. Searches of
+`WeilConjectures/`, `lean/Sheaf/`, and `dag/lean_names_upstream.json` found no
+matching declaration. Thus this module is required and uses the dependency
+notions directly; no new definition or dependency module is needed.
+
+The worker report incorrectly said the local Stacks source was unavailable. I
+verified the authoritative Tag 038F page online; this factual report error does
+not affect the Lean statement or node fields, so no code or node repair was
+needed. Compilation with `scompile.py` is clean (the only permitted warning is
+ the theorem's `sorry`).
