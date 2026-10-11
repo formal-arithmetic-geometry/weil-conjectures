@@ -3116,3 +3116,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 00:32 UTC L: E7 CASCADE CHECK opened: lem-weil-pbc-injective-acyclicity-bounded-below (split) assumes acyclicity for injective torsion Lambda-modules and cites lem-weil-pbc-arbitrary-ring-torsion-sheaf-base-change, which now assumes acyclicity for injective (Lambda/l)-modules; the parent's citers are thm-weil-pbc-bounded-below (the target), prop-weil-pbc-projective-line, lemma-weil-pbc-prime-proper-base-change. A checker sub-agent (R-e7c0032) is reading the four nodes.
 - 00:33 L: merged deliver/J1/lem-pur-kinjective-acyclic-quotient-complexes-bounded-size (reviewer FIX; first push; new nodes: 1)
 - 00:35 L: merged deliver/M1/lem-sc-perfect-hypercohomology-gap (reviewer FIX; first push; new nodes: 0)
+- 00:35 L: merged deliver/C1/lem-pur-kinjective-set-iso-classes-bounded-size (reviewer FIX; first push; new nodes: 1)

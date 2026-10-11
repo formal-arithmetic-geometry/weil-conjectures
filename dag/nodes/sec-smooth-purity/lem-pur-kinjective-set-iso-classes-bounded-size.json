@@ -21,9 +21,51 @@
  "stmt_deps": [
   "def-sp-grothendieck-abelian"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For every proper subobject $M'\\subsetneq M$, the generator property of $U$ gives a morphism $\\varphi_{M'}:U\\to M$ whose image is not contained in $M'$. The coproduct map $\\bigoplus_{M'\\subsetneq M}U\\to M$ induced by these morphisms is an epimorphism: if its image were contained in a proper subobject $N\\subsetneq M$, then the summand indexed by $N$ would have image contained in $N$, contradicting its choice. The index set is the set of proper subobjects of $M$, so it has cardinality at most $|M|\\le\\kappa$.",
+   "uses": [
+    "def-sp-grothendieck-abelian"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/injectives.tex",
+    "place": "Lemma lemma-set-iso-classes-bounded-size, proof"
+   }
+  },
+  {
+   "text": "For each cardinal $\\lambda\\le\\kappa$, the coproduct $U^{(\\lambda)}$ exists by the small-colimit hypothesis in the Grothendieck-abelian definition. By [lem-pur-kinjective-set-of-subobjects], the subobjects of $U^{(\\lambda)}$ form a set, and each quotient of $U^{(\\lambda)}$ is determined up to isomorphism by the kernel of a quotient map. Since the cardinals $\\lambda\\le\\kappa$ form a set, the union of these sets of quotient isomorphism classes is a set.",
+   "uses": [
+    "def-sp-grothendieck-abelian",
+    "lem-pur-kinjective-set-of-subobjects"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/injectives.tex",
+    "place": "Lemma lemma-set-iso-classes-bounded-size, proof"
+   }
+  },
+  {
+   "text": "By the first step, every object $M$ with $|M|\\le\\kappa$ is one of the quotients considered in the second step. Therefore the isomorphism classes of all such $M$ form a set.",
+   "uses": [
+    "def-sp-grothendieck-abelian"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/injectives.tex",
+    "place": "Lemma lemma-set-iso-classes-bounded-size, proof"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sp-grothendieck-abelian",
+  "lem-pur-kinjective-set-of-subobjects"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/injectives.tex",
+  "place": "Lemma lemma-set-iso-classes-bounded-size"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -48,12 +90,28 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-pur-kinjective-degreewise-existence",
   "by": "worker",
   "date": "2026-10-11"
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-def-sf-operations"
+ "unit": "sk-def-sf-operations",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-pur-kinjective-set-iso-classes-bounded-size",
+  "worker": "stage1",
+  "summary": "Split the Stacks lemma into the generator-quotient construction and the set-theoretic classification of quotients. No auxiliary node is needed: each step is a short argument from the Grothendieck-abelian definition, and the item is now marked split.",
+  "blueprint": "Realizes the Theorem 079P step choosing representatives of bounded-size objects, via the proof of Lemma lemma-set-iso-classes-bounded-size.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-sib0034",
+  "group": "C1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-sib0034 (reviewer sub-agent of L); spot-checked: Statement = Stacks lemma-set-iso-classes-bounded-size. Step 1 is the Stacks argument (one phi_{M'} per proper subobject; coproduct epi; <= |M| summands), generator clause of def-sp-grothendieck-abelian. Step 2 cites set-of-subobjects for well-poweredness (C1 satisfied) plus small coproducts; Step 3 (1)=>(2). Citers: lem-pur-kinjective-degreewise-existence uses exactly (2) termwise (C4 ok); no duplicate node (grep bounded-size/subobject/generator). FIX more, RETURN less: class (c) new node lem-pur-kinjective-set-of-subobjects is Mathlib CategoryTheory.wellPowered_of_isSeparator (Generator/Basic.lean:800; HasPullbacks/Balanced inferred from Abelian): made it a Mathlib leaf (status mathlib, mathlib_match, reviewer grep recorded); second reading missed this.; 1 file(s) fixed by the reviewer"
+ }
 }

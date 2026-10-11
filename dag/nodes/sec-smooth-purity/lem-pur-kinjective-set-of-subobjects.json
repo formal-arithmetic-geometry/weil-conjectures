@@ -1,0 +1,72 @@
+{
+ "id": "lem-pur-kinjective-set-of-subobjects",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-derived-pullback-tensor-hom",
+   "place": "Theorem 079P, choice of a set of representatives of bounded-size objects",
+   "via": [
+    "lem-pur-kinjective-degreewise-existence"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Subobjects form a set in an abelian category with a generator",
+ "statement": "Let $\\mathcal A$ be an abelian category [def-sp-abelian] with a generator $U$ (generator as in [def-sp-grothendieck-abelian]). For every object $X$ of $\\mathcal A$, the subobjects of $X$ form a set.",
+ "source": {
+  "document": "literature/stacks-project/injectives.tex",
+  "place": "Lemma lemma-set-of-subobjects"
+ },
+ "stmt_deps": [
+  "def-sp-abelian",
+  "def-sp-grothendieck-abelian"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "set of subobjects in an abelian category with a generator",
+   "results": "CategoryTheory.IsGrothendieckAbelian.wellPowered and generator infrastructure; no declaration with this exact source-level statement",
+   "date": "2026-10-11",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "wellPowered|subobjects.*Set|Subobject.*Set",
+   "results": "WellPowered infrastructure in Mathlib/CategoryTheory/Subobject and generator files; no exact theorem for an abelian category with a generator",
+   "date": "2026-10-11",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "WellPowered generator subobject",
+   "results": "loogle: Unknown identifier `WellPowered`",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'wellPowered_of_is' Mathlib/CategoryTheory; sed -n 796,801p Mathlib/CategoryTheory/Generator/Basic.lean",
+   "results": "Mathlib/CategoryTheory/Generator/Basic.lean:800 theorem wellPowered_of_isSeparator [HasPullbacks C] [Balanced C] (G : C) (hG : IsSeparator G) : WellPowered.{v₁} C; also IsGrothendieckAbelian.wellPowered (Abelian/GrothendieckCategory/Basic.lean:106)",
+   "date": "2026-10-11",
+   "verdict": "exact match (reviewer R-sib0034)"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "CategoryTheory.wellPowered_of_isSeparator",
+  "file": "Mathlib/CategoryTheory/Generator/Basic.lean",
+  "line": 800,
+  "how": "exact match: for [Category.{v} C] [Abelian C] (HasPullbacks and Balanced are inferred instances of Abelian, not a second step) and a generator G (IsSeparator G, the generator clause of def-sp-grothendieck-abelian), WellPowered.{v} C says Subobject X is v-small for every X, i.e. the subobjects of X form a set"
+ },
+ "status": "mathlib",
+ "created": {
+  "item": "lem-pur-kinjective-set-iso-classes-bounded-size",
+  "by": "worker",
+  "date": "2026-10-11"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-operations"
+}
