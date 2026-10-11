@@ -140,5 +140,23 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-lcf2752 (reviewer sub-agent of L); spot-checked: C1/C4: step 1 pqf-def-locnoeth affine Noetherian cover; step 2 leaf noetherianSpace_of_isAffine read at Noetherian.lean:181 (exact) + lem-sc-noetherian-finite-irreducible-components; step 3 new injection node (true: closure argument) + finiteness; statement matches the use in lem-sc-hilbert-nowhere-dense-dimension-drop. D: no cycle. FIX more, RETURN less: B search record: added a grep entry to lem-sc-components-open-injection naming preimage_mem_irreducibleComponents / subset_closure_inter_of_isPreirreducible_of_isOpen, which the delivery's searches (and second reading) missed.; 1 file(s) fixed by the reviewer"
  },
- "lead_note": "2026-10-10 L (R-lcf2752): Whole statement is not one Mathlib declaration (no LocallyFinite irreducibleComponents). lem-sc-components-open-injection: clause 1 is preimage_mem_irreducibleComponents (Topology/Irreducible.lean:473), injectivity from subset_closure_inter_of_isPreirreducible_of_isOpen (:325); recorded in its mathlib_searches for the later split."
+ "lead_note": "2026-10-10 L (R-lcf2752): Whole statement is not one Mathlib declaration (no LocallyFinite irreducibleComponents). lem-sc-components-open-injection: clause 1 is preimage_mem_irreducibleComponents (Topology/Irreducible.lean:473), injectivity from subset_closure_inter_of_isPreirreducible_of_isOpen (:325); recorded in its mathlib_searches for the later split.",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.LocallyNoetherianComponentsLocallyFinite",
+  "declaration": "AlgebraicGeometry.exists_open_finite_irreducibleComponents",
+  "file": "lean/Sheaf/AlgebraicGeometry/LocallyNoetherianComponentsLocallyFinite.lean",
+  "statement": "theorem exists_open_finite_irreducibleComponents (X : Scheme.{u}) [IsLocallyNoetherian X] (x : X) : ∃ U : X.Opens, x ∈ U ∧ {Z : Set X | Z ∈ irreducibleComponents X ∧ (Z ∩ (U : Set X)).Nonempty}.Finite",
+  "branch": "sheaf-dag",
+  "by": "K1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-lcl1127",
+  "group": "K1",
+  "result": "pass",
+  "note": "X : Scheme.{u} unrestricted; [IsLocallyNoetherian X] = pqf-def-locnoeth (not hollow: inferInstance fails); (x : X); ∃ U : X.Opens, x ∈ U = open nbhd; {Z | Z ∈ irreducibleComponents X ∧ (Z ∩ U).Nonempty}.Finite = node's inline locally-finite clause; compiled proof that it implies Mathlib LocallyFinite (fun Z : irreducibleComponents X => Z.1); not a Mathlib declaration (no LocallyFinite+irreducibleComponents); true (Tag 0052 on affine Noetherian opens)"
+ }
 }
