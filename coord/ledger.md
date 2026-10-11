@@ -4694,3 +4694,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 13:01 L: merged deliver/C1/lem-weil-pbc-popescu-lift-solution (stage 2; reviewer FIX; first push; Sheaf.RingTheory.PopescuLiftSolution Algebra.canBePopescuResolved_of_quotient_eighth_powers)
 - 13:02 L: merged deliver/M1/lem-weil-pbc-popescu-lift-nilpotent (stage 2; reviewer FIX; first push; Sheaf.Algebra.PopescuLiftNilpotent Algebra.popescu_lift_nilpotent)
 - 13:02 L: merged deliver/G1/lem-weil-pbc-power-series-onto-completion (stage 2; reviewer PASS; first push; Sheaf.RingTheory.PowerSeriesOntoCompletion MvPowerSeries.exists_surjective_toAdicCompletion)
+- 13:02 L: merged deliver/C1/lem-weil-pbc-power-series-normal-domain (stage 2; reviewer FIX; first push; Sheaf.RingTheory.PowerSeriesNormalDomain PowerSeries.noetherian_normal_domain)

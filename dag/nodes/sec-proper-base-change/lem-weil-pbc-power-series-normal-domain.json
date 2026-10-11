@@ -176,5 +176,24 @@
   "worker": "stage1",
   "summary": "Split following the proof of Stacks 0BI0 (algebra.tex 8149-8174), all tags checked in tags/tags (0BI0, 00GW definition-almost-integral, 00GX lemma-almost-integral, 0306 lemma-Noetherian-power-series). Step 1: Noetherian (existing leaf lem-weil-pbc-power-series-noetherian) and domain (existing leaf lem-weil-pbc-power-series-domain; the source omits that R[[x]] is a domain). Step 2: the embedding Frac(R[[x]]) into K((x)), which the source leaves implicit, made explicit with three new Mathlib leaves (def-weil-pbc-laurent-series, lem-weil-pbc-laurent-series-field, lem-weil-pbc-fraction-field-lift). Step 3: the lowest-term argument as a claim for any nonzero integral v, with 00GX split into two new leaves (def-weil-pbc-almost-integral for 00GW, lem-weil-pbc-almost-integral-integral for 00GX parts 2 and 3); the source's 'by the same lemma' also needs normality of R, written out. Step 4: the source's induction set up as P(N), using the subring property of integral elements (def-weil-pbc-integral-closure) that the source leaves implicit. Step 5: conclusion by injectivity of the embedding. No slopmaster2 declaration states the item (grep of WeilConjectures for the id, IsIntegrallyClosed with PowerSeries, LaurentSeries/IsAlmostIntegral: none relevant); Mathlib has no IsIntegrallyClosed (PowerSeries R) (searches recorded on the item).",
   "blueprint": "The item is not a blueprint node; its ancestor lem-weil-pbc-normal-constant-generic reaches it through the chain in blueprint.from.via, at the sentence of the proof of Algebra 032Q 'By Lemma lemma-power-series-over-Noetherian-normal-domain we see that $R'[[x]]$ is a normal domain'. Steps 1-5 realize that cited lemma entirely: steps 1 and 5 its conclusion (Noetherian normal domain), steps 2-4 the argument through Laurent series and almost integrality that the sentence takes from 0BI0. blueprint_refs.py search (almost integral, 00GX, 0BI0, Laurent series, power series normal, integrally closed power, Noetherian normal domain power, completely normal): no blueprint node states the item, so same_as = []."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.PowerSeriesNormalDomain",
+  "declaration": "PowerSeries.noetherian_normal_domain",
+  "file": "lean/Sheaf/RingTheory/PowerSeriesNormalDomain.lean",
+  "statement": "theorem noetherian_normal_domain (R : Type u) [CommRing R] [IsNoetherianRing R] [IsDomain R] [IsIntegrallyClosed R] : IsNoetherianRing (PowerSeries R) ∧ IsDomain (PowerSeries R) ∧ IsIntegrallyClosed (PowerSeries R)",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-psd1314"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-psd1314",
+  "group": "C1",
+  "result": "fix",
+  "note": "R:Type u CommRing; IsNoetherianRing R = Noetherian; IsDomain+IsIntegrallyClosed R = normal domain (STATE NORMAL RING); R[[x]] = PowerSeries R (one variable); conclusions IsNoetherianRing/IsDomain/IsIntegrallyClosed (PowerSeries R) = Noetherian, domain, integral fraction-field elements lie in R[[x]]; no extra hypothesis or clause"
  }
 }
