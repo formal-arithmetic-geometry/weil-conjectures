@@ -1,11 +1,11 @@
 # Work queue
 
-541 items; claim with `tools/claim.py next <group> [--stage N]`.
+544 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (541)
+## Stage 2: nodes to state (544)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -13,7 +13,6 @@
 | `pqf-def-coherent` | 1 | state |
 | `def-nagata-final-noetherian-base-system` | 2 | state |
 | `def-sc-group-scheme` | 2 | state |
-| `def-sp-convergence` | 2 | state |
 | `def-nagata-fixed-base-separated-stage` | 6 | state |
 | `cor-galois-lisse-representations` | 1 | state |
 | `lem-pc-arrow-iso-pullback-counit` | 1 | state |
@@ -23,6 +22,7 @@
 | `lem-pc-global-sections-separable` | 1 | state |
 | `lem-pc-module-pullback-identity-composition` | 1 | state |
 | `lem-pc-zero-scheme-adjunction-base-change` | 1 | state |
+| `lem-pqf-leray-five-term` | 1 | state |
 | `lem-sc-affine-complement-finite-on-integral-curve` | 1 | state |
 | `lem-sc-ample-on-reduction-noetherian` | 1 | state |
 | `lem-sc-ample-square-zero-thickening` | 1 | state |
@@ -43,6 +43,7 @@
 | `lem-sc-regular-meromorphic-section-exists` | 1 | state |
 | `lem-sc-zero-dim-noetherian-affine` | 1 | state |
 | `lem-sc-zero-dim-noetherian-finite-discrete` | 1 | state |
+| `lem-sp-page-induction` | 1 | state |
 | `lem-weil-derived-limit-roos-complex` | 1 | state |
 | `lem-weil-pbc-constructible-module-limit-descent` | 1 | state |
 | `lem-weil-pbc-constructible-module-noetherian-descent` | 1 | state |
@@ -73,7 +74,6 @@
 | `lem-weil-pbc-graded-module-away-restriction` | 1 | state |
 | `lem-weil-pbc-higher-direct-image-sheafified-presheaf` | 1 | state |
 | `lem-weil-pbc-ideal-module-product-stalk` | 1 | state |
-| `lem-weil-pbc-injective-sheaf-cech-acyclic` | 1 | state |
 | `lem-weil-pbc-integral-closure-finite-fibre-choose-g` | 1 | state |
 | `lem-weil-pbc-integral-closure-finite-fibre-image-clopen` | 1 | state |
 | `lem-weil-pbc-integral-closure-finite-fibre-quasi-finite` | 1 | state |
@@ -82,7 +82,6 @@
 | `lem-weil-pbc-jacobi-zariski-quotient-smooth` | 1 | state |
 | `lem-weil-pbc-kahler-differentials-mod-power-ideal` | 1 | state |
 | `lem-weil-pbc-koszul-differential` | 1 | state |
-| `lem-weil-pbc-krull-intersection-localization` | 1 | state |
 | `lem-weil-pbc-lft-over-field-isolated-point-residue-finite` | 1 | state |
 | `lem-weil-pbc-lift-idempotent-upstairs` | 1 | state |
 | `lem-weil-pbc-lift-projective-module-etale` | 1 | state |
@@ -95,12 +94,9 @@
 | `lem-weil-pbc-linear-equation-localization-polynomial` | 1 | state |
 | `lem-weil-pbc-lisse-generic-kernel` | 1 | state |
 | `lem-weil-pbc-local-artinian-basis-when-flat` | 1 | state |
-| `lem-weil-pbc-local-completion-quotient` | 1 | state |
 | `lem-weil-pbc-local-dimension-zero-henselian` | 1 | state |
-| `lem-weil-pbc-local-nagata-domain-analytically-unramified` | 1 | state |
 | `lem-weil-pbc-local-ring-colimit-essentially-finite-type-over-z` | 1 | state |
 | `lem-weil-pbc-localization-colimit-principal-localizations` | 1 | state |
-| `lem-weil-pbc-localization-finite-gl-dim` | 1 | state |
 | `lem-weil-pbc-localization-of-regular-ring` | 1 | state |
 | `lem-weil-pbc-localization-prime-residue-field-iso` | 1 | state |
 | `lem-weil-pbc-localization-regular` | 1 | state |
@@ -508,6 +504,9 @@
 | `thm-pqf-zmt-factorization` | 1 | state |
 | `thm-sc-proper-finite-fibre-finite-neighbourhood` | 1 | state |
 | `thm-sp-grothendieck` | 1 | state |
+| `thm-sp-if-e1` | 1 | state |
+| `thm-sp-spectral-object-yields` | 1 | state |
+| `thm-sp-truncation-e2` | 1 | state |
 | `lem-exc-coinduced-discrete-embedding` | 2 | state |
 | `lem-exc-etale-algebra-lift` | 2 | state |
 | `lem-kun-etale-lfp` | 2 | state |
@@ -536,6 +535,9 @@
 | `lem-sc-valuation-closed-fibre-section-vanishing` | 2 | state |
 | `lem-sc-valuation-proper-coherent-sections` | 2 | state |
 | `lem-sc-very-ample-separation-criterion` | 2 | state |
+| `lem-sp-derived-couple-functoriality` | 2 | state |
+| `lem-sp-edge-collapse` | 2 | state |
+| `lem-sp-filtered-homotopy-spectral-sequence` | 2 | state |
 | `lem-weil-pbc-finite-type-lift-nilpotent` | 2 | state |
 | `lem-weil-pbc-finite-type-z-g-ring` | 2 | state |
 | `lem-weil-pbc-henselian-finite-type-product-decomposition` | 2 | state |
@@ -546,12 +548,13 @@
 | `pqf-lem-qf-locqf-qc` | 2 | state |
 | `sbc-lem-higher-direct-image-limit` | 2 | state |
 | `thm-sc-proper-cohomology` | 2 | state |
+| `thm-sp-half-plane-convergence` | 2 | state |
 | `lem-pc-essentially-constant-ind-hom-colimit` | 3 | state |
 | `lem-sc-normalization-properties` | 3 | state |
 | `lem-pc-essentially-constant-pro-hom-colimit` | 4 | state |
 | `lem-pur-essential-constant-pro-criterion-05py` | 4 | state |
 
-Not open yet: 40 nodes that wait for stage 1, 738 nodes that wait for a statement dependency.
+Not open yet: 40 nodes that wait for stage 1, 729 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
