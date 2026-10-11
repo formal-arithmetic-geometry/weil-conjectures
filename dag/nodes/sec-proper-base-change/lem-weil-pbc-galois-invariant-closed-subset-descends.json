@@ -228,5 +228,23 @@
   "by": "L",
   "result": "accepted",
   "note": "10 steps follow Stacks 038B with the affine chart, the invariance of the radical ideal, the finite Galois subextension (existing leaf), extension of automorphisms (new 0BME leaf, line 233 verified), fixed field (new 09I1/09DW leaf, line 340 verified), G-invariants of A tensor M (new unsplit node), the radical identity, and gluing via T = p(T-bar) with p surjective. Tags 038B, 09I1, 09DW, 0BME, 0BMK verified."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GaloisInvariantClosedSubsetDescends",
+  "declaration": "AlgebraicGeometry.exists_closed_subset_of_galois_invariant",
+  "file": "lean/Sheaf/AlgebraicGeometry/GaloisInvariantClosedSubsetDescends.lean",
+  "statement": "theorem exists_closed_subset_of_galois_invariant (k K : Type u) [Field k] [Field K] [Algebra k K] [IsGalois k K] (X : Scheme.{u}) [X.Over (Spec (.of k))] (Tbar : Set ↥(pullback (X ↘ Spec (.of k)) (Spec.map (CommRingCat.ofHom (algebraMap k K))))) (hclosed : IsClosed Tbar) (hinvariant : ∀ σ : K ≃ₐ[k] K, (baseChangeMap (X ↘ Spec (.of k)) (specAlgEquivOver σ)) '' Tbar = Tbar) : ∃ T : Set X, IsClosed T ∧ (pullback.fst (X ↘ Spec (.of k)) (Spec.map (CommRingCat.ofHom (algebraMap k K)))) ⁻¹' T = Tbar",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-gic1054",
+  "group": "H1",
+  "result": "pass",
+  "note": "k,K Type u fields, Algebra k K, IsGalois k K (no FiniteDimensional: infinite allowed); X.Over Spec k; X_K = pullback (X ↘ Spec k) (Spec.map algebraMap); Tbar closed; image-invariance under baseChangeMap _ (specAlgEquivOver σ) for all σ : K ≃ₐ[k] K (same action spelling as landed F1 7930439e5); ∃ T closed with pullback.fst ⁻¹' T = Tbar"
  }
 }
