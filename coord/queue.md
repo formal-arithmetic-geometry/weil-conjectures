@@ -1,11 +1,11 @@
 # Work queue
 
-145 items; claim with `tools/claim.py next <group> [--stage N]`.
+139 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (145)
+## Stage 2: nodes to state (139)
 
 | node | distance to Mathlib | kind | blockers |
 |---|---|---|---|
@@ -77,7 +77,6 @@
 | `lem-weil-pbc-symmetric-product-over-base` | 1 | state | 0 |
 | `lem-weil-pbc-symmetric-product-surjective` | 1 | state | 0 |
 | `lem-weil-pbc-thickening-systems-dictionary` | 1 | state | 0 |
-| `lem-weil-pbc-tor-ideal-kernel-naturality` | 1 | state | 0 |
 | `lem-weil-pbc-tor-long-exact-first-variable` | 1 | state | 0 |
 | `lem-weil-pbc-tor-one-surjective-change-rings` | 1 | state | 0 |
 | `lem-weil-pbc-tor-one-surjective-flat-middle` | 1 | state | 0 |
@@ -86,21 +85,16 @@
 | `lem-weil-pbc-triangle-morphism-extension` | 1 | state | 0 |
 | `lem-weil-pbc-trivial-kan-homotopy-equivalence` | 1 | state | 0 |
 | `lem-weil-pbc-truncated-coskeleton-finite-limits` | 1 | state | 0 |
-| `lem-weil-pbc-truncation-step-ses` | 1 | state | 0 |
 | `lem-weil-pbc-universal-thickening-flat-base-change` | 1 | state | 0 |
 | `lem-weil-pbc-universal-thickening-open-restriction` | 1 | state | 0 |
 | `lem-weil-pbc-unramified-base-change-open` | 1 | state | 0 |
 | `lem-weil-pbc-vanishing-descends-retract` | 1 | state | 0 |
 | `lem-weil-pbc-zero-dimensional-base-change-points` | 1 | state | 0 |
 | `lem-weil-tower-split-envelope` | 1 | state | 0 |
-| `lemma-weil-pbc-chow-factorization` | 1 | state | 0 |
-| `lemma-weil-pbc-torsion-assembly` | 1 | state | 0 |
 | `lemma-weil-pbc-torsion-filtered-union` | 1 | state | 0 |
 | `prop-weil-pbc-composition-stability` | 1 | state | 0 |
 | `prop-weil-pbc-grothendieck-existence-proper` | 1 | state | 0 |
 | `thm-galois-fundamental` | 1 | state | 0 |
-| `thm-pqf-finite-iff-proper-finite-fibres` | 1 | state | 0 |
-| `thm-pqf-immersion-descent` | 1 | state | 0 |
 | `thm-pqf-zmt-factorization` | 1 | state | 0 |
 | `lem-exc-coinduced-continuous-acyclic` | 2 | state | 0 |
 | `lem-pc-affine-perfect-hom-colimit` | 2 | state | 0 |
