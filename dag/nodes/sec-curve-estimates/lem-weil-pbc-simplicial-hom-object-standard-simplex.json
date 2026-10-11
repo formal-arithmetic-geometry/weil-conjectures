@@ -167,5 +167,27 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of M1; spot-checked by L: L: reviewed in full by a reviewer sub-agent (FIX: citation of proper-faces added to step 3): 0177/018V read, 5 steps checked, small cases n = 0, 1, 2"
  },
- "lead_note": "2026-10-10 L: the statement was changed typographically ([m], [n] written as \\lbrack m\\rbrack) because the preflight CITE regex read [n-1] as a node citation; the report did not name it (E7, minor). Regex fixed in the tools at 13:35."
+ "lead_note": "2026-10-10 L: the statement was changed typographically ([m], [n] written as \\lbrack m\\rbrack) because the preflight CITE regex read [n-1] as a node citation; the report did not name it (E7, minor). Regex fixed in the tools at 13:35.",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SimplicialHomStandardSimplex",
+  "declaration": "AlgebraicGeometry.Scheme.simplicial_hom_standard_simplex",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.simplicial_hom_standard_simplex",
+   "AlgebraicGeometry.Scheme.simplicial_hom_boundary_matching"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/SimplicialHomStandardSimplex.lean",
+  "statement": "theorem simplicial_hom_standard_simplex {X : Scheme.{u}} (K : SimplicialObject (FormalCoproduct.{w} X.Etale)) (n : ℕ) : (∀ m : ℕ, Finite ((Δ[n] : SSet.{t}).obj (op ⦋m⦌)) ∧ Nonempty ((Δ[n] : SSet.{t}).obj (op ⦋m⦌))) ∧ SSet.Finite (Δ[n] : SSet.{t}) ∧ (∀ (m : ℕ) (s : (Δ[n] : SSet.{t}).obj (op ⦋m⦌)), s ∈ (Δ[n] : SSet.{t}).nonDegenerate m ↔ Function.Injective s) ∧ (∃ f : SimplicialHomFamily K (Δ[n] : SSet.{t}) (K.obj (op ⦋n⦌)), (∀ (m : ℕ) (s : (Δ[n] : SSet.{t}).obj (op ⦋m⦌)), f.val m s = K.map (SSet.stdSimplex.objEquiv s).op) ∧ (simplicialHomFamilyFunctor K Δ[n]).IsRepresentedBy f) ∧ (∀ (W : FormalCoproduct.{w} X.Etale) (f : SimplicialHomFamily K Δ[n] W), ∃! g : W ⟶ K.obj (op ⦋n⦌), g = f.val n (SSet.stdSimplex.objEquiv.symm (𝟙 ⦋n⦌)) ∧ ∀ (m : ℕ) (s : (Δ[n] : SSet.{t}).obj (op ⦋m⦌)), f.val m s = g ≫ K.map (SSet.stdSimplex.objEquiv s).op)",
+  "branch": "sheaf-dag",
+  "by": "M1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "M1",
+  "result": "pass",
+  "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
+ }
 }
