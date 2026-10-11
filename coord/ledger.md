@@ -4036,3 +4036,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 09:33 L: merged deliver/J1/lem-weil-pbc-depth-drops-by-one (stage 2; reviewer PASS; first push; Sheaf.RingTheory.DepthQuotSMulTop IsLocalRing.depth_quotSMulTop_of_isSMulRegular)
 - 09:33 L: merged deliver/G1/lem-weil-pbc-cohen-power-series-presentation (stage 2; reviewer FIX; first push; Sheaf.RingTheory.CohenPowerSeriesPresentation IsLocalRing.cohen_power_series_presentation)
 - 09:33 L: merged deliver/H1/lem-weil-pbc-degree-p-extension-regular (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.DegreePExtensionRegular Algebra.isRegularRing_quotient_X_pow_sub_of_isUnit_derivation)
+- 09:34 L: merged deliver/C1/lem-weil-pbc-coskeleton-free-homology-comparison (stage 2; reviewer PASS; first push; Sheaf.AlgebraicTopology.CoskeletonFreeHomologyComparison CategoryTheory.SimplicialObject.isIso_homologyMap_of_local_surjective_coskeletal)
