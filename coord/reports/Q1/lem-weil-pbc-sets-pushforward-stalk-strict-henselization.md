@@ -1,0 +1,70 @@
+## Worker report
+
+The item module states the complete node, with its original natural-language statement unchanged. It also writes the canonical fibre-product and site morphisms used by that statement. All theorem proofs are `sorry`; all definitions contain full data. The earlier sandbox theorem was replaced: it omitted qcqs, affine representatives and the actual component formula, had `True` in place of that formula, and used unavailable or ill-typed morphism expressions and statement `let` binders. No statement correction is needed because these were faults of that Lean attempt, not faults of the DAG node.
+
+Hypotheses and objects, in order:
+
+- Schemes and morphism: `{X Y : Scheme.{v}} (f : X ⟶ Y)`.
+- Quasi-compact and quasi-separated: `[QuasiCompact f] [QuasiSeparated f]`, the Mathlib properties named by the scheme conventions node.
+- Sheaf of sets on the small etale site: `H : Sheaf X.smallEtaleTopology (Type (v + 1))`.
+- Geometric point: `{Ω : Type v} [Field Ω] [IsAlgClosed Ω] (y : Spec (.of Ω) ⟶ Y)`.
+- Direct image: `(MorphismProperty.Over.pullback @Etale ⊤ f).sheafPushforwardContinuous (Type (v + 1)) (Y.smallGrothendieckTopology @Etale) (X.smallGrothendieckTopology @Etale)`. This is precomposition by base change, so its sections at V are exactly `H.obj.obj (op ((MorphismProperty.Over.pullback @Etale ⊤ f).obj V))`. The two topology spellings are definitionally equal; the general spelling is used where continuity instances expect it.
+- Affine pointed neighbourhoods: `ObjectProperty.FullSubcategory (fun n : (Scheme.pointSmallEtale y).fiber.Elements => IsAffine n.1.left)`. An object includes V, its geometric lift and the over-Y equality, and its property is precisely affineness; the formula quantifies over every such object.
+- C and Y^sh: the recorded `Scheme.strictHenselizationRing` and `Scheme.strictHenselizationScheme`, defined from the coordinate-ring colimit in the dependency module.
+- Canonical c_V and q: `Scheme.strictHenselizationNeighbourhoodMap y n` and `Scheme.strictHenselizationBaseMap y`, supplied by the dependency extension. The former transports the spectrum of a colimit coprojection along the small representative equivalence and the affine scheme/global-sections isomorphism. The latter chooses one affine neighbourhood's composite to Y; the named theorem `strictHenselizationNeighbourhoodMap_over` says every such composite is the same q.
+- X^sh and its projections: `pullback (Scheme.strictHenselizationBaseMap y) f`, with `pullback.fst` = f^sh and `pullback.snd` = p.
+- Inverse image p^-1 H: the recorded `Scheme.etaleSetPullback (pullback.snd ... f)`, with its existing sheaf-pullback adjunction unit.
+- The map to V ×_Y X: `Scheme.strictHenselizationBaseChangeMap f y n`, a `pullback.lift` with first component `pullback.fst ... f ≫ strictHenselizationNeighbourhoodMap y n` and second component p. Its named compatibility theorem uses the over-Y equality and `pullback.condition`.
+- σ_V: `Scheme.strictHenselizationSectionMap f y n`, a morphism in the X^sh etale site, from `Etale.mk (𝟙 X^sh)` to the pullback of V ×_Y X along p. Its two components are the preceding base-change map and `𝟙 X^sh`. Mathlib's `pullback.lift_snd` supplies the identity/over-X conditions, with no new postponed data.
+- Global sections: evaluation at `op (Scheme.Etale.mk (𝟙 X^sh))`.
+
+Conclusion clauses:
+
+1. `∀ t : (pointSmallEtale y).sheafFiber.obj (f_* H), ∃ n s, (pointSmallEtale y).toPresheafFiber n.obj.1 n.obj.2 (f_* H).obj s = t` says exactly that every germ has an affine pointed representative.
+2. `∃ Θ : stalk → sections, ...` supplies the comparison map. The first conjunct quantifies over every affine pointed n and every section s, and equates Θ of the germ with `p^-1 H` applied to `strictHenselizationSectionMap ... .op` on the adjunction-unit image of s. The second conjunct is `Function.Bijective Θ`. The final conjunct quantifies over *all* maps Θ' satisfying the same formula, without requiring Θ' bijective, and concludes `Θ' = Θ`. Thus uniqueness is for the stated formula, not merely among bijections.
+
+Recorded dependency declarations used:
+
+- `def-weil-pbc-scheme-conventions`: convention-only record; properties are `AlgebraicGeometry.QuasiCompact` and `AlgebraicGeometry.QuasiSeparated` in Mathlib's corresponding Morphisms modules (quasi-separated means quasi-compact diagonal).
+- `Mathlib.CategoryTheory.Sites.Sheaf`: `CategoryTheory.Sheaf` for `def-weil-pbc-etale-sheaf-of-sets`.
+- `Mathlib.FieldTheory.IsAlgClosed.Basic`: `IsAlgClosed`; geometric point is the inline scheme map recorded by `def-weil-geometric-point`.
+- `Mathlib.CategoryTheory.Elements` and `Mathlib.AlgebraicGeometry.Sites.EtalePoint`: `Functor.Elements`, `Scheme.pointSmallEtale`, the mathlib match of `def-weil-pbc-pointed-etale-neighbourhoods`.
+- `Sheaf.AlgebraicGeometry.StrictHenselization`: all recorded definitions of `def-weil-pbc-strict-henselization-limit`, in particular the ring, scheme, small diagram, canonical cone and affine-inclusion equivalence theorem; this delivery extends that module as explained below.
+- `Mathlib.CategoryTheory.Limits.Shapes.Pullback.HasPullback`: `pullback`, `pullback.fst`, `pullback.snd`, `pullback.lift` for `def-pc-fibre-product`.
+- `Sheaf.AlgebraicGeometry.EtaleSetInverseImageCompositionUnits`: recorded `AlgebraicGeometry.etaleSetInverseImageCompositionUnits`, whose underlying existing inverse image is `Scheme.etaleSetPullback` in `Sheaf.AlgebraicGeometry.EtaleSheaves`; the theorem uses the exact same `Functor.sheafPullbackConstruction.sheafAdjunctionContinuous` unit, not a new inverse-image notion.
+- `Mathlib.AlgebraicGeometry.Sites.Etale`: `Scheme.Etale`, `Scheme.smallEtaleTopology` for `def-weil-pbc-etale-site`.
+- `Mathlib.CategoryTheory.Sites.Point.Basic`: `GrothendieckTopology.Point.sheafFiber` and `toPresheafFiber`, with `Scheme.pointSmallEtale`, for `def-weil-pbc-geometric-stalks`.
+
+All dependency node statements and records were read, as were the source signatures and docstrings of their declarations. The Stacks source is absent from this local clone, so the proof of Tag 03Q9 was read directly at https://stacks.math.columbia.edu/tag/03Q9; it explicitly assumes qcqs and uses the affine-neighbourhood inverse limit and fibre products commuting with limits. The set-valued degree-zero continuity reading is the one explicitly given by this node's source (09YQ/09YU).
+
+Edge cases checked: f = identity gives the usual stalk/strict-henselization comparison. For X empty, H is forced by the empty covering to have singleton sections on the empty scheme; both sides are singleton, so there is no assumption of a point of X or a nonempty section set. Y empty admits no geometric point and the quantified statement is vacuous for the correct reason. The pointed-neighbourhood index is nonempty by the already-recorded cofilteredness theorem; the base-map definition uses that theorem's nonemptiness, not a new hypothesis. Arbitrary Ω and sheaf values are retained in the standard project universe encoding. No properness, finite type, affineness of X or Y, or field characteristic hypothesis has been added. There is no STATEMENT-DISPUTED flag.
+
+Searches made:
+
+- `msearch.py ... leanfinder "The stalk of an etale direct image of a sheaf of sets is sections on the strict henselization base change"`: eight unrelated structure-sheaf/manifold stalk results, no statement match.
+- `msearch.py ... loogle "CategoryTheory.GrothendieckTopology.Point.toPresheafFiber"`: twelve hits, providing the existing germ map and its colimit API, not the comparison theorem.
+- `msearch.py ... grep 'strictHenselization|strict_henselization' AlgebraicGeometry`: zero Mathlib hits.
+- `msearch.py ... leansearch "canonical maps from the strict henselization scheme to affine pointed etale neighbourhoods"`: service unavailable (HTTP Internal Server Error); no verdict is inferred from this failure.
+- `rg` for the item id in `/home/ubuntu/weil-src-slopmaster2/WeilConjectures`: no match. `rg` for strictHenselization in that source and in `lean/Sheaf/AlgebraicGeometry`: only the already-recorded project StrictHenselization construction. Source pushforward searches found unrelated divisor and cohomology infrastructure.
+- Mathlib grep of the sites/point modules located `toPresheafFiber`, `sheafFiber`, `sheafPushforwardContinuous` and the sheaf-pullback adjunction; affine-scheme grep found `Scheme.isoSpec` and its naturality.
+- `tools/blueprint_refs.py search 'strict henselization'`: three blueprint matches, including the existing strict-henselization definition; no new notion node is needed.
+
+Validation: both delivery modules compiled together on the server in dependency order, cleanly, in 3.6 seconds; only statement proofs are postponed. `deliver2.py Q1 lem-weil-pbc-sets-pushforward-stalk-strict-henselization --no-push` printed `OK (dry run)` (commit 1c47fedce): compiles and passes preflight except for the independent second-reading section, which the second reader must write. Nothing was pushed.
+
+## Dependency modules
+
+`def-weil-pbc-strict-henselization-limit`: the recorded module defines the spectrum of the small coordinate-ring colimit and its cone to spectra of global sections in the small representative model. It does not expose the legs to arbitrary affine pointed neighbourhoods or the morphism to the original base Y, so the earlier worker tried the ill-typed expression `Ysh ⟶ Y` as though it were a morphism. This dependency delivery retains every existing definition and statement, and extends the same module with `strictHenselizationAffineEquiv`, `strictHenselizationNeighbourhoodMap`, `strictHenselizationBaseNeighbourhood`, `strictHenselizationBaseMap`, and `strictHenselizationNeighbourhoodMap_over`. These expose precisely the canonical maps already part of the node's inverse-limit meaning. Only this dependency's `lean` record changes, including a note explaining the missing API; its statement, proof and all other node fields stay unchanged. The auxiliary base-change map and σ_V, which belong to the item's own statement, are in the item module and carry its blueprint tag. No new nodes were added.
+
+## Second reading by Q1
+
+I independently compared the node list, its Stacks Tag 03Q9 source place, and both delivery modules. The introduced objects match in order: a scheme morphism `f : X ⟶ Y` with `[QuasiCompact f] [QuasiSeparated f]`; a set-valued etale sheaf `H`; a geometric point `y : Spec (.of Ω) ⟶ Y` with `Ω` algebraically closed; the direct image represented by `MorphismProperty.Over.pullback @Etale ... .sheafPushforwardContinuous`; the affine pointed-neighbourhood full subcategory; the strict henselization ring and scheme; canonical legs `strictHenselizationNeighbourhoodMap` and common base map `strictHenselizationBaseMap`; the pullback `X^sh` and its projections; the set inverse image `Scheme.etaleSetPullback`; the base-change map and the site morphism `strictHenselizationSectionMap`; and evaluation on the final etale object. The dependency extension supplies exactly the legs and base map that the node requires.
+
+The first conclusion clause is rendered by the outer `∀ t` and existential affine `n,s`, with `toPresheafFiber` giving the germ equality. The second is rendered by `∃ Θ`; its first conjunct quantifies over every affine pointed `n` and section `s` and gives precisely the unit-image/restriction formula through `strictHenselizationSectionMap`; its second conjunct is `Function.Bijective Θ`; its final conjunct quantifies over every map `Θ'` satisfying that same formula and concludes `Θ' = Θ`. Quantifier order and all three conclusion clauses agree with the node. The two auxiliary theorems and one definition use the same fibre-product components specified in the node; their proofs remain postponed as named statements, and no definition contains `sorry` data.
+
+Edge cases were checked explicitly: identity `f` gives the usual stalk/strict-henselization comparison; an empty `X` forces singleton etale sections and leaves both sides singleton; an empty `Y` has no geometric point, so the theorem is vacuous for that reason; no point of `X`, nonempty section, properness, finite type, or characteristic assumption was added. The universe `Ω : Type v` and sheaf values `Type (v+1)` match the project convention, and the affine index is the full subcategory rather than an independently lower-universe index.
+
+The searches (LeanFinder/Loogle, Mathlib and source `rg`, and blueprint reference search) found no existing comparison theorem or duplicate strict-henselization notion. The only mismatch found was in the earlier worker attempt: it omitted qcqs, affine representatives, and the actual component formula and used unavailable morphism expressions and statement `let`s. The current module repairs those points without changing the DAG statement. The dependency module likewise adds only the missing canonical-neighbourhood API and records that reason in its dependency-node note. No statement correction or new node is required.
+
+## Reviewer fix (R-sps)
+
+The dependency module change to `def-weil-pbc-strict-henselization-limit` is left out (`--revert-nodes`): its `strictHenselizationBaseMap` is a second spelling of the landed `strictHenselizationStructuralMap` (def-weil-pbc-strict-henselization-structural-map, 14067f949), chosen through `Classical.arbitrary` of a neighbourhood, and c_V for an arbitrary affine pointed V is a stage-3 bridge per STATE.md (STRICT HENSELIZATION). The item module now uses `strictHenselizationStructuralMap y` for q : Y^sh → Y, and in clause (2) indexes the formula by the representatives `j : SmallModel (strictHenselizationNeighbourhoods y)` with c_V = `(strictHenselizationCone y).π.app (op (op j)) ≫ Spec.map (ΓSpecIso _).inv`, the same leg as in `exists_strictHenselizationStructuralMap`. Clause (1) still quantifies over all affine pointed neighbourhoods. The helpers `strictHenselizationBaseChange_condition`, `strictHenselizationBaseChangeMap`, `strictHenselizationSectionMap` take `j`.
