@@ -1,62 +1,121 @@
 {
-  "id": "lem-pc-derived-tensor-action-naturality",
-  "chapter": "sec-picard-framework",
-  "unit": "sk-thm-picard-semicon",
-  "blueprint": {
-    "is": null,
-    "from": {
-      "node": "lem-pc-rf-perfect-base-change",
-      "place": "proof of Tag 0DJ8: compatibility with scalar actions, morphisms, and the comparison map",
-      "via": [
-        "lem-pc-derived-tensor-localization-cohomology"
-      ]
-    },
-    "same_as": []
+ "id": "lem-pc-derived-tensor-action-naturality",
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-perfect-base-change",
+   "place": "proof of Tag 0DJ8: compatibility with scalar actions, morphisms, and the comparison map",
+   "via": [
+    "lem-pc-derived-tensor-localization-cohomology"
+   ]
   },
-  "kind": "statement",
-  "title": "Actions and naturality of the balanced derived tensor model",
-  "statement": "For the balanced model $P\\otimes_R F$ of $M\\otimes_R^{\\mathbf L}R'$ [lem-pc-balanced-derived-tensor-model], multiplication by $a\\in A$ on $P$ induces the action of the corresponding endomorphism of $M$ in $D(A)$; each $b\\in R'$ acts on $M\\otimes_R^{\\mathbf L}R'$ through the endomorphism of $R'$ in $D(R)$ given by multiplication by $b$, and these commuting actions make every $H^i(P\\otimes_R F)$ an $A\\otimes_R R'$-module. The canonical isomorphisms between the models for different choices of $P$ and $F$, and their identification with $M\\otimes_R^{\\mathbf L}R'$, are $A\\otimes_R R'$-linear on cohomology and natural in $M$; and under them the canonical comparison map $M\\otimes_R^{\\mathbf L}R'\\to M\\otimes_A^{\\mathbf L}(A\\otimes_R R')$ is represented by the chain map $P\\otimes_R F\\to P\\otimes_R R'=P\\otimes_A(A\\otimes_R R')$ induced by $F\\to R'$, whose effect on each $H^i$ is $A\\otimes_R R'$-linear.",
-  "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Tag 06Y6 (lemma-derived-base-change), functoriality and module actions of the derived tensor; equation comparison-map"
-  },
-  "stmt_deps": [
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Actions and naturality of the balanced derived tensor model",
+ "statement": "For the balanced model $P\\otimes_R F$ of $M\\otimes_R^{\\mathbf L}R'$ [lem-pc-balanced-derived-tensor-model], multiplication by $a\\in A$ on $P$ induces the action of the corresponding endomorphism of $M$ in $D(A)$; each $b\\in R'$ acts on $M\\otimes_R^{\\mathbf L}R'$ through the endomorphism of $R'$ in $D(R)$ given by multiplication by $b$, and these commuting actions make every $H^i(P\\otimes_R F)$ an $A\\otimes_R R'$-module. The canonical isomorphisms between the models for different choices of $P$ and $F$, and their identification with $M\\otimes_R^{\\mathbf L}R'$, are $A\\otimes_R R'$-linear on cohomology and natural in $M$; and under them the canonical comparison map $M\\otimes_R^{\\mathbf L}R'\\to M\\otimes_A^{\\mathbf L}(A\\otimes_R R')$ is represented by the chain map $P\\otimes_R F\\to P\\otimes_R R'=P\\otimes_A(A\\otimes_R R')$ induced by $F\\to R'$, whose effect on each $H^i$ is $A\\otimes_R R'$-linear.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 06Y6 (lemma-derived-base-change), functoriality and module actions of the derived tensor; equation comparison-map"
+ },
+ "stmt_deps": [
+  "lem-pc-balanced-derived-tensor-model",
+  "lem-pc-derived-tensor-transitivity"
+ ],
+ "proof": [
+  {
+   "text": "Choose K-flat resolutions $P\\to M$ over $A$ and $F\\to R'$ over $R$. By [lem-pc-balanced-derived-tensor-model], $C=P\\otimes_R F$ represents $M\\otimes_R^{\\mathbf L}R'$ in $D(A)$, multiplication by elements of $R'$ gives commuting endomorphisms in $D(A)$ and hence an $A\\otimes_R R'$-module structure on each $H^i(C)$, and the construction is independent of the resolutions up to canonical isomorphism and functorial in $M$. The $A$-action is that of $C$ as a complex of $A$-modules: multiplication by $a$ on $P$ tensored with $1_F$, which is compatible under $P\\to M$ with multiplication by $a$ on $M$, so it induces the corresponding endomorphism of $M$ in $D(A)$.",
+   "uses": [
     "lem-pc-balanced-derived-tensor-model"
-  ],
-  "proof": [],
-  "proof_deps": [],
-  "proof_origin": null,
-  "mathlib_searches": [
-    {
-      "tool": "leanfinder",
-      "query": "derived tensor model action agrees with derived category scalar action natural in the complex",
-      "results": "CategoryTheory.Tor'_map_app, CategoryTheory.Tor_map; no chain-level derived tensor action theorem",
-      "date": "2026-10-11",
-      "verdict": "no match"
-    },
-    {
-      "tool": "loogle",
-      "query": "derived tensor natural",
-      "results": "0 hits; loogle: Unknown identifier derived",
-      "date": "2026-10-11",
-      "verdict": "no match"
-    },
-    {
-      "tool": "grep",
-      "query": "natural.*tensor|tensor.*natural in Mathlib/Algebra/Homology",
-      "results": "0 matches",
-      "date": "2026-10-11",
-      "verdict": "no match"
-    }
-  ],
-  "mathlib_match": null,
-  "status": "unsplit",
-  "created": {
-    "item": "lem-pc-derived-tensor-localization-cohomology",
-    "by": "worker",
-    "date": "2026-10-11"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 06Y6, K-flat model and functoriality paragraph"
+   }
   },
-  "lead_notes": [
-    "L (02:24 UTC), after reviewer R-bdt0223 (J1 delivery lem-pc-balanced-derived-tensor-model, merged 71a308aa5): the action and independence-of-resolutions clauses of this node are also stated by lem-pc-balanced-derived-tensor-model; a worker proves them here by citing that node and proves only the comparison-map clause on its own, or restates this node as the comparison-map clause alone (statement_change, with the citers aligned)."
-  ]
+  {
+   "text": "Write $C=\\operatorname{Tot}(F\\otimes_R P)$ and apply [lem-pc-derived-tensor-second-factor-functor] to the exact functors $-\\otimes_R^{\\mathbf L}N:D(R)\\to D(A)$ for the $A$-complexes $N=P$ and $N=M$. The action of $b\\in R'$ is the value of this functor on the morphism of $R'$ in $D(R)$ given by multiplication by $b$; by clause (2) the canonical isomorphisms between the models for two K-flat resolutions $F,F'$ of $R'$ are those of a functor, so they commute with these values, and they are $A$-linear because they are morphisms in $D(A)$. By clause (3), a chain map $u:N\\to N'$ of $A$-complexes gives a natural transformation represented by $\\operatorname{Tot}(1_F\\otimes u)$, which is a quasi-isomorphism when $u$ is; taking $u$ the resolution $P\\to M$, or a map $P\\to P'$ over $M$ between two K-flat resolutions, shows that the identifications of $C$ with $M\\otimes_R^{\\mathbf L}R'$ and between choices of $P$ commute with the action of $b$ (naturality in the first variable) and of $a$ (compatibility with composition, $u$ being $A$-linear). Hence all these isomorphisms are $A\\otimes_R R'$-linear on cohomology, and clause (3) for a chain map $M\\to M'$ gives naturality in $M$.",
+   "uses": [
+    "lem-pc-derived-tensor-second-factor-functor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 06Y6 (lemma-derived-base-change), independence of choices and functoriality"
+   }
+  },
+  {
+   "text": "Apply clause (2) of [lem-pc-derived-tensor-transitivity] with $B=R'$, $T=C=A\\otimes_R R'$, $K=M$, $P_K=P$, $Q=F$, $K'=P\\otimes_A T$ (a complex of $T$-modules representing $M\\otimes_A^{\\mathbf L}T$, since $P$ is K-flat over $A$) and $\\psi$ the identity. The comparison morphism $c_M:M\\otimes_R^{\\mathbf L}R'\\to M\\otimes_A^{\\mathbf L}T$ is then represented by $P\\otimes_R F\\to P\\otimes_R R'=P\\otimes_A T$, the chain map induced by $F\\to R'$ followed by the associativity identification (the last map to $P\\otimes_A C$ being the identity), and $\\varphi_M=c_M$ commutes with the action of every $b\\in R'$, so each $H^i(c_M)$ is $A\\otimes_R R'$-linear. By Step 2 this holds for every choice of $P$ and $F$ under the canonical identifications.",
+   "uses": [
+    "lem-pc-derived-tensor-transitivity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 06Y6, equation comparison-map"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-balanced-derived-tensor-model",
+  "lem-pc-derived-tensor-second-factor-functor",
+  "lem-pc-derived-tensor-transitivity"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 06Y6 (lemma-derived-base-change)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "derived tensor model action agrees with derived category scalar action natural in the complex",
+   "results": "CategoryTheory.Tor'_map_app, CategoryTheory.Tor_map; no chain-level derived tensor action theorem",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "derived tensor natural",
+   "results": "0 hits; loogle: Unknown identifier derived",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "natural.*tensor|tensor.*natural in Mathlib/Algebra/Homology",
+   "results": "0 matches",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "item": "lem-pc-derived-tensor-localization-cohomology",
+  "by": "worker",
+  "date": "2026-10-11"
+ },
+ "lead_notes": [
+  "L (02:24 UTC), after reviewer R-bdt0223 (J1 delivery lem-pc-balanced-derived-tensor-model, merged 71a308aa5): the action and independence-of-resolutions clauses of this node are also stated by lem-pc-balanced-derived-tensor-model; a worker proves them here by citing that node and proves only the comparison-map clause on its own, or restates this node as the comparison-map clause alone (statement_change, with the citers aligned)."
+ ],
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-pc-derived-tensor-action-naturality",
+  "worker": "stage1",
+  "summary": "Split the action, resolution-independence, functoriality, and comparison-map assertions into three proof steps. No new nodes were needed: the balanced-model node supplies K-flat models and their functorial independence, while the existing derived tensor transitivity node supplies the commuting scalar actions, naturality, and comparison morphism.",
+  "blueprint": "Realizes the ancestor proof place 'proof of Tag 0DJ8: compatibility with scalar actions, morphisms, and the comparison map' through the K-flat model/action step, the naturality step, and the comparison-map step.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-dta0235",
+  "group": "J1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-dta0235 (reviewer sub-agent of L); spot-checked: Delivery postdates the 02:24 lead note but did not follow it. E: comparison map of Stacks 06Y6 is P tensor_R F -> P tensor_R R' = P tensor_A (A tensor_R R'), P K-flat over A; statement true. FIX more, RETURN less: C4 step 2 cited lem-pc-derived-tensor-transitivity for naturality of the scalar actions under the canonical model isomorphisms, which that node does not state (its naturality is that of alpha); step 2 rewritten to cite lem-pc-derived-tensor-second-factor-functor clauses (2),(3) (functoriality in R' for the b-action, natural transformation Tot(1_F tensor u) for P->M, P->P', M->M'), no re-proof of clauses stated by the balanced node (step 1 cites it); step 3 now cites transitivity clause (2) with C=T=A tensor_R R', K'=P tensor_A T, psi=id for the representative and T-linearity of H^i(c_M) instead of 'Steps 1 and 2'; B4 plain-text arrow in step 2 replaced by TeX; proof_deps add the second-factor node. Second reading missed the step 2 C4 fault and the note.; 1 file(s) fixed by the reviewer"
+ }
 }
