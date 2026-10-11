@@ -49,6 +49,18 @@ lemma rightDerivedFunctorCompIso'_hom_eq_conjugateEquiv (e : F ⋙ G ≅ H) (eL 
           adj₁.mapDerivedCategoryRightDerivedAdjunction)
         adj.mapDerivedCategoryRightDerivedAdjunction
         (Functor.mapDerivedCategoryNatIso eL ≪≫ Functor.mapDerivedCategoryCompIso _ _).hom := by
+  apply (F.rightDerivedFunctor ⋙ G.rightDerivedFunctor).rightDerived_ext
+    (Functor.rightDerivedFunctorCompUnit F G) (HomotopyCategory.quasiIso C (.up ℤ))
+  ext X
+  have hL : (Functor.rightDerivedFunctorCompUnit F G).app X ≫
+      (Functor.rightDerivedFunctorCompIso' F G e).hom.app (DerivedCategory.Qh.obj X) =
+        (Functor.rightDerivedFunctorUnit (F ⋙ G)).app X ≫
+          (Functor.rightDerivedFunctorNatTrans e.hom).app (DerivedCategory.Qh.obj X) := by
+    simp [Functor.rightDerivedFunctorCompIso', Functor.rightDerivedFunctorCompIso,
+      Functor.rightDerivedFunctorNatIso]
+  simp only [NatTrans.comp_app, Functor.whiskerLeft_app]
+  rw [hL]
+  simp [Functor.rightDerivedFunctorNatTrans, conjugateEquiv_apply_app]
   sorry
 
 end CategoryTheory.Adjunction
