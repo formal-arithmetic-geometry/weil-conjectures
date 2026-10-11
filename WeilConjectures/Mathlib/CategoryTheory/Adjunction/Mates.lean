@@ -69,7 +69,12 @@ lemma conjugateIsoEquiv_trans (e : L₂ ≅ L₁) (e' : L₃ ≅ L₂) :
 /-- **The mate of an isomorphism of left adjoints carries the pasted unit and counit.**
 Transporting the adjunction `L₁ ⊣ R₁` along an isomorphism `e : L₁ ≅ L₂` of left adjoints and
 along its conjugate `R₁ ≅ R₂` gives back the adjunction `L₂ ⊣ R₂`: the unit and counit of
-`adj₂` are those of `adj₁` pasted with `e` and with the conjugate of `e`. -/
+`adj₂` are those of `adj₁` pasted with `e` and with the conjugate of `e`:
+```
+  𝟭 --η₁--> L₁ ⋙ R₁ --e ◫ ẽ--> L₂ ⋙ R₂        R₂ ⋙ L₂ --ẽ⁻¹ ◫ e⁻¹--> R₁ ⋙ L₁ --ε₁--> 𝟭
+```
+where `ẽ : R₁ ≅ R₂` is the inverse of the conjugate `R₂ ≅ R₁` of `e`; the left composite is the
+unit `η₂` of `adj₂` and the right composite is its counit `ε₂`. -/
 lemma Adjunction.ofNatIsoLeft_ofNatIsoRight_conjugateIsoEquiv (e : L₁ ≅ L₂) :
     (adj₁.ofNatIsoLeft e).ofNatIsoRight (conjugateIsoEquiv adj₂ adj₁ e).symm = adj₂ := by
   ext c

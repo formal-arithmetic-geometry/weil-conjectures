@@ -316,6 +316,7 @@ theorem DerivedCategoryFiniteTor.nonempty_adjunctions_and_exists_comp_eq
   ⟨⟨DerivedCategoryFiniteTor.leftDerivedUpperStarAdjunction Λ aX aY f hf⟩,
     ⟨DerivedCategoryFiniteTor.rightDerivedLowerShriekAdjunction Λ aY f⟩,
     DerivedCategoryFiniteTor.exists_rightDerivedLowerShriekAdjunction_comp_eq Λ aY aZ f g⟩
+
 end FiniteTor
 
 section Exchange
