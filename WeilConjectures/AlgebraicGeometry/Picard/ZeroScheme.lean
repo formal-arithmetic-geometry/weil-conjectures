@@ -541,7 +541,7 @@ i.e. the section `s` of `ℒ ⊗ f_T^* 𝒩^{-1}` of the blueprint. Then the zer
 and `D ⟶ T` is flat) which is finite locally free of degree `g` over `T`: it lies in the
 Hilbert functor `Hilb^g_{X/k}(T)`.
 
-(blueprint: `lem-pc-zero-scheme-recd`) -/
+(blueprint: `lem-pc-zero-scheme-recd`, `sk-lem-picard-zero-dictionary`) -/
 theorem isInvertible_zeroLocus_directImageCounit
     (σ : Spec (.of k) ⟶ X) (hσ : σ ≫ X ↘ Spec (.of k) = 𝟙 (Spec (.of k)))
     [∀ T : Over (Spec (.of k)),
