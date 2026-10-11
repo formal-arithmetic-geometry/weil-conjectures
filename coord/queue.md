@@ -2,12 +2,12 @@
 
 865 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (48)
+## Stage 1: nodes to split (47)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
 | `lem-weil-derived-limit-roos-complex` | 15 | none |
-| `lem-weil-pbc-arbitrary-ring-torsion-sheaf-base-change` | 2003 | none |
+| `lemma-weil-pbc-prime-torsion-devissage` | 2004 | rests_on_sorry |
 | `lem-pc-ringed-space-module-stalk-tensor` | 3013 | none |
 | `lem-pc-ring-pseudo-coherent-localization-glue` | 3016 | none |
 | `lem-pc-ring-pseudo-coherent-distinguished-triangle` | 3018 | none |
@@ -52,10 +52,9 @@
 | `lem-pur-kinjective-functorial-injective` | - | none |
 | `lem-pur-kinjective-set-iso-classes-bounded-size` | - | none |
 | `lem-pur-left-derived-from-kflat-class` | - | none |
-| `lem-pc-finite-affine-fibre-sections` | - | none |
 | `lem-pc-finite-flat-pushforward-locally-free` | - | none |
 
-## Stage 2: nodes to state (817)
+## Stage 2: nodes to state (818)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -171,6 +170,7 @@
 | `lem-pc-derived-module-direct-sums` | 1 | state |
 | `lem-pc-derived-total-resolution-quasi-iso` | 1 | state |
 | `lem-pc-field-extension-fpqc-cover` | 1 | state |
+| `lem-pc-finite-affine-fibre-sections` | 1 | state |
 | `lem-pc-flat-pullback-effective-cartier-ideal` | 1 | state |
 | `lem-pc-flat-tensor-complex-cohom` | 1 | state |
 | `lem-pc-fp-module-map-descent-affine` | 1 | state |
@@ -877,7 +877,7 @@
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 | `def-nagata-fixed-base-separated-stage` | 6 | state |
 
-Not open yet: 1724 nodes that wait for a statement dependency, 89 nodes that wait for stage 1.
+Not open yet: 1725 nodes that wait for a statement dependency, 88 nodes that wait for stage 1.
 
 ## Stage 3: modules to prove (0)
 
