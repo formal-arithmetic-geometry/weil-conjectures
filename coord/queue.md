@@ -1,8 +1,8 @@
 # Work queue
 
-864 items; claim with `tools/claim.py next <group> [--stage N]`.
+863 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (38)
+## Stage 1: nodes to split (37)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -32,9 +32,8 @@
 | `lem-sc-picard-kunneth-qcoh` | 6014 | none |
 | `lem-sc-valuation-closed-fibre-section-vanishing` | 6014 | none |
 | `lem-pc-recd-fibre-cartier-local` | 6015 | none |
-| `lem-sc-finite-locally-free-residue-isomorphism` | 6015 | none |
-| `lem-sc-valuation-proper-coherent-higher-direct-images` | 6015 | none |
 | `lem-pc-affine-perfect-cut-degree-zero` | 6016 | none |
+| `lem-sc-coherent-ring-perfect-complex-cohomology` | 6016 | none |
 | `lem-sc-base-change-curve` | - | none |
 | `lem-sc-global-functions` | - | rests_on_sorry |
 | `lem-pur-kinjective-characterize-K-injective` | - | none |
@@ -876,7 +875,7 @@
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 | `def-nagata-fixed-base-separated-stage` | 6 | state |
 
-Not open yet: 1734 nodes that wait for a statement dependency, 79 nodes that wait for stage 1.
+Not open yet: 1736 nodes that wait for a statement dependency, 78 nodes that wait for stage 1.
 
 ## Stage 3: modules to prove (0)
 
