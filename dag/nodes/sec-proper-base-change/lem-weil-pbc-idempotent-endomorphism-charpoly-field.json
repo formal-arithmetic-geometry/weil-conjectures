@@ -150,5 +150,24 @@
   "group": "E1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of E1; spot-checked by L: 4 steps: decomposition from the image-base-change node over the field k, rank-nullity, adapted basis and the direct-sum formula, charpoly of 1 and 0 on the summands (three Mathlib leaves: LinearMap.charpoly_one Basic.lean:60, charpoly_zero :56, finrank_range_add_finrank_ker Lemmas.lean:173, lines verified by L), divisibility elementary. Correct."
+ },
+ "lean": {
+  "module": "Sheaf.LinearAlgebra.IdempotentEndomorphismCharpolyField",
+  "declaration": "LinearMap.charpoly_toMatrix_of_idempotent",
+  "file": "lean/Sheaf/LinearAlgebra/IdempotentEndomorphismCharpolyField.lean",
+  "statement": "theorem charpoly_toMatrix_of_idempotent {k : Type u} [Field k] (n : ℕ) (p : Module.End k (Fin n → k)) (hp : IsIdempotentElem p) (b : Module.Basis (Fin n) k (Fin n → k)) : let r := Module.finrank k (LinearMap.range p) (LinearMap.toMatrix b b p).charpoly = (Polynomial.X - 1) ^ r * Polynomial.X ^ (n - r) ∧ (LinearMap.toMatrix b b p).charpoly ∣ (Polynomial.X : Polynomial k) ^ n * (Polynomial.X - 1) ^ n",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-iec1119"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-iec1119",
+  "group": "C1",
+  "result": "fix",
+  "note": "field k {Type u}; n:ℕ incl. 0; V=Fin n→k; p k-linear endo with p∘p=p (now IsIdempotentElem p in Module.End, Iff.rfl to p.comp p = p); r=finrank range p; any basis b : Basis (Fin n); charpoly = (LinearMap.toMatrix b b p).charpoly per def-weil-pbc-charpoly-free-module note; (X-1)^r X^(n-r) and divisibility of X^n(X-1)^n; #check clean"
  }
 }
