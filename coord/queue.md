@@ -1,11 +1,11 @@
 # Work queue
 
-138 items; claim with `tools/claim.py next <group> [--stage N]`.
+135 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (138)
+## Stage 2: nodes to state (135)
 
 | node | distance to Mathlib | kind | blockers |
 |---|---|---|---|
@@ -25,10 +25,10 @@
 | `lem-weil-pbc-cohomology-pullback-functorial` | 1 | state | 8 |
 | `lem-weil-pbc-pair-henselization` | 1 | state | 5 |
 | `lem-sc-derived-internal-hom-adjunction` | 1 | state | 4 |
-| `lem-pc-derived-direct-image-preserves-qcoh` | 1 | state | 3 |
 | `lem-weil-pbc-etale-graph-section-extension-map-linear` | 1 | state | 3 |
 | `lem-weil-pbc-truncation-couple-morphism` | 1 | state | 3 |
 | `lem-pc-affine-tor-amplitude-criterion` | 1 | state | 2 |
+| `lem-pc-derived-mayer-vietoris-triangle` | 1 | state | 2 |
 | `lem-weil-pbc-formal-systems-annihilated-by-power` | 1 | state | 2 |
 | `lem-pc-affine-derived-pullback-tensor-tilde` | 1 | state | 1 |
 | `lem-pc-cech-resolution` | 1 | state | 1 |
@@ -104,7 +104,6 @@
 | `lem-sc-smooth-proper-diagonal-pushforward-structure` | 1 | state | 0 |
 | `lem-sc-smooth-proper-diagonal-tensor-formula` | 1 | state | 0 |
 | `lem-sc-smooth-proper-relative-dualizing-general` | 1 | state | 0 |
-| `lem-sc-smooth-proper-tensor-direct-sums` | 1 | state | 0 |
 | `lem-sc-smooth-proper-tensor-perfect-case` | 1 | state | 0 |
 | `lem-sc-strict-henselization-dvr` | 1 | state | 0 |
 | `lem-weil-pbc-coherent-formal-modules-local-exactness` | 1 | state | 0 |
@@ -118,7 +117,6 @@
 | `lem-weil-pbc-formal-systems-graded-vanishing` | 1 | state | 0 |
 | `lem-weil-pbc-formal-systems-proper-support-serre` | 1 | state | 0 |
 | `lem-weil-pbc-formal-systems-push-pull` | 1 | state | 0 |
-| `lem-weil-pbc-formal-systems-surjective` | 1 | state | 0 |
 | `lem-weil-pbc-gabber-criterion` | 1 | state | 0 |
 | `lem-weil-pbc-gm-pullback-strict-henselization` | 1 | state | 0 |
 | `lem-weil-pbc-gm-strict-henselization-stalk-formula` | 1 | state | 0 |
@@ -129,7 +127,6 @@
 | `lem-weil-pbc-module-pushforward-injective-acyclic` | 1 | state | 0 |
 | `lem-weil-pbc-projective-space-twisting-sheaf-charts` | 1 | state | 0 |
 | `lem-weil-pbc-pullback-iso-prime-torsion-devissage` | 1 | state | 0 |
-| `lem-weil-pbc-qcqs-cohomology-direct-sum` | 1 | state | 0 |
 | `lem-weil-pbc-qs-scheme-cohomology-directed-colimit` | 1 | state | 0 |
 | `lem-weil-pbc-sets-pushforward-stalk-strict-henselization` | 1 | state | 0 |
 | `lem-weil-pbc-strict-henselization-functoriality` | 1 | state | 0 |
@@ -148,7 +145,7 @@
 | `lem-sc-right-adjoint-open-support-criterion` | 2 | state | 0 |
 | `pqf-lem-affine-vanishing` | 2 | state | 0 |
 
-Not open yet: 40 nodes that wait for stage 1, 210 nodes that wait for a statement dependency.
+Not open yet: 40 nodes that wait for stage 1, 209 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
