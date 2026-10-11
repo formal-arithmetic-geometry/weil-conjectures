@@ -5,6 +5,7 @@ Authors: Claude
 -/
 module
 
+public import Mathlib.CategoryTheory.Adjunction.Mates
 public import WeilConjectures.CategoryTheory.Adjunction.ProjectionMap
 
 /-!
@@ -58,6 +59,37 @@ lemma unit_app_comp_map_rightAdjointProjectionMap (N L : D) :
   dsimp at h₂ ⊢
   rw [left_triangle_components_assoc, reassoc_of% h₂, ← NatTrans.comp_app, ← T_C.map_comp,
     adj.left_triangle_components, T_C.map_id, NatTrans.id_app, Category.comp_id]
+
+/-- **The right adjoint projection map is compatible with conjugates.** Let `adj' : F' ⊣ G'` be
+a second adjunction with a comparison `φ'`, and `α : F' ⟶ F` compatible with the comparisons.
+Then the conjugate `β : G ⟶ G'` of `α` intertwines the projection maps:
+`(β ⊗ 1) ≫ π' ≫ G'(1 ⊗ α) = π ≫ β`. -/
+@[reassoc]
+lemma rightAdjointProjectionMap_conjugate {F' : D ⥤ C} {G' : C ⥤ D} (adj' : F' ⊣ G')
+    (φ' : (postcompose₂.obj F').obj T_D ⟶ (((whiskeringLeft₂ C).obj F').obj F').obj T_C)
+    (α : F' ⟶ F)
+    (hα : ∀ a b, α.app ((T_D.obj a).obj b) ≫ (φ.app a).app b =
+      (φ'.app a).app b ≫ (T_C.map (α.app a)).app (F'.obj b) ≫
+        (T_C.obj (F.obj a)).map (α.app b))
+    (M : C) (L : D) :
+    (T_D.map ((conjugateEquiv adj adj' α).app M)).app L ≫
+        ((adj'.rightAdjointProjectionMap φ').app M).app L ≫
+        G'.map ((T_C.obj M).map (α.app L)) =
+      ((adj.rightAdjointProjectionMap φ).app M).app L ≫
+        (conjugateEquiv adj adj' α).app ((T_C.obj M).obj (F.obj L)) := by
+  apply (adj'.homEquiv _ _).symm.injective
+  simp only [homEquiv_counit, Functor.map_comp, Category.assoc, adj'.counit_naturality,
+    conjugateEquiv_counit]
+  erw [map_rightAdjointProjectionMap_app_app_comp_counit_assoc]
+  erw [α.naturality_assoc]
+  erw [adj.map_rightAdjointProjectionMap_app_app_comp_counit φ M L]
+  have h₁ := NatTrans.congr_app (φ'.naturality ((conjugateEquiv adj adj' α).app M)) L
+  dsimp at h₁ ⊢
+  rw [reassoc_of% h₁, ← NatTrans.comp_app_assoc, ← T_C.map_comp, conjugateEquiv_counit,
+    reassoc_of% (hα (G.obj M) L), T_C.map_comp, NatTrans.comp_app]
+  erw [(T_C.map (adj.counit.app M)).naturality (α.app L)]
+  simp only [Category.assoc]
+  rfl
 
 variable {C₁ D₁ C₂ D₂ : Type*} [Category* C₁] [Category* D₁] [Category* C₂] [Category* D₂]
   {F₁ : D₁ ⥤ C₁} {G₁ : C₁ ⥤ D₁} (adj₁ : F₁ ⊣ G₁) {F₂ : D₂ ⥤ C₂} {G₂ : C₂ ⥤ D₂} (adj₂ : F₂ ⊣ G₂)
