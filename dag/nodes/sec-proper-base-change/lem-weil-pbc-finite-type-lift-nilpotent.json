@@ -161,5 +161,23 @@
   "item": "lem-weil-pbc-finite-type-lift-nilpotent",
   "worker": "stage1",
   "summary": "Proof written from More on Morphisms 09ZW, 'The translation of (2) into algebra', in four steps: (1) generators of B'/IB' (Definition 00F3) lifted to B' and the A'-algebra map phi: A'[x_1..x_m] -> B' (elementary); (2) R/IR -> B'/IB' surjective, i.e. B' = N + IB' as A'-modules (elementary); (3) Nakayama for the nilpotent ideal I of A', Algebra 00DV (11), applied to phi as an A'-linear map: new unsplit node lem-weil-pbc-nakayama-nilpotent (absent from Mathlib: Mathlib's Nakayama lemmas all need finite generation and the Jacobson radical; surjective_of_mkQ_comp_surjective needs IsPrecomplete/IsHausdorff instances that Mathlib does not provide for nilpotent ideals); (4) conclusion by Definition 00F3 (Mathlib Algebra.FiniteType.iff_quotient_mvPolynomial''). Working over A' instead of over R with the ideal IR (as the statement's sketch did) avoids proving IR nilpotent. The statement's parenthetical misnumbered the part of 00DV: 'M = IM, I nilpotent => M = 0' is part (9); the part applied is (11); the sketch was corrected accordingly, the statement proper is unchanged. No Nakayama node existed in the DAG (lem-weil-pbc-nakayama-local-generators is the local-ring version). Whole statement not in Mathlib (searches recorded); nothing in the source repository (grep of WeilConjectures for finiteType/FiniteType with nilpotent: no hits)."
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.FiniteTypeLiftNilpotent",
+  "declaration": "finiteType_of_quotient_finiteType_nilpotent",
+  "file": "lean/Sheaf/Algebra/FiniteTypeLiftNilpotent.lean",
+  "statement": "theorem finiteType_of_quotient_finiteType_nilpotent {A B : Type*} [CommRing A] [CommRing B] (φ : A →+* B) (I : Ideal A) (hI : ∃ n : ℕ, I ^ (n + 1) = ⊥) (hquot : RingHom.FiniteType (Ideal.quotientMap (I.map φ) φ (Ideal.le_comap_map))) : RingHom.FiniteType φ",
+  "branch": "sheaf-dag",
+  "by": "G1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-ftl",
+  "group": "G1",
+  "result": "pass",
+  "note": "A,B CommRing, φ : A →+* B (bare ring map as node), I : Ideal A, hI ∃ n, I^(n+1)=⊥ = node's nilpotence, hquot RingHom.FiniteType of Ideal.quotientMap (I.map φ) φ = A'/I → B'/IB' finite type, conclusion RingHom.FiniteType φ; no H7; not in Mathlib"
  }
 }
