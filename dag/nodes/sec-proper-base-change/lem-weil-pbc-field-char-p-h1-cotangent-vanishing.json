@@ -194,5 +194,23 @@
   "worker": "stage1",
   "summary": "Statement unchanged (correct against Stacks 0322 (1) => (5) with k = F_p; the citer lem-weil-pbc-geometrically-regular-h1-injective uses exactly H_1(L_{L/F_p}) = 0 for residue fields L, steps 2, 7, 8 of its proof). Proof read in algebra.tex: 0322 is 'combine 030W, 0321, 031Y, 031X'; (1) => (5) goes through 0320 (3): K = colim of finitely generated K_i, H_1(L_{K_i/k}) = 0, colimit by 07BQ. Three steps, no new node: (1) every finitely generated E/F_p is separable, from the existing split node 030R (lem-weil-pbc-make-separable) with k = F_p, where the finite purely inseparable k' is forced to be F_p (elementary, Fermat), in place of 030Y/030Z (no node exists for 'F_p perfect'); (2) H_1(L_{E/F_p}) = 0 for such E: E = Frac B with B smooth (037X node, as in the proof of 07BV), H_1(L_B) = 0 by the definition, localization by the 00S7 leaf, and invariance of H_1 of the canonical presentation under an F_p-algebra isomorphism written out (renaming variables); (3) the colimit step 07BQ written out for the union of finitely generated subfields: a cycle g involves finitely many variables, so it is a cycle of the canonical presentation of a finitely generated E and dies in I_E^2 subset I^2 (only surjectivity of colim H_1 -> H_1 is needed). All cited nodes are in unit sk-thm-p1. Mathlib: no match for arbitrary K (Smooth/Field.lean has only separably generated and EssFiniteType-over-perfect cases); candidate recorded. Tags 0322, 0320, 07BQ, 07BV, 037X, 00S7, 030R, 030O, 030Y, 030Z verified in tags/tags."
  },
- "reviewed": "Reviewed by L 2026-10-10: faithful to Algebra 0320 (3)/0322 (1)=>(5) with k = F_p; 'F_p is perfect' (030Y/030Z) replaced by lem-weil-pbc-make-separable with the purely inseparable k' forced to be F_p (step 1, checked); H_1 = 0 for finitely generated separable E via 037X and the localization node (step 2); the colimit argument 07BQ written out (step 3). No new nodes; Mathlib candidate recorded (FormallySmooth of separably generated / essentially finite type over perfect fields, no directed-union statement; B8)."
+ "reviewed": "Reviewed by L 2026-10-10: faithful to Algebra 0320 (3)/0322 (1)=>(5) with k = F_p; 'F_p is perfect' (030Y/030Z) replaced by lem-weil-pbc-make-separable with the purely inseparable k' forced to be F_p (step 1, checked); H_1 = 0 for finitely generated separable E via 037X and the localization node (step 2); the colimit argument 07BQ written out (step 3). No new nodes; Mathlib candidate recorded (FormallySmooth of separably generated / essentially finite type over perfect fields, no directed-union statement; B8).",
+ "lean": {
+  "module": "Sheaf.RingTheory.SubsingletonH1CotangentOfCharP",
+  "declaration": "Algebra.subsingleton_h1Cotangent_of_charP",
+  "file": "lean/Sheaf/RingTheory/SubsingletonH1CotangentOfCharP.lean",
+  "statement": "theorem subsingleton_h1Cotangent_of_charP (p : ℕ) (hp : 0 < p) (K : Type u) [Field K] [CharP K p] : letI := ZMod.algebra K p Subsingleton (H1Cotangent (ZMod p) K)",
+  "branch": "sheaf-dag",
+  "by": "M1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-fhc1009",
+  "group": "M1",
+  "result": "pass",
+  "note": "Field K arbitrary Type u; char p>0 as (p:ℕ)(hp:0<p)[CharP K p] (hp genuine: excludes p=0 as node does); unique F_p-algebra via letI ZMod.algebra K p (Subsingleton (Algebra (ZMod p) K)); H_1 of canonical presentation = Algebra.H1Cotangent = (Generators.self).toExtension.H1Cotangent (#print checked); =0 as Subsingleton of AddCommGroup; no Mathlib match for arbitrary K (Smooth/Field only EssFiniteType/separating family), existing:false right; #check + p=2 instantiation compile"
+ }
 }
