@@ -23,7 +23,8 @@
   "def-pc-scheme",
   "pqf-def-coherent",
   "def-pc-fibre-product",
-  "def-pc-module-pullback"
+  "def-pc-module-pullback",
+  "def-sc-field-linear-module-cohomology-operations"
  ],
  "proof": [
   {
@@ -290,5 +291,25 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-kun0138 (reviewer sub-agent of L); spot-checked: Read packet whole, both returns, the citer lem-sc-picard-h1-product-injective step 3. Returns points 3 (child map direction now [a]x[b]->[axb]), 4 (cup-compat self-contained: X,X',f, arbitrary covers, refinement of Tag 01FD, (a) pullback, (b) cup), 5 (step 4 cites 01XB, step 7 qs from affine diagonal) repaired; induction (d(F'')<d(F) via acyclic embedding, finite cd) and base case checked. FIX more, RETURN less: (1) C4/E7: statement had again dropped 'functorial for pullback along morphisms of schemes over k' required by the citer's step 3; restored the base statement verbatim and added step 8 proving it from def-pc-fibre-product, lem-pc-module-pullback-identity-composition, lem-weil-pbc-module-pullback-tensor (cochain-level refinement commutes with Cech cup), lem-sc-cech-comparison-map-iso-affine and lem-sc-picard-cech-cup-pullback-compat (a),(b). (2) C4: step 6 cited lem-pc-cohomology-sections-affine-base whose hypothesis 'separated' fails for pr_2: X x V -> V (affine diagonal only); replaced by lem-weil-pbc-higher-direct-image-presheaf (any morphism, Zariski modules) with sections on affines computed by Cech and affines cofinal; pr_{2*}H = Gamma(X,F) tensor G via direct-sum lemma on affine V. (3) C1: steps 4/6 used sections of pr_1^*F tensor pr_2^*G on U x V = F(U) tensor_k G(V) uncited; cited lem-weil-pbc-module-pullback-affine-sections + affine-spectra + tensor-affine-sections. (4) class (c): lem-sc-picard-affine-diagonal-intersections is Mathlib AlgebraicGeometry.isAffineHom_diagonal_iff (Morphisms/Affine.lean:319) at U = top of Spec k; made a mathlib leaf, the 'consequently' finite-intersection clause dropped and folded into step 1 as an induction. No duplicate (class b) found for the other new nodes; algebraic Kunneth grep kunneth 0 hits.; 2 file(s) fixed by the reviewer"
  },
- "lead_note": "2026-10-11 L (R-kun0138): Head 8ed65d1dc had dropped the functoriality clause a third time (the lead's prompt said it was restored; the last Second reading says it was removed); restored by the reviewer with a proving step."
+ "lead_note": "2026-10-11 L (R-kun0138): Head 8ed65d1dc had dropped the functoriality clause a third time (the lead's prompt said it was restored; the last Second reading says it was removed); restored by the reviewer with a proving step.",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.PicardKunnethQcoh",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.picard_kunneth_qcoh",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.Modules.picard_kunneth_qcoh"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/PicardKunnethQcoh.lean",
+  "statement": "theorem picard_kunneth_qcoh (k : Type w) [Field k] (X Y : Scheme.{w}) (f : X ⟶ Spec (CommRingCat.of k)) (g : Y ⟶ Spec (CommRingCat.of k)) [CompactSpace X] [CompactSpace Y] [IsAffineHom (Limits.pullback.diagonal f)] [IsAffineHom (Limits.pullback.diagonal g)] (F : X.Modules) (G : Y.Modules) [F.IsQuasicoherent] [G.IsQuasicoherent] : (∀ n : ℕ, ∃ e : (⨁ i : {pq : ℕ × ℕ // pq.1 + pq.2 = n}, scalarCohomology f F i.val.1 ⊗[k] scalarCohomology g G i.val.2) ≃ₗ[k] scalarCohomology (Limits.pullback.fst f g ≫ f) (externalCupCoefficients f g F G) n, ∀ (i : {pq : ℕ × ℕ // pq.1 + pq.2 = n}) (a : scalarCohomology f F i.val.1) (b : scalarCohomology g G i.val.2), e (DirectSum.lof k _ (fun j : {pq : ℕ × ℕ // pq.1 + pq.2 = n} ↦ scalarCohomology f F j.val.1 ⊗[k] scalarCohomology g G j.val.2) i (a ⊗ₜ[k] b)) = cast (congrArg (fun d ↦ ↥(scalarCohomology (Limits.pullback.fst f g ≫ f) (externalCupCoefficients f g F G) d)) i.property) (externalCup f g F G i.val.1 i.val.2 a b)) ∧ (∀ (X' Y' : Scheme.{w}) (f' : X' ⟶ Spec (CommRingCat.of k)) (g' : Y' ⟶ Spec (CommRingCat.of k)) (u : X' ⟶ X) (v : Y' ⟶ Y) (hu : u ≫ f = f') (hv : v ≫ g = g') (w : Limits.pullback f' g' ⟶ Limits.pullback f g) (h₁ : w ≫ Limits.pullback.fst f g = Limits.pullback.fst f' g' ≫ u) (h₂ : w ≫ Limits.pullback.snd f g = Limits.pullback.snd f' g' ≫ v) (p q : ℕ) (a : scalarCohomology f F p) (b : scalarCohomology g G q), scalarCohomologyMap (Limits.pullback.fst f' g' ≫ f') (externalCupPullbackIso f g f' g' u v w h₁ h₂ F G).hom (p + q) (scalarCohomologyPullback (Limits.pullback.fst f g ≫ f) (Limits.pullback.fst f' g' ≫ f') w (by rw [← Category.assoc, h₁, Category.assoc, hu]) (externalCupCoefficients f g F G) (p + q) (externalCup f g F G p q a b)) = externalCup f' g' ((tensorPullback u).obj F) ((tensorPullback v).obj G) p q (scalarCohomologyPullback f f' u hu F p a) (scalarCohomologyPullback g g' v hv G q b))",
+  "branch": "sheaf-dag",
+  "by": "G1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-pkq2",
+  "group": "G1",
+  "result": "fix"
+ }
 }
