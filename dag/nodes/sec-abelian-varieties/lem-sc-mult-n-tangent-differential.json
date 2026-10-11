@@ -110,5 +110,23 @@
   "group": "F1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-mtd1914 (reviewer sub-agent of L); spot-checked: No cycle: lem-sc-group-addition-tangent-differential is unsplit with no proof deps and does not cite the item; lem-sc-mult-n-etale-kernel cites the item downstream only. Step 1 ([1]=m∘(e∘p,id)=id by the unit axiom) and step 2 (induction [d+1]=m∘([d],id), chain rule, product identification, addition differential, d·v+v=(d+1)·v) correct; the addition formula itself is the cited node (unsplit, its own item); no node restated. FIX more, RETURN less: C1/B3 the statement and step 2 used T_{G/k,e}, the tangent map and its functoriality without citing def-sc-scheme-tangent-space; added the citation to the statement, to both steps' uses, stmt_deps and proof_deps, and wrote out in step 2 that tangent maps are post-composition (κ(e)=k) and the product identification is θ↦(pr_1∘θ,pr_2∘θ).; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.MultNTangentDifferential",
+  "declaration": "AlgebraicGeometry.mult_n_tangent_differential",
+  "file": "lean/Sheaf/AlgebraicGeometry/MultNTangentDifferential.lean",
+  "statement": "theorem mult_n_tangent_differential (k : Type u) [Field k] (G : Over (Spec (.of k))) [GrpObj G] [IsCommMonObj G] (d : ℕ) (hd : 1 ≤ d) : ∃ hp : (𝟙 G ^ d).left (GrpObj.onePoint G) = GrpObj.onePoint G, ∃ he : Function.Bijective (((𝟙 G ^ d).left.residueFieldMap (GrpObj.onePoint G)).hom), ∀ v : schemeTangentSpace k G.left G.hom (GrpObj.onePoint G), (hp ▸ (schemeTangentMap k G.left G.left G.hom G.hom (𝟙 G ^ d).left (𝟙 G ^ d).w (GrpObj.onePoint G) he v)) = d • v",
+  "by": "N1",
+  "date": "2026-10-11",
+  "branch": "sheaf-dag",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "N1",
+  "result": "pass",
+  "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
  }
 }
