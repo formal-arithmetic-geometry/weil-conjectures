@@ -338,6 +338,13 @@ between the two sides that is defined on `X`. The routes that were tried:
 * for clause 1 alone, invertibility descends through the evaluation `L ⊗ᴸ RHom(L, Λ) ⟶ Λ`,
   but this needs the derived internal hom to commute with `Lu^*`, which is not available on the
   étale site either;
+* even with all canonical maps available, the hypothesis on `u ≫ f` would only give the existence
+  of isomorphisms on `U`, not the invertibility of the canonical map of `u ≫ f`; so descent
+  needs the definition itself to be stated with canonical maps;
+* for clause 1 through the generic comparison `Functor.LaxMonoidal.ihomComparison` of `Lu^*`
+  (compatible with evaluation by `ihomComparison_ev`): it is the mate of the tensorator and is
+  invertible only if `Lu^*` satisfies a projection formula with a left adjoint `Ru_!`, known in
+  the library only for open immersions, which are never surjective étale covers in general;
 * stating the definition with the canonical maps instead makes the composition law and the
   smooth case depend on the same missing coherences. -/
 theorem IsCohomologicallySmooth.of_comp_of_surjective {U X Y : Scheme.{u}} (u : U ⟶ X)
