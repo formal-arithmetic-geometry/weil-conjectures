@@ -198,5 +198,23 @@
  "lean_candidates": {
   "branch": "slopmaster2",
   "note": "SheafOfModules.preservesColimitsOfShape_toSheaf and preservesFiniteColimits_toSheaf (WeilConjectures/Mathlib/Algebra/Category/ModuleCat/Presheaf/Sheafification.lean:43/64, sorry-free) state clause (3) for colimits; the rest of the node is Mathlib (limits, faithfulness, finite limits at Sheaf/Limits.lean:118)"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ModuleSheavesColimitsForgetful",
+  "declaration": "CategoryTheory.moduleSheaves_colimits_forgetful",
+  "file": "lean/Sheaf/AlgebraicGeometry/ModuleSheavesColimitsForgetful.lean",
+  "statement": "theorem moduleSheaves_colimits_forgetful {C : Type u} [Category.{v} C] {J : GrothendieckTopology C} (R : Sheaf J RingCat.{u'}) [HasSheafify J AddCommGrpCat.{v'}] [J.WEqualsLocallyBijective AddCommGrpCat.{v'}] : (SheafOfModules.toSheaf.{v'} R).Faithful ∧ PreservesFiniteLimits (SheafOfModules.toSheaf.{v'} R) ∧ PreservesFiniteColimits (SheafOfModules.toSheaf.{v'} R) ∧ HasLimitsOfSize.{v', v'} (SheafOfModules.{v'} R) ∧ HasColimitsOfSize.{v', v'} (SheafOfModules.{v'} R) ∧ (∀ (K : Type v') [SmallCategory K], PreservesLimitsOfShape K (SheafOfModules.toSheaf.{v'} R) ∧ PreservesColimitsOfShape K (SheafOfModules.toSheaf.{v'} R) ∧ (∀ X : Cᵒᵖ, PreservesLimitsOfShape K (SheafOfModules.evaluation.{v'} R X)) ∧ (∀ F : K ⥤ SheafOfModules.{v'} R, ∃ s : Cocone F, Nonempty (IsColimit s) ∧ ∃ e : s.pt ≅ (PresheafOfModules.sheafification.{v'} (𝟙 R.obj)).obj (PresheafOfModules.colimitPresheafOfModules (F ⋙ SheafOfModules.forget R)), ∀ i : K, (PresheafOfModules.toPresheaf R.obj).map ((s.ι.app i).val ≫ e.hom.val) = (PresheafOfModules.toPresheaf R.obj).map ((PresheafOfModules.colimitCocone (F ⋙ SheafOfModules.forget R)).ι.app i) ≫ toSheafify J (PresheafOfModules.colimitPresheafOfModules (F ⋙ SheafOfModules.forget R)).presheaf))",
+  "branch": "sheaf-dag",
+  "by": "J1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-mcf1151",
+  "group": "J1",
+  "result": "pass",
+  "note": "general site C/J with HasSheafify+WEqualsLocallyBijective AddCommGrpCat.{v'} (not hollow: inferInstance fails); R : Sheaf J RingCat; toSheaf Faithful/finite exact; Has(Co)LimitsOfSize.{v',v'}; K : Type v' small (index in module universe); evaluation preserves limits (sectionwise); colimit cocone iso to module sheafification of colimitPresheafOfModules with coprojections = colimitCocone.ι ≫ toSheafify; toSheaf preserves limits/colimits of shape K (not Mathlib instances)"
  }
 }

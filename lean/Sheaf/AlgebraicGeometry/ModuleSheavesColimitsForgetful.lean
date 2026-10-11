@@ -1,0 +1,76 @@
+/-
+Copyright (c) 2026 The SHEAF contributors. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: SHEAF contributors
+-/
+import Mathlib.Algebra.Category.ModuleCat.Sheaf.Colimits
+
+/-!
+# Colimits of sheaves of modules and the forgetful functor
+
+Source: Stacks Project, Modules on Sites, Lemmas 03DA, 03DB, 03CO and 03CY
+(blueprint: lem-weil-pbc-module-sheaves-colimits-forgetful).
+-/
+
+universe u v u' v'
+
+open CategoryTheory CategoryTheory.Limits
+
+namespace CategoryTheory
+
+/-- Source: Stacks Project, Modules on Sites, Lemmas 03DA, 03DB, 03CO and 03CY
+(blueprint: lem-weil-pbc-module-sheaves-colimits-forgetful).
+The forgetful functor from module sheaves to abelian sheaves is faithful and exact.
+Small limits exist and are sectionwise; small colimits exist and are the module
+sheafifications of sectionwise presheaf colimits, with the canonical coprojections.
+The forgetful functor preserves both. Small here means relative to the module universe `v'`.
+
+Proof, following the four steps of the node:
+1. By `lem-weil-pbc-module-sheaves-limits-sectionwise`, form limits sectionwise, with
+componentwise operations and restrictions. Their underlying abelian presheaves are the
+sectionwise limits, which are sheaves and limits in abelian sheaves by
+`lem-weil-pbc-sheafification-exact` (1). Thus forgetting preserves limits.
+2. By `lem-weil-pbc-presheaf-modules-colimits-sectionwise`, form the presheaf colimit
+`P`, with its module structure and coprojections. Apply the module sheafification of
+`def-weil-presheaf-modules-sheafification`. A cocone into a module sheaf factors uniquely
+through `P`, and then uniquely through its sheafification by the sheafification adjunction.
+Uniqueness of both factorizations proves the colimit property, with coprojections induced
+by the sheafification unit, as in `def-weil-pbc-category-colimit`.
+3. Forgetting the module structure of `P` gives the presheaf colimit in abelian groups.
+Module sheafification has the same underlying abelian sheaf as abelian sheafification
+(`def-weil-pbc-sheafification`). The same two universal properties show that the resulting
+abelian cocone is a colimit. Thus forgetting preserves colimits, including coprojections.
+4. Morphisms are componentwise linear maps of abelian sheaves, so forgetting is faithful
+and additive (`def-weil-sheaf-of-modules-category`). Kernels are limits of a map and zero;
+cokernels are colimits of a map and zero. Steps 1 and 3 preserve these, and hence preserve
+images and exact sequences in the abelian categories, as in `def-pur-abelian-sheaf-kernel`.
+Equivalently, the forgetful functor preserves finite limits and finite colimits. -/
+theorem moduleSheaves_colimits_forgetful
+    {C : Type u} [Category.{v} C] {J : GrothendieckTopology C}
+    (R : Sheaf J RingCat.{u'})
+    [HasSheafify J AddCommGrpCat.{v'}]
+    [J.WEqualsLocallyBijective AddCommGrpCat.{v'}] :
+    (SheafOfModules.toSheaf.{v'} R).Faithful ∧
+      PreservesFiniteLimits (SheafOfModules.toSheaf.{v'} R) ∧
+      PreservesFiniteColimits (SheafOfModules.toSheaf.{v'} R) ∧
+      HasLimitsOfSize.{v', v'} (SheafOfModules.{v'} R) ∧
+      HasColimitsOfSize.{v', v'} (SheafOfModules.{v'} R) ∧
+      (∀ (K : Type v') [SmallCategory K],
+        PreservesLimitsOfShape K (SheafOfModules.toSheaf.{v'} R) ∧
+          PreservesColimitsOfShape K (SheafOfModules.toSheaf.{v'} R) ∧
+          (∀ X : Cᵒᵖ, PreservesLimitsOfShape K (SheafOfModules.evaluation.{v'} R X)) ∧
+          (∀ F : K ⥤ SheafOfModules.{v'} R,
+            ∃ s : Cocone F, Nonempty (IsColimit s) ∧
+              ∃ e : s.pt ≅ (PresheafOfModules.sheafification.{v'} (𝟙 R.obj)).obj
+                  (PresheafOfModules.colimitPresheafOfModules (F ⋙ SheafOfModules.forget R)),
+                ∀ i : K,
+                  (PresheafOfModules.toPresheaf R.obj).map ((s.ι.app i).val ≫ e.hom.val) =
+                    (PresheafOfModules.toPresheaf R.obj).map
+                        ((PresheafOfModules.colimitCocone
+                          (F ⋙ SheafOfModules.forget R)).ι.app i) ≫
+                      toSheafify J
+                        (PresheafOfModules.colimitPresheafOfModules
+                          (F ⋙ SheafOfModules.forget R)).presheaf)) := by
+  sorry
+
+end CategoryTheory
