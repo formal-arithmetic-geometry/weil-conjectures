@@ -137,5 +137,23 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-far2320 (reviewer sub-agent of L); spot-checked: Steps vs Tag 021P text and the cited statements (affine-open-cover, fppf-site def, flat-lfp-open, quasi-compact def); step 1 composition and step 3 quasi-compactness of Spec A are elementary and written out; tool use flat-lfp-open accepted as generic. FIX more, RETURN less: C4 in step 2 (missed by the second reading): 'the T_i jointly cover U' is not in def-pc-fppf-site, whose coverings are only flat lfp families (no joint surjectivity), so the item was false for the empty family on nonempty U; E7 statement change named: made joint surjectivity of the fppf covering explicit in the statement (Stacks 021L) and step 2 now uses that hypothesis.; 1 file(s) fixed by the reviewer"
  },
- "lead_note": "2026-10-10 L (R-far2320): def-pc-fppf-site (imported) omits joint surjectivity of fppf coverings (Stacks 021L); as stated the empty family is a covering. Repair that node; dependants (topos-equivalence, sheafification-restriction) inherit it."
+ "lead_note": "2026-10-10 L (R-far2320): def-pc-fppf-site (imported) omits joint surjectivity of fppf coverings (Stacks 021L); as stated the empty family is a covering. Repair that node; dependants (topos-equivalence, sheafification-restriction) inherit it.",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FppfAffineRefinement",
+  "declaration": "AlgebraicGeometry.Scheme.exists_finite_fppf_affine_open_refinement",
+  "file": "lean/Sheaf/AlgebraicGeometry/FppfAffineRefinement.lean",
+  "statement": "theorem exists_finite_fppf_affine_open_refinement {U : Scheme.{u}} [IsAffine U] {I : Type v} (T : I → Scheme.{u}) (f : ∀ i, T i ⟶ U) (hf : Presieve.ofArrows T f ∈ fppfPrecoverage U) : ∃ (n : ℕ) (i : Fin n → I) (V : ∀ j, (T (i j)).Opens), (∀ j, IsAffineOpen (V j)) ∧ Presieve.ofArrows (fun j ↦ (V j).toScheme) (fun j ↦ (V j).ι ≫ f (i j)) ∈ fppfPrecoverage U",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-far0745",
+  "group": "E1",
+  "result": "pass",
+  "note": "U affine = [IsAffine U]; I:Type v arbitrary, T,f; hf ofArrows ∈ fppfPrecoverage = each f i Flat ⊓ LocallyOfFinitePresentation + jointly surjective (ofArrows_mem_precoverage_iff, Stacks 021L); finite i:Fin n→I; V j affine opens of T (i j); factorization (V j).ι ≫ f (i j); conclusion ofArrows ∈ fppfPrecoverage = each composite fppf + images cover U; n=0/empty I only for empty U; universes u,v independent; docstring has node proof; H4: Mathlib QuasiCompactCover.exists_isAffineOpen_of_isCompact is close but not exact (no fppf conclusion, needs QuasiCompactCover)"
+ }
 }
