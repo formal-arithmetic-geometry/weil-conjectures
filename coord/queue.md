@@ -1,11 +1,11 @@
 # Work queue
 
-516 items; claim with `tools/claim.py next <group> [--stage N]`.
+512 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (516)
+## Stage 2: nodes to state (512)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -50,7 +50,6 @@
 | `lem-sc-picard-kunneth-qcoh` | 1 | state |
 | `lem-sc-picard-qcoh-finite-cd` | 1 | state |
 | `lem-sc-picard-qcoh-universal-delta-embedding` | 1 | state |
-| `lem-sc-regular-meromorphic-section-exists` | 1 | state |
 | `lem-sc-smooth-omega-finite-locally-free` | 1 | state |
 | `lem-sc-snapper-numerical-polynomial` | 1 | state |
 | `lem-sc-torsion-sections-generic` | 1 | state |
@@ -78,7 +77,6 @@
 | `lem-weil-pbc-etale-finite-data-descent` | 1 | state |
 | `lem-weil-pbc-finite-presentation-kernel-surjection-finite-type` | 1 | state |
 | `lem-weil-pbc-finite-pushforward-coherent` | 1 | state |
-| `lem-weil-pbc-formal-fibre-quasi-finite-ascent` | 1 | state |
 | `lem-weil-pbc-ideal-times-quasi-coherent-affine-sections` | 1 | state |
 | `lem-weil-pbc-integral-algebra-directed-colimit-finite` | 1 | state |
 | `lem-weil-pbc-integral-scheme-ideal-generic-stalk` | 1 | state |
@@ -98,8 +96,6 @@
 | `lem-weil-pbc-nakayama-nilpotent` | 1 | state |
 | `lem-weil-pbc-noetherian-acc-quasi-coherent` | 1 | state |
 | `lem-weil-pbc-nonvanishing-section-trivializes` | 1 | state |
-| `lem-weil-pbc-nonzerodivisor-if-maximal-not-associated` | 1 | state |
-| `lem-weil-pbc-normal-locus-open` | 1 | state |
 | `lem-weil-pbc-normal-nagata-monogenic-n1` | 1 | state |
 | `lem-weil-pbc-normal-ring-integrally-closed-total` | 1 | state |
 | `lem-weil-pbc-normalization-in-residue-field-extension` | 1 | state |
