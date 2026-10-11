@@ -1,11 +1,11 @@
 # Work queue
 
-971 items; claim with `tools/claim.py next <group> [--stage N]`.
+969 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (971)
+## Stage 2: nodes to state (969)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -18,11 +18,9 @@
 | `def-weil-pbc-formal-glueing-data` | 1 | state |
 | `def-weil-pbc-henselian-terminology` | 1 | state |
 | `def-weil-pbc-popescu-resolution` | 1 | state |
-| `def-weil-pbc-proetale-site` | 1 | state |
 | `lem-exc-discrete-modules-abelian` | 1 | state |
 | `lem-exc-discrete-modules-abelian-structure` | 1 | state |
 | `lem-exc-etale-sheaves-gsets-point` | 1 | state |
-| `lem-exc-finite-galois-sheaf-sections-coproduct` | 1 | state |
 | `lem-exc-rg-discrete-modules-functorial-injective-embeddings` | 1 | state |
 | `lem-exc-rg-open-stabilizer-adjoint` | 1 | state |
 | `lem-fin-etale-normal-components` | 1 | state |
