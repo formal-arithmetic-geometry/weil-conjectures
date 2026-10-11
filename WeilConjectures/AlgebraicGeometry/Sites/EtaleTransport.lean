@@ -14,12 +14,13 @@ public import WeilConjectures.AlgebraicGeometry.Sites.Gm
 
 Let `f : X ⟶ Y` be an étale monomorphism of schemes, for instance an isomorphism. Restriction
 along the localization functor `Φ : X.Etale ⥤ Y.Etale`, `U ↦ (U ⟶ X ⟶ Y)`, is an exact functor
-`R : Sh(Y_ét) ⥤ Sh(X_ét)` with `(R F)(U) = F(Φ U)` (`AlgebraicGeometry.Scheme.etaleRestriction`).
-It induces maps `H^n(Y, F) ⟶ H^n(X, R F)` on étale cohomology
+`R : Sh(Y_ét) ⥤ Sh(X_ét)` with `(R F)(U) = F(Φ U)`
+(`AlgebraicGeometry.Scheme.etaleRestriction`). It induces maps `H^n(Y, F) ⟶ H^n(X, R F)` on
+étale cohomology
 (`AlgebraicGeometry.Scheme.etaleRestrictionH`), natural in `F`, compatible with connecting
 homomorphisms and given in degree `0` by restriction of global sections. Restricting the
 underlying sheaf of a `G`-torsor gives an `R G`-torsor
-(`CategoryTheory.Sheaf.Torsor.etaleRestriction`), and the class of the restricted torsor in
+(`CategoryTheory.Sheaf.Torsor.restrict`), and the class of the restricted torsor in
 `H¹(X, R G)` is the image of the class of the torsor
 (`AlgebraicGeometry.Scheme.classH1_etaleRestriction`).
 
@@ -124,8 +125,11 @@ noncomputable abbrev etaleRestrictionTop : Y.Etale :=
   (etaleLocalization f).obj (MorphismProperty.Over.mk ⊤ (𝟙 X)
     (MorphismProperty.id_mem _ X))
 
-variable (hX : IsTerminal (MorphismProperty.Over.mk ⊤ (𝟙 X) (MorphismProperty.id_mem @Etale X)))
-  (hY : IsTerminal (MorphismProperty.Over.mk ⊤ (𝟙 Y) (MorphismProperty.id_mem @Etale Y)))
+/-- The terminal object `𝟙 : X ⟶ X` of the small étale site. -/
+noncomputable abbrev isTerminalEtale (X : Scheme.{u}) :
+    IsTerminal (MorphismProperty.Over.mk ⊤ (𝟙 X) (MorphismProperty.id_mem @Etale X)) :=
+  MorphismProperty.Over.mkIdTerminal @Etale X
+
 
 /-- The comparison `ℤ_X ⟶ R ℤ_Y` of constant sheaves sending `1` to the restriction of `1`. -/
 noncomputable def constantSheafToEtaleRestriction :
@@ -133,32 +137,32 @@ noncomputable def constantSheafToEtaleRestriction :
         (AddCommGrpCat.of (ULift ℤ)) ⟶
       (etaleRestriction f).obj ((constantSheaf Y.smallEtaleTopology AddCommGrpCat.{u + 1}).obj
         (AddCommGrpCat.of (ULift ℤ))) :=
-  (Sheaf.constantHomEquiv hX _).symm
+  (Sheaf.constantHomEquiv (isTerminalEtale X) _).symm
     (((constantSheaf Y.smallEtaleTopology AddCommGrpCat.{u + 1}).obj
-      (AddCommGrpCat.of (ULift ℤ))).obj.map (hY.from (etaleRestrictionTop f)).op
-        (Sheaf.constantHomEquiv hY _ (𝟙 _)))
+      (AddCommGrpCat.of (ULift ℤ))).obj.map ((isTerminalEtale Y).from (etaleRestrictionTop f)).op
+        (Sheaf.constantHomEquiv (isTerminalEtale Y) _ (𝟙 _)))
 
 /-- The map `H^n(Y, F) ⟶ H^n(X, R F)` induced by the restriction along an étale monomorphism:
 push an `Ext`-class forward along the exact functor `R` and precompose with the comparison
 `ℤ_X ⟶ R ℤ_Y` of constant sheaves. -/
 noncomputable def etaleRestrictionH [Mono f] (F : Sheaf Y.smallEtaleTopology AddCommGrpCat.{u + 1})
     (n : ℕ) : Sheaf.H F n →+ Sheaf.H ((etaleRestriction f).obj F) n :=
-  ((Ext.mk₀ (constantSheafToEtaleRestriction f hX hY)).precomp _ (zero_add n)).comp
+  ((Ext.mk₀ (constantSheafToEtaleRestriction f)).precomp _ (zero_add n)).comp
     ((etaleRestriction f).mapExtAddHom _ F n)
 
 variable [Mono f]
 
 lemma etaleRestrictionH_apply (F : Sheaf Y.smallEtaleTopology AddCommGrpCat.{u + 1}) (n : ℕ)
     (x : Sheaf.H F n) :
-    etaleRestrictionH f hX hY F n x = (Ext.mk₀ (constantSheafToEtaleRestriction f hX hY)).comp
+    etaleRestrictionH f F n x = (Ext.mk₀ (constantSheafToEtaleRestriction f)).comp
       (x.mapExactFunctor (etaleRestriction f)) (zero_add n) :=
   rfl
 
 /-- The map on cohomology is natural in the sheaf. -/
 lemma etaleRestrictionH_map {F F' : Sheaf Y.smallEtaleTopology AddCommGrpCat.{u + 1}}
     (φ : F ⟶ F') (n : ℕ) (x : Sheaf.H F n) :
-    etaleRestrictionH f hX hY F' n (Sheaf.H.map φ n x) =
-      Sheaf.H.map ((etaleRestriction f).map φ) n (etaleRestrictionH f hX hY F n x) := by
+    etaleRestrictionH f F' n (Sheaf.H.map φ n x) =
+      Sheaf.H.map ((etaleRestriction f).map φ) n (etaleRestrictionH f F n x) := by
   simp only [etaleRestrictionH_apply, Sheaf.H.map_apply, Ext.mapExactFunctor_comp,
     Ext.mapExactFunctor_mk₀]
   exact (Ext.comp_assoc _ _ _ (zero_add n) (add_zero n) (by omega)).symm
@@ -166,9 +170,9 @@ lemma etaleRestrictionH_map {F F' : Sheaf Y.smallEtaleTopology AddCommGrpCat.{u 
 /-- The map on cohomology commutes with the connecting homomorphisms. -/
 lemma etaleRestrictionH_δSucc {S : ShortComplex (Sheaf Y.smallEtaleTopology
     AddCommGrpCat.{u + 1})} (hS : S.ShortExact) (n : ℕ) (x : Sheaf.H S.X₃ n) :
-    etaleRestrictionH f hX hY S.X₁ (n + 1) (Sheaf.H.δSucc hS n x) =
+    etaleRestrictionH f S.X₁ (n + 1) (Sheaf.H.δSucc hS n x) =
       Sheaf.H.δSucc (hS.map_of_exact (etaleRestriction f)) n
-        (etaleRestrictionH f hX hY S.X₃ n x) := by
+        (etaleRestrictionH f S.X₃ n x) := by
   simp only [etaleRestrictionH_apply, Sheaf.H.δSucc_apply, Ext.mapExactFunctor_comp,
     Ext.mapExactFunctor_extClass]
   exact (Ext.comp_assoc _ _ _ (zero_add n) rfl (by omega)).symm
@@ -177,14 +181,15 @@ lemma etaleRestrictionH_δSucc {S : ShortComplex (Sheaf Y.smallEtaleTopology
 `(X ⟶ Y) ⟶ (Y ⟶ Y)`. -/
 lemma equiv₀_etaleRestrictionH (F : Sheaf Y.smallEtaleTopology AddCommGrpCat.{u + 1})
     (x : Sheaf.H F 0) :
-    Sheaf.H.equiv₀ _ hX (etaleRestrictionH f hX hY F 0 x) =
-      F.obj.map (hY.from (etaleRestrictionTop f)).op (Sheaf.H.equiv₀ F hY x) := by
+    Sheaf.H.equiv₀ _ (isTerminalEtale X) (etaleRestrictionH f F 0 x) =
+      F.obj.map ((isTerminalEtale Y).from (etaleRestrictionTop f)).op
+        (Sheaf.H.equiv₀ F (isTerminalEtale Y) x) := by
   obtain ⟨g, rfl⟩ := Ext.addEquiv₀.symm.surjective x
   rw [etaleRestrictionH_apply, Ext.addEquiv₀_symm_apply, Ext.mapExactFunctor_mk₀,
     Ext.mk₀_comp_mk₀, Sheaf.H.equiv₀_eq_constantHomEquiv, Sheaf.H.equiv₀_eq_constantHomEquiv]
   erw [Ext.addEquiv₀.apply_symm_apply, Ext.addEquiv₀.apply_symm_apply]
   rw [Sheaf.constantHomEquiv_comp, constantSheafToEtaleRestriction, Equiv.apply_symm_apply]
-  exact Sheaf.constantHomEquiv_naturality hY g _
+  exact Sheaf.constantHomEquiv_naturality (isTerminalEtale Y) g _
 
 end AlgebraicGeometry.Scheme
 
@@ -235,39 +240,37 @@ namespace AlgebraicGeometry.Scheme
 open Sheaf
 
 variable {X Y : Scheme.{u}} (f : X ⟶ Y) [Etale f] [Mono f]
-  (hX : IsTerminal (MorphismProperty.Over.mk ⊤ (𝟙 X) (MorphismProperty.id_mem @Etale X)))
-  (hY : IsTerminal (MorphismProperty.Over.mk ⊤ (𝟙 Y) (MorphismProperty.id_mem @Etale Y)))
 
 /-- The restriction of a lifting torsor is a lifting torsor. -/
 lemma etaleRestriction_lifts_equiv {G I Q : Sheaf Y.smallEtaleTopology AddCommGrpCat.{u + 1}}
     {ι : G ⟶ I} {d : I ⟶ Q} {w : ι ≫ d = 0} (hS : (ShortComplex.mk ι d w).ShortExact)
     (s : Q.obj.obj (op _)) :
-    (Torsor.lifts hY hS s).restrict f ≈
-      Torsor.lifts hX (hS.map_of_exact (etaleRestriction f))
-        (Q.obj.map (hY.from (etaleRestrictionTop f)).op s) := by
-  refine ⟨Torsor.Iso.ofHom ⟨{ app U := ↾fun x ↦ ⟨(x : (Torsor.lifts hY hS s).sheaf.obj.obj
+    (Torsor.lifts (isTerminalEtale Y) hS s).restrict f ≈
+      Torsor.lifts (isTerminalEtale X) (hS.map_of_exact (etaleRestriction f))
+        (Q.obj.map ((isTerminalEtale Y).from (etaleRestrictionTop f)).op s) := by
+  set P := Torsor.lifts (isTerminalEtale Y) hS s
+  refine ⟨Torsor.Iso.ofHom ⟨{ app U := ↾fun x ↦ ⟨(x : P.sheaf.obj.obj
     (op ((etaleLocalization f).obj U.unop))).1, ?_⟩, naturality U V g := rfl }⟩ fun U a x ↦ rfl⟩
-  have hx : d.hom.app _ (x : (Torsor.lifts hY hS s).sheaf.obj.obj
-    (op ((etaleLocalization f).obj U.unop))).1 = _ := x.2
-  change d.hom.app _ (x : (Torsor.lifts hY hS s).sheaf.obj.obj
-    (op ((etaleLocalization f).obj U.unop))).1 = Q.obj.map ((etaleLocalization f).map
-    (hX.from U.unop)).op (Q.obj.map (hY.from (etaleRestrictionTop f)).op s)
+  have hx : d.hom.app _ (x : P.sheaf.obj.obj (op ((etaleLocalization f).obj U.unop))).1 = _ :=
+    x.2
+  change d.hom.app _ (x : P.sheaf.obj.obj (op ((etaleLocalization f).obj U.unop))).1 =
+    Q.obj.map ((etaleLocalization f).map ((isTerminalEtale X).from U.unop)).op
+      (Q.obj.map ((isTerminalEtale Y).from (etaleRestrictionTop f)).op s)
   rw [hx, ← ConcreteCategory.comp_apply, ← Q.obj.map_comp, ← op_comp]
   congr 3
-  exact congrArg Quiver.Hom.op (hY.hom_ext _ _)
 
 /-- **Classes of restricted torsors.** The class of the restriction of a `G`-torsor `P` is the
 image of the class of `P` under `H¹(Y, G) ⟶ H¹(X, R G)`. -/
 theorem classH1_etaleRestriction {G : Sheaf Y.smallEtaleTopology AddCommGrpCat.{u + 1}}
     (P : Torsor G) :
-    Torsor.classH1 _ hX ⟦P.restrict f⟧ =
-      etaleRestrictionH f hX hY G 1 (Torsor.classH1 G hY ⟦P⟧) := by
+    Torsor.classH1 _ (isTerminalEtale X) ⟦P.restrict f⟧ =
+      etaleRestrictionH f G 1 (Torsor.classH1 G (isTerminalEtale Y) ⟦P⟧) := by
   have hS := Torsor.injectiveSequence_shortExact G
-  obtain ⟨s, hs⟩ := Torsor.exists_equiv_lifts hY hS P
-  obtain ⟨x, rfl⟩ := (H.equiv₀ _ hY).surjective s
+  obtain ⟨s, hs⟩ := Torsor.exists_equiv_lifts (isTerminalEtale Y) hS P
+  obtain ⟨x, rfl⟩ := (H.equiv₀ _ (isTerminalEtale Y)).surjective s
   rw [_root_.Quotient.sound hs, _root_.Quotient.sound (Torsor.restrict_equiv f hs),
-    _root_.Quotient.sound (etaleRestriction_lifts_equiv f hX hY hS _), Torsor.classH1_lifts,
+    _root_.Quotient.sound (etaleRestriction_lifts_equiv f hS _), Torsor.classH1_lifts,
     Torsor.classH1_lifts, ← equiv₀_etaleRestrictionH, ← H.δSucc_zero, ← H.δSucc_zero]
-  exact (etaleRestrictionH_δSucc f hX hY hS 0 x).symm
+  exact (etaleRestrictionH_δSucc f hS 0 x).symm
 
 end AlgebraicGeometry.Scheme
