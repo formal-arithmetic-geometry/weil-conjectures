@@ -1,15 +1,15 @@
 # Work queue
 
-162 items; claim with `tools/claim.py next <group> [--stage N]`.
+157 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (162)
+## Stage 2: nodes to state (157)
 
 | node | distance to Mathlib | kind | blockers |
 |---|---|---|---|
-| `def-weil-pbc-sites-and-cohomology` | 1 | state | 137 |
+| `def-weil-pbc-sites-and-cohomology` | 1 | state | 136 |
 | `def-nagata-qc-open-equality-stage` | 1 | state | 13 |
 | `def-sc-field-extension` | 1 | state | 6 |
 | `def-weil-pbc-module-cohomology-fmap` | 1 | state | 6 |
@@ -17,7 +17,7 @@
 | `def-weil-pbc-simplicial-hom-object` | 1 | state | 4 |
 | `def-pc-derived-rhom-algebra-module` | 1 | state | 2 |
 | `def-weil-pbc-hypercohomology-filtrations` | 1 | state | 2 |
-| `lem-pc-module-pullback-identity-composition` | 1 | state | 11 |
+| `lem-pc-module-pullback-identity-composition` | 1 | state | 10 |
 | `lemma-nagata-qc-open-descends` | 1 | state | 10 |
 | `lem-weil-pbc-coherent-formal-modules-abelian` | 1 | state | 9 |
 | `lem-weil-pbc-cohomology-pullback-functorial` | 1 | state | 8 |
@@ -153,23 +153,18 @@
 | `pqf-lem-fff-vanishing` | 1 | state | 0 |
 | `pqf-lem-serre-criterion` | 1 | state | 0 |
 | `prop-weil-pbc-strict-henselization-stalk-formula` | 1 | state | 0 |
-| `sbc-lem-higher-direct-image-presheaf` | 1 | state | 0 |
 | `thm-weil-pbc-universal-homeomorphism-invariance` | 1 | state | 0 |
 | `lem-pc-proper-support-perfect-direct-image` | 2 | state | 0 |
 | `lem-pc-rf-base-change-flat-module` | 2 | state | 0 |
 | `lem-pc-rf-single-complex-inherited-tensor-condition` | 2 | state | 0 |
 | `lem-pc-supported-open-pushforward` | 2 | state | 0 |
-| `lem-sc-finite-locally-free-derived-hom` | 2 | state | 0 |
 | `lem-sc-mult-n-tangent-differential` | 2 | state | 0 |
 | `lem-sc-p1-proj-shifted-free-twist` | 2 | state | 0 |
-| `lem-sc-pic-affine-quotient` | 2 | state | 0 |
 | `lem-sc-picard-valuation-probe-closure` | 2 | state | 0 |
 | `lem-sc-right-adjoint-open-support-criterion` | 2 | state | 0 |
-| `lem-sc-second-kummer-divisors` | 2 | state | 0 |
 | `lem-sc-supported-derived-generated-perfect` | 2 | state | 0 |
 | `lem-sc-valuation-closed-fibre-section-vanishing` | 2 | state | 0 |
 | `lem-sp-derived-couple-functoriality` | 2 | state | 0 |
-| `lemma-weil-pbc-etale-cohomology-continuity` | 2 | state | 0 |
 | `pqf-lem-affine-vanishing` | 2 | state | 0 |
 
 Not open yet: 40 nodes that wait for stage 1, 229 nodes that wait for a statement dependency.
