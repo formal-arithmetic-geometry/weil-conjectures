@@ -27,11 +27,11 @@ Step 2) is that `Tr^sm_p(cl) = 1`.
 
 ## Main statements
 
-- `AlgebraicGeometry.Etale.isIso_affineLineFundamentalClass_comp_smoothTrace`: for every purity
-  isomorphism, the trace of the fundamental class is invertible. It is the adjoint of the
+- `AlgebraicGeometry.Etale.isIso_affineLineFundamentalClass_comp_smoothPurityTrace`: for every
+  purity isomorphism, the trace of the fundamental class is invertible. It is the adjoint of the
   orientation, which is an isomorphism, and the counit of `R(s ≫ p)_! ⊣ R(s ≫ p)^!` is an
   isomorphism since `s ≫ p` is.
-- `AlgebraicGeometry.Etale.exists_affineLineFundamentalClass_comp_smoothTrace`: the trace of
+- `AlgebraicGeometry.Etale.exists_affineLineFundamentalClass_comp_smoothPurityTrace`: the trace of
   the fundamental class is `1`.
 
 ## Implementation notes
@@ -113,7 +113,7 @@ isomorphism, `AlgebraicGeometry.Etale.isIso_affineLineOrientation`):
 and the counit of the composite adjunction is an isomorphism because `s ≫ p : V(t) ⟶ Y` is an
 isomorphism (`AlgebraicGeometry.Etale.isIso_rightDerivedUpperShriekAdjunction_counit_of_isIso`),
 through `α : R(s ≫ p)_! ≅ Rs_! ⋙ Rp_!`. -/
-theorem isIso_affineLineFundamentalClass_comp_smoothTrace [HasKummerClass.IsNormalized Λ]
+theorem isIso_affineLineFundamentalClass_comp_smoothPurityTrace [HasKummerClass.IsNormalized Λ]
     [HasInvertibleExponent Λ Y]
     (α : R(𝔸(ULift.{u} (Fin 1); Y).zeroLocusSubschemeι
         {AffineSpace.coord Y (ULift.up 0)} ≫ (𝔸(ULift.{u} (Fin 1); Y) ↘ Y))_![ModuleCat.{u + 1} Λ] ≅
@@ -132,7 +132,7 @@ theorem isIso_affineLineFundamentalClass_comp_smoothTrace [HasKummerClass.IsNorm
     IsIso (ψ.hom ≫ affineLineFundamentalClass Λ Y α ≫
       (R(𝔸(ULift.{u} (Fin 1); Y) ↘ Y)_![ModuleCat.{u + 1} Λ]).map
         (affineLineTwistShiftIso Λ Y).inv ≫
-      smoothTrace Λ ((1 : ℕ) : ℤ) _ γ) := by
+      smoothPurityTrace Λ ((1 : ℕ) : ℤ) _ γ) := by
   have := isIso_affineLineOrientation Λ Y
   have : IsIso (𝔸(ULift.{u} (Fin 1); Y).zeroLocusSubschemeι
       {AffineSpace.coord Y (ULift.up 0)} ≫ (𝔸(ULift.{u} (Fin 1); Y) ↘ Y)) :=
@@ -153,7 +153,7 @@ theorem isIso_affineLineFundamentalClass_comp_smoothTrace [HasKummerClass.IsNorm
       Functor.isoWhiskerLeft _ α.symm ≪≫ asIso b.counit)
   have key : affineLineFundamentalClass Λ Y α ≫
       (R(𝔸(ULift.{u} (Fin 1); Y) ↘ Y)_![ModuleCat.{u + 1} Λ]).map
-        (affineLineTwistShiftIso Λ Y).inv ≫ smoothTrace Λ ((1 : ℕ) : ℤ) _ γ =
+        (affineLineTwistShiftIso Λ Y).inv ≫ smoothPurityTrace Λ ((1 : ℕ) : ℤ) _ γ =
       α.hom.app _ ≫ (R(𝔸(ULift.{u} (Fin 1); Y).zeroLocusSubschemeι
         {AffineSpace.coord Y (ULift.up 0)})_![ModuleCat.{u + 1} Λ] ⋙
           R(𝔸(ULift.{u} (Fin 1); Y) ↘ Y)_![ModuleCat.{u + 1} Λ]).map
@@ -164,7 +164,7 @@ theorem isIso_affineLineFundamentalClass_comp_smoothTrace [HasKummerClass.IsNorm
     have h := congrArg (R(𝔸(ULift.{u} (Fin 1); Y) ↘ Y)_![ModuleCat.{u + 1} Λ]).map
       (as.counit.naturality ((affineLineTwistShiftIso Λ Y).inv ≫ γ.hom))
     simp only [Functor.comp_map, Functor.id_map, Functor.map_comp, Category.assoc] at h
-    simp only [affineLineFundamentalClass, smoothTrace, Adjunction.comp_counit_app,
+    simp only [affineLineFundamentalClass, smoothPurityTrace, Adjunction.comp_counit_app,
       Functor.comp_map, Functor.map_comp, Category.assoc, reassoc_of% h]
     rfl
   rw [key]
@@ -176,9 +176,9 @@ theorem isIso_affineLineFundamentalClass_comp_smoothTrace [HasKummerClass.IsNorm
 the affine line `p : 𝔸¹_k ⟶ Spec k` sends the fundamental class of `𝔸¹` to `1`: for every
 composition isomorphism `α` and identification `ψ : Λ_k ≅ R(s ≫ p)_! Λ_{V(t)}` there is a
 purity isomorphism `γ_{p,Λ} : Lp^* Λ(1)[2] ≅ Rp^! Λ` with `Tr^sm_{p,Λ} ∘ cl ∘ ψ = 1`. Together
-with the transitivity `AlgebraicGeometry.Etale.smoothTrace_comp` this gives the normalization of
-`Tr^sm_{p_d}` on the ordered fundamental class of `𝔸^d` by induction on `d`. -/
-theorem exists_affineLineFundamentalClass_comp_smoothTrace {k : Type u} [Field k]
+with the transitivity `AlgebraicGeometry.Etale.smoothPurityTrace_comp` this gives the
+normalization of `Tr^sm_{p_d}` on the ordered fundamental class of `𝔸^d` by induction on `d`. -/
+theorem exists_affineLineFundamentalClass_comp_smoothPurityTrace {k : Type u} [Field k]
     [IsSepClosed k] [HasKummerClass.IsNormalized Λ]
     [HasInvertibleExponent Λ (Spec (.of k))]
     [HasCompactification (𝔸(ULift.{u} (Fin 1); Spec (.of k)).zeroLocusSubschemeι
@@ -203,7 +203,7 @@ theorem exists_affineLineFundamentalClass_comp_smoothTrace {k : Type u} [Field k
       ψ.hom ≫ affineLineFundamentalClass Λ (Spec (.of k)) α ≫
         (R(𝔸(ULift.{u} (Fin 1); Spec (.of k)) ↘ Spec (.of k))_![ModuleCat.{u + 1} Λ]).map
           (affineLineTwistShiftIso Λ (Spec (.of k))).inv ≫
-        smoothTrace Λ ((1 : ℕ) : ℤ) _ γ = 𝟙 _ := by
+        smoothPurityTrace Λ ((1 : ℕ) : ℤ) _ γ = 𝟙 _ := by
   have : SmoothOfRelativeDimension 1 (𝔸(ULift.{u} (Fin 1); Spec (.of k)) ↘ Spec (.of k)) := by
     have := AffineSpace.smoothOfRelativeDimension_over (ULift.{u} (Fin 1)) (Spec (.of k))
     rwa [show Nat.card (ULift.{u} (Fin 1)) = 1 by simp] at this
@@ -219,16 +219,16 @@ theorem exists_affineLineFundamentalClass_comp_smoothTrace {k : Type u} [Field k
     (twistShift Λ _ _).mapIso
       (leftDerivedUpperStarConstantComplexIso Λ (𝔸(ULift.{u} (Fin 1); Spec (.of k)) ↘ Spec (.of k)))
       ≪≫ θ.symm
-  have hu := isIso_affineLineFundamentalClass_comp_smoothTrace Λ (Spec (.of k)) α ψ γ₀
+  have hu := isIso_affineLineFundamentalClass_comp_smoothPurityTrace Λ (Spec (.of k)) α ψ γ₀
   refine ⟨γ₀ ≪≫
     (R(𝔸(ULift.{u} (Fin 1); Spec (.of k)) ↘ Spec (.of k))^![ModuleCat.{u + 1} Λ]).mapIso
       (asIso (ψ.hom ≫ affineLineFundamentalClass Λ (Spec (.of k)) α ≫
         (R(𝔸(ULift.{u} (Fin 1); Spec (.of k)) ↘ Spec (.of k))_![ModuleCat.{u + 1} Λ]).map
           (affineLineTwistShiftIso Λ (Spec (.of k))).inv ≫
-          smoothTrace Λ ((1 : ℕ) : ℤ) _ γ₀)).symm, ?_⟩
-  rw [smoothTrace, Iso.trans_hom, Functor.map_comp, Category.assoc, Functor.mapIso_hom,
+          smoothPurityTrace Λ ((1 : ℕ) : ℤ) _ γ₀)).symm, ?_⟩
+  rw [smoothPurityTrace, Iso.trans_hom, Functor.map_comp, Category.assoc, Functor.mapIso_hom,
     (rightDerivedUpperShriekAdjunction (ModuleCat.{u + 1} Λ) _).counit_naturality]
-  simp only [smoothTrace, Iso.symm_hom, asIso_inv] at hu ⊢
+  simp only [smoothPurityTrace, Iso.symm_hom, asIso_inv] at hu ⊢
   simp only [← Category.assoc] at hu ⊢
   exact IsIso.hom_inv_id _
 
