@@ -1,155 +1,174 @@
 {
-  "id": "lem-pc-perfect-complex-descent",
-  "blueprint": {
-    "is": null,
-    "from": {
-      "node": "lem-pc-rf-perfect-base-change",
-      "place": "Noetherian approximation proof step: descent of the perfect object (Tag 09RF)",
-      "via": []
-    },
-    "same_as": []
+ "id": "lem-pc-perfect-complex-descent",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-perfect-base-change",
+   "place": "Noetherian approximation proof step: descent of the perfect object (Tag 09RF)",
+   "via": []
   },
-  "kind": "statement",
-  "title": "Descent of a perfect complex",
-  "statement": "Let R be a filtered colimit of Noetherian rings R_i, let X_i be a finitely presented R_i-scheme [def-pc-scheme] whose base change to R is X, and let E be a perfect object of D(O_X) [def-pc-derived-category, def-pc-perfect-complex]. After increasing i, there is a perfect object E_i of D(O_{X_i}) together with an isomorphism from its base change to E.",
-  "source": {
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Descent of a perfect complex",
+ "statement": "Let R be a filtered colimit of Noetherian rings R_i, let X_i be a finitely presented R_i-scheme [def-pc-scheme] whose base change to R is X, and let E be a perfect object of D(O_X) [def-pc-derived-category, def-pc-perfect-complex]. After increasing i, there is a perfect object E_i of D(O_{X_i}) together with an isomorphism from its base change to E.",
+ "source": {
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Lemma 36.29.3, Tag 09RF"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "def-pc-perfect-complex"
+ ],
+ "proof": [
+  {
+   "text": "Let $f:X\\to X_i$ be the projection and, for $j\\ge i$, $X_j=X_i\\times_{\\operatorname{Spec}R_i}\\operatorname{Spec}R_j$. $X_i$ is finitely presented over $R_i$, hence quasi-compact and quasi-separated; choose a finite cover of $X_i$ by affine opens $V^{(1)},\\dots,V^{(n)}$ and put $W^{(k)}=V^{(1)}\\cup\\dots\\cup V^{(k)}$. Each $W^{(k)}$ and each $W^{(k)}\\cap V^{(k+1)}$ is a quasi-compact open of $X_i$ (quasi-separatedness), hence finitely presented over $R_i$, and its preimages in $X_j$ and $X$ are its base changes. We prove by induction on $k$ the assertion for $W^{(k)}$: after increasing $i$ there are a perfect $E_W$ on the preimage $W^{(k)}_i$ and an isomorphism $Lf^*E_W\\cong E|_{f^{-1}W^{(k)}}$. The case $k=n$ is the lemma.",
+   "uses": [
+    "def-pc-scheme"
+   ],
+   "elementary": true,
+   "source": {
     "document": "literature/stacks-project/perfect.tex",
-    "place": "Lemma 36.29.3, Tag 09RF"
+    "place": "Lemma 36.29.3, Tag 09RF, reduction to quasi-compact opens; induction along a finite affine cover (Cohomology of Schemes, Tag 01OY induction principle, case of finitely many affines)"
+   }
   },
-  "stmt_deps": [
-    "def-pc-scheme",
-    "def-pc-derived-category",
-    "def-pc-perfect-complex"
-  ],
-  "proof": [
-    {
-      "text": "Let $f:X\\to X_i$ be the projection and, for $j\\ge i$, $X_j=X_i\\times_{\\operatorname{Spec}R_i}\\operatorname{Spec}R_j$. $X_i$ is finitely presented over $R_i$, hence quasi-compact and quasi-separated; choose a finite cover of $X_i$ by affine opens $V^{(1)},\\dots,V^{(n)}$ and put $W^{(k)}=V^{(1)}\\cup\\dots\\cup V^{(k)}$. Each $W^{(k)}$ and each $W^{(k)}\\cap V^{(k+1)}$ is a quasi-compact open of $X_i$ (quasi-separatedness), hence finitely presented over $R_i$, and its preimages in $X_j$ and $X$ are its base changes. We prove by induction on $k$ the assertion for $W^{(k)}$: after increasing $i$ there are a perfect $E_W$ on the preimage $W^{(k)}_i$ and an isomorphism $Lf^*E_W\\cong E|_{f^{-1}W^{(k)}}$. The case $k=n$ is the lemma.",
-      "uses": [
-        "def-pc-scheme"
-      ],
-      "elementary": true,
-      "source": {
-        "document": "literature/stacks-project/perfect.tex",
-        "place": "Lemma 36.29.3, Tag 09RF, reduction to quasi-compact opens; induction along a finite affine cover (Cohomology of Schemes, Tag 01OY induction principle, case of finitely many affines)"
-      }
-    },
-    {
-      "text": "Affine case. For an affine member $V=V^{(k)}$, write $V_j=\\operatorname{Spec}A_j$ for its preimage in $X_j$ and $f^{-1}V=\\operatorname{Spec}A$ with $A=\\operatorname{colim}_jA_j$ (affine transition morphisms). By [lem-pc-perfect-affine-bounded-projective], $E|_{f^{-1}V}\\cong\\widetilde{P^\\bullet}$ for a bounded complex $P^\\bullet$ of finite projective $A$-modules. By [lem-pc-affine-perfect-colimit-descent] there are $j$ and a bounded complex $P_j^\\bullet$ of finite projective $A_j$-modules with $P_j^\\bullet\\otimes_{A_j}A\\cong P^\\bullet$. Then $E_V=\\widetilde{P_j^\\bullet}$ is strictly perfect, hence perfect [def-pc-perfect-complex], and since its terms are flat, $Lf^*\\widetilde{P_j^\\bullet}=\\widetilde{P_j^\\bullet\\otimes_{A_j}A}\\cong E|_{f^{-1}V}$.",
-      "uses": [
-        "lem-pc-perfect-affine-bounded-projective",
-        "lem-pc-affine-perfect-colimit-descent",
-        "def-pc-perfect-complex"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/perfect.tex",
-        "place": "Lemma 36.29.3, Tag 09RF, affine case via Lemmas 06Z0, 08EB and More on Algebra 0BC7"
-      }
-    },
-    {
-      "text": "Induction step. Let $W=W^{(k)}$, $V=V^{(k+1)}$ and, after increasing $i$, let $E_W$ on $W_i$ and $E_V$ on $V_i$ be perfect with isomorphisms $\\phi_W:Lf^*E_W\\to E|_{f^{-1}W}$ and $\\phi_V:Lf^*E_V\\to E|_{f^{-1}V}$ (induction hypothesis and Step 2). On the finitely presented $R_i$-scheme $W_i\\cap V_i$ apply [lem-pc-perfect-descend-morphisms] to the isomorphism $\\phi_V^{-1}\\circ\\phi_W$ restricted to $f^{-1}(W\\cap V)$: after increasing $i$ there is an isomorphism $c:E_W|_{W_i\\cap V_i}\\to E_V|_{W_i\\cap V_i}$ with $Lf^*c=\\phi_V^{-1}\\circ\\phi_W$ there. Let $a:E_W\\to(Rf_*E)|_{W_i}$ and $b:E_V\\to(Rf_*E)|_{V_i}$ be adjoint to $\\phi_W,\\phi_V$ by [lem-pc-ringed-spaces-derived-adjoint], using $(Rf_*E)|_{W_i}=R(f|_{f^{-1}W})_*(E|_{f^{-1}W})$ (Cohomology, Lemma 08FE); then $a=b\\circ c$ on $W_i\\cap V_i$ because $\\phi_W=\\phi_V\\circ Lf^*c$ there. By [lem-sc-derived-open-gluing] on $W_i\\cup V_i$ there are $F$ restricting to $E_W$ and $E_V$ with transition $c$, and a map $d:F\\to(Rf_*E)|_{W_i\\cup V_i}$ restricting to $a$ and $b$. $F$ is perfect, since perfectness is defined on an open cover [def-pc-perfect-complex]. The adjoint $Lf^*F\\to E|_{f^{-1}(W\\cup V)}$ of $d$ restricts to $\\phi_W$ and $\\phi_V$ on $f^{-1}W$ and $f^{-1}V$, which are isomorphisms; an arrow of a derived category of modules that is an isomorphism on each member of an open cover is an isomorphism (its cone has zero cohomology sheaves). This gives the assertion for $W^{(k+1)}$.",
-      "uses": [
-        "lem-pc-perfect-descend-morphisms",
-        "lem-pc-ringed-spaces-derived-adjoint",
-        "lem-sc-derived-open-gluing",
-        "def-pc-perfect-complex"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/perfect.tex",
-        "place": "Lemma 36.29.3, Tag 09RF, condition (2) of the induction principle: full faithfulness (09RE), adjunction, Cohomology lemma-glue (08DG)"
-      }
-    }
-  ],
-  "proof_deps": [
-    "def-pc-scheme",
-    "def-pc-perfect-complex",
+  {
+   "text": "Affine case. For an affine member $V=V^{(k)}$, write $V_j=\\operatorname{Spec}A_j$ for its preimage in $X_j$ and $f^{-1}V=\\operatorname{Spec}A$ with $A=\\operatorname{colim}_jA_j$ (affine transition morphisms). By [lem-pc-perfect-affine-bounded-projective], $E|_{f^{-1}V}\\cong\\widetilde{P^\\bullet}$ for a bounded complex $P^\\bullet$ of finite projective $A$-modules. By [lem-pc-affine-perfect-colimit-descent] there are $j$ and a bounded complex $P_j^\\bullet$ of finite projective $A_j$-modules with $P_j^\\bullet\\otimes_{A_j}A\\cong P^\\bullet$. Then $E_V=\\widetilde{P_j^\\bullet}$ is strictly perfect, hence perfect [def-pc-perfect-complex], and since its terms are flat, $Lf^*\\widetilde{P_j^\\bullet}=\\widetilde{P_j^\\bullet\\otimes_{A_j}A}\\cong E|_{f^{-1}V}$.",
+   "uses": [
     "lem-pc-perfect-affine-bounded-projective",
     "lem-pc-affine-perfect-colimit-descent",
+    "def-pc-perfect-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Lemma 36.29.3, Tag 09RF, affine case via Lemmas 06Z0, 08EB and More on Algebra 0BC7"
+   }
+  },
+  {
+   "text": "Induction step. Let $W=W^{(k)}$, $V=V^{(k+1)}$ and, after increasing $i$, let $E_W$ on $W_i$ and $E_V$ on $V_i$ be perfect with isomorphisms $\\phi_W:Lf^*E_W\\to E|_{f^{-1}W}$ and $\\phi_V:Lf^*E_V\\to E|_{f^{-1}V}$ (induction hypothesis and Step 2). On the finitely presented $R_i$-scheme $W_i\\cap V_i$ apply [lem-pc-perfect-descend-morphisms] to the isomorphism $\\phi_V^{-1}\\circ\\phi_W$ restricted to $f^{-1}(W\\cap V)$: after increasing $i$ there is an isomorphism $c:E_W|_{W_i\\cap V_i}\\to E_V|_{W_i\\cap V_i}$ with $Lf^*c=\\phi_V^{-1}\\circ\\phi_W$ there. Let $a:E_W\\to(Rf_*E)|_{W_i}$ and $b:E_V\\to(Rf_*E)|_{V_i}$ be adjoint to $\\phi_W,\\phi_V$ by [lem-pc-ringed-spaces-derived-adjoint], using $(Rf_*E)|_{W_i}=R(f|_{f^{-1}W})_*(E|_{f^{-1}W})$ (Cohomology, Lemma 08FE); then $a=b\\circ c$ on $W_i\\cap V_i$ because $\\phi_W=\\phi_V\\circ Lf^*c$ there. By [lem-sc-derived-open-gluing] on $W_i\\cup V_i$ there are $F$ restricting to $E_W$ and $E_V$ with transition $c$, and a map $d:F\\to(Rf_*E)|_{W_i\\cup V_i}$ restricting to $a$ and $b$. $F$ is perfect, since perfectness is defined on an open cover [def-pc-perfect-complex]. The adjoint $Lf^*F\\to E|_{f^{-1}(W\\cup V)}$ of $d$ restricts to $\\phi_W$ and $\\phi_V$ on $f^{-1}W$ and $f^{-1}V$, which are isomorphisms; an arrow of a derived category of modules that is an isomorphism on each member of an open cover is an isomorphism (its cone has zero cohomology sheaves). This gives the assertion for $W^{(k+1)}$.",
+   "uses": [
     "lem-pc-perfect-descend-morphisms",
     "lem-pc-ringed-spaces-derived-adjoint",
-    "lem-sc-derived-open-gluing"
-  ],
-  "proof_origin": {
-    "by": "document",
-    "document": "literature/stacks-project/perfect.tex",
-    "place": "Lemma 36.29.3, Tag 09RF"
-  },
-  "mathlib_searches": [
-    {
-      "tool": "leanfinder",
-      "query": "descent of finitely presented flat modules and proper support along filtered colimits",
-      "results": "HomologicalComplex filtered-colimit infrastructure; no perfect-complex descent theorem",
-      "date": "2026-10-11",
-      "verdict": "no match"
-    },
-    {
-      "tool": "loogle",
-      "query": "Module.FinitePresentation, Module.Flat, IsProper",
-      "results": "unknown identifier IsProper; no hit",
-      "date": "2026-10-11",
-      "verdict": "no match"
-    },
-    {
-      "tool": "grep",
-      "query": "FinitePresentation.*Flat|proper.*support in Mathlib/AlgebraicGeometry",
-      "results": "no matches",
-      "date": "2026-10-11",
-      "verdict": "no match"
-    },
-    {
-      "tool": "leansearch",
-      "query": "Noetherian descent of perfect complexes and flat finitely presented sheaves",
-      "results": "service unavailable: Internal Server Error",
-      "date": "2026-10-11",
-      "verdict": "unavailable"
-    }
-  ],
-  "mathlib_match": null,
-  "status": "split",
-  "created": {
-    "item": "lem-pc-noetherian-approximation-data",
-    "by": "worker",
-    "date": "2026-10-10"
-  },
-  "chapter": "sec-picard-framework",
-  "unit": "sk-thm-picard-semicon",
-  "split_report": {
-    "date": "2026-10-11",
-    "item": "lem-pc-perfect-complex-descent",
-    "worker": "stage1",
-    "summary": "Repaired the returned split by replacing the invalid finite-affine-overlap and triple-cocycle gluing claim with two-open gluing and a separate full-faithfulness/descent-of-morphisms statement. The proof now follows the induction on a finite affine cover in Tag 09RF; the affine child descends a complex over a given filtered system of coordinate rings.",
-    "blueprint": "Step 1 realizes the finite-affine reduction and induction in Tag 09RF; Step 2 realizes its finite-presentation descent of local complexes and finite equations; Step 3 realizes full-faithful descent of overlap isomorphisms followed by two-open gluing.",
-    "tool_uses": [
-      {
-        "node": "lem-sc-derived-open-gluing",
-        "why": "Generic two-open gluing of objects and morphisms in D(O_X) of a ringed space (Tag 08DG); this unit has no such statement."
-      },
-      {
-        "node": "lem-pc-ringed-spaces-derived-adjoint",
-        "why": "Generic adjunction Lf^* -| Rf_* for a morphism of schemes; this unit has no such statement."
-      },
-      {
-        "node": "lem-pc-perfect-affine-bounded-projective",
-        "why": "Tag 08EB (perfect on an affine is a bounded finite projective complex) is a generic fact used by the unit sk-thm-picard-duality; cited from there instead of a duplicate node (lead edit 21:40 UTC)"
-      }
-    ]
-  },
-  "tool_uses": [
     "lem-sc-derived-open-gluing",
-    "lem-pc-ringed-spaces-derived-adjoint",
-    "lem-pc-perfect-affine-bounded-projective"
-  ],
-  "reviewed": {
-    "date": "2026-10-10",
-    "by": "L",
-    "reviewer": "R-pcd2624",
-    "group": "J1",
-    "result": "pass",
-    "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-pcd2624 (reviewer sub-agent of L); spot-checked: 20:42 return: (1) false finite-cover gluing node gone, replaced by two-open gluing + full faithfulness (09RE node lem-pc-perfect-descend-morphisms, true: X_i fp hence qcqs, perfect in D_QCoh); (2) induction on a finite affine cover with quasi-compact overlaps, no separatedness; (3) affine child now over the given A=colim A_j (0BC7). C4: citer lem-pc-noetherian-approximation-data step uses exactly Zariski descent along X->X_i with base-change iso; matches. FIX more, RETURN less: (a) class (b) lem-pc-perfect-two-open-gluing duplicates existing lem-sc-derived-open-gluing (08DG) plus locality of perfectness (elementary from def-pc-perfect-complex): dropped, Step 3 cites lem-sc-derived-open-gluing (tool use); (b) C1 Step 3: object gluing alone does not give Lf^*E_i iso E (D not a stack): now uses the morphism clause of 08DG with the adjoints a,b into Rf_*E via lem-pc-ringed-spaces-derived-adjoint (tool use) and Cohomology 08FE, iso checked locally, as in 09RF; (c) C1 Step 1/2: representing E on an arbitrary affine member by a finite projective complex is not given by def-pc-perfect-complex (its cover is not the chosen one): added statement-only node lem-pc-perfect-affine-bounded-projective (08EB+06Z0; LeanFinder no match); (d) B3 lem-pc-perfect-descend-morphisms statement cites def-pc-scheme, added to stmt_deps. Proof rewritten as 3 steps (Step 1 elementary induction setup).; 3 file(s) fixed by the reviewer; 1 statement node(s) added by the reviewer (FIX more, RETURN less)"
+    "def-pc-perfect-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Lemma 36.29.3, Tag 09RF, condition (2) of the induction principle: full faithfulness (09RE), adjunction, Cohomology lemma-glue (08DG)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-scheme",
+  "def-pc-perfect-complex",
+  "lem-pc-perfect-affine-bounded-projective",
+  "lem-pc-affine-perfect-colimit-descent",
+  "lem-pc-perfect-descend-morphisms",
+  "lem-pc-ringed-spaces-derived-adjoint",
+  "lem-sc-derived-open-gluing"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Lemma 36.29.3, Tag 09RF"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "descent of finitely presented flat modules and proper support along filtered colimits",
+   "results": "HomologicalComplex filtered-colimit infrastructure; no perfect-complex descent theorem",
+   "date": "2026-10-11",
+   "verdict": "no match"
   },
-  "lead_note": "2026-10-10 L (R-pcd2624): Second push; 20:42 points 1-3 repaired. Reviewer repaired four fixable faults (see spot-checked).",
-  "lead_notes": [
-    "2026-10-10 21:40 UTC L: citation of lem-pc-perfect-affine-model (added by R-pcd2624) redirected to lem-pc-perfect-affine-bounded-projective (added by R-pcs2624 three minutes earlier, Tag 08EB, the iff form), which contains it; the duplicate node was deleted."
+  {
+   "tool": "loogle",
+   "query": "Module.FinitePresentation, Module.Flat, IsProper",
+   "results": "unknown identifier IsProper; no hit",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "FinitePresentation.*Flat|proper.*support in Mathlib/AlgebraicGeometry",
+   "results": "no matches",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Noetherian descent of perfect complexes and flat finitely presented sheaves",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "item": "lem-pc-noetherian-approximation-data",
+  "by": "worker",
+  "date": "2026-10-10"
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-pc-perfect-complex-descent",
+  "worker": "stage1",
+  "summary": "Repaired the returned split by replacing the invalid finite-affine-overlap and triple-cocycle gluing claim with two-open gluing and a separate full-faithfulness/descent-of-morphisms statement. The proof now follows the induction on a finite affine cover in Tag 09RF; the affine child descends a complex over a given filtered system of coordinate rings.",
+  "blueprint": "Step 1 realizes the finite-affine reduction and induction in Tag 09RF; Step 2 realizes its finite-presentation descent of local complexes and finite equations; Step 3 realizes full-faithful descent of overlap isomorphisms followed by two-open gluing.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-derived-open-gluing",
+    "why": "Generic two-open gluing of objects and morphisms in D(O_X) of a ringed space (Tag 08DG); this unit has no such statement."
+   },
+   {
+    "node": "lem-pc-ringed-spaces-derived-adjoint",
+    "why": "Generic adjunction Lf^* -| Rf_* for a morphism of schemes; this unit has no such statement."
+   },
+   {
+    "node": "lem-pc-perfect-affine-bounded-projective",
+    "why": "Tag 08EB (perfect on an affine is a bounded finite projective complex) is a generic fact used by the unit sk-thm-picard-duality; cited from there instead of a duplicate node (lead edit 21:40 UTC)"
+   }
   ]
+ },
+ "tool_uses": [
+  "lem-sc-derived-open-gluing",
+  "lem-pc-ringed-spaces-derived-adjoint",
+  "lem-pc-perfect-affine-bounded-projective"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-pcd2624",
+  "group": "J1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-pcd2624 (reviewer sub-agent of L); spot-checked: 20:42 return: (1) false finite-cover gluing node gone, replaced by two-open gluing + full faithfulness (09RE node lem-pc-perfect-descend-morphisms, true: X_i fp hence qcqs, perfect in D_QCoh); (2) induction on a finite affine cover with quasi-compact overlaps, no separatedness; (3) affine child now over the given A=colim A_j (0BC7). C4: citer lem-pc-noetherian-approximation-data step uses exactly Zariski descent along X->X_i with base-change iso; matches. FIX more, RETURN less: (a) class (b) lem-pc-perfect-two-open-gluing duplicates existing lem-sc-derived-open-gluing (08DG) plus locality of perfectness (elementary from def-pc-perfect-complex): dropped, Step 3 cites lem-sc-derived-open-gluing (tool use); (b) C1 Step 3: object gluing alone does not give Lf^*E_i iso E (D not a stack): now uses the morphism clause of 08DG with the adjoints a,b into Rf_*E via lem-pc-ringed-spaces-derived-adjoint (tool use) and Cohomology 08FE, iso checked locally, as in 09RF; (c) C1 Step 1/2: representing E on an arbitrary affine member by a finite projective complex is not given by def-pc-perfect-complex (its cover is not the chosen one): added statement-only node lem-pc-perfect-affine-bounded-projective (08EB+06Z0; LeanFinder no match); (d) B3 lem-pc-perfect-descend-morphisms statement cites def-pc-scheme, added to stmt_deps. Proof rewritten as 3 steps (Step 1 elementary induction setup).; 3 file(s) fixed by the reviewer; 1 statement node(s) added by the reviewer (FIX more, RETURN less)"
+ },
+ "lead_note": "2026-10-10 L (R-pcd2624): Second push; 20:42 points 1-3 repaired. Reviewer repaired four fixable faults (see spot-checked).",
+ "lead_notes": [
+  "2026-10-10 21:40 UTC L: citation of lem-pc-perfect-affine-model (added by R-pcd2624) redirected to lem-pc-perfect-affine-bounded-projective (added by R-pcs2624 three minutes earlier, Tag 08EB, the iff form), which contains it; the duplicate node was deleted."
+ ],
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.PerfectComplexDescent",
+  "declaration": "AlgebraicGeometry.perfect_complex_descends",
+  "file": "lean/Sheaf/AlgebraicGeometry/PerfectComplexDescent.lean",
+  "statement": "theorem perfect_complex_descends {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] (R : I ⥤ CommRingCat.{u}) [∀ i : I, IsNoetherianRing (R.obj i)] (c : Cocone R) (hc : IsColimit c) (i : I) (Xi : Scheme.{u}) (s : Xi ⟶ Spec (R.obj i)) [LocallyOfFinitePresentation s] [QuasiCompact s] [QuasiSeparated s] [∀ Z : Scheme.{u}, HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))] [∀ (Z : Scheme.{u}) (U : Z.Opens), HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings Z.toRingedSpace).over U))] (E : schemeDerivedCategory (pullback s (Spec.map (c.ι.app i)))) (hE : (pullback s (Spec.map (c.ι.app i))).IsPerfect E) : ∃ (j : I) (hij : i ≤ j) (Ej : schemeDerivedCategory (pullback s (Spec.map (R.map (homOfLE hij))))), (pullback s (Spec.map (R.map (homOfLE hij)))).IsPerfect Ej ∧ Nonempty ((derivedPullback (baseChangeMap s (T := Over.mk (Spec.map (R.map (homOfLE hij)))) (T' := Over.mk (Spec.map (c.ι.app i))) (Over.homMk (Spec.map (c.ι.app j)) (by dsimp; rw [← Spec.map_comp, c.w (homOfLE hij)])))).obj Ej ≅ E)",
+  "branch": "sheaf-dag",
+  "by": "G1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-pcd1348"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-pcd1348",
+  "group": "G1",
+  "result": "fix",
+  "note": "H7 revert: delivered Fj was an arbitrary existential functor (const functor at E proves it), Xj/f/basej/hbase iso untied, unused A, existential HasDerivedCategory; restated base node: directed I:Type u, Noetherian R_i, colimit c/hc, s fp (LFP+QC+QS), X=pullback s (Spec.map (c.ι.app i)), E IsPerfect; ∃ j≥i, Ej IsPerfect on pullback s (Spec.map (R.map (homOfLE hij))), (derivedPullback (baseChangeMap s …)).obj Ej ≅ E; J1 perfect_descend_morphisms stage form; reverted the delivery's statement correction of the item (statement, statement_change kept as on sheaf-dag; --revert-statement)"
+ }
 }
