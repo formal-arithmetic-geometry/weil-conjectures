@@ -173,6 +173,26 @@ theorem X_pow_dvd_lFactorLogDeriv (ι : PadicAlgCl l →+* ℂ) (F : WeilSheaf k
     rw [traceGen, <- coeff_zero_eq_constantCoeff_apply, coeff_map, coeff_mk, if_pos rfl,
       map_zero]) _)).mul_left _
 
+/-- The coefficients of the logarithmic derivative of a local factor:
+`d(x) ι tr(Fₓ^{n / d(x)})` in degrees `n ≥ 1` divisible by `d(x)`, and `0` otherwise. -/
+theorem coeff_lFactorLogDeriv (ι : PadicAlgCl l →+* ℂ) (F : WeilSheaf k₀ l X) (x : X.finitePoints)
+    (n : ℕ) : coeff n (F.lFactorLogDeriv ι x) =
+    if (X ↘ Spec (CommRingCat.of k₀)).degreeOver x.1 ∣ n ∧ n ≠ 0 then
+      ((X ↘ Spec (CommRingCat.of k₀)).degreeOver x.1 : ℂ) *
+        ι (LinearMap.trace (PadicAlgCl l) _ ((F.stalk x).frobeniusEnd ^
+          (n / (X ↘ Spec (CommRingCat.of k₀)).degreeOver x.1)))
+    else 0 := by
+  have hd := (X ↘ Spec (CommRingCat.of k₀)).degreeOver_ne_zero x.2
+  rw [lFactorLogDeriv, coeff_C_mul, coeff_expand]
+  by_cases h₁ : (X ↘ Spec (CommRingCat.of k₀)).degreeOver x.1 ∣ n
+  · rw [if_pos h₁]
+    rcases eq_or_ne n 0 with rfl | hn
+    · simp
+    · have hnd : n / (X ↘ Spec (CommRingCat.of k₀)).degreeOver x.1 ≠ 0 :=
+        (Nat.div_ne_zero_iff_of_dvd h₁).2 ⟨hn, hd⟩
+      rw [if_pos ⟨h₁, hn⟩, traceGen, coeff_map, coeff_mk, if_neg hnd]
+  · rw [if_neg h₁, if_neg fun h ↦ h₁ h.1, mul_zero]
+
 variable [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))]
   [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
 
@@ -251,23 +271,7 @@ theorem X_mul_derivative_lSeries (ι : PadicAlgCl l →+* ℂ) (F : WeilSheaf k�
     (fun n x hx ↦ X_pow_dvd_lFactorLogDeriv ι F (hmem hx)) (X_mul_derivative_lFactor ι F)
     fun n ↦ ?_
   rw [coeff_mk]
-  have hc (x : X.finitePoints) : coeff n (F.lFactorLogDeriv ι x) =
-      if (X ↘ Spec (CommRingCat.of k₀)).degreeOver x.1 ∣ n ∧ n ≠ 0 then
-        ((X ↘ Spec (CommRingCat.of k₀)).degreeOver x.1 : ℂ) *
-          ι (LinearMap.trace (PadicAlgCl l) _ ((F.stalk x).frobeniusEnd ^
-            (n / (X ↘ Spec (CommRingCat.of k₀)).degreeOver x.1)))
-      else 0 := by
-    have hd := (X ↘ Spec (CommRingCat.of k₀)).degreeOver_ne_zero x.2
-    rw [lFactorLogDeriv, coeff_C_mul, coeff_expand]
-    by_cases h₁ : (X ↘ Spec (CommRingCat.of k₀)).degreeOver x.1 ∣ n
-    · rw [if_pos h₁]
-      rcases eq_or_ne n 0 with rfl | hn
-      · simp
-      · have hnd : n / (X ↘ Spec (CommRingCat.of k₀)).degreeOver x.1 ≠ 0 :=
-          (Nat.div_ne_zero_iff_of_dvd h₁).2 ⟨hn, hd⟩
-        rw [if_pos ⟨h₁, hn⟩, traceGen, coeff_map, coeff_mk, if_neg hnd]
-    · rw [if_neg h₁, if_neg fun h ↦ h₁ h.1, mul_zero]
-  simp_rw [hc]
+  simp_rw [coeff_lFactorLogDeriv]
   rcases eq_or_ne n 0 with rfl | hn
   · simp
   have : Finite (FiniteField.galoisExtension k₀ n) := Module.finite_of_finite k₀
