@@ -4891,3 +4891,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 14:16 L: merged deliver/C1/lem-weil-pbc-relative-spec-base-change (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.RelativeSpecBaseChange AlgebraicGeometry.relative_spec_base_change)
 - 14:16 L: merged deliver/H1/lem-weil-pbc-relative-global-complete-intersection-base-change (stage 2; reviewer FIX; first push; Sheaf.Paper.RelativeGlobalCompleteIntersectionBaseChange Algebra.relativeGlobalCompleteIntersection_baseChange)
 - 14:16 L: merged deliver/K1/lem-weil-pbc-residue-field-pd-le-krull-dimension (stage 2; reviewer FIX; first push; Sheaf.RingTheory.ResidueFieldProjectiveDimension Ring.residueField_projectiveDimension_le_ringKrullDim)
+- 14:17 L: merged deliver/K1/lem-sc-derived-mayer-vietoris-triangle (stage 2; reviewer FIX; first push; Sheaf.Algebra.Homology.DerivedMayerVietorisTriangle AlgebraicGeometry.derived_mayer_vietoris_triangle)
