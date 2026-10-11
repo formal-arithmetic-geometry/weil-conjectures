@@ -1,11 +1,11 @@
 # Work queue
 
-679 items; claim with `tools/claim.py next <group> [--stage N]`.
+677 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (679)
+## Stage 2: nodes to state (677)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -30,7 +30,6 @@
 | `lem-weil-pbc-filtered-colimit-algebras-tensor-elementwise` | 1 | state |
 | `lem-weil-pbc-filtered-colimit-categories` | 1 | state |
 | `lem-weil-pbc-filtered-colimit-flat-modules` | 1 | state |
-| `lem-weil-pbc-filtered-colimit-henselian-pair` | 1 | state |
 | `lem-weil-pbc-filtered-colimit-localization-at-prime` | 1 | state |
 | `lem-weil-pbc-filtered-colimit-normal-ring` | 1 | state |
 | `lem-weil-pbc-filtered-colimit-tensor-varying-rings` | 1 | state |
@@ -43,7 +42,6 @@
 | `lem-weil-pbc-finite-locally-free-degree-etale-descent` | 1 | state |
 | `lem-weil-pbc-finite-locally-free-degree-locally-constant` | 1 | state |
 | `lem-weil-pbc-finite-module-complete-over-complete-noetherian` | 1 | state |
-| `lem-weil-pbc-finite-module-localization-zero-annihilator` | 1 | state |
 | `lem-weil-pbc-finite-open-cover-degree-sum` | 1 | state |
 | `lem-weil-pbc-finite-over-complete-local-product` | 1 | state |
 | `lem-weil-pbc-finite-over-complete-ring` | 1 | state |
