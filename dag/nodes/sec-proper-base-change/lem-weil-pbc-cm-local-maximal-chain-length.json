@@ -220,5 +220,24 @@
   "item": "lem-weil-pbc-cm-local-maximal-chain-length",
   "worker": "stage1",
   "summary": "Read Algebra 00N9 (lemma-maximal-chain-CM, 'special case of 0AAE') and the proof of 0AAE (lemma-maximal-chain-maximal-CM) for M = R, with 00DS, 00KW/0B52, 00N6, 0AAD, 00L3, 0CN5, 0BUS, 05BV, 00LA, 02JN; all tags verified in tags/tags. Not a Mathlib leaf (no Cohen-Macaulay rings or depth in the pinned Mathlib; searches of all three kinds recorded). Statement unchanged; the only citer (miracle-flatness step 4) uses exactly it. Proof in 8 steps following 0AAE: induction on d with the claim stated over all CM local rings; base and n >= 1 elementary; x in p_1 outside the minimal primes by the existing finitely-many-minimal-primes and prime-avoidance leaves; p_1 associated to S/x^kS by 0CN5 (new node) after p_0 in Ass(S) (05BV for M = R, new Mathlib leaf); y = x^k gives dim S/yS = d-1 (existing 0B52 leaf), y regular (existing 00N6 node, c = 1), S/yS CM of dim d-1 (existing 02JN node, in place of 00N6 + 0AAD for modules); p_1/yS minimal in S/yS by 0BUS for rings (new node); the induced chain is maximal in S/yS and the induction hypothesis gives n = d. New nodes: lem-weil-pbc-noetherian-minimal-prime-associated (mathlib), lem-weil-pbc-associated-prime-power-quotient (unsplit), lem-weil-pbc-cm-local-associated-prime-minimal (unsplit)."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.MaximalChainLengthOfDepth",
+  "declaration": "IsLocalRing.maximal_chain_length_eq_of_depth",
+  "file": "lean/Sheaf/RingTheory/MaximalChainLengthOfDepth.lean",
+  "statement": "theorem maximal_chain_length_eq_of_depth {S : Type u} [CommRing S] [IsNoetherianRing S] [IsLocalRing S] (d : ℕ) (hdim : ringKrullDim S = (d : WithBot ℕ∞)) (hdepth : (d : ℕ∞) ≤ IsLocalRing.depth (R := S) S) (p : LTSeries (PrimeSpectrum S)) (hmax : IsMaxChain (fun q r : PrimeSpectrum S ↦ q ≤ r) (Set.range p)) : p.length = d",
+  "branch": "sheaf-dag",
+  "by": "K1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-cmc1424"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-cmc1424",
+  "group": "K1",
+  "result": "fix",
+  "note": "Noetherian local S, ringKrullDim S = d, d <= IsLocalRing.depth S (inline CM as H1), chain p : LTSeries (PrimeSpectrum S) (was Fin (n+1) -> + StrictMono), insertion maximality IsMaxChain (<=) (range p), conclusion p.length = d"
  }
 }
