@@ -174,5 +174,24 @@
   "group": "E1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of E1; spot-checked by L: L: reviewed in full by a reviewer sub-agent (PASS): 0183/0184/0185 and 01GD read, 6 steps checked, small cases"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.TruncatedCoskeletonFiniteLimits",
+  "declaration": "CategoryTheory.truncatedCoskeletonFiniteLimits",
+  "file": "lean/Sheaf/CategoryTheory/TruncatedCoskeletonFiniteLimits.lean",
+  "statement": "theorem truncatedCoskeletonFiniteLimits (C : Type u) [Category.{v} C] [HasFiniteLimits C] (m : ℕ) : ∃ (R : SimplicialObject.Truncated C m ⥤ SimplicialObject C) (ε : R ⋙ SimplicialObject.truncation m ⟶ 𝟭 _), (∀ U, (R.obj U).IsRightKanExtension (ε.app U)) ∧ (∀ U, Nonempty ((Functor.RightExtension.mk (R.obj U) (ε.app U)).IsPointwiseRightKanExtension)) ∧ (∀ U, IsIso (ε.app U)) ∧ (∀ (U U' : SimplicialObject.Truncated C m) (β : U ⟶ U') (b : R.obj U ⟶ R.obj U'), (SimplicialObject.truncation m).map b ≫ ε.app U' = ε.app U ≫ β → b = R.map β) ∧ ∀ (D : Type w) [Category.{v'} D] (Φ : C ⥤ D), PreservesFiniteLimits Φ → (∀ U, (R.obj U ⋙ Φ).IsRightKanExtension (Functor.whiskerRight (ε.app U) Φ)) ∧ (∀ (U U' : SimplicialObject.Truncated C m) (β : U ⟶ U') (b : R.obj U ⋙ Φ ⟶ R.obj U' ⋙ Φ), (SimplicialObject.truncation m).map b ≫ Functor.whiskerRight (ε.app U') Φ = Functor.whiskerRight (ε.app U) Φ ≫ Functor.whiskerRight β Φ → b = Functor.whiskerRight (R.map β) Φ) ∧ (∀ (K : SimplicialObject C) (c : K ⟶ R.obj ((SimplicialObject.truncation m).obj K)), (SimplicialObject.truncation m).map c ≫ ε.app ((SimplicialObject.truncation m).obj K) = 𝟙 _ → IsIso c → ∀ c' : K ⋙ Φ ⟶ R.obj ((SimplicialObject.truncation m).obj K) ⋙ Φ, (SimplicialObject.truncation m).map c' ≫ Functor.whiskerRight (ε.app ((SimplicialObject.truncation m).obj K)) Φ = 𝟙 _ → IsIso c')",
+  "branch": "sheaf-dag",
+  "by": "T1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-tcf"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-tcf",
+  "group": "T1",
+  "result": "fix",
+  "note": "C finite limits, m; (1) existence as IsRightKanExtension along truncation (landed family form), limit formula as pointwise Kan extension (coneAt = U(n)), counit iso; (3) uniqueness of the induced map, functoriality via R; (2) image Kan extension, image-of-cosk-beta uniqueness, canonical image morphism iso; (4) by instantiating evaluation. Fix: dropped tautological conjuncts (eps naturality, Functor.map_isIso, Phi-whiskered equations); coskeletality clause now concludes IsIso of every c' satisfying the image counit equation"
  }
 }
