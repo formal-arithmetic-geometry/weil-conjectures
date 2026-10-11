@@ -150,5 +150,24 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-irs1948 (reviewer sub-agent of L); spot-checked: Statement vs Stacks 01EA; Step 4 elementary; no restatement of lem-sc-ringed-space-restrict-injective-resolution. FIX more, RETURN less: (1) C4 Steps 1-3: lem-sc-derived-open-restriction-adjunction-exact only gives an abstract left adjoint j_!, not its construction, so the stalk formulas of lem-sc-topological-extension-by-zero-stalks (abelian) and the presheaf description of alpha did not apply to it, and the claim that precomposition with alpha is restriction was not justified. Repaired by defining j_!O_U as the module sheafification of the explicit presheaf [def-weil-presheaf-modules-sheafification], deriving Hom(j_!O_U,F)=F(U) elementarily from its universal property, and computing stalks via lem-weil-pbc-stalk-sheafification-space; (2) the split_report tool_uses entry for lem-weil-pbc-module-extension-by-zero-adjunction (a scheme-only node, not cited, and wrongly described as general) was dropped, and lem-weil-pbc-stalk-sheafification-space was declared instead.; 1 file(s) fixed by the reviewer"
  },
- "lead_note": "2026-10-10 L (R-irs1948): R-irs1948: Steps 1-3 rebuilt on the explicit module sheafification of the extension-by-zero presheaf; the abstract adjunction node and the topological stalk node were dropped, since neither states that the abstract j_! is that sheafification."
+ "lead_note": "2026-10-10 L (R-irs1948): R-irs1948: Steps 1-3 rebuilt on the explicit module sheafification of the extension-by-zero presheaf; the abstract adjunction node and the topological stalk node were dropped, since neither states that the abstract j_! is that sheafification.",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.InjectiveRestrictionSurjective",
+  "declaration": "AlgebraicGeometry.injective_restriction_surjective",
+  "file": "lean/Sheaf/AlgebraicGeometry/InjectiveRestrictionSurjective.lean",
+  "statement": "theorem injective_restriction_surjective (X : RingedSpace.{u}) {U' U : Opens X} (hU : U' ≤ U) (I : SheafOfModules.{u} (moduleRings X)) [Injective I] : Function.Surjective (fun s : I.val.obj (Opposite.op U) => (I.val.map (homOfLE hU).op).hom s) ∧ ∀ (V W : Opens X), Function.Surjective (fun p : I.val.obj (Opposite.op V) × I.val.obj (Opposite.op W) => (show I.val.obj (Opposite.op (V ⊓ W)) from (I.val.map (homOfLE (inf_le_left : V ⊓ W ≤ V)).op).hom p.1) - (show I.val.obj (Opposite.op (V ⊓ W)) from (I.val.map (homOfLE (inf_le_right : V ⊓ W ≤ W)).op).hom p.2))",
+  "branch": "sheaf-dag",
+  "by": "G1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-irs1313"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-irs1313",
+  "group": "G1",
+  "result": "fix",
+  "note": "X:RingedSpace.{u}, U'≤U opens, I:SheafOfModules.{u} (moduleRings X) [Injective I] as H1 e5559ce69; clause 1 Surjective of I.val.map (homOfLE hU).op; clause 2 Surjective of (a,b)↦a|-b| on I(V)×I(W)→I(V⊓W); #check names; docstring given the node's proof in words"
+ }
 }
