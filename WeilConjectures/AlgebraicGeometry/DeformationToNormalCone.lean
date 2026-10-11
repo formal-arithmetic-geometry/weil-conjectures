@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.AlgebraicGeometry.Morphisms.RegularImmersion
+public import WeilConjectures.Compactification.Defs
 public import WeilConjectures.Mathlib.AlgebraicGeometry.AffineSpace
 
 /-!
@@ -102,6 +103,10 @@ identifying `g̃⁻¹(𝔾_{m,B})` with `V ×_B 𝔾_{m,B}` over `𝔾_{m,B}`.
 
 The normal cone datum `N` is not yet tied to `s`; see the TODO in the module documentation.
 
+In the purity conventions every scheme is separated of finite type over the base field, so
+`g̃` is moreover separated and compactifiable; both are recorded, the second being what makes
+the dualizing complex `ω_{g̃}` defined.
+
 Mathlib has neither the relative `Spec` of the extended Rees algebra nor a blow-up along an
 arbitrary closed subscheme, so the datum cannot be constructed here; existence is
 `AlgebraicGeometry.Scheme.Hom.nonempty_deformationToNormalConeData`. -/
@@ -118,6 +123,13 @@ structure DeformationToNormalConeData (d : ℕ) (g : V ⟶ B) (s : B ⟶ V)
   sect_comp_proj : sect ≫ proj = 𝟙 _
   /-- `g̃` is again smooth of pure relative dimension `d`. -/
   smoothOfRelativeDimension_proj : SmoothOfRelativeDimension d proj
+  /-- `g̃` is separated: in the purity conventions every scheme is separated of finite type
+  over the base field. -/
+  isSeparated_proj : IsSeparated proj
+  /-- `g̃` is compactifiable, as every separated morphism of finite type between schemes of
+  finite type over a field is (Nagata). This is what makes the dualizing complex `ω_{g̃}`,
+  and with it the family object of the deformation, defined. -/
+  hasCompactification_proj : HasCompactification proj
   /-- The inclusion `ι₁ : V ⟶ 𝒟_s V` of the fibre over `t = 1`. -/
   oneFibre : V ⟶ scheme
   /-- The fibre of `g̃` over the unit section is `g`. -/
@@ -145,6 +157,8 @@ structure DeformationToNormalConeData (d : ℕ) (g : V ⟶ B) (s : B ⟶ V)
   isPullback_generic : IsPullback generic (pullback.snd _ _) proj puncturedLine.ι
 
 attribute [instance] DeformationToNormalConeData.smoothOfRelativeDimension_proj
+  DeformationToNormalConeData.isSeparated_proj
+  DeformationToNormalConeData.hasCompactification_proj
 
 /-- Blueprint `sk-lem-geometry`: Geometry of the deformation of a section
 
@@ -158,6 +172,10 @@ smoothness of `g̃` and the two cartesian squares.
 
 All of this commutes with base change in `B` and with étale localization.
 
+Since `g` is separated and compactifiable, so is `g̃`: the deformation space is open in the
+blow-up of `V̄ ×_B 𝔸¹_B` along `s(B) × {0}`, for a compactification `V̄` of `g`, and this
+blow-up is proper over `𝔸¹_B`.
+
 As long as `AlgebraicGeometry.Scheme.Hom.NormalConeData` is not tied to `s` (see the TODO in the
 module documentation), this statement, which quantifies over every datum `N`, is false. Let `B`
 be a smooth projective curve with a nontrivial line bundle `L`, `V = 𝔸¹_B`, `s` the zero section,
@@ -166,7 +184,8 @@ be a smooth projective curve with a nontrivial line bundle `L`, `V = 𝔸¹_B`, 
 contradicting `Pic(𝔸¹_B) = Pic(B)`. It becomes the blueprint lemma once `N` is the normal cone of
 `s`. -/
 theorem nonempty_deformationToNormalConeData (d : ℕ) (g : V ⟶ B)
-    [SmoothOfRelativeDimension d g] (s : B ⟶ V) [IsClosedImmersion s] (hs : s ≫ g = 𝟙 B)
+    [SmoothOfRelativeDimension d g] [IsSeparated g] [HasCompactification g] (s : B ⟶ V)
+    [IsClosedImmersion s] (hs : s ≫ g = 𝟙 B)
     (N : NormalConeData d s) :
     Nonempty (DeformationToNormalConeData d g s N) :=
   sorry

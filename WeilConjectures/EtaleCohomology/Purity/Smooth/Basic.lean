@@ -6,22 +6,20 @@ Authors: Claude
 module
 
 public import WeilConjectures.Compactification.BaseChange
+public import WeilConjectures.EtaleCohomology.Purity.Smooth.CohomologicalSmoothness
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.AffineSpace
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.Deformation
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Smooth
 public import WeilConjectures.SixFunctors.Etale.Derived.TensorStructure
 
 /-!
-# Cohomological smoothness and finite-coefficient smooth purity
+# Finite-coefficient smooth purity
 
-The two central statements of the block. For `f : X ⟶ Y` smooth separated of pure relative
-dimension `d` and a finite coefficient ring `Λ` whose exponent is invertible on `X`:
-
-* *cohomological smoothness* (`sk-prop-cohsm`): the dualizing complex `ω_f = Rf^! Λ_Y` is
-  ⊗-invertible, `Rf^! K ≅ Lf^* K ⊗^L ω_f` for every `K ∈ D^b_{ctf}(Y, Λ)`, and the formation
-  of `Rf^!` commutes with base change;
-* *smooth purity* (`sk-thm-smooth-purity`): `ω_f ≅ Λ_X(d)[2d]`, hence
-  `Rf^! K ≅ Lf^* K(d)[2d]`.
+The central statement of the block. For `f : X ⟶ Y` smooth separated of pure relative
+dimension `d` and a finite coefficient ring `Λ` whose exponent is invertible on `X`, *smooth
+purity* (`sk-thm-smooth-purity`) says `ω_f ≅ Λ_X(d)[2d]`, hence `Rf^! K ≅ Lf^* K(d)[2d]`.
+It rests on *cohomological smoothness* (`sk-prop-cohsm`), stated in
+`WeilConjectures.EtaleCohomology.Purity.Smooth.CohomologicalSmoothness`.
 
 The route is the blueprint's: the model case is affine-space purity
 `AlgebraicGeometry.Etale.nonempty_iso_dualizingComplex_affineSpace`, transported along the
@@ -30,17 +28,16 @@ of the diagonal, a closed section of the first projection `X ×_Y X ⟶ X`.
 
 ## Implementation notes
 
-The blueprint asserts that each isomorphism below is *canonical*: `sk-prop-cohsm` (b) is about
-the mate `φ_K : Lf^* K ⊗ ω_f ⟶ Rf^! K` of the projection formula, and `sk-thm-smooth-purity`
-about the normalized comparison. Neither map exists in the repository — the projection map
-itself is a TODO of `WeilConjectures.SixFunctors.Etale.Derived.Exchange` — so each statement
-records the existence of the isomorphism only, with a `TODO(unify)` marker. For the same
-reason the smooth purity map `γ_{f,K}` and the smooth pullback exchange are built from their
-constituent isomorphisms, which are arguments of the constructions.
+The blueprint asserts that each isomorphism below is *canonical*: `sk-thm-smooth-purity` is
+about the normalized comparison, built from the mate `φ_K : Lf^* K ⊗ ω_f ⟶ Rf^! K` of the
+projection formula. That map does not exist in the repository — the projection map itself is a
+TODO of `WeilConjectures.SixFunctors.Etale.Derived.Exchange` — so each statement records the
+existence of the isomorphism only, with a `TODO(unify)` marker. For the same reason the smooth
+purity map `γ_{f,K}` and the smooth pullback exchange are built from their constituent
+isomorphisms, which are arguments of the constructions.
 
-The statements of `sk-prop-cohsm` carry `include d in`: their statements do not mention the
-relative dimension `d`, and without it the hypothesis `[SmoothOfRelativeDimension d f]` would
-silently be dropped.
+Statements whose type does not mention the relative dimension `d` carry `include d in`;
+without it the hypothesis `[SmoothOfRelativeDimension d f]` would silently be dropped.
 
 ## Main definitions
 
@@ -53,9 +50,6 @@ silently be dropped.
 
 ## Main statements
 
-- `AlgebraicGeometry.Etale.isInvertible_dualizingComplex`
-- `AlgebraicGeometry.Etale.nonempty_iso_rightDerivedUpperShriek_obj_derivedTensor`
-- `AlgebraicGeometry.Etale.nonempty_iso_leftDerivedUpperStar_comp_rightDerivedUpperShriek`
 - `AlgebraicGeometry.Etale.nonempty_iso_sectionInvariant_diagonal`: `𝒞(p₁, Δ) ≅ ω_f`.
 - `AlgebraicGeometry.Etale.nonempty_iso_dualizingComplex_twistShift`: `ω_f ≅ Λ_X(d)[2d]`.
 - `AlgebraicGeometry.Etale.nonempty_iso_rightDerivedUpperShriek_twistShift`:
@@ -82,65 +76,6 @@ namespace Etale
 variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] [HasTateTwist Λ] {X Y : Scheme.{u}}
   {d : ℕ} (f : X ⟶ Y) [IsSeparated f] [SmoothOfRelativeDimension d f] [HasCompactification f]
   [HasInvertibleExponent Λ X]
-
-include d in
-/-- Blueprint `sk-prop-cohsm`: Cohomological smoothness
-
-*Clause (a).* For `f` smooth separated of pure relative dimension `d` the dualizing complex
-`ω_f = Rf^! Λ_Y` is ⊗-invertible: it is a lisse rank-one object, twisted and shifted. This is
-the form of cohomological smoothness that does not yet name the twist; smooth purity
-identifies `ω_f` with `Λ_X(d)[2d]`. -/
-theorem isInvertible_dualizingComplex :
-    DerivedCategory.isInvertible Λ X (dualizingComplex (ModuleCat.{u + 1} Λ) f) :=
-  sorry
-
-include d in
-/-- Blueprint `sk-prop-cohsm`: Cohomological smoothness
-
-*Clause (b), the tensor formula.* For `f` smooth separated of pure relative dimension `d` and
-`K ∈ D^b_{ctf}(Y, Λ)`,
-
-`Rf^! K ≅ Lf^* K ⊗^L ω_f`.
-
-Equivalently, `Rf^!` is `Lf^*` twisted by the invertible object `ω_f` of clause (a); this is
-what turns the computation of `ω_f` into a computation of `Rf^!` on all coefficients. The
-blueprint statement is that the mate `φ_K` of the projection formula is this isomorphism. -/
--- TODO(unify): sk-prop-cohsm — state `IsIso φ_K` once the projection map is available.
-theorem nonempty_iso_rightDerivedUpperShriek_obj_derivedTensor
-    (K : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
-    (hK : DerivedCategory.boundedConstructibleFiniteTor Λ Y K) :
-    Nonempty (((derivedTensor (ModuleCat.{u + 1} Λ) X).obj
-        ((L((f)^*[ModuleCat.{u + 1} Λ])).obj K)).obj
-          (dualizingComplex (ModuleCat.{u + 1} Λ) f) ≅
-      (rightDerivedUpperShriek (ModuleCat.{u + 1} Λ) f).obj K) :=
-  sorry
-
-include d in
-/-- Blueprint `sk-prop-cohsm`: Cohomological smoothness
-
-*Clause (c), smooth base change for `R^!`.* In the cartesian square
-
-```
-  X' --g'--> X          Rf^! ⋙ Lg'^*  ≅  Lg^* ⋙ Rf'^!
-  |          |
-  f'         f          as functors D(Y_ét, Λ) ⥤ D(X'_ét, Λ)
-  |          |
-  v          v
-  Y' --g---> Y
-```
-
-with `f` smooth and `f'` its base change along `g`, the formation of `Rf^!` commutes with base
-change. Applied to the diagonal square `W = X ×_Y X` this gives `ω_{p₁} ≅ Lp₂^* ω_f` and
-`ω_{p₂} ≅ Lp₁^* ω_f`, which is what makes the diagonal computation of the purity theorem
-possible. -/
-theorem nonempty_iso_leftDerivedUpperStar_comp_rightDerivedUpperShriek {X' Y' : Scheme.{u}}
-    {g : Y' ⟶ Y} {f' : X' ⟶ Y'} {g' : X' ⟶ X} (sq : IsPullback g' f' f g)
-    [HasCompactification f'] :
-    Nonempty (rightDerivedUpperShriek (ModuleCat.{u + 1} Λ) f ⋙
-        L((g')^*[ModuleCat.{u + 1} Λ]) ≅
-      L((g)^*[ModuleCat.{u + 1} Λ]) ⋙
-        rightDerivedUpperShriek (ModuleCat.{u + 1} Λ) f') :=
-  sorry
 
 /-! ### The twist reassociation and its compatibility with pullback -/
 
@@ -215,29 +150,6 @@ theorem nonempty_iso_sectionInvariant_diagonal :
     (Functor.leftDerivedFunctorNatIso _ (Etale.upperStarId _ X) ≪≫
       (𝟭 _).leftDerivedFunctorIsoMapDerivedCategory ≪≫ Functor.mapDerivedCategoryIdIso _).app _⟩
 
-/-- Blueprint `sk-thm-smooth-purity`: Finite-coefficient smooth purity
-
-*Step 3, the standard pair.* For the projection `π : 𝔸^c_B ⟶ B` of a trivial vector bundle of
-rank `c` with zero section `0`, over a separated scheme of finite type over a field, the
-section invariant is the Tate twist:
-
-`𝒞(π, 0) = L0^* ω_π ≅ L0^* Λ(c)[2c] ≅ Λ_B(c)[2c]`,
-
-by affine-space purity (`AlgebraicGeometry.Etale.nonempty_iso_dualizingComplex_affineSpace`)
-and the compatibility of the twist with pullback. -/
-theorem nonempty_iso_sectionInvariant_affineSpace [HasTateTwist.IsNormalized Λ]
-    {k : Type u} [Field k] (c : ℕ)
-    (B : Scheme.{u}) (aB : B ⟶ Spec (.of k)) [IsSeparated aB] [LocallyOfFiniteType aB]
-    [HasInvertibleExponent Λ B] :
-    Nonempty (sectionInvariant Λ (𝔸(ULift.{u} (Fin c); B) ↘ B)
-        (AffineSpace.zeroSection (ULift.{u} (Fin c)) B) ≅
-      (twistShift Λ B c).obj (constantComplex Λ B)) := by
-  obtain ⟨e⟩ := nonempty_iso_dualizingComplex_affineSpace Λ c B aB
-  exact ⟨(L((AffineSpace.zeroSection (ULift.{u} (Fin c)) B)^*[ModuleCat.{u + 1} Λ])).mapIso
-      (e ≪≫ twistShiftConstantComplexIso Λ _ _) ≪≫
-    leftDerivedUpperStarTateShiftIso Λ _ _ ≪≫ (twistShiftConstantComplexIso Λ B _).symm⟩
-
-/-- Blueprint `sk-thm-smooth-purity`: Finite-coefficient smooth purity
 
 **Smooth purity, finite coefficients.** For `f : X ⟶ Y` smooth separated of pure relative
 dimension `d`, `Y` separated of finite type over a field, and a finite coefficient ring `Λ`
