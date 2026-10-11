@@ -433,50 +433,53 @@ noncomputable abbrev tangentMul (u : pointsKer G aug₁) : pointsKer G (aug₂ (
 theorem tangentMul_injective : Function.Injective (tangentMul (G := G)) :=
   kerMap_injective _ _ mul₂_injective
 
-theorem kerHom_commutator_fst (v w : pointsKer G aug₁) (a : stalkOne G) :
-    (kerHom ⁅tangentEps v, tangentDel w⁆ a).fst = inl (counit G a) := by
-  have h := kerHom_kerMap fst₂ aug₁_comp_fst₂ ⁅tangentEps v, tangentDel w⁆
+theorem kerMap_fst₂_commutator (v w : pointsKer G aug₁) :
+    kerMap fst₂ aug₁_comp_fst₂ ⁅tangentEps v, tangentDel w⁆ = 1 := by
   rw [map_commutatorElement, kerMap_tangentMap _ _ _ _ _ (inr 1) inr_one_mul_self (by simp)
       (by simp), kerMap_tangentMap _ _ _ _ _ 0 (mul_zero 0) (map_zero _) (by simp),
-    tangentMap_zero, commutatorElement_one_right, kerHom_one] at h
-  have := congrArg (· a) h
-  simpa [algebraMap_eq_inl] using this.symm
+    tangentMap_zero, commutatorElement_one_right]
 
-theorem kerHom_commutator_snd_fst (v w : pointsKer G aug₁) (a : stalkOne G) :
-    (kerHom ⁅tangentEps v, tangentDel w⁆ a).snd.fst = 0 := by
-  have h := kerHom_kerMap rho₂ aug₁_comp_rho₂ ⁅tangentEps v, tangentDel w⁆
+theorem kerMap_rho₂_commutator (v w : pointsKer G aug₁) :
+    kerMap rho₂ aug₁_comp_rho₂ ⁅tangentEps v, tangentDel w⁆ = 1 := by
   rw [map_commutatorElement, kerMap_tangentMap _ _ _ _ _ 0 (mul_zero 0) (map_zero _)
       (by simp [lift₂_apply, DualNumber.liftElem_apply, algebraMap_eq_inl]),
     kerMap_tangentMap _ _ _ _ _ (inr 1) inr_one_mul_self (by simp)
       (by simp [lift₂_apply, DualNumber.liftElem_apply, algebraMap_eq_inl]),
-    tangentMap_zero, commutatorElement_one_left, kerHom_one] at h
-  have h' := congrArg (fun f ↦ (f a).snd) h
-  simp only [RingHom.coe_comp, Function.comp_apply, AlgHom.toRingHom_eq_coe, RingHom.coe_coe,
-    lift₂_apply, DualNumber.liftElem_apply, algebraMap_eq_inl] at h'
-  simpa using h'.symm
+    tangentMap_zero, commutatorElement_one_left]
 
-/-- The commutator of `v_ε` and `w_δ` has the form `a(1) + εδ B(a)`. -/
-theorem kerHom_commutator (v w : pointsKer G aug₁) (a : stalkOne G) :
-    kerHom ⁅tangentEps v, tangentDel w⁆ a =
-      mul₂ (inl (counit G a) + inr (kerHom ⁅tangentEps v, tangentDel w⁆ a).snd.snd) := by
-  have h1 := kerHom_commutator_fst v w a
-  have h2 := kerHom_commutator_snd_fst v w a
-  generalize kerHom ⁅tangentEps v, tangentDel w⁆ a = X at h1 h2 ⊢
+/-- A point over `k[ε][δ]` trivial for `δ = 0` and for `ε = 0` has the form `a(1) + εδ B(a)`. -/
+theorem kerHom_eq_mul₂ (c : pointsKer G (aug₂ (k := k))) (h₁ : kerMap fst₂ aug₁_comp_fst₂ c = 1)
+    (h₂ : kerMap rho₂ aug₁_comp_rho₂ c = 1) (a : stalkOne G) :
+    kerHom c a = mul₂ (inl (counit G a) + inr (kerHom c a).snd.snd) := by
+  have e₁ : (kerHom c a).fst = inl (counit G a) := by
+    have h := kerHom_kerMap fst₂ aug₁_comp_fst₂ c
+    rw [h₁, kerHom_one] at h
+    have := congrArg (· a) h
+    simpa [algebraMap_eq_inl] using this.symm
+  have e₂ : (kerHom c a).snd.fst = 0 := by
+    have h := kerHom_kerMap rho₂ aug₁_comp_rho₂ c
+    rw [h₂, kerHom_one] at h
+    have h' := congrArg (fun f ↦ (f a).snd) h
+    simp only [RingHom.coe_comp, Function.comp_apply, AlgHom.toRingHom_eq_coe, RingHom.coe_coe,
+      lift₂_apply, DualNumber.liftElem_apply, algebraMap_eq_inl] at h'
+    simpa using h'.symm
+  generalize kerHom c a = X at e₁ e₂ ⊢
   ext
-  · simp [DualNumber.liftElem_apply, algebraMap_eq_inl', h1]
-  · simp [DualNumber.liftElem_apply, algebraMap_eq_inl', h1]
-  · simp [DualNumber.liftElem_apply, algebraMap_eq_inl', h2]
+  · simp [DualNumber.liftElem_apply, algebraMap_eq_inl', e₁]
+  · simp [DualNumber.liftElem_apply, algebraMap_eq_inl', e₁]
+  · simp [DualNumber.liftElem_apply, algebraMap_eq_inl', e₂]
   · simp [DualNumber.liftElem_apply, algebraMap_eq_inl']
 
 instance : IsLocalHom (counit G) :=
   inferInstanceAs (IsLocalHom (pointStalkHom _ _).hom)
 
-/-- The commutator of `v_ε` and `w_δ` is `u^{(εδ)}` for a tangent vector `u`. -/
-theorem exists_tangentMul_eq_commutator (v w : pointsKer G aug₁) :
-    ∃ u : pointsKer G aug₁, tangentMul u = ⁅tangentEps v, tangentDel w⁆ := by
-  set c := ⁅tangentEps v, tangentDel w⁆
+/-- A point over `k[ε][δ]` trivial for `δ = 0` and for `ε = 0` is `u^{(εδ)}` for a tangent
+vector `u`. -/
+theorem exists_tangentMul_eq (c : pointsKer G (aug₂ (k := k)))
+    (h₁ : kerMap fst₂ aug₁_comp_fst₂ c = 1) (h₂ : kerMap rho₂ aug₁_comp_rho₂ c = 1) :
+    ∃ u : pointsKer G aug₁, tangentMul u = c := by
   set f : stalkOne G → DualNumber k := fun a ↦ inl (counit G a) + inr (kerHom c a).snd.snd
-  have hf (a : stalkOne G) : mul₂ (f a) = kerHom c a := (kerHom_commutator v w a).symm
+  have hf (a : stalkOne G) : mul₂ (f a) = kerHom c a := (kerHom_eq_mul₂ c h₁ h₂ a).symm
   let θ : stalkOne G →+* DualNumber k :=
     { toFun := f
       map_one' := mul₂_injective (by rw [hf, map_one, map_one])
@@ -498,6 +501,11 @@ theorem exists_tangentMul_eq_commutator (v w : pointsKer G aug₁) :
     rw [mem_pointsKer, ← aug₂_comp_mul₂, ← points.map_map, hpc]
     exact mem_pointsKer.1 c.2
   exact ⟨⟨p, hp'⟩, Subtype.ext hpc⟩
+
+/-- The commutator of `v_ε` and `w_δ` is `u^{(εδ)}` for a tangent vector `u`. -/
+theorem exists_tangentMul_eq_commutator (v w : pointsKer G aug₁) :
+    ∃ u : pointsKer G aug₁, tangentMul u = ⁅tangentEps v, tangentDel w⁆ :=
+  exists_tangentMul_eq _ (kerMap_fst₂_commutator v w) (kerMap_rho₂_commutator v w)
 
 /-- The bracket `[v, w]` of two tangent vectors: the tangent vector `u` with
 `u^{(εδ)} = v_ε w_δ v_ε⁻¹ w_δ⁻¹` over `k[ε][δ]`. -/

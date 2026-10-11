@@ -5,7 +5,7 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.GroupScheme.Lie.Ring
+public import WeilConjectures.AlgebraicGeometry.GroupScheme.Lie.Differential
 
 /-!
 # The Lie algebra of a group scheme of finite type over a field
