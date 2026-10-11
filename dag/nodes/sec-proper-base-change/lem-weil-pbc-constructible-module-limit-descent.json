@@ -230,5 +230,24 @@
   "by": "L",
   "result": "accepted",
   "note": "Split reviewed: 8 steps, the module case of 09YU (3) written out (presentation by 095N; affine etale objects descend to a stage by lem-weil-pbc-affine-etale-site-colimit; inverse images of the free sheaves via the 03S6 node; the sections t_j descend by the 09YQ degree-0 node; the descended map pulls back to f, checked on generating sections; cokernel constructible by Serre closure and pullback; inverse image right exact). Correct. Two new unsplit nodes. Stage-3 note: sbc-prop-extension-by-zero-and-arbitrary-base-change (open immersions) vs the new 03S6 node (etale)."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ConstructibleEtaleModuleLimitDescent",
+  "declaration": "AlgebraicGeometry.Scheme.exists_constructible_etaleModuleSheaf_descent",
+  "file": "lean/Sheaf/AlgebraicGeometry/ConstructibleEtaleModuleLimitDescent.lean",
+  "statement": "theorem exists_constructible_etaleModuleSheaf_descent {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I] (D : Iᵒᵖ ⥤ Scheme.{u}) [∀ {i j : Iᵒᵖ} (f : i ⟶ j), IsAffineHom (D.map f)] [∀ i : Iᵒᵖ, CompactSpace (D.obj i)] [∀ i : Iᵒᵖ, QuasiSeparatedSpace (D.obj i)] (c : Cone D) (hc : IsLimit c) (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] (F : Sheaf c.pt.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (hF : IsConstructibleEtaleModuleSheaf F) : ∃ (i : I) (Fᵢ : Sheaf (D.obj (op i)).smallEtaleTopology (ModuleCat.{u + 1} Λ)), IsConstructibleEtaleModuleSheaf Fᵢ ∧ Nonempty ((Etale.upperStar (ModuleCat.{u + 1} Λ) (c.π.app (op i))).obj Fᵢ ≅ F)",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-cml1134"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-cml1134",
+  "group": "F1",
+  "result": "fix",
+  "note": "directed I : Type u (fixed from Type w), D : Iᵒᵖ ⥤ Scheme.{u}, affine transitions, qcqs stages as CompactSpace/QuasiSeparatedSpace, limit cone c/hc, finite comm Λ : Type (u+1), F : Sheaf c.pt.smallEtaleTopology (ModuleCat Λ) with IsConstructibleEtaleModuleSheaf, ∃ i Fᵢ constructible with Etale.upperStar (c.π.app (op i)) Fᵢ ≅ F"
  }
 }
