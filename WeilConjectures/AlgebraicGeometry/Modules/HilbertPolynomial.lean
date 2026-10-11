@@ -294,7 +294,6 @@ theorem eulerChar_sub_eulerChar_eq {M N : X.Modules}
     [SheafOfModules.IsFinitePresentation (R := X.ringCatSheaf) N] (φ : M ⟶ N) :
     N.eulerChar K - M.eulerChar K = (cokernel φ).eulerChar K - (kernel φ).eulerChar K := by
   have := isNoetherian_of_isProper K (X := X)
-  obtain ⟨D, hD⟩ := exists_forall_subsingleton_H K (X := X)
   have := isQuasicoherent_kernel φ
   have := isFinitePresentation_kernel φ
   have := isQuasicoherent_cokernel φ
@@ -315,8 +314,22 @@ theorem eulerChar_sub_eulerChar_eq {M N : X.Modules}
     finiteDimensional_H_of_isProper (kernel (cokernel.π φ))
   have j₂ : ∀ q, FiniteDimensional K (S₂.X₂.H q) := finiteDimensional_H_of_isProper N
   have j₃ : ∀ q, FiniteDimensional K (S₂.X₃.H q) := finiteDimensional_H_of_isProper (cokernel φ)
-  have h₁ := eulerChar_eq_add_of_shortExact K hS₁ D (hD _) (hD _) (hD _)
-  have h₂ := eulerChar_eq_add_of_shortExact K hS₂ D (hD _) (hD _) (hD _)
+  -- cohomology of quasi-coherent modules on `X` vanishes in large degrees
+  have hB (P : X.Modules) [SheafOfModules.IsQuasicoherent (R := X.ringCatSheaf) P] :=
+    exists_forall_subsingleton_H_of_isProper (k := K) P
+  obtain ⟨D₁, hD₁⟩ := hB S₁.X₁
+  obtain ⟨D₂, hD₂⟩ := hB S₁.X₂
+  obtain ⟨D₃, hD₃⟩ := hB S₁.X₃
+  obtain ⟨D₄, hD₄⟩ := hB S₂.X₁
+  obtain ⟨D₅, hD₅⟩ := hB S₂.X₂
+  obtain ⟨D₆, hD₆⟩ := hB S₂.X₃
+  let D := max (max (max D₁ D₂) (max D₃ D₄)) (max D₅ D₆)
+  have hle {P : X.Modules} {E : ℕ} (hE : E ≤ D) (h : ∀ q, E < q → Subsingleton (P.H q)) :
+      ∀ q, D < q → Subsingleton (P.H q) := fun q hq ↦ h q (hE.trans_lt hq)
+  have h₁ := eulerChar_eq_add_of_shortExact K hS₁ D (hle (by omega) hD₁) (hle (by omega) hD₂)
+    (hle (by omega) hD₃)
+  have h₂ := eulerChar_eq_add_of_shortExact K hS₂ D (hle (by omega) hD₄) (hle (by omega) hD₅)
+    (hle (by omega) hD₆)
   have h₃ := eulerChar_congr K (Abelian.coimageIsoImage φ)
   change M.eulerChar K = (kernel φ).eulerChar K + (cokernel (kernel.ι φ)).eulerChar K at h₁
   change N.eulerChar K = (kernel (cokernel.π φ)).eulerChar K + (cokernel φ).eulerChar K at h₂
