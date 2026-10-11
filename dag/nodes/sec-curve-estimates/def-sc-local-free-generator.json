@@ -1,0 +1,99 @@
+{
+ "id": "def-sc-local-free-generator",
+ "kind": "definition",
+ "title": "Local free generator of a module sheaf",
+ "status": "split",
+ "statement": "Let $X$ be a scheme [def-pc-scheme], $M$ an $\\mathcal O_X$-module, $U\\subseteq X$ open, and $e\\in\\Gamma(U,M)$. The section $e$ is a free generator on $U$ if for every open $V\\subseteq U$, the map $\\Gamma(V,\\mathcal O_X)\\to\\Gamma(V,M)$, $r\\mapsto r e|_V$, is bijective. Equivalently, multiplication by $e$ gives a trivialization $\\mathcal O_U\\cong M|_U$.",
+ "stmt_deps": [
+  "def-pc-scheme"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sheaves.tex",
+  "place": "Lemma 00AM (lemma-glue-sheaves-structures), specialization to the trivial rank-one local modules O_{U_i}; a trivialization is equivalently its inverse image of 1"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "local free generator section trivializes a sheaf of modules",
+   "results": "Service returned Internal Server Error; unavailable.",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "section of an O_X module which gives an isomorphism from the structure sheaf on an open",
+   "results": "Eight results about structure sheaves and Tilde; no free-generator definition.",
+   "date": "2026-10-11",
+   "verdict": "no exact Mathlib match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg def IsFreeGenerator in Mathlib, WeilConjectures and lean/Sheaf; rg IsFreeGenerator and local-free-generator in dag/nodes",
+   "results": "Source FreeGenerator.lean:100 defines precisely this notion; no Mathlib or Sheaf copy, and no DAG definition node carries it (other nodes use it in theorem signatures).",
+   "date": "2026-10-11",
+   "verdict": "reuse source declaration; add only a DAG record"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sc-glue-component-transition-cocycle",
+  "date": "2026-10-11",
+  "group": "M1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-pic-proper-ntorsion",
+   "place": "Chosen trivializations of the local rank-one modules in the Cech gluing step",
+   "via": [
+    "lem-sc-glue-component-transition-cocycle",
+    "lem-sc-glue-component-line-bundles",
+    "lem-sc-reduced-dim-le-one-ample",
+    "lem-sc-dim-one-ample-invertible",
+    "lem-sc-dim-one-quasi-projective",
+    "lem-sc-proper-dim-one-projective"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-thm-curveestimate",
+ "lean": {
+  "module": "WeilConjectures.AlgebraicGeometry.Modules.FreeGenerator",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.IsFreeGenerator",
+  "statement": "def IsFreeGenerator {U : X.Opens} (e : Γ(M, U)) : Prop",
+  "branch": "slopmaster2",
+  "by": "M1",
+  "date": "2026-10-11",
+  "existing": true,
+  "note": "Existing source definition, with section variables {X : Scheme.{u}} {M : X.Modules}; multiplication by e is bijective on every subopen. No duplicate Lean definition."
+ },
+ "reviewed": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-gtc1213",
+  "group": "M1",
+  "result": "fix",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-gtc1213",
+  "group": "M1",
+  "result": "fix",
+  "note": "X arbitrary Scheme; arbitrary open cover iSup U = top (no Finite/nonempty); g units on U a ⊓ U b; hid g_aa=1; hinv and hcoc compared after restriction to every W in the overlaps (equivalent to triple-overlap equalities); conclusion: L IsInvertible (recorded decl), frames e a with IsFreeGenerator (new existing:true node def-sc-local-free-generator = source FreeGenerator.lean:100, no Mathlib/DAG copy), e_a = g_ab e_b matching phi_ab∘psi_a = psi_b orientation of the node proof, uniqueness = exists-unique frame-preserving iso for any L' with free frames and same transitions; names resolved by rfl checks; fix: index binder I -> ι as in siblings"
+ }
+}

@@ -20,7 +20,8 @@
  },
  "stmt_deps": [
   "def-pc-scheme",
-  "def-sc-invertible-module"
+  "def-sc-invertible-module",
+  "def-sc-local-free-generator"
  ],
  "proof": [
   {
@@ -131,5 +132,24 @@
   "group": "F1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-gtc (reviewer sub-agent of L); spot-checked: Source: Stacks 00AM (sheaves.tex lemma-glue-sheaves-structures, tag verified in tags/tags, with 04TN for uniqueness); the item glues the trivial modules O_{U_a} along multiplication by g_ab, which is exactly 00AM for O-modules. Only split fields changed (proof, proof_deps, proof_origin, status, split_report); one commit, two files, report with Review by F1. Step 1: multiplication by the unit g_ab is an O_{U_ab}-linear iso with inverse g_ba; trivial module is invertible per def-sc-invertible-module. Step 2 elementary: g_aa=1 gives phi_aa=id, and g_ac=g_ab g_bc (commutative) gives phi_ac=phi_bc o phi_ab, the cocycle form required by clause (2) of lem-weil-pbc-glue-sheaves-of-modules (pairs incl. i=j). Step 3: clause (2) of that node gives L and psi_a with phi_ab o psi_a = psi_b. Step 4: L|U_a ~ O_{U_a} so locally free rank one, hence (quasi-coherent) invertible per def-sc-invertible-module; uniqueness: psi_b^{-1}psi'_b = psi_a^{-1}phi_ab^{-1}phi_ab psi'_a on U_ab, so clause (1) (glueing morphisms) gives the unique compatible map, iso by gluing inverses and the 'in particular' clause. Tool use lem-weil-pbc-glue-sheaves-of-modules (unit sk-thm-p1) accepted as generic gluing tool (C8). Small cases: one-open cover gives O_X; g_ab=1 gives trivial bundle. No sorry-free slopmaster2 declaration found stating Zariski gluing of line bundles by cocycles (only DescentCocycle, fpqc descent). Start Sat Oct 10 03:25:35 PM UTC 2026, end Sat Oct 10 03:26:00 PM UTC 2026."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GlueComponentTransitionCocycle",
+  "declaration": "AlgebraicGeometry.exists_invertible_of_cech_transition",
+  "file": "lean/Sheaf/AlgebraicGeometry/GlueComponentTransitionCocycle.lean",
+  "statement": "theorem exists_invertible_of_cech_transition {X : Scheme.{u}} {ι : Type v} (U : ι → X.Opens) (hcover : ⨆ a, U a = ⊤) (g : ∀ a b, Γ(X, U a ⊓ U b)ˣ) (hid : ∀ a, g a a = 1) (hinv : ∀ a b (W : X.Opens) (ha : W ≤ U a) (hb : W ≤ U b), Units.map (X.presheaf.map (homOfLE (le_inf hb ha)).op).hom.toMonoidHom (g b a) = (Units.map (X.presheaf.map (homOfLE (le_inf ha hb)).op).hom.toMonoidHom (g a b))⁻¹) (hcoc : ∀ a b c (W : X.Opens) (ha : W ≤ U a) (hb : W ≤ U b) (hc : W ≤ U c), Units.map (X.presheaf.map (homOfLE (le_inf ha hc)).op).hom.toMonoidHom (g a c) = Units.map (X.presheaf.map (homOfLE (le_inf ha hb)).op).hom.toMonoidHom (g a b) * Units.map (X.presheaf.map (homOfLE (le_inf hb hc)).op).hom.toMonoidHom (g b c)) : ∃ (L : X.Modules) (e : ∀ a, Γ(L, U a)), L.IsInvertible ∧ (∀ a, IsFreeGenerator (e a)) ∧ (∀ a b, L.presheaf.map (homOfLE inf_le_left).op (e a) = (g a b).val • L.presheaf.map (homOfLE inf_le_right).op (e b)) ∧ ∀ (L' : X.Modules) (e' : ∀ a, Γ(L', U a)), (∀ a, IsFreeGenerator (e' a)) → (∀ a b, L'.presheaf.map (homOfLE inf_le_left).op (e' a) = (g a b).val • L'.presheaf.map (homOfLE inf_le_right).op (e' b)) → ∃! f : L' ≅ L, ∀ a, f.hom.app (U a) (e' a) = e a",
+  "branch": "sheaf-dag",
+  "by": "M1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-gtc1213"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-gtc1213",
+  "group": "M1",
+  "result": "fix",
+  "note": "X arbitrary Scheme; arbitrary open cover iSup U = top (no Finite/nonempty); g units on U a ⊓ U b; hid g_aa=1; hinv and hcoc compared after restriction to every W in the overlaps (equivalent to triple-overlap equalities); conclusion: L IsInvertible (recorded decl), frames e a with IsFreeGenerator (new existing:true node def-sc-local-free-generator = source FreeGenerator.lean:100, no Mathlib/DAG copy), e_a = g_ab e_b matching phi_ab∘psi_a = psi_b orientation of the node proof, uniqueness = exists-unique frame-preserving iso for any L' with free frames and same transitions; names resolved by rfl checks; fix: index binder I -> ι as in siblings"
  }
 }
