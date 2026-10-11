@@ -19,7 +19,8 @@
   "place": "Tag 04JF, proof of lemma-G-modules, lines defining the forgetful functor v and its right adjoint u(M)"
  },
  "stmt_deps": [
-  "def-sp-injective-resolutions"
+  "def-sp-injective-resolutions",
+  "def-exc-discrete-modules-category"
  ],
  "proof": [
   {
@@ -116,5 +117,28 @@
   "group": "F1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-os2 (reviewer sub-agent of L); spot-checked: Repaired re-push after the 15:34 return (one point, E3/C2 step 1 monomorphism clause): step 1 now carries the kernel argument verbatim as the return entry wrote it (kernel K of the underlying map is a G-stable R-submodule with open stabilizers, hence an object of D_{R,G}; f o i = f o 0 forces i = 0, K = 0; injective R[G]-map is monic via a-b), uses [] elementary true; nothing else changed; the report's WANTED about injectives.tex is gone and the review says the proof was read there. Source re-read: Stacks 04JF, injectives.tex label lemma-G-modules lines 409-430: v fully faithful, transforms injective maps into injective maps, right adjoint u(M) = open-stabilizer elements; the statement agrees hypothesis by hypothesis (topological group G, ring R, Mod_{R,G}, Mod_{R[G]}). Step 2 (submodule: Stab(x+y) contains Stab(x) cap Stab(y), Stab(rx) contains Stab(x) by R-linearity of the action; G-stable as Stab(gx) = g Stab(x) g^{-1} open, conjugation a homeomorphism) and step 3 (an equivariant map carries Stab(n) into Stab(f(n)), so vN -> M lands in u(M); restriction/inclusion natural bijection) checked elementary. Only the item's fields changed (proof, proof_deps, proof_origin, status, split_report). Tool use def-sp-injective-resolutions (generic definition of injective objects, statement-only reference) accepted as C8 generic tool. Small cases: trivial G (u = id), discrete G (every stabilizer open, u = id), zero module. Start Sat Oct 10 03:45:27 PM UTC 2026, end Sat Oct 10 03:45:44 PM UTC 2026"
+ },
+ "lean": {
+  "module": "Sheaf.RepresentationTheory.OpenStabilizerAdjunction",
+  "declaration": "ModuleCat.openStabilizerAdjunction",
+  "declarations": [
+   "ModuleCat.forgetDiscreteGModule",
+   "ModuleCat.openStabilizerAdjunction"
+  ],
+  "file": "lean/Sheaf/RepresentationTheory/OpenStabilizerAdjunction.lean",
+  "statement": "theorem openStabilizerAdjunction (R : Type u) (G : Type v) [Ring R] [Group G] [TopologicalSpace G] [IsTopologicalGroup G] : (forgetDiscreteGModule.{u, v, w} R G).Full ∧ (forgetDiscreteGModule.{u, v, w} R G).Faithful ∧ (∀ ⦃N N' : Rep.DiscreteContinuousRep.{u, v, w} R G⦄ (f : N ⟶ N'), Mono f → Mono ((forgetDiscreteGModule.{u, v, w} R G).map f)) ∧ ∃ (u : Rep.{w} R G ⥤ Rep.DiscreteContinuousRep.{u, v, w} R G) (adj : forgetDiscreteGModule.{u, v, w} R G ⊣ u), ∀ M : Rep.{w} R G, Function.Injective (adj.counit.app M).hom ∧ ∀ x : M, x ∈ Set.range (adj.counit.app M).hom ↔ IsOpen {g : G | M.ρ g x = x}",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-osa0928"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-osa0928",
+  "group": "F1",
+  "result": "fix",
+  "note": "Both returns addressed: imports and uses M1's landed Rep.DiscreteContinuousRep, no private node/module; arbitrary Ring R, topological group G; v = ObjectProperty.ι into Rep R G (left R[G]-modules, per R-osa0737); Full, Faithful, Mono f -> Mono (v.map f), exists u and v ⊣ u with injective counit whose range is exactly the open-stabilizer elements; FIX: universes were six independent params (each clause at its own carrier universe), pinned to .{u,v,w}, inclusion now ι _ instead of restated predicate; H4 checked Mathlib Action/Continuous, WeilConjectures RepresentationTheory/Continuous: no such adjunction; docstring carries node steps 1-3; compiled clean"
  }
 }
