@@ -158,5 +158,23 @@
   "by": "L",
   "result": "pass",
   "note": "Reviewed by the lead (opus-relaunch6). Four steps along the proof of 07M7 lines 2212-2216, four new Mathlib leaves verified by line: 07BU (2)=>(1) (IsSmoothAt.exists_notMem_smooth, Smooth/Locus.lean:150, via smoothLocus_eq_compl_support_inter), 00RT (KaehlerDifferential.isLocalizedModule_map, Etale/Kaehler.lean:63), 00T3 first assertion (Smooth.comp :568 with Smooth.of_isLocalization_Away :559), and the identification 02GJ of etale ring maps (00U1) with etale morphisms of affine schemes (HasRingHomProperty.Spec_iff, Morphisms/RingHomProperties.lean:360, with Etale as the match of def-weil-etale-morphism); the two-lemma specializations accepted. Argument: smooth at q gives g; Omega_{C_g/A} = (Omega_{C/A})_g finitely generated and zero at q, so killed by some c not in q; h = gc, A -> C_h smooth with Omega = 0, i.e. etale (00U1); 02GJ. def-weil-affine-spectrum added to stmt_deps."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.EtaleAwayOfLocalizedCotangentVanishing",
+  "declaration": "AlgebraicGeometry.exists_etale_away_of_localized_cotangent_vanishing",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleAwayOfLocalizedCotangentVanishing.lean",
+  "statement": "theorem exists_etale_away_of_localized_cotangent_vanishing {A C : Type u} [CommRing A] [CommRing C] [Algebra A C] [Algebra.FinitePresentation A C] (q : Ideal C) [q.IsPrime] (hH : Subsingleton (LocalizedModule q.primeCompl (Algebra.H1Cotangent A C))) (hΩ : Subsingleton (LocalizedModule q.primeCompl (KaehlerDifferential A C))) : ∃ h : C, h ∉ q ∧ Etale (Spec.map (CommRingCat.ofHom (algebraMap A (Localization.Away h))))",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-enc0956",
+  "group": "E1",
+  "result": "pass",
+  "note": "A,C Type u comm rings + [Algebra A C] = ring map; [Algebra.FinitePresentation A C]; q prime; H1(L_{C/A})_q=0 as Subsingleton LocalizedModule q.primeCompl (Algebra.H1Cotangent A C) (Generators.self = R[S] presentation of def-weil-pbc-smooth-ring-map match); (Omega_{C/A})_q=0 via KaehlerDifferential, same form as landed EtaleAtPrimeFlatUnramifiedCriterion; conclusion exists h notin q, AlgebraicGeometry.Etale (Spec.map (ofHom (algebraMap A (Localization.Away h)))) = Spec C_h -> Spec A via composite A->C->C_h, scheme form as node speaks"
  }
 }
