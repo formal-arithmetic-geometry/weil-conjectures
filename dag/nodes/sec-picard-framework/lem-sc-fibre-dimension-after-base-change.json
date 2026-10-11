@@ -127,5 +127,24 @@
   "group": "H1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-fd3b (reviewer sub-agent of L); spot-checked: Third push after returns 15:32 and 15:46. All three points of the 15:46 return repaired: the commit now touches only the item node and the report (lem-sc-local-dimension-invariant-residue-field-extension gone, so its created field point lapses), and the report no longer mentions citations.json. Source Morphisms Tag 02FY (morphisms.tex line 5425) part (1): fibre product square, f locally of finite type, x' over x, s'=f'(x'), s=g(s')=f(x); the item statement agrees hypothesis by hypothesis (the fibre identification clause is the standard one used in its proof). Step 1: residue-field factorisation from def-weil-residue-field, the fibre and fibre product from def-pc-scheme-fibre and def-pc-fibre-product, the two transitivity isomorphisms from lem-weil-pbc-cartesian-square-pasting (Mathlib leaf IsPullback.paste_vert_iff). Step 2: X_s locally of finite type over kappa(s) from lem-weil-pbc-lft-base-change (Mathlib leaf locallyOfFiniteType_isStableUnderBaseChange), dimension at a point local by def-kun-dimension, affine comparison from lem-weil-pbc-dimension-at-point-field-extension (Tag 00P4, the source's own citation), accepted as a declared generic tool use (C8). Small cases: Spec K and A^1_K under field extension (dims 0 and 1). Start 2026-10-10 Sat Oct 10 03:52:56 PM UTC 2026, end Sat Oct 10 03:53:12 PM UTC 2026."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FibreDimensionAfterBaseChange",
+  "declaration": "AlgebraicGeometry.fibre_dimension_after_base_change",
+  "file": "lean/Sheaf/AlgebraicGeometry/FibreDimensionAfterBaseChange.lean",
+  "statement": "theorem fibre_dimension_after_base_change {X S S' : Scheme.{u}} (f : X ⟶ S) [LocallyOfFiniteType f] (g : S' ⟶ S) (x' : ↥(Limits.pullback f g)) : let f' : Limits.pullback f g ⟶ S' := Limits.pullback.snd f g let x : X := Limits.pullback.fst f g x' let s' : S' := f' x' let s : S := g s' (∃ e : f'.fiber s' ≅ Limits.pullback (f.fiberToSpecResidueField s) (Spec.map (g.residueFieldMap s')), e.hom ≫ Limits.pullback.fst _ _ ≫ f.fiberι s = f'.fiberι s' ≫ Limits.pullback.fst f g ∧ e.hom ≫ Limits.pullback.snd _ _ = f'.fiberToSpecResidueField s') ∧ f x = s ∧ topologicalKrullDimAt (f'.asFiber x') = topologicalKrullDimAt (f.asFiber x)",
+  "branch": "sheaf-dag",
+  "by": "M1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-fdb1501"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-fdb1501",
+  "group": "M1",
+  "result": "fix",
+  "note": "Tag 02FY(1): f lft = [LocallyOfFiniteType f]; g arbitrary; X'=pullback f g, f'=pullback.snd, x=pullback.fst x', s'=f' x', s=g s' with f x = s conjunct; fibre clause FIXED from bare Nonempty iso to an iso f'.fiber s' ≅ X_s ×_{κ(s)} Spec κ(s') compatible with fiberι/pullback.fst and fiberToSpecResidueField (as landed baseChange_fiber); dims topologicalKrullDimAt at asFiber points (def-kun-dimension's recorded decl); empty pullback vacuous, no char/universe restriction"
  }
 }
