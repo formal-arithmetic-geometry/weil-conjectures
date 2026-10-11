@@ -97,34 +97,6 @@ noncomputable def rightDerivedLowerStarUnit [Etale.UpperStarPreservesFlat A] :
 
 end CupProduct
 
-section Rewriting
-
-omit [Abelian.HasFunctorialFlatResolution A] in
-lemma derivedTensor_map_app {Z : Scheme.{u}} [Abelian.HasFunctorialFlatResolution A]
-    {K K' : 𝐃(Z, A)} (f : K ⟶ K') (M : 𝐃(Z, A)) :
-    ((derivedTensor A Z).map f).app M = f ▷ M :=
-  rfl
-
-omit [Abelian.HasFunctorialFlatResolution A] in
-lemma derivedTensor_obj_map {Z : Scheme.{u}} [Abelian.HasFunctorialFlatResolution A]
-    (K : 𝐃(Z, A)) {M M' : 𝐃(Z, A)} (f : M ⟶ M') :
-    ((derivedTensor A Z).obj K).map f = K ◁ f :=
-  rfl
-
-omit [Abelian.HasFunctorialFlatResolution A] in
-lemma derivedTensorAssociator_eq {Z : Scheme.{u}} [Abelian.HasFunctorialFlatResolution A]
-    (K L M : 𝐃(Z, A)) :
-    derivedTensorAssociator A Z K L M = α_ K L M :=
-  rfl
-
-omit [Abelian.HasFunctorialFlatResolution A] in
-lemma derivedTensorRightUnitor_eq {Z : Scheme.{u}} [Abelian.HasFunctorialFlatResolution A]
-    (K : 𝐃(Z, A)) :
-    derivedTensorRightUnitor A Z K = ρ_ K :=
-  rfl
-
-end Rewriting
-
 variable {FA : A → A → Type (u + 1)} {CA : A → Type (u + 1)}
   [∀ (P Q : A), FunLike (FA P Q) (CA P) (CA Q)] [ConcreteCategory.{u + 1} A FA]
   [Etale.UpperStarPreservesFlat A]
