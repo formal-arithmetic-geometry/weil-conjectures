@@ -167,6 +167,99 @@ theorem constructibleFiniteTor_preservation [IsSeparated f] [QuasiCompact f]
     fun K hK ↦ constructibleFiniteTor_rightDerivedUpperShriek Λ aY f hK,
     fun K hK ↦ constructibleFiniteTor_verdierDual Λ aX hK⟩
 
+/-- Blueprint `rem-sf-preservation-matrix`: Preservation results and their actual hypotheses.
+
+For a finite `Λ` whose exponent is invertible on `k` and a separated morphism `f : X ⟶ Y` of
+schemes of finite type over `k`, with `X` separated over `k`, the finite-coefficient preservation
+results come with these intervals:
+
+1. `Lf^*` preserves Tor amplitude in `[a, b]` (`lem-sf-pullback-tor-amplitude`), and the
+   derived tensor product of objects of Tor amplitude `[a, b]` and `[c, d]` has Tor amplitude
+   in `[a + c, b + d]` (`lem-sf-tensor-ctf`);
+2. on the pro-étale site, if `dim X ≤ d`, the direct image `Rf_*` carries a bounded constructible
+   complex of Tor amplitude `[a, b]` to a bounded constructible complex of Tor amplitude
+   `[a, b + 2d]` (`cor-sf-direct-image-ctf-proetale`);
+3. if `dim X ≤ m`, the internal hom `RHom(K, M)` of bounded constructible `K, M` of Tor
+   amplitude `[a, b]` and `[c, d]` has Tor amplitude in `[c - b - 2m, d - a + 2m]`, and in the
+   sharper interval `[c - b, d - a]` when `K` is dualizable (`thm-sf-hom-ctf`);
+4. `Rf^!` sends `D_c^[a, b]` with Tor amplitude in `[a, b]` into `D_c^[a - 2D, b + 2 dim Y + 1]`
+   with the same Tor bound, for a constant `D` depending only on `f`
+   (`thm-sf-preservation-class`), and the Verdier dual `𝔻_X` preserves `Dctf(X)` and is an
+   involution on it (`thm-sf-biduality-class`).
+
+The integral-coefficient entries of the remark only cite results of other subsections. -/
+theorem torAmplitudeIn_preservation [IsSeparated f] [QuasiCompact f] [HasCompactification f]
+    [IsSeparated aX] [HasCompactification aX] :
+    (∀ (a b : ℤ) (K : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))),
+      torAmplitudeIn (ModuleCat.{u + 1} Λ) Y a b K →
+        torAmplitudeIn (ModuleCat.{u + 1} Λ) X a b ((L((f)^*[ModuleCat.{u + 1} Λ])).obj K)) ∧
+    (∀ (a b c d : ℤ)
+      (K M : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))),
+      torAmplitudeIn (ModuleCat.{u + 1} Λ) X a b K →
+        torAmplitudeIn (ModuleCat.{u + 1} Λ) X c d M →
+          torAmplitudeIn (ModuleCat.{u + 1} Λ) X (a + c) (b + d)
+            (((-⊗ᴸ-(X)[ModuleCat.{u + 1} Λ]).obj K).obj M)) ∧
+    (∀ d : ℕ, topologicalKrullDim X ≤ (d : WithBot ℕ∞) → ∀ (a b : ℤ)
+      (K : _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} Λ))),
+      ProEtale.DerivedCategory.boundedConstructible (ModuleCat.{u + 1} Λ) X K →
+        ProEtale.DerivedCategory.torAmplitudeIn (ModuleCat.{u + 1} Λ) X a b K →
+          ProEtale.DerivedCategory.boundedConstructible (ModuleCat.{u + 1} Λ) Y
+              ((R(ProEtale.lowerStar (ModuleCat.{u + 1} Λ) f)).obj K) ∧
+            ProEtale.DerivedCategory.torAmplitudeIn (ModuleCat.{u + 1} Λ) Y a (b + 2 * (d : ℤ))
+              ((R(ProEtale.lowerStar (ModuleCat.{u + 1} Λ) f)).obj K)) ∧
+    (∀ m : ℕ, topologicalKrullDim X ≤ (m : WithBot ℕ∞) → ∀ (a b c d : ℤ)
+      (K M : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))),
+      boundedConstructible (ModuleCat.{u + 1} Λ) X K →
+        torAmplitudeIn (ModuleCat.{u + 1} Λ) X a b K →
+          boundedConstructible (ModuleCat.{u + 1} Λ) X M →
+            torAmplitudeIn (ModuleCat.{u + 1} Λ) X c d M →
+              torAmplitudeIn (ModuleCat.{u + 1} Λ) X (c - b - 2 * (m : ℤ)) (d - a + 2 * (m : ℤ))
+                (((RHom(X)[ModuleCat.{u + 1} Λ]).obj (op K)).obj M)) ∧
+    (∀ (a b c d : ℤ)
+      (K M : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))),
+      boundedConstructible (ModuleCat.{u + 1} Λ) X K →
+        torAmplitudeIn (ModuleCat.{u + 1} Λ) X a b K → IsDualizable K →
+          boundedConstructible (ModuleCat.{u + 1} Λ) X M →
+            torAmplitudeIn (ModuleCat.{u + 1} Λ) X c d M →
+              torAmplitudeIn (ModuleCat.{u + 1} Λ) X (c - b) (d - a)
+                (((RHom(X)[ModuleCat.{u + 1} Λ]).obj (op K)).obj M)) ∧
+    (∃ D : ℕ, ∀ d : ℕ, topologicalKrullDim Y ≤ (d : WithBot ℕ∞) → ∀ (a b : ℤ)
+      (K : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))),
+      constructibleTorAmplitudeIn (ModuleCat.{u + 1} Λ) Y a b K →
+        constructibleTorAmplitudeIn (ModuleCat.{u + 1} Λ) X (a - 2 * D) (b + 2 * d + 1)
+          ((R(f)^![ModuleCat.{u + 1} Λ]).obj K)) ∧
+    (∀ K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)),
+      constructibleFiniteTor (ModuleCat.{u + 1} Λ) X K →
+        constructibleFiniteTor (ModuleCat.{u + 1} Λ) X
+            ((verdierDual (ModuleCat.{u + 1} Λ) aX).obj (op K)) ∧
+          Nonempty (K ≅ (verdierDual (ModuleCat.{u + 1} Λ) aX).obj
+            (op ((verdierDual (ModuleCat.{u + 1} Λ) aX).obj (op K))))) := by
+  have : HasInvertibleExponent Λ X := .of_hom aX
+  have : HasInvertibleExponent Λ Y := .of_hom aY
+  have : LocallyOfFiniteType f := by
+    have : LocallyOfFiniteType (f ≫ aY) := hf ▸ inferInstance
+    exact locallyOfFiniteType_of_comp f aY
+  -- the exponent `n` of `Λ`, invertible in `k`
+  obtain ⟨n, hn, hΛ, hu⟩ :=
+    HasInvertibleExponent.exists_isUnit_natCast (Λ := Λ) (X := Spec (.of k))
+  have hnk : (n : k) ≠ 0 := by
+    simpa using (hu.map (Scheme.ΓSpecIso (.of k)).hom.hom).ne_zero
+  have hnΛ (M : ModuleCat.{u + 1} Λ) : n • 𝟙 M = 0 := by
+    ext x
+    simp [← Nat.cast_smul_eq_nsmul Λ, hΛ]
+  refine ⟨fun a b K hK ↦ torAmplitudeIn_leftDerivedUpperStar _ f a b hK,
+    fun a b c d K M hK hM ↦ torAmplitudeIn_tensor _ X a b c d hK hM,
+    fun d hd a b K hK hKt ↦
+      ⟨ProEtale.boundedConstructible_rightDerivedLowerStar _ n hnk hnΛ aY f hK,
+        ProEtale.torAmplitudeIn_rightDerivedLowerStar _ n hnk hnΛ aY f d hd a b hK hKt⟩,
+    fun m hm a b c d K M hK hKt hM hMt ↦
+      torAmplitudeIn_derivedHom Λ aX m hm a b c d hK hKt hM hMt,
+    fun a b c d K M hK hKt hKd hM hMt ↦
+      torAmplitudeIn_derivedHom_of_isDualizable Λ aX a b c d hK hKt hKd hM hMt,
+    exists_constructibleTorAmplitudeIn_rightDerivedUpperShriek_of_topologicalKrullDim_le Λ aY f,
+    fun K hK ↦ ⟨constructibleFiniteTor_verdierDual Λ aX hK,
+      nonempty_iso_verdierDual_verdierDual Λ aX hK⟩⟩
+
 end Etale
 
 namespace ProEtale.DerivedCategory
