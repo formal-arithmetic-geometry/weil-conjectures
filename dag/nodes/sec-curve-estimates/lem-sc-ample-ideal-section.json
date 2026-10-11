@@ -225,5 +225,23 @@
   "lem-weil-pbc-ample-scheme-separated",
   "lem-weil-pbc-nonvanishing-section-trivializes",
   "lem-weil-pbc-quasi-coherent-ideal-zero-set-affine"
- ]
+ ],
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AmpleIdealSection",
+  "declaration": "AlgebraicGeometry.Scheme.IdealSheafData.exists_section_of_ample_ideal",
+  "file": "lean/Sheaf/AlgebraicGeometry/AmpleIdealSection.lean",
+  "statement": "theorem exists_section_of_ample_ideal {Y : Scheme.{u}} [CompactSpace Y] (M : Y.Modules) [M.IsInvertible] (hM : Scheme.Modules.IsAmple Y M) (J : Y.IdealSheafData) {y : Y} (hy : y ∉ (J.support : Set Y)) : ∃ n : ℕ, 0 < n ∧ ∃ u : Γ(M.tensorPow n, ⊤), ∃ v : Γ(J.toModules.tensorObj (M.tensorPow n), ⊤), u = ((tensorHom J.toModulesι (𝟙 (M.tensorPow n)) ≫ (MonoidalCategory.leftUnitor (M.tensorPow n)).hom).app ⊤) v ∧ y ∈ Scheme.Modules.nonvanishingLocus (M.tensorPow n) u",
+  "branch": "sheaf-dag",
+  "by": "K1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-ais1204",
+  "group": "K1",
+  "result": "pass",
+  "note": "Y quasi-compact=[CompactSpace Y] (also inside IsAmple, faithful to node); M=(M:Y.Modules)[IsInvertible]+landed IsAmple; J=IdealSheafData (qc ideal), y∉V(J)=y∉J.support (#print: supportSet); n>0; u:Γ(M^n) tied to v:Γ(J.toModules⊗M^n) via (ι⊗1)≫λ (=Γ(J M^n) as M^n flat); y∈nonvanishingLocus; tensorObj=abbrev M⊗N of source monoidal instance (rfl); Γ(M,⊤) rfl to presheaf sections"
+ }
 }

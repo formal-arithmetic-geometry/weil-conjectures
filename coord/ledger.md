@@ -4558,3 +4558,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 12:04 L: merged deliver/M1/lem-pc-relative-kill-by-twisting (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.RelativeSerreVanishing AlgebraicGeometry.Scheme.Modules.exists_isZero_higherDirectImage_tensorPow_of_relatively_ample)
 - 12:04 L: merged deliver/M1/lem-sc-closed-subset-qc-ideal (stage 2; reviewer FIX; first push; Sheaf.AlgebraicGeometry.ClosedSubsetQcIdeal AlgebraicGeometry.Scheme.exists_idealSheafData_support_eq)
 - 12:05 L: merged deliver/M1/lem-sc-p1-ext-coherent-dim-one-vanishing (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.CoherentExtVanishing AlgebraicGeometry.Scheme.Modules.coherent_ext_subsingleton_of_regular)
+- 12:05 L: merged deliver/K1/lem-sc-ample-ideal-section (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.AmpleIdealSection AlgebraicGeometry.Scheme.IdealSheafData.exists_section_of_ample_ideal)
