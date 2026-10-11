@@ -134,6 +134,65 @@ theorem exists_globalSectionsToUpperStar_eq_zero_of_specializes {G : AdicSheaf l
     rw [Scheme.fromSpecResidueField_apply, hv₀]
   · exact globalSectionsToUpperStar_app_eq_zero_of_map_eq_zero M.X a f hf t
 
+lemma globalSectionOfModHom_comp {Y : Scheme.{u}} {M N : AdicSheaf l Y}
+    (v : AdicSheaf.unit l Y ⟶ M) (w : M ⟶ N) :
+    globalSectionOfModHom (v ≫ w) = ((Sheaf.Γ _ _).map w.hom) (globalSectionOfModHom v) := by
+  rw [globalSectionOfModHom_eq, globalSectionOfModHom_eq, Mod.comp_hom', Functor.map_comp,
+    ConcreteCategory.comp_apply]
+
+/-- **A morphism `ℚ̄_ℓ ⟶ j_! G` into the extension by zero of a lisse sheaf vanishes** if `U` is
+irreducible and its generic point specializes to a point `z` outside `U`. Its restriction to `U`,
+a section of the lisse sheaf `G`, vanishes at a geometric point over the generic point of `U`
+(`AlgebraicGeometry.ProEtale.exists_globalSectionsToUpperStar_eq_zero_of_specializes`), hence
+vanishes; and the comparison `j_! G ⟶ j_* G`, through which `ℚ̄_ℓ ⟶ j_! G` is determined by its
+restriction to `U`, is a monomorphism. -/
+theorem IsAdicLisseSheaf.eq_zero_of_hom_adicOpenImmersionLowerShriek [IrreducibleSpace U]
+    {G : AdicSheaf l U} (hG : IsAdicLisseSheaf G) {z : X} (hz : z ∉ Set.range j.base)
+    (hspec : j.base (genericPoint U) ⤳ z) (α : AdicSheaf.unit l X ⟶ (j)_!ᵃ[l].obj G) :
+    α = 0 := by
+  obtain ⟨K, _, _, p, hp, hpa⟩ := exists_globalSectionsToUpperStar_eq_zero_of_specializes j
+    (globalSectionOfModHom α) hspec hz
+  have hpr : Set.range p.base ⊆ Set.range j.base := by
+    rintro _ ⟨y, rfl⟩
+    rw [Subsingleton.elim y (IsLocalRing.closedPoint K), hp]
+    exact ⟨_, rfl⟩
+  let pU := IsOpenImmersion.lift j p hpr
+  have hpU : pU ≫ j = p := IsOpenImmersion.lift_fac _ _ _
+  have hpU' : pU.base (IsLocalRing.closedPoint K) = genericPoint U :=
+    j.isOpenEmbedding.injective (by rw [← Scheme.Hom.comp_apply, hpU, hp])
+  let e := asIso ((adicOpenImmersionLowerShriekAdjunction l j).unit.app G)
+  let β : AdicSheaf.unit l U ⟶ G := (adicUpperStarUnitIso l j).inv ≫ (j)^*ᵃ[l].map α ≫ e.inv
+  have hβ : β = 0 := by
+    refine hG.eq_zero_of_globalSectionsToUpperStar_eq_zero β K fun y ↦
+      ⟨genericPoint U, pU, genericPoint_specializes y, by rw [hpU'], ?_⟩
+    have h₀ : ((globalSectionsToUpperStar _ (pU ≫ j)).app ((j)_!ᵃ[l].obj G).X)
+        (globalSectionOfModHom α) = 0 := by
+      rw [hpU]
+      exact hpa
+    have h₁ := congrArg (fun φ ↦ φ (globalSectionOfModHom α))
+      (globalSectionsToUpperStar_comp _ pU j ((j)_!ᵃ[l].obj G).X)
+    simp only [ConcreteCategory.comp_apply] at h₁
+    rw [h₀, map_zero] at h₁
+    have h₂ := congrArg (fun φ ↦ φ (((globalSectionsToUpperStar _ j).app
+      ((j)_!ᵃ[l].obj G).X) (globalSectionOfModHom α)))
+      ((globalSectionsToUpperStar _ pU).naturality e.inv.hom)
+    simp only [ConcreteCategory.comp_apply, Functor.comp_map] at h₂
+    have h₃ : globalSectionOfModHom β = ((Sheaf.Γ _ _).map e.inv.hom)
+        (((globalSectionsToUpperStar _ j).app ((j)_!ᵃ[l].obj G).X) (globalSectionOfModHom α)) := by
+      rw [globalSectionsToUpperStar_globalSectionOfModHom, ← globalSectionOfModHom_comp]
+      simp only [β, Category.assoc]
+    rw [h₃]
+    erw [h₂, ← h₁, map_zero]
+  have hj : (j)^*ᵃ[l].map α = 0 := by
+    have : (j)^*ᵃ[l].map α = (adicUpperStarUnitIso l j).hom ≫ β ≫ e.hom := by
+      simp [β]
+    rw [this, hβ, zero_comp, comp_zero]
+  set c := (adicOpenImmersionLowerShriekToLowerStar l j).app G
+  have hc : α ≫ c = 0 := by
+    apply ((adicUpperStarLowerStarAdjunction l j).homEquiv _ _).symm.injective
+    simp [Adjunction.homEquiv_counit, hj]
+  rw [← cancel_mono c, hc, zero_comp]
+
 end ExtensionByZero
 
 end AlgebraicGeometry.ProEtale
