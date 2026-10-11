@@ -109,6 +109,58 @@ noncomputable instance commShiftDerivedTensorFlipObj
   inferInstanceAs
     (((curriedTensor (DerivedCategory (Sheaf X.smallEtaleTopology A))).flip.obj K).CommShift ℤ)
 
+attribute [local instance] Sheaf.monoidalCategory in
+/-- The shift compatibility of `K ⊗ᴸ -` is natural in the fixed factor `K`: for `g : K ⟶ K'`,
+the natural transformation `g ⊗ᴸ - : K ⊗ᴸ - ⟶ K' ⊗ᴸ -` commutes with the shifts. This is part
+of the two-variable shift structure `DerivedCategory.commShift₂CurriedTensor`. -/
+instance commShift_derivedTensor_map {K K' : DerivedCategory (Sheaf X.smallEtaleTopology A)}
+    (g : K ⟶ K') : NatTrans.CommShift ((derivedTensor A X).map g) ℤ :=
+  inferInstanceAs
+    (NatTrans.CommShift ((curriedTensor (DerivedCategory (Sheaf X.smallEtaleTopology A))).map g) ℤ)
+
+attribute [local instance] Sheaf.monoidalCategory in
+/-- The shift compatibility of `- ⊗ᴸ K` is natural in the fixed factor `K`: for `g : K ⟶ K'`,
+the natural transformation `- ⊗ᴸ g : - ⊗ᴸ K ⟶ - ⊗ᴸ K'` commutes with the shifts. -/
+instance commShift_derivedTensor_flip_map
+    {K K' : DerivedCategory (Sheaf X.smallEtaleTopology A)} (g : K ⟶ K') :
+    NatTrans.CommShift ((derivedTensor A X).flip.map g) ℤ :=
+  inferInstanceAs (NatTrans.CommShift
+    ((curriedTensor (DerivedCategory (Sheaf X.smallEtaleTopology A))).flip.map g) ℤ)
+
+/-- Naturality of the shift compatibility of `K ⊗ᴸ -` in the fixed factor: for `g : K ⟶ K'`
+the square
+
+```
+K ⊗ᴸ M⟦n⟧ ──≅──▶ (K ⊗ᴸ M)⟦n⟧
+    │                 │
+ g ⊗ 𝟙             (g ⊗ 𝟙)⟦n⟧
+    ▼                 ▼
+K' ⊗ᴸ M⟦n⟧ ──≅──▶ (K' ⊗ᴸ M)⟦n⟧
+```
+
+commutes. -/
+@[reassoc]
+lemma derivedTensor_map_app_comp_commShiftIso_hom_app
+    {K K' : DerivedCategory (Sheaf X.smallEtaleTopology A)} (g : K ⟶ K') (n : ℤ)
+    (M : DerivedCategory (Sheaf X.smallEtaleTopology A)) :
+    ((derivedTensor A X).map g).app (M⟦n⟧) ≫
+        (((derivedTensor A X).obj K').commShiftIso n).hom.app M =
+      (((derivedTensor A X).obj K).commShiftIso n).hom.app M ≫
+        (((derivedTensor A X).map g).app M)⟦n⟧' :=
+  (NatTrans.shift_app_comm _ n M).symm
+
+/-- Naturality of the shift compatibility of `- ⊗ᴸ K` in the fixed factor: for `g : K ⟶ K'`,
+`M⟦n⟧ ⊗ᴸ K ≅ (M ⊗ᴸ K)⟦n⟧` and `M⟦n⟧ ⊗ᴸ K' ≅ (M ⊗ᴸ K')⟦n⟧` are intertwined by `𝟙 ⊗ g`. -/
+@[reassoc]
+lemma derivedTensor_obj_map_comp_commShiftIso_hom_app
+    {K K' : DerivedCategory (Sheaf X.smallEtaleTopology A)} (g : K ⟶ K') (n : ℤ)
+    (M : DerivedCategory (Sheaf X.smallEtaleTopology A)) :
+    ((derivedTensor A X).obj (M⟦n⟧)).map g ≫
+        (((derivedTensor A X).flip.obj K').commShiftIso n).hom.app M =
+      (((derivedTensor A X).flip.obj K).commShiftIso n).hom.app M ≫
+        (((derivedTensor A X).obj M).map g)⟦n⟧' :=
+  (NatTrans.shift_app_comm ((derivedTensor A X).flip.map g) n M).symm
+
 /-- The derived tensor product of shifted complexes, `K⟦a⟧ ⊗ᴸ M⟦b⟧ ≅ (K ⊗ᴸ M)⟦a + b⟧`: the shift
 is first moved out of the left factor, then out of the right one.
 
