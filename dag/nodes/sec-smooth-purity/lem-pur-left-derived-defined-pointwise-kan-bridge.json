@@ -127,5 +127,23 @@
   "group": "C1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-pkb0100 (reviewer sub-agent of L); spot-checked: Math (E) checked: iota: S/X -> StructuredArrow(QX,Q), s |-> (X',Q(s)^-1), is initial (nonempty by surjectivity, connected by injectivity of lem-pc-right-localization-hom-colimit, colimit of sets = zigzags); essentially constant pro-object is a limit; conclusion is literally HasPointwiseLeftDerivedFunctorAt = HasPointwiseRightKanExtensionAt W.Q F (W.Q.obj X) = HasLimit (StructuredArrow.proj _ _ ⋙ F) (PointwiseLeftDerived.lean:45, Pointwise.lean:56); citer lem-pur-left-derived-from-kflat-class uses this direction. FIX more, RETURN less: (1) C4/E7: 'saturated multiplicative system compatible with the triangulated structure' (Tag 05R2) defined nowhere, same gap as sibling R-lde0058 return; the proof uses only a right multiplicative system, so the statement is generalized to D, D' categories, S right multiplicative system defined inline (RMS1-3, Tag 04VC), F any functor, with 05S8 noted as a special case; citer unaffected. (2) C1: Step 1 only built a cone; added the 3-line proof that it is a limit cone (Tag 0G2V). (3) C1: Step 2 asserted finality without argument or citation and said costructured-arrow; now defines iota, proves initiality from the hom-colimit lemma, and cites Tag 09WP/002R (Mathlib Functor.Initial.hasLimit_of_comp) for the limit transfer; Step 3 derives the projection at (X,id) as u_{id_X}. Second reading by C1 missed all three.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.DerivedCategory.LeftDerivedPointwiseKanBridge",
+  "declaration": "CategoryTheory.leftDerived_defined_pointwiseKan_bridge",
+  "file": "lean/Sheaf/CategoryTheory/DerivedCategory/LeftDerivedPointwiseKanBridge.lean",
+  "statement": "theorem leftDerived_defined_pointwiseKan_bridge {C : Type u} [Category.{v} C] {L : Type uL} [Category.{vL} L] {H : Type uH} [Category.{vH} H] (W : MorphismProperty C) [W.HasRightCalculusOfFractions] (Q : C ⥤ L) [Q.IsLocalization W] (F : C ⥤ H) (X : C) (Y : H) : let G := MorphismProperty.Over.forget W ⊤ X ⋙ Over.forget X ⋙ F IsEssentiallyConstantProDiagram G Y → ∀ (u : (Functor.const (W.Over ⊤ X)).obj Y ⟶ G), (∃ (j₀ : W.Over ⊤ X) (r : G.obj j₀ ⟶ Y), u.app j₀ ≫ r = 𝟙 Y ∧ ∀ j : W.Over ⊤ X, ∃ (k : W.Over ⊤ X) (a : k ⟶ j₀) (b : k ⟶ j), G.map b = G.map a ≫ r ≫ u.app j) → Q.HasPointwiseRightKanExtensionAt F (Q.obj X) ∧ ∃ (π : (Functor.const (StructuredArrow (Q.obj X) Q)).obj Y ⟶ StructuredArrow.proj (Q.obj X) Q ⋙ F), Nonempty (IsLimit (Cone.mk Y π)) ∧ (∀ s : W.Over ⊤ X, π.app (StructuredArrow.mk (Localization.isoOfHom Q W s.hom s.prop).inv) = u.app s) ∧ ∀ h : W (𝟙 X), π.app (StructuredArrow.mk (𝟙 (Q.obj X))) = u.app (⟨Over.mk (𝟙 X), h⟩ : W.Over ⊤ X)",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-ldk1005",
+  "group": "H1",
+  "result": "pass",
+  "note": "C,H,L universes independent; W+HasRightCalculusOfFractions = RMS1-3 (IsMultiplicative/exists_rightFraction/ext checked by #print); Q arbitrary IsLocalization W; S/X = W.Over top X (all triangles), G = forget>>Over.forget>>F; IsEssentiallyConstantProDiagram (incl. IsCofiltered) + forall u with its own j0,r witness (u>>r=id, G.map b = G.map a>>r>>u_j) = node's cone u_s; StructuredArrow (Q.obj X) Q morphisms Q(a) after phi = psi; HasPointwiseRightKanExtensionAt reducible to HasLimit(proj>>F) by #print; limit cone vertex Y, leg at mk (isoOfHom Q W s).inv = u_s, identity leg = u_id; statement true (iota S/X -> StructuredArrow initial by hom-colimit); equals HasPointwiseLeftDerivedFunctorAt via Mathlib hasPointwiseLeftDerivedFunctorAt_iff"
  }
 }
