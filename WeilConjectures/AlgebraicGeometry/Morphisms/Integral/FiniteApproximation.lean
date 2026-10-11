@@ -1121,20 +1121,4 @@ theorem Scheme.Hom.nonempty_finiteApproximation_of_isIntegralHom {X S : Scheme.{
       rw [G.π_p]
       exact f.toNormalization_fromNormalization }⟩
 
-/-- **An integral morphism is a limit of finite morphisms of finite presentation** (Stacks
-Project Tag 09YZ). If `f : X ⟶ S` is integral and `S` is quasi-compact and quasi-separated,
-then `X` is a cofiltered limit of schemes finite and of finite presentation over `S`.
-
-This strengthens `Scheme.Hom.nonempty_finiteApproximation_of_isIntegralHom` by the finite
-presentation of the stages. Blueprint `thm-pqf-immersion-descent` explicitly does not claim the
-finite presentation for the stages of the presentation of Step 2 of `thm-pqf-zmt-factorization`,
-and nothing in blueprint `sk-prop-nagata-sketch-zmt` uses this statement: the finitely presented
-factorization is
-`Scheme.Hom.exists_isOpenImmersion_isFinite_locallyOfFinitePresentation`, proved without it. -/
-@[stacks 09YZ]
-theorem Scheme.Hom.exists_finiteApproximation_of_isIntegralHom {X S : Scheme.{u}} (f : X ⟶ S)
-    [IsIntegralHom f] [CompactSpace S] [QuasiSeparatedSpace S] :
-    ∃ F : f.FiniteApproximation, ∀ i, LocallyOfFinitePresentation (F.p i) :=
-  sorry
-
 end AlgebraicGeometry

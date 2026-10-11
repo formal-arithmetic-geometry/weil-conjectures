@@ -249,6 +249,7 @@ public import WeilConjectures.AlgebraicGeometry.Morphisms.Finite.SplitExists
 public import WeilConjectures.AlgebraicGeometry.Morphisms.Finite.SplitNeighborhood
 public import WeilConjectures.AlgebraicGeometry.Morphisms.Integral.DisjointCover
 public import WeilConjectures.AlgebraicGeometry.Morphisms.Integral.FiniteApproximation
+public import WeilConjectures.AlgebraicGeometry.Morphisms.Integral.FinitePresentationApproximation
 public import WeilConjectures.AlgebraicGeometry.Morphisms.ProAffineEtale
 public import WeilConjectures.AlgebraicGeometry.Morphisms.QuasiFiniteFactorization
 public import WeilConjectures.AlgebraicGeometry.Morphisms.RegularImmersion
