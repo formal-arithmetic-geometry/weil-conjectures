@@ -108,5 +108,128 @@ lemma affineLine.artinSchreierEvalHom_hom_add (c d : k₀) :
   rfl
 
 end Translation
+section GlobalSections
+
+variable (k₀ l) in
+/-- The underlying sheaf `ĀS_* ℚ̄_ℓ` of the pushforward of the constant sheaf along the
+geometric Artin–Schreier map. -/
+noncomputable abbrev affineLine.artinSchreierSheaf :
+    Sheaf (Scheme.ProEt.topology Ā) (WeilCoefficients.{u} l) :=
+  (ĀS)_*[WeilCoefficients.{u} l].obj (ProEtale.adicConstantSheaf l Ā)
+
+variable (l) in
+/-- The evaluation `ĀS^* ĀS_* ℚ̄_ℓ ⟶ ℚ̄_ℓ` along `x ↦ (x, σ̄_c x)`, as a morphism of the
+underlying sheaves. -/
+noncomputable def affineLine.artinSchreierEval (c : k₀) :
+    (ĀS)^*[WeilCoefficients.{u} l].obj (affineLine.artinSchreierSheaf k₀ l) ⟶
+      ProEtale.adicConstantSheaf l Ā :=
+  (affineLine.artinSchreierEvalHom l c).hom
+
+lemma affineLine.artinSchreierEval_eq (c : k₀) :
+    affineLine.artinSchreierEval l c = (affineLine.artinSchreierEvalHom l c).hom :=
+  rfl
+
+/-- The evaluations translate under the deck transformations, on underlying sheaves
+(`AlgebraicGeometry.affineLine.artinSchreierEvalHom_hom_add`). -/
+lemma affineLine.upperStarFactor_inv_app_comp_artinSchreierEval (c d : k₀) :
+    (ProEtale.upperStarFactor (WeilCoefficients.{u} l)
+        (affineLine.geometricTranslation_comp_artinSchreierMap k₀ c)).inv.app
+        (affineLine.artinSchreierSheaf k₀ l) ≫ affineLine.artinSchreierEval l (c + d) =
+      ((affineLine.geometricTranslationIso k₀ c).hom)^*[WeilCoefficients.{u} l].map
+          (affineLine.artinSchreierEval l d) ≫
+        ProEtale.upperStarAdicConstantSheafHom l (affineLine.geometricTranslationIso k₀ c).hom := by
+  rw [affineLine.artinSchreierEval_eq, affineLine.artinSchreierEvalHom_hom_add,
+    Iso.inv_hom_id_app_assoc]
+  rfl
+
+/-- The global sections of `ĀS^* ĀS_* ℚ̄_ℓ` are determined by their evaluations along the
+sections `x ↦ (x, σ̄_c x)`, `c ∈ k₀`. -/
+lemma affineLine.eq_of_globalSections_artinSchreierEval
+    {z z' : (Sheaf.Γ (Scheme.ProEt.topology Ā) (WeilCoefficients.{u} l)).obj
+      ((ĀS)^*[WeilCoefficients.{u} l].obj (affineLine.artinSchreierSheaf k₀ l))}
+    (h : ∀ c, ((Sheaf.Γ _ _).map (affineLine.artinSchreierEval l c)).hom z =
+      ((Sheaf.Γ _ _).map (affineLine.artinSchreierEval l c)).hom z') : z = z' := by
+  let adj := constantSheafΓAdj (Scheme.ProEt.topology Ā) (WeilCoefficients.{u} l)
+  let R := ModuleCat.of (ULift.{u + 1} (PadicAlgCl l)) (ULift.{u + 1} (PadicAlgCl l))
+  let f (x : (Sheaf.Γ (Scheme.ProEt.topology Ā) (WeilCoefficients.{u} l)).obj
+      ((ĀS)^*[WeilCoefficients.{u} l].obj (affineLine.artinSchreierSheaf k₀ l))) :
+      R ⟶ (Sheaf.Γ _ _).obj
+        ((ĀS)^*[WeilCoefficients.{u} l].obj (affineLine.artinSchreierSheaf k₀ l)) :=
+    ModuleCat.ofHom (LinearMap.toSpanSingleton _ _ x)
+  have hf : f z = f z' := by
+    have : (adj.homEquiv _ _).symm (f z) = (adj.homEquiv _ _).symm (f z') := by
+      refine affineLine.artinSchreierEvalHom_hom_ext fun c ↦ ?_
+      change (adj.homEquiv _ _).symm (f z) ≫ affineLine.artinSchreierEval l c =
+        (adj.homEquiv _ _).symm (f z') ≫ affineLine.artinSchreierEval l c
+      rw [← Adjunction.homEquiv_naturality_right_symm, ← Adjunction.homEquiv_naturality_right_symm]
+      congr 1
+      ext
+      simp only [f, ModuleCat.hom_comp, ModuleCat.hom_ofHom, LinearMap.comp_apply,
+        LinearMap.toSpanSingleton_apply, one_smul]
+      exact h c
+    simpa using this
+  have := congrArg (fun φ : R ⟶ _ ↦ φ.hom (1 : ULift.{u + 1} (PadicAlgCl l))) hf
+  simp only [f, ModuleCat.hom_ofHom] at this
+  rwa [LinearMap.toSpanSingleton_apply_one, LinearMap.toSpanSingleton_apply_one] at this
+
+variable (l) in
+/-- The global section `x ↦ ((x, σ̄_c x) ↦ ψ(c))` of `ĀS^* ĀS_* ℚ̄_ℓ`, the image of `1` under the
+splitting map: it spans the `ψ`-isotypic line. -/
+noncomputable def affineLine.artinSchreierSplitSection (ψ : AddChar k₀ (PadicAlgCl l)) :
+    (Sheaf.Γ (Scheme.ProEt.topology Ā) (WeilCoefficients.{u} l)).obj
+      ((ĀS)^*[WeilCoefficients.{u} l].obj (affineLine.artinSchreierSheaf k₀ l)) :=
+  ProEtale.globalSectionOfModHom (affineLine.artinSchreierSplitModHom l ψ)
+
+/-- The evaluation of the split section along `x ↦ (x, σ̄_c x)` is the constant `ψ(c)`. -/
+lemma affineLine.Γ_map_artinSchreierEval_splitSection (ψ : AddChar k₀ (PadicAlgCl l))
+    (c : k₀) :
+    ((Sheaf.Γ _ _).map (affineLine.artinSchreierEval l c)).hom
+        (affineLine.artinSchreierSplitSection l ψ) =
+      ULift.up (ψ c) • ProEtale.oneGlobalSection (l := l) Ā := by
+  have hm : (affineLine.artinSchreierSplitModHom l ψ).hom ≫ affineLine.artinSchreierEval l c =
+      ULift.up (ψ c) • 𝟙 (ProEtale.adicConstantSheaf l Ā) := by
+    rw [affineLine.artinSchreierSplitModHom_hom, Category.assoc]
+    exact affineLine.artinSchreierSplitHom_comp_evalHom ψ c
+  have h := congrArg (fun φ ↦ ((Sheaf.Γ (Scheme.ProEt.topology Ā) (WeilCoefficients.{u} l)).map
+    φ).hom (ProEtale.oneGlobalSection (l := l) Ā)) hm
+  simp only [Functor.map_comp, Functor.map_smul, CategoryTheory.Functor.map_id,
+    ConcreteCategory.comp_apply] at h
+  rw [affineLine.artinSchreierSplitSection, ProEtale.globalSectionOfModHom_eq]
+  exact h
+
+/-- **The deck transformations act on the split section through `ψ`.** The germ along the deck
+transformation `σ̄_c` of `ĀS`, which is the pullback of global sections of `ĀS^* ĀS_* ℚ̄_ℓ`
+along `σ̄_c`, multiplies the split section by `ψ(-c)`. -/
+lemma affineLine.germ_artinSchreierSplitSection (ψ : AddChar k₀ (PadicAlgCl l)) (c : k₀) :
+    (ProEtale.germ (WeilCoefficients.{u} l)
+        (affineLine.geometricTranslation_comp_artinSchreierMap k₀ c)
+        (affineLine.artinSchreierSheaf k₀ l)).hom (affineLine.artinSchreierSplitSection l ψ) =
+      ULift.up (ψ (-c)) • affineLine.artinSchreierSplitSection l ψ := by
+  set g := (affineLine.geometricTranslationIso k₀ c).hom
+  have hg := affineLine.geometricTranslation_comp_artinSchreierMap k₀ c
+  have key (d : k₀) : ProEtale.germ (WeilCoefficients.{u} l) hg
+      (affineLine.artinSchreierSheaf k₀ l) ≫
+        (Sheaf.Γ _ _).map (affineLine.artinSchreierEval l (c + d)) =
+      (Sheaf.Γ _ _).map (affineLine.artinSchreierEval l d) ≫
+        (ProEtale.globalSectionsToUpperStar _ g).app (ProEtale.adicConstantSheaf l Ā) ≫
+        (Sheaf.Γ _ _).map (ProEtale.upperStarAdicConstantSheafHom l g) := by
+    have n := (ProEtale.globalSectionsToUpperStar (WeilCoefficients.{u} l) g).naturality
+      (affineLine.artinSchreierEval l d)
+    simp only [Functor.comp_map] at n
+    rw [ProEtale.germ, Category.assoc, ← Functor.map_comp,
+      affineLine.upperStarFactor_inv_app_comp_artinSchreierEval, Functor.map_comp,
+      reassoc_of% n]
+  refine affineLine.eq_of_globalSections_artinSchreierEval fun d' ↦ ?_
+  obtain ⟨d, rfl⟩ : ∃ d, d' = c + d := ⟨d' - c, by ring⟩
+  have h₁ := congrArg (fun φ ↦ φ.hom (affineLine.artinSchreierSplitSection l ψ)) (key d)
+  simp only [ModuleCat.hom_comp, LinearMap.comp_apply] at h₁
+  rw [h₁, affineLine.Γ_map_artinSchreierEval_splitSection, map_smul, map_smul,
+    map_smul, affineLine.Γ_map_artinSchreierEval_splitSection, ProEtale.oneGlobalSection_eq]
+  erw [ProEtale.globalSectionsToUpperStar_adicConstantGlobalSection]
+  rw [smul_smul]
+  congr 1
+  exact congrArg ULift.up (by rw [← AddChar.map_add_eq_mul, neg_add_cancel_left])
+
+end GlobalSections
 
 end AlgebraicGeometry
