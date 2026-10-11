@@ -49,6 +49,8 @@ The exchange `Ex_*` for `Rf_*` does already exist in this repository, as
 
 - `AlgebraicGeometry.Etale.isIso_rightDerivedLowerShriekOfCompactificationBaseChangeMap_of_finite`
 - `AlgebraicGeometry.Etale.isIso_rightDerivedLowerShriekBaseChangeMap`
+- `AlgebraicGeometry.Etale.isIso_rightDerivedLowerShriekBaseChangeMap_app_fiber`: the stalk of
+  `Rπ_! K` at a geometric point is the compactly supported cohomology of the fibre.
 - `AlgebraicGeometry.Etale.hasProjectionFormula_of_boundedConstructible`
 - `AlgebraicGeometry.Etale.nonempty_iso_reductionModIdeal_rightDerivedLowerShriek`,
   `AlgebraicGeometry.Etale.nonempty_iso_reductionModIdeal_rightDerivedLowerStar`
@@ -134,6 +136,23 @@ theorem isIso_rightDerivedLowerShriekBaseChangeMap [Finite Λ] [HasCompactificat
   have := isIso_rightDerivedLowerShriekOfCompactificationBaseChangeMap_of_finite Λ sq
     (HasCompactification.compactification f)
   unfold rightDerivedLowerShriekBaseChangeMap
+  infer_instance
+
+/-- Blueprint `lem-pur-cfiber-stalk`: Stalk of the compactly supported direct image.
+
+Let `π : E ⟶ B` admit a compactification (e.g. be separated of finite type), let `Λ` be finite
+and let `b : Spec Ω ⟶ B` be a geometric point, with fibre `E_b = E ×_B Spec Ω` and projection
+`π_b : E_b ⟶ Spec Ω`. The canonical comparison
+`(Rπ_! K)_b = Lb^* Rπ_! K ⟶ RΓ_c(E_b, K|_{E_b}) = Rπ_b! (K|_{E_b})`, the compactly supported base
+change map of the fibre square, is an isomorphism, for every `K` (in particular for `K` bounded
+constructible of finite Tor amplitude). This is compact-support base change
+`AlgebraicGeometry.Etale.isIso_rightDerivedLowerShriekBaseChangeMap` for the fibre square. -/
+theorem isIso_rightDerivedLowerShriekBaseChangeMap_app_fiber [Finite Λ] {E B : Scheme.{u}}
+    (π : E ⟶ B) [HasCompactification π] [QuasiCompact π] {Ω : Type u} [Field Ω] [IsSepClosed Ω]
+    (b : Spec (.of Ω) ⟶ B)
+    (K : DerivedCategory (Sheaf E.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
+    IsIso ((rightDerivedLowerShriekBaseChangeMap Λ (IsPullback.of_hasPullback π b)).app K) := by
+  have := isIso_rightDerivedLowerShriekBaseChangeMap Λ (IsPullback.of_hasPullback π b)
   infer_instance
 
 end Exchange
