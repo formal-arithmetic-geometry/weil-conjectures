@@ -263,5 +263,23 @@
   "item": "lem-weil-pbc-well-ordered-union-projective-dimension",
   "worker": "stage1",
   "summary": "Proof written from Stacks 0D1U (algebra.tex lines 26807-26853, Auslander's argument) in 11 steps: the inductive claim C(n) over all modules and all well-ordered filtrations; n=0: quotients projective (resolution of length 0 is an iso to a projective), sections s_e of M_e -> M_e/M_{<e} (05CF leaf), psi: (+)_e M_e/M_{<e} -> M injective (largest index in the support) and surjective (least e with M_e not in the image), M projective by 065Q for an arbitrary family (new leaf) and the iso; n>=1: following the source (not a choice of projective covers), F free on the elements of M, F_e free on the elements of M_e, K_e = K cap F_e, the short exact sequence 0 -> K_e/K_{<e} -> F_e/F_{<e} -> M_e/M_{<e} -> 0 with all exactness checks written out, F_e/F_{<e} free on M_e minus M_{<e}, 065S(1) (new unsplit node) gives pd(K_e/K_{<e}) <= n-1, induction hypothesis for (K, (K_e)), splicing with F (the source's 'whence'). Statement and stmt_deps unchanged. New nodes: lem-weil-pbc-projective-direct-sum-family (leaf Module.Projective.directSum, Projective.lean:304), lem-weil-pbc-projective-dimension-ses-kernel (unsplit, 065S(1); Mathlib candidate ShortExact.hasProjectiveDimensionLT_X₁ for the Ext-defined dimension, not a leaf by B8). Mathlib: no match for the item (LeanSearch, LeanFinder, Loogle, grep)."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.WellOrderedUnionProjectiveDimension",
+  "declaration": "ModuleCat.hasProjectiveResolutionLE_of_wellOrderedUnion",
+  "file": "lean/Sheaf/RingTheory/WellOrderedUnionProjectiveDimension.lean",
+  "statement": "theorem hasProjectiveResolutionLE_of_wellOrderedUnion {R : Type u} [CommRing R] (M : ModuleCat.{v} R) (n : ℕ) {E : Type w} [LinearOrder E] [IsWellOrder E (· < ·)] (F : E → Submodule R M) (hF : Monotone F) (hcover : ∀ x : M, ∃ e : E, x ∈ F e) (hquot : ∀ e : E, HasProjectiveResolutionLE (ModuleCat.of R ((F e) ⧸ ((⨆ e' : {i : E // i < e}, F e'.val).comap (F e).subtype))) n) : HasProjectiveResolutionLE M n",
+  "branch": "sheaf-dag",
+  "by": "J1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "J1",
+  "result": "pass",
+  "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
  }
 }
