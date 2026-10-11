@@ -46,4 +46,36 @@ lemma ProEtale.leftDerivedUpperStarTensorComparison_eq [ProEtale.UpperStarPreser
       (ProEtale.upperStar A g).leftDerivedTensorComparison :=
   rfl
 
+namespace ProEtale
+
+variable [Etale.UpperStarPreservesFlat A] [ProEtale.UpperStarPreservesFlat A]
+  [∀ X : Scheme.{u}, (ν^*(X)[A]).PreservesFlat]
+
+/-- The isomorphism `Lg^* ∘ Lν_Y^* ≅ Lν_Z^* ∘ Lg^*` of derived functors `D(Y_ét) ⥤ D(Z_proét)`,
+obtained by deriving the isomorphism `g^* ν_Y^* ≅ ν_Z^* g^*` of
+`AlgebraicGeometry.ProEtale.comparisonUpperStarCompUpperStarIso`. -/
+noncomputable abbrev leftDerivedComparisonUpperStarCompUpperStarIso :
+    L(ν^*(Y)[A]) ⋙ L(ProEtale.upperStar A g) ≅ L(Etale.upperStar A g) ⋙ L(ν^*(Z)[A]) :=
+  Functor.leftDerivedFunctorCompNatIso (Etale.upperStar A g) ν^*(Z)[A] ν^*(Y)[A]
+    (ProEtale.upperStar A g) (comparisonUpperStarCompUpperStarIso A g)
+
+/-- The tensor comparisons of `Lg^*` on the étale and pro-étale sites and those of `Lν^*` are
+compatible with `AlgebraicGeometry.ProEtale.leftDerivedComparisonUpperStarCompUpperStarIso`:
+the comparison `Lν_Z^* Lg^*(K ⊗ᴸ M) ⟶ Lν_Z^* Lg^* K ⊗ᴸ Lν_Z^* Lg^* M` obtained from the étale
+pullback agrees with the one obtained from the pro-étale pullback. -/
+lemma comparisonCompatible_leftDerivedComparisonUpperStarCompUpperStarIso :
+    Adjunction.ComparisonCompatible (leftDerivedComparisonUpperStarCompUpperStarIso A g)
+      (Etale.leftDerivedUpperStarTensorComparison _ g)
+      (ProEtale.leftDerivedUpperStarTensorComparison _ g)
+      (asIso (ν^*(Z)[A]).leftDerivedTensorComparison)
+      (asIso (ν^*(Y)[A]).leftDerivedTensorComparison) := by
+  intro a b
+  rw [Etale.leftDerivedUpperStarTensorComparison_eq,
+    ProEtale.leftDerivedUpperStarTensorComparison_eq, asIso_hom, asIso_hom,
+    Functor.map_leftDerivedTensorComparison_comp_eq_of_iso _ _ _ _
+      (comparisonUpperStarCompUpperStarIso A g), tensorHom_def]
+  rfl
+
+end ProEtale
+
 end AlgebraicGeometry

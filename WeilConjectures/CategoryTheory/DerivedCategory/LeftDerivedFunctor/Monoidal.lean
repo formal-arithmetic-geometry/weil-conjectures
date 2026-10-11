@@ -46,7 +46,7 @@ monoidal natural isomorphisms.
 
 @[expose] public section
 
-universe u u₁ u₂ u₃
+universe u u₁ u₂ u₃ u₄
 
 open CategoryTheory Abelian Limits MonoidalCategory DerivedCategory
 
@@ -539,6 +539,58 @@ lemma map_leftDerivedTensorComparison_app_app_comp (K M : DerivedCategory C) :
   simp
 
 end Comp
+
+section Square
+
+variable {D' : Type u₄} [Category.{u + 1} D'] [Abelian D'] [IsGrothendieckAbelian.{u + 1} D']
+  [MonoidalCategory D'] [MonoidalPreadditive D'] [MonoidalClosed D'] [BraidedCategory D']
+  [HasFunctorialFlatResolution D']
+  (F₁ : C ⥤ D) [F₁.Additive] [PreservesFiniteLimits F₁] [PreservesFiniteColimits F₁]
+  [F₁.PreservesFlat] [F₁.IsLeftAdjoint] [F₁.Monoidal]
+  (F₂ : D ⥤ E) [F₂.Additive] [PreservesFiniteLimits F₂] [PreservesFiniteColimits F₂]
+  [F₂.PreservesFlat] [F₂.IsLeftAdjoint] [F₂.Monoidal]
+  (G₁ : C ⥤ D') [G₁.Additive] [PreservesFiniteLimits G₁] [PreservesFiniteColimits G₁]
+  [G₁.PreservesFlat] [G₁.IsLeftAdjoint] [G₁.Monoidal]
+  (G₂ : D' ⥤ E) [G₂.Additive] [PreservesFiniteLimits G₂] [PreservesFiniteColimits G₂]
+  [G₂.PreservesFlat] [G₂.IsLeftAdjoint] [G₂.Monoidal]
+
+/-- The isomorphism `LG₁ ⋙ LG₂ ≅ LF₁ ⋙ LF₂` of left derived functors induced by an
+isomorphism `τ : G₁ ⋙ G₂ ≅ F₁ ⋙ F₂` of exact functors. -/
+noncomputable def leftDerivedFunctorCompNatIso (τ : G₁ ⋙ G₂ ≅ F₁ ⋙ F₂) :
+    G₁.leftDerivedFunctor ⋙ G₂.leftDerivedFunctor ≅
+      F₁.leftDerivedFunctor ⋙ F₂.leftDerivedFunctor :=
+  (G₁.leftDerivedFunctorCompIso G₂).symm ≪≫ (G₁ ⋙ G₂).leftDerivedFunctorNatIso τ ≪≫
+    F₁.leftDerivedFunctorCompIso F₂
+
+/-- A monoidal isomorphism `τ : G₁ ⋙ G₂ ≅ F₁ ⋙ F₂` of exact functors identifies the composite
+of the tensor comparisons of `LF₁` and `LF₂` with the composite of those of `LG₁` and `LG₂`,
+through the induced isomorphism `α : LG₁ ⋙ LG₂ ≅ LF₁ ⋙ LF₂`:
+```
+LF₂(LF₁(K ⊗ᴸ M)) ⟶ LF₂(LF₁K ⊗ᴸ LF₁M) ⟶ LF₂LF₁K ⊗ᴸ LF₂LF₁M
+```
+is `α⁻¹` followed by the corresponding composite for `G₁, G₂` and by `α ⊗ α`. -/
+lemma map_leftDerivedTensorComparison_comp_eq_of_iso (τ : G₁ ⋙ G₂ ≅ F₁ ⋙ F₂)
+    [NatTrans.IsMonoidal τ.hom] (K M : DerivedCategory C) :
+    F₂.leftDerivedFunctor.map ((F₁.leftDerivedTensorComparison.app K).app M) ≫
+        (F₂.leftDerivedTensorComparison.app (F₁.leftDerivedFunctor.obj K)).app
+          (F₁.leftDerivedFunctor.obj M) =
+      (leftDerivedFunctorCompNatIso F₁ F₂ G₁ G₂ τ).inv.app (K ⊗ M) ≫
+        G₂.leftDerivedFunctor.map ((G₁.leftDerivedTensorComparison.app K).app M) ≫
+        (G₂.leftDerivedTensorComparison.app (G₁.leftDerivedFunctor.obj K)).app
+          (G₁.leftDerivedFunctor.obj M) ≫
+        ((leftDerivedFunctorCompNatIso F₁ F₂ G₁ G₂ τ).hom.app K ⊗ₘ
+          (leftDerivedFunctorCompNatIso F₁ F₂ G₁ G₂ τ).hom.app M) := by
+  rw [map_leftDerivedTensorComparison_app_app_comp, map_leftDerivedTensorComparison_app_app_comp_assoc]
+  simp only [leftDerivedFunctorCompNatIso, Iso.trans_inv, Iso.trans_hom, Iso.symm_inv,
+    Iso.symm_hom, NatTrans.comp_app, Category.assoc, Iso.hom_inv_id_app_assoc,
+    tensorHom_comp_tensorHom_assoc]
+  congr 1
+  rw [← cancel_epi (((G₁ ⋙ G₂).leftDerivedFunctorNatIso τ).hom.app _),
+    Iso.hom_inv_id_app_assoc, leftDerivedTensorComparison_naturality_app_assoc,
+    tensorHom_comp_tensorHom]
+  simp
+
+end Square
 
 end Derived
 
