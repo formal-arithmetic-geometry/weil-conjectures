@@ -115,5 +115,24 @@
   "group": "K1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-scd1806 (reviewer sub-agent of L); spot-checked: Steps 1-3 against 01PW(2) proof: finite trivializing affine cover via quasi-compactness, X_s cap V_i = D(f_i), tilde-section localization for local fractions; overlaps W_ij qcqs (quasi-separated X, affine opens of W_ij are affine in X), twisted module quasi-coherent by generic tool lem-sc-invertible-tensor-qcoherent (accepted C7), torsion lemma hypotheses match exactly; common exponent and gluing elementary. No cycle: lem-sc-p1-section-restriction-s-torsion is the injectivity sibling created by the parent, unsplit, no deps on this item. No repairs needed; second reading missed nothing I found."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SectionClearingDenominatorsQCQS",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.exists_tensorPowSection_eq_restrict_qcqs",
+  "file": "lean/Sheaf/AlgebraicGeometry/SectionClearingDenominatorsQCQS.lean",
+  "statement": "theorem exists_tensorPowSection_eq_restrict_qcqs [CompactSpace X] [QuasiSeparatedSpace X] (L : X.Modules) [L.IsInvertible] (s : Γ(L, ⊤)) (F : X.Modules) [SheafOfModules.IsQuasicoherent (R := X.ringCatSheaf) F] (U : X.Opens) (hU : (U : Set X) = nonvanishingLocus L s) (t : Γ(F, U)) : ∃ (m : ℕ) (u : Γ(F ⊗ L.tensorPow m, ⊤)), (F ⊗ L.tensorPow m).presheaf.map (homOfLE le_top).op u = tmulSection t (tensorPowSectionOne (homOfGlobalSection L s) m U)",
+  "branch": "sheaf-dag",
+  "by": "K1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-scd1210"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-scd1210",
+  "group": "K1",
+  "result": "fix",
+  "note": "qc [CompactSpace X], qs [QuasiSeparatedSpace X], L invertible [L.IsInvertible], s : Γ(L,⊤), F quasi-coherent, X_s via U with (U:Set X)=nonvanishingLocus L s (FIX: was (Hom.zeroLocus s).support.compl, H4 vs STATE NON-VANISHING LOCUS), t : Γ(F,U), ∃ m:ℕ, u global section of F⊗L^m with u|_U = tmulSection t (tensorPowSectionOne (homOfGlobalSection L s) m U)"
  }
 }
