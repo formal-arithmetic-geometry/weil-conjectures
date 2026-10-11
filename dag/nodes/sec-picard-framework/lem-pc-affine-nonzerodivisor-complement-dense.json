@@ -104,5 +104,23 @@
   "group": "C1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-ncd2 (reviewer sub-agent of L); spot-checked: Source: Stacks Tag 07ZU (divisors.tex, lemma-complement-effective-Cartier-divisor), affine proof: S=Spec A, D=V(f), f nonzerodivisor, A subset A_f gives scheme-theoretic density; the item's statement (unchanged import: O_X -> j_*O_U injective and D(a) dense for a nonzerodivisor a) agrees with that calculation, hypotheses: commutative ring, a nonzerodivisor. Step 1: on the basis D(g) the map is A_g -> A_{ga}=(A_g)_a; lem-pc-localization-preserves-nonzerodivisor states the image of a in A_g is a nonzerodivisor, lem-pc-affine-localization-injective (new leaf) gives injectivity of A_g -> (A_g)_a; injectivity on a basis gives injectivity of the sheaf map (elementary). Step 2: lem-pc-principal-open-dense-of-nonzerodivisor (new unsplit node, true: minimal primes consist of zero divisors, so contain no nonzerodivisor, so every minimal prime lies in D(a)); no DAG or blueprint duplicate (blueprint_refs search 'principal open dense': 0). Mathlib leaf verified: IsLocalization.injective at Mathlib/RingTheory/Localization/Defs.lean:941 (hM : M <= nonZeroDivisors R), one-line specialization with M = powers a. Small cases: k[t], a=t (k[t] -> k[t,1/t] injective, D(t) dense); a=1 trivial; A=k[x,y]/(xy), a=x zero divisor excluded (D(x) not dense). FIX: dag/nodes/sec-picard-framework/lem-pc-affine-localization-injective.json: mathlib_match.how and mathlib_searches[1].verdict: named powers_le_nonZeroDivisors_of_noZeroDivisors, which needs NoZeroDivisors A and does not apply to a general ring; replaced by Submonoid.powers_le.mpr ha (Mathlib/Algebra/Group/Submonoid/Membership.lean:337). Start Sat Oct 10 03:46:58 PM UTC 2026, end Sat Oct 10 03:47:46 PM UTC 2026.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AffineNonZeroDivisorComplementDense",
+  "declaration": "AlgebraicGeometry.PrimeSpectrum.basicOpen_app_injective_and_dense_of_nonZeroDivisor",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineNonZeroDivisorComplementDense.lean",
+  "statement": "theorem PrimeSpectrum.basicOpen_app_injective_and_dense_of_nonZeroDivisor (A : Type u) [CommRing A] (a : A) (ha : a ∈ nonZeroDivisors A) : (∀ V : (Spec (.of A)).Opens, Function.Injective ((Scheme.Opens.ι (X := Spec (.of A)) (PrimeSpectrum.basicOpen a)).app V)) ∧ DenseRange (Scheme.Opens.ι (X := Spec (.of A)) (PrimeSpectrum.basicOpen a))",
+  "branch": "sheaf-dag",
+  "by": "G1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-nzd0715",
+  "group": "G1",
+  "result": "pass",
+  "note": "A : Type u [CommRing A] arbitrary (no extra hyps); a with ha : a ∈ nonZeroDivisors A; X = Spec (.of A); U = PrimeSpectrum.basicOpen a, j = Scheme.Opens.ι; O_X -> j_*O_U injective = ∀ V, Injective (j.app V) (j.app V : Γ(X,V) -> Γ(U, j⁻¹V) = (j_*O_U)(V)); U dense = DenseRange j (range = D(a)); H4: no Mathlib statement (grep basicOpen+dense/Dominant in AlgebraicGeometry, RingTheory/Spectrum/Prime; only general IsSchemeTheoreticallyDominant API); source IsInvertible.isSchemeTheoreticallyDominant_compl_support (Blowup/Density.lean) is the invertible-ideal-sheaf generalization, not this statement; name ok (AlgebraicGeometry.PrimeSpectrum namespace exists in Mathlib), lines <= 100, import used, proof sorry"
  }
 }
