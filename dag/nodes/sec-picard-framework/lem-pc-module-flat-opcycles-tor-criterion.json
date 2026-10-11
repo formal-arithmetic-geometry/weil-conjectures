@@ -130,5 +130,23 @@
   "group": "J1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-fot3153 (reviewer sub-agent of L); spot-checked: E by hand: with K=im d^{a-1}, P^a flat gives Tor_1(Q,N)=ker(K(x)N->P^a(x)N); P^{a-1}(x)N->>K(x)N and P^{a-2}->K is zero, so H^{a-1}(P(x)N)->>Tor_1(Q,N) holds for any complex (no boundedness needed; only P^a flat); then ideal Tor criterion gives Q flat. Statement repair to module flatness def-weil-pbc-flat-ring-map with one-point-site reading of def-pc-tensor-complex-sheaves is correct (E7 named). C4: citers lem-pc-module-tor-amplitude-flat-model steps and lem-sc-affine-truncation-kernel-flat use exactly this form. New surjection node is a real lemma (Tor via flat SES), no duplicate found by grep; no faults, second reading missed nothing."
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.FlatOpcyclesTorCriterion",
+  "declaration": "Module.Flat.opcycles_of_exactAt",
+  "file": "lean/Sheaf/Algebra/Homology/FlatOpcyclesTorCriterion.lean",
+  "statement": "theorem opcycles_of_exactAt {R : Type u} [CommRing R] (P : CochainComplex (ModuleCat R) ℤ) (a : ℤ) (hflat : ∀ i : ℤ, Module.Flat R (P.X i)) (hexact : ∀ N : ModuleCat R, (((tensorRight N).mapHomologicalComplex (.up ℤ)).obj P).ExactAt (a - 1)) : Module.Flat R (P.opcycles a)",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-fot0804",
+  "group": "F1",
+  "result": "fix",
+  "note": "CommRing R/ModuleCat R one-point site; P CochainComplex ℤ; hflat all P.X i Module.Flat; ∀ N tensorRight N degreewise ExactAt (a-1) = H^{a-1}(P⊗N)=0; opcycles a = coker d^{a-1}; Module.Flat conclusion; N in universe u suffices (ideals); proof checked by hand; FIX: dropped unused import Mathlib.Algebra.Homology.Monoidal (H9); no Mathlib Flat/Tor match; source has categorical ObjectProperty.flat_opcycles_of_exactAt, not Module.Flat, no bridge"
  }
 }
