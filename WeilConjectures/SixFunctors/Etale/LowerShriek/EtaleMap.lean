@@ -81,7 +81,7 @@ right exactness holds for every left adjoint. On presheaves, `v_!` sends `M` to
 `V ↦ ⨁_{s ∈ Hom_X(V, W)} M(V, s)`, which is left exact because direct sums of modules are
 exact (`AlgebraicGeometry.SmallSite.preservesFiniteLimits_op_lan_overMap_of_isGrothendieckAbelian`),
 and sheafification is left exact. -/
-theorem Etale.preservesFiniteLimits_etaleLowerShriek :
+instance Etale.preservesFiniteLimits_etaleLowerShriek :
     PreservesFiniteLimits (Etale.etaleLowerShriek (ModuleCat.{u + 1} Λ) v h) := by
   have heq : Etale.etaleLowerShriek (ModuleCat.{u + 1} Λ) v h =
       sheafToPresheaf W.smallEtaleTopology (ModuleCat.{u + 1} Λ) ⋙

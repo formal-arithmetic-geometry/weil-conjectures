@@ -5,7 +5,6 @@ Authors: Nailin Guan
 -/
 module
 
-public import Mathlib.AlgebraicGeometry.Sites.AffineEtale
 public import WeilConjectures.AlgebraicGeometry.Sites.Kummer
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.DerivabilityStructureInjectives
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.Plus
@@ -18,8 +17,9 @@ public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvari
 For `h : Y ⟶ X` and `K ∈ D⁺(Y_ét, Λ)`, the `q`-th cohomology sheaf of `Rh_* K` receives a
 canonical map from the presheaf `W ↦ H^q(W ×_X Y, K|)` on the small étale site of `X`; for `h`
 quasi-compact and quasi-separated it identifies `R^q h_* K` with the sheafification of that
-presheaf. Consequences: higher direct images commute with filtered colimits of sheaves, and a
-vanishing criterion for `R^q h_* (Λ/dΛ)`.
+presheaf. Consequence: a vanishing criterion for `R^q h_* (Λ/dΛ)`. That higher direct images
+commute with filtered colimits is in
+`WeilConjectures.SixFunctors.Etale.SmoothBaseChange.HigherDirectImage.FilteredColimit`.
 
 ## Main definitions
 
@@ -35,8 +35,6 @@ vanishing criterion for `R^q h_* (Λ/dΛ)`.
   classes `Λ[W][0] ⟶ L` are locally the same as sections of `H⁰(L)` over `W`.
 - `AlgebraicGeometry.Etale.isIso_higherDirectImagePresheafToSheaf`: `R^q h_* K` is the
   sheafification of `W ↦ H^q(W ×_X Y, K|)` for a quasi-compact quasi-separated `h`.
-- `AlgebraicGeometry.Etale.preservesColimitsOfShape_higherDirectImage`: higher direct images
-  along a quasi-compact quasi-separated morphism commute with filtered colimits of sheaves.
 - `AlgebraicGeometry.Etale.isZero_higherDirectImage_constantModSheaf_of_forall_exists`: the
   higher direct image `R^q h_* (Λ/dΛ)` vanishes as soon as every class of
   `H^q(U ×_X Y, ℤ/e)`, for `e ∣ d` and `U` affine étale over `X`, dies on an étale cover of `U`.
@@ -48,7 +46,7 @@ vanishing criterion for `R^q h_* (Λ/dΛ)`.
 
 @[expose] public section
 
-universe w u
+universe u
 
 open CategoryTheory Limits
 
@@ -661,6 +659,15 @@ lemma Etale.higherDirectImagePresheafToHom_app_apply {X Y : Scheme.{u}} (h : Y �
     Etale.derivedHomToHomology_app_apply]
   rfl
 
+/-- Naturality of the shift identification `H⁰((Rh_* K)[q]) ≅ Hᵠ(Rh_* K)` in `K`: for
+`φ : K ⟶ K'` the square
+```
+H⁰((Rh_* K)[q])  ⟶ Hᵠ(Rh_* K)
+      │                 │
+      ▼                 ▼
+H⁰((Rh_* K')[q]) ⟶ Hᵠ(Rh_* K')
+```
+commutes. -/
 lemma Etale.homologyShiftComparison_naturality {X Y : Scheme.{u}} (h : Y ⟶ X) (q : ℤ)
     {K K' : DerivedCategory.Plus (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
     (φ : K ⟶ K') :
@@ -680,6 +687,15 @@ lemma Etale.homologyShiftComparison_naturality {X Y : Scheme.{u}} (h : Y ⟶ X) 
   erw [reassoc_of% n₁, n₂]
   rfl
 
+/-- Naturality of the canonical map from `W ↦ Hᵠ(W ×_X Y, K|)` to `Hᵠ(Rh_* K)` in `K`: for
+`φ : K ⟶ K'` the square
+```
+Hᵠ(- ×_X Y, K|)  ⟶ Hᵠ(Rh_* K)
+      │                 │
+      ▼                 ▼
+Hᵠ(- ×_X Y, K'|) ⟶ Hᵠ(Rh_* K')
+```
+of presheaves on `X_ét` commutes, the right map being the map on sections of `Hᵠ(Rh_* φ)`. -/
 lemma Etale.higherDirectImagePresheafToSheaf_naturality {X Y : Scheme.{u}} (h : Y ⟶ X) (q : ℤ)
     {K K' : DerivedCategory.Plus (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
     (φ : K ⟶ K') :
@@ -708,21 +724,6 @@ lemma Etale.higherDirectImagePresheafToSheaf_naturality {X Y : Scheme.{u}} (h : 
   rw [h₁, h₁, Category.assoc, Etale.freeSheafSections_naturality, ← Category.assoc,
     ← Category.assoc, h₂]
 
-/-- Blueprint `lem-weil-pbc-cohomology-filtered-colimit` (subsection `sk-prop-h2`): Filtered
-colimits of étale cohomology. Let `V` be an étale `Y`-scheme whose underlying scheme is
-quasi-compact and quasi-separated. Then `F ↦ Hᵠ(V, F|_V) = Hom(Λ[V][0], F[q])`, cohomology of
-the restriction to `V` computed on the site of `Y` as in
-`AlgebraicGeometry.Etale.higherDirectImagePresheaf`, commutes with filtered colimits of sheaves
-of `Λ`-modules. -/
-theorem Etale.preservesColimitsOfShape_cohomology {Y : Scheme.{u}} (V : Y.Etale)
-    [CompactSpace V.left] [QuasiSeparatedSpace V.left] (q : ℤ) (J : Type w) [SmallCategory J]
-    [IsFiltered J] :
-    PreservesColimitsOfShape J
-      (DerivedCategory.Plus.singleFunctor (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)) 0 ⋙
-        shiftFunctor _ q ⋙ preadditiveCoyoneda.obj
-          (op ((DerivedCategory.Plus.singleFunctor _ 0).obj ((Etale.freeSheaf Λ Y).obj V)))) :=
-  sorry
-
 /-- The hypercohomology presheaves `W ↦ Hᵠ(W ×_X Y, K|)` as a functor of `K`. -/
 noncomputable def Etale.higherDirectImagePresheafFunctor {X Y : Scheme.{u}} (h : Y ⟶ X)
     (q : ℤ) :
@@ -742,252 +743,8 @@ lemma Etale.higherDirectImagePresheafFunctor_map {X Y : Scheme.{u}} (h : Y ⟶ X
       Etale.higherDirectImagePresheafMap Λ h q φ :=
   rfl
 
-/-- On an étale `X`-scheme `W` whose base change `W ×_X Y` is quasi-compact and
-quasi-separated, the hypercohomology presheaves of single sheaves commute with filtered
-colimits. -/
-theorem Etale.preservesColimitsOfShape_higherDirectImagePresheaf_app {X Y : Scheme.{u}}
-    (h : Y ⟶ X) (q : ℤ) (W : X.Etale)
-    [CompactSpace ((MorphismProperty.Over.pullback @Etale ⊤ h).obj W).left]
-    [QuasiSeparatedSpace ((MorphismProperty.Over.pullback @Etale ⊤ h).obj W).left]
-    (J : Type) [SmallCategory J] [IsFiltered J] :
-    PreservesColimitsOfShape J
-      (DerivedCategory.Plus.singleFunctor (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)) 0 ⋙
-        Etale.higherDirectImagePresheafFunctor Λ h q ⋙ (evaluation _ _).obj (op W)) := by
-  have := Etale.preservesColimitsOfShape_cohomology Λ
-    ((MorphismProperty.Over.pullback @Etale ⊤ h).obj W) q J
-  have : PreservesColimitsOfShape J
-      ((DerivedCategory.Plus.singleFunctor (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)) 0 ⋙
-        shiftFunctor _ q) ⋙ preadditiveCoyoneda.obj
-          (op ((DerivedCategory.Plus.singleFunctor _ 0).obj
-          ((Etale.freeSheaf Λ Y).obj ((MorphismProperty.Over.pullback @Etale ⊤ h).obj W))))) := this
-  refine preservesColimitsOfShape_of_natIso (Functor.isoWhiskerLeft
-    (DerivedCategory.Plus.singleFunctor _ 0 ⋙ shiftFunctor _ q)
-    (preadditiveCoyoneda.mapIso ((DerivedCategory.Plus.singleFunctor _ 0).mapIso
-      (Etale.upperStarFreeSheafIso Λ h W)).op))
-
-/-- Over an étale `X`-scheme `W` with affine underlying scheme, the base change along a
-quasi-compact quasi-separated `h : Y ⟶ X` is quasi-compact and quasi-separated. -/
-lemma Etale.compactSpace_and_quasiSeparatedSpace_pullback {X Y : Scheme.{u}} (h : Y ⟶ X)
-    [QuasiCompact h] [QuasiSeparated h] (W : X.Etale) [IsAffine W.left] :
-    CompactSpace ((MorphismProperty.Over.pullback @Etale ⊤ h).obj W).left ∧
-      QuasiSeparatedSpace ((MorphismProperty.Over.pullback @Etale ⊤ h).obj W).left := by
-  rw [show ((MorphismProperty.Over.pullback @Etale ⊤ h).obj W).left =
-    Limits.pullback W.hom h from rfl]
-  have : CompactSpace ((𝟭 Scheme).obj W.left) := inferInstanceAs (CompactSpace W.left)
-  have : QuasiSeparatedSpace ((𝟭 Scheme).obj W.left) :=
-    inferInstanceAs (QuasiSeparatedSpace W.left)
-  exact ⟨QuasiCompact.compactSpace_of_compactSpace (Limits.pullback.fst W.hom h),
-    quasiSeparatedSpace_of_quasiSeparated (Limits.pullback.fst W.hom h)⟩
-
-/-- Sections of a filtered colimit of sheaves of `Λ`-modules, computed by sheafifying the
-colimit of presheaves, come locally from a stage of the diagram. -/
-lemma Etale.sheafifyCocone_locally {X : Scheme.{u}} {J : Type} [SmallCategory J] [IsFiltered J]
-    (E : J ⥤ Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) {W : X.Etale}
-    (s : ToType ((Sheaf.sheafifyCocone (colimit.cocone
-      (E ⋙ sheafToPresheaf _ _))).pt.obj.obj (op W))) :
-    Sieve.mk (fun V (g : V ⟶ W) ↦ ∃ (j : J) (x : ToType ((E.obj j).obj.obj (op V))),
-      ((Sheaf.sheafifyCocone (colimit.cocone (E ⋙ sheafToPresheaf _ _))).ι.app j).hom.app
-        (op V) x =
-        (Sheaf.sheafifyCocone (colimit.cocone (E ⋙ sheafToPresheaf _ _))).pt.obj.map g.op s)
-      (by
-        rintro V V' g ⟨j, x, hx⟩ k
-        refine ⟨j, (E.obj j).obj.map k.op x, ?_⟩
-        rw [NatTrans.naturality_apply, hx]
-        simp)
-      ∈ X.smallEtaleTopology W := by
-  refine GrothendieckTopology.superset_covering _ ?_ (Presheaf.imageSieve_mem X.smallEtaleTopology
-    (toSheafify X.smallEtaleTopology (colimit (E ⋙ sheafToPresheaf _ _))) s)
-  rintro V g ⟨t, ht⟩
-  have : PreservesColimit ((E ⋙ sheafToPresheaf _ _) ⋙ (evaluation _ _).obj (op V))
-      (CategoryTheory.forget (ModuleCat.{u + 1} Λ)) :=
-    have := preservesFilteredColimitsOfSize_shrink.{0, u + 1, 0, u + 1}
-      (CategoryTheory.forget (ModuleCat.{u + 1} Λ))
-    inferInstance
-  obtain ⟨j, x, hx⟩ := Concrete.isColimit_exists_rep _
-    (isColimitOfPreserves ((evaluation _ _).obj (op V)) (colimit.isColimit _)) t
-  refine ⟨j, x, ?_⟩
-  rw [Sheaf.sheafifyCocone_ι_app_val, NatTrans.comp_app, ConcreteCategory.comp_apply]
-  erw [hx]
-  exact ht
-
-set_option maxHeartbeats 1600000 in
--- The element chases below go through many coercions between sections of sheaves of modules
--- and of abelian groups, which are expensive for the kernel.
-/-- Blueprint `lemma-weil-pbc-direct-image-filtered-colimit`: Filtered colimits and higher
-direct image.
-
-For a quasi-compact quasi-separated morphism `h : Y ⟶ X`, the higher direct image
-`F ↦ R^q h_* F` commutes with filtered colimits of sheaves of `Λ`-modules on `Y_ét`:
-`colim_i R^q h_* F_i ≅ R^q h_* (colim_i F_i)`. The functor is written out as the degree-`q`
-homology of the derived pushforward of a sheaf placed in degree `0`, the functor whose value
-at `F` is `AlgebraicGeometry.Etale.higherDirectImage`. -/
-theorem Etale.preservesColimitsOfShape_higherDirectImage {X Y : Scheme.{u}} (h : Y ⟶ X)
-    [QuasiCompact h] [QuasiSeparated h] (q : ℤ) (J : Type) [SmallCategory J] [IsFiltered J] :
-    PreservesColimitsOfShape J
-      (DerivedCategory.Plus.singleFunctor (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)) 0 ⋙
-        R+((h)_*[ModuleCat.{u + 1} Λ]) ⋙ DerivedCategory.Plus.homologyFunctor _ q) := by
-  constructor
-  intro D
-  let G := DerivedCategory.Plus.singleFunctor (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)) 0 ⋙
-    R+((h)_*[ModuleCat.{u + 1} Λ]) ⋙ DerivedCategory.Plus.homologyFunctor _ q
-  let P := DerivedCategory.Plus.singleFunctor (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)) 0 ⋙
-    Etale.higherDirectImagePresheafFunctor Λ h q
-  let ψ : ∀ F, P.obj F ⟶ ((sheafCompose X.smallEtaleTopology
-      (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj (G.obj F)).obj := fun F ↦
-    Etale.higherDirectImagePresheafToSheaf Λ h q ((DerivedCategory.Plus.singleFunctor _ 0).obj F)
-  have hψ : ∀ {F F'} (g : F ⟶ F'), P.map g ≫ ψ F' = ψ F ≫ Etale.sectionsMap (G.map g) :=
-    fun g ↦ Etale.higherDirectImagePresheafToSheaf_naturality Λ h q _
-  let c := colimit.cocone D
-  let c₀ := Sheaf.sheafifyCocone (colimit.cocone ((D ⋙ G) ⋙ sheafToPresheaf _ _))
-  let hc₀ : IsColimit c₀ := Sheaf.isColimitSheafifyCocone _ (colimit.isColimit _)
-  let a := hc₀.desc (G.mapCocone c)
-  have ha : ∀ j, c₀.ι.app j ≫ a = G.map (c.ι.app j) := hc₀.fac _
-  suffices IsIso a from
-    preservesColimit_of_preserves_colimit_cocone (colimit.isColimit D) (IsColimit.ofPointIso hc₀)
-  have : PreservesLimitsOfSize.{u, u + 1} (CategoryTheory.forget (ModuleCat.{u + 1} Λ)) :=
-    preservesLimitsOfSize_shrink.{u + 1, u + 1, u, u + 1} _
-  have : X.smallEtaleTopology.HasSheafCompose (CategoryTheory.forget (ModuleCat.{u + 1} Λ)) :=
-    inferInstance
-  refine (Sheaf.isLocallyBijective_iff_isIso a).1 ⟨?_, ?_⟩
-  · constructor
-    intro W x y hxy
-    have hsieve : Presheaf.equalizerSieve x y = Presheaf.equalizerSieve (x - y) 0 := by
-      ext V g
-      simp only [Presheaf.equalizerSieve_apply, map_sub, map_zero]
-      exact sub_eq_zero.symm
-    rw [hsieve]
-    have hz : a.hom.app W (x - y) = 0 := by rw [map_sub, hxy, sub_self]
-    generalize x - y = z at hz ⊢
-    refine X.smallEtaleTopology.transitive (Etale.sheafifyCocone_locally Λ (D ⋙ G) z) _ ?_
-    rintro V g ⟨j, zj, hzj⟩
-    have hzj0 : (G.map (c.ι.app j)).hom.app (op V) zj = 0 := by
-      have e := ConcreteCategory.congr_hom
-        (NatTrans.congr_app (congrArg (fun f ↦ f.hom) (ha j)) (op V)) zj
-      rw [ObjectProperty.FullSubcategory.comp_hom, NatTrans.comp_app,
-        ConcreteCategory.comp_apply, hzj] at e
-      erw [NatTrans.naturality_apply a.hom g.op z, hz,
-        map_zero] at e
-      exact e.symm
-    obtain ⟨_, _⟩ := Etale.isLocallyBijective_higherDirectImagePresheafToSheaf Λ h q
-      ((DerivedCategory.Plus.singleFunctor _ 0).obj (D.obj j))
-    obtain ⟨_, _⟩ := Etale.isLocallyBijective_higherDirectImagePresheafToSheaf Λ h q
-      ((DerivedCategory.Plus.singleFunctor _ 0).obj c.pt)
-    refine X.smallEtaleTopology.transitive (Presheaf.imageSieve_mem X.smallEtaleTopology
-      (ψ (D.obj j)) (show ToType ((((sheafCompose X.smallEtaleTopology
-        (forget₂ (ModuleCat.{u + 1} Λ)
-        AddCommGrpCat.{u + 1})).obj (G.obj (D.obj j))).obj).obj (op V)) from zj)) _ ?_
-    rintro V' g' ⟨β, hβ⟩
-    have hψβ : (ψ c.pt).app (op V') ((P.map (c.ι.app j)).app (op V') β) = 0 := by
-      have e₁ := ConcreteCategory.congr_hom
-        (NatTrans.congr_app (hψ (c.ι.app j)) (op V')) β
-      simp only [NatTrans.comp_app, ConcreteCategory.comp_apply] at e₁
-      erw [e₁, hβ]
-      have h₀ : (Etale.sectionsMap (G.map (c.ι.app j))).app (op V) zj = 0 := hzj0
-      change (Etale.sectionsMap (G.map (c.ι.app j))).app (op V')
-        ((((sheafCompose X.smallEtaleTopology (forget₂ (ModuleCat.{u + 1} Λ)
-          AddCommGrpCat.{u + 1})).obj (G.obj (D.obj j))).obj.map g'.op) zj) = 0
-      rw [NatTrans.naturality_apply]
-      erw [h₀, map_zero]
-    refine X.smallEtaleTopology.transitive (Presheaf.equalizerSieve_mem X.smallEtaleTopology
-      (ψ c.pt) ((P.map (c.ι.app j)).app (op V') β) 0 (by rw [hψβ, map_zero])) _ ?_
-    rintro V'' g'' hg''
-    refine X.smallEtaleTopology.superset_covering ?_
-      (Functor.is_cover_of_isCoverDense (Scheme.AffineEtale.Spec X) X.smallEtaleTopology V'')
-    rintro V''' k ⟨⟨U, k₁, k₂, rfl⟩⟩
-    have : IsAffine ((Scheme.AffineEtale.Spec X).obj U).left := by
-      rw [Scheme.AffineEtale.Spec_obj_left]; infer_instance
-    obtain ⟨_, _⟩ := Etale.compactSpace_and_quasiSeparatedSpace_pullback h
-      ((Scheme.AffineEtale.Spec X).obj U)
-    have := Etale.preservesColimitsOfShape_higherDirectImagePresheaf_app Λ h q
-      ((Scheme.AffineEtale.Spec X).obj U) J
-    have : PreservesColimitsOfShape J
-        (P ⋙ (evaluation _ _).obj (op ((Scheme.AffineEtale.Spec X).obj U))) := this
-    have := preservesFilteredColimitsOfSize_shrink.{0, u + 1, 0, u + 1}
-      (CategoryTheory.forget AddCommGrpCat.{u + 1})
-    let βU := (P.obj (D.obj j)).map (k₂ ≫ g'').op β
-    have hβU : (P.map (c.ι.app j)).app _ βU = (P.map (c.ι.app j)).app _ 0 := by
-      simp only [βU, op_comp, Functor.map_comp, ConcreteCategory.comp_apply, map_zero]
-      rw [NatTrans.naturality_apply, NatTrans.naturality_apply]
-      erw [hg'']
-      erw [map_zero, map_zero]
-    obtain ⟨j', f, f', hff⟩ := Concrete.isColimit_exists_of_rep_eq _
-      (isColimitOfPreserves (P ⋙ (evaluation _ _).obj (op ((Scheme.AffineEtale.Spec X).obj U)))
-        (colimit.isColimit D)) βU 0 hβU
-    rw [map_zero] at hff
-    have hψU : (ψ (D.obj j')).app _ ((P.map (D.map f)).app _ βU) = 0 := by
-      erw [hff]
-      exact AddMonoidHom.map_zero _
-    have e₁ := ConcreteCategory.congr_hom
-      (NatTrans.congr_app (hψ (D.map f)) (op ((Scheme.AffineEtale.Spec X).obj U))) βU
-    simp only [NatTrans.comp_app, ConcreteCategory.comp_apply] at e₁
-    erw [hψU] at e₁
-    -- `e₁ : 0 = G(D f)(ψ βU)`
-    have e₂ : (ψ (D.obj j)).app _ βU = (G.obj (D.obj j)).obj.map ((k₂ ≫ g'') ≫ g').op zj := by
-      simp only [βU]
-      erw [NatTrans.naturality_apply (ψ (D.obj j)), hβ]
-      simp only [op_comp, Functor.map_comp, ConcreteCategory.comp_apply]
-      rfl
-    have e₃ := ConcreteCategory.congr_hom
-      (NatTrans.congr_app (congrArg (fun f ↦ f.hom) (c₀.w f))
-        (op ((Scheme.AffineEtale.Spec X).obj U))) ((ψ (D.obj j)).app _ βU)
-    rw [ObjectProperty.FullSubcategory.comp_hom, NatTrans.comp_app,
-      ConcreteCategory.comp_apply] at e₃
-    erw [← e₁, map_zero, e₂] at e₃
-    -- `e₃ : 0 = c₀.ι j (G(D j).map _ zj)`
-    have hU : c₀.pt.obj.map ((k₂ ≫ g'') ≫ g' ≫ g).op z = 0 := by
-      rw [show ((k₂ ≫ g'') ≫ g' ≫ g) = ((k₂ ≫ g'') ≫ g') ≫ g by simp only [Category.assoc],
-        op_comp, Functor.map_comp, ConcreteCategory.comp_apply, ← hzj]
-      erw [← NatTrans.naturality_apply (c₀.ι.app j).hom]
-      exact e₃.symm
-    have hU' : c₀.pt.obj.map ((((k₁ ≫ k₂) ≫ g'') ≫ g') ≫ g).op z = 0 := by
-      rw [show (((k₁ ≫ k₂) ≫ g'') ≫ g') ≫ g = k₁ ≫ ((k₂ ≫ g'') ≫ g' ≫ g) by
-        simp only [Category.assoc], op_comp, Functor.map_comp, ConcreteCategory.comp_apply, hU]
-      simp
-    simpa using hU'
-  · constructor
-    intro W s
-    obtain ⟨_, _⟩ := Etale.isLocallyBijective_higherDirectImagePresheafToSheaf Λ h q
-      ((DerivedCategory.Plus.singleFunctor _ 0).obj c.pt)
-    have h₁ := Presheaf.imageSieve_mem X.smallEtaleTopology (ψ c.pt)
-      (show ToType ((((sheafCompose X.smallEtaleTopology (forget₂ (ModuleCat.{u + 1} Λ)
-        AddCommGrpCat.{u + 1})).obj (G.obj c.pt)).obj).obj (op W)) from s)
-    refine X.smallEtaleTopology.transitive h₁ _ ?_
-    rintro V g ⟨t, ht⟩
-    refine X.smallEtaleTopology.superset_covering ?_
-      (Functor.is_cover_of_isCoverDense (Scheme.AffineEtale.Spec X) X.smallEtaleTopology V)
-    rintro V' k ⟨⟨U, k₁, k₂, rfl⟩⟩
-    have : IsAffine ((Scheme.AffineEtale.Spec X).obj U).left := by
-      rw [Scheme.AffineEtale.Spec_obj_left]; infer_instance
-    obtain ⟨_, _⟩ := Etale.compactSpace_and_quasiSeparatedSpace_pullback h
-      ((Scheme.AffineEtale.Spec X).obj U)
-    have := Etale.preservesColimitsOfShape_higherDirectImagePresheaf_app Λ h q
-      ((Scheme.AffineEtale.Spec X).obj U) J
-    have : PreservesColimitsOfShape J
-        (P ⋙ (evaluation _ _).obj (op ((Scheme.AffineEtale.Spec X).obj U))) := this
-    have := preservesFilteredColimitsOfSize_shrink.{0, u + 1, 0, u + 1}
-      (CategoryTheory.forget AddCommGrpCat.{u + 1})
-    obtain ⟨j, β, hβ⟩ := Concrete.isColimit_exists_rep _
-      (isColimitOfPreserves (P ⋙ (evaluation _ _).obj (op ((Scheme.AffineEtale.Spec X).obj U)))
-        (colimit.isColimit D)) ((P.obj c.pt).map k₂.op t)
-    refine ⟨c₀.pt.obj.map k₁.op ((c₀.ι.app j).hom.app _ ((ψ (D.obj j)).app _ β)), ?_⟩
-    have e₁ := ConcreteCategory.congr_hom
-      (NatTrans.congr_app (hψ (c.ι.app j)) (op ((Scheme.AffineEtale.Spec X).obj U))) β
-    simp only [NatTrans.comp_app, ConcreteCategory.comp_apply] at e₁
-    have e₂ := ConcreteCategory.congr_hom
-      (NatTrans.congr_app (congrArg (fun f ↦ f.hom) (ha j))
-        (op ((Scheme.AffineEtale.Spec X).obj U)))
-      ((ψ (D.obj j)).app (op ((Scheme.AffineEtale.Spec X).obj U)) β)
-    rw [ObjectProperty.FullSubcategory.comp_hom, NatTrans.comp_app,
-      ConcreteCategory.comp_apply] at e₂
-    rw [NatTrans.naturality_apply a.hom k₁.op]
-    erw [e₂]
-    erw [← e₁]
-    erw [hβ, NatTrans.naturality_apply (ψ c.pt) k₂.op t, ht]
-    simp only [op_comp, Functor.map_comp, ConcreteCategory.comp_apply]
-    rfl
-
-
 end FilteredColimits
+
 /-- Blueprint `sbc-lem-higher-direct-image-presheaf`, in the vanishing form used for constant
 coefficients: Higher direct image as a sheafified cohomology presheaf.
 
