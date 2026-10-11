@@ -172,5 +172,24 @@
   "summary": "Split following Stacks 00MT line by line. The source's proof cites no lemma; its two changes of basis (normalising the unit entry to 1, clearing the column of $e_1$) are used without proof that the new families are bases, so that fact is the new unsplit node lem-weil-pbc-triangular-change-of-basis (triangular coefficient matrix with unit diagonal gives a basis; Mathlib has it only through Basis.is_basis_iff_det plus triangular determinants, recorded as candidate). The remaining steps (decomposition into spans of subfamilies, image of d_{i+1} avoids e_1 since d_i d_{i+1}=0, d_{i-1}(f_1)=0, and the explicit isomorphism with C' + T, which the source leaves as 'these conditions ... imply the lemma') are written out and are elementary given the definitions. The statement was kept and made self-contained: the direct sum of complexes and the isomorphism of chain complexes are now spelled out, with def-weil-pbc-direct-sum-modules added to stmt_deps. Item Mathlib searches redone in the SETUP checkout (the old grep was of another machine's checkout and was replaced); no match. No slopmaster2 Lean found (grep by id, tag 00MT and key words).",
   "blueprint": "The item realizes no sentence of thm-weil-pbc-finite-etale-lifting directly: its steps supply the 00MT cancellation used in Step 4-5 of lem-weil-pbc-minimal-finite-free-resolution-local, along the chain (via) to the final sentence 'Every finite etale $Y_0$-scheme is the restriction of a finite etale $Y$-scheme' of that blueprint proof. Blueprint search (unit entry, trivial complex, matrix coefficient, invertible matrix, change of basis, triangular, basis, 00MT, unimodular, split off, chain complex) found no node stating it: same_as []."
  },
- "reviewed": "2026-10-10 L: 6 steps following 00MT, the two changes of basis justified by the new node lem-weil-pbc-triangular-change-of-basis (triangular with unit diagonal is a basis; Mathlib candidates recorded), the splitting isomorphism written out; statement completed with the meaning of the direct sum and of a chain isomorphism (accepted); 1 new node"
+ "reviewed": "2026-10-10 L: 6 steps following 00MT, the two changes of basis justified by the new node lem-weil-pbc-triangular-change-of-basis (triangular with unit diagonal is a basis; Mathlib candidates recorded), the splitting isomorphism written out; statement completed with the meaning of the direct sum and of a chain isomorphism (accepted); 1 new node",
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.UnitEntrySplits",
+  "declaration": "ChainComplex.exists_splitting_of_isUnit_entry",
+  "file": "lean/Sheaf/Algebra/Homology/UnitEntrySplits.lean",
+  "statement": "theorem exists_splitting_of_isUnit_entry {R : Type u} [CommRing R] (C : ChainComplex (ModuleCat.{max u v} R) ℤ) (n : ℤ → ℕ) (b : ∀ j : ℤ, Module.Basis (Fin (n j)) R (C.X j)) (i : ℤ) (p : Fin (n i)) (q : Fin (n (i - 1))) (hunit : IsUnit (LinearMap.toMatrix (b i) (b (i - 1)) (C.d i (i - 1)).hom q p)) : ∃ (C' T : ChainComplex (ModuleCat.{max u v} R) ℤ) (n' : ℤ → ℕ), (∀ j : ℤ, Nonempty (Module.Basis (Fin (n' j)) R (C'.X j))) ∧ n' i + 1 = n i ∧ n' (i - 1) + 1 = n (i - 1) ∧ (∀ j : ℤ, j ≠ i → j ≠ i - 1 → n' j = n j) ∧ (∀ j : ℤ, j ≠ i → j ≠ i - 1 → Subsingleton (T.X j)) ∧ ∃ (e : T.X i ≃ₗ[R] R) (f : T.X (i - 1) ≃ₗ[R] R), (∀ t : T.X i, f ((T.d i (i - 1)).hom t) = e t) ∧ let M : ℤ → Bool → ModuleCat.{max u v} R := fun j s ↦ if s then T.X j else C'.X j ∃ ψ : ∀ j : ℤ, (⨁ s : Bool, M j s) ≃ₗ[R] C.X j, ∀ (j : ℤ) (x : C'.X j) (t : T.X j), (C.d j (j - 1)).hom (ψ j (DirectSum.lof R Bool (fun s ↦ M j s) false x + DirectSum.lof R Bool (fun s ↦ M j s) true t)) = ψ (j - 1) (DirectSum.lof R Bool (fun s ↦ M (j - 1) s) false ((C'.d j (j - 1)).hom x) + DirectSum.lof R Bool (fun s ↦ M (j - 1) s) true ((T.d j (j - 1)).hom t))",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-fcu1041"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-fcu1041",
+  "group": "C1",
+  "result": "fix",
+  "note": "CommRing R; ChainComplex ModuleCat Z with d_{i-1}d_i=0 built in; finite bases b j : Basis (Fin (n j)); unit entry IsUnit (toMatrix (b i) (b (i-1)) d_i q p) (FIX from repr form, same value); C' finite free with sizes n' i+1=n i, n'(i-1)+1=n(i-1), n' j=n j elsewhere; T subsingleton off i,i-1, R-1->R via e,f; psi_j linear equivs on Bool DirectSum commuting with d'+d^T on lof false x + lof true t (all elements, checked); zero ring and empty bases ok"
+ }
 }
