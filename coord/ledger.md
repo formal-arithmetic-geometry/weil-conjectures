@@ -4044,3 +4044,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 09:36 L: merged deliver/K1/lem-pod-adic-limit-finite-modules (stage 2; reviewer PASS; first push; Sheaf.NumberTheory.Padics.AdicLimitFiniteModules Padic.adicLimit_finite_modules)
 - 09:36 L: merged deliver/H1/lem-weil-pbc-depth-zero-injective-free-map-unit-minor (stage 2; reviewer PASS; first push; Sheaf.RingTheory.UnitMaximalMinorOfDepthZero Matrix.exists_isUnit_maximal_minor_of_annihilator_eq_maximalIdeal)
 - 09:36 L: merged deliver/H1/lem-weil-pbc-derivation-extends (stage 2; reviewer PASS; first push; Sheaf.RingTheory.Derivation.CompletionAndLocalization Derivation.exists_completion_and_unique_localization)
+- 09:36 L: merged deliver/G1/lem-weil-pbc-cyclic-extension-flat-descent (stage 2; reviewer PASS; first push; Sheaf.RingTheory.CyclicExtensionFlatDescent LinearMap.exists_cyclic_extension_flat_descent)
