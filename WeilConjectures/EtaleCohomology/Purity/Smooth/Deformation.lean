@@ -307,7 +307,6 @@ theorem exists_etale_nonempty_iso_familyObject [HasTateTwist.IsNormalized Λ] :
     (leftDerivedUpperStarTwistShiftIso Λ _ d _).symm ≪≫
     (L((T ↘ B')^*[ModuleCat.{u + 1} Λ])).mapIso c₀.symm
 
-
 variable [HasTateTwist.IsNormalized Λ]
 
 include aB in
@@ -498,7 +497,6 @@ theorem existsUnique_familyObject_iso
   rw [← cancel_mono (ε.hom.app _)]
   exact hκ.trans ((key κ₀ ψ).trans hψ).symm
 
-
 omit [HasTateTwist.IsNormalized Λ] in
 /-- Blueprint `prop-pur-dnc-family-constancy`: The deformation family is constant along the
 affine line
@@ -610,7 +608,6 @@ theorem nonempty_iso_sectionInvariant_normalCone [HasTateTwist.IsNormalized Λ] 
     (L((AffineSpace.zeroSection (ULift.{u} (Fin 1)) B)^*[ModuleCat.{u + 1} Λ])).mapIso κ.symm ≪≫
     e₀⟩
 
-
 /-- Blueprint `sk-thm-dnc`: DNC invariance of the section dualizing line
 
 *Normalization in coordinates and uniqueness.* Fix identifications `θ₁ : i₁^* F ≅ 𝒞(g, s)` and
@@ -711,28 +708,6 @@ theorem existsUnique_iso_sectionInvariant_normalCone [HasTateTwist.IsNormalized 
       rw [Functor.map_comp, h₁, ← Functor.map_comp, Iso.hom_inv_id,
         CategoryTheory.Functor.map_id]; rfl)
   exact Iso.ext ((Iso.comp_inv_eq_id _).mp this)
-
-/-- Blueprint `sk-thm-dnc`: DNC invariance of the section dualizing line
-
-*The comparison for an arbitrary normal cone datum*, `𝒞(g, s) ≅ 𝒞(π_N, 0_N)` for every
-`N : NormalConeData d s`, without a deformation datum. This is the form smooth purity
-(`sk-thm-smooth-purity`) uses as long as `AlgebraicGeometry.Scheme.Hom.NormalConeData` is not
-tied to `s`: there `N` is the trivial bundle `𝔸^d`, for which no deformation datum need exist
-(see `AlgebraicGeometry.Scheme.Hom.nonempty_deformationToNormalConeData`), so
-`nonempty_iso_sectionInvariant_normalCone` does not apply.
-
-It is stronger than the blueprint, which takes `N` to be the normal cone of `s`, but it is true:
-both sides are `Λ_B(d)[2d]`, by smooth purity for `g` and for `π_N`. -/
--- TODO(unify): sk-thm-dnc — remove once `NormalConeData` is the normal cone of `s` (branch
--- `prove2/sk-thm-smooth-purity-2`); smooth purity then uses
--- `nonempty_iso_sectionInvariant_normalCone` with the datum of
--- `AlgebraicGeometry.Scheme.Hom.nonempty_deformationToNormalConeData`.
-theorem nonempty_iso_sectionInvariant_normalConeData (d : ℕ) (g : V ⟶ B)
-    [SmoothOfRelativeDimension d g] [HasCompactification g] (s : B ⟶ V) [IsClosedImmersion s]
-    (hs : s ≫ g = 𝟙 B) (N : Scheme.Hom.NormalConeData d s)
-    [HasCompactification N.proj] [HasInvertibleExponent Λ B] :
-    Nonempty (sectionInvariant Λ g s ≅ sectionInvariant Λ N.proj N.zeroSection) :=
-  sorry
 
 end Etale
 

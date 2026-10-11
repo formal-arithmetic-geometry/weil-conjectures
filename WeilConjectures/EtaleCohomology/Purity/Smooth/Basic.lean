@@ -166,44 +166,30 @@ diagonal argument. Let `W = X ×_Y X` and `Δ : X ⟶ W` the diagonal, a closed 
 smooth projection `p₁`.
 1. `𝒞(p₁, Δ) ≅ ω_f` by smooth base change
    (`AlgebraicGeometry.Etale.nonempty_iso_sectionInvariant_diagonal`).
-2. The deformation to the normal cone (`sk-thm-dnc`, here in the form
-   `AlgebraicGeometry.Etale.nonempty_iso_sectionInvariant_normalConeData`) identifies
-   `𝒞(p₁, Δ)` with the section invariant of a rank-`d` vector bundle with its zero section.
+2. The deformation to the normal cone of `Δ` (`sk-thm-dnc`,
+   `AlgebraicGeometry.Etale.nonempty_iso_sectionInvariant_normalCone`) identifies `𝒞(p₁, Δ)`
+   with the section invariant of its normal bundle, a rank-`d` vector bundle.
 3. That section invariant is `Λ_X(d)[2d]` by affine-space purity
    (`AlgebraicGeometry.Etale.nonempty_iso_sectionInvariant_affineSpace`), which needs `X` of
    finite type over the field.
 
 The normal bundle of `Δ` is the relative tangent bundle `T_{X/Y}`, which is étale-locally
-trivial of rank `d` (`sk-lem-diag-reg`). Mathlib has neither vector bundles nor `T_{X/Y}`, so
-the normal cone datum is recorded through `AlgebraicGeometry.Scheme.Hom.NormalConeData`, which
-only asks for a smooth rank-`d` projection with a closed zero section; the trivial bundle
-`𝔸^d_X` is used in step 2, for which step 3 is affine-space purity. -/
+trivial of rank `d` (`sk-lem-diag-reg`), so that step 3 is affine-space purity étale-locally.
+Mathlib has neither vector bundles nor `T_{X/Y}`, and the normal cone datum
+`AlgebraicGeometry.Scheme.Hom.NormalConeData` is not yet tied to the immersion, so the proof is
+left as a TODO. -/
 theorem nonempty_iso_dualizingComplex_twistShift [HasTateTwist.IsNormalized Λ]
     {k : Type u} [Field k]
     (aY : Y ⟶ Spec (.of k)) [IsSeparated aY] [LocallyOfFiniteType aY] :
     Nonempty (dualizingComplex (ModuleCat.{u + 1} Λ) f ≅
-      (twistShift Λ X d).obj (constantComplex Λ X)) := by
-  -- TODO: the normal cone datum of `Δ` should be its normal bundle `T_{X/Y}`, as in blueprint
-  -- `thm-pur-dnc-invariance`, and step 3 vector-bundle purity for it. `NormalConeData` does not
-  -- tie the datum to the immersion, so the trivial bundle `𝔸^d_X` is accepted here, through the
-  -- comparison `nonempty_iso_sectionInvariant_normalConeData` for an arbitrary datum (a
-  -- deformation datum of `sk-lem-geometry` need not exist for it); undo this shortcut, and use
-  -- `nonempty_iso_sectionInvariant_normalCone`, once the datum is pinned down.
-  let N : (pullback.diagonal f).NormalConeData d :=
-    { scheme := 𝔸(ULift.{u} (Fin d); X)
-      proj := 𝔸(ULift.{u} (Fin d); X) ↘ X
-      zeroSection := AffineSpace.zeroSection _ X
-      zeroSection_comp_proj := AffineSpace.zeroSection_over _ X
-      isClosedImmersion_zeroSection := inferInstance
-      smoothOfRelativeDimension_proj := by
-        have := AffineSpace.smoothOfRelativeDimension_over (ULift.{u} (Fin d)) X
-        rwa [show Nat.card (ULift.{u} (Fin d)) = d by simp] at this }
-  have : HasCompactification N.proj := HasCompactification.affineSpace_over _ X
-  obtain ⟨e₁⟩ := nonempty_iso_sectionInvariant_diagonal Λ (d := d) f
-  obtain ⟨e₂⟩ := nonempty_iso_sectionInvariant_normalConeData Λ d (pullback.fst f f)
-    (pullback.diagonal f) (pullback.diagonal_fst f) N
-  obtain ⟨e₃⟩ := nonempty_iso_sectionInvariant_affineSpace Λ d X (f ≫ aY)
-  exact ⟨e₁.symm ≪≫ e₂ ≪≫ e₃⟩
+      (twistShift Λ X d).obj (constantComplex Λ X)) :=
+  -- TODO: step 2 needs a deformation to the normal cone of `Δ` whose normal cone datum is the
+  -- normal bundle `T_{X/Y}` (`nonempty_iso_sectionInvariant_normalCone`), and step 3
+  -- vector-bundle purity for it. `NormalConeData` does not yet tie the datum to the immersion,
+  -- and the existence of a deformation datum (`nonempty_deformationToNormalConeData`) is false
+  -- for an arbitrary one, so the proof waits for the normal bundle
+  -- (`prove2/sk-thm-smooth-purity-2`).
+  sorry
 
 /-! ### The smooth purity map -/
 
