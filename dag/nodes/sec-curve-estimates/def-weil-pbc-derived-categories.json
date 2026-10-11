@@ -113,5 +113,34 @@
   "result": "pass"
  },
  "chapter": "sec-curve-estimates",
- "unit": "sk-prop-h2"
+ "unit": "sk-prop-h2",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.DerivedCategories",
+  "declaration": "AlgebraicGeometry.Etale.DerivedCategory.torsionCohomology",
+  "declarations": [
+   "AlgebraicGeometry.Etale.DerivedCategoryModule",
+   "DerivedCategory",
+   "DerivedCategory.Plus",
+   "DerivedCategory.Bounded",
+   "DerivedCategory.homologyFunctor",
+   "AlgebraicGeometry.Etale.DerivedCategory.torsionCohomology",
+   "CategoryTheory.Sheaf.IsTorsion"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/DerivedCategories.lean",
+  "statement": "def DerivedCategory.torsionCohomology (Λ : Type (u + 1)) [CommRing Λ] (T : Scheme.{u}) : ObjectProperty (DerivedCategoryModule Λ T)",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-11",
+  "existing": false,
+  "note": "Mixed record (fixed by R-ddc1147 to the six-functor encoding of STATE 'Λ-MODULE ÉTALE SHEAVES: TWO ENCODINGS', the encoding of every landed proper-base-change citer). Existing: D(T_et,Λ) = AlgebraicGeometry.Etale.DerivedCategoryModule Λ T := DerivedCategory (Sheaf T.smallEtaleTopology (ModuleCat.{u+1} Λ)) (source WeilConjectures.SixFunctors.Etale.Derived.Coefficients, Λ : Type (u+1), global HasDerivedCategory.ofIsGrothendieckAbelian); D(T_et) = DerivedCategory (Sheaf T.smallEtaleTopology AddCommGrpCat.{u+1}) as in HasTorsionEtaleCohomology of def-weil-pbc-etale-sheaves; H^i = DerivedCategory.homologyFunctor _ i; D^+, D^b = DerivedCategory.Plus / DerivedCategory.Bounded of Sheaf T.smallEtaleTopology (ModuleCat.{u+1} Λ) (Mathlib, def-weil-pbc-bounded-derived-subcategories). New: torsionCohomology on all of D(T_et,Λ), every H^r(K) torsion as an abelian sheaf (CategoryTheory.Sheaf.IsTorsion after forget₂); on D^+ it is the source's Etale.DerivedCategory.Plus.torsionHomology via Scheme.isTorsionSheaf_iff_isTorsion. The delivered SheafOfModules encoding (independent coefficient universe v, four sheafification/smallness abbrevs, HasDerivedCategory.standard) is dropped.",
+  "fixed_by": "R-ddc1147"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-ddc1147",
+  "group": "E1",
+  "result": "fix",
+  "note": "T scheme, Λ : Type (u+1) comm ring (STATE six-functor encoding), D(T_et,Λ)=Etale.DerivedCategoryModule, D(T_et)=DerivedCategory (Sheaf .. AddCommGrpCat.{u+1}), H^i=homologyFunctor, D^+/D^b=DerivedCategory.Plus/Bounded, torsion cohomology = ∀ r, Sheaf.IsTorsion of forget₂ H^r(K)"
+ }
 }
