@@ -156,5 +156,23 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-ess (reviewer sub-agent of L); spot-checked: Start Sat Oct 10 04:29:51 PM UTC 2026. Source Stacks equiv 0FZ3 (lemma-Ext-0-regular) proof of (1), which uses the local-to-global spectral sequence of Cohomology section-ext 0BQP; statement checked true under the corrected Ext^n_X(F,G)=R^n Hom(F,-)(G) (def-sc-ext-sheaf is ill-posed, see lead_note/HUMAN.md); Noetherian/coherent hypotheses superfluous but harmless; vanishing corollary checked from first-quadrant convergence. New node lem-sc-ext-coherent-hom-injective-acyclic: true for any ringed space and any F (Hom(F,I) flasque for I injective via j_!F|_U -> F, Hartshorne III.6), no existing DAG node states it (grep flasque/acyclic Hom). Step 1: thm-sp-grothendieck (composable pair of Grothendieck abelian categories, F sends injectives to G-acyclics) with def-sp-composite-acyclicity, def-sp-acyclic read; step 2: def-weil-pbc-sheaf-ext (RHom via K-injective), pqf-def-cohomology, lem-weil-pbc-ext-via-injective-resolution; step 3: first-quadrant filtration. FIX more, RETURN less: (1) C4 step 1: thm-sp-grothendieck requires Grothendieck abelian categories, not stated by enough-injectives: cited prop-pur-kinjective-resolutions-exist (Mod(O) on small site Grothendieck abelian) and lem-weil-pbc-ring-modules-grothendieck-abelian (Ab=Mod(Z)); (2) C1 step 2: R^qT(G)=SheafExt^q needs the injective resolution K-injective: cited lem-weil-pbc-bounded-below-injectives-kinjective, and Gamma o SheafHom(F,-)=Hom(F,-) cited def-pur-sheaf-hom; proof_deps updated. FIX: dag/nodes/sec-picard-framework/lem-sc-ext-sheaf-to-global-spectral-sequence.json: stmt_deps: duplicate def-weil-pbc-sheaf-ext removed. Tool uses accepted: thm-sp-grothendieck, lem-weil-pbc-scheme-modules-enough-injectives (declared), plus the three generic nodes added. No Mathlib leaf in the delivery. End Sat Oct 10 04:31:34 PM UTC 2026.; 1 file(s) fixed by the reviewer"
  },
- "lead_note": "2026-10-10 L (R-ess): R-ess: abutment cites def-sc-ext-sheaf (ill-posed contravariant Hom(-,G)); the statement is true and proved with Ext^n = R^n Hom_{O_X}(F,-)(G) (Stacks Cohomology 0BQP), the meaning the step uses; when def-sc-ext-sheaf is corrected nothing here changes."
+ "lead_note": "2026-10-10 L (R-ess): R-ess: abutment cites def-sc-ext-sheaf (ill-posed contravariant Hom(-,G)); the statement is true and proved with Ext^n = R^n Hom_{O_X}(F,-)(G) (Stacks Cohomology 0BQP), the meaning the step uses; when def-sc-ext-sheaf is corrected nothing here changes.",
+ "lean": {
+  "module": "Sheaf.Paper.ExtSheafToGlobalSpectralSequence",
+  "declaration": "AlgebraicGeometry.exists_sheafExt_global_spectralSequence",
+  "file": "lean/Sheaf/Paper/ExtSheafToGlobalSpectralSequence.lean",
+  "statement": "theorem exists_sheafExt_global_spectralSequence (X : Scheme.{u}) [CompactSpace X] [AlgebraicGeometry.IsLocallyNoetherian X] [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))] [HasExt.{u} X.Modules] (F G : SheafOfModules.{u} (moduleRings X.toRingedSpace)) (hF : RingedSpace.IsCoherent X.toRingedSpace F) (hG : RingedSpace.IsCoherent X.toRingedSpace G) : ∃ (E : E₂CohomologicalSpectralSequenceNat AddCommGrpCat.{u}), (∀ (p q : ℕ), Nonempty ( (E.page 2).X (p, q) ≅ AddCommGrpCat.of (((RingedSpace.moduleCohomology X.toRingedSpace p).obj ((AlgebraicGeometry.moduleSheafExt X q F G))))) ) ∧ E.AbutsTo (fun n ↦ AddCommGrpCat.of (AlgebraicGeometry.Scheme.Modules.Ext F G n)) ∧ ∀ (d : ℕ), (∀ (p q : ℕ), d < p + q → IsZero (AddCommGrpCat.of (((RingedSpace.moduleCohomology X.toRingedSpace p).obj ((AlgebraicGeometry.moduleSheafExt X q F G))))) ) → ∀ (n : ℕ), d < n → IsZero (AddCommGrpCat.of (AlgebraicGeometry.Scheme.Modules.Ext F G n))",
+  "branch": "sheaf-dag",
+  "by": "V1",
+  "date": "2026-10-12",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "V1",
+  "result": "pass",
+  "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
+ }
 }
