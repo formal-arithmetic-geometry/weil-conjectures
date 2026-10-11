@@ -21,53 +21,126 @@
  "stmt_deps": [
   "def-weil-abstract-derived-category"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
- "mathlib_searches": [
+ "proof": [
   {
-   "tool": "leansearch",
-   "query": "a morphism from a bounded complex of projective modules in the derived category is represented by a chain map",
-   "results": "service unavailable: Internal Server Error",
-   "date": "2026-10-10",
-   "verdict": "unavailable"
+   "text": "Since $D(R)$ is a triangulated category [def-weil-abstract-derived-category], (TR1) of [def-weil-triangulated-category] completes $\\alpha$ to a distinguished triangle $E^\\bullet\\xrightarrow{\\alpha}L^\\bullet\\xrightarrow{i}C\\to E^\\bullet[1]$ in $D(R)$; as an object of the localization, $C=Q(C^\\bullet)$ for a complex $C^\\bullet$ of $R$-modules. The long exact cohomology sequence of this distinguished triangle [lem-sf-derived-homology-long-exact] shows $H^j(C^\\bullet)=0$ for every $j\\ge n$: for $j>n$ use that $H^j(\\alpha)$ and $H^{j+1}(\\alpha)$ are isomorphisms, while for $j=n$ use that $H^n(\\alpha)$ is surjective and $H^{n+1}(\\alpha)$ is an isomorphism.",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "def-weil-triangulated-category",
+    "lem-sf-derived-homology-long-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 064E proof, after forming the cone C(α), using the cone triangle and Lemma 064D"
+   }
   },
   {
-   "tool": "loogle",
-   "query": "DerivedCategory.Q.map",
-   "results": "none; unknown identifier",
-   "date": "2026-10-10",
+   "text": "Apply [lem-pc-ring-precise-vanishing] to $P^\\bullet$ and $C^\\bullet$ (in the abelian category of $R$-modules). Since $P^i=0$ for $i<n$ and $H^j(C^\\bullet)=0$ for $j\\ge n$, the composite $i\\circ\\beta:Q(P^\\bullet)\\to Q(C^\\bullet)$ is zero in $D(R)$.",
+   "uses": [
+    "lem-pc-ring-precise-vanishing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 064E proof, invocation of Tag 064D (lemma-precise-vanishing)"
+   }
+  },
+  {
+   "text": "By (ii) of [lem-weil-pbc-hom-into-triangle-exact] applied to the distinguished triangle of Step 1 with $W=Q(P^\\bullet)$, since $i\\circ\\beta=0$ there is a morphism $\\delta:Q(P^\\bullet)\\to Q(E^\\bullet)$ in $D(R)$ with $\\alpha\\circ\\delta=\\beta$. By the surjectivity in [lem-pc-ring-derived-map-representative] (with $\\mathcal A$ the $R$-modules and $P^\\bullet$ bounded, hence bounded above), $\\delta=Q(\\gamma)$ for a morphism of complexes $\\gamma:P^\\bullet\\to E^\\bullet$. Hence $\\alpha\\circ Q(\\gamma)=\\beta$ in $D(R)$.",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "lem-weil-pbc-hom-into-triangle-exact",
+    "lem-pc-ring-derived-map-representative"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 064E proof, lift β through the cone by Lemma 0149; Tags 064B/064C for chain-map representation"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-abstract-derived-category",
+  "def-weil-triangulated-category",
+  "lem-sf-derived-homology-long-exact",
+  "lem-pc-ring-precise-vanishing",
+  "lem-weil-pbc-hom-into-triangle-exact",
+  "lem-pc-ring-derived-map-representative"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tag 064E (derived-lemma-lift-map)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "derived category lift from bounded projective complex through a map inducing cohomology isomorphisms above n and surjection at n",
+   "results": "DerivedCategory.left_fac_of_isStrictlyGE, right_fac_of_isStrictlyLE, CochainComplex.IsKProjective.Qh_map_bijective; no exact lift theorem",
+   "date": "2026-10-11",
    "verdict": "no match"
   },
   {
-   "tool": "leanfinder",
-   "query": "derived category morphism from bounded projective complex represented by chain map",
-   "results": "CochainComplex.IsKProjective.Qh_map_bijective and DerivedCategory.left_fac/right_fac; no exact bounded-projective lift declaration",
-   "date": "2026-10-10",
+   "tool": "loogle",
+   "query": "CochainComplex.IsKProjective.Qh_map_bijective, DerivedCategory.Q, cone",
+   "results": "unknown identifier cone",
+   "date": "2026-10-11",
    "verdict": "no match"
   },
   {
    "tool": "grep",
-   "query": "lift.?map|projective.*derived",
-   "results": "no matching source declaration",
-   "date": "2026-10-10",
+   "query": "lift.?map|projective.*derived|Qh_map_bijective in Mathlib/Algebra/Homology",
+   "results": "no matching source declaration from this regex",
+   "date": "2026-10-11",
    "verdict": "no match"
   },
   {
-   "tool": "leanfinder",
-   "query": "lift a morphism from a bounded complex of projectives vanishing below degree n through a map in the derived category that is an isomorphism on cohomology above n and surjective in degree n",
-   "results": "DerivedCategory.from_singleFunctor_obj_eq_zero_of_projective, DerivedCategory.right_fac_of_isStrictlyLE, left_fac_of_isStrictlyGE, CochainComplex.cm5b, right_fac_of_isStrictlyLE_of_isStrictlyGE, ProjectiveResolution.extMk_surjective; none states the lift",
+   "tool": "leansearch",
+   "query": "derived category lift from bounded projective complex through a cohomology isomorphism",
+   "results": "service unavailable: Internal Server Error",
    "date": "2026-10-11",
-   "verdict": "no match"
+   "verdict": "unavailable"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-pc-ring-pseudo-coherent-distinguished-triangle",
   "by": "worker",
   "date": "2026-10-11"
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-duality"
+ "unit": "sk-thm-picard-duality",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-pc-ring-derived-map-lift",
+  "worker": "stage1",
+  "summary": "Split Tag 064E into the cone cohomology-vanishing calculation, the precise-vanishing application, and the factorization plus chain-map representation. Added the strictly smaller Tag 064D statement and a Mathlib leaf for representing maps from bounded projective complexes. The derived-category statement and all hypotheses are unchanged.",
+  "blueprint": "The steps realize the ancestor lem-sc-finite-duality proof place 'proper-flat support proof: lift the map between finite-free witnesses to a map of complexes'.",
+  "tool_uses": [
+   {
+    "node": "lem-sf-derived-homology-long-exact",
+    "why": "The cone step needs the general long exact cohomology sequence, which is a generic derived-category tool outside this unit."
+   },
+   {
+    "node": "lem-weil-pbc-hom-into-triangle-exact",
+    "why": "The lift step needs exactness of Hom from a fixed object into a distinguished triangle; no node in this unit supplies this generic triangulated-category fact."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sf-derived-homology-long-exact",
+  "lem-weil-pbc-hom-into-triangle-exact",
+  "lem-sf-derived-homology-long-exact",
+  "lem-weil-pbc-hom-into-triangle-exact"
+ ],
+ "reviewed": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-rml0118",
+  "group": "J1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-rml0118 (reviewer sub-agent of L); spot-checked: Read packet whole; Tag 064E/064D/064B text vs item and new nodes; citer lem-pc-ring-pseudo-coherent-distinguished-triangle step 1 applies the lift with alpha=beta:E->B and P->A->B as D(R) morphisms (B an object of D(R)); Mathlib KProjective.lean:113 (isKProjective_of_projective, IsStrictlyLE d + Projective terms) and DerivedCategory/KProjective.lean:43 (Qh_map_bijective) read with sed: one-line term specialization; Step 1 cone cohomology vanishing j>=n checked; duplicates: lem-sc-bounded-above-projective-kprojective states only K-projectivity, lem-weil-pbc-projective-resolution-lift is module-resolution lift, no 064B/064D node exists. FIX more, RETURN less: (1) C4/E7 in the citer: the delivery changed the item statement to chain maps alpha,beta with a homotopy conclusion while the split_report claims it unchanged; the citer uses D(R)-morphism alpha,beta, so the sheaf-dag D(R) statement (which implies the 064E chain-map form) is restored; (2) Step 1 now forms the triangle by TR1 of def-weil-triangulated-category (added to uses/proof_deps) with C=Q(C^bullet); Step 3 rewritten to use hom-into-triangle (ii) and surjectivity of the representative bijection, giving alpha o Q(gamma)=beta. The Second reading by J1 missed (1): it introduced the fault.; 1 file(s) fixed by the reviewer"
+ }
 }
