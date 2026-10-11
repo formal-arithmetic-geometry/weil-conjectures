@@ -42,58 +42,48 @@
  ],
  "proof": [
   {
-   "text": "Set $S_0=\\operatorname{Spec}(A/I)$. The closed fibre $Y_0=Y\\times_S S_0$ is a closed subscheme of $Y$ by base change of the quotient closed immersion. Since $Y\\to S$ is proper and $S$ is affine, $Y$ is quasi-compact and quasi-separated. Stacks Tag 0A0B gives the Zariski comparison for every sheaf of sets on the underlying topological space of $Y$. For every finite $h:Y'\\to Y$, the composite $Y'\\to S$ is proper, and applying the same Tag 0A0B result to $Y'$ gives the comparison for every Zariski sheaf on $Y'$ with its closed fibre $Y'_0=Y'\\times_S S_0$. These are exactly the two hypotheses of the Gabber criterion.",
+   "text": "Properness gives compactness and quasi-separatedness of Y. The quotient spectrum map is a closed immersion, and the pullback square makes i a closed immersion. The pullback image formula and the range of the quotient spectrum map give range(i)=p⁻¹(V(I)). The quotient map is surjective, so the affine characterization of closed immersions applies. Prime ideals of A/I correspond to primes of A containing I. The fibre-product point description then gives the image equality, since the tensor product of the two residue fields over their common residue field is nonzero.",
    "uses": [
     "def-weil-pbc-scheme-conventions",
+    "lem-weil-pbc-qcqs-over-affine",
+    "def-weil-closed-immersion",
     "lem-weil-pbc-closed-immersion-base-change",
-    "lem-weil-pbc-zariski-h0-proper-henselian-pair",
-    "lem-weil-pbc-finite-proper"
+    "lem-weil-pbc-fibre-product-points"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Etale Cohomology, Lemma 59.91.1, Tag 0A0B (label lemma-zariski-h0-proper-over-henselian-pair, lines 18167-18200)"
+    "document": "lean/WeilConjectures/SixFunctors/Etale/BaseChangeTheorems/DegreeZero.lean",
+    "place": "proof of isIso_globalSectionsUpperStarMap_of_henselianRing"
    }
   },
   {
-   "text": "Apply [lem-weil-pbc-gabber-h0-etale-criterion], Stacks Tag 09ZF, to $X=Y$ and $Z=Y_0$. Its quasi-compactness, quasi-separatedness, and closed-immersion hypotheses and both Zariski comparison hypotheses were checked in Step 1. It yields bijectivity of the canonical restriction $\\Gamma(Y,F)\\to\\Gamma(Y_0,i^{-1}_{\\mathrm{et}}F)$ for every sheaf of sets, hence for the underlying sheaf of every abelian etale sheaf. The inverse is automatically a group homomorphism because the restriction map is.",
+   "text": "For every finite q:X′→Y and irreducible closed C, apply Stein connectedness to q≫p; rewriting range(i) as p⁻¹(V(I)) identifies the resulting connected intersection with C∩q⁻¹(range(i)). The finite-cover connectedness criterion then gives the required module-section isomorphism.",
    "uses": [
-    "lem-weil-pbc-gabber-h0-etale-criterion"
+    "lemma-weil-pbc-stein-connectedness",
+    "lem-weil-pbc-etale-module-h0-finite-connected-criterion",
+    "lem-weil-pbc-finite-morphism-permanence"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Etale Cohomology, Lemma 59.82.2, Tag 09ZF (label lemma-gabber-h0, lines 14974-15070), applied in Lemma 59.91.2, Tag 0A0C (lines 18202-18211)"
-   }
-  },
-  {
-   "text": "Both maps in Steps 1 and 2 are canonical restriction maps induced by inverse-image units, so the isomorphism is natural in $F$. In a cartesian finite pullback $h:Y'\\to Y$ over the same henselian pair, the inverse-image units commute with base change; [lem-weil-pbc-finite-pullback-identities] gives the closed-fibre restriction equation, hence the two comparison isomorphisms commute with $h^\\sharp$. The same cartesian restriction equation gives compatibility with a morphism of henselian pairs after base-changing the proper scheme.",
-   "uses": [
-    "def-weil-pbc-finite-section-pullback",
-    "lem-weil-pbc-finite-pullback-identities",
-    "def-weil-pbc-inverse-image"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Etale Cohomology, Lemma 59.91.2, Tag 0A0C, canonical restriction; finite-pullback functoriality expanded from its construction"
+    "document": "lean/WeilConjectures/SixFunctors/Etale/BaseChangeTheorems/DegreeZero.lean",
+    "place": "proof of isIso_globalSectionsUpperStarMap_of_henselianRing"
    }
   }
  ],
  "proof_deps": [
   "def-weil-pbc-scheme-conventions",
+  "lem-weil-pbc-qcqs-over-affine",
+  "def-weil-closed-immersion",
   "lem-weil-pbc-closed-immersion-base-change",
-  "lem-weil-pbc-zariski-h0-proper-henselian-pair",
-  "lem-weil-pbc-finite-proper",
-  "lem-weil-pbc-gabber-h0-etale-criterion",
-  "def-weil-pbc-finite-section-pullback",
-  "lem-weil-pbc-finite-pullback-identities",
-  "def-weil-pbc-inverse-image"
+  "lem-weil-pbc-fibre-product-points",
+  "lemma-weil-pbc-stein-connectedness",
+  "lem-weil-pbc-etale-module-h0-finite-connected-criterion",
+  "lem-weil-pbc-finite-morphism-permanence"
  ],
  "proof_origin": {
-  "by": "document",
-  "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Etale Cohomology, Lemma 59.91.2, Tag 0A0C (label lemma-h0-proper-over-henselian-pair, lines 18202-18211), via Tags 0A0B and 09ZF"
+  "by": "agent",
+  "document": "lean/WeilConjectures/SixFunctors/Etale/BaseChangeTheorems/DegreeZero.lean",
+  "place": "compiled proof of isIso_globalSectionsUpperStarMap_of_henselianRing"
  },
  "mathlib_searches": [],
  "mathlib_match": null,
@@ -198,5 +188,15 @@
   ],
   "sorry_free": false,
   "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state sorry_here)"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "X-b38f5",
+  "group": "J1",
+  "result": "pass",
+  "landing": "20261011T231708-L-352269",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered files compile cleanly; target statement and existing interfaces are unchanged; proof, node metadata, report, imports, and named remaining sorry satisfy stage-3 requirements."
  }
 }

@@ -11,6 +11,10 @@ public import WeilConjectures.AlgebraicGeometry.Morphisms.UniversalHomeomorphism
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace
 public import WeilConjectures.SixFunctors.BaseChange.GlobalSections
 
+import WeilConjectures.AlgebraicGeometry.HenselianConnectedness
+import Mathlib.AlgebraicGeometry.PullbackCarrier
+import Sheaf.AlgebraicGeometry.EtaleH0FiniteConnectedCriterion
+
 /-!
 # Sections of étale sheaves on proper schemes over a henselian base
 
@@ -88,8 +92,26 @@ theorem Etale.isIso_globalSectionsUpperStarMap_of_henselianRing {A : Type u} [Co
     (i : Y₀ ⟶ Y) (p₀ : Y₀ ⟶ Spec (.of (A ⧸ I)))
     (h : IsPullback i p₀ p (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk I))))
     (F : Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :
-    IsIso (globalSectionsUpperStarMap (ModuleCat.{u + 1} Λ) i F) :=
-  sorry
+    IsIso (globalSectionsUpperStarMap (ModuleCat.{u + 1} Λ) i F) := by
+  have : CompactSpace Y := QuasiCompact.compactSpace_of_compactSpace p
+  have : QuasiSeparatedSpace Y := quasiSeparatedSpace_of_quasiSeparated p
+  have : IsClosedImmersion (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk I))) :=
+    IsClosedImmersion.spec_of_surjective _ (Ideal.Quotient.mk_surjective)
+  have : IsClosedImmersion i :=
+    MorphismProperty.of_isPullback (P := @IsClosedImmersion) h.flip inferInstance
+  have hrange : Set.range i = p ⁻¹' PrimeSpectrum.zeroLocus (I : Set A) := by
+    have hi := Scheme.image_preimage_eq_of_isPullback h.flip (Set.univ : Set (Spec
+      (.of (A ⧸ I))))
+    have hquot : Set.range (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk I))) =
+        PrimeSpectrum.zeroLocus (I : Set A) := by
+      change Set.range (PrimeSpectrum.comap (Ideal.Quotient.mk I)) = _
+      rw [range_comap_of_surjective _ _ (Ideal.Quotient.mk_surjective),
+        Ideal.mk_ker]
+    simpa only [Set.preimage_univ, Set.image_univ, hquot] using hi
+  apply Etale.isIso_globalSectionsUpperStarMap_of_finite_connected_closed_intersections Λ i
+  intro X' q hq C hC hC'
+  rw [hrange, ← Set.preimage_comp]
+  exact ((q ≫ p).spectralSpace_and_isClosed_and_isConnected_inter I).2.2 C hC hC'
 
 /-- The pullback of global sections along a universal homeomorphism is an isomorphism: the
 pullback is then an equivalence of categories of étale sheaves
