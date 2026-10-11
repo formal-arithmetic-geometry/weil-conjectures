@@ -66,9 +66,9 @@ Written by the launcher at the start (`1-dag`), then kept current by the maintai
 
 **ABELIAN CURVE PAIRS AND C1–C8 (09:49 UTC; decision of L).** Feed through the Ab ≃ Mod(ULift ℤ) bridge `E` of E1 7631c4992 (lem-weil-pbc-curve-assertions-finite-pushforward); no second bridge.
 
-**NORMAL RING (10:14 UTC; decision of L).** Def-weil-pbc-normal-ring is written inline as `∀ (p : Ideal A) [p.IsPrime], IsDomain (Localization.AtPrime p) ∧ IsIntegrallyClosed (Localization.AtPrime p)` (K1 ccd06d885, H1 a96cb269b); for a domain `IsDomain ∧ IsIntegrallyClosed`; no named predicate.
+**NORMAL RING (10:14 UTC; decision of L).** def-weil-pbc-normal-ring is written inline as `∀ (p : Ideal A) [p.IsPrime], IsDomain (Localization.AtPrime p) ∧ IsIntegrallyClosed (Localization.AtPrime p)` (K1 ccd06d885, H1 a96cb269b); for a domain `IsDomain ∧ IsIntegrallyClosed`; no named predicate.
 
-**FIBRE RING (10:14 UTC; decision of L).** Κ(p) ⊗[R] S is Mathlib `p.Fiber S` (`Ideal.Fiber`, `Algebra.TensorProduct.includeRight`, `PrimeSpectrum.preimageEquivFiber`); never a hand-written `S ⊗[R] κ(p)` (E1 846bd08dc, F1 c84d7f11f, G1 e8f0036eb, J1 609956747, K1 de4006636).
+**FIBRE RING (10:14 UTC; decision of L).** κ(p) ⊗[R] S is Mathlib `p.Fiber S` (`Ideal.Fiber`, `Algebra.TensorProduct.includeRight`, `PrimeSpectrum.preimageEquivFiber`); never a hand-written `S ⊗[R] κ(p)` (E1 846bd08dc, F1 c84d7f11f, G1 e8f0036eb, J1 609956747, K1 de4006636).
 
 **FILTERED COLIMITS OF RINGS (10:14 UTC; decision of L).** `{I : Type w} [SmallCategory I] [IsFiltered I]`, `F : I ⥤ CommRingCat`, `[HasColimit F]`, `colimit F`, `colimit.ι` (K1 ccd06d885, H1 e6c93b368, J1 8231d9091, F1 6ebcba30e); directed systems keep the DIRECTED SETS line.
 
