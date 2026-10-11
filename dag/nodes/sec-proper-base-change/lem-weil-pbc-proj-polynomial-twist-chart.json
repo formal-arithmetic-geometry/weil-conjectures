@@ -224,5 +224,24 @@
  },
  "tool_uses": [
   "lem-weil-pbc-dehomogenization-polynomial-ring"
- ]
+ ],
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProjPolynomialTwistChart",
+  "declaration": "AlgebraicGeometry.proj_polynomial_twist_chart",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProjPolynomialTwistChart.lean",
+  "statement": "theorem proj_polynomial_twist_chart (A : Type u) [CommRing A] (m : ℕ) : (⨆ k : Fin (m + 1), Proj.basicOpen (MvPolynomial.homogeneousSubmodule (Fin (m + 1)) A) (MvPolynomial.X k)) = ⊤ ∧ (∀ k : Fin (m + 1), IsIso (Proj.basicOpenToSpec (MvPolynomial.homogeneousSubmodule (Fin (m + 1)) A) (MvPolynomial.X k))) ∧ (∀ k : Fin (m + 1), ∃ e : MvPolynomial {l : Fin (m + 1) // l ≠ k} A ≃ₐ[A] HomogeneousLocalization.Away (MvPolynomial.homogeneousSubmodule (Fin (m + 1)) A) (MvPolynomial.X k), ∀ l : {l : Fin (m + 1) // l ≠ k}, e (MvPolynomial.X l) = MvPolynomial.awayXRatio A k l.1) ∧ (∀ k : Fin (m + 1), Scheme.Modules.IsFreeGenerator (M := Proj.twist (MvPolynomial.homogeneousSubmodule (Fin (m + 1)) A) 1) (Proj.twistPowSection 1 (MvPolynomial.isHomogeneous_X A k))) ∧ (∀ k l : Fin (m + 1), (Proj.twist (MvPolynomial.homogeneousSubmodule (Fin (m + 1)) A) 1).presheaf.map (homOfLE inf_le_right : Proj.basicOpen (MvPolynomial.homogeneousSubmodule (Fin (m + 1)) A) (MvPolynomial.X k) ⊓ Proj.basicOpen (MvPolynomial.homogeneousSubmodule (Fin (m + 1)) A) (MvPolynomial.X l) ⟶ Proj.basicOpen (MvPolynomial.homogeneousSubmodule (Fin (m + 1)) A) (MvPolynomial.X l)).op (Proj.twistPowSection 1 (MvPolynomial.isHomogeneous_X A l)) = (Proj (MvPolynomial.homogeneousSubmodule (Fin (m + 1)) A)).presheaf.map (homOfLE inf_le_left : Proj.basicOpen (MvPolynomial.homogeneousSubmodule (Fin (m + 1)) A) (MvPolynomial.X k) ⊓ Proj.basicOpen (MvPolynomial.homogeneousSubmodule (Fin (m + 1)) A) (MvPolynomial.X l) ⟶ Proj.basicOpen (MvPolynomial.homogeneousSubmodule (Fin (m + 1)) A) (MvPolynomial.X k)).op (Proj.awayToSection (MvPolynomial.homogeneousSubmodule (Fin (m + 1)) A) (MvPolynomial.X k) (MvPolynomial.awayXRatio A k l)) • (Proj.twist (MvPolynomial.homogeneousSubmodule (Fin (m + 1)) A) 1).presheaf.map (homOfLE inf_le_left : Proj.basicOpen (MvPolynomial.homogeneousSubmodule (Fin (m + 1)) A) (MvPolynomial.X k) ⊓ Proj.basicOpen (MvPolynomial.homogeneousSubmodule (Fin (m + 1)) A) (MvPolynomial.X l) ⟶ Proj.basicOpen (MvPolynomial.homogeneousSubmodule (Fin (m + 1)) A) (MvPolynomial.X k)).op (Proj.twistPowSection 1 (MvPolynomial.isHomogeneous_X A k))) ∧ (∀ k l : Fin (m + 1), Proj.awayι (MvPolynomial.homogeneousSubmodule (Fin (m + 1)) A) (MvPolynomial.X k) (MvPolynomial.isHomogeneous_X A k) Nat.one_pos ⁻¹ᵁ Proj.basicOpen (MvPolynomial.homogeneousSubmodule (Fin (m + 1)) A) (MvPolynomial.X l) = PrimeSpectrum.basicOpen (MvPolynomial.awayXRatio A k l)) ∧ ∃! q : Proj (MvPolynomial.homogeneousSubmodule (Fin (m + 1)) A) ⟶ Spec (.of A), ∀ k : Fin (m + 1), Proj.awayι (MvPolynomial.homogeneousSubmodule (Fin (m + 1)) A) (MvPolynomial.X k) (MvPolynomial.isHomogeneous_X A k) Nat.one_pos ≫ q = Spec.map (CommRingCat.ofHom (algebraMap A (HomogeneousLocalization.Away (MvPolynomial.homogeneousSubmodule (Fin (m + 1)) A) (MvPolynomial.X k))))",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-ptc1354"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-ptc1354",
+  "group": "F1",
+  "result": "fix",
+  "note": "A CommRing Type u, m:ℕ, S=MvPolynomial (Fin (m+1)) A total degree, P=Proj, U_k=Proj.basicOpen X_k; cover ⨆=⊤; canonical chart IsIso basicOpenToSpec (not an instance); A-alg iso tied by X_l ↦ awayXRatio A k l = x_l/x_k; e_k=twistPowSection 1 free generator of source Proj.twist _ 1; e_l=(x_l/x_k)e_k on U_k⊓U_l via presheaf maps; awayι⁻¹ U_l = basicOpen(x_l/x_k); ∃! q to Spec A with chart restrictions Spec(algebraMap a↦a/1). Fix: thin polynomialTwist wrapper re-recording L's landed def-pc-projective-space-twist reverted, Proj.twist used directly, section variables bound, notations inlined.; reverted the delivery's change of existing node(s) def-pc-projective-space-twist (--revert-nodes; kept as on sheaf-dag)"
+ }
 }
