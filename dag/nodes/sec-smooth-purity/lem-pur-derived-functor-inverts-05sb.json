@@ -22,9 +22,40 @@
   "def-pur-saturated-triangulated-localization",
   "lem-pur-derived-functor-morphisms-05sa"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write J_X=S/X and J_Y=S/Y for the cofiltered denominator categories of Definition 05S9. Since s lies in S, MS1 gives a functor c:J_X→J_Y, (u:X'→X) ↦ (s∘u:X'→Y), and the pro-diagram of J_Y composed with c is literally the pro-diagram (u:X'→X) ↦ F(X') of J_X. The functor c is initial: for every denominator t:Z→Y, the second MS2 clause applied to t∈S and s gives a denominator u:W→X and v:W→Z with t∘v=s∘u, i.e. a morphism c(u)→t in J_Y; and given two morphisms c(u)→t, c(u')→t, pass to a common object u'' of the cofiltered J_X mapping to u and u', so that one gets two maps a,b:W''→Z with t∘a=t∘b, and the second MS3 clause (t∈S with source Z) gives a denominator r with a∘r=b∘r, which (composed into J_X) connects the two morphisms. By Stacks Categories Lemma 0A1T (restriction along an initial functor of cofiltered categories), the pro-diagram of J_X is essentially constant exactly when that of J_Y is. Therefore LF is defined at X if and only if it is defined at Y.",
+   "uses": [
+    "def-pur-saturated-triangulated-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Lemma 05SB(2), using Situation 05S8 MS1-MS3, Definition 05S9 and Categories Lemma 0A1T"
+   }
+  },
+  {
+   "text": "Assume both values exist. Lemma 05SA(2) gives LF(s):LF(X)→LF(Y). Use the reverse MS2 comparison: for each denominator s':Y'→Y choose a denominator t':X'→X and a map t:X'→Y' with s∘t'=s'∘t. Applying F(t) and the cone maps defines a morphism LF(Y)→LF(X); MS3 makes it independent of the chosen square. After a further common denominator, MS3 also makes each composite equal to the corresponding identity comparison. The uniqueness clause of 05SA(2) then identifies the composites with id_{LF(X)} and id_{LF(Y)}, so LF(s) is an isomorphism.",
+   "uses": [
+    "def-pur-saturated-triangulated-localization",
+    "lem-pur-derived-functor-morphisms-05sa"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Lemma 05SB(2), using Lemma 05SA(2) and Situation 05S8 MS2-MS3"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pur-saturated-triangulated-localization",
+  "lem-pur-derived-functor-morphisms-05sa"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Lemma 05SB(2) (source proof is omitted; argument written from Situation 05S8 MS2-MS3 and Lemma 05SA(2))"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -49,12 +80,28 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-pur-left-derived-exact-when-defined",
   "by": "worker",
   "date": "2026-10-11"
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-def-sf-operations"
+ "unit": "sk-def-sf-operations",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-pur-derived-functor-inverts-05sb",
+  "worker": "stage1",
+  "summary": "The source gives Lemma 05SB(2) with an omitted proof. I wrote the omitted argument directly: MS2-MS3 transport the cofiltered denominator categories S/X and S/Y, preserving essential constancy, and the 05SA morphism construction together with common refinements supplies a two-sided inverse for LF(s). No new nodes were created; the existing Stacks definition and 05SA statement provide exactly the cited data.",
+  "blueprint": "Realizes the blueprint clause 'Lemma 05SB(2): LF inverts S'.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-dfi0150",
+  "group": "E1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-dfi0150 (reviewer sub-agent of L); spot-checked: Statement = Stacks 05SB(2) in Situation 05S8; LF(s) is the 05SA(2) map (unsplit node of same batch, class b citation fine); essential constancy is def-pc-essentially-constant-pro-diagram via the definition node; citer lem-pur-left-derived-exact-when-defined uses only 'LF(s) iso', matches; no duplicate. FIX more, RETURN less: C4 in Step 1 (missed by the Second reading): it claimed the first MS2 clause (co-span completion) gives a comparison J_Y->J_X direction and called the MS2 squares a comparison J_X->J_Y; rewrote Step 1 as: MS1 gives c: S/X->S/Y, u|->s∘u; second MS2 clause plus second MS3 clause make c initial; Stacks Categories Lemma 0A1T transfers essential constancy. Step 2 (second MS2 clause, MS3, 05SA uniqueness) checked correct.; 1 file(s) fixed by the reviewer"
+ }
 }
