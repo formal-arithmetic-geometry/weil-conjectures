@@ -184,5 +184,24 @@
   "worker": "stage1",
   "summary": "Split following the proof of Stacks 0GWM, adapted to prescribed lifts: (1) phi: A^r -> M, e_i -> m_i, localized at p has image the span of the m_i/1; (2) surjectivity at p by identifying kappa(p) (x)_A M with kappa(p) (x)_{A_p} M_p [lem-weil-pbc-localization-tensor-product] and Nakayama over A_p [lem-weil-pbc-nakayama-local-generators]; (3) injectivity at p since M_p is free of rank r and a surjective endomorphism of A_p^r is bijective [lem-weil-pbc-finite-module-surjective-endomorphism-bijective]; (4) spreading by a new Mathlib leaf combining 05GF and 00HN [lem-weil-pbc-finite-to-finitely-presented-map-iso-at-prime-spreads = Module.FinitePresentation.exists_notMem_bijective]; (5) phi_f bijective means the m_i/1 are a basis. Statement kept; stmt_deps gained def-weil-pbc-free-module (basis) and def-weil-module-base-change (M (x) kappa(p)), which the statement uses. No one-line Mathlib match for the item itself (searches recorded)."
  },
- "reviewed": "pass (L, 2026-10-10): 5 steps follow the proof of 0GWM with the prescribed lifts: the map A^r -> M is surjective at p by Nakayama, injective at p since a surjective endomorphism of A_p^r is bijective (05G8), and bijectivity spreads to a principal localization (new leaf 05GF+00HN). Citations added to the statement only."
+ "reviewed": "pass (L, 2026-10-10): 5 steps follow the proof of 0GWM with the prescribed lifts: the map A^r -> M is surjective at p by Nakayama, injective at p since a surjective endomorphism of A_p^r is bijective (05G8), and bijectivity spreads to a principal localization (new leaf 05GF+00HN). Citations added to the statement only.",
+ "lean": {
+  "module": "Sheaf.RingTheory.PrescribedResidueBasisSpreads",
+  "declaration": "Module.FinitePresentation.exists_basis_away_of_prescribed_residue_basis",
+  "file": "lean/Sheaf/RingTheory/PrescribedResidueBasisSpreads.lean",
+  "statement": "theorem exists_basis_away_of_prescribed_residue_basis {A : Type u} [CommRing A] {M : Type v} [AddCommGroup M] [Module A M] [Module.FinitePresentation A M] (p : Ideal A) [p.IsPrime] (r : ℕ) (m : Fin r → M) (hres : ∃ b : Module.Basis (Fin r) p.ResidueField (p.ResidueField ⊗[A] M), ∀ i : Fin r, b i = (1 : p.ResidueField) ⊗ₜ[A] m i) (hfree : Nonempty (Module.Basis (Fin r) (Localization.AtPrime p) (LocalizedModule p.primeCompl M))) : ∃ f : A, f ∉ p ∧ ∃ b : Module.Basis (Fin r) (Localization.Away f) (LocalizedModule.Away f M), ∀ i : Fin r, b i = LocalizedModule.mkLinearMap (Submonoid.powers f) M (m i)",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-prb1326"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-prb1326",
+  "group": "E1",
+  "result": "fix",
+  "note": "A CommRing/M AddCommGroup+Module, fp=Module.FinitePresentation, p prime, m:Fin r->M; hres basis of kappa(p)(x)M (Ideal.ResidueField, scalar-first as recorded baseChange) with b i = 1(x)m i; hfree Basis (Fin r) A_p M_p; concl f notin p, Basis (Fin r) A_f M_f with b i = m i/1; fix: Basis -> Module.Basis (resolved only via namespace Module)"
+ }
 }
