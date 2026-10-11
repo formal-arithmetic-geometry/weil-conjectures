@@ -3172,3 +3172,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 00:53 UTC L: K1 kinjective-surjection-bounded-size PASS 90ea1ee4e re-push (R-sbs0052).
 - 00:53 L: returned deliver/H1/lem-pc-derived-tensor-transitivity (reviewer RETURN: 1. E (ill-typed statement, third time; same fault as R-dtt3144 and R-dtt0007): the item statement is byte-identical to s)
 - 00:53 L: returned deliver/K1/lem-sc-valuation-closed-fibre-section-vanishing (reviewer RETURN: Reviewer R-cfs0053, head f80b22124. (1) E (false statement / missing hypothesis): the item allows A to be a field (field)
+- 00:53 L: merged deliver/G1/lem-sc-perfect-finite-free-residue-model (reviewer FIX; first push; new nodes: 2)

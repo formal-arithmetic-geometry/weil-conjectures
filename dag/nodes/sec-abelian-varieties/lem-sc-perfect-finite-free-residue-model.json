@@ -23,9 +23,59 @@
   "def-pc-perfect-complex",
   "def-pc-derived-category"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "By the definition of a perfect complex [def-pc-perfect-complex] (with its affine form, Stacks Tag 08EB), choose an affine open neighbourhood $\\operatorname{Spec}(A)$ of $x$ on which $E$ is represented by $\\widetilde{P^\\bullet}$ for a bounded complex $P^\\bullet$ of finite projective $A$-modules, and write $\\mathfrak p\\subset A$ for the prime corresponding to $x$; then $Li_x^*E$ is $P^\\bullet\\otimes_A^{\\mathbf L}\\kappa(\\mathfrak p)$. By [lem-sc-perfect-pullback-perfect-residue] this derived fibre is perfect over the field $\\kappa(\\mathfrak p)$, i.e. quasi-isomorphic to a bounded complex of finite-dimensional $\\kappa(\\mathfrak p)$-vector spaces; its cohomology spaces are subquotients of these terms, so the numbers $d_i$ are finite and all but finitely many are zero.",
+   "uses": [
+    "lem-sc-perfect-pullback-perfect-residue",
+    "def-pc-perfect-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "More on Algebra, Lemma 15.76.19, Tag 0BCD, proof: pull-perfect and the splitting over a field"
+   }
+  },
+  {
+   "text": "Localize at $\\mathfrak p$. The terms of $P^\\bullet_{\\mathfrak p}=P^\\bullet\\otimes_AA_{\\mathfrak p}$ are finite projective modules over a local ring, hence finite free (Stacks Tag 00NZ), so $P^\\bullet_{\\mathfrak p}$ is a bounded complex of finite free modules and in particular pseudo-coherent [def-pur-pseudo-coherent-complex]; and $P^\\bullet_{\\mathfrak p}\\otimes_{A_{\\mathfrak p}}^{\\mathbf L}\\kappa(\\mathfrak p)=P^\\bullet\\otimes_A^{\\mathbf L}\\kappa(\\mathfrak p)$ has cohomology dimensions $d_i$. Apply [lem-sc-perfect-local-pseudocoherent-free-model] (Tag 0BCC) to obtain a bounded-above complex $F^\\bullet$ of finite free $A_{\\mathfrak p}$-modules with $F^i=A_{\\mathfrak p}^{\\oplus d_i}$ and an isomorphism $F^\\bullet\\cong P^\\bullet_{\\mathfrak p}$ in $D(A_{\\mathfrak p})$. Since the $d_i$ vanish outside a finite interval by Step 1, $F^\\bullet$ is bounded.",
+   "uses": [
+    "lem-sc-perfect-local-pseudocoherent-free-model",
+    "def-pur-pseudo-coherent-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "More on Algebra, Lemma 15.76.19, Tag 0BCD, proof: apply Lemma 0BCC after localizing at the prime"
+   }
+  },
+  {
+   "text": "The local ring is the directed colimit $A_{\\mathfrak p}=\\operatorname{colim}_{f\\notin\\mathfrak p}A_f$ of principal localizations (Stacks Tag 00CM). By [lem-pc-affine-perfect-colimit-descent] applied to $F^\\bullet$, there are $f\\notin\\mathfrak p$ and a bounded complex $Q^\\bullet$ of finite projective $A_f$-modules with $Q^\\bullet\\otimes_{A_f}A_{\\mathfrak p}\\cong F^\\bullet$ as complexes. Now $Q^\\bullet$ and $P^\\bullet_f$ are bounded complexes of finite projective $A_f$-modules whose images over $A_{\\mathfrak p}$ are isomorphic in $D(A_{\\mathfrak p})$ (via $F^\\bullet\\cong P^\\bullet_{\\mathfrak p}$). By [lem-pc-affine-perfect-hom-colimit] (stage $A_f$, both orders of the two complexes, and each complex with itself), this isomorphism and its inverse come from morphisms $\\alpha:Q^\\bullet_g\\to P^\\bullet_g$ and $\\beta:P^\\bullet_g\\to Q^\\bullet_g$ in $D(A_g)$ for some $g\\in fA$, $g\\notin\\mathfrak p$, and since $\\beta\\alpha$ and $\\alpha\\beta$ become identities over $A_{\\mathfrak p}$, the injectivity in the same lemma gives $h\\notin\\mathfrak p$, $h\\in gA$, with $\\alpha_h$ an isomorphism $Q^\\bullet_h\\cong P^\\bullet_h$ in $D(A_h)$. Apply [lem-weil-pbc-finite-projective-standard-free-cover] to each of the finitely many nonzero terms $Q^i_h$: of the elements generating the unit ideal, one lies outside $\\mathfrak p$; let $u$ be $h$ times the product of these choices, so $u\\notin\\mathfrak p$ and every $Q^i_u$ is finite free, of rank $d_i$ because $Q^i_u\\otimes_{A_u}A_{\\mathfrak p}\\cong F^i=A_{\\mathfrak p}^{\\oplus d_i}$ and $A_{\\mathfrak p}\\neq0$. On $U=D(u)\\ni x$, which is affine, $E|_U\\cong\\widetilde{P^\\bullet_u}\\cong\\widetilde{Q^\\bullet_u}$, a bounded complex with terms $\\mathcal O_U^{\\oplus d_i}$.",
+   "uses": [
+    "lem-pc-affine-perfect-colimit-descent",
+    "lem-pc-affine-perfect-hom-colimit",
+    "lem-weil-pbc-finite-projective-standard-free-cover"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "More on Algebra, Lemma 15.76.19, Tag 0BCD, proof: $R_{\\mathfrak p}=\\operatorname{colim}R_f$ and Lemma 0BC7"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-perfect-pullback-perfect-residue",
+  "def-pc-perfect-complex",
+  "lem-sc-perfect-local-pseudocoherent-free-model",
+  "def-pur-pseudo-coherent-complex",
+  "lem-pc-affine-perfect-colimit-descent",
+  "lem-pc-affine-perfect-hom-colimit",
+  "lem-weil-pbc-finite-projective-standard-free-cover"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "More on Algebra, Lemma 15.76.19, Tag 0BCD"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -50,12 +100,49 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sc-perfect-h0-locally-closed",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-abelian-varieties",
- "unit": "sk-prop-av-cube"
+ "unit": "sk-prop-av-cube",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-sc-perfect-finite-free-residue-model",
+  "worker": "stage1",
+  "summary": "Split Tag 0BCD into the residue-field perfectness input and the local pseudo-coherent finite-free model (Tag 0BCC). The proof pulls to the residue field, uses the field splitting result to establish finite support of the ranks, applies the local model, and descends the resulting bounded finite-free complex from the localization at the prime along the principal-localization colimit (Tag 0BC7). No project declaration states the item.",
+  "blueprint": "Realizes the ancestor thm-sc-theorem-of-cube place 'proof: construct the locally closed loci on which degree-zero direct images are finite locally free', via lem-sc-perfect-h0-locally-closed.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-affine-perfect-colimit-descent",
+    "why": "Affine colimit descent is a generic theorem outside the cube unit."
+   },
+   {
+    "node": "lem-weil-pbc-finite-projective-standard-free-cover",
+    "why": "Finite-projective terms become free after shrinking; this generic module lemma is outside the cube unit."
+   },
+   {
+    "node": "lem-pc-affine-perfect-hom-colimit",
+    "why": "Affine filtered-colimit Hom comparison for bounded finite projective complexes is a generic theorem outside the cube unit; it spreads the local quasi-isomorphism out to a principal open."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-affine-perfect-colimit-descent",
+  "lem-weil-pbc-finite-projective-standard-free-cover",
+  "lem-pc-affine-perfect-hom-colimit",
+  "lem-pc-affine-perfect-colimit-descent",
+  "lem-weil-pbc-finite-projective-standard-free-cover",
+  "lem-pc-affine-perfect-hom-colimit"
+ ],
+ "reviewed": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-pfr0052",
+  "group": "G1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-pfr0052 (reviewer sub-agent of L); spot-checked: Read packet whole: item vs Tag 0BCD agrees (d_i via Li_x^*E, affine U, terms O^{d_i}); new nodes vs 066W and 0BCC true, no duplicates (grep 066W/0BCC/pull-perfect/residue-model; lem-sc-affine-pseudo-coherent-lift is 08EE, different); citers jump-loci/degree-zero-fibre-criterion/cut-complex use the stated clauses (d_i=0 for i<0 gives model in degrees >=0). FIX more, RETURN less: (1) C4/C7 Step 1: lem-pod-perfect-point-complex-field is the Poincare-duality point-category lemma (finite coefficient point), not D(kappa(p)), and was not in uses; dropped as tool use, finite-dimensionality folded into Step 1 as elementary from perfectness over a field; Step 1 now picks Spec A inside the strictly perfect locus (def-pc-perfect-complex, 08EB) so E is a bounded finite projective complex P. (2) C1 Step 3: colimit-descent gives only a complex Q over A_f with Q tensor A_p = F, not that Q represents E near x; added lem-pc-affine-perfect-hom-colimit (Tag 09RE affine, generic tool) to spread the iso F=P_p and its inverse to some A_h, then free-cover with ranks d_i; Step 2 pseudo-coherence made explicit (finite projective over local = free, 00NZ). (3) B3: lem-sc-perfect-local-pseudocoherent-free-model had empty stmt_deps though citing def-pc-derived-category, def-pur-pseudo-coherent-complex; added. G1's second reading missed (1) and (2).; 2 file(s) fixed by the reviewer"
+ }
 }
