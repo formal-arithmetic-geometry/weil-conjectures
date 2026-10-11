@@ -3091,3 +3091,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 00:21 UTC L: H1 pic-restriction-boundary FIX 06530a3ec (R-prb0020).
 - 00:21 L: returned deliver/C1/lem-sc-picard-valuation-probe-specializes (reviewer RETURN: Not a fault: the node was attached by L at 23:56 UTC (commit becdd3ebc) to the sorry-free slopmaster2 declaration Algebr)
 - 00:21 UTC L: C1 delivery of the attached node lem-sc-picard-valuation-probe-specializes returned as unneeded, branch deleted with a notice.
+- 00:23 L: merged deliver/C1/lem-sc-local-dvr-base-change (reviewer FIX; first push; new nodes: 1)
