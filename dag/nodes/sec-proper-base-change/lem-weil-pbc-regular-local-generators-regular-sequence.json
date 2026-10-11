@@ -203,5 +203,29 @@
   "by": "L",
   "result": "accepted",
   "note": "6 steps following Stacks 00NQ with the parenthetical clause (minimal generating sets of m are the sets of dim R generators) proved in step 1 from 00KQ and Nakayama; x_1 nonzero by 00KQ, R a domain by lem-sc-regular-local-domain (tool use, unit sk-thm-picard-duality, imported), dimension drop by the 00KW leaf, induction via the third isomorphism theorem. No new nodes."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.RegularLocalGeneratorsRegularSequence",
+  "declaration": "IsRegularLocalRing.isRegular_and_quotients_of_generators",
+  "declarations": [
+   "IsRegularLocalRing.isRegular_and_quotients_of_generators",
+   "IsRegularLocalRing.minimal_generators_iff_card_eq_dimension"
+  ],
+  "file": "lean/Sheaf/RingTheory/RegularLocalGeneratorsRegularSequence.lean",
+  "statement": "theorem isRegular_and_quotients_of_generators (R : Type u) [CommRing R] [IsRegularLocalRing R] (d : ℕ) (hd : ringKrullDim R = (d : WithBot ℕ∞)) (rs : List R) (hrs : IsLocalRing.IsRegularSystemOfParameters rs) : RingTheory.Sequence.IsRegular R rs ∧ (∀ c : ℕ, c ≤ d → IsRegularLocalRing (R ⧸ Ideal.ofList (rs.take c)) ∧ ringKrullDim (R ⧸ Ideal.ofList (rs.take c)) = ((d - c : ℕ) : WithBot ℕ∞)) ∧ (∀ ys : List R, rs.Perm ys → IsLocalRing.IsRegularSystemOfParameters ys ∧ RingTheory.Sequence.IsRegular R ys)",
+  "branch": "sheaf-dag",
+  "by": "J1",
+  "date": "2026-10-11",
+  "existing": false,
+  "note": "The second declaration renders the parenthetical characterization of minimal generating sets; the first renders regularity, all initial quotients and all permutations.",
+  "fixed_by": "R-lgr"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-lgr",
+  "group": "J1",
+  "result": "fix",
+  "note": "R IsRegularLocalRing, d with ringKrullDim R = d, rs IsRegularSystemOfParameters (replacing inline length/mem/span, H12), IsRegular R rs, all c<=d quotients R/(rs.take c) regular local of dim d-c, permutations RSOP and regular; minimal finsets generating m iff card d"
  }
 }
