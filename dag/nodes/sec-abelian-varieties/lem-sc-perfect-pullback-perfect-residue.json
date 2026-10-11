@@ -13,13 +13,14 @@
  },
  "kind": "statement",
  "title": "Derived pullback of a perfect complex is perfect",
- "statement": "Let $A\\to B$ be a ring map and let $K$ be a perfect complex [def-pc-perfect-complex] of $A$-modules. Then $K\\otimes_A^{\\mathbf L}B$ is a perfect complex [def-pc-perfect-complex] of $B$-modules.",
+ "statement": "Let $A\\to B$ be a homomorphism of commutative rings and let $K$ be a perfect complex [def-pc-perfect-ring-complex] of $A$-modules. Then $K\\otimes_A^{\\mathbf L}B$ is a perfect complex [def-pc-perfect-ring-complex] of $B$-modules. Here derived tensor is the fixed-second-factor functor [lem-pc-derived-tensor-second-factor-functor] evaluated at the regular $B$-module in degree zero.",
  "source": {
   "document": "literature/stacks-project/more-algebra.tex",
   "place": "More on Algebra, Lemma 15.68.3, Tag 066W (lemma-pull-perfect)"
  },
  "stmt_deps": [
-  "def-pc-perfect-complex"
+  "def-pc-perfect-ring-complex",
+  "lem-pc-derived-tensor-second-factor-functor"
  ],
  "proof": [
   {
@@ -116,5 +117,44 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-ppp0109 (reviewer sub-agent of L); spot-checked: Statement vs Tag 066W; citer lem-sc-perfect-finite-free-residue-model uses it for A->kappa(p), matches. No duplicate (lem-pc-rf-perfect-base-change, lem-sc-perfect-derived-tensor-perfect etc. are different statements); Mathlib grep IsPerfect: no match (recorded). FIX more, RETURN less: (1) C4/C1 step 1: def-pc-perfect-complex only gives local strictly perfect models, not a global bounded finite projective model over A; now cites lem-pc-perfect-affine-bounded-projective (also for the converse in step 2), declared as generic tool use. (2) C1 step 1: termwise tensor computing the derived tensor was asserted elementary; now cites lem-pc-termwise-tor-acyclic-derived-tensor (generic tool; Tor vanishing for projective terms elementary). (3) source.place still said 15.68.3 despite the second reading's claim; made source and proof_origin consistent (Tag 066W).; 1 file(s) fixed by the reviewer"
  },
- "lead_note": "2026-10-11 L (R-ppp0109): No ring-level perfect definition node exists; def-pc-perfect-complex is the scheme (locally strictly perfect) form, the ring reading goes through lem-pc-perfect-affine-bounded-projective (Tag 08EB / Def 0656), as in lem-pc-ring-pseudo-coherent-finite-tor-perfect. Both new citations are generic tools of sk-thm-picard-duality (C7/C8)."
+ "lead_note": "2026-10-11 L (R-ppp0109): No ring-level perfect definition node exists; def-pc-perfect-complex is the scheme (locally strictly perfect) form, the ring reading goes through lem-pc-perfect-affine-bounded-projective (Tag 08EB / Def 0656), as in lem-pc-ring-pseudo-coherent-finite-tor-perfect. Both new citations are generic tools of sk-thm-picard-duality (C7/C8).",
+ "lean": {
+  "module": "Sheaf.CategoryTheory.DerivedCategory.PerfectScalarExtension",
+  "declaration": "DerivedCategory.IsPerfect.scalarExtension",
+  "file": "lean/Sheaf/CategoryTheory/DerivedCategory/PerfectScalarExtension.lean",
+  "statement": "theorem IsPerfect.scalarExtension {A B : Type u} [CommRing A] [CommRing B] [HasDerivedCategory.{wA} (ModuleCat.{u} A)] [HasDerivedCategory.{wB} (ModuleCat.{u} B)] (f : A →+* B) (K : DerivedCategory (ModuleCat.{u} A)) (hK : ∃ P : CochainComplex (ModuleCat.{u} A) ℤ, (∃ a b : ℤ, ∀ n : ℤ, n < a ∨ b < n → IsZero (P.X n)) ∧ (∀ n : ℤ, Module.Finite A (P.X n)) ∧ (∀ n : ℤ, Module.Projective A (P.X n)) ∧ Nonempty (Q.obj P ≅ K)) : ∃ P : CochainComplex (ModuleCat.{u} B) ℤ, (∃ a b : ℤ, ∀ n : ℤ, n < a ∨ b < n → IsZero (P.X n)) ∧ (∀ n : ℤ, Module.Finite B (P.X n)) ∧ (∀ n : ℤ, Module.Projective B (P.X n)) ∧ Nonempty (Q.obj P ≅ ((Classical.choose (exists_derivedTensor_second_factor_functor f).2).obj ((HomologicalComplex.single (ModuleCat.{u} B) (ComplexShape.up ℤ) 0).obj (ModuleCat.of B B))).obj K)",
+  "branch": "sheaf-dag",
+  "by": "Q1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-ppr"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-ppr",
+  "group": "Q1",
+  "result": "fix",
+  "statement_corrected": true
+ },
+ "statement_change": {
+  "date": "2026-10-11",
+  "by": "Q1 stage 2",
+  "old_statement": "Let $A\\to B$ be a ring map and let $K$ be a perfect complex [def-pc-perfect-complex] of $A$-modules. Then $K\\otimes_A^{\\mathbf L}B$ is a perfect complex [def-pc-perfect-complex] of $B$-modules.",
+  "what": "The cited def-pc-perfect-complex defines scheme complexes, not objects of D(A). Replace its reference by the existing ring-perfect definition, and name the shared derived tensor functor. Commutativity is the standing Stacks convention and is now explicit. No mathematical hypothesis or conclusion changes.",
+  "source": {
+   "document": "literature/stacks-project/more-algebra.tex",
+   "place": "Tag 066W, Lemma 15.76.9; ring-perfect definition Tag 0656"
+  },
+  "citers": [
+   {
+    "id": "lem-sc-perfect-finite-free-residue-model",
+    "holds": true,
+    "note": "Uses scalar extension to a residue field; the ring-perfect interpretation and derived tensor are unchanged."
+   }
+  ],
+  "old_stmt_deps": [
+   "def-pc-perfect-complex"
+  ]
+ }
 }
