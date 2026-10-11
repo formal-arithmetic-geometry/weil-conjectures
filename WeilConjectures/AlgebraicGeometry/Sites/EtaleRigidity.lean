@@ -8,6 +8,7 @@ module
 public import Mathlib.AlgebraicGeometry.Geometrically.Connected
 public import WeilConjectures.AlgebraicGeometry.Sites.EtaleVanishingLocus
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
+public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
 
 /-!
 # Rigidity of sections of pulled back étale sheaves
@@ -136,5 +137,140 @@ lemma isClosed_vanishingLocus_of_eq_comp {V : T.Etale}
   exact mem_vanishingLocus_of_map_eq_zero b h₀ w₀
 
 end SepClosed
+
+end AlgebraicGeometry.Etale
+
+namespace AlgebraicGeometry.Etale
+
+section Unit
+
+variable {R T : Scheme.{u}} (t : T ⟶ R) (G : Sheaf R.smallEtaleTopology AddCommGrpCat.{u + 1})
+
+/-- The unit `G ⟶ t_* t^* G` sends a section `g` over `W` to its pullback along the projection
+`W ×_R T ⟶ W`. -/
+lemma unit_app_hom_app_eq_pullSection (W : R.Etale) (g : G.obj.obj (op W)) :
+    ((upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} t).unit.app G).hom.app (op W) g =
+      pullSection t G (V := (MorphismProperty.Over.pullback @AlgebraicGeometry.Etale ⊤ t).obj W)
+        (pullback.fst W.hom t) pullback.condition g := by
+  have := map_unit_app_eq_pullSection t G (𝟙 _) g
+  rw [op_id, CategoryTheory.Functor.map_id, ConcreteCategory.id_apply] at this
+  refine this.trans ?_
+  apply pullSection_congr
+  simp
+
+/-- **Pullback of sections along a surjective morphism is injective.** -/
+lemma injective_unit_app_of_surjective [Surjective t] (W : R.Etale) :
+    Function.Injective
+      (((upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} t).unit.app G).hom.app (op W)) := by
+  intro g₁ g₂ hg
+  rw [← sub_eq_zero, ← map_sub, unit_app_hom_app_eq_pullSection] at hg
+  rw [← sub_eq_zero]
+  have h₁ := range_subset_vanishingLocus_of_pullSection_eq_zero t G _ _ _ hg
+  have : Surjective (pullback.fst W.hom t) :=
+    MorphismProperty.pullback_fst (P := @Surjective) _ _ ‹_›
+  exact eq_zero_of_forall_mem_vanishingLocus fun x ↦ h₁ ((pullback.fst W.hom t).surjective x)
+
+end Unit
+
+section Section
+
+variable {X T : Scheme.{u}} (q : T ⟶ X) (σ : X ⟶ T) (hσ : σ ≫ q = 𝟙 X)
+  (G : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1})
+
+set_option backward.isDefEq.respectTransparency false in
+/-- **Rigidity.** Let `q : T ⟶ X` be geometrically connected with a section `σ`. A section `s`
+of `q^* G` over the base change `V` of `X` (that is, `V ⟶ T` an isomorphism) which vanishes
+along `σ` vanishes. On the geometric fibre of `q` through a point of `V`, the vanishing locus
+of the restriction of `s` is open, closed
+(`AlgebraicGeometry.Etale.isClosed_vanishingLocus_of_eq_comp`) and contains the point coming
+from `σ`, hence is everything since the fibre is connected. -/
+lemma eq_zero_of_restrictAlong_eq_zero_of_section [GeometricallyConnected q] {V : T.Etale}
+    [IsIso V.hom] {V' : X.Etale} [IsIso V'.hom] (m : V'.left ⟶ V.left)
+    (hm : m ≫ V.hom = V'.hom ≫ σ) (s : ((q)^*[AddCommGrpCat.{u + 1}].obj G).obj.obj (op V))
+    (hs : restrictAlong q G σ (𝟙 X) hσ.symm m hm s = 0) : s = 0 := by
+  refine eq_zero_of_forall_mem_vanishingLocus fun y ↦ ?_
+  -- the geometric fibre `Z` of `q` through `y`
+  let x := q (V.hom y)
+  let xb := X.algClosurePoint x
+  let f := pullback.fst q xb
+  let g := pullback.snd q xb
+  have : ConnectedSpace ↥(pullback q xb) :=
+    GeometricallyConnected.geometrically_connectedSpace (f := q) xb f g
+      (IsPullback.of_hasPullback _ _)
+  let VZ := (MorphismProperty.Over.pullback @AlgebraicGeometry.Etale ⊤ f).obj V
+  have : IsIso VZ.hom := (inferInstance : IsIso (pullback.snd V.hom f))
+  have : ConnectedSpace VZ.left := VZ.hom.homeomorph.connectedSpace_iff.mpr ‹_›
+  have hmZ : pullback.fst V.hom f ≫ V.hom = VZ.hom ≫ f := pullback.condition
+  -- the restriction `E` of `s` to the fibre has clopen vanishing locus
+  have hcl := isClosed_vanishingLocus_of_eq_comp (f ≫ q) G g xb pullback.condition
+    (restrictAlong q G f (f ≫ q) rfl (V' := VZ) (pullback.fst V.hom f) hmZ s)
+  have hop := isOpen_vanishingLocus
+    (restrictAlong q G f (f ≫ q) rfl (V' := VZ) (pullback.fst V.hom f) hmZ s)
+  -- `E` vanishes along the section of the fibre induced by `σ`
+  let σZ : Spec (.of (AlgebraicClosure (X.residueField x))) ⟶ pullback q xb :=
+    pullback.lift (xb ≫ σ) (𝟙 _) (by rw [Category.assoc, hσ, Category.comp_id, Category.id_comp])
+  have hσZ : σZ ≫ f = xb ≫ σ := pullback.lift_fst _ _ _
+  let V'' := (MorphismProperty.Over.pullback @AlgebraicGeometry.Etale ⊤ σZ).obj VZ
+  have : IsIso V''.hom := (inferInstance : IsIso (pullback.snd VZ.hom σZ))
+  have hm'' : pullback.fst VZ.hom σZ ≫ VZ.hom = V''.hom ≫ σZ := pullback.condition
+  let n : V''.left ⟶ V'.left := V''.hom ≫ xb ≫ inv V'.hom
+  have hn : n ≫ V'.hom = V''.hom ≫ xb := by simp [n]
+  have hnm : pullback.fst VZ.hom σZ ≫ pullback.fst V.hom f = n ≫ m := by
+    rw [← cancel_mono V.hom, Category.assoc, hmZ, reassoc_of% hm'', hσZ, Category.assoc, hm]
+    simp [n]
+  have hE : restrictAlong (f ≫ q) G σZ xb (by rw [reassoc_of% hσZ, hσ, Category.comp_id])
+      (V := VZ) (V' := V'') (pullback.fst VZ.hom σZ) hm''
+        (restrictAlong q G f (f ≫ q) rfl (V' := VZ) (pullback.fst V.hom f) hmZ s) = 0 := by
+    rw [restrictAlong_restrictAlong, restrictAlong_congr_left q G xb hσZ,
+      restrictAlong_congr (h := hnm), ← restrictAlong_restrictAlong q G σ (𝟙 X) hσ.symm xb xb
+        (Category.comp_id _).symm m hm n hn, hs, map_zero]
+  have hne := range_subset_vanishingLocus_of_restrictAlong_eq_zero (f ≫ q) G σZ xb _ _ hm'' _ hE
+    ⟨inv V''.hom (default : Spec (.of (AlgebraicClosure (X.residueField x)))), rfl⟩
+  have huniv := IsClopen.eq_univ ⟨hcl, hop⟩ ⟨_, hne⟩
+  rw [← eq_zero_iff_vanishingLocus_eq_univ] at huniv
+  -- every point of `V` lies on such a fibre
+  have h₁ := range_subset_vanishingLocus_of_restrictAlong_eq_zero q G f (f ≫ q) rfl _ hmZ s huniv
+  obtain ⟨z, hz, -⟩ := Scheme.Pullback.exists_preimage_pullback (f := q) (g := xb) (V.hom y)
+    (default : Spec (.of (AlgebraicClosure (X.residueField x))))
+    (X.algClosurePoint_base x _).symm
+  obtain ⟨w, hw, -⟩ := Scheme.Pullback.exists_preimage_pullback (f := V.hom) (g := f) y z hz.symm
+  exact h₁ ⟨w, hw⟩
+
+/-- Pullback along an isomorphism `𝟙 X` is bijective on sections. -/
+lemma bijective_unit_app_id (W : X.Etale) :
+    Function.Bijective
+      (((upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} (𝟙 X)).unit.app G).hom.app (op W)) := by
+  have := isEquivalence_upperStar AddCommGrpCat.{u + 1} (𝟙 X)
+  have : IsIso ((upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} (𝟙 X)).unit.app G) :=
+    inferInstance
+  exact ConcreteCategory.bijective_of_isIso
+    (((sheafSections _ _).obj (op W)).map
+      ((upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} (𝟙 X)).unit.app G))
+
+include hσ in
+/-- **Pullback of sections along a geometrically connected morphism with a section is
+surjective** over every `W` étale over `X` whose structure morphism is an isomorphism. -/
+lemma surjective_unit_app_of_section [GeometricallyConnected q] (W : X.Etale) [IsIso W.hom] :
+    Function.Surjective
+      (((upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} q).unit.app G).hom.app (op W)) := by
+  intro s
+  obtain ⟨s₀, hs₀⟩ := (bijective_unit_app_id G W).2
+    ((unitComparison σ q (𝟙 X) hσ.symm G).hom.app (op W) s)
+  refine ⟨s₀, ?_⟩
+  rw [← sub_eq_zero]
+  have : IsIso ((MorphismProperty.Over.pullback @AlgebraicGeometry.Etale ⊤ q).obj W).hom :=
+    (inferInstance : IsIso (pullback.snd W.hom q))
+  have : IsIso ((MorphismProperty.Over.pullback @AlgebraicGeometry.Etale ⊤ (𝟙 X)).obj W).hom :=
+    (inferInstance : IsIso (pullback.snd W.hom (𝟙 X)))
+  refine eq_zero_of_restrictAlong_eq_zero_of_section q σ hσ G
+    (V := (MorphismProperty.Over.pullback @AlgebraicGeometry.Etale ⊤ q).obj W)
+    (V' := (MorphismProperty.Over.pullback @AlgebraicGeometry.Etale ⊤ (𝟙 X)).obj W)
+    (pullback.map W.hom (𝟙 X) W.hom q (𝟙 _) σ (𝟙 _) (by simp) (by simp [hσ]))
+    (pullback.lift_snd _ _ _) _ ?_
+  rw [← unitComparison_hom_app_eq, map_sub, sub_eq_zero]
+  refine Eq.trans ?_ hs₀
+  exact congrArg (fun φ ↦ φ.hom.app (op W) s₀) (unit_app_comp_unitComparison σ q (𝟙 X) hσ.symm G)
+
+end Section
 
 end AlgebraicGeometry.Etale
