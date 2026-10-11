@@ -25,7 +25,9 @@
   "document": "literature/stacks-project/algebra.tex",
   "place": "Algebra, Lemma Tag 02M3 (lemma-ass), lines 15130-15150, first two assertions (the third, about direct sums, is not stated here); tag verified in literature/stacks-project/tags/tags: 02M3,algebra-lemma-ass"
  },
- "stmt_deps": [],
+ "stmt_deps": [
+  "def-weil-pbc-annihilator-associated-primes"
+ ],
  "proof": [
   {
    "text": "First inclusion. Let $z'\\in P'$. Since $f$ is $T$-linear and injective, for $a\\in T$ we have $a f(z')=f(az')$, and $f(az')=0$ if and only if $az'=0$. Hence $\\operatorname{Ann}_T(f(z'))=\\operatorname{Ann}_T(z')$. If $\\mathfrak q=\\operatorname{Ann}_T(z')$ is prime, then $\\mathfrak q=\\operatorname{Ann}_T(f(z'))$ with $f(z')\\in P$, so $\\mathfrak q\\in\\operatorname{Ass}_T(P)$. This proves $\\operatorname{Ass}_T(P')\\subseteq\\operatorname{Ass}_T(P)$ and the parenthetical equality of annihilators.",
@@ -120,5 +122,23 @@
   "worker": "stage1",
   "summary": "Read Stacks 02M3 (algebra-lemma-ass, algebra.tex 15130-15150; tag verified in tags/tags line 3430) and its proof. Statement kept (it is the first two assertions of 02M3 for any ring with the annihilator definition 00LA-style 'definition-associated', which the statement writes inline). Proof written completely in three elementary steps following the Stacks proof: annihilators are preserved under the injective f; in the case that some s outside q puts sz into P'=ker g, Ann(sz)=q because q is prime, and its preimage z' has annihilator q; otherwise Ann(g(z))=q. No new node: every step uses only the definitions in the statement. Mathlib: associatedPrimes.subset_of_injective / subset_union_of_exact are tagged 02M3 but use the radical of the annihilator; the notions differ off Noetherian rings (counterexample recorded in mathlib_searches), so the item is not a leaf (B8). No slopmaster2 declaration (grep for the id, 02M3, associatedPrimes/IsAssociatedPrime in WeilConjectures: none). Blueprint search (associated primes exact sequence; 02M3; annihilator; associated): no blueprint node states it, same_as [].",
   "blueprint": "The steps realize, in lem-weil-pbc-normal-constant-generic (through the via chain, the 0312 node lem-weil-pbc-associated-primes-flat-base-change), the inclusions of associated primes along a short exact sequence used in 0312's first paragraph ('see Lemma 02M3', Ass_S(N/pN) ⊆ Ass_S(M⊗N): steps 1) and in the passage through the filtration of its last paragraph (steps 2-3, Ass(P) ⊆ Ass(P') ∪ Ass(P''))."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.AnnihilatorAssociatedPrimesExactSequence",
+  "declaration": "RingTheory.annihilatorAssociatedPrimes_of_shortExact",
+  "file": "lean/Sheaf/RingTheory/AnnihilatorAssociatedPrimesExactSequence.lean",
+  "statement": "theorem annihilatorAssociatedPrimes_of_shortExact {R : Type uR} [CommRing R] {M' : Type uSub} [AddCommGroup M'] [Module R M'] {M : Type uMid} [AddCommGroup M] [Module R M] {M'' : Type uQuot} [AddCommGroup M''] [Module R M''] (f : M' →ₗ[R] M) (g : M →ₗ[R] M'') (hf : Function.Injective f) (hfg : Function.Exact f g) (hg : Function.Surjective g) : (annihilatorAssociatedPrimes R M' ⊆ annihilatorAssociatedPrimes R M) ∧ (∀ z' : M', (⊥ : Submodule R M).colon {f z'} = (⊥ : Submodule R M').colon {z'}) ∧ (annihilatorAssociatedPrimes R M ⊆ annihilatorAssociatedPrimes R M' ∪ annihilatorAssociatedPrimes R M'')",
+  "branch": "sheaf-dag",
+  "by": "K1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-ape1405",
+  "group": "K1",
+  "result": "pass",
+  "note": "T commutative ring = {R} [CommRing R]; P',P,P'' arbitrary modules in independent universes; f,g linear; f injective = hf; ker g = im f = Function.Exact f g; g surjective = hg; Ass(P') ⊆ Ass(P), ∀z' Ann(f z') = Ann(z') via colon ⊥ {·}, Ass(P) ⊆ Ass(P') ∪ Ass(P''); no Noetherian; Ass = new def (prime ∧ ∃z, q = colon ⊥ {z}) = Stacks 00LA exactly; Mathlib associatedPrimes takes radical(Ann x) and differs off Noetherian rings (k[x_i]/(x_i^2)), so existing:false and the new node are right"
  }
 }

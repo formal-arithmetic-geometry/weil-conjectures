@@ -1,0 +1,107 @@
+{
+ "id": "def-weil-pbc-annihilator-associated-primes",
+ "kind": "definition",
+ "title": "Associated primes as element annihilators over an arbitrary ring",
+ "status": "split",
+ "statement": "Let $R$ be a commutative ring and $M$ an $R$-module. Define $\\operatorname{Ass}_R(M)=\\{\\mathfrak q\\subset R\\mid \\mathfrak q\\text{ is a prime ideal and }\\exists z\\in M,\\ \\mathfrak q=\\{a\\in R\\mid az=0\\}\\}$. No Noetherian hypothesis is imposed.",
+ "stmt_deps": [],
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Definition 00LA (definition-associated), lines 15107-15115"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "IsAssociatedPrime|associatedPrimes|annihilatorAssociatedPrimes",
+   "results": "25 hits; top: Mathlib/RingTheory/Lasker.lean, Mathlib/RingTheory/Lasker.lean, Mathlib/RingTheory/Lasker.lean, Mathlib/RingTheory/Lasker.lean, Mathlib/RingTheory/Lasker.lean, Mathlib/RingTheory/Ideal/AssociatedPrime/Localization.lean, Mathlib/RingTheory/Ideal/AssociatedPrime/Localization.lean, Mathlib/RingTheory/Ideal/AssociatedPrime/Localization.lean. Mathlib definitions use radicals. Direct rg of WeilConjectures and lean/Sheaf found no annihilator-associated set; DAG definition search found only the distinct weakly-associated notion.",
+   "date": "2026-10-11",
+   "verdict": "no match: radical association differs over arbitrary rings"
+  },
+  {
+   "tool": "leansearch",
+   "query": "prime ideals equal to annihilator of an element of a module over an arbitrary commutative ring",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Associated primes defined as annihilators of elements, short exact sequence of modules without Noetherian assumption",
+   "results": "8 hits; top: associatedPrimes.subset_union_of_exact, exists_le_isAssociatedPrime_of_isNoetherianRing, Module.associatedPrimes.minimalPrimes_annihilator_subset_associatedPrimes, associatedPrimes.finite, associatedPrimes, isAssociatedPrime_iff_exists_injective_linearMap, associatedPrimes.nonempty, AssociatePrimes.mem_iff.",
+   "date": "2026-10-11",
+   "verdict": "no match: radical association differs over arbitrary rings"
+  },
+  {
+   "tool": "loogle",
+   "query": "associatedPrimes, Function.Exact",
+   "results": "1 hits; top: associatedPrimes.subset_union_of_exact.",
+   "date": "2026-10-11",
+   "verdict": "no match: radical association differs over arbitrary rings"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-associated-primes-exact-sequence",
+  "date": "2026-10-11",
+  "group": "K1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-normal-constant-generic",
+   "place": "The element-annihilator meaning of Ass in the exact-sequence inclusions of 02M3, used through 0312 in step 4 of lem-weil-pbc-normal-constant-generic.",
+   "via": [
+    "lem-weil-pbc-associated-primes-exact-sequence",
+    "lem-weil-pbc-associated-primes-flat-base-change",
+    "lem-weil-pbc-analytic-unramified-principal-criterion",
+    "lem-weil-pbc-normal-nagata-monogenic-n1",
+    "lem-weil-pbc-nagata-universally-japanese",
+    "lem-weil-pbc-finite-type-z-domain-normalization-finite",
+    "lem-weil-pbc-smooth-over-normal-ring-normal",
+    "lem-weil-pbc-etale-over-normal-ring-normal",
+    "lem-weil-pbc-etale-colimit-normal-local-domain"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "module": "Sheaf.RingTheory.AnnihilatorAssociatedPrimes",
+  "declaration": "RingTheory.annihilatorAssociatedPrimes",
+  "file": "lean/Sheaf/RingTheory/AnnihilatorAssociatedPrimes.lean",
+  "statement": "def annihilatorAssociatedPrimes (R : Type u) [CommRing R] (M : Type v) [AddCommGroup M] [Module R M] : Set (Ideal R)",
+  "branch": "sheaf-dag",
+  "by": "K1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-ape1405",
+  "group": "K1",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-ape1405",
+  "group": "K1",
+  "result": "pass",
+  "note": "T commutative ring = {R} [CommRing R]; P',P,P'' arbitrary modules in independent universes; f,g linear; f injective = hf; ker g = im f = Function.Exact f g; g surjective = hg; Ass(P') ⊆ Ass(P), ∀z' Ann(f z') = Ann(z') via colon ⊥ {·}, Ass(P) ⊆ Ass(P') ∪ Ass(P''); no Noetherian; Ass = new def (prime ∧ ∃z, q = colon ⊥ {z}) = Stacks 00LA exactly; Mathlib associatedPrimes takes radical(Ann x) and differs off Noetherian rings (k[x_i]/(x_i^2)), so existing:false and the new node are right"
+ }
+}
