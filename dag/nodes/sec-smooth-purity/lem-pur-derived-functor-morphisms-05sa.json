@@ -133,5 +133,23 @@
   "group": "E1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-dfm0157 (reviewer sub-agent of L); spot-checked: Statement matches Stacks 05SA(2) (unique LF(f) w.r.t. the square compatibility; C4 ok). Step1 bridge gives limit cone with projections u_s; Step2 precomposition phi∘Q(f) well typed; Step4 uniqueness via Hom-colimit surjectivity + RMS2 (=MS2 second clause, in Situation 05S8 S is RMS) + cone naturality along g, valid (limit formulation replaces Stacks' MS3 independence). Citer 05sb uses existence+uniqueness exactly. No duplicate. FIX more, RETURN less: Step 3 said the image of (Y',Q(s')^{-1}) is 'represented by (X',Q(f')Q(s)^{-1})' (wrong first component); rewrote it as (Y',Q(s')^{-1}Q(f)) with f' a morphism from (X',Q(s)^{-1}) and cone naturality giving u_{s'}LF(f)=F(f')u_s.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.LeftDerivedValueMorphism",
+  "declaration": "CategoryTheory.Functor.leftDerived_value_morphism",
+  "file": "lean/Sheaf/CategoryTheory/LeftDerivedValueMorphism.lean",
+  "statement": "theorem leftDerived_value_morphism {C : Type u} {D : Type uD} [Category.{v} C] [Category.{vD} D] [HasZeroObject C] [HasShift C ℤ] [Preadditive C] [∀ n : ℤ, (shiftFunctor C n).Additive] [Pretriangulated C] [CategoryTheory.IsTriangulated C] [HasZeroObject D] [HasShift D ℤ] [Preadditive D] [∀ n : ℤ, (shiftFunctor D n).Additive] [Pretriangulated D] [CategoryTheory.IsTriangulated D] (F : C ⥤ D) [F.CommShift ℤ] [F.IsTriangulated] (S : MorphismProperty C) (hS : S.IsSaturatedTriangulatedMultiplicativeSystem) {X Y : C} (f : X ⟶ Y) (LX LY : D) (hX : F.IsTriangulatedLeftDerivedValue S hS X LX) (hY : F.IsTriangulatedLeftDerivedValue S hS Y LY) (uX : (Functor.const (S.Over ⊤ X)).obj LX ⟶ MorphismProperty.Over.forget S ⊤ X ⋙ Over.forget X ⋙ F) (uY : (Functor.const (S.Over ⊤ Y)).obj LY ⟶ MorphismProperty.Over.forget S ⊤ Y ⋙ Over.forget Y ⋙ F) (huX : ∃ s₀ : S.Over ⊤ X, ∃ r : F.obj s₀.left ⟶ LX, uX.app s₀ ≫ r = 𝟙 LX ∧ ∀ s : S.Over ⊤ X, ∃ t : S.Over ⊤ X, ∃ a : t ⟶ s₀, ∃ b : t ⟶ s, F.map b.left = F.map a.left ≫ r ≫ uX.app s) (huY : ∃ s₀ : S.Over ⊤ Y, ∃ r : F.obj s₀.left ⟶ LY, uY.app s₀ ≫ r = 𝟙 LY ∧ ∀ s : S.Over ⊤ Y, ∃ t : S.Over ⊤ Y, ∃ a : t ⟶ s₀, ∃ b : t ⟶ s, F.map b.left = F.map a.left ≫ r ≫ uY.app s) : ∃! lf : LX ⟶ LY, ∀ (s : S.Over ⊤ X) (s' : S.Over ⊤ Y) (f' : s.left ⟶ s'.left), s.hom ≫ f = f' ≫ s'.hom → uX.app s ≫ F.map f' = lf ≫ uY.app s' ∧ (uX.app s ≫ F.map s.hom) ≫ F.map f = lf ≫ uY.app s' ≫ F.map s'.hom",
+  "branch": "sheaf-dag",
+  "by": "J1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "J1",
+  "result": "pass",
+  "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
  }
 }
