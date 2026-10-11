@@ -1826,12 +1826,18 @@ theorem nonempty_representableBy_picardFunctorDegree_of_isPullback {K : Type u} 
       (t : T.left) : picardDegree f (β.hom.app _ s) t = 0 := by
     obtain ⟨Z, g, ⟨a, ha⟩, -, -, z, rfl⟩ := exists_flat_mem_of_mem_fppfTopology_over
       (Presheaf.imageSieve_mem J' (toSheafify J' S.toFunctor) s) t
-    rw [← picardDegree_map, ← NatTrans.naturality_apply β.hom, ← ha, hβS,
-      picardDegree_toPicardFunctor]
+    rw [← picardDegree_map, ← NatTrans.naturality_apply β.hom]
+    erw [← ha]
+    rw [hβS, picardDegree_toPicardFunctor]
     exact (mem_picardSubfunctorDegree_iff f 0 a.1).1 a.2 z
   -- `Pic^0_{C/k}` satisfies the sheaf condition for `T ×_k K ⟶ T`
   have hF (T : Over (Spec (.of k))) : Presieve.IsSheafFor (picardFunctorDegree f 0).obj
       (.singleton (Over.baseChangeπ p T)) := by
+    have : Flat (Over.baseChangeπ p T).left := inferInstanceAs (Flat (pullback.fst _ _))
+    have : Surjective (Over.baseChangeπ p T).left :=
+      inferInstanceAs (Surjective (pullback.fst _ _))
+    have : QuasiCompact (Over.baseChangeπ p T).left :=
+      inferInstanceAs (QuasiCompact (pullback.fst _ _))
     refine Presieve.isSheafFor_singleton_of_injective β.hom hβ
       (isSheafFor_singleton_picardFunctor _) fun s ⟨x, hx⟩ ↦ ?_
     refine Presieve.mem_range_of_imageSieve_mem J'
@@ -1846,7 +1852,13 @@ theorem nonempty_representableBy_picardFunctorDegree_of_isPullback {K : Type u} 
       exact hdeg x t'
     exact ⟨(toSheafify J' S.toFunctor).app _ ⟨M, hMS⟩, by rw [hβS, hM]⟩
   obtain ⟨e, -⟩ := Functor.RepresentableBy.exists_representableBy_of_isPullback hq hinv hF
-    fun T ↦ isSheafFor_singleton_yoneda J (Over.baseChangeπ p T)
+    fun T ↦
+      have : Flat (Over.baseChangeπ p T).left := inferInstanceAs (Flat (pullback.fst _ _))
+      have : Surjective (Over.baseChangeπ p T).left :=
+        inferInstanceAs (Surjective (pullback.fst _ _))
+      have : QuasiCompact (Over.baseChangeπ p T).left :=
+        inferInstanceAs (QuasiCompact (pullback.fst _ _))
+      isSheafFor_singleton_yoneda J (Over.baseChangeπ p T)
   exact ⟨e⟩
 
 /-- **The geometric points of `Pic^0_{C₀/k₀}`.** Let `C₀` be a smooth projective geometrically

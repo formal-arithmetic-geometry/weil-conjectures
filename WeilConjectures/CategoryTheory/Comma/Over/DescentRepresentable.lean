@@ -310,6 +310,63 @@ theorem exists_representableBy_of_isPullback (hq : IsPullback q V.hom J.hom p)
 
 end Descent
 
+section OverMapComp
+
+variable {C : Type u} [Category.{v} C] {X Y Z : C} {p : X ⟶ Y} {p' : Y ⟶ Z} {p'' : X ⟶ Z}
+  {G : (Over Z)ᵒᵖ ⥤ Type w} {V : Over X}
+
+/-- The identity of `T`, from `(T, (T.hom ≫ p) ≫ p')` to `(T, T.hom ≫ p'')`. -/
+abbrev overMapCompHom (hp : p ≫ p' = p'') (T : Over X) :
+    (Over.map p').obj ((Over.map p).obj T) ⟶ (Over.map p'').obj T :=
+  Over.homMk (𝟙 T.left) (by simp [← hp])
+
+/-- The identity of `T`, from `(T, T.hom ≫ p'')` to `(T, (T.hom ≫ p) ≫ p')`. -/
+abbrev overMapCompInv (hp : p ≫ p' = p'') (T : Over X) :
+    (Over.map p'').obj T ⟶ (Over.map p').obj ((Over.map p).obj T) :=
+  Over.homMk (𝟙 T.left) (by simp [← hp])
+
+/-- A representing object of the restriction of `G` along `p'' = p ≫ p'` also represents the
+restriction in two steps, along `p'` and then along `p`. -/
+noncomputable def overMapComp (r : ((Over.map p'').op ⋙ G).RepresentableBy V) (hp : p ≫ p' = p'') :
+    ((Over.map p).op ⋙ (Over.map p').op ⋙ G).RepresentableBy V where
+  homEquiv {T} :=
+    { toFun a := G.map (overMapCompHom hp T).op (r.homEquiv a)
+      invFun x := r.homEquiv.symm (G.map (overMapCompInv hp T).op x)
+      left_inv a := by
+        dsimp only
+        rw [← Functor.map_comp_apply, ← op_comp]
+        rw [show overMapCompInv hp T ≫ overMapCompHom hp T = 𝟙 _ by ext; simp, op_id,
+          Functor.map_id_apply, Equiv.symm_apply_apply]
+      right_inv x := by
+        dsimp only
+        rw [Equiv.apply_symm_apply, ← Functor.map_comp_apply, ← op_comp]
+        rw [show overMapCompHom hp T ≫ overMapCompInv hp T = 𝟙 _ by ext; simp, op_id,
+          Functor.map_id_apply] }
+  homEquiv_comp {T T'} g b := by
+    simp only [Equiv.coe_fn_mk]
+    rw [r.homEquiv_comp]
+    erw [← Functor.map_comp_apply G, ← Functor.map_comp_apply G]
+    exact congrArg (fun φ ↦ G.map φ _) (Quiver.Hom.unop_inj (by ext; simp))
+
+lemma overMapComp_homEquiv (r : ((Over.map p'').op ⋙ G).RepresentableBy V) (hp : p ≫ p' = p'')
+    {T : Over X} (a : T ⟶ V) :
+    (r.overMapComp hp).homEquiv a = G.map (overMapCompHom hp T).op (r.homEquiv a) :=
+  rfl
+
+/-- The canonical transport of `overMapComp` is the canonical transport of the original
+representation. -/
+lemma overTransport_overMapComp (r : ((Over.map p'').op ⋙ G).RepresentableBy V)
+    (hp : p ≫ p' = p'') {T : C} (f₁ f₂ : T ⟶ X) (h : f₁ ≫ p = f₂ ≫ p) (a : Over.mk f₁ ⟶ V) :
+    (r.overMapComp hp).overTransport f₁ f₂ h a =
+      r.overTransport f₁ f₂ (by rw [← hp, reassoc_of% h]) a := by
+  apply (r.overMapComp hp).homEquiv.injective
+  rw [homEquiv_overTransport, overMapComp_homEquiv, overMapComp_homEquiv]
+  erw [homEquiv_overTransport]
+  erw [← Functor.map_comp_apply G, ← Functor.map_comp_apply G]
+  exact congrArg (fun φ ↦ G.map φ _) (Quiver.Hom.unop_inj (by ext; simp))
+
+end OverMapComp
+
 end Functor.RepresentableBy
 
 end CategoryTheory

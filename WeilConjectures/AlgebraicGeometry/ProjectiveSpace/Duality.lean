@@ -159,10 +159,10 @@ namespace ProjectiveLine
 variable (k : Type u) [Field k]
 
 /-- **Resolutions by twists on `ℙ¹_k`.** Every coherent `𝒪_{ℙ¹_k}`-module `𝒢` has a resolution
-`0 → ℰ₂ → ℰ₁ → ℰ₀ → 𝒢 → 0` in which each `ℰᵢ` is a finite direct sum of twists `𝒪(d)`. Indeed
-`𝒢 = M^~` for a finitely generated graded module `M` over `k[x₀, x₁]`, which has a graded free
-resolution of length two by the graded Hilbert syzygy theorem; sheafifying it gives the
-resolution, since `S(d)^~ = 𝒪(d)`.
+`0 → ℰ₂ → ℰ₁ → ℰ₀ → 𝒢 → 0` in which each `ℰᵢ` is a finite direct sum of twists `𝒪(d)`. In
+fact `ℰ₂ = 0` can be taken: `exists_shortExact_sigma_twist` gives a resolution
+`0 → 𝒪(-N - 1)^a → 𝒪(-N)^b → 𝒢 → 0` by Castelnuovo–Mumford regularity, replacing the graded
+Hilbert syzygy theorem of the blueprint.
 
 (blueprint: `lem-sc-p1-graded-resolution`) -/
 theorem exists_exact_sigma_twist (𝒢 : (ProjectiveLine (Spec (.of k))).Modules)

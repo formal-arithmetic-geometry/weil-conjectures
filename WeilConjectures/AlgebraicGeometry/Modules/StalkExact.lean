@@ -47,12 +47,15 @@ instance : (toAb X).Faithful :=
   inferInstanceAs (SheafOfModules.toSheaf.{u} X.ringCatSheaf).Faithful
 
 instance (x : X) : (stalkFunctor x).Additive := by
+  have : (TopCat.Sheaf.forget Ab.{u} X).Additive := inferInstance
+  have : (TopCat.Presheaf.stalkFunctor Ab.{u} x).Additive := inferInstance
   dsimp only [stalkFunctor]
   infer_instance
 
 instance (x : X) : PreservesFiniteLimits (stalkFunctor x) := by
-  dsimp only [stalkFunctor]
-  exact comp_preservesFiniteLimits _ _
+  have : PreservesFiniteLimits (TopCat.Sheaf.forget Ab.{u} X ⋙
+      TopCat.Presheaf.stalkFunctor Ab.{u} x) := inferInstance
+  exact comp_preservesFiniteLimits (toAb X) _
 
 instance (x : X) : PreservesFiniteColimits (stalkFunctor x) := by
   dsimp only [stalkFunctor]

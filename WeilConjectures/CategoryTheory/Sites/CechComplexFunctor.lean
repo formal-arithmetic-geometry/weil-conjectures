@@ -32,28 +32,7 @@ universe w v u
 
 namespace CategoryTheory
 
-open Limits Opposite
-
-namespace AlgebraicTopology
-
-variable {A B : Type*} [Category* A] [Category* B] [Preadditive A] [Preadditive B]
-  (G : A ⥤ B) [G.Additive]
-
-/-- An additive functor commutes with the alternating coface map complex. -/
-noncomputable def mapAlternatingCofaceMapComplexIso (Y : CosimplicialObject A) :
-    (G.mapHomologicalComplex _).obj ((alternatingCofaceMapComplex A).obj Y) ≅
-      (alternatingCofaceMapComplex B).obj (Y ⋙ G) :=
-  HomologicalComplex.Hom.isoOfComponents (fun _ ↦ Iso.refl _) (by
-    rintro i j (rfl : i + 1 = j)
-    simp [AlternatingCofaceMapComplex.obj, AlternatingCofaceMapComplex.objD,
-      CosimplicialObject.δ])
-
-@[simp]
-lemma mapAlternatingCofaceMapComplexIso_hom_f (Y : CosimplicialObject A) (n : ℕ) :
-    (mapAlternatingCofaceMapComplexIso G Y).hom.f n = 𝟙 _ :=
-  rfl
-
-end AlgebraicTopology
+open Limits Opposite Simplicial
 
 namespace Limits.FormalCoproduct
 
@@ -65,9 +44,11 @@ variable {C : Type u} [Category.{v} C] {A B : Type*} [Category* A] [Category* B]
 coproducts. -/
 noncomputable def evalOpCompIso (P : Cᵒᵖ ⥤ A) :
     (evalOp.{w} C A).obj P ⋙ G ≅ (evalOp.{w} C B).obj (P ⋙ G) :=
-  NatIso.ofComponents (fun X ↦ asIso (piComparison G _)) (fun f ↦ by
+  NatIso.ofComponents (fun X ↦ asIso (piComparison G _)) (fun {X Y} f ↦ by
     refine Pi.hom_ext _ _ fun i ↦ ?_
-    simp [← G.map_comp])
+    simp only [Functor.comp_obj, Functor.comp_map, asIso_hom, Category.assoc,
+      piComparison_comp_π, ← G.map_comp, evalOp_obj_map, Pi.lift_π, Functor.comp_map]
+    rw [G.map_comp, ← Category.assoc, piComparison_comp_π])
 
 @[simp]
 lemma evalOpCompIso_hom_app (P : Cᵒᵖ ⥤ A) (X : (FormalCoproduct.{w} C)ᵒᵖ) :
@@ -82,6 +63,15 @@ variable {C : Type u} [Category.{v} C] [HasFiniteProducts C] {ι : Type w} (U : 
 
 section
 
+/-- The differential of the Čech complex is the alternating sum of the coface maps. -/
+lemma cechComplexFunctor_obj_d (P : Cᵒᵖ ⥤ A) (n : ℕ) :
+    ((cechComplexFunctor U).obj P).d n (n + 1) =
+      ∑ i : Fin (n + 2), (-1 : ℤ) ^ (i : ℕ) •
+        ((FormalCoproduct.cosimplicialObjectFunctor (FormalCoproduct.mk _ U).cech).obj P).δ i :=
+  CochainComplex.of_d (fun m ↦ ((FormalCoproduct.cosimplicialObjectFunctor
+    (FormalCoproduct.mk _ U).cech).obj P).obj ⦋m⦌)
+    (AlgebraicTopology.AlternatingCofaceMapComplex.objD _) n
+
 variable (G : A ⥤ B) [G.Additive] [∀ J : Type w, PreservesLimitsOfShape (Discrete J) G]
 
 /-- An additive functor `G` preserving products commutes with the Čech complex functor:
@@ -89,14 +79,21 @@ variable (G : A ⥤ B) [G.Additive] [∀ J : Type w, PreservesLimitsOfShape (Dis
 noncomputable def cechComplexFunctorMapIso (P : Cᵒᵖ ⥤ A) :
     (G.mapHomologicalComplex _).obj ((cechComplexFunctor U).obj P) ≅
       (cechComplexFunctor U).obj (P ⋙ G) :=
-  AlgebraicTopology.mapAlternatingCofaceMapComplexIso G _ ≪≫
-    (AlgebraicTopology.alternatingCofaceMapComplex B).mapIso
-      (Functor.isoWhiskerLeft (FormalCoproduct.mk _ U).cech.rightOp
-        (FormalCoproduct.evalOpCompIso G P))
+  HomologicalComplex.Hom.isoOfComponents
+    (fun n ↦ asIso (piComparison G
+      (fun i ↦ P.obj (op (((FormalCoproduct.mk _ U).cech.obj (op ⦋n⦌)).obj i))))) (by
+      rintro i j (rfl : i + 1 = j)
+      rw [Functor.mapHomologicalComplex_obj_d, cechComplexFunctor_obj_d,
+        cechComplexFunctor_obj_d, Functor.map_sum, Preadditive.sum_comp, Preadditive.comp_sum]
+      refine Finset.sum_congr rfl fun k _ ↦ ?_
+      rw [Functor.map_zsmul, Preadditive.zsmul_comp, Preadditive.comp_zsmul]
+      congr 1
+      exact ((FormalCoproduct.evalOpCompIso G P).hom.naturality _).symm)
 
+@[simp]
 lemma cechComplexFunctorMapIso_hom_f (P : Cᵒᵖ ⥤ A) (n : ℕ) :
-    (cechComplexFunctorMapIso U G P).hom.f n = piComparison G _ := by
-  simp [cechComplexFunctorMapIso]
+    (cechComplexFunctorMapIso U G P).hom.f n = piComparison G _ :=
+  rfl
 
 end
 
@@ -113,21 +110,47 @@ lemma cechAugmentation_π (P : Cᵒᵖ ⥤ A) (i) :
     cechAugmentation U hT P ≫ Pi.π _ i = P.map (hT.from _).op :=
   Pi.lift_π _ _
 
+lemma cechAugmentation_δ (P : Cᵒᵖ ⥤ A) (i : Fin 2) :
+    cechAugmentation U hT P ≫
+      ((FormalCoproduct.cosimplicialObjectFunctor (FormalCoproduct.mk _ U).cech).obj P).δ i =
+      Pi.lift fun _ ↦ P.map (hT.from _).op := by
+  refine Pi.hom_ext _ _ fun j ↦ ?_
+  rw [Category.assoc, Pi.lift_π]
+  erw [Pi.lift_π]
+  rw [← Category.assoc, cechAugmentation_π, ← P.map_comp, ← op_comp]
+  congr 2
+  exact hT.hom_ext _ _
+
 @[reassoc (attr := simp)]
 lemma cechAugmentation_d (P : Cᵒᵖ ⥤ A) :
     cechAugmentation U hT P ≫ ((cechComplexFunctor U).obj P).d 0 1 = 0 := by
-  sorry
+  rw [cechComplexFunctor_obj_d U P 0, Fin.sum_univ_two, Preadditive.comp_add,
+    Preadditive.comp_zsmul, Preadditive.comp_zsmul, cechAugmentation_δ, cechAugmentation_δ]
+  simp
+
+lemma cechComplexFunctor_map_f {P Q : Cᵒᵖ ⥤ A} (φ : P ⟶ Q) (n : ℕ) :
+    ((cechComplexFunctor U).map φ).f n =
+      Limits.Pi.map (fun i ↦ φ.app (op (((FormalCoproduct.mk _ U).cech.obj (op ⦋n⦌)).obj i))) :=
+  rfl
 
 @[reassoc]
 lemma cechAugmentation_naturality {P Q : Cᵒᵖ ⥤ A} (φ : P ⟶ Q) :
     cechAugmentation U hT P ≫ ((cechComplexFunctor U).map φ).f 0 =
       φ.app _ ≫ cechAugmentation U hT Q := by
-  sorry
+  refine Pi.hom_ext _ _ fun j ↦ ?_
+  rw [Category.assoc, cechComplexFunctor_map_f]
+  erw [Pi.map_π, Pi.lift_π_assoc, Category.assoc, Pi.lift_π]
+  exact φ.naturality _
 
 lemma map_cechAugmentation_comp (G : A ⥤ B) [G.Additive]
     [∀ J : Type w, PreservesLimitsOfShape (Discrete J) G] (P : Cᵒᵖ ⥤ A) :
     G.map (cechAugmentation U hT P) ≫ (cechComplexFunctorMapIso U G P).hom.f 0 =
       cechAugmentation U hT (P ⋙ G) := by
-  sorry
+  refine Pi.hom_ext _ _ fun j ↦ ?_
+  rw [Category.assoc, cechComplexFunctorMapIso_hom_f]
+  erw [piComparison_comp_π, Pi.lift_π]
+  rw [← G.map_comp]
+  erw [Pi.lift_π]
+  rfl
 
 end CategoryTheory

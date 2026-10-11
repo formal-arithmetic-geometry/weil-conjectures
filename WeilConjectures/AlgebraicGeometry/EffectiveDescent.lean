@@ -13,7 +13,10 @@ public import Mathlib.AlgebraicGeometry.Sites.Fpqc
 public import Mathlib.CategoryTheory.Monoidal.Cartesian.CommGrp_
 public import Mathlib.CategoryTheory.Monoidal.Cartesian.Over
 public import Mathlib.CategoryTheory.Sites.Over
+public import WeilConjectures.AlgebraicGeometry.EffectiveDescent.AffineLocal
+public import WeilConjectures.AlgebraicGeometry.EffectiveDescent.Gluing
 public import WeilConjectures.AlgebraicGeometry.EffectiveDescent.Group
+public import WeilConjectures.AlgebraicGeometry.EffectiveDescent.Neighbourhood
 public import WeilConjectures.AlgebraicGeometry.FieldExtensionDescent
 
 /-!
@@ -63,8 +66,10 @@ one needed there, which only asks it of the finite sets of points lying over one
 theorem isEffective_of_isFinite [IsFinite p] [Flat p] [LocallyOfFinitePresentation p]
     [Surjective p] {V : Over X}
     (hV : ∀ s : Set V.left, s.Finite → ∃ U : V.left.Opens, IsAffineOpen U ∧ s ⊆ U)
-    (D : Over.DescentDatum p V) : D.IsEffective :=
-  sorry
+    (D : Over.DescentDatum p V) : D.IsEffective := by
+  refine isEffective_of_forall_exists_mem fun v ↦ ?_
+  obtain ⟨U, hv, hU, hUa, W, hW, hUW⟩ := D.exists_isInvariant_isAffineOpen hV v
+  exact ⟨U, hU, hv, D.isEffective_restrict_of_isAffineOpen hU hUa hW hUW⟩
 
 /-- **Morphisms descend.** Let `p : X ⟶ Y` be faithfully flat and quasi-compact, and let `V`, `W`
 be schemes over `X` with descent data `D`, `E` that are effective, with descended schemes `V₀`,

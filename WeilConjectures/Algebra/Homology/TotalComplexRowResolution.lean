@@ -115,7 +115,7 @@ lemma ιTotal_d_totalπ (p' q' n : ℕ) (h : p' + q' = n) (p q : ℕ) :
         (K.XXIsoOfEq _ _ _ h.1 h.2).hom else 0) +
       (ComplexShape.up ℕ).ε p' • ((K.X p').d q' (q' + 1) ≫ (if h : p' = p ∧ q' + 1 = q then
         (K.XXIsoOfEq _ _ _ h.1 h.2).hom else 0)) := by
-  simp only [total_d, comp_add, add_comp, ι_D₁_assoc, ι_D₂_assoc, Category.assoc]
+  simp only [total_d, comp_add, add_comp, ι_D₁_assoc, ι_D₂_assoc]
   rw [K.d₁_eq _ (show (ComplexShape.up ℕ).Rel p' (p' + 1) from rfl) q' (n + 1)
       (by rw [π_up_nat]; omega),
     K.d₂_eq _ p' (show (ComplexShape.up ℕ).Rel q' (q' + 1) from rfl) (n + 1)
@@ -131,7 +131,8 @@ lemma d_totalπ_succ_succ (n p q : ℕ) :
   rw [π_up_nat] at h'
   rw [ιTotal_d_totalπ _ _ _ _ h', comp_add, ιTotal_totalπ_assoc, Linear.comp_units_smul,
     ιTotal_totalπ_assoc]
-  split_ifs <;> first | omega | (simp; done) | (exfalso; tauto) | (obtain ⟨rfl, rfl⟩ := ‹p' = _ ∧ q' = _›; simp)
+  split_ifs <;> first | omega | (simp; done) | (exfalso; tauto) |
+    (obtain ⟨rfl, rfl⟩ := ‹p' = _ ∧ q' = _›; simp)
 
 lemma d_totalπ_succ_zero (n p : ℕ) :
     (K.total (ComplexShape.up ℕ)).d n (n + 1) ≫ K.totalπ (n + 1) (p + 1) 0 =
@@ -139,7 +140,8 @@ lemma d_totalπ_succ_zero (n p : ℕ) :
   ext p' q' h'
   rw [π_up_nat] at h'
   rw [ιTotal_d_totalπ _ _ _ _ h', ιTotal_totalπ_assoc]
-  split_ifs <;> first | omega | (simp; done) | (exfalso; tauto) | (obtain ⟨rfl, rfl⟩ := ‹p' = _ ∧ q' = _›; simp)
+  split_ifs <;> first | omega | (simp; done) | (exfalso; tauto) |
+    (obtain ⟨rfl, rfl⟩ := ‹p' = _ ∧ q' = _›; simp)
 
 lemma d_totalπ_zero_succ (n q : ℕ) :
     (K.total (ComplexShape.up ℕ)).d n (n + 1) ≫ K.totalπ (n + 1) 0 (q + 1) =
@@ -147,7 +149,8 @@ lemma d_totalπ_zero_succ (n q : ℕ) :
   ext p' q' h'
   rw [π_up_nat] at h'
   rw [ιTotal_d_totalπ _ _ _ _ h', ιTotal_totalπ_assoc]
-  split_ifs <;> first | omega | (simp; done) | (exfalso; tauto) | (obtain ⟨rfl, rfl⟩ := ‹p' = _ ∧ q' = _›; simp)
+  split_ifs <;> first | omega | (simp; done) | (exfalso; tauto) |
+    (obtain ⟨rfl, rfl⟩ := ‹p' = _ ∧ q' = _›; simp)
 
 lemma d_totalπ_zero_zero (n : ℕ) :
     (K.total (ComplexShape.up ℕ)).d n (n + 1) ≫ K.totalπ (n + 1) 0 0 = 0 := by
@@ -191,8 +194,8 @@ lemma comp_d_totalπ_succ {A : C} {n : ℕ} (x : A ⟶ (K.total (ComplexShape.up
       (x ≫ K.totalπ n p q) ≫ (K.d p (p + 1)).f q := by
   obtain _ | q := q
   · rw [d_totalπ_succ_zero, Category.assoc]
-  · rw [d_totalπ_succ_succ, comp_add, Linear.comp_units_smul, ← Category.assoc x, hx, zero_comp,
-      smul_zero, add_zero, Category.assoc]
+  · rw [d_totalπ_succ_succ, comp_add, Linear.comp_units_smul]
+    simp only [← Category.assoc, hx, zero_comp, smul_zero, add_zero]
 
 lemma comp_d_totalπ_zero {A : C} {n : ℕ} (x : A ⟶ (K.total (ComplexShape.up ℕ)).X n) :
     x ≫ (K.total (ComplexShape.up ℕ)).d n (n + 1) ≫ K.totalπ (n + 1) 0 (n + 1) =
@@ -218,12 +221,12 @@ lemma exists_vanishesFrom_step {A : C} {m k : ℕ} (hk : k ≤ m)
   dsimp at z hz
   refine ⟨A', π, hπ, z ≫ K.ιTotal (ComplexShape.up ℕ) k (m - k) m
     (by rw [π_up_nat]; omega), fun p q hp ↦ ?_⟩
-  rw [sub_comp, Category.assoc, Category.assoc, Category.assoc, ιTotal_d_totalπ, comp_add,
-    comp_add, Linear.comp_units_smul, dif_neg (by omega), comp_zero, comp_zero, smul_zero,
-    add_zero]
+  rw [sub_comp, Category.assoc, Category.assoc, Category.assoc, ιTotal_d_totalπ,
+    dif_neg (show ¬ (k = p ∧ m - k + 1 = q) by omega)]
+  simp only [comp_zero, smul_zero, add_zero]
   by_cases hp' : p = k + 1 ∧ m - k = q
   · obtain ⟨rfl, rfl⟩ := hp'
-    rw [dif_pos ⟨rfl, rfl⟩, ← Category.assoc π, hz]
+    rw [dif_pos ⟨rfl, rfl⟩, hz]
     simp
   · rw [dif_neg (fun h ↦ hp' ⟨h.1.symm, h.2⟩), comp_zero, comp_zero, sub_zero]
     by_cases hp'' : p = k + 1
@@ -283,8 +286,7 @@ noncomputable def toTotalOfAugmentation (hε : ε ≫ K.d 0 1 = 0) :
       rw [← HomologicalComplex.comp_f, hε, HomologicalComplex.zero_f]
     refine K.total_hom_ext_π fun p q hpq ↦ ?_
     simp only [Category.assoc, ιTotal_d_totalπ, ιTotal_totalπ, comp_add, Linear.comp_units_smul]
-    split_ifs <;> first | omega | (exfalso; tauto) | (simp [reassoc_of% h0]; done) |
-      (obtain ⟨rfl, rfl⟩ := ‹_ = p ∧ _ = q›; simp [HomologicalComplex.Hom.comm_assoc])
+    split_ifs <;> first | omega | (exfalso; tauto) | simp [reassoc_of% h0]
 
 @[reassoc (attr := simp)]
 lemma toTotalOfAugmentation_f_totalπ_zero (n : ℕ) :
@@ -321,33 +323,37 @@ include h₀ h₁ hrow in
 quadrant double complex `K` augmented by `ε : L ⟶ K.X 0` are exact, then the induced morphism
 `L ⟶ Tot K` is a quasi-isomorphism. -/
 theorem quasiIso_toTotalOfAugmentation : QuasiIso (K.toTotalOfAugmentation ε hε) := by
+  have : ∀ q, Mono (ε.f q) := h₀
   rw [quasiIso_iff]
   intro n
   rw [quasiIsoAt_iff_isIso_homologyMap]
   have hmono : Mono (HomologicalComplex.homologyMap (K.toTotalOfAugmentation ε hε) n) := by
-    rw [HomologicalComplex.mono_homologyMap_iff_up_to_refinements _ _ n (n + 1) rfl (by simp)]
+    rw [HomologicalComplex.mono_homologyMap_iff_up_to_refinements _ (n - 1) n (n + 1)
+      (by obtain _ | n := n <;> simp) (by simp)]
     intro A x₂ hx₂ y₁ hy₁
     obtain _ | m := n
     · refine ⟨A, 𝟙 A, inferInstance, 0, ?_⟩
       have : x₂ ≫ ε.f 0 = 0 := by
         rw [← toTotalOfAugmentation_f_totalπ_zero K ε hε, ← Category.assoc, hy₁,
           HomologicalComplex.shape _ _ _ (by simp), comp_zero, zero_comp]
-      rw [← cancel_mono (ε.f 0), zero_comp] at this
-      simp [this]
-    · simp only [CochainComplex.prev_nat_succ] at y₁ hy₁ ⊢
-      obtain ⟨A₁, π₁, hπ₁, w, hw⟩ := exists_vanishesFrom_one hrow y₁ (by
-        rw [← hy₁]
+      have hx : x₂ = 0 := (cancel_mono (ε.f 0)).1 (by rw [this, zero_comp])
+      simp [hx]
+    · let y : A ⟶ (K.total (ComplexShape.up ℕ)).X m := y₁
+      have hy : y ≫ (K.total (ComplexShape.up ℕ)).d m (m + 1) =
+          x₂ ≫ (K.toTotalOfAugmentation ε hε).f (m + 1) := hy₁.symm
+      obtain ⟨A₁, π₁, hπ₁, w, hw⟩ := exists_vanishesFrom_one hrow y (by
+        rw [hy]
         exact fun p q hp ↦ vanishesFrom_toTotalOfAugmentation K ε hε x₂ p q (by omega))
-      set y' := π₁ ≫ y₁ - w ≫ (K.total (ComplexShape.up ℕ)).d (m - 1) m
+      set y' := π₁ ≫ y - w ≫ (K.total (ComplexShape.up ℕ)).d (m - 1) m
       have hdy' : y' ≫ (K.total (ComplexShape.up ℕ)).d m (m + 1) =
           π₁ ≫ x₂ ≫ (K.toTotalOfAugmentation ε hε).f (m + 1) := by
-        obtain _ | m' := m
-        · simp [y', hy₁, HomologicalComplex.shape _ 0 0 (by simp)]
-        · simp only [y', sub_comp, Category.assoc, HomologicalComplex.d_comp_d, comp_zero,
-            sub_zero, Nat.add_sub_cancel, hy₁]
-      obtain ⟨A₂, π₂, hπ₂, l, hl⟩ := exists_eq_comp_ε h₁ hw (by
-        rw [← Category.assoc, hdy', Category.assoc, Category.assoc,
-          vanishesFrom_toTotalOfAugmentation K ε hε x₂ 1 m le_rfl, comp_zero])
+        simp only [y', sub_comp, Category.assoc, HomologicalComplex.d_comp_d, comp_zero,
+          sub_zero, hy]
+      obtain ⟨A₂, π₂, hπ₂, l, hl⟩ := exists_eq_comp_ε (hε := hε) h₁ hw (by
+        rw [← Category.assoc, hdy']
+        simp only [Category.assoc]
+        rw [← Category.assoc x₂, vanishesFrom_toTotalOfAugmentation K ε hε x₂ 1 m le_rfl,
+          comp_zero])
       refine ⟨A₂, π₂ ≫ π₁, epi_comp _ _, l, ?_⟩
       have e1 := comp_d_totalπ_zero y'
       rw [← Category.assoc, hdy', Category.assoc, Category.assoc,
@@ -358,7 +364,7 @@ theorem quasiIso_toTotalOfAugmentation : QuasiIso (K.toTotalOfAugmentation ε h�
             rw [← e1]
             simp only [Category.assoc]
         _ = (l ≫ L.d m (m + 1)) ≫ ε.f (m + 1) := by
-            rw [← Category.assoc, hl, Category.assoc, ← HomologicalComplex.Hom.comm,
+            rw [← Category.assoc, hl, Category.assoc, HomologicalComplex.Hom.comm,
               Category.assoc]
   have hepi : Epi (HomologicalComplex.homologyMap (K.toTotalOfAugmentation ε hε) n) := by
     rw [HomologicalComplex.epi_homologyMap_iff_up_to_refinements _ (n - 1) n (n + 1)
@@ -370,14 +376,14 @@ theorem quasiIso_toTotalOfAugmentation : QuasiIso (K.toTotalOfAugmentation ε h�
     set x' := π₁ ≫ y₂ - w ≫ (K.total (ComplexShape.up ℕ)).d (n - 1) n
     have hdx' : x' ≫ (K.total (ComplexShape.up ℕ)).d n (n + 1) = 0 := by
       simp [x', hy₂]
-    obtain ⟨A₂, π₂, hπ₂, l, hl⟩ := exists_eq_comp_ε h₁ hw (by
+    obtain ⟨A₂, π₂, hπ₂, l, hl⟩ := exists_eq_comp_ε (hε := hε) h₁ hw (by
       rw [← Category.assoc, hdx', zero_comp])
     refine ⟨A₂, π₂ ≫ π₁, epi_comp _ _, l, ?_, π₂ ≫ w, ?_⟩
     · rw [← cancel_mono (ε.f (n + 1)), zero_comp]
       have e1 := comp_d_totalπ_zero x'
       rw [← Category.assoc, hdx', zero_comp] at e1
       calc (l ≫ L.d n (n + 1)) ≫ ε.f (n + 1) = (l ≫ ε.f n) ≫ (K.X 0).d n (n + 1) := by
-            rw [Category.assoc, HomologicalComplex.Hom.comm, Category.assoc]
+            rw [Category.assoc, ← HomologicalComplex.Hom.comm, Category.assoc]
         _ = 0 := by
             rw [← hl, Category.assoc, ← e1, comp_zero]
     · have hx' := eq_totalπ_ιTotal_of_vanishesFrom_one hw

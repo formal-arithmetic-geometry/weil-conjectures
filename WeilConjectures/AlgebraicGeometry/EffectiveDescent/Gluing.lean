@@ -59,8 +59,8 @@ lemma mem_of_apply_eq_apply {O : V.left.Opens} (hO : D.IsInvariant O) {w w' : U}
     Scheme.Pullback.exists_preimage_pullback (f := q) (g := q) w' w hww'.symm
   let T := (pullback.fst q q ≫ U.ι) ⁻¹ᵁ O
   have ht : t ∈ T := by
-    change (pullback.fst q q ≫ U.ι) t ∈ O
-    rwa [Scheme.Hom.comp_apply, ht₁]
+    rw [Scheme.Hom.mem_preimage, Scheme.Hom.comp_apply, ht₁]
+    exact hw'
   have hp : (T.ι ≫ pullback.fst q q ≫ U.ι ≫ V.hom) ≫ p =
       (T.ι ≫ pullback.snd q q ≫ U.ι ≫ V.hom) ≫ p := by
     simp only [Category.assoc, ← hq.w, pullback.condition_assoc]
@@ -112,7 +112,7 @@ lemma isEffective_restrict_of_le [Flat p] [Surjective p] [QuasiCompact p] {U U' 
     rw [Scheme.Opens.range_ι]
     rintro _ ⟨w, rfl⟩
     refine ⟨V.left.homOfLE hle w, ?_, rfl⟩
-    change (V.left.homOfLE hle ≫ U.ι) w ∈ U'
+    rw [SetLike.mem_coe, Scheme.Hom.mem_preimage, ← Scheme.Hom.comp_apply]
     rw [Scheme.homOfLE_ι]
     exact w.2
   let q' := IsOpenImmersion.lift O.ι (V.left.homOfLE hle ≫ q) hr
@@ -150,6 +150,7 @@ noncomputable def proj (W : Idx D) : W.1.toScheme ⟶ (obj W).left := W.2.2.choo
 lemma isPullback_proj (W : Idx D) : IsPullback (proj W) (W.1.ι ≫ V.hom) (obj W).hom p :=
   W.2.2.choose_spec.choose_spec.1
 
+@[reassoc]
 lemma proj_transport (W : Idx D) {T : Scheme.{u}} (f₁ f₂ : T ⟶ X) (h : f₁ ≫ p = f₂ ≫ p)
     (a : Over.mk f₁ ⟶ Over.mk (W.1.ι ≫ V.hom)) :
     ((D.restrict W.1 (isInvariant W)).transport f₁ f₂ h a).left ≫ proj W = a.left ≫ proj W :=
@@ -223,10 +224,6 @@ def inf (i j : Idx D) : Idx D :=
 lemma inf_le_left (i j : Idx D) : inf i j ≤ i := _root_.inf_le_left (a := i.1) (b := j.1)
 
 lemma inf_le_right (i j : Idx D) : inf i j ≤ j := _root_.inf_le_right (a := i.1) (b := j.1)
-
-lemma homOfLE_injective {U U' : V.left.Opens} (hle : U ≤ U') :
-    Function.Injective (V.left.homOfLE hle) :=
-  (V.left.homOfLE hle).isOpenEmbedding.injective
 
 instance isLocallyDirected : ((G (D := D)) ⋙ Scheme.forget).IsLocallyDirected where
   cond {i j k} fi fj xi xj hx := by
@@ -382,9 +379,6 @@ instance : IsIso (θ h) :=
   isIso_of_isOpenImmersion_of_opensRange_eq_top _
     (by ext1; simpa using Set.range_eq_univ.mpr (θ_surjective h))
 
-end Glue
-
-include h in
 lemma univ_θ_fst :
     D.univ ≫ θ h ≫ pullback.fst gluedHom p =
       pullback.fst (V.hom ≫ p) p ≫ θ h ≫ pullback.fst gluedHom p := by
@@ -407,12 +401,13 @@ lemma univ_θ_fst :
   have hp : (O.ι ≫ pullback.fst (V.hom ≫ p) p ≫ V.hom) ≫ p =
       (O.ι ≫ pullback.snd (V.hom ≫ p) p) ≫ p := by
     simp [pullback.condition]
-  have ht := restrict_transport_left_ι W.1 (isInvariant W) _ _ hp b
-  rw [D.transport_left_eq_comp O.ι _ _ _ (Over.homMk (pullback.fst (V.hom ≫ p) p) rfl) hp
-    (by simp) rfl _ hb] at ht
-  rw [← reassoc_of% ht, ← reassoc_of% hb, ι_θ_assoc, ι_θ_assoc, θW_fst, θW_fst,
-    proj_transport_assoc]
-  rfl
+  have ht : ((D.restrict W.1 (isInvariant W)).transport _ _ hp b).left ≫ W.1.ι = O.ι ≫ D.univ :=
+    (restrict_transport_left_ι W.1 (isInvariant W) _ _ hp b).trans
+      (D.transport_left_eq_comp O.ι _ _ (by rw [Category.assoc, pullback.condition])
+        (Over.homMk (U := Over.mk (pullback.fst (V.hom ≫ p) p ≫ V.hom))
+          (pullback.fst (V.hom ≫ p) p) rfl) hp rfl rfl _ hb)
+  rw [← reassoc_of% ht, ι_θ_assoc, θW_fst, proj_transport_assoc, ← θW_fst, ← ι_θ_assoc h W,
+    reassoc_of% hb]
 
 end Glue
 

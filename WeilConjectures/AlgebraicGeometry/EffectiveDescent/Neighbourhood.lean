@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.EffectiveDescent.Invariant
 public import WeilConjectures.AlgebraicGeometry.Morphisms.FiniteFlatNorm
+public import Mathlib.AlgebraicGeometry.Morphisms.QuasiFinite
 public import WeilConjectures.Mathlib.AlgebraicGeometry.AffineScheme
 
 /-!
@@ -90,10 +91,11 @@ lemma lift_fst_snd_univ {T : Scheme.{u}} (a b : T ⟶ Limits.pullback (V.hom ≫
     Over.homMk (a ≫ pullback.fst (V.hom ≫ p) p) (by simp)
   let β : Over.mk (a ≫ pullback.snd (V.hom ≫ p) p) ⟶ V :=
     Over.homMk (b ≫ pullback.fst (V.hom ≫ p) p) (by
-      rw [Over.mk_hom, Category.assoc, ← hab, Category.assoc, univ_hom])
+      rw [← hab, Category.assoc, univ_hom]
+      rfl)
   have e₂ : (D.transport _ _ h₁₂ α).left = β.left := by
-    rw [D.transport_left_eq, Over.homMk_left, ← hab]
-    congr 1
+    rw [D.transport_left_eq]
+    refine (congrArg (· ≫ D.univ) ?_).trans hab
     ext <;> simp [α]
   have e₃ := D.transport_left_eq _ _ (h₁₂.trans h₂₃) α
   rw [← D.transport_transport _ _ _ h₁₂ h₂₃, D.transport_left_congr h₂₃ h₂₃ rfl rfl β _ e₂,
@@ -130,8 +132,8 @@ lemma isOpen_setOf_forall_univ_mem [IsFinite p] {T : Set V.left} (hT : IsOpen T)
   have e : {w | ∀ z, pullback.fst (V.hom ≫ p) p z = w → D.univ z ∈ T} =
       (pullback.fst (V.hom ≫ p) p '' (D.univ ⁻¹' Tᶜ))ᶜ := by
     ext w
-    simp only [Set.mem_setOf_eq, Set.mem_compl_iff, Set.mem_image, Set.mem_preimage,
-      not_exists, not_and, not_not]
+    simp only [Set.mem_ofPred_eq, Set.mem_compl_iff, Set.mem_image, Set.mem_preimage,
+      not_exists, not_and]
     exact forall_congr' fun z ↦ ⟨fun h hz hw ↦ hz (h hw), fun h hw ↦ by_contra (h · hw)⟩
   rw [e, isOpen_compl_iff]
   exact (pullback.fst (V.hom ≫ p) p).isClosedMap _
@@ -140,7 +142,9 @@ lemma isOpen_setOf_forall_univ_mem [IsFinite p] {T : Set V.left} (hT : IsOpen T)
 /-- **Invariant affine neighbourhoods** (Stacks 03JE, 0H8K). Let `p : X ⟶ Y` be finite, flat and
 locally of finite presentation and `D` a descent datum on `V` relative to `p`. If every finite set
 of points of `V` lies in an affine open, then every point `v` of `V` has an affine open
-neighbourhood `U` which is invariant under `D` and lies over an affine open of `Y`. -/
+neighbourhood `U` which is invariant under `D` and lies over an affine open of `Y`.
+
+(blueprint: `thm-pd-effective-descent`, a step of the proof) -/
 theorem exists_isInvariant_isAffineOpen [IsFinite p] [Flat p] [LocallyOfFinitePresentation p]
     (D : DescentDatum p V)
     (hV : ∀ s : Set V.left, s.Finite → ∃ U : V.left.Opens, IsAffineOpen U ∧ s ⊆ U)
@@ -162,8 +166,38 @@ theorem exists_isInvariant_isAffineOpen [IsFinite p] [Flat p] [LocallyOfFinitePr
     obtain ⟨z₃, h₁, h₂⟩ := D.exists_fst_eq_univ_eq_of_univ_eq_fst z₀ z hz.symm
     have hz₃ : D.univ z ∈ O := ⟨z₃, h₁.trans hz₀, h₂⟩
     refine ⟨hOA hz₃, ?_⟩
-    rw [Scheme.Hom.mem_preimage, ← h₂, D.univ_apply_hom_comp, h₁, Set.mem_singleton_iff.mp hz₀]
+    rw [SetLike.mem_coe, Scheme.Hom.mem_preimage, ← h₂, D.univ_apply_hom_comp, h₁,
+      Set.mem_singleton_iff.mp hz₀]
     exact hvW
-  sorry
+  -- a basic open `D(f)` of `A` containing the orbit of `v`, inside `G`
+  obtain ⟨f, hOf, hfG⟩ := hA.exists_basicOpen_le_of_finite (O := G ⊓ A) inf_le_right hOfin
+    (Set.subset_inter hOG hOA)
+  have hfW : V.left.basicOpen f ≤ (V.hom ≫ p) ⁻¹ᵁ W :=
+    hfG.trans (inf_le_left.trans (hGle.trans inf_le_right))
+  have hfree' := free_app_of_isPullback (IsPullback.of_hasPullback (V.hom ≫ p) p) hW
+    (hW.preimage p) (hA.basicOpen f) hfW hfree
+  have hle : pullback.fst (V.hom ≫ p) p ⁻¹ᵁ V.left.basicOpen f ≤ D.univ ⁻¹ᵁ A :=
+    fun z hz ↦ ((inf_le_left : G ⊓ A ≤ G) (hfG hz) z rfl).1
+  -- the norm of `φ^* f` along `fst⁻¹ D(f) ⟶ D(f)`
+  let h := D.univ.appLE A (pullback.fst (V.hom ≫ p) p ⁻¹ᵁ V.left.basicOpen f) hle f
+  let g := (pullback.fst (V.hom ≫ p) p).normAt (V.left.basicOpen f) h
+  have key (w : V.left) : w ∈ V.left.basicOpen g ↔
+      ∀ z, pullback.fst (V.hom ≫ p) p z = w → D.univ z ∈ V.left.basicOpen f := by
+    have hiff (hw : w ∈ V.left.basicOpen f) :=
+      mem_basicOpen_normAt_of_free _ (hA.basicOpen f) hfree' h hw
+    refine ⟨fun hw z hz ↦ ?_, fun hw ↦ ?_⟩
+    · have := (hiff (V.left.basicOpen_le g hw)).mp hw z hz
+      rw [Scheme.basicOpen_appLE] at this
+      exact this.2
+    · obtain ⟨z, hz₁, hz₂⟩ := D.exists_fst_eq_univ_eq w
+      have hwf : w ∈ V.left.basicOpen f := hz₂ ▸ hw z hz₁
+      refine (hiff hwf).mpr fun z hz ↦ ?_
+      rw [Scheme.basicOpen_appLE]
+      refine ⟨?_, hw z hz⟩
+      rw [SetLike.mem_coe, Scheme.Hom.mem_preimage, hz]
+      exact hwf
+  exact ⟨V.left.basicOpen g, (key v).mpr fun z hz ↦ hOf ⟨z, hz, rfl⟩,
+    D.isInvariant_of_forall_mem_iff _ _ key, (hA.basicOpen f).basicOpen g, W, hW,
+    (V.left.basicOpen_le g).trans hfW⟩
 
 end CategoryTheory.Over.DescentDatum

@@ -164,41 +164,44 @@ def splitIdempotent : Matrix b b R := (1 - L₁ * L₁') * (1 - M₂' * M₂)
 lemma splitIdempotent_mul_self (hL₁ : L₁' * L₁ = 1) (hM₂ : M₂ * M₂' = 1) (hML : M₂ * L₁ = 0) :
     splitIdempotent L₁ L₁' M₂ M₂' * splitIdempotent L₁ L₁' M₂ M₂' =
       splitIdempotent L₁ L₁' M₂ M₂' := by
-  have h₁ {o : Type*} (Z : Matrix ρ₁ o R) : L₁' * (L₁ * Z) = Z := by
+  have h₁ (Z : Matrix ρ₁ b R) : L₁' * (L₁ * Z) = Z := by
     rw [← Matrix.mul_assoc, hL₁, Matrix.one_mul]
-  have h₂ {o : Type*} (Z : Matrix ρ₂ o R) : M₂ * (M₂' * Z) = Z := by
+  have h₂ (Z : Matrix ρ₂ b R) : M₂ * (M₂' * Z) = Z := by
     rw [← Matrix.mul_assoc, hM₂, Matrix.one_mul]
-  have h₃ {o : Type*} (Z : Matrix ρ₁ o R) : M₂ * (L₁ * Z) = 0 := by
+  have h₃ (Z : Matrix ρ₁ b R) : M₂ * (L₁ * Z) = 0 := by
     rw [← Matrix.mul_assoc, hML, Matrix.zero_mul]
   unfold splitIdempotent
   simp only [Matrix.sub_mul, Matrix.mul_sub, Matrix.one_mul, Matrix.mul_one, Matrix.mul_assoc,
-    h₁, h₂, h₃, hL₁, hM₂, hML, Matrix.mul_zero, sub_zero, zero_sub]
+    h₁, h₂, h₃, Matrix.mul_zero, sub_zero]
   abel
 
+omit [Fintype a] [DecidableEq ρ₂] in
 lemma splitIdempotent_mul (hA₁ : A₁ = L₁ * M₁) (hL₁ : L₁' * L₁ = 1) (hML : M₂ * L₁ = 0) :
     splitIdempotent L₁ L₁' M₂ M₂' * A₁ = 0 := by
-  have h₁ {o : Type*} (Z : Matrix ρ₁ o R) : L₁' * (L₁ * Z) = Z := by
+  have h₁ (Z : Matrix ρ₁ a R) : L₁' * (L₁ * Z) = Z := by
     rw [← Matrix.mul_assoc, hL₁, Matrix.one_mul]
-  have h₃ {o : Type*} (Z : Matrix ρ₁ o R) : M₂ * (L₁ * Z) = 0 := by
+  have h₃ (Z : Matrix ρ₁ a R) : M₂ * (L₁ * Z) = 0 := by
     rw [← Matrix.mul_assoc, hML, Matrix.zero_mul]
   unfold splitIdempotent
   simp only [hA₁, Matrix.sub_mul, Matrix.mul_sub, Matrix.one_mul, Matrix.mul_one,
-    Matrix.mul_assoc, h₁, h₃, Matrix.mul_zero, sub_zero, sub_self]
+    Matrix.mul_assoc, h₁, h₃, Matrix.mul_zero, sub_self]
 
+omit [Fintype c] [DecidableEq ρ₁] in
 lemma mul_splitIdempotent (hA₂ : A₂ = L₂ * M₂) (hM₂ : M₂ * M₂' = 1) (hML : M₂ * L₁ = 0) :
     A₂ * splitIdempotent L₁ L₁' M₂ M₂' = 0 := by
-  have h₂ {o : Type*} (Z : Matrix ρ₂ o R) : M₂ * (M₂' * Z) = Z := by
+  have h₂ (Z : Matrix ρ₂ b R) : M₂ * (M₂' * Z) = Z := by
     rw [← Matrix.mul_assoc, hM₂, Matrix.one_mul]
-  have h₃ {o : Type*} (Z : Matrix ρ₁ o R) : M₂ * (L₁ * Z) = 0 := by
+  have h₃ (Z : Matrix ρ₁ b R) : M₂ * (L₁ * Z) = 0 := by
     rw [← Matrix.mul_assoc, hML, Matrix.zero_mul]
   unfold splitIdempotent
   simp only [hA₂, Matrix.sub_mul, Matrix.mul_sub, Matrix.one_mul, Matrix.mul_one,
     Matrix.mul_assoc, h₂, h₃, Matrix.mul_zero, sub_zero, sub_self]
 
+omit [DecidableEq ρ₁] [DecidableEq ρ₂] in
 lemma add_splitIdempotent_add :
     L₁ * L₁' + splitIdempotent L₁ L₁' M₂ M₂' + (1 - L₁ * L₁') * (M₂' * M₂) = 1 := by
   unfold splitIdempotent
-  noncomm_ring
+  rw [add_assoc, ← Matrix.mul_add, sub_add_cancel, Matrix.mul_one, add_sub_cancel]
 
 /-- **Splitting data for the cohomology of a complex of free modules.** Given split factorisations
 `A₁ = L₁ M₁`, `A₂ = L₂ M₂` of composable matrices with `A₂ A₁ = 0`, and a split factorisation
@@ -224,10 +227,27 @@ lemma split_homology_data {k : Type*} [Fintype k] [DecidableEq k] (h : A₂ * A�
       rw [hA₁, Matrix.mul_assoc, ← Matrix.mul_assoc M₁, hM₁, Matrix.one_mul]
     have e₂ : (1 - L₁ * L₁') * M₂' * L₂' * A₂ = (1 - L₁ * L₁') * (M₂' * M₂) := by
       rw [hA₂, Matrix.mul_assoc, Matrix.mul_assoc, ← Matrix.mul_assoc L₂', hL₂, Matrix.one_mul]
-    rw [← hε, e₁, e₂, ← add_splitIdempotent_add (L₁ := L₁) (L₁' := L₁') (M₂ := M₂)
-      (M₂' := M₂')]
+    rw [← hε, e₁, e₂]
+    refine Eq.trans ?_ (add_splitIdempotent_add (L₁ := L₁) (L₁' := L₁') (M₂ := M₂) (M₂' := M₂'))
     abel
 
+omit [Fintype a] [Fintype c] [DecidableEq ρ₁] [DecidableEq ρ₂] in
+lemma splitIdempotent_map {S : Type*} [CommRing S] (f : R →+* S) :
+    (splitIdempotent L₁ L₁' M₂ M₂').map f =
+      splitIdempotent (L₁.map f) (L₁'.map f) (M₂.map f) (M₂'.map f) := by
+  simp [splitIdempotent, Matrix.map_mul, Matrix.map_sub, Matrix.map_one]
+
 end SplitComplex
+
+/-- A split factorisation stays one after applying a ring homomorphism. -/
+lemma split_map {R S : Type*} [CommRing R] [CommRing S] {m n ρ : Type*} [Fintype m] [Fintype n]
+    [Fintype ρ] [DecidableEq ρ] {A : Matrix m n R} {L : Matrix m ρ R} {M : Matrix ρ n R}
+    {L' : Matrix ρ m R} {M' : Matrix n ρ R} (f : R →+* S)
+    (h : A = L * M ∧ L' * L = 1 ∧ M * M' = 1) :
+    A.map f = L.map f * M.map f ∧ L'.map f * L.map f = 1 ∧ M.map f * M'.map f = 1 := by
+  obtain ⟨h₁, h₂, h₃⟩ := h
+  refine ⟨by rw [h₁, Matrix.map_mul], ?_, ?_⟩
+  · rw [← Matrix.map_mul, h₂, Matrix.map_one _ (map_zero f) (map_one f)]
+  · rw [← Matrix.map_mul, h₃, Matrix.map_one _ (map_zero f) (map_one f)]
 
 end Matrix

@@ -6,7 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.AlgebraicGeometry.EffectiveDescent.AffineCoaction
-public import WeilConjectures.AlgebraicGeometry.EffectiveDescent.Basic
+public import WeilConjectures.AlgebraicGeometry.EffectiveDescent.Invariant
 
 /-!
 # Affine faithfully flat descent of schemes
@@ -17,7 +17,7 @@ Let `p : X ⟶ Y` be a faithfully flat morphism of affine schemes and `V` an aff
 
 The transport of the universal point `pr₁ : V ×_Y X ⟶ V` (lying over `pr₁ ≫ V.hom`) to the
 second projection `pr₂ : V ×_Y X ⟶ X` is a morphism `γ : V ×_Y X ⟶ V` over `pr₂`, the
-*universal transport* `CategoryTheory.Over.DescentDatum.universalTransport`. By naturality every
+*universal transport* `CategoryTheory.Over.DescentDatum.univ`. By naturality every
 transport is a pullback of `γ`, and the axioms of a descent datum say that `γ` is a counital and
 coassociative coaction. Affine flat descent in coaction form
 (`AlgebraicGeometry.exists_isPullback_of_coaction`) then descends `V`.
@@ -40,49 +40,27 @@ open AlgebraicGeometry
 
 variable {X Y : Scheme.{u}} {p : X ⟶ Y} {V : Over X}
 
-/-- The **universal transport** of a descent datum: the transport of the point
-`pr₁ : V ×_Y X ⟶ V` over `pr₁ ≫ V.hom` to a point over `pr₂ : V ×_Y X ⟶ X`. -/
-noncomputable def universalTransport (D : DescentDatum p V) :
-    Limits.pullback (V.hom ≫ p) p ⟶ V.left :=
-  (D.transport (Limits.pullback.fst _ _ ≫ V.hom) (Limits.pullback.snd _ _)
-    (by simp [Limits.pullback.condition]) (Over.homMk (Limits.pullback.fst _ _) rfl)).left
-
-/-- The universal transport lies over the second projection. -/
-@[reassoc (attr := simp)]
-lemma universalTransport_hom (D : DescentDatum p V) :
-    D.universalTransport ≫ V.hom = Limits.pullback.snd _ _ :=
-  Over.w _
-
 /-- Any transport pulled back from the universal one is the composite with the universal
 transport. -/
-lemma transport_left_eq_comp_universalTransport (D : DescentDatum p V) {T : Scheme.{u}}
+lemma transport_left_eq_comp_univ (D : DescentDatum p V) {T : Scheme.{u}}
     (g : T ⟶ Limits.pullback (V.hom ≫ p) p) {f₁ f₂ : T ⟶ X} (h : f₁ ≫ p = f₂ ≫ p)
     (hf₁ : f₁ = g ≫ Limits.pullback.fst _ _ ≫ V.hom) (hf₂ : f₂ = g ≫ Limits.pullback.snd _ _)
     (a : Over.mk f₁ ⟶ V) (ha : a.left = g ≫ Limits.pullback.fst _ _) :
-    (D.transport f₁ f₂ h a).left = g ≫ D.universalTransport :=
+    (D.transport f₁ f₂ h a).left = g ≫ D.univ :=
   D.transport_left_eq_comp g _ _ _ _ h hf₁ hf₂ a ha
 
-/-- **Every transport is a pullback of the universal transport**: the transport of a point `a`
-over `f₁` to `f₂` is `(a, f₂) ≫ γ`, where `γ` is the universal transport. -/
-lemma transport_left_eq_lift_comp (D : DescentDatum p V) {T : Scheme.{u}} (f₁ f₂ : T ⟶ X)
-    (h : f₁ ≫ p = f₂ ≫ p) (a : Over.mk f₁ ⟶ V) :
-    (D.transport f₁ f₂ h a).left =
-      Limits.pullback.lift a.left f₂ (by simp [reassoc_of% (Over.w a), h]) ≫
-        D.universalTransport :=
-  D.transport_left_eq_comp_universalTransport _ h (by simp) (by simp) a (by simp)
-
 /-- The counit identity for the universal transport. -/
-lemma coactionUnit_universalTransport (D : DescentDatum p V) :
-    coactionUnit p V.hom ≫ D.universalTransport = 𝟙 V.left := by
-  rw [← D.transport_left_eq_comp_universalTransport (coactionUnit p V.hom) (f₁ := V.hom)
+lemma coactionUnit_univ (D : DescentDatum p V) :
+    coactionUnit p V.hom ≫ D.univ = 𝟙 V.left := by
+  rw [← D.transport_left_eq_comp_univ (coactionUnit p V.hom) (f₁ := V.hom)
     (f₂ := V.hom) rfl (by rw [Limits.pullback.lift_fst_assoc, Category.id_comp]) (by simp)
     (Over.homMk (𝟙 V.left)) (by simp), D.transport_self]
   rfl
 
 /-- The coassociativity identity for the universal transport. -/
-lemma coactionMap_universalTransport (D : DescentDatum p V) :
-    coactionMap p V.hom D.universalTransport D.universalTransport_hom ≫ D.universalTransport =
-      coactionForget p V.hom ≫ D.universalTransport := by
+lemma coactionMap_univ (D : DescentDatum p V) :
+    coactionMap p V.hom D.univ D.univ_hom ≫ D.univ =
+      coactionForget p V.hom ≫ D.univ := by
   have h₁ : (Limits.pullback.fst _ _ ≫ Limits.pullback.fst _ _ ≫ V.hom) ≫ p =
       (Limits.pullback.fst (Limits.pullback.snd (V.hom ≫ p) p ≫ p) p ≫
         Limits.pullback.snd _ _) ≫ p := by
@@ -93,12 +71,12 @@ lemma coactionMap_universalTransport (D : DescentDatum p V) :
     simp [Limits.pullback.condition]
   have e : D.transport _ _ h₁
       (Over.homMk (Limits.pullback.fst _ _ ≫ Limits.pullback.fst _ _) rfl) =
-      Over.homMk (Limits.pullback.fst _ _ ≫ D.universalTransport) (by simp) := by
+      Over.homMk (Limits.pullback.fst _ _ ≫ D.univ) (by simp) := by
     ext
-    exact D.transport_left_eq_comp_universalTransport _ h₁ (by simp) (by simp) _ (by simp)
-  rw [← D.transport_left_eq_comp_universalTransport _ h₂ (by simp) (by simp)
-    (Over.homMk (Limits.pullback.fst _ _ ≫ D.universalTransport) (by simp)) (by simp), ← e,
-    D.transport_transport, ← D.transport_left_eq_comp_universalTransport _ (h₁.trans h₂)
+    exact D.transport_left_eq_comp_univ _ h₁ (by simp) (by simp) _ (by simp)
+  rw [← D.transport_left_eq_comp_univ _ h₂ (by simp) (by simp)
+    (Over.homMk (Limits.pullback.fst _ _ ≫ D.univ) (by simp)) (by simp), ← e,
+    D.transport_transport, ← D.transport_left_eq_comp_univ _ (h₁.trans h₂)
     (by simp) (by simp) (Over.homMk (Limits.pullback.fst _ _ ≫ Limits.pullback.fst _ _) rfl)
     (by simp)]
 
@@ -110,9 +88,9 @@ datum, see `AlgebraicGeometry.exists_isPullback_of_coaction`. -/
 theorem isEffective_of_isAffine {X Y : Scheme.{u}} {p : X ⟶ Y} [IsAffine X] [IsAffine Y]
     [Flat p] [Surjective p] {V : Over X} [IsAffine V.left] (D : DescentDatum p V) :
     D.IsEffective := by
-  obtain ⟨N, nY, q, hq, hγq⟩ := exists_isPullback_of_coaction p V.hom D.universalTransport
-    D.universalTransport_hom D.coactionUnit_universalTransport D.coactionMap_universalTransport
+  obtain ⟨N, nY, q, hq, hγq⟩ := exists_isPullback_of_coaction p V.hom D.univ
+    D.univ_hom D.coactionUnit_univ D.coactionMap_univ
   refine ⟨Over.mk nY, q, hq, fun f₁ f₂ h a ↦ ?_⟩
-  rw [D.transport_left_eq_lift_comp, Category.assoc, hγq, Limits.pullback.lift_fst_assoc]
+  rw [D.transport_left_eq, Category.assoc, hγq, Limits.pullback.lift_fst_assoc]
 
 end CategoryTheory.Over.DescentDatum
