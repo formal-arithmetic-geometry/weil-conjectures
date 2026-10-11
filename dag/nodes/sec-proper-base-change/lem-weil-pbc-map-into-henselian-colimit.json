@@ -217,5 +217,24 @@
   "date": "2026-10-09",
   "by": "L",
   "result": "pass"
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.MapIntoHenselianColimit",
+  "declaration": "Algebra.map_into_henselian_colimit",
+  "file": "lean/Sheaf/RingTheory/MapIntoHenselianColimit.lean",
+  "statement": "theorem map_into_henselian_colimit (R : Type u) [CommRing R] (S : Type v) [CommRing S] [Algebra R S] [HenselianLocalRing S] (A : Type w) [CommRing A] [Algebra R A] (I : Type w) [SmallCategory I] [IsFiltered I] (F : I ⥤ CommAlgCat.{w} R) [HasColimit F] (hA : Nonempty (colimit F ≅ CommAlgCat.of R A)) (hEtale : ∀ i : I, Algebra.Etale R (F.obj i)) (q : Ideal A) [q.IsPrime] (p : Ideal R) [p.IsPrime] (hp : p = q.comap (algebraMap R A)) (hm : p = (IsLocalRing.maximalIdeal S).comap (algebraMap R S)) (τ : q.ResidueField →+* (IsLocalRing.maximalIdeal S).ResidueField) (hτ : τ.comp (Ideal.ResidueField.map p q (algebraMap R A) hp) = Ideal.ResidueField.map p (IsLocalRing.maximalIdeal S) (algebraMap R S) hm) : ∃! f : A →ₐ[R] S, ∃ hf : q = (IsLocalRing.maximalIdeal S).comap f.toRingHom, Ideal.ResidueField.map q (IsLocalRing.maximalIdeal S) f.toRingHom hf = τ",
+  "branch": "sheaf-dag",
+  "by": "J1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-mhc1126"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-mhc1126",
+  "group": "J1",
+  "result": "fix",
+  "note": "R->S algebra, HenselianLocalRing S, A R-algebra = colimit of filtered I:Type w diagram in CommAlgCat.{w} R with Algebra.Etale stages, q prime over p = comap m_S, tau compatible over kappa(p) via ResidueField.map, ExistsUnique R-alg f with comap m = q and residue map = tau; index universe fixed x->w"
  }
 }

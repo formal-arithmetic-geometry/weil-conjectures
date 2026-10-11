@@ -4444,3 +4444,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 11:26 L: merged deliver/J1/lem-weil-pbc-integral-closure-finite-fibre-choose-g (stage 2; reviewer FIX; first push; Sheaf.AlgebraicGeometry.IntegralClosureFiniteFibreChooseG AlgebraicGeometry.integralClosure_finite_fibre_choose_g)
 - 11:26 L: merged deliver/E1/lem-sc-find-globally-generated (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.FindGloballyGenerated AlgebraicGeometry.Scheme.Modules.exists_globallyGenerated_invertible_nonvanishing_eq)
 - 11:26 L: merged deliver/K1/lem-sc-ass-weakass-locally-noetherian (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.AssociatedPointsEqWeaklyAssociatedPoints AlgebraicGeometry.Scheme.associatedPoints_eq_weaklyAssociatedPoints)
+- 11:26 L: merged deliver/J1/lem-weil-pbc-map-into-henselian-colimit (stage 2; reviewer FIX; first push; Sheaf.RingTheory.MapIntoHenselianColimit Algebra.map_into_henselian_colimit)
