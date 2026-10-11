@@ -1,0 +1,99 @@
+{
+ "id": "def-sc-associated-points",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-hilbert-polynomial",
+   "place": "statement hypothesis: associated points of the structure sheaf",
+   "via": [
+    "lem-sc-regular-meromorphic-section-exists"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "definition",
+ "title": "Associated points of a scheme",
+ "status": "split",
+ "statement": "For a scheme X, the associated points are the points x whose stalk O_{X,x} has its maximal ideal as an associated prime of the stalk module O_{X,x}.",
+ "stmt_deps": [],
+ "source": {
+  "document": "literature/stacks-project/divisors.tex",
+  "place": "Tag 02OZ (associated points of the structure sheaf)"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "associated points of a scheme stalk maximal ideal associated prime",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "associatedPoints Scheme",
+   "results": "no exact declaration",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsAssociatedPrime maximalIdeal scheme stalk",
+   "results": "0 hits",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "associatedPoints|AssociatedPoint|associated points",
+   "results": "no declaration in Mathlib, source repository, or lean/Sheaf",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-sc-regular-meromorphic-section-exists",
+  "date": "2026-10-11",
+  "group": "H1"
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-def-av-ample-degree",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AssociatedPoints",
+  "declaration": "AlgebraicGeometry.associatedPoints",
+  "file": "lean/Sheaf/AlgebraicGeometry/AssociatedPoints.lean",
+  "statement": "def associatedPoints (X : Scheme.{w}) : Set X",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-rms1158",
+  "group": "H1",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-rms1158",
+  "group": "H1",
+  "result": "pass",
+  "note": "k field, X.Over Spec k + IsProper (proper over k), IsLocallyNoetherian, NoEmbeddedPoints, topologicalKrullDim X ≠ ⊤ (finite dim), L : X.Modules [IsInvertible]; conclusion ∃ s : unit X ⟶ meromorphicModule X L with Mono (meromorphicSectionMap X L s) = K_X → K_X(L) injective (landed def-sc-meromorphic-module). New associatedPoints = IsAssociatedPrime m_x of O_{X,x} (Stacks 02OJ def), NoEmbeddedPoints uses Mathlib genericPoints (= M1 14582dfc7's), not hollow (inferInstance fails); no landed associated-points/no-embedded-points declaration (M1/ass-weakass state it inline, bridgeable). Sandbox compile of all three modules clean."
+ }
+}

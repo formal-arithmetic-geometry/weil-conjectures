@@ -20,7 +20,9 @@
   "def-weil-proper-morphism",
   "pqf-def-locnoeth",
   "def-sc-invertible-module",
-  "def-kun-topological-krull-dimension"
+  "def-kun-topological-krull-dimension",
+  "def-sc-no-embedded-points",
+  "def-sc-associated-points"
  ],
  "proof": [
   {
@@ -110,5 +112,23 @@
   "group": "E1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-rms2432 (reviewer sub-agent of L); spot-checked: Statement unchanged; keeps locally Noetherian + no embedded points (02OZ(3)/0EMI) and the injectivity definition K_X -> K_X(L). No new node in the delivery, so nothing restates lem-sc-hilbert-difference (class b). Read 0EMI, 02OZ, 0EMH against the steps. FIX more, RETURN less: dag/nodes/sec-abelian-varieties/lem-sc-regular-meromorphic-section-exists.json: step 1 cited lem-sc-rational-functions-generic-stalks, which describes the ring R(X), not the sheaf K_X, and the K_X(L) generic-stalk description was uncited (the delivery's own report admits the existing node cannot supply it); step 2 checked injectivity only on global sections (C4, C1). Repair: new statement-only node lem-sc-meromorphic-sheaf-generic-product (Stacks Tag 0EMH, unsplit, grep search recorded) giving K_X(U) and K_X(L)(U) as products over generic points in U; steps 1-2 rewritten to cite it, injectivity checked on every open U; rank-one freeness of L_eta cites def-sc-invertible-module; finiteness of generic points no longer needed; proof_deps updated. Second reading by E1 missed this fault. Start 'Sat Oct 10 08:57:24 PM UTC 2026', end 'Sat Oct 10 08:57:48 PM UTC 2026'.; 2 file(s) fixed by the reviewer; 1 statement node(s) added by the reviewer (FIX more, RETURN less)"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.RegularMeromorphicSectionExists",
+  "declaration": "AlgebraicGeometry.exists_regularMeromorphicSection",
+  "file": "lean/Sheaf/AlgebraicGeometry/RegularMeromorphicSectionExists.lean",
+  "statement": "theorem exists_regularMeromorphicSection {k : Type v} [Field k] (X : Scheme.{v}) [X.Over (Spec (.of k))] [IsProper (X ↘ Spec (.of k))] [IsLocallyNoetherian X] [NoEmbeddedPoints X] (hfinite : topologicalKrullDim X ≠ ⊤) (L : X.Modules) [L.IsInvertible] : ∃ s : unit X ⟶ meromorphicModule X L, Mono (meromorphicSectionMap X L s)",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-rms1158",
+  "group": "H1",
+  "result": "pass",
+  "note": "k field, X.Over Spec k + IsProper (proper over k), IsLocallyNoetherian, NoEmbeddedPoints, topologicalKrullDim X ≠ ⊤ (finite dim), L : X.Modules [IsInvertible]; conclusion ∃ s : unit X ⟶ meromorphicModule X L with Mono (meromorphicSectionMap X L s) = K_X → K_X(L) injective (landed def-sc-meromorphic-module). New associatedPoints = IsAssociatedPrime m_x of O_{X,x} (Stacks 02OJ def), NoEmbeddedPoints uses Mathlib genericPoints (= M1 14582dfc7's), not hollow (inferInstance fails); no landed associated-points/no-embedded-points declaration (M1/ass-weakass state it inline, bridgeable). Sandbox compile of all three modules clean."
  }
 }
