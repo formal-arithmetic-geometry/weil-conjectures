@@ -161,5 +161,24 @@
   "group": "M1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-fss3020 (reviewer sub-agent of L); spot-checked: Step 1 quoted the item's own source Tag 07BV (10.158.11) as an 'elementary' step with no node: D1/C1, missed by the Second reading. FIX more, RETURN less: replaced it by a real 3-step proof (Stacks route via 07BU): (1) cite lem-weil-pbc-separable-extension-fraction-field-of-smooth-algebra (smooth B subset L with Frac B = L; separability def def-weil-pbc-separable-field-extension matches); (2) B[1/f] = B_f smooth by lem-weil-pbc-smooth-ring-map-principal-localization (mathlib leaf), finitely presented; (3) elementary: directed union of B[1/f] over nonzero f is L, filtered colimit with inclusions. proof_deps updated; both pbc lemmas declared as tool_uses (generic commutative algebra). C4: statement matches its citer lem-kun-separable-smooth-colimit. Mathlib: leanfinder record shows no filtered-colimit theorem; not a leaf.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.FieldTheory.FgSeparableSmooth",
+  "declaration": "FieldTheory.fg_separable_extension_is_filtered_colimit_smooth",
+  "file": "lean/Sheaf/FieldTheory/FgSeparableSmooth.lean",
+  "statement": "theorem fg_separable_extension_is_filtered_colimit_smooth {K : Type u} {L : Type v} [Field K] [Field L] [Algebra K L] (hsep : Algebra.IsSeparableExtension K L) [Algebra.EssFiniteType K L] : ∃ (ι : Type v) (A : ι → Subalgebra K L), Nonempty ι ∧ (∀ i, Algebra.Smooth K (A i)) ∧ (∀ i, (A i).FG) ∧ Directed (· ≤ ·) A ∧ ∀ x : L, ∃ i, x ∈ A i",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-fss0720"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-fss0720",
+  "group": "C1",
+  "result": "fix",
+  "note": "fields K L, Algebra K L; separable = IsSeparableExtension (Tag 030O); fg as field = EssFiniteType (fg_top_iff); ι : Type v nonempty; each A i smooth and FG; directed by inclusion; union = L"
  }
 }
