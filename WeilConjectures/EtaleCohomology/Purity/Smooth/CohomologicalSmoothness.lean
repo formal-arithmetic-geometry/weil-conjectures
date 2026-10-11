@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.Basic
+public import WeilConjectures.EtaleCohomology.Purity.Smooth.Coprojection
 public import WeilConjectures.SixFunctors.Etale.Derived.Composition
 public import WeilConjectures.SixFunctors.Etale.Derived.EtaleLocalization
 public import WeilConjectures.SixFunctors.Etale.Derived.Stability.Basic
@@ -48,7 +49,7 @@ with the projection maps and with `Ex_!` (`sk-thm-sf-comp-composition`,
 
 The invertibility of `ω_{f ≫ g}` needs no canonical map: an invertible tensor factor passes
 through every `Rf^!`
-(`AlgebraicGeometry.Etale.nonempty_iso_rightDerivedUpperShriek_comp_derivedTensorRight`), so
+(`AlgebraicGeometry.Etale.derivedTensorRightCompRightDerivedUpperShriekIso`), so
 `ω_{f ≫ g} ≅ Rf^! ω_g ≅ ω_f ⊗ᴸ Lf^* ω_g` as soon as `ω_g` is invertible.
 
 ## Main definitions
@@ -142,20 +143,20 @@ lemma DerivedCategory.isInvertible_constantComplex (X : Scheme.{u}) :
 `ω_{f ≫ g} ≅ Rf^! ω_g ≅ Rf^!(Λ_Y ⊗ᴸ ω_g) ≅ ω_f ⊗ᴸ Lf^* ω_g`,
 
 by the composition law for `R^!` and since an invertible tensor factor passes through `Rf^!`
-(`AlgebraicGeometry.Etale.nonempty_iso_rightDerivedUpperShriek_comp_derivedTensorRight`). The
+(`AlgebraicGeometry.Etale.derivedTensorRightCompRightDerivedUpperShriekIso`). The
 composite is given as a morphism `h` with `f ≫ g = h`. -/
 theorem nonempty_iso_dualizingComplex_comp_of_isInvertible {X Y Z : Scheme.{u}} (f : X ⟶ Y)
     (g : Y ⟶ Z) (h : X ⟶ Z) (w : f ≫ g = h) [HasCompactification f] [HasCompactification g]
-    [HasCompactification h]
+    [HasCompactification h] [QuasiCompact h]
     (hg : DerivedCategory.isInvertible Λ Y (dualizingComplex (ModuleCat.{u + 1} Λ) g)) :
     Nonempty (dualizingComplex (ModuleCat.{u + 1} Λ) h ≅
       ((derivedTensor (ModuleCat.{u + 1} Λ) X).obj (dualizingComplex (ModuleCat.{u + 1} Λ) f)).obj
         ((L((f)^*[ModuleCat.{u + 1} Λ])).obj (dualizingComplex (ModuleCat.{u + 1} Λ) g))) := by
   subst w
   obtain ⟨c⟩ := nonempty_iso_rightDerivedUpperShriek_comp Λ f g
-  obtain ⟨t⟩ := nonempty_iso_rightDerivedUpperShriek_comp_derivedTensorRight Λ f hg
+  obtain ⟨M, ⟨e'⟩, ⟨e⟩⟩ := hg
   exact ⟨c.app _ ≪≫ (R(f)^![ModuleCat.{u + 1} Λ]).mapIso (derivedTensorLeftUnitor _ Y _).symm ≪≫
-    t.app (𝟙_ _)⟩
+    (derivedTensorRightCompRightDerivedUpperShriekIso Λ f _ M e e').app (𝟙_ _)⟩
 
 variable {Λ}
 
@@ -165,7 +166,7 @@ For cohomologically smooth `g : Y ⟶ Z` and any `f : X ⟶ Y` admitting a compa
 `ω_{f ≫ g} ≅ ω_f ⊗ᴸ Lf^* ω_g`. -/
 theorem IsCohomologicallySmooth.nonempty_iso_dualizingComplex_comp {X Y Z : Scheme.{u}}
     {f : X ⟶ Y} {g : Y ⟶ Z} [HasCompactification f] [HasCompactification g]
-    [HasCompactification (f ≫ g)] (hg : IsCohomologicallySmooth Λ g) :
+    [HasCompactification (f ≫ g)] [QuasiCompact (f ≫ g)] (hg : IsCohomologicallySmooth Λ g) :
     Nonempty (dualizingComplex (ModuleCat.{u + 1} Λ) (f ≫ g) ≅
       ((derivedTensor (ModuleCat.{u + 1} Λ) X).obj (dualizingComplex (ModuleCat.{u + 1} Λ) f)).obj
         ((L((f)^*[ModuleCat.{u + 1} Λ])).obj (dualizingComplex (ModuleCat.{u + 1} Λ) g))) :=
@@ -178,7 +179,7 @@ If `f : X ⟶ Y` and `g : Y ⟶ Z` are cohomologically smooth, the dualizing com
 objects. -/
 theorem IsCohomologicallySmooth.isInvertible_dualizingComplex_comp {X Y Z : Scheme.{u}}
     {f : X ⟶ Y} {g : Y ⟶ Z} [HasCompactification f] [HasCompactification g]
-    [HasCompactification (f ≫ g)] (hf : IsCohomologicallySmooth Λ f)
+    [HasCompactification (f ≫ g)] [QuasiCompact (f ≫ g)] (hf : IsCohomologicallySmooth Λ f)
     (hg : IsCohomologicallySmooth Λ g) :
     DerivedCategory.isInvertible Λ X (dualizingComplex (ModuleCat.{u + 1} Λ) (f ≫ g)) := by
   obtain ⟨e⟩ := hg.nonempty_iso_dualizingComplex_comp (f := f)
@@ -203,7 +204,8 @@ The intermediate base change of `g` is quasi-compact when `g` is, which is assum
 under the conventions of the blueprint (morphisms of finite type). -/
 theorem IsCohomologicallySmooth.comp {X Y Z : Scheme.{u}} {f : X ⟶ Y} {g : Y ⟶ Z}
     [HasCompactification f] [HasCompactification g] [HasCompactification (f ≫ g)]
-    [QuasiCompact g] (hf : IsCohomologicallySmooth Λ f) (hg : IsCohomologicallySmooth Λ g) :
+    [QuasiCompact g] [QuasiCompact (f ≫ g)]
+    (hf : IsCohomologicallySmooth Λ f) (hg : IsCohomologicallySmooth Λ g) :
     IsCohomologicallySmooth Λ (f ≫ g) where
   isInvertible_dualizingComplex := hf.isInvertible_dualizingComplex_comp hg
   isIso_dualizingComplexTensorMap K hK :=
@@ -308,7 +310,7 @@ theorem isCohomologicallySmooth_of_smoothOfRelativeDimension {X Y : Scheme.{u}} 
 invertibility of `ω_g` is used. -/
 theorem nonempty_iso_dualizingComplex_comp_of_smoothOfRelativeDimension {X Y Z : Scheme.{u}}
     (f : X ⟶ Y) (g : Y ⟶ Z) [HasCompactification f] [HasCompactification g]
-    [HasCompactification (f ≫ g)] (e : ℕ) [SmoothOfRelativeDimension e g]
+    [HasCompactification (f ≫ g)] [QuasiCompact (f ≫ g)] (e : ℕ) [SmoothOfRelativeDimension e g]
     [HasInvertibleExponent Λ Y] :
     Nonempty (dualizingComplex (ModuleCat.{u + 1} Λ) (f ≫ g) ≅
       ((derivedTensor (ModuleCat.{u + 1} Λ) X).obj (dualizingComplex (ModuleCat.{u + 1} Λ) f)).obj
@@ -372,7 +374,7 @@ compactification, and the exponent of `Λ` invertible on `U`. -/
 theorem IsCohomologicallySmooth.of_comp_of_surjective {U X Y : Scheme.{u}} (u : U ⟶ X)
     [Etale u] [Surjective u] [QuasiCompact u] [HasCompactification u]
     [HasInvertibleExponent Λ U] (f : X ⟶ Y) [HasCompactification f]
-    [HasCompactification (u ≫ f)] (h : IsCohomologicallySmooth Λ (u ≫ f)) :
+    [HasCompactification (u ≫ f)] [QuasiCompact (u ≫ f)] (h : IsCohomologicallySmooth Λ (u ≫ f)) :
     IsCohomologicallySmooth Λ f where
   isInvertible_dualizingComplex :=
     isInvertible_dualizingComplex_of_comp u f

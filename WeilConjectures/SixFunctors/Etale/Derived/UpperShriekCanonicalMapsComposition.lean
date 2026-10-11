@@ -5,6 +5,7 @@ Authors: Claude
 -/
 module
 
+public import WeilConjectures.SixFunctors.Etale.Derived.CoefficientsShift
 public import WeilConjectures.SixFunctors.Etale.Derived.Composition
 public import WeilConjectures.SixFunctors.Etale.Derived.EtaleLocalization
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekCompositionCoherence
@@ -145,7 +146,8 @@ invertible, and `f : X ⟶ Y`: if `ω_{u ≫ f}` is invertible, then so is `ω_f
 `ω_{u ≫ f} ≅ Ru^! ω_f ≅ ω_u ⊗ᴸ Lu^* ω_f`. -/
 theorem isInvertible_dualizingComplex_of_comp {U X Y : Scheme.{u}} (u : U ⟶ X) [Etale u]
     [Surjective u] (f : X ⟶ Y) [HasCompactification u] [HasCompactification f]
-    [HasCompactification (u ≫ f)] (hu : ∀ P, IsIso (dualizingComplexTensorMap Λ u P))
+    [HasCompactification (u ≫ f)] [QuasiCompact (u ≫ f)]
+    (hu : ∀ P, IsIso (dualizingComplexTensorMap Λ u P))
     (hω : DerivedCategory.isInvertible Λ U (dualizingComplex (ModuleCat.{u + 1} Λ) u))
     (hωh : DerivedCategory.isInvertible Λ U (dualizingComplex (ModuleCat.{u + 1} Λ) (u ≫ f))) :
     DerivedCategory.isInvertible Λ X (dualizingComplex (ModuleCat.{u + 1} Λ) f) := by
