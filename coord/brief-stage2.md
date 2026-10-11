@@ -8,6 +8,7 @@ Written by the lead (rules: decision of the human, 2026-10-11). Your prompt name
 - Every node in `stmt_deps`, its statement and its `lean` record (`module`, `declaration`) or `mathlib_match`.
 - The source module of each recorded declaration: `~/weil-conjectures-slopmaster2/<module path>.lean` (module `A.B.C` is file `A/B/C.lean`; compiled, read-only). Read the declaration and its docstring, not only its name.
 - Mathlib: `~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/` (read-only).
+- The source checkout is slopmaster2 at `7d675a263` since 2026-10-12 (before: `71d63dcf6`); its declarations are in `local/sorry_map_slopmaster2_7d675a26.jsonl.gz`, and the declarations of ours that share a name with one of its declarations are judged in `coord/upstream-overlaps.md`. A notion it now defines is used, not defined again (e.g. `IsStrictlyHenselianLocalRing`, the class of `WeilConjectures.Mathlib.RingTheory.Henselian`).
 - The node's source place: for Stacks, `literature/stacks-project/` (`stacks-project/tags/tags` maps a tag to its label).
 - The example module `lean/Sheaf/CategoryTheory/CompactObject.lean` (node `def-pc-compact-object`, in git): header, docstrings, namespace as in §3.
 
