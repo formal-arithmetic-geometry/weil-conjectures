@@ -5085,3 +5085,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 14:54 L: merged deliver/H1/pqf-lem-locqf-fibre-discrete (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.FiniteDiscreteFiber AlgebraicGeometry.Scheme.Hom.finite_discrete_fiber_and_isQuasiFiniteAtPoint)
 - 14:55 L: merged deliver/K1/lem-weil-pbc-tor-symmetry (stage 2; reviewer PASS; first push; Sheaf.Algebra.Category.ModuleCat.TorSymmetry CategoryTheory.nonempty_tor'_flip_iso)
 - 14:55 L: merged deliver/M1/lem-weil-pbc-torsion-cyclic-presentation (stage 2; reviewer PASS; first push; Sheaf.RingTheory.TorsionCyclicPresentation Ideal.exists_torsion_cyclic_presentation)
+- 14:55 L: merged deliver/M1/lem-weil-pbc-zariski-pair-finite-gabber-polynomial (stage 2; reviewer PASS; first push; Sheaf.RingTheory.FiniteGabberPolynomial Algebra.exists_monic_aeval_eq_zero_gabber_polynomial)

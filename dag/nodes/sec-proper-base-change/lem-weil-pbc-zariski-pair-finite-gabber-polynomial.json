@@ -214,5 +214,23 @@
   "item": "lem-weil-pbc-zariski-pair-finite-gabber-polynomial",
   "worker": "stage1",
   "summary": "Split along the proof of Stacks 0EM0 in more-algebra.tex: lift the idempotent (1,0) after an etale A->A' with A/I = A'/IA' (07M4, existing node), decompose B' = B'_1 x B'_2, Nakayama 00DV(1) gives g in 1+IA' with A'_g -> B'_1 surjective, pick a' in IA'' for the first component, 00H5 (existing Mathlib leaf) for the second, multiply to get (b''-1)b''^d in sum IA'' b''^j, and descend along the faithfully flat A -> A'' by 05CK. Statement unchanged mathematically; added the citation [def-weil-finitely-generated-module] for 'finite ring map' and spelled out 'Jacobson radical' (no definition node exists for it). Two new Mathlib leaves: Nakayama 00DV item (1) and universal injectivity of faithfully flat maps (05CK). Small repairs of the source: d >= 1 is ensured by multiplying g by x (Stacks' g may have degree 0 when B_2 = 0); faithful flatness of A -> A'' is obtained from the maximal-ideal criterion 00HP instead of openness of the image (00I1), the same fact (every maximal ideal contains I and lies in the image)."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.FiniteGabberPolynomial",
+  "declaration": "Algebra.exists_monic_aeval_eq_zero_gabber_polynomial",
+  "file": "lean/Sheaf/RingTheory/FiniteGabberPolynomial.lean",
+  "statement": "theorem exists_monic_aeval_eq_zero_gabber_polynomial {A : Type u} {B : Type v} [CommRing A] [CommRing B] [Algebra A B] [Module.Finite A B] (I : Ideal A) (hI : I ≤ Ideal.jacobson ⊥) (B₁ : Type w) (B₂ : Type z) [CommRing B₁] [CommRing B₂] [Algebra (A ⧸ I) B₁] [Algebra (A ⧸ I) B₂] (e : (B ⧸ I.map (algebraMap A B)) ≃+* (B₁ × B₂)) (he : ∀ a : A, e (Ideal.Quotient.mk (I.map (algebraMap A B)) (algebraMap A B a)) = (algebraMap (A ⧸ I) B₁ (Ideal.Quotient.mk I a), algebraMap (A ⧸ I) B₂ (Ideal.Quotient.mk I a))) (h₁ : Function.Surjective (algebraMap (A ⧸ I) B₁)) (b : B) (hb : e (Ideal.Quotient.mk (I.map (algebraMap A B)) b) = (1, 0)) : ∃ (d : ℕ) (a : Fin (d + 1) → A) (f : A[X]), 1 ≤ d ∧ (∀ j, a j ∈ I) ∧ f.Monic ∧ aeval b f = 0 ∧ f = X ^ d * (X - 1) + ∑ j : Fin (d + 1), C (a j) * X ^ (j : ℕ)",
+  "branch": "sheaf-dag",
+  "by": "M1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "M1",
+  "result": "pass",
+  "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
  }
 }
