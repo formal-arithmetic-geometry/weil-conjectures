@@ -16,9 +16,12 @@ public import WeilConjectures.SixFunctors.Etale.Derived.Triangulated
 /-!
 # Generation of `Dctf`
 
-This file computes the Tor amplitude of a flat sheaf placed in degree `0` and proves that
-`Dctf(X, Λ)` is generated, as a thick subcategory, by the objects `Rj_! L` and `Ri_* L` for
-lisse flat sheaves `L` on locally closed subschemes (`sk-lem-sf-ctf-generation`).
+This file computes the Tor amplitude of a flat sheaf placed in degree `0`, shows that
+`Dctf(X, Λ)` is a thick subcategory of `D(X_ét, Λ)` for a finite ring `Λ`, and proves that it is
+generated, as a thick subcategory, by the objects `Rg_* Rj_! L` for lisse flat sheaves `L` on the
+strata of stratifications of `X` (`sk-lem-sf-ctf-generation`). Over a finite-type scheme over a
+field, `Dctf(X, Λ)` is exactly the thick envelope of these generators
+(`lem-trf-devissage-generation`).
 
 This file is part of `WeilConjectures.SixFunctors.Etale.Derived.Stability`, whose module
 documentation records the implementation notes.

@@ -208,6 +208,40 @@ theorem IsClosedImmersion.existsUnique_fac_of_field {K : Type u} [Field K] (i : 
   IsClosedImmersion.existsUnique_fac_of_range_subset_range i s
     (Scheme.range_base_subset_of_closedPoint_mem s hs)
 
+/-- For a point `x` with `{x}` locally closed, the morphism `Spec κ(x) ⟶ X` factors through a
+closed immersion into the open `W = X ∖ (closure {x} ∖ {x})`, which contains `x` as a closed
+point. -/
+lemma exists_isClosedImmersion_comp_ι_eq_fromSpecResidueField {x : Y}
+    (hx : IsLocallyClosed ({x} : Set Y)) :
+    ∃ (W : Y.Opens) (g : Spec (Y.residueField x) ⟶ W), x ∈ W ∧ IsClosedImmersion g ∧
+      g ≫ W.ι = Y.fromSpecResidueField x := by
+  let W : Y.Opens := ⟨coborder {x}, hx.isOpen_coborder⟩
+  have hxW : x ∈ W := subset_coborder rfl
+  have hr : Set.range (Y.fromSpecResidueField x).base ⊆ Set.range W.ι.base := by
+    rw [Scheme.range_fromSpecResidueField, Scheme.Opens.range_ι, Set.singleton_subset_iff]
+    exact hxW
+  let g := IsOpenImmersion.lift W.ι (Y.fromSpecResidueField x) hr
+  have hg : g ≫ W.ι = Y.fromSpecResidueField x := IsOpenImmersion.lift_fac _ _ _
+  refine ⟨W, g, hxW, ?_, hg⟩
+  have : IsPreimmersion (g ≫ W.ι) := by rw [hg]; infer_instance
+  have : IsPreimmersion g := .of_comp g W.ι
+  refine .of_isPreimmersion g ?_
+  have : Set.range g.base = W.ι.base ⁻¹' closure {x} := by
+    refine Set.ext fun w ↦ ⟨?_, fun hw ↦ ?_⟩
+    · rintro ⟨p, rfl⟩
+      rw [Set.mem_preimage, ← Scheme.Hom.comp_apply, hg]
+      exact subset_closure (Scheme.range_fromSpecResidueField x ▸ ⟨p, rfl⟩)
+    · have hw' : W.ι.base w ∈ (W : Set Y) := by rw [← Scheme.Opens.range_ι]; exact ⟨w, rfl⟩
+      have : W.ι.base w ∈ coborder {x} ∩ closure {x} := ⟨hw', hw⟩
+      rw [coborder_inter_closure, Set.mem_singleton_iff] at this
+      obtain ⟨p, hp⟩ : x ∈ Set.range (Y.fromSpecResidueField x).base := by
+        rw [Scheme.range_fromSpecResidueField]; rfl
+      refine ⟨p, W.ι.isOpenEmbedding.injective ?_⟩
+      rw [← Scheme.Hom.comp_apply, hg, hp, this]
+  rw [this]
+  exact isClosed_closure.preimage W.ι.base.hom.continuous
+
+
 end Point
 
 section AffineDescent
