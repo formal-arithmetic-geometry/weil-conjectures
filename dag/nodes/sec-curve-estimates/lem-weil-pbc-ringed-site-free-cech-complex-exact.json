@@ -147,5 +147,24 @@
    "decls": [],
    "missing": []
   }
+ },
+ "lean": {
+  "module": "Sheaf.Paper.FreeCechComplexExactK1",
+  "declaration": "CategoryTheory.free_presheaf_cech_complex_exact",
+  "statement": "theorem free_presheaf_cech_complex_exact (C : Type u) [SmallCategory C] (J : Precoverage C) [J.HasIsos] [J.IsStableUnderComposition] [J.IsStableUnderBaseChange] [J.HasPullbacks] (R : Sheaf J.toGrothendieck RingCat.{max u w r}) (I : Type w) (U : C) (Uι : I → C) (f : ∀ i : I, Uι i ⟶ U) (hS : Presieve.ofArrows Uι f ∈ J U) (P : ∀ (n : ℕ) (s : Fin (n + 1) → I), WidePullbackCone (fun j => f (s j))) (hP : ∀ (n : ℕ) (s : Fin (n + 1) → I), IsLimit (P n s)) (δ : ∀ (n : ℕ) (s : Fin (n + 2) → I) (a : Fin (n + 2)), (P (n + 1) s).pt ⟶ (P n (s ∘ a.succAbove)).pt) (hδ : ∀ (n : ℕ) (s : Fin (n + 2) → I) (a : Fin (n + 2)) (j : Fin (n + 1)), δ n s a ≫ (P n (s ∘ a.succAbove)).π j = (P (n + 1) s).π (a.succAbove j)) (K : ChainComplex (PresheafOfModules R.obj) ℕ) (e : ∀ n : ℕ, (∐ fun s : Fin (n + 1) → I => (PresheafOfModules.free R.obj).obj (uliftYoneda.{max w r}.obj (P n s).pt)) ≅ K.X n) (hd : ∀ (n : ℕ) (s : Fin (n + 2) → I), Sigma.ι (fun t : Fin (n + 2) → I => (PresheafOfModules.free R.obj).obj (uliftYoneda.{max w r}.obj (P (n + 1) t).pt)) s ≫ (e (n + 1)).hom ≫ K.d (n + 1) n = ∑ a : Fin (n + 2), (-1 : ℤ) ^ (a : ℕ) • ((PresheafOfModules.free R.obj).map (uliftYoneda.{max w r}.map (δ n s a)) ≫ Sigma.ι (fun t : Fin (n + 1) → I => (PresheafOfModules.free R.obj).obj (uliftYoneda.{max w r}.obj (P n t).pt)) (s ∘ a.succAbove) ≫ (e n).hom)) : ∀ (n : ℕ), 0 < n → K.ExactAt n",
+  "by": "K1",
+  "date": "2026-10-12",
+  "file": "lean/Sheaf/Paper/FreeCechComplexExactK1.lean",
+  "branch": "sheaf-dag",
+  "existing": false,
+  "note": "Second reader repaired H3: use the recorded Precoverage site encoding and a sheaf of rings; limiting wide-pullback cones specify the iterated fibre products, projection equations specify deletion, and coproduct-component equations identify the alternating differential. No change to the mathematical node statement."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "K1",
+  "result": "pass",
+  "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
  }
 }
