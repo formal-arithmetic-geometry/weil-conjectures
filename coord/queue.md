@@ -1,11 +1,11 @@
 # Work queue
 
-512 items; claim with `tools/claim.py next <group> [--stage N]`.
+507 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (512)
+## Stage 2: nodes to state (507)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -16,11 +16,9 @@
 | `lem-pc-derived-tensor-transitivity` | 1 | state |
 | `lem-pc-finite-flat-pushforward-locally-free` | 1 | state |
 | `lem-pc-flf-properties` | 1 | state |
-| `lem-pc-fp-complex-descent` | 1 | state |
 | `lem-pc-fp-module-map-descent` | 1 | state |
 | `lem-pc-module-pullback-identity-composition` | 1 | state |
 | `lem-pc-picard-functor-agrees-sc` | 1 | state |
-| `lem-pc-quasi-coherent-extension` | 1 | state |
 | `lem-pc-relative-kill-by-twisting` | 1 | state |
 | `lem-pc-zero-support-finite-scheme` | 1 | state |
 | `lem-sc-affine-cap-section-open-dictionary` | 1 | state |
@@ -30,7 +28,6 @@
 | `lem-sc-base-change-curve` | 1 | state |
 | `lem-sc-closed-subset-qc-ideal` | 1 | state |
 | `lem-sc-coherent-free-stalks-locally-free` | 1 | state |
-| `lem-sc-ext-coherent-hom-injective-flasque` | 1 | state |
 | `lem-sc-ext-evaluation` | 1 | state |
 | `lem-sc-ext-tensor-exact` | 1 | state |
 | `lem-sc-finite-locally-free-residue-isomorphism` | 1 | state |
@@ -91,9 +88,7 @@
 | `lem-weil-pbc-module-pullback-finite-type` | 1 | state |
 | `lem-weil-pbc-module-stalk-exact` | 1 | state |
 | `lem-weil-pbc-module-stalk-tensor` | 1 | state |
-| `lem-weil-pbc-module-tensor-hom-adjunction` | 1 | state |
 | `lem-weil-pbc-n2-ascends-finite-domain-extension` | 1 | state |
-| `lem-weil-pbc-nakayama-nilpotent` | 1 | state |
 | `lem-weil-pbc-noetherian-acc-quasi-coherent` | 1 | state |
 | `lem-weil-pbc-nonvanishing-section-trivializes` | 1 | state |
 | `lem-weil-pbc-normal-nagata-monogenic-n1` | 1 | state |
