@@ -132,7 +132,6 @@ noncomputable def isLimitHomologyFunctorMapCone {F : J ⥤ ShortComplex C} {c : 
   have h₂ : c.pt.homologyπ ≫ φ ≫ limit.π (F ⋙ homologyFunctor C) j =
       cyclesMap (c.π.app j) ≫ (F.obj j).homologyπ := by
     rw [π_descHomology_assoc, assoc, lim_map, limMap_π, reassoc_of% he₂]
-    rfl
   exact h₂.trans ((homologyπ_naturality (c.π.app j)).symm.trans h₁.symm)
 
 instance preservesLimitsOfShape_homologyFunctor :

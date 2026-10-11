@@ -54,6 +54,50 @@ lemma fanShift_proj {K : C} {P : Fan fun _ : ℕ ↦ K} (hP : IsLimit P) (n : �
     fanShift hP ≫ P.proj n = P.proj (n + 1) :=
   Fan.IsLimit.fac hP _ n
 
+
+section Linear
+
+variable [Preadditive C] [Linear R C]
+
+/-- Whether `1 - ϖ • s` is invertible on a product of countably many copies of an object does
+not depend on the choice of the product, nor on the object within its isomorphism class. -/
+lemma isIso_one_sub_smul_fanShift_iff_of_iso {X Y : C} (e : X ≅ Y) {P : Fan fun _ : ℕ ↦ X}
+    (hP : IsLimit P) {Q : Fan fun _ : ℕ ↦ Y} (hQ : IsLimit Q) (ϖ : R) :
+    IsIso (𝟙 P.pt - ϖ • fanShift hP) ↔ IsIso (𝟙 Q.pt - ϖ • fanShift hQ) := by
+  let Φ : P.pt ⟶ Q.pt := Fan.IsLimit.lift hQ fun n ↦ P.proj n ≫ e.hom
+  let Ψ : Q.pt ⟶ P.pt := Fan.IsLimit.lift hP fun n ↦ Q.proj n ≫ e.inv
+  have hΦ (n : ℕ) : Φ ≫ Q.proj n = P.proj n ≫ e.hom := Fan.IsLimit.fac hQ _ n
+  have hΨ (n : ℕ) : Ψ ≫ P.proj n = Q.proj n ≫ e.inv := Fan.IsLimit.fac hP _ n
+  have hΦΨ : Φ ≫ Ψ = 𝟙 _ := Fan.IsLimit.hom_ext hP _ _ fun n ↦ by
+    rw [assoc, hΨ, reassoc_of% hΦ, e.hom_inv_id, comp_id, id_comp]
+  have hΨΦ : Ψ ≫ Φ = 𝟙 _ := Fan.IsLimit.hom_ext hQ _ _ fun n ↦ by
+    rw [assoc, hΦ, reassoc_of% hΨ, e.inv_hom_id, comp_id, id_comp]
+  have : IsIso Φ := ⟨Ψ, hΦΨ, hΨΦ⟩
+  have : IsIso Ψ := ⟨Φ, hΨΦ, hΦΨ⟩
+  have hcomm : (𝟙 P.pt - ϖ • fanShift hP) ≫ Φ = Φ ≫ (𝟙 Q.pt - ϖ • fanShift hQ) :=
+    Fan.IsLimit.hom_ext hQ _ _ fun n ↦ by
+      simp only [sub_comp, comp_sub, id_comp, comp_id, Linear.smul_comp, Linear.comp_smul,
+        assoc, hΦ, fanShift_proj, fanShift_proj_assoc]
+  constructor
+  · intro h
+    rw [show 𝟙 Q.pt - ϖ • fanShift hQ = Ψ ≫ (𝟙 P.pt - ϖ • fanShift hP) ≫ Φ by
+      rw [hcomm, reassoc_of% hΨΦ]]
+    infer_instance
+  · intro h
+    rw [show 𝟙 P.pt - ϖ • fanShift hP = Φ ≫ (𝟙 Q.pt - ϖ • fanShift hQ) ≫ Ψ by
+      rw [← reassoc_of% hcomm, hΦΨ, comp_id]]
+    infer_instance
+
+/-- On a product of copies of a zero object, `1 - ϖ • s` is invertible. -/
+lemma isIso_one_sub_smul_fanShift_of_isZero {X : C} (hX : IsZero X) {P : Fan fun _ : ℕ ↦ X}
+    (hP : IsLimit P) (ϖ : R) : IsIso (𝟙 P.pt - ϖ • fanShift hP) := by
+  have : IsZero P.pt := by
+    rw [IsZero.iff_id_eq_zero]
+    exact Fan.IsLimit.hom_ext hP _ _ fun n ↦ hX.eq_of_tgt _ _
+  exact this.isIso this _
+
+end Linear
+
 end Pretriangulated
 
 variable [Preadditive C] [Linear R C]
@@ -101,13 +145,12 @@ lemma isIso_smul_id_of_distTriang {P Z : C} (ϖ : R) (s : P ⟶ P) (g : P ⟶ Z)
     exact this
   obtain ⟨ψ, hψdef⟩ : ∃ ψ : Z ⟶ Z, ψ = ϖ • σ - 𝟙 Z := ⟨_, rfl⟩
   have h₁ : g ≫ ψ = 0 := by
-    simp only [hψdef, comp_sub, Linear.comp_smul, hσ₁, comp_id]
-    rw [← Linear.smul_comp, ← sub_eq_zero.mpr rfl]
-    have : (ϖ • s) ≫ g = g := by
+    have hsg : (ϖ • s) ≫ g = g := by
       have := hφg
       rw [sub_comp, id_comp, sub_eq_zero] at this
       exact this.symm
-    rw [this, sub_self]
+    simp only [hψdef, comp_sub, Linear.comp_smul, hσ₁, comp_id]
+    rw [← Linear.smul_comp, hsg, sub_self]
   have h₂ : ψ ≫ h = 0 := by
     simp only [hψdef, sub_comp, Linear.smul_comp, ← hσ₂, id_comp]
     have : h ≫ (ϖ • s)⟦(1 : ℤ)⟧' = h := by
