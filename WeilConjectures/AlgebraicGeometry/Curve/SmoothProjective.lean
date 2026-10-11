@@ -7,6 +7,7 @@ module
 
 public import Mathlib.AlgebraicGeometry.Fiber
 public import Mathlib.AlgebraicGeometry.Geometrically.Integral
+public import WeilConjectures.AlgebraicGeometry.BaseChangeField
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.AffineMorphism
 public import WeilConjectures.AlgebraicGeometry.Curve
 public import WeilConjectures.AlgebraicGeometry.Curve.RiemannRoch
@@ -184,14 +185,6 @@ end Curve
 section GeneralCurve
 
 variable {k : Type u} [Field k] {C : Scheme.{u}} [C.Over (Spec (.of k))]
-
-variable (k) (K : Type u) [Field K] [Algebra k K] (C) in
-/-- The base change `C_K = C ×_{Spec k} Spec K` of a `k`-scheme `C` to a field extension `K/k`,
-a scheme over `K` through the second projection.
-
-(blueprint: `def-pc-base-change`) -/
-noncomputable abbrev Scheme.baseChangeField : Scheme.{u} :=
-  pullback (C ↘ Spec (.of k)) (Spec.map (CommRingCat.ofHom (algebraMap k K)))
 
 variable [IsSmoothProjectiveCurve (C ↘ Spec (.of k))]
 

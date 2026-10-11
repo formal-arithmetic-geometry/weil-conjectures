@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.Algebra.Homology.ExactCouple.Convergence
+public import WeilConjectures.Algebra.Homology.ExactCouple.EdgeCollapse
 
 /-!
 # Convergence of half-plane exact couples
@@ -99,13 +100,6 @@ end αPow
 section HalfPlane
 
 variable {b : ℤ × ℤ} (X : ExactCouple C ((-1, 0) : ℤ × ℤ) b 0)
-
-/-- The `E`-objects of the derived couples are subquotients of those of the couple. -/
-lemma isZero_derivedIter_E (N : ℕ) (i : ℤ × ℤ) (hi : IsZero (X.E i)) :
-    IsZero ((X.derivedIter N).E i) := by
-  induction N with
-  | zero => exact hi
-  | succ N ih => exact ShortComplex.isZero_homology_of_isZero_X₂ _ ih
 
 /-- The degree of the map `g` of the `N`-th derived couple of a couple with `α` of degree
 `(-1, 0)` and `g` of degree `0` is `(N, 0)`. -/
@@ -296,7 +290,8 @@ theorem derivedIter_d_eq_zero_of_isHalfPlane' (N : ℕ) (p n : ℤ) :
         simp at h₁ h₂
         rw [Prod.mk.injEq]
         constructor <;> omega
-      exact (X.isZero_derivedIter_E N _ (h.isZero_E _ _ (Or.inl hN))).eq_of_src _ _
+      exact (X.isZero_derivedIter_E 0 N (Nat.zero_le _) _
+        (h.isZero_E _ _ (Or.inl hN))).eq_of_src _ _
     · exact (X.derivedIter N).shape_d _ _ hj
 
 end HalfPlane
