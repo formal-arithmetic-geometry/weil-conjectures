@@ -5187,3 +5187,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 15:17 L: merged deliver/F1/lem-sc-strict-henselization-noetherian (stage 2; reviewer PASS; first push; Sheaf.RingTheory.StrictHenselizationNoetherian Algebra.isNoetherianRing_iff_isStrictHenselization)
 - 15:17 L: merged deliver/K1/lem-sc-p1-duality-pairing-naturality (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.ProjectiveLineDualityPairingNaturality AlgebraicGeometry.Scheme.Modules.p1_duality_pairing_naturality)
 - 15:17 L: merged deliver/K1/lem-weil-pbc-coherent-formal-modules-isomorphism-local (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.CoherentFormalModuleIsomorphismLocal AlgebraicGeometry.coherentFormalModule_isIso_of_isIso_restrict)
+- 15:17 L: merged deliver/K1/lem-weil-pbc-site-morphism-composition (stage 2; reviewer PASS; first push; Sheaf.CategoryTheory.SiteMorphismComposition CategoryTheory.siteMorphism_composition)
