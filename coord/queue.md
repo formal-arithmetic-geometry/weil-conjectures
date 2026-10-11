@@ -1,19 +1,19 @@
 # Work queue
 
-986 items; claim with `tools/claim.py next <group> [--stage N]`.
+983 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (986)
+## Stage 2: nodes to state (983)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
 | `def-exc-continuous-cohomology` | 1 | state |
+| `def-galois-categories` | 1 | state |
 | `def-pur-hom-complex` | 1 | state |
 | `def-weil-derived-tensor` | 1 | state |
 | `def-weil-pbc-derived-categories` | 1 | state |
-| `def-weil-pbc-finite-torsors` | 1 | state |
 | `lem-kun-03sa` | 1 | state |
 | `lem-pc-base-change-product` | 1 | state |
 | `lem-pc-derived-adjoint-functors` | 1 | state |
@@ -25,14 +25,12 @@
 | `lem-pc-hilb-containment-locus` | 1 | state |
 | `lem-pc-homeo-pure-insep` | 1 | state |
 | `lem-pc-kflat-derived-tensor-associator` | 1 | state |
-| `lem-pc-module-pullback-adjunction` | 1 | state |
 | `lem-pc-module-pullback-identity-composition` | 1 | state |
 | `lem-pc-pre-derived-adjoint-functors-general` | 1 | state |
 | `lem-pc-projective-base-change` | 1 | state |
 | `lem-pc-proper-descends-field` | 1 | state |
 | `lem-pc-sheaf-modules-tensor-closed` | 1 | state |
 | `lem-pc-tor-independent-projective-complex-tensor` | 1 | state |
-| `lem-pc-tower-surjective-lim-acyclic` | 1 | state |
 | `lem-pc-very-ample-disjoint-union` | 1 | state |
 | `lem-pc-zero-scheme-pullback` | 1 | state |
 | `lem-pur-derived-change-of-rings` | 1 | state |
@@ -55,9 +53,8 @@
 | `lem-sc-glue-component-transition-cocycle` | 1 | state |
 | `lem-sc-going-down-surjective-dimension` | 1 | state |
 | `lem-sc-graded-localization-exact` | 1 | state |
-| `lem-sc-hilbert-affine-denominator-module` | 1 | state |
 | `lem-sc-hilbert-denominator-ideal-nowhere-dense` | 1 | state |
-| `lem-sc-hilbert-embedded-points-affine-removal` | 1 | state |
+| `lem-sc-hilbert-embedded-points-affine-localization` | 1 | state |
 | `lem-sc-integral-closure-dedekind-surjective-fibres` | 1 | state |
 | `lem-sc-integral-overring-jacobson-power` | 1 | state |
 | `lem-sc-invert-s-cohomology-induction` | 1 | state |
@@ -996,7 +993,7 @@
 | `lem-sc-normalization-properties` | 3 | state |
 | `def-nagata-fixed-base-separated-stage` | 6 | state |
 
-Not open yet: 933 nodes that wait for a statement dependency, 40 nodes that wait for stage 1.
+Not open yet: 931 nodes that wait for a statement dependency, 40 nodes that wait for stage 1.
 
 ## Stage 3: modules to prove (0)
 
