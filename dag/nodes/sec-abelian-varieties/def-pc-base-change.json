@@ -100,5 +100,32 @@
   "result": "pass"
  },
  "chapter": "sec-abelian-varieties",
- "unit": "sk-def-av-jacobian"
+ "unit": "sk-def-av-jacobian",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.BaseChangeConventions",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.moduleBaseChange",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.Modules.moduleBaseChange",
+   "AlgebraicGeometry.baseChange_morphism_projections",
+   "AlgebraicGeometry.baseChange_iterated",
+   "AlgebraicGeometry.baseChange_fiber",
+   "AlgebraicGeometry.Scheme.Hom.geometricFiberAt",
+   "AlgebraicGeometry.baseChange_section_characterization"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/BaseChangeConventions.lean",
+  "statement": "def Scheme.Modules.moduleBaseChange (f : X ⟶ S) {T T' : Over S} (g : T' ⟶ T) : (Limits.pullback f T.hom).Modules ⥤ (Limits.pullback f T'.hom).Modules",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-11",
+  "existing": false,
+  "note": "Bundle of conventions. Scheme and morphism base change reuse CategoryTheory.Over.pullback; g_X and induced sections reuse AlgebraicGeometry.baseChangeMap and sectionBaseChange from slopmaster2. The module records the comparison clauses and adds module base change using the dependency tensorPullback, and the geometric fibre at a point with an arbitrary chosen algebraic closure."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-dbc1130",
+  "group": "H1",
+  "result": "pass",
+  "note": "X_T=Limits.pullback f T.hom with pr_T=snd, f_T=fst (Over.pullback obj rfl-checked); h_T both projections; g_X=baseChangeMap and X_T' ≅ X_T ×_T T' with fst=g_X, snd=pr_T'; F_T'=tensorPullback(g_X) (H1 convention, not Modules.pullback); X_t ≅ (pr_T).fiber t compatible with both maps; geometric fibre over arbitrary IsAlgClosure Ω; induced section = sectionBaseChange, both equations + uniqueness; names #check-resolved"
+ }
 }
