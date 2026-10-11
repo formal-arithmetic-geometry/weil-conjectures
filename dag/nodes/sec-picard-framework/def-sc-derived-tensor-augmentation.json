@@ -1,0 +1,108 @@
+{
+ "id": "def-sc-derived-tensor-augmentation",
+ "kind": "definition",
+ "title": "Derived tensor augmentation on a scheme",
+ "status": "split",
+ "statement": "Let $X$ be a scheme [def-pc-scheme], and let $A,I,B$ be objects of $D(\\mathcal O_X)$ [def-pc-derived-category], with $\\beta:B\\to A$. Say that $\\beta$ is a derived tensor augmentation with factor $I$ if there are K-flat complexes $P,J$ of $\\mathcal O_X$-modules [def-pc-kflat-complex], isomorphisms $a:Q(P)\\cong A$, $i:Q(J)\\cong I$ and $b:Q(\\operatorname{Tot}(P\\otimes J))\\cong B$ [def-pc-tensor-complex-sheaves], and a map of complexes $u:J\\to\\mathcal O_X[0]$, such that $\\beta=a\\circ Q(\\rho_P)\\circ Q(1_P\\otimes u)\\circ b^{-1}$, where $\\rho_P:\\operatorname{Tot}(P\\otimes\\mathcal O_X[0])\\cong P$ the canonical right unitor. Here $Q$ sends a complex to the derived category. The tensor is the sheaf tensor product [def-pur-sheaf-tensor-product], and its additive monoidal structure is supplied by [lem-pc-sheaf-modules-tensor-closed]. Thus $B$ represents $A\\otimes^{\\mathbf L}I$ and $\\beta$ is induced by the derived morphism $I\\to\\mathcal O_X$ represented by $u$.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "def-pc-kflat-complex",
+  "def-pc-tensor-complex-sheaves",
+  "def-pur-sheaf-tensor-product",
+  "lem-pc-sheaf-modules-tensor-closed"
+ ],
+ "source": {
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 08EH, lemma-lift-map, proof; K-flat derived tensor construction in Cohomology on Sites, Tags 06YS and 06YU"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "derived tensor product of sheaves of modules using K flat representatives and induced map to the first factor",
+   "results": "[leansearch] UNAVAILABLE 0 hit(s) | service unavailable: Internal Server Error",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "derived tensor map induced by augmentation of a K flat complex to the structure sheaf",
+   "results": "[leanfinder] OK 8 hit(s): ModuleCat.preservesFiniteLimits_tensorLeft_of_ringHomFlat; Module.Flat.toAlgebra; Module.Flat.rTensor_shortComplex_exact; Module.Flat.lTensor_shortComplex_exact; Module.Flat.iff_rTensor_preserves_shortComplex_exact; Module.Flat.iff_lTensor_preserves_shortComplex_exact; Module.Flat.ker_lTensor_eq; AlgebraicGeometry.Scheme.Hom.flat_appLE",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "IsDerivedTensorAugmentation|derived tensor augmentation|tensor augmentation (Mathlib, WeilConjectures, lean/Sheaf, dag/nodes); blueprint_refs.py search derived tensor",
+   "results": "rg: 0 hits in all four trees. blueprint_refs.py: 35 blueprint nodes match derived tensor, but none defines an augmentation on D(O_X); def-weil-derived-tensor and def-kun-derived-tensor concern constant coefficients on other sites. Scheme derived-tensor cohomology vanishing is only a predicate for tensor with a degree-zero module, not an augmentation.",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sc-affine-perfect-map-lift",
+  "date": "2026-10-11",
+  "group": "H1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "The affine supported perfect map lift: tensor with a perfect augmentation to the structure sheaf.",
+   "via": [
+    "lem-sc-affine-perfect-map-lift",
+    "lem-sc-perfect-support-map-lift",
+    "lem-sc-proper-flat-right-adjoint-open-support",
+    "lem-sc-proper-flat-right-adjoint-restriction-open",
+    "lem-sc-proper-flat-right-adjoint-basechange",
+    "lem-sc-smooth-proper-diagonal-basechange-upper-shriek",
+    "lem-sc-smooth-proper-diagonal-pushforward-structure",
+    "lem-sc-smooth-proper-relative-dualizing-general",
+    "lem-sc-smooth-proper-curve-dualizing",
+    "lem-sc-finite-duality-trace"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.DerivedTensorAugmentation",
+  "declaration": "AlgebraicGeometry.Scheme.IsDerivedTensorAugmentation",
+  "file": "lean/Sheaf/AlgebraicGeometry/DerivedTensorAugmentation.lean",
+  "statement": "def IsDerivedTensorAugmentation (X : Scheme.{u}) [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))] (A I B : schemeDerivedCategory X) (β : B ⟶ A) : Prop",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-apm1547",
+  "group": "H1",
+  "result": "fix",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-apm1547",
+  "group": "H1",
+  "result": "fix",
+  "note": "X affine IsAffine, U qc IsCompact, E' schemeDerivedQCohCategory, A IsPerfect; FIX: alpha/beta|U/gamma|U now via overFunctor ⋙ overEquiv U .mapDerivedCategory in D(O_U) as siblings E1 534dc09bd/F1 4e129afd2/G1 00e16b592 and citer J1 PerfectSupportedMapLift (+U.toScheme HasDerivedCategory binder); support clause rewritten from a second form (vanishing restrictions to opens disjoint from T) to the landed homology-stalk Subsingleton form (J1 PerfectSupportedMapLift, PerfectGenerationOpenInduction); tied existential bU.hom = R.map beta, alpha = bU.inv ≫ R.map gamma; I perfect + IsDerivedTensorAugmentation (new def: K-flat P,J, eB to Tot(P⊗J), u : J ⟶ O_X[0], beta = eB.inv ≫ Q(1⊗u) ≫ Q(rho) ≫ eA.hom; same mapBifunctor/curriedTensor form as def-pc-derived-tensor-complex-cohomology-vanishes; tensorClosed .some only selects Prop MonoidalPreadditive); combined sandbox compile 6.1 s"
+ }
+}
