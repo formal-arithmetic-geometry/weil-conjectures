@@ -11,6 +11,7 @@ public import Mathlib.FieldTheory.IsAlgClosed.Classification
 public import Mathlib.NumberTheory.Padics.Complex
 public import Mathlib.RingTheory.Algebraic.Cardinality
 public import Mathlib.Topology.Algebra.Module.Cardinality
+public import WeilConjectures.Mathlib.FieldTheory.IsAlgClosed.Classification
 
 /-!
 # `ℚ̄_p` is abstractly isomorphic to `ℂ`
@@ -29,6 +30,10 @@ complex absolute values, exist.
 - `Padic.mk_eq_continuum`: `#ℚ_[p] = 𝔠`.
 - `PadicAlgCl.mk_eq_continuum`: `#ℚ̄_p = 𝔠`.
 - `PadicAlgCl.nonempty_ringEquiv_complex`: `ℚ̄_p ≃+* ℂ`.
+- `PadicAlgCl.exists_ringEquiv_complex_extend`: every embedding of a number field `L ⊆ ℚ̄_p`
+  into `ℂ` extends to an isomorphism `ℚ̄_p ≃+* ℂ` (blueprint `lem-embedding-extension`).
+- `PadicAlgCl.exists_ringEquiv_complex_apply_eq`: an algebraic `β ∈ ℚ̄_p` can be sent to any
+  conjugate by an isomorphism `ℚ̄_p ≃+* ℂ`.
 -/
 
 @[expose] public section
@@ -76,13 +81,38 @@ theorem PadicAlgCl.nonempty_ringHom_complex : Nonempty (PadicAlgCl p →+* ℂ) 
 
 /-- Blueprint `lem-embedding-extension` (extension of embeddings): every field embedding
 `σ : L → ℂ` of a number field `L ⊆ ℚ̄_p` extends to an abstract field isomorphism
-`ι : ℚ̄_p ≃ ℂ`. Both fields are algebraically closed of characteristic zero with transcendence
-bases of cardinality `𝔠` over the countable algebraic closures of `L` and of `σ L`
+`ι : ℚ̄_p ≃ ℂ`. Both fields are algebraically closed of cardinality `𝔠`, so their transcendence
+bases over the countable field `L` (acting on `ℂ` through `σ`) are equipotent
 (`IsAlgClosed.exists_ringEquiv_extend`). -/
 theorem PadicAlgCl.exists_ringEquiv_complex_extend (L : IntermediateField ℚ (PadicAlgCl p))
     [FiniteDimensional ℚ L] (σ : L →ₐ[ℚ] ℂ) :
-    ∃ ι : PadicAlgCl p ≃+* ℂ, ∀ x : L, ι x = σ x :=
-  sorry
+    ∃ ι : PadicAlgCl p ≃+* ℂ, ∀ x : L, ι x = σ x := by
+  have hL : #L ≤ ℵ₀ := (Algebra.IsAlgebraic.cardinalMk_le_max ℚ L).trans <| by
+    rw [Cardinal.mkRat, max_self]
+  have hK : ℵ₀ < #(PadicAlgCl p) := by
+    rw [PadicAlgCl.mk_eq_continuum]
+    exact Cardinal.aleph0_lt_continuum
+  have hKL : Nonempty (PadicAlgCl p ≃ ℂ) :=
+    Cardinal.eq.1 (by rw [PadicAlgCl.mk_eq_continuum, Cardinal.mk_complex])
+  obtain ⟨ι, hι⟩ := IsAlgClosed.exists_ringEquiv_extend hL hK hKL σ.toRingHom
+  exact ⟨ι, hι⟩
+
+open IntermediateField in
+/-- An element `β ∈ ℚ̄_p` algebraic over `ℚ` can be sent by a field isomorphism `ℚ̄_p ≃+* ℂ` to
+any complex root of its minimal polynomial over `ℚ`: embed `ℚ(β)` by `β ↦ z` and extend
+(`PadicAlgCl.exists_ringEquiv_complex_extend`, blueprint `lem-embedding-extension`). -/
+theorem PadicAlgCl.exists_ringEquiv_complex_apply_eq {β : PadicAlgCl p} (hβ : IsIntegral ℚ β)
+    {z : ℂ} (hz : Polynomial.aeval z (minpoly ℚ β) = 0) :
+    ∃ ι : PadicAlgCl p ≃+* ℂ, ι β = z := by
+  have : FiniteDimensional ℚ ℚ⟮β⟯ := adjoin.finiteDimensional hβ
+  let τ : ℚ⟮β⟯ →ₐ[ℚ] ℂ := (adjoin.powerBasis hβ).lift z (by
+    rwa [adjoin.powerBasis_gen, minpoly_gen])
+  obtain ⟨ι, hι⟩ := PadicAlgCl.exists_ringEquiv_complex_extend p ℚ⟮β⟯ τ
+  refine ⟨ι, ?_⟩
+  have h := hι (AdjoinSimple.gen ℚ β)
+  rw [AdjoinSimple.coe_gen] at h
+  rw [h]
+  exact (adjoin.powerBasis hβ).lift_gen z _
 
 /-- An element `β ∈ ℚ̄_p` algebraic over `ℚ` can be sent by a field embedding `ℚ̄_p →+* ℂ` to any
 complex root of its minimal polynomial over `ℚ`: embed `ℚ(β)` by `β ↦ z` and extend
@@ -90,4 +120,5 @@ complex root of its minimal polynomial over `ℚ`: embed `ℚ(β)` by `β ↦ z`
 theorem PadicAlgCl.exists_ringHom_complex_apply_eq {β : PadicAlgCl p} (hβ : IsIntegral ℚ β)
     {z : ℂ} (hz : Polynomial.aeval z (minpoly ℚ β) = 0) :
     ∃ ι : PadicAlgCl p →+* ℂ, ι β = z :=
-  sorry
+  let ⟨ι, hι⟩ := PadicAlgCl.exists_ringEquiv_complex_apply_eq p hβ hz
+  ⟨ι, hι⟩

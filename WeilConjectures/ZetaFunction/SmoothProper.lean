@@ -61,8 +61,12 @@ theorem frobeniusCharpolyRev_zero [IsSeparated (X ↘ Spec (CommRingCat.of k₀)
     [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
     [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))]
     [GeometricallyConnected (X ↘ Spec (CommRingCat.of k₀))] :
-    frobeniusCharpolyRev k₀ l X 0 = 1 - Polynomial.X :=
-  sorry
+    frobeniusCharpolyRev k₀ l X 0 = 1 - Polynomial.X := by
+  have h : ((WeilSheaf.adicConstant k₀ l X).cohomology 0).frobeniusEnd = 1 := by
+    rw [FrobeniusModule.frobeniusEnd, WeilSheaf.frobenius_cohomology_zero_adicConstant]
+    rfl
+  rw [frobeniusCharpolyRev_def, FrobeniusModule.localPolynomial, h, LinearMap.charpolyRev_one,
+    WeilSheaf.finrank_cohomology_zero_adicConstant, pow_one]
 
 /-- The top-degree endpoint of `prop-endpoints`: for `X₀` smooth, proper and geometrically
 connected of pure dimension `d`, the trace `H^{2d}(X₀ ⊗ k̄, ℚ̄_ℓ) ≅ ℚ̄_ℓ(-d)` of Poincaré duality is
@@ -71,8 +75,18 @@ a Frobenius-equivariant isomorphism onto a line on which Frobenius acts by `qᵈ
 theorem frobeniusCharpolyRev_two_mul (d : ℕ) [IsProper (X ↘ Spec (CommRingCat.of k₀))]
     [SmoothOfRelativeDimension d (X ↘ Spec (CommRingCat.of k₀))]
     [GeometricallyConnected (X ↘ Spec (CommRingCat.of k₀))] :
-    frobeniusCharpolyRev k₀ l X (2 * d) = 1 - C ((Nat.card k₀ : PadicAlgCl l) ^ d) * Polynomial.X :=
-  sorry
+    frobeniusCharpolyRev k₀ l X (2 * d) =
+      1 - C ((Nat.card k₀ : PadicAlgCl l) ^ d) * Polynomial.X := by
+  obtain ⟨T, htr, -, -, -, hF, -⟩ := WeilSheaf.poincareDuality k₀ l X d
+  set M := (WeilSheaf.adicConstant k₀ l X).cohomology (2 * d)
+  have hfin : Module.finrank (PadicAlgCl l) M.carrier = 1 :=
+    (LinearEquiv.ofBijective T.trace htr).finrank_eq.trans (Module.finrank_self _)
+  have hfrob : M.frobeniusEnd = (Nat.card k₀ : PadicAlgCl l) ^ d • 1 := by
+    refine LinearMap.ext fun z ↦ htr.1 ?_
+    rw [LinearMap.smul_apply, LinearMap.one_apply, map_smul, smul_eq_mul]
+    exact hF z
+  rw [frobeniusCharpolyRev_def, FrobeniusModule.localPolynomial, hfrob,
+    LinearMap.charpolyRev_smul_one, hfin, pow_one]
 
 /-- Blueprint `sk-prop-rootpurity` and `prop-weight-purity-roots` (reciprocal roots have the
 weight-`i` absolute value): for `X₀` smooth, proper and geometrically connected of pure
@@ -84,8 +98,21 @@ theorem isPureOfWeight_map_frobeniusCharpolyRev (d : ℕ)
     [IsProper (X ↘ Spec (CommRingCat.of k₀))]
     [SmoothOfRelativeDimension d (X ↘ Spec (CommRingCat.of k₀))]
     [GeometricallyConnected (X ↘ Spec (CommRingCat.of k₀))] (ι : PadicAlgCl l →+* ℂ) (i : ℕ) :
-    ((frobeniusCharpolyRev k₀ l X i).map ι).IsPureOfWeight (Nat.card k₀) i :=
-  sorry
+    ((frobeniusCharpolyRev k₀ l X i).map ι).IsPureOfWeight (Nat.card k₀) i := by
+  set M := (WeilSheaf.adicConstant k₀ l X).cohomology i
+  have hpure := WeilSheaf.isPureOfWeightOver_cohomology_adicConstant k₀ l X d ι i
+  refine ⟨by rw [Polynomial.coeff_map, coeff_zero_frobeniusCharpolyRev, map_one], fun z hz ↦ ?_⟩
+  rw [frobeniusCharpolyRev_def, FrobeniusModule.localPolynomial,
+    LinearMap.roots_map_charpolyRev_eq_map_inv ι _ (LinearEquiv.isUnit_det' M.frobenius),
+    (IsAlgClosed.splits M.frobeniusEnd.charpoly).roots_map ι, Multiset.map_map,
+    Multiset.mem_map] at hz
+  obtain ⟨α, hα, rfl⟩ := hz
+  have hα' : M.frobeniusEnd.HasEigenvalue α :=
+    (Module.End.hasEigenvalue_iff_isRoot_charpoly _ _).2
+      (Polynomial.isRoot_of_mem_roots hα)
+  have hnorm := hpure α hα'
+  have hq : (0 : ℝ) < Nat.card k₀ := by exact_mod_cast Nat.card_pos
+  rw [Function.comp_apply, norm_inv, hnorm, ← Real.rpow_neg hq.le, Int.cast_natCast, neg_div]
 
 /-- The Weil conjectures for `X₀` at the prime `ℓ`: the factorization, the functional equation
 and the Riemann hypothesis for integer polynomials `Pᵢ` with `Pᵢ^{(ℓ)} = P_{i,ℓ}`. -/
@@ -97,8 +124,58 @@ theorem exists_isWeilFactorization_of_prime (d : ℕ) [IsProper (X ↘ Spec (Com
       WeilFunctionalEquation (Nat.card k₀) d P ∧
       WeilRiemannHypothesis (Nat.card k₀) d P ∧
       ∀ i : Fin (2 * d + 1),
-        (P i).map (Int.castRingHom (PadicAlgCl l)) = frobeniusCharpolyRev k₀ l X (i : ℕ) :=
-  sorry
+        (P i).map (Int.castRingHom (PadicAlgCl l)) = frobeniusCharpolyRev k₀ l X (i : ℕ) := by
+  have hq : 1 < Nat.card k₀ := Finite.one_lt_card
+  -- the smooth-proper cohomological family as a trace datum
+  let H := (WeilSheaf.adicConstant k₀ l X).cohomology
+  let D : TraceDatum.{0, u + 1} (PadicAlgCl l) (2 * d) :=
+    { V := fun i ↦ (H (i : ℕ)).carrier
+      F := fun i ↦ (H (i : ℕ)).frobeniusEnd
+      N := fun n ↦ ((X ↘ Spec (CommRingCat.of k₀)).pointCount n : ℤ)
+      trace_eq := fun n hn ↦ by
+        rw [Int.cast_natCast, WeilSheaf.pointCount_eq_sum_trace_cohomology k₀ l X d hn,
+          Finset.sum_range] }
+  have hDP (i : Fin (2 * d + 1)) : D.P i = frobeniusCharpolyRev k₀ l X (i : ℕ) := rfl
+  -- Poincaré duality: the self-duality of the trace datum
+  obtain ⟨T, -, -, -, hpair, -, hsim, -, -⟩ := WeilSheaf.poincareDuality k₀ l X d
+  have hrev (i : Fin (2 * d + 1)) : ((i : ℕ) : ℤ) + ((i.rev : ℕ) : ℤ) = 2 * (d : ℤ) := by
+    have := i.isLt
+    rw [Fin.val_rev]
+    omega
+  let p : ∀ i : Fin (2 * d + 1), D.V i →ₗ[PadicAlgCl l] D.V i.rev →ₗ[PadicAlgCl l] PadicAlgCl l :=
+    fun i ↦ T.pairing (i : ℕ) (i.rev : ℕ) (hrev i)
+  have hp (i : Fin (2 * d + 1)) : (p i).IsPerfPair := (hpair _ _ (hrev i)).1
+  have hFG (i : Fin (2 * d + 1)) (v : D.V i) (w : D.V i.rev) :
+      p i (D.F i v) (D.F i.rev w) = (Nat.card k₀ : PadicAlgCl l) ^ d * p i v w :=
+    hsim _ _ (hrev i) v w
+  -- integrality and the comparison of the counting series
+  have hZ : PowerSeries.map (algebraMap ℚ (PadicAlgCl l))
+      (X ↘ Spec (CommRingCat.of k₀)).zetaSeries = D.zeta :=
+    D.map_zetaSeries _ fun _ ↦ rfl
+  have hint := (X ↘ Spec (CommRingCat.of k₀)).exists_int_zetaSeries
+  -- purity for every embedding, hence universal purity
+  obtain ⟨ι⟩ := PadicAlgCl.nonempty_ringHom_complex l
+  have hpure (ι' : PadicAlgCl l →+* ℂ) (i : Fin (2 * d + 1)) :
+      ((D.P i).map ι').IsPureOfWeight (Nat.card k₀) i.1 :=
+    isPureOfWeight_map_frobeniusCharpolyRev k₀ l X d ι' i
+  have hupure := D.isUniversallyPureOfWeight_map_P hq
+    (fun _ _ hβ hz ↦ PadicAlgCl.exists_ringHom_complex_apply_eq l hβ hz) hpure hZ hint ι
+  -- the endpoint factors
+  have hzero : (D.P 0).map ι = 1 - Polynomial.X := by
+    rw [hDP, Fin.val_zero, Nat.cast_zero, frobeniusCharpolyRev_zero, Polynomial.map_sub,
+      Polynomial.map_one, Polynomial.map_X]
+  have hlast : (D.P (Fin.last (2 * d))).map ι =
+      1 - Polynomial.C ((Nat.card k₀ : ℂ) ^ d) * Polynomial.X := by
+    rw [hDP, Fin.val_last, Nat.cast_mul, Nat.cast_two, frobeniusCharpolyRev_two_mul,
+      Polynomial.map_sub, Polynomial.map_one, Polynomial.map_mul, Polynomial.map_C,
+      Polynomial.map_X, map_pow, map_natCast]
+  obtain ⟨P, hfact, hfe, hrh, hPι⟩ :=
+    D.exists_isWeilFactorization_and_functionalEquation_and_riemannHypothesis hq ι hupure hzero
+      hlast hp hFG hZ hint
+  refine ⟨P, hfact, hfe, hrh, fun i ↦ Polynomial.map_injective ι ι.injective ?_⟩
+  rw [Polynomial.map_map, ← hDP, ← hPι i]
+  congr 1
+  exact RingHom.ext_int _ _
 
 end Endpoints
 
@@ -123,8 +200,19 @@ theorem exists_isWeilFactorization_of_smoothProper :
       IsWeilFactorization (Nat.card k₀) d (X ↘ Spec (CommRingCat.of k₀)).zetaSeries P ∧
       WeilFunctionalEquation (Nat.card k₀) d P ∧
       WeilRiemannHypothesis (Nat.card k₀) d P ∧
-      ∀ i : Fin (2 * d + 1), IsIntegralFrobeniusFactor k₀ X (i : ℕ) (P i) :=
-  sorry
+      ∀ i : Fin (2 * d + 1), IsIntegralFrobeniusFactor k₀ X (i : ℕ) (P i) := by
+  have hq : 1 < Nat.card k₀ := Finite.one_lt_card
+  obtain ⟨l₀, hl₀, hne⟩ : ∃ l : ℕ, l.Prime ∧ ringChar k₀ ≠ l := by
+    by_cases h : ringChar k₀ = 2
+    · exact ⟨3, Nat.prime_three, by omega⟩
+    · exact ⟨2, Nat.prime_two, h⟩
+  have : Fact l₀.Prime := ⟨hl₀⟩
+  have : Fact (ringChar k₀ ≠ l₀) := ⟨hne⟩
+  obtain ⟨P, hfact, hfe, hrh, -⟩ := exists_isWeilFactorization_of_prime k₀ l₀ X d
+  refine ⟨P, hfact, hfe, hrh, fun i l _ _ ↦ ?_⟩
+  obtain ⟨P', hfact', -, hrh', hP'⟩ := exists_isWeilFactorization_of_prime k₀ l X d
+  rw [← IsWeilFactorization.unique hq hfact' hfact hrh' hrh]
+  exact hP' i
 
 end Scheme
 

@@ -47,7 +47,7 @@ Weil complexes of this repository, whose compactly supported cohomology is
 
 universe u
 
-open CategoryTheory Limits
+open CategoryTheory Limits MonoidalCategory
 
 namespace AlgebraicGeometry
 
@@ -79,6 +79,110 @@ theorem WeilComplex.finsum_trace_compactlySupportedCohomology_eq (K : WeilComple
 
 end Separated
 
+/-- Isomorphic Frobenius modules have the same traces of the powers of the Frobenius. -/
+theorem _root_.FrobeniusModule.Equiv.trace_frobeniusEnd_pow {K : Type*} [Field K]
+    {M N : FrobeniusModule K} (e : M.Equiv N) (m : ℕ) :
+    LinearMap.trace K _ (N.frobeniusEnd ^ m) = LinearMap.trace K _ (M.frobeniusEnd ^ m) := by
+  have hpow : ∀ k : ℕ, e.toLinearEquiv.conj M.frobeniusEnd ^ k =
+      e.toLinearEquiv.conj (M.frobeniusEnd ^ k) := by
+    intro k
+    induction k with
+    | zero => simp only [pow_zero, Module.End.one_eq_id, LinearEquiv.conj_id]
+    | succ k ih =>
+      rw [pow_succ, pow_succ, ih, Module.End.mul_eq_comp, Module.End.mul_eq_comp,
+        LinearEquiv.conj_comp]
+  rw [e.frobeniusEnd_eq_conj, hpow, LinearMap.trace_conj']
+
+section Stalks
+
+variable {X : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
+
+/-- The maps induced on the stalks by morphisms `g : G ⟶ F`, `f : F ⟶ G` with `g ≫ f = 𝟙 G`
+compose to the identity. -/
+theorem WeilSheaf.stalkAtMap_stalkAtMap_of_comp_eq_id {F G : WeilSheaf k₀ l X} (f : F ⟶ G)
+    (g : G ⟶ F) (hfg : g ≫ f = 𝟙 G)
+    (s : Spec (.of (AlgebraicClosure k₀)) ⟶ (X ↘ Spec (CommRingCat.of k₀)).geometricFiber)
+    (m : ℕ) (hs : s ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).hom =
+      (specGeometricFrobenius k₀ ^ m).hom ≫ s) (x : (G.stalkAt s m hs).carrier) :
+    WeilSheaf.stalkAtMap s m hs f (WeilSheaf.stalkAtMap s m hs g x) = x := by
+  rw [← WeilSheaf.stalkAtMap_comp, hfg, WeilSheaf.stalkAtMap_id]
+
+/-- An isomorphism of Weil sheaves induces isomorphisms of Frobenius modules between their
+stalks (`AlgebraicGeometry.WeilSheaf.stalkAtMap_frobenius`). -/
+theorem WeilSheaf.nonempty_equiv_stalkAt_of_iso {F G : WeilSheaf k₀ l X} (e : F ≅ G)
+    (s : Spec (.of (AlgebraicClosure k₀)) ⟶ (X ↘ Spec (CommRingCat.of k₀)).geometricFiber)
+    (m : ℕ) (hs : s ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).hom =
+      (specGeometricFrobenius k₀ ^ m).hom ≫ s) :
+    Nonempty ((F.stalkAt s m hs).Equiv (G.stalkAt s m hs)) := by
+  -- the identities are passed through explicitly to keep the kernel check fast
+  have h₁ : (WeilSheaf.stalkAtMap s m hs e.hom).comp (WeilSheaf.stalkAtMap s m hs e.inv) =
+      LinearMap.id :=
+    LinearMap.ext fun x ↦ (LinearMap.comp_apply _ _ x).trans
+      ((WeilSheaf.stalkAtMap_stalkAtMap_of_comp_eq_id _ _ e.inv_hom_id s m hs x).trans
+        (LinearMap.id_apply x).symm)
+  have h₂ : (WeilSheaf.stalkAtMap s m hs e.inv).comp (WeilSheaf.stalkAtMap s m hs e.hom) =
+      LinearMap.id :=
+    LinearMap.ext fun x ↦ (LinearMap.comp_apply _ _ x).trans
+      ((WeilSheaf.stalkAtMap_stalkAtMap_of_comp_eq_id _ _ e.hom_inv_id s m hs x).trans
+        (LinearMap.id_apply x).symm)
+  have hc : ⇑(LinearEquiv.ofLinearMap _ _ h₁ h₂ :
+      (F.stalkAt s m hs).carrier ≃ₗ[PadicAlgCl l] (G.stalkAt s m hs).carrier) =
+      WeilSheaf.stalkAtMap s m hs e.hom :=
+    LinearEquiv.coe_ofLinearMap _ _ h₁ h₂
+  exact ⟨⟨LinearEquiv.ofLinearMap _ _ h₁ h₂, fun x ↦ (congrFun hc _).trans
+    ((WeilSheaf.stalkAtMap_frobenius s m hs e.hom x).trans (congrArg _ (congrFun hc x).symm))⟩⟩
+
+/-- Isomorphic Weil sheaves have stalks with the same Frobenius trace. -/
+theorem WeilSheaf.trace_frobeniusEnd_stalkAt_congr {F G : WeilSheaf k₀ l X} (e : F ≅ G)
+    (s : Spec (.of (AlgebraicClosure k₀)) ⟶ (X ↘ Spec (CommRingCat.of k₀)).geometricFiber)
+    (m : ℕ) (hs : s ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).hom =
+      (specGeometricFrobenius k₀ ^ m).hom ≫ s) :
+    LinearMap.trace (PadicAlgCl l) _ (G.stalkAt s m hs).frobeniusEnd =
+      LinearMap.trace (PadicAlgCl l) _ (F.stalkAt s m hs).frobeniusEnd := by
+  obtain ⟨E⟩ := WeilSheaf.nonempty_equiv_stalkAt_of_iso e s m hs
+  simpa only [pow_one] using E.trace_frobeniusEnd_pow 1
+
+/-- Isomorphic Weil sheaves have the same trace function. -/
+theorem WeilSheaf.traceFunction_congr {F G : WeilSheaf k₀ l X} (e : F ≅ G) (n : ℕ)
+    (y : (X ↘ Spec (CommRingCat.of k₀)).fieldPoints (FiniteField.galoisExtension k₀ n)) :
+    F.traceFunction n y = G.traceFunction n y :=
+  (WeilSheaf.trace_frobeniusEnd_stalkAt_congr e _ _ _).symm
+
+variable (k₀ l) in
+/-- The stalks `Γ(Spec k̄, s^* ℚ̄_ℓ)` of the constant Weil sheaf are one-dimensional: the unit
+section `ℚ̄_ℓ ⟶ Γ(Spec k̄, s^* ℚ̄_ℓ)` is an isomorphism
+(`AlgebraicGeometry.ProEtale.isIso_unitSection`). -/
+theorem WeilSheaf.finrank_stalkAt_adicConstant
+    (s : Spec (.of (AlgebraicClosure k₀)) ⟶ (X ↘ Spec (CommRingCat.of k₀)).geometricFiber)
+    (m : ℕ) (hs : s ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).hom =
+      (specGeometricFrobenius k₀ ^ m).hom ≫ s) :
+    Module.finrank (PadicAlgCl l) ((WeilSheaf.adicConstant k₀ l X).stalkAt s m hs).carrier =
+      1 := by
+  let e₁ : (WeilCoefficients.toModuleCat l).obj (𝟙_ (WeilCoefficients.{u} l)) ≃ₗ[PadicAlgCl l]
+      PadicAlgCl l :=
+    { toFun x := ULift.down (x : ULift.{u + 1} (PadicAlgCl l))
+      invFun x := (ULift.up x : ULift.{u + 1} (PadicAlgCl l))
+      map_add' _ _ := rfl
+      map_smul' _ _ := rfl
+      left_inv _ := rfl
+      right_inv _ := rfl }
+  exact (WeilCoefficients.linearEquivOfIso (asIso (ProEtale.unitSection l s)).symm).finrank_eq.trans
+    (e₁.finrank_eq.trans (Module.finrank_self _))
+
+variable (k₀ l) in
+/-- The Frobenius of every stalk of the constant Weil sheaf has trace `1`. -/
+theorem WeilSheaf.trace_frobeniusEnd_stalkAt_adicConstant
+    (s : Spec (.of (AlgebraicClosure k₀)) ⟶ (X ↘ Spec (CommRingCat.of k₀)).geometricFiber)
+    (m : ℕ) (hs : s ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).hom =
+      (specGeometricFrobenius k₀ ^ m).hom ≫ s) :
+    LinearMap.trace (PadicAlgCl l) _ ((WeilSheaf.adicConstant k₀ l X).stalkAt s m hs).frobeniusEnd =
+      1 := by
+  rw [FrobeniusModule.frobeniusEnd, WeilSheaf.adicConstant_stalkAt_frobenius,
+    LinearEquiv.refl_toLinearMap, LinearMap.trace_id,
+    WeilSheaf.finrank_stalkAt_adicConstant k₀ l s m hs, Nat.cast_one]
+
+end Stalks
+
 section Constant
 
 variable (k₀ l) (X : Scheme.{u}) [X.Over (Spec (CommRingCat.of k₀))]
@@ -89,15 +193,18 @@ and every local Frobenius is the identity
 theorem WeilSheaf.traceFunction_adicConstant (n : ℕ)
     (y : (X ↘ Spec (CommRingCat.of k₀)).fieldPoints (FiniteField.galoisExtension k₀ n)) :
     (WeilSheaf.adicConstant k₀ l X).traceFunction n y = 1 :=
-  sorry
+  WeilSheaf.trace_frobeniusEnd_stalkAt_adicConstant k₀ l _ _ _
 
 variable {k₀ l X} in
 /-- The trace function of a Weil sheaf, viewed as a Weil complex concentrated in degree zero, is
 its trace function as a sheaf. -/
 theorem WeilComplex.traceFunction_toComplex (F : WeilSheaf k₀ l X) (n : ℕ)
     (y : (X ↘ Spec (CommRingCat.of k₀)).fieldPoints (FiniteField.galoisExtension k₀ n)) :
-    (WeilSheaf.toComplex.obj F).traceFunction n y = F.traceFunction n y :=
-  sorry
+    (WeilSheaf.toComplex.obj F).traceFunction n y = F.traceFunction n y := by
+  rw [WeilComplex.traceFunction_eq_sum (WeilSheaf.toComplex.obj F) {0}
+    (fun j hj ↦ WeilComplex.isZero_homologySheaf_singleComplex (by simpa using hj) F) n y,
+    Finset.sum_singleton, Int.negOnePow_zero, Units.val_one, one_smul]
+  exact WeilSheaf.traceFunction_congr (WeilSheaf.toComplexCompHomologySheafIso.app F) n y
 
 variable [IsSeparated (X ↘ Spec (CommRingCat.of k₀))]
   [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
@@ -116,8 +223,20 @@ theorem WeilSheaf.pointCount_eq_finsum_trace_compactlySupportedCohomology {m : �
     (hm : 1 ≤ m) :
     ((X ↘ Spec (CommRingCat.of k₀)).pointCount m : PadicAlgCl l) =
       ∑ᶠ i : ℤ, (i.negOnePow : ℤ) • LinearMap.trace (PadicAlgCl l) _
-        (((WeilSheaf.adicConstant k₀ l X).compactlySupportedCohomology i).frobeniusEnd ^ m) :=
-  sorry
+        (((WeilSheaf.adicConstant k₀ l X).compactlySupportedCohomology i).frobeniusEnd ^ m) := by
+  have : Finite (FiniteField.galoisExtension k₀ m) := Module.finite_of_finite k₀
+  have := (X ↘ Spec (CommRingCat.of k₀)).finite_fieldPoints (FiniteField.galoisExtension k₀ m)
+  let _ := Fintype.ofFinite
+    ((X ↘ Spec (CommRingCat.of k₀)).fieldPoints (FiniteField.galoisExtension k₀ m))
+  have h := (WeilSheaf.toComplex.obj
+    (WeilSheaf.adicConstant k₀ l X)).finsum_trace_compactlySupportedCohomology_eq hm
+  simp only [WeilComplex.traceFunction_toComplex, WeilSheaf.traceFunction_adicConstant] at h
+  have h1 : (∑ᶠ _ : (X ↘ Spec (CommRingCat.of k₀)).fieldPoints (FiniteField.galoisExtension k₀ m),
+      (1 : PadicAlgCl l)) = ((X ↘ Spec (CommRingCat.of k₀)).pointCount m : PadicAlgCl l) := by
+    rw [finsum_eq_sum_of_fintype, Finset.sum_const, Finset.card_univ, nsmul_one,
+      Scheme.Hom.pointCount, Nat.card_eq_fintype_card]
+  rw [h1] at h
+  exact h.symm
 
 end Constant
 
@@ -136,8 +255,12 @@ compactly supported cohomology being ordinary cohomology
 theorem WeilSheaf.pointCount_eq_finsum_trace_cohomology {m : ℕ} (hm : 1 ≤ m) :
     ((X ↘ Spec (CommRingCat.of k₀)).pointCount m : PadicAlgCl l) =
       ∑ᶠ i : ℤ, (i.negOnePow : ℤ) • LinearMap.trace (PadicAlgCl l) _
-        (((WeilSheaf.adicConstant k₀ l X).cohomology i).frobeniusEnd ^ m) :=
-  sorry
+        (((WeilSheaf.adicConstant k₀ l X).cohomology i).frobeniusEnd ^ m) := by
+  rw [WeilSheaf.pointCount_eq_finsum_trace_compactlySupportedCohomology k₀ l X hm]
+  refine finsum_congr fun i ↦ ?_
+  obtain ⟨e⟩ := WeilComplex.nonempty_equiv_compactlySupportedCohomology_cohomology
+    (WeilSheaf.toComplex.obj (WeilSheaf.adicConstant k₀ l X)) i
+  exact congrArg _ (e.trace_frobeniusEnd_pow m).symm
 
 /-- Blueprint `thm-weil-grothendieck-lefschetz-trace` (Grothendieck–Lefschetz trace formula):
 for a Weil complex `K` on a separated `k₀`-scheme `Y₀` of finite type and `m ≥ 1`, the sum over
@@ -172,8 +295,25 @@ theorem WeilSheaf.pointCount_eq_sum_trace_cohomology (d : ℕ)
     [SmoothOfRelativeDimension d (X ↘ Spec (CommRingCat.of k₀))] {n : ℕ} (hn : 1 ≤ n) :
     ((X ↘ Spec (CommRingCat.of k₀)).pointCount n : PadicAlgCl l) =
       ∑ i ∈ Finset.range (2 * d + 1), (-1) ^ i * LinearMap.trace (PadicAlgCl l) _
-        (((WeilSheaf.adicConstant k₀ l X).cohomology i).frobeniusEnd ^ n) :=
-  sorry
+        (((WeilSheaf.adicConstant k₀ l X).cohomology i).frobeniusEnd ^ n) := by
+  rw [WeilSheaf.pointCount_eq_finsum_trace_cohomology k₀ l X hn,
+    finsum_eq_sum_of_support_subset (s := (Finset.range (2 * d + 1)).map Nat.castEmbedding) _ ?_,
+    Finset.sum_map]
+  · refine Finset.sum_congr rfl fun i _ ↦ ?_
+    rw [Nat.castEmbedding_apply, Int.coe_negOnePow_natCast, zsmul_eq_mul]
+    push_cast
+    rfl
+  · intro i hi
+    by_contra h
+    have hi' : i < 0 ∨ 2 * (d : ℤ) < i := by
+      by_contra hc
+      exact h (Finset.mem_map.2 ⟨i.toNat, Finset.mem_range.2 (by omega),
+        by rw [Nat.castEmbedding_apply, Int.toNat_of_nonneg (by omega)]⟩)
+    have := WeilSheaf.subsingleton_cohomology_adicConstant k₀ l X d hi'
+    exact hi (by
+      dsimp only
+      rw [Subsingleton.elim (((WeilSheaf.adicConstant k₀ l X).cohomology i).frobeniusEnd ^ n) 0,
+        map_zero, smul_zero])
 
 end Proper
 

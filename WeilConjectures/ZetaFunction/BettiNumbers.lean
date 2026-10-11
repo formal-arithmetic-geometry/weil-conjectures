@@ -43,6 +43,33 @@ power series, which this repository also does not have.
 
 namespace AlgebraicGeometry
 
+/-- Blueprint `def-weil-betti-numbers` (Betti numbers): for a family `P₀, …, P_n` of integral
+Frobenius factors, the `i`-th Betti number is `bᵢ = deg Pᵢ` for `0 ≤ i ≤ n`, and `bᵢ = 0` for
+`i < 0` or `i > n`. -/
+noncomputable def weilBettiNumber {n : ℕ} (P : Fin (n + 1) → Polynomial ℤ) (i : ℤ) : ℕ :=
+  if h : 0 ≤ i ∧ i ≤ n then (P ⟨i.toNat, by omega⟩).natDegree else 0
+
+theorem weilBettiNumber_natCast {n : ℕ} (P : Fin (n + 1) → Polynomial ℤ) (i : Fin (n + 1)) :
+    weilBettiNumber P (i : ℕ) = (P i).natDegree := by
+  rw [weilBettiNumber, dif_pos ⟨by omega, by exact_mod_cast i.is_le⟩]
+  congr
+
+theorem weilBettiNumber_eq_zero {n : ℕ} (P : Fin (n + 1) → Polynomial ℤ) {i : ℤ}
+    (hi : i < 0 ∨ (n : ℤ) < i) : weilBettiNumber P i = 0 := by
+  rw [weilBettiNumber, dif_neg (by omega)]
+
+/-- Blueprint `def-weil-determinant-constants` (determinant constants): the determinant constant
+`D = (-1)^b [T^b] P(T)` of an integral Frobenius factor `P` of degree `b`; under
+`P^{(ℓ)} = det(1 - T F | V)` its image in `ℚ̄_ℓ` is `det F`. -/
+def weilDeterminantConstant (P : Polynomial ℤ) : ℤ :=
+  (-1) ^ P.natDegree * P.coeff P.natDegree
+
+/-- Blueprint `def-weil-determinant-constants`: the alternating determinant scalar
+`Δ = ∏ᵢ Dᵢ^{(-1)ⁱ} ∈ ℚ` of a family of integral Frobenius factors. The Euler characteristic
+`χ = ∑ᵢ (-1)ⁱ bᵢ` of the family is `Polynomial.alternatingNatDegreeSum`. -/
+noncomputable def weilDeterminantScalar {n : ℕ} (P : Fin (n + 1) → Polynomial ℤ) : ℚ :=
+  ∏ i : Fin (n + 1), (weilDeterminantConstant (P i) : ℚ) ^ ((-1 : ℤ) ^ (i : ℕ))
+
 /-- **Betti symmetry.** The functional equation matches the reciprocal roots in degree `i` with
 those in degree `2 * d - i`, so the two root multisets have the same cardinality; over `ℂ` that
 cardinality is the degree, so the Betti numbers `b i = deg (P i)` satisfy

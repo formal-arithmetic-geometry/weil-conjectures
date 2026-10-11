@@ -5,6 +5,7 @@ Authors: Claude
 -/
 module
 
+public import Mathlib.Algebra.Algebra.Hom.Rat
 public import WeilConjectures.ZetaLinearAlgebra.WeilFactorization
 
 /-!
@@ -50,7 +51,29 @@ theorem isUniversallyPureOfWeight_map_P [IsAlgClosed K] (hq : 1 < q)
     {Z : PowerSeries ℚ} (hZ : PowerSeries.map (algebraMap ℚ K) Z = D.zeta)
     (hint : ∃ Z' : PowerSeries ℤ, PowerSeries.map (Int.castRingHom ℚ) Z' = Z)
     (ι : K →+* ℂ) (i : Fin (2 * d + 1)) :
-    ((D.P i).map ι).IsUniversallyPureOfWeight q i.1 :=
-  sorry
+    ((D.P i).map ι).IsUniversallyPureOfWeight q i.1 := by
+  obtain ⟨A₀, B₀, hA, hB, hAB, hfrac⟩ := D.exists_reduced_int_normalized_fraction hZ hint
+  have hA' : (A₀.map (Int.castRingHom ℚ)).coeff 0 = 1 := by
+    rw [Polynomial.coeff_map, hA, map_one]
+  have hB' : (B₀.map (Int.castRingHom ℚ)).coeff 0 = 1 := by
+    rw [Polynomial.coeff_map, hB, map_one]
+  have hroots : ∀ ι' : K →+* ℂ, ((D.P i).map ι').roots = (D.P i).roots.map ι' := fun ι' ↦
+    (IsAlgClosed.splits (D.P i)).roots_map ι'
+  refine ⟨(hpure ι i).1, fun z hz ↦ ?_⟩
+  have hzalg : IsAlgebraic ℚ z :=
+    Polynomial.isAlgebraic_of_mem_roots_of_prod_mul_eq (P := fun j ↦ (D.P j).map ι) hq
+      (hpure ι) hAB hA' hB' (D.prod_odd_mul_eq_prod_even_mul ι hZ hfrac) hz
+  refine ⟨hzalg, fun y hy ↦ ?_⟩
+  rw [hroots] at hz
+  obtain ⟨β, hβ, rfl⟩ := Multiset.mem_map.1 hz
+  have hβint : IsIntegral ℚ β :=
+    ((isAlgebraic_algHom_iff ι.toRatAlgHom ι.injective).1 hzalg).isIntegral
+  have hmin : minpoly ℚ (ι β) = minpoly ℚ β := minpoly.algHom_eq ι.toRatAlgHom ι.injective β
+  rw [hmin] at hy
+  obtain ⟨ι', hι'⟩ := hext β y hβint (Polynomial.mem_aroots.1 hy).2
+  have hy' : y ∈ ((D.P i).map ι').roots := by
+    rw [hroots, ← hι']
+    exact Multiset.mem_map_of_mem ι' hβ
+  exact (hpure ι' i).2 y hy'
 
 end TraceDatum

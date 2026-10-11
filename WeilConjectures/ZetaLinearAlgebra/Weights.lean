@@ -282,6 +282,26 @@ theorem eq_of_isPureOfWeight_of_prod_mul_eq {q r : ℕ} (hq : 1 < q) {P P' : Fin
     rw [if_pos hoddj, if_neg hevenj, if_pos hoddj, if_neg hevenj, add_zero, add_zero] at hfil
     exact hfil
 
+
+/-- The weight-`i` part of the roots of a product of pure polynomials of pairwise distinct
+weights: if `P j` is pure of weight `j` for `j ∈ S` and `i ∈ S`, the roots of `∏_{j ∈ S} P j` of
+absolute value `q^{-i/2}` are the roots of `P i`. -/
+theorem roots_prod_filter_norm_eq {q : ℕ} (hq : 1 < q) {S : Finset ℕ}
+    {P : ℕ → Polynomial ℂ} (hP : ∀ j ∈ S, (P j).IsPureOfWeight q j) {i : ℕ} (hi : i ∈ S) :
+    (∏ j ∈ S, P j).roots.filter (fun z ↦ ‖z‖ = (q : ℝ) ^ (-(i : ℝ) / 2)) = (P i).roots := by
+  classical
+  rw [Polynomial.roots_prod _ _ (Finset.prod_ne_zero_iff.2 fun j hj ↦ (hP j hj).ne_zero),
+    Multiset.filter_bind, ← Finset.insert_erase hi, Finset.insert_val_of_notMem
+      (Finset.notMem_erase i S), Multiset.cons_bind,
+    Multiset.filter_eq_self.2 fun z hz ↦ (hP i hi).2 z hz]
+  convert add_zero (P i).roots
+  refine Multiset.eq_zero_of_forall_notMem fun z hz ↦ ?_
+  obtain ⟨j, hj, hz⟩ := Multiset.mem_bind.1 hz
+  obtain ⟨hz, hzi⟩ := Multiset.mem_filter.1 hz
+  have hji : j ≠ i := Finset.ne_of_mem_erase hj
+  have hzj := (hP j (Finset.mem_of_mem_erase hj)).2 z hz
+  exact hji (weight_eq_of_norm_eq hq hzj hzi)
+
 end Polynomial
 
 /-- A complex number is universally pure of at most one weight. (No hypothesis `z ≠ 0` is

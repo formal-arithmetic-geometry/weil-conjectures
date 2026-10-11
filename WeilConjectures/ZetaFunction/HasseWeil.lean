@@ -35,6 +35,13 @@ roots `α` of the `P i`, the shadow of the Lefschetz trace formula.
 
 ## Main statements
 
+- `AlgebraicGeometry.IsWeilFactorization.eq_of_one`: in dimension one a Weil factorization is
+  determined by the zeta function.
+- `AlgebraicGeometry.Scheme.exists_linearEquiv_cohomology_endpoints`,
+  `AlgebraicGeometry.Scheme.endpoints_of_isIntegralFrobeniusFactor`: the endpoint cohomology
+  `H⁰ ≅ ℚ̄_ℓ`, `H^{2d} ≅ ℚ̄_ℓ(-d)` and the endpoint factors (`prop-endpoints`).
+- `AlgebraicGeometry.Scheme.abs_pointCount_sub_le_sum_finrank`: the Hasse–Weil bound with the
+  Betti numbers `dim Hⁱ(X₀ ⊗ k̄, ℚ̄_ℓ)` (`cor-zl-hasse-weil-general-bound`).
 - `AlgebraicGeometry.Scheme.Hom.pointCount_eq_sum_roots`: `N n = ∑ (-1) ^ i ∑ αⁿ`.
 - `AlgebraicGeometry.Scheme.Hom.abs_pointCount_sub_le`: the Hasse–Weil bound over the degree `n`
   extension, `|N n - (q ^ (d n) + 1)| ≤ ∑_{0 < i < 2d} deg (P i) · q ^ (i n / 2)`.
@@ -54,6 +61,125 @@ roots `α` of the `P i`, the shadow of the Lefschetz trace formula.
 @[expose] public section
 
 universe u
+
+namespace AlgebraicGeometry
+
+/-- In dimension `d = 1` a Weil factorization is determined by the power series it factors: the
+endpoint factors `P 0 = 1 - T` and `P 2 = 1 - q T` are prescribed, and then
+`P 1 = Z · (1 - T) (1 - q T)`. No Riemann hypothesis is needed (compare
+`AlgebraicGeometry.IsWeilFactorization.unique`). -/
+theorem IsWeilFactorization.eq_of_one {q : ℕ} {Z : PowerSeries ℚ}
+    {P P' : Fin (2 * 1 + 1) → Polynomial ℤ} (h : IsWeilFactorization q 1 Z P)
+    (h' : IsWeilFactorization q 1 Z P') : P = P' := by
+  have he : Finset.univ.filter (fun i : Fin (2 * 1 + 1) ↦ Even i.1) = {0, Fin.last (2 * 1)} := by
+    decide
+  have ho : Finset.univ.filter (fun i : Fin (2 * 1 + 1) ↦ Odd i.1) = {1} := by
+    decide
+  have h0 : P 0 = P' 0 := h.apply_zero.trans h'.apply_zero.symm
+  have h2 : P (Fin.last (2 * 1)) = P' (Fin.last (2 * 1)) :=
+    h.apply_last.trans h'.apply_last.symm
+  have h1 : P 1 = P' 1 := by
+    have e := h.factorization
+    have e' := h'.factorization
+    rw [he, ho, Finset.prod_singleton, Finset.prod_pair (by decide)] at e e'
+    rw [h0, h2, e'] at e
+    exact Polynomial.map_injective _ (RingHom.injective_int _)
+      (Polynomial.coe_injective e.symm)
+  funext i
+  fin_cases i
+  exacts [h0, h1, h2]
+
+namespace Scheme
+
+section Endpoints
+
+open Polynomial
+
+variable (k₀ : Type u) [Field k₀] [Finite k₀] (X : Scheme.{u}) [X.Over (Spec (CommRingCat.of k₀))]
+
+/-- Blueprint `def-weil-betti-numbers` (and the degree clause of `prop-integral-recovery`): the
+degree of an integral Frobenius factor in degree `i` is the Betti number
+`dim_{ℚ̄_ℓ} Hⁱ(X₀ ⊗ k̄, ℚ̄_ℓ)`, for every prime `ℓ ≠ p`. -/
+theorem natDegree_eq_finrank_cohomology [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))]
+    [QuasiSeparated (X ↘ Spec (CommRingCat.of k₀))]
+    [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))] {i : ℤ} {P : Polynomial ℤ}
+    (h : IsIntegralFrobeniusFactor k₀ X i P) (l : ℕ) [Fact l.Prime] [Fact (ringChar k₀ ≠ l)] :
+    P.natDegree =
+      Module.finrank (PadicAlgCl l) ((WeilSheaf.adicConstant k₀ l X).cohomology i).carrier := by
+  rw [← natDegree_frobeniusCharpolyRev, ← h l,
+    Polynomial.natDegree_map_eq_of_injective (RingHom.injective_int _)]
+
+variable (d : ℕ) [IsProper (X ↘ Spec (CommRingCat.of k₀))]
+  [SmoothOfRelativeDimension d (X ↘ Spec (CommRingCat.of k₀))]
+  [GeometricallyConnected (X ↘ Spec (CommRingCat.of k₀))]
+
+/-- Blueprint `prop-endpoints` (endpoint cohomology): for `X₀` smooth, proper and geometrically
+connected of pure dimension `d` over `k₀ = 𝔽_q`, there are Frobenius-equivariant isomorphisms
+`H⁰(X₀ ⊗ k̄, ℚ̄_ℓ) ≅ ℚ̄_ℓ`, with geometric Frobenius acting by `1`, and
+`H^{2d}(X₀ ⊗ k̄, ℚ̄_ℓ) ≅ ℚ̄_ℓ(-d)`, with geometric Frobenius acting by `qᵈ`. -/
+theorem exists_linearEquiv_cohomology_endpoints (l : ℕ) [Fact l.Prime]
+    [Fact (ringChar k₀ ≠ l)] :
+    (∃ e : ((WeilSheaf.adicConstant k₀ l X).cohomology 0).carrier ≃ₗ[PadicAlgCl l]
+        PadicAlgCl l,
+      ∀ z, e (((WeilSheaf.adicConstant k₀ l X).cohomology 0).frobenius z) = e z) ∧
+    ∃ e : ((WeilSheaf.adicConstant k₀ l X).cohomology (2 * d)).carrier ≃ₗ[PadicAlgCl l]
+        PadicAlgCl l,
+      ∀ z, e (((WeilSheaf.adicConstant k₀ l X).cohomology (2 * d)).frobenius z) =
+        (Nat.card k₀ : PadicAlgCl l) ^ d * e z := by
+  refine ⟨⟨LinearEquiv.ofFinrankEq _ _ (by
+    rw [WeilSheaf.finrank_cohomology_zero_adicConstant, Module.finrank_self]), fun z ↦ ?_⟩, ?_⟩
+  · rw [WeilSheaf.frobenius_cohomology_zero_adicConstant]
+    rfl
+  · obtain ⟨T, htr, -, -, -, hF, -⟩ := WeilSheaf.poincareDuality k₀ l X d
+    exact ⟨LinearEquiv.ofBijective T.trace htr, hF⟩
+
+/-- Blueprint `prop-endpoints` (endpoint factors): for `X₀` smooth, proper and geometrically
+connected of pure dimension `d` over `k₀ = 𝔽_q`, the integral Frobenius factors satisfy
+`P₀ = 1 - T` and `P_{2d} = 1 - qᵈ T`, and the endpoint Betti numbers are `b₀ = b_{2d} = 1`. -/
+theorem endpoints_of_isIntegralFrobeniusFactor {P : Fin (2 * d + 1) → Polynomial ℤ}
+    (hP : ∀ i : Fin (2 * d + 1), IsIntegralFrobeniusFactor k₀ X (i : ℕ) (P i)) :
+    P 0 = 1 - Polynomial.X ∧
+      P (Fin.last (2 * d)) = 1 - C ((Nat.card k₀ : ℤ) ^ d) * Polynomial.X ∧
+      (P 0).natDegree = 1 ∧ (P (Fin.last (2 * d))).natDegree = 1 := by
+  obtain ⟨l, hl, hne⟩ : ∃ l : ℕ, l.Prime ∧ ringChar k₀ ≠ l := by
+    by_cases h : ringChar k₀ = 2
+    · exact ⟨3, Nat.prime_three, by omega⟩
+    · exact ⟨2, Nat.prime_two, h⟩
+  have : Fact l.Prime := ⟨hl⟩
+  have : Fact (ringChar k₀ ≠ l) := ⟨hne⟩
+  obtain ⟨P', hfact, -, -, hP'⟩ := exists_isWeilFactorization_of_smoothProper k₀ X d
+  obtain rfl : P = P' := funext fun i ↦
+    Polynomial.map_injective _ (RingHom.injective_int (Int.castRingHom (PadicAlgCl l)))
+      ((hP i l).trans (hP' i l).symm)
+  refine ⟨hfact.apply_zero, hfact.apply_last, ?_, ?_⟩
+  · rw [natDegree_eq_finrank_cohomology k₀ X (hP 0) l, Fin.val_zero, Nat.cast_zero,
+      WeilSheaf.finrank_cohomology_zero_adicConstant]
+  · obtain ⟨-, e, -⟩ := exists_linearEquiv_cohomology_endpoints k₀ X d l
+    rw [natDegree_eq_finrank_cohomology k₀ X (hP _) l, Fin.val_last, Nat.cast_mul,
+      Nat.cast_two, e.finrank_eq, Module.finrank_self]
+
+/-- Blueprint `cor-zl-hasse-weil-general-bound` (Hasse–Weil bound in every dimension), in its
+cohomological form: for `X₀` smooth, proper and geometrically connected of pure dimension
+`d ≥ 1` over `k₀ = 𝔽_q` and every prime `ℓ ≠ p`, the number `N n = #X₀(𝔽_{qⁿ})` satisfies
+`|N n - (q^{dn} + 1)| ≤ ∑_{0 < i < 2d} bᵢ q^{in/2}` with the Betti numbers
+`bᵢ = dim_{ℚ̄_ℓ} Hⁱ(X₀ ⊗ k̄, ℚ̄_ℓ)`. -/
+theorem abs_pointCount_sub_le_sum_finrank (l : ℕ) [Fact l.Prime] [Fact (ringChar k₀ ≠ l)]
+    (hd : 1 ≤ d) {n : ℕ} (hn : n ≠ 0) :
+    |((X ↘ Spec (CommRingCat.of k₀)).pointCount n : ℝ) - ((Nat.card k₀ : ℝ) ^ (d * n) + 1)| ≤
+      ∑ i ∈ Finset.univ.filter (fun i : Fin (2 * d + 1) ↦ 0 < i.1 ∧ i.1 < 2 * d),
+        (Module.finrank (PadicAlgCl l)
+          ((WeilSheaf.adicConstant k₀ l X).cohomology (i : ℕ)).carrier : ℝ) *
+          (Nat.card k₀ : ℝ) ^ ((i.1 : ℝ) * n / 2) := by
+  obtain ⟨P, hfact, -, hrh, hP⟩ := exists_isWeilFactorization_of_smoothProper k₀ X d
+  refine ((X ↘ Spec (CommRingCat.of k₀)).abs_pointCount_sub_le rfl hd hfact hrh hn).trans
+    (le_of_eq (Finset.sum_congr rfl fun i _ ↦ ?_))
+  rw [natDegree_eq_finrank_cohomology k₀ X (hP i) l]
+
+end Endpoints
+
+end Scheme
+
+end AlgebraicGeometry
 
 namespace AlgebraicGeometry.Scheme
 
@@ -229,14 +355,43 @@ geometrically integral curve over a finite field, the factor `P 1` in the factor
 `Z = P 1 / ((1 - T) (1 - q T))` of its zeta function has degree `2 g`.
 
 This is the zeta-function form of Step 4 of the blueprint proof of `cor-zl-hasse-bound`:
-`dim H¹(C, ℚ̄_ℓ) = 2 g`, which follows from the Kummer computation `H¹(C, ℤ/n) ≅ (ℤ/n)^{2g}`
-(`AlgebraicGeometry.IsCurve.nonempty_addEquiv_sheafH_constantZMod_one`) once `ℓ`-adic cohomology
-and its trace formula are available. -/
+`dim H¹(C ⊗ k̄, ℚ̄_ℓ) = 2 g`.
+
+The proof reduces the statement to this dimension count: a Weil factorization with `d = 1` is
+determined by the zeta function (`AlgebraicGeometry.IsWeilFactorization.eq_of_one`), so `P` is
+the family of integral Frobenius factors of
+`AlgebraicGeometry.Scheme.exists_isWeilFactorization_of_smoothProper`, and
+`deg P 1 = dim H¹(C ⊗ k̄, ℚ̄_ℓ)` (`AlgebraicGeometry.Scheme.natDegree_eq_finrank_cohomology`).
+
+The remaining `sorry` is the identity `dim_{ℚ̄_ℓ} H¹(C ⊗ k̄, ℚ̄_ℓ) = 2 g` for the cohomology
+`(WeilSheaf.adicConstant k l X).cohomology 1` of the constant pro-étale `ℓ`-adic Weil sheaf.
+It needs the Kummer computation `H¹(C ⊗ k̄, ℤ/ℓⁿ) ≅ (ℤ/ℓⁿ)^{2g}`
+(`AlgebraicGeometry.IsCurve.nonempty_addEquiv_sheafH_constantZMod_one`, itself `sorry`), the
+invariance of the genus under the base change `k → k̄` (blueprint `lem-pc-genus-base-change`),
+and a comparison of the pro-étale cohomology with coefficients in the sheaf `ℚ̄_ℓ` of locally
+finite continuous functions with `(lim_n H¹_ét(C ⊗ k̄, ℤ/ℓⁿ)) ⊗ ℚ̄_ℓ` (Bhatt–Scholze), which
+the repository does not have: its `ℓ`-adic Weil sheaves are not built from finite levels. -/
 theorem Hom.natDegree_eq_two_mul_genus_of_isWeilFactorization
     (f : X ⟶ Spec (.of k)) [SmoothOfRelativeDimension 1 f] [IsProper f]
     [GeometricallyIntegral f] {P : Fin (2 * 1 + 1) → Polynomial ℤ}
     (hfact : IsWeilFactorization (Nat.card k) 1 f.zetaSeries P) :
-    (P 1).natDegree = 2 * f.genus :=
+    (P 1).natDegree = 2 * f.genus := by
+  let : X.Over (Spec (.of k)) := ⟨f⟩
+  have : SmoothOfRelativeDimension 1 (X ↘ Spec (CommRingCat.of k)) :=
+    ‹SmoothOfRelativeDimension 1 f›
+  have : IsProper (X ↘ Spec (CommRingCat.of k)) := ‹IsProper f›
+  have : GeometricallyConnected (X ↘ Spec (CommRingCat.of k)) :=
+    GeometricallyIntegral.geometricallyConnected f
+  obtain ⟨P', hfact', -, -, hP'⟩ := exists_isWeilFactorization_of_smoothProper k X 1
+  obtain rfl : P = P' := hfact.eq_of_one hfact'
+  obtain ⟨l, hl, hne⟩ : ∃ l : ℕ, l.Prime ∧ ringChar k ≠ l := by
+    by_cases h : ringChar k = 2
+    · exact ⟨3, Nat.prime_three, by omega⟩
+    · exact ⟨2, Nat.prime_two, h⟩
+  have : Fact l.Prime := ⟨hl⟩
+  have : Fact (ringChar k ≠ l) := ⟨hne⟩
+  rw [natDegree_eq_finrank_cohomology k X (hP' 1) l]
+  -- `dim H¹(C ⊗ k̄, ℚ̄_ℓ) = 2 g`: see the docstring
   sorry
 
 /-- **The Hasse–Weil bound for curves.** Let `C` be a smooth proper geometrically integral curve
