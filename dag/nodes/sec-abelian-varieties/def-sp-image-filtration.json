@@ -116,5 +116,23 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-dif1849 (reviewer sub-agent of L); spot-checked: Statement faithful to blueprint node order 508; well-typed; deps def-sp-filtration (decreasing Z-filtration by subobjects) and def-sp-abelian supply all notions; no cycle (no proof, deps are upstream definitions); Mathlib searches recorded, no match. FIX more, RETURN less: (1) Stacks note claimed Tag 012E is 'the case of this construction' and the second reading said the recipe 'correctly specializes' to it; false, since H(F^pK) are not subobjects of a filtered object: reworded as an analogous construction and said why. (2) Added the one-line check that F^{n+1}B is contained in F^nB so the result is a filtration in the sense of [def-sp-filtration].; 1 file(s) fixed by the reviewer"
  },
- "lead_note": "2026-10-10 L (R-dif1849): Item is the general image filtration F^nB=im(F^nA->B) per its blueprint node (deps def-sp-filtration, def-sp-abelian); it does not and should not define the abutment A^n=colim, its filtration, or E_infty=gr, and does not cite def-sp-spectral-sequence: those belong to def-sp-convergence (E1 return 18:47), which must define them itself (its F^pA^n=im(D^{p,n-p}->A^n) is not literally an instance of this node either, since the D^{p,n-p} are not subobjects of one filtered object)."
+ "lead_note": "2026-10-10 L (R-dif1849): Item is the general image filtration F^nB=im(F^nA->B) per its blueprint node (deps def-sp-filtration, def-sp-abelian); it does not and should not define the abutment A^n=colim, its filtration, or E_infty=gr, and does not cite def-sp-spectral-sequence: those belong to def-sp-convergence (E1 return 18:47), which must define them itself (its F^pA^n=im(D^{p,n-p}->A^n) is not literally an instance of this node either, since the D^{p,n-p} are not subobjects of one filtered object).",
+ "lean": {
+  "module": "Sheaf.CategoryTheory.ImageFiltration",
+  "declaration": "CategoryTheory.DecreasingFiltration.image",
+  "file": "lean/Sheaf/CategoryTheory/ImageFiltration.lean",
+  "statement": "def DecreasingFiltration.image {A B : C} (F : DecreasingFiltration A) (f : A ⟶ B) : DecreasingFiltration B",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-imf0722",
+  "group": "C1",
+  "result": "pass",
+  "note": "Binders A B : C over [Abelian C], F : DecreasingFiltration A (dep def-sp-filtration's recorded decl), f : A ⟶ B; step n = (Subobject.exists f).obj (F.step n) = im(F^nA -> B) as Subobject B, all n : Z; antitone_step = F^{n+1}B <= F^nB (decreasing); no added hypotheses; Mathlib SpectralSequence/SpectralObject and source imageFiltration (spectral-object-specific) checked: no general image filtration, existing false correct"
+ }
 }
