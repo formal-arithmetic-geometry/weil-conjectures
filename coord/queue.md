@@ -1,11 +1,11 @@
 # Work queue
 
-1007 items; claim with `tools/claim.py next <group> [--stage N]`.
+1000 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (1007)
+## Stage 2: nodes to state (1000)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -24,18 +24,14 @@
 | `lem-pc-bounded-above-flat-tensor-acyclic` | 1 | state |
 | `lem-pc-closed-subscheme-base-change-ideal-image` | 1 | state |
 | `lem-pc-derived-adjoint-functors` | 1 | state |
-| `lem-pc-derived-tensor-flat-second-localization` | 1 | state |
 | `lem-pc-kflat-bounded-flat-replacement` | 1 | state |
 | `lem-pc-kflat-pullback-preservation` | 1 | state |
 | `lem-pc-kflat-resolution` | 1 | state |
-| `lem-pc-module-change-of-rings-adjunction` | 1 | state |
 | `lem-pc-module-inverse-image-adjunction` | 1 | state |
 | `lem-pc-module-pullback-adjunction` | 1 | state |
 | `lem-pc-module-pullback-identity-composition` | 1 | state |
 | `lem-pc-pre-derived-adjoint-functors-general` | 1 | state |
-| `lem-pc-right-localization-hom-colimit` | 1 | state |
 | `lem-pc-ring-pseudo-coherent-iff-all-m` | 1 | state |
-| `lem-pc-ringed-space-module-stalk-tensor` | 1 | state |
 | `lem-pc-sites-modules-j-shriek-flat` | 1 | state |
 | `lem-pc-sites-modules-sheafification-flat` | 1 | state |
 | `lem-pc-skyscraper-complex` | 1 | state |
@@ -50,14 +46,12 @@
 | `lem-pur-kinjective-acyclic-quotient-complexes-bounded-size` | 1 | state |
 | `lem-pur-kinjective-surjection-bounded-size` | 1 | state |
 | `lem-sc-affine-cap-section-open` | 1 | state |
-| `lem-sc-affine-finite-module-free-locus` | 1 | state |
 | `lem-sc-ample-finite-affine-cover` | 1 | state |
 | `lem-sc-ample-finite-principal-affine` | 1 | state |
 | `lem-sc-ample-finite-set-affine` | 1 | state |
 | `lem-sc-ample-proj-canonical-map` | 1 | state |
 | `lem-sc-ample-proj-local-chart` | 1 | state |
 | `lem-sc-ample-proj-open` | 1 | state |
-| `lem-sc-complex-lift-acyclic-projective` | 1 | state |
 | `lem-sc-conductor-ideal-restriction` | 1 | state |
 | `lem-sc-conductor-ideal-zero-intersection` | 1 | state |
 | `lem-sc-conductor-sections` | 1 | state |
@@ -69,7 +63,6 @@
 | `lem-sc-dual-number-scheme-pushout` | 1 | state |
 | `lem-sc-dvr-field-extension-order` | 1 | state |
 | `lem-sc-dvr-saturation-line` | 1 | state |
-| `lem-sc-dvr-tensor-surjective-negative-valuation` | 1 | state |
 | `lem-sc-dvr-valuation-ring-characterization` | 1 | state |
 | `lem-sc-effective-cartier-affine-dimension-drop` | 1 | state |
 | `lem-sc-effective-cartier-dimension-drop` | 1 | state |
