@@ -217,5 +217,23 @@
   "worker": "stage1",
   "summary": "Statement checked against Stacks 013S (derived.tex 6481): Stacks assumes beta_i alpha homotopic to a common gamma, equivalent to beta_1 alpha ~ beta_2 alpha (take gamma = beta_1 alpha); statement kept. Proof written from the direct argument of 013S (lines 6498-6537) in 7 steps: mapping cylinder 013N (new unsplit node lem-weil-pbc-complex-mapping-cylinder-split-factorization), the replacement alpha~ is a quasi-isomorphism (homotopic-maps-equal-cohomology leaf), reduction through pi and s (elementary), quotient complex M and factorization through it (elementary), M acyclic from the long exact cohomology sequence (existing leaf complex-ses-homology-long-exact, five-term chase written out), correction of beta_1-beta_2 on K (elementary), conclusion by 013R (existing leaf acyclic-map-to-injective-nullhomotopy). Source typo in 013S: '(d h^n + h^{n+1}) d' should read 'd h^n + h^{n+1} d'. Mathlib: re-searched (leansearch, loogle, grep); no one-line match; mathlib_candidate through IsKInjective.Qh_map_bijective recorded. lean_audit none on both branches."
  },
- "reviewed": "Reviewed by L 2026-10-10: faithful to Derived Categories 013S (direct proof): mapping cylinder (013N, new unsplit node) reduces to a termwise split alpha, the quotient complex is acyclic by the long exact sequence, the difference is corrected on K and killed by 013R (existing leaf); the source's misprinted correction term noted. No Mathlib match; candidate recorded (K-injective route, B8)."
+ "reviewed": "Reviewed by L 2026-10-10: faithful to Derived Categories 013S (direct proof): mapping cylinder (013N, new unsplit node) reduces to a termwise split alpha, the quotient complex is acyclic by the long exact sequence, the difference is corrected on K and killed by 013R (existing leaf); the source's misprinted correction term noted. No Mathlib match; candidate recorded (K-injective route, B8).",
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.LiftToInjectiveUniqueUpToHomotopy",
+  "declaration": "CochainComplex.homotopy_of_comp_quasiIso_of_injective",
+  "file": "lean/Sheaf/Algebra/Homology/LiftToInjectiveUniqueUpToHomotopy.lean",
+  "statement": "theorem homotopy_of_comp_quasiIso_of_injective {C : Type u} [Category.{v} C] [Abelian C] {K L I : CochainComplex C ℤ} (hI : ∃ a : ℤ, ∀ n : ℤ, n < a → IsZero (I.X n)) [∀ n : ℤ, Injective (I.X n)] (α : K ⟶ L) [QuasiIso α] (β₁ β₂ : L ⟶ I) (h : Nonempty (Homotopy (α ≫ β₁) (α ≫ β₂))) : Nonempty (Homotopy β₁ β₂)",
+  "branch": "sheaf-dag",
+  "by": "M1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-liu1111",
+  "group": "M1",
+  "result": "pass",
+  "note": "abelian C with independent universes u v (both used); K L I : CochainComplex C Z; I bounded below as inline ∃a ∀n<a IsZero (landed convention); [∀n Injective (I.X n)] (def-sp-injective-resolutions injective clause); α with [QuasiIso α] (HasHomology by inferInstance, not hollow); β₁ β₂ : L ⟶ I; Nonempty (Homotopy (α≫β₁) (α≫β₂)) incl. equal case; conclusion Nonempty (Homotopy β₁ β₂) = k^n:L^n→I^{n-1} family; not a Mathlib verbatim statement; recompiled under L"
+ }
 }
