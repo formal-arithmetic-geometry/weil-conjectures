@@ -127,5 +127,23 @@
   "group": "J1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-tle2553 (reviewer sub-agent of L); spot-checked: Statement vs Tag 07KW setup; cites existing def-weil-inverse-system and lem-pc-tower-abelian (no redefinition); exactness notion = additive + kernel-preserving per def-sp-left-exact-additive, matches citers lem-pc-derived-limit-roos-abelian-groups and lem-pc-tower-surjective-lim-acyclic. Mathlib: lim_preservesLimits (CategoryTheory/Adjunction/Limits.lean:215) is the generic fact, no single declaration for this statement; recorded. FIX more, RETURN less: C4 (missed by second reading) - lem-pc-tower-abelian does not state that kernels/biproducts/zero in towers are levelwise, which steps 1-2 use; folded that elementary universal-property check into both step texts.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.Limits.TowerLimitAdditiveLeftExact",
+  "declaration": "CategoryTheory.towerLimitAdditiveLeftExact",
+  "file": "lean/Sheaf/CategoryTheory/Limits/TowerLimitAdditiveLeftExact.lean",
+  "statement": "theorem towerLimitAdditiveLeftExact : (lim : (ℕᵒᵖ ⥤ AddCommGrpCat.{u}) ⥤ AddCommGrpCat.{u}).Additive ∧ PreservesFiniteLimits (lim : (ℕᵒᵖ ⥤ AddCommGrpCat.{u}) ⥤ AddCommGrpCat.{u})",
+  "branch": "sheaf-dag",
+  "by": "J1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-tle0921",
+  "group": "J1",
+  "result": "pass",
+  "note": "Objects: towers = ℕᵒᵖ ⥤ AddCommGrpCat.{u} (Z≥1 reindexed), lim = Mathlib lim; no hypotheses; .Additive = additive (finite products), PreservesFiniteLimits = left exact given additivity (preservesFiniteLimits_of_preservesKernels); same forms as M1 c262a989d/F1 ae7ee24c8; not one statement twice: node is Additive ∧ left exact, M1 has these as unrecorded helper roosLimitAdditive + a conjunct citing this node; Mathlib: PreservesFiniteLimits lim is an instance (PreservesLimits.preservesFiniteLimits lim), lim.Additive is not (probe), no single declaration states the conjunction, existing:false right; docstring carries both node steps; header/tag/imports/lines ok"
  }
 }

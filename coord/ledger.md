@@ -3616,3 +3616,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 07:18 L: merged deliver/M1/lem-pur-kinjective-characterize-K-injective (stage 2; reviewer PASS; first push; Sheaf.CategoryTheory.GrothendieckAbelian.KInjectiveCriterion CochainComplex.isKInjective_of_small_acyclic)
 - 07:18 L: merged deliver/H1/lem-pod-adic-tower-reconstruction (stage 2; reviewer PASS; first push; Sheaf.Paper.AdicTowerReconstruction Ideal.adic_tower_reconstruction)
 - 07:18 L: merged deliver/F1/lem-pc-termwise-tor-acyclic-derived-tensor (stage 2; reviewer PASS; first push; Sheaf.Algebra.Homology.TermwiseTorAcyclicDerivedTensor CochainComplex.quasiIso_tensor_of_termwise_tor_acyclic)
+- 07:18 L: merged deliver/J1/lem-pc-tower-limit-left-exact (stage 2; reviewer PASS; first push; Sheaf.CategoryTheory.Limits.TowerLimitAdditiveLeftExact CategoryTheory.towerLimitAdditiveLeftExact)
