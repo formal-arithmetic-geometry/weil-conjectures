@@ -214,5 +214,24 @@
   "by": "L",
   "result": "pass",
   "note": "Six steps: torsion and the unique Z/n-structure (new node lem-weil-pbc-sheaves-killed-by-n-zmod-modules, agent-formulated, unsplit); the partitions coincide (elementary); restriction commutes with forgetting (prop-weil-pbc-inverse-image-modules-exact (2),(3)); constant pieces (constant-sheaf stalk, finite values = finite stalks on nonempty pieces, lem-weil-pbc-constant-module-sheaf-underlying); the two implications, with empty pieces discarded. Statement fixed to the abelian reading of 'locally constant' in def-weil-pbc-constructible-torsion (imported, ambiguous) and tightened to the two definitions' exact clauses. The hypotheses on k and C are only for the curve coefficient pair. The known-defect pointer of prop-weil-pbc-algebraically-closed-extension step 10 is now set (this node added to its step 10 uses)."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ConstructibleTorsionModulesAgree",
+  "declaration": "AlgebraicGeometry.Scheme.constructible_torsion_modules_agree",
+  "file": "lean/Sheaf/AlgebraicGeometry/ConstructibleTorsionModulesAgree.lean",
+  "statement": "theorem constructible_torsion_modules_agree {k : Type v} [Field k] [IsAlgClosed k] {C : Scheme.{v}} (f : C ⟶ Spec (.of k)) [IsCurve f] (n : ℕ) (hn : 0 < n) (F : Sheaf C.smallEtaleTopology AddCommGrpCat.{v + 1}) (hF : n • 𝟙 F = 0) : letI : NeZero n := ⟨Nat.ne_of_gt hn⟩ let R := ULift.{v + 1} (ZMod n) let U := sheafCompose C.smallEtaleTopology (forget₂ (ModuleCat.{v + 1} R) AddCommGrpCat.{v + 1}) ∃ hT : C.IsTorsionAbelianSheaf F, let P : CurveCoefficientPair k := ⟨C, f, inferInstance, F, hT⟩ ∃ (M : Sheaf C.smallEtaleTopology (ModuleCat.{v + 1} R)) (e : U.obj M ≅ F), (∀ (N : Sheaf C.smallEtaleTopology (ModuleCat.{v + 1} R)) (eN : U.obj N ≅ F), ∃! a : M ≅ N, U.mapIso a ≪≫ eN = e) ∧ (P.IsConstructible ↔ IsConstructibleEtaleModuleSheaf M) ∧ ∀ S : Stratification C, ((∀ i : Fin S.n, IsFiniteLocallyConstantEtaleSheafOfSets ((etaleSetPullback (S.immersion i)).obj ((sheafCompose C.smallEtaleTopology (CategoryTheory.forget AddCommGrpCat.{v + 1})).obj F))) ↔ ∀ i : Fin S.n, let G := (Etale.upperStar AddCommGrpCat.{v + 1} (S.immersion i)).obj F IsLocallyConstantSheaf G ∧ ∀ (Ω : Type v) [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ S.domain i), Finite (((pointSmallEtale s).sheafFiber (A := AddCommGrpCat.{v + 1})).obj G)) ∧ ((∀ i : Fin S.n, let G := (Etale.upperStar AddCommGrpCat.{v + 1} (S.immersion i)).obj F IsLocallyConstantSheaf G ∧ ∀ (Ω : Type v) [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ S.domain i), Finite (((pointSmallEtale s).sheafFiber (A := AddCommGrpCat.{v + 1})).obj G)) ↔ ∀ i : Fin S.n, let G := (Etale.upperStar (ModuleCat.{v + 1} R) (S.immersion i)).obj M ∃ d : LocallyConstantDatum G, ∀ j : d.cover.I₀, ∃ A : ModuleCat.{v + 1} R, Finite A ∧ Nonempty ((G.over (d.cover.etalePrecoverageToEtale j)) ≅ (constantSheaf ((S.domain i).smallEtaleTopology.over (d.cover.etalePrecoverageToEtale j)) (ModuleCat.{v + 1} R)).obj A))",
+  "branch": "sheaf-dag",
+  "by": "G1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-ctm1135"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-ctm1135",
+  "group": "G1",
+  "result": "fix",
+  "note": "k alg closed; C sep finite type dim<=1 via IsCurve f; n>0; F abelian, n*id=0; torsion; curve pair on same C,F; unique Z/n-module lift in fiber of forget2; (i) recorded K1 P.IsConstructible (rfl to set-sheaf form) <-> recorded IsConstructibleEtaleModuleSheaf; per fixed Scheme.Stratification: set <-> abelian <-> module stratum conditions; universes v / v+1 line up; reverted the delivery's change of existing node(s) def-weil-pbc-constructible-torsion (--revert-nodes; kept as on sheaf-dag); left out new module(s) lean/Sheaf/AlgebraicGeometry/CurveCoefficientPairAbelianConstructible.lean (--drop-files, or a record fixed to existing: true)"
  }
 }
