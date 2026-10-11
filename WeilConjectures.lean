@@ -645,6 +645,7 @@ public import WeilConjectures.Compactification.RefinementPullback
 public import WeilConjectures.Compactification.RefinementUniqueness
 public import WeilConjectures.Compactification.StrictTransform
 public import WeilConjectures.Compactification.StrictTransformBlowup
+public import WeilConjectures.Compactification.StrictTransformChartModel
 public import WeilConjectures.Compactification.Tower
 public import WeilConjectures.Compactification.Triangle
 public import WeilConjectures.Compactification.TwoOpen
