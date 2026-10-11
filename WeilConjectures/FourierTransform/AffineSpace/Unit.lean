@@ -5,6 +5,7 @@ Authors: Christian Merten
 -/
 module
 
+public import WeilConjectures.EtaleCohomology.Purity.Smooth.AffineSpace
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.AffineSpaceTrace
 public import WeilConjectures.FourierTransform.AffineSpace.UnitVanishing
 public import WeilConjectures.SixFunctors.OpenClosed.Derived
@@ -150,37 +151,6 @@ section Twist
 
 variable (Λ : Type (u + 1)) [CommRing Λ] [HasTateTwist Λ]
 
-/-- Twist-and-shifts compose additively, `(K(m)[2m])(m')[2m'] ≅ K(m + m')[2(m + m')]`. -/
-private lemma nonempty_iso_twistShift_twistShift (X : Scheme.{u}) (m m' : ℤ)
-    (K : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
-    Nonempty ((twistShift Λ X m').obj ((twistShift Λ X m).obj K) ≅
-      (twistShift Λ X (m + m')).obj K) :=
-  ⟨(shiftFunctor _ (2 * m')).mapIso
-      ((((derivedTensor (ModuleCat.{u + 1} Λ) X).flip.obj (tateObject Λ X m')).commShiftIso
-        (2 * m)).app _) ≪≫
-    ((shiftFunctorAdd' _ (2 * m) (2 * m') (2 * (m + m')) (by ring)).app _).symm ≪≫
-    (shiftFunctor _ (2 * (m + m'))).mapIso
-      (derivedTensorAssociator _ X _ _ _ ≪≫
-        ((derivedTensor (ModuleCat.{u + 1} Λ) X).obj K).mapIso
-          (HasTateTwist.twistObjectAddIso X m m'))⟩
-
-/-- The zero twist is trivial: `K(0)[0] ≅ K`. -/
-private lemma nonempty_iso_twistShift_zero (X : Scheme.{u}) {m : ℤ} (hm : m = 0)
-    (K : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
-    Nonempty ((twistShift Λ X m).obj K ≅ K) :=
-  ⟨(shiftFunctorZero' _ (2 * m) (by simp [hm])).app _ ≪≫
-    ((derivedTensor (ModuleCat.{u + 1} Λ) X).obj K).mapIso
-      (eqToIso (by rw [hm]; rfl) ≪≫ HasTateTwist.twistObjectZeroIso X) ≪≫
-    derivedTensorRightUnitor _ X K⟩
-
-/-- `K ≅ (K(m)[2m])(-m)[-2m]`. -/
-private lemma nonempty_iso_twistShift_neg_twistShift (X : Scheme.{u}) (m : ℤ)
-    (K : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
-    Nonempty (K ≅ (twistShift Λ X (-m)).obj ((twistShift Λ X m).obj K)) := by
-  obtain ⟨e₁⟩ := nonempty_iso_twistShift_twistShift Λ X m (-m) K
-  obtain ⟨e₂⟩ := nonempty_iso_twistShift_zero Λ X (add_neg_cancel m) K
-  exact ⟨e₂.symm ≪≫ e₁.symm⟩
-
 /-- Proper direct image commutes with twist-and-shift, `Rf_*(M(m)[2m]) ≅ (Rf_* M)(m)[2m]`. -/
 lemma nonempty_iso_rightDerivedLowerStar_twistShift [Finite Λ] {X Y : Scheme.{u}}
     (f : X ⟶ Y) [IsProper f] (m : ℤ)
@@ -199,10 +169,11 @@ lemma nonempty_iso_rightDerivedLowerShriek_unit_affineSpace [Finite Λ]
       (twistShift Λ S (-(Fintype.card n : ℤ))).obj (𝟙_ _)) := by
   let A := ModuleCat.{u + 1} Λ
   obtain ⟨tr⟩ := nonempty_iso_rightDerivedLowerShriek_twistShift_affineSpace Λ n S
-  obtain ⟨e⟩ := nonempty_iso_twistShift_neg_twistShift Λ 𝔸(n; S) (Fintype.card n) (𝟙_ _)
   obtain ⟨t⟩ := nonempty_iso_rightDerivedLowerShriek_twistShift Λ (𝔸(n; S) ↘ S)
     (-(Fintype.card n : ℤ)) ((twistShift Λ 𝔸(n; S) (Fintype.card n)).obj (𝟙_ _))
-  exact ⟨(R(𝔸(n; S) ↘ S)_![A]).mapIso e ≪≫ t ≪≫
+  exact ⟨(R(𝔸(n; S) ↘ S)_![A]).mapIso
+      ((twistShiftZeroIso Λ 𝔸(n; S) (add_neg_cancel _) (𝟙_ _)).symm ≪≫
+        (twistShiftTwistShiftIso Λ 𝔸(n; S) _ _ (𝟙_ _)).symm) ≪≫ t ≪≫
     (twistShift Λ S (-(Fintype.card n : ℤ))).mapIso tr⟩
 
 end Twist
@@ -233,7 +204,11 @@ lemma charP_appTop_pullback_zeroSection
   charP_appTop_of_comp_eq_id (fibreToProduct _ _ (zeroSection n S))
     (pullback.lift (pullback.fst _ _) (pullback.snd _ _ ≫ 𝔸(n; S) ↘ S)
       (by rw [zeroSection_comp_over, Category.comp_id, pullback.condition]))
-    (by ext <;> simp)
+    (by
+      refine pullback.hom_ext ?_ ?_
+      · rw [Category.assoc, pullback.lift_fst, fibreToProduct_fst, Category.id_comp]
+      · rw [Category.assoc, pullback.lift_snd, fibreToProduct_snd_assoc, zeroSection_comp_over,
+          Category.comp_id, Category.id_comp])
 
 /-- Twisting `Λ` by the Artin–Schreier sheaf of the zero function gives back `Λ`. -/
 lemma nonempty_iso_artinSchreierTwist_obj_unit (X : Scheme.{u}) [CharP Γ(X, ⊤) p]
