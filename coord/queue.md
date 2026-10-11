@@ -1,19 +1,21 @@
 # Work queue
 
-980 items; claim with `tools/claim.py next <group> [--stage N]`.
+986 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (980)
+## Stage 2: nodes to state (986)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
 | `def-exc-continuous-cohomology` | 1 | state |
 | `def-galois-categories` | 1 | state |
+| `def-kun-support` | 1 | state |
 | `def-pur-hom-complex` | 1 | state |
 | `def-weil-derived-tensor` | 1 | state |
-| `def-weil-pbc-derived-categories` | 1 | state |
+| `def-weil-pbc-constructible-complexes` | 1 | state |
+| `def-weil-pbc-kinjective-resolutions` | 1 | state |
 | `lem-kun-03sa` | 1 | state |
 | `lem-pc-base-change-product` | 1 | state |
 | `lem-pc-derived-adjoint-functors` | 1 | state |
@@ -47,9 +49,7 @@
 | `lem-sc-global-generation-nonvanishing-cover` | 1 | state |
 | `lem-sc-global-sections-left-exact` | 1 | state |
 | `lem-sc-glue-component-line-bundles` | 1 | state |
-| `lem-sc-glue-component-reduced-cover-sections` | 1 | state |
 | `lem-sc-glue-component-transition-cocycle` | 1 | state |
-| `lem-sc-going-down-surjective-dimension` | 1 | state |
 | `lem-sc-graded-localization-exact` | 1 | state |
 | `lem-sc-hilbert-denominator-ideal-nowhere-dense` | 1 | state |
 | `lem-sc-hilbert-embedded-points-affine-localization` | 1 | state |
@@ -142,6 +142,7 @@
 | `lem-weil-pbc-annihilator-element-flat-base-change` | 1 | state |
 | `lem-weil-pbc-annihilator-localization-finite` | 1 | state |
 | `lem-weil-pbc-another-helper-g-ring` | 1 | state |
+| `lem-weil-pbc-arbitrary-ring-torsion-sheaf-base-change` | 1 | state |
 | `lem-weil-pbc-artinian-ideal-length-one-filtration` | 1 | state |
 | `lem-weil-pbc-artinian-local-essentially-finite-type-residue` | 1 | state |
 | `lem-weil-pbc-associated-module-hom` | 1 | state |
@@ -251,6 +252,8 @@
 | `lem-weil-pbc-derivation-nonzero-on-non-pth-power` | 1 | state |
 | `lem-weil-pbc-derived-finite-product` | 1 | state |
 | `lem-weil-pbc-derived-functor-long-exact` | 1 | state |
+| `lem-weil-pbc-derived-inverse-image-composition` | 1 | state |
+| `lem-weil-pbc-derived-square-iso-commshift` | 1 | state |
 | `lem-weil-pbc-descend-qc-open-fg-subalgebra` | 1 | state |
 | `lem-weil-pbc-differential-zero-iff-pth-power` | 1 | state |
 | `lem-weil-pbc-differentials-dimension-bound-smooth-at-prime` | 1 | state |
@@ -912,6 +915,7 @@
 | `lem-weil-pbc-unramified-fibre-point-isolated` | 1 | state |
 | `lem-weil-pbc-unramified-over-field-discrete` | 1 | state |
 | `lem-weil-pbc-valuation-ring-normal` | 1 | state |
+| `lem-weil-pbc-vanishing-descends-retract` | 1 | state |
 | `lem-weil-pbc-well-ordered-union-projective-dimension` | 1 | state |
 | `lem-weil-pbc-z-g-ring` | 1 | state |
 | `lem-weil-pbc-z-localizations-dvr` | 1 | state |
@@ -929,6 +933,8 @@
 | `lemma-weil-pbc-affine-neighbourhood-cofinal` | 1 | state |
 | `lemma-weil-pbc-cancellation` | 1 | state |
 | `lemma-weil-pbc-chow-factorization` | 1 | state |
+| `lemma-weil-pbc-target-locality` | 1 | state |
+| `lemma-weil-pbc-torsion-assembly` | 1 | state |
 | `lemma-weil-pbc-torsion-filtered-union` | 1 | state |
 | `pqf-def-coherent` | 1 | state |
 | `pqf-def-locnoeth` | 1 | state |
@@ -990,7 +996,7 @@
 | `lem-sc-normalization-properties` | 3 | state |
 | `def-nagata-fixed-base-separated-stage` | 6 | state |
 
-Not open yet: 931 nodes that wait for a statement dependency, 40 nodes that wait for stage 1.
+Not open yet: 922 nodes that wait for a statement dependency, 40 nodes that wait for stage 1.
 
 ## Stage 3: modules to prove (0)
 
