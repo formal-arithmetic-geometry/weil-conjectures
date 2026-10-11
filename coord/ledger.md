@@ -4239,3 +4239,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 10:28 L: merged deliver/J1/lem-weil-pbc-finite-etale-lifting-limit-descent (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.FiniteEtaleLiftingLimitDescent AlgebraicGeometry.Scheme.exists_finiteEtale_lift_of_henselianPair_of_gRing_lifting)
 - 10:28 L: merged deliver/F1/lem-pur-triangle-morphism-category-05r9 (stage 2; reviewer PASS; first push; Sheaf.CategoryTheory.TriangleMorphismCategory CategoryTheory.triangle_morphism_category_cofiltered_initial)
 - 10:28 L: merged deliver/M1/lem-weil-pbc-finite-module-complete-over-complete-noetherian (stage 2; reviewer PASS; first push; Sheaf.RingTheory.FiniteModuleComplete finite_module_complete_over_complete_noetherian)
+- 10:28 L: merged deliver/K1/lem-weil-pbc-finite-subalgebra-fraction-field (stage 2; reviewer PASS; first push; Sheaf.RingTheory.FiniteSubalgebraFractionField MvPolynomial.exists_finite_subalgebra_fraction_field)

@@ -211,5 +211,23 @@
   "by": "L",
   "result": "accepted",
   "note": "5 steps (proof_origin agent; the source 07PR only asserts B): A is a domain (power-series and polynomial-ring leaves) and K its fraction field; monic equations for a K-basis by the finite-algebra-is-integral leaf; denominators cleared by a common delta (written out); B = A[delta e_i] finite over A by the integral-generators leaf; every u in M is b/s. Statement: 'a domain' now a proved claim, finite extension spelled out, n, m introduced."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.FiniteSubalgebraFractionField",
+  "declaration": "MvPolynomial.exists_finite_subalgebra_fraction_field",
+  "file": "lean/Sheaf/RingTheory/FiniteSubalgebraFractionField.lean",
+  "statement": "theorem exists_finite_subalgebra_fraction_field (k : Type u) [Field k] (p : ℕ) [CharP k p] (hp : 0 < p) (n m : ℕ) (K : Type v) [Field K] [Algebra (MvPolynomial (Fin m) (MvPowerSeries (Fin n) k)) K] [IsLocalization.AtPrime K (⊥ : Ideal (MvPolynomial (Fin m) (MvPowerSeries (Fin n) k)))] (M : Type w) [Field M] [Algebra K M] [Algebra (MvPolynomial (Fin m) (MvPowerSeries (Fin n) k)) M] [IsScalarTower (MvPolynomial (Fin m) (MvPowerSeries (Fin n) k)) K M] [Module.Finite K M] : IsDomain (MvPolynomial (Fin m) (MvPowerSeries (Fin n) k)) ∧ ∃ B : Subalgebra (MvPolynomial (Fin m) (MvPowerSeries (Fin n) k)) M, Module.Finite (MvPolynomial (Fin m) (MvPowerSeries (Fin n) k)) B ∧ ∀ z : M, ∃ b s : B, (s : M) ≠ 0 ∧ z = (b : M) / (s : M)",
+  "branch": "sheaf-dag",
+  "by": "K1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-fsf1028",
+  "group": "K1",
+  "result": "pass",
+  "note": "k field char p>0 (CharP+0<p); A=MvPolynomial (Fin m) (MvPowerSeries (Fin n) k); IsDomain A as conclusion; K=A_(0) via IsLocalization.AtPrime K ⊥ (satisfiable: FractionRing instance checked); M finite ext Module.Finite K M with IsScalarTower A K M; B : Subalgebra A M, Module.Finite A B, every z=b/s s≠0; no Mathlib lemma states it"
  }
 }
