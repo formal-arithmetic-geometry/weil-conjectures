@@ -183,17 +183,33 @@ lemma ι_obj_derivedHom_obj_obj (K : (DerivedCategoryFiniteTor (ModuleCat.{u + 1
       ((RHom(X)[ModuleCat.{u + 1} Λ]).obj (op ((ι _ X).obj K.unop))).obj ((ι _ X).obj M) :=
   rfl
 
+@[simp]
+lemma derivedHom_map_app_hom {K K' : (DerivedCategoryFiniteTor (ModuleCat.{u + 1} Λ) X)ᵒᵖ}
+    (f : K ⟶ K') (M : DerivedCategoryFiniteTor (ModuleCat.{u + 1} Λ) X) :
+    (((derivedHom Λ aX).map f).app M).hom =
+      ((RHom(X)[ModuleCat.{u + 1} Λ]).map f.unop.hom.op).app M.obj :=
+  rfl
+
+omit [Finite Λ] in
+@[simp]
+lemma leftDerivedUpperStar_map_hom {Y : Scheme.{u}} (h : Y ⟶ X)
+    {K K' : DerivedCategoryFiniteTor (ModuleCat.{u + 1} Λ) X} (f : K ⟶ K') :
+    ((leftDerivedUpperStar _ h).map f).hom = L((h)^*[ModuleCat.{u + 1} Λ]).map f.hom :=
+  rfl
+
 noncomputable instance (K : (DerivedCategoryFiniteTor (ModuleCat.{u + 1} Λ) X)ᵒᵖ) :
     ((derivedHom Λ aX).obj K).CommShift ℤ :=
   inferInstanceAs ((ObjectProperty.liftFullSubcategory (DerivedCategory.constructibleFiniteTor _ X)
-    (DerivedCategory.constructibleFiniteTor _ X) ((RHom(X)[ModuleCat.{u + 1} Λ]).obj (op K.unop.obj))
+    (DerivedCategory.constructibleFiniteTor _ X)
+    ((RHom(X)[ModuleCat.{u + 1} Λ]).obj (op K.unop.obj))
     fun _ hM ↦ constructibleFiniteTor_derivedHom Λ aX K.unop.property hM).CommShift ℤ)
 
 /-- The derived internal hom `RHom(K, -)` of `Dctf(X, Λ)` is a triangulated functor. -/
 instance (K : (DerivedCategoryFiniteTor (ModuleCat.{u + 1} Λ) X)ᵒᵖ) :
     ((derivedHom Λ aX).obj K).IsTriangulated :=
   inferInstanceAs ((ObjectProperty.liftFullSubcategory (DerivedCategory.constructibleFiniteTor _ X)
-    (DerivedCategory.constructibleFiniteTor _ X) ((RHom(X)[ModuleCat.{u + 1} Λ]).obj (op K.unop.obj))
+    (DerivedCategory.constructibleFiniteTor _ X)
+    ((RHom(X)[ModuleCat.{u + 1} Λ]).obj (op K.unop.obj))
     fun _ hM ↦ constructibleFiniteTor_derivedHom Λ aX K.unop.property hM).IsTriangulated)
 
 end DerivedCategoryFiniteTor
@@ -290,6 +306,23 @@ noncomputable abbrev leftDerivedUpperStarDerivedHomIso [L((g)^*[A]).IsEquivalenc
       (RHom(Z)[A].obj (op (L((g)^*[A]).obj K))).obj (L((g)^*[A]).obj M) :=
   asIso (leftDerivedUpperStarDerivedHomComparison A g K M)
 
+/-- The internal-Hom Frobenius `Lg^* RHom(K, M) ⟶ RHom(Lg^* K, Lg^* M) ⟶ RHom(K, M)` built from
+`ψ_K : K ⟶ Lg^* K` and `φ_M : Lg^* M ⟶ M` is natural in `K`: for `f : K' ⟶ K` compatible with
+`ψ_K` and `ψ_{K'}` it commutes with precomposition by `f`. -/
+lemma leftDerivedUpperStarDerivedHomComparison_comp_naturality_left {X : Scheme.{u}}
+    (g : X ⟶ X) [(g)^*[A].PreservesFlat] {K K' M : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)}
+    (f : K' ⟶ K) (ψK : K ⟶ L((g)^*[A]).obj K) (ψK' : K' ⟶ L((g)^*[A]).obj K')
+    (φM : L((g)^*[A]).obj M ⟶ M) (hf : ψK' ≫ L((g)^*[A]).map f = f ≫ ψK) :
+    (leftDerivedUpperStarDerivedHomComparison A g K M ≫ (RHom(X)[A].map ψK.op).app _ ≫
+        (RHom(X)[A].obj (op K)).map φM) ≫ (RHom(X)[A].map f.op).app M =
+      L((g)^*[A]).map ((RHom(X)[A].map f.op).app M) ≫
+        leftDerivedUpperStarDerivedHomComparison A g K' M ≫ (RHom(X)[A].map ψK'.op).app _ ≫
+          (RHom(X)[A].obj (op K')).map φM := by
+  rw [leftDerivedUpperStarDerivedHomComparison_naturality_left_assoc, Category.assoc,
+    Category.assoc, ← NatTrans.comp_app_assoc, ← Functor.map_comp, ← op_comp, hf, op_comp,
+    Functor.map_comp, NatTrans.comp_app_assoc,
+    ← NatTrans.naturality (RHom(X)[A].map f.op) φM]
+
 end InternalHom
 
 omit [Finite Λ] in
@@ -312,7 +345,8 @@ noncomputable def tensorFrobenius (K L : WeilComplex (ModuleCat.{u + 1} Λ) g) :
         (((DerivedCategoryFiniteTor.derivedTensor Λ X).obj K.obj).obj L.obj) ≅
       ((DerivedCategoryFiniteTor.derivedTensor Λ X).obj K.obj).obj L.obj :=
   ObjectProperty.isoMk _ (leftDerivedUpperStarTensorIso _ g.hom K.obj.obj L.obj.obj ≪≫
-    ((-⊗ᴸ-(X)[ModuleCat.{u + 1} Λ]).mapIso ((DerivedCategoryFiniteTor.ι _ X).mapIso K.frobenius)).app _ ≪≫
+    ((-⊗ᴸ-(X)[ModuleCat.{u + 1} Λ]).mapIso
+      ((DerivedCategoryFiniteTor.ι _ X).mapIso K.frobenius)).app _ ≪≫
     ((-⊗ᴸ-(X)[ModuleCat.{u + 1} Λ]).obj K.obj.obj).mapIso
       ((DerivedCategoryFiniteTor.ι _ X).mapIso L.frobenius))
 
@@ -332,7 +366,8 @@ lemma frobenius_hom_comp_hom {K L : WeilComplex (ModuleCat.{u + 1} Λ) g} (f : K
   congrArg InducedCategory.Hom.hom f.comm
 
 lemma tensorFrobenius_hom_hom (K L : WeilComplex (ModuleCat.{u + 1} Λ) g) :
-    (tensorFrobenius K L).hom.hom = (leftDerivedUpperStarTensorIso _ g.hom K.obj.obj L.obj.obj).hom ≫
+    (tensorFrobenius K L).hom.hom =
+      (leftDerivedUpperStarTensorIso _ g.hom K.obj.obj L.obj.obj).hom ≫
       ((-⊗ᴸ-(X)[ModuleCat.{u + 1} Λ]).map K.frobenius.hom.hom).app _ ≫
         ((-⊗ᴸ-(X)[ModuleCat.{u + 1} Λ]).obj K.obj.obj).map L.frobenius.hom.hom :=
   rfl
@@ -383,7 +418,8 @@ noncomputable def tensor :
   map_id K := NatTrans.ext <| funext fun L ↦ hom_ext
       (NatTrans.congr_app ((DerivedCategoryFiniteTor.derivedTensor Λ X).map_id K.obj) L.obj)
   map_comp f f' := NatTrans.ext <| funext fun L ↦ hom_ext
-      (NatTrans.congr_app ((DerivedCategoryFiniteTor.derivedTensor Λ X).map_comp f.hom f'.hom) L.obj)
+      (NatTrans.congr_app
+        ((DerivedCategoryFiniteTor.derivedTensor Λ X).map_comp f.hom f'.hom) L.obj)
 
 @[simp]
 lemma tensor_obj_obj_obj (K L : WeilComplex (ModuleCat.{u + 1} Λ) g) :
@@ -408,6 +444,165 @@ lemma tensor_map_app_hom {K K' : WeilComplex (ModuleCat.{u + 1} Λ) g} (f : K �
     (L : WeilComplex (ModuleCat.{u + 1} Λ) g) :
     (((tensor Λ g).map f).app L).hom =
       ((DerivedCategoryFiniteTor.derivedTensor Λ X).map f.hom).app L.obj :=
+  rfl
+
+omit [Finite Λ] in
+/-- The compatibility of a morphism of Weil complexes with the inverses of the Weil structures,
+in `D(X_ét)`. -/
+@[reassoc]
+lemma frobenius_inv_hom_comp_map {K L : WeilComplex (ModuleCat.{u + 1} Λ) g} (f : K ⟶ L) :
+    K.frobenius.inv.hom ≫ L((g.hom)^*[ModuleCat.{u + 1} Λ]).map f.hom.hom =
+      f.hom.hom ≫ L.frobenius.inv.hom := by
+  rw [← cancel_mono ((DerivedCategoryFiniteTor.ι _ X).mapIso L.frobenius).hom]
+  rw [Category.assoc, Category.assoc]
+  change _ = _ ≫ ((DerivedCategoryFiniteTor.ι _ X).mapIso L.frobenius).inv ≫
+    ((DerivedCategoryFiniteTor.ι _ X).mapIso L.frobenius).hom
+  rw [Iso.inv_hom_id, Category.comp_id]
+  change _ ≫ _ ≫ L.frobenius.hom.hom = _
+  rw [← frobenius_hom_comp_hom]
+  change ((DerivedCategoryFiniteTor.ι _ X).mapIso K.frobenius).inv ≫
+    ((DerivedCategoryFiniteTor.ι _ X).mapIso K.frobenius).hom ≫ _ = _
+  rw [Iso.inv_hom_id_assoc]
+
+/-! ### Internal homs of Weil complexes -/
+
+variable {k : Type u} [Field k] (aX : X ⟶ Spec (.of k)) [LocallyOfFiniteType aX]
+  [QuasiCompact aX] [HasInvertibleExponent Λ X]
+
+/-- Blueprint `def-wf-internal-hom`: the *internal-Hom Frobenius* of two Weil complexes
+`(K, φ_K)` and `(L, φ_L)`, the Weil structure
+`Lg^* RHom(K, L) ≅ RHom(Lg^* K, Lg^* L) ≅ RHom(K, L)` on `RHom(K, L)`, whose first arrow is the
+comparison map of the monoidal equivalence `Lg^*` and whose second arrow is
+`RHom(φ_K⁻¹, φ_L)`. -/
+noncomputable def internalHomFrobenius (K L : WeilComplex (ModuleCat.{u + 1} Λ) g) :
+    (DerivedCategoryFiniteTor.leftDerivedUpperStar _ g.hom).obj
+        (((DerivedCategoryFiniteTor.derivedHom Λ aX).obj (op K.obj)).obj L.obj) ≅
+      ((DerivedCategoryFiniteTor.derivedHom Λ aX).obj (op K.obj)).obj L.obj :=
+  ObjectProperty.isoMk _
+    (leftDerivedUpperStarDerivedHomIso (ModuleCat.{u + 1} Λ) g.hom K.obj.obj L.obj.obj ≪≫
+      (RHom(X)[ModuleCat.{u + 1} Λ].mapIso
+        ((DerivedCategoryFiniteTor.ι _ X).mapIso K.frobenius).symm.op).app _ ≪≫
+      (RHom(X)[ModuleCat.{u + 1} Λ].obj (op K.obj.obj)).mapIso
+        ((DerivedCategoryFiniteTor.ι _ X).mapIso L.frobenius))
+
+lemma internalHomFrobenius_hom_hom (K L : WeilComplex (ModuleCat.{u + 1} Λ) g) :
+    (internalHomFrobenius aX K L).hom.hom =
+      leftDerivedUpperStarDerivedHomComparison (ModuleCat.{u + 1} Λ) g.hom K.obj.obj L.obj.obj ≫
+        (RHom(X)[ModuleCat.{u + 1} Λ].map K.frobenius.inv.hom.op).app _ ≫
+          (RHom(X)[ModuleCat.{u + 1} Λ].obj (op K.obj.obj)).map L.frobenius.hom.hom :=
+  rfl
+
+/-- The internal-Hom Frobenius is natural in the first variable. -/
+lemma internalHomFrobenius_hom_comp_map_test1 {K K' : WeilComplex (ModuleCat.{u + 1} Λ) g} (f : K' ⟶ K)
+    (L : WeilComplex (ModuleCat.{u + 1} Λ) g) :
+    (internalHomFrobenius aX K L).hom ≫
+        ((DerivedCategoryFiniteTor.derivedHom Λ aX).map f.hom.op).app L.obj =
+      (DerivedCategoryFiniteTor.leftDerivedUpperStar _ g.hom).map
+          (((DerivedCategoryFiniteTor.derivedHom Λ aX).map f.hom.op).app L.obj) ≫
+        (internalHomFrobenius aX K' L).hom := by
+  apply ObjectProperty.hom_ext
+  rw [ObjectProperty.FullSubcategory.comp_hom, ObjectProperty.FullSubcategory.comp_hom,
+    internalHomFrobenius_hom_hom, internalHomFrobenius_hom_hom,
+    DerivedCategoryFiniteTor.leftDerivedUpperStar_map_hom,
+    DerivedCategoryFiniteTor.derivedHom_map_app_hom, Quiver.Hom.unop_op]
+  with_reducible exact leftDerivedUpperStarDerivedHomComparison_comp_naturality_left _ g.hom f.hom.hom _ _ _
+    (frobenius_inv_hom_comp_map f)
+
+set_option maxHeartbeats 3000000 in
+lemma internalHomFrobenius_hom_comp_map_test2 {K K' : WeilComplex (ModuleCat.{u + 1} Λ) g} (f : K' ⟶ K)
+    (L : WeilComplex (ModuleCat.{u + 1} Λ) g) :
+    (internalHomFrobenius aX K L).hom ≫
+        ((DerivedCategoryFiniteTor.derivedHom Λ aX).map f.hom.op).app L.obj =
+      (DerivedCategoryFiniteTor.leftDerivedUpperStar _ g.hom).map
+          (((DerivedCategoryFiniteTor.derivedHom Λ aX).map f.hom.op).app L.obj) ≫
+        (internalHomFrobenius aX K' L).hom := by
+  apply ObjectProperty.hom_ext
+  rw [ObjectProperty.FullSubcategory.comp_hom, ObjectProperty.FullSubcategory.comp_hom,
+    internalHomFrobenius_hom_hom, internalHomFrobenius_hom_hom,
+    DerivedCategoryFiniteTor.leftDerivedUpperStar_map_hom,
+    DerivedCategoryFiniteTor.derivedHom_map_app_hom, Quiver.Hom.unop_op]
+  exact leftDerivedUpperStarDerivedHomComparison_comp_naturality_left _ g.hom f.hom.hom _ _ _
+    (frobenius_inv_hom_comp_map f)
+
+/-- The internal-Hom Frobenius is natural in the first variable. -/
+lemma internalHomFrobenius_hom_comp_map {K K' : WeilComplex (ModuleCat.{u + 1} Λ) g} (f : K' ⟶ K)
+    (L : WeilComplex (ModuleCat.{u + 1} Λ) g) :
+    (internalHomFrobenius aX K L).hom ≫
+        ((DerivedCategoryFiniteTor.derivedHom Λ aX).map f.hom.op).app L.obj =
+      (DerivedCategoryFiniteTor.leftDerivedUpperStar _ g.hom).map
+          (((DerivedCategoryFiniteTor.derivedHom Λ aX).map f.hom.op).app L.obj) ≫
+        (internalHomFrobenius aX K' L).hom := by sorry
+
+variable (g) in
+/-- Blueprint `lem-wf-internal-hom-weil`: the derived internal hom of Weil complexes. With the
+internal-Hom Frobenius `RHom(φ_K⁻¹, φ_L)` (`AlgebraicGeometry.Etale.WeilComplex.internalHomFrobenius`),
+the derived internal hom of `Dctf(X, Λ)` lifts to a bifunctor `WeilDᵒᵖ × WeilD ⥤ WeilD` on Weil
+complexes, lying over the derived internal hom of `Dctf(X, Λ)`
+(`AlgebraicGeometry.Etale.WeilComplex.internalHom_obj_obj_obj`, `…internalHom_map_app_hom`,
+`…internalHom_obj_map_hom`), which is triangulated in its second variable. -/
+noncomputable def internalHom :
+    (WeilComplex (ModuleCat.{u + 1} Λ) g)ᵒᵖ ⥤ WeilComplex (ModuleCat.{u + 1} Λ) g ⥤
+      WeilComplex (ModuleCat.{u + 1} Λ) g where
+  obj K :=
+    { obj L := ⟨((DerivedCategoryFiniteTor.derivedHom Λ aX).obj (op K.unop.obj)).obj L.obj,
+        internalHomFrobenius aX K.unop L⟩
+      map {L L'} h :=
+        ⟨((DerivedCategoryFiniteTor.derivedHom Λ aX).obj (op K.unop.obj)).map h.hom, by
+          apply ObjectProperty.hom_ext
+          change (internalHomFrobenius aX K.unop L).hom.hom ≫
+              (RHom(X)[ModuleCat.{u + 1} Λ].obj (op K.unop.obj.obj)).map h.hom.hom =
+            L((g.hom)^*[ModuleCat.{u + 1} Λ]).map
+                ((RHom(X)[ModuleCat.{u + 1} Λ].obj (op K.unop.obj.obj)).map h.hom.hom) ≫
+              (internalHomFrobenius aX K.unop L').hom.hom
+          rw [internalHomFrobenius_hom_hom, internalHomFrobenius_hom_hom,
+            leftDerivedUpperStarDerivedHomComparison_naturality_right_assoc, Category.assoc,
+            Category.assoc, NatTrans.naturality_assoc, ← Functor.map_comp, ← Functor.map_comp,
+            frobenius_hom_comp_hom]⟩
+      map_id L := by
+        ext1
+        exact ((DerivedCategoryFiniteTor.derivedHom Λ aX).obj (op K.unop.obj)).map_id L.obj
+      map_comp h h' := by
+        ext1
+        exact ((DerivedCategoryFiniteTor.derivedHom Λ aX).obj (op K.unop.obj)).map_comp
+          h.hom h'.hom }
+  map {K K'} f :=
+    { app L := ⟨((DerivedCategoryFiniteTor.derivedHom Λ aX).map f.unop.hom.op).app L.obj,
+        internalHomFrobenius_hom_comp_map aX f.unop L⟩
+      naturality L L' h := by
+        ext1
+        exact ((DerivedCategoryFiniteTor.derivedHom Λ aX).map f.unop.hom.op).naturality h.hom }
+  map_id K := NatTrans.ext <| funext fun L ↦ hom_ext
+      (NatTrans.congr_app ((DerivedCategoryFiniteTor.derivedHom Λ aX).map_id (op K.unop.obj))
+        L.obj)
+  map_comp f f' := NatTrans.ext <| funext fun L ↦ hom_ext
+      (NatTrans.congr_app ((DerivedCategoryFiniteTor.derivedHom Λ aX).map_comp f.unop.hom.op
+        f'.unop.hom.op) L.obj)
+
+@[simp]
+lemma internalHom_obj_obj_obj (K : (WeilComplex (ModuleCat.{u + 1} Λ) g)ᵒᵖ)
+    (L : WeilComplex (ModuleCat.{u + 1} Λ) g) :
+    (((internalHom g aX).obj K).obj L).obj =
+      ((DerivedCategoryFiniteTor.derivedHom Λ aX).obj (op K.unop.obj)).obj L.obj :=
+  rfl
+
+@[simp]
+lemma internalHom_obj_obj_frobenius (K : (WeilComplex (ModuleCat.{u + 1} Λ) g)ᵒᵖ)
+    (L : WeilComplex (ModuleCat.{u + 1} Λ) g) :
+    (((internalHom g aX).obj K).obj L).frobenius = internalHomFrobenius aX K.unop L :=
+  rfl
+
+@[simp]
+lemma internalHom_obj_map_hom (K : (WeilComplex (ModuleCat.{u + 1} Λ) g)ᵒᵖ)
+    {L L' : WeilComplex (ModuleCat.{u + 1} Λ) g} (h : L ⟶ L') :
+    (((internalHom g aX).obj K).map h).hom =
+      ((DerivedCategoryFiniteTor.derivedHom Λ aX).obj (op K.unop.obj)).map h.hom :=
+  rfl
+
+@[simp]
+lemma internalHom_map_app_hom {K K' : (WeilComplex (ModuleCat.{u + 1} Λ) g)ᵒᵖ} (f : K ⟶ K')
+    (L : WeilComplex (ModuleCat.{u + 1} Λ) g) :
+    (((internalHom g aX).map f).app L).hom =
+      ((DerivedCategoryFiniteTor.derivedHom Λ aX).map f.unop.hom.op).app L.obj :=
   rfl
 
 end WeilComplex
