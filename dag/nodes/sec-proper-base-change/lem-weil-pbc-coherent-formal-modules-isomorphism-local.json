@@ -161,5 +161,23 @@
   "worker": "stage1",
   "summary": "Read Stacks 087X (coherent.tex line 6313, tag verified) and its proof: the remark that a morphism of Coh(X,I) whose components are isomorphisms is an isomorphism, checked on an open cover, is hidden in 'Parts (2) and (3) are immediate'; the proof is therefore written by the agent. Not a Mathlib leaf (B8): Mathlib has no Coh(X,I) and no inverse systems of coherent modules; LeanSearch, LeanFinder, Loogle and grep recorded (local_search index unavailable). Proof in three steps: (1) each alpha_n is an isomorphism, by glueing the local inverses, which agree on overlaps by uniqueness of inverses, with lem-weil-pbc-glue-sheaves-of-modules (1) (same unit sk-thm-p1), and checking the two composites are the identity by its uniqueness clause; (2) the inverses commute with the transition maps (elementary); (3) they form a morphism of Coh(X,I) inverse to alpha (elementary, componentwise composition from def-weil-pbc-coherent-formal-module). Statement clarified, not changed in content: 'Noetherian' spelled out as in the definition node and the citer, the restriction alpha_n|_{U_j} defined, the conclusion made explicit (inverse beta with beta_n = alpha_n^{-1}); def-weil-sheaf-of-modules-category added to stmt_deps. No new node."
  },
- "reviewed": "pass (L, 2026-10-10): 3 steps by agent (the remark in 087X): local inverses glue (glue-sheaves-of-modules), the inverses commute with the transition maps, so (alpha_n^{-1}) is an inverse in Coh(X,I). Statement clarified only. Stage-3 note: the citer coherent-formal-modules-local-exactness step 4 should say it applies this lemma to Q -> 0."
+ "reviewed": "pass (L, 2026-10-10): 3 steps by agent (the remark in 087X): local inverses glue (glue-sheaves-of-modules), the inverses commute with the transition maps, so (alpha_n^{-1}) is an inverse in Coh(X,I). Statement clarified only. Stage-3 note: the citer coherent-formal-modules-local-exactness step 4 should say it applies this lemma to Q -> 0.",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.CoherentFormalModuleIsomorphismLocal",
+  "declaration": "AlgebraicGeometry.coherentFormalModule_isIso_of_isIso_restrict",
+  "file": "lean/Sheaf/AlgebraicGeometry/CoherentFormalModuleIsomorphismLocal.lean",
+  "statement": "theorem coherentFormalModule_isIso_of_isIso_restrict {X : Scheme.{u}} [IsNoetherian X] (I : X.IdealSheafData) {J : Type v} (U : J → X.Opens) (hU : iSup U = ⊤) {F G : CoherentFormalModule X I} (α : F ⟶ G) (hα : ∀ (j : J) (n : ℕ), IsIso ((Scheme.Modules.restrictFunctor (U j).ι).map (α.hom.app (op n)))) : IsIso α ∧ ∃ β : G ⟶ F, α ≫ β = 𝟙 F ∧ β ≫ α = 𝟙 G ∧ ∀ n : ℕ, ∃ e : F.obj.obj (op n) ≅ G.obj.obj (op n), e.hom = α.hom.app (op n) ∧ e.inv = β.hom.app (op n)",
+  "branch": "sheaf-dag",
+  "by": "K1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "K1",
+  "result": "pass",
+  "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
+ }
 }
