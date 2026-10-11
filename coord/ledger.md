@@ -3316,3 +3316,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 02:44 L: reviewers R-ecc0244 (J1 lem-pur-essential-constant-cofinal-0a1s, 202d1aa84) and R-epc0244 (J1 lem-pur-essential-constant-pro-criterion-05py, f23063834) launched; three reviewers in flight
 - 02:44 L: J1's delivery of lem-pur-essential-constant-cofinal-0a1s (202d1aa84) weakened the statement (cone-map clauses dropped, no statement_change) while the citer 05SC uses them; reviewer R-ecc0244 told to restore the statement (C4 FIX); second reading by J1 on lem-sc-picard-cech-cup-pullback-compat missed the step-3 non-sequitur (R-ccp0242 FIX, merged 87373258e)
 - 02:44 L: merged deliver/J1/lem-pur-essential-constant-pro-criterion-05py (reviewer PASS; first push; new nodes: 0)
+- 02:46 L: merged deliver/J1/lem-pur-essential-constant-cofinal-0a1s (reviewer FIX; first push; new nodes: 0)

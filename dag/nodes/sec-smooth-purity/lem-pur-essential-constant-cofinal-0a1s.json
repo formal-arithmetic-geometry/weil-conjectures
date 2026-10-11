@@ -21,35 +21,102 @@
  "stmt_deps": [
   "def-pc-essentially-constant-pro-diagram"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Comparison of Hom-colimits. Here \"initial\" is Stacks' notion (Categories, Definition of an initial functor): conditions (1), (2) of [lem-weil-pbc-initial-functor-limit]. Fix an object $W$ of $\\mathcal C$ and consider the functor $j\\mapsto\\operatorname{Hom}_{\\mathcal C}(M(j),W)$ from $\\mathcal J$ to the opposite category $\\mathrm{Set}^{\\mathrm{op}}$; its limit in $\\mathrm{Set}^{\\mathrm{op}}$ is the colimit $\\varinjlim_{j\\in\\mathcal J^{\\mathrm{op}}}\\operatorname{Hom}(M(j),W)$ in $\\mathrm{Set}$, which exists. Applying [lem-weil-pbc-initial-functor-limit] to $H$ and this functor (with $\\mathrm{Set}^{\\mathrm{op}}$ as the target category) gives that the canonical map $\\kappa_W:\\varinjlim_{i\\in\\mathcal I^{\\mathrm{op}}}\\operatorname{Hom}(M(H(i)),W)\\to\\varinjlim_{j\\in\\mathcal J^{\\mathrm{op}}}\\operatorname{Hom}(M(j),W)$, $[\\psi]_i\\mapsto[\\psi]_{H(i)}$, is a bijection.",
+   "uses": [
+    "lem-weil-pbc-initial-functor-limit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Categories, Lemma Tag 0A1T proof: Lemma Tag 04E7 (lemma-cofinal) for the cofinal functor H^opp"
+   }
+  },
+  {
+   "text": "Assume $M$ is essentially constant with value $X$ and cone maps $u_j$. By [lem-pc-essentially-constant-pro-hom-colimit] the map $\\varinjlim_{j}\\operatorname{Hom}(M(j),W)\\to\\operatorname{Hom}(X,W)$, $[\\psi]_j\\mapsto\\psi\\circ u_j$, is bijective; composing with $\\kappa_W$ of Step 1, the map $\\beta_W:[\\psi]_i\\mapsto\\psi\\circ u_{H(i)}$ from $\\varinjlim_{i\\in\\mathcal I^{\\mathrm{op}}}\\operatorname{Hom}(M(H(i)),W)$ to $\\operatorname{Hom}(X,W)$ is bijective for every $W$. Let $[r']_{i_0}=\\beta_X^{-1}(\\mathrm{id}_X)$, with $r':M(H(i_0))\\to X$; then $r'\\circ u_{H(i_0)}=\\mathrm{id}_X$, and $\\beta_W([\\varphi\\circ r']_{i_0})=\\varphi$, so $\\varphi\\mapsto[\\varphi\\circ r']_{i_0}$ is the inverse bijection $\\beta_W^{-1}$. By [lem-pur-essential-constant-pro-criterion-05py] ($\\mathcal I$ cofiltered, index $i_0$, $r=r'$), $M\\circ H$ is essentially constant with value $X$, with cone maps $u'_i$ satisfying $[u'_i\\circ r']_{i_0}=[\\mathrm{id}_{M(H(i))}]_i$ in $\\varinjlim_k\\operatorname{Hom}(M(H(k)),M(H(i)))$. Applying $\\beta_{M(H(i))}$ to both sides gives $u'_i\\circ r'\\circ u_{H(i_0)}=u_{H(i)}$, i.e. $u'_i=u_{H(i)}$: the cone maps are the restricted $u_{H(i)}$.",
+   "uses": [
+    "lem-pc-essentially-constant-pro-hom-colimit",
+    "lem-pur-essential-constant-pro-criterion-05py"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Categories, Lemma Tag 0A1T proof, using Lemma Tag 05PZ (2)=>(1) and (4)=>(1)"
+   }
+  },
+  {
+   "text": "Conversely assume $M\\circ H$ is essentially constant with value $X$ and cone maps $v_i$. By [lem-pc-essentially-constant-pro-hom-colimit] (for $M\\circ H$ over the cofiltered $\\mathcal I$) the map $\\gamma_W:[\\psi]_i\\mapsto\\psi\\circ v_i$ from $\\varinjlim_{i\\in\\mathcal I^{\\mathrm{op}}}\\operatorname{Hom}(M(H(i)),W)$ to $\\operatorname{Hom}(X,W)$ is bijective. Let $[r]_{i_0}=\\gamma_X^{-1}(\\mathrm{id}_X)$, $r:M(H(i_0))\\to X$; then $r\\circ v_{i_0}=\\mathrm{id}_X$ and $\\gamma_W^{-1}(\\varphi)=[\\varphi\\circ r]_{i_0}$. Composing with $\\kappa_W$ of Step 1, $\\varphi\\mapsto[\\varphi\\circ r]_{H(i_0)}$ is a bijection $\\operatorname{Hom}(X,W)\\to\\varinjlim_{j\\in\\mathcal J^{\\mathrm{op}}}\\operatorname{Hom}(M(j),W)$ for every $W$. By [lem-pur-essential-constant-pro-criterion-05py] (index $j_0=H(i_0)$, morphism $r$), $M$ is essentially constant with value $X$, with cone maps $u_j$ characterized by $[u_j\\circ r]_{H(i_0)}=[\\mathrm{id}_{M(j)}]_j$ in $\\varinjlim_k\\operatorname{Hom}(M(k),M(j))$.",
+   "uses": [
+    "lem-pc-essentially-constant-pro-hom-colimit",
+    "lem-pur-essential-constant-pro-criterion-05py"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Categories, Lemma Tag 0A1T proof, using Lemma Tag 05PZ (4)=>(1)"
+   }
+  },
+  {
+   "text": "The cone maps agree: for an index $i$ take $j=H(i)$ and $W=M(H(i))$ in Step 3. Both $[u_{H(i)}\\circ r]_{i_0}$ and $[\\mathrm{id}]_i$ in $\\varinjlim_{k\\in\\mathcal I^{\\mathrm{op}}}\\operatorname{Hom}(M(H(k)),M(H(i)))$ are sent by $\\kappa_W$ to the equal classes $[u_{H(i)}\\circ r]_{H(i_0)}=[\\mathrm{id}]_{H(i)}$; $\\kappa_W$ is injective, so they are equal, and applying $\\gamma_W$ gives $u_{H(i)}\\circ r\\circ v_{i_0}=v_i$, i.e. $u_{H(i)}=v_i$ since $r\\circ v_{i_0}=\\mathrm{id}_X$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Categories, Lemma Tag 0A1T proof"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-initial-functor-limit",
+  "lem-pc-essentially-constant-pro-hom-colimit",
+  "lem-pur-essential-constant-pro-criterion-05py"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/categories.tex",
+  "place": "Categories, Lemma Tag 0A1T (lemma-initial-essentially-constant)"
+ },
  "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "initial functor cofiltered pro diagram essentially constant",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leansearch",
+   "query": "essentially constant diagram preserved and reflected by cofinal functor",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
+  },
   {
    "tool": "leanfinder",
    "query": "initial functor cofiltered pro diagram essentially constant",
-   "results": "generic initial/cofiltered APIs, no Stacks essential-constancy theorem",
+   "results": "CategoryTheory.Functor.initial_iff_of_isCofiltered and initial_of_exists_of_isCofiltered; generic initiality APIs, no Stacks essential-constancy theorem",
    "date": "2026-10-11",
    "verdict": "no match"
   },
   {
    "tool": "loogle",
    "query": "Functor.Initial cofiltered",
-   "results": "0 hits; unknown constant",
+   "results": "0 hits; unknown constant Functor.Initial",
    "date": "2026-10-11",
    "verdict": "unavailable"
   },
   {
    "tool": "grep",
    "query": "Initial|cofiltered in Mathlib/CategoryTheory",
-   "results": "generic initial/cofiltered declarations only",
+   "results": "generic initial/cofiltered declarations only; no essential-constancy theorem",
    "date": "2026-10-11",
    "verdict": "no match"
   },
   {
    "tool": "leanfinder",
    "query": "essentially constant diagram preserved and reflected by cofinal functor",
-   "results": "CategoryTheory.IsCofiltered.IsEventuallyConstant and cofinality APIs concern eventual isomorphisms, not the Stacks essentially-constant pro/ind notion",
+   "results": "CategoryTheory.IsCofiltered.IsEventuallyConstant and cofinality APIs concern eventual isomorphisms, not the Stacks notion",
    "date": "2026-10-11",
    "verdict": "no match"
   },
@@ -69,12 +136,28 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-pur-derived-functor-triangles-05sc",
   "by": "worker",
   "date": "2026-10-11"
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-def-sf-operations"
+ "unit": "sk-def-sf-operations",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-pur-essential-constant-cofinal-0a1s",
+  "worker": "stage1",
+  "summary": "Corrected the imported statement to match Categories Lemma 0A1S exactly and split its formal proof into the two directions via the existing Hom-colimit formula, the existing initial-functor colimit leaf, and the existing converse criterion. No new nodes were needed.",
+  "blueprint": "Realizes the Lemma 05SC proof clause replacing the pro-index category by an initial cofinal category without changing essential constancy.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-ecc0244",
+  "group": "J1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-ecc0244 (reviewer sub-agent of L); spot-checked: Read the packet, Stacks 0A1S/0A1T/05PZ/definition-initial/lemma-cofinal, def-pc-essentially-constant-pro-diagram, 05py, hom-colimit, the citer 05sc steps 2 and 4, 05r9 (projections initial in Stacks' zigzag sense). FIX more, RETURN less: (1) C4/E7 (missed by the Second reading by J1, which deleted it as 'unsupported'): the delivery dropped the value and cone-map clauses that the citer lem-pur-derived-functor-triangles-05sc uses in steps 2 and 4, with no statement_change; restored the sheaf-dag statement word for word and made the proof establish them (Step 2: cone maps of M∘H are u_{H(i)} via the 05py characterization; Steps 3-4: u_{H(i)}=v_i, elementary from injectivity of the comparison map and r∘v_{i0}=id). (2) C4: the delivery cited lem-weil-pbc-initial-functor-cofiltered-criterion, whose colimit clause assumes the equalizer conditions (i),(ii), not Stacks' zigzag initiality that the statement and 05r9 use; replaced by lem-weil-pbc-initial-functor-limit (Stacks' initial, any target category) applied with target Set^op, giving the Hom-colimit comparison bijection kappa_W. (3) source place corrected: Tag 0A1S is the ind/cofinal lemma-cofinal-essentially-constant; the item is the pro form Tag 0A1T (lemma-initial-essentially-constant). Mathlib: grep EssentiallyConstant in Mathlib: 0 hits; Functor.Initial exists (generic only).; 1 file(s) fixed by the reviewer"
+ }
 }
