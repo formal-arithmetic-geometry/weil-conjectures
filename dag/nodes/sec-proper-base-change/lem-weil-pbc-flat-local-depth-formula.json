@@ -225,5 +225,23 @@
   "worker": "stage1",
   "summary": "Read Algebra 0337 and the proof of 0338 (the item's source.place named 0336 for lemma-apply-grothendieck-module; 0336 is the section tag, corrected to 0338). Wrote the proof of 0338 for M = R, N = S as an induction on n = depth R + depth(S/m_R S) among flat local homomorphisms of Noetherian local rings: finiteness (00LK), base case via an element with annihilator m (00LL) and annihilators under flat base change (07T8), case depth of fibre > 0 via 00ME and 090R, case depth of fibre = 0 via a nonzerodivisor of R, flat base change to R/fR -> S/fS and 090R. New unsplit nodes: depth-drops-by-one (090R), flat-mod-injective (00ME), depth-over-quotient-ring (0AUK for R -> R/I). Statement unchanged."
  },
- "reviewed": "pass (L, 2026-10-10): 9 steps follow 0338 (M = R, N = S) by induction on depth R + depth of the closed fibre: depth 0 gives an element with annihilator m and flat base change of annihilators; otherwise a nonzerodivisor f is lifted from the fibre (00ME, new unsplit node) or taken in m_R, depth drops by one (090R, new unsplit node) and depth is computed over the quotient ring (0AUK, new unsplit node). The source tag 0336 in source.place corrected to 0338 by the worker."
+ "reviewed": "pass (L, 2026-10-10): 9 steps follow 0338 (M = R, N = S) by induction on depth R + depth of the closed fibre: depth 0 gives an element with annihilator m and flat base change of annihilators; otherwise a nonzerodivisor f is lifted from the fibre (00ME, new unsplit node) or taken in m_R, depth drops by one (090R, new unsplit node) and depth is computed over the quotient ring (0AUK, new unsplit node). The source tag 0336 in source.place corrected to 0338 by the worker.",
+ "lean": {
+  "module": "Sheaf.RingTheory.FlatLocalDepthFormula",
+  "declaration": "IsLocalRing.depth_eq_add_of_flat_local",
+  "file": "lean/Sheaf/RingTheory/FlatLocalDepthFormula.lean",
+  "statement": "theorem depth_eq_add_of_flat_local {R : Type u} {S : Type v} [CommRing R] [CommRing S] [IsNoetherianRing R] [IsNoetherianRing S] [IsLocalRing R] [IsLocalRing S] (φ : R →+* S) [IsLocalHom φ] (hflat : φ.Flat) : let I : Ideal S := (maximalIdeal R).map φ IsNoetherianRing (S ⧸ I) ∧ ∃ hlocal : IsLocalRing (S ⧸ I), letI := hlocal (maximalIdeal S).map (Ideal.Quotient.mk I) = maximalIdeal (S ⧸ I) ∧ depth (R := S) S = depth (R := R) R + depth (R := S ⧸ I) (S ⧸ I)",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-fld1028",
+  "group": "E1",
+  "result": "pass",
+  "note": "Noetherian local R,S as IsNoetherianRing+IsLocalRing; local phi = IsLocalHom (local_hom_TFAE); flat = recorded RingHom.Flat (#check); m_R S = (maximalIdeal R).map phi, fibre S/I literal, Noetherian/local/max ideal m_S/m_R S as conclusions not hypotheses; depth resolves to recorded IsLocalRing.depth (#print), self-module, values in ℕ∞; ring case 0337 as node states (no module M)"
+ }
 }

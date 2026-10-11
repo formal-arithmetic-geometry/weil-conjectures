@@ -4240,3 +4240,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 10:28 L: merged deliver/F1/lem-pur-triangle-morphism-category-05r9 (stage 2; reviewer PASS; first push; Sheaf.CategoryTheory.TriangleMorphismCategory CategoryTheory.triangle_morphism_category_cofiltered_initial)
 - 10:28 L: merged deliver/M1/lem-weil-pbc-finite-module-complete-over-complete-noetherian (stage 2; reviewer PASS; first push; Sheaf.RingTheory.FiniteModuleComplete finite_module_complete_over_complete_noetherian)
 - 10:28 L: merged deliver/K1/lem-weil-pbc-finite-subalgebra-fraction-field (stage 2; reviewer PASS; first push; Sheaf.RingTheory.FiniteSubalgebraFractionField MvPolynomial.exists_finite_subalgebra_fraction_field)
+- 10:29 L: merged deliver/E1/lem-weil-pbc-flat-local-depth-formula (stage 2; reviewer PASS; first push; Sheaf.RingTheory.FlatLocalDepthFormula IsLocalRing.depth_eq_add_of_flat_local)
