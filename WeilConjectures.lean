@@ -29,6 +29,7 @@ public import WeilConjectures.Algebra.Homology.InternalHom
 public import WeilConjectures.Algebra.Homology.ModuleCat.Subcomplex
 public import WeilConjectures.Algebra.Homology.Monoidal.Dual
 public import WeilConjectures.Algebra.Homology.Monoidal.MapHomologicalComplex
+public import WeilConjectures.Algebra.Homology.Monoidal.ProjectionMap
 public import WeilConjectures.Algebra.Homology.ResolutionByClass
 public import WeilConjectures.AlgebraicGeometry.AbelianVariety.Basic
 public import WeilConjectures.AlgebraicGeometry.AbelianVariety.Cube
