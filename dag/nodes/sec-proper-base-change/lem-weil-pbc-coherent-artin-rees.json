@@ -167,5 +167,23 @@
  },
  "tool_uses": [
   "pqf-def-locnoeth"
- ]
+ ],
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.CoherentArtinRees",
+  "declaration": "AlgebraicGeometry.Scheme.coherent_artin_rees",
+  "file": "lean/Sheaf/AlgebraicGeometry/CoherentArtinRees.lean",
+  "statement": "theorem coherent_artin_rees {X : Scheme.{u}} [IsNoetherian X] (F G : X.Modules) (hF : RingedSpace.IsCoherent X.toRingedSpace F) (g : G ⟶ F) [Mono g] (hG : G.IsQuasicoherent) (I : X.IdealSheafData) : ∃ c : ℕ, ∀ n : ℕ, c ≤ n → ∀ W : X.Opens, Set.range ((idealModuleProductι (idealSheafPower I.toModulesι (n - c)).2 (pullback (idealModuleProductι (idealSheafPower I.toModulesι c).2 F) g) ≫ pullback.fst (idealModuleProductι (idealSheafPower I.toModulesι c).2 F) g ≫ idealModuleProductι (idealSheafPower I.toModulesι c).2 F).app W) = Set.range ((idealModuleProductι (idealSheafPower I.toModulesι n).2 F).app W) ∩ Set.range (g.app W) ∧ Set.range ((idealModuleProductι (idealSheafPower I.toModulesι n).2 F).app W) ∩ Set.range (g.app W) ⊆ Set.range ((idealModuleProductι (idealSheafPower I.toModulesι (n - c)).2 G ≫ g).app W)",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "F1",
+  "result": "pass",
+  "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
+ }
 }
