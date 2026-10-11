@@ -122,6 +122,74 @@ noncomputable def Etale.derivedEtaleLowerShriekUpperStarAdjunctionPlus :
   ((Etale.etaleLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} Λ) v hv).derivedPlus).ofNatIsoRight
     (Functor.rightDerivedFunctorPlusIsoMapDerivedCategoryPlus _)
 
+/-- The functor `N ↦ Hom(A[0], N[0]⟦q⟧)` on sheaves of `Λ`-modules on `Z_ét`; for `A = Λ` it is
+the étale cohomology `N ↦ Hᵠ(Z, N)` with coefficients in `Λ`-modules. -/
+noncomputable abbrev Etale.shiftedHomFunctor {Z : Scheme.{u}}
+    (A : Sheaf Z.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (q : ℤ) :
+    Sheaf Z.smallEtaleTopology (ModuleCat.{u + 1} Λ) ⥤ AddCommGrpCat.{u + 1} :=
+  DerivedCategory.Plus.singleFunctor _ 0 ⋙ shiftFunctor _ q ⋙
+    preadditiveCoyoneda.obj (op ((DerivedCategory.Plus.singleFunctor _ 0).obj A))
+
+/-- `v^*` commutes with `N ↦ N[0]⟦q⟧`. -/
+noncomputable def Etale.upperStarSingleShiftIso (q : ℤ) :
+    DerivedCategory.Plus.singleFunctor _ 0 ⋙ shiftFunctor _ q ⋙
+        ((v)^*[ModuleCat.{u + 1} Λ]).mapDerivedCategoryPlus ≅
+      (v)^*[ModuleCat.{u + 1} Λ] ⋙ DerivedCategory.Plus.singleFunctor _ 0 ⋙ shiftFunctor _ q :=
+  Functor.isoWhiskerLeft _ (((v)^*[ModuleCat.{u + 1} Λ]).mapDerivedCategoryPlus.commShiftIso q) ≪≫
+    (Functor.associator _ _ _).symm ≪≫
+    Functor.isoWhiskerRight (((v)^*[ModuleCat.{u + 1} Λ]).mapDerivedCategoryPlusSingleFunctor 0)
+      (shiftFunctor _ q) ≪≫ Functor.associator _ _ _
+
+/-- The derived adjunction `v_! ⊣ v^*` on shifted maps out of a sheaf placed in degree `0`:
+`Hom((v_! M)[0], N[0]⟦q⟧) ≃ Hom(M[0], (v^* N)[0]⟦q⟧)`. -/
+noncomputable def Etale.etaleLowerShriekShiftedHomEquiv
+    (M : Sheaf V.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (q : ℤ)
+    (N : Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :
+    ((Etale.shiftedHomFunctor Λ ((Etale.etaleLowerShriek (ModuleCat.{u + 1} Λ) v hv).obj M) q).obj
+      N) ≃+ ((Etale.shiftedHomFunctor Λ M q).obj ((v)^*[ModuleCat.{u + 1} Λ].obj N)) :=
+  let i₁ := ((Etale.etaleLowerShriek (ModuleCat.{u + 1} Λ) v hv).mapDerivedCategoryPlusSingleFunctor
+    0).app M
+  let i₂ := (Etale.upperStarSingleShiftIso Λ v hv q).app N
+  let adj := Etale.derivedEtaleLowerShriekUpperStarAdjunctionPlus Λ v hv
+  AddEquiv.mk'
+    { toFun f := adj.homEquiv _ _ (i₁.hom ≫ f) ≫ i₂.hom
+      invFun g := i₁.inv ≫ (adj.homEquiv _ _).symm (g ≫ i₂.inv)
+      left_inv f := by simp
+      right_inv g := by simp }
+    (fun a b ↦ by
+      simp only [Equiv.coe_fn_mk, Adjunction.homEquiv_unit]
+      erw [Preadditive.comp_add, Functor.map_add, Preadditive.comp_add, Preadditive.add_comp])
+
+lemma Etale.etaleLowerShriekShiftedHomEquiv_apply
+    (M : Sheaf V.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (q : ℤ)
+    (N : Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))
+    (f : (Etale.shiftedHomFunctor Λ ((Etale.etaleLowerShriek (ModuleCat.{u + 1} Λ) v hv).obj M)
+      q).obj N) :
+    Etale.etaleLowerShriekShiftedHomEquiv Λ v hv M q N f =
+      (Etale.derivedEtaleLowerShriekUpperStarAdjunctionPlus Λ v hv).homEquiv _ _
+        ((((Etale.etaleLowerShriek (ModuleCat.{u + 1} Λ) v hv).mapDerivedCategoryPlusSingleFunctor
+          0).app M).hom ≫ f) ≫ ((Etale.upperStarSingleShiftIso Λ v hv q).app N).hom :=
+  rfl
+
+/-- The derived adjunction `v_! ⊣ v^*` on shifted maps out of a sheaf placed in degree `0`,
+naturally in the target. -/
+noncomputable def Etale.etaleLowerShriekShiftedHomIso
+    (M : Sheaf V.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (q : ℤ) :
+    Etale.shiftedHomFunctor Λ ((Etale.etaleLowerShriek (ModuleCat.{u + 1} Λ) v hv).obj M) q ≅
+      (v)^*[ModuleCat.{u + 1} Λ] ⋙ Etale.shiftedHomFunctor Λ M q :=
+  NatIso.ofComponents
+    (fun N ↦ (Etale.etaleLowerShriekShiftedHomEquiv Λ v hv M q N).toAddCommGrpIso)
+    (fun {N N'} g ↦ by
+      ext f
+      change Etale.etaleLowerShriekShiftedHomEquiv Λ v hv M q N'
+          (f ≫ (shiftFunctor _ q).map ((DerivedCategory.Plus.singleFunctor _ 0).map g)) =
+        Etale.etaleLowerShriekShiftedHomEquiv Λ v hv M q N f ≫ (shiftFunctor _ q).map
+          ((DerivedCategory.Plus.singleFunctor _ 0).map ((v)^*[ModuleCat.{u + 1} Λ].map g))
+      rw [Etale.etaleLowerShriekShiftedHomEquiv_apply, Etale.etaleLowerShriekShiftedHomEquiv_apply,
+        ← Category.assoc, Adjunction.homEquiv_naturality_right, Category.assoc, Category.assoc]
+      congr 1
+      exact (Etale.upperStarSingleShiftIso Λ v hv q).hom.naturality g)
+
 end Restriction
 
 end AlgebraicGeometry
