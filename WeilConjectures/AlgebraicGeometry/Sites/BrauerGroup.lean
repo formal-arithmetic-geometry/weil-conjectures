@@ -5,8 +5,8 @@ Authors: Claude
 -/
 module
 
+public import WeilConjectures.AlgebraicGeometry.Sites.BrauerGroupQuasiAlgClosed
 public import WeilConjectures.AlgebraicGeometry.Sites.Gm
-public import WeilConjectures.FieldTheory.Cr
 
 /-!
 # The Brauer group of a field as étale cohomology
@@ -49,10 +49,13 @@ end AlgebraicGeometry.Scheme
 open AlgebraicGeometry
 
 /-- The cohomological Brauer group `H²(Spec(K)_ét, 𝔾ₘ)` of a quasi-algebraically closed field
-`K` vanishes.
+`K` vanishes. This is proved directly, without the comparison
+`AlgebraicGeometry.Scheme.nonempty_equiv_cohomologicalBrauerGroup`, by
+`AlgebraicGeometry.Scheme.subsingleton_cohomologicalBrauerGroup_of_isQuasiAlgClosed`: a class
+dies on a finite Galois extension `L`, where it becomes a Galois `2`-cocycle with values in `Lˣ`,
+which is a coboundary because its crossed product algebra is split
+(`IsQuasiAlgClosed.exists_mul_eq_of_galois_cocycle`).
 (blueprint: `sk-prop-tsen`) -/
 theorem IsQuasiAlgClosed.subsingleton_cohomologicalBrauerGroup (K : Type u) [Field K]
-    [IsQuasiAlgClosed K] : Subsingleton (Spec (.of K)).CohomologicalBrauerGroup := by
-  obtain ⟨e⟩ := Scheme.nonempty_equiv_cohomologicalBrauerGroup K
-  have := IsQuasiAlgClosed.subsingleton_brauerGroup K
-  exact e.symm.subsingleton
+    [IsQuasiAlgClosed K] : Subsingleton (Spec (.of K)).CohomologicalBrauerGroup :=
+  Scheme.subsingleton_cohomologicalBrauerGroup_of_isQuasiAlgClosed

@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Basic
+public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Field
 public import WeilConjectures.AlgebraicGeometry.Modules.Invertible
 
 /-!
@@ -103,7 +104,7 @@ theorem hFiber_eq_finrank_sections_higherDirectImage [QuasiCompact f] [IsSeparat
   have : QuasiCompact (f.fiberToSpecResidueField t) := by
     unfold Scheme.Hom.fiberToSpecResidueField
     infer_instance
-  obtain ⟨e, he⟩ := exists_bijective_semilinearMap_sections_higherDirectImage_H
+  obtain ⟨e, he⟩ := exists_bijective_semilinearMap_sections_higherDirectImage_H_of_field
     (f.fiberToSpecResidueField t) ((Modules.pullback (f.fiberι t)).obj ℱ) q
   let j := (AddEquiv.ofBijective e.toAddMonoidHom he).symm
   let := f.fiberOverSpecResidueField t
@@ -128,7 +129,7 @@ theorem nonempty_moduleSpecΓFunctor_obj_higherDirectImage_linearEquiv_H (K : Ty
     [SheafOfModules.IsQuasicoherent (R := X.ringCatSheaf) ℱ] (q : ℕ) :
     Nonempty ((moduleSpecΓFunctor (R := .of K)).obj
       ((higherDirectImage (X ↘ Spec (.of K)) q).obj ℱ) ≃ₗ[K] ℱ.H q) := by
-  obtain ⟨e, he⟩ := exists_bijective_semilinearMap_sections_higherDirectImage_H
+  obtain ⟨e, he⟩ := exists_bijective_semilinearMap_sections_higherDirectImage_H_of_field
     (X ↘ Spec (.of K)) ℱ q
   let M := (moduleSpecΓFunctor (R := .of K)).obj ((higherDirectImage (X ↘ Spec (.of K)) q).obj ℱ)
   refine ⟨LinearEquiv.ofBijective (M := M)

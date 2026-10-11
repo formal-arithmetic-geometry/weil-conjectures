@@ -178,8 +178,9 @@ theorem exists_forall_hFiber_eq_zero (hℱ : ℱ.IsFlatOver f) (t : T) :
   have : QuasiCompact (f.fiberToSpecResidueField t') := by
     unfold Scheme.Hom.fiberToSpecResidueField
     infer_instance
-  obtain ⟨φ⟩ := nonempty_sections_higherDirectImage_iso_H (f.fiberToSpecResidueField t')
-    ((Modules.pullback (f.fiberι t')).obj ℱ) q
+  obtain ⟨e₀, -⟩ := exists_addEquiv_sections_higherDirectImage_H_of_field
+    (f.fiberToSpecResidueField t') q
+  let φ := e₀ ((Modules.pullback (f.fiberι t')).obj ℱ)
   have : Subsingleton (((Modules.pullback (f.fiberι t')).obj ℱ).H q) :=
     have : Subsingleton Γ((higherDirectImage (f.fiberToSpecResidueField t') q).obj
         ((Modules.pullback (f.fiberι t')).obj ℱ), ⊤) :=

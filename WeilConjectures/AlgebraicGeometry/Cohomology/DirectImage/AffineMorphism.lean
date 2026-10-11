@@ -126,8 +126,8 @@ Coherence is spelled as quasi-coherence together with finite presentation.
 This is the case `T = Spec k` of the finiteness of the higher direct images along a proper
 morphism to a Noetherian affine scheme
 (`AlgebraicGeometry.Scheme.Modules.finite_sections_higherDirectImage`), transported along the
-identification `Γ(Spec k, R^q f_* ℱ) ≅ H^q(X, ℱ)`
-(`AlgebraicGeometry.Scheme.Modules.exists_bijective_semilinearMap_sections_higherDirectImage_H`).
+identification `Γ(Spec k, R^q f_* ℱ) ≅ H^q(X, ℱ)`, which holds for every morphism to the
+spectrum of a field (`exists_bijective_semilinearMap_sections_higherDirectImage_H_of_field`).
 -/
 @[stacks 02O5]
 theorem finiteDimensional_H_of_isProper [IsProper (X ↘ Spec (.of k))] (ℱ : X.Modules)
@@ -138,7 +138,7 @@ theorem finiteDimensional_H_of_isProper [IsProper (X ↘ Spec (.of k))] (ℱ : X
   have := isGrothendieckAbelian X
   have : IsNoetherianRing Γ(Spec (.of k), ⊤) :=
     isNoetherianRing_of_ringEquiv _ (Scheme.ΓSpecIso (.of k)).commRingCatIsoToRingEquiv.symm
-  obtain ⟨e, he⟩ := exists_bijective_semilinearMap_sections_higherDirectImage_H
+  obtain ⟨e, he⟩ := exists_bijective_semilinearMap_sections_higherDirectImage_H_of_field
     (X ↘ Spec (.of k)) ℱ q
   obtain ⟨s, hs⟩ := (finite_sections_higherDirectImage (X ↘ Spec (.of k)) ℱ q).fg_top
   have key (x) (hx : x ∈ Submodule.span Γ(Spec (.of k), ⊤) (s : Set _)) :
