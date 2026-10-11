@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.AlgebraicGeometry.GeometricFrobenius
+public import WeilConjectures.SixFunctors.ProEtale.Derived.AlgClosedField
 public import WeilConjectures.SixFunctors.ProEtale.Derived.TorAmplitude
 public import WeilConjectures.SixFunctors.ProEtale.Derived.UpperLowerStar
 
@@ -30,7 +31,8 @@ and the resulting category is `AlgebraicGeometry.ProEtale.GeometricFiberStrictWe
 
 This is a category of pairs over `Dctf(X, A)`, not a triangulated (derived) category of Weil
 sheaves such as `AlgebraicGeometry.WeilComplex`: its Hom-groups are not Ext groups of Weil
-sheaves.
+sheaves, since a nonsplit Frobenius extension of `Λ` by `Λ` gives no nonzero map `Λ ⟶ Λ[1]` of
+pairs.
 
 ## Main definitions
 
@@ -41,6 +43,13 @@ sheaves.
 - `AlgebraicGeometry.ProEtale.GeometricFiberStrictWeilComplex`: the category
   `D^b_{ctf,W}(X, A)` of strict Weil complexes on the geometric fiber `X = X₀ ×_{k₀} k̄`, for
   the geometric Frobenius `g_γ`.
+
+## Main results
+
+- `AlgebraicGeometry.ProEtale.StrictWeilComplex.map_hom_eq_zero_of_iso_unit` and
+  `AlgebraicGeometry.ProEtale.GeometricFiberStrictWeilComplex.map_hom_eq_zero_of_iso_unit`: on a
+  point, there is no nonzero morphism of strict Weil complexes from `Λ` to `Λ[1]`, whatever the
+  Weil structures, so the Hom-groups are not Ext groups of Weil sheaves.
 
 ## Implementation notes
 
@@ -179,6 +188,45 @@ This is a category of pairs over `Dctf(X, A)`, not a triangulated category of We
 as `AlgebraicGeometry.WeilComplex`. -/
 abbrev GeometricFiberStrictWeilComplex : Type _ :=
   StrictWeilComplex A f.geometricGaloisFrobenius
+
+section HomGroups
+
+variable {K : Type u} [Field K] [IsAlgClosed K] {Λ : Type (u + 1)} [CommRing Λ]
+
+/-- Blueprint `def-trf-strict-weil-complex`: Strict Weil complex at finite coefficients.
+
+The Hom-groups of strict Weil complexes are not Ext groups of Weil sheaves. On a point
+`X ≅ Spec K`, `K` algebraically closed, a strict Weil complex `M` with underlying complex `Λ`
+and one `N` with underlying complex `Λ[1]` admit no nonzero morphism `M ⟶ N`, whatever their
+Weil structures: the underlying morphism lies in `Hom(Λ, Λ[1]) = H¹(X_proét, Λ) = 0`. In
+particular a nonsplit Frobenius extension of `Λ` by `Λ` (a Jordan block), which is a nonzero
+extension class of Weil sheaves, gives no nonzero map `Λ ⟶ Λ[1]` of pairs. -/
+lemma StrictWeilComplex.map_hom_eq_zero_of_iso_unit {X : Scheme.{u}} (e : X ≅ Spec (.of K))
+    {g : X ≅ X} {M N : StrictWeilComplex (ModuleCat.{u + 1} Λ) g}
+    (eM : (DerivedCategoryFiniteTor.ι _ X).obj M.obj ≅ 𝟙_ _)
+    (eN : (DerivedCategoryFiniteTor.ι _ X).obj N.obj ≅ (𝟙_ _)⟦(1 : ℤ)⟧) (f : M ⟶ N) :
+    (DerivedCategoryFiniteTor.ι _ X).map f.hom = 0 := by
+  rw [← cancel_epi eM.inv, ← cancel_mono eN.hom, Limits.comp_zero, Limits.zero_comp]
+  exact DerivedCategory.unit_hom_shift_one_eq_zero_of_iso Λ e _
+
+variable {k₀ : Type u} [Field k₀] [Finite k₀]
+
+/-- Blueprint `def-trf-strict-weil-complex`: Strict Weil complex at finite coefficients.
+
+The Hom-groups of `D^b_{ctf,W}(X, Λ)` are not Ext groups of Weil sheaves: on the geometric
+fiber `X = Spec k̄` of the point `Spec k₀`, there is no nonzero morphism of strict Weil
+complexes from one with underlying complex `Λ` to one with underlying complex `Λ[1]`, so a
+nonsplit Frobenius extension of `Λ` by `Λ` (a Jordan block) gives no nonzero map
+`Λ ⟶ Λ[1]` of pairs. -/
+lemma GeometricFiberStrictWeilComplex.map_hom_eq_zero_of_iso_unit
+    {M N : GeometricFiberStrictWeilComplex (ModuleCat.{u + 1} Λ) (𝟙 (Spec (.of k₀)))}
+    (eM : (DerivedCategoryFiniteTor.ι _ _).obj M.obj ≅ 𝟙_ _)
+    (eN : (DerivedCategoryFiniteTor.ι _ _).obj N.obj ≅ (𝟙_ _)⟦(1 : ℤ)⟧) (f : M ⟶ N) :
+    (DerivedCategoryFiniteTor.ι _ _).map f.hom = 0 :=
+  StrictWeilComplex.map_hom_eq_zero_of_iso_unit
+    (asIso (pullback.snd (𝟙 (Spec (.of k₀))) (Scheme.specAlgebraicClosure k₀).hom)) eM eN f
+
+end HomGroups
 
 end ProEtale
 
