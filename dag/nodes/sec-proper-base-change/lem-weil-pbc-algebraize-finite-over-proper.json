@@ -291,5 +291,24 @@
   "by": "L",
   "result": "accepted",
   "note": "Split reviewed: 13 steps along Cohomology of Schemes 09ZT (coherent algebras A_n = f_{n*}O, transition isomorphisms by affine base change, support of A_0 proper, existence theorem 088E, closed subscheme Z carrying F, restriction of tensor products checked affine-locally, multiplication and unit (through O_X/I_Z) by full faithfulness, algebra axioms by faithfulness, Y = Spec_X(F) finite, Y x_X X_n = Y_n, Y proper via Y = Y x_X Z). Correct and more complete than Stacks (unit, axioms, properness written out). Six new unsplit nodes with exact tags."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.AlgebraizeFiniteOverProper",
+  "declaration": "AlgebraicGeometry.algebraize_finite_over_proper",
+  "file": "lean/Sheaf/Paper/AlgebraizeFiniteOverProper.lean",
+  "statement": "theorem algebraize_finite_over_proper (A : Type u) [CommRing A] (I : Ideal A) [IsNoetherianRing A] [IsAdicComplete I A] (X : Scheme.{u}) (f : X ⟶ Spec (.of A)) [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f] (Yn : ℕ → Scheme.{u}) (fnY : ∀ n, Yn n ⟶ pullback f (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk (I ^ (n + 1)))))) [∀ n, IsFinite (fnY n)] (gn : ∀ n, Yn n ⟶ Yn (n + 1)) (hcart : ∀ n, IsPullback (fnY n) (gn n) (pullback.map f (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk (I ^ (n + 1))))) f (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk (I ^ (n + 1 + 1))))) (𝟙 X) (Spec.map (CommRingCat.ofHom (Ideal.Quotient.factor (Ideal.pow_le_pow_right (Nat.le_succ (n + 1)))))) (𝟙 _) (by simp) (by rw [Category.comp_id, ← Spec.map_comp, ← CommRingCat.ofHom_comp, Ideal.Quotient.factor_comp_mk])) (fnY (n + 1))) [IsProper (fnY 0 ≫ pullback.snd _ _)] : ∃ (Y : Scheme.{u}) (g : Y ⟶ X), IsFinite g ∧ IsProper (g ≫ f) ∧ ∃ e : ∀ n, pullback g (pullback.fst f (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk (I ^ (n + 1)))))) ⟶ Yn n, (∀ n, IsIso (e n) ∧ e n ≫ fnY n = pullback.snd _ _) ∧ (∀ n, ∃ q : pullback g (pullback.fst f (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk (I ^ (n + 1)))))) ⟶ pullback g (pullback.fst f (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk (I ^ (n + 1 + 1)))))), q ≫ pullback.fst _ _ = pullback.fst _ _ ∧ q ≫ pullback.snd _ _ = pullback.snd g _ ≫ pullback.map f (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk (I ^ (n + 1))))) f (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk (I ^ (n + 1 + 1))))) (𝟙 X) (Spec.map (CommRingCat.ofHom (Ideal.Quotient.factor (Ideal.pow_le_pow_right (Nat.le_succ (n + 1)))))) (𝟙 _) (by simp) (by rw [Category.comp_id, ← Spec.map_comp, ← CommRingCat.ofHom_comp, Ideal.Quotient.factor_comp_mk]) ∧ e n ≫ gn n = q ≫ e (n + 1))",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-afp1358"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-afp1358",
+  "group": "C1",
+  "result": "fix",
+  "note": "Noetherian+IsAdicComplete I A; S=Spec A literally; S_n=Spec(A/I^(n+1)) via Quotient.mk, X_n=pullback f (S_n->S), X_n->X_{n+1} = pullback.map of Quotient.factor; separated+LFT+QC f; finite fnY; IsPullback squares; IsProper Y0->S0; conclusion finite g, proper g≫f, isos Y×_X X_n≅Y_n over X_n compatible with gn via induced q"
  }
 }

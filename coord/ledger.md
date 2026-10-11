@@ -3917,3 +3917,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 08:58 L: merged deliver/F1/lem-pc-filtered-colimit-derived-tensor (stage 2; reviewer PASS; first push; Sheaf.Algebra.Homology.FilteredColimitDerivedTensor DerivedCategory.filteredColimit_derivedTensor_cohomology)
 - 08:58 L: merged deliver/F1/lem-weil-pbc-affine-formally-smooth-iff-ring-lifting (stage 2; reviewer FIX; first push; Sheaf.AlgebraicGeometry.AffineFormallySmooth AlgebraicGeometry.formallySmooth_spec_iff_ringHom_formallySmooth)
 - 08:59 L: merged deliver/K1/lem-weil-pbc-closed-immersion-products (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.ClosedImmersionProducts AlgebraicGeometry.closedImmersion_comp_products_and_finiteType_openImmersion)
+- 08:59 L: merged deliver/C1/lem-weil-pbc-algebraize-finite-over-proper (stage 2; reviewer FIX; first push; Sheaf.Paper.AlgebraizeFiniteOverProper AlgebraicGeometry.algebraize_finite_over_proper)
