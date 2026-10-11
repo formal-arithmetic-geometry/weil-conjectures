@@ -187,10 +187,12 @@ theorem convergesTo_abutmentFiltration
     have hexact₂ := (X.derivedIter N).exact_g_f (p - N, n) (p, n) u (by rw [hdegg]; ext <;> simp)
       (by ext <;> simp [u])
     have : Epi ((X.derivedIter N).g (p - N, n) (p, n)) := hexact₂.epi_f hf₀
-    let e₁ : (X.derivedIter N).E (p, n) ≅ cokernel ((X.derivedIter N).α (p - N + 1, n) (p - N, n)) :=
+    let e₁ : (X.derivedIter N).E (p, n) ≅
+        cokernel ((X.derivedIter N).α (p - N + 1, n) (p - N, n)) :=
       (hexact₁.gIsCokernel).coconePointUniqueUpToIso (colimit.isColimit _)
     obtain ⟨e₂⟩ := nonempty_cokernel_ofLE_iso (X.ιIter N (p - N + 1, n) ≫ ι (p - N + 1) n)
-      (X.ιIter N (p - N, n) ≫ ι (p - N) n) ((X.derivedIter N).α (p - N + 1, n) (p - N, n)) (hj (p - N))
+      (X.ιIter N (p - N, n) ≫ ι (p - N) n) ((X.derivedIter N).α (p - N + 1, n) (p - N, n))
+      (hj (p - N))
       ((X.abutmentFiltration ι hι n).F (p + 1)) ((X.abutmentFiltration ι hι n).F p)
       (X.imageSubobject_ι_eq_mk ι hι N (p + 1) (p - N + 1) n (by omega))
       (X.imageSubobject_ι_eq_mk ι hι N p (p - N) n (by omega))
