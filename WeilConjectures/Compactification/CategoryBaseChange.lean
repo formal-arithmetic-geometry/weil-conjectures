@@ -80,10 +80,10 @@ noncomputable def baseChange (r : c.Refinement d) (t : T ⟶ S) :
     (by simp)
   i_hom := by
     apply pullback.hom_ext
-    · simp only [baseChange_Z, Category.assoc, limit.lift_π, PullbackCone.mk_pt,
+    · simp only [baseChange_Z, Category.assoc, limit.lift_π,
         PullbackCone.mk_π_app]
       rw [baseChange_i_fst_assoc, r.i_hom, baseChange_i_fst]
-    · simp only [baseChange_Z, Category.assoc, limit.lift_π, PullbackCone.mk_pt,
+    · simp only [baseChange_Z, Category.assoc, limit.lift_π,
         PullbackCone.mk_π_app, Category.comp_id]
       rw [baseChange_i_snd, baseChange_i_snd]
   hom_g := by simp
@@ -144,7 +144,11 @@ lemma baseChangePullbackMap_snd :
 lemma graph_baseChange_baseChangePullbackMap :
     graph (c.baseChange t) (d.baseChange t) ≫ baseChangePullbackMap c d t =
       pullback.fst f t ≫ graph c d := by
-  apply pullback.hom_ext <;> simp
+  apply pullback.hom_ext
+  · rw [Category.assoc, baseChangePullbackMap_fst, graph_fst_assoc, baseChange_i_fst,
+      Category.assoc, graph_fst]
+  · rw [Category.assoc, baseChangePullbackMap_snd, graph_snd_assoc, baseChange_i_fst,
+      Category.assoc, graph_snd]
 
 variable [QuasiCompact f]
 
@@ -159,7 +163,8 @@ noncomputable def infBaseChangeHom :
     (by
       change _ ≫ ((graph c d).imageι ≫ pullback.fst c.g d.g) ≫ c.g = _
       simp only [Category.assoc, Scheme.Hom.imageMap_imageι_assoc,
-        baseChangePullbackMap_fst_assoc, pullback.condition])
+        baseChangePullbackMap_fst_assoc]
+      rw [pullback.condition (f := c.g) (g := t)])
 
 @[reassoc (attr := simp)]
 lemma infBaseChangeHom_fst :
@@ -188,11 +193,10 @@ noncomputable def infBaseChange :
   hom := infBaseChangeHom c d t
   i_hom := by
     apply pullback.hom_ext
-    · change (graph _ _).toImage ≫ _ = _
-      rw [Category.assoc, infBaseChangeHom_fst, Scheme.Hom.toImage_imageMap, baseChange_i_fst]
+    · rw [Category.assoc, infBaseChangeHom_fst, inf_i, Scheme.Hom.toImage_imageMap,
+        baseChange_i_fst]
       rfl
-    · change (graph _ _).toImage ≫ _ = _
-      rw [Category.assoc, infBaseChangeHom_snd, Scheme.Hom.toImage_imageι_assoc,
+    · rw [Category.assoc, infBaseChangeHom_snd, inf_i, Scheme.Hom.toImage_imageι_assoc,
         graph_fst_assoc, baseChange_i_snd, baseChange_i_snd]
   hom_g := by
     change _ ≫ pullback.snd (inf c d).g t = _
@@ -209,9 +213,8 @@ theorem infBaseChange_comp_infFst :
   apply pullback.hom_ext
   · simp [infBaseChange_hom, infFst_hom]
   · simp only [Refinement.comp_hom, Refinement.baseChange_hom, infBaseChange_hom, infFst_hom,
-      Category.assoc, limit.lift_π, PullbackCone.mk_pt, PullbackCone.mk_π_app,
+      Category.assoc, limit.lift_π, PullbackCone.mk_π_app,
       Category.comp_id, infBaseChangeHom_snd]
-    rfl
 
 /-- The comparison `infBaseChange` lies over the second projections. -/
 theorem infBaseChange_comp_infSnd :
@@ -221,7 +224,7 @@ theorem infBaseChange_comp_infSnd :
   apply pullback.hom_ext
   · simp [infBaseChange_hom, infSnd_hom]
   · simp only [Refinement.comp_hom, Refinement.baseChange_hom, infBaseChange_hom, infSnd_hom,
-      Category.assoc, limit.lift_π, PullbackCone.mk_pt, PullbackCone.mk_π_app,
+      Category.assoc, limit.lift_π, PullbackCone.mk_π_app,
       Category.comp_id, infBaseChangeHom_snd]
     change _ ≫ _ ≫ (c.baseChange t).g = _ ≫ _ ≫ (d.baseChange t).g
     rw [pullback.condition]
@@ -279,7 +282,7 @@ theorem isCofiltered_of_field {K : Type u} [Field K] {X Y : Scheme.{u}}
   have : QuasiSeparatedSpace Y := IsLocallyNoetherian.quasiSeparatedSpace
   have : LocallyOfFiniteType (f ≫ pY) := by rw [hf]; infer_instance
   have : QuasiCompact (f ≫ pY) := by rw [hf]; infer_instance
-  have : LocallyOfFiniteType f := .of_comp f pY
+  have : LocallyOfFiniteType f := locallyOfFiniteType_of_comp f pY
   have : QuasiCompact f := .of_comp f pY
   infer_instance
 
