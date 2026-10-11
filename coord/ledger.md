@@ -3969,3 +3969,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 09:14 L: merged deliver/F1/lem-weil-pbc-complete-local-nagata (stage 2; reviewer PASS; first push; Sheaf.RingTheory.NagataOfCompleteLocal isNagataRing_of_complete_local)
 - 09:14 L: merged deliver/J1/lem-weil-pbc-complete-local-g-ring (stage 2; reviewer PASS; first push; Sheaf.RingTheory.CompleteLocalGRing isGRing_of_isNoetherianRing_of_isAdicComplete)
 - 09:14 L: merged deliver/C1/lem-weil-pbc-associated-module-pullback (stage 2; reviewer FIX; first push; Sheaf.AlgebraicGeometry.AssociatedModulePullback AlgebraicGeometry.associatedModule_pullback)
+- 09:15 L: merged deliver/C1/lem-weil-pbc-change-ideal-completion (stage 2; reviewer FIX; first push; Sheaf.Algebra.ChangeIdealCompletion changeIdealCompletion)

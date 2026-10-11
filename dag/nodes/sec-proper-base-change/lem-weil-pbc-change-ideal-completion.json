@@ -208,5 +208,31 @@
   "by": "L",
   "result": "pass",
   "note": "Seven elementary steps along Stacks 0319 with the explicit reindexed maps: inclusions, well-definedness and compatibility with transition maps, linearity, the two composites are identities (x_{dcn} = x_n mod J^n), compatibility with the canonical maps, completeness equivalence, ring isomorphism for M = A. Correct; 0 new nodes."
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.ChangeIdealCompletion",
+  "declaration": "changeIdealCompletion",
+  "declarations": [
+   "changeIdealCompletion",
+   "changeIdealCompletionRing",
+   "powerReductionJI",
+   "powerReductionIJ"
+  ],
+  "file": "lean/Sheaf/Algebra/ChangeIdealCompletion.lean",
+  "statement": "theorem changeIdealCompletion {A : Type*} [CommRing A] (I J : Ideal A) (c d : ℕ) (hc : 1 ≤ c) (hd : 1 ≤ d) (hIJ : I ^ c ≤ J) (hJI : J ^ d ≤ I) (M : Type*) [AddCommGroup M] [Module A M] : ∃ (θ : AdicCompletion J M ≃ₗ[A] AdicCompletion I M), (∀ (x : AdicCompletion J M) (k : ℕ), (θ x).val k = Submodule.factor (show J ^ (d * k) • (⊤ : Submodule A M) ≤ I ^ k • (⊤ : Submodule A M) by exact powerReductionJI I J d k M hJI) (x.val (d * k))) ∧ (∀ (x : AdicCompletion I M) (n : ℕ), (θ.symm x).val n = Submodule.factor (show I ^ (c * n) • (⊤ : Submodule A M) ≤ J ^ n • (⊤ : Submodule A M) by exact powerReductionIJ I J c n M hIJ) (x.val (c * n))) ∧ (∀ (x : M), θ (AdicCompletion.of J M x) = AdicCompletion.of I M x) ∧ (Function.Bijective (AdicCompletion.of I M) ↔ Function.Bijective (AdicCompletion.of J M))",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-11",
+  "existing": false,
+  "note": "Ring specialization is stated by changeIdealCompletionRing with the canonical component formula.",
+  "fixed_by": "R-cic1457"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-cic1457",
+  "group": "C1",
+  "result": "fix",
+  "note": "A CommRing, I J ideals, c d with hc hd, I^c<=J, J^d<=I, arbitrary A-module M; theta: AdicCompletion J M ≃ₗ AdicCompletion I M with component x_{dk} mod I^kM, inverse y_{cn} mod J^nM, theta∘of J = of I, Bijective (of I) ↔ Bijective (of J); M=A ring equiv with same formula; no Mathlib two-ideal comparison found; FIX: H8 docstrings (helpers lacked source place, ring theorem lacked proof, main proof not the node's)"
  }
 }
