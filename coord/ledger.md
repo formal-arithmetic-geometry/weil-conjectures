@@ -5117,3 +5117,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 15:02 L: merged deliver/F1/lem-sc-p1-right-derived-triangle-connecting (stage 2; reviewer PASS; first push; Sheaf.CategoryTheory.Abelian.RightDerivedTriangleConnecting CategoryTheory.rightDerived_triangle_connecting)
 - 15:02 L: merged deliver/G1/thm-sp-if-e1 (stage 2; reviewer FIX; first push; Sheaf.CategoryTheory.HypercohomologyFirstPage CategoryTheory.Functor.exists_hypercohomology_firstPage; statement corrected (7 citers))
 - 15:03 L: merged deliver/N1/pqf-lem-sheaf-zero-stalks (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.SheafZeroStalks AlgebraicGeometry.Scheme.Modules.isZero_of_isZero_stalks)
+- 15:03 L: merged deliver/E1/pqf-lem-finite-qf (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.FiniteIsQuasiFinite AlgebraicGeometry.Scheme.Hom.isQuasiFinite_of_isFinite)

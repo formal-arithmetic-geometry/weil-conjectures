@@ -12,7 +12,9 @@
   "document": "literature/blueprint/master/blueprint/sec-abelian-varieties/sk-prop-av-pqf-finite/pqf-lem-finite-qf.md",
   "place": "node pqf-lem-finite-qf, order 530"
  },
- "stmt_deps": [],
+ "stmt_deps": [
+  "pqf-def-quasifinite"
+ ],
  "proof": [
   {
    "text": "Let $f$ be a finite morphism. By clause (1) of [lem-weil-pbc-finite-closed-map-finite-fibres], $f$ is proper, hence of finite type; by the definition of finite type recorded in [def-weil-pbc-scheme-conventions], $f$ is therefore quasi-compact and locally of finite type. By clause (2) of [lem-weil-pbc-finite-closed-map-finite-fibres], every fibre $f^{-1}(\\{y\\})$ is finite. Applying the reverse implication of [pqf-lem-qf-finitefibres] gives that $f$ is quasi-finite.",
@@ -111,5 +113,22 @@
   "group": "H1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-pfq2309 (reviewer sub-agent of L); spot-checked: Mathlib has no scheme-level QuasiFinite; QuasiFinite.lean:90 gives only LocallyQuasiFinite from IsFinite, and pqf-def-quasifinite also demands finite type, so H1's un-leafing is right. Step checked against the three cited statements: complete, non-circular. FIX more, RETURN less: C4 the step credited finite type of a finite morphism to def-weil-pbc-scheme-conventions, which only records definitions; re-attributed to clause (1) of lem-weil-pbc-finite-closed-map-finite-fibres (proper, hence finite type), with quasi-compact and locally finite type from the conventions' definition of finite type; grep recorded in mathlib_searches.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FiniteIsQuasiFinite",
+  "declaration": "AlgebraicGeometry.Scheme.Hom.isQuasiFinite_of_isFinite",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteIsQuasiFinite.lean",
+  "statement": "theorem isQuasiFinite_of_isFinite {X S : AlgebraicGeometry.Scheme.{u}} (f : X ⟶ S) [AlgebraicGeometry.IsFinite f] : f.IsQuasiFinite",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-fqf",
+  "group": "E1",
+  "result": "pass"
  }
 }
