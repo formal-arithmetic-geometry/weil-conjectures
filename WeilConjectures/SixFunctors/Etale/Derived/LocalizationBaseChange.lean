@@ -183,6 +183,92 @@ lemma comp_leftDerivedUpperStar_map_adjoint_comp_derivedBaseChangeMap
     ← Functor.commShiftIso_hom_naturality, ← Adjunction.unit_naturality_assoc]
   simp only [Functor.map_comp, Category.assoc]
 
+section Restriction
+
+variable {Z₀ Z₀' X₀ U₁ : Scheme.{u}}
+
+omit [HasSmallSiteSheafify A] in
+/-- The restriction of supports factors the pullback of the counit through the counit. -/
+@[reassoc]
+lemma supportedRestriction_comp_counit (e : U₁ ⟶ X₀) (i : Z₀ ⟶ X₀) (i' : Z₀' ⟶ U₁)
+    [IsClosedImmersion i] [(R(i)_![A]).IsLeftAdjoint] [IsClosedImmersion i']
+    [(R(i')_![A]).IsLeftAdjoint] (g : Z₀' ⟶ Z₀) (hg : IsPullback g i' i e)
+    (L : DerivedCategory (Sheaf X₀.smallEtaleTopology A))
+    (L' : DerivedCategory (Sheaf U₁.smallEtaleTopology A)) (τ : (L((e)^*[A])).obj L ≅ L') :
+    supportedRestriction A e i i' g hg L L' τ ≫
+        (rightDerivedUpperShriekAdjunction A i').counit.app L' =
+      (L((e)^*[A])).map ((rightDerivedUpperShriekAdjunction A i).counit.app L) ≫ τ.hom :=
+  (existsUnique_supportedRestriction A e i i' g hg L L' τ).exists.choose_spec
+
+omit [HasSmallSiteSheafify A] in
+/-- The pullback along `e` of an object supported on `Z` is supported on the base change `Z'`:
+it vanishes on the open complement of `Z'`. -/
+lemma isZero_leftDerivedUpperStar_openComplement_leftDerivedUpperStar_rightDerivedLowerShriek
+    (e : U₁ ⟶ X₀) (i : Z₀ ⟶ X₀) (i' : Z₀' ⟶ U₁) [IsClosedImmersion i] [IsClosedImmersion i']
+    (g : Z₀' ⟶ Z₀) (hg : IsPullback g i' i e)
+    (B : DerivedCategory (Sheaf Z₀.smallEtaleTopology A)) :
+    IsZero ((L((i'.openComplement.ι)^*[A])).obj ((L((e)^*[A])).obj ((R(i)_![A]).obj B))) := by
+  refine (isZero_leftDerivedUpperStar_obj_rightDerivedLowerShriek_of_disjoint A i
+    i.openComplement.ι (by rw [i.range_eq_compl_range_openComplement_ι]; exact disjoint_compl_left)
+    (i'.openComplement.ι ≫ e) ?_ _).of_iso
+      ((leftDerivedUpperStarComp A i'.openComplement.ι e).app _).symm
+  rw [← compl_compl (Set.range i.openComplement.ι), ← i.range_eq_compl_range_openComplement_ι,
+    Set.subset_compl_iff_disjoint_left, Set.disjoint_left]
+  rintro _ ⟨z, rfl⟩ ⟨x, hx⟩
+  apply x.2
+  rw [Scheme.range_snd_of_isPullback hg]
+  exact ⟨z, hx.symm⟩
+
+omit [HasSmallSiteSheafify A] in
+/-- **Restriction of supports commutes with shifts.** Restricting the class
+`γ : K ⟶ Ri_! Ri^! (L[n])` read from a degree-`n` class `γ : K ⟶ (Ri_! Ri^! L)[n]`
+(`AlgebraicGeometry.Etale.shiftSupportedClass`) along `e` is the same as restricting `γ` in
+degree `n` and reading the result as a class with coefficients `L'[n]`. -/
+lemma restrictSupportedClass_shiftSupportedClass (e : U₁ ⟶ X₀) (i : Z₀ ⟶ X₀) (i' : Z₀' ⟶ U₁)
+    [IsClosedImmersion i] [(R(i)_![A]).IsLeftAdjoint] [IsClosedImmersion i']
+    [(R(i')_![A]).IsLeftAdjoint] (g : Z₀' ⟶ Z₀) (hg : IsPullback g i' i e)
+    {K L : DerivedCategory (Sheaf X₀.smallEtaleTopology A)}
+    {K' L' : DerivedCategory (Sheaf U₁.smallEtaleTopology A)}
+    (σ : K' ⟶ (L((e)^*[A])).obj K) (τ : (L((e)^*[A])).obj L ≅ L') (n : ℤ)
+    (γ : K ⟶ ((R(i)_![A]).obj ((R(i)^![A]).obj L))⟦n⟧) :
+    restrictSupportedClass A e i i' g hg σ
+        (((L((e)^*[A])).commShiftIso n).app L ≪≫ (shiftFunctor _ n).mapIso τ)
+        (shiftSupportedClass A i n γ) =
+      shiftSupportedClass A i' n (σ ≫ (L((e)^*[A])).map γ ≫
+        ((L((e)^*[A])).commShiftIso n).hom.app _ ≫
+          (supportedRestriction A e i i' g hg L L' τ)⟦n⟧') := by
+  have := (rightDerivedUpperShriekAdjunction A i).commShift_of_leftAdjoint ℤ
+  have := (rightDerivedUpperShriekAdjunction A i').commShift_of_leftAdjoint ℤ
+  have hz : IsZero ((L((i'.openComplement.ι)^*[A])).obj ((L((e)^*[A])).obj
+      (((R(i)_![A]).obj ((R(i)^![A]).obj L))⟦n⟧))) := by
+    refine ((shiftFunctor _ n).map_isZero
+      (isZero_leftDerivedUpperStar_openComplement_leftDerivedUpperStar_rightDerivedLowerShriek
+        A e i i' g hg ((R(i)^![A]).obj L))).of_iso ?_
+    exact (L((i'.openComplement.ι)^*[A])).mapIso (((L((e)^*[A])).commShiftIso n).app _) ≪≫
+      ((L((i'.openComplement.ι)^*[A])).commShiftIso n).app _
+  have key : (L((e)^*[A])).map (((R(i)_![A]).commShiftIso n).inv.app _ ≫
+        (R(i)_![A]).map (((R(i)^![A]).commShiftIso n).inv.app L)) ≫
+        supportedRestriction A e i i' g hg (L⟦n⟧) (L'⟦n⟧)
+          (((L((e)^*[A])).commShiftIso n).app L ≪≫ (shiftFunctor _ n).mapIso τ) =
+      ((L((e)^*[A])).commShiftIso n).hom.app _ ≫
+        (supportedRestriction A e i i' g hg L L' τ)⟦n⟧' ≫
+          ((R(i')_![A]).commShiftIso n).inv.app _ ≫
+            (R(i')_![A]).map (((R(i')^![A]).commShiftIso n).inv.app L') := by
+    refine (existsUnique_comp_counit_of_isZero A i' i'.openComplement.ι
+      i'.range_eq_compl_range_openComplement_ι hz _).unique ?_ rfl
+    have h₁ := (rightDerivedUpperShriekAdjunction A i).commShiftIso_inv_app_counit_app ℤ n L
+    have h₂ := (rightDerivedUpperShriekAdjunction A i').commShiftIso_inv_app_counit_app ℤ n L'
+    simp only [Functor.commShiftIso_comp_inv_app, Category.assoc] at h₁ h₂
+    rw [Category.assoc, supportedRestriction_comp_counit, ← Functor.map_comp_assoc,
+      Category.assoc, h₁, Category.assoc, Category.assoc, Category.assoc, h₂,
+      ← Functor.map_comp, supportedRestriction_comp_counit, Functor.map_comp,
+      ← Functor.commShiftIso_hom_naturality_assoc]
+    rfl
+  simp only [Functor.map_comp, Category.assoc] at key
+  simp only [restrictSupportedClass, shiftSupportedClass, Functor.map_comp, Category.assoc, key]
+
+end Restriction
+
 end Etale
 
 end AlgebraicGeometry
