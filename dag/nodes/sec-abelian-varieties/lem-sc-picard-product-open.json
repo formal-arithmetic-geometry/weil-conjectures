@@ -122,5 +122,24 @@
   "group": "M1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-ppo2950 (reviewer sub-agent of L); spot-checked: Return of 23:03 repaired: lem-sc-picard-h1-product-injective now the slice form of Tag 0BED in degree 1 (H^1(XxY)=H^1(X)+H^1(Y) when H^0=k; slice (1,y) restricts to id on H^1(X) and kills H^1(Y) via Spec k), true; Spec(k x k) excluded by H^0=k; no slopmaster2 Kunneth declaration (B10). Step 1: H^0(X_s,O)=kappa(s) is the universal-pushforward hypothesis at T=Spec kappa(s), points sigma(s),tau(s); step 1 supplies exactly the u_i-induced injectivity step 2 needs (C4). Item statement unchanged, matches cube step 6 use (cube step 2 supplies the hypotheses). FIX more, RETURN less: (1) C1 step 2: universal pushforward for the product X x_S Y -> S was asserted from the hypotheses on f,g without citation; added flat base change in degree 0 (lem-pc-flat-base-change-cohom, Tag 02KH, generic tool, tool_uses) with the computation; also spelled out Z_i=S so Z in Z_1 cap Z_2, and the final shrinking to trivialize N. (2) B3 lem-sc-picard-h1-product-injective: stmt_deps lacked def-weil-field (cited in text) and rational point; added def-weil-field, def-pc-rational-point and its citation.; 2 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.PicardProductOpen",
+  "declaration": "AlgebraicGeometry.Scheme.picard_product_open",
+  "file": "lean/Sheaf/AlgebraicGeometry/PicardProductOpen.lean",
+  "statement": "theorem picard_product_open {S X Y : Scheme.{u}} (f : X ⟶ S) (g : Y ⟶ S) [Flat f] [IsProper f] [LocallyOfFinitePresentation f] [Flat g] [IsProper g] [LocallyOfFinitePresentation g] (σ : S ⟶ X) (τ : S ⟶ Y) (hσ : σ ≫ f = 𝟙 S) (hτ : τ ≫ g = 𝟙 S) (s : S) (L : (pullback f g).Modules) [L.IsInvertible] (hO : ∀ {T : Scheme.{u}} (t : T ⟶ S), IsIso ((Classical.choose (Scheme.Modules.exists_tensorPullbackAdjunction (pullback.snd f t))).unit.app (SheafOfModules.unit T.ringCatSheaf))) (hO' : ∀ {T : Scheme.{u}} (t : T ⟶ S), IsIso ((Classical.choose (Scheme.Modules.exists_tensorPullbackAdjunction (pullback.snd g t))).unit.app (SheafOfModules.unit T.ringCatSheaf))) (h₁ : Nonempty ((Scheme.Modules.tensorPullback (pullback.lift (𝟙 X) (f ≫ τ) (by simp [hτ]))).obj L ≅ SheafOfModules.unit X.ringCatSheaf)) (h₂ : Nonempty ((Scheme.Modules.tensorPullback (pullback.lift (g ≫ σ) (𝟙 Y) (by simp [hσ]))).obj L ≅ SheafOfModules.unit Y.ringCatSheaf)) (hs : Nonempty ((Scheme.Modules.tensorPullback ((pullback.fst f g ≫ f).fiberι s)).obj L ≅ SheafOfModules.unit _)) : ∃ U : S.Opens, s ∈ U ∧ Nonempty ((Scheme.Modules.tensorPullback (pullback.fst (pullback.fst f g ≫ f) U.ι)).obj L ≅ SheafOfModules.unit (pullback (pullback.fst f g ≫ f) U.ι).ringCatSheaf)",
+  "branch": "sheaf-dag",
+  "by": "G1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-ppo1421"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-ppo1421",
+  "group": "G1",
+  "result": "fix",
+  "note": "f,g flat/proper/LFP (proper gives qc+qs so finite presentation); sections hσ,hτ; L invertible on pullback f g; slices 1×τ = lift (𝟙 X) (f≫τ), σ×1 = lift (g≫σ) (𝟙 Y), trivial = ≅ unit; fibre (X×_SY)_s; conclusion U : S.Opens, s ∈ U, L trivial on (X×_SY)_U. FIX: hpush (.c IsIso) restated as hO/hO' in the landed Picard-family adjunction-unit form (C1 f7075ffa0, 47e8207f5); fibre via Mathlib Scheme.Hom.fiberι (defeq, as the citer GeneralTheoremOfCube uses); namespace AlgebraicGeometry.Scheme as the family"
  }
 }
