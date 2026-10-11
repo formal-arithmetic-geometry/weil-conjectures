@@ -22,7 +22,8 @@
   "def-weil-pbc-topological-inverse-image",
   "def-weil-finite-integral-morphism",
   "def-weil-pbc-etale-site",
-  "def-weil-pbc-inverse-image"
+  "def-weil-pbc-inverse-image",
+  "def-weil-pbc-etale-sheaves"
  ],
  "proof": [
   {
@@ -255,5 +256,24 @@
   "lem-weil-pbc-closed-pushforward-constant-stalks",
   "lem-weil-pbc-site-sheafification-sections-local"
  ],
- "reviewed": "2026-10-10 L: 11 steps following the 09ZF proof (Zariski into etale inverse image injective: new node; every closed subset meets Z via the constant sheaf; local sections shrunk, finite refinement by the 09Z0 node, the sections on X' glued by (2), the coherence on X' x_X X' written out (new composition node for sheaves of sets), descent along the finite surjective X' -> X (new node 09Z3) and the restriction check the source omits); 2 tool uses accepted; 3 new nodes"
+ "reviewed": "2026-10-10 L: 11 steps following the 09ZF proof (Zariski into etale inverse image injective: new node; every closed subset meets Z via the constant sheaf; local sections shrunk, finite refinement by the 09Z0 node, the sections on X' glued by (2), the coherence on X' x_X X' written out (new composition node for sheaves of sets), descent along the finite surjective X' -> X (new node 09Z3) and the restriction check the source omits); 2 tool uses accepted; 3 new nodes",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GabberH0EtaleCriterion",
+  "declaration": "AlgebraicGeometry.gabber_h0_etale_criterion",
+  "file": "lean/Sheaf/AlgebraicGeometry/GabberH0EtaleCriterion.lean",
+  "statement": "theorem gabber_h0_etale_criterion {X Z : Scheme.{u}} [CompactSpace X] [QuasiSeparatedSpace X] (i : Z ⟶ X) [IsClosedImmersion i] (hZar : letI : ∀ P : X.Opensᵒᵖ ⥤ Type (u + 1), (Opens.map (i.base : Z.toTopCat ⟶ X.toTopCat)).op.HasPointwiseLeftKanExtension P := fun P U ↦ @Types.hasColimit.{u, u + 1, u} (CostructuredArrow.{u, u, u, u} (Opens.map i.base).op U) inferInstance (small_succ.{u} _) (CostructuredArrow.proj _ U ⋙ P) ∀ G : TopCat.Sheaf (Type (u + 1)) X.toTopCat, Function.Bijective (((Functor.sheafPullbackConstruction.sheafAdjunctionContinuous (Opens.map (i.base : Z.toTopCat ⟶ X.toTopCat)) (Type (u + 1)) (Opens.grothendieckTopology X) (Opens.grothendieckTopology Z)).unit.app G).hom.app (op (⊤ : X.Opens)))) (hFinite : ∀ (X' : Scheme.{u}) (h : X' ⟶ X) [IsFinite h], let b : CategoryTheory.Functor.{u, u, u, u} X'.Opens (pullback i h : Scheme.{u}).Opens := Opens.map ((pullback.snd i h : (pullback i h : Scheme.{u}) ⟶ X').base) letI : ∀ P : X'.Opensᵒᵖ ⥤ Type (u + 1), b.op.HasPointwiseLeftKanExtension P := fun P U ↦ @Types.hasColimit.{u, u + 1, u} (CostructuredArrow.{u, u, u, u} b.op U) inferInstance (small_succ.{u} _) (CostructuredArrow.proj b.op U ⋙ P) ∀ G : TopCat.Sheaf (Type (u + 1)) X'.toTopCat, Function.Bijective (((Functor.sheafPullbackConstruction.sheafAdjunctionContinuous b (Type (u + 1)) (Opens.grothendieckTopology X') (Opens.grothendieckTopology (pullback i h : Scheme.{u}))).unit.app G).hom.app (op (⊤ : X'.Opens)))) (F : Sheaf X.smallEtaleTopology (Type (u + 1))) : let adj : Scheme.etaleSetPullback i ⊣ (MorphismProperty.Over.pullback @Etale ⊤ i).sheafPushforwardContinuous (Type (u + 1)) (X.smallGrothendieckTopology @Etale) (Z.smallGrothendieckTopology @Etale) := Functor.sheafPullbackConstruction.sheafAdjunctionContinuous (MorphismProperty.Over.pullback @Etale ⊤ i) (Type (u + 1)) (X.smallGrothendieckTopology @Etale) (Z.smallGrothendieckTopology @Etale) Function.Bijective ((adj.unit.app F).hom.app (op (Scheme.Etale.mk (𝟙 X))))",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-11",
+  "existing": false,
+  "note": "Uses the existing set-valued Scheme.etaleSetPullback from def-weil-pbc-etale-sheaves: the recorded Etale.upperStar is restricted to abelian coefficients. Restriction is the constructed inverse-image adjunction unit at the terminal object. No new notions or correction."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-ghe1117",
+  "group": "E1",
+  "result": "pass",
+  "note": "qcqs X as CompactSpace+QuasiSeparatedSpace; closed immersion i; hZar = constructed Zariski Kan-ext+sheafification unit at ⊤ for all Type(u+1) set sheaves (universe matches the étale F, so step 8 can apply it to F'_Zar); hFinite over all finite h : X' ⟶ X in Scheme.{u}, i' = pullback.snd i h; F on smallEtaleTopology (defeq smallGrothendieckTopology @Etale, rfl-checked); conclusion = unit of recorded etaleSetPullback ⊣ pushforward at op (Etale.mk (𝟙 X)); #check with pp.fullNames: all names resolve to Mathlib/recorded decls; letI instances are genuine Types.hasColimit, not hypotheses"
+ }
 }
