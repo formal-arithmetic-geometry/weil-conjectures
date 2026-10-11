@@ -145,5 +145,23 @@
   "group": "C1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-gva (reviewer sub-agent of L); spot-checked: Source: the item follows AlgebraicGeometry.IsCurve.subsingleton_H_of_genericVanishing (GenericComparison.lean:140-232, read in full; transitively sorried via Scheme.H_map_isColimit_of_isFiltered, so not attachable) and the blueprint lem-sc-generic-cohomology-comparison proof; statement unchanged, hypotheses (alg. closed k, integral curve, sieve condition hG, no torsion) agree with the Lean theorem. Step 1 carried by new node lem-sc-generic-vanishing-kernel-colimit (matches Lean K, Dg over NonemptyAffineOpens^op, cG, phi mono+locally surjective). Step 2 by lem-sc-finite-support-acyclic (unit sk-prop-cd): j_U^{-1}K_U=0 by triangle identity + counit iso for an open immersion; complement of a nonempty open in an integral curve over alg. closed k is finitely many closed points with residue field k (Stacks 0F1F = etale-cohomology-lemma-supported-in-closed-points). Step 3 by lem-weil-pbc-cohomology-filtered-colimit (Stacks 03Q5), C qcqs since separated of finite type over k. Step 4 elementary. Small cases: C a point (U=C, K_U=0); constant nonzero sheaf fails the hypothesis. Tool uses: lem-weil-pbc-cohomology-filtered-colimit (sk-prop-h2) accepted as generic tool; lem-sc-finite-support-acyclic dropped from tool_uses since it is in the item's own unit. Fixes: dag/nodes/sec-curve-estimates/lem-sc-generic-vanishing-kernel-colimit.json: statement: 'filtered category under inclusion' corrected to reverse inclusion with explicit transition inclusions K_U subset K_V for V subset U (the Lean diagram is over NonemptyAffineOpens^op); lean_audit and merged_into added per template (created left as delivered: the tool refuses a change of created; it lacks by/date). Start Sat Oct 10 03:04:50 PM UTC 2026, end Sat Oct 10 03:05:46 PM UTC 2026.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "WeilConjectures.AlgebraicGeometry.Curve.GenericComparison",
+  "declaration": "AlgebraicGeometry.IsCurve.subsingleton_H_of_genericVanishing",
+  "statement": "theorem subsingleton_H_of_genericVanishing\n    (G : Sheaf C.smallEtaleTopology AddCommGrpCat.{u + 1})\n    (hG : ∀ (V : C.Etale) (s : G.obj.obj (op V)),\n      C.genericVanishingSieve G s ∈ C.smallEtaleTopology V) (i : ℕ) :\n    Subsingleton (Sheaf.H G (i + 1))",
+  "branch": "slopmaster2",
+  "by": "F1",
+  "date": "2026-10-11",
+  "existing": true,
+  "note": "Exact source theorem, GenericComparison.lean:146–232. Inherited binders: {k : Type u} [Field k] [IsAlgClosed k] {C : Scheme.{u}} (f : C ⟶ Spec (.of k)) [IsCurve f] [IsIntegral C]. The covering genericVanishingSieve is exactly the local affine-open unit-vanishing hypothesis; i+1 ranges over all positive degrees. Sheaf.H is the source cohomology convention accepted by def-weil-pbc-etale-cohomology, with its derived-global-sections comparison deferred to stage 3. The existing proof is transitively sorried, so this record is a stage-2 statement reuse, not a stage-3 proof claim."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-gva",
+  "group": "F1",
+  "result": "pass",
+  "note": "k alg closed; IsCurve f (sep, finite type, dim<=1); IsIntegral C; G abelian etale sheaf; forall V s, genericVanishingSieve (exists nonempty affine U, unit of upperStarLowerStarAdjunction kills restricted section) covering = node's etale covering with per-member U_a; Sheaf.H G (i+1) subsingleton for all i:N = all q>0 (Sheaf.H accepted per def-weil-pbc-etale-cohomology note, stage-3 bridge); no torsion; proof transitively sorried (Curve/Reductions.lean)"
  }
 }
