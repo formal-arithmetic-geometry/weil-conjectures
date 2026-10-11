@@ -124,5 +124,24 @@
    "decls": [],
    "missing": []
   }
+ },
+ "lean": {
+  "module": "Sheaf.Paper.AffineProjectiveComplexDerivedHom",
+  "declaration": "CategoryTheory.affineProjectiveComplexDerivedHom",
+  "file": "lean/Sheaf/Paper/AffineProjectiveComplexDerivedHom.lean",
+  "statement": "theorem affineProjectiveComplexDerivedHom {R : Type u} [CommRing R] [HasDerivedCategory.{w} (SheafOfModules.{u} ((sheafCompose ⊥ (forget₂ CommRingCat.{u} RingCat.{u})).obj (CochainComplex.onePointRingSheaf R)))] (P L : CochainComplex (SheafOfModules.{u} ((sheafCompose ⊥ (forget₂ CommRingCat.{u} RingCat.{u})).obj (CochainComplex.onePointRingSheaf R))) ℤ) (d e : ℤ) [P.IsStrictlyLE d] [L.IsStrictlyGE e] [∀ n : ℤ, Projective (P.X n)] : Nonempty (DerivedCategory.Q.obj (homComplex (R := CochainComplex.onePointRingSheaf R) P L) ≅ (derivedInternalHom ⊥ (CochainComplex.onePointRingSheaf R)).obj (op (DerivedCategory.Q.obj P), DerivedCategory.Q.obj L)) ∧ (∀ (I : CochainComplex (SheafOfModules.{u} ((sheafCompose ⊥ (forget₂ CommRingCat.{u} RingCat.{u})).obj (CochainComplex.onePointRingSheaf R))) ℤ ⥤ CochainComplex (SheafOfModules.{u} ((sheafCompose ⊥ (forget₂ CommRingCat.{u} RingCat.{u})).obj (CochainComplex.onePointRingSheaf R))) ℤ) (η : 𝟭 (CochainComplex (SheafOfModules.{u} ((sheafCompose ⊥ (forget₂ CommRingCat.{u} RingCat.{u})).obj (CochainComplex.onePointRingSheaf R))) ℤ) ⟶ I), (∀ N : CochainComplex (SheafOfModules.{u} ((sheafCompose ⊥ (forget₂ CommRingCat.{u} RingCat.{u})).obj (CochainComplex.onePointRingSheaf R))) ℤ, QuasiIso (η.app N) ∧ (I.obj N).IsKInjective) → IsIso (DerivedCategory.Q.map (((homComplexFunctor (R := CochainComplex.onePointRingSheaf R)).obj (op P)).map (η.app L)))) ∧ ∃ a : ℤ, ∀ n : ℤ, n < a → IsZero ((homComplex (R := CochainComplex.onePointRingSheaf R) P L).homology n)",
+  "branch": "sheaf-dag",
+  "by": "S1",
+  "date": "2026-10-12",
+  "existing": false,
+  "fixed_by": "R-apc2"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-apc2",
+  "group": "S1",
+  "result": "fix",
+  "note": "one-point site R-modules via onePointRingSheaf (M1 form); P strictly LE d with projective terms, L strictly GE e; Q homComplex P L ≅ derivedInternalHom ⊥ (onePointRingSheaf R) (Q P, Q L); FIX: tied the iso to the canonical Hom(P,L)→Hom(P,I(L)) as in landed derivedHom_projectiveResolution; eventual negative-degree vanishing of homology"
  }
 }
