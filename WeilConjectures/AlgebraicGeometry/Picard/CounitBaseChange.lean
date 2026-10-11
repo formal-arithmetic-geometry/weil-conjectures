@@ -76,6 +76,23 @@ lemma isAffineOpen_iInf_of_isSeparated {Y T : Scheme.{u}} (p : Y ⟶ T) [IsSepar
   simpa using (key Finset.univ Finset.univ_nonempty).1
 
 
+
+/-- Functions on an affine open `V` pulled back along `Spec R ⟶ Spec Γ(T, V) ⟶ T` are their
+images under `φ : Γ(T, V) ⟶ R`. -/
+lemma ΓSpecIso_hom_appLE_SpecMap_comp_fromSpec {T : Scheme.{u}} {V : T.Opens}
+    (hV : IsAffineOpen V) {R : CommRingCat.{u}} (φ : Γ(T, V) ⟶ R)
+    (h : ⊤ ≤ (Spec.map φ ≫ hV.fromSpec) ⁻¹ᵁ V) (a : Γ(T, V)) :
+    (Scheme.ΓSpecIso R).hom ((Spec.map φ ≫ hV.fromSpec).appLE V ⊤ h a) = φ a := by
+  have : (Spec.map φ ≫ hV.fromSpec).appLE V ⊤ h ≫ (Scheme.ΓSpecIso R).hom = φ := by
+    have e₁ : hV.fromSpec.appLE V ⊤ hV.fromSpec_preimage_self.ge = (Scheme.ΓSpecIso _).inv := by
+      rw [Scheme.Hom.appLE, hV.fromSpec_app_self, Category.assoc, ← Functor.map_comp]
+      convert Category.comp_id _
+      exact (Spec Γ(T, V)).presheaf.map_id _
+    rw [← Scheme.Hom.appLE_comp_appLE _ _ _ ⊤ _ hV.fromSpec_preimage_self.ge (by simp), e₁,
+      Category.assoc, Scheme.Hom.appLE_top_top_eq_appTop, Scheme.ΓSpecIso_naturality,
+      Iso.inv_hom_id_assoc]
+  exact congr($this a)
+
 section Core
 
 variable {k : Type u} [Field k] {X : Scheme.{u}} (f : X ⟶ Spec (.of k)) [Flat f] [IsProper f]
