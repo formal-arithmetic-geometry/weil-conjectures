@@ -260,7 +260,6 @@ public import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.FullyF
 public import WeilConjectures.SixFunctors.Etale.LowerShriek.Proper
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Monoidal
-public import WeilConjectures.SixFunctors.ProEtale.CondensedCoefficientPullback
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Hom
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.LowerShriek
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.OpenImmersionLowerShriek
@@ -276,6 +275,18 @@ public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Proper
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Defs
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Monoidal
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.LowerShriek.CompactlySupported
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.LowerShriek.MorphismDefs
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.MorphismDefs
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.Proper
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Basic
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructible
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Hom
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.LowerShriek
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.OpenImmersionLowerShriek
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Tensor
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperLowerStar
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperShriek
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteExtension.BaseChangeTheorems.LowerShriek.CompactlySupported
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteExtension.BaseChangeTheorems.LowerShriek.MorphismDefs
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteExtension.BaseChangeTheorems.MorphismDefs
@@ -291,6 +302,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteExtension.
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteExtension.LowerShriek.Defs
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteExtension.UpperLowerStar.Defs
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteExtension.UpperLowerStar.Monoidal
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.LowerShriek.Defs
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.PAdicAlgCl.BaseChangeTheorems.LowerShriek.CompactlySupported
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.PAdicAlgCl.BaseChangeTheorems.LowerShriek.MorphismDefs
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.PAdicAlgCl.BaseChangeTheorems.MorphismDefs
@@ -305,6 +317,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.PAdicAlgCl.Deriv
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.PAdicAlgCl.Derived.UpperShriek
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.PAdicAlgCl.LowerShriek.Defs
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.PAdicAlgCl.UpperLowerStar.Defs
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.Defs
 public import WeilConjectures.SpecialValues
 public import WeilConjectures.Statement
 public import WeilConjectures.Topology.Stratification

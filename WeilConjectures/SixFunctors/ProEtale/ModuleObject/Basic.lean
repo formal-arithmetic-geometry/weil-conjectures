@@ -8,12 +8,14 @@ module
 public import Mathlib.AlgebraicGeometry.Limits
 public import Mathlib.AlgebraicGeometry.Morphisms.WeaklyEtale
 public import Mathlib.Topology.LocallyConstant.Algebra
+public import WeilConjectures.CategoryTheory.ModuleObjects.MapMod
 public import WeilConjectures.CategoryTheory.RingObjects.Condensed.ContinuousMap
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteExtension.ContinuousMap
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteExtension.UpperLowerStar.Monoidal
 
 /-!
 
-# Coefficient rings pulled back from the pro-étale site of a point
+# Condensed coefficient rings and their canonical coefficient morphisms
 
 Let `Λ` be a condensed ring, i.e. a ring object of abelian sheaves on the pro-étale site of a
 point `*_proét = (Profinite, coherent topology)`, for instance the condensed rings
@@ -28,7 +30,9 @@ isomorphisms of ring objects
 ```
 α_f : f^* Λ_Y ≅ Λ_X
 ```
-for every morphism of schemes `f : X ⟶ Y`.
+for every morphism of schemes `f : X ⟶ Y`. These are the coefficient rings and the canonical
+coefficient morphisms of the six functors on module objects over `Λ_X`, built in the other files
+of `WeilConjectures.SixFunctors.ProEtale.ModuleObject`.
 
 ## The profinite test objects
 
@@ -53,16 +57,32 @@ Accordingly, the inverse image along `p_X` is the composite
 p_X^* := π_X^* ∘ p^*,
 ```
 where `p^* : Sheaf *_proét Ab ⥤ Sheaf (Spec ℤ)_proét Ab` is the inverse image along the
-continuous functor `S ↦ Spec LC(S, ℤ)` (`AlgebraicGeometry.ProEtale.pointUpperStar`). For
-`f : X ⟶ Y`, the structure morphisms satisfy `f ≫ π_Y = π_X`, `Spec ℤ` being terminal, and the
-comparison
+continuous functor `S ↦ Spec LC(S, ℤ)` (`AlgebraicGeometry.ProEtale.pointUpperStar`). It is
+strong monoidal and braided, so for a commutative condensed ring `Λ` the pullback
+`Λ_X = p_X^* Λ` is a commutative ring object of abelian sheaves on `X_proét`
+(`AlgebraicGeometry.ProEtale.condensedRingObj`). For `f : X ⟶ Y`, the structure morphisms
+satisfy `f ≫ π_Y = π_X`, `Spec ℤ` being terminal, and the comparison
 ```
-α_f : f^* p_Y^* = f^* π_Y^* p^* ≅ (f ≫ π_Y)^* p^* = π_X^* p^* = p_X^*
+f^* p_Y^* = f^* π_Y^* p^* ≅ (f ≫ π_Y)^* p^* = π_X^* p^* = p_X^*
 ```
 is the composition isomorphism `ProEtale.upperStarComp` of the pullbacks, which on the test
 objects is the canonical isomorphism `X ×_Y Y[S] ≅ X[S]` of the notes
-(`AlgebraicGeometry.ProEtale.upperStarFromPointComp`). Evaluated at `Λ`, it is the isomorphism
-of ring objects `α_f : f^* Λ_Y ≅ Λ_X` (`AlgebraicGeometry.ProEtale.coefficientPullbackIso`).
+(`AlgebraicGeometry.ProEtale.upperStarFromPointComp`).
+
+## The canonical coefficient morphisms
+
+* `α_f : f^* Λ_Y ⟶ Λ_X` (`AlgebraicGeometry.ProEtale.condensedPullbackHom`): the component at
+  `Λ` of the comparison `f^* ∘ p_Y^* ≅ p_X^*`. It is a morphism of ring objects, and, unlike for
+  the coefficient sheaves of `WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteExtension`,
+  it is an isomorphism for *every* `f`: the coefficients pulled back from the point form a
+  Cartesian system. As a morphism of bundled ring objects it is
+  `AlgebraicGeometry.ProEtale.coefficientPullbackIso`.
+* `η_f : Λ_Y ⟶ f_* Λ_X` (`AlgebraicGeometry.ProEtale.condensedPushforwardHom`): the mate of
+  `α_f` under the adjunction `f^* ⊣ f_*`, i.e. the unit `Λ_Y ⟶ f_* f^* Λ_Y` followed by `f_* α_f`.
+
+The import of `WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteExtension.ContinuousMap`
+is only for the instance `AddCommGrpCat.hasFunctorialFlatResolution`, which the derived functors
+need and which lives there for now.
 
 ## Main definitions
 
@@ -71,11 +91,12 @@ of ring objects `α_f : f^* Λ_Y ≅ Λ_X` (`AlgebraicGeometry.ProEtale.coeffici
 * `AlgebraicGeometry.ProEtale.pointUpperStar`: the inverse image `p^*` from condensed abelian
   groups to abelian sheaves on `(Spec ℤ)_proét`.
 * `AlgebraicGeometry.ProEtale.upperStarFromPoint`: the inverse image `p_X^* = π_X^* ∘ p^*`.
-* `AlgebraicGeometry.ProEtale.coefficientRing`: the ring object `Λ_X = p_X^* Λ`.
+* `AlgebraicGeometry.ProEtale.condensedRingObj`: the ring object `Λ_X = p_X^* Λ`, and
+  `AlgebraicGeometry.ProEtale.coefficientRing`: the same as a bundled ring object.
 * `AlgebraicGeometry.ProEtale.upperStarFromPointComp`: the natural isomorphism
   `f^* ∘ p_Y^* ≅ p_X^*`.
-* `AlgebraicGeometry.ProEtale.coefficientPullbackIso`: the isomorphism of ring objects
-  `α_f : f^* Λ_Y ≅ Λ_X`.
+* `AlgebraicGeometry.ProEtale.condensedPullbackHom` and
+  `AlgebraicGeometry.ProEtale.condensedPushforwardHom`: the coefficient morphisms `α_f` and `η_f`.
 
 ## Sorried input
 
@@ -100,6 +121,13 @@ of ring objects `α_f : f^* Λ_Y ≅ Λ_X` (`AlgebraicGeometry.ProEtale.coeffici
 * `AlgebraicGeometry.ProEtale.isMonoidal_upperStarFromPointComp`: the comparison
   `f^* ∘ p_Y^* ≅ p_X^*` is a monoidal natural isomorphism. It is the mate of the composition
   isomorphism of pushforwards, which is monoidal by `ProEtale.isMonoidal_lowerStarComp`.
+* `AlgebraicGeometry.ProEtale.condensedPushforwardHom_id` and
+  `AlgebraicGeometry.ProEtale.condensedPushforwardHom_comp`: `η` is compatible with the identity
+  and composition isomorphisms of the pushforwards. Both follow from the unit and composition
+  coherences of `α` (Theorem 5.2 of `WeilConjectures/RefactorInstruction.tex`), which come from
+  the coherence of the composition isomorphisms `ProEtale.upperStarComp` of the pullbacks, i.e.
+  from the associativity of the base change isomorphisms `(V ×_Z Y) ×_Y X ≅ V ×_Z X` defining
+  `ProEtale.lowerStarComp`, by passing to mates.
 
 -/
 
@@ -232,6 +260,32 @@ instance isIso_δ_pointUpperStar (F G : Sheaf (coherentTopology Profinite.{u}) A
 noncomputable instance monoidal_pointUpperStar : pointUpperStar.{u}.Monoidal :=
   Functor.Monoidal.ofOplaxMonoidal _
 
+/-- The direct image `p_*` is lax braided, being the pushforward along a continuous functor. -/
+noncomputable instance laxBraided_pointLowerStar : pointLowerStar.{u}.LaxBraided := by
+  unfold pointLowerStar
+  infer_instance
+
+/-- The inverse image `p^*` is lax braided (hence braided, being strong monoidal): the
+compatibility with the braiding is the mate of the one of `p_*`. In particular `p^*` sends
+commutative ring objects to commutative ring objects. -/
+noncomputable instance laxBraided_pointUpperStar : pointUpperStar.{u}.LaxBraided where
+  braided F G := by
+    have h : δ pointUpperStar F G ≫ (β_ (pointUpperStar.obj F) (pointUpperStar.obj G)).hom =
+        pointUpperStar.map (β_ F G).hom ≫ δ pointUpperStar G F := by
+      change (pointUpperStarLowerStarAdjunction.homEquiv _ _).symm
+          ((pointUpperStarLowerStarAdjunction.unit.app F ⊗ₘ
+            pointUpperStarLowerStarAdjunction.unit.app G) ≫ μ pointLowerStar _ _) ≫ _ =
+        _ ≫ (pointUpperStarLowerStarAdjunction.homEquiv _ _).symm
+          ((pointUpperStarLowerStarAdjunction.unit.app G ⊗ₘ
+            pointUpperStarLowerStarAdjunction.unit.app F) ≫ μ pointLowerStar _ _)
+      rw [← Adjunction.homEquiv_naturality_right_symm]
+      erw [← Adjunction.homEquiv_naturality_left_symm]
+      rw [Category.assoc, Functor.LaxBraided.braided]
+      erw [BraidedCategory.braiding_naturality_assoc]
+      rfl
+    rw [← cancel_epi (δ pointUpperStar F G), Functor.Monoidal.δ_μ_assoc, reassoc_of% h,
+      Functor.Monoidal.δ_μ, Category.comp_id]
+
 /-! ### The inverse image `p_X^*` and the coefficient rings `Λ_X` -/
 
 /-- The inverse image `p_X^* = π_X^* ∘ p^*` from condensed abelian groups to abelian sheaves on
@@ -243,6 +297,13 @@ noncomputable def upperStarFromPoint (X : Scheme.{u}) :
 /-- The inverse image `p_X^*` is strong monoidal. -/
 noncomputable instance monoidal_upperStarFromPoint (X : Scheme.{u}) :
     (upperStarFromPoint X).Monoidal := by
+  unfold upperStarFromPoint
+  infer_instance
+
+/-- The inverse image `p_X^*` is lax braided. In particular it sends commutative ring objects to
+commutative ring objects. -/
+noncomputable instance laxBraided_upperStarFromPoint (X : Scheme.{u}) :
+    (upperStarFromPoint X).LaxBraided := by
   unfold upperStarFromPoint
   infer_instance
 
@@ -294,5 +355,93 @@ noncomputable def coefficientPullbackIso
     (Functor.mapMonNatIso (upperStarFromPointComp f)).app Λ
 
 end Comparison
+
+/-! ### The canonical coefficient morphisms of the six functors on module objects -/
+
+section CoefficientMorphisms
+
+open MonObj
+
+open scoped CategoryTheory.Obj
+
+variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ]
+
+/-! ### The coefficient ring objects `Λ_X` -/
+
+/-- The coefficient ring object `Λ_X = p_X^* Λ` of abelian sheaves on `X_proét`, with the ring
+object structure transported along the strong monoidal functor `p_X^*`. -/
+noncomputable abbrev condensedRingObj (X : Scheme.{u}) :
+    Sheaf (Scheme.ProEt.topology X) Ab.{u + 1} :=
+  (upperStarFromPoint X).obj Λ
+
+/-- The coefficient ring object `Λ_X` is commutative when `Λ` is, `p_X^*` being braided. -/
+instance isCommMonObj_condensedRingObj [IsCommMonObj Λ] (X : Scheme.{u}) :
+    IsCommMonObj (condensedRingObj Λ X) :=
+  Functor.isCommMonObj_obj (F := upperStarFromPoint X)
+
+variable {X Y : Scheme.{u}} (f : X ⟶ Y)
+
+/-! ### The canonical coefficient morphisms -/
+
+/-- The canonical coefficient morphism `α_f : f^* Λ_Y ⟶ Λ_X`: the component at `Λ` of the
+comparison isomorphism `f^* ∘ p_Y^* ≅ p_X^*`, which on the test objects is the canonical
+isomorphism `X ×_Y Y[S] ≅ X[S]`. -/
+noncomputable abbrev condensedPullbackHom :
+    (f)^*[Ab.{u + 1}].obj (condensedRingObj Λ Y) ⟶ condensedRingObj Λ X :=
+  Functor.compAlgHom (upperStarFromPoint Y) (f)^*[Ab.{u + 1}] (upperStarFromPointComp f).hom Λ
+
+/-- `α_f` is a morphism of ring objects. -/
+instance isMonHom_condensedPullbackHom : IsMonHom (condensedPullbackHom Λ f) :=
+  Functor.isMonHom_compAlgHom _ _ _ _
+
+/-- `α_f` is an isomorphism, for every morphism of schemes `f`. -/
+instance isIso_condensedPullbackHom : IsIso (condensedPullbackHom Λ f) :=
+  inferInstanceAs (IsIso ((upperStarFromPointComp f).hom.app Λ))
+
+omit [MonObj Λ] in
+/-- For an open immersion `j : U ⟶ X`, `α_j : j^* Λ_X ⟶ Λ_U` is an isomorphism. This is the
+special case of `ProEtale.isIso_condensedPullbackHom` used by the exceptional operations. -/
+lemma isIso_condensedPullbackHom_of_isOpenImmersion {U X : Scheme.{u}} (j : U ⟶ X)
+    [IsOpenImmersion j] : IsIso (condensedPullbackHom Λ j) :=
+  inferInstance
+
+/-- The canonical coefficient morphism `η_f : Λ_Y ⟶ f_* Λ_X`: the mate of `α_f` under the
+adjunction `f^* ⊣ f_*`, the unit `Λ_Y ⟶ f_* f^* Λ_Y` followed by `f_* α_f`. -/
+noncomputable def condensedPushforwardHom :
+    condensedRingObj Λ Y ⟶ (f)_*[Ab.{u + 1}].obj (condensedRingObj Λ X) :=
+  (ProEtale.upperStarLowerStarAdjunction Ab.{u + 1} f).unitAlgHom (condensedRingObj Λ Y) ≫
+    (f)_*[Ab.{u + 1}].map (condensedPullbackHom Λ f)
+
+/-- `η_f` is a morphism of ring objects, for the ring object structure of `f_* Λ_X` induced by
+the lax monoidal structure of `f_*`. -/
+instance isMonHom_condensedPushforwardHom : IsMonHom (condensedPushforwardHom Λ f) :=
+  inferInstanceAs (IsMonHom
+    ((ProEtale.upperStarLowerStarAdjunction Ab.{u + 1} f).unitAlgHom (condensedRingObj Λ Y) ≫
+      (f)_*[Ab.{u + 1}].map (condensedPullbackHom Λ f)))
+
+omit [MonObj Λ] in
+/-- `η_f` is the mate of `α_f`: it is the unit `Λ_Y ⟶ f_* f^* Λ_Y` followed by `f_* α_f`. -/
+@[reassoc]
+lemma unitAlgHom_comp_map_condensedPullbackHom :
+    (ProEtale.upperStarLowerStarAdjunction Ab.{u + 1} f).unitAlgHom (condensedRingObj Λ Y) ≫
+      (f)_*[Ab.{u + 1}].map (condensedPullbackHom Λ f) =
+        condensedPushforwardHom Λ f :=
+  rfl
+
+/-- `η` of the identity is the identification `Λ_X ≅ (𝟙 X)_* Λ_X`. See the module docstring. -/
+lemma condensedPushforwardHom_id (X : Scheme.{u}) :
+    condensedPushforwardHom Λ (𝟙 X) =
+      (ProEtale.lowerStarId Ab.{u + 1} X).inv.app (condensedRingObj Λ X) :=
+  sorry
+
+/-- `η` of a composition is the composition of the `η`'s, up to the composition isomorphism
+`g_* ∘ f_* ≅ (f ≫ g)_*`. See the module docstring. -/
+lemma condensedPushforwardHom_comp {Z : Scheme.{u}} (g : Y ⟶ Z) :
+    condensedPushforwardHom Λ (f ≫ g) =
+      condensedPushforwardHom Λ g ≫ (g)_*[Ab.{u + 1}].map (condensedPushforwardHom Λ f) ≫
+        (ProEtale.lowerStarComp Ab.{u + 1} f g).hom.app (condensedRingObj Λ X) :=
+  sorry
+
+end CoefficientMorphisms
 
 end AlgebraicGeometry.ProEtale
