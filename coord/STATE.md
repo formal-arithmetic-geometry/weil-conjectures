@@ -43,7 +43,7 @@ Written by the launcher at the start (`1-dag`), then kept current by the maintai
 
 **NON-VANISHING LOCUS X_s (07:59 UTC; decision of L).** The non-vanishing locus X_s of a global section s of an invertible module M (or of `M.tensorPow n`) is `AlgebraicGeometry.Scheme.Modules.nonvanishingLocus M s` (lean/Sheaf/AlgebraicGeometry/Ample.lean, node def-weil-pbc-ample-invertible-module): K1's germ condition, the germ of s at x lies outside maximalIdeal • ⊤ of the stalk, equal by definition to the predicate written inline in `IsAmple`. New statements use it instead of writing the predicate inline or using the source's `generatingLocus`; the equality with `generatingLocus` for invertible M is a stage-3 bridge lemma.
 
-**BASE CHANGE X_T (08:05 UTC; decision of L).** The base-changed scheme X_T of f : X ⟶ S along T : Over S (node def-pc-base-change, lean/Sheaf/AlgebraicGeometry/BaseChangeConventions.lean, merge 9b19482bd) is `CategoryTheory.Limits.pullback f T.hom` (= `Over.pullback`), with pr_T = `pullback.snd` and f_T = `pullback.fst`; g_X is `baseChangeMap`, induced sections are `sectionBaseChange`, the geometric fibre is `Scheme.Hom.geometricFiberAt`, the fibre over t is `(pullback.snd f T.hom).fiber t`. The record's main declaration `Scheme.Modules.moduleBaseChange` is only module base change; citers needing X_T use the pullback directly.
+**BASE CHANGE X_T (08:05 UTC; decision of L).** The base-changed scheme X_T of f : X ⟶ S along T : Over S (node def-pc-base-change, lean/Sheaf/AlgebraicGeometry/BaseChangeConventions.lean, merge 9b19482bd) is `CategoryTheory.Limits.pullback f T.hom` (= `Over.pullback`); the base-changed morphism f_T : X_T ⟶ T is `pullback.snd f T.hom` and the projection X_T ⟶ X is `pullback.fst f T.hom` (corrected 11:39 UTC, M1 66136964e; the earlier "f_T = pullback.fst" was wrong); g_X is `baseChangeMap`, induced sections are `sectionBaseChange`, the geometric fibre is `Scheme.Hom.geometricFiberAt`, the fibre over t is `(pullback.snd f T.hom).fiber t`. The record's main declaration `Scheme.Modules.moduleBaseChange` is only module base change; citers needing X_T use the pullback directly.
 
 **DERIVED RESTRICTION TO AN OPEN (08:15 UTC; decision of L).** For a ringed space X with modules `SheafOfModules (AlgebraicGeometry.moduleRings X)` (structure sheaf via `forget₂ CommRingCat RingCat`, as in ModuleStalkFunctor), derived restriction to an open U is `(SheafOfModules.overFunctor (moduleRings X) U).mapDerivedCategory` (to `(moduleRings X).over U`), restriction between opens i : W ⟶ U is `(SheafOfModules.overMap (moduleRings X) i).mapDerivedCategory`, and the Hom restriction is `AlgebraicGeometry.derivedOpenHomRestriction` (node lem-sc-derived-hom-mayer-vietoris, lean/Sheaf/Paper/DerivedHomMayerVietoris.lean, merge 453ada29d). Its sorry'd exactness instances `AlgebraicGeometry.moduleOverFunctor_additive`/`_limits`/`_colimits` and `AlgebraicGeometry.moduleOverMap_additive`/`_limits`/`_colimits` are THE shared ones: later items cite them, never restate them (H4). `moduleRings` was made a public abbrev (was `private`, used in public statements) so citers can name it.
 
@@ -71,13 +71,63 @@ Written by the launcher at the start (`1-dag`), then kept current by the maintai
 
 **FIBRE RING (10:14 UTC; decision of L).** κ(p) ⊗[R] S is Mathlib `p.Fiber S` (`Ideal.Fiber`, `Algebra.TensorProduct.includeRight`, `PrimeSpectrum.preimageEquivFiber`); never a hand-written `S ⊗[R] κ(p)` (E1 846bd08dc, F1 c84d7f11f, G1 e8f0036eb, J1 609956747, K1 de4006636).
 
-**FILTERED COLIMITS OF RINGS (10:14 UTC; decision of L).** `{I : Type w} [SmallCategory I] [IsFiltered I]`, `F : I ⥤ CommRingCat`, `[HasColimit F]`, `colimit F`, `colimit.ι` (K1 ccd06d885, H1 e6c93b368, J1 8231d9091, F1 6ebcba30e); directed systems keep the DIRECTED SETS line.
+**FILTERED COLIMITS OF RINGS (10:14 UTC; decision of L; index universe amended 11:39 UTC).** `{I : Type u} [SmallCategory I] [IsFiltered I]` (index in the rings' universe, INDEX UNIVERSES FOR LIMITS AND FILTERED COLIMITS; `CommAlgCat.{u} A` for colimits of A-algebras, M1 a265ca575), `F : I ⥤ CommRingCat`, `[HasColimit F]`, `colimit F`, `colimit.ι` (K1 ccd06d885, H1 e6c93b368, J1 8231d9091, F1 6ebcba30e); directed systems keep the DIRECTED SETS line.
 
 **UNRAMIFIED AT A POINT (10:14 UTC; decision of L).** `∃ U : X.Opens, x ∈ U ∧ LocallyOfFiniteType (U.ι ≫ f) ∧ IsOpenImmersion (pullback.diagonal (U.ι ≫ f))` (recorded def-weil-unramified-morphism match; E1 c97916d2e).
 
 **GEOMETRIC FIBRE (10:14 UTC; decision of L).** The scheme X ×_Y Spec Ω along ȳ is `Limits.pullback f ȳ` and its cardinality is the number of points of that scheme (J1 024846f33); def-weil-pbc-geometric-fibre (`Scheme.Hom.GeometricFiber`, the set of Ω-lifts) is a different object — cite the one the node's stmt_dep names.
 
 **ÉTALE SHEAF SECTIONS AND COVERS (10:14 UTC; decision of L).** Global sections at `op (Scheme.Etale.mk (𝟙 X))` (H1 f92914c51, J1 33fd4728f, F1 14053efbd); a clopen/coproduct cover as `(ι : ∀ i, C i ⟶ X) (hc : IsColimit (Cofan.mk X ι))` (E1 5d9bb8370) unless the node names Mathlib's chosen `∐`.
+
+**COHERENT SHEAVES (11:39 UTC; decision of L).** `AlgebraicGeometry.RingedSpace.IsCoherent X F` on `SheafOfModules.{u} (moduleRings X)` (Stacks 01BV; for a scheme `IsCoherent X.toRingedSpace F`), quasi-coherent = Mathlib `SheafOfModules.IsQuasicoherent`, finite type = Mathlib `SheafOfModules.IsFiniteType` (C1 pqf-def-coherent 35b32fee7). The source's `Scheme.Modules.isCoherent` (quasi-coherent + finite presentation) is Stacks-coherent only on locally Noetherian schemes, so a citer with a source record needs a bridge, and no group defines a second `IsQuasicoherent`/`IsFiniteType`.
+
+**LOCALLY NOETHERIAN (11:39 UTC; decision of L).** `AlgebraicGeometry.IsLocallyNoetherian X` (pqf-def-locnoeth, `existing: true`, E1 48220d270); the every-affine-open form is `IsLocallyNoetherian.component_noetherian`. Cite the Mathlib class, never a private predicate (a formal-scheme citer such as def-weil-pbc-coherent-formal-module cannot use it directly).
+
+**NOETHERIAN SCHEME (11:39 UTC; decision of L).** `[IsNoetherian X]` (M1 74f845ccf). New statements use this form; the ~10 landed modules with `[IsLocallyNoetherian X] [CompactSpace X]` are not rewritten and are bridged by `haveI : IsNoetherian X := {}`.
+
+**QUASI-FINITE (11:39 UTC; decision of L).** `Scheme.Hom.IsQuasiFiniteAtPoint f x` (affine pairs + `Algebra.IsQuasiFiniteAtPrime`), `Scheme.Hom.IsLocallyQuasiFinite f`, `Scheme.Hom.IsQuasiFinite f` (LocallyOfFiniteType ∧ QuasiCompact ∧ open singleton in `asFiber`), `Scheme.Hom.HasFiniteFibres f` (C1 pqf-def-quasifinite c85d109b5); ring level `Algebra.IsQuasiFiniteAtPrime` (H1 ff16f882f). These are defs, not classes: statements take them as explicit hypotheses.
+
+**SMOOTH PROJECTIVE CURVE (11:39 UTC; decision of L).** class `Scheme.Hom.IsSmoothProjectiveCurve f` (extends `f.IsCurveOverField`, `Smooth f`, `IsProjective f`; H1 def-pc-smooth-projective-curve 6d8cf9421); citers write `[f.IsSmoothProjectiveCurve]` or `[(X ↘ Spec (.of k)).IsSmoothProjectiveCurve]`. The bridge to `IsConnectedCurve ∧ Smooth` is F1 21c919b4c (curves-are-sc); other source forms are stage-3 bridges.
+
+**GROUP SCHEME (11:39 UTC; decision of L).** `existing: true` `CategoryTheory.GrpObj` on `G : Over (Spec (.of k))`, with `[IsCommMonObj G]`, `[IsMonHom f]`, `GrpObj.ker`, `[IsFinite G.hom]`, `finrankΓ`, `[Etale G.hom]` (J1 def-sc-group-scheme af5c70674). The functor of points needs `open scoped CategoryTheory.MonObj`; no private group-scheme structure.
+
+**PICARD FUNCTOR (11:39 UTC; decision of L).** the source's `picardFunctor f` (fppf sheaf), Pic^d = `picardFunctorDegree f d`, Pic^0 = `picardFunctorDegree f 0` (`existing: true`; M1 def-sc-picard-functor ffc435303). Never a second name for them; the node's deg⁻¹(d) subfunctor vs the source's sheafified form is a stage-3 bridge.
+
+**SPECTRAL SEQUENCE CONVERGENCE (11:39 UTC; decision of L).** `BigradedExactCouple.ConvergesTo` (exact-couple form, Sheaf.CategoryTheory.ExactCoupleConvergence; J1 def-sp-convergence 07e58361f). The landed inline first-quadrant E₂ form (`first_quadrant_row_collapse`, `exists_module_grothendieck_spectralSequence`) stays and is bridged in stage 3; new nodes cite def-sp-convergence.
+
+**INDEX UNIVERSES FOR LIMITS AND FILTERED COLIMITS (11:39 UTC; decision of L).** the index type lives in the objects' universe: `I : Type u` with `Scheme.{u}` / `CommRingCat.{u}` / `CommAlgCat.{u} A`, plus `[Nonempty I]` when no stage i₀ is fixed (C1 02bc80ff3, G1 117cfd333). An independent `I : Type w` makes the statement false (empty or too-large index: the limit/colimit is not computed element by element), so reviewers return or fix it.
+
+**OPEN COVERS (11:39 UTC; decision of L).** a finite open cover of a scheme is `U : Fin m → X.Opens` with `⨆ i, U i = ⊤` (F1 eec20c7c0, C1 d9e3a07ba). `∀ x, ∃ i, x ∈ U i` is the same statement but not the convention (landed AmpleFiniteAffineCover keeps it; stage-3 bridge).
+
+**FPQC DESCENT OF PROPERTIES (11:39 UTC; decision of L).** family form `(S' : I → Scheme) (g : ∀ i, S' i ⟶ S) (hcover : Presieve.ofArrows S' g ∈ Scheme.fpqcPrecoverage S) (h : ∀ i, P (pullback.snd f (g i))) : P f` (H1 f7dc0d331, UnramifiedDescent.lean). Exception: a single-morphism node stays single-morphism (`g` flat surjective quasi-compact, `pullback.snd f g`; E1 c2fa8c1e3) and Mathlib `DescendsAlong` instances are recorded `existing: true` there; FpqcOpenImmersionDescent's IsPullback form is a stage-3 bridge.
+
+**FLAT RING MAPS (11:39 UTC; decision of L).** two accepted spellings, `(φ : R →+* S) (hflat : φ.Flat)` (E1 91ccca9e3, def-weil-pbc-flat-ring-map record) and `[Algebra R S] [Module.Flat R S]` (E1 fd047eff9, C1 a3715b2f7). Use the one the node speaks (bare ring map vs algebra); they agree through `φ.toAlgebra`, no conversion.
+
+**INTEGRAL RING MAPS (11:39 UTC; decision of L).** `Algebra.IsIntegral R S` (H1 65afa0448), unless the node is a bare ring map with no algebra structure, then `RingHom.IsIntegral f` (F1 bf4250dfa). Landed uses of the other form are not rewritten.
+
+**CHARACTERISTIC p (11:39 UTC; decision of L).** `[Fact p.Prime] [CharP k p]` (C1 fe000df38). New statements use this form, not `(p : R) = 0` + `p.Prime` or `(hp : 0 < p)`.
+
+**RESIDUE FIELD (11:39 UTC; decision of L).** `IsLocalRing.ResidueField A` (M1 89e4627c1), unless a needed `Module (ResidueField R) (M ⧸ m • ⊤)` instance is missing, then `R ⧸ maximalIdeal R` (C1 b5d3fafd4); k → κ(y) is `Scheme.Hom.residueFieldAlgebraMap` (K1 c6a4fecfd), κ(f x) → κ(x) is `(f.residueFieldMap x).hom.toAlgebra`. No hand-written quotient where ResidueField typechecks.
+
+**REDUCTION MOD IDEAL (11:39 UTC; decision of L).** the induced map M/IM → N/IN is `Submodule.mapQ` with `smul_top_le_comap_smul_top` (J1 b095e7e4e, bc5bcb342). Landed `reduceModIdeal` (AdicLimitFiniteModules) is not rewritten; new statements use mapQ.
+
+**FG FIELD EXTENSION (11:39 UTC; decision of L).** `(⊤ : IntermediateField k K).FG` (C1 4fb39de05). Not `EssFiniteType` or `∃ b, adjoin k (Set.range b) = ⊤` in new statements; landed variants are bridged in stage 3.
+
+**INVERSE IMAGE (11:39 UTC; decision of L).** topological f⁻¹ at `Type u` is `TopCat.Sheaf.pullback` with `TopCat.Sheaf.pullbackPushforwardAdjunction` (M1 f4fd3341a, C1 ace160850), at `Type (u+1)` the `Functor.sheafPullbackConstruction` form (`sheafAdjunctionContinuous`, E1 ef529d482); étale f⁻¹ is `Etale.upperStar` (G1 a06b49e0c). Use the one for the node's site and universe; no `Presheaf.pullback ⋙ presheafToSheaf` in new statements.
+
+**CONSTRUCTIBLE (11:39 UTC; decision of L).** three landed forms: sets `IsConstructibleEtaleSheafOfSets` (recorded on def-weil-pbc-etale-sheaves; K1 d2af24026), modules `IsConstructibleEtaleModuleSheaf`, source `Scheme.IsConstructibleSheaf` (finitely generated stalks, C4/C5); bridge nodes are stage 3. Cite the form the node's stmt_dep records, and never weaken a set-sheaf predicate to an abelian one (G1 faa2456ba); constructible material uses `Sheaf … (ModuleCat.{u+1} Λ)` (Λ-MODULE ÉTALE SHEAVES: TWO ENCODINGS, F1 c208eb7a6).
+
+**LOCALLY CONSTANT (11:39 UTC; decision of L).** `IsLocallyConstantEtaleSheafOfSets` on the set sheaf (K1 68c96857b), not the source's `IsLocallyConstantSheaf`. Use it whenever the node's stmt_dep is the recorded set-sheaf notion.
+
+**REGULAR SCHEME (11:39 UTC; decision of L).** `∀ x : X, ∃ U : X.affineOpens, x ∈ U ∧ IsRegularRing Γ(X, U)` (the mathlib_match of def-weil-regular-scheme; G1 4f128dac5). The landed forms `[IsRegular X]` (source, stalkwise) and `∀ x, IsRegularLocalRing (X.presheaf.stalk x)` are bridged by Stacks 02IT in stage 3; new statements use the affine-neighbourhood form.
+
+**SEPARATED SCHEME (11:39 UTC; decision of L).** `[X.IsSeparated]` (H1 f1d86abbd). Not `IsSeparated (terminal.from X)` in new statements (landed FiniteDiscreteSeparatedAffine keeps it).
+
+**IDEMPOTENT ENDOMORPHISMS (11:39 UTC; decision of L).** `(p : Module.End k V) (hp : IsIdempotentElem p)`, charpoly via `(LinearMap.toMatrix b b p).charpoly` (C1 ad05bee5d, 55c94c81e). The sec-proper-base-change siblings (image base change, rank–nullity, charpoly identity/zero) use this form.
+
+**KOSZUL (11:39 UTC; decision of L).** the Koszul differential is ONE named map, `CliffordAlgebra.contractLeft` at Q = 0 on `ExteriorAlgebra` (M1 1ca3df789), never `Classical.choose` of an existence statement. def-weil-pbc-koszul-complex and lem-weil-pbc-koszul-differential-square-zero must name that map.
+
+**ASSOCIATED POINT (11:39 UTC; decision of L).** x is associated to F iff the colon ideal of {s} in the stalk F_x is the maximal ideal for some s (K1 0f0c9cfac; weakly associated `Ideal.WeakAss`, H1). Nodes of the ass/weakass family state it in this colon-of-{s} stalk form.
 
 **GENERAL-SITE RESTRICTION (09:05 UTC; decision of L).** On a general site, restriction of module sheaves to U is `SheafOfModules.overFunctor` on `J.over U`. Its zero-preservation instance is H1's `CategoryTheory.module_overFunctor_preservesZero` (node lem-pur-rhom-into-kinjective-local, lean/Sheaf/Algebra/Homology/RhomIntoKInjectiveLocal.lean, 38d166329) — cite it, never restate it. The ringed-space instances `moduleOverFunctor_additive`/`moduleOverFunctor_limits`/`moduleOverFunctor_colimits` (DERIVED RESTRICTION TO AN OPEN) are separate.
 
