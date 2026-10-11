@@ -207,5 +207,23 @@
   "by": "L",
   "result": "pass",
   "note": "Reviewed by the lead (opus-relaunch6). Seven steps along 01QY with the stalkwise proof of 08KS: i_* G quasi-coherent since a closed immersion is affine (lem-weil-pbc-affine-pushforward-base-change (1)); I i_* G = 0 from I = ker i^sharp; i^* F quasi-coherent by the new node lem-weil-pbc-module-pullback-quasi-coherent (01BG; Lean isQuasicoherent_pullback attached by the lead, sorry-free, so that node is closed) and of finite type by lem-weil-pbc-support-pullback-finite-type (3); the unit F -> i_* i^* F is an isomorphism on stalks: zero off i(Z) (lem-weil-pbc-closed-pushforward-stalks (1) and 1 in I(X \\ i(Z))), and at x = i(z) the surjective local ring map with kernel killing F_x makes the stalk map m -> m (x) 1 bijective (lem-weil-pbc-module-stalk-pullback as a tool use); conclusion by lem-weil-pbc-module-iso-on-stalks. Noted: lem-weil-pbc-module-iso-on-stalks has source.document modules.tex but cites Sheaves 007T; lem-weil-pbc-closed-pushforward-stalks (2) matches Mathlib stalkPushforward_iso_of_isInducing (Topology/Sheaves/Stalks.lean:220) for the bijectivity half."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ClosedImmersionPushforwardAnnihilated",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.closedImmersion_pushforward_annihilated",
+  "file": "lean/Sheaf/AlgebraicGeometry/ClosedImmersionPushforwardAnnihilated.lean",
+  "statement": "theorem closedImmersion_pushforward_annihilated {X Z : Scheme.{u}} (i : Z ⟶ X) [IsClosedImmersion i] : (∀ (G : Z.Modules) [G.IsQuasicoherent], ((pushforward i).obj G).IsQuasicoherent ∧ ∀ (V : X.Opens) (a : Γ(X, V)), a ∈ i.ker.idealOfOpens V → ∀ s : Γ((pushforward i).obj G, V), a • s = 0) ∧ ∀ (F : X.Modules) [F.IsQuasicoherent], (∀ (V : X.Opens) (a : Γ(X, V)), a ∈ i.ker.idealOfOpens V → ∀ s : Γ(F, V), a • s = 0) → ((tensorPullback i).obj F).IsQuasicoherent ∧ IsIso ((Classical.choose (exists_tensorPullbackAdjunction i)).unit.app F) ∧ (F.IsFiniteType → ((tensorPullback i).obj F).IsFiniteType)",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-cpa1230",
+  "group": "E1",
+  "result": "pass",
+  "note": "X Z : Scheme.{u}, i closed immersion [IsClosedImmersion i]; I = i.ker.idealOfOpens V (= range i.ker.toModulesι.app V by range_toModulesι_app_eq_idealOfOpens), all opens; (1) G qcoh => pushforward qcoh and a•s=0 (smul is restriction along i.app V, rfl-checked); (2) F qcoh with sectionwise IF=0 => tensorPullback qcoh, IsIso of unit of Classical.choose exists_tensorPullbackAdjunction, finite type conditional; hypothesis not automatic (simp fails); node unchanged but lean record"
  }
 }
