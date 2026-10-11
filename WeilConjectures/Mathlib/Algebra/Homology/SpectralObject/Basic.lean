@@ -45,6 +45,22 @@ lemma isIso_H_map_twoδ₂Toδ₁ (X : SpectralObject C ι)
     (X.exact₂ f g fg hfg n₁).epi_f (h₁.eq_of_tgt _ _)
   exact isIso_of_mono_of_epi _
 
+/-- Constructor for isomorphisms of spectral objects: a family of isomorphisms
+`X.H n ≅ Y.H n` which commute with the connecting homomorphisms. -/
+@[simps]
+def isoMk {X Y : SpectralObject C ι} (e : ∀ n : ℤ, X.H n ≅ Y.H n)
+    (comm : ∀ (n₀ n₁ : ℤ) (hn₁ : n₀ + 1 = n₁) {i j k : ι} (f : i ⟶ j) (g : j ⟶ k),
+      X.δ f g n₀ n₁ hn₁ ≫ (e n₁).hom.app (mk₁ f) = (e n₀).hom.app (mk₁ g) ≫ Y.δ f g n₀ n₁ hn₁) :
+    X ≅ Y where
+  hom := { hom n := (e n).hom, comm := comm }
+  inv :=
+    { hom n := (e n).inv
+      comm n₀ n₁ hn₁ i j k f g := by
+        rw [← cancel_epi ((e n₀).hom.app (mk₁ g)), ← reassoc_of% (comm n₀ n₁ hn₁ f g)]
+        simp }
+  hom_inv_id := Hom.ext (funext fun n ↦ (e n).hom_inv_id)
+  inv_hom_id := Hom.ext (funext fun n ↦ (e n).inv_hom_id)
+
 variable {C' : Type*} [Category* C'] [Abelian C']
 
 /-- The image of a spectral object under an exact functor `F`: its functors are `H n ⋙ F` and

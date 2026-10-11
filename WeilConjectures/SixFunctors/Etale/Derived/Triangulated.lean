@@ -26,7 +26,9 @@ the commutations with shifts of `WeilConjectures.SixFunctors.Etale.Derived.Shift
 
 - `AlgebraicGeometry.Etale.isTriangulated_rightDerivedLowerStar`
 - `AlgebraicGeometry.Etale.isTriangulated_rightDerivedLowerShriek`
+- `AlgebraicGeometry.Etale.isTriangulated_leftDerivedUpperStar`
 - `AlgebraicGeometry.Etale.isTriangulated_derivedTensorRight`
+- `AlgebraicGeometry.Etale.isTriangulated_derivedTensor_obj`
 -/
 
 @[expose] public section
@@ -64,6 +66,14 @@ section Monoidal
 variable [MonoidalCategory A] [MonoidalPreadditive A] [SymmetricCategory A] [MonoidalClosed A]
   [Abelian.HasFunctorialFlatResolution A] {X : Scheme.{u}}
 
+/-- The derived pullback `Lg^*` is a triangulated functor, being isomorphic, compatibly with the
+shifts, to the functor `D(g^*)` induced by the exact pullback. -/
+instance isTriangulated_leftDerivedUpperStar {Z Y : Scheme.{u}} (g : Z ⟶ Y) :
+    (L((g)^*[A])).IsTriangulated :=
+  have : NatTrans.CommShift (leftDerivedUpperStarIsoMapDerivedCategory A g).symm.hom ℤ :=
+    Functor.CommShift.ofIso_compatibility (leftDerivedUpperStarIsoMapDerivedCategory A g).symm ℤ
+  Functor.isTriangulated_of_iso (leftDerivedUpperStarIsoMapDerivedCategory A g).symm
+
 /-- Tensoring on the right with a fixed complex, `M ↦ M ⊗ᴸ K`, commutes with shifts. -/
 noncomputable instance commShiftDerivedTensorRight
     (K : DerivedCategory (Sheaf X.smallEtaleTopology A)) :
@@ -77,6 +87,22 @@ instance isTriangulated_derivedTensorRight
     (derivedTensorRight A X K).IsTriangulated :=
   inferInstanceAs
     (((curriedTensor (DerivedCategory (Sheaf X.smallEtaleTopology A))).flip.obj K).IsTriangulated)
+
+attribute [local instance] Sheaf.monoidalCategory in
+/-- Tensoring on the left with a fixed complex, `M ↦ K ⊗ᴸ M`, is triangulated. -/
+instance isTriangulated_derivedTensor_obj
+    (K : DerivedCategory (Sheaf X.smallEtaleTopology A)) :
+    ((derivedTensor A X).obj K).IsTriangulated :=
+  inferInstanceAs
+    (((curriedTensor (DerivedCategory (Sheaf X.smallEtaleTopology A))).obj K).IsTriangulated)
+
+/-- Tensoring on the right with a fixed complex, `M ↦ M ⊗ᴸ K`, is triangulated. This restates
+`isTriangulated_derivedTensorRight` in the `(derivedTensor A X).flip.obj K` form, so that
+instance search finds it for functors written in that form. -/
+instance isTriangulated_derivedTensor_flip_obj
+    (K : DerivedCategory (Sheaf X.smallEtaleTopology A)) :
+    ((derivedTensor A X).flip.obj K).IsTriangulated :=
+  inferInstanceAs (derivedTensorRight A X K).IsTriangulated
 
 end Monoidal
 

@@ -5,8 +5,10 @@ Authors: Claude
 -/
 module
 
+public import WeilConjectures.ConstructibleSheaf.Monoidal
 public import WeilConjectures.ConstructibleSheaf.OpenClosedStratification
 public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness
+public import WeilConjectures.SixFunctors.Etale.Derived.Stability.DirectImage
 public import WeilConjectures.SixFunctors.Etale.Derived.Stability.OpenImmersion
 public import WeilConjectures.SixFunctors.Etale.Derived.Supports
 public import WeilConjectures.SixFunctors.Etale.Derived.Triangulated
@@ -14,9 +16,12 @@ public import WeilConjectures.SixFunctors.Etale.Derived.Triangulated
 /-!
 # Generation of `Dctf`
 
-This file computes the Tor amplitude of a flat sheaf placed in degree `0` and proves that
-`Dctf(X, Λ)` is generated, as a thick subcategory, by the objects `Rj_! L` and `Ri_* L` for
-lisse flat sheaves `L` on locally closed subschemes (`sk-lem-sf-ctf-generation`).
+This file computes the Tor amplitude of a flat sheaf placed in degree `0`, shows that
+`Dctf(X, Λ)` is a thick subcategory of `D(X_ét, Λ)` for a finite ring `Λ`, and proves that it is
+generated, as a thick subcategory, by the objects `Rg_* Rj_! L` for lisse flat sheaves `L` on the
+strata of stratifications of `X` (`sk-lem-sf-ctf-generation`). Over a finite-type scheme over a
+field, `Dctf(X, Λ)` is exactly the thick envelope of these generators
+(`lem-trf-devissage-generation`).
 
 This file is part of `WeilConjectures.SixFunctors.Etale.Derived.Stability`, whose module
 documentation records the implementation notes.
@@ -26,7 +31,7 @@ documentation records the implementation notes.
 
 universe u' u
 
-open CategoryTheory Limits MonoidalCategory Opposite
+open CategoryTheory Limits MonoidalCategory Opposite ZeroObject
 
 open scoped CategoryTheory.Functor
 
@@ -83,6 +88,70 @@ theorem torAmplitudeIn_singleFunctor_obj_of_flat
     · exact ObjectProperty.flat_of_isZero (HomologicalComplex.isZero_single_obj_X _ _ _ _ hq)
 
 end FlatSheaf
+
+/-! ### `Dctf` is a thick subcategory -/
+
+section Thick
+
+variable (X : Scheme.{u})
+
+/-- Finite Tor amplitude is a triangulated property of objects of `D(X_ét)`: the derived
+tensor product `- ⊗ᴸ F` is a triangulated functor, and concentration in an interval is stable
+under shifts and under extensions, with the interval shifted and widened. -/
+instance DerivedCategory.finiteTorAmplitude_isTriangulated :
+    (DerivedCategory.finiteTorAmplitude A X).IsTriangulated where
+  exists_zero := ⟨0, isZero_zero _, 0, 0, fun F ↦ by
+    have h : IsZero ((0 : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)) ⊗
+        (_root_.DerivedCategory.singleFunctor _ 0).obj F) :=
+      Functor.map_isZero ((-⊗ᴸ-(X)[A]).flip.obj
+        ((_root_.DerivedCategory.singleFunctor _ 0).obj F)) (isZero_zero _)
+    exact ⟨(_root_.DerivedCategory.isGE_iff _ _).2 fun q _ ↦ Functor.map_isZero _ h,
+      (_root_.DerivedCategory.isLE_iff _ _).2 fun q _ ↦ Functor.map_isZero _ h⟩⟩
+  isStableUnderShiftBy n := ⟨fun M ⟨a, b, h⟩ ↦ ⟨a - n, b - n, fun F ↦ by
+    let := _root_.DerivedCategory.commShiftTensorRight
+      (K := (_root_.DerivedCategory.singleFunctor (Sheaf X.smallEtaleTopology A) 0).obj F)
+    obtain ⟨h₁, h₂⟩ := h F
+    let e := (((-⊗ᴸ-(X)[A]).flip.obj
+      ((_root_.DerivedCategory.singleFunctor _ 0).obj F)).commShiftIso n).app M
+    have hge := _root_.DerivedCategory.TStructure.t.isGE_shift (M ⊗
+      (_root_.DerivedCategory.singleFunctor (Sheaf X.smallEtaleTopology A) 0).obj F) a n (a - n)
+    have hle := _root_.DerivedCategory.TStructure.t.isLE_shift (M ⊗
+      (_root_.DerivedCategory.singleFunctor (Sheaf X.smallEtaleTopology A) 0).obj F) b n (b - n)
+    exact ⟨@Triangulated.TStructure.isGE_of_iso _ _ _ _ _ _ _ _root_.DerivedCategory.TStructure.t
+        _ _ e.symm (a - n) hge,
+      @Triangulated.TStructure.isLE_of_iso _ _ _ _ _ _ _ _root_.DerivedCategory.TStructure.t
+        _ _ e.symm (b - n) hle⟩⟩⟩
+  ext₂' T hT := by
+    rintro ⟨a, b, h₁⟩ ⟨c, d, h₃⟩
+    refine ObjectProperty.le_isoClosure _ _ ⟨min a c, max b d, fun F ↦ ?_⟩
+    let G := (-⊗ᴸ-(X)[A]).flip.obj ((_root_.DerivedCategory.singleFunctor _ 0).obj F)
+    let := _root_.DerivedCategory.commShiftTensorRight
+      (K := (_root_.DerivedCategory.singleFunctor (Sheaf X.smallEtaleTopology A) 0).obj F)
+    have : G.IsTriangulated := _root_.DerivedCategory.isTriangulated_tensorRight
+      (K := (_root_.DerivedCategory.singleFunctor (Sheaf X.smallEtaleTopology A) 0).obj F)
+    obtain ⟨g₁, l₁⟩ := (h₁ F).mono (min_le_left a c) (le_max_left b d)
+    obtain ⟨g₃, l₃⟩ := (h₃ F).mono (min_le_right a c) (le_max_right b d)
+    exact ⟨_root_.DerivedCategory.TStructure.t.isGE₂ _ (G.map_distinguished _ hT) _ g₁ g₃,
+      _root_.DerivedCategory.TStructure.t.isLE₂ _ (G.map_distinguished _ hT) _ l₁ l₃⟩
+
+variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
+
+/-- `Dctf(X, Λ)` is a triangulated subcategory of `D(X_ét, Λ)`, for a finite ring `Λ`. -/
+instance DerivedCategory.constructibleFiniteTor_isTriangulated :
+    (DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} Λ) X).IsTriangulated :=
+  inferInstanceAs (boundedConstructible (ModuleCat.{u + 1} Λ) X ⊓
+    DerivedCategory.finiteTorAmplitude (ModuleCat.{u + 1} Λ) X).IsTriangulated
+
+/-- `Dctf(X, Λ)` is stable under retracts, for a finite ring `Λ`. Together with
+`DerivedCategory.constructibleFiniteTor_isTriangulated`, it is a thick subcategory of
+`D(X_ét, Λ)`. -/
+instance DerivedCategory.constructibleFiniteTor_isStableUnderRetracts :
+    (DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} Λ) X).IsStableUnderRetracts where
+  of_retract e h := ⟨(boundedConstructible _ X).prop_of_retract e h.1,
+    (DerivedCategory.finiteTorAmplitude _ X).prop_of_retract e h.2⟩
+
+end Thick
+
 
 /-! ### Generation of `Dctf` -/
 
@@ -244,6 +313,70 @@ theorem ctf_generated_by_rightDerivedLowerStar_rightDerivedLowerShriek (Λ : Typ
   have := hPc n
   exact P.prop_of_iso ((rightDerivedLowerStarIdIso Λ X).app _)
     (prop_rightDerivedLowerStar_of_flat Λ X P hP ⊤ (𝟙 X) (by simp) (Pc.X n) (hPflat n))
+
+/-- The generators of `Dctf(X, Λ)` of `sk-lem-sf-ctf-generation` and
+`lem-trf-devissage-generation`: the objects isomorphic to `Rg_* Rj_! L`, where `U` is a stratum of
+a stratification of `X`, `j : U ⟶ Ū` is an open immersion and `g : Ū ⟶ X` a closed immersion
+with image the closure of `U`, and `L` is a lisse (finite locally constant) flat sheaf of
+`Λ`-modules on `U`, placed in degree `0`. -/
+def ctfGenerators (X : Scheme.{u}) :
+    ObjectProperty (_root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :=
+  fun K ↦ ∃ (str : Scheme.Stratification X) (i : Fin str.n) (Ubar : Scheme.{u})
+    (j : str.domain i ⟶ Ubar) (_ : IsOpenImmersion j) (_ : HasCompactification j)
+    (g : Ubar ⟶ X) (_ : IsClosedImmersion g), Set.range (j ≫ g) = str.stratum i ∧
+    Set.range g = _root_.closure (str.stratum i) ∧
+    ∃ (L : Sheaf (str.domain i).smallEtaleTopology (ModuleCat.{u + 1} Λ)),
+      IsFiniteLocallyConstantSheaf L ∧ ObjectProperty.flat L ∧
+      Nonempty (K ≅ (R((g)_*[ModuleCat.{u + 1} Λ])).obj ((R(j)_![ModuleCat.{u + 1} Λ]).obj
+        ((_root_.DerivedCategory.singleFunctor _ 0).obj L)))
+
+omit [Finite Λ] in
+/-- The zero object is a generator, for the trivial stratification and `L = 0`. -/
+instance (X : Scheme.{u}) : (ctfGenerators Λ X).Nonempty :=
+  ⟨_, Stratification.trivial X, (0 : Fin 1), X, 𝟙 X,
+    (inferInstance : IsOpenImmersion (𝟙 X)), (inferInstance : HasCompactification (𝟙 X)), 𝟙 X,
+    inferInstance, Set.range_eq_univ.2 fun x ↦ ⟨x, rfl⟩, by simp, 0,
+    IsFiniteLocallyConstantSheaf.of_isZero (isZero_zero _),
+    ObjectProperty.flat_of_isZero (isZero_zero _), ⟨Iso.refl _⟩⟩
+
+/-- Blueprint `lem-trf-devissage-generation`: Constructible dévissage, the thick-subcategory
+generation.
+
+Let `X` be a finite-type scheme over a field `k` and `Λ` a finite ring whose exponent is
+invertible on `X`. Then `Dctf(X, Λ)` *is* the thick subcategory of `D(X_ét, Λ)` generated by the
+objects `Rg_* Rj_! L` of `ctfGenerators` (`ObjectProperty.triangEnvelope`, the smallest
+triangulated subcategory stable under retracts containing them).
+
+The generators lie in `Dctf(X, Λ)`: a lisse flat sheaf has Tor amplitude `[0, 0]`
+(`torAmplitudeIn_singleFunctor_obj_of_flat`), and `Rj_!`, `Rg_*` preserve `Dctf`
+(`constructibleFiniteTor_rightDerivedLowerShriek`, `constructibleFiniteTor_rightDerivedLowerStar`);
+and `Dctf(X, Λ)` is thick. Conversely every object of `Dctf(X, Λ)` lies in the envelope by
+`ctf_generated_by_rightDerivedLowerStar_rightDerivedLowerShriek`. Constant coefficients
+`L = Λ_U` do not suffice, see there. -/
+theorem constructibleFiniteTor_eq_triangEnvelope_ctfGenerators {k : Type u} [Field k]
+    {X : Scheme.{u}} (aX : X ⟶ Spec (.of k)) [LocallyOfFiniteType aX] [QuasiCompact aX]
+    [HasInvertibleExponent Λ X] :
+    constructibleFiniteTor (ModuleCat.{u + 1} Λ) X = (ctfGenerators Λ X).triangEnvelope := by
+  have : CompactSpace X := QuasiCompact.compactSpace_of_compactSpace aX
+  have : IsNoetherian X := { __ := LocallyOfFiniteType.isLocallyNoetherian aX }
+  refine le_antisymm (fun K hK ↦ ?_) ((ObjectProperty.triangEnvelope_le_iff _).2 ?_)
+  · refine ctf_generated_by_rightDerivedLowerStar_rightDerivedLowerShriek Λ X _
+      (fun str i Ubar j _ _ g _ h₁ h₂ L _ hL ↦ ?_) K hK
+    exact ObjectProperty.le_triangEnvelope _ _
+      ⟨str, i, Ubar, j, inferInstance, inferInstance, g, inferInstance, h₁, h₂, L, inferInstance,
+        hL, ⟨Iso.refl _⟩⟩
+  · rintro K ⟨str, i, Ubar, j, _, _, g, _, -, -, L, _, hL, ⟨e⟩⟩
+    refine (constructibleFiniteTor _ X).prop_of_iso e.symm ?_
+    have : HasInvertibleExponent Λ Ubar := .of_hom g
+    have : TopologicalSpace.NoetherianSpace (str.domain i) :=
+      (str.immersion i).isEmbedding.isInducing.noetherianSpace
+    have : QuasiCompact j := ⟨fun U _ _ ↦ TopologicalSpace.NoetherianSpace.isCompact _⟩
+    have : IsConstructibleSheaf L := IsFiniteLocallyConstantSheaf.isConstructibleSheaf ‹_›
+    exact constructibleFiniteTor_rightDerivedLowerStar Λ (g ≫ aX) aX g rfl
+      (constructibleFiniteTor_rightDerivedLowerShriek Λ (g ≫ aX) j
+        ⟨boundedConstructible_singleFunctor_obj L 0, 0, 0,
+          torAmplitudeIn_singleFunctor_obj_of_flat Λ L hL⟩)
+
 
 end Generation
 

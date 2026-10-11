@@ -47,9 +47,11 @@ is `AlgebraicGeometry.Scheme.Hom.ker_pullback_snd` in `map`/`comap` language.
   finite intersections, and `AlgebraicGeometry.Scheme.IdealSheafData.comap_iInf_map_of_flat`:
   descent of ideal sheaves along a finite family of flat quasi-compact morphisms;
 - `AlgebraicGeometry.Scheme.IdealSheafData.exists_comap_ι_eq`: ideal sheaves on the affine opens
-  compatible with restriction to basic opens glue, and
-  `AlgebraicGeometry.Scheme.IdealSheafData.exists_forall_le_ker_iff`: closed subfunctors which
-  are affine-locally closed subschemes are closed subschemes.
+  compatible with restriction to basic opens glue;
+- `AlgebraicGeometry.Scheme.IdealSheafData.eq_of_forall_le_ker_iff`: on an affine scheme, an
+  ideal sheaf is determined by the morphisms from affine schemes whose kernel contains it;
+- `AlgebraicGeometry.Scheme.IdealSheafData.le_of_forall_comap_le`: an inclusion of ideal sheaves
+  may be checked on an open cover.
 
 The last section computes sections of the inverse image ideal sheaf:
 `AlgebraicGeometry.Scheme.IdealSheafData.ideal_map_appLE_le_ideal_comap` and
@@ -319,113 +321,6 @@ theorem exists_comap_ι_eq (K : ∀ U : X.affineOpens, U.1.toScheme.IdealSheafDa
   rwa [Ideal.map_map, Ideal.map_map, ← CommRingCat.hom_comp, Iso.hom_inv_id, CommRingCat.hom_id,
     Ideal.map_id, Ideal.map_id] at this
 
-/-- An ideal sheaf pulls back into the kernel of `g` along `f` if and only if it lies in the
-kernel of `g ≫ f`: both say that its pullback along `g ≫ f` vanishes. -/
-lemma comap_le_ker_iff {W : Scheme.{u}} (I : Y.IdealSheafData) (f : X ⟶ Y) (g : W ⟶ X) :
-    I.comap f ≤ g.ker ↔ I ≤ (g ≫ f).ker := by
-  rw [← map_bot, ← map_bot, le_map_iff_comap_le, le_map_iff_comap_le, comap_comp]
-
-/-- An ideal sheaf lies in the kernel of `g` if and only if its pullback along `g` vanishes. -/
-lemma le_ker_iff_comap_eq_bot (I : Y.IdealSheafData) (g : X ⟶ Y) :
-    I ≤ g.ker ↔ I.comap g = ⊥ :=
-  ⟨fun h ↦ le_bot_iff.mp ((comap_mono g h).trans_eq g.comap_ker_self),
-    le_ker_of_comap_eq_bot g⟩
-
-/-- Comparison of ideal sheaves is local: `A ≤ B` as soon as every point lies in the range of
-an open immersion along which the pullback of `A` is contained in that of `B`. -/
-theorem le_of_forall_exists_comap_le {A B : Y.IdealSheafData}
-    (H : ∀ y : Y, ∃ (Z : Scheme.{u}) (j : Z ⟶ Y), IsOpenImmersion j ∧ y ∈ Set.range j ∧
-      A.comap j ≤ B.comap j) : A ≤ B := by
-  refine le_of_iSup_eq_top (ι := {U : Y.affineOpens //
-      ∃ (Z : Scheme.{u}) (j : Z ⟶ Y) (_ : IsOpenImmersion j),
-        U.1 ≤ j.opensRange ∧ A.comap j ≤ B.comap j}) (fun U ↦ U.1) ?_ ?_
-  · rw [eq_top_iff]
-    intro y _
-    obtain ⟨Z, j, hj, hy, hAB⟩ := H y
-    obtain ⟨_, ⟨U, hU, rfl⟩, hyU, hUj⟩ := Y.isBasis_affineOpens.exists_subset_of_mem_open
-      (a := y) hy j.opensRange.2
-    exact TopologicalSpace.Opens.mem_iSup.mpr ⟨⟨⟨U, hU⟩, Z, j, hj, hUj, hAB⟩, hyU⟩
-  · rintro ⟨U, Z, j, hj, hU, hAB⟩
-    have himg : j ''ᵁ (j ⁻¹ᵁ U.1) = U.1 := by
-      rw [Scheme.Hom.image_preimage_eq_opensRange_inf, inf_eq_right.mpr hU]
-    have hcongr : (⟨j ''ᵁ (j ⁻¹ᵁ U.1),
-        (U.2.preimage_of_isOpenImmersion j hU).image_of_isOpenImmersion j⟩ :
-        Y.affineOpens) = U := Subtype.ext himg
-    have h := le_def.mp hAB ⟨j ⁻¹ᵁ U.1, U.2.preimage_of_isOpenImmersion j hU⟩
-    rw [ideal_comap_of_isOpenImmersion, ideal_comap_of_isOpenImmersion,
-      Ideal.comap_le_comap_iff_of_surjective _
-        (ConcreteCategory.bijective_of_isIso (j.appIso _).inv).2] at h
-    change A.ideal U ≤ B.ideal U
-    rw [← hcongr]
-    exact h
-
-/-- Containment in a kernel is local on the source: `I ≤ a.ker` as soon as every point of the
-source has an open neighbourhood `U` with `I ≤ (U.ι ≫ a).ker`. -/
-theorem le_ker_of_forall_exists_le_ker_comp_ι {W : Scheme.{u}} (I : Y.IdealSheafData) (a : W ⟶ Y)
-    (H : ∀ w : W, ∃ U : W.Opens, w ∈ U ∧ I ≤ (U.ι ≫ a).ker) : I ≤ a.ker := by
-  rw [le_ker_iff_comap_eq_bot, ← le_bot_iff]
-  refine le_of_forall_exists_comap_le fun w ↦ ?_
-  obtain ⟨U, hw, hU⟩ := H w
-  refine ⟨U, U.ι, inferInstance, by simpa using hw, ?_⟩
-  rw [← comap_comp, (le_ker_iff_comap_eq_bot _ _).mp hU]
-  exact bot_le
-
-/-- **Closed subfunctors glue.** Let `P` be a property of morphisms into `X` which is stable
-under precomposition and local on the source. Suppose that over every affine open `U` of `X`
-the morphisms from affine schemes into `U` satisfying `P` are exactly those factoring through
-a closed subscheme of `U`. Then there is a closed subscheme of `X`, given by its ideal sheaf
-`J`, such that a morphism `a` into `X` satisfies `P` if and only if it factors through it,
-i.e. `J ≤ a.ker`.
-
-The closed subschemes of the affine opens are unique, hence compatible with restriction, and
-glue by `exists_comap_ι_eq`. -/
-theorem exists_forall_le_ker_iff (P : ∀ ⦃W : Scheme.{u}⦄, (W ⟶ X) → Prop)
-    (hP : ∀ ⦃W W' : Scheme.{u}⦄ (b : W' ⟶ W) (a : W ⟶ X), P a → P (b ≫ a))
-    (hloc : ∀ ⦃W : Scheme.{u}⦄ (a : W ⟶ X), (∀ w : W, ∃ U : W.Opens, w ∈ U ∧ P (U.ι ≫ a)) →
-      P a)
-    (haff : ∀ U : X.affineOpens, ∃ K : U.1.toScheme.IdealSheafData,
-      ∀ ⦃W : Scheme.{u}⦄ [IsAffine W] (a : W ⟶ U.1), K ≤ a.ker ↔ P (a ≫ U.1.ι)) :
-    ∃ J : X.IdealSheafData, ∀ ⦃W : Scheme.{u}⦄ (a : W ⟶ X), J ≤ a.ker ↔ P a := by
-  choose K hK using haff
-  -- the closed subscheme of an affine open is unique
-  have uniq (U : X.affineOpens) (K' : U.1.toScheme.IdealSheafData)
-      (hK' : ∀ ⦃W : Scheme.{u}⦄ [IsAffine W] (a : W ⟶ U.1), K' ≤ a.ker ↔ P (a ≫ U.1.ι)) :
-      K' = K U := by
-    have : IsAffine U.1.toScheme := U.2
-    have : IsAffine K'.subscheme := isAffine_of_isAffineHom K'.subschemeι
-    have : IsAffine (K U).subscheme := isAffine_of_isAffineHom (K U).subschemeι
-    refine le_antisymm ?_ ?_
-    · rw [← ker_subschemeι (K U)]
-      exact (hK' _).mpr ((hK U _).mp (ker_subschemeι (K U)).ge)
-    · rw [← ker_subschemeι K']
-      exact (hK U _).mpr ((hK' _).mp (ker_subschemeι K').ge)
-  have compat (U : X.affineOpens) (f : Γ(X, U)) :
-      (K U).comap (X.homOfLE (X.basicOpen_le f)) = K (X.affineBasicOpen f) := by
-    refine uniq (X.affineBasicOpen f) _ ?_
-    intro W _ a
-    rw [comap_le_ker_iff, hK, Category.assoc, Scheme.homOfLE_ι]
-    rfl
-  obtain ⟨J, hJ⟩ := exists_comap_ι_eq K compat
-  refine ⟨J, fun W a ↦ ?_⟩
-  -- on an affine open `V` of `W` mapping into an affine open `U` of `X` both sides agree
-  have key (w : W) : ∃ V : W.Opens, w ∈ V ∧ (J ≤ (V.ι ≫ a).ker ↔ P (V.ι ≫ a)) := by
-    obtain ⟨_, ⟨U, hU, rfl⟩, hwU, -⟩ := X.isBasis_affineOpens.exists_subset_of_mem_open
-      (Set.mem_univ (a w)) isOpen_univ
-    obtain ⟨_, ⟨V, hV, rfl⟩, hwV, hVU⟩ := W.isBasis_affineOpens.exists_subset_of_mem_open
-      (a := w) hwU (a ⁻¹ᵁ U).2
-    let V' : W.affineOpens := ⟨V, hV⟩
-    have : IsAffine V'.1.toScheme := V'.2
-    refine ⟨V'.1, hwV, ?_⟩
-    rw [← a.resLE_comp_ι (U := U) (V := V'.1) (show V'.1 ≤ a ⁻¹ᵁ U from hVU), ← comap_le_ker_iff,
-      hJ ⟨U, hU⟩, hK ⟨U, hU⟩]
-  constructor
-  · refine fun h ↦ hloc a fun w ↦ ?_
-    obtain ⟨V, hwV, hV⟩ := key w
-    exact ⟨V, hwV, hV.mp (h.trans (Scheme.Hom.le_ker_comp V.ι a))⟩
-  · refine fun h ↦ le_ker_of_forall_exists_le_ker_comp_ι J a fun w ↦ ?_
-    obtain ⟨V, hwV, hV⟩ := key w
-    exact ⟨V, hwV, hV.mpr (hP _ _ h)⟩
-
 end Gluing
 
 section Sections
@@ -535,5 +430,42 @@ lemma isPullback_comap {Y Y' : Scheme.{u}} (I : Y.IdealSheafData) (h : Y' ⟶ Y)
   IsPullback.of_iso_pullback ⟨by simp⟩ (I.comapIso h) (by simp) rfl
 
 end Pullback
+
+section Kernel
+
+/-- The pullback of `K` along `h` is contained in the kernel of `a` if and only if `K` is
+contained in the kernel of `a ≫ h`. -/
+lemma comap_le_ker_iff {W : Scheme.{u}} (K : Y.IdealSheafData) (h : X ⟶ Y) (a : W ⟶ X) :
+    K.comap h ≤ a.ker ↔ K ≤ (a ≫ h).ker := by
+  rw [← map_bot a, ← map_bot (a ≫ h), le_map_iff_comap_le, le_map_iff_comap_le, comap_comp]
+
+/-- An ideal sheaf on an affine scheme is determined by the morphisms from affine schemes whose
+kernel contains it: test with the inclusions of the closed subschemes. -/
+lemma eq_of_forall_le_ker_iff [IsAffine X] {K₁ K₂ : X.IdealSheafData}
+    (H : ∀ (W : Scheme.{u}) [IsAffine W] (a : W ⟶ X), K₁ ≤ a.ker ↔ K₂ ≤ a.ker) : K₁ = K₂ := by
+  have (K : X.IdealSheafData) : IsAffine K.subscheme := isAffine_of_isAffineHom K.subschemeι
+  refine le_antisymm ?_ ?_
+  · simpa only [ker_subschemeι] using (H _ K₂.subschemeι).2 (ker_subschemeι K₂).ge
+  · simpa only [ker_subschemeι] using (H _ K₁.subschemeι).1 (ker_subschemeι K₁).ge
+
+/-- An inclusion of ideal sheaves can be checked after pullback along a family of open
+immersions jointly covering the scheme. -/
+lemma le_of_forall_comap_le {ι : Type*} {Z : ι → Scheme.{u}} (j : ∀ i, Z i ⟶ X)
+    [∀ i, IsOpenImmersion (j i)] (hj : ⨆ i, (j i).opensRange = ⊤) {A B : X.IdealSheafData}
+    (H : ∀ i, A.comap (j i) ≤ B.comap (j i)) : A ≤ B := by
+  refine le_of_iSup_eq_top (ι := Σ i, (Z i).affineOpens)
+    (fun p ↦ ⟨j p.1 ''ᵁ p.2.1, p.2.2.image_of_isOpenImmersion _⟩) ?_ fun p ↦ ?_
+  · rw [eq_top_iff]
+    intro x _
+    obtain ⟨i, z, rfl⟩ := TopologicalSpace.Opens.mem_iSup.mp (hj.ge (Set.mem_univ x))
+    obtain ⟨_, ⟨W, hW, rfl⟩, hzW, -⟩ :=
+      (Z i).isBasis_affineOpens.exists_subset_of_mem_open (Set.mem_univ z) isOpen_univ
+    exact TopologicalSpace.Opens.mem_iSup.mpr ⟨⟨i, ⟨W, hW⟩⟩, ⟨z, hzW, rfl⟩⟩
+  · have h := H p.1 p.2
+    rw [ideal_comap_of_isOpenImmersion, ideal_comap_of_isOpenImmersion] at h
+    exact (Ideal.comap_le_comap_iff_of_surjective _
+      (j p.1 |>.appIso p.2.1).commRingCatIsoToRingEquiv.symm.surjective _ _).mp h
+
+end Kernel
 
 end AlgebraicGeometry.Scheme.IdealSheafData
