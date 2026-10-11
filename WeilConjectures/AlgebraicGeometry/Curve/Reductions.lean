@@ -72,7 +72,32 @@ abelian étale sheaves on `X`. Then for every `q` the canonical map
 every class on the colimit comes from some `D_λ`, and a class on `D_λ` which dies on the colimit
 already dies on some `D_μ`, `λ ⟶ μ`. The compatibility with the pullback along a field
 extension is the naturality `AlgebraicGeometry.Etale.cohomologyMap_map` of the pullback maps.
-The statement holds for arbitrary (not only torsion) abelian sheaves.
+The statement holds for arbitrary (not only torsion) abelian sheaves, and for filtered diagrams
+indexed by a category in the universe `u + 1` of the coefficients, such as the diagram of
+finitely generated subgroups of an abelian group of that universe; the case of a diagram
+indexed in the universe `u` is `AlgebraicGeometry.Scheme.H_map_isColimit_of_isFiltered`.
+(blueprint: `lemma-weil-pbc-curve-filtered-cohomology`) -/
+@[stacks 03Q6]
+theorem Scheme.H_map_isColimit_of_isFiltered_of_large (X : Scheme.{u}) [CompactSpace X]
+    [QuasiSeparatedSpace X] {J : Type (u + 1)} [SmallCategory J] [IsFiltered J]
+    {D : J ⥤ Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}} {c : Cocone D}
+    (hc : IsColimit c) (q : ℕ) :
+    (∀ x : Sheaf.H c.pt q, ∃ (j : J) (y : Sheaf.H (D.obj j) q),
+      Sheaf.H.map (c.ι.app j) q y = x) ∧
+    ∀ (j : J) (y : Sheaf.H (D.obj j) q), Sheaf.H.map (c.ι.app j) q y = 0 →
+      ∃ (j' : J) (φ : j ⟶ j'), Sheaf.H.map (D.map φ) q y = 0 :=
+  sorry
+
+/-- **Étale cohomology commutes with filtered colimits on a qcqs scheme.** Let `X` be
+quasi-compact and quasi-separated and let `c` be a colimit cocone of a filtered diagram `D` of
+abelian étale sheaves on `X`. Then for every `q` the canonical map
+`colim_λ Hᵠ(X, D_λ) ⟶ Hᵠ(X, colim_λ D_λ)` is bijective; this is spelled out elementwise:
+every class on the colimit comes from some `D_λ`, and a class on `D_λ` which dies on the colimit
+already dies on some `D_μ`, `λ ⟶ μ`. The compatibility with the pullback along a field
+extension is the naturality `AlgebraicGeometry.Etale.cohomologyMap_map` of the pullback maps.
+The statement holds for arbitrary (not only torsion) abelian sheaves. This is the case of a
+diagram indexed in the universe `u` of
+`AlgebraicGeometry.Scheme.H_map_isColimit_of_isFiltered_of_large`.
 (blueprint: `lemma-weil-pbc-curve-filtered-cohomology`) -/
 @[stacks 03Q6]
 theorem Scheme.H_map_isColimit_of_isFiltered (X : Scheme.{u}) [CompactSpace X]
@@ -82,8 +107,15 @@ theorem Scheme.H_map_isColimit_of_isFiltered (X : Scheme.{u}) [CompactSpace X]
     (∀ x : Sheaf.H c.pt q, ∃ (j : J) (y : Sheaf.H (D.obj j) q),
       Sheaf.H.map (c.ι.app j) q y = x) ∧
     ∀ (j : J) (y : Sheaf.H (D.obj j) q), Sheaf.H.map (c.ι.app j) q y = 0 →
-      ∃ (j' : J) (φ : j ⟶ j'), Sheaf.H.map (D.map φ) q y = 0 :=
-  sorry
+      ∃ (j' : J) (φ : j ⟶ j'), Sheaf.H.map (D.map φ) q y = 0 := by
+  have : IsFiltered (AsSmall.{u + 1} J) := IsFiltered.of_equivalence AsSmall.equiv
+  obtain ⟨h₁, h₂⟩ := X.H_map_isColimit_of_isFiltered_of_large
+    (IsColimit.whiskerEquivalence hc AsSmall.equiv.symm) q
+  refine ⟨fun x ↦ ?_, fun j y hy ↦ ?_⟩
+  · obtain ⟨j, y, hy⟩ := h₁ x
+    exact ⟨AsSmall.down.obj j, y, hy⟩
+  · obtain ⟨j', φ, hφ⟩ := h₂ (AsSmall.up.obj j) y hy
+    exact ⟨AsSmall.down.obj j', AsSmall.down.map φ, hφ⟩
 
 /-! ### Dévissage -/
 
