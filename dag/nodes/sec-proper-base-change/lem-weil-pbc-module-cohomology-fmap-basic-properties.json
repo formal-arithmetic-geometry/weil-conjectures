@@ -252,5 +252,23 @@
   "by": "L",
   "result": "accepted",
   "note": "8 steps (agent proof from Stacks 01F7-01FB and the derived-category lemmas): the identifications iota_J and the independence of the module structure; linearity; degree zero via the left-exact-resolution node; the identity case via lifts unique up to homotopy; clause (4) by a common resolution on Y, a lift between the two complexes J'' and J' (acyclic-map-to-injective nullhomotopy, K-injective Hom), homotopy, and the computation. No new nodes; the sibling functorial node is not cited (it will cite clause (3) of this one)."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ModuleCohomologyFMapBasicProperties",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.moduleCohomologyFMap_basic_properties",
+  "file": "lean/Sheaf/AlgebraicGeometry/ModuleCohomologyFMapBasicProperties.lean",
+  "statement": "theorem moduleCohomologyFMap_basic_properties {X Y : Scheme.{u}} (h : X ⟶ Y) {G : SheafOfModules.{u} Y.ringCatSheaf} {F : SheafOfModules.{u} X.ringCatSheaf} (φ : G ⟶ (pushforward h).obj F) (p : ℕ) : (∃ L : (Y.toRingedSpace.moduleCohomology p).obj G ⟶ (ModuleCat.restrictScalars h.appTop.hom).obj ((X.toRingedSpace.moduleCohomology p).obj F), (forget₂ _ AddCommGrpCat).map L = moduleCohomologyFMap h φ p) ∧ (∃ eG : (Y.toRingedSpace.moduleCohomology 0).obj G ≅ (RingedSpace.globalSectionsFunctor Y.toRingedSpace).obj G, ∃ eF : (X.toRingedSpace.moduleCohomology 0).obj F ≅ (RingedSpace.globalSectionsFunctor X.toRingedSpace).obj F, (forget₂ _ AddCommGrpCat).map eG.hom ≫ (forget₂ _ AddCommGrpCat).map ((RingedSpace.globalSectionsFunctor Y.toRingedSpace).map φ) = moduleCohomologyFMap h φ 0 ≫ (forget₂ _ AddCommGrpCat).map eF.hom) ∧ (∀ (Z : Scheme.{u}) (GZ FZ : SheafOfModules.{u} Z.ringCatSheaf) (ψ : GZ ⟶ FZ), moduleCohomologyFMap (𝟙 Z) ψ p = (forget₂ _ AddCommGrpCat).map ((Z.toRingedSpace.moduleCohomology p).map ψ)) ∧ (∀ (U : Y.Opens), ∃ κ : (restrictFunctor U.ι).obj G ≅ (tensorPullback U.ι).obj G, moduleCohomologyFMap U.ι ((restrictAdjunction U.ι).unit.app G) p ≫ (forget₂ _ AddCommGrpCat).map (((U : Scheme).toRingedSpace.moduleCohomology p).map κ.hom) = moduleCohomologyFMap U.ι ((Classical.choose (exists_tensorPullbackAdjunction U.ι)).unit.app G) p)",
+  "branch": "sheaf-dag",
+  "by": "R1",
+  "date": "2026-10-12",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "R1",
+  "result": "pass",
+  "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
  }
 }
