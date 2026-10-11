@@ -256,5 +256,24 @@
   "by": "L",
   "result": "accepted",
   "note": "10 steps following Stacks 04KM with the 'details omitted' step written out: characteristic 0 via the existing separability node; finite transcendence basis (new 030F leaf) and finiteness of K over k(x) (new 09GH leaf), the separable closure K_s and the strong induction on [K : K_s] for the pair (extension, basis); the case 1; the choice of beta, alpha, P; k' = k(s^{1/p}) for the coefficients and E' = k'(x^{1/p}) making the coefficients of P p-th powers; adjoining p-th roots is finite purely inseparable; x^{1/p} is a transcendence basis of L/k' and L/E' finite (new compositum leaf, Adjoin/Basic.lean:190); beta becomes separable by 031V (2) (new unsplit node) and injectivity of Frobenius; the degree drops by the compositum bound and multiplicativity (new 09G9 leaf); induction and transitivity of finite purely inseparable extensions (new 09HG leaf). Six new nodes, five Mathlib leaves with lines verified by L (FinTrdeg.lean:36/86, Adjoin/Basic.lean:590/190, Dimension/Free.lean:68, PurelyInseparable/Basic.lean:260)."
+ },
+ "lean": {
+  "module": "Sheaf.FieldTheory.MakeSeparablyGenerated",
+  "declaration": "FieldExtension.exists_finitePurelyInseparable_separablyGenerated",
+  "file": "lean/Sheaf/FieldTheory/MakeSeparablyGenerated.lean",
+  "statement": "theorem exists_finitePurelyInseparable_separablyGenerated (k : Type u) (K : Type v) [Field k] [Field K] [Algebra k K] (hfg : (⊤ : IntermediateField k K).FG) : ∃ (k' : Type (max u v)) (hk' : Field k') (akk' : Algebra k k') (K' : Type (max u v)) (hK' : Field K') (aKK' : Algebra K K') (akK' : Algebra k' K'), letI := hk' letI := akk' letI := hK' letI := aKK' letI := akK' Module.Finite k k' ∧ IsPurelyInseparable k k' ∧ Module.Finite K K' ∧ IsPurelyInseparable K K' ∧ Algebra.IsSeparablyGenerated k' K' ∧ (algebraMap k' K').comp (algebraMap k k') = (algebraMap K K').comp (algebraMap k K)",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-msg1127"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-msg1127",
+  "group": "C1",
+  "result": "fix",
+  "note": "k,K fields+[Algebra k K]; finite generation now (⊤ : IntermediateField k K).FG (H1 acf0900cf form, was inline ∃ n a adjoin); k',K' in Type (max u v) existential (not vacuous: finite exts of K fit); Module.Finite ∧ IsPurelyInseparable both sides (char 0 forces equality, matches node); Algebra.IsSeparablyGenerated k' K' recorded; square of algebraMaps commutes"
  }
 }
