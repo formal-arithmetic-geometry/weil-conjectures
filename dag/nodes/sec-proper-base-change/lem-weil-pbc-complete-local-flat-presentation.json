@@ -212,5 +212,23 @@
   "summary": "Read Stacks 07NN and its proof, 032A, 07NL, 07NJ, 07DY, 00NQ, 0327 (all tags checked in tags/tags). The node keeps only the flat-presentation clause of 07NN, which is all that its citer lem-weil-pbc-fs-adic-local-flat (step 2) uses; the statement is unchanged. Six steps following the source: Cohen structure theorem for A and B (new node, 032A(2)); lift R -> S_0 by formal smoothness of power series over Q or Z (new node, 07NL (1),(3)) and the existing 07NJ node, with closedness of the kernel written out; S = Lambda_B[[y,z]] and phi'(x_i) = phi(x_i) + y_i via a new universal-property node; commutativity by its uniqueness clause; flatness via 00NQ and 07DY, the parameters p, t, z generating m_S directly (no Nakayama). Mathlib lacks the Cohen structure theorem; three new unsplit nodes. The existing node lem-weil-pbc-complete-local-map-regular-presentation (created 2026-10-10 for 07NN from lem-weil-pbc-fs-adic-lift-from-residue-field, merged 08:49, ten minutes before this node) states a strictly stronger form of 07NN (regular R, S, parameters, residue field iso, flat): a near-duplicate, reported to the lead.",
   "blueprint": "the item serves thm-weil-pbc-finite-etale-lifting at step 7 of its split (source: Lemma 0GS2, proof: the essential-surjectivity paragraphs) (via 9 created nodes); its steps realize: 07NN proof: Cohen presentations of A and B (032A), lift by formal smoothness (07NL, 07NJ), adjoin variables y and map x_i to phi(x_i)+y_i, flatness by 00NQ and 07DY; only the flat-presentation clause (entry written by L at review; the worker predates the rule of 2026-10-10)"
  },
- "reviewed": "2026-10-10 L: 6 steps checked against the 07NN proof for the flatness clause only: Cohen surjections (new 032A node), lift by 07NL (new) and 07NJ with the kernel shown closed, S = Lambda_B[[y,z]] and phi'(x_i) = phi(x_i) + y_i via the universal property (new node; uniqueness among all ring maps), (p, t, z) generate m_S so p, t is a regular sequence (00NQ) and R -> S is flat (07DY); citer fs-adic-local-flat step 2 matches"
+ "reviewed": "2026-10-10 L: 6 steps checked against the 07NN proof for the flatness clause only: Cohen surjections (new 032A node), lift by 07NL (new) and 07NJ with the kernel shown closed, S = Lambda_B[[y,z]] and phi'(x_i) = phi(x_i) + y_i via the universal property (new node; uniqueness among all ring maps), (p, t, z) generate m_S so p, t is a regular sequence (00NQ) and R -> S is flat (07DY); citer fs-adic-local-flat step 2 matches",
+ "lean": {
+  "module": "Sheaf.RingTheory.ExistsCompleteLocalFlatPresentation",
+  "declaration": "RingHom.exists_completeLocal_flat_presentation",
+  "file": "lean/Sheaf/RingTheory/ExistsCompleteLocalFlatPresentation.lean",
+  "statement": "theorem exists_completeLocal_flat_presentation {A : Type u} {B : Type v} [CommRing A] [CommRing B] [IsNoetherianRing A] [IsNoetherianRing B] [IsLocalRing A] [IsLocalRing B] [IsAdicComplete (IsLocalRing.maximalIdeal A) A] [IsAdicComplete (IsLocalRing.maximalIdeal B) B] (f : A →+* B) [IsLocalHom f] : ∃ (R S : Type (max u v)) (rR : CommRing R) (rS : CommRing S), letI := rR letI := rS ∃ (lR : IsLocalRing R) (lS : IsLocalRing S), letI := lR letI := lS IsNoetherianRing R ∧ IsNoetherianRing S ∧ IsAdicComplete (IsLocalRing.maximalIdeal R) R ∧ IsAdicComplete (IsLocalRing.maximalIdeal S) S ∧ ∃ (g : R →+* S) (q : R →+* A) (b : S →+* B), IsLocalHom g ∧ IsLocalHom q ∧ IsLocalHom b ∧ Function.Surjective q ∧ Function.Surjective b ∧ g.Flat ∧ b.comp g = f.comp q",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-clf1451",
+  "group": "H1",
+  "result": "pass",
+  "note": "A,B CommRing+IsNoetherianRing+IsLocalRing+IsAdicComplete(maximalIdeal) ; f local; ∃ R S : Type (max u v) CommRing/IsLocalRing/Noetherian/IsAdicComplete(maximalIdeal); g q b all IsLocalHom; q,b surjective; g.Flat = RingHom.Flat (#check); b.comp g = f.comp q; sorry-only axioms"
+ }
 }
