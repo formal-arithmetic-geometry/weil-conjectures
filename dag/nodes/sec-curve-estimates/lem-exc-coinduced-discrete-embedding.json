@@ -113,5 +113,23 @@
   "group": "J1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-cd3 (reviewer sub-agent of L); spot-checked: Repaired re-push after the 14:48 return (head f69490006); all three points checked repaired: (1) D1: the new node lem-exc-coinduced-functions-open-stabilizer is now the strictly smaller topological fact (continuous f from a profinite G to a discrete S is right-invariant under an open normal U), no modules in it, searches redone; step 2 derives Stab(f) contains U, hence open, from it; step 1 proves the action and continuity of translates citing only lem-exc-discrete-modules-abelian. (2) E7/B3: item statement and stmt_deps identical to sheaf-dag (git diff starts at proof). (3) F1: report reads etale-cohomology.tex, 04JP (definition-G-module-continuous, line 8786, remark at 8809: continuity iff open stabilizers, verified locally) and 0DVG, WANTED none, proof_origin by agent; step 3 now says left coset xH. Mathematics: new node true (fibres open, choose open normal V_x with xV_x in the fibre, finite subcover x_iV_i, U = intersection; tested on trivial G, finite discrete G, constant maps); step 3 continuity (orbit map constant on open left cosets), linearity, equivariance (xh)m=x(hm), injectivity by evaluation at 1, naturality correct. Item mathlib_searches text edits and status split are split-owned fields. FIX: dag/nodes/sec-curve-estimates/lem-exc-coinduced-functions-open-stabilizer.json: statement and stmt_deps: dropped the citation [lem-exc-discrete-modules-abelian] after 'discrete topological space' (that node does not define a discrete space; stmt_deps now []). Start Sat Oct 10 03:06:47 PM UTC 2026, end Sat Oct 10 03:07:22 PM UTC 2026.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.RepresentationTheory.CoinducedDiscreteEmbedding",
+  "declaration": "Rep.exists_coinduced_discrete_embedding",
+  "file": "lean/Sheaf/RepresentationTheory/CoinducedDiscreteEmbedding.lean",
+  "statement": "theorem exists_coinduced_discrete_embedding (G : Type u) [TopologicalSpace G] [Group G] [IsTopologicalGroup G] [CompactSpace G] [T2Space G] [TotallyDisconnectedSpace G] (A : Type v) [Ring A] [Finite A] : ∃ D : DiscreteContinuousRep.{v, u, max u w} A G ⥤ DiscreteContinuousRep.{v, u, max u w} A G, ∃ e : ∀ M : DiscreteContinuousRep.{v, u, max u w} A G, (D.obj M).obj.V ≃ₗ[A] LocallyConstant G M.obj.V, ∃ ι : 𝟭 (DiscreteContinuousRep.{v, u, max u w} A G) ⟶ D, (∀ (M : DiscreteContinuousRep.{v, u, max u w} A G) (h : G) (f : (D.obj M).obj.V) (x : G), e M ((D.obj M).obj.ρ h f) x = e M f (x * h)) ∧ (∀ (M N : DiscreteContinuousRep.{v, u, max u w} A G) (a : M ⟶ N) (f : (D.obj M).obj.V) (x : G), e N ((D.map a).hom.hom f) x = a.hom.hom (e M f x)) ∧ (∀ (M : DiscreteContinuousRep.{v, u, max u w} A G) (m : M.obj.V) (x : G), e M ((ι.app M).hom.hom m) x = M.obj.ρ x m) ∧ (∀ M : DiscreteContinuousRep.{v, u, max u w} A G, Function.Injective (ι.app M).hom.hom)",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "H1",
+  "result": "pass",
+  "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
  }
 }
