@@ -242,5 +242,24 @@
   "by": "L",
   "result": "accepted",
   "note": "7 steps follow Stacks 0CUG(1): cocone of residue fields, cofinal reduction, affine neighbourhood (open immersions preserve residue fields), translation to rings via the global-sections leaf, colimit of residue fields written out via the localization-colimit node (maps of fields injective), universal property, scheme-limit form via spec-colimit-limit and residue-field naturality. No new nodes; statement made precise (colimit in rings; I nonempty by 00D3). Tags 0CUG, 00D3 verified."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.LimitResidueField",
+  "declaration": "AlgebraicGeometry.exists_isColimit_residueField_of_isLimit",
+  "file": "lean/Sheaf/AlgebraicGeometry/LimitResidueField.lean",
+  "statement": "theorem exists_isColimit_residueField_of_isLimit {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I] (D : Iᵒᵖ ⥤ Scheme.{u}) [∀ {i j : Iᵒᵖ} (f : i ⟶ j), IsAffineHom (D.map f)] (c : Cone D) (hc : IsLimit c) (s : c.pt) : ∃ (R : I ⥤ CommRingCat.{u}) (r : Cocone R), (∀ i : I, R.obj i = (D.obj (op i)).residueField (c.π.app (op i) s)) ∧ (∀ (i j : I) (f : i ⟶ j), HEq (R.map f) ((D.map f.op).residueFieldMap (c.π.app (op j) s))) ∧ r.pt = c.pt.residueField s ∧ (∀ i : I, HEq (r.ι.app i) ((c.π.app (op i)).residueFieldMap s)) ∧ Nonempty (IsColimit r) ∧ (∃ t : Cone (R.op ⋙ Scheme.Spec), t.pt = Spec (c.pt.residueField s) ∧ (∀ i : I, HEq (t.π.app (op i)) (Spec.map ((c.π.app (op i)).residueFieldMap s))) ∧ Nonempty (IsLimit t) ∧ ∀ {i j : Iᵒᵖ} (f : i ⟶ j), IsAffineHom ((R.op ⋙ Scheme.Spec).map f)) ∧ (∀ i : I, Spec.map ((c.π.app (op i)).residueFieldMap s) ≫ (D.obj (op i)).fromSpecResidueField (c.π.app (op i) s) = c.pt.fromSpecResidueField s ≫ c.π.app (op i)) ∧ (∀ (i j : I) (f : i ⟶ j), Spec.map ((D.map f.op).residueFieldMap (c.π.app (op j) s)) ≫ (D.obj (op i)).fromSpecResidueField (D.map f.op (c.π.app (op j) s)) = (D.obj (op j)).fromSpecResidueField (c.π.app (op j) s) ≫ D.map f.op)",
+  "branch": "sheaf-dag",
+  "by": "M1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-lrf1143"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-lrf1143",
+  "group": "M1",
+  "result": "fix",
+  "note": "directed preorder+Nonempty I (now Type u); D : Iᵒᵖ ⥤ Scheme.{u} with IsAffineHom transitions; given Cone+IsLimit; s : c.pt, s_i = c.π.app (op i) s; R objects/maps pinned to residueField/residueFieldMap via =/HEq; cocone on κ(s) with IsColimit in CommRingCat; Spec cone IsLimit with affine transitions; fromSpecResidueField compatibility on projections and transitions"
  }
 }
