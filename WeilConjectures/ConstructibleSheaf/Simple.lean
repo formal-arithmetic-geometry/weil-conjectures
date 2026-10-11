@@ -5,6 +5,7 @@ Authors: Claude
 -/
 module
 
+public import Mathlib.CategoryTheory.Simple
 public import WeilConjectures.CategoryTheory.DerivedCategory.Constructible
 public import WeilConjectures.ConstructibleSheaf.KernelCokernel
 public import WeilConjectures.ConstructibleSheaf.OpenClosed
@@ -210,18 +211,13 @@ lemma exists_isClosedImmersion_fromSpecResidueField {x : X} (hx : IsLocallyClose
   rw [this]
   exact isClosed_closure.preimage W.ι.base.hom.continuous
 
-/-- A sheaf supported at a point `x`, closed in an open `W`, is the extension by zero along
-`W ⟶ X` of the direct image of its restriction to `x`. -/
-lemma nonempty_iso_of_compl_stalkZeroLocus_subset
-    (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) {x : X}
-    (hx : (stalkZeroLocus F)ᶜ ⊆ {x}) (W : X.Opens) (hxW : x ∈ W)
-    (g : Spec (X.residueField x) ⟶ W) [IsClosedImmersion g]
-    (hg : g ≫ W.ι = X.fromSpecResidueField x) :
-    Nonempty (F ≅ (W.ι)_!open[ModuleCat.{u + 1} Λ].obj ((g)_*[ModuleCat.{u + 1} Λ].obj
-      (((g)^*[ModuleCat.{u + 1} Λ]).obj (((W.ι)^*[ModuleCat.{u + 1} Λ]).obj F)))) := by
-  have hmem : ∀ y, y ≠ x → y ∈ stalkZeroLocus F := fun y hy ↦ by
-    by_contra h; exact hy (hx h)
-  -- the restriction to the closed complement of `W` vanishes
+omit [IsNoetherianRing Λ] [TopologicalSpace.NoetherianSpace X] in
+/-- A sheaf whose stalks vanish off an open `W` is the extension by zero of its restriction
+to `W`: the counit `j_! j^* F ⟶ F` of `j_! ⊣ j^*` is an isomorphism. -/
+lemma isIso_counit_app_of_compl_subset_stalkZeroLocus
+    (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (W : X.Opens)
+    (hF : (W : Set X)ᶜ ⊆ stalkZeroLocus F) :
+    IsIso ((Etale.openImmersionLowerShriekUpperStarAdjunction _ W.ι).counit.app F) := by
   have hij := range_closedComplement_eq_compl_range_ι W
   let S := Etale.openClosedShortComplex (ModuleCat.{u + 1} Λ) W.ι W.closedComplement
     (disjoint_range_of_range_eq_compl _ _ hij) F
@@ -229,15 +225,18 @@ lemma nonempty_iso_of_compl_stalkZeroLocus_subset
     Etale.shortExact_openClosedShortComplex (ModuleCat.{u + 1} Λ) W.ι W.closedComplement F hij
   have hZ : IsZero (((W.closedComplement)^*[ModuleCat.{u + 1} Λ]).obj F) := by
     refine (isZero_iff_stalkZeroLocus_eq_univ _).2 (Set.eq_univ_of_forall fun z ↦ ?_)
-    refine mem_stalkZeroLocus_upperStar _ _ (hmem _ fun h ↦ ?_)
+    refine mem_stalkZeroLocus_upperStar _ _ (hF ?_)
     have : W.closedComplement.base z ∈ (Set.range W.ι.base)ᶜ := hij ▸ ⟨z, rfl⟩
-    rw [Scheme.Opens.range_ι, h] at this
-    exact this hxW
-  have : IsIso S.f :=
-    hS.isIso_f_iff.2 (((W.closedComplement)_*[ModuleCat.{u + 1} Λ]).map_isZero hZ)
-  let e₁ := asIso S.f
-  -- on `W`, the sheaf is supported on the closed point `x`
-  set G := ((W.ι)^*[ModuleCat.{u + 1} Λ]).obj F
+    rwa [Scheme.Opens.range_ι] at this
+  exact hS.isIso_f_iff.2 (((W.closedComplement)_*[ModuleCat.{u + 1} Λ]).map_isZero hZ)
+
+omit [IsNoetherianRing Λ] [TopologicalSpace.NoetherianSpace X] in
+/-- A sheaf whose stalks vanish off the range of a closed immersion `g` is the direct image of
+its restriction: the unit `G ⟶ g_* g^* G` of `g^* ⊣ g_*` is an isomorphism. -/
+lemma isIso_unit_app_of_compl_subset_stalkZeroLocus {Z : Scheme.{u}} (g : Z ⟶ Y)
+    [IsClosedImmersion g] (G : Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))
+    (hG : (Set.range g.base)ᶜ ⊆ stalkZeroLocus G) :
+    IsIso ((Etale.upperStarLowerStarAdjunction _ g).unit.app G) := by
   let W' := openComplementOfIsClosedImmersion g
   have hij' : Set.range g.base = (Set.range W'.ι.base)ᶜ := by
     rw [Scheme.Opens.range_ι]; exact (compl_compl _).symm
@@ -247,17 +246,162 @@ lemma nonempty_iso_of_compl_stalkZeroLocus_subset
     Etale.shortExact_openClosedShortComplex (ModuleCat.{u + 1} Λ) W'.ι g G hij'
   have hZ' : IsZero (((W'.ι)^*[ModuleCat.{u + 1} Λ]).obj G) := by
     refine (isZero_iff_stalkZeroLocus_eq_univ _).2 (Set.eq_univ_of_forall fun w ↦ ?_)
-    refine mem_stalkZeroLocus_upperStar _ _ (mem_stalkZeroLocus_upperStar _ _ (hmem _ fun h ↦ ?_))
-    have hw : W'.ι.base w ∈ (W' : Set W) := by rw [← Scheme.Opens.range_ι]; exact ⟨w, rfl⟩
-    apply hw
-    obtain ⟨p, hp⟩ : x ∈ Set.range (X.fromSpecResidueField x).base := by
-      rw [Scheme.range_fromSpecResidueField]; rfl
-    refine ⟨p, W.ι.isOpenEmbedding.injective ?_⟩
-    rw [← Scheme.Hom.comp_apply, hg, hp, ← h]
-  have : IsIso S'.g := hS'.isIso_g_iff.2
-    (((W'.ι)_!open[ModuleCat.{u + 1} Λ]).map_isZero hZ')
-  let e₂ := asIso S'.g
-  exact ⟨e₁.symm ≪≫ ((W.ι)_!open[ModuleCat.{u + 1} Λ]).mapIso e₂⟩
+    refine mem_stalkZeroLocus_upperStar _ _ (hG ?_)
+    have : W'.ι.base w ∈ (Set.range W'.ι.base) := ⟨w, rfl⟩
+    rwa [Scheme.Opens.range_ι] at this
+  exact hS'.isIso_g_iff.2 (((W'.ι)_!open[ModuleCat.{u + 1} Λ]).map_isZero hZ')
+
+omit [IsNoetherianRing Λ] [TopologicalSpace.NoetherianSpace X] in
+/-- If `g : Spec κ(x) ⟶ W` is a closed immersion with `g ≫ W.ι = Spec κ(x) ⟶ X`, then the
+points of `W` mapping to `x` are those of the range of `g`. -/
+lemma mem_range_of_ι_eq {x : X} (W : X.Opens) (g : Spec (X.residueField x) ⟶ W)
+    (hg : g ≫ W.ι = X.fromSpecResidueField x) {w : W} (hw : W.ι.base w = x) :
+    w ∈ Set.range g.base := by
+  obtain ⟨p, hp⟩ : x ∈ Set.range (X.fromSpecResidueField x).base := by
+    rw [Scheme.range_fromSpecResidueField]; rfl
+  refine ⟨p, W.ι.isOpenEmbedding.injective ?_⟩
+  rw [← Scheme.Hom.comp_apply, hg, hp, hw]
+
+omit [IsNoetherianRing Λ] [TopologicalSpace.NoetherianSpace X] in
+/-- A sheaf supported at a point `x`, closed in an open `W`, is the extension by zero along
+`W ⟶ X` of the direct image of its restriction to `x`. -/
+lemma isIso_of_compl_stalkZeroLocus_subset
+    (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) {x : X}
+    (hx : (stalkZeroLocus F)ᶜ ⊆ {x}) (W : X.Opens) (hxW : x ∈ W)
+    (g : Spec (X.residueField x) ⟶ W) [IsClosedImmersion g]
+    (hg : g ≫ W.ι = X.fromSpecResidueField x) :
+    IsIso ((Etale.openImmersionLowerShriekUpperStarAdjunction _ W.ι).counit.app F) ∧
+      IsIso ((Etale.upperStarLowerStarAdjunction _ g).unit.app
+        (((W.ι)^*[ModuleCat.{u + 1} Λ]).obj F)) := by
+  have hmem : ∀ y, y ≠ x → y ∈ stalkZeroLocus F := fun y hy ↦ by
+    by_contra h; exact hy (hx h)
+  refine ⟨isIso_counit_app_of_compl_subset_stalkZeroLocus F W fun y hy ↦
+    hmem y fun h ↦ hy (h ▸ hxW), isIso_unit_app_of_compl_subset_stalkZeroLocus g _
+      fun w hw ↦ mem_stalkZeroLocus_upperStar _ _ (hmem _ fun h ↦ hw ?_)⟩
+  exact mem_range_of_ι_eq W g hg h
+
+omit [IsNoetherianRing Λ] [TopologicalSpace.NoetherianSpace X] in
+/-- A sheaf supported at a point `x`, closed in an open `W`, is the extension by zero along
+`W ⟶ X` of the direct image of its restriction to `x`. -/
+lemma nonempty_iso_of_compl_stalkZeroLocus_subset
+    (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) {x : X}
+    (hx : (stalkZeroLocus F)ᶜ ⊆ {x}) (W : X.Opens) (hxW : x ∈ W)
+    (g : Spec (X.residueField x) ⟶ W) [IsClosedImmersion g]
+    (hg : g ≫ W.ι = X.fromSpecResidueField x) :
+    Nonempty (F ≅ (W.ι)_!open[ModuleCat.{u + 1} Λ].obj ((g)_*[ModuleCat.{u + 1} Λ].obj
+      (((g)^*[ModuleCat.{u + 1} Λ]).obj (((W.ι)^*[ModuleCat.{u + 1} Λ]).obj F)))) := by
+  obtain ⟨h₁, h₂⟩ := isIso_of_compl_stalkZeroLocus_subset F hx W hxW g hg
+  exact ⟨(asIso ((Etale.openImmersionLowerShriekUpperStarAdjunction _ W.ι).counit.app F)).symm ≪≫
+    ((W.ι)_!open[ModuleCat.{u + 1} Λ]).mapIso (asIso ((Etale.upperStarLowerStarAdjunction _ g).unit.app
+      (((W.ι)^*[ModuleCat.{u + 1} Λ]).obj F)))⟩
+
+omit [TopologicalSpace.NoetherianSpace X] in
+/-- A constructible sheaf is a simple object of the abelian category of constructible sheaves
+exactly when it is nonzero and each of its constructible subsheaves is zero or all of it. -/
+lemma simple_iff (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))
+    (hF : IsConstructibleSheaf F) :
+    Simple (⟨F, hF⟩ : (Etale.constructibleSheaf (ModuleCat.{u + 1} Λ) X).FullSubcategory) ↔
+      ¬ IsZero F ∧ ∀ (G : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (ι : G ⟶ F),
+        Mono ι → IsConstructibleSheaf G → IsZero G ∨ IsIso ι := by
+  set P := Etale.constructibleSheaf (ModuleCat.{u + 1} Λ) X
+  constructor
+  · intro hs
+    refine ⟨fun h ↦ Simple.not_isZero (⟨F, hF⟩ : P.FullSubcategory)
+      ((IsZero.iff_id_eq_zero _).2 (ObjectProperty.hom_ext _ ((IsZero.iff_id_eq_zero F).1 h))),
+      fun G ι hι hG ↦ ?_⟩
+    let ι' : (⟨G, hG⟩ : P.FullSubcategory) ⟶ ⟨F, hF⟩ := ObjectProperty.homMk ι
+    have : Mono ι' := P.ι.mono_of_mono_map hι
+    by_cases h0 : ι' = 0
+    · left
+      have : ι = 0 := congrArg InducedCategory.Hom.hom h0
+      have : Mono (0 : G ⟶ F) := this ▸ hι
+      exact IsZero.of_mono_zero G F
+    · right
+      have := isIso_of_mono_of_nonzero h0
+      exact (ObjectProperty.isIso_hom_iff ι').2 this
+  · rintro ⟨hF₀, hsub⟩
+    refine ⟨fun {G'} f hf ↦ ⟨fun hiso h0 ↦ ?_, fun h0 ↦ ?_⟩⟩
+    · have : 𝟙 (⟨F, hF⟩ : (Etale.constructibleSheaf (ModuleCat.{u + 1} Λ) X).FullSubcategory) = 0 := by
+        rw [← IsIso.inv_hom_id f]; simp [h0]
+      exact hF₀ ((IsZero.iff_id_eq_zero F).2 (congrArg InducedCategory.Hom.hom this))
+    · have hG' : IsConstructibleSheaf G'.obj := G'.2
+      have hk : IsConstructibleSheaf (kernel f.hom) := IsConstructibleSheaf.kernel f.hom
+      have hm : Mono f.hom := by
+        refine Preadditive.mono_of_kernel_zero ?_
+        let k : (⟨kernel f.hom, hk⟩ : P.FullSubcategory) ⟶ G' := ObjectProperty.homMk (kernel.ι _)
+        have : k ≫ f = 0 := ObjectProperty.hom_ext _ (kernel.condition _)
+        exact congrArg InducedCategory.Hom.hom ((cancel_mono f).1 (this.trans zero_comp.symm))
+      rcases hsub G'.obj f.hom hm hG' with h | h
+      · exact (h0 (ObjectProperty.hom_ext _ (h.eq_of_src _ _))).elim
+      · exact (ObjectProperty.isIso_hom_iff f).1 h
+
+/-- The extension by zero along an open `W ⟶ X` of the direct image along a closed immersion
+into `W` of a constructible sheaf is constructible. -/
+lemma isConstructibleSheaf_openImmersionLowerShriek_lowerStar (W : X.Opens) {Z : Scheme.{u}}
+    (g : Z ⟶ W) [IsClosedImmersion g] (N : Sheaf Z.smallEtaleTopology (ModuleCat.{u + 1} Λ))
+    [IsConstructibleSheaf N] :
+    IsConstructibleSheaf ((W.ι)_!open[ModuleCat.{u + 1} Λ].obj
+      ((g)_*[ModuleCat.{u + 1} Λ].obj N)) := by
+  have : TopologicalSpace.NoetherianSpace W := W.ι.isOpenEmbedding.isInducing.noetherianSpace
+  have : QuasiCompact W.ι := ⟨fun U _ _ ↦ TopologicalSpace.NoetherianSpace.isCompact _⟩
+  let W' := openComplementOfIsClosedImmersion g
+  have : TopologicalSpace.NoetherianSpace W' := W'.ι.isOpenEmbedding.isInducing.noetherianSpace
+  have : QuasiCompact W'.ι := ⟨fun U _ _ ↦ TopologicalSpace.NoetherianSpace.isCompact _⟩
+  have hij' : Set.range g.base = (Set.range W'.ι.base)ᶜ := by
+    rw [Scheme.Opens.range_ι]; exact (compl_compl _).symm
+  have := IsConstructibleSheaf.lowerStar_of_isClosedImmersion W'.ι g hij' N
+  exact IsConstructibleSheaf.openImmersionLowerShriek W.ι W.closedComplement
+    (range_closedComplement_eq_compl_range_ι W) _
+
+omit [IsNoetherianRing Λ] [TopologicalSpace.NoetherianSpace X] in
+/-- A faithful functor preserving zero morphisms reflects zero objects. -/
+lemma _root_.CategoryTheory.Functor.isZero_of_isZero_obj {C D : Type*} [Category* C]
+    [Category* D] [HasZeroMorphisms C] [HasZeroMorphisms D] (H : C ⥤ D) [H.Faithful]
+    [H.PreservesZeroMorphisms] {N : C} (h : IsZero (H.obj N)) : IsZero N :=
+  (IsZero.iff_id_eq_zero N).2 (H.map_injective (by rw [H.map_id, H.map_zero]; exact h.eq_of_src _ _))
+
+/-- Blueprint `lem-trf-simple-constructible`: simple constructible sheaves.
+
+Let `X` be a scheme with Noetherian underlying space and `Λ` a Noetherian ring. Every simple
+object `F` of the abelian category of constructible sheaves of `Λ`-modules on `X_ét` is of the
+form `i_{x!} M`: there is a point `x` with `{x}` locally closed, and `i_{x!}` is the extension by
+zero `j_! g_*` along `Spec κ(x) ⟶[g] W ⟶[j] X`, where `W` is an open in which `x` is closed and
+`g` a closed immersion, and `M` is a simple constructible sheaf on `Spec κ(x)`, that is a simple
+finite `Λ`-module with a continuous action of `Gal(κ(x)ˢᵉᵖ / κ(x))`. Moreover `F` is supported
+at `x`: its stalks vanish at the geometric points over every other point. -/
+theorem exists_iso_openImmersionLowerShriek_lowerStar_of_simple
+    (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (hF : IsConstructibleSheaf F)
+    [Simple (⟨F, hF⟩ : (Etale.constructibleSheaf (ModuleCat.{u + 1} Λ) X).FullSubcategory)] :
+    ∃ x : X, IsLocallyClosed ({x} : Set X) ∧ (stalkZeroLocus F)ᶜ = {x} ∧
+      ∃ (W : X.Opens) (g : Spec (X.residueField x) ⟶ W), x ∈ W ∧ IsClosedImmersion g ∧
+        g ≫ W.ι = X.fromSpecResidueField x ∧
+        ∃ (M : Sheaf (Spec (X.residueField x)).smallEtaleTopology (ModuleCat.{u + 1} Λ))
+          (hM : IsConstructibleSheaf M),
+          Simple (⟨M, hM⟩ : (Etale.constructibleSheaf (ModuleCat.{u + 1} Λ) _).FullSubcategory) ∧
+          Nonempty (F ≅ (W.ι)_!open[ModuleCat.{u + 1} Λ].obj ((g)_*[ModuleCat.{u + 1} Λ].obj M)) := by
+  obtain ⟨hF₀, hsub⟩ := (simple_iff F hF).1 ‹_›
+  obtain ⟨x, hx⟩ := exists_compl_stalkZeroLocus_eq_singleton F hF₀ hsub
+  have hlc := isLocallyClosed_singleton_of_compl_stalkZeroLocus_eq F hx
+  obtain ⟨W, g, hxW, hgc, hg⟩ := exists_isClosedImmersion_fromSpecResidueField hlc
+  obtain ⟨e⟩ := nonempty_iso_of_compl_stalkZeroLocus_subset F hx.le W hxW g hg
+  set M := ((g)^*[ModuleCat.{u + 1} Λ]).obj (((W.ι)^*[ModuleCat.{u + 1} Λ]).obj F)
+  have : IsConstructibleSheaf (((W.ι)^*[ModuleCat.{u + 1} Λ]).obj F) :=
+    IsConstructibleSheaf.upperStar _ _
+  have hM : IsConstructibleSheaf M := IsConstructibleSheaf.upperStar _ _
+  refine ⟨x, hlc, hx, W, g, hxW, hgc, hg, M, hM, (simple_iff M hM).2 ⟨fun h ↦ hF₀ ?_,
+    fun N ι hι hN ↦ ?_⟩, ⟨e⟩⟩
+  · exact (((W.ι)_!open[ModuleCat.{u + 1} Λ]).map_isZero
+      (((g)_*[ModuleCat.{u + 1} Λ]).map_isZero h)).of_iso e
+  · have := isConstructibleSheaf_openImmersionLowerShriek_lowerStar W g N
+    rcases hsub _ (((W.ι)_!open[ModuleCat.{u + 1} Λ]).map (((g)_*[ModuleCat.{u + 1} Λ]).map ι) ≫
+      e.inv) inferInstance this with h | h
+    · exact .inl (((g)_*[ModuleCat.{u + 1} Λ]).isZero_of_isZero_obj
+        (((W.ι)_!open[ModuleCat.{u + 1} Λ]).isZero_of_isZero_obj h))
+    · have : IsIso (((W.ι)_!open[ModuleCat.{u + 1} Λ]).map
+          (((g)_*[ModuleCat.{u + 1} Λ]).map ι)) := IsIso.of_isIso_comp_right _ e.inv
+      have := isIso_of_fully_faithful ((W.ι)_!open[ModuleCat.{u + 1} Λ])
+        (((g)_*[ModuleCat.{u + 1} Λ]).map ι)
+      exact .inr (isIso_of_fully_faithful ((g)_*[ModuleCat.{u + 1} Λ]) ι)
 
 end Etale
 
