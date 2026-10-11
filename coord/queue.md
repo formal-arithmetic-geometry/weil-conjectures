@@ -1,11 +1,11 @@
 # Work queue
 
-848 items; claim with `tools/claim.py next <group> [--stage N]`.
+844 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (848)
+## Stage 2: nodes to state (844)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -51,15 +51,11 @@
 | `lem-weil-pbc-complete-local-domain-finite-over-regular` | 1 | state |
 | `lem-weil-pbc-complete-local-map-regular-presentation` | 1 | state |
 | `lem-weil-pbc-complete-local-quotient` | 1 | state |
-| `lem-weil-pbc-complete-pair-henselian` | 1 | state |
-| `lem-weil-pbc-completed-module-associated-graded-generators` | 1 | state |
 | `lem-weil-pbc-completion-at-quasi-finite-prime` | 1 | state |
 | `lem-weil-pbc-completion-dimension` | 1 | state |
 | `lem-weil-pbc-complex-spectral-sequence-comparison` | 1 | state |
-| `lem-weil-pbc-constant-group-scheme-morphism-clopen` | 1 | state |
 | `lem-weil-pbc-constant-group-scheme-multiplication` | 1 | state |
 | `lem-weil-pbc-constant-sheaf-geometric-stalk` | 1 | state |
-| `lem-weil-pbc-constant-sheaf-sections-connected` | 1 | state |
 | `lem-weil-pbc-constant-sheaf-sections-locally-constant` | 1 | state |
 | `lem-weil-pbc-constant-sheaf-set-sections-connected-natural` | 1 | state |
 | `lem-weil-pbc-constant-subsheaf-generic` | 1 | state |
