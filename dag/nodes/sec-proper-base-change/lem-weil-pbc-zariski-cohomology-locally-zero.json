@@ -188,5 +188,23 @@
   "by": "L",
   "result": "accepted",
   "note": "4 steps following Cohomology on Sites 01FW with 03F3 for the passage to U: a cocycle s for xi; exactness of the injective resolution in degree q > 0 gives an epimorphism I^{q-1} -> ker d^q (sectionwise kernel leaf, abelian-category leaf); an epimorphism of abelian sheaves lifts sections locally (leaf), giving U and t with dt = s|_U; the restricted resolution computes H^q(U) (new unsplit node for 03F3 (1)-(2) on X_Zar; candidate via injective_of_adjoint recorded). Statement: the restriction map H^q(X) -> H^q(U), previously undefined, is now defined through an injective resolution, independent of the choice. Stage-3 notes: def-sc-zariski-cohomology (imported, sk-prop-sf-cbc) cites def-weil-pbc-kinjective-resolutions for its convention; citer gabber-criterion step 3 uses the compatibility of the strict-henselian comparison with restriction to opens, which that node's statement gives only for X."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ZariskiCohomologyLocallyZero",
+  "declaration": "AlgebraicGeometry.zariski_cohomology_class_locally_zero",
+  "file": "lean/Sheaf/AlgebraicGeometry/ZariskiCohomologyLocallyZero.lean",
+  "statement": "theorem zariski_cohomology_class_locally_zero {X : Scheme.{u}} [HasExt.{u} (Sheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u})] (G : Sheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u}) (I : InjectiveResolution G) (q : ℕ) (hq : 0 < q) (ξ : (G.cohomologyPresheaf q).obj (op ⊤)) (x : X) : ∃ U : X.Opens, x ∈ U ∧ ((G.cohomologyPresheaf q).map (homOfLE (X := X.Opens) (x := U) (y := ⊤) le_top).op).hom ξ = 0",
+  "branch": "sheaf-dag",
+  "by": "N1",
+  "date": "2026-10-12",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "N1",
+  "result": "pass",
+  "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
  }
 }

@@ -5606,3 +5606,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 18:48 L: merged deliver/T1/lem-sc-closed-immersion-pushforward-exact (stage 2; reviewer PASS; first push; Sheaf.Topology.ClosedImmersionPushforwardExact TopCat.Sheaf.shortExact_map_pushforward_closedSubset)
 - 18:49 L: merged deliver/U1/lem-sc-leray-closed-pushforward-cohomology (stage 2; reviewer PASS; first push; Sheaf.Topology.Sheaves.LerayAcyclicComparison TopCat.Sheaf.exists_lerayEdge_isIso_of_acyclic)
 - 18:49 L: merged deliver/V1/lem-sc-noetherian-topological-cohomology-vanishing (stage 2; reviewer PASS; first push; Sheaf.Topology.NoetherianTopologicalCohomologyVanishing TopCat.isZero_noetherian_topological_cohomology_of_dimension_bound)
+- 18:49 L: merged deliver/N1/lem-weil-pbc-zariski-cohomology-locally-zero (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.ZariskiCohomologyLocallyZero AlgebraicGeometry.zariski_cohomology_class_locally_zero)
