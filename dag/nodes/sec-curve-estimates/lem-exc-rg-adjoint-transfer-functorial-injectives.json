@@ -143,5 +143,24 @@
   "date": "2026-10-10",
   "note": "split read in full against Stacks 0161/0160/015Z; statement generalized to arbitrary categories with v faithful and mono-preserving (E7, reason: the citer applies it to discrete G-modules, not a module category; in the abelian case faithfulness is Stacks hypothesis (4) by Remark 03B9); steps: transpose of the embedding, u preserves injectives (new Mathlib leaf Adjunction.map_injective, Injective/Basic.lean 279, read by L), unit-composite mono by counit naturality + triangle identity + faithfulness; 1 new node"
  },
- "lead_note": "Statement corrected 15:24 UTC (worker, accepted by L): general categories, v faithful; \"functorial injective embeddings\" defined inline, no node defines it (see def-sp-injective-resolutions lead_note)."
+ "lead_note": "Statement corrected 15:24 UTC (worker, accepted by L): general categories, v faithful; \"functorial injective embeddings\" defined inline, no node defines it (see def-sp-injective-resolutions lead_note).",
+ "lean": {
+  "module": "Sheaf.CategoryTheory.AdjunctionTransferFunctorialInjectives",
+  "declaration": "CategoryTheory.adjunction_transfer_functorial_injective_embeddings",
+  "file": "lean/Sheaf/CategoryTheory/AdjunctionTransferFunctorialInjectives.lean",
+  "statement": "theorem adjunction_transfer_functorial_injective_embeddings {D : Type u₁} [Category.{v₁} D] {M : Type u₂} [Category.{v₂} M] (v : D ⥤ M) (u : M ⥤ D) (adj : v ⊣ u) [v.PreservesMonomorphisms] [v.Faithful] (J : M ⥤ M) (j : 𝟭 M ⟶ J) (hjmono : ∀ X : M, Mono (j.app X)) (hjinj : ∀ X : M, Injective (J.obj X)) : ∃ (jD : 𝟭 D ⟶ v ⋙ J ⋙ u), (∀ B : D, jD.app B = adj.unit.app B ≫ u.map (j.app (v.obj B))) ∧ (∀ B : D, Mono (jD.app B)) ∧ (∀ B : D, Injective ((v ⋙ J ⋙ u).obj B))",
+  "branch": "sheaf-dag",
+  "by": "K1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-atf0815"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-atf0815",
+  "group": "K1",
+  "result": "fix",
+  "note": "D,M arbitrary categories (indep universes), v ⊣ u, v PreservesMonomorphisms + Faithful, (J,j) mono+injective on M; conclusion jD : 𝟭 D ⟶ v⋙J⋙u with component unit ≫ u.map (j.app (v B)), mono, injective; Injective = Mathlib general-category class; no Mathlib functorial transfer (only Adjunction.map_injective); removed unused aux def"
+ }
 }
