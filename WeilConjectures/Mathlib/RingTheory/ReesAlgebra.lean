@@ -139,6 +139,13 @@ lemma laurentMap_T (φ : R →+* S) (n : ℤ) : laurentMap φ (T n : R[T;T⁻¹]
   rw [T, AddMonoidAlgebra.mapRingHom_single, map_one]
   rfl
 
+@[simp]
+lemma laurentMap_toLaurent (φ : R →+* S) (p : R[X]) :
+    laurentMap φ (toLaurent p) = toLaurent (p.map φ) := by
+  induction p using Polynomial.induction_on' with
+  | add p q hp hq => simp only [map_add, Polynomial.map_add, hp, hq]
+  | monomial n a => simp [← C_mul_X_pow_eq_monomial]
+
 lemma laurentMap_mem_extendedReesAlgebra (φ : R →+* S) {J : Ideal S} (h : I.map φ ≤ J)
     {x : R[T;T⁻¹]} (hx : x ∈ I.extendedReesAlgebra) :
     laurentMap φ x ∈ J.extendedReesAlgebra := by
@@ -242,30 +249,30 @@ theorem isBaseChange_extendedReesAlgebraAlgHom [Module.Flat R S] :
       refine Algebra.adjoin_le ?_
       rintro _ (rfl | ⟨y, hy, rfl⟩)
       · refine ⟨_, ⟨1 ⊗ₜ I.extendedReesAlgebraT, rfl⟩, ?_⟩
-        show ((L (1 ⊗ₜ I.extendedReesAlgebraT) : J.extendedReesAlgebra) : S[T;T⁻¹]) = T 1
+        change ((L (1 ⊗ₜ I.extendedReesAlgebraT) : J.extendedReesAlgebra) : S[T;T⁻¹]) = T 1
         simp only [L, Algebra.TensorProduct.lift_tmul, map_one, one_mul]
         rw [coe_extendedReesAlgebraAlgHom, coe_extendedReesAlgebraT, laurentMap_T]
       · induction hy using Submodule.span_induction with
         | mem y hy =>
           obtain ⟨x, hx, rfl⟩ := hy
           refine ⟨_, ⟨1 ⊗ₜ ⟨_, C_mul_T_neg_one_mem_extendedReesAlgebra hx⟩, rfl⟩, ?_⟩
-          show ((L (1 ⊗ₜ ⟨_, C_mul_T_neg_one_mem_extendedReesAlgebra hx⟩) :
+          change ((L (1 ⊗ₜ ⟨_, C_mul_T_neg_one_mem_extendedReesAlgebra hx⟩) :
             J.extendedReesAlgebra) : S[T;T⁻¹]) = _
           simp only [L, Algebra.TensorProduct.lift_tmul, map_one, one_mul]
           rw [coe_extendedReesAlgebraAlgHom, map_mul, laurentMap_C, laurentMap_T]
         | zero => simp
         | add y z _ _ hy hz =>
-          show LaurentPolynomial.C (y + z) * T (-1) ∈ K
+          change LaurentPolynomial.C (y + z) * T (-1) ∈ K
           rw [map_add, add_mul]; exact K.add_mem hy hz
         | smul a y _ hy =>
-          show LaurentPolynomial.C (a • y) * T (-1) ∈ K
+          change LaurentPolynomial.C (a • y) * T (-1) ∈ K
           rw [smul_eq_mul, map_mul, mul_assoc, LaurentPolynomial.C_eq_algebraMap, ← Algebra.smul_def]
           exact K.smul_mem hy a
     intro z
     obtain ⟨_, ⟨w, rfl⟩, hw⟩ := hK z.2
     exact ⟨w, Subtype.ext hw⟩
   refine IsBaseChange.of_equiv (LinearEquiv.ofBijective L.toLinearMap ⟨hinj, hsurj⟩) fun x ↦ ?_
-  show L (1 ⊗ₜ x) = _
+  change L (1 ⊗ₜ x) = _
   simp only [L, Algebra.TensorProduct.lift_tmul, map_one, one_mul]
   rfl
 
@@ -516,10 +523,10 @@ lemma range_mvPolynomialToLaurent :
           exact ⟨MvPolynomial.X i, mvPolynomialToLaurent_X C σ i⟩
         | zero => simp
         | add y z _ _ hy hz =>
-          show LaurentPolynomial.C (y + z) * T (-1) ∈ K
+          change LaurentPolynomial.C (y + z) * T (-1) ∈ K
           rw [map_add, add_mul]; exact K.add_mem hy hz
         | smul a y _ hy =>
-          show LaurentPolynomial.C (a • y) * T (-1) ∈ K
+          change LaurentPolynomial.C (a • y) * T (-1) ∈ K
           rw [smul_eq_mul, map_mul, mul_assoc]
           exact K.mul_mem (mem_range_mvPolynomialToLaurent_C C σ a) hy
     exact fun x hx ↦ this hx
