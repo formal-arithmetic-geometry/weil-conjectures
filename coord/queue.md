@@ -1,11 +1,11 @@
 # Work queue
 
-990 items; claim with `tools/claim.py next <group> [--stage N]`.
+988 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (990)
+## Stage 2: nodes to state (988)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -49,11 +49,9 @@
 | `lem-pod-lisse-module-sheaves-as-module-objects` | 1 | state |
 | `lem-pod-lisse-tensor-and-scalar-extension` | 1 | state |
 | `lem-pur-kinjective-acyclic-quotient-complexes-bounded-size` | 1 | state |
-| `lem-pur-kinjective-degreewise-existence` | 1 | state |
 | `lem-pur-kinjective-homotopy-limit-vanishing` | 1 | state |
 | `lem-pur-kinjective-surjection-bounded-size` | 1 | state |
 | `lem-pur-left-derived-from-kflat-class` | 1 | state |
-| `lem-pur-quasi-isos-saturated-triangulated` | 1 | state |
 | `lem-pur-ringed-site-grothendieck-abelian` | 1 | state |
 | `lem-pur-sheaf-hom-cover-gluing` | 1 | state |
 | `lem-pur-sheaf-hom-is-sheaf` | 1 | state |
