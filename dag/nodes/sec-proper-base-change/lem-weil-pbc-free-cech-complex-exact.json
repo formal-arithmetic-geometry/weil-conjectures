@@ -135,5 +135,24 @@
   "date": "2026-10-09",
   "by": "L",
   "result": "pass"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.FreeCechComplexExact",
+  "declaration": "AlgebraicGeometry.freeCechComplex_exact",
+  "file": "lean/Sheaf/Paper/FreeCechComplexExact.lean",
+  "statement": "theorem freeCechComplex_exact (X : Scheme.{u}) (ι : Type u) (U₀ : X.Etale) (U : ι → X.Etale) (f : ∀ i : ι, U i ⟶ U₀) (O : X.Etaleᵒᵖ ⥤ RingCat.{u}) (W : X.Etale) (p : ℕ) : (((PresheafOfModules.evaluation O (op W)).mapHomologicalComplex _).obj ((AlgebraicTopology.alternatingFaceMapComplex (PresheafOfModules.{u} O)).obj ((FormalCoproduct.mk ι fun i ↦ Over.mk (f i)).cech ⋙ (FormalCoproduct.eval (Over U₀) (PresheafOfModules.{u} O)).obj (Over.forget U₀ ⋙ yoneda ⋙ PresheafOfModules.free O)))).ExactAt (p + 1)",
+  "branch": "sheaf-dag",
+  "by": "M1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-fce1115"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-fce1115",
+  "group": "M1",
+  "result": "fix",
+  "note": "X, family f : U i ⟶ U₀ (no covering), presheaf of rings O, object W matched; K_• rebuilt as the node's complex: Čech nerve of Over.mk (f i) in Over U₀ (fibre products, projection faces), O_V = PresheafOfModules.free O (yoneda V), alternatingFaceMapComplex signs; conclusion ExactAt (p+1) after evaluation at W = H_q(K(W)) = 0 for all q > 0; ι, O in universe u, no vacuous universe, no hollow hypothesis; dropped duplicate new node(s) def-weil-pbc-free-cech-differential (--drop-nodes; not merged, the item points at the landed declaration)"
  }
 }
