@@ -124,5 +124,25 @@ noncomputable def H.restrictSucc (I : InjectiveResolution ℱ) (n : ℕ) :
   (H.cyclesZeroSuccAddEquiv K I.cocomplex_exactAt_succ
       (fun _ m ↦ subsingleton_H_of_injective _ m) n).toAddMonoidHom.comp
     (H.map I.isoCyclesZero.hom (n + 1))
+/-- `H.restrictSucc` on representatives: the class represented by a section `s` of the cycles
+`Zⁿ⁺¹` of `I` restricts to the class represented by the restriction of `s`. -/
+lemma H.restrictSucc_apply (I : InjectiveResolution ℱ) (n : ℕ)
+    (s : Γ(I.cocomplex.cycles (n + 1), ⊤)) :
+    H.restrictSucc f I n (H.map I.isoCyclesZero.inv (n + 1)
+        ((H.cyclesZeroSuccAddEquiv I.cocomplex I.cocomplex_exactAt_succ
+          (fun _ m ↦ subsingleton_H_of_injective _ m) n).symm (QuotientAddGroup.mk s))) =
+      H.map ((restrictCyclesIso f I.cocomplex 0).hom ≫
+          (restrictFunctor f).map I.isoCyclesZero.inv) (n + 1)
+        ((H.cyclesZeroSuccAddEquiv (restrictComplex f I.cocomplex)
+          (fun j ↦ exactAt_restrict f (I.cocomplex_exactAt_succ j))
+          (fun j m ↦ subsingleton_H_restrict_of_injective f (I.cocomplex.X j) m) n).symm
+          (QuotientAddGroup.mk (restrictCyclesSections f I.cocomplex n s))) := by
+  change H.map _ (n + 1) ((H.cyclesZeroSuccAddEquiv _ _ _ n).symm (QuotientAddGroup.map _ _
+    (restrictCyclesSections f I.cocomplex n)
+    (range_app_toCycles_le_comap_restrictCyclesSections f I.cocomplex n)
+    (H.cyclesZeroSuccAddEquiv I.cocomplex _ _ n (H.map I.isoCyclesZero.hom (n + 1)
+      (H.map I.isoCyclesZero.inv (n + 1) _))))) = _
+  rw [← H.map_comp_apply, Iso.inv_hom_id, H.map_id_apply, AddEquiv.apply_symm_apply,
+    QuotientAddGroup.map_mk]
 
 end AlgebraicGeometry.Scheme.Modules
