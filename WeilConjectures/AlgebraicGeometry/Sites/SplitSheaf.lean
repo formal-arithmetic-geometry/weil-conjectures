@@ -9,6 +9,7 @@ public import WeilConjectures.AlgebraicGeometry.Curve.GenericRestriction
 public import WeilConjectures.AlgebraicGeometry.Sites.ConstantSheafSections
 public import WeilConjectures.AlgebraicGeometry.Sites.Kummer
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.ConstantSheafOver
+public import Mathlib.GroupTheory.FiniteAbelian.Basic
 
 /-!
 # Sheaves on a field split by a Galois extension
@@ -569,5 +570,460 @@ lemma IsSplitBy.res (hN : IsSplitBy N L) : IsSplitBy (FieldTrace.res F F' N) L :
 end Restriction
 
 end Split
+
+end AlgebraicGeometry.Scheme
+
+namespace AlgebraicGeometry.Scheme
+
+variable {F : Type u} [Field F]
+
+instance (V : (Spec (.of F)).Etale) (v : V.left) : IsOpenImmersion (pointι V v).left :=
+  inferInstanceAs (IsOpenImmersion (pointOpens V v).ι)
+
+/-- A morphism from a one-point scheme factors through the open point of its image. -/
+lemma exists_comp_pointι_eq {Z V : (Spec (.of F)).Etale} (g : Z ⟶ V) (v : V.left)
+    (hv : ∀ z, g.left z = v) : ∃ g' : Z ⟶ pointObj V v, g' ≫ pointι V v = g := by
+  have hr : Set.range g.left ⊆ Set.range (pointι V v).left := by
+    rintro _ ⟨z, rfl⟩
+    rw [hv z]
+    exact ⟨⟨_, rfl⟩, rfl⟩
+  refine ⟨MorphismProperty.Over.homMk (IsOpenImmersion.lift (pointι V v).left g.left hr)
+    (by
+      rw [← MorphismProperty.Over.w (pointι V v), ← Category.assoc,
+        IsOpenImmersion.lift_fac]
+      exact MorphismProperty.Over.w g) _root_.trivial, ?_⟩
+  exact MorphismProperty.Over.Hom.ext (IsOpenImmersion.lift_fac _ _ _)
+
+/-- Two morphisms into a one-point scheme, from one-point schemes, are dominated by a common
+one-point scheme. -/
+lemma exists_comp_eq_comp {Y Z W : (Spec (.of F)).Etale} [Subsingleton Y.left]
+    [Nonempty Z.left] [Nonempty W.left] (h : Z ⟶ Y) (w : W ⟶ Y) :
+    ∃ (P : (Spec (.of F)).Etale) (_ : Subsingleton P.left) (_ : Nonempty P.left) (p₁ : P ⟶ Z)
+      (p₂ : P ⟶ W), p₁ ≫ h = p₂ ≫ w := by
+  have : AlgebraicGeometry.Etale w.left := by
+    have := W.prop
+    have := Y.prop
+    have : AlgebraicGeometry.Etale (w.left ≫ Y.hom) := by
+      rw [MorphismProperty.Over.w w]; exact W.prop
+    exact AlgebraicGeometry.Etale.of_comp w.left Y.hom
+  let T : (Spec (.of F)).Etale := MorphismProperty.Over.mk ⊤
+    (pullback.fst h.left w.left ≫ Z.hom) (by have := Z.prop; infer_instance)
+  let q₁ : T ⟶ Z := MorphismProperty.Over.homMk (pullback.fst h.left w.left) rfl _root_.trivial
+  let q₂ : T ⟶ W := MorphismProperty.Over.homMk (pullback.snd h.left w.left) (by
+    change _ ≫ W.hom = _ ≫ Z.hom
+    rw [← MorphismProperty.Over.w w, ← Category.assoc, ← pullback.condition, Category.assoc,
+      MorphismProperty.Over.w h]) _root_.trivial
+  obtain ⟨t, -, -⟩ := Scheme.Pullback.exists_preimage_pullback (f := h.left) (g := w.left)
+    (Classical.arbitrary Z.left) (Classical.arbitrary W.left) (Subsingleton.elim _ _)
+  refine ⟨pointObj T t, inferInstance, inferInstance, pointι T t ≫ q₁, pointι T t ≫ q₂, ?_⟩
+  rw [Category.assoc, Category.assoc]
+  congr 1
+  exact MorphismProperty.Over.Hom.ext pullback.condition
+
+section SplitSubsheaf
+
+variable (M : Sheaf (Spec (.of F)).smallEtaleTopology AddCommGrpCat.{u + 1})
+  (L : Type u) [Field L] [Algebra F L] [Algebra.Etale F L]
+  (A : AddSubgroup (M.obj.obj (op (etaleSpec F L))))
+
+/-- The sections of `M` over `V` which, on every one-point étale scheme `Z` over `V` admitting a
+morphism `t : Z ⟶ Spec L`, are restrictions along `t` of elements of `A`. -/
+def splitSubgroup (V : (Spec (.of F)).Etale) : AddSubgroup (M.obj.obj (op V)) where
+  carrier := {s | ∀ (Z : (Spec (.of F)).Etale) [Subsingleton Z.left] [Nonempty Z.left]
+    (g : Z ⟶ V) (t : Z ⟶ etaleSpec F L), M.obj.map g.op s ∈ A.map (M.obj.map t.op).hom}
+  add_mem' {a b} ha hb Z _ _ g t := by
+    rw [map_add]
+    exact add_mem (ha Z g t) (hb Z g t)
+  zero_mem' Z _ _ g t := by
+    rw [map_zero]
+    exact zero_mem _
+  neg_mem' {a} ha Z _ _ g t := by
+    rw [map_neg]
+    exact neg_mem (ha Z g t)
+
+variable {M L A}
+
+lemma map_mem_splitSubgroup {V V' : (Spec (.of F)).Etale} (h : V' ⟶ V) {s : M.obj.obj (op V)}
+    (hs : s ∈ splitSubgroup M L A V) : M.obj.map h.op s ∈ splitSubgroup M L A V' :=
+  fun Z _ _ g t ↦ by
+    rw [FieldTrace.map_map_apply]
+    exact hs Z (g ≫ h) t
+
+lemma mem_splitSubgroup_of_comp {Y W : (Spec (.of F)).Etale} [Subsingleton Y.left]
+    [Nonempty W.left] (w : W ⟶ Y) {x : M.obj.obj (op Y)}
+    (hx : M.obj.map w.op x ∈ splitSubgroup M L A W) : x ∈ splitSubgroup M L A Y := by
+  intro Z _ _ h t
+  obtain ⟨P, _, _, p₁, p₂, hp⟩ := exists_comp_eq_comp h w
+  obtain ⟨a, ha, hax⟩ := AddSubgroup.mem_map.1 (hx P p₂ (p₁ ≫ t))
+  refine AddSubgroup.mem_map.2 ⟨a, ha, injective_map_of_subsingleton M p₁
+    ((FieldTrace.map_map_apply M.obj _ _ a).trans (hax.trans ?_))⟩
+  rw [FieldTrace.map_map_apply M.obj p₂ w x, ← hp, ← FieldTrace.map_map_apply]
+
+lemma mem_splitSubgroup_of_pointι {V : (Spec (.of F)).Etale} {s : M.obj.obj (op V)}
+    (hs : ∀ v, M.obj.map (pointι V v).op s ∈ splitSubgroup M L A (pointObj V v)) :
+    s ∈ splitSubgroup M L A V := by
+  intro Z _ _ g t
+  let z : Z.left := Classical.arbitrary _
+  obtain ⟨g', hg'⟩ := exists_comp_pointι_eq g (g.left z) fun z' ↦ by rw [Subsingleton.elim z' z]
+  rw [← hg', ← FieldTrace.map_map_apply]
+  exact hs _ Z g' t
+
+lemma mem_splitSubgroup_of_mem_sieve {V : (Spec (.of F)).Etale} {S : Sieve V}
+    (hS : S ∈ (Spec (.of F)).smallEtaleTopology V) {s : M.obj.obj (op V)}
+    (h : ∀ (W : (Spec (.of F)).Etale) (g : W ⟶ V), S g → M.obj.map g.op s ∈ splitSubgroup M L A W) :
+    s ∈ splitSubgroup M L A V := by
+  refine mem_splitSubgroup_of_pointι fun v ↦ ?_
+  obtain ⟨W, g, w, hg, hw⟩ := exists_of_mem_smallEtaleTopology hS v
+  obtain ⟨g', hg'⟩ := exists_comp_pointι_eq (pointι W w ≫ g) v fun z ↦ by
+    rw [← hw]
+    change g.left ((pointι W w).left z) = _
+    congr 1
+    obtain ⟨z, hz⟩ := z
+    exact Set.mem_singleton_iff.1 (show z ∈ ({w} : Set W.left) from hz)
+  refine mem_splitSubgroup_of_comp g' ?_
+  rw [FieldTrace.map_map_apply, hg', ← FieldTrace.map_map_apply]
+  exact map_mem_splitSubgroup _ (h W g hg)
+
+section SubgroupPresheaf
+
+variable (M) (P : ∀ V : (Spec (.of F)).Etale, AddSubgroup (M.obj.obj (op V)))
+  (hP : ∀ {V V' : (Spec (.of F)).Etale} (h : V' ⟶ V) {s : M.obj.obj (op V)}, s ∈ P V →
+    M.obj.map h.op s ∈ P V')
+
+/-- The subpresheaf of `M` given by a restriction-stable family of subgroups. -/
+noncomputable def subgroupPresheaf : (Spec (.of F)).Etaleᵒᵖ ⥤ AddCommGrpCat.{u + 1} where
+  obj V := AddCommGrpCat.of (P V.unop)
+  map {V V'} h := AddCommGrpCat.ofHom (AddMonoidHom.codRestrict
+    ((M.obj.map h).hom.comp (P V.unop).subtype) _ fun x ↦ hP h.unop x.2)
+  map_id V := by
+    ext x
+    simp [AddMonoidHom.codRestrict]
+  map_comp f g := by
+    ext x
+    simp [AddMonoidHom.codRestrict]
+
+/-- A restriction-stable family of subgroups of the sections of a sheaf which is local for the
+covering sieves is a sheaf. -/
+lemma isSheaf_subgroupPresheaf
+    (hloc : ∀ {V : (Spec (.of F)).Etale} {S : Sieve V}, S ∈ (Spec (.of F)).smallEtaleTopology V →
+      ∀ s : M.obj.obj (op V), (∀ (W : (Spec (.of F)).Etale) (g : W ⟶ V), S g →
+        M.obj.map g.op s ∈ P W) → s ∈ P V) :
+    Presheaf.IsSheaf (Spec (.of F)).smallEtaleTopology (subgroupPresheaf M P hP) := by
+  rw [Presheaf.isSheaf_iff_isSheaf_forget (s := CategoryTheory.forget AddCommGrpCat),
+    isSheaf_iff_isSheaf_of_type]
+  intro V S hS
+  have hM : Presieve.IsSheafFor (M.obj ⋙ CategoryTheory.forget _) S.arrows :=
+    (isSheaf_iff_isSheaf_of_type _ _).mp
+    (Presheaf.isSheaf_comp_of_isSheaf _ M.obj (CategoryTheory.forget AddCommGrpCat) M.property)
+    S hS
+  intro x hx
+  let x' : Presieve.FamilyOfElements (M.obj ⋙ CategoryTheory.forget _) S.arrows :=
+    fun W g hg ↦ (x g hg).1
+  have hx' : x'.Compatible := fun Y₁ Y₂ Z g₁ g₂ f₁ f₂ h₁ h₂ w ↦
+    congrArg Subtype.val (hx g₁ g₂ h₁ h₂ w)
+  obtain ⟨s, hs, huniq⟩ := hM x' hx'
+  have hmem : s ∈ P V := hloc hS s fun W g hg ↦ by
+    rw [show M.obj.map g.op s = (x g hg).1 from hs g hg]
+    exact (x g hg).2
+  exact ⟨⟨s, hmem⟩, fun W g hg ↦ Subtype.ext (hs g hg),
+    fun t ht ↦ Subtype.ext (huniq t.1 fun W g hg ↦ congrArg Subtype.val (ht g hg))⟩
+
+end SubgroupPresheaf
+
+variable (M L A) in
+/-- The subpresheaf of `M` of sections split by `L` with values in `A`. -/
+noncomputable abbrev splitPresheaf : (Spec (.of F)).Etaleᵒᵖ ⥤ AddCommGrpCat.{u + 1} :=
+  subgroupPresheaf M (splitSubgroup M L A) fun h _ hs ↦ map_mem_splitSubgroup h hs
+
+lemma isSheaf_splitPresheaf :
+    Presheaf.IsSheaf (Spec (.of F)).smallEtaleTopology (splitPresheaf M L A) :=
+  isSheaf_subgroupPresheaf _ _ _ fun hS _ h ↦ mem_splitSubgroup_of_mem_sieve hS h
+
+variable (M L A) in
+/-- The subsheaf of `M` of sections split by `L` with values in `A`. -/
+noncomputable def splitSheaf : Sheaf (Spec (.of F)).smallEtaleTopology AddCommGrpCat.{u + 1} :=
+  ⟨splitPresheaf M L A, isSheaf_splitPresheaf⟩
+
+variable (M L A) in
+/-- The inclusion of `splitSheaf M L A` into `M`. -/
+noncomputable def splitSheafι : splitSheaf M L A ⟶ M :=
+  ⟨{ app V := AddCommGrpCat.ofHom (splitSubgroup M L A V.unop).subtype
+     naturality _ _ _ := rfl }⟩
+
+instance : Mono (splitSheafι M L A) := by
+  have (V : (Spec (.of F)).Etaleᵒᵖ) : Mono ((splitSheafι M L A).hom.app V) :=
+    (AddCommGrpCat.mono_iff_injective _).2 Subtype.val_injective
+  have : Mono (splitSheafι M L A).hom := NatTrans.mono_of_mono_app _
+  exact Sheaf.Hom.mono_of_presheaf_mono _ _ _
+
+lemma mem_of_mem_splitSubgroup_etaleSpec {s : M.obj.obj (op (etaleSpec F L))}
+    (hs : s ∈ splitSubgroup M L A (etaleSpec F L)) : s ∈ A := by
+  obtain ⟨a, ha, has⟩ := AddSubgroup.mem_map.1 (hs _ (𝟙 _) (𝟙 _))
+  rw [op_id, CategoryTheory.Functor.map_id] at has
+  exact (show a = s from has) ▸ ha
+
+lemma mem_splitSubgroup_etaleSpec [IsGalois F L]
+    (hA : ∀ σ : L ≃ₐ[F] L, ∀ a ∈ A, M.obj.map (etaleSpecMap σ.toAlgHom).op a ∈ A) {a}
+    (ha : a ∈ A) : a ∈ splitSubgroup M L A (etaleSpec F L) := by
+  intro Z _ _ g t
+  obtain ⟨σ, hσ⟩ := exists_eq_comp_etaleSpecMap L t g
+  rw [hσ, ← FieldTrace.map_map_apply]
+  exact ⟨_, hA σ a ha, rfl⟩
+
+lemma isSplitBy_splitSheaf [IsGalois F L]
+    (hA : ∀ σ : L ≃ₐ[F] L, ∀ a ∈ A, M.obj.map (etaleSpecMap σ.toAlgHom).op a ∈ A) :
+    IsSplitBy (splitSheaf M L A) L := by
+  intro Z _ _ t
+  refine ⟨fun x y h ↦ Subtype.ext (injective_map_of_subsingleton M t
+    (congrArg Subtype.val h)), fun y ↦ ?_⟩
+  obtain ⟨a, ha, hay⟩ := AddSubgroup.mem_map.1 (y.2 Z (𝟙 _) t)
+  rw [op_id, CategoryTheory.Functor.map_id] at hay
+  exact ⟨⟨a, mem_splitSubgroup_etaleSpec hA ha⟩, Subtype.ext hay⟩
+
+instance [Finite A] : Finite ((splitSheaf M L A).obj.obj (op (etaleSpec F L))) :=
+  Finite.of_injective (β := A) (fun x ↦ ⟨x.1, mem_of_mem_splitSubgroup_etaleSpec x.2⟩)
+    (by intro x y h; simp only [Subtype.mk.injEq] at h; exact Subtype.ext h)
+
+end SplitSubsheaf
+
+end AlgebraicGeometry.Scheme
+
+/-- **Common Galois extension.** Two finite separable extensions of a field embed into a common
+finite Galois extension. -/
+lemma exists_isGalois_algHom_algHom (F : Type u) [Field F] (E₁ E₂ : Type u) [Field E₁] [Field E₂]
+    [Algebra F E₁] [Algebra F E₂] [Algebra.Etale F E₁] [Algebra.Etale F E₂] :
+    ∃ (L : Type u) (_ : Field L) (_ : Algebra F L) (_ : Algebra.Etale F L) (_ : IsGalois F L),
+      Nonempty (E₁ →ₐ[F] L) ∧ Nonempty (E₂ →ₐ[F] L) := by
+  have : Module.Finite F E₁ := Algebra.FormallyUnramified.finite_of_free F E₁
+  have : Module.Finite F E₂ := Algebra.FormallyUnramified.finite_of_free F E₂
+  have : Algebra.IsSeparable F E₁ := Algebra.FormallyUnramified.isSeparable F E₁
+  have : Algebra.IsSeparable F E₂ := Algebra.FormallyUnramified.isSeparable F E₂
+  let Ω := SeparableClosure E₁
+  have : Algebra.IsSeparable F Ω := Algebra.IsSeparable.trans F E₁ Ω
+  have : IsSepClosure F Ω := ⟨inferInstance, inferInstance⟩
+  let ι₁ : E₁ →ₐ[F] Ω := IsScalarTower.toAlgHom F E₁ Ω
+  let ι₂ : E₂ →ₐ[F] Ω := IsSepClosed.lift
+  let E : IntermediateField F Ω := ι₁.fieldRange ⊔ ι₂.fieldRange
+  have : FiniteDimensional F ι₁.fieldRange :=
+    (AlgEquiv.ofInjectiveField ι₁).toLinearEquiv.finiteDimensional
+  have : FiniteDimensional F ι₂.fieldRange :=
+    (AlgEquiv.ofInjectiveField ι₂).toLinearEquiv.finiteDimensional
+  have : FiniteDimensional F E := IntermediateField.finiteDimensional_sup _ _
+  let L := IntermediateField.normalClosure F E Ω
+  have hE : E ≤ L := IntermediateField.le_normalClosure E
+  have : Algebra.IsSeparable F L := Algebra.isSeparable_tower_bot_of_isSeparable F L Ω
+  have : Algebra.FormallyEtale F L := Algebra.FormallyEtale.of_isSeparable F L
+  have : Algebra.Etale F L :=
+    ⟨inferInstance, Algebra.FinitePresentation.of_finiteType.mp inferInstance⟩
+  exact ⟨L, inferInstance, inferInstance, inferInstance, inferInstance,
+    ⟨ι₁.codRestrict L.toSubalgebra fun x ↦ hE (le_sup_left (a := ι₁.fieldRange) ⟨x, rfl⟩)⟩,
+    ⟨ι₂.codRestrict L.toSubalgebra fun x ↦ hE (le_sup_right (b := ι₂.fieldRange) ⟨x, rfl⟩)⟩⟩
+
+lemma AddSubgroup.finite_closure_of_isOfFinAddOrder {G : Type*} [AddCommGroup G] {s : Set G}
+    (hs : s.Finite) (ht : ∀ x ∈ s, IsOfFinAddOrder x) : Finite (AddSubgroup.closure s) := by
+  have := hs.to_subtype
+  have : AddGroup.FG (AddSubgroup.closure s) := AddGroup.closure_finite_fg s
+  have : Module.Finite ℤ (AddSubgroup.closure s) := Module.Finite.iff_addGroup_fg.2 this
+  refine Module.finite_of_fg_torsion _ fun x ↦ ?_
+  have hx : (x : G) ∈ AddCommGroup.torsion G :=
+    (AddSubgroup.closure_le _).2 (fun y hy ↦ ht y hy) x.2
+  have hx' : IsOfFinAddOrder x := AddSubmonoid.isOfFinAddOrder_coe.1 hx
+  refine ⟨⟨addOrderOf x, mem_nonZeroDivisors_of_ne_zero
+    (by exact_mod_cast hx'.addOrderOf_pos.ne')⟩, ?_⟩
+  change ((addOrderOf x : ℕ) : ℤ) • x = 0
+  rw [natCast_zsmul, addOrderOf_nsmul_eq_zero]
+
+namespace AlgebraicGeometry.Scheme
+
+variable {F : Type u} [Field F] (M : Sheaf (Spec (.of F)).smallEtaleTopology AddCommGrpCat.{u + 1})
+  (L : Type u) [Field L] [Algebra F L] [Algebra.Etale F L]
+
+section Orbit
+
+/-- The subgroup generated by the Galois orbits of a set of sections over `Spec L`. -/
+noncomputable def orbitClosure (B : Set (M.obj.obj (op (etaleSpec F L)))) :
+    AddSubgroup (M.obj.obj (op (etaleSpec F L))) :=
+  AddSubgroup.closure {y | ∃ (σ : L ≃ₐ[F] L) (b : M.obj.obj (op (etaleSpec F L))), b ∈ B ∧
+    M.obj.map (etaleSpecMap σ.toAlgHom).op b = y}
+
+variable {M L}
+
+lemma subset_orbitClosure (B : Set (M.obj.obj (op (etaleSpec F L)))) :
+    B ⊆ orbitClosure M L B := fun b hb ↦ AddSubgroup.subset_closure ⟨1, b, hb, by
+  change M.obj.map (etaleSpecMap (AlgHom.id F L)).op b = b
+  rw [GaloisCech.etaleSpecMap_id, op_id, CategoryTheory.Functor.map_id,
+    ConcreteCategory.id_apply]⟩
+
+lemma map_mem_orbitClosure (B : Set (M.obj.obj (op (etaleSpec F L)))) (σ : L ≃ₐ[F] L)
+    {a : M.obj.obj (op (etaleSpec F L))} (ha : a ∈ orbitClosure M L B) :
+    M.obj.map (etaleSpecMap σ.toAlgHom).op a ∈ orbitClosure M L B := by
+  have : orbitClosure M L B ≤ (orbitClosure M L B).comap (M.obj.map
+      (etaleSpecMap σ.toAlgHom).op).hom := by
+    refine (AddSubgroup.closure_le _).2 ?_
+    rintro _ ⟨τ, b, hb, rfl⟩
+    have hcomp : (σ * τ).toAlgHom = σ.toAlgHom.comp τ.toAlgHom := AlgHom.ext fun _ ↦ rfl
+    have heq : M.obj.map (etaleSpecMap (σ * τ).toAlgHom).op b =
+        M.obj.map (etaleSpecMap σ.toAlgHom).op (M.obj.map (etaleSpecMap τ.toAlgHom).op b) := by
+      rw [FieldTrace.map_map_apply, etaleSpecMap_comp, hcomp]
+    exact AddSubgroup.mem_comap.2 (AddSubgroup.subset_closure ⟨σ * τ, b, hb, heq⟩)
+  exact AddSubgroup.mem_comap.1 (this ha)
+
+lemma finite_orbitClosure (B : Set (M.obj.obj (op (etaleSpec F L)))) (hB : B.Finite)
+    (ht : ∀ b ∈ B, IsOfFinAddOrder b) [Finite (L ≃ₐ[F] L)] :
+    Finite (orbitClosure M L B) := by
+  refine AddSubgroup.finite_closure_of_isOfFinAddOrder ?_ ?_
+  · have : {y | ∃ (σ : L ≃ₐ[F] L) (b : M.obj.obj (op (etaleSpec F L))), b ∈ B ∧
+        M.obj.map (etaleSpecMap σ.toAlgHom).op b = y} =
+        ⋃ σ : L ≃ₐ[F] L, (M.obj.map (etaleSpecMap σ.toAlgHom).op) '' B := by
+      ext y
+      simp
+    rw [this]
+    exact Set.finite_iUnion fun σ ↦ hB.image _
+  · rintro _ ⟨σ, b, hb, rfl⟩
+    exact AddMonoidHom.isOfFinAddOrder (M.obj.map (etaleSpecMap σ.toAlgHom).op).hom (ht b hb)
+
+end Orbit
+
+end AlgebraicGeometry.Scheme
+
+namespace AlgebraicGeometry.Scheme
+
+variable {F : Type u} [Field F] {M : Sheaf (Spec (.of F)).smallEtaleTopology AddCommGrpCat.{u + 1}}
+
+lemma splitSubgroup_mono {L L' : Type u} [Field L] [Algebra F L] [Algebra.Etale F L] [Field L']
+    [Algebra F L'] [Algebra.Etale F L'] (ι : L →ₐ[F] L') {A : AddSubgroup (M.obj.obj
+      (op (etaleSpec F L)))} {A' : AddSubgroup (M.obj.obj (op (etaleSpec F L')))}
+    (h : ∀ a ∈ A, M.obj.map (etaleSpecMap ι).op a ∈ A') (V : (Spec (.of F)).Etale) :
+    splitSubgroup M L A V ≤ splitSubgroup M L' A' V := by
+  intro s hs Z _ _ g t
+  obtain ⟨a, ha, has⟩ := AddSubgroup.mem_map.1 (hs Z g (t ≫ etaleSpecMap ι))
+  refine AddSubgroup.mem_map.2 ⟨_, h a ha, ?_⟩
+  rw [FieldTrace.map_map_apply]
+  exact has
+
+/-- A section of order `n` over a one-point scheme has finite order if the sheaf is torsion. -/
+lemma isOfFinAddOrder_of_isTorsion (hM : M.IsTorsion) {Y : (Spec (.of F)).Etale}
+    [Subsingleton Y.left] [Nonempty Y.left] (x : M.obj.obj (op Y)) : IsOfFinAddOrder x := by
+  obtain ⟨S, hS, hSx⟩ := hM (U := op Y) x
+  obtain ⟨W, g, w, hg, -⟩ := exists_of_mem_smallEtaleTopology hS (Classical.arbitrary Y.left)
+  have : Nonempty W.left := ⟨w⟩
+  rw [← addOrderOf_pos_iff, ← addOrderOf_injective (M.obj.map g.op).hom
+    (injective_map_of_subsingleton M g) x, addOrderOf_pos_iff]
+  exact hSx hg
+
+/-- Every section of a torsion sheaf over a one-point étale scheme is split by some finite Galois
+extension, with values in the subgroup generated by a finite Galois orbit. -/
+lemma exists_mem_splitSubgroup (hM : M.IsTorsion) {Y : (Spec (.of F)).Etale}
+    [Subsingleton Y.left] [Nonempty Y.left] (x : M.obj.obj (op Y)) :
+    ∃ (L : Type u) (_ : Field L) (_ : Algebra F L) (_ : Algebra.Etale F L) (_ : IsGalois F L)
+      (B : Set (M.obj.obj (op (etaleSpec F L)))), B.Finite ∧ (∀ b ∈ B, IsOfFinAddOrder b) ∧
+        x ∈ splitSubgroup M L (orbitClosure M L B) Y := by
+  obtain ⟨E, _, _, _, g₀, -, -⟩ := exists_etaleSpec_field_left_apply_eq Y (Classical.arbitrary _)
+  obtain ⟨L, _, _, _, _, ⟨ι⟩, -⟩ := exists_isGalois_algHom_algHom F E E
+  let w := etaleSpecMap ι ≫ g₀
+  refine ⟨L, inferInstance, inferInstance, inferInstance, inferInstance, {M.obj.map w.op x},
+    Set.finite_singleton _, fun b hb ↦ hb ▸ isOfFinAddOrder_of_isTorsion hM _,
+    mem_splitSubgroup_of_comp w (mem_splitSubgroup_etaleSpec
+      (fun σ a ha ↦ map_mem_orbitClosure _ σ ha) (subset_orbitClosure _ rfl))⟩
+
+section Family
+
+variable (M)
+
+/-- The families of subgroups `V ↦ splitSubgroup M L A V`, for `L / F` finite Galois and `A`
+generated by the Galois orbits of finitely many sections of finite order over `Spec L`. -/
+def SplitFamily : Type (u + 1) :=
+  {P : ∀ V : (Spec (.of F)).Etale, AddSubgroup (M.obj.obj (op V)) //
+    ∃ (L : Type u) (_ : Field L) (_ : Algebra F L) (_ : Algebra.Etale F L) (_ : IsGalois F L)
+      (B : Set (M.obj.obj (op (etaleSpec F L)))), B.Finite ∧ (∀ b ∈ B, IsOfFinAddOrder b) ∧
+        P = splitSubgroup M L (orbitClosure M L B)}
+
+instance : PartialOrder (SplitFamily M) := Subtype.partialOrder _
+
+instance : Nonempty (SplitFamily M) :=
+  ⟨⟨_, F, inferInstance, inferInstance, inferInstance, inferInstance, ∅, Set.finite_empty,
+    by simp, rfl⟩⟩
+
+instance : IsDirected (SplitFamily M) (· ≤ ·) where
+  directed := by
+    rintro ⟨_, L₁, _, _, _, _, B₁, hB₁, ht₁, rfl⟩ ⟨_, L₂, _, _, _, _, B₂, hB₂, ht₂, rfl⟩
+    obtain ⟨L, _, _, _, _, ⟨ι₁⟩, ⟨ι₂⟩⟩ := exists_isGalois_algHom_algHom F L₁ L₂
+    have : FiniteDimensional F L₁ := Algebra.FormallyUnramified.finite_of_free F L₁
+    have : FiniteDimensional F L₂ := Algebra.FormallyUnramified.finite_of_free F L₂
+    have := finite_orbitClosure (M := M) _ hB₁ ht₁
+    have := finite_orbitClosure (M := M) _ hB₂ ht₂
+    let B : Set (M.obj.obj (op (etaleSpec F L))) :=
+      (M.obj.map (etaleSpecMap ι₁).op) '' (orbitClosure M L₁ B₁ : Set _) ∪
+        (M.obj.map (etaleSpecMap ι₂).op) '' (orbitClosure M L₂ B₂ : Set _)
+    have hB : B.Finite := (Set.toFinite _).image _ |>.union ((Set.toFinite _).image _)
+    have ht : ∀ b ∈ B, IsOfFinAddOrder b := by
+      rintro _ (⟨a, ha, rfl⟩ | ⟨a, ha, rfl⟩)
+      · exact AddMonoidHom.isOfFinAddOrder _
+          (AddSubmonoid.isOfFinAddOrder_coe.2 (isOfFinAddOrder_of_finite (⟨a, ha⟩ :
+            orbitClosure M L₁ B₁)))
+      · exact AddMonoidHom.isOfFinAddOrder _
+          (AddSubmonoid.isOfFinAddOrder_coe.2 (isOfFinAddOrder_of_finite (⟨a, ha⟩ :
+            orbitClosure M L₂ B₂)))
+    refine ⟨⟨_, L, inferInstance, inferInstance, inferInstance, inferInstance, B, hB, ht, rfl⟩,
+      fun V ↦ splitSubgroup_mono ι₁ (fun a ha ↦ subset_orbitClosure _ (Or.inl ⟨a, ha, rfl⟩)) V,
+      fun V ↦ splitSubgroup_mono ι₂ (fun a ha ↦ subset_orbitClosure _ (Or.inr ⟨a, ha, rfl⟩)) V⟩
+
+
+variable {M} in
+lemma SplitFamily.map_mem (j : SplitFamily M) {V V' : (Spec (.of F)).Etale} (h : V' ⟶ V)
+    {s : M.obj.obj (op V)} : s ∈ j.1 V → M.obj.map h.op s ∈ j.1 V' := by
+  obtain ⟨_, L, _, _, _, _, B, -, -, rfl⟩ := j
+  exact fun hs ↦ map_mem_splitSubgroup h hs
+
+variable {M} in
+lemma SplitFamily.isSheaf (j : SplitFamily M) :
+    Presheaf.IsSheaf (Spec (.of F)).smallEtaleTopology
+      (subgroupPresheaf M j.1 (SplitFamily.map_mem j)) := by
+  obtain ⟨_, L, _, _, _, _, B, -, -, rfl⟩ := j
+  exact isSheaf_splitPresheaf
+
+variable {M} in
+/-- The sheaf of sections in a split family. -/
+noncomputable def SplitFamily.sheaf (j : SplitFamily M) :
+    Sheaf (Spec (.of F)).smallEtaleTopology AddCommGrpCat.{u + 1} :=
+  ⟨_, SplitFamily.isSheaf j⟩
+
+/-- The diagram of the subsheaves of a split family. -/
+noncomputable def SplitFamily.diagram :
+    SplitFamily M ⥤ Sheaf (Spec (.of F)).smallEtaleTopology AddCommGrpCat.{u + 1} where
+  obj j := j.sheaf
+  map h := ⟨NatTrans.mk (fun V ↦ AddCommGrpCat.ofHom (AddSubgroup.inclusion (leOfHom h V.unop)))
+    (fun _ _ _ ↦ rfl)⟩
+  map_id _ := rfl
+  map_comp _ _ := rfl
+
+/-- The cocone of the subsheaves of a split family, with point `M`. -/
+noncomputable def SplitFamily.cocone : Cocone (SplitFamily.diagram M) where
+  pt := M
+  ι := NatTrans.mk (fun j ↦ ⟨NatTrans.mk (fun V ↦ AddCommGrpCat.ofHom (j.1 V.unop).subtype)
+    (fun _ _ _ ↦ rfl)⟩) (fun _ _ _ ↦ rfl)
+
+instance (j : SplitFamily M) : Mono ((SplitFamily.cocone M).ι.app j) := by
+  have (V : (Spec (.of F)).Etaleᵒᵖ) : Mono (((SplitFamily.cocone M).ι.app j).hom.app V) :=
+    (AddCommGrpCat.mono_iff_injective _).2 Subtype.val_injective
+  have : Mono ((SplitFamily.cocone M).ι.app j).hom := NatTrans.mono_of_mono_app _
+  exact Sheaf.Hom.mono_of_presheaf_mono _ _ _
+
+variable {M} in
+/-- Each subsheaf of the split family is split by a finite Galois extension, with finite sections
+over it. -/
+lemma SplitFamily.exists_isSplitBy (j : SplitFamily M) :
+    ∃ (L : Type u) (_ : Field L) (_ : Algebra F L) (_ : Algebra.Etale F L) (_ : IsGalois F L),
+      IsSplitBy ((SplitFamily.diagram M).obj j) L ∧
+        Finite (((SplitFamily.diagram M).obj j).obj.obj (op (etaleSpec F L))) := by
+  obtain ⟨_, L, _, _, _, _, B, hB, ht, rfl⟩ := j
+  have : FiniteDimensional F L := Algebra.FormallyUnramified.finite_of_free F L
+  have := finite_orbitClosure (M := M) _ hB ht
+  exact ⟨L, inferInstance, inferInstance, inferInstance, inferInstance,
+    isSplitBy_splitSheaf (fun σ a ha ↦ map_mem_orbitClosure _ σ ha),
+    inferInstanceAs (Finite ((splitSheaf M L (orbitClosure M L B)).obj.obj
+      (op (etaleSpec F L))))⟩
+
+end Family
 
 end AlgebraicGeometry.Scheme
