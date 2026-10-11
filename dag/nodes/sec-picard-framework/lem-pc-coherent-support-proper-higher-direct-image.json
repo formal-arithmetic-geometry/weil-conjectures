@@ -179,5 +179,23 @@
   "group": "H1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-csh2650 (reviewer sub-agent of L); spot-checked: Statement = Tag 08DS exactly. Step 1 cites lem-weil-pbc-module-support-proper-over-base (Tag 0CYS factorization, not restated); Step 3 lem-pc-coherent-hi (Tag 02O5) hypotheses met. FIX more, RETURN less: (1) C1 Step 2: vanishing R^q i_*G=0 justified only by an untagged and wrong 'restriction of sections' remark; now cited via lem-weil-pbc-closed-immersion-integral-separated-uc(b) + lem-pc-affine-morphism-hi (Tag 01Y6/01XC). (2) Step 2 composition written X->Z->S, corrected to Z->X->S, Rg_*G = Rf_*Ri_*G. (3) C1 Step 3: Z locally Noetherian and G coherent were uncited; now pqf-lem-locnoeth-lft (01T6) and pqf-lem-coherent-ft-locnoeth (01XZ). uses/proof_deps/tool_uses updated. Second reading by H1 missed (1)-(3).; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.CoherentSupportProperHigherDirectImage",
+  "declaration": "AlgebraicGeometry.isCoherent_schemeModuleHigherDirectImage_of_support_proper",
+  "file": "lean/Sheaf/AlgebraicGeometry/CoherentSupportProperHigherDirectImage.lean",
+  "statement": "theorem isCoherent_schemeModuleHigherDirectImage_of_support_proper {X S : Scheme.{u}} [IsLocallyNoetherian S] (f : X ⟶ S) [LocallyOfFiniteType f] [HasDerivedCategory.{wX} (SheafOfModules.{u} (moduleRings X.toRingedSpace))] [HasDerivedCategory.{wS} (SheafOfModules.{u} (moduleRings S.toRingedSpace))] (F : SheafOfModules.{u} (moduleRings X.toRingedSpace)) (hF : RingedSpace.IsCoherent X.toRingedSpace F) (hSupport : Scheme.Modules.HasSupportProperOver f F) (p : ℤ) (hp : 0 ≤ p) : RingedSpace.IsCoherent S.toRingedSpace ((schemeModuleHigherDirectImage f p).obj F)",
+  "branch": "sheaf-dag",
+  "by": "V1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-csp",
+  "group": "V1",
+  "result": "pass",
+  "note": "IsLocallyNoetherian S; LocallyOfFiniteType f; F coherent via landed RingedSpace.IsCoherent X.toRingedSpace; support proper via recorded Scheme.Modules.HasSupportProperOver f F; R^p f_* = schemeModuleHigherDirectImage f p (S1 module of the def-pc-derived-direct-image record, built on schemeDerivedDirectImage); p : Z with 0 <= p; conclusion IsCoherent on S; HasDerivedCategory binders as landed; no let/local notation/instances"
  }
 }
