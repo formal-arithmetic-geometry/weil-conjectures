@@ -23,21 +23,63 @@
   "def-pc-scheme",
   "pqf-def-coherent"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Because X is quasi-compact, choose a finite affine open cover X=U_1 union ... union U_N. Since the diagonal of X over Spec(k) is affine, every finite intersection U_{i_0} cap ... cap U_{i_p} is affine, by the affine-diagonal intersection lemma.",
+   "uses": [
+    "lem-sc-picard-affine-diagonal-intersections"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Tag 01XI, proof of coherent-lemma-vanishing-nr-affines: finite affine covering and affine intersections"
+   }
+  },
+  {
+   "text": "Order the index set {1,...,N}. By the alternating Cech complex lemma, the Cech cohomology of this cover is the cohomology of the alternating complex, whose degree-p term is the product of F(U_{i_0...i_p}) over strictly increasing tuples i_0<...<i_p in {1,...,N}. There is no such tuple when p >= N, so the alternating complex is zero in degrees p >= N, and Cech cohomology of the cover vanishes in every degree p >= N.",
+   "uses": [
+    "lem-pc-alternating-cech-computes"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Tag 01XI, second proof of coherent-lemma-vanishing-nr-affines: alternating Cech complex (Cohomology, Lemma cohomology-lemma-alternating-usual) vanishes in degrees >= t"
+   }
+  },
+  {
+   "text": "By the Cech comparison theorem for a cover whose finite intersections are affine, Cech cohomology agrees with H^p(X,F) for every quasi-coherent F. Therefore H^p(X,F)=0 for p >= N. Taking d_X=N-1 proves the claimed uniform bound.",
+   "uses": [
+    "lem-pc-cech-computes"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Tag 01XI, proof of coherent-lemma-vanishing-nr-affines: Cech comparison and conclusion"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-picard-affine-diagonal-intersections",
+  "lem-pc-cech-computes",
+  "lem-pc-alternating-cech-computes"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Tag 01XI, coherent-lemma-vanishing-nr-affines"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
    "query": "finite cohomological dimension quasi coherent sheaves affine diagonal",
-   "results": "no scheme cohomological-dimension declaration",
+   "results": "AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit; AlgebraicGeometry.Scheme.exists_isQuasiAffine_of_isLimit; AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit; AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit; CategoryTheory.HasInjectiveDimensionLT.mk; CategoryTheory.hasInjectiveDimensionLT_iff; CategoryTheory.HasInjectiveDimensionLT.mk'; DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE",
    "date": "2026-10-11",
    "verdict": "no match"
   },
   {
    "tool": "loogle",
    "query": "Scheme affine diagonal cohomology vanishing",
-   "results": "0 hits; unknown identifier Scheme",
+   "results": "0 hits; loogle: Unknown identifier Scheme",
    "date": "2026-10-11",
    "verdict": "no match"
   },
@@ -57,12 +99,30 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sc-picard-kunneth-qcoh",
   "by": "worker",
   "date": "2026-10-11"
  },
  "chapter": "sec-abelian-varieties",
- "unit": "sk-prop-av-cube"
+ "unit": "sk-prop-av-cube",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-sc-picard-qcoh-finite-cd",
+  "worker": "stage1",
+  "summary": "Split the finite cohomological-dimension assertion into finite affine-cover selection, boundedness of the normalized Cech complex, and Cech comparison. The statement is Tag 01XI and no Lean declaration states it.",
+  "blueprint": "Realizes the finite affine-cover and Cech-vanishing argument in the proof of Tag 01XI used when the Kunneth argument invokes this bound."
+ },
+ "tool_uses": [
+  "lem-pc-alternating-cech-computes"
+ ],
+ "reviewed": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-qfc0203",
+  "group": "H1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-qfc0203 (reviewer sub-agent of L); spot-checked: Statement vs Stacks 01XI (k-field hypothesis unused, harmless specialization); Step 1 cites lem-sc-picard-affine-diagonal-intersections (pairwise, finite intersections by induction; E ok); Step 3 cites lem-pc-cech-computes (Tag 01XD, hypotheses met); citer c6920c975 (lem-sc-picard-kunneth-qcoh) uses exactly the uniform bound; no duplicate (grep cohomological dimension / 01XI: only etale curve nodes); Mathlib grep AlgebraicGeometry for Cech: none. FIX more, RETURN less: C1 Step 2 claimed the Cech complex has no terms in degrees >= N (false for the full complex: intersections with repeated indices are not empty) and passed to the alternating complex silently; rewrote Step 2 to cite existing lem-pc-alternating-cech-computes (Stacks cohomology-lemma-alternating-usual) as a generic tool use (C7/C8: general Cech-complex fact, unit sk-thm-picard-pn), elementary false, added to proof_deps.; 1 file(s) fixed by the reviewer"
+ }
 }
