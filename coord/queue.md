@@ -1,11 +1,11 @@
 # Work queue
 
-981 items; claim with `tools/claim.py next <group> [--stage N]`.
+976 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (981)
+## Stage 2: nodes to state (976)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -18,14 +18,12 @@
 | `lem-exc-abelian-sheaves-gmodules` | 1 | state |
 | `lem-kun-03sa` | 1 | state |
 | `lem-pc-bounded-above-flat-tensor-acyclic` | 1 | state |
-| `lem-pc-closed-subscheme-base-change-ideal-image` | 1 | state |
 | `lem-pc-derived-adjoint-functors` | 1 | state |
 | `lem-pc-derived-tensor-second-factor-functor` | 1 | state |
 | `lem-pc-derived-tensor-transitivity` | 1 | state |
 | `lem-pc-kflat-bounded-flat-replacement` | 1 | state |
 | `lem-pc-kflat-derived-tensor-associator` | 1 | state |
 | `lem-pc-kflat-pullback-preservation` | 1 | state |
-| `lem-pc-module-inverse-image-adjunction` | 1 | state |
 | `lem-pc-module-pullback-adjunction` | 1 | state |
 | `lem-pc-module-pullback-identity-composition` | 1 | state |
 | `lem-pc-pre-derived-adjoint-functors-general` | 1 | state |
@@ -41,16 +39,13 @@
 | `lem-pc-zero-scheme-pullback-local-coefficient` | 1 | state |
 | `lem-pod-lisse-module-sheaves-as-module-objects` | 1 | state |
 | `lem-pur-derived-change-of-rings` | 1 | state |
-| `lem-sc-ample-finite-set-affine` | 1 | state |
 | `lem-sc-ample-proj-local-chart` | 1 | state |
 | `lem-sc-ample-proj-open` | 1 | state |
 | `lem-sc-conductor-ideal-restriction` | 1 | state |
 | `lem-sc-conductor-ideal-zero-intersection` | 1 | state |
 | `lem-sc-conductor-sections` | 1 | state |
 | `lem-sc-derived-hom-mayer-vietoris` | 1 | state |
-| `lem-sc-dim-one-ample-invertible` | 1 | state |
 | `lem-sc-dvr-valuation-ring-characterization` | 1 | state |
-| `lem-sc-enough-globally-generated-ample` | 1 | state |
 | `lem-sc-ext-derived-composite-natural` | 1 | state |
 | `lem-sc-finite-free-internal-hom-exact` | 1 | state |
 | `lem-sc-finite-pushforward-locally-free` | 1 | state |
