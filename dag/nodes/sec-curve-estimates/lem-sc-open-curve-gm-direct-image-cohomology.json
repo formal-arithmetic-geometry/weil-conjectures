@@ -103,5 +103,23 @@
   "group": "C1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-ogd1748 (reviewer sub-agent of L); spot-checked: Step1 helper: stalks of R^1,R^2 j_*G_m = H^q(K^sh,G_m), Hilbert 90 / Br(K^sh)=0 per Stacks discussion before 03RM; Step2 helper: E2 page with E^{p,1}=E^{p,2}=0 gives edge iso for q<=2 (correct). Helpers unsplit with no proof_deps, so no cycle through lem-sc-brauer-zero. Not duplicates: lem-weil-pbc-site-leray-degenerate needs R^q=0 for all q>0, pqf-lem-leray-lowdegree is quasi-coherent H^1 only. LeanFinder query for Leray low-degree: no match (recorded). FIX more, RETURN less: lem-sc-open-curve-etale-leray-low-degree stmt_deps: added def-weil-open-immersion (cited in statement, missing), removed lem-sc-topological-leray-spectral-sequence (a topological lemma, not used by the statement).; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.Curve.OpenCurveGmDirectImageCohomology",
+  "declaration": "AlgebraicGeometry.Etale.bijective_openCurve_gm_directImage_cohomology",
+  "file": "lean/Sheaf/AlgebraicGeometry/Curve/OpenCurveGmDirectImageCohomology.lean",
+  "statement": "theorem bijective_openCurve_gm_directImage_cohomology {k : Type u} [Field k] [IsAlgClosed k] {Cbar C : Scheme.{u}} [Cbar.Over (Spec (.of k))] [IsConnectedCurve (Cbar ↘ Spec (.of k))] [Smooth (Cbar ↘ Spec (.of k))] [IsProper (Cbar ↘ Spec (.of k))] (S : Finset Cbar) (hS : ∀ p ∈ S, IsClosed ({p} : Set Cbar)) (j : C ⟶ Cbar) [IsOpenImmersion j] (hj : Set.range j.base = (↑S : Set Cbar)ᶜ) (q : ℕ) (hq : q ≤ 2) : Function.Bijective (fun x : Sheaf.H ((lowerStar AddCommGrpCat.{u + 1} j).obj C.gmSheaf) q ↦ Sheaf.H.map ((upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} j).counit.app C.gmSheaf) q (cohomologyMap j _ q x))",
+  "branch": "sheaf-dag",
+  "by": "G1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "G1",
+  "result": "pass",
+  "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
  }
 }
