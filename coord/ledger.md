@@ -3258,3 +3258,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 01:49 UTC L: K1 ring-precise-vanishing PASS c04ea5495 (R-rpv0148).
 - 01:49 UTC L: E1 def-pur-saturated-triangulated-localization FIX 033c55a29 (R-dsl0147; tags 04VC/05Q8, S/X cofiltered stated).
 - 01:50 L: merged deliver/C1/lem-sc-valuation-limit-qcoh-section-descent (reviewer FIX; first push; new nodes: 1)
+- 01:50 L: merged deliver/F1/lem-pc-derived-splitting-unique (reviewer FIX; first push; new nodes: 1)

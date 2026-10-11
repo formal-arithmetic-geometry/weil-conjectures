@@ -21,9 +21,61 @@
  "stmt_deps": [
   "def-weil-abstract-derived-category"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Choose a bounded projective representative P^\\bullet of L, with P^i=0 for i<a. Applying the precise vanishing lemma for bounded projective complexes [lem-pc-ring-precise-vanishing] to P^\\bullet and a complex representing K gives Hom_{D(R)}(L,K)=0 whenever H^i(K)=0 for all i\\geq a.",
+   "uses": [
+    "lem-pc-ring-precise-vanishing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0BCG, Lemma splitting-unique, first assertion"
+   }
+  },
+  {
+   "text": "For a distinguished triangle K\\to M\\to L\\xrightarrow{\\delta}K[1], assume H^i(K)=0 for i\\geq a+1. The shifted complex K[1] has H^i(K[1])=H^{i+1}(K)=0 for i\\geq a, so the first step applied to the same projective representative of L gives Hom_{D(R)}(L,K[1])=0. Hence the connecting morphism \\delta is zero.",
+   "uses": [
+    "lem-pc-ring-precise-vanishing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0BCG, Lemma splitting-unique, proof of the splitting assertion"
+   }
+  },
+  {
+   "text": "The zero connecting morphism makes the triangle a biproduct triangle: the Mathlib split-triangle statement [lem-pc-derived-zero-third-split] gives an isomorphism M\\cong K\\oplus L compatible with the triangle.",
+   "uses": [
+    "lem-pc-derived-zero-third-split"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0BCG, Lemma splitting-unique, proof of the splitting assertion"
+   }
+  },
+  {
+   "text": "If H^i(K)=0 for i\\geq a, Step 1 gives Hom_{D(R)}(L,K)=0. For two compatible biproduct splittings, their composite fixes the K-summand and L-summand maps; subtracting the identity leaves a matrix with only an L\\to K off-diagonal entry. That entry is zero by the Hom vanishing, so the composite is the identity and the splittings coincide.",
+   "uses": [
+    "lem-pc-ring-precise-vanishing"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0BCG, Lemma splitting-unique, proof of uniqueness"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-ring-precise-vanishing",
+  "lem-pc-derived-zero-third-split"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 0BCG, Lemma splitting-unique"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -55,12 +107,37 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-pc-affine-perfect-cut-degree-zero",
   "by": "worker",
   "date": "2026-10-11"
  },
  "chapter": "sec-abelian-varieties",
- "unit": "sk-prop-av-cube"
+ "unit": "sk-prop-av-cube",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-pc-derived-splitting-unique",
+  "worker": "stage1",
+  "summary": "Split Tag 0BCG into precise vanishing, vanishing of the connecting morphism after shifting, the Mathlib zero-third-map biproduct criterion, and the elementary uniqueness matrix argument.",
+  "blueprint": "proof of the affine perfect-complex cut: split the truncation distinguished triangle",
+  "tool_uses": [
+   {
+    "node": "lem-pc-ring-precise-vanishing",
+    "why": "The first and shifted Hom-vanishing clauses are the generic precise-vanishing lemma already present in the DAG; the current item specializes it to R-modules."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-ring-precise-vanishing",
+  "lem-pc-ring-precise-vanishing"
+ ],
+ "reviewed": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-dsu0149",
+  "group": "F1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-dsu0149 (reviewer sub-agent of L); spot-checked: Item vs Tag 0BCG clauses (1)-(3) with degree bounds; Step 1/2 vs lem-pc-ring-precise-vanishing (P^i=0 below a, shift H^i(K[1])=H^{i+1}(K)); Step 4 matrix uniqueness elementary via Hom(L,K)=0; Mathlib Pretriangulated.lean:579 read with sed; citer lem-pc-affine-perfect-cut-degree-zero uses a=1, hypotheses met; no duplicate among split/biproduct nodes; tool_use of precise-vanishing accepted as generic. FIX more, RETURN less: C4 on lem-pc-derived-zero-third-split - its statement gave only an abstract iso Y = X+Z, but Step 3 needs compatibility with the triangle; restated with e.u = inl and v = snd.e, exactly as the Mathlib declaration concludes (mathlib_match.how updated).; 1 file(s) fixed by the reviewer"
+ }
 }
