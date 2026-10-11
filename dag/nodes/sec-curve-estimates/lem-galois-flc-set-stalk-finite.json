@@ -188,5 +188,23 @@
    "missing": []
   }
  },
- "reviewed": "2026-10-10 L: 5 steps checked (geometric point lifts to a member of the covering; the stalk of the restriction maps onto the stalk, 03Q1 (3) reindexing; the isomorphism with the constant sheaf on stalks; the stalk of a constant sheaf of sets via sheafification preserving stalks; bound). Only Mathlib leaves and definitions cited. Lean: IsFiniteLocallyConstantSheafOfTypes has finite stalks by definition (worker note). LeanSearch down."
+ "reviewed": "2026-10-10 L: 5 steps checked (geometric point lifts to a member of the covering; the stalk of the restriction maps onto the stalk, 03Q1 (3) reindexing; the isomorphism with the constant sheaf on stalks; the stalk of a constant sheaf of sets via sheafification preserving stalks; bound). Only Mathlib leaves and definitions cited. Lean: IsFiniteLocallyConstantSheafOfTypes has finite stalks by definition (worker note). LeanSearch down.",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FiniteLocallyConstantStalk",
+  "declaration": "AlgebraicGeometry.Scheme.finite_stalk_of_finite_locally_constant_sets",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteLocallyConstantStalk.lean",
+  "statement": "theorem finite_stalk_of_finite_locally_constant_sets {Y : Scheme.{u}} (F : Sheaf Y.smallEtaleTopology (Type (u + 1))) (hF : ∃ 𝒰 : Scheme.Cover.{u} Scheme.etalePrecoverage Y, ∀ i, ∃ S : Type (u + 1), Finite S ∧ Nonempty ((F.over (𝒰.etalePrecoverageToEtale i)) ≅ (constantSheaf (Y.smallEtaleTopology.over (𝒰.etalePrecoverageToEtale i)) (Type (u + 1))).obj S)) : ∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ Y), Finite ((pointSmallEtale s).sheafFiber.obj F)",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-fss0641",
+  "group": "C1",
+  "result": "pass",
+  "note": "Y : Scheme.{u}; F sheaf of Type (u+1) on smallEtaleTopology; hF: etale Cover.{u} with each member's F.over iso to constantSheaf of a Finite S (empty S allowed), as source LocallyConstantDatum/IsFiniteLocallyConstantSheafOfTypes; all Omega alg. closed, s : Spec Omega -> Y; conclusion Finite (pointSmallEtale s).sheafFiber.obj F; source IsFiniteSheaf assumes finite stalks so existing false"
+ }
 }
