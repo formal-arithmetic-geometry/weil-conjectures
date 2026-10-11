@@ -230,5 +230,23 @@
   "worker": "stage1",
   "summary": "Checked against More on Algebra 07P5 (more-algebra.tex line 11521) and its proof, and 07P4 (line 11458) whose conditions (1)-(3) are parts (2)-(4). Statement kept; only the citation [def-weil-pbc-localization-at-prime] added for the fraction field (stmt_deps likewise). Proof in 8 steps: A a domain (leaves power-series-domain, polynomial-ring-domain); coefficients and A_J a subring; the facts on k_J from the p-basis (k_J is the k^p-span of the monomials off J, written out as in the 07P2 node; the t^E, supp E in J, are a k_J-basis of k; cap_J k_J = k^p; monotonicity in J); an explicit A_J-basis t^E x^e y^g (E supported in J, 0 <= e_i, g_j < p) of A, giving (1) (the source cites Algebra 0394 instead); p-th powers coefficientwise (new Mathlib leaf lem-weil-pbc-power-series-frobenius-coefficientwise = MvPowerSeries.map_frobenius_expand) giving (2); A cap K_J = A_J from the K_J-independence of the basis (replacing the source's derivation argument); (3) along the source's route f/g^p with the 'clear' A^p = cap_J A_J written out; (4). proof_origin agent for the two replaced arguments. 1 new node (Mathlib leaf). Item absent from Mathlib (no p-bases)."
  },
- "reviewed": "Reviewed by L 2026-10-10: faithful to the structure of More on Algebra 07P5 with the explicit basis t^E x^e y^g (E supported in J, exponents < p) of A over A_J replacing the source's appeal to 0394 and to derivations (steps 4, 6-7, checked); p-th powers coefficientwise by a new exact Mathlib leaf; the fields k_J handled from the p-basis (step 3). Statement gained a citation only. No Mathlib match for the item."
+ "reviewed": "Reviewed by L 2026-10-10: faithful to the structure of More on Algebra 07P5 with the explicit basis t^E x^e y^g (E supported in J, exponents < p) of A over A_J replacing the source's appeal to 0394 and to derivations (steps 4, 6-7, checked); p-th powers coefficientwise by a new exact Mathlib leaf; the fields k_J handled from the p-basis (step 3). Statement gained a citation only. No Mathlib match for the item.",
+ "lean": {
+  "module": "Sheaf.RingTheory.PowerSeriesRingSubfields",
+  "declaration": "RingTheory.powerSeriesRingSubfields",
+  "file": "lean/Sheaf/RingTheory/PowerSeriesRingSubfields.lean",
+  "statement": "theorem powerSeriesRingSubfields (p : ℕ) [Fact p.Prime] (k : Type u) [Field k] [CharP k p] (I : Type w) (t : I → k) (hpb : ∃ b : Module.Basis {E : I →₀ ℕ // ∀ i : I, E i < p} (IntermediateField.adjoin (ZMod p) (Set.range (fun x : k => x ^ p))) k, ∀ E, b E = (E : I →₀ ℕ).prod (fun i e => t i ^ e)) (n m : ℕ) (K : Type v) [Field K] [Algebra (MvPolynomial (Fin m) (MvPowerSeries (Fin n) k)) K] [IsFractionRing (MvPolynomial (Fin m) (MvPowerSeries (Fin n) k)) K] (kJ : Finset I → Subfield k) (hkJ : ∀ J, kJ J = Subfield.closure (Set.range (fun x : k => x ^ p) ∪ {x : k | ∃ i : I, i ∉ J ∧ t i = x})) (AJ : Finset I → Subring (MvPolynomial (Fin m) (MvPowerSeries (Fin n) k))) (hAJ : ∀ J f, f ∈ AJ J ↔ ∀ (a : Fin n →₀ ℕ) (g : Fin m →₀ ℕ), MvPowerSeries.coeff a (MvPolynomial.coeff g f) ∈ kJ J ∧ (MvPowerSeries.coeff a (MvPolynomial.coeff g f) ≠ 0 → (∀ i, p ∣ a i) ∧ (∀ j, p ∣ g j))) (KJ : Finset I → Subfield K) (hKJ : ∀ J z, z ∈ KJ J ↔ ∃ a b : AJ J, (b : MvPolynomial (Fin m) (MvPowerSeries (Fin n) k)) ≠ 0 ∧ z = algebraMap (MvPolynomial (Fin m) (MvPowerSeries (Fin n) k)) K a / algebraMap (MvPolynomial (Fin m) (MvPowerSeries (Fin n) k)) K b) : (∀ J : Finset I, Module.Finite (AJ J) (MvPolynomial (Fin m) (MvPowerSeries (Fin n) k))) ∧ (∀ J : Finset I, Set.range (fun x : K => x ^ p) ⊆ (KJ J : Set K)) ∧ (Set.range (fun x : K => x ^ p) = ⋂ J : Finset I, (KJ J : Set K)) ∧ (∀ J J' : Finset I, KJ (J ∪ J') ≤ KJ J ⊓ KJ J')",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-prs1326",
+  "group": "H1",
+  "result": "pass",
+  "note": "p prime, k char p, p-basis as Module.Basis over adjoin(ZMod p)(k^p) indexed by bounded finsupps (as ExistsPBasis); A = MvPolynomial (Fin m) (MvPowerSeries (Fin n) k); K IsFractionRing; kJ = closure(k^p ∪ t(I\\J)); AJ by coefficients in kJ with p-divisible x- and y-exponents; KJ = quotients of AJ, b≠0; (1) Module.Finite (smul = mul, checked rfl) (2) K^p ⊆ KJ (3) K^p = ⋂ over Finset I (4) KJ(J∪J') ≤ KJ ⊓ KJ'; no let, no hollow hyp, universes u/v/w harmless"
+ }
 }
