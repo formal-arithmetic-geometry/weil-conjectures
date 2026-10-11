@@ -177,5 +177,23 @@
   "group": "J1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of J1; spot-checked by L: L: 07CE for projective I/I^2: the section of q, the symmetric-algebra presentation, local freeness and 07CX; 0 new"
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.SymmetricProjectivePresentationConormal",
+  "declaration": "Algebra.symmetric_projective_presentation_conormal",
+  "file": "lean/Sheaf/RingTheory/SymmetricProjectivePresentationConormal.lean",
+  "statement": "theorem symmetric_projective_presentation_conormal (R : Type u) [CommRing R] (n m : ℕ) (I : Ideal (MvPolynomial (Fin n) R)) (f : Fin m → I) (hf : Ideal.span (Set.range (fun j ↦ (f j).1)) = I) [Module.Projective (MvPolynomial (Fin n) R ⧸ I) I.Cotangent] (q : (Fin m → (MvPolynomial (Fin n) R ⧸ I)) →ₗ[(MvPolynomial (Fin n) R ⧸ I)] I.Cotangent) (hq : ∀ j : Fin m, q (Pi.single j 1) = I.toCotangent (f j)) (φ : MvPolynomial (Fin m) (MvPolynomial (Fin n) R) →+* SymmetricAlgebra (MvPolynomial (Fin n) R ⧸ I) I.Cotangent) (hφC : ∀ x : MvPolynomial (Fin n) R, φ (MvPolynomial.C x) = algebraMap (MvPolynomial (Fin n) R ⧸ I) (SymmetricAlgebra (MvPolynomial (Fin n) R ⧸ I) I.Cotangent) (Ideal.Quotient.mk I x)) (hφX : ∀ j : Fin m, φ (MvPolynomial.X j) = SymmetricAlgebra.ι (MvPolynomial (Fin n) R ⧸ I) I.Cotangent (q (Pi.single j 1))) (α : MvPolynomial (Fin m) (MvPolynomial (Fin n) R ⧸ I) →ₐ[(MvPolynomial (Fin n) R ⧸ I)] SymmetricAlgebra (MvPolynomial (Fin n) R ⧸ I) I.Cotangent) (hαX : ∀ j : Fin m, α (MvPolynomial.X j) = SymmetricAlgebra.ι (MvPolynomial (Fin n) R ⧸ I) I.Cotangent (q (Pi.single j 1))) : ∃ (hφ : Function.Surjective φ) (hα : Function.Surjective α), ∃ (lam : (SymmetricAlgebra (MvPolynomial (Fin n) R ⧸ I) I.Cotangent) ⊗[(MvPolynomial (Fin n) R ⧸ I)] LinearMap.ker q ≃ₗ[SymmetricAlgebra (MvPolynomial (Fin n) R ⧸ I) I.Cotangent] (Extension.ofSurjective α hα).Cotangent) (i : (SymmetricAlgebra (MvPolynomial (Fin n) R ⧸ I) I.Cotangent) ⊗[(MvPolynomial (Fin n) R ⧸ I)] I.Cotangent →ₗ[SymmetricAlgebra (MvPolynomial (Fin n) R ⧸ I) I.Cotangent] (Extension.ofSurjective φ.toIntAlgHom hφ).Cotangent) (p : (Extension.ofSurjective φ.toIntAlgHom hφ).Cotangent →ₗ[SymmetricAlgebra (MvPolynomial (Fin n) R ⧸ I) I.Cotangent] (SymmetricAlgebra (MvPolynomial (Fin n) R ⧸ I) I.Cotangent) ⊗[(MvPolynomial (Fin n) R ⧸ I)] LinearMap.ker q), (∀ (c : SymmetricAlgebra (MvPolynomial (Fin n) R ⧸ I) I.Cotangent) (k : LinearMap.ker q) (y : (Extension.ofSurjective α hα).ker), y.1 = ∑ j : Fin m, MvPolynomial.C (k.1 j) * MvPolynomial.X j → lam (c ⊗ₜ k) = c • Extension.Cotangent.mk y) ∧ (∀ (c : SymmetricAlgebra (MvPolynomial (Fin n) R ⧸ I) I.Cotangent) (x : I) (y : (Extension.ofSurjective φ.toIntAlgHom hφ).ker), y.1 = MvPolynomial.C x.1 → i (c ⊗ₜ I.toCotangent x) = c • Extension.Cotangent.mk y) ∧ (∀ (x : (Extension.ofSurjective φ.toIntAlgHom hφ).ker) (y : (Extension.ofSurjective α hα).ker), y.1 = MvPolynomial.map (Ideal.Quotient.mk I) x.1 → lam (p (Extension.Cotangent.mk x)) = Extension.Cotangent.mk y) ∧ Function.Injective i ∧ Function.Exact i p ∧ Function.Surjective p ∧ (∃ s : (SymmetricAlgebra (MvPolynomial (Fin n) R ⧸ I) I.Cotangent) ⊗[(MvPolynomial (Fin n) R ⧸ I)] LinearMap.ker q →ₗ[SymmetricAlgebra (MvPolynomial (Fin n) R ⧸ I) I.Cotangent] (Extension.ofSurjective φ.toIntAlgHom hφ).Cotangent, p.comp s = LinearMap.id) ∧ Nonempty ((Extension.ofSurjective φ.toIntAlgHom hφ).Cotangent ≃ₗ[SymmetricAlgebra (MvPolynomial (Fin n) R ⧸ I) I.Cotangent] (SymmetricAlgebra (MvPolynomial (Fin n) R ⧸ I) I.Cotangent) ⊗[(MvPolynomial (Fin n) R ⧸ I)] (I.Cotangent × LinearMap.ker q)) ∧ Nonempty ((SymmetricAlgebra (MvPolynomial (Fin n) R ⧸ I) I.Cotangent) ⊗[(MvPolynomial (Fin n) R ⧸ I)] (I.Cotangent × LinearMap.ker q) ≃ₗ[SymmetricAlgebra (MvPolynomial (Fin n) R ⧸ I) I.Cotangent] (Fin m → SymmetricAlgebra (MvPolynomial (Fin n) R ⧸ I) I.Cotangent))",
+  "branch": "sheaf-dag",
+  "by": "U1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-spc",
+  "group": "U1",
+  "result": "pass",
+  "note": "R,n,m,P=MvPolynomial (Fin n) R, I=span f, A=P/I, M=I.Cotangent projective, q tied by hq on Pi.single, C=SymmetricAlgebra A M, phi tied by hphiC/hphiX (ringHom_ext), alpha by hαX; J/J^2 and reduced conormal as Extension.ofSurjective Cotangent (STATE naive cotangent line); i, p, lam formulas on generators; injective/exact/surjective, section, both isos"
  }
 }
