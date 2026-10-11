@@ -1,6 +1,6 @@
 # Work queue
 
-863 items; claim with `tools/claim.py next <group> [--stage N]`.
+864 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (8)
 
@@ -10,12 +10,12 @@
 | `lem-weil-tower-split-envelope` | 16 | none |
 | `lem-pc-ringed-space-module-stalk-tensor` | 3013 | none |
 | `lem-pc-genus-agrees-sc` | 4007 | rests_on_sorry |
-| `lem-pc-derived-tensor-flat-second-localization` | 5018 | none |
 | `lem-pc-kflat-tensor-quasi-iso` | 5018 | none |
+| `lem-pc-filtered-colimit-derived-tensor` | 5019 | none |
 | `lem-sc-base-change-curve` | - | none |
 | `lem-sc-global-functions` | - | rests_on_sorry |
 
-## Stage 2: nodes to state (855)
+## Stage 2: nodes to state (856)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -132,6 +132,7 @@
 | `lem-pc-derived-lower-truncation-step-ses` | 1 | state |
 | `lem-pc-derived-module-direct-sums` | 1 | state |
 | `lem-pc-derived-splitting-unique` | 1 | state |
+| `lem-pc-derived-tensor-flat-second-localization` | 1 | state |
 | `lem-pc-derived-total-resolution-quasi-iso` | 1 | state |
 | `lem-pc-field-extension-fpqc-cover` | 1 | state |
 | `lem-pc-finite-affine-fibre-sections` | 1 | state |
