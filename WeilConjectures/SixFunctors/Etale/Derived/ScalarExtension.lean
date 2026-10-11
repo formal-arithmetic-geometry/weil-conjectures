@@ -141,6 +141,30 @@ lemma exists_pow_eq_mul {ϖ : Shrink.{u + 1} (integers l L)}
   exact ⟨n, ↑u⁻¹, by rw [mul_comm (u : Shrink.{u + 1} (integers l L)), mul_assoc,
     Units.mul_inv, mul_one]⟩
 
+omit [FiniteDimensional ℚ_[l] L] [Small.{u + 1} L] in
+/-- Clearing denominators: for every `x ∈ L`, some power of `ℓ` multiplies `x` into `𝒪_L`. -/
+lemma exists_pow_mul_mem_integers (x : L) :
+    ∃ n : ℕ, algebraMap ℚ_[l] L (l : ℚ_[l]) ^ n * x ∈ integers l L := by
+  have hl : ‖(l : ℚ_[l])‖₊ < 1 := by
+    rw [← NNReal.coe_lt_coe, coe_nnnorm, Padic.norm_p]
+    exact inv_lt_one_of_one_lt₀ (by exact_mod_cast (Fact.out : l.Prime).one_lt)
+  by_cases hx : ‖algebraMap L (PadicAlgCl l) x‖₊ = 0
+  · refine ⟨0, ?_⟩
+    rw [mem_integers_iff, pow_zero, one_mul, hx]
+    exact zero_le_one
+  obtain ⟨n, hn⟩ := NNReal.exists_pow_lt_of_lt_one
+    (inv_pos.2 (pos_iff_ne_zero.2 hx)) hl
+  refine ⟨n, ?_⟩
+  rw [mem_integers_iff, map_mul, map_pow, ← IsScalarTower.algebraMap_apply, nnnorm_mul,
+    nnnorm_pow]
+  have : ‖algebraMap ℚ_[l] (PadicAlgCl l) (l : ℚ_[l])‖₊ = ‖(l : ℚ_[l])‖₊ :=
+    NNReal.eq (PadicAlgCl.norm_extends l _)
+  rw [this]
+  calc ‖(l : ℚ_[l])‖₊ ^ n * ‖algebraMap L (PadicAlgCl l) x‖₊
+      ≤ ‖algebraMap L (PadicAlgCl l) x‖₊⁻¹ * ‖algebraMap L (PadicAlgCl l) x‖₊ :=
+        mul_le_mul_of_nonneg_right hn.le zero_le
+    _ = 1 := inv_mul_cancel₀ hx
+
 end DVR
 
 end PadicAlgCl
