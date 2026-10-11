@@ -3412,3 +3412,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 05:55 L: merged deliver/H1/def-weil-pbc-formally-smooth-adic (stage 2; reviewer PASS; first push; Sheaf.RingTheory.FormallySmoothAdic Algebra.FormallySmoothAdic)
 - 05:55 L: merged deliver/J1/def-weil-pbc-japanese-domain (stage 2; reviewer PASS; first push; Sheaf.RingTheory.JapaneseDomain IsN2)
 - 05:55 L: merged deliver/H1/def-weil-pbc-g-ring (stage 2; reviewer PASS; first push; Sheaf.RingTheory.GRing IsGRing)
+- 05:55 L: merged deliver/E1/def-sc-rational-functions (stage 2; reviewer FIX; first push; Sheaf.AlgebraicGeometry.RationalFunctions AlgebraicGeometry.Scheme.rationalFunctions)
