@@ -23,7 +23,9 @@
   "def-sc-generic-point",
   "def-weil-irreducible-components",
   "pqf-def-coherent",
-  "def-weil-pbc-module-stalk"
+  "def-weil-pbc-module-stalk",
+  "def-sc-meromorphic-module",
+  "def-sc-weakly-associated-primes"
  ],
  "proof": [
   {
@@ -113,5 +115,24 @@
   "group": "M1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-mwg2900 (reviewer sub-agent of L); spot-checked: Head a57f8c0ac is a rebase of a10bcb9d7 onto 0cc04154f, delivery files identical. Item vs Tag 0EMF (hyps a,b; product and quasi-coherent clause; matches H1 step use, invertible L is quasi-coherent); weakly-associated-point definition inline, verbatim as in lem-sc-ass-weakass-locally-noetherian; K_X defined inline as in H1 (no def-sc-meromorphic node exists); new nodes vs 02LX/05C3, true (minimal primes are zero-divisors), not duplicates of the 02LX nodes. FIX more, RETURN less: (1) C4/B3 lem-sc-affine-totalquotient-minimal-product cited lem-sc-ass-weakass-locally-noetherian (a locally Noetherian scheme lemma) for the ring notion of weakly associated prime: definition written inline, stmt_dep dropped (Second reading removed the same dep from the sibling but missed this one); (2) source tags: 0546 is the section, the zero-divisor lemma is tag 05C3 and the definition 0547, corrected in both new nodes and the item; (3) C1 Step 1 used uncited point/prime translation of weak association (Tag 0566): folded in with its two-line localization argument and the tag.; 3 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.MeromorphicGenericProduct",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.meromorphicModule_generic_product",
+  "file": "lean/Sheaf/AlgebraicGeometry/MeromorphicGenericProduct.lean",
+  "statement": "theorem meromorphicModule_generic_product (X : Scheme.{u}) (F : X.Modules) [F.IsQuasicoherent] (hweak : ∀ x : X, IsLocalRing.maximalIdeal (X.presheaf.stalk x) ∈ Ideal.WeakAss (X.presheaf.stalk x) → x ∈ genericPoints X) (hfinite : ∀ U : X.Opens, IsCompact (U : Set X) → (irreducibleComponents U).Finite) : (∃ e : meromorphicModule X (unit X) ≅ ∏ᶜ (fun η : {x : X // x ∈ genericPoints X} ↦ (pushforward (X.fromSpecStalk η.val)).obj (unit (Spec (X.presheaf.stalk η.val)))), ∀ η : {x : X // x ∈ genericPoints X}, toMeromorphicModule X (unit X) ≫ e.hom ≫ Pi.π _ η = SheafOfModules.unitToPushforwardObjUnit (X.fromSpecStalk η.val).toRingCatSheafHom) ∧ Nonempty ((meromorphicModule X (unit X) ⊗ F) ≅ meromorphicModule X F) ∧ (∃ e : meromorphicModule X F ≅ ∏ᶜ (fun η : {x : X // x ∈ genericPoints X} ↦ (pushforward (X.fromSpecStalk η.val)).obj (tilde (ModuleCat.of (X.presheaf.stalk η.val) (F.presheaf.stalk η.val)))), ∀ (η : {x : X // x ∈ genericPoints X}) (U : X.Opens) (hη : η.val ∈ U) (m : Γ(F, U)), (toMeromorphicModule X F ≫ e.hom ≫ Pi.π _ η).val.app (op U) m = tilde.toOpen (ModuleCat.of (X.presheaf.stalk η.val) (F.presheaf.stalk η.val)) (X.fromSpecStalk η.val ⁻¹ᵁ U) (F.presheaf.germ U η.val hη m))",
+  "branch": "sheaf-dag",
+  "by": "J1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-mwg1205"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-mwg1205",
+  "group": "J1",
+  "result": "fix",
+  "note": "X Scheme; X^0 as Mathlib genericPoints X (M1 14582dfc7 spelling, was inline ∃ Z ∈ irreducibleComponents, IsGenericPoint); (a) hweak via Ideal.WeakAss of stalk maximal ideal (K1 form); (b) hfinite IsCompact opens -> (irreducibleComponents U).Finite; F quasi-coherent; K_X = meromorphicModule; stalk Module instance checked rfl-equal to M1's inferInstanceAs; FIX: bare Nonempty product isos pinned to the canonical maps (clause 1 = toMeromorphicModule ≫ e ≫ Pi.π η = unitToPushforwardObjUnit of fromSpecStalk; clause 3 on sections = tilde.toOpen of the germ at η), tensor clause oriented as landed meromorphicModule_tensor_iso; no let, no new defs, no hollow hyps"
  }
 }
