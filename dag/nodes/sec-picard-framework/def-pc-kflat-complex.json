@@ -1,143 +1,146 @@
 {
-  "id": "def-pc-kflat-complex",
-  "blueprint": {
-    "is": null,
-    "from": {
-      "node": "def-weil-derived-tensor",
-      "place": "its statement (a notion the statement uses)",
-      "via": []
-    },
-    "same_as": null
+ "id": "def-pc-kflat-complex",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-derived-tensor",
+   "place": "its statement (a notion the statement uses)",
+   "via": []
   },
-  "kind": "definition",
-  "title": "K-flat complex of modules on a ringed site",
-  "statement": "Let $\\mathcal C$ be a site and $\\mathcal O$ a sheaf of commutative rings on $\\mathcal C$. A cochain complex $\\mathcal F^\\bullet$ of sheaves of $\\mathcal O$-modules [def-pc-cochain-complex-modules] is *acyclic* if all its cohomology sheaves $H^i(\\mathcal F^\\bullet)$, computed in the abelian category of $\\mathcal O$-modules, vanish [def-pc-acyclic-complex-modules]. A cochain complex $\\mathcal K^\\bullet$ of sheaves of $\\mathcal O$-modules is *K-flat* if for every acyclic complex $\\mathcal F^\\bullet$ of $\\mathcal O$-modules the total tensor complex $\\operatorname{Tot}(\\mathcal F^\\bullet\\otimes_{\\mathcal O}\\mathcal K^\\bullet)$ [def-pc-tensor-complex-sheaves] is acyclic. A *K-flat resolution* of a complex $\\mathcal G^\\bullet$ of $\\mathcal O$-modules is a quasi-isomorphism $\\mathcal K^\\bullet\\to\\mathcal G^\\bullet$ [def-pc-quasi-iso-modules] with $\\mathcal K^\\bullet$ K-flat.",
-  "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Definition 06YN (sites-cohomology-definition-K-flat), Section 06YL; the term 'K-flat resolution' as used in Lemma 06YS (sites-cohomology-lemma-K-flat-resolution) and its applications in Section 06YL"
+  "same_as": null
+ },
+ "kind": "definition",
+ "title": "K-flat complex of modules on a ringed site",
+ "statement": "Let $\\mathcal C$ be a site and $\\mathcal O$ a sheaf of commutative rings on $\\mathcal C$. A cochain complex $\\mathcal F^\\bullet$ of sheaves of $\\mathcal O$-modules [def-pc-cochain-complex-modules] is *acyclic* if all its cohomology sheaves $H^i(\\mathcal F^\\bullet)$, computed in the abelian category of $\\mathcal O$-modules, vanish [def-pc-acyclic-complex-modules]. A cochain complex $\\mathcal K^\\bullet$ of sheaves of $\\mathcal O$-modules is *K-flat* if for every acyclic complex $\\mathcal F^\\bullet$ of $\\mathcal O$-modules the total tensor complex $\\operatorname{Tot}(\\mathcal F^\\bullet\\otimes_{\\mathcal O}\\mathcal K^\\bullet)$ [def-pc-tensor-complex-sheaves] is acyclic. A *K-flat resolution* of a complex $\\mathcal G^\\bullet$ of $\\mathcal O$-modules is a quasi-isomorphism $\\mathcal K^\\bullet\\to\\mathcal G^\\bullet$ [def-pc-quasi-iso-modules] with $\\mathcal K^\\bullet$ K-flat.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Definition 06YN (sites-cohomology-definition-K-flat), Section 06YL; the term 'K-flat resolution' as used in Lemma 06YS (sites-cohomology-lemma-K-flat-resolution) and its applications in Section 06YL"
+ },
+ "stmt_deps": [
+  "def-pc-cochain-complex-modules",
+  "def-pc-acyclic-complex-modules",
+  "def-pc-tensor-complex-sheaves",
+  "def-pc-quasi-iso-modules"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "grep -rln 'KFlat\\|IsKFlat\\|kflat\\|K-flat' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib",
+   "results": "none",
+   "date": "2026-10-09",
+   "verdict": "no match"
   },
-  "stmt_deps": [
-    "def-pc-cochain-complex-modules",
-    "def-pc-acyclic-complex-modules",
-    "def-pc-tensor-complex-sheaves",
-    "def-pc-quasi-iso-modules"
-  ],
-  "proof": [],
-  "proof_deps": [],
-  "proof_origin": null,
-  "mathlib_searches": [
-    {
-      "tool": "grep",
-      "query": "grep -rln 'KFlat\\|IsKFlat\\|kflat\\|K-flat' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib",
-      "results": "none",
-      "date": "2026-10-09",
-      "verdict": "no match"
-    },
-    {
-      "tool": "grep",
-      "query": "ls ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Homology/HomotopyCategory/ ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Homology/DerivedCategory/; grep -rn 'class IsKInjective\\|class IsKProjective' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Homology",
-      "results": "`CochainComplex.IsKInjective` (HomotopyCategory/KInjective.lean:42) and `IsKProjective` (KProjective.lean:42) exist; no K-flat notion and no tensor structure on `DerivedCategory`",
-      "date": "2026-10-09",
-      "verdict": "no match (only the K-injective and K-projective analogues)"
-    },
-    {
-      "tool": "grep",
-      "query": "grep -n 'def Acyclic' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Homology/ShortComplex/HomologicalComplex.lean",
-      "results": "`HomologicalComplex.Acyclic` (line 681) gives the acyclicity used in the definition",
-      "date": "2026-10-09",
-      "verdict": "ingredient only"
-    },
-    {
-      "tool": "grep",
-      "query": "grep -rn 'Flat' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Homology ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Category/ModuleCat/Sheaf* ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Category/ModuleCat/Presheaf*",
-      "results": "none: no flatness notion for complexes or for sheaves/presheaves of modules; the ingredients exist: `CochainComplex (SheafOfModules R) ℤ` (def-pc-cochain-complex-modules), `HomologicalComplex.Acyclic` (def-pc-acyclic-complex-modules), `QuasiIso` (def-pc-quasi-iso-modules), `HomologicalComplex.mapBifunctor` (def-pc-tensor-complex-sheaves)",
-      "date": "2026-10-09",
-      "verdict": "no match: K-flatness is to be defined from these ingredients (one line: `∀ F, F.Acyclic → (mapBifunctor F K T (ComplexShape.up ℤ)).Acyclic`)"
-    },
-    {
-      "tool": "leansearch",
-      "query": "K-flat complex: tensor product with any acyclic complex is acyclic",
-      "results": "Module.Flat.rTensor_shortComplex_exact, Module.Flat.lTensor_shortComplex_exact, Module.Flat.iff_rTensor_preserves_shortComplex_exact (Mathlib.RingTheory.Flat.CategoryTheory), CochainComplex.IsKProjective.leftOrthogonal (Mathlib.Algebra.Homology.HomotopyCategory.KProjective)",
-      "date": "2026-10-09",
-      "verdict": "no match (flatness of single modules over a ring; K-projective only)"
-    },
-    {
-      "tool": "loogle",
-      "query": "\"KFlat\"",
-      "results": "only Lean.mkFlatCtorOfStructCtorName (Lean.Structure): no Mathlib declaration with KFlat in its name",
-      "date": "2026-10-09",
-      "verdict": "no match"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "K-flat complex: tensoring with acyclic complexes gives acyclic complexes; derived tensor product",
-      "results": "Module.Flat.iff_lTensor_preserves_shortComplex_exact, Module.Flat.iff_rTensor_preserves_shortComplex_exact, Module.Flat.lTensor_shortComplex_exact, Module.Flat.rTensor_shortComplex_exact (Mathlib.RingTheory.Flat.CategoryTheory), CategoryTheory.Tor' (Mathlib.CategoryTheory.Monoidal.Tor)",
-      "date": "2026-10-09",
-      "verdict": "no match"
-    },
-    {
-      "tool": "grep",
-      "query": "rg -ln -i 'k-flat|kflat|derivedTensor|tensorDerived|leftDerivedTensor' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/; rg -ln 'Monoidal|Flat' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Category/ModuleCat/Sheaf/",
-      "results": "none; no monoidal structure and no flatness notion on SheafOfModules (only PresheafOfModules/Monoidal.lean); Algebra/Homology/HomotopyCategory has KInjective.lean and KProjective.lean only",
-      "date": "2026-10-09",
-      "verdict": "no match: the split stands (notions are the leaves CochainComplex, Acyclic, QuasiIso, mapBifunctor)"
-    }
-  ],
-  "mathlib_match": null,
-  "status": "split",
-  "merged_into": null,
-  "created": {
-    "by": "worker",
-    "item": "def-weil-derived-tensor",
-    "date": "2026-10-09"
+  {
+   "tool": "grep",
+   "query": "ls ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Homology/HomotopyCategory/ ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Homology/DerivedCategory/; grep -rn 'class IsKInjective\\|class IsKProjective' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Homology",
+   "results": "`CochainComplex.IsKInjective` (HomotopyCategory/KInjective.lean:42) and `IsKProjective` (KProjective.lean:42) exist; no K-flat notion and no tensor structure on `DerivedCategory`",
+   "date": "2026-10-09",
+   "verdict": "no match (only the K-injective and K-projective analogues)"
   },
-  "lean_audit": {
-    "master": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    },
-    "slopmaster2": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    }
+  {
+   "tool": "grep",
+   "query": "grep -n 'def Acyclic' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Homology/ShortComplex/HomologicalComplex.lean",
+   "results": "`HomologicalComplex.Acyclic` (line 681) gives the acyclicity used in the definition",
+   "date": "2026-10-09",
+   "verdict": "ingredient only"
   },
-  "split_report": {
-    "date": "2026-10-09",
-    "item": "def-pc-kflat-complex",
-    "worker": "stage1",
-    "summary": "Checked the statement against Stacks 06YN (sites-cohomology.tex, Section 06YL), which defines K-flatness exactly as stated; 'K-flat resolution' is not part of 06YN but is the term used in 06YS, and is kept. Split by one level: the notions are cochain complexes of O-modules (new def-pc-cochain-complex-modules, Mathlib leaf CochainComplex (SheafOfModules R) ℤ, Stacks 010V/0114), cohomology sheaves and acyclicity (new def-pc-acyclic-complex-modules, Mathlib leaf HomologicalComplex.Acyclic / homology, Stacks 0115(2)), the total tensor complex (existing def-pc-tensor-complex-sheaves, Mathlib leaf), and quasi-isomorphisms (new def-pc-quasi-iso-modules, Mathlib leaf QuasiIso, Stacks 0115(1)). The statement's citations of def-weil-abstract-derived-category (used only for cohomology and quasi-isomorphisms, not for the derived category) were replaced by these finer nodes; the wording is otherwise unchanged. The definition does not use flatness of modules; the flat-module notion needed by lem-pc-kflat-resolution was created as def-pc-flat-sheaf-modules (Stacks 03ER(3), unsplit: Mathlib has only Module.Flat over a ring) but is not a dependency of this node. Mathlib has no K-flat notion (only CochainComplex.IsKInjective / IsKProjective)."
+  {
+   "tool": "grep",
+   "query": "grep -rn 'Flat' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Homology ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Category/ModuleCat/Sheaf* ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Category/ModuleCat/Presheaf*",
+   "results": "none: no flatness notion for complexes or for sheaves/presheaves of modules; the ingredients exist: `CochainComplex (SheafOfModules R) ℤ` (def-pc-cochain-complex-modules), `HomologicalComplex.Acyclic` (def-pc-acyclic-complex-modules), `QuasiIso` (def-pc-quasi-iso-modules), `HomologicalComplex.mapBifunctor` (def-pc-tensor-complex-sheaves)",
+   "date": "2026-10-09",
+   "verdict": "no match: K-flatness is to be defined from these ingredients (one line: `∀ F, F.Acyclic → (mapBifunctor F K T (ComplexShape.up ℤ)).Acyclic`)"
   },
-  "reviewed": {
-    "date": "2026-10-09",
-    "by": "L",
-    "result": "pass"
+  {
+   "tool": "leansearch",
+   "query": "K-flat complex: tensor product with any acyclic complex is acyclic",
+   "results": "Module.Flat.rTensor_shortComplex_exact, Module.Flat.lTensor_shortComplex_exact, Module.Flat.iff_rTensor_preserves_shortComplex_exact (Mathlib.RingTheory.Flat.CategoryTheory), CochainComplex.IsKProjective.leftOrthogonal (Mathlib.Algebra.Homology.HomotopyCategory.KProjective)",
+   "date": "2026-10-09",
+   "verdict": "no match (flatness of single modules over a ring; K-projective only)"
   },
-  "chapter": "sec-picard-framework",
-  "unit": "sk-thm-picard-semicon",
-  "lean": {
-    "module": "Sheaf.Algebra.Homology.KFlat",
-    "declaration": "CochainComplex.IsKFlat",
-    "declarations": [
-      "CochainComplex.IsKFlat",
-      "CochainComplex.IsKFlatResolution",
-      "SheafOfModules.preservesZeroMorphisms_curriedTensor",
-      "SheafOfModules.preservesZeroMorphisms_curriedTensor_obj"
-    ],
-    "file": "lean/Sheaf/Algebra/Homology/KFlat.lean",
-    "statement": "def IsKFlat (K : CochainComplex (SheafOfModules.{u} ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj R)) ℤ) : Prop",
-    "branch": "sheaf-dag",
-    "by": "L",
-    "date": "2026-10-11",
-    "existing": false
+  {
+   "tool": "loogle",
+   "query": "\"KFlat\"",
+   "results": "only Lean.mkFlatCtorOfStructCtorName (Lean.Structure): no Mathlib declaration with KFlat in its name",
+   "date": "2026-10-09",
+   "verdict": "no match"
   },
-  "reviewed_lean": {
-    "date": "2026-10-11",
-    "by": "L",
-    "reviewer": "R-kfl0545",
-    "group": "L",
-    "result": "fix",
-    "note": "lead item, worker W-kfl0542; IsKFlat over SheafOfModules R (R : Sheaf J CommRingCat, site and ring in one universe u, the source monoidal structure SheafOfModules.monoidalCategory via letI), Tot(F ⊗ K) as mapBifunctor F K (curriedTensor), acyclic in the abelian category; IsKFlatResolution := QuasiIso ∧ IsKFlat; two Prop instances PreservesZeroMorphisms with sorry; reviewer removed noncomputable and corrected the recorded signature; landed 05:35 UTC"
+  {
+   "tool": "leanfinder",
+   "query": "K-flat complex: tensoring with acyclic complexes gives acyclic complexes; derived tensor product",
+   "results": "Module.Flat.iff_lTensor_preserves_shortComplex_exact, Module.Flat.iff_rTensor_preserves_shortComplex_exact, Module.Flat.lTensor_shortComplex_exact, Module.Flat.rTensor_shortComplex_exact (Mathlib.RingTheory.Flat.CategoryTheory), CategoryTheory.Tor' (Mathlib.CategoryTheory.Monoidal.Tor)",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -ln -i 'k-flat|kflat|derivedTensor|tensorDerived|leftDerivedTensor' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/; rg -ln 'Monoidal|Flat' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Category/ModuleCat/Sheaf/",
+   "results": "none; no monoidal structure and no flatness notion on SheafOfModules (only PresheafOfModules/Monoidal.lean); Algebra/Homology/HomotopyCategory has KInjective.lean and KProjective.lean only",
+   "date": "2026-10-09",
+   "verdict": "no match: the split stands (notions are the leaves CochainComplex, Acyclic, QuasiIso, mapBifunctor)"
   }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "def-weil-derived-tensor",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "split_report": {
+  "date": "2026-10-09",
+  "item": "def-pc-kflat-complex",
+  "worker": "stage1",
+  "summary": "Checked the statement against Stacks 06YN (sites-cohomology.tex, Section 06YL), which defines K-flatness exactly as stated; 'K-flat resolution' is not part of 06YN but is the term used in 06YS, and is kept. Split by one level: the notions are cochain complexes of O-modules (new def-pc-cochain-complex-modules, Mathlib leaf CochainComplex (SheafOfModules R) ℤ, Stacks 010V/0114), cohomology sheaves and acyclicity (new def-pc-acyclic-complex-modules, Mathlib leaf HomologicalComplex.Acyclic / homology, Stacks 0115(2)), the total tensor complex (existing def-pc-tensor-complex-sheaves, Mathlib leaf), and quasi-isomorphisms (new def-pc-quasi-iso-modules, Mathlib leaf QuasiIso, Stacks 0115(1)). The statement's citations of def-weil-abstract-derived-category (used only for cohomology and quasi-isomorphisms, not for the derived category) were replaced by these finer nodes; the wording is otherwise unchanged. The definition does not use flatness of modules; the flat-module notion needed by lem-pc-kflat-resolution was created as def-pc-flat-sheaf-modules (Stacks 03ER(3), unsplit: Mathlib has only Module.Flat over a ring) but is not a dependency of this node. Mathlib has no K-flat notion (only CochainComplex.IsKInjective / IsKProjective)."
+ },
+ "reviewed": {
+  "date": "2026-10-09",
+  "by": "L",
+  "result": "pass"
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.KFlat",
+  "declaration": "CochainComplex.IsKFlat",
+  "declarations": [
+   "CochainComplex.IsKFlat",
+   "CochainComplex.IsKFlatResolution",
+   "SheafOfModules.preservesZeroMorphisms_curriedTensor",
+   "SheafOfModules.preservesZeroMorphisms_curriedTensor_obj",
+   "SheafOfModules.isMonoidal_W_separateHomUniverse"
+  ],
+  "file": "lean/Sheaf/Algebra/Homology/KFlat.lean",
+  "statement": "def IsKFlat (K : CochainComplex (SheafOfModules.{max u v} ((sheafCompose J (forget₂ CommRingCat.{max u v} RingCat.{max u v})).obj R)) ℤ) : Prop",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-11",
+  "existing": false,
+  "note": "The old definition required the site object and morphism universes to be equal, excluding Scheme.ProEt (objects u+1, morphisms u). Generalize the hom universe, retaining the same acyclic-total-tensor predicate and resolution, with the monoidality proof named separately.",
+  "fixed_by": "R-ddt1257"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-ddt1257",
+  "group": "H1",
+  "result": "fix",
+  "note": "Y_proet/A_Y (CommRingCat constant sheaf forgotten to RingCat), K1 K2 unbounded, chosen P->K1 QuasiIso with sheaf IsKFlat (06YN), value Q.obj Tot(P (x) K2) via mapBifunctor curriedTensor of SheafOfModules.monoidalCategory, B_Y restrictScalars along constant-sheaf map in degree 0; KFlat fixed with synthInstance.maxSize 256 (HasMapBifunctor failed at max u v); 13 KFlat importers + DerivedTensor recompiled clean against fixed KFlat"
+ }
 }

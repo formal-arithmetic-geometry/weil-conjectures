@@ -15,7 +15,7 @@ Source: the Weil conjectures blueprint, `def-weil-pbc-proetale-site`, order 662
 (blueprint: def-weil-pbc-proetale-site).
 -/
 
-universe u
+universe t
 
 open CategoryTheory
 
@@ -31,12 +31,14 @@ as an `abbrev` it carries the category and triangulated structure of `DerivedCat
 
 Source: the Weil conjectures blueprint, `def-weil-pbc-proetale-site`, order 662;
 Stacks Project, Tag 098K (the small site) and Tag 05RU (the derived category). -/
-noncomputable abbrev proEtaleDerivedCategory (Y : Scheme.{u})
-    (A : Type u) [CommRing A] : Type _ :=
+noncomputable abbrev proEtaleDerivedCategory (Y : Scheme.{t})
+    (A : Type t) [CommRing A] : Type _ :=
   @DerivedCategory
-    (SheafOfModules.{u + 1}
-      ((constantSheaf (ProEt.topology Y) RingCat.{u + 1}).obj
-        (RingCat.of (ULift.{u + 1, u} A))))
+    (SheafOfModules.{t + 1}
+      ((sheafCompose (ProEt.topology Y)
+        (forget₂ CommRingCat.{t + 1} RingCat.{t + 1})).obj
+          ((constantSheaf (ProEt.topology Y) CommRingCat.{t + 1}).obj
+            (CommRingCat.of (ULift.{t + 1, t} A)))))
     _ _ (HasDerivedCategory.standard _)
 
 end AlgebraicGeometry.Scheme

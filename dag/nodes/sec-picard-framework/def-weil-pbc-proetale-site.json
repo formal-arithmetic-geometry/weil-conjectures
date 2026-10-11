@@ -133,19 +133,20 @@
   "module": "Sheaf.AlgebraicGeometry.ProEtaleDerivedCategory",
   "declaration": "AlgebraicGeometry.Scheme.proEtaleDerivedCategory",
   "file": "lean/Sheaf/AlgebraicGeometry/ProEtaleDerivedCategory.lean",
-  "statement": "abbrev proEtaleDerivedCategory (Y : Scheme.{u}) (A : Type u) [CommRing A] : Type _",
+  "statement": "abbrev proEtaleDerivedCategory (Y : Scheme.{t}) (A : Type t) [CommRing A] : Type _",
   "branch": "sheaf-dag",
-  "by": "K1",
+  "by": "H1",
   "date": "2026-10-11",
   "existing": false,
-  "fixed_by": "R-pes0858"
+  "fixed_by": "R-pes0858",
+  "note": "The RingCat-only constant sheaf presentation could not use the existing commutative-ring sheaf tensor or K-flat predicate. Form the constant CommRingCat sheaf first and forget commutativity, defining the same A_Y and derived category with commutativity available."
  },
  "reviewed_lean": {
   "date": "2026-10-11",
   "by": "L",
-  "reviewer": "R-pes0858",
-  "group": "K1",
+  "reviewer": "R-ddt1257",
+  "group": "H1",
   "result": "fix",
-  "note": "Y arbitrary Scheme.{u}; Y.ProEt = Over WeaklyEtale (flat + flat diagonal) with all Y-morphisms; ProEt.topology from proetalePrecoverage = propQCPrecoverage WeaklyEtale (fpqc finite-affine-image); A : Type u CommRing via ULift; A_Y = constantSheaf (const + presheafToSheaf) in RingCat; SheafOfModules of A_Y (abelian); unbounded DerivedCategory; FIX: def with letI gave a bare Type with no Category instance, now abbrev @DerivedCategory .. (standard _) so Category/Pretriangulated infer; no Mathlib/source declaration of this composite"
+  "note": "Y_proet/A_Y (CommRingCat constant sheaf forgotten to RingCat), K1 K2 unbounded, chosen P->K1 QuasiIso with sheaf IsKFlat (06YN), value Q.obj Tot(P (x) K2) via mapBifunctor curriedTensor of SheafOfModules.monoidalCategory, B_Y restrictScalars along constant-sheaf map in degree 0; KFlat fixed with synthInstance.maxSize 256 (HasMapBifunctor failed at max u v); 13 KFlat importers + DerivedTensor recompiled clean against fixed KFlat"
  }
 }
