@@ -4259,3 +4259,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 10:32 L: merged deliver/H1/lem-weil-pbc-finite-surjective-affine-target (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.FiniteSurjectiveAffineTarget AlgebraicGeometry.isAffine_of_isFinite_surjective)
 - 10:32 L: merged deliver/H1/lem-weil-pbc-finite-type-module-sheaf-stalk-finitely-generated (stage 2; reviewer FIX; first push; Sheaf.AlgebraicGeometry.FiniteTypeEtaleModuleStalk AlgebraicGeometry.Scheme.finite_geometric_stalk_of_isFiniteType)
 - 10:33 L: merged deliver/H1/lem-weil-pbc-formal-glueing-finite-modules (stage 2; reviewer PASS; first push; Sheaf.RingTheory.FiniteIffFormalGlueing Module.finite_iff_formalGlueing)
+- 10:33 L: merged deliver/E1/lem-weil-pbc-formally-smooth-complete-local-regular (stage 2; reviewer PASS; first push; Sheaf.RingTheory.FormallySmoothCompleteLocalRegular RingHom.isRegular_of_formallySmoothAdic)

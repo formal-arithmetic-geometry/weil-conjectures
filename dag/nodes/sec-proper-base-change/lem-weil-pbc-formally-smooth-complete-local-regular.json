@@ -242,5 +242,23 @@
   "result": "accepted",
   "note": "9 steps following Stacks 07PM (4)=>(1): flatness and geometrically regular closed fibre (new unsplit 07NQ node); reduction to A a domain and p = (0) via quotients (0325 node) and base change (new unsplit 07EG node); the coefficient ring A_0 (032D node) and the lift C formally smooth over A_0 with C (x) A = B (new unsplit node for Remark 07NS (3)(4) with 07NR); reduction to C (x) K_0 via 0381-type geometrically-regular extensions; C regular by 031E; characteristic 0 done; characteristic p by induction along the p-th root tower (new unsplit Fields 09HI node), the finite subring A', a derivation with D(f) nonzero (new unsplit 07PH node), lifted through the formally smooth C (x) A' (new unsplit 07PL node, stated with only the completeness of S its proof uses, L accepted) and to the localization, then 07PG (new unsplit node). Source errors recorded by the worker: 07PM cites 07EH (descent) where base change 07EG is used; 07PL is applied to A' -> B (x) A' without checking it is local; typo 'B (x)_A M ring is regular'. The discrete-topology convention of def-weil-pbc-formally-smooth-adic on the base agrees with the adic one for local maps (07EC (2))."
  },
- "lead_note": " L 2026-10-10: the citation of lem-weil-pbc-find-derivation-not-pth-power (duplicate of 07PH) repointed to lem-weil-pbc-derivation-nonzero-on-non-pth-power, same statement."
+ "lead_note": " L 2026-10-10: the citation of lem-weil-pbc-find-derivation-not-pth-power (duplicate of 07PH) repointed to lem-weil-pbc-derivation-nonzero-on-non-pth-power, same statement.",
+ "lean": {
+  "module": "Sheaf.RingTheory.FormallySmoothCompleteLocalRegular",
+  "declaration": "RingHom.isRegular_of_formallySmoothAdic",
+  "file": "lean/Sheaf/RingTheory/FormallySmoothCompleteLocalRegular.lean",
+  "statement": "theorem isRegular_of_formallySmoothAdic {A : Type u} {B : Type v} [CommRing A] [CommRing B] [IsNoetherianRing A] [IsNoetherianRing B] [IsLocalRing A] [IsLocalRing B] [IsAdicComplete (IsLocalRing.maximalIdeal A) A] [IsAdicComplete (IsLocalRing.maximalIdeal B) B] (φ : A →+* B) [IsLocalHom φ] (hfs : letI : Algebra A B := φ.toAlgebra Algebra.FormallySmoothAdic A B (IsLocalRing.maximalIdeal B)) : φ.IsRegular",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-fsr1033",
+  "group": "E1",
+  "result": "pass",
+  "note": "A,B Noetherian local, IsAdicComplete at maximal ideals; IsLocalHom phi = phi(m_A) in m_B; hfs FormallySmoothAdic A B m_B under phi.toAlgebra (recorded H1 def, D : Type (max u v)); conclusion recorded RingHom.IsRegular = Flat + all primes p.Fiber B Noetherian & geometrically regular over p.ResidueField; #check resolves; no hollow hypotheses"
+ }
 }
