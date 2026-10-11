@@ -13,6 +13,7 @@ public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.HomologyS
 public import WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory.Plus
 public import WeilConjectures.Mathlib.CategoryTheory.Functor.ReflectsIso.Jointly
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.TStructure
+public import WeilConjectures.Mathlib.CategoryTheory.Triangulated.TStructure.SpectralObject
 
 /-!
 # Functoriality of `mapDerivedCategory`
@@ -432,6 +433,15 @@ noncomputable instance : F.mapDerivedCategoryPlus.CommShift ℤ := by
 instance : F.mapDerivedCategoryPlus.IsTriangulated := by
   dsimp only [mapDerivedCategoryPlus]
   infer_instance
+
+/-- The functor induced by an exact functor on the bounded below derived categories is t-exact
+for the canonical t-structures. -/
+instance : F.mapDerivedCategoryPlus.IsTExact DerivedCategory.Plus.TStructure.t
+    DerivedCategory.Plus.TStructure.t where
+  isLE X n _ := (DerivedCategory.Plus.isLE_ι_obj_iff (F.mapDerivedCategoryPlus.obj X) n).1
+    (F.isLE_mapDerivedCategory_obj (DerivedCategory.Plus.ι.obj X) n)
+  isGE X n _ := (DerivedCategory.Plus.isGE_ι_obj_iff (F.mapDerivedCategoryPlus.obj X) n).1
+    (F.isGE_mapDerivedCategory_obj (DerivedCategory.Plus.ι.obj X) n)
 
 /-- The functor `F.mapDerivedCategoryPlus` induced on the bounded below derived categories
 by an exact functor `F` factors the functor `F.mapHomotopyCategoryPlus` on the bounded
