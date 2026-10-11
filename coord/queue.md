@@ -1,8 +1,8 @@
 # Work queue
 
-858 items; claim with `tools/claim.py next <group> [--stage N]`.
+857 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (46)
+## Stage 1: nodes to split (45)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -14,8 +14,8 @@
 | `lem-pc-module-opcycles-tor-surjection` | 3018 | none |
 | `lem-pc-tor-independent-projective-complex-tensor` | 3022 | none |
 | `lem-sc-affine-koszul-hom-alternating-cech` | 3022 | none |
-| `lem-sc-perfect-ext-bounded-qcoh-vanishing` | 3022 | none |
 | `lem-sc-qcoh-complex-alternating-cech-derived-sections` | 3022 | none |
+| `lem-sc-perfect-hypercohomology-gap` | 3023 | none |
 | `lem-pc-ring-pseudo-coherent-distinguished-triangle` | 3024 | none |
 | `lem-pc-genus-agrees-sc` | 4007 | rests_on_sorry |
 | `prop-av-tate-rank` | 4008 | rests_on_sorry |
@@ -28,19 +28,18 @@
 | `lem-pc-affine-derived-base-change-comparison-map` | 5016 | none |
 | `lem-pc-affine-flat-module-descent` | 5016 | none |
 | `lem-pc-rf-mv-triangle-naturality` | 5016 | none |
-| `lem-pc-sites-sheafification-underlying-sets` | 5016 | none |
 | `lem-sp-ce-vertical-nullhomotopy` | 6008 | none |
 | `lem-sp-filtered-complex-associated-spectral-sequence-construction` | 6008 | none |
 | `lem-sc-picard-h1-multiple-locus` | 6013 | none |
 | `pqf-lem-serre-criterion` | 6013 | none |
 | `lem-sc-perfect-degree-zero-fibre-criterion` | 6014 | none |
 | `lem-sc-perfect-finite-free-residue-model` | 6014 | none |
-| `lem-sc-perfect-jump-loci` | 6014 | none |
 | `lem-sc-picard-kunneth-qcoh` | 6014 | none |
 | `lem-sc-valuation-closed-fibre-section-vanishing` | 6014 | none |
 | `lem-sc-valuation-fp-torsionfree-free` | 6014 | none |
 | `lem-sc-valuation-proper-coherent-sections` | 6014 | none |
 | `lem-sc-valuation-zero-section-relative-cartier` | 6014 | none |
+| `lem-sc-finite-free-complex-homology-upper-semicontinuous` | 6015 | none |
 | `lem-sc-base-change-curve` | - | none |
 | `lem-sc-global-functions` | - | rests_on_sorry |
 | `lem-pc-coherent-property-devissage` | - | none |
@@ -51,7 +50,7 @@
 | `lem-pc-flf-properties` | - | none |
 | `lem-pur-left-derived-from-kflat-class` | - | none |
 | `lem-wf-lie-algebra-derivation-bracket` | - | none |
-| `lem-pur-rhom-into-kinjective-local` | - | none |
+| `lem-pur-site-restriction-module-adjunction-exact` | - | none |
 
 ## Stage 2: nodes to state (812)
 
@@ -870,7 +869,7 @@
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 | `def-nagata-fixed-base-separated-stage` | 6 | state |
 
-Not open yet: 1704 nodes that wait for a statement dependency, 87 nodes that wait for stage 1.
+Not open yet: 1707 nodes that wait for a statement dependency, 86 nodes that wait for stage 1.
 
 ## Stage 3: modules to prove (0)
 
