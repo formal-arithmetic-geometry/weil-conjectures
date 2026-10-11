@@ -26,6 +26,7 @@ the commutations with shifts of `WeilConjectures.SixFunctors.Etale.Derived.Shift
 
 - `AlgebraicGeometry.Etale.isTriangulated_rightDerivedLowerStar`
 - `AlgebraicGeometry.Etale.isTriangulated_rightDerivedLowerShriek`
+- `AlgebraicGeometry.Etale.isTriangulated_leftDerivedUpperStar`
 - `AlgebraicGeometry.Etale.isTriangulated_derivedTensorRight`
 - `AlgebraicGeometry.Etale.isTriangulated_derivedTensor_obj`
 -/
@@ -64,6 +65,14 @@ section Monoidal
 
 variable [MonoidalCategory A] [MonoidalPreadditive A] [SymmetricCategory A] [MonoidalClosed A]
   [Abelian.HasFunctorialFlatResolution A] {X : Scheme.{u}}
+
+/-- The derived pullback `Lg^*` is a triangulated functor, being isomorphic, compatibly with the
+shifts, to the functor `D(g^*)` induced by the exact pullback. -/
+instance isTriangulated_leftDerivedUpperStar {Z Y : Scheme.{u}} (g : Z ⟶ Y) :
+    (L((g)^*[A])).IsTriangulated :=
+  have : NatTrans.CommShift (leftDerivedUpperStarIsoMapDerivedCategory A g).symm.hom ℤ :=
+    Functor.CommShift.ofIso_compatibility (leftDerivedUpperStarIsoMapDerivedCategory A g).symm ℤ
+  Functor.isTriangulated_of_iso (leftDerivedUpperStarIsoMapDerivedCategory A g).symm
 
 /-- Tensoring on the right with a fixed complex, `M ↦ M ⊗ᴸ K`, commutes with shifts. -/
 noncomputable instance commShiftDerivedTensorRight
