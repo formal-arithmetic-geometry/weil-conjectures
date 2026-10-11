@@ -258,5 +258,23 @@
   "worker": "stage1",
   "summary": "Split from the proof of Stacks 00Q1 (algebra.tex line 30666), in 10 steps: set-up (finite type, R[x] = polynomial ring); normal case: quasi-finite => kappa(q)/kappa(p) finite (00PJ on the fibre + fibre residue fields), kappa(r)/kappa(p) finite, pR[x] prime and strictly inside r (argument written out; the source states it without proof), going down for R[x] ⊂ S (030A + 00GK + 00H8), q not isolated (fibre-prime bijection preserves inclusion); general case: R' = integral closure of R in K (normal, existing leaf), S' = R'S in L, x strongly transcendental over R' (clearing denominators, unstated in the source), S' finite over R'[x], Spec S' -> Spec S surjective (00GQ), four rings lemma 00PN. Statement kept; it is exactly what step 4 of lem-weil-pbc-reduced-strongly-transcendental-not-quasi-finite uses. New Mathlib leaves: lem-weil-pbc-polynomial-ring-normal-domain (030A, instIsIntegrallyClosedPolynomialOfIsDomain) and lem-weil-pbc-going-down-normal-integral (00H8, HasGoingDown instance + Ideal.exists_ideal_le_liesOver_of_le). Mathlib candidate Algebra.not_isStronglyTranscendental_of_quasiFiniteAt kept as candidate only (B8; it is 00Q2 for Mathlib's QuasiFiniteAt)."
  },
- "reviewed": "pass (L, 2026-10-10): 10 steps follow 00Q1: normal case by going down (new leaves 030A and 00H8) from the finiteness of kappa(q) over kappa(p) and the strictness of pR[x] in r (written out), general case by normalizing R, lying over and the four-rings lemma."
+ "reviewed": "pass (L, 2026-10-10): 10 steps follow 00Q1: normal case by going down (new leaves 030A and 00H8) from the finiteness of kappa(q) over kappa(p) and the strictness of pR[x] in r (written out), general case by normalizing R, lying over and the four-rings lemma.",
+ "lean": {
+  "module": "Sheaf.RingTheory.NotQuasiFiniteAtPrimeOfStronglyTranscendental",
+  "declaration": "Algebra.not_isQuasiFiniteAtPrime_of_isStronglyTranscendental",
+  "file": "lean/Sheaf/RingTheory/NotQuasiFiniteAtPrimeOfStronglyTranscendental.lean",
+  "statement": "theorem not_isQuasiFiniteAtPrime_of_isStronglyTranscendental (R : Type u) (S : Type v) [CommRing R] [CommRing S] [IsDomain R] [IsDomain S] [Algebra R S] [FaithfulSMul R S] (x : S) (hx : IsStronglyTranscendental R x) [Module.Finite (Algebra.adjoin R ({x} : Set S)) S] : letI : Algebra.FiniteType R S := Algebra.FiniteType.trans (Algebra.FiniteType.adjoin_of_finite (Set.finite_singleton x)) (inferInstance : Algebra.FiniteType (Algebra.adjoin R ({x} : Set S)) S) ∀ q : PrimeSpectrum S, ¬ IsQuasiFiniteAtPrime R S q",
+  "branch": "sheaf-dag",
+  "by": "J1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-dst0950",
+  "group": "J1",
+  "result": "pass",
+  "note": "R,S CommRing+IsDomain (domains); Algebra+FaithfulSMul (inclusion R⊆S); x:S with Mathlib IsStronglyTranscendental (dep mathlib_match, 00PZ, #print matches u·φ(a_i)=0); Module.Finite (Algebra.adjoin R {x}) S (S finite over R[x]); FiniteType via letI from adjoin_of_finite+trans (node's parenthetical, Prop class, no added hypothesis); ∀ q : PrimeSpectrum S, ¬ Algebra.IsQuasiFiniteAtPrime R S q (landed C1/E1 def, #check resolves to Algebra.*)"
+ }
 }
