@@ -131,5 +131,24 @@
   "group": "H1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-dfc2233 (reviewer sub-agent of L); spot-checked: Statement is the repaired Tag 09KN form (degreewise surjective, surjective on cocycles, degreewise split 0->Q'->Q->Q''->0 with Q',Q'' sums of A[k], zero differential); unchanged since base. Step 1 two-term T(n,m) gives degreewise surjectivity, step 2 cocycle shifts give surjectivity on cocycles (checked M=A[0] where contractible pieces alone fail), step 3 Q' = upper terms + cocycle shifts is a subcomplex with zero-differential quotient. Only termwise direct sums of complexes are used (elementary, as in step 1 of lem-pc-derived-module-direct-sums); that node's D(A)-coproduct statement is not needed, so no C1. No restated node (class b): only this item and its parent use carry the 09KN construction. FIX more, RETURN less: shift sign: steps wrote A[n], A[n+1] for summands in degrees n, n+1 (with N[k]^j=N^{j+k} these sit in degrees -n, -n-1, so the maps to M^n were not of degree 0); now A[-n] -> A[-n-1] and A[-n] with the convention stated; step 2 now says why S(n,z)->M is a chain map and that Z^n(Q)->Z^n(M) is onto; step 3 says why Q' is a subcomplex. H1's second reading missed the shift sign, and its claim to have changed created.item is not in the file (created.item correctly stays lem-pc-derived-filtered-free-resolution).; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.FreeComplexCover",
+  "declaration": "CochainComplex.exists_freeComplexCover",
+  "file": "lean/Sheaf/Algebra/Homology/FreeComplexCover.lean",
+  "statement": "theorem exists_freeComplexCover {A : Type u} [CommRing A] (M : CochainComplex (ModuleCat.{u} A) ℤ) : ∃ (S : ShortComplex (CochainComplex (ModuleCat.{u} A) ℤ)) (f : S.X₂ ⟶ M), (∀ n : ℤ, Function.Surjective (f.f n)) ∧ (∀ (n : ℤ) (z : M.X n), M.d n (n + 1) z = 0 → ∃ x : S.X₂.X n, S.X₂.d n (n + 1) x = 0 ∧ f.f n x = z) ∧ S.ShortExact ∧ (∀ n : ℤ, Nonempty (S.map (HomologicalComplex.eval (ModuleCat.{u} A) (ComplexShape.up ℤ) n)).Splitting) ∧ ∃ (I₁ I₃ : Type u) (d₁ : I₁ → ℤ) (d₃ : I₃ → ℤ), Nonempty (S.X₁ ≅ ∐ (fun i : I₁ => (HomologicalComplex.single (ModuleCat.{u} A) (ComplexShape.up ℤ) (d₁ i)).obj (ModuleCat.of A A))) ∧ Nonempty (S.X₃ ≅ ∐ (fun i : I₃ => (HomologicalComplex.single (ModuleCat.{u} A) (ComplexShape.up ℤ) (d₃ i)).obj (ModuleCat.of A A)))",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-dfc0737"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-dfc0737",
+  "group": "C1",
+  "result": "fix",
+  "note": "A commutative ring ([Ring] -> [CommRing], Stacks convention), M : CochainComplex (ModuleCat A) Z; f : S.X2 -> M degreewise surjective; cocycle lift x with d x = 0, f x = z; S.ShortExact with each degree split via eval; S.X1, S.X3 iso to coproducts of single (ModuleCat.of A A) in degrees d_i (zero differential, empty index allowed); docstring has the 3 proof steps; no Mathlib/source match (source FreeComplex.lean is finite free complexes); unused EpiMono import removed"
  }
 }
