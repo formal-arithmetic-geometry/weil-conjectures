@@ -1497,6 +1497,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekProjectionBas
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekProjectionExchange
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekProjectionRefinement
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekProjectionShift
+public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekReduction
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekToLowerStar
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekTransport
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerStarProjection
