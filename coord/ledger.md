@@ -5058,3 +5058,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 14:49 L: merged deliver/U1/lem-weil-pbc-symmetric-algebra-quotient-module (stage 2; reviewer PASS; first push; Sheaf.RingTheory.SymmetricAlgebraQuotientModule symmetricAlgebra_quotient_module)
 - 14:49 L: merged deliver/N1/lem-weil-pbc-spectral-sheaf-colimit-constant-embeddings (stage 2; reviewer PASS; first push; Sheaf.Topology.SpectralSheafColimitConstantEmbeddings TopCat.spectral_sheaf_colimit_constant_embeddings)
 - 14:49 L: merged deliver/H1/lem-weil-pbc-tilde-pullback-base-change (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.TensorPullbackTilde AlgebraicGeometry.Scheme.Modules.exists_tensorPullback_tilde_iso)
+- 14:50 L: merged deliver/Q1/lem-sc-p1-proj-tilde-functorial (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.ProjTildeFunctorial AlgebraicGeometry.Proj.tilde_functorial)
