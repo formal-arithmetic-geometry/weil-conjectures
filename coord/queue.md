@@ -1,11 +1,11 @@
 # Work queue
 
-464 items; claim with `tools/claim.py next <group> [--stage N]`.
+462 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (464)
+## Stage 2: nodes to state (462)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -38,10 +38,8 @@
 | `lem-sc-hilbert-difference` | 1 | state |
 | `lem-sc-hilbert-embedded-points-gluing` | 1 | state |
 | `lem-sc-intersection-effective-cartier` | 1 | state |
-| `lem-sc-perfect-local-pseudocoherent-free-model` | 1 | state |
 | `lem-sc-picard-kunneth-qcoh` | 1 | state |
 | `lem-sc-pseudo-coherent-qcoh` | 1 | state |
-| `lem-sc-qc-open-derived-lift` | 1 | state |
 | `lem-sc-top-dimensional-reduction-intersection` | 1 | state |
 | `lem-sc-valuation-proper-coherent-higher-direct-images` | 1 | state |
 | `lem-weil-derived-limit-roos-complex` | 1 | state |
