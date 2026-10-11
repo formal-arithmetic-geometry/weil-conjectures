@@ -132,5 +132,24 @@
   "group": "G1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of G1; spot-checked by L: L: reviewed in full by a reviewer sub-agent (FIX: stmt_deps completed): 00M1 injectivity paragraph read, 2 steps checked with the + convention, small cases n = 0, 1"
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.ZigzagTrivialIfRowBoundary",
+  "declaration": "HomologicalComplex₂.zigzag_trivial_if_row_boundary",
+  "file": "lean/Sheaf/Algebra/Homology/ZigzagTrivialIfRowBoundary.lean",
+  "statement": "theorem zigzag_trivial_if_row_boundary (A : HomologicalComplex₂ (ModuleCat.{v} R) (ComplexShape.down ℕ) (ComplexShape.down ℕ)) (hrow : ∀ (p q : ℕ), 0 < p → (ShortComplex.mk ((A.d (p + 1) p).f q) ((A.d p (p - 1)).f q) (by rw [← HomologicalComplex.comp_f, A.d_comp_d, HomologicalComplex.zero_f])).Exact) (n : ℕ) (a : zigzagTotal A n) (ha : a ∈ zigzagCycles A n) (hboundary : ∃ y : (A.opcycles 0).X (n + 1), (A.opcycles 0).d (n + 1) n y = (A.pOpcycles 0).f n (DirectSum.component R (ZigzagIndex n) (fun i : ZigzagIndex n => (A.X i.1.1).X i.1.2) ⟨(0, n), by simp⟩ a)) : a ∈ zigzagBoundaries A n",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-ztb0957"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-ztb0957",
+  "group": "H1",
+  "result": "fix",
+  "note": "R CommRing; A HomologicalComplex₂ ModuleCat down ℕ down ℕ; A^rt := A.opcycles 0 with pOpcycles (replaced arbitrary C/π cokernel coforks, E1/G1 form); rows exact p≥1 via ShortComplex.Exact in E1's spelling; a ∈ zigzagCycles A n; π_n(a_{0,n}) ∈ im (opcycles 0).d (n+1) n; conclusion a ∈ zigzagBoundaries A n; n=0 checked"
  }
 }
