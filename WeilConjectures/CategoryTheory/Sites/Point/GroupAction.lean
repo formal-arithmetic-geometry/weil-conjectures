@@ -10,6 +10,7 @@ public import Mathlib.Algebra.Category.Grp.FilteredColimits
 public import Mathlib.Algebra.Category.Grp.Limits
 public import Mathlib.CategoryTheory.Action.Basic
 public import Mathlib.CategoryTheory.Sites.Point.Category
+public import WeilConjectures.Mathlib.CategoryTheory.Sites.Point.ConstantSheaf
 
 /-!
 # Points of a site with a group action
@@ -344,5 +345,46 @@ noncomputable def sheafFiberActionAdjunction :
         refine NatTrans.ext (funext fun M ↦ Sheaf.hom_ext (NatTrans.ext (funext fun X ↦
           AddCommGrpCat.ext fun f ↦ Subtype.ext (funext fun x ↦ ?_))))
         exact toPresheafFiber_fromEquivariantSheaf_hom_apply _ _ _ _ _ _ }
+
+section constant
+
+/-- The action of `σ` on fibres of presheaves is natural. -/
+@[reassoc]
+lemma presheafFiber_map_presheafFiberAct {P Q : Cᵒᵖ ⥤ AddCommGrpCat.{w}} (f : P ⟶ Q) (σ : G) :
+    Φ.presheafFiber.map f ≫ Φ.presheafFiberAct act Q σ =
+      Φ.presheafFiberAct act P σ ≫ Φ.presheafFiber.map f :=
+  Φ.presheafFiber_hom_ext fun X x ↦ by
+    rw [toPresheafFiber_naturality_assoc, toPresheafFiber_presheafFiberAct,
+      toPresheafFiber_presheafFiberAct_assoc, toPresheafFiber_naturality]
+
+/-- `G` acts trivially on the fibre of a constant presheaf. -/
+lemma presheafFiberAct_const (A : AddCommGrpCat.{w}) (σ : G) :
+    Φ.presheafFiberAct act ((Functor.const Cᵒᵖ).obj A) σ = 𝟙 _ :=
+  Φ.presheafFiber_hom_ext fun X x ↦ by
+    rw [toPresheafFiber_presheafFiberAct, Category.comp_id,
+      ← cancel_mono (Φ.presheafFiberConstIso A).hom, toPresheafFiber_presheafFiberConstIso_hom,
+      toPresheafFiber_presheafFiberConstIso_hom]
+
+variable [HasSheafify J AddCommGrpCat.{w}] [J.WEqualsLocallyBijective AddCommGrpCat.{w}]
+  [LocallySmall.{w} C]
+
+/-- `G` acts trivially on the fibre of a constant sheaf. -/
+lemma sheafFiberAction_constantSheaf_ρ (A : AddCommGrpCat.{w}) (σ : G) :
+    ((Φ.sheafFiberAction act).obj ((constantSheaf J AddCommGrpCat.{w}).obj A)).ρ σ = 𝟙 _ := by
+  change Φ.presheafFiberAct act (CategoryTheory.sheafify J ((Functor.const Cᵒᵖ).obj A)) σ = 𝟙 _
+  rw [← cancel_epi (Φ.presheafFiber.map (CategoryTheory.toSheafify J ((Functor.const Cᵒᵖ).obj A))),
+    presheafFiber_map_presheafFiberAct, presheafFiberAct_const, Category.id_comp,
+    Category.comp_id]
+
+/-- The fibre of the constant sheaf with value `A`, with its action of `G`, is `A` with the
+trivial action. -/
+noncomputable def sheafFiberActionConstantSheafIso (A : AddCommGrpCat.{w}) :
+    (Φ.sheafFiberAction act).obj ((constantSheaf J AddCommGrpCat.{w}).obj A) ≅
+      Action.trivial G A :=
+  Action.mkIso (Φ.sheafFiberConstantSheafIso A) fun σ ↦ by
+    rw [sheafFiberAction_constantSheaf_ρ]
+    rfl
+
+end constant
 
 end CategoryTheory.GrothendieckTopology.Point
