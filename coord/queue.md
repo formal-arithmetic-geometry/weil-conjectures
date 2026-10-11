@@ -1,11 +1,11 @@
 # Work queue
 
-414 items; claim with `tools/claim.py next <group> [--stage N]`.
+412 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (414)
+## Stage 2: nodes to state (412)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -69,13 +69,11 @@
 | `lem-weil-derived-limit-roos-complex` | 1 | state |
 | `lem-weil-pbc-closed-immersion-conormal-flat-base-change` | 1 | state |
 | `lem-weil-pbc-pair-henselization` | 1 | state |
-| `lem-weil-pbc-popescu-enlarge-solution-modulo` | 1 | state |
 | `lem-weil-pbc-popescu-solution-modulo-choose` | 1 | state |
 | `lem-weil-pbc-power-series-parameter-quotient` | 1 | state |
 | `lem-weil-pbc-projective-space-functor-of-points` | 1 | state |
 | `lem-weil-pbc-purely-inseparable-base-change-local-ring` | 1 | state |
 | `lem-weil-pbc-purely-inseparable-pth-root-tower` | 1 | state |
-| `lem-weil-pbc-qcqs-higher-direct-image` | 1 | state |
 | `lem-weil-pbc-quasi-coherence-scalar-restriction` | 1 | state |
 | `lem-weil-pbc-quasi-coherent-affine-section-base-change` | 1 | state |
 | `lem-weil-pbc-quasi-coherent-algebra-colimit` | 1 | state |
