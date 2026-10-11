@@ -175,5 +175,23 @@
   "item": "lem-weil-pbc-site-covering-isomorphic-family",
   "worker": "stage1",
   "summary": "Checked the statement against Stacks Sites 00VH and its Clarifications. The statement as written was false: the axioms see index sets (axiom (1) gives a covering indexed by some singleton, axiom (2) gives a family indexed by pairs), and a site can contain a covering {x}_{\\{0\\}} while the isomorphic family {y}_{\\{0\\}} is not a covering (counterexample now in the statement, marked STATEMENT-DISPUTED). Corrected the conclusion to: a reindexing of {f_a} along a bijection A'->A is a covering, and {f_a}_{a in A} itself is one if Cov is closed under bijective reindexing. Proof in 5 steps from axioms (iii), (i), (ii) and the universal property of fibre products (all elementary or instances of the axioms of the definition node). The Clarifications paragraph does not say that (iii) holds for every choice of fibre products; that is avoided here by comparing the chosen fibre product with V_a directly. No new nodes. Mathlib re-searched with three kinds: no match (Mathlib's presieve-based precoverages have no index sets)."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.SiteCoveringIsomorphicFamily",
+  "declaration": "CategoryTheory.site_covering_isomorphic_family",
+  "statement": "theorem site_covering_isomorphic_family {C : Type u} [Category.{v} C] (J : Precoverage C) [Precoverage.HasIsos J] [Precoverage.IsStableUnderComposition J] [Precoverage.IsStableUnderBaseChange J] [Precoverage.HasPullbacks J] {A : Type (max u v)} {U : C} {Uₐ : A → C} (g : ∀ a, Uₐ a ⟶ U) (hg : Presieve.ofArrows Uₐ g ∈ J U) {V : C} (φ : V ⟶ U) [IsIso φ] {Vₐ : A → C} (f : ∀ a, Vₐ a ⟶ V) (σ : ∀ a, Vₐ a ⟶ Uₐ a) (hσ : ∀ a, IsIso (σ a)) (compat : ∀ a, σ a ≫ g a = f a ≫ φ) : (∃ (A' : Type (max u v)) (β : A' ≃ A), Presieve.ofArrows (fun a' => Vₐ (β a')) (fun a' => f (β a')) ∈ J V) ∧ Presieve.ofArrows Vₐ f ∈ J V",
+  "by": "P1",
+  "date": "2026-10-12",
+  "file": "lean/Sheaf/Paper/SiteCoveringIsomorphicFamily.lean",
+  "branch": "sheaf-dag",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "P1",
+  "result": "pass",
+  "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
  }
 }
