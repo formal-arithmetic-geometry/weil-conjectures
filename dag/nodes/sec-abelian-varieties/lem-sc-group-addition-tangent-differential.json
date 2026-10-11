@@ -123,5 +123,23 @@
   "group": "K1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-gat1957 (reviewer sub-agent of L); spot-checked: Re-push after 19:24 return: (1 E) product node now over a field k at k-rational points citing def-sc-scheme-tangent-space, fibre clause dropped - repaired; (2 C4) isomorphism stated k-linear, so Step 3 additivity is covered - repaired; (3) Second reading no longer claims a created.item correction; created.item = this item is right since the node is new in the diff. Steps 1-3 not reopened. No duplicate of Tag 0BEB in dag. FIX more, RETURN less: B3 TeX typo kappa(y) -> \\kappa(y) in the product node; Step 1 text still named the removed base S=Spec k, reworded to the field case at k-rational points x=y=e.; 2 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GroupAdditionTangentDifferential",
+  "declaration": "AlgebraicGeometry.group_addition_tangent_differential",
+  "file": "lean/Sheaf/AlgebraicGeometry/GroupAdditionTangentDifferential.lean",
+  "statement": "theorem group_addition_tangent_differential (k : Type u) [Field k] (G : Over (Spec (.of k))) [GrpObj G] : ∃ he : Function.Bijective (StructureSheaf.toStalk k (G.hom (GrpObj.onePoint G)) ≫ G.hom.stalkMap (GrpObj.onePoint G) ≫ G.left.residue (GrpObj.onePoint G)).hom, ∃ E : schemeTangentSpace k (G ⊗ G).left (G ⊗ G).hom (GrpObj.onePoint (G ⊗ G)) ≃+ (schemeTangentSpace k G.left G.hom (GrpObj.onePoint G) × schemeTangentSpace k G.left G.hom (GrpObj.onePoint G)), ∀ t : schemeTangentSpace k (G ⊗ G).left (G ⊗ G).hom (GrpObj.onePoint (G ⊗ G)), (t.val ≫ (fst G G).left = Spec.map (CommRingCat.ofHom (DualNumber.mapRingHom ((StructureSheaf.toStalk k ((G ⊗ G).hom (GrpObj.onePoint (G ⊗ G))) ≫ (G ⊗ G).hom.stalkMap (GrpObj.onePoint (G ⊗ G)) ≫ (G ⊗ G).left.residue (GrpObj.onePoint (G ⊗ G))).hom.comp (RingEquiv.ofBijective (StructureSheaf.toStalk k (G.hom (GrpObj.onePoint G)) ≫ G.hom.stalkMap (GrpObj.onePoint G) ≫ G.left.residue (GrpObj.onePoint G)).hom he).symm.toRingHom))) ≫ (E t).1.val) ∧ (t.val ≫ (snd G G).left = Spec.map (CommRingCat.ofHom (DualNumber.mapRingHom ((StructureSheaf.toStalk k ((G ⊗ G).hom (GrpObj.onePoint (G ⊗ G))) ≫ (G ⊗ G).hom.stalkMap (GrpObj.onePoint (G ⊗ G)) ≫ (G ⊗ G).left.residue (GrpObj.onePoint (G ⊗ G))).hom.comp (RingEquiv.ofBijective (StructureSheaf.toStalk k (G.hom (GrpObj.onePoint G)) ≫ G.hom.stalkMap (GrpObj.onePoint G) ≫ G.left.residue (GrpObj.onePoint G)).hom he).symm.toRingHom))) ≫ (E t).2.val) ∧ (t.val ≫ (MonObj.mul (X := G)).left = Spec.map (CommRingCat.ofHom (DualNumber.mapRingHom ((StructureSheaf.toStalk k ((G ⊗ G).hom (GrpObj.onePoint (G ⊗ G))) ≫ (G ⊗ G).hom.stalkMap (GrpObj.onePoint (G ⊗ G)) ≫ (G ⊗ G).left.residue (GrpObj.onePoint (G ⊗ G))).hom.comp (RingEquiv.ofBijective (StructureSheaf.toStalk k (G.hom (GrpObj.onePoint G)) ≫ G.hom.stalkMap (GrpObj.onePoint G) ≫ G.left.residue (GrpObj.onePoint G)).hom he).symm.toRingHom))) ≫ ((E t).1 + (E t).2).val)",
+  "branch": "sheaf-dag",
+  "by": "M1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-gat",
+  "group": "M1",
+  "result": "pass",
+  "note": "k field; G : Over (Spec k) with [GrpObj G] (STATE GROUP SCHEME); e = GrpObj.onePoint, (e,e) = onePoint (G ⊗ G); T via schemeTangentSpace (scheme-level, product-lemma form) with its canonical AddCommGroup; E : T_(e,e) ≃+ T_e × T_e tied by both projection postcompositions (same dual-number transport as product_tangentSpace_directSum, determined uniquely); dm = postcomposition with (MonObj.mul).left equals transported (E t).1 + (E t).2; he is the k-rationality of e, a conclusion; no lets, local instances or notation; node statement unchanged"
  }
 }
