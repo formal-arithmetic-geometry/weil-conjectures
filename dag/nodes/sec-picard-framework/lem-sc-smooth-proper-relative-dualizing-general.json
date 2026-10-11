@@ -28,7 +28,8 @@
   "def-sc-kahler-differentials",
   "def-pc-base-change",
   "def-weil-pbc-kahler-differentials",
-  "def-weil-pbc-exterior-algebra"
+  "def-weil-pbc-exterior-algebra",
+  "def-sc-sheaf-exterior-power"
  ],
  "proof": [
   {
@@ -201,5 +202,23 @@
    "decls": [],
    "missing": []
   }
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SmoothProperRelativeDualizing",
+  "declaration": "AlgebraicGeometry.smoothProper_dualizing",
+  "file": "lean/Sheaf/AlgebraicGeometry/SmoothProperRelativeDualizing.lean",
+  "statement": "theorem smoothProper_dualizing (X S : Scheme.{u}) [CompactSpace S] [IsLocallyNoetherian S] (f : X ⟶ S) (d : ℕ) [SmoothOfRelativeDimension d f] [IsProper f] [HasDerivedCategory.{wX} (SheafOfModules.{u} (moduleRings X.toRingedSpace))] [HasDerivedCategory.{wS} (SheafOfModules.{u} (moduleRings S.toRingedSpace))] (R : schemeDerivedQCohCategory X ⥤ schemeDerivedQCohCategory S) (comparison : R ⋙ (schemeDerivedQCohProperty S).ι ≅ (schemeDerivedQCohProperty X).ι ⋙ schemeDerivedDirectImage f) (a : schemeDerivedQCohCategory S ⥤ schemeDerivedQCohCategory X) (adj : R ⊣ a) (O : schemeDerivedQCohCategory S) (hO : O.obj ≅ (DerivedCategory.singleFunctor (SheafOfModules.{u} (moduleRings S.toRingedSpace)) 0).obj (SheafOfModules.unit (moduleRings S.toRingedSpace))) : Nonempty ((a.obj O).obj ≅ ((DerivedCategory.singleFunctor (SheafOfModules.{u} (moduleRings X.toRingedSpace)) 0).obj (Scheme.Modules.exteriorSheaf f.relativeDifferentials d))⟦(d : ℤ)⟧)",
+  "branch": "sheaf-dag",
+  "by": "V1",
+  "date": "2026-10-11",
+  "existing": false,
+  "note": "Uses the landed def-sc-sheaf-exterior-power for Ω^d; the additional statement dependency records this existing notion. R with comparison specifies Rf_* on D_QCoh, a with adj its right adjoint, and O with hO the structure sheaf in degree zero."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-srd",
+  "group": "V1",
+  "result": "pass"
  }
 }
