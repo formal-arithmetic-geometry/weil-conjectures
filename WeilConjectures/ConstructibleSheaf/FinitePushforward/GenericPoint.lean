@@ -8,6 +8,8 @@ module
 public import Mathlib.CategoryTheory.Sites.LocallyBijective
 public import WeilConjectures.AlgebraicGeometry.Sites.ModulePointFunctions
 public import WeilConjectures.ConstructibleSheaf.FinitePushforward.ConstantUnit
+public import WeilConjectures.RingTheory.ProEtale.WeakDimension
+public import Mathlib.RingTheory.Etale.Field
 
 /-!
 # Constant sheaves on a normal integral scheme and the generic point
@@ -24,7 +26,7 @@ normal domain are finite products of domains (Stacks 092W).
 
 universe u
 
-open CategoryTheory Limits Opposite
+open CategoryTheory Limits Opposite TensorProduct
 
 namespace AlgebraicGeometry
 
@@ -100,11 +102,117 @@ lemma Scheme.Hom.subsingleton_pullback_fromSpecStalk_genericPoint {W Z : Scheme.
   · obtain ⟨a, -⟩ := (Set.ext_iff.1 hr (genericPoint W)).2 rfl
     exact ⟨a⟩
 
+/-- **Étale algebras over a normal domain are locally domains.** Let `B` be an étale algebra over an
+integrally closed domain `R` and `q` a prime of `B`. Then some `b ∉ q` has `B[1/b]` a domain:
+`B` is integrally closed in `B ⊗_R K` (Stacks 092W), which is a finite product of fields `Aᵢ`, so
+the idempotents of the product come from `B`, and `B[1/bᵢ]` embeds into `Aᵢ`. -/
+theorem Algebra.Etale.exists_notMem_isDomain_localization {R B : Type u} [CommRing R]
+    [IsDomain R] [IsIntegrallyClosed R] [CommRing B] [Algebra R B] [Algebra.Etale R B]
+    (q : Ideal B) [q.IsPrime] : ∃ b : B, b ∉ q ∧ IsDomain (Localization.Away b) := by
+  classical
+  have : Nontrivial B := nontrivial_of_ne 0 1 fun h ↦
+    ‹q.IsPrime›.ne_top ((Ideal.eq_top_iff_one q).2 (h ▸ q.zero_mem))
+  let K := FractionRing R
+  have : IsIntegrallyClosedIn R K := (isIntegrallyClosed_iff_isIntegrallyClosedIn K).1 inferInstance
+  have : Algebra.IsAlgebraic R K := IsLocalization.isAlgebraic K (nonZeroDivisors R)
+  have hic := Algebra.WeaklyEtale.isIntegrallyClosedIn_tensorProduct R B K
+  obtain ⟨I, _, Ai, _, _, e, -⟩ :=
+    (Algebra.Etale.iff_exists_algEquiv_prod K (K ⊗[R] B)).1 inferInstance
+  have := Fintype.ofFinite I
+  -- the ring map `B ⟶ ∏ Aᵢ`, injective since `B` is flat over `R`
+  let ι : B →+* (∀ i, Ai i) := e.toRingHom.comp ((Algebra.TensorProduct.comm R B K).toRingHom.comp
+    (algebraMap B (B ⊗[R] K)))
+  have hι : Function.Injective ι :=
+    e.injective.comp ((Algebra.TensorProduct.comm R B K).injective.comp
+    (Algebra.TensorProduct.includeLeft_injective (S := R) (IsFractionRing.injective R K)))
+  -- the idempotents of `∏ Aᵢ` come from `B`
+  have hb (i : I) : ∃ b : B, ι b = Pi.single i 1 := by
+    let f : B ⊗[R] K := (Algebra.TensorProduct.comm R B K).symm (e.symm (Pi.single i 1))
+    have hid : f * f = f := by
+      simp only [f, ← map_mul, ← Pi.single_mul, one_mul]
+    have hf : _root_.IsIntegral B f :=
+      ⟨Polynomial.X ^ 2 - Polynomial.X,
+        Polynomial.monic_X_pow_sub (by rw [Polynomial.degree_X]; norm_num), by simp [sq, hid]⟩
+    obtain ⟨b, hb⟩ := IsIntegrallyClosedIn.isIntegral_iff.1 hf
+    refine ⟨b, ?_⟩
+    change e ((Algebra.TensorProduct.comm R B K) (algebraMap B _ b)) = _
+    rw [hb]
+    simp [f]
+  choose b hb using hb
+  have hsum : ∑ i, b i = 1 := hι (by
+    rw [map_sum, map_one]
+    simp only [hb]
+    exact Finset.univ_sum_single (fun _ ↦ 1))
+  obtain ⟨i, hi⟩ : ∃ i, b i ∉ q := by
+    by_contra! h
+    exact ‹q.IsPrime›.ne_top ((Ideal.eq_top_iff_one q).2 (hsum ▸ q.sum_mem fun i _ ↦ h i))
+  refine ⟨b i, hi, ?_⟩
+  let π : B →+* Ai i := (Pi.evalRingHom Ai i).comp ι
+  have hπb : π (b i) = 1 := by simp [π, hb]
+  let φ : Localization.Away (b i) →+* Ai i :=
+    IsLocalization.Away.lift (b i) (by rw [hπb]; exact isUnit_one)
+  refine Function.Injective.isDomain φ ((injective_iff_map_eq_zero φ).2 fun z hz ↦ ?_)
+  obtain ⟨⟨x, _, n, rfl⟩, rfl⟩ := IsLocalization.mk'_surjective (Submonoid.powers (b i)) z
+  have hx : π x = 0 := by
+    simp only [φ, IsLocalization.Away.lift, IsLocalization.lift_mk'] at hz
+    simpa using hz
+  have hxb : x * b i = 0 := hι (by
+    rw [map_mul, hb, map_zero]
+    ext j
+    by_cases h : j = i
+    · subst h
+      simpa [π] using hx
+    · simp [h])
+  exact (IsLocalization.mk'_eq_zero_iff _ _).2 ⟨⟨b i, Submonoid.mem_powers _⟩, by
+    rw [mul_comm]; exact hxb⟩
+
 /-- **Étale schemes over a normal integral scheme are locally integral.** -/
 lemma Scheme.exists_isIntegral_of_isIntegrallyClosed {Z : Scheme.{u}} [IsIntegral Z]
     (hZ : ∀ z : Z, IsIntegrallyClosed (Z.presheaf.stalk z)) (V : Z.Etale) (x : V.left) :
     ∃ U : V.left.Opens, x ∈ U ∧ IsIntegral U.toScheme := by
-  sorry
+  have : AlgebraicGeometry.Etale V.hom := V.prop
+  obtain ⟨U, hU, hxU, -⟩ :=
+    exists_isAffineOpen_mem_and_subset (show V.hom x ∈ (⊤ : Z.Opens) from trivial)
+  obtain ⟨A, hA, hxA, hAU⟩ := exists_isAffineOpen_mem_and_subset (X := V.left)
+    (show x ∈ (V.hom ⁻¹ᵁ U : V.left.Opens) from hxU)
+  have : Nonempty U := ⟨⟨_, hxU⟩⟩
+  -- `Γ(Z, U)` is an integrally closed domain
+  have : IsIntegrallyClosed Γ(Z, U) := IsIntegrallyClosed.of_localization_maximal fun P _ _ ↦ by
+    let y : PrimeSpectrum Γ(Z, U) := ⟨P, inferInstance⟩
+    have hy : hU.fromSpec y ∈ U := by
+      have : hU.fromSpec y ∈ Set.range hU.fromSpec := ⟨y, rfl⟩
+      rwa [hU.range_fromSpec] at this
+    let := TopCat.Presheaf.algebra_section_stalk Z.presheaf ⟨_, hy⟩
+    have := hU.isLocalization_stalk' y hy
+    have := hZ (hU.fromSpec y)
+    exact IsIntegrallyClosed.of_equiv
+      (IsLocalization.algEquiv P.primeCompl (Z.presheaf.stalk (hU.fromSpec y))
+        (Localization.AtPrime P)).toRingEquiv
+  -- the étale algebra `Γ(Z, U) ⟶ Γ(V, A)`
+  let φ : Γ(Z, U) ⟶ Γ(V.left, A) := V.hom.appLE U A hAU
+  let := φ.hom.toAlgebra
+  have : Algebra.Etale Γ(Z, U) Γ(V.left, A) := by
+    rw [← RingHom.etale_algebraMap]
+    exact HasRingHomProperty.appLE @AlgebraicGeometry.Etale V.hom inferInstance ⟨U, hU⟩ ⟨A, hA⟩ _
+  obtain ⟨b, hbq, hdom⟩ :=
+    Algebra.Etale.exists_notMem_isDomain_localization (R := Γ(Z, U))
+      (hA.primeIdealOf ⟨x, hxA⟩).asIdeal
+  have hxb : x ∈ V.left.basicOpen b := by
+    rw [Scheme.mem_basicOpen _ _ _ hxA]
+    by_contra h
+    apply hbq
+    rw [hA.primeIdealOf_eq_map_closedPoint]
+    exact (IsLocalRing.mem_maximalIdeal _).2 h
+  refine ⟨V.left.basicOpen b, hxb, ?_⟩
+  · have hB := hA.isLocalization_basicOpen b
+    have : IsAffine (V.left.basicOpen b).toScheme := hA.basicOpen b
+    have : Nonempty (V.left.basicOpen b).toScheme := ⟨⟨x, hxb⟩⟩
+    have : IsDomain Γ(V.left, V.left.basicOpen b) := Function.Injective.isDomain
+      (IsLocalization.algEquiv (Submonoid.powers b) Γ(V.left, V.left.basicOpen b)
+        (Localization.Away b)).toRingEquiv.toRingHom (RingEquiv.injective _)
+    have : IsDomain Γ((V.left.basicOpen b).toScheme, ⊤) := Function.Injective.isDomain
+      (Scheme.Opens.topIso _).commRingCatIsoToRingEquiv.toRingHom (RingEquiv.injective _)
+    exact isIntegral_of_isAffine_of_isDomain _
 
 /-- **Constant sheaves on a normal integral scheme, at the generic point** (the generic-point
 half of Stacks 09Z5). Let `Z` be an integral scheme whose local rings are integrally closed and

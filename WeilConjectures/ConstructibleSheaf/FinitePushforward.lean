@@ -9,6 +9,7 @@ public import Mathlib.AlgebraicGeometry.FunctionField
 public import Mathlib.CategoryTheory.Presentable.Finite
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Sheaf
 public import WeilConjectures.ConstructibleSheaf.Defs
+public import WeilConjectures.ConstructibleSheaf.FinitePushforward.GenericPoint
 public import WeilConjectures.SixFunctors.Finite.BaseChange
 public import WeilConjectures.SixFunctors.Etale.LowerShriek.FinitelyPresentable
 
@@ -180,16 +181,14 @@ theorem Etale.isIso_unit_constantSheaf_of_isIntegrallyClosed {Y : Scheme.{u}} [I
         IsIso ((upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) j).unit.app
           ((constantSheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj M)) :=
   by
-  -- The generic-point half: on stalks at a geometric point `ȳ` the unit is
-  -- `M ⟶ M^{π₀(Spec 𝒪ˢʰ_{Y,ȳ} ×_Y Spec K)}`, and this generic fibre is connected since the strict
-  -- henselisation of a normal local domain is a normal domain (Stacks 06DI).
+  -- The generic-point half: on the integral étale `Z`-schemes `W` the constant sections are
+  -- `M`, and so are those over the one-point generic fibre `W ×_Z Spec K`.
   have hgen : ∀ (Z : Scheme.{u}) [IsIntegral Z],
       (∀ z : Z, IsIntegrallyClosed (Z.presheaf.stalk z)) →
         IsIso ((upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ)
           (Z.fromSpecStalk (genericPoint Z))).unit.app
             ((constantSheaf Z.smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj M)) :=
-    -- it suffices to check this on the stalks at the geometric points of `Z`
-    fun Z _ _ ↦ Scheme.isIso_of_isIso_sheafFiber_map _ fun _ ↦ sorry
+    fun Z _ hZ ↦ Etale.isIso_unit_constantSheaf_fromSpecStalk_genericPoint Z hZ M
   -- The open-immersion half follows from the generic-point half.
   exact ⟨hgen Y hY, fun j ↦
     Etale.isIso_unit_constantSheaf_of_isOpenImmersion_of_genericPoint Λ M hgen hY j⟩
