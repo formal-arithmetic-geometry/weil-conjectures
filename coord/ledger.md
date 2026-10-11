@@ -4190,3 +4190,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 10:15 L: merged deliver/J1/lem-weil-pbc-finite-module-localization-zero-annihilator (stage 2; reviewer PASS; first push; Sheaf.RingTheory.ExistsAnnihilatorOfSubsingletonLocalizedModule Module.exists_annihilator_of_subsingleton_localizedModule)
 - 10:16 L: merged deliver/K1/lem-weil-pbc-filtered-colimit-henselian-pair (stage 2; reviewer FIX; first push; Sheaf.RingTheory.FilteredColimitHenselianPair filteredColimit_henselianPair)
 - 10:16 L: merged deliver/K1/lem-weil-pbc-finite-over-henselian-local-product (stage 2; reviewer PASS; first push; Sheaf.RingTheory.FiniteOverHenselianLocalProduct HenselianLocalRing.finite_over_henselian_exists_algEquiv_pi)
+- 10:16 L: merged deliver/F1/lem-weil-pbc-filtered-colimit-tensor-varying-rings (stage 2; reviewer PASS; first push; Sheaf.LinearAlgebra.TensorProduct.ColimitVaryingRings TensorProduct.exists_unique_colimit_tensor_varying_rings)
