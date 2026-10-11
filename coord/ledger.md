@@ -3692,3 +3692,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 07:47 L: merged deliver/K1/lem-sc-cone-pseudo-coherent (stage 2; reviewer FIX; first push; Sheaf.RingTheory.ConePseudoCoherent CategoryTheory.isMPseudoCoherent_cone)
 - 07:47 L: merged deliver/J1/lem-sc-etale-fibre-product-coproduct (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.EtaleFibreProductCoproduct AlgebraicGeometry.etale_fibre_product_coproduct)
 - 07:48 L: merged deliver/M1/lem-sc-etale-local-ring-stalk-faithfully-flat (stage 2; reviewer PASS; first push; Sheaf.RingTheory.LocalRingHomTensorProductFieldExtensionFaithfullyFlat Localization.localRingHom_tensorProduct_fieldExtension_faithfullyFlat)
+- 07:48 L: merged deliver/K1/lem-sc-effective-cartier-dimension-drop (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.EffectiveCartierDimensionDrop AlgebraicGeometry.topologicalKrullDim_subscheme_of_isInvertible)
