@@ -88,5 +88,35 @@
   "summary": "Definition split. Rule 0: no slopmaster2 declaration (grep of WeilConjectures and Comparator for the id, 'zigzag', 'zig-zag', '00M1', 'no-spectral'; the bicomplex files there are total-complex/rows/columns machinery, no zig-zag module), lean_audit none. Notions: the double complex of R-modules and its morphisms, written inline in the statement, are now the new Mathlib leaf def-weil-pbc-module-double-complex (HomologicalComplex₂ (ModuleCat R) (ComplexShape.down ℕ) (ComplexShape.down ℕ), commuting squares as here and as in Stacks). The existing def-sp-double-complex-total (cohomological, ℤ-indexed, abelian category, with total complex and filtrations) was not cited: it is another indexing convention and carries the total complex, which this definition does not use; it is recorded in the new node's same_as. Chain complexes (def-weil-pbc-module-chain-complex-homology) are not used by this definition: T_n with D is never used as a complex here. Direct sums, submodules, images and quotients of modules are Mathlib basics (DirectSum/Pi, Submodule, LinearMap.range, Submodule quotient). Claims inside the definition: the old statement asserted that Φ maps Z_n into Z_n and B_n into B_n (via ΦD=DΦ), so that H_n(Φ) is well defined, and that it is functorial. These are moved, together with B_n(A) ⊆ Z_n(A) (which the definition does not need, since it divides by Z_n ∩ B_n, but which the citers' reasoning about 'trivial zig-zags' uses implicitly), into the new statement node lem-weil-pbc-double-complex-zigzag-module-functorial; the definition keeps the data (Z_n, B_n, H_n, and the formula [a]↦[Φ(a)]) and names the lemma in its text without citing it (the lemma's statement uses this definition; a citation would be a cycle, and the pointers field may not be changed by a worker). Proof of the lemma, for the queue: (a) a generator of B_n is, for b ∈ A_{p,q} (p+q=n+1), the tuple with δb at (p,q−1) and db at (p−1,q); the zig-zag conditions at the three affected adjacent pairs read d(δb)=δ(db) (commuting square), d(0)=δ(δb)=0 and d(db)=δ(0)=0; (b) componentwise from Φd=dΦ, Φδ=δΦ; (c),(d) Submodule.mapQ / mapQ_comp / mapQ_id. Sign check: with commuting squares the displayed set d(a_{i+1,0})+δ(a_{i,1}),... of 00M1 is correct and the generator (…,−δ(a),d(a),…) of the source's next sentence is not a zig-zag unless 2δd(a)=0 (already recorded by the worker of lem-weil-pbc-double-complex-cokernel-homology-iso); this node uses the + convention. Statement otherwise unchanged; the source place's dangling reference to 'the item's split_report' now points to that node's split_report. Blueprint search (tools/blueprint_refs.py search 'double complex', 'bicomplex', 'zig-zag', 'zigzag', '00M1', 'trivial zig-zags'): only def-sp-double-complex-total and thm-sp-double-complex-spectral-sequences (and unrelated nodes) come up; neither states zig-zag modules, so same_as stays [].",
   "blueprint": "Realizes, inside the place of lem-weil-pbc-normal-constant-generic named in from.place (step 4 -> ... -> Tor symmetry 00M3 -> 00M1), the definition of the third group $\\mathbf H_i(A)$ in the proof of 00M1 ('We will show that H_i(R(A)) and H_i(U(A)) are canonically isomorphic to a third group. Namely H_i(A):=...', 'we divide out by trivial zig-zags') and the 'clear' induced maps of morphisms of double complexes used for 'The isomorphisms are functorial'; the setting 'homological double complex of R-modules' goes to def-weil-pbc-module-double-complex, the well-definedness and functoriality to lem-weil-pbc-double-complex-zigzag-module-functorial."
  },
- "reviewed": "2026-10-10 L: definition split: double complexes of modules as a Mathlib leaf (HomologicalComplex₂), the claims (B_n inside Z_n, functoriality of H_n) moved into a statement node, now cited by the two users; 2 new nodes"
+ "reviewed": "2026-10-10 L: definition split: double complexes of modules as a Mathlib leaf (HomologicalComplex₂), the claims (B_n inside Z_n, functoriality of H_n) moved into a statement node, now cited by the two users; 2 new nodes",
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.ZigzagModule",
+  "declaration": "HomologicalComplex₂.zigzagModule",
+  "declarations": [
+   "HomologicalComplex₂.ZigzagIndex",
+   "HomologicalComplex₂.zigzagTotal",
+   "HomologicalComplex₂.zigzagRelation",
+   "HomologicalComplex₂.zigzagCycles",
+   "HomologicalComplex₂.zigzagBoundaryComponent",
+   "HomologicalComplex₂.zigzagBoundary",
+   "HomologicalComplex₂.zigzagBoundaries",
+   "HomologicalComplex₂.zigzagModule",
+   "HomologicalComplex₂.zigzagTotalMap",
+   "HomologicalComplex₂.zigzagMap"
+  ],
+  "file": "lean/Sheaf/Algebra/Homology/ZigzagModule.lean",
+  "statement": "abbrev zigzagModule (A : HomologicalComplex₂ (ModuleCat R) (ComplexShape.down ℕ) (ComplexShape.down ℕ)) (n : ℕ)",
+  "branch": "sheaf-dag",
+  "by": "G1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-dcz0626",
+  "group": "G1",
+  "result": "pass",
+  "note": "R CommRing; A HomologicalComplex2 (ModuleCat R) down N down N = dep's recorded Mathlib leaf ((A.X p).X q = A_pq, A.d outer = d, inner = delta); T_n direct sum over p+q=n; Z_n: d(a_{p+1,q}) = delta(a_{p,q+1}) for p+1+q=n, empty at n=0; D_{n+1}(b)_{p,q} = d b_{p+1,q} + delta b_{p,q+1} with + sign as node and algebra.tex 18429-18435, edges omitted; B_n = range D; H_n = Z_n/(Z_n cap B_n) via comap; Phi componentwise; H_n(Phi) by mapQ with well-definedness in named sorry theorem (brief 28); no sorry in data"
+ }
 }
