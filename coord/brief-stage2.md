@@ -9,7 +9,7 @@ Written by the lead (rules: decision of the human, 2026-10-11). Your prompt name
 - The source module of each recorded declaration: `~/weil-conjectures-slopmaster2/<module path>.lean` (module `A.B.C` is file `A/B/C.lean`; compiled, read-only). Read the declaration and its docstring, not only its name.
 - Mathlib: `~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/` (read-only).
 - The node's source place: for Stacks, `literature/stacks-project/` (`stacks-project/tags/tags` maps a tag to its label).
-- The example module `lean/.sandbox/L/CompactObject.lean` (node `def-pc-compact-object`); its namespace is as in §3.
+- The example module `lean/Sheaf/CategoryTheory/CompactObject.lean` (node `def-pc-compact-object`, in git): header, docstrings, namespace as in §3.
 
 ## 1. Your item
 
