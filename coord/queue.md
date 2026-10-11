@@ -1,11 +1,11 @@
 # Work queue
 
-1012 items; claim with `tools/claim.py next <group> [--stage N]`.
+1007 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (1012)
+## Stage 2: nodes to state (1007)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -38,14 +38,11 @@
 | `lem-exc-finite-galois-tensor-decomposition` | 1 | state |
 | `lem-exc-rg-adjoint-transfer-functorial-injectives` | 1 | state |
 | `lem-exc-rg-discrete-modules-functorial-injective-embeddings` | 1 | state |
-| `lem-exc-rg-group-algebra-functorial-injective-embeddings` | 1 | state |
 | `lem-exc-rg-open-stabilizer-adjoint` | 1 | state |
 | `lem-fin-dense-normal-open` | 1 | state |
-| `lem-galois-aut-profinite` | 1 | state |
 | `lem-galois-constant-sheaf-sets-representable` | 1 | state |
 | `lem-galois-descent` | 1 | state |
 | `lem-galois-descent-datum-diagonal-identity` | 1 | state |
-| `lem-galois-fpqc-descend-etale` | 1 | state |
 | `lem-galois-fpqc-morphisms-descend` | 1 | state |
 | `lem-galois-fpqc-pullback-canonical-iso` | 1 | state |
 | `lem-galois-fpqc-singleton-fully-faithful-0241` | 1 | state |
@@ -57,13 +54,11 @@
 | `lem-kun-stalks-commute-colimits` | 1 | state |
 | `lem-kun-support-geometric-point-independent` | 1 | state |
 | `lem-pc-affine-containment-ideal` | 1 | state |
-| `lem-pc-affine-finite-type-algebra` | 1 | state |
 | `lem-pc-affine-flat-module-descent` | 1 | state |
 | `lem-pc-affine-flat-module-local-criterion` | 1 | state |
 | `lem-pc-affine-nonzerodivisor-complement-dense` | 1 | state |
 | `lem-pc-affine-surjective-structure-map-closed-immersion` | 1 | state |
 | `lem-pc-affine-tilde-kflat` | 1 | state |
-| `lem-pc-algebraic-dim-zero-affine-finite` | 1 | state |
 | `lem-pc-ample-affine-loci-criterion` | 1 | state |
 | `lem-pc-balanced-derived-tensor-model` | 1 | state |
 | `lem-pc-brown-cohomological-representability` | 1 | state |
