@@ -132,5 +132,23 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-dlt2448 (reviewer sub-agent of L); spot-checked: Return of 20:37 repaired: (1) SES node now 0->C_m(K)->tau_{>=m}K->tau_{>=m+1}K->0 with C_m=K^m/Im d^{m-1}->Im d^m, checked degreewise exact, q_m the quotient, H^m(K)[-m]->C_m inclusion is a quasi-iso (H^m=Ker d^m/Im, H^{m+1}=0); (2) Step 2 gives C->E_n->E_{n-1}->C[1] from lem-weil-pbc-complex-ses-triangle, Step 3 transports along the cited quasi-iso by TR1, direction right. Item statement unchanged vs base (diff only adds step sources/proof_origin). FIX more, RETURN less: C1 in Step 1, def-sbc represents tau_{>=m}E by K/tau_{<=m-1}K, not the canonical complex; added the elementary quasi-iso K/tau_{<=m-1}K->tau_{>=m}K (acyclic kernel K^{m-1}/Ker d^{m-1} ~ Im d^{m-1}, Stacks 08J5) and its compatibility with the transitions.; 1 file(s) fixed by the reviewer"
  },
- "lead_note": "2026-10-10 L (R-dlt2448): Second reading by F1 wrongly claims the item source was changed from 08D4 to 08J5 (it was not, and 08D4 is the correct source); harmless."
+ "lead_note": "2026-10-10 L (R-dlt2448): Second reading by F1 wrongly claims the item source was changed from 08D4 to 08J5 (it was not, and 08D4 is the correct source); harmless.",
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.LowerTruncationStepTriangle",
+  "declaration": "DerivedCategory.exists_lowerTruncationStepTriangle",
+  "file": "lean/Sheaf/Algebra/Homology/LowerTruncationStepTriangle.lean",
+  "statement": "theorem exists_lowerTruncationStepTriangle {C : Type u} [Category.{v} C] [Abelian C] [HasDerivedCategory.{w} C] (E : DerivedCategory C) (n : ℤ) : ∃ (f : (Q.obj ((CochainComplex.singleFunctor C 0).obj ((homologyFunctor C (-n)).obj E)))⟦n⟧ ⟶ ((TStructure.t (C := C)).truncGE (-n)).obj E) (h : ((TStructure.t (C := C)).truncGE (-n + 1)).obj E ⟶ ((Q.obj ((CochainComplex.singleFunctor C 0).obj ((homologyFunctor C (-n)).obj E)))⟦n⟧)⟦(1 : ℤ)⟧), Triangle.mk f (((TStructure.t (C := C)).natTransTruncGEOfLE (-n) (-n + 1) (by omega)).app E) h ∈ distTriang (DerivedCategory C)",
+  "branch": "sheaf-dag",
+  "by": "G1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-ltt0910",
+  "group": "G1",
+  "result": "pass",
+  "note": "A abelian = Category.{v}+Abelian, D(A) via HasDerivedCategory.{w}; E, n arbitrary; E_n/E_{n-1} = TStructure.t.truncGE (-n)/(-n+1) (Mathlib's t is def-sbc's standard t-structure); first object Q(single_0 H^{-n}E)[n] sits in degree -n (cohomological shift); middle arrow natTransTruncGEOfLE (-n) (-n+1), truncGE a -> truncGE b, = canonical transition by pi_natTransTruncGEOfLE_app; f,h existential, Triangle.mk in distTriang gives the 4th term obj1[1] ~ H^{-n}(E)[n+1]; no Mathlib/source triangle with H^n third term (TruncLTGE/TruncLEGT/SpectralObject/derived TStructure checked): existing false right; docstring = node's 3 steps"
+ }
 }
