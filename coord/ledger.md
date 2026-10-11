@@ -4263,3 +4263,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 10:36 L: merged deliver/F1/lem-weil-pbc-flat-over-regular-with-regular-fibre (stage 2; reviewer PASS; first push; Sheaf.RingTheory.RegularLocalOfFlatWithRegularClosedFiber IsRegularLocalRing.of_flat_of_regular_closedFiber)
 - 10:36 L: merged deliver/F1/lem-weil-pbc-fpqc-affine-standard-refinement (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.FpqcAffineStandardRefinement AlgebraicGeometry.Scheme.exists_fpqc_affine_standard_refinement)
 - 10:36 L: merged deliver/C1/def-weil-pbc-finite-etale-trace (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.FiniteEtaleTrace AlgebraicGeometry.Etale.finiteEtaleTrace)
+- 10:36 L: merged deliver/H1/lem-weil-pbc-formal-glueing-complex-exact (stage 2; reviewer PASS; first push; Sheaf.RingTheory.FormalGlueingComplexExact RingTheory.formalGlueingComplexExact)

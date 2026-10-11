@@ -27,7 +27,8 @@
  "stmt_deps": [
   "def-weil-pbc-flat-ring-map",
   "def-weil-module-base-change",
-  "def-weil-pbc-module-localization-away"
+  "def-weil-pbc-module-localization-away",
+  "lem-weil-pbc-cover-module-exact"
  ],
  "proof": [
   {
@@ -211,5 +212,24 @@
   "worker": "stage1",
   "summary": "Read More on Algebra 05E5-05EK (more-algebra.tex lines 24440-24640: 05E7, 05E9, 05EC, 05EE, 05EF, the complex equation-glueing-complex and both proofs of 05EK) and the citer lem-weil-pbc-grothendieck-existence-easy (steps 3, 5, 6 use exactly: alpha injective, Ker beta = Im alpha, with (P otimes S)_{f_i} = P_{f_i} otimes S); statement kept (it already corrects the source's beta, whose second component is misprinted as (m_1-m_2,...,m_{t-1}-m_t) with an unbalanced parenthesis; the node takes all differences m_i - m_j in M_{f_if_j}). Followed the second (computational) proof, which needs no Cech complexes or derived tensor products, in 8 steps: torsion vs. localizations (elementary), the identification via the localized map phi_{f_i} (lem-weil-pbc-localization-module-tensor), beta alpha = 0, alpha injective (05EC(1) instead of the source's 05EC(2)), normalisation of a kernel element with the enlargement of n written out, the Koszul H_1 and its annihilation by (f_1^n,...,f_t^n) (05EF, written out, elementary), xi = 0 via flat exactness, tensor with finite products and 05E9, and the last correction by 05EC(1). New nodes: lem-weil-pbc-torsion-module-flat-base-change-iso (05E9, unsplit), lem-weil-pbc-torsion-submodule-flat-base-change-iso (05EC(1), unsplit), lem-weil-pbc-tensor-finite-product (Mathlib leaf TensorProduct.piLeft, Pi.lean:115). Mathlib: no Beauville-Laszlo, no glueing complex; searches recorded."
  },
- "reviewed": "Reviewed by L 2026-10-10: faithful to More on Algebra 05EK (second proof) with the normalisation 'after enlarging n' (step 5), the Koszul group H_1 and its annihilator (05EF, step 6) and the one-element use of H_1(M)⊗S = H_1(M⊗S) (step 7: flat exactness + finite products) written out; alpha injective and Ker beta ⊆ Im alpha from 05EC (1), xi = 0 from 05E9 (2)=>(1), both new unsplit nodes; tensor-finite-product is an exact Mathlib leaf (TensorProduct.piLeft). Source misprint in beta's second component and the inexact citation of 05EA noted. No Mathlib match for the item."
+ "reviewed": "Reviewed by L 2026-10-10: faithful to More on Algebra 05EK (second proof) with the normalisation 'after enlarging n' (step 5), the Koszul group H_1 and its annihilator (05EF, step 6) and the one-element use of H_1(M)⊗S = H_1(M⊗S) (step 7: flat exactness + finite products) written out; alpha injective and Ker beta ⊆ Im alpha from 05EC (1), xi = 0 from 05E9 (2)=>(1), both new unsplit nodes; tensor-finite-product is an exact Mathlib leaf (TensorProduct.piLeft). Source misprint in beta's second component and the inexact citation of 05EA noted. No Mathlib match for the item.",
+ "lean": {
+  "module": "Sheaf.RingTheory.FormalGlueingComplexExact",
+  "declaration": "RingTheory.formalGlueingComplexExact",
+  "file": "lean/Sheaf/RingTheory/FormalGlueingComplexExact.lean",
+  "statement": "theorem formalGlueingComplexExact {R : Type u} {S : Type v} [CommRing R] [CommRing S] (φ : R →+* S) (hflat : φ.Flat) (t : ℕ) (f : Fin t → R) (hquot : Function.Bijective (Ideal.quotientMap ((Ideal.span (Set.range f)).map φ) φ Ideal.le_comap_map)) (M : Type w) [AddCommGroup M] [Module R M] : letI : Algebra R S := φ.toAlgebra let η : M →ₗ[R] S ⊗[R] M := TensorProduct.mk R S M 1 let ρ := fun (a h : R) (ha : a ∣ h) ↦ IsLocalizedModule.lift (Submonoid.powers a) (LocalizedModule.mkLinearMap (Submonoid.powers a) M) (LocalizedModule.mkLinearMap (Submonoid.powers h) M) (localizationAway_map_units_of_dvd (M := M) a h ha) let α : M → (S ⊗[R] M) × (∀ i : Fin t, LocalizedModule.Away (f i) M) := fun m ↦ (η m, fun i ↦ LocalizedModule.mkLinearMap (Submonoid.powers (f i)) M m) let β : (S ⊗[R] M) × (∀ i : Fin t, LocalizedModule.Away (f i) M) → (∀ i : Fin t, LocalizedModule.Away (f i) (S ⊗[R] M)) × (∀ i j : Fin t, LocalizedModule.Away (f i * f j) M) := fun p ↦ (fun i ↦ LocalizedModule.mkLinearMap (Submonoid.powers (f i)) (S ⊗[R] M) p.1 - IsLocalizedModule.map (Submonoid.powers (f i)) (LocalizedModule.mkLinearMap (Submonoid.powers (f i)) M) (LocalizedModule.mkLinearMap (Submonoid.powers (f i)) (S ⊗[R] M)) η (p.2 i), fun i j ↦ ρ (f i) (f i * f j) (dvd_mul_right (f i) (f j)) (p.2 i) - ρ (f j) (f i * f j) (dvd_mul_left (f j) (f i)) (p.2 j)) Function.Injective α ∧ Function.Exact α β",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-11",
+  "existing": false,
+  "note": "The scalar extension is S ⊗[R] M, canonically M ⊗[R] S by TensorProduct.comm, following the recorded base-change dependency. Localized η renders m_i ⊗ 1. The added landed dependency supplies localizationAway_map_units_of_dvd, used by the universal overlap maps; no cover/unit-ideal hypothesis is assumed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-fgc1035",
+  "group": "H1",
+  "result": "pass",
+  "note": "R,S CommRing, φ:R→+*S with φ.Flat (RingHom.Flat); f:Fin t→R, I=span(range f), hquot = induced Ideal.quotientMap R/I→S/IS bijective; M arbitrary R-module; base change S⊗[R]M with η=mk 1 (sibling 07a85155d spelling); M_fi,(S⊗M)_fi,M_fifj = LocalizedModule.Away; overlap maps = IsLocalizedModule.lift via landed localizationAway_map_units_of_dvd; α=(η m,(m/1)), β=((m'/1−η_fi(m_i)),(m_i−m_j in M_fifj)) all ordered pairs; concl Injective α ∧ Function.Exact α β; t=0, i=j, zero rings ok; no Mathlib 05EK"
+ }
 }
