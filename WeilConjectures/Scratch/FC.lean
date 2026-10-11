@@ -123,4 +123,59 @@ lemma Etale.higherDirectImagePresheafToSheaf_naturality {X Y : Scheme.{u}} (h : 
   rw [h₁, h₁, Category.assoc, Etale.freeSheafSections_naturality, ← Category.assoc,
     ← Category.assoc, h₂]
 
+/-- Blueprint `lem-weil-pbc-cohomology-filtered-colimit` (subsection `sk-prop-h2`): Filtered
+colimits of étale cohomology. Let `V` be an étale `Y`-scheme whose underlying scheme is
+quasi-compact and quasi-separated. Then `F ↦ Hᵠ(V, F|_V) = Hom(Λ[V][0], F[q])`, cohomology of
+the restriction to `V` computed on the site of `Y` as in
+`AlgebraicGeometry.Etale.higherDirectImagePresheaf`, commutes with filtered colimits of sheaves
+of `Λ`-modules. -/
+theorem Etale.preservesColimitsOfShape_cohomology {Y : Scheme.{u}} (V : Y.Etale)
+    [CompactSpace V.left] [QuasiSeparatedSpace V.left] (q : ℤ) (J : Type) [SmallCategory J]
+    [IsFiltered J] :
+    PreservesColimitsOfShape J
+      (DerivedCategory.Plus.singleFunctor (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)) 0 ⋙
+        shiftFunctor _ q ⋙ preadditiveCoyoneda.obj
+          (op ((DerivedCategory.Plus.singleFunctor _ 0).obj ((Etale.freeSheaf Λ Y).obj V)))) :=
+  sorry
+
+/-- The hypercohomology presheaves `W ↦ Hᵠ(W ×_X Y, K|)` as a functor of `K`. -/
+noncomputable def Etale.higherDirectImagePresheafFunctor {X Y : Scheme.{u}} (h : Y ⟶ X)
+    (q : ℤ) :
+    DerivedCategory.Plus (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)) ⥤
+      X.Etaleᵒᵖ ⥤ AddCommGrpCat.{u + 1} :=
+  shiftFunctor _ q ⋙ preadditiveYoneda ⋙ (Functor.whiskeringLeft _ _ _).obj
+    (Etale.freeSheaf Λ X ⋙ (h)^*[ModuleCat.{u + 1} Λ] ⋙ DerivedCategory.Plus.singleFunctor _ 0).op
+
+lemma Etale.higherDirectImagePresheafFunctor_obj {X Y : Scheme.{u}} (h : Y ⟶ X) (q : ℤ) (K) :
+    (Etale.higherDirectImagePresheafFunctor Λ h q).obj K = Etale.higherDirectImagePresheaf Λ h q K :=
+  rfl
+
+lemma Etale.higherDirectImagePresheafFunctor_map {X Y : Scheme.{u}} (h : Y ⟶ X) (q : ℤ)
+    {K K'} (φ : K ⟶ K') :
+    (Etale.higherDirectImagePresheafFunctor Λ h q).map φ =
+      Etale.higherDirectImagePresheafMap Λ h q φ :=
+  rfl
+
+/-- On an étale `X`-scheme `W` whose base change `W ×_X Y` is quasi-compact and
+quasi-separated, the hypercohomology presheaves of single sheaves commute with filtered
+colimits. -/
+theorem Etale.preservesColimitsOfShape_higherDirectImagePresheaf_app {X Y : Scheme.{u}}
+    (h : Y ⟶ X) (q : ℤ) (W : X.Etale)
+    [CompactSpace ((MorphismProperty.Over.pullback @Etale ⊤ h).obj W).left]
+    [QuasiSeparatedSpace ((MorphismProperty.Over.pullback @Etale ⊤ h).obj W).left]
+    (J : Type) [SmallCategory J] [IsFiltered J] :
+    PreservesColimitsOfShape J
+      (DerivedCategory.Plus.singleFunctor (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)) 0 ⋙
+        Etale.higherDirectImagePresheafFunctor Λ h q ⋙ (evaluation _ _).obj (op W)) := by
+  have := Etale.preservesColimitsOfShape_cohomology Λ
+    ((MorphismProperty.Over.pullback @Etale ⊤ h).obj W) q J
+  have : PreservesColimitsOfShape J
+      ((DerivedCategory.Plus.singleFunctor (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)) 0 ⋙
+        shiftFunctor _ q) ⋙ preadditiveCoyoneda.obj (op ((DerivedCategory.Plus.singleFunctor _ 0).obj
+          ((Etale.freeSheaf Λ Y).obj ((MorphismProperty.Over.pullback @Etale ⊤ h).obj W))))) := this
+  refine preservesColimitsOfShape_of_natIso (Functor.isoWhiskerLeft
+    (DerivedCategory.Plus.singleFunctor _ 0 ⋙ shiftFunctor _ q)
+    (preadditiveCoyoneda.mapIso ((DerivedCategory.Plus.singleFunctor _ 0).mapIso
+      (Etale.upperStarFreeSheafIso Λ h W)).op))
+
 end AlgebraicGeometry
