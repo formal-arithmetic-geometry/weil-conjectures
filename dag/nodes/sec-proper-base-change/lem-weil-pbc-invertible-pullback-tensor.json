@@ -20,7 +20,9 @@
   "def-sc-invertible-module",
   "def-pc-module-pullback",
   "def-pur-sheaf-tensor-product",
-  "def-weil-residue-field"
+  "def-weil-residue-field",
+  "def-weil-pbc-module-residue-fiber",
+  "lem-pc-module-pullback-adjunction"
  ],
  "mathlib_searches": [
   {
@@ -190,5 +192,23 @@
   "by": "L",
   "result": "pass",
   "note": "eight steps with Stacks places (source tags corrected); 5 new nodes, two closed by Lean; lem-pc-tensor-dual-invertible (sk-thm-picard-hilb-curves) accepted as a tool use"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.Modules.InvertiblePullbackTensor",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.invertible_pullback_tensor",
+  "file": "lean/Sheaf/AlgebraicGeometry/Modules/InvertiblePullbackTensor.lean",
+  "statement": "theorem invertible_pullback_tensor {X Y : Scheme.{v}} (f : X ⟶ Y) : let pb : ∀ {A B : Scheme.{v}} (h : A ⟶ B) (N : B.Modules) (V : B.Opens), Γ(N, V) → Γ((tensorPullback h).obj N, h ⁻¹ᵁ V) := fun {_ _} h N V s ↦ ((Classical.choose (exists_tensorPullbackAdjunction h)).unit.app N).val.app (op V) s (∀ (L : Y.Modules) [L.IsInvertible], (∀ y : Y, Module.rank (Y.residueField y) (residueFiber L y) = 1) ∧ ((tensorPullback f).obj L).IsInvertible) ∧ (∀ (L M : Y.Modules) [L.IsInvertible] [M.IsInvertible], (L ⊗ M).IsInvertible) ∧ (∃ e : ∀ (L M : Y.Modules) [L.IsInvertible] [M.IsInvertible], (tensorPullback f).obj (L ⊗ M) ≅ (tensorPullback f).obj L ⊗ (tensorPullback f).obj M, (∀ (L M L' M' : Y.Modules) [L.IsInvertible] [M.IsInvertible] [L'.IsInvertible] [M'.IsInvertible] (a : L ⟶ L') (b : M ⟶ M'), (tensorPullback f).map (a ⊗ₘ b) ≫ (e L' M').hom = (e L M).hom ≫ ((tensorPullback f).map a ⊗ₘ (tensorPullback f).map b)) ∧ (∀ (L M : Y.Modules) [L.IsInvertible] [M.IsInvertible] (V : Y.Opens) (s : Γ(L, V)) (t : Γ(M, V)), (e L M).hom.app (f ⁻¹ᵁ V) (pb f (L ⊗ M) V (tmulSection s t)) = tmulSection (pb f L V s) (pb f M V t))) ∧ (∀ (W : Scheme.{v}) (g : W ⟶ X) (L : Y.Modules) [L.IsInvertible], ∃ e : (tensorPullback g).obj ((tensorPullback f).obj L) ≅ (tensorPullback (g ≫ f)).obj L, ∀ (V : Y.Opens) (s : Γ(L, V)), e.hom.app ((g ≫ f) ⁻¹ᵁ V) (pb g ((tensorPullback f).obj L) (f ⁻¹ᵁ V) (pb f L V s)) = pb (g ≫ f) L V s) ∧ (∀ (L M : Y.Modules) [L.IsInvertible] [M.IsInvertible] (V : Y.Opens) (s : Γ(L, V)) (t : Γ(M, V)), (β_ L M).hom.app V (tmulSection s t) = tmulSection t s) ∧ (∀ (n : ℕ) (L : Fin n → Y.Modules) [∀ i, (L i).IsInvertible] (π : Equiv.Perm (Fin n)), Nonempty ((List.ofFn L).foldr (fun A B ↦ A ⊗ B) (𝟙_ Y.Modules) ≅ (List.ofFn (fun i ↦ L (π.symm i))).foldr (fun A B ↦ A ⊗ B) (𝟙_ Y.Modules))) ∧ (∀ (L : Y.Modules) [L.IsInvertible] (x : X), ∃ e : residueFiber ((tensorPullback f).obj L) x ≅ (ModuleCat.extendScalars (f.residueFieldMap x).hom).obj (residueFiber L (f x)), ∀ (V : Y.Opens) (hx : f x ∈ V) (s : Γ(L, V)), e.hom (residueValue (pb f L V s) x hx) = (1 : X.residueField x) ⊗ₜ[Y.residueField (f x), (f.residueFieldMap x).hom] residueValue s (f x) hx) ∧ (∀ (L M : Y.Modules) [L.IsInvertible] [M.IsInvertible] (y : Y), ∃ e : residueFiber (L ⊗ M) y ≅ (residueFiber L y ⊗ residueFiber M y), ∀ (V : Y.Opens) (hy : y ∈ V) (s : Γ(L, V)) (t : Γ(M, V)), e.hom (residueValue (tmulSection s t) y hy) = residueValue s y hy ⊗ₜ[Y.residueField y] residueValue t y hy)",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-ipt1109",
+  "group": "F1",
+  "result": "pass",
+  "note": "X,Y,f arbitrary Scheme.{v}; L,M as Y.Modules+[IsInvertible]; fibre=residueFiber (extendScalars along Y.residue of Mathlib-instance stalk), value=1⊗germ; f^*s=unit of choose exists_tensorPullbackAdjunction; tensor/β_ = source instMonoidal/SymmetricCategory_weilConjectures, tmulSection; (1) rank 1 + f^*L, L⊗M invertible; (2) natural e with section formula, g^*f^*≅(g≫f)^* with section formula, β_ swaps tmulSection, Fin n permutation reorder; (3) pullback fibre ≅ extendScalars residueFieldMap with 1⊗s(f x), tensor fibre ≅ ⊗ with value formula; new def node not in Mathlib/source/DAG; probe compile clean (only sorryAx)"
  }
 }

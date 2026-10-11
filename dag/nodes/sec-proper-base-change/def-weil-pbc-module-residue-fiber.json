@@ -1,0 +1,107 @@
+{
+ "id": "def-weil-pbc-module-residue-fiber",
+ "kind": "definition",
+ "title": "Residue-field fibre of a scheme module and value of a section",
+ "status": "split",
+ "statement": "Let $X$ be a scheme, $M$ an $\\mathcal O_X$-module [def-weil-sheaf-of-modules-category], and $x\\in X$. Its fibre is the $\\kappa(x)$-module $M(x)=\\kappa(x)\\otimes_{\\mathcal O_{X,x}}M_x$, equivalently $M_x\\otimes_{\\mathcal O_{X,x}}\\kappa(x)$, using the stalk [def-weil-pbc-module-stalk] and the residue map [def-weil-residue-field]. For an open $U\\subseteq X$, a section $s\\in M(U)$ and $x\\in U$, its value is $s(x)=1\\otimes s_x$, where $s_x$ is its germ.",
+ "stmt_deps": [
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-module-stalk",
+  "def-weil-residue-field"
+ ],
+ "source": {
+  "document": "literature/stacks-project/modules.tex; literature/stacks-project/sheaves.tex",
+  "place": "Modules, Tag 01C5 (locally free modules) and Tag 01CB; Sheaves, Tag 0098; the fibre and section-value notation in lem-weil-pbc-invertible-pullback-tensor"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "fibre of sheaf of modules at point tensor stalk with residue field",
+   "results": "service unavailable: Internal Server Error; ",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "fibre of module sheaf at a point tensor product of stalk with residue field",
+   "results": "; ModuleCat.Tilde.stalkToFiberLinearMap, ModuleCat.Tilde.stalkToFiberLinearMap_toStalk, ModuleCat.Tilde.stalkIso_hom, ModuleCat.Tilde.toStalk, ModuleCat.Tilde.stalkToFiberLinearMap_germ, ModuleCat.Tilde.toStalk_comp_stalkToFiberLinearMap, ModuleCat.Tilde.toStalk_comp_stalkToFiberLinearMap_assoc, ModuleCat.Tilde.stalkIso",
+   "date": "2026-10-11",
+   "verdict": "No match: tilde stalks, topological vector bundles, and ring fibres are different notions."
+  },
+  {
+   "tool": "grep",
+   "query": "residueFiber|residueValue|module.*[Ff]ibre|module.*[Ff]iber",
+   "results": "; Mathlib/NumberTheory/Real/GoldenRatio.lean, Mathlib/NumberTheory/Real/GoldenRatio.lean, Mathlib/Topology/VectorBundle/Basic.lean, Mathlib/Topology/VectorBundle/Basic.lean, Mathlib/Topology/VectorBundle/Basic.lean, Mathlib/RingTheory/RingHom/QuasiFinite.lean, Mathlib/RingTheory/QuasiFinite/Basic.lean, Mathlib/RingTheory/QuasiFinite/Basic.lean",
+   "date": "2026-10-11",
+   "verdict": "No match: tilde stalks, topological vector bundles, and ring fibres are different notions."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n \"residueFiber|residueValue|module.*fibre|module.*fiber\" WeilConjectures/AlgebraicGeometry/Modules lean/Sheaf/AlgebraicGeometry; rg -l \"fibre.*stalk|stalk.*residue|fiber.*residue\" dag/nodes; tools/blueprint_refs.py search \"module fibre\"",
+   "results": "No module residue-fibre declaration. Existing nodes use fibre formulas inline but do not define the general residue-field fibre. Blueprint search found only a lisse sheaf node. Stalk notion is def-weil-pbc-module-stalk.",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-invertible-pullback-tensor",
+  "date": "2026-10-11",
+  "group": "F1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-symmetric-product-properties",
+   "place": "Fibre computations and section values in the invertible-module pullback and tensor formulas, steps 1, 2, 3, 5 of the symmetric-product proof",
+   "via": [
+    "lem-weil-pbc-invertible-pullback-tensor"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-reduction",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.Modules.ResidueFiber",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.residueFiber",
+  "file": "lean/Sheaf/AlgebraicGeometry/Modules/ResidueFiber.lean",
+  "statement": "def residueFiber {X : Scheme.{u}} (M : X.Modules) (x : X) : ModuleCat (X.residueField x)",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-11",
+  "existing": false,
+  "declarations": [
+   "AlgebraicGeometry.Scheme.Modules.residueFiber",
+   "AlgebraicGeometry.Scheme.Modules.residueValue"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-ipt1109",
+  "group": "F1",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-ipt1109",
+  "group": "F1",
+  "result": "pass",
+  "note": "X,Y,f arbitrary Scheme.{v}; L,M as Y.Modules+[IsInvertible]; fibre=residueFiber (extendScalars along Y.residue of Mathlib-instance stalk), value=1⊗germ; f^*s=unit of choose exists_tensorPullbackAdjunction; tensor/β_ = source instMonoidal/SymmetricCategory_weilConjectures, tmulSection; (1) rank 1 + f^*L, L⊗M invertible; (2) natural e with section formula, g^*f^*≅(g≫f)^* with section formula, β_ swaps tmulSection, Fin n permutation reorder; (3) pullback fibre ≅ extendScalars residueFieldMap with 1⊗s(f x), tensor fibre ≅ ⊗ with value formula; new def node not in Mathlib/source/DAG; probe compile clean (only sorryAx)"
+ }
+}
