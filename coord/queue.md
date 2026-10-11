@@ -1,11 +1,11 @@
 # Work queue
 
-108 items; claim with `tools/claim.py next <group> [--stage N]`.
+104 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (108)
+## Stage 2: nodes to state (104)
 
 | node | distance to Mathlib | kind | blockers |
 |---|---|---|---|
@@ -36,7 +36,6 @@
 | `lem-pc-restrict-derived-direct-image-open` | 1 | state | 1 |
 | `lem-sc-cech-comparison-natural` | 1 | state | 1 |
 | `cor-galois-lisse-representations` | 1 | state | 0 |
-| `lem-pc-affine-pseudo-coherent-criterion` | 1 | state | 0 |
 | `lem-pc-base-change-rhom-perfect` | 1 | state | 0 |
 | `lem-pc-bounded-coherent-finite-tor-proper-pushforward-perfect` | 1 | state | 0 |
 | `lem-pc-finite-scheme-cohomology-tensor` | 1 | state | 0 |
@@ -52,7 +51,6 @@
 | `lem-pc-rf-single-complex-qcqs-induction` | 1 | state | 0 |
 | `lem-pc-rf-single-complex-relative-mayer-vietoris` | 1 | state | 0 |
 | `lem-pc-tor-independent-perfect-tensor-base-change` | 1 | state | 0 |
-| `lem-pqf-quasicompact-h1-zero` | 1 | state | 0 |
 | `lem-sc-affine-derived-cohomology` | 1 | state | 0 |
 | `lem-sc-affine-derived-pushforward-t-exact` | 1 | state | 0 |
 | `lem-sc-affine-koszul-cech-derived-comparison` | 1 | state | 0 |
@@ -80,7 +78,6 @@
 | `lem-sc-proper-flat-right-adjoint-basechange` | 1 | state | 0 |
 | `lem-sc-proper-flat-right-adjoint-direct-sums` | 1 | state | 0 |
 | `lem-sc-proper-flat-right-adjoint-restriction-open` | 1 | state | 0 |
-| `lem-sc-proper-upper-shriek-composition` | 1 | state | 0 |
 | `lem-sc-qcoh-acyclic-derived-pushforward-cohomology` | 1 | state | 0 |
 | `lem-sc-qcoh-acyclic-derived-sections-comparison` | 1 | state | 0 |
 | `lem-sc-smooth-proper-diagonal-basechange-upper-shriek` | 1 | state | 0 |
@@ -97,7 +94,6 @@
 | `lem-weil-pbc-hypercohomology-e1-pullback-functorial` | 1 | state | 0 |
 | `lem-weil-pbc-ml-cohomology-powers-ideal` | 1 | state | 0 |
 | `lem-weil-pbc-projective-space-twisting-sheaf-charts` | 1 | state | 0 |
-| `lem-weil-pbc-pullback-iso-prime-torsion-devissage` | 1 | state | 0 |
 | `lem-weil-pbc-qs-scheme-cohomology-directed-colimit` | 1 | state | 0 |
 | `lem-weil-pbc-sets-pushforward-stalk-strict-henselization` | 1 | state | 0 |
 | `lem-weil-pbc-strict-henselization-functoriality` | 1 | state | 0 |
