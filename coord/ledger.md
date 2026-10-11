@@ -4354,3 +4354,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 10:58 L: merged deliver/H1/lem-weil-pbc-improve-presentation (stage 2; reviewer PASS; first push; Sheaf.RingTheory.ImprovePresentation Algebra.exists_finiteType_retract_smooth_free_differentials)
 - 10:59 L: merged deliver/C1/lem-weil-pbc-glue-sheaves-of-modules (stage 2; reviewer FIX; first push; Sheaf.Topology.GlueSheavesOfModules AlgebraicGeometry.glue_sheaves_of_modules)
 - 10:59 L: merged deliver/F1/lem-weil-pbc-fs-adic-lift-over-finite-coefficient-map (stage 2; reviewer PASS; first push; Sheaf.RingTheory.FsAdicLiftOverFiniteCoefficientMap RingHom.exists_fs_adic_lift_over_finite_coefficient_map)
+- 10:59 L: merged deliver/C1/lem-weil-pbc-intersection-subfields-subspace (stage 2; reviewer PASS; first push; Sheaf.FieldTheory.IntersectionSubfieldsSubspace IntermediateField.exists_ne_zero_mem_base_iff_forall_mem_intermediateField)

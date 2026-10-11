@@ -145,5 +145,23 @@
   "item": "lem-weil-pbc-intersection-subfields-subspace",
   "worker": "stage1",
   "summary": "Checked the statement and induction against Stacks More on Algebra, Lemma Tag 07P3. The nonempty index hypothesis already corrects the source's empty-family edge case. Wrote the forward implication and the converse induction explicitly: the tail subspace, normalized vector, one-dimensional intersection over K_alpha, and cofinal intersection via directedness. No new nodes or proof dependencies are needed."
+ },
+ "lean": {
+  "module": "Sheaf.FieldTheory.IntersectionSubfieldsSubspace",
+  "declaration": "IntermediateField.exists_ne_zero_mem_base_iff_forall_mem_intermediateField",
+  "file": "lean/Sheaf/FieldTheory/IntersectionSubfieldsSubspace.lean",
+  "statement": "theorem exists_ne_zero_mem_base_iff_forall_mem_intermediateField {k : Type u} {K : Type v} [Field k] [Field K] [Algebra k K] {ι : Type w} [Nonempty ι] (L : ι → IntermediateField k K) (h_inter : (⨅ a, L a) = ⊥) (h_directed : ∀ a b : ι, ∃ c : ι, L c ≤ L a ⊓ L b) (n : ℕ) (hn : 1 ≤ n) (V : Submodule K (Fin n → K)) : (∃ x : Fin n → K, x ∈ V ∧ x ≠ 0 ∧ ∀ i, x i ∈ (⊥ : IntermediateField k K)) ↔ ∀ a : ι, ∃ x : Fin n → K, x ∈ V ∧ x ≠ 0 ∧ ∀ i, x i ∈ L a",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-iss1059",
+  "group": "C1",
+  "result": "pass",
+  "note": "K/k as [Field k][Field K][Algebra k K]; nonempty A as [Nonempty ι]; subfields with (1) as IntermediateField k K; (2) ⨅ = ⊥; (3) L c ≤ L a ⊓ L b; n≥1; V Submodule K (Fin n → K); LHS ∃ nonzero x∈V coords in ⊥; RHS ∀ a ∃ nonzero x∈V coords in L a (per-a vector)"
  }
 }
