@@ -237,7 +237,10 @@ section Finite
 
 variable (Λ : Type (u + 1)) [CommRing Λ] {X Y : Scheme.{u}}
 
-/-- **The projection formula for a proper direct image at finite coefficients, unbounded.**
+/-- Blueprint `lem-amb-proper-coproducts-projection`: The proper projection formula on the
+ambient category.
+
+**The projection formula for a proper direct image at finite coefficients, unbounded.**
 For a finite coefficient ring `Λ` and a proper morphism `g : Z ⟶ Y`, the projection map
 
 `Rg_* M ⊗ᴸ L ⟶ Rg_*(M ⊗ᴸ Lg^* L)`
@@ -251,7 +254,10 @@ compactification being formal. It holds by SGA 4 XVII 5.2.9: the question is loc
 over a quasi-compact open the fibres of `g` have bounded dimension, so `Rg_*` has finite
 cohomological dimension on torsion sheaves and commutes with direct sums; on geometric stalks,
 by unbounded proper base change, it becomes `RΓ(Z_ȳ, M) ⊗ᴸ N ≅ RΓ(Z_ȳ, M ⊗ᴸ N)` for a complex
-`N` of `Λ`-modules, which holds for `N = Λ` and passes to all `N` through these colimits. -/
+`N` of `Λ`-modules, which holds for `N = Λ` and passes to all `N` through these colimits.
+
+The blueprint node is stated for `g` of finite type between Noetherian schemes, with the tensor
+factors in the other order; neither hypothesis is used by the argument above. -/
 theorem isIso_rightDerivedLowerStarProjectionMap_of_finite [Finite Λ] {Z : Scheme.{u}}
     (g : Z ⟶ Y) [IsProper g] :
     IsIso (rightDerivedLowerStarProjectionMap (ModuleCat.{u + 1} Λ) g) :=
