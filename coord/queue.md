@@ -1,11 +1,11 @@
 # Work queue
 
-53 items; claim with `tools/claim.py next <group> [--stage N]`.
+50 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (53)
+## Stage 2: nodes to state (50)
 
 | node | distance to Mathlib | kind | blockers |
 |---|---|---|---|
@@ -24,14 +24,12 @@
 | `lem-pc-perfect-rhom-tensor-comparison` | 1 | state | 1 |
 | `lem-weil-pbc-colimit-of-sites-sections` | 1 | state | 1 |
 | `lem-weil-pbc-site-cech-vanishing-criterion` | 1 | state | 1 |
-| `lem-weil-pbc-site-equivalence-is-morphism-of-sites` | 1 | state | 1 |
 | `lem-weil-pbc-site-injective-cech-acyclic` | 1 | state | 1 |
 | `cor-galois-lisse-representations` | 1 | state | 0 |
 | `lem-pc-affine-morphism-hom-out-of-perfect` | 1 | state | 0 |
 | `lem-pc-global-hom-pullback-adjunction` | 1 | state | 0 |
 | `lem-sc-affine-koszul-cech-derived-comparison` | 1 | state | 0 |
 | `lem-sc-as-sequence` | 1 | state | 0 |
-| `lem-sc-etale-affine-qcoherent` | 1 | state | 0 |
 | `lem-sc-etale-standard-cover-cech` | 1 | state | 0 |
 | `lem-sc-etale-zariski-qcoh-comparison` | 1 | state | 0 |
 | `lem-sc-flat-precompose-pus` | 1 | state | 0 |
@@ -42,8 +40,8 @@
 | `lem-sc-zariski-dimension-bound` | 1 | state | 0 |
 | `lem-sc-zariski-flasque-acyclic` | 1 | state | 0 |
 | `lem-sc-zariski-module-abelian-cohomology-agree` | 1 | state | 0 |
-| `lem-weil-pbc-cech-nerve-free-homology` | 1 | state | 0 |
 | `lem-weil-pbc-colimit-of-sites-injective-system` | 1 | state | 0 |
+| `lem-weil-pbc-etale-cohomology-invariance-under-site-equivalence` | 1 | state | 0 |
 | `lem-weil-pbc-etale-cohomology-local-ring-colimit` | 1 | state | 0 |
 | `lem-weil-pbc-etale-cohomology-over-open` | 1 | state | 0 |
 | `lem-weil-pbc-etale-mayer-vietoris-pullback` | 1 | state | 0 |
@@ -59,11 +57,10 @@
 | `lem-weil-pbc-site-restriction-injectives` | 1 | state | 0 |
 | `lem-weil-pbc-site-ses-cech-h1-surjective` | 1 | state | 0 |
 | `lem-weil-pbc-zariski-cohomology-locally-zero` | 1 | state | 0 |
-| `lem-weil-pbc-zariski-extension-by-zero-exact` | 1 | state | 0 |
 | `lem-sc-p1-proj-shifted-free-twist` | 2 | state | 0 |
 | `lem-weil-pbc-constant-sheaf-open-maps-sections` | 2 | state | 0 |
 
-Not open yet: 40 nodes that wait for stage 1, 79 nodes that wait for a statement dependency.
+Not open yet: 40 nodes that wait for stage 1, 78 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
