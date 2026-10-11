@@ -191,5 +191,23 @@
   "by": "L",
   "result": "accepted",
   "note": "7 steps following Stacks 032A (1): square-zero kernels of R/m^n -> R/m^{n-1}; characteristic 0: lift id_kappa step by step by formal smoothness of kappa over Q (new composed leaf, 0322 (3)) and pass to the limit by completeness, Lambda = image a field; characteristic p: a Cohen ring (new unsplit 0328 node) and lifts of Lambda_0/p^n by 0329 (new unsplit node), limit map psi with psi(a) in m iff a in p Lambda_0, kernel 0 or p^N Lambda_0, the three coefficient-ring properties checked in both cases (Stacks says only 'the image is the desired coefficient ring'). Tags verified."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.ExistsCoefficientSubring",
+  "declaration": "IsLocalRing.exists_coefficient_subring",
+  "file": "lean/Sheaf/RingTheory/ExistsCoefficientSubring.lean",
+  "statement": "theorem exists_coefficient_subring (R : Type u) [CommRing R] [IsLocalRing R] [IsAdicComplete (maximalIdeal R) R] (p : ℕ) [CharP (ResidueField R) p] : ∃ (Λ : Subring R) (hΛ : IsLocalRing Λ), letI : IsLocalRing Λ := hΛ maximalIdeal Λ = (maximalIdeal R).comap Λ.subtype ∧ IsAdicComplete ((maximalIdeal R).comap Λ.subtype) Λ ∧ Function.Bijective (Ideal.quotientMap (I := (maximalIdeal R).comap Λ.subtype) (maximalIdeal R) Λ.subtype le_rfl) ∧ (maximalIdeal R).comap Λ.subtype = Ideal.span {(p : Λ)}",
+  "branch": "sheaf-dag",
+  "by": "G1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-ccr1441",
+  "group": "G1",
+  "result": "pass",
+  "note": "R comm local [IsLocalRing], m-adic complete [IsAdicComplete (maximalIdeal R) R] (recorded decl of stmt_dep), residue char p via CharP (ResidueField R) p incl p=0; Λ : Subring R; (1) local with maximalIdeal Λ = comap subtype m and IsAdicComplete for it; (2) Ideal.quotientMap of the inclusion bijective; (3) comap = span{p}; #check'd names; docstring carries all 7 proof steps"
  }
 }
