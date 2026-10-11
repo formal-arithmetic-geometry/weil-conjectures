@@ -168,5 +168,30 @@
   "by": "L",
   "result": "accepted",
   "note": "5 steps (agent proof; Stacks 0CYV uses the fact without proof): stalks of sub-modules inject (new unsplit node: the stalk functor on O_X-modules is exact, Modules 17.3 / 01AG); the multiplication map on stalks via the 01CB node lem-weil-pbc-module-stalk-tensor (unit sk-thm-reduction, recorded by L as a tool use); (JF)_x = J_x F_x; (F/JF)_x = F_x / J_x F_x; (J^n)_x = J_x^n by induction. Not in Mathlib (only abelian sheaves)."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.IdealModuleProductStalk",
+  "declaration": "AlgebraicGeometry.Scheme.ideal_module_product_stalk",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.idealModuleProduct",
+   "AlgebraicGeometry.Scheme.idealModuleProductι",
+   "AlgebraicGeometry.Scheme.idealSheafPower",
+   "AlgebraicGeometry.Scheme.ideal_module_product_stalk"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/IdealModuleProductStalk.lean",
+  "statement": "theorem ideal_module_product_stalk {X : Scheme.{u}} {J : X.Modules} (ι : J ⟶ SheafOfModules.unit X.ringCatSheaf) [Mono ι] (F : X.Modules) (x : X) : let S := RingedSpace.moduleStalkFunctor X.toRingedSpace x ∃ e : S.obj (SheafOfModules.unit X.ringCatSheaf) ≅ ModuleCat.of (X.presheaf.stalk x) (X.presheaf.stalk x), (∀ (U : X.Opens) (hx : x ∈ U) (r : Γ(X, U)), e.hom (TopCat.Presheaf.germ (SheafOfModules.unit X.ringCatSheaf).val.presheaf U x hx r) = X.presheaf.germ U x hx r) ∧ let I : Ideal (X.presheaf.stalk x) := LinearMap.range (S.map ι ≫ e.hom).hom Function.Injective (S.map ι).hom ∧ Function.Injective (S.map (idealModuleProductι ι F)).hom ∧ LinearMap.range (S.map (idealModuleProductι ι F)).hom = I • ⊤ ∧ (∃ φ : (S.obj F ⧸ I • (⊤ : Submodule (X.presheaf.stalk x) (S.obj F))) ≃ₗ[ X.presheaf.stalk x] S.obj (cokernel (idealModuleProductι ι F)), ∀ m : S.obj F, φ (Submodule.Quotient.mk m) = (S.map (cokernel.π (idealModuleProductι ι F))).hom m) ∧ ∀ n : ℕ, 1 ≤ n → let Jn := idealSheafPower ι n LinearMap.range (S.map Jn.2 ≫ e.hom).hom = I ^ n ∧ LinearMap.range (S.map (idealModuleProductι Jn.2 F)).hom = I ^ n • ⊤ ∧ ∃ φ : (S.obj F ⧸ I ^ n • (⊤ : Submodule (X.presheaf.stalk x) (S.obj F))) ≃ₗ[ X.presheaf.stalk x] S.obj (cokernel (idealModuleProductι Jn.2 F)), ∀ m : S.obj F, φ (Submodule.Quotient.mk m) = (S.map (cokernel.π (idealModuleProductι Jn.2 F))).hom m",
+  "branch": "sheaf-dag",
+  "by": "K1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-imp1129"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-imp1129",
+  "group": "K1",
+  "result": "fix",
+  "note": "J arbitrary sub-O_X-module (ι, Mono) not IdealSheafData; e: stalk O_X ≅ O_{X,x} on germs; (1) both injectivities; (2) range = I•⊤; (3) F_x/IF_x ≃ (F/JF)_x via stalk of π; (4) n≥1 J^n with J^1=J: range = I^n, I^n•⊤, quotient equiv; reverted vague correction; reverted the delivery's statement correction of the item (statement, statement_change kept as on sheaf-dag; --revert-statement)"
  }
 }
