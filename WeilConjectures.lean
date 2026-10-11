@@ -510,7 +510,6 @@ public import WeilConjectures.CategoryTheory.GrothendieckAbelian.SerpeSmallObjec
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Sheaf
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Subcomplex
 public import WeilConjectures.CategoryTheory.HomotopyCategory.Adjunction
-public import WeilConjectures.CategoryTheory.Idempotents.Octahedron
 public import WeilConjectures.CategoryTheory.Idempotents.Pretriangulated
 public import WeilConjectures.CategoryTheory.Idempotents.Shift
 public import WeilConjectures.CategoryTheory.Idempotents.TStructure
