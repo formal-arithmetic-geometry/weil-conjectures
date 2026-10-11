@@ -127,8 +127,22 @@ def take(who, m, quiet=False) -> bool:
     return False
 
 
-def node_finished(m: str) -> bool:
-    """A stage-1 item is finished when its node file is no longer unsplit/imported (the queue may be stale)."""
+def queue_stage(m: str):
+    """The stage of an item as coord/queue.tsv lists it (None when the queue does not list it)."""
+    q = WORK / "queue.tsv"
+    if not q.exists():
+        return None
+    for l in q.read_text().splitlines():
+        r = l.split("\t")
+        if r and r[0] == m and len(r) > 1:
+            return r[1]
+    return None
+
+
+def node_finished(m: str, stage=None) -> bool:
+    """A stage-1 item is finished when its node file is no longer unsplit/imported (the queue may be stale);
+    a stage-2 item (stage 2 opened 2026-10-11) when its node already records a Lean declaration (`lean.module`)
+    or is a Mathlib leaf: a split node is exactly what stage 2 states, so the stage-1 rule must not refuse it."""
     hits = list((li.ROOT / "dag" / "nodes").glob(f"*/{m}.json"))
     if not hits:
         return False
@@ -136,6 +150,13 @@ def node_finished(m: str) -> bool:
         d = json.loads(hits[0].read_text())
     except Exception:
         return False
+    if stage is None:
+        stage = queue_stage(m)
+    if str(stage) == "2":
+        l = d.get("lean")
+        if isinstance(l, dict) and l.get("module"):
+            return True
+        return d.get("status") in ("mathlib", "merged")
     # launcher's order 2026-10-10 20:55 UTC: a node whose status is split, mathlib or merged is finished whether or not
     # `reviewed` is set (L's own split of lem-pc-ringed-space-module-stalk-tensor at 19:58 carried no `reviewed`, so
     # `next` handed the item to J1 at 20:14 after F1 had abandoned it for the same reason)
