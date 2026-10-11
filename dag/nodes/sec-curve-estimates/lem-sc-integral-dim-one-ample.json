@@ -122,5 +122,24 @@
   "group": "H1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-id2 (reviewer sub-agent of L); spot-checked: Re-push after the 15:20 return, checked point by point: 1 repaired (affine-complement node now for nonempty affine U; true: X\\U is a proper closed subset of the irreducible Noetherian X of dim 1, finitely many components each a closed point); 2 repaired (step 1 covers by nonempty affine opens); 3 repaired (both statements cite def-weil-pbc-generating-sections, Zariski O_X-modules, and def-weil-pbc-ample-invertible-module for X_s); 4 repaired (source places 09NB/09NC; E7 specialization 'X Noetherian of dimension 1' for 'O_{X,x_i} Noetherian of dim 1' named in the report and true: x_i is not the generic point since U is nonempty, so 1 <= dim O_{X,x_i} <= dim X = 1; local-ring sentence removed); 5 repaired (report lists the three new nodes and reviews them); 6: created = {item} only is what tools/README 'Fields of a node' prescribes for a delivered new node (the merge sets created), so not a fault; via of the new nodes repaired; from.place not repaired, fixed below. Source: Stacks varieties.tex 09ND (line 7927), 09NB (7856), 09NC (7894): item = 09ND hypothesis by hypothesis (Noetherian integral separated dim 1); 09NB and 09NC statements agree with the two new nodes (09NB specialized as above). Steps: 1 by lem-sc-affine-complement-finite-on-integral-curve (Y nonempty quasi-compact); 2 by lem-sc-find-globally-generated (integral separated Noetherian dim 1, U_i nonempty affine, finite complement); 3 by lem-sc-enough-globally-generated-ample (Y quasi-compact, X_{s_i}=U_i affine cover Y). Small cases: U empty in Spec Z (excluded by nonempty), U = X affine curve (complement empty), A^1 in P^1 (one-point complement). FIX more, RETURN less (B3): 'Noetherian' was cited by pqf-def-locnoeth (locally Noetherian) alone in two new statements, and the affine-complement statement is false for locally Noetherian non-quasi-compact X (A^1 with infinitely many doubled points); added [def-weil-pbc-quasi-compact-scheme] after it. Fixes: dag/nodes/sec-curve-estimates/lem-sc-affine-complement-finite-on-integral-curve.json: statement, stmt_deps: cite def-weil-pbc-quasi-compact-scheme for Noetherian, add def-pc-scheme (cited but missing in stmt_deps); lem-sc-find-globally-generated.json: statement, stmt_deps: same quasi-compact citation; the three new nodes: blueprint.from.place: the sentence of lem-sc-pic-proper-ntorsion's proof followed by the 09ND proof sentence (return point 6); lem-sc-integral-dim-one-ample.json: blueprint.from.via: removed the item itself, which the worker had prepended to its own via. The report mentions a citations.json that is not delivered (harmless). Start 'Sat Oct 10 03:36:21 PM UTC 2026', end 'Sat Oct 10 03:37:29 PM UTC 2026'.; 4 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.IntegralDimOneAmple",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.exists_isAmple_of_integral_dim_one",
+  "file": "lean/Sheaf/AlgebraicGeometry/IntegralDimOneAmple.lean",
+  "statement": "theorem exists_isAmple_of_integral_dim_one (Y : Scheme.{u}) [IsIntegral Y] [IsLocallyNoetherian Y] [CompactSpace Y] [Y.IsSeparated] (hY : topologicalKrullDim Y = (1 : WithBot ℕ∞)) : ∃ L : Y.Modules, ∃ hL : L.IsInvertible, @IsAmple Y L hL",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-ida1132b"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-ida1132b",
+  "group": "H1",
+  "result": "fix",
+  "note": "Y:Scheme.{u}; integral=AlgebraicGeometry.IsIntegral (#check); Noetherian=[IsLocallyNoetherian Y][CompactSpace Y]; separated fixed to [Y.IsSeparated] (sc-family form, not hollow: inferInstance fails); dim topologicalKrullDim Y = 1; conclusion ∃ L, ∃ hL : L.IsInvertible, @IsAmple Y L hL resolving to landed Scheme.Modules.IsAmple (pp.fullNames)"
  }
 }

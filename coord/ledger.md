@@ -4462,3 +4462,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 11:32 L: merged deliver/H1/lem-weil-pbc-limit-module-finite-presentation (stage 2; reviewer FIX; first push; Sheaf.RingTheory.LimitModuleFinitePresentation Algebra.limitModuleFinitePresentation)
 - 11:32 L: merged deliver/K1/lem-weil-pbc-ideal-module-product-stalk (stage 2; reviewer FIX; first push; Sheaf.AlgebraicGeometry.IdealModuleProductStalk AlgebraicGeometry.Scheme.ideal_module_product_stalk; statement correction reverted (statement, statement_change))
 - 11:32 L: merged deliver/H1/lem-pc-global-sections-separable (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.GlobalSectionsSeparable AlgebraicGeometry.globalSections_isSeparable_of_isSmoothProjectiveCurve)
+- 11:33 L: merged deliver/H1/lem-sc-integral-dim-one-ample (stage 2; reviewer FIX; first push; Sheaf.AlgebraicGeometry.IntegralDimOneAmple AlgebraicGeometry.Scheme.Modules.exists_isAmple_of_integral_dim_one)
