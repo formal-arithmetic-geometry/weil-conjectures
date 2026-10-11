@@ -126,5 +126,23 @@
   "group": "G1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-llh2055 (reviewer sub-agent of L); spot-checked: Read exists_leftFraction (CalculusOfFractions.lean:743), LeftFractionRel (:246), LeftFraction.map_eq_iff (:757), homMk_eq_iff_leftFractionRel (:522). Representation leaf exact; orientation of steps 2-3 correct; right-fraction nodes not restated. FIX more, RETURN less: (1) C4/B leaf: lem-pc-left-localization-fraction-equality cited homMk_eq_iff_leftFractionRel, which is about the constructed Localization W, while step 3 compares Q(f)≫Q(s)⁻¹ under the localization functor, and its 'equivalently' clause dropped s1≫t1=s2≫t2; restated for an arbitrary localization L with the relation explicit, leaf now LeftFraction.map_eq_iff line 757, grep recorded. (2) C1: step 1 now cites Stacks 05Q0 for filteredness of X/S (noted as unused), mirroring the right-fraction fix.; 2 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.LocalizationHomColimit",
+  "declaration": "CategoryTheory.localization_hom_colimit",
+  "file": "lean/Sheaf/CategoryTheory/LocalizationHomColimit.lean",
+  "statement": "theorem localization_hom_colimit {C : Type u} [Category.{v} C] {D : Type u'} [Category.{v'} D] (S : MorphismProperty C) [S.HasLeftCalculusOfFractions] (Q : C ⥤ D) [Q.IsLocalization S] (X Y : C) : ∃ e : colimit ((MorphismProperty.Under.forget S ⊤ X ⋙ Under.forget X) ⋙ (uliftCoyoneda.{u} (C := C)).obj (Opposite.op Y)) ≃ (Q.obj Y ⟶ Q.obj X), ∀ (s : S.Under ⊤ X) (f : Y ⟶ s.right), e (colimit.ι ((MorphismProperty.Under.forget S ⊤ X ⋙ Under.forget X) ⋙ (uliftCoyoneda.{u} (C := C)).obj (Opposite.op Y)) s (ULift.up f)) = (MorphismProperty.LeftFraction.mk f s.hom s.prop).map Q (Localization.inverts Q S)",
+  "branch": "sheaf-dag",
+  "by": "G1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-llh0759",
+  "group": "G1",
+  "result": "pass",
+  "note": "C,D arbitrary (u v u' v'); S MorphismProperty + HasLeftCalculusOfFractions = Stacks LMS1-3; Q IsLocalization S; index S.Under ⊤ X = X/S with all commuting triangles; diagram ULift(Y ⟶ I) postcomposition; e equiv with canonical eq colimit.ι s f ↦ LeftFraction.mk f s.hom map = Q f ≫ (Q s)⁻¹ (Mathlib LeftFraction = Stacks s^{-1}f orientation); grep Mathlib Localization/ and LeftFraction users: no colimit Hom form, existing false right"
  }
 }
