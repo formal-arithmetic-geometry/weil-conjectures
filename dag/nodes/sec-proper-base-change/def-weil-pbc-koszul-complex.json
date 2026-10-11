@@ -110,5 +110,33 @@
   "summary": "Definition split against Stacks 0622/0623 (More on Algebra, read at lines 6566-6603; tags verified). The definition was kept (same objects, same formula, same degree conventions) and rewritten to cite a node for every notion and every claim it made inside itself: the exterior algebra and exterior powers (new Mathlib leaf def-weil-pbc-exterior-algebra: ExteriorAlgebra, exteriorPower), the basis of the exterior powers of R^r with K_0=R, K_1=E, K_n=0 for n>r (new Mathlib leaf lem-weil-pbc-exterior-power-free-basis: Module.Basis.exteriorPower, zeroEquiv, oneEquiv), the well-definedness of the differential, which the old statement asserted inside the definition and Stacks calls 'straightforward' (new unsplit statement lem-weil-pbc-koszul-differential: unique D with D(1)=0, D(v x)=phi(v)x - v D(x), degree -1, explicit formula, unique derivation; Mathlib candidate CliffordAlgebra.contractLeft, which gives existence only), d o d = 0 (new unsplit statement lem-weil-pbc-koszul-differential-square-zero; candidate CliffordAlgebra.contractLeft_contractLeft, applicable once D = contractLeft phi), the tensor product with M and the functoriality making K tensor M a complex (new Mathlib leaf def-weil-pbc-module-tensor-product), chain complexes and H_i = ker/im (new Mathlib leaf def-weil-pbc-module-chain-complex-homology). The statement now also records Stacks' description of d as the unique derivation and the cdga structure, which the old text omitted. No Koszul complex exists in this Mathlib (only a TODO in RingTheory/Regular/RegularSequence.lean:21) nor in slopmaster2 (only the two-term Koszul sequence on P^1 in WeilConjectures/AlgebraicGeometry/ProjectiveSpace/Koszul.lean, a different object).",
   "blueprint": "No proof of a blueprint node is realized by steps here (a definition). The item serves thm-weil-pbc-finite-etale-lifting, step 7 of its split (essential surjectivity via Stacks 0GS2, through the regular-sequence / H_1-regularity chain of 0665); its new nodes refine that place: the exterior powers (0622 (1)), the differential and d^2 = 0 (0622 (2) and the formula after it), the basis of the terms (00DM, used for 0623 with E = R^r), and the tensor/homology notions in which H_1-regularity is stated. Blueprint search (koszul, exterior algebra, wedge, interior product, contraction, chain complex, homology module, tensor product of modules, tags 0622/0623/00DM/00CV/00CX/010V) found no blueprint node stating any of them: same_as [] for the item and all new nodes."
  },
- "reviewed": "2026-10-10 L: definition split against 0622/0623: exterior algebra and the free basis of exterior powers (Mathlib leaves), the Koszul differential (existence, degree, formula, uniqueness as a derivation: statement node, Mathlib candidate contractLeft) and d^2 = 0 (statement node), tensor product and chain-complex homology leaves; the derivation characterization added from Stacks; 6 new nodes"
+ "reviewed": "2026-10-10 L: definition split against 0622/0623: exterior algebra and the free basis of exterior powers (Mathlib leaves), the Koszul differential (existence, degree, formula, uniqueness as a derivation: statement node, Mathlib candidate contractLeft) and d^2 = 0 (statement node), tensor product and chain-complex homology leaves; the derivation characterization added from Stacks; 6 new nodes",
+ "lean": {
+  "module": "Sheaf.Paper.KoszulComplex",
+  "declaration": "ExteriorAlgebra.koszulComplex",
+  "declarations": [
+   "ExteriorAlgebra.koszul_contract_mem",
+   "ExteriorAlgebra.koszulBoundary",
+   "ExteriorAlgebra.koszulBoundary_comp",
+   "ExteriorAlgebra.koszulComplex",
+   "ExteriorAlgebra.koszulBoundary_rTensor_comp",
+   "ExteriorAlgebra.koszulComplexTensor"
+  ],
+  "file": "lean/Sheaf/Paper/KoszulComplex.lean",
+  "statement": "def koszulComplex (R : Type u) [CommRing R] (r : ℕ) (f : Fin r → R) : ChainComplex (ModuleCat.{u} R) ℕ",
+  "branch": "sheaf-dag",
+  "by": "G1",
+  "date": "2026-10-11",
+  "existing": false,
+  "note": "Reviewer R-dkc1304 FIX: re-indexed by ℕ (ChainComplex (ModuleCat.{u} R) ℕ, K_n = ⋀[R]^n (Fin r →₀ R); negative terms zero by the extension convention, ComplexShape.embeddingDownNat to CochainComplex ℤ), dropping the `if n < 0` term helper koszulTerm; dropped the unused koszulExteriorBasis (a restatement of Mathlib Module.Basis.exteriorPower, the leaf lem-weil-pbc-exterior-power-free-basis). Differential = restriction of CliffordAlgebra.contractLeft (Q := 0) (Finsupp.linearCombination R f) (STATE KOSZUL).",
+  "fixed_by": "R-dkc1304"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-dkc1304",
+  "group": "G1",
+  "result": "fix",
+  "note": "R comm ring u, r:ℕ (r=0 ok), f:Fin r→R; E=Fin r→₀R, φ=linearCombination f (φ e_i=f_i); K_n=⋀[R]^n E over ℕ (neg. zero by convention); d=codRestrict of contractLeft(Q:=0) φ (sign D(v∧x)=φ(v)x−v∧Dx, d2(e_i∧e_j)=f_ie_j−f_je_i); d²=0 cites square-zero; K⊗M via rTensor; X/d rfl-checked"
+ }
 }

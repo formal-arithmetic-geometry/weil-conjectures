@@ -4640,3 +4640,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 12:35 L: merged deliver/E1/lem-pc-tor-amplitude-qcoh-test (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.TorAmplitudeQCohTest AlgebraicGeometry.torAmplitude_of_quasiCoherent_tests; new nodes: def-pc-derived-tensor-cohomology-vanishes)
 - 12:35 L: merged deliver/J1/lem-pc-fp-relation-descent (stage 2; reviewer FIX; first push; Sheaf.AlgebraicGeometry.FiniteRelationDescent AlgebraicGeometry.finiteRelation_module_map_descent)
 - 12:35 L: merged deliver/G1/lem-weil-pbc-coherent-generic-point-ideal-inclusion (stage 2; reviewer FIX; first push; Sheaf.AlgebraicGeometry.CoherentGenericPointIdealInclusion AlgebraicGeometry.Scheme.Modules.coherent_generic_point_ideal_inclusion)
+- 12:35 L: merged deliver/G1/def-weil-pbc-koszul-complex (stage 2; reviewer FIX; first push; Sheaf.Paper.KoszulComplex ExteriorAlgebra.koszulComplex)
