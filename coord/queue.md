@@ -1,11 +1,11 @@
 # Work queue
 
-18 items; claim with `tools/claim.py next <group> [--stage N]`.
+17 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (18)
+## Stage 2: nodes to state (17)
 
 | node | distance to Mathlib | kind | blockers |
 |---|---|---|---|
@@ -22,7 +22,6 @@
 | `lem-sc-picard-h1-restriction-compatibility` | 1 | state | 0 |
 | `lem-sc-qcoh-complex-alternating-cech-derived-sections` | 1 | state | 0 |
 | `lem-weil-pbc-cohomology-colimit-of-sites` | 1 | state | 0 |
-| `lem-weil-pbc-colimit-of-sites-injective-system` | 1 | state | 0 |
 | `lem-weil-pbc-etale-mayer-vietoris-pullback` | 1 | state | 0 |
 | `lem-weil-pbc-hypercover-free-resolution` | 1 | state | 0 |
 | `lem-weil-pbc-matching-object-fibre-product` | 1 | state | 0 |
