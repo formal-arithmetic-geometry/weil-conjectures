@@ -14,14 +14,18 @@ LP=$(cd "$SHEAF_LEAN" && lake env printenv LEAN_PATH) || { echo "lake env failed
 OUT=()
 refresh_mirror() {
   # Link what the shared build has and the mirror lacks; where the shared build is newer than a file the group
-  # compiled itself, the shared one is the verified one and replaces it; drop links to modules that are gone.
+  # compiled itself, the shared one is the verified one and replaces it; drop links to modules whose source is gone.
+  # A dangling link whose module still has its source is kept: the shared build is being rebuilt in place (a base move
+  # rebuilds lean/.lake/build with lake, outside build.py, and does not touch $SHEAF_BUILD), and deleting the link then
+  # left the module missing from the mirror until the next publish (X-mir, 2026-10-11).
   [ ! -e "$M/.stamp" ] || [ "$SHEAF_BUILD" -nt "$M/.stamp" ] || return 0
   mkdir -p "$M"
   while IFS= read -r own; do
     s="$SHEAF_BUILD/${own#"$M"/}"
     [ -e "$s" ] && [ "$s" -nt "$own" ] && ln -sf "$s" "$own"
   done < <(find "$M" -type f \( -name '*.olean' -o -name '*.ilean' \) 2>/dev/null)
-  find "$M" -xtype l -delete 2>/dev/null
+  while IFS= read -r l; do r=${l#"$M"/}; [ -e "$SHEAF_LEAN/${r%%.*}.lean" ] || rm -f "$l"; done \
+    < <(find "$M" -xtype l 2>/dev/null)
   for x in "$SHEAF_BUILD"/*; do [ -e "$x" ] && ionice -c3 cp -asn "$x" "$M/" 2>/dev/null; done
   touch "$M/.stamp"
 }
