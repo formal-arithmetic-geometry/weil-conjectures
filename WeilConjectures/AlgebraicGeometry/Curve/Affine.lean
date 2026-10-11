@@ -298,8 +298,8 @@ over an algebraically closed field `k` and `ℓ` a prime. Then `H²(C_ét, ℤ/�
 If `ℓ ≠ char k`, a primitive `ℓ`-th root of unity identifies `ℤ/ℓ` with `μ_ℓ`
 (`AlgebraicGeometry.Scheme.constantZModIsoRootsOfUnitySheaf`), and the Kummer sequence gives
 `H²(C, μ_ℓ) ≅ Pic(C) / ℓ`
-(`AlgebraicGeometry.IsCurve.nonempty_addEquiv_sheafH_rootsOfUnitySheaf_two`), which vanishes
-as `Pic(C)` is `ℓ`-divisible
+(`AlgebraicGeometry.IsCurve.nonempty_addEquiv_sheafH_rootsOfUnitySheaf_two_of_smooth`), which
+vanishes as `Pic(C)` is `ℓ`-divisible
 (`AlgebraicGeometry.IsConnectedCurve.surjective_zsmul_pic_and_finite_torsionBy`). If
 `ℓ = char k`, this is the Artin–Schreier vanishing
 `AlgebraicGeometry.Scheme.subsingleton_sheafH_constantZMod_of_isAffine`.
@@ -313,7 +313,7 @@ theorem subsingleton_sheafH_two_constantZMod (f : C ⟶ Spec (.of k)) [IsConnect
   have : NeZero (ℓ : k) := ⟨hℓ⟩
   have : NeZero ℓ := .of_neZero_natCast k
   obtain ⟨-, -, ζ, hζ, -⟩ := IsSepClosed.exists_isPrimitiveRoot.{u, u} k ℓ
-  obtain ⟨e⟩ := IsCurve.nonempty_addEquiv_sheafH_rootsOfUnitySheaf_two f ℓ hℓ
+  obtain ⟨e⟩ := IsCurve.nonempty_addEquiv_sheafH_rootsOfUnitySheaf_two_of_smooth f ℓ hℓ
   obtain ⟨ePic⟩ := C.nonempty_addEquiv_cohomologicalPicardGroup
   have hdiv := (surjective_zsmul_pic_and_finite_torsionBy f hℓ).1
   have htop : (zsmulAddGroupHom (α := C.CohomologicalPicardGroup) (ℓ : ℤ)).range = ⊤ := by

@@ -67,7 +67,8 @@ theorem Scheme.exists_nilradical_pow_eq_bot (X : Scheme.{u}) [CompactSpace X]
   obtain ⟨x, hxt, hyx⟩ : ∃ x ∈ t, y ∈ V x := by simpa using ht (Set.mem_univ y)
   have hle : (_root_.nilradical Γ(X, U) ^ t.sup N).map (X.presheaf.germ U y hy).hom ≤ ⊥ := by
     rw [Ideal.map_pow]
-    refine (Ideal.pow_right_mono (Ideal.map_le_iff_le_comap.2 fun b hb ↦ ?_) _).trans ?_
+    refine (Ideal.pow_right_mono (J := _root_.nilradical (X.presheaf.stalk y))
+      (Ideal.map_le_iff_le_comap.2 fun b hb ↦ ?_) _).trans ?_
     · exact mem_nilradical.2 ((mem_nilradical.1 hb).map _)
     · exact (Ideal.pow_le_pow_right (Finset.le_sup hxt)).trans (hN x y hyx).le
   exact Ideal.mem_bot.1 (hle (Ideal.mem_map_of_mem _ ha))
@@ -115,6 +116,7 @@ lemma Scheme.mul_eq_zero_of_appTop_pullback_fst_eq_zero {X Y T : Scheme.{u}} (ι
     eq_bot_iff.2 (Ideal.mul_le.2 fun c hc d hd ↦ Ideal.mem_bot.2 (hsq ⟨U, hU⟩ c d hc hd))
   have hprod := Ideal.mul_mem_mul (hmem a ha) (hmem b hb)
   rw [← Ideal.map_mul, hK, Ideal.map_bot, ← map_mul] at hprod
+  change T.presheaf.germ ⊤ t trivial (a * b) = 0
   rw [← T.presheaf.germ_res_apply (homOfLE le_top) t htV, Ideal.mem_bot.1 hprod, map_zero]
 
 namespace IsCurve

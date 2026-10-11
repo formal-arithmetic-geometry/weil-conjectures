@@ -86,6 +86,7 @@ public import WeilConjectures.AlgebraicGeometry.Curve.AffineAcyclic
 public import WeilConjectures.AlgebraicGeometry.Curve.Assertions
 public import WeilConjectures.AlgebraicGeometry.Curve.BoundaryNeighbourhood
 public import WeilConjectures.AlgebraicGeometry.Curve.Brauer
+public import WeilConjectures.AlgebraicGeometry.Curve.BrauerNonreduced
 public import WeilConjectures.AlgebraicGeometry.Curve.BrauerReduced
 public import WeilConjectures.AlgebraicGeometry.Curve.ClosedPoint
 public import WeilConjectures.AlgebraicGeometry.Curve.CohomologicalDimension
@@ -96,6 +97,7 @@ public import WeilConjectures.AlgebraicGeometry.Curve.DivisorIdealSheaf
 public import WeilConjectures.AlgebraicGeometry.Curve.DivisorSequence
 public import WeilConjectures.AlgebraicGeometry.Curve.Estimate
 public import WeilConjectures.AlgebraicGeometry.Curve.FieldExtension
+public import WeilConjectures.AlgebraicGeometry.Curve.GaCohomology
 public import WeilConjectures.AlgebraicGeometry.Curve.GenericComparison
 public import WeilConjectures.AlgebraicGeometry.Curve.HighDegreeVanishing
 public import WeilConjectures.AlgebraicGeometry.Curve.Kummer
@@ -243,7 +245,6 @@ public import WeilConjectures.AlgebraicGeometry.Modules.LocallyFreeAffine
 public import WeilConjectures.AlgebraicGeometry.Modules.LocallyFreeRank
 public import WeilConjectures.AlgebraicGeometry.Modules.PicardAffine
 public import WeilConjectures.AlgebraicGeometry.Modules.ProjectionFormula
-public import WeilConjectures.AlgebraicGeometry.Modules.PullbackAffineSections
 public import WeilConjectures.AlgebraicGeometry.Modules.PullbackFreeGenerator
 public import WeilConjectures.AlgebraicGeometry.Modules.PullbackMonoidal
 public import WeilConjectures.AlgebraicGeometry.Modules.PullbackTilde
