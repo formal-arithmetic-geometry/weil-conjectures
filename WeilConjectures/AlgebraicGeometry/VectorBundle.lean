@@ -31,19 +31,33 @@ the symmetric algebra commutes with base change. It comes with the projection `V
 the zero section `X ⟶ V(M)`, given by the augmentation `Sym M ⟶ 𝒪_X`.
 
 When `M` is locally free of constant rank `d`, this is the vector bundle of
-blueprint `def-asd-vector-bundle-zero-section`; over an open on which `M` is free the pieces are
-`Spec Γ(X, U)[x₁, …, x_d]`, the affine space of dimension `d`.
+blueprint `def-asd-vector-bundle-zero-section`. A basis `b` of `Γ(M, U)` over an affine open `U`
+identifies the piece over `U` with the affine space `𝔸(ι; U)` (`affineSpaceIso`), compatibly with
+the zero sections; two bases differ by the linear automorphism of `𝔸(ι; U)` given by their
+change-of-basis matrix (`affineSpaceIso_inv_linearMap`). Hence `V(M)` is a vector bundle of rank
+`d` in the sense of `AlgebraicGeometry.IsVectorBundleOfRank` (`isVectorBundleOfRank_vectorBundle`),
+which is stable under base change and has a smooth projection of relative dimension `d`.
+
+## Main definitions
+
+- `AlgebraicGeometry.Scheme.Modules.vectorBundle`, `vectorBundleProj`, `vectorBundleZeroSection`:
+  `V(M)`, its projection and its zero section.
+- `AlgebraicGeometry.Scheme.Modules.affineSpaceIso`: `Spec (Sym Γ(M, U)) ≅ 𝔸(ι; U)` for a basis.
+- `AlgebraicGeometry.Scheme.Modules.vectorBundleTrivialization`: the corresponding
+  trivialisation `V(M)|_U ≅ 𝔸^d_U`.
+- `AlgebraicGeometry.Scheme.Modules.transitionMatrix`: the matrix of a change of trivialisation.
 
 ## Blueprint
 
 - `def-amb-finite-locally-free-module`: `AlgebraicGeometry.Scheme.Modules.IsLocallyFreeOfRank`.
 - `def-asd-vector-bundle-zero-section`: `AlgebraicGeometry.Scheme.Modules.vectorBundle`,
   `AlgebraicGeometry.Scheme.Modules.vectorBundleProj`,
-  `AlgebraicGeometry.Scheme.Modules.vectorBundleZeroSection`.
-- `rem-asd-vector-bundle-comparison`: the purity chapter's vector bundles (relative spectra of
-  symmetric algebras of locally free modules of constant rank, with their zero sections) are
-  the same construction: `vectorBundle` is the coordinate-free form, and it assumes nothing
-  about `f^!`.
+  `AlgebraicGeometry.Scheme.Modules.vectorBundleZeroSection`, with trivialisations
+  `AlgebraicGeometry.Scheme.Modules.vectorBundleTrivialization` and transition matrices
+  `AlgebraicGeometry.Scheme.Modules.transitionMatrix`.
+- `rem-asd-vector-bundle-comparison`:
+  `AlgebraicGeometry.Scheme.Modules.isVectorBundleOfRank_vectorBundle`: the coordinate-free
+  `vectorBundle` is a vector bundle in the local sense used by the purity chapter.
 -/
 
 @[expose] public section
@@ -325,13 +339,9 @@ relative spectrum of its symmetric algebra, glued from the affine pieces
 `Spec (Sym_{Γ(X, U)} Γ(M, U))` over the affine opens `U ⊆ X`. Its projection is
 `vectorBundleProj`, its zero section (given by the augmentation `Sym M → 𝒪_X`) is
 `vectorBundleZeroSection`, a closed immersion. When `M` is locally free of constant rank `d`
-(`IsLocallyFreeOfRank`), over an affine open `U` on which `M` is free the bundle is
-`Spec Γ(X, U)[x₁, …, x_d]` (`vectorBundleι`, `isPullback_vectorBundleι` and
-`SymmetricAlgebra.equivMvPolynomial`); changes of trivialization are invertible matrices.
-
-This construction is also the vector bundle of the purity chapter
-(blueprint `rem-asd-vector-bundle-comparison`): the two definitions agree, and neither assumes
-anything about `f^!`. -/
+(`IsLocallyFreeOfRank`), a basis of `Γ(M, U)` over an affine open `U` trivialises the bundle over
+`U` as `𝔸^d_U` (`vectorBundleTrivialization`), and changes of trivialisation are the invertible
+matrices `transitionMatrix` (`affineSpaceIso_inv_linearMap`). -/
 noncomputable def vectorBundle : Scheme.{u} :=
   M.symSpecGluingData.glued
 
@@ -717,9 +727,14 @@ lemma exists_basis_of_isLocallyFreeOfRank [M.IsLocallyFreeOfRank d] (x : X) :
   exact ⟨BasicAffineOpens.ofAffineOpens ⟨V, hV⟩, hxV,
     ⟨Module.Basis.ofEquivFun (sectionsLinearEquivOfOverIsoFree (he i).some hVY)⟩⟩
 
-/-- The vector bundle of a locally free module of rank `d` is a vector bundle of rank `d`: it is
+/-- Blueprint `rem-asd-vector-bundle-comparison`: Relation to the purity chapter's vector bundles.
+
+The coordinate-free vector bundle `V(M) = Spec_X (Sym M)` of a locally free module of rank `d`,
+with its zero section given by the augmentation, is a vector bundle of rank `d` in the local
+sense (`AlgebraicGeometry.IsVectorBundleOfRank`) in which the purity chapter uses vector bundles:
 Zariski locally `𝔸^d` with its zero section, with linear transition maps. In particular it is
-stable under base change (`AlgebraicGeometry.IsVectorBundleOfRank.baseChange`). -/
+stable under base change (`AlgebraicGeometry.IsVectorBundleOfRank.baseChange`). Neither notion
+involves `f^!`. -/
 instance isVectorBundleOfRank_vectorBundle [M.IsLocallyFreeOfRank d] :
     IsVectorBundleOfRank d M.vectorBundleProj M.vectorBundleZeroSection :=
   ⟨⟨vectorBundleAtlas M.exists_basis_of_isLocallyFreeOfRank⟩⟩
