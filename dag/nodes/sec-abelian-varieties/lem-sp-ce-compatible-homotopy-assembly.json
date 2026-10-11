@@ -22,9 +22,56 @@
   "def-sp-abelian",
   "def-sp-injective-resolutions"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "First choose, degree by degree, extensions $\\widetilde{s}_Z^q:I^q\\to J_Z^{q-1}$ of $s_Z^q$ across the monomorphisms $i^q$, using injectivity of the terms of $J_Z$. Since $J_Z^{q-1}$ is injective, the monomorphism $j^{q-1}$ has a retraction, so each short exact sequence $0\\to J_Z^{q-1}\\to J_I^{q-1}\\to J_B^{q-1}\\to0$ splits and $\\rho^{q-1}$ has a section $\\sigma^{q-1}$ with $\\rho^{q-1}\\sigma^{q-1}=1$ (the injectivity of $J_B^{q-1}$ is not what gives the section); independently choose the null-homotopy $s_B$ of $R_B$ with $s_B^0=0$ by the acyclic-to-injective null-homotopy result applied to the augmented exact complex $B$ (adjoin its augmentation object in degree $-1$, with the map $0$ there, a chain map because $R_B\\epsilon_B=0$). The resolutions are indexed from degree $0$, so $J^{-1}=0$ and every map $I^0\\to J^{-1}$ or $B^0\\to J^{-1}$ is zero; in particular $s_B^0=0$ and $\\widetilde{s}_Z^0=0$, hence $t^0=0$ below. The condition $R_I\\epsilon_I=0$ implies $R_B\\epsilon_B=0$, so this application has the required augmentation-zero condition.",
+   "uses": [
+    "lem-weil-pbc-acyclic-map-to-injective-nullhomotopy"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 015I, comparison construction for the boundary and cycle rows; Weibel Homological Algebra, Lemma 5.7.10"
+   }
+  },
+  {
+   "text": "Define $t^q=j\\widetilde{s}_Z^q+\\sigma^{q-1}s_B^q\\pi^q$. Then $t i=j s_Z$ and $\\rho t=s_B\\pi$. Put $E=R_I-(d t+t d)$. The homotopy identity for $s_Z$ and the relation $R_Ii=jR_Z$ give $Ei=0$, while the homotopy identity for $s_B$ and $\\rho R_I=R_B\\pi$ give $\\rho E=0$. Exactness therefore factors the defect uniquely as $E=jE'\\pi$ for a chain map $E':B^\\bullet\\to J_Z^{\\bullet}$; its augmentation composite is zero because $E\\epsilon_I=0$ and $j$ is monic.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 015I, compatibility of the boundary/cycle exact sequences"
+   }
+  },
+  {
+   "text": "Apply the same acyclic-to-bounded-below-injective null-homotopy result to the augmentation-zero map $E'$ (again adjoining the augmentation object in degree $-1$). It gives $k^q:B^q\\to J_Z^{q-1}$ with $k^0=0$ and $E'=d k+k d$. Define $s_I=t+j k\\pi$ and retain $s_B$. Then $R_I=d s_I+s_I d$, because $E=jE'\\pi$, while $s_Ii=js_Z$ and $\\rho s_I=s_B\\pi$ because $\\pi i=0$ and $\\rho j=0$.",
+   "uses": [
+    "lem-weil-pbc-acyclic-map-to-injective-nullhomotopy"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 015I, compatibility of the boundary/cycle exact sequences; Weibel Homological Algebra, Lemma 5.7.10"
+   }
+  },
+  {
+   "text": "The chosen homotopies vanish in degree zero, so $s_I^0=s_B^0=0$; the displayed identities give all required conclusions.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 015I"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-acyclic-map-to-injective-nullhomotopy"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tag 015I; vertical assembly detail from Weibel Homological Algebra, Lemma 5.7.10"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -56,12 +103,28 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sp-ce-vertical-nullhomotopy",
   "by": "worker",
   "date": "2026-10-11"
  },
  "chapter": "sec-abelian-varieties",
- "unit": "sk-prop-av-pqf-finite"
+ "unit": "sk-prop-av-pqf-finite",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-sp-ce-vertical-nullhomotopy",
+  "worker": "stage1",
+  "summary": "Split the assembly into degreewise extension and splitting, elementary defect factorization, and a second application of the existing acyclic-to-injective null-homotopy result. The construction preserves the prescribed cycle homotopy and produces the compatible boundary homotopy.",
+  "blueprint": "Realizes thm-sp-grothendieck proof, final paragraph: assembling the row homotopies through the exact boundary-cycle sequences.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-cha0101",
+  "group": "G1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-cha0101 (reviewer sub-agent of L); spot-checked: E by hand: extensions of s_Z along monic i^q into injective J_Z^{q-1}; t i = j s_Z, rho t = s_B pi; E i = j(R_Z - d s_Z - s_Z d) = 0, rho E = (R_B - d s_B - s_B d) pi = 0, E = j E' pi with E' a chain map, E' eps_B = 0 from E eps_I = 0 (t^0 = 0 since J^{-1} = 0) and pi_0 epi, j monic; s_I = t + j k pi gives all four identities and s^0 = 0; R_I eps_I = 0 => R_B eps_B = 0 via pi eps_I = eps_B pi_0. C1/C4: lem-weil-pbc-acyclic-map-to-injective-nullhomotopy (adjoin augmentation in degree -1 with map 0, chain map since R eps = 0; h^0 lands in J^{-1} = 0) and def-sp-injective-resolutions; citer lem-sp-ce-vertical-nullhomotopy (0d5ef1832) step 3 uses exactly the stated hypotheses (exact augmented sequences, injective rows, R eps_I = 0, given s_Z) and conclusions (s_I i = j s_Z, rho s_I = s_B pi, s^0 = 0). R-cvn0013 counterexample (degree-0 complexes, R_I(a,b)=(b,0)) is excluded: exactness of the augmented I makes eps_I: I_0 -> I^0 an iso, so R_I eps_I = 0 forces R_I^0 = 0, failing for R_I(a,b)=(b,0). Duplicates: grep nullhomot/cartan-eilenberg node names, none states the assembly. FIX more, RETURN less: step 1 justified the section sigma of rho by injectivity of J_B^{q-1}, which gives no section; corrected to the splitting from injectivity of J_Z^{q-1} (j has a retraction), and made explicit J^{-1}=0 so s_B^0 = tilde-s_Z^0 = t^0 = 0. Missed by the Second reading by G1 (its claimed created.item correction is absent from the head; created.item left as is, the maintainer's field).; 1 file(s) fixed by the reviewer"
+ }
 }
