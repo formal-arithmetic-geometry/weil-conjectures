@@ -142,5 +142,24 @@
   "group": "E1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-vas (reviewer sub-agent of L); spot-checked: Repaired re-push after return of 14:14: point 1 repaired (new node now has hypothesis (0) 'some s in V nonvanishing at every closed point, equivalently V generates L', cites def-weil-pbc-generating-sections in statement and stmt_deps, conclusion no longer claims generation, keeps finite-dimensionality; report records E7 addition); point 2 repaired (item step 4 now reads 'Step 1 gives (0), steps 2 and 3 give (1) and (2)', so step 1's nonvanishing evaluation is used). Read Stacks varieties.tex label lemma-separate-points-tangent-vectors (0E8S): new node = Stacks' hypotheses (k alg closed, X proper, L invertible, V subspace, (1), (2)) plus (0); counterexample X=Spec k, V=0 now excluded by (0). Read cited statements def-weil-pbc-generating-sections, def-weil-pbc-morphism-to-projective-space-by-sections (needs generating sections, supplied by (0)), def-pc-projective-space-twist, def-sc-ample (complete linear system closed immersion, matches step 4 with V=H^0), def-sc-divisor (vanishing description used by steps 1-3). Steps 2 and 3 unchanged from the version the previous reviewer checked. No Mathlib leaf. FIX: dag/nodes/sec-picard-framework/lem-sc-point-tangent-separation-closed-immersion.json: source.place: appended the note that hypothesis (0) is added to Tag 0E8S (E7) and why, which the return asked for and the repair left out of source.place. 14:35-14:37 UTC.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.VeryAmpleSeparationCriterion",
+  "declaration": "AlgebraicGeometry.Scheme.veryAmple_of_divisor_dimension_drops",
+  "file": "lean/Sheaf/AlgebraicGeometry/VeryAmpleSeparationCriterion.lean",
+  "statement": "theorem veryAmple_of_divisor_dimension_drops (k : Type u) [Field k] [IsAlgClosed k] (C : Scheme.{u}) (f : C ⟶ Spec (.of k)) [IsConnectedCurve f] [Smooth f] [IsProper f] (M : C.Modules) [M.IsInvertible] (h₁ : ∀ P : closedPoints C, Module.finrank k ((ModuleCat.restrictScalars ((Scheme.ΓSpecIso (.of k)).inv ≫ f.appTop).hom).obj ((M ⊗ Divisor.moduleOfSmoothConnectedCurve k C f (Finsupp.single P (-1))).val.obj (Opposite.op ⊤))) + 1 = Module.finrank k ((ModuleCat.restrictScalars ((Scheme.ΓSpecIso (.of k)).inv ≫ f.appTop).hom).obj (M.val.obj (Opposite.op ⊤)))) (h₂ : ∀ P Q : closedPoints C, Module.finrank k ((ModuleCat.restrictScalars ((Scheme.ΓSpecIso (.of k)).inv ≫ f.appTop).hom).obj ((M ⊗ Divisor.moduleOfSmoothConnectedCurve k C f (Finsupp.single P (-1) + Finsupp.single Q (-1))).val.obj (Opposite.op ⊤))) + 2 = Module.finrank k ((ModuleCat.restrictScalars ((Scheme.ΓSpecIso (.of k)).inv ≫ f.appTop).hom).obj (M.val.obj (Opposite.op ⊤)))) : IsVeryAmple f M ∧ ∃ (I : Type u) (_ : Finite I) (b : Module.Basis I k ((ModuleCat.restrictScalars ((Scheme.ΓSpecIso (.of k)).inv ≫ f.appTop).hom).obj (M.val.obj (Opposite.op ⊤)))) (s : I → M.sections), (∀ i : I, (s i).val (Opposite.op ⊤) = b i) ∧ ∃ hs : Epi (M.freeHomEquiv.symm s), IsClosedImmersion (ProjectiveSpace.homOfGeneratingSections I f M s hs) ∧ Nonempty (ProjectiveSpace.twistRestrict (ProjectiveSpace.homOfGeneratingSections I f M s hs) 1 ≅ M)",
+  "branch": "sheaf-dag",
+  "by": "U1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-vas"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-vas",
+  "group": "U1",
+  "result": "fix",
+  "note": "Hypotheses match the node clause by clause (alg. closed k; IsConnectedCurve/Smooth/IsProper f; invertible M; all closed points = k-points; M(-P), M(-P-Q) via the recorded def-sc-divisor module, P=Q allowed; additive finrank drops over k via the structure map). FIX: the delivery repointed def-sc-ample's landed record (IsAmple) to a new module defining IsVeryAmpleCompleteLinearSystem/IsAmpleCompleteLinearSystem, a second spelling of very ample/ample while ~10 landed statements cite def-sc-ample through IsAmple/IsVeryAmple and the record question is open in STATE (H1 cf468430d). Reverted def-sc-ample, dropped CompleteLinearSystemAmple.lean; conclusion restated with landed forms as in H1 cf468430d: IsVeryAmple f M and a basis of all of H^0 whose homOfGeneratingSections (C1 46a980a7c) is a closed immersion with twistRestrict 1 iso M. Compiled (SHEAF_GROUP=L).; reverted the delivery's change of existing node(s) def-sc-ample (--revert-nodes; kept as on sheaf-dag); left out new module(s) lean/Sheaf/AlgebraicGeometry/CompleteLinearSystemAmple.lean (--drop-files, or a record fixed to existing: true)"
  }
 }
