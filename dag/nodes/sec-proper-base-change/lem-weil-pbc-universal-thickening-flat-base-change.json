@@ -191,5 +191,23 @@
   "by": "L",
   "result": "accepted",
   "note": "5 steps following Stacks 04F8/04F9: formally unramified base changes (02HB leaf); Z in Z' is a first order thickening by pasting and the new 09ZU node (ideal = I O_{Z'}, square zero); the universal property written out through the fibre product; f' flat by base change; the conormal map is the 01R4 map (new node, closed-immersion case) and an isomorphism by 0473 (new node) for the cartesian square with flat f'. Tags verified."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.UniversalThickeningFlatBaseChange",
+  "declaration": "AlgebraicGeometry.universalFirstOrderThickening_flat_base_change",
+  "file": "lean/Sheaf/AlgebraicGeometry/UniversalThickeningFlatBaseChange.lean",
+  "statement": "theorem universalFirstOrderThickening_flat_base_change {W W' X Y : Scheme.{u}} (hW : W ⟶ Y) [FormallyUnramified hW] (g : X ⟶ Y) [Flat g] (iW : W ⟶ W') (s : W' ⟶ Y) (HW : IsUniversalFirstOrderThickening hW iW s) (iZ : pullback g hW ⟶ pullback g s) (_hfst : iZ ≫ pullback.fst g s = pullback.fst g hW) (hsnd : iZ ≫ pullback.snd g s = pullback.snd g hW ≫ iW) : ∃ hu : FormallyUnramified (pullback.fst g hW), ∃ HZ : IsUniversalFirstOrderThickening (pullback.fst g hW) iZ (pullback.fst g s), Flat (pullback.snd g s) ∧ ∀ c : (Scheme.Modules.tensorPullback (pullback.snd g hW)).obj (formallyUnramifiedConormal hW iW s HW) ⟶ @formallyUnramifiedConormal _ _ _ (pullback.fst g hW) hu iZ (pullback.fst g s) HZ, c = Classical.choose ((Classical.choose_spec (@Scheme.Modules.closedImmersion_conormal_functorial (pullback g s) (pullback g hW) W' W iZ iW HZ.1.1 HW.1.1 (pullback.snd g s) (pullback.snd g hW) hsnd).2).2) → IsIso c",
+  "branch": "sheaf-dag",
+  "by": "K1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "K1",
+  "result": "pass",
+  "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
  }
 }
