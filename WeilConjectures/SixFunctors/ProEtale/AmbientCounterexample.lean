@@ -7,6 +7,8 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.AbelianVariety.Defs
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.FullyFaithful
+public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Triangulated
+public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.FullyFaithful
 public import WeilConjectures.SixFunctors.ProEtale.Derived.ClopenIdempotent
 public import WeilConjectures.SixFunctors.ProEtale.ExceptionalAdjoint
 
@@ -231,6 +233,63 @@ theorem not_isLeftAdjoint_rightDerivedLowerShriek_of_isAbelianVariety
   not_preservesColimitsOfShape_rightDerivedLowerStar_of_isAbelianVariety Λ E hE
     (preservesColimitsOfShape_of_natIso
       (rightDerivedLowerShriekIsoOfIsProper (ModuleCat.{u + 1} Λ) E.hom))
+
+/-- Blueprint `sk-rem-sf-fullcd-scope` (iii), `open-sf-ambient-adjoint-input`: for the structure
+morphism `a_E` of an elliptic curve (more generally an abelian variety of positive dimension)
+over an algebraically closed field, `Ra_{E!}` has no right adjoint on the bounded below derived
+category `D⁺(E_proét, Λ)` either.
+
+Let `F` be the sheaf of
+`AlgebraicGeometry.ProEtale.exists_forall_not_isZero_homology_rightDerivedLowerStar` and `I` an
+injective coseparator of the pro-étale sheaves on `Spec k`. As `Ra_{E!} ≅ Ra_{E*}`
+(`AlgebraicGeometry.ProEtale.rightDerivedLowerShriekIsoOfIsProper`), `H⁰(Ra_{E!}(F[n])) =
+Hⁿ(E_proét, F) ≠ 0`, so `Hom(Ra_{E!}(F[n]), I) ≠ 0` for every `n ≥ 1`
+(`DerivedCategory.exists_ne_zero_hom_singleFunctor_obj`). A right adjoint `G` on `D⁺` would
+give `Hom(F[n], G(I)) ≠ 0` for all `n ≥ 1`, whereas `G(I)` is bounded below, so these groups
+vanish for `n` large by `t`-structure orthogonality. -/
+theorem not_isLeftAdjoint_rightDerivedLowerShriekPlus_of_isAbelianVariety
+    (hE : 0 < IsAbelianVariety.dim E) :
+    ¬ (R(E.hom)_![ModuleCat.{u + 1} Λ]+).IsLeftAdjoint := by
+  intro hL
+  let adj := Adjunction.ofIsLeftAdjoint (R(E.hom)_![ModuleCat.{u + 1} Λ]+)
+  obtain ⟨F, hF⟩ := exists_forall_not_isZero_homology_rightDerivedLowerStar Λ E hE
+  obtain ⟨I, _, hI⟩ := Abelian.has_injective_coseparator
+    (separator (Sheaf (Scheme.ProEt.topology (Spec (.of k))) (ModuleCat.{u + 1} Λ)))
+    (isSeparator_separator _)
+  let IP : DerivedCategory.Plus (Sheaf (Scheme.ProEt.topology (Spec (.of k)))
+      (ModuleCat.{u + 1} Λ)) := ⟨(DerivedCategory.singleFunctor _ 0).obj I, ⟨0, inferInstance⟩⟩
+  obtain ⟨a, ha⟩ := ((R(E.hom)_![ModuleCat.{u + 1} Λ]+).rightAdjoint.obj IP).property
+  let n : ℕ := (-a).toNat + 1
+  have hn : -(n : ℤ) < a := by have := Int.self_le_toNat (-a); simp only [n]; push_cast; omega
+  let K := ((DerivedCategory.singleFunctor
+    (Sheaf (Scheme.ProEt.topology E.left) (ModuleCat.{u + 1} Λ)) 0).obj F)⟦(n : ℤ)⟧
+  have : DerivedCategory.TStructure.t.IsLE K (-n) :=
+    DerivedCategory.TStructure.t.isLE_shift _ 0 n (-n)
+  have : DerivedCategory.TStructure.t.IsGE K (-n) :=
+    DerivedCategory.TStructure.t.isGE_shift _ 0 n (-n)
+  let KP : DerivedCategory.Plus (Sheaf (Scheme.ProEt.topology E.left) (ModuleCat.{u + 1} Λ)) :=
+    ⟨K, ⟨-n, inferInstance⟩⟩
+  -- every morphism `Ra_{E!}(F[n]) ⟶ I` vanishes
+  have hzero (φ : (R(E.hom)_![ModuleCat.{u + 1} Λ]+).obj KP ⟶ IP) : φ = 0 := by
+    have h : adj.homEquiv _ _ φ = 0 := (ObjectProperty.fullyFaithfulι _).map_injective
+      (DerivedCategory.TStructure.t.zero_of_isLE_of_isGE _ (-n) a hn ‹_› ha)
+    rw [← (adj.homEquiv _ _).symm_apply_apply φ, h, Adjunction.homEquiv_counit,
+      Functor.map_zero, Limits.zero_comp]
+  -- but `H⁰(Ra_{E!}(F[n])) ≅ Hⁿ(Ra_{E*} F) ≠ 0`
+  let e : (DerivedCategory.Plus.ι.obj ((R(E.hom)_![ModuleCat.{u + 1} Λ]+).obj KP)) ≅
+      ((R((E.hom)_*[ModuleCat.{u + 1} Λ])).obj
+        ((DerivedCategory.singleFunctor _ 0).obj F))⟦(n : ℤ)⟧ :=
+    (rightDerivedLowerShriekPlusCompatibility (ModuleCat.{u + 1} Λ) E.hom).app KP ≪≫
+      (rightDerivedLowerShriekIsoOfIsProper (ModuleCat.{u + 1} Λ) E.hom).app K ≪≫
+      ((R((E.hom)_*[ModuleCat.{u + 1} Λ])).commShiftIso (n : ℤ)).app _
+  have hK : ¬ IsZero ((DerivedCategory.homologyFunctor _ 0).obj
+      (DerivedCategory.Plus.ι.obj ((R(E.hom)_![ModuleCat.{u + 1} Λ]+).obj KP))) := fun h ↦
+    hF n (by omega) (h.of_iso ((DerivedCategory.homologyFunctor _ 0).mapIso e ≪≫
+      ((DerivedCategory.homologyFunctor _ 0).shiftIso (n : ℤ) 0 n (by simp)).app _).symm)
+  obtain ⟨φ, hφ⟩ := DerivedCategory.exists_ne_zero_hom_singleFunctor_obj _ hI hK
+  have := congrArg DerivedCategory.Plus.ι.map
+    (hzero ((ObjectProperty.fullyFaithfulι _).preimage φ))
+  exact hφ (by simpa using this)
 
 end AbelianVariety
 
