@@ -1,11 +1,11 @@
 # Work queue
 
-786 items; claim with `tools/claim.py next <group> [--stage N]`.
+780 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (786)
+## Stage 2: nodes to state (780)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -22,15 +22,12 @@
 | `lem-sc-p1-rhom-hom-derived-connecting` | 1 | state |
 | `lem-sc-product-tangent-space-direct-sum` | 1 | state |
 | `lem-sc-rational-unramified-cotangent-criterion` | 1 | state |
-| `lem-sc-vector-bundle-line-subbundle` | 1 | state |
 | `lem-sp-kinjective-computes` | 1 | state |
 | `lem-sp-shift-identification` | 1 | state |
 | `lem-weil-derived-limit-roos-complex` | 1 | state |
 | `lem-weil-pbc-complex-spectral-sequence-comparison` | 1 | state |
 | `lem-weil-pbc-cotangent-complex-symmetric-algebra` | 1 | state |
 | `lem-weil-pbc-criterion-flatness-fibre-noetherian` | 1 | state |
-| `lem-weil-pbc-depth-in-ses` | 1 | state |
-| `lem-weil-pbc-derivation-extends-finite-type-extension` | 1 | state |
 | `lem-weil-pbc-derived-adjunction-commshift` | 1 | state |
 | `lem-weil-pbc-derived-exchange-termwise` | 1 | state |
 | `lem-weil-pbc-derived-finite-product` | 1 | state |
@@ -40,13 +37,10 @@
 | `lem-weil-pbc-descend-qc-open-fg-subalgebra` | 1 | state |
 | `lem-weil-pbc-differential-zero-iff-pth-power` | 1 | state |
 | `lem-weil-pbc-differentials-dimension-bound-smooth-at-prime` | 1 | state |
-| `lem-weil-pbc-dim-one-residue-field-extensions-finite` | 1 | state |
 | `lem-weil-pbc-dim-one-submodule-quotient-finite-length` | 1 | state |
 | `lem-weil-pbc-dimension-at-point-components` | 1 | state |
 | `lem-weil-pbc-dimension-at-point-field-extension` | 1 | state |
 | `lem-weil-pbc-dimension-at-point-local-ring-trdeg` | 1 | state |
-| `lem-weil-pbc-dimension-at-point-open-subspace` | 1 | state |
-| `lem-weil-pbc-dimension-inequality-quasi-finite` | 1 | state |
 | `lem-weil-pbc-dimension-preserved-field-extension` | 1 | state |
 | `lem-weil-pbc-dimension-quasi-finite-over-polynomial-algebra` | 1 | state |
 | `lem-weil-pbc-dimension-supremum-local-dimensions` | 1 | state |
