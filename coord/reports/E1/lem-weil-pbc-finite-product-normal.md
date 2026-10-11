@@ -1,36 +1,148 @@
-# lem-weil-pbc-finite-product-normal
+## Worker report
 
-## Files
+The module `Sheaf.RingTheory.FiniteProductNormal` states
+`Pi.isNormalRing_of_finite`, with a `sorry` proof and no definitions or additional nodes.
+It formalizes the finite-product normality assertion of Stacks Tag 0CYA.
+The local literature checkout has no `algebra.tex`, so the source was read at
+https://stacks.math.columbia.edu/tag/0CYA (Lemma 10.37.15 and its proof).
 
-- `dag/nodes/sec-proper-base-change/lem-weil-pbc-finite-product-normal.json`: split the Stacks 0CYA proof into prime classification, localization, and normality transport; the empty product case has no primes.
-- `dag/nodes/sec-proper-base-change/lem-weil-pbc-product-prime-factor.json`: statement, Mathlib leaf at `PrimeSpectrum.exists_comap_evalRingHom_eq` (`Mathlib/RingTheory/Spectrum/Prime/RingHom.lean:164`).
-- `dag/nodes/sec-proper-base-change/lem-weil-pbc-product-prime-localization.json`: statement, Mathlib leaf at `Localization.AtPrime.mapPiEvalRingHom_bijective` (`Mathlib/RingTheory/Localization/AtPrime/Basic.lean:410`).
-- `dag/nodes/sec-proper-base-change/lem-weil-pbc-normal-domain-ring-equivalence.json`: statement, Mathlib leaf using `IsIntegrallyClosed.of_equiv` (`Mathlib/RingTheory/IntegralClosure/IntegrallyClosed.lean:261`) and `MulEquiv.isDomain_iff` (`Mathlib/Algebra/Ring/Equiv.lean:970`).
+Hypothesis and clause correspondence:
+- The finite family R₁,…,Rₙ is `{I : Type u} [Finite I] (R : I → Type v)`.
+  Independent explicit universes permit arbitrary finite index types and ring carriers.
+- The factors are commutative rings: `[∀ i : I, CommRing (R i)]`.
+- Every factor is normal: `hR : ∀ (i : I) (p : Ideal (R i)) [p.IsPrime],
+  IsDomain (Localization.AtPrime p) ∧ IsIntegrallyClosed (Localization.AtPrime p)`.
+- The product is the pointwise ring on `∀ i : I, R i` (Mathlib `Pi.commRing`).
+- For every prime of this product: `∀ (p : Ideal (∀ i : I, R i)) [p.IsPrime]`.
+- Its localization is a normal domain: `IsDomain (Localization.AtPrime p) ∧
+  IsIntegrallyClosed (Localization.AtPrime p)`. This is exactly the definition of
+  normal ring, so no additional conclusion is needed.
 
-## Attachments
+Dependency used: `def-weil-pbc-normal-ring` has status `mathlib` and no `lean` record.
+Its `mathlib_match` explicitly prescribes the above conjunction at every prime.
+The full signatures and docstrings of `IsIntegrallyClosedIn`, `IsIntegrallyClosed`
+(Mathlib.RingTheory.IntegralClosure.IntegrallyClosed), and `Localization.AtPrime`
+(Mathlib.RingTheory.Localization.AtPrime.Basic) were read, along with `IsDomain`
+(Mathlib.Algebra.Ring.Defs). No dependency module is needed: the match supplies the
+exact notion inline, as in the existing `Sheaf.RingTheory.EtaleNormalRing` module.
+The module docstring and theorem docstring record the source and all three DAG proof
+steps, including prime classification, localization identification, and transport.
 
-None. Searching `/home/ubuntu/weil-src-slopmaster2/WeilConjectures` and `Comparator` by item ID, proposed node IDs, and the product-normality notions found no matching declaration.
+Edge cases checked: the empty product is the zero ring, with no prime ideals, and
+both the source and Lean normality condition are vacuous; no `Nonempty I` or
+`Nontrivial (R i)` is imposed. A singleton product gives the same local condition as
+its factor. Zero-ring factors are allowed and have no primes. Factors need not be
+domains themselves (for instance products of fields); only prime localizations
+must be domains. No Noetherian, characteristic, or positive-cardinality assumption
+was introduced. Finite index types need no chosen enumeration or decidable equality.
 
-## Wanted
+Searches, using `msearch.py E1 lem-weil-pbc-finite-product-normal`:
+- LeanFinder: "A finite product of commutative normal rings is normal: every prime
+  localization is an integrally closed domain". Eight hits concern integral
+  algebras, Noetherian products, principal ideal rings, `Pi.commRing`, and finite
+  presentation; none states this assertion.
+- Loogle: `IsIntegrallyClosed, Localization.AtPrime`. Two hits:
+  `IsIntegrallyClosed.of_localization_maximal` and `.of_localization`, neither a
+  finite-product normality result.
+- LeanSearch: "finite product of normal rings is normal". Service unavailable
+  (Internal Server Error); the other search kinds were completed.
+- Mathlib grep: `IsIntegrallyClosed.*(pi|prod)|[Nn]ormal[Rr]ing|normal ring` in
+  RingTheory. Two hits are explanatory comments in IntegrallyClosed.lean, stating
+  that normal rings are a TODO, not a declaration.
+- `rg` over WeilConjectures for the item id, `IsIntegrallyClosed.*(pi|prod)`, and
+  `normal ring`: no hits. Broad normal-ring/name searches produced only unrelated
+  normalization and group-normality occurrences.
+- `rg` over `lean/Sheaf` and `dag/lean_names_upstream.json` for normal-ring and
+  finite-product names: only the etale-over-normal statement was relevant; no
+  existing finite-product statement or declaration-name collision was found.
 
-None. The Stacks source is available at `/home/ubuntu/c1-stacks-review/algebra.tex`.
+No statement correction or disputed mathematical assertion was found.
 
-## Source and Blueprint
+## Second reading by E1
 
-The item statement agrees with Algebra Tag 0CYA, `lemma-finite-product-normal`, at lines 8260-8272. Its proof cites `lemma-disjoint-decomposition` (Tag 00EE) for product-prime classification, although Tag 00EE states the correspondence of idempotents and clopen subsets. Algebra Tag 00ED, `lemma-spec-product`, at lines 3822-3848 is the direct product-spectrum result; the split cites it. This is a source citation correction, not a change to the theorem or route. The item and the three ingredients have no `same_as` match in the imported blueprint according to `tools/blueprint_refs.py search`; the nearest ancestor is `lem-weil-pbc-normal-constant-generic`.
+Read the sandbox node and module, the dependency node `def-weil-pbc-normal-ring`,
+and the actual Mathlib declarations supplying its accepted one-line match.
+The local Stacks checkout is absent. I independently read the upstream `algebra.tex`
+at https://raw.githubusercontent.com/stacks/stacks-project/master/algebra.tex:
+its Conventions section, `definition-domain-normal`, `definition-ring-normal`,
+and `lemma-finite-product-normal` with its proof. I also read the rendered Tags
+https://stacks.math.columbia.edu/tag/0CYA,
+https://stacks.math.columbia.edu/tag/0309 and
+https://stacks.math.columbia.edu/tag/00GV. The chapter convention is commutative
+rings with identity, including the zero ring; there is no standing Noetherian
+or nontriviality assumption.
 
-The Mathlib revision inspected is `v4.33.1`, the `mathlib` input revision in the read-only slopmaster2 `lake-manifest.json`; the same source is available at commit `0df444a360eaa60ab8c11dca51a86af692955474`. Its `PrimeSpectrum.exists_comap_evalRingHom_eq` at `RingHom.lean:164-187` supplies the finite-index prime classification, including the empty-index contradiction. `Localization.AtPrime.mapPiEvalRingHom` at `AtPrime/Basic.lean:405-408` is the evaluation-induced map and `mapPiEvalRingHom_bijective` at line 410 makes it an isomorphism, with no finiteness hypothesis. The node uses the finite case of that theorem to agree with Stacks 0CYA. `IsIntegrallyClosed.of_equiv` at `IntegrallyClosed.lean:261-268` and `MulEquiv.isDomain_iff` at `Algebra/Ring/Equiv.lean:970-973` give the two clauses of normal-domain preservation. Each declaration's hypotheses match the cited node after specializing the general Mathlib statements. No exact slopmaster2 declaration was found for the item or any of the three new leaves, either by blueprint tag or concept search.
+Object, hypothesis, and conclusion checklist (all verdicts: exact):
+1. A finite family of factors R_i: `{I : Type u} [Finite I] (R : I → Type v)`.
+   This expresses arbitrary finite families, including n = 0, without choosing
+   an enumeration, Fintype structure, or decidable equality.
+2. Each factor is a commutative ring with identity:
+   `[∀ i : I, CommRing (R i)]`, exactly the source's ring convention.
+3. Each factor is normal in the sense of the dependency:
+   `hR : ∀ (i : I) (p : Ideal (R i)) [p.IsPrime],
+   IsDomain (Localization.AtPrime p) ∧ IsIntegrallyClosed (Localization.AtPrime p)`.
+   The order is factor, ideal, primality evidence, normal-domain assertion.
+   The prime instance is a quantified implication, not an extra hypothesis that
+   primes exist. No domain structure on the factors themselves is required.
+4. R is the finite product of those very factors: `∀ i : I, R i`, equipped
+   with Mathlib's `Pi.commRing` from `Mathlib.Algebra.Ring.Pi`. An additional
+   product ring binder or isomorphism would add no mathematical content.
+5. Every prime of the product: `∀ (p : Ideal (∀ i : I, R i)) [p.IsPrime]`.
+   This ranges over all primes, rather than only maximal or selected primes.
+6. Its localization is a normal domain: both
+   `IsDomain (Localization.AtPrime p)` and
+   `IsIntegrallyClosed (Localization.AtPrime p)` occur in the conclusion.
+   These are exactly the domain and integral-closure clauses of the node,
+   hence exactly normality of the product; no clause is omitted or strengthened.
 
-## Checks
+Dependency/signature audit: the dependency is an accepted Mathlib leaf, with no
+`lean` declaration and an explicit `mathlib_match.how` prescribing this inline
+conjunction. `IsDomain` (Algebra/Ring/Defs.lean:439) supplies nontriviality and
+multiplicative cancellation, hence integral-domain structure for a commutative
+ring. `IsIntegrallyClosedIn` and `IsIntegrallyClosed` (IntegralClosure/
+IntegrallyClosed.lean:66,74) express integral closure in `FractionRing R`;
+`isIntegrallyClosed_iff` gives its elementwise meaning. `Localization.AtPrime`
+(Localization/AtPrime/Basic.lean:57) is `Localization P.primeCompl`, with the
+prime hypothesis and no domain hypothesis. Thus no missing definition or
+unusable dependency needs a new node or module. The existing project's
+`RingHom.Etale.isNormalRing` uses this same accepted normal-ring rendering.
 
-`tools/review_split.py lem-weil-pbc-finite-product-normal` passes; `tools/blueprint_refs.py check lem-weil-pbc-finite-product-normal` reports zero errors. On the fresh `sheaf-dag` tip, `tools/check_dag.py` reports zero cycles and exits 1 on seven existing reachability warnings and eleven route warnings concerning unrelated constructible nodes. No Lean was edited or built.
+Edge cases: for an empty I the product is the zero ring and has no primes,
+so the conclusion is vacuous, as the node explicitly requires. Zero-ring factors
+are allowed: their own normality is vacuous and their coordinate contributes no
+prime. A singleton gives precisely the factor's local assertion; non-domain
+normal factors, such as products of fields, remain allowed. No restrictions on
+characteristic, cardinality beyond finiteness, or Noetherianity occur. Explicit
+independent universes u and v allow arbitrary finite index universes and ring
+universes; finitely many carriers can be placed in a common universe. No
+variables or universes are unbound. Empty schemes and zero objects are not
+objects of this ring statement.
 
-## Review by E1
+Independent searches (different wording from the worker, through msearch.py):
+- LeanFinder: "Localization of a finite direct product of commutative rings at
+  a prime ideal is an integrally closed integral domain if all factors are normal".
+  Eight results: local-to-global integral-closure and Dedekind-localization results;
+  none states normality of finite products.
+- Loogle: `"IsIntegrallyClosed", "Pi"`: zero hits.
+- LeanSearch: "The direct product of finitely many locally integrally closed
+  commutative rings is locally integrally closed": service unavailable, Internal
+  Server Error; no verdict attributed to this unavailable service.
+- Mathlib grep: `isNormalRing|normal.*product|product.*normal|IsIntegrallyClosed.*(Pi|Prod)|((Pi|Prod).*)IsIntegrallyClosed`
+  in RingTheory. Three hits, all unrelated or explanatory text; no declaration.
+- The same independent name/concept search over the read-only WeilConjectures
+  source, repository lean/Sheaf, and dag/lean_names_upstream.json found only
+  unrelated normalized-product text and `RingHom.Etale.isNormalRing`. No existing
+  finite-product normality theorem or declaration-name collision was found.
 
-I read Algebra Tag 0CYA, `lemma-finite-product-normal`, and Tag 00ED, `lemma-spec-product`, in `algebra.tex`, and the normality definitions at Tags 0309 and 00GV. The item has exactly 0CYA's hypothesis (each factor is normal) and conclusion (the finite product is normal). The three new node statements isolate the prime classification supplied by 00ED, the localization identity used in 0CYA's proof, and transport of the normal-domain condition across that identity. They introduce their rings, index, prime, and isomorphism explicitly; the prime-factor statement uses `def-weil-affine-spectrum` to identify prime ideals with points of the spectrum, and the localization statement uses `def-weil-pbc-localization-at-prime` for its local rings. None includes a proof in its statement or proof fields. Their source labels are the TeX labels and tags, and searches of the current DAG and imported blueprint found no duplicate node. Each is smaller than the item.
+H5/H6/H8/H9: no definitions or private notions, one named theorem whose only
+proof is `sorry`, and no proved auxiliary statement. Its module and declaration
+source docstrings carry the exact blueprint id. The proof docstring reproduces
+all three node steps and their dependencies: classify primes by factors,
+identify the localization via projection, then transport normal-domain structure.
+The topic, namespace, necessary imports, and 100-character line limit are correct.
+The node's lean.statement was checked to equal the file's signature verbatim.
+No statement_change, new nodes, or dependency modules are present or needed.
 
-In step 1, `lem-weil-pbc-product-prime-factor` supplies exactly an index and factor prime whose coordinate comap is the given prime. Its Mathlib declaration has a finite-index hypothesis and includes the empty index: a prime of the empty product would produce an impossible index. Step 2 uses `lem-weil-pbc-product-prime-localization` for the displayed local-ring isomorphism and `def-weil-pbc-normal-ring` to obtain a normal domain on the factor side. The localization declaration is stated for any index set, so the finite case needs no extra hypothesis. Step 3 uses `lem-weil-pbc-normal-domain-ring-equivalence` to transfer both domain and integral closedness; the cited definition then gives normality of the product. The ring equivalence comes from step 2, and no proof step needs a fact hidden in a cited node's proof.
-
-I checked the edge cases: for zero factors the product is the zero ring and has no prime; for one factor the coordinate map and its localization are identities. A zero-ring factor contributes no prime and causes no exception. The Mathlib leaves are exact statements or one-line specializations: `PrimeSpectrum.exists_comap_evalRingHom_eq`, `Localization.AtPrime.mapPiEvalRingHom_bijective` together with its map definition, and one declaration for each clause of normal-domain transport. The definition node identifies normal domains with `IsDomain` and `IsIntegrallyClosed` at each prime localization. The slopmaster2 audit of the item is `none`; no exact source declaration was found for the item or new leaves.
-
-I corrected Mathlib line numbers in all three leaves and the worker report against the source at pinned commit `0df444a360eaa60ab8c11dca51a86af692955474` (B6). Preflight then required the `mathlib_match.line` integers, removal of new-node `merged_into` fields, and a cited definition in the prime-factor statement. I added the lines, removed those fields, and cited `def-weil-affine-spectrum`, which defines prime ideals as the points of an affine spectrum; I retained `def-weil-pbc-localization-at-prime` as the localization leaf's statement dependency (B3). No mathematical or route correction was needed. This review checks A-F: the sandbox has only this item's node files and report, the new nodes are self-contained Mathlib leaves, all non-elementary steps cite their stated inputs, and the proof is a genuine split of 0CYA.
+No mismatch found. I changed only this report by appending the second reading;
+the Lean module and node record remain as written. The required server compile
+via scompile.py completed cleanly (exit 0, no warnings).
