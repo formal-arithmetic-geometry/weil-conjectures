@@ -141,5 +141,24 @@
   "group": "K1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of K1; spot-checked by L: L: D^2 = 0 by the recursion on wedge monomials (D^2(v wedge x) = v wedge D^2(x)), then by linearity; 0 new"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.KoszulDifferentialSquareZero",
+  "declaration": "ExteriorAlgebra.koszul_differential_square_zero",
+  "file": "lean/Sheaf/Paper/KoszulDifferentialSquareZero.lean",
+  "statement": "theorem koszul_differential_square_zero (R : Type u) [CommRing R] (E : Type v) [AddCommGroup E] [Module R E] (φ : E →ₗ[R] R) : (CliffordAlgebra.contractLeft (Q := (0 : QuadraticForm R E)) φ).comp (CliffordAlgebra.contractLeft (Q := (0 : QuadraticForm R E)) φ) = 0 ∧ ∀ (n : ℕ) (x : ⋀[R]^(n + 1) E), CliffordAlgebra.contractLeft (Q := (0 : QuadraticForm R E)) φ (CliffordAlgebra.contractLeft (Q := (0 : QuadraticForm R E)) φ (x : ExteriorAlgebra R E)) = 0",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-kds1155"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-kds1155",
+  "group": "F1",
+  "result": "fix",
+  "note": "R CommRing, E R-module, phi R-linear = node hypotheses; D named as CliffordAlgebra.contractLeft at Q=0 (KOSZUL line) replacing Classical.choose; D.comp D = 0 and D(D x)=0 on wedge^(n+1) = d_{n-1} d_n = 0 for n>=1"
  }
 }
