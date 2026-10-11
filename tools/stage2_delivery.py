@@ -8,9 +8,11 @@ A delivery branch deliver/<G>/<item> is ONE commit on top of sheaf-dag with only
   (2) the node file dag/nodes/<chapter>/<item>.json, changed only in `lean`:
       {module, declaration, declarations?, file?, statement, branch, by, date, existing, note?} (`fixed_by`, the
       reviewer's id, is added by merge_delivery.py when a reviewer's fix changed the record), and in `stmt_deps` only by
-      adding new definition nodes of the delivery;
-  (3) coord/reports/<G>/<item>.md with `## Worker report` and `## Second reading by <G>`, plus `## New nodes` and
-      `## Dependency modules` when the delivery has them;
+      adding new definition nodes of the delivery; or, under STAGE 2 STATEMENT CORRECTION (decision of the human,
+      2026-10-11 06:22 UTC), CORRECTED: `statement` changed and, as far as forced, `stmt_deps`, `proof`, `proof_deps`,
+      with a `statement_change` record (node_fields.check_statement_change; citers = the base nodes citing the item);
+  (3) coord/reports/<G>/<item>.md with `## Worker report` and `## Second reading by <G>`, plus `## New nodes`,
+      `## Dependency modules` and `## Statement corrected` when the delivery has them;
 and, by the rule STAGE 2 EXTRA NODES (decision of the human, 2026-10-11 05:55 UTC; coord/STATE.md):
   (A) NEW DEFINITION NODES dag/nodes/<chapter of the item>/<id>.json, absent on the base, with the fields of
       check_new_node (kind definition, status split, created.item = the item, created.group = G, ...), each with its
@@ -544,10 +546,13 @@ def read_delivery(git: Git, ref: str, base: str, group: str, item: str, max_comm
     `overrides` {path: text} replaces the text of a delivered file (a reviewer's fix, merge_delivery.py).
     Returns {fails: [(letter, text)], notes, node_path, node, base_node, rec, lean_path, lean_text, report, decl,
     commits, base, new: {id: {path, node}}, deps: {id: {path, node, base_node}}, modules: [{file, node, role, rec,
-    text, decl, module, siblings}] in dependency order (a module after the sibling modules it imports), roles}."""
+    text, decl, module, siblings}] in dependency order (a module after the sibling modules it imports), roles,
+    corrected (the item's statement is corrected: STAGE 2 STATEMENT CORRECTION), citers (the base nodes whose
+    stmt_deps or proof_deps name the item, computed when corrected), citer_marks (statement_change.citers)}."""
     D = {"fails": [], "notes": [], "node_path": None, "node": None, "base_node": None, "rec": None,
          "lean_path": None, "lean_text": None, "report": None, "decl": None, "commits": [],
-         "new": {}, "deps": {}, "modules": [], "roles": [], "report_path": f"coord/reports/{group}/{item}.md"}
+         "new": {}, "deps": {}, "modules": [], "roles": [], "report_path": f"coord/reports/{group}/{item}.md",
+         "corrected": False, "citers": [], "citer_marks": []}
     fails = D["fails"]
     over = overrides or {}
     f = lambda L, s: fails.append((L, s))  # noqa: E731

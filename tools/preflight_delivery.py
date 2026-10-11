@@ -48,13 +48,17 @@ checks the branch <ref> (default HEAD; the lead passes deliver/<group>/<item>) a
      by = <group>; each other node file classified (printed) as a NEW definition node (absent on the base; the field
      rule of tools/stage2_delivery.py check_new_node, coord/STATE.md "STAGE 2 EXTRA NODES") or a DEPENDENCY node (in
      the item's stmt_deps on the base, changed only in `lean`, existing false, with lean.note); every module the
-     lean.file of exactly one node, every node with existing false with its module;
+     lean.file of exactly one node, every node with existing false with its module; a CORRECTED item (STAGE 2
+     STATEMENT CORRECTION: statement changed, and as far as forced stmt_deps, proof, proof_deps) with its
+     statement_change checked by tools/node_fields.py check_statement_change (citers = the base nodes citing the item),
+     printed as "item corrected: <n> citers, <k> marked holds:false";
   c. each module, with its own node's id: imports of Mathlib.*, WeilConjectures.*, Sheaf.* only; lines of at most 100
      characters; the declaration defined, its docstring with `(blueprint: <node id>)`, its name not already in Mathlib or the source;
      every theorem/lemma proved by `sorry`, no `sorry` in a definition; the recorded statement equal to the file's;
   d. an existing declaration (existing: true): no Lean file, module Mathlib.* or WeilConjectures.*, declared there;
   e. the report with non-empty `## Worker report` and `## Second reading by <group>`, and `## New nodes` /
-     `## Dependency modules` naming each new node / dependency node when there are any;
+     `## Dependency modules` naming each new node / dependency node when there are any, and `## Statement corrected`
+     naming each citer when the item is corrected;
   f. the compile of each module with tools/lean_file.sh in lean/.sandbox/<group>/<node>.lean, in dependency order;
      a module importing a sibling module not yet in the library prints "compile: deferred"; on the server only
      (SHEAF_COMPILE_ROOT names another project directory to compile in).
@@ -144,6 +148,9 @@ def main_stage2(argv: list[str]) -> int:
     print(f"delivery of {item} by {group}: the item ({D['node_path']})")
     for r in D.get("roles") or []:
         print(f"   {r}")
+    if D.get("corrected"):
+        nf = sum(1 for c in D.get("citer_marks") or [] if c.get("holds") is False)
+        print(f"item corrected: {len(D.get('citers') or [])} citers, {nf} marked holds:false")
     compiled = []
     for c in s2.compile_modules(D, group):
         where = f"{c['file']} ({c['node']})"
