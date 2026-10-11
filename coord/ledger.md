@@ -4336,3 +4336,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 10:54 L: merged deliver/J1/lem-weil-pbc-henselian-local-root-lifting (stage 2; reviewer PASS; first push; Sheaf.RingTheory.HenselianLocalRootLifting IsLocalRing.idempotent_lifting_iff_monic_simple_root_lifting)
 - 10:54 L: merged deliver/E1/lem-weil-pbc-idempotent-splitting-monic-factorization (stage 2; reviewer PASS; first push; Sheaf.RingTheory.MonicFactorizationOfIdempotent Polynomial.exists_monic_factorization_of_idempotent)
 - 10:55 L: merged deliver/C1/lem-weil-pbc-idempotent-endomorphism-charpoly-field (stage 2; reviewer FIX; first push; Sheaf.LinearAlgebra.IdempotentEndomorphismCharpolyField LinearMap.charpoly_toMatrix_of_idempotent)
+- 10:55 L: merged deliver/G1/lem-weil-pbc-idempotents-determined-modulo-radical (stage 2; reviewer PASS; first push; Sheaf.RingTheory.IdempotentsDeterminedModuloRadical IsIdempotentElem.eq_of_sub_mem_of_le_jacobson)
