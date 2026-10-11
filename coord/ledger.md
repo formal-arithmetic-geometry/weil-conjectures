@@ -3798,3 +3798,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 08:18 L: merged deliver/E1/lem-sc-positive-ample-hilbert-degree (stage 2; reviewer PASS; first push; WeilConjectures.AlgebraicGeometry.Modules.Ample AlgebraicGeometry.Scheme.Hom.degree_pos_of_isAmple_of_nonempty; existing declaration)
 - 08:18 L: merged deliver/G1/lem-sc-krull-akizuki-noetherian (stage 2; reviewer PASS; first push; Sheaf.RingTheory.KrullAkizukiNoetherian krullAkizukiNoetherian)
 - 08:18 L: merged deliver/K1/lem-sc-point-tangent-finite-local-cotangent-surjective (stage 2; reviewer PASS; first push; Sheaf.RingTheory.SurjectiveOfFiniteOfCotangent RingHom.surjective_of_finite_of_cotangent)
+- 08:18 L: merged deliver/K1/lem-sc-point-tangent-closed-fibre-singleton (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.ClosedFibreSingleton AlgebraicGeometry.preimage_singleton_eq_empty_or_singleton_of_injOn_closedPoints)
