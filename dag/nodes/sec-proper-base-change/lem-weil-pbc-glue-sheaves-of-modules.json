@@ -25,7 +25,8 @@
   "place": "Sheaves on Spaces, Section 00AK (section-glueing-sheaves, line 5071): Lemma 04TN (lemma-glue-maps, line 5078) for (1), proved there for sheaves of sets, the additivity and O-linearity of the glued map being checked on the U_i as below; Lemma 00AL (lemma-glue-sheaves, line 5192, first proof) and Lemma 00AM (lemma-glue-sheaves-structures, line 5253, the O-module case) for (2). Tags verified in literature/stacks-project/tags/tags: 00AK,sheaves-section-glueing-sheaves; 04TN,sheaves-lemma-glue-maps; 00AL,sheaves-lemma-glue-sheaves; 00AM,sheaves-lemma-glue-sheaves-structures."
  },
  "stmt_deps": [
-  "def-weil-sheaf-of-modules-category"
+  "def-weil-sheaf-of-modules-category",
+  "lem-sc-derived-hom-mayer-vietoris"
  ],
  "proof": [
   {
@@ -219,5 +220,28 @@
   "worker": "stage1",
   "summary": "Read Stacks Sheaves Section 00AK: 04TN (lemma-glue-maps) with its proof, 00AL (lemma-glue-sheaves) with its first proof, 00AM (lemma-glue-sheaves-structures) with its proof; tags checked in tags/tags. Statement kept in substance; made self-contained: the ringed space is introduced as X with a sheaf of commutative rings, the restriction of modules and of morphisms to opens is now defined in the statement (it was attributed to def-weil-sheaf-of-modules-category, which does not define it), and the pairs (i,j) of (2) are said to include i=j, as Stacks' glueing data does (needed for phi_ii = id, used by the citer lem-weil-pbc-module-finite-presentation-extension, which glues with identities). Proof in 7 steps following the sources: (1) per 04TN, sections phi_U(s) glued from (phi_i)(s|) by the sheaf condition of G, compatibility with restrictions and additivity/O-linearity checked on the U_i (Step 2), restriction to U_i and uniqueness, plus the 'in particular' clause used by the citers; (2) per 00AL first proof and 00AM: F(W) the equalizer submodule of prod F_i(W cap U_i), sheaf condition from that of the F_i, phi_i the projection, bijective by the cocycle condition and phi_ii = id, compatibility square. Every step uses only the definition of sheaves of modules (the sources use only sheaf axioms). No new node; no existing node states 04TN/00AL for sets or abelian groups (lem-weil-pbc-sheaf-morphism-on-basis is the basis version, lem-weil-pbc-sheaf-on-basis-extends of unit sk-thm-reduction the basis extension used by 00AL's second proof; neither needed). Checked the four citers: grothendieck-existence-easy (steps 7-8), module-finite-presentation-representatives (steps 2, 4), module-finite-presentation-extension (step 9) and sheaf-isomorphism-local-open-cover (steps 4-5) use (1) with its uniqueness clause and (2) exactly as stated. Mathlib: re-searched (leansearch, loogle, leanfinder, grep, local_search); Presheaf.IsSheaf.hom / sheafHomSectionsEquiv recorded as mathlib_candidate for (1) (fixed value category only), nothing for (2)."
  },
- "reviewed": "Reviewed by L 2026-10-10: faithful to Sheaves 04TN (steps 1-3, with O-linearity checked on the cover) and 00AL first proof + 00AM (steps 4-7, the equalizer construction); the statement now defines restriction inline and says the pairs include i = j (used by a citer). No new nodes; Mathlib candidate for (1) recorded (B8)."
+ "reviewed": "Reviewed by L 2026-10-10: faithful to Sheaves 04TN (steps 1-3, with O-linearity checked on the cover) and 00AL first proof + 00AM (steps 4-7, the equalizer construction); the statement now defines restriction inline and says the pairs include i = j (used by a citer). No new nodes; Mathlib candidate for (1) recorded (B8).",
+ "lean": {
+  "module": "Sheaf.Topology.GlueSheavesOfModules",
+  "declaration": "AlgebraicGeometry.glue_sheaves_of_modules",
+  "file": "lean/Sheaf/Topology/GlueSheavesOfModules.lean",
+  "statement": "theorem glue_sheaves_of_modules (X : RingedSpace.{u}) (I : Type w) (U : I → Opens X) (hcover : ⨆ i, U i = ⊤) : (∀ (F G : SheafOfModules.{max u v} (moduleRings X)) (φ : ∀ i : I, F.over (U i) ⟶ G.over (U i)), (∀ (i j : I) (W : Opens X) (hi : W ≤ U i) (hj : W ≤ U j), (φ i).val.app (op (Over.mk (homOfLE hi))) = (φ j).val.app (op (Over.mk (homOfLE hj)))) → ∃! ψ : F ⟶ G, ∀ i : I, ψ.over (U i) = φ i) ∧ (∀ (F G : SheafOfModules.{max u v} (moduleRings X)) (α β : F ⟶ G), (∀ i : I, α.over (U i) = β.over (U i)) → α = β) ∧ (∀ (Fi : ∀ i : I, SheafOfModules.{max u v} ((moduleRings X).over (U i))) (φij : ∀ i j : I, (SheafOfModules.overMap (moduleRings X) (homOfLE inf_le_left : U i ⊓ U j ⟶ U i)).obj (Fi i) ≅ (SheafOfModules.overMap (moduleRings X) (homOfLE inf_le_right : U i ⊓ U j ⟶ U j)).obj (Fi j)), (∀ (i j k : I) (W : Opens X) (hi : W ≤ U i) (hj : W ≤ U j) (hk : W ≤ U k), (φij i k).hom.val.app (op (Over.mk (homOfLE (le_inf hi hk)))) = (φij i j).hom.val.app (op (Over.mk (homOfLE (le_inf hi hj)))) ≫ (φij j k).hom.val.app (op (Over.mk (homOfLE (le_inf hj hk))))) → ∃ (H : SheafOfModules.{max u v} (moduleRings X)) (φi : ∀ i : I, H.over (U i) ≅ Fi i), ∀ (i j : I) (W : Opens X) (hi : W ≤ U i) (hj : W ≤ U j), (φi i).hom.val.app (op (Over.mk (homOfLE hi))) ≫ (φij i j).hom.val.app (op (Over.mk (homOfLE (le_inf hi hj)))) = (φi j).hom.val.app (op (Over.mk (homOfLE hj))))",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-11",
+  "existing": false,
+  "declarations": [
+   "AlgebraicGeometry.glue_sheaves_of_modules"
+  ],
+  "note": "Uses the shared moduleRings from Sheaf.Paper.DerivedHomMayerVietoris; actual local modules on Over (U i), overlap isomorphisms via overMap, and componentwise overlap/cocycle/compatibility equalities.",
+  "fixed_by": "R-gsm1058"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-gsm1058",
+  "group": "C1",
+  "result": "fix",
+  "note": "cover hcover -> ⨆ i, U i = ⊤ (OPEN COVERS); X RingedSpace/moduleRings shared; (1) φ_i on F.over (U i), overlap agreement componentwise at every W≤U_i,U_j = φ_i|U_ij=φ_j|U_ij, ∃! ψ with ψ.over (U i)=φ i; in-particular clause separate; (2) Fi local modules over (moduleRings X).over (U i), φij iso via Mathlib overMap incl. i=j, cocycle at every W≤U_ijk, H with H.over (U i)≅Fi i and φi≫φij=φj on U_ij; overMap/over/Hom.over are Mathlib (#check); modules max u v, I : Type w"
+ }
 }
