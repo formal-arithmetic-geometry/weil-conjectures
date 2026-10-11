@@ -3662,3 +3662,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 07:40 L: merged deliver/G1/lem-exc-etale-sheaves-gsets-point (stage 2; reviewer FIX; first push; Sheaf.AlgebraicGeometry.Sites.EtaleSheavesGsetsPoint AlgebraicGeometry.etaleSheavesGsetsPoint)
 - 07:41 L: merged deliver/F1/lem-pur-sheaf-hom-is-sheaf (stage 2; reviewer PASS; first push; Sheaf.Algebra.Category.ModuleCat.Sheaf.HomIsSheaf SheafOfModules.homObj_isSheaf_and_sections)
 - 07:41 L: merged deliver/F1/lem-sc-affine-totalquotient-minimal-product (stage 2; reviewer FIX; first push; Sheaf.AlgebraicGeometry.TotalQuotientRingMinimalProduct Algebra.totalQuotientRing_isProduct_minimalPrimes)
+- 07:41 L: merged deliver/J1/lem-pur-ringed-site-grothendieck-abelian (stage 2; reviewer PASS; first push; Sheaf.CategoryTheory.RingedSiteGrothendieckAbelian SheafOfModules.grothendieckAbelian_with_localized_generator)
