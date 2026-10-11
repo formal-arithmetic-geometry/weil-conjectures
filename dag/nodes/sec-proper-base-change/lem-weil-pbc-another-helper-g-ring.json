@@ -227,5 +227,23 @@
   "by": "L",
   "result": "pass",
   "note": "Seven steps along Stacks 07PU with the implicit points written out (q_i maximal over n_B, the zero factor when r' is not in q_i, existence and completeness of the finite domain B): completed local rings of B[x] Noetherian complete local with Noetherian fibres, residue field of a nonzero prime over (0) is K_B[x]/(g), the case K_B = kappa(s) via formal smoothness in the adic topology (new definition node 07EB/07NI, new node for the completion of A[x]_q being formally smooth, 07PM (4)=>(1) as a new node), derivation extends and the hypersurface-derivation node, finite extension B of A with fraction field L (finite-of-integral-generators, a leaf of sk-thm-reduction, counts as a tool), 07N9 decomposition (new node) and the 0325 product node (new), each factor regular, finite products of regular rings regular. Checked steps 2, 3, 5, 6; correct. Five new unsplit nodes; 07PM is the heavy one (worker warns of possible circularity with the 07PR helper when 07PM is split). Hypothesis char p unused (kept, as in the source)."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.PolynomialFormalFiber",
+  "declaration": "Polynomial.formalFiber_isGeometricallyRegular",
+  "file": "lean/Sheaf/RingTheory/PolynomialFormalFiber.lean",
+  "statement": "theorem formalFiber_isGeometricallyRegular (A : Type u) [CommRing A] [IsDomain A] [IsNoetherianRing A] [IsLocalRing A] [IsAdicComplete (IsLocalRing.maximalIdeal A) A] (p : ℕ) (hp : p.Prime) [CharP (Localization.AtPrime (⊥ : Ideal A)) p] (q : Ideal (Polynomial A)) [q.IsMaximal] (hq : q.comap (Polynomial.C : A →+* Polynomial A) = IsLocalRing.maximalIdeal A) (r : Ideal (Polynomial A)) [r.IsPrime] (hrq : r ≤ q) (hr : r ≠ ⊥) (hrA : r.comap (Polynomial.C : A →+* Polynomial A) = ⊥) : let C := AdicCompletion (IsLocalRing.maximalIdeal (Localization.AtPrime q)) (Localization.AtPrime q) IsNoetherianRing (r.Fiber C) ∧ Algebra.IsGeometricallyRegular r.ResidueField (r.Fiber C)",
+  "branch": "sheaf-dag",
+  "by": "M1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-agr1330",
+  "group": "M1",
+  "result": "pass",
+  "note": "p prime; A Noetherian local domain IsAdicComplete at maximalIdeal; CharP of Localization.AtPrime ⊥ (=A_(0)); q maximal, comap C = m; r prime, r ≤ q, r ≠ ⊥, comap C = ⊥; C = AdicCompletion of maximalIdeal of A[x]_q with algebraMap A[x]→C the composite (checked rfl); r.Fiber C (κ(r)⊗C, swap of node's order); Noetherian ∧ landed H1 Algebra.IsGeometricallyRegular"
  }
 }
