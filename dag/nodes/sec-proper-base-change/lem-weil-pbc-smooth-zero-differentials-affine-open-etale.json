@@ -188,5 +188,24 @@
   "by": "L",
   "result": "pass",
   "note": "Reviewed by the lead (opus-relaunch6). Five steps: restriction of the smooth g to W -> V smooth (restrict-open-subschemes leaf), the restriction is Spec of the induced ring map (new Mathlib leaf IsAffineOpen.SpecMap_appLE_fromSpec AffineScheme.lean:482, verified), the ring map smooth by the identification node (02H6 affine case, committed), etale since Omega = 0 (00U1 via the 02GJ leaf), composite with the open immersion etale. Tags verified by the worker (02GH, 02GI, 00U1, 01V6, 02GP, 02GN, 01I1)."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SmoothZeroDifferentialsAffineOpenEtale",
+  "declaration": "AlgebraicGeometry.smooth_zero_differentials_affine_open_etale",
+  "file": "lean/Sheaf/AlgebraicGeometry/SmoothZeroDifferentialsAffineOpenEtale.lean",
+  "statement": "theorem smooth_zero_differentials_affine_open_etale {U S : Scheme.{u}} (g : U ⟶ S) [Smooth g] (V : S.Opens) (W : U.Opens) (hV : IsAffineOpen V) (hW : IsAffineOpen W) (hWV : W ≤ g ⁻¹ᵁ V) [Algebra Γ(S, V) Γ(U, W)] (hφ : algebraMap Γ(S, V) Γ(U, W) = (g.appLE V W hWV).hom) (hΩ : Subsingleton (KaehlerDifferential Γ(S, V) Γ(U, W))) : Etale (W.ι ≫ g)",
+  "branch": "sheaf-dag",
+  "by": "J1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-sze"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-sze",
+  "group": "J1",
+  "result": "fix",
+  "note": "statement matched to node clause by clause; inline @KaehlerDifferential ... (g.appLE V W hWV).hom.toAlgebra replaced by [Algebra Γ(S, V) Γ(U, W)] tied by algebraMap = (g.appLE V W hWV).hom, Ω as KaehlerDifferential Γ(S, V) Γ(U, W) (STATE: no instance lambda/@toAlgebra inline)"
  }
 }
