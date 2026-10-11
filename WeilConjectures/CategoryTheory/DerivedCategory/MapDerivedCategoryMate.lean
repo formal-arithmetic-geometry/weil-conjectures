@@ -25,6 +25,37 @@ namespace CategoryTheory
 
 namespace Functor
 
+section NatIso
+
+variable {C D : Type*} [Category C] [Category D] [Abelian C] [Abelian D] [HasDerivedCategory C]
+  [HasDerivedCategory D] {F G H : C ⥤ D} [F.Additive] [PreservesFiniteLimits F]
+  [PreservesFiniteColimits F] [G.Additive] [PreservesFiniteLimits G] [PreservesFiniteColimits G]
+  [H.Additive] [PreservesFiniteLimits H] [PreservesFiniteColimits H]
+
+lemma mapDerivedCategoryNatIso_refl :
+    (mapDerivedCategoryNatIso (Iso.refl F)).hom = 𝟙 _ := by
+  refine Localization.natTrans_ext DerivedCategory.Q (HomologicalComplex.quasiIso C (.up ℤ))
+    (fun K ↦ ?_)
+  rw [← cancel_mono (F.mapDerivedCategoryFactors.hom.app K), mapDerivedCategoryNatIso_fac]
+  simp
+
+lemma mapDerivedCategoryNatIso_trans (e₁ : F ≅ G) (e₂ : G ≅ H) :
+    (mapDerivedCategoryNatIso (e₁ ≪≫ e₂)).hom =
+      (mapDerivedCategoryNatIso e₁).hom ≫ (mapDerivedCategoryNatIso e₂).hom := by
+  refine Localization.natTrans_ext DerivedCategory.Q (HomologicalComplex.quasiIso C (.up ℤ))
+    (fun K ↦ ?_)
+  rw [← cancel_mono (H.mapDerivedCategoryFactors.hom.app K), mapDerivedCategoryNatIso_fac,
+    NatTrans.comp_app, Category.assoc, mapDerivedCategoryNatIso_fac,
+    mapDerivedCategoryNatIso_fac_assoc, Iso.trans_hom, NatTrans.mapHomologicalComplex_comp,
+    NatTrans.comp_app, Functor.map_comp]
+
+lemma mapDerivedCategoryNatIso_symm (e : F ≅ G) :
+    (mapDerivedCategoryNatIso e.symm).hom = (mapDerivedCategoryNatIso e).inv := by
+  rw [← cancel_epi (mapDerivedCategoryNatIso e).hom, Iso.hom_inv_id,
+    ← mapDerivedCategoryNatIso_trans, Iso.self_symm_id, mapDerivedCategoryNatIso_refl]
+
+end NatIso
+
 variable {A B B' E : Type*} [Category A] [Category B] [Category B'] [Category E] [Abelian A]
   [Abelian B] [Abelian B'] [Abelian E] [HasDerivedCategory A] [HasDerivedCategory B]
   [HasDerivedCategory B'] [HasDerivedCategory E]
