@@ -49,6 +49,12 @@ namespace CategoryTheory.Abelian.Ext
 
 variable {C : Type u} [Category.{v} C] [Abelian C] [HasExt.{w} C]
 
+/-- In degree `0`, postcomposition with `mk₀ φ` is composition with `φ`. -/
+lemma addEquiv₀_comp_mk₀ {P F G : C} (x : Ext P F 0) (φ : F ⟶ G) :
+    addEquiv₀ (x.comp (mk₀ φ) (add_zero 0)) = addEquiv₀ x ≫ φ := by
+  apply (mk₀_bijective P G).injective
+  rw [mk₀_addEquiv₀_apply, ← mk₀_comp_mk₀, mk₀_addEquiv₀_apply]
+
 section Action
 
 variable {A : Type*} [CommRing A] {F : C} (ρ : A →+* End F)
