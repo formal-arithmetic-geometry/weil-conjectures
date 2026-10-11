@@ -49,6 +49,20 @@ lemma lanUnit_app_comp_lanProjectionMap_app (F : C ⥤ H) (G : D ⥤ H) (c : C) 
   exact h'
 
 
+/-- The projection map is natural in both variables. -/
+lemma lanProjectionMap_naturality {F F' : C ⥤ H} {G G' : D ⥤ H} (φ : F ⟶ F') (ψ : G ⟶ G') :
+    L.lan.map (φ ⊗ₘ Functor.whiskerLeft L ψ) ≫ L.lanProjectionMap F' G' =
+      L.lanProjectionMap F G ≫ (L.lan.map φ ⊗ₘ ψ) := by
+  apply ((L.lanAdjunction H).homEquiv _ _).injective
+  rw [Adjunction.homEquiv_naturality_left, Adjunction.homEquiv_naturality_right]
+  simp only [lanProjectionMap, Equiv.apply_symm_apply, Category.comp_id]
+  ext c
+  simp only [NatTrans.comp_app, Monoidal.tensorHom_app, whiskeringLeft_obj_map,
+    Functor.whiskerLeft_app, NatTrans.id_app, tensorHom_comp_tensorHom, Category.comp_id,
+    Category.id_comp]
+  congr 1
+  exact congr_app ((L.lanAdjunction H).unit.naturality φ) c
+
 /-- The legs of the cocone exhibiting `Lan F ⊗ G` at `Y` as a colimit. -/
 noncomputable def lanProjectionCocone (F : C ⥤ H) (G : D ⥤ H) (Y : D) :
     Cocone (CostructuredArrow.proj L Y ⋙ (F ⊗ (L ⋙ G))) where
