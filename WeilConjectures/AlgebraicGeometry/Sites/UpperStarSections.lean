@@ -381,6 +381,13 @@ lemma transition_hom_app_unit (U : R.Etale) (g : G.obj.obj (op U)) :
   calc X = F'.obj.map (𝟙 _).op X := by rw [op_id, CategoryTheory.Functor.map_id]; rfl
     _ = _ := by rw [← he, op_comp, Functor.map_comp, ConcreteCategory.comp_apply, h₂]; rfl
 
+/-- `restrictAlong` only depends on the morphism `m`, not on the proof of compatibility. -/
+lemma restrictAlong_congr {V : T.Etale} {V' : T'.Etale} {m₁ m₂ : V'.left ⟶ V.left}
+    (hm₁ : m₁ ≫ V.hom = V'.hom ≫ f) (h : m₁ = m₂) :
+    restrictAlong t G f t' ht' m₁ hm₁ = restrictAlong t G f t' ht' m₂ (h ▸ hm₁) := by
+  subst h
+  rfl
+
 /-- Restriction of `φ^* g` along `m` is `(m ≫ φ)^* g`. -/
 lemma restrictAlong_pullSection {V : T.Etale} {V' : T'.Etale} (m : V'.left ⟶ V.left)
     (hm : m ≫ V.hom = V'.hom ≫ f) {U : R.Etale} (φ : V.left ⟶ U.left)
@@ -525,7 +532,101 @@ lemma exists_map_eq_of_compatible {V : X.Etale} {ι : Type*} {V' : ι → X.Etal
         ConcreteCategory.comp_apply, ConcreteCategory.comp_apply, hσ i j])
   exact ⟨s, hs⟩
 
+/-- Two sections of a sheaf which agree étale locally agree. -/
+lemma eq_of_forall_exists_map_eq {V : X.Etale} (s₁ s₂ : F.obj.obj (op V))
+    (h : ∀ x : V.left, ∃ (W : X.Etale) (b : W ⟶ V), x ∈ Set.range b.left ∧
+      F.obj.map b.op s₁ = F.obj.map b.op s₂) : s₁ = s₂ := by
+  choose W b hx hb using h
+  rw [← sub_eq_zero]
+  exact eq_zero_of_forall_map_eq_zero F b (fun x ↦ ⟨x, hx x⟩) _
+    (fun x ↦ by rw [map_sub, hb, sub_self])
+
 end Gluing
+
+section Composition
+
+variable {T' T'' : Scheme.{u}} (f : T' ⟶ T) (t' : T' ⟶ R) (ht' : t' = f ≫ t)
+  (f' : T'' ⟶ T') (t'' : T'' ⟶ R) (ht'' : t'' = f' ≫ t')
+
+/-- The étale `T''`-scheme `V'' ×_V V₁` for `m : V'' ⟶ V` over `T'' ⟶ T` and an étale
+`a : V₁ ⟶ V`. -/
+noncomputable def pullbackObj {S S' : Scheme.{u}} {V : S.Etale} {V'' : S'.Etale} {V₁ : S.Etale}
+    (m : V''.left ⟶ V.left) (a : V₁ ⟶ V) : S'.Etale :=
+  MorphismProperty.Over.mk ⊤ (pullback.fst m a.left ≫ V''.hom) inferInstance
+
+/-- The projection `V'' ×_V V₁ ⟶ V''`. -/
+noncomputable def pullbackObjFst {S S' : Scheme.{u}} {V : S.Etale} {V'' : S'.Etale}
+    {V₁ : S.Etale} (m : V''.left ⟶ V.left) (a : V₁ ⟶ V) : pullbackObj m a ⟶ V'' :=
+  MorphismProperty.Over.homMk (pullback.fst m a.left) rfl
+
+@[simp]
+lemma pullbackObj_left {S S' : Scheme.{u}} {V : S.Etale} {V'' : S'.Etale} {V₁ : S.Etale}
+    (m : V''.left ⟶ V.left) (a : V₁ ⟶ V) : (pullbackObj m a).left = pullback m a.left :=
+  rfl
+
+@[simp]
+lemma pullbackObj_hom {S S' : Scheme.{u}} {V : S.Etale} {V'' : S'.Etale} {V₁ : S.Etale}
+    (m : V''.left ⟶ V.left) (a : V₁ ⟶ V) :
+    (pullbackObj m a).hom = pullback.fst m a.left ≫ V''.hom :=
+  rfl
+
+@[simp]
+lemma pullbackObjFst_left {S S' : Scheme.{u}} {V : S.Etale} {V'' : S'.Etale} {V₁ : S.Etale}
+    (m : V''.left ⟶ V.left) (a : V₁ ⟶ V) :
+    (pullbackObjFst m a).left = pullback.fst m a.left :=
+  rfl
+
+/-- **Restrictions compose.** -/
+lemma restrictAlong_restrictAlong {V : T.Etale} {V' : T'.Etale} {V'' : T''.Etale}
+    (m : V'.left ⟶ V.left) (hm : m ≫ V.hom = V'.hom ≫ f) (m' : V''.left ⟶ V'.left)
+    (hm' : m' ≫ V'.hom = V''.hom ≫ f')
+    (s : ((t)^*[AddCommGrpCat.{u + 1}].obj G).obj.obj (op V)) :
+    restrictAlong t' G f' t'' ht'' m' hm' (restrictAlong t G f t' ht' m hm s) =
+      restrictAlong t G (f' ≫ f) t'' (by rw [ht'', ht', Category.assoc]) (m' ≫ m)
+        (by rw [Category.assoc, hm, reassoc_of% hm']) s := by
+  apply eq_of_forall_exists_map_eq
+  intro x
+  obtain ⟨V₁, a, U, φ, hφ, g, ⟨w, hw⟩, hs⟩ := exists_pullSection_eq t G s (m (m' x))
+  obtain ⟨z, hz₁, -⟩ := Scheme.Pullback.exists_preimage_pullback (f := m' ≫ m) (g := a.left) x w
+    (by rw [hw]; rfl)
+  refine ⟨pullbackObj (m' ≫ m) a, pullbackObjFst (m' ≫ m) a, ⟨z, hz₁⟩, ?_⟩
+  -- the intermediate étale `T'`-scheme `V' ×_V V₁`
+  let δ : (pullbackObj (m' ≫ m) a).left ⟶ (pullbackObj m a).left :=
+    pullback.lift (pullback.fst _ _ ≫ m') (pullback.snd _ _)
+      (by rw [Category.assoc, pullback.condition])
+  have hδ : δ ≫ (pullbackObj m a).hom = (pullbackObj (m' ≫ m) a).hom ≫ f' := by
+    simp [δ, hm']
+  have wa : a.left ≫ V.hom = V₁.hom := MorphismProperty.Over.w a
+  have hsnd : pullback.snd m a.left ≫ V₁.hom = (pullbackObj m a).hom ≫ f := by
+    rw [pullbackObj_hom, Category.assoc, ← hm, ← wa, ← pullback.condition_assoc]
+  have hsnd' : pullback.snd (m' ≫ m) a.left ≫ V₁.hom =
+      (pullbackObj (m' ≫ m) a).hom ≫ f' ≫ f := by
+    rw [pullbackObj_hom, ← wa, ← pullback.condition_assoc, Category.assoc, hm,
+      reassoc_of% hm', Category.assoc]
+  -- both sides are `(snd ≫ φ)^* g`
+  have e₀ : restrictAlong t G f t' ht' (pullback.snd m a.left) hsnd
+      (((t)^*[AddCommGrpCat.{u + 1}].obj G).obj.map a.op s) =
+        pullSection t' G (V := pullbackObj m a) (pullback.snd m a.left ≫ φ)
+          (by rw [Category.assoc, hφ, reassoc_of% hsnd, ht']) g := by
+    rw [hs, restrictAlong_pullSection]
+  rw [map_restrictAlong, map_restrictAlong]
+  have e₁ : (pullbackObjFst (m' ≫ m) a).left ≫ m' = δ ≫ (pullbackObjFst m a).left := by
+    simp [δ]
+  rw [restrictAlong_congr (h := e₁),
+    ← restrictAlong_map _ _ _ _ _ (V' := pullbackObj (m' ≫ m) a) (pullbackObjFst m a) δ hδ,
+    map_restrictAlong,
+    restrictAlong_congr (h := show (pullbackObjFst m a).left ≫ m =
+      pullback.snd m a.left ≫ a.left from pullback.condition), ← restrictAlong_map _ _ _ _ _ (V' := pullbackObj m a) a
+      (pullback.snd m a.left) hsnd, e₀, restrictAlong_pullSection,
+    restrictAlong_congr (h := show (pullbackObjFst (m' ≫ m) a).left ≫ m' ≫ m =
+      pullback.snd (m' ≫ m) a.left ≫ a.left by simp [pullback.condition]),
+    ← restrictAlong_map _ _ _ _ _ (V' := pullbackObj (m' ≫ m) a) a
+      (pullback.snd (m' ≫ m) a.left) hsnd', hs,
+    restrictAlong_pullSection]
+  apply pullSection_congr
+  simp [δ]
+
+end Composition
 
 end Etale
 

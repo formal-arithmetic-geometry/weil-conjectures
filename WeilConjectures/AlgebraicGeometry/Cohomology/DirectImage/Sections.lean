@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Basic
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Field
+public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.RestrictOpen
 public import WeilConjectures.AlgebraicGeometry.Modules.Invertible
 
 /-!
@@ -161,8 +162,10 @@ theorem nonempty_higherDirectImage_iso_restrict {T' X' : Scheme.{u}} (g : T' ⟶
     [IsOpenImmersion g] (g' : X' ⟶ X) (f' : X' ⟶ T') [HasInjectiveResolutions X'.Modules]
     (sq : IsPullback g' f' f g) (q : ℕ) :
     Nonempty ((higherDirectImage f' q).obj ((Modules.pullback g').obj ℱ) ≅
-      ((higherDirectImage f q).obj ℱ).restrict g) :=
-  sorry
+      ((higherDirectImage f q).obj ℱ).restrict g) := by
+  have : IsOpenImmersion g' := MorphismProperty.of_isPullback (P := @IsOpenImmersion) sq.flip ‹_›
+  obtain ⟨e⟩ := nonempty_higherDirectImage_restrict_iso_of_isPullback sq ℱ q
+  exact ⟨(higherDirectImage f' q).mapIso ((restrictFunctorIsoPullback g').app ℱ).symm ≪≫ e⟩
 
 open MonoidalCategory in
 /-- **The projection formula** for an invertible module. For `f : X ⟶ T`, an `𝒪_X`-module `ℱ`

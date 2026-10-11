@@ -192,9 +192,12 @@ lemma moduleCechD_apply (k : ℕ) (c : ModuleCechCochain U M k) (y : Fin (k + 2)
 variable {U M}
 
 lemma moduleCechD_comp_eq_zero (P : Cᵒᵖ ⥤ AddCommGrpCat.{max w v})
-    (φ : ∀ W : Over V, P.obj (op W.left) ≃+ M.obj (op W))
-    (hφ : ∀ {W W' : Over V} (f : W ⟶ W') (s : P.obj (op W'.left)),
-      φ W (P.map f.left.op s) = M.map f.op (φ W' s)) (k : ℕ) :
+    (φ : ∀ {k : ℕ} (y : Fin (k + 1) → ι),
+      P.obj (op (cechNerveObj U y).left) ≃+ M.obj (op (cechNerveObj U y)))
+    (hφ : ∀ {k m : ℕ} (y : Fin (m + 1) → ι) (θ : Fin (k + 1) → Fin (m + 1))
+      (s : P.obj (op (cechNerveObj U (y ∘ θ)).left)),
+      φ y (P.map (cechNerveMap U y θ).left.op s) =
+        M.map (cechNerveMap U y θ).op (φ (y ∘ θ) s)) (k : ℕ) :
     moduleCechD U M (k + 1) ∘ₗ moduleCechD U M k = 0 := by
   -- the Čech complexes of `P` and `M` are identified by `φ`
   have key (k : ℕ) (c : ((cechComplex U).obj P).X k) :
@@ -203,7 +206,7 @@ lemma moduleCechD_comp_eq_zero (P : Cᵒᵖ ⥤ AddCommGrpCat.{max w v})
     funext y
     rw [moduleCechD_apply, cechComplex_d_apply, map_sum]
     refine Finset.sum_congr rfl fun i _ ↦ ?_
-    rw [map_zsmul, hφ]
+    rw [map_zsmul, hφ y i.succAbove]
   ext c : 1
   let c' : ((cechComplex U).obj P).X k := fun y ↦ (φ _).symm (c y)
   have hc : c = fun y ↦ φ _ (c' y) := by
@@ -241,9 +244,12 @@ abelian groups on `C` whose sections over the objects `W` of `Over V` are the `A
 `W` and bijective on the members of the Čech nerve of `U`. Then the Čech complex of `P` on the
 family `U` is exact in positive degrees. -/
 theorem exactAt_cechComplex_of_baseChange [Finite ι] (P : Cᵒᵖ ⥤ AddCommGrpCat.{max w v})
-    (φ : ∀ W : Over V, P.obj (op W.left) ≃+ M.obj (op W))
-    (hφ : ∀ {W W' : Over V} (f : W ⟶ W') (s : P.obj (op W'.left)),
-      φ W (P.map f.left.op s) = M.map f.op (φ W' s))
+    (φ : ∀ {k : ℕ} (y : Fin (k + 1) → ι),
+      P.obj (op (cechNerveObj U y).left) ≃+ M.obj (op (cechNerveObj U y)))
+    (hφ : ∀ {k m : ℕ} (y : Fin (m + 1) → ι) (θ : Fin (k + 1) → Fin (m + 1))
+      (s : P.obj (op (cechNerveObj U (y ∘ θ)).left)),
+      φ y (P.map (cechNerveMap U y θ).left.op s) =
+        M.map (cechNerveMap U y θ).op (φ (y ∘ θ) s))
     (B : ι → Type*) [∀ a, AddCommGroup (B a)] [∀ a, Module A (B a)]
     [Module.FaithfullyFlat A (∀ a, B a)]
     (e : ∀ (a : ι) (W : Over V), M.obj (op W) ⊗[A] B a →+ M.obj (op (W ⨯ U a)))
@@ -333,7 +339,7 @@ theorem exactAt_cechComplex_of_baseChange [Finite ι] (P : Cᵒᵖ ⥤ AddCommGr
     funext y
     rw [moduleCechD_apply, cechComplex_d_apply, map_sum]
     refine Finset.sum_congr rfl fun i _ ↦ ?_
-    rw [map_zsmul, hφ]
+    rw [map_zsmul, hφ y i.succAbove]
   rw [exactAt_cechComplex_iff]
   intro c hc
   obtain ⟨m, hm⟩ := (LinearMap.exact_iff.1 hex).le (x := fun y ↦ φ _ (c y)) (by

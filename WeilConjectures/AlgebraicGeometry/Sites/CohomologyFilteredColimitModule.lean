@@ -304,16 +304,16 @@ lemma exactAt_cechComplex_of_isColimit_of_injective_moduleCat [∀ j, Injective 
   funext y
   exact cocone_ι_app_map_apply_moduleCat c ψ _ (w' y)
 
-variable (X) in
-/-- **A filtered colimit of injective sheaves of modules is acyclic on a qcqs scheme.** Let `X`
-be quasi-compact quasi-separated and let `G` be a sheaf of `Λ`-modules on `X` corepresenting
-global sections, via `e`. Then a filtered colimit of injective étale sheaves of `Λ`-modules has
+/-- **A filtered colimit of injective sheaves of modules is acyclic.** Let `T` be an étale
+`X`-scheme with quasi-compact quasi-separated underlying scheme and let `G` be a sheaf of
+`Λ`-modules on `X` corepresenting sections over `T`, via `e` (for instance the free sheaf
+`Λ[T]`). Then a filtered colimit of injective étale sheaves of `Λ`-modules has
 no higher `Ext` out of `G`. -/
-theorem subsingleton_ext_succ_of_isColimit_of_injective_moduleCat [CompactSpace X]
-    [QuasiSeparatedSpace X] [∀ j, Injective (D.obj j)] (hc : IsColimit c)
+theorem subsingleton_ext_succ_of_isColimit_of_injective_moduleCat {T : X.Etale}
+    [CompactSpace T.left] [QuasiSeparatedSpace T.left] [∀ j, Injective (D.obj j)] (hc : IsColimit c)
     (G : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))
     (e : ∀ F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ),
-      (G ⟶ F) ≃ F.obj.obj (op (Etale.mk (𝟙 X))))
+      (G ⟶ F) ≃ F.obj.obj (op T))
     (he : ∀ {F F' : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)} (f : G ⟶ F) (g : F ⟶ F'),
       e F' (f ≫ g) = g.hom.app _ (e F f))
     (q : ℕ) : Subsingleton (Abelian.Ext G c.pt (q + 1)) := by
@@ -329,7 +329,6 @@ theorem subsingleton_ext_succ_of_isColimit_of_injective_moduleCat [CompactSpace 
     have hg : Sheaf.IsLocallySurjective g := (Sheaf.isLocallySurjective_iff_epi' (φ := g)).2 ‹_›
     have : Sheaf.IsLocallySurjective (Φ.map g) := ⟨fun s ↦ hg.imageSieve_mem s⟩
     exact Sheaf.epi_of_isLocallySurjective (Φ.map g)⟩
-  let T : X.Etale := Etale.mk (𝟙 X)
   let B : X.Etale → Prop := fun W ↦ CompactSpace W.left ∧ QuasiSeparatedSpace W.left
   have hcov (V : X.Etale) (hV : B V) (R : Sieve V) (hR : R ∈ X.smallEtaleTopology V) :
       ∃ (n : ℕ) (U : Fin n → Over V),
@@ -347,23 +346,22 @@ theorem subsingleton_ext_succ_of_isColimit_of_injective_moduleCat [CompactSpace 
     (fun I _ V n U q ↦
       have : Injective I.obj := (sheafificationAdjunction _ _).map_injective _ inferInstance
       exactAt_cechComplex_forget₂_of_injective I.obj U q)
-    B ⟨‹CompactSpace X›, ‹QuasiSeparatedSpace X›⟩ hcov c.pt
+    B ⟨‹CompactSpace T.left›, ‹QuasiSeparatedSpace T.left›⟩ hcov c.pt
     (fun V hV n U hU _ q ↦ exactAt_cechComplex_of_isColimit_of_injective_moduleCat hc U hU q) q
 
 end Cech
 
-/-- On a qcqs scheme, `Hom(G, -)` commutes with filtered colimits of étale sheaves of
-`Λ`-modules, for `G` corepresenting global sections. -/
-lemma commutesWithColimit_zero_moduleCat [CompactSpace X] [QuasiSeparatedSpace X]
+/-- `Hom(G, -)` commutes with filtered colimits of étale sheaves of `Λ`-modules, for `G`
+corepresenting sections over an étale `X`-scheme `T` with quasi-compact quasi-separated
+underlying scheme. -/
+lemma commutesWithColimit_zero_moduleCat {T : X.Etale} [CompactSpace T.left]
+    [QuasiSeparatedSpace T.left]
     (hc : IsColimit c) (G : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))
     (e : ∀ F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ),
-      (G ⟶ F) ≃ F.obj.obj (op (Etale.mk (𝟙 X))))
+      (G ⟶ F) ≃ F.obj.obj (op T))
     (he : ∀ {F F' : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)} (f : G ⟶ F) (g : F ⟶ F'),
       e F' (f ≫ g) = g.hom.app _ (e F f)) :
     Abelian.Ext.CommutesWithColimit G 0 c := by
-  let T : X.Etale := Etale.mk (𝟙 X)
-  have : CompactSpace T.left := ‹CompactSpace X›
-  have : QuasiSeparatedSpace T.left := ‹QuasiSeparatedSpace X›
   refine ⟨fun x ↦ ?_, fun j y hy ↦ ?_⟩
   · obtain ⟨g, rfl⟩ := (Abelian.Ext.mk₀_bijective _ _).2 x
     obtain ⟨j, y, hy⟩ := exists_app_eq_of_isColimit_moduleCat hc (e c.pt g)
@@ -389,5 +387,26 @@ lemma commutesWithColimit_zero_moduleCat [CompactSpace X] [QuasiSeparatedSpace X
     rw [Abelian.Ext.mk₀_comp_mk₀, ← Abelian.Ext.mk₀_zero]
     congr 1
     exact (e _).injective ((he _ _).trans (hφ.trans (he₀ _).symm))
+/-- **`Ext` out of `G` commutes with filtered colimits of sheaves of modules.** Let `T` be an
+étale `X`-scheme with quasi-compact quasi-separated underlying scheme and let `G` be a sheaf of
+`Λ`-modules corepresenting sections over `T` (for instance the free sheaf `Λ[T]`). Then every
+`Extᵠ(G, -)` commutes with filtered colimits of étale sheaves of `Λ`-modules. -/
+theorem commutesWithColimit_of_isFiltered_moduleCat {T : X.Etale} [CompactSpace T.left]
+    [QuasiSeparatedSpace T.left] (G : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))
+    (e : ∀ F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ), (G ⟶ F) ≃ F.obj.obj (op T))
+    (he : ∀ {F F' : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)} (f : G ⟶ F) (g : F ⟶ F'),
+      e F' (f ≫ g) = g.hom.app _ (e F f))
+    (q : ℕ) (hc : IsColimit c) : Abelian.Ext.CommutesWithColimit.{u + 1} G q c := by
+  have : HasLimitsOfSize.{u, u} (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :=
+    hasLimitsOfSizeShrink.{u, u, u + 1, u + 1} _
+  have : HasColimitsOfSize.{u, u} (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :=
+    hasColimitsOfSizeShrink.{u, u, u + 1, u + 1} _
+  have : IsFiltered (AsSmall.{u + 1} J) := IsFiltered.of_equivalence AsSmall.equiv
+  have : HasExactColimitsOfShape J (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :=
+    HasExactColimitsOfShape.of_domain_equivalence _ AsSmall.equiv.symm
+  exact Abelian.Ext.commutesWithColimit_of_isFiltered G
+    (fun _ _ hc ↦ commutesWithColimit_zero_moduleCat hc G e he)
+    (fun _ _ hc _ q x ↦
+      (subsingleton_ext_succ_of_isColimit_of_injective_moduleCat hc G e he q).elim _ _) q D c hc
 
 end AlgebraicGeometry.Scheme

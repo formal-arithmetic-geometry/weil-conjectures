@@ -303,7 +303,7 @@ theorem exactAt_cechComplex_gaPresheaf [IsAffine V.left] {n : ℕ} (U : Fin n �
   have hsurj := (ofArrows_mem_smallEtaleTopology_iff (fun a ↦ (U a).hom)).1 hcov
   have := faithfullyFlat_pi_overΓ U hUa hsurj
   exact Presheaf.exactAt_cechComplex_of_baseChange U (gaModulePresheaf V) X.gaPresheaf
-    gaPresheafAddEquiv (fun f s ↦ gaPresheafAddEquiv_naturality f s) (fun a ↦ OverΓ (U a))
+    (fun y ↦ gaPresheafAddEquiv _) (fun y θ s ↦ gaPresheafAddEquiv_naturality _ s) (fun a ↦ OverΓ (U a))
     (fun a W ↦ (gaBaseChange W (U a)).toAddMonoidHom)
     (fun a W W' f s b ↦ gaBaseChange_naturality (U a) f s b)
     (fun a k y ↦ by

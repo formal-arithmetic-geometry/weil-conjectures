@@ -51,38 +51,73 @@ lemma openHom_comp {U U' U'' : Y.Opens} (h : U ≤ U') (h' : U' ≤ U'') :
     openHom h ≫ openHom h' = openHom (h.trans h') :=
   hom_ext (by simp)
 
+section BasisCover
+
+variable (𝔅 : Set Y.Opens) [h𝔅 : Fact (TopologicalSpace.Opens.IsBasis 𝔅)]
+
+/-- The open cover of `Y` by the members of a basis `𝔅` of its topology. -/
+@[simps I₀ X f]
+noncomputable def basisCover : Y.OpenCover where
+  I₀ := 𝔅
+  X U := U.1
+  f U := U.1.ι
+  mem₀ := by
+    rw [presieve₀_mem_precoverage_iff]
+    refine ⟨fun y ↦ ?_, inferInstance⟩
+    obtain ⟨U, hU, hyU, -⟩ := TopologicalSpace.Opens.isBasis_iff_nbhd.mp h𝔅.out
+      (show y ∈ (⊤ : Y.Opens) from trivial)
+    exact ⟨⟨U, hU⟩, by rw [Scheme.Opens.range_ι]; exact hyU⟩
+
+instance : Preorder (basisCover 𝔅).I₀ := inferInstanceAs (Preorder 𝔅)
+
+noncomputable instance : (basisCover 𝔅).LocallyDirected :=
+  .ofIsBasisOpensRange (by intros; simp) <| by
+    have : (Set.range fun i : (basisCover 𝔅).I₀ ↦ ((basisCover 𝔅).f i).opensRange) = 𝔅 := by
+      ext U
+      simp only [basisCover_f, Scheme.Opens.opensRange_ι, Set.mem_range]
+      exact ⟨fun ⟨y, hy⟩ ↦ hy ▸ y.2, fun h ↦ ⟨⟨U, h⟩, rfl⟩⟩
+    rw [this]
+    exact h𝔅.out
+
+lemma basisCover_trans {U V : 𝔅} (h : U ≤ V) :
+    (basisCover 𝔅).trans (homOfLE h) = Y.homOfLE (show U.1 ≤ V.1 from h) :=
+  rfl
+
+end BasisCover
+
 section Gluing
 
-variable (F : Sheaf Y.smallEtaleTopology (Type w)) (X : ∀ U : Y.affineOpens, Over (openObj U.1))
-  (r : ∀ U : Y.affineOpens, ((Over.forget (openObj U.1)).op ⋙ F.obj).RepresentableBy (X U))
+variable {𝔅 : Set Y.Opens} [h𝔅 : Fact (TopologicalSpace.Opens.IsBasis 𝔅)]
+  (F : Sheaf Y.smallEtaleTopology (Type w)) (X : ∀ U : 𝔅, Over (openObj U.1))
+  (r : ∀ U : 𝔅, ((Over.forget (openObj U.1)).op ⋙ F.obj).RepresentableBy (X U))
 
 /-- The transition map `X_U ⟶ X_{U'}` for affine opens `U ≤ U'`: the morphism representing the
 universal section over `X_U`. -/
-noncomputable def τ {U U' : Y.affineOpens} (h : U ≤ U') : (X U).left ⟶ (X U').left :=
+noncomputable def τ {U U' : 𝔅} (h : U ≤ U') : (X U).left ⟶ (X U').left :=
   ((r U').exists_overElt_eq ((X U).hom ≫ openHom (show U.1 ≤ U'.1 from h))
     ((r U).overElt (𝟙 _))).choose
 
 variable {F X r}
 
-lemma τ_hom {U U' : Y.affineOpens} (h : U ≤ U') :
+lemma τ_hom {U U' : 𝔅} (h : U ≤ U') :
     τ F X r h ≫ (X U').hom = (X U).hom ≫ openHom (show U.1 ≤ U'.1 from h) :=
   ((r U').exists_overElt_eq ((X U).hom ≫ openHom (show U.1 ≤ U'.1 from h))
     ((r U).overElt (𝟙 _))).choose_spec.1
 
-lemma overElt_τ {U U' : Y.affineOpens} (h : U ≤ U') :
+lemma overElt_τ {U U' : 𝔅} (h : U ≤ U') :
     (r U').overElt (τ F X r h) = (r U).overElt (𝟙 _) :=
   ((r U').exists_overElt_eq ((X U).hom ≫ openHom (show U.1 ≤ U'.1 from h))
     ((r U).overElt (𝟙 _))).choose_spec.2
 
-lemma overElt_comp_τ {U U' : Y.affineOpens} (h : U ≤ U') {T : Y.Etale} (a : T ⟶ (X U).left) :
+lemma overElt_comp_τ {U U' : 𝔅} (h : U ≤ U') {T : Y.Etale} (a : T ⟶ (X U).left) :
     (r U').overElt (a ≫ τ F X r h) = (r U).overElt a := by
   rw [(r U').overElt_comp, overElt_τ, ← (r U).overElt_comp, Category.comp_id]
 
-lemma τ_refl (U : Y.affineOpens) : τ F X r (le_refl U) = 𝟙 _ :=
+lemma τ_refl (U : 𝔅) : τ F X r (le_refl U) = 𝟙 _ :=
   (r U).overElt_injective (by rw [τ_hom, openHom_refl, Category.comp_id, Category.id_comp])
     (by rw [overElt_τ])
 
-lemma τ_comp {U U' U'' : Y.affineOpens} (h : U ≤ U') (h' : U' ≤ U'') :
+lemma τ_comp {U U' U'' : 𝔅} (h : U ≤ U') (h' : U' ≤ U'') :
     τ F X r h ≫ τ F X r h' = τ F X r (h.trans h') :=
   (r U'').overElt_injective
     (by rw [Category.assoc, τ_hom, reassoc_of% τ_hom, openHom_comp, τ_hom])
@@ -91,7 +126,7 @@ lemma τ_comp {U U' U'' : Y.affineOpens} (h : U ≤ U') (h' : U' ≤ U'') :
 variable (F X r)
 
 /-- The diagram of the `X_U` over the affine opens of `Y`. -/
-noncomputable def gluingFunctor : Y.affineOpens ⥤ Scheme.{u} where
+noncomputable def gluingFunctor : 𝔅 ⥤ Scheme.{u} where
   obj U := (X U).left.left
   map h := (τ F X r (leOfHom h)).left
   map_id U := by
@@ -104,22 +139,22 @@ noncomputable def gluingFunctor : Y.affineOpens ⥤ Scheme.{u} where
 
 /-- The structure maps `X_U ⟶ U`. -/
 noncomputable def gluingNatTrans :
-    gluingFunctor F X r ⟶ Y.directedAffineCover.functorOfLocallyDirected where
+    gluingFunctor F X r ⟶ (basisCover 𝔅).functorOfLocallyDirected where
   app U := (X U).hom.left
   naturality U U' h := by
     have e : h = homOfLE (leOfHom h) := rfl
     change (τ F X r (leOfHom h)).left ≫ (X U').hom.left =
-      (X U).hom.left ≫ Y.directedAffineCover.trans h
-    rw [e, directedAffineCover_trans]
+      (X U).hom.left ≫ (basisCover 𝔅).trans h
+    rw [e, basisCover_trans]
     exact congr_arg (fun f ↦ f.left) (τ_hom (F := F) (X := X) (r := r) (leOfHom h))
 
 lemma gluingNatTrans_equifibered : (gluingNatTrans F X r).Equifibered := by
   intro U U' h
   let hUU' : U.1 ≤ U'.1 := leOfHom h
   change IsPullback (τ F X r (leOfHom h)).left (X U).hom.left (X U').hom.left
-    (Y.directedAffineCover.trans h)
+    ((basisCover 𝔅).trans h)
   have e : h = homOfLE (leOfHom h) := rfl
-  rw [e, directedAffineCover_trans]
+  rw [e, basisCover_trans]
   have hτ : (τ F X r (leOfHom h)).left ≫ (X U').hom.left = (X U).hom.left ≫ Y.homOfLE hUU' :=
     congr_arg (fun f ↦ f.left) (τ_hom (F := F) (X := X) (r := r) (leOfHom h))
   -- the pullback `Q = X_{U'} ×_{U'} U`, as an étale `Y`-scheme over `U`
@@ -156,14 +191,14 @@ lemma gluingNatTrans_equifibered : (gluingNatTrans F X r).Equifibered := by
     rfl
 
 /-- The relative gluing datum of the `X_U` over the directed affine open cover of `Y`. -/
-noncomputable def gluingData : Y.directedAffineCover.RelativeGluingData where
+noncomputable def gluingData : (basisCover 𝔅).RelativeGluingData where
   functor := gluingFunctor F X r
   natTrans := gluingNatTrans F X r
   equifibered := gluingNatTrans_equifibered F X r
 
 lemma gluingData_toBase_mem (P : MorphismProperty Scheme.{u}) [IsZariskiLocalAtTarget P]
     (hP : ∀ U, P (X U).hom.left) : P (gluingData F X r).toBase := by
-  refine IsZariskiLocalAtTarget.of_openCover Y.directedAffineCover fun U ↦ ?_
+  refine IsZariskiLocalAtTarget.of_openCover (basisCover 𝔅) fun U ↦ ?_
   have h := ((gluingData F X r).isPullback_natTrans_ι_toBase U).flip
   change P (pullback.snd _ _)
   rw [← h.isoPullback_inv_snd, P.cancel_left_of_respectsIso]
@@ -173,27 +208,30 @@ section Representation
 
 variable {F X r}
 
+/-- The structure morphism of an étale `Y`-scheme, with target `Y` (so that the directed affine
+cover of `Y` can be pulled back along it). -/
+abbrev structMap (T : Y.Etale) : T.left ⟶ Y := T.hom
+
 /-- For an étale `Y`-scheme `T` and an affine open `U ⊆ Y`, the étale `Y`-scheme `T ×_Y U`. -/
-noncomputable abbrev TU (T : Y.Etale) (U : Y.affineOpens) : Y.Etale :=
-  Etale.mk (pullback.fst T.hom U.1.ι ≫ T.hom)
+noncomputable abbrev TU (T : Y.Etale) (U : 𝔅) : Y.Etale :=
+  Etale.mk (pullback.fst (structMap T) U.1.ι ≫ T.hom)
 
 /-- The open immersion `T ×_Y U ⟶ T`. -/
-noncomputable def TUfst (T : Y.Etale) (U : Y.affineOpens) : TU T U ⟶ T :=
+noncomputable def TUfst (T : Y.Etale) (U : 𝔅) : TU T U ⟶ T :=
   homMk (pullback.fst _ _) rfl
 
 /-- The projection `T ×_Y U ⟶ U`. -/
-noncomputable def TUsnd (T : Y.Etale) (U : Y.affineOpens) : TU T U ⟶ openObj U.1 :=
-  homMk (pullback.snd T.hom U.1.ι) pullback.condition.symm
+noncomputable def TUsnd (T : Y.Etale) (U : 𝔅) : TU T U ⟶ openObj U.1 :=
+  homMk (pullback.snd (structMap T) U.1.ι) pullback.condition.symm
 
-@[simp] lemma TUfst_left (T : Y.Etale) (U : Y.affineOpens) :
-    (TUfst T U).left = pullback.fst T.hom U.1.ι := rfl
-@[simp] lemma TUsnd_left (T : Y.Etale) (U : Y.affineOpens) :
-    (TUsnd T U).left = pullback.snd T.hom U.1.ι := rfl
+@[simp] lemma TUfst_left (T : Y.Etale) (U : 𝔅) :
+    (TUfst T U).left = pullback.fst (structMap T) U.1.ι := rfl
+@[simp] lemma TUsnd_left (T : Y.Etale) (U : 𝔅) :
+    (TUsnd T U).left = pullback.snd (structMap T) U.1.ι := rfl
 
-lemma exists_mem_affineOpens_le {y : Y} {V : Y.Opens} (hy : y ∈ V) :
-    ∃ U : Y.affineOpens, y ∈ U.1 ∧ U.1 ≤ V := by
-  obtain ⟨_, ⟨U, hU, rfl⟩, hyU, hUV⟩ :=
-    Y.isBasis_affineOpens.exists_subset_of_mem_open hy V.isOpen
+lemma exists_mem_basis_le {y : Y} {V : Y.Opens} (hy : y ∈ V) :
+    ∃ U : 𝔅, y ∈ U.1 ∧ U.1 ≤ V := by
+  obtain ⟨U, hU, hyU, hUV⟩ := TopologicalSpace.Opens.isBasis_iff_nbhd.mp h𝔅.out hy
   exact ⟨⟨U, hU⟩, hyU, hUV⟩
 
 lemma mem_range_pullback_fst {T : Scheme.{u}} (f : T ⟶ Y) (U : Y.Opens) {t : T}
@@ -201,30 +239,31 @@ lemma mem_range_pullback_fst {T : Scheme.{u}} (f : T ⟶ Y) (U : Y.Opens) {t : T
   rw [Scheme.Pullback.range_fst, Scheme.Opens.range_ι]
   exact ht
 
-lemma iUnion_range_TUfst (T : Y.Etale) : ⋃ U, Set.range (TUfst T U).left = Set.univ := by
+lemma iUnion_range_TUfst (T : Y.Etale) : ⋃ U : 𝔅, Set.range (TUfst T U).left = Set.univ := by
   refine Set.eq_univ_of_forall fun t ↦ ?_
-  obtain ⟨U, hU, -⟩ := exists_mem_affineOpens_le (V := ⊤) (y := T.hom t) trivial
-  exact Set.mem_iUnion.2 ⟨U, mem_range_pullback_fst T.hom U.1 hU⟩
+  obtain ⟨U, hU, -⟩ := exists_mem_basis_le (𝔅 := 𝔅) (V := ⊤) (y := T.hom t) trivial
+  exact Set.mem_iUnion.2 ⟨U, mem_range_pullback_fst (structMap T) U.1 hU⟩
 
 /-- The transition maps of the pullback of the directed affine cover. -/
-lemma pullback₁_trans (T : Y.Etale) {i j : Y.affineOpens} (hij : i ⟶ j) :
-    Cover.trans (Y.directedAffineCover.pullback₁ T.hom) hij =
-      pullback.map _ _ _ _ (𝟙 _) (Y.homOfLE (leOfHom hij)) (𝟙 _) (by simp) (by simp) :=
+lemma pullback₁_trans (T : Y.Etale) {i j : 𝔅} (hij : i ⟶ j) :
+    Cover.trans ((basisCover 𝔅).pullback₁ (structMap T)) hij =
+      pullback.map (structMap T) i.1.ι (structMap T) j.1.ι (𝟙 _) (Y.homOfLE (leOfHom hij))
+        (𝟙 _) (by simp) (by simp) :=
   rfl
 
 variable (F X r) in
 lemma exists_glue (T : Y.Etale) (s : F.obj.obj (op T)) :
-    ∃ m : T.left ⟶ (gluingData F X r).glued, ∀ (U : Y.affineOpens) (a : TU T U ⟶ (X U).left),
+    ∃ m : T.left ⟶ (gluingData F X r).glued, ∀ (U : 𝔅) (a : TU T U ⟶ (X U).left),
       a ≫ (X U).hom = TUsnd T U → (r U).overElt a = F.obj.map (TUfst T U).op s →
-        pullback.fst T.hom U.1.ι ≫ m = a.left ≫ colimit.ι (gluingData F X r).functor U := by
-  have H (U : Y.affineOpens) : ∃ a : TU T U ⟶ (X U).left, a ≫ (X U).hom = TUsnd T U ∧
+        pullback.fst (structMap T) U.1.ι ≫ m = a.left ≫ colimit.ι (gluingData F X r).functor U := by
+  have H (U : 𝔅) : ∃ a : TU T U ⟶ (X U).left, a ≫ (X U).hom = TUsnd T U ∧
       (r U).overElt a = F.obj.map (TUfst T U).op s :=
     (r U).exists_overElt_eq (TUsnd T U) (F.obj.map (TUfst T U).op s)
   choose a ha₁ ha₂ using H
-  let g (U : Y.affineOpens) : pullback T.hom U.1.ι ⟶ (gluingData F X r).glued :=
+  let g (U : 𝔅) : pullback (structMap T) U.1.ι ⟶ (gluingData F X r).glued :=
     (a U).left ≫ colimit.ι (gluingData F X r).functor U
-  have hg {i j : Y.affineOpens} (hij : i ⟶ j) :
-      Cover.trans (Y.directedAffineCover.pullback₁ T.hom) hij ≫ g j = g i := by
+  have hg {i j : 𝔅} (hij : i ⟶ j) :
+      Cover.trans ((basisCover 𝔅).pullback₁ (structMap T)) hij ≫ g j = g i := by
     let transC : TU T i ⟶ TU T j :=
       homMk (pullback.map _ _ _ _ (𝟙 _) (Y.homOfLE (leOfHom hij)) (𝟙 _) (by simp) (by simp))
         (by simp)
@@ -243,11 +282,11 @@ lemma exists_glue (T : Y.Etale) (s : F.obj.obj (op T)) :
     change transC.left ≫ (a j).left ≫ _ = _
     rw [reassoc_of% e']
     exact congr_arg _ (colimit.w (gluingData F X r).functor hij)
-  refine ⟨OpenCover.glueMorphismsOfLocallyDirected (Y.directedAffineCover.pullback₁ T.hom) g hg,
+  refine ⟨OpenCover.glueMorphismsOfLocallyDirected ((basisCover 𝔅).pullback₁ (structMap T)) g hg,
     fun U a' ha'₁ ha'₂ ↦ ?_⟩
   have : a' = a U := (r U).overElt_injective (ha'₁.trans (ha₁ U).symm) (ha'₂.trans (ha₂ U).symm)
   subst this
-  exact OpenCover.map_glueMorphismsOfLocallyDirected (Y.directedAffineCover.pullback₁ T.hom) g hg U
+  exact OpenCover.map_glueMorphismsOfLocallyDirected ((basisCover 𝔅).pullback₁ (structMap T)) g hg U
 
 variable (F X r) in
 /-- The morphism `T ⟶ X` to the glued scheme attached to a section of `F` over `T`. -/
@@ -255,21 +294,21 @@ noncomputable def glueLeft (T : Y.Etale) (s : F.obj.obj (op T)) :
     T.left ⟶ (gluingData F X r).glued :=
   (exists_glue F X r T s).choose
 
-lemma fst_glueLeft (T : Y.Etale) (s : F.obj.obj (op T)) (U : Y.affineOpens)
+lemma fst_glueLeft (T : Y.Etale) (s : F.obj.obj (op T)) (U : 𝔅)
     (a : TU T U ⟶ (X U).left) (ha₁ : a ≫ (X U).hom = TUsnd T U)
     (ha₂ : (r U).overElt a = F.obj.map (TUfst T U).op s) :
-    pullback.fst T.hom U.1.ι ≫ glueLeft F X r T s =
+    pullback.fst (structMap T) U.1.ι ≫ glueLeft F X r T s =
       a.left ≫ colimit.ι (gluingData F X r).functor U :=
   (exists_glue F X r T s).choose_spec U a ha₁ ha₂
 
 lemma hom_ext_pullback₁ {T : Y.Etale} {Z : Scheme.{u}} {f₁ f₂ : T.left ⟶ Z}
-    (h : ∀ U : Y.affineOpens, pullback.fst T.hom U.1.ι ≫ f₁ = pullback.fst T.hom U.1.ι ≫ f₂) :
+    (h : ∀ U : 𝔅, pullback.fst (structMap T) U.1.ι ≫ f₁ = pullback.fst (structMap T) U.1.ι ≫ f₂) :
     f₁ = f₂ :=
-  Cover.hom_ext (Y.directedAffineCover.pullback₁ T.hom) _ _ h
+  Cover.hom_ext ((basisCover 𝔅).pullback₁ (structMap T)) _ _ h
 
 lemma glueLeft_toBase (T : Y.Etale) (s : F.obj.obj (op T)) :
     glueLeft F X r T s ≫ (gluingData F X r).toBase = T.hom := by
-  refine hom_ext_pullback₁ fun U ↦ ?_
+  refine hom_ext_pullback₁ (𝔅 := 𝔅) fun U ↦ ?_
   obtain ⟨a, ha₁, ha₂⟩ := (r U).exists_overElt_eq (TUsnd T U) (F.obj.map (TUfst T U).op s)
   rw [reassoc_of% fst_glueLeft T s U a ha₁ ha₂, Cover.RelativeGluingData.ι_toBase]
   have := congr_arg (fun f ↦ f.left) ha₁
@@ -295,7 +334,7 @@ noncomputable def glue (T : Y.Etale) (s : F.obj.obj (op T)) : T ⟶ XG F X r :=
 
 lemma glue_naturality {T T' : Y.Etale} (h : T' ⟶ T) (s : F.obj.obj (op T)) :
     glue F X r T' (F.obj.map h.op s) = h ≫ glue F X r T s := by
-  refine hom_ext (hom_ext_pullback₁ fun U ↦ ?_)
+  refine hom_ext (hom_ext_pullback₁ (𝔅 := 𝔅) fun U ↦ ?_)
   obtain ⟨a, ha₁, ha₂⟩ := (r U).exists_overElt_eq (TUsnd T U) (F.obj.map (TUfst T U).op s)
   let hU : TU T' U ⟶ TU T U := homMk (pullback.map _ _ _ _ h.left (𝟙 _) (𝟙 _)
     (by rw [Category.comp_id, w_left]) (by simp)) (by
@@ -303,7 +342,7 @@ lemma glue_naturality {T T' : Y.Etale} (h : T' ⟶ T) (s : F.obj.obj (op T)) :
       rw [pullback.lift_fst_assoc, Category.assoc, w_left])
   have h₁ : hU ≫ TUsnd T U = TUsnd T' U := hom_ext (by simp [hU])
   have h₂ : hU ≫ TUfst T U = TUfst T' U ≫ h := hom_ext (by simp [hU])
-  have h₂' : hU.left ≫ pullback.fst T.hom U.1.ι = pullback.fst T'.hom U.1.ι ≫ h.left := by
+  have h₂' : hU.left ≫ pullback.fst (structMap T) U.1.ι = pullback.fst (structMap T') U.1.ι ≫ h.left := by
     simpa using congr_arg (fun f ↦ f.left) h₂
   rw [glue_left, comp_left, glue_left, fst_glueLeft T' _ U (hU ≫ a)
     (by rw [Category.assoc, ha₁, h₁])
@@ -313,7 +352,7 @@ lemma glue_naturality {T T' : Y.Etale} (h : T' ⟶ T) (s : F.obj.obj (op T)) :
 
 lemma glue_injective (T : Y.Etale) : Function.Injective (glue F X r T) := by
   intro s s' hss'
-  refine ext_of_isSheaf F (TUfst T) (iUnion_range_TUfst T) fun U ↦ ?_
+  refine ext_of_isSheaf F (TUfst (𝔅 := 𝔅) T) (iUnion_range_TUfst T) fun U ↦ ?_
   obtain ⟨a, ha₁, ha₂⟩ := (r U).exists_overElt_eq (TUsnd T U) (F.obj.map (TUfst T U).op s)
   obtain ⟨a', ha'₁, ha'₂⟩ :=
     (r U).exists_overElt_eq (TUsnd T U) (F.obj.map (TUfst T U).op s')
@@ -326,13 +365,13 @@ lemma glue_injective (T : Y.Etale) : Function.Injective (glue F X r T) := by
   exact ha₂.symm.trans ha'₂
 
 /-- The restriction of a morphism `t : T ⟶ X` to `T ×_Y U` factors through `X_U`. -/
-lemma exists_lift (T : Y.Etale) (U : Y.affineOpens) (φ : T.left ⟶ (gluingData F X r).glued)
+lemma exists_lift (T : Y.Etale) (U : 𝔅) (φ : T.left ⟶ (gluingData F X r).glued)
     (hφ : φ ≫ (gluingData F X r).toBase = T.hom) :
     ∃ b : TU T U ⟶ (X U).left, b ≫ (X U).hom = TUsnd T U ∧
-      b.left ≫ colimit.ι (gluingData F X r).functor U = pullback.fst T.hom U.1.ι ≫ φ := by
+      b.left ≫ colimit.ι (gluingData F X r).functor U = pullback.fst (structMap T) U.1.ι ≫ φ := by
   have hpb := (gluingData F X r).isPullback_natTrans_ι_toBase U
-  have hw : pullback.snd T.hom U.1.ι ≫ Y.directedAffineCover.f U =
-      (pullback.fst T.hom U.1.ι ≫ φ) ≫ (gluingData F X r).toBase := by
+  have hw : pullback.snd (structMap T) U.1.ι ≫ (basisCover 𝔅).f U =
+      (pullback.fst (structMap T) U.1.ι ≫ φ) ≫ (gluingData F X r).toBase := by
     rw [Category.assoc, hφ]
     exact pullback.condition.symm
   refine ⟨homMk (hpb.lift _ _ hw) ?_, hom_ext (hpb.lift_fst _ _ _), hpb.lift_snd _ _ _⟩
@@ -345,38 +384,37 @@ lemma glue_surjective (T : Y.Etale) : Function.Surjective (glue F X r T) := by
   intro t
   have ht : t.left ≫ (gluingData F X r).toBase = T.hom := w_left t
   choose b hb₁ hb₂ using fun U ↦ exists_lift T U t.left ht
-  obtain ⟨s, hs, -⟩ := existsUnique_of_isSheaf F (TUfst T) (iUnion_range_TUfst T)
+  obtain ⟨s, hs, -⟩ := existsUnique_of_isSheaf F (TUfst (𝔅 := 𝔅) T) (iUnion_range_TUfst T)
     (fun U ↦ (r U).overElt (b U)) (by
       intro i j Z gi gj hij
       change F.obj.map gi.op ((r i).overElt (b i)) = F.obj.map gj.op ((r j).overElt (b j))
       rw [← (r i).overElt_comp, ← (r j).overElt_comp]
       -- the composite `ψ : Z ⟶ T` lands in `i ∩ j`
       let ψ : Z ⟶ T := gi ≫ TUfst T i
-      have hψ (k : Y.affineOpens) (g : Z ⟶ TU T k) (hg : g ≫ TUfst T k = ψ) (z : Z.left) :
+      have hψ (k : 𝔅) (g : Z ⟶ TU T k) (hg : g ≫ TUfst T k = ψ) (z : Z.left) :
           Z.hom z ∈ k.1 := by
-        have e : (g ≫ TUsnd T k ≫ openHom (le_top (a := k.1))).left =
-            (g ≫ TUfst T k).left ≫ T.hom := by
-          simp [pullback.condition]
-        rw [← w_left (g ≫ TUfst T k), ← e]
-        simp only [comp_left, openHom_left, Scheme.Hom.comp_apply]
-        exact ((Y.homOfLE le_top) ((pullback.snd T.hom k.1.ι) (g.left z))).2
+        have e : g.left ≫ pullback.snd (structMap T) k.1.ι ≫ k.1.ι = Z.hom := by
+          rw [← pullback.condition, ← w_left ψ, ← hg]
+          rfl
+        rw [← e, Scheme.Hom.comp_apply, Scheme.Hom.comp_apply, Scheme.Opens.ι_apply]
+        exact Subtype.prop _
       -- separatedness for the cover of `Z` by its parts over affine opens in `i ∩ j`
-      let I := {U : Y.affineOpens // U ≤ i ∧ U ≤ j}
+      let I := {U : 𝔅 // U ≤ i ∧ U ≤ j}
       refine ext_of_isSheaf F (fun U : I ↦ TUfst Z U.1) ?_ fun U ↦ ?_
       · refine Set.eq_univ_of_forall fun z ↦ ?_
-        obtain ⟨U, hU, hUij⟩ := exists_mem_affineOpens_le (V := i.1 ⊓ j.1)
+        obtain ⟨U, hU, hUij⟩ := exists_mem_basis_le (𝔅 := 𝔅) (V := i.1 ⊓ j.1)
           ⟨hψ i gi rfl z, hψ j gj hij.symm z⟩
         exact Set.mem_iUnion.2 ⟨⟨U, fun x hx ↦ (hUij hx).1, fun x hx ↦ (hUij hx).2⟩,
-          mem_range_pullback_fst Z.hom U.1 hU⟩
+          mem_range_pullback_fst (structMap Z) U.1 hU⟩
       · -- both sides are the section represented by the lift `c : Z ×_Y U ⟶ X_U`
         obtain ⟨U, hUi, hUj⟩ := U
         obtain ⟨c, hc₁, hc₂⟩ := exists_lift Z U (ψ.left ≫ t.left) (by
           rw [Category.assoc, ht, w_left])
-        have hc (V : Y.affineOpens) (hUV : U ≤ V) (g : Z ⟶ TU T V)
+        have hc (V : 𝔅) (hUV : U ≤ V) (g : Z ⟶ TU T V)
             (hg : g ≫ TUfst T V = ψ) : TUfst Z U ≫ g ≫ b V = c ≫ τ F X r hUV := by
           have hpb := (gluingData F X r).isPullback_natTrans_ι_toBase V
           refine hom_ext (hpb.hom_ext ?_ ?_)
-          · rw [← cancel_mono (Y.directedAffineCover.f V)]
+          · rw [← cancel_mono ((basisCover 𝔅).f V)]
             have e₁ := congr_arg (fun f ↦ f.left) (τ_hom (F := F) (X := X) (r := r) hUV)
             have e₂ := congr_arg (fun f ↦ f.left) (hb₁ V)
             have e₃ := congr_arg (fun f ↦ f.left) hc₁
@@ -384,10 +422,21 @@ lemma glue_surjective (T : Y.Etale) : Function.Surjective (glue F X r T) := by
             simp only [comp_left, openHom_left, TUsnd_left, TUfst_left] at e₁ e₂ e₃ e₄
             change (TUfst Z U ≫ g ≫ b V).left ≫ (X V).hom.left ≫ V.1.ι =
               (c ≫ τ F X r hUV).left ≫ (X V).hom.left ≫ V.1.ι
-            simp only [comp_left, Category.assoc]
-            rw [reassoc_of% e₁, reassoc_of% e₂, Scheme.homOfLE_ι, reassoc_of% e₃,
-              pullback.condition, ← pullback.condition, reassoc_of% e₄]
-            simp only [ψ, comp_left, Category.assoc, TUfst_left, w_left]
+            simp only [comp_left, Category.assoc, TUfst_left]
+            have e₅ : g.left ≫ pullback.fst (structMap T) V.1.ι ≫ T.hom = Z.hom := by
+              rw [reassoc_of% e₄]
+              exact w_left ψ
+            calc pullback.fst (structMap Z) U.1.ι ≫ g.left ≫ (b V).left ≫ (X V).hom.left ≫
+                  V.1.ι = pullback.fst (structMap Z) U.1.ι ≫ g.left ≫
+                    pullback.snd (structMap T) V.1.ι ≫ V.1.ι := by rw [reassoc_of% e₂]
+              _ = pullback.fst (structMap Z) U.1.ι ≫ g.left ≫
+                    pullback.fst (structMap T) V.1.ι ≫ T.hom := by
+                rw [← pullback.condition]
+              _ = pullback.snd (structMap Z) U.1.ι ≫ U.1.ι := by
+                rw [e₅]
+                exact pullback.condition
+              _ = c.left ≫ (τ F X r hUV).left ≫ (X V).hom.left ≫ V.1.ι := by
+                rw [reassoc_of% e₁, Scheme.homOfLE_ι, reassoc_of% e₃]
           · have e₅ := congr_arg (fun f ↦ f.left) hg
             simp only [comp_left, TUfst_left] at e₅
             change (TUfst Z U ≫ g ≫ b V).left ≫ colimit.ι (gluingData F X r).functor V =
@@ -400,7 +449,7 @@ lemma glue_surjective (T : Y.Etale) : Function.Surjective (glue F X r T) := by
         rw [← (r i).overElt_comp, ← (r j).overElt_comp, ← Category.assoc, ← Category.assoc,
           Category.assoc (TUfst Z U) gi, hc i hUi gi rfl, Category.assoc (TUfst Z U) gj,
           hc j hUj gj hij.symm, overElt_comp_τ, overElt_comp_τ])
-  refine ⟨s, hom_ext (hom_ext_pullback₁ fun U ↦ ?_)⟩
+  refine ⟨s, hom_ext (hom_ext_pullback₁ (𝔅 := 𝔅) fun U ↦ ?_)⟩
   rw [glue_left, fst_glueLeft T s U (b U) (hb₁ U) (hs U).symm, hb₂]
 
 end Representation
@@ -408,13 +457,15 @@ end Representation
 end Gluing
 
 /-- **Representability by finite étale schemes is Zariski local.** Let `F` be a sheaf of sets on
-the small étale site of `Y` such that for every affine open `U ⊆ Y` the restriction of `F` to
-étale `Y`-schemes over `U` is represented by a finite étale `U`-scheme. Then `F` is represented
-by a finite étale `Y`-scheme. -/
-theorem exists_representableBy_of_forall_affineOpens (F : Sheaf Y.smallEtaleTopology (Type w))
-    (H : ∀ U : Y.affineOpens, ∃ X : Over (openObj U.1), IsFinite X.hom.left ∧
+the small étale site of `Y` and `𝔅` a basis of the topology of `Y` such that for every `U ∈ 𝔅`
+the restriction of `F` to étale `Y`-schemes over `U` is represented by a finite étale
+`U`-scheme. Then `F` is represented by a finite étale `Y`-scheme. -/
+theorem exists_representableBy_of_isBasis (F : Sheaf Y.smallEtaleTopology (Type w))
+    (𝔅 : Set Y.Opens) (h𝔅 : TopologicalSpace.Opens.IsBasis 𝔅)
+    (H : ∀ U : 𝔅, ∃ X : Over (openObj U.1), IsFinite X.hom.left ∧
       Nonempty (((Over.forget (openObj U.1)).op ⋙ F.obj).RepresentableBy X)) :
     ∃ X : Y.Etale, IsFinite X.hom ∧ Nonempty (F.obj.RepresentableBy X) := by
+  have : Fact (TopologicalSpace.Opens.IsBasis 𝔅) := ⟨h𝔅⟩
   choose X hX r using H
   let r' U := (r U).some
   refine ⟨XG F X r', gluingData_toBase_mem F X r' @IsFinite hX, ⟨?_⟩⟩

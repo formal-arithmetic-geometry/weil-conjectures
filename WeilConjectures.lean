@@ -239,6 +239,7 @@ public import WeilConjectures.AlgebraicGeometry.Modules.LocallyFreeAffine
 public import WeilConjectures.AlgebraicGeometry.Modules.LocallyFreeRank
 public import WeilConjectures.AlgebraicGeometry.Modules.PicardAffine
 public import WeilConjectures.AlgebraicGeometry.Modules.ProjectionFormula
+public import WeilConjectures.AlgebraicGeometry.Modules.PullbackAffineSections
 public import WeilConjectures.AlgebraicGeometry.Modules.PullbackFreeGenerator
 public import WeilConjectures.AlgebraicGeometry.Modules.PullbackMonoidal
 public import WeilConjectures.AlgebraicGeometry.Modules.PullbackTilde
@@ -490,6 +491,7 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.Complete.Rationaliz
 public import WeilConjectures.CategoryTheory.DerivedCategory.Complete.SmulInvertible
 public import WeilConjectures.CategoryTheory.DerivedCategory.Complete.TensorQuotPow
 public import WeilConjectures.CategoryTheory.DerivedCategory.Constructible
+public import WeilConjectures.CategoryTheory.DerivedCategory.ExtPlus
 public import WeilConjectures.CategoryTheory.DerivedCategory.FlatModel
 public import WeilConjectures.CategoryTheory.DerivedCategory.FlatModelOfClass
 public import WeilConjectures.CategoryTheory.DerivedCategory.HasMonoidalDerivedCategory
@@ -1383,7 +1385,9 @@ public import WeilConjectures.PointCount
 public import WeilConjectures.PointCountBound
 public import WeilConjectures.RepresentationTheory.Clifford
 public import WeilConjectures.RepresentationTheory.DiscreteModule.Basic
+public import WeilConjectures.RepresentationTheory.DiscreteModule.CohomologicalDimension
 public import WeilConjectures.RepresentationTheory.DiscreteModule.Induction
+public import WeilConjectures.RepresentationTheory.DiscreteModule.Sylow
 public import WeilConjectures.RepresentationTheory.FiniteMatrixWitness
 public import WeilConjectures.RepresentationTheory.IntegralModel
 public import WeilConjectures.RingTheory.BertiniNoether

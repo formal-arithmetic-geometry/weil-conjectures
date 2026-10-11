@@ -65,7 +65,7 @@ theorem exists_etale_isPullback_of_isAffine {I : Type u} [Category.{u} I] [IsCof
     rw [← ConcreteCategory.comp_apply, ← Scheme.Hom.comp_appTop, c.w g]
     exact hs b
   let R := Γ(A.obj i₀, ⊤)
-  letI : Algebra R Γ(c.pt, ⊤) := (c.π.app i₀).appTop.hom.toAlgebra
+  let _ : Algebra R Γ(c.pt, ⊤) := (c.π.app i₀).appTop.hom.toAlgebra
   have hf : (P.f.coeffs : Set Γ(c.pt, ⊤)) ⊆ Set.range (algebraMap R Γ(c.pt, ⊤)) :=
     fun b hb ↦ hmem b (Finset.mem_union_left _ hb)
   have hg : (P.g.coeffs : Set Γ(c.pt, ⊤)) ⊆ Set.range (algebraMap R Γ(c.pt, ⊤)) :=
@@ -107,5 +107,190 @@ theorem exists_etale_isPullback_of_isAffine {I : Type u} [Category.{u} I] [IsCof
   refine ⟨i₀, _, inferInstance, _, inferInstance, _, _, _, hsq, e, ?_, hz⟩
   rw [← he]
   simp
+
+section Stage
+
+variable {J : Type u} [SmallCategory J] [IsCofiltered J] (D : J ⥤ Scheme.{u}) (c : Cone D)
+  (hc : IsLimit c) [∀ {i j} (f : i ⟶ j), IsAffineHom (D.map f)]
+
+include hc in
+/-- **Étale schemes over a base change to the limit are locally dominated by base changes from a
+stage.** Let `X = lim Dⱼ` be a cofiltered limit with affine transition maps, `p : V ⟶ Dₖ` étale
+and `β : Z ⟶ V ×_{Dₖ} X` étale. Every point of `Z` lies in the image of a morphism
+`γ : E ×_{Dₖ'} X ⟶ Z` over `V ×_{Dₖ} X` from the base change of an affine scheme `E` étale over
+a later stage `Dₖ'` and mapping to `V`. -/
+theorem exists_etale_refinement_of_isLimit {k : J} {V : Scheme.{u}} (p : V ⟶ D.obj k)
+    [Etale p] {Z : Scheme.{u}} (β : Z ⟶ pullback p (c.π.app k)) [Etale β] (z : Z) :
+    ∃ (k' : J) (f : k' ⟶ k) (E : Scheme.{u}) (_ : IsAffine E) (q : E ⟶ D.obj k') (_ : Etale q)
+      (e : E ⟶ V) (he : e ≫ p = q ≫ D.map f) (E' : Scheme.{u}) (π₁ : E' ⟶ E)
+      (π₂ : E' ⟶ c.pt) (hπ : IsPullback π₁ π₂ q (c.π.app k')) (γ : E' ⟶ Z),
+      γ ≫ β = pullback.lift (π₁ ≫ e) π₂
+        (by rw [Category.assoc, he, reassoc_of% hπ.w, c.w f]) ∧ z ∈ Set.range γ := by
+  -- an affine open `O` of `V` around the image of `z`
+  obtain ⟨O, hO, hxO, -⟩ := exists_isAffineOpen_mem_and_subset
+    (X := V) (x := pullback.fst p (c.π.app k) (β z)) (U := ⊤) trivial
+  have : IsAffine O := hO
+  let pO : O.toScheme ⟶ D.obj k := O.ι ≫ p
+  -- the open `Z_O` of `Z` lying over `O`
+  let ZO : Z.Opens := (β ≫ pullback.fst p (c.π.app k)) ⁻¹ᵁ O
+  have hzO : z ∈ ZO := hxO
+  let r : ZO.toScheme ⟶ O.toScheme := (β ≫ pullback.fst p (c.π.app k)).resLE O ZO le_rfl
+  have hr : r ≫ O.ι = ZO.ι ≫ β ≫ pullback.fst p (c.π.app k) := Scheme.Hom.resLE_comp_ι _ _
+  let β' : ZO.toScheme ⟶ pullback pO (c.π.app k) :=
+    pullback.lift r (ZO.ι ≫ β ≫ pullback.snd _ _) (by
+      rw [Category.assoc, Category.assoc, ← pullback.condition, ← reassoc_of% hr])
+  have hβ'₂ : β' ≫ pullback.snd pO (c.π.app k) = ZO.ι ≫ β ≫ pullback.snd _ _ :=
+    pullback.lift_snd _ _ _
+  have : Etale (β' ≫ pullback.snd pO (c.π.app k)) := by
+    rw [hβ'₂]
+    infer_instance
+  have : Etale β' := Etale.of_comp β' (pullback.snd pO (c.π.app k))
+  have (j : Over k) : IsAffine ((baseChangeDiagram D pO).obj j) :=
+    inferInstanceAs (IsAffine (pullback pO (D.map j.hom)))
+  obtain ⟨i, E, hE, q, hq, E', π₁, π₂, hπ, γ', hγ', hz'⟩ :=
+    exists_etale_isPullback_of_isAffine (baseChangeDiagram D pO) (baseChangeCone D c pO)
+      (isLimitBaseChangeCone D c pO hc) β' ⟨z, hzO⟩
+  have hπ' : IsPullback π₁ (π₂ ≫ pullback.snd pO (c.π.app k))
+      (q ≫ pullback.snd pO (D.map i.hom)) (c.π.app i.left) :=
+    hπ.paste_vert (isPullback_baseChangeCone_π D c pO i)
+  have he : (q ≫ pullback.fst pO (D.map i.hom) ≫ O.ι) ≫ p =
+      (q ≫ pullback.snd pO (D.map i.hom)) ≫ D.map i.hom := by
+    simp only [Category.assoc]
+    rw [← pullback.condition]
+  refine ⟨i.left, i.hom, E, hE, q ≫ pullback.snd pO (D.map i.hom), inferInstance,
+    q ≫ pullback.fst pO (D.map i.hom) ≫ O.ι, he, E', π₁, π₂ ≫ pullback.snd pO (c.π.app k), hπ',
+    γ' ≫ ZO.ι, ?_, ?_⟩
+  · have h1 : r = β' ≫ pullback.fst pO (c.π.app k) := (pullback.lift_fst _ _ _).symm
+    have key : ZO.ι ≫ β ≫ pullback.fst p (c.π.app k) =
+        β' ≫ pullback.fst pO (c.π.app k) ≫ O.ι := by
+      rw [← hr, h1, Category.assoc]
+    have h2 : π₂ ≫ pullback.fst pO (c.π.app k) ≫ O.ι =
+        π₁ ≫ q ≫ pullback.fst pO (D.map i.hom) ≫ O.ι := by
+      have h3 : (baseChangeCone D c pO).π.app i ≫ pullback.fst pO (D.map i.hom) =
+          pullback.fst pO (c.π.app k) := baseChangeCone_π_app_fst D c pO i
+      calc π₂ ≫ pullback.fst pO (c.π.app k) ≫ O.ι
+          = π₂ ≫ ((baseChangeCone D c pO).π.app i ≫ pullback.fst pO (D.map i.hom)) ≫ O.ι := by
+            rw [h3]
+        _ = (π₁ ≫ q) ≫ pullback.fst pO (D.map i.hom) ≫ O.ι := by
+            rw [hπ.w]; simp only [Category.assoc]
+        _ = _ := by simp only [Category.assoc]
+    apply pullback.hom_ext
+    · rw [pullback.lift_fst]
+      simp only [Category.assoc]
+      rw [key]
+      exact ((reassoc_of% hγ') _).trans h2
+    · rw [pullback.lift_snd]
+      simp only [Category.assoc]
+      rw [← hβ'₂]
+      exact (reassoc_of% hγ') (pullback.snd pO (c.π.app k))
+  · obtain ⟨w, hw⟩ := hz'
+    exact ⟨w, by rw [Scheme.Hom.comp_apply, hw]; rfl⟩
+
+section OverBase
+
+variable [∀ j, CompactSpace (D.obj j)] [∀ j, QuasiSeparatedSpace (D.obj j)]
+  {R : Scheme.{u}} (π : D ⟶ (Functor.const J).obj R)
+
+/-- (Implementation) The structure morphism to `R` of the base change of the diagram along a
+morphism `q : E ⟶ Dₖ`. -/
+@[simps]
+noncomputable def baseChangeDiagramToBase {k : J} {E : Scheme.{u}} (q : E ⟶ D.obj k) :
+    baseChangeDiagram D q ⟶ (Functor.const (Over k)).obj R where
+  app j := pullback.snd q (D.map j.hom) ≫ π.app j.left
+  naturality {j j'} g := by
+    have h := π.naturality g.left
+    simp only [Functor.const_obj_obj, Functor.const_obj_map, Category.comp_id] at h ⊢
+    rw [baseChangeDiagram_map_snd_assoc, h]
+
+include hc in
+/-- **Morphisms to a scheme of finite presentation over the base descend to a stage.** Let
+`q : E ⟶ Dₖ` with `E` quasi-compact and quasi-separated, and let `u : U ⟶ R` be locally of
+finite presentation. Every `R`-morphism `E ×_{Dₖ} X ⟶ U` factors through `E ×_{Dₖ} Dₖ'` for some
+`k' ⟶ k`. -/
+theorem exists_hom_descent_of_isLimit {k : J} {E : Scheme.{u}} (q : E ⟶ D.obj k)
+    [CompactSpace E] [QuasiSeparatedSpace E] {U : Scheme.{u}} (u : U ⟶ R)
+    [LocallyOfFinitePresentation u] (φ : pullback q (c.π.app k) ⟶ U)
+    (hφ : φ ≫ u = pullback.snd q (c.π.app k) ≫ c.π.app k ≫ π.app k) :
+    ∃ (k' : J) (f : k' ⟶ k) (ψ : pullback q (D.map f) ⟶ U),
+      ψ ≫ u = pullback.snd q (D.map f) ≫ π.app k' ∧
+        pullback.map q (c.π.app k) q (D.map f) (𝟙 _) (c.π.app k') (𝟙 _) (by simp)
+          (by simp) ≫ ψ = φ := by
+  obtain ⟨j, g, hg, hgu⟩ := Scheme.exists_π_app_comp_eq_of_locallyOfFinitePresentation
+    (baseChangeDiagram D q) (baseChangeDiagramToBase D π q) u (baseChangeCone D c q)
+    (isLimitBaseChangeCone D c q hc) φ (by
+      ext j
+      have h₁ := π.naturality j.hom
+      simp only [Functor.const_obj_obj, Functor.const_obj_map, Category.comp_id] at h₁
+      simp only [Functor.const_obj_obj, NatTrans.comp_app, baseChangeCone_π_app,
+        baseChangeDiagramToBase_app, Functor.const_map_app, hφ]
+      rw [pullback.lift_snd_assoc, ← h₁, Category.assoc, c.w_assoc])
+  exact ⟨j.left, j.hom, g, hgu, hg⟩
+
+omit [∀ j, CompactSpace (D.obj j)] [∀ j, QuasiSeparatedSpace (D.obj j)] in
+include hc in
+/-- **Equalities of morphisms to a scheme of finite type over the base descend to a stage.** -/
+theorem exists_eq_descent_of_isLimit {k : J} {E : Scheme.{u}} (q : E ⟶ D.obj k)
+    [CompactSpace E] {U : Scheme.{u}} (u : U ⟶ R) [LocallyOfFiniteType u] (ψ₁ ψ₂ : E ⟶ U)
+    (h₁ : ψ₁ ≫ u = q ≫ π.app k) (h₂ : ψ₂ ≫ u = q ≫ π.app k)
+    (h : pullback.fst q (c.π.app k) ≫ ψ₁ = pullback.fst q (c.π.app k) ≫ ψ₂) :
+    ∃ (k' : J) (f : k' ⟶ k), pullback.fst q (D.map f) ≫ ψ₁ = pullback.fst q (D.map f) ≫ ψ₂ := by
+  obtain ⟨j, hj, heq⟩ := Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType
+    (baseChangeDiagram D q) (baseChangeDiagramToBase D π q) u (baseChangeCone D c q)
+    (isLimitBaseChangeCone D c q hc) (i := Over.mk (𝟙 k))
+    (pullback.fst _ _ ≫ ψ₁) (pullback.fst _ _ ≫ ψ₂)
+    (by simp [h₁, pullback.condition_assoc]) (by simp [h₂, pullback.condition_assoc])
+    (by rw [baseChangeCone_π_app_fst_assoc, baseChangeCone_π_app_fst_assoc, h])
+  exact ⟨j.left, j.hom, by simpa using heq⟩
+
+end OverBase
+
+section Cover
+
+variable [∀ j, CompactSpace (D.obj j)]
+
+include hc in
+/-- **Coverings descend to a stage.** Let `p : V ⟶ Dₖ` with `V` quasi-compact and let
+`eᵢ : Eᵢ ⟶ V` be finitely many étale morphisms. If every point of `V ×_{Dₖ} X` maps into one of
+the images of the `eᵢ`, then from some stage `k'` on, every point of `V ×_{Dₖ} Dₖ''` does. -/
+theorem exists_forall_mem_range_of_isLimit {k : J} {V : Scheme.{u}} (p : V ⟶ D.obj k)
+    [CompactSpace V] {ι : Type*} {E : ι → Scheme.{u}} (e : ∀ i, E i ⟶ V) [∀ i, Etale (e i)]
+    (h : ∀ x : ↥(pullback p (c.π.app k)), ∃ i, pullback.fst p (c.π.app k) x ∈ Set.range (e i)) :
+    ∃ (k' : J) (f : k' ⟶ k), ∀ (k'' : J) (g : k'' ⟶ k') (x : ↥(pullback p (D.map (g ≫ f)))),
+      ∃ i, pullback.fst p (D.map (g ≫ f)) x ∈ Set.range (e i) := by
+  let Ω : V.Opens := ⨆ i, ⟨Set.range (e i), (e i).isOpenMap.isOpen_range⟩
+  have hΩ (y : V) : y ∈ Ω ↔ ∃ i, y ∈ Set.range (e i) := by
+    simp [Ω]
+  obtain ⟨j, fj, hj⟩ := exists_map_eq_top (baseChangeDiagram D p) (baseChangeCone D c p)
+    (isLimitBaseChangeCone D c p hc) (i := Over.mk (𝟙 k))
+    (pullback.fst p (D.map (𝟙 k)) ⁻¹ᵁ Ω) (by
+      ext x
+      simp only [TopologicalSpace.Opens.coe_top, Set.mem_univ, iff_true]
+      change (((baseChangeCone D c p).π.app (Over.mk (𝟙 k)) ≫
+        pullback.fst p (D.map (𝟙 k))) x) ∈ Ω
+      have e₁ : (baseChangeCone D c p).π.app (Over.mk (𝟙 k)) ≫ pullback.fst p (D.map (𝟙 k)) =
+          pullback.fst p (c.π.app k) := baseChangeCone_π_app_fst D c p (Over.mk (𝟙 k))
+      rw [e₁, hΩ]
+      exact h x)
+  refine ⟨j.left, j.hom, fun k'' g x ↦ ?_⟩
+  let y : ↥(pullback p (D.map j.hom)) := pullback.map p (D.map (g ≫ j.hom)) p (D.map j.hom)
+    (𝟙 _) (D.map g) (𝟙 _) (by simp) (by simp) x
+  have hy : y ∈ (baseChangeDiagram D p).map fj ⁻¹ᵁ pullback.fst p (D.map (𝟙 k)) ⁻¹ᵁ Ω := by
+    rw [hj]
+    trivial
+  rw [← hΩ]
+  change ((baseChangeDiagram D p).map fj ≫ pullback.fst p (D.map (𝟙 k))) y ∈ Ω at hy
+  have e₂ : (baseChangeDiagram D p).map fj ≫ pullback.fst p (D.map (𝟙 k)) =
+      pullback.fst p (D.map j.hom) := baseChangeDiagram_map_fst D p fj
+  have hxy : pullback.fst p (D.map j.hom) y = pullback.fst p (D.map (g ≫ j.hom)) x := by
+    change (pullback.map p (D.map (g ≫ j.hom)) p (D.map j.hom) (𝟙 _) (D.map g) (𝟙 _)
+      (by simp) (by simp) ≫ pullback.fst p (D.map j.hom)) x = _
+    rw [pullback.lift_fst, Category.comp_id]
+  rw [e₂] at hy
+  rw [← hxy]
+  exact hy
+
+end Cover
+
+end Stage
 
 end AlgebraicGeometry
