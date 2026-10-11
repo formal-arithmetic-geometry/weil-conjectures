@@ -19,7 +19,9 @@
  "stmt_deps": [
   "def-pc-scheme",
   "def-pc-derived-category",
-  "def-pc-perfect-complex"
+  "def-pc-perfect-complex",
+  "def-pc-derived-pullback",
+  "lem-pc-ringed-spaces-derived-pullback-composition"
  ],
  "proof": [
   {
@@ -164,5 +166,28 @@
   "group": "F1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-pdm2800 (reviewer sub-agent of L); spot-checked: Statement vs Tag 09RE (perfect/perfect case) and its use in lem-pc-perfect-complex-descent step 3 (applied on W_i cap V_i, finitely presented): matches. New node lem-pc-affine-perfect-hom-colimit: true, real affine lemma, not a duplicate of lem-pc-affine-perfect-colimit-descent. FIX more, RETURN less: (1) C1 Step 1: the Mayer-Vietoris Hom sequence needed the open-immersion adjunction (now cites lem-pc-ringed-spaces-derived-adjoint), the five lemma (lem-weil-pbc-five-lemma), the property quantified over all shifts n, and perfect in D_QCoh for the triangle (Tag 08DB, inline); (2) C1 Step 2: passage from D(O_U) to D(A) and perfect = bounded finite projective were uncited; now cites lem-pc-perfect-affine-bounded-projective and lem-pc-affine-qcoh-derived-equivalence, takes K_0 bounded finite projective (K-flat, Tag 0649) and flat-term pullback; (3) Step 3: inverse g was typed P_j->Q_j, corrected to Q_j->P_j and derived from the n=0 bijection. Faults missed by the F1 second reading.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.PerfectDescendMorphisms",
+  "declaration": "AlgebraicGeometry.perfect_descend_morphisms",
+  "declarations": [
+   "AlgebraicGeometry.perfectDescentComparison",
+   "AlgebraicGeometry.perfect_descend_morphisms"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/PerfectDescendMorphisms.lean",
+  "statement": "theorem perfect_descend_morphisms {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] (R : I ⥤ CommRingCat.{u}) (c : Cocone R) (hc : IsColimit c) (i : I) (Xi : Scheme.{u}) (s : Xi ⟶ Spec (R.obj i)) [LocallyOfFinitePresentation s] [QuasiCompact s] [QuasiSeparated s] [∀ Z : Scheme.{u}, HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))] [∀ U : Xi.Opens, HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings Xi.toRingedSpace).over U))] (Pi Qi : schemeDerivedCategory Xi) (hP : Xi.IsPerfect Pi) (hQ : Xi.IsPerfect Qi) : (∀ φ : (derivedPullback (pullback.fst s (Spec.map (c.ι.app i)))).obj Pi ⟶ (derivedPullback (pullback.fst s (Spec.map (c.ι.app i)))).obj Qi, ∃ (j : I) (hij : i ≤ j) (φj : (derivedPullback (pullback.fst s (Spec.map (R.map (homOfLE hij))))).obj Pi ⟶ (derivedPullback (pullback.fst s (Spec.map (R.map (homOfLE hij))))).obj Qi), (perfectDescentComparison s (T := Over.mk (Spec.map (R.map (homOfLE hij)))) (T' := Over.mk (Spec.map (c.ι.app i))) (Over.homMk (Spec.map (c.ι.app j)) (by dsimp; rw [← Spec.map_comp, c.w (homOfLE hij)]))).hom.app Pi ≫ (derivedPullback (baseChangeMap s (T := Over.mk (Spec.map (R.map (homOfLE hij)))) (T' := Over.mk (Spec.map (c.ι.app i))) (Over.homMk (Spec.map (c.ι.app j)) (by dsimp; rw [← Spec.map_comp, c.w (homOfLE hij)])))).map φj = φ ≫ (perfectDescentComparison s (T := Over.mk (Spec.map (R.map (homOfLE hij)))) (T' := Over.mk (Spec.map (c.ι.app i))) (Over.homMk (Spec.map (c.ι.app j)) (by dsimp; rw [← Spec.map_comp, c.w (homOfLE hij)]))).hom.app Qi ∧ (IsIso φ → IsIso φj)) ∧ (∀ (j : I) (hij : i ≤ j) (n : ℕ) (a b : Fin n → ((derivedPullback (pullback.fst s (Spec.map (R.map (homOfLE hij))))).obj Pi ⟶ (derivedPullback (pullback.fst s (Spec.map (R.map (homOfLE hij))))).obj Qi)), (∀ t : Fin n, (derivedPullback (baseChangeMap s (T := Over.mk (Spec.map (R.map (homOfLE hij)))) (T' := Over.mk (Spec.map (c.ι.app i))) (Over.homMk (Spec.map (c.ι.app j)) (by dsimp; rw [← Spec.map_comp, c.w (homOfLE hij)])))).map (a t) = (derivedPullback (baseChangeMap s (T := Over.mk (Spec.map (R.map (homOfLE hij)))) (T' := Over.mk (Spec.map (c.ι.app i))) (Over.homMk (Spec.map (c.ι.app j)) (by dsimp; rw [← Spec.map_comp, c.w (homOfLE hij)])))).map (b t)) → ∃ (k : I) (hjk : j ≤ k), ∀ t : Fin n, (derivedPullback (baseChangeMap s (T := Over.mk (Spec.map (R.map (homOfLE hij)))) (T' := Over.mk (Spec.map (R.map (homOfLE (hij.trans hjk))))) (Over.homMk (Spec.map (R.map (homOfLE hjk))) (by dsimp; rw [← Spec.map_comp, ← R.map_comp]; rfl)))).map (a t) = (derivedPullback (baseChangeMap s (T := Over.mk (Spec.map (R.map (homOfLE hij)))) (T' := Over.mk (Spec.map (R.map (homOfLE (hij.trans hjk))))) (Over.homMk (Spec.map (R.map (homOfLE hjk))) (by dsimp; rw [← Spec.map_comp, ← R.map_comp]; rfl)))).map (b t))",
+  "branch": "sheaf-dag",
+  "by": "J1",
+  "date": "2026-10-11",
+  "existing": false,
+  "note": "The comparison specializes the counit-pinned coherent family of exists_derivedPullbackComposition. Derived pullback and its newly landed composition node are added as statement dependencies; the mathematical statement is unchanged."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-pdm1348",
+  "group": "J1",
+  "result": "pass",
+  "note": "Tag 09RE: directed I:Type u (DIRECTED SETS), R:I⥤CommRingCat.{u}, cocone+IsColimit, s fp = LOFP+QC+QS, X_j/X as pullback s Spec.map(...), Pi Qi with Scheme.IsPerfect, P_j/P as derivedPullback of pullback.fst; clause 1 surjectivity with comparison from the landed coherent c (choose_spec x3, no second pullback) and IsIso phi -> IsIso phi_j in the same existential; clause 2 finite Fin n equalities at a common k (compositions covered by instantiating Qi:=Pi); #check baseChangeMap is the TwistedDescent one, not Scheme.baseChangeMap"
  }
 }
