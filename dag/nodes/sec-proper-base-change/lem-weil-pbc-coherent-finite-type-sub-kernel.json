@@ -197,5 +197,23 @@
   "by": "L",
   "result": "accepted",
   "note": "5 steps following Modules 01BY (1), (2): conventions (restriction, maps from free modules, sectionwise kernels); (1) a map into the subsheaf has the same kernel as its composite into G; (2) local generators, the kernel K of the composite is of finite type by coherence, K -> (Ker phi)|_U is an epimorphism by the local-lifting node in both directions (the source's 'image' claim written out), and the image of a finite type module is of finite type by the image-extension node. Statement unchanged. Stage-3 note: pqf-def-coherent cites tag 01DW where 01BV is meant (already noted at the citer's review)."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.CoherentFiniteTypeSubKernel",
+  "declaration": "AlgebraicGeometry.RingedSpace.coherent_finiteType_submodule_kernel",
+  "file": "lean/Sheaf/AlgebraicGeometry/CoherentFiniteTypeSubKernel.lean",
+  "statement": "theorem coherent_finiteType_submodule_kernel (X : RingedSpace.{u}) : (∀ (K G : SheafOfModules.{u} (moduleRings X)) (i : K ⟶ G) [Mono i], K.IsFiniteType → IsCoherent X G → IsCoherent X K) ∧ (∀ (F G : SheafOfModules.{u} (moduleRings X)) (φ : F ⟶ G), F.IsFiniteType → IsCoherent X G → (kernel φ).IsFiniteType)",
+  "by": "G1",
+  "date": "2026-10-11",
+  "existing": false,
+  "branch": "sheaf-dag"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-cfk1207",
+  "group": "G1",
+  "result": "pass",
+  "note": "RingedSpace X (node's own ringed-space extension, as FinitePresentationBiprod); (1) K,G : SheafOfModules (moduleRings X), Mono i = sub-module, K.IsFiniteType, IsCoherent X G -> IsCoherent X K; (2) phi : F -> G, F.IsFiniteType, IsCoherent X G -> (kernel phi).IsFiniteType; neither clause is the IsCoherent definition unfolded (K not free, F not free); Mono not hollow; one universe u; #check universes; spellings as locnoeth sibling"
  }
 }
