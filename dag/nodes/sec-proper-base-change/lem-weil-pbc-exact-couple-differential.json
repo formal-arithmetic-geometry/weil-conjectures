@@ -206,5 +206,23 @@
   "by": "L",
   "result": "pass",
   "note": "lem-sp-couple-morphism (unit sk-prop-av-pqf-finite, off the route) accepted as a tool use per the ruling in SETUP.md; the new node lem-weil-pbc-derived-exchange-triangulated filed by the lead under sk-def-exchange"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.ExactCoupleDifferential",
+  "declaration": "AlgebraicGeometry.Etale.exact_couple_differential",
+  "file": "lean/Sheaf/Paper/ExactCoupleDifferential.lean",
+  "statement": "theorem exact_couple_differential {X' X Y' Y : Scheme.{u}} {g' : X' ⟶ X} {f' : X' ⟶ Y'} {f : X ⟶ Y} {g : Y' ⟶ Y} (sq : IsPullback g' f' f g) (K : _root_.DerivedCategory.Plus (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1})) (a : ℤ) (_hT : ∀ q : ℤ, ((_root_.DerivedCategory.Plus.homologyFunctor _ q).obj K).IsTorsion) (_hbelow : ∀ q : ℤ, q < a → IsZero ((_root_.DerivedCategory.Plus.homologyFunctor _ q).obj K)) : ∃ P Q : BigradedExactCouple (Sheaf Y'.smallEtaleTopology AddCommGrpCat.{u + 1}) 0, ∃ hPE : P.E = E (truncationPhi f g) K, ∃ hQE : Q.E = E (truncationPsi g' f') K, P.D = D (truncationPhi f g) K ∧ Q.D = D (truncationPsi g' f') K ∧ HEq P.alpha (alpha (truncationPhi f g) K) ∧ HEq Q.alpha (alpha (truncationPsi g' f') K) ∧ HEq P.f (CategoryTheory.TruncationExchange.f (truncationPhi f g) K) ∧ HEq Q.f (CategoryTheory.TruncationExchange.f (truncationPsi g' f') K) ∧ HEq P.g (CategoryTheory.TruncationExchange.g (truncationPhi f g) K) ∧ HEq Q.g (CategoryTheory.TruncationExchange.g (truncationPsi g' f') K) ∧ (∀ p q : ℤ, alpha (truncationPhi f g) K p q ≫ tD (derivedBaseChangeMapPlus AddCommGrpCat.{u + 1} sq.toCommSq) K (p - 1) (q + 1) = tD (derivedBaseChangeMapPlus AddCommGrpCat.{u + 1} sq.toCommSq) K p q ≫ alpha (truncationPsi g' f') K p q) ∧ (∀ p q : ℤ, CategoryTheory.TruncationExchange.g (truncationPhi f g) K p q ≫ tE (derivedBaseChangeMapPlus AddCommGrpCat.{u + 1} sq.toCommSq) K p q = tD (derivedBaseChangeMapPlus AddCommGrpCat.{u + 1} sq.toCommSq) K p q ≫ CategoryTheory.TruncationExchange.g (truncationPsi g' f') K p q) ∧ (∀ p q : ℤ, CategoryTheory.TruncationExchange.f (truncationPhi f g) K p q ≫ tD (derivedBaseChangeMapPlus AddCommGrpCat.{u + 1} sq.toCommSq) K (p + 2) (q - 1) = tE (derivedBaseChangeMapPlus AddCommGrpCat.{u + 1} sq.toCommSq) K p q ≫ CategoryTheory.TruncationExchange.f (truncationPsi g' f') K p q) ∧ (∃ t : ∀ (n : ℕ) (p q : ℤ), (P.pageCouple n).E p q ⟶ (Q.pageCouple n).E p q, (∀ p q : ℤ, t 0 p q = eqToHom (congrFun (congrFun hPE p) q) ≫ tE (derivedBaseChangeMapPlus AddCommGrpCat.{u + 1} sq.toCommSq) K p q ≫ eqToHom (congrFun (congrFun hQE p) q).symm) ∧ (∀ (n : ℕ) (p q : ℤ), (P.pageCouple n).d p q ≫ t n (p + 2 + n) (q - 1 - n) = t n p q ≫ (Q.pageCouple n).d p q) ∧ (∀ (n : ℕ) (p q : ℤ), ∃ k : kernel ((P.pageCouple n).d p q) ⟶ kernel ((Q.pageCouple n).d p q), k ≫ kernel.ι ((Q.pageCouple n).d p q) = kernel.ι ((P.pageCouple n).d p q) ≫ t n p q ∧ (P.pageCouple n).derivedEProjection p q ≫ t (n + 1) p q = k ≫ (Q.pageCouple n).derivedEProjection p q)) ∧ (∀ p q : ℤ, tE (derivedBaseChangeMapPlus AddCommGrpCat.{u + 1} sq.toCommSq) K p q ≫ (pageIso (truncationPsi g' f') K p q ≪≫ truncationTargetIso g' f' ((_root_.DerivedCategory.Plus.homologyFunctor _ q).obj K) p).hom = (pageIso (truncationPhi f g) K p q ≪≫ truncationSourceIso f g ((_root_.DerivedCategory.Plus.homologyFunctor _ q).obj K) p).hom ≫ (truncationSourceIso f g ((_root_.DerivedCategory.Plus.homologyFunctor _ q).obj K) p).inv ≫ (_root_.DerivedCategory.Plus.homologyFunctor (Sheaf Y'.smallEtaleTopology AddCommGrpCat.{u + 1}) p).map ((derivedBaseChangeMapPlus AddCommGrpCat.{u + 1} sq.toCommSq).app (sheaf K q)) ≫ (truncationTargetIso g' f' ((_root_.DerivedCategory.Plus.homologyFunctor _ q).obj K) p).hom)",
+  "branch": "sheaf-dag",
+  "by": "R1",
+  "date": "2026-10-12",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "R1",
+  "result": "pass",
+  "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
  }
 }
