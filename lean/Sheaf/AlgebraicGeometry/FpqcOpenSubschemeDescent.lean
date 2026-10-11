@@ -1,0 +1,55 @@
+/-
+Copyright (c) 2026 The SHEAF contributors. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: SHEAF group E1
+-/
+import Mathlib.AlgebraicGeometry.Sites.Fpqc
+import Mathlib.AlgebraicGeometry.Restrict
+import Mathlib.AlgebraicGeometry.Pullbacks
+
+/-!
+# Fpqc descent of compatible open subschemes
+
+Source: literature/stacks-project/descent.tex, Lemma Tag 03N0
+(blueprint: lem-weil-pbc-open-subscheme-fpqc-descent).
+-/
+
+open CategoryTheory CategoryTheory.Limits
+open AlgebraicGeometry
+
+universe u v
+
+namespace AlgebraicGeometry
+
+/-- Compatible open subschemes descend uniquely along an fpqc covering.
+
+Source: literature/stacks-project/descent.tex, Lemma Tag 03N0.
+(blueprint: lem-weil-pbc-open-subscheme-fpqc-descent).
+
+Proof:
+1. By the fibre-product point description (`lem-weil-pbc-fibre-product-points`),
+   compatibility implies that the subset W = ⋃ i, g i (W i) has inverse image W i
+   under every g i. Joint surjectivity from `def-weil-pbc-fpqc-covering` makes
+   this subset unique.
+2. Openness is local on the base: restrict the family and the opens over an
+   arbitrary affine open U of S.
+3. Choose a finite standard fpqc refinement over U using
+   `lem-weil-pbc-fpqc-affine-standard-refinement`. Each refinement member has
+   open inverse image of W, since it factors through a T i and pulls back W i.
+4. Apply `lem-weil-pbc-standard-fpqc-quotient-topology` to that standard cover
+   to conclude W is open on U. Hence W is open on S.
+5. Joint surjectivity uniquely determines its underlying subset; an open
+   subscheme is determined by that subset with the restricted structure sheaf.
+-/
+theorem openSubscheme_existsUnique_of_fpqc
+    {S : Scheme.{u}} {I : Type v} {T : I → Scheme.{u}}
+    (g : ∀ i, T i ⟶ S)
+    (hg : Presieve.ofArrows T g ∈ Scheme.fpqcPrecoverage S)
+    (W : ∀ i, (T i).Opens)
+    (hW : ∀ (i j : I),
+      (pullback.fst (g i) (g j) ⁻¹ᵁ W i) =
+        (pullback.snd (g i) (g j) ⁻¹ᵁ W j)) :
+    ∃! V : S.Opens, ∀ i, (g i ⁻¹ᵁ V) = W i := by
+  sorry
+
+end AlgebraicGeometry

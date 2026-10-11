@@ -145,5 +145,23 @@
   "group": "H1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-osd1819 (reviewer sub-agent of L); spot-checked: Steps 1-5 against Tag 03N0: set-theoretic descent via fibre-product points (pr_0^{-1}W_i=pr_1^{-1}W_j gives g_i^{-1}(W)=W_i), affine reduction, refinement node true (flat + images cover U => R->prod A_j faithfully flat), f_j^{-1}(W)=V_j cap W_{a(j)} open, quotient-topology node = Tag 02JY on Spec(prod A_j); no cycle: etale-open-fpqc-descent and etale-sections-fpqc-descent depend on the item, not conversely; grep Submersive|isQuotientMap in Mathlib/AlgebraicGeometry/Morphisms: only one-morphism Flat.isQuotientMap_of_surjective (Flat.lean:124), family version needs the coproduct identification, kept as statement node; no repairs"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FpqcOpenSubschemeDescent",
+  "declaration": "AlgebraicGeometry.openSubscheme_existsUnique_of_fpqc",
+  "file": "lean/Sheaf/AlgebraicGeometry/FpqcOpenSubschemeDescent.lean",
+  "statement": "theorem openSubscheme_existsUnique_of_fpqc {S : Scheme.{u}} {I : Type v} {T : I → Scheme.{u}} (g : ∀ i, T i ⟶ S) (hg : Presieve.ofArrows T g ∈ Scheme.fpqcPrecoverage S) (W : ∀ i, (T i).Opens) (hW : ∀ (i j : I), (pullback.fst (g i) (g j) ⁻¹ᵁ W i) = (pullback.snd (g i) (g j) ⁻¹ᵁ W j)) : ∃! V : S.Opens, ∀ i, (g i ⁻¹ᵁ V) = W i",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-ofd1245",
+  "group": "E1",
+  "result": "pass",
+  "note": "S Scheme.{u}; I : Type v (no limit taken, matches landed UnramifiedDescent/ClosedImmersion/EtaleOpenFpqcDescent family forms); hg ofArrows ∈ Scheme.fpqcPrecoverage S = def-weil-pbc-fpqc-covering record; W_i (T i).Opens; hW pullback.fst/snd (g i) (g j) ⁻¹ᵁ equality = node's pullbacks to T_i×_S T_j; ∃! V : S.Opens, ∀ i, g i ⁻¹ᵁ V = W i tied = unique open with pullback W_i; citer existsUnique_open_of_etale_fpqc_baseChange uses same shape; no hollow hyps, no let, node statement unchanged"
  }
 }
