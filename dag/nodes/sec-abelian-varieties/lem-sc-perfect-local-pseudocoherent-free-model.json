@@ -13,13 +13,14 @@
  },
  "kind": "statement",
  "title": "Minimal free model over a local ring",
- "statement": "Let $(R,\\mathfrak m,\\kappa)$ be a local ring and let $K\\in D(R)$ [def-pc-derived-category] be pseudo-coherent, that is, isomorphic in $D(R)$ to a bounded-above complex of finite free $R$-modules. Put $d_i=\\dim_\\kappa H^i(K\\otimes_R^{\\mathbf L}\\kappa)$. If the $d_i$ are finite and vanish for all sufficiently large $i$, then $K$ is represented by a bounded-above complex of finite free $R$-modules whose term in degree $i$ is $R^{\\oplus d_i}$. Such a complex is unique up to isomorphism of complexes.",
+ "statement": "Let $(R,\\mathfrak m,\\kappa)$ be a local ring and let $K\\in D(R)$ [def-weil-abstract-derived-category] be pseudo-coherent [def-pc-ring-pseudo-coherent-complex], that is, isomorphic in $D(R)$ to a bounded-above complex of finite free $R$-modules. Put $d_i=\\dim_\\kappa H^i(K\\otimes_R^{\\mathbf L}\\kappa)$. If the $d_i$ are finite and vanish for all sufficiently large $i$, then $K$ is represented by a bounded-above complex of finite free $R$-modules whose term in degree $i$ is $R^{\\oplus d_i}$. Such a complex is unique up to isomorphism of complexes.",
  "source": {
   "document": "literature/stacks-project/more-algebra.tex",
   "place": "More on Algebra, Lemma 15.75.7, Tag 0BCC (lemma-lift-pseudo-coherent-from-residue-field)"
  },
  "stmt_deps": [
-  "def-pc-derived-category"
+  "def-weil-abstract-derived-category",
+  "def-pc-ring-pseudo-coherent-complex"
  ],
  "proof": [
   {
@@ -127,5 +128,44 @@
   "group": "E1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-lpf0132 (reviewer sub-agent of L); spot-checked: Read Tag 0BCC/0BCB and the citer 2edf1260d (uses existence for a bounded finite-free P_p, compatible). FIX more, RETURN less: (1) class (b): new lem-sc-perfect-derived-morphism-chain-map duplicates existing leaf lem-pc-ring-derived-map-representative (Qh_map_bijective, missed by the second reading); cited it, dropped the new node. (2) C4/B3: def-pur-pseudo-coherent-complex is for schemes; inlined the ring wording (bounded-above finite free model, as in lem-pc-ring-pseudo-coherent-iff-all-m) in the item and in lem-sc-pseudo-coherent-lift-stably-free-complex, inlined 'finite stably free'. (3) C1 Step 4: beta tensor kappa quasi-iso and zero reduced differentials were unjustified; now homotopy equivalence via the representative lemma, K-flatness via lem-pc-module-bounded-flat-kflat, rank count, and Nakayama for surjectivity plus kernel (injectivity). (4) B4: plain-text statements/steps rewritten in TeX. d_i finite and eventual vanishing are hypotheses here though they follow from pseudo-coherence (Stacks); used in Step 1; uniqueness clause added with reason (E7).; 2 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.MinimalFreeModel",
+  "declaration": "DerivedCategory.exists_unique_minimalFreeModel",
+  "file": "lean/Sheaf/RingTheory/MinimalFreeModel.lean",
+  "statement": "theorem exists_unique_minimalFreeModel {R : Type u} [CommRing R] [IsLocalRing R] [HasDerivedCategory.{w} (ModuleCat.{max u v} R)] (K : DerivedCategory (ModuleCat.{max u v} R)) (hK : IsPseudoCoherent K) (d : ℤ → ℕ) (hfinite : ∀ i : ℤ, Module.Finite (IsLocalRing.ResidueField R) ((((ModuleCat.extendScalars (IsLocalRing.residue R)).mapHomologicalComplex (ComplexShape.up ℤ)).obj (Classical.choose hK)).homology i)) (hd : ∀ i : ℤ, d i = Module.finrank (IsLocalRing.ResidueField R) ((((ModuleCat.extendScalars (IsLocalRing.residue R)).mapHomologicalComplex (ComplexShape.up ℤ)).obj (Classical.choose hK)).homology i)) (hbound : ∃ b : ℤ, ∀ i : ℤ, b < i → d i = 0) : ∃ F : CochainComplex (ModuleCat.{max u v} R) ℤ, (∃ b : ℤ, F.IsStrictlyLE b) ∧ Nonempty (Q.obj F ≅ K) ∧ (∀ i : ℤ, Nonempty (F.X i ≅ ModuleCat.of R (ULift.{v} (Fin (d i) → R)))) ∧ (∀ G : CochainComplex (ModuleCat.{max u v} R) ℤ, (∃ b : ℤ, G.IsStrictlyLE b) → Nonempty (Q.obj G ≅ K) → (∀ i : ℤ, Nonempty (G.X i ≅ ModuleCat.of R (ULift.{v} (Fin (d i) → R)))) → Nonempty (F ≅ G))",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-plp1301",
+  "group": "F1",
+  "result": "pass",
+  "note": "Tag 0BCC vs Lean: local R, K in D(R), hK = landed C1 DerivedCategory.IsPseudoCoherent (#check), d_i tied by hd to finrank_kappa H^i of termwise kappa-extension of the chosen bounded-above finite free representative (K-flat, = K tensor^L kappa; no ring-level derived tensor landed), hfinite, hbound, conclusion bounded-above F with Q.obj F = K and F^i = R^{d_i}, uniqueness as complexes against every such G; citation correction def-pc-derived-category -> def-weil-abstract-derived-category + def-pc-ring-pseudo-coherent-complex is right (not H7), citer holds",
+  "statement_corrected": true
+ },
+ "statement_change": {
+  "date": "2026-10-11",
+  "by": "F1 stage 2",
+  "old_statement": "Let $(R,\\mathfrak m,\\kappa)$ be a local ring and let $K\\in D(R)$ [def-pc-derived-category] be pseudo-coherent, that is, isomorphic in $D(R)$ to a bounded-above complex of finite free $R$-modules. Put $d_i=\\dim_\\kappa H^i(K\\otimes_R^{\\mathbf L}\\kappa)$. If the $d_i$ are finite and vanish for all sufficiently large $i$, then $K$ is represented by a bounded-above complex of finite free $R$-modules whose term in degree $i$ is $R^{\\oplus d_i}$. Such a complex is unique up to isomorphism of complexes.",
+  "what": "The citation def-pc-derived-category defines D(O_X) for a scheme, not the D(R) of ordinary R-modules required by this statement. Replace that ill-typed citation by the existing abstract derived-category construction and cite the existing ring pseudo-coherence definition. No mathematical hypothesis or conclusion changes.",
+  "source": {
+   "document": "Stacks Project, More on Algebra",
+   "place": "Tag 0BCC, lemma-lift-pseudo-coherent-from-residue-field; https://stacks.math.columbia.edu/tag/0BCC"
+  },
+  "citers": [
+   {
+    "id": "lem-sc-perfect-finite-free-residue-model",
+    "holds": true,
+    "note": "The local-ring minimal finite free model is unchanged; replacing the scheme-derived-category citation by the abstract module derived category preserves the application after localizing at the point."
+   }
+  ],
+  "old_stmt_deps": [
+   "def-pc-derived-category"
+  ]
  }
 }
