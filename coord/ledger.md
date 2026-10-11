@@ -3078,3 +3078,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 00:17 L: merged deliver/C1/lem-sc-etale-torsor-h1-functoriality (reviewer FIX; first push; new nodes: 2)
 - 00:17 UTC L: M1 coherent-property-devissage FIX 7eec7c08b re-push (R-cpd0015; TeX statement restored, lem-pc-coherent-property-irreducible aligned with 01YH).
 - 00:17 UTC L: C1 etale-torsor-h1-functoriality FIX 7c471da85 (R-eth0015).
+- 00:17 L: merged deliver/M1/lem-pc-module-opcycles-tor-surjection (reviewer FIX; first push; new nodes: 0)

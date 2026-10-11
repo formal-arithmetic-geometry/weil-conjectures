@@ -26,8 +26,72 @@
   "def-weil-pbc-flat-ring-map",
   "def-weil-pbc-tor-modules"
  ],
- "proof": [],
- "proof_deps": [],
+ "proof": [
+  {
+   "text": "Put $K=\\operatorname{im}(d^{a-1})\\subseteq P^a$ and write $d^{a-1}$ as a surjection $\\pi:P^{a-1}\\to K$ followed by the inclusion $\\iota:K\\hookrightarrow P^a$. The low-degree Tor sequence [lem-weil-pbc-tor-long-exact-first-variable] for $0\\to K\\xrightarrow{\\iota}P^a\\to Q\\to0$ gives an exact segment $\\operatorname{Tor}_1^A(P^a,N)\\to\\operatorname{Tor}_1^A(Q,N)\\xrightarrow{\\delta_N}K\\otimes_AN\\xrightarrow{\\iota\\otimes1}P^a\\otimes_AN$, with $\\delta$ natural in $N$. Next, $\\operatorname{Tor}_1^A(P^a,N)=0$: by [lem-weil-pbc-tor-symmetry] it is isomorphic to $\\operatorname{Tor}_1^A(N,P^a)$, the first homology of $F_\\bullet\\otimes_AP^a$ for a free resolution $F_\\bullet\\to N$ [def-weil-pbc-tor-modules]. With $Z=\\operatorname{im}(F_1\\to F_0)$, the sequence $F_2\\otimes_AP^a\\to F_1\\otimes_AP^a\\to Z\\otimes_AP^a\\to0$ is exact by [lem-weil-pbc-tensor-right-exact], and $Z\\otimes_AP^a\\to F_0\\otimes_AP^a$ is injective because $P^a$ is flat [def-weil-pbc-flat-ring-map]; hence $\\ker(F_1\\otimes_AP^a\\to F_0\\otimes_AP^a)=\\operatorname{im}(F_2\\otimes_AP^a)$. Thus $\\delta_N$ identifies $\\operatorname{Tor}_1^A(Q,N)$, naturally in $N$, with $\\ker(\\iota\\otimes1:K\\otimes_AN\\to P^a\\otimes_AN)$.",
+   "uses": [
+    "def-weil-pbc-flat-ring-map",
+    "def-weil-pbc-tor-modules",
+    "lem-weil-pbc-tor-long-exact-first-variable",
+    "lem-weil-pbc-tor-symmetry",
+    "lem-weil-pbc-tensor-right-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "More on Algebra, Lemma 15.59.2 (Tag 0653), Tor_1 argument in the proof"
+   }
+  },
+  {
+   "text": "Regard $N$ as a complex in degree $0$; then the degree-$(a-1)$ differential of $P^\\bullet\\otimes_AN$ [def-pc-tensor-complex-sheaves] is $d^{a-1}\\otimes1=(\\iota\\otimes1)\\circ(\\pi\\otimes1)$, and $\\pi\\otimes1:P^{a-1}\\otimes_AN\\to K\\otimes_AN$ is surjective by right exactness [lem-weil-pbc-tensor-right-exact]. Let $Z^{a-1}=\\ker(d^{a-1}\\otimes1)$, so $H^{a-1}(P^\\bullet\\otimes_AN)=Z^{a-1}/\\operatorname{im}(d^{a-2}\\otimes1)$ [def-pc-acyclic-complex-modules]. For $x\\in Z^{a-1}$ one has $(\\iota\\otimes1)(\\pi\\otimes1)(x)=0$, so $\\pi\\otimes1$ maps $Z^{a-1}$ into $\\ker(\\iota\\otimes1)$; and $(\\pi\\otimes1)\\circ(d^{a-2}\\otimes1)=(\\pi\\circ d^{a-2})\\otimes1=0$ because $\\iota\\circ\\pi\\circ d^{a-2}=d^{a-1}d^{a-2}=0$ and $\\iota$ is injective. Hence $\\pi\\otimes1$ induces an $A$-linear map $\\bar\\pi_N:H^{a-1}(P^\\bullet\\otimes_AN)\\to\\ker(\\iota\\otimes1)$, natural in $N$.",
+   "uses": [
+    "lem-weil-pbc-tensor-right-exact",
+    "def-pc-acyclic-complex-modules",
+    "def-pc-tensor-complex-sheaves"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "More on Algebra, Lemma 15.59.2 (Tag 0653), Tor_1 argument in the proof"
+   }
+  },
+  {
+   "text": "$\\bar\\pi_N$ is surjective: let $y\\in K\\otimes_AN$ with $(\\iota\\otimes1)(y)=0$. By the surjectivity of $\\pi\\otimes1$ from Step 2 choose $x\\in P^{a-1}\\otimes_AN$ with $(\\pi\\otimes1)(x)=y$. Then $(d^{a-1}\\otimes1)(x)=(\\iota\\otimes1)(y)=0$, so $x\\in Z^{a-1}$ and $\\bar\\pi_N[x]=y$.",
+   "uses": [
+    "lem-weil-pbc-tensor-right-exact",
+    "def-pc-acyclic-complex-modules",
+    "def-pc-tensor-complex-sheaves"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "More on Algebra, Lemma 15.59.2 (Tag 0653), Tor_1 argument in the proof"
+   }
+  },
+  {
+   "text": "The composite $\\delta_N^{-1}\\circ\\bar\\pi_N:H^{a-1}(P^\\bullet\\otimes_AN)\\to\\operatorname{Tor}_1^A(Q,N)$ of the surjection of Steps 2--3 with the inverse of the isomorphism $\\delta_N$ onto $\\ker(\\iota\\otimes1)$ of Step 1 is an $A$-linear surjection. For $g:N\\to N'$ both $\\bar\\pi$ (induced by $\\pi\\otimes1$) and $\\delta$ (by the naturality in [lem-weil-pbc-tor-long-exact-first-variable], with Tor functorial as in [def-weil-pbc-tor-modules]) commute with the maps induced by $g$, so the surjection is natural in $N$.",
+   "uses": [
+    "lem-weil-pbc-tor-long-exact-first-variable",
+    "def-weil-pbc-tor-modules",
+    "def-pc-acyclic-complex-modules",
+    "def-pc-tensor-complex-sheaves"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "More on Algebra, Lemma 15.59.2 (Tag 0653), Tor_1 argument in the proof"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-flat-ring-map",
+  "def-weil-pbc-tor-modules",
+  "lem-weil-pbc-tor-long-exact-first-variable",
+  "lem-weil-pbc-tensor-right-exact",
+  "def-pc-acyclic-complex-modules",
+  "def-pc-tensor-complex-sheaves",
+  "lem-weil-pbc-tor-symmetry"
+ ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/more-algebra.tex",
@@ -54,15 +118,57 @@
    "results": "0 hits",
    "date": "2026-10-11",
    "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "Tor in Mathlib/RingTheory/Flat/*.lean",
+   "results": "only a TODO 'Relate flatness with Tor' in CategoryTheory.lean; no Tor declaration",
+   "date": "2026-10-11",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-pc-module-flat-opcycles-tor-criterion",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-duality"
+ "unit": "sk-thm-picard-duality",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-pc-module-opcycles-tor-surjection",
+  "worker": "stage1",
+  "summary": "Split the Tag 0653 Tor argument directly. The short exact sequence for the opcycle cokernel and the low-degree Tor sequence identify Tor_1(Q,N) with a kernel because P^a is flat; tensor right exactness and the differential identify that kernel as a quotient of preceding tensor homology, with naturality inherited from the constructions.",
+  "blueprint": "Realizes the Tor_1 argument in the ancestor's Tag 0654 truncation proof: the degree-a opcycle cokernel is controlled by the preceding tensor homology.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-tor-long-exact-first-variable",
+    "why": "The low-degree long exact Tor sequence is the generic homological tool used to identify Tor_1 of the cokernel with a tensor kernel."
+   },
+   {
+    "node": "lem-weil-pbc-tensor-right-exact",
+    "why": "Right exactness supplies lifts from P^{a-1} tensor N to the image module tensor N; the Picard unit has no replacement for this module fact."
+   },
+   {
+    "node": "lem-weil-pbc-tor-symmetry",
+    "why": "Tor symmetry reduces Tor_1(P^a,N)=0 for flat P^a to exactness of a free resolution of N tensored with P^a; a generic module fact."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-tor-symmetry",
+  "lem-weil-pbc-tor-long-exact-first-variable",
+  "lem-weil-pbc-tensor-right-exact",
+  "lem-weil-pbc-tor-symmetry"
+ ],
+ "reviewed": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-ots0016",
+  "group": "M1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-ots0016 (reviewer sub-agent of L); spot-checked: Proof by hand (kernel identification via Tor sequence, lift via right exactness); citer lem-pc-module-flat-opcycles-tor-criterion uses exactly the stated surjection; one-point-site phrasing matches the citer; def-weil-pbc-flat-ring-map defines flat modules; no duplicate Tor node (grep dag/nodes for tor/opcycles); Mathlib grep Tor in RingTheory/Flat: only a TODO. FIX more, RETURN less: (1) C1/E Step 1: Tor_1(P^a,N)=0 was argued from a resolution of P^a, which flatness of P^a does not control; now via lem-weil-pbc-tor-symmetry, a free resolution of N tensored with P^a, right exactness and flatness (tool use added); (2) C4 Steps 2-3: wrong justifications ('because d^a d^{a-1}=0', 'since K->P^a is injective') replaced by the factorisation d^{a-1} tensor 1 = (iota tensor 1)(pi tensor 1) and pi d^{a-2}=0; (3) B4 all steps rewritten in TeX (plain arrows removed).; 1 file(s) fixed by the reviewer"
+ }
 }
