@@ -198,5 +198,24 @@
   "worker": "stage1",
   "summary": "Statement kept (checked against the use in lem-weil-pbc-affine-module-correspondence, Step 3, which needs exactly quasi-coherence and bijectivity of t_W on affines). Morphisms 01SB only asserts 'quasi-coherence is preserved by change of rings', so the proof is written by the agent: P (x)_B C is identified, by universal properties of sheafification (Sheaves 0089 via def-weil-presheaf-modules-sheafification), with the cokernel of delta = a_1 - a_2 : B (x)_O (P (x)_O C) -> P (x)_O C, the difference of the two B-actions; quasi-coherence and the affine sections then come from lem-weil-pbc-quasi-coherent-tensor-product-affine-sections (Schemes 01I8 (1), Section 01LA) and lem-weil-pbc-quasi-coherent-module-cokernel-image, plus the algebra presentation of M (x)_B N as a quotient of M (x)_R N, written out in Step 5. No new node; all cited statements are in unit sk-thm-p1, the other citations are definitions or Mathlib leaves. Three further Mathlib searches recorded (no match)."
  },
- "reviewed": "2026-10-10 L: 7 steps checked (agent proof; Stacks 01SB only asserts it): P (x)_B C as the cokernel of the relation map B (x)_O S -> S = P (x)_O C between quasi-coherent modules (tensor-product-affine-sections, cokernel-image (2),(3)), the algebra fact M (x)_B N = (M (x)_R N)/(bm (x) n - m (x) bn) written out, comparison maps rho, sigma by the universal properties and the two B-actions; citer affine-module-correspondence steps 3-4 use the two stated clauses"
+ "reviewed": "2026-10-10 L: 7 steps checked (agent proof; Stacks 01SB only asserts it): P (x)_B C as the cokernel of the relation map B (x)_O S -> S = P (x)_O C between quasi-coherent modules (tensor-product-affine-sections, cokernel-image (2),(3)), the algebra fact M (x)_B N = (M (x)_R N)/(bm (x) n - m (x) bn) written out, comparison maps rho, sigma by the universal properties and the two B-actions; citer affine-module-correspondence steps 3-4 use the two stated clauses",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.QuasiCoherentAlgebraChangeOfRings",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.quasiCoherent_algebra_changeOfRings",
+  "file": "lean/Sheaf/AlgebraicGeometry/QuasiCoherentAlgebraChangeOfRings.lean",
+  "statement": "theorem quasiCoherent_algebra_changeOfRings (Y : Scheme.{u}) (B C : Y.CommAlgebraSheaf) (φ : B ⟶ C) (P : SheafOfModules.{u} (𝓡 B.right)) (hB : B.toModule.IsQuasicoherent) (hC : C.toModule.IsQuasicoherent) (hP : ((SheafOfModules.restrictScalars (𝓻 B.hom)).obj P).IsQuasicoherent) : ((SheafOfModules.restrictScalars (𝓻 C.hom)).obj (SheafOfModules.changeOfRings.{u, u, u} φ.right P)).IsQuasicoherent ∧ ∀ (W : Y.Opens), IsAffineOpen W → Function.Bijective (((PresheafOfModules.sheafificationAdjunction (𝟙 (𝓡 C.right).obj)).unit.app (SheafOfModules.changeOfRingsPresheaf.{u, u, u} φ.right P)).app (op W))",
+  "branch": "sheaf-dag",
+  "by": "K1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-qac1424"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-qac1424",
+  "group": "K1",
+  "result": "fix",
+  "note": "Y scheme; B,C quasi-coherent O_Y-algebras as Y.CommAlgebraSheaf + toModule.IsQuasicoherent (fixed from bare b : Y.sheaf ⟶ B); φ Under-morphism; P B-module with qc restriction along B.hom; changeOfRings φ.right P (scalar-first tensor, symmetric to node's); conclusion qc along C.hom = B.hom ≫ φ.right; t_W = sheafificationAdjunction unit at op W, all affine W"
+ }
 }
