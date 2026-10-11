@@ -138,5 +138,23 @@
   "by": "L",
   "result": "accepted",
   "note": "2 elementary steps (Stacks 00J3 (2)): a chain of maximal length exists since lengths are bounded by the finite length; a non-simple quotient would allow inserting a submodule. Statement now cites the two new definition leaves def-weil-pbc-module-length (Module.length, Length.lean:32, with the remark that chains from 0 to M give the same supremum as all strict chains) and def-weil-pbc-simple-module (IsSimpleModule, SimpleModule/Basic.lean:60); both lines verified by L. Not a leaf: Mathlib's route is three lemmas plus unpacking CompositionSeries. Source note '02LY = 00IV' corrected (00IV is length-additive). Stage 3: lem-weil-pbc-artinian-ring-self-finite-length (C1) should cite def-weil-pbc-module-length."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.SimpleFiltration",
+  "declaration": "Module.exists_simple_filtration_of_length_lt_top",
+  "file": "lean/Sheaf/RingTheory/SimpleFiltration.lean",
+  "statement": "theorem exists_simple_filtration_of_length_lt_top (R : Type u) [CommRing R] (M : Type v) [AddCommGroup M] [Module R M] (hM : Module.length R M < ⊤) : ∃ (r : ℕ) (F : Fin (r + 1) → Submodule R M), F 0 = ⊥ ∧ F (Fin.last r) = ⊤ ∧ (∀ i : Fin r, F i.castSucc < F i.succ) ∧ (∀ i : Fin r, IsSimpleModule R (↥(F i.succ) ⧸ Submodule.comap (F i.succ).subtype (F i.castSucc)))",
+  "branch": "sheaf-dag",
+  "by": "G1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-flm1014",
+  "group": "G1",
+  "result": "pass",
+  "note": "CommRing R, Module R M; hM = Module.length R M < ⊤ (recorded def-weil-pbc-module-length); ∃ r:ℕ, F : Fin (r+1) → Submodule R M, F 0 = ⊥, F last = ⊤, strict F i.castSucc < F i.succ, IsSimpleModule R (F i.succ ⧸ comap subtype F i.castSucc) (recorded def-weil-pbc-simple-module); r=0 zero module; not literally Mathlib (isFiniteLength_iff_exists_compositionSeries has IsFiniteLength + covBy), so existing:false; same Fin-chain shape as landed consumer ArtinianIdealLengthOneFiltration"
  }
 }
