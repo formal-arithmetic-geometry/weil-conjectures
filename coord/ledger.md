@@ -3837,3 +3837,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 08:29 L: returned deliver/J1/lem-sc-etale-faithfully-flat-local (reviewer RETURN: Reviewer R-ffl1249 on e4f0c0fd6. H7: the statement correction makes the node a different, trivial statement: e_X : X_K ≅)
 - 08:30 L: merged deliver/E1/lem-sc-hilbert-embedded-points-affine-localization (stage 2; reviewer PASS; first push; Sheaf.RingTheory.LocalizationEmbeddedPoints Module.localization_commutes_with_embedded_point_removal)
 - 08:30 L: merged deliver/E1/def-pur-hom-complex (stage 2; reviewer FIX; first push; Sheaf.Algebra.Homology.HomComplex CategoryTheory.homComplex)
+- 08:30 L: merged deliver/K1/lem-sc-semilocal-dim-one-normalization (stage 2; reviewer FIX; first push; Sheaf.RingTheory.SemilocalNormalizationDimOne integralClosure.semilocal_normalization_dim_one)
