@@ -106,6 +106,7 @@ public import WeilConjectures.AlgebraicGeometry.Curve.Assertions
 public import WeilConjectures.AlgebraicGeometry.Curve.BoundaryNeighbourhood
 public import WeilConjectures.AlgebraicGeometry.Curve.Brauer
 public import WeilConjectures.AlgebraicGeometry.Curve.ClosedPoint
+public import WeilConjectures.AlgebraicGeometry.Curve.SeparatingFunction
 public import WeilConjectures.AlgebraicGeometry.Curve.CohomologicalDimension
 public import WeilConjectures.AlgebraicGeometry.Curve.Compactification
 public import WeilConjectures.AlgebraicGeometry.Curve.Divisor
