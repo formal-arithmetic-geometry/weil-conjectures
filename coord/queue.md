@@ -1,11 +1,11 @@
 # Work queue
 
-937 items; claim with `tools/claim.py next <group> [--stage N]`.
+934 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (937)
+## Stage 2: nodes to state (934)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -37,9 +37,6 @@
 | `lem-sc-picard-locus-closed` | 1 | state |
 | `lem-sc-picard-locus-closed-valuation-triviality` | 1 | state |
 | `lem-sc-picard-product-open` | 1 | state |
-| `lem-sc-proper-flat-global-sections` | 1 | state |
-| `lem-sc-proper-flat-global-sections-criterion` | 1 | state |
-| `lem-sc-proper-or-affine` | 1 | state |
 | `lem-sc-qcoh-cech-total-tensor-iso` | 1 | state |
 | `lem-sc-rational-functions-generic-stalks` | 1 | state |
 | `lem-sc-regular-local-ext-vanishing` | 1 | state |
