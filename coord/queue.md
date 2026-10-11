@@ -1,11 +1,11 @@
 # Work queue
 
-959 items; claim with `tools/claim.py next <group> [--stage N]`.
+978 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (959)
+## Stage 2: nodes to state (978)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -14,7 +14,6 @@
 | `def-weil-pbc-ample-invertible-module` | 1 | state |
 | `def-weil-pbc-etale-sheaves` | 1 | state |
 | `def-weil-pbc-formal-glueing-data` | 1 | state |
-| `def-weil-pbc-henselian-terminology` | 1 | state |
 | `lem-exc-discrete-modules-abelian` | 1 | state |
 | `lem-exc-discrete-modules-abelian-structure` | 1 | state |
 | `lem-exc-etale-sheaves-gsets-point` | 1 | state |
@@ -32,7 +31,6 @@
 | `lem-pc-flat-tensor-complex-cohom` | 1 | state |
 | `lem-pc-fppf-affine-sheafification-restriction` | 1 | state |
 | `lem-pc-kflat-pullback-preservation` | 1 | state |
-| `lem-pc-kflat-stalk-criterion` | 1 | state |
 | `lem-pc-kflat-tensor-cone-two-out-of-three` | 1 | state |
 | `lem-pc-kflat-tensor-quasi-iso` | 1 | state |
 | `lem-pc-module-change-of-rings-adjunction` | 1 | state |
@@ -52,13 +50,10 @@
 | `lem-pc-tower-enough-injectives` | 1 | state |
 | `lem-pc-tower-injective-embedding` | 1 | state |
 | `lem-pc-tower-limit-left-exact` | 1 | state |
-| `lem-pc-zero-dimensional-closed-subscheme-finite` | 1 | state |
-| `lem-pc-zero-scheme-locally-principal` | 1 | state |
 | `lem-pod-adic-tower-reconstruction` | 1 | state |
 | `lem-pod-equivalence-induces-module-objects` | 1 | state |
 | `lem-pod-etale-stalk-tensor-scalar` | 1 | state |
 | `lem-pod-lisse-tensor-and-scalar-extension` | 1 | state |
-| `lem-pqf-finite-spectrum-maximal-primes` | 1 | state |
 | `lem-pur-kinjective-ML-ordinals` | 1 | state |
 | `lem-pur-kinjective-characterize-K-injective` | 1 | state |
 | `lem-pur-kinjective-characterize-injective` | 1 | state |
@@ -264,6 +259,7 @@
 | `lem-weil-pbc-complete-local-map-regular-presentation` | 1 | state |
 | `lem-weil-pbc-complete-local-nagata` | 1 | state |
 | `lem-weil-pbc-complete-local-quotient` | 1 | state |
+| `lem-weil-pbc-complete-pair-henselian` | 1 | state |
 | `lem-weil-pbc-completed-module-associated-graded-generators` | 1 | state |
 | `lem-weil-pbc-completion-at-quasi-finite-prime` | 1 | state |
 | `lem-weil-pbc-completion-dimension` | 1 | state |
@@ -323,6 +319,7 @@
 | `lem-weil-pbc-dimension-preserved-field-extension` | 1 | state |
 | `lem-weil-pbc-dimension-quasi-finite-over-polynomial-algebra` | 1 | state |
 | `lem-weil-pbc-dimension-supremum-local-dimensions` | 1 | state |
+| `lem-weil-pbc-dimension-zero-local-strictly-henselian` | 1 | state |
 | `lem-weil-pbc-direct-image-preserves-injectives` | 1 | state |
 | `lem-weil-pbc-direct-sum-extension-assembly` | 1 | state |
 | `lem-weil-pbc-directed-colimit-base-change-elementwise` | 1 | state |
@@ -367,6 +364,7 @@
 | `lem-weil-pbc-etale-ring-map-prescribed-residue-field` | 1 | state |
 | `lem-weil-pbc-etale-ring-map-quasi-finite` | 1 | state |
 | `lem-weil-pbc-etale-section-idempotent-splitting` | 1 | state |
+| `lem-weil-pbc-etale-section-lifting-henselian-pair` | 1 | state |
 | `lem-weil-pbc-etale-separated-stratified-finite` | 1 | state |
 | `lem-weil-pbc-etale-sheaf-clopen-product` | 1 | state |
 | `lem-weil-pbc-etale-splits-off-isolated-points-technical` | 1 | state |
@@ -400,12 +398,14 @@
 | `lem-weil-pbc-filtered-colimit-algebras-underlying-module` | 1 | state |
 | `lem-weil-pbc-filtered-colimit-categories` | 1 | state |
 | `lem-weil-pbc-filtered-colimit-flat-modules` | 1 | state |
+| `lem-weil-pbc-filtered-colimit-henselian-pair` | 1 | state |
 | `lem-weil-pbc-filtered-colimit-localization-at-prime` | 1 | state |
 | `lem-weil-pbc-filtered-colimit-normal-ring` | 1 | state |
 | `lem-weil-pbc-filtered-colimit-tensor-varying-rings` | 1 | state |
 | `lem-weil-pbc-finite-after-completion` | 1 | state |
 | `lem-weil-pbc-finite-coproduct-lfp-qcqs` | 1 | state |
 | `lem-weil-pbc-finite-etale-etale-local-split` | 1 | state |
+| `lem-weil-pbc-finite-etale-lifting-approximation` | 1 | state |
 | `lem-weil-pbc-finite-free-resolution-noetherian` | 1 | state |
 | `lem-weil-pbc-finite-galois-receiving-separable-extensions` | 1 | state |
 | `lem-weil-pbc-finite-gl-dim-regular-local` | 1 | state |
@@ -417,6 +417,7 @@
 | `lem-weil-pbc-finite-open-cover-degree-sum` | 1 | state |
 | `lem-weil-pbc-finite-over-complete-local-product` | 1 | state |
 | `lem-weil-pbc-finite-over-complete-ring` | 1 | state |
+| `lem-weil-pbc-finite-over-henselian-local-product` | 1 | state |
 | `lem-weil-pbc-finite-over-nagata-nagata` | 1 | state |
 | `lem-weil-pbc-finite-presentation-hom-directed-colimit` | 1 | state |
 | `lem-weil-pbc-finite-product-complex-cohomology` | 1 | state |
@@ -526,7 +527,14 @@
 | `lem-weil-pbc-h0-spectral-closed-restriction` | 1 | state |
 | `lem-weil-pbc-h1-injective-differentials-injective-char-p` | 1 | state |
 | `lem-weil-pbc-helper-g-ring-char-p` | 1 | state |
+| `lem-weil-pbc-henselian-etale-retraction` | 1 | state |
+| `lem-weil-pbc-henselian-factorization-criterion` | 1 | state |
 | `lem-weil-pbc-henselian-factorization-locally-nilpotent` | 1 | state |
+| `lem-weil-pbc-henselian-finite-etale-equivalence` | 1 | state |
+| `lem-weil-pbc-henselian-local-root-lifting` | 1 | state |
+| `lem-weil-pbc-henselian-pair-approximation` | 1 | state |
+| `lem-weil-pbc-henselian-pair-integral-idempotent-lifting` | 1 | state |
+| `lem-weil-pbc-henselian-pair-prime-connected` | 1 | state |
 | `lem-weil-pbc-henselization-finite-separable-fibres` | 1 | state |
 | `lem-weil-pbc-higher-direct-image-sheafified-presheaf` | 1 | state |
 | `lem-weil-pbc-horseshoe-morphism-lift` | 1 | state |
@@ -548,6 +556,7 @@
 | `lem-weil-pbc-integral-closure-zariski-main-away` | 1 | state |
 | `lem-weil-pbc-integral-extension-dimension` | 1 | state |
 | `lem-weil-pbc-integral-idempotent-annihilating-polynomial` | 1 | state |
+| `lem-weil-pbc-integral-over-henselian-pair` | 1 | state |
 | `lem-weil-pbc-intersection-subfields-differentials` | 1 | state |
 | `lem-weil-pbc-intersection-subfields-subspace` | 1 | state |
 | `lem-weil-pbc-inverse-image-closed-pushforward-constant` | 1 | state |
@@ -588,6 +597,7 @@
 | `lem-weil-pbc-linear-equation-localization-polynomial` | 1 | state |
 | `lem-weil-pbc-local-artinian-basis-when-flat` | 1 | state |
 | `lem-weil-pbc-local-completion-quotient` | 1 | state |
+| `lem-weil-pbc-local-dimension-zero-henselian` | 1 | state |
 | `lem-weil-pbc-local-nagata-domain-analytically-unramified` | 1 | state |
 | `lem-weil-pbc-local-ring-colimit-essentially-finite-type-over-z` | 1 | state |
 | `lem-weil-pbc-localization-colimit-principal-localizations` | 1 | state |
@@ -599,6 +609,7 @@
 | `lem-weil-pbc-locally-constant-germ-evaluation` | 1 | state |
 | `lem-weil-pbc-make-separable` | 1 | state |
 | `lem-weil-pbc-make-separably-generated` | 1 | state |
+| `lem-weil-pbc-map-into-henselian-colimit` | 1 | state |
 | `lem-weil-pbc-matrix-left-inverse-minors` | 1 | state |
 | `lem-weil-pbc-minimal-finite-free-resolution-local` | 1 | state |
 | `lem-weil-pbc-miracle-flatness` | 1 | state |
@@ -647,6 +658,7 @@
 | `lem-weil-pbc-p-basis-exists` | 1 | state |
 | `lem-weil-pbc-p-independent-differentials-independent` | 1 | state |
 | `lem-weil-pbc-p-independent-extends-to-p-basis` | 1 | state |
+| `lem-weil-pbc-pair-henselization` | 1 | state |
 | `lem-weil-pbc-polynomial-complete-local-formal-fibres` | 1 | state |
 | `lem-weil-pbc-polynomial-ideal-coefficients-monomial` | 1 | state |
 | `lem-weil-pbc-polynomial-local-completion-formally-smooth` | 1 | state |
@@ -794,6 +806,7 @@
 | `lem-weil-pbc-sets-etale-inverse-image-constant-base-change` | 1 | state |
 | `lem-weil-pbc-sets-finite-pushforward-stalk` | 1 | state |
 | `lem-weil-pbc-sets-inverse-image-composition` | 1 | state |
+| `lem-weil-pbc-sets-strictly-henselian-open-sections-stalk` | 1 | state |
 | `lem-weil-pbc-sheaf-algebraic-structures-objects` | 1 | state |
 | `lem-weil-pbc-sheaf-algebras-directed-colimit` | 1 | state |
 | `lem-weil-pbc-sheaf-cokernel-local-image` | 1 | state |
@@ -857,6 +870,9 @@
 | `lem-weil-pbc-stein-geometric-fibre-etale-criterion` | 1 | state |
 | `lem-weil-pbc-stein-normalized-fibre-idempotent` | 1 | state |
 | `lem-weil-pbc-stein-universally-closed-factor` | 1 | state |
+| `lem-weil-pbc-strict-henselization-triples` | 1 | state |
+| `lem-weil-pbc-strictly-henselian-quotient` | 1 | state |
+| `lem-weil-pbc-strictly-henselian-sections-stalk` | 1 | state |
 | `lem-weil-pbc-strictly-standard-base-change` | 1 | state |
 | `lem-weil-pbc-strictly-standard-localization-smooth` | 1 | state |
 | `lem-weil-pbc-subcategory-right-resolution-05T6` | 1 | state |
@@ -909,6 +925,7 @@
 | `lem-weil-pbc-well-ordered-union-projective-dimension` | 1 | state |
 | `lem-weil-pbc-z-g-ring` | 1 | state |
 | `lem-weil-pbc-z-localizations-dvr` | 1 | state |
+| `lem-weil-pbc-zariski-h0-proper-henselian-pair` | 1 | state |
 | `lem-weil-pbc-zariski-pair-finite-gabber-polynomial` | 1 | state |
 | `lem-weil-pbc-zariski-pair-flat-integral-isomorphism` | 1 | state |
 | `lem-weil-pbc-zariski-pair-rank-one-propagation` | 1 | state |
@@ -960,7 +977,9 @@
 | `lem-sc-valuation-proper-coherent-sections` | 2 | state |
 | `lem-weil-pbc-finite-type-lift-nilpotent` | 2 | state |
 | `lem-weil-pbc-finite-type-z-g-ring` | 2 | state |
+| `lem-weil-pbc-henselian-finite-type-product-decomposition` | 2 | state |
 | `lem-weil-pbc-integral-closure-finite-fibre-part-localization` | 2 | state |
+| `lem-weil-pbc-quotient-henselian-pair` | 2 | state |
 | `pqf-def-quasifinite` | 2 | state |
 | `pqf-lem-pushforward-qcoh` | 2 | state |
 | `pqf-lem-qf-locqf-qc` | 2 | state |
@@ -969,7 +988,7 @@
 | `lem-sc-normalization-properties` | 3 | state |
 | `def-nagata-fixed-base-separated-stage` | 6 | state |
 
-Not open yet: 1101 nodes that wait for a statement dependency, 40 nodes that wait for stage 1.
+Not open yet: 1077 nodes that wait for a statement dependency, 40 nodes that wait for stage 1.
 
 ## Stage 3: modules to prove (0)
 
