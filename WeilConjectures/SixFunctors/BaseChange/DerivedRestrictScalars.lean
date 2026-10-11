@@ -106,6 +106,32 @@ section BaseChange
 
 variable {X' X Y' Y : Scheme.{u}} {g' : X' ⟶ X} {f' : X' ⟶ Y'} {f : X ⟶ Y} {g : Y' ⟶ Y}
 
+/-- The restriction of scalars of the unit `f_* M ⟶ R⁺f_* M` over `Λ'`, followed by the
+comparison `res(R⁺f_* M) ≅ R⁺f_*(res M)`, is the unit over `Λ` at `res M`. -/
+lemma restrictScalars_map_rightDerivedFunctorPlusUnit_app (f : X ⟶ Y)
+    (M : HomotopyCategory.Plus (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ'))) :
+    (Sheaf.restrictScalars Y.smallEtaleTopology φ).mapDerivedCategoryPlus.map
+        (((f)_*[ModuleCat.{u + 1} Λ']).rightDerivedFunctorPlusUnit.app M) ≫
+      (rightDerivedLowerStarRestrictScalars φ f).app (DerivedCategory.Plus.Qh.obj M) =
+    (Sheaf.restrictScalars Y.smallEtaleTopology φ).mapDerivedCategoryPlusFactorsh.hom.app
+        (((f)_*[ModuleCat.{u + 1} Λ']).mapHomotopyCategoryPlus.obj M) ≫
+      ((f)_*[ModuleCat.{u + 1} Λ]).rightDerivedFunctorPlusUnit.app
+        ((Sheaf.restrictScalars X.smallEtaleTopology φ).mapHomotopyCategoryPlus.obj M) ≫
+      ((f)_*[ModuleCat.{u + 1} Λ]).rightDerivedFunctorPlus.map
+        ((Sheaf.restrictScalars X.smallEtaleTopology φ).mapDerivedCategoryPlusFactorsh.inv.app
+          M) := by
+  have := congr_app (Functor.rightDerivedFunctorPlusBaseChange_fac
+    (lowerStarCompRestrictScalarsIso φ f).hom) M
+  simp only [Functor.rightDerivedFunctorPlusBaseChangeAux, NatTrans.comp_app,
+    Functor.whiskerLeft_app, Functor.whiskerRight_app, Functor.associator_hom_app,
+    Functor.associator_inv_app, Category.id_comp, Category.comp_id,
+    Functor.mapHomotopyCategoryPlusCompIso_refl_hom_app,
+    Functor.mapHomotopyCategoryPlusCompIso_refl_inv_app, lowerStarCompRestrictScalarsIso,
+    Iso.refl_hom, NatTrans.mapHomotopyCategoryPlus_id, NatTrans.id_app,
+    CategoryTheory.Functor.map_id] at this
+  refine this.trans ?_
+  erw [Category.id_comp, Category.id_comp, Category.id_comp]
+
 /-- The compatibility `AlgebraicGeometry.Etale.baseChangeMap_app_restrictScalars` of the base
 change maps with restriction of scalars, applied degreewise to a bounded below complex. -/
 lemma mapHomotopyCategoryPlus_baseChangeMap_restrictScalars (sq : CommSq g' f' f g)
