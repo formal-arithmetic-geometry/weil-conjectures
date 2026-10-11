@@ -143,5 +143,28 @@
   "group": "J1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-rkl0004 (reviewer sub-agent of L); spot-checked: C1/C4: step1 cites new module adjunction node + lem-weil-pbc-right-adjoint-preserves-kinjective (u=restriction, v=j_! exact) so I|_U K-injective in def-pur-kinjective-complex sense; step2 H^0 of Gamma(U,Hom^.) = Hom_K via def-pur-hom-complex differential (d^{-1}h = dh+hd, null-homotopy), elementary; step3 lem-weil-pbc-kinjective-hom-derived map is f->Q_U(f), exactly the map H1 lem-pur-rhom-well-defined step uses (naturality from functoriality of Q_U). Class b/d: new node is site/module version, not dup of lem-sc-derived-open-restriction-adjunction-exact / lem-sc-derived-k-injective-restrict-open (ringed spaces) or abelian-sheaf lem-weil-pbc-site-* nodes; lem-pur-rhom-global-sections is the global derived statement, not a dup. Mathlib grep (overPullback only) no match, recorded. FIX more, RETURN less: (1) B3 new node lem-pur-site-restriction-module-adjunction-exact: j_U^* and j_{U!} now defined in the statement (restriction; sheafification of def-weil-extension-by-zero-presheaf), stmt_deps corrected to the referenced definitions (dropped three lemmas that the statement does not use); (2) dropped stale tool_uses for the abelian-sheaf lemmas no step cites after the second reading.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.RhomIntoKInjectiveLocal",
+  "declaration": "CategoryTheory.rhom_into_kinjective_local",
+  "declarations": [
+   "CategoryTheory.module_overFunctor_preservesZero",
+   "CategoryTheory.rhom_into_kinjective_local"
+  ],
+  "file": "lean/Sheaf/Algebra/Homology/RhomIntoKInjectiveLocal.lean",
+  "statement": "theorem rhom_into_kinjective_local {C : Type u} [Category.{v} C] (J : GrothendieckTopology C) (R : Sheaf J CommRingCat.{max u v}) (U : C) [HasDerivedCategory.{t} (SheafOfModules.{max u v} (((sheafCompose J (forget₂ CommRingCat.{max u v} RingCat.{max u v})).obj R).over U))] (L I : CochainComplex (SheafOfModules.{max u v} ((sheafCompose J (forget₂ CommRingCat.{max u v} RingCat.{max u v})).obj R)) ℤ) [I.IsKInjective] : let R₀ := (sheafCompose J (forget₂ CommRingCat.{max u v} RingCat.{max u v})).obj R let H := homComplex (R := R) L I let π := Classical.choose (Classical.choose_spec (homComplex_exists.{u, v, max u v, max u v} (J := J) (R := R))) let S := ((SheafOfModules.forget R₀ ⋙ PresheafOfModules.evaluation R₀.obj (op U) ⋙ forget₂ (ModuleCat.{max u v} (R₀.obj.obj (op U))) AddCommGrpCat).mapHomologicalComplex (ComplexShape.up ℤ)).obj H letI := module_overFunctor_preservesZero.{u, v, max u v, max u v} R₀ U let res : CochainComplex (SheafOfModules.{max u v} R₀) ℤ ⥤ CochainComplex (SheafOfModules.{max u v} (R₀.over U)) ℤ := (SheafOfModules.overFunctor.{max u v} R₀ U).mapHomologicalComplex (ComplexShape.up ℤ) let Q := DerivedCategory.Q.{t} (C := SheafOfModules.{max u v} (R₀.over U)) ∃ e : S.cycles 0 ≃ (res.obj L ⟶ res.obj I), (∀ (z : S.cycles 0) (p : ℤ) (W : (Over U)ᵒᵖ), ((e z).f p).val.app W = (((π L I 0 p p (add_zero p)).val.app (op U)) (S.iCycles 0 z)).app W) ∧ ∃ φ : S.homology 0 → (Q.obj (res.obj L) ⟶ Q.obj (res.obj I)), (∀ z : S.cycles 0, φ (S.homologyπ 0 z) = Q.map (e z)) ∧ Function.Bijective φ",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-rkl1403"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-rkl1403",
+  "group": "H1",
+  "result": "fix",
+  "note": "site C/J (Category.{v}, large-site universes max u v), R sheaf of CommRingCat, U : C, restriction = SheafOfModules.overFunctor on J.over U degreewise, L I complexes, [I.IsKInjective] Mathlib, H = landed homComplex, S = sections at U to AddCommGrp, e : cycles 0 ≃ (L|U ⟶ I|U) pinned componentwise by homComplex_exists projections, phi on homology 0 with phi[z]=Q_U(e z), Bijective"
  }
 }
