@@ -103,6 +103,11 @@ public import WeilConjectures.AlgebraicGeometry.EffectiveCartier
 public import WeilConjectures.AlgebraicGeometry.EffectiveCartierSum
 public import WeilConjectures.AlgebraicGeometry.EffectiveDescent
 public import WeilConjectures.AlgebraicGeometry.EtaleFiniteRefinement
+public import WeilConjectures.AlgebraicGeometry.EtaleFiniteRefinement.FiniteBound
+public import WeilConjectures.AlgebraicGeometry.EtaleFiniteRefinement.FinitePresentation
+public import WeilConjectures.AlgebraicGeometry.EtaleFiniteRefinement.GeometricLifts
+public import WeilConjectures.AlgebraicGeometry.EtaleFiniteRefinement.Induction
+public import WeilConjectures.AlgebraicGeometry.EtaleFiniteRefinement.Specialization
 public import WeilConjectures.AlgebraicGeometry.FieldBaseChangeSections
 public import WeilConjectures.AlgebraicGeometry.FiniteOverField
 public import WeilConjectures.AlgebraicGeometry.Frobenius
@@ -1098,6 +1103,7 @@ public import WeilConjectures.Mathlib.Data.Nat.Choose.Dvd
 public import WeilConjectures.Mathlib.Data.Set.Image
 public import WeilConjectures.Mathlib.FieldTheory.Finite.Basic
 public import WeilConjectures.Mathlib.FieldTheory.Finite.Polynomial
+public import WeilConjectures.Mathlib.FieldTheory.Fixed
 public import WeilConjectures.Mathlib.FieldTheory.Galois.Infinite
 public import WeilConjectures.Mathlib.FieldTheory.IsAlgClosed.Basic
 public import WeilConjectures.Mathlib.FieldTheory.IsSepClosed

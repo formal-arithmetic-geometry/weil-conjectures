@@ -79,7 +79,7 @@ theorem Scheme.Hom.isFinite_steinFactorizationBase {A : Type u} [CommRing A]
   exact hp.comp (RingHom.Finite.of_surjective _
     (ConcreteCategory.bijective_of_isIso (Scheme.ΓSpecIso (.of A)).inv).2)
 
-/-- Every nonempty irreducible closed subset `C` of a scheme proper over `Spec A` meets the
+/-- Every nonempty closed subset `C` of a scheme proper over `Spec A` meets the
 closed fibre over `V(I)` when `I` lies in the Jacobson radical: the image of `C` is closed, so
 it contains a closed point of `Spec A`, i.e. a maximal ideal, which contains `I`. This is the
 nonemptiness half of `AlgebraicGeometry.Scheme.Hom.isConnected_inter_preimage_zeroLocus`. -/
