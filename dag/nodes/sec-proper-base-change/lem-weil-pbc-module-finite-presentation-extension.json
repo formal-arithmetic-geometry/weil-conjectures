@@ -252,5 +252,23 @@
   "by": "L",
   "result": "accepted",
   "note": "9 steps following Stacks 01PI as an induction on W_k = U cup U_1 cup ... cup U_k inside the qcqs X: finite affine cover; the inductive claim; the affine situation with U' = W_k cap V quasi-compact (spectral-space leaf, new leaf: affine schemes are qcqs, AffineScheme.lean:561 / QuasiSeparated.lean:167 verified by L); quasi-coherent extension (new unsplit 01PE (3) node); finite-type submodule (01PF node); a surjection from O_V^m and its kernel; the kernel over U' is of finite type (01BP node) and extends; the cokernel is finitely presented (today's 0H96 node) and agrees with G_k on U'; gluing. Source: 01PI cites 01PC where 01PB is used, and leaves the quasi-coherence of G and the quasi-compactness of U cap V -> V unstated. The two tool lemmas were removed from stmt_deps (they are proof tools); L added the citation of def-weil-pbc-module-finite-type-presentation."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ModuleFinitePresentationExtension",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.exists_finitePresentation_extension",
+  "file": "lean/Sheaf/AlgebraicGeometry/ModuleFinitePresentationExtension.lean",
+  "statement": "theorem exists_finitePresentation_extension (X : Scheme.{u}) [CompactSpace X] [QuasiSeparatedSpace X] (U : X.Opens) (hU : IsCompact (U : Set X)) (F : SheafOfModules.{u} (moduleRings X.toRingedSpace)) [F.IsQuasicoherent] (G : SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U)) [G.IsFinitePresentation] (φ : G ⟶ F.over U) : ∃ (G' : SheafOfModules.{u} (moduleRings X.toRingedSpace)), G'.IsFinitePresentation ∧ ∃ (φ' : G' ⟶ F) (e : G'.over U ≅ G), (SheafOfModules.overFunctor (moduleRings X.toRingedSpace) U).map φ' = e.hom ≫ φ",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-fpe1223",
+  "group": "H1",
+  "result": "pass",
+  "note": "X Scheme.{u} qcqs as CompactSpace+QuasiSeparatedSpace (not inferable); U qc open IsCompact (not hollow); F quasi-coherent Mathlib IsQuasicoherent; G on (moduleRings X).over U with Mathlib IsFinitePresentation (index universe u1=site, shrink); phi : G -> F.over U (F.over U = overFunctor.obj F rfl); conclusion G' IsFinitePresentation, phi', e : G'.over U iso G, overFunctor.map phi' = e.hom >> phi tied; matches Stacks 01PI; forms agree with landed ModuleFinitePresentationCokernel/glue_sheaves_of_modules"
  }
 }
