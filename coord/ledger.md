@@ -3909,3 +3909,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 08:56 L: restart on a new account at 08:54 UTC (usage limit): 8 reviewer sub-agents and 1 tool sub-agent were killed mid-run and relaunched; build green at 08:54:33Z. REVIEW BEHIND: 33 stage-2 deliveries waiting at 08:56; 8 reviewers in flight, oldest first (repaired returns first).
 - 08:56 L: merged deliver/M1/lem-sc-derived-hom-tensor-total (stage 2; reviewer FIX; first push; Sheaf.Algebra.Homology.HomTensorTotal CategoryTheory.homComplex_tensorTotal_iso)
 - 08:57 L: merged deliver/G1/lem-weil-pbc-affine-tilde-tensor (stage 2; reviewer FIX; first push; Sheaf.AlgebraicGeometry.Modules.AffineTildeTensor AlgebraicGeometry.affine_tilde_tensor)
+- 08:57 L: merged deliver/F1/lem-pc-flat-bounded-complex-descent (stage 2; reviewer FIX; first push; Sheaf.AlgebraicGeometry.FlatBoundedComplexDescent AlgebraicGeometry.flat_bounded_complex_descent)
