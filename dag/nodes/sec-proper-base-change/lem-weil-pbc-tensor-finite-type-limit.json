@@ -127,5 +127,23 @@
   "group": "K1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-tfl1706 (reviewer sub-agent of L); spot-checked: Source: Stacks Algebra Lemma 00I3 (algebra.tex label lemma-limit-argument, line 10106); the node statement (unchanged) is clauses (1) and (2) of 00I3 with the same hypotheses (k field, R,S k-algebras, f.g. subalgebras); clause (3) on idempotents is not part of the node. The proof avoids the Stacks flatness argument and goes through filtered colimits instead; checked it is sound: Step 1 (f.g. k-subalgebras form a directed system with union R, hence the colimit in commutative k-algebras) is elementary; Step 2 uses lem-weil-pbc-filtered-colimit-algebras-tensor-elementwise (1) for a representative z_i of z with N=S, its (2) on z_i^n (gamma_i is a ring map since S is an algebra, so gamma_i(z_i^n)=z^n=0), then gamma_u ring map gives (gamma_u z_i)^n=0 and nonzero because its image is z; then the same with R_j fixed, S the colimit, N=R_j (tensor symmetry elementary). Step 3 likewise with a common stage for x,y (filteredness) and eventual vanishing of xy; nonzeroness from the nonzero images. Field hypothesis not needed, statement true. Declared tool_uses (both sk-thm-p1 nodes of the same chapter, generic filtered-colimit facts used as black boxes) accepted (C8). Only split-owned fields changed. Mathlib query (grep IsReduced/FG over Mathlib): found IsReduced.tensorProduct_of_flat_of_forall_fg (RingTheory/Flat/Basic.lean:642), which reduces only one factor and only reducedness, not the node's two-sided statement with the zero-divisor clause; no exact match, node stays split. Start Sat Oct 10 05:01:35 PM UTC 2026, end Sat Oct 10 05:02:02 PM UTC 2026."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.TensorFiniteTypeLimit",
+  "declaration": "Algebra.tensor_finite_type_limit",
+  "statement": "theorem tensor_finite_type_limit (k : Type u) [Field k] (R : Type v) [CommRing R] [Algebra k R] (S : Type w) [CommRing S] [Algebra k S] : (¬ IsReduced (R ⊗[k] S) → ∃ (R' : Subalgebra k R) (S' : Subalgebra k S), Algebra.FiniteType k R' ∧ Algebra.FiniteType k S' ∧ ¬ IsReduced (R' ⊗[k] S')) ∧ ((∃ x y : R ⊗[k] S, x ≠ 0 ∧ y ≠ 0 ∧ x * y = 0) → ∃ (R' : Subalgebra k R) (S' : Subalgebra k S), Algebra.FiniteType k R' ∧ Algebra.FiniteType k S' ∧ ∃ x y : R' ⊗[k] S', x ≠ 0 ∧ y ≠ 0 ∧ x * y = 0)",
+  "branch": "sheaf-dag",
+  "by": "V1",
+  "date": "2026-10-11",
+  "existing": false,
+  "file": "lean/Sheaf/RingTheory/TensorFiniteTypeLimit.lean"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "V1",
+  "result": "pass",
+  "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
  }
 }
