@@ -180,5 +180,28 @@
   "by": "L",
   "result": "accepted",
   "note": "Split reviewed: 5 steps along More on Algebra 0A04 (functoriality and the comparison maps from the universal property of the henselization, the colimit pair henselian by 0FWT, u and v inverse by the uniqueness clauses, the henselian case directly). Statement: clause (2) made precise, meaning unchanged. Correct. The adjunction clause of 0A02 dropped at the review of lem-weil-pbc-pair-henselization is now its own node."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.HenselizationColimit",
+  "declaration": "RingTheory.pairHenselization_colimit",
+  "declarations": [
+   "RingTheory.pairHenselization_transition_system",
+   "RingTheory.pairHenselization_colimit"
+  ],
+  "file": "lean/Sheaf/RingTheory/HenselizationColimit.lean",
+  "statement": "theorem pairHenselization_colimit {Λ : Type u} [Preorder Λ] [IsDirected Λ (· ≤ ·)] [Nonempty Λ] (F G : Λ ⥤ CommRingCat.{u}) (η : F ⟶ G) (J : ∀ i : Λ, Ideal (F.obj i)) (hJ : ∀ {i j : Λ} (f : i ⟶ j), Ideal.map (F.map f).hom (J i) ≤ J j) (hG : ∀ i : Λ, ∃ c : Cocone (ObjectProperty.ι (fun C : Under (F.obj i) ↦ AlgebraicGeometry.Etale (AlgebraicGeometry.Spec.map C.hom) ∧ Function.Bijective (Ideal.quotientMap ((J i).map C.hom.hom) C.hom.hom (Ideal.le_comap_map)))), Nonempty (IsColimit c) ∧ ∃ e : c.pt.right ≅ G.obj i, c.pt.hom ≫ e.hom = η.app i) (c : Cocone F) (hc : IsColimit c) (I : Ideal c.pt) (hI : ∀ x : c.pt, x ∈ I ↔ ∃ (i : Λ) (a : F.obj i), (c.ι.app i).hom a = x ∧ a ∈ J i) (d : Cocone G) (hd : IsColimit d) : ∃ Ih : Ideal d.pt, (∀ x : d.pt, x ∈ Ih ↔ ∃ (i : Λ) (a : G.obj i), (d.ι.app i).hom a = x ∧ a ∈ (J i).map (η.app i).hom) ∧ ∃ ηInf : c.pt ⟶ d.pt, (∀ i : Λ, c.ι.app i ≫ ηInf = η.app i ≫ d.ι.app i) ∧ (∀ (A : CommRingCat.{u}) (ζ : c.pt ⟶ A), (∃ ch : Cocone (ObjectProperty.ι (fun C : Under c.pt ↦ AlgebraicGeometry.Etale (AlgebraicGeometry.Spec.map C.hom) ∧ Function.Bijective (Ideal.quotientMap (I.map C.hom.hom) C.hom.hom (Ideal.le_comap_map)))), Nonempty (IsColimit ch) ∧ ∃ e : ch.pt.right ≅ A, ch.pt.hom ≫ e.hom = ζ) → (∃! u : d.pt ⟶ A, ηInf ≫ u = ζ) ∧ (∀ u : d.pt ⟶ A, ηInf ≫ u = ζ → Function.Bijective u.hom ∧ Ideal.map u.hom Ih = I.map ζ.hom)) ∧ (HenselianRing c.pt I → ∃ β : ∀ i : Λ, G.obj i ⟶ c.pt, (∀ i : Λ, η.app i ≫ β i = c.ι.app i ∧ (∀ b : G.obj i ⟶ c.pt, η.app i ≫ b = c.ι.app i → b = β i) ∧ Ideal.map (β i).hom ((J i).map (η.app i).hom) ≤ I) ∧ (∀ {i j : Λ} (f : i ⟶ j), G.map f ≫ β j = β i) ∧ ∃ b : d.pt ⟶ c.pt, (∀ i : Λ, d.ι.app i ≫ b = β i) ∧ Function.Bijective b.hom ∧ Ideal.map b.hom Ih = I)",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-11",
+  "existing": false,
+  "note": "Clause (1) is pairHenselization_transition_system; clause (2) and its henselian specialization are pairHenselization_colimit. Each henselization hypothesis uses exactly the colimit diagram of RingTheory.pair_henselization, up to an isomorphism preserving the structure map. No new definition or node correction."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "C1",
+  "result": "pass",
+  "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
  }
 }
