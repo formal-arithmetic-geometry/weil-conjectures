@@ -36,7 +36,7 @@ respect to the cup product `∪ : Ra_* L ⊗ᴸ Ra_* M ⟶ Ra_*(L ⊗ᴸ M)`
 - `AlgebraicGeometry.Etale.mixedSupportCupProduct_naturality`: naturality in `K` and `L`.
 - `AlgebraicGeometry.Etale.mixedSupportCupProduct_associativity`: associativity.
 - `AlgebraicGeometry.Etale.mixedSupportCupProduct_rightUnitality`: the unit acts as the identity.
-- `AlgebraicGeometry.Etale.mixedSupportCupProduct_comp_rightDerivedLowerShriekIsoRightDerivedLowerStar`:
+- `AlgebraicGeometry.Etale.mixedSupportCupProduct_comp_lowerShriekIsoLowerStar`:
   for proper `a`, the mixed-support cup product is the cup product `∪` read through
   `Ra_! ≅ Ra_*`.
 - `AlgebraicGeometry.Etale.rightDerivedLowerStarCupProduct_associativity`: associativity of `∪`.
@@ -203,7 +203,7 @@ lemma compactificationProjectionMap_comp_forgetSupports (K : 𝐃(X, A)) (L : �
   refine (derivedUpperStarLowerStarAdjunction A c.g).compProjectionMap_comp _
     (derivedUpperStarLowerStarAdjunction A c.i) (derivedUpperStarLowerStarAdjunction A f)
     (leftDerivedUpperStarTensorComparison A c.i) (leftDerivedUpperStarTensorComparison A f) _ _
-    (derivedOpenImmersionLowerShriekProjectionIso_inv_comp_lowerShriekToLowerStar A c.i)
+    (derivedOpenImmersionLowerShriekProjectionIso_inv_comp_toLowerStar A c.i)
     (fun M L ↦ ?_) K L
   have h := rightDerivedLowerStarProjectionMap_comp' A c.i c.g f c.comm M L
   rw [← Iso.symm_hom, ← leftDerivedUpperStarCompactificationIso_eq] at h
@@ -211,6 +211,26 @@ lemma compactificationProjectionMap_comp_forgetSupports (K : 𝐃(X, A)) (L : �
   exact h
 
 end Compactification
+
+section Composition
+
+omit [Etale.UpperStarPreservesFlat A] [ConcreteCategory A FA]
+  [(CategoryTheory.forget A).ReflectsIsomorphisms]
+  [PreservesFilteredColimitsOfSize.{u + 1, u + 1} (CategoryTheory.forget A)]
+  [∀ Z : Scheme.{u}, Z.smallEtaleTopology.HasSheafCompose (CategoryTheory.forget A)] in
+/-- The composition isomorphism `Rg₁_* ⋙ Rg₂_* ≅ R(g₁ ≫ g₂)_*`, transported along
+`g₁₂ = g₁ ≫ g₂`, is the conjugate of `AlgebraicGeometry.Etale.leftDerivedUpperStarComp` under the
+adjunctions `Lg^* ⊣ Rg_*`. -/
+lemma rightDerivedLowerStarComp_hom_comp_congr_hom {T S R : Scheme.{u}} (g₁ : T ⟶ S)
+    (g₂ : S ⟶ R) (g₁₂ : T ⟶ R) (hg : g₁₂ = g₁ ≫ g₂) :
+    (rightDerivedLowerStarComp A g₁ g₂).hom ≫ (rightDerivedLowerStarCongr A hg.symm).hom =
+      rightDerivedLowerStarCompHom A g₁ g₂ g₁₂ hg := by
+  subst hg
+  rw [rightDerivedLowerStarCongr_refl, Iso.refl_hom, Category.comp_id,
+    rightDerivedLowerStarCompHom, conjugateEquiv_leftDerivedUpperStarComp_hom]
+  rfl
+
+end Composition
 
 section MixedSupport
 
@@ -228,6 +248,8 @@ lemma projectionMap_app_app_eq (K : 𝐃(X, A)) (L : 𝐃(Y, A)) :
             (HasCompactification.compactification a)).hom.app L) K L :=
   rfl
 
+omit [MonoidalCategory A] [MonoidalPreadditive A] [SymmetricCategory A] [MonoidalClosed A]
+  [Abelian.HasFunctorialFlatResolution A] [Etale.UpperStarPreservesFlat A] in
 lemma rightDerivedLowerShriek_map_eq {K K' : 𝐃(X, A)} (x : K ⟶ K') :
     (R(a)_![A]).map x =
       (D(((HasCompactification.compactification a).i)_!open[A]) ⋙
@@ -336,7 +358,80 @@ theorem mixedSupportCupProduct_rightUnitality (K : 𝐃(X, A)) :
       (HasCompactification.compactification a) K y)
     (compactificationProjectionMap_rightUnitality A (HasCompactification.compactification a)) K
 
+omit [Etale.UpperStarPreservesFlat A]
+  [∀ Z : Scheme.{u}, Z.smallEtaleTopology.HasSheafCompose (CategoryTheory.forget A)] in
+/-- The forget-supports map `Ra_! ⟶ Ra_*` of the chosen compactification `(i, g)`, written as
+`Rg_*` of `i_! ⟶ Ri_*` followed by the composition isomorphism `Ri_* ⋙ Rg_* ⟶ Ra_*` conjugate to
+`AlgebraicGeometry.Etale.leftDerivedUpperStarComp`. -/
+lemma rightDerivedLowerShriekToLowerStarComp_comp_eq :
+    rightDerivedLowerShriekToLowerStarComp A a ≫ (rightDerivedLowerStarComp A _ _).hom ≫
+        (rightDerivedLowerStarCongr A (HasCompactification.compactification a).comm.symm).hom =
+      Functor.whiskerRight
+          (derivedOpenImmersionLowerShriekToLowerStar A (HasCompactification.compactification a).i)
+          (R(((HasCompactification.compactification a).g)_*[A])) ≫
+        rightDerivedLowerStarCompHom A (HasCompactification.compactification a).i
+          (HasCompactification.compactification a).g a
+          (HasCompactification.compactification a).comm := by
+  rw [rightDerivedLowerStarComp_hom_comp_congr_hom]
+  rfl
+
+/-- Blueprint `prop-pod-cup-product-coherence`: Coherence of the mixed-support cup product.
+
+The mixed-support cup product is compatible with the cup product
+`∪ : Ra_* K ⊗ᴸ Ra_* L ⟶ Ra_*(K ⊗ᴸ L)` through the forget-supports map `s : Ra_! ⟶ Ra_*`:
+`⌣_c ≫ s = (s ⊗ 1) ≫ ∪`. -/
+theorem mixedSupportCupProduct_comp_forgetSupports (K L : 𝐃(X, A)) :
+    mixedSupportCupProduct A a K L ≫
+        (rightDerivedLowerShriekToLowerStarComp A a ≫ (rightDerivedLowerStarComp A _ _).hom ≫
+          (rightDerivedLowerStarCongr A
+            (HasCompactification.compactification a).comm.symm).hom).app _ =
+      ((derivedTensor A Y).map ((rightDerivedLowerShriekToLowerStarComp A a ≫
+          (rightDerivedLowerStarComp A _ _).hom ≫ (rightDerivedLowerStarCongr A
+            (HasCompactification.compactification a).comm.symm).hom).app K)).app _ ≫
+        rightDerivedLowerStarCupProduct A a K L := by
+  simp only [rightDerivedLowerShriekToLowerStarComp_comp_eq, mixedSupportCupProduct_eq,
+    derivedTensor_map_app, rightDerivedLowerStarCupProduct]
+  exact (derivedUpperStarLowerStarAdjunction A a).cupProductOfProjection_comp
+    (leftDerivedUpperStarTensorComparison A a) _
+    (compactificationProjectionMap_comp_forgetSupports A (HasCompactification.compactification a))
+    K L
+
+/-- Blueprint `prop-pod-cup-product-coherence`: Coherence of the mixed-support cup product.
+
+For a proper morphism `a`, the mixed-support cup product is the cup product
+`∪ : Ra_* K ⊗ᴸ Ra_* L ⟶ Ra_*(K ⊗ᴸ L)` read through the identification `Ra_! ≅ Ra_*`
+(`AlgebraicGeometry.Etale.rightDerivedLowerShriekIsoRightDerivedLowerStar`), i.e. through
+`RΓ_c(X, -) ≅ RΓ(X, -)`. -/
+theorem mixedSupportCupProduct_comp_lowerShriekIsoLowerStar [IsProper a]
+    (K L : 𝐃(X, A)) :
+    mixedSupportCupProduct A a K L ≫
+        (rightDerivedLowerShriekIsoRightDerivedLowerStar A a).hom.app _ =
+      ((derivedTensor A Y).map ((rightDerivedLowerShriekIsoRightDerivedLowerStar A a).hom.app
+          K)).app _ ≫
+        rightDerivedLowerStarCupProduct A a K L := by
+  rw [rightDerivedLowerShriekIsoRightDerivedLowerStar_hom]
+  exact mixedSupportCupProduct_comp_forgetSupports A a K L
+
 end MixedSupport
+
+/-- Blueprint `prop-pod-cup-product-coherence`: Coherence of the mixed-support cup product.
+
+**Associativity of the cup product** `∪ : Ra_* K ⊗ᴸ Ra_* L ⟶ Ra_*(K ⊗ᴸ L)`, the compatibility
+with the iterate of the cup product. -/
+theorem rightDerivedLowerStarCupProduct_associativity {X Y : Scheme.{u}} (a : X ⟶ Y)
+    (K L M : 𝐃(X, A)) :
+    ((derivedTensor A Y).map (rightDerivedLowerStarCupProduct A a K L)).app
+          ((R((a)_*[A])).obj M) ≫
+        rightDerivedLowerStarCupProduct A a (((derivedTensor A X).obj K).obj L) M ≫
+        (R((a)_*[A])).map (derivedTensorAssociator A X K L M).hom =
+      (derivedTensorAssociator A Y _ _ _).hom ≫
+        ((derivedTensor A Y).obj ((R((a)_*[A])).obj K)).map
+          (rightDerivedLowerStarCupProduct A a L M) ≫
+        rightDerivedLowerStarCupProduct A a K (((derivedTensor A X).obj L).obj M) := by
+  simp only [derivedTensor_map_app, derivedTensor_obj_map, derivedTensorAssociator_eq,
+    rightDerivedLowerStarCupProduct]
+  exact (derivedUpperStarLowerStarAdjunction A a).rightAdjointCupProduct_associativity _
+    (leftDerivedUpperStarTensorComparison_associativity A a) K L M
 
 end Etale
 

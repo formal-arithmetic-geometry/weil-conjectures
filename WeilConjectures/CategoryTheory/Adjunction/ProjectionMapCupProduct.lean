@@ -181,7 +181,8 @@ lemma cupProductOfProjection_rightUnitality (η : F.obj (𝟙_ D) ⟶ 𝟙_ C)
       (ρ_ _).hom := by
   rw [cupProductOfProjection, Category.assoc, reassoc_of% (hpmr K (adj.homEquiv _ _ η)),
     ← P.map_comp,
-    ← P.map_comp, ← MonoidalCategory.whiskerLeft_comp_assoc, ← homEquiv_counit, Equiv.symm_apply_apply, hpm]
+    ← P.map_comp, ← MonoidalCategory.whiskerLeft_comp_assoc, ← homEquiv_counit,
+    Equiv.symm_apply_apply, hpm]
 
 /-- **Compatibility of the cup product with a map to `G`**: if `s : P ⟶ G` intertwines `pm` with
 the projection map of `G`, it intertwines the cup products. -/
@@ -279,9 +280,8 @@ lemma compProjectionMap_associativity
   erw [reassoc_of% h₁]
   simp only [← G.map_comp]
   congr 3
-  simp only [Category.assoc, comp_whiskerRight]
-  rw [reassoc_of% (hψl (K ◁ e L) (F.obj L')), reassoc_of% (hψ K _ _), Iso.inv_hom_id_assoc,
-    ]
+  simp only [Category.assoc]
+  rw [reassoc_of% (hψl (K ◁ e L) (F.obj L')), reassoc_of% (hψ K _ _), Iso.inv_hom_id_assoc]
   erw [reassoc_of% (hψr K ((φ.app L).app L'))]
   simp only [← J.map_comp]
   congr 2

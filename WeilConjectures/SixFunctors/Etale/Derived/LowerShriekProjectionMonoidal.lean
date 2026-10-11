@@ -14,25 +14,32 @@ public import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStarAdjunction
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal.Unit
 
 /-!
-# Associativity and unitality of the projection maps of the six operations
+# Monoidal coherence of the ingredients of the projection map of `Rf_!`
 
-We show that the projection maps of the derived direct image `Rp_*`, of the extension by zero
-`j_!` along an open immersion and of the compactly supported direct image `Rf_!` are
-associative and unital, i.e. compatible with the associators and unitors of the derived tensor
-product and with the monoidal structure of the derived pullbacks.
+The projection map `PF_c : Rf_!(c)K ⊗ᴸ L ⟶ Rf_!(c)(K ⊗ᴸ Lf^*L)` of a compactification
+`c = (X ⟶[i] Z ⟶[g] Y)` (`AlgebraicGeometry.Etale.projectionMapOfCompactification`) is assembled
+from the tensor comparisons of the derived pullbacks, the projection map of `Rg_*` and the
+projection formula for the extension by zero `i_!`. We prove that these ingredients are
+associative and unital, and compatible with each other; the coherence of `PF_c` and of the
+mixed-support cup product is deduced from these facts in
+`WeilConjectures.SixFunctors.Etale.Derived.CupProductCoherence`.
 
 ## Main statements
 
 - `AlgebraicGeometry.Etale.leftDerivedUpperStarTensorComparison_associativity`,
   `AlgebraicGeometry.Etale.leftDerivedUpperStarTensorComparison_rightUnitor_hom`: the
   associativity and right unitality of the tensor comparison of `Lg^*`.
-- `AlgebraicGeometry.Etale.rightDerivedLowerStarProjectionMap_associativity`: associativity of
-  the projection map of `Rp_*`.
-- `AlgebraicGeometry.Etale.projectionMapOfCompactification_associativity`,
-  `AlgebraicGeometry.Etale.projectionMapOfCompactification_rightUnitality`: associativity and
-  unitality of the projection map `PF_c : Rf_!(c)K ⊗ᴸ L ⟶ Rf_!(c)(K ⊗ᴸ Lf^*L)`.
-- `AlgebraicGeometry.Etale.projectionMapOfCompactification_comp_forgetSupports`: the projection
-  map of `Rf_!` is compatible with that of `Rf_*` through the forget-supports map `Rf_! ⟶ Rf_*`.
+- `AlgebraicGeometry.Etale.rightDerivedLowerStarProjectionMap_associativity`,
+  `AlgebraicGeometry.Etale.rightDerivedLowerStarProjectionMap_rightUnitality`: associativity and
+  unitality of the projection map of `Rp_*`.
+- `AlgebraicGeometry.Etale.derivedOpenImmersionLowerShriekProjectionIso_inv_associativity`,
+  `AlgebraicGeometry.Etale.derivedOpenImmersionLowerShriekProjectionIso_inv_rightUnitality`:
+  associativity and unitality of the projection formula `j_!K ⊗ᴸ M ≅ j_!(K ⊗ᴸ Lj^*M)`.
+- `AlgebraicGeometry.Etale.derivedOpenImmersionLowerShriekProjectionIso_inv_comp_toLowerStar`:
+  the projection formula for `j_!` and the projection map of `Rj_*` agree through `j_! ⟶ Rj_*`.
+- `AlgebraicGeometry.Etale.leftDerivedUpperStarCompactificationIso_hom_app_tensor`,
+  `AlgebraicGeometry.Etale.leftDerivedUpperStarCompactificationIso_hom_app_unit`: the isomorphism
+  `Lg^* ⋙ Li^* ≅ Lf^*` of a compactification is monoidal.
 -/
 
 @[expose] public section
@@ -419,7 +426,7 @@ lemma derivedUpperStarLowerStarAdjunction_homEquiv_symm_lowerShriekToLowerStar
 /-- The projection map of `j_!` and that of `Rj_*` agree through the comparison
 `j_! ⟶ Rj_*`. -/
 @[reassoc]
-lemma derivedOpenImmersionLowerShriekProjectionIso_inv_comp_lowerShriekToLowerStar
+lemma derivedOpenImmersionLowerShriekProjectionIso_inv_comp_toLowerStar
     (K : DerivedCategory (Sheaf U.smallEtaleTopology A))
     (N : DerivedCategory (Sheaf X.smallEtaleTopology A)) :
     ((derivedOpenImmersionLowerShriekProjectionIso A j).inv.app K).app N ≫
