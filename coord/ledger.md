@@ -3738,3 +3738,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 07:59 L: merged deliver/H1/lem-pc-closed-subscheme-base-change-ideal-image (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.ClosedSubschemeBaseChangeIdealImage AlgebraicGeometry.closedSubscheme_baseChange_ideal_image)
 - 08:00 L: merged deliver/M1/lem-sc-enough-globally-generated-ample (stage 2; reviewer FIX; first push; Sheaf.AlgebraicGeometry.ExistsAmpleOfEnoughGloballyGenerated AlgebraicGeometry.Scheme.Modules.exists_isAmple_of_enough_globallyGenerated)
 - 08:00 L: merged deliver/E1/lem-pc-module-inverse-image-adjunction (stage 2; reviewer FIX; first push; Sheaf.Algebra.Category.ModuleCat.Sheaf.TopologicalPullback SheafOfModules.moduleInverseImageAdjunction)
+- 08:00 L: merged deliver/C1/lem-sc-ample-proj-open (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.AmpleProjOpen AlgebraicGeometry.exists_isOpenImmersion_proj_of_isAmple)

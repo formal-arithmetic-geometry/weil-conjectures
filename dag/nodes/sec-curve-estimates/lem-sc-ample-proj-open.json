@@ -116,5 +116,23 @@
   "group": "F1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-ap2 (reviewer sub-agent of L); spot-checked: Repaired re-push after the 16:33 return; both points repaired. Point 1: lem-sc-ample-proj-local-chart now assumes every point lies in some X_s, s positive-degree homogeneous, and asserts the canonical morphism f: X -> Proj(S) with f^{-1}(D_+(s)) = X_s, exactly Stacks 01PZ (properties.tex lemma-map-into-proj) clauses (existence, (1)); its ample clause X_s affine => X_s -> D_+(s) iso is the 01Q1 proof (ample => quasi-separated, then 01PW Gamma_*(X,L)_(s) = Gamma(X_s,O)), true; source.place cites 01PZ, 01Q1, 01PW. Point 2: step 1 now gets the finite affine cover from lem-sc-ample-finite-affine-cover (= Definition 01PS plus quasi-compactness), notes that this gives the cover hypothesis, and only then takes f from the local-chart node. Step 2 uses the local-chart node's two conclusions for each s_i; step 3 is elementary gluing (f is iso over each D_+(s_i), preimages cover X, so f is an iso onto the open union), as in the last sentences of 01Q1. Notions checked: def-pc-proj gives D_+(f) for positive-degree homogeneous f, def-weil-pbc-ample-invertible-module gives X_s and ampleness as 01PS. Small cases: X=P^1, L=O(1) (standard charts), L=O(-1) now excluded from the morphism clause by the cover hypothesis; X=Spec A, L=O_X. FIX more, RETURN less: dag/nodes/sec-curve-estimates/lem-sc-ample-proj-open.json: proof[0].uses: added lem-sc-ample-proj-local-chart, which step 1 cites in its text for the canonical morphism (the 16:33 return had wrongly said to keep uses unchanged); proof_deps already had it. Start 2026-10-10 16:48:36 UTC, end Sat Oct 10 04:49:01 PM UTC 2026 (date -u before merge).; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AmpleProjOpen",
+  "declaration": "AlgebraicGeometry.exists_isOpenImmersion_proj_of_isAmple",
+  "file": "lean/Sheaf/AlgebraicGeometry/AmpleProjOpen.lean",
+  "statement": "theorem exists_isOpenImmersion_proj_of_isAmple (X : Scheme.{u}) (L : X.Modules) [L.IsInvertible] (hL : Scheme.Modules.IsAmple X L) : ∃ (S : Type u) (_ : CommRing S) (𝒮 : ℕ → AddSubgroup S) (_ : GradedRing 𝒮) (f : X ⟶ Proj 𝒮), IsOpenImmersion f",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-apo1117",
+  "group": "C1",
+  "result": "pass",
+  "note": "Node is existential and so is the Lean: X:Scheme.{u}; L:X.Modules [L.IsInvertible] (def-sc-invertible-module); hL: Scheme.Modules.IsAmple X L, #check confirms K1's absolute AlgebraicGeometry.Scheme.Modules.IsAmple (X L), not the relative IsAmple f L; ∃ S:Type u, CommRing, 𝒮:ℕ→AddSubgroup S, GradedRing 𝒮 = nonnegatively graded comm ring; f:X⟶Proj 𝒮 with IsOpenImmersion f; nothing added (no section-ring pinning, which the node statement does not make), universe u forced by X⟶Proj; empty X, affine X with O_X, P^1 with O(1) fit; docstring carries blueprint tag and the three proof steps; compile clean, axioms only sorryAx+standard"
  }
 }
