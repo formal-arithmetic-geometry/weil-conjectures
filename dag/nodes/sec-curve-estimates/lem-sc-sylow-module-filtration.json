@@ -13,7 +13,8 @@
   "place": "node lem-sc-sylow-module-filtration, order 978"
  },
  "stmt_deps": [
-  "def-exc-continuous-cohomology"
+  "def-exc-continuous-cohomology",
+  "def-exc-discrete-modules-category"
  ],
  "proof": [
   {
@@ -136,5 +137,24 @@
   "group": "E1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of E1; spot-checked by L: L: reviewed in full by a reviewer sub-agent (PASS): blueprint proof and 0A3R/0GIZ/0GJ0 read, 4 steps checked against the cited statements, Sylow.not_dvd_index line 489 and the filtration declaration verified, small cases tested"
+ },
+ "lean": {
+  "module": "Sheaf.RepresentationTheory.SylowModuleFiltration",
+  "declaration": "Rep.exists_openSubgroup_primary_module_filtration",
+  "file": "lean/Sheaf/RepresentationTheory/SylowModuleFiltration.lean",
+  "statement": "theorem exists_openSubgroup_primary_module_filtration (G : Type u) [Group G] [TopologicalSpace G] [IsTopologicalGroup G] [CompactSpace G] [T2Space G] [TotallyDisconnectedSpace G] (ℓ : ℕ) (hℓ : ℓ.Prime) (M : DiscreteContinuousRep.{0, u, v} ℤ G) [Finite M.obj.V] (hM : IsPGroup ℓ (Multiplicative M.obj.V)) : ∃ H : OpenSubgroup G, H.toSubgroup.index.Coprime ℓ ∧ ∃ (n : ℕ) (F : Fin (n + 1) → AddSubgroup M.obj.V), Monotone F ∧ F 0 = ⊥ ∧ F (Fin.last n) = ⊤ ∧ (∀ (i : Fin (n + 1)) (g : H) (x : M.obj.V), x ∈ F i → M.obj.ρ (g : G) x ∈ F i) ∧ (∀ (i : Fin n) (x : M.obj.V), x ∈ F i.succ → ℓ • x ∈ F i.castSucc ∧ ∀ g : H, M.obj.ρ (g : G) x - x ∈ F i.castSucc)",
+  "branch": "sheaf-dag",
+  "by": "K1",
+  "date": "2026-10-11",
+  "existing": false,
+  "note": "Uses the landed discrete continuous module category over ℤ (abelian groups), rather than requiring a choice of finite coefficient ring. The quotient conditions are the exact elementwise criteria for annihilation by ℓ and trivial H-action; no dimension restriction is imposed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-smf1311",
+  "group": "K1",
+  "result": "pass",
+  "note": "profinite G (compact T2 totally disconnected topological group), prime ell, M in landed Rep.DiscreteContinuousRep over Z, Finite carrier, ell-primary as IsPGroup on Multiplicative; OpenSubgroup H with index coprime to ell; Fin (n+1) chain of AddSubgroups 0..M, H-stable, consecutive quotients killed by ell with trivial H-action; M=0 n=0 case; #check: IsPGroup/OpenSubgroup resolve to Mathlib roots"
  }
 }
