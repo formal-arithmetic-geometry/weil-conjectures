@@ -11,7 +11,7 @@
  },
  "kind": "statement",
  "title": "Bounded-above flat module complexes are K-flat",
- "statement": "Let R be a ring and let P^\\bullet be a bounded-above cochain complex of flat R-modules, where flat means that tensoring with the module preserves exact sequences. Then for every acyclic cochain complex L^\\bullet of R-modules, the total tensor complex Tot(L^\\bullet \\otimes_R P^\\bullet) is acyclic; equivalently P^\\bullet is K-flat [def-pc-kflat-complex].",
+ "statement": "Let R be a commutative ring and let P^\\bullet be a bounded-above cochain complex of flat R-modules, where flat means that tensoring with the module preserves exact sequences. Then for every acyclic cochain complex L^\\bullet of R-modules, the total tensor complex Tot(L^\\bullet \\otimes_R P^\\bullet) is acyclic; equivalently P^\\bullet is K-flat [def-pc-kflat-complex].",
  "source": {
   "document": "literature/stacks-project/more-algebra.tex",
   "place": "Tag 064K, More on Algebra Lemma 15.59.1 (more-algebra-lemma-derived-tor-quasi-isomorphism)"
@@ -100,5 +100,76 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-mbf2103 (reviewer sub-agent of L); spot-checked: Single step cites lem-pc-kflat-closure clause 1 (bounded-above flat complexes K-flat on any site) specialised to the one-point site with ring R, then def-pc-kflat-complex; no reproof at length, no colimit/induction step to cite (C1 ok). Hypotheses match Tag 064K (bounded above, termwise flat; conclusion acyclic Tot with every acyclic L). No cycle on sheaf-dag: lem-pc-kflat-closure is unsplit, created from lem-pc-kflat-resolution, not from this item or its parent. stmt_deps additions correct. No new nodes. Second reading missed no mathematical fault; its created.item remark is inaccurate (field unchanged)."
  },
- "lead_note": "2026-10-10 L (R-mbf2103): Item now rests on unsplit lem-pc-kflat-closure clause 1; when that node is split, clause 1 must be proved on the site directly (Stacks 06YF-style truncation + flat tensor exactness), never via lem-pc-bounded-above-flat-kflat or this item, else a cycle. Second reading's claim that created.item was changed is inaccurate (it still names lem-pc-bounded-above-flat-kflat, correctly); harmless."
+ "lead_note": "2026-10-10 L (R-mbf2103): Item now rests on unsplit lem-pc-kflat-closure clause 1; when that node is split, clause 1 must be proved on the site directly (Stacks 06YF-style truncation + flat tensor exactness), never via lem-pc-bounded-above-flat-kflat or this item, else a cycle. Second reading's claim that created.item was changed is inaccurate (it still names lem-pc-bounded-above-flat-kflat, correctly); harmless.",
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.BoundedFlatKFlat",
+  "declaration": "CochainComplex.acyclic_mapBifunctor_of_boundedAbove_flat",
+  "file": "lean/Sheaf/Algebra/Homology/BoundedFlatKFlat.lean",
+  "statement": "theorem acyclic_mapBifunctor_of_boundedAbove_flat {R : Type u} [CommRing R] (P : CochainComplex (ModuleCat.{u} R) ℤ) (hbounded : ∃ b : ℤ, ∀ i : ℤ, b < i → IsZero (P.X i)) (hflat : ∀ i : ℤ, Module.Flat R (P.X i)) : ∀ L : CochainComplex (ModuleCat.{u} R) ℤ, L.Acyclic → (mapBifunctor L P (MonoidalCategory.curriedTensor _)).Acyclic",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-bfk0853",
+  "group": "C1",
+  "result": "fix",
+  "note": "CommRing R (Stacks Conventions: rings commutative; correction legit, not easier); P : CochainComplex (ModuleCat.{u} R) ℤ; bounded above = ∃ b, IsZero (P.X i) for i > b; termwise Module.Flat; ∀ acyclic L, Tot(L ⊗ P) = CochainComplex.mapBifunctor curriedTensor (standard ε sign) acyclic; K-flat gloss = def-pc-kflat-complex on one-point site, unfolded (no ring-module K-flat node yet); FromJoel kFlat_of_isStrictlyLE_of_flat is the quasiIso-morphism-property kFlat, not the node; citers all Stacks-sourced -> holds:true",
+  "statement_corrected": true
+ },
+ "statement_change": {
+  "date": "2026-10-11",
+  "by": "C1 stage 2",
+  "old_statement": "Let R be a ring and let P^\\bullet be a bounded-above cochain complex of flat R-modules, where flat means that tensoring with the module preserves exact sequences. Then for every acyclic cochain complex L^\\bullet of R-modules, the total tensor complex Tot(L^\\bullet \\otimes_R P^\\bullet) is acyclic; equivalently P^\\bullet is K-flat [def-pc-kflat-complex].",
+  "what": "The node said only \"ring\"; the tensor product of two left R-modules L^p \\otimes_R P^q needs R commutative, and the recorded tensor/K-flat dependencies (def-pc-tensor-complex-sheaves, def-pc-kflat-complex) are over commutative rings. Stacks' convention (conventions.tex: a ring is a commutative ring with 1) assumes this throughout; the correction states it.",
+  "source": {
+   "document": "literature/stacks-project/more-algebra.tex",
+   "place": "Tag 064K, More on Algebra Lemma 15.59.1, read with Stacks Conventions (literature/stacks-project/conventions.tex: \"a ring is a commutative ring with a 1\")"
+  },
+  "citers": [
+   {
+    "id": "lem-sc-perfect-local-pseudocoherent-free-model",
+    "holds": true,
+    "note": "Holds: a Stacks-sourced node, where \"ring\" means commutative ring (Stacks Conventions); its rings are commutative, so the corrected item applies unchanged."
+   },
+   {
+    "id": "lem-sc-complex-lift-class-projective",
+    "holds": true,
+    "note": "Holds: a Stacks-sourced node, where \"ring\" means commutative ring (Stacks Conventions); its rings are commutative, so the corrected item applies unchanged."
+   },
+   {
+    "id": "lem-pc-termwise-tor-acyclic-derived-tensor",
+    "holds": true,
+    "note": "Its statement already assumes a commutative ring."
+   },
+   {
+    "id": "lem-pc-bounded-above-flat-kflat",
+    "holds": true,
+    "note": "Holds: a Stacks-sourced node, where \"ring\" means commutative ring (Stacks Conventions); its rings are commutative, so the corrected item applies unchanged."
+   },
+   {
+    "id": "lem-pc-base-change-rhom-perfect",
+    "holds": true,
+    "note": "Its statement assumes commutative rings throughout."
+   },
+   {
+    "id": "lem-pc-affine-perfect-hom-colimit",
+    "holds": true,
+    "note": "Holds: a Stacks-sourced node, where \"ring\" means commutative ring (Stacks Conventions); its rings are commutative, so the corrected item applies unchanged."
+   },
+   {
+    "id": "lem-pc-module-tor-amplitude-flat-model",
+    "holds": true,
+    "note": "Holds: a Stacks-sourced node, where \"ring\" means commutative ring (Stacks Conventions); its rings are commutative, so the corrected item applies unchanged."
+   },
+   {
+    "id": "lem-pc-derived-pullback-tor-independent-flat-complex",
+    "holds": true,
+    "note": "Holds: a Stacks-sourced node, where \"ring\" means commutative ring (Stacks Conventions); its rings are commutative, so the corrected item applies unchanged."
+   }
+  ]
+ }
 }
