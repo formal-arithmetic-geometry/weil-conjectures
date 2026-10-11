@@ -26,7 +26,9 @@
   "def-pc-perfect-complex",
   "def-sbc-closed-immersion-ideal-sheaf",
   "def-pc-module-pullback",
-  "lem-pc-noetherian-derived-direct-image-right-adjoint"
+  "lem-pc-noetherian-derived-direct-image-right-adjoint",
+  "def-pc-derived-pullback",
+  "def-pc-scheme-derived-tensor-structure"
  ],
  "proof": [
   {
@@ -159,5 +161,23 @@
    "decls": [],
    "missing": []
   }
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SmoothProperDiagonalTensorFormula",
+  "declaration": "AlgebraicGeometry.smooth_proper_diagonal_tensor_formula",
+  "file": "lean/Sheaf/AlgebraicGeometry/SmoothProperDiagonalTensorFormula.lean",
+  "statement": "theorem smooth_proper_diagonal_tensor_formula {Z Y : Scheme.{u}} [IsNoetherian Z] [IsNoetherian Y] (i : Z ⟶ Y) [IsClosedImmersion i] [IsProper i] [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))] [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))] [∀ U : Y.Opens, HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings Y.toRingedSpace).over U))] (hperfect : Y.IsPerfect ((schemeDerivedDirectImage i).obj (𝟙_ (schemeDerivedCategory Z)))) : ∃ (hRf : ∀ E : schemeDerivedQCohCategory Z, schemeDerivedQCohProperty Y ((schemeDerivedDirectImage i).obj E.obj)) (hO : schemeDerivedQCohProperty Y (𝟙_ (schemeDerivedCategory Y))) (hTensor : ∀ (K : schemeDerivedQCohCategory Y) (E : schemeDerivedQCohCategory Z), schemeDerivedQCohProperty Z (((derivedPullback i).obj K.obj) ⊗ E.obj)), Nonempty (Functor.Monoidal (derivedPullback i)) ∧ Nonempty (derivedPullback i ⊣ schemeDerivedDirectImage i) ∧ ∀ (_ : Functor.Monoidal (derivedPullback i)) (a : derivedPullback i ⊣ schemeDerivedDirectImage i) (c : schemeDerivedQCohCategory Y ⥤ schemeDerivedQCohCategory Z) (adj : (schemeDerivedQCohProperty Y).lift ((schemeDerivedQCohProperty Z).ι ⋙ schemeDerivedDirectImage i) hRf ⊣ c) (K : schemeDerivedQCohCategory Y), ∃ pf : (schemeDerivedDirectImage i).obj (((derivedPullback i).obj K.obj) ⊗ (c.obj ⟨𝟙_ _, hO⟩).obj) ≅ K.obj ⊗ (schemeDerivedDirectImage i).obj (c.obj ⟨𝟙_ _, hO⟩).obj, pf.inv = (a.homEquiv _ _) ((Functor.Monoidal.μIso (derivedPullback i) K.obj ((schemeDerivedDirectImage i).obj (c.obj ⟨𝟙_ _, hO⟩).obj)).inv ≫ (derivedPullback i).obj K.obj ◁ a.counit.app (c.obj ⟨𝟙_ _, hO⟩).obj) ∧ IsIso ((adj.homEquiv ⟨((derivedPullback i).obj K.obj) ⊗ (c.obj ⟨𝟙_ _, hO⟩).obj, hTensor K (c.obj ⟨𝟙_ _, hO⟩)⟩ K) (ObjectProperty.homMk (pf.hom ≫ K.obj ◁ (adj.counit.app ⟨𝟙_ _, hO⟩).hom ≫ (ρ_ K.obj).hom)))",
+  "branch": "sheaf-dag",
+  "by": "S1",
+  "date": "2026-10-12",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-dtf",
+  "group": "S1",
+  "result": "pass",
+  "note": "Noetherian Z,Y; closed immersion+proper i; i_*O_Z perfect as Y.IsPerfect (Ri_* 𝟙_); arbitrary right adjoint c of the D_QCoh lift of Ri_*; arbitrary K in D_QCoh(Y); projection map pinned via Li^*-|Ri_* homEquiv, μIso, counit; conclusion IsIso of the mate of pf ≫ K◁counit ≫ ρ_, same encoding as landed SmoothProperTensorPerfectCase; added stmt_deps def-pc-derived-pullback, def-pc-scheme-derived-tensor-structure justified (both used); check_dag unchanged"
  }
 }
