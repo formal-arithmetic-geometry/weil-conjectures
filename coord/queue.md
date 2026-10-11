@@ -1,11 +1,11 @@
 # Work queue
 
-60 items; claim with `tools/claim.py next <group> [--stage N]`.
+57 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (60)
+## Stage 2: nodes to state (57)
 
 | node | distance to Mathlib | kind | blockers |
 |---|---|---|---|
@@ -30,7 +30,6 @@
 | `cor-galois-lisse-representations` | 1 | state | 0 |
 | `lem-pc-affine-morphism-hom-out-of-perfect` | 1 | state | 0 |
 | `lem-pc-base-change-map-cech` | 1 | state | 0 |
-| `lem-pc-base-change-rhom-perfect` | 1 | state | 0 |
 | `lem-pc-derived-internal-hom-pullback-adjunction` | 1 | state | 0 |
 | `lem-pc-global-hom-pullback-adjunction` | 1 | state | 0 |
 | `lem-pc-sites-module-sheafification-bilinear-extension` | 1 | state | 0 |
@@ -38,7 +37,6 @@
 | `lem-pc-sites-sheaf-tensor-bilinear-universal` | 1 | state | 0 |
 | `lem-pur-site-restriction-module-adjunction-exact` | 1 | state | 0 |
 | `lem-sc-affine-koszul-cech-derived-comparison` | 1 | state | 0 |
-| `lem-sc-finite-duality-derived-hom` | 1 | state | 0 |
 | `lem-sc-finite-sheafhom-affine-adjoint` | 1 | state | 0 |
 | `lem-sc-flat-precompose-pus` | 1 | state | 0 |
 | `lem-sc-hilb-dominating-power` | 1 | state | 0 |
@@ -58,7 +56,6 @@
 | `lem-weil-pbc-sets-etale-inverse-image-exact` | 1 | state | 0 |
 | `lem-weil-pbc-sheaf-surjection-kernel-pair-coequalizer` | 1 | state | 0 |
 | `lem-weil-pbc-sheaves-injective-directed-colimit-qc-sections` | 1 | state | 0 |
-| `lem-weil-pbc-simplicial-hom-object-pushout` | 1 | state | 0 |
 | `lem-weil-pbc-site-equivalence-morphism-transport` | 1 | state | 0 |
 | `lem-weil-pbc-site-higher-direct-image-sheafified-presheaf` | 1 | state | 0 |
 | `lem-weil-pbc-site-module-sheafification-lift-injective` | 1 | state | 0 |
