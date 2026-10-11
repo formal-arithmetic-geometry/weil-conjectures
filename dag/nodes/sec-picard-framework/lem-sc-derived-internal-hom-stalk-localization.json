@@ -165,5 +165,24 @@
    "decls": [],
    "missing": []
   }
+ },
+ "lean": {
+  "module": "Sheaf.Paper.DerivedInternalHomStalkLocalization",
+  "declaration": "AlgebraicGeometry.derivedInternalHom_stalk_localization",
+  "statement": "theorem derivedInternalHom_stalk_localization (X : Scheme.{u}) [CompactSpace X] [AlgebraicGeometry.IsLocallyNoetherian X] [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))] (F G : SheafOfModules.{u} (moduleRings X.toRingedSpace)) (hF : RingedSpace.IsCoherent X.toRingedSpace F) (x : X) (i : ℤ) [HasDerivedCategory.{w} (SheafOfModules.{u} ((sheafCompose ⊥ (forget₂ CommRingCat.{u} RingCat.{u})).obj (CochainComplex.onePointRingSheaf (X.toRingedSpace.presheaf.stalk x))))] : Nonempty ((RingedSpace.moduleStalkFunctor X.toRingedSpace x).obj ((DerivedCategory.homologyFunctor (SheafOfModules.{u} (moduleRings X.toRingedSpace)) i).obj ((CategoryTheory.derivedInternalHom (Opens.grothendieckTopology X.toRingedSpace) X.toRingedSpace.sheaf).obj (op ((DerivedCategory.singleFunctor (SheafOfModules.{u} (moduleRings X.toRingedSpace)) 0).obj F), (DerivedCategory.singleFunctor (SheafOfModules.{u} (moduleRings X.toRingedSpace)) 0).obj G))) ≃ₗ[ X.presheaf.stalk x] (SheafOfModules.evaluation ((sheafCompose ⊥ (forget₂ CommRingCat.{u} RingCat.{u})).obj (CochainComplex.onePointRingSheaf (X.toRingedSpace.presheaf.stalk x))) (Opposite.op (Discrete.mk PUnit.unit))).obj ((DerivedCategory.homologyFunctor (SheafOfModules.{u} ((sheafCompose ⊥ (forget₂ CommRingCat.{u} RingCat.{u})).obj (CochainComplex.onePointRingSheaf (X.toRingedSpace.presheaf.stalk x)))) i).obj ((CategoryTheory.derivedInternalHom ⊥ (CochainComplex.onePointRingSheaf (X.toRingedSpace.presheaf.stalk x))).obj (op ((DerivedCategory.singleFunctor _ 0).obj ⟨(PresheafOfModules.constFunctor {pt := RingCat.of (X.toRingedSpace.presheaf.stalk x), ι := 𝟙 _}).obj ((RingedSpace.moduleStalkFunctor X.toRingedSpace x).obj F), Presheaf.isSheaf_bot _⟩), (DerivedCategory.singleFunctor _ 0).obj ⟨(PresheafOfModules.constFunctor {pt := RingCat.of (X.toRingedSpace.presheaf.stalk x), ι := 𝟙 _}).obj ((RingedSpace.moduleStalkFunctor X.toRingedSpace x).obj G), Presheaf.isSheaf_bot _⟩))))",
+  "branch": "sheaf-dag",
+  "by": "S1",
+  "date": "2026-10-12",
+  "file": "lean/Sheaf/Paper/DerivedInternalHomStalkLocalization.lean",
+  "existing": false,
+  "fixed_by": "R-dsl"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-dsl",
+  "group": "S1",
+  "result": "fix",
+  "note": "X qc+loc. Noetherian, F coherent, G any, x, i:ℤ; LHS moduleStalkFunctor of H^i derivedInternalHom(F[0],G[0]); RHS evaluation at the point of H^i derivedInternalHom on onePointRingSheaf O_{X,x} of F_x[0],G_x[0]; ≃+ on Ab-stalk -> ≃ₗ[O_{X,x}] via moduleStalkFunctor; statement correction reverted (it named an error of an old Lean draft, not of the node); reverted the delivery's statement correction of the item (statement, statement_change kept as on sheaf-dag; --revert-statement)"
  }
 }
