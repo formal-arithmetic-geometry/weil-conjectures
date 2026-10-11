@@ -135,5 +135,24 @@
   "group": "C1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-pgi2559 (reviewer sub-agent of L); spot-checked: Read whole packet; checked Steps 1-4 against Tag 09IS/09IQ/09IR/08DP/08DF and cited statements; generator sense matches def-pc-generators and citer lem-pc-derived-qcoh-perfect-generation (weak generator, C4 ok); no MV node needed (local-iso check), no overlap with lem-pc-perfect-thick-closure; Koszul/08DP/08DF inputs are proper statement-only nodes, no existing node by tag/grep. FIX more, RETURN less: (1) C1 Step 3 restriction of Rj_* to V was uncited ('transitivity') - now cites existing lem-pc-restrict-derived-direct-image-open (Tag 08FE, generic ringed-space tool from sk-thm-picard-f-representable, C7 tool use); (2) C4 new node lem-pc-perfect-generation-koszul-orthogonal (i) said only 'E is isomorphic to', Step 3 needs the canonical map to be an iso (as in 09IR) - statement corrected; (3) C4 Step 3 cited lem-sc-derived-open-gluing for 'iso on an open cover is iso', which it does not state, and had the map direction F->E - replaced by the elementary cone argument with the unit E->F, gluing citation dropped; Step 4 uses trimmed. Note E7: dropping 'Koszul' from the item statement (weakening, citer only needs perfect) was not named in the report.; 2 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.PerfectGenerationOpenInduction",
+  "declaration": "AlgebraicGeometry.Scheme.exists_perfect_generator_of_open_union_affine",
+  "file": "lean/Sheaf/AlgebraicGeometry/PerfectGenerationOpenInduction.lean",
+  "statement": "theorem exists_perfect_generator_of_open_union_affine (X : Scheme.{u}) [CompactSpace X] [QuasiSeparatedSpace X] (U V : X.Opens) (hU : IsCompact (U : Set X)) (hV : IsAffineOpen V) (hcover : U ⊔ V = ⊤) [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))] [∀ W : X.Opens, HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over W))] [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace))] [∀ W : U.toScheme.Opens, HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings U.toScheme.toRingedSpace).over W))] (P : schemeDerivedQCohCategory U.toScheme) (hP : IsPerfect U.toScheme P.obj) (hgen : ∀ E : schemeDerivedQCohCategory U.toScheme, IsZero E.obj ↔ ∀ n : ℤ, Subsingleton (P.obj⟦n⟧ ⟶ E.obj)) : ∃ Q K' : schemeDerivedCategory X, IsPerfect X Q ∧ IsPerfect X K' ∧ (∃ (ι : P.obj ⟶ ((SheafOfModules.overFunctor.{u} (moduleRings X.toRingedSpace) U) ⋙ Equivalence.functor (C := SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U)) (D := SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace)) (Modules.overEquiv U)).mapDerivedCategory.obj Q) (π : ((SheafOfModules.overFunctor.{u} (moduleRings X.toRingedSpace) U) ⋙ Equivalence.functor (C := SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U)) (D := SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace)) (Modules.overEquiv U)).mapDerivedCategory.obj Q ⟶ P.obj), ι ≫ π = 𝟙 P.obj) ∧ (∀ (n : ℤ) (x : X), x ∉ (V : Set X) \\ (U : Set X) → Subsingleton ↑(TopCat.Presheaf.stalk ((DerivedCategory.homologyFunctor (SheafOfModules.{u} (moduleRings X.toRingedSpace)) n).obj K').val.presheaf x)) ∧ schemeDerivedQCohProperty X (Q ⊞ K') ∧ ∀ E : schemeDerivedQCohCategory X, IsZero E.obj ↔ ∀ n : ℤ, Subsingleton ((Q ⊞ K')⟦n⟧ ⟶ E.obj)",
+  "branch": "sheaf-dag",
+  "by": "G1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-poi1508"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-poi1508",
+  "group": "G1",
+  "result": "fix",
+  "note": "qcqs X CompactSpace+QuasiSeparatedSpace; U IsCompact; V IsAffineOpen; U⊔V=⊤; P in D_QCoh(U) IsPerfect, generation C1 IsZero↔Subsingleton(P⟦n⟧⟶E) form; Q,K' IsPerfect; P retract of Q|U via overFunctor⋙overEquiv U mapDerivedCategory (G1 ce180b4c0); H^n(K') stalks vanish off V\\U; Q⊞K' qcoh and generates; IsTriangulated binders removed"
  }
 }
