@@ -37,14 +37,16 @@ testing for geometric irreducibility below.
 
 - `AlgebraicGeometry.WeilSheaf.exists_isClosedImmersion_isIrreducibleLocalSystem_upperStar`:
   blueprint `lem-zl-curve-testing-irreducibility`.
+- `AlgebraicGeometry.WeilSheaf.isMixed_of_forall_exists_isMixed_upperStar_opensι`: the Noetherian
+  induction of `thm-zl-real-mixed-by-curves`.
 - `AlgebraicGeometry.WeilSheaf.IsReal.isMixed`: blueprint `sk-i-dl-general-real` and
   `thm-zl-real-mixed-by-curves`.
 
 ## TODO
 
-`AlgebraicGeometry.WeilSheaf.IsReal.isMixed` is proved here by Noetherian induction from
-`AlgebraicGeometry.WeilSheaf.IsReal.exists_isMixed_upperStar_opensι` (mixedness on a nonempty
-open), which is stated with `sorry`, as is curve testing
+`AlgebraicGeometry.WeilSheaf.IsReal.isMixed` is reduced here by Noetherian induction
+(`AlgebraicGeometry.WeilSheaf.isMixed_of_forall_exists_isMixed_upperStar_opensι`) to mixedness on
+a nonempty open, which is left as `sorry`, as is curve testing
 `AlgebraicGeometry.WeilSheaf.exists_isClosedImmersion_isIrreducibleLocalSystem_upperStar`. Both
 need infrastructure that does not exist yet: the dictionary between lisse pro-étale Weil sheaves
 and representations of the Weil group (`def-wf-fundamental-representation`) on a base of any
@@ -132,31 +134,23 @@ theorem isMixedOfWeightsAtMost_of_isEmpty {X : Scheme.{u}} [X.Over (Spec (CommRi
     fun i ↦ Fin.cases ⟨fun _ _ _ ↦ (Limits.isZero_zero _).eq_of_tgt _ _⟩ (fun j ↦ j.elim0) i,
     fun _ ↦ ⟨w, le_rfl, fun x ↦ isEmptyElim x.1⟩⟩
 
-/-- **Real sheaves are mixed on a nonempty open.** Let `X` be a nonempty reduced separated
-`k₀`-scheme of finite type and `F` an `ι`-real Weil sheaf on `X`. Then the restriction of `F` to
-some nonempty open of `X` is `ι`-mixed (blueprint: `thm-zl-real-mixed-by-curves`, the lisse
-stratum: after shrinking, `F` is lisse on a smooth affine stratum, where curve testing
-`lem-zl-curve-testing-irreducibility` and purity of real lisse sheaves on curves
-`thm-rp-real-lisse-purity-affine` make the constituents of `F` pure, after a finite constant
-extension which is then descended). -/
-theorem IsReal.exists_isMixed_upperStar_opensι {X : Scheme.{u}}
-    [X.Over (Spec (CommRingCat.of k₀))] [IsReduced X] [Nonempty X]
-    [IsSeparated (X ↘ Spec (CommRingCat.of k₀))]
-    [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
-    [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))] {F : WeilSheaf k₀ l X} (hF : F.IsReal ι) :
-    ∃ U : X.Opens, (U : Set X).Nonempty ∧ ((WeilSheaf.upperStar U.ι).obj F).IsMixed ι :=
-  sorry
-
-/-- Every constructible `ι`-real Weil sheaf on a separated finite-type `k₀`-scheme is `ι`-mixed
-(blueprint: `sk-i-dl-general-real`, `thm-zl-real-mixed-by-curves`).
+/-- **Reduction of mixedness of real sheaves to a nonempty open.** Suppose that on every nonempty
+reduced separated `k₀`-scheme `T` of finite type, every `ι`-real Weil sheaf is `ι`-mixed on some
+nonempty open of `T`. Then every `ι`-real Weil sheaf on a separated finite-type `k₀`-scheme is
+`ι`-mixed (blueprint: `thm-zl-real-mixed-by-curves`, the reduction to a lisse stratum).
 
 Noetherian induction on the closed subsets of `X`: on a reduced closed subscheme `T`, a real
-sheaf is mixed on a nonempty open `U`
-(`AlgebraicGeometry.WeilSheaf.IsReal.exists_isMixed_upperStar_opensι`)
-and, by induction, on the reduced closed complement of `U`; mixed filtrations glue along the
-open–closed exact sequence (`AlgebraicGeometry.WeilSheaf.IsMixedOfWeightsAtMost.of_openClosed`),
-and reality is inherited by restrictions (`AlgebraicGeometry.WeilSheaf.IsReal.upperStar`). -/
-theorem IsReal.isMixed {X : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
+sheaf is mixed on a nonempty open `U` by hypothesis and, by induction, on the reduced closed
+complement of `U`; mixed filtrations glue along the open–closed exact sequence
+(`AlgebraicGeometry.WeilSheaf.IsMixedOfWeightsAtMost.of_openClosed`), and reality is inherited
+by restrictions (`AlgebraicGeometry.WeilSheaf.IsReal.upperStar`). -/
+theorem isMixed_of_forall_exists_isMixed_upperStar_opensι
+    (h : ∀ (T : Scheme.{u}) [T.Over (Spec (CommRingCat.of k₀))] [IsReduced T] [Nonempty T]
+      [IsSeparated (T ↘ Spec (CommRingCat.of k₀))]
+      [LocallyOfFiniteType (T ↘ Spec (CommRingCat.of k₀))]
+      [QuasiCompact (T ↘ Spec (CommRingCat.of k₀))] (G : WeilSheaf k₀ l T), G.IsReal ι →
+        ∃ U : T.Opens, (U : Set T).Nonempty ∧ ((WeilSheaf.upperStar U.ι).obj G).IsMixed ι)
+    {X : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
     [IsSeparated (X ↘ Spec (CommRingCat.of k₀))]
     [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
     [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))] {F : WeilSheaf k₀ l X} (hF : F.IsReal ι) :
@@ -182,7 +176,7 @@ theorem IsReal.isMixed {X : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
     have := isNoetherian_of_locallyOfFiniteType (T ↘ Spec (CommRingCat.of k₀))
     cases isEmpty_or_nonempty T
     · exact ⟨0, isMixedOfWeightsAtMost_of_isEmpty G 0⟩
-    obtain ⟨U, ⟨u, hu⟩, w₁, hU⟩ := hG.exists_isMixed_upperStar_opensι
+    obtain ⟨U, ⟨u, hu⟩, w₁, hU⟩ := h T G hG
     -- The reduced closed complement `T'` of `U`.
     let C : Closeds T := ⟨(U : Set T)ᶜ, U.isOpen.isClosed_compl⟩
     let i' := (Scheme.IdealSheafData.vanishingIdeal C).subschemeι
@@ -221,6 +215,27 @@ theorem IsReal.isMixed {X : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
     (by rw [Scheme.Opens.range_ι, Scheme.IdealSheafData.range_subschemeι,
       Scheme.IdealSheafData.coe_support_vanishingIdeal]; exact isCompl_bot_top)
     (isMixedOfWeightsAtMost_of_isEmpty _ w) hw⟩
+
+/-- Every constructible `ι`-real Weil sheaf on a separated finite-type `k₀`-scheme is `ι`-mixed
+(blueprint: `sk-i-dl-general-real`, `thm-zl-real-mixed-by-curves`).
+
+By Noetherian induction
+(`AlgebraicGeometry.WeilSheaf.isMixed_of_forall_exists_isMixed_upperStar_opensι`) it suffices
+to make a real sheaf mixed on a nonempty open. That step is not yet formalised: after shrinking,
+the sheaf is lisse on a smooth affine stratum, where curve testing
+(`AlgebraicGeometry.WeilSheaf.exists_isClosedImmersion_isIrreducibleLocalSystem_upperStar`) and
+purity of real lisse sheaves on curves
+(`AlgebraicGeometry.WeilSheaf.IsReal.exists_isPunctuallyPureOfWeight_cokernel`) make the
+geometric constituents pure after a finite constant extension, which is then descended. -/
+theorem IsReal.isMixed {X : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
+    [IsSeparated (X ↘ Spec (CommRingCat.of k₀))]
+    [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
+    [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))] {F : WeilSheaf k₀ l X} (hF : F.IsReal ι) :
+    F.IsMixed ι :=
+  -- TODO: the lisse-stratum step needs the dictionary between lisse pro-étale Weil sheaves and
+  -- Weil-group representations, finite constant-field extensions of Weil sheaves with the
+  -- trace splitting, and the descent of the curves of curve testing to a finite field.
+  isMixed_of_forall_exists_isMixed_upperStar_opensι (fun _ _ _ _ _ _ _ _ _ ↦ sorry) hF
 
 end WeilSheaf
 

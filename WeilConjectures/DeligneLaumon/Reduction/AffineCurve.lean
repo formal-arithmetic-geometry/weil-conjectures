@@ -13,7 +13,7 @@ public import WeilConjectures.WeilSheaf.LisseLocus
 public import WeilConjectures.WeilSheaf.StalkFunctor
 public import WeilConjectures.WeilSheaf.Triangle
 public import WeilConjectures.AlgebraicGeometry.AffineSpace.Line
-public import WeilConjectures.Mathlib.AlgebraicGeometry.AffineSpace.Fiber
+public import WeilConjectures.AlgebraicGeometry.AffineSpace.Fiber
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme
 
 /-!
@@ -123,7 +123,7 @@ theorem WeilSheaf.nonempty_equiv_compactlySupportedCohomology_zero_higherLowerSh
   obtain ⟨e₂⟩ := WeilComplex.nonempty_homologySheaf_map_iso
     (WeilComplex.derivedLowerShriek k₀ l
       (Spec (CommRingCat.of k₀) ↘ Spec (CommRingCat.of k₀))) ha L r
-  obtain ⟨e₅⟩ := WeilComplex.nonempty_derivedLowerShriekCompIso (k₀ := k₀) (l := l) f
+  obtain ⟨e₅⟩ := WeilComplex.nonempty_derivedLowerShriek_comp_iso (k₀ := k₀) (l := l) f
     (Spec (CommRingCat.of k₀) ↘ Spec (CommRingCat.of k₀))
   let E := (e₅.app _).symm ≪≫
     (WeilComplex.derivedLowerShriekCongr (comp_over f _)).app (WeilSheaf.toComplex.obj F)
@@ -154,7 +154,7 @@ theorem WeilSheaf.nonempty_equiv_compactlySupportedCohomology_higherLowerShriek_
       · exact WeilSheaf.isZero_homologySheaf_derivedLowerShriek_of_neg F hb
       · obtain ⟨n, rfl⟩ : ∃ n : ℕ, b = n := ⟨b.toNat, (Int.toNat_of_nonneg hb.le).symm⟩
         exact isZero_higherLowerShriek_of_quasiFinite f n (by exact_mod_cast hb) F
-  obtain ⟨e₅⟩ := WeilComplex.nonempty_derivedLowerShriekCompIso (k₀ := k₀) (l := l) f
+  obtain ⟨e₅⟩ := WeilComplex.nonempty_derivedLowerShriek_comp_iso (k₀ := k₀) (l := l) f
     (Y ↘ Spec (CommRingCat.of k₀))
   let E := (WeilComplex.derivedLowerShriekCongr (comp_over f _).symm).app
       (WeilSheaf.toComplex.obj F) ≪≫ e₅.app _ ≪≫

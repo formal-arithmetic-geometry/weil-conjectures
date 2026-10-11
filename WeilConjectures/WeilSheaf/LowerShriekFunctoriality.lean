@@ -34,7 +34,7 @@ stated here with `sorry`, each with the blueprint statement it renders. The iden
 - `AlgebraicGeometry.WeilComplex.derivedLowerShriekObjIsoDerivedLowerStar`: `Rf₀! ≅ Rf₀*` for
   `f` proper.
 - `AlgebraicGeometry.WeilComplex.nonempty_derivedLowerShriek_toComplex_iso_of_isOpenImmersion`,
-  `AlgebraicGeometry.WeilComplex.nonempty_derivedLowerShriekCompIso`,
+  `AlgebraicGeometry.WeilComplex.nonempty_derivedLowerShriek_comp_iso`,
   `AlgebraicGeometry.WeilComplex.exists_distTriang_derivedLowerShriek_openClosed` and
   `AlgebraicGeometry.WeilComplex.nonempty_upperStar_derivedLowerShriek_iso`: clauses 2, 3 and 4 of
   `prop-functor-package`.
@@ -126,7 +126,11 @@ theorem nonempty_derivedLowerShriek_toComplex_iso_of_isOpenImmersion (j : U ⟶ 
 /-- **The open–closed triangle** (blueprint: `prop-sf-open-closed-triangle-all-stages`): for a
 quasi-compact open immersion `j : U ⟶ X` with closed complement `i : Z ⟶ X` and a Weil complex `K`
 on `X`, the open counit and the closed unit extend to a distinguished triangle of Weil complexes
-`j₀!j₀^*K ⟶ K ⟶ i₀*i₀^*K ⟶ j₀!j₀^*K[1]`. -/
+`j₀!j₀^*K ⟶ K ⟶ i₀*i₀^*K ⟶ j₀!j₀^*K[1]`.
+
+This is a weakening of the blueprint node: the vertices of the triangle are only identified up
+to some isomorphism, and the first two arrows are not asserted to be the canonical counit and
+unit. -/
 theorem exists_distTriang_openClosed (j : U ⟶ X) [IsOpenImmersion j] [QuasiCompact j]
     [j.IsOver (Spec (CommRingCat.of k₀))] (i : Z ⟶ X) [IsClosedImmersion i]
     [i.IsOver (Spec (CommRingCat.of k₀))] (hij : IsCompl (Set.range j.base) (Set.range i.base))
@@ -144,7 +148,7 @@ theorem exists_distTriang_openClosed (j : U ⟶ X) [IsOpenImmersion j] [QuasiCom
 clause 3: `R(gf)_! ≃ Rg_!Rf_!`; this is `lem-zl-shriek-composition` of
 `sec-deligne-laumon-general`). For composable separated morphisms of finite type
 `X ⟶[f] Y ⟶[g] Z` of `k₀`-schemes, `R(f ≫ g)₀! ≅ Rg₀! ∘ Rf₀!`. -/
-theorem nonempty_derivedLowerShriekCompIso (f : X ⟶ Y) (g : Y ⟶ Z)
+theorem nonempty_derivedLowerShriek_comp_iso (f : X ⟶ Y) (g : Y ⟶ Z)
     [f.IsOver (Spec (CommRingCat.of k₀))] [IsSeparated f] [LocallyOfFiniteType f]
     [QuasiCompact f] [g.IsOver (Spec (CommRingCat.of k₀))] [IsSeparated g]
     [LocallyOfFiniteType g] [QuasiCompact g]

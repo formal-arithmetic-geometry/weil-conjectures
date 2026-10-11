@@ -43,6 +43,7 @@ public import WeilConjectures.AlgebraicGeometry.AbelianVariety.TateModule
 public import WeilConjectures.AlgebraicGeometry.AbelianVariety.Torsion
 public import WeilConjectures.AlgebraicGeometry.AbsoluteFrobenius
 public import WeilConjectures.AlgebraicGeometry.AffineSpace.ArtinSchreier
+public import WeilConjectures.AlgebraicGeometry.AffineSpace.Fiber
 public import WeilConjectures.AlgebraicGeometry.AffineSpace.Line
 public import WeilConjectures.AlgebraicGeometry.AffineSpace.ZeroSection
 public import WeilConjectures.AlgebraicGeometry.BaseChangeNorm
@@ -942,7 +943,6 @@ public import WeilConjectures.Mathlib.Algebra.Ring.Subring.Basic
 public import WeilConjectures.Mathlib.AlgebraicGeometry.AffineOpenAlgebra
 public import WeilConjectures.Mathlib.AlgebraicGeometry.AffineScheme
 public import WeilConjectures.Mathlib.AlgebraicGeometry.AffineSpace
-public import WeilConjectures.Mathlib.AlgebraicGeometry.AffineSpace.Fiber
 public import WeilConjectures.Mathlib.AlgebraicGeometry.AffineTransitionLimit
 public import WeilConjectures.Mathlib.AlgebraicGeometry.AlgClosed.Basic
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Birational.RationalMap
