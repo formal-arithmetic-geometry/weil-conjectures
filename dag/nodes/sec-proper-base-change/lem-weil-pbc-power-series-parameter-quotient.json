@@ -161,5 +161,27 @@
   "group": "G1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of G1; spot-checked by L: L: 07NM by the substitution isomorphisms in the field and Cohen cases; 0 new"
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.PowerSeriesParameterQuotient",
+  "declaration": "MvPowerSeries.exists_algEquiv_quotient_parameters_field",
+  "declarations": [
+   "MvPowerSeries.exists_algEquiv_quotient_parameters_field",
+   "MvPowerSeries.exists_algEquiv_quotient_parameters_cohen"
+  ],
+  "file": "lean/Sheaf/RingTheory/PowerSeriesParameterQuotient.lean",
+  "statement": "theorem exists_algEquiv_quotient_parameters_field (K : Type u) [Field K] (n : ℕ) (z y : List (MvPowerSeries (Fin n) K)) (hparams : IsLocalRing.IsRegularSystemOfParameters (z ++ y)) : z.length ≤ n ∧ y.length = n - z.length ∧ ∃ e : MvPowerSeries (Fin y.length) K ≃ₐ[K] (MvPowerSeries (Fin n) K ⧸ Ideal.span {a | a ∈ z}), IsLocalHom e.toRingHom ∧ ∀ i : Fin y.length, e (X i) = Ideal.Quotient.mk _ (y.get i)",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-ppq1440",
+  "group": "E1",
+  "result": "pass",
+  "note": "07NM (2),(4): K field / Cohen Λ (IsCohenRing p Λ, Prop instances IsLocalRing+IsNoetherianRing implied), S=MvPowerSeries (Fin n), z++y resp. C p::(z++y) IsLocalRing.IsRegularSystemOfParameters (landed def), quotient Ideal.span {a | a ∈ z}, local alg equiv from MvPowerSeries (Fin y.length) tied X i ↦ mk (y.get i), C p fixed; counts z.length ≤ n, y.length = n - z.length; names #check'd fully qualified; only lean field added to node"
  }
 }
