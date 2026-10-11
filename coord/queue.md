@@ -1,11 +1,11 @@
 # Work queue
 
-196 items; claim with `tools/claim.py next <group> [--stage N]`.
+190 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (196)
+## Stage 2: nodes to state (190)
 
 | node | distance to Mathlib | kind | blockers |
 |---|---|---|---|
@@ -33,7 +33,6 @@
 | `thm-sp-grothendieck` | 1 | state | 2 |
 | `lem-pc-derived-tensor-transitivity` | 1 | state | 1 |
 | `lem-sc-base-change-curve` | 1 | state | 1 |
-| `lem-weil-pbc-symmetric-algebra-graded` | 1 | state | 1 |
 | `thm-sp-spectral-object-yields` | 1 | state | 1 |
 | `lem-sc-group-addition-tangent-differential` | 2 | state | 1 |
 | `lem-sc-hilbert-polynomial` | 2 | state | 1 |
@@ -53,30 +52,25 @@
 | `lem-weil-pbc-etale-geometric-fibre-constant-sections` | 1 | state | 0 |
 | `lem-weil-pbc-local-ring-spec-limit-affine-neighbourhoods` | 1 | state | 0 |
 | `lem-weil-pbc-projective-space-twisting-sheaf-charts` | 1 | state | 0 |
-| `lem-weil-pbc-sets-etale-section-continuity` | 1 | state | 0 |
 | `lem-weil-pbc-smooth-section-etale-lift` | 1 | state | 0 |
 | `lem-weil-pbc-spec-algebraically-closed-etale-sheaf-constant` | 1 | state | 0 |
 | `lem-weil-pbc-spec-field-point-residue-field` | 1 | state | 0 |
 | `lem-weil-pbc-spectral-limit-pullback-sections` | 1 | state | 0 |
 | `lem-weil-pbc-spectral-sheaf-colimit-constant-embeddings` | 1 | state | 0 |
-| `lem-weil-pbc-spread-finite-separable-extension` | 1 | state | 0 |
-| `lem-weil-pbc-spread-purely-inseparable-factors` | 1 | state | 0 |
 | `lem-weil-pbc-stalk-change-of-rings-tensor` | 1 | state | 0 |
 | `lem-weil-pbc-standard-fpqc-quotient-topology` | 1 | state | 0 |
 | `lem-weil-pbc-standard-smooth-over-field-dimension-at-points` | 1 | state | 0 |
-| `lem-weil-pbc-stein-fibre-idempotent-image` | 1 | state | 0 |
 | `lem-weil-pbc-stein-geometric-fibre-etale-criterion` | 1 | state | 0 |
 | `lem-weil-pbc-stein-universally-closed-factor` | 1 | state | 0 |
 | `lem-weil-pbc-strictly-henselian-sections-stalk` | 1 | state | 0 |
 | `lem-weil-pbc-support-pullback-finite-type` | 1 | state | 0 |
 | `lem-weil-pbc-surjective-universally-closed-affine-target` | 1 | state | 0 |
 | `lem-weil-pbc-symmetric-algebra-base-change` | 1 | state | 0 |
-| `lem-weil-pbc-symmetric-algebra-finite-presentation` | 1 | state | 0 |
 | `lem-weil-pbc-symmetric-algebra-quotient-module` | 1 | state | 0 |
+| `lem-weil-pbc-symmetric-degree-exact` | 1 | state | 0 |
 | `lem-weil-pbc-symmetric-projective-presentation-conormal` | 1 | state | 0 |
 | `lem-weil-pbc-syntomic-at-prime-relative-global-complete-intersection` | 1 | state | 0 |
 | `lem-weil-pbc-tate-n2-complete-principal` | 1 | state | 0 |
-| `lem-weil-pbc-tensor-field-extension-galois-invariants` | 1 | state | 0 |
 | `lem-weil-pbc-tensor-finite-type-limit` | 1 | state | 0 |
 | `lem-weil-pbc-thickening-affine-scheme` | 1 | state | 0 |
 | `lem-weil-pbc-tilde-pullback-base-change` | 1 | state | 0 |
@@ -206,7 +200,7 @@
 | `lem-pc-essentially-constant-pro-hom-colimit` | 4 | state | 0 |
 | `lem-pur-essential-constant-pro-criterion-05py` | 4 | state | 0 |
 
-Not open yet: 40 nodes that wait for stage 1, 454 nodes that wait for a statement dependency.
+Not open yet: 40 nodes that wait for stage 1, 453 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
