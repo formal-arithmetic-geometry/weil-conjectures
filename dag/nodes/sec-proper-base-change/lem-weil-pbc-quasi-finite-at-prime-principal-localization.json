@@ -257,5 +257,23 @@
   "item": "lem-weil-pbc-quasi-finite-at-prime-principal-localization",
   "worker": "stage1",
   "summary": "Split into 9 steps following Stacks 077H, whose proof only says that the fibre of Spec(S_fg) -> Spec(R_f) is homeomorphic to an open subset of the fibre of Spec(S) -> Spec(R). Written out: (1) R_f -> S_fg is the map given by the universal property of localization and is of finite type; (2) qS_fg is prime over q, p' = pR_f, kappa(p) = kappa(p') (00E3 via lem-weil-pbc-localization-prime-residue-field-iso); (3) the fibre rings F, F' and their points, h = phi(f)g, its image in F not in the point and f a unit in F; (4)-(6) the ring isomorphism F_h ~ S_h (x)_{R_f} kappa(p') built from the pushout universal property of tensor products of algebras and the universal property of principal localization, inverse checked on generators; (7) it carries the point qbar F_h to qbar'; (8) Spec F_h -> D(hbar) is a homeomorphism (open immersion leaf, 00E4); (9) a point of an open subspace is isolated there iff isolated in the whole space, and the definition. Statement unchanged. No new node: all facts are existing nodes. Mathlib: kept unsplit-candidate (B8), searches recorded."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.QuasiFiniteAtPrimePrincipalLocalization",
+  "declaration": "Algebra.isQuasiFiniteAtPrime_iff_principalLocalization",
+  "file": "lean/Sheaf/RingTheory/QuasiFiniteAtPrimePrincipalLocalization.lean",
+  "statement": "theorem isQuasiFiniteAtPrime_iff_principalLocalization (R : Type u) (S : Type v) [CommRing R] [CommRing S] [Algebra R S] [Algebra.FiniteType R S] (q : PrimeSpectrum S) (f : R) (hf : f ∉ q.asIdeal.comap (algebraMap R S)) (g : S) (hg : g ∉ q.asIdeal) (φ' : Localization.Away f →+* Localization.Away (algebraMap R S f * g)) (hφ' : φ'.comp (algebraMap R (Localization.Away f)) = (algebraMap S (Localization.Away (algebraMap R S f * g))).comp (algebraMap R S)) : ∃ hft : @Algebra.FiniteType (Localization.Away f) (Localization.Away (algebraMap R S f * g)) _ _ φ'.toAlgebra, ∃ hq' : (q.asIdeal.map (algebraMap S (Localization.Away (algebraMap R S f * g)))).IsPrime, (IsQuasiFiniteAtPrime R S q ↔ @IsQuasiFiniteAtPrime (Localization.Away f) (Localization.Away (algebraMap R S f * g)) _ _ φ'.toAlgebra hft ⟨q.asIdeal.map (algebraMap S (Localization.Away (algebraMap R S f * g))), hq'⟩)",
+  "branch": "sheaf-dag",
+  "by": "M1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-qpl1552",
+  "group": "M1",
+  "result": "pass",
+  "note": "R,S CommRing + Algebra R S + FiniteType R S = finite-type phi; q : PrimeSpectrum S; hf: f notin comap q = p; hg: g notin q; R_f = Away f, S_fg = Away (phi f * g); phi' constrained by commuting square (unique; satisfiable by awayToAwayRight∘awayMap, checked); conclusion ∃ FiniteType via phi'.toAlgebra, ∃ IsPrime (q.map), IsQuasiFiniteAtPrime R S q ↔ same recorded J1 predicate at ⟨q.map, _⟩; #check resolves to Algebra.IsQuasiFiniteAtPrime; no let/show/private defs"
  }
 }
