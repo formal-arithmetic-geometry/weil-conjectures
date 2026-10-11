@@ -162,5 +162,27 @@
    "decls": [],
    "missing": []
   }
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.QCqsSheafRHomAdjunction",
+  "declaration": "AlgebraicGeometry.qcqsSheafRHomAdjunction",
+  "declarations": [
+   "AlgebraicGeometry.qcqsSheafRHomAdjunction"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/QCqsSheafRHomAdjunction.lean",
+  "statement": "theorem qcqsSheafRHomAdjunction (X Y : Scheme.{u₁}) [CompactSpace X] [QuasiSeparatedSpace X] [CompactSpace Y] [QuasiSeparatedSpace Y] [HasDerivedCategory.{w₁} (SheafOfModules.{u₁} (moduleRings X.toRingedSpace))] [HasDerivedCategory.{w₁} (SheafOfModules.{u₁} (moduleRings Y.toRingedSpace))] (f : X ⟶ Y) [QuasiCompact f] [QuasiSeparated f] (hpres : ∀ E : schemeDerivedCategory X, schemeDerivedQCohProperty X E → schemeDerivedQCohProperty Y ((schemeDerivedDirectImage f).obj E)) (a : schemeDerivedQCohCategory Y ⥤ schemeDerivedQCohCategory X) (adj : (schemeDerivedQCohProperty Y).lift ((schemeDerivedQCohProperty X).ι ⋙ schemeDerivedDirectImage f) (fun E ↦ hpres E.obj E.property) ⊣ a) (DQ : schemeDerivedCategory Y ⥤ schemeDerivedQCohCategory Y) (coh : (schemeDerivedQCohProperty Y).ι ⊣ DQ) (p : derivedPullback f ⊣ schemeDerivedDirectImage f) (bX : ∀ L : schemeDerivedCategory X, tensorRight L ⊣ (Functor.curry.obj (derivedInternalHom (Opens.grothendieckTopology X) X.toRingedSpace.sheaf)).obj (op L)) (bY : ∀ L : schemeDerivedCategory Y, tensorRight L ⊣ (Functor.curry.obj (derivedInternalHom (Opens.grothendieckTopology Y) Y.toRingedSpace.sheaf)).obj (op L)) (t : tensor (schemeDerivedCategory Y) ⋙ derivedPullback f ≅ (derivedPullback f).prod (derivedPullback f) ⋙ tensor (schemeDerivedCategory X)) (c : derivedInternalHom (Opens.grothendieckTopology X) X.toRingedSpace.sheaf ⋙ schemeDerivedDirectImage f ⟶ (schemeDerivedDirectImage f).op.prod (schemeDerivedDirectImage f) ⋙ derivedInternalHom (Opens.grothendieckTopology Y) Y.toRingedSpace.sheaf) (hc : ∀ (L M : schemeDerivedCategory X) (A : schemeDerivedCategory Y) (α : A ⟶ (schemeDerivedDirectImage f).obj ((derivedInternalHom (Opens.grothendieckTopology X) X.toRingedSpace.sheaf).obj (op L, M))), ((bY ((schemeDerivedDirectImage f).obj L)).homEquiv A ((schemeDerivedDirectImage f).obj M)).symm (α ≫ c.app (op L, M)) = p.homEquiv (A ⊗ (schemeDerivedDirectImage f).obj L) M (t.hom.app (A, (schemeDerivedDirectImage f).obj L) ≫ (𝟙 ((derivedPullback f).obj A) ⊗ₘ p.counit.app L) ≫ ((bX L).homEquiv ((derivedPullback f).obj A) M).symm ((p.homEquiv A ((derivedInternalHom (Opens.grothendieckTopology X) X.toRingedSpace.sheaf).obj (op L, M))).symm α))) : (∀ (L L' : schemeDerivedQCohCategory X) (K K' : schemeDerivedQCohCategory Y) (g : L' ⟶ L) (h : K ⟶ K'), (schemeDerivedDirectImage f).map ((derivedInternalHom (Opens.grothendieckTopology X) X.toRingedSpace.sheaf).map (g.hom.op ×ₘ (a.map h).hom)) ≫ c.app (op L'.obj, (a.obj K').obj) ≫ (derivedInternalHom (Opens.grothendieckTopology Y) Y.toRingedSpace.sheaf).map (𝟙 _ ×ₘ (adj.counit.app K').hom) = (c.app (op L.obj, (a.obj K).obj) ≫ (derivedInternalHom (Opens.grothendieckTopology Y) Y.toRingedSpace.sheaf).map (𝟙 _ ×ₘ (adj.counit.app K).hom)) ≫ (derivedInternalHom (Opens.grothendieckTopology Y) Y.toRingedSpace.sheaf).map (((schemeDerivedDirectImage f).map g.hom).op ×ₘ h.hom)) ∧ (∀ (L : schemeDerivedQCohCategory X) (K : schemeDerivedQCohCategory Y), IsIso (DQ.map (c.app (op L.obj, (a.obj K).obj) ≫ (derivedInternalHom (Opens.grothendieckTopology Y) Y.toRingedSpace.sheaf).map (𝟙 _ ×ₘ (adj.counit.app K).hom))))",
+  "branch": "sheaf-dag",
+  "by": "R1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-sra"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-sra",
+  "group": "R1",
+  "result": "fix",
+  "note": "H5: derivedSheafyTrace was Classical.choose of sorried exists_derivedDirectImage_internalHom_comparison; node dropped, comparison c tied in-theorem by the landed mate equation hc; qcqs X,Y,f, hpres/adj restricted adjunction, coh: iota -| DQ, naturality (L contra, K co) and IsIso (DQ.map (c(L,aK) >> RHom(Rf_*L, counit_K))); dropped duplicate new node(s) def-pc-derived-sheafy-trace-data (--drop-nodes; not merged, the item points at the landed declaration)"
  }
 }
