@@ -5,6 +5,7 @@ Authors: Claude
 -/
 module
 
+public import WeilConjectures.SixFunctors.ProEtale.Adic.AlgClosedFieldExact
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseRank
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseStalk
 
@@ -157,5 +158,124 @@ theorem IsAdicLisseSheaf.exists_rank_of_irreducibleSpace [IrreducibleSpace Y]
     obtain ⟨t, ht⟩ := exists_comp_eq_of_weaklyEtale (f j) s ⟨w, hw⟩
     rw [← hgen j i₀ w v₀]
     exact ⟨(adicUpperStarCongr l ht.symm).app H ≪≫ AdicSheaf.trivPull (f j) (e j).some t⟩
+
+section Stalk
+
+variable {K : Type u} [Field K] [IsAlgClosed K]
+
+variable (l) in
+/-- The stalk `Γ(Spec K, s^* H)` of an `ℓ`-adic sheaf at a geometric point `s : Spec K ⟶ Y`, as
+a `ℚ̄_ℓ`-vector space. -/
+noncomputable abbrev geometricStalkFunctor (s : Spec (.of K) ⟶ Y) :
+    AdicSheaf l Y ⥤ WeilCoefficients.{u} l :=
+  (s)^*ᵃ[l] ⋙ AdicSheaf.forget _ ⋙ Sheaf.Γ _ _
+
+instance (s : Spec (.of K) ⟶ Y) : (geometricStalkFunctor l s).PreservesMonomorphisms := by
+  unfold geometricStalkFunctor
+  infer_instance
+
+/-- The geometric stalk functor is exact on the right: the global sections on the spectrum of an
+algebraically closed field preserve epimorphisms. -/
+instance (s : Spec (.of K) ⟶ Y) : (geometricStalkFunctor l s).PreservesEpimorphisms := by
+  have : ((s)^*ᵃ[l]).PreservesEpimorphisms := inferInstance
+  have : (AdicSheaf.forget (l := l) (Spec (.of K))).PreservesEpimorphisms := inferInstance
+  have := preservesEpimorphisms_Γ_of_isAlgClosed (K := K) (l := l)
+  exact @Functor.preservesEpimorphisms_comp _ _ _ _ _ _ _ _ ‹_›
+    (@Functor.preservesEpimorphisms_comp _ _ _ _ _ _ _ _ ‹_›
+      ‹_›)
+
+omit [IsAlgClosed K] in
+/-- The stalk of `ℚ̄_ℓ^r` at a geometric point has dimension `r`. -/
+lemma finrank_geometricStalkFunctor_of_iso (s : Spec (.of K) ⟶ Y) {H : AdicSheaf l Y} {r : ℕ}
+    (e : (s)^*ᵃ[l].obj H ≅ ⨁ fun _ : Fin r ↦ AdicSheaf.unit l (Spec (.of K))) :
+    Module.finrank (PadicAlgCl l)
+      ((WeilCoefficients.toModuleCat l).obj ((geometricStalkFunctor l s).obj H)) = r := by
+  rw [← finrank_globalSections_biproduct_unit (l := l) K r]
+  exact ((AdicSheaf.forget _ ⋙ Sheaf.Γ _ _ ⋙ WeilCoefficients.toModuleCat l).mapIso
+    e).toLinearEquiv.finrank_eq
+
+variable [IrreducibleSpace Y] {H : AdicSheaf l Y}
+
+/-- On an irreducible scheme the stalks of a lisse sheaf at all geometric points have the same
+dimension, the rank. -/
+theorem IsAdicLisseSheaf.finrank_geometricStalkFunctor_eq (hH : IsAdicLisseSheaf H)
+    (s : Spec (.of K) ⟶ Y) {K' : Type u} [Field K'] [IsAlgClosed K'] (s' : Spec (.of K') ⟶ Y) :
+    Module.finrank (PadicAlgCl l)
+      ((WeilCoefficients.toModuleCat l).obj ((geometricStalkFunctor l s).obj H)) =
+    Module.finrank (PadicAlgCl l)
+      ((WeilCoefficients.toModuleCat l).obj ((geometricStalkFunctor l s').obj H)) := by
+  obtain ⟨r, -, hr⟩ := hH.exists_rank_of_irreducibleSpace
+  rw [finrank_geometricStalkFunctor_of_iso s (hr K s).some,
+    finrank_geometricStalkFunctor_of_iso s' (hr K' s').some]
+
+/-- On an irreducible scheme a lisse sheaf vanishes if and only if its stalk at one geometric
+point does. -/
+theorem IsAdicLisseSheaf.isZero_iff_finrank_geometricStalkFunctor_eq_zero
+    (hH : IsAdicLisseSheaf H) (s : Spec (.of K) ⟶ Y) :
+    IsZero H ↔ Module.finrank (PadicAlgCl l)
+      ((WeilCoefficients.toModuleCat l).obj ((geometricStalkFunctor l s).obj H)) = 0 := by
+  obtain ⟨r, hr0, hr⟩ := hH.exists_rank_of_irreducibleSpace
+  rw [finrank_geometricStalkFunctor_of_iso s (hr K s).some, hr0]
+
+/-- The stalks of a lisse sheaf on an irreducible scheme are finite-dimensional. -/
+theorem IsAdicLisseSheaf.finiteDimensional_geometricStalkFunctor (hH : IsAdicLisseSheaf H)
+    (s : Spec (.of K) ⟶ Y) : FiniteDimensional (PadicAlgCl l)
+      ((WeilCoefficients.toModuleCat l).obj ((geometricStalkFunctor l s).obj H)) := by
+  by_cases h : IsZero H
+  · have : Subsingleton ((WeilCoefficients.toModuleCat l).obj
+        ((geometricStalkFunctor l s).obj H)) :=
+      ModuleCat.subsingleton_of_isZero (Functor.map_isZero _ (Functor.map_isZero _ h))
+    infer_instance
+  · exact Module.finite_of_finrank_pos (Nat.pos_of_ne_zero fun h0 ↦
+      h ((hH.isZero_iff_finrank_geometricStalkFunctor_eq_zero s).2 h0))
+
+/-- A monomorphism into a lisse sheaf on an irreducible scheme does not increase the stalk
+dimension. -/
+theorem finrank_geometricStalkFunctor_le_of_mono {A X : AdicSheaf l Y} (hX : IsAdicLisseSheaf X)
+    (i : A ⟶ X) [Mono i] (s : Spec (.of K) ⟶ Y) :
+    Module.finrank (PadicAlgCl l)
+      ((WeilCoefficients.toModuleCat l).obj ((geometricStalkFunctor l s).obj A)) ≤
+    Module.finrank (PadicAlgCl l)
+      ((WeilCoefficients.toModuleCat l).obj ((geometricStalkFunctor l s).obj X)) := by
+  have := hX.finiteDimensional_geometricStalkFunctor s
+  exact LinearMap.finrank_le_finrank_of_injective
+    (f := ((WeilCoefficients.toModuleCat l).map ((geometricStalkFunctor l s).map i)).hom)
+    ((ModuleCat.mono_iff_injective _).1 inferInstance)
+
+/-- **A monomorphism of lisse sheaves of the same rank is an isomorphism**, on an irreducible
+scheme: its cokernel is lisse, with zero stalk. -/
+theorem IsAdicLisseSheaf.isIso_of_mono_of_finrank_eq {A X : AdicSheaf l Y}
+    (hA : IsAdicLisseSheaf A) (hX : IsAdicLisseSheaf X) (i : A ⟶ X) [Mono i]
+    (s : Spec (.of K) ⟶ Y)
+    (h : Module.finrank (PadicAlgCl l)
+      ((WeilCoefficients.toModuleCat l).obj ((geometricStalkFunctor l s).obj A)) =
+    Module.finrank (PadicAlgCl l)
+      ((WeilCoefficients.toModuleCat l).obj ((geometricStalkFunctor l s).obj X))) :
+    IsIso i := by
+  have := hA.finiteDimensional_geometricStalkFunctor s
+  have := hX.finiteDimensional_geometricStalkFunctor s
+  have hC := (hA.kernel_cokernel_of_irreducibleSpace hX i).2
+  let ω := geometricStalkFunctor l s
+  have hsurj : Function.Surjective
+      ((WeilCoefficients.toModuleCat l).map (ω.map i)).hom :=
+    (LinearMap.injective_iff_surjective_of_finrank_eq_finrank h).1
+      ((ModuleCat.mono_iff_injective _).1 inferInstance)
+  have hπ : Function.Surjective (ω.map (cokernel.π i)).hom :=
+    (ModuleCat.epi_iff_surjective _).1 (Functor.map_epi ω (cokernel.π i))
+  have hzero : ω.map i ≫ ω.map (cokernel.π i) = 0 := by
+    rw [← Functor.map_comp, cokernel.condition, Functor.map_zero]
+  have : Subsingleton ((WeilCoefficients.toModuleCat l).obj (ω.obj (cokernel i))) := by
+    refine ⟨fun y y' ↦ ?_⟩
+    have key (z : (WeilCoefficients.toModuleCat l).obj (ω.obj (cokernel i))) : z = 0 := by
+      obtain ⟨x, rfl⟩ := hπ z
+      obtain ⟨a, rfl⟩ := hsurj x
+      exact congrArg (fun φ ↦ φ.hom a) hzero
+    rw [key y, key y']
+  have hz := (hC.isZero_iff_finrank_geometricStalkFunctor_eq_zero s).2
+    Module.finrank_zero_of_subsingleton
+  have : Epi i := Abelian.epi_of_cokernel_π_eq_zero _ (hz.eq_of_tgt _ _)
+  exact isIso_of_mono_of_epi i
+
+end Stalk
 
 end AlgebraicGeometry.ProEtale
