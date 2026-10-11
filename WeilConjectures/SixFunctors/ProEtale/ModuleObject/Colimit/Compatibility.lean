@@ -1,0 +1,179 @@
+/-
+Copyright (c) 2026 Nailin Guan. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Nailin Guan
+-/
+module
+
+public import WeilConjectures.CategoryTheory.RingObjects.Condensed.FiniteSubextension
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.ChangeOfCoefficients
+
+/-!
+
+# Compatibility of the six functors with the extension of `ℓ`-adic coefficients
+
+Let `ℓ` be a prime, `E ≤ F` finite subextensions of `ℚ_ℓ` inside `ℚ̄_ℓ`
+(`PadicAlgCl.FiniteIntermediateField ℓ`) and `Ω = ℚ̄_ℓ`. The inclusions of condensed rings
+`E̲ ⟶ F̲` (`Profinite.padicSubfieldRingObjMap`) and `E̲ ⟶ ℚ̲̄_ℓ`
+(`Profinite.padicSubfieldRingObjToPadicAlgCl`) of
+`WeilConjectures.CategoryTheory.RingObjects.Condensed.FiniteSubextension` pull back, on a
+scheme `X`, to coefficient changes `ι : E_X ⟶ F_X` and `ι : E_X ⟶ ℚ̄_ℓ,X`
+(`ProEtale.coefficientMap`), inducing the derived extensions of scalars
+```
+T^X_{E,F} = F_X ⊗ᴸ_{E_X} - ,   T^X_{E,Ω} = ℚ̄_ℓ,X ⊗ᴸ_{E_X} - .
+```
+The comparisons (Pull), (Push) and (Shriek) between these and the derived functors `Lf^*`,
+`Rf_*`, `Rf_!` on module objects are the ones of
+`WeilConjectures.SixFunctors.ProEtale.ModuleObject.ChangeOfCoefficients`, for these two
+coefficient changes. This file supplies the coefficient-specific input:
+
+* both coefficient changes are flat, so that (Pull) and (Push) are defined on the unbounded
+  derived categories, and (Pull) is an isomorphism there;
+* for a finite extension `F/E`, (Push) is an isomorphism on all unbounded objects, hence so is
+  (Shriek);
+* for `E ⊆ Ω`, (Push) is an isomorphism on all unbounded objects when `f` is proper, but not
+  for an arbitrary `f`. Since the proper part of a compactification is proper, (Shriek) is an
+  isomorphism on all unbounded objects for every `f` with a compactification.
+
+## Sorried input
+
+* **(A0.2)** `ProEtale.CondensedRing.preservesFiniteLimits_extendScalars_padicSubfieldRingObjMap`:
+  for finite subextensions `E ≤ F`, the extension of scalars `F_X ⊗_{E_X} -` is exact, i.e.
+  `F_X` is flat over `E_X`. Indeed `F_X` is finite free over `E_X`: an `E`-basis `b₁, …, bₙ` of
+  `F` gives `C(-, F) ≅ C(-, E)^n`, `h ↦ (hᵢ)` with `h = ∑ hᵢ bᵢ`, on the point, and `p_X^*`
+  preserves finite direct sums.
+* **(A0.2)**
+  `ProEtale.CondensedRing.preservesFiniteLimits_extendScalars_padicSubfieldRingObjToPadicAlgCl`:
+  for a finite subextension `E`, the extension of scalars `ℚ̄_ℓ,X ⊗_{E_X} -` is exact, i.e.
+  `ℚ̄_ℓ,X` is flat over `E_X`: `ℚ̲̄_ℓ` is the filtered colimit of the `F̲`, `F ≥ E`, each of which
+  is finite free over `E̲`, and `p_X^*` preserves colimits.
+* `ProEtale.CondensedRing.isIso_derivedPushHom_padicSubfieldRingObjMap`: for a finite extension
+  `F/E`, (Push) is an isomorphism on all unbounded objects, since `F_X ≅ E_X^n` reduces it to
+  the compatibility of `Rf_*` with finite direct sums.
+* `ProEtale.CondensedRing.isIso_derivedPushHom_padicSubfieldRingObjToPadicAlgCl_of_isProper`:
+  for `E ⊆ Ω` and `f` proper, (Push) is an isomorphism on all unbounded objects: `Rf_*` has a
+  right adjoint `Rf^!`, hence commutes with the coproducts through which `ℚ̄_ℓ,X ⊗ᴸ_{E_X} -` is
+  computed from the finite stages. For a general `f` this fails, and (Push) is an isomorphism
+  only at objects at which `Rf_*` commutes with the relevant coproducts; no such statement is
+  made here.
+
+-/
+
+@[expose] public section
+
+universe u
+
+open CategoryTheory Limits
+
+open scoped CategoryTheory.Obj CategoryTheory.Functor
+
+namespace AlgebraicGeometry.ProEtale
+
+open Scheme PadicAlgCl
+
+/-! ### The coefficient rings `E_X`, `ℚ̄_ℓ,X` and their inclusions -/
+
+section RingObj
+
+variable (X : Scheme.{u}) (ℓ : ℕ) [Fact ℓ.Prime]
+
+/-- The coefficient ring object `E_X = p_X^* E̲` on `X_proét`, for a finite subextension
+`E ⊆ ℚ̄_ℓ` of `ℚ_ℓ`. -/
+noncomputable abbrev padicSubfieldRingObj (E : FiniteIntermediateField ℓ) :
+    Sheaf (ProEt.topology X) Ab.{u + 1} :=
+  condensedRingObj (Profinite.padicSubfieldRingObj ℓ E) X
+
+/-- The coefficient ring object `ℚ̄_ℓ,X = p_X^* ℚ̲̄_ℓ` on `X_proét`. -/
+noncomputable abbrev padicAlgClRingObj : Sheaf (ProEt.topology X) Ab.{u + 1} :=
+  condensedRingObj (Profinite.padicAlgClRingObj ℓ) X
+
+/-- The inclusion `E_X ⟶ F_X` for finite subextensions `E ≤ F`, the coefficient change induced by
+the inclusion `E̲ ⟶ F̲` of condensed rings. -/
+noncomputable abbrev padicSubfieldRingObjMap {E F : FiniteIntermediateField ℓ} (h : E ≤ F) :
+    padicSubfieldRingObj X ℓ E ⟶ padicSubfieldRingObj X ℓ F :=
+  coefficientMap (Profinite.padicSubfieldRingObjMap ℓ h) X
+
+/-- The inclusion `E_X ⟶ ℚ̄_ℓ,X` for a finite subextension `E`, the coefficient change induced by
+the inclusion `E̲ ⟶ ℚ̲̄_ℓ` of condensed rings. -/
+noncomputable abbrev padicSubfieldRingObjToPadicAlgCl (E : FiniteIntermediateField ℓ) :
+    padicSubfieldRingObj X ℓ E ⟶ padicAlgClRingObj X ℓ :=
+  coefficientMap (Profinite.padicSubfieldRingObjToPadicAlgCl ℓ E) X
+
+/-- The inclusion `E_X ⟶ F_X` followed by the inclusion `F_X ⟶ ℚ̄_ℓ,X` is the inclusion
+`E_X ⟶ ℚ̄_ℓ,X`. -/
+@[reassoc]
+lemma padicSubfieldRingObjMap_comp_toPadicAlgCl {E F : FiniteIntermediateField ℓ} (h : E ≤ F) :
+    padicSubfieldRingObjMap X ℓ h ≫ padicSubfieldRingObjToPadicAlgCl X ℓ F =
+      padicSubfieldRingObjToPadicAlgCl X ℓ E := by
+  rw [← coefficientMap_comp, Profinite.padicSubfieldRingObjMap_comp_toPadicAlgCl]
+
+end RingObj
+
+namespace CondensedRing
+
+variable (ℓ : ℕ) [Fact ℓ.Prime]
+
+/-! ### Flatness of the coefficient inclusions -/
+
+section Flat
+
+variable (X : Scheme.{u})
+
+/-- **(A0.2)** For finite subextensions `E ≤ F`, the extension of scalars along `E_X ⟶ F_X` is
+exact: `F_X` is finite free, in particular flat, over `E_X`. See the module docstring. -/
+instance preservesFiniteLimits_extendScalars_padicSubfieldRingObjMap
+    {E F : FiniteIntermediateField ℓ} (h : E ≤ F) :
+    PreservesFiniteLimits
+      (Mod.extendScalars (padicSubfieldRingObjMap X ℓ h)) :=
+  sorry
+
+/-- **(A0.2)** For a finite subextension `E`, the extension of scalars along `E_X ⟶ ℚ̄_ℓ,X` is
+exact: `ℚ̄_ℓ,X` is flat over `E_X`, being a filtered colimit of finite free `E_X`-modules. See
+the module docstring. -/
+instance preservesFiniteLimits_extendScalars_padicSubfieldRingObjToPadicAlgCl
+    (E : FiniteIntermediateField ℓ) :
+    PreservesFiniteLimits
+      (Mod.extendScalars (padicSubfieldRingObjToPadicAlgCl X ℓ E)) :=
+  sorry
+
+end Flat
+
+/-! ### (Push) and (Shriek) -/
+
+section Push
+
+variable {X Y : Scheme.{u}} (f : X ⟶ Y)
+
+/-- **(Push)** is an isomorphism for a finite extension `F/E`, on all unbounded objects: `F_X`
+is finite free over `E_X`, so both sides are finite direct sums of copies of `Rf_*^E`. See the
+module docstring. -/
+instance isIso_derivedPushHom_padicSubfieldRingObjMap {E F : FiniteIntermediateField ℓ}
+    (h : E ≤ F) : IsIso (derivedPushHom (Profinite.padicSubfieldRingObjMap ℓ h) f) :=
+  sorry
+
+/-- **(Push)** is an isomorphism for `E ⊆ ℚ̄_ℓ` and `f` *proper*, on all unbounded objects: `Rf_*`
+then admits a right adjoint `Rf^!`, hence commutes with the coproducts through which the derived
+extension of scalars along the flat `E_X ⟶ ℚ̄_ℓ,X` is computed. See the module docstring. -/
+instance isIso_derivedPushHom_padicSubfieldRingObjToPadicAlgCl_of_isProper [IsProper f]
+    (E : FiniteIntermediateField ℓ) :
+    IsIso (derivedPushHom (Profinite.padicSubfieldRingObjToPadicAlgCl ℓ E) f) :=
+  sorry
+
+variable [HasCompactification f]
+
+/-- **(Shriek)** is an isomorphism for a finite extension `F/E`, on all unbounded objects. -/
+example {E F : FiniteIntermediateField ℓ} (h : E ≤ F) :
+    IsIso (derivedLowerShriekHom (Profinite.padicSubfieldRingObjMap ℓ h) f) :=
+  inferInstance
+
+/-- **(Shriek)** is an isomorphism for `E ⊆ ℚ̄_ℓ`, on all unbounded objects: the proper part of
+the compactification contributes (Push) for a proper morphism, which is an isomorphism. -/
+example (E : FiniteIntermediateField ℓ) :
+    IsIso (derivedLowerShriekHom (Profinite.padicSubfieldRingObjToPadicAlgCl ℓ E) f) :=
+  inferInstance
+
+end Push
+
+end CondensedRing
+
+end AlgebraicGeometry.ProEtale
