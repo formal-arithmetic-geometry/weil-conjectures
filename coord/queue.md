@@ -1,11 +1,11 @@
 # Work queue
 
-862 items; claim with `tools/claim.py next <group> [--stage N]`.
+856 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (862)
+## Stage 2: nodes to state (856)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -28,7 +28,6 @@
 | `lem-pod-profinite-stable-lattice` | 1 | state |
 | `lem-sc-base-change-curve` | 1 | state |
 | `lem-sc-curve-base-change-relative-dimension-one` | 1 | state |
-| `lem-sc-fibre-dimension-after-base-change` | 1 | state |
 | `lem-sc-finite-flat-unramified-tangent-criterion` | 1 | state |
 | `lem-sc-hilb-dominating-power` | 1 | state |
 | `lem-sc-invertible-module-generic-stalk` | 1 | state |
@@ -45,12 +44,9 @@
 | `lem-sc-vector-bundle-line-subbundle` | 1 | state |
 | `lem-sp-cartan-eilenberg-comparison-homotopy` | 1 | state |
 | `lem-sp-cartan-eilenberg-comparison-independence` | 1 | state |
-| `lem-sp-ce-horizontal-lift` | 1 | state |
 | `lem-weil-derived-limit-roos-complex` | 1 | state |
-| `lem-weil-pbc-closed-pushforward-stalks` | 1 | state |
 | `lem-weil-pbc-cohen-power-series-presentation` | 1 | state |
 | `lem-weil-pbc-colimit-category-fp-algebras` | 1 | state |
-| `lem-weil-pbc-colimit-eventually-flat` | 1 | state |
 | `lem-weil-pbc-colimit-flat-ring-map` | 1 | state |
 | `lem-weil-pbc-colimit-surjective-ring-map` | 1 | state |
 | `lem-weil-pbc-complete-local-domain-finite-over-regular` | 1 | state |
@@ -62,9 +58,7 @@
 | `lem-weil-pbc-completion-at-quasi-finite-prime` | 1 | state |
 | `lem-weil-pbc-completion-dimension` | 1 | state |
 | `lem-weil-pbc-completion-finite-extension` | 1 | state |
-| `lem-weil-pbc-completion-finite-quotient` | 1 | state |
 | `lem-weil-pbc-completion-noetherian-quotient-noetherian` | 1 | state |
-| `lem-weil-pbc-completion-regular-local` | 1 | state |
 | `lem-weil-pbc-complex-injective-resolution-mono` | 1 | state |
 | `lem-weil-pbc-complex-mapping-cylinder-split-factorization` | 1 | state |
 | `lem-weil-pbc-complex-spectral-sequence-comparison` | 1 | state |
