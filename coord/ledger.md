@@ -5207,3 +5207,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 15:21 L: merged deliver/Q1/def-nagata-affine-fp-descent (stage 2; reviewer FIX; first push; Sheaf.AlgebraicGeometry.NagataAffineFpDescent AlgebraicGeometry.NagataAffineFpDescent)
 - 15:22 L: merged deliver/R1/lem-weil-pbc-triangle-morphism-extension (stage 2; reviewer PASS; first push; Sheaf.CategoryTheory.Triangulated.TriangleMorphismExtension CategoryTheory.Pretriangulated.triangle_morphism_extension)
 - 15:22 L: merged deliver/R1/lem-weil-tower-split-envelope (stage 2; reviewer PASS; first push; Sheaf.CategoryTheory.TowerSplitEnvelope CategoryTheory.tower_split_envelope)
+- 15:22 L: merged deliver/G1/lem-pur-derived-functor-triangles-05sc (stage 2; reviewer FIX; first push; Sheaf.CategoryTheory.DerivedFunctorTriangles CategoryTheory.Functor.leftDerived_map_distinguished_of_two_defined)
