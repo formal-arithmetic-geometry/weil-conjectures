@@ -1,11 +1,11 @@
 # Work queue
 
-639 items; claim with `tools/claim.py next <group> [--stage N]`.
+635 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (639)
+## Stage 2: nodes to state (635)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -13,7 +13,6 @@
 | `def-weil-pbc-finite-etale-trace` | 1 | state |
 | `lem-pc-derived-tensor-transitivity` | 1 | state |
 | `lem-pc-module-pullback-identity-composition` | 1 | state |
-| `lem-pur-derived-functor-shift-05su` | 1 | state |
 | `lem-pur-left-derived-exact-when-defined` | 1 | state |
 | `lem-pur-triangle-morphism-category-05r9` | 1 | state |
 | `lem-sc-base-change-curve` | 1 | state |
@@ -23,7 +22,6 @@
 | `lem-weil-pbc-exchange-identity-pasting` | 1 | state |
 | `lem-weil-pbc-ext-one-direct-sum` | 1 | state |
 | `lem-weil-pbc-filtered-colimit-localization-at-prime` | 1 | state |
-| `lem-weil-pbc-finite-etale-lifting-limit-descent` | 1 | state |
 | `lem-weil-pbc-finite-module-complete-over-complete-noetherian` | 1 | state |
 | `lem-weil-pbc-finite-pushforward-generic-constructible` | 1 | state |
 | `lem-weil-pbc-finite-subalgebra-fraction-field` | 1 | state |
@@ -33,14 +31,12 @@
 | `lem-weil-pbc-finite-type-z-domain-normalization-finite` | 1 | state |
 | `lem-weil-pbc-finite-unramified-etale-local` | 1 | state |
 | `lem-weil-pbc-finite-unramified-one-point-closed` | 1 | state |
-| `lem-weil-pbc-finitely-generated-field-complete-intersection-model` | 1 | state |
 | `lem-weil-pbc-first-order-thickening-base-change` | 1 | state |
 | `lem-weil-pbc-first-quadrant-row-collapse` | 1 | state |
 | `lem-weil-pbc-flat-another-variant-local-criterion` | 1 | state |
 | `lem-weil-pbc-flat-completion` | 1 | state |
 | `lem-weil-pbc-flat-fibres-irreducible` | 1 | state |
 | `lem-weil-pbc-flat-formally-smooth-closed-fibre-adic` | 1 | state |
-| `lem-weil-pbc-flat-iso-mod-ideal-powers` | 1 | state |
 | `lem-weil-pbc-flat-local-completion-iso` | 1 | state |
 | `lem-weil-pbc-flat-local-criterion-nonzerodivisor` | 1 | state |
 | `lem-weil-pbc-flat-local-depth-formula` | 1 | state |
