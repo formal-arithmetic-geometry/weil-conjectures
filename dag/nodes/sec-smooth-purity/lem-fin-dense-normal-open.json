@@ -166,5 +166,23 @@
   "group": "M1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-dno2459 (reviewer sub-agent of L); spot-checked: Proof does not use openness of the normal locus (0BXG) or generic-point normality: it argues via finiteness of normalization (lem-fin-normalization-extension-finite, imported, no dependency back on the item) plus common denominator C_b=B_b, then integral-closure normality and localization leaves (pbc tool_uses accepted as generic tools); localization leaf also covers local rings R_p for normal-scheme definition; nonempty/dense elementary; no new nodes, no restatement, no cycle. No fault beyond the second reading."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FiniteDenseNormalOpen",
+  "declaration": "AlgebraicGeometry.exists_nonempty_normal_open",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteDenseNormalOpen.lean",
+  "statement": "theorem exists_nonempty_normal_open (f : X ⟶ Spec (.of k)) [LocallyOfFiniteType f] [QuasiCompact f] [IsIntegral X] : ∃ U : X.Opens, Nonempty U ∧ ∀ x : X, x ∈ U → IsIntegrallyClosed (X.presheaf.stalk x)",
+  "branch": "sheaf-dag",
+  "by": "K1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-dno0726",
+  "group": "K1",
+  "result": "pass",
+  "note": "k field any char, X : Scheme.{u} shared universe; finite type = LocallyOfFiniteType f + QuasiCompact f per conventions; IsIntegral X resolves to AlgebraicGeometry.IsIntegral (checked by #check); conclusion U : X.Opens, Nonempty U, every stalk on U IsIntegrallyClosed = normal per def-sbc-normal-dominant-galois (stalks are domains as X integral), same convention as source (FunctionField.lean:54); no Mathlib normal-scheme class, source exists_isIso_fromNormalization_restrict is a different claim; docstring carries all four proof steps"
  }
 }
