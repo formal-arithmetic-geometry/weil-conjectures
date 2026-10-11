@@ -219,4 +219,66 @@ lemma exact_compactlySupportedCohomologyδ_right :
 
 end WeilComplex
 
+namespace WeilComplex
+
+section SpecCohomology
+
+variable {K L : WeilComplex k₀ l (Spec (CommRingCat.of k₀))}
+
+/-- The map `Hʳ(Spec k̄, K) → Hʳ(Spec k̄, L)` induced by a morphism of Weil complexes on `Spec k₀`.
+-/
+noncomputable def cohomologyMap (f : K ⟶ L) (r : ℤ) :
+    (K.cohomologyFrobeniusModule r).carrier →ₗ[PadicAlgCl l]
+      (L.cohomologyFrobeniusModule r).carrier :=
+  WeilSheaf.globalSectionsLinearMap ((homologySheaf r).map f)
+
+lemma cohomologyMap_frobenius (f : K ⟶ L) (r : ℤ) (x : (K.cohomologyFrobeniusModule r).carrier) :
+    cohomologyMap f r ((K.cohomologyFrobeniusModule r).frobenius x) =
+      (L.cohomologyFrobeniusModule r).frobenius (cohomologyMap f r x) :=
+  WeilSheaf.globalSectionsLinearMap_frobenius _ x
+
+/-- An isomorphism of Weil complexes on `Spec k₀` induces isomorphisms of cohomology. -/
+noncomputable def cohomologyEquivOfIso (e : K ≅ L) (r : ℤ) :
+    (K.cohomologyFrobeniusModule r).Equiv (L.cohomologyFrobeniusModule r) :=
+  WeilSheaf.globalSectionsEquivOfIso ((homologySheaf r).mapIso e)
+
+variable (T : Triangle (WeilComplex k₀ l (Spec (CommRingCat.of k₀)))) (n₀ n₁ : ℤ)
+  (h : n₀ + 1 = n₁)
+
+/-- The connecting map `H^{n₀}(K₃) → H^{n₁}(K₁)` of a triangle of Weil complexes on `Spec k₀`. -/
+noncomputable def cohomologyδ :
+    (T.obj₃.cohomologyFrobeniusModule n₀).carrier →ₗ[PadicAlgCl l]
+      (T.obj₁.cohomologyFrobeniusModule n₁).carrier :=
+  WeilSheaf.globalSectionsLinearMap (homologySheafδ T n₀ n₁ h)
+
+lemma cohomologyδ_frobenius (x : (T.obj₃.cohomologyFrobeniusModule n₀).carrier) :
+    cohomologyδ T n₀ n₁ h ((T.obj₃.cohomologyFrobeniusModule n₀).frobenius x) =
+      (T.obj₁.cohomologyFrobeniusModule n₁).frobenius (cohomologyδ T n₀ n₁ h x) :=
+  WeilSheaf.globalSectionsLinearMap_frobenius _ x
+
+variable (hT : T ∈ distTriang (WeilComplex k₀ l (Spec (CommRingCat.of k₀))))
+include hT
+
+set_option maxHeartbeats 1000000 in
+-- the unification of the instance arguments of the global sections is slow
+lemma exact_cohomologyMap :
+    Function.Exact (cohomologyMap T.mor₁ n₀) (cohomologyMap T.mor₂ n₀) :=
+  WeilSheaf.exact_globalSectionsLinearMap (homologySheaf_exact₂ T n₀ hT)
+
+set_option maxHeartbeats 1000000 in
+-- the unification of the instance arguments of the global sections is slow
+lemma exact_cohomologyδ_left :
+    Function.Exact (cohomologyMap T.mor₂ n₀) (cohomologyδ T n₀ n₁ h) :=
+  WeilSheaf.exact_globalSectionsLinearMap (homologySheaf_exact₃ T n₀ n₁ hT h)
+
+set_option maxHeartbeats 1000000 in
+-- the unification of the instance arguments of the global sections is slow
+lemma exact_cohomologyδ_right :
+    Function.Exact (cohomologyδ T n₀ n₁ h) (cohomologyMap T.mor₁ n₁) :=
+  WeilSheaf.exact_globalSectionsLinearMap (homologySheaf_exact₁ T n₀ n₁ hT h)
+
+end SpecCohomology
+
+end WeilComplex
+
 end AlgebraicGeometry

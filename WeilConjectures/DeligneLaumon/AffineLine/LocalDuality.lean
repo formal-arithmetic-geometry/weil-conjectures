@@ -7,6 +7,9 @@ module
 
 public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
 public import WeilConjectures.DeligneLaumon.AffineLine.Defs
+public import WeilConjectures.WeilSheaf.OpenClosedTriangle
+public import WeilConjectures.WeilSheaf.UpperStarLowerStar
+public import WeilConjectures.ZetaLinearAlgebra.FrobeniusModule.Trace
 
 /-!
 # Local boundary duality on a curve
@@ -51,7 +54,7 @@ the blueprint.
 
 universe u
 
-open CategoryTheory Polynomial
+open CategoryTheory Polynomial Pretriangulated
 
 namespace AlgebraicGeometry
 
@@ -90,6 +93,8 @@ theorem exists_linearEquiv_dual_stalk_higherDirectImage
         (((C ↘ Spec (CommRingCat.of k₀)).residueCard s.1 : PadicAlgCl l)) * e a b := by
   sorry
 
+set_option maxHeartbeats 1600000 in
+-- the cohomology of the three terms of the triangle unfolds through the Weil structures
 /-- *Boundary localization sequence for a curve.* Let `j : U₀ ↪ C₀` be a dense open immersion
 of smooth curves, `i : Z₀ ↪ C₀` the closed complement and `F` a lisse Weil sheaf on `U₀`. The
 open–closed triangle `j_!F → j_*F → i_*i^*j_*F →` gives a long exact sequence of compactly
@@ -130,6 +135,83 @@ theorem exists_exact_compactlySupportedCohomology_boundary
           (A.compactlySupportedCohomology 0).carrier,
         Function.Injective h ∧ ∀ x, h ((F.compactlySupportedCohomology 0).frobenius x) =
           (A.compactlySupportedCohomology 0).frobenius (h x) := by
-  sorry
+  intro A B
+  have : IsSeparated (Z ↘ Spec (CommRingCat.of k₀)) := inferInstance
+  have : LocallyOfFiniteType (Z ↘ Spec (CommRingCat.of k₀)) := inferInstance
+  have : QuasiCompact (Z ↘ Spec (CommRingCat.of k₀)) := inferInstance
+  -- the open–closed triangle `RΓ_c(U, j^*K) → RΓ_c(C, K) → RΓ_c(Z, i^*K) →` for `K = j_*F`
+  obtain ⟨α, β, γ, hT⟩ := WeilComplex.exists_distTriang_derivedLowerShriek_openClosed j i hij
+    (WeilSheaf.toComplex.obj A)
+  set T := Triangle.mk α β γ
+  -- identification of the outer terms
+  have hA : A = (WeilSheaf.lowerStar j).obj F := rfl
+  let eU : (WeilComplex.upperStar j).obj (WeilSheaf.toComplex.obj A) ≅
+      WeilSheaf.toComplex.obj F :=
+    (WeilSheaf.toComplexCompUpperStarIso j).app A ≪≫
+      WeilSheaf.toComplex.mapIso (hA ▸ WeilSheaf.upperStarDirectImageIso j F)
+  let eZ : (WeilComplex.upperStar i).obj (WeilSheaf.toComplex.obj A) ≅
+      WeilSheaf.toComplex.obj B :=
+    (WeilSheaf.toComplexCompUpperStarIso i).app A
+  let EU (r : ℤ) := WeilComplex.cohomologyEquivOfIso
+    ((WeilComplex.derivedLowerShriek k₀ l (U ↘ Spec (CommRingCat.of k₀))).mapIso eU) r
+  let EZ (r : ℤ) := WeilComplex.cohomologyEquivOfIso
+    ((WeilComplex.derivedLowerShriek k₀ l (Z ↘ Spec (CommRingCat.of k₀))).mapIso eZ) r
+  -- the boundary has no cohomology outside degree `0`
+  have hZ (r : ℤ) (hr : r ≠ 0) : Subsingleton (T.obj₃.cohomologyFrobeniusModule r).carrier := by
+    have h := WeilSheaf.subsingleton_compactlySupportedCohomology_of_isFinite B hr
+    exact ⟨fun a b ↦ (EZ r).toLinearEquiv.injective (h.elim _ _)⟩
+
+  refine ⟨⟨(EU 1).toLinearEquiv.toLinearMap ∘ₗ WeilComplex.cohomologyδ T 0 1 rfl ∘ₗ
+      (EZ 0).toLinearEquiv.symm.toLinearMap,
+    WeilComplex.cohomologyMap T.mor₁ 1 ∘ₗ (EU 1).toLinearEquiv.symm.toLinearMap, ?_, ?_, ?_, ?_⟩,
+    WeilComplex.cohomologyMap T.mor₁ 0 ∘ₗ (EU 0).toLinearEquiv.symm.toLinearMap, ?_, ?_⟩
+  · intro y
+    have hex := WeilComplex.exact_cohomologyδ_right T 0 1 rfl hT ((EU 1).toLinearEquiv.symm y)
+    change WeilComplex.cohomologyMap T.mor₁ 1 ((EU 1).toLinearEquiv.symm y) = 0 ↔
+      ∃ x, (EU 1).toLinearEquiv (WeilComplex.cohomologyδ T 0 1 rfl
+        ((EZ 0).toLinearEquiv.symm x)) = y
+    rw [hex]
+    constructor
+    · rintro ⟨x, hx⟩
+      refine ⟨(EZ 0).toLinearEquiv x, ?_⟩
+      rw [LinearEquiv.symm_apply_apply, hx, LinearEquiv.apply_symm_apply]
+    · rintro ⟨x, hx⟩
+      refine ⟨(EZ 0).toLinearEquiv.symm x, ?_⟩
+      rw [← hx, LinearEquiv.symm_apply_apply]
+  · intro z
+    have := hZ 1 one_ne_zero
+    obtain ⟨x, hx⟩ := (WeilComplex.exact_cohomologyMap T 1 hT z).1 (Subsingleton.elim _ _)
+    refine ⟨(EU 1).toLinearEquiv x, ?_⟩
+    change WeilComplex.cohomologyMap T.mor₁ 1 ((EU 1).toLinearEquiv.symm
+      ((EU 1).toLinearEquiv x)) = z
+    rw [LinearEquiv.symm_apply_apply, hx]
+  · intro x
+    change (EU 1).toLinearEquiv (WeilComplex.cohomologyδ T 0 1 rfl
+        ((EZ 0).toLinearEquiv.symm ((B.compactlySupportedCohomology 0).frobenius x))) =
+      (F.compactlySupportedCohomology 1).frobenius ((EU 1).toLinearEquiv
+        (WeilComplex.cohomologyδ T 0 1 rfl ((EZ 0).toLinearEquiv.symm x)))
+    erw [(EZ 0).symm_map_frobenius x, WeilComplex.cohomologyδ_frobenius, (EU 1).map_frobenius]
+    rfl
+  · intro x
+    change WeilComplex.cohomologyMap T.mor₁ 1
+        ((EU 1).toLinearEquiv.symm ((F.compactlySupportedCohomology 1).frobenius x)) =
+      (A.compactlySupportedCohomology 1).frobenius
+        (WeilComplex.cohomologyMap T.mor₁ 1 ((EU 1).toLinearEquiv.symm x))
+    erw [(EU 1).symm_map_frobenius x, WeilComplex.cohomologyMap_frobenius]
+    rfl
+  · refine (injective_iff_map_eq_zero _).2 fun x hx ↦ ?_
+    change WeilComplex.cohomologyMap T.mor₁ 0 ((EU 0).toLinearEquiv.symm x) = 0 at hx
+    obtain ⟨z, hz⟩ := (WeilComplex.exact_cohomologyδ_right T (-1) 0 (by norm_num) hT _).1 hx
+    have := hZ (-1) (by norm_num)
+    rw [Subsingleton.elim z 0, map_zero] at hz
+    have := congrArg (EU 0).toLinearEquiv hz
+    rwa [LinearEquiv.apply_symm_apply, map_zero, eq_comm] at this
+  · intro x
+    change WeilComplex.cohomologyMap T.mor₁ 0
+        ((EU 0).toLinearEquiv.symm ((F.compactlySupportedCohomology 0).frobenius x)) =
+      (A.compactlySupportedCohomology 0).frobenius
+        (WeilComplex.cohomologyMap T.mor₁ 0 ((EU 0).toLinearEquiv.symm x))
+    erw [(EU 0).symm_map_frobenius x, WeilComplex.cohomologyMap_frobenius]
+    rfl
 
 end AlgebraicGeometry

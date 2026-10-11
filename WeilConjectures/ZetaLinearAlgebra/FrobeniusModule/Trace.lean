@@ -36,6 +36,14 @@ namespace FrobeniusModule
 
 variable {K : Type v} [Field K]
 
+/-- The inverse of an isomorphism of Frobenius modules intertwines the Frobenius. -/
+theorem Equiv.symm_map_frobenius {M N : FrobeniusModule.{u, v} K} (e : M.Equiv N)
+    (y : N.carrier) :
+    e.toLinearEquiv.symm (N.frobenius y) = M.frobenius (e.toLinearEquiv.symm y) := by
+  apply e.toLinearEquiv.injective
+  rw [e.map_frobenius]
+  simp
+
 /-- Isomorphic Frobenius modules have the same traces of the powers of the Frobenius. -/
 theorem Equiv.trace_frobeniusEnd_pow {M N : FrobeniusModule.{u, v} K} (e : M.Equiv N) (k : ℕ) :
     LinearMap.trace K _ (N.frobeniusEnd ^ k) = LinearMap.trace K _ (M.frobeniusEnd ^ k) := by
