@@ -4031,3 +4031,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 09:32 L: merged deliver/E1/lem-weil-pbc-criterion-flatness-fibre (stage 2; reviewer PASS; first push; Sheaf.RingTheory.FlatOfFlatClosedFiber Module.flat_of_flat_closedFiber)
 - 09:32 L: merged deliver/M1/lem-sc-point-tangent-cotangent-surjective (stage 2; reviewer FIX; first push; Sheaf.AlgebraicGeometry.CotangentSurjectiveOfTangentInjective AlgebraicGeometry.cotangent_surjective_of_tangent_injective)
 - 09:33 L: merged deliver/J1/lem-sc-smooth-diagonal-regular-immersion (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.SmoothDiagonalRegularGenerators AlgebraicGeometry.exists_isRegular_smooth_diagonal_generators)
+- 09:33 L: merged deliver/F1/lem-sc-curve-base-change-relative-dimension-one (stage 2; reviewer FIX; first push; Sheaf.AlgebraicGeometry.CurveBaseChangeRelativeDimensionOne AlgebraicGeometry.curve_baseChange_smoothOfRelativeDimension_one)
