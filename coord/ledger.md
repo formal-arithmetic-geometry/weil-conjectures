@@ -5557,3 +5557,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 18:29 L: merged deliver/P1/lem-weil-pbc-locally-constant-maps-sheaf (stage 2; reviewer PASS; first push; Sheaf.Topology.LocallyConstantMapsSheaf TopCat.locallyConstantMapsPresheaf_isSheaf; new nodes: def-weil-pbc-locally-constant-maps-presheaf)
 - 18:29 L: merged deliver/J1/lem-weil-pbc-cohomology-over-object-localization (stage 2; reviewer PASS; first push; Sheaf.CategoryTheory.Sites.CohomologyOverObjectLocalization CategoryTheory.cohomology_over_object_localization)
 - 18:30 L: merged deliver/E1/def-weil-pbc-site-cech-complex (stage 2; reviewer FIX; first push; Sheaf.CategoryTheory.SiteCechComplex CategoryTheory.SiteCechComplex)
+- 18:30 L: merged deliver/H1/lem-pc-sites-sheaf-tensor-bilinear-universal (stage 2; reviewer FIX; first push; Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorBilinearUniversal SheafOfModules.tensor_bilinear_universal)

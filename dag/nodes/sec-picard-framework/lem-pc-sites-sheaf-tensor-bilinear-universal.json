@@ -147,5 +147,24 @@
    "decls": [],
    "missing": []
   }
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorBilinearUniversal",
+  "declaration": "SheafOfModules.tensor_bilinear_universal",
+  "existing": false,
+  "by": "H1",
+  "date": "2026-10-12",
+  "file": "lean/Sheaf/Algebra/Category/ModuleCat/Sheaf/TensorBilinearUniversal.lean",
+  "branch": "sheaf-dag",
+  "statement": "theorem tensor_bilinear_universal {C : Type u} [Category.{u} C] {J : GrothendieckTopology C} (R : Sheaf J CommRingCat.{u}) [J.WEqualsLocallyBijective AddCommGrpCat.{u}] [HasWeakSheafify J AddCommGrpCat.{u}] (F G H : SheafOfModules.{u} ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj R)) (β : ∀ U : Cᵒᵖ, F.val.obj U →ₗ[R.obj.obj U] G.val.obj U →ₗ[R.obj.obj U] H.val.obj U) (hβ : ∀ {U V : Cᵒᵖ} (f : U ⟶ V) (x : F.val.obj U) (y : G.val.obj U), β V (F.val.map f x) (G.val.map f y) = H.val.map f (β U x y)) : ∃! φ : F ⊗ G ⟶ H, ∀ (U : Cᵒᵖ) (x : F.val.obj U) (y : G.val.obj U), φ.val.app U ((tensorObjIsoSheafification F G).inv.val.app U (((PresheafOfModules.sheafificationAdjunction (𝟙 ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj R).obj)).unit.app (F.val ⊗ G.val)).app U (x ⊗ₜ[R.obj.obj U] y))) = β U x y",
+  "fixed_by": "R-stb"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-stb",
+  "group": "H1",
+  "result": "fix",
+  "note": "site C:Type u/J GrothendieckTopology per stmt_dep records; R sheaf of comm rings; F G H SheafOfModules over sheafCompose R; Bilin = restriction-compatible family of O(U)-bilinear maps (landed SheafificationBilinearExtension form); conclusion ∃! φ : F ⊗ G ⟶ H whose composite with the pure-tensor map (unit of sheafification + tensorObjIsoSheafification, landed SheafificationTensor form) is β; delivered statement was Equiv.bijective + the proved tensorHomEquiv_comp_homObjMap (tautological), no Bilin, letI; fixed with attribute [local instance] monoidalCategory"
  }
 }
