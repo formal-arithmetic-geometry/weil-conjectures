@@ -453,6 +453,13 @@ lemma span_T_le_ker_extendedReesAlgebraToPolynomial (φ : R →+* S) (h : I ≤ 
   rw [Ideal.span_singleton_le_iff_mem, RingHom.mem_ker]
   simp
 
+@[simp]
+lemma extendedReesAlgebraToPolynomial_algebraMap (φ : R →+* S) (h : I ≤ RingHom.ker φ) (x : R) :
+    I.extendedReesAlgebraToPolynomial φ h (algebraMap R I.extendedReesAlgebra x) =
+      Polynomial.C (φ x) := by
+  apply toLaurent_injective
+  simp
+
 lemma extendedReesAlgebraToPolynomial_C_mul_T_neg_one (φ : R →+* S) (h : I ≤ RingHom.ker φ)
     {x : R} (hx : x ∈ I) :
     I.extendedReesAlgebraToPolynomial φ h ⟨_, C_mul_T_neg_one_mem_extendedReesAlgebra hx⟩ = 0 := by

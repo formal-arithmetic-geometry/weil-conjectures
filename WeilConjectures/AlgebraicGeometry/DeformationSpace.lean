@@ -425,6 +425,23 @@ noncomputable def normalConeToQuotient : I.normalConePresheaf ⟶ I.quotientAlge
     exact (congrArg (Polynomial.eval 0) (I.reesToQuotientPolynomial.naturality_apply i x)).trans
       (Polynomial.eval_zero_map _ _)
 
+lemma toNormalConePresheaf_comp_normalConeToQuotient :
+    (I.toReesPresheaf ≫ toQuotientPresheaf I.tIdeal I.map_tIdeal) ≫ I.normalConeToQuotient =
+      I.toQuotientAlgebra := by
+  ext U x
+  change Polynomial.eval 0 (Ideal.extendedReesAlgebraToPolynomial _ (Ideal.Quotient.mk _)
+    Ideal.mk_ker.ge (algebraMap _ (I.siteIdeal U.unop).extendedReesAlgebra x)) = _
+  exact (congrArg (Polynomial.eval 0) (Ideal.extendedReesAlgebraToPolynomial_algebraMap
+    (I := I.siteIdeal U.unop) _ Ideal.mk_ker.ge x)).trans Polynomial.eval_C
+
+lemma polynomialToRees_comp_reesToQuotientPolynomial :
+    I.polynomialToRees ≫ I.reesToQuotientPolynomial =
+      Functor.whiskerRight I.toQuotientAlgebra CommRingCat.polynomialFunctor := by
+  refine NatTrans.ext (funext fun U ↦ ?_)
+  refine CommRingCat.hom_ext ?_
+  exact Ideal.extendedReesAlgebraToPolynomial_comp_toExtendedReesAlgebra
+    (I := I.siteIdeal U.unop) (Ideal.Quotient.mk _) Ideal.mk_ker.ge
+
 /-! ### The fibres of the deformation space -/
 
 lemma toPolynomialPresheaf_comp_polynomialToLaurent :

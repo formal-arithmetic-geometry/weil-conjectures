@@ -7,6 +7,8 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.Morphisms.RegularImmersion
 public import WeilConjectures.Mathlib.AlgebraicGeometry.AffineSpace
+public import WeilConjectures.AlgebraicGeometry.DeformationSpace
+public import Mathlib.AlgebraicGeometry.Morphisms.Separated
 
 /-!
 # Deformation to the normal cone of a section
@@ -69,6 +71,133 @@ namespace AlgebraicGeometry
 variable {V B : Scheme.{u}}
 
 namespace Scheme.Hom
+
+/-! ### The construction -/
+
+section Construction
+
+open AffineZariskiSite
+
+variable (g : V ⟶ B) (s : B ⟶ V)
+
+/-- The projection `g̃ : D_s V ⟶ 𝔸¹_B` of the deformation space of the section `s`, given by the
+coordinate `t` and `D_s V ⟶ V ⟶ B`. -/
+noncomputable def deformationSpaceProj : s.ker.deformationSpace ⟶ 𝔸(ULift.{u} (Fin 1); B) :=
+  s.ker.deformationSpaceToPolynomialSpec ≫ V.polynomialSpecToAffineSpace ≫
+    AffineSpace.map (ULift.{u} (Fin 1)) g
+
+/-- `B` is the closed subscheme `V(I_s) = Spec_V (𝒪_V / I_s)`. -/
+noncomputable def toQuotientSpec : B ⟶ s.ker.quotientSpec :=
+  IsClosedImmersion.lift (relativeGluingData s.ker.coequifibered_toQuotientAlgebra).toBase s
+    (s.ker.ker_quotientSpec_toBase).le
+
+@[reassoc (attr := simp)]
+
+lemma toQuotientSpec_toBase :
+    s.toQuotientSpec ≫ (relativeGluingData s.ker.coequifibered_toQuotientAlgebra).toBase = s :=
+  IsClosedImmersion.lift_fac _ _ _
+
+instance [IsClosedImmersion s] : IsIso s.toQuotientSpec :=
+  IsClosedImmersion.isIso_of_ker_eq _ _ _ (s.toQuotientSpec_toBase)
+    (s.ker.ker_quotientSpec_toBase).symm
+
+/-- The projection `N_s ⟶ B` of the normal cone of the section. -/
+noncomputable def normalConeProj : s.ker.normalCone ⟶ B :=
+  (relativeGluingData s.ker.coequifibered_toNormalConePresheaf).toBase ≫ g
+
+/-- The zero section `B ⟶ N_s` of the normal cone, given by the degree-zero part
+`⨁_{r ≥ 0} I^r / I^{r+1} ⟶ 𝒪_V / I`. -/
+noncomputable def normalConeZeroSection : B ⟶ s.ker.normalCone :=
+  s.toQuotientSpec ≫ relativeGluingMap s.ker.coequifibered_toNormalConePresheaf
+    s.ker.coequifibered_toQuotientAlgebra s.ker.normalConeToQuotient
+
+
+@[reassoc (attr := simp)]
+lemma normalConeZeroSection_toBase :
+    s.normalConeZeroSection ≫ (relativeGluingData s.ker.coequifibered_toNormalConePresheaf).toBase =
+      s := by
+  rw [normalConeZeroSection, Category.assoc,
+    relativeGluingMap_toBase _ _ _ s.ker.toNormalConePresheaf_comp_normalConeToQuotient,
+    toQuotientSpec_toBase]
+
+variable {g s} in
+lemma normalConeZeroSection_normalConeProj (hs : s ≫ g = 𝟙 B) :
+    s.normalConeZeroSection ≫ normalConeProj g s = 𝟙 B := by
+  rw [normalConeProj, normalConeZeroSection_toBase_assoc, hs]
+
+instance [IsClosedImmersion s] : IsClosedImmersion s.normalConeZeroSection := by
+  have : IsClosedImmersion (s.normalConeZeroSection ≫
+      (relativeGluingData s.ker.coequifibered_toNormalConePresheaf).toBase) := by
+    rw [normalConeZeroSection_toBase]; infer_instance
+  exact IsClosedImmersion.of_comp _
+    (relativeGluingData s.ker.coequifibered_toNormalConePresheaf).toBase
+
+/-- `𝔸¹_B ⟶ 𝔸¹_{V(I_s)} = Spec_V (𝒪_V / I_s)[t]`, the affine line over `B ≅ V(I_s)`. -/
+noncomputable def affineSpaceToQuotientPolynomialSpec :
+    𝔸(ULift.{u} (Fin 1); B) ⟶ s.ker.quotientPolynomialSpec :=
+  s.ker.isPullback_quotientPolynomialSpec.lift
+    ((𝔸(ULift.{u} (Fin 1); B) ↘ B) ≫ s.toQuotientSpec)
+    (AffineSpace.map (ULift.{u} (Fin 1)) s ≫ inv V.polynomialSpecToAffineSpace) (by
+      rw [Category.assoc, toQuotientSpec_toBase, Category.assoc,
+        ← polynomialSpecToAffineSpace_over, IsIso.inv_hom_id_assoc, AffineSpace.map_over])
+
+@[reassoc (attr := simp)]
+lemma affineSpaceToQuotientPolynomialSpec_toQuotientSpec :
+    s.affineSpaceToQuotientPolynomialSpec ≫ relativeGluingMap
+      s.ker.coequifibered_toQuotientAlgebra s.ker.coequifibered_toQuotientPolynomialAlgebra
+      (s.ker.quotientAlgebra.whiskerLeft CommRingCat.polynomialC) =
+      (𝔸(ULift.{u} (Fin 1); B) ↘ B) ≫ s.toQuotientSpec :=
+  IsPullback.lift_fst _ _ _ _
+
+@[reassoc (attr := simp)]
+lemma affineSpaceToQuotientPolynomialSpec_toPolynomialSpec :
+    s.affineSpaceToQuotientPolynomialSpec ≫ relativeGluingMap
+      V.coequifibered_toPolynomialPresheaf s.ker.coequifibered_toQuotientPolynomialAlgebra
+      s.ker.polynomialToQuotientPolynomial =
+      AffineSpace.map (ULift.{u} (Fin 1)) s ≫ inv V.polynomialSpecToAffineSpace :=
+  IsPullback.lift_snd _ _ _ _
+
+/-- The section `s̃ : 𝔸¹_B ⟶ D_s V` of `g̃`: on the extended Rees algebra it is
+`𝒪_V[t, I t⁻¹] ⟶ (𝒪_V / I)[t]`, `t ↦ t`, `x t⁻¹ ↦ 0`. -/
+noncomputable def deformationSpaceSection : 𝔸(ULift.{u} (Fin 1); B) ⟶ s.ker.deformationSpace :=
+  s.affineSpaceToQuotientPolynomialSpec ≫ relativeGluingMap s.ker.coequifibered_toReesPresheaf
+    s.ker.coequifibered_toQuotientPolynomialAlgebra s.ker.reesToQuotientPolynomial
+
+lemma toReesPresheaf_comp_reesToQuotientPolynomial :
+    s.ker.toReesPresheaf ≫ s.ker.reesToQuotientPolynomial = s.ker.toQuotientPolynomialAlgebra := by
+  ext U x
+  exact Ideal.extendedReesAlgebraToPolynomial_algebraMap (I := s.ker.siteIdeal U.unop) _
+    Ideal.mk_ker.ge x
+
+@[reassoc (attr := simp)]
+lemma deformationSpaceSection_toPolynomialSpec :
+    s.deformationSpaceSection ≫ s.ker.deformationSpaceToPolynomialSpec =
+      AffineSpace.map (ULift.{u} (Fin 1)) s ≫ inv V.polynomialSpecToAffineSpace := by
+  rw [deformationSpaceSection, IdealSheafData.deformationSpaceToPolynomialSpec, Category.assoc,
+    ← relativeGluingMap_comp, s.ker.polynomialToRees_comp_reesToQuotientPolynomial,
+    affineSpaceToQuotientPolynomialSpec_toPolynomialSpec]
+
+@[reassoc (attr := simp)]
+lemma deformationSpaceSection_toBase :
+    s.deformationSpaceSection ≫ s.ker.deformationSpaceProj =
+      (𝔸(ULift.{u} (Fin 1); B) ↘ B) ≫ s := by
+  change _ ≫ (relativeGluingData s.ker.coequifibered_toReesPresheaf).toBase = _
+  rw [← relativeGluingMap_toBase V.coequifibered_toPolynomialPresheaf
+    s.ker.coequifibered_toReesPresheaf s.ker.polynomialToRees
+    s.ker.toPolynomialPresheaf_comp_polynomialToRees,
+    ← IdealSheafData.deformationSpaceToPolynomialSpec,
+    deformationSpaceSection_toPolynomialSpec_assoc,
+    show (relativeGluingData V.coequifibered_toPolynomialPresheaf).toBase =
+      V.polynomialSpecToAffineSpace ≫ _ from V.polynomialSpecToAffineSpace_over.symm,
+    IsIso.inv_hom_id_assoc, AffineSpace.map_over]
+
+variable {g s} in
+lemma deformationSpaceSection_deformationSpaceProj (hs : s ≫ g = 𝟙 B) :
+    s.deformationSpaceSection ≫ deformationSpaceProj g s = 𝟙 _ := by
+  rw [deformationSpaceProj, deformationSpaceSection_toPolynomialSpec_assoc,
+    IsIso.inv_hom_id_assoc, ← AffineSpace.map_comp, hs, AffineSpace.map_id]
+
+end Construction
 
 /-- Blueprint `sk-lem-geometry`: Geometry of the deformation of a section
 
