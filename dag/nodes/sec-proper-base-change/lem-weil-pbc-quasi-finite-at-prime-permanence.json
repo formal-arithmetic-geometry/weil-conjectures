@@ -171,5 +171,23 @@
   "item": "lem-weil-pbc-quasi-finite-at-prime-permanence",
   "worker": "stage1",
   "summary": "Split along Stacks Algebra 0C6H in 4 steps: (1) B → C of finite type from the generators of C over A (00F4, elementary); (2) the ring map θ: C⊗_Aκ(p) → C⊗_Bκ(q), c⊗λ ↦ c⊗λ̄, with θ∘j_A = j_B, written out from the A-balanced map (elementary, def-weil-pbc-localization-at-prime); (3) by lem-weil-pbc-fibre-ring-primes-bijection (Mathlib leaf) applied to A → C and to B → C, Q ↦ θ^{-1}(Q) pulls the point r̄_A back to exactly {r̄_B}; (4) Spec θ is continuous, so {r̄_B} is open, which is the DAG's definition of quasi-finite at r. The source argues with 00PK (3) (D(c) ∩ primes over p = {r}); since the DAG's definition is 00PK (1) and no node states (1)⇔(3) or that Spec of the fibre ring is homeomorphic to the fibre, the subset argument is realized by θ, needing no new node (proof_origin agent, document 0C6H). Statement unchanged. Searches added: local_search, leansearch, loogle, grep; Mathlib candidate Algebra.QuasiFinite.of_restrictScalars kept, not a leaf (B8). No new nodes."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.QuasiFiniteAtPrimePermanence",
+  "declaration": "Algebra.IsQuasiFiniteAtPrime.of_restrictScalars",
+  "file": "lean/Sheaf/RingTheory/QuasiFiniteAtPrimePermanence.lean",
+  "statement": "theorem IsQuasiFiniteAtPrime.of_restrictScalars {A : Type u} {B : Type v} {C : Type w} [CommRing A] [CommRing B] [CommRing C] [Algebra A B] [Algebra B C] [Algebra A C] [IsScalarTower A B C] [FiniteType A C] (r : PrimeSpectrum C) (hr : IsQuasiFiniteAtPrime A C r) : @IsQuasiFiniteAtPrime B C _ _ _ (FiniteType.of_restrictScalars_finiteType A B C) r",
+  "branch": "sheaf-dag",
+  "by": "M1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-qfp1543",
+  "group": "M1",
+  "result": "pass",
+  "note": "A,B,C CommRing in u v w; Algebra A B, B C, A C + IsScalarTower = maps and composite; [FiniteType A C] = composite finite type; B->C finite type derived via Mathlib of_restrictScalars_finiteType (theorem, not instance, so @ needed); r : PrimeSpectrum C; hr uses recorded J1 Algebra.IsQuasiFiniteAtPrime (p.Fiber S isolated point); conclusion same predicate over B at same r; no let/show, no hollow hyps, no private defs"
  }
 }
