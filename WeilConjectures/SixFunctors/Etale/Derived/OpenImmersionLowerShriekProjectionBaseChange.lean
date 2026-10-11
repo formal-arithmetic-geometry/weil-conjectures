@@ -254,6 +254,47 @@ lemma derivedOpenImmersionLowerShriekProjectionMap_baseChange (hsq : IsPullback 
     (unit_map_derivedOpenImmersionLowerShriekBaseChangeIso A hsq)
     (derivedOpenImmersionSquareMap_tensor A hsq.toCommSq) K M
 
+variable {FC : A → A → Type*} {CC : A → Type (u + 1)}
+  [∀ (P Q : A), FunLike (FC P Q) (CC P) (CC Q)] [ConcreteCategory.{u + 1} A FC]
+  [(CategoryTheory.forget A).ReflectsIsomorphisms]
+  [PreservesFilteredColimitsOfSize.{u + 1, u + 1} (CategoryTheory.forget A)]
+  [∀ Z : Scheme.{u}, Z.smallEtaleTopology.HasSheafCompose (CategoryTheory.forget A)]
+
+/-- The inverse form of `derivedOpenImmersionLowerShriekProjectionMap_baseChange`, with the
+blueprint's projection map `j_!K ⊗ᴸ M ⟶ j_!(K ⊗ᴸ Lj^*M)`. -/
+lemma derivedOpenImmersionLowerShriekProjectionIso_inv_baseChange
+    (hsq : IsPullback g' j' j g'')
+    (K : DerivedCategory (Sheaf U.smallEtaleTopology A))
+    (M : DerivedCategory (Sheaf Z.smallEtaleTopology A)) :
+    (leftDerivedUpperStarTensorIso A g'' (D((j)_!open[A]).obj K) M).inv ≫
+        L((g'')^*[A]).map (((derivedOpenImmersionLowerShriekProjectionIso A j).inv.app K).app M) ≫
+        (derivedOpenImmersionLowerShriekBaseChangeIso A hsq).inv.app
+          (((-⊗ᴸ-(U)[A]).obj K).obj (L((j)^*[A]).obj M)) =
+      ((-⊗ᴸ-(Z')[A]).map ((derivedOpenImmersionLowerShriekBaseChangeIso A hsq).inv.app K)).app
+          (L((g'')^*[A]).obj M) ≫
+        ((derivedOpenImmersionLowerShriekProjectionIso A j').inv.app (L((g')^*[A]).obj K)).app
+          (L((g'')^*[A]).obj M) ≫
+        D((j')_!open[A]).map (((-⊗ᴸ-(U')[A]).obj (L((g')^*[A]).obj K)).map
+          ((derivedSquareUpperStarIso A hsq.toCommSq).hom.app M)) ≫
+        D((j')_!open[A]).map (leftDerivedUpperStarTensorIso A g' K (L((j)^*[A]).obj M)).inv := by
+  have h := derivedOpenImmersionLowerShriekProjectionMap_baseChange A hsq K M
+  rw [← cancel_epi (leftDerivedUpperStarTensorIso A g'' (D((j)_!open[A]).obj K) M).hom,
+    Iso.hom_inv_id_assoc, ← cancel_epi (L((g'')^*[A]).map
+      (((derivedOpenImmersionLowerShriekProjectionIso A j).hom.app K).app M)),
+    ← Functor.map_comp_assoc, ← NatTrans.comp_app, Iso.hom_inv_id_app, NatTrans.id_app,
+    CategoryTheory.Functor.map_id, Category.id_comp,
+    ← cancel_epi ((derivedOpenImmersionLowerShriekBaseChangeIso A hsq).hom.app _),
+    Iso.hom_inv_id_app]
+  erw [reassoc_of% h]
+  simp only [← NatTrans.comp_app_assoc, ← Functor.map_comp_assoc, Iso.hom_inv_id_app]
+  erw [CategoryTheory.Functor.map_id, Category.id_comp]
+  rw [← derivedOpenImmersionLowerShriekProjectionIso_hom, Iso.hom_inv_id_app, NatTrans.id_app,
+    Category.id_comp, ← Functor.map_comp, ← Functor.map_comp, Category.assoc,
+    ← Functor.map_comp_assoc, Iso.inv_hom_id_app]
+  erw [CategoryTheory.Functor.map_id, Category.id_comp]
+  rw [← leftDerivedUpperStarTensorIso_hom, Iso.hom_inv_id]
+  exact (CategoryTheory.Functor.map_id D((j')_!open[A]) _).symm
+
 end Derived
 
 end Etale
