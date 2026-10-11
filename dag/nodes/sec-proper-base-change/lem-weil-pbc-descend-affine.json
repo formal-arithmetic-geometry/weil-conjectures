@@ -195,5 +195,23 @@
  "tool_uses": [
   "pqf-lem-affine-local-target"
  ],
- "lead_note": "tool_uses: pqf-lem-affine-local-target (01S8, affineness is local on the target) is used in step 6 as a tool outside the unit's route; attached by the lead at review."
+ "lead_note": "tool_uses: pqf-lem-affine-local-target (01S8, affineness is local on the target) is used in step 6 as a tool outside the unit's route; attached by the lead at review.",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.DescendAffine",
+  "declaration": "AlgebraicGeometry.exists_isAffineHom_baseChange_of_isLimit",
+  "file": "lean/Sheaf/AlgebraicGeometry/DescendAffine.lean",
+  "statement": "theorem exists_isAffineHom_baseChange_of_isLimit {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] (D : Iᵒᵖ ⥤ Scheme.{u}) [∀ {i j : Iᵒᵖ} (a : i ⟶ j), IsAffineHom (D.map a)] (c : Cone D) (hc : IsLimit c) (i₀ : I) [CompactSpace (D.obj (op i₀))] [QuasiSeparatedSpace (D.obj (op i₀))] {X₀ Y₀ : Scheme.{u}} [CompactSpace X₀] [QuasiSeparatedSpace X₀] [CompactSpace Y₀] [QuasiSeparatedSpace Y₀] (f₀ : X₀ ⟶ Y₀) (h : Y₀ ⟶ D.obj (op i₀)) (hf : IsAffineHom (pullback.map (f₀ ≫ h) (c.π.app (op i₀)) h (c.π.app (op i₀)) f₀ (𝟙 c.pt) (𝟙 (D.obj (op i₀))) (Category.comp_id _) ((Category.comp_id _).trans (Category.id_comp _).symm))) : ∃ (i : I) (hi : i₀ ≤ i), IsAffineHom (pullback.map (f₀ ≫ h) (D.map (homOfLE hi).op) h (D.map (homOfLE hi).op) f₀ (𝟙 (D.obj (op i))) (𝟙 (D.obj (op i₀))) (Category.comp_id _) ((Category.comp_id _).trans (Category.id_comp _).symm))",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-dsa1134",
+  "group": "F1",
+  "result": "pass",
+  "note": "I:Type u (schemes' universe, checked pp.universes: single param u) Preorder+IsDirected; D:Iᵒᵖ⥤Scheme.{u} affine transitions; Cone+IsLimit S; i₀=0; S₀,X₀,Y₀ CompactSpace+QuasiSeparatedSpace; f₀ over S₀ via h with X₀→S₀=f₀≫h; X_i,Y_i,f_i = pullback.map (f₀≫h) p h p f₀ 𝟙 𝟙 (arg order #checked); hf IsAffineHom at c.π.app; conclusion ∃ i ≥ i₀ IsAffineHom f_i; no hollow hyps; imports only landed LimitAffineTransition"
+ }
 }
