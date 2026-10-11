@@ -13,13 +13,13 @@
  },
  "kind": "statement",
  "title": "Lifting a derived complex for a projective class",
- "statement": "Let $R$ be a ring, $I\\subseteq R$ an ideal, $\\mathcal P$ a class of $R$-modules, $K\\in D(R)$ [def-pc-derived-category], and $E^\\bullet$ a complex of $R/I$-modules representing $K\\otimes_R^{\\mathbf L}R/I$ in $D(R/I)$. Assume: (1) every member of $\\mathcal P$ is projective; (2) $P_1\\in\\mathcal P$ and $P_1\\oplus P_2\\in\\mathcal P$ if and only if $P_1,P_2\\in\\mathcal P$; (3) every map $f:P_1\\to P_2$ with $P_1,P_2\\in\\mathcal P$ that is surjective modulo $I$ is surjective; (4) $E^\\bullet$ is bounded above and each $E^i$ is isomorphic to $P/IP$ for some $P\\in\\mathcal P$; and (5) $K$ is represented by a bounded-above complex with terms in $\\mathcal P$. Then $K$ is represented by a bounded-above complex $P^\\bullet$ with terms in $\\mathcal P$ whose termwise quotient $P^\\bullet/IP^\\bullet$ is isomorphic to $E^\\bullet$ as a complex.",
+ "statement": "Let $R$ be a ring, $I\\subseteq R$ an ideal, $\\mathcal P$ a class of $R$-modules, $K\\in D(R)$ [def-weil-abstract-derived-category], and $E^\\bullet$ a complex of $R/I$-modules representing $K\\otimes_R^{\\mathbf L}R/I$ in $D(R/I)$. Assume: (1) every member of $\\mathcal P$ is projective; (2) $P_1\\in\\mathcal P$ and $P_1\\oplus P_2\\in\\mathcal P$ if and only if $P_1,P_2\\in\\mathcal P$; (3) every map $f:P_1\\to P_2$ with $P_1,P_2\\in\\mathcal P$ that is surjective modulo $I$ is surjective; (4) $E^\\bullet$ is bounded above and each $E^i$ is isomorphic to $P/IP$ for some $P\\in\\mathcal P$; and (5) $K$ is represented by a bounded-above complex with terms in $\\mathcal P$. Then $K$ is represented by a bounded-above complex $P^\\bullet$ with terms in $\\mathcal P$ whose termwise quotient $P^\\bullet/IP^\\bullet$ is isomorphic to $E^\\bullet$ as a complex.",
  "source": {
   "document": "literature/stacks-project/more-algebra.tex",
   "place": "More on Algebra, Lemma 15.75.2, proof and statement of lemma-lift-complex (general class of modules)"
  },
  "stmt_deps": [
-  "def-pc-derived-category"
+  "def-weil-abstract-derived-category"
  ],
  "proof": [
   {
@@ -154,5 +154,44 @@
   "group": "H1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-clp0250 (reviewer sub-agent of L); spot-checked: Read Tag 0BCA statement+whole proof and Tag 0BC9; child statement matches 0BC9 (hyp (2) one-directional), no duplicate (grep 0BC*/lift-complex), Mathlib grep 0 hits. FIX more, RETURN less: (1) C1 step 1: K^./IK^. representing K(x)^L R/I was uncited -> cite lem-pc-module-bounded-flat-kflat + lem-pur-derived-change-of-rings (generic tools: K-flatness of bounded-above flat complexes, derived change of rings computed by K-flat complexes); (2) C4 step 4: lem-pc-ring-derived-map-representative gives pi.h = q only up to homotopy, step claimed strict reduction -> added homotopy correction (lift s through surjective pi using K^i projective); (3) step 6 shift slip: cokernel complex Q reduces to E[1], not E -> P^.=Q[-1]; also restored the unchanged pre-delivery statement text (delivery reworded it without E7 note), spelled out 0 in P and uses of (1)-(3) in step 5, deduplicated proof_deps.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ComplexLiftClassProjective",
+  "declaration": "AlgebraicGeometry.complex_lift_class_projective",
+  "statement": "theorem complex_lift_class_projective (R : Type u) [CommRing R] (I : Ideal R) (Pclass : Set (ModuleCat.{max u v} R)) [HasDerivedCategory.{w} (ModuleCat.{max u v} R)] [HasDerivedCategory.{w'} (ModuleCat.{max u v} (R ⧸ I))] (K : DerivedCategory (ModuleCat.{max u v} R)) (E : CochainComplex (ModuleCat.{max u v} (R ⧸ I)) ℤ) (hproj : ∀ P : ModuleCat.{max u v} R, P ∈ Pclass → Projective P) (hclosed : ∀ P₁ P₂ P₁₂ : ModuleCat.{max u v} R, Nonempty (P₁₂ ≅ ModuleCat.of R (P₁ × P₂)) → (P₁ ∈ Pclass ∧ P₁₂ ∈ Pclass ↔ P₁ ∈ Pclass ∧ P₂ ∈ Pclass)) (hsurj : ∀ (P₁ P₂ : ModuleCat.{max u v} R) (f : P₁ ⟶ P₂), P₁ ∈ Pclass → P₂ ∈ Pclass → Function.Surjective ((ModuleCat.extendScalars (Ideal.Quotient.mk I)).map f) → Function.Surjective f) (hEbound : ∃ b : ℤ, E.IsStrictlyLE b) (hEterms : ∀ i : ℤ, ∃ P : ModuleCat.{max u v} R, P ∈ Pclass ∧ Nonempty (E.X i ≅ (ModuleCat.extendScalars (Ideal.Quotient.mk I)).obj P)) (hK : ∃ K₀ : CochainComplex (ModuleCat.{max u v} R) ℤ, (∃ b : ℤ, K₀.IsStrictlyLE b) ∧ (∀ i : ℤ, K₀.X i ∈ Pclass) ∧ Nonempty (DerivedCategory.Q.obj K₀ ≅ K) ∧ Nonempty (DerivedCategory.Q.obj (((ModuleCat.extendScalars (Ideal.Quotient.mk I)).mapHomologicalComplex (ComplexShape.up ℤ)).obj K₀) ≅ DerivedCategory.Q.obj E)) : ∃ P₀ : CochainComplex (ModuleCat.{max u v} R) ℤ, (∃ b : ℤ, P₀.IsStrictlyLE b) ∧ (∀ i : ℤ, P₀.X i ∈ Pclass) ∧ Nonempty (DerivedCategory.Q.obj P₀ ≅ K) ∧ Nonempty (((ModuleCat.extendScalars (Ideal.Quotient.mk I)).mapHomologicalComplex (ComplexShape.up ℤ)).obj P₀ ≅ E)",
+  "by": "M1",
+  "date": "2026-10-11",
+  "existing": false,
+  "file": "lean/Sheaf/AlgebraicGeometry/ComplexLiftClassProjective.lean",
+  "branch": "sheaf-dag"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-clp1320",
+  "group": "M1",
+  "result": "pass",
+  "note": "Matched vs Tag 0BCA: R CommRing, I ideal, class as Set (ModuleCat.{max u v} R) (iso-closure follows from hclosed); (1) Mathlib Projective; (2) iff with any model of P1xP2 (as sibling AcyclicLift); (3) surjectivity of extendScalars.map f => surjective f (not identity); (4) IsStrictlyLE + termwise extendScalars iso; (5)+E-represents-K(x)^L R/I as hK tied to the same K0 (equivalent: bounded-above projective K0 computes derived tensor; no Mathlib derived tensor on ModuleCat); conclusion tied existential with complex iso via mapHomologicalComplex (differentials respected). Same reduction form as landed sibling exists_acyclic_lift_mod_ideal; no private defs, no let. Correction def-pc-derived-category (D(O_X)) -> def-weil-abstract-derived-category valid; sole citer holds.",
+  "statement_corrected": true
+ },
+ "statement_change": {
+  "date": "2026-10-11",
+  "by": "M1 stage 2",
+  "old_statement": "Let $R$ be a ring, $I\\subseteq R$ an ideal, $\\mathcal P$ a class of $R$-modules, $K\\in D(R)$ [def-pc-derived-category], and $E^\\bullet$ a complex of $R/I$-modules representing $K\\otimes_R^{\\mathbf L}R/I$ in $D(R/I)$. Assume: (1) every member of $\\mathcal P$ is projective; (2) $P_1\\in\\mathcal P$ and $P_1\\oplus P_2\\in\\mathcal P$ if and only if $P_1,P_2\\in\\mathcal P$; (3) every map $f:P_1\\to P_2$ with $P_1,P_2\\in\\mathcal P$ that is surjective modulo $I$ is surjective; (4) $E^\\bullet$ is bounded above and each $E^i$ is isomorphic to $P/IP$ for some $P\\in\\mathcal P$; and (5) $K$ is represented by a bounded-above complex with terms in $\\mathcal P$. Then $K$ is represented by a bounded-above complex $P^\\bullet$ with terms in $\\mathcal P$ whose termwise quotient $P^\\bullet/IP^\\bullet$ is isomorphic to $E^\\bullet$ as a complex.",
+  "source": {
+   "document": "literature/stacks-project/more-algebra.tex",
+   "place": "More on Algebra, Lemma 15.75.2, Tag 0BCA"
+  },
+  "citers": [
+   {
+    "id": "lem-sc-pseudo-coherent-lift-stably-free-complex",
+    "holds": true,
+    "note": "It applies the ring-level lifting lemma to finite stably free modules, so the corrected citation matches."
+   }
+  ],
+  "old_stmt_deps": [
+   "def-pc-derived-category"
+  ],
+  "what": "The statement cited def-pc-derived-category, whose notion is the derived category of sheaves of O_X-modules for a scheme X; the source lemma instead uses the derived category of modules over an arbitrary ring R. The citation could not typecheck for the stated objects."
  }
 }

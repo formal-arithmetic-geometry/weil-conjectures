@@ -4700,3 +4700,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 13:03 L: merged deliver/F1/lem-weil-pbc-power-series-quotient-variables (stage 2; reviewer PASS; first push; Sheaf.RingTheory.PowerSeriesQuotientVariables MvPowerSeries.quotient_first_variables)
 - 13:04 L: merged deliver/J1/lem-weil-pbc-closed-immersion-conormal-functorial (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.ClosedImmersionConormalFunctorial AlgebraicGeometry.Scheme.Modules.closedImmersion_conormal_functorial)
 - 13:04 L: merged deliver/K1/lem-weil-pbc-power-in-base-after-localization (stage 2; reviewer PASS; first push; Sheaf.FieldTheory.PowerInBaseAfterLocalization RingTheory.power_in_base_after_localization)
+- 13:04 L: merged deliver/M1/lem-sc-complex-lift-class-projective (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.ComplexLiftClassProjective AlgebraicGeometry.complex_lift_class_projective; statement corrected (1 citers))
