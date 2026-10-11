@@ -16,6 +16,7 @@ public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.AB
 public import WeilConjectures.SixFunctors.ProEtale.Comparison
 public import WeilConjectures.SixFunctors.ProEtale.Comparison.Flat
 public import WeilConjectures.CategoryTheory.DerivedCategory.FlatModel
+public import WeilConjectures.CategoryTheory.DerivedCategory.TorAmplitudeMapDerivedCategory
 
 /-!
 
@@ -27,6 +28,11 @@ with the internal hom of bounded constructible complexes at a finite coefficient
 
 ## Main statements
 
+- `AlgebraicGeometry.ProEtale.monoidal_comparisonUpperStar`: `ν^*` is strong monoidal on sheaves
+  of `Λ`-modules.
+- `AlgebraicGeometry.ProEtale.DerivedCategory.torAmplitudeIn_mapDerivedCategory_iff`
+  (`lem-exc-comparison-tor-interval`): an étale complex has Tor amplitude in `[a, b]` if and only
+  if its pullback to the pro-étale site has.
 - `AlgebraicGeometry.ProEtale.DerivedCategory.torAmplitudeIn_of_mapDerivedCategory`
   (`lem-sf-comparison-tor-amplitude` (ii)): an étale complex whose pullback to the pro-étale
   site is bounded constructible of Tor amplitude in `[a, b]` has Tor amplitude in `[a, b]`.
@@ -49,6 +55,25 @@ universe u
 open CategoryTheory MonoidalCategory Opposite
 
 open scoped CategoryTheory.Functor
+
+namespace AlgebraicGeometry.ProEtale
+
+open Scheme
+
+set_option synthInstance.maxHeartbeats 400000 in
+-- the instances `WEqualsLocallyBijective` and `HasSheafCompose` on the small étale and
+-- pro-étale sites take long to synthesize
+/-- The comparison functor `ν^* : Sh(X_ét, Λ) ⥤ Sh(X_proét, Λ)` is strong monoidal. This is
+`CategoryTheory.Functor.sheafPullbackConstruction.sheafPullbackMonoidal` for the inclusion of the
+small étale site into the small pro-étale site, whose comma categories are filtered. -/
+noncomputable instance monoidal_comparisonUpperStar (Λ : Type (u + 1)) [CommRing Λ]
+    (X : Scheme.{u}) : ν^*(X)[ModuleCat.{u + 1} Λ].Monoidal :=
+  have (K : X.ProEtᵒᵖ) : IsFiltered (CostructuredArrow (X.toProEt).op K) :=
+    IsFiltered.of_equivalence (structuredArrowOpEquivalence _ (Opposite.unop K))
+  inferInstanceAs (Functor.sheafPullbackConstruction.sheafPullback (X.toProEt)
+    (ModuleCat.{u + 1} Λ) X.smallEtaleTopology (Scheme.ProEt.topology X)).Monoidal
+
+end AlgebraicGeometry.ProEtale
 
 namespace AlgebraicGeometry.ProEtale.DerivedCategory
 
@@ -100,6 +125,23 @@ theorem constructibleFiniteTor_mapDerivedCategory {X : Scheme.{u}}
   have ⟨hbc, a, b, hKt⟩ := hK'
   ⟨boundedConstructible_comparisonUpperStar_mapDerivedCategory_obj hbc, a, b,
     torAmplitudeIn_mapDerivedCategory Λ hKt⟩
+
+variable {Λ} in
+/-- Blueprint `lem-exc-comparison-tor-interval`: Site comparison preserves and detects Tor
+intervals.
+
+Let `Λ` be a finite ring and `K` a complex of étale sheaves of `Λ`-modules. Then `K` has Tor
+amplitude in `[a, b]` if and only if its pullback `ν^* K` to the pro-étale site has. The
+pullback is exact, faithful and strong monoidal, and it preserves flat sheaves
+(`AlgebraicGeometry.ProEtale.flat_comparisonUpperStar_obj`), so this is
+`DerivedCategory.torAmplitudeIn_mapDerivedCategory_obj_iff`. The blueprint's hypothesis that `K`
+be bounded below is not needed. -/
+theorem torAmplitudeIn_mapDerivedCategory_iff {X : Scheme.{u}} (a b : ℤ)
+    (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
+    torAmplitudeIn (ModuleCat.{u + 1} Λ) X a b (D(ν^*(X)[ModuleCat.{u + 1} Λ]).obj K) ↔
+      Etale.DerivedCategory.torAmplitudeIn (ModuleCat.{u + 1} Λ) X a b K :=
+  _root_.DerivedCategory.torAmplitudeIn_mapDerivedCategory_obj_iff _
+    (fun _ ↦ flat_comparisonUpperStar_obj) a b K
 
 /-- Blueprint `lem-sf-comparison-tor-amplitude`: Finite Tor amplitude under the site
 comparison, clause (ii).
