@@ -161,5 +161,27 @@
   "item": "def-weil-pbc-delta-functor",
   "worker": "stage1",
   "summary": "Checked clause by clause against Stacks homology.tex Section 010P: data (a),(b) and axioms (1),(2) = Definition 010Q (Stacks requires the F^n additive, as the node said; a morphism of short exact sequences is a commutative diagram (a,b,c), now written out as bf=f'a, cg=g'b; δ indexed by the sequence with its maps; the displayed long sequence completed with F^1(g), δ^1); morphisms = 010R; universality = 010S. No discrepancy of substance. No hidden claim: the left exactness of F^0 (remark after 010Q), the category of δ-functors and Lemma 010U are not asserted, and neither user uses them through this node. New statement dependencies, both Mathlib leaves: def-weil-pbc-additive-functor (Stacks 00ZY = CategoryTheory.Functor.Additive, exact) and def-weil-pbc-exact-sequence (Stacks 010E = ShortComplex.Exact via exact_iff_image_eq_kernel, ShortComplex.ShortExact, ComposableArrows.Exact); the DAG had no node for either. Mathlib searched three more ways for the δ-functor structure: none; the closest are ShortComplex.ShortExact.δ / homology_exact₁₂₃ / HomologySequence.δ_naturality and Ext.covariant_sequence_exact*; Functor.rightDerived (abelian) has no connecting maps in Mathlib. Source repository: no DeltaFunctor/deltaFunctor/universal δ-functor; the only IsUniversal hits are Kan-extension universality (RightExtension/LeftExtension.IsUniversal.op/unop in FromJoel/.../Derived/LeftDerived.lean, sorry-free), unrelated."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.DeltaFunctor",
+  "declaration": "CategoryTheory.CohomologicalDeltaFunctor",
+  "declarations": [
+   "CategoryTheory.CohomologicalDeltaFunctor.Hom",
+   "CategoryTheory.CohomologicalDeltaFunctor.IsUniversal"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/DeltaFunctor.lean",
+  "statement": "structure CohomologicalDeltaFunctor (A : Type u₁) (B : Type u₂) [Category.{v₁} A] [Abelian A] [Category.{v₂} B] [Abelian B]",
+  "branch": "sheaf-dag",
+  "by": "G1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-dlt0602",
+  "group": "G1",
+  "result": "pass",
+  "note": "abelian A,B with free universes v1 v2 u1 u2; F:N->A⥤B additive; delta indexed by S:ShortComplex with ShortExact, F^n X3 -> F^(n+1) X1; exactness at F0A (mono_zero), F^nB, F^nC, F^(n+1)A covers every position incl. n=0; naturality over phi:S⟶T in Lean order delta_S≫F(a)=F(c)≫delta_T; Hom.naturality = 010R; IsUniversal ∃! Hom with app 0 = t = 010S; no sorry; Mathlib/source grep DeltaFunctor: none"
  }
 }
