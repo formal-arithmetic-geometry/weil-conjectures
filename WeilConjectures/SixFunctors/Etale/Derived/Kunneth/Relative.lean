@@ -142,6 +142,57 @@ theorem nonempty_iso_rightDerivedLowerShriek_externalProduct (f : X ⟶ B) (g : 
   sorry
 
 omit [HasSmallSiteSheafify A] in
+/-- The assembly step of the ordinary Künneth formula with an identity factor for a morphism
+`p : X ⟶ Y` with base change `p' = p × 𝟙_Z : X ×_S Z ⟶ Y ×_S Z`: base change along the
+projection `Y ×_S Z ⟶ Y` and the projection formula for `p'` give
+`Rp_* M ⊠ Q ≅ Rp'_* (M ⊠ Q)`. -/
+theorem nonempty_iso_externalProduct_rightDerivedLowerStar_of_iso [UpperStarPreservesFlat A]
+    {S Z : Scheme.{u}} (b : Y ⟶ S) (c : Z ⟶ S) (p : X ⟶ Y)
+    (M : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A))
+    (Q : _root_.DerivedCategory (Sheaf Z.smallEtaleTopology A))
+    (e : (L((pullback.fst b c)^*[A])).obj ((R((p)_*[A])).obj M) ≅
+      (R((pullback.mapOverBaseRight p b c)_*[A])).obj
+        ((L((pullback.fst (p ≫ b) c)^*[A])).obj M))
+    (hpf : IsIso (((rightDerivedLowerStarProjectionMap A (pullback.mapOverBaseRight p b c)).app
+      ((L((pullback.fst (p ≫ b) c)^*[A])).obj M)).app ((L((pullback.snd b c)^*[A])).obj Q))) :
+    Nonempty (externalProduct A b c ((R((p)_*[A])).obj M) Q ≅
+      (R((pullback.mapOverBaseRight p b c)_*[A])).obj (externalProduct A (p ≫ b) c M Q)) := by
+  let e' : (L((pullback.mapOverBaseRight p b c)^*[A])).obj ((L((pullback.snd b c)^*[A])).obj Q) ≅
+      (L((pullback.snd (p ≫ b) c)^*[A])).obj Q :=
+    ((leftDerivedUpperStarComp A (pullback.mapOverBaseRight p b c) (pullback.snd b c)
+      (pullback.snd (p ≫ b) c) (by simp)).app Q).symm
+  exact ⟨((derivedTensor A _).mapIso e).app _ ≪≫ asIso (((rightDerivedLowerStarProjectionMap A
+    (pullback.mapOverBaseRight p b c)).app ((L((pullback.fst (p ≫ b) c)^*[A])).obj M)).app
+      ((L((pullback.snd b c)^*[A])).obj Q)) ≪≫
+    (R((pullback.mapOverBaseRight p b c)_*[A])).mapIso (((derivedTensor A _).obj _).mapIso e')⟩
+
+/-- The ordinary Künneth formula with an identity factor `sk-lem-sf-kunneth-star` for a
+*proper* morphism `p : X ⟶ Y` and a finite coefficient ring: `Rp_* M ⊠ Q ≅ R(p × 𝟙_Z)_* (M ⊠ Q)`
+for all `M` and `Q`, by proper base change
+(`AlgebraicGeometry.Etale.isIso_derivedBaseChangeMap_of_isProper_of_isAddTorsion_ring`) and the
+projection formula for the proper morphism `p × 𝟙_Z`
+(`AlgebraicGeometry.Etale.isIso_rightDerivedLowerStarProjectionMap_of_finite`). For a
+compactification `f = g ∘ j` of a general `f` this handles the proper factor `g`; the open
+factor `j` is the non-formal part of
+`AlgebraicGeometry.Etale.nonempty_iso_externalProduct_rightDerivedLowerStar`. -/
+theorem nonempty_iso_externalProduct_rightDerivedLowerStar_of_isProper (Λ : Type (u + 1))
+    [CommRing Λ] [Finite Λ] {S Z : Scheme.{u}} (b : Y ⟶ S) (c : Z ⟶ S) (p : X ⟶ Y) [IsProper p]
+    (M : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
+    (Q : _root_.DerivedCategory (Sheaf Z.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
+    Nonempty (externalProduct (ModuleCat.{u + 1} Λ) b c
+        ((R((p)_*[ModuleCat.{u + 1} Λ])).obj M) Q ≅
+      (R((pullback.mapOverBaseRight p b c)_*[ModuleCat.{u + 1} Λ])).obj
+        (externalProduct (ModuleCat.{u + 1} Λ) (p ≫ b) c M Q)) := by
+  have sq : IsPullback (pullback.fst (p ≫ b) c) (pullback.mapOverBaseRight p b c) p
+      (pullback.fst b c) := isPullback_pullbackMapLeft b c p
+  have : IsProper (pullback.mapOverBaseRight p b c) :=
+    MorphismProperty.of_isPullback (P := @IsProper) sq inferInstance
+  have := isIso_derivedBaseChangeMap_of_isProper_of_isAddTorsion_ring Λ isAddTorsion_of_finite sq
+  have := isIso_rightDerivedLowerStarProjectionMap_of_finite Λ (pullback.mapOverBaseRight p b c)
+  exact nonempty_iso_externalProduct_rightDerivedLowerStar_of_iso (ModuleCat.{u + 1} Λ) b c p M Q
+    ((asIso (derivedBaseChangeMap (ModuleCat.{u + 1} Λ) sq.toCommSq)).app M) inferInstance
+
+omit [HasSmallSiteSheafify A] in
 /-- The assembly step of the relative product theorem `sk-thm-sf-kunneth-relative`: with
 `p`, `q` the projections of `X ×_B Y`, a composition isomorphism
 `R(f ×_B g)_! ≅ Rq_! ⋙ Rg_!`, the projection formula for `q` at `(Lp^*K, M)`, compact-support
