@@ -1,8 +1,8 @@
 # Work queue
 
-865 items; claim with `tools/claim.py next <group> [--stage N]`.
+864 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (11)
+## Stage 1: nodes to split (9)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -12,13 +12,11 @@
 | `lem-pc-genus-agrees-sc` | 4007 | rests_on_sorry |
 | `lem-pc-derived-tensor-flat-second-localization` | 5018 | none |
 | `lem-pc-kflat-tensor-quasi-iso` | 5018 | none |
-| `lem-sc-complex-lift-acyclic-projective` | 6018 | none |
 | `lem-sc-base-change-curve` | - | none |
 | `lem-sc-global-functions` | - | rests_on_sorry |
 | `lem-pur-triangle-common-refinement-ms3-05r9` | - | none |
-| `lem-pur-triangle-completion-ms6-05r9` | - | none |
 
-## Stage 2: nodes to state (854)
+## Stage 2: nodes to state (855)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -233,6 +231,7 @@
 | `lem-sc-bounded-below-injective-resolution` | 1 | state |
 | `lem-sc-closed-affine-union-affine` | 1 | state |
 | `lem-sc-coherent-ring-fp-kernel-cokernel` | 1 | state |
+| `lem-sc-complex-lift-acyclic-projective` | 1 | state |
 | `lem-sc-cone-pseudo-coherent` | 1 | state |
 | `lem-sc-derived-hom-mayer-vietoris` | 1 | state |
 | `lem-sc-determinant-short-exact` | 1 | state |
@@ -877,7 +876,7 @@
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 | `def-nagata-fixed-base-separated-stage` | 6 | state |
 
-Not open yet: 1783 nodes that wait for a statement dependency, 52 nodes that wait for stage 1.
+Not open yet: 1784 nodes that wait for a statement dependency, 50 nodes that wait for stage 1.
 
 ## Stage 3: modules to prove (0)
 
