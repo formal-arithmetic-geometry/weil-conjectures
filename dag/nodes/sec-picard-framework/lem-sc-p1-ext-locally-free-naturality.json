@@ -150,5 +150,27 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-eln (reviewer sub-agent of L); spot-checked: Start Sat Oct 10 03:48:13 PM UTC 2026. Source: blueprint thm-sc-p1-duality.md proof Step 1 (Ext of locally free = H^i(F^vee tensor G), Yoneda pairing); Stacks 06XR (via lem-weil-pbc-ext-via-injective-resolution), 015E, 01EQ, 01XD. Under the corrected Ext (R^i Hom(F,-)(G) by injective resolutions of G, def-sc-ext-sheaf lead_note) the item is true: Hom(F,I) = Gamma(F^vee tensor I) termwise, F^vee tensor I^bullet an acyclic resolution of F^vee tensor G, and u acts by u^vee tensor 1 termwise. Step 1: new node lem-sc-ext-evaluation-first-naturality is a true sheaf-level square; Step 4 cites lem-sc-p1-monomial (ii),(iii) and the H^1 = Ext^1(O,-) clause of lem-sc-ext-locally-free correctly. Small cases d=0 (s constant: identity on H^1(omega)=k), d=1 (H^1(O(-3)) basis [t^-2],[t^-1], multiplication by s=a+bt sends [t^-2] to b[t^-1]) agree. FIX more, RETURN less: (1) C4 dag/nodes/sec-picard-framework/lem-sc-ext-evaluation-first-naturality.json: statement: hypothesis 'finite locally free in the sense of def-amb-finite-locally-free-module' (constant rank) narrower than the item's; replaced by the open-cover notion of lem-sc-ext-evaluation, and the evaluation isomorphisms cited to it. (2) C1 item Step 2: naturality of the derived-composite isomorphism in the exact functor was used uncited ('functoriality of right derived functors'); added statement node lem-sc-ext-derived-composite-natural (Stacks 015E) and rewrote Step 2 through lem-weil-pbc-ext-via-injective-resolution, lem-sc-ext-evaluation, def-pur-sheaf-hom, lem-sc-ext-derived-composite, the new evaluation square and the added node. (3) C1 item Step 3: naturality in the sheaf of the Cech-to-cohomology isomorphism was used uncited and the step was marked elementary; added statement node lem-sc-cech-comparison-natural (Stacks 01EQ, 01XD), Step 3 now cites lem-pc-cech-computes and it, dual-generator computation written out, elementary false; proof_deps updated. lem-pc-cech-computes (unit sk-lem-picard-cech-computes) is a generic tool (C8). End Sat Oct 10 03:51:14 PM UTC 2026.; 4 file(s) fixed by the reviewer; 2 statement node(s) added by the reviewer (FIX more, RETURN less)"
  },
- "lead_note": "2026-10-10 L (R-eln): R-eln: Step 2 identifies the canonical isomorphism of lem-sc-ext-locally-free with its construction (ext-via-injective-resolution + evaluation + lem-sc-ext-derived-composite); if lem-sc-ext-locally-free is later restated, state that construction in its statement. Ext read as R^i Hom(F,-)(G) per the def-sc-ext-sheaf correction; the item is true under that reading."
+ "lead_note": "2026-10-10 L (R-eln): R-eln: Step 2 identifies the canonical isomorphism of lem-sc-ext-locally-free with its construction (ext-via-injective-resolution + evaluation + lem-sc-ext-derived-composite); if lem-sc-ext-locally-free is later restated, state that construction in its statement. Ext read as R^i Hom(F,-)(G) per the def-sc-ext-sheaf correction; the item is true under that reading.",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.LocallyFreeExtNaturality",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.locallyFreeExtAddEquivH_naturality",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.Modules.locallyFreeExtAddEquivH_naturality",
+   "AlgebraicGeometry.Scheme.Modules.p1_ext_pullback_cech_multiplication"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/LocallyFreeExtNaturality.lean",
+  "statement": "theorem locallyFreeExtAddEquivH_naturality {X : Scheme.{v}} [HasExt.{v} X.Modules] (F F' G : X.Modules) [F.IsFiniteLocallyFree] [F'.IsFiniteLocallyFree] (f : F' ⟶ F) (i : ℕ) (z : Ext F G i) : locallyFreeExtAddEquivH F' G i ((Abelian.Ext.mk₀ f).comp z (Nat.zero_add i)) = H.map (dualMap f ▷ G) i (locallyFreeExtAddEquivH F G i z)",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-eln1433",
+  "group": "F1",
+  "result": "fix",
+  "note": "general: X arbitrary scheme, F,F' IsFiniteLocallyFree (variable rank), G arbitrary, f:F'⟶F, all i:ℕ, pullback = (mk₀ f).comp z, RHS H.map (dualMap f ▷ G); P1: k alg closed, X=ProjectiveLine, L=twist d with TwistData E, O=unit, ω=relativeDifferentials (≅O(-2) by monomial iii), s:O⟶L, Čech transport by natural e (choice irrelevant by naturality), cochain map = σ•τ on charts/overlaps; FIX: dependency module's private locallyFreeEvaluation replaced by source dualTensorHom (H4), isIso renamed isIso_dualTensorHom_of_isFiniteLocallyFree; both modules compiled"
+ }
 }

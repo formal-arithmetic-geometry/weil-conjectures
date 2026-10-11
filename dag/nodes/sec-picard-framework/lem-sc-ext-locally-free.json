@@ -1,214 +1,231 @@
 {
-  "id": "lem-sc-ext-locally-free",
-  "blueprint": {
-    "is": "lem-sc-ext-locally-free",
-    "from": null,
-    "same_as": []
-  },
-  "kind": "statement",
-  "title": "Ext of a finite locally free module",
-  "statement": "Let $X$ be a scheme, $\\mathcal F$ a finite locally free\n$\\mathcal O_X$-module and $\\mathcal G$ an $\\mathcal O_X$-module,\nwith $\\operatorname{Ext}$ as in [def-sc-ext-sheaf] and\n$\\mathcal F^{\\vee}=\\mathcal{H}om_{\\mathcal O_X}(\\mathcal F,\\mathcal O_X)$. Then there are canonical isomorphisms\n\n$$\n\\operatorname{Ext}^i_X(\\mathcal F,\\mathcal G)\\;\\cong\\;\n\\mathrm H^i\\bigl(X,\\mathcal F^{\\vee}\\otimes_{\\mathcal O_X}\n\\mathcal G\\bigr)\\qquad(i\\geq0),\n$$\n\nin particular\n$\\operatorname{Ext}^i_X(\\mathcal O_X,\\mathcal G)=\\mathrm H^i(X,\\mathcal G)$.",
-  "source": {
-    "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-duality/lem-sc-ext-locally-free.md",
-    "place": "node lem-sc-ext-locally-free, order 689"
-  },
-  "stmt_deps": [
-    "def-sc-ext-sheaf",
-    "def-pur-sheaf-tensor-product",
-    "def-pur-sheaf-hom",
-    "def-weil-sheaf-of-modules-category"
-  ],
-  "proof": [
-    {
-      "text": "By [lem-sc-ext-evaluation], naturally in $\\mathcal G$, evaluation identifies $\\mathcal{H}om_{\\mathcal O_X}(\\mathcal F,\\mathcal G)$ with $\\mathcal F^{\\vee}\\otimes\\mathcal G$. The global-sections clause of [def-pur-sheaf-hom] identifies its sections on $X$ with $\\operatorname{Hom}_{\\mathcal O_X}(\\mathcal F,\\mathcal G)$. By [def-sc-ext-sheaf] and [pqf-def-cohomology], this gives the degree-zero isomorphism.",
-      "uses": [
-        "lem-sc-ext-evaluation",
-        "def-pur-sheaf-hom",
-        "def-sc-ext-sheaf",
-        "pqf-def-cohomology"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-duality/lem-sc-ext-locally-free.md",
-        "place": "Proof, first sentence"
-      }
-    },
-    {
-      "text": "On each $V_a$ of an open cover with $\\mathcal F|_{V_a}\\cong\\mathcal O_{V_a}^{\\oplus d_a}$, the definition of sheaf Hom [def-pur-sheaf-hom] gives $\\mathcal F^{\\vee}|_{V_a}\\cong\\mathcal O_{V_a}^{\\oplus d_a}$ by taking the Hom of a finite direct sum. Thus the dual satisfies the same finite locally free open-cover condition (compare [def-amb-finite-locally-free-module]), and [lem-sc-ext-tensor-exact] makes $T(-)=\\mathcal F^{\\vee}\\otimes-$ exact. By [lem-sc-ext-evaluation] and the global-sections clause of [def-pur-sheaf-hom], $\\operatorname{Hom}(\\mathcal F,-)\\cong\\Gamma(X,T(-))$. Kernels of $\\mathcal O_X$-modules are computed sectionwise by [def-weil-sheaf-of-modules-category], so evaluating at $X$ preserves kernels and finite products; hence $\\Gamma(X,-)$ is left exact in the sense of [def-sp-left-exact-additive].",
-      "uses": [
-        "def-pur-sheaf-hom",
-        "def-amb-finite-locally-free-module",
-        "lem-sc-ext-tensor-exact",
-        "lem-sc-ext-evaluation",
-        "def-weil-sheaf-of-modules-category",
-        "def-sp-left-exact-additive"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-duality/lem-sc-ext-locally-free.md",
-        "place": "Proof, exactness sentence"
-      }
-    },
-    {
-      "text": "The tensor-Hom adjunction [lem-weil-pbc-module-tensor-hom-adjunction], with its tensor factors interchanged using the sectionwise symmetry [lem-weil-pbc-module-tensor-comm] and sheafification in [def-pur-sheaf-tensor-product], makes $\\mathcal{H}om_{\\mathcal O_X}(\\mathcal F,-)$ right adjoint to $\\mathcal F\\otimes-$. The evaluation isomorphism [lem-sc-ext-evaluation] identifies this right adjoint with $T$; [def-pur-sheaf-hom] specifies the sheaf Hom involved. The functor $\\mathcal F\\otimes-$ is exact by [lem-sc-ext-tensor-exact], so [lem-sp-right-adjoint-preserves-injectives] makes $T(I)$ injective for every injective $I$. The injective resolution concentrated in degree zero shows $R^i\\Gamma(X,T(I))=0$ for $i>0$ by [def-sp-left-exact-additive], hence $T(I)$ is $\\Gamma$-acyclic by [def-sp-acyclic].",
-      "uses": [
-        "lem-weil-pbc-module-tensor-hom-adjunction",
-        "lem-weil-pbc-module-tensor-comm",
-        "def-pur-sheaf-tensor-product",
-        "lem-sc-ext-evaluation",
-        "def-pur-sheaf-hom",
-        "lem-sc-ext-tensor-exact",
-        "lem-sp-right-adjoint-preserves-injectives",
-        "def-sp-left-exact-additive",
-        "def-sp-acyclic"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-duality/lem-sc-ext-locally-free.md",
-        "place": "Proof, exactness sentence"
-      }
-    },
-    {
-      "text": "By [lem-weil-pbc-scheme-modules-enough-injectives], $\\operatorname{Mod}(\\mathcal O_X)$ has enough injectives, so both the source and target of $T$ meet the hypothesis of [lem-sc-ext-derived-composite]. Apply that node to $\\Gamma(X,-)\\circ T$. Its $i$-th right derived functor is $\\mathrm H^i(X,\\mathcal F^{\\vee}\\otimes\\mathcal G)$ by [pqf-def-cohomology], while [lem-weil-pbc-ext-via-injective-resolution] identifies the right derived functor of $\\operatorname{Hom}(\\mathcal F,-)$ in the second variable with $\\operatorname{Ext}^i_X(\\mathcal F,\\mathcal G)$ (correcting the contravariant wording in [def-sc-ext-sheaf]).",
-      "uses": [
-        "lem-weil-pbc-scheme-modules-enough-injectives",
-        "lem-sc-ext-derived-composite",
-        "pqf-def-cohomology",
-        "lem-weil-pbc-ext-via-injective-resolution",
-        "def-sc-ext-sheaf"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-duality/lem-sc-ext-locally-free.md",
-        "place": "Proof, standard homological algebra parenthetical"
-      }
-    },
-    {
-      "text": "For $\\mathcal F=\\mathcal O_X$, [def-pur-sheaf-hom] identifies its dual with $\\mathcal O_X$, and [def-pur-sheaf-tensor-product] identifies $\\mathcal O_X\\otimes\\mathcal G$ with $\\mathcal G$; the isomorphism above specializes to the stated formula.",
-      "uses": [
-        "def-pur-sheaf-hom",
-        "def-pur-sheaf-tensor-product"
-      ],
-      "elementary": true,
-      "source": {
-        "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-duality/lem-sc-ext-locally-free.md",
-        "place": "Proof, final specialization"
-      }
-    }
-  ],
-  "proof_deps": [
+ "id": "lem-sc-ext-locally-free",
+ "blueprint": {
+  "is": "lem-sc-ext-locally-free",
+  "from": null,
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Ext of a finite locally free module",
+ "statement": "Let $X$ be a scheme, $\\mathcal F$ a finite locally free\n$\\mathcal O_X$-module and $\\mathcal G$ an $\\mathcal O_X$-module,\nwith $\\operatorname{Ext}$ as in [def-sc-ext-sheaf] and\n$\\mathcal F^{\\vee}=\\mathcal{H}om_{\\mathcal O_X}(\\mathcal F,\\mathcal O_X)$. Then there are canonical isomorphisms\n\n$$\n\\operatorname{Ext}^i_X(\\mathcal F,\\mathcal G)\\;\\cong\\;\n\\mathrm H^i\\bigl(X,\\mathcal F^{\\vee}\\otimes_{\\mathcal O_X}\n\\mathcal G\\bigr)\\qquad(i\\geq0),\n$$\n\nin particular\n$\\operatorname{Ext}^i_X(\\mathcal O_X,\\mathcal G)=\\mathrm H^i(X,\\mathcal G)$.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-duality/lem-sc-ext-locally-free.md",
+  "place": "node lem-sc-ext-locally-free, order 689"
+ },
+ "stmt_deps": [
+  "def-sc-ext-sheaf",
+  "def-pur-sheaf-tensor-product",
+  "def-pur-sheaf-hom",
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "proof": [
+  {
+   "text": "By [lem-sc-ext-evaluation], naturally in $\\mathcal G$, evaluation identifies $\\mathcal{H}om_{\\mathcal O_X}(\\mathcal F,\\mathcal G)$ with $\\mathcal F^{\\vee}\\otimes\\mathcal G$. The global-sections clause of [def-pur-sheaf-hom] identifies its sections on $X$ with $\\operatorname{Hom}_{\\mathcal O_X}(\\mathcal F,\\mathcal G)$. By [def-sc-ext-sheaf] and [pqf-def-cohomology], this gives the degree-zero isomorphism.",
+   "uses": [
     "lem-sc-ext-evaluation",
-    "lem-sc-ext-tensor-exact",
-    "lem-sc-ext-derived-composite",
+    "def-pur-sheaf-hom",
     "def-sc-ext-sheaf",
-    "def-sp-left-exact-additive",
+    "pqf-def-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-duality/lem-sc-ext-locally-free.md",
+    "place": "Proof, first sentence"
+   }
+  },
+  {
+   "text": "On each $V_a$ of an open cover with $\\mathcal F|_{V_a}\\cong\\mathcal O_{V_a}^{\\oplus d_a}$, the definition of sheaf Hom [def-pur-sheaf-hom] gives $\\mathcal F^{\\vee}|_{V_a}\\cong\\mathcal O_{V_a}^{\\oplus d_a}$ by taking the Hom of a finite direct sum. Thus the dual satisfies the same finite locally free open-cover condition (compare [def-amb-finite-locally-free-module]), and [lem-sc-ext-tensor-exact] makes $T(-)=\\mathcal F^{\\vee}\\otimes-$ exact. By [lem-sc-ext-evaluation] and the global-sections clause of [def-pur-sheaf-hom], $\\operatorname{Hom}(\\mathcal F,-)\\cong\\Gamma(X,T(-))$. Kernels of $\\mathcal O_X$-modules are computed sectionwise by [def-weil-sheaf-of-modules-category], so evaluating at $X$ preserves kernels and finite products; hence $\\Gamma(X,-)$ is left exact in the sense of [def-sp-left-exact-additive].",
+   "uses": [
+    "def-pur-sheaf-hom",
     "def-amb-finite-locally-free-module",
+    "lem-sc-ext-tensor-exact",
+    "lem-sc-ext-evaluation",
+    "def-weil-sheaf-of-modules-category",
+    "def-sp-left-exact-additive"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-duality/lem-sc-ext-locally-free.md",
+    "place": "Proof, exactness sentence"
+   }
+  },
+  {
+   "text": "The tensor-Hom adjunction [lem-weil-pbc-module-tensor-hom-adjunction], with its tensor factors interchanged using the sectionwise symmetry [lem-weil-pbc-module-tensor-comm] and sheafification in [def-pur-sheaf-tensor-product], makes $\\mathcal{H}om_{\\mathcal O_X}(\\mathcal F,-)$ right adjoint to $\\mathcal F\\otimes-$. The evaluation isomorphism [lem-sc-ext-evaluation] identifies this right adjoint with $T$; [def-pur-sheaf-hom] specifies the sheaf Hom involved. The functor $\\mathcal F\\otimes-$ is exact by [lem-sc-ext-tensor-exact], so [lem-sp-right-adjoint-preserves-injectives] makes $T(I)$ injective for every injective $I$. The injective resolution concentrated in degree zero shows $R^i\\Gamma(X,T(I))=0$ for $i>0$ by [def-sp-left-exact-additive], hence $T(I)$ is $\\Gamma$-acyclic by [def-sp-acyclic].",
+   "uses": [
+    "lem-weil-pbc-module-tensor-hom-adjunction",
+    "lem-weil-pbc-module-tensor-comm",
+    "def-pur-sheaf-tensor-product",
+    "lem-sc-ext-evaluation",
+    "def-pur-sheaf-hom",
+    "lem-sc-ext-tensor-exact",
     "lem-sp-right-adjoint-preserves-injectives",
-    "def-sp-acyclic",
+    "def-sp-left-exact-additive",
+    "def-sp-acyclic"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-duality/lem-sc-ext-locally-free.md",
+    "place": "Proof, exactness sentence"
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-scheme-modules-enough-injectives], $\\operatorname{Mod}(\\mathcal O_X)$ has enough injectives, so both the source and target of $T$ meet the hypothesis of [lem-sc-ext-derived-composite]. Apply that node to $\\Gamma(X,-)\\circ T$. Its $i$-th right derived functor is $\\mathrm H^i(X,\\mathcal F^{\\vee}\\otimes\\mathcal G)$ by [pqf-def-cohomology], while [lem-weil-pbc-ext-via-injective-resolution] identifies the right derived functor of $\\operatorname{Hom}(\\mathcal F,-)$ in the second variable with $\\operatorname{Ext}^i_X(\\mathcal F,\\mathcal G)$ (correcting the contravariant wording in [def-sc-ext-sheaf]).",
+   "uses": [
+    "lem-weil-pbc-scheme-modules-enough-injectives",
+    "lem-sc-ext-derived-composite",
     "pqf-def-cohomology",
     "lem-weil-pbc-ext-via-injective-resolution",
-    "lem-weil-pbc-scheme-modules-enough-injectives",
-    "lem-weil-pbc-module-tensor-hom-adjunction",
-    "lem-weil-pbc-module-tensor-comm",
-    "def-pur-sheaf-tensor-product",
-    "def-pur-sheaf-hom",
-    "def-weil-sheaf-of-modules-category"
-  ],
-  "proof_origin": {
-    "by": "agent",
-    "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-duality/lem-sc-ext-locally-free.md",
-    "place": "## Proof"
-  },
-  "mathlib_searches": [],
-  "mathlib_match": null,
-  "status": "split",
-  "merged_into": null,
-  "import_flags": [],
-  "blueprint_kind": "lemma",
-  "blueprint_order": 689,
-  "blueprint_uses": [
     "def-sc-ext-sheaf"
-  ],
-  "proof_split_by": "paragraphs",
-  "lean_audit": {
-    "master": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    },
-    "slopmaster2": {
-      "state": "sorry_here",
-      "decls": [
-        {
-          "name": "AlgebraicGeometry.Scheme.Modules.nonempty_ext_addEquiv_H",
-          "module": "WeilConjectures.AlgebraicGeometry.Modules.Ext",
-          "lines": [
-            71,
-            79
-          ],
-          "kind": "theorem",
-          "sorry": true
-        }
-      ],
-      "missing": [],
-      "open": []
-    }
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-duality/lem-sc-ext-locally-free.md",
+    "place": "Proof, standard homological algebra parenthetical"
+   }
   },
-  "chapter": "sec-picard-framework",
-  "unit": "sk-thm-picard-duality",
-  "split_report": {
-    "date": "2026-10-10",
-    "item": "lem-sc-ext-locally-free",
-    "worker": "stage1",
-    "summary": "Repaired the split after review: the module tensor-Hom adjunction and sheaf Hom global sections now justify the composite, and the enough-injectives theorem makes the derived comparison applicable.",
-    "blueprint": [
-      "first sentence (evaluation identification)",
-      "exactness sentence",
-      "standard homological algebra parenthetical",
-      "final specialization"
-    ],
-    "tool_uses": [
-      {
-        "node": "lem-sp-right-adjoint-preserves-injectives",
-        "why": "The route needs the generic categorical fact that a right adjoint to an exact functor preserves injectives; no node in this Picard-duality unit supplies it."
-      },
-      {
-        "node": "lem-weil-pbc-module-tensor-hom-adjunction",
-        "why": "The ringed-space module tensor-Hom adjunction supplies the adjunction used to preserve injectives; no Picard-duality node states it."
-      },
-      {
-        "node": "lem-weil-pbc-module-tensor-comm",
-        "why": "Sectionwise tensor symmetry identifies the tensor factor order in the existing adjunction with the exact tensor functor used here."
-      },
-      {
-        "node": "lem-weil-pbc-scheme-modules-enough-injectives",
-        "why": "The derived-composite and Ext comparison require enough injectives in the scheme module category."
-      }
-    ]
-  },
-  "tool_uses": [
-    "lem-sp-right-adjoint-preserves-injectives",
-    "lem-weil-pbc-module-tensor-hom-adjunction",
-    "lem-weil-pbc-module-tensor-comm",
-    "lem-weil-pbc-scheme-modules-enough-injectives"
-  ],
-  "reviewed": {
-    "date": "2026-10-10",
-    "by": "L",
-    "reviewer": "R-el3",
-    "group": "K1",
-    "result": "pass",
-    "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-el3 (reviewer sub-agent of L); spot-checked: Re-push after the 14:35 and 14:55 returns; every point of the 14:55 return is repaired. (1) step 3 now cites the existing reviewed node lem-weil-pbc-module-tensor-hom-adjunction (Modules 01CN, ringed space, bijection Hom(A,Hom(G,F)) = Hom(A tensor G,F) natural in A, which is all lem-sp-right-adjoint-preserves-injectives' injectivity argument needs) with factors swapped by lem-weil-pbc-module-tensor-comm sectionwise and sheafification (def-pur-sheaf-tensor-product); citing the existing node instead of a duplicate is accepted. (2) def-pur-sheaf-hom is in the stmt_deps of lem-sc-ext-evaluation and of the item and in the uses of steps 1, 2, 3, 5; its statement gives the global sections Hom_O(F,G). (3) step 4 cites lem-weil-pbc-scheme-modules-enough-injectives; lem-sc-ext-derived-composite asks enough injectives of A and B only; lem-weil-pbc-ext-via-injective-resolution identifies Ext with R^i Hom(F,-) under that hypothesis. (4) step 2: Gamma left exact because def-weil-sheaf-of-modules-category states kernels sectionwise; F^vee|V_a = O^{d_a} from def-pur-sheaf-hom (Hom of a finite sum, elementary). (5) the two new statements write the open-cover meaning with ranks d_a varying, def-amb-finite-locally-free-module only as 'compare'; removed from the item's stmt_deps; '## Source error' heading present. Mathematics: derived-composite (T exact, T(I) U-acyclic, A,B enough injectives) is true (T(I^.) is a U-acyclic resolution of T(M)), the former Z/4 / F_2 counterexamples are excluded by the acyclicity hypothesis; evaluation and tensor-exactness true for finite locally free, tested on F=0, F=O_X^d and a disconnected X with different ranks. Step 4 applies the composite to Gamma o T with A=B=Mod(O_X), C=Ab, T(I) Gamma-acyclic by step 3, H^i by pqf-def-cohomology. Item statement unchanged; changed fields only split-owned; new nodes created.item = the item, unsplit, empty proof, TeX ASCII only, three Mathlib searches each; project Lean has only IsFiniteLocallyFree.dual/tensorObj (Dual.lean 180,186), no exact match for the new statements (B10 fine). Tool uses accepted as generic: lem-sp-right-adjoint-preserves-injectives, lem-weil-pbc-module-tensor-hom-adjunction, lem-weil-pbc-module-tensor-comm, lem-weil-pbc-scheme-modules-enough-injectives. def-sc-ext-sheaf remains ill-posed (lead_note); step 4 routes through lem-weil-pbc-ext-via-injective-resolution and names the correction. Start Sat Oct 10 03:12:14 PM UTC 2026, end Sat Oct 10 03:13:26 PM UTC 2026."
-  },
-  "lean": {
-    "module": "WeilConjectures.AlgebraicGeometry.Modules.Ext",
-    "declaration": "AlgebraicGeometry.Scheme.Modules.nonempty_ext_addEquiv_H",
-    "branch": "slopmaster2",
-    "line": 71,
-    "declarations": [
-      "AlgebraicGeometry.Scheme.Modules.nonempty_ext_addEquiv_H"
-    ],
-    "sorry_free": false,
-    "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state sorry_here)"
+  {
+   "text": "For $\\mathcal F=\\mathcal O_X$, [def-pur-sheaf-hom] identifies its dual with $\\mathcal O_X$, and [def-pur-sheaf-tensor-product] identifies $\\mathcal O_X\\otimes\\mathcal G$ with $\\mathcal G$; the isomorphism above specializes to the stated formula.",
+   "uses": [
+    "def-pur-sheaf-hom",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-duality/lem-sc-ext-locally-free.md",
+    "place": "Proof, final specialization"
+   }
   }
+ ],
+ "proof_deps": [
+  "lem-sc-ext-evaluation",
+  "lem-sc-ext-tensor-exact",
+  "lem-sc-ext-derived-composite",
+  "def-sc-ext-sheaf",
+  "def-sp-left-exact-additive",
+  "def-amb-finite-locally-free-module",
+  "lem-sp-right-adjoint-preserves-injectives",
+  "def-sp-acyclic",
+  "pqf-def-cohomology",
+  "lem-weil-pbc-ext-via-injective-resolution",
+  "lem-weil-pbc-scheme-modules-enough-injectives",
+  "lem-weil-pbc-module-tensor-hom-adjunction",
+  "lem-weil-pbc-module-tensor-comm",
+  "def-pur-sheaf-tensor-product",
+  "def-pur-sheaf-hom",
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-duality/lem-sc-ext-locally-free.md",
+  "place": "## Proof"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "import_flags": [],
+ "blueprint_kind": "lemma",
+ "blueprint_order": 689,
+ "blueprint_uses": [
+  "def-sc-ext-sheaf"
+ ],
+ "proof_split_by": "paragraphs",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "sorry_here",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.Scheme.Modules.nonempty_ext_addEquiv_H",
+     "module": "WeilConjectures.AlgebraicGeometry.Modules.Ext",
+     "lines": [
+      71,
+      79
+     ],
+     "kind": "theorem",
+     "sorry": true
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-sc-ext-locally-free",
+  "worker": "stage1",
+  "summary": "Repaired the split after review: the module tensor-Hom adjunction and sheaf Hom global sections now justify the composite, and the enough-injectives theorem makes the derived comparison applicable.",
+  "blueprint": [
+   "first sentence (evaluation identification)",
+   "exactness sentence",
+   "standard homological algebra parenthetical",
+   "final specialization"
+  ],
+  "tool_uses": [
+   {
+    "node": "lem-sp-right-adjoint-preserves-injectives",
+    "why": "The route needs the generic categorical fact that a right adjoint to an exact functor preserves injectives; no node in this Picard-duality unit supplies it."
+   },
+   {
+    "node": "lem-weil-pbc-module-tensor-hom-adjunction",
+    "why": "The ringed-space module tensor-Hom adjunction supplies the adjunction used to preserve injectives; no Picard-duality node states it."
+   },
+   {
+    "node": "lem-weil-pbc-module-tensor-comm",
+    "why": "Sectionwise tensor symmetry identifies the tensor factor order in the existing adjunction with the exact tensor functor used here."
+   },
+   {
+    "node": "lem-weil-pbc-scheme-modules-enough-injectives",
+    "why": "The derived-composite and Ext comparison require enough injectives in the scheme module category."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sp-right-adjoint-preserves-injectives",
+  "lem-weil-pbc-module-tensor-hom-adjunction",
+  "lem-weil-pbc-module-tensor-comm",
+  "lem-weil-pbc-scheme-modules-enough-injectives"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-el3",
+  "group": "K1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-el3 (reviewer sub-agent of L); spot-checked: Re-push after the 14:35 and 14:55 returns; every point of the 14:55 return is repaired. (1) step 3 now cites the existing reviewed node lem-weil-pbc-module-tensor-hom-adjunction (Modules 01CN, ringed space, bijection Hom(A,Hom(G,F)) = Hom(A tensor G,F) natural in A, which is all lem-sp-right-adjoint-preserves-injectives' injectivity argument needs) with factors swapped by lem-weil-pbc-module-tensor-comm sectionwise and sheafification (def-pur-sheaf-tensor-product); citing the existing node instead of a duplicate is accepted. (2) def-pur-sheaf-hom is in the stmt_deps of lem-sc-ext-evaluation and of the item and in the uses of steps 1, 2, 3, 5; its statement gives the global sections Hom_O(F,G). (3) step 4 cites lem-weil-pbc-scheme-modules-enough-injectives; lem-sc-ext-derived-composite asks enough injectives of A and B only; lem-weil-pbc-ext-via-injective-resolution identifies Ext with R^i Hom(F,-) under that hypothesis. (4) step 2: Gamma left exact because def-weil-sheaf-of-modules-category states kernels sectionwise; F^vee|V_a = O^{d_a} from def-pur-sheaf-hom (Hom of a finite sum, elementary). (5) the two new statements write the open-cover meaning with ranks d_a varying, def-amb-finite-locally-free-module only as 'compare'; removed from the item's stmt_deps; '## Source error' heading present. Mathematics: derived-composite (T exact, T(I) U-acyclic, A,B enough injectives) is true (T(I^.) is a U-acyclic resolution of T(M)), the former Z/4 / F_2 counterexamples are excluded by the acyclicity hypothesis; evaluation and tensor-exactness true for finite locally free, tested on F=0, F=O_X^d and a disconnected X with different ranks. Step 4 applies the composite to Gamma o T with A=B=Mod(O_X), C=Ab, T(I) Gamma-acyclic by step 3, H^i by pqf-def-cohomology. Item statement unchanged; changed fields only split-owned; new nodes created.item = the item, unsplit, empty proof, TeX ASCII only, three Mathlib searches each; project Lean has only IsFiniteLocallyFree.dual/tensorObj (Dual.lean 180,186), no exact match for the new statements (B10 fine). Tool uses accepted as generic: lem-sp-right-adjoint-preserves-injectives, lem-weil-pbc-module-tensor-hom-adjunction, lem-weil-pbc-module-tensor-comm, lem-weil-pbc-scheme-modules-enough-injectives. def-sc-ext-sheaf remains ill-posed (lead_note); step 4 routes through lem-weil-pbc-ext-via-injective-resolution and names the correction. Start Sat Oct 10 03:12:14 PM UTC 2026, end Sat Oct 10 03:13:26 PM UTC 2026."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.LocallyFreeExtCohomology",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.locallyFreeExtAddEquivH",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.Modules.locallyFreeHomAbelianFunctor",
+   "AlgebraicGeometry.Scheme.Modules.locallyFreeHomAbelianFunctor_exact",
+   "AlgebraicGeometry.Scheme.Modules.locallyFreeExtComparison",
+   "AlgebraicGeometry.Scheme.Modules.bijective_locallyFreeExtComparison",
+   "AlgebraicGeometry.Scheme.Modules.locallyFreeExtAddEquivH",
+   "AlgebraicGeometry.Scheme.Modules.locallyFreeUnitExtAddEquivH"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/LocallyFreeExtCohomology.lean",
+  "statement": "def locallyFreeExtAddEquivH {X : Scheme.{u}} [HasExt.{u} X.Modules] (F G : X.Modules) [F.IsFiniteLocallyFree] (i : ℕ) : Ext F G i ≃+ (Fᵛ ⊗ G).H i",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-11",
+  "existing": false,
+  "note": "The recorded nonempty_ext_addEquiv_H only asserts Nonempty of an additive equivalence; no canonical map or chosen equivalence is available to state its naturality. This module constructs the canonical comparison using exact internal Hom, its identity section, and inverse evaluation, and states bijectivity for precisely the same finite locally free modules (varying local rank).",
+  "fixed_by": "R-eln1433"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-eln1433",
+  "group": "F1",
+  "result": "fix",
+  "note": "general: X arbitrary scheme, F,F' IsFiniteLocallyFree (variable rank), G arbitrary, f:F'⟶F, all i:ℕ, pullback = (mk₀ f).comp z, RHS H.map (dualMap f ▷ G); P1: k alg closed, X=ProjectiveLine, L=twist d with TwistData E, O=unit, ω=relativeDifferentials (≅O(-2) by monomial iii), s:O⟶L, Čech transport by natural e (choice irrelevant by naturality), cochain map = σ•τ on charts/overlaps; FIX: dependency module's private locallyFreeEvaluation replaced by source dualTensorHom (H4), isIso renamed isIso_dualTensorHom_of_isFiniteLocallyFree; both modules compiled"
+ }
 }
