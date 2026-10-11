@@ -1,11 +1,11 @@
 # Work queue
 
-151 items; claim with `tools/claim.py next <group> [--stage N]`.
+146 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (151)
+## Stage 2: nodes to state (146)
 
 | node | distance to Mathlib | kind | blockers |
 |---|---|---|---|
@@ -27,10 +27,10 @@
 | `lem-weil-pbc-pair-henselization` | 1 | state | 5 |
 | `lem-pc-derived-direct-image-composition` | 1 | state | 4 |
 | `lem-sc-derived-internal-hom-adjunction` | 1 | state | 4 |
-| `lem-weil-pbc-truncation-triangle` | 1 | state | 4 |
 | `lem-pc-derived-direct-image-preserves-qcoh` | 1 | state | 3 |
 | `lem-pc-ringed-spaces-derived-adjoint-general` | 1 | state | 3 |
 | `lem-weil-pbc-etale-graph-section-extension-map-linear` | 1 | state | 3 |
+| `lem-weil-pbc-truncation-couple-morphism` | 1 | state | 3 |
 | `lem-pc-noetherian-derived-direct-image-right-adjoint` | 1 | state | 2 |
 | `lem-weil-pbc-underived-exchange-module-linear` | 1 | state | 2 |
 | `lem-pc-cech-resolution` | 1 | state | 1 |
@@ -119,7 +119,6 @@
 | `lem-weil-pbc-integral-cover-trivial-cohomology` | 1 | state | 0 |
 | `lem-weil-pbc-inverse-image-composition-module-linear` | 1 | state | 0 |
 | `lem-weil-pbc-inverse-image-free-etale-module` | 1 | state | 0 |
-| `lem-weil-pbc-module-pullback-ideal-quotient` | 1 | state | 0 |
 | `lem-weil-pbc-projective-space-twisting-sheaf-charts` | 1 | state | 0 |
 | `lem-weil-pbc-sets-pushforward-stalk-strict-henselization` | 1 | state | 0 |
 | `lem-weil-pbc-strict-henselization-functoriality` | 1 | state | 0 |
@@ -142,8 +141,6 @@
 | `lem-pc-supported-open-pushforward` | 2 | state | 0 |
 | `lem-sc-finite-locally-free-derived-hom` | 2 | state | 0 |
 | `lem-sc-mult-n-tangent-differential` | 2 | state | 0 |
-| `lem-sc-p1-boundary-extension-composition` | 2 | state | 0 |
-| `lem-sc-p1-finite-homogeneous-generators` | 2 | state | 0 |
 | `lem-sc-p1-graded-kernel-finite` | 2 | state | 0 |
 | `lem-sc-p1-proj-shifted-free-twist` | 2 | state | 0 |
 | `lem-sc-p1-serre-section-module-finite` | 2 | state | 0 |
@@ -155,13 +152,11 @@
 | `lem-sc-supported-derived-generated-perfect` | 2 | state | 0 |
 | `lem-sc-valuation-closed-fibre-section-vanishing` | 2 | state | 0 |
 | `lem-sc-valuation-proper-coherent-sections` | 2 | state | 0 |
-| `lem-sc-very-ample-separation-criterion` | 2 | state | 0 |
 | `lem-sp-derived-couple-functoriality` | 2 | state | 0 |
 | `lem-weil-pbc-etale-cohomology-limit-complex-systems` | 2 | state | 0 |
-| `lem-weil-pbc-integral-closure-finite-fibre-part-localization` | 2 | state | 0 |
 | `lemma-weil-pbc-etale-cohomology-continuity` | 2 | state | 0 |
 
-Not open yet: 40 nodes that wait for stage 1, 274 nodes that wait for a statement dependency.
+Not open yet: 40 nodes that wait for stage 1, 273 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
