@@ -1072,6 +1072,15 @@ def refit_record(text: str | None, rec: dict, override: dict | None = None, revi
                 notes.append(f"lean-record.json: key {k!r} ignored (stays {rec.get(k)!r})")
             continue
         new[k] = v
+    if new.get("existing") is True and rec.get("existing") is False:
+        # (2026-10-11) a new module turned into existing declarations: no `file` (absent or null in the override), the
+        # module's `declarations` go unless the override gives them, the statement must be given verbatim
+        if new.get("file") is None or "file" not in (override or {}):
+            new.pop("file", None)
+        if "declarations" not in (override or {}):
+            new.pop("declarations", None)
+        if "statement" not in (override or {}):
+            refuse.append("existing: true: give the existing declaration's statement verbatim in the record override")
     if text_fixed and text is not None and new.get("existing") is not True:
         byname = {d["name"]: d for d in declarations(text) if d["name"]}
         decl = new.get("declaration")

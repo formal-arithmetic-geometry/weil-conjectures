@@ -768,9 +768,36 @@ def cmd_merge2(o):
                 if newrec != rec:
                     nd["lean"] = newrec
                     overrides[path] = dump(nd)
+            # (2026-10-11) a record turned from a new module into `existing: true` (no `file`): checked as an existing
+            # record (declaration found, statement verbatim, #check), and its delivered module is left out below
+            olds = {item: D["node"].get("lean"), **{k: v["node"].get("lean") for k, v in list(D["new"].items()) + list(D["deps"].items())}}
+            switched = []
+            for nid, (path, nd) in nodes.items():
+                r, r0 = nd.get("lean"), olds.get(nid)
+                if not (isinstance(r, dict) and isinstance(r0, dict) and r.get("existing") is True and r0.get("existing") is False):
+                    continue
+                if "file" in r and r["file"] is None:
+                    del r["file"]
+                    overrides[path] = dump(nd)
+                df, dn = s2.check_existing(r, G, base)
+                bad = [x for _, x in df] + [x for x in dn if "differs" in x or "not resolved" in x]
+                for d in [r.get("declaration")] + list(r.get("declarations") or []):
+                    ran, rc, out = s2.compile_text(f"import {r.get('module')}\n\n#check @{d}\n", "L", f"{item}.check")
+                    if ran and rc != 0:
+                        bad.append(f"#check @{d} fails: {out.splitlines()[-1] if out else rc}")
+                    elif not ran:
+                        fixnotes.append(f"{nid}: #check @{d} not run ({out})")
+                if bad:
+                    raise Fail(f"stage-2 fix of {nid} (existing: true): " + " | ".join(bad))
+                if r0.get("file"):
+                    switched.append(r0["file"])
             for fpath, text in texts.items():
                 overrides[fpath] = text
             owned = {(nd.get("lean") or {}).get("file") for _, nd in nodes.values() if isinstance(nd.get("lean"), dict)}
+            for lf in dict.fromkeys(switched):
+                if lf not in owned and lf not in dfiles:
+                    dfiles.append(lf)
+                    fixnotes.append(f"{lf}: the module of a record the fix turns into existing: true, left out")
             orphan = sorted(added_mods - owned)
             if orphan:
                 raise Fail(f"--apply-fixes: new module(s) {', '.join(orphan)}: no fixed record has it as lean.file "
@@ -832,7 +859,7 @@ def cmd_merge2(o):
             dnote = "; ".join(x for x in (dnote, f"reverted the delivery's change of existing node(s) {', '.join(reverted)} "
                                                   "(--revert-nodes; kept as on sheaf-dag)") if x)
         if dropped_files:
-            dnote = "; ".join(x for x in (dnote, f"left out new module(s) {', '.join(dropped_files)} (--drop-files)") if x)
+            dnote = "; ".join(x for x in (dnote, f"left out new module(s) {', '.join(dropped_files)} (--drop-files, or a record fixed to existing: true)") if x)
         if rfields:
             dnote = "; ".join(x for x in (dnote, f"reverted the delivery's statement correction of the item ({', '.join(rfields)} "
                                                   "kept as on sheaf-dag; --revert-statement)") if x)

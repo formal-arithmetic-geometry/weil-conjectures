@@ -161,5 +161,23 @@
   "group": "M1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-k4c3002 (reviewer sub-agent of L); spot-checked: Checked statement vs Stacks 04CA and each cited statement (prop-openclosed-lowerstar-fully-faithful, lemma-openclosed-stalk-lowerstar, lem-weil-pbc-inverse-image-stalk-germ tool use accepted, geometric-stalk conservativity); citers (lem-kun-cp-approximation, lem-kun-0f1f-vanish/-gen) use only 'support in Z => F = i_*(F|_Z)' with X finite type over a field. FIX more, RETURN less: (1) B3/C4: statement used def-kun-support (defined only for X of finite type over a field) for arbitrary schemes X; support-in-Z now defined inline via geometric stalks, with def-kun-support named as the same condition in the finite-type case; stmt_deps updated. (2) D/C: the inclusion 'essential image has support in Z' was not proved; added the vanishing of (i_*G) stalks off Z via the cofinal neighbourhoods in X\\Z, and the converse step now reuses it. Second reading missed both.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.EtaleClosedImmersionEssentialImage",
+  "declaration": "AlgebraicGeometry.Etale.lowerStar_closedImmersion_fullyFaithful_leftInverse_essImage",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleClosedImmersionEssentialImage.lean",
+  "statement": "theorem lowerStar_closedImmersion_fullyFaithful_leftInverse_essImage {Z X : Scheme.{u}} (i : Z ⟶ X) [IsClosedImmersion i] : (lowerStar AddCommGrpCat.{u + 1} i).Full ∧ (lowerStar AddCommGrpCat.{u + 1} i).Faithful ∧ Nonempty (lowerStar AddCommGrpCat.{u + 1} i ⋙ upperStar AddCommGrpCat.{u + 1} i ≅ 𝟭 (Sheaf Z.smallEtaleTopology AddCommGrpCat.{u + 1})) ∧ ∀ F : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}, (lowerStar AddCommGrpCat.{u + 1} i).essImage F ↔ Scheme.etaleSheafSupport F ⊆ Set.range i.base",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-k4c1337",
+  "group": "F1",
+  "result": "pass",
+  "note": "Z X arbitrary Scheme.{u}, [IsClosedImmersion i] (no field/finite-type added); i_* = Etale.lowerStar AddCommGrpCat.{u+1}, i^{-1} = Etale.upperStar; Full ∧ Faithful; left inverse = Nonempty (i_* ⋙ i^{-1} ≅ 𝟭) i.e. i^{-1}i_* ≅ id; ∀ F, essImage F ↔ Scheme.etaleSheafSupport F ⊆ range i.base = all geometric stalks off Z vanish (landed def-kun-support, defined for arbitrary schemes, so the finite-type parenthetical adds nothing); names #check'd fully qualified"
  }
 }
