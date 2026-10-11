@@ -154,5 +154,28 @@
   "by": "L",
   "result": "pass",
   "note": "Reviewed by the lead (opus-relaunch6). Definition node (030O) split into four elementary steps; the notions of transcendence basis (030E; Mathlib leaf IsTranscendenceBasis, AlgebraicIndependent/Defs.lean:173, verified, with the two lemmas turning the maximality form into the 'algebraic over k(x_i)' form) and separable algebraic extension (09H1/030J; Mathlib leaf Algebra.IsSeparable, FieldTheory/Separable.lean:549, verified) moved into two new definition nodes cited by the statement; agreement of 'separable' with def-pc-separable-polynomial and the other nodes' wording argued; 030X and 030P noted as statements about the notion, not created."
+ },
+ "lean": {
+  "module": "Sheaf.FieldTheory.SeparableExtension",
+  "declaration": "Algebra.IsSeparableExtension",
+  "declarations": [
+   "Algebra.IsSeparablyGenerated",
+   "Algebra.IsSeparableExtension"
+  ],
+  "file": "lean/Sheaf/FieldTheory/SeparableExtension.lean",
+  "statement": "def IsSeparableExtension (k : Type u) (K : Type v) [Field k] [Field K] [Algebra k K] : Prop",
+  "branch": "sheaf-dag",
+  "by": "K1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-sfe0558"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-sfe0558",
+  "group": "K1",
+  "result": "fix",
+  "note": "K/k as [Field k][Field K][Algebra k K], universes u v, all chars; (1) exists s : Set K, IsTranscendenceBasis k (coe) and Algebra.IsSeparable (adjoin k s) K (minpoly separable forces algebraic; set-indexing ok since alg. indep. families are injective; empty/infinite s); (2) forall F : IntermediateField k K, F.FG -> IsSeparablyGenerated k F (empty generators give k). H4: Mathlib has only IsGeometricallyReduced (equivalent by 030W, not the definition) and theorems in FieldTheory.SeparablyGenerated, no predicate. FIX H9: unused import Mathlib.FieldTheory.SeparablyGenerated replaced by FieldTheory.Separable + RingTheory.AlgebraicIndependent.Defs"
  }
 }
