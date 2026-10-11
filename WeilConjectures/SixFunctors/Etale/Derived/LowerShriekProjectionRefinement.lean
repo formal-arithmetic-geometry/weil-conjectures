@@ -9,6 +9,8 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekComparison.CompositionLaw
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekIndependenceUnbounded
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekProjection
+public import WeilConjectures.SixFunctors.Etale.Derived.LowerStarProjectionComp
+public import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStarAdjunctionCompat
 
 /-!
 # The projection map and refinements of compactifications
@@ -64,6 +66,33 @@ lemma rightDerivedFunctorCompIso'_refinementLowerStarComp_hom :
       rw [refinementLowerStarComp_eq]
       exact (congrArg Iso.hom
         (Etale.conjugateIsoEquiv_upperStarComp A r.hom d.g c.g r.hom_g.symm)).symm)
+
+lemma rightDerivedFunctorCompIso'_refinementLowerStarComp_hom_eq :
+    (Functor.rightDerivedFunctorCompIso' (r.hom)_*[A] (d.g)_*[A]
+        (refinementLowerStarComp A r)).hom =
+      rightDerivedLowerStarCompHom A r.hom d.g c.g r.hom_g.symm := by
+  rw [rightDerivedFunctorCompIso'_refinementLowerStarComp_hom, rightDerivedLowerStarCompHom,
+    conjugateEquiv_leftDerivedUpperStarComp_hom]
+
+/-- The comparison along a refinement, through the derived pullback `Lq^*`: it is the unit of
+`Lq^* ⊣ Rq_*`, the inverse of the base change `D(c.i)_! ≅ D(d.i)_! ⋙ Lq^*` and the composition
+map `Rq_* ⋙ R(d.g)_* ⟶ R(c.g)_*`. -/
+lemma rightDerivedLowerShriekOfCompactificationComparison_app
+    (hcart : IsPullback c.i (𝟙 X) r.hom d.i)
+    (M : DerivedCategory (Sheaf X.smallEtaleTopology A)) :
+    (rightDerivedLowerShriekOfCompactificationComparison A r hcart).app M =
+      R((d.g)_*[A]).map ((derivedUpperStarLowerStarAdjunction A r.hom).unit.app
+          (D((d.i)_!open[A]).obj M)) ≫
+        R((d.g)_*[A]).map (R((r.hom)_*[A]).map
+          ((leftDerivedUpperStarIsoMapDerivedCategory A r.hom).hom.app _ ≫
+            (refinementLowerShriekBaseChangeDerivedIso A r hcart).inv.app M)) ≫
+        (rightDerivedLowerStarCompHom A r.hom d.g c.g r.hom_g.symm).app
+          (D((c.i)_!open[A]).obj M) := by
+  simp only [rightDerivedLowerShriekOfCompactificationComparison, NatTrans.comp_app,
+    Functor.whiskerRight_app, Functor.whiskerLeft_app, Functor.comp_map,
+    rightDerivedFunctorCompIso'_refinementLowerStarComp_hom_eq,
+    mapDerivedUpperStarLowerStarAdjunction_eq,
+    Adjunction.ofNatIsoLeft_unit, Functor.map_comp, Category.assoc]
 
 /-- The comparison `Rf_!(d) ⟶ Rf_!(c)` along a refinement intertwines the projection maps. -/
 lemma projectionMapOfCompactification_comparison (hcart : IsPullback c.i (𝟙 X) r.hom d.i)
