@@ -1,11 +1,11 @@
 # Work queue
 
-1006 items; claim with `tools/claim.py next <group> [--stage N]`.
+1005 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (1006)
+## Stage 2: nodes to state (1005)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -14,13 +14,13 @@
 | `def-sbc-normal-dominant-galois` | 1 | state |
 | `def-sp-double-complex-total` | 1 | state |
 | `def-weil-pbc-associated-module` | 1 | state |
+| `def-weil-pbc-curve-setting` | 1 | state |
 | `def-weil-pbc-etale-sheaves` | 1 | state |
 | `def-weil-pbc-formal-glueing-data` | 1 | state |
 | `def-weil-pbc-henselian-terminology` | 1 | state |
 | `def-weil-pbc-popescu-resolution` | 1 | state |
 | `def-weil-pbc-proetale-site` | 1 | state |
 | `def-weil-pbc-serre-conditions-rk-sk` | 1 | state |
-| `def-weil-pbc-torsion-etale-sheaf` | 1 | state |
 | `lem-exc-discrete-modules-abelian` | 1 | state |
 | `lem-exc-discrete-modules-abelian-injective-embeddings` | 1 | state |
 | `lem-exc-discrete-modules-abelian-structure` | 1 | state |
@@ -32,13 +32,11 @@
 | `lem-exc-rg-adjoint-transfer-functorial-injectives` | 1 | state |
 | `lem-exc-rg-discrete-modules-functorial-injective-embeddings` | 1 | state |
 | `lem-exc-rg-open-stabilizer-adjoint` | 1 | state |
-| `lem-fin-dense-normal-open` | 1 | state |
 | `lem-galois-descent` | 1 | state |
 | `lem-galois-descent-datum-diagonal-identity` | 1 | state |
 | `lem-galois-fpqc-morphisms-descend` | 1 | state |
 | `lem-galois-fpqc-pullback-canonical-iso` | 1 | state |
 | `lem-galois-object-exists` | 1 | state |
-| `lem-kun-closed-point-field` | 1 | state |
 | `lem-kun-separable-smooth-colimit` | 1 | state |
 | `lem-kun-stalks-commute-colimits` | 1 | state |
 | `lem-kun-support-geometric-point-independent` | 1 | state |
@@ -935,6 +933,7 @@
 | `lem-weil-pbc-torsion-extension-flat-descent` | 1 | state |
 | `lem-weil-pbc-torsion-hom-flat-comparison` | 1 | state |
 | `lem-weil-pbc-torsion-module-flat-base-change-iso` | 1 | state |
+| `lem-weil-pbc-torsion-sheaf-characterizations` | 1 | state |
 | `lem-weil-pbc-torsion-submodule-flat-base-change-iso` | 1 | state |
 | `lem-weil-pbc-tower-limit-exact-surjective-kernels` | 1 | state |
 | `lem-weil-pbc-triangle-morphism-extension` | 1 | state |
@@ -1016,7 +1015,7 @@
 | `lem-sc-normalization-properties` | 3 | state |
 | `def-nagata-fixed-base-separated-stage` | 6 | state |
 
-Not open yet: 1136 nodes that wait for a statement dependency, 40 nodes that wait for stage 1.
+Not open yet: 1134 nodes that wait for a statement dependency, 40 nodes that wait for stage 1.
 
 ## Stage 3: modules to prove (0)
 
