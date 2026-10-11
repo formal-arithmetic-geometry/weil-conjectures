@@ -4787,3 +4787,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 13:37 L: merged deliver/F1/lem-weil-pbc-quasi-coherent-ideal-zero-set-affine (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.QuasiCoherentIdealZeroSetAffine AlgebraicGeometry.Scheme.quasi_coherent_ideal_zero_set_affine)
 - 13:37 L: merged deliver/M1/lem-sc-perfect-support-map-lift (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.PerfectSupportedMapLift AlgebraicGeometry.Scheme.exists_perfect_supported_map_lift)
 - 13:37 L: merged deliver/E1/lem-sc-perfect-h0-locally-closed (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.PerfectLowestCohomologyLocus AlgebraicGeometry.Scheme.exists_perfectLowestCohomologyLocus)
+- 13:37 L: merged deliver/H1/lem-weil-pbc-quasi-coherent-module-cokernel-image (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.Modules.QuasiCoherentCokernelImage AlgebraicGeometry.Scheme.Modules.quasiCoherent_cokernel_image)
