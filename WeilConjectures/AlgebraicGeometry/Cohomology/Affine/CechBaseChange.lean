@@ -206,6 +206,69 @@ lemma cechBaseChange_tmul (k : ℕ) (b : Γ(T, ⊤)) (c : CechCochain U ℱ.pres
           pullbackSection g (c y)) := by
   simp [cechBaseChange, TensorProduct.piRight_apply, sectionsBaseChange_tmul]
 
+
+omit [Fintype ι] [DecidableEq ι] in
+/-- Restriction commutes with multiplication by the image of a function on `T`. -/
+lemma presheaf_map_appLE_smul (P : Y.Modules) {V₁ V₂ : Y.Opens} (h : V₂ ≤ V₁) (b : Γ(T, ⊤))
+    (m : Γ(P, V₁)) :
+    P.presheaf.map (homOfLE h).op (iY.appLE ⊤ V₁ (le_top.trans iY.preimage_top.ge) b • m) =
+      iY.appLE ⊤ V₂ (le_top.trans iY.preimage_top.ge) b • P.presheaf.map (homOfLE h).op m := by
+  rw [Scheme.Modules.map_smul, ← CommRingCat.comp_apply, Scheme.Hom.appLE_map]
+
+/-- **Base change of Čech cochains is bijective** when all finite intersections of the cover are
+affine opens on which `ℱ` has a free generator, and `T`, `V` are affine. -/
+theorem cechBaseChange_bijective (H : IsPullback g iY iX f) (hV : IsAffineOpen V) [IsAffine T]
+    (hUa : ∀ (k : ℕ) (y : Fin (k + 1) → ι), IsAffineOpen (⨅ l, U (y l)))
+    (he : ∀ (k : ℕ) (y : Fin (k + 1) → ι), ∃ e : Γ(ℱ, ⨅ l, U (y l)), IsFreeGenerator e)
+    (k : ℕ) : Function.Bijective (cechBaseChange hfV ℱ U hUV hf hU H.w k) := by
+  let φ : ∀ y : Fin (k + 1) → ι, Γ(T, ⊤) ⊗[Γ(S, V)] Γ(ℱ, ⨅ l, U (y l)) →
+      Γ((pullback g).obj ℱ, ⨅ l, g ⁻¹ᵁ U (y l)) := fun y ↦
+    (((pullback g).obj ℱ).presheaf.map
+      (eqToHom (iInf_preimage_eq_preimage_iInf g U y)).op).hom ∘
+      sectionsBaseChange H.w hfV ℱ (iInf_le_preimage_of_forall_le U hUV y) hf (hU k y)
+  have hφ (y : Fin (k + 1) → ι) : Function.Bijective (φ y) := by
+    obtain ⟨e, he⟩ := he k y
+    refine (ConcreteCategory.bijective_of_isIso _).comp ?_
+    exact sectionsBaseChange_bijective hfV ℱ _ hf (hU k y) H hV (hUa k y) he
+  have key : ⇑(cechBaseChange hfV ℱ U hUV hf hU H.w k) =
+      (fun z y ↦ φ y (z y)) ∘ ⇑(TensorProduct.piRight Γ(S, V) Γ(S, V) Γ(T, ⊤)
+        (fun y : Fin (k + 1) → ι ↦ Γ(ℱ, ⨅ l, U (y l)))) := rfl
+  rw [key]
+  refine Function.Bijective.comp ?_ (LinearEquiv.bijective _)
+  refine ⟨fun z z' hzz' ↦ funext fun y ↦ (hφ y).1 (congr_fun hzz' y), fun c ↦ ?_⟩
+  choose z hz using fun y ↦ (hφ y).2 (c y)
+  exact ⟨z, funext hz⟩
+
+
+omit [Fintype ι] [DecidableEq ι] in
+lemma presheaf_map_eqToHom_eq_homOfLE (P : Y.Modules) {V₁ V₂ : Y.Opens} (h : V₂ = V₁)
+    (m : Γ(P, V₁)) : P.presheaf.map (eqToHom h).op m = P.presheaf.map (homOfLE h.le).op m :=
+  rfl
+
+/-- **Base change of Čech cochains commutes with the differentials.** -/
+theorem cechBaseChange_d (k : ℕ) (z : Γ(T, ⊤) ⊗[Γ(S, V)] CechCochain U ℱ.presheaf k) :
+    cechBaseChange hfV ℱ U hUV hf hU w (k + 1)
+        ((cechDifferential ℱ U hUV hU k).lTensor Γ(T, ⊤) z) =
+      ((cechComplex (fun i ↦ g ⁻¹ᵁ U i)).obj ((pullback g).obj ℱ).presheaf).d k (k + 1)
+        (cechBaseChange hfV ℱ U hUV hf hU w k z) := by
+  induction z using TensorProduct.induction_on with
+  | zero => simp only [map_zero]
+  | add z z' hz hz' => simp only [map_add, hz, hz']
+  | tmul b c =>
+    funext y
+    rw [LinearMap.lTensor_tmul, cechBaseChange_tmul, cechDifferential_apply,
+      cechComplex_d_apply, cechComplex_d_apply]
+    simp only [pullbackSection, map_sum, map_zsmul, Finset.smul_sum, smul_comm _ ((-1 : ℤ) ^ _)]
+    refine Finset.sum_congr rfl fun i _ ↦ ?_
+    congr 1
+    rw [cechBaseChange_tmul]
+    change ((pullback g).obj ℱ).presheaf.map _ (_ • pullbackSection g
+      (ℱ.presheaf.map (homOfLE _).op _)) = ((pullback g).obj ℱ).presheaf.map _
+        (((pullback g).obj ℱ).presheaf.map _ (_ • pullbackSection g _))
+    rw [pullbackSection_map, presheaf_map_eqToHom_eq_homOfLE, presheaf_map_eqToHom_eq_homOfLE,
+      presheaf_map_appLE_smul, presheaf_map_appLE_smul, presheaf_map_appLE_smul,
+      TopCat.Presheaf.map_homOfLE_map_homOfLE_apply, TopCat.Presheaf.map_homOfLE_map_homOfLE_apply]
+
 end Cech
 
 end AlgebraicGeometry.Scheme.Modules
