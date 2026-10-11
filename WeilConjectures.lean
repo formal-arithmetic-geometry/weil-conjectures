@@ -45,6 +45,7 @@ public import WeilConjectures.AlgebraicGeometry.AffineSpace.ArtinSchreier
 public import WeilConjectures.AlgebraicGeometry.AffineSpace.ZeroSection
 public import WeilConjectures.AlgebraicGeometry.BaseChangeNorm
 public import WeilConjectures.AlgebraicGeometry.Bertini
+public import WeilConjectures.AlgebraicGeometry.CechNerve
 public import WeilConjectures.AlgebraicGeometry.ChowLemma
 public import WeilConjectures.AlgebraicGeometry.ChowLemma.ClosedModel
 public import WeilConjectures.AlgebraicGeometry.ChowLemma.EmbeddingOver
@@ -472,6 +473,7 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.Constructible
 public import WeilConjectures.CategoryTheory.DerivedCategory.FlatModel
 public import WeilConjectures.CategoryTheory.DerivedCategory.FlatModelOfClass
 public import WeilConjectures.CategoryTheory.DerivedCategory.HasMonoidalDerivedCategory
+public import WeilConjectures.CategoryTheory.DerivedCategory.HomologyAmplitude
 public import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.Defs
 public import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.MapDerivedCategory
 public import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryMate
@@ -988,6 +990,7 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.SmallAffineZariski
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Stalk
 public import WeilConjectures.Mathlib.AlgebraicGeometry.ValuativeCriterion
 public import WeilConjectures.Mathlib.AlgebraicGeometry.ZariskisMainTheorem
+public import WeilConjectures.Mathlib.AlgebraicTopology.CechNerve
 public import WeilConjectures.Mathlib.Analysis.Analytic.ConvergenceRadius
 public import WeilConjectures.Mathlib.Analysis.Complex.Polynomial.Basic
 public import WeilConjectures.Mathlib.Analysis.Normed.Field.Basic
@@ -1319,14 +1322,17 @@ public import WeilConjectures.Mathlib.RingTheory.Valuation.ValuationSubring
 public import WeilConjectures.Mathlib.SetTheory.Cardinal.HasCardinalLT
 public import WeilConjectures.Mathlib.Topology.Category.TopCat.Limits.Pullbacks
 public import WeilConjectures.Mathlib.Topology.Category.TopCat.Opens
+public import WeilConjectures.Mathlib.Topology.Compactification.StoneCech
 public import WeilConjectures.Mathlib.Topology.Connected.Basic
 public import WeilConjectures.Mathlib.Topology.Connected.Clopen
 public import WeilConjectures.Mathlib.Topology.Connected.TotallyDisconnected
 public import WeilConjectures.Mathlib.Topology.Constructible
 public import WeilConjectures.Mathlib.Topology.Constructions
+public import WeilConjectures.Mathlib.Topology.ExtremallyDisconnected
 public import WeilConjectures.Mathlib.Topology.Inseparable
 public import WeilConjectures.Mathlib.Topology.JacobsonSpace
 public import WeilConjectures.Mathlib.Topology.KrullDimension
+public import WeilConjectures.Mathlib.Topology.LocallyConstant.Algebra
 public import WeilConjectures.Mathlib.Topology.Maps.Basic
 public import WeilConjectures.Mathlib.Topology.NoetherianSpace
 public import WeilConjectures.Mathlib.Topology.QuasiSeparated
@@ -1650,10 +1656,13 @@ public import WeilConjectures.SixFunctors.ProEtale.Adic.UnitMatrix
 public import WeilConjectures.SixFunctors.ProEtale.Adic.UnitSection
 public import WeilConjectures.SixFunctors.ProEtale.Adic.UpperStar
 public import WeilConjectures.SixFunctors.ProEtale.AlgClosedFieldSite
+public import WeilConjectures.SixFunctors.ProEtale.AmbientCounterexample
 public import WeilConjectures.SixFunctors.ProEtale.BaseChange.SmoothBaseChange
 public import WeilConjectures.SixFunctors.ProEtale.BaseChange.WeaklyEtale
 public import WeilConjectures.SixFunctors.ProEtale.Comparison
+public import WeilConjectures.SixFunctors.ProEtale.Comparison.CohomologicalDimension
 public import WeilConjectures.SixFunctors.ProEtale.Comparison.Continuity
+public import WeilConjectures.SixFunctors.ProEtale.Comparison.Counterexample
 public import WeilConjectures.SixFunctors.ProEtale.Comparison.Defs
 public import WeilConjectures.SixFunctors.ProEtale.Comparison.Flat
 public import WeilConjectures.SixFunctors.ProEtale.Comparison.FullyFaithful
