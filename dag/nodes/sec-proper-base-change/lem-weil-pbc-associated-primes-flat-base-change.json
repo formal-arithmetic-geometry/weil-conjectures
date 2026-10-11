@@ -26,7 +26,8 @@
  },
  "stmt_deps": [
   "def-weil-pbc-flat-ring-map",
-  "def-weil-pbc-noetherian-ring"
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-annihilator-associated-primes"
  ],
  "proof": [
   {
@@ -232,5 +233,24 @@
   "worker": "stage1",
   "summary": "Split following the proof of Stacks 0312 read in algebra.tex lines 15785-15851 (the line range recorded in the node, 15774-15830, stopped before the last paragraph; corrected in source.place). Cited lemmas read: 02M3 (lemma-ass), 0310 (lemma-associated-primes-localize), 00LL (lemma-ideal-nonzerodivisor), 00L0 (lemma-filter-Noetherian-module); 00LB (lemma-ass-filter) is cited only parenthetically and not needed. Step 1 the inclusion ⊇ (injection R/p→M, flatness, R/p⊗N=N/pN, 02M3); Steps 2-3 the reduction to finite M (written out: Ass of a directed union, the directed union of the F_λ); Steps 4-7 the 'preceding paragraph' made into Claim C (q∈Ass_S(M⊗N) ⇒ φ^{-1}(q)∈Ass_R(M)), with the identification (M⊗N)_q ≅ M_p⊗_R N_q and the flatness of N_q over R written out from existing localization nodes (instead of the source's ⊗_{R_p} and R_p-flatness: same module, one identification fewer); Steps 8-9 the filtration (00L0), its tensor with N, 02M3 inductively, Ass(R/p_i)={p_i} and Claim C for R/p_i. Since S is an arbitrary ring, the existing Noetherian-only node lem-weil-pbc-associated-prime-submodule and the Noetherian leaf lem-weil-pbc-associated-prime-localization-depth-zero could not be used: new unsplit nodes for 02M3 and 0310(1) over any ring (Mathlib's associatedPrimes uses the radical of the annihilator and agrees with the annihilator notion only for Noetherian rings). New Mathlib leaves for 0310(2) over Noetherian R and 00L0. 00LL is the existing node lem-weil-pbc-nonzerodivisor-if-maximal-not-associated. No slopmaster2 Lean for the item or the new nodes (grep of WeilConjectures for 0312/0310/00L0/02M3/associatedPrimes: only an unrelated use in ProjectiveDimension.lean).",
   "blueprint": "The blueprint ancestor lem-weil-pbc-normal-constant-generic uses this lemma (through the chain in blueprint.from.via, last via lem-weil-pbc-analytic-unramified-principal-criterion) at 'step 4 of its split (source: Lemma 59.73.13 (Tag 09Z5), proof of (1))'; the item is not a blueprint node and its proof follows Stacks 0312, not blueprint text. Steps 1-9 together realize that place: the equality case Ass_{Â}(Â/tÂ)=∪_{p∈Ass(A/tA)} Ass(Â/pÂ) used there is Steps 3-9, the inclusion is Step 1. blueprint search (tools/blueprint_refs.py search for 'associated primes', 'Bourbaki', '0312', '02M3', '0310', '00L0', 'annihilator localization', 'associated prime localization'): no blueprint node states it; same_as []."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.AnnihilatorAssociatedPrimesFlatBaseChange",
+  "declaration": "RingTheory.annihilatorAssociatedPrimes_flat_base_change",
+  "file": "lean/Sheaf/RingTheory/AnnihilatorAssociatedPrimesFlatBaseChange.lean",
+  "statement": "theorem annihilatorAssociatedPrimes_flat_base_change {R : Type r} {S : Type s} [CommRing R] [CommRing S] [Algebra R S] (M : Type m) [AddCommGroup M] [Module R M] (N : Type n) [AddCommGroup N] [Module R N] [Module S N] [IsScalarTower R S N] [Module.Flat R N] : letI : Module S (M ⊗[R] N) := (TensorProduct.comm R M N).toAddEquiv.module S let rhs : Set (Ideal S) := ⋃ p ∈ annihilatorAssociatedPrimes R M, annihilatorAssociatedPrimes S (N ⧸ ((p : Set R) • (⊤ : Submodule S N))) rhs ⊆ annihilatorAssociatedPrimes S (M ⊗[R] N) ∧ (IsNoetherianRing R → annihilatorAssociatedPrimes S (M ⊗[R] N) = rhs)",
+  "branch": "sheaf-dag",
+  "by": "M1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-apf1412"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-apf1412",
+  "group": "M1",
+  "result": "fix",
+  "note": "dropped duplicate new node(s) def-weil-pbc-annihilator-associated-primes (--drop-nodes; not merged, the item points at the landed declaration); left out new module(s) lean/Sheaf/RingTheory/AnnihilatorAssociatedPrimes.lean (--drop-files, or a record fixed to existing: true)"
  }
 }
