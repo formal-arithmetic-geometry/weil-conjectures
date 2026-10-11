@@ -52,23 +52,26 @@ Proof (the node's fourteen steps):
     though the node's proof observes that it is unused.
 
 The localized algebra is the base change R_p ⊗[R] A (canonically A ⊗[R] R_p), and the
-induced map A_p → Λ_q is `AlgHom.liftEquiv` of α followed by Λ → Λ_q, as in the sibling
+induced map A_p → Λ_q is `Algebra.TensorProduct.lift` of the structure map R_p → Λ_q and α
+followed by Λ → Λ_q, as in the sibling
 lem-weil-pbc-popescu-delocalize-height-zero. The local algebra structure on Λ_q is the
-canonical one, and qΛ_q is the closed point of Λ_q.
+canonical one, and qΛ_q is the maximal ideal of Λ_q.
 -/
 theorem exists_factorization_singularIdeal_not_le_of_local_popescu_resolution
     {R : Type u} {A : Type v} {Λ : Type t}
     [CommRing R] [CommRing A] [CommRing Λ]
     [Algebra R A] [Algebra R Λ] [IsNoetherianRing R] [FinitePresentation R A]
     (α : A →ₐ[R] Λ) (q : PrimeSpectrum Λ)
-    (hminimal : (popescuIdeal α).IsMinimalPrime q.asIdeal)
+    (hminimal : q.asIdeal ∈ (popescuIdeal α).minimalPrimes)
     (hlocal :
       letI := Localization.AtPrime.algebraOfLiesOver (q.asIdeal.under R) q.asIdeal
       CanBePopescuResolved
-        (AlgHom.liftEquiv R (Localization.AtPrime (q.asIdeal.under R)) A
-          (Localization.AtPrime q.asIdeal)
-          ((IsScalarTower.toAlgHom R Λ (Localization.AtPrime q.asIdeal)).comp α))
-        (IsLocalRing.closedPoint (Localization.AtPrime q.asIdeal))) :
+        (Algebra.TensorProduct.lift
+          (Algebra.ofId (Localization.AtPrime (q.asIdeal.under R))
+            (Localization.AtPrime q.asIdeal))
+          ((IsScalarTower.toAlgHom R Λ (Localization.AtPrime q.asIdeal)).comp α)
+          (fun _ _ => Commute.all _ _))
+        ⟨IsLocalRing.maximalIdeal (Localization.AtPrime q.asIdeal), inferInstance⟩) :
     ∃ (C : Type (max u v)) (_ : CommRing C) (_ : Algebra R C),
       ∃ (β : A →ₐ[R] C) (γ : C →ₐ[R] Λ),
         FinitePresentation R C ∧ γ.comp β = α ∧
