@@ -265,5 +265,23 @@
   "by": "L",
   "result": "accepted",
   "note": "Ten steps along Stacks 015B via the derived category (05TE), all tags confirmed: R^n v additive and R^0 v ≅ v from the reviewed resolution nodes plus the new leaf lem-weil-pbc-injective-resolution-lift-exists (InjectiveResolution.desc :94, desc_commutes_zero :108; checked), connecting maps from the triangle of a short exact sequence and the triangulated Rv (closed nodes), naturality from the ladder, effaceability from injective vanishing, universality from the new 010T node (unsplit; the naturality of t^{n+1} omitted by Stacks is flagged for its split). New definition node def-weil-pbc-delta-functor (010Q/010R/010S). Note: the δ of this item (triangle) and the δ of lem-weil-pbc-derived-functor-long-exact (horseshoe) are not proved equal; lead_note added to def-weil-pbc-sites-and-cohomology."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.RightDerivedUniversalDeltaFunctor",
+  "declaration": "CategoryTheory.Functor.exists_universal_rightDerived_deltaFunctor",
+  "file": "lean/Sheaf/CategoryTheory/RightDerivedUniversalDeltaFunctor.lean",
+  "statement": "theorem Functor.exists_universal_rightDerived_deltaFunctor {A : Type u₁} {B : Type u₂} [Category.{v₁} A] [Abelian A] [EnoughInjectives A] [Category.{v₂} B] [Abelian B] (v : A ⥤ B) [v.Additive] [PreservesFiniteLimits v] : ∃ G : CohomologicalDeltaFunctor A B, G.F = (fun n : ℕ ↦ v.rightDerived n) ∧ G.IsUniversal ∧ Nonempty (v.rightDerived 0 ≅ v)",
+  "branch": "sheaf-dag",
+  "by": "K1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-udf",
+  "group": "K1",
+  "result": "pass",
+  "note": "A abelian+EnoughInjectives, B abelian, v Additive+PreservesFiniteLimits (recorded left-exact form), G.F = v.rightDerived (delta tied to derived family), G.IsUniversal via landed CohomologicalDeltaFunctor, R^0v≅v functor iso; Mathlib has no delta-functor so existing:false correct"
  }
 }
