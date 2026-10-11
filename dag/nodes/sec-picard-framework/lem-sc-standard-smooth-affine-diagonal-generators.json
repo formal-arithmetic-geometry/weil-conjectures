@@ -157,5 +157,23 @@
   "group": "J1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-sdg1950 (reviewer sub-agent of L); spot-checked: Read packet whole. Mathlib leaf exists_etale_mvPolynomial at StandardSmooth.lean:253-258 exact (factorization + etale). Three unsplit nodes checked against sorry-free slopmaster2 decls (sorryfree.py OK): isWeaklyRegular_ofFn_one_tmul_sub_tmul_one, exists_lmul'_eq_one_mul_mem_ofList, isRegularImmersion_specMap; hypotheses (flat/etale R-alg map, c>0, surjective, r in ker, q(e)=1, e*ker in (r)) match. grep of Mathlib: none present (class c no). C1: item defines Delta as Spec of multiplication; criterion speaks of the defining ideal of Spec q, so kernel-of-multiplication identification is by the item's own definition, not assumed; r_i in ker mu and surjectivity computed in step 2. Step 4 elementary: image point gives proper ideal so weakly regular -> B-regular. No cycle, no duplicate. No repairs."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.StandardSmoothAffineDiagonalGenerators",
+  "declaration": "AlgebraicGeometry.exists_isRegular_diagonal_generators_of_isStandardSmooth",
+  "file": "lean/Sheaf/AlgebraicGeometry/StandardSmoothAffineDiagonalGenerators.lean",
+  "statement": "theorem exists_isRegular_diagonal_generators_of_isStandardSmooth {R : Type u} {A : Type v} [CommRing R] [CommRing A] [Algebra R A] {d : ℕ} (hd : 0 < d) [Algebra.IsStandardSmoothOfRelativeDimension d R A] : let W := Spec (CommRingCat.of (A ⊗[R] A)) let Δ := Spec.map (CommRingCat.ofHom (Algebra.TensorProduct.lmul' R : A ⊗[R] A →ₐ[R] A).toRingHom) ∀ w : W, w ∈ Set.range Δ → ∃ U : W.affineOpens, w ∈ U.1 ∧ ∃ r : List Γ(W, U.1), r.length = d ∧ RingTheory.Sequence.IsRegular Γ(W, U.1) r ∧ Ideal.ofList r = RingHom.ker (Δ.app U.1).hom",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-sad1247",
+  "group": "E1",
+  "result": "pass",
+  "note": "Read packet whole; #check: IsStandardSmoothOfRelativeDimension d = finite SubmersivePresentation with dimension d (node's n-c, Jacobian unit); Ideal.ofList = Ideal.span of list; IsRegular Γ(W,U) r full regular (nonzero final quotient); W=Spec(A⊗A), Δ=Spec.map lmul' (multiplication); Δ.app U kernel = defining ideal of Δ⁻¹U→U; d>0, image points, affine U∋w, length d all matched; zero ring vacuous; no added hypotheses"
  }
 }
