@@ -107,5 +107,23 @@
   "group": "H1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-atk2110 (reviewer sub-agent of L); spot-checked: Route 01HV leaf -> base change -> 06YB stalk criterion (lem-pc-kflat-stalk-criterion, reverse direction) confirmed, C1/C4 ok, no restatement of the item. FIX more, RETURN less: (1) B/class (d) + wrong source: new node lem-pc-kflat-module-base-change was tagged 064K (that tag is the bounded-above-flat lemma, already lem-pc-module-bounded-flat-kflat); the real lemma is more-algebra lemma-base-change-K-flat, Tag 06Y1, whose proof is 'follows from the definitions' via (K(x)_A A_p)(x)_{A_p} L = K (x)_A L; folded into step 2 as elementary citing Tag 06Y1, node dropped; (2) item source.place and blueprint.place corrected 064K -> 06Y1. Second reading by H1 missed the wrong tag.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.Modules.IsKFlatTilde",
+  "declaration": "AlgebraicGeometry.isKFlat_tilde",
+  "file": "lean/Sheaf/AlgebraicGeometry/Modules/IsKFlatTilde.lean",
+  "statement": "theorem isKFlat_tilde (A : Type u) [CommRing A] (K : CochainComplex (ModuleCat.{u} A) ℤ) (hK : ∀ F : CochainComplex (ModuleCat.{u} A) ℤ, F.Acyclic → (CochainComplex.mapBifunctor F K (curriedTensor (ModuleCat A))).Acyclic) : CochainComplex.IsKFlat (R := (Spec (.of A)).sheaf) ((@Functor.mapHomologicalComplex ℤ (ModuleCat.{u} A) (Spec (.of A)).Modules _ _ _ _ (tilde.functor (.of A)) ⟨fun _ _ => tilde.map_zero⟩ (ComplexShape.up ℤ)).obj K)",
+  "branch": "sheaf-dag",
+  "by": "M1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-atk0910",
+  "group": "M1",
+  "result": "pass",
+  "note": "A:Type u CommRing; Spec (.of A); K CochainComplex (ModuleCat A) Z; hK = unfolded acyclic-tensor K-flat, same form as C1 acyclic_mapBifunctor_of_boundedAbove_flat (Tot(F (x) K) order); termwise complex = Mathlib tilde.functor via mapHomologicalComplex (X n = tilde (K.X n), d = tilde.map (K.d) checked by rfl); conclusion landed IsKFlat with R := (Spec A).sheaf, Scheme.Modules = SheafOfModules (sheafCompose forget2 sheaf) by rfl; explicit PreservesZeroMorphisms is Prop-valued (proof-irrelevant); no new def nodes; H4 none (FromJoel KFlat is the categorical notion); proof sorry, axioms sorryAx only"
  }
 }
