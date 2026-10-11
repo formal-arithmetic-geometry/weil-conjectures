@@ -1,11 +1,11 @@
 # Work queue
 
-677 items; claim with `tools/claim.py next <group> [--stage N]`.
+672 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (677)
+## Stage 2: nodes to state (672)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -26,15 +26,12 @@
 | `lem-weil-pbc-etale-inverse-image-algebraic-structures` | 1 | state |
 | `lem-weil-pbc-etale-qcqs-sections-filtered-colimit` | 1 | state |
 | `lem-weil-pbc-ext-one-direct-sum` | 1 | state |
-| `lem-weil-pbc-fibre-dimension-bounded-open-upstairs` | 1 | state |
 | `lem-weil-pbc-filtered-colimit-algebras-tensor-elementwise` | 1 | state |
 | `lem-weil-pbc-filtered-colimit-categories` | 1 | state |
 | `lem-weil-pbc-filtered-colimit-flat-modules` | 1 | state |
 | `lem-weil-pbc-filtered-colimit-localization-at-prime` | 1 | state |
 | `lem-weil-pbc-filtered-colimit-normal-ring` | 1 | state |
-| `lem-weil-pbc-filtered-colimit-tensor-varying-rings` | 1 | state |
 | `lem-weil-pbc-finite-after-completion` | 1 | state |
-| `lem-weil-pbc-finite-etale-etale-local-split` | 1 | state |
 | `lem-weil-pbc-finite-etale-lifting-limit-descent` | 1 | state |
 | `lem-weil-pbc-finite-etale-trace-exists` | 1 | state |
 | `lem-weil-pbc-finite-galois-receiving-separable-extensions` | 1 | state |
@@ -45,14 +42,12 @@
 | `lem-weil-pbc-finite-open-cover-degree-sum` | 1 | state |
 | `lem-weil-pbc-finite-over-complete-local-product` | 1 | state |
 | `lem-weil-pbc-finite-over-complete-ring` | 1 | state |
-| `lem-weil-pbc-finite-over-henselian-local-product` | 1 | state |
 | `lem-weil-pbc-finite-over-nagata-nagata` | 1 | state |
 | `lem-weil-pbc-finite-presentation-hom-directed-colimit` | 1 | state |
 | `lem-weil-pbc-finite-product-complex-cohomology` | 1 | state |
 | `lem-weil-pbc-finite-product-functor-left-exact` | 1 | state |
 | `lem-weil-pbc-finite-product-injective-resolutions` | 1 | state |
 | `lem-weil-pbc-finite-product-integral-closure` | 1 | state |
-| `lem-weil-pbc-finite-product-normal` | 1 | state |
 | `lem-weil-pbc-finite-projective-prime-local-free` | 1 | state |
 | `lem-weil-pbc-finite-projective-standard-free-cover` | 1 | state |
 | `lem-weil-pbc-finite-purely-inseparable-degree-p-intermediate` | 1 | state |
