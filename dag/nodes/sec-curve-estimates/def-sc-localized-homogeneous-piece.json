@@ -1,0 +1,110 @@
+{
+ "id": "def-sc-localized-homogeneous-piece",
+ "kind": "definition",
+ "title": "Homogeneous pieces of module localization at one element",
+ "status": "split",
+ "statement": "Let $A$ be a commutative ring, $M$ an $A$-module, $(M_n)_{n\\in\\mathbb Z}$ a family of additive subgroups of $M$, $s\\in A$, and $d,n\\in\\mathbb Z$. In the localization $M_s$ at the powers of $s$ [def-weil-pbc-module-localization-away], define $P_n(M,s,d)=\\{m/s^k\\mid k\\in\\mathbb N,\\ m\\in M_{n+kd}\\}$. When $M$ is graded and $s$ is homogeneous of degree $d$, this is the underlying set of the homogeneous degree-$n$ part of the localized module; $P_0(M,s,d)$ is its degree-zero part.",
+ "stmt_deps": [
+  "def-weil-pbc-module-localization-away"
+ ],
+ "source": {
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Cohomology of Schemes, Lemma 09MR proof, Mayer–Vietoris paragraph (localization exactness)"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "homogeneous degree component of localization of a graded module at powers of a homogeneous element",
+   "results": "service unavailable: Internal Server Error; 0 hits; digest 4f53cda18c2baa0c",
+   "date": "2026-10-11",
+   "verdict": "unavailable; no mathematical verdict"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "homogeneous fractions m divided by s to the k in the localized graded module with degree n plus k times d",
+   "results": "HomogeneousLocalization.Away.mk, HomogeneousLocalization.mk, HomogeneousLocalization.Away.isLocalizationElem, HomogeneousLocalization.NumDenSameDeg.embedding, HomogeneousLocalization.val, HomogeneousLocalization.Away.val_mk, HomogeneousLocalization.NumDenSameDeg.num, HomogeneousLocalization.Away.isLocalization_mul; 8 hits; digest ec7d55b475b375c0",
+   "date": "2026-10-11",
+   "verdict": "no match for arbitrary modules; hits concern ring localization only"
+  },
+  {
+   "tool": "grep",
+   "query": "homogeneous.*(module|fraction)|graded.*localiz|localized.*grade",
+   "results": "No hits; 0 hits; digest 4f53cda18c2baa0c",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n homogeneous.*localiz|localiz.*homogeneous dag/nodes; python3 tools/blueprint_refs.py search \"graded localization\"; rg -n homogeneous.*(module|fraction)|graded.*localiz|localized.*grade WeilConjectures lean/Sheaf",
+   "results": "Existing nodes are statements using the notion, not definitions of module homogeneous fractions. Blueprint search: def-pc-proj, def-pc-standard-graded-algebra, prop-nagata-rees-localization. Source hits concern homogeneous localization of rings; no module-piece definition in the project.",
+   "date": "2026-10-11",
+   "verdict": "no duplicate notion"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sc-graded-localization-exact",
+  "date": "2026-10-11",
+  "group": "H1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-pic-proper-ntorsion",
+   "place": "09MR Mayer–Vietoris paragraph: degree-zero homogeneous fractions in module localization",
+   "via": [
+    "lem-sc-graded-localization-exact",
+    "lem-sc-invert-s-cohomology-mayer-vietoris-diagram",
+    "lem-sc-invert-s-cohomology-gluing",
+    "lem-sc-invert-s-cohomology",
+    "lem-sc-section-affine-open-kills-cohomology",
+    "lem-sc-ample-square-zero-thickening",
+    "lem-sc-ample-on-reduction-noetherian",
+    "lem-sc-dim-one-ample-invertible",
+    "lem-sc-dim-one-quasi-projective",
+    "lem-sc-proper-dim-one-projective"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-thm-curveestimate",
+ "lean": {
+  "module": "Sheaf.Algebra.Module.LocalizedHomogeneousPiece",
+  "declaration": "LocalizedModule.homogeneousPieceAway",
+  "file": "lean/Sheaf/Algebra/Module/LocalizedHomogeneousPiece.lean",
+  "statement": "def homogeneousPieceAway {A : Type uHP} [CommRing A] {M : Type vHP} [AddCommGroup M] [Module A M] (𝓜 : ℤ → AddSubgroup M) (s : A) (d n : ℤ) : Set (LocalizedModule.Away s M)",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-gle1203",
+  "group": "H1",
+  "result": "fix",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-gle1203",
+  "group": "H1",
+  "result": "fix",
+  "note": "commutative Z-graded ring = IsInternal 𝓐 + hmul (FIX: was GradedRing, sibling C1 convention); graded modules = IsInternal + hsmul A_aM_b⊆M_(a+b) (FIX: was Decomposition/GradedSMul instances); s∈A_d, 0≤d; f,g A-linear degree-preserving hf/hg; im f=ker g as Function.Exact; M_s via LocalizedModule.Away/IsLocalizedModule.map m/s^k↦f(m)/s^k; degree-n piece {m/s^k, m∈M_(n+kd)} = node's e-kd convention; M_(s)=piece 0; conclusions Function.Exact fₛ gₛ, MapsTo degree preservation, image=kernel on degree-zero sets; ∀ i over arbitrary I for finite/infinite sequences; no Mathlib/landed module homogeneous localization (HomogeneousLocalization is ring-only)"
+ }
+}

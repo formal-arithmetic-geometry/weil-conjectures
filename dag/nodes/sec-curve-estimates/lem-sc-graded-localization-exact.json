@@ -21,7 +21,8 @@
   "place": "Cohomology of Schemes, Lemma 09MR proof, Mayer–Vietoris paragraph (localization exactness)"
  },
  "stmt_deps": [
-  "def-weil-pbc-module-localization-away"
+  "def-weil-pbc-module-localization-away",
+  "def-sc-localized-homogeneous-piece"
  ],
  "proof": [
   {
@@ -115,5 +116,24 @@
   "group": "J1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-gle1710 (reviewer sub-agent of L); spot-checked: Source: Stacks 09MR (label coherent-lemma-invert-s-cohomology), proof of the lemma, Mayer-Vietoris paragraph using exactness of localization and passage to degree-zero parts; statement unchanged from the node created by R-mvd, hypotheses (Z-graded A, s homogeneous of degree d>=0, degree-preserving f,g, im f = ker g) agree. Step 1: lem-weil-pbc-localization-module-exact (status mathlib, LocalizedModule.map_exact, Mathlib/Algebra/Module/LocalizedModule/Exact.lean line 37 verified with sed) states exactness of T^{-1}(-) for any multiplicative T, applied to T = powers of s, hypotheses met; declared tool use accepted (generic leaf used as black box, C8). Step 2 elementary: f_s, g_s are degree-preserving for the direct-sum grading of M_s, so a degree-zero y in ker g_s = im f_s is f_s(x_0) for the degree-zero component x_0 of a preimage; the other inclusion is g f = 0; termwise for long sequences. Small cases: d=0 (M_(s) = (M_0)_s-type degree-zero fractions) and zero sequences. Mathlib query run (B8, LeanFinder 'homogeneous localization of a graded module at a homogeneous element is exact (degree zero part ...)'): only ungraded exact_of_isLocalized_span, IsLocalizedModule.map_exact, LocalizedModule.map_exact, ModuleCat.localizedModule_functor_map_exact; no graded degree-zero module statement, so the item stays split, not a leaf (same verdict as the recorded R-mvd query). Only the item's node and report changed; no new nodes. Start Sat Oct 10 05:09:16 PM UTC 2026, end Sat Oct 10 05:09:41 PM UTC 2026."
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Module.GradedLocalizationExact",
+  "declaration": "LocalizedModule.graded_localization_exact",
+  "file": "lean/Sheaf/Algebra/Module/GradedLocalizationExact.lean",
+  "statement": "theorem graded_localization_exact {A : Type u} [CommRing A] (𝓐 : ℤ → AddSubgroup A) (_h𝓐 : DirectSum.IsInternal 𝓐) (_hmul : ∀ (a b : ℤ) (r t : A), r ∈ 𝓐 a → t ∈ 𝓐 b → r * t ∈ 𝓐 (a + b)) (s : A) (d : ℤ) (_hd : 0 ≤ d) (_hs : s ∈ 𝓐 d) (I : Type w) (M₀ : I → Type v₀) (M₁ : I → Type v₁) (M₂ : I → Type v₂) [∀ i, AddCommGroup (M₀ i)] [∀ i, AddCommGroup (M₁ i)] [∀ i, AddCommGroup (M₂ i)] [∀ i, Module A (M₀ i)] [∀ i, Module A (M₁ i)] [∀ i, Module A (M₂ i)] (𝓜₀ : ∀ i, ℤ → AddSubgroup (M₀ i)) (𝓜₁ : ∀ i, ℤ → AddSubgroup (M₁ i)) (𝓜₂ : ∀ i, ℤ → AddSubgroup (M₂ i)) (_h𝓜₀ : ∀ i, DirectSum.IsInternal (𝓜₀ i)) (_h𝓜₁ : ∀ i, DirectSum.IsInternal (𝓜₁ i)) (_h𝓜₂ : ∀ i, DirectSum.IsInternal (𝓜₂ i)) (_hsmul₀ : ∀ i (a b : ℤ) (r : A) (m : M₀ i), r ∈ 𝓐 a → m ∈ 𝓜₀ i b → r • m ∈ 𝓜₀ i (a + b)) (_hsmul₁ : ∀ i (a b : ℤ) (r : A) (m : M₁ i), r ∈ 𝓐 a → m ∈ 𝓜₁ i b → r • m ∈ 𝓜₁ i (a + b)) (_hsmul₂ : ∀ i (a b : ℤ) (r : A) (m : M₂ i), r ∈ 𝓐 a → m ∈ 𝓜₂ i b → r • m ∈ 𝓜₂ i (a + b)) (f : ∀ i, M₀ i →ₗ[A] M₁ i) (g : ∀ i, M₁ i →ₗ[A] M₂ i) (hf : ∀ i n x, x ∈ 𝓜₀ i n → f i x ∈ 𝓜₁ i n) (hg : ∀ i n x, x ∈ 𝓜₁ i n → g i x ∈ 𝓜₂ i n) (hex : ∀ i, Function.Exact (f i) (g i)) : ∀ i, let fₛ := IsLocalizedModule.map (Submonoid.powers s) (mkLinearMap (Submonoid.powers s) (M₀ i)) (mkLinearMap (Submonoid.powers s) (M₁ i)) (f i) let gₛ := IsLocalizedModule.map (Submonoid.powers s) (mkLinearMap (Submonoid.powers s) (M₁ i)) (mkLinearMap (Submonoid.powers s) (M₂ i)) (g i) Function.Exact fₛ gₛ ∧ (∀ n, Set.MapsTo fₛ (homogeneousPieceAway (𝓜₀ i) s d n) (homogeneousPieceAway (𝓜₁ i) s d n)) ∧ (∀ n, Set.MapsTo gₛ (homogeneousPieceAway (𝓜₁ i) s d n) (homogeneousPieceAway (𝓜₂ i) s d n)) ∧ (∀ y ∈ homogeneousPieceAway (𝓜₁ i) s d 0, gₛ y = 0 ↔ ∃ x ∈ homogeneousPieceAway (𝓜₀ i) s d 0, fₛ x = y)",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-gle1203"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-gle1203",
+  "group": "H1",
+  "result": "fix",
+  "note": "commutative Z-graded ring = IsInternal 𝓐 + hmul (FIX: was GradedRing, sibling C1 convention); graded modules = IsInternal + hsmul A_aM_b⊆M_(a+b) (FIX: was Decomposition/GradedSMul instances); s∈A_d, 0≤d; f,g A-linear degree-preserving hf/hg; im f=ker g as Function.Exact; M_s via LocalizedModule.Away/IsLocalizedModule.map m/s^k↦f(m)/s^k; degree-n piece {m/s^k, m∈M_(n+kd)} = node's e-kd convention; M_(s)=piece 0; conclusions Function.Exact fₛ gₛ, MapsTo degree preservation, image=kernel on degree-zero sets; ∀ i over arbitrary I for finite/infinite sequences; no Mathlib/landed module homogeneous localization (HomogeneousLocalization is ring-only)"
  }
 }

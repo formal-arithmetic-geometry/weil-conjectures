@@ -3791,3 +3791,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 08:15 L: merged deliver/H1/lem-sc-global-sections-left-exact (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.GlobalSectionsLeftExact AlgebraicGeometry.Scheme.Modules.globalSectionsFunctor_additive_leftExact)
 - 08:15 L: merged deliver/K1/lem-sc-glue-component-line-bundles (stage 2; reviewer FIX; first push; Sheaf.AlgebraicGeometry.GlueComponentLineBundles AlgebraicGeometry.Scheme.Modules.glueComponentLineBundles)
 - 08:15 L: merged deliver/C1/lem-pc-zero-scheme-pullback (stage 2; reviewer FIX; after a return; Sheaf.AlgebraicGeometry.Modules.ZeroLocusPullback AlgebraicGeometry.Scheme.Modules.Hom.comap_zeroLocus_tensorPullback)
+- 08:16 L: merged deliver/H1/lem-sc-graded-localization-exact (stage 2; reviewer FIX; first push; Sheaf.Algebra.Module.GradedLocalizationExact LocalizedModule.graded_localization_exact; new nodes: def-sc-localized-homogeneous-piece)
