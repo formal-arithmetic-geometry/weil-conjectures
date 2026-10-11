@@ -5041,3 +5041,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 14:46 L: merged deliver/T1/lem-weil-pbc-symmetric-algebra-finite-presentation (stage 2; reviewer FIX; first push; Sheaf.RingTheory.SymmetricAlgebraFinitePresentation SymmetricAlgebra.generators_and_finitePresentation)
 - 14:46 L: merged deliver/F1/lem-weil-pbc-sets-etale-section-continuity (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.EtaleSetSectionContinuity AlgebraicGeometry.etaleSetSectionContinuity; statement corrected (1 citers))
 - 14:46 L: merged deliver/U1/lem-weil-pbc-symmetric-algebra-graded (stage 2; reviewer PASS; first push; Sheaf.LinearAlgebra.SymmetricAlgebra.Graded SymmetricAlgebra.graded_by_tensor_images)
+- 14:46 L: merged deliver/V1/lem-weil-pbc-tensor-field-extension-galois-invariants (stage 2; reviewer PASS; first push; Sheaf.FieldTheory.TensorFieldExtensionGaloisInvariants TensorProduct.injective_and_range_eq_invariants)
