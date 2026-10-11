@@ -162,5 +162,23 @@
   "group": "J1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-vls (reviewer sub-agent of L); spot-checked: Source: blueprint lem-sc-riemann-roch.md lines 120-142, proof of (*) rank induction; the item statement is unchanged and the four steps follow that paragraph sentence by sentence. Step 1: stalk of j_*(E_eta/Ks) at any x is E_eta/Ks (eta in every nonempty open), so L_x = preimage of Ks in E_x; injectivity E_x -> E_eta from clause 2 of lem-sc-integral-scheme-stalks-in-function-field (O_x domain, rho_x injective) plus E_x free. Step 2: x non-generic gives dim O_x = 1 (eta < x and dim X = 1), lem-sc-regular-dim1-dvr (in the unit route via sk-thm-picard-duality) gives a DVR; new node lem-sc-dvr-saturation-line checked true: L = E cap Ks nonzero by clearing denominators, submodule of free over a PID hence free of rank 1, E/L torsion-free (a e in Ks implies e in Ks) hence free of rank r-1; hypotheses r>=1, s!=0 present; tested r=1 (L=E, E/L=0, rank 0) and R^2 with s=(1,0) and s=(1,t)/t. Step 3: j qcqs (one-point source, X Noetherian hence quasi-separated), pqf-lem-pushforward-qcoh, lem-weil-pbc-quasi-coherent-module-kernel, then clause (2) of lem-weil-pbc-coherent-kernel-cokernel-locnoeth for L and E/L coherent; free stalks over domains give torsion-free (elementary), lem-sc-regular-curve-torsionfree-free gives local freeness and constant rank = generic dimension (1 and r-1); def-sc-invertible-module. Step 4 elementary. Declared tool uses (integral-scheme stalks, pushforward qcoh, qcoh kernel, coherent kernel/cokernel) are generic black-box tools, accepted (C8). New node: statement only, unsplit, TeX, stmt_deps def-sc-discrete-valuation-ring, from = lem-sc-riemann-roch with exact place, same_as [] confirmed by my blueprint_refs search (saturation; discrete valuation ring free module): nothing relevant; no Mathlib leaf. Start Sat Oct 10 02:54:07 PM UTC 2026, end Sat Oct 10 02:54:59 PM UTC 2026."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.VectorBundleLineSubbundle",
+  "declaration": "AlgebraicGeometry.exists_saturated_line_subbundle",
+  "file": "lean/Sheaf/AlgebraicGeometry/VectorBundleLineSubbundle.lean",
+  "statement": "theorem exists_saturated_line_subbundle (X : Scheme.{u}) [IsIntegral X] [IsNoetherian X] (hregular : ∀ x : X, IsRegularLocalRing (↑(X.presheaf.stalk x))) (hdim : topologicalKrullDim X = 1) (r : ℕ) (hr : 1 ≤ r) (E : X.Modules) [E.IsFiniteLocallyFreeOfRank r] (s : ↑(TopCat.Presheaf.stalk E.val.presheaf (genericPoint X))) (hs : s ≠ 0) : ∃ (L Q : X.Modules) (ι : L ⟶ E) (π : E ⟶ Q), ∃ hcomp : ι ≫ π = 0, L.IsInvertible ∧ Q.IsFiniteLocallyFreeOfRank (r - 1) ∧ ShortComplex.ShortExact (ShortComplex.mk ι π hcomp) ∧ (∀ x : X, Set.range (((TopCat.Presheaf.stalkFunctor _ x).map ι.mapPresheaf).hom) = (TopCat.Presheaf.stalkSpecializes E.val.presheaf (genericPoint_specializes x)) ⁻¹' (Submodule.span X.functionField {s} : Set ↑(TopCat.Presheaf.stalk E.val.presheaf (genericPoint X)))) ∧ Set.range (((TopCat.Presheaf.stalkFunctor _ (genericPoint X)).map ι.mapPresheaf).hom) = (Submodule.span X.functionField {s} : Set ↑(TopCat.Presheaf.stalk E.val.presheaf (genericPoint X)))",
+  "branch": "sheaf-dag",
+  "by": "G1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-vls0943",
+  "group": "G1",
+  "result": "pass",
+  "note": "X Scheme + AlgebraicGeometry.IsIntegral (#check) + IsNoetherian; regular = IsRegularLocalRing all stalks; dim one = topologicalKrullDim X = 1 (def-kun-dimension); K = X.functionField (def-sc-function-field record note: integral clause reuses Mathlib generic stalk); E SheafOfModules.IsFiniteLocallyFreeOfRank r, 1<=r (as landed determinant_shortExact); s nonzero in E_eta; L = kernel of E->j_*(E_eta/Ks) via stalk image = stalkSpecializes preimage of Ks + mono; L Scheme.Modules.IsInvertible; generic fibre Ks; Q rank r-1 + ShortExact = E/L"
  }
 }
