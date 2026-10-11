@@ -106,5 +106,23 @@
   "group": "F1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-dsl (reviewer sub-agent of L); spot-checked: Source: item statement unchanged (E7 n/a); its local calculation is the DVR case of Stacks 0CC4 (divisors-lemma-torsion-free-over-regular-dim-1, read: proof reduces to stalks over a DVR) and the rank-induction paragraph of lem-sc-riemann-roch. Step 1 elementary: clearing denominators gives 0 != as in L, and saturation (b e in L, b != 0 => e in Ks) is a two-line check. Step 2 carried by lem-sc-dvr-saturation-line-smith-normal-form (diagonal bases, n <= r; the a_i are nonzero since bN is a basis in a torsion-free module), plus Ks = K L from step 1 and L in Ks, so n = 1. Step 3: with L = R a_1 e_j, a_1 nonunit would give e_j not in L but a_1 e_j in L, contradicting step 1; so L = R e_j and E/L is free on the other r-1 vectors. Leaf: Submodule.exists_smith_normal_form_of_le verified with sed in the pinned Mathlib Mathlib/LinearAlgebra/FreeModule/PID.lean line 492 ([IsDomain R] [IsPrincipalIdealRing R], Finite basis b, N <= O; conclusion bO, bN, a with bN i = a i * bO (castLE i)); node is its specialization O = top to a DVR (a PID by def-sc-discrete-valuation-ring). blueprint_refs search 'Smith normal form' and 'saturation': no match, same_as [] right. Small cases: r=1 (L=E, quotient 0), R^2 with s=(1,0) and s=(1,t)/t (L = R(1,t), quotient free rank 1). FIX: dag/nodes/sec-picard-framework/lem-sc-dvr-saturation-line-smith-normal-form.json: mathlib_match.line: 483 -> 492 (pinned Mathlib; worker read another checkout), mathlib_match.how and mathlib_searches[2].results updated to the same line. Start Sat Oct 10 03:18:05 PM UTC 2026, end Sat Oct 10 03:18:43 PM UTC 2026.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.DvrSaturationLine",
+  "declaration": "Module.dvr_saturation_line",
+  "file": "lean/Sheaf/AlgebraicGeometry/DvrSaturationLine.lean",
+  "statement": "theorem dvr_saturation_line {R K E : Type*} [CommRing R] [IsDomain R] [IsDiscreteValuationRing R] [Field K] [Algebra R K] [IsFractionRing R K] [AddCommGroup E] [Module R E] {r : ℕ} (b : Basis (Fin r) R E) (hr : 1 ≤ r) (s : E ⊗[R] K) (hs : s ≠ 0) : let V : Submodule K (K ⊗[R] E) := Submodule.span K {TensorProduct.comm R E K s} let i : E →ₗ[R] K ⊗[R] E := TensorProduct.mk R K E 1 let L : Submodule R E := (V.restrictScalars R).comap i Nonempty (Basis (Fin 1) R L) ∧ Submodule.span K (i '' (L : Set E)) = V ∧ Nonempty (Basis (Fin (r - 1)) R (E ⧸ L))",
+  "branch": "sheaf-dag",
+  "by": "M1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-dsl1020",
+  "group": "M1",
+  "result": "pass",
+  "note": "R: CommRing+IsDomain+IsDiscreteValuationRing (stmt_dep decl); K: Field+Algebra+IsFractionRing; E finite free rank r: Basis (Fin r), hr 1<=r; s:E⊗K, s≠0; Ks transported by TensorProduct.comm into K⊗E (standard left K-action), i = e↦1⊗e, L = comap of restrictScalars = E∩Ks; conclusions Basis (Fin 1) R L, span K (i''L) = V, Basis (Fin (r-1)) R (E⧸L); r=1 gives Fin 0; docstring carries blueprint id and 3-step proof"
  }
 }
