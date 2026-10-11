@@ -49,8 +49,10 @@ functor from finite-level étale sheaves, or from the lattice categories `D^b_c(
 blueprint, to the pro-étale `ℓ`-adic sheaves `AlgebraicGeometry.ProEtale.AdicSheaf` underlying
 Weil sheaves:
 
-- `AlgebraicGeometry.WeilSheaf.isLisse_higherLowerStar_of_smooth_of_isProper` (Step 1, local
-  constancy) uses the finite-level nodes `prop-weil-proet-finite-proper-base-change`,
+- `ProEtale.isAdicLisseSheaf_homology_rightDerivedFunctor_lowerStar_of_smooth_of_isProper`
+  (Step 1, local constancy, for the `ℓ`-adic sheaves on the geometric fibres; the Weil-level
+  `AlgebraicGeometry.WeilSheaf.isLisse_higherLowerStar_of_smooth_of_isProper` is derived from it)
+  uses the finite-level nodes `prop-weil-proet-finite-proper-base-change`,
   `sbc-thm-smooth-base-change` (`AlgebraicGeometry.Etale.isIso_baseChangeHomologyMap_of_smooth`)
   and `thm-fin-proper-constructibility-complete` on a lattice of `F`, and
   `cor-weil-pbc-geometric-fiber-qbar` to pass to the limit; neither lattices of lisse
@@ -126,8 +128,6 @@ end FrobeniusModule
 namespace AlgebraicGeometry
 
 namespace ProEtale
-
-
 
 variable {l : ℕ} [Fact l.Prime] {K : Type u} [Field K] [IsAlgClosed K] {X Y : Scheme.{u}}
 
