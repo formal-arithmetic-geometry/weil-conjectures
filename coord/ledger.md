@@ -3269,3 +3269,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 02:00 L: second readings: F1 05SU missed nothing; E1 05SA missed the wrong first object in step 3 (fixed by R-dfm0157); H1 cech-total-tensor-iso missed the well-definedness of the Künneth map and a stale source.place (fixed by R-cti0157)
 - 02:01 L: merged deliver/G1/lem-pc-finite-free-map-residue-localization (reviewer PASS; first push; new nodes: 0)
 - 02:03 L: merged deliver/H1/lem-sc-picard-qcoh-finite-cd (reviewer FIX; first push; new nodes: 0)
+- 02:03 L: STATE rows 00:05-01:57 (progress and blueprint tables) and the groups-table stamp were dated 2026-10-10 by the lead's row script; corrected to 2026-10-11, script now reads the day from date -u
