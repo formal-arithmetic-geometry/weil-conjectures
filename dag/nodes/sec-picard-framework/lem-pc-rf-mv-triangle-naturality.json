@@ -13,7 +13,7 @@
  },
  "kind": "statement",
  "title": "Naturality of the base-change comparison with the relative Mayer–Vietoris triangles",
- "statement": "Let X' \\xrightarrow{g'} X and S' \\xrightarrow{g} S form a cartesian square, let f:X\\to S be quasi-compact and quasi-separated, and let f':X'\\to S' be its base change [def-pc-scheme, def-pc-base-change]. Assume moreover that S and S' are affine. Let K be in D_{\\mathrm{QCoh}}(\\mathcal O_X) and let L(g')^*K\\to K' be a morphism in D_{\\mathrm{QCoh}}(\\mathcal O_{X'}) [def-pc-derived-category]. If X=U\\cup V with U and V quasi-compact open subschemes and U\\cap V quasi-compact, put W'=X'\\times_X W for W in {X,U,V,U\\cap V}. For each such W, let \\alpha_W be the canonical composite Lg^*R(f|_W)_*(K|_W)\\to R(f'|_{W'})_*L(g'|_{W'})^*(K|_W)\\to R(f'|_{W'})_*(K'|_{W'}), using derived pullback and direct image [def-pc-derived-pullback, def-pc-derived-direct-image]. Apply Lg^*Rf_* to the derived Mayer--Vietoris triangle of K for the cover X=U\\cup V, and Rf'_* to that of K' for the cover X'=U'\\cup V' [lem-pc-derived-mayer-vietoris-triangle], identifying Rf_*R(j_W)_* with R(f|_W)_* and Rf'_*R(j_{W'})_* with R(f'|_{W'})_*. Between the two resulting distinguished triangles in D(\\mathcal O_{S'}), the maps \\alpha_X, \\alpha_U\\oplus\\alpha_V, and \\alpha_{U\\cap V} form a morphism of distinguished triangles.",
+ "statement": "Let X' \\xrightarrow{g'} X and S' \\xrightarrow{g} S form a cartesian square, let f:X\\to S be quasi-compact and quasi-separated, and let f':X'\\to S' be its base change [def-pc-scheme, def-pc-base-change]. Assume moreover that S and S' are affine. Let K\\in D_{\\mathrm{QCoh}}(\\mathcal O_X) and K'\\in D_{\\mathrm{QCoh}}(\\mathcal O_{X'}) be objects, together with a morphism L(g')^*K\\to K' in D_{\\mathrm{QCoh}}(\\mathcal O_{X'}) [def-pc-derived-category]. If X=U\\cup V with U and V quasi-compact open subschemes and U\\cap V quasi-compact, write U'=X'\\times_X U and V'=X'\\times_X V, and put W'=X'\\times_X W for W in {X,U,V,U\\cap V}. For each such W, let \\alpha_W be the composite Lg^*R(f|_W)_*(K|_W)\\to R(f'|_{W'})_*L(g'|_{W'})^*(K|_W)\\to R(f'|_{W'})_*(K'|_{W'}) of the derived base-change morphism for f|_W [def-pc-derived-base-change-map] and R(f'|_{W'})_* of the restriction to W' of the given morphism, using derived pullback and direct image [def-pc-derived-pullback, def-pc-derived-direct-image]. Apply Lg^*Rf_* to the derived Mayer--Vietoris triangle of K for the cover X=U\\cup V, and Rf'_* to that of K' for the cover X'=U'\\cup V' [lem-pc-derived-mayer-vietoris-triangle], identifying Rf_*R(j_W)_* with R(f|_W)_* and Rf'_*R(j_{W'})_* with R(f'|_{W'})_*. Between the two resulting distinguished triangles in D(\\mathcal O_{S'}), the maps \\alpha_X, \\alpha_U\\oplus\\alpha_V, and \\alpha_{U\\cap V} form a morphism of distinguished triangles.",
  "source": {
   "document": "literature/stacks-project/perfect.tex",
   "place": "Tag 0DJ9, induction step; naturality of the relative Mayer--Vietoris triangles from Cohomology, Lemma cohomology-lemma-unbounded-relative-mayer-vietoris"
@@ -24,11 +24,63 @@
   "def-pc-derived-category",
   "def-pc-derived-pullback",
   "def-pc-derived-direct-image",
-  "lem-pc-derived-mayer-vietoris-triangle"
+  "lem-pc-derived-mayer-vietoris-triangle",
+  "def-pc-derived-base-change-map"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Since S and S' are affine, g is affine [lem-weil-pbc-morphism-affine-schemes-affine], hence so is its base change g', and g' is quasi-compact and separated [lem-weil-pbc-affine-morphism-permanence]. Since f is quasi-compact and quasi-separated and S is affine, X is quasi-compact and quasi-separated [lem-weil-pbc-qcqs-over-affine]; likewise f', the base change of f, is quasi-compact and quasi-separated (Tags 01K5 and 01KU, elementary), so X' is quasi-compact and quasi-separated over the affine S' [lem-weil-pbc-qcqs-over-affine]. As g' is quasi-compact, U'=(g')^{-1}(U), V'=(g')^{-1}(V) and U'\\cap V'=(g')^{-1}(U\\cap V) are quasi-compact opens with X'=U'\\cup V'. Hence the derived Mayer--Vietoris node applies to K on X=U\\cup V and to K' on X'=U'\\cup V' [lem-pc-derived-mayer-vietoris-triangle]. Applying the exact functors Lg^*Rf_* and Rf'_* gives distinguished triangles in D(\\mathcal O_{S'}). For each W in \\{X,U,V,U\\cap V\\}, the canonical composition isomorphism Rf_*R(j_W)_*\\cong R(f|_W)_* (and its primed analogue) identifies the terms with the objects used to define \\alpha_W [lem-pc-derived-direct-image-composition].",
+   "uses": [
+    "lem-weil-pbc-morphism-affine-schemes-affine",
+    "lem-weil-pbc-affine-morphism-permanence",
+    "lem-weil-pbc-qcqs-over-affine",
+    "lem-pc-derived-mayer-vietoris-triangle",
+    "lem-pc-derived-direct-image-composition",
+    "def-pc-derived-pullback",
+    "def-pc-derived-direct-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 0DJ9, induction step; apply the relative Mayer--Vietoris triangles and identify composites of derived direct images"
+   }
+  },
+  {
+   "text": "Let \\psi:K\\to Rg'_*K' be the adjoint of the given morphism L(g')^*K\\to K' under L(g')^*\\dashv Rg'_* [lem-pc-pre-derived-adjoint-functors-general]; Rg'_*K' lies in D_{\\mathrm{QCoh}}(\\mathcal O_X) because g' is quasi-compact and quasi-separated [lem-pc-derived-direct-image-preserves-qcoh]. Since restriction to opens commutes with these adjunctions, \\psi|_W corresponds to the restricted morphism L(g'|_{W'})^*(K|_W)\\to K'|_{W'} under (Rg'_*K')|_W\\cong R(g'|_{W'})_*(K'|_{W'}). By the definition of the base-change morphism [def-pc-derived-base-change-map] (the unit of L(g')^*\\dashv Rg'_* followed by naturality of the unit), the adjoint of \\alpha_W under Lg^*\\dashv Rg_* is Rf_*R(j_W)_*(\\psi|_W) followed by the composition isomorphisms Rf_*R(j_W)_*R(g'|_{W'})_*\\cong Rf_*Rg'_*R(j_{W'})_*\\cong Rg_*Rf'_*R(j_{W'})_* [lem-pc-derived-direct-image-composition]. By part (1) of [lem-pc-derived-mayer-vietoris-functorial] applied to \\psi, the maps \\psi, R(j_U)_*(\\psi|_U)\\oplus R(j_V)_*(\\psi|_V), R(j_{UV})_*(\\psi|_{U\\cap V}) form a morphism of distinguished triangles MV(K)\\to MV(Rg'_*K'), connecting square included; by part (2) with h=g' (X' qcqs and U', V' quasi-compact by Step 1), MV(Rg'_*K')\\cong Rg'_*MV(K') as distinguished triangles, compatibly with the connecting morphisms. Applying the triangulated functor Rf_* and the composition isomorphism Rf_*Rg'_*\\cong Rg_*Rf'_*, the adjoints of \\alpha_X, \\alpha_U\\oplus\\alpha_V, \\alpha_{U\\cap V} form a morphism of distinguished triangles Rf_*MV(K)\\to Rg_*Rf'_*MV(K'). The adjunction bijection \\mathrm{Hom}(Lg^*A,B)\\cong\\mathrm{Hom}(A,Rg_*B) is natural in A and B and compatible with the shift isomorphisms of the triangulated functors Lg^* and Rg_*, so each of the three squares (the connecting square alpha_X[1]\\circ Lg^*Rf_*(\\delta)=Rf'_*(\\delta')\\circ\\alpha_{U\\cap V} included) commutes because its adjoint square does. Hence (\\alpha_X,\\alpha_U\\oplus\\alpha_V,\\alpha_{U\\cap V}) is a morphism of distinguished triangles.",
+   "uses": [
+    "lem-pc-derived-mayer-vietoris-functorial",
+    "def-pc-derived-base-change-map",
+    "lem-pc-pre-derived-adjoint-functors-general",
+    "lem-pc-derived-direct-image-preserves-qcoh",
+    "lem-pc-derived-direct-image-composition",
+    "def-pc-derived-pullback",
+    "def-pc-derived-direct-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 0DJ9, induction step; naturality of the relative Mayer--Vietoris triangles from Cohomology, Lemma cohomology-lemma-unbounded-relative-mayer-vietoris"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-morphism-affine-schemes-affine",
+  "lem-weil-pbc-affine-morphism-permanence",
+  "lem-weil-pbc-qcqs-over-affine",
+  "lem-pc-derived-mayer-vietoris-triangle",
+  "lem-pc-derived-direct-image-composition",
+  "def-pc-derived-pullback",
+  "def-pc-derived-direct-image",
+  "lem-pc-derived-mayer-vietoris-functorial",
+  "def-pc-derived-base-change-map",
+  "lem-pc-pre-derived-adjoint-functors-general",
+  "lem-pc-derived-direct-image-preserves-qcoh"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 0DJ9, induction step; naturality of the relative Mayer--Vietoris triangles"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -67,12 +119,67 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-pc-rf-single-complex-relative-mayer-vietoris",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-semicon"
+ "unit": "sk-thm-picard-semicon",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-pc-rf-mv-triangle-naturality",
+  "worker": "stage1",
+  "summary": "Split the Tag 0DJ9 naturality clause into (1) formation of the two pushed-forward distinguished Mayer--Vietoris triangles and identification of their terms using derived direct-image composition, and (2) the componentwise commutativity argument from naturality of restriction adjunction maps and the defining comparison morphisms. No new node was needed.",
+  "blueprint": "Realizes the parent proof clause 'induction step using the relative Mayer--Vietoris distinguished triangles for U, V, and U intersect V', specifically its naturality assertion.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-derived-mayer-vietoris-triangle",
+    "why": "The generic derived Mayer--Vietoris triangles are a cross-unit construction required to form both triangles; no node in this unit supplies them."
+   },
+   {
+    "node": "lem-pc-pre-derived-adjoint-functors-general",
+    "why": "Generic derived adjunction Lg^* -| Rg_* used to transpose alpha_W; no node in this unit supplies it."
+   },
+   {
+    "node": "lem-pc-derived-direct-image-preserves-qcoh",
+    "why": "Generic: Rg'_* of a D_QCoh object is in D_QCoh for qcqs g'."
+   },
+   {
+    "node": "lem-weil-pbc-morphism-affine-schemes-affine",
+    "why": "Generic Mathlib fact: a morphism of affine schemes is affine."
+   },
+   {
+    "node": "lem-weil-pbc-affine-morphism-permanence",
+    "why": "Generic Mathlib fact: affine morphisms are stable under base change and are quasi-compact and separated (Tag 01S5)."
+   },
+   {
+    "node": "lem-weil-pbc-qcqs-over-affine",
+    "why": "Generic Mathlib fact: a qcqs scheme over an affine base is qcqs."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-derived-mayer-vietoris-triangle",
+  "lem-pc-pre-derived-adjoint-functors-general",
+  "lem-pc-derived-direct-image-preserves-qcoh",
+  "lem-weil-pbc-morphism-affine-schemes-affine",
+  "lem-weil-pbc-affine-morphism-permanence",
+  "lem-weil-pbc-qcqs-over-affine",
+  "lem-pc-derived-mayer-vietoris-triangle",
+  "lem-pc-pre-derived-adjoint-functors-general",
+  "lem-pc-derived-direct-image-preserves-qcoh",
+  "lem-weil-pbc-morphism-affine-schemes-affine",
+  "lem-weil-pbc-affine-morphism-permanence",
+  "lem-weil-pbc-qcqs-over-affine"
+ ],
+ "reviewed": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-mvn0004",
+  "group": "G1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-mvn0004 (reviewer sub-agent of L); spot-checked: Return R-mvn3136 points 1-4 checked against head: connecting square now via new functoriality node; MV node no longer carries naturality; X'/U'/V' checked; def-pc-derived-base-change-map added (genuine, not a duplicate of def-weil-pbc-ambient-ringed-exchange (pro-etale) or lem-pc-base-change-map-cech (module, separated f)). Parent lem-pc-rf-single-complex-relative-mayer-vietoris uses the item as a morphism of triangles: matches. FIX more, RETURN less: (1) C1 Step 1: bare Tag 01S5/01KU replaced by Mathlib leaves lem-weil-pbc-morphism-affine-schemes-affine, lem-weil-pbc-affine-morphism-permanence, lem-weil-pbc-qcqs-over-affine; (2) B/C4 lem-pc-derived-mayer-vietoris-functorial was imprecise (source/target triangles unnamed, affine q unrelated to h and the cover): restated as (1) naturality of MV(E) in E with delta named as the 08BV boundary, (2) Rh_*MV(E') = MV(Rh_*E') for qcqs h with U'=h^{-1}U, connecting maps included; distinct from lem-sc-derived-mayer-vietoris-triangle (j_! triangle, no naturality) and lem-pc-derived-mayer-vietoris-triangle; (3) C4/D Step 2 rewritten as the adjunction argument: adjoint of alpha_W = Rf_*Rj_W*(psi|_W), functoriality (1) for psi:K->Rg'_*K' and (2) for h=g', transposed via Lg^*-|Rg_* compatible with shifts; (4) item statement now cites def-pc-derived-base-change-map for alpha_W, def node restriction clause reworded; stmt_deps/proof_deps/tool_uses corrected.; 3 file(s) fixed by the reviewer"
+ }
 }
