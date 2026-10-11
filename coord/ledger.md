@@ -3522,3 +3522,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 06:34 L: merged deliver/H1/lem-pc-h0-geom-connected (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.GlobalSectionsGeomConnected AlgebraicGeometry.Scheme.globalSectionsRingHom_bijective_iff_geometricallyConnected)
 - 06:34 L: returned deliver/C1/def-pur-sheaf-tensor-product (reviewer RETURN: Reviewer R-stp0747, head ef646769c. This push undoes the repair the report describes. H3: two of the node's three clause)
 - 06:35 L: merged deliver/F1/lem-pc-derived-lower-truncation-step-ses (stage 2; reviewer FIX; first push; Sheaf.Algebra.Homology.LowerTruncationStepSES CochainComplex.exists_lowerTruncationStepSES)
+- 06:35 L: merged deliver/F1/lem-pc-injective-split-tower-injective (stage 2; reviewer FIX; first push; Sheaf.CategoryTheory.InjectiveSplitTower CategoryTheory.injective_of_injective_split_tower)
