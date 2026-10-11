@@ -1,11 +1,11 @@
 # Work queue
 
-142 items; claim with `tools/claim.py next <group> [--stage N]`.
+138 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (142)
+## Stage 2: nodes to state (138)
 
 | node | distance to Mathlib | kind | blockers |
 |---|---|---|---|
@@ -65,7 +65,6 @@
 | `lem-pc-tor-independent-perfect-tensor-base-change` | 1 | state | 0 |
 | `lem-pqf-quasicompact-h1-zero` | 1 | state | 0 |
 | `lem-sc-affine-derived-cohomology` | 1 | state | 0 |
-| `lem-sc-affine-derived-concentration` | 1 | state | 0 |
 | `lem-sc-affine-derived-pushforward-t-exact` | 1 | state | 0 |
 | `lem-sc-affine-koszul-cech-derived-comparison` | 1 | state | 0 |
 | `lem-sc-affine-perfect-derived-tensor-hom` | 1 | state | 0 |
@@ -98,7 +97,6 @@
 | `lem-sc-proper-upper-shriek-composition` | 1 | state | 0 |
 | `lem-sc-qcoh-acyclic-derived-pushforward-cohomology` | 1 | state | 0 |
 | `lem-sc-qcoh-acyclic-derived-sections-comparison` | 1 | state | 0 |
-| `lem-sc-section-affine-open-kills-cohomology` | 1 | state | 0 |
 | `lem-sc-sheaf-ext-coherent` | 1 | state | 0 |
 | `lem-sc-smooth-proper-curve-dualizing` | 1 | state | 0 |
 | `lem-sc-smooth-proper-diagonal-basechange-upper-shriek` | 1 | state | 0 |
@@ -111,7 +109,6 @@
 | `lem-sc-strict-henselization-dvr` | 1 | state | 0 |
 | `lem-weil-pbc-coherent-formal-modules-local-exactness` | 1 | state | 0 |
 | `lem-weil-pbc-coherent-formal-short-exact-levels` | 1 | state | 0 |
-| `lem-weil-pbc-coherent-serre-vanishing` | 1 | state | 0 |
 | `lem-weil-pbc-cohomology-powers-ideal-application` | 1 | state | 0 |
 | `lem-weil-pbc-cohomology-powers-ideal-rees-finite` | 1 | state | 0 |
 | `lem-weil-pbc-etale-cohomology-limit-of-schemes` | 1 | state | 0 |
@@ -139,7 +136,6 @@
 | `lem-weil-pbc-theorem-formal-functions` | 1 | state | 0 |
 | `lem-weil-pbc-unrestricted-strict-henselization-stalk` | 1 | state | 0 |
 | `lem-weil-pbc-vanishing-projective` | 1 | state | 0 |
-| `lemma-weil-pbc-fibre-product-limit` | 1 | state | 0 |
 | `pqf-lem-fff-vanishing` | 1 | state | 0 |
 | `pqf-lem-serre-criterion` | 1 | state | 0 |
 | `prop-weil-pbc-strict-henselization-stalk-formula` | 1 | state | 0 |
