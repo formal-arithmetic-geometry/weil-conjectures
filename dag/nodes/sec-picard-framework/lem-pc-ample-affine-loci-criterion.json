@@ -160,5 +160,23 @@
   "group": "K1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-aal (reviewer sub-agent of L); spot-checked: Read Properties 01PS (properties-definition-ample) and 01Q3 (properties-proposition-characterize-ample, statement and proof), Morphisms 01VT and 01W6, blueprint lem-pc-very-ample-ample and def-sc-ample. Item statement: hypothesis = 01PS (2) for proper X over a field, conclusion = def-sc-ample; true. Step 1: def-weil-pbc-ample-invertible-module, quasi-compactness from finite type (def-weil-finite-type-morphism). Step 2: lem-weil-pbc-ample-very-ample-immersion-affine-base with A=k (locally finite type from proper), accepted as generic tool (01VT). Step 3: proper-to-separated + proper-immersion-closed. Step 4: the new bridge lem-pc-complete-linear-system-closed, checked true (projection to P(V^vee) defined on the image, cancellation along a separated morphism, proper image closed; Gamma finite-dimensional since X proper), tested on a point, the empty scheme, P^1 with O(1) and O(2). Slopmaster2 Modules/Ample.lean has no declaration stating the item (B10 ok). FIX more, RETURN less: (1) C1 step 3 used separatedness of P_n with no node: cited lem-weil-pbc-projective-space-proj-separated; (2) C1 step 3 passed from the immersion j to 'the finite subsystem of sections' with no node: rewrote step 3 to take s_l from j^*x_l via lem-weil-pbc-projective-space-functor-of-points and to get the closed immersion j_V into P(V^vee) via lem-weil-pbc-closed-immersion-integral-separated-uc (a) and lem-weil-pbc-closed-immersion-from-composite; step 4 now just applies the bridge to V (its narrative repeated the bridge's proof with uncited claims). Fixes: lem-pc-ample-affine-loci-criterion.json: proof steps 1,3,4 uses/text, step 3,4 source, proof_deps, proof_origin (B5: 01Q3's proof contains no linear-projection argument; the bridge has no Stacks tag); lem-pc-complete-linear-system-closed.json: statement cites lem-weil-pbc-projective-space-functor-of-points for 'associated morphism' (+stmt_deps), source.place corrected (not 01Q3), blueprint.from.place set to the sentence of lem-pc-very-ample-ample it serves. Tool uses added: functor-of-points, closed-immersion-from-composite (generic). Start Sat Oct 10 03:14:30 PM UTC 2026, end Sat Oct 10 03:17:16 PM UTC 2026.; 2 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AmpleOfAffineGeneratingLoci",
+  "declaration": "AlgebraicGeometry.isAmple_of_affine_generatingLoci",
+  "file": "lean/Sheaf/AlgebraicGeometry/AmpleOfAffineGeneratingLoci.lean",
+  "statement": "theorem isAmple_of_affine_generatingLoci {K : Type u} [Field K] {X : Scheme.{u}} (f : X ⟶ Spec (.of K)) (L : X.Modules) (hproper : IsProper f) (hL : L.IsInvertible) (h : ∀ x : X, ∃ (n : ℕ) (s : Γ(L.tensorPow n, ⊤)), 0 < n ∧ x ∈ Scheme.Modules.generatingLocus s ∧ IsAffineOpen (Scheme.Modules.generatingLocus s)) : IsAmple f L",
+  "branch": "sheaf-dag",
+  "by": "J1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-aal0719",
+  "group": "J1",
+  "result": "pass",
+  "note": "K field; X Scheme.{u} with f : X -> Spec K, IsProper f (def-weil-proper-morphism); L invertible (recorded IsInvertible); forall x, exists n>0, s : Gamma(L^n, top) with x in generatingLocus s and IsAffineOpen (generatingLocus s) (= X_s for invertible L by Nakayama, generatesAt_iff_mem_basicOpen); conclusion recorded IsAmple f L (def-sc-ample); one direction as node; no Mathlib/source duplicate"
  }
 }
