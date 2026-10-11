@@ -1,16 +1,16 @@
 # Work queue
 
-981 items; claim with `tools/claim.py next <group> [--stage N]`.
+985 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (981)
+## Stage 2: nodes to state (985)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
 | `def-pc-base-change` | 1 | state |
-| `def-pur-sheaf-hom` | 1 | state |
+| `def-pur-hom-complex` | 1 | state |
 | `def-weil-derived-tensor` | 1 | state |
 | `def-weil-pbc-derived-categories` | 1 | state |
 | `def-weil-pbc-finite-torsors` | 1 | state |
@@ -30,6 +30,7 @@
 | `lem-pc-module-pullback-identity-composition` | 1 | state |
 | `lem-pc-pre-derived-adjoint-functors-general` | 1 | state |
 | `lem-pc-ring-pseudo-coherent-iff-all-m` | 1 | state |
+| `lem-pc-sheaf-modules-tensor-closed` | 1 | state |
 | `lem-pc-sites-modules-j-shriek-flat` | 1 | state |
 | `lem-pc-sites-modules-sheafification-flat` | 1 | state |
 | `lem-pc-skyscraper-complex` | 1 | state |
@@ -41,7 +42,6 @@
 | `lem-pc-zero-scheme-pullback-local-coefficient` | 1 | state |
 | `lem-pod-lisse-module-sheaves-as-module-objects` | 1 | state |
 | `lem-pur-derived-change-of-rings` | 1 | state |
-| `lem-sc-affine-cap-section-open` | 1 | state |
 | `lem-sc-ample-finite-principal-affine` | 1 | state |
 | `lem-sc-ample-finite-set-affine` | 1 | state |
 | `lem-sc-ample-proj-local-chart` | 1 | state |
@@ -51,15 +51,15 @@
 | `lem-sc-conductor-sections` | 1 | state |
 | `lem-sc-derived-hom-mayer-vietoris` | 1 | state |
 | `lem-sc-dim-one-ample-invertible` | 1 | state |
-| `lem-sc-dvr-field-extension-order` | 1 | state |
 | `lem-sc-dvr-valuation-ring-characterization` | 1 | state |
 | `lem-sc-enough-globally-generated-ample` | 1 | state |
 | `lem-sc-etale-torsor-pushout-extension` | 1 | state |
 | `lem-sc-ext-derived-composite-natural` | 1 | state |
-| `lem-sc-finite-duality-trace` | 1 | state |
+| `lem-sc-finite-free-internal-hom-exact` | 1 | state |
 | `lem-sc-finite-maximals-over-element` | 1 | state |
 | `lem-sc-finite-pushforward-locally-free` | 1 | state |
 | `lem-sc-finite-sections-cover-qc` | 1 | state |
+| `lem-sc-finite-sheafhom-affine` | 1 | state |
 | `lem-sc-free-prime-membership` | 1 | state |
 | `lem-sc-generic-stalk-finite-length` | 1 | state |
 | `lem-sc-generic-vanishing-kernel-colimit` | 1 | state |
@@ -615,6 +615,7 @@
 | `lem-weil-pbc-module-stalk-filtered-colimit` | 1 | state |
 | `lem-weil-pbc-module-stalk-pullback` | 1 | state |
 | `lem-weil-pbc-module-stalk-tensor` | 1 | state |
+| `lem-weil-pbc-module-tensor-hom-adjunction` | 1 | state |
 | `lem-weil-pbc-n1-descends-finite-domain-extension` | 1 | state |
 | `lem-weil-pbc-n1-local-characterization` | 1 | state |
 | `lem-weil-pbc-n2-ascends-finite-domain-extension` | 1 | state |
@@ -800,6 +801,8 @@
 | `lem-weil-pbc-sheaf-algebraic-structures-objects` | 1 | state |
 | `lem-weil-pbc-sheaf-algebras-directed-colimit` | 1 | state |
 | `lem-weil-pbc-sheaf-cokernel-local-image` | 1 | state |
+| `lem-weil-pbc-sheaf-hom-finite-presentation-colimit` | 1 | state |
+| `lem-weil-pbc-sheaf-hom-finite-presentation-kernel` | 1 | state |
 | `lem-weil-pbc-sheaf-isomorphism-local-open-cover` | 1 | state |
 | `lem-weil-pbc-sheaf-of-modules-from-basis` | 1 | state |
 | `lem-weil-pbc-sheaf-on-basis-extends` | 1 | state |
@@ -854,6 +857,7 @@
 | `lem-weil-pbc-spread-finite-separable-extension` | 1 | state |
 | `lem-weil-pbc-spread-purely-inseparable-factors` | 1 | state |
 | `lem-weil-pbc-stalk-change-of-rings-tensor` | 1 | state |
+| `lem-weil-pbc-stalk-internal-hom-finite-presentation` | 1 | state |
 | `lem-weil-pbc-standard-fpqc-quotient-topology` | 1 | state |
 | `lem-weil-pbc-standard-smooth-include-generators` | 1 | state |
 | `lem-weil-pbc-stein-factorization-affine` | 1 | state |
@@ -991,7 +995,7 @@
 | `lem-sc-normalization-properties` | 3 | state |
 | `def-nagata-fixed-base-separated-stage` | 6 | state |
 
-Not open yet: 973 nodes that wait for a statement dependency, 40 nodes that wait for stage 1.
+Not open yet: 965 nodes that wait for a statement dependency, 40 nodes that wait for stage 1.
 
 ## Stage 3: modules to prove (0)
 
