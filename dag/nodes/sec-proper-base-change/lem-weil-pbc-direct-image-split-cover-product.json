@@ -217,5 +217,23 @@
   "by": "L",
   "result": "pass",
   "note": "Reviewed by the lead (opus-relaunch6). Agent-written proof (Stacks 095B calls it clear), five steps, no new node: the clopen pieces of W x_X Y and the sections sigma_{j,W} as an etale covering, the sheaf condition for a covering with empty pairwise fibre products written out (as in the finite-etale-trace-degree node), the restrictions and their sectionwise product (sites limits node), the Lambda_X-module structures made precise (Stacks 03D6/03DH: def-weil-pbc-direct-image does not define the module structure on f_*H), conclusion. Stage-3 note: 'an etale sheaf on a disjoint union is the product of its restrictions' is written inside steps in three nodes now; a reusable node would match Presieve.isSheafFor_iff_preservesProduct (Sites/Preserves.lean:163)."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.DirectImageSplitCoverProduct",
+  "declaration": "AlgebraicGeometry.directImage_splitCover_product",
+  "file": "lean/Sheaf/Paper/DirectImageSplitCoverProduct.lean",
+  "statement": "theorem directImage_splitCover_product {X Y : Scheme.{u}} {J : Type w} [Finite J] {Λ : Type (u + 1)} [CommRing Λ] (f : Y ⟶ X) (V : J → Scheme.{u}) (i : ∀ j, V j ⟶ Y) (t : ∀ j, X ⟶ V j) (hcolim : IsColimit (Cofan.mk Y i)) (hinv₁ : ∀ j, t j ≫ i j ≫ f = 𝟙 X) (hinv₂ : ∀ j, i j ≫ f ≫ t j = 𝟙 (V j)) (hopens : ∀ j, AlgebraicGeometry.IsOpenImmersion (i j)) (hclosed : ∀ j, AlgebraicGeometry.IsClosedImmersion (i j)) (H : Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)) : letI : ∀ j, IsOpenImmersion (i j) := hopens letI : ∀ j, IsIso (t j) := fun j ↦ ⟨⟨i j ≫ f, hinv₁ j, hinv₂ j⟩⟩ let s := fun j ↦ t j ≫ i j let R := fun j ↦ (Etale.localizationRestriction (ModuleCat.{u + 1} Λ) (s j) inferInstance).obj H ∃ e : (Etale.lowerStar (ModuleCat.{u + 1} Λ) f).obj H ≅ ∏ᶜ R, ∀ (j : J) (W : X.Etale), ((e.hom ≫ Pi.π R j).hom.app (op W)) = H.obj.map (MorphismProperty.Over.homMk (A := (MorphismProperty.Over.map ⊤ (inferInstance : Etale (s j))).obj W) (B := (MorphismProperty.Over.pullback @Etale ⊤ f).obj W) (pullback.lift (𝟙 W.left) (W.hom ≫ s j) (by change (𝟙 W.left) ≫ W.hom = (W.hom ≫ s j) ≫ f simp [s, Category.assoc, hinv₁ j])) (by simp)).op",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-dsc1000",
+  "group": "E1",
+  "result": "pass",
+  "note": "f:Y->X; finite possibly empty J (Type w, Finite); V_j clopen covering disjoint = IsColimit Cofan + IsOpenImmersion + IsClosedImmersion; f|V_j iso with inverse t j (hinv1/hinv2), s_j = t j ≫ i j; Λ comm ring, H ModuleCat-valued sheaf on Y_et; f_* = Etale.lowerStar; H|_{s_j} = Etale.localizationRestriction (literal precomposition with Over.map, no sheafification); σ_{j,W} = pullback.lift (𝟙 W) (w ≫ s_j) as Over.homMk; ∃ iso to ∏ᶜ with every component = H(σ_{j,W}); no statement change"
  }
 }

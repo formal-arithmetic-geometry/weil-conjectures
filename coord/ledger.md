@@ -4130,3 +4130,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 09:59 L: merged deliver/J1/lem-weil-pbc-etale-section-lifting-henselian-pair (stage 2; reviewer PASS; first push; Sheaf.RingTheory.HenselianOfEtaleSectionLifting henselianRing_of_etale_section_lifting)
 - 10:00 L: merged deliver/M1/lem-weil-pbc-etale-section-idempotent-splitting (stage 2; reviewer PASS; first push; Sheaf.RingTheory.EtaleSectionIdempotentSplitting Algebra.Etale.exists_idempotent_splitting_of_algHom)
 - 10:00 L: merged deliver/C1/lem-weil-pbc-etale-localize-upstairs (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.EtaleLocalizeUpstairs AlgebraicGeometry.exists_etale_localization_of_prime_mem)
+- 10:00 L: merged deliver/E1/lem-weil-pbc-direct-image-split-cover-product (stage 2; reviewer PASS; first push; Sheaf.Paper.DirectImageSplitCoverProduct AlgebraicGeometry.directImage_splitCover_product)
