@@ -23,7 +23,7 @@ What is open follows the stage documents. A node that no target reaches is not o
            (the key printed by `items` is rank*1000 + distance);
   stage 2  when stage 1 has split it (a definition naming the notions it is built from, or a statement with its proof in steps),
            it has no Lean declaration yet, and every node its statement needs has one or is a Mathlib leaf;
-           nearest to Mathlib first (the fewest dependency steps down to a Mathlib leaf), so that the
+           definitions before statements (launcher, 2026-10-11), each nearest to Mathlib first (the fewest dependency steps down to a Mathlib leaf), so that the
            statements climb from Mathlib upward. With SHEAF_EARLY_REVIEW=1 in coord/sheaf.env the nodes
            needed to state the targets come first instead.
 
@@ -248,7 +248,9 @@ class Dag:
             if not all(self.stated(c) for c in self.deps(i, "stmt")):
                 why["waits for a statement dependency"] += 1; continue
             items.append((0 if early and i in tsc else 1, self.h(i), i))
-        return sorted(items), why
+        # launcher, 2026-10-11 11:55 UTC (STAGE 2 ORDER: DEFINITIONS FIRST): a statement cannot be written before its
+        # definitions, so within the open items the definitions come first, then the statements, each by the order above
+        return sorted(items, key=lambda t: (t[0], not is_def(self.live[t[2]]), t[1], t[2])), why
 
     def waiting(self) -> list[tuple[str, str]]:
         """(module, node it waits for) for every stated node whose proof uses an unstated node."""
