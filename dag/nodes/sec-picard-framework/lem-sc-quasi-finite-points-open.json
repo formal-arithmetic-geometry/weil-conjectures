@@ -151,5 +151,23 @@
   "group": "H1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-qfo1730 (reviewer sub-agent of L); spot-checked: Steps 1-4 against pqf-def-quasifinite (1), lem-weil-pbc-ring-quasi-finite-locus-open, lem-weil-pbc-affine-open-spec-points and Tag 01TI; mathlib_candidate Scheme.Hom.isOpen_quasiFiniteAt kept as candidate with why_not_exact recorded (not a leaf, B8 n/a). FIX more, RETURN less: (1) C4 step 5 applied lem-weil-pbc-lqf-restriction-to-opens, whose hypothesis is f locally quasi-finite, to an arbitrary f; rewrote step 5 to witness pqf-def-quasifinite (1)/(2) for U->S with the U_g of step 3, dropped the citation from uses/proof_deps/tool_uses; (2) step 3 now states f(U_g) in V and finite type of A->B_g required by the definition.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.QuasiFiniteLocusOpen",
+  "declaration": "AlgebraicGeometry.Scheme.Hom.isOpen_quasiFiniteAtPoint",
+  "file": "lean/Sheaf/AlgebraicGeometry/QuasiFiniteLocusOpen.lean",
+  "statement": "theorem isOpen_quasiFiniteAtPoint {X S : Scheme.{u}} (f : X ⟶ S) : ∃ U : X.Opens, (∀ x : X, x ∈ U ↔ IsQuasiFiniteAtPoint f x) ∧ IsLocallyQuasiFinite (U.ι ≫ f)",
+  "branch": "sheaf-dag",
+  "by": "J1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-qfp1129",
+  "group": "J1",
+  "result": "pass",
+  "note": "f : X ⟶ S arbitrary (no LocallyOfFiniteType/instances added); ∃ U : X.Opens with x ∈ U ↔ landed Scheme.Hom.IsQuasiFiniteAtPoint f x (both directions, all x); IsLocallyQuasiFinite (U.ι ≫ f) = landed def of pqf-def-quasifinite clause 2 on the induced morphism; #check confirms Scheme.Hom namespace resolution; not Mathlib's isOpen_quasiFiniteAt (needs LocallyOfFiniteType, stalk-level QuasiFiniteAt); no new definitions; 5-step proof in docstring"
  }
 }
