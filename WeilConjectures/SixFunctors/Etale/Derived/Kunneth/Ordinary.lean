@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.AlgebraicGeometry.InvertibleExponent
+public import WeilConjectures.AlgebraicGeometry.Sites.PointCohomology
 public import WeilConjectures.SixFunctors.Etale.Derived.GlobalSections
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerStarProjection
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.FlatModuleCat
@@ -55,7 +56,7 @@ This file also introduces the constant complex functor `D(Λ) ⥤ D(X_ét, Λ)` 
 
 universe u' u
 
-open CategoryTheory Limits MonoidalCategory
+open CategoryTheory Limits MonoidalCategory Opposite
 
 open scoped CategoryTheory.Functor
 
@@ -301,14 +302,132 @@ noncomputable def constantFunctorCompLeftDerivedUpperStarIso {X Y : Scheme.{u}} 
     (Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
       Functor.mapDerivedCategoryNatIso (constantSheafCompUpperStarIso Λ f)
 
+section Point
+
+variable {k : Type u} [Field k] [IsSepClosed k]
+
+/-- Over a separably closed field `k`, the sheafification map of a presheaf of `Λ`-modules on
+the small étale site of `Spec k` is bijective on global sections: every covering sieve of the
+terminal object contains the identity. -/
+lemma bijective_toSheafify_app_etalePoint
+    (P : (Spec (.of k)).Etaleᵒᵖ ⥤ ModuleCat.{u + 1} Λ) :
+    Function.Bijective
+      ((toSheafify (Spec (.of k)).smallEtaleTopology P).app (op (etalePoint k))) := by
+  constructor
+  · intro x y h
+    have := id_mem_of_mem_smallEtaleTopology_of_isSepClosed k _
+      (Presheaf.equalizerSieve_mem (Spec (.of k)).smallEtaleTopology
+        (toSheafify (Spec (.of k)).smallEtaleTopology P) x y h)
+    simpa using this
+  · intro s
+    obtain ⟨t, ht⟩ := id_mem_of_mem_smallEtaleTopology_of_isSepClosed k _
+      (Presheaf.imageSieve_mem (Spec (.of k)).smallEtaleTopology
+        (toSheafify (Spec (.of k)).smallEtaleTopology P) (U := op (etalePoint k)) s)
+    exact ⟨t, ht.trans (by simp)⟩
+
+instance additive_sheafSections_obj (U : (Spec (.of k)).Etaleᵒᵖ) :
+    ((sheafSections (Spec (.of k)).smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj U).Additive where
+  map_add := rfl
+
+instance additive_constantSheaf (X : Scheme.{u}) :
+    (constantSheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)).Additive :=
+  inferInstanceAs (Functor.const _ ⋙ presheafToSheaf _ _).Additive
+
+instance isIso_unit_constantSheafAdj_etalePoint :
+    IsIso (constantSheafAdj (Spec (.of k)).smallEtaleTopology (ModuleCat.{u + 1} Λ)
+      isTerminalEtalePoint).unit := by
+  have (M : ModuleCat.{u + 1} Λ) : IsIso ((constantSheafAdj (Spec (.of k)).smallEtaleTopology
+      (ModuleCat.{u + 1} Λ) isTerminalEtalePoint).unit.app M) := by
+    rw [constantSheafAdj, Adjunction.comp_unit_app, sheafificationAdjunction_unit_app]
+    have : IsIso ((constantPresheafAdj (ModuleCat.{u + 1} Λ)
+        (isTerminalEtalePoint (k := k))).unit.app M) := by
+      rw [constantPresheafAdj_unit_app]; infer_instance
+    have : IsIso ((toSheafify (Spec (.of k)).smallEtaleTopology
+        ((Functor.const _).obj M)).app (op (etalePoint k))) :=
+      (ConcreteCategory.isIso_iff_bijective _).2 (bijective_toSheafify_app_etalePoint Λ _)
+    dsimp
+    infer_instance
+  exact NatIso.isIso_of_isIso_app _
+
+/-- Over a separably closed field `k`, a morphism of étale sheaves of `Λ`-modules on `Spec k`
+which is bijective on global sections is an isomorphism. -/
+lemma isIso_of_isIso_app_etalePoint
+    {F G : Sheaf (Spec (.of k)).smallEtaleTopology (ModuleCat.{u + 1} Λ)} (φ : F ⟶ G)
+    [hφ : IsIso (φ.hom.app (op (etalePoint k)))] : IsIso φ := by
+  let Γ := (sheafSections (Spec (.of k)).smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj
+    (op (etalePoint k))
+  have hinj := (ConcreteCategory.isIso_iff_bijective _).1 hφ
+  have : Γ.IsRightAdjoint := (constantSheafAdj _ _ isTerminalEtalePoint).isRightAdjoint
+  have : Mono φ := by
+    refine Preadditive.mono_of_kernel_zero ?_
+    have hK : IsZero (kernel φ) := isZero_of_subsingleton_sections_of_isSepClosed _ ⟨fun x y ↦ by
+      have hι : Mono (Γ.map (kernel.ι φ)) := Γ.map_mono _
+      rw [ModuleCat.mono_iff_injective] at hι
+      apply hι
+      apply hinj.1
+      change ((kernel.ι φ ≫ φ).hom.app _) x = ((kernel.ι φ ≫ φ).hom.app _) y
+      simp⟩
+    exact hK.eq_of_src _ _
+  have : Epi φ := by
+    refine Preadditive.epi_of_cokernel_zero ?_
+    have hQ : IsZero (cokernel φ) := isZero_of_subsingleton_sections_of_isSepClosed _ ⟨fun x y ↦ by
+      have h0 : ∀ z, (cokernel.π φ).hom.app (op (etalePoint k)) z = 0 := fun z ↦ by
+        obtain ⟨w, rfl⟩ := hinj.2 z
+        change ((φ ≫ cokernel.π φ).hom.app _) w = 0
+        simp
+      obtain ⟨x', rfl⟩ := surjective_app_of_epi_of_isSepClosed k (cokernel.π φ) x
+      obtain ⟨y', rfl⟩ := surjective_app_of_epi_of_isSepClosed k (cokernel.π φ) y
+      rw [h0, h0]⟩
+    exact hQ.eq_of_tgt _ _
+  exact isIso_of_mono_of_epi φ
+
+instance isIso_counit_constantSheafAdj_etalePoint :
+    IsIso (constantSheafAdj (Spec (.of k)).smallEtaleTopology (ModuleCat.{u + 1} Λ)
+      isTerminalEtalePoint).counit := by
+  let adj := constantSheafAdj (Spec (.of k)).smallEtaleTopology (ModuleCat.{u + 1} Λ)
+    (isTerminalEtalePoint (k := k))
+  have (F : Sheaf (Spec (.of k)).smallEtaleTopology (ModuleCat.{u + 1} Λ)) :
+      IsIso (adj.counit.app F) := by
+    have : IsIso ((adj.counit.app F).hom.app (op (etalePoint k))) := by
+      have h := adj.right_triangle_components F
+      have : IsIso (adj.unit.app (((sheafSections _ _).obj (op (etalePoint k))).obj F)) :=
+        inferInstance
+      have : IsIso (adj.unit.app (((sheafSections _ _).obj (op (etalePoint k))).obj F) ≫
+          ((sheafSections _ _).obj (op (etalePoint k))).map (adj.counit.app F)) := by
+        rw [h]; infer_instance
+      exact IsIso.of_isIso_comp_left (adj.unit.app _)
+        (((sheafSections _ _).obj (op (etalePoint k))).map (adj.counit.app F))
+    exact isIso_of_isIso_app_etalePoint Λ _
+  exact NatIso.isIso_of_isIso_app _
+
+/-- Over a separably closed field `k`, étale sheaves of `Λ`-modules on `Spec k` are
+`Λ`-modules: the constant sheaf functor is an equivalence, with inverse the global sections. -/
+noncomputable def constantSheafEquivalenceOfIsSepClosed :
+    ModuleCat.{u + 1} Λ ≌ Sheaf (Spec (.of k)).smallEtaleTopology (ModuleCat.{u + 1} Λ) :=
+  (constantSheafAdj (Spec (.of k)).smallEtaleTopology (ModuleCat.{u + 1} Λ)
+    isTerminalEtalePoint).toEquivalence
+
+end Point
 /-- Over a separably closed field `k`, every object `C` of `D((Spec k)_ét, Λ)` is the constant
 complex on its derived global sections: `C ≅ RΓ(Spec k, C)_{Spec k}`. -/
 theorem nonempty_iso_constantFunctor_rightDerivedGlobalSections_of_isSepClosed {k : Type u}
     [Field k] [IsSepClosed k]
     (C : DerivedCategory (Sheaf (Spec (.of k)).smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
     Nonempty (C ≅ (constantFunctor Λ (Spec (.of k))).obj
-      ((rightDerivedGlobalSections (ModuleCat.{u + 1} Λ) (Spec (.of k))).obj C)) :=
-  sorry
+      ((rightDerivedGlobalSections (ModuleCat.{u + 1} Λ) (Spec (.of k))).obj C)) := by
+  let E := constantSheafEquivalenceOfIsSepClosed Λ (k := k)
+  let Γ := (sheafSections (Spec (.of k)).smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj
+    (op (etalePoint k))
+  have : Γ.IsEquivalence := E.isEquivalence_inverse
+  have : E.functor.Additive := additive_constantSheaf Λ _
+  have : E.inverse.Additive := additive_sheafSections_obj Λ _
+  let e : rightDerivedGlobalSections (ModuleCat.{u + 1} Λ) (Spec (.of k)) ≅
+      Γ.mapDerivedCategory :=
+    Functor.rightDerivedFunctorNatIso
+      (Sheaf.ΓNatIsoSheafSections _ _ isTerminalEtalePoint) ≪≫
+      Γ.rightDerivedFunctorIsoMapDerivedCategory
+  exact ⟨(E.mapDerivedCategory.counitIso.app C).symm ≪≫
+    (constantFunctor Λ _).mapIso (e.app C).symm⟩
 
 end Inputs
 
