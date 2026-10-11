@@ -140,16 +140,17 @@ noncomputable def Etale.etaleLowerShriekTensorIso (F : Sheaf V.smallEtaleTopolog
     (G : Sheaf U.smallEtaleTopology A) :
     (Etale.etaleLowerShriek A f h).obj (F ⊗ ((f)^*[A]).obj G) ≅
       (Etale.etaleLowerShriek A f h).obj F ⊗ G :=
-  have := Etale.isIso_lanProjectionMap_overMap A h F.val G.val
+  have := Etale.isIso_lanProjectionMap_overMap A h F.obj G.obj
   (Etale.etaleLowerShriek A f h).mapIso
       (tensorIso (asIso ((sheafificationAdjunction _ A).counit.app F)).symm
           (asIso ((sheafificationAdjunction _ A).counit.app (((f)^*[A]).obj G))).symm ≪≫
         Functor.Monoidal.μIso (presheafToSheaf V.smallEtaleTopology A) _ _ ≪≫
-        (presheafToSheaf V.smallEtaleTopology A).mapIso (whiskerLeftIso F.val
-          ((sheafToPresheaf _ A).mapIso ((Etale.upperStarIsoLocalizationRestriction A f h).app G)))) ≪≫
+        (presheafToSheaf V.smallEtaleTopology A).mapIso (whiskerLeftIso F.obj
+          ((sheafToPresheaf _ A).mapIso
+            ((Etale.upperStarIsoLocalizationRestriction A f h).app G)))) ≪≫
     (Etale.presheafToSheafCompEtaleLowerShriekIso A h).app _ ≪≫
     (presheafToSheaf U.smallEtaleTopology A).mapIso
-      (asIso ((MorphismProperty.Over.map ⊤ h).op.lanProjectionMap F.val G.val)) ≪≫
+      (asIso ((MorphismProperty.Over.map ⊤ h).op.lanProjectionMap F.obj G.obj)) ≪≫
     (Functor.Monoidal.μIso (presheafToSheaf U.smallEtaleTopology A) _ _).symm ≪≫
     whiskerLeftIso _ (asIso ((sheafificationAdjunction _ A).counit.app G))
 
