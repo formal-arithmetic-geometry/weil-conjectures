@@ -1,11 +1,11 @@
 # Work queue
 
-139 items; claim with `tools/claim.py next <group> [--stage N]`.
+134 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (139)
+## Stage 2: nodes to state (134)
 
 | node | distance to Mathlib | kind | blockers |
 |---|---|---|---|
@@ -47,7 +47,6 @@
 | `lem-pc-ringed-space-rgamma-derived-limit` | 1 | state | 0 |
 | `lem-pc-ringed-space-sheafification-cohomology` | 1 | state | 0 |
 | `lem-pc-ringed-spaces-derived-direct-image-composition` | 1 | state | 0 |
-| `lem-pur-derived-functor-triangles-05sc` | 1 | state | 0 |
 | `lem-sc-affine-koszul-cech-derived-comparison` | 1 | state | 0 |
 | `lem-sc-affine-perfect-derived-tensor-hom` | 1 | state | 0 |
 | `lem-sc-affine-projective-complex-derived-hom` | 1 | state | 0 |
@@ -80,7 +79,6 @@
 | `lem-weil-pbc-finite-coproduct-cohomology-assembly` | 1 | state | 0 |
 | `lem-weil-pbc-finite-geometric-point-coproduct-cohomology` | 1 | state | 0 |
 | `lem-weil-pbc-formal-system-support-constant` | 1 | state | 0 |
-| `lem-weil-pbc-formal-systems-kernel-rees-finite` | 1 | state | 0 |
 | `lem-weil-pbc-gabber-absolutely-algebraically-closed` | 1 | state | 0 |
 | `lem-weil-pbc-gabber-h1-absolutely-algebraically-closed` | 1 | state | 0 |
 | `lem-weil-pbc-geometric-point-cohomology` | 1 | state | 0 |
@@ -105,13 +103,10 @@
 | `lem-weil-pbc-universal-thickening-open-restriction` | 1 | state | 0 |
 | `lem-weil-pbc-zero-dimensional-base-change-points` | 1 | state | 0 |
 | `lem-weil-pbc-zero-dimensional-cohomology` | 1 | state | 0 |
-| `lem-weil-tower-split-envelope` | 1 | state | 0 |
 | `sbc-lem-higher-direct-image-presheaf` | 1 | state | 0 |
 | `lem-exc-coinduced-continuous-acyclic` | 2 | state | 0 |
 | `lem-exc-coinduced-homotopy-identity` | 2 | state | 0 |
 | `lem-pc-affine-perfect-hom-colimit` | 2 | state | 0 |
-| `lem-pc-bounded-above-flat-kflat` | 2 | state | 0 |
-| `lem-pc-finite-projective-cokernel-localization` | 2 | state | 0 |
 | `lem-pc-rf-single-complex-inherited-tensor-condition` | 2 | state | 0 |
 | `lem-pc-ring-pseudo-coherent-summand` | 2 | state | 0 |
 | `lem-sc-finite-locally-free-derived-hom` | 2 | state | 0 |
