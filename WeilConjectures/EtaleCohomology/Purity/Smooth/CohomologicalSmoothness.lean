@@ -324,7 +324,22 @@ identifies them with those of `u ≫ f` and concludes by
 `AlgebraicGeometry.Etale.isIso_of_isIso_leftDerivedUpperStar_map_of_surjective`. This needs the
 canonical maps and their compatibility with the canonical identification `Lu^* Rf^! ≅ R(u ≫ f)^!`;
 neither is available in the library, and isomorphisms whose existence alone is known cannot be
-descended along `u`. -/
+descended along `u`: objects of `D(X_ét, Λ)` that become isomorphic after `Lu^*` need not be
+isomorphic, so clauses 2 and 3 of the definition can only be descended through a morphism
+between the two sides that is defined on `X`. The routes that were tried:
+* the canonical tensor map `ω_f ⊗ᴸ Lf^* K ⟶ Rf^! K`, the adjunct of the inverse projection
+  formula followed by the counit, can be defined; but identifying `Lu^*` of it (or `Ru^!` of it,
+  `Ru^! ≅ Lu^*` being natural) with the map of `u ≫ f` needs the projection formula to be
+  compatible with the composition `R(u ≫ f)_! ≅ Rf_! ⋙ Ru_!`, which the library only records
+  objectwise (`sk-prop-sf-pf-coherence`);
+* a canonical `Lu^* Rf^! ⟶ R(u ≫ f)^!` is the adjunct of `R(u ≫ f)_! Lu^* ⟶ Rf_! Ru_! Lu^* ⟶ Rf_!`,
+  which needs a canonical composition isomorphism for `R_!` and the adjunction `Ru_! ⊣ Lu^*`
+  for an étale `u` that is not an open immersion; neither exists;
+* for clause 1 alone, invertibility descends through the evaluation `L ⊗ᴸ RHom(L, Λ) ⟶ Λ`,
+  but this needs the derived internal hom to commute with `Lu^*`, which is not available on the
+  étale site either;
+* stating the definition with the canonical maps instead makes the composition law and the
+  smooth case depend on the same missing coherences. -/
 theorem IsCohomologicallySmooth.of_comp_of_surjective {U X Y : Scheme.{u}} (u : U ⟶ X)
     [Etale u] [Surjective u] [IsSeparated u] [QuasiCompact u] (f : X ⟶ Y)
     [HasCompactification f] [HasCompactification (u ≫ f)]
