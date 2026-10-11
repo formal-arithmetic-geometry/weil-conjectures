@@ -29,7 +29,8 @@
   "def-pc-f-subfunctor",
   "def-pc-invertible-in-degree-zero",
   "def-pc-base-change",
-  "def-sc-invertible-module"
+  "def-sc-invertible-module",
+  "lem-pc-module-pullback-adjunction"
  ],
  "proof": [
   {
@@ -121,5 +122,23 @@
   "group": "C1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-zab1915 (reviewer sub-agent of L); spot-checked: Step 1 specializes lem-pc-arrow-iso-pullback-counit (field, geom. integral, injective resolutions, i, L in F(T)) with geometric integrality from prop-pc-xk-integral (2); injective-resolution hypothesis now in the item statement (E7 change named, source-required). No cycle: arrow-iso proof_deps (rf-base-change-flat-module, smooth-flat, module-pullback-*) do not reach this item or lem-pc-zero-scheme-recd; base change of the counit is argued in arrow-iso's proof via lem-pc-rf-base-change-flat-module. Tool uses accepted as generic. No repairs."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.Picard.AdjunctionBaseChange",
+  "declaration": "AlgebraicGeometry.nonempty_arrowIso_moduleBaseChange_counit",
+  "file": "lean/Sheaf/AlgebraicGeometry/Picard/AdjunctionBaseChange.lean",
+  "statement": "theorem nonempty_arrowIso_moduleBaseChange_counit {k : Type u} [Field k] [IsSepClosed k] {X : Scheme.{u}} (f : X ⟶ Spec (.of k)) [f.IsSmoothProjectiveCurve] (σ : Spec (.of k) ⟶ X) (hσ : σ ≫ f = 𝟙 (Spec (.of k))) [∀ T : Over (Spec (.of k)), HasInjectiveResolutions (pullback f T.hom).Modules] {T T' : Over (Spec (.of k))} (i : T' ⟶ T) (ℒ : picardInvertibleDirectImageClasses f σ hσ T) : let L := (fromSkeleton _).obj ℒ.1.1.val let L' := (Scheme.Modules.moduleBaseChange f i).obj L let adj := Classical.choose (Scheme.Modules.exists_tensorPullbackAdjunction (pullback.snd f T.hom)) let adj' := Classical.choose (Scheme.Modules.exists_tensorPullbackAdjunction (pullback.snd f T'.hom)) Nonempty (Arrow.mk ((Scheme.Modules.moduleBaseChange f i).map (adj.counit.app L)) ≅ Arrow.mk (adj'.counit.app L'))",
+  "branch": "sheaf-dag",
+  "by": "K1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-zsa1138",
+  "group": "K1",
+  "result": "pass",
+  "note": "IsSepClosed k (no geom-integrality added)/explicit f with IsSmoothProjectiveCurve/section σ,hσ/∀T HasInjectiveResolutions on pullback f T.hom (same universe u)/i:T'⟶T in Over/ℒ in landed E1 picardInvertibleDirectImageClasses (IsInvertibleDirectImage = R0 invertible, Rq=0 q>0)/f_T=pullback.snd, i'=baseChangeMap via moduleBaseChange=tensorPullback(baseChangeMap)/counits of Classical.choose exists_tensorPullbackAdjunction/Nonempty Arrow iso; compiled against landed module in L sandbox; IsSepClosed not inferInstance; duplicate dependency module reverted to E1's landed record; reverted the delivery's change of existing node(s) def-pc-f-subfunctor (--revert-nodes; kept as on sheaf-dag)"
  }
 }
