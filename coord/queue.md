@@ -1,11 +1,11 @@
 # Work queue
 
-969 items; claim with `tools/claim.py next <group> [--stage N]`.
+966 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (969)
+## Stage 2: nodes to state (966)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -25,7 +25,6 @@
 | `lem-pc-flat-module-descent` | 1 | state |
 | `lem-pc-hilb-containment-locus` | 1 | state |
 | `lem-pc-homeo-pure-insep` | 1 | state |
-| `lem-pc-kflat-derived-tensor-associator` | 1 | state |
 | `lem-pc-module-pullback-identity-composition` | 1 | state |
 | `lem-pc-pre-derived-adjoint-functors-general` | 1 | state |
 | `lem-pc-projective-base-change` | 1 | state |
@@ -43,7 +42,6 @@
 | `lem-sc-glue-component-transition-cocycle` | 1 | state |
 | `lem-sc-hilbert-denominator-ideal-nowhere-dense` | 1 | state |
 | `lem-sc-hilbert-embedded-points-affine-localization` | 1 | state |
-| `lem-sc-integral-closure-dedekind-surjective-fibres` | 1 | state |
 | `lem-sc-invert-s-cohomology-separated-induction` | 1 | state |
 | `lem-sc-krull-akizuki-noetherian` | 1 | state |
 | `lem-sc-lfp-field-extension-pointwise-descent` | 1 | state |
@@ -56,7 +54,6 @@
 | `lem-sc-p1-tor-dimension-shift-natural` | 1 | state |
 | `lem-sc-p1-tor-dimension-shifting` | 1 | state |
 | `lem-sc-pic-lift-closed-immersion-dim-le-one` | 1 | state |
-| `lem-sc-pic-proper-decomposition` | 1 | state |
 | `lem-sc-pic-proper-ntorsion` | 1 | state |
 | `lem-sc-picard-diagonal-locally-closed` | 1 | state |
 | `lem-sc-picard-h1-product-injective` | 1 | state |
