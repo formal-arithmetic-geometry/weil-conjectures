@@ -159,5 +159,23 @@
   "group": "G1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of G1; spot-checked by L: five steps follow Stacks 088A: 087T identification, G_e from hypothesis (1), 2t/4t bounds via the 0888 node, 0889 (new unsplit node) and its uniqueness; note: step 1 relies on clause (2) of lem-weil-pbc-closed-immersion-coherent-equivalence, whose wording 'supported on Z' should read 'annihilated by the ideal sheaf' (stage 3)"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GrothendieckExistenceDevissage",
+  "declaration": "AlgebraicGeometry.grothendieck_existence_devissage",
+  "file": "lean/Sheaf/AlgebraicGeometry/GrothendieckExistenceDevissage.lean",
+  "statement": "theorem grothendieck_existence_devissage {X : Scheme.{u}} [IsNoetherian X] (I K : X.IdealSheafData) (M : CoherentFormalModule X I) (hthick : ∀ (e : ℕ), 1 ≤ e → ∀ (hZ : IsNoetherian (K ^ e).subscheme), Functor.IsEquivalence (@completion ((K ^ e).subscheme) hZ (I.comap (K ^ e).subschemeι))) (H : CoherentModules X) (α : M ⟶ completion X I |>.obj H) (htorsion : ∃ t : ℕ, 1 ≤ t ∧ ∃ k : KernelFork α, ∃ c : CokernelCofork α, Nonempty (IsLimit k) ∧ Nonempty (IsColimit c) ∧ (∀ n : ℕ, IsZero (Scheme.idealModuleProduct (Scheme.idealSheafPower K.toModulesι t).2 (k.pt.obj.obj (op n)))) ∧ (∀ n : ℕ, IsZero (Scheme.idealModuleProduct (Scheme.idealSheafPower K.toModulesι t).2 (c.pt.obj.obj (op n))))) : ∃ F : CoherentModules X, Nonempty ((completion X I).obj F ≅ M)",
+  "branch": "sheaf-dag",
+  "by": "Q1",
+  "date": "2026-10-12",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "Q1",
+  "result": "pass",
+  "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
  }
 }
