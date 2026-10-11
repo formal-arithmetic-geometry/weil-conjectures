@@ -33,12 +33,13 @@ No derived completeness condition is imposed.
 
 ## Sorried input
 
-The derived category uses the `sorry`ed instances of
+The bounded constructible complexes on a topologically noetherian scheme form a triangulated
+subcategory (`ProEtale.isTriangulated_boundedConstructible`). This rests on the fact that
+constructible sheaves on such a scheme are closed under kernels, cokernels and extensions,
+which is not formalized; the instance is `sorry`ed. Noetherianity is assumed only there: the
+definition `ProEtale.boundedConstructible` makes sense on any scheme. The derived category
+itself uses the `sorry`ed instances of
 `WeilConjectures.CategoryTheory.ModuleObjects.DerivedCategory`.
-
-That the bounded constructible complexes form a triangulated subcategory is not stated here for
-a general `R`: it is stated, on a topologically noetherian scheme, for the `ℓ`-adic coefficient
-rings in `WeilConjectures.ConstructibleSheaf.ProEtaleModule.EllAdic`.
 
 -/
 
@@ -85,5 +86,11 @@ lemma mem_boundedConstructible_iff
 /-- The bounded constructible derived category `D_cons(X_proét, R)`. -/
 abbrev BoundedConstructible : Type _ :=
   (boundedConstructible R).FullSubcategory
+
+/-- The bounded constructible complexes on a topologically noetherian scheme form a triangulated
+subcategory. -/
+instance isTriangulated_boundedConstructible [TopologicalSpace.NoetherianSpace X] :
+    (boundedConstructible R).IsTriangulated :=
+  sorry
 
 end AlgebraicGeometry.ProEtale
