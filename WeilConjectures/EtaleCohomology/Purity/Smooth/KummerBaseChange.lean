@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.KummerClass
 public import WeilConjectures.SixFunctors.Etale.Derived.LocalizationBaseChange
+public import WeilConjectures.SixFunctors.Etale.Derived.GeometricPoint
 
 /-!
 # Base change of the Kummer boundary
@@ -19,9 +20,20 @@ is `∂κ(e^* f)`. This is the naturality of the Kummer class
 the supported localization triangle
 (`AlgebraicGeometry.Etale.supportedLocalizationBoundary_baseChange`).
 
+We also read classes with supports as morphisms `Λ_Z ⟶ Ri^! L` and restrict these morphisms
+along base changes (`AlgebraicGeometry.Etale.restrictSupportedHom`). Precomposition with
+endomorphisms of the constant complexes, pulled back along the maps of schemes
+(`AlgebraicGeometry.Etale.constantComplexEndPullback`), is compatible with this restriction.
+
+## Main definitions
+
+- `AlgebraicGeometry.Etale.constantComplexEndPullback`
+- `AlgebraicGeometry.Etale.restrictSupportedHom`
+
 ## Main statements
 
 - `AlgebraicGeometry.Etale.kummerBoundary_baseChange`
+- `AlgebraicGeometry.Etale.restrictSupportedHom_constantComplexEndPullback_comp`
 -/
 
 @[expose] public section
@@ -76,7 +88,16 @@ lemma leftDerivedUpperStarConstantComplexIso_comp {X Y S : Scheme.{u}} (f : X �
 variable {X Y X' Y' : Scheme.{u}} {g' : X' ⟶ X} {f' : X' ⟶ Y'} {f : X ⟶ Y} {g : Y' ⟶ Y}
 
 /-- The derived square isomorphism of a commutative square `g' ≫ f = f' ≫ g` is compatible with
-the pullback identifications of the twisting objects. -/
+the pullback identifications of the twisting objects:
+
+```
+Lf'^* Lg^* Λ_Y(m) ──≅──▶ Lg'^* Lf^* Λ_Y(m) ──Lg'^* ≅──▶ Lg'^* Λ_X(m)
+        │                                                 │
+Lf'^* ≅ │                                                 │ ≅
+        ▼                                                 ▼
+  Lf'^* Λ_{Y'}(m) ──────────────────≅─────────────────▶ Λ_{X'}(m)
+```
+-/
 lemma derivedSquareUpperStarIso_hom_app_tateObject (sq : CommSq g' f' f g) (m : ℤ) :
     (derivedSquareUpperStarIso (ModuleCat.{u + 1} Λ) sq).hom.app (tateObject Λ Y m) ≫
         (L((g')^*[ModuleCat.{u + 1} Λ])).map (leftDerivedUpperStarTateObjectIso f m).hom ≫
@@ -145,7 +166,16 @@ variable {U U' D D' : Scheme.{u}} {e₁ : D' ⟶ D} {j' : D' ⟶ U'} {j : D ⟶ 
 /-- The Kummer class `κ(u)` on `D ⊆ U`, read on `U` through `Lj^* Λ_U ≅ Λ_D` and
 `Lj^* Λ_U(1) ≅ Λ_D(1)`, is compatible with a commutative square `e₁ ≫ j = j' ≫ e`: its pullback
 along `e₁`, read through the derived square isomorphism, is the Kummer class of the pulled back
-unit on `D'`. -/
+unit on `D'`:
+
+```
+Lj'^* Λ_{U'} ──≅──▶ Le₁^* Lj^* Λ_U ──Le₁^*(κ(u) read on U)──▶ Le₁^* ((Lj^* Λ_U(1))[1])
+     │                                                                  │
+   ≅ │                                                                  │ ≅
+     ▼                                                                  ▼
+   Λ_{D'} ──κ(u')──▶ Λ_{D'}(1)[1] ──────────≅──────────▶ (Lj'^* Λ_{U'}(1))[1]
+```
+-/
 lemma kummerClass_square (sq : CommSq e₁ j' j e) (u : Γ(D, ⊤)ˣ) (u' : Γ(D', ⊤)ˣ)
     (hu : Units.map e₁.appTop.hom.toMonoidHom u = u') :
     (L((j')^*[ModuleCat.{u + 1} Λ])).map (leftDerivedUpperStarConstantComplexIso Λ e).inv ≫
@@ -204,7 +234,16 @@ restriction of `∂κ(f) ∈ H²_{V(f)}(U, Λ(1))` to `U'` — the pullback `Le^
 — is `∂κ(e^* f)`. This is the step "the Kummer class is compatible with the pullback" of the
 proof of `prop-pur-affine-line-orientation-base-change`: the naturality of the Kummer class
 (`AlgebraicGeometry.Etale.kummerClass_square`) combined with the base change of the supported
-localization triangle (`AlgebraicGeometry.Etale.supportedLocalizationBoundary_baseChange`). -/
+localization triangle (`AlgebraicGeometry.Etale.supportedLocalizationBoundary_baseChange`).
+
+```
+Λ_{U'} ──≅──▶ Le^* Λ_U ──Le^* ∂κ(f)──▶ Le^* ((Ri_! Ri^! Λ_U(1))[2])
+   │                                              │
+   │ ∂κ(e^* f)                                    │ ≅ ≫ ψ[2]
+   ▼                                              ▼
+(Ri'_! Ri'^! Λ_{U'}(1))[2] ════════════ (Ri'_! Ri'^! Λ_{U'}(1))[2]
+```
+-/
 theorem kummerBoundary_baseChange (e : U' ⟶ U) (f : Γ(U, ⊤))
     (g : U'.zeroLocusSubscheme {e.appTop f} ⟶ U.zeroLocusSubscheme {f})
     (hg : IsPullback g (U'.zeroLocusSubschemeι {e.appTop f}) (U.zeroLocusSubschemeι {f}) e) :
@@ -263,6 +302,160 @@ theorem kummerBoundary_baseChange_of_eq (e : U' ⟶ U) (f : Γ(U, ⊤)) (f' : Γ
   exact kummerBoundary_baseChange Λ e f g hg
 
 end Kummer
+
+section Restriction
+
+variable {Λ : Type (u + 1)} [CommRing Λ] [HasTateTwist Λ]
+
+variable (Λ) in
+/-- The pullback `f^♯ h : Λ_X ⟶ Λ_X` of an endomorphism `h` of the constant complex `Λ_S` along
+`f : X ⟶ S`: the derived pullback `Lf^* h`, read through `Lf^* Λ_S ≅ Λ_X`. -/
+noncomputable def constantComplexEndPullback {X S : Scheme.{u}} (f : X ⟶ S)
+    (h : constantComplex Λ S ⟶ constantComplex Λ S) :
+    constantComplex Λ X ⟶ constantComplex Λ X :=
+  (leftDerivedUpperStarConstantComplexIso Λ f).inv ≫ (L((f)^*[ModuleCat.{u + 1} Λ])).map h ≫
+    (leftDerivedUpperStarConstantComplexIso Λ f).hom
+
+@[simp]
+lemma constantComplexEndPullback_id {X S : Scheme.{u}} (f : X ⟶ S) :
+    constantComplexEndPullback Λ f (𝟙 _) = 𝟙 _ := by
+  simp [constantComplexEndPullback]
+
+/-- The pullback of endomorphisms of the constant complexes is compatible with composition:
+`f^♯ (g^♯ h) = (f ≫ g)^♯ h`. -/
+lemma constantComplexEndPullback_constantComplexEndPullback {X Y S : Scheme.{u}} (f : X ⟶ Y)
+    (g : Y ⟶ S) (fg : X ⟶ S) (hfg : fg = f ≫ g)
+    (h : constantComplex Λ S ⟶ constantComplex Λ S) :
+    constantComplexEndPullback Λ f (constantComplexEndPullback Λ g h) =
+      constantComplexEndPullback Λ fg h := by
+  rw [constantComplexEndPullback, constantComplexEndPullback, constantComplexEndPullback,
+    leftDerivedUpperStarConstantComplexIso_comp Λ f g fg hfg]
+  simp only [Iso.trans_hom, Iso.trans_inv, Iso.app_hom, Iso.app_inv, Functor.mapIso_hom,
+    Functor.mapIso_inv, Functor.map_comp, Category.assoc]
+  erw [(leftDerivedUpperStarComp (ModuleCat.{u + 1} Λ) f g fg hfg).hom.naturality_assoc h,
+    Iso.inv_hom_id_app_assoc]
+  rfl
+
+variable {X Y : Scheme.{u}}
+
+/-- Two endomorphisms of the constant complex `Λ_X` are equal if their pullbacks along every
+geometric point `x : Spec Ω ⟶ X` are equal. -/
+lemma constantComplexEnd_ext {a b : constantComplex Λ X ⟶ constantComplex Λ X}
+    (h : ∀ (Ω : Type u) [Field Ω] [IsSepClosed Ω] (x : Spec (.of Ω) ⟶ X),
+      constantComplexEndPullback Λ x a = constantComplexEndPullback Λ x b) :
+    a = b :=
+  constantComplex_hom_ext_of_leftDerivedUpperStar_map_eq (Iso.refl _) fun Ω _ _ x ↦ by
+    simpa only [constantComplexEndPullback, cancel_epi, cancel_mono] using h Ω x
+
+end Restriction
+
+section SupportedRestriction
+
+variable {Λ : Type (u + 1)} [CommRing Λ] [HasKummerClass Λ] [Finite Λ]
+
+variable {X Z U Z' : Scheme.{u}}
+
+/-- Precomposing a class with supports with an endomorphism `h` of `Λ_X` precomposes its adjoint
+with the pullback `i^♯ h` of `h` to the support. -/
+lemma supportedClassMap_comp (i : Z ⟶ X) [IsClosedImmersion i]
+    {L : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
+    (h : constantComplex Λ X ⟶ constantComplex Λ X)
+    (γ : constantComplex Λ X ⟶
+      (R(i)_![ModuleCat.{u + 1} Λ]).obj ((R(i)^![ModuleCat.{u + 1} Λ]).obj L)) :
+    supportedClassMap Λ i (h ≫ γ) =
+      constantComplexEndPullback Λ i h ≫ supportedClassMap Λ i γ := by
+  have hc := leftDerivedUpperStarConstantComplexIso_comp Λ
+    (HasCompactification.compactification i).i (HasCompactification.compactification i).g i
+    (HasCompactification.compactification i).comm
+  have key : constantComplexEndPullback Λ i h =
+      (compactificationConstantComplexIso Λ i).inv ≫
+        (L(((HasCompactification.compactification i).i)^*[ModuleCat.{u + 1} Λ])).map
+          ((L(((HasCompactification.compactification i).g)^*[ModuleCat.{u + 1} Λ])).map h) ≫
+        (compactificationConstantComplexIso Λ i).hom := by
+    rw [constantComplexEndPullback, hc]
+    simp only [compactificationConstantComplexIso, Iso.trans_inv, Iso.trans_hom, Iso.app_inv,
+      Iso.app_hom, Category.assoc]
+    rw [← Functor.comp_map, ← NatIso.naturality_1 (leftDerivedUpperStarComp
+      (ModuleCat.{u + 1} Λ) _ _ i (HasCompactification.compactification i).comm) h]
+    simp only [Category.assoc]
+  rw [key]
+  simp only [supportedClassMap, rightDerivedLowerShriekTranspose, Category.assoc,
+    Iso.hom_inv_id_assoc, Adjunction.homEquiv_naturality_left_symm]
+  rfl
+
+/-- Precomposing a class with supports with an endomorphism `h` of `Λ_X` commutes with the
+restriction of supports along `e`, which replaces `h` by its pullback `e^♯ h`. -/
+lemma restrictSupportedClass_comp (e : U ⟶ X) (i : Z ⟶ X) (i' : Z' ⟶ U) [IsClosedImmersion i]
+    [IsClosedImmersion i'] (g : Z' ⟶ Z) (hg : IsPullback g i' i e)
+    {L : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
+    {L' : DerivedCategory (Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
+    (τ : (L((e)^*[ModuleCat.{u + 1} Λ])).obj L ≅ L')
+    (h : constantComplex Λ X ⟶ constantComplex Λ X)
+    (γ : constantComplex Λ X ⟶
+      (R(i)_![ModuleCat.{u + 1} Λ]).obj ((R(i)^![ModuleCat.{u + 1} Λ]).obj L)) :
+    restrictSupportedClass (ModuleCat.{u + 1} Λ) e i i' g hg
+        (leftDerivedUpperStarConstantComplexIso Λ e).inv τ (h ≫ γ) =
+      constantComplexEndPullback Λ e h ≫
+        restrictSupportedClass (ModuleCat.{u + 1} Λ) e i i' g hg
+          (leftDerivedUpperStarConstantComplexIso Λ e).inv τ γ := by
+  simp [restrictSupportedClass, constantComplexEndPullback]
+
+variable (Λ) in
+/-- Classes with supports on `Z` are morphisms `Λ_Z ⟶ Ri^! L`: the bijection
+`AlgebraicGeometry.Etale.supportedClassMap_bijective` as an equivalence. -/
+noncomputable def supportedClassMapEquiv (i : Z ⟶ X) [IsClosedImmersion i]
+    (L : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
+    (constantComplex Λ X ⟶
+        (R(i)_![ModuleCat.{u + 1} Λ]).obj ((R(i)^![ModuleCat.{u + 1} Λ]).obj L)) ≃
+      (constantComplex Λ Z ⟶ (R(i)^![ModuleCat.{u + 1} Λ]).obj L) :=
+  Equiv.ofBijective _ (supportedClassMap_bijective Λ i L)
+
+@[simp]
+lemma supportedClassMapEquiv_apply (i : Z ⟶ X) [IsClosedImmersion i]
+    (L : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
+    (γ : constantComplex Λ X ⟶
+      (R(i)_![ModuleCat.{u + 1} Λ]).obj ((R(i)^![ModuleCat.{u + 1} Λ]).obj L)) :
+    supportedClassMapEquiv Λ i L γ = supportedClassMap Λ i γ :=
+  rfl
+
+variable (Λ) in
+/-- The *restriction* `Λ_{Z'} ⟶ Ri'^! L'` along `e : U ⟶ X` of a morphism `φ : Λ_Z ⟶ Ri^! L`,
+for the base change `i'` of the closed immersion `i` and an identification `τ : Le^* L ≅ L'`:
+`φ` is read as a class with supports on `Z`
+(`AlgebraicGeometry.Etale.supportedClassMapEquiv`), restricted along `e`
+(`AlgebraicGeometry.Etale.restrictSupportedClass`) and read back as a morphism. This is the
+exceptional base change `Lg^* Ri^! L ⟶ Ri'^! L'` applied to the pullback `Lg^* φ`. -/
+noncomputable def restrictSupportedHom (e : U ⟶ X) (i : Z ⟶ X) (i' : Z' ⟶ U)
+    [IsClosedImmersion i] [IsClosedImmersion i'] (g : Z' ⟶ Z) (hg : IsPullback g i' i e)
+    {L : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
+    {L' : DerivedCategory (Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
+    (τ : (L((e)^*[ModuleCat.{u + 1} Λ])).obj L ≅ L')
+    (φ : constantComplex Λ Z ⟶ (R(i)^![ModuleCat.{u + 1} Λ]).obj L) :
+    constantComplex Λ Z' ⟶ (R(i')^![ModuleCat.{u + 1} Λ]).obj L' :=
+  supportedClassMap Λ i' (restrictSupportedClass (ModuleCat.{u + 1} Λ) e i i' g hg
+    (leftDerivedUpperStarConstantComplexIso Λ e).inv τ ((supportedClassMapEquiv Λ i L).symm φ))
+
+/-- The restriction of `i^♯ h ≫ φ` along `e` is `i'^♯ (e^♯ h)` followed by the restriction of
+`φ`, for an endomorphism `h` of `Λ_X`. -/
+lemma restrictSupportedHom_constantComplexEndPullback_comp (e : U ⟶ X) (i : Z ⟶ X)
+    (i' : Z' ⟶ U) [IsClosedImmersion i] [IsClosedImmersion i'] (g : Z' ⟶ Z)
+    (hg : IsPullback g i' i e)
+    {L : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
+    {L' : DerivedCategory (Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
+    (τ : (L((e)^*[ModuleCat.{u + 1} Λ])).obj L ≅ L')
+    (h : constantComplex Λ X ⟶ constantComplex Λ X)
+    (φ : constantComplex Λ Z ⟶ (R(i)^![ModuleCat.{u + 1} Λ]).obj L) :
+    restrictSupportedHom Λ e i i' g hg τ (constantComplexEndPullback Λ i h ≫ φ) =
+      constantComplexEndPullback Λ i' (constantComplexEndPullback Λ e h) ≫
+        restrictSupportedHom Λ e i i' g hg τ φ := by
+  have hφ : (supportedClassMapEquiv Λ i L).symm (constantComplexEndPullback Λ i h ≫ φ) =
+      h ≫ (supportedClassMapEquiv Λ i L).symm φ := by
+    rw [Equiv.symm_apply_eq, supportedClassMapEquiv_apply, supportedClassMap_comp,
+      ← supportedClassMapEquiv_apply, Equiv.apply_symm_apply]
+  rw [restrictSupportedHom, restrictSupportedHom, hφ, restrictSupportedClass_comp,
+    supportedClassMap_comp]
+
+end SupportedRestriction
 
 end Etale
 
