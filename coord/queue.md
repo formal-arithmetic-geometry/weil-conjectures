@@ -1,11 +1,11 @@
 # Work queue
 
-533 items; claim with `tools/claim.py next <group> [--stage N]`.
+529 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (533)
+## Stage 2: nodes to state (529)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -69,7 +69,6 @@
 | `lem-weil-pbc-flat-fp-lqf-bounded-stratification` | 1 | state |
 | `lem-weil-pbc-flat-fp-qf-stratification` | 1 | state |
 | `lem-weil-pbc-formal-fibre-quasi-finite-ascent` | 1 | state |
-| `lem-weil-pbc-gabber-h0-etale-criterion` | 1 | state |
 | `lem-weil-pbc-higher-direct-image-sheafified-presheaf` | 1 | state |
 | `lem-weil-pbc-ideal-module-product-stalk` | 1 | state |
 | `lem-weil-pbc-integral-closure-finite-fibre-choose-g` | 1 | state |
@@ -86,16 +85,13 @@
 | `lem-weil-pbc-limit-tower-essentially-finite-presentation` | 1 | state |
 | `lem-weil-pbc-lisse-generic-kernel` | 1 | state |
 | `lem-weil-pbc-local-dimension-zero-henselian` | 1 | state |
-| `lem-weil-pbc-localization-prime-residue-field-iso` | 1 | state |
 | `lem-weil-pbc-locally-constant-finite-values-finite-type` | 1 | state |
-| `lem-weil-pbc-locally-constant-germ-evaluation` | 1 | state |
 | `lem-weil-pbc-lqf-locally-finite-type` | 1 | state |
 | `lem-weil-pbc-lqf-qc-source-bounded-fibres` | 1 | state |
 | `lem-weil-pbc-lqf-restriction-to-opens` | 1 | state |
 | `lem-weil-pbc-make-separable` | 1 | state |
 | `lem-weil-pbc-make-separably-generated` | 1 | state |
 | `lem-weil-pbc-map-into-henselian-colimit` | 1 | state |
-| `lem-weil-pbc-matrix-left-inverse-minors` | 1 | state |
 | `lem-weil-pbc-minimal-finite-free-resolution-local` | 1 | state |
 | `lem-weil-pbc-miracle-flatness` | 1 | state |
 | `lem-weil-pbc-mittag-leffler-complex-limit-homology` | 1 | state |
