@@ -150,5 +150,29 @@
   "date": "2026-10-09",
   "by": "L",
   "result": "pass"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.FiniteFiltrationInduction",
+  "declaration": "CategoryTheory.FilteredObject.finite_filtration_induction",
+  "file": "lean/Sheaf/CategoryTheory/FiniteFiltrationInduction.lean",
+  "statement": "theorem finite_filtration_induction (A B : FilteredObject C) (f : Hom A B) (hA : A.filtration.IsFinite) (hB : B.filtration.IsFinite) (hgraded : ∀ p : ℤ, IsIso (gradedMap f p)) : IsIso f.hom ∧ ∀ p : ℤ, IsIso (restriction f p)",
+  "branch": "sheaf-dag",
+  "by": "M1",
+  "date": "2026-10-11",
+  "existing": false,
+  "declarations": [
+   "CategoryTheory.FilteredObject.restriction",
+   "CategoryTheory.FilteredObject.exists_gradedMap",
+   "CategoryTheory.FilteredObject.gradedMap",
+   "CategoryTheory.FilteredObject.finite_filtration_induction"
+  ]
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-ffi1315",
+  "group": "M1",
+  "result": "pass",
+  "note": "C abelian, A B : FilteredObject (landed def-sp-filtration), f : Hom A B (not strict), hA/hB IsFinite each = common n<=m bounds, hgraded all p via cokernel-induced gradedMap, concl IsIso f.hom and all step restrictions (=> strict); gradedMap chosen from named sorry existence theorem per brief-stage2 H5 pattern"
  }
 }
