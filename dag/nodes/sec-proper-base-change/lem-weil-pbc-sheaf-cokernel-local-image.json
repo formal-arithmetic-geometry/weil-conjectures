@@ -151,5 +151,24 @@
   "group": "G1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of G1; spot-checked by L: L: 4 steps, 0 new nodes: sectionwise quotient presheaf, sheafification as sets (existing node), local-section criterion (site-sheafification-sections-local, which carries 00WB/00WK), kernel = locally-in-image subsheaf, epimorphism by local representatives. Correct."
+ },
+ "lean": {
+  "module": "Sheaf.Topology.SheafCokernelLocalImage",
+  "declaration": "AlgebraicGeometry.RingedSpace.sheafified_cokernel_local_image",
+  "file": "lean/Sheaf/Topology/SheafCokernelLocalImage.lean",
+  "statement": "theorem sheafified_cokernel_local_image (X : RingedSpace.{u}) {F G : SheafOfModules.{u} (moduleRings X)} (φ : F ⟶ G) (q : G ⟶ (PresheafOfModules.sheafification (𝟙 (moduleRings X).obj)).obj (cokernel φ.val)) (hq : q.val = cokernel.π φ.val ≫ (PresheafOfModules.sheafificationAdjunction (𝟙 (moduleRings X).obj)).unit.app (cokernel φ.val)) : (∀ (V : Opens X) (s : G.val.obj (op V)), q.val.app (op V) s = 0 ↔ ∀ x : X, x ∈ V → ∃ (W : Opens X) (hWV : W ≤ V), x ∈ W ∧ ∃ t : F.val.obj (op W), φ.val.app (op W) t = G.val.map (homOfLE hWV).op s) ∧ Epi q ∧ φ ≫ q = 0",
+  "branch": "sheaf-dag",
+  "by": "K1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-ckl"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-ckl",
+  "group": "K1",
+  "result": "fix",
+  "note": "ringed space restated as X : RingedSpace.{u} with SheafOfModules.{u} (moduleRings X) (STATE MODULE SHEAVES ON A SPACE); q tied to cokernel.π ≫ module sheafification unit instead of toPresheaf/toSheafify equation"
  }
 }
