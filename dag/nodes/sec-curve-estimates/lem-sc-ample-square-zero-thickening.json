@@ -246,5 +246,27 @@
   "group": "F1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-as2 (reviewer sub-agent of L); spot-checked: Repaired re-push after the 15:04 return: all seven points checked repaired. (1) step 1 now cites closed-immersion-unit-quotient (F=L^n), pushforward-annihilated (2) (F=M_n quasi-coherent, I M_n=0 from I^2=0) and affine-morphism-cohomology-edge (j affine, G_n quasi-coherent; no homeomorphism claim); (2) step 3 sets up O'=sum L^m, O=sum j_*j^*L^m, kernel sum I tensor L^m of square zero, commutativity, degree naturality of the boundary, Leibniz induction giving partial(s^{e+1})=(e+1)s^e xi; (3) step 4 checks 01XR node hypotheses (Z qc Noetherian, qs by lem-weil-pbc-locally-noetherian-quasi-separated, Z_s affine, G_n qcoh, p=1) and identifies the multiplication by naturality of the edge map; (4) step 5 checks the four inputs of 01YQ node (j^{-1}X_{s'}=Z_s by stalks, closed immersion base change proper-fp-permanence (b), finite, surjective via V(I)=X, X_{s'} Noetherian) and step 6 clause (1) and (e+1)n>=1; (5) 01XR node stmt_deps equal its inline citations, multiplication by s^e defined; (6) 0B8S node restated on a scheme with commutative O_X-algebras, O-module structure on I explained; (7) report names the nodes per step. Sources: Stacks 01XR (coherent.tex lemma-section-affine-open-kills-classes) and 0B8S (cohomology.tex lemma-boundary-derivation-over-cup-product) read against the new statements, hypothesis by hypothesis (0B8S specialised to commutative algebras on a scheme, the case used); 09MS (lemma-ample-on-reduction) paragraphs 2-3 against the steps; item statement unchanged. All 12 cited statements read. Tool uses (8 declared) accepted as generic closed-immersion/scheme facts. Small cases: I=0 gives xi=0 and Z_s=X_s. FIX more, RETURN less: dag/nodes/sec-curve-estimates/lem-sc-ample-square-zero-thickening.json: proof steps 1,2,5 and proof_deps: quasi-coherence of I and I(U)^2=0 used without citation, now cite [def-sbc-closed-immersion-ideal-sheaf] and [def-sbc-ideal-sheaf-powers] (C1); step 4 and proof_deps: invertibility of j^*L^n now cites [lem-weil-pbc-invertible-pullback-invertible] (C1, added as tool use). Start 'Sat Oct 10 03:17:03 PM UTC 2026', end 'Sat Oct 10 03:18:38 PM UTC 2026'.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AmpleSquareZeroThickening",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.isAmple_of_isAmple_tensorPullback_of_square_zero",
+  "file": "lean/Sheaf/AlgebraicGeometry/AmpleSquareZeroThickening.lean",
+  "statement": "theorem isAmple_of_isAmple_tensorPullback_of_square_zero {X Z : Scheme.{u}} (j : Z ⟶ X) [IsClosedImmersion j] [IsLocallyNoetherian X] [CompactSpace X] [IsLocallyNoetherian Z] [CompactSpace Z] (L : X.Modules) [L.IsInvertible] (hI : j.ker ^ 2 = ⊥) : letI : ((Scheme.Modules.tensorPullback j).obj L).IsInvertible := ((Scheme.Modules.invertible_pullback_tensor j).1 L).2 AlgebraicGeometry.Scheme.Modules.IsAmple Z ((Scheme.Modules.tensorPullback j).obj L) → AlgebraicGeometry.Scheme.Modules.IsAmple X L",
+  "branch": "sheaf-dag",
+  "by": "J1",
+  "date": "2026-10-11",
+  "existing": false,
+  "declarations": [
+   "AlgebraicGeometry.Scheme.Modules.isAmple_of_isAmple_tensorPullback_of_square_zero"
+  ],
+  "fixed_by": "R-ast1153"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-ast1153",
+  "group": "J1",
+  "result": "fix",
+  "note": "j:Z->X closed immersion=[IsClosedImmersion j]; X,Z Noetherian=[IsLocallyNoetherian][CompactSpace] on both (sibling a29f681a4 form); I^2=0 = j.ker ^ 2 = ⊥ in IdealSheafData (checked (I^2).ideal U = (I.ideal U)^2 by simp); L : X.Modules [L.IsInvertible]; j^*L = tensorPullback j; invertibility of j^*L now from landed invertible_pullback_tensor (.1 L).2 instead of the delivered sorry'd duplicate tensorPullback_isInvertible (H4/H12); conclusion IsAmple Z (j^*L) -> IsAmple X L with landed Scheme.Modules.IsAmple; same universe u; docstring proof filled with the node's steps"
  }
 }
