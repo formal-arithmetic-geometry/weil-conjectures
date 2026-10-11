@@ -192,5 +192,23 @@
   "item": "lem-weil-pbc-torsion-submodule-flat-base-change-iso",
   "worker": "stage1",
   "summary": "Read More on Algebra 05E7, 05E9, 05EA, 05EB and 05EC with the proof of part (1) (more-algebra.tex lines 24030-24340), and the citer lem-weil-pbc-formal-glueing-complex-exact (steps 3 and 7 use injectivity and surjectivity of exactly this map). Statement kept. Proof follows the Stacks proof of 05EC (1) in 7 steps: the map is defined (elementary); M' = M/M[I^infty] has no I-power torsion (05EB (1), new unsplit node lem-weil-pbc-quotient-by-power-torsion-no-torsion, plus the induction of 05EA written out); the test map x -> (f_k^n x)_k is injective (pigeonhole bound on monomials written out); its base change is injective by flatness and the finite-product tensor iso (Mathlib leaf), so (M' (x) S)[I^infty] = 0; the base-changed sequence 0 -> T (x) S -> M (x) S -> M' (x) S -> 0 is exact (flatness, right exactness leaf); T -> T (x) S is bijective (05E9 node, as a statement); conclusion written out. Mathlib: M[I^infty] exists as Ideal.primaryComponent, but no base-change or quotient lemma for it; searches recorded."
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Module.TorsionSubmoduleFlatBaseChangeIso",
+  "declaration": "Ideal.primaryComponent_baseChange_bijective",
+  "file": "lean/Sheaf/Algebra/Module/TorsionSubmoduleFlatBaseChangeIso.lean",
+  "statement": "theorem Ideal.primaryComponent_baseChange_bijective {R : Type u} {S : Type v} [CommRing R] [CommRing S] [Algebra R S] (I : Ideal R) (hI : I.FG) (hflat : RingHom.Flat (algebraMap R S)) (hquot : Function.Bijective (Ideal.quotientMap (Ideal.map (algebraMap R S) I) (algebraMap R S) Ideal.le_comap_map)) (M : Type w) [AddCommGroup M] [Module R M] : Function.Bijective ((Ideal.primaryComponent.map I (TensorProduct.mk R S M 1)) : Ideal.primaryComponent M I →ₗ[R] Ideal.primaryComponent (S ⊗[R] M) I)",
+  "branch": "sheaf-dag",
+  "by": "P1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-tsf"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-tsf",
+  "group": "P1",
+  "result": "fix"
  }
 }
