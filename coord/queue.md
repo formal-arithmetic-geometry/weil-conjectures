@@ -1,6 +1,6 @@
 # Work queue
 
-19 items; claim with `tools/claim.py next <group> [--stage N]`.
+20 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (3)
 
@@ -22,7 +22,7 @@
 
 Not open yet: 42 nodes that wait for stage 1, 6 nodes that wait for a statement dependency.
 
-## Stage 3: modules to prove (11)
+## Stage 3: modules to prove (12)
 
 | module | distance to a target | sorry | kind |
 |---|---|---|---|
@@ -31,9 +31,10 @@ Not open yet: 42 nodes that wait for stage 1, 6 nodes that wait for a statement 
 | `WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.ProjectiveLine` | 0 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.ProjectiveLineGeometricStalkReduction` | 1 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.ProperGeometricPointExchange` | 2 | 1 | proof |
-| `WeilConjectures.AlgebraicGeometry.Cohomology.EulerChar` | 2 | 2 | proof |
+| `WeilConjectures.AlgebraicGeometry.Cohomology.EulerChar` | 2 | 1 | proof |
 | `WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.ProjectiveLine.StrictHenselian` | 2 | 5 | proof |
 | `Sheaf.AlgebraicGeometry.EtaleH0FiniteConnectedCriterion` | 3 | 1 | proof |
+| `Sheaf.AlgebraicGeometry.ZariskiDimensionBound` | 3 | 1 | proof |
 | `WeilConjectures.AlgebraicGeometry.HenselianConnectedness` | 3 | 1 | proof |
 | `WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.FiniteFreeComplex` | 5 | 3 | proof |
 | `WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Sections` | 6 | 6 | proof |
