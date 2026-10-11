@@ -184,5 +184,23 @@
   "group": "K1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-ld2 (reviewer sub-agent of L); spot-checked: Re-push after the 14:28 return; all three points repaired: (1) pqf-lem-leray gone from uses/proof_deps/tool_uses; Step 2 applies thm-sp-grothendieck to f_* and Gamma(Y,-) on all O_X-modules, acyclicity from lem-weil-pbc-module-pushforward-injective-acyclic (01EX, V=Y), composite identified with H^n(X,-) via Gamma(Y,f_*G)=Gamma(X,G), pqf-def-cohomology, lem-sp-derived-well-defined. (2) new unsplit node lem-pc-grothendieck-edge-cocycle (created.item = item, same unit) states the cocycle description of the left edge of lem-sp-grothendieck-edge-maps for a composable pair with an injective resolution; correct (Z^n(GFI)=G(Z^n FI) by left exactness, then G(Z^n->H^n)); B10 checked: slopmaster2 Grothendieck.lean 269-391 has only defs (grothendieckLeftEdge, grothendieckLeftEdgeMap), no theorem stating it, so nothing to attach. (3) its 'in particular' clause gives the edge iso when R^pG(R^qF X)=0 for p>0, with the finite filtration/exact couple hypotheses of lem-sp-edge-collapse named; Step 3 cites it. Report names the statements checked and the all-O_X-modules scope. Source: Stacks 01F4 (cohomology-lemma-apply-Leray) (2) agrees with the item hypothesis by hypothesis (H^p(Y,R^qf_*F)=0 for all q, p>0 gives H^q(X,F)=H^0(Y,R^qf_*F)); item now for every O_X-module, statement unchanged. Small cases: n=0 (edge = identity Gamma(X,F)=Gamma(Y,f_*F)); f=id (R^qf_*=0 for q>0, condition = H^p(X,F)=0, edge iso trivially). Declared tool uses thm-sp-grothendieck, lem-weil-pbc-module-pushforward-injective-acyclic, lem-sp-derived-well-defined, lem-sp-grothendieck-edge-maps accepted as generic. FIX: dag/nodes/sec-picard-framework/lem-pc-leray-degenerate-sections.json: proof[1].text/uses, proof_deps, split_report.tool_uses: added the check of the composable-pair hypotheses of def-sp-composite-acyclicity (Mod(O_X), Mod(O_Y) Grothendieck abelian by prop-pur-kinjective-resolutions-exist, Ab by lem-weil-pbc-ring-modules-grothendieck-abelian, f_* and Gamma left exact by def-weil-sheaf-of-modules-category), tool use prop-pur-kinjective-resolutions-exist. 14:40-14:49 UTC; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.LerayDegenerateSections",
+  "declaration": "AlgebraicGeometry.exists_lerayEdge_isIso_of_vanishing",
+  "file": "lean/Sheaf/AlgebraicGeometry/LerayDegenerateSections.lean",
+  "statement": "theorem exists_lerayEdge_isIso_of_vanishing {X Y : Scheme.{u}} (f : X ⟶ Y) : ∃ ε : ∀ q : ℕ, (RingedSpace.moduleCohomology X.toRingedSpace q ⋙ forget₂ _ AddCommGrpCat) ⟶ (RingedSpace.moduleDirectImage f.toLRSHom.toShHom).rightDerived q ⋙ RingedSpace.globalSectionsFunctor Y.toRingedSpace ⋙ forget₂ _ AddCommGrpCat, (∀ (q : ℕ) (F : SheafOfModules.{u} (moduleRings X.toRingedSpace)) (I : InjectiveResolution F) (K : CochainComplex (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) ℕ) (hK : K = ((RingedSpace.moduleDirectImage f.toLRSHom.toShHom).mapHomologicalComplex (ComplexShape.up ℕ)).obj I.cocomplex) (s : (RingedSpace.globalSectionsComplex I).cycles q), ∃ z : (RingedSpace.globalSectionsFunctor Y.toRingedSpace).obj (K.cycles q), (I.cocomplex.X q).val.presheaf.map (eqToHom (congrArg op (Opens.map_top f.base).symm)) ((RingedSpace.globalSectionsComplex I).iCycles q s) = (RingedSpace.globalSectionsFunctor Y.toRingedSpace).map (K.iCycles q ≫ (eqToHom hK).f q) z ∧ (ε q).app F ((I.isoRightDerivedObj (RingedSpace.globalSectionsFunctor X.toRingedSpace) q).inv ((RingedSpace.globalSectionsComplex I).homologyπ q s)) = (RingedSpace.globalSectionsFunctor Y.toRingedSpace).map ((K.homologyπ q) ≫ HomologicalComplex.homologyMap (eqToHom hK) q ≫ (I.isoRightDerivedObj (RingedSpace.moduleDirectImage f.toLRSHom.toShHom) q).inv) z) ∧ (∀ (F : SheafOfModules.{u} (moduleRings X.toRingedSpace)), (∀ (q p : ℕ), 0 < p → IsZero ((RingedSpace.moduleCohomology Y.toRingedSpace p).obj (((RingedSpace.moduleDirectImage f.toLRSHom.toShHom).rightDerived q).obj F))) → ∀ q : ℕ, IsIso ((ε q).app F))",
+  "branch": "sheaf-dag",
+  "by": "P1",
+  "date": "2026-10-12",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "P1",
+  "result": "pass",
+  "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
  }
 }
