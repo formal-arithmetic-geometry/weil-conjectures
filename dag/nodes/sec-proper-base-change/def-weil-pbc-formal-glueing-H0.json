@@ -1,0 +1,112 @@
+{
+ "id": "def-weil-pbc-formal-glueing-H0",
+ "kind": "definition",
+ "title": "Compatible-section module of a formal glueing datum",
+ "status": "split",
+ "statement": "Let $R,S$ be commutative rings, $\\varphi:R\\to S$ a ring map, $t\\ge0$ an integer, $f_1,\\ldots,f_t\\in R$, and $\\mathbf M=(M',(M_i)_i,(\\alpha_i)_i,(\\alpha_{ij})_{i,j})$ a formal glueing datum [def-weil-pbc-formal-glueing-data]. Write $P_f$ for module localization, with map $p\\mapsto p/1$ [def-weil-pbc-module-localization-away], and $P\\otimes_RS$ for base change [def-weil-module-base-change]. Define $H^0(\\mathbf M)$ to be the $R$-submodule of $M'\\times\\prod_{i=1}^tM_i$ consisting of all $(m',(m_i)_i)$ such that $\\alpha_i(m'/1)=m_i\\otimes1$ for every $i$ and $\\alpha_{ij}(m_i/1)=m_j/1$ for every $i,j$; $M'$ is regarded as an $R$-module through $\\varphi$.",
+ "stmt_deps": [
+  "def-weil-pbc-formal-glueing-data",
+  "def-weil-pbc-module-localization-away",
+  "def-weil-module-base-change"
+ ],
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Remark 05EL (remark-glueing-data), displayed definition of H^0"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "FormalGlueing|glueing|BeauvilleLaszlo",
+   "results": "0 hits: ",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "module of compatible sections H0 of formal glueing data for a ring map and finitely many localizations",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Formal glueing datum compatible families module H0 localization at one chart is isomorphic to the chart module",
+   "results": "8 hits: AlgebraicGeometry.Scheme.GlueData.sheafValGluedMk_val, ModuleCat.Tilde.openToLocalization, ModuleCat.Tilde.toOpen, ModuleCat.Tilde.exists_const, ModuleCat.Tilde.const, ModuleCat.Tilde.const_apply, ModuleCat.Tilde.stalkIso, SheafOfModules.Presentation.mapGenerators",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "LocalizedModule.Away, LinearMap",
+   "results": "4 hits: Module.FinitePresentation.exists_lift_equiv_of_isLocalizedModule, IsLocalizedModule.exists_subsingleton_away, Module.FinitePresentation.exists_free_localizedModule_powers, Module.FinitePresentation.exists_basis_localizedModule_powers",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-formal-glueing-H0-localization",
+  "date": "2026-10-11",
+  "group": "H1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "step 7 of thm-weil-pbc-finite-etale-lifting: the formal-glueing algebraization used in the essential-surjectivity argument (Stacks 0GS2); H^0 in the localization component of Proposition 05ER",
+   "via": [
+    "lem-weil-pbc-formal-glueing-H0-localization",
+    "prop-weil-pbc-formal-glueing-equivalence",
+    "lem-weil-pbc-formal-glueing-isogeny",
+    "lem-weil-pbc-grothendieck-existence-easy",
+    "lem-weil-pbc-grothendieck-existence-devissage",
+    "prop-weil-pbc-grothendieck-existence-proper",
+    "prop-weil-pbc-grothendieck-existence",
+    "lem-weil-pbc-algebraize-finite-over-proper",
+    "lem-weil-pbc-finite-etale-lifting-complete",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "module": "Sheaf.RingTheory.FormalGlueingH0",
+  "declaration": "FormalGlueing.h0",
+  "file": "lean/Sheaf/RingTheory/FormalGlueingH0.lean",
+  "statement": "def h0 {t : ℕ} (φ : R →+* S) (f : Fin t → R) (X : Data.{u, v, w} φ f) : Submodule R (restrict φ X.M' × ∀ i : Fin t, piece (f i) (X.M i))",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-fgh1045",
+  "group": "H1",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-fgh1045",
+  "group": "H1",
+  "result": "pass",
+  "note": "h0 membership proved (sandbox) to be exactly alpha i (m'/1) = 1 ⊗ m_i and alpha_overlap i j (m_i/1) = m_j/1 for all i,j on restrict φ M' × Π piece; flat φ, Fin t → R, X : Data, fixed i; π R-linear H0_{f_i} → piece, π(h/1) = h.val.2 i, uniqueness over all R-linear π', Bijective; new def node fields per EXTRA NODES rule; no H^0 elsewhere in lean/Sheaf"
+ }
+}

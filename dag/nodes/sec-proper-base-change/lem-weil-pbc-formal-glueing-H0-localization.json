@@ -31,7 +31,8 @@
   "def-weil-pbc-formal-glueing-data",
   "def-weil-ring-localization-away",
   "def-weil-pbc-module-localization-away",
-  "def-weil-module-base-change"
+  "def-weil-module-base-change",
+  "def-weil-pbc-formal-glueing-H0"
  ],
  "proof": [
   {
@@ -190,5 +191,23 @@
   "worker": "stage1",
   "summary": "Split the localization of H0 into the finite equalizer calculation of Stacks 05EQ and the unit-component argument of 05EP used in the proof of 05ER. The source omits the details of 05EQ, so the proof clears common powers of f_i explicitly. Conditions (a) and (b) of the existing glueing-data node prove compatibility of the inverse tuple, and alpha_ii = id follows from its cocycle. Reused the existing Mathlib leaf localization-module-exact and existing formal-glueing-canonical-maps node; no new nodes or route changes. The flatness hypothesis is inherited from 05ER and is not needed for localization itself.",
   "blueprint": "Serves the essential-surjectivity proof step of thm-weil-pbc-finite-etale-lifting (its 0GS2 algebraization argument), reached through prop-weil-pbc-formal-glueing-equivalence and its 05ER localization component. The five steps realize the equalizer, localization, inverse-tuple and compatibility calculations required there. Whole-blueprint searches for 05ER, formal glueing H0, and glueing localization found no duplicate statement."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.FormalGlueingH0Localization",
+  "declaration": "FormalGlueing.exists_unique_bijective_h0_localization",
+  "file": "lean/Sheaf/RingTheory/FormalGlueingH0Localization.lean",
+  "statement": "theorem exists_unique_bijective_h0_localization {t : ℕ} (φ : R →+* S) (hflat : φ.Flat) (f : Fin t → R) (X : Data.{uL, vL, wL} φ f) (i : Fin t) : ∃ π : LocalizedModule.Away (f i) (h0 φ f X) →ₗ[R] piece (f i) (X.M i), (∀ h : h0 φ f X, π (LocalizedModule.mk h 1) = h.val.2 i) ∧ (∀ π' : LocalizedModule.Away (f i) (h0 φ f X) →ₗ[R] piece (f i) (X.M i), (∀ h : h0 φ f X, π' (LocalizedModule.mk h 1) = h.val.2 i) → π' = π) ∧ Function.Bijective π",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-fgh1045",
+  "group": "H1",
+  "result": "pass",
+  "note": "h0 membership proved (sandbox) to be exactly alpha i (m'/1) = 1 ⊗ m_i and alpha_overlap i j (m_i/1) = m_j/1 for all i,j on restrict φ M' × Π piece; flat φ, Fin t → R, X : Data, fixed i; π R-linear H0_{f_i} → piece, π(h/1) = h.val.2 i, uniqueness over all R-linear π', Bijective; new def node fields per EXTRA NODES rule; no H^0 elsewhere in lean/Sheaf"
  }
 }
