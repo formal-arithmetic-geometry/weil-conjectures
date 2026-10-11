@@ -127,5 +127,23 @@
   "group": "K1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-homex2 (reviewer sub-agent of L); spot-checked: Re-push after return. Return points repaired: (E2/B7) lem-weil-pbc-simplicial-index-finite-initial now states initiality of I_{S,<=2m_0}^op -> I_S^op with the conditions of categories.tex definition-initial written out and correctly translated to I_S (z->y into the bounded subcategory; zigzag y_0->y_1<-y_2... of bounded objects with compatible maps from z, orientation checked arrow by arrow against the definition's x_0<-x_1->x_2 in the opposite category). Tested m_0=0: S=Delta[0], I_S=Delta, {[0]}: every [n] has the unique map to [0], so (1) holds and (2) is trivial; S constant on two points: I_S = Delta coprod Delta, degree-0 objects, fine. Verified the general statement against the 017K proof: (1) by nondegenerate roots (z=(n,s)->(k,u), k<=m_0); (2) for z->x', z->x'' bounded, go to roots u,u' (deg<=m_0), descend z through a of degree <=2m_0 by the common-repeat argument and injectivity of s_i, zigzag x'->u<-a->u'<-x'' compatible under z. Consequently-clause matches categories.tex Lemma 002R (lemma-initial, 'if either side exists'). (C1) step 2 now takes the comparison from the new node's clause, no uncited tag. (F/E5) WANTED dropped, proof_origin by document citing simplicial.tex 017J/017K, categories 002R, hypercovering 01G2. Full review: item statement vs 017J/017K hypothesis by hypothesis (finite nonempty S_n; finitely many nondegenerate implies degenerate for n>>0; C=SR(X) with finite limits; universal family = representing object of Mor(W x S, K)); step 1 carried by def-weil-pbc-simplicial-set and def-weil-pbc-semi-representable-object (017J construction, cones = compatible families); step 2 by the new node; step 3 by lem-weil-pbc-semi-representable-finite-limits (FC(C) has finite limits, applied to X_et, as in def-weil-pbc-semi-representable-object (1)) and the new node's comparison clause. Only the item's fields owned by a split changed; new node unsplit, created.item correct, same_as list, three Mathlib searches; no slopmaster2 declaration found citing 017K. No Mathlib leaves. Review 14:12-14:20 UTC."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SimplicialHomObjectExists",
+  "declaration": "AlgebraicGeometry.Scheme.exists_simplicial_hom_object",
+  "file": "lean/Sheaf/AlgebraicGeometry/SimplicialHomObjectExists.lean",
+  "statement": "theorem exists_simplicial_hom_object (X : Scheme.{u}) (K : SimplicialObject (FormalCoproduct.{w} X.Etale)) (S : SSet.{t}) [S.Finite] (hfinite : ∀ n : ℕ, Finite (S.obj (op ⦋n⦌))) (hnonempty : ∀ n : ℕ, Nonempty (S.obj (op ⦋n⦌))) : ∃ (H : FormalCoproduct.{w} X.Etale) (u : ∀ (n : ℕ), S.obj (op ⦋n⦌) → (H ⟶ K.obj (op ⦋n⦌))), (∀ (m n : ℕ) (φ : ⦋m⦌ ⟶ ⦋n⦌) (s : S.obj (op ⦋n⦌)), u n s ≫ K.map φ.op = u m (S.map φ.op s)) ∧ (∀ (W : FormalCoproduct.{w} X.Etale) (f : ∀ (n : ℕ), S.obj (op ⦋n⦌) → (W ⟶ K.obj (op ⦋n⦌))), (∀ (m n : ℕ) (φ : ⦋m⦌ ⟶ ⦋n⦌) (s : S.obj (op ⦋n⦌)), f n s ≫ K.map φ.op = f m (S.map φ.op s)) → ∃! g : W ⟶ H, ∀ (n : ℕ) (s : S.obj (op ⦋n⦌)), g ≫ u n s = f n s)",
+  "branch": "sheaf-dag",
+  "by": "V1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "V1",
+  "result": "pass",
+  "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
  }
 }
