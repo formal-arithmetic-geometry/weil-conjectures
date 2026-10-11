@@ -1,11 +1,11 @@
 # Work queue
 
-977 items; claim with `tools/claim.py next <group> [--stage N]`.
+973 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (977)
+## Stage 2: nodes to state (973)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -31,7 +31,6 @@
 | `lem-pc-flat-tensor-complex-cohom` | 1 | state |
 | `lem-pc-fppf-affine-sheafification-restriction` | 1 | state |
 | `lem-pc-kflat-pullback-preservation` | 1 | state |
-| `lem-pc-kflat-tensor-cone-two-out-of-three` | 1 | state |
 | `lem-pc-kflat-tensor-quasi-iso` | 1 | state |
 | `lem-pc-module-change-of-rings-adjunction` | 1 | state |
 | `lem-pc-module-filtered-colimits-tensor` | 1 | state |
@@ -48,18 +47,15 @@
 | `lem-pc-termwise-tor-acyclic-derived-tensor` | 1 | state |
 | `lem-pc-tor-independent-projective-complex-tensor` | 1 | state |
 | `lem-pc-tower-enough-injectives` | 1 | state |
-| `lem-pc-tower-injective-embedding` | 1 | state |
 | `lem-pc-tower-limit-left-exact` | 1 | state |
 | `lem-pod-adic-tower-reconstruction` | 1 | state |
 | `lem-pod-equivalence-induces-module-objects` | 1 | state |
 | `lem-pod-etale-stalk-tensor-scalar` | 1 | state |
 | `lem-pod-lisse-tensor-and-scalar-extension` | 1 | state |
-| `lem-pur-kinjective-ML-ordinals` | 1 | state |
 | `lem-pur-kinjective-characterize-K-injective` | 1 | state |
 | `lem-pur-kinjective-degreewise-existence` | 1 | state |
 | `lem-pur-kinjective-functorial-homotopies` | 1 | state |
 | `lem-pur-kinjective-functorial-injective` | 1 | state |
-| `lem-pur-kinjective-homotopy-exact-injective-target` | 1 | state |
 | `lem-pur-kinjective-homotopy-limit-vanishing` | 1 | state |
 | `lem-pur-kinjective-set-iso-classes-bounded-size` | 1 | state |
 | `lem-pur-left-derived-from-kflat-class` | 1 | state |

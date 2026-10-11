@@ -4,7 +4,8 @@ tools/preflight_delivery.py --stage 2, tools/review_packet.py --stage 2 and tool
 
 A delivery branch deliver/<G>/<item> is ONE commit on top of sheaf-dag with only:
   (1) the module lean/Sheaf/<Topic>/<Name>.lean (module Sheaf.<Topic>.<Name>; the declarations inside carry no
-      `Sheaf.` prefix), or no Lean file when the node is an existing declaration of Mathlib or of the source;
+      `Sheaf.` prefix), or no Lean file when the node is an existing declaration of Mathlib, of the source, or of
+      lean/Sheaf on the base (module Sheaf.*, branch sheaf-dag: another node of this project already states it);
   (2) the node file dag/nodes/<chapter>/<item>.json, changed only in `lean`:
       {module, declaration, declarations?, file?, statement, branch, by, date, existing, note?} (`fixed_by`, the
       reviewer's id, is added by merge_delivery.py when a reviewer's fix changed the record), and in `stmt_deps` only by

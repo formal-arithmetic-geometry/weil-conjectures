@@ -47,7 +47,7 @@ checks the branch <ref> (default HEAD; the lead passes deliver/<group>/<item>) a
      declaration, [declarations], [file], statement, branch, by, date, existing} with the module matching the file and
      by = <group>; each other node file classified (printed) as a NEW definition node (absent on the base; the field
      rule of tools/stage2_delivery.py check_new_node, coord/STATE.md "STAGE 2 EXTRA NODES") or a DEPENDENCY node (in
-     the item's stmt_deps on the base, changed only in `lean`, existing false, with lean.note); every module the
+     the item's stmt_deps on the base, changed only in `lean`, existing false or a sheaf-dag record, with lean.note); every module the
      lean.file of exactly one node, every node with existing false with its module; a CORRECTED item (STAGE 2
      STATEMENT CORRECTION: statement changed, and as far as forced stmt_deps, proof, proof_deps) with its
      statement_change checked by tools/node_fields.py check_statement_change (citers = the base nodes citing the item),
@@ -55,7 +55,8 @@ checks the branch <ref> (default HEAD; the lead passes deliver/<group>/<item>) a
   c. each module, with its own node's id: imports of Mathlib.*, WeilConjectures.*, Sheaf.* only; lines of at most 100
      characters; the declaration defined, its docstring with `(blueprint: <node id>)`, its name not already in Mathlib or the source;
      every theorem/lemma proved by `sorry`, no `sorry` in a definition; the recorded statement equal to the file's;
-  d. an existing declaration (existing: true): no Lean file, module Mathlib.* or WeilConjectures.*, declared there;
+  d. an existing declaration (existing: true): no Lean file, module Mathlib.* or WeilConjectures.*, or Sheaf.* with
+     branch sheaf-dag (read from lean/Sheaf on the base; no compile), declared there;
   e. the report with non-empty `## Worker report` and `## Second reading by <group>`, and `## New nodes` /
      `## Dependency modules` naming each new node / dependency node when there are any, and `## Statement corrected`
      naming each citer when the item is corrected;
