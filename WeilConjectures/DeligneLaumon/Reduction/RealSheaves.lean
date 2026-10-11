@@ -181,35 +181,25 @@ theorem IsReal.exists_isMixed_upperStar_opensι_of_card_eq_one {n : Type u} [Fin
     rw [hv]; infer_instance
   exact ⟨U, hne, (hG.upperStar U.ι).isMixed_of_isLisse hlisse⟩
 
-
-/-- **Real sheaves on open subschemes of affine space of dimension at least two are mixed on a
-nonempty open** (blueprint: `thm-zl-real-mixed-by-curves`, the curve argument in dimension
-`d ≥ 2`). Let `O` be a nonempty open subscheme of `𝔸ᵈ` over `k₀`, `d ≥ 2`, and `G` an `ι`-real
-Weil sheaf on `O`. Then `G` is `ι`-mixed on a nonempty open of `O`: after shrinking, `G` is lisse,
-its constituents become geometrically irreducible after a finite constant extension, curve
-testing (`lem-zl-curve-testing-irreducibility`) produces curves through any two closed points on
-which they stay irreducible, and purity of real lisse sheaves on curves
-(`thm-rp-real-lisse-purity-affine`) gives each constituent a weight independent of the point. -/
-theorem IsReal.exists_isMixed_upperStar_opensι_of_two_le {d : ℕ} (hd : 2 ≤ d)
-    (O : 𝔸(ULift.{u} (Fin d); Spec (CommRingCat.of k₀)).Opens) [Nonempty O]
-    {G : WeilSheaf k₀ l O} (hG : G.IsReal ι) :
-    ∃ O' : O.toScheme.Opens, (O' : Set O).Nonempty ∧
-      ((WeilSheaf.upperStar O'.ι).obj G).IsMixed ι :=
-  sorry
-
 /-- An `ι`-real Weil sheaf on a nonempty open subscheme of `𝔸ᵈ` over `k₀` is `ι`-mixed on a
-nonempty open: for `d = 0` every Weil sheaf on a point is mixed, for `d = 1` this is the curve
-case, and `d ≥ 2` is `AlgebraicGeometry.WeilSheaf.IsReal.exists_isMixed_upperStar_opensι_of_two_le`.
--/
-theorem IsReal.exists_isMixed_upperStar_opensι_of_affineSpace {d : ℕ}
+nonempty open, granted the case `d ≥ 2` (the hypothesis `h`, which carries the curve argument of
+`thm-zl-real-mixed-by-curves`: curve testing and purity of real lisse sheaves on curves): for
+`d = 0` every Weil sheaf on a point is mixed and for `d = 1` this is the curve case. -/
+theorem IsReal.exists_isMixed_upperStar_opensι_of_affineSpace
+    (h : ∀ (d : ℕ), 2 ≤ d → ∀ (O : 𝔸(ULift.{u} (Fin d); Spec (CommRingCat.of k₀)).Opens)
+      [Nonempty O] (G : WeilSheaf k₀ l O), G.IsReal ι →
+        ∃ O' : O.toScheme.Opens, (O' : Set O).Nonempty ∧
+          ((WeilSheaf.upperStar O'.ι).obj G).IsMixed ι) {d : ℕ}
     (O : 𝔸(ULift.{u} (Fin d); Spec (CommRingCat.of k₀)).Opens) [Nonempty O]
     {G : WeilSheaf k₀ l O} (hG : G.IsReal ι) :
     ∃ O' : O.toScheme.Opens, (O' : Set O).Nonempty ∧
       ((WeilSheaf.upperStar O'.ι).obj G).IsMixed ι := by
-  rcases d with _ | _ | d
+  by_cases hd : 2 ≤ d
+  · exact h d hd O G hG
+  obtain rfl | rfl : d = 0 ∨ d = 1 := by omega
   · exact exists_isMixed_upperStar_opensι_of_isEmpty O G
   · exact hG.exists_isMixed_upperStar_opensι_of_card_eq_one (by simp) O
-  · exact hG.exists_isMixed_upperStar_opensι_of_two_le (by omega) O
+
 open ZeroObject in
 /-- A Weil sheaf on a scheme without points is mixed of weights at most `w`, for every `w`: the
 filtration `0 ⊆ F` has the single quotient `F`, which is punctually pure of weight `w` since
