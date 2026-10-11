@@ -172,5 +172,23 @@
   "worker": "stage1",
   "summary": "Modules 01BF omits the proof. From Schemes 01ID and 01LA, prove the sectionwise binary sum is a sheaf and a coproduct, restrict it to an affine open, identify each summand with the tilde of its global sections, use the tilde adjunction's preservation of coproducts to identify the sum with the tilde of the module direct sum, and apply the affine-local definition of quasi-coherence. No new nodes.",
   "blueprint": "Serves lemma-weil-pbc-h1-constructible-representation, proof third paragraph ('The finite-pushforward lemma gives a monomorphism F into F' = direct sum of finite pushforwards'), indirectly through the finite-pushforward, integral-limit, finite-presentation, and quasi-coherent-extension lemmas in blueprint.from.via; specifically, its four steps justify the quasi-coherence of the binary sum used in the extension lemma's Step 2. The blueprint does not state this auxiliary result as a node; whole-blueprint title/statement/source searches for quasi-coherent direct sum, quasi-coherent coproduct, quasicoherent biproduct, direct sum modules, and 01BF found no same statement."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.Modules.QuasicoherentBinarySum",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.isQuasicoherent_biprod",
+  "file": "lean/Sheaf/AlgebraicGeometry/Modules/QuasicoherentBinarySum.lean",
+  "statement": "theorem isQuasicoherent_biprod {X : Scheme.{u}} (F₁ F₂ : X.Modules) [F₁.IsQuasicoherent] [F₂.IsQuasicoherent] : (F₁ ⊞ F₂).IsQuasicoherent",
+  "branch": "sheaf-dag",
+  "by": "K1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-qds1523",
+  "group": "K1",
+  "result": "pass",
+  "note": "X : Scheme.{u} arbitrary; F1 F2 : X.Modules (= SheafOfModules (moduleRings X.toRingedSpace)); [IsQuasicoherent] on both (inferInstance fails: not hollow); conclusion (F1 ⊞ F2).IsQuasicoherent via local HasFiniteBiproducts.of_hasFiniteProducts; binary, no index universe; no landed duplicate on sheaf-dag; node JSON only adds lean record"
  }
 }
