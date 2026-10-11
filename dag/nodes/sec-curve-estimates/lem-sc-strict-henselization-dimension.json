@@ -131,5 +131,24 @@
   "group": "M1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-shd2114 (reviewer sub-agent of L); spot-checked: Item vs 06LK; Step 1 and 2 vs cited statements; 00OH/07QP/07QM text; Mathlib grep for going-down dimension (only Noetherian 00ON leaf). FIX more, RETURN less: (1) B class (b): new lem-sc-strict-henselization-faithfully-flat-local duplicates merged lem-sc-strict-henselization-faithfully-flat (07QM(1), states the canonical local map is faithfully flat); dropped, step 1 cites the existing node. (2) C4: step 2 said the triples node presents R^sh by localizations (B_i)_{q_i}; it gives colim of etale S with m_C contracting to q; step rewritten so the contracted chain lies in q and passes to S_q, then 07QP gives dim S_q = dim R. (3) B3: lem-sc-faithfully-flat-local-dimension source 'Tag 112.1' is not a tag; corrected to Algebra Tag 00OH, Mathlib grep recorded. Closed-fibre description not used by this proof, so not needed.; 2 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.StrictHenselizationDimension",
+  "declaration": "Algebra.ringKrullDim_eq_of_isStrictHenselization",
+  "file": "lean/Sheaf/RingTheory/StrictHenselizationDimension.lean",
+  "statement": "theorem ringKrullDim_eq_of_isStrictHenselization (R K C : Type u) [CommRing R] [IsLocalRing R] [Field K] [Algebra (IsLocalRing.ResidueField R) K] [IsSepClosure (IsLocalRing.ResidueField R) K] [Algebra R K] [IsScalarTower R (IsLocalRing.ResidueField R) K] [CommRing C] [Algebra R C] (hC : IsStrictHenselization R K C) : ringKrullDim R = ringKrullDim C",
+  "branch": "sheaf-dag",
+  "by": "K1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-shd1314"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-shd1314",
+  "group": "K1",
+  "result": "fix",
+  "note": "R local comm ring (CommRing, IsLocalRing; no Noetherian, as node); K = IsSepClosure of residue field, R acts via IsScalarTower; C with landed Algebra.IsStrictHenselization R K C (dropped private duplicate); dim = ringKrullDim, equality in WithBot ENat; dropped duplicate new node(s) def-sc-strict-henselization-ring (--drop-nodes; not merged, the item points at the landed declaration); left out new module(s) lean/Sheaf/RingTheory/StrictHenselizationRing.lean (--drop-files)"
  }
 }
