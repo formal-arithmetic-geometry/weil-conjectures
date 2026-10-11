@@ -21,39 +21,117 @@
  "stmt_deps": [
   "def-pur-saturated-triangulated-localization"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For each object Z equal to X or Y, apply the pointwise Kan-extension bridge to the essentially constant pro-object defining LF(Z). It supplies a limit cone with vertex LF(Z) over the structured-arrow diagram (QZ $\\downarrow$ Q), and its projection at every denominator object (Z', Q(s)^{-1}) is the cone map u_s:LF(Z)\\to F(Z') for s:Z'\\to Z in S.",
+   "uses": [
+    "lem-pur-left-derived-defined-pointwise-kan-bridge"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Definition 05S9 and Lemma 05SA(2), in the pointwise Kan-extension reformulation"
+   }
+  },
+  {
+   "text": "The morphism Q(f):Q(X)\\to Q(Y) induces a functor (Q(Y) \\downarrow Q)\\to(Q(X) \\downarrow Q) by precomposition: (Z',\\varphi:Q(Y)\\to Q(Z')) is sent to (Z',\\varphi\\circ Q(f)). Restricting the limit cone for LF(X) along this functor gives a cone over the diagram defining LF(Y), so the universal property of the limit gives a unique morphism LF(f):LF(X)\\to LF(Y) whose component at (Z',\\varphi) is the LF(X)-cone projection at (Z',\\varphi\\circ Q(f)).",
+   "uses": [
+    "lem-pur-left-derived-defined-pointwise-kan-bridge",
+    "def-pur-saturated-triangulated-localization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Lemma 05SA(2), construction of the morphism from the universal property of the (cofiltered) limit"
+   }
+  },
+  {
+   "text": "For a commutative denominator square f\\circ s=s'\\circ f' with s:X'\\to X and s':Y'\\to Y in S, the denominator object (Y',Q(s')^{-1}) is sent by precomposition to (Y',Q(s')^{-1}\\circ Q(f)) in (Q(X) \\downarrow Q), and Q(s')^{-1}\\circ Q(f)=Q(f')\\circ Q(s)^{-1} because Q(f)\\circ Q(s)=Q(s')\\circ Q(f'). Hence f' is a morphism (X',Q(s)^{-1})\\to(Y',Q(s')^{-1}\\circ Q(f)) of (Q(X) \\downarrow Q), and naturality of the LF(X)-cone together with the projection formula from Step 1 gives u_{s'}\\circ LF(f)=F(f')\\circ u_s; composing with F(s') and using f\\circ s=s'\\circ f' gives the required commutative diagram through F(X) and F(Y).",
+   "uses": [
+    "lem-pur-left-derived-defined-pointwise-kan-bridge"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Lemma 05SA(2), comparison diagram for a commutative square with denominators in S"
+   }
+  },
+  {
+   "text": "For any (Z',\\varphi:Q(Y)\\to Q(Z')), the localization Hom-colimit bijection represents \\varphi as Q(g)\\circ Q(s')^{-1} for some s':W\\to Y in S and g:W\\to Z'. By the right-multiplicative-system axiom (RMS2), applied to f:X\\to Y and s':W\\to Y, choose t:V\\to X in S and f':V\\to W with f\\circ t=s'\\circ f'. Thus the denominator-square property gives u_{s'}\\circ h=F(f')\\circ u_t for either candidate h:LF(X)\\to LF(Y). The limit cone projection at (Z',\\varphi) is F(g)\\circ u_{s'} (by the bridge statement), so the composites of the two candidates with this projection agree. Since every structured-arrow object has such a denominator representation, all limit projections agree, and the limit universal property gives uniqueness.",
+   "uses": [
+    "lem-pc-right-localization-hom-colimit",
+    "lem-pur-left-derived-defined-pointwise-kan-bridge"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Categories Remark 05Q4 and Lemma 05SA(2), uniqueness via the localization Hom-colimit description"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-left-derived-defined-pointwise-kan-bridge",
+  "def-pur-saturated-triangulated-localization",
+  "lem-pc-right-localization-hom-colimit"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Lemma 05SA(2), with the pointwise Kan-extension reformulation and Categories Remark 05Q4"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
    "query": "derived functor maps morphisms 05SA",
-   "results": "general leftDerived_map_eq and derived functor interfaces; no arbitrary Stacks 05SA statement",
+   "results": "CategoryTheory.Functor.rightDerived_map_eq; CategoryTheory.NatTrans.leftDerived; CategoryTheory.Functor.leftDerived_map_eq; CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app; CategoryTheory.Functor.leftDerivedNatTrans_app; CategoryTheory.NatTrans.rightDerived; CategoryTheory.Functor.mapDerivedCategoryFactorsh; CategoryTheory.Functor.mapDerivedCategoryFactors; none states arbitrary Stacks 05SA",
    "date": "2026-10-11",
    "verdict": "no match"
   },
   {
    "tool": "loogle",
    "query": "derived functor maps morphisms 05SA",
-   "results": "parse error / no hit",
+   "results": "0 hits; parse error: expected end of input",
    "date": "2026-10-11",
    "verdict": "unavailable"
   },
   {
    "tool": "grep",
    "query": "derived|triangulated in Mathlib/CategoryTheory",
-   "results": "general derived functor declarations, no 05SA result",
+   "results": "25 hits, mostly Lie derived series and generic imports; no Stacks 05SA morphism theorem",
    "date": "2026-10-11",
    "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "derived functor maps morphisms between values of an essentially constant pro-object",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-pur-left-derived-exact-when-defined",
   "by": "worker",
   "date": "2026-10-11"
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-def-sf-operations"
+ "unit": "sk-def-sf-operations",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-pur-derived-functor-morphisms-05sa",
+  "worker": "stage1",
+  "summary": "Checked Stacks Lemma 05SA(2) against the project statement. The split constructs the morphism between left-derived values by precomposing the pointwise Kan-extension limit cone along Q(f), verifies the denominator comparison square, and proves uniqueness using the localization Hom-colimit bijection. No new nodes were needed.",
+  "blueprint": "Realizes the ancestor blueprint clause 'Lemma 05SA(2): values of LF are functorial on morphisms'.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-dfm0157",
+  "group": "E1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-dfm0157 (reviewer sub-agent of L); spot-checked: Statement matches Stacks 05SA(2) (unique LF(f) w.r.t. the square compatibility; C4 ok). Step1 bridge gives limit cone with projections u_s; Step2 precomposition phi∘Q(f) well typed; Step4 uniqueness via Hom-colimit surjectivity + RMS2 (=MS2 second clause, in Situation 05S8 S is RMS) + cone naturality along g, valid (limit formulation replaces Stacks' MS3 independence). Citer 05sb uses existence+uniqueness exactly. No duplicate. FIX more, RETURN less: Step 3 said the image of (Y',Q(s')^{-1}) is 'represented by (X',Q(f')Q(s)^{-1})' (wrong first component); rewrote it as (Y',Q(s')^{-1}Q(f)) with f' a morphism from (X',Q(s)^{-1}) and cone naturality giving u_{s'}LF(f)=F(f')u_s.; 1 file(s) fixed by the reviewer"
+ }
 }
