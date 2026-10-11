@@ -239,5 +239,24 @@
  },
  "tool_uses": [
   "lem-weil-pbc-proper-immersion-closed"
- ]
+ ],
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProperFinitePresentationClosedLimit",
+  "declaration": "AlgebraicGeometry.exists_proper_finitePresentation_closedImmersion_limit",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProperFinitePresentationClosedLimit.lean",
+  "statement": "theorem exists_proper_finitePresentation_closedImmersion_limit {X S : Scheme.{u}} (f : X ⟶ S) [IsProper f] [CompactSpace S] [QuasiSeparatedSpace S] : (∃ (I : Type u) (_ : Preorder I) (_ : Nonempty I) (_ : IsDirected I (· ≤ ·)) (D : Iᵒᵖ ⥤ Scheme.{u}) (p : D ⟶ (Functor.const Iᵒᵖ).obj S) (π : (Functor.const Iᵒᵖ).obj X ⟶ D), (∀ i : Iᵒᵖ, IsProper (p.app i) ∧ LocallyOfFinitePresentation (p.app i) ∧ QuasiCompact (p.app i) ∧ QuasiSeparated (p.app i)) ∧ (∀ (i j : Iᵒᵖ) (a : i ⟶ j), IsClosedImmersion (D.map a)) ∧ (∀ i : Iᵒᵖ, IsClosedImmersion (π.app i) ∧ π.app i ≫ p.app i = f) ∧ Nonempty (IsLimit (Cone.mk X π))) ∧ (∃ (Y : Scheme.{u}) (i : X ⟶ Y) (g : Y ⟶ S), IsClosedImmersion i ∧ IsProper g ∧ LocallyOfFinitePresentation g ∧ QuasiCompact g ∧ QuasiSeparated g ∧ i ≫ g = f)",
+  "branch": "sheaf-dag",
+  "by": "G1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-pcp1345"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-pcp1345",
+  "group": "G1",
+  "result": "fix",
+  "note": "f proper [IsProper f], S qcqs [CompactSpace S][QuasiSeparatedSpace S], nonempty directed I : Type u (PartialOrder->Preorder per DIRECTED SETS / limit-affine-transition), D : Iop => Scheme with p : D -> const S (S-schemes), pi : const X -> D compatible and over f, stages IsProper + LFP/QC/QS (01TP), transitions and projections IsClosedImmersion, IsLimit (Cone.mk X pi) in Scheme, in-particular closed immersion i with i >> g = f, g proper fp"
+ }
 }
