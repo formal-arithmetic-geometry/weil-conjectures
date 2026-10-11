@@ -182,5 +182,23 @@
   "summary": "Proof written from Stacks 01GM. The source's three citations became nodes: 018R (glue one simplex: V = U amalg_{boundary} Delta[n]) -> lem-weil-pbc-simplicial-set-glue-simplex; 017N (Hom(-,K)_0 turns the pushout into a fibre product, plus the product case over an empty A needed for n = 0) -> lem-weil-pbc-simplicial-hom-object-pushout; 018V with 0177 (Hom(Delta[n],K)_0 = K_n, Hom(boundary,K)_0 = M_n(K), restriction = mu_n) -> lem-weil-pbc-simplicial-hom-object-standard-simplex, stated against the explicit matching object M_n(K) of def-weil-pbc-semi-representable-object instead of cosk_{n-1}sk_{n-1}. Written out what the source leaves implicit: that isomorphisms of SR(X) are coverings (so the identifications preserve coverings), the base change through the canonical fibre product of lem-weil-pbc-semi-representable-finite-limits and covering permanence (1),(2), and the n = 0 case through the final object. Statement unchanged (it assumes V also has finitely many nondegenerate simplices, which the source does not need but which follows from (1)-(3)). No Lean on slopmaster2.",
   "blueprint": "The steps realize the fourth paragraph of lem-weil-pbc-hypercover-refinement's proof ('Previously chosen faces prescribe compatible boundaries; the matching covers of U lift those boundaries after finite refinement') for one new simplex: step 1 and 4 the prescribed boundary (gluing along boundary Delta[n]), steps 5-6 the lift along the matching cover K_n -> M_n(K) by base change, step 7 the degree-0 case."
  },
- "reviewed": "2026-10-10 L: 7 steps following 01GM (V as a pushout of U and the simplex 018R, the Hom objects, the fibre square 017N, the bottom arrow as the matching map via 018V/0177, base change by permanence, the n = 0 case); 3 new nodes"
+ "reviewed": "2026-10-10 L: 7 steps following 01GM (V as a pushout of U and the simplex 018R, the Hom objects, the fibre square 017N, the bottom arrow as the matching map via 018V/0177, base change by permanence, the n = 0 case); 3 new nodes",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.HypercoverOneMoreSimplex",
+  "declaration": "AlgebraicGeometry.Scheme.isSemiRepresentableCovering_simplicialHomRestriction_one_more_simplex",
+  "file": "lean/Sheaf/AlgebraicGeometry/HypercoverOneMoreSimplex.lean",
+  "statement": "theorem isSemiRepresentableCovering_simplicialHomRestriction_one_more_simplex {X : Scheme.{u}} (K : SimplicialObject (FormalCoproduct.{w} X.Etale)) (hK : IsSemiRepresentableHypercover K) (V : SSet.{t}) (U : V.Subcomplex) (hV : ∀ i : ℕ, Finite (V.obj (op ⦋i⦌)) ∧ Nonempty (V.obj (op ⦋i⦌))) (hU : ∀ i : ℕ, Finite (U.toSSet.obj (op ⦋i⦌)) ∧ Nonempty (U.toSSet.obj (op ⦋i⦌))) [V.Finite] [U.toSSet.Finite] (n : ℕ) (x : V.obj (op ⦋n⦌)) (hx : x ∉ U.obj (op ⦋n⦌)) (hlower : ∀ i : ℕ, i < n → U.obj (op ⦋i⦌) = Set.univ) (hdegree : (Set.univ : Set (V.obj (op ⦋n⦌))) = U.obj (op ⦋n⦌) ∪ {x}) (hhigher : ∀ (j : ℕ) (z : V.obj (op ⦋j⦌)), n < j → z ∉ U.obj (op ⦋j⦌) → z ∈ V.degenerate j) {HV HU : FormalCoproduct.{w} X.Etale} (v : SimplicialHomFamily K V HV) (u : SimplicialHomFamily K U.toSSet HU) (hv : (simplicialHomFamilyFunctor K V).IsRepresentedBy v) (hu : (simplicialHomFamilyFunctor K U.toSSet).IsRepresentedBy u) : IsSemiRepresentableCovering (simplicialHomRestriction U v hu)",
+  "branch": "sheaf-dag",
+  "by": "M1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "M1",
+  "result": "pass",
+  "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
+ }
 }

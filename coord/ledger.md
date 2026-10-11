@@ -5504,3 +5504,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 18:09 L: merged deliver/C1/lem-pc-derived-tensor-action-naturality (stage 2; reviewer PASS; first push; Sheaf.Algebra.Homology.DerivedTensorActionNaturality DerivedCategory.exists_derivedTensor_action_naturality)
 - 18:09 L: merged deliver/N1/def-pc-global-derived-rhom (stage 2; reviewer FIX; first push; Sheaf.AlgebraicGeometry.GlobalDerivedHom AlgebraicGeometry.schemeGlobalDerivedHom)
 - 18:09 L: merged deliver/M1/lem-weil-pbc-hypercover-finite-simplex-lifting (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.HypercoverFiniteSimplexLifting AlgebraicGeometry.Scheme.hypercover_finite_simplex_lifting)
+- 18:09 L: merged deliver/M1/lem-weil-pbc-hypercover-one-more-simplex (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.HypercoverOneMoreSimplex AlgebraicGeometry.Scheme.isSemiRepresentableCovering_simplicialHomRestriction_one_more_simplex)
