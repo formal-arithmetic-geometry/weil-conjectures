@@ -226,5 +226,23 @@
   "item": "lem-weil-pbc-dimension-at-point-field-extension",
   "worker": "stage1",
   "summary": "Not a Mathlib leaf (no dimension at a point in Mathlib; three kinds of search recorded). Statement checked against Algebra 00P4 (label lemma-dimension-at-a-point-preserved-field-extension, line 28307; S (x)_k K written for K (x)_k S, isomorphic by the swap) and kept. Proof written from the source's proof (line 28319) in 5 steps: presentations P->S, P_K->S_K via lem-weil-pbc-presentation-base-change and the lying-over relation q'_K over q'; Noetherianity and flatness of kappa:P->P_K and j:S->S_K (field-extension-base-change-faithfully-flat, and the bijection P_K = P (x)_k K); the equality of the fibre rings P_K/q'P_K = S_K/qS_K with the corresponding primes, written out; the flat height formula 00ON (lem-weil-pbc-flat-height-formula) twice; and the codimension formula 00P2 specialized to polynomial quotients (lem-weil-pbc-polynomial-quotient-dimension-at-point-height-difference) twice. The source localizes before applying 00ON; the existing node states 00ON globally with heights, so no localization step is needed. No new nodes; all cited statements are in unit sk-thm-p1. The citer lem-weil-pbc-lci-field-change step 2(a) uses exactly this statement."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.DimensionAtPointFieldExtension",
+  "declaration": "AlgebraicGeometry.topologicalKrullDimAt_spec_tensorProduct_field_extension",
+  "file": "lean/Sheaf/AlgebraicGeometry/DimensionAtPointFieldExtension.lean",
+  "statement": "theorem topologicalKrullDimAt_spec_tensorProduct_field_extension {k : Type u} {K : Type v} {S : Type w} [Field k] [Field K] [CommRing S] [Algebra k K] [Algebra k S] [Algebra.FiniteType k S] (qK : Spec (.of (S ⊗[k] K))) : topologicalKrullDimAt (X := Spec (.of S)) (PrimeSpectrum.comap (Algebra.TensorProduct.includeLeftRingHom (R := k) (A := S) (B := K)) qK) = topologicalKrullDimAt qK",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-dpe0947",
+  "group": "F1",
+  "result": "pass",
+  "note": "fields k,K + [Algebra k K]=iota; S CommRing+Algebra k S+[Algebra.FiniteType k S]; S_K = S ⊗[k] K (node's order); j = includeLeftRingHom s↦s⊗1; qK : Spec(.of (S⊗[k]K)) arbitrary prime; q = PrimeSpectrum.comap j qK; both sides recorded root topologicalKrullDimAt on Spec carriers (#check); conclusion dim_q Spec S = dim_qK Spec S_K; zero algebra vacuous, universes independent"
  }
 }
