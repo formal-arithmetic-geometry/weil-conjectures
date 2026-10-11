@@ -38,13 +38,15 @@
   "def-pc-subfunctor"
  ],
  "lean": {
-  "module": "WeilConjectures.AlgebraicGeometry.Picard.Representability",
-  "declaration": "AlgebraicGeometry.picardFunctorInvertibleDirectImage",
-  "branch": "slopmaster2",
-  "line": 126,
-  "sorry_free": false,
-  "body_lines": 4,
-  "sorry_free_note": "corrected by L 14:55 UTC: the imported flag was shallow; the declaration rests on sorried declarations transitively (sorry map slopmaster2_71d63dcf, d edges); not attachable"
+  "module": "Sheaf.AlgebraicGeometry.Picard.InvertibleDirectImageClasses",
+  "declaration": "AlgebraicGeometry.picardInvertibleDirectImageClasses",
+  "file": "lean/Sheaf/AlgebraicGeometry/Picard/InvertibleDirectImageClasses.lean",
+  "statement": "def picardInvertibleDirectImageClasses {k : Type v} [Field k] {X : Scheme.{v}} (f : X ⟶ Spec (.of k)) [f.IsSmoothProjectiveCurve] (σ : Spec (.of k) ⟶ X) (hσ : σ ≫ f = 𝟙 (Spec (.of k))) [∀ T : Over (Spec (.of k)), HasInjectiveResolutions (pullback f T.hom).Modules] (T : Over (Spec (.of k))) : Set ((picardFunctorNormalized f σ hσ).toFunctor.obj (op T))",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-11",
+  "existing": false,
+  "note": "The old picardFunctorInvertibleDirectImage record requires [IsProper f] to construct its Subfunctor, while the dependency node defines only the pointwise assignment F(T). The recorded IsSmoothProjectiveCurve class does not provide a properness instance. This module states that exact pointwise assignment, reusing picardFunctorNormalized and IsInvertibleDirectImage, without a further properness hypothesis or a duplicate derived-image predicate; base-change stability is left to its separate node."
  },
  "blueprint_lean": [
   "AlgebraicGeometry.picardFunctorInvertibleDirectImage"
@@ -143,5 +145,13 @@
   "group": "F1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-fsf1805 (reviewer sub-agent of L); spot-checked: Read packet; checked def-pc-subfunctor, def-pc-open-subfunctor, def-pc-pic-sigma-functor, def-pc-base-change, def-pc-invertible-in-degree-zero, def-pc-derived-direct-image and lem-pc-f-open-subfunctor (stmt_deps include def-pc-f-subfunctor; item cites no lemma: no cycle). Smooth-projective-curve restriction correct (matches lem-pc-f-open-subfunctor). FIX more, RETURN less: (1) E/well-definedness: statement asserted 'This defines the subfunctor F' without proof, a claim missed by the second reading; rephrased so the item defines only the assignment T -> F(T) and states that stability under pullback (subfunctor in the sense of [def-pc-subfunctor]) and the open-immersion property are Lemma 44.6.2 (lem-pc-f-open-subfunctor step 1/2), without citing that node (avoids a cycle). (2) Made the object precise: Pic_{X/k,sigma} as a functor on schemes over k with u acting by u_X^* [def-pc-base-change], f_T named as base change, condition independent of representative, [def-pc-invertible-in-degree-zero] cited; uses_not_cited trimmed accordingly.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-aip1134",
+  "group": "E1",
+  "result": "pass",
+  "note": "field/X.Over/IsSmoothProjectiveCurve/GeometricallyIntegral instance/section σ with hσ/∀T HasInjectiveResolutions on X_T (same universe u)/i:T'⟶T in Over/ℒ in F(T) = pointwise subset of picardFunctorNormalized via source IsInvertibleDirectImage (old Subfunctor record needs IsProper, not inferable from IsSmoothProjectiveCurve: checked by inferInstance)/fT = pullback.snd, iX = baseChangeMap/counits of Classical.choose exists_tensorPullbackAdjunction/iX^* via tensorPullback/Nonempty Arrow iso; both modules compiled together in L sandbox with #check of every cited name"
  }
 }
