@@ -1,245 +1,254 @@
 {
- "id": "lem-weil-pbc-injective-acyclicity-bounded-below",
- "blueprint": {
-  "is": null,
-  "from": {
-   "node": "thm-weil-pbc-bounded-below",
-   "place": "proof Step 1 note: the Lean split used by the project to pass from injective acyclicity to bounded-below base change",
-   "via": []
+  "id": "lem-weil-pbc-injective-acyclicity-bounded-below",
+  "blueprint": {
+    "is": null,
+    "from": {
+      "node": "thm-weil-pbc-bounded-below",
+      "place": "proof Step 1 note: the Lean split used by the project to pass from injective acyclicity to bounded-below base change",
+      "via": []
+    },
+    "same_as": []
   },
-  "same_as": []
- },
- "kind": "statement",
- "title": "Injective acyclicity gives bounded-below base change (Lean split, general coefficients)",
- "statement": "Let $\\Lambda$ be a commutative ring and $f:X\\to Y$ a proper morphism of schemes [def-weil-proper-morphism]. Call a sheaf $F$ of $\\Lambda_X$-modules on $X_{\\Et}$ [def-weil-pbc-derived-categories] *torsion* if its underlying abelian sheaf is torsion [def-weil-pbc-torsion-etale-sheaf]. Throughout, sheaves and complexes of $\\Lambda$-modules are regarded as abelian sheaves and complexes of abelian sheaves through the forgetful functor, and the inverse images [def-weil-pbc-inverse-image], (higher) direct images [def-weil-pbc-direct-image] and the derived exchange morphism [def-weil-pbc-derived-exchange] are those of abelian sheaves. Assume that for every morphism $g:Y'\\to Y$, every cartesian square [def-weil-pbc-cartesian-square] and every injective torsion object $I$ of $\\Mod(X_{\\Et},\\Lambda)$, $R^qf'_*g'^{-1}I=0$ for $q>0$. Then for every such square and every $K\\in\\Dplus(X_{\\Et},\\Lambda)$ all of whose cohomology sheaves are torsion, represented by a bounded below complex of $\\Lambda_X$-modules and regarded as an object of $\\Dplus(X_{\\Et})$, the derived exchange morphism $\\Ex_{\\square,K}:g^{-1}Rf_*K\\to Rf'_*g'^{-1}K$ is an isomorphism in $\\Dplus(Y'_{\\Et})$. No hypothesis is put on $g$.",
- "source": {
-  "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Lemma 0A4B (lemma-proper-base-change-in-terms-of-injectives, line 18360), direction (2)=>(1), with the dévissage of its proof, and Lemma 0DDE (lemma-proper-base-change, line 18708) for complexes; the statement is that of the Lean declaration AlgebraicGeometry.Etale.hasTorsionBaseChange_of_hasInjectiveAcyclicity, module WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.BaseChangeProperty, lines 309-323 (branch slopmaster2), and its docstring"
- },
- "stmt_deps": [
-  "def-weil-proper-morphism",
-  "def-weil-pbc-cartesian-square",
-  "def-weil-pbc-derived-categories",
-  "def-weil-pbc-torsion-etale-sheaf",
-  "def-weil-pbc-direct-image",
-  "def-weil-pbc-inverse-image",
-  "def-weil-pbc-derived-exchange"
- ],
- "mathlib_searches": [
-  {
-   "tool": "leansearch",
-   "query": "injective acyclicity implies derived proper base change for a torsion sheaf of modules over an arbitrary ring",
-   "results": "service unavailable (Internal Server Error)",
-   "date": "2026-10-11",
-   "verdict": "unavailable"
-  },
-  {
-   "tool": "loogle",
-   "query": "IsIso (derivedBaseChangeMapPlus _ _) HasInjectiveAcyclicity",
-   "results": "no matching declaration; Loogle reports unknown identifier IsIso",
-   "date": "2026-10-11",
-   "verdict": "no match"
-  },
-  {
-   "tool": "leanfinder",
-   "query": "injective acyclicity implies proper base change for torsion complexes on the etale site",
-   "results": "generic K-injective and unrelated etale-stability declarations only; no theorem of this form",
-   "date": "2026-10-11",
-   "verdict": "no match"
-  },
-  {
-   "tool": "grep",
-   "query": "HasInjectiveAcyclicity|derivedBaseChangeMapPlus|proper base change in Mathlib/AlgebraicGeometry",
-   "results": "no hits in pinned Mathlib AlgebraicGeometry sources",
-   "date": "2026-10-11",
-   "verdict": "no match"
-  }
- ],
- "mathlib_match": null,
- "status": "split",
- "lean_audit": {
-  "master": {
-   "state": "none",
-   "decls": [],
-   "missing": [
-    "AlgebraicGeometry.Etale.hasTorsionBaseChange_of_hasInjectiveAcyclicity"
-   ]
-  },
-  "slopmaster2": {
-   "state": "sorry_here",
-   "decls": [
-    {
-     "name": "AlgebraicGeometry.Etale.hasTorsionBaseChange_of_hasInjectiveAcyclicity",
-     "module": "WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.BaseChangeProperty",
-     "lines": [
-      309,
-      323
-     ],
-     "kind": "theorem",
-     "sorry": true
-    }
-   ],
-   "missing": [],
-   "open": []
-  }
- },
- "proof": [
-  {
-   "text": "The degree-zero case is the arbitrary-coefficient torsion-sheaf dévissage: under injective acyclicity, for every cartesian square and torsion $\\Lambda_X$-module sheaf $F$, the derived exchange $\\Ex_{\\square,F}$ is an isomorphism in $\\Dplus(Y'_{\\Et})$.",
-   "uses": [
-    "lem-weil-pbc-arbitrary-ring-torsion-sheaf-base-change"
-   ],
-   "elementary": false,
-   "source": {
+  "kind": "statement",
+  "title": "Injective acyclicity gives bounded-below base change (Lean split, general coefficients)",
+  "statement": "Let $\\Lambda$ be a commutative ring and $f:X\\to Y$ a proper morphism of schemes [def-weil-proper-morphism]. Call a sheaf $F$ of $\\Lambda_X$-modules on $X_{\\Et}$ [def-weil-pbc-derived-categories] *torsion* if its underlying abelian sheaf is torsion [def-weil-pbc-torsion-etale-sheaf]. Throughout, sheaves and complexes of $\\Lambda$-modules are regarded as abelian sheaves and complexes of abelian sheaves through the forgetful functor, and the inverse images [def-weil-pbc-inverse-image], (higher) direct images [def-weil-pbc-direct-image] and the derived exchange morphism [def-weil-pbc-derived-exchange] are those of abelian sheaves. Assume coefficient-wise injective acyclicity: for every prime $\\ell$, every morphism $g:Y'\\to Y$, every cartesian square [def-weil-pbc-cartesian-square] with induced $f':X'\\to Y'$ and $g':X'\\to X$, and every injective sheaf $I$ of $(\\Lambda/\\ell)_X$-modules on $X_{\\Et}$, one has $R^qf'_*g'^{-1}I=0$ for all $q>0$ (higher direct images [def-weil-pbc-direct-image] of the inverse image [def-weil-pbc-inverse-image] of the underlying abelian sheaf). Then for every such square and every $K\\in\\Dplus(X_{\\Et},\\Lambda)$ all of whose cohomology sheaves are torsion, represented by a bounded below complex of $\\Lambda_X$-modules and regarded as an object of $\\Dplus(X_{\\Et})$, the derived exchange morphism $\\Ex_{\\square,K}:g^{-1}Rf_*K\\to Rf'_*g'^{-1}K$ is an isomorphism in $\\Dplus(Y'_{\\Et})$. No hypothesis is put on $g$.",
+  "source": {
     "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Lemma 0A4B, proof paragraphs 2-3"
-   }
+    "place": "Lemma 0A4B (lemma-proper-base-change-in-terms-of-injectives, line 18360), direction (2)=>(1), with the dévissage of its proof, and Lemma 0DDE (lemma-proper-base-change, line 18708) for complexes; the statement is that of the Lean declaration AlgebraicGeometry.Etale.hasTorsionBaseChange_of_hasInjectiveAcyclicity, module WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.BaseChangeProperty, lines 309-323 (branch slopmaster2), and its docstring"
   },
-  {
-   "text": "Choose a bounded-below representative of $K$ and the canonical truncation triangles. Applying $g^{-1}Rf_*$ and $Rf'_*g'^{-1}$ produces truncation exact couples and spectral sequences; exactness of inverse image identifies the second graded term with $R^pf'_*g'^{-1}\\mathcal H^q(K)$, and naturality of derived exchange gives a morphism between the couples.",
-   "uses": [
+  "stmt_deps": [
+    "def-weil-proper-morphism",
+    "def-weil-pbc-cartesian-square",
+    "def-weil-pbc-derived-categories",
+    "def-weil-pbc-torsion-etale-sheaf",
+    "def-weil-pbc-direct-image",
+    "def-weil-pbc-inverse-image",
+    "def-weil-pbc-derived-exchange"
+  ],
+  "mathlib_searches": [
+    {
+      "tool": "leansearch",
+      "query": "injective acyclicity implies derived proper base change for a torsion sheaf of modules over an arbitrary ring",
+      "results": "service unavailable (Internal Server Error)",
+      "date": "2026-10-11",
+      "verdict": "unavailable"
+    },
+    {
+      "tool": "loogle",
+      "query": "IsIso (derivedBaseChangeMapPlus _ _) HasInjectiveAcyclicity",
+      "results": "no matching declaration; Loogle reports unknown identifier IsIso",
+      "date": "2026-10-11",
+      "verdict": "no match"
+    },
+    {
+      "tool": "leanfinder",
+      "query": "injective acyclicity implies proper base change for torsion complexes on the etale site",
+      "results": "generic K-injective and unrelated etale-stability declarations only; no theorem of this form",
+      "date": "2026-10-11",
+      "verdict": "no match"
+    },
+    {
+      "tool": "grep",
+      "query": "HasInjectiveAcyclicity|derivedBaseChangeMapPlus|proper base change in Mathlib/AlgebraicGeometry",
+      "results": "no hits in pinned Mathlib AlgebraicGeometry sources",
+      "date": "2026-10-11",
+      "verdict": "no match"
+    }
+  ],
+  "mathlib_match": null,
+  "status": "split",
+  "lean_audit": {
+    "master": {
+      "state": "none",
+      "decls": [],
+      "missing": [
+        "AlgebraicGeometry.Etale.hasTorsionBaseChange_of_hasInjectiveAcyclicity"
+      ]
+    },
+    "slopmaster2": {
+      "state": "sorry_here",
+      "decls": [
+        {
+          "name": "AlgebraicGeometry.Etale.hasTorsionBaseChange_of_hasInjectiveAcyclicity",
+          "module": "WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.BaseChangeProperty",
+          "lines": [
+            309,
+            323
+          ],
+          "kind": "theorem",
+          "sorry": true
+        }
+      ],
+      "missing": [],
+      "open": []
+    }
+  },
+  "proof": [
+    {
+      "text": "The degree-zero case is the arbitrary-coefficient torsion-sheaf dévissage: under coefficient-wise injective acyclicity (the hypothesis of this lemma), for every cartesian square and torsion $\\Lambda_X$-module sheaf $F$, the derived exchange $\\Ex_{\\square,F}$ is an isomorphism in $\\Dplus(Y'_{\\Et})$. (The hypothesis of this lemma is exactly that of the cited node.)",
+      "uses": [
+        "lem-weil-pbc-arbitrary-ring-torsion-sheaf-base-change"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/etale-cohomology.tex",
+        "place": "Lemma 0A4B, proof paragraphs 2-3"
+      }
+    },
+    {
+      "text": "Choose a bounded-below representative of $K$ and the canonical truncation triangles. Applying $g^{-1}Rf_*$ and $Rf'_*g'^{-1}$ produces truncation exact couples and spectral sequences; exactness of inverse image identifies the second graded term with $R^pf'_*g'^{-1}\\mathcal H^q(K)$, and naturality of derived exchange gives a morphism between the couples.",
+      "uses": [
+        "def-weil-pbc-hypercohomology-filtrations",
+        "def-weil-pbc-truncation-exact-couples",
+        "lem-sp-truncation-couple-exact",
+        "lem-weil-pbc-derived-exchange-triangulated",
+        "prop-weil-pbc-inverse-image-exact",
+        "def-weil-pbc-derived-exchange"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/etale-cohomology.tex",
+        "place": "Lemma 0DDE, proof: truncation spectral sequences"
+      }
+    },
+    {
+      "text": "Every cohomology sheaf $\\mathcal H^q(K)$ is torsion, so Step 1 identifies the morphism on every $E_2$-term as an isomorphism.",
+      "uses": [
+        "lem-weil-pbc-arbitrary-ring-torsion-sheaf-base-change"
+      ],
+      "elementary": true,
+      "source": {
+        "document": "literature/stacks-project/etale-cohomology.tex",
+        "place": "Lemma 0DDE, proof after the two $E_2$ descriptions"
+      }
+    },
+    {
+      "text": "Induction on the page number preserves the isomorphism because $E_{r+1}$ is the cohomology of $(E_r,d_r)$ and the morphism commutes with $d_r$. Bounded-below convergence gives finite exhaustive separated filtrations on each total-degree abutment, with $E_\\infty$ as associated graded.",
+      "uses": [
+        "lem-sp-page-induction",
+        "lemma-weil-pbc-hypercohomology-convergence"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/etale-cohomology.tex",
+        "place": "Lemma 0DDE, proof of convergence and page induction"
+      }
+    },
+    {
+      "text": "The exchange map on the abutments respects the finite filtrations and induces the $E_\\infty$ isomorphisms on their graded pieces. Finite-filtration induction therefore makes each cohomology map $\\mathcal H^n(\\Ex_{\\square,K})$ an isomorphism.",
+      "uses": [
+        "lemma-weil-pbc-exact-couple-abutment",
+        "lem-sp-finite-filtration-induction"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/etale-cohomology.tex",
+        "place": "Lemma 0DDE, proof of the abutment filtration"
+      }
+    },
+    {
+      "text": "A morphism in the bounded-below derived category whose cohomology sheaf maps are all isomorphisms is an isomorphism, so $\\Ex_{\\square,K}$ is an isomorphism in $\\Dplus(Y'_{\\Et})$.",
+      "uses": [
+        "lem-weil-pbc-derived-plus-iso-on-cohomology"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/etale-cohomology.tex",
+        "place": "Lemma 0DDE, final paragraph"
+      }
+    }
+  ],
+  "proof_deps": [
+    "lem-weil-pbc-arbitrary-ring-torsion-sheaf-base-change",
     "def-weil-pbc-hypercohomology-filtrations",
     "def-weil-pbc-truncation-exact-couples",
     "lem-sp-truncation-couple-exact",
     "lem-weil-pbc-derived-exchange-triangulated",
     "prop-weil-pbc-inverse-image-exact",
-    "def-weil-pbc-derived-exchange"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Lemma 0DDE, proof: truncation spectral sequences"
-   }
-  },
-  {
-   "text": "Every cohomology sheaf $\\mathcal H^q(K)$ is torsion, so Step 1 identifies the morphism on every $E_2$-term as an isomorphism.",
-   "uses": [
-    "lem-weil-pbc-arbitrary-ring-torsion-sheaf-base-change"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Lemma 0DDE, proof after the two $E_2$ descriptions"
-   }
-  },
-  {
-   "text": "Induction on the page number preserves the isomorphism because $E_{r+1}$ is the cohomology of $(E_r,d_r)$ and the morphism commutes with $d_r$. Bounded-below convergence gives finite exhaustive separated filtrations on each total-degree abutment, with $E_\\infty$ as associated graded.",
-   "uses": [
+    "def-weil-pbc-derived-exchange",
     "lem-sp-page-induction",
-    "lemma-weil-pbc-hypercohomology-convergence"
-   ],
-   "elementary": false,
-   "source": {
+    "lemma-weil-pbc-hypercohomology-convergence",
+    "lemma-weil-pbc-exact-couple-abutment",
+    "lem-sp-finite-filtration-induction",
+    "lem-weil-pbc-derived-plus-iso-on-cohomology"
+  ],
+  "proof_origin": {
+    "by": "document",
     "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Lemma 0DDE, proof of convergence and page induction"
-   }
+    "place": "Lemma 0A4B and Lemma 0DDE"
   },
-  {
-   "text": "The exchange map on the abutments respects the finite filtrations and induces the $E_\\infty$ isomorphisms on their graded pieces. Finite-filtration induction therefore makes each cohomology map $\\mathcal H^n(\\Ex_{\\square,K})$ an isomorphism.",
-   "uses": [
+  "merged_into": null,
+  "import_flags": [],
+  "created": {
+    "by": "worker",
+    "item": "thm-weil-pbc-bounded-below",
+    "date": "2026-10-09"
+  },
+  "chapter": "sec-proper-base-change",
+  "unit": "sk-thm-iff",
+  "split_report": {
+    "date": "2026-10-11",
+    "item": "lem-weil-pbc-injective-acyclicity-bounded-below",
+    "worker": "stage1",
+    "summary": "Split the arbitrary-coefficient injective-acyclicity implication into a genuine degree-zero torsion-sheaf dévissage lemma and the bounded-below truncation spectral-sequence argument. The degree-zero lemma is new and unsplit; the complex-level exact-couple, convergence, filtration, and derived-category steps cite existing nodes.",
+    "blueprint": "The steps realize the Lean split noted in Step 1 of thm-weil-pbc-bounded-below and the bounded-below complex argument of Lemma 0DDE.",
+    "tool_uses": [
+      {
+        "node": "lem-sp-truncation-couple-exact",
+        "why": "generic exact-couple construction for bounded-below truncations"
+      },
+      {
+        "node": "prop-weil-pbc-inverse-image-exact",
+        "why": "generic exactness of inverse image needed to identify cohomology sheaves"
+      },
+      {
+        "node": "lem-sp-page-induction",
+        "why": "generic spectral-sequence page induction"
+      },
+      {
+        "node": "lemma-weil-pbc-hypercohomology-convergence",
+        "why": "generic bounded-below convergence and finite abutment filtrations"
+      },
+      {
+        "node": "lemma-weil-pbc-exact-couple-abutment",
+        "why": "generic identification of the induced abutment map"
+      },
+      {
+        "node": "lem-sp-finite-filtration-induction",
+        "why": "generic finite-filtration isomorphism criterion"
+      }
+    ]
+  },
+  "tool_uses": [
+    "lem-sp-truncation-couple-exact",
+    "prop-weil-pbc-inverse-image-exact",
+    "lem-sp-page-induction",
+    "lemma-weil-pbc-hypercohomology-convergence",
+    "lemma-weil-pbc-exact-couple-abutment",
+    "lem-sp-finite-filtration-induction",
+    "lem-sp-truncation-couple-exact",
+    "prop-weil-pbc-inverse-image-exact",
+    "lem-sp-page-induction",
+    "lemma-weil-pbc-hypercohomology-convergence",
     "lemma-weil-pbc-exact-couple-abutment",
     "lem-sp-finite-filtration-induction"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Lemma 0DDE, proof of the abutment filtration"
-   }
+  ],
+  "reviewed": {
+    "date": "2026-10-10",
+    "by": "L",
+    "reviewer": "R-iab3016",
+    "group": "F1",
+    "result": "pass",
+    "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-iab3016 (reviewer sub-agent of L); spot-checked: Read all six steps against cited statements, 0A4B/0DDE text, Lean decl lines 309-323 and def HasInjectiveAcyclicity; checked citers (thm-weil-pbc-bounded-below, lemma-weil-pbc-prime-proper-base-change, prop-weil-pbc-projective-line) use the abelian D+ conclusion. FIX more, RETURN less: (1) C4/E7 item: Ex and R^q f'_* are defined only for abelian sheaves (def-weil-pbc-derived-exchange, def-weil-pbc-direct-image) but the item concluded iso in D+(Y'_et,Lambda); retyped to the underlying abelian complex, iso in D+(Y'_et). (2) C4 new node lem-weil-pbc-arbitrary-ring-torsion-sheaf-base-change cited def-weil-pbc-injective-acyclicity-property for Lambda-coefficient acyclicity, but that def is IA_r for F_r-modules only; dropped the citation (hypothesis already stated inline), cited def-weil-pbc-torsion-etale-sheaf, direct-image, inverse-image for torsion and R^q, stmt_deps corrected. New node not class b/c/d (arbitrary Lambda; no existing node with IA_Lambda hypothesis; delivery's Mathlib searches recorded). Properness enters only through the new node (Step 1), as in 0A4B.; 2 file(s) fixed by the reviewer"
   },
-  {
-   "text": "A morphism in the bounded-below derived category whose cohomology sheaf maps are all isomorphisms is an isomorphism, so $\\Ex_{\\square,K}$ is an isomorphism in $\\Dplus(Y'_{\\Et})$.",
-   "uses": [
-    "lem-weil-pbc-derived-plus-iso-on-cohomology"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Lemma 0DDE, final paragraph"
-   }
-  }
- ],
- "proof_deps": [
-  "lem-weil-pbc-arbitrary-ring-torsion-sheaf-base-change",
-  "def-weil-pbc-hypercohomology-filtrations",
-  "def-weil-pbc-truncation-exact-couples",
-  "lem-sp-truncation-couple-exact",
-  "lem-weil-pbc-derived-exchange-triangulated",
-  "prop-weil-pbc-inverse-image-exact",
-  "def-weil-pbc-derived-exchange",
-  "lem-sp-page-induction",
-  "lemma-weil-pbc-hypercohomology-convergence",
-  "lemma-weil-pbc-exact-couple-abutment",
-  "lem-sp-finite-filtration-induction",
-  "lem-weil-pbc-derived-plus-iso-on-cohomology"
- ],
- "proof_origin": {
-  "by": "document",
-  "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Lemma 0A4B and Lemma 0DDE"
- },
- "merged_into": null,
- "import_flags": [],
- "created": {
-  "by": "worker",
-  "item": "thm-weil-pbc-bounded-below",
-  "date": "2026-10-09"
- },
- "chapter": "sec-proper-base-change",
- "unit": "sk-thm-iff",
- "split_report": {
-  "date": "2026-10-11",
-  "item": "lem-weil-pbc-injective-acyclicity-bounded-below",
-  "worker": "stage1",
-  "summary": "Split the arbitrary-coefficient injective-acyclicity implication into a genuine degree-zero torsion-sheaf dévissage lemma and the bounded-below truncation spectral-sequence argument. The degree-zero lemma is new and unsplit; the complex-level exact-couple, convergence, filtration, and derived-category steps cite existing nodes.",
-  "blueprint": "The steps realize the Lean split noted in Step 1 of thm-weil-pbc-bounded-below and the bounded-below complex argument of Lemma 0DDE.",
-  "tool_uses": [
-   {
-    "node": "lem-sp-truncation-couple-exact",
-    "why": "generic exact-couple construction for bounded-below truncations"
-   },
-   {
-    "node": "prop-weil-pbc-inverse-image-exact",
-    "why": "generic exactness of inverse image needed to identify cohomology sheaves"
-   },
-   {
-    "node": "lem-sp-page-induction",
-    "why": "generic spectral-sequence page induction"
-   },
-   {
-    "node": "lemma-weil-pbc-hypercohomology-convergence",
-    "why": "generic bounded-below convergence and finite abutment filtrations"
-   },
-   {
-    "node": "lemma-weil-pbc-exact-couple-abutment",
-    "why": "generic identification of the induced abutment map"
-   },
-   {
-    "node": "lem-sp-finite-filtration-induction",
-    "why": "generic finite-filtration isomorphism criterion"
-   }
+  "lead_note": "2026-10-10 L (R-iab3016): Item statement retyped (E7): its cited direct-image and derived-exchange nodes are abelian-only, so the conclusion is now in D+(Y'_et) of the underlying abelian complex (what citers thm-weil-pbc-bounded-below / lemma-weil-pbc-prime-proper-base-change use); the Lambda-derived reading of the Lean needs the forgetful/Rf_* comparison, not a node yet.",
+  "statement_change": {
+    "date": "2026-10-11",
+    "by": "L",
+    "what": "hypothesis changed from \"for every square and every injective torsion object I of Mod(X_et, Lambda), R^q f'_* g'^{-1} I = 0 for q>0\" to the coefficient-wise form (for every prime l, every square and every injective sheaf I of (Lambda/l)_X-modules), word for word the hypothesis of lem-weil-pbc-arbitrary-ring-torsion-sheaf-base-change after its merge e0ef044ea (Stacks 0A4B(2) is stated for Z/l-modules); the old hypothesis was not known to imply the new one (checker R-e7c0032); conclusion unchanged.",
+    "old_hypothesis": "Assume that for every morphism $g:Y'\\to Y$, every cartesian square [def-weil-pbc-cartesian-square] and every injective torsion object $I$ of $\\Mod(X_{\\Et},\\Lambda)$, $R^qf'_*g'^{-1}I=0$ for $q>0$."
+  },
+  "lead_notes": [
+    "00:34 UTC L: hypothesis restated to the coefficient-wise form of lem-weil-pbc-arbitrary-ring-torsion-sheaf-base-change (E7 cascade from the reviewer merge e0ef044ea); checker R-e7c0032 read the citers: prop-weil-pbc-projective-line step 4 with lem-weil-pbc-injective-module-direct-image-acyclic at R = Lambda/l supplies the new hypothesis, thm-weil-pbc-bounded-below step 1 names this lemma only in text, lemma-weil-pbc-prime-proper-base-change only in lean_audit; the slopmaster2 declaration Etale.hasTorsionBaseChange_of_hasInjectiveAcyclicity (BaseChangeProperty.lean:309-323, sorry) still carries the old torsion-Lambda hypothesis: STATEMENT MISMATCH with Lean to be resolved at stage 3 (the Lean HasInjectiveAcyclicity at :187-196 should be restated coefficient-wise, or the old implication proved)."
   ]
- },
- "tool_uses": [
-  "lem-sp-truncation-couple-exact",
-  "prop-weil-pbc-inverse-image-exact",
-  "lem-sp-page-induction",
-  "lemma-weil-pbc-hypercohomology-convergence",
-  "lemma-weil-pbc-exact-couple-abutment",
-  "lem-sp-finite-filtration-induction",
-  "lem-sp-truncation-couple-exact",
-  "prop-weil-pbc-inverse-image-exact",
-  "lem-sp-page-induction",
-  "lemma-weil-pbc-hypercohomology-convergence",
-  "lemma-weil-pbc-exact-couple-abutment",
-  "lem-sp-finite-filtration-induction"
- ],
- "reviewed": {
-  "date": "2026-10-10",
-  "by": "L",
-  "reviewer": "R-iab3016",
-  "group": "F1",
-  "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-iab3016 (reviewer sub-agent of L); spot-checked: Read all six steps against cited statements, 0A4B/0DDE text, Lean decl lines 309-323 and def HasInjectiveAcyclicity; checked citers (thm-weil-pbc-bounded-below, lemma-weil-pbc-prime-proper-base-change, prop-weil-pbc-projective-line) use the abelian D+ conclusion. FIX more, RETURN less: (1) C4/E7 item: Ex and R^q f'_* are defined only for abelian sheaves (def-weil-pbc-derived-exchange, def-weil-pbc-direct-image) but the item concluded iso in D+(Y'_et,Lambda); retyped to the underlying abelian complex, iso in D+(Y'_et). (2) C4 new node lem-weil-pbc-arbitrary-ring-torsion-sheaf-base-change cited def-weil-pbc-injective-acyclicity-property for Lambda-coefficient acyclicity, but that def is IA_r for F_r-modules only; dropped the citation (hypothesis already stated inline), cited def-weil-pbc-torsion-etale-sheaf, direct-image, inverse-image for torsion and R^q, stmt_deps corrected. New node not class b/c/d (arbitrary Lambda; no existing node with IA_Lambda hypothesis; delivery's Mathlib searches recorded). Properness enters only through the new node (Step 1), as in 0A4B.; 2 file(s) fixed by the reviewer"
- },
- "lead_note": "2026-10-10 L (R-iab3016): Item statement retyped (E7): its cited direct-image and derived-exchange nodes are abelian-only, so the conclusion is now in D+(Y'_et) of the underlying abelian complex (what citers thm-weil-pbc-bounded-below / lemma-weil-pbc-prime-proper-base-change use); the Lambda-derived reading of the Lean needs the forgetful/Rf_* comparison, not a node yet."
 }
