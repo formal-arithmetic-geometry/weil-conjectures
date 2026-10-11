@@ -18,7 +18,8 @@ of a morphism of sheaves from an étale `U`-scheme to an isomorphic étale `X`-s
 
 ## Main results
 
-- `CategoryTheory.NatTrans.isIso_app_of_iso`.
+- `CategoryTheory.NatTrans.isIso_app_of_iso`, and its version
+  `CategoryTheory.NatTrans.isIso_app_app_of_iso` for bifunctors.
 -/
 
 @[expose] public section
@@ -60,5 +61,22 @@ lemma conj_eq_comp_conj' {C D : Type*} [Category C] [Category D]
       (t₁.symm ≪≫ c.app X).hom ≫ F₂.map φ ≫ ((c.app Y).symm ≪≫ s₁).hom := by
   simp only [Iso.trans_hom, Iso.symm_hom, Iso.app_hom, Iso.app_inv, Category.assoc,
     NatTrans.naturality_assoc, Iso.hom_inv_id_app_assoc]
+
+/-- A component `(τ.app M').app L'` of a natural transformation of bifunctors is an isomorphism
+if the component at isomorphic arguments `(M, L)` is. -/
+lemma NatTrans.isIso_app_app_of_iso {C D E : Type*} [Category* C] [Category* D] [Category* E]
+    {F G : C ⥤ D ⥤ E} (τ : F ⟶ G) {M M' : C} {L L' : D}
+    (eM : M ≅ M') (eL : L ≅ L') [IsIso ((τ.app M).app L)] : IsIso ((τ.app M').app L') := by
+  have h₁ := (τ.app M).naturality eL.hom
+  have h₂ := congr_app (τ.naturality eM.hom) L'
+  dsimp at h₂
+  have : IsIso ((F.obj M).map eL.hom ≫ (τ.app M).app L') := by
+    rw [h₁]
+    infer_instance
+  have : IsIso ((τ.app M).app L') := IsIso.of_isIso_comp_left ((F.obj M).map eL.hom) _
+  have : IsIso ((F.map eM.hom).app L' ≫ (τ.app M').app L') := by
+    rw [h₂]
+    infer_instance
+  exact IsIso.of_isIso_comp_left ((F.map eM.hom).app L') _
 
 end CategoryTheory
