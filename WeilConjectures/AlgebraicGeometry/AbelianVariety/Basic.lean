@@ -87,6 +87,31 @@ instance IsAbelianVariety.isCommMonObj (A : Over (Spec (.of K))) [GrpObj A]
     [IsAbelianVariety A] : IsCommMonObj A :=
   isCommMonObj_of_isProper_of_geometricallyIntegral A
 
+/-- Blueprint `d-ab-field`: an abelian variety is geometrically connected over the base field.
+
+It is proper and connected with a rational point, the unit, so this is Stacks 04KV
+(`GeometricallyConnected.of_universallyClosed_of_section`). -/
+instance IsAbelianVariety.geometricallyConnected (A : Over (Spec (.of K))) [GrpObj A]
+    [IsAbelianVariety A] : GeometricallyConnected A.hom :=
+  GeometricallyConnected.of_universallyClosed_of_section A.hom η[A].left (by simp)
+
+/-- Blueprint `sk-d-ab-field`: Finite fields, Frobenius and abelian varieties.
+
+This is also blueprint `d-ab-field`, which defines an abelian variety over `K` as a proper, smooth,
+geometrically connected, commutative group scheme of finite type over `K`. For a group scheme
+`A` over `K` this agrees with `AlgebraicGeometry.IsAbelianVariety` (proper, smooth and
+connected): a geometrically connected scheme over the one-point space `Spec K` is connected, and
+conversely an abelian variety is geometrically connected
+(`AlgebraicGeometry.IsAbelianVariety.geometricallyConnected`). Finite type is part of
+properness, and commutativity is automatic (`AlgebraicGeometry.IsAbelianVariety.isCommMonObj`). -/
+theorem isAbelianVariety_iff_geometricallyConnected (A : Over (Spec (.of K))) [GrpObj A] :
+    IsAbelianVariety A ↔ IsProper A.hom ∧ Smooth A.hom ∧ GeometricallyConnected A.hom := by
+  refine ⟨fun _ ↦ ⟨inferInstance, inferInstance, inferInstance⟩, fun ⟨_, _, _⟩ ↦ ?_⟩
+  obtain ⟨x⟩ := (inferInstance : Nonempty (Spec (.of K)))
+  have h := A.hom.isConnected_preimage_singleton x
+  rw [Set.eq_univ_of_forall (s := A.hom ⁻¹' {x}) fun y ↦ Subsingleton.elim (A.hom y) x] at h
+  exact { toConnectedSpace := connectedSpace_iff_univ.mpr h }
+
 /-- The base change `A_L` of an abelian variety `A` over `K` along a field extension
 `Spec L ⟶ Spec K` is an abelian variety over `L`: properness and smoothness are stable under base
 change, and `A_L` is connected because `A`, being proper and connected with a rational point (the
