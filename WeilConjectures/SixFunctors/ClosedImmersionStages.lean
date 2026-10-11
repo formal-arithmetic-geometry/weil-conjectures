@@ -8,7 +8,6 @@ module
 public import WeilConjectures.CategoryTheory.DerivedCategory.Complete.RationalCoefficient
 public import WeilConjectures.CategoryTheory.DerivedCategory.Complete.RationalizationMap
 public import WeilConjectures.EtaleCohomology.PoincareDuality.PointPerfect
-public import WeilConjectures.Mathlib.CategoryTheory.Idempotents.FunctorExtension
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LowerStar
 public import WeilConjectures.SixFunctors.Etale.Derived.DerivedComplete
 public import WeilConjectures.SixFunctors.Etale.Derived.Triangulated
@@ -36,7 +35,7 @@ being torsion of order invertible in `k`.
   complete objects of `D(X_ét, 𝒪_E)` whose reductions modulo `𝔪_Eⁿ` are bounded constructible of
   uniformly bounded Tor amplitude; the functor is
   `AlgebraicGeometry.Etale.boundedConstructibleIntegralLowerStar`.
-* `E`: the Karoubi envelope of the rationalization of `Dᵇc(-, 𝒪_E)`
+* `E`: the rationalization of `Dᵇc(-, 𝒪_E)`, without Karoubi completion
   (`AlgebraicGeometry.Etale.DerivedCategoryBoundedConstructibleRational`, blueprint
   `def-weil-rationalization-karoubi`), the rationalization realised inside the rationalization
   `D_comp(X_ét, E)` of the derived complete objects; the functor is
@@ -51,8 +50,7 @@ repository, and the corestricted functor is fully faithful: `Ri_*` is fully fait
 whole ambient derived category (integral and `ℚ̄_ℓ` stages: because `i_*` is fully faithful and
 preserves K-injective complexes), the functor induced on rationalizations by a fully faithful
 linear triangulated functor is fully faithful (`CategoryTheory.Rationalization.full_map`, the
-blueprint's argument that bijectivity persists after tensoring with `E`), and Karoubi extension
-preserves full faithfulness (`CategoryTheory.Idempotents.full_functorExtension₂_obj`). The unit
+blueprint's argument that bijectivity persists after tensoring with `E`). The unit
 of any right adjoint of a fully faithful functor is an isomorphism.
 
 The blueprint's proof at the integral stage goes through the Roos triangles of the `𝒪_E`-adic
@@ -392,10 +390,10 @@ def Etale.DerivedCategory.boundedConstructibleRational (X : Scheme.{u}) :
       ((DerivedCategoryDerivedCompleteIntegral.ι _ l E).obj L) ∧
     Nonempty ((DerivedCategoryDerivedCompleteRational.fromIntegral _ l E).obj L ≅ K)
 
-/-- The rational stage `Dᵇc(X, E)` of blueprint `def-weil-rationalization-karoubi`: the Karoubi
-envelope of the rationalization of `Dᵇc(X, 𝒪_E)`. -/
+/-- The rational stage `Dᵇc(X, E) = Dᵇc(X, 𝒪_E)[1/ϖ_E]` of blueprint
+`def-weil-rationalization-karoubi` (where, despite the name, no Karoubi completion is taken). -/
 abbrev Etale.DerivedCategoryBoundedConstructibleRational (X : Scheme.{u}) :=
-  Idempotents.Karoubi (Etale.DerivedCategory.boundedConstructibleRational l E X).FullSubcategory
+  (Etale.DerivedCategory.boundedConstructibleRational l E X).FullSubcategory
 
 /-- The ring of integers `𝒪_E` of a finite extension of `ℚ_ℓ` is noetherian, being a principal
 ideal ring; so is its copy in `Type (u + 1)`. -/
@@ -422,23 +420,21 @@ lemma Etale.boundedConstructibleRational_rightDerivedLowerStar_of_isClosedImmers
       L).symm ≪≫ (Etale.rightDerivedLowerStarDerivedCompleteRational l E i).mapIso e⟩⟩
 
 /-- Blueprint `prop-sf-closed-unit-all-stages`, rational stage: the direct image
-`i_* : Dᵇc(Z, E) ⥤ Dᵇc(X, E)`, the Karoubi extension of the functor induced on the
+`i_* : Dᵇc(Z, E) ⥤ Dᵇc(X, E)`, the restriction of the functor induced on the
 rationalizations of `Dᵇc(-, 𝒪_E)` by the integral `Ri_*`. -/
 noncomputable def Etale.boundedConstructibleRationalLowerStar :
     Etale.DerivedCategoryBoundedConstructibleRational l E Z ⥤
       Etale.DerivedCategoryBoundedConstructibleRational l E X :=
-  (Idempotents.functorExtension₂ _ _).obj
-    ((Etale.DerivedCategory.boundedConstructibleRational l E X).lift
-      ((Etale.DerivedCategory.boundedConstructibleRational l E Z).ι ⋙
-        Etale.rightDerivedLowerStarDerivedCompleteRational l E i)
-      (fun K ↦ Etale.boundedConstructibleRational_rightDerivedLowerStar_of_isClosedImmersion i aX
-        l E K.property))
+  (Etale.DerivedCategory.boundedConstructibleRational l E X).lift
+    ((Etale.DerivedCategory.boundedConstructibleRational l E Z).ι ⋙
+      Etale.rightDerivedLowerStarDerivedCompleteRational l E i)
+    (fun K ↦ Etale.boundedConstructibleRational_rightDerivedLowerStar_of_isClosedImmersion i aX
+      l E K.property)
 
 /-- Blueprint `prop-sf-closed-unit-all-stages`, rational stage: `i_*` is fully faithful on
 `Dᵇc(-, E)`. The functor induced on rationalizations by the fully faithful integral `Ri_*` is
 fully faithful (`CategoryTheory.Rationalization.full_map`), which is the blueprint's argument
-that bijectivity persists after tensoring with `E`, and Karoubi extension preserves full
-faithfulness (`CategoryTheory.Idempotents.full_functorExtension₂_obj`). -/
+that bijectivity persists after tensoring with `E`. -/
 instance Etale.full_boundedConstructibleRationalLowerStar :
     (Etale.boundedConstructibleRationalLowerStar i aX l E).Full := by
   unfold Etale.boundedConstructibleRationalLowerStar
