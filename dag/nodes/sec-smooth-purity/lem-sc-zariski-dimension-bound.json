@@ -22,13 +22,8 @@
  ],
  "proof": [
   {
-   "text": "Forget the scheme structure. By [lem-weil-pbc-noetherian-scheme-closed-subsets-minimal] the underlying topological space of $X$ is Noetherian, and by hypothesis its topological Krull dimension [def-kun-topological-krull-dimension] is at most $d$. The small Zariski site [def-sc-zariski-site] has exactly the open subsets of this space and jointly surjective open coverings, so an abelian sheaf $F$ on $X_{\\rm Zar}$ is an abelian sheaf on the space, and by [def-sc-topological-abelian-cohomology] the topological cohomology $H^q(X,F)$ is the group $H^q(X_{\\rm Zar},F)$ of [def-sc-zariski-cohomology]. Therefore [lem-sc-noetherian-topological-cohomology-vanishing] applies to $F$ and gives $H^q(X_{\\rm Zar},F)=0$ for every $q>d$.",
+   "text": "Use the existing `IsNoetherian` class constructor: the assumptions `[CompactSpace X] [IsLocallyNoetherian X]` give an `IsNoetherian X` instance. Apply `TopCat.isZero_noetherian_topological_cohomology_of_dimension_bound` directly; the Zariski site is definitionally the site of opens of the underlying topological space, so the cohomology object has exactly the required type.",
    "uses": [
-    "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal",
-    "def-kun-topological-krull-dimension",
-    "def-sc-zariski-site",
-    "def-sc-topological-abelian-cohomology",
-    "def-sc-zariski-cohomology",
     "lem-sc-noetherian-topological-cohomology-vanishing"
    ],
    "elementary": false,
@@ -39,17 +34,12 @@
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal",
-  "def-kun-topological-krull-dimension",
-  "def-sc-zariski-site",
-  "def-sc-topological-abelian-cohomology",
-  "def-sc-zariski-cohomology",
   "lem-sc-noetherian-topological-cohomology-vanishing"
  ],
  "proof_origin": {
-  "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-sc-zariski-dimension-bound.md",
-  "place": "## Proof"
+  "by": "worker",
+  "document": "Mathlib.AlgebraicGeometry.Noetherian and Sheaf.Topology.NoetherianTopologicalCohomologyVanishing",
+  "place": "direct specialization via IsNoetherian.mk"
  },
  "mathlib_searches": [
   {
@@ -157,5 +147,15 @@
   "group": "M1",
   "result": "pass",
   "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "X-2cb89",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261011T234804-L-439981",
+  "kind": "proof",
+  "note": "independent Codex review: Delivered Lean, DAG node, report, and compile output match the stage-3 requirements; target/signature fields are unchanged and compilation succeeds."
  }
 }

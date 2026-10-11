@@ -13,6 +13,8 @@ public import Mathlib.CategoryTheory.Abelian.GrothendieckAxioms.Sheaf
 public import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.HasExt
 public import Mathlib.Algebra.Category.Grp.AB
 
+import Sheaf.Topology.NoetherianTopologicalCohomologyVanishing
+
 /-!
 # The Zariski dimension bound
 
@@ -48,6 +50,8 @@ theorem isZero_zariskiCohomology_of_dimension_bound
     (d : ℕ) (hdim : topologicalKrullDim X ≤ (d : WithBot ℕ∞))
     (F : Sheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u})
     (q : ℕ) (hq : d < q) : IsZero (Sheaf.H' F q (⊤ : X.Opens)) := by
-  sorry
+  let : IsNoetherian X := IsNoetherian.mk
+  exact TopCat.isZero_noetherian_topological_cohomology_of_dimension_bound
+    X d hdim F q hq
 
 end AlgebraicGeometry

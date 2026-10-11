@@ -5732,3 +5732,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 23:39 L: merged deliver/H1/WeilConjectures.AlgebraicGeometry.Cohomology.EulerChar (stage 3; reviewer PASS; after a return; landing 20261011T233842-L-412783 (proof); modules 1; new nodes 0)
 - 23:41 L: returned deliver/Q1/Sheaf.AlgebraicGeometry.ProjectiveLineGeometricStalkReduction (reviewer RETURN: (reviewer X-45caa, head 45caa7b71) C6: The proof creates an import/declaration cycle. In `lean/Sheaf/AlgebraicGeometry/P)
 - 23:45 L: merged deliver/E1/WeilConjectures.AlgebraicGeometry.Curve.FieldExtension (stage 3; reviewer PASS; after a return; landing 20261011T234426-L-429530 (interface); modules 2; new nodes 1)
+- 23:48 L: merged deliver/E1/Sheaf.AlgebraicGeometry.ZariskiDimensionBound (stage 3; reviewer PASS; first push; landing 20261011T234804-L-439981 (proof); modules 1; new nodes 0)
