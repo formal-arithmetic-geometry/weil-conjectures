@@ -181,5 +181,28 @@
   "by": "L",
   "result": "accepted",
   "note": "7 steps following Stacks 02OC: the A-module structure and theta_n; the constant c from the new 02OB node (Ker rho_n in I^{n-c}H, Im tau_{k,n} = Im rho_n); lim N_n = lim M_n; lim N_n = lim H/K_n; the two filtrations I^nH and K_n are cofinal; completions agree by explicit inverse maps; the composite is lim theta_n. No ML-exactness node needed."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.TheoremFormalFunctions",
+  "declaration": "AlgebraicGeometry.theorem_formal_functions",
+  "declarations": [
+   "AlgebraicGeometry.theorem_formal_functions",
+   "AlgebraicGeometry.globalSections_formal_functions"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/TheoremFormalFunctions.lean",
+  "statement": "theorem theorem_formal_functions {A : Type v} [CommRing A] [IsNoetherianRing A] (I : Ideal A) {X : Scheme.{v}} (f : X ⟶ Spec (CommRingCat.of A)) [IsProper f] (J : X.IdealSheafData) (hJ : J = (Scheme.IdealSheafData.ofIdealTop (I.map (Scheme.ΓSpecIso (CommRingCat.of A)).inv.hom)).comap f) (F : X.Modules) (hF : RingedSpace.IsCoherent X.toRingedSpace F) (p : ℕ) : ∃ θ : ∀ n : ℕ, ((RingedSpace.moduleCohomology X.toRingedSpace p ⋙ ModuleCat.restrictScalars ((Scheme.ΓSpecIso (CommRingCat.of A)).inv ≫ f.appTop).hom).obj F ⧸ (I ^ (n + 1) • ⊤ : Submodule A ((RingedSpace.moduleCohomology X.toRingedSpace p ⋙ ModuleCat.restrictScalars ((Scheme.ΓSpecIso (CommRingCat.of A)).inv ≫ f.appTop).hom).obj F))) →ₗ[A] (RingedSpace.moduleCohomology X.toRingedSpace p ⋙ ModuleCat.restrictScalars ((Scheme.ΓSpecIso (CommRingCat.of A)).inv ≫ f.appTop).hom).obj (formalModuleQuotient J (n + 1) F), (∀ n : ℕ, (θ n).comp (Submodule.mkQ (I ^ (n + 1) • ⊤ : Submodule A ((RingedSpace.moduleCohomology X.toRingedSpace p ⋙ ModuleCat.restrictScalars ((Scheme.ΓSpecIso (CommRingCat.of A)).inv ≫ f.appTop).hom).obj F))) = ((RingedSpace.moduleCohomology X.toRingedSpace p ⋙ ModuleCat.restrictScalars ((Scheme.ΓSpecIso (CommRingCat.of A)).inv ≫ f.appTop).hom).map (formalModuleQuotientπ J (n + 1) F)).hom) ∧ (∀ (n m : ℕ) (h : n ≤ m), ((RingedSpace.moduleCohomology X.toRingedSpace p ⋙ ModuleCat.restrictScalars ((Scheme.ΓSpecIso (CommRingCat.of A)).inv ≫ f.appTop).hom).map (formalModuleQuotientMap J (𝟙 F) (Nat.succ_le_succ h))).hom.comp (θ m) = (θ n).comp (AdicCompletion.transitionMap I ((RingedSpace.moduleCohomology X.toRingedSpace p ⋙ ModuleCat.restrictScalars ((Scheme.ΓSpecIso (CommRingCat.of A)).inv ≫ f.appTop).hom).obj F) (Nat.succ_le_succ h))) ∧ ∃ e : ModuleCat.of A (AdicCompletion I ((RingedSpace.moduleCohomology X.toRingedSpace p ⋙ ModuleCat.restrictScalars ((Scheme.ΓSpecIso (CommRingCat.of A)).inv ≫ f.appTop).hom).obj F)) ≅ limit (formalCompletionSystem J F ⋙ (RingedSpace.moduleCohomology X.toRingedSpace p ⋙ ModuleCat.restrictScalars ((Scheme.ΓSpecIso (CommRingCat.of A)).inv ≫ f.appTop).hom)), ∀ n : ℕ, e.hom ≫ limit.π (formalCompletionSystem J F ⋙ (RingedSpace.moduleCohomology X.toRingedSpace p ⋙ ModuleCat.restrictScalars ((Scheme.ΓSpecIso (CommRingCat.of A)).inv ≫ f.appTop).hom)) (op n) = ModuleCat.ofHom ((θ n).comp (AdicCompletion.eval I ((RingedSpace.moduleCohomology X.toRingedSpace p ⋙ ModuleCat.restrictScalars ((Scheme.ΓSpecIso (CommRingCat.of A)).inv ≫ f.appTop).hom).obj F) (n + 1)))",
+  "branch": "sheaf-dag",
+  "by": "V1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-tff"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-tff",
+  "group": "V1",
+  "result": "fix",
+  "note": "A Noetherian, I, f proper to Spec A, J tied by hJ (landed I·O_X form), F coherent, p; theta_n on H/I^(n+1)H tied by mkQ to H^p(pi), transition compatibility, e: AdicCompletion iso to limit tied on every projection; H^p and Gamma as A-modules inlined as moduleCohomology/globalSectionsFunctor ⋙ restrictScalars((ΓSpecIso A).inv ≫ f.appTop); dropped duplicate new node(s) def-weil-pbc-affine-base-module-cohomology (--drop-nodes; not merged, the item points at the landed declaration); left out new module(s) lean/Sheaf/AlgebraicGeometry/AffineBaseModuleCohomology.lean (--drop-files, or a record fixed to existing: true)"
  }
 }
