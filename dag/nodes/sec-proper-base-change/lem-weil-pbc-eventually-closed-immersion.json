@@ -185,5 +185,24 @@
   "item": "lem-weil-pbc-eventually-closed-immersion",
   "worker": "stage1",
   "summary": "Statement checked against Stacks 0A0N (limits.tex line 956) and kept: it is 0A0N with $S=T$ and the limit taken in schemes; stmt_deps kept. Proof written from the Stacks proof in six steps: reduction to affine $h_i$ by 09ZM (new node lem-weil-pbc-eventually-affine, unsplit), a finite affine covering of $T$ and the rings $A_{j,i}=\\mathcal O(h_i^{-1}V_j)$, the three hypotheses of the affine case (surjective transitions and surjective $R_j\\to A_j$ from the new Mathlib leaf lem-weil-pbc-closed-immersion-affine-cover-criterion = Morphisms 01QO; finite type from 01T2), the identification $A_j=\\varinjlim A_{j,i}$ (01YX(2) and 01YW, written out because the Stacks proof only writes '$A=\\colim A_i$'), the ring argument with the elementwise colimit description, and the conclusion by 01QO (3)$\\Rightarrow$(1). Tags 0A0N, 09ZM, 01Z6, 01QO, 01S8, 01T2, 01IG, 01IH, 01IN checked in tags/tags. Mathlib searches of the item kept (no match); no Mathlib or slopmaster2 declaration states 0A0N (the slopmaster2 Scheme.exists_isClosedImmersion_comp_π is Tag 081B(1), a different statement)."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.EventuallyClosedImmersion",
+  "declaration": "AlgebraicGeometry.eventually_isClosedImmersion_of_isLimit",
+  "file": "lean/Sheaf/AlgebraicGeometry/EventuallyClosedImmersion.lean",
+  "statement": "theorem eventually_isClosedImmersion_of_isLimit {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I] (T : Scheme.{u}) [CompactSpace T] [QuasiSeparatedSpace T] (D : Iᵒᵖ ⥤ Scheme.{u}) [∀ i : Iᵒᵖ, CompactSpace (D.obj i)] [∀ i : Iᵒᵖ, QuasiSeparatedSpace (D.obj i)] [∀ {i j : Iᵒᵖ} (f : i ⟶ j), IsClosedImmersion (D.map f)] (h : D ⟶ (Functor.const Iᵒᵖ).obj T) [∀ i : Iᵒᵖ, LocallyOfFiniteType (h.app i)] (c : Cone D) (_hc : IsLimit c) (f : c.pt ⟶ T) (_hf : ∀ i : Iᵒᵖ, c.π.app i ≫ h.app i = f) [IsClosedImmersion f] : ∃ i : I, ∀ j : I, i ≤ j → IsClosedImmersion (h.app (op j))",
+  "branch": "sheaf-dag",
+  "by": "K1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-eci1139"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-eci1139",
+  "group": "K1",
+  "result": "fix",
+  "note": "T qcqs; I nonempty directed preorder, index universe fixed w->u; D : Iᵒᵖ ⥤ Scheme.{u} closed-immersion transitions; stages qcqs; h : D ⟶ const T LFT components; Cone+IsLimit; f with c.π ≫ h = f, IsClosedImmersion f; ∃ i, ∀ j ≥ i, IsClosedImmersion (h.app (op j))"
  }
 }
