@@ -97,5 +97,24 @@
   "group": "C1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-fsc (reviewer sub-agent of L); spot-checked: Source: Varieties Lemma 09NC (varieties-lemma-enough-globally-generated-ample), proof sentence 'Again because X is quasi-compact' (varieties.tex l.7907); item statement agrees (X quasi-compact scheme, L invertible and globally generated, finitely many t_j with X = union of X_{t_j}), unchanged. Step 1 carried by lem-sc-global-generation-nonvanishing-cover (X = union over all s of X_s), def-weil-pbc-ample-invertible-module (X_s open, case n=1) and def-weil-pbc-quasi-compact-scheme (finite subcover). New helper lem-sc-global-generation-nonvanishing-cover: true (Modules 01AM/01CY, Sheaves 0H7H: surjectivity on stalks plus Nakayama for the rank-one stalk gives a section not in m_x L_x at each x), self-contained, notions cited by existing nodes, TeX, blueprint.from/same_as present (my blueprint_refs search 'globally generated nonvanishing': 0 matches), three Mathlib searches recorded, statement-only, created.item = item. Small cases: X empty (m=0), X = Spec A with L = O_X (t = 1), one-point scheme. No Mathlib leaf. FIX: dag/nodes/sec-curve-estimates/lem-sc-finite-sections-cover-qc.json: proof[0].text, proof[0].uses, proof_deps: added def-weil-pbc-ample-invertible-module for the openness of X_s (the helper does not state openness; the step called the X_s an open cover). Times: start Sat Oct 10 04:15:35 PM UTC 2026, end Sat Oct 10 04:16:07 PM UTC 2026; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FiniteSectionsCover",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.finite_sections_cover_of_globally_generated",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteSectionsCover.lean",
+  "statement": "theorem finite_sections_cover_of_globally_generated (X : Scheme.{u}) [CompactSpace X] (L : X.Modules) [L.IsInvertible] (hgen : Nonempty (SheafOfModules.GeneratingSections L)) : ∃ (m : ℕ) (t : Fin m → L.val.presheaf.obj (Opposite.op ⊤)), ⋃ j, nonvanishingLocus L (t j) = Set.univ",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-fsc1127"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-fsc1127",
+  "group": "F1",
+  "result": "fix",
+  "note": "X scheme, [CompactSpace X] quasi-compact, L : X.Modules [IsInvertible], Nonempty GeneratingSections = globally generated, Fin m sections of Γ(X,L), conclusion rewritten as ⋃ j, nonvanishingLocus L (t j) = univ (was inline germ predicate); empty scheme m=0 ok; I : Type u checked"
  }
 }
