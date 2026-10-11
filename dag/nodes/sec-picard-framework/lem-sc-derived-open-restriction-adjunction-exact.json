@@ -139,5 +139,24 @@
   "group": "M1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-ora1913 (reviewer sub-agent of L); spot-checked: Statement vs 08BS/00A7/01AK; Step 1 stalkwise restriction exactness via lem-weil-pbc-module-stalk-exact(5) (ringed-space, generic tool accepted); Step 2 adjunction via module sheafification universal property; no cycle with F1 parent lem-sc-derived-k-injective-restrict-open (item cites only generic nodes, none created from F1); not a restatement of site nodes lem-weil-pbc-site-extension-by-zero-exact / -restriction-exact (abelian sheaves on a site, not ringed-space modules) nor of scheme-only lem-weil-pbc-module-extension-by-zero-adjunction. FIX more, RETURN less: C1 Step 2 rederived the j_! stalk formula and its naturality inline; now cites existing lem-sc-topological-extension-by-zero-stalks as a generic tool (abelian sheafification underlies module sheafification by def-weil-presheaf-modules-sheafification), added to uses/proof_deps.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.OpenRestrictionAdjunctionExact",
+  "declaration": "AlgebraicGeometry.open_restriction_adjunction_exact",
+  "file": "lean/Sheaf/Algebra/Homology/OpenRestrictionAdjunctionExact.lean",
+  "statement": "theorem open_restriction_adjunction_exact (X : RingedSpace.{u}) (U : Opens X) : PreservesFiniteLimits (SheafOfModules.overFunctor.{u} (moduleRings X) U) ∧ PreservesFiniteColimits (SheafOfModules.overFunctor.{u} (moduleRings X) U) ∧ PreservesFiniteLimits (SheafOfModules.extensionByZeroPresheaf.{u} (moduleRings X) U ⋙ PresheafOfModules.sheafification.{u} (𝟙 (moduleRings X).obj)) ∧ PreservesFiniteColimits (SheafOfModules.extensionByZeroPresheaf.{u} (moduleRings X) U ⋙ PresheafOfModules.sheafification.{u} (𝟙 (moduleRings X).obj)) ∧ Nonempty (SheafOfModules.extensionByZeroPresheaf.{u} (moduleRings X) U ⋙ PresheafOfModules.sheafification.{u} (𝟙 (moduleRings X).obj) ⊣ SheafOfModules.overFunctor.{u} (moduleRings X) U)",
+  "branch": "sheaf-dag",
+  "by": "K1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-dor1314"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-dor1314",
+  "group": "K1",
+  "result": "fix",
+  "note": "Delivered statement had arbitrary ModX/ModU/jInv/jShriek unrelated to X,U (false); fixed to j^-1 = SheafOfModules.overFunctor (moduleRings X) U, j_! = extensionByZeroPresheaf (moduleRings X) U ⋙ PresheafOfModules.sheafification (𝟙 _) (as G1/F1 siblings), exactness PreservesFiniteLimits ∧ PreservesFiniteColimits for both, Nonempty (j_! ⊣ j^-1); compiled"
  }
 }
