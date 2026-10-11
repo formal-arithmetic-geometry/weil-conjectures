@@ -1,0 +1,104 @@
+{
+ "id": "def-weil-pbc-hypercover-cohomology-colimit",
+ "kind": "definition",
+ "title": "Natural hypercover cohomology and its colimit universal property",
+ "status": "split",
+ "statement": "Let $X$ be a quasi-compact quasi-separated scheme and $U$ a finite split etale hypercover of $X$ [def-weil-pbc-finite-split-hypercover]. Let $A$ be an abelian category (in particular abelian groups or modules over a fixed ring), and $q\\in\\mathbb N$. Define the functor $K_U^q:\\operatorname{Sh}(X_{\\mathrm{Et}},A)\\to A$ by taking degree-$q$ homology of the alternating coface complex of $F(U_\\bullet)$. A refinement $f:U\\to V$ induces a natural transformation $f^*:K_V^q\\to K_U^q$ by restriction. A functor $H:\\operatorname{Sh}(X_{\\mathrm{Et}},A)\\to A$ is the natural hypercover cohomology colimit in degree $q$ if homotopic refinements have equal induced transformations and there are natural transformations $c_U:K_U^q\\to H$ with $f^*c_U=c_V$ for every refinement, such that for every sheaf $F$, every $B\\in A$ and every compatible family $d_U:K_U^q(F)\\to B$, there is a unique $e:H(F)\\to B$ satisfying $c_U(F)e=d_U$ for all $U$. This is the pointwise colimit over refinements modulo simplicial homotopy, naturally in $F$.",
+ "stmt_deps": [
+  "def-weil-pbc-finite-split-hypercover"
+ ],
+ "source": {
+  "document": "literature/stacks-project/hypercovering.tex",
+  "place": "Sections section-homotopies and section-cohomology; Theorem theorem-cohomology-hypercoverings, Tag 01H0; the colimit displayed in blueprint order 949"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "colimit of hypercover cohomology functors modulo simplicial homotopy",
+   "results": "UNAVAILABLE 0 hit(s). service unavailable: Internal Server Error Top results: []",
+   "date": "2026-10-11",
+   "verdict": "Service unavailable; no mathematical verdict."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Universal property of colimit of hypercover cohomology natural in coefficient sheaves",
+   "results": "OK 8 hit(s).  Top results: [\"CategoryTheory.GrothendieckTopology.OneHypercover.map_amalgamate\", \"CategoryTheory.PreOneHypercover.forkOfIsColimit_ι_map_inj_assoc\", \"CategoryTheory.GrothendieckTopology.OneHypercover.glueMorphisms\", \"CategoryTheory.GrothendieckTopology.OneHypercoverFamily.IsSheafIff.fac\", \"CategoryTheory.GrothendieckTopology.OneHypercoverFamily.IsSheafIff.fac'\", \"CategoryTheory.GrothendieckTopology.OneHypercoverFamily.IsSheafIff.fac'_assoc\", \"CategoryTheory.GrothendieckTopology.OneHypercover.amalgamate\", \"CategoryTheory.PreOneHypercover.p₁_sigmaOfIsColimit\"]",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"hypercover\"",
+   "results": "OK 12 hit(s).  Top results: [\"CategoryTheory.PreZeroHypercover\", \"CategoryTheory.PreZeroHypercover.empty\", \"CategoryTheory.Precoverage.ZeroHypercover\", \"CategoryTheory.PreZeroHypercover.HasPullbacks\", \"CategoryTheory.PreZeroHypercover.I₀\", \"CategoryTheory.PreZeroHypercover.instCategory\", \"CategoryTheory.PreZeroHypercover.presieve₀\", \"CategoryTheory.PreZeroHypercover.shrink\"]",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "hypercover.*cohomology|cohomology.*hypercover",
+   "results": "OK 0 hit(s).  Top results: []",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "thm-weil-pbc-hypercover-cohomology",
+  "date": "2026-10-11",
+  "group": "M1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-hypercover-cohomology",
+   "place": "Displayed colimit over refinements modulo homotopy; proof paragraphs constructing the natural comparison and identifying representatives.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-h2",
+ "lean": {
+  "module": "Sheaf.Paper.HypercoverCohomologyColimit",
+  "declaration": "AlgebraicGeometry.FiniteSplitEtaleHypercover.IsCohomologyColimit",
+  "file": "lean/Sheaf/Paper/HypercoverCohomologyColimit.lean",
+  "statement": "def IsCohomologyColimit (q : ℕ) (H : Sheaf X.smallEtaleTopology A ⥤ A) : Prop",
+  "branch": "sheaf-dag",
+  "by": "M1",
+  "date": "2026-10-11",
+  "existing": false,
+  "declarations": [
+   "AlgebraicGeometry.FiniteSplitEtaleHypercover.cohomologyFunctor",
+   "AlgebraicGeometry.FiniteSplitEtaleHypercover.cohomologyRefinement",
+   "AlgebraicGeometry.FiniteSplitEtaleHypercover.IsCohomologyColimit"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-sub-C",
+  "group": "M1",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-sub-C",
+  "group": "M1",
+  "result": "pass",
+  "note": "X qcqs (CompactSpace, QuasiSeparatedSpace), q:Nat, all F by naturality; index = all FiniteSplitEtaleHypercover with Refinement, homotopic refinements give equal maps; cocone direction K_V->K_U, pointwise unique factorisation = colimit; vertex singleFunctor 0 then Etale.cohomology q; module clause for every ring R in ModuleCat R; new def node: cohomologyFunctor is rfl-equal to the landed U.cohomology on AddCommGrpCat (scratch compile), no category instance on hypercovers so no IsColimit duplicate; finitely-many-degrees sentence intrinsic to degree-q homology"
+ }
+}

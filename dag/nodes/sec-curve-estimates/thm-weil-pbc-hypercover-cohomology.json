@@ -20,7 +20,8 @@
  },
  "stmt_deps": [
   "def-weil-pbc-finite-split-hypercover",
-  "def-weil-pbc-etale-cohomology"
+  "def-weil-pbc-etale-cohomology",
+  "def-weil-pbc-hypercover-cohomology-colimit"
  ],
  "proof": [
   {
@@ -188,5 +189,23 @@
   "group": "C1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of C1; spot-checked by L: L: 01H0 via the double complex of an injective resolution evaluated on the hypercover; 0 new"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.HypercoverCohomology",
+  "declaration": "AlgebraicGeometry.hypercover_cohomology",
+  "file": "lean/Sheaf/Paper/HypercoverCohomology.lean",
+  "statement": "theorem hypercover_cohomology (X : Scheme.{u₁}) [CompactSpace X] [QuasiSeparatedSpace X] (q : ℕ) : FiniteSplitEtaleHypercover.IsCohomologyColimit AddCommGrpCat.{u₁ + 1} q (DerivedCategory.singleFunctor (Sheaf X.smallEtaleTopology AddCommGrpCat.{u₁ + 1}) 0 ⋙ Etale.cohomology AddCommGrpCat.{u₁ + 1} X (q : ℤ)) ∧ ∀ (R : Type (u₁ + 1)) [Ring R], FiniteSplitEtaleHypercover.IsCohomologyColimit (ModuleCat.{u₁ + 1} R) q (DerivedCategory.singleFunctor (Sheaf X.smallEtaleTopology (ModuleCat.{u₁ + 1} R)) 0 ⋙ Etale.cohomology (ModuleCat.{u₁ + 1} R) X (q : ℤ))",
+  "branch": "sheaf-dag",
+  "by": "M1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-sub-C",
+  "group": "M1",
+  "result": "pass",
+  "note": "X qcqs (CompactSpace, QuasiSeparatedSpace), q:Nat, all F by naturality; index = all FiniteSplitEtaleHypercover with Refinement, homotopic refinements give equal maps; cocone direction K_V->K_U, pointwise unique factorisation = colimit; vertex singleFunctor 0 then Etale.cohomology q; module clause for every ring R in ModuleCat R; new def node: cohomologyFunctor is rfl-equal to the landed U.cohomology on AddCommGrpCat (scratch compile), no category instance on hypercovers so no IsColimit duplicate; finitely-many-degrees sentence intrinsic to degree-q homology"
  }
 }

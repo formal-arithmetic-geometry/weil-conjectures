@@ -5676,3 +5676,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 19:46 L: returned deliver/F1/lem-weil-pbc-colimit-of-sites-injective-system (reviewer RETURN: (reviewer R-sub-A, head e3140f62a) H7 only; the Lean is right and stays. (1) H7: dag/nodes/sec-proper-base-change/lem-we)
 - 19:46 L: returned deliver/U1/lem-sc-closed-pushforward-boundary-naturality (reviewer RETURN: (reviewer R-sub-D, head b6d280443) Two points; everything else in the statement was matched to the node and stays (binde)
 - 19:47 L: merged deliver/K1/lem-weil-pbc-hypercover-product (stage 2; reviewer PASS; first push; Sheaf.Paper.EtaleHypercoverProduct AlgebraicGeometry.isEtaleHypercover_prod; new nodes: def-weil-pbc-etale-hypercover)
+- 19:48 L: merged deliver/M1/thm-weil-pbc-hypercover-cohomology (stage 2; reviewer PASS; first push; Sheaf.Paper.HypercoverCohomology AlgebraicGeometry.hypercover_cohomology; new nodes: def-weil-pbc-hypercover-cohomology-colimit)
