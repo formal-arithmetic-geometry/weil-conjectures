@@ -52,6 +52,12 @@ Spec k' -ι-> Spec k
   as a separate predicate.
 - `AlgebraicGeometry.IsCurve.Assertions`: the conjunction `C(X, F)` of the eight assertions.
 
+The constructibility hypothesis of `C₄` and `C₅` (blueprint: `def-weil-pbc-constructible-torsion`)
+is `AlgebraicGeometry.Scheme.IsConstructibleSheaf`: a finite stratification of `X` by locally
+closed constructible subschemes on each of which `F` is locally constant with finite stalks.
+The pullback map of `C₆` and `C₇` (blueprint: `def-weil-pbc-extension-pullback`) is
+`AlgebraicGeometry.Etale.cohomologyMap`.
+
 ## Main statements
 
 - `AlgebraicGeometry.IsCurve.assertions_iff`: `C(X, F)` holds if and only if each of the eight

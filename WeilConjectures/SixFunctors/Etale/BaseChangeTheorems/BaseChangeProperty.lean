@@ -130,8 +130,8 @@ imposed on `g`, and none on `f`: the proper base change theorem says that `PBC(f
 whenever `f` is proper.
 
 This is the restriction to torsion cohomology of `AlgebraicGeometry.Etale.IsBaseChangeIso`,
-which is the declaration realising the blueprint's `def:weil-pbc-property`; see the module
-docstring. -/
+which is the declaration realising the blueprint's `def-weil-pbc-property`; see the module
+docstring. (blueprint: `sk-def-pbc`) -/
 def Etale.HasTorsionBaseChange (f : X ⟶ Y) : Prop :=
   ∀ ⦃Y' X' : Scheme.{u}⦄ ⦃g : Y' ⟶ Y⦄ ⦃f' : X' ⟶ Y'⦄ ⦃g' : X' ⟶ X⦄ (sq : IsPullback g' f' f g)
     (K : DerivedCategory.Plus (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))),
@@ -183,7 +183,8 @@ For a torsion `Λ` — the case in which the two properties are compared below �
 This is the form in which the proper base change theorem is actually proved: it is a
 vanishing statement about a single sheaf, it composes, it cancels along proper surjections,
 and it can be checked on geometric stalks.
-(blueprint: `def:weil-pbc-injective-acyclicity-property`) -/
+(blueprint: `sk-def-ia`, `def-weil-pbc-injective-acyclicity-property`; the property `IA_r(f)`
+of the latter is the case `Λ = 𝐅_r`, where every sheaf is torsion) -/
 def Etale.HasInjectiveAcyclicity (f : X ⟶ Y) : Prop :=
   ∀ ⦃Y' X' : Scheme.{u}⦄ ⦃g : Y' ⟶ Y⦄ ⦃f' : X' ⟶ Y'⦄ ⦃g' : X' ⟶ X⦄ (_sq : IsPullback g' f' f g)
     (I : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)), IsTorsionSheaf I → Injective I →
