@@ -212,5 +212,23 @@
   "by": "L",
   "result": "pass",
   "note": "Eight steps on the universal property of sheafification with finite products: the action as a morphism of sheaves of sets; eta^m x id is a sheafification (new Mathlib leaf lem-weil-pbc-ring-sheafification-underlying-sets: sheafifyComposeIso PreservesSheafification.lean:233 with the forget instance :305 and constantCommuteCompose ConstantSheaf.lean:184, verified; with lem-weil-pbc-sheafification-sets-exact); constants act by integers (new Mathlib leaf lem-weil-pbc-zmod-module-structure-killed-by-n: AddCommGroup.zmodModule ZMod.lean:44, ZMod.instSubsingletonModule Basic.lean:1308, Int.cast_smul_eq_zsmul NatInt.lean:173, ZMod.map_smul ZMod.lean:63, verified); (1); (2) existence by extension along eta and the axioms checked on constants; uniqueness; (3) linearity; consequences. Route differs from the brief (no node on the sections of (Z/n)_T exists); essential smallness of T_et noted against the set-of-objects hypothesis of the sheafification-sets-exact leaf."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.SheavesKilledByNZmodModules",
+  "declaration": "AlgebraicGeometry.sheaves_killed_by_n_zmod_modules",
+  "file": "lean/Sheaf/Paper/SheavesKilledByNZmodModules.lean",
+  "statement": "theorem sheaves_killed_by_n_zmod_modules (T : Scheme.{u}) (n : ℕ) (hn : 1 ≤ n) : (∀ (G : SheafOfModules.{u + 1} ((constantSheaf T.smallEtaleTopology RingCat.{u + 1}).obj (RingCat.of (ULift.{u + 1} (ZMod n))))) (U : T.Etaleᵒᵖ) (s : G.val.obj U), n • s = 0) ∧ (∀ (F : Sheaf T.smallEtaleTopology AddCommGrpCat.{u + 1}), (∀ (U : T.Etaleᵒᵖ) (s : F.1.obj U), n • s = 0) → ∃! G : SheafOfModules.{u + 1} ((constantSheaf T.smallEtaleTopology RingCat.{u + 1}).obj (RingCat.of (ULift.{u + 1} (ZMod n)))), (SheafOfModules.toSheaf ((constantSheaf T.smallEtaleTopology RingCat.{u + 1}).obj (RingCat.of (ULift.{u + 1} (ZMod n))))).obj G = F) ∧ (∀ (G : SheafOfModules.{u + 1} ((constantSheaf T.smallEtaleTopology RingCat.{u + 1}).obj (RingCat.of (ULift.{u + 1} (ZMod n))))) (U : T.Etaleᵒᵖ) (a : ℤ) (s : G.val.obj U), ((toSheafify T.smallEtaleTopology ((Functor.const T.Etaleᵒᵖ).obj (RingCat.of (ULift.{u + 1} (ZMod n))))).app U) (ULift.up (a : ZMod n)) • s = a • s) ∧ (∀ (G G' : SheafOfModules.{u + 1} ((constantSheaf T.smallEtaleTopology RingCat.{u + 1}).obj (RingCat.of (ULift.{u + 1} (ZMod n))))), Function.Bijective ((SheafOfModules.toSheaf ((constantSheaf T.smallEtaleTopology RingCat.{u + 1}).obj (RingCat.of (ULift.{u + 1} (ZMod n))))).map : (G ⟶ G') → ((SheafOfModules.toSheaf ((constantSheaf T.smallEtaleTopology RingCat.{u + 1}).obj (RingCat.of (ULift.{u + 1} (ZMod n))))).obj G ⟶ (SheafOfModules.toSheaf ((constantSheaf T.smallEtaleTopology RingCat.{u + 1}).obj (RingCat.of (ULift.{u + 1} (ZMod n))))).obj G'))) ∧ (∀ (F : Sheaf T.smallEtaleTopology AddCommGrpCat.{u + 1}), (SheafOfModules.toSheaf ((constantSheaf T.smallEtaleTopology RingCat.{u + 1}).obj (RingCat.of (ULift.{u + 1} (ZMod n))))).essImage F ↔ ∀ (U : T.Etaleᵒᵖ) (s : F.1.obj U), n • s = 0) ∧ (∀ (G G' : SheafOfModules.{u + 1} ((constantSheaf T.smallEtaleTopology RingCat.{u + 1}).obj (RingCat.of (ULift.{u + 1} (ZMod n))))) (i : (SheafOfModules.toSheaf ((constantSheaf T.smallEtaleTopology RingCat.{u + 1}).obj (RingCat.of (ULift.{u + 1} (ZMod n))))).obj G ≅ (SheafOfModules.toSheaf ((constantSheaf T.smallEtaleTopology RingCat.{u + 1}).obj (RingCat.of (ULift.{u + 1} (ZMod n))))).obj G'), ∃ j : G ≅ G', (SheafOfModules.toSheaf ((constantSheaf T.smallEtaleTopology RingCat.{u + 1}).obj (RingCat.of (ULift.{u + 1} (ZMod n))))).mapIso j = i)",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "C1",
+  "result": "pass",
+  "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
  }
 }
