@@ -120,5 +120,23 @@
   "group": "M1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-dps1757 (reviewer sub-agent of L); spot-checked: Statement vs Tag 0E2P/0E2Q; pr_2/pr_1 orientation vs Lemma 48.12.4 (b for p=pr_2, Lq^*=Lpr_1^*) correct; new node not a duplicate (grep of right-adjoint base-change nodes), no cycle with parent relative-dualizing-general; no regular-immersion claim in this item. FIX more, RETURN less: (1) C1 Step 1: R(pr_2)_* o RDelta_* = id was uncited; now cites lem-pc-proper-derived-direct-image-composition with Delta proper as closed immersion (Tags 01KH, 01W6), added to uses/proof_deps; (2) C4 Step 2: the new node needs finite presentation, not in the item; added finite type over Noetherian S implies finite presentation (Tag 01TX).; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.DiagonalPushforwardStructure",
+  "declaration": "AlgebraicGeometry.diagonal_counit_identity",
+  "statement": "theorem diagonal_counit_identity {X S : Scheme.{u}} [IsNoetherian X] [IsNoetherian S] [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))] [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings S.toRingedSpace))] (f : X ⟶ S) [Flat f] [IsProper f] [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings (Limits.pullback f f).toRingedSpace))] (hRf : ∀ E : schemeDerivedQCohCategory X, schemeDerivedQCohProperty S ((schemeDerivedDirectImage f).obj E.obj)) (hRΔ : ∀ E : schemeDerivedQCohCategory X, schemeDerivedQCohProperty (Limits.pullback f f) ((schemeDerivedDirectImage (pullback.diagonal f)).obj E.obj)) (hLpr₁ : ∀ E : schemeDerivedQCohCategory X, schemeDerivedQCohProperty (Limits.pullback f f) ((derivedPullback (pullback.fst f f)).obj E.obj)) (hOX : schemeDerivedQCohProperty X ((DerivedCategory.singleFunctor (SheafOfModules.{u} (moduleRings X.toRingedSpace)) 0).obj (SheafOfModules.unit (moduleRings X.toRingedSpace)))) (hOS : schemeDerivedQCohProperty S ((DerivedCategory.singleFunctor (SheafOfModules.{u} (moduleRings S.toRingedSpace)) 0).obj (SheafOfModules.unit (moduleRings S.toRingedSpace)))) (a : schemeDerivedQCohCategory S ⥤ schemeDerivedQCohCategory X) (adjA : (schemeDerivedQCohProperty S).lift ((schemeDerivedQCohProperty X).ι ⋙ schemeDerivedDirectImage f) hRf ⊣ a) (c : schemeDerivedQCohCategory (Limits.pullback f f) ⥤ schemeDerivedQCohCategory X) (adjC : (schemeDerivedQCohProperty (Limits.pullback f f)).lift ((schemeDerivedQCohProperty X).ι ⋙ schemeDerivedDirectImage (pullback.diagonal f)) hRΔ ⊣ c) : Nonempty ((⟨(DerivedCategory.singleFunctor (SheafOfModules.{u} (moduleRings X.toRingedSpace)) 0).obj (SheafOfModules.unit (moduleRings X.toRingedSpace)), hOX⟩ : schemeDerivedQCohCategory X) ≅ c.obj (((schemeDerivedQCohProperty (Limits.pullback f f)).lift ((schemeDerivedQCohProperty X).ι ⋙ derivedPullback (pullback.fst f f)) hLpr₁).obj (a.obj ⟨(DerivedCategory.singleFunctor (SheafOfModules.{u} (moduleRings S.toRingedSpace)) 0).obj (SheafOfModules.unit (moduleRings S.toRingedSpace)), hOS⟩)))",
+  "branch": "sheaf-dag",
+  "by": "T1",
+  "date": "2026-10-12",
+  "existing": false,
+  "file": "lean/Sheaf/AlgebraicGeometry/DiagonalPushforwardStructure.lean"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "T1",
+  "result": "pass",
+  "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
  }
 }
