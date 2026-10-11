@@ -135,5 +135,24 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-smc (reviewer sub-agent of L); spot-checked: Source: Stacks 0BXD (coherent-proposition-coherent-modules-on-proj) last paragraph, and Properties 01PW (lemma-invert-s-sections) read in properties.tex: the new node lem-sc-p1-invertible-section-localization agrees with 01PW (2) hypothesis by hypothesis (X qcqs, L invertible, s in Gamma(X,L), F quasi-coherent, N over Z, map t/s^n -> t|_{X_s} (x) s^{-n}); item statement unchanged. Step 1 carried by def-weil-pbc-proj-twisting-sheaf (1) (Gamma(D_+(f),M~)=M_(f)) and def-sc-p1-standard (cover); step 2 elementary (multiply by x_i^r), checked on G=O_P and O_P(-1); step 4 elementary gluing. Step 3 used facts no cited node stated. FIX more, RETURN less: (a) C1 step 3: quasi-separatedness of P from the affine cover with affine intersection now cites lem-weil-pbc-quasi-separated-affine-cover-criterion (2) and (1) (mathlib leaf); (b) C1 step 3: G quasi-coherent (01PW needs it, pqf-def-coherent does not give it) now cites pqf-lem-coherent-ft-locnoeth (01XZ, P locally Noetherian), recorded as tool use; (c) C1 step 3: O_P(1) invertible, O_P(1)^{(x)n} (x) G = G(n) compatibly with multiplication by x_i, and P_{x_i}=D_+(x_i) were used with no node: added statement node lem-sc-p1-twist-multiplication (Constructions 01MS, 01MU with W_1=P, 01MV; searches recorded) and cited it; fixed dag/nodes/sec-picard-framework/lem-sc-p1-serre-section-module-comparison.json: proof[2].text/uses, proof_deps. Not fixed, noted for the lead: C5, the delivered node duplicates the p=0 case of lem-sc-invert-s-cohomology (09MR). Lean: slopmaster2 exists_tensorPowSection_eq_restrict (ClearDenominators.lean:262, @[stacks 01PW]) is only the surjectivity half under separatedness, not an exact match (B10 ok). Start Sat Oct 10 04:08:54 PM UTC 2026, end Sat Oct 10 04:12:07 PM UTC 2026.; 2 file(s) fixed by the reviewer; 1 statement node(s) added by the reviewer (FIX more, RETURN less)"
  },
- "lead_note": "2026-10-10 L (R-smc): Reviewer R-smc: the delivered new node lem-sc-p1-invertible-section-localization (Stacks 01PW (2)) is the p=0 case of the existing lem-sc-invert-s-cohomology (09MR, unit sk-thm-curveestimate; H^0=Gamma); whoever splits it can close it in one step by citing that node as a tool. Reviewer-added statement node lem-sc-p1-twist-multiplication (01MS/01MU/01MV for Proj k[x_0,x_1])."
+ "lead_note": "2026-10-10 L (R-smc): Reviewer R-smc: the delivered new node lem-sc-p1-invertible-section-localization (Stacks 01PW (2)) is the p=0 case of the existing lem-sc-invert-s-cohomology (09MR, unit sk-thm-curveestimate; H^0=Gamma); whoever splits it can close it in one step by citing that node as a tool. Reviewer-added statement node lem-sc-p1-twist-multiplication (01MS/01MU/01MV for Proj k[x_0,x_1]).",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SerreSectionModuleComparison",
+  "declaration": "AlgebraicGeometry.serreSectionModuleComparison",
+  "file": "lean/Sheaf/AlgebraicGeometry/SerreSectionModuleComparison.lean",
+  "statement": "theorem serreSectionModuleComparison (G : (Proj (MvPolynomial.homogeneousSubmodule (Fin 2) k)).Modules) (hG : RingedSpace.IsCoherent (Proj (MvPolynomial.homogeneousSubmodule (Fin 2) k)).toRingedSpace G) {d : ℕ} (hd : 0 < d) {f : MvPolynomial (Fin 2) k} (hf : f ∈ MvPolynomial.homogeneousSubmodule (Fin 2) k d) : (∀ s : Γ(G, Proj.basicOpen (MvPolynomial.homogeneousSubmodule (Fin 2) k) f), ∃ (r : ℕ) (t : Γ(G ⊗ Proj.twist (MvPolynomial.homogeneousSubmodule (Fin 2) k) (0 + ((r • d : ℕ) : ℤ)), ⊤)), (G ⊗ Proj.twist (MvPolynomial.homogeneousSubmodule (Fin 2) k) (0 + ((r • d : ℕ) : ℤ))).presheaf.map (homOfLE le_top : Proj.basicOpen (MvPolynomial.homogeneousSubmodule (Fin 2) k) f ⟶ ⊤).op t = Scheme.Modules.Hom.app ((ρ_ G).inv ≫ G ◁ Proj.unitToTwist (SetLike.pow_mem_graded r hf)) (Proj.basicOpen (MvPolynomial.homogeneousSubmodule (Fin 2) k) f) s) ∧ (∀ (r : ℕ) (t : Γ(G ⊗ Proj.twist (MvPolynomial.homogeneousSubmodule (Fin 2) k) (0 + ((r • d : ℕ) : ℤ)), ⊤)), (G ⊗ Proj.twist (MvPolynomial.homogeneousSubmodule (Fin 2) k) (0 + ((r • d : ℕ) : ℤ))).presheaf.map (homOfLE le_top : Proj.basicOpen (MvPolynomial.homogeneousSubmodule (Fin 2) k) f ⟶ ⊤).op t = 0 → ∃ e : ℕ, Scheme.Modules.Hom.app (G ◁ Proj.twistMul (0 + ((r • d : ℕ) : ℤ)) (SetLike.pow_mem_graded e hf)) ⊤ t = 0)",
+  "branch": "sheaf-dag",
+  "by": "M1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-ssm2"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-ssm2",
+  "group": "M1",
+  "result": "fix",
+  "note": "F was a free binder (Nonempty (F ≅ G) for arbitrary F): restated as bijectivity of the canonical degree-zero localization maps (M_{≥0})_(f) → Γ(D₊(f),G) on the basis of standard opens, G(n) = G ⊗ Proj.twist n, multiplication by f^r via Proj.unitToTwist/twistMul; coherence hG, field k, P = Proj k[x0,x1] kept"
+ }
 }
