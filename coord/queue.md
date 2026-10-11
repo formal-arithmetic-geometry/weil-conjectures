@@ -1,11 +1,11 @@
 # Work queue
 
-189 items; claim with `tools/claim.py next <group> [--stage N]`.
+184 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (189)
+## Stage 2: nodes to state (184)
 
 | node | distance to Mathlib | kind | blockers |
 |---|---|---|---|
@@ -37,9 +37,7 @@
 | `thm-sp-spectral-object-yields` | 1 | state | 1 |
 | `lem-exc-coinduced-homotopy-continuous` | 2 | state | 1 |
 | `lem-sc-group-addition-tangent-differential` | 2 | state | 1 |
-| `lem-sc-pic-restriction-boundary` | 2 | state | 1 |
 | `lem-sp-couple-morphism` | 2 | state | 1 |
-| `lem-sp-edge-collapse` | 2 | state | 1 |
 | `cor-galois-lisse-representations` | 1 | state | 0 |
 | `lem-pc-ringed-space-rgamma-derived-limit` | 1 | state | 0 |
 | `lem-pur-derived-functor-triangles-05sc` | 1 | state | 0 |
@@ -77,7 +75,6 @@
 | `lem-weil-pbc-semi-representable-covering-permanence` | 1 | state | 0 |
 | `lem-weil-pbc-spec-algebraically-closed-etale-sheaf-constant` | 1 | state | 0 |
 | `lem-weil-pbc-spectral-limit-pullback-sections` | 1 | state | 0 |
-| `lem-weil-pbc-stein-universally-closed-factor` | 1 | state | 0 |
 | `lem-weil-pbc-strictly-henselian-sections-stalk` | 1 | state | 0 |
 | `lem-weil-pbc-symmetric-degree-exact` | 1 | state | 0 |
 | `lem-weil-pbc-thickening-systems-dictionary` | 1 | state | 0 |
@@ -88,10 +85,8 @@
 | `lem-weil-pbc-torsion-extension-flat-descent` | 1 | state | 0 |
 | `lem-weil-pbc-torsion-hom-flat-comparison` | 1 | state | 0 |
 | `lem-weil-pbc-torsion-module-flat-base-change-iso` | 1 | state | 0 |
-| `lem-weil-pbc-torsion-sheaf-characterizations` | 1 | state | 0 |
 | `lem-weil-pbc-torsion-submodule-flat-base-change-iso` | 1 | state | 0 |
 | `lem-weil-pbc-tower-limit-exact-surjective-kernels` | 1 | state | 0 |
-| `lem-weil-pbc-transitivity-gamma` | 1 | state | 0 |
 | `lem-weil-pbc-triangle-morphism-extension` | 1 | state | 0 |
 | `lem-weil-pbc-triangular-change-of-basis` | 1 | state | 0 |
 | `lem-weil-pbc-trivial-kan-homotopy-equivalence` | 1 | state | 0 |
