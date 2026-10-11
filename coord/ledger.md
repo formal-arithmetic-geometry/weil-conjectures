@@ -4582,3 +4582,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 12:13 L: merged deliver/J1/lem-pc-fp-module-map-descent (stage 2; reviewer FIX; first push; Sheaf.AlgebraicGeometry.FinitePresentationModuleMapDescent AlgebraicGeometry.finitePresentation_module_map_descent)
 - 12:14 L: merged deliver/J1/lem-weil-pbc-coherent-sheaf-hom-coherent (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.CoherentSheafHom AlgebraicGeometry.Scheme.Modules.isCoherent_homObj)
 - 12:14 L: merged deliver/H1/lem-sc-invertible-tensor-qcoherent (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.InvertibleTensorQcoherent AlgebraicGeometry.Scheme.Modules.isQuasicoherent_tensor_integer_power)
+- 12:16 L: merged deliver/C1/lem-weil-pbc-finite-pushforward-coherent (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.FinitePushforwardCoherent AlgebraicGeometry.Scheme.Modules.isCoherent_pushforward_of_isFinite)
