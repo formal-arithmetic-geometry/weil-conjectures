@@ -12,7 +12,6 @@
 | `def-pc-field-tower` | 1 | state |
 | `def-pc-generators` | 1 | state |
 | `def-pc-kflat-complex` | 1 | state |
-| `def-pc-projective-morphism` | 1 | state |
 | `def-pc-representable-functor` | 1 | state |
 | `def-pur-sheaf-modules-hom-module` | 1 | state |
 | `def-pur-sheaf-tensor-product` | 1 | state |
@@ -265,6 +264,7 @@
 | `lem-sc-positive-dimensional-locally-algebraic-closed-points` | 1 | state |
 | `lem-sc-product-irreducible-components-bijection` | 1 | state |
 | `lem-sc-proj-standard-open-basis` | 1 | state |
+| `lem-sc-proper-dim-one-projective` | 1 | state |
 | `lem-sc-proper-or-affine` | 1 | state |
 | `lem-sc-qcoh-cech-total-tensor-iso` | 1 | state |
 | `lem-sc-reduced-ideals-zero-intersection` | 1 | state |
@@ -820,7 +820,7 @@
 | `lem-sc-normalization-properties` | 3 | state |
 | `def-nagata-fixed-base-separated-stage` | 6 | state |
 
-Not open yet: 1412 nodes that wait for a statement dependency, 40 nodes that wait for stage 1.
+Not open yet: 1411 nodes that wait for a statement dependency, 40 nodes that wait for stage 1.
 
 ## Stage 3: modules to prove (0)
 
