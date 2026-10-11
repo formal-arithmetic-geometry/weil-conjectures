@@ -114,8 +114,11 @@ theorem isNonexceptional_iff_isFourierNonexceptional (hD : D.sheaf.IsIrreducible
     D.sheaf.IsNonexceptional ψ D.j ↔ D.IsFourierNonexceptional ψ :=
   ⟨D.isFourierNonexceptional_of_isNonexceptional ψ hD, fun h a ha ↦ h.2 a ⟨hirr, ha⟩⟩
 
--- TODO(adic): needs the geometric fundamental representation and the inertia group at `∞`;
--- the local input is `AlgebraicGeometry.not_isUnramifiedAtInfinity_artinSchreier`.
+-- TODO(adic): the semisimplicity half is available sheaf-theoretically (as in
+-- `AlgebraicGeometry.WeilSheaf.IsIrreducibleLisse.exists_iso_biproduct_unit`, `F̄` is a quotient
+-- of a sum of Frobenius translates of the constituent); missing are the ramification of
+-- `ℒ_{ψ(a x)}`, `a ∈ k̄ˣ`, at `∞` for geometric sheaves (`lem-a1-artin-schreier-ramified-infinity`,
+-- not yet in Lean) and the passage of lisseness at `∞` to direct summands of `F̄`.
 /-- A lisse sheaf unramified at infinity has no geometric constituent `ℒ_{ψ(a x)}|_U` with
 `a ≠ 0`: the restriction of `M_η̄` to the geometric fundamental group is semisimple
 (`Representation.isSemisimpleRepresentation_comp_subtype`), so such a constituent is a direct
@@ -129,7 +132,9 @@ theorem not_hasLinearArtinSchreierConstituent_of_isUnramifiedAtInfinity (hψ : �
 
 -- TODO(adic): needs the transforms of skyscraper sheaves (`lem-fd-first-formula`), the base
 -- change of the transform to `k̄` (`lem-fd-base-change`), Fourier inversion
--- (`lem-fd-inversion`) and `j^* j_* M = M`.
+-- (`lem-fd-inversion`) and `j^* j_* M = M`, none of which exist yet for pro-étale Weil complexes
+-- (`AlgebraicGeometry.Etale.*` are stated in the étale formalism); also a geometric transform
+-- on `D(𝔸¹_{k̄})` to state the base change.
 /-- **The punctual case is excluded.** For `M` irreducible lisse and nonexceptional, the
 transform of `(j_*M)[1]` is not a sheaf of finite support in degree `0`: otherwise inverting the
 transform and passing to `k̄` would give `M_k̄ ≅ ⊕_ξ (ℒ_{ψ(-ξ x)}|_U)^{n_ξ}`, so that `M` would
