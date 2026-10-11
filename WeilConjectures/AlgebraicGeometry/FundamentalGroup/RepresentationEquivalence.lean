@@ -340,4 +340,66 @@ theorem exists_stalkMap_eq (t : stalk s F →ₗ[Λ] stalk s F')
 
 end Full
 
+section Free
+
+variable {Ω : Type u} [Field Ω] [IsSepClosed Ω] (s : Spec (.of Ω) ⟶ Y)
+
+omit [Finite Λ] in
+/-- The stalk of the underlying sheaf of sets of `F` at the germ of a section is the germ of
+the section in the stalk of `F`. -/
+lemma forgetStalkEquiv_toPresheafFiber [Finite Λ] (F : Y.FiniteLocallyConstantModule Λ)
+    (X : Y.Etale) (x : (pointSmallEtale s).fiber.obj X) (a : F.obj.obj.obj (op X)) :
+    forgetStalkEquiv s F
+        ((pointSmallEtale s).toPresheafFiber X x ((forget Y Λ).obj F).obj.obj a) =
+      ((pointSmallEtale s).toPresheafFiber X x F.obj.obj).hom a := by
+  have h := ConcreteCategory.congr_hom
+    ((pointSmallEtale s).toPresheafFiber_presheafFiberCompIso_hom_app (forgetModule Λ) X x
+      F.obj.obj) a
+  refine Eq.trans ?_ h
+  simp [forgetStalkEquiv]
+  rfl
+
+variable (Λ) in
+/-- The basis of the stalk `Λ[P]_s = Λ[P_s]` of the free sheaf on a finite étale `Y`-scheme `P`,
+indexed by the geometric fibre `P_s`. -/
+noncomputable def freeBasis (P : Y.FiniteEtale) :
+    Module.Basis ((FiniteEtale.fiber s).obj P) Λ (stalk s (free Λ P)) :=
+  .ofRepr (GrothendieckTopology.Point.sheafFiberFreeYonedaEquiv (pointSmallEtale s) Λ P.obj).symm
+
+omit [Finite Λ] in
+lemma freeBasis_apply (P : Y.FiniteEtale) (x : (FiniteEtale.fiber s).obj P) :
+    freeBasis Λ s P x = ((pointSmallEtale s).toPresheafFiber P.obj x (free Λ P).obj.obj).hom
+      (GrothendieckTopology.Point.sheafFreeYonedaGen (J := Y.smallEtaleTopology) Λ P.obj) := by
+  rw [freeBasis, Module.Basis.coe_ofRepr, LinearEquiv.symm_symm]
+  exact GrothendieckTopology.Point.sheafFiberFreeYonedaEquiv_single (pointSmallEtale s) Λ P.obj x
+
+/-- The generating section of `Λ[P]`, on stalks, sends a point `x` of the geometric fibre `P_s`
+to the basis element `x` of `Λ[P]_s`. -/
+lemma forgetStalkEquiv_stalkMap_unit (P : Y.FiniteEtale) (x : (FiniteEtale.fiber s).obj P) :
+    forgetStalkEquiv s (free Λ P) (FiniteLocallyConstant.stalkMap s (unit Λ P)
+      ((FiniteEtale.sheafFiberToSheafEquiv s P).symm (ULift.up x))) = freeBasis Λ s P x := by
+  rw [freeBasis_apply, ← forgetStalkEquiv_toPresheafFiber]
+  congr 1
+  change (pointSmallEtale s).presheafFiber.map (unit Λ P).hom.hom
+    ((pointSmallEtale s).toPresheafFiber P.obj x (FiniteEtale.yonedaPresheaf P.obj)
+      (FiniteEtale.yonedaSection (𝟙 P.obj))) = _
+  refine (GrothendieckTopology.Point.toPresheafFiber_naturality_apply (pointSmallEtale s)
+    (unit Λ P).hom.hom P.obj x (FiniteEtale.yonedaSection (𝟙 P.obj))).trans ?_
+  congr 1
+  simp [unit]
+
+variable [ConnectedSpace Y] (G : Type u) [Group G] [∀ P, MulAction G ((FiniteEtale.fiber s).obj P)]
+  [IsNaturalSMul (FiniteEtale.fiber s) G]
+
+/-- `G = π₁(Y, s)` permutes the basis of `Λ[P]_s` through its action on `P_s`. -/
+lemma smul_freeBasis (P : Y.FiniteEtale) (g : G) (x : (FiniteEtale.fiber s).obj P) :
+    smul s G g (freeBasis Λ s P x) = freeBasis Λ s P (g • x) := by
+  rw [← forgetStalkEquiv_stalkMap_unit, ← forgetStalkEquiv_stalkMap_unit, smul,
+    Equiv.symm_apply_apply, ← FiniteLocallyConstant.stalkMap_smul]
+  congr 2
+  rw [Equiv.eq_symm_apply, FiniteLocallyConstant.smul_toFiniteLocallyConstant,
+    Equiv.apply_symm_apply]
+
+end Free
+
 end AlgebraicGeometry.Scheme.FiniteLocallyConstantModule
