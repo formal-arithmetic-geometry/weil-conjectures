@@ -141,5 +141,23 @@
   "group": "C1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-afc1709 (reviewer sub-agent of L); spot-checked: Source Stacks Properties Definition 01PS / Proposition 01Q3 (1)=>(2): the item statement (unchanged) agrees with it; only the item node and report changed, no new nodes. Step 1: clause (2) of def-weil-pbc-ample-invertible-module gives for each x an n>=1, s with x in X_s and X_s affine, and the same node states X_s is open, so the X_{s_x} form an open cover. Step 2: clause (1) of that node gives quasi-compactness, def-weil-pbc-quasi-compact-scheme states every open cover has a finite subcover; the subfamily keeps n_i>0 and affineness. Both cited statements read in full; hypotheses match; definitions cited are in stmt_deps, no off-unit lemma used. Small cases: empty X (empty family), Spec A with O_X, P^1 with O(1) (two charts). Mathlib: grep of pinned Mathlib/AlgebraicGeometry for Ample/IsAmple finds no file or declaration, so no leaf. Checked that lem-sc-ample-proj-open, lem-sc-ample-proj-local-chart and lem-sc-dim-one-ample-invertible are not restated (open immersion into Proj, local chart of Proj morphism, existence of ample on dim<=1). Start Sat Oct 10 05:08:33 PM UTC 2026, end Sat Oct 10 05:08:53 PM UTC 2026."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AmpleFiniteAffineCover",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.IsAmple.exists_finite_affine_cover",
+  "file": "lean/Sheaf/AlgebraicGeometry/AmpleFiniteAffineCover.lean",
+  "statement": "theorem IsAmple.exists_finite_affine_cover (X : Scheme.{u}) (L : X.Modules) [L.IsInvertible] (hL : IsAmple X L) : ∃ (m : ℕ) (n : Fin m → ℕ) (s : (i : Fin m) → (L.tensorPow (n i)).val.presheaf.obj (Opposite.op ⊤)) (U : Fin m → X.Opens), (∀ i : Fin m, 0 < n i) ∧ (∀ i : Fin m, IsAffineOpen (U i)) ∧ (∀ (i : Fin m) (x : X), x ∈ U i ↔ (TopCat.Presheaf.germ (L.tensorPow (n i)).val.presheaf ⊤ x trivial) (s i) ∉ (IsLocalRing.maximalIdeal (X.presheaf.stalk x)) • (⊤ : Submodule (X.presheaf.stalk x) ↑(TopCat.Presheaf.stalk (L.tensorPow (n i)).val.presheaf x))) ∧ (∀ x : X, ∃ i : Fin m, x ∈ U i)",
+  "branch": "sheaf-dag",
+  "by": "K1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-afa1058",
+  "group": "K1",
+  "result": "pass",
+  "note": "X:Scheme.{u}; L:X.Modules [IsInvertible]; hL: landed Scheme.Modules.IsAmple (f0debf313, resolves in-namespace, not AlgebraicGeometry.IsAmple); finite family via Fin m (m=0 for empty X); n i>0 in N; s i in Gamma(X, L.tensorPow (n i)); U i = X_{s_i} via verbatim IsAmple germ/maximalIdeal•⊤ iff; IsAffineOpen (U i); cover ∀x ∃i. Docstring blueprint+proof; compile clean."
  }
 }
