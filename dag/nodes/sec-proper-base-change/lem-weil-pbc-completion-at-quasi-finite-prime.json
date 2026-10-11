@@ -197,5 +197,24 @@
   "by": "L",
   "result": "accepted",
   "note": "8 steps following Stacks 07NC (with the pointwise form of Zariski's main theorem as a new unsplit node, since 00QB assumes quasi-finiteness everywhere): S' finite with S'_g = S_g; S'_{q'} = S_q written out; 07N9 for S' with the idempotent e of the first factor; phi j = alpha phi'; T_g = U_g; g a unit on Te; j: Te = Uf; conclusion with B = U(1-f). Statement citation repointed to def-weil-pbc-ring-map-quasi-finite-at-prime."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.CompletionAtQuasiFinitePrime",
+  "declaration": "Algebra.completion_at_quasiFiniteAtPrime",
+  "file": "lean/Sheaf/RingTheory/CompletionAtQuasiFinitePrime.lean",
+  "statement": "theorem completion_at_quasiFiniteAtPrime (R : Type u) (S : Type v) [CommRing R] [CommRing S] [Algebra R S] [Algebra.FiniteType R S] [IsNoetherianRing R] (q : PrimeSpectrum S) (hq : IsQuasiFiniteAtPrime R S q) : let p : Ideal R := q.comap (algebraMap R S) let Rp := Localization.AtPrime p let Sq := Localization.AtPrime q.asIdeal let Ip := IsLocalRing.maximalIdeal Rp let Iq := IsLocalRing.maximalIdeal Sq let Rph := AdicCompletion Ip Rp let Sqh := AdicCompletion Iq Sq let f : Rp →+* Sq := Localization.localRingHom p q.asIdeal (algebraMap R S) rfl let U := TensorProduct R Rph S ∃ ψ : Rph →+* Sqh, (∀ (n : ℕ) (x : Rph) (a : Rp), AdicCompletion.evalₐ Ip n x = Ideal.Quotient.mk (Ip ^ n) a → AdicCompletion.evalₐ Iq n (ψ x) = Ideal.Quotient.mk (Iq ^ n) (f a)) ∧ ∃ (B : Type (max u v)) (_ : CommRing B) (β : U →+* B) (φ : U →+* Sqh), (∀ (x : Rph) (y : S), φ (TensorProduct.tmul R x y) = ψ x * algebraMap Sq Sqh (algebraMap S Sq y)) ∧ ∃ e : U ≃+* Sqh × B, e.toRingHom = RingHom.prod φ β",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-cqp1540"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-cqp1540",
+  "group": "E1",
+  "result": "fix",
+  "note": "R->S CommRing+Algebra; R Noetherian (IsNoetherianRing); S finite type (Algebra.FiniteType); q prime (PrimeSpectrum); p = comap; quasi-finite at q = recorded Algebra.IsQuasiFiniteAtPrime; Rp,Sq = Localization.AtPrime; completions AdicCompletion at maximalIdeal; local map = Localization.localRingHom (F1 72b404dc7 form); psi fixed level-by-level; phi pinned on pure tensors x⊗y ↦ psi x * iota y; B, beta existential in max u v; e : U ≃+* Sqh × B with e = prod phi beta encodes S- and Rph-algebra iso"
  }
 }
