@@ -4682,3 +4682,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 12:57 L: merged deliver/F1/lem-weil-pbc-popescu-height-zero-auxiliary-algebra-localizations (stage 2; reviewer FIX; first push; Sheaf.RingTheory.PopescuAuxiliaryAlgebraLocalizations Algebra.popescu_auxiliaryAlgebra_localizations)
 - 12:58 L: merged deliver/M1/def-pc-perfect-complex (stage 2; reviewer FIX; first push; Sheaf.AlgebraicGeometry.PerfectComplex AlgebraicGeometry.Scheme.IsPerfect)
 - 12:58 L: merged deliver/F1/def-pc-derived-category-qcoh-algebra (stage 2; reviewer FIX; first push; Sheaf.AlgebraicGeometry.DerivedCategoryQCoherentAlgebra AlgebraicGeometry.sheafAlgebraDerivedCategory; dropped nodes: def-pc-qcoherent-sheaf-algebra)
+- 12:58 L: merged deliver/M1/lem-weil-pbc-power-series-cohen-formally-smooth-adic (stage 2; reviewer PASS; first push; Sheaf.RingTheory.PowerSeriesCohenFormallySmoothAdic MvPowerSeries.formallySmoothAdic_rat)

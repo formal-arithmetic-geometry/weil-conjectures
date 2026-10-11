@@ -175,5 +175,28 @@
   "worker": "stage1",
   "summary": "Read 07NL (more-algebra.tex line 9704) and its proof, Algebra 0322 (line 44475), 0327, 0329 (line 44907) and its proof, More on Algebra 07EB (line 9140) and 07EC (line 9165); tags verified in tags/tags. Statement kept. The source's one-line reduction 'by the universal property of power series rings it suffices' is written out: Step 1 fixes a test datum, chooses lifts d_i of g(x_i) (and d_0 = p in part (2)), shows they generate a nilpotent ideal (pigeonhole), so D and D/J are adically complete for it; Steps 2 and 3 lift g on the coefficient ring (K via the char-0 formal smoothness node; Lambda via the Cohen mod p^N node, after observing p^{2k}=0 in D, which is the source's remark 'some power of p is zero in A'); Step 4 extends by the existence part of the universal-property node and gets q o f = g by its uniqueness part applied in D/J, and checks R-linearity. No new node: every fact used is an existing node (universal property of power series, char-zero field formally smooth (Mathlib leaf), Cohen ring mod p^n formally smooth). No slopmaster2 Lean for 07NL. Blueprint search (07NL, 'power series formally smooth', 'Cohen ring formally smooth', 'Cohen', 'formally smooth'): no blueprint node states it.",
   "blueprint": "No blueprint node is the item; its ancestor thm-weil-pbc-finite-etale-lifting (step 7 of its split, Lemma 0GS2 essential-surjectivity paragraphs) uses it through the chain in blueprint.from.via. Steps 1-5 realize the formal-smoothness input of that place for the complete local rings Lambda_0[[x]] (the presentation in lem-weil-pbc-complete-local-flat-presentation); the blueprint proof itself does not spell this out."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.PowerSeriesCohenFormallySmoothAdic",
+  "declaration": "MvPowerSeries.formallySmoothAdic_rat",
+  "declarations": [
+   "MvPowerSeries.formallySmoothAdic_rat",
+   "MvPowerSeries.formallySmoothAdic_int_of_isCohenRing"
+  ],
+  "file": "lean/Sheaf/RingTheory/PowerSeriesCohenFormallySmoothAdic.lean",
+  "statement": "theorem formallySmoothAdic_rat (K : Type u) [Field K] [CharZero K] (n : ℕ) : Algebra.FormallySmoothAdic ℚ (MvPowerSeries (Fin n) K) (Ideal.span (Set.range (fun i : Fin n ↦ (X i : MvPowerSeries (Fin n) K))))",
+  "branch": "sheaf-dag",
+  "by": "M1",
+  "date": "2026-10-11",
+  "existing": false,
+  "note": "Two declarations state respectively parts (1) and (2) of the node (Stacks 07NL (1) and (3)). The rational algebra structure is the canonical one through K; the integer algebra structure is canonical."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-pcs1306",
+  "group": "M1",
+  "result": "pass",
+  "note": "n:ℕ/Fin n both parts; (1) Field K + CharZero K, ℚ-algebra = canonical MvPowerSeries.instAlgebra via DivisionRing.toRatAlgebra (rfl-checked), ideal span range X = (x_i); (2) p:ℕ with Nat.Prime inside landed IsCohenRing p Λ, ideal span insert (MvPowerSeries.C p) range X = (p,x_i) as sibling FieldCohenPowerSeriesFormallySmooth word for word; conclusions landed Algebra.FormallySmoothAdic, test universe max 0 u; n=0 checked; no defs, no lets"
  }
 }
