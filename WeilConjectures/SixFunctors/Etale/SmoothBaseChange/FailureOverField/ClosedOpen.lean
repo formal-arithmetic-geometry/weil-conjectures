@@ -20,7 +20,7 @@ TODO
 
 @[expose] public section
 
-universe u
+universe v u
 
 open CategoryTheory Limits
 
@@ -116,6 +116,60 @@ lemma isIso_derivedPlus_counit_app_Qh_obj (hε : ∀ Y, IsIso (adj.counit.app Y)
 end Plus
 
 end CategoryTheory.Adjunction
+
+section StalkRange
+
+namespace CategoryTheory
+
+variable {𝒜 : Type*} [Category* 𝒜] [Abelian 𝒜] {R : Type*} [Ring R]
+
+/-- Let `Φ` be an exact functor to modules. If the map induced on the cokernels of `f` and `f'`
+by a commutative square is a monomorphism, then an element whose image under `Φ β` lies in the
+range of `Φ f'` already lies in the range of `Φ f`. -/
+lemma mem_range_of_mono_cokernelMap (Φ : 𝒜 ⥤ ModuleCat.{v} R) [PreservesFiniteLimits Φ]
+    [PreservesFiniteColimits Φ] {A B A' B' : 𝒜} (f : A ⟶ B) (f' : A' ⟶ B') (α : A ⟶ A')
+    (β : B ⟶ B') (w : f ≫ β = α ≫ f') [Mono (cokernel.map f f' α β w)] (x : Φ.obj B)
+    (hx : (Φ.map β).hom x ∈ Set.range (Φ.map f').hom) : x ∈ Set.range (Φ.map f).hom := by
+  have hex := ((ShortComplex.mk f (cokernel.π f) (cokernel.condition f)).exact_of_g_is_cokernel
+    (cokernelIsCokernel f)).map Φ
+  rw [ShortComplex.moduleCat_exact_iff] at hex
+  refine hex x ?_
+  have hm : Function.Injective (Φ.map (cokernel.map f f' α β w)).hom :=
+    (ModuleCat.mono_iff_injective _).1 inferInstance
+  apply hm
+  obtain ⟨y, hy⟩ := hx
+  rw [map_zero]
+  change (Φ.map (cokernel.π f) ≫ Φ.map (cokernel.map f f' α β w)).hom x = 0
+  rw [← Φ.map_comp, cokernel.π_desc, Φ.map_comp, ModuleCat.hom_comp, LinearMap.comp_apply, ← hy]
+  change (Φ.map f' ≫ Φ.map (cokernel.π f')).hom y = 0
+  rw [← Φ.map_comp, cokernel.condition, Φ.map_zero]
+  rfl
+
+/-- Let `τ : S ⟶ T` be a natural transformation between functors to an additive category,
+with `T` additive, and let `Φ` be an additive functor to modules. An element of
+`Φ (T (G₁ ⊞ G₂))` whose two components are in the ranges of `Φ τ` is in the range of
+`Φ τ`. -/
+lemma mem_range_of_biprod {𝒞 : Type*} [Category* 𝒞] [Preadditive 𝒞] [HasBinaryBiproducts 𝒞]
+    {ℬ : Type*} [Category* ℬ] [Preadditive ℬ] (Φ : ℬ ⥤ ModuleCat.{v} R) [Φ.Additive]
+    {S T : 𝒞 ⥤ ℬ} [T.Additive] (τ : S ⟶ T) {G₁ G₂ : 𝒞} (x : Φ.obj (T.obj (G₁ ⊞ G₂)))
+    (h₁ : (Φ.map (T.map biprod.fst)).hom x ∈ Set.range (Φ.map (τ.app G₁)).hom)
+    (h₂ : (Φ.map (T.map biprod.snd)).hom x ∈ Set.range (Φ.map (τ.app G₂)).hom) :
+    x ∈ Set.range (Φ.map (τ.app (G₁ ⊞ G₂))).hom := by
+  obtain ⟨y₁, hy₁⟩ := h₁
+  obtain ⟨y₂, hy₂⟩ := h₂
+  refine ⟨(Φ.map (S.map biprod.inl)).hom y₁ + (Φ.map (S.map biprod.inr)).hom y₂, ?_⟩
+  have e (G : 𝒞) (b : G ⟶ G₁ ⊞ G₂) (y : Φ.obj (S.obj G)) :
+      (Φ.map (τ.app (G₁ ⊞ G₂))).hom ((Φ.map (S.map b)).hom y) =
+        (Φ.map (T.map b)).hom ((Φ.map (τ.app G)).hom y) := by
+    rw [← ModuleCat.comp_apply, ← Φ.map_comp, τ.naturality, Φ.map_comp, ModuleCat.comp_apply]
+  rw [map_add, e, e, hy₁, hy₂, ← ModuleCat.comp_apply, ← ModuleCat.comp_apply, ← Φ.map_comp,
+    ← Φ.map_comp, ← T.map_comp, ← T.map_comp, ← LinearMap.add_apply, ← ModuleCat.hom_add,
+    ← Φ.map_add, ← T.map_add, biprod.total, T.map_id, Φ.map_id]
+  rfl
+
+end CategoryTheory
+
+end StalkRange
 
 section MonoRightDerived
 
@@ -791,10 +845,10 @@ theorem Etale.exists_baseChangeTargetTransition_comp_eq {X T Y T₂ Y₂ T₁ Y�
       IsIso (((i)^*[ModuleCat.{u + 1} Λ]).map β ≫
         (Etale.upperStarLowerStarAdjunction _ i).counit.app _) ∧
       Etale.baseChangeTargetTransition Λ e h q f₂ a₂ e₂ h₂ wa₂ wh₂ F ≫
+          (Etale.baseChangeTargetFunctor Λ e₂ h₂ q).map β ≫
           (DerivedCategory.Plus.homologyFunctor _ q).map
             (R+((h₂)_*[ModuleCat.{u + 1} Λ]).map
-                (D+((e₂)^*[ModuleCat.{u + 1} Λ]).map ((DerivedCategory.Plus.singleFunctor _ 0).map β) ≫
-                  D+((e₂)^*[ModuleCat.{u + 1} Λ]).map (Etale.singleLowerStarComparison Λ i
+                (D+((e₂)^*[ModuleCat.{u + 1} Λ]).map (Etale.singleLowerStarComparison Λ i
                     (((i ≫ f₂)^*[ModuleCat.{u + 1} Λ]).obj F)) ≫
                   (Etale.baseChange (ModuleCat.{u + 1} Λ) sqk).app
                     ((DerivedCategory.Plus.singleFunctor _ 0).obj
@@ -837,8 +891,10 @@ theorem Etale.exists_baseChangeTargetTransition_comp_eq {X T Y T₂ Y₂ T₁ Y�
     exact isIso_of_fully_faithful (DerivedCategory.Plus.singleFunctor _ 0) _
   · rw [← Etale.baseChangeTargetTransition_comp_eq Λ q F f₂ a₂ wa₂ wh₂ i a₁ wa₁ wh₁ a' wa' wh' ha]
     congr 1
+    rw [Etale.baseChangeTargetFunctor_map, ← Functor.map_comp]
     congr 1
     rw [Etale.targetTransitionPlus_comp_map Λ e₂ h₂ i a' e₁ h₁ wa' wh' sqk,
+      ← Functor.map_comp_assoc (R+((h₂)_*[ModuleCat.{u + 1} Λ])),
       ← Functor.map_comp_assoc (R+((h₂)_*[ModuleCat.{u + 1} Λ]))]
     refine Eq.trans ?lhs (Eq.trans (congrArg (fun x ↦ R+((h₂)_*[ModuleCat.{u + 1} Λ]).map x ≫
       (Etale.lowerStarPlusCompIso Λ a' h₂ h₁ wh').hom.app
@@ -853,6 +909,36 @@ theorem Etale.exists_baseChangeTargetTransition_comp_eq {X T Y T₂ Y₂ T₁ Y�
     case lhs => rfl
     case rhs => rfl
     case hwφ => exact hφ
+
+/-- A morphism `G ⟶ j_* N₁ ⊞ i_* N₂` along complementary open and closed immersions is a
+monomorphism as soon as its two adjoint components `j^* G ⟶ N₁` and `i^* G ⟶ N₂` are. -/
+lemma Etale.mono_biprod_lift {T' V Z : Scheme.{u}} (j : V ⟶ T') [IsOpenImmersion j]
+    (i : Z ⟶ T') [IsClosedImmersion i] (hij : Set.range i.base = (Set.range j.base)ᶜ)
+    {G : Sheaf T'.smallEtaleTopology (ModuleCat.{u + 1} Λ)}
+    {N₁ : Sheaf V.smallEtaleTopology (ModuleCat.{u + 1} Λ)}
+    {N₂ : Sheaf Z.smallEtaleTopology (ModuleCat.{u + 1} Λ)}
+    (β₁ : G ⟶ ((j)_*[ModuleCat.{u + 1} Λ]).obj N₁) (β₂ : G ⟶ ((i)_*[ModuleCat.{u + 1} Λ]).obj N₂)
+    [Mono (((j)^*[ModuleCat.{u + 1} Λ]).map β₁ ≫
+      (Etale.upperStarLowerStarAdjunction _ j).counit.app N₁)]
+    [Mono (((i)^*[ModuleCat.{u + 1} Λ]).map β₂ ≫
+      (Etale.upperStarLowerStarAdjunction _ i).counit.app N₂)] :
+    Mono (biprod.lift β₁ β₂) := by
+  have h₁ : kernel.ι (biprod.lift β₁ β₂) ≫ β₁ = 0 := by
+    have := kernel.condition (biprod.lift β₁ β₂) =≫ biprod.fst
+    rwa [Category.assoc, biprod.lift_fst, zero_comp] at this
+  have h₂ : kernel.ι (biprod.lift β₁ β₂) ≫ β₂ = 0 := by
+    have := kernel.condition (biprod.lift β₁ β₂) =≫ biprod.snd
+    rwa [Category.assoc, biprod.lift_snd, zero_comp] at this
+  refine Preadditive.mono_of_kernel_zero (IsZero.eq_of_src ?_ _ _)
+  refine Etale.isZero_of_isZero_upperStar i hij ?_ ?_
+  · refine IsZero.of_mono_eq_zero (((j)^*[ModuleCat.{u + 1} Λ]).map (kernel.ι _)) ?_
+    rw [← cancel_mono (((j)^*[ModuleCat.{u + 1} Λ]).map β₁ ≫
+      (Etale.upperStarLowerStarAdjunction _ j).counit.app N₁), ← Category.assoc,
+      ← Functor.map_comp, h₁, Functor.map_zero, zero_comp, zero_comp]
+  · refine IsZero.of_mono_eq_zero (((i)^*[ModuleCat.{u + 1} Λ]).map (kernel.ι _)) ?_
+    rw [← cancel_mono (((i)^*[ModuleCat.{u + 1} Λ]).map β₂ ≫
+      (Etale.upperStarLowerStarAdjunction _ i).counit.app N₂), ← Category.assoc,
+      ← Functor.map_comp, h₂, Functor.map_zero, zero_comp, zero_comp]
 
 
 end Pushforward
