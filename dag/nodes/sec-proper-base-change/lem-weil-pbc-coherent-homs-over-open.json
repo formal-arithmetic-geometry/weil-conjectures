@@ -308,5 +308,24 @@
  },
  "tool_uses": [
   "pqf-lem-coherent-ft-locnoeth"
- ]
+ ],
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.CoherentHomsOverOpen",
+  "declaration": "AlgebraicGeometry.Scheme.coherent_homs_over_open",
+  "file": "lean/Sheaf/AlgebraicGeometry/CoherentHomsOverOpen.lean",
+  "statement": "theorem coherent_homs_over_open {X : Scheme.{u}} [IsLocallyNoetherian X] [CompactSpace X] (I : X.IdealSheafData) (F G : X.Modules) [F.IsQuasicoherent] (hG : RingedSpace.IsCoherent X.toRingedSpace G) : ∃ (U : X.Opens) (r : ∀ (n m : ℕ), n ≤ m → (idealModuleProduct (idealSheafPower I.toModulesι m).2 G ⟶ idealModuleProduct (idealSheafPower I.toModulesι n).2 G)), (∀ x : X, x ∈ U ↔ Function.Surjective ((RingedSpace.moduleStalkFunctor X.toRingedSpace x).map I.toModulesι).hom) ∧ (∀ (W : X.Opens), W ≤ U → Function.Bijective (I.toModulesι.app W)) ∧ (∀ n : ℕ, IsIso ((SheafOfModules.overFunctor X.ringCatSheaf U).map (idealModuleProductι (idealSheafPower I.toModulesι n).2 G))) ∧ (∀ (n m : ℕ) (h : n ≤ m), r n m h ≫ idealModuleProductι (idealSheafPower I.toModulesι n).2 G = idealModuleProductι (idealSheafPower I.toModulesι m).2 G) ∧ (∃ (D : ℕ ⥤ AddCommGrpCat.{u}) (e : ∀ n : ℕ, D.obj n ≅ AddCommGrpCat.of (idealModuleProduct (idealSheafPower I.toModulesι n).2 G ⟶ F)) (c : D ⟶ (Functor.const ℕ).obj (AddCommGrpCat.of ((SheafOfModules.overFunctor X.ringCatSheaf U).obj G ⟶ (SheafOfModules.overFunctor X.ringCatSheaf U).obj F))), (∀ (n m : ℕ) (h : n ≤ m) (χ : idealModuleProduct (idealSheafPower I.toModulesι n).2 G ⟶ F), (e m).hom (D.map (homOfLE h) ((e n).inv χ)) = r n m h ≫ χ) ∧ (∀ (n : ℕ) (χ : idealModuleProduct (idealSheafPower I.toModulesι n).2 G ⟶ F), (SheafOfModules.overFunctor X.ringCatSheaf U).map (idealModuleProductι (idealSheafPower I.toModulesι n).2 G) ≫ c.app n ((e n).inv χ) = (SheafOfModules.overFunctor X.ringCatSheaf U).map χ) ∧ Function.Bijective (colimit.desc D ⟨_, c⟩)) ∧ ∀ ψ : (SheafOfModules.overFunctor X.ringCatSheaf U).obj G ⟶ (SheafOfModules.overFunctor X.ringCatSheaf U).obj F, ∃ (n : ℕ) (χ : idealModuleProduct (idealSheafPower I.toModulesι n).2 G ⟶ F), (SheafOfModules.overFunctor X.ringCatSheaf U).map (idealModuleProductι (idealSheafPower I.toModulesι n).2 G) ≫ ψ = (SheafOfModules.overFunctor X.ringCatSheaf U).map χ",
+  "branch": "sheaf-dag",
+  "by": "M1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-cho"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-cho",
+  "group": "M1",
+  "result": "fix",
+  "note": "Noetherian X (IsLocallyNoetherian+CompactSpace), F qcoh, G coherent (dropped redundant [G.IsQuasicoherent]), I IdealSheafData; U tied stalkwise (I_x=O_x), I|_U=O_U, (I^nG)|_U=G|_U as IsIso over U; r tied to inclusions; D tied by e; cocone c tied to chi|_U (was a free cocone); bijective colimit.desc; in-particular clause; restriction .over U"
+ }
 }
