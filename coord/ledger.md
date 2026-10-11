@@ -3219,3 +3219,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 01:19 L: merged deliver/E1/lem-sc-module-localization-filtered-colimit (reviewer FIX; first push; new nodes: 0)
 - 01:19 L: merged deliver/J1/lem-pc-ring-derived-map-lift (reviewer FIX; first push; new nodes: 2)
 - 01:19 UTC L: E1 module-localization-filtered-colimit FIX a7b3d150a (R-mlc0119).
+- 01:19 UTC L: J1 ring-derived-map-lift FIX 4db9a2f32 (R-rml0118; the second reading's silent statement change reverted to the D(R) form the citer uses).
