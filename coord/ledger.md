@@ -5359,3 +5359,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 16:08 L: merged deliver/R1/lem-pc-ringed-space-derived-limit-stalk-injective (stage 2; reviewer PASS; first push; Sheaf.Topology.DerivedLimitStalkInjective AlgebraicGeometry.RingedSpace.derivedLimit_stalk_injective)
 - 16:08 L: merged deliver/E1/lem-pc-proper-perfect-direct-image-perfect (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.ProperPerfectDirectImagePerfect AlgebraicGeometry.proper_perfect_directImage_perfect; new nodes: def-pc-perfect-morphism)
 - 16:08 L: returned deliver/F1/def-pc-derived-rhom-algebra-module (reviewer RETURN: R-dra (head 10ddbf434). H5: the definition's data comes from Classical.choose of sorried theorems, which makes it hollow)
+- 16:08 L: merged deliver/P1/lem-sc-sheaf-ext-coherent (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.SheafExtCoherent AlgebraicGeometry.sheafExt_isCoherent)

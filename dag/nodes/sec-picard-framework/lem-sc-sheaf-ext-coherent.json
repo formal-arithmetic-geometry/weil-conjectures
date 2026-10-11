@@ -145,5 +145,23 @@
   "group": "K1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-sec1820 (reviewer sub-agent of L); spot-checked: Return of 17:30 repaired: restatement node dropped, affine argument written (local reduction, affine RHom node, finite Ext node, 01XZ). New nodes true, not duplicates (same-tag list checked), no Mathlib match (grep Ext finiteness). Tool uses pqf-lem-coherent-ft-locnoeth (01XZ) and lem-weil-pbc-quasi-coherent-finite-type-affine are generic scheme facts (C7/C8 ok). FIX more, RETURN less: (1) C1 Step 2 used 08DL without a node: now cites lem-sc-derived-internal-hom-restrict-open plus def-weil-pbc-sheaf-ext and spells out restriction of H^q; (2) C1 Steps 1/3 used 01XZ with no node: now cite pqf-lem-coherent-ft-locnoeth, lem-weil-pbc-quasi-coherent-finite-type-affine(a), lem-weil-pbc-affine-tilde-gamma-adjunction(2)(3); (3) B3 new nodes: Ext^q_A (def-pc-ext, q>=0) was used for every integer q and stmt_deps missed RHom/H^q/Ext/tilde defs: affine node now states H^q=0 for q<0 and iso for q>=0, deps added; finite-Ext node cites def-pc-ext; item Step 3 treats q<0.; 3 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SheafExtCoherent",
+  "declaration": "AlgebraicGeometry.sheafExt_isCoherent",
+  "file": "lean/Sheaf/AlgebraicGeometry/SheafExtCoherent.lean",
+  "statement": "theorem sheafExt_isCoherent (X : Scheme.{u₁}) [IsLocallyNoetherian X] [HasDerivedCategory.{w₁} (SheafOfModules.{u₁} (moduleRings X.toRingedSpace))] (F G : SheafOfModules.{u₁} (moduleRings X.toRingedSpace)) (hF : RingedSpace.IsCoherent X.toRingedSpace F) (hG : RingedSpace.IsCoherent X.toRingedSpace G) : ∀ q : ℤ, RingedSpace.IsCoherent X.toRingedSpace (moduleSheafExt X q F G)",
+  "branch": "sheaf-dag",
+  "by": "P1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "P1",
+  "result": "pass",
+  "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
  }
 }
