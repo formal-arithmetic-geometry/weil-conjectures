@@ -1,11 +1,11 @@
 # Work queue
 
-978 items; claim with `tools/claim.py next <group> [--stage N]`.
+977 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (978)
+## Stage 2: nodes to state (977)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -56,7 +56,6 @@
 | `lem-pod-lisse-tensor-and-scalar-extension` | 1 | state |
 | `lem-pur-kinjective-ML-ordinals` | 1 | state |
 | `lem-pur-kinjective-characterize-K-injective` | 1 | state |
-| `lem-pur-kinjective-characterize-injective` | 1 | state |
 | `lem-pur-kinjective-degreewise-existence` | 1 | state |
 | `lem-pur-kinjective-functorial-homotopies` | 1 | state |
 | `lem-pur-kinjective-functorial-injective` | 1 | state |
