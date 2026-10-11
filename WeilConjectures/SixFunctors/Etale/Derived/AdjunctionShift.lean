@@ -5,33 +5,27 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.CategoryTheory.DerivedCategory.AdjunctionComparison
 public import WeilConjectures.Mathlib.CategoryTheory.Shift.Adjunction
 public import WeilConjectures.SixFunctors.Etale.Derived.Hom
 public import WeilConjectures.SixFunctors.Etale.Derived.Shift
 
 /-!
-# The adjunctions of the derived six functors commute with shifts
+# The adjunctions `Rf_! ⊣ Rf^!` and `K ⊗ᴸ - ⊣ RHom(K, -)` commute with shifts
 
-The functors `Lg^*`, `Rg_*`, `Rf_!`, `Rf^!` and `K ⊗ᴸ -` on the unbounded derived categories of
-étale sheaves commute with the shift functors (`WeilConjectures.SixFunctors.Etale.Derived.Shift`).
-This file equips the derived hom `RHom(K, -)` with its `CommShift` structure, as the right
-adjoint of `K ⊗ᴸ -`, and shows that the three adjunctions `Lg^* ⊣ Rg_*`, `Rf_! ⊣ Rf^!` and
-`K ⊗ᴸ - ⊣ RHom(K, -)` are compatible with these structures
-(`CategoryTheory.Adjunction.CommShift`): their units and counits commute with the shifts.
-
-For `Lg^* ⊣ Rg_*` this is not formal: the shift structure of `Rg_*` comes from the adjunction
-`D(g^*) ⊣ Rg_*` with the levelwise pullback, and that of `Lg^*` from the isomorphism
-`Lg^* ≅ D(g^*)`. The derived adjunction `Lg^* ⊣ Rg_*` is the levelwise one transported along
-this isomorphism (`CategoryTheory.Adjunction.derivedAdjunction_eq_ofNatIsoLeft`).
+The functors `Rf_!`, `Rf^!` and `K ⊗ᴸ -` on the unbounded derived categories of étale sheaves
+commute with the shift functors (`WeilConjectures.SixFunctors.Etale.Derived.Shift`). This file
+equips the derived hom `RHom(K, -)` with its `CommShift` structure, as the right adjoint of
+`K ⊗ᴸ -`, and shows that the adjunctions `Rf_! ⊣ Rf^!` and `K ⊗ᴸ - ⊣ RHom(K, -)` are
+compatible with these structures (`CategoryTheory.Adjunction.CommShift`): their units and
+counits commute with the shifts. For `Lg^* ⊣ Rg_*` this is
+`AlgebraicGeometry.Etale.commShift_derivedUpperStarLowerStarAdjunction`.
 
 ## Main definitions and results
 
 - `AlgebraicGeometry.Etale.commShiftDerivedHomObj`: `RHom(K, -)` commutes with shifts.
 - `AlgebraicGeometry.Etale.commShift_derivedTensorHomAdjunction`,
-  `AlgebraicGeometry.Etale.commShift_derivedUpperStarLowerStarAdjunction`,
   `AlgebraicGeometry.Etale.commShift_rightDerivedUpperShriekAdjunction`: the adjunctions
-  `K ⊗ᴸ - ⊣ RHom(K, -)`, `Lg^* ⊣ Rg_*` and `Rf_! ⊣ Rf^!` commute with shifts.
+  `K ⊗ᴸ - ⊣ RHom(K, -)` and `Rf_! ⊣ Rf^!` commute with shifts.
 -/
 
 @[expose] public section
@@ -59,19 +53,6 @@ instance commShift_rightDerivedUpperShriekAdjunction {X Y : Scheme.{u}} (f : X �
 
 variable [MonoidalCategory A] [MonoidalPreadditive A] [SymmetricCategory A] [MonoidalClosed A]
   [Abelian.HasFunctorialFlatResolution A]
-
-/-- The adjunction `Lg^* ⊣ Rg_*` commutes with shifts. It is the adjunction `D(g^*) ⊣ Rg_*`,
-which defines the shift structure of `Rg_*`, transported along the isomorphism
-`Lg^* ≅ D(g^*)` which defines the shift structure of `Lg^*`. -/
-instance commShift_derivedUpperStarLowerStarAdjunction {Z Y : Scheme.{u}} (g : Z ⟶ Y) :
-    (derivedUpperStarLowerStarAdjunction A g).CommShift ℤ := by
-  have : (mapDerivedUpperStarLowerStarAdjunction A g).CommShift ℤ :=
-    (mapDerivedUpperStarLowerStarAdjunction A g).commShift_of_leftAdjoint ℤ
-  have : NatTrans.CommShift (leftDerivedUpperStarIsoMapDerivedCategory A g).symm.hom ℤ :=
-    Functor.CommShift.ofIso_compatibility (leftDerivedUpperStarIsoMapDerivedCategory A g).symm ℤ
-  rw [derivedUpperStarLowerStarAdjunction, Adjunction.derivedAdjunction_eq_ofNatIsoLeft]
-  exact Adjunction.CommShift.ofNatIsoLeft (mapDerivedUpperStarLowerStarAdjunction A g)
-    (leftDerivedUpperStarIsoMapDerivedCategory A g).symm
 
 variable {X : Scheme.{u}}
 

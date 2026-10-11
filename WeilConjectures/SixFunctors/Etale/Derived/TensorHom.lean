@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.Mathlib.CategoryTheory.Adjunction.Parametrized
 public import WeilConjectures.SixFunctors.Etale.Derived.AdjunctionShift
+public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekProjectionShift
 public import WeilConjectures.SixFunctors.Etale.Derived.Composition
 public import WeilConjectures.SixFunctors.Etale.Derived.Dualizing
 public import WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormula
@@ -46,7 +47,7 @@ scalar extension) is encoded by functors `T_X`, `T_Y` and comparison 2-squares f
 adjoints `Lf^*`, `Rf_!`, `M ⊗ᴸ -`; the comparison maps of the right adjoints `Rf_*`, `Rf^!`,
 `RHom(M, -)` are their mates. If the projection map is compatible with the change of
 coefficients (axiom (A5) of `def-sf-datum`), so is the exchange. Likewise the exchange commutes
-with shifts as soon as the projection map does.
+with shifts, since the projection map does.
 
 The tensor–Hom statement is made on `Dctf`, so applying it at `N = ω_Y` needs `ω_Y` to lie in
 `Dctf(Y, A)`. In the blueprint's setting (a finite-type scheme over a field, finite coefficient
@@ -138,21 +139,19 @@ omit [HasSmallSiteSheafify A] in
 
 The isomorphism `Rf_* RHom_X(M, Rf^! N) ≅ RHom_Y(Rf_! M, N)` of
 `AlgebraicGeometry.Etale.derivedHomRightDerivedLowerShriekIso` commutes with the shifts in
-`N`, as soon as the projection map `Rf_! M ⊗ᴸ L ⟶ Rf_!(M ⊗ᴸ Lf^* L)` commutes with the shifts
-in `L`. Both sides carry the shift structures of the functors they are built from
+`N`. Both sides carry the shift structures of the functors they are built from
 (`AlgebraicGeometry.Etale.commShiftDerivedHomObj` for `RHom(M, -)`).
 
 As in the blueprint, the compatibility is that of the ingredients: the isomorphism is the
-conjugate of the projection map along the adjunctions `Lf^* ⊣ Rf_*`, `Rf_! ⊣ Rf^!` and
-`K ⊗ᴸ - ⊣ RHom(K, -)`, which commute with shifts
+conjugate of the projection map `Rf_! M ⊗ᴸ L ⟶ Rf_!(M ⊗ᴸ Lf^* L)`, which commutes with the
+shifts in `L` (`AlgebraicGeometry.Etale.commShift_projectionMap_app`), along the adjunctions
+`Lf^* ⊣ Rf_*`, `Rf_! ⊣ Rf^!` and `K ⊗ᴸ - ⊣ RHom(K, -)`, which commute with shifts
 (`AlgebraicGeometry.Etale.commShift_derivedUpperStarLowerStarAdjunction`,
 `AlgebraicGeometry.Etale.commShift_rightDerivedUpperShriekAdjunction`,
 `AlgebraicGeometry.Etale.commShift_derivedTensorHomAdjunction`), and conjugation preserves
 the compatibility with shifts (`CategoryTheory.NatTrans.CommShift.conjugateEquiv`). -/
 theorem commShift_derivedHomRightDerivedLowerShriekIso_app_hom [IsIso (projectionMap A f)]
-    (M : DerivedCategory (Sheaf X.smallEtaleTopology A))
-    [NatTrans.CommShift (F₁ := (-⊗ᴸ-(Y)[A]).obj ((R(f)_![A]).obj M))
-      (F₂ := L((f)^*[A]) ⋙ (-⊗ᴸ-(X)[A]).obj M ⋙ R(f)_![A]) ((projectionMap A f).app M) ℤ] :
+    (M : DerivedCategory (Sheaf X.smallEtaleTopology A)) :
     NatTrans.CommShift (F₁ := (R(f)^![A] ⋙ (RHom(X)[A]).obj (op M)) ⋙ R((f)_*[A]))
       (F₂ := (RHom(Y)[A]).obj (op ((R(f)_![A]).obj M)))
       ((derivedHomRightDerivedLowerShriekIso A f).app (op M)).hom ℤ :=
@@ -316,7 +315,7 @@ finiteness hypothesis on `M` and `N` is needed.
 
 The naturality in `M` and `N` and the compatibilities of the blueprint are those of
 `AlgebraicGeometry.Etale.derivedHomRightDerivedLowerShriekIso` at `A = ModuleCat Λ`: it commutes
-with shifts when the projection map does
+with shifts
 (`AlgebraicGeometry.Etale.commShift_derivedHomRightDerivedLowerShriekIso_app_hom`), and it is
 compatible with any change of coefficients `Λ → Λ'`, such as finite reduction or scalar
 extension, which is compatible with the projection map
