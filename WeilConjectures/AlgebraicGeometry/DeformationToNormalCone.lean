@@ -313,6 +313,78 @@ lemma deformationSpaceGeneric_toBase :
       IdealSheafData.toPolynomialPresheaf_comp_polynomialToLaurent]
   exact (isPullback_laurentSpec g).isoPullback_inv_fst
 
+/-! #### The fibre over `t = 1` -/
+
+/-- The unit section `B ⟶ 𝔸¹_B` lands in the punctured line. -/
+noncomputable def oneSectionToPuncturedLine (B : Scheme.{u}) : B ⟶ puncturedLine B :=
+  IsOpenImmersion.lift (puncturedLine B).ι (AffineSpace.oneSection (ULift.{u} (Fin 1)) B) (by
+    rw [Scheme.Opens.range_ι]
+    rintro _ ⟨y, rfl⟩
+    change y ∈ AffineSpace.oneSection _ B ⁻¹ᵁ puncturedLine B
+    rw [Scheme.preimage_basicOpen_top, AffineSpace.oneSection, AffineSpace.homOfVector_appTop_coord]
+    simp)
+
+@[reassoc (attr := simp)]
+lemma oneSectionToPuncturedLine_ι (B : Scheme.{u}) :
+    oneSectionToPuncturedLine B ≫ (puncturedLine B).ι = AffineSpace.oneSection _ B :=
+  IsOpenImmersion.lift_fac _ _ _
+
+@[reassoc (attr := simp)]
+lemma oneSectionToPuncturedLine_ι_over (B : Scheme.{u}) :
+    oneSectionToPuncturedLine B ≫ (puncturedLine B).ι ≫ 𝔸(ULift.{u} (Fin 1); B) ↘ B = 𝟙 B := by
+  rw [oneSectionToPuncturedLine_ι_assoc, AffineSpace.oneSection_comp_over]
+
+/-- The inclusion `ι₁ : V ⟶ D_s V` of the fibre over `t = 1`. -/
+noncomputable def deformationSpaceOneFibre : V ⟶ s.ker.deformationSpace :=
+  pullback.lift (𝟙 V) (g ≫ oneSectionToPuncturedLine B) (by
+    rw [Category.assoc, oneSectionToPuncturedLine_ι_over, Category.id_comp,
+      Category.comp_id]) ≫ deformationSpaceGeneric g s
+
+/-- Pulling back a base change along a section gives back the source. -/
+lemma isPullback_lift_of_section {X' Y' Z' : Scheme.{u}} (f : X' ⟶ Z') (h : Y' ⟶ Z')
+    (σ : Z' ⟶ Y') (hσ : σ ≫ h = 𝟙 Z') :
+    IsPullback (pullback.lift (𝟙 X') (f ≫ σ) (by simp [hσ])) f (pullback.snd f h) σ :=
+  IsPullback.of_right (by simpa [hσ] using IsPullback.of_horiz_isIso (CommSq.mk (by simp)))
+    (by simp) (IsPullback.of_hasPullback f h)
+
+/-- **The fibre over `t = 1` is `(g, s)`.** -/
+lemma isPullback_deformationSpaceOneFibre :
+    IsPullback (deformationSpaceOneFibre g s) g (deformationSpaceProj g s)
+      (AffineSpace.oneSection (ULift.{u} (Fin 1)) B) := by
+  have := (isPullback_lift_of_section g ((puncturedLine B).ι ≫ 𝔸(ULift.{u} (Fin 1); B) ↘ B)
+    (oneSectionToPuncturedLine B) (oneSectionToPuncturedLine_ι_over B)).paste_horiz
+      (isPullback_deformationSpaceGeneric g s)
+  rwa [oneSectionToPuncturedLine_ι] at this
+
+lemma laurentSpecToDeformationSpace_toBase :
+    s.ker.laurentSpecToDeformationSpace ≫ s.ker.deformationSpaceProj =
+      V.laurentSpecToPolynomialSpec ≫ V.polynomialSpecProj := by
+  rw [IdealSheafData.laurentSpecToDeformationSpace,
+    relativeGluingMap_toBase _ _ _ s.ker.toReesPresheaf_comp_reesToLaurent,
+    laurentSpecToPolynomialSpec, relativeGluingMap_toBase _ _ _
+      IdealSheafData.toPolynomialPresheaf_comp_polynomialToLaurent]
+
+variable {g s} in
+lemma comp_deformationSpaceOneFibre (hs : s ≫ g = 𝟙 B) :
+    s ≫ deformationSpaceOneFibre g s =
+      AffineSpace.oneSection (ULift.{u} (Fin 1)) B ≫ s.deformationSpaceSection := by
+  have hP := isPullback_laurentSpecToDeformationSpace g s
+  have hm : (AffineSpace.oneSection (ULift.{u} (Fin 1)) B ≫ s.deformationSpaceSection) ≫
+      deformationSpaceProj g s = oneSectionToPuncturedLine B ≫ (puncturedLine B).ι := by
+    rw [Category.assoc, deformationSpaceSection_deformationSpaceProj hs, Category.comp_id,
+      oneSectionToPuncturedLine_ι]
+  rw [← hP.lift_fst _ _ hm, deformationSpaceOneFibre, deformationSpaceGeneric]
+  simp only [← Category.assoc]
+  congr 1
+  refine (isPullback_laurentSpec g).hom_ext ?_ ?_
+  · rw [Category.assoc, IsPullback.isoPullback_inv_fst, ← laurentSpecToDeformationSpace_toBase,
+      hP.lift_fst_assoc, Category.assoc, Category.assoc, deformationSpaceSection_toBase,
+      ← Category.assoc (AffineSpace.oneSection _ B), AffineSpace.oneSection_comp_over,
+      Category.id_comp]
+    simp
+  · rw [hP.lift_snd, Category.assoc, Category.assoc, IsPullback.isoPullback_inv_snd,
+      pullback.lift_snd, reassoc_of% hs]
+
 end Construction
 
 /-- Blueprint `sk-lem-geometry`: Geometry of the deformation of a section
