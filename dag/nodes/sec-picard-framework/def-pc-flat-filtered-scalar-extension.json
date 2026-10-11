@@ -1,0 +1,106 @@
+{
+ "id": "def-pc-flat-filtered-scalar-extension",
+ "kind": "definition",
+ "title": "Scalar extension of filtered complexes",
+ "statement": "Let $A\\to B$ be a homomorphism of commutative rings and $(K,F)$ a cochain complex of $A$-modules [def-pc-cochain-complex-modules] with a decreasing filtration by subcomplexes [def-sp-filtration]. Its scalar-extension filtered complex has underlying complex $B\\otimes_A K$ (termwise extension of scalars), and step $F^p(B\\otimes_A K)=\\operatorname{im}(B\\otimes_A F^pK\\to B\\otimes_A K)$. If $F$ is finite, so is the induced filtration, with the same full and zero filtration bounds. If $A\\to B$ is flat [def-weil-pbc-flat-ring-map], scalar extension preserves finite limits, independently of ring and module universes. For a complex of any shape, its canonical homology base-change isomorphism $B\\otimes_A H^i(K)\\cong H^i(B\\otimes_A K)$ is the inverse of the exact-functor homology comparison. Ordinary and bigraded page complexes use this same scalar-extension construction.",
+ "source": {
+  "document": "literature/stacks-project/homology.tex",
+  "place": "Section 12.24 (Tag 012K), filtered-complex spectral sequence and functoriality; scalar extension as in Cohomology of Schemes, Tag 02KH"
+ },
+ "stmt_deps": [
+  "def-pc-cochain-complex-modules",
+  "def-sp-filtration",
+  "def-weil-pbc-flat-ring-map"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "canonical functor spectral sequence finite filtered cochain complex; filtered cochain complex scalar extension filtration tensor subcomplex spectral sequence",
+   "results": "Service unavailable: Internal Server Error; no search verdict inferred.",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "finite filtered cochain complex canonical spectral sequence functor with first page graded cohomology; extension of scalars filtration of cochain complexes image of tensored inclusions",
+   "results": "CochainComplex.truncGE/truncLE and cm5b; IsModuleFiltration.mk_int, Submodule.FG.lTensor.directedSystem, and complex tensor instances. These are truncations, increasing algebra filtrations, and tensor constructions, not either required construction.",
+   "date": "2026-10-11",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "finiteFilteredSpectral|filteredScalarFunctor|filteredScalarObject|flatFilteredHomologyIso|FiniteFilteredComplex and spectral functor / filtered scalar concepts in DAG, Mathlib, WeilConjectures, lean/Sheaf",
+   "results": "No existing named finite filtered spectral functor or scalar filtration of complexes. Found boundedFilteredComplex_spectralSequence, FilteredPageTwoModel, extendScalars, ShortComplex.mapHomologyIso and preservesFiniteLimits_extendScalars_of_flat; read signatures. Reuse all applicable constructions; the last flatness lemma restricts module carriers to the rings universe.",
+   "date": "2026-10-11",
+   "verdict": "no exact match for the filtered constructions"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-pc-flat-filtered-complex-comparison",
+  "date": "2026-10-11",
+  "group": "U1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-flat-base-change-cohom",
+   "place": "Step 2: canonical page comparison after flat tensoring of the finite filtered Cech complex",
+   "via": [
+    "lem-pc-flat-filtered-complex-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "module": "Sheaf.CategoryTheory.FlatFilteredScalarExtension",
+  "declaration": "ModuleCat.filteredScalarObject",
+  "declarations": [
+   "ModuleCat.filteredScalarFunctor",
+   "ModuleCat.filteredScalarFunctor_additive",
+   "ModuleCat.filteredScalarFunctor_isLeftAdjoint",
+   "ModuleCat.filteredScalarComplex",
+   "ModuleCat.filteredScalarObject",
+   "ModuleCat.filteredScalarObject_isFinite",
+   "ModuleCat.filteredScalarFunctor_preservesFiniteLimits",
+   "ModuleCat.flatFilteredHomologyIso"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/FlatFilteredScalarExtension.lean",
+  "statement": "def filteredScalarObject (φ : A →+* B) (U : FilteredObject (CochainComplex (ModuleCat.{max uS vS wS} A) ℤ)) : FilteredObject (CochainComplex (ModuleCat.{max uS vS wS} B) ℤ)",
+  "branch": "sheaf-dag",
+  "by": "U1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-ffc",
+  "group": "U1",
+  "result": "fix",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-ffc",
+  "group": "U1",
+  "result": "fix",
+  "note": "rings A,B + flat φ (RingHom.Flat); C,D FilteredObject of CochainComplex with IsFinite + bounded-below; f : scalar-extended filtered object ⟶ D; spectral sequences = any FilteredPageTwoModel MA,MB (dropped Classical.choose-of-sorried finite model); s/g tied by inclusion/projection eqns; page isos e r (r≥2) tied to pageIso image description via flat homology base change; E2-iso ⇒ H^n iso via flatFilteredHomologyIso ≫ homologyMap f; dropped duplicate new node(s) def-pc-finite-filtered-spectral-model (--drop-nodes; not merged, the item points at the landed declaration)"
+ }
+}

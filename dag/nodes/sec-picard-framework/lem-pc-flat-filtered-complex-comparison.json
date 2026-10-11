@@ -22,7 +22,8 @@
   "def-weil-pbc-flat-ring-map",
   "def-pc-cochain-complex-modules",
   "def-sp-filtration",
-  "thm-sp-spectral-object-yields"
+  "thm-sp-spectral-object-yields",
+  "def-pc-flat-filtered-scalar-extension"
  ],
  "proof": [
   {
@@ -159,5 +160,27 @@
   "group": "G1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-ffc2226 (reviewer sub-agent of L); spot-checked: Checked steps against thm-sp-spectral-object-yields (a)-(c), lem-sp-finite-filtration-induction, lem-pc-flat-tensor-complex-cohom, lem-sp-page-induction. FIX more, RETURN less: (1) C1 Step 2: E_2-iso to E_r/E_infty-iso of the morphism of spectral sequences re-derived inline; now cites lem-sp-page-induction (+def-sp-convergence for E_infty), added as tool use. (2) C1/class b Steps 1-2: flat tensor commuting with cohomology of gr^p C and of page complexes was restated inline from lem-weil-pbc-flat-tensor-exact; now cites lem-pc-flat-tensor-complex-cohom, with elementary stupid-truncation remark since that node assumes a bounded complex (gr^pC is only bounded below). (3) C1 Step 3: spectral argument gives H^n(C(x)B)->H^n(D); the identification H^n(C)(x)B = H^n(C(x)B) needed for the stated conclusion was missing; now cited from lem-pc-flat-tensor-complex-cohom. Second reading by G1 missed (1)-(3).; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.FlatFilteredComplexComparison",
+  "declaration": "CategoryTheory.flatFilteredComplex_comparison",
+  "declarations": [
+   "CategoryTheory.flatFilteredComplex_comparison"
+  ],
+  "file": "lean/Sheaf/Paper/FlatFilteredComplexComparison.lean",
+  "statement": "theorem flatFilteredComplex_comparison (A : Type u) (B : Type v) [CommRing A] [CommRing B] (φ : A →+* B) (hφ : φ.Flat) (C : FilteredObject (CochainComplex (ModuleCat.{max u v w} A) ℤ)) (D : FilteredObject (CochainComplex (ModuleCat.{max u v w} B) ℤ)) (hCfin : C.filtration.IsFinite) (hDfin : D.filtration.IsFinite) (hC : ∃ N : ℤ, ∀ i : ℤ, i < N → IsZero (C.obj.X i)) (hD : ∃ N : ℤ, ∀ i : ℤ, i < N → IsZero (D.obj.X i)) (f : ModuleCat.filteredScalarObject.{u, v, w} φ C ⟶ D) (MA : FilteredPageTwoModel (ModuleCat.{max u v w} A)) (MB : FilteredPageTwoModel (ModuleCat.{max u v w} B)) : ∃ (s : ∀ p : ℤ, (ModuleCat.filteredScalarComplex.{u, v, w} φ (.up ℤ)).obj (C.filtration.step p : CochainComplex (ModuleCat.{max u v w} A) ℤ) ≅ ((ModuleCat.filteredScalarObject.{u, v, w} φ C).filtration.step p : CochainComplex (ModuleCat.{max u v w} B) ℤ)) (g : ∀ (a b : ℤ) (hab : a ≤ b), (ModuleCat.filteredScalarComplex.{u, v, w} φ (.up ℤ)).obj (C.filtration.complexQuotient a b hab) ≅ (ModuleCat.filteredScalarObject.{u, v, w} φ C).filtration.complexQuotient a b hab) (e : ∀ (r : ℤ) (hr : 2 ≤ r), (ModuleCat.filteredScalarComplex.{u, v, w} φ (ComplexShape.up' (⟨r, 1 - r⟩ : ℤ × ℤ))).obj ((MA.S.obj C).page r hr) ≅ (MB.S.obj (ModuleCat.filteredScalarObject.{u, v, w} φ C)).page r hr), (∀ p : ℤ, (s p).hom ≫ ((ModuleCat.filteredScalarObject.{u, v, w} φ C).filtration.step p).arrow = (ModuleCat.filteredScalarComplex.{u, v, w} φ (.up ℤ)).map (C.filtration.step p).arrow) ∧ (∀ (a b : ℤ) (hab : a ≤ b), (ModuleCat.filteredScalarComplex.{u, v, w} φ (.up ℤ)).map (C.filtration.complexQuotientπ a b hab) ≫ (g a b hab).hom = (s a).hom ≫ (ModuleCat.filteredScalarObject.{u, v, w} φ C).filtration.complexQuotientπ a b hab) ∧ (∀ (r : ℤ) (hr : 2 ≤ r) (p q : ℤ), (e r hr).hom.f (p, q) ≫ (MB.pageIso (ModuleCat.filteredScalarObject.{u, v, w} φ C) p q r hr).hom ≫ image.ι (HomologicalComplex.homologyMap (MB.φ (ModuleCat.filteredScalarObject.{u, v, w} φ C) p r hr) (p + q)) = (ModuleCat.filteredScalarFunctor.{u, v, w} φ).map ((MA.pageIso C p q r hr).hom ≫ image.ι (HomologicalComplex.homologyMap (MA.φ C p r hr) (p + q))) ≫ (ModuleCat.flatFilteredHomologyIso.{u, v, w} φ hφ (C.filtration.complexQuotient (p - r + 1) (p + 1) (by omega)) (p + q)).hom ≫ HomologicalComplex.homologyMap (g (p - r + 1) (p + 1) (by omega)).hom (p + q)) ∧ ((∀ p q : ℤ, IsIso ((e 2 le_rfl).hom.f (p, q) ≫ ((MB.S.map f).hom 2).f (p, q))) → ∀ n : ℤ, IsIso ((ModuleCat.flatFilteredHomologyIso.{u, v, w} φ hφ C.obj n).hom ≫ HomologicalComplex.homologyMap f.hom n))",
+  "branch": "sheaf-dag",
+  "by": "U1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-ffc"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-ffc",
+  "group": "U1",
+  "result": "fix",
+  "note": "rings A,B + flat φ (RingHom.Flat); C,D FilteredObject of CochainComplex with IsFinite + bounded-below; f : scalar-extended filtered object ⟶ D; spectral sequences = any FilteredPageTwoModel MA,MB (dropped Classical.choose-of-sorried finite model); s/g tied by inclusion/projection eqns; page isos e r (r≥2) tied to pageIso image description via flat homology base change; E2-iso ⇒ H^n iso via flatFilteredHomologyIso ≫ homologyMap f; dropped duplicate new node(s) def-pc-finite-filtered-spectral-model (--drop-nodes; not merged, the item points at the landed declaration)"
  }
 }
