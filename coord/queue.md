@@ -1,11 +1,11 @@
 # Work queue
 
-1000 items; claim with `tools/claim.py next <group> [--stage N]`.
+996 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (1000)
+## Stage 2: nodes to state (996)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -37,7 +37,7 @@
 | `lem-pc-skyscraper-complex` | 1 | state |
 | `lem-pc-stalk-tensor-complex` | 1 | state |
 | `lem-pc-tor-independent-projective-complex-tensor` | 1 | state |
-| `lem-pc-tower-enough-injectives` | 1 | state |
+| `lem-pc-tower-surjective-lim-acyclic` | 1 | state |
 | `lem-pc-very-ample-disjoint-union` | 1 | state |
 | `lem-pc-zero-scheme-pullback` | 1 | state |
 | `lem-pc-zero-scheme-pullback-local-coefficient` | 1 | state |
@@ -59,8 +59,6 @@
 | `lem-sc-derived-hom-mayer-vietoris` | 1 | state |
 | `lem-sc-determinant-short-exact` | 1 | state |
 | `lem-sc-dim-one-ample-invertible` | 1 | state |
-| `lem-sc-dim-one-quasi-projective` | 1 | state |
-| `lem-sc-dual-number-scheme-pushout` | 1 | state |
 | `lem-sc-dvr-field-extension-order` | 1 | state |
 | `lem-sc-dvr-saturation-line` | 1 | state |
 | `lem-sc-dvr-valuation-ring-characterization` | 1 | state |
@@ -68,9 +66,7 @@
 | `lem-sc-effective-cartier-dimension-drop` | 1 | state |
 | `lem-sc-enough-globally-generated-ample` | 1 | state |
 | `lem-sc-etale-at-prime-flat-unramified-criterion` | 1 | state |
-| `lem-sc-etale-coproduct-etale` | 1 | state |
 | `lem-sc-etale-fibre-product-coproduct` | 1 | state |
-| `lem-sc-etale-local-dimension` | 1 | state |
 | `lem-sc-etale-local-ring-faithfully-flat-descent` | 1 | state |
 | `lem-sc-etale-local-ring-stalk-faithfully-flat` | 1 | state |
 | `lem-sc-etale-torsor-pushout-extension` | 1 | state |
@@ -1010,7 +1006,7 @@
 | `lem-sc-normalization-properties` | 3 | state |
 | `def-nagata-fixed-base-separated-stage` | 6 | state |
 
-Not open yet: 991 nodes that wait for a statement dependency, 40 nodes that wait for stage 1.
+Not open yet: 990 nodes that wait for a statement dependency, 40 nodes that wait for stage 1.
 
 ## Stage 3: modules to prove (0)
 
