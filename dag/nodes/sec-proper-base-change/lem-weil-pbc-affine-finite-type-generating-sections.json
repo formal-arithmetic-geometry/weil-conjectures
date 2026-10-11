@@ -180,5 +180,23 @@
   "by": "L",
   "result": "accepted",
   "note": "4 steps with existing nodes only: Gamma finitely generated on an affine (01PB node), G = M~ by the tilde-Gamma adjunction, surjectivity on stalks via the stalk-localization leaves, surjective on stalks => surjective (leaf). No new nodes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AffineFiniteTypeGeneratingSections",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.affine_finiteType_generatingSections",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineFiniteTypeGeneratingSections.lean",
+  "statement": "theorem affine_finiteType_generatingSections (U : Scheme.{u}) [IsAffine U] (G : U.Modules) [G.IsQuasicoherent] [G.IsFiniteType] : Module.Finite Γ(U, ⊤) Γ(G, ⊤) ∧ (∃ σ : SheafOfModules.GeneratingSections G, Finite σ.I) ∧ (∀ (k : ℕ) (s : ULift.{u} (Fin k) → G.sections), Submodule.span (M := Γ(G, ⊤)) Γ(U, ⊤) (Set.range (fun i => (s i).1 (.op ⊤))) = ⊤ → Epi (G.freeHomEquiv.symm s))",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-afg1207",
+  "group": "F1",
+  "result": "pass",
+  "note": "U:Scheme [IsAffine U] = affine; G:U.Modules [IsQuasicoherent][IsFiniteType] = pqf-def-coherent's prescribed Mathlib classes (not hollow); Module.Finite Γ(U,⊤) Γ(G,⊤) = parenthetical f.g.; ∃ GeneratingSections with Finite I = finitely many generators (epi tied in σ); ∀ k, s : ULift (Fin k) → G.sections, span of top values = ⊤ → Epi (freeHomEquiv.symm s) = any finite generating family; k=0/empty scheme ok; single universe u; no let"
  }
 }
