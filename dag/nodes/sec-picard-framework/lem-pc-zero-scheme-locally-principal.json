@@ -112,5 +112,24 @@
   "group": "F1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-zlp1824 (reviewer sub-agent of L); spot-checked: PASS. Read packet whole. Step 1/2 new nodes match slopmaster2 sorry-free decls IsInvertible.sheafOfModules_isInvertible (ProjectionFormula.lean 119-128) and exists_isFreeGenerator2 (ZeroLocus.lean 89-97) exactly, hypotheses included (two SheafOfModules.IsInvertible instances, x in W); both statement-only, cite only defs, no duplicate in DAG (grep). Step 3 cites lem-pc-zero-scheme-ideal-local rather than restating it; its hypotheses (affine U, free generators, phi(eM)=b eN) are supplied by step 2. No cycle: new nodes created from this item cite only def-pc-scheme/def-sc-invertible-module; ideal-local does not cite the item; lem-pc-zero-scheme-properties cites item as consumer only. Common-free-generator is near-elementary but kept as a Lean-attachable leaf. Second reading: no missed fault."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.Modules.ZeroLocusLocallyPrincipal",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.Hom.isLocallyPrincipal_zeroLocus_of_isInvertible",
+  "file": "lean/Sheaf/AlgebraicGeometry/Modules/ZeroLocusLocallyPrincipal.lean",
+  "statement": "theorem Hom.isLocallyPrincipal_zeroLocus_of_isInvertible {X : Scheme.{u}} {M N : X.Modules} [M.IsInvertible] [N.IsInvertible] (φ : M ⟶ N) : φ.zeroLocus.IsLocallyPrincipal",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-11",
+  "existing": false,
+  "note": "The source theorem uses SheafOfModules.IsInvertible hypotheses; this statement uses the recorded Scheme.Modules.IsInvertible notion, as required by the node. The bridge is a theorem, not a global instance."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-zlp0915",
+  "group": "E1",
+  "result": "pass",
+  "note": "X:Scheme.{u}, M N:X.Modules with recorded Scheme.Modules.IsInvertible (as J1 pic-of-field), phi:M⟶N, conclusion phi.zeroLocus (recorded def-pc-zero-scheme Hom.zeroLocus : IdealSheafData).IsLocallyPrincipal (source predicate, as C1); source thm 570-576 binds SheafOfModules.IsInvertible (section line 481) so existing:false is right; no Mathlib zeroLocus/IsLocallyPrincipal for ideal sheaves; docstring carries all 3 proof steps; conventions OK"
  }
 }
