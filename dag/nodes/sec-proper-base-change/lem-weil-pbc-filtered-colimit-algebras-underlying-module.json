@@ -180,5 +180,24 @@
   "by": "L",
   "result": "pass",
   "note": "Five steps (agent proof after Stacks 00D6): elements and equality at a stage (elementwise node plus the rings-zero leaf), the coprojections form a cocone of modules, f defined on representatives is well defined, R-linear via a common stage, unique. Correct; 0 new nodes."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.FilteredColimitAlgebrasUnderlyingModule",
+  "declaration": "CommAlgCat.filtered_colimit_algebras_underlying_module",
+  "file": "lean/Sheaf/RingTheory/FilteredColimitAlgebrasUnderlyingModule.lean",
+  "statement": "theorem filtered_colimit_algebras_underlying_module {R : Type u} [CommRing R] {I : Type t} [SmallCategory I] [IsFiltered I] (F : I ⥤ CommAlgCat.{v} R) [HasColimit F] (P : Type w) [AddCommGroup P] [Module R P] (f : ∀ i : I, F.obj i →ₗ[R] P) (hf : ∀ (i j : I) (a : i ⟶ j), (f j).comp (F.map a).hom.toLinearMap = f i) : ∃! g : (colimit F : CommAlgCat.{v} R) →ₗ[R] P, ∀ i : I, g.comp (colimit.ι F i).hom.toLinearMap = f i",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-fcu1011"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-fcu1011",
+  "group": "F1",
+  "result": "fix",
+  "note": "R CommRing; I small filtered (IsFiltered, nonempty); F : I ⥤ CommAlgCat R with landed [HasColimit F]/colimit F/colimit.ι (fixed from arbitrary Cocone+IsColimit); P any R-module (universe w); f_i linear with f_j ∘ A(u) = f_i; ∃! linear g with g ∘ ι_i = f_i; Mathlib has no forget₂ CommAlgCat/AlgCat → ModuleCat filtered-colimit preservation (only AlgCat→RingCat/types), so existing:false stays"
  }
 }
