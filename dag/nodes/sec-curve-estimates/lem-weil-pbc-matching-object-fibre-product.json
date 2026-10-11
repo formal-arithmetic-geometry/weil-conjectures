@@ -21,7 +21,8 @@
  "stmt_deps": [
   "def-pc-scheme",
   "def-pc-fibre-product",
-  "def-weil-pbc-finite-split-hypercover"
+  "def-weil-pbc-finite-split-hypercover",
+  "lem-weil-pbc-matching-object-proper-faces"
  ],
  "proof": [
   {
@@ -145,5 +146,24 @@
   "group": "C1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of C1; spot-checked by L: L: 4 steps (n=0, cones into the product diagram are pairs of cones, limit property, matching maps) read; the elementary steps are the cone argument of 018C"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.MatchingObjectFibreProduct",
+  "declaration": "AlgebraicGeometry.matching_object_fibre_product",
+  "file": "lean/Sheaf/AlgebraicGeometry/MatchingObjectFibreProduct.lean",
+  "statement": "theorem matching_object_fibre_product (X : Scheme.{u}) (U V W : SimplicialObject (Over X)) (p : W ⟶ U) (q : W ⟶ V) (_hW : ∀ Δ : SimplexCategoryᵒᵖ, IsLimit (BinaryFan.mk (p.app Δ) (q.app Δ))) (n : ℕ) (MU : Cone (properFaceDiagram U n)) (MV : Cone (properFaceDiagram V n)) (MW : Cone (properFaceDiagram W n)) (_hMU : IsLimit MU) (_hMV : IsLimit MV) (_hMW : IsLimit MW) (μU : U.obj (op (SimplexCategory.mk n)) ⟶ MU.pt) (μV : V.obj (op (SimplexCategory.mk n)) ⟶ MV.pt) (μW : W.obj (op (SimplexCategory.mk n)) ⟶ MW.pt) (_hμU : ∀ a : ProperFaceCategory n, μU ≫ MU.π.app (op a) = U.map a.obj.hom.op) (_hμV : ∀ a : ProperFaceCategory n, μV ≫ MV.π.app (op a) = V.map a.obj.hom.op) (_hμW : ∀ a : ProperFaceCategory n, μW ≫ MW.π.app (op a) = W.map a.obj.hom.op) : ∃ (Mp : MW.pt ⟶ MU.pt) (Mq : MW.pt ⟶ MV.pt), (∀ a : ProperFaceCategory n, Mp ≫ MU.π.app (op a) = MW.π.app (op a) ≫ p.app (op a.obj.left)) ∧ (∀ a : ProperFaceCategory n, Mq ≫ MV.π.app (op a) = MW.π.app (op a) ≫ q.app (op a.obj.left)) ∧ IsIso (prod.lift Mp Mq) ∧ μW ≫ prod.lift Mp Mq = prod.lift (p.app (op (SimplexCategory.mk n)) ≫ μU) (q.app (op (SimplexCategory.mk n)) ≫ μV)",
+  "branch": "sheaf-dag",
+  "by": "K1",
+  "date": "2026-10-12",
+  "existing": false,
+  "note": "Uses arbitrary simplicial objects in Over X, matching the node's arbitrary augmented simplicial X-schemes; termwise product and matching data are expressed by the displayed limit hypotheses."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "X-7fedb",
+  "group": "K1",
+  "result": "pass",
+  "note": "independent Codex review: Matched arbitrary augmented simplicial X-schemes in Over X, termwise fibre-product projections and induced operators, proper-face matching limits and maps for every n including 0, the induced comparison isomorphism, and matching-map compatibility. All earlier return points are repaired; the packet compile is clean."
  }
 }
