@@ -1,11 +1,11 @@
 # Work queue
 
-984 items; claim with `tools/claim.py next <group> [--stage N]`.
+980 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (984)
+## Stage 2: nodes to state (980)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -22,11 +22,9 @@
 | `lem-exc-cochains-derived-invariants` | 1 | state |
 | `lem-exc-continuous-cochains-short-exact` | 1 | state |
 | `lem-exc-etale-sheaves-gsets-point` | 1 | state |
-| `lem-galois-fpqc-pullback-canonical-iso` | 1 | state |
 | `lem-pc-derived-adjoint-functors` | 1 | state |
 | `lem-pc-derived-limit-milnor-sequence` | 1 | state |
 | `lem-pc-derived-tensor-flat-second-localization` | 1 | state |
-| `lem-pc-fppf-affine-sheafification-restriction` | 1 | state |
 | `lem-pc-kflat-pullback-preservation` | 1 | state |
 | `lem-pc-module-change-of-rings-adjunction` | 1 | state |
 | `lem-pc-module-filtered-colimits-tensor` | 1 | state |
@@ -52,10 +50,8 @@
 | `lem-pur-ringed-site-grothendieck-abelian` | 1 | state |
 | `lem-pur-sheaf-hom-is-sheaf` | 1 | state |
 | `lem-sc-acyclic-comparison-natural` | 1 | state |
-| `lem-sc-affine-cap-section-open-algebra` | 1 | state |
 | `lem-sc-affine-finite-module-free-locus` | 1 | state |
 | `lem-sc-affine-finite-projective-prime-membership` | 1 | state |
-| `lem-sc-affine-maximal-points-closed-in-lft-scheme` | 1 | state |
 | `lem-sc-affine-standard-cover-finite-presentation-flat` | 1 | state |
 | `lem-sc-affine-standard-cover-finite-projective` | 1 | state |
 | `lem-sc-affine-totalquotient-minimal-product` | 1 | state |
