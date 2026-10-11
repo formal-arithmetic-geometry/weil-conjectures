@@ -23,9 +23,42 @@
   "def-weil-abstract-derived-category",
   "def-sp-injective-resolutions"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For a complex $K^\\bullet$ write $\\operatorname{Hom}^\\bullet(K^\\bullet,I^\\bullet)$ for the complex of abelian groups with $\\operatorname{Hom}^n(K^\\bullet,I^\\bullet)=\\prod_{j\\in\\mathbb Z}\\operatorname{Hom}_{\\mathcal A}(K^j,I^{j+n})$ and differential $d(f)=d_I\\circ f-(-1)^nf\\circ d_K$. With the shift convention $(K[1])^r=K^{r+1}$, differential $-d_K$, of [def-weil-abstract-derived-category], a degree-$n$ cocycle is exactly a chain map $K^\\bullet[-n]\\to I^\\bullet$ and the degree-$n$ coboundaries are exactly the null-homotopic ones, so $H^n(\\operatorname{Hom}^\\bullet(K^\\bullet,I^\\bullet))=\\operatorname{Hom}_{K(\\mathcal A)}(K^\\bullet[-n],I^\\bullet)$. Since $n$ ranges over all of $\\mathbb Z$, the hypothesis says precisely that each $\\operatorname{Hom}^\\bullet(K_\\beta^\\bullet,I^\\bullet)$, $\\beta<\\lambda$, is acyclic. Colimits of complexes are computed termwise and $\\operatorname{Hom}_{\\mathcal A}(-,I^{j+n})$ turns colimits into limits, so $K_\\lambda^\\bullet=\\operatorname{colim}_{\\beta<\\lambda}K_\\beta^\\bullet$ gives $\\operatorname{Hom}^\\bullet(K_\\lambda^\\bullet,I^\\bullet)=\\varprojlim_{\\beta<\\lambda}\\operatorname{Hom}^\\bullet(K_\\beta^\\bullet,I^\\bullet)$. For $\\beta<\\lambda$ and every $n$, $\\varprojlim_{\\gamma<\\beta}\\operatorname{Hom}^n(K_\\gamma^\\bullet,I^\\bullet)=\\operatorname{Hom}^n(\\operatorname{colim}_{\\gamma<\\beta}K_\\gamma^\\bullet,I^\\bullet)$, and the map $\\operatorname{colim}_{\\gamma<\\beta}K_\\gamma^\\bullet\\to K_\\beta^\\bullet$ is a monomorphism (zero for $\\beta=0$, the transition map $K_\\gamma^\\bullet\\to K_{\\gamma+1}^\\bullet$ for $\\beta=\\gamma+1$, an isomorphism by continuity for $\\beta$ a limit); since each $I^{j+n}$ is injective, restriction along it is surjective termwise, so $\\operatorname{Hom}^n(K_\\beta^\\bullet,I^\\bullet)\\to\\varprojlim_{\\gamma<\\beta}\\operatorname{Hom}^n(K_\\gamma^\\bullet,I^\\bullet)$ is surjective (a product of surjections).",
+   "uses": [
+    "def-sp-injective-resolutions",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/injectives.tex",
+    "place": "Lemma lemma-characterize-K-injective, proof at the limit step; Homology Lemma Tag 0AAT (lemma-ML-over-ordinals) hypotheses"
+   }
+  },
+  {
+   "text": "Apply [lem-pur-kinjective-ML-ordinals] with $\\alpha=\\lambda$ to the inverse system $(\\operatorname{Hom}^\\bullet(K_\\beta^\\bullet,I^\\bullet))_{\\beta<\\lambda}$, whose hypotheses (acyclicity and termwise surjectivity onto the earlier limits) were checked in the previous step. Its conclusion makes $\\varprojlim_{\\beta<\\lambda}\\operatorname{Hom}^\\bullet(K_\\beta^\\bullet,I^\\bullet)=\\operatorname{Hom}^\\bullet(K_\\lambda^\\bullet,I^\\bullet)$ acyclic, so $\\operatorname{Hom}_{K(\\mathcal A)}(K_\\lambda^\\bullet[-n],I^\\bullet)=H^n(\\operatorname{Hom}^\\bullet(K_\\lambda^\\bullet,I^\\bullet))=0$ for every $n\\in\\mathbb Z$, which is the conclusion.",
+   "uses": [
+    "lem-pur-kinjective-ML-ordinals",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/injectives.tex",
+    "place": "Lemma lemma-characterize-K-injective, proof at the limit step; Homology Lemma Tag 0AAT (lemma-ML-over-ordinals) conclusion"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sp-injective-resolutions",
+  "def-weil-abstract-derived-category",
+  "lem-pur-kinjective-ML-ordinals"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/injectives.tex",
+  "place": "Lemma lemma-characterize-K-injective, proof at the limit step"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -57,12 +90,28 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-pur-kinjective-characterize-K-injective",
   "by": "worker",
   "date": "2026-10-11"
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-def-sf-operations"
+ "unit": "sk-def-sf-operations",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-pur-kinjective-homotopy-limit-vanishing",
+  "worker": "stage1",
+  "summary": "Split the limit-step vanishing into the ordinal inverse-limit acyclicity lemma of Stacks Tag 0AAT. The first step verifies continuity of the Hom complexes, degreewise surjectivity from injectivity, and acyclicity from the all-shifts induction hypothesis; the second applies the child and translates acyclicity back to vanishing in the homotopy category.",
+  "blueprint": "Realizes the limit-ordinal Hom-complex argument in the ancestor criterion's proof.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-hlv0127",
+  "group": "H1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-hlv0127 (reviewer sub-agent of L); spot-checked: Child lem-pur-kinjective-ML-ordinals matches homology.tex 7861-7872 (ordinal, acyclic stages, surjection onto lim_{gamma<beta}, acyclic limit); no duplicate (mittag-leffler nodes are countable towers); citer 7e61b05ae step uses exactly this statement; counterexample ((1/n!)Z, Q->Q/Z) now violates hypothesis (Hom_K(K_n[1],I)=Z). FIX more, RETURN less: (1) C4/E shift sign: Step 1 said degree-n cocycles are chain maps K[n]->I; with (K[1])^r=K^{r+1} they are chain maps K[-n]->I, H^n(Hom^.)=Hom_K(K[-n],I) - corrected (harmless as n ranges over Z); Hom complex defined inline since def-pur-hom-complex is for sheaves on a site; (2) Step 1 surjectivity argument made explicit for beta=0/successor/limit (continuity) and 'induction hypothesis' replaced by the item's hypothesis; Step 2 names alpha=lambda and the identification lim Hom^.(K_beta,I)=Hom^.(K_lambda,I).; 1 file(s) fixed by the reviewer"
+ }
 }

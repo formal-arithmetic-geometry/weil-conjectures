@@ -3230,3 +3230,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 01:27 UTC L: deleted C1's second re-push of the Mathlib leaf pqf-lem-affine-open-locnoeth (4c6be90b1), notice in coord/returns/C1.md. NOTE: C1 re-claimed/re-pushed a status-mathlib node despite the claim.py refusal rule; check claim.py's status check at stage 3.
 - 01:28 UTC L: E1 finite-flat-restriction-projective FIX fe7aa41fe (R-ffr0125; wrongly filed Mathlib leaf turned into a three-step proof); lem-pc-module-finite-presentation-transitive (Module.FinitePresentation.trans, FinitePresentation.lean:323) and lem-pc-module-flat-transitive (Module.Flat.trans, Flat/Stability.lean:62) set to mathlib by L.
 - 01:28 UTC L: deleted stale branch deliver/F1/lem-pc-derived-tensor-localization-cohomology (claim now G1's); notice quoting the pruned return in coord/returns/F1.md.
+- 01:28 L: merged deliver/H1/lem-pur-kinjective-homotopy-limit-vanishing (reviewer FIX; first push; new nodes: 1)
