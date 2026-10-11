@@ -136,5 +136,23 @@
   "group": "C1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-ldb0022 (reviewer sub-agent of L); spot-checked: Checked: item statement and citer lem-sc-affine-unit-divisor-base-change Step 2 (uses only v_{P'}(u')=v_P(u)); def-sc-divisor normalized valuation of O_{C,P} matches; lem-sc-base-change-curve is not a duplicate (it gives X' a smooth proper curve, no orders); lem-sc-dvr-field-extension-order is true in the stated generality (R tensor k' free over R, mod t it is k', so every nonzero element is t^n times a unit of R'), real lemma, no duplicate among 00PD nodes, Mathlib grep recorded (no match). Unramifiedness m_P O' = m_{P'} is the uniformizer clause of that node; flatness is implicit in it. FIX more, RETURN less: (1) class (d)/(b) new node lem-sc-rational-point-base-change-unique is two lines from existing lem-weil-pbc-fibre-ring-primes-residue-fields (1) (fibre ring (A/m) tensor_k k' = k' a field): Step 1 now cites that node (declared tool use, generic commutative algebra), the new node is dropped, proof_deps corrected.; 2 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.LocalDvrBaseChange",
+  "declaration": "AlgebraicGeometry.Scheme.local_dvr_base_change",
+  "file": "lean/Sheaf/AlgebraicGeometry/LocalDvrBaseChange.lean",
+  "statement": "theorem Scheme.local_dvr_base_change (k k' : Type u) [Field k] [IsAlgClosed k] [Field k'] [IsAlgClosed k'] [Algebra k k'] (X : Scheme.{u}) (s : X ⟶ Spec (.of k)) [IsConnectedCurve s] [Smooth s] [IsProper s] (P : X) (hP : P ∈ closedPoints X) : ∃ (_ : IsIntegral X) (_ : IsIntegral (pullback s (Spec.map (CommRingCat.ofHom (algebraMap k k'))))) (_ : IsLocallyNoetherian X) (_ : IsLocallyNoetherian (pullback s (Spec.map (CommRingCat.ofHom (algebraMap k k'))))), ∃ P' : (pullback s (Spec.map (CommRingCat.ofHom (algebraMap k k'))) : Scheme.{u}), pullback.fst s (Spec.map (CommRingCat.ofHom (algebraMap k k'))) P' = P ∧ (∀ Q : (pullback s (Spec.map (CommRingCat.ofHom (algebraMap k k'))) : Scheme.{u}), pullback.fst s (Spec.map (CommRingCat.ofHom (algebraMap k k'))) Q = P → Q = P') ∧ IsDiscreteValuationRing (X.presheaf.stalk P) ∧ IsDiscreteValuationRing ((pullback s (Spec.map (CommRingCat.ofHom (algebraMap k k')))).presheaf.stalk P') ∧ ∃ ρ : X.functionField →+* (pullback s (Spec.map (CommRingCat.ofHom (algebraMap k k')))).functionField, (∀ r : X.presheaf.stalk (pullback.fst s (Spec.map (CommRingCat.ofHom (algebraMap k k'))) P'), ρ (algebraMap _ X.functionField r) = algebraMap _ (pullback s (Spec.map (CommRingCat.ofHom (algebraMap k k')))).functionField ((pullback.fst s (Spec.map (CommRingCat.ofHom (algebraMap k k')))).stalkMap P' r)) ∧ ∀ f : X.functionFieldˣ, (pullback s (Spec.map (CommRingCat.ofHom (algebraMap k k')))).ord (ρ f) P' = X.ord (f : X.functionField) P",
+  "branch": "sheaf-dag",
+  "by": "M1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "M1",
+  "result": "pass",
+  "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
  }
 }
