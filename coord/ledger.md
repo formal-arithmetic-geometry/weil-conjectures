@@ -3124,3 +3124,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 00:36 L: merged deliver/H1/lem-pc-coherent-property-irreducible (reviewer FIX; first push; new nodes: 0)
 - 00:36 UTC L: E1 ring-pseudo-coherent-localization-glue FIX 051657da7 third push (R-pcg0034; proof rewritten in four TeX steps, source 064U).
 - 00:37 UTC L: H1 coherent-property-irreducible FIX ee15e4b93 (R-cpi0035).
+- 00:37 L: merged deliver/C1/lem-sc-etale-torsor-pushout-extension (reviewer FIX; first push; new nodes: 0)

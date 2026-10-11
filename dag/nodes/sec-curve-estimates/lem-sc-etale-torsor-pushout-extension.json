@@ -13,7 +13,7 @@
  },
  "kind": "statement",
  "title": "Pushout of the etale torsor extension",
- "statement": "Let $S$ be a scheme, let $G\\to G'$ be a morphism of abelian sheaves on $S_{\\mathrm{Et}}$, and let $0\\to G\\to E_T\\to\\mathbf Z_S\\to0$ be the canonical extension attached to a $G$-torsor $T$ by [lem-sc-torsor-h1]. Form its pushout $E_T\\wedge^G G'$ along $G\\to G'$. Then the pushout is a short exact sequence $0\\to G'\\to E_T\\wedge^G G'\\to\\mathbf Z_S\\to0$, and its fibre over $1$ is canonically the contracted-product $G'$-torsor $T\\wedge^G G'$.",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], let $\\varphi:G\\to G'$ be a morphism of abelian sheaves on $S_{\\mathrm{Et}}$ [def-weil-pbc-abelian-etale-sheaves], and let $0\\to G\\xrightarrow{\\iota}E_T\\xrightarrow{\\sigma}\\mathbf Z_S\\to0$ be the canonical extension attached to a $G$-torsor $T$ [def-sc-gm-torsor] by [lem-sc-torsor-h1]. Let $E_T\\wedge^GG'=(G'\\oplus E_T)/\\{(\\varphi(g),-\\iota(g)):g\\in G\\}$ be its pushout along $\\varphi$, with canonical maps $\\iota':G'\\to E_T\\wedge^GG'$ and $v:E_T\\to E_T\\wedge^GG'$. Then there is a unique $\\sigma':E_T\\wedge^GG'\\to\\mathbf Z_S$ with $\\sigma'\\circ v=\\sigma$ and $\\sigma'\\circ\\iota'=0$, the sequence $0\\to G'\\xrightarrow{\\iota'}E_T\\wedge^GG'\\xrightarrow{\\sigma'}\\mathbf Z_S\\to0$ is short exact, and $(\\varphi,v,\\mathrm{id}_{\\mathbf Z_S})$ is a morphism of short exact sequences. Its fibre over $1$ (the subsheaf of local sections mapped to $1$ by $\\sigma'$, with $G'$ acting by translation through $\\iota'$) is canonically the $G'$-torsor $T\\wedge^GG'$, the sheafification of $(T\\times G')/G$ with $g\\cdot(t,g')=(g\\cdot t,\\varphi(g)^{-1}g')$ and $G'$ acting on the second factor. Moreover the pushout sequence is isomorphic, as an extension of $\\mathbf Z_S$ by $G'$, to the canonical extension $0\\to G'\\to E_{T\\wedge^GG'}\\to\\mathbf Z_S\\to0$ attached to the $G'$-torsor $T\\wedge^GG'$ by [lem-sc-torsor-h1].",
  "source": {
   "document": "literature/stacks-project/sites-cohomology.tex",
   "place": "Cohomology on Sites, Lemma 03AJ (label lemma-torsors-h1), pushout of E_T along phi is E_{T wedge G'}"
@@ -24,14 +24,59 @@
   "lem-sc-torsor-h1",
   "def-sc-gm-torsor"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The category $\\Ab(S_{\\mathrm{Et}})$ of abelian sheaves on the small étale site of $S$ is an abelian category by [def-weil-pbc-abelian-etale-sheaves]. Regard $0\\to G\\xrightarrow{\\iota}E_T\\xrightarrow{\\sigma}\\mathbf Z_S\\to0$ as a short exact sequence in it and take $u=\\varphi$ in [lem-weil-pbc-pushout-short-exact-sequence]: the pushout $E_T\\wedge^GG'=\\operatorname{Coker}((\\varphi,-\\iota):G\\to G'\\oplus E_T)$ exists, there is a unique $\\sigma'$ with $\\sigma'\\circ v=\\sigma$ and $\\sigma'\\circ\\iota'=0$, the sequence $0\\to G'\\xrightarrow{\\iota'}E_T\\wedge^GG'\\xrightarrow{\\sigma'}\\mathbf Z_S\\to0$ is short exact, and $(\\varphi,v,\\mathrm{id}_{\\mathbf Z_S})$ is a morphism of short exact sequences.",
+   "uses": [
+    "def-weil-pbc-abelian-etale-sheaves",
+    "lem-weil-pbc-pushout-short-exact-sequence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Cohomology on Sites, Lemma 03AJ, pushout of E_T along phi"
+   }
+  },
+  {
+   "text": "Write $F'\\subset E_T\\wedge^GG'$ for the fibre of $\\sigma'$ over $1$ and $[g',e]$ for the class of a local section $(g',e)$ of $G'\\oplus E_T$. By [lem-sc-torsor-h1], $E_T$ is the quotient of $\\mathbf Z[T]$ by the relations $[g\\cdot t]=[t]+\\iota(g)$, with $\\sigma([t])=1$. Define $\\alpha:T\\times G'\\to F'$ on local sections by $\\alpha(t,g')=[g',[t]]$; it lands in $F'$ since $\\sigma'[g',[t]]=\\sigma([t])=1$. It is invariant under the action of $G$: $\\alpha(g\\cdot t,\\varphi(g)^{-1}g')=[g'-\\varphi(g),[t]+\\iota(g)]=[g',[t]]-[\\varphi(g),-\\iota(g)]=[g',[t]]$, because $(\\varphi(g),-\\iota(g))$ lies in the image of $(\\varphi,-\\iota)$. It is $G'$-equivariant: $\\alpha(t,g'+h)=[g',[t]]+\\iota'(h)$. Hence $\\alpha$ induces a $G'$-equivariant morphism of sheaves $\\bar\\alpha:T\\wedge^GG'\\to F'$ (universal property of sheafification). Now $F'$ is a $G'$-torsor: it is locally nonempty, since $T$ is locally nonempty and $\\alpha(t,0)\\in F'$; and if $x,y$ are local sections of $F'$, then $\\sigma'(x-y)=0$, so by the exactness of Step 1 $x-y=\\iota'(h)$ for a local section $h$ of $G'$, unique as $\\iota'$ is injective; so $G'$ acts freely and transitively. Since $T\\wedge^GG'$ is a $G'$-torsor as well, the equivariant morphism $\\bar\\alpha$ of $G'$-torsors is an isomorphism (locally both are $G'$ with translation, and an equivariant self-map of $G'$ is a translation). This is the canonical identification $T\\wedge^GG'\\cong F'$.",
+   "uses": [
+    "lem-sc-torsor-h1",
+    "def-sc-gm-torsor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Cohomology on Sites, Lemma 03AJ, identification of the fibre of the pushout"
+   }
+  },
+  {
+   "text": "Put $T'=T\\wedge^GG'\\cong F'$ (Step 2). By [lem-sc-torsor-h1], $E_{T'}$ is the quotient of $\\mathbf Z[T']$ by the relations $[h\\cdot s]=[s]+h$ ($h$ a local section of $G'$, $s$ of $T'$), with $G'\\to E_{T'}$, $h\\mapsto h$, and $E_{T'}\\to\\mathbf Z_S$, $[s]\\mapsto1$. The map $\\mathbf Z[F']\\to E_T\\wedge^GG'$, $[s]\\mapsto s$, respects these relations, since $h\\cdot s=s+\\iota'(h)$ in $E_T\\wedge^GG'$; so it induces $\\beta:E_{T'}\\to E_T\\wedge^GG'$ with $\\beta(h)=\\iota'(h)$ and $\\sigma'\\circ\\beta=([s]\\mapsto1)$. Thus $(\\mathrm{id}_{G'},\\beta,\\mathrm{id}_{\\mathbf Z_S})$ is a morphism of short exact sequences in the abelian category $\\Ab(S_{\\mathrm{Et}})$, and $\\beta$ is an isomorphism by the five lemma. This is the isomorphism of extensions with $E_{T\\wedge^GG'}$.",
+   "uses": [
+    "lem-sc-torsor-h1"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Cohomology on Sites, Lemma 03AJ, the extension attached to a torsor"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-abelian-etale-sheaves",
+  "lem-weil-pbc-pushout-short-exact-sequence",
+  "lem-sc-torsor-h1",
+  "def-sc-gm-torsor"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Cohomology on Sites, Lemma 03AJ and its pushout-fibre argument"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
-   "query": "pushout of the torsor extension along a morphism has contracted product fibre",
-   "results": "AlgebraicGeometry.isPullback and Types.Pushout results; no sheaf torsor result",
+   "query": "pushout of an etale torsor extension along a morphism has contracted product fibre",
+   "results": "AlgebraicGeometry.Scheme.Pullback.Triplet.tensor, AlgebraicGeometry.Scheme.instHasPullbacksEtale, AlgebraicGeometry.isPullback_Spec_map_pushout, AlgebraicGeometry.isPullback_SpecMap_pushout, AlgebraicGeometry.Scheme.Pullback.Triplet.tensorInr, AlgebraicGeometry.Scheme.Pullback.Triplet.tensorInl, AlgebraicGeometry.isPullback_Spec_map_isPushout, AlgebraicGeometry.isPullback_SpecMap_of_isPushout; no sheaf torsor result",
    "date": "2026-10-11",
    "verdict": "no match"
   },
@@ -51,12 +96,38 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sc-etale-torsor-h1-functoriality",
   "by": "worker",
   "date": "2026-10-11"
  },
  "chapter": "sec-curve-estimates",
- "unit": "sk-prop-ext-invariance"
+ "unit": "sk-prop-ext-invariance",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-sc-etale-torsor-pushout-extension",
+  "worker": "stage1",
+  "summary": "Split the etale torsor pushout statement into exactness of the abelian-sheaf pushout, the explicit fibre quotient calculation, and the torsor local-lifting argument. Reused the existing generic pushout exactness and stalkwise short-exactness nodes; no new nodes were needed.",
+  "blueprint": "Realizes the ancestor thm-sc-constant-invariance clause on torsor classification under change of coefficients: pushout of E_T and identification of its fibre with T wedge^G G'.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-pushout-short-exact-sequence",
+    "why": "Generic pushout exactness in an abelian category is needed for Step 1 and is not supplied by this unit's route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-pushout-short-exact-sequence",
+  "lem-weil-pbc-pushout-short-exact-sequence"
+ ],
+ "reviewed": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-tpe0036",
+  "group": "C1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-tpe0036 (reviewer sub-agent of L); spot-checked: FIX more, RETURN less: (1) C4: lem-sc-abelian-sheaf-short-exact-stalkwise is for sheaves on a topological space, not S_Et; removed from Steps 2-3, torsor property of the fibre now from Step 1 exactness plus local nonemptiness of T (elementary). (2) E/C4 for citer: citer step 4 needs pushout ~= E_{T wedge G'} as extensions, not only the fibre; added to statement (E7) with elementary Step 3 (Z[T'] -> pushout respects [h.s]=[s]+h, five lemma). (3) B4: plain-text arrows and ASCII math rewritten in TeX; Step 2 identification written on sections: (t,g') -> [g',[t]], G-invariance via the relation (phi(g),-iota(g)), G'-equivariance. Fibre over 1 of E_T is T via t -> [t] (lem-sc-torsor-h1, Stacks 03AJ direction checked). Contracted product now defined in the statement, matching the parent's clause (2). Duplicate check: lem-sc-torsor-h1-ext-pushout is the Zariski analogue, not a duplicate. Tool use of lem-weil-pbc-pushout-short-exact-sequence accepted (generic abelian-category pushout).; 1 file(s) fixed by the reviewer"
+ },
+ "lead_note": "2026-10-11 L (R-tpe0036): Statement strengthened (E7): pushout defined explicitly, morphism of SES stated, contracted product defined inline, and isomorphism with E_{T wedge^G G'} added, which the citer lem-sc-etale-torsor-h1-functoriality step 4 needs to apply the representative description of lem-sc-torsor-h1."
 }
