@@ -3425,3 +3425,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 05:58 L: merged deliver/J1/def-weil-pbc-relative-global-complete-intersection (stage 2; reviewer FIX; first push; Sheaf.Paper.RelativeGlobalCompleteIntersection Algebra.IsRelativeGlobalCompleteIntersection)
 - 05:59 L: returned deliver/M1/lem-exc-discrete-modules-abelian-injective-embeddings (reviewer RETURN: (reviewer R-dmi0620, head 4be801aa0) H7/H2: the module defines a new notion inline, `Rep.DiscreteContinuousRep` (full su)
 - 05:59 L: returned deliver/C1/def-pur-sheaf-tensor-product (reviewer RETURN: Reviewer R-stp0615, head 351a7f1b6. H4: SheafOfModules.tensorProduct is a second definition of a notion the source repos)
+- 06:00 L: merged deliver/J1/lem-exc-finite-galois-algebra-tensor-decomposition (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.FiniteGaloisTensorCoproduct AlgebraicGeometry.finiteGaloisTensorCoproduct)

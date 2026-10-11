@@ -116,5 +116,23 @@
   "group": "E1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-gat1836 (reviewer sub-agent of L); spot-checked: Step 1 checked against lem-weil-pbc-fibre-product-affine-spectra (R=L, A=B=E) and lem-weil-pbc-spec-finite-product-fields (disjoint open immersions covering, glue to coproduct); projection labels a tensor b -> a q(b) correct. No cycle: parent lem-exc-finite-galois-tensor-decomposition cites this node in its part-(2) steps, this node cites neither parent nor descendants. Not a duplicate of parent part (1): parent states only the tensor iso and the sheaf-sections bijection; this node takes the iso as hypothesis and proves the fibre-product coproduct, which the parent does not state, so it is kept (not a citation, not dropped). Mathlib grep for a Galois tensor-product Pi equiv in slopmaster2 mathlib: none. tool_uses accepted (generic scheme facts). FIX more, RETURN less: B4 plain-text arrow in step 1 replaced by TeX \\to. Second reading missed only the arrow.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FiniteGaloisTensorCoproduct",
+  "declaration": "AlgebraicGeometry.finiteGaloisTensorCoproduct",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteGaloisTensorCoproduct.lean",
+  "statement": "theorem finiteGaloisTensorCoproduct (L E : Type u) [Field L] [Field E] [Algebra L E] [FiniteDimensional L E] [IsGalois L E] (φ : (E ⊗[L] E) ≃ₐ[L] ((E ≃ₐ[L] E) → E)) (hφ : ∀ (a b : E) (q : E ≃ₐ[L] E), φ (a ⊗ₜ[L] b) q = a * q b) : ∃ e : (∐ fun _ : E ≃ₐ[L] E => Spec (.of E)) ≅ pullback (Spec.map (CommRingCat.ofHom (algebraMap L E))) (Spec.map (CommRingCat.ofHom (algebraMap L E))), (∀ q : E ≃ₐ[L] E, Sigma.ι (fun _ : E ≃ₐ[L] E => Spec (.of E)) q ≫ e.hom ≫ pullback.fst _ _ = 𝟙 (Spec (.of E))) ∧ (∀ q : E ≃ₐ[L] E, Sigma.ι (fun _ : E ≃ₐ[L] E => Spec (.of E)) q ≫ e.hom ≫ pullback.snd _ _ = Spec.map (CommRingCat.ofHom q.toRingEquiv.toRingHom))",
+  "branch": "sheaf-dag",
+  "by": "J1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-fgt0620",
+  "group": "J1",
+  "result": "pass",
+  "note": "E/L field ext (Type u, Field, Algebra) + FiniteDimensional + IsGalois; Q = E ≃ₐ[L] E for product and coproduct index; phi supplied as hypothesis with hφ a⊗b ↦ a*q b (node takes phi as given, per E1 review); W = pullback of Spec.map algebraMap twice; ∃ iso ∐_Q Spec E ≅ W with ι_q≫e≫fst = 𝟙 and ι_q≫e≫snd = Spec.map q; no duplicate in Mathlib FieldTheory/Galois or source"
  }
 }
