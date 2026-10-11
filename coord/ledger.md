@@ -3327,3 +3327,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 02:53 L: def-sc-finitely-presented-module: three literal tabs ('\t'+'o' from a JSON-escaped \to) in the statement repaired to \to; a scan of every node's statement and step text finds no other tab
 - 02:54 L: reviewers R-dsf0254 (C1 lem-pc-derived-tensor-second-factor-functor, d461d00eb) and R-ude0254 (J1 lem-sc-picard-qcoh-universal-delta-embedding, e6a3f3582) launched
 - 02:55 L: merged deliver/J1/lem-sc-picard-qcoh-universal-delta-embedding (reviewer PASS; first push; new nodes: 0)
+- 02:55 L: merged deliver/C1/lem-pc-derived-tensor-second-factor-functor (reviewer FIX; first push; new nodes: 1)
