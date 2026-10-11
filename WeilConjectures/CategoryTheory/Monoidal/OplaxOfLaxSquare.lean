@@ -7,6 +7,7 @@ module
 
 public import Mathlib.CategoryTheory.Monoidal.Functor
 public import Mathlib.CategoryTheory.Whiskering
+public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Functor
 
 /-!
 # Oplax monoidal structures induced through lax monoidal functors
@@ -236,8 +237,7 @@ lemma oplax_right_unitality_of_lax_square [∀ a, IsIso (e a)] [IsIso (ε Q₂)]
 an oplax monoidal functor `F : K₁ ⥤ K₂` through the lax monoidal functors `Q₁ : K₁ ⥤ D₁` and
 `Q₂ : K₂ ⥤ D₂`: see the module docstring. -/
 @[instance_reducible]
-noncomputable def ofLaxSquare [∀ a, IsIso (e a)] [IsIso (ε Q₂)]
-    [∀ x, IsIso (μ Q₂ (𝟙_ K₂) x)] [∀ x, IsIso (μ Q₂ x (𝟙_ K₂))] (S : ObjectProperty K₁)
+noncomputable def ofLaxSquare [∀ a, IsIso (e a)] [IsIso (ε Q₂)] (S : ObjectProperty K₁)
     (hS : ∀ X : D₁, ∃ a, S a ∧ Nonempty (Q₁.obj a ≅ X))
     (hμ : ∀ (x : K₂) (b : K₁), S b → IsIso (μ Q₂ x (F.obj b))) :
     G.OplaxMonoidal where
@@ -255,9 +255,11 @@ noncomputable def ofLaxSquare [∀ a, IsIso (e a)] [IsIso (ε Q₂)]
       (oplax_associativity_of_lax_square δG e he hδ a b c)
   oplax_left_unitality X := by
     obtain ⟨a, -, ⟨iX⟩⟩ := hS X
+    have := LaxMonoidal.isIso_μ_tensorUnit_left Q₂ (F.obj a)
     exact oplax_left_unitality_of_iso δG iX (oplax_left_unitality_of_lax_square δG e he hδ a)
   oplax_right_unitality X := by
     obtain ⟨a, -, ⟨iX⟩⟩ := hS X
+    have := LaxMonoidal.isIso_μ_tensorUnit_right Q₂ (F.obj a)
     exact oplax_right_unitality_of_iso δG iX (oplax_right_unitality_of_lax_square δG e he hδ a)
 
 end CategoryTheory.Functor.OplaxMonoidal
