@@ -36,6 +36,16 @@ forward along a proper morphism, and integrated when `T` is proper over the base
   `AlgebraicGeometry.ProEtale.Correspondence.intersectionStr`: the support map
   `c : C ⟶ Y × X`, its swapped form on an opposite correspondence, and the intersection
   support `E(C, D) = C ×_{Y × X} D` of an opposite pair.
+- `AlgebraicGeometry.ProEtale.SupportedClass`: the classes `H_T^0(Z, P) = Hom(Ri_! A_T, P)`
+  supported on a morphism `i : T ⟶ Z`.
+- `AlgebraicGeometry.ProEtale.Correspondence.traceClassSource`,
+  `AlgebraicGeometry.ProEtale.Correspondence.mate`: the trace-class source
+  `RHom(Lc₂^* K, Rc₁^! L)` and the mate `A_C ⟶ RHom(Lc₂^* K, Rc₁^! L)` of the coefficient map.
+- `AlgebraicGeometry.ProEtale.GeometricOperations.correspondenceClassEquiv`,
+  `AlgebraicGeometry.ProEtale.Correspondence.classEquiv`,
+  `AlgebraicGeometry.ProEtale.Correspondence.rhomClass`: the bijection
+  `Hom(Rc_! A_C, RHom(Lp₂^* K, Rp₁^! L)) ≃ Hom(Lc₂^* K, Rc₁^! L)`, natural in `K` and `L`, and
+  the class `[u]` of a correspondence.
 - `AlgebraicGeometry.ProEtale.Correspondence.ofEnd`: the diagonal endocorrespondence
   attached to an endomorphism of the coefficient complex.
 - `AlgebraicGeometry.ProEtale.Correspondence.ofGraph`: the graph endocorrespondence `(1, g)`
@@ -50,6 +60,12 @@ forward along a proper morphism, and integrated when `T` is proper over the base
 
 ## Main results
 
+- `AlgebraicGeometry.ProEtale.Correspondence.isPullback_fixι_toProd`,
+  `AlgebraicGeometry.ProEtale.Correspondence.fixUpperShriekIso`: the fixed square
+  `Fix(c) = C ×_{X × X} X` is Cartesian, and `Rd^! ≃ Ri_F^! Rc₁^!` for `d = c₁ ∘ i_F`.
+- `AlgebraicGeometry.ProEtale.GeometricOperations.correspondenceClassEquiv_naturality_left`,
+  `AlgebraicGeometry.ProEtale.GeometricOperations.correspondenceClassEquiv_naturality_right`:
+  naturality of the class bijection.
 - `AlgebraicGeometry.ProEtale.GeometricOperations.borelMoorePushforward_id`: pushing forward
   along the identity gives the section back.
 
