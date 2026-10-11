@@ -31,7 +31,8 @@
   "def-pc-relative-effective-cartier",
   "def-pc-finite-locally-free",
   "def-pc-base-change",
-  "def-sc-effective-cartier-divisor"
+  "def-sc-effective-cartier-divisor",
+  "def-pd-degree-morphism"
  ],
  "proof": [
   {
@@ -225,5 +226,24 @@
   "summary": "Split following Stacks 0BA0 (4) and the second paragraph of its proof (gamma_d from O(D_univ) by Yoneda), Remark 0B9J and Lemma 0B9D. Seven steps: (1) C_T -> T smooth of relative dimension 1, flat, proper, of finite presentation (new unsplit node for the relative-dimension claim, which the imported Hilbert nodes took as 'standard'); (2) clause 1 from 0B9D (1)=>(2) and the invertibility of O(D); (3) the fibre of O(D_d) at t is O(D_t) by the base-change lemma lem-pc-recd-pullback, D_t of length d by the definition of degree d; (4) clause 2 from deg O(D) = dim Gamma(O_D) (lem-pc-degree-base-change (2)) on the 1-dimensional proper C_{kappa(t)}; (5) gamma_d defined from the class via the representing isomorphism of Pic^d; (6)-(7) clause 3 by Yoneda for the Hilbert functor (x corresponds to D_d x_{H_d} Spec K) and naturality of the Pic^d isomorphism. Statement unchanged; stmt_deps gained def-pc-relative-effective-cartier, def-pc-finite-locally-free, def-pc-base-change, def-sc-effective-cartier-divisor, which the statement uses. lem-pc-universal-divisor (Lean-closed) was not cited: its node statement covers only degree d+1 >= 1, the scheme underline Hilb, and k-rational points, while the item needs every d >= 0, any representing H_d, and K-points; its Lean declaration isRelativeEffectiveCartier_universal_hilbertPresheaf does cover clauses 1 and the pullback part of step 6 in full generality. No slopmaster2 declaration constructs gamma_d.",
   "blueprint": "thm-sc-jacobian-representability, proof step (4) 'Connectedness' (via lem-sc-picg-geometrically-integral): the morphism Hilb^g -> Pic^g, D -> O_C(D); unit sk-prop-jacobian step 4 'The universal divisor of [sk-thm-picard-hilb-curves] (3) ... defines alpha: Hilb^g -> Pic^g, D -> O_C(D)': steps 1-2 realize 'the universal divisor', steps 3-5 'defines alpha into Pic^g', steps 6-7 'D -> O_C(D)' on points."
  },
- "reviewed": "2026-10-10 L: 7 steps along 0BA0 (4) checked (C_T -> T smooth of relative dimension 1 by the new node, flat, lfp, proper; D_d a relative effective Cartier divisor by the Cartier criterion, O(D_d) invertible; fibre at t and dim Gamma(O_{D_t}) = d; fibrewise degree d by the degree base-change node; gamma_d from the class via sheafification and the representing isomorphism; Yoneda and pullback of D_d for a K-point; naturality). stmt_deps completed. New unsplit node lem-sc-curve-base-change-relative-dimension-one (02NK with 02FY/01VB/0A21; Mathlib candidate smoothOfRelativeDimension_isStableUnderBaseChange recorded, not a leaf by B8). LeanSearch down."
+ "reviewed": "2026-10-10 L: 7 steps along 0BA0 (4) checked (C_T -> T smooth of relative dimension 1 by the new node, flat, lfp, proper; D_d a relative effective Cartier divisor by the Cartier criterion, O(D_d) invertible; fibre at t and dim Gamma(O_{D_t}) = d; fibrewise degree d by the degree base-change node; gamma_d from the class via sheafification and the representing isomorphism; Yoneda and pullback of D_d for a K-point; naturality). stmt_deps completed. New unsplit node lem-sc-curve-base-change-relative-dimension-one (02NK with 02FY/01VB/0A21; Mathlib candidate smoothOfRelativeDimension_isStableUnderBaseChange recorded, not a leaf by B8). LeanSearch down.",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.HilbertToPicardMorphism",
+  "declaration": "AlgebraicGeometry.exists_hilbertToPicardMorphism",
+  "file": "lean/Sheaf/AlgebraicGeometry/HilbertToPicardMorphism.lean",
+  "statement": "theorem exists_hilbertToPicardMorphism {k : Type u} [Field k] [IsSepClosed k] {C : Scheme.{u}} (f : C ⟶ Spec (.of k)) [f.IsSmoothProjectiveCurve] [GeometricallyIntegral f] (d : ℕ) (H P : Over (Spec (.of k))) (eH : (hilbertPresheaf f d).RepresentableBy H) (eP : (picardFunctorDegree f d).obj.RepresentableBy P) : let D := (eH.homEquiv (𝟙 H)).1 D.IsRelativeEffectiveCartier (pullback.snd f H.hom) ∧ D.toModulesᵛ.IsInvertible ∧ ∃ L : (pullback f H.hom).Pic, Nonempty ((fromSkeleton _).obj L.val ≅ D.toModulesᵛ) ∧ (∀ t : H.left, picardPresheafDegree f L t = (d : ℤ)) ∧ ∃ (hL : L ∈ (picardSubfunctorDegree f d).obj (op H)) (γ : H ⟶ P), eP.homEquiv γ = (toSheafify (Scheme.fppfTopology.over (Spec (.of k))) (picardSubfunctorDegree f d).toFunctor).app (op H) ⟨L, hL⟩ ∧ ∀ (K : Type u) [Field K] [Algebra k K] (x : Over.mk (Spec.map (CommRingCat.ofHom (algebraMap k K))) ⟶ H), let T := Over.mk (Spec.map (CommRingCat.ofHom (algebraMap k K))) let DK := (eH.homEquiv x).1 DK.IsInvertible ∧ DK.toModulesᵛ.IsInvertible ∧ ∃ (LK : (pullback f T.hom).Pic) (hLK : LK ∈ (picardSubfunctorDegree f d).obj (op T)), Nonempty ((fromSkeleton _).obj LK.val ≅ DK.toModulesᵛ) ∧ eP.homEquiv (x ≫ γ) = (toSheafify (Scheme.fppfTopology.over (Spec (.of k))) (picardSubfunctorDegree f d).toFunctor).app (op T) ⟨LK, hLK⟩",
+  "branch": "sheaf-dag",
+  "by": "M1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-htp1136"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-htp1136",
+  "group": "M1",
+  "result": "fix",
+  "note": "k sep. closed [IsSepClosed]; C smooth projective [f.IsSmoothProjectiveCurve] + [GeometricallyIntegral f]; d : ℕ; H_d via (hilbertPresheaf f d).RepresentableBy H, D = eH.homEquiv (𝟙 H); P_d via (picardFunctorDegree f d).obj.RepresentableBy P (FIX: replaced the delivered private degree subfunctor Q/hQ of picardFunctor, H4/H12); (1) IsRelativeEffectiveCartier + O(D) invertible; (2) L ≅ O(D), fibre degree d, L ∈ picardSubfunctorDegree f d, eP.homEquiv γ = toSheafify class of ⟨L,hL⟩; (3) all K/k in Type u, x : Spec K ⟶ H, DK effective Cartier, eP.homEquiv (x ≫ γ) = class of O(DK) in Pic^d; g unused; no hollow hypotheses"
+ }
 }
