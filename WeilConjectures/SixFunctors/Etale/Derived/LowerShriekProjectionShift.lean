@@ -52,14 +52,6 @@ variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{
 
 namespace Etale
 
-/-- The image of a morphism under the derived tensor product commutes with the shifts in the
-second variable. -/
-instance commShift_derivedTensor_map {X : Scheme.{u}}
-    {K K' : DerivedCategory (Sheaf X.smallEtaleTopology A)} (φ : K ⟶ K') :
-    NatTrans.CommShift ((-⊗ᴸ-(X)[A]).map φ) ℤ :=
-  inferInstanceAs (NatTrans.CommShift
-    ((curriedTensor (DerivedCategory (Sheaf X.smallEtaleTopology A))).map φ) ℤ)
-
 variable [Etale.UpperStarPreservesFlat A]
 
 /-- The projection map `Rp_*M ⊗ᴸ L ⟶ Rp_*(M ⊗ᴸ Lp^*L)` of the derived pushforward commutes
