@@ -185,5 +185,24 @@
   "by": "L",
   "result": "pass",
   "note": "Four steps along Stacks 02G1 through 01V7 (locally standard smooth), 00T7(2) (Omega free on dx_{c+1..n}), 00T7(5) (base change) and the over-field dimension (00T7(7) with the equidimensionality remark after Definition 00S9, algebra.tex 35838-35850). Step 3 writes out the affine-local identification dim_{x'}(X_s) = dim at a prime of Spec(A tensor kappa(p)) with existing nodes only. Five new nodes: def standard smooth (mathlib, Algebra.IsStandardSmooth via SubmersivePresentation, lines 62/495 verified), kahler basis (mathlib basisKaehler StandardSmoothCotangent.lean:226 verified), base change (mathlib SubmersivePresentation.baseChange Submersive.lean:563 verified), two unsplit (01V7; over-field pointwise dimension). Note: the pointwise node is stronger than 00T7(7) as worded (Krull dimension of the ring); it is correct by the equidimensionality remark after 00S9 (dim S_m = n-c for all maximal m and 00OT), which its source field names. Worker reports Lean candidates in slopmaster2 Smooth.lean (isLocallyConstant_topologicalKrullDimAt_asFiber @[stacks 02G1], rests on sorry)."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SmoothDifferentialsFreeRankFibreDimension",
+  "declaration": "AlgebraicGeometry.smooth_differentials_free_rank_fibre_dimension",
+  "file": "lean/Sheaf/AlgebraicGeometry/SmoothDifferentialsFreeRankFibreDimension.lean",
+  "statement": "theorem smooth_differentials_free_rank_fibre_dimension (X S : Scheme.{u}) (f : X ⟶ S) [Smooth f] (x : X) : ∃ (d : ℕ), topologicalKrullDimAt (f.asFiber x) = (d : WithBot ℕ∞) ∧ ∃ (V : S.Opens) (W : X.Opens) (hWV : W ≤ f ⁻¹ᵁ V), x ∈ W ∧ IsAffineOpen V ∧ IsAffineOpen W ∧ Nonempty (Module.Basis (Fin d) (Γ(X, W)) (CommRingCat.KaehlerDifferential (f.appLE V W hWV)))",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-sdf"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-sdf",
+  "group": "F1",
+  "result": "fix",
+  "note": "fibre point x' binder + fiberι hypothesis replaced by f.asFiber x (STATE QUASI-FINITE convention); rest matches 02G1 node: Smooth f, topologicalKrullDimAt d:ℕ, affine V W with W ≤ f⁻¹ᵁ V, x∈W, Fin d basis of CommRingCat.KaehlerDifferential (f.appLE V W hWV)"
  }
 }
