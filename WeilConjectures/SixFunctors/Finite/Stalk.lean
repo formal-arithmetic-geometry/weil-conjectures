@@ -25,7 +25,9 @@ neighbourhood `U ×_Y X` decomposes into pairwise disjoint clopen pieces indexed
 so that `G (U ×_Y X) = ∏_t G (piece_t)`. Finite products commute with the filtered colimit
 (`A` satisfies AB5), and the colimit of `G (piece_t)` over the split neighbourhoods is the
 stalk `G_t`, the pieces being cofinal among the pointed étale neighbourhoods of `t`
-(`AlgebraicGeometry.Scheme.Hom.SplitNbhd.initial_pieceFunctor`).
+(`AlgebraicGeometry.Scheme.Hom.SplitNbhd.initial_pieceFunctor`). The classical argument through the
+strict henselization (blueprint remark `rem-weil-pbc-finite-stalk-formula-strict-henselian`) is
+not the one formalised here.
 
 ## Main definitions
 
