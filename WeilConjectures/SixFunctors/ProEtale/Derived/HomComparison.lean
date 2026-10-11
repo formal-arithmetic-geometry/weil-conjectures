@@ -14,6 +14,7 @@ public import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
 public import Mathlib.Data.ZMod.Basic
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.AB
 public import WeilConjectures.SixFunctors.ProEtale.Comparison
+public import WeilConjectures.SixFunctors.ProEtale.Comparison.Flat
 public import WeilConjectures.CategoryTheory.DerivedCategory.FlatModel
 
 /-!
@@ -65,6 +66,40 @@ noncomputable def mapDerivedCategoryComparisonUpperStarUnitIso (X : Scheme.{u}) 
     ((ν^*(X)[ModuleCat.{u + 1} Λ]).mapDerivedCategorySingleFunctor 0).app _ ≪≫
     (_root_.DerivedCategory.singleFunctor _ 0).mapIso (comparisonUpperStarUnitIso Λ X) ≪≫
     _root_.DerivedCategory.singleFunctorObjUnitIso _
+
+/-- Blueprint `lem-sf-comparison-tor-amplitude`: Finite Tor amplitude under the site
+comparison, clause (i).
+
+Let `Λ` be a finite ring. If a complex `K'` of étale `Λ`-sheaves has Tor amplitude in
+`[a, b]`, then `ν^* K'` has Tor amplitude in `[a, b]` on the pro-étale site: a flat model of
+`K'` in degrees `[a, b]` is carried by the exact functor `ν^*` to a flat model of `ν^* K'`, as
+`ν^*` preserves flat sheaves (`AlgebraicGeometry.ProEtale.flat_comparisonUpperStar_obj`). The
+blueprint's hypotheses that `K'` be bounded constructible and that the exponent of `Λ` be
+invertible on `X` are not needed. -/
+theorem torAmplitudeIn_mapDerivedCategory {X : Scheme.{u}}
+    {a b : ℤ} {K' : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
+    (hKt : Etale.DerivedCategory.torAmplitudeIn (ModuleCat.{u + 1} Λ) X a b K') :
+    torAmplitudeIn (ModuleCat.{u + 1} Λ) X a b (D(ν^*(X)[ModuleCat.{u + 1} Λ]).obj K') := by
+  obtain ⟨P, _, _, hP, ⟨e⟩⟩ :=
+    (_root_.DerivedCategory.torAmplitudeIn_iff_exists_iso_Q_obj_flat a b K').1 hKt
+  exact (_root_.DerivedCategory.torAmplitudeIn_iff_exists_iso_Q_obj_flat a b _).2
+    ⟨((ν^*(X)[ModuleCat.{u + 1} Λ]).mapHomologicalComplex _).obj P, inferInstance, inferInstance,
+      fun n ↦ flat_comparisonUpperStar_obj (hP n),
+      ⟨((ν^*(X)[ModuleCat.{u + 1} Λ]).mapDerivedCategoryFactors.app P).symm ≪≫
+        D(ν^*(X)[ModuleCat.{u + 1} Λ]).mapIso e⟩⟩
+
+/-- Blueprint `lem-sf-comparison-tor-amplitude`: Finite Tor amplitude under the site
+comparison, clause (i).
+
+The derived comparison pullback `ν^*` carries `Dctf(X_ét, Λ)` into `Dctf(X_proét, Λ)`, for a
+finite ring `Λ`. -/
+theorem constructibleFiniteTor_mapDerivedCategory {X : Scheme.{u}}
+    {K' : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
+    (hK' : Etale.DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} Λ) X K') :
+    constructibleFiniteTor (ModuleCat.{u + 1} Λ) X (D(ν^*(X)[ModuleCat.{u + 1} Λ]).obj K') :=
+  have ⟨hbc, a, b, hKt⟩ := hK'
+  ⟨boundedConstructible_comparisonUpperStar_mapDerivedCategory_obj hbc, a, b,
+    torAmplitudeIn_mapDerivedCategory Λ hKt⟩
 
 /-- Blueprint `lem-sf-comparison-tor-amplitude`: Finite Tor amplitude under the site
 comparison, clause (ii).
