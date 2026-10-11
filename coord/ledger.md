@@ -5071,3 +5071,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 14:52 L: merged deliver/U1/lem-weil-pbc-symmetric-projective-presentation-conormal (stage 2; reviewer PASS; first push; Sheaf.RingTheory.SymmetricProjectivePresentationConormal Algebra.symmetric_projective_presentation_conormal)
 - 14:52 L: merged deliver/J1/lem-weil-pbc-z-g-ring (stage 2; reviewer PASS; first push; Sheaf.RingTheory.IntGRing Int.isGRing)
 - 14:52 L: merged deliver/C1/lem-pc-coherent-property-devissage (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.CoherentPropertyDevissage AlgebraicGeometry.coherent_property_devissage)
+- 14:52 L: merged deliver/F1/lem-weil-pbc-truncation-descends (stage 2; reviewer PASS; first push; Sheaf.CategoryTheory.TruncationDescends DerivedCategory.truncation_descends)
