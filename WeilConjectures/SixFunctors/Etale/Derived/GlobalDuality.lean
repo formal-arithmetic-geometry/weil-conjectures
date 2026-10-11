@@ -203,7 +203,11 @@ noncomputable def coefficientDualShiftIso
 /-- Blueprint `sk-thm-sf-global-duality` (shifts): global duality for a shifted complex is the
 shift of global duality, `RΓ_c(X, K⟦a⟧)^∨ ≅ RΓ(X, 𝔻_X K)⟦-a⟧`. It is the coefficient dual of the
 commutation `Ra_{X!}(K⟦a⟧) ≅ (Ra_{X!} K)⟦a⟧`, then `(-)^∨` turning `⟦a⟧` into `⟦-a⟧`
-(`AlgebraicGeometry.Etale.coefficientDualShiftIso`), then the shift of global duality for `K`. -/
+(`AlgebraicGeometry.Etale.coefficientDualShiftIso`), then the shift of global duality for `K`.
+
+This is only the object-level form of the shift compatibility: it does not state that this
+isomorphism agrees with the shift of the global duality isomorphism for `K`, which the
+blueprint also asks for. -/
 noncomputable def coefficientDualRightDerivedLowerShriekShiftIso [IsIso (projectionMap A aX)]
     (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)) (a : ℤ) :
     (DerivedCategory.coefficientDual A S).obj (op ((R(aX)_![A]).obj (K⟦a⟧))) ≅

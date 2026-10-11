@@ -15,6 +15,12 @@ Let `adj : F ⊣ G` be an adjunction compatible with shifts. If a comparison
 `φ : F (T_D a b) ⟶ T_C (F a) (F b)` commutes with the shifts in the variable `a`, then the
 right adjoint projection map `T_D (G M) L ⟶ G (T_C M (F L))` commutes with the shifts in the
 variable `M` (`CategoryTheory.Adjunction.commShift_rightAdjointProjectionMapFlipApp`).
+Dually, for `adj : F ⊣ G` and a comparison `δ : T (G X) (G' M) ⟶ G (T' X M)` commuting with the
+shifts in `X`, the projection map `F (T K (G' M)) ⟶ T' (F K) M` commutes with the shifts in the
+variable `K` (`CategoryTheory.Adjunction.commShift_projectionMapFlipApp`).
+
+These lemmas are groundwork for the compatibility of global Verdier duality with shifts
+(blueprint `sk-thm-sf-global-duality`), which is not formalised yet; nothing uses them so far.
 -/
 
 @[expose] public section
@@ -46,6 +52,8 @@ def rightAdjointProjectionMapFlipApp (L : D) :
   naturality M M' f := by
     simpa using NatTrans.congr_app ((adj.rightAdjointProjectionMap φ).naturality f) L
 
+/-- The right adjoint projection map for a fixed `L`, written as a composite of the whiskered
+unit, the comparison `φ` and the whiskered counit. -/
 lemma rightAdjointProjectionMapFlipApp_eq (L : D) :
     adj.rightAdjointProjectionMapFlipApp φ L =
       (Functor.rightUnitor _).inv ≫ whiskerLeft (G ⋙ T_D.flip.obj L) adj.unit ≫
@@ -63,7 +71,15 @@ variable (A : Type*) [AddMonoid A] [HasShift C A] [HasShift D A] [F.CommShift A]
   [∀ X : C, (T_C.flip.obj X).CommShift A]
 
 /-- If `φ` commutes with the shifts in its first variable, so does the right adjoint projection
-map. -/
+map: for every `a : A` the square in `D`
+```
+T_D ((G M)⟦a⟧) L ─────────▶ G (T_C (M⟦a⟧) (F L))
+        │                              │
+        ▼                              ▼
+(T_D (G M) L)⟦a⟧ ─────────▶ (G (T_C M (F L)))⟦a⟧
+```
+commutes, where the horizontal maps are projection maps and the vertical maps are built from
+the shift isomorphisms. -/
 lemma commShift_rightAdjointProjectionMapFlipApp (L : D)
     [NatTrans.CommShift (comparisonFlipApp φ L) A] :
     NatTrans.CommShift (adj.rightAdjointProjectionMapFlipApp φ L) A := by
@@ -97,6 +113,8 @@ noncomputable def projectionMapFlipApp (M : D) : T.flip.obj (G'.obj M) ⋙ F ⟶
     dsimp at this ⊢
     exact this
 
+/-- The projection map for a fixed `M`, written as a composite of the whiskered unit, the
+comparison `δ` and the whiskered counit. -/
 lemma projectionMapFlipApp_eq (M : D) :
     adj.projectionMapFlipApp G' T T' δ M =
       whiskerRight ((Functor.leftUnitor _).inv ≫
@@ -113,7 +131,16 @@ variable (A : Type*) [AddMonoid A] [HasShift C A] [HasShift D A] [F.CommShift A]
   [adj.CommShift A] [∀ M : D, (T.flip.obj (G'.obj M)).CommShift A]
   [∀ M : D, (T'.flip.obj M).CommShift A]
 
-/-- If `δ` commutes with the shifts in its first variable, so does the projection map. -/
+/-- If `δ` commutes with the shifts in its first variable, so does the projection map: for every
+`a : A` the square in `D`
+```
+F (T (K⟦a⟧) (G' M)) ─────────▶ T' (F (K⟦a⟧)) M
+         │                             │
+         ▼                             ▼
+(F (T K (G' M)))⟦a⟧ ─────────▶ (T' (F K) M)⟦a⟧
+```
+commutes, where the horizontal maps are projection maps and the vertical maps are built from
+the shift isomorphisms. -/
 lemma commShift_projectionMapFlipApp (M : D)
     [NatTrans.CommShift (comparisonFlipApp' G' T T' δ M) A] :
     NatTrans.CommShift (adj.projectionMapFlipApp G' T T' δ M) A := by
