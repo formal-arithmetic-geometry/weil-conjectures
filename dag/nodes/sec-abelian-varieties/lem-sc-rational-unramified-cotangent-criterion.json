@@ -145,5 +145,24 @@
   "group": "C1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-ruc2100 (reviewer sub-agent of L); spot-checked: Read item and cited statements (JZ, localization, base-change, affine criterion, Kahler def). FIX more, RETURN less: (1) C1 Step 3: JZ node gives only exactness at the middle, so ker(delta) contained in image of m_A (the direction Omega tensor k = 0 implies cotangent surjective) was uncited, and the fibre/base-change identification was asserted without derivation; replaced by the explicit derivation c -> c - lambda(c) mod (m_A C + m_C^2) via the universal property [def-weil-pbc-kahler-differentials], base-change node no longer needed. (2) C1 Steps 1-2: Omega_{C/R}=Omega_{C/A} (localization of the base) and the passage between unramified-at-x and stalk vanishing (finite module support, open restriction) were assumed; written out with citations. (3) B4: plain-text arrows rewritten in TeX throughout. Correct uses/proof_deps. Second reading by C1 missed fault (1).; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.RationalUnramifiedCotangentCriterion",
+  "declaration": "AlgebraicGeometry.rational_unramified_iff_cotangent_surjective",
+  "file": "lean/Sheaf/AlgebraicGeometry/RationalUnramifiedCotangentCriterion.lean",
+  "statement": "theorem rational_unramified_iff_cotangent_surjective (k : Type u) [Field k] (X Y : Scheme.{u}) (pX : X ⟶ Spec (.of k)) (pY : Y ⟶ Spec (.of k)) (f : X ⟶ Y) [LocallyOfFiniteType f] (hf : f ≫ pY = pX) (x : X) (hx : IsClosed ({x} : Set X)) (hy : IsClosed ({f x} : Set Y)) (hκx : Function.Bijective (pX.residueFieldMap x).hom) (hκy : Function.Bijective (pY.residueFieldMap (f x)).hom) : (∃ U : X.Opens, x ∈ U ∧ LocallyOfFiniteType (U.ι ≫ f) ∧ IsOpenImmersion (pullback.diagonal (U.ι ≫ f))) ↔ Function.Surjective (Ideal.mapCotangent (IsLocalRing.maximalIdeal (Y.presheaf.stalk (f x))) (IsLocalRing.maximalIdeal (X.presheaf.stalk x)) (f.stalkMap x).hom.toIntAlgHom (Ideal.map_le_iff_le_comap.mp (IsLocalRing.map_maximalIdeal_le (f.stalkMap x).hom)) : IsLocalRing.CotangentSpace (Y.presheaf.stalk (f x)) →ₗ[ℤ] IsLocalRing.CotangentSpace (X.presheaf.stalk x))",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-ruc0954"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-ruc0954",
+  "group": "E1",
+  "result": "fix",
+  "note": "k field, pX pY hf over Spec k, LocallyOfFiniteType f, x/f x closed (base stmt) with k->kappa bijective (M1 form), unramified at x as exists U with LOFT and open diagonal of U.ι≫f, cotangent map = M1 mapCotangent of f.stalkMap x; reverted the delivery's statement correction of the item (statement, stmt_deps, proof, proof_deps, statement_change kept as on sheaf-dag; --revert-statement)"
  }
 }
