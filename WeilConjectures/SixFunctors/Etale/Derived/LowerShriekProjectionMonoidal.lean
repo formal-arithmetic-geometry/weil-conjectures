@@ -8,6 +8,7 @@ module
 public import WeilConjectures.CategoryTheory.Adjunction.ProjectionMapMonoidal
 public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Functor
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekProjection
+public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekProjectionBaseChange
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekToLowerStar
 public import WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormulaAssoc
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerStarProjectionComp
@@ -167,27 +168,7 @@ end OpenImmersion
 
 section Compactification
 
-variable {X Y Z : Scheme.{u}}
-
-omit [Etale.UpperStarPreservesFlat A] in
-lemma leftDerivedUpperStarComp_symm_trans_eqToIso (g₁ : X ⟶ Z) (g₂ : Z ⟶ Y) (f : X ⟶ Y)
-    (h : f = g₁ ≫ g₂) :
-    (leftDerivedUpperStarComp A g₁ g₂).symm ≪≫
-        eqToIso (congrArg (fun h ↦ L((h)^*[A])) h.symm) =
-      (leftDerivedUpperStarComp A g₁ g₂ f h).symm := by
-  subst h
-  ext
-  simp
-
-variable {f : X ⟶ Y} (c : Compactification f)
-
-omit [Etale.UpperStarPreservesFlat A] in
-/-- The isomorphism `Lg^* ⋙ Li^* ≅ Lf^*` of a compactification `c = (X ⟶[i] Z ⟶[g] Y)` of `f` is
-the inverse of the composition isomorphism `Lf^* ≅ Lg^* ⋙ Li^*` along `f = i ≫ g`. -/
-lemma leftDerivedUpperStarCompactificationIso_eq :
-    leftDerivedUpperStarCompactificationIso A c =
-      (leftDerivedUpperStarComp A c.i c.g f c.comm).symm :=
-  leftDerivedUpperStarComp_symm_trans_eqToIso A c.i c.g f c.comm
+variable {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f)
 
 /-- The isomorphism `Lg^* ⋙ Li^* ≅ Lf^*` of a compactification is monoidal: it commutes with the
 tensor comparisons. -/
