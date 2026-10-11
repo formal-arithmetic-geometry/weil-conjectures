@@ -1,5 +1,23 @@
 # GOAL
 
+## DECISION OF THE HUMAN (2026-10-12 04:20 +08)
+
+**The targets of the run are the five upstream declarations on which the old target `thm-weil-pbc-bounded-below` rests.** They are the five `sorry`s on its route in the source repository (branch `slopmaster2` at `7d675a263`); the line is the line of the `theorem` keyword:
+
+| # | Declaration | Module | Line | Blueprint node |
+|---|---|---|---|---|
+| 1 | `AlgebraicGeometry.Etale.exists_addEquiv_sheafFiber_baseChangeHomologyMap_projectiveLine` | `WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.ProjectiveLine.GeometricStalk` | 133 | lemma-weil-pbc-p1-exchange-geometric-stalk |
+| 2 | `AlgebraicGeometry.Etale.hasTorsionBaseChange_of_projectiveLine_of_isProper` | `WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.ProjectiveLine` | 145 | prop-weil-pbc-reduction-to-projective-line |
+| 3 | `AlgebraicGeometry.IsCurve.bijective_cohomologyMap_of_isAlgClosed` | `WeilConjectures.AlgebraicGeometry.Curve.FieldExtension` | 88 | prop-weil-pbc-algebraically-closed-extension |
+| 4 | `AlgebraicGeometry.IsCurve.bijective_cohomologyMap_of_isSepClosed_of_isAlgClosed` | `WeilConjectures.AlgebraicGeometry.Curve.FieldExtension` | 120 | lemma-weil-pbc-curve-separably-closed-passage |
+| 5 | `AlgebraicGeometry.Etale.hasTorsionBaseChange_of_hasInjectiveAcyclicity` | `WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.BaseChangeProperty` | 321 | lemma-weil-pbc-property-iff-acyclicity, lem-weil-pbc-injective-acyclicity-bounded-below |
+
+Target 5 is **not locked until the upstream side answers**: the human takes it to the upstream side with proposal (c′), which re-proves `Etale.hasTorsionBaseChange_projectiveLine` without it, so that it leaves the old target's closure.
+
+`lean/Challenge.lean` holds the five statements verbatim. When all five are proved, the old target (`AlgebraicGeometry.Etale.isIso_baseChange_of_isProper` and `AlgebraicGeometry.Etale.isIso_baseChange_of_isProper_of_isAddTorsion_ring` in `WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.Proper`) follows by upstream's own sorry-free assembly.
+
+The text below is the earlier goal, kept for the record.
+
 **Decision of the human (2026-10-09, evening): the whole Weil conjecture is too large a target for now. The target of the run is the single node `thm-weil-pbc-bounded-below` (bounded-below derived proper base change), chapter `sec-proper-base-change`, unit `sk-thm-properbasechange`. Its Lean declarations are `AlgebraicGeometry.Etale.isIso_baseChange_of_isProper` and `AlgebraicGeometry.Etale.isIso_baseChange_of_isProper_of_isAddTorsion_ring` in `WeilConjectures/SixFunctors/Etale/BaseChangeTheorems/Proper.lean` (both branches; on master the first contains a `sorry`, on slopmaster2 neither does, but they may rest on sorries). `thm-weil-final` keeps its node and loses the `target` flag; nodes the new target does not reach stop being items. The text below is the earlier goal, kept for the record.**
 
 Formalize the following result of the Weil-conjectures blueprint (`literature/blueprint/master/blueprint/`, from `github.com/formal-arithmetic-geometry/weil-conjectures`, branch `master`) with no `sorry`.
