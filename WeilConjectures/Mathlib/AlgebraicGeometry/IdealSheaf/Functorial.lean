@@ -469,3 +469,35 @@ lemma le_of_forall_comap_le {ι : Type*} {Z : ι → Scheme.{u}} (j : ∀ i, Z i
 end Kernel
 
 end AlgebraicGeometry.Scheme.IdealSheafData
+
+namespace AlgebraicGeometry.Scheme
+
+variable {X Y : Scheme.{u}}
+
+/-- The map `V(f^* s) ⟶ V(s)` between the closed subschemes cut out by global sections `s` of
+`X` and by their pullbacks along `f : Y ⟶ X`. -/
+noncomputable def Hom.zeroLocusSubschemeMap (f : Y ⟶ X) (s : Set Γ(X, ⊤)) :
+    Y.zeroLocusSubscheme (f.appTop '' s) ⟶ X.zeroLocusSubscheme s :=
+  IsClosedImmersion.lift (X.zeroLocusSubschemeι s) (Y.zeroLocusSubschemeι (f.appTop '' s) ≫ f)
+    (IdealSheafData.le_ker_of_comap_eq_bot _ (by
+      rw [IdealSheafData.ker_subschemeι, IdealSheafData.comap_comp,
+        IdealSheafData.comap_ofIdealTop, Ideal.map_span, ← IdealSheafData.ker_subschemeι
+          (IdealSheafData.ofIdealTop (Ideal.span (f.appTop '' s)))]
+      exact Hom.comap_ker_self _))
+
+@[reassoc (attr := simp)]
+lemma Hom.zeroLocusSubschemeMap_zeroLocusSubschemeι (f : Y ⟶ X) (s : Set Γ(X, ⊤)) :
+    f.zeroLocusSubschemeMap s ≫ X.zeroLocusSubschemeι s =
+      Y.zeroLocusSubschemeι (f.appTop '' s) ≫ f :=
+  IsClosedImmersion.lift_fac _ _ _
+
+/-- **Base change of the closed subscheme cut out by global sections**: the closed subscheme of
+`Y` cut out by the pullbacks `f^* s` is the base change of `V(s) ⊆ X` along `f`. -/
+lemma isPullback_zeroLocusSubschemeι (f : Y ⟶ X) (s : Set Γ(X, ⊤)) :
+    IsPullback (f.zeroLocusSubschemeMap s) (Y.zeroLocusSubschemeι (f.appTop '' s))
+      (X.zeroLocusSubschemeι s) f :=
+  (isPullback_of_isClosedImmersion _ _ _ _ (f.zeroLocusSubschemeMap_zeroLocusSubschemeι s).symm
+    (by rw [IdealSheafData.ker_subschemeι, IdealSheafData.ker_subschemeι,
+      IdealSheafData.comap_ofIdealTop, Ideal.map_span])).flip
+
+end AlgebraicGeometry.Scheme

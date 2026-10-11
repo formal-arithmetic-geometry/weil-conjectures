@@ -266,6 +266,55 @@ theorem restrictSupportedClass_cupWithSupports (i₁ : Z₁ ⟶ U) (i₂ : Z₂ 
   rw [hP, ← reassoc_of% hΔ, derivedTensorHom_comp_assoc, derivedTensorHom_comp_assoc]
   simp only [Category.assoc]
 
+omit [(e)^*[A].PreservesFlat] in
+/-- **Naturality of the restriction of supports in the coefficients.** For `φ : L₁ ⟶ L₂` on `U`
+and `φ' : L₁' ⟶ L₂'` on `U'` compatible with identifications `τ₁ : Le^* L₁ ≅ L₁'` and
+`τ₂ : Le^* L₂ ≅ L₂'`, restricting `γ ≫ Ri_! Ri^! φ` gives the restriction of `γ` followed by
+`Ri'_! Ri'^! φ'`. -/
+theorem restrictSupportedClass_map (i : Z ⟶ U) (i' : Z' ⟶ U') [IsClosedImmersion i]
+    [(R(i)_![A]).IsLeftAdjoint] [IsClosedImmersion i'] [(R(i')_![A]).IsLeftAdjoint]
+    (g : Z' ⟶ Z) (hg : IsPullback g i' i e)
+    {K L₁ L₂ : DerivedCategory (Sheaf U.smallEtaleTopology A)}
+    {K' L₁' L₂' : DerivedCategory (Sheaf U'.smallEtaleTopology A)}
+    (σ : K' ⟶ (L((e)^*[A])).obj K) (τ₁ : (L((e)^*[A])).obj L₁ ≅ L₁')
+    (τ₂ : (L((e)^*[A])).obj L₂ ≅ L₂') (φ : L₁ ⟶ L₂) (φ' : L₁' ⟶ L₂')
+    (hφ : (L((e)^*[A])).map φ ≫ τ₂.hom = τ₁.hom ≫ φ')
+    (γ : K ⟶ (R(i)_![A]).obj ((R(i)^![A]).obj L₁)) :
+    restrictSupportedClass A e i i' g hg σ τ₂ (γ ≫ (R(i)_![A]).map ((R(i)^![A]).map φ)) =
+      restrictSupportedClass A e i i' g hg σ τ₁ γ ≫ (R(i')_![A]).map ((R(i')^![A]).map φ') := by
+  have hψ₁ := (existsUnique_supportedRestriction A e i i' g hg L₁ L₁' τ₁).exists.choose_spec
+  have hψ₂ := (existsUnique_supportedRestriction A e i i' g hg L₂ L₂' τ₂).exists.choose_spec
+  have hS : IsZero ((L((i'.openComplement.ι)^*[A])).obj
+      ((L((e)^*[A])).obj ((R(i)_![A]).obj ((R(i)^![A]).obj L₁)))) := by
+    have hk : Set.range (i'.openComplement.ι ≫ e).base ⊆ Set.range i.openComplement.ι.base := by
+      rw [← compl_compl (Set.range i.openComplement.ι.base),
+        ← i.range_eq_compl_range_openComplement_ι, Set.subset_compl_iff_disjoint_left,
+        Set.disjoint_left]
+      rintro _ ⟨z, rfl⟩ ⟨x, hx⟩
+      apply x.2
+      rw [Scheme.range_snd_of_isPullback hg]
+      exact ⟨z, hx.symm⟩
+    have hdisj : Disjoint (Set.range i.base) (Set.range i.openComplement.ι.base) := by
+      rw [i.range_eq_compl_range_openComplement_ι]
+      exact disjoint_compl_left
+    exact (isZero_leftDerivedUpperStar_obj_rightDerivedLowerShriek_of_disjoint A i
+      i.openComplement.ι hdisj _ hk _).of_iso
+        ((leftDerivedUpperStarComp A i'.openComplement.ι e).app _).symm
+  have key : (L((e)^*[A])).map ((R(i)_![A]).map ((R(i)^![A]).map φ)) ≫
+      supportedRestriction A e i i' g hg L₂ L₂' τ₂ =
+        supportedRestriction A e i i' g hg L₁ L₁' τ₁ ≫
+          (R(i')_![A]).map ((R(i')^![A]).map φ') := by
+    refine (existsUnique_comp_counit_of_isZero A i' i'.openComplement.ι
+      i'.range_eq_compl_range_openComplement_ι hS _).unique rfl ?_
+    simp only [Category.assoc]
+    erw [(rightDerivedUpperShriekAdjunction A i').counit.naturality φ', reassoc_of% hψ₁, hψ₂]
+    rw [← Functor.map_comp_assoc]
+    erw [(rightDerivedUpperShriekAdjunction A i).counit.naturality φ]
+    rw [Functor.map_comp_assoc]
+    erw [hφ]
+    rfl
+  simp only [restrictSupportedClass, Functor.map_comp, Category.assoc, key]
+
 end Etale
 
 end AlgebraicGeometry
