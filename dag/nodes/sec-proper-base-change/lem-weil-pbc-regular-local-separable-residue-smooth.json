@@ -227,5 +227,23 @@
   "worker": "stage1",
   "summary": "Proof written from Algebra 00TV (lemma-separable-smooth) and read in full with the lemmas it cites (00TU, 00RU, 00RT, 00P1, 00TT; tags checked in tags/tags). Seven steps: setup (R = S_q Noetherian local, kappa(q) finitely generated and separable over k); the short exact sequence 0 -> m/m^2 -> Omega_{R/k} (x) kappa -> Omega_{kappa/k} -> 0 from the 00RU leaf and the new node for 00TU; dim m/m^2 >= dim R with equality iff regular (existing leaf at 00KU) and dim Omega_{kappa/k} = trdeg (new node, from the proof of 031W: dx_i basis for a separating transcendence basis; Stacks' 00TV uses it without reference); localization of differentials (00RT leaf); dim_q Spec S = dim R + trdeg (new node for 00P1); both directions via 00TT: regular => smooth by the new node for 00TT (2)=>(1), smooth => regular by the existing node for 00TT (1)=>(3). Both directions are proved as in the source. Four new unsplit nodes, all searched (LeanSearch, LeanFinder, Loogle where the rate limit allowed, grep). Statement unchanged; stmt_deps unchanged."
  },
- "reviewed": "Reviewed by L 2026-10-10: faithful to Algebra 00TV in both directions: the exact sequence m/m² → Ω⊗κ → Ω_κ with injectivity from 00TU (new node), dim Ω_{κ/k} = trdeg for separable κ (new node from the proof of 031W, used without reference by 00TV), the dimension-at-a-point formula 00P1 (new node), then 00TT (2)=>(1) (new node) and the existing (1)=>(3) node. No Mathlib match (no link between IsRegularLocalRing and smoothness)."
+ "reviewed": "Reviewed by L 2026-10-10: faithful to Algebra 00TV in both directions: the exact sequence m/m² → Ω⊗κ → Ω_κ with injectivity from 00TU (new node), dim Ω_{κ/k} = trdeg for separable κ (new node from the proof of 031W, used without reference by 00TV), the dimension-at-a-point formula 00P1 (new node), then 00TT (2)=>(1) (new node) and the existing (1)=>(3) node. No Mathlib match (no link between IsRegularLocalRing and smoothness).",
+ "lean": {
+  "module": "Sheaf.RingTheory.RegularLocalSeparableResidueSmooth",
+  "declaration": "Algebra.regularLocal_iff_smoothAtPrime",
+  "file": "lean/Sheaf/RingTheory/RegularLocalSeparableResidueSmooth.lean",
+  "statement": "theorem regularLocal_iff_smoothAtPrime (k : Type u) (S : Type v) [Field k] [CommRing S] [Algebra k S] [Algebra.FiniteType k S] (q : Ideal S) [q.IsPrime] (hsep : Algebra.IsSeparableExtension k q.ResidueField) : Algebra.IsSmoothAtPrime k ⟨q, inferInstance⟩ ↔ IsRegularLocalRing (Localization.AtPrime q)",
+  "branch": "sheaf-dag",
+  "by": "G1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-lss",
+  "group": "G1",
+  "result": "pass",
+  "note": "field k; S finite-type k-algebra (Algebra.FiniteType); prime q; S_q = Localization.AtPrime q; kappa(q) = q.ResidueField (rfl to IsLocalRing.ResidueField, k-algebra via IsScalarTower k S); separable = recorded Algebra.IsSeparableExtension (not separable-algebraic); smooth at q = recorded Algebra.IsSmoothAtPrime; regular = IsRegularLocalRing; iff; no H7"
+ }
 }
