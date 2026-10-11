@@ -20,7 +20,8 @@
   "def-weil-pbc-scheme-conventions",
   "def-weil-pbc-etale-site",
   "def-weil-pbc-finite-split-hypercover",
-  "def-pc-fibre-product"
+  "def-pc-fibre-product",
+  "def-weil-pbc-etale-hypercover"
  ],
  "proof": [
   {
@@ -143,5 +144,23 @@
   "summary": "Read Hypercoverings 01GI (lemma-product-hypercoverings; proof: 'verify directly or use 01GH'), 01GH (lemma-funny-gamma) and its proof, Simplicial 016U and 018D, Topologies 0217; tags checked in tags/tags. Wrote the direct verification following the proof of 01GH with L the constant object X: (1) termwise fibre product is an augmented simplicial object of X_Et and the projections are morphisms (elementary, universal property of fibre products); (2) the matching scheme of W is M_n(U) x_X M_n(V) with matching map mu^U x mu^V (new unsplit node lem-weil-pbc-matching-object-fibre-product, Simplicial 018D, proof omitted in the source); (3) mu^U x mu^V = (id x mu^V) o (mu^U x id), each a base change of an etale covering (lem-weil-pbc-etale-covering-base-change, a Mathlib leaf of sk-thm-reduction used as a tool; the cartesian squares are written out); (4) composite of coverings (new Mathlib leaf lem-weil-pbc-etale-covering-composition, Topologies 0217(2)). Statement made explicit (matching schemes, structure maps, 'etale hypercover' spelled out as the covering condition), no hypothesis changed; def-pc-fibre-product kept in stmt_deps. The qcqs hypothesis on X is not used by the proof. No slopmaster2 Lean found (grep of the id and 'hypercover'). No existing DAG or blueprint node for 01GI, 018D, 0217 or composition of etale coverings.",
   "blueprint": "Realizes, in lem-weil-pbc-hypercover-refinement, the proof's fourth paragraph 'For two hypercovers, perform this construction with the product of their matching covers' (used in its step 5: U x_X V is a hypercover mapping to both): steps 1 and 4 give the product hypercover and its two projections, steps 2-3 make precise 'the product of their matching covers'."
  },
- "reviewed": "2026-10-10 L: 4 steps following 01GI/01GH (the termwise product is a simplicial object; its matching map is the product of the matching maps (new node 018D); the product of coverings as a composite of two base changes; composites of coverings (new Mathlib leaf)); 2 new nodes"
+ "reviewed": "2026-10-10 L: 4 steps following 01GI/01GH (the termwise product is a simplicial object; its matching map is the product of the matching maps (new node 018D); the product of coverings as a composite of two base changes; composites of coverings (new Mathlib leaf)); 2 new nodes",
+ "lean": {
+  "module": "Sheaf.Paper.EtaleHypercoverProduct",
+  "declaration": "AlgebraicGeometry.isEtaleHypercover_prod",
+  "file": "lean/Sheaf/Paper/EtaleHypercoverProduct.lean",
+  "statement": "theorem isEtaleHypercover_prod (X : Scheme.{uP}) [CompactSpace X] [QuasiSeparatedSpace X] (U V : SimplicialObject X.Etale) (hU : IsEtaleHypercover U) (hV : IsEtaleHypercover V) : IsEtaleHypercover (U ⨯ V)",
+  "branch": "sheaf-dag",
+  "by": "K1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-sub-B",
+  "group": "K1",
+  "result": "pass",
+  "note": "X qcqs = CompactSpace+QuasiSeparatedSpace; U,V simplicial objects of X.Etale; hU,hV = new IsEtaleHypercover (all n incl. 0, matching object = limit over all lower simplices tested on Over X as in FiniteSplitEtaleHypercover, mu composites = simplex maps, Surjective mu.left) read against Stacks 01G5; W = U ⨯ V termwise product with prod.fst/snd as the projections; conclusion IsEtaleHypercover (U ⨯ V); new node not a duplicate of the SR hypercover or of the finite split structure; combined scratch compile clean"
+ }
 }

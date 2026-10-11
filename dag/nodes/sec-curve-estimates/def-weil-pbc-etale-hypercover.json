@@ -1,0 +1,96 @@
+{
+ "id": "def-weil-pbc-etale-hypercover",
+ "kind": "definition",
+ "title": "The all-degree etale hypercover condition without splitting",
+ "status": "split",
+ "statement": "Let $X$ be a scheme [def-weil-pbc-scheme-conventions] and $U_\\bullet$ a simplicial object of its small etale site [def-weil-pbc-etale-site], hence an augmented simplicial $X$-scheme. It is an etale hypercover if, for every $n\\geq0$, the matching scheme $M_n(U)$ (the universal scheme over $X$ with compatible projections to all lower simplices, as in [def-weil-pbc-finite-split-hypercover]) exists in the small etale site and the canonical map $U_n\\to M_n(U)$ is surjective etale. The canonical map composes with each matching projection to the corresponding simplex map. The matching universal property is tested on all schemes over $X$. In degree zero $M_0(U)=X$. No splitting or finiteness condition is imposed.",
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-finite-split-hypercover"
+ ],
+ "source": {
+  "document": "literature/stacks-project/hypercovering.tex",
+  "place": "Definition 01G5 (definition-hypercovering), specialized to representable simplicial etale X-schemes; matching-scheme clause of blueprint def-weil-pbc-finite-split-hypercover"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "etale simplicial hypercover matching objects all degrees",
+   "results": "UNAVAILABLE 0 hit(s): service unavailable: Internal Server Error",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An etale simplicial hypercover with matching maps surjective in every degree",
+   "results": "8 hits: GrothendieckTopology.OneHypercover, HOneHypercover, their homotopies and related truncated declarations; no all-degree predicate.",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "IsHypercover|EtaleHypercover|hypercover.*prod in Mathlib/CategoryTheory; IsEtaleHypercover|isEtaleHypercover_prod in Mathlib, WeilConjectures and lean/Sheaf; matching|Hypercover in lean/Sheaf/Paper; blueprint_refs.py search hypercover; rg matching.*scheme|matching schemes|etale hypercover dag/nodes",
+   "results": "Mathlib: four coproduct comments about 0- or 1-hypercovers. Source: only truncated hypercovers. Sheaf: FiniteSplitEtaleHypercover contains matching data but additionally requires a splitting and degreewise finiteness; no predicate for arbitrary simplicial objects. DAG and blueprint search locate the finite split definition and hypercover statements, no definition node for the unrestricted predicate.",
+   "date": "2026-10-11",
+   "verdict": "no existing unrestricted all-degree hypercover predicate"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-hypercover-product",
+  "date": "2026-10-11",
+  "group": "K1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-hypercover-refinement",
+   "place": "Fourth proof paragraph: product of two hypercovers, without imposing splitting on the product",
+   "via": [
+    "lem-weil-pbc-hypercover-product"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-h2",
+ "lean": {
+  "module": "Sheaf.Paper.EtaleHypercover",
+  "declaration": "AlgebraicGeometry.IsEtaleHypercover",
+  "file": "lean/Sheaf/Paper/EtaleHypercover.lean",
+  "statement": "def IsEtaleHypercover {X : Scheme.{u}} (U : SimplicialObject X.Etale) : Prop",
+  "branch": "sheaf-dag",
+  "by": "K1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-sub-B",
+  "group": "K1",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-sub-B",
+  "group": "K1",
+  "result": "pass",
+  "note": "X qcqs = CompactSpace+QuasiSeparatedSpace; U,V simplicial objects of X.Etale; hU,hV = new IsEtaleHypercover (all n incl. 0, matching object = limit over all lower simplices tested on Over X as in FiniteSplitEtaleHypercover, mu composites = simplex maps, Surjective mu.left) read against Stacks 01G5; W = U ⨯ V termwise product with prod.fst/snd as the projections; conclusion IsEtaleHypercover (U ⨯ V); new node not a duplicate of the SR hypercover or of the finite split structure; combined scratch compile clean"
+ }
+}
