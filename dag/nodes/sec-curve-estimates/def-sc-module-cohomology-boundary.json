@@ -1,0 +1,109 @@
+{
+ "id": "def-sc-module-cohomology-boundary",
+ "kind": "definition",
+ "title": "Canonical module cohomology boundary",
+ "status": "split",
+ "statement": "Let X be a ringed space and let H^q(X,-) be module cohomology [def-sc-ringed-space-module-cohomology]. For a short exact sequence S: 0 \\to A \\to B \\to C \\to 0 [def-weil-pbc-exact-sequence] and q \\ge 0, define the connecting map H^q(X,C) \\to H^{q+1}(X,A). Concretely, apply derived global sections to the canonical distinguished triangle of S in the derived category [def-weil-abstract-derived-category], take its homology-sequence connecting morphism, and transport it through the canonical single-complex/right-derived-functor comparison isomorphisms.",
+ "stmt_deps": [
+  "def-sc-ringed-space-module-cohomology",
+  "def-weil-pbc-exact-sequence",
+  "def-weil-abstract-derived-category"
+ ],
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 01DZ, equation cohomology-modules; Tag 0B8S, connecting map of the short exact sequence"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "canonical connecting morphism for right derived global sections cohomology of modules",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "canonical boundary map of short exact sequence in right derived functors",
+   "results": "[\"CategoryTheory.ShortComplex.SnakeInput.δ\", \"CategoryTheory.ShortComplex.ShortExact.δ_apply\", \"CategoryTheory.ShortComplex.ShortExact.δ_apply'\", \"CategoryTheory.ShortComplex.ShortExact.singleδ\", \"CategoryTheory.ShortComplex.SnakeInput.δ_apply\", \"CategoryTheory.ShortComplex.SnakeInput.L₁'_g\", \"CategoryTheory.ShortComplex.ShortExact.δ_eq\", \"CategoryTheory.kernelCokernelCompSequence.δ\"]",
+   "date": "2026-10-11",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "moduleCohomologyBoundary|rightDerived.*δ|boundary.*cohomology",
+   "results": "[]",
+   "date": "2026-10-11",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg moduleCohomologyBoundary|rightDerived.*δ|boundary.*cohomology Mathlib/CategoryTheory/Abelian WeilConjectures lean/Sheaf; blueprint_refs.py search module cohomology boundary; rg boundary dag/nodes",
+   "results": "No boundary definition on moduleCohomology. Upstream exists_rightDerived_δ_exact only existentially states exactness; singleδ is before deriving global sections. Existing BoundaryDerivationSquareZero states a horseshoe formula in a theorem; it does not define a canonical boundary. blueprint_refs.py: 0 matching definition nodes.",
+   "date": "2026-10-11",
+   "verdict": "no exact match"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sc-boundary-cech-local-lifts",
+  "date": "2026-10-11",
+  "group": "H1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-pic-proper-ntorsion",
+   "place": "the connecting class in the 0B8S local-lift description",
+   "via": [
+    "lem-sc-boundary-cech-local-lifts",
+    "lem-sc-boundary-derivation-square-zero",
+    "lem-sc-ample-square-zero-thickening",
+    "lem-sc-ample-on-reduction-noetherian",
+    "lem-sc-dim-one-ample-invertible",
+    "lem-sc-dim-one-quasi-projective",
+    "lem-sc-proper-dim-one-projective"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-thm-curveestimate",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ModuleCohomologyBoundary",
+  "declaration": "AlgebraicGeometry.RingedSpace.moduleCohomologyBoundary",
+  "file": "lean/Sheaf/AlgebraicGeometry/ModuleCohomologyBoundary.lean",
+  "statement": "def moduleCohomologyBoundary (X : RingedSpace.{uB}) [HasDerivedCategory.{wCB} (SheafOfModules.{uB} (moduleRings X))] [HasDerivedCategory.{wDB} (ModuleCat.{uB} ((moduleRings X).obj.obj (Opposite.op ⊤)))] (S : ShortComplex (SheafOfModules.{uB} (moduleRings X))) (hS : S.ShortExact) (q : ℕ) : (moduleCohomology X q).obj S.X₃ ⟶ (moduleCohomology X (q + 1)).obj S.X₁",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "X-83cb4",
+  "group": "H1",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "X-83cb4",
+  "group": "H1",
+  "result": "pass",
+  "note": "independent Codex review: Matched every theorem hypothesis and conclusion to the node, including square-zero kernel, cover, local-lift cocycle, canonical injective Cech comparison, and derived boundary; repaired boundary definition uses the recorded canonical triangle."
+ }
+}

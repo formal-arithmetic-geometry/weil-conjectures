@@ -23,7 +23,10 @@
   "def-pc-scheme",
   "pqf-def-cohomology",
   "def-weil-pbc-site-cech-complex",
-  "lem-sc-cech-h1-map-natural"
+  "lem-sc-cech-h1-map-natural",
+  "def-weil-pbc-comm-algebra-sheaf",
+  "def-weil-pbc-ringed-space-algebra-module",
+  "def-sc-module-cohomology-boundary"
  ],
  "proof": [
   {
@@ -131,5 +134,24 @@
    "decls": [],
    "missing": []
   }
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.BoundaryCechLocalLifts",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.boundary_cech_local_lifts",
+  "file": "lean/Sheaf/AlgebraicGeometry/BoundaryCechLocalLifts.lean",
+  "statement": "theorem boundary_cech_local_lifts (X : Scheme.{u}) [HasDerivedCategory.{wC} (SheafOfModules.{u} (moduleRings X.toRingedSpace))] [HasDerivedCategory.{wD} (ModuleCat.{u} ((moduleRings X.toRingedSpace).obj.obj (op ⊤)))] (B C : X.CommAlgebraSheaf) (p : B ⟶ C) (I : X.Modules) (j : I ⟶ B.toModule) (hzero : j ≫ (commAlgebraSheafModuleFunctor X.sheaf).map p = 0) (hshort : (ShortComplex.mk j ((commAlgebraSheafModuleFunctor X.sheaf).map p) hzero).ShortExact) (hsquare : ∀ (W : X.Opens) (a a' : I.val.obj (op W)), (@id (B.right.obj.obj (op W)) (j.val.app (op W) a)) * (@id (B.right.obj.obj (op W)) (j.val.app (op W) a')) = 0) {ι : Type u} (U : ι → X.Opens) (hcover : iSup U = ⊤) : ∃ c : ((CategoryTheory.cechComplexFunctor U).obj I.presheafModuleCat).homology 1 ⟶ (RingedSpace.moduleCohomology X.toRingedSpace 1).obj I, IsModuleCechComparison U I 1 c ∧ Function.Injective c ∧ ∀ (f : C.right.obj.obj (op ⊤)) (t : ∀ i : ι, B.right.obj.obj (op (U i))), (∀ i : ι, p.right.hom.app (op (U i)) (t i) = C.right.obj.map (homOfLE (le_top : U i ≤ ⊤)).op f) → ∃ z : ((CategoryTheory.cechComplexFunctor U).obj I.presheafModuleCat).cycles 1, (∀ x : Fin 2 → ι, j.val.app (op (∏ᶜ fun k : Fin 2 ↦ U (x k))) ((Pi.π (fun y : Fin 2 → ι ↦ I.presheafModuleCat.obj (op (∏ᶜ fun k : Fin 2 ↦ U (y k)))) x) (((CategoryTheory.cechComplexFunctor U).obj I.presheafModuleCat).iCycles 1 z)) = B.right.obj.map (Pi.π (fun k : Fin 2 ↦ U (x k)) 0).op (t (x 0)) - B.right.obj.map (Pi.π (fun k : Fin 2 ↦ U (x k)) 1).op (t (x 1))) ∧ c (((CategoryTheory.cechComplexFunctor U).obj I.presheafModuleCat).homologyπ 1 z) = RingedSpace.moduleCohomologyBoundary X.toRingedSpace (ShortComplex.mk j ((commAlgebraSheafModuleFunctor X.sheaf).map p) hzero) hshort 0 ((RingedSpace.globalSectionsFunctor X.toRingedSpace).toRightDerivedZero.app C.toModule f)",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-11",
+  "existing": false,
+  "note": "Kernel I is a module, with square-zero image in the algebra B; the quotient arrow is the recorded underlying-module functor applied to an algebra morphism. The boundary is the canonical derived-global-sections boundary. The report flags the source/local-comparison sign for independent review."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "X-83cb4",
+  "group": "H1",
+  "result": "pass",
+  "note": "independent Codex review: Matched every theorem hypothesis and conclusion to the node, including square-zero kernel, cover, local-lift cocycle, canonical injective Cech comparison, and derived boundary; repaired boundary definition uses the recorded canonical triangle."
  }
 }

@@ -5695,3 +5695,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 20:12 L: returned deliver/Q1/lem-weil-pbc-cohomology-colimit-of-sites (reviewer RETURN: (reviewer X-47889, head 4788917a2) H3: In cohomology_colimit_of_sites, replace the incomplete site-setting binders with )
 - 20:14 L: returned deliver/Q1/cor-galois-lisse-representations (reviewer RETURN: (reviewer R-sub-D, head f6404ca40) The four points of R-h1f302 are repaired (def-pod-lisse-l-adic-sheaves is untouched; )
 - 20:18 L: returned deliver/C1/lem-pc-affine-morphism-hom-out-of-perfect (reviewer RETURN: (reviewer X-2462d, head 2462d51f8) H3/H12: In AffineGlobalHomBaseChangeMap.lean, exists_globalHomPullbackComparison exis)
+- 20:19 L: merged deliver/H1/lem-sc-boundary-cech-local-lifts (stage 2; reviewer PASS; after a return; Sheaf.AlgebraicGeometry.BoundaryCechLocalLifts AlgebraicGeometry.Scheme.Modules.boundary_cech_local_lifts; new nodes: def-sc-module-cohomology-boundary)
