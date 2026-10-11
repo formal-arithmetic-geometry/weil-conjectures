@@ -1,34 +1,47 @@
 # Work queue
 
-308 items; claim with `tools/claim.py next <group> [--stage N]`.
+321 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (308)
+## Stage 2: nodes to state (321)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
-| `def-weil-pbc-closed-subset-proper-over-base` | 1 | state |
+| `def-weil-pbc-coherent-formal-module` | 1 | state |
 | `cor-galois-lisse-representations` | 1 | state |
+| `def-sc-sheaf-cohomology-functor` | 1 | state |
 | `lem-pc-chow-relative-ample` | 1 | state |
-| `lem-pc-complete-linear-system-closed` | 1 | state |
+| `lem-pc-coherent-property-devissage` | 1 | state |
+| `lem-pc-coherent-property-irreducible` | 1 | state |
 | `lem-pc-derived-tensor-transitivity` | 1 | state |
+| `lem-pc-finite-flat-proper-support-descent` | 1 | state |
 | `lem-pc-module-pullback-identity-composition` | 1 | state |
+| `lem-pc-noetherian-approximation-data` | 1 | state |
+| `lem-pc-proper-support-descent` | 1 | state |
 | `lem-sc-affine-koszul-cech-derived-comparison` | 1 | state |
 | `lem-sc-base-change-curve` | 1 | state |
 | `lem-sc-derived-mayer-vietoris-triangle` | 1 | state |
 | `lem-sc-hilb-dominating-power` | 1 | state |
 | `lem-sc-hilbert-embedded-points-gluing` | 1 | state |
-| `lem-sc-p1-serre-section-module-comparison` | 1 | state |
 | `lem-sc-picard-kunneth-qcoh` | 1 | state |
 | `lem-sc-point-tangent-separation-closed-immersion` | 1 | state |
 | `lem-weil-derived-limit-roos-complex` | 1 | state |
+| `lem-weil-pbc-closed-subset-proper-over-base-properties` | 1 | state |
+| `lem-weil-pbc-closed-subset-proper-over-base-union-preimage` | 1 | state |
+| `lem-weil-pbc-closed-subset-proper-over-base-universally-closed-image` | 1 | state |
+| `lem-weil-pbc-coherent-property-devissage-integral-subschemes` | 1 | state |
+| `lem-weil-pbc-coherent-support-union-exact-sequence` | 1 | state |
+| `lem-weil-pbc-finite-surjective-coherent-generic-support` | 1 | state |
+| `lem-weil-pbc-finite-type-module-support-closed` | 1 | state |
 | `lem-weil-pbc-geometrically-regular-descent` | 1 | state |
 | `lem-weil-pbc-horseshoe-delta-functor` | 1 | state |
+| `lem-weil-pbc-module-support-proper-over-base` | 1 | state |
 | `lem-weil-pbc-pair-henselization` | 1 | state |
 | `lem-weil-pbc-projective-morphism-chart-preimage` | 1 | state |
 | `lem-weil-pbc-projective-space-twisting-sheaf-charts` | 1 | state |
+| `lem-weil-pbc-pushforward-coherent-on-open` | 1 | state |
 | `lem-weil-pbc-relative-global-complete-intersection-base-change` | 1 | state |
 | `lem-weil-pbc-relative-spec-base-change` | 1 | state |
 | `lem-weil-pbc-residue-field-pd-le-krull-dimension` | 1 | state |
@@ -36,11 +49,10 @@
 | `lem-weil-pbc-ringed-space-colimit-restriction` | 1 | state |
 | `lem-weil-pbc-ringed-space-module-exactness-local-lifting` | 1 | state |
 | `lem-weil-pbc-ringed-space-open-restriction-adjunction` | 1 | state |
-| `lem-weil-pbc-root-lifting-etale-retraction` | 1 | state |
 | `lem-weil-pbc-schanuel` | 1 | state |
 | `lem-weil-pbc-scheme-clopen-idempotent` | 1 | state |
-| `lem-weil-pbc-scheme-modules-enough-injectives` | 1 | state |
 | `lem-weil-pbc-scheme-modules-functorial-injective-embeddings` | 1 | state |
+| `lem-weil-pbc-scheme-theoretic-support` | 1 | state |
 | `lem-weil-pbc-scheme-theoretic-union` | 1 | state |
 | `lem-weil-pbc-sections-annihilated-by-ideal` | 1 | state |
 | `lem-weil-pbc-sections-base-field-extension` | 1 | state |
@@ -56,7 +68,6 @@
 | `lem-weil-pbc-separably-generated-differentials-dimension` | 1 | state |
 | `lem-weil-pbc-separably-generated-separable` | 1 | state |
 | `lem-weil-pbc-separably-generated-tensor-reduced` | 1 | state |
-| `lem-weil-pbc-separate-image-closed-from-closed` | 1 | state |
 | `lem-weil-pbc-separated-affine-cover-criterion` | 1 | state |
 | `lem-weil-pbc-separated-lqf-base-change` | 1 | state |
 | `lem-weil-pbc-separating-transcendence-basis-finite-subextension` | 1 | state |
@@ -153,6 +164,7 @@
 | `lem-weil-pbc-strictly-standard-base-change` | 1 | state |
 | `lem-weil-pbc-strictly-standard-localization-smooth` | 1 | state |
 | `lem-weil-pbc-subcategory-right-resolution-05T6` | 1 | state |
+| `lem-weil-pbc-support-pullback-finite-type` | 1 | state |
 | `lem-weil-pbc-surjective-universally-closed-affine-target` | 1 | state |
 | `lem-weil-pbc-surjective-universally-closed-separated` | 1 | state |
 | `lem-weil-pbc-symmetric-algebra-base-change` | 1 | state |
@@ -240,6 +252,7 @@
 | `prop-pur-kinjective-resolutions-exist` | 1 | state |
 | `prop-weil-pbc-composition-stability` | 1 | state |
 | `prop-weil-pbc-formal-glueing-equivalence` | 1 | state |
+| `prop-weil-pbc-grothendieck-existence` | 1 | state |
 | `prop-weil-pbc-inverse-image-exact` | 1 | state |
 | `prop-weil-pbc-inverse-image-modules-exact` | 1 | state |
 | `prop-weil-pbc-kinjective-resolutions-exist` | 1 | state |
@@ -318,7 +331,7 @@
 | `lem-pc-essentially-constant-pro-hom-colimit` | 4 | state |
 | `lem-pur-essential-constant-pro-criterion-05py` | 4 | state |
 
-Not open yet: 40 nodes that wait for stage 1, 497 nodes that wait for a statement dependency.
+Not open yet: 40 nodes that wait for stage 1, 478 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
