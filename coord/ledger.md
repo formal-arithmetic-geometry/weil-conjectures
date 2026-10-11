@@ -4717,3 +4717,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 13:09 L: merged deliver/G1/lem-pc-flat-complex-derived-pullback (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.FlatComplexDerivedPullback AlgebraicGeometry.flatComplexDerivedPullback)
 - 13:09 L: merged deliver/K1/lem-sc-derived-open-mayer-vietoris-ses (stage 2; reviewer PASS; first push; Sheaf.Algebra.Homology.OpenExtensionMayerVietorisShortExact AlgebraicGeometry.open_extension_mayer_vietoris_shortExact)
 - 13:09 L: merged deliver/E1/lem-weil-pbc-projective-dimension-ext-characterization (stage 2; reviewer PASS; first push; Sheaf.RingTheory.ProjectiveResolutionExtCharacterization ModuleCat.hasProjectiveResolutionLE_iff_ext_vanishing)
+- 13:11 L: merged deliver/J1/lem-weil-pbc-principal-maximal-dim-one-regular (stage 2; reviewer PASS; first push; Sheaf.RingTheory.PrincipalMaximalDimOneRegular Ring.isRegularLocalRing_of_principal_maximalIdeal)
