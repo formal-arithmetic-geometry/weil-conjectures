@@ -107,7 +107,8 @@ lemma sheafComposeAdjunction_counit_app_hom (P : Sheaf J B) :
 
 /-- A morphism `x : F a ⟶ b` factors as `F (η a) ≫ F (G x) ≫ ε b` for an adjunction `F ⊣ G`. -/
 lemma Adjunction.map_unit_comp_map_map_comp_counit {F : A ⥤ B} {G : B ⥤ A} (adj : F ⊣ G) {a : A}
-    {b : B} (x : F.obj a ⟶ b) : F.map (adj.unit.app a) ≫ F.map (G.map x) ≫ adj.counit.app b = x := by
+    {b : B} (x : F.obj a ⟶ b) :
+    F.map (adj.unit.app a) ≫ F.map (G.map x) ≫ adj.counit.app b = x := by
   simp
 
 end CategoryTheory
@@ -171,8 +172,7 @@ instance isIso_upperStarForget₂Comparison
     erw [Adjunction.homEquiv_counit]
     simp only [ObjectProperty.FullSubcategory.comp_hom, NatTrans.comp_app, sheafCompose_map_hom,
       Functor.whiskerRight_app, Functor.map_comp, Category.assoc,
-      sheafComposeAdjunction_counit_app_hom, Functor.whiskerLeft_app,
-      sheafComposeAdjunction_unit_app_hom]
+      sheafComposeAdjunction_counit_app_hom, Functor.whiskerLeft_app]
     congr 1
     exact ((ModuleCat.forget₂AddCommGrpAdjunction Λ).map_unit_comp_map_map_comp_counit _).symm
   have : (fun g ↦ upperStarForget₂Comparison Λ f G ≫ g) =
@@ -190,7 +190,11 @@ theorem isIso_globalSectionsUpperStarMap_iff_forget₂
         ((sheafCompose _ (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj G)) := by
   simp only [globalSectionsUpperStarMap, isIso_comp_left_iff, ← Category.assoc,
     isIso_comp_right_iff]
-  trace_state
-  sorry
+  rw [← isIso_comp_right_iff _ (((sheafSections _ _).obj (Opposite.op (⊤_ Y.Etale))).map
+      ((f)_*[AddCommGrpCat.{u + 1}].map (upperStarForget₂Comparison Λ f G))), ← Functor.map_comp,
+    unit_comp_lowerStar_map_upperStarForget₂Comparison]
+  exact (isIso_iff_of_reflects_iso (((sheafSections _ _).obj (Opposite.op (⊤_ Y.Etale))).map
+    ((upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) f).unit.app G))
+    (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).symm
 
 end AlgebraicGeometry.Etale
