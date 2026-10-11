@@ -228,5 +228,24 @@
   "by": "L",
   "result": "accepted",
   "note": "Split reviewed: 8 steps along Limits 01ZO with the affine reduction written out (affine at a stage k by 01ZN; re-basing at k by pasting; finitely many affine pieces; the base over W_k as Spec of a colimit; pieces as spectra; the finite hypothesis over S; Algebra 07RG and persistence to larger indices; finite is local on the target). Correct; new: 01ZN and 07RG unsplit, 01WI Mathlib leaf verified."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.DescendFinite",
+  "declaration": "AlgebraicGeometry.exists_isFinite_baseChange_stage",
+  "file": "lean/Sheaf/AlgebraicGeometry/DescendFinite.lean",
+  "statement": "theorem exists_isFinite_baseChange_stage {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] (D : Iᵒᵖ ⥤ Scheme.{u}) [∀ {i j : Iᵒᵖ} (g : i ⟶ j), IsAffineHom (D.map g)] (c : Cone D) (hc : IsLimit c) (i₀ : I) [CompactSpace (D.obj (op i₀))] [QuasiSeparatedSpace (D.obj (op i₀))] (X₀ Y₀ : Over (D.obj (op i₀))) (f₀ : X₀ ⟶ Y₀) [CompactSpace X₀.left] [QuasiSeparatedSpace X₀.left] [CompactSpace Y₀.left] [QuasiSeparatedSpace Y₀.left] [LocallyOfFiniteType f₀.left] (hfinite : IsFinite (((Over.pullback (c.π.app (op i₀))).map f₀).left)) : ∃ (i : I) (hi : i₀ ≤ i), IsFinite (((Over.pullback (D.map (homOfLE hi).op)).map f₀).left)",
+  "branch": "sheaf-dag",
+  "by": "K1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-dfi1147"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-dfi1147",
+  "group": "K1",
+  "result": "fix",
+  "note": "I : Type u with Scheme.{u} (index universe OK), directed preorder, affine transitions, Cone+IsLimit, i0, qcqs S0/X0/Y0, f0 over S0, LocallyOfFiniteType f0, IsFinite of the limit base change, exists i >= i0 IsFinite; FIX: pullback.map x0 y0 h0 form rewritten to the Over.pullback form of the landed siblings (K1 d68be4daf, J1 bfbc053b5, M1 658c5d95f)"
  }
 }
