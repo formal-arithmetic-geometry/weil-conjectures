@@ -264,5 +264,23 @@
   "item": "lem-weil-pbc-reduced-induced-closed-subscheme",
   "worker": "stage1",
   "summary": "Split along the proof of Stacks Schemes Lemma 01J3 (tags 01J3, 01J2, 01J4, 00E0, 01J1, 01HM, 01HN, 01HO, 01HP, 01IN, 01IH, 01I3, 01HV checked against tags/tags). Nine steps: I_T is a sheaf of ideals (pointwise condition; elementary); on an affine open Spec R, T cap U = V(I) for a unique radical I (Zariski topology, zero-locus/radical node); I_T(U) = I via 'f(t)=0 iff f in p_t'; I_T(D(g)) = I_g, written out (Stacks says 'by the same reasoning'); I_T|_U = I~ by agreement on standard opens, hence quasi-coherent; the closed subscheme T_red cut out by I_T, locally Spec(R/I), with image T; reducedness by 01J2 (affine-scheme-reduced-iff) and locality of reducedness; for reduced Z' with image T the ideal of Z' is radical with the same zero locus, so equals I_T on affines and globally; equal ideal sheaves give a unique isomorphism over X. New nodes (all Mathlib leaves): lem-weil-pbc-affine-open-section-vanishing-prime (f(x)=0 iff f in p_x; basic opens of an affine open are affine with ring R_f), lem-weil-pbc-quasi-coherent-ideal-closed-subscheme (01HM/01HN/01IN: closed subscheme of a quasi-coherent ideal, locally Spec(R/I); IdealSheafData.subscheme), lem-weil-pbc-closed-immersions-equal-ideal-isomorphic (01HO: IsClosedImmersion.lift/isIso_lift). Statement and stmt_deps kept. No Mathlib declaration states the item (reducedness of the vanishing-ideal subscheme is absent from Mathlib); the source repository has AlgebraicGeometry.Scheme.IdealSheafData.isReduced_subscheme_vanishingIdeal (WeilConjectures/Mathlib/AlgebraicGeometry/IdealSheaf/Subscheme.lean:143, reaches no sorry) as a Lean candidate for clause (2), not attached."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ReducedInducedClosedSubscheme",
+  "declaration": "AlgebraicGeometry.Scheme.IdealSheafData.reduced_induced_closed_subscheme",
+  "file": "lean/Sheaf/AlgebraicGeometry/ReducedInducedClosedSubscheme.lean",
+  "statement": "theorem reduced_induced_closed_subscheme (X : Scheme.{u}) (T : TopologicalSpace.Closeds X) : (∀ (U : X.Opens) (f : Γ(X, U)), f ∈ (vanishingIdeal T).idealOfOpens U ↔ ∀ (t : X) (ht : t ∈ U), t ∈ T → X.evaluation U t ht f = 0) ∧ (∀ U : X.affineOpens, (∃! I : Ideal Γ(X, U), I.IsRadical ∧ PrimeSpectrum.zeroLocus (I : Set Γ(X, U)) = U.2.fromSpec ⁻¹' (T : Set X)) ∧ (vanishingIdeal T).ideal U = PrimeSpectrum.vanishingIdeal (U.2.fromSpec ⁻¹' (T : Set X)) ∧ (∀ g : Γ(X, U), ((vanishingIdeal T).ideal U).map (X.presheaf.map (homOfLE (X.basicOpen_le g)).op).hom = (vanishingIdeal T).ideal (X.affineBasicOpen g))) ∧ IsClosedImmersion (vanishingIdeal T).subschemeι ∧ IsReduced (vanishingIdeal T).subscheme ∧ (vanishingIdeal T).subschemeι.ker = vanishingIdeal T ∧ Set.range (vanishingIdeal T).subschemeι = (T : Set X) ∧ (∀ U : X.affineOpens, IsPullback ((vanishingIdeal T).subschemeCover.f U) (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk ((vanishingIdeal T).ideal U)))) (vanishingIdeal T).subschemeι U.2.fromSpec) ∧ (∀ (Z' : Scheme.{u}) (i' : Z' ⟶ X) [IsClosedImmersion i'] [IsReduced Z'], Set.range i' = (T : Set X) → i'.ker = vanishingIdeal T ∧ ∃! φ : Z' ≅ (vanishingIdeal T).subscheme, φ.hom ≫ (vanishingIdeal T).subschemeι = i')",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-ric1348",
+  "group": "H1",
+  "result": "pass",
+  "note": "X Scheme.{u}, T Closeds X; I_T on every open = idealOfOpens (ker of subschemeι.app, STATE QC IDEAL line) iff evaluation in residue fields vanishes on T∩U; affine: unique radical I with zeroLocus = fromSpec⁻¹'T, ideal U = vanishingIdeal of it, basic-open localization; IsClosedImmersion, IsReduced, ker, range = T, IsPullback with Spec(R/I)→Spec R over fromSpec; clause 3 over Z' : Scheme.{u} with [IsClosedImmersion i'] [IsReduced Z'], range = T ⇒ i'.ker = vanishingIdeal T ∧ ∃! iso over X; single universe, no hollow hyps, no let/show, no duplicate notion"
  }
 }
