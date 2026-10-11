@@ -54,8 +54,7 @@ variable {C : Type u} [Category.{v} C] [Preadditive C] [HasZeroObject C] [HasShi
 section Truncation
 
 omit [HasZeroObject C] [Pretriangulated C] in
-/-- A morphism `X ⟶ Y` with `X ≤ n` and `Y⟦1⟧`-shifted... a morphism of objects which becomes zero
-after a shift is zero. -/
+/-- A morphism which becomes zero after a shift is zero. -/
 lemma eq_zero_of_shift_map_eq_zero {X Y : C} (f : X ⟶ Y) (a : ℤ) (h : f⟦a⟧' = 0) : f = 0 :=
   (shiftFunctor C a).map_injective (by rw [h, Functor.map_zero])
 

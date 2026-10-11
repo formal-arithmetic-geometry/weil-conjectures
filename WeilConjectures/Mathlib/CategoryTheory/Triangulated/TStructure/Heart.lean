@@ -14,14 +14,13 @@ public import Mathlib.CategoryTheory.Limits.Constructions.FiniteProductsOfBinary
 /-!
 # The heart of a t-structure is abelian
 
-Let `t` be a t-structure on a triangulated category `C`. We show that the subcategories
-`t.le n` and `t.ge n` are closed under extensions, and that the heart of `t` is an abelian
-category ([BBD, Théorème 1.3.6]). Consequently the heart is idempotent complete.
+Let `t` be a t-structure on a triangulated category `C`. Using that the subcategories `t.le n`
+and `t.ge n` are closed under extensions (`CategoryTheory.Triangulated.TStructure.isLE₂` and
+`CategoryTheory.Triangulated.TStructure.isGE₂`, from Mathlib), we show that the heart of `t` is
+an abelian category ([BBD, Théorème 1.3.6]). Consequently the heart is idempotent complete.
 
 ## Main statements
 
-- `CategoryTheory.Triangulated.TStructure.isLE₂`, `CategoryTheory.Triangulated.TStructure.isGE₂`:
-  the subcategories `t.le n` and `t.ge n` are closed under extensions.
 - `CategoryTheory.Triangulated.TStructure.abelianHeart`: the heart is abelian.
 - `CategoryTheory.Triangulated.TStructure.isIdempotentComplete_heart`: the heart is idempotent
   complete.

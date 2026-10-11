@@ -73,7 +73,19 @@ omit [IsTriangulated C] in
 /-- The core of the inductive step: an idempotent `p` of the middle term of a distinguished
 triangle `T`, compatible with idempotents `pA`, `pB` of the outer terms, splits if `pA` and `pB`
 split through the outer terms of a distinguished triangle `T₁` whose connecting morphism is the
-restriction of that of `T`. -/
+restriction of that of `T`:
+
+```
+  T₁.obj₁ ──T₁.mor₁──▶ T₁.obj₂ ──T₁.mor₂──▶ T₁.obj₃ ──T₁.mor₃──▶ T₁.obj₁⟦1⟧
+   │  ▲                                       │  ▲
+ iA│  │eA                                   iB│  │eB
+   ▼  │                                       ▼  │
+  T.obj₁ ──T.mor₁───▶ T.obj₂ ───T.mor₂───▶ T.obj₃ ───T.mor₃───▶ T.obj₁⟦1⟧
+   ⟲ pA = eA ≫ iA        ⟲ p                 ⟲ pB = eB ≫ iB
+```
+
+with `iA ≫ eA = 𝟙` and `iB ≫ eB = 𝟙`, `p` compatible with `pA` and `pB`, and
+`T₁.mor₃ = iB ≫ T.mor₃ ≫ eA⟦1⟧'`. -/
 lemma isSplit_of_distTriang_aux (T T₁ : Triangle C) (hT : T ∈ distTriang C)
     (hT₁ : T₁ ∈ distTriang C) {p : T.obj₂ ⟶ T.obj₂} (hp : p ≫ p = p)
     {pA : T.obj₁ ⟶ T.obj₁} {pB : T.obj₃ ⟶ T.obj₃}
