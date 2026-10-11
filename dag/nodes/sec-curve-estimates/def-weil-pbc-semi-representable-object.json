@@ -93,5 +93,34 @@
   "summary": "Definition split against hypercovering.tex 01G0, 01G2, 01G3, 01G5 and simplicial.tex 016A, 0180, 0AMA, 0183, 0186 (tags checked in tags/tags). Statement kept in substance; every notion now cites a node: the category is the new Mathlib leaf def-weil-pbc-formal-coproduct (FormalCoproduct, incl, inclHomEquiv for T-points) applied to X_Et, its finite limits the leaf lem-weil-pbc-semi-representable-finite-limits; simplicial objects the new leaf def-weil-pbc-simplicial-object (SimplicialObject, delta, sigma) over def-weil-pbc-simplicial-set; coverings use the covering families of def-weil-pbc-etale-site. The claims the old text made inside the definition were moved out: existence and uniqueness of the matching object, its description by tuples of faces, and the existence of the matching morphism (which needs the simplicial identity d_{j-1}d_i = d_id_j) are the new generic statement lem-weil-pbc-simplicial-matching-object; the agreement with Stacks' (cosk_{n-1}sk_{n-1}K)_n of 01G5 (0183 + 0186) is the new statement lem-weil-pbc-matching-object-coskeleton, with the coskeleton the new leaf def-weil-pbc-simplicial-coskeleton (Mathlib's Truncated.cosk as right Kan extension, coskAdj). For the citer lem-weil-pbc-hypercover-refinement (step 5 applies the SR(X) lifting lemma to scheme hypercovers) the new statement lem-weil-pbc-sr-matching-object-one-member says that a simplicial etale X-scheme gives a simplicial object of one-member families whose SR(X) matching objects are the matching schemes, so the two hypercover notions agree; nothing cites it yet (flagged unreachable). No sorry-free slopmaster2 declaration states any of these (grep of WeilConjectures and Comparator for the id, semi-representable, FormalCoproduct, matching, hypercover: only a Cech use of FormalCoproduct and 0-hypercovers).",
   "blueprint": "The item serves the blueprint proof of lem-weil-pbc-hypercover-refinement, fourth paragraph ('Previously chosen faces prescribe compatible boundaries; the matching covers of U lift those boundaries after finite refinement'): clauses (1)-(3) give the objects in which the boundaries are lifted and what 'cover' means, clause (4) the 'matching' objects (and through lem-weil-pbc-matching-object-coskeleton their Stacks form), clause (5) the hypercovers whose matching maps are covers; lem-weil-pbc-sr-matching-object-one-member connects this to the matching schemes M_n(U) of def-weil-pbc-finite-split-hypercover used in that paragraph and in the second paragraph ('choose a finite cover of M_n(U)')."
  },
- "reviewed": "2026-10-10 L: definition split: SR(X) as the formal-coproduct category (Mathlib leaf), simplicial objects and coskeleta (leaves), the matching object and the comparison with cosk sk as statement nodes, the bridge to hypercovers of single schemes as a node; 6 new nodes"
+ "reviewed": "2026-10-10 L: definition split: SR(X) as the formal-coproduct category (Mathlib leaf), simplicial objects and coskeleta (leaves), the matching object and the comparison with cosk sk as statement nodes, the bridge to hypercovers of single schemes as a node; 6 new nodes",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SemiRepresentableObject",
+  "declaration": "AlgebraicGeometry.Scheme.IsSemiRepresentableHypercover",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.semiRepresentableHasFiniteLimits",
+   "AlgebraicGeometry.Scheme.semiRepresentablePoints",
+   "AlgebraicGeometry.Scheme.semiRepresentablePointsMap",
+   "AlgebraicGeometry.Scheme.IsSemiRepresentableCovering",
+   "AlgebraicGeometry.Scheme.semiRepresentableMatchingObject",
+   "AlgebraicGeometry.Scheme.semiRepresentableMatchingMap",
+   "AlgebraicGeometry.Scheme.IsSemiRepresentableHypercover"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/SemiRepresentableObject.lean",
+  "statement": "def IsSemiRepresentableHypercover {X : Scheme.{u}} (K : SimplicialObject (FormalCoproduct.{w} X.Etale)) : Prop",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-11",
+  "existing": false,
+  "note": "FormalCoproduct X.Etale is the category already defined by the formal-coproduct dependency. All clauses are rendered by the listed declarations together with the recorded matching-object and coskeleton comparison theorems; no duplicate category or simplicial-object definition.",
+  "fixed_by": "R-sro"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-sro",
+  "group": "C1",
+  "result": "fix",
+  "note": "SR(X)=Mathlib FormalCoproduct.{w} X.Etale; covering = per-target-index ofArrows sieve in smallEtaleTopology; T-points = Hom from incl T; M_0={id_X}, M_1=prod of two K_0, M_{n+2}=multiequalizer of recorded matchingBoundaryIndex; hypercover = all-degree covering matching maps; FIX: matching data no longer Classical.choose of sorried theorems, module sorry-free"
+ }
 }
