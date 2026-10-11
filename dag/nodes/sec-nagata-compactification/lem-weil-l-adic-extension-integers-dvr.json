@@ -139,5 +139,23 @@
   "group": "J1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-led2842 (reviewer sub-agent of L); spot-checked: Read LocallyCompact.lean:350-357 (properSpace_iff_..._finite_residueField, Valued K with RankOne; one-line specialization to the normed ultrametric field E) and FiniteDimension.lean:553-556 (FiniteDimensional.proper, Q_l locally compact, NormedSpace from |a x|=|a|_l|x|_E): both leaves exact. Steps 3-4: ring/unit/fraction-field elementary from ultrametric inequality; maximal value, uniformizer characterization and unique u*varpi^m follow from the cited factorization node (DVR is Noetherian) and |u|=1, |varpi|<1. Duplicates: grepped dag/nodes for ProperSpace / finite residue field; lem-weil-valued-dvr-finite-quotients is downstream (quotients), not a duplicate; no existing properness or proper-DVR node. No fault beyond the Second reading. FIX more, RETURN less: none needed."
+ },
+ "lean": {
+  "module": "Sheaf.NumberTheory.Padics.ExtensionIntegersDvr",
+  "declaration": "Padic.extension_integers_dvr",
+  "file": "lean/Sheaf/NumberTheory/Padics/ExtensionIntegersDvr.lean",
+  "statement": "theorem extension_integers_dvr (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (abv : AbsoluteValue E ℝ) (h_ext : ∀ a : ℚ_[l], abv (algebraMap ℚ_[l] E a) = ‖a‖) : ∃ O : Subring E, ∃ m : Ideal O, (∀ x : E, x ∈ O ↔ abv x ≤ 1) ∧ (∀ x : O, x ∈ m ↔ abv (x : E) < 1) ∧ (∀ x : O, IsUnit x ↔ abv (x : E) = 1) ∧ IsLocalRing O ∧ m.IsMaximal ∧ (∀ J : Ideal O, J.IsMaximal → J = m) ∧ IsFractionRing O E ∧ IsDiscreteValuationRing O ∧ IsPrincipalIdealRing O ∧ m ≠ ⊥ ∧ (∀ J : Ideal O, J.IsPrime ∧ J ≠ ⊥ ↔ J = m) ∧ Finite (O ⧸ m) ∧ (∃ r : ℝ, (∃ y : O, y ∈ m ∧ y ≠ 0 ∧ abv (y : E) = r) ∧ (∀ y : O, y ∈ m → y ≠ 0 → abv (y : E) ≤ r) ∧ (∀ π : O, Ideal.span ({π} : Set O) = m ↔ π ≠ 0 ∧ abv (π : E) = r)) ∧ (∃ π : O, Ideal.span ({π} : Set O) = m) ∧ (∀ π π' : O, Ideal.span ({π} : Set O) = m → Ideal.span ({π'} : Set O) = m → ∃ v : Oˣ, π' = (v : O) * π) ∧ (∀ π : O, Ideal.span ({π} : Set O) = m → ∀ x : Eˣ, ∃! p : Oˣ × ℤ, (x : E) = ((p.1 : O) : E) * (π : E) ^ p.2)",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-led1319",
+  "group": "C1",
+  "result": "pass",
+  "note": "l:ℕ [Fact l.Prime], ℚ_[l], [Algebra ℚ_[l] E] [FiniteDimensional], abv:AbsoluteValue E ℝ with h_ext = ‖·‖ (padicNormE); O/m existential with carriers abv≤1 / abv<1 (exact node sets, no private def); clause1 units/local/unique max/IsFractionRing; clause2 IsDVR+PID+m≠⊥+unique nonzero prime; clause3 Finite (O⧸m); clause4 attained max r, span{π}=m ↔ π≠0∧abv π=r, existence, unit association; clause5 ∃! (Oˣ×ℤ) zpow in E for fixed π; no landed ℚ_[l] Lean to keep consistent with; node diff only adds lean"
  }
 }
