@@ -6,7 +6,8 @@
  "stmt_deps": [
   "def-sc-p1-standard",
   "def-weil-pbc-proj-twisting-sheaf",
-  "def-sc-invertible-module"
+  "def-sc-invertible-module",
+  "def-weil-pbc-ample-invertible-module"
  ],
  "source": {
   "document": "literature/stacks-project/constructions.tex",
@@ -136,5 +137,24 @@
   "group": "C1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-ptm1745 (reviewer sub-agent of L); spot-checked: FIX more, RETURN less: C4 x3 repaired. Step 1 cited lem-weil-pbc-projective-space-twisting-sheaf-charts, stated only over Z (no base Spec k); step 2 cited lem-pc-twist-tensor, whose O(d) is the glued module of def-pc-projective-space-twist, identified with S(d)~ only for A=Z, d=1 (lem-weil-pbc-projective-space-twist-glued-identification), so not the item's mu_{n,m}; step 3 cited lem-weil-pbc-projective-space-standard-charts, about S x P^n_Z with rho^*O(1), not Proj k[x0,x1] with S(1)~. Repair: proof rewritten as the Stacks 01MS/01MU/01MV chart computation in three elementary steps: (S_f)_n free on x_i^n over D_+(x_i) from def-weil-pbc-proj-twisting-sheaf (2); mu basis-to-basis; dual via mu_{1,-1}; non-vanishing via x_i=(x_i/x_j)x_j and the basic-open clause of lem-weil-pbc-proj-polynomial-twist-chart (A=k, m=1; declared tool use, functions only). Three old tool uses dropped. Mathlib: existing searches (leanfinder, grep) found no twisting sheaves; no new nodes.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProjectiveLineTwistMultiplication",
+  "declaration": "AlgebraicGeometry.projectiveLine_twist_multiplication",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProjectiveLineTwistMultiplication.lean",
+  "statement": "theorem projectiveLine_twist_multiplication (k : Type u) [Field k] : (Proj.twist (MvPolynomial.homogeneousSubmodule (Fin 2) k) 1).IsInvertible ∧ ∃ μ : ∀ n m : ℤ, Proj.twist (MvPolynomial.homogeneousSubmodule (Fin 2) k) n ⊗ Proj.twist (MvPolynomial.homogeneousSubmodule (Fin 2) k) m ⟶ Proj.twist (MvPolynomial.homogeneousSubmodule (Fin 2) k) (n + m), (∀ n m : ℤ, IsIso (μ n m)) ∧ (∀ (n m : ℤ) (U : (Proj (MvPolynomial.homogeneousSubmodule (Fin 2) k)).Opens) (s : Γ(Proj.twist (MvPolynomial.homogeneousSubmodule (Fin 2) k) n, U)) (t : Γ(Proj.twist (MvPolynomial.homogeneousSubmodule (Fin 2) k) m, U)) (x : U), (((μ n m).app U (tmulSection s t)).1 x : Localization.AtPrime x.1.asHomogeneousIdeal.toIdeal) = (s.1 x : Localization.AtPrime x.1.asHomogeneousIdeal.toIdeal) * (t.1 x)) ∧ (∃ (ePos : ∀ a : ℕ, (Proj.twist (MvPolynomial.homogeneousSubmodule (Fin 2) k) 1).tensorPow a ≅ Proj.twist (MvPolynomial.homogeneousSubmodule (Fin 2) k) (a : ℤ)) (eNeg : ∀ a : ℕ, (dual (Proj.twist (MvPolynomial.homogeneousSubmodule (Fin 2) k) 1)).tensorPow a ≅ Proj.twist (MvPolynomial.homogeneousSubmodule (Fin 2) k) (-(a : ℤ))), (ePos 0).hom = Proj.unitToTwist (𝒜 := MvPolynomial.homogeneousSubmodule (Fin 2) k) (SetLike.GradedOne.one_mem (A := MvPolynomial.homogeneousSubmodule (Fin 2) k)) ≫ eqToHom (by congr 1) ∧ ePos 0 = eNeg 0 ∧ (∀ (a : ℕ) (i : Fin 2), (ρ_ _).inv ≫ (Proj.twist (MvPolynomial.homogeneousSubmodule (Fin 2) k) 1).tensorPow a ◁ Proj.unitToTwist (𝒜 := MvPolynomial.homogeneousSubmodule (Fin 2) k) (MvPolynomial.X_mem_homogeneousSubmodule_one k i) ≫ (ePos a).hom ▷ _ ≫ μ (a : ℤ) 1 = (ρ_ _).inv ≫ (Proj.twist (MvPolynomial.homogeneousSubmodule (Fin 2) k) 1).tensorPow a ◁ Proj.unitToTwist (𝒜 := MvPolynomial.homogeneousSubmodule (Fin 2) k) (MvPolynomial.X_mem_homogeneousSubmodule_one k i) ≫ (β_ _ _).hom ≫ (ePos (a + 1)).hom ≫ eqToHom (by congr 1)) ∧ (∀ (a : ℕ) (i : Fin 2), (ρ_ _).inv ≫ (dual (Proj.twist (MvPolynomial.homogeneousSubmodule (Fin 2) k) 1)).tensorPow (a + 1) ◁ Proj.unitToTwist (𝒜 := MvPolynomial.homogeneousSubmodule (Fin 2) k) (MvPolynomial.X_mem_homogeneousSubmodule_one k i) ≫ (eNeg (a + 1)).hom ▷ _ ≫ μ (-((a + 1 : ℕ) : ℤ)) 1 ≫ eqToHom (by congr 1; omega) = (ρ_ _).inv ≫ (dual (Proj.twist (MvPolynomial.homogeneousSubmodule (Fin 2) k) 1)).tensorPow (a + 1) ◁ Proj.unitToTwist (𝒜 := MvPolynomial.homogeneousSubmodule (Fin 2) k) (MvPolynomial.X_mem_homogeneousSubmodule_one k i) ≫ (β_ _ _).hom ≫ (α_ (Proj.twist (MvPolynomial.homogeneousSubmodule (Fin 2) k) 1) (dual (Proj.twist (MvPolynomial.homogeneousSubmodule (Fin 2) k) 1)) ((dual (Proj.twist (MvPolynomial.homogeneousSubmodule (Fin 2) k) 1)).tensorPow a)).inv ≫ dualEvaluation (Proj.twist (MvPolynomial.homogeneousSubmodule (Fin 2) k) 1) ▷ (dual (Proj.twist (MvPolynomial.homogeneousSubmodule (Fin 2) k) 1)).tensorPow a ≫ (λ_ _).hom ≫ (eNeg a).hom)) ∧ (∀ i : Fin 2, nonvanishingLocus (Proj.twist (MvPolynomial.homogeneousSubmodule (Fin 2) k) 1) (Scheme.Modules.Hom.app (Proj.unitToTwist (𝒜 := MvPolynomial.homogeneousSubmodule (Fin 2) k) (MvPolynomial.X_mem_homogeneousSubmodule_one k i)) ⊤ (1 : Γ(Proj (MvPolynomial.homogeneousSubmodule (Fin 2) k), ⊤))) = (Proj.basicOpen (MvPolynomial.homogeneousSubmodule (Fin 2) k) (MvPolynomial.X i) : Set (Proj (MvPolynomial.homogeneousSubmodule (Fin 2) k))))",
+  "branch": "sheaf-dag",
+  "by": "P1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-ptm"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-ptm",
+  "group": "P1",
+  "result": "fix",
+  "note": "field k, S=k[x0,x1] homogeneousSubmodule grading, raw Proj per node; O(n)=Proj.twist; O(1) IsInvertible; mu tied by the tmulSection pointwise-product formula (determines it), IsIso; ePos/eNeg were untied up to a global unit (only the successor squares and ePos 0 = eNeg 0 constrained them) -> added (ePos 0).hom = Proj.unitToTwist(1) >> eqToHom, which with the squares (x0,x1 generate O(1); t->(t x0,t x1) mono) fixes all of them; G-version via tensorLeft; nonvanishingLocus of unitToTwist x_i at 1 = basicOpen X_i (STATE NON-VANISHING LOCUS); stmt_deps += def-weil-pbc-ample-invertible-module justified (records nonvanishingLocus), check_dag no new faults/cycles; no dispute, no let/notation/inline instances"
  }
 }
