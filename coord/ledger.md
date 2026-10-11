@@ -4132,3 +4132,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 10:00 L: merged deliver/C1/lem-weil-pbc-etale-localize-upstairs (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.EtaleLocalizeUpstairs AlgebraicGeometry.exists_etale_localization_of_prime_mem)
 - 10:00 L: merged deliver/E1/lem-weil-pbc-direct-image-split-cover-product (stage 2; reviewer PASS; first push; Sheaf.Paper.DirectImageSplitCoverProduct AlgebraicGeometry.directImage_splitCover_product)
 - 10:01 L: merged deliver/J1/lem-weil-pbc-etale-local-finite-multiple-points-elementary (stage 2; reviewer FIX; first push; Sheaf.AlgebraicGeometry.EtaleLocalFiniteMultiplePointsElementary AlgebraicGeometry.exists_etale_local_finite_multiple_points_elementary)
+- 10:01 L: merged deliver/C1/lem-weil-pbc-etale-residue-polynomial-lift (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.EtaleResiduePolynomialLift AlgebraicGeometry.residue_polynomial_lift)

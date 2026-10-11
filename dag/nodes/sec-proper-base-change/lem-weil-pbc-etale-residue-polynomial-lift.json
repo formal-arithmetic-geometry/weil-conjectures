@@ -163,5 +163,23 @@
   "by": "L",
   "result": "accepted",
   "note": "4 elementary steps writing out Stacks 00UD's 'verification omitted': minimal polynomial g of alpha; common denominator c of its coefficients with explicit lifts r_i; gamma^d g(T/gamma) is the minimal polynomial of c alpha; the monic lift f. No new nodes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.EtaleResiduePolynomialLift",
+  "declaration": "AlgebraicGeometry.residue_polynomial_lift",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleResiduePolynomialLift.lean",
+  "statement": "theorem residue_polynomial_lift (R : Type u) [CommRing R] (p : Ideal R) [p.IsPrime] (L : Type v) [Field L] [Algebra p.ResidueField L] [Module.Finite p.ResidueField L] (hsep : Algebra.IsSeparable p.ResidueField L) (α : L) (hgen : Algebra.adjoin p.ResidueField ({α} : Set L) = ⊤) : ∃ c : R, c ∉ p ∧ ∃ f : Polynomial R, f.Monic ∧ Polynomial.map (algebraMap R p.ResidueField) f = minpoly p.ResidueField ((algebraMap p.ResidueField L) (algebraMap R p.ResidueField c) * α)",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-erp1001",
+  "group": "C1",
+  "result": "pass",
+  "note": "R CommRing; p prime; L/κ(p)=Ideal.ResidueField (=ResidueField of Localization.AtPrime) finite (Module.Finite) separable (Algebra.IsSeparable); α generates (Algebra.adjoin {α}=⊤); ∃ c∉p, ∃ f monic in R[T], Polynomial.map f = minpoly of π(c)α; tested Z,(0),α=√2/3,c=3"
  }
 }
