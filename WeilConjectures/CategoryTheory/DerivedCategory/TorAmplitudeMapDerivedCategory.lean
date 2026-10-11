@@ -32,8 +32,6 @@ The application is the comparison functor `ν^*` from étale to pro-étale sheav
 
 ## Main results
 
-- `DerivedCategory.homologyConcentratedIn_of_homologyConcentratedIn_mapDerivedCategory_obj`:
-  a faithful exact functor reflects homology concentration.
 - `DerivedCategory.torAmplitudeIn_mapDerivedCategory_obj_iff`: `D(F)` preserves and reflects
   Tor amplitude.
 
@@ -50,20 +48,6 @@ namespace DerivedCategory
 variable {C : Type u₁} [Category.{v₁} C] [Abelian C] [HasDerivedCategory.{w₁} C]
   {D : Type u₂} [Category.{v₂} D] [Abelian D] [HasDerivedCategory.{w₂} D]
   (F : C ⥤ D) [F.Additive] [PreservesFiniteLimits F] [PreservesFiniteColimits F]
-
-/-- A faithful exact functor reflects homology concentration in an interval `[a, b]`: it
-reflects the vanishing of homology objects. -/
-lemma homologyConcentratedIn_of_homologyConcentratedIn_mapDerivedCategory_obj [F.Faithful]
-    {a b : ℤ} {K : DerivedCategory C}
-    (hK : homologyConcentratedIn a b (F.mapDerivedCategory.obj K)) :
-    homologyConcentratedIn a b K := by
-  obtain ⟨h₁, h₂⟩ := hK
-  exact ⟨(isGE_iff K a).2 fun i hi ↦
-      F.isZero_homologyFunctor_of_isZero_homologyFunctor_mapDerivedCategory_obj
-        ((isGE_iff _ a).1 h₁ i hi),
-    (isLE_iff K b).2 fun i hi ↦
-      F.isZero_homologyFunctor_of_isZero_homologyFunctor_mapDerivedCategory_obj
-        ((isLE_iff _ b).1 h₂ i hi)⟩
 
 variable [IsGrothendieckAbelian.{v₁} C] [MonoidalCategory C] [MonoidalPreadditive C]
   [MonoidalClosed C] [BraidedCategory C] [Abelian.HasFunctorialFlatResolution C]
@@ -102,7 +86,7 @@ lemma torAmplitudeIn_of_torAmplitudeIn_mapDerivedCategory_obj [F.Faithful]
     {a b : ℤ} {K : DerivedCategory C} (hK : torAmplitudeIn D a b (F.mapDerivedCategory.obj K)) :
     torAmplitudeIn C a b K := by
   -- `K` is concentrated in `[a, b]`, so it has a bounded above flat model `P`
-  obtain ⟨-, hLE⟩ := homologyConcentratedIn_of_homologyConcentratedIn_mapDerivedCategory_obj F
+  obtain ⟨-, hLE⟩ := F.homologyConcentratedIn_of_homologyConcentratedIn_mapDerivedCategory_obj
     (homologyConcentratedIn_of_torAmplitudeIn hK)
   obtain ⟨L, _, ⟨e⟩⟩ := K.exists_iso_Q_obj_of_isLE b
   obtain ⟨P, _, π, _, hP⟩ := L.exists_quasiIso_flat_of_isStrictlyLE b
@@ -125,7 +109,7 @@ lemma torAmplitudeIn_of_torAmplitudeIn_mapDerivedCategory_obj [F.Faithful]
       (F.mapDerivedCategoryFactors.app _).symm ≪≫
       F.mapDerivedCategory.mapIso
         ((QObjTensorSingleFunctorObjIso P hPk N).symm ≪≫ whiskerRightIso e' _)
-  exact homologyConcentratedIn_of_homologyConcentratedIn_mapDerivedCategory_obj F
+  exact F.homologyConcentratedIn_of_homologyConcentratedIn_mapDerivedCategory_obj
     ((homologyConcentratedIn a b).prop_of_iso i (hK (F.obj N)))
 
 /-- **Tor amplitude under an exact monoidal functor.** An exact, faithful, strong monoidal

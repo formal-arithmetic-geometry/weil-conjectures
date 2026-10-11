@@ -35,7 +35,7 @@ with the internal hom of bounded constructible complexes at a finite coefficient
   if its pullback to the pro-étale site has.
 - `AlgebraicGeometry.ProEtale.DerivedCategory.torAmplitudeIn_of_mapDerivedCategory`
   (`lem-sf-comparison-tor-amplitude` (ii)): an étale complex whose pullback to the pro-étale
-  site is bounded constructible of Tor amplitude in `[a, b]` has Tor amplitude in `[a, b]`.
+  site has Tor amplitude in `[a, b]` has Tor amplitude in `[a, b]`.
 - `AlgebraicGeometry.ProEtale.DerivedCategory.nonempty_iso_mapDerivedCategory_derivedHom`
   (`thm-sf-hom-comparison-constructible`): `ν^* RHom(K, M) ≅ RHom(ν^* K, ν^* M)` for `K` in
   `Dctf(X_ét, Λ)` and `M` in `Dᵇc(X_ét, Λ)`, on a finite-type scheme over `k = F̄_p`.
@@ -104,14 +104,9 @@ invertible on `X` are not needed. -/
 theorem torAmplitudeIn_mapDerivedCategory {X : Scheme.{u}}
     {a b : ℤ} {K' : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
     (hKt : Etale.DerivedCategory.torAmplitudeIn (ModuleCat.{u + 1} Λ) X a b K') :
-    torAmplitudeIn (ModuleCat.{u + 1} Λ) X a b (D(ν^*(X)[ModuleCat.{u + 1} Λ]).obj K') := by
-  obtain ⟨P, _, _, hP, ⟨e⟩⟩ :=
-    (_root_.DerivedCategory.torAmplitudeIn_iff_exists_iso_Q_obj_flat a b K').1 hKt
-  exact (_root_.DerivedCategory.torAmplitudeIn_iff_exists_iso_Q_obj_flat a b _).2
-    ⟨((ν^*(X)[ModuleCat.{u + 1} Λ]).mapHomologicalComplex _).obj P, inferInstance, inferInstance,
-      fun n ↦ flat_comparisonUpperStar_obj (hP n),
-      ⟨((ν^*(X)[ModuleCat.{u + 1} Λ]).mapDerivedCategoryFactors.app P).symm ≪≫
-        D(ν^*(X)[ModuleCat.{u + 1} Λ]).mapIso e⟩⟩
+    torAmplitudeIn (ModuleCat.{u + 1} Λ) X a b (D(ν^*(X)[ModuleCat.{u + 1} Λ]).obj K') :=
+  _root_.DerivedCategory.torAmplitudeIn_mapDerivedCategory_obj _
+    (fun _ ↦ flat_comparisonUpperStar_obj) hKt
 
 /-- Blueprint `lem-sf-comparison-tor-amplitude`: Finite Tor amplitude under the site
 comparison, clause (i).
@@ -146,18 +141,17 @@ theorem torAmplitudeIn_mapDerivedCategory_iff {X : Scheme.{u}} (a b : ℤ)
 /-- Blueprint `lem-sf-comparison-tor-amplitude`: Finite Tor amplitude under the site
 comparison, clause (ii).
 
-Let `Λ` be a finite ring whose exponent is invertible on `X`, and let `K'` be a bounded below
-complex of étale `Λ`-sheaves. If `ν^* K'` is bounded constructible on `X_proét` with Tor
-amplitude in `[a, b]`, then `K'` has Tor amplitude in `[a, b]` on the étale site. -/
-theorem torAmplitudeIn_of_mapDerivedCategory {X : Scheme.{u}} [HasInvertibleExponent Λ X]
+Let `Λ` be a finite ring and `K'` a complex of étale `Λ`-sheaves. If `ν^* K'` has Tor
+amplitude in `[a, b]` on `X_proét`, then `K'` has Tor amplitude in `[a, b]` on the étale site.
+This is the reverse implication of `torAmplitudeIn_mapDerivedCategory_iff`; the blueprint's
+hypotheses that `K'` be bounded below, that `ν^* K'` be bounded constructible and that the
+exponent of `Λ` be invertible on `X` are not needed. -/
+theorem torAmplitudeIn_of_mapDerivedCategory {X : Scheme.{u}}
     {a b : ℤ} {K' : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
-    (hK' : _root_.DerivedCategory.TStructure.t.plus K')
-    (hK : boundedConstructible (ModuleCat.{u + 1} Λ) X
-      (D(ν^*(X)[ModuleCat.{u + 1} Λ]).obj K'))
     (hKt : torAmplitudeIn (ModuleCat.{u + 1} Λ) X a b
       (D(ν^*(X)[ModuleCat.{u + 1} Λ]).obj K')) :
     Etale.DerivedCategory.torAmplitudeIn (ModuleCat.{u + 1} Λ) X a b K' :=
-  sorry
+  (torAmplitudeIn_mapDerivedCategory_iff a b K').1 hKt
 
 /-- Blueprint `thm-sf-hom-comparison-constructible`: Internal-Hom comparison for finite-Tor
 constructible inputs.
