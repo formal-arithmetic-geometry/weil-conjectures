@@ -83,8 +83,8 @@ Let `K = (K_n)_n` be a normalized system on `Y` (`AlgebraicGeometry.Etale.Normal
 levels `K_n ∈ D(Y_ét, A_n)`, `A_n = R ⧸ Iⁿ⁺¹`, the intended case being `R = 𝒪_E`), and let
 `f : X ⟶ Y` be smooth separated of relative dimension `d`. Let `S` and `T` be normalized
 systems on `X` with levels identified with `Lf^* K_n(d)[2d]` (by `eS`) and `Rf^! K_n` (by `eT`),
-and let `γ_{f,K_n}` be the finite-coefficient purity isomorphisms (`thm-pur-finite-coefficient-smooth-purity`). If they commute with the
-transition maps — the finite reduction of purity, `thm-pur-finite-reduction-of-purity`
+and let `γ_{f,K_n}` be the finite-coefficient purity isomorphisms
+(`thm-pur-finite-coefficient-smooth-purity`). If they commute with the transition maps — the finite reduction of purity, `thm-pur-finite-reduction-of-purity`
 (`AlgebraicGeometry.Etale.map_smoothPurityIso_hom_comp`) — they form a morphism of normalized
 systems, and they induce an isomorphism
 
