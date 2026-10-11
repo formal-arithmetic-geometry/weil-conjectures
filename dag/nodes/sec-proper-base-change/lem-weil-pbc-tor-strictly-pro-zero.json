@@ -194,5 +194,22 @@
   "by": "L",
   "result": "accepted",
   "note": "5 steps following More on Algebra 0911: a finite free resolution of M (split node) and the shifted resolution of K; dimension shifting Tor_p(M, -) = Tor_{p-1}(K, -) read off the resolutions, natural in N; Tor_1(M, A/J) = (K cap J^t)/JK from the tensor-over-quotient and right-exactness leaves, compatible with J in J'; p = 1 by the Artin-Rees leaf with c = max(c_0, 1); induction with the same c. Statement unchanged; the long exact sequence node not needed."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.TorStrictlyProZero",
+  "declaration": "ModuleCat.tor_quotient_pow_strictly_pro_zero",
+  "file": "lean/Sheaf/RingTheory/TorStrictlyProZero.lean",
+  "statement": "theorem tor_quotient_pow_strictly_pro_zero {A : Type u} [CommRing A] [IsNoetherianRing A] (I : Ideal A) (M : Type v) [AddCommGroup M] [Module A M] [Module.Finite A M] (p : ℕ) (hp : 0 < p) : ∃ c : ℕ, 0 < c ∧ ∀ n : ℕ, c ≤ n → ((Tor' (ModuleCat (ULift.{v} A)) p).obj (ModuleCat.of (ULift.{v} A) (ULift.{u} M))).map (ModuleCat.ofHom (((ULift.moduleEquiv : ULift.{v} (A ⧸ I ^ (n - c)) ≃ₗ[ULift.{v} A] A ⧸ I ^ (n - c)).symm.toLinearMap).comp (((Submodule.factor (Ideal.pow_le_pow_right (Nat.sub_le n c)) : (A ⧸ I ^ n) →ₗ[A] (A ⧸ I ^ (n - c))).restrictScalars (ULift.{v} A)).comp (ULift.moduleEquiv : ULift.{v} (A ⧸ I ^ n) ≃ₗ[ULift.{v} A] A ⧸ I ^ n).toLinearMap))) = 0",
+  "branch": "sheaf-dag",
+  "by": "J1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-tpz",
+  "group": "J1",
+  "result": "pass"
  }
 }

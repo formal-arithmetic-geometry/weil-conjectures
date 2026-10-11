@@ -5080,3 +5080,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 14:53 L: merged deliver/H1/lem-exc-coinduced-discrete-embedding (stage 2; reviewer PASS; first push; Sheaf.RepresentationTheory.CoinducedDiscreteEmbedding Rep.exists_coinduced_discrete_embedding)
 - 14:54 L: merged deliver/H1/lem-weil-pbc-smooth-section-etale-lift (stage 2; reviewer PASS; first push; Sheaf.Paper.SmoothSectionEtaleLift AlgebraicGeometry.exists_etale_lift_of_smooth)
 - 14:54 L: merged deliver/H1/lem-weil-pbc-topological-inverse-image-stalk (stage 2; reviewer PASS; first push; Sheaf.Topology.InverseImageStalk TopCat.Sheaf.exists_inverseImage_stalk_iso_ab)
+- 14:54 L: merged deliver/J1/lem-weil-pbc-tor-strictly-pro-zero (stage 2; reviewer PASS; first push; Sheaf.RingTheory.TorStrictlyProZero ModuleCat.tor_quotient_pow_strictly_pro_zero)
