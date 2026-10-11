@@ -139,10 +139,13 @@ comparison.
    pro-étale site. In particular finite-stage Verdier duality on the pro-étale constructible
    category is transported from étale Verdier duality.
 
-The blueprint asserts that canonical comparison maps are isomorphisms; these maps need a
-monoidal structure on `ν^*` compatible with the internal homs, which is not formalised, so the
-existence of isomorphisms is stated, and the identification of evaluations and double-dual maps
-is rendered as clause 3. Clauses 2 and 3 are stated whenever the exceptional inverse image
+The blueprint asserts that canonical comparison maps are isomorphisms. The map
+`ν^* RHom(K, M) ⟶ RHom(ν^* K, ν^* M)` is the adjoint of
+`ν^* RHom(K, M) ⊗ᴸ ν^* K ≅ ν^* (RHom(K, M) ⊗ᴸ K) ⟶ ν^* M`, built from
+`AlgebraicGeometry.ProEtale.leftDerivedComparisonUpperStarTensorNatIso` and the evaluation;
+constructing it and proving it is an isomorphism is left to the subsection of this node. Here
+the existence of isomorphisms is stated, and the identification of evaluations and double-dual
+maps is rendered as clause 3. Clauses 2 and 3 are stated whenever the exceptional inverse image
 along `a_X` defining the dualizing complexes is available. -/
 theorem nonempty_iso_mapDerivedCategory_derivedHom_of_isSeparated {k : Type u} [Field k]
     {p : ℕ} [Fact p.Prime] [Algebra (ZMod p) k] [IsAlgClosure (ZMod p) k]
