@@ -7,6 +7,8 @@ module
 
 public import WeilConjectures.SixFunctors.ProEtale.Derived.LowerShriekComparison
 public import WeilConjectures.SixFunctors.ProEtale.LowerShriek.OpenImmersion.Conservative
+public import WeilConjectures.SixFunctors.ProEtale.Comparison.LowerStar
+public import WeilConjectures.SixFunctors.ProEtale.UpperLowerStar.Detection
 
 /-!
 # The essential image of the comparison pullback
@@ -27,6 +29,11 @@ under extensions.
 - `AlgebraicGeometry.ProEtale.comparisonUpperStar_essImage_of_shortExact`: the essential image of
   `ν^*` is closed under extensions. This uses the full faithfulness of `ν^*` on bounded below
   derived categories.
+- `AlgebraicGeometry.ProEtale.comparisonUpperStar_essImage_of_finite`: for sheaves of modules, a
+  sheaf is of étale origin as soon as its pullbacks along finitely many quasi-compact
+  quasi-separated morphisms jointly covering `X` are.
+- `AlgebraicGeometry.ProEtale.comparisonUpperStar_essImage_of_mem_proetalePrecoverage`: for
+  sheaves of modules, being of étale origin is local for the pro-étale topology.
 -/
 
 @[expose] public section
@@ -233,5 +240,176 @@ theorem comparisonUpperStar_essImage_of_shortExact {X : Scheme.{u}}
       (DerivedCategory.singleFunctorCompHomologyFunctorIso _ 0).app S.X₂)⟩⟩
 
 end Extension
+
+section Closure
+
+/-- Pro-étale sheaves have finite biproducts (an abelian category has them; stated explicitly
+since instance search does not find the general route). -/
+noncomputable instance hasFiniteBiproducts_sheaf (X : Scheme.{u}) :
+    HasFiniteBiproducts (Sheaf (ProEt.topology X) A) :=
+  HasFiniteBiproducts.of_hasFiniteProducts
+
+/-- Étale sheaves have finite biproducts. -/
+noncomputable instance _root_.AlgebraicGeometry.Etale.hasFiniteBiproducts_sheaf
+    (X : Scheme.{u}) : HasFiniteBiproducts (Sheaf X.smallEtaleTopology A) :=
+  HasFiniteBiproducts.of_hasFiniteProducts
+
+variable {A}
+
+/-- The essential image of `ν^*` is closed under kernels: `ν^*` is full and preserves kernels. -/
+lemma comparisonUpperStar_essImage_kernel {X : Scheme.{u}} {E₁ E₂ : Sheaf (ProEt.topology X) A}
+    (φ : E₁ ⟶ E₂) (h₁ : (ν^*(X)[A]).essImage E₁) (h₂ : (ν^*(X)[A]).essImage E₂) :
+    (ν^*(X)[A]).essImage (kernel φ) := by
+  obtain ⟨G₁, ⟨e₁⟩⟩ := h₁
+  obtain ⟨G₂, ⟨e₂⟩⟩ := h₂
+  obtain ⟨ψ, hψ⟩ := (ν^*(X)[A]).map_surjective (e₁.hom ≫ φ ≫ e₂.inv)
+  exact ⟨kernel ψ, ⟨PreservesKernel.iso (ν^*(X)[A]) ψ ≪≫ kernelIsoOfEq hψ ≪≫
+    kernelIsIsoComp e₁.hom (φ ≫ e₂.inv) ≪≫ kernelCompMono φ e₂.inv⟩⟩
+
+/-- The essential image of `ν^*` is closed under cokernels: `ν^*` is full and preserves
+cokernels. -/
+lemma comparisonUpperStar_essImage_cokernel {X : Scheme.{u}}
+    {E₁ E₂ : Sheaf (ProEt.topology X) A} (φ : E₁ ⟶ E₂) (h₁ : (ν^*(X)[A]).essImage E₁)
+    (h₂ : (ν^*(X)[A]).essImage E₂) : (ν^*(X)[A]).essImage (cokernel φ) := by
+  obtain ⟨G₁, ⟨e₁⟩⟩ := h₁
+  obtain ⟨G₂, ⟨e₂⟩⟩ := h₂
+  obtain ⟨ψ, hψ⟩ := (ν^*(X)[A]).map_surjective (e₁.hom ≫ φ ≫ e₂.inv)
+  exact ⟨cokernel ψ, ⟨PreservesCokernel.iso (ν^*(X)[A]) ψ ≪≫ cokernelIsoOfEq hψ ≪≫
+    cokernelEpiComp e₁.hom (φ ≫ e₂.inv) ≪≫ cokernelCompIsIso φ e₂.inv⟩⟩
+
+/-- The essential image of `ν^*` is closed under finite biproducts. -/
+lemma comparisonUpperStar_essImage_biproduct {X : Scheme.{u}} {κ : Type} [Finite κ]
+    (E : κ → Sheaf (ProEt.topology X) A) (h : ∀ k, (ν^*(X)[A]).essImage (E k)) :
+    (ν^*(X)[A]).essImage (⨁ E) := by
+  choose G e using h
+  exact ⟨⨁ G, ⟨(ν^*(X)[A]).mapBiproduct G ≪≫ biproduct.mapIso fun k ↦ (e k).some⟩⟩
+
+/-- The essential image of `ν^*` is preserved by the pullback along any morphism of schemes:
+`g^* ν^* ≅ ν^* g^*`. -/
+lemma comparisonUpperStar_essImage_upperStar_obj {Z X : Scheme.{u}} (g : Z ⟶ X)
+    {E : Sheaf (ProEt.topology X) A} (h : (ν^*(X)[A]).essImage E) :
+    (ν^*(Z)[A]).essImage ((g)^*[A].obj E) := by
+  obtain ⟨G, ⟨e⟩⟩ := h
+  exact ⟨(Etale.upperStar A g).obj G,
+    ⟨((comparisonUpperStarCompUpperStarIso A g).app G).symm ≪≫ (g)^*[A].mapIso e⟩⟩
+
+/-- The essential image of `ν^*` is preserved by the direct image along a quasi-compact
+quasi-separated morphism of schemes: `g_* ν^* ≅ ν^* g_*`. -/
+lemma comparisonUpperStar_essImage_lowerStar_obj {Z X : Scheme.{u}} (g : Z ⟶ X)
+    [QuasiCompact g] [QuasiSeparated g] {E : Sheaf (ProEt.topology Z) A}
+    (h : (ν^*(Z)[A]).essImage E) : (ν^*(X)[A]).essImage ((g)_*[A].obj E) := by
+  obtain ⟨G, ⟨e⟩⟩ := h
+  have := isIso_lowerStarComparisonUpperStarBaseChange g A
+  exact ⟨(Etale.lowerStar A g).obj G,
+    ⟨asIso ((lowerStarComparisonUpperStarBaseChange g A).app G) ≪≫ (g)_*[A].mapIso e⟩⟩
+
+end Closure
+
+section FiniteCover
+
+variable {R : Type (u + 1)} [CommRing R]
+
+/-- For sheaves of modules, being of étale origin can be checked after pullback along finitely
+many quasi-compact quasi-separated morphisms `g k : Z k ⟶ X` jointly covering `X`. The unit
+`η : F ⟶ ⨁ₖ (g k)_* (g k)^* F` is a monomorphism, the pullbacks jointly detecting sections. Its
+cokernel `C` has pullbacks of étale origin, being cokernels of morphisms between sheaves of
+étale origin (`ν^*` commutes with pullbacks and quasi-compact quasi-separated direct images),
+so `F` is the kernel of the morphism `⨁ₖ (g k)_* (g k)^* F ⟶ ⨁ₖ (g k)_* (g k)^* C` between
+sheaves of étale origin. -/
+theorem comparisonUpperStar_essImage_of_finite {X : Scheme.{u}} {κ : Type} [Finite κ]
+    {Z : κ → Scheme.{u}} (g : ∀ k, Z k ⟶ X) [∀ k, QuasiCompact (g k)]
+    [∀ k, QuasiSeparated (g k)] (hg : ∀ x, ∃ k, x ∈ Set.range (g k))
+    (F : Sheaf (ProEt.topology X) (ModuleCat.{u + 1} R))
+    (hF : ∀ k, (ν^*(Z k)[ModuleCat.{u + 1} R]).essImage ((g k)^*[ModuleCat.{u + 1} R].obj F)) :
+    (ν^*(X)[ModuleCat.{u + 1} R]).essImage F := by
+  let η (E : Sheaf (ProEt.topology X) (ModuleCat.{u + 1} R)) :
+      E ⟶ ⨁ fun k ↦ (g k)_*[ModuleCat.{u + 1} R].obj ((g k)^*[ModuleCat.{u + 1} R].obj E) :=
+    biproduct.lift fun k ↦ (upperStarLowerStarAdjunction (ModuleCat.{u + 1} R) (g k)).unit.app E
+  have hη (E : Sheaf (ProEt.topology X) (ModuleCat.{u + 1} R)) : Mono (η E) := by
+    refine Preadditive.mono_of_cancel_zero _ fun {T} u hu ↦ ?_
+    have hk (k : κ) :
+        u ≫ (upperStarLowerStarAdjunction (ModuleCat.{u + 1} R) (g k)).unit.app E = 0 := by
+      simpa [η] using congrArg (· ≫ biproduct.π _ k) hu
+    refine Sheaf.hom_ext (NatTrans.ext (funext fun V ↦ ModuleCat.hom_ext
+      (LinearMap.ext fun x ↦ ?_)))
+    refine eq_zero_of_forall_unit_app_eq_zero R g hg E ((u.hom.app V).hom x) fun k ↦ ?_
+    simpa using congrArg (fun ψ ↦ (ψ.hom.app V).hom x) (hk k)
+  have hB (E : Sheaf (ProEt.topology X) (ModuleCat.{u + 1} R))
+      (hE : ∀ k, (ν^*(Z k)[ModuleCat.{u + 1} R]).essImage
+        ((g k)^*[ModuleCat.{u + 1} R].obj E)) :
+      (ν^*(X)[ModuleCat.{u + 1} R]).essImage
+        (⨁ fun k ↦ (g k)_*[ModuleCat.{u + 1} R].obj ((g k)^*[ModuleCat.{u + 1} R].obj E)) :=
+    comparisonUpperStar_essImage_biproduct _ fun k ↦
+      comparisonUpperStar_essImage_lowerStar_obj (g k) (hE k)
+  have hC (k : κ) : (ν^*(Z k)[ModuleCat.{u + 1} R]).essImage
+      ((g k)^*[ModuleCat.{u + 1} R].obj (cokernel (η F))) :=
+    (ν^*(Z k)[ModuleCat.{u + 1} R]).essImage.prop_of_iso
+      (PreservesCokernel.iso ((g k)^*[ModuleCat.{u + 1} R]) (η F)).symm
+      (comparisonUpperStar_essImage_cokernel _ (hF k)
+        (comparisonUpperStar_essImage_upperStar_obj (g k) (hB F hF)))
+  have := hη F
+  have := hη (cokernel (η F))
+  refine (ν^*(X)[ModuleCat.{u + 1} R]).essImage.prop_of_iso
+    (kernelCompMono (cokernel.π (η F)) (η (cokernel (η F))) ≪≫
+      ((Abelian.monoIsKernelOfCokernel _ (cokernelIsCokernel (η F))).conePointUniqueUpToIso
+        (kernelIsKernel _)).symm)
+    (comparisonUpperStar_essImage_kernel _ (hB F hF) (hB _ hC))
+
+/-- Being of étale origin is local for the pro-étale topology, for sheaves of modules: a
+pro-étale sheaf on `X` whose pullbacks along the members of a pro-étale covering family are of
+étale origin is of étale origin. Over an affine open of `X`, finitely many affine opens of the
+base changes of the members cover it (the covering family is quasi-compact), and these are
+quasi-compact quasi-separated over it, so `comparisonUpperStar_essImage_of_finite` applies; and
+being of étale origin is Zariski local (`comparisonUpperStar_essImage_of_cover`). -/
+theorem comparisonUpperStar_essImage_of_mem_proetalePrecoverage {X : Scheme.{u}} {ι : Type*}
+    {W : ι → Scheme.{u}} (g : ∀ i, W i ⟶ X)
+    (hg : Presieve.ofArrows W g ∈ Scheme.proetalePrecoverage X)
+    (F : Sheaf (ProEt.topology X) (ModuleCat.{u + 1} R))
+    (hF : ∀ i, (ν^*(W i)[ModuleCat.{u + 1} R]).essImage ((g i)^*[ModuleCat.{u + 1} R].obj F)) :
+    (ν^*(X)[ModuleCat.{u + 1} R]).essImage F := by
+  have hcov : Presieve.ofArrows (fun U : X.affineOpens ↦ ((U : X.Opens) : Scheme.{u}))
+      (fun U ↦ (U : X.Opens).ι) ∈ Scheme.proetalePrecoverage X := by
+    refine Scheme.zariskiPrecoverage_le_proetalePrecoverage _
+      ((Scheme.ofArrows_mem_precoverage_iff _).mpr ⟨fun x ↦ ?_, fun U ↦ inferInstance⟩)
+    obtain ⟨_, ⟨U, hU, rfl⟩, hxU, -⟩ := X.isBasis_affineOpens.exists_subset_of_mem_open
+      (Set.mem_univ x) isOpen_univ
+    exact ⟨⟨U, hU⟩, by simpa using hxU⟩
+  refine comparisonUpperStar_essImage_of_cover (fun U : X.affineOpens ↦ (U : X.Opens).ι)
+    hcov F fun U ↦ ?_
+  have hUa : IsAffine (U : X.Opens) := U.2
+  -- the base change of the covering family to `U`
+  have hpb : Presieve.ofArrows (fun i ↦ pullback (g i) (U : X.Opens).ι)
+      (fun i ↦ pullback.snd (g i) (U : X.Opens).ι) ∈
+        Scheme.proetalePrecoverage (U : X.Opens) :=
+    Precoverage.mem_coverings_of_isPullback g hg _ _ (fun i ↦ pullback.fst _ _)
+      fun i ↦ (IsPullback.of_hasPullback (g i) (U : X.Opens).ι).flip
+  let E : PreZeroHypercover ((U : X.Opens) : Scheme.{u}) :=
+    ⟨ι, _, fun i ↦ pullback.snd (g i) (U : X.Opens).ι⟩
+  have : QuasiCompactCover E := Scheme.presieve₀_mem_qcPrecoverage_iff.1 hpb.1
+  obtain ⟨n, a, V, hV, hVU⟩ := QuasiCompactCover.exists_isAffineOpen_of_isCompact E
+    (U := ⊤) isCompact_univ
+  have (m : Fin n) : IsAffine (V m) := hV m
+  let h (m : Fin n) : (V m : Scheme.{u}) ⟶ (U : X.Opens) :=
+    (V m).ι ≫ pullback.snd (g (a m)) (U : X.Opens).ι
+  have (m : Fin n) : QuasiCompact (h m) :=
+    (HasAffineProperty.iff_of_isAffine (P := @QuasiCompact)).2 inferInstance
+  have (m : Fin n) : QuasiSeparated (h m) :=
+    (HasAffineProperty.iff_of_isAffine (P := @QuasiSeparated)).2 inferInstance
+  refine comparisonUpperStar_essImage_of_finite h (fun y ↦ ?_) _ fun m ↦ ?_
+  · have hy : y ∈ ((⊤ : (U : X.Opens).toScheme.Opens) : Set (U : X.Opens).toScheme) := trivial
+    rw [← hVU, Set.mem_iUnion] at hy
+    obtain ⟨m, z, hz, rfl⟩ := hy
+    obtain ⟨z, rfl⟩ : z ∈ Set.range (V m).ι := by rwa [Scheme.Opens.range_ι]
+    exact ⟨m, z, rfl⟩
+  · have e : (h m)^*[ModuleCat.{u + 1} R].obj (((U : X.Opens).ι)^*[ModuleCat.{u + 1} R].obj F) ≅
+        ((V m).ι ≫ pullback.fst (g (a m)) (U : X.Opens).ι)^*[ModuleCat.{u + 1} R].obj
+          ((g (a m))^*[ModuleCat.{u + 1} R].obj F) :=
+      ((upperStarComp (ModuleCat.{u + 1} R) (h m) (U : X.Opens).ι).app F).symm ≪≫
+        eqToIso (by simp only [h, Category.assoc, pullback.condition]) ≪≫
+        (upperStarComp (ModuleCat.{u + 1} R) _ (g (a m))).app F
+    exact (ν^*(V m)[ModuleCat.{u + 1} R]).essImage.prop_of_iso e.symm
+      (comparisonUpperStar_essImage_upperStar_obj _ (hF (a m)))
+
+end FiniteCover
 
 end AlgebraicGeometry.ProEtale
