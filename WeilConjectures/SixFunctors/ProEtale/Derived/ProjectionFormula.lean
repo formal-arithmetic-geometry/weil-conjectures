@@ -257,15 +257,19 @@ the pro-étale one
 (`AlgebraicGeometry.ProEtale.isIso_rightDerivedLowerStarProjectionMap_app_app_leftDerived`),
 and the étale projection formula for the proper `g` at finite coefficients is
 `AlgebraicGeometry.Etale.isIso_rightDerivedLowerStarProjectionMap_of_finite`. The finite Tor
-amplitude of `L` makes `i_! K₀ ⊗ᴸ Lg^* L₀` bounded below, where `ν^*` commutes with `Rg_*`. -/
-theorem hasProjectionFormulaOfCompactification_of_constructibleFiniteTor [Finite Λ] {f : X ⟶ Y}
+amplitude of `L` makes `i_! K₀ ⊗ᴸ Lg^* L₀` bounded below, where `ν^*` commutes with `Rg_*`.
+
+Only the bounded constructibility of `K` is used, as in the pro-étale half of blueprint
+`lem-weil-finite-compact-projection-formula`. -/
+theorem hasProjectionFormulaOfCompactification_of_boundedConstructible [Finite Λ] {f : X ⟶ Y}
     (c : Compactification f)
     {K : _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} Λ))}
     {L : _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology Y) (ModuleCat.{u + 1} Λ))}
-    (hK : DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} Λ) X K)
+    (hK : DerivedCategory.boundedConstructible (ModuleCat.{u + 1} Λ) X K)
     (hL : DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} Λ) Y L) :
     HasProjectionFormulaOfCompactification (ModuleCat.{u + 1} Λ) c K L := by
-  obtain ⟨K₀, hK₀, ⟨eK⟩⟩ := hK.1
+  have hKb := hK.bounded
+  obtain ⟨K₀, hK₀, ⟨eK⟩⟩ := hK
   obtain ⟨L₀, -, ⟨eL⟩⟩ := hL.1
   obtain ⟨a, b, hLt⟩ := hL.2
   -- `i_! K₀ ⊗ᴸ Lg^* L₀` is bounded below, since its pro-étale realization `i_! K ⊗ᴸ Lg^* L` is
@@ -279,10 +283,22 @@ theorem hasProjectionFormulaOfCompactification_of_constructibleFiniteTor [Finite
     (eL.symm ≪≫
       ((ν^*(Y)[ModuleCat.{u + 1} Λ]).leftDerivedFunctorIsoMapDerivedCategory.app L₀).symm)
     ((ProEtale.openImmersionLowerShriek (ModuleCat.{u + 1} Λ) c.i).bounded_mapDerivedCategory_obj
-      hK.1.bounded) hLt
+      hKb) hLt
   -- the étale projection formula for the proper `g`
   have := Etale.isIso_rightDerivedLowerStarProjectionMap_of_finite Λ c.g
   exact hasProjectionFormulaOfCompactification_of_comparison c eK eL hK₀.1 hML inferInstance
+
+/-- The projection formula of `sk-thm-sf-pf-proetale` for `Rf_!` computed with an arbitrary
+compactification `c` of `f`, for `K` and `L` in `Dctf`: a special case of
+`AlgebraicGeometry.ProEtale.hasProjectionFormulaOfCompactification_of_boundedConstructible`. -/
+theorem hasProjectionFormulaOfCompactification_of_constructibleFiniteTor [Finite Λ] {f : X ⟶ Y}
+    (c : Compactification f)
+    {K : _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} Λ))}
+    {L : _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology Y) (ModuleCat.{u + 1} Λ))}
+    (hK : DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} Λ) X K)
+    (hL : DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} Λ) Y L) :
+    HasProjectionFormulaOfCompactification (ModuleCat.{u + 1} Λ) c K L :=
+  hasProjectionFormulaOfCompactification_of_boundedConstructible Λ c hK.1 hL
 
 /-- Blueprint `sk-thm-sf-pf-proetale`: Projection formula: the pro-étale realization.
 
@@ -300,6 +316,47 @@ theorem hasProjectionFormula_of_constructibleFiniteTor [Finite Λ] (f : X ⟶ Y)
     HasProjectionFormula (ModuleCat.{u + 1} Λ) f K L :=
   hasProjectionFormulaOfCompactification_of_constructibleFiniteTor Λ
     (HasCompactification.compactification f) hK hL
+
+/-- The pro-étale projection formula at a finite coefficient stage for `K` bounded constructible
+(of étale origin) and `L` in `Dctf`, computed with the chosen compactification of `f`. -/
+theorem hasProjectionFormula_of_boundedConstructible [Finite Λ] (f : X ⟶ Y)
+    [HasCompactification f]
+    {K : _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} Λ))}
+    {L : _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology Y) (ModuleCat.{u + 1} Λ))}
+    (hK : DerivedCategory.boundedConstructible (ModuleCat.{u + 1} Λ) X K)
+    (hL : DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} Λ) Y L) :
+    HasProjectionFormula (ModuleCat.{u + 1} Λ) f K L :=
+  hasProjectionFormulaOfCompactification_of_boundedConstructible Λ
+    (HasCompactification.compactification f) hK hL
+
+/-- Blueprint `lem-weil-finite-compact-projection-formula`: Finite-coefficient compact-support
+projection formula.
+
+Let `Λ` be a finite coefficient ring and `f : X ⟶ Y` a morphism admitting a compactification.
+On the small étale sites, for `K ∈ Dᵇc(X_ét, Λ)` and `L ∈ Dᵇc(Y_ét, Λ)` of finite Tor amplitude,
+the projection transformation `Rf_! K ⊗ᴸ L ⟶ Rf_!(K ⊗ᴸ Lf^* L)` is an isomorphism; and the same
+holds on the small pro-étale sites for the pro-étale realizations, i.e. for `K` bounded
+constructible (of étale origin) and `L` in `Dctf(Y_proét, Λ)`. Naturality in `K` and `L` holds
+because the projection map is a natural transformation of bifunctors
+(`AlgebraicGeometry.Etale.projectionMap`, `AlgebraicGeometry.ProEtale.projectionMap`).
+
+The étale half is `AlgebraicGeometry.Etale.hasProjectionFormula_of_finite`, the pro-étale half
+`AlgebraicGeometry.ProEtale.hasProjectionFormula_of_boundedConstructible`, transported along
+the comparison `ν^*`. -/
+theorem hasProjectionFormula_etale_and_proEtale_of_finite [Finite Λ] (f : X ⟶ Y)
+    [HasCompactification f] :
+    (∀ (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
+        (L : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))),
+        Etale.DerivedCategory.boundedConstructible (ModuleCat.{u + 1} Λ) X K →
+        Etale.DerivedCategory.boundedConstructibleFiniteTor Λ Y L →
+        Etale.HasProjectionFormula (ModuleCat.{u + 1} Λ) f K L) ∧
+      ∀ (K : _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} Λ)))
+        (L : _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology Y) (ModuleCat.{u + 1} Λ))),
+        DerivedCategory.boundedConstructible (ModuleCat.{u + 1} Λ) X K →
+        DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} Λ) Y L →
+        HasProjectionFormula (ModuleCat.{u + 1} Λ) f K L :=
+  ⟨fun K L _ _ ↦ Etale.hasProjectionFormula_of_finite Λ f K L,
+    fun _ _ hK hL ↦ hasProjectionFormula_of_boundedConstructible Λ f hK hL⟩
 
 end AlgebraicGeometry.ProEtale
 

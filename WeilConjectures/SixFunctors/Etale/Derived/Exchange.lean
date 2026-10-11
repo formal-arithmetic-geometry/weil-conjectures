@@ -144,6 +144,9 @@ variable (f : X ⟶ Y) [HasCompactification f]
 
 /-- Blueprint `sk-thm-sf-pf-finite`: Projection formula, finite coefficients
 
+This is also blueprint `thm-sf-pf-finite` (Finite coefficients on the étale site), the same
+statement in the setting of the six-functor datum `def-sf-datum`.
+
 **The projection formula at finite coefficients.** For `Λ` a finite coefficient ring whose
 exponent is invertible on `Y`, `f : X ⟶ Y` separated of finite type, `K` bounded constructible
 on `X` and `L` bounded constructible *of finite Tor amplitude* on `Y`, the projection map

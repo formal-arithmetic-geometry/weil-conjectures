@@ -84,8 +84,13 @@ inverse image along the structure morphism `a : X ⟶ S` of the monoidal unit `�
 noncomputable def dualizingComplex : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A) :=
   (R(a)^![A]).obj (𝟙_ _)
 
-/-- The Verdier dual `𝔻_X = RHom_X(-, ω_X) : D(X_ét)ᵒᵖ ⥤ D(X_ét)`, the internal hom into the
-dualizing complex `AlgebraicGeometry.Etale.dualizingComplex`. -/
+/-- Blueprint `def-sf-pf`: Coefficient dual, Verdier dual, and the projection formula.
+
+The Verdier dual `𝔻_X = RHom_X(-, ω_X) : D(X_ét)ᵒᵖ ⥤ D(X_ét)`, the internal hom into the
+dualizing complex `AlgebraicGeometry.Etale.dualizingComplex`. The other two items of the
+blueprint definition are the coefficient dual `K^∨ = RHom(K, Λ_X)`
+(`AlgebraicGeometry.Etale.DerivedCategory.coefficientDual`) and the projection transformation
+`PF_{f,K,L}` (`AlgebraicGeometry.Etale.projectionMap`). -/
 noncomputable def verdierDual :
     (_root_.DerivedCategory (Sheaf X.smallEtaleTopology A))ᵒᵖ ⥤
       _root_.DerivedCategory (Sheaf X.smallEtaleTopology A) :=
