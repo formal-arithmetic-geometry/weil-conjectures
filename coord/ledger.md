@@ -5316,3 +5316,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 15:55 L: merged deliver/V1/lem-sp-derived-couple-functoriality (stage 2; reviewer PASS; first push; Sheaf.CategoryTheory.DerivedCoupleFunctoriality CategoryTheory.BigradedExactCouple.derivedCoupleFunctoriality)
 - 15:55 L: merged deliver/V1/lem-weil-pbc-symmetric-product-surjective (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.SymmetricProductSurjective AlgebraicGeometry.symmetricProduct_surjective)
 - 15:55 L: merged deliver/C1/lem-weil-pbc-etale-mayer-vietoris (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.EtaleMayerVietoris AlgebraicGeometry.Etale.etale_mayerVietoris)
+- 15:55 L: merged deliver/M1/lem-pc-grothendieck-ss-double-complex-model (stage 2; reviewer FIX; first push; Sheaf.CategoryTheory.GrothendieckSSDoubleComplexModel CategoryTheory.grothendieckSSDoubleComplexModel)
