@@ -129,5 +129,24 @@
   "group": "H1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-exv (reviewer sub-agent of L); spot-checked: Source: blueprint lem-sc-ext-locally-free.md, Proof first sentence (evaluation F^vee tensor - -> Hom(F,-) iso for finite locally free F); the item statement says exactly that, for F locally free of locally finite (not necessarily constant) rank and arbitrary O_X-module G, natural in G; it involves no Ext, so it is unaffected by the ill-posed def-sc-ext-sheaf and remains what the correct route needs (Ext^i = R^i Hom(F,-)(G) with Hom(F,-) = Gamma o (F^vee tensor -)). Read the five cited definition nodes (def-amb-finite-locally-free-module, def-pur-sheaf-tensor-product, def-pur-sheaf-hom incl. its sheaf property, def-pur-sheaf-modules-hom-module, def-weil-sheaf-of-modules-category). FIX more, RETURN less (C1): dag/nodes/sec-picard-framework/lem-sc-ext-evaluation.json: proof steps 1-2: the delivered step 1 identified (F^vee tensor G)|_{V_a} with a finite sum of G|_{V_a} via the presheaf tensor, which needs sheafification to commute with restriction to opens (no node cited), and the global evaluation morphism needs the O-linear universal property of sheafification (not cited); rewrote step 1 as the presheaf-level map e: F^vee tensor_p G -> Hom(F,G), bijective on every open inside some V_a (direct computation from the cited definitions), and step 2 as: e locally injective and locally surjective, hence e^# iso by the existing leaf lem-weil-pbc-site-sheafification-iso-locally-bijective (Mathlib W_iff_isLocallyBijective / W_iff), with the O-linear factorization from leaf def-weil-presheaf-modules-sheafification; added both to uses and proof_deps; step 3 (naturality) unchanged. Small cases: rank 0 (both sides 0), rank 1 (O tensor G = G = Hom(O,G)), disconnected X with ranks 0 and 2, non-quasi-coherent G (argument is sectionwise on U subset V_a, no quasi-coherence used). Report item 1 mentions a citations.json not in the delivery (harmless). Start 'Sat Oct 10 03:41:13 PM UTC 2026', end 'Sat Oct 10 03:42:55 PM UTC 2026'.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ExtEvaluation",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.dual_tensor_hom_iso",
+  "file": "lean/Sheaf/AlgebraicGeometry/ExtEvaluation.lean",
+  "statement": "theorem dual_tensor_hom_iso (X : Scheme.{u}) (F : X.Modules) [F.IsFiniteLocallyFree] : ∃ e : (∀ G : X.Modules, Scheme.Modules.tensorObj (dual F) G ≅ homObj F G), (∀ G : X.Modules, (e G).hom = dualTensorHom F G) ∧ ∀ {G H : X.Modules} (g : G ⟶ H), (e G).hom ≫ SheafOfModules.homObjMap (R := X.sheaf) (𝟙 F) g = (dual F ◁ g) ≫ (e H).hom",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-exe1314"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-exe1314",
+  "group": "E1",
+  "result": "fix",
+  "note": "X : Scheme, F : X.Modules [F.IsFiniteLocallyFree] (source class, varying local ranks as the node says; universes all u, checked with pp.universes), arbitrary G; e G : Fᵛ ⊗ G ≅ Hom(F,G) tied to the source's canonical dualTensorHom (φ⊗g ↦ x ↦ φ(x)g); naturality square with homObjMap (𝟙 F) g and Fᵛ ◁ g; equivalent to (∀ G, IsIso (dualTensorHom F G)) ∧ naturality (checked by compiling the derivation). FIX: removed redundant letI := SheafOfModules.monoidalCategory X.sheaf (global instance on X.Modules is that structure, rfl-checked; no let in statements)."
  }
 }
