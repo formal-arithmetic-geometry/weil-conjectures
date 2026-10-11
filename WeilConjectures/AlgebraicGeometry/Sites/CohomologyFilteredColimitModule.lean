@@ -156,13 +156,15 @@ lemma exists_mem_forall_exists_of_isColimit_moduleCat (hc : IsColimit c) {W : X.
   exact Sheaf.iso_hom_app_inv_app_apply_moduleCat e _ s
 
 /-- **A section vanishing in a filtered colimit vanishes locally at a later stage.** -/
-lemma exists_mem_forall_exists_eq_zero_of_isColimit_moduleCat (hc : IsColimit c) {W : X.Etale} {j : J}
+lemma exists_mem_forall_exists_eq_zero_of_isColimit_moduleCat (hc : IsColimit c) {W : X.Etale}
+    {j : J}
     (x : (D.obj j).obj.obj (op W)) (hx : (c.ι.app j).hom.app (op W) x = 0) :
     ∃ R ∈ X.smallEtaleTopology W, ∀ ⦃V : X.Etale⦄ (f : V ⟶ W), R f →
       ∃ (k : J) (φ : j ⟶ k), (D.map φ).hom.app (op V) ((D.obj j).obj.map f.op x) = 0 := by
   have h₁ := Sheaf.sheafifyCocone_ι_app_val (colimit.cocone (D ⋙ sheafToPresheaf _ _)) j
   simp only [colimit.cocone_ι, colimit.cocone_x] at h₁
-  have h₂ := congrArg (fun φ ↦ φ.app (op W) x) (h₁.symm.trans (sheafifyCocone_ι_app_eq_moduleCat hc j))
+  have h₂ := congrArg (fun φ ↦ φ.app (op W) x)
+    (h₁.symm.trans (sheafifyCocone_ι_app_eq_moduleCat hc j))
   simp only [NatTrans.comp_app, ConcreteCategory.comp_apply] at h₂
   have h : (toSheafify X.smallEtaleTopology (colimit (D ⋙ sheafToPresheaf _ _))).app (op W)
       ((colimit.ι (D ⋙ sheafToPresheaf _ _) j).app (op W) x) =
@@ -179,7 +181,8 @@ lemma exists_mem_forall_exists_eq_zero_of_isColimit_moduleCat (hc : IsColimit c)
     ((NatTrans.naturality_apply (colimit.ι (D ⋙ sheafToPresheaf _ _) j) f.op x).trans hf)
 
 /-- **Sections of a filtered colimit over a quasi-compact étale `X`-scheme, injectivity.** Let
-`c` be a colimit of a filtered diagram `D` of étale sheaves of `Λ`-modules on `X`, and `W` an étale
+`c` be a colimit of a filtered diagram `D` of étale sheaves of `Λ`-modules on `X`, and `W` an
+étale
 `X`-scheme with quasi-compact underlying space. A section of `D_j` over `W` which vanishes in
 `c.pt` vanishes in some `D_k`, `j ⟶ k`. -/
 lemma exists_map_app_eq_zero_of_isColimit_moduleCat (hc : IsColimit c) {W : X.Etale}
@@ -193,10 +196,12 @@ lemma exists_map_app_eq_zero_of_isColimit_moduleCat (hc : IsColimit c) {W : X.Et
   refine ⟨m, ψ, (isSheafFor_ofArrows_moduleCat (D.obj m) g hcov).isSeparatedFor.ext ?_⟩
   rintro Z f ⟨a⟩
   change (D.obj m).obj.map _ _ = (D.obj m).obj.map _ 0
-  rw [map_zero, ← NatTrans.naturality_apply, ← hh a, map_comp_hom_app_apply_moduleCat, hφ a, map_zero]
+  rw [map_zero, ← NatTrans.naturality_apply, ← hh a, map_comp_hom_app_apply_moduleCat, hφ a,
+    map_zero]
 
 /-- **Sections of a filtered colimit over a qcqs étale `X`-scheme, surjectivity.** Let `c` be a
-colimit of a filtered diagram `D` of étale sheaves of `Λ`-modules on `X`, and `W` an étale `X`-scheme
+colimit of a filtered diagram `D` of étale sheaves of `Λ`-modules on `X`, and `W` an étale
+`X`-scheme
 with quasi-compact quasi-separated underlying scheme. Every section of `c.pt` over `W` comes
 from some `D_j`. -/
 lemma exists_app_eq_of_isColimit_moduleCat (hc : IsColimit c) {W : X.Etale} [CompactSpace W.left]
@@ -387,6 +392,7 @@ lemma commutesWithColimit_zero_moduleCat {T : X.Etale} [CompactSpace T.left]
     rw [Abelian.Ext.mk₀_comp_mk₀, ← Abelian.Ext.mk₀_zero]
     congr 1
     exact (e _).injective ((he _ _).trans (hφ.trans (he₀ _).symm))
+
 /-- **`Ext` out of `G` commutes with filtered colimits of sheaves of modules.** Let `T` be an
 étale `X`-scheme with quasi-compact quasi-separated underlying scheme and let `G` be a sheaf of
 `Λ`-modules corepresenting sections over `T` (for instance the free sheaf `Λ[T]`). Then every
@@ -396,11 +402,9 @@ theorem commutesWithColimit_of_isFiltered_moduleCat {T : X.Etale} [CompactSpace 
     (e : ∀ F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ), (G ⟶ F) ≃ F.obj.obj (op T))
     (he : ∀ {F F' : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)} (f : G ⟶ F) (g : F ⟶ F'),
       e F' (f ≫ g) = g.hom.app _ (e F f))
-    (q : ℕ) (hc : IsColimit c) : Abelian.Ext.CommutesWithColimit.{u + 1} G q c := by
-  have : HasLimitsOfSize.{u, u} (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :=
+    (q : ℕ) (hc : IsColimit c) : Abelian.Ext.CommutesWithColimit G q c := by
+  have : HasLimitsOfSize.{u, u} (ModuleCat.{u + 1} Λ) :=
     hasLimitsOfSizeShrink.{u, u, u + 1, u + 1} _
-  have : HasColimitsOfSize.{u, u} (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :=
-    hasColimitsOfSizeShrink.{u, u, u + 1, u + 1} _
   have : IsFiltered (AsSmall.{u + 1} J) := IsFiltered.of_equivalence AsSmall.equiv
   have : HasExactColimitsOfShape J (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :=
     HasExactColimitsOfShape.of_domain_equivalence _ AsSmall.equiv.symm
