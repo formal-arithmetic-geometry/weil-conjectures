@@ -20,7 +20,8 @@
  },
  "stmt_deps": [
   "def-sc-topological-abelian-cohomology",
-  "lem-sc-cohomology-closed-immersion-pushforward"
+  "lem-sc-cohomology-closed-immersion-pushforward",
+  "def-weil-pbc-site-extension-by-zero-presheaf"
  ],
  "proof": [
   {
@@ -182,5 +183,23 @@
   "group": "M1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-ocs1754 (reviewer sub-agent of L); spot-checked: Steps 1-5 against 02UT/02UZ/02UV and cited statements; no cycle (new node created from item, cites only defs; inverse-image-stalk node deps are pbc defs/stalk lemmas); extension by zero cited via new node lem-sc-topological-extension-by-zero-stalks, not a duplicate of the etale pbc/purity extension-by-zero nodes; Mathlib grep extendByZero/lowerShriek in Topology+AlgebraicGeometry: no match. FIX more, RETURN less: (1) C1/E: i^*F and the map b (and c in Step 4) were written as restriction F(V)->F(V cap Z), ill-typed for non-open V cap Z, and the stalk identification (i^*F)_z=F_z was uncited; now b, c are the units of i^{-1} -| i_* [def-weil-pbc-topological-inverse-image] and the stalk identification cites lem-weil-pbc-topological-inverse-image-stalk (declared tool use), proof_deps updated; (2) B3: new node used j^*F and the adjunction map undefined; now defined in its statement. Noetherian hypothesis unused (harmless; target statement fixed).; 2 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Topology.NoetherianOpenClosedCohomologySequence",
+  "declaration": "TopCat.noetherian_open_closed_cohomology_sequence",
+  "file": "lean/Sheaf/Topology/NoetherianOpenClosedCohomologySequence.lean",
+  "statement": "theorem noetherian_open_closed_cohomology_sequence (X : TopCat.{u}) [NoetherianSpace X] (U : Opens X) (F : TopCat.Sheaf AddCommGrpCat.{u} X) : ∃ a : (presheafToSheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u}).obj ((siteExtensionByZeroPresheaf U).obj (F.over U).obj) ⟶ F, (∀ (V : Opens X) (φ : V ⟶ U) (s : F.obj.obj (Opposite.op V)), (a.hom.app (Opposite.op V)) ((toSheafify (Opens.grothendieckTopology X) ((siteExtensionByZeroPresheaf U).obj (F.over U).obj)).app (Opposite.op V) (DirectSum.of (fun ψ : V ⟶ U ↦ (F.over U).obj.obj (Opposite.op (Over.mk ψ))) φ s)) = s) ∧ (∃ h : a ≫ (TopCat.Sheaf.pullbackPushforwardAdjunction AddCommGrpCat.{u} (TopCat.ofHom ⟨Subtype.val, continuous_subtype_val⟩ : TopCat.of ↥((U : Set X)ᶜ) ⟶ X)).unit.app F = 0, (ShortComplex.mk a ((TopCat.Sheaf.pullbackPushforwardAdjunction AddCommGrpCat.{u} (TopCat.ofHom ⟨Subtype.val, continuous_subtype_val⟩ : TopCat.of ↥((U : Set X)ᶜ) ⟶ X)).unit.app F) h).ShortExact) ∧ ∃ F' : TopCat.Sheaf AddCommGrpCat.{u} (TopCat.of ↥(closure (U : Set X))), Nonempty ((presheafToSheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u}).obj ((siteExtensionByZeroPresheaf U).obj (F.over U).obj) ≅ (TopCat.Sheaf.pushforward AddCommGrpCat.{u} (TopCat.ofHom ⟨Subtype.val, continuous_subtype_val⟩ : TopCat.of ↥(closure (U : Set X)) ⟶ X)).obj F') ∧ ∀ p : ℕ, Nonempty (@CategoryTheory.Sheaf.H' (Opens ↥(closure (U : Set X))) _ (Opens.grothendieckTopology ↥(closure (U : Set X))) _ (HasExt.standard _) F' p ⊤ ≅ @CategoryTheory.Sheaf.H' (Opens X) _ (Opens.grothendieckTopology X) _ (HasExt.standard _) ((presheafToSheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u}).obj ((siteExtensionByZeroPresheaf U).obj (F.over U).obj)) p ⊤)",
+  "branch": "sheaf-dag",
+  "by": "U1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-hde5ce",
+  "group": "U1",
+  "result": "pass",
+  "note": "headless review: Noetherian X ↔ [NoetherianSpace X]; open j:U→X ↔ U : Opens X; closed complement i:Z→X ↔ subtype inclusion of (U:Set X)ᶜ; abelian sheaf F ↔ TopCat.Sheaf AddCommGrpCat X; j_!j^*F ↔ presheafToSheaf of the landed siteExtensionByZeroPresheaf U applied to F.over U (direct sum over V⟶U); 0→j_!j^*F→F→i_*i^*F→0 ↔ a (pinned as the canonical map by the DirectSum.of equation), the unit of pullbackPushforwardAdjunction for the complement, ShortComplex.ShortExact (composite zero, mono, exact, epi); closed direct image from the closure ↔ ∃ F' on closure U with an iso to its pushforward; cohomology computed on the closure ↔ ∀ p, Sheaf.H' (HasExt.standard) iso at ⊤, same form as cohomology_closed_immersion_pushforward; stmt_deps only gained a landed def; compile clean"
  }
 }
