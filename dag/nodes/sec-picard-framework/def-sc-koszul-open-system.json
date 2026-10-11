@@ -1,0 +1,139 @@
+{
+ "id": "def-sc-koszul-open-system",
+ "kind": "definition",
+ "title": "Canonical truncated Koszul power system on an affine scheme",
+ "status": "split",
+ "statement": "Let $A$ be a commutative ring, $X=\\operatorname{Spec}(A)$ [def-pc-scheme], and $f_1,\\ldots,f_r\\in A$. Put $U=\\bigcup_iD(f_i)$. From the Koszul complex [def-weil-pbc-koszul-complex], for $e\\ge1$ form $I_e^i=K^{i-1}(f_1^e,\\ldots,f_r^e)$ for $i\\le0$, zero otherwise, with negative Koszul differential. Its augmentation to $A[0]$ is the Koszul boundary $K_1\\to K_0=A$. For $a\\le b$ the comparison $I_b\\to I_a$ in degree $-n$ is the exterior power of the diagonal map multiplying generator $i$ by $f_i^{b-a}$. Termwise associated sheaf and localization to $D(\\mathcal O_X)$ [def-pc-derived-category] give the canonical objects, augmentations and comparisons. For $E\\in D(\\mathcal O_X)$, they give the directed diagram $e\\mapsto\\operatorname{Hom}(I_e,E)$ with transitions by precomposition. The full Koszul complex gives $K_e$ and the canonical inclusion $\\mathcal O_X\\to K_e$.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-koszul-complex",
+  "def-pc-derived-category"
+ ],
+ "source": {
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 08CX, section-koszul, equation-system; Tag 08DC, equation-comparison"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "truncated Koszul complex inverse system powers",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-11",
+   "verdict": "unavailable (no mathematical verdict)"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Koszul complex truncation I with negative differential and power comparison maps",
+   "results": "8 hits: HomologicalComplex.truncGE'.d, ChainComplex.truncateTo, ChainComplex.truncate_obj_d, HomologicalComplex.truncLE'_d_eq, HomologicalComplex.truncGE'_d_eq, HomologicalComplex.truncLE'_d_eq_toCycles, HomologicalComplex.truncGE'.d_comp_d_assoc, HomologicalComplex.truncGE'.d_comp_d. Generic truncation operations, no negative Koszul power system.",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "koszulOpen|Koszul.*[Ss]ystem|[Tt]runcated.*Koszul in Mathlib",
+   "results": "0 hits",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "koszulOpen|Koszul.*[Ss]ystem|[Tt]runcated.*Koszul in WeilConjectures and lean/Sheaf; blueprint_refs.py search Koszul; rg of dag/nodes",
+   "results": "No existing definition of the truncated power system. Project has ExteriorAlgebra.koszulComplex, used here. Blueprint intrinsic-completion nodes concern full Koszul complexes and derived inverse limits, not the augmented truncated tail. The lem-sc-affine-perfect-koszul-principal-unit and comparison statement nodes mention these objects but do not define them.",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sc-affine-perfect-open-represent-cohomology",
+  "date": "2026-10-11",
+  "group": "M1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "proper-flat support proof: modify the affine supported perfect complex so its map to E lifts over the affine open",
+   "via": [
+    "lem-sc-affine-perfect-open-represent-cohomology",
+    "lem-sc-affine-perfect-map-lift",
+    "lem-sc-perfect-support-map-lift",
+    "lem-sc-proper-flat-right-adjoint-open-support",
+    "lem-sc-proper-flat-right-adjoint-restriction-open",
+    "lem-sc-proper-flat-right-adjoint-basechange",
+    "lem-sc-smooth-proper-diagonal-basechange-upper-shriek",
+    "lem-sc-smooth-proper-diagonal-pushforward-structure",
+    "lem-sc-smooth-proper-relative-dualizing-general",
+    "lem-sc-smooth-proper-curve-dualizing",
+    "lem-sc-finite-duality-trace"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.KoszulOpenSystem",
+  "declaration": "AlgebraicGeometry.koszulOpenObject",
+  "file": "lean/Sheaf/AlgebraicGeometry/KoszulOpenSystem.lean",
+  "statement": "def koszulOpenObject (e : ℕ) : schemeDerivedCategory (Spec (.of A))",
+  "branch": "sheaf-dag",
+  "by": "M1",
+  "date": "2026-10-11",
+  "existing": false,
+  "declarations": [
+   "AlgebraicGeometry.koszulOpenTail_square",
+   "AlgebraicGeometry.koszulOpenTail",
+   "AlgebraicGeometry.koszulOpenAugmentationComponent",
+   "AlgebraicGeometry.koszulOpenAugmentationComponent_cycle",
+   "AlgebraicGeometry.koszulOpenAugmentation",
+   "AlgebraicGeometry.koszulOpenDiagonal",
+   "AlgebraicGeometry.koszulOpenTransitionComponent",
+   "AlgebraicGeometry.koszulOpenTransitionComponent_comm",
+   "AlgebraicGeometry.koszulOpenTransition",
+   "AlgebraicGeometry.koszulOpenTilde",
+   "AlgebraicGeometry.koszulOpenTilde_additive_proof",
+   "AlgebraicGeometry.koszulOpenTilde_additive",
+   "AlgebraicGeometry.koszulOpenSheafComplex",
+   "AlgebraicGeometry.koszulOpenObject",
+   "AlgebraicGeometry.koszulOpenStructure",
+   "AlgebraicGeometry.koszulOpenKoszulObject",
+   "AlgebraicGeometry.koszulOpenKoszulInclusion",
+   "AlgebraicGeometry.koszulOpenKoszulUnit",
+   "AlgebraicGeometry.koszulOpenUnit",
+   "AlgebraicGeometry.koszulOpenMap",
+   "AlgebraicGeometry.koszulOpen",
+   "AlgebraicGeometry.koszulOpenMap_laws",
+   "AlgebraicGeometry.koszulOpenHomDiagram_laws",
+   "AlgebraicGeometry.koszulOpenHomDiagram"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-aor",
+  "group": "M1",
+  "result": "fix",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-aor",
+  "group": "M1",
+  "result": "fix",
+  "note": "A,r,f,U=koszulOpen; E in D_QCoh; I_e=tail K^{i-1} neg diff, aug K1->K0, transitions f^(b-a) wedge (checked commute with d and aug); triangle I->O->K; IsPerfect; u_e|_U iso via two-sided v; colimit Hom(I_e,E)->Hom(O_U,E|_U) with fixed legs; FIX: restriction now overFunctor ⋙ (Scheme.Modules.overEquiv U).functor as sibling map-lift"
+ }
+}

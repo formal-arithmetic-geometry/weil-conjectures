@@ -21,7 +21,8 @@
  "stmt_deps": [
   "def-pc-scheme",
   "def-pc-derived-category",
-  "def-pc-perfect-complex"
+  "def-pc-perfect-complex",
+  "def-sc-koszul-open-system"
  ],
  "proof": [
   {
@@ -152,5 +153,24 @@
   "group": "C1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-rch2944 (reviewer sub-agent of L); spot-checked: Item statement vs Tags 08CX/08DC/08DD (H^0 form, E in D_QCoh) matches G1 step 2 use (E=R in D_QCoh) and J1 (applied to E[n]); principal-unit node true (bounded finite free; cone K_e acyclic on each D(f_i)); Koszul-Cech node = 08D1+08D2 combined, not a duplicate of lem-pc-alternating-cech-computes (single sheaf, Cech vs alternating) nor of lem-pc-qcoh-truncation-derived-limit. FIX more, RETURN less: C1 Step 3 used, uncited, (a) representing E by a qcoh complex and Hom_{D(A)}=Hom_{D(O_X)} -> cited lem-pc-affine-qcoh-derived-equivalence (Tag 06Z0, generic affine tool from sk-thm-picard-f-representable, C7 tool use); (b) H^0 Hom^*(I^*,M^*)=Hom_{D(A)} for unbounded M^* -> cited lem-sc-bounded-above-projective-kprojective plus the K-projective Hom fact folded in text (lem-sc-affine-projective-complex-derived-hom not usable: needs M bounded below, C4); proof_deps updated. Second reading by C1 missed this.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AffinePerfectOpenRepresentCohomology",
+  "declaration": "AlgebraicGeometry.affine_perfect_open_represent_cohomology",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffinePerfectOpenRepresentCohomology.lean",
+  "statement": "theorem affine_perfect_open_represent_cohomology (A : Type uMain) [CommRing A] (r : ℕ) (f : Fin r → A) [HasDerivedCategory.{wMain} (SheafOfModules.{uMain} (moduleRings (Spec (.of A)).toRingedSpace))] [∀ V : (Spec (.of A)).Opens, HasDerivedCategory.{wMain} (SheafOfModules.{uMain} ((moduleRings (Spec (.of A)).toRingedSpace).over V))] [HasDerivedCategory.{wMain} (SheafOfModules.{uMain} (moduleRings (koszulOpen A r f).toScheme.toRingedSpace))] (E : schemeDerivedQCohCategory (Spec (.of A))) : (∀ e : ℕ, ∃ δ : koszulOpenKoszulObject A r f e ⟶ (koszulOpenObject A r f e)⟦(1 : ℤ)⟧, Triangle.mk (koszulOpenUnit A r f e) (koszulOpenKoszulUnit A r f e) δ ∈ distTriang (schemeDerivedCategory (Spec (.of A)))) ∧ (∀ e : ℕ, Scheme.IsPerfect (Spec (.of A)) (koszulOpenObject A r f e)) ∧ (∀ (a b : ℕ) (h : a ≤ b), koszulOpenMap A r f a b h ≫ koszulOpenUnit A r f a = koszulOpenUnit A r f b) ∧ ∃ v : ∀ e : ℕ, ((SheafOfModules.overFunctor.{uMain} (moduleRings (Spec (.of A)).toRingedSpace) (koszulOpen A r f)) ⋙ Equivalence.functor (C := SheafOfModules.{uMain} ((moduleRings (Spec (.of A)).toRingedSpace).over (koszulOpen A r f))) (D := SheafOfModules.{uMain} (moduleRings (koszulOpen A r f).toScheme.toRingedSpace)) (Scheme.Modules.overEquiv (koszulOpen A r f))).mapDerivedCategory.obj (koszulOpenStructure A) ⟶ ((SheafOfModules.overFunctor.{uMain} (moduleRings (Spec (.of A)).toRingedSpace) (koszulOpen A r f)) ⋙ Equivalence.functor (C := SheafOfModules.{uMain} ((moduleRings (Spec (.of A)).toRingedSpace).over (koszulOpen A r f))) (D := SheafOfModules.{uMain} (moduleRings (koszulOpen A r f).toScheme.toRingedSpace)) (Scheme.Modules.overEquiv (koszulOpen A r f))).mapDerivedCategory.obj (koszulOpenObject A r f e), (∀ e : ℕ, ((SheafOfModules.overFunctor.{uMain} (moduleRings (Spec (.of A)).toRingedSpace) (koszulOpen A r f)) ⋙ Equivalence.functor (C := SheafOfModules.{uMain} ((moduleRings (Spec (.of A)).toRingedSpace).over (koszulOpen A r f))) (D := SheafOfModules.{uMain} (moduleRings (koszulOpen A r f).toScheme.toRingedSpace)) (Scheme.Modules.overEquiv (koszulOpen A r f))).mapDerivedCategory.map (koszulOpenUnit A r f e) ≫ v e = 𝟙 _) ∧ (∀ e : ℕ, v e ≫ ((SheafOfModules.overFunctor.{uMain} (moduleRings (Spec (.of A)).toRingedSpace) (koszulOpen A r f)) ⋙ Equivalence.functor (C := SheafOfModules.{uMain} ((moduleRings (Spec (.of A)).toRingedSpace).over (koszulOpen A r f))) (D := SheafOfModules.{uMain} (moduleRings (koszulOpen A r f).toScheme.toRingedSpace)) (Scheme.Modules.overEquiv (koszulOpen A r f))).mapDerivedCategory.map (koszulOpenUnit A r f e) = 𝟙 _) ∧ ∃ ι : koszulOpenHomDiagram A r f E.1 ⟶ (Functor.const ℕ).obj (((SheafOfModules.overFunctor.{uMain} (moduleRings (Spec (.of A)).toRingedSpace) (koszulOpen A r f)) ⋙ Equivalence.functor (C := SheafOfModules.{uMain} ((moduleRings (Spec (.of A)).toRingedSpace).over (koszulOpen A r f))) (D := SheafOfModules.{uMain} (moduleRings (koszulOpen A r f).toScheme.toRingedSpace)) (Scheme.Modules.overEquiv (koszulOpen A r f))).mapDerivedCategory.obj (koszulOpenStructure A) ⟶ ((SheafOfModules.overFunctor.{uMain} (moduleRings (Spec (.of A)).toRingedSpace) (koszulOpen A r f)) ⋙ Equivalence.functor (C := SheafOfModules.{uMain} ((moduleRings (Spec (.of A)).toRingedSpace).over (koszulOpen A r f))) (D := SheafOfModules.{uMain} (moduleRings (koszulOpen A r f).toScheme.toRingedSpace)) (Scheme.Modules.overEquiv (koszulOpen A r f))).mapDerivedCategory.obj E.1), (∀ (e : ℕ) (φ : koszulOpenObject A r f e ⟶ E.1), ι.app e φ = v e ≫ ((SheafOfModules.overFunctor.{uMain} (moduleRings (Spec (.of A)).toRingedSpace) (koszulOpen A r f)) ⋙ Equivalence.functor (C := SheafOfModules.{uMain} ((moduleRings (Spec (.of A)).toRingedSpace).over (koszulOpen A r f))) (D := SheafOfModules.{uMain} (moduleRings (koszulOpen A r f).toScheme.toRingedSpace)) (Scheme.Modules.overEquiv (koszulOpen A r f))).mapDerivedCategory.map φ) ∧ Nonempty (IsColimit (Cocone.mk _ ι))",
+  "branch": "sheaf-dag",
+  "by": "M1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-aor"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-aor",
+  "group": "M1",
+  "result": "fix",
+  "note": "A,r,f,U=koszulOpen; E in D_QCoh; I_e=tail K^{i-1} neg diff, aug K1->K0, transitions f^(b-a) wedge (checked commute with d and aug); triangle I->O->K; IsPerfect; u_e|_U iso via two-sided v; colimit Hom(I_e,E)->Hom(O_U,E|_U) with fixed legs; FIX: restriction now overFunctor ⋙ (Scheme.Modules.overEquiv U).functor as sibling map-lift"
  }
 }
