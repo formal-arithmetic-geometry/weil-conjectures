@@ -140,5 +140,23 @@
   "by": "L",
   "result": "accepted",
   "note": "3 steps follow Stacks 093N(1): generators of M_i give global sections of G|_{U_i}; locally surjective by the new leaf (sections of a constant module sheaf are locally constant; LocallyBijective.lean:136 verified); epimorphism via the abelian-sheaf epi node and faithfulness; the finite-type definition asks for one etale covering of Y. Tag 093N verified."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.LocallyConstantFiniteValuesFiniteType",
+  "declaration": "AlgebraicGeometry.Scheme.locallyConstant_finiteValues_isFiniteType",
+  "file": "lean/Sheaf/AlgebraicGeometry/LocallyConstantFiniteValuesFiniteType.lean",
+  "statement": "theorem locallyConstant_finiteValues_isFiniteType {Y : Scheme.{u}} {Λ : Type (u + 1)} [CommRing Λ] (F : Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (𝒰 : Cover.{u} etalePrecoverage Y) (M : 𝒰.I₀ → ModuleCat.{u + 1} Λ) (hfinite : ∀ i : 𝒰.I₀, Module.Finite Λ (M i)) (α : ∀ i : 𝒰.I₀, F.over (𝒰.etalePrecoverageToEtale i) ≅ (constantSheaf (Y.smallEtaleTopology.over (𝒰.etalePrecoverageToEtale i)) (ModuleCat.{u + 1} Λ)).obj (M i)) : IsFiniteTypeEtaleModuleSheaf F ∧ ∀ (i : 𝒰.I₀) (n : ℕ) (x : Fin n → M i), Submodule.span Λ (Set.range x) = ⊤ → Epi ((constantSheaf (Y.smallEtaleTopology.over (𝒰.etalePrecoverageToEtale i)) (ModuleCat.{u + 1} Λ)).map (ModuleCat.ofHom (∑ j : Fin n, (LinearMap.proj j).smulRight (x j) : (Fin n → Λ) →ₗ[Λ] M i)) ≫ (α i).inv)",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-lcf1126",
+  "group": "H1",
+  "result": "pass",
+  "note": "Y Scheme.{u}; Λ CommRing at u+1; F module sheaf on smallEtaleTopology; 𝒰 Cover etalePrecoverage (jointly surjective étale); M_i with Module.Finite; α_i : F.over ≅ constantSheaf.obj (M i) on J.over; conclusion IsFiniteTypeEtaleModuleSheaf F ∧ ∀ generating x : Fin n → M i, Epi (constantSheaf.map (Σ proj_j.smulRight x_j) ≫ α.inv), same source as the recorded finite-type def; #check Cover/etalePrecoverage/Sheaf.over resolve to Mathlib"
  }
 }
