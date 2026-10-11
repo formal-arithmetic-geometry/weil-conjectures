@@ -82,5 +82,26 @@
   "summary": "Definition split. Checked the statement against the master blueprint node (order 720; slopmaster2 has no copy) and Stacks fields.tex (Tags 09G3 degree/finite, 09GC algebraic, 09H1 separable, 09HE purely inseparable, 09GS algebraic closure, 09GQ algebraically closed, 09FR characteristic). Every notion now cites a definition node, all Mathlib leaves: field extension def-pc-field-extension (Algebra), degree via def-weil-vector-space-dimension (Module.finrank) and def-weil-finite-dimensional-subspace (finite = Module.Finite), algebraic def-weil-algebraic-element (Algebra.IsAlgebraic), finite separable = finite + def-weil-pbc-separable-algebraic-extension (Algebra.IsSeparable), purely inseparable def-weil-pbc-finite-purely-inseparable-extension (IsPurelyInseparable), algebraically closed and algebraic closure def-weil-algebraic-closure (IsAlgClosed, IsAlgClosure). New leaf def-pc-field-characteristic (CharP/ringChar) for the p the statement used without introducing it. The well-definedness of 'separable minimal polynomial' in a finite extension (finite implies algebraic, Stacks 09GG) is taken from the existing leaf lem-weil-pbc-finite-algebra-is-integral (integral, hence algebraic) and named in the statement. Existence and uniqueness of an algebraic closure (Stacks 09GT, 09GV), presupposed by the citers' notation k-bar, had no statement node (def-weil-algebraic-closure only mentions them inside a definition): new leaf lem-pc-algebraic-closure-exists-unique, flagged unreachable (nothing cites it yet; the item, a definition, does not cite a lemma about its own notion). Statement changes: p was undefined; it is now the characteristic of k, and the parenthesis 'in characteristic 0 this means K=k' is made the characteristic-0 clause of the definition (as in Stacks 09HE and the cited node), since with p = 0 the power condition would be meaningless. Removed def-pc-scheme from stmt_deps: the statement uses no scheme. Whole item: every clause is one Mathlib class (searches recorded); left as split, not mathlib, because it is five definitions, not one declaration.",
   "blueprint": "the item is itself the blueprint node (a definition, no proof): its five clauses (finite, algebraic, finite separable, purely inseparable, algebraic closure) are realized by the stmt_deps listed in the summary; the implicit claims of the text (minimal polynomials exist in a finite extension; an algebraic closure exists and is unique, used as the notation k-bar) are lem-weil-pbc-finite-algebra-is-integral and lem-pc-algebraic-closure-exists-unique"
  },
- "reviewed": "2026-10-10 L: definition split; every notion cited to a Mathlib-leaf definition node (finite, algebraic, separable, purely inseparable, algebraic closure, characteristic: new leaf), existence and uniqueness of the algebraic closure moved into a new Mathlib-leaf statement (unreachable, flagged); p defined, the characteristic-0 clause fixed; 2 new nodes"
+ "reviewed": "2026-10-10 L: definition split; every notion cited to a Mathlib-leaf definition node (finite, algebraic, separable, purely inseparable, algebraic closure, characteristic: new leaf), existence and uniqueness of the algebraic closure moved into a new Mathlib-leaf statement (unreachable, flagged); p defined, the characteristic-0 clause fixed; 2 new nodes",
+ "lean": {
+  "module": "Sheaf.FieldTheory.FieldTower",
+  "declaration": "FieldExtension.degree",
+  "declarations": [
+   "FieldExtension.degree"
+  ],
+  "file": "lean/Sheaf/FieldTheory/FieldTower.lean",
+  "statement": "def degree (k : Type u) (K : Type v) [Field k] [Field K] [Algebra k K] : WithTop ℕ",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-fto0612",
+  "group": "C1",
+  "result": "fix",
+  "note": "k K fields + Algebra k K = field extension; degree = Module.finrank if Module.Finite else ⊤ (node's ∞); other clauses Mathlib: finite Module.Finite, algebraic Algebra.IsAlgebraic, finite separable Module.Finite ∧ Algebra.IsSeparable, purely inseparable IsPurelyInseparable (= node's p>0/p=0 split via isPurelyInseparable_iff_pow_mem, q=1 gives K=k), algebraic closure IsAlgClosure; 5 aliases gone, if without h, imports trimmed; report Changes paragraph replaced (was stale)"
+ }
 }
