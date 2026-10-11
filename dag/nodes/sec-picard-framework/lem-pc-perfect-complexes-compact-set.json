@@ -132,5 +132,23 @@
   "group": "C1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-pcs2624 (reviewer sub-agent of L); spot-checked: 20:59 return points 1-3 repaired: chain-level encoding removed, route is qcqs induction (08DR node) + affine case + 08BV derived Mayer-Vietoris triangle (new node true as stated, specialization of 08BV; not dup of the open-restriction triangle or MV long exact sequence); cocone-of-fixed-morphism argument correct; no downstream citation (no cycle); statement unchanged so citer lem-pc-derived-qcoh-compact-generation unaffected (C4). FIX more, RETURN less: (C1) Step 1 used the local-to-global affine fact Stacks 08EB (perfect on Spec A = bounded finite projective complex globally), which def-pc-perfect-complex does not state (it only describes strictly perfect complexes on the cover) and no node stated; added statement-only node lem-pc-perfect-affine-bounded-projective and rewrote Step 1 on it, making the set-size argument explicit (terms as submodules of A^n); (C1) Step 2 now states restriction of perfect is perfect from def-pc-perfect-complex and the transport of the second triangle map to fixed representatives; dropped tool_use lem-pc-affine-qcoh-derived-equivalence (no longer used). Hom-sets of D(O_X) taken as sets by the framework convention of def-pc-derived-category. Second reading by C1 missed the 08EB gap.; 2 file(s) fixed by the reviewer; 1 statement node(s) added by the reviewer (FIX more, RETURN less)"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.PerfectComplexRepresentatives",
+  "declaration": "AlgebraicGeometry.Scheme.exists_perfectComplex_representatives",
+  "file": "lean/Sheaf/AlgebraicGeometry/PerfectComplexRepresentatives.lean",
+  "statement": "theorem exists_perfectComplex_representatives (X : Scheme.{u}) [CompactSpace X] [QuasiSeparatedSpace X] [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))] [∀ U : X.Opens, HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))] : ∃ (I : Type u) (P : I → schemeDerivedQCohCategory X), (∀ i : I, IsPerfect X (P i).obj) ∧ ∀ E : schemeDerivedQCohCategory X, IsPerfect X E.obj → ∃ i : I, Nonempty (E ≅ P i)",
+  "branch": "sheaf-dag",
+  "by": "K1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-pcs1437",
+  "group": "K1",
+  "result": "pass",
+  "note": "X:Scheme.{u} qcqs = CompactSpace+QuasiSeparatedSpace; D_QCoh = schemeDerivedQCohCategory; perfect = recorded IsPerfect on .obj (perfectSubcategory is IsPerfect); set of reps = ∃ I:Type u, P with all P i perfect and every perfect E ≅ some P i (u-small true: affine finite-projective models + MV cones, Homs u-essentially-small); I in u matches downstream HasCoproducts.{u} in DerivedQCohCompactGeneration; HasDerivedCategory binders are IsPerfect's signature; no let/show/hollow binders; node statement unchanged"
  }
 }
