@@ -25,7 +25,9 @@
   "def-pc-tensor-complex-sheaves",
   "def-pc-kflat-complex",
   "lem-pc-affine-qcoh-derived-equivalence",
-  "lem-weil-pbc-spec-module-tilde-sections"
+  "lem-weil-pbc-spec-module-tilde-sections",
+  "def-pc-scheme-derived-tensor-structure",
+  "def-pc-module-kflat-complex"
  ],
  "proof": [
   {
@@ -166,5 +168,32 @@
    "decls": [],
    "missing": []
   }
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AffineDerivedPullbackTensorTilde",
+  "declaration": "AlgebraicGeometry.derivedPullback_openRestriction_iso",
+  "declarations": [
+   "AlgebraicGeometry.derivedPullback_openRestriction_iso",
+   "AlgebraicGeometry.derivedTensor_openRestriction_iso",
+   "AlgebraicGeometry.derivedPullback_tilde_iso",
+   "AlgebraicGeometry.derivedTensor_tilde_iso",
+   "AlgebraicGeometry.derivedPullback_tilde_kFlat_natIso",
+   "AlgebraicGeometry.derivedTensor_tilde_kFlat_natIso"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineDerivedPullbackTensorTilde.lean",
+  "statement": "theorem derivedPullback_openRestriction_iso {X Y : Scheme.{u}} (f : X ⟶ Y) (U : X.Opens) (V : Y.Opens) (hUV : U ≤ f ⁻¹ᵁ V) [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))] [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))] [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace))] [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings V.toScheme.toRingedSpace))] : Nonempty (derivedPullback f ⋙ (SheafOfModules.overFunctor.{u} (moduleRings X.toRingedSpace) U ⋙ Equivalence.functor (C := SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U)) (D := SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace)) (Scheme.Modules.overEquiv U)).mapDerivedCategory ≅ (SheafOfModules.overFunctor.{u} (moduleRings Y.toRingedSpace) V ⋙ Equivalence.functor (C := SheafOfModules.{u} ((moduleRings Y.toRingedSpace).over V)) (D := SheafOfModules.{u} (moduleRings V.toScheme.toRingedSpace)) (Scheme.Modules.overEquiv V)).mapDerivedCategory ⋙ derivedPullback (f.resLE V U hUV))",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-11",
+  "existing": false,
+  "note": "The six statements together render all three clauses. The two open-restriction comparisons and the two affine comparisons on K-flat models are natural isomorphisms. The affine object formulas apply to every K-flat resolution P → M, whose scalar-extension or total-tensor complex is precisely the module derived-tensor representative; no boundedness or flatness assumption is imposed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-apt",
+  "group": "F1",
+  "result": "pass",
+  "note": "clause (1): Lf* ⋙ R_U ≅ R_V ⋙ L(f.resLE V U hUV)* with R = overFunctor ⋙ overEquiv.functor, mapDerivedCategory; (K⊗L)|U ≅ K|U⊗L|U as curried natIso via global schemeDerivedTensorMonoidal; (2) Spec.map φ, Lf* Q(tilde M) ≅ Q(tilde (extendScalars φ P)) for any K-flat qis P→M (recorded MorphismProperty.kFlat), plus natIso on ιKFlat; (3) Q tilde M ⊗ Q tilde N ≅ Q tilde (mapBifunctor P N), natIso via map₂CochainComplex; tilde form as landed 5adffa6dd/qcoh-equivalence; no let/choose/local notation; stmt_deps gained 2 landed used nodes; check_dag unchanged"
  }
 }
