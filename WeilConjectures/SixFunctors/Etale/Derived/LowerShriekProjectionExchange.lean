@@ -37,6 +37,11 @@ namespace Etale
 
 variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
 
+-- Search the braiding of `ModuleCat Λ` through its symmetric structure, as in the generic
+-- statements specialised here: otherwise the monoidal structures on sheaves and derived categories
+-- found by instance search differ from the specialised ones, and unifying them is very expensive.
+attribute [local instance high] SymmetricCategory.toBraidedCategory
+
 section Independence
 
 variable {X Y : Scheme.{u}} {f : X ⟶ Y} [QuasiCompact f]
@@ -127,6 +132,8 @@ theorem projectionMapOfCompactification_rightDerivedLowerShriekBaseChangeMap'
   rw [show rightDerivedLowerShriekIso Λ c' = rightDerivedLowerShriekOfCompactificationIso Λ c'
       (HasCompactification.compactification f') from rfl]
   dsimp only [Functor.comp_obj]
+  -- TODO: `rw [hD']` here blows up memory (instance mismatch between the generic theorem
+  -- specialised at `ModuleCat Λ` and directly elaborated terms), see the memory notes.
   sorry
 
 /-- **The projection map commutes with the exchange map `Ex_!`**: for a cartesian square
