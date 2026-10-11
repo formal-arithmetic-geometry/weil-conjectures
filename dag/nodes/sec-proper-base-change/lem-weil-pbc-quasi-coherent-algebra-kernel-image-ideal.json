@@ -26,7 +26,8 @@
   "def-weil-sheaf-of-modules-category",
   "pqf-def-coherent",
   "def-weil-pbc-sheafification",
-  "def-pur-sheaf-tensor-product"
+  "def-pur-sheaf-tensor-product",
+  "def-weil-pbc-comm-algebra-sheaf"
  ],
  "proof": [
   {
@@ -191,5 +192,28 @@
   "item": "lem-weil-pbc-quasi-coherent-algebra-kernel-image-ideal",
   "worker": "stage1",
   "summary": "Split into the module-level Stacks results plus algebra bookkeeping. Module level: kernel quasi-coherent (new lem-weil-pbc-quasi-coherent-module-kernel, Schemes 01IC/01LB; stated exactly by the sorry-free slopmaster2 declaration AlgebraicGeometry.Scheme.Modules.isQuasicoherent_kernel), cokernel and image quasi-coherent with sections over affines (new lem-weil-pbc-quasi-coherent-module-cokernel-image, 01IC/01IB/01LA(5)), tensor product quasi-coherent with affine sections the tensor of sections (new lem-weil-pbc-quasi-coherent-tensor-product-affine-sections, 01I8(1)/01CE). Algebra level: kernel is a sheaf of ideals (sectionwise), image a subalgebra (local sections), the ideal (e(E)) = Im(B (x) E -> B) with its minimality checked on affine opens (Step 0: affine opens cover every open), the quotient algebra as ring sheafification of B(U)/I(U) identified with the module cokernel by the two universal properties (existing lem-weil-pbc-ring-sheafification-space-underlying-abelian), universal property from the ring sheafification. Statement kept; stmt_deps gained def-weil-pbc-sheafification and def-pur-sheaf-tensor-product, which the statement uses. Mathlib (LeanSearch, LeanFinder, Loogle, grep) has no kernel/cokernel/image/tensor permanence for quasi-coherent SheafOfModules."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.QuasiCoherentAlgebraKernelImageIdeal",
+  "declaration": "AlgebraicGeometry.Scheme.CommAlgebraSheaf.kernel_image_quasiCoherent",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.CommAlgebraSheaf.kernel_image_quasiCoherent",
+   "AlgebraicGeometry.Scheme.CommAlgebraSheaf.generated_ideal_quotient_quasiCoherent"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/QuasiCoherentAlgebraKernelImageIdeal.lean",
+  "statement": "theorem kernel_image_quasiCoherent {X : Scheme.{u}} (B A : X.CommAlgebraSheaf) (hB : B.toModule.IsQuasicoherent) (hA : A.toModule.IsQuasicoherent) (ψ : B ⟶ A) : (∃ (J : X.Modules) (i : J ⟶ B.toModule), J.IsQuasicoherent ∧ ∀ U : X.Opens, Function.Injective (i.app U) ∧ Set.range (i.app U) = (RingHom.ker (ψ.right.hom.app (op U)).hom : Set (B.right.obj.obj (op U)))) ∧ (∃ (D : X.CommAlgebraSheaf) (k : D ⟶ A), D.toModule.IsQuasicoherent ∧ (∀ U : X.Opens, Function.Injective (k.right.hom.app (op U))) ∧ (∀ (U : X.Opens) (s : A.right.obj.obj (op U)), s ∈ Set.range (k.right.hom.app (op U)) ↔ ∀ x : X, x ∈ U → ∃ (V : X.Opens) (hVU : V ≤ U), x ∈ V ∧ A.right.obj.map (homOfLE hVU).op s ∈ Set.range (ψ.right.hom.app (op V))) ∧ (∀ (U : X.Opens), IsAffineOpen U → Set.range (k.right.hom.app (op U)) = Set.range (ψ.right.hom.app (op U))))",
+  "branch": "sheaf-dag",
+  "by": "M1",
+  "date": "2026-10-11",
+  "existing": false,
+  "note": "Part (a) is kernel_image_quasiCoherent; part (b) is generated_ideal_quotient_quasiCoherent. Ideals are represented by module-sheaf inclusions with injective section maps and specified ideal ranges; no additional definition is introduced. Quotient presheaf sections are specified by surjectivity and kernel, and the quotient sheaf and its map are tied to the existing sheafification adjunction unit."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-qki1452",
+  "group": "M1",
+  "result": "pass",
+  "note": "arbitrary X : Scheme.{u}; B A : X.CommAlgebraSheaf with .toModule.IsQuasicoherent, ψ : B ⟶ A in Under; kernel = mono J ⟶ B.toModule with range = RingHom.ker ψ_U on all opens, qcoh; image = algebra D ↪ A with local-preimage ranges, qcoh, affine range ψ_U; (b) E qcoh, e : E ⟶ B.toModule; ideal sheaf I contains e(E), minimal over all ideal subsheaves, affine = Ideal.span, local image of μ on sheafified presheaf tensor with μ(b⊗s)=b·e(s); quotient Q = sheafification of sectionwise B(U)/I(U) tied by unit and iso, qcoh, locally surjective, affine surj with ker I U, ∃! factorization over all C with χ∘e=0; names resolved by #check"
  }
 }
