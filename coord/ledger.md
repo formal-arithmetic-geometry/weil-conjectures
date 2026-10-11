@@ -4523,3 +4523,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 11:54 L: merged deliver/J1/lem-sc-ample-square-zero-thickening (stage 2; reviewer FIX; first push; Sheaf.AlgebraicGeometry.AmpleSquareZeroThickening AlgebraicGeometry.Scheme.Modules.isAmple_of_isAmple_tensorPullback_of_square_zero)
 - 11:54 L: merged deliver/H1/lem-weil-pbc-module-finite-type-surjective-on-stalk (stage 2; reviewer FIX; first push; Sheaf.Topology.FiniteTypeSurjectiveNearStalk AlgebraicGeometry.RingedSpace.exists_surjective_neighbourhood_of_surjective_stalk)
 - 11:54 L: merged deliver/E1/lem-weil-pbc-n2-char-p-purely-inseparable-criterion (stage 2; reviewer FIX; first push; Sheaf.RingTheory.N2CharPPurelyInseparableCriterion isN2_of_finite_purelyInseparable_integralClosure)
+- 11:54 L: merged deliver/C1/lem-pqf-leray-five-term (stage 2; reviewer FIX; first push; Sheaf.CategoryTheory.LerayFiveTerm CategoryTheory.BigradedExactCouple.lerayFiveTerm)

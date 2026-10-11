@@ -131,5 +131,24 @@
   "group": "G1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-lft2445 (reviewer sub-agent of L); spot-checked: Checked all five exactness spots against def-sp-convergence (Z_inf/B_inf, E_inf=gr^p) and def-sp-filtration; the edge maps are the filtration inclusion/quotient composites, matching the ancestor's use via lem-sp-grothendieck-edge-maps; d_2 is the bare d_2; no new nodes, so nothing is restated (class b: none). FIX more, RETURN less: (1) C1 Step 1 used E_inf=Z_inf/B_inf without citing def-sp-convergence and claimed falsely that d_2 is the only differential at all total-degree 1-2 entries (d_2 from (1,1) and d_3 from (0,2) exist); rewritten to check the entries (1,0),(0,1),(2,0) one by one, and def-sp-convergence added to uses. (2) C4/D Step 2 left F^0H^n=H^n and F^{n+1}H^n=0 implicit; derived them from finiteness and the vanishing of gr^p outside 0..n, with each edge's kernel and image stated. (3) Step 3 exactness at E_2^{2,0} was garbled ('kernel modulo the transgression image'); now kernel of the degree-2 bottom edge = im d_2. The Second reading by G1 missed (1) and (3).; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.LerayFiveTerm",
+  "declaration": "CategoryTheory.BigradedExactCouple.lerayFiveTerm",
+  "file": "lean/Sheaf/CategoryTheory/LerayFiveTerm.lean",
+  "statement": "theorem lerayFiveTerm (X : BigradedExactCouple C 0) (L : LimitSubobjects X) (A : ∀ n : ℤ, AlphaColimit X n) (hquadrant : X.IsFirstQuadrant) (hconverges : X.ConvergesTo L A) : (ComposableArrows.mk₅ (0 : (0 : C) ⟶ X.page 2 1 0) (X.bottomEdge L A hquadrant hconverges 1) (X.leftEdge L A hquadrant hconverges 1) (X.pageDifferential 2 0 1) (X.bottomEdge L A hquadrant hconverges 2)).Exact",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-lft1152"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-lft1152",
+  "group": "C1",
+  "result": "fix",
+  "note": "Abelian C; X type-0 exact couple, pages r>=2; IsFirstQuadrant (page r = page 2 for r<2, equivalent to E2 first-quadrant); L,A,ConvergesTo = def-sp-convergence (regular+abuts+inverse limit; finite filtration follows); five terms E2^{1,0},H1,E2^{0,1},E2^{2,0},H2 with leading 0 via mk5; d2 = pageDifferential 2 0 1; edges were existential -> fixed to canonical bottomEdge/leftEdge built from E2->Einf, Einf~=gr comparison, F^{n+1}H^n=0, F^0H^n=H^n"
  }
 }
