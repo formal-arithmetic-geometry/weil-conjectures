@@ -167,5 +167,24 @@
   "group": "C1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-cb2 (reviewer sub-agent of L); spot-checked: Repaired re-push after the 14:58 return (point 1, C1/C4 on step 3): repaired as asked. New node lem-sc-dimension-locally-algebraic states Stacks Tag 0A21 (varieties.tex lemma-dimension-locally-algebraic) part (3) hypothesis by hypothesis (k a field, X irreducible, locally of finite type over k; dim U = dim X for nonempty open U, dim_x X = dim X), cites existing def-weil-irreducible-components, def-weil-finite-type-morphism, def-kun-topological-krull-dimension, def-kun-dimension; created.item is the item, unsplit, empty proof, three Mathlib searches, same_as [] and from {node,place,via}. Step 3 now: 02FY node (lem-sc-fibre-dimension-after-base-change, matches Tag 02FY (1)) applied to C -> Spec k with X_s = C since kappa(s)=k; def-pc-curve gives dim C = 1 in the sense of def-pc-dimension (sup of local-ring dimensions); lem-pc-scheme-dimension-local-rings turns this into topological Krull dimension 1; the 0A21 node (C integral hence irreducible, finite type hence locally finite type) gives dim_y C = 1 for every y; uses and proof_deps updated with all four. Step 1 carried by lem-pc-proper-base-change (2) (declared tool use, generic, accepted); step 2 elementary from def-pc-base-change and def-pc-scheme-fibre (now cited); step 4 the definition in def-sbc-smooth-morphisms. Small case: Spec of a DVR shows why 0A21 needs locally finite type over a field (generic point has dim 0); for C = P^1_k every point has dim_y = 1. Start 15:16:56 UTC, end Sat Oct 10 03:17:13 PM UTC 2026 (date -u)."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.CurveBaseChangeRelativeDimensionOne",
+  "declaration": "AlgebraicGeometry.curve_baseChange_smoothOfRelativeDimension_one",
+  "file": "lean/Sheaf/AlgebraicGeometry/CurveBaseChangeRelativeDimensionOne.lean",
+  "statement": "theorem curve_baseChange_smoothOfRelativeDimension_one {k : Type u} [Field k] {C T : Scheme.{u}} (f : C ⟶ Spec (.of k)) [f.IsCurveOverField] [Smooth f] (g : T ⟶ Spec (.of k)) : SmoothOfRelativeDimension 1 (pullback.snd f g)",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-cbc0931"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-cbc0931",
+  "group": "F1",
+  "result": "fix",
+  "note": "FIX: conclusion 'smooth of relative dimension 1 in the sense of def-sbc-smooth-morphisms' restated with that node's recorded declaration SmoothOfRelativeDimension 1 (pullback.snd f g) instead of an inline Smooth ∧ ∀x topologicalKrullDimAt(asFiber x)=1 expansion (H4, one notion one declaration; downstream hilb-to-pic/Cartier criterion consume SmoothOfRelativeDimension); renamed to curve_baseChange_smoothOfRelativeDimension_one. Matched: k field; f : C ⟶ Spec k with IsCurveOverField (integral, separated, lft+qc, C.dim=1); Smooth f; arbitrary g : T ⟶ Spec k (explicit form ok for base change); C_T = pullback f g, f_T = pullback.snd; empty T vacuous; universe u common"
  }
 }
