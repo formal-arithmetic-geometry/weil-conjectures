@@ -159,5 +159,23 @@
   "worker": "stage1",
   "summary": "Statement kept (checked against both citers: lem-weil-pbc-cohen-ring-mod-pn-formally-smooth uses it with N = 2, lem-weil-pbc-popescu-artinian-flat-subalgebras with D = Lambda, J = m^{n-1} and with D = F'[x]/(x)^n and a nilpotent kernel; both take exactly the statement). Proof in three steps following the proof of Stacks 0320 (3) for k = F_p and the induction of 07K4: (1) ring maps between rings with p = 0 are the F_p-algebra maps (elementary); (2) square-zero lifting: H_1(L_{K/F_p}) = 0 by the existing node lem-weil-pbc-field-char-p-h1-cotangent-vanishing (split today, it carries the separability of K/F_p from F_p perfect and the colimit argument of 0320 (3)), Omega_{K/F_p} projective by a new Mathlib leaf lem-weil-pbc-vector-space-projective (09FN; Module.Free.of_divisionRing + Module.Projective.of_free), and the existing Mathlib leaf lem-weil-pbc-smooth-ring-map-square-zero-lifting (031J (6) => (1), comp_surjective) gives lifting along square-zero ideals; this is 031Z with its source proof; (3) the induction P(i) along D/J^{i+1} -> D/J^i, kernel J^i/J^{i+1} of square zero, written out. One new node (a Mathlib leaf); route chosen over new nodes for 0320 (3) and 030Z since the H_1 node already carries them. Mathlib: exists_lift gives step 3 but Algebra.FormallySmooth (ZMod p) K exists only for K essentially of finite type (of_perfectField); recorded as mathlib_candidate (B8)."
  },
- "reviewed": "Reviewed by L 2026-10-10: faithful to Algebra 0320 (3) + 031Z + the induction of 07K4; the square-zero case comes from the split node lem-weil-pbc-field-char-p-h1-cotangent-vanishing (reviewed today), the new Mathlib leaf (vector spaces projective) and the leaf lem-weil-pbc-smooth-ring-map-square-zero-lifting (031J); the ring-map/F_p-algebra identification is written out (step 1). Mathlib candidate recorded (FormallySmooth.exists_lift needs the FormallySmooth instance, which Mathlib has only for essentially finite type extensions; B8)."
+ "reviewed": "Reviewed by L 2026-10-10: faithful to Algebra 0320 (3) + 031Z + the induction of 07K4; the square-zero case comes from the split node lem-weil-pbc-field-char-p-h1-cotangent-vanishing (reviewed today), the new Mathlib leaf (vector spaces projective) and the leaf lem-weil-pbc-smooth-ring-map-square-zero-lifting (031J); the ring-map/F_p-algebra identification is written out (step 1). Mathlib candidate recorded (FormallySmooth.exists_lift needs the FormallySmooth instance, which Mathlib has only for essentially finite type extensions; B8).",
+ "lean": {
+  "module": "Sheaf.RingTheory.ExistsLiftOfFieldCharP",
+  "declaration": "RingHom.exists_lift_of_field_charP",
+  "file": "lean/Sheaf/RingTheory/ExistsLiftOfFieldCharP.lean",
+  "statement": "theorem exists_lift_of_field_charP (K : Type u) (D : Type v) [Field K] [CommRing D] (p : ℕ) [CharP K p] (hp : 0 < p) (hD : (p : D) = 0) (J : Ideal D) (N : ℕ) (hN : 1 ≤ N) (hJ : J ^ N = ⊥) (g : K →+* D ⧸ J) : ∃ f : K →+* D, (Ideal.Quotient.mk J).comp f = g",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-fnl1010",
+  "group": "C1",
+  "result": "pass",
+  "note": "Field K + CharP K p + 0<p = char p>0 field; CommRing D + (p:D)=0 = p·1_D=0 (no CharP D, zero ring allowed); J^N=⊥ with 1≤N = nilpotent J (same form as landed NilpotentBaseChangeIdempotents); g : K →+* D⧸J, ∃ f, (mk J).comp f = g = π∘f=g; Mathlib FormallySmooth K/F_p only under EssFiniteType (of_perfectField), so existing:false right; #check signature in L sandbox"
+ }
 }
