@@ -21,7 +21,8 @@
  "stmt_deps": [
   "def-pc-scheme",
   "def-pc-derived-category",
-  "def-pc-perfect-complex"
+  "def-pc-perfect-complex",
+  "def-sc-finite-locally-free-sheaf"
  ],
  "proof": [
   {
@@ -125,5 +126,23 @@
   "group": "J1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-apl3004 (reviewer sub-agent of L); spot-checked: Statement = Stacks 08ED and matches citer lem-sc-affine-perfect-plus-shift (F[-r] (+) F, locally free summand on U). Steps follow 08ED (08EE lift, last-one-flat kernel, 09M4 vanishing on qcqs U with D_QCoh target, split triangle); no same-tag duplicates; new nodes not elementary. FIX more, RETURN less: (1) E/C4 shift bookkeeping inherited from a Stacks typo: with K in degree r-1 the triangle is P|_U -> F -> K|_U[1-r] and the splitting gives P|_U = K|_U[-r] (+) F, not [-r-1]/[-r-2] with 'replace r by r+2'; steps 2-4 rewritten, step 3 now states both conditions r<a and r-1<a'. (2) B/E new node lem-sc-affine-truncation-kernel-finite-locally-free asserted Ker(P^r->P^{r+1}) = Im(P^{r-1}->P^r) as A-modules, false in general off U; K now defined as the image, equal to the kernel on U; item step 2 aligned. J1's second reading missed both.; 2 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AffinePerfectPlusLocallyFree",
+  "declaration": "AlgebraicGeometry.Scheme.exists_perfect_lift_plus_finiteLocallyFree",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffinePerfectPlusLocallyFree.lean",
+  "statement": "theorem exists_perfect_lift_plus_finiteLocallyFree (X : Scheme.{u}) [IsAffine X] (U : X.Opens) (hU : IsCompact (U : Set X)) [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))] [∀ V : X.Opens, HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over V))] [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace))] [∀ V : U.toScheme.Opens, HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings U.toScheme.toRingedSpace).over V))] (F : schemeDerivedCategory U.toScheme) (hF : IsPerfect U.toScheme F) : ∃ (r : ℤ) (M : SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace)), M.IsFiniteLocallyFree ∧ ∃ P : schemeDerivedCategory X, IsPerfect X P ∧ Nonempty (((SheafOfModules.overFunctor.{u} (moduleRings X.toRingedSpace) U) ⋙ Equivalence.functor (C := SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U)) (D := SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace)) (Modules.overEquiv U)).mapDerivedCategory.obj P ≅ ((DerivedCategory.singleFunctor (SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace)) 0).obj M)⟦-r⟧ ⊞ F)",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-apl1512",
+  "group": "E1",
+  "result": "pass",
+  "note": "X Scheme.{u} [IsAffine X]; U X.Opens, IsCompact; F : schemeDerivedCategory U.toScheme with IsPerfect; exists r:Z, M with IsFiniteLocallyFree (variable rank, universes fixed to u), P perfect on X; restriction overFunctor⋙overEquiv mapDerivedCategory as AffinePseudoCoherentLift and F1 sibling plus-shift; (single 0 M)⟦-r⟧ ≅ single r M checked by compile (degree r = Stacks F[-r]); ⊞ F; Stacks 08EG text"
  }
 }

@@ -4775,3 +4775,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 13:32 L: merged deliver/C1/lem-pc-perfect-generator-exists (stage 2; reviewer FIX; first push; Sheaf.AlgebraicGeometry.PerfectGeneratorExists AlgebraicGeometry.exists_perfect_generator)
 - 13:33 L: merged deliver/C1/lem-pc-perfect-generation-koszul-orthogonal (stage 2; reviewer FIX; first push; Sheaf.AlgebraicGeometry.KoszulOpenOrthogonality AlgebraicGeometry.koszul_open_orthogonality; dropped nodes: def-pc-affine-koszul-object)
 - 13:33 L: merged deliver/C1/lem-pc-perfect-affine-bounded-projective (stage 2; reviewer FIX; first push; Sheaf.AlgebraicGeometry.PerfectAffineBoundedProjective AlgebraicGeometry.perfect_iff_affine_bounded_projective)
+- 13:33 L: merged deliver/E1/lem-sc-affine-perfect-plus-locally-free (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.AffinePerfectPlusLocallyFree AlgebraicGeometry.Scheme.exists_perfect_lift_plus_finiteLocallyFree)
