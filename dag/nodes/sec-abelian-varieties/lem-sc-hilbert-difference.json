@@ -139,5 +139,24 @@
   "group": "F1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-hdf2425 (reviewer sub-agent of L); spot-checked: Statement keeps both J1 corrections (regular = K_X->K_X(L) injective; X nonempty). Checked the affine a/b calculation against Tag 02P2 (b,a nonzerodivisors on M since Ass(M)=minimal primes), the Euler sign in step 4 via lem-pc-euler-additive, and the nowhere-dense dimension drop (a chain in Z extends inside a component since components of a locally Noetherian scheme have nonempty interior). The item needs no regular-section-exists or embedded-points citation since it takes s and F without embedded points as hypotheses. FIX more, RETURN less: (1) B3: lem-sc-hilbert-denominator-ideal-nowhere-dense used 'regular meromorphic section' undefined; the K_X / K_X(L)-injective definition is now inline. (2) C1: step 1's local form s=a/b with a,b nonzerodivisors and I(U)={x | x a/b in A} was uncited; added as clause (1) of that node (the content of the Tag 02P0 proof) and step 1 cites it. (3) stmt_deps of the item no longer list the lemma lem-sc-hilbert-denominator-ideal-nowhere-dense (the statement defines I inline). The second reading missed (1) and (2).; 2 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.HilbertDifference",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.hilbert_difference",
+  "file": "lean/Sheaf/AlgebraicGeometry/HilbertDifference.lean",
+  "statement": "theorem hilbert_difference {k : Type u} [Field k] {X : Scheme.{u}} [X.Over (Spec (.of k))] [IsProper (X ↘ Spec (.of k))] [Nonempty X] [IsLocallyNoetherian X] (d : ℕ) (hDim : topologicalKrullDim X = (d : WithBot ℕ∞)) (F : X.Modules) (hFcoh : AlgebraicGeometry.RingedSpace.IsCoherent X.toRingedSpace F) (hFsupport : ∀ x : X, ¬ Subsingleton ((presheaf F).stalk x)) (hFnoEmbedded : ∀ (U : X.Opens) (_ : IsAffineOpen U) (p : Ideal (Γ(X, U))), p ∈ associatedPrimes (Γ(X, U)) (Γ(F, U)) → Minimal (fun q : Ideal (Γ(X, U)) => q ∈ associatedPrimes (Γ(X, U)) (Γ(F, U))) p) (L : X.Modules) [L.IsInvertible] (s : unit X ⟶ meromorphicModule X L) (hs : Mono (meromorphicSectionMap X L s)) : ∃ jF : idealModuleProduct (pullback.fst s (toMeromorphicModule X L)) F ⟶ tensorObj F L, factorThruImage ((pullback.fst s (toMeromorphicModule X L)) ▷ F ≫ (λ_ F).hom) ≫ jF = (pullback.snd s (toMeromorphicModule X L)) ▷ F ≫ (β_ L F).hom ∧ (Mono (idealModuleProductι (pullback.fst s (toMeromorphicModule X L)) F) ∧ Mono jF) ∧ (AlgebraicGeometry.RingedSpace.IsCoherent X.toRingedSpace (cokernel (idealModuleProductι (pullback.fst s (toMeromorphicModule X L)) F)) ∧ AlgebraicGeometry.RingedSpace.IsCoherent X.toRingedSpace (cokernel jF)) ∧ topologicalKrullDim {x : X | ¬ Subsingleton ((presheaf (cokernel (idealModuleProductι (pullback.fst s (toMeromorphicModule X L)) F) : X.Modules)).stalk x)} < topologicalKrullDim X ∧ topologicalKrullDim {x : X | ¬ Subsingleton ((presheaf (cokernel jF : X.Modules)).stalk x)} < topologicalKrullDim X ∧ ∀ (n : ℤ), eulerChar k (tensorObj F (if 0 ≤ n + 1 then L.tensorPow (n + 1).toNat else L.dual.tensorPow (-(n + 1)).toNat)) - eulerChar k (tensorObj F (if 0 ≤ n then L.tensorPow n.toNat else L.dual.tensorPow (-n).toNat)) = eulerChar k (tensorObj (cokernel jF) (if 0 ≤ n then L.tensorPow n.toNat else L.dual.tensorPow (-n).toNat)) - eulerChar k (tensorObj (cokernel (idealModuleProductι (pullback.fst s (toMeromorphicModule X L)) F)) (if 0 ≤ n then L.tensorPow n.toNat else L.dual.tensorPow (-n).toNat))",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-hdf1258"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-hdf1258",
+  "group": "E1",
+  "result": "fix",
+  "note": "Matched k field, X.Over Spec k, IsProper, Nonempty, IsLocallyNoetherian, finite dim, F coherent, full support (nonzero stalks), no embedded points (affine Ass minimal), L invertible, s with K_X->K_X(L) mono, I = landed pullback, IF = landed idealModuleProduct, jF characterized by a*m -> m (x) as, both Mono, both cokernels coherent, both support dims < dim X, forward difference chi(F L^{n+1})-chi(F L^n)=chi(Q' L^n)-chi(Q L^n) for all n:Z (signs checked against the two SESs). FIX: dropped tensorIntPow second twist form for H1's inline if/tensorPow/dual.tensorPow; removed let binders.; dropped duplicate new node(s) def-sc-invertible-tensor-integer-power (--drop-nodes; not merged, the item points at the landed declaration); left out new module(s) lean/Sheaf/AlgebraicGeometry/IntegerTensorPower.lean (--drop-files, or a record fixed to existing: true)"
  }
 }
