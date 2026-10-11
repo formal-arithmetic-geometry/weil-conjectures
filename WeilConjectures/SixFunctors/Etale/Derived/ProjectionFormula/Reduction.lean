@@ -167,6 +167,66 @@ theorem isIso_derivedTensorRight_map_projectionMapOfCompactification_iff
 
 end General
 
+section Constant
+
+variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
+  [MonoidalCategory A] [MonoidalPreadditive A] [SymmetricCategory A] [MonoidalClosed A]
+  [Abelian.HasFunctorialFlatResolution A] [HasSmallSiteSheafify A]
+
+variable {X Y : Scheme.{u}}
+
+/-- The constant complex `M_X ∈ D(X_ét)` on an object `M` of the coefficient category: the
+constant sheaf with value `M`, placed in degree zero. -/
+noncomputable abbrev constantSingle (X : Scheme.{u}) (M : A) :
+    DerivedCategory (Sheaf X.smallEtaleTopology A) :=
+  (DerivedCategory.singleFunctor _ 0).obj ((constantSheaf X.smallEtaleTopology A).obj M)
+
+/-- **The derived pullback of a constant complex is constant**: `Lf^*(M_Y) ≅ M_X`. The pullback
+`f^*` is exact, so `Lf^*` is computed termwise
+(`AlgebraicGeometry.Etale.leftDerivedUpperStarIsoMapDerivedCategory`), and `f^*` carries
+constant sheaves to constant sheaves (`AlgebraicGeometry.Scheme.upperStarConstantSheafIso`). -/
+noncomputable def leftDerivedUpperStarConstantSingleIso (f : X ⟶ Y) (M : A) :
+    L((f)^*[A]).obj (constantSingle A Y M) ≅ constantSingle A X M :=
+  (leftDerivedUpperStarIsoMapDerivedCategory A f).app _ ≪≫
+    ((f)^*[A].mapDerivedCategorySingleFunctor 0).app _ ≪≫
+    (DerivedCategory.singleFunctor _ 0).mapIso ((Scheme.upperStarConstantSheafIso A f).app M)
+
+end Constant
+
+section Module
+
+variable (Λ : Type (u + 1)) [CommRing Λ] (J : Ideal Λ) {X Y : Scheme.{u}}
+
+lemma reductionModIdeal_eq_derivedTensorRight (X : Scheme.{u}) :
+    reductionModIdeal Λ X J = derivedTensorRight (ModuleCat.{u + 1} Λ) X
+      (constantSingle (ModuleCat.{u + 1} Λ) X (ModuleCat.of Λ (Λ ⧸ J))) :=
+  rfl
+
+/-- **`Lf^*` commutes with the reduction of the coefficients**: the isomorphism
+`Lf^*(L ⊗ᴸ (Λ/J)_Y) ≅ Lf^*L ⊗ᴸ (Λ/J)_X`, natural in `L`, given by the tensor comparison of
+`Lf^*` followed by `Lf^*(Λ/J)_Y ≅ (Λ/J)_X`. -/
+noncomputable def leftDerivedUpperStarReductionModIdealIso (f : X ⟶ Y) :
+    derivedTensorRight _ Y (constantSingle _ Y (ModuleCat.of Λ (Λ ⧸ J))) ⋙
+        L((f)^*[ModuleCat.{u + 1} Λ]) ≅
+      L((f)^*[ModuleCat.{u + 1} Λ]) ⋙
+        derivedTensorRight _ X (constantSingle _ X (ModuleCat.of Λ (Λ ⧸ J))) :=
+  leftDerivedUpperStarDerivedTensorRightIso _ f
+    (leftDerivedUpperStarConstantSingleIso _ f (ModuleCat.of Λ (Λ ⧸ J)))
+
+variable {f : X ⟶ Y} (c : Compactification f)
+
+/-- **The comparison of `Rf_!` with the reduction of the coefficients**,
+`ρ(Rf_!K) = Rf_!K ⊗ᴸ (Λ/J)_Y ⟶ Rf_!(K ⊗ᴸ (Λ/J)_X) = Rf_!(ρK)`, natural in `K`: the
+projection map at `(K, (Λ/J)_Y)` followed by `Lf^*(Λ/J)_Y ≅ (Λ/J)_X`. -/
+noncomputable def rightDerivedLowerShriekReductionModIdealMap :
+    Rf_!(c)[ModuleCat.{u + 1} Λ] ⋙ derivedTensorRight _ Y (constantSingle _ Y (ModuleCat.of Λ (Λ ⧸ J))) ⟶
+      derivedTensorRight _ X (constantSingle _ X (ModuleCat.of Λ (Λ ⧸ J))) ⋙
+        Rf_!(c)[ModuleCat.{u + 1} Λ] :=
+  rightDerivedLowerShriekDerivedTensorRightMap _ c
+    (leftDerivedUpperStarConstantSingleIso _ f (ModuleCat.of Λ (Λ ⧸ J))).hom
+
+end Module
+
 end Etale
 
 end AlgebraicGeometry
