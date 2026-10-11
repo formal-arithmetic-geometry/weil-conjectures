@@ -226,5 +226,23 @@
   "by": "L",
   "result": "accepted",
   "note": "9 steps follow Stacks 0523 with the passage to R_p -> S_q written out; the six new nodes left by the dead worker were checked and kept (4 Mathlib leaves, lines 37/244+256/153+436/401+294 verified with sed; 00ML variant criterion and 00IQ(1) unsplit). Tags 0523, 00ML, 00M6, 00IQ, 00HT verified."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.Flat.FlatModulePowers",
+  "declaration": "Module.Flat.flat_of_flat_quotients_powers",
+  "file": "lean/Sheaf/RingTheory/Flat/FlatModulePowers.lean",
+  "statement": "theorem flat_of_flat_quotients_powers {R : Type u} {S : Type v} {M : Type w} [CommRing R] [CommRing S] [Algebra R S] [AddCommGroup M] [Module R M] [Module S M] [IsScalarTower R S M] [IsNoetherianRing R] [IsNoetherianRing S] [Module.Finite S M] (I : Ideal R) (hflat : ∀ n : ℕ, 1 ≤ n → Module.Flat (R ⧸ I ^ n) (M ⧸ (I ^ n) • (⊤ : Submodule R M))) : (∀ (q : Ideal S) [q.IsPrime], I.map (algebraMap R S) ≤ q → Module.Flat R (LocalizedModule q.primeCompl M)) ∧ (∀ [IsLocalRing S], I.map (algebraMap R S) ≤ IsLocalRing.maximalIdeal S → Module.Flat R M)",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-fmp1031",
+  "group": "E1",
+  "result": "pass",
+  "note": "R,S CommRing + Algebra R S (phi); M S-module with IsScalarTower R S M (restricted R-action; #synth OreLocalization.instModuleOfIsScalarTower on M_q, r•m/s=(r•m)/s); (1)(2) IsNoetherianRing R/S; (3) Module.Finite S M; (4) forall n>=1 Module.Flat (R/I^n) (M/(I^n)•top) via Module.instQuotientIdealSubmoduleHSMulTop; concl. forall prime q, I.map algebraMap <= q -> Flat R (LocalizedModule q.primeCompl M); local clause scoped [IsLocalRing S], IS<=m_S -> Flat R M; no Mathlib duplicate"
  }
 }
