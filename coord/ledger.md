@@ -5652,3 +5652,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 19:31 L: merged deliver/Q1/lem-weil-pbc-gabber-strict-henselian-zariski-comparison (stage 2; reviewer PASS; first push; Sheaf.Paper.StrictHenselianZariskiEtaleComparison strictHenselian_zariski_etale_comparison)
 - 19:31 L: merged deliver/U1/lem-sc-closed-pushforward-abelian-stalks (stage 2; reviewer PASS; first push; Sheaf.Topology.ClosedPushforwardAbelianStalks TopCat.closedPushforwardAbelianStalks)
 - 19:32 L: merged deliver/T1/lem-sc-topological-extension-by-zero-stalks (stage 2; reviewer PASS; first push; Sheaf.Topology.AbelianOpenExtensionByZeroStalks TopCat.Sheaf.abelianOpenExtensionByZero_stalks; new nodes: def-sc-abelian-open-extension-by-zero)
+- 19:32 L: merged deliver/V1/lem-sc-support-dimension-cohomology-vanishing (stage 2; reviewer PASS; first push; Sheaf.Paper.SupportDimensionCohomologyVanishing AlgebraicGeometry.support_dimension_cohomology_vanishing)
