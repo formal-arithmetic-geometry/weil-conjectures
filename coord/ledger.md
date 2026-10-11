@@ -4197,3 +4197,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 10:18 L: merged deliver/F1/lem-weil-pbc-filtered-colimit-categories (stage 2; reviewer PASS; first push; Sheaf.CategoryTheory.FilteredColimitCategories CategoryTheory.exists_filteredColimit_category; new nodes: def-weil-pbc-arrows-functor)
 - 10:18 L: merged deliver/H1/lem-weil-pbc-finite-product-complex-cohomology (stage 2; reviewer PASS; first push; Sheaf.Algebra.Homology.FiniteProductCohomology HomologicalComplex.homology_finite_product_comparison_isIso)
 - 10:18 L: merged deliver/K1/lem-weil-pbc-etale-graph-section-extension-map (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.EtaleGraphSectionExtensionMap AlgebraicGeometry.etale_graph_section_extension_map)
+- 10:18 L: merged deliver/E1/lem-weil-pbc-filtered-colimit-normal-ring (stage 2; reviewer PASS; first push; Sheaf.RingTheory.FilteredColimitNormalRing CommRingCat.isNormal_of_filtered_colimit)

@@ -166,5 +166,23 @@
   "item": "lem-weil-pbc-filtered-colimit-normal-ring",
   "worker": "stage1",
   "summary": "Checked the statement against Stacks 037D (directed system; the node states it for a filtered category, which the proof handles directly with the existing filtered-colimit nodes, so Categories 0032 is not needed in the proof; statement kept). Wrote the proof in five steps following the Stacks proof: reduction to R_p = colim (R_i)_{p_i} (asserted without proof in Stacks, line 8323; new node lem-weil-pbc-filtered-colimit-localization-at-prime, unsplit, no Mathlib match after LeanSearch/LeanFinder/Loogle/grep), common lifts and relations at one index (lem-weil-pbc-filtered-colimit-algebras-elementwise, lem-weil-pbc-filtered-colimit-rings-zero), the colimit is a domain (implicit in Stacks, written out), integrally closed by clearing denominators and lifting the monic equation, conclusion. Tags verified in stacks-project/tags/tags: 037D lemma-colimit-normal-ring, 0032 categories-lemma-directed-category-system, 06DI more-algebra-lemma-henselization-normal, 00GV definition-ring-normal, 0309 definition-domain-normal, 00D6, 00D7, 00CO. No Lean candidate in slopmaster2."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.FilteredColimitNormalRing",
+  "declaration": "CommRingCat.isNormal_of_filtered_colimit",
+  "file": "lean/Sheaf/RingTheory/FilteredColimitNormalRing.lean",
+  "statement": "theorem isNormal_of_filtered_colimit {I : Type w} [SmallCategory I] [IsFiltered I] (F : I ⥤ CommRingCat.{u}) [HasColimit F] (hF : ∀ i : I, ∀ (p : Ideal (F.obj i)) [p.IsPrime], IsDomain (Localization.AtPrime p) ∧ IsIntegrallyClosed (Localization.AtPrime p)) : ∀ (p : Ideal ((colimit F : CommRingCat.{u}) : Type u)) [p.IsPrime], IsDomain (Localization.AtPrime p) ∧ IsIntegrallyClosed (Localization.AtPrime p)",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-fcn1019",
+  "group": "E1",
+  "result": "pass",
+  "note": "I small filtered (Type w, SmallCategory, IsFiltered); F : I ⥤ CommRingCat with HasColimit; hF = inline NORMAL RING per stage; conclusion = inline NORMAL RING on colimit F carrier; no transition-map condition; matches STATE FILTERED COLIMITS OF RINGS form of K1 ccd06d885"
  }
 }
