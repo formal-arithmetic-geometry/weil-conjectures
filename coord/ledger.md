@@ -3274,3 +3274,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 02:04 L: merged deliver/G1/lem-pc-derived-tensor-localization-cohomology (reviewer FIX; after a return; new nodes: 3)
 - 02:05 L: tool use accepted on lem-pc-derived-tensor-localization-cohomology: lem-pc-kflat-pullback-preservation (sk-thm-picard-duality) as a generic tool (R-dtl0203 dropped the duplicate lem-pc-localization-preserves-kflat; second reading by G1 missed the duplicate and the missing comparison-map clause); item landed on its third push overall (G1's second)
 - 02:05 L: returned deliver/F1/lem-pur-derived-functor-triangles-05sc (reviewer RETURN: Reviewer R-dft0206. The statement is the LF clause of 05SC (pro-objects over S/X = arrows X'->X in S, cofiltered, per de)
+- 02:05 L: merged deliver/J1/lem-pc-derived-tensor-transitivity (reviewer FIX; first push; new nodes: 1)
