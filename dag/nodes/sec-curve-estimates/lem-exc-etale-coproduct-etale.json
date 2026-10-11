@@ -122,5 +122,23 @@
   "group": "E1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-ece (reviewer sub-agent of L); spot-checked: Source Stacks Morphisms 02GL (lemma-etale-over-field, morphisms.tex:8175), direction 'disjoint union of spectra of finite separable extensions is etale': the statement agrees (K field, any index set I, L_i/K finite separable, coproduct morphism to Spec K etale); stmt_deps addition of the coproduct node is right since the statement names the coproduct. Step 1 carried by lem-weil-pbc-scheme-coproduct-family (existence, universal property, open immersions with disjoint covering images; Mathlib leaf). Step 2 by lem-weil-pbc-finite-separable-extension-etale (finite + separable algebraic gives Spec k' -> Spec k etale; hypotheses are the item's). Step 3 by lem-weil-pbc-etale-local-on-source (open cover U_b of X, f etale iff each f o j_b etale) with U_i = image of iota_i, the passage from iota_i to j_i being composition with an isomorphism onto the open image. Small cases: I empty (X empty, vacuous), I singleton (the given morphism). Mathlib: AlgebraicGeometry.IsZariskiLocalAtSource.sigmaDesc at Mathlib/AlgebraicGeometry/Morphisms/Basic.lean:305 read; it is the generic coproduct clause, not the node (needs the finite separable component fact), so the split stands rather than a leaf. FIX: dag/nodes/sec-curve-estimates/lem-exc-etale-coproduct-etale.json: mathlib_searches[2] (grep): results/verdict corrected to name IsZariskiLocalAtSource.sigmaDesc (Basic.lean:305) instead of 'no theorem'; mathlib_candidate added with that declaration. Start Sat Oct 10 04:11:21 PM UTC 2026, end Sat Oct 10 04:12:10 PM UTC 2026.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.EtaleCoproductOfFiniteSeparableFields",
+  "declaration": "AlgebraicGeometry.etale_sigmaDesc_spec_of_finite_separable",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleCoproductOfFiniteSeparableFields.lean",
+  "statement": "theorem etale_sigmaDesc_spec_of_finite_separable (K : Type u) [Field K] (I : Type u) (L : I → Type u) [∀ i, Field (L i)] [∀ i, Algebra K (L i)] [∀ i, Module.Finite K (L i)] [∀ i, Algebra.IsSeparable K (L i)] : Etale (Sigma.desc (fun i : I => Spec.map (CommRingCat.ofHom (algebraMap K (L i)))))",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-ece0608",
+  "group": "F1",
+  "result": "pass",
+  "note": "K field=(K:Type u)[Field K]; any index set I=(I:Type u), no Finite/Nonempty; L_i/K field ext=Field (L i)+Algebra K (L i); finite=Module.Finite K (L i); separable algebraic=Algebra.IsSeparable (includes algebraic); coproduct map=Sigma.desc of Spec.map (ofHom algebraMap) into Spec K in Scheme.{u}; conclusion AlgebraicGeometry.Etale; I empty/singleton covered; not stated in Mathlib/source (only binary Etale.coprodDesc, generic IsZariskiLocalAtSource.sigmaDesc, ring-level Algebra.Etale of finite separable); docstring carries the 3 proof steps"
  }
 }
