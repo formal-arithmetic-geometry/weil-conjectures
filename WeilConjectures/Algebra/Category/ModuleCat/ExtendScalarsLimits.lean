@@ -1,0 +1,101 @@
+/-
+Copyright (c) 2026 Claude. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Claude
+-/
+module
+
+public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
+public import Mathlib.Algebra.Category.ModuleCat.Monoidal.Closed
+public import Mathlib.Algebra.Category.ModuleCat.Limits
+public import Mathlib.LinearAlgebra.Contraction
+public import Mathlib.CategoryTheory.Sites.Whiskering
+
+/-!
+# Extension of scalars along a finite projective ring map preserves limits
+
+If `S` is finite projective as an `R`-module via `f : R →+* S`, then `S ⊗_R M ≅ Hom_R(S^∨, M)`
+naturally in `M`, so `restrictScalars f ∘ extendScalars f` is a right adjoint, hence preserves
+limits; since `restrictScalars f` preserves and reflects limits, so does `extendScalars f`
+(`ModuleCat.preservesLimits_extendScalars`).
+-/
+
+@[expose] public section
+
+universe u
+
+open CategoryTheory Limits
+
+namespace ModuleCat
+
+variable {R S : Type u} [CommRing R] [CommRing S] (f : R →+* S)
+  [Module.Finite R ((restrictScalars f).obj (of S S))]
+  [Module.Projective R ((restrictScalars f).obj (of S S))]
+
+/-- The `R`-linear identification `S ⊗_R M ≅ Hom_R(S^∨, M)` for `S` finite projective over `R`,
+on the restriction of the extension of scalars. -/
+noncomputable def extendScalarsDualEquiv (M : ModuleCat.{u} R) :
+    (restrictScalars f).obj ((extendScalars f).obj M) ≃ₗ[R]
+      (Module.Dual R ((restrictScalars f).obj (of S S)) →ₗ[R] M) :=
+  let e := (TensorProduct.congr (Module.evalEquiv R ((restrictScalars f).obj (of S S)))
+      (LinearEquiv.refl R M)).trans (dualTensorHomEquiv R _ M)
+  { e.toAddEquiv with
+    map_smul' r x := by
+      change e _ = r • e x
+      rw [← map_smul] }
+
+lemma extendScalarsDualEquiv_tmul {M : ModuleCat.{u} R} (s : (restrictScalars f).obj (of S S))
+    (m : M) (φ : Module.Dual R ((restrictScalars f).obj (of S S))) :
+    extendScalarsDualEquiv f M (s ⊗ₜ[R] m) φ = φ s • m := by
+  simp [extendScalarsDualEquiv, dualTensorHomEquiv]
+
+/-- Extension of scalars followed by restriction is the internal Hom out of the dual `S^∨`. -/
+noncomputable def extendScalarsCompRestrictScalarsIso :
+    extendScalars.{u, u, u} f ⋙ restrictScalars.{u} f ≅
+      ihom (of R (Module.Dual R ((restrictScalars f).obj (of S S)))) :=
+  NatIso.ofComponents
+    (fun M ↦ ((extendScalarsDualEquiv f M).trans
+      (homLinearEquiv (M := of R (Module.Dual R ((restrictScalars f).obj (of S S)))) (N := M)
+        (S := R)).symm).toModuleIso)
+    (fun {M N} g ↦ by
+      ext x
+      induction x using TensorProduct.induction_on with
+      | zero => simp
+      | add x y hx hy => simp only [map_add] at hx hy ⊢; rw [hx, hy]
+      | tmul s m =>
+        refine ModuleCat.hom_ext (LinearMap.ext fun φ ↦ ?_)
+        change extendScalarsDualEquiv f N (s ⊗ₜ[R] g m) φ =
+          g (extendScalarsDualEquiv f M (s ⊗ₜ[R] m) φ)
+        rw [extendScalarsDualEquiv_tmul, extendScalarsDualEquiv_tmul, map_smul])
+
+/-- Extension of scalars along a ring map `f : R →+* S` making `S` a finite projective
+`R`-module preserves limits. -/
+instance preservesLimits_extendScalars :
+    PreservesLimits (extendScalars.{u, u, u} f) :=
+  have : PreservesLimits (extendScalars.{u, u, u} f ⋙ restrictScalars.{u} f) :=
+    preservesLimits_of_natIso (extendScalarsCompRestrictScalarsIso f).symm
+  have : ReflectsLimits (restrictScalars.{u} f) := reflectsLimits_of_reflectsIsomorphisms
+  preservesLimits_of_reflects_of_preserves _ (restrictScalars.{u} f)
+
+end ModuleCat
+
+namespace CategoryTheory
+
+universe v₁ u₁
+
+variable {C : Type u₁} [Category.{v₁} C] (J : GrothendieckTopology C) {R S : Type u} [CommRing R]
+  [CommRing S] (f : R →+* S) [Module.Finite R ((ModuleCat.restrictScalars f).obj (.of S S))]
+  [Module.Projective R ((ModuleCat.restrictScalars f).obj (.of S S))]
+
+instance [UnivLE.{v₁, u}] [UnivLE.{max u₁ v₁, u}] :
+    J.HasSheafCompose (ModuleCat.extendScalars.{u, u, u} f) :=
+  have := preservesLimitsOfSize_of_univLE.{u, u, v₁, max u₁ v₁}
+    (ModuleCat.extendScalars.{u, u, u} f)
+  inferInstance
+
+/-- Extension of scalars `− ⊗_R S` on sheaves of modules, for `S` finite projective over `R`. -/
+noncomputable abbrev sheafExtendScalars [UnivLE.{v₁, u}] [UnivLE.{max u₁ v₁, u}] :
+    Sheaf J (ModuleCat.{u} R) ⥤ Sheaf J (ModuleCat.{u} S) :=
+  sheafCompose J (ModuleCat.extendScalars.{u, u, u} f)
+
+end CategoryTheory

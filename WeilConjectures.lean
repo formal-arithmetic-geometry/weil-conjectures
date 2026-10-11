@@ -1,6 +1,7 @@
 module  -- shake: keep-all --deprecated_module: ignore
 
 public import WeilConjectures.Algebra.Category.ModuleCat.CoextendScalarsComp
+public import WeilConjectures.Algebra.Category.ModuleCat.ExtendScalarsLimits
 public import WeilConjectures.Algebra.Category.ModuleCat.Presheaf.Bidual
 public import WeilConjectures.Algebra.Category.ModuleCat.Presheaf.InternalHom
 public import WeilConjectures.Algebra.Category.ModuleCat.Presheaf.InternalHomOver
@@ -1400,6 +1401,7 @@ public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.TorsionSheaf
 public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.UnderivedExchange
 public import WeilConjectures.SixFunctors.Etale.Derived.Adjunctions
 public import WeilConjectures.SixFunctors.Etale.Derived.AlgClosedField
+public import WeilConjectures.SixFunctors.Etale.Derived.AlgebraicClosureBaseChange
 public import WeilConjectures.SixFunctors.Etale.Derived.AlgebraicClosureLowerStar
 public import WeilConjectures.SixFunctors.Etale.Derived.AlgebraicClosureStage
 public import WeilConjectures.SixFunctors.Etale.Derived.CoefficientExtension
