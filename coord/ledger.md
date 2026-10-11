@@ -3225,3 +3225,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 01:23 L: merged deliver/J1/lem-sc-strict-henselization-mod-power-free (reviewer FIX; first push; new nodes: 0)
 - 01:24 UTC L: J1 strict-henselization-mod-power-free FIX a69a1b4c0 (R-shm0122).
 - 01:26 L: merged deliver/H1/lem-pur-kinjective-homotopy-exact-injective-target (reviewer FIX; first push; new nodes: 0)
+- 01:26 UTC L: H1 kinjective-homotopy-exact-injective-target FIX 86c51a2f5 (R-hei0125; elementary child folded in).
