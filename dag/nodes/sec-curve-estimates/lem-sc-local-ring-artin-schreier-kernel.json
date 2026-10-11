@@ -130,5 +130,23 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of C1; spot-checked by L: L: reviewed in full by a reviewer sub-agent (PASS): 0A3J and 00E9 read, Mathlib leaf Subfield.mem_bot_iff_pow_eq_self line 748 verified, 3 steps checked, small cases tested"
  },
- "lead_note": "2026-10-10 L: same_as cleared (was lem-sc-artin-schreier-k, which assumes k algebraically closed and adds surjectivity: not the same statement; reviewer)."
+ "lead_note": "2026-10-10 L: same_as cleared (was lem-sc-artin-schreier-k, which assumes k algebraically closed and adds surjectivity: not the same statement; reviewer).",
+ "lean": {
+  "module": "Sheaf.RingTheory.LocalRing.ArtinSchreierKernel",
+  "declaration": "IsLocalRing.pow_eq_self_iff_existsUnique_zmod",
+  "file": "lean/Sheaf/RingTheory/LocalRing/ArtinSchreierKernel.lean",
+  "statement": "theorem pow_eq_self_iff_existsUnique_zmod {R : Type u} [CommRing R] [IsLocalRing R] (p : ℕ) (hp : p.Prime) (hchar : (p : R) = 0) (a : R) : a ^ p = a ↔ ∃! c : ZMod p, (ZMod.cast c : R) = a",
+  "branch": "sheaf-dag",
+  "by": "K1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-ask1149",
+  "group": "K1",
+  "result": "pass",
+  "note": "p prime=(hp : p.Prime); local ring=[CommRing R][IsLocalRing R] (nontrivial = has a maximal ideal); p*1_R=0=(hchar : (p:R)=0) literal; c*1_R=ZMod.cast (canonical map for p prime); exactly one c + bijection onto roots = a^p=a <-> exists! c; name absent from Mathlib (#check), no landed AS-kernel decl for local rings"
+ }
 }
