@@ -18,6 +18,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormula
 public import WeilConjectures.SixFunctors.Etale.Derived.Stability
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStar
 public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.Defs
+public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.Shriek
 
 /-!
 
@@ -162,8 +163,14 @@ and `N` in `Dctf(Y, A)`,
 on `X ×_S Y`, where `𝔻_Y = RHom(-, ω_Y)` is the Verdier dual relative to `b : Y ⟶ S`. -/
 theorem hasKunnethComparisons (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] (k : Type u)
     [Field k] [HasInvertibleExponent Λ (Spec (.of k))] :
-    HasKunnethComparisons (ModuleCat.{u + 1} Λ) (Spec (.of k)) :=
-  sorry
+    HasKunnethComparisons (ModuleCat.{u + 1} Λ) (Spec (.of k)) where
+  kunnethShriek := by
+    intro _ _ _ _ b₁ b₂ _ _ _ _ f₁ f₂ _ _ _ _ _ _ _ hM₁ hM₂
+    exact nonempty_iso_rightDerivedLowerShriek_mapOverBase_externalProduct (Λ := Λ) b₁ b₂ f₁ f₂
+      hM₁ hM₂
+  exceptional := sorry
+  externalHom := sorry
+  kunnethVerdier := sorry
 
 end Etale
 
