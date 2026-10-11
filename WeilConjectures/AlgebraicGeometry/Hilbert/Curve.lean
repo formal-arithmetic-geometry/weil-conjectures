@@ -996,7 +996,7 @@ theorem exists_transcendental_mem_range_stalk {X : Scheme.{u}} [X.Over (Spec (.o
       ∀ x ∈ t, c ∈ Set.range (algebraMap (X.presheaf.stalk x) X.functionField) := by
   classical
   let K := X.functionField
-  letI := (Scheme.functionFieldRingHom k X).toAlgebra
+  let := (Scheme.functionFieldRingHom k X).toAlgebra
   obtain ⟨a, ha⟩ := Scheme.exists_transcendental_functionField (k := k) x₀ hx₀
   -- the structure maps `k → 𝒪_{X,x}` and `k → κ(x)`
   let ι (x : X) : k →+* X.presheaf.stalk x :=
@@ -1081,7 +1081,7 @@ theorem exists_transcendental_mem_range_stalk {X : Scheme.{u}} [X.Over (Spec (.o
         (IsLocalRing.residue_eq_zero_iff b).mpr hbm, Polynomial.eval₂_at_zero,
         Polynomial.coeff_zero_reverse, hPm.leadingCoeff, map_one]
       exact one_ne_zero
-    letI := invertibleOfNonzero ha0
+    let := invertibleOfNonzero ha0
     have key : Polynomial.aeval a P =
         algebraMap _ K (Polynomial.eval₂ (ι x) b P.reverse) * a ^ P.natDegree := by
       rw [Polynomial.hom_eval₂, hι, hb, ← invOf_eq_inv, Polynomial.eval₂_reverse_mul_pow]
