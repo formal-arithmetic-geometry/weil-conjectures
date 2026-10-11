@@ -4999,3 +4999,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 14:38 L: merged deliver/C1/lem-weil-pbc-matching-object-proper-faces (stage 2; reviewer PASS; first push; Sheaf.CategoryTheory.ProperFaceMatchingObject CategoryTheory.SimplicialObject.matching_object_proper_faces_succ_succ)
 - 14:39 L: merged deliver/F1/lem-weil-pbc-smooth-differentials-free-rank-fibre-dimension (stage 2; reviewer FIX; first push; Sheaf.AlgebraicGeometry.SmoothDifferentialsFreeRankFibreDimension AlgebraicGeometry.smooth_differentials_free_rank_fibre_dimension)
 - 14:39 L: merged deliver/M1/lem-pc-chow-relative-ample (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.ChowRelativeAmple AlgebraicGeometry.chow_relative_ample)
+- 14:39 L: merged deliver/M1/lem-weil-pbc-spectral-generalizations-of-quasi-compact (stage 2; reviewer PASS; first push; Sheaf.Topology.SpectralGeneralizations Topology.generalizations_isCompact_sInter_isCompactOpen)
