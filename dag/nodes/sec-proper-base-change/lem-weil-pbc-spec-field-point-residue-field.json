@@ -206,5 +206,30 @@
   "item": "lem-weil-pbc-spec-field-point-residue-field",
   "worker": "stage1",
   "summary": "Leaf decision: not a Mathlib leaf as a whole. Clause (1) is Mathlib one declaration per sub-clause (Spec.residueFieldIso + Ideal.ker_algebraMap_residueField + the IsFractionRing (R ⧸ p) p.ResidueField instance), but (2) (no lemma `X.fromSpecResidueField x = Spec.map (evaluation) ≫ hU.fromSpec`) and (3) (no lemma computing the point and residue map of Spec.map ψ for ψ : R → K) are 3-5 lemma composites. Split into five steps, all elementary given five new Mathlib leaves: prime-residue-field-algebra (Ideal.ResidueField API: kernel, fraction field, ringHom_ext, lift), spec-residue-field-identification (Spec.residueFieldIso and its two compatibilities), morphism-from-spec-field (SpecToEquivOfField, Stacks 01J9 discussion), residue-field-point-naturality (SpecMap_residueFieldMap_fromSpecResidueField, residue-field iso for open immersions), affine-open-spec-points (IsAffineOpen.fromSpec, primeIdealOf, fromSpec_primeIdealOf). Statement kept; def-pc-scheme added to stmt_deps (clause (2) speaks of a scheme X). Proof follows Stacks Schemes 01J5/01J9 and Algebra local rings/00CT/00E2; those state the facts in passing, the compositions are written out here. The uses by lem-weil-pbc-normalization-in-residue-field-extension (steps 3 and 6) match clauses (1)-(3) as stated."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpecFieldPointResidueField",
+  "declaration": "AlgebraicGeometry.spec_field_point_residue_field",
+  "declarations": [
+   "AlgebraicGeometry.spec_field_point_residue_field",
+   "AlgebraicGeometry.spec_field_point_residue_field_affine_open",
+   "AlgebraicGeometry.spec_field_point_residue_field_map",
+   "AlgebraicGeometry.spec_field_point_residue_field_generic"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/SpecFieldPointResidueField.lean",
+  "statement": "theorem spec_field_point_residue_field (R : CommRingCat.{u}) (p : PrimeSpectrum R) : Nonempty ((Spec R).residueField p ≅ CommRingCat.of (IsLocalRing.ResidueField (Localization.AtPrime p.asIdeal))) ∧ CommRingCat.ofHom (algebraMap R p.asIdeal.ResidueField) ≫ (Scheme.Spec.residueFieldIso R p).inv = (Scheme.ΓSpecIso R).inv ≫ (Spec R).presheaf.germ ⊤ p trivial ≫ (Spec R).residue p ∧ RingHom.ker (algebraMap R p.asIdeal.ResidueField) = p.asIdeal ∧ IsFractionRing (R ⧸ p.asIdeal) p.asIdeal.ResidueField",
+  "branch": "sheaf-dag",
+  "by": "K1",
+  "date": "2026-10-11",
+  "existing": false,
+  "note": "The four declarations jointly state clauses (1), (2), (3), and its generic-point specialization. The induced field map into K is Mathlib descResidueField of stalkClosedPointTo, i.e. the field-map component of SpecToEquivOfField."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "K1",
+  "result": "pass",
+  "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
  }
 }
