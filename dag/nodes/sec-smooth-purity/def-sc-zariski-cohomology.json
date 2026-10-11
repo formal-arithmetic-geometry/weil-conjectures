@@ -101,5 +101,22 @@
   "group": "M1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-zar2752 (reviewer sub-agent of L); spot-checked: Read packet, cited nodes (def-sp-abelian, def-sp-left-exact-additive, def-sp-injective-resolutions, lem-weil-pbc-site-sheaves-enough-injectives, def-sc-zariski-site, def-weil-pbc-sites-and-cohomology), possible duplicates (def-sc-topological-abelian-cohomology cites this node; def-sc-ringed-space-module-cohomology and def-sc-sheaf-cohomology-functor are O_X-module cohomology; def-weil-pbc-sites-and-cohomology (2) is the general site version, not a duplicate definition node), citers lem-weil-pbc-zariski-cohomology-locally-zero and lem-weil-pbc-gabber-strict-henselian-zariski-comparison (they use H^q=H^q(I(X)) for any injective resolution: matches). The 'equivalently' is the definition in def-sp-left-exact-additive (injective resolutions), no smuggled K-injective lemma. Mathlib grep for rightDerived in AlgebraicGeometry/Topology/Sheaves: none. FIX more, RETURN less: (1) C4: 'abelian category [def-sp-abelian]' - def-sp-abelian only defines abelian categories; abelianness and enough injectives of Ab(X_Zar) (hypothesis of def-sp-left-exact-additive) are lem-weil-pbc-site-sheaves-enough-injectives, which was in stmt_deps but uncited in text: now cited. (2) C4: left exactness of Gamma and resolution-independence of the 'equivalently' cited to def-weil-pbc-sites-and-cohomology (2) (added to stmt_deps); def-sp-injective-resolutions only defines resolutions.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Mathlib.CategoryTheory.Sites.SheafCohomology.Basic",
+  "declaration": "CategoryTheory.Sheaf.H'",
+  "statement": "abbrev H' (F : Sheaf J AddCommGrpCat.{v}) (n : ℕ) (X : C) : AddCommGrpCat.{w'}",
+  "branch": "mathlib",
+  "by": "E1",
+  "date": "2026-10-12",
+  "existing": true,
+  "note": "Specialize C to X.Opens, J to Opens.grothendieckTopology X, and the object argument to ⊤. This is the same existing object-cohomology form recorded for def-weil-pbc-sites-and-cohomology (2). H' uses Ext from the sheafified free abelian representable; sheafification, free-forgetful and Yoneda adjunctions identify its Hom functor with evaluation at the open. Hence its Ext is R^q Γ(X,-), with the injective-resolution comparison deferred to stage 3 as in that dependency record. HasSheafify and EnoughInjectives are inferred; an explicit CategoryTheory.hasExt_of_enoughInjectives supplies HasExt in universe u for Scheme.{u} and AddCommGrpCat.{u}. No second Zariski cohomology definition is introduced."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-zco",
+  "group": "E1",
+  "result": "pass"
  }
 }
