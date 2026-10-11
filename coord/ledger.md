@@ -5589,3 +5589,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 18:42 L: merged deliver/F1/lem-weil-pbc-site-injective-cech-acyclic (stage 2; reviewer PASS; first push; Sheaf.CategoryTheory.SiteInjectiveCechAcyclic CategoryTheory.site_injective_cech_acyclic)
 - 18:42 L: merged deliver/K1/lem-weil-pbc-etale-cohomology-invariance-under-site-equivalence (stage 2; reviewer PASS; first push; Sheaf.CategoryTheory.Sites.CohomologySiteEquivalence CategoryTheory.cohomology_site_equivalence)
 - 18:42 L: merged deliver/U1/lem-sc-as-sequence (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.ArtinSchreierSequence AlgebraicGeometry.artinSchreier_shortExact)
+- 18:43 L: merged deliver/C1/lem-sc-rhom-supported-qcoherent (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.RHomSupportedQuasiCoherent AlgebraicGeometry.rhom_supported_quasiCoherent)
