@@ -1,11 +1,11 @@
 # Work queue
 
-512 items; claim with `tools/claim.py next <group> [--stage N]`.
+507 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (512)
+## Stage 2: nodes to state (507)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -26,16 +26,13 @@
 | `lem-sc-hilb-dominating-power` | 1 | state |
 | `lem-weil-derived-limit-roos-complex` | 1 | state |
 | `lem-weil-pbc-finite-etale-trace-degree` | 1 | state |
-| `lem-weil-pbc-fs-adic-base-change` | 1 | state |
 | `lem-weil-pbc-gabber-h0-etale-criterion` | 1 | state |
 | `lem-weil-pbc-graded-module-away-restriction` | 1 | state |
 | `lem-weil-pbc-henselian-etale-retraction` | 1 | state |
-| `lem-weil-pbc-henselian-factorization-criterion` | 1 | state |
 | `lem-weil-pbc-higher-direct-image-sheafified-presheaf` | 1 | state |
 | `lem-weil-pbc-horseshoe-morphism-lift-exact-source` | 1 | state |
 | `lem-weil-pbc-ideal-module-product-stalk` | 1 | state |
 | `lem-weil-pbc-improve-presentation-smooth-conormal-free` | 1 | state |
-| `lem-weil-pbc-injective-resolution-ses-complexes` | 1 | state |
 | `lem-weil-pbc-injective-sheaf-cech-acyclic` | 1 | state |
 | `lem-weil-pbc-integral-closure-finite-fibre-choose-g` | 1 | state |
 | `lem-weil-pbc-integral-closure-finite-fibre-image-clopen` | 1 | state |
@@ -48,9 +45,7 @@
 | `lem-weil-pbc-inverse-image-stalk-germ` | 1 | state |
 | `lem-weil-pbc-invertible-pullback-tensor` | 1 | state |
 | `lem-weil-pbc-irreducible-lisse-strata` | 1 | state |
-| `lem-weil-pbc-isolated-fibre-point-base-change` | 1 | state |
 | `lem-weil-pbc-isolated-fibre-point-quasi-finite-affine-pairs` | 1 | state |
-| `lem-weil-pbc-isolated-fibre-point-residue-finite` | 1 | state |
 | `lem-weil-pbc-isolated-prime-finite-type-algebra-residue-finite` | 1 | state |
 | `lem-weil-pbc-jacobi-zariski-homology-sequence` | 1 | state |
 | `lem-weil-pbc-jacobi-zariski-left-term-vanishing` | 1 | state |
