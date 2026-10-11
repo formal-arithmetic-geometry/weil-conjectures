@@ -141,5 +141,23 @@
   "group": "K1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-elf2826 (reviewer sub-agent of L); spot-checked: Statement matches G1 step 2 use (fp B, q_K over q, IsEtaleAt A_K q_K => IsEtaleAt A q) (C4 ok). Stalk ff node = Tag 0C4Y(1); tensor-zero leaf read at FaithfullyFlat/Basic.lean:169 (exact). FIX more, RETURN less: (1) class (d): lem-sc-etale-local-ring-flat-descent dropped; Step 2 now cites the stalk node (applied to A, giving A_p->(A_K)_{p_K} ff), flat composition Tag 00HC, and existing lem-weil-pbc-flat-permanence (Tag 039V, generic algebra tool use of sk-thm-p1). (2) C1: steps 2-4 used the pointwise criterion IsEtaleAt <=> flat at q + (Omega)_q=0 for fp algebras (Tag 00U6/08WD; not elementary, Mathlib's of_isUnramifiedAt_of_flat needs global flatness), missed by the second reading; added statement-only node lem-sc-etale-at-prime-flat-unramified-criterion and cited it in steps 2, 3, 4 (step 4 no longer elementary). (3) item stmt_deps reset to the statement's own citations (dropped def-weil-etale-morphism and the stalk node, which the statement does not cite).; 2 file(s) fixed by the reviewer; 1 statement node(s) added by the reviewer (FIX more, RETURN less)"
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.IsEtaleAtFieldExtensionDescent",
+  "declaration": "Algebra.IsEtaleAt.of_fieldExtension",
+  "file": "lean/Sheaf/RingTheory/IsEtaleAtFieldExtensionDescent.lean",
+  "statement": "theorem IsEtaleAt.of_fieldExtension (k : Type u) (K : Type v) (A : Type w) (B : Type z) [Field k] [Field K] [Algebra k K] [CommRing A] [CommRing B] [Algebra k A] [Algebra A B] [Algebra k B] [IsScalarTower k A B] [FinitePresentation A B] (q : Ideal B) [q.IsPrime] (qK : Ideal (B ⊗[k] K)) [qK.IsPrime] (hq : Ideal.comap (Algebra.TensorProduct.includeLeftRingHom (R := k) (B := K)) qK = q) : letI : Algebra (A ⊗[k] K) (B ⊗[k] K) := (Algebra.TensorProduct.map (IsScalarTower.toAlgHom k A B) (AlgHom.id k K)).toRingHom.toAlgebra IsEtaleAt (A ⊗[k] K) qK → IsEtaleAt A q",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-lfd1010",
+  "group": "H1",
+  "result": "pass",
+  "note": "k,K fields with Algebra k K; A k-algebra; B FinitePresentation A-algebra with k-tower; q prime of B; qK prime of B⊗K with comap along includeLeft = q; A⊗K-algebra on B⊗K is map(tower,id) (no competing Mathlib instance); hyp IsEtaleAt (A⊗K) qK, concl IsEtaleAt A q (= FormallyEtale of localization, the node's named predicate); p, p_K auxiliary"
  }
 }
