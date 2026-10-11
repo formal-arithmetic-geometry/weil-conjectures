@@ -93,3 +93,19 @@ A review that could have been written without opening the files will be returned
 2. Do not answer an uncited fact by moving it into a new node that restates the item (D1): cite the fact, or write its argument in the step.
 3. After the repair, check the delivery again from A to F, and say in the review, point by point, what was done for each point of the return.
 4. An item returned three times is abandoned with the reason (`roles/remote-lead.md`), not pushed a fourth time.
+
+## H. Stage 2 (statements)
+
+The rules are in `coord/brief-stage2.md` (decision of the human, 2026-10-11). A stage-2 delivery is returned for the points below, by letter and number (`H3: the hypothesis "X proper" is missing`). The list grows as returns come in; each new reason is added here in the same commit as the return. `tools/preflight_delivery.py <G> <item> --stage 2` finds H1, H2, H8 (in part), H9 and H10.
+
+1. **Shape.** Not one commit on top of `sheaf-dag`; files other than the module `lean/Sheaf/<Topic>/<Name>.lean`, the node file and `coord/reports/<G>/<item>.md`; more than one module; no `## Worker report` or no `## Second reading by <G>`.
+2. **Node changed outside `lean`.** Any field but `lean` changed (status, statement, stmt_deps, …); a new node; `lean` incomplete (`module`, `declaration`, `statement`, `branch`, `by`, `date`, `existing`; `file` when not existing) or its `statement` not verbatim from the file.
+3. **Not the node's statement.** A hypothesis added or dropped, a conclusion weakened or strengthened, a clause missing, other objects than the node's (another category, another ring, a special case), a hypothesis the source assumes throughout left out, an edge case excluded (empty index set, zero object, a characteristic, a universe too small).
+4. **A second definition of a notion.** The notion or statement exists in Mathlib or in the source repository and was written again; a dependency's recorded declaration not used (a private copy instead); no record of the three kinds of search in the report.
+5. **Hollow definition.** A def whose data is `sorry`, or a proof a def needs left as `sorry` inside it instead of a named theorem.
+6. **Something proved, or a statement weakened to be provable.** Stage 2 states; every theorem's proof is `sorry`. A statement believed false is written as the node says and marked `STATEMENT-DISPUTED:`.
+7. **Node faults handled silently.** The node's statement wrong or ill-typed and the worker changed it, or rendered something else without reporting; a wrong dependency record not released with `abandon: dependency <node>: …`.
+8. **Docstrings.** No module docstring `/-! # … Source: … (blueprint: <id>) -/`; a declaration without a docstring naming the source place and `(blueprint: <id>)`; a statement whose docstring lacks the node's proof step by step.
+9. **Conventions.** A line over 100 characters; an import outside `Mathlib.*`, `WeilConjectures.*`, `Sheaf.*` or unused; an unbound variable (auto-implicit); the wrong topic directory; a declaration carrying a `Sheaf.` prefix, or a full name that already exists in Mathlib or the source repository.
+10. **Does not compile clean** on the server (`tools/compile_remote.sh`): an error, a timeout, or a warning left (unused variables).
+11. **Second reading not a reading.** It could have been written without opening the node and the file: it must match each hypothesis and clause of the node with its Lean and say what it found and what changed.
