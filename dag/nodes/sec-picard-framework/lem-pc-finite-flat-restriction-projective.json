@@ -156,5 +156,23 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-ffr0125 (reviewer sub-agent of L); spot-checked: Statement (E7: finite A-module made explicit) true; citer lem-pc-finite-flat-pushforward-locally-free supplies finite+fp algebra+flat and FP projective M (C4 ok). Read the Mathlib decls at FinitePresentation.lean:323, ModuleFinitePresentation.lean:80, Flat/Basic.lean:231, Flat/Stability.lean:62, EquationalCriterion.lean:287; no Module.Projective.trans exists, so no <=3-declaration composite. FIX more, RETURN less: (B8) leaf needed four non-instance declarations (of_finite_of_finitePresentation, FinitePresentation.trans, Flat.trans, projective_of_finitePresentation), and FinitePresentation.trans had no file/line; made the item a three-step proof citing lem-weil-pbc-finite-algebra-presentation-module-presentation, lem-weil-pbc-projective-module-flat, lem-weil-pbc-finitely-presented-flat-module-projective and two new statement-only nodes for module FP transitivity and module flatness transitivity (Mathlib leaves).; 3 file(s) fixed by the reviewer; 2 statement node(s) added by the reviewer (FIX more, RETURN less)"
  },
- "lead_note": "2026-10-11 L (R-ffr0125): 2026-10-11 R-ffr0125: new statement-only nodes lem-pc-module-finite-presentation-transitive = Module.FinitePresentation.trans (Mathlib/Algebra/Module/FinitePresentation.lean:323) and lem-pc-module-flat-transitive = Module.Flat.trans (Mathlib/RingTheory/Flat/Stability.lean:62) are exact Mathlib statements: attach them as leaves. No Module.Projective.trans in this Mathlib."
+ "lead_note": "2026-10-11 L (R-ffr0125): 2026-10-11 R-ffr0125: new statement-only nodes lem-pc-module-finite-presentation-transitive = Module.FinitePresentation.trans (Mathlib/Algebra/Module/FinitePresentation.lean:323) and lem-pc-module-flat-transitive = Module.Flat.trans (Mathlib/RingTheory/Flat/Stability.lean:62) are exact Mathlib statements: attach them as leaves. No Module.Projective.trans in this Mathlib.",
+ "lean": {
+  "module": "Sheaf.Algebra.FiniteFlatRestrictionProjective",
+  "declaration": "Module.finite_flat_restriction_projective",
+  "file": "lean/Sheaf/Algebra/FiniteFlatRestrictionProjective.lean",
+  "statement": "theorem finite_flat_restriction_projective (A : Type u) (B : Type v) (M : Type w) [CommRing A] [CommRing B] [Algebra A B] [AddCommGroup M] [Module B M] [Module A M] [IsScalarTower A B M] [Module.Finite A B] [Algebra.FinitePresentation A B] [Module.Flat A B] [Module.FinitePresentation B M] [Module.Projective B M] : Module.FinitePresentation A M ∧ Module.Projective A M",
+  "branch": "sheaf-dag",
+  "by": "J1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-ffp0809",
+  "group": "J1",
+  "result": "fix",
+  "note": "A,B CommRing + Algebra A B; M AddCommGroup, Module B M, Module A M via IsScalarTower (restriction); Module.Finite A B, Algebra.FinitePresentation A B, Module.Flat A B; Module.FinitePresentation B M, Module.Projective B M => Module.FinitePresentation A M ∧ Module.Projective A M; independent universes; no H4 match (Unramified projective_of_restrictScalars is the other direction). FIX: docstring now gives node's 3 steps (Step 2 projective=>flat was missing) and source place; imports narrowed to the defining files (Flat.Stability, EquationalCriterion, ModuleFinitePresentation unused by the statement)"
+ }
 }
