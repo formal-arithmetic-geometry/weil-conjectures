@@ -125,7 +125,10 @@ The tuple `(ρ, H, G_arith(ρ), G^[m])` of a represented degree datum is its mon
 `lem-wf-degree-component-image`; `RepresentedDegreeDatum.degreeComponent_mul_degreeComponent` and
 `RepresentedDegreeDatum.inv_degreeComponent` implement `lem-wf-degree-components-grading`. The
 closure `G` of a subgroup is a closed subgroup (`lem-wf-zariski-closure-subgroup`) by
-`Matrix.GeneralLinearGroup.instIsHopfIdealVanishingIdeal`.
+`Matrix.GeneralLinearGroup.instIsHopfIdealVanishingIdeal`. The pointer remarks
+`rem-ptr-wf-arithmetic-monodromy-extension-1` and `rem-ptr-wf-degree-components-2` refer to the
+statements above of `lem-wf-arith-extension-group`, `lem-wf-degree-component-image` and
+`lem-wf-degree-components-grading`.
 -/
 
 @[expose] public section
