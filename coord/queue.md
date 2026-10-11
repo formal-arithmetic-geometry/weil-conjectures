@@ -1,11 +1,11 @@
 # Work queue
 
-36 items; claim with `tools/claim.py next <group> [--stage N]`.
+32 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (36)
+## Stage 2: nodes to state (32)
 
 | node | distance to Mathlib | kind | blockers |
 |---|---|---|---|
@@ -20,13 +20,11 @@
 | `cor-galois-lisse-representations` | 1 | state | 0 |
 | `lem-pc-base-change-rhom-perfect` | 1 | state | 0 |
 | `lem-pc-derived-internal-hom-pullback-adjunction` | 1 | state | 0 |
-| `lem-pc-dualizable-evaluation-criterion` | 1 | state | 0 |
 | `lem-pc-rf-base-change-complex` | 1 | state | 0 |
 | `lem-pc-rf-base-change-single-complex-criterion` | 1 | state | 0 |
 | `lem-sc-affine-koszul-cech-derived-comparison` | 1 | state | 0 |
 | `lem-sc-derived-internal-hom-stalk-localization` | 1 | state | 0 |
 | `lem-sc-etale-qcoherent-descent-fpqc-sections` | 1 | state | 0 |
-| `lem-sc-finite-affine-derived-equivalence` | 1 | state | 0 |
 | `lem-sc-finite-duality-derived-hom` | 1 | state | 0 |
 | `lem-sc-finite-flat-duality-evaluation` | 1 | state | 0 |
 | `lem-sc-finite-sheafhom-affine-adjoint` | 1 | state | 0 |
@@ -42,9 +40,7 @@
 | `lem-weil-pbc-simplicial-hom-object-standard-simplex` | 1 | state | 0 |
 | `prop-weil-pbc-strict-henselization-stalk-formula` | 1 | state | 0 |
 | `lem-pc-derived-tensor-action-naturality` | 2 | state | 0 |
-| `lem-pc-rf-single-complex-inherited-tensor-condition` | 2 | state | 0 |
 | `lem-sc-p1-proj-shifted-free-twist` | 2 | state | 0 |
-| `lem-weil-pbc-henselization-pair-g-ring` | 2 | state | 0 |
 
 Not open yet: 40 nodes that wait for stage 1, 159 nodes that wait for a statement dependency.
 
