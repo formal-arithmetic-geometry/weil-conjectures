@@ -223,6 +223,42 @@ lemma mateEquiv_whiskerTop_conjugateEquiv {G : A ⥤ C} {H : B ⥤ D}
       (mateEquiv adj₁ adj₁' w₁).whiskerBottom (conjugateEquiv adj₁' adj₂' α') := by
   rw [← conjugateEquiv_mateEquiv_vcomp, h, mateEquiv_conjugateEquiv_vcomp]
 
+
+section ConjugateComp
+
+open TwoSquare
+
+variable {C₁ C₂ C₁' C₂' : Type*} [Category* C₁] [Category* C₂] [Category* C₁'] [Category* C₂']
+  {L₁ : C₁ ⥤ C₂} {R₁ : C₂ ⥤ C₁} {L₂ : C₂ ⥤ C₂} {R₂ : C₂ ⥤ C₂} {L₃ : C₂ ⥤ C₁} {R₃ : C₁ ⥤ C₂}
+  {L : C₁ ⥤ C₁} {R : C₁ ⥤ C₁}
+  {L₁' : C₁' ⥤ C₂'} {R₁' : C₂' ⥤ C₁'} {L₂' : C₂' ⥤ C₂'} {R₂' : C₂' ⥤ C₂'}
+  {L₃' : C₂' ⥤ C₁'} {R₃' : C₁' ⥤ C₂'} {L' : C₁' ⥤ C₁'} {R' : C₁' ⥤ C₁'}
+
+/-- Componentwise form of `CategoryTheory.mateEquiv_whiskerTop_conjugateEquiv` for the
+conjugate of a morphism `α : L ⟶ L₁ ⋙ L₂ ⋙ L₃` into a composite of three left adjoints: if
+2-squares `σ`, `μ`, `ρ` for `L₁`, `L₂`, `L₃` and `ν` for `L` are compatible with `α` and with
+`α' : L' ⟶ L₁' ⋙ L₂' ⋙ L₃'`, then the conjugates of `α` and `α'` are compatible with the mate
+of `ν` and the composite of the mates of `σ`, `μ` and `ρ`. -/
+lemma map_conjugateEquiv_comp_comp_app_comp_mateEquiv_app (adj₁ : L₁ ⊣ R₁) (adj₂ : L₂ ⊣ R₂)
+    (adj₃ : L₃ ⊣ R₃) (adj : L ⊣ R) (adj₁' : L₁' ⊣ R₁') (adj₂' : L₂' ⊣ R₂') (adj₃' : L₃' ⊣ R₃')
+    (adj' : L' ⊣ R') (T₁ : C₁ ⥤ C₁') (T₂ : C₂ ⥤ C₂')
+    (α : L ⟶ L₁ ⋙ L₂ ⋙ L₃) (α' : L' ⟶ L₁' ⋙ L₂' ⋙ L₃')
+    (σ : TwoSquare T₁ L₁ L₁' T₂) (μ : TwoSquare T₂ L₂ L₂' T₂) (ρ : TwoSquare T₂ L₃ L₃' T₁)
+    (ν : TwoSquare T₁ L L' T₁) (h : ν.whiskerLeft α = (σ ≫ᵥ μ ≫ᵥ ρ).whiskerRight α')
+    (N : C₁) :
+    T₁.map ((conjugateEquiv (adj₁.comp (adj₂.comp adj₃)) adj α).app N) ≫
+        (mateEquiv adj adj' ν).app N =
+      (mateEquiv adj₁ adj₁' σ).app _ ≫ R₁'.map ((mateEquiv adj₂ adj₂' μ).app _) ≫
+        R₁'.map (R₂'.map ((mateEquiv adj₃ adj₃' ρ).app N)) ≫
+          (conjugateEquiv (adj₁'.comp (adj₂'.comp adj₃')) adj' α').app (T₁.obj N) := by
+  have key := congr_app (mateEquiv_whiskerTop_conjugateEquiv (adj₁.comp (adj₂.comp adj₃)) adj
+    (adj₁'.comp (adj₂'.comp adj₃')) adj' α α' _ ν h) N
+  rw [mateEquiv_hcomp, mateEquiv_hcomp] at key
+  simpa only [TwoSquare.whiskerTop_app, TwoSquare.whiskerBottom_app, TwoSquare.hComp_app,
+    Functor.comp_obj, Category.assoc, Functor.map_comp] using key
+
+end ConjugateComp
+
 section Triple
 
 open _root_.CategoryTheory.Functor
