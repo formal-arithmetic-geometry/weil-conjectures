@@ -393,6 +393,33 @@ lemma projectionMap_derivedEtaleLowerShriek_app_Qh {U : Scheme.{u}} (f : U ⟶ X
   erw [← HomotopyCategory.MonoidalCategory.quotient_map_whiskerLeft']
   rfl
 
+open HomotopyCategory _root_.DerivedCategory in
+omit [HasSmallSiteSheafify A] in
+/-- The derived projection map of `D(u_!) ⊣ Lu^*` is an isomorphism at `K = Qh K₁` when `K₁`
+and `u^*K₁` are K-flat and the projection maps on cochain complexes are isomorphisms. -/
+lemma isIso_projectionMap_derivedEtaleLowerShriek_app_Qh {U : Scheme.{u}} (f : U ⟶ X)
+    [Etale f] [(f)^*[A].PreservesFlat] (K₁ : CochainComplex (Sheaf X.smallEtaleTopology A) ℤ)
+    (hK₁ : (HomotopyCategory.quasiIso _ (.up ℤ)).kFlat ((quotient _ _).obj K₁))
+    (hK₁' : (HomotopyCategory.quasiIso _ (.up ℤ)).kFlat
+      ((quotient _ _).obj (((f)^*[A].mapHomologicalComplex (.up ℤ)).obj K₁)))
+    (T₁ : CochainComplex (Sheaf U.smallEtaleTopology A) ℤ)
+    [IsIso ((Functor.Monoidal.projectionMap
+      ((Etale.etaleLowerShriekUpperStarAdjunction A f inferInstance).mapHomologicalComplex
+        (.up ℤ)) K₁).app T₁)] :
+    letI := leftDerivedUpperStarMonoidal A f
+    IsIso ((Functor.Monoidal.projectionMap (derivedEtaleLowerShriekLeftDerivedUpperStarAdjunction
+        (A := A) f) (Qh.obj ((quotient _ _).obj K₁))).app (Qh.obj ((quotient _ _).obj T₁))) := by
+  let := leftDerivedUpperStarMonoidal A f
+  have h := projectionMap_derivedEtaleLowerShriek_app_Qh (A := A) f K₁ T₁
+  have := isIso_μ_Qh_of_kFlat ((quotient _ _).obj K₁)
+    (((Etale.etaleLowerShriek A f inferInstance).mapHomotopyCategory (.up ℤ)).obj
+      ((quotient _ _).obj T₁)) hK₁
+  have := isIso_μ_Qh_of_kFlat (((f)^*[A].mapHomotopyCategory (.up ℤ)).obj
+    ((quotient _ _).obj K₁)) ((quotient _ _).obj T₁) hK₁'
+  rw [← IsIso.eq_comp_inv] at h
+  rw [h]
+  infer_instance
+
 /-- **Derived projection formula for an étale morphism** `u : U ⟶ X`: the projection map
 `D(u_!)(Lu^*K ⊗ᴸ T) ⟶ K ⊗ᴸ D(u_!)T` of the adjunction `D(u_!) ⊣ Lu^*`, for the monoidal
 structure `leftDerivedUpperStarMonoidal` of `Lu^*`, is an isomorphism. -/
