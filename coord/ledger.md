@@ -5559,3 +5559,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 18:30 L: merged deliver/E1/def-weil-pbc-site-cech-complex (stage 2; reviewer FIX; first push; Sheaf.CategoryTheory.SiteCechComplex CategoryTheory.SiteCechComplex)
 - 18:30 L: merged deliver/H1/lem-pc-sites-sheaf-tensor-bilinear-universal (stage 2; reviewer FIX; first push; Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorBilinearUniversal SheafOfModules.tensor_bilinear_universal)
 - 18:30 L: merged deliver/F1/lem-weil-pbc-colimit-of-sites (stage 2; reviewer PASS; first push; Sheaf.CategoryTheory.ColimitSites CategoryTheory.exists_colimit_site; statement corrected (7 citers))
+- 18:30 L: merged deliver/N1/lem-weil-pbc-zariski-extension-by-zero-adjunction (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.ZariskiExtensionByZeroAdjunction AlgebraicGeometry.zariski_extension_by_zero_adjunction)

@@ -188,5 +188,23 @@
   "worker": "stage1",
   "summary": "Read Modules on Sites 03DI (lemma-extension-by-zero, sites-modules.tex line 2058, with its proof) and 04IX (4),(5), Sheaves 00A5 (lemma-j-shriek-abelian, line 4685, proof omitted) and 00A4 (1),(2); tags verified in tags/tags. The statement asserts only (1) additive functor and (2) the natural adjunction bijection psi -> (psi theta_F)|_U (no stalks, no exactness: exactness is lem-weil-pbc-zariski-extension-by-zero-exact); kept unchanged. Proof written by an agent after the proof of 03DI and the reviewed module analogue: Step 1 restriction G -> G|_U is an additive functor Ab(X_Zar) -> Ab(U_Zar) (G|_U a sheaf since coverings and intersections in U_Zar are those of X_Zar), which the statement asserts implicitly; Step 2 j_{p!} additive functor to presheaves (it is the 03DI presheaf, Mor(V,U) having at most one element); Step 3 clause (1) from the universal property of sheafification [def-weil-pbc-sheafification]; Step 4 the presheaf-level bijection with explicit inverse a -> a~ and its naturality; Step 5 clause (2). Cited: def-sc-zariski-site, def-weil-pbc-sites-and-cohomology (unit sk-thm-p1, split), def-weil-pbc-sheafification and lem-weil-pbc-abelian-presheaves-evaluation-exact (Mathlib leaves). No new node. The citer lem-weil-pbc-zariski-open-restriction-injectives Step 3 uses clauses (1),(2) as stated. Mathlib re-searched (LeanSearch, Loogle, LeanFinder, grep): Functor.sheafAdjunctionContinuous along IsOpenMap.functor is an abstract left adjoint only, so not a leaf (B8)."
  },
- "reviewed": "2026-10-10 L: 5 steps checked (03DI/00A5 with the omitted verifications written out): restriction to U_Zar is an additive functor (sheaf condition transported), j_{p!} presheaf functor, j_! by sheafification on the site, presheaf-level bijection with explicit inverse and both naturalities, clause (2) by composing with the sheafification bijection; the statement has no stalk clause (exactness is the sibling node); citer zariski-open-restriction-injectives step 3 uses clauses (1),(2)"
+ "reviewed": "2026-10-10 L: 5 steps checked (03DI/00A5 with the omitted verifications written out): restriction to U_Zar is an additive functor (sheaf condition transported), j_{p!} presheaf functor, j_! by sheafification on the site, presheaf-level bijection with explicit inverse and both naturalities, clause (2) by composing with the sheafification bijection; the statement has no stalk clause (exactness is the sibling node); citer zariski-open-restriction-injectives step 3 uses clauses (1),(2)",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ZariskiExtensionByZeroAdjunction",
+  "declaration": "AlgebraicGeometry.zariski_extension_by_zero_adjunction",
+  "file": "lean/Sheaf/AlgebraicGeometry/ZariskiExtensionByZeroAdjunction.lean",
+  "statement": "theorem zariski_extension_by_zero_adjunction (X : Scheme.{u}) (U : Opens X.toRingedSpace.carrier) : ∃ (L : TopCat.Sheaf AddCommGrpCat.{u} ((Opens.toTopCat X.toRingedSpace.carrier).obj U) ⥤ TopCat.Sheaf AddCommGrpCat.{u} X.toRingedSpace.carrier) (P : ∀ F : TopCat.Sheaf AddCommGrpCat.{u} ((Opens.toTopCat X.toRingedSpace.carrier).obj U), (Opens X.toRingedSpace.carrier)ᵒᵖ ⥤ AddCommGrpCat.{u}) (θ : ∀ F : TopCat.Sheaf AddCommGrpCat.{u} ((Opens.toTopCat X.toRingedSpace.carrier).obj U), P F ⟶ (TopCat.Sheaf.forget AddCommGrpCat.{u} X.toRingedSpace.carrier).obj (L.obj F)), Functor.Additive L ∧ (∀ (F : TopCat.Sheaf AddCommGrpCat.{u} ((Opens.toTopCat X.toRingedSpace.carrier).obj U)) (V : Opens X.toRingedSpace.carrier), (V ≤ U → Nonempty ((P F).obj (op V) ≅ ((TopCat.Sheaf.forget AddCommGrpCat.{u} ((Opens.toTopCat X.toRingedSpace.carrier).obj U)).obj F).obj (op ((Opens.map (TopCat.ofHom ⟨(fun x : U => (x : X.toRingedSpace.carrier)), continuous_subtype_val⟩)).obj V)))) ∧ (¬ V ≤ U → IsZero ((P F).obj (op V)))) ∧ (∀ (F : TopCat.Sheaf AddCommGrpCat.{u} ((Opens.toTopCat X.toRingedSpace.carrier).obj U)) (H : TopCat.Sheaf AddCommGrpCat.{u} X.toRingedSpace.carrier) (η : P F ⟶ (TopCat.Sheaf.forget AddCommGrpCat.{u} X.toRingedSpace.carrier).obj H), ∃! ψ : L.obj F ⟶ H, θ F ≫ (TopCat.Sheaf.forget AddCommGrpCat.{u} X.toRingedSpace.carrier).map ψ = η) ∧ ∃ adj : L ⊣ TopCat.Sheaf.pullback AddCommGrpCat.{u} (TopCat.ofHom ⟨(fun x : U => (x : X.toRingedSpace.carrier)), continuous_subtype_val⟩), (∀ (F : TopCat.Sheaf AddCommGrpCat.{u} ((Opens.toTopCat X.toRingedSpace.carrier).obj U)) (G : TopCat.Sheaf AddCommGrpCat.{u} X.toRingedSpace.carrier), Function.Bijective (adj.homEquiv F G))",
+  "branch": "sheaf-dag",
+  "by": "N1",
+  "date": "2026-10-12",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "N1",
+  "result": "pass",
+  "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
+ }
 }
