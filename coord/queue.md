@@ -1,20 +1,20 @@
 # Work queue
 
-53 items; claim with `tools/claim.py next <group> [--stage N]`.
+52 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (53)
+## Stage 2: nodes to state (52)
 
 | node | distance to Mathlib | kind | blockers |
 |---|---|---|---|
-| `def-weil-pbc-sites-and-cohomology` | 1 | state | 134 |
+| `def-weil-pbc-sites-and-cohomology` | 1 | state | 133 |
 | `def-nagata-qc-open-equality-stage` | 1 | state | 13 |
 | `def-pc-global-derived-rhom` | 1 | state | 4 |
 | `def-weil-pbc-simplicial-hom-object` | 1 | state | 4 |
 | `def-pc-derived-rhom-algebra-module` | 1 | state | 2 |
-| `lem-pc-module-pullback-identity-composition` | 1 | state | 10 |
+| `lem-pc-module-pullback-identity-composition` | 1 | state | 9 |
 | `lem-weil-pbc-pair-henselization` | 1 | state | 5 |
 | `lem-sc-derived-internal-hom-adjunction` | 1 | state | 4 |
 | `lem-weil-pbc-etale-graph-section-extension-map-linear` | 1 | state | 3 |
@@ -59,7 +59,6 @@
 | `lem-weil-pbc-unrestricted-strict-henselization-stalk` | 1 | state | 0 |
 | `prop-weil-pbc-strict-henselization-stalk-formula` | 1 | state | 0 |
 | `lem-pc-rf-single-complex-inherited-tensor-condition` | 2 | state | 0 |
-| `lem-sc-kummer-base-change-compatibility` | 2 | state | 0 |
 | `lem-sc-p1-proj-shifted-free-twist` | 2 | state | 0 |
 | `lem-sc-units-quotient-base-change` | 2 | state | 0 |
 
