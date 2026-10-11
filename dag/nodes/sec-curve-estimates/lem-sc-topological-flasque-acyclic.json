@@ -124,5 +124,23 @@
    "decls": [],
    "missing": []
   }
+ },
+ "lean": {
+  "module": "Sheaf.Topology.FlasqueZariskiAcyclic",
+  "declaration": "TopCat.Sheaf.IsFlasque.subsingleton_H'_top",
+  "statement": "theorem IsFlasque.subsingleton_H'_top {X : TopCat.{u}}\n    [HasExt.{u} (CategoryTheory.Sheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u})]\n    (F : CategoryTheory.Sheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u})\n    [TopCat.Sheaf.IsFlasque F] (q : ℕ) (hq : 0 < q) :\n    Subsingleton (CategoryTheory.Sheaf.H' F q ⊤)",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-11",
+  "existing": true,
+  "note": "Existing declaration of lem-sc-zariski-flasque-acyclic states exactly the same topological opens-site vanishing, using the recorded cohomology Sheaf.H' F q ⊤ and Mathlib flasqueness. The node already identifies the two statements in blueprint.same_as; no duplicate module. HasExt is the cohomology model structure, available from enough injectives, rather than an additional geometric hypothesis."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-h83ac3",
+  "group": "F1",
+  "result": "pass",
+  "note": "headless review: X topological space = {X : TopCat.{u}}; opens site with open coverings + abelian sheaf F = F : Sheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u}; flasque (all restrictions surjective) = [TopCat.Sheaf.IsFlasque F] (recorded def-sc-zariski-flasque, epi = surjective in AddCommGrpCat); q>0 = (q : ℕ) (hq : 0 < q); H^q(X,F)=0 = Subsingleton (Sheaf.H' F q ⊤) with recorded H' of def-sc-topological-abelian-cohomology at ⊤ = X; HasExt.{u} is the Prop H' needs, true by enough injectives, not hollow; existing landed declaration of same_as node lem-sc-zariski-flasque-acyclic, statement verbatim, only the item's lean key added"
  }
 }
