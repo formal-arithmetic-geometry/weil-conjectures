@@ -126,5 +126,24 @@
   "group": "E1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-nbc2532 (reviewer sub-agent of L); spot-checked: Read the packet whole; Stacks 08E8 and cohomology.tex lemma-cone-pseudo-coherent (08CD). Induction correct: lower-truncation node with n=-m gives H^m(E)[-m] -> tau_{>=m}E -> tau_{>=m+1}E, descending from tau_{>=b+1}E=0 to tau_{>=a}E=E; Noetherian hypothesis of lem-sc-coherent-pseudo-coherent supplied (C1/C4 ok). Boundedness matches the only citer lem-pc-bounded-coherent-finite-tor-proper-pushforward-perfect (D^b_Coh of Rf_*E). New triangle node is a real lemma, true, statement-only; no DAG duplicate (no existing two-out-of-three/cone node for pseudo-coherence), no Mathlib (reviewer grep of mathlib for pseudo.?coherent: 0 hits, recorded); not class b/c/d. FIX more, RETURN less: (1) B4: proof text in TeX (\\to, \\le, \\tau_{\\ge m}), plain-text arrows removed; (2) new node source tag was 08E6, which is an obsolete duplicate lemma on direct summands of free modules, missed by the Second reading: corrected to cohomology.tex Tag 08CD lemma-cone-pseudo-coherent part (2); (3) Step 3 uses dropped lem-sc-coherent-pseudo-coherent and def-pur-pseudo-coherent-complex, which enter only through Step 2. Statement unchanged.; 2 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.NoetherianBoundedCoherentPseudoCoherent",
+  "declaration": "AlgebraicGeometry.Scheme.isPseudoCoherent_of_bounded_coherent",
+  "file": "lean/Sheaf/AlgebraicGeometry/NoetherianBoundedCoherentPseudoCoherent.lean",
+  "statement": "theorem isPseudoCoherent_of_bounded_coherent (S : Scheme.{u}) [IsNoetherian S] [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings S.toRingedSpace))] [∀ U : S.Opens, HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings S.toRingedSpace).over U))] (E : schemeDerivedCategory S) (hbounded : ∃ a b : ℤ, ∀ i : ℤ, i < a ∨ b < i → IsZero ((DerivedCategory.homologyFunctor (SheafOfModules.{u} (moduleRings S.toRingedSpace)) i).obj E)) (hcoherent : ∀ i : ℤ, RingedSpace.IsCoherent S.toRingedSpace ((DerivedCategory.homologyFunctor (SheafOfModules.{u} (moduleRings S.toRingedSpace)) i).obj E)) : IsPseudoCoherent S E",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-nbc1323"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-nbc1323",
+  "group": "F1",
+  "result": "fix",
+  "note": "Read packet whole; Stacks 08E8 (perfect.tex 2262): Noetherian X, E in D_QCoh, H^i coherent bounded above <=> pseudo-coherent. S:Scheme.{u}+[IsNoetherian S] (H1 sibling form); E:schemeDerivedCategory S with HasDerivedCategory.{w} + per-open instances as IsPseudoCoherent requires; bounded = exists a b, IsZero homologyFunctor outside [a,b] (sibling FinitelyPresentedComplexDescent form; IsZero in SheafOfModules, not Type); coherent = RingedSpace.IsCoherent of every H^i; conclusion IsPseudoCoherent S E. Reverted F1's D_QCoh correction: coherent (01BV) implies locally finitely presented implies quasi-coherent, so hQCoh was redundant, its stated justification false and the citer holds:false spurious; node proof (truncation induction via lem-sc-coherent-pseudo-coherent) never uses QCoh. Docstring now has the proof in words; #check confirmed names.; reverted the delivery's statement correction of the item (statement, statement_change kept as on sheaf-dag; --revert-statement)"
  }
 }
