@@ -212,5 +212,23 @@
   "worker": "stage1",
   "summary": "Not a Mathlib leaf: LeanSearch (2 queries), LeanFinder, grep (Loogle rate-limited) find no declaration stating Stacks 031V(2); the creator's three searches agree. Split along the proof of Fields 031V (fields.tex line 3747), verified tags 031V = fields-lemma-pth-root and 09HF = fields-lemma-take-pth-root. Six steps: (1) hypothesis (b) gives P coprime to P' in E[T]; (2) hence no repeated root in an algebraic closure Omega of L; (3) Q with Q^(p)=P via the coefficientwise Frobenius of Omega[T]; (4) Q has no repeated root (the source's 'roots of Q are the p-th roots of the roots of P'); (5) a p-th root gamma of alpha in Omega is a root of Q and (T-gamma)^p=T^p-alpha; (6) by the existing 09HF leaf lem-weil-pbc-x-pow-p-minus-t-irreducible, T^p-alpha divides Q in L[T] if alpha is not a p-th power, contradiction. No new node. Statement made precise: (b) now says P is nonzero (for P=0 the conclusion fails, e.g. alpha=t in F_p(t)) and spells out 'pairwise distinct roots' as no square (T-rho)^2 dividing P; added def-weil-polynomial-ring to stmt_deps. The separability of L/E is not used by part (2); kept as in the source. The citer lem-weil-pbc-make-separably-generated (its step 8) supplies exactly these hypotheses (P the nonzero minimal polynomial, distinct roots in any extension by its Bezout remark, coefficients p-th powers in E')."
  },
- "reviewed": "pass (L, 2026-10-10): 6 steps follow 031V (2) via 09HF; statement sharpened by the worker to require P != 0 (the citer supplies a minimal polynomial, so it is consistent). The separability of L/E is unused, as in the source."
+ "reviewed": "pass (L, 2026-10-10): 6 steps follow 031V (2) via 09HF; statement sharpened by the worker to require P != 0 (the citer supplies a minimal polynomial, so it is consistent). The separability of L/E is unused, as in the source.",
+ "lean": {
+  "module": "Sheaf.FieldTheory.SeparableRootPthPower",
+  "declaration": "Polynomial.exists_pow_eq_of_distinct_roots_coeff_pow",
+  "file": "lean/Sheaf/FieldTheory/SeparableRootPthPower.lean",
+  "statement": "theorem exists_pow_eq_of_distinct_roots_coeff_pow {E : Type u} {L : Type v} [Field E] [Field L] [Algebra E L] (p : ℕ) [Fact p.Prime] [CharP E p] [Algebra.IsSeparable E L] (α : L) (P : E[X]) (hroot : aeval α P = 0) (hne : P ≠ 0) (hdistinct : ∀ ρ : AlgebraicClosure E, ¬ (X - C ρ) ^ 2 ∣ P.map (algebraMap E (AlgebraicClosure E))) (hcoeff : ∀ n : ℕ, ∃ b : E, P.coeff n = b ^ p) : ∃ α' : L, α = α' ^ p",
+  "branch": "sheaf-dag",
+  "by": "K1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "K1",
+  "result": "pass",
+  "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
+ }
 }

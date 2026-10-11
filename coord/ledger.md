@@ -4930,3 +4930,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 14:23 L: merged deliver/J1/lem-weil-pbc-simplicial-set-add-simplices (stage 2; reviewer PASS; first push; Sheaf.Paper.SimplicialSetAddSimplices SSet.add_simplices)
 - 14:23 L: merged deliver/C1/lem-weil-pbc-smooth-artinian-lifting-at-point (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.SmoothArtinianLiftingAtPoint AlgebraicGeometry.smooth_near_iff_artinian_lifting_at_point)
 - 14:23 L: merged deliver/J1/lem-weil-pbc-singular-ideal-localization-smooth (stage 2; reviewer PASS; first push; Sheaf.RingTheory.SingularIdealLocalizationSmooth Algebra.smooth_localization_of_mem_singularIdeal)
+- 14:23 L: merged deliver/K1/lem-weil-pbc-separable-root-pth-power (stage 2; reviewer PASS; first push; Sheaf.FieldTheory.SeparableRootPthPower Polynomial.exists_pow_eq_of_distinct_roots_coeff_pow)
