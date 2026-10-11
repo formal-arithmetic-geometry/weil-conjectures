@@ -149,5 +149,22 @@
   "by": "L",
   "result": "pass",
   "note": "Reviewed by the lead (opus-relaunch6). Four steps along Stacks 0CYJ: j_*F restricts to F on U (definitional, elementary), F vanishes on U minus T (stalks and the sections-determined-by-germs leaf), j_*F vanishes on X minus T (elementary), coherence from the open cover {U, X minus T} with the zero module coherent (new unsplit node: coherence restricts to opens and is local on an open cover; agent-formulated, Stacks uses it silently; Mathlib has no coherent sheaves of modules). Statement citations added, content unchanged. Stage-3 note: pqf-def-coherent (sec-abelian-varieties, imported) cites 01DW (cohomology-section-phantom) where 01BV (modules-definition-coherent) is meant."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.PushforwardCoherentOnOpen",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.pushforward_coherent_on_open",
+  "file": "lean/Sheaf/AlgebraicGeometry/PushforwardCoherentOnOpen.lean",
+  "statement": "theorem pushforward_coherent_on_open (X : Scheme.{u}) (U : X.Opens) (T : Closeds X) (hT : (T : Set X) ⊆ (U : Set X)) (F : U.toScheme.Modules) (hF : RingedSpace.IsCoherent U.toScheme.toRingedSpace F) (hSupp : {x : U.toScheme | ¬ Subsingleton (F.presheaf.stalk x)} ⊆ U.ι.base ⁻¹' (T : Set X)) : RingedSpace.IsCoherent X.toRingedSpace ((pushforward U.ι).obj F) ∧ Nonempty ((restrictFunctor U.ι).obj ((pushforward U.ι).obj F) ≅ F) ∧ IsZero ((restrictFunctor (Scheme.Opens.ι T.compl)).obj ((pushforward U.ι).obj F))",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-pco",
+  "group": "E1",
+  "result": "pass"
  }
 }
