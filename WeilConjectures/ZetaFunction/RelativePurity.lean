@@ -43,15 +43,25 @@ relative duality `(Rⁱf₀*F)^∨ ≅ R^{2d-i}f₀*(F^∨(d))`: the right-hand 
 
 ## Implementation notes
 
-Two geometric inputs are stated separately, with `sorry`, because the repository lacks the
-operations they need on Weil sheaves:
+Two geometric inputs are stated separately, with `sorry`. Their blueprint proofs use nodes of
+other sections that cannot yet be stated for Weil sheaves, because the repository has no
+functor from finite-level étale sheaves, or from the lattice categories `D^b_c(X, ℚ̄_ℓ)` of the
+blueprint, to the pro-étale `ℓ`-adic sheaves `AlgebraicGeometry.ProEtale.AdicSheaf` underlying
+Weil sheaves:
 
 - `AlgebraicGeometry.WeilSheaf.isLisse_higherLowerStar_of_smooth_of_isProper` (Step 1, local
-  constancy): needs proper and smooth base change for the `ℓ`-adic pro-étale sheaves underlying
-  Weil sheaves, and the passage to the limit over a lattice;
-- `AlgebraicGeometry.WeilSheaf.nonempty_dual_higherLowerStar_iso` (Step 3, relative duality):
-  needs `RHom`, `Rf^!`, the smooth orientation `Rf^!ℚ̄_ℓ ≅ ℚ̄_ℓ(d)[2d]` and the tensor–Hom
-  exchange as morphisms of Weil complexes, none of which exist yet
+  constancy) uses the finite-level nodes `prop-weil-proet-finite-proper-base-change`,
+  `sbc-thm-smooth-base-change` (`AlgebraicGeometry.Etale.isIso_baseChangeHomologyMap_of_smooth`)
+  and `thm-fin-proper-constructibility-complete` on a lattice of `F`, and
+  `cor-weil-pbc-geometric-fiber-qbar` to pass to the limit; neither lattices of lisse
+  `ℓ`-adic sheaves nor the limit comparison exist yet;
+- `AlgebraicGeometry.WeilSheaf.nonempty_dual_higherLowerStar_iso` (Step 3, relative duality)
+  uses `lem-sf-tensor-hom`, `thm-pur-rational-and-qbar-purity`, `lem-sf-twist-interchange`
+  and `lem-sf-hom-finite-projective` at the `ℚ̄_ℓ`-stage, as morphisms of Weil complexes. These
+  are stated in the repository for étale sheaves of `Λ`-modules only
+  (`WeilConjectures.SixFunctors.Etale.Derived.TensorHom`,
+  `WeilConjectures.SixFunctors.Etale.Derived.Perfect.TateTwist`); `RHom` from a non-lisse
+  source, `Rf^!` and the smooth orientation do not exist for Weil complexes
   (see `WeilConjectures.WeilSheaf.Operations`).
 
 The Tate twist `(d)` of a Weil sheaf is the constant twist by `χ_ℓ(σ)ᵈ = q⁻ᵈ`
@@ -314,14 +324,15 @@ relative clauses (a), (b) of `sk-prop-smooth-proper-purity`): let `f : X₀ ⟶ 
 proper morphism of pure relative dimension `d` between separated `k₀`-schemes of finite type and
 `F` a lisse Weil sheaf on `X₀`, punctually `ι`-pure of weight `w`. Then for every `i`:
 
-- (a) `Rⁱf₀!F ≅ Rⁱf₀*F` as Weil sheaves, and this sheaf is lisse;
+- (a) the canonical map `Rⁱf₀!F ⟶ Rⁱf₀*F` is an isomorphism of Weil sheaves, namely
+  `(higherLowerShriekObjIsoOfIsProper f i F).hom`, and this sheaf is lisse;
 - (b) it is punctually `ι`-pure of weight `w + i`. -/
 theorem smooth_proper_relative_purity {F : WeilSheaf k₀ l X} (hF : F.IsLisse) {w : ℝ}
     (hw : F.IsPunctuallyPureOfWeight ι w) (i : ℕ) :
-    Nonempty ((higherLowerShriek k₀ l f i).obj F ≅ (higherLowerStar f i).obj F) ∧
+    IsIso (higherLowerShriekObjIsoOfIsProper f i F).hom ∧
       ((higherLowerStar f i).obj F).IsLisse ∧
       ((higherLowerStar f i).obj F).IsPunctuallyPureOfWeight ι (w + i) :=
-  ⟨⟨higherLowerShriekObjIsoOfIsProper f i F⟩, isLisse_higherLowerStar_of_smooth_of_isProper f
+  ⟨inferInstance, isLisse_higherLowerStar_of_smooth_of_isProper f
     (hs := SmoothOfRelativeDimension.smooth d f) hF i,
     isPunctuallyPureOfWeight_higherLowerStar f d hF hw i⟩
 
