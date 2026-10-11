@@ -78,6 +78,12 @@ lemma quotSMulTop_map_mk {M N : ModuleCat.{v} R} (f : M ⟶ N) (m : M) :
     (quotSMulTop I).map f (Submodule.Quotient.mk m) = Submodule.Quotient.mk (f m) :=
   rfl
 
+instance : (quotSMulTop.{v} I).Additive where
+  map_add {_ _ f g} := by
+    refine ModuleCat.hom_ext (LinearMap.ext fun x ↦ ?_)
+    induction x using Submodule.Quotient.induction_on with
+    | H m => exact quotSMulTopMap_mk I _ m
+
 /-- Restricting the scalars of `M / I M` back to `R` gives `M / I M` as an `R`-module. -/
 noncomputable def quotSMulTopRestrictScalarsEquiv (M : Type v) [AddCommGroup M] [Module R M] :
     (M ⧸ I • (⊤ : Submodule R M)) ≃ₗ[R]
