@@ -142,5 +142,23 @@
   "group": "H1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-rsc2744 (reviewer sub-agent of L); spot-checked: Statement vs Tag 0BKJ; cited statements; citer lem-pc-ringed-space-derived-limit-stalk-injective. FIX more, RETURN less: (1) C4: def-sc-ringed-space-module-cohomology defines H^p(X,F) of a single module only, not H^q(U,K) for K in D(O_X); statement now defines H^q(U,-) on D(O_X) via the functorial K-injective resolutions of def-pc-ringed-spaces-derived-direct-image (same unit), stmt_deps updated. (2) C4/E: Step 1 said a complex of injectives is 'equivalently' K-injective, false for unbounded K; now uses the K-injective resolution I(K), sections over U of the resolution on X (no restriction lemma needed). (3) C4 for the citer: derived-limit-stalk-injective applies the clauses to K and K_{n(x)} through pr o p, so it needs naturality in K; statement (E7: strengthened, reason the citer) now says the iso is natural in K and gives the germ compatibility, proved elementarily in Steps 2-3. Tool use lem-weil-pbc-ringed-site-module-sheafification-exact accepted (generic site lemma).; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.RingedSpaceSheafificationCohomology",
+  "declaration": "AlgebraicGeometry.RingedSpace.sheafification_cohomology",
+  "file": "lean/Sheaf/AlgebraicGeometry/RingedSpaceSheafificationCohomology.lean",
+  "statement": "theorem sheafification_cohomology (X : RingedSpace.{u}) [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X))] (q : ℤ) : ∃ P : DerivedCategory (SheafOfModules.{u} (moduleRings X)) ⥤ ((Opens X)ᵒᵖ ⥤ AddCommGrpCat.{u}), Nonempty (DerivedCategory.Q ⋙ P ≅ CochainComplex.kInjectiveResolutionFunctor.{u} (SheafOfModules.{u} (moduleRings X)) ⋙ (Functor.mapHomologicalComplex (SheafOfModules.toSheaf (moduleRings X) ⋙ sheafToPresheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u}) (ComplexShape.up ℤ)) ⋙ HomologicalComplex.homologyFunctor _ (ComplexShape.up ℤ) q) ∧ ∃ e : P ⋙ presheafToSheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u} ≅ DerivedCategory.homologyFunctor (SheafOfModules.{u} (moduleRings X)) q ⋙ SheafOfModules.toSheaf (moduleRings X), ∃ θ : P ⟶ DerivedCategory.homologyFunctor (SheafOfModules.{u} (moduleRings X)) q ⋙ SheafOfModules.toSheaf (moduleRings X) ⋙ sheafToPresheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u}, θ = Functor.whiskerLeft P (sheafificationAdjunction (Opens.grothendieckTopology X) AddCommGrpCat.{u}).unit ≫ Functor.whiskerRight e.hom (sheafToPresheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u}) ∧ (∀ (K : DerivedCategory (SheafOfModules.{u} (moduleRings X))) (x : X) (t : ((TopCat.Presheaf.stalkFunctor AddCommGrpCat.{u} x).obj ((DerivedCategory.homologyFunctor (SheafOfModules.{u} (moduleRings X)) q ⋙ SheafOfModules.toSheaf (moduleRings X) ⋙ sheafToPresheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u}).obj K))), ∃ (U : Opens X) (hx : x ∈ U) (s : (P.obj K).obj (op U)), (TopCat.Presheaf.germ (C := AddCommGrpCat.{u}) _ U x hx) ((θ.app K).app (op U) s) = t) ∧ (∀ (K : DerivedCategory (SheafOfModules.{u} (moduleRings X))) (U : Opens X) (x : X) (hx : x ∈ U) (s : (P.obj K).obj (op U)), (TopCat.Presheaf.germ (C := AddCommGrpCat.{u}) _ U x hx) ((θ.app K).app (op U) s) = 0 → ∃ (V : Opens X) (_hxV : x ∈ V) (i : V ⟶ U), (P.obj K).map i.op s = 0) ∧ (∀ (K L : DerivedCategory (SheafOfModules.{u} (moduleRings X))) (f : K ⟶ L) (U : Opens X) (x : X) (hx : x ∈ U) (s : (P.obj K).obj (op U)), (TopCat.Presheaf.germ (C := AddCommGrpCat.{u}) _ U x hx) ((θ.app L).app (op U) ((P.map f).app (op U) s)) = ((TopCat.Presheaf.stalkFunctor AddCommGrpCat.{u} x).map ((DerivedCategory.homologyFunctor (SheafOfModules.{u} (moduleRings X)) q ⋙ SheafOfModules.toSheaf (moduleRings X) ⋙ sheafToPresheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u}).map f)) ((TopCat.Presheaf.germ (C := AddCommGrpCat.{u}) _ U x hx) ((θ.app K).app (op U) s)))",
+  "branch": "sheaf-dag",
+  "by": "U1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "U1",
+  "result": "pass",
+  "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
  }
 }
