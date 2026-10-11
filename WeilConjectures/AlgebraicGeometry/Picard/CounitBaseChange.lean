@@ -270,6 +270,44 @@ theorem pullbackSection_baseChangeMap_ne_zero {T : Over (Spec (.of k))}
   rw [map_zero, map_zero]
   rfl
 
+
+/-- Pullback of sections is natural in the module. -/
+lemma Scheme.Modules.pullbackSection_app {Y Z : Scheme.{u}} (g : Z ⟶ Y) {M N : Y.Modules}
+    (φ : M ⟶ N) {U : Y.Opens} (m : Γ(M, U)) :
+    pullbackSection g (φ.app U m) = ((Modules.pullback g).map φ).app (g ⁻¹ᵁ U)
+      (pullbackSection g m) :=
+  congr($(congrArg (fun ψ ↦ Hom.app ψ U)
+    ((pullbackPushforwardAdjunction g).unit.naturality φ)) m)
+
+/-- **The adjunction morphism of an `F`-class does not vanish on fibres.** For `ℒ` satisfying
+`IsInvertibleDirectImage` and `q : T₀ ⟶ T` from an affine scheme with nonzero ring of functions,
+landing in an affine open over which `f_{T,*} ℒ` has a free generator, the pullback along
+`X_{T₀} ⟶ X_T` of the adjunction morphism `f_T^* f_{T,*} ℒ ⟶ ℒ` is nonzero: by the triangle
+identity it sends the pullback of the generator to the pullback of the generator, which is
+nonzero (`AlgebraicGeometry.pullbackSection_baseChangeMap_ne_zero`). -/
+theorem pullback_baseChangeMap_map_counit_ne_zero {T : Over (Spec (.of k))}
+    {L : (Limits.pullback f T.hom).Pic} (hL : IsInvertibleDirectImage f T L)
+    {V : T.left.Opens} (hV : IsAffineOpen V)
+    {s : Γ((pushforward (Limits.pullback.snd f T.hom)).obj ((fromSkeleton _).obj L.val), V)}
+    (hs : IsFreeGenerator s) {T₀ : Over (Spec (.of k))} (q : T₀ ⟶ T) [IsAffine T₀.left]
+    [Nontrivial Γ(T₀.left, ⊤)] (hq : ⊤ ≤ q.left ⁻¹ᵁ V) :
+    (Modules.pullback (baseChangeMap f q)).map
+      ((pullbackPushforwardAdjunction (Limits.pullback.snd f T.hom)).counit.app
+        ((fromSkeleton _).obj L.val)) ≠ 0 := by
+  intro h0
+  apply pullbackSection_baseChangeMap_ne_zero f hL hV hs q hq
+  let adj := pullbackPushforwardAdjunction (Limits.pullback.snd f T.hom)
+  have tri := adj.right_triangle_components ((fromSkeleton _).obj L.val)
+  have hs' : (adj.counit.app ((fromSkeleton _).obj L.val)).app _
+      ((adj.unit.app ((pushforward (Limits.pullback.snd f T.hom)).obj
+        ((fromSkeleton _).obj L.val))).app V s) = s :=
+    congr($(congrArg (fun ψ ↦ Hom.app ψ V) tri) s)
+  have key := pullbackSection_app (baseChangeMap f q) (adj.counit.app _)
+    ((adj.unit.app ((pushforward (Limits.pullback.snd f T.hom)).obj
+      ((fromSkeleton _).obj L.val))).app V s)
+  erw [h0, hs'] at key
+  exact key
+
 end Core
 
 end AlgebraicGeometry
