@@ -122,5 +122,23 @@
   "item": "def-weil-pbc-formal-glueing-data",
   "worker": "stage1",
   "summary": "Checked against More on Algebra Remark 05EL (more-algebra.tex 24640-24690, label remark-glueing-data, Section 05E5 section-formal-glueing; tags verified in tags/tags: 05E5, 05EL, 07K0 algebra-lemma-universal-property-localization-module, 00DK algebra-lemma-tensor-localization) and against the two citers, lem-weil-pbc-formal-glueing-isogeny (steps 2-4: objects D, D', morphisms Phi, Phi', componentwise composition and the components of an isomorphism) and prop-weil-pbc-formal-glueing-equivalence (Can(M), Can(u), c, sigma). (a) Completeness and correctness: objects (M', M_i, alpha_i, alpha_ij) with M' an S-module, M_i an R_{f_i}-module, alpha_i : M'_{f_i} → M_i ⊗_R S, alpha_ij : (M_i)_{f_j} → (M_j)_{f_i} isomorphisms, and conditions (a), (b) agree with 05EL (1)(a),(b) once the implicit identifications are written; I typed every composite: (a) is a pair of maps (M'_{f_i})_{f_j} → (M_j)_{f_i} ⊗_R S and (b) a pair ((M_i)_{f_j})_{f_k} → ((M_k)_{f_j})_{f_i}, both sides of each have these source and target. The source writes the target of (a) as (M_j)_{f_i}, which omits ⊗_R S (a slip of notation, not a mathematical error; the node has the right target). Morphisms (u', u_i) with the two compatibilities agree with 05EL (2). Composition and identities are componentwise (now written out); the remark that R-linear maps between modules on which f acts bijectively are R_f-linear (one line: f·u(x/f) = u(x)) reconciles 'S-linear'/'R-linear' with the source's isomorphisms of S_{f_i}-, R_{f_if_j}-modules; 'M_i regarded as an R-module' added. No mathematical error found. (b) Claims moved out: the existence, uniqueness, formula and S-linearity of sigma^P_{f,g} and c^P_f, that they are isomorphisms, and the S-module structure on P_f with the functoriality of h ↦ h_f, are the new unsplit statement node lem-weil-pbc-formal-glueing-canonical-maps, recorded in `pointers` (not in stmt_deps, to keep the definition from citing a lemma about its own data); the sentence of the statement that asserted them now refers to that statement in words. One-line verifications left in the definition: that composites and identities of morphisms are morphisms (beta_i∘(v'u')_{f_i} = beta_i∘v'_{f_i}∘u'_{f_i} = ... = ((v_iu_i) ⊗ S)∘alpha_i by clause (1) of the new node and the compatibility of ⊗_R S with composition in def-weil-module-base-change; likewise for alpha_ij; identities since id_f = id and id ⊗ S = id), and the category laws, which hold componentwise because they hold for linear maps. 'Can(M) is an object' and 'Can is a functor' are not in the definition (they are prop-weil-pbc-formal-glueing-equivalence (1)). (c) stmt_deps: kept def-weil-pbc-module-localization-away, def-weil-ring-localization-away, def-weil-module-base-change; added def-weil-pbc-module-localization (it, not the -away node, defines the localization h_f of a linear map and the localized multiplications) and the Mathlib leaf def-nagata-category (CategoryTheory.Category). (d) Mathlib: the earlier LeanFinder/LeanSearch/grep/Loogle searches kept; added LeanSearch and grep on Mathlib's CategoryTheory.Pseudofunctor.DescentData (Sites/Descent/DescentData.lean:59-76), which is not Glue (it requires a datum over S ⊗_R S, which formal glueing omits), and a LeanFinder search; verdict: no match, the definition stays a split definition node."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.FormalGlueingData",
+  "declaration": "FormalGlueing.Data",
+  "file": "lean/Sheaf/RingTheory/FormalGlueingData.lean",
+  "statement": "structure Data (φ : R →+* S) {t : ℕ} (f : Fin t → R)",
+  "branch": "sheaf-dag",
+  "by": "G1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-fgd1027",
+  "group": "G1",
+  "result": "fix",
+  "note": "M' S-module, M_i over Localization.Away (f i) restricted to R; alpha_i R-equiv + alpha_smul = S-linear iso M'_fi -> M_i⊗S; alpha_ij (M_i)_fj ≃ (M_j)_fi; (a) both 3-map paths (M'_fi)_fj -> (M_j)_fi⊗S with sigma/c by unique-extension specs; (b) cocycle ((M_i)_fj)_fk -> ((M_k)_fj)_fi; Hom u' S-linear, u_i R-linear, both equations; componentwise id/comp; t=0 ok; no glueing notion in Mathlib or source. FIX: restrict := ModuleCat.restrictScalars.obj (one definition per notion), noncomputable section"
  }
 }
