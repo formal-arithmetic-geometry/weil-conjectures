@@ -149,5 +149,23 @@
   "group": "J1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-nme2954 (reviewer sub-agent of L); spot-checked: Read packet whole; merged def-nagata-morphism-equality-stage on sheaf-dag (data used exactly: W_1,W_2, lambda_jk, U_jkl cover of W_1∩W_2, generator witnesses mu_jklb via clause (2), u(F)); citers def-nagata-morphism-descent (H1, overlap maps agree at lambda_phi) and lemma-nagata-morphism-descends (M1, via H1) use exactly this statement (C4 ok). FIX more, RETURN less: (1) B4/B3 all three steps were plain text (lambda_jk, varphi, '>=', 'X_nu -> X_lambda'): rewritten in TeX. (2) C1 step 3 elementary gap: added transport of witness equalities from mu_jklb to lambda along the Gamma transition map, the identification of chart maps with R_j-algebra maps B_jk -> Gamma(U_jkl,lambda), and the fibre-product universal property passing from phi_lambda0∘p = psi_lambda0∘p to phi_lambda = psi_lambda on U_jkl,lambda; step 2 now states the role substitution for lemma-nagata-qc-open-eq-eventually and derives that the U_jkl,lambda cover X_lambda (uses += def-nagata-morphism-equality-stage). (3) removed the incorrect last sentence of step 3 (base change to S_nu is not composition with X_nu -> X_lambda; also superfluous since lambda is arbitrary). Second reading by J1 missed (1)-(3).; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.NagataMorphismEqEventually",
+  "declaration": "AlgebraicGeometry.nagataMorphismEqEventually",
+  "file": "lean/Sheaf/AlgebraicGeometry/NagataMorphismEqEventually.lean",
+  "statement": "theorem nagataMorphismEqEventually {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I] {D : Iᵒᵖ ⥤ Scheme.{u}} {c : Cone D} {hc : IsLimit c} [∀ {i j : Iᵒᵖ} (f : i ⟶ j), IsAffineHom (D.map f)] {i₀ : I} [CompactSpace (D.obj (op i₀))] [QuasiSeparatedSpace (D.obj (op i₀))] {X₀ Y₀ : Scheme.{u}} [CompactSpace X₀] [QuasiSeparatedSpace X₀] {p : X₀ ⟶ D.obj (op i₀)} {q : Y₀ ⟶ D.obj (op i₀)} [LocallyOfFinitePresentation p] [QuasiCompact p] [QuasiSeparated p] [LocallyOfFinitePresentation q] [QuasiCompact q] [QuasiSeparated q] {phi psi : X₀ ⟶ Y₀} {hphi : phi ≫ q = p} {hpsi : psi ≫ q = p} {d : I → I → I} {r : LinearOrder I} (data : NagataMorphismEqualityStageData D c hc i₀ p q phi psi hphi hpsi d r) : ∀ (lambda : I) (hlambda : i₀ ≤ lambda), nagataMorphismEqualityStage data ≤ lambda → ((Over.pullback (D.map (homOfLE hlambda).op)).map (Over.homMk (U := Over.mk p) (V := Over.mk q) phi hphi)).left = ((Over.pullback (D.map (homOfLE hlambda).op)).map (Over.homMk (U := Over.mk p) (V := Over.mk q) psi hpsi)).left",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-12",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "E1",
+  "result": "pass",
+  "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
  }
 }
