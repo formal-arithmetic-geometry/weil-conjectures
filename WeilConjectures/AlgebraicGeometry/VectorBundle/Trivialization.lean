@@ -78,6 +78,19 @@ lemma ι_comp : t.ι ≫ p = 𝔸(ULift.{u} (Fin d); t.V) ↘ t.V ≫ t.j :=
 instance : IsOpenImmersion t.ι :=
   MorphismProperty.of_isPullback t.isPullback.flip inferInstance
 
+/-- The restriction `E ×_S V` of the bundle to the trivialising open is `𝔸^d_V`. -/
+noncomputable def isoAffineSpace : pullback p t.j ≅ 𝔸(ULift.{u} (Fin d); t.V) :=
+  t.isPullback.isoPullback.symm
+
+@[reassoc (attr := simp)]
+lemma isoAffineSpace_hom_over :
+    t.isoAffineSpace.hom ≫ 𝔸(ULift.{u} (Fin d); t.V) ↘ t.V = pullback.snd p t.j :=
+  t.isPullback.isoPullback_inv_snd
+
+@[reassoc (attr := simp)]
+lemma isoAffineSpace_inv_fst : t.isoAffineSpace.inv ≫ pullback.fst p t.j = t.ι :=
+  t.isPullback.isoPullback_hom_fst
+
 /-- Two trivialisations are *linearly compatible* if, locally on their overlap `W`, the
 transition automorphism of `𝔸^d_W` is linear, i.e. given by a `d × d` matrix of functions. -/
 def IsLinearlyCompatible (t t' : VectorBundleTrivialization d p z) : Prop :=
