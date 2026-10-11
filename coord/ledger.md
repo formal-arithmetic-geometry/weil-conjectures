@@ -3838,3 +3838,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 08:30 L: merged deliver/E1/lem-sc-hilbert-embedded-points-affine-localization (stage 2; reviewer PASS; first push; Sheaf.RingTheory.LocalizationEmbeddedPoints Module.localization_commutes_with_embedded_point_removal)
 - 08:30 L: merged deliver/E1/def-pur-hom-complex (stage 2; reviewer FIX; first push; Sheaf.Algebra.Homology.HomComplex CategoryTheory.homComplex)
 - 08:30 L: merged deliver/K1/lem-sc-semilocal-dim-one-normalization (stage 2; reviewer FIX; first push; Sheaf.RingTheory.SemilocalNormalizationDimOne integralClosure.semilocal_normalization_dim_one)
+- 08:30 L: merged deliver/E1/def-kun-support (stage 2; reviewer FIX; first push; Sheaf.AlgebraicGeometry.EtaleSupport AlgebraicGeometry.Scheme.etaleSheafSupport)
