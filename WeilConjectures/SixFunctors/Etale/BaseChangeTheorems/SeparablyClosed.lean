@@ -7,6 +7,7 @@ module
 
 public import Mathlib.RingTheory.Jacobson.Ring
 public import WeilConjectures.AlgebraicGeometry.Sites.EtaleRigidity
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Geometrically.Connected
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Forget
 
 /-!
@@ -194,5 +195,87 @@ lemma Etale.isIso_terminal_hom (X : Scheme.{u}) : IsIso (⊤_ X.Etale).hom := by
     (Category.comp_id _).symm.trans (MorphismProperty.Over.w e.hom)
   rw [← h]
   exact this
+
+/-- **Sections are invariant under extension of an algebraically closed base field**, for
+abelian sheaves. Let `k` be an algebraically closed field, `K/k` a field extension and
+`p : X ⟶ Spec k` quasi-compact and quasi-separated. For every abelian étale sheaf `G` on `X`,
+pullback along the projection `X ×_k K ⟶ X` is an isomorphism `Γ(X, G) ≅ Γ(X ×_k K, G|)`. -/
+theorem Etale.isIso_globalSectionsUpperStarMap_addCommGrpCat_of_isAlgClosed {k K : Type u}
+    [Field k] [Field K] [Algebra k K] [IsAlgClosed k] {X : Scheme.{u}} (p : X ⟶ Spec (.of k))
+    [QuasiCompact p] [QuasiSeparated p] (G : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) :
+    IsIso (globalSectionsUpperStarMap AddCommGrpCat.{u + 1}
+      (pullback.fst p (Spec.map (CommRingCat.ofHom (algebraMap k K)))) G) := by
+  simp only [globalSectionsUpperStarMap, isIso_comp_left_iff, ← Category.assoc,
+    isIso_comp_right_iff]
+  rw [ConcreteCategory.isIso_iff_bijective]
+  have := isIso_terminal_hom X
+  have : CompactSpace X := QuasiCompact.compactSpace_of_compactSpace p
+  have : QuasiSeparatedSpace X := quasiSeparatedSpace_of_quasiSeparated p
+  have : CompactSpace (⊤_ X.Etale).left :=
+    QuasiCompact.compactSpace_of_compactSpace (Y := X) (⊤_ X.Etale).hom
+  have : QuasiSeparatedSpace (⊤_ X.Etale).left :=
+    quasiSeparatedSpace_of_quasiSeparated (Y := X) (⊤_ X.Etale).hom
+  refine ⟨?_, fun t ↦ ?_⟩
+  · -- injectivity: `X_K ⟶ X` is surjective
+    have : Surjective (pullback.fst p (Spec.map (CommRingCat.ofHom (algebraMap k K)))) :=
+      MorphismProperty.pullback_fst (P := @Surjective) _ _ inferInstance
+    exact injective_unit_app_of_surjective _ G _
+  · -- surjectivity: every section comes from some `X ×_k A`, `A` finitely generated
+    have (j : (Finset K)ᵒᵖ) : CompactSpace ((baseChangeAdjoinFinsetDiagram K p).obj j) :=
+      inferInstanceAs (CompactSpace ↥(pullback p _))
+    have (j : (Finset K)ᵒᵖ) : QuasiSeparatedSpace ((baseChangeAdjoinFinsetDiagram K p).obj j) :=
+      quasiSeparatedSpace_of_quasiSeparated (pullback.snd p
+        (Spec.map (CommRingCat.ofHom (algebraMap k (Algebra.adjoin k (j.unop : Set K))))))
+    have : ∀ {i j : (Finset K)ᵒᵖ} (f : i ⟶ j),
+        IsAffineHom ((baseChangeAdjoinFinsetDiagram K p).map f) := fun {i j} f ↦ by
+      have : IsAffineHom (pullback.fst p (Spec.map
+          (CommRingCat.ofHom (algebraMap k (Algebra.adjoin k (j.unop : Set K)))))) :=
+        MorphismProperty.pullback_fst (P := @IsAffineHom) _ _ inferInstance
+      have : IsAffineHom ((baseChangeAdjoinFinsetDiagram K p).map f ≫ pullback.fst _ _) := by
+        simp only [baseChangeAdjoinFinsetDiagram, pullback.lift_fst, Category.comp_id]
+        exact MorphismProperty.pullback_fst (P := @IsAffineHom) _ _ inferInstance
+      exact IsAffineHom.of_comp _ (pullback.fst p
+        (Spec.map (CommRingCat.ofHom (algebraMap k (Algebra.adjoin k (j.unop : Set K))))))
+    obtain ⟨S, s, hs⟩ := unitComparison_app_surjective_of_isLimit
+      (baseChangeAdjoinFinsetDiagram K p) (baseChangeAdjoinFinsetπ K p)
+      (baseChangeAdjoinFinsetCone K p) _ (baseChangeAdjoinFinset_fst_eq K p)
+      (isLimitBaseChangeAdjoinFinsetCone K p) G (⊤_ X.Etale) t
+    let B := Algebra.adjoin k (S.unop : Set K)
+    have : Algebra.FiniteType k B := Algebra.FiniteType.adjoin_of_finite S.unop.finite_toSet
+    obtain ⟨a⟩ := Algebra.FiniteType.nonempty_algHom_of_isAlgClosed k B
+    have : ConnectedSpace (Spec (.of B)) := inferInstanceAs (ConnectedSpace (PrimeSpectrum B))
+    have : GeometricallyConnected (Spec.map (CommRingCat.ofHom (algebraMap k B))) :=
+      GeometricallyConnected.of_connectedSpace_of_isSepClosed _
+    have : GeometricallyConnected ((baseChangeAdjoinFinsetπ K p).app S) :=
+      inferInstanceAs
+        (GeometricallyConnected (pullback.fst p (Spec.map (CommRingCat.ofHom (algebraMap k B)))))
+    -- the section of `X ×_k A ⟶ X` given by the `k`-point `a` of `A`
+    have ha : CommRingCat.ofHom (algebraMap k B) ≫ CommRingCat.ofHom a.toRingHom = 𝟙 _ := by
+      ext x
+      simp
+    let σ : X ⟶ (baseChangeAdjoinFinsetDiagram K p).obj S :=
+      pullback.lift (𝟙 X) (p ≫ Spec.map (CommRingCat.ofHom a.toRingHom))
+        (by rw [Category.assoc, ← Spec.map_comp, ha, Spec.map_id, Category.comp_id,
+          Category.id_comp])
+    obtain ⟨s₀, rfl⟩ := surjective_unit_app_of_section _ σ (pullback.lift_fst _ _ _) G
+      (⊤_ X.Etale) s
+    refine ⟨s₀, Eq.trans ?_ hs⟩
+    exact (congrArg (fun φ ↦ φ.hom.app (op (⊤_ X.Etale)) s₀)
+      (unit_app_comp_unitComparison _ _ _ (baseChangeAdjoinFinset_fst_eq K p S) G)).symm
+
+variable (Λ : Type (u + 1)) [CommRing Λ]
+
+/-- **Sections are invariant under extension of an algebraically closed base field.** Let `k`
+be an algebraically closed field, `K/k` a field extension and `p : X ⟶ Spec k` quasi-compact
+and quasi-separated. For every étale sheaf `F` of `Λ`-modules on `X`, pullback along the
+projection `X ×_k K ⟶ X` is an isomorphism `Γ(X, F) ≅ Γ(X ×_k K, F|)`. -/
+@[stacks 0A3I]
+theorem Etale.isIso_globalSectionsUpperStarMap_of_isAlgClosed {k K : Type u} [Field k] [Field K]
+    [Algebra k K] [IsAlgClosed k] {X : Scheme.{u}} (p : X ⟶ Spec (.of k)) [QuasiCompact p]
+    [QuasiSeparated p] (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :
+    IsIso (globalSectionsUpperStarMap (ModuleCat.{u + 1} Λ)
+      (pullback.fst p (Spec.map (CommRingCat.ofHom (algebraMap k K)))) F) :=
+  (isIso_globalSectionsUpperStarMap_iff_forget₂ Λ _ F).2
+    (isIso_globalSectionsUpperStarMap_addCommGrpCat_of_isAlgClosed p _)
 
 end AlgebraicGeometry
