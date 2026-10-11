@@ -203,5 +203,23 @@
   "by": "L",
   "result": "accepted",
   "note": "Split reviewed: 6 steps along Limits 07RP with the affine reduction written out (finitely many affine triples; the base over W as Spec of a colimit of rings; pieces of the base changes as spectra of tensor products; the hypothesis on the piece over S; Algebra 07RI plus persistence to larger indices by base change; locality of etale on the source). Correct; source tag corrected (02GJ, not 02GN). New: 07RI unsplit, two Mathlib leaves verified."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.EtaleInverseLimitDescent",
+  "declaration": "AlgebraicGeometry.Etale.exists_stage_of_inverseLimit",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleInverseLimitDescent.lean",
+  "statement": "theorem Etale.exists_stage_of_inverseLimit {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] (D : Iᵒᵖ ⥤ Scheme.{u}) [∀ {i j : Iᵒᵖ} (a : i ⟶ j), IsAffineHom (D.map a)] (c : Cone D) (hc : IsLimit c) (i₀ : I) [CompactSpace (D.obj (op i₀))] [QuasiSeparatedSpace (D.obj (op i₀))] (X₀ Y₀ : Over (D.obj (op i₀))) [CompactSpace X₀.left] [QuasiSeparatedSpace X₀.left] [CompactSpace Y₀.left] [QuasiSeparatedSpace Y₀.left] (f₀ : X₀ ⟶ Y₀) [LocallyOfFinitePresentation f₀.left] (hf : Etale (((Over.pullback (c.π.app (op i₀))).map f₀).left)) : ∃ (i : I) (h : i₀ ≤ i), Etale (((Over.pullback (D.map (homOfLE h).op)).map f₀).left)",
+  "branch": "sheaf-dag",
+  "by": "J1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-dse1135",
+  "group": "J1",
+  "result": "pass",
+  "note": "I : Type u (same universe as Scheme.{u}, #check confirms) Preorder+IsDirected, i0 gives nonemptiness; D : Iop => Scheme with IsAffineHom transitions; Cone+IsLimit; S0,X0,Y0 qcqs via CompactSpace/QuasiSeparatedSpace; X0,Y0 : Over S0, f0 over S0 with LocallyOfFinitePresentation f0.left; X_i,Y_i,f_i and f via Over.pullback (= pullback g.hom f, Over.pullback_obj_left); hf Etale at limit; conclusion exists i >= i0 with Etale f_i; no hollow hyps, no duplicate (grep 07RP/descend-etale), only file+item record in diff"
  }
 }
