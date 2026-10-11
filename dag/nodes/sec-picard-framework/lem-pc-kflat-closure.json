@@ -135,5 +135,24 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-kfc2124 (reviewer sub-agent of L); spot-checked: Checked all three steps against 06YS/03EU and the cited statements; cycle check vs lem-pc-bounded-above-flat-kflat and lem-pc-module-bounded-flat-kflat (not reached); new nodes: bounded-above-site is the site generalisation of the ringed-space node (not class b), cone-direct-sum duplicates none of the 8 same-tag nodes; Mathlib/slopmaster2 grep for sheaf-module monoidal closed: no match. FIX more, RETURN less: (1) C4 step 2 cited lem-weil-pbc-sheaf-tensor-closed (A-valued sheaves, fixed A) for Mod(O): dropped it, step 2 now cites only lem-pc-kflat-cone-direct-sum; (2) D/elementary: the homotopy-colimit clause of the item was never derived: added to step 2 via the hocolim definition in lem-pc-complex-hocolim-colimit; (3) C4 step 3 same misuse for the Grothendieck and monoidal-closed hypotheses of lem-weil-pbc-flat-coproduct: now cites prop-pur-kinjective-resolutions-exist (Mod(O) Grothendieck) and new statement-only node lem-pc-sheaf-modules-tensor-closed (Stacks 03EO), with the exact-vs-finite-limits translation spelled out; tool use lem-weil-pbc-sheaf-tensor-closed dropped.; 2 file(s) fixed by the reviewer; 1 statement node(s) added by the reviewer (FIX more, RETURN less)"
  },
- "lead_note": "2026-10-10 L (R-kfc2124): Second reading by C1 describes a filtered-colimit node and abelian-sheaf/forgetful citations that are not in the delivered files; it missed that lem-weil-pbc-sheaf-tensor-closed is about A-valued sheaves for a fixed A and does not cover Mod(O) for a sheaf of rings O. No cycle: nothing cited reaches lem-pc-bounded-above-flat-kflat or lem-pc-module-bounded-flat-kflat. When lem-pc-bounded-above-flat-kflat-site is split it must not cite those two nodes."
+ "lead_note": "2026-10-10 L (R-kfc2124): Second reading by C1 describes a filtered-colimit node and abelian-sheaf/forgetful citations that are not in the delivered files; it missed that lem-weil-pbc-sheaf-tensor-closed is about A-valued sheaves for a fixed A and does not cover Mod(O) for a sheaf of rings O. No cycle: nothing cited reaches lem-pc-bounded-above-flat-kflat or lem-pc-module-bounded-flat-kflat. When lem-pc-bounded-above-flat-kflat-site is split it must not cite those two nodes.",
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.KFlatTelescopeClosure",
+  "declaration": "CochainComplex.kFlat_closure",
+  "file": "lean/Sheaf/Algebra/Homology/KFlatTelescopeClosure.lean",
+  "statement": "theorem kFlat_closure {C : Type u} [Category.{u} C] {J : GrothendieckTopology C} [J.WEqualsLocallyBijective AddCommGrpCat.{u}] [HasWeakSheafify J AddCommGrpCat.{u}] (R : Sheaf J CommRingCat.{u}) : (∀ K : CochainComplex (SheafOfModules.{u} ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj R)) ℤ, (∃ b : ℤ, ∀ i : ℤ, b < i → IsZero (K.X i)) → (∀ i : ℤ, SheafOfModules.IsFlat (K.X i)) → K.IsKFlat) ∧ (∀ (K L : CochainComplex (SheafOfModules.{u} ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj R)) ℤ) (f : K ⟶ L), K.IsKFlat → L.IsKFlat → (mappingCone f).IsKFlat) ∧ (∀ (I : Type u) [Countable I], ∀ K : I → CochainComplex (SheafOfModules.{u} ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj R)) ℤ, (∀ i : I, (K i).IsKFlat) → (∐ K).IsKFlat) ∧ (∀ (K : ℕ → CochainComplex (SheafOfModules.{u} ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj R)) ℤ) (t : ∀ n : ℕ, K n ⟶ K (n + 1)), (∀ n : ℕ, (K n).IsKFlat) → (mappingCone (𝟙 (∐ K) - Sigma.desc (fun n : ℕ => t n ≫ Sigma.ι K (n + 1)))).IsKFlat) ∧ (∀ (I : Type u) [Countable I], ∀ F : I → SheafOfModules.{u} ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj R), (∀ i : I, SheafOfModules.IsFlat (F i)) → SheafOfModules.IsFlat (∐ F))",
+  "branch": "sheaf-dag",
+  "by": "V1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-kfc2"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-kfc2",
+  "group": "V1",
+  "result": "fix",
+  "note": "5 clauses vs node (bounded-above flat => K-flat; cone; countable sums I:Type u Countable; telescope cone of 1-shift; countable sums of flat are flat); dependency module reverted to landed SheafOfModules.IsFlat (Category.{u}, sheafify instance args); item restated in the landed single-universe setting; reverted the delivery's change of existing node(s) def-pc-flat-sheaf-modules (--revert-nodes; kept as on sheaf-dag)"
+ }
 }
