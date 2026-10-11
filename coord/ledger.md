@@ -3947,3 +3947,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 09:06 L: merged deliver/F1/lem-sp-ce-vertical-nullhomotopy (stage 2; reviewer PASS; first push; Sheaf.CategoryTheory.CartanEilenbergVerticalNullhomotopy CategoryTheory.cartanEilenberg_vertical_nullhomotopy)
 - 09:07 L: merged deliver/G1/lem-weil-pbc-cm-local-quotient-nonzerodivisor-cm (stage 2; reviewer PASS; first push; Sheaf.RingTheory.DepthQuotientNonzerodivisor IsLocalRing.depth_quotient_nonzerodivisor)
 - 09:08 L: merged deliver/M1/lem-weil-pbc-cohen-rings-exist (stage 2; reviewer PASS; first push; Sheaf.RingTheory.CohenRingsExist exists_cohenRing; dependency modules: def-weil-pbc-cohen-ring)
+- 09:08 L: merged deliver/M1/lem-weil-pbc-cech-vanishing-criterion (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.EtaleCechVanishingCriterion AlgebraicGeometry.Scheme.isZero_rightDerived_etale_of_cech_vanishing)

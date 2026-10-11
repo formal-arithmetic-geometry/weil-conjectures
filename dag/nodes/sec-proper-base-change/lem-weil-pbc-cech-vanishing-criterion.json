@@ -196,5 +196,23 @@
   "by": "L",
   "result": "pass",
   "note": "Stacks 03F9 by dimension shifting (03AW, 03F8, 015B); 5 new nodes, 2 Mathlib leaves; lem-weil-pbc-module-sheaves-enough-injectives (sk-thm-reduction) and lem-sp-derived-well-defined (sk-prop-av-pqf-finite) accepted as tool uses"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.EtaleCechVanishingCriterion",
+  "declaration": "AlgebraicGeometry.Scheme.isZero_rightDerived_etale_of_cech_vanishing",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleCechVanishingCriterion.lean",
+  "statement": "theorem isZero_rightDerived_etale_of_cech_vanishing (X : Scheme.{u}) (B : Set X.Etale) (Cov : ∀ (U : X.Etale) (I : Type (u + 1)) (V : I → X.Etale), (∀ i : I, V i ⟶ U) → Prop) (F : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) (hcover : ∀ (U : X.Etale) (I : Type (u + 1)) (V : I → X.Etale) (f : ∀ i : I, V i ⟶ U), Cov U I V f → Sieve.ofArrows V f ∈ X.smallEtaleTopology U) (hB : ∀ (U : X.Etale) (I : Type (u + 1)) (V : I → X.Etale) (f : ∀ i : I, V i ⟶ U), Cov U I V f → U ∈ B ∧ (∀ i : I, V i ∈ B) ∧ ∀ (p : ℕ) (a : Fin (p + 1) → I), (piObj (fun j : Fin (p + 1) ↦ Over.mk (f (a j)))).left ∈ B) (hcofinal : ∀ (U : X.Etale), U ∈ B → ∀ (I : Type (u + 1)) (V : I → X.Etale) (f : ∀ i : I, V i ⟶ U), Sieve.ofArrows V f ∈ X.smallEtaleTopology U → ∃ (K : Type (u + 1)) (W : K → X.Etale) (g : ∀ k : K, W k ⟶ U), Cov U K W g ∧ ∀ k : K, ∃ (i : I) (t : W k ⟶ V i), t ≫ f i = g k) (hcech : ∀ (U : X.Etale) (I : Type (u + 1)) (V : I → X.Etale) (f : ∀ i : I, V i ⟶ U), Cov U I V f → ∀ (p : ℕ), 0 < p → IsZero (((cechComplexFunctor fun i : I ↦ Over.mk (f i)).obj ((Over.forget U).op ⋙ F.obj)).homology p)) : ∀ (U : X.Etale), U ∈ B → ∀ (p : ℕ), 0 < p → IsZero (((sheafToPresheaf X.smallEtaleTopology AddCommGrpCat.{u + 1} ⋙ (CategoryTheory.evaluation X.Etaleᵒᵖ AddCommGrpCat.{u + 1}).obj (op U)).rightDerived p).obj F)",
+  "branch": "sheaf-dag",
+  "by": "M1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-cvc1433",
+  "group": "M1",
+  "result": "pass",
+  "note": "X/X.Etale/smallEtaleTopology; B:Set; Cov predicate + hcover (ofArrows sieve covering = jointly surjective); F in AddCommGrpCat.{u+1} as siblings; hB = (1) incl. U, U_i, all Fin(p+1)-tuple products in Over U; hcofinal = (2) same target, refinement direction t≫f i=g k; hcech = (3) Mathlib cechComplexFunctor (full tuples, alternating cofaces) homology p>0; conclusion rightDerived of G↦G(U) per node, all U∈B, p>0; local instances are Mathlib facts"
  }
 }
