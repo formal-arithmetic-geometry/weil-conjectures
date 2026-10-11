@@ -173,5 +173,24 @@
   "by": "L",
   "result": "accepted",
   "note": "5 steps (agent proof of the unproved parenthesis in Stacks 03JA): each W_i affine, finite-dimensional and finite discrete (existing leaves); T finite discrete; T affine (03J6-style leaf); Gamma(T) -> prod Gamma(W_i) injective by the sheaf axiom, giving the dimension bound; finiteness over k by the local-on-target leaf. No new nodes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FiniteOpenCoverDegreeSum",
+  "declaration": "AlgebraicGeometry.finite_open_cover_degree_sum",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteOpenCoverDegreeSum.lean",
+  "statement": "theorem finite_open_cover_degree_sum {k : Type u} [Field k] {T : Scheme.{u}} (t : T ⟶ Spec (.of k)) (m : ℕ) (U : Fin m → T.Opens) (n : Fin m → ℕ) (hcover : ⨆ i, U i = ⊤) (hfinite : ∀ i : Fin m, IsFinite ((U i).ι ≫ t)) (hbound : ∀ i : Fin m, ((U i).ι ≫ t).finrankΓ ≤ n i) : IsFinite t ∧ t.finrankΓ ≤ ∑ i : Fin m, n i",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-fod1019"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-fod1019",
+  "group": "F1",
+  "result": "fix",
+  "note": "k field, T scheme, t : T ⟶ Spec k, U : Fin m → T.Opens (m=0 ok) with ⨆ U = ⊤, IsFinite (U i).ι ≫ t, finrankΓ ≤ n i (ΓAlgebra via ΓSpecIso, = t|W_i scalar map); conclusion IsFinite t ∧ t.finrankΓ ≤ ∑ n i; #check'd finrankΓ, IsFinite"
  }
 }

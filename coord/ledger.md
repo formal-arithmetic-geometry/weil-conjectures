@@ -4201,3 +4201,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 10:18 L: merged deliver/H1/def-weil-pbc-derived-direct-image-composition (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.DerivedDirectImageComposition AlgebraicGeometry.Etale.derivedDirectImageComposition)
 - 10:19 L: merged deliver/C1/lem-weil-pbc-etale-inverse-image-algebraic-structures (stage 2; reviewer FIX; first push; Sheaf.AlgebraicGeometry.EtaleInverseImageAlgebraicStructures AlgebraicGeometry.etaleInverseImageAlgebraicStructures)
 - 10:19 L: merged deliver/H1/lem-weil-pbc-finite-etale-trace-exists (stage 2; reviewer FIX; first push; Sheaf.AlgebraicGeometry.FiniteEtaleTraceExists AlgebraicGeometry.Etale.existsUnique_finiteEtaleTrace)
+- 10:20 L: merged deliver/F1/lem-weil-pbc-finite-open-cover-degree-sum (stage 2; reviewer FIX; first push; Sheaf.AlgebraicGeometry.FiniteOpenCoverDegreeSum AlgebraicGeometry.finite_open_cover_degree_sum)
