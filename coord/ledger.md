@@ -5133,3 +5133,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 15:05 L: merged deliver/N1/prop-pur-kinjective-objects-small (stage 2; reviewer PASS; first push; Sheaf.CategoryTheory.GrothendieckAbelian.ObjectsSmall CategoryTheory.exists_factorization_of_subobject_cardinal_lt_cof)
 - 15:05 L: merged deliver/P1/lem-weil-pbc-torsion-module-flat-base-change-iso (stage 2; reviewer PASS; first push; Sheaf.Paper.TorsionModuleFlatBaseChangeIso RingTheory.torsionModule_flat_baseChange_bijective)
 - 15:06 L: merged deliver/Q1/prop-weil-pbc-grothendieck-existence (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.GrothendieckExistence AlgebraicGeometry.grothendieck_existence)
+- 15:06 L: merged deliver/S1/thm-galois-abstract-equivalence (stage 2; reviewer PASS; first push; Sheaf.CategoryTheory.Galois.AbstractEquivalence CategoryTheory.stacksGalois_functorToContAction_isEquivalence)
