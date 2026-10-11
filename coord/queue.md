@@ -1,11 +1,11 @@
 # Work queue
 
-992 items; claim with `tools/claim.py next <group> [--stage N]`.
+990 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (992)
+## Stage 2: nodes to state (990)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -44,7 +44,7 @@
 | `lem-pc-derived-functor-commutes-derived-limit` | 1 | state |
 | `lem-pc-derived-limit-milnor-sequence` | 1 | state |
 | `lem-pc-derived-limit-roos-abelian-groups` | 1 | state |
-| `lem-pc-derived-lower-truncation-step-ses` | 1 | state |
+| `lem-pc-derived-lower-truncation-step-triangle` | 1 | state |
 | `lem-pc-derived-module-direct-sums` | 1 | state |
 | `lem-pc-derived-splitting-unique` | 1 | state |
 | `lem-pc-derived-tensor-flat-second-localization` | 1 | state |
@@ -59,9 +59,7 @@
 | `lem-pc-fp-module-map-descent-affine` | 1 | state |
 | `lem-pc-fppf-affine-sheafification-restriction` | 1 | state |
 | `lem-pc-fppf-affine-site-topos-equivalence` | 1 | state |
-| `lem-pc-fpqc-descend-closed-immersion` | 1 | state |
 | `lem-pc-h0-proper-variety` | 1 | state |
-| `lem-pc-injective-split-tower-injective` | 1 | state |
 | `lem-pc-inseparable-tensor-nilpotent` | 1 | state |
 | `lem-pc-kflat-cone-direct-sum` | 1 | state |
 | `lem-pc-kflat-hocolim-truncations` | 1 | state |
@@ -1002,7 +1000,7 @@
 | `lem-sc-normalization-properties` | 3 | state |
 | `def-nagata-fixed-base-separated-stage` | 6 | state |
 
-Not open yet: 1130 nodes that wait for a statement dependency, 40 nodes that wait for stage 1.
+Not open yet: 1129 nodes that wait for a statement dependency, 40 nodes that wait for stage 1.
 
 ## Stage 3: modules to prove (0)
 
