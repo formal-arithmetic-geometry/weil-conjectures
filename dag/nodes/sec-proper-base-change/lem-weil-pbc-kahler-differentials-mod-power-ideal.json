@@ -138,5 +138,23 @@
   "by": "L",
   "result": "accepted",
   "note": "4 steps follow Stacks 02HQ: the 00RU leaf tensored with S/I^n (right exactness leaf), middle term via cancel-base-change, Leibniz d(I^{n+1}) in I^n Omega, kernel generators vanish. No new nodes. Tags 02HQ, 00RU verified."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.KaehlerDifferentialsModPowerIdeal",
+  "declaration": "kahlerDifferential_mod_power_ideal",
+  "statement": "theorem kahlerDifferential_mod_power_ideal (R : Type u) (S : Type v) [CommRing R] [CommRing S] [Algebra R S] (I : Ideal S) (n : ℕ) (_hn : 1 ≤ n) : letI : Algebra (S ⧸ I ^ (n + 1)) (S ⧸ I ^ n) := (Ideal.Quotient.factorPowSucc I n).toAlgebra ∃ e : (S ⧸ I ^ n) ⊗[S] KaehlerDifferential R S ≃ₗ[S ⧸ I ^ n] (S ⧸ I ^ n) ⊗[S ⧸ I ^ (n + 1)] KaehlerDifferential R (S ⧸ I ^ (n + 1)), ∀ (s : S) (t : S), e (Ideal.Quotient.mk (I ^ n) t ⊗ₜ[S] KaehlerDifferential.D R S s) = Ideal.Quotient.mk (I ^ n) t ⊗ₜ[S ⧸ I ^ (n + 1)] KaehlerDifferential.D R (S ⧸ I ^ (n + 1)) (Ideal.Quotient.mk (I ^ (n + 1)) s)",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-11",
+  "existing": false,
+  "file": "lean/Sheaf/RingTheory/KaehlerDifferentialsModPowerIdeal.lean"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-kdm1138",
+  "group": "C1",
+  "result": "pass",
+  "note": "R,S CommRing + Algebra R S = ring map; I : Ideal S; n with 1<=n (not hollow); S'=S/I^(n+1) with quotient R-algebra; S'-action on S/I^n via factorPowSucc (smul = mk(a*b) by rfl, no competing instance); Omega=KaehlerDifferential, d=D; both tensors with S/I^n factor first (symmetry), e S/I^n-linear equiv fixed by generator formula t⊗ds -> t⊗d(s bar); not in Mathlib (only square tensorKaehlerQuotKerSqEquiv)"
  }
 }
