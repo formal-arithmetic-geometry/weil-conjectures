@@ -8,6 +8,7 @@ module
 public import WeilConjectures.CategoryTheory.Adjunction.ProjectionMapMonoidal
 public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Functor
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekProjection
+public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekToLowerStar
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerStarProjectionComp
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStarAdjunctionCompat
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal.Unit
@@ -334,6 +335,145 @@ lemma leftDerivedUpperStarCompactificationIso_hom_app_unit :
   erw [h₄, h₅, Iso.inv_hom_id_app_assoc]
 
 end Compactification
+section OpenImmersionInverse
+variable {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j]
+  {FC : A → A → Type*} {CC : A → Type (u + 1)}
+  [∀ (P Q : A), FunLike (FC P Q) (CC P) (CC Q)] [ConcreteCategory.{u + 1} A FC]
+  [(CategoryTheory.forget A).ReflectsIsomorphisms]
+  [PreservesFilteredColimitsOfSize.{u + 1, u + 1} (CategoryTheory.forget A)]
+  [X.smallEtaleTopology.HasSheafCompose (CategoryTheory.forget A)]
+
+@[reassoc]
+lemma derivedOpenImmersionLowerShriekProjectionIso_inv_naturality_left
+    {K K' : DerivedCategory (Sheaf U.smallEtaleTopology A)} (x : K ⟶ K')
+    (N : DerivedCategory (Sheaf X.smallEtaleTopology A)) :
+    D((j)_!open[A]).map x ▷ N ≫
+        ((derivedOpenImmersionLowerShriekProjectionIso A j).inv.app K').app N =
+      ((derivedOpenImmersionLowerShriekProjectionIso A j).inv.app K).app N ≫
+        D((j)_!open[A]).map (x ▷ L((j)^*[A]).obj N) :=
+  NatTrans.congr_app ((derivedOpenImmersionLowerShriekProjectionIso A j).inv.naturality x) N
+
+@[reassoc]
+lemma derivedOpenImmersionLowerShriekProjectionIso_inv_naturality_right
+    (K : DerivedCategory (Sheaf U.smallEtaleTopology A))
+    {N N' : DerivedCategory (Sheaf X.smallEtaleTopology A)} (y : N ⟶ N') :
+    D((j)_!open[A]).obj K ◁ y ≫
+        ((derivedOpenImmersionLowerShriekProjectionIso A j).inv.app K).app N' =
+      ((derivedOpenImmersionLowerShriekProjectionIso A j).inv.app K).app N ≫
+        D((j)_!open[A]).map (K ◁ L((j)^*[A]).map y) :=
+  ((derivedOpenImmersionLowerShriekProjectionIso A j).inv.app K).naturality y
+
+@[reassoc]
+lemma derivedOpenImmersionLowerShriekProjectionIso_inv_associativity
+    (K : DerivedCategory (Sheaf U.smallEtaleTopology A))
+    (N N' : DerivedCategory (Sheaf X.smallEtaleTopology A)) :
+    ((derivedOpenImmersionLowerShriekProjectionIso A j).inv.app K).app N ▷ N' ≫
+        ((derivedOpenImmersionLowerShriekProjectionIso A j).inv.app
+          (K ⊗ L((j)^*[A]).obj N)).app N' =
+      (α_ _ _ _).hom ≫ ((derivedOpenImmersionLowerShriekProjectionIso A j).inv.app K).app
+          (N ⊗ N') ≫
+        D((j)_!open[A]).map (K ◁ ((leftDerivedUpperStarTensorComparison A j).app N).app N' ≫
+          (α_ _ _ _).inv) := by
+  have h := derivedOpenImmersionLowerShriekProjectionMap_associativity A j K N N'
+  rw [← derivedOpenImmersionLowerShriekProjectionIso_hom] at h
+  rw [← cancel_mono (((derivedOpenImmersionLowerShriekProjectionIso A j).hom.app
+      (K ⊗ L((j)^*[A]).obj N)).app N' ≫
+      ((derivedOpenImmersionLowerShriekProjectionIso A j).hom.app K).app N ▷ N' ≫
+      (α_ _ _ _).hom)]
+  simp only [Category.assoc]
+  conv_rhs => rw [h]
+  simp only [Iso.inv_hom_id_app_app_assoc, ← comp_whiskerRight_assoc,
+    Iso.inv_hom_id_app_app, id_whiskerRight, Category.id_comp, ← Functor.map_comp_assoc]
+  simp only [Category.assoc, Iso.inv_hom_id_assoc, ← whiskerLeft_comp, IsIso.hom_inv_id,
+    whiskerLeft_id]
+  erw [CategoryTheory.Functor.map_id, Category.id_comp, Iso.inv_hom_id_app_app, Category.comp_id]
+
+lemma derivedOpenImmersionLowerShriekProjectionIso_inv_rightUnitality
+    (K : DerivedCategory (Sheaf U.smallEtaleTopology A)) :
+    ((derivedOpenImmersionLowerShriekProjectionIso A j).inv.app K).app (𝟙_ _) ≫
+        D((j)_!open[A]).map (K ◁ (leftDerivedUpperStarUnitIso A j).hom ≫ (ρ_ K).hom) =
+      (ρ_ _).hom := by
+  have h := derivedOpenImmersionLowerShriekProjectionMap_rightUnitality A j K
+  rw [← derivedOpenImmersionLowerShriekProjectionIso_hom] at h
+  rw [← cancel_epi (ρ_ (D((j)_!open[A]).obj K)).inv, Iso.inv_hom_id, ← h]
+  simp only [Category.assoc, Iso.hom_inv_id_app_app_assoc, ← CategoryTheory.Functor.map_comp,
+    ← whiskerLeft_comp_assoc, Iso.inv_hom_id, whiskerLeft_id, Category.id_comp,
+    Iso.inv_hom_id]
+  erw [CategoryTheory.Functor.map_id]
+
+omit [Etale.UpperStarPreservesFlat A] in
+/-- The transpose along `Lj^* ⊣ Rj_*` of the comparison `j_!K ⟶ Rj_*K`. -/
+lemma derivedUpperStarLowerStarAdjunction_homEquiv_symm_lowerShriekToLowerStar
+    (K : DerivedCategory (Sheaf U.smallEtaleTopology A)) :
+    ((derivedUpperStarLowerStarAdjunction A j).homEquiv _ _).symm
+        ((derivedOpenImmersionLowerShriekToLowerStar A j).app K) =
+      (leftDerivedUpperStarIsoMapDerivedCategory A j).hom.app _ ≫
+        inv ((derivedOpenImmersionLowerShriekUpperStarAdjunction A j).unit.app K) := by
+  rw [Equiv.symm_apply_eq, Adjunction.homEquiv_unit]
+  simp only [derivedOpenImmersionLowerShriekToLowerStar, NatTrans.comp_app,
+    Functor.whiskerLeft_app, Functor.whiskerRight_app, Functor.associator_inv_app,
+    NatIso.isIso_inv_app, Category.id_comp, mapDerivedUpperStarLowerStarAdjunction_eq]
+  dsimp [Adjunction.ofNatIsoLeft]
+  simp only [Category.assoc, CategoryTheory.Functor.map_comp]
+
+/-- The projection map of `j_!` and that of `Rj_*` agree through the comparison
+`j_! ⟶ Rj_*`. -/
+@[reassoc]
+lemma derivedOpenImmersionLowerShriekProjectionIso_inv_comp_lowerShriekToLowerStar
+    (K : DerivedCategory (Sheaf U.smallEtaleTopology A))
+    (N : DerivedCategory (Sheaf X.smallEtaleTopology A)) :
+    ((derivedOpenImmersionLowerShriekProjectionIso A j).inv.app K).app N ≫
+        (derivedOpenImmersionLowerShriekToLowerStar A j).app (K ⊗ L((j)^*[A]).obj N) =
+      (derivedOpenImmersionLowerShriekToLowerStar A j).app K ▷ N ≫
+        ((rightDerivedLowerStarProjectionMap A j).app K).app N := by
+  have key :
+      L((j)^*[A]).map (((derivedOpenImmersionLowerShriekProjectionMap A j).app K).app N) ≫
+        ((leftDerivedUpperStarTensorComparison A j).app _).app N ≫
+        ((leftDerivedUpperStarIsoMapDerivedCategory A j).hom.app _ ≫
+          inv ((derivedOpenImmersionLowerShriekUpperStarAdjunction A j).unit.app K)) ▷
+            L((j)^*[A]).obj N =
+      (leftDerivedUpperStarIsoMapDerivedCategory A j).hom.app _ ≫
+        inv ((derivedOpenImmersionLowerShriekUpperStarAdjunction A j).unit.app
+          (K ⊗ L((j)^*[A]).obj N)) := by
+    rw [← cancel_epi ((leftDerivedUpperStarIsoMapDerivedCategory A j).inv.app
+      (D((j)_!open[A]).obj (K ⊗ L((j)^*[A]).obj N))), Iso.inv_hom_id_app_assoc]
+    erw [← (leftDerivedUpperStarIsoMapDerivedCategory A j).inv.naturality_assoc]
+    rw [← cancel_epi ((derivedOpenImmersionLowerShriekUpperStarAdjunction A j).unit.app _),
+      IsIso.hom_inv_id]
+    erw [Adjunction.unit_app_comp_map_projectionMap_assoc]
+    rw [mapDerivedCategoryUpperStarDerivedTensorIso_hom_app_app]
+    simp only [Category.assoc]
+    erw [Iso.hom_inv_id_app_assoc]
+    rw [IsIso.inv_hom_id_assoc]
+    simp only [← comp_whiskerRight]
+    rw [Iso.inv_hom_id_app_assoc, IsIso.hom_inv_id, id_whiskerRight]
+    rfl
+  apply ((derivedUpperStarLowerStarAdjunction A j).homEquiv _ _).symm.injective
+  erw [Adjunction.homEquiv_naturality_left_symm,
+    derivedUpperStarLowerStarAdjunction_homEquiv_symm_lowerShriekToLowerStar,
+    Adjunction.homEquiv_naturality_left_symm, homEquiv_symm_rightDerivedLowerStarProjectionMap,
+    ← cancel_epi (L((j)^*[A]).map
+      (((derivedOpenImmersionLowerShriekProjectionMap A j).app K).app N)),
+    ← CategoryTheory.Functor.map_comp_assoc]
+  rw [← derivedOpenImmersionLowerShriekProjectionIso_hom, Iso.hom_inv_id_app_app,
+    CategoryTheory.Functor.map_id, Category.id_comp]
+  erw [← key]
+  have hs : L((j)^*[A]).map ((derivedOpenImmersionLowerShriekToLowerStar A j).app K) ≫
+      (derivedUpperStarLowerStarAdjunction A j).counit.app K =
+        (leftDerivedUpperStarIsoMapDerivedCategory A j).hom.app _ ≫
+          inv ((derivedOpenImmersionLowerShriekUpperStarAdjunction A j).unit.app K) := by
+    rw [← derivedUpperStarLowerStarAdjunction_homEquiv_symm_lowerShriekToLowerStar,
+      Adjunction.homEquiv_counit]
+  have hn := NatTrans.congr_app ((leftDerivedUpperStarTensorComparison A j).naturality
+    ((derivedOpenImmersionLowerShriekToLowerStar A j).app K)) N
+  dsimp at hn
+  congr 1
+  erw [reassoc_of% hn]
+  rw [← NatTrans.comp_app, ← CategoryTheory.Functor.map_comp]
+  erw [hs]
+  rfl
+
+end OpenImmersionInverse
 
 end Etale
 
