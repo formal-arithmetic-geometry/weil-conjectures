@@ -286,7 +286,8 @@ theorem hasProjectionFormulaOfCompactification_of_constructibleFiniteTor [Finite
   have := Etale.isIso_rightDerivedLowerStarProjectionMap_of_finite Λ c.g
   exact hasProjectionFormulaOfCompactification_of_comparison c eK eL hK₀.1 hML inferInstance
 
-/-- Blueprint `sk-thm-sf-pf-proetale`: Projection formula: the pro-étale realization.
+/-- Blueprints `sk-thm-sf-pf-proetale` and `thm-sf-pf-proetale`: Projection formula: the pro-étale
+realization; the finite stages.
 
 Let `Λ` be a finite ring (a finite coefficient stage). For a morphism `f : X ⟶ Y` admitting a
 compactification, and `K` in `Dctf(X_proét, Λ)` and `L` in `Dctf(Y_proét, Λ)`, the projection
@@ -328,7 +329,7 @@ local instance (X : Scheme.{u}) : EssentiallySmall.{u + 1} X.Etale :=
 
 variable {X Y : Scheme.{u}}
 
-/-- Blueprint `sk-thm-sf-pf-proetale`, the integral stage `𝒪_E`.
+/-- Blueprints `sk-thm-sf-pf-proetale` and `thm-sf-pf-proetale`, the integral stage `𝒪_E`.
 
 Let `K ≅ ν^* K₀` and `L ≅ ν^* L₀` be the pro-étale realizations of bounded constructible,
 derived complete complexes `K₀`, `L₀` of étale sheaves of `𝒪_E`-modules of finite Tor amplitude,
@@ -363,8 +364,10 @@ theorem hasProjectionFormula_of_derivedCompleteIntegral (f : X ⟶ Y) [HasCompac
         (HasCompactification.compactification f).i).bounded_mapDerivedCategory_obj hKc.1)
       hLt') hPF'
 
-/-- Blueprint `sk-thm-sf-pf-proetale`, the rational stage `E` (and, through the finite stages
-`E'` at which its objects are represented, the stage `ℚ̄_ℓ`).
+/-- Blueprints `sk-thm-sf-pf-proetale` and `thm-sf-pf-proetale`, the rational stage `E` (and,
+through the finite stages `E'` at which its objects are represented, the stage `ℚ̄_ℓ`; see
+`AlgebraicGeometry.ProEtale.isIso_rationalization_map_projectionMap_extendScalars` for the
+compatibility with extension of scalars).
 
 The rational stage is the rationalization `D(Y_proét, 𝒪_E)[1/ℓ]` of the integral one, the
 Verdier quotient by the objects killed by a nonzero element of `𝒪_E`, and the projection map

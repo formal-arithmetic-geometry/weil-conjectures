@@ -119,7 +119,8 @@ local instance (X : Scheme.{u}) : EssentiallySmall.{u + 1} X.Etale :=
 
 variable {X Y : Scheme.{u}}
 
-/-- Blueprint `sk-thm-sf-pf-proetale`, the integral stages `𝒪_{E'}` for scalar extensions.
+/-- Blueprints `sk-thm-sf-pf-proetale` and `thm-sf-pf-proetale`, the integral stages `𝒪_{E'}`
+for scalar extensions.
 
 Let `E ⊆ E'` be finite extensions of `ℚ_ℓ` inside `ℚ̄_ℓ`, and let `K ≅ ν^* K₀` and `L ≅ ν^* L₀` be
 the pro-étale realizations of bounded constructible, derived complete complexes `K₀`, `L₀` of
@@ -146,7 +147,7 @@ theorem hasProjectionFormula_extendScalars_of_derivedCompleteIntegral (f : X ⟶
   have h := hasProjectionFormula_of_derivedCompleteIntegral l E f eK eL hKc hK hKt hLc hL hLt
   exact hasProjectionFormula_extendScalars f K L h
 
-/-- Blueprint `sk-thm-sf-pf-proetale`, the stage `ℚ̄_ℓ`.
+/-- Blueprints `sk-thm-sf-pf-proetale` and `thm-sf-pf-proetale`, the stage `ℚ̄_ℓ`.
 
 An object of the stage `ℚ̄_ℓ` is represented at a finite stage `E`, and it is carried to every
 larger finite stage `E' ⊇ E` inside `ℚ̄_ℓ` by extension of scalars; the projection map at the
