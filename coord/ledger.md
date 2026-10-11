@@ -4482,3 +4482,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 11:40 L: merged deliver/K1/lem-weil-pbc-eventually-closed-immersion (stage 2; reviewer FIX; first push; Sheaf.AlgebraicGeometry.EventuallyClosedImmersion AlgebraicGeometry.eventually_isClosedImmersion_of_isLimit)
 - 11:40 L: merged deliver/K1/lem-pc-zero-scheme-adjunction-base-change (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.Picard.AdjunctionBaseChange AlgebraicGeometry.nonempty_arrowIso_moduleBaseChange_counit; reverted nodes: def-pc-f-subfunctor)
 - 11:40 L: merged deliver/G1/lem-weil-pbc-lift-idempotent-upstairs (stage 2; reviewer PASS; first push; Sheaf.RingTheory.LiftIdempotentUpstairs AlgebraicGeometry.exists_etale_lift_isIdempotentElem)
+- 11:41 L: merged deliver/M1/lem-weil-pbc-mittag-leffler-limit-exact (stage 2; reviewer FIX; first push; Sheaf.CategoryTheory.MittagLefflerLimitExact CategoryTheory.ShortComplex.mittagLeffler_quotient_and_limit_exact)

@@ -188,5 +188,24 @@
   "worker": "stage1",
   "summary": "Read Homology 02N0/02N1 (homology.tex 7652--7700) and Algebra 0595, 0596, 0597, 0598, 03CA (algebra.tex 20700--20870); tags verified in tags/tags. Statement kept (it agrees with 02N1 (2), (3)); stmt_deps unchanged. Proof in 6 steps: notation and the composite commutations; (2) via t_{k,i}(C_k)=v_i(b_{k,i}(B_k)) with the same c(i) (02N1's exercise written out); (3) following the proof of 0598: the fibres E_i=v_i^{-1}(c_i) form a tower of nonempty sets, it is ML (the correction x_k=e'_k+u_k(beta) written out with the commutations), so its limit is nonempty by the new node lem-weil-pbc-ml-sets-tower-limit-nonempty (Lemma 0597 for I = positive integers), giving a lift; left exactness from lem-weil-pbc-tower-limit-exact-surjective-kernels (b) with R = Z. One new node (unsplit, Mathlib composite recorded in mathlib_candidate). Mathlib: no match for the item (earlier searches kept, LeanSearch and grep repeated)."
  },
- "reviewed": "Reviewed by L 2026-10-10: (2) elementary from surjectivity of v_k; (3) by the fibre system E_i = v_i^{-1}(c_i), shown Mittag-Leffler by the correction argument of Algebra 0598 (step 4, checked), nonempty limit by 0597 (new unsplit node for sets), left exactness from the existing tower node. No Mathlib match for the item; the new node has a Mathlib candidate chain (B8)."
+ "reviewed": "Reviewed by L 2026-10-10: (2) elementary from surjectivity of v_k; (3) by the fibre system E_i = v_i^{-1}(c_i), shown Mittag-Leffler by the correction argument of Algebra 0598 (step 4, checked), nonempty limit by 0597 (new unsplit node for sets), left exactness from the existing tower node. No Mathlib match for the item; the new node has a Mathlib candidate chain (B8).",
+ "lean": {
+  "module": "Sheaf.CategoryTheory.MittagLefflerLimitExact",
+  "declaration": "CategoryTheory.ShortComplex.mittagLeffler_quotient_and_limit_exact",
+  "file": "lean/Sheaf/CategoryTheory/MittagLefflerLimitExact.lean",
+  "statement": "theorem mittagLeffler_quotient_and_limit_exact (S : ShortComplex (ℕᵒᵖ ⥤ AddCommGrpCat.{u})) (hS : ∀ n : ℕᵒᵖ, (S.map ((evaluation ℕᵒᵖ AddCommGrpCat).obj n)).ShortExact) : ((S.X₂ ⋙ forget AddCommGrpCat).IsMittagLeffler → (S.X₃ ⋙ forget AddCommGrpCat).IsMittagLeffler) ∧ ((S.X₁ ⋙ forget AddCommGrpCat).IsMittagLeffler → (S.map (lim : (ℕᵒᵖ ⥤ AddCommGrpCat.{u}) ⥤ AddCommGrpCat.{u})).ShortExact)",
+  "branch": "sheaf-dag",
+  "by": "M1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-mle1140"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-mle1140",
+  "group": "M1",
+  "result": "fix",
+  "note": "towers ℕᵒᵖ⥤AddCommGrpCat (n=i-1), termwise SES as ShortComplex+hS evaluation ShortExact (070D form), (2) B ML→C ML via forget IsMittagLeffler, (3) A ML→(S.map lim).ShortExact = injective lim u, exact at lim B, lim v surjective; universe u free; no hollow hyps"
+ }
 }
