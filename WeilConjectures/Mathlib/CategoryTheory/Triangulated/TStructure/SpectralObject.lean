@@ -6,6 +6,8 @@ Authors: Claude
 module
 
 public import Mathlib.CategoryTheory.Triangulated.TStructure.SpectralObject
+public import WeilConjectures.Mathlib.CategoryTheory.Triangulated.SpectralObject
+public import WeilConjectures.Mathlib.CategoryTheory.Triangulated.TStructure.ETrunc
 
 /-!
 # t-exact functors and the spectral objects attached to t-structures
@@ -31,7 +33,6 @@ variable {C D : Type*} [Category* C] [Preadditive C] [HasZeroObject C] [HasShift
   [∀ n : ℤ, (shiftFunctor C n).Additive] [Pretriangulated C]
   [Category* D] [Preadditive D] [HasZeroObject D] [HasShift D ℤ]
   [∀ n : ℤ, (shiftFunctor D n).Additive] [Pretriangulated D]
-  [CategoryTheory.IsTriangulated C] [CategoryTheory.IsTriangulated D]
   (t₁ : TStructure C) (t₂ : TStructure D)
 
 namespace Functor
@@ -43,9 +44,11 @@ class IsTExact (F : C ⥤ D) : Prop where
   isLE (X : C) (n : ℤ) [t₁.IsLE X n] : t₂.IsLE (F.obj X) n
   isGE (X : C) (n : ℤ) [t₁.IsGE X n] : t₂.IsGE (F.obj X) n
 
-variable (F : C ⥤ D) [F.CommShift ℤ] [F.IsTriangulated] [F.IsTExact t₁ t₂]
+variable (F : C ⥤ D)
 
 namespace IsTExact
+
+variable [F.IsTExact t₁ t₂]
 
 include t₂ in
 lemma isLE_obj (X : C) (n : ℤ) [t₁.IsLE X n] : t₂.IsLE (F.obj X) n :=
@@ -57,10 +60,14 @@ lemma isGE_obj (X : C) (n : ℤ) [t₁.IsGE X n] : t₂.IsGE (F.obj X) n :=
 
 end IsTExact
 
+variable [CategoryTheory.IsTriangulated D]
+  [F.CommShift ℤ] [F.IsTriangulated] [F.IsTExact t₁ t₂]
+
 section
 
 variable {t₁ t₂}
 
+omit [CategoryTheory.IsTriangulated D] in
 lemma isIso_eTruncLTι_app_map_eTruncLT_obj_obj (i : EInt) (X : C) :
     IsIso ((t₂.eTruncLTι i).app (F.obj ((t₁.eTruncLT.obj i).obj X))) := by
   induction i using WithBotTop.rec with
@@ -83,6 +90,7 @@ lemma isIso_eTruncLT_obj_map_map_eTruncLTι_app (i : EInt) (X : C) :
       (F.map_distinguished _ (t₁.triangleLTGE_distinguished n X)) n this
   | top => dsimp; infer_instance
 
+omit [CategoryTheory.IsTriangulated D] in
 lemma isIso_eTruncGEπ_app_map_eTruncGE_obj_obj (i : EInt) (X : C) :
     IsIso ((t₂.eTruncGEπ i).app (F.obj ((t₁.eTruncGE.obj i).obj X))) := by
   induction i using WithBotTop.rec with
@@ -267,6 +275,131 @@ lemma eTruncGEδLT_comm (i : EInt) (X : C) :
     have := φ.comm₃
     rw [e₁, e₃] at this
     exact (Category.assoc _ _ _).symm.trans this
+
+variable [CategoryTheory.IsTriangulated C]
+
+/-- The image under a t-exact functor `F` of `τ_{≥ a} τ_{< b} X` is `τ_{≥ a} τ_{< b} F(X)`. -/
+noncomputable def eTruncGELTIsoApp (a b : EInt) (X : C) :
+    F.obj ((t₁.eTruncGE.obj a).obj ((t₁.eTruncLT.obj b).obj X)) ≅
+      (t₂.eTruncGE.obj a).obj ((t₂.eTruncLT.obj b).obj (F.obj X)) :=
+  F.eTruncGEIsoApp t₁ t₂ a ((t₁.eTruncLT.obj b).obj X) ≪≫
+    (t₂.eTruncGE.obj a).mapIso (F.eTruncLTIsoApp t₁ t₂ b X)
+
+omit [CategoryTheory.IsTriangulated C] in
+@[reassoc]
+lemma eTruncGELTIsoApp_hom_naturality {a b a' b' : EInt} (ha : a ⟶ a') (hb : b ⟶ b') (X : C) :
+    F.map ((t₁.eTruncGE.map ha).app ((t₁.eTruncLT.obj b).obj X)) ≫
+        F.map ((t₁.eTruncGE.obj a').map ((t₁.eTruncLT.map hb).app X)) ≫
+        (F.eTruncGELTIsoApp t₁ t₂ a' b' X).hom =
+      (F.eTruncGELTIsoApp t₁ t₂ a b X).hom ≫
+        (t₂.eTruncGE.map ha).app ((t₂.eTruncLT.obj b).obj (F.obj X)) ≫
+        (t₂.eTruncGE.obj a').map ((t₂.eTruncLT.map hb).app (F.obj X)) := by
+  have h₁ := (F.eTruncGEIso t₁ t₂ a').hom.naturality ((t₁.eTruncLT.map hb).app X)
+  simp only [Functor.comp_map, eTruncGEIso_hom_app] at h₁
+  have h₂ := F.eTruncGE_map_app_eTruncGEIso_hom_app t₁ t₂ ha ((t₁.eTruncLT.obj b).obj X)
+  have h₃ := F.eTruncLT_map_app_eTruncLTIso_hom_app t₁ t₂ hb X
+  simp only [eTruncGEIso_hom_app, eTruncLTIso_hom_app] at h₂ h₃
+  simp only [eTruncGELTIsoApp, Iso.trans_hom, Functor.mapIso_hom, Category.assoc]
+  rw [reassoc_of% h₁, reassoc_of% h₂, ← Functor.map_comp, h₃, Functor.map_comp,
+    ← NatTrans.naturality_assoc]
+  rfl
+
+lemma eTruncGELTIsoApp_δ (a b c : EInt) (X : C) :
+    F.map ((t₁.eTruncGEδLT.app b).app ((t₁.eTruncLT.obj c).obj X) ≫
+        ((t₁.eTruncLT.obj b).map ((t₁.eTruncGEπ a).app ((t₁.eTruncLT.obj c).obj X)))⟦(1 : ℤ)⟧' ≫
+        ((t₁.eTruncLTGEIsoGELT a b).hom.app ((t₁.eTruncLT.obj c).obj X))⟦(1 : ℤ)⟧' ≫
+        ((t₁.eTruncGE.obj a).map ((t₁.eTruncLT.obj b).map
+          ((t₁.eTruncLTι c).app X)))⟦(1 : ℤ)⟧') ≫
+      (F.commShiftIso (1 : ℤ)).hom.app _ ≫ ((F.eTruncGELTIsoApp t₁ t₂ a b X).hom)⟦(1 : ℤ)⟧' =
+    (F.eTruncGELTIsoApp t₁ t₂ b c X).hom ≫
+      (t₂.eTruncGEδLT.app b).app ((t₂.eTruncLT.obj c).obj (F.obj X)) ≫
+        ((t₂.eTruncLT.obj b).map
+          ((t₂.eTruncGEπ a).app ((t₂.eTruncLT.obj c).obj (F.obj X))))⟦(1 : ℤ)⟧' ≫
+        ((t₂.eTruncLTGEIsoGELT a b).hom.app ((t₂.eTruncLT.obj c).obj (F.obj X)))⟦(1 : ℤ)⟧' ≫
+        ((t₂.eTruncGE.obj a).map ((t₂.eTruncLT.obj b).map
+          ((t₂.eTruncLTι c).app (F.obj X))))⟦(1 : ℤ)⟧' := by
+  set Y := (t₁.eTruncLT.obj c).obj X
+  have inner : F.map ((t₁.eTruncLT.obj b).map ((t₁.eTruncGEπ a).app Y)) ≫
+      F.map ((t₁.eTruncLTGEIsoGELT a b).hom.app Y) ≫
+      F.map ((t₁.eTruncGE.obj a).map ((t₁.eTruncLT.obj b).map ((t₁.eTruncLTι c).app X))) ≫
+      (F.eTruncGELTIsoApp t₁ t₂ a b X).hom =
+      (F.eTruncLTIsoApp t₁ t₂ b Y).hom ≫
+        (t₂.eTruncLT.obj b).map (F.eTruncLTIsoApp t₁ t₂ c X).hom ≫
+        (t₂.eTruncLT.obj b).map ((t₂.eTruncGEπ a).app ((t₂.eTruncLT.obj c).obj (F.obj X))) ≫
+        (t₂.eTruncLTGEIsoGELT a b).hom.app ((t₂.eTruncLT.obj c).obj (F.obj X)) ≫
+        (t₂.eTruncGE.obj a).map ((t₂.eTruncLT.obj b).map ((t₂.eTruncLTι c).app (F.obj X))) := by
+    have h₁ := t₁.eTruncLT_map_eTruncGEπ_app_eTruncLTGEIsoGELT_hom_app a b Y
+    have h₃ := (F.eTruncLTIso t₁ t₂ b).hom.naturality ((t₁.eTruncLTι c).app X)
+    simp only [Functor.comp_map, eTruncLTIso_hom_app] at h₃
+    rw [t₂.eTruncLT_map_eTruncGEπ_app_eTruncLTGEIsoGELT_hom_app_assoc,
+      ← F.map_comp_assoc, h₁, ← F.map_comp_assoc, t₁.eTruncGEπ_naturality]
+    simp only [eTruncGELTIsoApp, Iso.trans_hom, Functor.mapIso_hom, F.map_comp,
+      Category.assoc]
+    erw [F.eTruncGEπ_app_eTruncGEIsoApp_hom_assoc t₁ t₂ a ((t₁.eTruncLT.obj b).obj X)]
+    rw [t₂.eTruncGEπ_naturality, t₂.eTruncGEπ_naturality,
+      ← Functor.map_comp_assoc (t₂.eTruncLT.obj b),
+      F.eTruncLTIsoApp_hom_eTruncLTι_app t₁ t₂ c X]
+    erw [← reassoc_of% h₃]
+    rfl
+  have inner' := congrArg (fun g ↦ (shiftFunctor D (1 : ℤ)).map g) inner
+  simp only [Functor.map_comp] at inner'
+  have hδ := F.eTruncGEδLT_comm t₁ t₂ b Y
+  simp only [eTruncLTIso_hom_app, eTruncGEIso_hom_app] at hδ
+  have hδ' := (t₂.eTruncGEδLT.app b).naturality (F.eTruncLTIsoApp t₁ t₂ c X).hom
+  simp only [F.map_comp, Category.assoc, Functor.commShiftIso_hom_naturality_assoc]
+  rw [inner', reassoc_of% hδ]
+  simp only [eTruncGELTIsoApp, Iso.trans_hom, Functor.mapIso_hom, Category.assoc]
+  rw [reassoc_of% hδ']
+  rfl
+
+omit [CategoryTheory.IsTriangulated C] in
+@[reassoc]
+lemma eTruncGELTIsoApp_hom_naturality_obj (a b : EInt) {X Y : C} (f : X ⟶ Y) :
+    F.map ((t₁.eTruncGE.obj a).map ((t₁.eTruncLT.obj b).map f)) ≫
+        (F.eTruncGELTIsoApp t₁ t₂ a b Y).hom =
+      (F.eTruncGELTIsoApp t₁ t₂ a b X).hom ≫
+        (t₂.eTruncGE.obj a).map ((t₂.eTruncLT.obj b).map (F.map f)) := by
+  have h₁ := (F.eTruncGEIso t₁ t₂ a).hom.naturality ((t₁.eTruncLT.obj b).map f)
+  have h₂ := (F.eTruncLTIso t₁ t₂ b).hom.naturality f
+  simp only [Functor.comp_map, eTruncGEIso_hom_app, eTruncLTIso_hom_app] at h₁ h₂
+  simp only [eTruncGELTIsoApp, Iso.trans_hom, Functor.mapIso_hom, Category.assoc]
+  rw [reassoc_of% h₁, ← Functor.map_comp, ← Functor.map_comp, h₂]
+
+/-- The image under a t-exact triangulated functor `F` of the spectral object
+`t₁.spectralObject X` of all the truncations of `X` is the spectral object
+`t₂.spectralObject (F.obj X)` of all the truncations of `F.obj X`. -/
+noncomputable def mapTriangulatedSpectralObjectObjIso (X : C) :
+    (t₁.spectralObject X).mapTriangulatedFunctor F ≅ t₂.spectralObject (F.obj X) :=
+  Triangulated.SpectralObject.isoMk
+    (NatIso.ofComponents (fun D ↦ F.eTruncGELTIsoApp t₁ t₂ (D.obj 0) (D.obj 1) X)
+      (fun {D D'} φ ↦ by
+        have := F.eTruncGELTIsoApp_hom_naturality t₁ t₂ (φ.app 0) (φ.app 1) X
+        rw [← F.map_comp_assoc] at this
+        exact this))
+    (fun {i j k} f g ↦ by
+      have := F.eTruncGELTIsoApp_δ t₁ t₂ i j k X
+      rw [Triangulated.SpectralObject.mapTriangulatedFunctor_δ, TStructure.spectralObject_δ,
+        TStructure.spectralObject_δ, TStructure.ω₁δ_app, TStructure.ω₁δ_app, Category.assoc]
+      exact this)
+
+@[simp]
+lemma mapTriangulatedSpectralObjectObjIso_hom_hom_app (X : C) (D : ComposableArrows EInt 1) :
+    (F.mapTriangulatedSpectralObjectObjIso t₁ t₂ X).hom.hom.app D =
+      (F.eTruncGELTIsoApp t₁ t₂ (D.obj 0) (D.obj 1) X).hom := rfl
+
+/-- A t-exact triangulated functor `F` commutes with the formation of the spectral objects
+consisting of all the truncations of objects. -/
+noncomputable def mapTriangulatedSpectralObjectIso :
+    t₁.spectralObjectFunctor ⋙ F.mapTriangulatedSpectralObject EInt ≅
+      F ⋙ t₂.spectralObjectFunctor :=
+  NatIso.ofComponents (F.mapTriangulatedSpectralObjectObjIso t₁ t₂) (fun {X Y} f ↦ by
+    ext D
+    exact F.eTruncGELTIsoApp_hom_naturality_obj t₁ t₂ (D.obj 0) (D.obj 1) f)
+
+@[simp]
+lemma mapTriangulatedSpectralObjectIso_hom_app_hom_app (X : C) (D : ComposableArrows EInt 1) :
+    ((F.mapTriangulatedSpectralObjectIso t₁ t₂).hom.app X).hom.app D =
+      (F.eTruncGELTIsoApp t₁ t₂ (D.obj 0) (D.obj 1) X).hom := rfl
 
 end Functor
 

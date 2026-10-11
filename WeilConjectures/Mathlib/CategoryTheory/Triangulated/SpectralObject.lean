@@ -63,6 +63,29 @@ lemma mapHomologicalFunctor_δ {i j k : ι} (f : i ⟶ j) (g : j ⟶ k) (n₀ n�
 
 end Triangulated.SpectralObject
 
+namespace Triangulated.SpectralObject
+
+variable {C ι : Type*} [Category* C] [Category* ι] [HasZeroObject C] [Preadditive C]
+  [HasShift C ℤ] [∀ n : ℤ, (shiftFunctor C n).Additive] [Pretriangulated C]
+
+/-- Constructor for isomorphisms of spectral objects in a pretriangulated category: an
+isomorphism `X.ω₁ ≅ Y.ω₁` which commutes with the connecting homomorphisms. -/
+@[simps]
+def isoMk {X Y : SpectralObject C ι} (e : X.ω₁ ≅ Y.ω₁)
+    (comm : ∀ {i j k : ι} (f : i ⟶ j) (g : j ⟶ k),
+      X.δ f g ≫ (e.hom.app (mk₁ f))⟦(1 : ℤ)⟧' = e.hom.app (mk₁ g) ≫ Y.δ f g) :
+    X ≅ Y where
+  hom := { hom := e.hom, comm := comm }
+  inv :=
+    { hom := e.inv
+      comm f g := by
+        rw [← cancel_epi (e.hom.app (mk₁ g)), ← reassoc_of% (comm f g), ← Functor.map_comp,
+          Iso.hom_inv_id_app, Functor.map_id, Category.comp_id, Iso.hom_inv_id_app_assoc] }
+  hom_inv_id := SpectralObject.hom_ext e.hom_inv_id
+  inv_hom_id := SpectralObject.hom_ext e.inv_hom_id
+
+end Triangulated.SpectralObject
+
 namespace Functor
 
 variable {C A : Type*} [Category* C] [Category* A] [Abelian A]
