@@ -176,5 +176,22 @@
   "worker": "stage1",
   "summary": "Checked against Stacks Algebra 030U (line 10152) and its proof (lines 10160-10193); the only citer, lem-weil-pbc-separably-generated-separable step 2, uses the statement with S = L a field, which this statement covers. Not a Mathlib leaf: Mathlib's reducedness results for tensor products (IsReduced.tensorProduct_of_flat_of_forall_fg, the IsGeometricallyReduced API with algebraic K, FormallyUnramified.isReduced_of_field) never start from a separating transcendence basis; searches recorded on the node. Statement unchanged in content; the multiplication of the tensor product ring was written out (no definition node for tensor products of algebras exists). Four steps following 030U: (1) z nilpotent in K⊗S comes from K'⊗S' with K' finite separable over L = k(x_T), T finite, by the new node lem-weil-pbc-separating-transcendence-basis-finite-subextension (the claim 030U's second paragraph states without proof) and flatness over a field (existing leaves); (2) S' finite type reduced, hence Noetherian, embeds into its total ring of fractions, a finite product of fields (existing 02LX node), and the tensor product distributes over the finite product (existing leaf); (3) L⊗_kF is a domain, by the existing leaves for polynomial rings and the generic-fibre localization node, with fraction field E; (4) K'⊗_kF = K'⊗_L(L⊗_kF) embeds into K'⊗_LE, reduced by the new node lem-weil-pbc-finite-separable-tensor-field-reduced (030U's 'P separable, F[T]/(P) a finite product of fields'; Mathlib candidate chain of three declarations recorded, B8). No error found in the source; Stacks reduces S to a domain, here to fields."
  },
- "reviewed": "pass (L, 2026-10-10): 4 steps follow 030U, reducing by flatness over fields to K' finite separable over L = k(x_T) and S' a field factor of the total ring of fractions of a reduced Noetherian finite-type algebra; L tensor F a domain via polynomial scalar extension and the generic-fibre node; new nodes 030U-paragraph-2 (finite subextension) and the finite separable tensor case (candidate: FormallyUnramified chain). Statement only spells out the ring structure of K tensor S."
+ "reviewed": "pass (L, 2026-10-10): 4 steps follow 030U, reducing by flatness over fields to K' finite separable over L = k(x_T) and S' a field factor of the total ring of fractions of a reduced Noetherian finite-type algebra; L tensor F a domain via polynomial scalar extension and the generic-fibre node; new nodes 030U-paragraph-2 (finite subextension) and the finite separable tensor case (candidate: FormallyUnramified chain). Statement only spells out the ring structure of K tensor S.",
+ "lean": {
+  "module": "Sheaf.FieldTheory.SeparablyGeneratedTensorReduced",
+  "declaration": "Algebra.isReduced_tensorProduct_of_isSeparablyGenerated",
+  "file": "lean/Sheaf/FieldTheory/SeparablyGeneratedTensorReduced.lean",
+  "statement": "theorem isReduced_tensorProduct_of_isSeparablyGenerated (k : Type u) (K : Type v) (S : Type w) [Field k] [Field K] [CommRing S] [Algebra k K] [Algebra k S] [IsReduced S] (hK : IsSeparablyGenerated k K) : IsReduced (K ⊗[k] S)",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-sgt",
+  "group": "C1",
+  "result": "pass"
+ }
 }
