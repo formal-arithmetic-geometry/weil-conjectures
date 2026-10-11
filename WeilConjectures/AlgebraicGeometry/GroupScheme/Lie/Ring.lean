@@ -143,7 +143,7 @@ noncomputable def tangentPoint (x : Lie G) : points G (DualNumber R) :=
 theorem tangentPoint_mem_tangentGroup (x : Lie G) : tangentPoint x ∈ tangentGroup G :=
   (infPointsEquivTangentGroup G ((lieEquiv G).symm x)).2
 
-theorem tangentPoint_injective : Function.Injective (tangentPoint (G := G)) := fun x y h ↦
+theorem tangentPoint_injective : Function.Injective (tangentPoint (G := G)) := fun _ _ h ↦
   (lieEquiv G).symm.injective ((infPointsEquivTangentGroup G).injective (Subtype.ext h))
 
 theorem exists_tangentPoint_eq {p : points G (DualNumber R)} (hp : p ∈ tangentGroup G) :
