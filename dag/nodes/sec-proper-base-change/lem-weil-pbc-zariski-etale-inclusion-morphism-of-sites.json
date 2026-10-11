@@ -226,5 +226,23 @@
   "worker": "stage1",
   "summary": "Not a Mathlib leaf: Mathlib has no functor from the opens of X to X.Etale; the generic ingredients (sheafPullback preserves finite limits for a representably flat continuous functor) are matched only by the already existing leaf nodes the steps cite. Split into 7 steps following Sites 00X6 and the proof of 00X5: (1) u is a functor (02GP); (2) X_Zar has final object X and fibre products V cap W (elementary, poset of opens); (3) u preserves them: id_X final and scheme fibre products in X_et (021D, node lem-weil-pbc-etale-base-change-finite-limits) and V cap W = V x_U W (01JR, lem-weil-pbc-open-preimage-fibre-product), canonical map an X-isomorphism; (4) continuity (00WV) from (1)-(3); (5) u_s is a left adjoint (00WX node, after 00WW node) hence preserves colimits (0038 node); (6) u_s = # o u_p o iota is left exact (00W2, 00X5/00X3 node lem-weil-pbc-presheaf-pullback-sets-left-exact, 00WJ node); (7) exact, so a morphism of sites with epsilon_* F = F o u (00X1). Checked against the citer's step 0: it uses continuity, the morphism of sites, epsilon_* F = F o u and u(X) = id_X final, all provided. No new nodes; statement unchanged."
  },
- "reviewed": "pass (L, 2026-10-10): 7 steps follow 00X6/00X5: u is a functor (open immersions etale), X_Zar has finite limits (intersections), u preserves them (021D, 01JR), hence continuous; u_s is a left adjoint (right exact) and # o u_p o iota is left exact (00W2, 00X5, 00WJ), so u gives a morphism of sites. No new nodes."
+ "reviewed": "pass (L, 2026-10-10): 7 steps follow 00X6/00X5: u is a functor (open immersions etale), X_Zar has finite limits (intersections), u preserves them (021D, 01JR), hence continuous; u_s is a left adjoint (right exact) and # o u_p o iota is left exact (00W2, 00X5, 00WJ), so u gives a morphism of sites. No new nodes.",
+ "lean": {
+  "module": "Sheaf.Paper.ZariskiEtaleInclusionMorphismOfSites",
+  "declaration": "AlgebraicGeometry.zariski_to_etale_is_morphism",
+  "statement": "theorem zariski_to_etale_is_morphism (X : Scheme.{u}) : ∃ (i : X.Opens ⥤ X.Etale), (i ⋙ Scheme.Etale.forget X = X.restrictFunctor) ∧ CoverPreserving (Opens.grothendieckTopology X.carrier) X.smallEtaleTopology i ∧ PreservesFiniteLimits i ∧ Nonempty (IsTerminal (i.obj ⊤)) ∧ ∃ (_ : i.IsContinuous (Opens.grothendieckTopology X.carrier) X.smallEtaleTopology), ∃ (L : Sheaf (Opens.grothendieckTopology X.carrier) (Type (max (u + 1) v)) ⥤ Sheaf X.smallEtaleTopology (Type (max (u + 1) v))), Nonempty (L ⊣ i.sheafPushforwardContinuous (Type (max (u + 1) v)) (Opens.grothendieckTopology X.carrier) X.smallEtaleTopology) ∧ PreservesFiniteLimits L ∧ PreservesFiniteColimits L",
+  "branch": "sheaf-dag",
+  "by": "G1",
+  "date": "2026-10-12",
+  "existing": false,
+  "file": "lean/Sheaf/Paper/ZariskiEtaleInclusionMorphismOfSites.lean"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "G1",
+  "result": "pass",
+  "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
+ }
 }

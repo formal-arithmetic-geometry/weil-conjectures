@@ -5542,3 +5542,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 18:25 L: merged deliver/J1/lem-weil-pbc-closed-pushforward-constant-stalks (stage 2; reviewer PASS; first push; Sheaf.Topology.ClosedPushforwardConstantStalks TopCat.closed_pushforward_constant_stalks; new nodes: def-weil-pbc-closed-pushforward-constant-presheaf)
 - 18:25 L: merged deliver/G1/lem-weil-pbc-site-extension-by-zero-exact (stage 2; reviewer PASS; first push; Sheaf.CategoryTheory.SiteExtensionByZeroExact CategoryTheory.site_extensionByZero_exact)
 - 18:25 L: merged deliver/E1/def-sc-zariski-cohomology (stage 2; reviewer PASS; first push; Mathlib.CategoryTheory.Sites.SheafCohomology.Basic CategoryTheory.Sheaf.H'; existing declaration)
+- 18:26 L: merged deliver/G1/lem-weil-pbc-zariski-etale-inclusion-morphism-of-sites (stage 2; reviewer PASS; first push; Sheaf.Paper.ZariskiEtaleInclusionMorphismOfSites AlgebraicGeometry.zariski_to_etale_is_morphism)
