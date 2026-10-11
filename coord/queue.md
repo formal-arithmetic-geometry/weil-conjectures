@@ -1,11 +1,11 @@
 # Work queue
 
-996 items; claim with `tools/claim.py next <group> [--stage N]`.
+992 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (996)
+## Stage 2: nodes to state (992)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -55,7 +55,6 @@
 | `lem-sc-conductor-ideal-restriction` | 1 | state |
 | `lem-sc-conductor-ideal-zero-intersection` | 1 | state |
 | `lem-sc-conductor-sections` | 1 | state |
-| `lem-sc-cone-pseudo-coherent` | 1 | state |
 | `lem-sc-derived-hom-mayer-vietoris` | 1 | state |
 | `lem-sc-determinant-short-exact` | 1 | state |
 | `lem-sc-dim-one-ample-invertible` | 1 | state |
@@ -66,9 +65,6 @@
 | `lem-sc-effective-cartier-dimension-drop` | 1 | state |
 | `lem-sc-enough-globally-generated-ample` | 1 | state |
 | `lem-sc-etale-at-prime-flat-unramified-criterion` | 1 | state |
-| `lem-sc-etale-fibre-product-coproduct` | 1 | state |
-| `lem-sc-etale-local-ring-faithfully-flat-descent` | 1 | state |
-| `lem-sc-etale-local-ring-stalk-faithfully-flat` | 1 | state |
 | `lem-sc-etale-torsor-pushout-extension` | 1 | state |
 | `lem-sc-exact-functor-higher-derived-vanishing` | 1 | state |
 | `lem-sc-ext-derived-composite` | 1 | state |
