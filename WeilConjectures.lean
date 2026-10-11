@@ -853,8 +853,10 @@ public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.Basic
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.DerivabilityStructureInjectives
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.Ext.Basic
+public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.Ext.EnoughInjectives
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.Ext.Map
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.Ext.MapBijective
+public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.Ext.TStructure
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.FullyFaithful
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.HomologyProperty
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
@@ -862,6 +864,7 @@ public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.KInjectiv
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.KProjective
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.Plus
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.RightDerivedFunctorPlus
+public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.SingleProjective
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.SingleTriangle
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.TStructure
 public import WeilConjectures.Mathlib.Algebra.Homology.Double
@@ -1439,6 +1442,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.CoextendScalars
 public import WeilConjectures.SixFunctors.Etale.Derived.Composition
 public import WeilConjectures.SixFunctors.Etale.Derived.CupProductWeil
 public import WeilConjectures.SixFunctors.Etale.Derived.DerivedComplete
+public import WeilConjectures.SixFunctors.Etale.Derived.DirectImageVanishing
 public import WeilConjectures.SixFunctors.Etale.Derived.Dualizing
 public import WeilConjectures.SixFunctors.Etale.Derived.Exchange
 public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness
@@ -1690,6 +1694,7 @@ public import WeilConjectures.SixFunctors.ProEtale.Derived.UpperStarMonoidal.KFl
 public import WeilConjectures.SixFunctors.ProEtale.Derived.UpperStarMonoidal.Vanishing
 public import WeilConjectures.SixFunctors.ProEtale.Derived.WeilComplex
 public import WeilConjectures.SixFunctors.ProEtale.ExceptionalAdjoint
+public import WeilConjectures.SixFunctors.ProEtale.FullCohomologicalDimension
 public import WeilConjectures.SixFunctors.ProEtale.GeometricFrobenius
 public import WeilConjectures.SixFunctors.ProEtale.LowerShriek.Comparison
 public import WeilConjectures.SixFunctors.ProEtale.LowerShriek.Defs
@@ -1723,6 +1728,7 @@ public import WeilConjectures.SixFunctors.ProEtale.UpperLowerStar.Monoidal
 public import WeilConjectures.SixFunctors.ProEtale.UpperLowerStar.MonoidalIso
 public import WeilConjectures.SixFunctors.ProEtale.UpperLowerStar.Restriction
 public import WeilConjectures.SixFunctors.ProEtale.UpperLowerStar.TopologicalInvariance
+public import WeilConjectures.SixFunctors.ProEtale.WeaklyContractibleCohomology
 public import WeilConjectures.SixFunctors.UpperLowerStar.Defs
 public import WeilConjectures.SixFunctors.UpperLowerStar.Monoidal
 public import WeilConjectures.SpecialValues
