@@ -220,7 +220,7 @@ lemma exists_forall_mem_range_lift_of_isLimit [∀ {i j} (f : i ⟶ j), IsAffine
 omit [IsCofiltered J] in
 /-- The structure morphisms of the stages to `R` are compatible with the transition maps. -/
 lemma app_eq_map_comp_app {k k' : J} (g : k' ⟶ k) : π.app k' = D.map g ≫ π.app k := by
-  simpa using (π.naturality g).symm
+  simp
 
 variable (G : Sheaf R.smallEtaleTopology AddCommGrpCat.{u + 1})
 
@@ -422,7 +422,6 @@ lemma exists_local_section_descent_of_isLimit [∀ {i j} (f : i ⟶ j), IsAffine
       map_pullSection]
     exact pullSection_congr _ _ _ (by simp [u', huψ]) _
 
-set_option maxHeartbeats 1000000 in
 include hc hP in
 /-- **Surjectivity of the comparison of sections at a cofiltered limit.** Let `Y` be a
 quasi-compact quasi-separated étale scheme over a stage `Dₖ`, with base change `m : V ⟶ Y` to the

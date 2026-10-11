@@ -29,6 +29,10 @@ since base change is representably flat.
 For `f : T' ⟶ T`, the restriction of sections of `t^* G` to sections of `(f ≫ t)^* G` along a
 morphism `m : V' ⟶ V` over `f` is `AlgebraicGeometry.Etale.restrictAlong`; it sends `φ^* g` to
 `(m ≫ φ)^* g` (`AlgebraicGeometry.Etale.restrictAlong_pullSection`).
+
+For `h₁ : T ⟶ S` and `h₂ : S ⟶ R`, the unit of `h₁^* ⊣ h₁_*` induces the comparison map
+`AlgebraicGeometry.Etale.unitComparison : h₂_* h₂^* G ⟶ (h₁ ≫ h₂)_* (h₁ ≫ h₂)^* G`, which on
+sections is a restriction (`AlgebraicGeometry.Etale.unitComparison_hom_app_eq`).
 -/
 
 @[expose] public section

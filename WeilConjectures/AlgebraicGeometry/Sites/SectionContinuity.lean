@@ -21,8 +21,10 @@ For a cofiltered system `(Dⱼ)` of quasi-compact quasi-separated schemes over `
 transition maps and limit `X`, the comparison maps exhibit the sections of the pullback of `G`
 over `W ×_R X` as the colimit of the sections over the `W ×_R Dⱼ`, for `W` quasi-compact and
 quasi-separated (`AlgebraicGeometry.Etale.unitComparison_app_isColimit_of_isLimit`). This is
-blueprint `lem-weil-pbc-etale-section-continuity`, which belongs to the subsection
-`sk-prop-h2`; its proof is not formalised here.
+blueprint `lem-weil-pbc-etale-section-continuity`. It is deduced from the corresponding statements
+for étale schemes over a stage and their base changes to the limit
+(`AlgebraicGeometry.Etale.exists_restrictAlong_eq_of_isLimit`,
+`AlgebraicGeometry.Etale.exists_restrictAlong_eq_zero_of_isLimit`).
 -/
 
 @[expose] public section
@@ -70,10 +72,13 @@ theorem unitComparison_app_isColimit_of_isLimit [∀ j, CompactSpace (D.obj j)]
   have : QuasiCompact W.hom := @quasiCompact_of_compactSpace _ _ W.hom
     (inferInstanceAs (CompactSpace W.left)) (inferInstanceAs (QuasiSeparatedSpace R))
   -- the étale `Dⱼ`-schemes `W ×_R Dⱼ` are quasi-compact and quasi-separated
-  have hc₁ (j : J) : CompactSpace ((MorphismProperty.Over.pullback @Etale ⊤ (π.app j)).obj W).left :=
-    inferInstanceAs (CompactSpace (pullback W.hom (π.app j)))
+  have hc₁ (j : J) :
+      CompactSpace ((MorphismProperty.Over.pullback @Etale ⊤ (π.app j)).obj W).left :=
+    inferInstanceAs (CompactSpace ↥(pullback W.hom (π.app j)))
   have hq₁ (j : J) :
       QuasiSeparatedSpace ((MorphismProperty.Over.pullback @Etale ⊤ (π.app j)).obj W).left := by
+    have : QuasiSeparatedSpace (((Functor.const J).obj R).obj j) :=
+      inferInstanceAs (QuasiSeparatedSpace R)
     have : QuasiSeparated (π.app j) := (quasiSeparated_iff_quasiSeparatedSpace _).2
       (inferInstanceAs (QuasiSeparatedSpace (D.obj j)))
     exact @quasiSeparatedSpace_of_quasiSeparated _ _ (pullback.fst W.hom (π.app j))
@@ -85,19 +90,20 @@ theorem unitComparison_app_isColimit_of_isLimit [∀ j, CompactSpace (D.obj j)]
       ((MorphismProperty.Over.pullback @Etale ⊤ (π.app j)).obj W).hom (c.π.app j) := by
     refine IsPullback.of_right ?_ (pullback.lift_snd _ _ _)
       (IsPullback.of_hasPullback W.hom (π.app j))
-    convert IsPullback.of_hasPullback W.hom P using 2
-    · simp
-    · exact (hP j).symm
+    convert IsPullback.of_hasPullback W.hom P using 2 <;> first | exact (hP j).symm | rfl | simp
   refine ⟨fun t ↦ ?_, fun j s hs ↦ ?_⟩
   · obtain ⟨j₀⟩ := IsCofiltered.nonempty (C := J)
     obtain ⟨K, h, H⟩ := exists_restrictAlong_eq_of_isLimit hc π P hP G
       ((MorphismProperty.Over.pullback @Etale ⊤ (π.app j₀)).obj W) _ (hm j₀) t
     obtain ⟨s, hs⟩ := H (𝟙 K) ((MorphismProperty.Over.pullback @Etale ⊤ (π.app K)).obj W)
       (pullback.map W.hom (π.app K) W.hom (π.app j₀) (𝟙 _) (D.map h) (𝟙 _) (by simp)
-        (by simp [app_eq_map_comp_app π h]))
-      (by rw [Category.id_comp]; exact pullback.lift_snd _ _ _)
+        (by rw [Category.comp_id]; exact app_eq_map_comp_app π h))
+      (by rw [Category.id_comp h]; exact pullback.lift_snd _ _ _)
       (pullback.map W.hom P W.hom (π.app K) (𝟙 _) (c.π.app K) (𝟙 _) (by simp) (by simp [hP K]))
-      (pullback.lift_snd _ _ _) (by apply pullback.hom_ext <;> simp)
+      (pullback.lift_snd _ _ _) (by
+        apply pullback.hom_ext <;>
+          simp only [pullback.map, Category.assoc, pullback.lift_fst,
+            pullback.lift_snd, pullback.lift_snd_assoc, Category.comp_id, c.w])
     exact ⟨K, s, by rw [unitComparison_hom_app_eq]; exact hs⟩
   · rw [unitComparison_hom_app_eq] at hs
     obtain ⟨k', f, H⟩ := exists_restrictAlong_eq_zero_of_isLimit hc π P hP G
