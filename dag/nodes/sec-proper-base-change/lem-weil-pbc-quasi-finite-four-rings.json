@@ -213,5 +213,24 @@
   "item": "lem-weil-pbc-quasi-finite-four-rings",
   "worker": "stage1",
   "summary": "Split following Algebra 00PN's proof (read at algebra.tex:30293) with 00PJ (1)=>(2) for the decomposition of the fibre ring. Eight steps: finite type of R'->S' and the compatibility of primes (elementary); the map alpha: F=S(x)_R k(p) -> F'=S'(x)_{R'} k(p') from the tensor universal property; F' spanned over k(p') by alpha(F) (the source's surjectivity, elementary); alpha^{-1} of the point of q' is the point of q (fibre-ring bijection); idempotent e with D(e)={q-bar} (isolated prime is maximal + clopen-idempotent); eF finite over k(p) via the quotient F/(1-e) with one prime and the new Mathlib leaf lem-weil-pbc-finite-type-algebra-dim-zero-finite (0ALW (1)=>(5)); e'=alpha(e) not in the point of q' and F'/(1-e') finite over k(p') (elementary); its Spec finite discrete and homeomorphic to the open D(e'), so q' is isolated. The source's products S_1 x S_2 are written with idempotents and quotients by 1-e. Statement unchanged; it already states that R'->S' is of finite type, which the source leaves implicit. Mathlib: candidate for Mathlib's QuasiFiniteAt kept (B8); loogle and local_search records added. Checked against the citer lem-weil-pbc-integral-closure-zariski-main-away step 7 (R->S, R->R/(R cap sqrt J), S->S/sqrt J): hypotheses hold there."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.QuasiFiniteFourRings",
+  "declaration": "Algebra.finiteType_and_isQuasiFiniteAtPrime_of_four_rings",
+  "file": "lean/Sheaf/RingTheory/QuasiFiniteFourRings.lean",
+  "statement": "theorem finiteType_and_isQuasiFiniteAtPrime_of_four_rings (R : Type u) (S : Type v) (R' : Type w) (S' : Type z) [CommRing R] [CommRing S] [CommRing R'] [CommRing S'] [Algebra R S] [Algebra R R'] [Algebra R' S'] [Algebra S S'] [Algebra R S'] [IsScalarTower R S S'] [IsScalarTower R R' S'] [Algebra.FiniteType R S] (hgen : ∀ x : S', ∃ (n : ℕ) (s : Fin n → S) (r : Fin n → R'), x = ∑ i : Fin n, algebraMap S S' (s i) * algebraMap R' S' (r i)) : ∃ hft : Algebra.FiniteType R' S', ∀ q' : PrimeSpectrum S', IsQuasiFiniteAtPrime R S (q'.comap (algebraMap S S')) → @IsQuasiFiniteAtPrime R' S' _ _ _ hft q'",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-qfr1549"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-qfr1549",
+  "group": "C1",
+  "result": "fix",
+  "note": "four CommRing binders; R->S, R->R', R'->S', S->S' as Algebra instances with IsScalarTower R S S' and R R' S' (commuting square); FiniteType R S; hgen finite sums over Fin n with algebraMap S S' and algebraMap R' S'; exists FiniteType R' S' unconditional; forall q' : PrimeSpectrum S', IsQuasiFiniteAtPrime R S (q'.comap (algebraMap S S')) -> IsQuasiFiniteAtPrime R' S' q' (recorded J1 def via p.Fiber S); towers tested by instantiation R'=R, S'=S"
  }
 }
