@@ -123,5 +123,23 @@
   "group": "F1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-gpa2 (reviewer sub-agent of L); spot-checked: Source Stacks Algebra 00JS (algebra.tex label lemma-graded-silly, l.13630): the item statement (unchanged) agrees hypothesis by hypothesis (graded S, homogeneous primes p_1..p_r, graded I subset S_+, I not in any p_i; homogeneous x in I of positive degree outside all p_i); def-pc-proj supplies the graded-ring/S_+ notation. Delivery changes only proof, proof_deps=[], proof_origin, status, split_report; no new nodes, no tool uses. Steps checked, all elementary from the definitions: (1) removing inclusions; (2) r=1 via a homogeneous component of an element of I outside the homogeneous p_1, positive degree since I in S_+; (3) induction hypothesis; (4) I p_1...p_{r-1} not in p_r using a_i in p_i minus p_r and primality; (5) homogeneous y in the graded product ideal, z=x^{deg y}+y^{deg x} homogeneous of positive degree in I, outside p_i for i<r (y in p_i, x not) and outside p_r (x in p_r, y not). Small case r=2 checked by hand; r=0 trivial (0 in S_1). Mathlib (pinned): no graded prime avoidance (grep avoid/avoidance in RingTheory/GradedAlgebra and ProjectiveSpectrum; only Ideal.subset_union_prime, ungraded), so no leaf. B10: slopmaster2 ProjectiveSpectrum.exists_homogeneous_notMem_of_finset (WeilConjectures/Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Topology.lean:54) is only the special case I=S_+ with relevant primes, not an exact statement, so the split stands. FIX: dag/nodes/sec-curve-estimates/lem-sc-graded-prime-avoidance.json: proof[0..4].text: plain-unicode notation (pi_i for the primes, deg(y), product dots) rewritten in TeX (\\mathfrak p_i, \\deg, \\cdots), wording and mathematics unchanged (B4). Start Sat Oct 10 04:06:24 PM UTC 2026, end Sat Oct 10 04:07:19 PM UTC 2026.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.GradedPrimeAvoidance",
+  "declaration": "HomogeneousIdeal.exists_homogeneous_mem_notMem_of_isPrime",
+  "file": "lean/Sheaf/RingTheory/GradedPrimeAvoidance.lean",
+  "statement": "theorem exists_homogeneous_mem_notMem_of_isPrime {A : Type u} {σ : Type v} [CommRing A] [SetLike σ A] [AddSubgroupClass σ A] (𝒜 : ℕ → σ) [GradedRing 𝒜] (r : ℕ) (p : Fin r → HomogeneousIdeal 𝒜) (hp : ∀ i : Fin r, (p i).toIdeal.IsPrime) (I : HomogeneousIdeal 𝒜) (hI : I ≤ HomogeneousIdeal.irrelevant 𝒜) (hIp : ∀ i : Fin r, ¬ I ≤ p i) : ∃ (n : ℕ), 0 < n ∧ ∃ (x : A), x ∈ 𝒜 n ∧ x ∈ I ∧ ∀ i : Fin r, x ∉ p i",
+  "branch": "sheaf-dag",
+  "by": "J1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-gpa1124",
+  "group": "J1",
+  "result": "pass",
+  "note": "CommRing A + (𝒜 : ℕ → σ) [GradedRing 𝒜] (generic SetLike/AddSubgroupClass, as Mathlib Proj; covers AddSubgroup siblings) = nonneg graded comm ring; p : Fin r → HomogeneousIdeal with toIdeal.IsPrime = homogeneous primes p_1..p_r; I : HomogeneousIdeal, I ≤ irrelevant = graded I ⊆ S_+; ∀ i, ¬ I ≤ p i; conclusion ∃ n>0, x ∈ 𝒜 n, x ∈ I, ∀ i, x ∉ p i; r=0 (x=0 in degree 1) ok; no Mathlib graded prime avoidance (only Ideal.subset_union_prime ungraded, upstream exists_homogeneous_notMem_of_finset is I=S_+ only); docstring has 00JS, blueprint id and the 5-step proof"
  }
 }
