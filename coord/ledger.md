@@ -5621,3 +5621,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 18:54 L: merged deliver/F1/lem-weil-pbc-sets-extension-by-empty-adjunction (stage 2; reviewer PASS; first push; Sheaf.Topology.SetsExtensionByEmptyAdjunction TopCat.extensionByEmpty_adjunction_stalks)
 - 18:55 L: merged deliver/Q1/lem-weil-pbc-site-leray-degenerate (stage 2; reviewer PASS; first push; Sheaf.CategoryTheory.SiteLerayDegenerate CategoryTheory.siteLeray_degenerate)
 - 18:55 L: merged deliver/H1/lem-weil-pbc-spectral-finite-coequalizer-from-finite-space (stage 2; reviewer PASS; first push; Sheaf.Topology.SpectralFiniteCoequalizer TopCat.spectral_finite_coequalizer_from_finite_space)
+- 18:56 L: merged deliver/K1/lem-weil-pbc-affine-etale-site-colimit (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.AffineEtaleSiteColimit AlgebraicGeometry.Scheme.exists_affineEtaleSite_colimit)
