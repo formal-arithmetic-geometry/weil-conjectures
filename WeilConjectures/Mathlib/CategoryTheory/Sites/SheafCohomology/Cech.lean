@@ -127,7 +127,7 @@ theorem Sheaf.exists_cechDoubleComplex [HasExt.{v} (Sheaf J AddCommGrpCat.{v})]
       ((HomologicalComplex.shortComplexFunctor' _ _ p (p + 1) (p + 2)).mapIso (e q))).2
       (Presheaf.exact_cechComplexFunctor_of_injective V (R.cocomplex.X q).obj p)
   have := HomologicalComplex₂.quasiIso_toTotalOfAugmentation (hε := hε) h₀ h₁ hrow
-  exact (HomologicalComplex.isoOfQuasiIsoAt (D.toTotalOfAugmentation ε hε) n).symm ≪≫
+  exact (isoOfQuasiIsoAt (D.toTotalOfAugmentation ε hε) n).symm ≪≫
     Sheaf.cohomologyPresheafIsoApp R n (op X)
 
 /-- **The Čech-to-derived spectral sequence.** Let `C` be a site with fibre products, `X : C` and
