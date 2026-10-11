@@ -171,5 +171,23 @@
   "by": "L",
   "result": "pass",
   "note": "Reviewed by the lead (opus-relaunch6). Five steps along the second paragraph of the proof of Stacks 0C4G: A -> B^ flat (Noetherian completion flat node and the new Mathlib leaf RingHom.Flat.comp, RingHom/Flat.lean:45, verified), B^/m_A^n B^ flat over A/m_A^n (new leaf of a few declarations: Module.Flat.baseChange Stability.lean:100 with TensorProduct.quotTensorEquivQuotSMul, accepted as 'a few lemmas, verified'), A/m_A^n = A^/(m_A^)^n (local completion and mod-power nodes), module structures transported (elementary), the local flatness criterion via powers Stacks 0523 (new unsplit node lem-weil-pbc-flat-module-powers; its split needs 00ML, Tor_1 = ker(I (x) M -> M) and Artin-Rees 00IQ). Brief error: lem-weil-pbc-flat-module-completion-flat (0AGW) does not give this item (it completes B m_A-adically, not m_B-adically). Tags verified by the worker (0C4G, 0523, 00HC, 00HI, 00ML, 00IQ)."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.FlatCompletion",
+  "declaration": "flat_adicCompletion_of_flat_local",
+  "statement": "theorem flat_adicCompletion_of_flat_local (A : Type u) (B : Type v) [CommRing A] [CommRing B] [IsLocalRing A] [IsLocalRing B] [IsNoetherianRing A] [IsNoetherianRing B] (φ : A →+* B) (hφ : φ.Flat) (hlocal : ∀ x : A, x ∈ IsLocalRing.maximalIdeal A → φ x ∈ IsLocalRing.maximalIdeal B) : let mA : Ideal A := IsLocalRing.maximalIdeal A let mB : Ideal B := IsLocalRing.maximalIdeal B let Ahat := AdicCompletion mA A let Bhat := AdicCompletion mB B let ιA : A →+* Ahat := algebraMap A Ahat let ιB : B →+* Bhat := algebraMap B Bhat ∃ φhat : Ahat →+* Bhat, (∀ n : ℕ, ((AdicCompletion.evalₐ mB n).toRingHom).comp φhat = (Ideal.Quotient.lift (mA ^ n) ((Ideal.Quotient.mk (mB ^ n)).comp φ) (by intro x hx change Ideal.Quotient.mk (mB ^ n) (φ x) = 0 rw [Ideal.Quotient.eq_zero_iff_mem] exact (pow_le_pow_left' ((Ideal.map_le_iff_le_comap).2 (by intro y hy exact hlocal y hy)) n) (by rw [← Ideal.map_pow] exact Ideal.mem_map_of_mem φ hx)) ).comp (AdicCompletion.evalₐ mA n).toRingHom) ∧ φhat.comp ιA = ιB.comp φ ∧ φhat.Flat",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-11",
+  "existing": false,
+  "file": "lean/Sheaf/RingTheory/FlatCompletion.lean"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-fco1104",
+  "group": "E1",
+  "result": "pass",
+  "note": "A,B CommRing local Noetherian (IsLocalRing/IsNoetherianRing), φ.Flat (RingHom.Flat), hlocal = φ(m_A)⊆m_B (checked ↔ IsLocalHom), completions AdicCompletion mA A / mB B, φhat existential pinned levelwise by evalₐ ∘ φhat = lift(mk∘φ) ∘ evalₐ for all n (determines φhat), φhat∘ιA = ιB∘φ, conclusion φhat.Flat; not a Mathlib instance (only R→R^ flat); recompiled"
  }
 }

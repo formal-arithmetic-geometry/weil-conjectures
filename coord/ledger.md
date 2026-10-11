@@ -4321,3 +4321,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 10:50 L: merged deliver/K1/lem-weil-pbc-geometrically-regular-over-field-flat (stage 2; reviewer PASS; first push; Sheaf.RingTheory.GeometricallyRegularOverFieldFlat Algebra.exists_flat_polynomialLocalization_of_isGeometricallyRegular)
 - 10:50 L: merged deliver/C1/lem-weil-pbc-geometric-point-morphism-stalk-bijection (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.GeometricPointMorphismStalkBijection AlgebraicGeometry.Scheme.geometricPointMorphism_stalk_bijection)
 - 10:51 L: merged deliver/M1/lem-weil-pbc-free-complex-mod-nonzerodivisor-exact (stage 2; reviewer FIX; first push; Sheaf.RingTheory.FreeComplexModNonzerodivisorExact free_complex_mod_nonzerodivisor_exact)
+- 10:51 L: merged deliver/E1/lem-weil-pbc-flat-completion (stage 2; reviewer PASS; first push; Sheaf.RingTheory.FlatCompletion flat_adicCompletion_of_flat_local)
