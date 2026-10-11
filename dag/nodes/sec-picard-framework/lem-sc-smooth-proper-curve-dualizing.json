@@ -22,7 +22,8 @@
   "def-sbc-smooth-morphisms",
   "def-weil-proper-morphism",
   "def-pc-derived-direct-image",
-  "def-sc-kahler-differentials"
+  "def-sc-kahler-differentials",
+  "def-pc-derived-category"
  ],
  "proof": [
   {
@@ -109,5 +110,23 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-spd (reviewer sub-agent of L); spot-checked: Source: Stacks Tag 0BRT = duality-lemma-smooth-proper (duality.tex l.3662): S Noetherian, f smooth proper of relative dimension d, a right adjoint of Rf_* on D_QCoh, iso wedge^d Omega_{X/S}[d] -> a(O_S) in D(O_X); the new node lem-sc-smooth-proper-relative-dualizing-general states exactly this, hypothesis by hypothesis, and the item is its S=Spec k, d=1 case. Step 1 is carried by the new node's statement (Spec k Noetherian; smooth of rel. dim 1 and proper are the item's hypotheses); Step 2 is wedge^1 E = E from def-weil-pbc-exterior-algebra, elementary. No cycle (new node cites only definitions). No Mathlib leaf; B10: slopmaster2 has only etale dualizing complexes, no coherent f^! declaration. Small cases: P^1_k gives O(-2)[1], consistent with Serre duality H^1(O(-2))=k; d=0 finite etale gives f^!O_S = O_X via the trace. FIX more, RETURN less (B3, three faults, repaired): dag/nodes/sec-picard-framework/lem-sc-smooth-proper-relative-dualizing-general.json: statement+stmt_deps: (1) Omega^1_{X/S} was cited to def-sc-kahler-differentials, which defines it only for a smooth curve over k: now defined inline as Delta^*(I/I^2) as in that node, with the affine description via def-weil-pbc-kahler-differentials and def-pc-base-change; (2) wedge^d of a sheaf had no definition: now defined affine-locally via def-weil-pbc-exterior-algebra; (3) 'Noetherian scheme' had no node: now quasi-compact [def-weil-pbc-quasi-compact-scheme] and locally Noetherian [pqf-def-locnoeth]; smooth of relative dimension d and proper cited inline. dag/nodes/sec-picard-framework/lem-sc-smooth-proper-curve-dualizing.json: proof step 1 text: the identification of Omega^1_{X/S} with Omega^1_{C/k} now says it is by definition of the cited nodes. Start Sat Oct 10 03:40:36 PM UTC 2026, end Sat Oct 10 03:42:05 PM UTC 2026.; 2 file(s) fixed by the reviewer"
  },
- "lead_note": "15:42 UTC (reviewer R-spd): the statement writes \"let g^! denote the right adjoint of Rg_* on quasi-coherent complexes\", which assumes the adjoint exists (Stacks, lemma twisted-inverse-image / Duality for Schemes 0A9E); no node states that existence; whoever splits a citer needing it should add a statement node for it."
+ "lead_note": "15:42 UTC (reviewer R-spd): the statement writes \"let g^! denote the right adjoint of Rg_* on quasi-coherent complexes\", which assumes the adjoint exists (Stacks, lemma twisted-inverse-image / Duality for Schemes 0A9E); no node states that existence; whoever splits a citer needing it should add a statement node for it.",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SmoothProperCurveDualizing",
+  "declaration": "AlgebraicGeometry.smoothProperCurve_dualizing",
+  "file": "lean/Sheaf/AlgebraicGeometry/SmoothProperCurveDualizing.lean",
+  "statement": "theorem smoothProperCurve_dualizing (k : Type u) [Field k] (C : Scheme.{u}) (g : C ⟶ Spec (.of k)) [SmoothOfRelativeDimension 1 g] [IsProper g] [HasDerivedCategory.{wC} (SheafOfModules.{u} (moduleRings C.toRingedSpace))] [HasDerivedCategory.{wk} (SheafOfModules.{u} (moduleRings (Spec (.of k)).toRingedSpace))] (R : schemeDerivedQCohCategory C ⥤ schemeDerivedQCohCategory (Spec (.of k))) (comparison : R ⋙ (schemeDerivedQCohProperty (Spec (.of k))).ι ≅ (schemeDerivedQCohProperty C).ι ⋙ schemeDerivedDirectImage g) (a : schemeDerivedQCohCategory (Spec (.of k)) ⥤ schemeDerivedQCohCategory C) (adj : R ⊣ a) (O : schemeDerivedQCohCategory (Spec (.of k))) (hO : O.obj ≅ (DerivedCategory.singleFunctor (SheafOfModules.{u} (moduleRings (Spec (.of k)).toRingedSpace)) 0).obj (SheafOfModules.unit (moduleRings (Spec (.of k)).toRingedSpace))) : Nonempty ((a.obj O).obj ≅ ((DerivedCategory.singleFunctor (SheafOfModules.{u} (moduleRings C.toRingedSpace)) 0).obj g.relativeDifferentials)⟦(1 : ℤ)⟧)",
+  "branch": "sheaf-dag",
+  "by": "P1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-cdz",
+  "group": "P1",
+  "result": "pass",
+  "note": "k field Type u; g : C ⟶ Spec k explicit (node names g); SmoothOfRelativeDimension 1 g = smooth of pure rel. dim 1; IsProper g; R with comparison R⋙ι ≅ ι⋙schemeDerivedDirectImage g ties Rg_* on D_QCoh (same form as landed properPerfect_rightAdjoint_preservesCoproducts); a, adj : R ⊣ a = g^!; O tied by hO to singleFunctor 0 of SheafOfModules.unit; conclusion Nonempty iso to singleFunctor 0 (g.relativeDifferentials) shifted ⟦1⟧ in D(O_C); stmt_deps + landed def-pc-derived-category justified (schemeDerivedQCoh*); check_dag unchanged vs base; no let/local instance/notation"
+ }
 }

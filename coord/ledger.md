@@ -5347,3 +5347,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 16:04 L: merged deliver/M1/lem-sc-ext-stalk-localization (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.SheafExtStalkLocalization AlgebraicGeometry.nonempty_moduleSheafExt_stalk_linearEquiv)
 - 16:04 L: merged deliver/V1/lem-sc-ext-coherent-hom-injective-acyclic (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.CoherentHomInjectiveAcyclic AlgebraicGeometry.coherent_hom_injective_acyclic)
 - 16:05 L: merged deliver/C1/lem-pc-direct-image-qc-support-reduction (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.DirectImageQCSupportReduction AlgebraicGeometry.directImage_qc_support_reduction)
+- 16:05 L: merged deliver/P1/lem-sc-smooth-proper-curve-dualizing (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.SmoothProperCurveDualizing AlgebraicGeometry.smoothProperCurve_dualizing)
