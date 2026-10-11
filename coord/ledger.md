@@ -4737,3 +4737,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 13:17 L: merged deliver/G1/lem-weil-pbc-pullback-finite-locally-constant (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.PullbackFiniteLocallyConstant AlgebraicGeometry.Scheme.pullback_finite_locally_constant)
 - 13:17 L: merged deliver/K1/lem-weil-pbc-proj-graded-module-sheaf-exists (stage 2; reviewer FIX; first push; Sheaf.AlgebraicGeometry.ProjGradedModuleSheafExists AlgebraicGeometry.Proj.gradedModuleSheaf_exists)
 - 13:17 L: merged deliver/F1/lem-weil-pbc-pullback-ample-invertible (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.AmplePullback AlgebraicGeometry.Scheme.Modules.isAmple_tensorPullback_of_isAffineHom)
+- 13:17 L: merged deliver/F1/lem-weil-pbc-qcqs-scheme-cofinal-finite-coverings (stage 2; reviewer FIX; first push; Sheaf.AlgebraicGeometry.QcqsSchemeCofinalFiniteCoverings AlgebraicGeometry.qcqs_scheme_cofinal_finite_affine_open_coverings)
