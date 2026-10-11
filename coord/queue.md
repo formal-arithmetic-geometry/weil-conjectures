@@ -12,7 +12,6 @@
 | `def-nagata-relative-finite-affine-presentation` | 1 | state |
 | `def-pc-flat-sheaf-modules` | 1 | state |
 | `def-pc-module-pullback` | 1 | state |
-| `def-sp-double-complex-total` | 1 | state |
 | `def-weil-pbc-ample-invertible-module` | 1 | state |
 | `def-weil-pbc-etale-sheaves` | 1 | state |
 | `def-weil-pbc-formal-glueing-data` | 1 | state |
@@ -26,7 +25,6 @@
 | `lem-fin-etale-normal-components` | 1 | state |
 | `lem-fin-normal-generic-constant` | 1 | state |
 | `lem-galois-descent` | 1 | state |
-| `lem-galois-descent-datum-diagonal-identity` | 1 | state |
 | `lem-galois-fpqc-pullback-canonical-iso` | 1 | state |
 | `lem-pc-affine-tilde-kflat` | 1 | state |
 | `lem-pc-balanced-derived-tensor-model` | 1 | state |
@@ -54,9 +52,7 @@
 | `lem-pc-pre-derived-adjoint-functors-general` | 1 | state |
 | `lem-pc-presheaf-change-of-rings-adjunction` | 1 | state |
 | `lem-pc-presheaf-module-inverse-image-adjunction` | 1 | state |
-| `lem-pc-proper-geometrically-reduced-global-sections-separable` | 1 | state |
 | `lem-pc-right-localization-hom-colimit` | 1 | state |
-| `lem-pc-ring-derived-map-lift` | 1 | state |
 | `lem-pc-ring-pseudo-coherent-distinguished-triangle` | 1 | state |
 | `lem-pc-ring-pseudo-coherent-iff-all-m` | 1 | state |
 | `lem-pc-ring-pseudo-coherent-localization-glue` | 1 | state |
@@ -209,6 +205,8 @@
 | `lem-sc-weakass-localization` | 1 | state |
 | `lem-sc-zariski-contracted-power-torsor` | 1 | state |
 | `lem-sp-cart-eilenberg-left-exact-cohomology` | 1 | state |
+| `lem-sp-cartan-eilenberg-exists` | 1 | state |
+| `lem-sp-cartan-eilenberg-properties` | 1 | state |
 | `lem-sp-ce-compatible-homotopy-assembly` | 1 | state |
 | `lem-sp-derived-couple-exact` | 1 | state |
 | `lem-sp-filtered-complex-ZB-description` | 1 | state |
@@ -241,6 +239,7 @@
 | `lem-weil-pbc-base-change-nilpotent-thickening-idempotents` | 1 | state |
 | `lem-weil-pbc-basis-sheaf-cofinal-coverings` | 1 | state |
 | `lem-weil-pbc-basis-sheaf-sections-germs` | 1 | state |
+| `lem-weil-pbc-cartesian-eilenberg-functorial` | 1 | state |
 | `lem-weil-pbc-cartier-equality` | 1 | state |
 | `lem-weil-pbc-cauchy-binet` | 1 | state |
 | `lem-weil-pbc-cech-vanishing-criterion` | 1 | state |
@@ -947,6 +946,7 @@
 | `prop-weil-pbc-inverse-image-exact` | 1 | state |
 | `thm-galois-abstract-equivalence` | 1 | state |
 | `thm-pqf-zmt-factorization` | 1 | state |
+| `thm-sp-grothendieck` | 1 | state |
 | `def-nagata-glued-limit-comparison` | 2 | state |
 | `def-pc-essentially-constant-ind-diagram` | 2 | state |
 | `def-sc-group-scheme` | 2 | state |
@@ -979,7 +979,7 @@
 | `lem-sc-normalization-properties` | 3 | state |
 | `def-nagata-fixed-base-separated-stage` | 6 | state |
 
-Not open yet: 1110 nodes that wait for a statement dependency, 40 nodes that wait for stage 1.
+Not open yet: 1106 nodes that wait for a statement dependency, 40 nodes that wait for stage 1.
 
 ## Stage 3: modules to prove (0)
 
