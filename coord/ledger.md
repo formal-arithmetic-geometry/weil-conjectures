@@ -5064,3 +5064,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 14:50 L: merged deliver/C1/lem-sc-divisor-class-curve (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.DivisorClassCurve AlgebraicGeometry.Scheme.exists_divisorClassGroup_addEquiv_pic_associatedModule)
 - 14:50 L: merged deliver/S1/lem-weil-pbc-tor-dimension-shift-free (stage 2; reviewer PASS; first push; Sheaf.Algebra.TorDimensionShiftFree CategoryTheory.tor_dimension_shift_free)
 - 14:51 L: merged deliver/T1/lem-weil-pbc-symmetric-algebra-base-change (stage 2; reviewer PASS; first push; Sheaf.RingTheory.SymmetricAlgebraBaseChange SymmetricAlgebra.baseChange_bijective)
+- 14:51 L: merged deliver/Q1/lem-weil-pbc-standard-smooth-over-field-dimension-at-points (stage 2; reviewer PASS; first push; Sheaf.RingTheory.StandardSmoothDimensionAtPoints Algebra.SubmersivePresentation.topologicalKrullDimAt_spec_eq)
