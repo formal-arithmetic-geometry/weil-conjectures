@@ -46,6 +46,8 @@ instance :
     PreservesLimitsOfSize.{u, u + 1} (ModuleCat.coextendScalars.{u + 1, u + 1, u + 1} φ) :=
   (ModuleCat.restrictCoextendScalarsAdj.{u + 1} φ).rightAdjoint_preservesLimits
 
+/- Mathlib's instance is stated for `coextendScalars.{u₁, u₂, max u₂ w}`, and unifying
+`u + 1 =?= max (u + 1) ?w` gets stuck, so instance search does not find it here. -/
 instance : (ModuleCat.coextendScalars.{u + 1, u + 1, u + 1} φ).IsRightAdjoint :=
   (ModuleCat.restrictCoextendScalarsAdj.{u + 1} φ).isRightAdjoint
 

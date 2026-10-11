@@ -87,7 +87,9 @@ instance isTriangulated_derivedTensor_obj
   inferInstanceAs
     (((curriedTensor (DerivedCategory (Sheaf X.smallEtaleTopology A))).obj K).IsTriangulated)
 
-/-- Tensoring on the right with a fixed complex, `M ↦ M ⊗ᴸ K`, is triangulated. -/
+/-- Tensoring on the right with a fixed complex, `M ↦ M ⊗ᴸ K`, is triangulated. This restates
+`isTriangulated_derivedTensorRight` in the `(derivedTensor A X).flip.obj K` form, so that
+instance search finds it for functors written in that form. -/
 instance isTriangulated_derivedTensor_flip_obj
     (K : DerivedCategory (Sheaf X.smallEtaleTopology A)) :
     ((derivedTensor A X).flip.obj K).IsTriangulated :=
