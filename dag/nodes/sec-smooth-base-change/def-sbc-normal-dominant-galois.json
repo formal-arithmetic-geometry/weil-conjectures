@@ -90,5 +90,34 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-ndg2557 (reviewer sub-agent of L); spot-checked: Read the statement against the blueprint and every citer's use (integral/normal in lem-weil-pbc-normal-constant-generic, lem-fin-*; geometrically connected/reduced fibres in sbc-lem-slicing, sbc-thm-universal-test-vanishing, sbc-lem-degree-zero-flat-base-change; Galois cover with group G in sbc-thm-spreading-finite-etale-galois); separably closed extensions include the algebraic closure, so both geometric notions are correct; geometric points are algebraically closed (def-weil-geometric-point). FIX more, RETURN less: (1) B10/C1: removed the smuggled claim 'for a connected Galois cover the deck group is G, as the deck-group lemma below records' (no such node, no citer uses it); (2) class (b): integral now cites def-pc-integral-scheme, added to stmt_deps; (3) removed the second, geometric-point definition of geometrically connected/reduced fibres, which re-defined the same terms and hid an equivalence lemma.; 1 file(s) fixed by the reviewer"
  },
- "lead_note": "2026-10-10 L (R-ndg2557): Second reading by H1 claims repairs (deck-group reference removed, quantifiers changed) that are not in the delivered statement; it is false."
+ "lead_note": "2026-10-10 L (R-ndg2557): Second reading by H1 claims repairs (deck-group reference removed, quantifiers changed) that are not in the delivered statement; it is false.",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.NormalScheme",
+  "declaration": "AlgebraicGeometry.IsNormalScheme",
+  "declarations": [
+   "AlgebraicGeometry.IsNormalScheme",
+   "AlgebraicGeometry.Scheme.GaloisCoverAction",
+   "AlgebraicGeometry.Scheme.Hom.deckGroup",
+   "AlgebraicGeometry.IsIntegral",
+   "AlgebraicGeometry.IsDominant",
+   "AlgebraicGeometry.GeometricallyConnected",
+   "AlgebraicGeometry.GeometricallyReduced"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/NormalScheme.lean",
+  "statement": "def IsNormalScheme (S : Scheme.{u}) : Prop",
+  "branch": "sheaf-dag",
+  "by": "J1",
+  "date": "2026-10-11",
+  "existing": false,
+  "note": "One declaration per notion. Integral = Mathlib AlgebraicGeometry.IsIntegral; normal = IsNormalScheme (IsIntegral and every stalk an integrally closed domain; lem-fin-dense-normal-open's inline stalk clause is this notion on an open); dominant = Mathlib AlgebraicGeometry.IsDominant (DenseRange); geometrically connected / reduced fibres = Mathlib GeometricallyConnected / GeometricallyReduced (fibre form: iff_geometricallyConnected_fiber / iff_geometricallyReduced_fiber). Galois cover = Scheme.GaloisCoverAction: slopmaster2 Scheme.GaloisCover (EtaleTorsor.lean, docstring cites this node) imposes [Finite G] and G : Type (u+1), neither in the node (differs only over the empty base and in the universe of G), so it is not recorded as existing. Deck group = Scheme.Hom.deckGroup π := Aut (Over.mk π), an abbrev so it carries the Group instance of Aut (reviewer fix: as a def it had none).",
+  "fixed_by": "R-ndg0830"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-ndg0830",
+  "group": "J1",
+  "result": "fix",
+  "note": "normal = IsIntegral and every stalk IsDomain+IsIntegrallyClosed (matches node and K1 lem-fin-dense-normal-open stalk clause); integral/dominant/geom. connected/reduced fibres are the Mathlib IsIntegral/IsDominant/GeometricallyConnected/GeometricallyReduced, recorded in declarations; GaloisCoverAction: finite etale surjective, action over C with one/mul laws, simple transitivity on Omega-points of geometric fibres, categorical quotient; slopmaster2 Scheme.GaloisCover not exact (Finite G, G : Type (u+1)); FIX: deckGroup def->abbrev so it is a group"
+ }
 }
