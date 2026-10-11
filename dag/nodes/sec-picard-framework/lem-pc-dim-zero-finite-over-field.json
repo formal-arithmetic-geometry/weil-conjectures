@@ -124,5 +124,23 @@
   "group": "K1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-dzf (reviewer sub-agent of L); spot-checked: Source: Stacks Tag 06LH (varieties.tex, label lemma-algebraic-scheme-dim-0, line 3736) read in full: an algebraic (finite type) k-scheme of dimension 0 is affine and finite over Spec k; the new node lem-pc-algebraic-dim-zero-affine-finite states exactly this, hypothesis by hypothesis (field k, finite type [def-weil-finite-type-morphism], dim<=0 [def-pc-dimension, sup of local Krull dims = Stacks dimension]; conclusions affine [def-pc-scheme] and finite [def-weil-finite-integral-morphism]); no separatedness needed, as in Stacks. Item steps: step 1 proper => finite type carried by pqf-lem-proper-basic (statement lists 'of finite type'; also immediate from def-weil-proper-morphism), accepted as declared generic tool use (C8); step 2 carried by the new node; step 3 carried by lem-weil-pbc-finite-over-field-affine-finite-dim (finite T->Spec k gives T affine and Gamma finite-dimensional), hypotheses match. Item statement unchanged; only proof, proof_deps, proof_origin, status, split_report changed. Duplicates checked: DAG nodes citing 06LH (lem-pc-chi-zero-dim-support, lem-weil-pbc-zero-dim-integral-point, lem-sc-dim0-finite) state different facts; blueprint_refs search 'dimension zero finite' found nothing equal; grep of slopmaster2 AlgebraicGeometry found no declaration of dim-0 finite type => affine finite (B10 not triggered). Small cases: Spec k, Spec k[e]/(e^2), finite disjoint union of points (affine, finite); A^1_k excluded by dim 1; empty scheme conclusion trivially true. Start Sat Oct 10 02:56:01 PM UTC 2026, end Sat Oct 10 02:56:47 PM UTC 2026."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProperDimZeroFiniteOverField",
+  "declaration": "AlgebraicGeometry.proper_dim_zero_finite_over_field",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProperDimZeroFiniteOverField.lean",
+  "statement": "theorem proper_dim_zero_finite_over_field {k : Type u} [Field k] {Y : Scheme.{u}} (f : Y ⟶ Spec (.of k)) [IsProper f] (hY : Y.dim ≤ 0) : IsFinite f ∧ IsAffine Y ∧ (letI := f.ΓAlgebra; Module.Finite k Γ(Y, ⊤))",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-dzf0759",
+  "group": "H1",
+  "result": "pass",
+  "note": "k field (Type u, same universe as Y forced by Spec); f : Y ⟶ Spec k the structure morphism with [IsProper f] (def-weil-proper-morphism; finite type via LocallyOfFiniteType + QuasiCompact from UniversallyClosed); hY : Y.dim ≤ 0 with landed Scheme.dim (def-pc-dimension), empty Y (⊥) included and conclusion true; conclusion IsFinite f ∧ IsAffine Y ∧ Module.Finite k Γ(Y,⊤) under f.ΓAlgebra, all three node clauses in order; not the same statement as e61204bdb (proper hypothesis, extra Γ clause; proof step 2 applies it via Y.Over := ⟨f⟩); docstring follows the three proof steps; Mathlib Artinian.lean only IsLocallyArtinian/IsArtinianScheme components, source Proper.lean isFinite_of_isProper_of_isAffine is the converse (affine ⇒ dim 0): existing false correct"
  }
 }

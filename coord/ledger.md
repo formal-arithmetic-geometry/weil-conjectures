@@ -3532,3 +3532,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 06:37 L: merged deliver/J1/lem-kun-stalks-commute-colimits (stage 2; reviewer FIX; first push; Sheaf.AlgebraicGeometry.GeometricStalkColimits AlgebraicGeometry.Scheme.geometricStalk_preservesColimits)
 - 06:38 L: merged deliver/G1/lem-pc-derived-total-resolution-quasi-iso (stage 2; reviewer FIX; first push; Sheaf.Paper.DerivedTotalResolutionQuasiIso WeilConjectures.DerivedTotalResolution.total_resolution_quasiIso)
 - 06:38 L: returned deliver/M1/lem-exc-discrete-modules-abelian-structure (reviewer RETURN: H4/H12: lean/Sheaf/RepresentationTheory/DiscreteRep.lean defines Rep.IsDiscrete and Rep.DiscreteRep, a private second co)
+- 06:38 L: merged deliver/H1/lem-pc-dim-zero-finite-over-field (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.ProperDimZeroFiniteOverField AlgebraicGeometry.proper_dim_zero_finite_over_field)
