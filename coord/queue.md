@@ -1,11 +1,11 @@
 # Work queue
 
-933 items; claim with `tools/claim.py next <group> [--stage N]`.
+931 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (933)
+## Stage 2: nodes to state (931)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -22,7 +22,6 @@
 | `lem-pc-derived-tensor-transitivity` | 1 | state |
 | `lem-pc-filtered-colimit-derived-tensor` | 1 | state |
 | `lem-pc-flat-bounded-complex-descent` | 1 | state |
-| `lem-pc-flat-module-descent` | 1 | state |
 | `lem-pc-module-pullback-identity-composition` | 1 | state |
 | `lem-pc-pre-derived-adjoint-functors-general` | 1 | state |
 | `lem-pur-hom-kflat-into-kinjective` | 1 | state |
@@ -32,7 +31,6 @@
 | `lem-sc-bounded-above-finite-free-hom-acyclic` | 1 | state |
 | `lem-sc-derived-hom-tensor-total` | 1 | state |
 | `lem-sc-etale-faithfully-flat-local` | 1 | state |
-| `lem-sc-local-domain-dim-one-principal-localization-fraction-field` | 1 | state |
 | `lem-sc-p1-ext-locally-free-naturality` | 1 | state |
 | `lem-sc-p1-ext-yoneda-associativity` | 1 | state |
 | `lem-sc-picard-h1-multiple-locus` | 1 | state |
