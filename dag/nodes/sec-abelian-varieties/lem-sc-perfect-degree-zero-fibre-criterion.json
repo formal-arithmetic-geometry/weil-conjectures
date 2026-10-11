@@ -14,7 +14,7 @@
  },
  "kind": "statement",
  "title": "Perfect complex with residue-field degree-zero fibres",
- "statement": "Let $S$ be a scheme, let $K$ be a perfect complex on $S$ [def-pc-perfect-complex], and let $u:\\mathcal O_S\\to K$ be a morphism in $D(\\mathcal O_S)$ [def-pc-derived-category]. Assume that for every point $s\\in S$ the map $\\kappa(s)=H^0(\\mathcal O_S\\otimes^{\\mathbf L}_{\\mathcal O_S}\\kappa(s))\\to H^0(K\\otimes^{\\mathbf L}_{\\mathcal O_S}\\kappa(s))$ induced by $u$ is an isomorphism and $H^i(K\\otimes^{\\mathbf L}_{\\mathcal O_S}\\kappa(s))=0$ for all $i<0$. Then $H^0(u):\\mathcal O_S\\to H^0(K)$ is an isomorphism, and Zariski-locally on $S$ there is a decomposition $K\\cong\\mathcal O_S\\oplus P$ in $D(\\mathcal O_S)$, where $P$ is perfect of Tor-amplitude in $[1,\\infty)$ [lem-pc-tor-amplitude-qcoh-test].",
+ "statement": "Let $S$ be a scheme, let $K$ be a perfect object of $D_{\\mathrm{QCoh}}(\\mathcal O_S)$ [def-pc-derived-category, def-pc-perfect-complex], and let $u:\\mathcal O_S\\to K$ be a morphism in $D(\\mathcal O_S)$. Assume that for every point $s\\in S$ the map $\\kappa(s)=H^0(\\mathcal O_S\\otimes^{\\mathbf L}_{\\mathcal O_S}\\kappa(s))\\to H^0(K\\otimes^{\\mathbf L}_{\\mathcal O_S}\\kappa(s))$ induced by $u$ is an isomorphism and $H^i(K\\otimes^{\\mathbf L}_{\\mathcal O_S}\\kappa(s))=0$ for all $i<0$. Then $H^0(u):\\mathcal O_S\\to H^0(K)$ is an isomorphism, and Zariski-locally on $S$ there is a decomposition $K\\cong\\mathcal O_S\\oplus P$ in $D(\\mathcal O_S)$, where $P$ is perfect of Tor-amplitude in $[1,\\infty)$ [lem-pc-tor-amplitude-qcoh-test].",
  "source": {
   "document": "Stacks Project",
   "place": "Tag 0E62, proof of lemma-proper-flat-h0"
@@ -22,12 +22,69 @@
  "stmt_deps": [
   "def-pc-perfect-complex",
   "def-pc-derived-category",
-  "def-pc-derived-pullback",
   "lem-pc-tor-amplitude-qcoh-test"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Fix $s\\in S$. By [lem-sc-perfect-finite-free-residue-model] there is an affine open neighbourhood $U$ of $s$ on which $K$ is represented by a bounded complex of finite free modules whose term in degree $i$ has rank $d_i=\\dim_{\\kappa(s)}H^i(K\\otimes^{\\mathbf L}\\kappa(s))$; by hypothesis $d_i=0$ for $i<0$. A bounded complex of flat modules sitting in degrees $\\ge0$ computes $K|_U\\otimes^{\\mathbf L}\\mathcal G$ termwise, so it has no cohomology in negative degrees for every $\\mathcal O_U$-module $\\mathcal G$. As cohomology sheaves are local, $K$ has Tor-amplitude in $[0,\\infty)$ on $S$; in particular $H^i(K)=0$ for $i<0$.",
+   "uses": [
+    "lem-sc-perfect-finite-free-residue-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 0E62, proof of lemma-proper-flat-h0, sentence 'This first implies that E has tor amplitude in [0, infinity)'"
+   }
+  },
+  {
+   "text": "Since $H^i(K)=0$ for $i<0$ we have $\\tau_{\\le0}K=H^0(K)[0]$, and $u$ factors as $\\mathcal O_S\\xrightarrow{H^0(u)}H^0(K)\\to K$. By naturality, for $s\\in S$ the fibre map $\\kappa(s)\\to H^0(K\\otimes^{\\mathbf L}\\kappa(s))$ is the composite $\\mathcal O_S\\otimes\\kappa(s)\\to H^0(K)\\otimes\\kappa(s)\\to H^0(K\\otimes^{\\mathbf L}\\kappa(s))$; as it is an isomorphism, the second map is surjective. Applying [lem-sc-perfect-cut-complex-degree-zero] (its Tor-amplitude hypothesis is step 1) gives an open neighbourhood $U$ of $s$ and $K|_U\\cong H^0(K)|_U\\oplus P$ with $P$ perfect of Tor-amplitude in $[1,\\infty)$.",
+   "uses": [
+    "lem-sc-perfect-cut-complex-degree-zero"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 0E62, proof of lemma-proper-flat-h0, application of More on Algebra, Lemma better-cut-complex-in-two"
+   }
+  },
+  {
+   "text": "On $U$ as in step 2, $M=H^0(K)|_U$ is a direct summand of $K|_U$, hence perfect by [lem-pc-perfect-summand], and of Tor-amplitude in $[0,\\infty)$ by step 1; since $H^i(M\\otimes^{\\mathbf L}\\mathcal G)=\\mathcal Tor_{-i}(M,\\mathcal G)$ vanishes for $i<0$, $M$ is flat. On an affine open $V=\\operatorname{Spec}A\\subset U$, [lem-pc-perfect-affine-bounded-projective] represents $M|_V$ by a bounded complex $P^\\bullet$ of finite projective $A$-modules with cohomology only in degree $0$; exactness in degrees $\\ge1$ splits $P^{\\ge0}$ from the top, so $Z^0=\\ker(P^0\\to P^1)$ is a direct summand of $P^0$, and $M(V)=\\operatorname{coker}(P^{-1}\\to Z^0)$ is finitely presented. By [lem-weil-pbc-finitely-presented-flat-module-projective] it is finite projective, so $H^0(K)$ is finite locally free on $S$.",
+   "uses": [
+    "lem-pc-perfect-summand",
+    "lem-pc-perfect-affine-bounded-projective",
+    "lem-weil-pbc-finitely-presented-flat-module-projective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 0E62, proof of lemma-proper-flat-h0, paragraph 'Since E has tor amplitude in [0, infinity) ... finite locally free'"
+   }
+  },
+  {
+   "text": "On $U$ as in step 2, $K\\otimes^{\\mathbf L}\\kappa(s)\\cong(H^0(K)\\otimes\\kappa(s))\\oplus(P\\otimes^{\\mathbf L}\\kappa(s))$ because $H^0(K)$ is flat (step 3), and $P\\otimes^{\\mathbf L}\\kappa(s)$ has no cohomology in degrees $\\le0$; so $H^0(K)\\otimes\\kappa(s)\\to H^0(K\\otimes^{\\mathbf L}\\kappa(s))$ is an isomorphism, and by the factorization of step 2 so is $H^0(u)\\otimes\\kappa(s):\\kappa(s)\\to H^0(K)\\otimes\\kappa(s)$, for every $s\\in S$. Both $\\mathcal O_S$ and $H^0(K)$ are finite locally free (step 3), so [lem-sc-finite-locally-free-residue-isomorphism] shows that $H^0(u)$ is an isomorphism. Substituting it into the splitting of step 2 gives $K|_U\\cong\\mathcal O_U\\oplus P$ with $P$ perfect of Tor-amplitude in $[1,\\infty)$.",
+   "uses": [
+    "lem-sc-finite-locally-free-residue-isomorphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 0E62, proof of lemma-proper-flat-h0, final paragraph"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-perfect-finite-free-residue-model",
+  "lem-sc-perfect-cut-complex-degree-zero",
+  "lem-pc-perfect-summand",
+  "lem-pc-perfect-affine-bounded-projective",
+  "lem-weil-pbc-finitely-presented-flat-module-projective",
+  "lem-sc-finite-locally-free-residue-isomorphism"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 0E62, proof of lemma-proper-flat-h0"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -59,12 +116,42 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sc-proper-flat-global-sections-criterion",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-abelian-varieties",
- "unit": "sk-prop-av-cube"
+ "unit": "sk-prop-av-cube",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-sc-perfect-degree-zero-fibre-criterion",
+  "summary": "Split Tag 0E62 into the local cut-complex statement and the residue-field isomorphism criterion; the item proof follows the source's four reductions and records all cited dependencies.",
+  "blueprint": "Realizes the theorem-of-the-cube proof clause using the perfect-complex degree-zero fibre criterion.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-tor-amplitude-qcoh-test",
+    "why": "Generic Tor-amplitude testing is needed to turn residue-field vanishing into nonnegative amplitude; the cube unit has no replacement for this derived-category tool."
+   },
+   {
+    "node": "lem-pc-perfect-affine-bounded-projective",
+    "why": "The affine finite-projective model for a perfect complex is needed for the local finite-flat calculation; the cube unit has no replacement for this generic perfect-complex tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-perfect-summand",
+  "lem-weil-pbc-finitely-presented-flat-module-projective",
+  "lem-pc-tor-amplitude-qcoh-test",
+  "lem-pc-perfect-affine-bounded-projective"
+ ],
+ "reviewed": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-dzf0012",
+  "group": "J1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-dzf0012 (reviewer sub-agent of L); spot-checked: Item statement vs Tag 0E62 (D_QCoh context, conclusions true); citer lem-sc-proper-flat-global-sections-criterion uses only the H^0(u) clause, matching. New nodes: cut-complex (Tag 0A1U, true with Tor-amp [0,inf)), residue-iso (Tag 00O0(3); one LeanFinder query recorded, no sheaf-level match); no duplicates (lem-sc-perfect-finite-free-residue-model is a different lemma, now cited). FIX more, RETURN less: (1) C4 step 1: lem-pc-tor-amplitude-qcoh-test needs vanishing for all quasi-coherent F, not just residue fields; replaced by the existing lem-sc-perfect-finite-free-residue-model (Tag 0BCD), giving a finite free model in degrees >=0 locally. (2) C1/C4 step 3: flatness of H^0(K) and finite presentation do not follow from Tor-amp of K or from K's projective model (H^0 of a finite projective complex need not be finitely presented, nor flat, e.g. Ann(x) over k[x,y]/(xy)); now argued on the summand H^0(K)|_U via lem-pc-perfect-summand and the affine model of H^0(K) itself. (3) E step 4: 'fibre iso by hypothesis' was a gap; added that H^0(K)⊗κ(s)→H^0(K⊗^Lκ(s)) is an iso from the splitting and flatness, and step 2's factorization of the fibre map through H^0(u). Tool uses added: lem-pc-perfect-summand, lem-weil-pbc-finitely-presented-flat-module-projective (generic module/perfect facts).; 2 file(s) fixed by the reviewer"
+ }
 }
