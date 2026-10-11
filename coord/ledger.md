@@ -3690,3 +3690,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 07:47 L: merged deliver/H1/lem-sc-dual-number-scheme-pushout (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.DualNumberSchemePushout AlgebraicGeometry.existsUnique_dualNumberScheme_extension; new nodes: def-sc-trivial-square-zero-extension)
 - 07:47 L: merged deliver/H1/lem-sc-etale-local-ring-faithfully-flat-descent (stage 2; reviewer PASS; first push; Sheaf.RingTheory.IsEtaleAtFieldExtensionDescent Algebra.IsEtaleAt.of_fieldExtension)
 - 07:47 L: merged deliver/K1/lem-sc-cone-pseudo-coherent (stage 2; reviewer FIX; first push; Sheaf.RingTheory.ConePseudoCoherent CategoryTheory.isMPseudoCoherent_cone)
+- 07:47 L: merged deliver/J1/lem-sc-etale-fibre-product-coproduct (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.EtaleFibreProductCoproduct AlgebraicGeometry.etale_fibre_product_coproduct)
