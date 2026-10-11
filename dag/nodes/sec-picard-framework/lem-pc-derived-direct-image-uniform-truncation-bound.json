@@ -174,5 +174,23 @@
   "group": "M1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-utb1842 (reviewer sub-agent of L); spot-checked: No cycle: item cites none of preserves-qcoh/preserves-direct-sums/qcoh-acyclic-derived-pushforward-cohomology; the uniform Cech bound comes from lem-pc-finite-support-hi (01XJ), whose proof_deps are lem-pc-affine-vanishing and lem-pc-cech-computes. Steps 1-4 checked against 08D5(2)/08D4(3): base change to f^{-1}U, Leray clause (2) hypotheses on affine U, K-injective restriction, affine-basis sheafification, index n>=N-q in step 4. New nodes: 08D4 bound matches Stacks; derived-sections comparison is unbounded, not a duplicate of lem-weil-pbc-module-pushforward-injectives-sections-quasi-iso (bounded below). FIX more, RETURN less: B3 in lem-pc-unbounded-derived-functor-cohomological-bound, the free variable b is now introduced as an integer.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.DerivedDirectImageUniformTruncationBound",
+  "declaration": "AlgebraicGeometry.exists_schemeDerivedDirectImage_uniform_truncation_bound",
+  "file": "lean/Sheaf/AlgebraicGeometry/DerivedDirectImageUniformTruncationBound.lean",
+  "statement": "theorem exists_schemeDerivedDirectImage_uniform_truncation_bound {X S : Scheme.{u}} [HasDerivedCategory.{wX} (SheafOfModules.{u} (moduleRings X.toRingedSpace))] [HasDerivedCategory.{wS} (SheafOfModules.{u} (moduleRings S.toRingedSpace))] (f : X ⟶ S) [QuasiCompact f] [QuasiSeparated f] [CompactSpace S] : (∃ N : ℤ, 0 < N ∧ ∀ E : schemeDerivedQCohCategory X, (∀ m : ℤ, 0 < m → IsZero ((DerivedCategory.homologyFunctor (SheafOfModules.{u} (moduleRings X.toRingedSpace)) m).obj E.obj)) → ∀ m : ℤ, N ≤ m → IsZero ((schemeHigherDirectImage f m).obj E.obj)) ∧ (∀ (E : schemeDerivedQCohCategory X) (q : ℤ), ∃ n₀ : ℤ, ∀ n : ℤ, n₀ ≤ n → IsIso ((schemeHigherDirectImage f q).map ((DerivedCategory.TStructure.t.truncGEπ (-n)).app E.obj)))",
+  "branch": "sheaf-dag",
+  "by": "V1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "V1",
+  "result": "pass",
+  "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
  }
 }
