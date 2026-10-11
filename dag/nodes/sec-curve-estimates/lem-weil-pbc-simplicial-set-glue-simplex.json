@@ -144,5 +144,24 @@
   "group": "F1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of F1; spot-checked by L: L: reviewed in full by a reviewer sub-agent (PASS): 018R read, 4 steps checked, new Mathlib leaf lines 114/217/225/233 verified, small cases tested"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicTopology.GlueSimplex",
+  "declaration": "SSet.glue_simplex",
+  "file": "lean/Sheaf/AlgebraicTopology/GlueSimplex.lean",
+  "statement": "theorem glue_simplex {X : SSet.{u}} (U V : X.Subcomplex) (hUV : U ≤ V) {n : ℕ} (x : (V.toSSet).obj (Opposite.op (SimplexCategory.mk n))) (hx : x.1 ∉ U.obj (Opposite.op (SimplexCategory.mk n))) (hbelow : ∀ i : ℕ, i < n → V.obj (Opposite.op (SimplexCategory.mk i)) = U.obj (Opposite.op (SimplexCategory.mk i))) (hat : V.obj (Opposite.op (SimplexCategory.mk n)) = U.obj (Opposite.op (SimplexCategory.mk n)) ∪ {x.1}) (habove : ∀ j : ℕ, n < j → ∀ z : (V.toSSet).obj (Opposite.op (SimplexCategory.mk j)), z.1 ∉ U.obj (Opposite.op (SimplexCategory.mk j)) → z ∈ (V.toSSet).degenerate j) : ∃ b : (SSet.boundary n).toSSet ⟶ U.toSSet, b ≫ Subcomplex.homOfLE hUV = (SSet.boundary n).ι ≫ SSet.yonedaEquiv.symm x ∧ IsPushout b (SSet.boundary n).ι (Subcomplex.homOfLE hUV) (SSet.yonedaEquiv.symm x)",
+  "branch": "sheaf-dag",
+  "by": "J1",
+  "date": "2026-10-11",
+  "existing": false,
+  "note": ""
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "J1",
+  "result": "pass",
+  "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
  }
 }
