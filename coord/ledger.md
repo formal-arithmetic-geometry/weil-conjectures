@@ -3719,3 +3719,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 07:54 L: merged deliver/K1/lem-sc-finite-cohomology (stage 2; reviewer PASS; first push; Sheaf.RingTheory.FiniteHomologyOfMPseudoCoherent DerivedCategory.finite_homology_of_isMPseudoCoherent; statement corrected (3 citers))
 - 07:54 L: merged deliver/J1/lem-sc-filtered-colimit-prime-chain-dimension (stage 2; reviewer FIX; first push; Sheaf.RingTheory.FilteredColimitPrimeChainDimension CommRingCat.filteredColimit_prime_chain_and_dimension)
 - 07:55 L: merged deliver/K1/lem-pur-kinjective-surjection-bounded-size (stage 2; reviewer FIX; first push; Sheaf.CategoryTheory.BoundedSubobjectSurjection CategoryTheory.exists_subobject_surjecting_bounded_size)
+- 07:55 L: returned deliver/G1/def-weil-pbc-finite-torsors (reviewer RETURN: Reviewer R-ftr1046, head b443ddb19. H4 (a second definition of a notion): the node's M-torsors on Y_et and Tor^1(Y,M) ex)
