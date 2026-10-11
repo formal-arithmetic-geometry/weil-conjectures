@@ -3647,3 +3647,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 07:33 L: merged deliver/J1/lem-pc-fppf-affine-sheafification-restriction (stage 2; reviewer FIX; first push; Sheaf.AlgebraicGeometry.FppfAffineSheafificationRestriction AlgebraicGeometry.Scheme.fppfSheafification_affineRestriction)
 - 07:33 L: merged deliver/K1/lem-sc-affine-cap-section-open-algebra (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.AffineCapSectionOpenAlgebra AlgebraicGeometry.affine_cap_section_open_algebra)
 - 07:33 L: returned deliver/C1/lem-pc-skyscraper-complex (reviewer RETURN: Reviewer R-skc0933, head ec76561b1. The item's statement is RIGHT clause by clause (arbitrary ringed space, x, Z-graded )
+- 07:33 L: merged deliver/F1/lem-galois-fpqc-pullback-canonical-iso (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.DescentPullbackCanonicalIso AlgebraicGeometry.descent_pullback_canonical_iso)
