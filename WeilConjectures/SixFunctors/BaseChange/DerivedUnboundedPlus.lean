@@ -92,18 +92,59 @@ lemma mateEquiv_app_of_restrict (adj₁ : L₁ ⊣ R₁) (adj₂ : L₂ ⊣ R₂
   have hη := adj₂.unit.naturality (eG.inv.app (R₁'.obj Y) ≫ G.map (c₁R.inv.app Y))
   have hαn := α.natTrans.naturality (c₁R.inv.app Y)
   dsimp at hη hαn
-  simp only [Functor.map_comp, assoc, Iso.hom_inv_id_app_assoc, Iso.hom_inv_id_app,
-    comp_id] at hη ⊢
+  simp only [Functor.map_comp, assoc, Iso.hom_inv_id_app_assoc] at hη ⊢
   rw [reassoc_of% hη]
   congr 1
-  simp only [← Functor.map_comp_assoc, ← Functor.map_comp]
+  simp only [← Functor.map_comp_assoc]
   congr 2
   simp only [Functor.map_comp, assoc, Iso.hom_inv_id_app_assoc, Functor.comp_obj]
   rw [← Functor.map_comp_assoc (H) (c₁L.hom.app _), Iso.hom_inv_id_app, Functor.map_id,
     id_comp, reassoc_of% hαn]
-  trace_state
-  sorry
+  rfl
 
 end Restrict
 
 end CategoryTheory
+
+namespace AlgebraicGeometry
+
+open Scheme DerivedCategory.Plus
+
+open scoped CategoryTheory.Functor
+
+namespace Etale
+
+variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
+  [MonoidalCategory A] [MonoidalPreadditive A] [SymmetricCategory A] [MonoidalClosed A]
+  [Abelian.HasFunctorialFlatResolution A]
+
+/-- The composition isomorphism of the bounded below pullbacks
+`AlgebraicGeometry.Etale.upperStarCompDerivedPlus` is the restriction of the composition
+isomorphism `AlgebraicGeometry.Etale.leftDerivedUpperStarComp` of the unbounded derived
+pullbacks, modulo the identifications `Lh^* ≅ D(h^*)`. -/
+lemma ι_map_upperStarCompDerivedPlus_hom_app {T S R : Scheme.{u}} (h₁ : T ⟶ S)
+    (h₂ : S ⟶ R) (h₁₂ : T ⟶ R) (hh₁₂ : h₁₂ = h₁ ≫ h₂)
+    (K : DerivedCategory.Plus (Sheaf R.smallEtaleTopology A)) :
+    ι.map ((upperStarCompDerivedPlus A h₁ h₂ h₁₂ hh₁₂).hom.app K) =
+      (leftDerivedUpperStarIsoMapDerivedCategory A h₁₂).inv.app (ι.obj K) ≫
+        (leftDerivedUpperStarComp A h₁ h₂ h₁₂ hh₁₂).hom.app (ι.obj K) ≫
+        (L((h₁)^*[A])).map
+          ((leftDerivedUpperStarIsoMapDerivedCategory A h₂).hom.app (ι.obj K)) ≫
+        (leftDerivedUpperStarIsoMapDerivedCategory A h₁).hom.app
+          ((D((h₂)^*[A])).obj (ι.obj K)) := by
+  simp only [Etale.upperStarCompDerivedPlus, Iso.trans_hom, NatTrans.comp_app, Functor.map_comp,
+    Functor.ι_map_mapDerivedCategoryPlusNatIso_hom_app,
+    Functor.ι_map_mapDerivedCategoryPlusCompIso_hom_app, Etale.leftDerivedUpperStarComp,
+    Functor.leftDerivedFunctorNatIso, Functor.leftDerivedFunctorCompIso,
+    Etale.leftDerivedUpperStarIsoMapDerivedCategory, Iso.symm_hom, Functor.isoWhiskerRight_hom,
+    Functor.isoWhiskerLeft_hom, Functor.whiskerRight_app, Functor.whiskerLeft_app, assoc,
+    Iso.inv_hom_id_app_assoc]
+  have h := ((h₁)^*[A]).leftDerivedFunctorIsoMapDerivedCategory.inv.naturality
+    (((h₂)^*[A]).leftDerivedFunctorIsoMapDerivedCategory.hom.app (ι.obj K))
+  rw [← reassoc_of% h, ← Functor.map_comp_assoc, Iso.inv_hom_id_app, CategoryTheory.Functor.map_id,
+    id_comp, Iso.inv_hom_id_app]
+  erw [Category.comp_id]
+
+end Etale
+
+end AlgebraicGeometry
