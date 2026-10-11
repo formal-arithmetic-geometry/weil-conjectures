@@ -197,5 +197,23 @@
   "item": "lem-weil-pbc-torsion-module-flat-base-change-iso",
   "worker": "stage1",
   "summary": "Read More on Algebra 05E7, 05E9 and 05EC (tags verified in stacks-project/tags/tags: 05E7 lemma-characterize-flatness-on-torsion, 05E9 lemma-neighbourhood-isomorphism, 05EC lemma-neighbourhood-equivalence; 05E8 is not cited by 05E9). Not a Mathlib leaf (LeanSearch, LeanFinder, Loogle, grep; nothing on I-power torsion modules under base change). Proof follows 05E9 (2)=>(1) in four steps: set-up and naturality of x -> x(x)1; the case IM = 0 with the identification M(x)_R S = M (written as an explicit inverse r(x(x)s) = psi^{-1}(s mod IS)x); induction P(n) => P(n+1) with 0 -> I^nM -> M -> M/I^nM -> 0, flatness, right exactness and the short five lemma; the general case as the colimit of the T_n = T[I^n] with tensor products commuting with colimits, the inverse built from the two colimit properties. Only flatness and R/I = S/IS are used; the faithful flatness of the 05E7 standing hypothesis is not needed. Statement kept; both citers (formal-glueing-isogeny step 5, formal-glueing-complex-exact step 6) use only bijectivity of x -> x(x)1, which is what the statement gives. No new nodes; lem-weil-pbc-short-five-lemma (unit sk-thm-properbasechange) is a Mathlib leaf used as a tool."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.TorsionModuleFlatBaseChangeIso",
+  "declaration": "RingTheory.torsionModule_flat_baseChange_bijective",
+  "statement": "theorem torsionModule_flat_baseChange_bijective {R S T : Type*} [CommRing R] [CommRing S] [AddCommGroup T] [Module R T] (φ : R →+* S) (hflat : RingHom.Flat φ) (I : Ideal R) (hiso : ∃ e : (R ⧸ I) ≃+* (S ⧸ I.map φ), ∀ r : R, e (Ideal.Quotient.mk I r) = Ideal.Quotient.mk (I.map φ) (φ r)) : (∀ x : T, ∃ n : ℕ, 0 < n ∧ ∀ y : R, y ∈ I ^ n → y • x = 0) → Function.Bijective (fun x : T => @TensorProduct.mk R _ T S _ _ _ (Module.compHom S φ) x 1)",
+  "by": "P1",
+  "date": "2026-10-11",
+  "file": "lean/Sheaf/Paper/TorsionModuleFlatBaseChangeIso.lean",
+  "branch": "sheaf-dag",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "P1",
+  "result": "pass",
+  "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
  }
 }
