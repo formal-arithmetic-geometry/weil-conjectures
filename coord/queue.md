@@ -1,15 +1,14 @@
 # Work queue
 
-804 items; claim with `tools/claim.py next <group> [--stage N]`.
+799 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (804)
+## Stage 2: nodes to state (799)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
-| `def-pod-l-adic-representations` | 1 | state |
 | `def-pod-lisse-l-adic-sheaves` | 1 | state |
 | `def-sc-constant-sheaves` | 1 | state |
 | `def-sp-truncation-couple` | 1 | state |
@@ -34,7 +33,6 @@
 | `lem-sp-shift-identification` | 1 | state |
 | `lem-weil-derived-limit-roos-complex` | 1 | state |
 | `lem-weil-pbc-charpoly-locally-free-direct-sum` | 1 | state |
-| `lem-weil-pbc-colimit-category-fp-algebras` | 1 | state |
 | `lem-weil-pbc-complex-spectral-sequence-comparison` | 1 | state |
 | `lem-weil-pbc-constant-sheaf-set-sections-connected-natural` | 1 | state |
 | `lem-weil-pbc-cotangent-complex-symmetric-algebra` | 1 | state |
@@ -42,10 +40,7 @@
 | `lem-weil-pbc-criterion-flatness-fibre-noetherian` | 1 | state |
 | `lem-weil-pbc-curve-assertions-finite-pushforward` | 1 | state |
 | `lem-weil-pbc-cyclic-extension-cocycle` | 1 | state |
-| `lem-weil-pbc-depth-ext` | 1 | state |
 | `lem-weil-pbc-depth-in-ses` | 1 | state |
-| `lem-weil-pbc-depth-le-dim-associated-prime` | 1 | state |
-| `lem-weil-pbc-depth-le-support-dimension` | 1 | state |
 | `lem-weil-pbc-depth-over-quotient-ring` | 1 | state |
 | `lem-weil-pbc-derivation-extends-finite-type-extension` | 1 | state |
 | `lem-weil-pbc-derived-adjunction-commshift` | 1 | state |
