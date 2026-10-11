@@ -253,10 +253,11 @@ theorem bijective_toDescentData_map_of [Module.FaithfullyFlat A B]
         ConcreteCategory.id_apply] at e2
       generalize ψ₀.app ⊤ (pullbackΓ f M m) = x at e2 ⊢
       obtain ⟨t, rfl⟩ := eN.surjective x
-      rw [pullbackCompOfEq_hom_app_top_linearEquiv Algebra.TensorProduct.includeLeft N h₁ hp₁ eN heN
-          eq heq,
-        pullbackCompOfEq_hom_app_top_linearEquiv Algebra.TensorProduct.includeRight N h₂ hp₂ eN heN
-          eq heq] at e2
+      -- The ascriptions select the algebra instance of `eq`, avoiding a slow unification.
+      rw [pullbackCompOfEq_hom_app_top_linearEquiv
+          (Algebra.TensorProduct.includeLeft : B →ₐ[A] B ⊗[A] B) N h₁ hp₁ eN heN eq heq,
+        pullbackCompOfEq_hom_app_top_linearEquiv
+          (Algebra.TensorProduct.includeRight : B →ₐ[A] B ⊗[A] B) N h₂ hp₂ eN heN eq heq] at e2
       obtain ⟨n, rfl⟩ := Module.FaithfullyFlat.exists_eq_one_tmul_of_rTensor_eq t
         (eq.injective e2)
       exact ⟨n, heN n⟩
