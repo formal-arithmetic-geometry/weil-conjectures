@@ -146,5 +146,23 @@
   "group": "M1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-udb2006 (reviewer sub-agent of L); spot-checked: Checked steps against Stacks 08D4 (2)-(3), 08D3, 07KY; bound direction (H^i(E)=0 for i>b => H^i(RF E)=0 for i>=b+N) matches citing node lem-pc-derived-direct-image-uniform-truncation-bound; truncation triangle/standard truncation cited via def-sbc-standard-tstructure and the stabilization node, not assumed; Milnor node not a duplicate of prop-weil-pbc-roos-triangle (pro-etale towers) or lem-weil-pbc-mittag-leffler (finite groups); grep of Mathlib for Milnor/lim1: verdict no match. FIX more, RETURN less: (1) D2 missed by the second reading: lem-pc-derived-functor-truncation-stabilization's 'Consequently'/'In particular' clauses restated Steps 1-4 and the item itself; trimmed it to the transition-isomorphism claim, now stated for all integers n (needed to reach tau_{>=b+1}E=0). (2) B3: that node referred to 'F as in [lem-pc-qcoh-truncation-derived-limit]' with X undefined; made self-contained, stmt_deps updated. (3) Steps 4-5 rewritten: Step 4 elementary Mittag-Leffler (Tag 07KW) giving H^i(RF E)=H^i(RF E_m), m>=max(0,N-i-1); Step 5 chains the stabilization isomorphisms from E_m down to E_{-b-1}=tau_{>=b+1}E=0.; 2 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.UnboundedDerivedFunctorCohomologicalBound",
+  "declaration": "AlgebraicGeometry.isZero_homology_rightDerivedFunctor_of_cohomological_bound",
+  "file": "lean/Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.lean",
+  "statement": "theorem isZero_homology_rightDerivedFunctor_of_cohomological_bound (X : Scheme.{u}) [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))] [HasDerivedCategory.{w'} AddCommGrpCat.{u}] [Abelian.HasKInjectiveResolutions (SheafOfModules.{u} (moduleRings X.toRingedSpace))] [HasInjectiveResolutions (SheafOfModules.{u} (moduleRings X.toRingedSpace))] (F : SheafOfModules.{u} (moduleRings X.toRingedSpace) ⥤ AddCommGrpCat.{u}) [F.Additive] [PreservesLimitsOfShape (Discrete ℕ) F] (N : ℕ) (hN : ∀ (M : SheafOfModules.{u} (moduleRings X.toRingedSpace)), M.IsQuasicoherent → ∀ p : ℕ, N ≤ p → IsZero ((F.rightDerived p).obj M)) (b : ℤ) (E : schemeDerivedCategory X) (hE : schemeDerivedQCohProperty X E) (hb : ∀ i : ℤ, b < i → IsZero ((DerivedCategory.homologyFunctor (SheafOfModules.{u} (moduleRings X.toRingedSpace)) i).obj E)) : ∀ i : ℤ, b + (N : ℤ) - 1 < i → IsZero ((DerivedCategory.homologyFunctor AddCommGrpCat.{u} i).obj (F.rightDerivedFunctor.obj E))",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-udb1254",
+  "group": "F1",
+  "result": "pass",
+  "note": "X:Scheme.{u}; Mod(O_X)=SheafOfModules (moduleRings X.toRingedSpace) as landed siblings; F additive into AddCommGrpCat with PreservesLimitsOfShape (Discrete ℕ) F (countable products, as J1 QCohTruncationDerivedLimit); N:ℕ; hN all qcoh M, p≥N via Mathlib F.rightDerived p; E in D_QCoh via schemeDerivedQCohProperty; hb b<i homologyFunctor; conclusion b+N-1<i on F.rightDerivedFunctor.obj E; binders as stabilization node; no let/existentials; no hollow hyps"
  }
 }
