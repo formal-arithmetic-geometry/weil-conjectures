@@ -134,5 +134,23 @@
   "group": "J1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-fip (reviewer sub-agent of L); spot-checked: Source: Stacks Algebra Lemma 00UK (lemma-etale-makes-quasi-finite-finite, algebra.tex 40362-40420), whose proof says the finite-type fibre over the residue field is Noetherian and so has finitely many isolated closed points; the item (unchanged statement) asks the stronger finiteness of all primes with open singleton over a field k, hypotheses k field and A finite type, matching. Step 1 carried by lem-weil-pbc-finite-type-algebra-noetherian (Noetherian base, finite type map) with k Noetherian elementary from def-weil-pbc-noetherian-ring; step 2 by lem-weil-pbc-noetherian-finitely-many-minimal-primes; step 3 by part (i) of lem-weil-pbc-spec-localization-away-basic-open (basis of D(a)) giving D(f)={q}, then any prime p in q lies in D(f), so q is minimal; step 4 a subset of a finite set. proof_deps equal the union of uses; no new nodes, no tool uses; only split-owned fields changed (status, proof, proof_deps, proof_origin, split_report). No sorry-free slopmaster2 declaration states the item (grep for isolated/open-singleton finiteness). Small cases: A=k (one isolated minimal prime), k[x] (none), k x k (two), zero ring (empty). 14:45-14:46 UTC."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FiniteIsolatedPointsOfFiniteType",
+  "declaration": "AlgebraicGeometry.Spec.finite_setOf_isOpen_singleton_of_finiteType",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteIsolatedPointsOfFiniteType.lean",
+  "statement": "theorem Spec.finite_setOf_isOpen_singleton_of_finiteType (k : Type u) [Field k] (A : Type v) [CommRing A] [Algebra k A] [Algebra.FiniteType k A] : {q : Spec (CommRingCat.of A) | IsOpen ({q} : Set (Spec (CommRingCat.of A)))}.Finite",
+  "branch": "sheaf-dag",
+  "by": "G1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-fip1024",
+  "group": "G1",
+  "result": "pass",
+  "note": "k field=(k:Type u)[Field k]; A f.g. k-algebra=[CommRing A][Algebra k A][Algebra.FiniteType k A]; primes q=points of Spec (CommRingCat.of A) (stmt_dep decl); {q} open=IsOpen ({q}:Set _) (J1 spelling); finite=Set.Finite; no Mathlib exact lemma (QuasiFinite/Jacobson only); edge cases zero algebra, k[t], universes ok"
  }
 }
