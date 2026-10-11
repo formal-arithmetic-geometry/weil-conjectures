@@ -208,5 +208,23 @@
   "by": "L",
   "result": "pass",
   "note": "six steps (Noetherian setup; the counit surjective on stalks via the germ restriction and the named finite stalk formula; epimorphism by stalks; f^{-1}f_*F constructible along Stacks 095G with the closed pullback nodes; the kernel torsion; the sibling sub-quotient lemma); 2 new nodes, both closed by the Lean of Finite/Stalk.lean attached by the lead; the hypothesis f_*F torsion is redundant (kept)"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.Curve.FinitePushforwardConstructibleDescent",
+  "declaration": "AlgebraicGeometry.CurveCoefficientPair.isConstructible_of_finite_pushforward",
+  "file": "lean/Sheaf/AlgebraicGeometry/Curve/FinitePushforwardConstructibleDescent.lean",
+  "statement": "theorem CurveCoefficientPair.isConstructible_of_finite_pushforward {k : Type u} [Field k] [IsAlgClosed k] (P : CurveCoefficientPair k) {Y : Scheme.{u}} (g : Y ⟶ Spec (.of k)) [IsCurve g] (f : P.C ⟶ Y) [IsFinite f] (hf : f ≫ g = P.toSpec) (hT : Y.IsTorsionAbelianSheaf (Etale.lowerStar AddCommGrpCat.{u + 1} f |>.obj P.F)) : (CurveCoefficientPair.IsConstructible ({ C := Y toSpec := g isCurve := inferInstance F := (Etale.lowerStar AddCommGrpCat.{u + 1} f).obj P.F isTorsion := hT } : CurveCoefficientPair k)) → P.IsConstructible",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-fpc1141",
+  "group": "C1",
+  "result": "pass",
+  "note": "k alg closed; X = P (curve pair, IsCurve = separated+finite type+dim<=1); Y via g [IsCurve g]; f [IsFinite f] with hf k-compatibility; f_*F = Etale.lowerStar AddCommGrpCat.{u+1} f (recorded); torsion hT explicit as node states; antecedent/consequent the recorded CurveCoefficientPair.IsConstructible; same as landed forward sibling FinitePushforwardAssertions spelling; single universe u"
  }
 }
