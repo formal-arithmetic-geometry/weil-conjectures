@@ -13,7 +13,7 @@
  },
  "kind": "statement",
  "title": "Zero locus of a section over a valuation base is relative Cartier",
- "statement": "Let A be a valuation ring, let f:X\\to\\operatorname{Spec}(A) be proper, flat, and of finite presentation [def-weil-scheme-morphism-properties], let X_0 be the integral closed fibre [def-pc-integral-scheme], let L be an invertible module on X [def-sc-invertible-module], and let s be a global section of L whose restriction to X_0 is nonzero. Then the zero scheme Z(s) [def-pc-zero-scheme] is a relative effective Cartier divisor on X over \\operatorname{Spec}(A) [def-pc-relative-effective-cartier], hence Z(s)\\to\\operatorname{Spec}(A) is flat.",
+ "statement": "Let A be a valuation ring, let f:X\\to\\operatorname{Spec}(A) be proper, flat, and of finite presentation [def-weil-scheme-morphism-properties], let x_0 be a closed point of \\operatorname{Spec}(A), and let X_0 be the fibre over x_0, assumed integral [def-pc-integral-scheme]. Let L be an invertible module on X [def-sc-invertible-module], and let s be a global section of L whose restriction to X_0 is nonzero. Then the zero scheme Z(s) [def-pc-zero-scheme] is a relative effective Cartier divisor on X over \\operatorname{Spec}(A) [def-pc-relative-effective-cartier], hence Z(s)\\to\\operatorname{Spec}(A) is flat.",
  "source": {
   "document": "literature/stacks-project/more-on-morphisms.tex",
   "place": "More on Morphisms, Lemma lemma-triviality-generic-fibre-valuation-ring, Tag 0EX8, proof paragraph invoking Divisors Lemma fibre-Cartier"
@@ -133,5 +133,42 @@
   "group": "J1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-zsc0027 (reviewer sub-agent of L); spot-checked: Checked step 1 against Tag 0EX8 final paragraph and Tag 062Y(3); new node lem-pc-recd-fibre-cartier-local is the local part (3), not a duplicate of lem-pc-recd-locally-principal (all-fibres) nor of lem-pc-zero-scheme-recd/lem-pc-cartier-criterion; citer 03198bf1b uses exactly this statement; tool_uses accepted (generic zero-scheme and integral-Cartier facts). FIX more, RETURN less: (E/C4) step 1 said the image of x is the generic point - false, f(x) is any point; rewritten: f(closure x) is closed nonempty so contains the closed point of local Spec(A). (C1, elementary) added Z(s)_0 = Z(s|_{X_0}) via the affine description in lem-pc-zero-scheme-properties(1), needed to apply lem-pc-nonzero-section-integral-cartier to the fibre. (D) made explicit that y in Z(s), x in U_y since x specializes to y, and that the U_y with X minus Z(s) cover X so the local conclusions glue.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ValuationZeroSectionRelativeCartier",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.valuation_zero_section_relative_cartier",
+  "file": "lean/Sheaf/AlgebraicGeometry/ValuationZeroSectionRelativeCartier.lean",
+  "statement": "theorem valuation_zero_section_relative_cartier (A : Type u) [CommRing A] [IsDomain A] [ValuationRing A] (X : Scheme.{u}) (f : X ⟶ Spec (.of A)) [IsProper f] [Flat f] [LocallyOfFinitePresentation f] (x₀ : Spec (.of A)) (hx₀ : IsClosed ({x₀} : Set (Spec (.of A)))) [IsIntegral (f.fiber x₀)] (M : X.Modules) [M.IsInvertible] (s : Γ(M, ⊤)) (hs₀ : ((Classical.choose (exists_tensorPullbackAdjunction (f.fiberι x₀))).unit.app M).val.app (op ⊤) s ≠ 0) : Scheme.IdealSheafData.IsRelativeEffectiveCartier (Scheme.Modules.Hom.zeroLocus (Scheme.Modules.homOfGlobalSection M s)) f",
+  "branch": "sheaf-dag",
+  "by": "M1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-vzc1356"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-vzc1356",
+  "group": "M1",
+  "result": "fix",
+  "note": "valuation ring A (CommRing+IsDomain+ValuationRing); f proper+flat+LFP (=f.p. with proper's qcqs); x0 closed point; AlgebraicGeometry.IsIntegral (f.fiber x0) (#check); M IsInvertible; s : Γ(M,⊤); restriction to X0 via tensorPullback adjunction unit (was Mathlib pullbackΓ); conclusion IsRelativeEffectiveCartier (Hom.zeroLocus (homOfGlobalSection M s)) f, flatness by definition; corrected statement equivalent to source (local base: unique closed point); citer holds",
+  "statement_corrected": true
+ },
+ "statement_change": {
+  "date": "2026-10-11",
+  "by": "M1 stage 2",
+  "old_statement": "Let A be a valuation ring, let f:X\\to\\operatorname{Spec}(A) be proper, flat, and of finite presentation [def-weil-scheme-morphism-properties], let X_0 be the integral closed fibre [def-pc-integral-scheme], let L be an invertible module on X [def-sc-invertible-module], and let s be a global section of L whose restriction to X_0 is nonzero. Then the zero scheme Z(s) [def-pc-zero-scheme] is a relative effective Cartier divisor on X over \\operatorname{Spec}(A) [def-pc-relative-effective-cartier], hence Z(s)\\to\\operatorname{Spec}(A) is flat.",
+  "what": "The Lean signature introduced an arbitrary fibre section s₀ unrelated to the restriction of s, so hs₀ could hold even when the restriction of s vanishes; the corrected signature tests the canonical pullback restriction directly.",
+  "source": {
+   "document": "literature/stacks-project/more-on-morphisms.tex",
+   "place": "More on Morphisms, Lemma lemma-triviality-generic-fibre-valuation-ring, Tag 0EX8, proof paragraph invoking Divisors Lemma fibre-Cartier"
+  },
+  "citers": [
+   {
+    "id": "lem-sc-picard-locus-closed-valuation-triviality",
+    "holds": true,
+    "note": "Uses the lemma only for a global section whose closed-fibre restriction is nonzero, so the corrected hypothesis is exactly its use."
+   }
+  ]
  }
 }
