@@ -22,7 +22,9 @@
  },
  "stmt_deps": [
   "def-weil-abstract-derived-category",
-  "def-pc-kflat-complex"
+  "def-pc-kflat-complex",
+  "def-pc-module-kflat-complex",
+  "def-pc-mixed-total-tensor"
  ],
  "proof": [
   {
@@ -128,5 +130,23 @@
   "group": "J1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-bdt0223 (reviewer sub-agent of L); spot-checked: Read Tags 064K, 06Y6 and lemma-derived-tor-quasi-isomorphism-other-side; parent lem-pc-derived-tensor-localization-cohomology step 1 cites exactly the model, A'-action on cohomology (not a strict complex) and same-lemma-over-R_p clauses. Math: model correct (only K-flatness of F needed; P K-flat over A is not K-flat over R in general and is not used so). Checked R=A=R', zero complex. Nearby nodes lem-pc-kflat-derived-tensor-associator, lem-pc-derived-tensor-flat-second-localization do not restate the item; lem-pc-derived-tensor-action-naturality (existing, cites the item) overlaps the action clauses but adds the comparison-map clause. FIX more, RETURN less: dag/nodes/sec-picard-framework/lem-pc-balanced-derived-tensor-model.json steps 2-4: cited lem-pur-derived-change-of-rings states only -tensor_O O' along a ring map (N=A), not the derived tensor over R with a complex M of A-modules, its functoriality in R' or independence of F (C4, missed by the Second reading); added statement-only node lem-pc-derived-tensor-second-factor-functor (Tag 06Y6 with general N, 064L, functoriality in N; Mathlib grep recorded) and rewrote steps 2-4 from it (step 2: clause (2) with E=R', clause (3) for P to M, symmetry iso; step 3: functor on mu_b, naturality for a, elementary false; step 4: independence of F by (2), of P via step 2, functoriality by (3)); dropped tool use lem-pur-derived-change-of-rings; step 1 plain-text arrows to TeX (B4); proof_deps updated. Start 02:16 UTC, end 02:24 UTC.; 2 file(s) fixed by the reviewer; 1 statement node(s) added by the reviewer (FIX more, RETURN less)"
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.BalancedDerivedTensorModel",
+  "declaration": "DerivedCategory.exists_balancedDerivedTensorModel",
+  "file": "lean/Sheaf/Algebra/Homology/BalancedDerivedTensorModel.lean",
+  "statement": "theorem exists_balancedDerivedTensorModel : ∃ T : DerivedCategory (ModuleCat.{uB} A) ⥤ DerivedCategory (ModuleCat.{uB} R) ⥤ DerivedCategory (ModuleCat.{uB} A), ∃ α : ∀ M : CochainComplex (ModuleCat.{uB} A) ℤ, Q ⋙ T.obj (Q.obj M) ⟶ (B).obj M ⋙ Q, (∀ M, (T.obj (Q.obj M)).IsLeftDerivedFunctor (α M) (HomologicalComplex.quasiIso (ModuleCat.{uB} R) (.up ℤ))) ∧ (∀ M F, (HomologicalComplex.quasiIso (ModuleCat.{uB} R) (.up ℤ)).kFlat F → IsIso ((α M).app F)) ∧ (∀ (M N : CochainComplex (ModuleCat.{uB} A) ℤ) (g : M ⟶ N) (F : CochainComplex (ModuleCat.{uB} R) ℤ), (T.map (Q.map g)).app (Q.obj F) ≫ (α N).app F = (α M).app F ≫ Q.map (((B).map g).app F)) ∧ (∀ (M P : CochainComplex (ModuleCat.{uB} A) ℤ) (q : P ⟶ M), QuasiIso q → (HomologicalComplex.quasiIso (ModuleCat.{uB} A) (.up ℤ)).kFlat P → ∀ (F : CochainComplex (ModuleCat.{uB} R) ℤ) (f : F ⟶ E), QuasiIso f → (HomologicalComplex.quasiIso (ModuleCat.{uB} R) (.up ℤ)).kFlat F → ∃! e : Q.obj (((B).obj P).obj F) ≅ (T.obj (Q.obj M)).obj (Q.obj E), (α P).app F ≫ e.hom = (T.map (Q.map q)).app (Q.obj F) ≫ (T.obj (Q.obj M)).map (Q.map f)) ∧ (∀ M : CochainComplex (ModuleCat.{uB} A) ℤ, ∃ ρ : R' →+* End ((T.obj (Q.obj M)).obj (Q.obj E)), (∀ b : R', ρ b = (T.obj (Q.obj M)).map (Q.map ((S).map (ModuleCat.ofHom (LinearMap.mulLeft R b))))) ∧ (∀ (a : A) (b : R'), Commute (ρ b) ((T.map (Q.map (a • 𝟙 M))).app (Q.obj E))) ∧ ∀ i : ℤ, let H := homologyFunctor (ModuleCat.{uB} A) i ∃ m : Module (A ⊗[R] R') (H.obj ((T.obj (Q.obj M)).obj (Q.obj E))), ∀ (a : A) (b : R') (x : H.obj ((T.obj (Q.obj M)).obj (Q.obj E))), letI := m (a ⊗ₜ[R] b) • x = a • (H.map (ρ b)).hom x)",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-bdt0940",
+  "group": "E1",
+  "result": "fix",
+  "note": "Matched clause by clause: R,A,R' CommRing + Algebra R A/R R' (common universe uB, HasDerivedCategory wA/wR); K-flat resolution P->M over A (QuasiIso + source kFlat over ModuleCat A) and F->R'[0] over R; T bifunctor D(A)->D(R)->D(A) with alpha M left-derived of Tot(M (x)_R -) along Q_R, iso on K-flat F; unique e : Q Tot(P(x)_R F) = T(QM)(QE) fixed by both resolution maps; naturality in M; rho : R'->+* End via mulLeft, Commute with a.1_M, A(x)_R R'-module on every H^i with b=1 recovering A. New node def-pc-module-kflat-complex: existing true on slopmaster2 MorphismProperty.kFlat (source states HomotopyCategory.kFlat_iff_preserves_acyclic = 06XZ), no DAG node carries it; def-pc-mixed-total-tensor not in Mathlib/source (grep extendScalars/mixedTensor), map2CochainComplex = mapBifunctor. Fix: mixed-total-tensor statement now cites def-weil-pbc-module-tensor-product and def-weil-module-base-change. Edge: zero rings/complexes, unbounded."
  }
 }

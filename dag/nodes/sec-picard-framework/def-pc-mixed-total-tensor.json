@@ -1,0 +1,138 @@
+{
+ "id": "def-pc-mixed-total-tensor",
+ "kind": "definition",
+ "title": "Total tensor of A-module and R-module complexes",
+ "status": "split",
+ "statement": "Let $R\\to A$ be a homomorphism of commutative rings. For an $A$-module $M$ and an $R$-module $E$, use the $A$-module $M\\otimes_A(A\\otimes_R E)$, the tensor product of modules [def-weil-pbc-module-tensor-product] of $M$ with the base change $A\\otimes_R E$ of $E$ to $A$ [def-weil-module-base-change], canonically $M\\otimes_R E$, with $A$ acting through $M$. Applied to cochain complexes [def-weil-abstract-derived-category], this bifunctor gives the total tensor complex [def-pc-tensor-complex-sheaves] $B(M,E)=\\operatorname{Tot}(M\\otimes_R E)$ in $A$-modules: $B(M,E)^n=\\bigoplus_{p+q=n}M^p\\otimes_R E^q$ with differential $d_M\\otimes1+(-1)^p1\\otimes d_E$. It is functorial in both complexes.",
+ "stmt_deps": [
+  "def-weil-abstract-derived-category",
+  "def-pc-tensor-complex-sheaves",
+  "def-weil-pbc-module-tensor-product",
+  "def-weil-module-base-change"
+ ],
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Section 06Y5, construction before Lemma 06Y6"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "balanced derived tensor product of an A-module complex and an R-algebra computed by K-flat resolutions with commuting actions",
+   "results": "8 hits: HomologicalComplex.HasGoodTensor₁₂, HomologicalComplex.HasTensor, HomologicalComplex.instHasGoodTensor₁₂OfHasGoodTensor₁₂TensorX, HomologicalComplex.instHasGoodTensor₂₃OfHasGoodTensorTensor₂₃X, HomologicalComplex.HasGoodTensor₂₃, HomologicalComplex.tensorObj, HomologicalComplex.instHasTensorOfHasTensorX, HomologicalComplex.ιTensorObj",
+   "date": "2026-10-11",
+   "verdict": "ingredients only; no exact mixed tensor theorem or ring-specialized K-flat node"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.DerivedCategory, CochainComplex",
+   "results": "0 hits: ; loogle: unknown identifier 'CategoryTheory.DerivedCategory'",
+   "date": "2026-10-11",
+   "verdict": "ingredients only; no exact mixed tensor theorem or ring-specialized K-flat node"
+  },
+  {
+   "tool": "grep",
+   "query": "KFlat|balanced.*tensor",
+   "results": "0 hits: ",
+   "date": "2026-10-11",
+   "verdict": "ingredients only; no exact mixed tensor theorem or ring-specialized K-flat node"
+  },
+  {
+   "tool": "leansearch",
+   "query": "K-flat module complex tensor with every acyclic complex is acyclic",
+   "results": "Service unavailable: service unavailable: Internal Server Error",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "mixed total tensor product complex A modules R modules extension scalars",
+   "results": "8 hits: HomologicalComplex.tensorObj, HomologicalComplex.ιTensorObj, HomologicalComplex.HasTensor, HomologicalComplex.tensorHom, HomologicalComplex.HasGoodTensor₁₂, HomologicalComplex.instHasTensorOfHasTensorX, HomologicalComplex.HasGoodTensor₂₃, HomologicalComplex.instHasGoodTensor₂₃OfHasGoodTensorTensor₂₃X",
+   "date": "2026-10-11",
+   "verdict": "ingredients only; no exact mixed tensor theorem or ring-specialized K-flat node"
+  },
+  {
+   "tool": "grep",
+   "query": "mixedTensor|IsKFlat|KFlat|map₂CochainComplex",
+   "results": "6 hits: Mathlib/Algebra/Homology/Bifunctor.lean, Mathlib/Algebra/Homology/BifunctorShift.lean, Mathlib/Algebra/Homology/BifunctorShift.lean, Mathlib/Algebra/Homology/BifunctorShift.lean, Mathlib/Algebra/Homology/BifunctorShift.lean, Mathlib/Algebra/Homology/BifunctorShift.lean",
+   "date": "2026-10-11",
+   "verdict": "ingredients only; no exact mixed tensor theorem or ring-specialized K-flat node"
+  },
+  {
+   "tool": "grep",
+   "query": "rg mixedTensor|IsModuleKFlat|exists_balancedDerivedTensorModel in WeilConjectures, lean/Sheaf, dag/lean_names_upstream.json; rg KFlat in WeilConjectures/FromJoel/CategoryTheory/Abelian/Flat/KFlat.lean; rg -l K-flat dag/nodes/def*.json; blueprint_refs.py search K-flat complex of modules over a ring",
+   "results": "No exact specialized declaration/node. Existing generic CategoryTheory.MorphismProperty.kFlat and CochainComplex.kFlat_iff_preservesQuasiIso found and reused; existing sheaf-only CochainComplex.IsKFlat cannot take ModuleCat complexes. Existing generic mapBifunctor and ModuleCat.extendScalars found and reused.",
+   "date": "2026-10-11",
+   "verdict": "Reuse generic source K-flat predicate; introduce mixed coefficient total tensor specialization."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-pc-balanced-derived-tensor-model",
+  "date": "2026-10-11",
+  "group": "E1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-perfect-base-change",
+   "place": "choose K-flat module models and form their total tensor over R in the proof of Tag 0DJ8",
+   "via": [
+    "lem-pc-balanced-derived-tensor-model",
+    "lem-pc-derived-tensor-localization-cohomology",
+    "lem-pc-affine-derived-base-change-comparison-map",
+    "lem-pc-rf-single-complex-affine-base-change",
+    "lem-pc-rf-single-complex-qcqs-induction",
+    "lem-pc-rf-base-change-single-complex-criterion",
+    "lem-pc-rf-base-change-complex",
+    "lem-pc-proper-support-perfect-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.MixedTotalTensor",
+  "declaration": "ModuleCat.mixedTotalTensor",
+  "file": "lean/Sheaf/Algebra/Homology/MixedTotalTensor.lean",
+  "statement": "def mixedTotalTensor {R A : Type u} [CommRing R] [CommRing A] (f : R →+* A) : CochainComplex (ModuleCat.{u} A) ℤ ⥤ CochainComplex (ModuleCat.{u} R) ℤ ⥤ CochainComplex (ModuleCat.{u} A) ℤ",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-11",
+  "existing": false,
+  "declarations": [
+   "ModuleCat.mixedTensor",
+   "ModuleCat.mixedTensor_preservesZeroMorphisms",
+   "ModuleCat.mixedTensor_obj_preservesZeroMorphisms",
+   "ModuleCat.mixedTotalTensor"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-bdt0940",
+  "group": "E1",
+  "result": "fix",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-bdt0940",
+  "group": "E1",
+  "result": "fix",
+  "note": "Matched clause by clause: R,A,R' CommRing + Algebra R A/R R' (common universe uB, HasDerivedCategory wA/wR); K-flat resolution P->M over A (QuasiIso + source kFlat over ModuleCat A) and F->R'[0] over R; T bifunctor D(A)->D(R)->D(A) with alpha M left-derived of Tot(M (x)_R -) along Q_R, iso on K-flat F; unique e : Q Tot(P(x)_R F) = T(QM)(QE) fixed by both resolution maps; naturality in M; rho : R'->+* End via mulLeft, Commute with a.1_M, A(x)_R R'-module on every H^i with b=1 recovering A. New node def-pc-module-kflat-complex: existing true on slopmaster2 MorphismProperty.kFlat (source states HomotopyCategory.kFlat_iff_preserves_acyclic = 06XZ), no DAG node carries it; def-pc-mixed-total-tensor not in Mathlib/source (grep extendScalars/mixedTensor), map2CochainComplex = mapBifunctor. Fix: mixed-total-tensor statement now cites def-weil-pbc-module-tensor-product and def-weil-module-base-change. Edge: zero rings/complexes, unbounded."
+ }
+}
