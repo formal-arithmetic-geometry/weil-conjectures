@@ -160,7 +160,7 @@ lemma sectionsIso_hom (U : X.AffineZariskiSite) :
   rfl
 
 
-lemma _root_.AlgebraicGeometry.Scheme.Hom.appLE_eq_of_eq {X Y : Scheme.{u}} {f g : X ⟶ Y}
+lemma _root_.AlgebraicGeometry.Scheme.Hom.appLE_congr_hom {X Y : Scheme.{u}} {f g : X ⟶ Y}
     (h : f = g) (U : Y.Opens) (V : X.Opens) (e : V ≤ f ⁻¹ᵁ U) (e' : V ≤ g ⁻¹ᵁ U) :
     f.appLE U V e = g.appLE U V e' := by
   subst h; rfl
@@ -175,7 +175,7 @@ lemma sectionsIso_hom_naturality {U V : X.AffineZariskiSite} (i : V ⟶ U) :
   have hw : Spec.map (F.map i.op) ≫ colimit.ι (relativeGluingData H).functor U =
       colimit.ι (relativeGluingData H).functor V := colimit.w (relativeGluingData H).functor i
   rw [sectionsIso_hom, sectionsIso_hom, Scheme.Hom.map_appLE_assoc,
-    Scheme.Hom.appLE_eq_of_eq hw.symm _ _ _ (by
+    Scheme.Hom.appLE_congr_hom hw.symm _ _ _ (by
       rw [hw]
       exact (top_le_preimage_toBase H V).trans (Scheme.Hom.preimage_mono _
         ((relativeGluingData H).toBase.preimage_mono (toOpens_mono i.le)))),
@@ -190,7 +190,7 @@ set_option backward.isDefEq.respectTransparency false in
 lemma toBase_appLE_sectionsIso_hom (U : X.AffineZariskiSite) :
     (relativeGluingData H).toBase.appLE U.1 _ le_rfl ≫ (sectionsIso H U).hom = α.app (.op U) := by
   rw [sectionsIso_hom, Scheme.Hom.appLE_comp_appLE_assoc,
-    Scheme.Hom.appLE_eq_of_eq (ι_toBase H U) _ _ _ (by simp), Scheme.Hom.comp_appLE,
+    Scheme.Hom.appLE_congr_hom (ι_toBase H U) _ _ _ (by simp), Scheme.Hom.comp_appLE,
     IsAffineOpen.fromSpec_app_of_le _ _ le_rfl]
   simp only [homOfLE_refl, op_id, CategoryTheory.Functor.map_id, Category.id_comp,
     Scheme.Hom.map_appLE, Category.assoc]
@@ -210,7 +210,7 @@ lemma relativeGluingMap_appLE_sectionsIso_hom {β : (toOpensFunctor X).op ⋙ X.
       (sectionsIso H' U).hom = (sectionsIso H U).hom ≫ φ.app (.op U) := by
   have hw := ι_relativeGluingMap H H' φ U
   rw [sectionsIso_hom, sectionsIso_hom, Scheme.Hom.appLE_comp_appLE_assoc,
-    Scheme.Hom.appLE_eq_of_eq hw _ _ _ (by
+    Scheme.Hom.appLE_congr_hom hw _ _ _ (by
       rw [← hw]
       exact (top_le_preimage_toBase H' U).trans (Scheme.Hom.preimage_mono _
         (relativeGluingMap_preimage H H' φ hφ U).ge)),

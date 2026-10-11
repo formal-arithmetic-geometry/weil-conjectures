@@ -98,7 +98,7 @@ lemma exists_isIntegral_app_of_isLimit [∀ {i j} (f : i ⟶ j), IsClosedImmersi
   let χ (j : I) := (c.π.app j).appLE (p j ⁻¹ᵁ U) (q ⁻¹ᵁ U) (hle j)
   have hφχ : (p k).app U ≫ χ k = q.app U := by
     rw [Scheme.Hom.app_eq_appLE, Scheme.Hom.appLE_comp_appLE,
-      Scheme.Hom.appLE_eq_of_eq (hq k) _ _ _ le_rfl, Scheme.Hom.appLE_eq_app]
+      Scheme.Hom.appLE_congr_hom (hq k) _ _ _ le_rfl, Scheme.Hom.appLE_eq_app]
   have hqint : (q.app U).hom.IsIntegral := q.isIntegral_app U hU
   -- generators of the sections of the stage `k`
   obtain ⟨s, hs⟩ : ∃ s : Finset Γ(D.obj k, p k ⁻¹ᵁ U),
@@ -153,13 +153,13 @@ lemma exists_isIntegral_app_of_isLimit [∀ {i j} (f : i ⟶ j), IsClosedImmersi
         rw [hf, map_zero]
       have hσp : (p j).app U ≫ σ = (p j').app U := by
         rw [Scheme.Hom.app_eq_appLE, Scheme.Hom.appLE_comp_appLE,
-          Scheme.Hom.appLE_eq_of_eq (hp f) _ _ _ le_rfl, Scheme.Hom.appLE_eq_app]
+          Scheme.Hom.appLE_congr_hom (hp f) _ _ _ le_rfl, Scheme.Hom.appLE_eq_app]
       have hσρ : ((p j').app U).hom = σ.hom.comp ((p j).app U).hom := by
         rw [← hσp, CommRingCat.hom_comp]
       refine ⟨j', ρ ≫ σ, hpre ▸ hjU.preimage (D.map f), hσs.comp hρs, ?_, ?_, ?_⟩
       · rw [← Category.assoc, hρp, hσp]
       · rw [Category.assoc, Scheme.Hom.appLE_comp_appLE,
-          Scheme.Hom.appLE_eq_of_eq (c.w f) _ _ _ (hle j), hρχ]
+          Scheme.Hom.appLE_congr_hom (c.w f) _ _ _ (hle j), hρχ]
       · intro y hy
         rw [hσρ]
         rcases Finset.mem_insert.mp hy with rfl | hy
@@ -219,7 +219,7 @@ theorem Scheme.exists_isFinite_of_isLimit [∀ {i j} (f : i ⟶ j), IsClosedImme
     refine ⟨hpre ▸ h.1.preimage (D.map f), ?_⟩
     have hσp : (p j).app U ≫ (D.map f).appLE _ _ hpre.ge = (p j').app U := by
       rw [Scheme.Hom.app_eq_appLE, Scheme.Hom.appLE_comp_appLE,
-        Scheme.Hom.appLE_eq_of_eq (hp f) _ _ _ le_rfl, Scheme.Hom.appLE_eq_app]
+        Scheme.Hom.appLE_congr_hom (hp f) _ _ _ le_rfl, Scheme.Hom.appLE_eq_app]
     rw [← hσp, CommRingCat.hom_comp]
     have : IsIso (homOfLE hpre.ge).op := (eqToIso hpre).op.isIso_inv
     have hσs : Function.Surjective ((D.map f).appLE _ _ hpre.ge).hom :=
