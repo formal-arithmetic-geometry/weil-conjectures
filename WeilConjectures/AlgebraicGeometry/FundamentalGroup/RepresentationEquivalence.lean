@@ -5,6 +5,7 @@ Authors: Claude
 -/
 module
 
+public import Mathlib.Algebra.Homology.ShortComplex.ModuleCat
 public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.Representation
 public import WeilConjectures.CategoryTheory.Sites.Point.FreeYoneda
 
@@ -483,3 +484,116 @@ lemma exists_fiber_equiv {X : Type*} [Finite X] [MulAction G X]
   rw [hβ, hsmul, Equiv.symm_apply_apply]
 
 end AlgebraicGeometry.Scheme.FiniteEtale
+
+namespace AlgebraicGeometry.Scheme.FiniteLocallyConstantModule
+
+variable {Y : Scheme.{u}} {Λ : Type (u + 1)} [CommRing Λ] [Finite Λ]
+  {Ω : Type u} [Field Ω] [IsSepClosed Ω] (s : Spec (.of Ω) ⟶ Y) [ConnectedSpace Y]
+  (G : Type u) [Group G] [TopologicalSpace G] [IsTopologicalGroup G] [CompactSpace G]
+  [∀ P, MulAction G ((FiniteEtale.fiber s).obj P)] [IsFundamentalGroup (FiniteEtale.fiber s) G]
+
+omit [TopologicalSpace G] [IsTopologicalGroup G] [CompactSpace G] in
+/-- A linear map out of `Λ[P]_s` defined on the basis `P_s` is `G`-equivariant as soon as its
+values on the basis are. -/
+lemma constr_smul {M : Type*} [AddCommGroup M] [Module Λ M] (ρ : Representation Λ G M)
+    [IsNaturalSMul (FiniteEtale.fiber s) G] (P : Y.FiniteEtale)
+    (b : (FiniteEtale.fiber s).obj P → M) (hb : ∀ g x, b (g • x) = ρ g (b x)) (g : G)
+    (w : stalk s (free Λ P)) :
+    (freeBasis Λ s P).constr Λ b (smul s G g w) = ρ g ((freeBasis Λ s P).constr Λ b w) := by
+  have h : (freeBasis Λ s P).constr Λ b ∘ₗ representation s G (free Λ P) g =
+      ρ g ∘ₗ (freeBasis Λ s P).constr Λ b :=
+    (freeBasis Λ s P).ext fun x ↦ by
+      rw [LinearMap.comp_apply, LinearMap.comp_apply, representation_apply, smul_freeBasis,
+        Module.Basis.constr_basis, Module.Basis.constr_basis, hb]
+  exact LinearMap.congr_fun h w
+
+/-- Blueprint `sk-i-real-galois`: the stalk functor is essentially surjective onto finite
+continuous representations of `G = π₁(Y, s)`.
+
+The representation `V` is the cokernel of a map `Λ[K] ⟶ Λ[V]` of permutation representations
+on finite continuous `G`-sets; the `G`-sets are geometric fibres of finite étale `Y`-schemes, the
+permutation representations are the stalks of the corresponding free sheaves, the map comes from
+a map of sheaves by fullness, and the stalk of its cokernel is its cokernel on stalks. -/
+theorem exists_iso_toRep (V : Rep.{u + 1} Λ G) (hV : Rep.IsFiniteContinuous V) :
+    ∃ F : Y.FiniteLocallyConstantModule Λ, Nonempty ((toRep Λ s G).obj F ≅ V) := by
+  classical
+  obtain ⟨_, hVo⟩ := hV
+  let _ : MulAction G V.V :=
+    { smul g v := V.ρ g v
+      one_smul v := by change V.ρ 1 v = v; simp
+      mul_smul g h v := by change V.ρ (g * h) v = V.ρ g (V.ρ h v); simp [map_mul] }
+  obtain ⟨Q, β, hβ⟩ := FiniteEtale.exists_fiber_equiv s G (X := V.V) hVo
+  -- the surjection `Λ[V]_s ⟶ V`
+  let π : stalk s (free Λ Q) →ₗ[Λ] V.V := (freeBasis Λ s Q).constr Λ fun y ↦ β y
+  have hπ (g : G) (w : stalk s (free Λ Q)) : π (smul s G g w) = V.ρ g (π w) :=
+    constr_smul s G V.ρ Q _ (fun g y ↦ hβ g y) g w
+  have hπs : Function.Surjective π := fun v ↦
+    ⟨freeBasis Λ s Q (β.symm v), by simp [π, Module.Basis.constr_basis]⟩
+  -- its kernel `K`, a finite continuous `G`-set
+  let K := LinearMap.ker π
+  have hK (g : G) (k : stalk s (free Λ Q)) (hk : k ∈ K) : smul s G g k ∈ K := by
+    simp only [K, LinearMap.mem_ker] at hk ⊢
+    rw [hπ, hk, map_zero]
+  let _ : MulAction G K :=
+    { smul g k := ⟨smul s G g k, hK g k k.2⟩
+      one_smul k := Subtype.ext (one_smul s G (k : stalk s (free Λ Q)))
+      mul_smul g h k := Subtype.ext (mul_smul s G g h (k : stalk s (free Λ Q))) }
+  obtain ⟨P, α, hα⟩ := FiniteEtale.exists_fiber_equiv s G (X := K) fun k ↦ by
+    have h : {g : G | g • k = k} = {g : G | smul s G g (k : stalk s (free Λ Q)) = k} := by
+      ext g
+      exact Subtype.ext_iff
+    rw [h]
+    exact isOpen_setOf_smul_eq s G _
+  -- the map `Λ[K]_s ⟶ Λ[V]_s` with image `K`
+  let t : stalk s (free Λ P) →ₗ[Λ] stalk s (free Λ Q) :=
+    (freeBasis Λ s P).constr Λ fun x ↦ (α x : stalk s (free Λ Q))
+  have ht (g : G) (w : stalk s (free Λ P)) : t (smul s G g w) = smul s G g (t w) :=
+    constr_smul s G (representation s G (free Λ Q)) P _
+      (fun g x ↦ by rw [hα]; rfl) g w
+  have hrange : LinearMap.range t = K := by
+    rw [Module.Basis.constr_range]
+    have h : Set.range (fun x ↦ (α x : stalk s (free Λ Q))) = (K : Set (stalk s (free Λ Q))) := by
+      ext k
+      refine ⟨?_, fun hk ↦ ⟨α.symm ⟨k, hk⟩, by simp⟩⟩
+      rintro ⟨x, rfl⟩
+      exact (α x).2
+    rw [h, Submodule.span_eq]
+  obtain ⟨φ, hφ⟩ := exists_stalkMap_eq s G t ht
+  -- the cokernel of `φ` and its stalk
+  have := (free Λ P).property
+  have := (free Λ Q).property
+  let C : Y.FiniteLocallyConstantModule Λ :=
+    ⟨cokernel φ.hom, IsFiniteLocallyConstantSheaf.cokernel φ.hom⟩
+  let p : free Λ Q ⟶ C := ObjectProperty.homMk (cokernel.π φ.hom)
+  have := (pointSmallEtale s).sheafFiber_additive (A := ModuleCat.{u + 1} Λ)
+  let hc := isColimitOfHasCokernelOfPreservesColimit (pointSmallEtale s).sheafFiber φ.hom
+  let S : ShortComplex (ModuleCat.{u + 1} Λ) :=
+    ShortComplex.mk ((pointSmallEtale s).sheafFiber.map φ.hom)
+      ((pointSmallEtale s).sheafFiber.map (cokernel.π φ.hom))
+      (by rw [← Functor.map_comp, cokernel.condition, Functor.map_zero])
+  have hS : S.Exact := S.exact_of_g_is_cokernel hc
+  have hp : Function.Surjective (stalkMap s p) :=
+    (ModuleCat.epi_iff_surjective _).1 (epi_of_isColimit_cofork hc)
+  have hker : LinearMap.ker (stalkMap s p).hom = K := by
+    rw [← hrange]
+    refine (hS.moduleCat_range_eq_ker).symm.trans ?_
+    congr 1
+    exact LinearMap.ext hφ
+  -- the identification `C_s ≅ V`
+  let ψ : stalk s C ≃ₗ[Λ] V.V :=
+    ((stalkMap s p).hom.quotKerEquivOfSurjective hp).symm ≪≫ₗ
+      Submodule.quotEquivOfEq _ _ hker ≪≫ₗ π.quotKerEquivOfSurjective hπs
+  have hψ (w : stalk s (free Λ Q)) : ψ (stalkMap s p w) = π w := by
+    have h : ((stalkMap s p).hom.quotKerEquivOfSurjective hp).symm (stalkMap s p w) =
+        Submodule.Quotient.mk w := by
+      rw [LinearEquiv.symm_apply_eq]
+      rfl
+    simp only [ψ, LinearEquiv.trans_apply]
+    erw [h]
+    rfl
+  refine ⟨C, ⟨Rep.mkIso (Representation.Equiv.mk ψ fun g ↦ LinearMap.ext fun y ↦ ?_)⟩⟩
+  obtain ⟨w, rfl⟩ := hp y
+  change ψ (smul s G g (stalkMap s p w)) = V.ρ g (ψ (stalkMap s p w))
+  rw [← stalkMap_smul, hψ, hψ, hπ]
+
+end AlgebraicGeometry.Scheme.FiniteLocallyConstantModule
