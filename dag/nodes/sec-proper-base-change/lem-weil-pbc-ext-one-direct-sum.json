@@ -174,5 +174,24 @@
   "group": "F1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-ed2 (reviewer sub-agent of L); spot-checked: Repaired re-push after the 15:26 return (94aa77654); all three points checked: (1) D1 the two clause-sized nodes are deleted, the delivery touches only the item and its report; (2) D5 the details omitted by Stacks 05EG (more-algebra.tex 24504-24516) are now written as steps: step 1 pullback E x_P C_j is an extension and equivalences pull back (def-weil-pbc-direct-sum-modules, def-weil-pbc-exact-sequence); step 2 kernel of sum map is direct sum of u_j(N) by finite support; step 3 pushout E=(N + sum E_j)/R, checked N->E injective (u_j injective forces n=0), E->P well defined and surjective, kernel = image; step 4 E_j -> E x_P C_j, e -> ([0,i_j e], v_j e) checked injective (relation with single j-component forces e=0) and surjective (components k!=j lie in u_k(N), absorbed via R and (a,0)~(0,i_j u_j a)), N and C_j fixed; step 5 generation E = u(N)+sum im(pullbacks); step 6 glued q' kills ker q (v forces all C_j-components 0, then summands in N where h_j=id, u injective gives a+sum n_j=0), inverse from h_j^{-1}, h fixes N and commutes with maps to P, all checked; step 7 trivial. (3) B4 moot, no new node. Small cases: empty family (P=0, Ext of 0 is a point) and singleton (identity). Statement unchanged and correct for arbitrary families. FIX more, RETURN less: dag/nodes/sec-proper-base-change/lem-weil-pbc-ext-one-direct-sum.json: proof[2].uses, proof[3].uses, proof[5].uses, proof_deps: added the existing def-weil-pbc-quotient-module (steps 3-4 form and compute in the quotient module (N + sum E_j)/R, step 6 factors through the surjection q) (B3/C1). Start 2026-10-10 Sat Oct 10 03:45:15 PM UTC 2026, end Sat Oct 10 03:46:03 PM UTC 2026.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.ExtOneDirectSum",
+  "declaration": "LinearMap.extOne_directSum_bijective",
+  "file": "lean/Sheaf/Algebra/ExtOneDirectSum.lean",
+  "statement": "theorem extOne_directSum_bijective {R : Type u} [CommRing R] {N : Type w} [AddCommGroup N] [Module R N] {J : Type x} [DecidableEq J] (C : J → Type y) [∀ j, AddCommGroup (C j)] [∀ j, Module R (C j)] : (∀ (E : J → Type z) [∀ j, AddCommGroup (E j)] [∀ j, Module R (E j)] (u : ∀ j, N →ₗ[R] E j) (v : ∀ j, E j →ₗ[R] C j), (∀ j, Function.Injective (u j) ∧ Function.Exact (u j) (v j) ∧ Function.Surjective (v j)) → ∃ (F : Type (max w x y)) (_ : AddCommGroup F) (_ : Module R F) (u' : N →ₗ[R] F) (v' : F →ₗ[R] (⨁ j, C j)), Function.Injective u' ∧ Function.Exact u' v' ∧ Function.Surjective v' ∧ ∀ j, ∃ h : LinearMap.ker (v' ∘ₗ LinearMap.fst R F (C j) - (DirectSum.lof R J C j) ∘ₗ LinearMap.snd R F (C j)) ≃ₗ[R] E j, (∀ (n : N) (hn : ((u' n, 0) : F × C j) ∈ LinearMap.ker (v' ∘ₗ LinearMap.fst R F (C j) - (DirectSum.lof R J C j) ∘ₗ LinearMap.snd R F (C j))), h ⟨(u' n, 0), hn⟩ = u j n) ∧ ∀ p, v j (h p) = (p : F × C j).2) ∧ (∀ (F : Type z) [AddCommGroup F] [Module R F] (F' : Type z') [AddCommGroup F'] [Module R F'] (u : N →ₗ[R] F) (v : F →ₗ[R] (⨁ j, C j)) (u' : N →ₗ[R] F') (v' : F' →ₗ[R] (⨁ j, C j)), Function.Injective u → Function.Exact u v → Function.Surjective v → Function.Injective u' → Function.Exact u' v' → Function.Surjective v' → (∀ j, ∃ h : LinearMap.ker (v ∘ₗ LinearMap.fst R F (C j) - (DirectSum.lof R J C j) ∘ₗ LinearMap.snd R F (C j)) ≃ₗ[R] LinearMap.ker (v' ∘ₗ LinearMap.fst R F' (C j) - (DirectSum.lof R J C j) ∘ₗ LinearMap.snd R F' (C j)), (∀ (n : N) (hn : ((u n, 0) : F × C j) ∈ LinearMap.ker (v ∘ₗ LinearMap.fst R F (C j) - (DirectSum.lof R J C j) ∘ₗ LinearMap.snd R F (C j))) (hn' : ((u' n, 0) : F' × C j) ∈ LinearMap.ker (v' ∘ₗ LinearMap.fst R F' (C j) - (DirectSum.lof R J C j) ∘ₗ LinearMap.snd R F' (C j))), h ⟨(u n, 0), hn⟩ = ⟨(u' n, 0), hn'⟩) ∧ ∀ p, ((h p : F' × C j)).2 = (p : F × C j).2) → ∃ g : F ≃ₗ[R] F', g.toLinearMap ∘ₗ u = u' ∧ v' ∘ₗ g.toLinearMap = v)",
+  "branch": "sheaf-dag",
+  "by": "K1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-eod1035"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-eod1035",
+  "group": "K1",
+  "result": "fix",
+  "note": "Restated in the unbundled form of K1 668c08560: A=CommRing R, N, family C j over J, P = ⨁ C with ι_j = DirectSum.lof; short exact = Injective/Function.Exact/Surjective; equivalence = endpoint-fixed ≃ₗ (h∘u=u', v'∘h=v); E×_P C_j = ker(v∘fst - ι_j∘snd) ⊆ E×C_j with n↦(u n,0), snd; bijectivity of Φ_A = surjectivity clause ∧ injectivity clause; universes independent, assembled extension in max w x y; private ModuleExtension/ExtOne/pullbackExtension removed (H4/H12)"
  }
 }
