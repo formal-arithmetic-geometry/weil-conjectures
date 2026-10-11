@@ -24,7 +24,9 @@
   "lem-pc-kflat-resolution",
   "def-pc-tensor-complex-sheaves",
   "def-weil-abstract-derived-category",
-  "lem-pc-balanced-derived-tensor-model"
+  "lem-pc-balanced-derived-tensor-model",
+  "def-pc-module-kflat-complex",
+  "def-pc-mixed-total-tensor"
  ],
  "chapter": "sec-picard-framework",
  "unit": "sk-thm-picard-semicon",
@@ -157,5 +159,24 @@
   "group": "H1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-kda0239 (reviewer sub-agent of L); spot-checked: Leaf lem-pc-kflat-total-tensor-associativity: read HomologicalComplex.mapBifunctorAssociator (BifunctorAssociator.lean:812), one-line specialization with AlgebraTensorModule.assoc; up-Z epsilon signs match def-pc-tensor-complex-sheaves (d = dp + (-1)^a p dp' + (-1)^{a+b} p p' dq on both sides). No duplicate among balanced-model/second-factor-functor/flat-second-localization; grep: no derived tensor associator in Mathlib DerivedCategory. FIX more, RETURN less: (1) C1/C4 Step 3 claimed the D(R)-endomorphism of B is represented by a chain endomorphism of Q (false for K-flat Q, and the action was uncited; the second reading cited action-naturality, which the step does not use): rewrote with the action defined via lem-pc-derived-tensor-second-factor-functor (1),(2), roofs through a K-flat Q'' and chain naturality in Q, plus the Koszul swap. (2) C1 Step 4 resolution independence: made explicit the roofs of K-flat resolutions and naturality in all three variables, citing second-factor-functor and lem-pc-kflat-resolution; proof_deps updated.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.KFlatDerivedTensorAssociator",
+  "declaration": "DerivedCategory.exists_kFlatDerivedTensorAssociator",
+  "file": "lean/Sheaf/Algebra/Homology/KFlatDerivedTensorAssociator.lean",
+  "statement": "theorem exists_kFlatDerivedTensorAssociator (R A B : Type u) [CommRing R] [CommRing A] [CommRing B] [Algebra R A] [Algebra R B] [HasDerivedCategory.{wA} (ModuleCat.{u} A)] [HasDerivedCategory.{wR} (ModuleCat.{u} R)] : let CA := CochainComplex (ModuleCat.{u} A) ℤ let CR := CochainComplex (ModuleCat.{u} R) ℤ let DA := DerivedCategory (ModuleCat.{u} A) let DR := DerivedCategory (ModuleCat.{u} R) let T := (curriedTensor (ModuleCat.{u} A)).map₂CochainComplex let S := ModuleCat.mixedTotalTensor (algebraMap R A) let Lc := Functor.uncurry.obj (Functor.uncurry.obj (bifunctorComp₁₂ T S)) let Uc := Functor.uncurry.obj (Functor.uncurry.obj (bifunctorComp₂₃ T S)) let KA := CochainComplex.KFlat (ModuleCat.{u} A) let KR := CochainComplex.KFlat (ModuleCat.{u} R) let J : ((KA × KA) × KR) ⥤ ((CA × CA) × CR) := ((CochainComplex.ιKFlat (ModuleCat.{u} A)).prod (CochainComplex.ιKFlat (ModuleCat.{u} A))).prod (CochainComplex.ιKFlat (ModuleCat.{u} R)) let Qp : ((CA × CA) × CR) ⥤ ((DA × DA) × DR) := ((Q (C := ModuleCat.{u} A)).prod (Q (C := ModuleCat.{u} A))).prod (Q (C := ModuleCat.{u} R)) ∃ α : Lc ≅ Uc, (∀ (P N : CA) (F : CR) (i j k : ℤ), ((ModuleCat.mixedTensor (algebraMap R A)).map (ιMapBifunctor P N (curriedTensor _) (.up ℤ) i j (i + j) rfl)).app (F.X k) ≫ ιMapBifunctor ((T.obj P).obj N) F (ModuleCat.mixedTensor (algebraMap R A)) (.up ℤ) (i + j) k ((i + j) + k) rfl ≫ (α.hom.app ((P, N), F)).f ((i + j) + k) = (α_ (P.X i) (N.X j) ((ModuleCat.extendScalars (algebraMap R A)).obj (F.X k))).hom ≫ ((curriedTensor (ModuleCat.{u} A)).obj (P.X i)).map (ιMapBifunctor N F (ModuleCat.mixedTensor (algebraMap R A)) (.up ℤ) j k (j + k) rfl) ≫ ιMapBifunctor P ((S.obj N).obj F) (curriedTensor _) (.up ℤ) i (j + k) ((i + j) + k) (Int.add_assoc i j k).symm) ∧ ∃ (L U : ((DA × DA) × DR) ⥤ DA) (βL : J ⋙ Lc ⋙ Q ≅ J ⋙ Qp ⋙ L) (βU : J ⋙ Uc ⋙ Q ≅ J ⋙ Qp ⋙ U) (γ : L ≅ U), (∀ X : (KA × KA) × KR, (βL.hom.app X) ≫ γ.hom.app (Qp.obj (J.obj X)) = Q.map (α.hom.app (J.obj X)) ≫ βU.hom.app X) ∧ ∀ (E K : CA) (P N : KA) (F : KR) (p : P.obj ⟶ E) (n : N.obj ⟶ K) (q : F.obj ⟶ (CochainComplex.singleFunctor (ModuleCat.{u} R) (0 : ℤ)).obj (ModuleCat.of R B)), QuasiIso p → QuasiIso n → QuasiIso q → let X : (KA × KA) × KR := ((P, N), F) let Z : (CA × CA) × CR := ((E, K), (CochainComplex.singleFunctor (ModuleCat.{u} R) (0 : ℤ)).obj (ModuleCat.of R B)) let f : Qp.obj (J.obj X) ⟶ Qp.obj Z := Qp.map ((p, n), q) IsIso (L.map f) ∧ IsIso (U.map f) ∧ (βL.hom.app X ≫ L.map f) ≫ γ.hom.app (Qp.obj Z) = Q.map (α.hom.app (J.obj X)) ≫ (βU.hom.app X ≫ U.map f) ∧ ∀ φ : End ((Q (C := ModuleCat.{u} R)).obj Z.2), let eL := βL.hom.app X ≫ L.map f let eU := βU.hom.app X ≫ U.map f ∀ (eLi : L.obj (Qp.obj Z) ⟶ Q.obj (Lc.obj (J.obj X))) (eUi : U.obj (Qp.obj Z) ⟶ Q.obj (Uc.obj (J.obj X))), eL ≫ eLi = 𝟙 _ → eLi ≫ eL = 𝟙 _ → eU ≫ eUi = 𝟙 _ → eUi ≫ eU = 𝟙 _ → Q.map (α.hom.app (J.obj X)) ≫ (eU ≫ U.map ((𝟙 _, 𝟙 _), φ) ≫ eUi) = (eL ≫ L.map ((𝟙 _, 𝟙 _), φ) ≫ eLi) ≫ Q.map (α.hom.app (J.obj X))",
+  "branch": "sheaf-dag",
+  "by": "K1",
+  "date": "2026-10-11",
+  "existing": false,
+  "note": "Descent is stated as natural model comparison isomorphisms on the K-flat full subcategories and a compatible natural isomorphism of derived trifunctors. The summand equation fixes canonical chain rebracketing; the resolution square and conjugation equation specify independence and all derived B-endomorphisms."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-kda1208",
+  "group": "K1",
+  "result": "pass",
+  "note": "R,A,B CommRing + Algebra R A/B; E,K arbitrary A-complexes; P,N in CochainComplex.KFlat A (landed def-pc-module-kflat-complex), F in KFlat R, quasi-iso augmentations to E,K,B[0]; Lc/Uc = bifunctorComp12/23 of map2CochainComplex curriedTensor and landed mixedTotalTensor; summand eqn pins alpha to module associator (no sign: up Z eps2=(-1)^p associative); gamma natural on DA x DA x DR with beta comparisons on K-flat triples gives descent/independence/naturality; phi : End(Q B[0]) conjugation clause follows from gamma naturality, as the node says"
  }
 }
