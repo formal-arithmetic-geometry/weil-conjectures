@@ -143,5 +143,23 @@
   "group": "F1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of F1; spot-checked by L: Repaired as asked at 20:35 and 21:00: TeX throughout, the tags 0738(4)/03Q4 in the statements, the local description of the sheafification now a self-contained node lem-weil-pbc-site-sheafification-sections-local (00WB/00WK), the finite affine refinement node self-contained with 0218, the stray lock file gone, lem-weil-pbc-module-sheaves-colimits-forgetful recorded as a tool use. Three steps along 0738(4): refinement, injectivity by eventual equality on a finite affine refinement and the sheaf condition, surjectivity by gluing representatives at a common index after injectivity on the quasi-compact overlaps."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.EtaleSectionsFilteredColimit",
+  "declaration": "AlgebraicGeometry.etale_sections_filtered_colimit",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleSectionsFilteredColimit.lean",
+  "statement": "theorem etale_sections_filtered_colimit (X : Scheme.{u}) (Λ : Type v) [CommRing Λ] (U : X.Etale) [CompactSpace U.left] [QuasiSeparatedSpace U.left] (I : Type w) [SmallCategory I] [IsFiltered I] (G : I ⥤ Sheaf X.smallEtaleTopology (ModuleCat.{max v w} Λ)) (c : Cocone G) (_hc : IsColimit c) : let E := (sheafSections X.smallEtaleTopology (ModuleCat.{max v w} Λ)).obj (Opposite.op U) Function.Bijective ((colimit.desc (G ⋙ E) (E.mapCocone c)).hom)",
+  "branch": "sheaf-dag",
+  "by": "K1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-eqs1018",
+  "group": "K1",
+  "result": "pass",
+  "note": "X:Scheme, Λ CommRing, Mod(X_et,Λ)=Sheaf X.smallEtaleTopology (ModuleCat Λ) (R-ecs1031 encoding), U:X.Etale arbitrary object with CompactSpace/QuasiSeparatedSpace U.left (scheme U qcqs, not the morphism), I small filtered, G:I⥤Sheaf, arbitrary colimit cocone c+IsColimit, canonical map colimit.desc (G⋙sheafSections at op U) (mapCocone c) bijective; instantiates at convention universes (Λ:Type(u+1), ModuleCat.{u+1}, I:Type u, colimit.cocone G) — checked by compile; no Mathlib/source existing theorem (source H_map_isColimit_of_isFiltered is H^q at X for Ab sheaves)"
  }
 }
