@@ -273,21 +273,26 @@ lemma closedBaseChange_functorPushforward_imageSieve {Y₁ Y₂ : X.AffineProEt}
   obtain ⟨g₁, hg₁⟩ := hlift W₁' w₁ hw₁ hw₁ind φ₁
   obtain ⟨g₂, hg₂⟩ := hlift W₂' w₂ hw₂ hw₂ind φ₂
   have hφ₁ : φ₁ ≫ (MorphismProperty.Over.pullback @WeaklyEtale ⊤ i).map
-      (ProEt.ofOpenImmersionHom ((AffineProEt.toProEt X).obj Y₁) W₁.ι) = ProEt.ofOpenImmersionHom Q V.ι := by
-    ext1
+      (ProEt.ofOpenImmersionHom ((AffineProEt.toProEt X).obj Y₁) W₁.ι) =
+        ProEt.ofOpenImmersionHom Q V.ι := by
+    refine MorphismProperty.Over.Hom.ext ?_
     refine pullback.hom_ext ?_ ?_ <;> simp [φ₁, a₁, ProEt.ofOpenImmersionHom]
   have hφ₂ : φ₂ ≫ (MorphismProperty.Over.pullback @WeaklyEtale ⊤ i).map
-      (ProEt.ofOpenImmersionHom ((AffineProEt.toProEt X).obj Y₂) W₂.ι) = ProEt.ofOpenImmersionHom Q V.ι ≫ f := by
-    ext1
+      (ProEt.ofOpenImmersionHom ((AffineProEt.toProEt X).obj Y₂) W₂.ι) =
+        ProEt.ofOpenImmersionHom Q V.ι ≫ f := by
+    refine MorphismProperty.Over.Hom.ext ?_
     refine pullback.hom_ext ?_ ?_
     · simp [φ₂, a₂, ProEt.ofOpenImmersionHom]
     · simp [φ₂, ProEt.ofOpenImmersionHom, hf₂]
-  refine ⟨Y, (AffineProEt.toProEt X).preimage (g₁ ≫ ProEt.ofOpenImmersionHom ((AffineProEt.toProEt X).obj Y₁) W₁.ι),
-    e.inv, ⟨(AffineProEt.toProEt X).preimage (g₂ ≫ ProEt.ofOpenImmersionHom ((AffineProEt.toProEt X).obj Y₂) W₂.ι), ?_⟩, ?_⟩
+  refine ⟨Y, (AffineProEt.toProEt X).preimage
+      (g₁ ≫ ProEt.ofOpenImmersionHom ((AffineProEt.toProEt X).obj Y₁) W₁.ι), e.inv,
+    ⟨(AffineProEt.toProEt X).preimage
+      (g₂ ≫ ProEt.ofOpenImmersionHom ((AffineProEt.toProEt X).obj Y₂) W₂.ι), ?_⟩, ?_⟩
   · simp only [closedBaseChange, Functor.comp_map, Functor.map_preimage, Functor.map_comp, hg₁,
       hg₂, Category.assoc, hφ₁, hφ₂]
   · simp only [closedBaseChange, Functor.comp_map, Functor.map_preimage, Functor.map_comp, hg₁,
       Category.assoc, hφ₁, Iso.inv_hom_id_assoc]
+    rfl
 
 /-- Blueprint `lem-exc-closed-site-adjunction`, the morphism half: base change from the affine
 pro-étale site of `X` to the pro-étale site of `Z` is locally full. A morphism
@@ -297,17 +302,21 @@ pro-étale site of `X` to the pro-étale site of `Z` is locally full. A morphism
 instance isLocallyFull_closedBaseChange :
     (closedBaseChange i).IsLocallyFull (ProEt.topology Z) where
   functorPushforward_imageSieve_mem {Y₁ Y₂} f := by
-    have hf₂ : f.left ≫ pullback.snd Y₂.hom i = pullback.snd Y₁.hom i := MorphismProperty.Over.w f
+    have hf₂ : f.left ≫ pullback.snd Y₂.hom i = pullback.snd Y₁.hom i :=
+      MorphismProperty.Over.w f
     have key : f.left ≫ pullback.fst Y₂.hom i ≫ Y₂.hom = pullback.fst Y₁.hom i ≫ Y₁.hom := by
       rw [pullback.condition, reassoc_of% hf₂, pullback.condition]
-    have hU (p : ↥(pullback Y₁.hom i)) : ∃ U ∈ X.affineOpens, Y₁.hom (pullback.fst Y₁.hom i p) ∈ U ∧ U ≤ ⊤ :=
+    have hU (p : ↥(pullback Y₁.hom i)) :
+        ∃ U ∈ X.affineOpens, Y₁.hom (pullback.fst Y₁.hom i p) ∈ U ∧ U ≤ ⊤ :=
       TopologicalSpace.Opens.isBasis_iff_nbhd.mp X.isBasis_affineOpens (Set.mem_univ _)
     choose U hU hpU _ using hU
-    have hW₁ (p : ↥(pullback Y₁.hom i)) : ∃ W ∈ Y₁.left.affineOpens, pullback.fst Y₁.hom i p ∈ W ∧
+    have hW₁ (p : ↥(pullback Y₁.hom i)) :
+        ∃ W ∈ Y₁.left.affineOpens, pullback.fst Y₁.hom i p ∈ W ∧
         W ≤ Y₁.hom ⁻¹ᵁ U p :=
       TopologicalSpace.Opens.isBasis_iff_nbhd.mp Y₁.left.isBasis_affineOpens (hpU p)
     choose W₁ hW₁ hpW₁ hW₁U using hW₁
-    have hW₂ (p : ↥(pullback Y₁.hom i)) : ∃ W ∈ Y₂.left.affineOpens, pullback.fst Y₂.hom i (f.left p) ∈ W ∧
+    have hW₂ (p : ↥(pullback Y₁.hom i)) :
+        ∃ W ∈ Y₂.left.affineOpens, pullback.fst Y₂.hom i (f.left p) ∈ W ∧
         W ≤ Y₂.hom ⁻¹ᵁ U p := by
       refine TopologicalSpace.Opens.isBasis_iff_nbhd.mp Y₂.left.isBasis_affineOpens ?_
       have h := congrArg (fun g ↦ g p) key
@@ -316,7 +325,8 @@ instance isLocallyFull_closedBaseChange :
     choose W₂ hW₂ hpW₂ hW₂U using hW₂
     have hV (p : ↥(pullback Y₁.hom i)) : ∃ V ∈ (pullback Y₁.hom i).affineOpens, p ∈ V ∧
         V ≤ pullback.fst Y₁.hom i ⁻¹ᵁ W₁ p ⊓ f.left ⁻¹ᵁ (pullback.fst Y₂.hom i ⁻¹ᵁ W₂ p) :=
-      TopologicalSpace.Opens.isBasis_iff_nbhd.mp (pullback Y₁.hom i).isBasis_affineOpens ⟨hpW₁ p, hpW₂ p⟩
+      TopologicalSpace.Opens.isBasis_iff_nbhd.mp (pullback Y₁.hom i).isBasis_affineOpens
+        ⟨hpW₁ p, hpW₂ p⟩
     choose V hV hpV hVW using hV
     exact ProEt.mem_topology_of_openImmersion _ (fun p ↦ (V p).ι)
       (fun p ↦ ⟨p, by simpa using hpV p⟩) fun p ↦
