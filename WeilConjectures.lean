@@ -1455,6 +1455,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.WeilComplex
 public import WeilConjectures.SixFunctors.Etale.Derived.WeilFrobenius
 public import WeilConjectures.SixFunctors.Etale.Gabber
 public import WeilConjectures.SixFunctors.Etale.GeometricFrobenius
+public import WeilConjectures.SixFunctors.Etale.LowerShriek.BaseChange
 public import WeilConjectures.SixFunctors.Etale.LowerShriek.Comparison
 public import WeilConjectures.SixFunctors.Etale.LowerShriek.Defs
 public import WeilConjectures.SixFunctors.Etale.LowerShriek.EtaleMap
