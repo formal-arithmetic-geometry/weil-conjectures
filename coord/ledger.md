@@ -4279,3 +4279,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 10:39 L: merged deliver/K1/lem-weil-pbc-fpqc-descend-affine (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.FpqcAffineDescent AlgebraicGeometry.isAffineHom_of_fpqc_cover)
 - 10:39 L: merged deliver/H1/lem-weil-pbc-fpqc-descend-universally-closed (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.UniversallyClosedOfFpqcCover AlgebraicGeometry.universallyClosed_of_fpqc_cover)
 - 10:39 L: merged deliver/F1/lem-weil-pbc-etale-finite-pushforward-locally-constant (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.FiniteEtalePushforwardLocallyConstant AlgebraicGeometry.Scheme.finiteLocallyConstant_lowerStar_of_finite_etale)
+- 10:39 L: merged deliver/K1/lem-weil-pbc-flat-tor-ideal-criterion (stage 2; reviewer PASS; first push; Sheaf.Algebra.FlatTorIdealCriterion CategoryTheory.flat_iff_tor_one_quotient_ideal)
