@@ -1,0 +1,164 @@
+## Worker report
+
+The module `Sheaf.RingTheory.SmoothAtPrimeFreeConormalBasis` states
+`Algebra.exists_smoothAtPrime_free_conormal_basis` for a polynomial algebra
+`MvPolynomial (Fin n) R`, a finite family of relations `f : Fin m → P`, and a
+prime of the quotient. The hypothesis `hs` is exactly
+`Algebra.IsSmoothAtPrime R q` from `Sheaf.RingTheory.SingularIdeal`.
+
+The conclusion is rendered as follows. The element `a : P` and the conjunct
+`Ideal.Quotient.mk (Ideal.span (Set.range f)) a ∉ q.asIdeal` render the element
+outside the prime. `V : Finset (Fin m)` and `c : ℕ` with `V.card = c` render the
+selected subset and its cardinality; `c ≤ min n m` is the stated bound. The
+conjunct `Algebra.Smooth R (Localization.Away (...))` renders smoothness of the
+principal localization. An equivalence `e : Fin c ≃ V` indexes the selected
+relations. The displayed `Module.Basis` over the localization, together with
+its equality to `LocalizedModule.mkLinearMap ... (I.toCotangent ...)` for each
+`j`, says that the classes of the selected `f`'s are the basis of the localized
+conormal module. Finally `Nonempty (Module.Basis (Fin (n-c)) ...
+(KaehlerDifferential R ...))` says that the localized Kähler differentials are
+free of rank `n-c`.
+
+Dependencies used: `def-weil-pbc-singular-ideal`, declaration
+`Algebra.IsSmoothAtPrime` in `Sheaf.RingTheory.SingularIdeal`; smooth ring maps
+use Mathlib's `Algebra.Smooth`; module localization uses Mathlib's
+`LocalizedModule.Away`; Kähler differentials use Mathlib's
+`KaehlerDifferential`. The quotient conormal is Mathlib's
+`Ideal.Cotangent`, with classes through `Ideal.toCotangent`.
+
+Edge cases checked: `n = 0`, `m = 0`, and `c = 0` are admitted by `Fin 0`,
+`Finset.card`, `Fin (n-c)`, and `Module.Basis`; the bound uses `min n m`, and
+no nonemptiness or nonzero assumption on the quotient or localization is added.
+The family is indexed by `Fin m`, so the empty family is represented correctly.
+
+Searches made:
+- msearch.py leanfinder: “smooth at a prime conormal module basis given by generators”:
+  8 hits, including SubmersivePresentation.basisCotangent and standard smooth
+  criteria; none selects a subset of an arbitrary given relation family.
+- msearch.py loogle: “Ideal.Cotangent, LocalizedModule.Away”: 0 hits.
+- msearch.py grep: “conormal|exists_notMem_isStandardSmooth” in RingTheory/Smooth:
+  3 hits for the existence of a standard smooth localization, no exact statement.
+- rg over WeilConjectures and lean/Sheaf for Cotangent, conormal, IsSmoothAtPrime,
+  and KaehlerDifferential: related presentation and conormal lemmas, no exact statement.
+
+The local literature file is absent on this machine, so the source proof was read
+at https://stacks.math.columbia.edu/tag/07C6. It explicitly spreads the two bases.
+No STATEMENT-DISPUTED or node fault found. Parentheses separate the conormal
+basis condition from differential freeness, preserving the differential conclusion
+when c=0. Clean server compilation has been obtained.
+
+## Earlier second reading (a previous round; superseded)
+
+Pending independent second reader, as required by the dispatcher brief. This worker
+has not performed or claimed an independent second reading; the next worker must
+replace this placeholder with their clause-by-clause review before delivery.
+
+
+## Second reading by J1
+
+Independent review of the node, its four statement dependencies, their recorded
+source declarations, and the delivered module. No mathematical or Lean mismatch
+was found; the Lean and node record are left unchanged. This section is the
+second reading, replacing the earlier pending placeholder above.
+
+Source checked: the Stacks smoothing.tex source, section-singular-ideal and
+lemma-find-strictly-standard, read directly from
+https://raw.githubusercontent.com/stacks/stacks-project/master/smoothing.tex
+(the local literature checkout is absent). Also read Tags 07C6 and 07CP at
+https://stacks.math.columbia.edu/tag/07C6 and
+https://stacks.math.columbia.edu/tag/07CP. Section 07C4 starts with an arbitrary
+ring map. Tag 07C6 requires only a ring, the finite polynomial presentation,
+a prime, and smoothness at that prime. The node deliberately records the two
+bases constructed in the proof, not the additional Jacobian-minor conclusion
+of the source lemma. No Noetherian hypothesis from the later 07CP lifting lemma
+belongs here. Choosing a polynomial lift of the localization element is valid
+because the quotient map is surjective.
+
+Objects, hypotheses, and conclusions, item by item:
+
+1. Arbitrary commutative ring R: `(R : Type u) [CommRing R]`. PASS; no field,
+   Noetherian, domain, or nontriviality assumption.
+2. Nonnegative n and m: `(n m : ℕ)`. PASS.
+3. P = R[x_1,...,x_n] and the specified m relations: `MvPolynomial (Fin n) R`
+   and `f : Fin m → MvPolynomial (Fin n) R`. PASS; Fin indexing simply renumbers
+   the source's one-based indexing and retains repetitions and zero relations.
+4. I generated by these relations and A = P/I: `Ideal.span (Set.range f)` and
+   `MvPolynomial (Fin n) R ⧸ Ideal.span (Set.range f)`. PASS; these are concrete
+   terms, so no extra presentation or algebra-structure hypotheses are introduced.
+5. I/I² as an A-module: `(Ideal.span (Set.range f)).Cotangent`. PASS;
+   Mathlib Ideal/Cotangent.lean defines this as the quotient of I by I • top,
+   with the canonical `Module (P ⧸ I)` structure, and proves the kernel is I².
+6. Prime q of A: `q : PrimeSpectrum (...)`. PASS; primality and properness are
+   the bundled data, not stronger local-ring or maximal-ideal assumptions.
+7. Smoothness of R → A at q: `hs : Algebra.IsSmoothAtPrime R q`. PASS;
+   opened SingularIdeal.lean: this is `∃ g, g ∉ q.asIdeal ∧
+   Smooth R (Localization.Away g)`, exactly the dependency's neighbourhood notion.
+8. Existence of a polynomial a with image outside q: `∃ a : MvPolynomial ...`,
+   followed by `Ideal.Quotient.mk (...) a ∉ q.asIdeal`. PASS; a is in P, not A.
+9. Selected subset V and c = |V| ≤ min(n,m): `∃ (V : Finset (Fin m)) (c : ℕ),
+   V.card = c ∧ c ≤ min n m`. PASS; all subsets of the finite relation index
+   set are finite and the existential c is uniquely determined by V.card.
+10. Clause (i), smooth localized algebra: `Algebra.Smooth R
+    (Localization.Away (Ideal.Quotient.mk (...) a))`. PASS; read Smooth/Basic.lean
+    class Smooth (formal smoothness plus finite presentation), including its
+    Stacks 00T2/00TN equivalence annotation. It is the recorded smooth-map notion.
+11. Clause (ii), prescribed conormal basis: `∃ e : Fin c ≃ V, ∃ b :
+    Module.Basis (Fin c) (Localization.Away ...) (LocalizedModule.Away ...
+    I.Cotangent), ∀ j, b j = LocalizedModule.mkLinearMap ...
+    (I.toCotangent ⟨f (e j).1, Ideal.subset_span ...⟩)`. PASS; e enumerates V,
+    toCotangent is the class modulo I², and mkLinearMap is localization m ↦ m/1.
+    Read LocalizedModule/Basic.lean (mkLinearMap and Away) and Ideal/Cotangent.lean
+    (Cotangent, its quotient-ring scalar action, and toCotangent). A basis is
+    specified to equal these classes; mere freeness would have been insufficient.
+12. Clause (iii), free differentials of rank n-c: `Nonempty (Module.Basis
+    (Fin (n - c)) (Localization.Away ...) (KaehlerDifferential R
+    (Localization.Away ...)))`. PASS; read Kaehler/Basic.lean definition and
+    linearMapEquivDerivation universal property. This is Ω of the localized
+    algebra over R, not differentials of the polynomial ring. The bound c ≤ n
+    makes natural subtraction the intended complementary rank. This conjunct
+    is outside the `∀ j` and outside the conormal-basis existential parentheses,
+    so it is still required when c = 0.
+
+Quantifiers are in the node's order: fixed R,n,m,f,q, smoothness hypothesis,
+then a,V,c with all three clauses for the same a,V,c. The enumeration and
+basis witnesses express the prescribed finite basis and add no mathematical
+restriction. The explicit universe u is arbitrary; P and its quotient are
+constructed from R and finite indices and introduce no independent universe
+constraint or quantification over small test algebras.
+
+Edge cases: n = 0 and m = 0 are allowed. The bound forces c = 0 in either
+case, and `Fin 0`, the empty finset and empty bases are permitted. With m = 0,
+I = 0 and the conormal module is zero, while differentials retain rank n.
+When c = n the differential rank is zero. R or A may be the zero ring;
+then A has no primes and the theorem's prime binder correctly has no instances.
+No nonzero localization or nonempty basis index is assumed; outside a proper
+prime the localization is in fact nonzero. No characteristic is fixed or
+excluded. The statement concerns rings, so empty schemes add no further cases.
+
+Independent searches (different wording from the first worker):
+- msearch leanfinder: `finite polynomial presentation selected relations basis
+  localized cotangent smooth neighbourhood`: 8 hits. Opened the closest
+  Generators.exists_presentation_of_basis_cotangent context in
+  Extension/Cotangent/Basis.lean: it starts from a given basis and constructs a
+  new presentation, not a subset of the fixed relation family. The other hits
+  concern standard smooth presentations or localization presentations.
+- msearch loogle: `Ideal.toCotangent, Module.Basis`: 0 hits.
+- msearch leansearch: `A subset of defining polynomial equations is a basis of
+  the conormal module after localization at a smooth prime`: service returned
+  Internal Server Error; recorded as unavailable, with no search verdict.
+- rg in Mathlib Extension/Cotangent/Basis.lean and Smooth/StandardSmoothOfFree.lean,
+  and across WeilConjectures and repository lean/Sheaf, for `basisCotangent`,
+  `toCotangent`, `conormal`, `free_conormal`: related results only. In particular,
+  ImprovePresentationSmoothConormalFree changes the presentation; it does not
+  supply the selected prescribed relation classes near the given prime.
+  No existing exact declaration was found and no notion is privately duplicated.
+
+There are no new definition nodes, dependency modules, or statement corrections
+in this delivery. All four dependency notions are usable as recorded. The sole
+statement proof remains `sorry`; no definition, helper proof, axiom, notation,
+or file-local instance was added. Module and theorem docstrings give the source
+and blueprint identifier; the theorem docstring follows all four node proof
+steps, including both shrinking arguments. All variables and the universe are
+bound, every line is at most 100 characters, and lean.statement equals the
+source signature verbatim. Changes in this second reading: appended this
+independent review only; no Lean or node edits were needed.

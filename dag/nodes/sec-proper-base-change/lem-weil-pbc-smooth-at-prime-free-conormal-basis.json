@@ -153,5 +153,23 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of E1; spot-checked by L: L read the four steps (07C6): split conormal sequence on a smooth principal neighbourhood, selection of relation classes at the prime, spreading the prescribed basis (new unsplit 0GWM-variant node) and the free differentials, common shrink."
  },
- "lead_note": "Amended by L (2026-10-10): step 3 now states that the rank of the localized conormal module at q_b is c (needed by the prescribed-basis node); found by the worker on that node."
+ "lead_note": "Amended by L (2026-10-10): step 3 now states that the rank of the localized conormal module at q_b is c (needed by the prescribed-basis node); found by the worker on that node.",
+ "lean": {
+  "module": "Sheaf.RingTheory.SmoothAtPrimeFreeConormalBasis",
+  "declaration": "Algebra.exists_smoothAtPrime_free_conormal_basis",
+  "file": "lean/Sheaf/RingTheory/SmoothAtPrimeFreeConormalBasis.lean",
+  "statement": "theorem exists_smoothAtPrime_free_conormal_basis (R : Type u) [CommRing R] (n m : ℕ) (f : Fin m → MvPolynomial (Fin n) R) (q : PrimeSpectrum (MvPolynomial (Fin n) R ⧸ Ideal.span (Set.range f))) (hs : Algebra.IsSmoothAtPrime R q) : ∃ (a : MvPolynomial (Fin n) R), Ideal.Quotient.mk (Ideal.span (Set.range f)) a ∉ q.asIdeal ∧ ∃ (V : Finset (Fin m)) (c : ℕ), V.card = c ∧ c ≤ min n m ∧ Algebra.Smooth R (Localization.Away (Ideal.Quotient.mk (Ideal.span (Set.range f)) a)) ∧ (∃ (e : Fin c ≃ V), ∃ b : Module.Basis (Fin c) (Localization.Away (Ideal.Quotient.mk (Ideal.span (Set.range f)) a)) (LocalizedModule.Away (Ideal.Quotient.mk (Ideal.span (Set.range f)) a) (Ideal.span (Set.range f)).Cotangent), ∀ j : Fin c, b j = LocalizedModule.mkLinearMap (Submonoid.powers (Ideal.Quotient.mk (Ideal.span (Set.range f)) a)) (Ideal.span (Set.range f)).Cotangent ((Ideal.span (Set.range f)).toCotangent ⟨f (e j).1, Ideal.subset_span ⟨(e j).1, rfl⟩⟩)) ∧ Nonempty (Module.Basis (Fin (n - c)) (Localization.Away (Ideal.Quotient.mk (Ideal.span (Set.range f)) a)) (KaehlerDifferential R (Localization.Away (Ideal.Quotient.mk (Ideal.span (Set.range f)) a))))",
+  "branch": "sheaf-dag",
+  "by": "J1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "J1",
+  "result": "pass",
+  "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
+ }
 }
