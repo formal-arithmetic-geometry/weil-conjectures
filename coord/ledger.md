@@ -3218,3 +3218,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 01:18 UTC L: C1 affine-perfect-cut-degree-zero FIX 0756c63f7 (R-apc0116; silent conclusion change reverted, TeX restored).
 - 01:19 L: merged deliver/E1/lem-sc-module-localization-filtered-colimit (reviewer FIX; first push; new nodes: 0)
 - 01:19 L: merged deliver/J1/lem-pc-ring-derived-map-lift (reviewer FIX; first push; new nodes: 2)
+- 01:19 UTC L: E1 module-localization-filtered-colimit FIX a7b3d150a (R-mlc0119).
