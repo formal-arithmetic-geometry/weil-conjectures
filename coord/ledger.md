@@ -5403,3 +5403,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 16:20 L: merged deliver/J1/pqf-lem-affine-vanishing (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.AffineOpenModuleCohomologyVanishing AlgebraicGeometry.subsingleton_openModuleCohomology_of_isAffineOpen)
 - 16:20 L: merged deliver/V1/lem-sc-ext-sheaf-to-global-spectral-sequence (stage 2; reviewer PASS; first push; Sheaf.Paper.ExtSheafToGlobalSpectralSequence AlgebraicGeometry.exists_sheafExt_global_spectralSequence)
 - 16:21 L: merged deliver/G1/lem-sc-right-adjoint-open-support-criterion (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.RightAdjointOpenSupportCriterion AlgebraicGeometry.rightAdjoint_open_support_criterion)
+- 16:21 L: merged deliver/H1/lem-weil-pbc-cohomology-pullback-functorial (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.EtaleCohomologyPullbackFunctorial AlgebraicGeometry.Etale.cohomologyPullbackFunctorial)
