@@ -199,5 +199,23 @@
   "by": "L",
   "result": "pass",
   "note": "Reviewed by the lead (opus-relaunch6). Seven steps for 0CYR and 0CYQ(3) with Stacks' hidden arguments written out: (1) by induction to n = 2, the coproduct of the reduced induced structures with its finite map g to X (lem-weil-pbc-finite-coproduct, finite => proper via lem-weil-pbc-finite-morphism-permanence (c)), W proper over S by the new node lem-weil-pbc-proper-coproduct (coproduct of proper morphisms is proper), and the image g(W) = Z_1 u Z_2 proper by the new node for 0CYQ(2) (image under a universally closed S-morphism); (2) the scheme-theoretic inverse image Z' = X x_Y Z_red, a closed subscheme of X with underlying set f^{-1}(Z) (points of fibre products, 01JT), proper over S as a composite of proper morphisms. lem-weil-pbc-finite-proper (another unit) avoided. The n = 0 case handled."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ClosedSubsetProperOverBaseUnionPreimage",
+  "declaration": "AlgebraicGeometry.Scheme.isClosedSubsetProperOver_union_preimage",
+  "statement": "theorem isClosedSubsetProperOver_union_preimage {X S : Scheme.{u}} (sX : X ⟶ S) [LocallyOfFiniteType sX] : (∀ (n : ℕ) (Z : Fin n → TopologicalSpace.Closeds X), (∀ i, IsClosedSubsetProperOver sX (Z i)) → IsClosedSubsetProperOver sX (⨆ i, Z i)) ∧ (∀ {Y : Scheme.{u}} (f : X ⟶ Y) (sY : Y ⟶ S) [LocallyOfFiniteType sY] [IsProper f], f ≫ sY = sX → ∀ (Z : TopologicalSpace.Closeds Y), IsClosedSubsetProperOver sY Z → IsClosedSubsetProperOver sX (Z.preimage (f := f.base) f.continuous))",
+  "branch": "sheaf-dag",
+  "by": "K1",
+  "date": "2026-10-11",
+  "existing": false,
+  "file": "lean/Sheaf/AlgebraicGeometry/ClosedSubsetProperOverBaseUnionPreimage.lean"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-cup",
+  "group": "K1",
+  "result": "pass",
+  "note": "X,S,sX LFT shared; (1) Fin n family of Closeds each IsClosedSubsetProperOver sX, conclusion on ⨆ (closed finite union, n=0 bot); (2) Y, sY LFT, IsProper f, f ≫ sY = sX, Z proper via sY, Closeds.preimage along f.base proper via sX; landed H1 IsClosedSubsetProperOver, no second spelling"
  }
 }
