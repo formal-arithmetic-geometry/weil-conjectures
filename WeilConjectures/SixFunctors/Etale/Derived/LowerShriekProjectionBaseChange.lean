@@ -183,6 +183,23 @@ variable [Etale.UpperStarPreservesFlat A] [HasSmallSiteSheafify A]
   [PreservesFilteredColimitsOfSize.{u + 1, u + 1} (CategoryTheory.forget A)]
   [∀ Z : Scheme.{u}, Z.smallEtaleTopology.HasSheafCompose (CategoryTheory.forget A)]
 
+/-- Restating an intertwining property of a morphism `κ : Rf_!(c₁) ⟶ Rf_!(c₂)` with the projection
+maps. Specialising this generic statement, rather than using a specialised proof directly, keeps
+the instance terms of the projection maps identical to those of other generic statements. -/
+lemma projectionMapOfCompactification_comp_of_forall {X Y : Scheme.{u}} {f : X ⟶ Y}
+    (c₁ c₂ : Compactification f) (κ : Rf_!(c₁)[A] ⟶ Rf_!(c₂)[A])
+    (h : ∀ (K : DerivedCategory (Sheaf X.smallEtaleTopology A))
+      (L : DerivedCategory (Sheaf Y.smallEtaleTopology A)),
+      ((projectionMapOfCompactification A c₁).app K).app L ≫
+        κ.app (((-⊗ᴸ-(X)[A]).obj K).obj (L((f)^*[A]).obj L)) =
+      ((-⊗ᴸ-(Y)[A]).map (κ.app K)).app L ≫ ((projectionMapOfCompactification A c₂).app K).app L)
+    (K : DerivedCategory (Sheaf X.smallEtaleTopology A))
+    (L : DerivedCategory (Sheaf Y.smallEtaleTopology A)) :
+    ((projectionMapOfCompactification A c₁).app K).app L ≫
+        κ.app (((-⊗ᴸ-(X)[A]).obj K).obj (L((f)^*[A]).obj L)) =
+      ((-⊗ᴸ-(Y)[A]).map (κ.app K)).app L ≫ ((projectionMapOfCompactification A c₂).app K).app L :=
+  h K L
+
 /-- **The projection map commutes with compactly supported base change**, for a compactification
 `c'` of the base change lying over `c`. -/
 theorem projectionMapOfCompactification_baseChange'

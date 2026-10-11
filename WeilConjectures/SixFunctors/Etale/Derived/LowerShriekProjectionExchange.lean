@@ -109,21 +109,12 @@ theorem projectionMapOfCompactification_rightDerivedLowerShriekBaseChangeMap'
           (L((g)^*[ModuleCat.{u + 1} Λ]).obj L) := by
   have thm := projectionMapOfCompactification_baseChange (ModuleCat.{u + 1} Λ) sq c c' q hi hp
     K L
-  have hD' : ((projectionMapOfCompactification (ModuleCat.{u + 1} Λ) c').app
-        (L((g')^*[ModuleCat.{u + 1} Λ]).obj K)).app (L((g)^*[ModuleCat.{u + 1} Λ]).obj L) ≫
-      (rightDerivedLowerShriekOfCompactificationIso Λ c'
-        (HasCompactification.compactification f')).hom.app
-          (((-⊗ᴸ-(X')[ModuleCat.{u + 1} Λ]).obj (L((g')^*[ModuleCat.{u + 1} Λ]).obj K)).obj
-            (L((f')^*[ModuleCat.{u + 1} Λ]).obj (L((g)^*[ModuleCat.{u + 1} Λ]).obj L))) =
-      ((-⊗ᴸ-(Y')[ModuleCat.{u + 1} Λ]).map
-          ((rightDerivedLowerShriekOfCompactificationIso Λ c'
-            (HasCompactification.compactification f')).hom.app
-              (L((g')^*[ModuleCat.{u + 1} Λ]).obj K))).app (L((g)^*[ModuleCat.{u + 1} Λ]).obj L) ≫
-        ((projectionMapOfCompactification (ModuleCat.{u + 1} Λ)
-          (HasCompactification.compactification f')).app
-            (L((g')^*[ModuleCat.{u + 1} Λ]).obj K)).app (L((g)^*[ModuleCat.{u + 1} Λ]).obj L) :=
-    projectionMapOfCompactification_rightDerivedLowerShriekOfCompactificationIso Λ c'
-      (HasCompactification.compactification f') _ _
+  have hD' := projectionMapOfCompactification_comp_of_forall (ModuleCat.{u + 1} Λ) c'
+      (HasCompactification.compactification f')
+      (rightDerivedLowerShriekOfCompactificationIso Λ c' (HasCompactification.compactification f')).hom
+      (projectionMapOfCompactification_rightDerivedLowerShriekOfCompactificationIso Λ c'
+        (HasCompactification.compactification f')) (L((g')^*[ModuleCat.{u + 1} Λ]).obj K)
+      (L((g)^*[ModuleCat.{u + 1} Λ]).obj L)
   simp only [rightDerivedLowerShriekBaseChangeMap', NatTrans.comp_app, Functor.whiskerLeft_app,
     Functor.map_comp, Category.assoc]
   rw [← NatTrans.naturality_assoc (rightDerivedLowerShriekIso Λ c').hom,
@@ -131,8 +122,6 @@ theorem projectionMapOfCompactification_rightDerivedLowerShriekBaseChangeMap'
   erw [reassoc_of% thm]
   rw [show rightDerivedLowerShriekIso Λ c' = rightDerivedLowerShriekOfCompactificationIso Λ c'
       (HasCompactification.compactification f') from rfl]
-  -- TODO: finishing with `rw [hD']` (or `slice_lhs 3 4 => rw [hD']`) elaborates quickly but the
-  -- KERNEL check then needs > 10 GB; see the memory notes of 2026-10-11.
   sorry
 
 /-- **The projection map commutes with the exchange map `Ex_!`**: for a cartesian square
