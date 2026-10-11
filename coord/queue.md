@@ -1,11 +1,11 @@
 # Work queue
 
-1002 items; claim with `tools/claim.py next <group> [--stage N]`.
+1011 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (1002)
+## Stage 2: nodes to state (1011)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -30,7 +30,6 @@
 | `def-weil-pbc-nagata-ring` | 1 | state |
 | `def-weil-pbc-popescu-resolution` | 1 | state |
 | `def-weil-pbc-proetale-site` | 1 | state |
-| `def-weil-pbc-relative-global-complete-intersection` | 1 | state |
 | `def-weil-pbc-serre-conditions-rk-sk` | 1 | state |
 | `def-weil-pbc-torsion-etale-sheaf` | 1 | state |
 | `def-weil-pbc-universal-first-order-thickening` | 1 | state |
@@ -42,7 +41,6 @@
 | `lem-exc-etale-open-subgroup-fixed-field` | 1 | state |
 | `lem-exc-etale-sheaves-gsets-point` | 1 | state |
 | `lem-exc-field-sections-stalk-invariants` | 1 | state |
-| `lem-exc-finite-galois-algebra-tensor-decomposition` | 1 | state |
 | `lem-exc-finite-galois-sections-descent` | 1 | state |
 | `lem-exc-finite-galois-sheaf-sections-coproduct` | 1 | state |
 | `lem-exc-finite-galois-tensor-decomposition` | 1 | state |
@@ -428,6 +426,7 @@
 | `lem-weil-pbc-effaceable-delta-functor-universal` | 1 | state |
 | `lem-weil-pbc-elementary-etale-finite-piece-persistence` | 1 | state |
 | `lem-weil-pbc-equation-count-fibre-dimension-flat` | 1 | state |
+| `lem-weil-pbc-equation-count-localize-relative-global-complete-intersection` | 1 | state |
 | `lem-weil-pbc-essentially-constant-splitting` | 1 | state |
 | `lem-weil-pbc-essentially-finite-presentation-over-intermediate` | 1 | state |
 | `lem-weil-pbc-essentially-smooth-composition` | 1 | state |
@@ -817,6 +816,14 @@
 | `lem-weil-pbc-regular-sequence-short-exact-sequence` | 1 | state |
 | `lem-weil-pbc-regular-sequence-swap-two` | 1 | state |
 | `lem-weil-pbc-regular-through-localization` | 1 | state |
+| `lem-weil-pbc-relative-global-complete-intersection-base-change` | 1 | state |
+| `lem-weil-pbc-relative-global-complete-intersection-conormal-free` | 1 | state |
+| `lem-weil-pbc-relative-global-complete-intersection-flat` | 1 | state |
+| `lem-weil-pbc-relative-global-complete-intersection-local-regular-sequence` | 1 | state |
+| `lem-weil-pbc-relative-global-complete-intersection-noetherian-approximation` | 1 | state |
+| `lem-weil-pbc-relative-global-complete-intersection-partial-local-flat` | 1 | state |
+| `lem-weil-pbc-relative-global-complete-intersection-principal-localization` | 1 | state |
+| `lem-weil-pbc-relative-global-complete-intersection-smooth-jacobian` | 1 | state |
 | `lem-weil-pbc-right-derived-universal-delta-functor` | 1 | state |
 | `lem-weil-pbc-ring-quasi-finite-locus-open` | 1 | state |
 | `lem-weil-pbc-ring-universal-first-order-thickening` | 1 | state |
@@ -877,6 +884,7 @@
 | `lem-weil-pbc-smooth-over-normal-ring-normal` | 1 | state |
 | `lem-weil-pbc-smooth-over-product-ring` | 1 | state |
 | `lem-weil-pbc-smooth-product-algebra` | 1 | state |
+| `lem-weil-pbc-smooth-retract-relative-global-complete-intersection` | 1 | state |
 | `lem-weil-pbc-smooth-retract-standard-smooth` | 1 | state |
 | `lem-weil-pbc-spec-algebraically-closed-etale-sheaf-constant` | 1 | state |
 | `lem-weil-pbc-spec-field-point-residue-field` | 1 | state |
@@ -920,6 +928,7 @@
 | `lem-weil-pbc-symmetric-algebra-graded` | 1 | state |
 | `lem-weil-pbc-symmetric-algebra-quotient-module` | 1 | state |
 | `lem-weil-pbc-symmetric-projective-presentation-conormal` | 1 | state |
+| `lem-weil-pbc-syntomic-at-prime-relative-global-complete-intersection` | 1 | state |
 | `lem-weil-pbc-tate-n2-complete-principal` | 1 | state |
 | `lem-weil-pbc-tensor-field-extension-galois-invariants` | 1 | state |
 | `lem-weil-pbc-tensor-finite-type-limit` | 1 | state |
@@ -1012,7 +1021,7 @@
 | `lem-sc-normalization-properties` | 3 | state |
 | `def-nagata-fixed-base-separated-stage` | 6 | state |
 
-Not open yet: 1185 nodes that wait for a statement dependency, 40 nodes that wait for stage 1.
+Not open yet: 1174 nodes that wait for a statement dependency, 40 nodes that wait for stage 1.
 
 ## Stage 3: modules to prove (0)
 
