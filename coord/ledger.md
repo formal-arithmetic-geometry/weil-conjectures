@@ -3754,3 +3754,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 08:05 L: merged deliver/H1/def-pc-base-change (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.BaseChangeConventions AlgebraicGeometry.Scheme.Modules.moduleBaseChange)
 - 08:05 L: merged deliver/G1/lem-sc-conductor-ideal-restriction (stage 2; reviewer FIX; first push; Sheaf.AlgebraicGeometry.ConductorIdealRestriction AlgebraicGeometry.Scheme.conductorIdeal_restriction_isIso)
 - 08:05 L: merged deliver/M1/lem-pc-stalk-tensor-complex (stage 2; reviewer PASS; after a return; Sheaf.Algebra.Homology.StalkTensorComplex CochainComplex.exists_stalk_tensor_complex_iso)
+- 08:05 L: returned deliver/J1/lem-pc-very-ample-disjoint-union (reviewer RETURN: Reviewer R-vad1129, head 21ab0f071. H13/H4: the dependency module Sheaf.AlgebraicGeometry.Modules.VeryAmpleCompleteLinea)
