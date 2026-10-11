@@ -108,5 +108,23 @@
   "group": "J1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-fpd2343 (reviewer sub-agent of L); spot-checked: Read packet whole; checked citing node lem-pc-noetherian-approximation-data step 2 (directed system, support proper per def-weil-pbc-closed-subset-proper-over-base), Tags 01ZR/05LY/081G against both new nodes (true statements, narrower than item, not duplicates of 01ZR/081G-tagged nodes), step 2 common-stage base change keeps differentials/flatness/fp. FIX more, RETURN less: C4/B3 - item and lem-pc-proper-support-descent said 'scheme-theoretic support proper over S [def-weil-pbc-closed-subset-proper-over-base]' but the cited definition defines only (set) support proper over S, and the citing node lem-pc-noetherian-approximation-data assumes support proper; replaced by 'support' (equivalent for finite type modules, Morphisms 29.5.3, so statements stay true and now match the citing node and definition). Missed by J1 second reading (it introduced the wording).; 2 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FiniteFlatProperSupportDescent",
+  "declaration": "AlgebraicGeometry.finite_flat_proper_support_descent",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteFlatProperSupportDescent.lean",
+  "statement": "theorem finite_flat_proper_support_descent {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] (R : I ⥤ CommRingCat.{u}) [∀ k : I, IsNoetherianRing (R.obj k)] (c : Cone (R.op ⋙ Scheme.Spec)) (hc : IsLimit c) [IsAffine c.pt] (i : I) {Xi : Scheme.{u}} (f : Xi ⟶ Spec (R.obj i)) [LocallyOfFinitePresentation f] [QuasiCompact f] [QuasiSeparated f] (G : CochainComplex (pullback f (c.π.app (op i))).Modules ℤ) (hG_bounded : ∃ a b : ℤ, ∀ n : ℤ, n < a ∨ b < n → IsZero (G.X n)) (hG_fp : ∀ n : ℤ, (G.X n).IsFinitePresentation) (hG_flat : ∀ n : ℤ, (G.X n).IsFlatOver (pullback.snd f (c.π.app (op i)))) (hG_support : ∀ n : ℤ, Scheme.Modules.HasSupportProperOver (pullback.snd f (c.π.app (op i))) (G.X n)) : ∃ (j : I) (hij : i ≤ j) (Gj : CochainComplex (pullback f (Spec.map (R.map (homOfLE hij)))).Modules ℤ), (∃ a b : ℤ, ∀ n : ℤ, n < a ∨ b < n → IsZero (Gj.X n)) ∧ (∀ n : ℤ, (Gj.X n).IsFinitePresentation) ∧ (∀ n : ℤ, (Gj.X n).IsFlatOver (pullback.snd f (Spec.map (R.map (homOfLE hij))))) ∧ (∀ n : ℤ, Scheme.Modules.HasSupportProperOver (pullback.snd f (Spec.map (R.map (homOfLE hij)))) (Gj.X n)) ∧ ∃ e : ∀ n : ℤ, (Scheme.Modules.moduleBaseChange f (T := Over.mk (Spec.map (R.map (homOfLE hij)))) (T' := Over.mk (c.π.app (op i))) (Over.homMk (c.π.app (op j)) (c.w (homOfLE hij).op))).obj (Gj.X n) ≅ G.X n, ∀ n m : ℤ, (Scheme.Modules.moduleBaseChange f (T := Over.mk (Spec.map (R.map (homOfLE hij)))) (T' := Over.mk (c.π.app (op i))) (Over.homMk (c.π.app (op j)) (c.w (homOfLE hij).op))).map (Gj.d n m) ≫ (e m).hom = (e n).hom ≫ G.d n m",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "F1",
+  "result": "pass",
+  "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
  }
 }
