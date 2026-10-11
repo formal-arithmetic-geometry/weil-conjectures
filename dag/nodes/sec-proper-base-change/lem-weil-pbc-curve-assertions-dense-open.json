@@ -345,5 +345,23 @@
   "by": "L",
   "result": "pass",
   "note": "Stacks 0GJA; the converse direction restated with the hypothesis that F is p-primary or prime to p, since the literature claim has a gap for mixed torsion F (counterexample in the split report); every current user satisfies the hypothesis"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.Curve.DenseOpenAssertions",
+  "declaration": "AlgebraicGeometry.IsCurve.dense_open_assertions",
+  "file": "lean/Sheaf/AlgebraicGeometry/Curve/DenseOpenAssertions.lean",
+  "statement": "theorem IsCurve.dense_open_assertions {k : Type u} [Field k] [IsAlgClosed k] (P : CurveCoefficientPair k) (hP : P.IsConstructible) (U : P.C.Opens) (hU : Dense (U : Set P.C)) : let E := (forget₂ (ModuleCat.{u + 1} ℤ) AddCommGrpCat.{u + 1}).inv ⋙ ModuleCat.restrictScalars (ULift.ringEquiv : ULift.{u + 1} ℤ ≃+* ℤ).toRingHom let F := (sheafCompose P.C.smallEtaleTopology E).obj P.F let F' := (Etale.openImmersionLowerShriek AddCommGrpCat.{u + 1} U.ι).obj ((Etale.upperStar AddCommGrpCat.{u + 1} U.ι).obj P.F) let G := (sheafCompose P.C.smallEtaleTopology E).obj F' (IsCurve.Assertions (ULift.{u + 1} ℤ) P.toSpec G → IsCurve.Assertions (ULift.{u + 1} ℤ) P.toSpec F) ∧ ((Scheme.IsTorsionSheafOfInvertibleOrder (Spec (.of k)) F ∨ ∃ p : ℕ, p.Prime ∧ CharP k p ∧ Scheme.IsPrimaryTorsionSheaf (ULift.{u + 1} ℤ) F p) → IsCurve.Assertions (ULift.{u + 1} ℤ) P.toSpec F → IsCurve.Assertions (ULift.{u + 1} ℤ) P.toSpec G) ∧ (∀ r : ℕ, r.Prime → r • 𝟙 P.F = 0 → (IsCurve.Assertions (ULift.{u + 1} ℤ) P.toSpec F ↔ IsCurve.Assertions (ULift.{u + 1} ℤ) P.toSpec G))",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-cad1142",
+  "group": "H1",
+  "result": "pass",
+  "note": "k [IsAlgClosed]; P : CurveCoefficientPair (separated f.t. dim<=1, torsion); hP IsConstructible; U : P.C.Opens + Dense; F'=openImmersionLowerShriek(upperStar U.ι P.F); bridge E as E1/J1; clause1 G->F unconditional; clause2 InvertibleOrder(Spec k) ∨ ∃p prime, CharP k p, IsPrimaryTorsionSheaf F p; clause3 prime r, r•𝟙 P.F=0 iff; #check names resolved"
  }
 }

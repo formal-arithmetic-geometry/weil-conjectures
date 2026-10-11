@@ -4489,3 +4489,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 11:42 L: merged deliver/E1/lem-weil-pbc-integral-closure-finite-fibre-quasi-finite (stage 2; reviewer FIX; first push; Sheaf.RingTheory.FiniteQuotientComponentQuasiFinite Algebra.isQuasiFiniteAtPrime_of_finite_quotient_component)
 - 11:42 L: merged deliver/M1/lem-weil-pbc-descend-surjective (stage 2; reviewer FIX; first push; Sheaf.AlgebraicGeometry.DescendSurjective AlgebraicGeometry.exists_surjective_of_isLimit)
 - 11:43 L: merged deliver/J1/lem-weil-pbc-limit-tower-essentially-finite-presentation (stage 2; reviewer FIX; first push; Sheaf.Paper.LimitTowerEssentiallyFinitePresentation WeilConjectures.limit_tower_essentially_finite_presentation)
+- 11:44 L: merged deliver/H1/lem-weil-pbc-curve-assertions-dense-open (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.Curve.DenseOpenAssertions AlgebraicGeometry.IsCurve.dense_open_assertions)
