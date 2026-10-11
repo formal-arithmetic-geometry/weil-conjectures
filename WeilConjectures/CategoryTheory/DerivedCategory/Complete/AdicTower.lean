@@ -178,4 +178,51 @@ noncomputable def reductionConeIso (n : ℕ)
 
 end Reduction
 
+section Reduction'
+
+variable {I : Ideal R} {ϖ : R} (hϖ : ϖ ∈ nonZeroDivisors R) (hI : I = Ideal.span {ϖ})
+
+lemma reductionConeIso_hom_naturality (n : ℕ)
+    {X Y : CochainComplex (Sheaf J (ModuleCat.{u + 1} R)) ℤ} (f : X ⟶ Y) :
+    (Q.map f ▷ (quotPowFunctor J I).obj (op n)) ≫ (reductionConeIso hϖ hI n Y).hom =
+      (reductionConeIso hϖ hI n X).hom ≫
+        Q.map (CochainComplex.mappingCone.map (ϖ ^ n • 𝟙 X) (ϖ ^ n • 𝟙 Y) f f (by simp)) :=
+  TensorStructure.reductionIso_hom_naturality (sheafTensorStructure J R) rfl _ _ f
+
+/-- Under `reductionConeIso`, the reduction map `Q X ⟶ Q X ⊗ᴸ R/Iⁿ` is the inclusion of `X` into
+the mapping cone. -/
+lemma derivedCompletionCone_π_app_reductionConeIso_hom (n : ℕ)
+    (X : CochainComplex (Sheaf J (ModuleCat.{u + 1} R)) ℤ) :
+    (derivedCompletionCone J I (Q.obj X)).π.app (op n) ≫ (reductionConeIso hϖ hI n X).hom =
+      Q.map (CochainComplex.mappingCone.inr (ϖ ^ n • 𝟙 X)) :=
+  by
+  rw [show (derivedCompletionCone J I (Q.obj X)).π.app (op n) = (ρ_ (Q.obj X)).inv ≫
+    Q.obj X ◁ ((sheafTensorStructure J R).ε ≫ (singleFunctor _ 0).map
+      ((Sheaf.quotPowCone J I).π.app (op n))) from rfl, assoc]
+  exact TensorStructure.reduction_reductionIso_hom (sheafTensorStructure J R) rfl
+    (smul_comp_sheafQuotPowCone_π hI n) (sheafQuotPowShortComplex_shortExact' hϖ hI n) X
+
+/-- `reductionConeIso` is compatible with the transition `R/Iⁿ ⟶ R/Iᵏ` for `k ≤ n`. -/
+lemma derivedCompletionDiagram_map_reductionConeIso_hom {k n : ℕ} (h : k ≤ n)
+    (X : CochainComplex (Sheaf J (ModuleCat.{u + 1} R)) ℤ) :
+    (derivedCompletionDiagram J I (Q.obj X)).map (homOfLE h).op ≫
+        (reductionConeIso hϖ hI k X).hom =
+      (reductionConeIso hϖ hI n X).hom ≫ Q.map (CochainComplex.mappingCone.map
+        (ϖ ^ n • 𝟙 X) (ϖ ^ k • 𝟙 X) (ϖ ^ (n - k) • 𝟙 X) (𝟙 X)
+        (smul_comp_smul_eq (by rw [← pow_add, Nat.add_sub_cancel' h]) X).symm) :=
+  TensorStructure.whiskerLeft_reductionIso_hom (sheafTensorStructure J R) rfl
+    (by rw [← pow_add, Nat.add_sub_cancel' h]) _ _ _ _ _ ((Sheaf.quotPowCone J I).w _) X
+
+/-- The reduction maps `K ⟶ K ⊗ᴸ R/Iⁿ` are natural in `K`. -/
+@[reassoc]
+lemma derivedCompletionCone_π_app_naturality
+    {K K' : DerivedCategory (Sheaf J (ModuleCat.{u + 1} R))}
+    (f : K ⟶ K') (n : ℕ) :
+    (derivedCompletionCone J I K).π.app (op n) ≫ f ▷ (quotPowFunctor J I).obj (op n) =
+      f ≫ (derivedCompletionCone J I K').π.app (op n) := by
+  change ((ρ_ K).inv ≫ K ◁ _) ≫ _ = f ≫ (ρ_ K').inv ≫ K' ◁ _
+  rw [assoc, whisker_exchange, ← assoc, ← rightUnitor_inv_naturality, assoc]
+
+end Reduction'
+
 end DerivedCategory
