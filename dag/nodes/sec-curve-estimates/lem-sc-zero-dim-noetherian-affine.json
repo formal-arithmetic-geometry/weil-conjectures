@@ -128,5 +128,23 @@
   "group": "M1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-zna (reviewer sub-agent of L); spot-checked: Source: Stacks properties.tex Lemma 0AAX (lemma-locally-Noetherian-dimension-0: locally Noetherian dim 0 is a disjoint union of spectra of Artinian local rings, discrete topology) and 0CKV (lemma-dimension-zero: dim 0 separated, quasi-compact implies affine); the item (Noetherian, separated, dim<=0, incl. empty) agrees hypothesis by hypothesis. New node finite-discrete: Noetherian + dim<=0 gives discrete (0AAX) and quasi-compact discrete gives finite: true, empty case fine. New node finite-discrete-separated-affine: true (a one-point scheme is affine, a finite disjoint union of affines is affine; separatedness not even needed). Step 1 carried by lem-sc-zero-dim-noetherian-finite-discrete (the Noetherian-closed-subsets node is redundant but correct); step 2 by lem-sc-finite-discrete-separated-affine, its hypotheses qc+separated+finite discrete all available; step 3 elementary from def-weil-pbc-ample-invertible-module (qc, n=1, s=1, Y_1=Y affine). Small cases: empty scheme, Spec of a field, disjoint union of two Artinian spectra. Mathlib: verified Mathlib/AlgebraicGeometry/Limits.lean line 700, instance [Finite X] [DiscreteTopology X] : IsAffine X (name AlgebraicGeometry.instIsAffineOfFiniteOfDiscreteTopologyCarrierCarrierCommRingCat via exact?), a hit of the worker's own grep pattern that the verdict missed. Fixes: dag/nodes/sec-curve-estimates/lem-sc-finite-discrete-separated-affine.json: mathlib_searches[2] results/verdict corrected to that hit, mathlib_candidate added (decl stated without qc/separated; node is its immediate consequence); dag/nodes/sec-curve-estimates/lem-sc-zero-dim-noetherian-affine.json: proof step 3 text: states condition (1) quasi-compactness and n=1 explicitly (no change of mathematics). Start Sat Oct 10 03:14:55 PM UTC 2026, end Sat Oct 10 03:16:14 PM UTC 2026.; 2 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ZeroDimNoetherianAffine",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.isAffine_and_isAmple_tensorUnit_of_dim_le_zero",
+  "file": "lean/Sheaf/AlgebraicGeometry/ZeroDimNoetherianAffine.lean",
+  "statement": "theorem isAffine_and_isAmple_tensorUnit_of_dim_le_zero (Y : Scheme.{u}) [IsLocallyNoetherian Y] [CompactSpace Y] [Y.IsSeparated] (hdim : topologicalKrullDim Y ≤ 0) : IsAffine Y ∧ IsAmple Y (𝟙_ Y.Modules)",
+  "branch": "sheaf-dag",
+  "by": "J1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-zna1134",
+  "group": "J1",
+  "result": "pass",
+  "note": "Y : Scheme.{u}; Noetherian = [IsLocallyNoetherian Y] [CompactSpace Y] (Mathlib IsNoetherian's two parents, as sibling C1 8ec289606); separated = [Y.IsSeparated] (Scheme.IsSeparated wraps IsSeparated (terminal.from Y), sc-family form H1 f1d86abbd); dim<=0 = topologicalKrullDim Y <= 0 in WithBot ℕ∞ incl. empty; affine = IsAffine Y; O_Y ample = Scheme.Modules.IsAmple Y (𝟙_ Y.Modules), #print confirms resolution to the recorded absolute predicate (not relative AlgebraicGeometry.IsAmple), IsInvertible instance on tensor unit found; no new defs, no duplicate (combined statement of landed siblings), no hollow hypothesis, single universe"
  }
 }
