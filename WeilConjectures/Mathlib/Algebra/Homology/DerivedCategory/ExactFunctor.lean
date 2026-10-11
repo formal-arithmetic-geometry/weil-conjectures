@@ -13,6 +13,7 @@ public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.HomologyS
 public import WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory.Plus
 public import WeilConjectures.Mathlib.CategoryTheory.Functor.ReflectsIso.Jointly
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.TStructure
+public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.Plus
 public import WeilConjectures.Mathlib.CategoryTheory.Triangulated.TStructure.SpectralObject
 
 /-!
@@ -707,6 +708,43 @@ noncomputable def mapDerivedCategoryPlusSingleFunctor (n : ℤ) :
       F.mapDerivedCategorySingleFunctor n ≪≫
       isoWhiskerLeft F (DerivedCategory.Plus.singleFunctorιIso D n).symm ≪≫
       (Functor.associator _ _ _).symm)
+
+/-- The isomorphisms `H^n(-) ⋙ F ≅ F.mapDerivedCategoryPlus ⋙ H^n(-)` are compatible with the
+shift sequence structure of the homology functors: they commute with the isomorphisms
+`H^a(X⟦n⟧) ≅ H^{a'}(X)` for `n + a = a'`. -/
+lemma mapDerivedCategoryPlusHomologyFunctorIso_hom_app_shiftIso (n a a' : ℤ) (h : n + a = a')
+    (X : DerivedCategory.Plus C) :
+    F.map (((DerivedCategory.Plus.homologyFunctor C 0).shiftIso n a a' h).hom.app X) ≫
+        (F.mapDerivedCategoryPlusHomologyFunctorIso a').hom.app X =
+      (F.mapDerivedCategoryPlusHomologyFunctorIso a).hom.app (X⟦n⟧) ≫
+        (DerivedCategory.Plus.homologyFunctor D a).map
+          ((F.mapDerivedCategoryPlus.commShiftIso n).hom.app X) ≫
+        ((DerivedCategory.Plus.homologyFunctor D 0).shiftIso n a a' h).hom.app
+          (F.mapDerivedCategoryPlus.obj X) := by
+  sorry
+
+/-- The isomorphism `H^n(F(A)[-n]) ≅ F(H^n(A[-n]))` given by `F.mapDerivedCategoryPlusSingleFunctor`
+and `F.mapDerivedCategoryPlusHomologyFunctorIso` is compatible with the identifications
+`H^n(A[-n]) ≅ A`. -/
+lemma mapDerivedCategoryPlusHomologyFunctorIso_hom_app_singleFunctor (n : ℤ) (A : C) :
+    (F.mapDerivedCategoryPlusHomologyFunctorIso n).hom.app
+        ((DerivedCategory.Plus.singleFunctor C n).obj A) ≫
+      (DerivedCategory.Plus.homologyFunctor D n).map
+        ((F.mapDerivedCategoryPlusSingleFunctor n).hom.app A) ≫
+      (DerivedCategory.Plus.singleFunctorCompHomologyFunctorIso n).hom.app (F.obj A) =
+    F.map ((DerivedCategory.Plus.singleFunctorCompHomologyFunctorIso n).hom.app A) := by
+  sorry
+
+/-- The isomorphisms `F.mapDerivedCategoryPlusSingleFunctor` are compatible with the shifts. -/
+lemma mapDerivedCategoryPlusSingleFunctor_hom_app_shiftIso (n a a' : ℤ) (h : n + a = a')
+    (A : C) :
+    F.mapDerivedCategoryPlus.map
+        (((DerivedCategory.Plus.singleFunctors C).shiftIso n a a' h).hom.app A) ≫
+      (F.mapDerivedCategoryPlusSingleFunctor a).hom.app A =
+    (F.mapDerivedCategoryPlus.commShiftIso n).hom.app _ ≫
+      ((F.mapDerivedCategoryPlusSingleFunctor a').hom.app A)⟦n⟧' ≫
+      ((DerivedCategory.Plus.singleFunctors D).shiftIso n a a' h).hom.app (F.obj A) := by
+  sorry
 
 end Plus
 

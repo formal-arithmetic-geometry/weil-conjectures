@@ -16,6 +16,7 @@ public import WeilConjectures.Mathlib.Algebra.Homology.SpectralObject.SpectralSe
 public import WeilConjectures.Mathlib.Algebra.Homology.SpectralSequence.Basic
 public import WeilConjectures.Mathlib.CategoryTheory.Preadditive.Injective.Preserves
 public import WeilConjectures.Mathlib.CategoryTheory.Triangulated.SpectralObject
+public import WeilConjectures.Mathlib.CategoryTheory.Triangulated.TStructure.SpectralObject
 
 /-!
 # The Grothendieck spectral sequence
@@ -414,6 +415,81 @@ noncomputable def grothendieckE₂BaseChange (eF : F ⋙ β ≅ α ⋙ F') (eG :
     (F.rightDerived q ⋙ G.rightDerived p) ⋙ γ ⟶ α ⋙ F'.rightDerived q ⋙ G'.rightDerived p :=
   Functor.whiskerLeft (F.rightDerived q) (rightDerivedBaseChange eG.hom p) ≫
     Functor.whiskerRight (rightDerivedBaseChange eF.hom q) (G'.rightDerived p)
+
+/-- The natural transformation `R⁺F(X[0]) ⟶ R⁺F'((α X)[0])` in `D⁺(B')`, natural in `X`, given
+by the base change morphism `β⁺ R⁺F ⟶ R⁺F' α⁺` of the right derived functors. -/
+noncomputable def rightDerivedFunctorPlusSingleBaseChange (eF : F ⋙ β ≅ α ⋙ F') :
+    DerivedCategory.Plus.singleFunctor A 0 ⋙ F.rightDerivedFunctorPlus ⋙
+        β.mapDerivedCategoryPlus ⟶
+      α ⋙ DerivedCategory.Plus.singleFunctor A' 0 ⋙ F'.rightDerivedFunctorPlus :=
+  Functor.whiskerLeft (DerivedCategory.Plus.singleFunctor A 0)
+      (rightDerivedFunctorPlusBaseChange eF.hom) ≫
+    (Functor.associator _ _ _).inv ≫
+    Functor.whiskerRight (α.mapDerivedCategoryPlusSingleFunctor 0).hom
+      F'.rightDerivedFunctorPlus ≫
+    (Functor.associator _ _ _).hom
+
+/-- The morphism of triangulated spectral objects underlying the base change morphism of the
+Grothendieck spectral sequences: on `τ_{≥ a} τ_{< b} RF(X)` it is the base change morphism
+`γ⁺ R⁺G ⟶ R⁺G' β⁺`, followed by the commutation of the t-exact functor `β⁺` with the
+truncations and the base change morphism `β⁺ RF(X) ⟶ RF'(α X)`. -/
+noncomputable def grothendieckTriangulatedSpectralObjectBaseChange (eF : F ⋙ β ≅ α ⋙ F')
+    (eG : G ⋙ γ ≅ β ⋙ G') :
+    DerivedCategory.Plus.singleFunctor A 0 ⋙ F.rightDerivedFunctorPlus ⋙
+        DerivedCategory.Plus.TStructure.t.spectralObjectFunctor ⋙
+        G.rightDerivedFunctorPlus.mapTriangulatedSpectralObject EInt ⋙
+        γ.mapDerivedCategoryPlus.mapTriangulatedSpectralObject EInt ⟶
+      α ⋙ DerivedCategory.Plus.singleFunctor A' 0 ⋙ F'.rightDerivedFunctorPlus ⋙
+        DerivedCategory.Plus.TStructure.t.spectralObjectFunctor ⋙
+        G'.rightDerivedFunctorPlus.mapTriangulatedSpectralObject EInt :=
+  Functor.whiskerLeft (DerivedCategory.Plus.singleFunctor A 0 ⋙ F.rightDerivedFunctorPlus ⋙
+      DerivedCategory.Plus.TStructure.t.spectralObjectFunctor)
+      ((Functor.mapTriangulatedSpectralObjectCompIso _ _ EInt).inv ≫
+        NatTrans.mapTriangulatedSpectralObject (rightDerivedFunctorPlusBaseChange eG.hom) EInt ≫
+        (Functor.mapTriangulatedSpectralObjectCompIso _ _ EInt).hom) ≫
+    Functor.whiskerLeft (DerivedCategory.Plus.singleFunctor A 0 ⋙ F.rightDerivedFunctorPlus)
+      ((Functor.associator _ _ _).inv ≫
+        Functor.whiskerRight (β.mapDerivedCategoryPlus.mapTriangulatedSpectralObjectIso
+          DerivedCategory.Plus.TStructure.t DerivedCategory.Plus.TStructure.t).hom
+          (G'.rightDerivedFunctorPlus.mapTriangulatedSpectralObject EInt) ≫
+        (Functor.associator _ _ _).hom) ≫
+    (Functor.associator _ _ _).inv ≫ (Functor.associator _ _ _).inv ≫
+    Functor.whiskerRight (rightDerivedFunctorPlusSingleBaseChange F F' eF)
+      (DerivedCategory.Plus.TStructure.t.spectralObjectFunctor ⋙
+        G'.rightDerivedFunctorPlus.mapTriangulatedSpectralObject EInt) ≫
+    (Functor.associator _ _ _).hom ≫ Functor.whiskerLeft α (Functor.associator _ _ _).hom
+
+/-- Applying `γ` to the spectral object of the Grothendieck spectral sequence amounts to applying
+the homology functor after `γ⁺` on the derived category. -/
+noncomputable def grothendieckSpectralObjectFunctorCompMapSpectralObjectIso :
+    (G.rightDerivedFunctorPlus.mapTriangulatedSpectralObject EInt ⋙
+        (DerivedCategory.Plus.homologyFunctor C 0).mapHomologicalSpectralObject EInt) ⋙
+        γ.mapSpectralObject EInt ≅
+      G.rightDerivedFunctorPlus.mapTriangulatedSpectralObject EInt ⋙
+        γ.mapDerivedCategoryPlus.mapTriangulatedSpectralObject EInt ⋙
+        (DerivedCategory.Plus.homologyFunctor C' 0).mapHomologicalSpectralObject EInt :=
+  Functor.associator _ _ _ ≪≫
+    Functor.isoWhiskerLeft (G.rightDerivedFunctorPlus.mapTriangulatedSpectralObject EInt)
+      (Functor.mapHomologicalSpectralObjectCompMapSpectralObjectIso
+        (DerivedCategory.Plus.homologyFunctor C 0)
+        (DerivedCategory.Plus.homologyFunctor C' 0) γ.mapDerivedCategoryPlus γ
+        (fun n ↦ γ.mapDerivedCategoryPlusHomologyFunctorIso n)
+        (fun a a' h X ↦ γ.mapDerivedCategoryPlusHomologyFunctorIso_hom_app_shiftIso
+          1 a a' h X) EInt)
+
+-- Unifying the source and target with the composed functors needs unfolding of the definitions.
+set_option maxHeartbeats 1000000 in
+/-- The base change morphism between the spectral objects of two Grothendieck spectral
+sequences related by exact functors, see `Functor.exists_grothendieckSpectralObject_baseChange`. -/
+noncomputable def grothendieckSpectralObjectBaseChange (eF : F ⋙ β ≅ α ⋙ F')
+    (eG : G ⋙ γ ≅ β ⋙ G') :
+    F.grothendieckSpectralObjectFunctor G ⋙ γ.mapSpectralObject EInt ⟶
+      α ⋙ F'.grothendieckSpectralObjectFunctor G' :=
+  Functor.whiskerLeft (DerivedCategory.Plus.singleFunctor A 0 ⋙ F.rightDerivedFunctorPlus ⋙
+      DerivedCategory.Plus.TStructure.t.spectralObjectFunctor)
+      (grothendieckSpectralObjectFunctorCompMapSpectralObjectIso G (γ := γ)).hom ≫
+    Functor.whiskerRight (grothendieckTriangulatedSpectralObjectBaseChange F G F' G' eF eG)
+      ((DerivedCategory.Plus.homologyFunctor C' 0).mapHomologicalSpectralObject EInt)
 
 /-- **Base change for the Grothendieck spectral sequence.** Let `(F, G)` and `(F', G')` be
 composable pairs with acyclicity, related by exact functors `α : A ⥤ A'`, `β : B ⥤ B'`,
