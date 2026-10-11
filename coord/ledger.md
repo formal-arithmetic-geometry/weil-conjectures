@@ -4071,3 +4071,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 09:42 L: merged deliver/C1/lem-weil-pbc-dimension-inequality-quasi-finite (stage 2; reviewer PASS; first push; Sheaf.RingTheory.QuasiFiniteLocalDimension Algebra.ringKrullDim_le_of_isQuasiFiniteAtPrime)
 - 09:42 L: merged deliver/G1/lem-sc-vector-bundle-line-subbundle (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.VectorBundleLineSubbundle AlgebraicGeometry.exists_saturated_line_subbundle)
 - 09:42 L: merged deliver/K1/lem-weil-pbc-differentials-dimension-bound-smooth-at-prime (stage 2; reviewer PASS; first push; Sheaf.RingTheory.SmoothAtPrimeOfDifferentialsDimensionBound Algebra.isSmoothAtPrime_of_finrank_kaehlerDifferential_le)
+- 09:42 L: merged deliver/G1/lem-weil-pbc-dimension-at-point-local-ring-trdeg (stage 2; reviewer PASS; first push; Sheaf.RingTheory.DimensionAtPointLocalRingTrdeg AlgebraicGeometry.topologicalKrullDimAt_eq_ringKrullDim_add_trdeg)

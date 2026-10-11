@@ -165,5 +165,23 @@
   "item": "lem-weil-pbc-dimension-at-point-local-ring-trdeg",
   "worker": "stage1",
   "summary": "Split the proof exactly along Algebra Tag 00P1: identify the dimension of V(p) with the residue-field transcendence degree by Tag 00P0; enumerate the minimal primes below p and identify them after localization; express the local-ring dimension by maximal chains below p; and concatenate those chains with a maximal chain above p, using Tag 00OT to compute the local topological dimension. Added unsplit nodes for the previously absent Tags 00P0 and 00OT after LeanSearch, LeanFinder/Loogle, and Mathlib-source searches found no match."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.DimensionAtPointLocalRingTrdeg",
+  "declaration": "AlgebraicGeometry.topologicalKrullDimAt_eq_ringKrullDim_add_trdeg",
+  "file": "lean/Sheaf/RingTheory/DimensionAtPointLocalRingTrdeg.lean",
+  "statement": "theorem topologicalKrullDimAt_eq_ringKrullDim_add_trdeg {k : Type u} [Field k] {S : Type v} [CommRing S] [Algebra k S] [Algebra.FiniteType k S] (p : Ideal S) [p.IsPrime] : ∃ d r : ℕ, ringKrullDim (Localization.AtPrime p) = (d : WithBot ℕ∞) ∧ Algebra.trdeg k p.ResidueField = (r : Cardinal.{v}) ∧ topologicalKrullDimAt (⟨p, inferInstance⟩ : Spec (CommRingCat.of S)) = ((d + r : ℕ) : WithBot ℕ∞)",
+  "branch": "sheaf-dag",
+  "by": "G1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-dlt0943",
+  "group": "G1",
+  "result": "pass",
+  "note": "field k, finite type k-algebra S (Algebra.FiniteType), prime p; S_p = Localization.AtPrime p, kappa(p) = p.ResidueField with k-algebra via S (IsScalarTower k S kappa synthesized); dim_p Spec S = root topologicalKrullDimAt (#check, inf over opens) at the PrimeSpectrum point; ringKrullDim S_p; Algebra.trdeg k kappa : Cardinal.{v}; exists d r : N encodes finiteness of all three plus the sum formula; no domain hypothesis"
  }
 }
