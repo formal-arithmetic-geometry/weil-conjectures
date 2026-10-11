@@ -1,0 +1,122 @@
+{
+ "id": "def-weil-pbc-quasi-coherent-algebra",
+ "kind": "definition",
+ "title": "Quasi-coherent algebra sheaves and affine-local algebra properties",
+ "status": "split",
+ "statement": "Let $X$ be a scheme [def-pc-scheme]. For a sheaf $\\mathcal A$ of commutative $\\mathcal O_X$-algebras [def-weil-pbc-comm-algebra-sheaf], quasi-coherence means that its underlying $\\mathcal O_X$-module is quasi-coherent [pqf-def-coherent]. These algebra sheaves form a full subcategory. Such an algebra is finite, integral, or of finite presentation if on every affine open $U$ its structure map on sections is respectively a finite, integral, or finitely presented ring homomorphism. For a quasi-coherent algebra $\\mathcal A$, its finite quasi-coherent subalgebras are the subobjects of $\\mathcal A$ in algebra sheaves whose source is quasi-coherent and finite, ordered by factorization of their inclusions. Their diagram sends each subobject to its source and each inclusion to the induced algebra morphism.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "pqf-def-coherent",
+  "def-weil-pbc-comm-algebra-sheaf"
+ ],
+ "source": {
+  "document": "Stacks Project, Properties of Schemes, Section 28.23",
+  "place": "Properties, Section 28.23: definition of finite presentation before Lemma 28.23.10 (05JS), finite type before 28.23.11 (05JT), finite/integral before 28.23.12 (086N), and the collection in 28.23.13 (0817)"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "quasi coherent sheaf of commutative algebras on a scheme",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "integral quasi coherent algebra directed colimit finite finitely presented algebras",
+   "results": "8 hits: RingHom.QuasiFinite.of_isIntegral_of_finiteType, SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation, RingHom.EssFiniteType.exists_comp_map_eq_of_isColimit, Algebra.QuasiFinite.of_isIntegral_of_finiteType, AlgebraicGeometry.IsFinite.iff_isIntegralHom_and_locallyOfFiniteType, SheafOfModules.QuasicoherentData.instIsFiniteTypeLocalGeneratorsDataOfIsFinitePresentation, AlgebraicGeometry.IsFinite.instIsIntegralHom, AlgebraicGeometry.instLocallyOfFiniteTypeOfLocallyOfFinitePresentation",
+   "date": "2026-10-11",
+   "verdict": "reuse underlying module quasi-coherence; no algebra-sheaf predicate or target colimit statement"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.IsQuasicoherent",
+   "results": "12 hits: SheafOfModules.IsQuasicoherent, SheafOfModules.instIsQuasicoherentOfIsFinitePresentation, SheafOfModules.QuasicoherentData.isQuasicoherent, SheafOfModules.IsQuasicoherent.nonempty_quasicoherentData, SheafOfModules.IsQuasicoherent.mk, SheafOfModules.instIsQuasicoherentObjIsQuasicoherent, SheafOfModules.Presentation.isQuasicoherent, SheafOfModules.isQuasicoherent_over",
+   "date": "2026-10-11",
+   "verdict": "reuse underlying module quasi-coherence; no algebra-sheaf predicate or target colimit statement"
+  },
+  {
+   "tool": "grep",
+   "query": "QuasiCoherentAlgebra|QuasicoherentAlgebra|SheafOfAlgebras",
+   "results": "0 hits: ",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "independent second reading: algebra sheaves and quasi-coherent algebras in lean/Sheaf and dag/nodes",
+   "results": "Found landed def-weil-pbc-comm-algebra-sheaf and def-weil-pbc-finite-type-quasi-coherent-subalgebras; reuse CommAlgebraSheaf and toModule. No finite (as module) subalgebra diagram or full category of quasi-coherent algebras.",
+   "date": "2026-10-11",
+   "verdict": "reuse existing category and module functor; remaining notions absent"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-integral-algebra-directed-colimit-finite",
+  "date": "2026-10-11",
+  "group": "H1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-h1-constructible-representation",
+   "place": "The integral quasi-coherent algebra and its finite subalgebras in Stacks 0817, used in the approximation of an integral morphism by finite morphisms",
+   "via": [
+    "lem-weil-pbc-integral-algebra-directed-colimit-finite",
+    "lem-weil-pbc-integral-morphism-limit-of-finite",
+    "lem-weil-pbc-constructible-module-finite-pushforward-noetherian",
+    "lem-weil-pbc-constructible-module-finite-pushforward-embedding"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.QuasiCoherentAlgebra",
+  "declaration": "AlgebraicGeometry.QuasiCoherentAlgebra",
+  "file": "lean/Sheaf/AlgebraicGeometry/QuasiCoherentAlgebra.lean",
+  "statement": "abbrev QuasiCoherentAlgebra (X : Scheme.{u})",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-11",
+  "existing": false,
+  "declarations": [
+   "AlgebraicGeometry.Scheme.IsQuasiCoherentAlgebra",
+   "AlgebraicGeometry.QuasiCoherentAlgebra",
+   "AlgebraicGeometry.Scheme.CommAlgebraSheaf.IsFinite",
+   "AlgebraicGeometry.Scheme.CommAlgebraSheaf.IsIntegral",
+   "AlgebraicGeometry.Scheme.CommAlgebraSheaf.IsFinitePresentation",
+   "AlgebraicGeometry.QuasiCoherentAlgebra.FiniteSubalgebras",
+   "AlgebraicGeometry.QuasiCoherentAlgebra.finiteSubalgebraDiagram"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-iac1333",
+  "group": "H1",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-iac1333",
+  "group": "H1",
+  "result": "pass",
+  "note": "X Scheme.{v} + CompactSpace/QuasiSeparatedSpace (not hollow, inferInstance fails); A in full subcategory toModule.IsQuasicoherent as landed 05JT sibling; integral/finite/fp = RingHom.IsIntegral/Finite/FinitePresentation on every affine open; (1) all finite QC Subobjects, Nonempty+IsDirected, cocone tied to arrows, IsColimit; (2) I : Type v Preorder+Nonempty+IsDirected, F into QC algebras, finite and fp each stage, colimit cocone in algebra sheaves with iso to A; no duplicate of CommAlgebraSheaf/toModule; combined compile clean"
+ }
+}

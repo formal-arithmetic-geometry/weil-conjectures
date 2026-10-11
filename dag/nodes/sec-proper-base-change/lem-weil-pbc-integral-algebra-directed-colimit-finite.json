@@ -24,7 +24,8 @@
   "def-pc-scheme",
   "def-weil-pbc-scheme-conventions",
   "pqf-def-coherent",
-  "def-weil-pbc-category-colimit"
+  "def-weil-pbc-category-colimit",
+  "def-weil-pbc-quasi-coherent-algebra"
  ],
  "proof": [
   {
@@ -244,5 +245,23 @@
   "item": "lem-weil-pbc-integral-algebra-directed-colimit-finite",
   "worker": "stage1",
   "summary": "Split along Stacks Properties 0817 (tags verified in literature/stacks-project/tags/tags: 0817, 05JT, 05JS, 086N, 01PK, 01BS, 02JJ, 01PC, 01PB, 01CG, 01CL, 01IC, 01ID, 00DO). (1): Step 1 (finite = finite type for quasi-coherent subalgebras of an integral algebra, by 02JJ = lem-weil-pbc-finite-of-integral-generators) and Step 2 (05JT, new node). (2): Stacks' proof written out in Steps 3-9: F_i from 01PK (new node), Sym(F_i) (new node), kernels J_i and images (new node), E_ik from 01PK again, the ideals (E_ik) and quotients A_ik (finitely presented by a new ring-level node on Sym of a finitely presented module), the order on pairs (i,k) which Stacks leaves implicit (taken from 05JS) and its directedness by 01BS (new node), the colimit computed on affine sections (new node for colimits of quasi-coherent modules; existing nodes for algebra colimits, elementwise colimits, basis isomorphisms), finiteness for k >= k_0(i) by the argument of the proof of 086N, and the passage to the cofinal subset P_fin of finite stages (existing lem-weil-pbc-colimit-initial-full-subcategory). Stacks writes A_ki/'direct colimit' and 'Write J_i = colim E_ik as a colimit of finitely presented modules' while also using the generated ideals: the steps use the maps E_ik -> J_i (not submodules) as Stacks does. Statement kept. Mathlib (searched before, 5 queries) has nothing on quasi-coherent algebras; Algebra.finite_adjoin_of_finite_of_isIntegral and Algebra.FinitePresentation.quotient are the ring-level ingredients only."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.IntegralAlgebraDirectedColimitFinite",
+  "declaration": "AlgebraicGeometry.integral_algebra_directed_colimit_finite",
+  "file": "lean/Sheaf/AlgebraicGeometry/IntegralAlgebraDirectedColimitFinite.lean",
+  "statement": "theorem integral_algebra_directed_colimit_finite (X : Scheme.{v}) [CompactSpace X] [QuasiSeparatedSpace X] (A : QuasiCoherentAlgebra X) (hA : A.obj.IsIntegral) : (Nonempty A.FiniteSubalgebras ∧ IsDirected A.FiniteSubalgebras (· ≤ ·) ∧ ∃ (c : Cocone A.finiteSubalgebraDiagram) (e : c.pt ≅ A.obj), (∀ B : A.FiniteSubalgebras, c.ι.app B ≫ e.hom = B.val.arrow) ∧ Nonempty (IsColimit c)) ∧ (∃ (I : Type v) (_ : Preorder I) (_ : Nonempty I) (_ : IsDirected I (· ≤ ·)) (F : I ⥤ QuasiCoherentAlgebra X) (c : Cocone (F ⋙ (X.IsQuasiCoherentAlgebra).ι)) (e : c.pt ≅ A.obj), (∀ i : I, (F.obj i).obj.IsFinite ∧ (F.obj i).obj.IsFinitePresentation) ∧ Nonempty (IsColimit c))",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-iac1333",
+  "group": "H1",
+  "result": "pass",
+  "note": "X Scheme.{v} + CompactSpace/QuasiSeparatedSpace (not hollow, inferInstance fails); A in full subcategory toModule.IsQuasicoherent as landed 05JT sibling; integral/finite/fp = RingHom.IsIntegral/Finite/FinitePresentation on every affine open; (1) all finite QC Subobjects, Nonempty+IsDirected, cocone tied to arrows, IsColimit; (2) I : Type v Preorder+Nonempty+IsDirected, F into QC algebras, finite and fp each stage, colimit cocone in algebra sheaves with iso to A; no duplicate of CommAlgebraSheaf/toModule; combined compile clean"
  }
 }
