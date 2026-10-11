@@ -121,5 +121,23 @@
   "group": "G1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-efl2620 (reviewer sub-agent of L); spot-checked: Both 21:06 return points repaired: Step 1 now cites new lem-sc-lfp-field-extension-pointwise-descent (true: cokernel/kernel of a finite-type approximation have support pulled back from Spec B, and X_K->X is open, so vanishing near x_K gives vanishing near x; not a duplicate of 02KY global node or the smooth-over-k node lem-weil-pbc-smooth-at-prime-field-extension-descent; not elementary); child now uses Mathlib Algebra.IsEtaleAt (= FormallyEtale of B_q), true via flat base change of Omega and H1Cotangent and faithful flatness of B_q->(B_K)_{q_K}; Step 2 has every child hypothesis (B fp from Step 1 shrink, q_K over q, IsEtaleAt at q_K). FIX more, RETURN less: (1) C4 Step 2 claimed A_{q cap A}->(B_K)_{q_K} faithfully flat by 0C4Y (false; 0C4Y gives B_q->(B_K)_{q_K}); corrected and listed the child's hypotheses. (2) B child's parenthetical 'after localizing at q_K the map is finitely presented' repeated the ill-posed phrasing of return point 2; reworded to B_K fp, (B_K)_{q_K} flat, localized differentials zero. (3) C1 Step 1 used etale => lfp without citing def-weil-etale-morphism; added. Second reading missed (1) and (2).; 2 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.EtaleFaithfullyFlatLocal",
+  "declaration": "AlgebraicGeometry.etale_of_faithfullyFlat_fieldExtension",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleFaithfullyFlatLocal.lean",
+  "statement": "theorem etale_of_faithfullyFlat_fieldExtension (k K : Type u) [Field k] [Field K] [Algebra k K] {X Y : Over (Spec (CommRingCat.of k))} (f : X ⟶ Y) (x : X.left) (xK : (pullback X.hom (Spec.map (CommRingCat.ofHom (algebraMap k K))) : Scheme)) (hx : (pullback.fst X.hom (Spec.map (CommRingCat.ofHom (algebraMap k K)))) xK = x) : (let fK := ((Over.pullback (Spec.map (CommRingCat.ofHom (algebraMap k K)))).map f).left ∃ U : (pullback X.hom (Spec.map (CommRingCat.ofHom (algebraMap k K)))).Opens, xK ∈ U ∧ Etale (U.ι ≫ fK)) → ∃ U : X.left.Opens, x ∈ U ∧ Etale (U.ι ≫ f.left)",
+  "branch": "sheaf-dag",
+  "by": "J1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-ffl1317",
+  "group": "J1",
+  "result": "pass",
+  "note": "Return R-ffl1249 repaired in tree (diff checked): statement/stmt_deps/statement_change identical to sheaf-dag (H7), no def-sc-etale-at/EtaleAt.lean (H4/H12), docstring carries both node proof steps (H8). Matched: k,K fields with Algebra k K = field extension; X Y : Over (Spec k), f : X ⟶ Y = morphism of k-schemes; xK on Limits.pullback X.hom (Spec.map algebraMap) with pullback.fst xK = x = point above x; fK = (Over.pullback _).map f = h_T of def-pc-base-change; pointwise étale = ∃ U, _ ∈ U ∧ Etale (U.ι ≫ _) on both sides, implication fK-at-xK → f-at-x; statement is exactly the ← direction of landed E1 etaleAt_iff_fieldExtension; no added hypotheses; compile clean."
  }
 }
