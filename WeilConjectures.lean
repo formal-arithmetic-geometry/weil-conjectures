@@ -552,7 +552,9 @@ public import WeilConjectures.CategoryTheory.Sites.TransfinitePlusSheaf
 public import WeilConjectures.CategoryTheory.SpectralSequence.Grothendieck
 public import WeilConjectures.CategoryTheory.Triangulated.HomotopyLimit
 public import WeilConjectures.CategoryTheory.Triangulated.HomotopyLimit.Basic
+public import WeilConjectures.CategoryTheory.Triangulated.TStructure.Homology
 public import WeilConjectures.CategoryTheory.Triangulated.TStructure.Karoubian
+public import WeilConjectures.CategoryTheory.Triangulated.TStructure.ShortExact
 public import WeilConjectures.ClosedPoints
 public import WeilConjectures.Compactification.Affine
 public import WeilConjectures.Compactification.BaseChange
