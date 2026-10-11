@@ -240,5 +240,23 @@
  "tool_uses": [
   "lem-weil-pbc-strict-henselization-functoriality"
  ],
- "reviewed": "2026-10-10 L: 10 steps following 03QP (1) for sets (the stalk as sections over the strict henselization: new node 03Q9 degree 0; X^sh finite over O^sh, a product of strictly henselian local rings: new node 04GH; the factors matched to the geometric points over y (new Mathlib leaf on separably closed fields); sections of a disjoint union; 03QO for sets: new node; the germ node); 1 tool use accepted; 4 new nodes"
+ "reviewed": "2026-10-10 L: 10 steps following 03QP (1) for sets (the stalk as sections over the strict henselization: new node 03Q9 degree 0; X^sh finite over O^sh, a product of strictly henselian local rings: new node 04GH; the factors matched to the geometric points over y (new Mathlib leaf on separably closed fields); sections of a disjoint union; 03QO for sets: new node; the germ node); 1 tool use accepted; 4 new nodes",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FinitePushforwardSetStalk",
+  "declaration": "AlgebraicGeometry.finite_pushforward_set_stalk_bijective",
+  "file": "lean/Sheaf/AlgebraicGeometry/FinitePushforwardSetStalk.lean",
+  "statement": "theorem finite_pushforward_set_stalk_bijective {X Y : Scheme.{u}} (f : X ⟶ Y) [IsFinite f] (H : Sheaf X.smallEtaleTopology (Type (u + 1))) {Ω : Type u} [Field Ω] [IsAlgClosed Ω] (y : Spec (.of Ω) ⟶ Y) : Finite {x : Spec (.of Ω) ⟶ X // x ≫ f = y} ∧ Function.Bijective (fun a : (Scheme.pointSmallEtale y).sheafFiber.obj ((f.Etale.sheafPushforwardContinuous (Type (u + 1)) Y.smallEtaleTopology X.smallEtaleTopology).obj H) ↦ fun t : {x : Spec (.of Ω) ⟶ X // x ≫ f = y} ↦ (colimit.pre ((CategoryOfElements.π (Scheme.pointSmallEtale t.1).fiber).op ⋙ H.obj) (Etale.baseChangeNbhd f y t).op) a)",
+  "branch": "sheaf-dag",
+  "by": "G1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "G1",
+  "result": "pass",
+  "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
+ }
 }
