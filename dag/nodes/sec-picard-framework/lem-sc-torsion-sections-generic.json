@@ -144,5 +144,24 @@
   "group": "H1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-ts2 (reviewer sub-agent of L); spot-checked: Repaired re-push after return 9edd1fda3: return point 1 (C4, step 1) repaired as prescribed: W=Spec A from [pqf-def-coherent], D(f) in W cap U by the principal-open basis, f^k s|D(f)=tau_D(f)(m) from [lem-weil-pbc-spec-module-tilde-sections] (localization at powers of f), unit germs f_x,f_eta transfer torsion/vanishing to tau_W(m), then [lem-weil-pbc-spec-tilde-stalk-localization] at p_x and (0); step 2 now derives a_x s_x=0 from s_x=f_x^{-k}tau_W(m)_x; the wrong Wanted entry was dropped. Source: Stacks 0AXR divisors.tex lemma-torsion-sections lines 1649-1665 (proof omitted); the statement agrees hypothesis by hypothesis (integral X, generic point, quasi-coherent F, nonempty open U, s in F(U), four clauses), statement text unchanged on the branch. Steps: 3=>2 via step 1 + localization zero criterion in M_(0) and injectivity part 1 of [lem-sc-integral-scheme-stalks-in-function-field] for a_x nonzero; 1=>3 via injective rho_x into the field k(X) [def-sc-function-field]; 2=>1 and 3=>1 since U nonempty and eta in U; 3<=>4 since j^{-1}U is the one-point source. Each cited statement read and checked to say what the step takes. Only changed fields are split-owned (stmt_deps adds def-weil-pbc-module-stalk for germs). No new nodes, no Mathlib leaves. Small cases: Spec k, Spec Z with O, ~(Z/n), ~(Z+Z/n) agree. FIX: dag/nodes/sec-picard-framework/lem-sc-torsion-sections-generic.json: proof[1].uses: added def-weil-pbc-module-stalk, cited in the step text but missing from uses. Start Sat Oct 10 03:19:17 PM UTC 2026, end Sat Oct 10 03:19:52 PM UTC 2026.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.TorsionSectionsGeneric",
+  "declaration": "AlgebraicGeometry.torsion_sections_generic",
+  "file": "lean/Sheaf/AlgebraicGeometry/TorsionSectionsGeneric.lean",
+  "statement": "theorem torsion_sections_generic (X : Scheme.{u}) [IsIntegral X] (F : X.Modules) [F.IsQuasicoherent] (U : X.Opens) [Nonempty U] (s : Γ(F, U)) : List.TFAE [ (∃ x : U, ∃ a : X.presheaf.stalk x, a ≠ 0 ∧ a • F.presheaf.germ U x x.property s = 0), (∀ x : U, ∃ a : X.presheaf.stalk x, a ≠ 0 ∧ a • F.presheaf.germ U x x.property s = 0), (F.presheaf.germ U (genericPoint X) (((genericPoint_spec X).mem_open_set_iff U.isOpen).mpr (by simpa using (inferInstance : Nonempty U))) s = 0), ((Scheme.Modules.toSkyscraper (LinearMap.id : F.presheaf.stalk (genericPoint X) →ₗ[X.functionField] F.presheaf.stalk (genericPoint X))).app U s = 0)]",
+  "branch": "sheaf-dag",
+  "by": "K1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-tsg1232"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-tsg1232",
+  "group": "K1",
+  "result": "fix",
+  "note": "Stacks 0AXR: IsIntegral X, genericPoint X, F : X.Modules [F.IsQuasicoherent], U nonempty open ([Nonempty U] needed), s : Γ(F,U); (1) ∃x∈U ∃a≠0 a•s_x=0, (2) ∀x∈U, (3) s_η=0 with η∈U from genericPoint_spec, (4) toSkyscraper id app U s = 0 = image in j_*F_η (skyscraper sections PLift(η∈U)→F_η, as landed sibling lem-sc-torsion-subsheaf-quotient); TFAE all pairs; no statement change; FIX: Γ(F,U)/F.presheaf.germ as the landed sibling instead of F.val.obj/TopCat.Presheaf.germ F.val.presheaf"
  }
 }
