@@ -1,0 +1,113 @@
+{
+ "id": "def-pc-base-derived-tensor-cohomology-model",
+ "kind": "definition",
+ "title": "Base-derived tensor cohomology and canonical localization comparison model",
+ "status": "split",
+ "statement": "Let R be a commutative ring, A and B commutative R-algebras, E=A\\otimes_R B [def-weil-pbc-module-tensor-product], Q^\\bullet a cochain complex of A-modules, and D a commutative E-algebra. Use the derived categories and cohomology functors [def-weil-abstract-derived-category] and extension of scalars [def-weil-module-base-change]. A base-derived tensor cohomology model consists of the total left derived functor L:D(R)\\to D(B) of extension to B, its universal counit \\alpha: L(Q_R)\\to Q_R\\otimes_R B, the ordinary complex isomorphism (Q_R\\otimes_R B)\\cong Q\\otimes_A E sending b\\otimes q to (1\\otimes b)\\otimes q, E-modules T_i with B-linear isomorphisms T_i\\cong H^i(L(Q_R)) under which a\\otimes 1 acts as H^i(L(a\\cdot\\mathrm{id}_{Q_R})) for every a\\in A (so the E-action is the canonical one), and E-linear maps \\beta_i:T_i\\to H^i(Q\\otimes_A E) whose restrictions to B are the counit on cohomology under these isomorphisms. It also includes the termwise E-linear map Q\\otimes_A E\\to Q\\otimes_A D sending e\\otimes q to \\bar e\\otimes q (the target restricted to E), and D-linear maps c_i:D\\otimes_E T_i\\to H^i(Q\\otimes_A D) characterized by c_i(1\\otimes t)=H^i(Q\\otimes_A E\\to Q\\otimes_A D)(\\beta_i(t)). Here Q_R is Q with scalars restricted to R and the A\\to D map is the composite A\\to E\\to D. Select a model by choice from its existence theorem; T_i and c_i then denote the derived cohomology and its canonical localization comparison, with no isomorphism of \\beta_i or c_i assumed.",
+ "stmt_deps": [
+  "def-weil-pbc-module-tensor-product",
+  "def-weil-abstract-derived-category",
+  "def-weil-module-base-change"
+ ],
+ "source": {
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 08IB, lemma-compare-base-change, local affine derived-tensor comparison; construction of derived extension and its counit: Tag 06Y6, lemma-derived-base-change"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "BaseDerivedTensorCohomologyModel|baseDerivedTensorCohomologyModel|derived.*tensor.*cohomology|extendScalars_additive",
+   "results": "0 hits: ",
+   "date": "2026-10-11",
+   "verdict": "no existing derived tensor cohomology model with scalar action and specified canonical comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "total left derived tensor cohomology module action base change comparison map",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-11",
+   "verdict": "service unavailable; no mathematical verdict possible"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "derived tensor cohomology model with commuting scalar actions over tensor product algebra",
+   "results": "8 hits: Algebra.Extension.tensorH1Cotangent, Rep.torIso, Algebra.tensorH1CotangentOfIsLocalization_toLinearMap, Algebra.tensorH1CotangentOfIsLocalization, Rep.Tor_obj, Algebra.Extension.lTensor_cotangentComplex_eq_cotangentComplexBaseChange, Algebra.Extension.tensorCotangent, Algebra.Extension.instModuleH1CotangentOfIsScalarTowerCotangent",
+   "date": "2026-10-11",
+   "verdict": "no existing derived tensor cohomology model with scalar action and specified canonical comparison"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-pc-tor-independent-projective-complex-tensor",
+  "date": "2026-10-11",
+  "group": "J1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Tag 08IB local affine reduction: the actual derived tensor cohomology with its E-action and canonical localization comparison",
+   "via": [
+    "lem-pc-tor-independent-projective-complex-tensor",
+    "lem-pc-tor-independent-perfect-pullback-comparison",
+    "lem-pc-tor-independent-perfect-tensor-base-change",
+    "lem-pc-affine-morphism-hom-out-of-perfect",
+    "lem-sc-proper-flat-right-adjoint-affine-basechange",
+    "lem-sc-proper-flat-right-adjoint-basechange",
+    "lem-sc-smooth-proper-diagonal-basechange-upper-shriek",
+    "lem-sc-smooth-proper-diagonal-pushforward-structure",
+    "lem-sc-smooth-proper-relative-dualizing-general",
+    "lem-sc-smooth-proper-curve-dualizing",
+    "lem-sc-finite-duality-trace"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.BaseDerivedTensorCohomologyModel",
+  "declaration": "ModuleCat.baseDerivedTensorCohomologyModel",
+  "file": "lean/Sheaf/Algebra/Homology/BaseDerivedTensorCohomologyModel.lean",
+  "statement": "def baseDerivedTensorCohomologyModel (Q : CochainComplex (ModuleCat.{max uR uA uB uD v} A) ℤ) (D : Type uD) [CommRing D] [Algebra (A ⊗[R] B) D] : BaseDerivedTensorCohomologyModel R A B Q D",
+  "branch": "sheaf-dag",
+  "by": "J1",
+  "date": "2026-10-11",
+  "existing": false,
+  "declarations": [
+   "ModuleCat.extendScalars_additive",
+   "ModuleCat.BaseDerivedTensorCohomologyModel",
+   "ModuleCat.nonempty_baseDerivedTensorCohomologyModel",
+   "ModuleCat.baseDerivedTensorCohomologyModel"
+  ],
+  "fixed_by": "R-tip1148"
+ },
+ "reviewed": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-tip1148",
+  "group": "J1",
+  "result": "fix",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-tip1148",
+  "group": "J1",
+  "result": "fix",
+  "note": "R,A,B CommRing + Algebra R A/B; hTor Tor' over ULift R of ULift A, ULift B (ULift.module = canonical action, checked; Mathlib monoidal ModuleCat needs same universe), 0<i; Q CochainComplex (ModuleCat A) Z, bounded as IsZero outside [m,n]; Module.Finite+Projective = summand of A^m; D CommRing, Algebra E D, IsLocalization S D; Q(x)^L_R B = IsLeftDerivedFunctor of extendScalars R->B on Q_R (no recorded module derived tensor; def-weil-derived-tensor unrecorded); Q(x)_A D termwise extendScalars along A->E->D; conclusion IsIso localizedComparison i for all i. FIX: model pinned only the B-action on T_i, so for non-injective beta_i the E-action and c_i were not canonical; added field cohomologyIso_smul (a(x)1 acts as H^i(L(a.id_Q))) + node statement/docstrings"
+ }
+}

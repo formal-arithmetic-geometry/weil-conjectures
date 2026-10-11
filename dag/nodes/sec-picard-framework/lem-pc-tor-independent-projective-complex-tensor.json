@@ -19,7 +19,8 @@
   "place": "Tag 08IB, lemma-compare-base-change: local affine reduction and Tor-independent comparison of derived tensors"
  },
  "stmt_deps": [
-  "def-weil-pbc-tor-modules"
+  "def-weil-pbc-tor-modules",
+  "def-pc-base-derived-tensor-cohomology-model"
  ],
  "proof": [
   {
@@ -115,5 +116,23 @@
   "group": "F1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-tpt0018 (reviewer sub-agent of L); spot-checked: Steps 1-2: children state exactly the needed Tor vanishing (summand of A^m) and termwise-Tor-acyclic derived=ordinary tensor; no duplicate among 08IB nodes, lem-pc-module-bounded-flat-kflat, lem-pc-bounded-above-flat-tensor-acyclic; citer 502603da5 Step 2 uses this statement with D=C (C4 ok). FIX more, RETURN less: C4 in Step 3 (missed by the second reading): lem-weil-pbc-localization-module-exact states exactness of T^{-1}(-), not of -\\otimes_E D, and the step was marked elementary while citing it; replaced by lem-weil-pbc-localization-flat (D flat over E) + lem-weil-pbc-flat-tensor-exact (flat tensor preserves exactness, hence commutes with H^i), elementary false, proof_deps updated.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.TorIndependentProjectiveComplexTensor",
+  "declaration": "ModuleCat.torIndependent_projectiveComplex_tensor",
+  "file": "lean/Sheaf/Algebra/Homology/TorIndependentProjectiveComplexTensor.lean",
+  "statement": "theorem torIndependent_projectiveComplex_tensor {R : Type uR₁} {A : Type uA₁} {B : Type uB₁} [CommRing R] [CommRing A] [CommRing B] [Algebra R A] [Algebra R B] [HasDerivedCategory.{w₁} (ModuleCat.{max uR₁ uA₁ uB₁ uD₁ v₁} R)] [HasDerivedCategory.{w₁} (ModuleCat.{max uR₁ uA₁ uB₁ uD₁ v₁} B)] (hTor : ∀ i : ℕ, 0 < i → IsZero (((CategoryTheory.Tor' (ModuleCat.{max uR₁ uA₁ uB₁ uD₁ v₁} (ULift.{max uR₁ uA₁ uB₁ uD₁ v₁} R)) i).obj (ModuleCat.of (ULift.{max uR₁ uA₁ uB₁ uD₁ v₁} R) (ULift.{max uR₁ uA₁ uB₁ uD₁ v₁} A))).obj (ModuleCat.of (ULift.{max uR₁ uA₁ uB₁ uD₁ v₁} R) (ULift.{max uR₁ uA₁ uB₁ uD₁ v₁} B)))) (Q : CochainComplex (ModuleCat.{max uR₁ uA₁ uB₁ uD₁ v₁} A) ℤ) (hbounded : ∃ m n : ℤ, ∀ i : ℤ, i < m ∨ n < i → IsZero (Q.X i)) (hprojective : ∀ i : ℤ, Module.Finite A (Q.X i) ∧ Module.Projective A (Q.X i)) (D : Type uD₁) [CommRing D] [Algebra (A ⊗[R] B) D] (hlocalization : ∃ S : Submonoid (A ⊗[R] B), IsLocalization S D) : ∀ i : ℤ, IsIso ((baseDerivedTensorCohomologyModel R A B Q D).localizedComparison i)",
+  "branch": "sheaf-dag",
+  "by": "J1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-tip1148",
+  "group": "J1",
+  "result": "fix",
+  "note": "R,A,B CommRing + Algebra R A/B; hTor Tor' over ULift R of ULift A, ULift B (ULift.module = canonical action, checked; Mathlib monoidal ModuleCat needs same universe), 0<i; Q CochainComplex (ModuleCat A) Z, bounded as IsZero outside [m,n]; Module.Finite+Projective = summand of A^m; D CommRing, Algebra E D, IsLocalization S D; Q(x)^L_R B = IsLeftDerivedFunctor of extendScalars R->B on Q_R (no recorded module derived tensor; def-weil-derived-tensor unrecorded); Q(x)_A D termwise extendScalars along A->E->D; conclusion IsIso localizedComparison i for all i. FIX: model pinned only the B-action on T_i, so for non-injective beta_i the E-action and c_i were not canonical; added field cohomologyIso_smul (a(x)1 acts as H^i(L(a.id_Q))) + node statement/docstrings"
  }
 }
