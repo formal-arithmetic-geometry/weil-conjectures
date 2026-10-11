@@ -164,5 +164,24 @@
  "tool_uses": [
   "pqf-lem-pushforward-qcoh"
  ],
- "lead_note": "Off-route tool use recorded by L (2026-10-10): pqf-lem-pushforward-qcoh (Schemes 01LC, pushforward along qcqs preserves quasi-coherence; imported, unit sk-prop-av-pqf-finite) in step 3, as a black box. L (2026-10-10): step 4 reworded to the hypothesis of the (corrected) nilpotent-section node: vanishing in every residue field, not vanishing germs."
+ "lead_note": "Off-route tool use recorded by L (2026-10-10): pqf-lem-pushforward-qcoh (Schemes 01LC, pushforward along qcqs preserves quasi-coherence; imported, unit sk-prop-av-pqf-finite) in step 3, as a black box. L (2026-10-10): step 4 reworded to the hypothesis of the (corrected) nilpotent-section node: vanishing in every residue field, not vanishing germs.",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SteinUniversallyClosedFactor",
+  "declaration": "AlgebraicGeometry.stein_universally_closed_factor",
+  "file": "lean/Sheaf/AlgebraicGeometry/SteinUniversallyClosedFactor.lean",
+  "statement": "theorem stein_universally_closed_factor {A : CommRingCat.{u}} {X : Scheme.{u}} (f : X ⟶ Spec A) [UniversallyClosed f] [QuasiSeparated f] : UniversallyClosed X.toSpecΓ ∧ QuasiCompact X.toSpecΓ ∧ QuasiSeparated X.toSpecΓ ∧ Surjective X.toSpecΓ ∧ IsIntegralHom f.steinFactorizationBase ∧ IsIso X.toSpecΓ.c ∧ IsIso ((TopCat.Sheaf.pushforward CommRingCat.{u} f.steinFactorizationBase.base).map (⟨X.toSpecΓ.c⟩ : Scheme.sheaf (Spec Γ(X, ⊤)) ⟶ (TopCat.Sheaf.pushforward CommRingCat.{u} X.toSpecΓ.base).obj (Scheme.sheaf X))) ∧ (∀ (T B' X' : Scheme.{u}) (g : T ⟶ Spec A) (_ : Flat g) (b : B' ⟶ Spec Γ(X, ⊤)) (s' : B' ⟶ T) (x : X' ⟶ X) (q' : X' ⟶ B'), IsPullback b s' f.steinFactorizationBase g → IsPullback x q' X.toSpecΓ b → IsIso ((TopCat.Sheaf.pushforward CommRingCat.{u} s'.base).map (⟨q'.c⟩ : Scheme.sheaf B' ⟶ (TopCat.Sheaf.pushforward CommRingCat.{u} q'.base).obj (Scheme.sheaf X'))))",
+  "branch": "sheaf-dag",
+  "by": "R1",
+  "date": "2026-10-11",
+  "existing": false,
+  "note": "Relative Spec is rendered by its canonical algebra identification along the integral (hence affine) second map; flat base change uses arbitrary Cartesian squares, not only affine bases."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "R1",
+  "result": "pass",
+  "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
+ }
 }
