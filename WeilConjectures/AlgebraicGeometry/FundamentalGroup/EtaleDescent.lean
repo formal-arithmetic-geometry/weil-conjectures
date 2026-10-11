@@ -248,6 +248,7 @@ noncomputable def ofPtLeft {Z : Y.Etale} (z : Z.left ⟶ Y') (hz : z ≫ p = Z.h
     (by rw [Category.assoc, hz, pullback.condition]) (pullback.fst _ _ ≫ b)
     (by rw [Category.assoc, hb])
 
+omit [AlgebraicGeometry.Etale V.hom] in
 lemma compat_ofPtLeft {Z : Y.Etale} (z : Z.left ⟶ Y') (hz : z ≫ p = Z.hom)
     (b : Z.left ⟶ V.left) (hb : b ≫ V.hom = z) :
     Compat D (ofPtLeft D z hz b hb) (D.trLeft_hom _ _ _ _ _) := by
@@ -278,9 +279,9 @@ lemma toPt_ofPt {Z : Y.Etale} (z : Z.left ⟶ Y') (hz : z ≫ p = Z.hom)
   change pullback.lift (𝟙 _) z _ ≫ ofPtLeft D z hz b hb = b
   refine (D.trLeft_comp _ _ _ rfl rfl rfl).symm.trans
     ((D.trLeft_congr (f₁' := z) (f₂' := z) (b' := b) ?_ ?_ ?_).trans (D.trLeft_of_eq rfl))
-  · simp <;> exact Category.id_comp _
-  · simp
-  · simp <;> exact Category.id_comp _
+  · rw [pullback.lift_fst_assoc]; exact Category.id_comp _
+  · exact pullback.lift_snd _ _ _
+  · rw [pullback.lift_fst_assoc]; exact Category.id_comp _
 
 @[simp]
 lemma ofPt_toPt {Z : Y.Etale} (z : Z.left ⟶ Y') (hz : z ≫ p = Z.hom)
@@ -311,7 +312,9 @@ lemma toPt_map {Z₁ Z₂ : Y.Etale} (g : Z₁ ⟶ Z₂) (z₂ : Z₂.left ⟶ Y
   rw [← Category.assoc, ← Category.assoc]
   congr 1
   apply pullback.hom_ext
-  · simp [etale_map_left_fst] <;> exact Category.id_comp _
+  · simp only [Category.assoc, etale_map_left_fst, pullback.lift_fst_assoc, pullback.lift_fst,
+      Category.comp_id]
+    exact Category.id_comp _
   · simp [etale_map_left_snd, e]
 
 /-- Changing the point of `Y'` transports the morphism `toPt` by the descent datum. -/
@@ -511,19 +514,28 @@ lemma descQ_invariant {T : Scheme.{u}} (f₁ f₂ : T ⟶ Y') (h : f₁ ≫ p = 
 
 end Descended
 
-set_option maxHeartbeats 1000000 in
-variable (D) in
-lemma exists_representableBy [AlgebraicGeometry.Etale p] [Surjective p] [IsFinite V.hom] :
-    ∃ X : Y.Etale, IsFinite X.hom ∧ Nonempty ((sheaf D).obj.RepresentableBy X) := by
-  let 𝔅 : Set Y.Opens := {U | IsAffineOpen U ∧ ∃ (W : Scheme.{u}) (_ : IsAffine W) (q : W ⟶ Y')
+variable (p) in
+/-- The affine opens `U` of `Y` admitting a surjective morphism from an affine scheme which
+factors through `p` by an étale morphism. -/
+def goodOpens : Set Y.Opens :=
+  {U | IsAffineOpen U ∧ ∃ (W : Scheme.{u}) (_ : IsAffine W) (q : W ⟶ Y')
     (_ : AlgebraicGeometry.Etale q) (pU : W ⟶ U.toScheme), pU ≫ U.ι = q ≫ p ∧ Surjective pU}
-  have h𝔅 : TopologicalSpace.Opens.IsBasis 𝔅 := by
-    rw [TopologicalSpace.Opens.isBasis_iff_nbhd]
-    intro O y hy
-    obtain ⟨U, hU, hyU, hUO, W, hW, q, hq, pU, hpq, hp⟩ :=
-      exists_isAffineOpen_surjective_etale p hy (p.surjective y)
-    exact ⟨U, ⟨hU, W, hW, q, hq, pU, hpq, hp⟩, hyU, hUO⟩
-  refine Etale.exists_representableBy_of_isBasis (sheaf D) 𝔅 h𝔅 fun U ↦ ?_
+
+omit [AlgebraicGeometry.Etale V.hom] in
+variable (p) in
+lemma isBasis_goodOpens [AlgebraicGeometry.Etale p] [Surjective p] :
+    TopologicalSpace.Opens.IsBasis (goodOpens p) := by
+  rw [TopologicalSpace.Opens.isBasis_iff_nbhd]
+  intro O y hy
+  obtain ⟨U, hU, hyU, hUO, W, hW, q, hq, pU, hpq, hp⟩ :=
+    exists_isAffineOpen_surjective_etale p hy (p.surjective y)
+  exact ⟨U, ⟨hU, W, hW, q, hq, pU, hpq, hp⟩, hyU, hUO⟩
+
+variable (D) in
+lemma exists_representableBy_goodOpens [AlgebraicGeometry.Etale p] [IsFinite V.hom]
+    (U : goodOpens p) :
+    ∃ X : Over (Etale.openObj U.1), IsFinite X.hom.left ∧
+      Nonempty (((Over.forget (Etale.openObj U.1)).op ⋙ (sheaf D).obj).RepresentableBy X) := by
   obtain ⟨hU, W, hW, q, hq, pU, hpq, hp⟩ := U.2
   have : IsAffine (Etale.openObj U.1).left := hU
   let WE : Y.Etale := Etale.mk (q ≫ p)
@@ -532,6 +544,12 @@ lemma exists_representableBy [AlgebraicGeometry.Etale p] [Surjective p] [IsFinit
   have : Surjective pE.left := hp
   exact Etale.exists_representableBy_of_isAffine (sheaf D) pE (overW (V := V) (W := WE) q)
     (representableByW D (W := WE) q rfl)
+
+variable (D) in
+lemma exists_representableBy [AlgebraicGeometry.Etale p] [Surjective p] [IsFinite V.hom] :
+    ∃ X : Y.Etale, IsFinite X.hom ∧ Nonempty ((sheaf D).obj.RepresentableBy X) :=
+  Etale.exists_representableBy_of_isBasis (sheaf D) (goodOpens p) (isBasis_goodOpens p)
+    (exists_representableBy_goodOpens D)
 
 variable (D) in
 /-- **Effective étale descent for finite étale schemes**: a finite étale `Y'`-scheme `V` with a
@@ -545,3 +563,104 @@ theorem exists_isPullback [AlgebraicGeometry.Etale p] [Surjective p] [IsFinite V
   exact ⟨X, descQ r, hX, isPullback_descQ r, descQ_invariant r⟩
 
 end AlgebraicGeometry.Scheme.EtaleDescent
+
+namespace CategoryTheory.Over.DescentDatum
+
+open AlgebraicGeometry
+
+variable {Y Y' : Scheme.{u}} {p : Y' ⟶ Y}
+
+/-- **Effective étale descent for finite étale schemes.** Let `p : Y' ⟶ Y` be a surjective
+étale morphism and `V` a finite étale `Y'`-scheme. Every descent datum on `V` relative to `p` is
+effective, and the descended `Y`-scheme is finite étale. -/
+theorem exists_isPullback_of_etale [AlgebraicGeometry.Etale p] [Surjective p] {V : Over Y'}
+    [IsFinite V.hom] [AlgebraicGeometry.Etale V.hom] (D : DescentDatum p V) :
+    ∃ (V₀ : Over Y) (q : V.left ⟶ V₀.left), IsFinite V₀.hom ∧ AlgebraicGeometry.Etale V₀.hom ∧
+      IsPullback q V.hom V₀.hom p ∧
+      ∀ {T : Scheme.{u}} (f₁ f₂ : T ⟶ Y') (h : f₁ ≫ p = f₂ ≫ p) (a : Over.mk f₁ ⟶ V),
+        (D.transport f₁ f₂ h a).left ≫ q = a.left ≫ q := by
+  obtain ⟨X, q, hX, hq, hinv⟩ := Scheme.EtaleDescent.exists_isPullback D
+  exact ⟨Over.mk X.hom, q, hX, X.prop, hq, hinv⟩
+
+/-- **Morphisms descend along surjective étale morphisms.** Let `p : Y' ⟶ Y` be surjective and
+étale, and let `V`, `W` be `Y'`-schemes with descent data `D`, `E` which are effective, with
+descended `Y`-schemes `V₀`, `W₀` and projections `qV`, `qW` invariant under the transport. Then
+every morphism `ψ : V ⟶ W` over `Y'` compatible with the descent data is the base change of a
+unique morphism `ψ₀ : V₀ ⟶ W₀` over `Y`: the projection `qV`, a base change of `p`, is an
+effective epimorphism. -/
+theorem existsUnique_hom_of_isPullback_of_etale [AlgebraicGeometry.Etale p] [Surjective p]
+    {V W : Over Y'} (D : DescentDatum p V) (E : DescentDatum p W) {V₀ W₀ : Over Y}
+    (qV : V.left ⟶ V₀.left) (hqV : IsPullback qV V.hom V₀.hom p)
+    (hDV : ∀ {T : Scheme.{u}} (f₁ f₂ : T ⟶ Y') (h : f₁ ≫ p = f₂ ≫ p) (a : Over.mk f₁ ⟶ V),
+      (D.transport f₁ f₂ h a).left ≫ qV = a.left ≫ qV)
+    (qW : W.left ⟶ W₀.left) (hqW : IsPullback qW W.hom W₀.hom p)
+    (hEW : ∀ {T : Scheme.{u}} (f₁ f₂ : T ⟶ Y') (h : f₁ ≫ p = f₂ ≫ p) (a : Over.mk f₁ ⟶ W),
+      (E.transport f₁ f₂ h a).left ≫ qW = a.left ≫ qW)
+    (ψ : V ⟶ W)
+    (hψ : ∀ {T : Scheme.{u}} (f₁ f₂ : T ⟶ Y') (h : f₁ ≫ p = f₂ ≫ p) (a : Over.mk f₁ ⟶ V),
+      E.transport f₁ f₂ h (a ≫ ψ) = D.transport f₁ f₂ h a ≫ ψ) :
+    ∃! ψ₀ : V₀ ⟶ W₀, ψ.left ≫ qW = qV ≫ ψ₀.left := by
+  have : AlgebraicGeometry.Etale qV := MorphismProperty.of_isPullback hqV.flip ‹_›
+  have : Surjective qV := MorphismProperty.of_isPullback hqV.flip ‹_›
+  have hdesc : ∀ {Z : Scheme.{u}} (g₁ g₂ : Z ⟶ V.left), g₁ ≫ qV = g₂ ≫ qV →
+      g₁ ≫ ψ.left ≫ qW = g₂ ≫ ψ.left ≫ qW := by
+    intro Z g₁ g₂ hg
+    have h : (g₁ ≫ V.hom) ≫ p = (g₂ ≫ V.hom) ≫ p := by
+      rw [Category.assoc, Category.assoc, ← hqV.w, reassoc_of% hg]
+    let a : Over.mk (g₁ ≫ V.hom) ⟶ V := Over.homMk g₁
+    have ha : (D.transport _ _ h a).left = g₂ :=
+      hqV.hom_ext ((hDV _ _ h a).trans hg) (Over.w (D.transport _ _ h a))
+    have := congrArg (fun f ↦ f.left ≫ qW) (hψ _ _ h a)
+    simp only [Over.comp_left, Category.assoc, ha] at this
+    rw [← this, ← Category.assoc, hEW]
+    rfl
+  let ψ₀ : V₀ ⟶ W₀ := Over.homMk (EffectiveEpi.desc qV (ψ.left ≫ qW) hdesc) (by
+    rw [← cancel_epi qV, EffectiveEpi.fac_assoc, Category.assoc, hqW.w, Over.w_assoc ψ, hqV.w])
+  refine ⟨ψ₀, (EffectiveEpi.fac qV _ hdesc).symm, fun ψ₁ hψ₁ ↦ ?_⟩
+  ext
+  rw [← cancel_epi qV, ← hψ₁]
+  exact (EffectiveEpi.fac qV _ hdesc).symm
+
+end CategoryTheory.Over.DescentDatum
+
+namespace AlgebraicGeometry.Scheme.FiniteEtale
+
+/-- **Effective étale descent for finite étale morphisms.** Let `p : Y' ⟶ Y` be a surjective
+étale morphism. Then base change along `p` identifies finite étale `Y`-schemes with finite étale
+`Y'`-schemes endowed with a descent datum relative to `p`:
+
+* every descent datum `D` on a finite étale `Y'`-scheme `V` is effective: `V` is the base change
+  `V₀ ×_Y Y'` of a finite étale `Y`-scheme `V₀`, through a projection `q : V ⟶ V₀` invariant
+  under the transport of `D` (essential surjectivity);
+* for effective descent data on `V` and `W` with descended schemes `V₀` and `W₀`, every
+  morphism `V ⟶ W` over `Y'` compatible with the descent data is the base change of a unique
+  morphism `V₀ ⟶ W₀` over `Y` (full faithfulness).
+
+The descent data are in the transport form `CategoryTheory.Over.DescentDatum`, which by the
+Yoneda lemma is the same as an isomorphism `φ : p₁^* V ≅ p₂^* V` over `Y' ×_Y Y'` satisfying
+the cocycle condition over `Y' ×_Y Y' ×_Y Y'`.
+(blueprint: `lem-galois-descent`) -/
+theorem galois_descent {Y Y' : Scheme.{u}} (p : Y' ⟶ Y) [AlgebraicGeometry.Etale p]
+    [Surjective p] :
+    (∀ (V : Over Y') [IsFinite V.hom] [AlgebraicGeometry.Etale V.hom]
+      (D : Over.DescentDatum p V),
+      ∃ (V₀ : Over Y) (q : V.left ⟶ V₀.left), IsFinite V₀.hom ∧
+        AlgebraicGeometry.Etale V₀.hom ∧ IsPullback q V.hom V₀.hom p ∧
+        ∀ {T : Scheme.{u}} (f₁ f₂ : T ⟶ Y') (h : f₁ ≫ p = f₂ ≫ p) (a : Over.mk f₁ ⟶ V),
+          (D.transport f₁ f₂ h a).left ≫ q = a.left ≫ q) ∧
+    (∀ {V W : Over Y'} (D : Over.DescentDatum p V) (E : Over.DescentDatum p W) {V₀ W₀ : Over Y}
+      (qV : V.left ⟶ V₀.left) (_ : IsPullback qV V.hom V₀.hom p)
+      (_ : ∀ {T : Scheme.{u}} (f₁ f₂ : T ⟶ Y') (h : f₁ ≫ p = f₂ ≫ p) (a : Over.mk f₁ ⟶ V),
+        (D.transport f₁ f₂ h a).left ≫ qV = a.left ≫ qV)
+      (qW : W.left ⟶ W₀.left) (_ : IsPullback qW W.hom W₀.hom p)
+      (_ : ∀ {T : Scheme.{u}} (f₁ f₂ : T ⟶ Y') (h : f₁ ≫ p = f₂ ≫ p) (a : Over.mk f₁ ⟶ W),
+        (E.transport f₁ f₂ h a).left ≫ qW = a.left ≫ qW)
+      (ψ : V ⟶ W)
+      (_ : ∀ {T : Scheme.{u}} (f₁ f₂ : T ⟶ Y') (h : f₁ ≫ p = f₂ ≫ p) (a : Over.mk f₁ ⟶ V),
+        E.transport f₁ f₂ h (a ≫ ψ) = D.transport f₁ f₂ h a ≫ ψ),
+      ∃! ψ₀ : V₀ ⟶ W₀, ψ.left ≫ qW = qV ≫ ψ₀.left) :=
+  ⟨fun _ _ _ D ↦ D.exists_isPullback_of_etale,
+    fun D E _ _ qV hqV hDV qW hqW hEW ψ hψ ↦
+      D.existsUnique_hom_of_isPullback_of_etale E qV hqV hDV qW hqW hEW ψ hψ⟩
+
+end AlgebraicGeometry.Scheme.FiniteEtale
