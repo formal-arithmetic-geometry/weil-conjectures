@@ -213,5 +213,23 @@
   "item": "lem-weil-pbc-g-ring-completion-regular",
   "worker": "stage1",
   "summary": "Split along the proof of Stacks More on Algebra 0AH2 (more-algebra.tex 12704-12740), nine steps. Existing nodes used: def-weil-pbc-g-ring (G-ring clause at p = m, and Noetherianity), lem-weil-pbc-adic-completion-noetherian (0316), lem-weil-pbc-adic-completion-mod-ideal (05GG: A^/IA^ = A/I, IA^-adic completeness), lem-weil-pbc-adic-complete-jacobson-radical (05GI(4) applied to (A^, IA^)), def-weil-pbc-localization-at-prime. New nodes: Mathlib leaves lem-weil-pbc-noetherian-completion-flat (00MB(1), AdicCompletion.flat_of_isNoetherian), lem-weil-pbc-flat-local-ring-maps (00HT(6)+00FN, RingHom.Flat.localRingHom etc.), lem-weil-pbc-local-completion-faithfully-flat (00MC local case, Module.FaithfullyFlat.of_flat_of_isLocalHom); unsplit lem-weil-pbc-regular-local-maximal (07C0), lem-weil-pbc-flat-local-completion-iso (0AGX), lem-weil-pbc-regular-permanence (07NT). The Stacks proof's identification ((A^)_m')^ = (A_m)^ and the transfer of regularity along it are written out (Steps 6-7); the deduction that m is maximal with m' = mA^ is written out (Step 4). Statement unchanged; stmt_deps unchanged. No Lean in slopmaster2 (grep of WeilConjectures for G-ring/regular/AdicCompletion: nothing)."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.GRingCompletionRegular",
+  "declaration": "AdicCompletion.isRegular_of_isGRing",
+  "file": "lean/Sheaf/RingTheory/GRingCompletionRegular.lean",
+  "statement": "theorem isRegular_of_isGRing (A : Type u) [CommRing A] (I : Ideal A) (hA : IsGRing A) : RingHom.IsRegular (algebraMap A (AdicCompletion I A))",
+  "branch": "sheaf-dag",
+  "by": "J1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-gcr1043",
+  "group": "J1",
+  "result": "pass",
+  "note": "A:Type u CommRing; hA: recorded IsGRing (Noetherian conjunct included, no extra instance); I arbitrary Ideal A; AdicCompletion I A with algebraMap (=AdicCompletion.of); conclusion recorded RingHom.IsRegular = Flat + all primes p.Fiber IsGeometricallyRegular (Noetherian+regular after finite purely insep k'); I=top/bot, A=0 edge cases fine; matches landed DVRCompletionRegular form"
  }
 }
