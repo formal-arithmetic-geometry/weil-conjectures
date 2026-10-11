@@ -1,67 +1,179 @@
 {
- "id": "lem-weil-derived-limit-roos-complex",
- "blueprint": {
-  "is": null,
-  "from": {
-   "node": "lem-weil-derived-limit-existence",
-   "place": "Assertion (3): compare the inverse-limit complex of a K-injective tower with the Roos cone",
-   "via": []
+  "id": "lem-weil-derived-limit-roos-complex",
+  "blueprint": {
+    "is": null,
+    "from": {
+      "node": "lem-weil-derived-limit-existence",
+      "place": "Assertion (3): compare the inverse-limit complex of a K-injective tower with the Roos cone",
+      "via": []
+    },
+    "same_as": []
   },
-  "same_as": []
- },
- "kind": "statement",
- "title": "Roos complex computes inverse limit on K-injective towers",
- "statement": "Let $\\mathcal A$ be an abelian category [def-weil-abstract-derived-category] with exact countable products and enough injectives, and let $\\operatorname{Tow}(\\mathcal A)$ be the abelian category of inverse systems [def-weil-inverse-system] in $\\mathcal A$. For a K-injective cochain complex [def-weil-pbc-kinjective-resolutions] $I_\\bullet$ of towers, write $P=\\prod_n\\operatorname{ev}_n(I_\\bullet)$ and let $1-s:P\\to P$ be induced by the transition maps [def-weil-tower-transition-endomorphism]. The canonical map from the termwise inverse-limit complex $L^p=\\varprojlim_n(I_n)^p$ to the shifted mapping cone $\\operatorname{Cone}(1-s)[-1]$ is a quasi-isomorphism. Consequently $L$ and $\\operatorname{Cone}(1-s)[-1]$ represent the same object of $D(\\mathcal A)$.",
- "source": {
-  "document": "literature/stacks-project/derived.tex",
-  "place": "Lemma Tag 070M (lemma-difficulty-K-injectives), using Tag 0BK6 (lemma-product-K-injective); the arbitrary-tower form is obtained by replacing a K-injective representative by a termwise injective one"
- },
- "stmt_deps": [
-  "def-weil-abstract-derived-category",
-  "def-weil-inverse-system",
-  "def-weil-pbc-kinjective-resolutions",
-  "def-weil-tower-transition-endomorphism"
- ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
- "mathlib_searches": [
-  {
-   "tool": "leanfinder",
-   "query": "Roos exact sequence termwise products inverse limit complexes exact countable products",
-   "results": "generic homological-complex exactness; no derived inverse-limit computation",
-   "date": "2026-10-11",
-   "verdict": "no match"
+  "kind": "statement",
+  "title": "Roos complex computes inverse limit on K-injective towers",
+  "statement": "Let $\\mathcal A$ be an abelian category [def-weil-abstract-derived-category] with exact countable products and enough injectives, and let $\\operatorname{Tow}(\\mathcal A)$ be the abelian category of inverse systems [def-weil-inverse-system] in $\\mathcal A$. Let $I_\\bullet$ be a K-injective cochain complex of $\\operatorname{Tow}(\\mathcal A)$, i.e. every morphism of complexes from an acyclic complex of $\\operatorname{Tow}(\\mathcal A)$ to $I_\\bullet$ is homotopic to zero (the notion of [def-weil-pbc-kinjective-resolutions], with $\\operatorname{Tow}(\\mathcal A)$ in place of the category of sheaves). Write $P=\\prod_n\\operatorname{ev}_n(I_\\bullet)$ for the termwise product complex, $P^p=\\prod_n(I_n)^p$, and let $1-s:P\\to P$ be the chain map given in each degree by the transition endomorphism of the inverse system $((I_n)^p)_n$ [def-weil-tower-transition-endomorphism]. Let $L^p=\\varprojlim_n(I_n)^p$ be the termwise inverse limit, realized as $\\ker(1-s:P^p\\to P^p)$, with inclusion $\\iota:L\\to P$, and let $\\operatorname{Cone}(1-s)[-1]$ be the shifted mapping cone of [def-weil-abstract-derived-category], with terms $P^{p-1}\\oplus P^p$ and differential $(y,x)\\mapsto(-d_Py-(1-s)x,\\,d_Px)$. Then the canonical map $\\eta:L\\to\\operatorname{Cone}(1-s)[-1]$, $\\eta^p=(0,\\iota^p)$, is a morphism of complexes and a quasi-isomorphism. Consequently $L$ and $\\operatorname{Cone}(1-s)[-1]$ represent the same object of $D(\\mathcal A)$.",
+  "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Lemma Tag 070M (lemma-difficulty-K-injectives), using Tag 0BK6 (lemma-product-K-injective); the arbitrary-tower form is obtained by replacing a K-injective representative by a termwise injective one"
   },
-  {
-   "tool": "loogle",
-   "query": "CochainComplex inverse limit product one minus shift",
-   "results": "unknown identifier inverse; no hits",
-   "date": "2026-10-11",
-   "verdict": "no match"
+  "stmt_deps": [
+    "def-weil-abstract-derived-category",
+    "def-weil-inverse-system",
+    "def-weil-pbc-kinjective-resolutions",
+    "def-weil-tower-transition-endomorphism"
+  ],
+  "proof": [
+    {
+      "text": "Set-up. By [lem-weil-tower-category-levelwise-abelian], $\\operatorname{Tow}(\\mathcal A)$ is abelian with kernels, cokernels, monomorphisms, epimorphisms and short exact sequences computed levelwise. For an inverse system $T=(T_n,f_n)$ in $\\mathcal A$ let $P_T=\\prod_nT_n$ (it exists: $\\mathcal A$ has countable products) and $1-s_T$ its transition endomorphism [def-weil-tower-transition-endomorphism]. A morphism $x:Y\\to P_T$ satisfies $(1-s_T)x=0$ iff its components $x_n=\\mathrm{pr}_nx$ satisfy $x_n=f_n x_{n+1}$ for all $n$, i.e. iff $(x_n)$ is a cone over $T$ [def-weil-inverse-system]; hence $L_T:=\\ker(1-s_T)$ with the maps $\\mathrm{pr}_n\\iota$ is $\\varprojlim_nT_n$. By the naturality clause of [def-weil-tower-transition-endomorphism], $T\\mapsto P_T$, $T\\mapsto L_T$ are additive functors $\\operatorname{Tow}(\\mathcal A)\\to\\mathcal A$ and $1-s$, $\\iota$ are natural. Applied termwise to a complex $X$ of $\\operatorname{Tow}(\\mathcal A)$ they give complexes $P(X)=\\prod_n\\operatorname{ev}_n(X)$, $L(X)$ and chain maps $1-s:P(X)\\to P(X)$, $\\iota:L(X)\\to P(X)$, and we put $\\Phi(X)=\\operatorname{Cone}(1-s)[-1]$ with the terms and differential of [def-weil-abstract-derived-category] written in the statement. The map $\\eta_X^p=(0,\\iota^p)$ is a chain map: $d\\eta(k)=(-(1-s)\\iota k,\\,d_P\\iota k)=(0,\\iota d_Lk)=\\eta(dk)$ since $(1-s)\\iota=0$. A chain map $\\varphi:X\\to X'$ induces $L(\\varphi)$ and $\\Phi(\\varphi)=P(\\varphi)^{p-1}\\oplus P(\\varphi)^p$, which is a chain map because $P(\\varphi)$ commutes with $1-s$, and $\\eta_{X'}L(\\varphi)=\\Phi(\\varphi)\\eta_X$.",
+      "uses": [
+        "lem-weil-tower-category-levelwise-abelian",
+        "def-weil-tower-transition-endomorphism",
+        "def-weil-inverse-system",
+        "def-weil-abstract-derived-category"
+      ],
+      "elementary": true,
+      "source": {
+        "document": "literature/stacks-project/derived.tex",
+        "place": "Lemma Tag 070M (lemma-difficulty-K-injectives), proof: the first map of 0 -> I^p -> prod I_n^p -> prod I_n^p -> 0 'given by the projection maps' and the second by (x_n) -> (x_n - f_{n+1}(x_{n+1}))"
+      }
+    },
+    {
+      "text": "Homotopy invariance. Let $\\varphi,\\psi:X\\to X'$ be chain maps of complexes of $\\operatorname{Tow}(\\mathcal A)$ with $\\varphi-\\psi=d h+h d$ for $h^p:X^p\\to X'^{p-1}$. Since $L$ and $P$ are additive functors applied termwise, $L(\\varphi)-L(\\psi)=dL(h)+L(h)d$ and likewise for $P$; and $P(h)$ commutes with $1-s$ (naturality of $1-s$ in [def-weil-tower-transition-endomorphism]). On $\\Phi$ put $H(y,x)=(-P(h)y,\\,P(h)x)$; then $(DH+HD)(y,x)=\\big((dP(h)+P(h)d)y-(1-s)P(h)x+P(h)(1-s)x,\\ (dP(h)+P(h)d)x\\big)=(\\Phi(\\varphi)-\\Phi(\\psi))(y,x)$, $D$ the differential of $\\Phi$. So $L$ and $\\Phi$ induce functors $K(\\operatorname{Tow}(\\mathcal A))\\to K(\\mathcal A)$ on homotopy categories [def-weil-abstract-derived-category], and $\\eta$ is natural on them by Step 1.",
+      "uses": [
+        "def-weil-tower-transition-endomorphism",
+        "def-weil-abstract-derived-category"
+      ],
+      "elementary": true,
+      "source": {
+        "document": "literature/stacks-project/derived.tex",
+        "place": "Lemma Tag 070M, proof ('a corresponding distinguished triangle in K(A)'); the homotopy formula is written by the agent"
+      }
+    },
+    {
+      "text": "Split towers. Let $X=(X_n,g_n)$ be a split inverse system, with $g_n\\sigma_n=\\mathrm{id}$ (the notion of [lem-weil-tower-split-envelope]). Define $u:P_X\\to P_X$ by $\\mathrm{pr}_1u=0$ and $\\mathrm{pr}_{n+1}u=\\sigma_n(\\mathrm{pr}_nu-\\mathrm{pr}_n)$ (recursively, then by the universal property of the product). Then $\\mathrm{pr}_n(1-s)u=\\mathrm{pr}_nu-g_n\\mathrm{pr}_{n+1}u=\\mathrm{pr}_nu-g_n\\sigma_n(\\mathrm{pr}_nu-\\mathrm{pr}_n)=\\mathrm{pr}_n$, so $(1-s)u=\\mathrm{id}$ and $1-s_X$ is a (split) epimorphism; with Step 1, $0\\to L_X\\xrightarrow{\\iota}P_X\\xrightarrow{1-s}P_X\\to0$ is exact. This is the split short exact sequence $0\\to I^p\\to\\prod I_n^p\\to\\prod I_n^p\\to0$ of the source, there obtained from $I_{n+1}^p=C_{n+1}^p\\oplus I_n^p$. A finite direct sum of split systems is split (take the direct sum of the sections).",
+      "uses": [
+        "lem-weil-tower-split-envelope",
+        "def-weil-tower-transition-endomorphism"
+      ],
+      "elementary": true,
+      "source": {
+        "document": "literature/stacks-project/derived.tex",
+        "place": "Lemma Tag 070M, proof: 'We claim there is a split short exact sequence 0 -> I^p -> prod I_n^p -> prod I_n^p -> 0 ... The splitting comes from the map prod I_n^p -> prod C_n^p = I^p'"
+      }
+    },
+    {
+      "text": "The case of split terms. Let $J$ be a complex of $\\operatorname{Tow}(\\mathcal A)$ every term $J^p$ of which is a split inverse system. By Step 3 the chain map $1-s:P(J)\\to P(J)$ is an epimorphism in every degree, with termwise kernel $\\iota:L(J)\\to P(J)$. By [lem-weil-degreewise-epi-kernel-cocone-qis], applied in $\\mathcal A$ to $f=1-s$, the map $\\kappa=(0,\\iota)=\\eta_J:L(J)\\to\\operatorname{Cone}(1-s)[-1]=\\Phi(J)$ is a quasi-isomorphism.",
+      "uses": [
+        "lem-weil-degreewise-epi-kernel-cocone-qis"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/derived.tex",
+        "place": "Lemma Tag 070M, proof: 'We obtain a termwise split short exact sequence of complexes 0 -> I -> prod I_n -> prod I_n -> 0. Hence a corresponding distinguished triangle in K(A) and D(A)'"
+      }
+    },
+    {
+      "text": "Replacement by split terms. Apply the functor $E$ and the natural monomorphism $j:T\\to E(T)$ of [lem-weil-tower-split-envelope] termwise to the complex $I_\\bullet$: by naturality and additivity, $E(I_\\bullet)$ is a complex and $j:I_\\bullet\\to E(I_\\bullet)$ a chain map, monomorphic in each degree by [lem-weil-tower-category-levelwise-abelian]; let $q:E(I_\\bullet)\\to C(I_\\bullet)$ be its termwise cokernel, a chain map with the induced differential, so that $0\\to I_\\bullet\\xrightarrow{j}E(I_\\bullet)\\xrightarrow{q}C(I_\\bullet)\\to0$ is short exact in each degree and $q$ is a degreewise epimorphism with kernel $j$. The terms of $E(I_\\bullet)$ and of $C(I_\\bullet)$ are split [lem-weil-tower-split-envelope]. Applying [lem-weil-degreewise-epi-kernel-cocone-qis] in the abelian category $\\operatorname{Tow}(\\mathcal A)$ to $q$ gives a quasi-isomorphism $u=(0,j):I_\\bullet\\to J:=\\operatorname{Cone}(q)[-1]$, and $J^p=C(I_\\bullet)^{p-1}\\oplus E(I_\\bullet)^p$ is split by Step 3.",
+      "uses": [
+        "lem-weil-tower-split-envelope",
+        "lem-weil-tower-category-levelwise-abelian",
+        "lem-weil-degreewise-epi-kernel-cocone-qis"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/derived.tex",
+        "place": "Lemma Tag 070M; the replacement of the K-injective complex by a complex with split terms is written by the agent (the source works with the special inverse system of Lemma 13.29.3 / lemma-special-inverse-system, whose terms are split by construction)"
+      }
+    },
+    {
+      "text": "A homotopy retraction. $u$ is a quasi-isomorphism, so $Q(u)$ is an isomorphism in $D(\\operatorname{Tow}(\\mathcal A))$ [def-weil-abstract-derived-category]. As $I_\\bullet$ is K-injective, $Q:\\operatorname{Hom}_{K}(N,I_\\bullet)\\to\\operatorname{Hom}_{D}(QN,QI_\\bullet)$ is bijective for every complex $N$ of $\\operatorname{Tow}(\\mathcal A)$ [lem-weil-pbc-kinjective-hom-derived]. Taking $N=J$ gives a chain map $r:J\\to I_\\bullet$ with $Q(r)=Q(u)^{-1}$; then $Q(ru)=\\mathrm{id}=Q(\\mathrm{id}_{I})$, and injectivity for $N=I_\\bullet$ gives $ru\\simeq\\mathrm{id}_{I_\\bullet}$ (chain homotopic).",
+      "uses": [
+        "lem-weil-pbc-kinjective-hom-derived",
+        "def-weil-abstract-derived-category"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/derived.tex",
+        "place": "agent-written; uses that maps into a K-injective complex are computed in K(A) (Lemma Tag 05TG, lemma-K-injective-defined, in the form of lem-weil-pbc-kinjective-hom-derived)"
+      }
+    },
+    {
+      "text": "Conclusion. By Step 2, in $K(\\mathcal A)$: $L(r)L(u)=L(ru)=\\mathrm{id}$, $\\Phi(r)\\Phi(u)=\\mathrm{id}$, $\\eta_JL(u)=\\Phi(u)\\eta_I$ and $\\eta_IL(r)=\\Phi(r)\\eta_J$. Apply $H^p$, which is defined on $K(\\mathcal A)$ [def-weil-abstract-derived-category], and let $v=H^p(L(r))\\,H^p(\\eta_J)^{-1}\\,H^p(\\Phi(u))$, using Step 4. Then $H^p(\\eta_I)v=H^p(\\Phi(r))H^p(\\eta_J)H^p(\\eta_J)^{-1}H^p(\\Phi(u))=H^p(\\Phi(ru))=\\mathrm{id}$ and $vH^p(\\eta_I)=H^p(L(r))H^p(\\eta_J)^{-1}H^p(\\eta_J)H^p(L(u))=H^p(L(ru))=\\mathrm{id}$. So $H^p(\\eta_I)$ is an isomorphism for every $p$: $\\eta=\\eta_{I_\\bullet}:L\\to\\operatorname{Cone}(1-s)[-1]$ is a quasi-isomorphism, and $Q(\\eta)$ is an isomorphism $L\\cong\\operatorname{Cone}(1-s)[-1]$ in $D(\\mathcal A)$ [def-weil-abstract-derived-category].",
+      "uses": [
+        "def-weil-abstract-derived-category"
+      ],
+      "elementary": true,
+      "source": {
+        "document": "literature/stacks-project/derived.tex",
+        "place": "Lemma Tag 070M, proof: 'It follows that I represents R lim I_n'; the retract argument is written by the agent"
+      }
+    }
+  ],
+  "proof_deps": [
+    "lem-weil-tower-category-levelwise-abelian",
+    "def-weil-tower-transition-endomorphism",
+    "def-weil-inverse-system",
+    "def-weil-abstract-derived-category",
+    "lem-weil-tower-split-envelope",
+    "lem-weil-degreewise-epi-kernel-cocone-qis",
+    "lem-weil-pbc-kinjective-hom-derived"
+  ],
+  "proof_origin": {
+    "by": "agent",
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Lemma Tag 070M (lemma-difficulty-K-injectives), proof (the split short exact sequence 0 -> I -> prod I_n -> prod I_n -> 0 and its triangle), extended by the agent from the special inverse system of Lemma lemma-special-inverse-system to an arbitrary K-injective complex of towers through a split-envelope replacement and a homotopy retraction; Tag 0BK6 (lemma-product-K-injective) is not needed for this statement (it is used by the citer lem-weil-derived-limit-existence)"
   },
-  {
-   "tool": "grep",
-   "query": "inverse limit.*product.*shift|Roos",
-   "results": "none in Mathlib/Algebra/Homology",
-   "date": "2026-10-11",
-   "verdict": "no match"
+  "mathlib_searches": [
+    {
+      "tool": "leanfinder",
+      "query": "Roos exact sequence termwise products inverse limit complexes exact countable products",
+      "results": "generic homological-complex exactness; no derived inverse-limit computation",
+      "date": "2026-10-11",
+      "verdict": "no match"
+    },
+    {
+      "tool": "loogle",
+      "query": "CochainComplex inverse limit product one minus shift",
+      "results": "unknown identifier inverse; no hits",
+      "date": "2026-10-11",
+      "verdict": "no match"
+    },
+    {
+      "tool": "grep",
+      "query": "inverse limit.*product.*shift|Roos",
+      "results": "none in Mathlib/Algebra/Homology",
+      "date": "2026-10-11",
+      "verdict": "no match"
+    },
+    {
+      "tool": "leansearch",
+      "query": "termwise Roos sequence of complexes with exact countable products",
+      "results": "service unavailable: Internal Server Error",
+      "date": "2026-10-11",
+      "verdict": "unavailable"
+    }
+  ],
+  "mathlib_match": null,
+  "status": "split",
+  "created": {
+    "item": "lem-weil-derived-limit-existence",
+    "by": "worker",
+    "date": "2026-10-10"
   },
-  {
-   "tool": "leansearch",
-   "query": "termwise Roos sequence of complexes with exact countable products",
-   "results": "service unavailable: Internal Server Error",
-   "date": "2026-10-11",
-   "verdict": "unavailable"
+  "chapter": "sec-proper-base-change",
+  "unit": "sk-thm-properbasechange",
+  "split_report": {
+    "date": "2026-10-11",
+    "item": "lem-weil-derived-limit-roos-complex",
+    "worker": "stage1",
+    "summary": "Read Stacks derived.tex 070M (lemma-difficulty-K-injectives) with its proof and 0BK6 (lemma-product-K-injective). 070M proves the comparison only for the special system of lemma-special-inverse-system, whose terms satisfy I_{n+1}^p = C_{n+1}^p ⊕ I_n^p, so that 1-s is termwise split epi. The item is for an arbitrary K-injective complex of towers, so the split was written: Steps 1-3 set up lim, prod, 1-s, the cone and the map eta, prove homotopy invariance and that 1-s is split epi on split towers (elementary); Step 4 gets the split-term case from the new node lem-weil-degreewise-epi-kernel-cocone-qis; Step 5 replaces I by a quasi-isomorphic complex with split terms through the new node lem-weil-tower-split-envelope (Tow(A) levelwise by the new Mathlib leaf lem-weil-tower-category-levelwise-abelian); Step 6 uses K-injectivity through lem-weil-pbc-kinjective-hom-derived to get a homotopy retraction r of u; Step 7 is the retract argument. Statement clarified (not changed in content): K-injective defined for Tow(A) explicitly (the cited definition node is for etale sheaves), L realized as ker(1-s), the cone and the map eta=(0,iota) written out. The hypotheses 'exact countable products' and 'enough injectives' are not used by the proof (only the existence of countable products); they are kept since the citer works in that setting.",
+    "blueprint": "Realizes the place of lem-weil-derived-limit-existence's proof named in from.place: Assertion (3), the last step 'By [lem-weil-derived-limit-roos-complex] the termwise inverse-limit complex L = lim_n I_n is quasi-isomorphic to Cone(1-s)[-1]'; Steps 1-4 realize the split short exact sequence argument of Stacks 070M, Steps 5-7 the passage from the special inverse system of 070M to an arbitrary K-injective representative in Tow(A).",
+    "tool_uses": []
+  },
+  "statement_change": {
+    "date": "2026-10-11",
+    "by": "W-roos0207 (lead worker), recorded by L at 02:14 UTC",
+    "what": "clarification, same content: K-injective spelled out for Tow(A) (the cited definition node is for sheaves), P^p = prod_n (I_n)^p, L^p realized as ker(1-s) with inclusion iota, the cone terms and differential written out, the canonical map named eta = (0, iota); the citer lem-weil-derived-limit-existence step 4 uses the conclusion unchanged",
+    "old_statement": "Let $\\mathcal A$ be an abelian category [def-weil-abstract-derived-category] with exact countable products and enough injectives, and let $\\operatorname{Tow}(\\mathcal A)$ be the abelian category of inverse systems [def-weil-inverse-system] in $\\mathcal A$. For a K-injective cochain complex [def-weil-pbc-kinjective-resolutions] $I_\\bullet$ of towers, write $P=\\prod_n\\operatorname{ev}_n(I_\\bullet)$ and let $1-s:P\\to P$ be induced by the transition maps [def-weil-tower-transition-endomorphism]. The canonical map from the termwise inverse-limit complex $L^p=\\varprojlim_n(I_n)^p$ to the shifted mapping cone $\\operatorname{Cone}(1-s)[-1]$ is a quasi-isomorphism. Consequently $L$ and $\\operatorname{Cone}(1-s)[-1]$ represent the same object of $D(\\mathcal A)$."
   }
- ],
- "mathlib_match": null,
- "status": "unsplit",
- "created": {
-  "item": "lem-weil-derived-limit-existence",
-  "by": "worker",
-  "date": "2026-10-10"
- },
- "chapter": "sec-proper-base-change",
- "unit": "sk-thm-properbasechange"
 }

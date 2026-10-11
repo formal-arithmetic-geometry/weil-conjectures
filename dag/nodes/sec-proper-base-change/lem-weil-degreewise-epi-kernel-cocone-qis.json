@@ -1,0 +1,76 @@
+{
+ "id": "lem-weil-degreewise-epi-kernel-cocone-qis",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-derived-limit-existence",
+   "place": "Assertion (3), 'the termwise inverse-limit complex lim_n I_n represents R lim K_n': the comparison of the kernel of the degreewise epimorphism 1-s (and of the kernel of the split envelope I -> E(I) -> C(I)) with the shifted mapping cone, which the Roos-complex step of lem-weil-derived-limit-existence takes for granted",
+   "via": [
+    "lem-weil-derived-limit-roos-complex"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Kernel of a degreewise epimorphism is quasi-isomorphic to the shifted cone",
+ "statement": "Let $\\mathcal A$ be an abelian category [def-sp-abelian] and let $f:P\\to Q$ be a morphism of cochain complexes of $\\mathcal A$ [def-weil-abstract-derived-category] such that $f^p:P^p\\to Q^p$ is an epimorphism for every $p\\in\\mathbf Z$. Let $K\\subseteq P$ be the termwise kernel, $K^p=\\ker f^p$ with the restricted differential, and $\\iota:K\\to P$ the inclusion. With the mapping cone $\\operatorname{Cone}(f)^r=Q^r\\oplus P^{r+1}$, differential $(y,x)\\mapsto(d_Qy+f(x),-d_Px)$, and the shift of [def-weil-abstract-derived-category], the complex $\\operatorname{Cone}(f)[-1]$ has terms $Q^{p-1}\\oplus P^p$ and differential $(y,x)\\mapsto(-d_Qy-f(x),\\,d_Px)$. Then the maps $\\kappa^p=(0,\\iota^p):K^p\\to Q^{p-1}\\oplus P^p$ form a morphism of complexes $\\kappa:K\\to\\operatorname{Cone}(f)[-1]$, and $\\kappa$ is a quasi-isomorphism; in particular $K\\cong\\operatorname{Cone}(f)[-1]$ in $D(\\mathcal A)$.",
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "used without statement in the proof of Lemma Tag 070M (lemma-difficulty-K-injectives): 'We obtain a termwise split short exact sequence of complexes ... Hence a corresponding distinguished triangle'; the chain-level form is written by the agent"
+ },
+ "stmt_deps": [
+  "def-sp-abelian",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "short exact sequence of cochain complexes: the first term is quasi-isomorphic to the shifted mapping cone of the second map",
+   "results": "CochainComplex.mappingCone.quasiIso_descShortComplex (Mathlib.Algebra.Homology.HomotopyCategory.ShortExact: mappingCone S.f -> S.X3 is a quasi-iso), DerivedCategory.triangleOfSESIso, DerivedCategory.triangleOfSESδ, CochainComplex.mappingConeHomOfDegreewiseSplitIso",
+   "date": "2026-10-11",
+   "verdict": "no match: quasiIso_descShortComplex is the cone of the first map onto the third term, not the kernel into the cocone of the second map; deriving this node from it needs a rotation argument, not one line"
+  },
+  {
+   "tool": "loogle",
+   "query": "CochainComplex.mappingCocone, QuasiIso",
+   "results": "none",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "mappingCocone in ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib",
+   "results": "Algebra/Homology/HomotopyCategory/MappingCocone.lean (definition mappingCocone = (mappingCone φ)⟦-1⟧, fst, lift, triangle, rotateTriangleIso; no kernel comparison), DerivedCategory/Basic.lean:224 mappingCocone_triangle_distinguished, Factorizations/CM5a.lean (uses lift_fst)",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "kernel of a degreewise epimorphism of cochain complexes is quasi-isomorphic to the mapping cocone",
+   "results": "service unavailable: HTTP Error 500 Internal Server Error",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-derived-limit-roos-complex",
+  "date": "2026-10-11"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange"
+}

@@ -1,0 +1,81 @@
+{
+ "id": "lem-weil-tower-category-levelwise-abelian",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-derived-limit-existence",
+   "place": "Assertion (3), the phrase 'the abelian category whose objects are inverse systems in A and whose morphisms are compatible levelwise maps': that this category is abelian with levelwise kernels, cokernels and exactness, used in the Roos-complex comparison to compute the cokernel of the split envelope and the kernel of a degreewise epimorphism of complexes of towers",
+   "via": [
+    "lem-weil-derived-limit-roos-complex"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Inverse systems in an abelian category form an abelian category, computed levelwise",
+ "statement": "Let $\\mathcal A$ be an abelian category [def-sp-abelian] and let $\\operatorname{Tow}(\\mathcal A)$ be the category of inverse systems $(T_n,f_n:T_{n+1}\\to T_n)_{n\\geq1}$ in $\\mathcal A$ with morphisms of inverse systems [def-weil-inverse-system], with the levelwise addition of morphisms $(\\varphi+\\psi)_n=\\varphi_n+\\psi_n$. Then $\\operatorname{Tow}(\\mathcal A)$ is an abelian category, and for every $n\\geq1$ the evaluation functor $\\operatorname{ev}_n:\\operatorname{Tow}(\\mathcal A)\\to\\mathcal A$, $(T_m)_m\\mapsto T_n$, is additive and exact: finite products, kernels and cokernels of $\\operatorname{Tow}(\\mathcal A)$ are computed levelwise (the kernel of $\\varphi:T\\to T'$ is the system $(\\ker\\varphi_n)_n$ with the induced transition maps, and similarly for cokernels). In particular a morphism $\\varphi$ of inverse systems is a monomorphism, resp. an epimorphism, if and only if every $\\varphi_n$ is one, and a sequence $0\\to T\\to T'\\to T''\\to0$ in $\\operatorname{Tow}(\\mathcal A)$ is short exact if and only if $0\\to T_n\\to T'_n\\to T''_n\\to0$ is short exact in $\\mathcal A$ for every $n$.",
+ "source": {
+  "document": "literature/stacks-project/homology.tex",
+  "place": "Lemma Tag 02MZ (lemma-inverse-systems-abelian), part (2), whose proof Stacks omits; in Mathlib as the functor-category instance"
+ },
+ "stmt_deps": [
+  "def-sp-abelian",
+  "def-weil-inverse-system"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "functor category from N^op into an abelian category is abelian, kernels and cokernels computed objectwise",
+   "results": "CategoryTheory.Abelian.functorCategoryAbelian (Mathlib.CategoryTheory.Abelian.FunctorCategory), functorCategoryPreadditive",
+   "date": "2026-10-11",
+   "verdict": "match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatTrans.epi_iff_epi_app",
+   "results": "CategoryTheory.NatTrans.epi_iff_epi_app (Mathlib.CategoryTheory.Limits.FunctorCategory.EpiMono): Epi f <-> forall k, Epi (f.app k), given HasPushouts",
+   "date": "2026-10-11",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "functorCategoryAbelian | evaluation_preservesLimitsOfShape | evaluation_preservesColimitsOfShape | mono_iff_mono_app | epi_iff_epi_app in ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory",
+   "results": "CategoryTheory/Abelian/FunctorCategory.lean:96 functorCategoryAbelian; CategoryTheory/Limits/FunctorCategory/Basic.lean:225 evaluation_preservesLimitsOfShape, :319 evaluation_preservesColimitsOfShape; CategoryTheory/Limits/FunctorCategory/EpiMono.lean:38 NatTrans.mono_iff_mono_app, :61 NatTrans.epi_iff_epi_app",
+   "date": "2026-10-11",
+   "verdict": "match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "category of functors into an abelian category is abelian",
+   "results": "service unavailable: HTTP Error 500 Internal Server Error",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "CategoryTheory.Abelian.functorCategoryAbelian",
+  "file": "Mathlib/CategoryTheory/Abelian/FunctorCategory.lean",
+  "line": 96,
+  "how": "one declaration per clause, with Tow(A) = the functor category (ℕ≥1)ᵒᵖ ⥤ A (equivalently ℕᵒᵖ ⥤ A after reindexing): abelian by the instance functorCategoryAbelian (FunctorCategory.lean:96, read with sed); evaluation at n preserves finite limits and finite colimits by evaluation_preservesLimitsOfShape and evaluation_preservesColimitsOfShape (Mathlib/CategoryTheory/Limits/FunctorCategory/Basic.lean:225 and :319; an abelian category has finite limits and colimits), so kernels, cokernels and finite products are levelwise and ev_n is exact; mono and epi are levelwise by NatTrans.mono_iff_mono_app and NatTrans.epi_iff_epi_app (Mathlib/CategoryTheory/Limits/FunctorCategory/EpiMono.lean:38 and :61; A has pullbacks and pushouts); the short-exactness clause follows, the comparison map from T to the levelwise kernel of T'→T'' being a levelwise isomorphism hence an isomorphism (NatIso.isIso_of_isIso_app)."
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-derived-limit-roos-complex",
+  "date": "2026-10-11"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange"
+}

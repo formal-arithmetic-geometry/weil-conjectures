@@ -1,0 +1,76 @@
+{
+ "id": "lem-weil-tower-split-envelope",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-derived-limit-existence",
+   "place": "Assertion (3), 'If I is a K-injective representative in Tow(A) of the tower (K_n,f_n)': the replacement of the K-injective complex of towers by a quasi-isomorphic complex whose terms have split transition maps (the role played in Stacks 070M by the decompositions I_{n+1}^p = C_{n+1}^p ⊕ I_n^p)",
+   "via": [
+    "lem-weil-derived-limit-roos-complex"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Functorial embedding of a tower into a split tower with split cokernel",
+ "statement": "Let $\\mathcal A$ be an abelian category [def-sp-abelian]. Call an inverse system $(X_n,g_n:X_{n+1}\\to X_n)_{n\\geq1}$ in $\\mathcal A$ [def-weil-inverse-system] *split* if every $g_n$ has a right inverse, i.e. there are $\\sigma_n:X_n\\to X_{n+1}$ with $g_n\\circ\\sigma_n=\\mathrm{id}_{X_n}$. For an inverse system $T=(T_n,f_n)$ write $f_{m,n}=f_n\\circ f_{n+1}\\circ\\cdots\\circ f_{m-1}:T_m\\to T_n$ for $m\\geq n$ ($f_{n,n}=\\mathrm{id}$), and let $E(T)$ be the inverse system with $E(T)_m=\\prod_{n=1}^mT_n$ (a finite product) and transition maps $E(T)_{m+1}\\to E(T)_m$ the projections forgetting the factor $T_{m+1}$; for a morphism $\\varphi=(\\varphi_n):T\\to T'$ let $E(\\varphi)_m=\\prod_{n\\le m}\\varphi_n$. Let $j_T:T\\to E(T)$ have components $j_{T,m}=(f_{m,n})_{n\\le m}:T_m\\to\\prod_{n\\le m}T_n$. Then $E$ is an additive functor from inverse systems in $\\mathcal A$ to inverse systems in $\\mathcal A$, $j_T$ is a morphism of inverse systems natural in $T$ (i.e. $E(\\varphi)\\circ j_T=j_{T'}\\circ\\varphi$), every $j_{T,m}$ is a monomorphism, and both $E(T)$ and the levelwise cokernel $C(T)=(\\operatorname{coker}j_{T,m})_m$, with its induced transition maps, are split inverse systems.",
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "agent-written replacement step; it plays the role of the direct sum decompositions I_{n+1}^p = C_{n+1}^p ⊕ I_n^p in the proof of Lemma Tag 070M (lemma-difficulty-K-injectives)"
+ },
+ "stmt_deps": [
+  "def-sp-abelian",
+  "def-weil-inverse-system"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "every inverse sequence embeds into one whose transition maps are split epimorphisms, functorially",
+   "results": "CategoryTheory.SplitEpi.map, SplitEpi.map_section_, instIsSplitEpiMap (Mathlib.CategoryTheory.EpiMono), Functor.IsSplitPair, SimplexCategoryGenRel.isSplitEpi_toSimplexCategory_map_of_P_σ",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor ℕᵒᵖ _, CategoryTheory.IsSplitEpi",
+   "results": "none",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "files containing 'ℕᵒᵖ ⥤' in ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib, then 'IsSplitEpi|SplitEpi' in them",
+   "results": "files Condensed/Light/Epi.lean, Topology/Category/LightProfinite/*, CategoryTheory/Functor/OfSequence.lean, CategoryTheory/Sites/Coherent/SequentialLimit.lean, ...; none mentions split epimorphisms",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "inverse system with split surjective transition maps, monomorphism into tower with split epimorphic transitions",
+   "results": "service unavailable: HTTP Error 500 Internal Server Error",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-derived-limit-roos-complex",
+  "date": "2026-10-11"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange"
+}
