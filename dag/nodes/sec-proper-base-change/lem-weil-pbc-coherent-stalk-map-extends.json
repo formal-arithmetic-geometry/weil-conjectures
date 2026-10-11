@@ -143,5 +143,24 @@
   "worker": "stage1",
   "summary": "Read Cohomology of Schemes 01Y4 and 01XZ, and Modules 01CP. Expanded the coherent-to-finite-presentation reduction locally, then applied the new unsplit 01CP node to take a germ of internal Hom representing the stalk map. Its representative is the required morphism on a neighbourhood. Searches of the DAG and whole blueprint found no 01CP node or blueprint duplicate. The item itself has no exact Mathlib match.",
   "blueprint": "The item supplies the coherent stalk-map extension used by lem-weil-pbc-coherent-generic-point-ideal-inclusion, descended through the recorded via chain from step 7 of thm-weil-pbc-finite-etale-lifting (Stacks 0GS2 essential-surjectivity route). The blueprint has no matching statement for 01Y4 or 01CP."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.CoherentStalkMapExtends",
+  "declaration": "AlgebraicGeometry.exists_open_hom_of_coherent_stalk_map",
+  "file": "lean/Sheaf/AlgebraicGeometry/CoherentStalkMapExtends.lean",
+  "statement": "theorem exists_open_hom_of_coherent_stalk_map {X : Scheme.{u}} [IsLocallyNoetherian X] (F G : X.Modules) (hF : RingedSpace.IsCoherent X.toRingedSpace F) (hG : RingedSpace.IsCoherent X.toRingedSpace G) (x : X) (ψ : (RingedSpace.moduleStalkFunctor X.toRingedSpace x).obj G ⟶ (RingedSpace.moduleStalkFunctor X.toRingedSpace x).obj F) : ∃ (U : X.Opens) (hx : x ∈ U) (φ : (Scheme.Modules.restrictFunctor U.ι).obj G ⟶ (Scheme.Modules.restrictFunctor U.ι).obj F), ∀ m : (RingedSpace.moduleStalkFunctor X.toRingedSpace x).obj G, ψ m = ConcreteCategory.hom ((Scheme.Modules.restrictStalkNatIso U.ι ((⟨x, hx⟩ : (U : Scheme)))).hom.app F) ((RingedSpace.moduleStalkFunctor (U : Scheme).toRingedSpace ⟨x, hx⟩).map φ (ConcreteCategory.hom ((Scheme.Modules.restrictStalkNatIso U.ι ((⟨x, hx⟩ : (U : Scheme)))).inv.app G) m))",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-csm1302"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-csm1302",
+  "group": "H1",
+  "result": "fix",
+  "note": "locnoeth instance; F,G X.Modules coherent via RingedSpace.IsCoherent; psi and phi_x switched to RingedSpace.moduleStalkFunctor (MODULE STALKS form, K1 ab9999373); U open with x in U; phi on restrictFunctor U.ι (J1 form); tied equation psi = restrictStalkNatIso.hom ∘ phi_x ∘ restrictStalkNatIso.inv elementwise; rfl-checked moduleStalkFunctor.map = Ab stalk map of mapPresheaf"
  }
 }
