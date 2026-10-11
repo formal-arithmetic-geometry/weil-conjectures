@@ -1,11 +1,11 @@
 # Work queue
 
-493 items; claim with `tools/claim.py next <group> [--stage N]`.
+488 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (493)
+## Stage 2: nodes to state (488)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -32,14 +32,12 @@
 | `lem-pc-qcoh-truncation-derived-limit` | 1 | state |
 | `lem-pc-tor-amplitude-qcoh-test` | 1 | state |
 | `lem-pc-unbounded-derived-functor-cohomological-bound` | 1 | state |
-| `lem-sc-affine-section-localization` | 1 | state |
 | `lem-sc-ass-weakass-fg-stalk` | 1 | state |
 | `lem-sc-base-change-curve` | 1 | state |
 | `lem-sc-complex-lift-class-projective` | 1 | state |
 | `lem-sc-derived-open-gluing` | 1 | state |
 | `lem-sc-derived-open-restriction-adjunction-exact` | 1 | state |
 | `lem-sc-ext-evaluation` | 1 | state |
-| `lem-sc-ext-tensor-exact` | 1 | state |
 | `lem-sc-finite-free-complex-homology-upper-semicontinuous` | 1 | state |
 | `lem-sc-finite-locally-free-residue-isomorphism` | 1 | state |
 | `lem-sc-hilb-dominating-power` | 1 | state |
@@ -60,15 +58,12 @@
 | `lem-weil-pbc-closed-immersion-conormal-functorial` | 1 | state |
 | `lem-weil-pbc-closed-immersion-pushforward-annihilated` | 1 | state |
 | `lem-weil-pbc-coherent-generic-point-ideal-inclusion` | 1 | state |
-| `lem-weil-pbc-coherent-local-isomorphism` | 1 | state |
 | `lem-weil-pbc-coherent-stalk-map-extends` | 1 | state |
 | `lem-weil-pbc-ideal-times-quasi-coherent-affine-sections` | 1 | state |
 | `lem-weil-pbc-integral-algebra-directed-colimit-finite` | 1 | state |
-| `lem-weil-pbc-integral-scheme-ideal-generic-stalk` | 1 | state |
 | `lem-weil-pbc-limit-fibre-products` | 1 | state |
 | `lem-weil-pbc-module-base-change-map-algebra` | 1 | state |
 | `lem-weil-pbc-module-directed-colimit-finite-presentation` | 1 | state |
-| `lem-weil-pbc-module-finite-presentation-extension` | 1 | state |
 | `lem-weil-pbc-module-finite-type-image-extension` | 1 | state |
 | `lem-weil-pbc-module-finite-type-submodule-extension` | 1 | state |
 | `lem-weil-pbc-module-pullback-affine-sections` | 1 | state |
