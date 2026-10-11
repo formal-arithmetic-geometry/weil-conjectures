@@ -40,7 +40,10 @@ being torsion of order invertible in `k`.
   `def-weil-rationalization-karoubi`), the rationalization realised inside the rationalization
   `D_comp(X_ét, E)` of the derived complete objects; the functor is
   `AlgebraicGeometry.Etale.boundedConstructibleRationalLowerStar`.
-* `ℚ̄_ℓ`: bounded complexes of sheaves of modules over the constant `ℓ`-adic sheaf with
+* `ℚ̄_ℓ`: in the blueprint's form, the common-stage category of the rational stages is treated in
+  `WeilConjectures.SixFunctors.ClosedImmersionAlgebraicClosure`
+  (`AlgebraicGeometry.Etale.algebraicClosureLowerStar`). Here, in addition, the Bhatt–Scholze
+  model: bounded complexes of sheaves of modules over the constant `ℓ`-adic sheaf with
   constructible cohomology (`AlgebraicGeometry.ProEtale.DerivedCategory.boundedAdicConstructible`),
   the Bhatt–Scholze model of the `2`-colimit of the `Dᵇc(-, E)`; the functor is
   `AlgebraicGeometry.ProEtale.boundedAdicConstructibleLowerStar`.

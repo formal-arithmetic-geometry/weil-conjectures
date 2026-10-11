@@ -40,6 +40,7 @@ open CategoryTheory
 
 namespace CategoryTheory
 
+set_option linter.checkUnivs false in
 /-- A directed system of categories over a preorder `S`, with transition functors and composition
 isomorphisms satisfying the cocycle condition. -/
 structure TwoColimitData (S : Type w) [Preorder S] where
@@ -143,6 +144,7 @@ lemma rel_equivalence : Equivalence (@Rel S _ D P A B) where
     obtain ⟨N, hM, hM'⟩ := directed_of (· ≤ ·) M M'
     exact ⟨N, hx.trans hM, hz.trans hM', (rel_of_le h hM).trans (rel_of_le h' hM')⟩
 
+omit [IsDirected S (· ≤ ·)] in
 lemma rel_push (x : PreHom A B) {M : S} (h : x.L ≤ M) : Rel x (x.push h) :=
   ⟨M, h, le_rfl, by simp [push, D.transport_transport]⟩
 
@@ -173,7 +175,8 @@ noncomputable def comp (x : PreHom A B) (y : PreHom B C) : PreHom A C :=
 
 lemma comp_transport (x : PreHom A B) (y : PreHom B C) {N : S} (h : (comp x y).L ≤ N) :
     D.transport (comp x y).f h =
-      D.transport x.f ((le_upper_left _ _).trans h) ≫ D.transport y.f ((le_upper_right _ _).trans h) := by
+      D.transport x.f ((le_upper_left _ _).trans h) ≫
+        D.transport y.f ((le_upper_right _ _).trans h) := by
   simp [comp, D.transport_comp, D.transport_transport]
 
 lemma comp_rel {x x' : PreHom A B} {y y' : PreHom B C} (hx : Rel x x') (hy : Rel y y') :
@@ -241,6 +244,7 @@ def mapObj (A : D.Obj P) : D'.Obj P' := ⟨A.E, (Φ.F A.E).obj A.K, hP _ _ A.pro
 def mapPre {A B : D.Obj P} (x : PreHom A B) : PreHom (Φ.mapObj hP A) (Φ.mapObj hP B) :=
   ⟨x.L, x.hA, x.hB, (Φ.κ x.hA).hom.app A.K ≫ (Φ.F x.L).map x.f ≫ (Φ.κ x.hB).inv.app B.K⟩
 
+omit [IsDirected S (· ≤ ·)] in
 lemma κ_trans_hom_app {E L M : S} (h₁ : E ≤ L) (h₂ : L ≤ M) (K : D.C E) :
     (Φ.κ (h₁.trans h₂)).hom.app K = (D'.comp h₁ h₂).inv.app ((Φ.F E).obj K) ≫
       (D'.T h₂).map ((Φ.κ h₁).hom.app K) ≫ (Φ.κ h₂).hom.app ((D.T h₁).obj K) ≫
@@ -249,6 +253,7 @@ lemma κ_trans_hom_app {E L M : S} (h₁ : E ≤ L) (h₂ : L ≤ M) (K : D.C E)
   simp only [NatTrans.comp_app, Functor.whiskerLeft_app, Functor.whiskerRight_app] at this
   rw [← this, Iso.inv_hom_id_app_assoc]
 
+omit [IsDirected S (· ≤ ·)] in
 lemma map_transport {A B : D.Obj P} (x : PreHom A B) {M : S} (h : x.L ≤ M) :
     D'.transport (Φ.mapPre hP x).f h = (Φ.mapPre hP (x.push h)).f := by
   have hn := (Φ.κ h).hom.naturality x.f
@@ -265,6 +270,7 @@ lemma map_transport {A B : D.Obj P} (x : PreHom A B) {M : S} (h : x.L ≤ M) :
   erw [← Functor.map_comp_assoc, Iso.hom_inv_id_app, CategoryTheory.Functor.map_id,
     Category.id_comp, Category.comp_id]
 
+omit [IsDirected S (· ≤ ·)] in
 lemma mapPre_rel {A B : D.Obj P} {x y : PreHom A B} (hxy : PreHom.Rel x y) :
     PreHom.Rel (Φ.mapPre hP x) (Φ.mapPre hP y) := by
   obtain ⟨M, hx, hy, h⟩ := hxy
@@ -312,8 +318,9 @@ instance full_functor [∀ E, (Φ.F E).Full] : (Φ.functor hP).Full where
       ((Φ.κ y.hA).inv.app A.K ≫ y.f ≫ (Φ.κ y.hB).hom.app B.K)⟩, ?_⟩
     refine Quotient.sound ⟨y.L, le_rfl, le_rfl, ?_⟩
     congr 1
-    simp [mapPre]
-    exact Category.comp_id _
+    simp only [mapPre, Functor.map_preimage, Category.assoc, Iso.hom_inv_id_app_assoc,
+      Iso.hom_inv_id_app]
+    exact Category.comp_id y.f
 
 end Morphism
 

@@ -42,10 +42,10 @@ noncomputable def sheafComposeCompIso {F : A ⥤ B} {G : B ⥤ D} {H : A ⥤ D} 
     sheafCompose J F ⋙ sheafCompose J G ≅ sheafCompose J H where
   hom :=
     { app P := ⟨Functor.whiskerLeft P.obj α.hom⟩
-      naturality _ _ f := Sheaf.hom_ext (NatTrans.ext (funext fun U ↦ α.hom.naturality _)) }
+      naturality _ _ _ := Sheaf.hom_ext (NatTrans.ext (funext fun _ ↦ α.hom.naturality _)) }
   inv :=
     { app P := ⟨Functor.whiskerLeft P.obj α.inv⟩
-      naturality _ _ f := Sheaf.hom_ext (NatTrans.ext (funext fun U ↦ α.inv.naturality _)) }
+      naturality _ _ _ := Sheaf.hom_ext (NatTrans.ext (funext fun _ ↦ α.inv.naturality _)) }
   hom_inv_id := NatTrans.ext (funext fun P ↦ Sheaf.hom_ext (NatTrans.ext (funext fun U ↦
     α.hom_inv_id_app (P.obj.obj U))))
   inv_hom_id := NatTrans.ext (funext fun P ↦ Sheaf.hom_ext (NatTrans.ext (funext fun U ↦
@@ -235,8 +235,8 @@ instance {E L : FiniteSubext l} (h : E ≤ L) : (integralStageTransition X h).Is
     ((DerivedCategory.derivedCompleteIntegral X.smallEtaleTopology l E.field).ι ⋙
       derivedStageTransition X h) _).IsTriangulated)
 
--- The instance arguments of the derived complete categories are expensive to unify.
 set_option maxHeartbeats 1600000 in
+-- The instance arguments of the derived complete categories are expensive to unify.
 /-- The integral transition functors carry torsion objects to torsion objects. -/
 lemma torsion_integralStageTransition_obj {E L : FiniteSubext l} (h : E ≤ L)
     (K : DerivedCategoryDerivedCompleteIntegral X.smallEtaleTopology l E.field)
@@ -280,7 +280,8 @@ lemma rationalStageTransitionComp_cocycle {E L L' L'' : FiniteSubext l} (h : E �
         (rationalStageTransitionComp X (h.trans h') h'').hom =
       Functor.whiskerLeft (rationalStageTransition X h) (rationalStageTransitionComp X h' h'').hom ≫
         (rationalStageTransitionComp X h (h'.trans h'')).hom :=
-  Rationalization.mapOfTorsionCompIso_cocycle _ _ _ _ (integralStageTransitionComp_cocycle X h h' h'')
+  Rationalization.mapOfTorsionCompIso_cocycle _ _ _ _
+    (integralStageTransitionComp_cocycle X h h' h'')
 
 end Integral
 

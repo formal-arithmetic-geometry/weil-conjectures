@@ -26,8 +26,9 @@ functors `K ↦ K ⊗_E L` realised by derived coextension of scalars along `�
 
 For a closed immersion `i : Z ⟶ X`, `Ri_*` commutes with the transition functors compatibly with
 their composition (`AlgebraicGeometry.Etale.rationalLowerStarTransitionIso_hexagon`), so it induces
-`i_* : Dᵇc(Z, ℚ̄_ℓ) ⥤ Dᵇc(X, ℚ̄_ℓ)` (`AlgebraicGeometry.Etale.algebraicClosureLowerStar`). Its action on
-morphisms is the filtered colimit of the bijections given by the rational stage
+`i_* : Dᵇc(Z, ℚ̄_ℓ) ⥤ Dᵇc(X, ℚ̄_ℓ)`
+(`AlgebraicGeometry.Etale.algebraicClosureLowerStar`). Its action on morphisms is the filtered
+colimit of the bijections given by the rational stage
 (`AlgebraicGeometry.Etale.full_boundedConstructibleRationalLowerStar`), hence it is fully faithful:
 blueprint `prop-sf-closed-unit-all-stages` at the stage `ℚ̄_ℓ`.
 
@@ -134,7 +135,7 @@ rational stages `E`. -/
 noncomputable def algebraicClosureLowerStar :
     DerivedCategoryBoundedConstructibleAlgebraicClosure l Z ⥤
       DerivedCategoryBoundedConstructibleAlgebraicClosure l X :=
-  (algebraicClosureLowerStarMorphism i).functor (fun E K hK ↦
+  (algebraicClosureLowerStarMorphism i).functor (fun E _ hK ↦
     have := hasInvertibleExponent_residueField l hl E
     Etale.boundedConstructibleRational_rightDerivedLowerStar_of_isClosedImmersion i aX l
       E.field hK)

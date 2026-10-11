@@ -13,7 +13,8 @@ public import WeilConjectures.SixFunctors.Etale.Derived.Triangulated
 # Direct images and the transition functors of the `ℚ̄_ℓ` coefficient stage
 
 For a morphism `f : Z ⟶ X`, the derived direct image `Rf_*` commutes with the transition functors
-`K ↦ K ⊗_E L` of the `ℚ̄_ℓ` coefficient stage (`AlgebraicGeometry.Etale.derivedLowerStarTransitionIso`),
+`K ↦ K ⊗_E L` of the `ℚ̄_ℓ` coefficient stage
+(`AlgebraicGeometry.Etale.derivedLowerStarTransitionIso`),
 and these isomorphisms are compatible with the composition isomorphisms of the transition functors
 (`AlgebraicGeometry.Etale.derivedLowerStarTransitionIso_hexagon`). This is what makes `Rf_*`
 induce a functor on the `2`-colimit defining the `ℚ̄_ℓ` stage.
@@ -113,7 +114,7 @@ lemma derivedLowerStarTransitionIso_hexagon {E L L' : FiniteSubext l} (h : E ≤
     (Functor.rightDerivedFunctorCompIso' _ _ e) (Functor.rightDerivedFunctorCompIso' _ _ e')
     (Functor.rightDerivedFunctorCompIso'_cocycle _ _ _ _ (by
       simp only [lowerStarCompCoextendScalarsIso, Iso.refl_hom, Functor.whiskerRight_id',
-        Category.id_comp, Category.comp_id]; rfl))
+        Category.id_comp]; rfl))
     (Functor.rightDerivedFunctorCompIso'_cocycle _ _ _ _ (by
       simp only [Iso.refl_hom, Functor.whiskerLeft_id', Category.id_comp, Category.comp_id]
       rfl))
@@ -175,8 +176,8 @@ instance (E : FiniteSubext l) : (integralStageLowerStar f E).IsTriangulated :=
     ((DerivedCategory.derivedCompleteIntegral Z.smallEtaleTopology l E.field).ι ⋙
       (stageLowerStar f E).rightDerivedFunctor) _).IsTriangulated)
 
--- The instance arguments of the derived complete categories are expensive to unify.
 set_option maxHeartbeats 1600000 in
+-- The instance arguments of the derived complete categories are expensive to unify.
 /-- The integral direct image carries torsion objects to torsion objects, being linear. -/
 lemma torsion_integralStageLowerStar_obj (E : FiniteSubext l)
     (K : DerivedCategoryDerivedCompleteIntegral Z.smallEtaleTopology l E.field)
@@ -226,8 +227,8 @@ noncomputable def rationalLowerStarTransitionIso {E L : FiniteSubext l} (h : E �
     (Rationalization.mapOfTorsionCompIso _ _ (torsion_integralLowerStarTransition f h)
       (Iso.refl _)).symm
 
--- The derived complete categories make the unification of the composites expensive.
 set_option maxHeartbeats 3200000 in
+-- The derived complete categories make the unification of the composites expensive.
 /-- The hexagon for the rational compatibility isomorphisms. -/
 lemma rationalLowerStarTransitionIso_hexagon {E L L' : FiniteSubext l} (h : E ≤ L)
     (h' : L ≤ L') :
