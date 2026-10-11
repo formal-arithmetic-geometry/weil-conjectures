@@ -1,159 +1,167 @@
 {
- "id": "lem-pc-ringed-space-module-stalk-tensor",
- "blueprint": {
-  "is": null,
-  "from": {
-   "node": "lem-sc-finite-duality",
-   "place": "the stalkwise tensor identification used in the K-flat criterion",
-   "via": [
-    "lem-pc-stalk-tensor-complex"
-   ]
+  "id": "lem-pc-ringed-space-module-stalk-tensor",
+  "blueprint": {
+    "is": null,
+    "from": {
+      "node": "lem-sc-finite-duality",
+      "place": "the stalkwise tensor identification used in the K-flat criterion",
+      "via": [
+        "lem-pc-stalk-tensor-complex"
+      ]
+    },
+    "same_as": []
   },
-  "same_as": []
- },
- "kind": "statement",
- "title": "Stalk of a tensor product of modules on a ringed space",
- "statement": "Let $(X,\\mathcal O_X)$ be a ringed space [def-weil-locally-ringed-space-morphism], let $\\mathcal F$ and $\\mathcal G$ be sheaves of $\\mathcal O_X$-modules [def-weil-sheaf-of-modules-category], and let $x\\in X$. There is a canonical isomorphism of $\\mathcal O_{X,x}$-modules $$(\\mathcal F\\otimes_{\\mathcal O_X}\\mathcal G)_x\\;\\xrightarrow{\\sim}\\;\\mathcal F_x\\otimes_{\\mathcal O_{X,x}}\\mathcal G_x,$$ natural in $\\mathcal F$ and $\\mathcal G$.",
- "source": {
-  "document": "literature/stacks-project/modules.tex",
-  "place": "Modules, Lemma 17.16.1 (Tag 01CB, label lemma-stalk-tensor-product)"
- },
- "stmt_deps": [
-  "def-weil-locally-ringed-space-morphism",
-  "def-weil-sheaf-of-modules-category",
-  "def-pur-sheaf-tensor-product",
-  "def-weil-pbc-module-stalk"
- ],
- "proof": [
-  {
-   "text": "*Setting and stalks.* Let $x\\in X$. The open neighbourhoods of $x$, ordered by reverse inclusion, form a directed set $I_x$. For every presheaf of $\\mathcal O_X$-modules $\\mathcal P$ on $X$ the stalk $\\mathcal P_x=\\varinjlim_{U\\in I_x}\\mathcal P(U)$ is an $\\mathcal O_{X,x}$-module with $r_x\\,s_x=(rs)_x$ for $r\\in\\mathcal O_X(U)$, $s\\in\\mathcal P(U)$; every element of $\\mathcal P_x$ is a germ, and a morphism $\\varphi$ of presheaves of $\\mathcal O_X$-modules induces the $\\mathcal O_{X,x}$-linear map $\\varphi_x:s_x\\mapsto\\varphi(s)_x$ [def-weil-pbc-module-stalk]. This applies to $\\mathcal F$, $\\mathcal G$, $\\mathcal F\\otimes_{\\mathcal O_X}\\mathcal G$ and to the presheaf tensor product $\\mathcal P=\\mathcal F\\otimes_{p,\\mathcal O_X}\\mathcal G$, $\\mathcal P(U)=\\mathcal F(U)\\otimes_{\\mathcal O_X(U)}\\mathcal G(U)$, whose restriction maps are $s\\otimes t\\mapsto s|_V\\otimes t|_V$ [def-pur-sheaf-tensor-product].",
-   "uses": [
-    "def-weil-pbc-module-stalk",
-    "def-pur-sheaf-tensor-product"
-   ],
-   "elementary": true,
-   "source": {
+  "kind": "statement",
+  "title": "Stalk of a tensor product of modules on a ringed space",
+  "statement": "Let $(X,\\mathcal O_X)$ be a ringed space [def-weil-locally-ringed-space-morphism], let $\\mathcal F$ and $\\mathcal G$ be sheaves of $\\mathcal O_X$-modules [def-weil-sheaf-of-modules-category], and let $x\\in X$. There is a canonical isomorphism of $\\mathcal O_{X,x}$-modules $$(\\mathcal F\\otimes_{\\mathcal O_X}\\mathcal G)_x\\;\\xrightarrow{\\sim}\\;\\mathcal F_x\\otimes_{\\mathcal O_{X,x}}\\mathcal G_x,$$ natural in $\\mathcal F$ and $\\mathcal G$.",
+  "source": {
     "document": "literature/stacks-project/modules.tex",
-    "place": "Modules, Lemma 17.16.1 (Tag 01CB, lemma-stalk-tensor-product; proof omitted)"
-   }
+    "place": "Modules, Lemma 17.16.1 (Tag 01CB, label lemma-stalk-tensor-product)"
   },
-  {
-   "text": "*Sheafification does not change the stalk.* Let $\\theta:\\mathcal P\\to\\mathcal P^\\#=\\mathcal F\\otimes_{\\mathcal O_X}\\mathcal G$ be the sheafification map [def-pur-sheaf-tensor-product]. By [def-weil-presheaf-modules-sheafification] the underlying sheaf of abelian groups of the sheafification of the presheaf of $\\mathcal O_X$-modules $\\mathcal P$ is the sheafification of $\\mathcal P$ as a presheaf of abelian groups, with $\\theta$ as its unit, and $\\theta$ is $\\mathcal O_X$-linear. By [lem-weil-pbc-stalk-sheafification-space] (on the topological space $X$) the induced map $\\theta_x:\\mathcal P_x\\to(\\mathcal F\\otimes_{\\mathcal O_X}\\mathcal G)_x$, $p_x\\mapsto\\theta_U(p)_x$, is an isomorphism of abelian groups. It is $\\mathcal O_{X,x}$-linear: given $a\\in\\mathcal O_{X,x}$ and $\\xi\\in\\mathcal P_x$, write (shrinking to a common neighbourhood, $I_x$ being directed) $a=r_x$, $\\xi=p_x$ with $r\\in\\mathcal O_X(U)$, $p\\in\\mathcal P(U)$; then $\\theta_x(a\\xi)=\\theta_x((rp)_x)=\\theta_U(rp)_x=(r\\,\\theta_U(p))_x=r_x\\,\\theta_U(p)_x=a\\,\\theta_x(\\xi)$ [def-weil-pbc-module-stalk]. So $\\theta_x$ is an isomorphism of $\\mathcal O_{X,x}$-modules.",
-   "uses": [
-    "def-weil-presheaf-modules-sheafification",
-    "lem-weil-pbc-stalk-sheafification-space",
+  "stmt_deps": [
+    "def-weil-locally-ringed-space-morphism",
+    "def-weil-sheaf-of-modules-category",
     "def-pur-sheaf-tensor-product",
     "def-weil-pbc-module-stalk"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sheaves.tex",
-    "place": "Sheaves, Lemma 008B (lemma-stalk-tensor-sheaf-modules), proof: 'Follows directly from Lemma 007K and the fact that taking stalks commutes with sheafification'"
-   }
-  },
-  {
-   "text": "*The stalk of the presheaf tensor product.* By definition $\\mathcal P_x=\\varinjlim_{U\\in I_x}\\mathcal F(U)\\otimes_{\\mathcal O_X(U)}\\mathcal G(U)$ with transition maps $s\\otimes t\\mapsto s|_V\\otimes t|_V$ (step 1). Apply [lem-weil-pbc-filtered-colimit-tensor-varying-rings] to the directed set $I_x$ and the systems $A_U=\\mathcal O_X(U)$, $M_U=\\mathcal F(U)$, $N_U=\\mathcal G(U)$ with the restriction maps (commutative rings, and semilinear restrictions since $\\mathcal F,\\mathcal G$ are $\\mathcal O_X$-modules): here $A=\\mathcal O_{X,x}$, $M=\\mathcal F_x$, $N=\\mathcal G_x$, the coprojections are the germ maps, the $A$-module structures of the lemma ($r_x\\,s_x=(rs)_x$) are those of [def-weil-pbc-module-stalk], and $T=\\mathcal P_x$ with its $\\mathcal O_{X,x}$-module structure. The lemma gives an isomorphism of $\\mathcal O_{X,x}$-modules $\\psi:\\mathcal P_x\\to\\mathcal F_x\\otimes_{\\mathcal O_{X,x}}\\mathcal G_x$ with $\\psi((s\\otimes t)_x)=s_x\\otimes t_x$ for $s\\in\\mathcal F(U)$, $t\\in\\mathcal G(U)$, $x\\in U$. This is Sheaves, Lemma 007K for the presheaf tensor product.",
-   "uses": [
+  ],
+  "proof": [
+    {
+      "text": "*Setting and stalks.* Let $x\\in X$. The open neighbourhoods of $x$, ordered by reverse inclusion, form a directed set $I_x$. For every presheaf of $\\mathcal O_X$-modules $\\mathcal P$ on $X$ the stalk $\\mathcal P_x=\\varinjlim_{U\\in I_x}\\mathcal P(U)$ is an $\\mathcal O_{X,x}$-module with $r_x\\,s_x=(rs)_x$ for $r\\in\\mathcal O_X(U)$, $s\\in\\mathcal P(U)$; every element of $\\mathcal P_x$ is a germ, and a morphism $\\varphi$ of presheaves of $\\mathcal O_X$-modules induces the $\\mathcal O_{X,x}$-linear map $\\varphi_x:s_x\\mapsto\\varphi(s)_x$ [def-weil-pbc-module-stalk]. This applies to $\\mathcal F$, $\\mathcal G$, $\\mathcal F\\otimes_{\\mathcal O_X}\\mathcal G$ and to the presheaf tensor product $\\mathcal P=\\mathcal F\\otimes_{p,\\mathcal O_X}\\mathcal G$, $\\mathcal P(U)=\\mathcal F(U)\\otimes_{\\mathcal O_X(U)}\\mathcal G(U)$, whose restriction maps are $s\\otimes t\\mapsto s|_V\\otimes t|_V$ [def-pur-sheaf-tensor-product].",
+      "uses": [
+        "def-weil-pbc-module-stalk",
+        "def-pur-sheaf-tensor-product"
+      ],
+      "elementary": true,
+      "source": {
+        "document": "literature/stacks-project/modules.tex",
+        "place": "Modules, Lemma 17.16.1 (Tag 01CB, lemma-stalk-tensor-product; proof omitted)"
+      }
+    },
+    {
+      "text": "*Sheafification does not change the stalk.* Let $\\theta:\\mathcal P\\to\\mathcal P^\\#=\\mathcal F\\otimes_{\\mathcal O_X}\\mathcal G$ be the sheafification map [def-pur-sheaf-tensor-product]. By [def-weil-presheaf-modules-sheafification] the underlying sheaf of abelian groups of the sheafification of the presheaf of $\\mathcal O_X$-modules $\\mathcal P$ is the sheafification of $\\mathcal P$ as a presheaf of abelian groups, with $\\theta$ as its unit, and $\\theta$ is $\\mathcal O_X$-linear. By [lem-weil-pbc-stalk-sheafification-space] (on the topological space $X$) the induced map $\\theta_x:\\mathcal P_x\\to(\\mathcal F\\otimes_{\\mathcal O_X}\\mathcal G)_x$, $p_x\\mapsto\\theta_U(p)_x$, is an isomorphism of abelian groups. It is $\\mathcal O_{X,x}$-linear: given $a\\in\\mathcal O_{X,x}$ and $\\xi\\in\\mathcal P_x$, write (shrinking to a common neighbourhood, $I_x$ being directed) $a=r_x$, $\\xi=p_x$ with $r\\in\\mathcal O_X(U)$, $p\\in\\mathcal P(U)$; then $\\theta_x(a\\xi)=\\theta_x((rp)_x)=\\theta_U(rp)_x=(r\\,\\theta_U(p))_x=r_x\\,\\theta_U(p)_x=a\\,\\theta_x(\\xi)$ [def-weil-pbc-module-stalk]. So $\\theta_x$ is an isomorphism of $\\mathcal O_{X,x}$-modules.",
+      "uses": [
+        "def-weil-presheaf-modules-sheafification",
+        "lem-weil-pbc-stalk-sheafification-space",
+        "def-pur-sheaf-tensor-product",
+        "def-weil-pbc-module-stalk"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/sheaves.tex",
+        "place": "Sheaves, Lemma 008B (lemma-stalk-tensor-sheaf-modules), proof: 'Follows directly from Lemma 007K and the fact that taking stalks commutes with sheafification'"
+      }
+    },
+    {
+      "text": "*The stalk of the presheaf tensor product.* By definition $\\mathcal P_x=\\varinjlim_{U\\in I_x}\\mathcal F(U)\\otimes_{\\mathcal O_X(U)}\\mathcal G(U)$ with transition maps $s\\otimes t\\mapsto s|_V\\otimes t|_V$ (step 1). Apply [lem-weil-pbc-filtered-colimit-tensor-varying-rings] to the directed set $I_x$ and the systems $A_U=\\mathcal O_X(U)$, $M_U=\\mathcal F(U)$, $N_U=\\mathcal G(U)$ with the restriction maps (commutative rings, and semilinear restrictions since $\\mathcal F,\\mathcal G$ are $\\mathcal O_X$-modules): here $A=\\mathcal O_{X,x}$, $M=\\mathcal F_x$, $N=\\mathcal G_x$, the coprojections are the germ maps, the $A$-module structures of the lemma ($r_x\\,s_x=(rs)_x$) are those of [def-weil-pbc-module-stalk], and $T=\\mathcal P_x$ with its $\\mathcal O_{X,x}$-module structure. The lemma gives an isomorphism of $\\mathcal O_{X,x}$-modules $\\psi:\\mathcal P_x\\to\\mathcal F_x\\otimes_{\\mathcal O_{X,x}}\\mathcal G_x$ with $\\psi((s\\otimes t)_x)=s_x\\otimes t_x$ for $s\\in\\mathcal F(U)$, $t\\in\\mathcal G(U)$, $x\\in U$. This is Sheaves, Lemma 007K for the presheaf tensor product.",
+      "uses": [
+        "lem-weil-pbc-filtered-colimit-tensor-varying-rings",
+        "def-weil-pbc-module-stalk",
+        "def-pur-sheaf-tensor-product"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/sheaves.tex",
+        "place": "Sheaves, Lemma 007K (lemma-stalk-tensor-presheaf-modules, proof omitted: written out here)"
+      }
+    },
+    {
+      "text": "*The isomorphism and the germs of $s\\otimes t$.* Put $\\Phi=\\psi\\circ\\theta_x^{-1}:(\\mathcal F\\otimes_{\\mathcal O_X}\\mathcal G)_x\\to\\mathcal F_x\\otimes_{\\mathcal O_{X,x}}\\mathcal G_x$, an isomorphism of $\\mathcal O_{X,x}$-modules by steps 2 and 3. For an open $U\\ni x$, $s\\in\\mathcal F(U)$, $t\\in\\mathcal G(U)$, the section $s\\otimes t\\in(\\mathcal F\\otimes_{\\mathcal O_X}\\mathcal G)(U)$ of the statement is $\\theta_U(s\\otimes t)$, so its germ is $\\theta_U(s\\otimes t)_x=\\theta_x((s\\otimes t)_x)$ and $\\Phi((s\\otimes t)_x)=\\psi((s\\otimes t)_x)=s_x\\otimes t_x$. Moreover the germs $(s\\otimes t)_x$ generate $(\\mathcal F\\otimes_{\\mathcal O_X}\\mathcal G)_x$ as an abelian group: every element is $\\theta_x(p_x)$ for some $p=\\sum_k s_k\\otimes t_k\\in\\mathcal P(U)$, hence equals $\\sum_k(s_k\\otimes t_k)_x$.",
+      "uses": [],
+      "elementary": true,
+      "source": {
+        "document": "literature/stacks-project/modules.tex",
+        "place": "Modules, Lemma 17.16.1 (Tag 01CB, lemma-stalk-tensor-product; proof omitted)"
+      }
+    },
+    {
+      "text": "*Naturality.* Let $\\varphi:\\mathcal F\\to\\mathcal F'$ and $\\gamma:\\mathcal G\\to\\mathcal G'$ be morphisms of $\\mathcal O_X$-modules. The morphism $\\varphi\\otimes\\gamma:\\mathcal F\\otimes_{\\mathcal O_X}\\mathcal G\\to\\mathcal F'\\otimes_{\\mathcal O_X}\\mathcal G'$ is the image under the sheafification functor of the morphism of presheaves $\\mathcal P\\to\\mathcal P'$, $s\\otimes t\\mapsto\\varphi(s)\\otimes\\gamma(t)$, i.e. the unique $\\mathcal O_X$-linear map with $(\\varphi\\otimes\\gamma)\\circ\\theta=\\theta'\\circ(\\varphi\\otimes_p\\gamma)$ [def-weil-presheaf-modules-sheafification, def-pur-sheaf-tensor-product]; hence $(\\varphi\\otimes\\gamma)(s\\otimes t)=\\varphi(s)\\otimes\\gamma(t)$ for sections $s,t$ over $U$. The two additive maps $\\Phi'\\circ(\\varphi\\otimes\\gamma)_x$ and $(\\varphi_x\\otimes\\gamma_x)\\circ\\Phi$ from $(\\mathcal F\\otimes_{\\mathcal O_X}\\mathcal G)_x$ to $\\mathcal F'_x\\otimes_{\\mathcal O_{X,x}}\\mathcal G'_x$ both send $(s\\otimes t)_x$ to $\\varphi(s)_x\\otimes\\gamma(t)_x$ (step 4 and [def-weil-pbc-module-stalk]: $\\varphi_x(s_x)=\\varphi(s)_x$), and these germs generate (step 4), so the maps are equal: $\\Phi$ is natural in $\\mathcal F$ and $\\mathcal G$.",
+      "uses": [
+        "def-weil-presheaf-modules-sheafification",
+        "def-pur-sheaf-tensor-product",
+        "def-weil-pbc-module-stalk"
+      ],
+      "elementary": true,
+      "source": {
+        "document": "literature/stacks-project/modules.tex",
+        "place": "Modules, Lemma 17.16.1 (Tag 01CB, lemma-stalk-tensor-product; proof omitted)"
+      }
+    }
+  ],
+  "proof_deps": [
+    "def-pur-sheaf-tensor-product",
+    "def-weil-pbc-module-stalk",
+    "def-weil-presheaf-modules-sheafification",
     "lem-weil-pbc-filtered-colimit-tensor-varying-rings",
-    "def-weil-pbc-module-stalk",
-    "def-pur-sheaf-tensor-product"
-   ],
-   "elementary": false,
-   "source": {
+    "lem-weil-pbc-stalk-sheafification-space"
+  ],
+  "proof_origin": {
+    "by": "agent",
     "document": "literature/stacks-project/sheaves.tex",
-    "place": "Sheaves, Lemma 007K (lemma-stalk-tensor-presheaf-modules, proof omitted: written out here)"
-   }
+    "place": "Written by an agent following the outline of Stacks Sheaves Lemma 008B (stalks commute with sheafification + Lemma 007K) and of the omitted proof of Modules Lemma 01CB (literature/stacks-project/modules.tex, lemma-stalk-tensor-product: stalks are colimits over neighbourhoods, sheafification does not change stalks, tensor products commute with filtered colimits); the omitted proofs of 007K and 01CB are written out in steps 3-5",
+    "note": "The five steps are those of lem-weil-pbc-module-stalk-tensor (scheme case), which never use that X is a scheme; copied by L (19:57 UTC)."
   },
-  {
-   "text": "*The isomorphism and the germs of $s\\otimes t$.* Put $\\Phi=\\psi\\circ\\theta_x^{-1}:(\\mathcal F\\otimes_{\\mathcal O_X}\\mathcal G)_x\\to\\mathcal F_x\\otimes_{\\mathcal O_{X,x}}\\mathcal G_x$, an isomorphism of $\\mathcal O_{X,x}$-modules by steps 2 and 3. For an open $U\\ni x$, $s\\in\\mathcal F(U)$, $t\\in\\mathcal G(U)$, the section $s\\otimes t\\in(\\mathcal F\\otimes_{\\mathcal O_X}\\mathcal G)(U)$ of the statement is $\\theta_U(s\\otimes t)$, so its germ is $\\theta_U(s\\otimes t)_x=\\theta_x((s\\otimes t)_x)$ and $\\Phi((s\\otimes t)_x)=\\psi((s\\otimes t)_x)=s_x\\otimes t_x$. Moreover the germs $(s\\otimes t)_x$ generate $(\\mathcal F\\otimes_{\\mathcal O_X}\\mathcal G)_x$ as an abelian group: every element is $\\theta_x(p_x)$ for some $p=\\sum_k s_k\\otimes t_k\\in\\mathcal P(U)$, hence equals $\\sum_k(s_k\\otimes t_k)_x$.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/modules.tex",
-    "place": "Modules, Lemma 17.16.1 (Tag 01CB, lemma-stalk-tensor-product; proof omitted)"
-   }
+  "mathlib_searches": [
+    {
+      "tool": "grep",
+      "query": "stalk.*tensor|tensor.*stalk in Mathlib/Topology/Sheaves Mathlib/Algebra/Category/ModuleCat",
+      "results": "No declaration for the stalk of a tensor product of sheaf modules on a ringed space.",
+      "date": "2026-10-11",
+      "verdict": "no match"
+    },
+    {
+      "tool": "leanfinder",
+      "query": "stalk tensor product sheaf modules ringed space",
+      "results": "Presheaf and ModuleCat stalk declarations only; no exact sheaf-module tensor stalk isomorphism.",
+      "date": "2026-10-11",
+      "verdict": "no match"
+    },
+    {
+      "tool": "loogle",
+      "query": "SheafOfModules stalk tensor",
+      "results": "Unknown identifier `stalk`; no hit.",
+      "date": "2026-10-11",
+      "verdict": "no match"
+    },
+    {
+      "tool": "leansearch",
+      "query": "canonical isomorphism stalk tensor product sheaves modules",
+      "results": "Service unavailable: Internal Server Error.",
+      "date": "2026-10-11",
+      "verdict": "unavailable"
+    }
+  ],
+  "mathlib_match": null,
+  "status": "split",
+  "created": {
+    "item": "lem-pc-stalk-tensor-complex",
+    "by": "worker",
+    "date": "2026-10-10"
   },
-  {
-   "text": "*Naturality.* Let $\\varphi:\\mathcal F\\to\\mathcal F'$ and $\\gamma:\\mathcal G\\to\\mathcal G'$ be morphisms of $\\mathcal O_X$-modules. The morphism $\\varphi\\otimes\\gamma:\\mathcal F\\otimes_{\\mathcal O_X}\\mathcal G\\to\\mathcal F'\\otimes_{\\mathcal O_X}\\mathcal G'$ is the image under the sheafification functor of the morphism of presheaves $\\mathcal P\\to\\mathcal P'$, $s\\otimes t\\mapsto\\varphi(s)\\otimes\\gamma(t)$, i.e. the unique $\\mathcal O_X$-linear map with $(\\varphi\\otimes\\gamma)\\circ\\theta=\\theta'\\circ(\\varphi\\otimes_p\\gamma)$ [def-weil-presheaf-modules-sheafification, def-pur-sheaf-tensor-product]; hence $(\\varphi\\otimes\\gamma)(s\\otimes t)=\\varphi(s)\\otimes\\gamma(t)$ for sections $s,t$ over $U$. The two additive maps $\\Phi'\\circ(\\varphi\\otimes\\gamma)_x$ and $(\\varphi_x\\otimes\\gamma_x)\\circ\\Phi$ from $(\\mathcal F\\otimes_{\\mathcal O_X}\\mathcal G)_x$ to $\\mathcal F'_x\\otimes_{\\mathcal O_{X,x}}\\mathcal G'_x$ both send $(s\\otimes t)_x$ to $\\varphi(s)_x\\otimes\\gamma(t)_x$ (step 4 and [def-weil-pbc-module-stalk]: $\\varphi_x(s_x)=\\varphi(s)_x$), and these germs generate (step 4), so the maps are equal: $\\Phi$ is natural in $\\mathcal F$ and $\\mathcal G$.",
-   "uses": [
-    "def-weil-presheaf-modules-sheafification",
-    "def-pur-sheaf-tensor-product",
-    "def-weil-pbc-module-stalk"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/modules.tex",
-    "place": "Modules, Lemma 17.16.1 (Tag 01CB, lemma-stalk-tensor-product; proof omitted)"
-   }
-  }
- ],
- "proof_deps": [
-  "def-pur-sheaf-tensor-product",
-  "def-weil-pbc-module-stalk",
-  "def-weil-presheaf-modules-sheafification",
-  "lem-weil-pbc-filtered-colimit-tensor-varying-rings",
-  "lem-weil-pbc-stalk-sheafification-space"
- ],
- "proof_origin": {
-  "by": "agent",
-  "document": "literature/stacks-project/sheaves.tex",
-  "place": "Written by an agent following the outline of Stacks Sheaves Lemma 008B (stalks commute with sheafification + Lemma 007K) and of the omitted proof of Modules Lemma 01CB (literature/stacks-project/modules.tex, lemma-stalk-tensor-product: stalks are colimits over neighbourhoods, sheafification does not change stalks, tensor products commute with filtered colimits); the omitted proofs of 007K and 01CB are written out in steps 3-5",
-  "note": "The five steps are those of lem-weil-pbc-module-stalk-tensor (scheme case), which never use that X is a scheme; copied by L (19:57 UTC)."
- },
- "mathlib_searches": [
-  {
-   "tool": "grep",
-   "query": "stalk.*tensor|tensor.*stalk in Mathlib/Topology/Sheaves Mathlib/Algebra/Category/ModuleCat",
-   "results": "No declaration for the stalk of a tensor product of sheaf modules on a ringed space.",
-   "date": "2026-10-11",
-   "verdict": "no match"
-  },
-  {
-   "tool": "leanfinder",
-   "query": "stalk tensor product sheaf modules ringed space",
-   "results": "Presheaf and ModuleCat stalk declarations only; no exact sheaf-module tensor stalk isomorphism.",
-   "date": "2026-10-11",
-   "verdict": "no match"
-  },
-  {
-   "tool": "loogle",
-   "query": "SheafOfModules stalk tensor",
-   "results": "Unknown identifier `stalk`; no hit.",
-   "date": "2026-10-11",
-   "verdict": "no match"
-  },
-  {
-   "tool": "leansearch",
-   "query": "canonical isomorphism stalk tensor product sheaves modules",
-   "results": "Service unavailable: Internal Server Error.",
-   "date": "2026-10-11",
-   "verdict": "unavailable"
-  }
- ],
- "mathlib_match": null,
- "status": "split",
- "created": {
-  "item": "lem-pc-stalk-tensor-complex",
-  "by": "worker",
-  "date": "2026-10-10"
- },
- "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-duality",
- "tool_uses": [
-  "lem-weil-pbc-filtered-colimit-tensor-varying-rings"
- ],
- "split_report": {
-  "summary": "Split by L by copying the five steps of lem-weil-pbc-module-stalk-tensor, whose proof is ringed-space general (no step uses that X is a scheme, and every cited node is stated for a topological space or a site). No new node.",
-  "new_nodes": [],
-  "blueprint": "lem-pc-stalk-tensor-complex step 2 (termwise stalk of a tensor complex), serving unit sk-thm-picard-duality",
-  "date": "2026-10-10",
-  "by": "L",
+  "chapter": "sec-picard-framework",
+  "unit": "sk-thm-picard-duality",
   "tool_uses": [
-   {
-    "node": "lem-weil-pbc-filtered-colimit-tensor-varying-rings",
-    "why": "generic tool: tensor products commute with directed colimits over a directed system of rings (pure algebra, unit sk-thm-reduction); used in step 3 exactly as in the scheme case"
-   }
-  ]
- },
- "lead_note": " Split by L (19:57 UTC) by copying the proof of lem-weil-pbc-module-stalk-tensor; stage 3: that scheme node is now a special case of this one (same proof), dedupe there."
+    "lem-weil-pbc-filtered-colimit-tensor-varying-rings"
+  ],
+  "split_report": {
+    "summary": "Split by L by copying the five steps of lem-weil-pbc-module-stalk-tensor, whose proof is ringed-space general (no step uses that X is a scheme, and every cited node is stated for a topological space or a site). No new node.",
+    "new_nodes": [],
+    "blueprint": "lem-pc-stalk-tensor-complex step 2 (termwise stalk of a tensor complex), serving unit sk-thm-picard-duality",
+    "date": "2026-10-10",
+    "by": "L",
+    "tool_uses": [
+      {
+        "node": "lem-weil-pbc-filtered-colimit-tensor-varying-rings",
+        "why": "generic tool: tensor products commute with directed colimits over a directed system of rings (pure algebra, unit sk-thm-reduction); used in step 3 exactly as in the scheme case"
+      }
+    ]
+  },
+  "lead_note": " Split by L (19:57 UTC) by copying the proof of lem-weil-pbc-module-stalk-tensor; stage 3: that scheme node is now a special case of this one (same proof), dedupe there.",
+  "reviewed": {
+    "date": "2026-10-11",
+    "by": "L",
+    "reviewer": "L",
+    "group": "L",
+    "result": "pass",
+    "note": "lead item: split by L at 19:57 UTC by copying the ringed-space-general proof of lem-weil-pbc-module-stalk-tensor (ledger 19:57, commit cc00d6b7a); reviewed by L; mathematics reviewed in full by L; reviewed field set by L at 04:19 UTC (the lead splits were committed without it, so the queue still counted them as open)"
+  }
 }

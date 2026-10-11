@@ -1,20 +1,11 @@
 # Work queue
 
-863 items; claim with `tools/claim.py next <group> [--stage N]`.
+858 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (7)
+## Stage 1: nodes to split (0)
 
-| node | distance to a target | Lean state on the done branch |
-|---|---|---|
-| `lem-weil-derived-limit-roos-complex` | 15 | none |
-| `lem-weil-tower-split-envelope` | 16 | none |
-| `lem-pc-ringed-space-module-stalk-tensor` | 3013 | none |
-| `lem-pc-genus-agrees-sc` | 4007 | rests_on_sorry |
-| `lem-pc-kflat-tensor-quasi-iso` | 5018 | none |
-| `lem-sc-base-change-curve` | - | none |
-| `lem-sc-global-functions` | - | rests_on_sorry |
 
-## Stage 2: nodes to state (856)
+## Stage 2: nodes to state (858)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -271,6 +262,7 @@
 | `lem-sc-free-prime-membership` | 1 | state |
 | `lem-sc-generic-stalk-finite-length` | 1 | state |
 | `lem-sc-genus-invariant` | 1 | state |
+| `lem-sc-global-functions` | 1 | state |
 | `lem-sc-global-sections-left-exact` | 1 | state |
 | `lem-sc-glue-component-line-bundles` | 1 | state |
 | `lem-sc-glue-component-reduced-cover-sections` | 1 | state |
@@ -810,6 +802,7 @@
 | `lem-weil-pbc-zariski-pair-flat-integral-isomorphism` | 1 | state |
 | `lem-weil-pbc-zariski-pair-rank-one-propagation` | 1 | state |
 | `lem-weil-separably-closed-geometrically-connected` | 1 | state |
+| `lem-weil-tower-split-envelope` | 1 | state |
 | `lem-zl-noether-normalization-dimension` | 1 | state |
 | `lemma-nagata-diagonal-base-change` | 1 | state |
 | `lemma-nagata-filtered-colimit-finite-data` | 1 | state |
@@ -875,7 +868,7 @@
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 | `def-nagata-fixed-base-separated-stage` | 6 | state |
 
-Not open yet: 1786 nodes that wait for a statement dependency, 48 nodes that wait for stage 1.
+Not open yet: 1791 nodes that wait for a statement dependency, 41 nodes that wait for stage 1.
 
 ## Stage 3: modules to prove (0)
 

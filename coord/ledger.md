@@ -3353,3 +3353,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 03:54 L: reviewer R-fcd0355 launched (F1 lem-pc-filtered-colimit-derived-tensor, head 9c7ca4f32; seen within a minute by the head-change watch)
 - 03:55 L: merged deliver/F1/lem-pc-filtered-colimit-derived-tensor (reviewer PASS; first push; new nodes: 0)
 - 03:55 L: lem-pc-filtered-colimit-derived-tensor merged by R-fcd0355 (PASS 8187bbf25; second reading by F1 missed nothing; tool use lem-pur-quasi-iso-cone-acyclic accepted)
+- 04:19 L: finding: the lead's own accepted splits (seven nodes: roos-complex, tower-split-envelope, base-change-curve, global-functions, genus-agrees-sc, kflat-tensor-quasi-iso, and ringed-space-module-stalk-tensor of 19:57) were committed without the 'reviewed' field that merge_delivery.py writes, so tools/dag_queue.py still counted them as stage-1 open and their children as waiting; 'reviewed' set on all seven from the review records, queue rewritten
