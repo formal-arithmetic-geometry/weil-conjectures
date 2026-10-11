@@ -1,18 +1,17 @@
 # Work queue
 
-544 items; claim with `tools/claim.py next <group> [--stage N]`.
+541 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (544)
+## Stage 2: nodes to state (541)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
 | `def-sc-picard-functor` | 1 | state |
 | `pqf-def-coherent` | 1 | state |
 | `def-nagata-final-noetherian-base-system` | 2 | state |
-| `def-sc-group-scheme` | 2 | state |
 | `def-nagata-fixed-base-separated-stage` | 6 | state |
 | `cor-galois-lisse-representations` | 1 | state |
 | `lem-pc-arrow-iso-pullback-counit` | 1 | state |
@@ -71,7 +70,6 @@
 | `lem-weil-pbc-flat-fp-qf-stratification` | 1 | state |
 | `lem-weil-pbc-formal-fibre-quasi-finite-ascent` | 1 | state |
 | `lem-weil-pbc-gabber-h0-etale-criterion` | 1 | state |
-| `lem-weil-pbc-graded-module-away-restriction` | 1 | state |
 | `lem-weil-pbc-higher-direct-image-sheafified-presheaf` | 1 | state |
 | `lem-weil-pbc-ideal-module-product-stalk` | 1 | state |
 | `lem-weil-pbc-integral-closure-finite-fibre-choose-g` | 1 | state |
@@ -86,7 +84,6 @@
 | `lem-weil-pbc-lift-idempotent-upstairs` | 1 | state |
 | `lem-weil-pbc-lift-projective-module-etale` | 1 | state |
 | `lem-weil-pbc-limit-finite-presentation` | 1 | state |
-| `lem-weil-pbc-limit-flat-modules` | 1 | state |
 | `lem-weil-pbc-limit-module-essentially-finite-presentation-over-system` | 1 | state |
 | `lem-weil-pbc-limit-module-finite-presentation` | 1 | state |
 | `lem-weil-pbc-limit-residue-field` | 1 | state |
@@ -95,11 +92,9 @@
 | `lem-weil-pbc-lisse-generic-kernel` | 1 | state |
 | `lem-weil-pbc-local-artinian-basis-when-flat` | 1 | state |
 | `lem-weil-pbc-local-dimension-zero-henselian` | 1 | state |
-| `lem-weil-pbc-local-ring-colimit-essentially-finite-type-over-z` | 1 | state |
 | `lem-weil-pbc-localization-colimit-principal-localizations` | 1 | state |
 | `lem-weil-pbc-localization-of-regular-ring` | 1 | state |
 | `lem-weil-pbc-localization-prime-residue-field-iso` | 1 | state |
-| `lem-weil-pbc-localization-regular` | 1 | state |
 | `lem-weil-pbc-locally-constant-finite-values-finite-type` | 1 | state |
 | `lem-weil-pbc-locally-constant-germ-evaluation` | 1 | state |
 | `lem-weil-pbc-lqf-locally-finite-type` | 1 | state |
@@ -520,7 +515,9 @@
 | `lem-pc-sites-modules-coproduct-flat` | 2 | state |
 | `lem-pur-derived-functor-morphisms-05sa` | 2 | state |
 | `lem-sc-divisor-class-curve` | 2 | state |
+| `lem-sc-group-addition-tangent-differential` | 2 | state |
 | `lem-sc-hilbert-polynomial` | 2 | state |
+| `lem-sc-hom-etale-locus-translation` | 2 | state |
 | `lem-sc-mult-n-locally-quasi-finite` | 2 | state |
 | `lem-sc-p1-boundary-connecting-naturality` | 2 | state |
 | `lem-sc-p1-boundary-extension-composition` | 2 | state |
@@ -554,7 +551,7 @@
 | `lem-pc-essentially-constant-pro-hom-colimit` | 4 | state |
 | `lem-pur-essential-constant-pro-criterion-05py` | 4 | state |
 
-Not open yet: 40 nodes that wait for stage 1, 729 nodes that wait for a statement dependency.
+Not open yet: 40 nodes that wait for stage 1, 727 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
