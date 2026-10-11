@@ -90,8 +90,13 @@ instance commShift_mapHomotopyCategoryδNatTrans_app (K : HomotopyCategory C (.u
       δK =
       e₁.hom ≫ Functor.whiskerRight δ' (HomotopyCategory.quotient D (.up ℤ)) ≫ e₂.inv := by
     ext L
-    simp [e₁, e₂, δ', δK, Functor.mapHomotopyCategoryFactors,
-      Functor.quotientCompBifunctorMapHomotopyObjIso]
+    simp only [comp_obj, curriedTensor_obj_obj, whiskerLeft_app,
+      quotientCompBifunctorMapHomotopyObjIso, isoWhiskerRight_refl, mapHomotopyCategoryFactors,
+      Iso.trans_hom, Iso.symm_hom, Iso.refl_hom, isoWhiskerLeft_hom, Iso.trans_inv, Iso.symm_inv,
+      isoWhiskerLeft_inv, Iso.refl_inv, assoc, isoWhiskerRight_inv, NatTrans.comp_app,
+      associator_inv_app, NatTrans.id_app, associator_hom_app, Quotient.lift.isLift_hom,
+      whiskerRight_app, mapHomologicalComplexδNatTrans_app_app, Quotient.lift.isLift_inv,
+      curriedTensor_obj_map, MonoidalCategory.whiskerLeft_id, comp_id, id_comp, δK, e₁, δ', e₂]
     erw [Category.id_comp, Category.id_comp, Category.comp_id]
     rfl
   have : NatTrans.CommShift (Functor.whiskerLeft (HomotopyCategory.quotient C (.up ℤ))
@@ -109,7 +114,8 @@ instance commShift_mapHomotopyCategoryδNatTrans_flipApp (K : HomotopyCategory C
         (curriedTensor _).flip.obj ((G.mapHomotopyCategory (.up ℤ)).obj K))
       ((mapHomotopyCategoryδNatTrans (.up ℤ) G).flipApp K) ℤ := by
   obtain ⟨K₀⟩ := K
-  let δK : (curriedTensor (HomotopyCategory C (.up ℤ))).flip.obj ⟨K₀⟩ ⋙ G.mapHomotopyCategory (.up ℤ) ⟶
+  let δK : (curriedTensor (HomotopyCategory C (.up ℤ))).flip.obj ⟨K₀⟩ ⋙
+      G.mapHomotopyCategory (.up ℤ) ⟶
       G.mapHomotopyCategory (.up ℤ) ⋙ (curriedTensor _).flip.obj
         ((G.mapHomotopyCategory (.up ℤ)).obj ⟨K₀⟩) :=
     (mapHomotopyCategoryδNatTrans (.up ℤ) G).flipApp ⟨K₀⟩
@@ -146,8 +152,13 @@ instance commShift_mapHomotopyCategoryδNatTrans_flipApp (K : HomotopyCategory C
       δK =
       e₁.hom ≫ Functor.whiskerRight δ' (HomotopyCategory.quotient D (.up ℤ)) ≫ e₂.inv := by
     ext L
-    simp [e₁, e₂, δ', δK, Functor.mapHomotopyCategoryFactors,
-      Functor.quotientCompBifunctorMapHomotopyFlipObjIso]
+    simp only [comp_obj, flip_obj_obj, curriedTensor_obj_obj, whiskerLeft_app,
+      flipFunctor_map_app_app, quotientCompBifunctorMapHomotopyFlipObjIso, isoWhiskerRight_refl,
+      mapHomotopyCategoryFactors, Iso.trans_hom, Iso.symm_hom, Iso.refl_hom, isoWhiskerLeft_hom,
+      Iso.trans_inv, Iso.symm_inv, isoWhiskerLeft_inv, Iso.refl_inv, assoc, isoWhiskerRight_inv,
+      NatTrans.comp_app, associator_inv_app, NatTrans.id_app, associator_hom_app,
+      Quotient.lift.isLift_hom, whiskerRight_app, mapHomologicalComplexδNatTrans_app_app,
+      Quotient.lift.isLift_inv, flip_obj_map, map_id, comp_id, id_comp, δK, e₁, δ', e₂]
     erw [Category.id_comp, Category.id_comp, Category.comp_id]
     rfl
   have : NatTrans.CommShift (Functor.whiskerLeft (HomotopyCategory.quotient C (.up ℤ))

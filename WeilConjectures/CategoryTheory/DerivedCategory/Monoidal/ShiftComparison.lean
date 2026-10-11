@@ -107,8 +107,9 @@ variable (F : C₁ ⥤ C₂) [F.Additive] [F.OplaxMonoidal]
   (LF : DerivedCategory C₁ ⥤ DerivedCategory C₂) [LF.CommShift ℤ]
   (cL : Qh ⋙ LF ⟶ F.mapHomotopyCategory (.up ℤ) ⋙ Qh) [IsIso cL] [NatTrans.CommShift cL ℤ]
 
-open Functor in
 set_option maxHeartbeats 1000000 in
+-- The factorisation through `Qh` elaborates large composites of whiskered transformations.
+open Functor in
 /-- A natural transformation `τ : LF(Qh X ⊗ᴸ -) ⟶ LF(Qh X) ⊗ᴸ LF(-)` which is compatible, on
 the homotopy category, with the comparison `F(X ⊗ -) ⟶ F(X) ⊗ F(-)`, commutes with the shifts,
 if `X` and `F(X)` are K-flat. -/
@@ -157,8 +158,9 @@ lemma commShift_of_tensorLeft_fac (X : HomotopyCategory C₁ (.up ℤ))
   exact NatTrans.CommShift.of_whiskerLeft _ Qh
     (fun M ↦ ⟨Qh.objPreimage M, (Qh.objObjPreimageIso M).inv, inferInstance⟩)
 
-open Functor in
 set_option maxHeartbeats 1000000 in
+-- The factorisation through `Qh` elaborates large composites of whiskered transformations.
+open Functor in
 /-- A natural transformation `τ : LF(- ⊗ᴸ Qh X) ⟶ LF(-) ⊗ᴸ LF(Qh X)` which is compatible, on
 the homotopy category, with the comparison `F(- ⊗ X) ⟶ F(-) ⊗ F(X)`, commutes with the shifts,
 if `X` and `F(X)` are K-flat. -/

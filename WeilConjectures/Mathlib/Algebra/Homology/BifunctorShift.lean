@@ -78,9 +78,11 @@ instance commShift_mapBifunctorComparisonNatTrans_app (K₁ : CochainComplex C�
     simp only [Units.smul_def, CochainComplex.shiftFunctorObjXIso, HomologicalComplex.XIsoOfEq_rfl,
       Iso.refl_hom, Iso.refl_inv, Category.id_comp, Category.comp_id, Functor.map_zsmul,
       Preadditive.zsmul_comp, Preadditive.comp_zsmul, CategoryTheory.Functor.map_id,
-      HomologicalComplex.id_f, NatTrans.id_app, Functor.mapHomologicalComplex_commShiftIso_hom_app_f]
+      HomologicalComplex.id_f, NatTrans.id_app,
+      Functor.mapHomologicalComplex_commShiftIso_hom_app_f]
     congr 1
-    erw [CategoryTheory.Functor.map_id, Category.id_comp, map_ιMapBifunctor_mapBifunctorComparisonX]
+    erw [CategoryTheory.Functor.map_id, Category.id_comp,
+      map_ιMapBifunctor_mapBifunctorComparisonX]
     erw [CategoryTheory.Functor.map_id]
     erw [Category.id_comp]
     erw [Category.id_comp]

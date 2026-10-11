@@ -121,8 +121,13 @@ lemma commShift_leftDerivedUpperStarTensorComparisonApp_Qh_obj
   DerivedCategory.commShift_of_tensorLeft_fac (g)^*[A] L((g)^*[A])
     (g)^*[A].leftDerivedFunctorCounit X hX hgX _ (fun M ↦ by
       have := leftDerivedUpperStarTensorComparison_app_app_fac A g X M
-      simp [derivedTensorLeftDerivedUpperStarCounit,
-        leftDerivedUpperStarDerivedTensorCounit] at this ⊢
+      simp only [Functor.postcompose₂_obj_obj_obj_obj, Functor.whiskeringLeft₂_obj_obj_obj_obj_obj,
+        curriedTensor_obj_obj, derivedTensorLeftDerivedUpperStarCounit, NatTrans.comp_app,
+        Functor.comp_obj, Functor.whiskeringLeft₂_map_app_app_app_app,
+        Functor.whiskeringLeft₂_obj_map_app_app_app, Functor.whiskeringLeft₂_obj_obj_map_app_app,
+        Functor.LaxMonoidal.μNatTrans_app_app, leftDerivedUpperStarDerivedTensorCounit,
+        Functor.postcompose₂_obj_map_app_app, Functor.postcompose₂_map_app_app_app,
+        Functor.postcompose₂MapWhiskeringLeft₂_app_app, Category.assoc] at this ⊢
       exact this)
 
 /-- For a fixed `K`, the tensor comparison `Lg^*(K ⊗ᴸ -) ⟶ Lg^*K ⊗ᴸ Lg^*(-)` commutes with
@@ -142,6 +147,7 @@ instance commShift_leftDerivedUpperStarTensorComparisonApp
       (asIso (DerivedCategory.Q.map (Λ.resolutionNatTrans.app K₀))).symm ≪≫
       (DerivedCategory.quotientCompQhIso _).symm.app R
   exact commShift_leftDerivedUpperStarTensorComparisonApp_of_iso A g e
+
 /-- The tensor comparison `Lg^*(- ⊗ᴸ M) ⟶ Lg^*(-) ⊗ᴸ Lg^*M` for a fixed `M`. -/
 noncomputable abbrev leftDerivedUpperStarTensorComparisonFlipApp
     (M : DerivedCategory (Sheaf Y.smallEtaleTopology A)) :
@@ -176,8 +182,14 @@ lemma commShift_leftDerivedUpperStarTensorComparisonFlipApp_Qh_obj
   DerivedCategory.commShift_of_tensorRight_fac (g)^*[A] L((g)^*[A])
     (g)^*[A].leftDerivedFunctorCounit X hX hgX _ (fun M ↦ by
       have := leftDerivedUpperStarTensorComparison_app_app_fac A g M X
-      simp [derivedTensorLeftDerivedUpperStarCounit,
-        leftDerivedUpperStarDerivedTensorCounit] at this ⊢
+      simp only [Functor.postcompose₂_obj_obj_obj_obj, Functor.whiskeringLeft₂_obj_obj_obj_obj_obj,
+        curriedTensor_obj_obj, derivedTensorLeftDerivedUpperStarCounit, NatTrans.comp_app,
+        Functor.comp_obj, Functor.whiskeringLeft₂_map_app_app_app_app,
+        Functor.whiskeringLeft₂_obj_map_app_app_app, Functor.whiskeringLeft₂_obj_obj_map_app_app,
+        Functor.LaxMonoidal.μNatTrans_app_app, leftDerivedUpperStarDerivedTensorCounit,
+        Functor.postcompose₂_obj_map_app_app, Functor.postcompose₂_map_app_app_app,
+        Functor.postcompose₂MapWhiskeringLeft₂_app_app, Category.assoc, Functor.flip_obj_obj,
+        flipFunctor_map_app_app] at this ⊢
       exact this)
 
 /-- For a fixed `M`, the tensor comparison `Lg^*(- ⊗ᴸ M) ⟶ Lg^*(-) ⊗ᴸ Lg^*M` commutes with
