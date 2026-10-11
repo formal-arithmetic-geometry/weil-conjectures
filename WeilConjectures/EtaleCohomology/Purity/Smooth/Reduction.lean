@@ -169,6 +169,40 @@ theorem map_smoothTrace {d : ℤ} (ΨX : 𝐃(X, Λ) ⥤ 𝐃(X, Λ')) (ΨY : �
   rw [smoothTrace, smoothTrace, ← Functor.map_comp_assoc, ← hγ, Functor.map_comp_assoc, hS,
     ← reassoc_of% hψ, Iso.hom_inv_id_app_assoc, Functor.map_comp]
 
+/-- Blueprint `prop-pur-adic-reconstruction-trace-coherence`: Adic transport of trace and
+coherence
+
+**The smooth traces of a normalized system form a morphism of systems.** Let `Ψ` be a change of
+coefficients commuting with `Rf_!` through `ψ`, for instance the restriction of scalars along
+`A_{n+1} → A_n`, and let `u : K' ⟶ Ψ K` be a transition map (`K' = K_{n+1}`, `K = K_n`), with
+transition maps `v₀` of the sources `Lf^* K(d)[2d]` and `vS` of the targets `Rf^! K`. If `vS`
+is compatible with the counits (`hS`) and the purity maps commute with the transitions (`hγ`,
+the finite reduction of purity), then so do the smooth traces:
+`u ∘ Tr^sm_{f,K'} = Ψ(Tr^sm_{f,K}) ∘ ψ⁻¹ ∘ Rf_! v₀`. Hence the levelwise traces are a morphism
+of normalized systems, which is what the uniform-tower reconstruction realizes at the adic
+stage. -/
+theorem smoothTrace_comp_eq_of_transition {d : ℤ} (ΨX : 𝐃(X, Λ) ⥤ 𝐃(X, Λ'))
+    (ΨY : 𝐃(Y, Λ) ⥤ 𝐃(Y, Λ'))
+    (ψ : R(f)_![ModuleCat.{u + 1} Λ] ⋙ ΨY ≅ ΨX ⋙ R(f)_![ModuleCat.{u + 1} Λ'])
+    {K : 𝐃(Y, Λ)} {K' : 𝐃(Y, Λ')} (v : K' ⟶ ΨY.obj K)
+    (γ : (twistShift Λ X d).obj ((L((f)^*[ModuleCat.{u + 1} Λ])).obj K) ≅
+      (R(f)^![ModuleCat.{u + 1} Λ]).obj K)
+    (γ' : (twistShift Λ' X d).obj ((L((f)^*[ModuleCat.{u + 1} Λ'])).obj K') ≅
+      (R(f)^![ModuleCat.{u + 1} Λ']).obj K')
+    (v₀ : (twistShift Λ' X d).obj ((L((f)^*[ModuleCat.{u + 1} Λ'])).obj K') ⟶
+      ΨX.obj ((twistShift Λ X d).obj ((L((f)^*[ModuleCat.{u + 1} Λ])).obj K)))
+    (vS : (R(f)^![ModuleCat.{u + 1} Λ']).obj K' ⟶ ΨX.obj ((R(f)^![ModuleCat.{u + 1} Λ]).obj K))
+    (hS : (R(f)_![ModuleCat.{u + 1} Λ']).map vS ≫ ψ.inv.app _ ≫
+        ΨY.map ((rightDerivedUpperShriekAdjunction (ModuleCat.{u + 1} Λ) f).counit.app K) =
+      (rightDerivedUpperShriekAdjunction (ModuleCat.{u + 1} Λ') f).counit.app K' ≫ v)
+    (hγ : γ'.hom ≫ vS = v₀ ≫ ΨX.map γ.hom) :
+    smoothTrace Λ' d f γ' ≫ v =
+      (R(f)_![ModuleCat.{u + 1} Λ']).map v₀ ≫ ψ.inv.app _ ≫ ΨY.map (smoothTrace Λ d f γ) := by
+  have hψ := ψ.inv.naturality γ.hom
+  simp only [Functor.comp_obj, Functor.comp_map] at hψ
+  rw [smoothTrace, smoothTrace, Category.assoc, ← hS, ← Functor.map_comp_assoc, hγ,
+    Functor.map_comp, Category.assoc, reassoc_of% hψ, Functor.map_comp]
+
 end Purity
 
 end Etale
