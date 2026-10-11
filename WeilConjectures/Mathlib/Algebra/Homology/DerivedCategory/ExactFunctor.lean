@@ -746,6 +746,75 @@ lemma mapDerivedCategoryPlusSingleFunctor_hom_app_shiftIso (n a a' : ℤ) (h : n
       ((DerivedCategory.Plus.singleFunctors D).shiftIso n a a' h).hom.app (F.obj A) := by
   sorry
 
+open DerivedCategory.Plus in
+/-- The isomorphisms `τ_{≥ q} τ_{< q + 1} K ≅ H^q(K)[-q]` are compatible with the exact
+functor `F`, through the commutation of the t-exact functor `F.mapDerivedCategoryPlus` with the
+truncations and of `F` with the single functors and the homology functors. -/
+lemma mapDerivedCategoryPlus_map_eTruncLTCompETruncGEIso_hom_app (q : ℤ)
+    (K : DerivedCategory.Plus C) :
+    F.mapDerivedCategoryPlus.map ((eTruncLTCompETruncGEIso q).hom.app K) ≫
+      (F.mapDerivedCategoryPlusSingleFunctor q).hom.app ((homologyFunctor C q).obj K) ≫
+      (singleFunctor D q).map ((F.mapDerivedCategoryPlusHomologyFunctorIso q).hom.app K) =
+    (F.mapDerivedCategoryPlus.eTruncGELTIsoApp TStructure.t TStructure.t q (q + 1 : ℤ) K).hom ≫
+      (eTruncLTCompETruncGEIso q).hom.app (F.mapDerivedCategoryPlus.obj K) := by
+  let t₁ := TStructure.t (C := C)
+  let t₂ := TStructure.t (C := D)
+  let Y := (t₁.eTruncLT.obj ((q + 1 : ℤ) : EInt)).obj K
+  have : t₁.IsGE ((t₁.eTruncLT.obj ((q + 1 : ℤ) : EInt) ⋙ t₁.eTruncGE.obj (q : EInt)).obj K) q :=
+    t₁.isGE_eTruncGE_obj_obj q q le_rfl _
+  have : t₁.IsLE Y q := t₁.isLE_eTruncLT_obj_obj q ((q + 1 : ℤ) : EInt) le_rfl K
+  have : t₁.IsLE ((t₁.eTruncLT.obj ((q + 1 : ℤ) : EInt) ⋙ t₁.eTruncGE.obj (q : EInt)).obj K) q :=
+    inferInstanceAs (t₁.IsLE ((t₁.eTruncGE.obj (q : EInt)).obj Y) q)
+  have : (F.mapDerivedCategoryPlus.obj ((t₁.eTruncLT.obj ((q + 1 : ℤ) : EInt) ⋙
+      t₁.eTruncGE.obj (q : EInt)).obj K)).IsGE q :=
+    Functor.IsTExact.isGE_obj t₁ t₂ F.mapDerivedCategoryPlus _ q
+  have : (F.mapDerivedCategoryPlus.obj ((t₁.eTruncLT.obj ((q + 1 : ℤ) : EInt) ⋙
+      t₁.eTruncGE.obj (q : EInt)).obj K)).IsLE q :=
+    Functor.IsTExact.isLE_obj t₁ t₂ F.mapDerivedCategoryPlus _ q
+  apply singleFunctor_hom_ext_of_isGE_of_isLE q
+  have hs₂ {a b : D} (u : a ⟶ b) : (homologyFunctor D q).map ((singleFunctor D q).map u) ≫ (singleFunctorCompHomologyFunctorIso (C := D) q).hom.app b =
+      (singleFunctorCompHomologyFunctorIso (C := D) q).hom.app a ≫ u := (singleFunctorCompHomologyFunctorIso (C := D) q).hom.naturality u
+  have he {X₁ X₂ : DerivedCategory.Plus C} (f : X₁ ⟶ X₂) :
+      (homologyFunctor D q).map (F.mapDerivedCategoryPlus.map f) = (F.mapDerivedCategoryPlusHomologyFunctorIso q).inv.app X₁ ≫ F.map ((homologyFunctor C q).map f) ≫ (F.mapDerivedCategoryPlusHomologyFunctorIso q).hom.app X₂ := by
+    rw [← cancel_epi ((F.mapDerivedCategoryPlusHomologyFunctorIso q).hom.app X₁), Iso.hom_inv_id_app_assoc]
+    exact ((F.mapDerivedCategoryPlusHomologyFunctorIso q).hom.naturality f).symm
+  have hC := F.mapDerivedCategoryPlusHomologyFunctorIso_hom_app_singleFunctor q ((homologyFunctor C q).obj K)
+  have hε₁ := homologyFunctor_map_eTruncLTCompETruncGEIso_hom_app q K
+  have hε₂ := homologyFunctor_map_eTruncLTCompETruncGEIso_hom_app q (F.mapDerivedCategoryPlus.obj K)
+  rw [← cancel_mono ((singleFunctorCompHomologyFunctorIso (C := D) q).hom.app ((homologyFunctor D q).obj (F.mapDerivedCategoryPlus.obj K)))]
+  have hL : (homologyFunctor D q).map ((singleFunctor D q).map ((F.mapDerivedCategoryPlusHomologyFunctorIso q).hom.app K)) ≫
+      (singleFunctorCompHomologyFunctorIso (C := D) q).hom.app ((homologyFunctor D q).obj (F.mapDerivedCategoryPlus.obj K)) =
+      (singleFunctorCompHomologyFunctorIso (C := D) q).hom.app (F.obj ((homologyFunctor C q).obj K)) ≫ (F.mapDerivedCategoryPlusHomologyFunctorIso q).hom.app K := hs₂ _
+  have hC' : (homologyFunctor D q).map ((F.mapDerivedCategoryPlusSingleFunctor q).hom.app ((homologyFunctor C q).obj K)) ≫
+      (singleFunctorCompHomologyFunctorIso (C := D) q).hom.app (F.obj ((homologyFunctor C q).obj K)) =
+      (F.mapDerivedCategoryPlusHomologyFunctorIso q).inv.app ((singleFunctor C q).obj ((homologyFunctor C q).obj K)) ≫ F.map ((singleFunctorCompHomologyFunctorIso (C := C) q).hom.app ((homologyFunctor C q).obj K)) := by
+    rw [← hC, Iso.inv_hom_id_app_assoc]
+  have hπ : IsIso ((homologyFunctor D q).map (F.mapDerivedCategoryPlus.map ((t₁.eTruncGEπ (q : EInt)).app Y))) := by
+    rw [he]; infer_instance
+  have hκ : F.mapDerivedCategoryPlus.map ((t₁.eTruncGEπ (q : EInt)).app Y) ≫
+      (F.mapDerivedCategoryPlus.eTruncGELTIsoApp t₁ t₂ q (q + 1 : ℤ) K).hom =
+      (F.mapDerivedCategoryPlus.eTruncLTIsoApp t₁ t₂ ((q + 1 : ℤ) : EInt) K).hom ≫ (t₂.eTruncGEπ (q : EInt)).app ((t₂.eTruncLT.obj ((q + 1 : ℤ) : EInt)).obj (F.mapDerivedCategoryPlus.obj K)) := by
+    simp only [Functor.eTruncGELTIsoApp, Iso.trans_hom, Functor.mapIso_hom]
+    erw [Functor.eTruncGEπ_app_eTruncGEIsoApp_hom_assoc]
+    exact t₂.eTruncGEπ_naturality _ _
+  simp only [Functor.map_comp, Category.assoc, hL, reassoc_of% hC']
+  rw [hε₂, he, ← cancel_epi ((homologyFunctor D q).map (F.mapDerivedCategoryPlus.map ((t₁.eTruncGEπ (q : EInt)).app Y)))]
+  simp only [Category.assoc]
+  rw [← Functor.map_comp_assoc, hκ, Functor.map_comp_assoc, IsIso.hom_inv_id_assoc,
+    ← Functor.map_comp, Functor.eTruncLTIsoApp_hom_eTruncLTι_app, he, he]
+  have key : (homologyFunctor C q).map ((t₁.eTruncGEπ (q : EInt)).app Y) ≫
+      (homologyFunctor C q).map ((eTruncLTCompETruncGEIso q).hom.app K) ≫
+      (singleFunctorCompHomologyFunctorIso q).hom.app ((homologyFunctor C q).obj K) =
+      (homologyFunctor C q).map ((t₁.eTruncLTι ((q + 1 : ℤ) : EInt)).app K) := by
+    erw [hε₁, IsIso.hom_inv_id_assoc]
+  have key' := congrArg F.map key
+  simp only [F.map_comp] at key'
+  erw [Iso.hom_inv_id_app_assoc]
+  simp only [Category.assoc]
+  erw [Iso.hom_inv_id_app_assoc]
+  erw [reassoc_of% key']
+  rfl
+
 end Plus
 
 section Identity
