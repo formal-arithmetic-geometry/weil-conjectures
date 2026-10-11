@@ -33,22 +33,19 @@
  "blueprint_order": 1158,
  "blueprint_uses": [],
  "lean": {
-  "module": "WeilConjectures.ConstructibleSheaf.Defs",
-  "declaration": "AlgebraicGeometry.Scheme.Stratification",
-  "branch": "master",
-  "line": 202,
-  "sorry_free": true,
-  "body_lines": 4,
-  "others": [
-   {
-    "module": "WeilConjectures.Topology.Stratification",
-    "declaration": "Topology.Stratification",
-    "branch": "master",
-    "line": 29,
-    "sorry_free": true,
-    "body_lines": 5
-   }
-  ]
+  "module": "Sheaf.AlgebraicGeometry.LocallyClosedStratification",
+  "declaration": "AlgebraicGeometry.Scheme.LocallyClosedStratification",
+  "file": "lean/Sheaf/AlgebraicGeometry/LocallyClosedStratification.lean",
+  "statement": "structure LocallyClosedStratification (X : Scheme.{w}) extends Topology.Stratification X",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-11",
+  "existing": false,
+  "declarations": [
+   "AlgebraicGeometry.Scheme.LocallyClosedStratification",
+   "Topology.Stratification"
+  ],
+  "note": "The recorded source Scheme.Stratification now additionally requires isConstructible_stratum, absent from this node. LocallyClosedStratification states exactly the node: the existing Topology.Stratification together with schemes, immersions, and their image equalities, without constructibility. Topology.Stratification remains the existing topological notion."
  },
  "blueprint_lean": [
   "AlgebraicGeometry.Scheme.Stratification",
@@ -112,5 +109,13 @@
  },
  "chapter": "sec-proper-base-change",
  "unit": "sk-thm-p1",
- "lead_note": "15:52 UTC: the text omits that the strata are constructible, which its Lean (AlgebraicGeometry.Scheme.Stratification, Defs.lean 218-238) requires as a field; lemma-constructible-common-refinement as written therefore gives no constructible strata (thm-constructible-serre uses the new node lem-weil-pbc-constructible-stratification-intersection instead); the definition should add the condition when next touched."
+ "lead_note": "15:52 UTC: the text omits that the strata are constructible, which its Lean (AlgebraicGeometry.Scheme.Stratification, Defs.lean 218-238) requires as a field; lemma-constructible-common-refinement as written therefore gives no constructible strata (thm-constructible-serre uses the new node lem-weil-pbc-constructible-stratification-intersection instead); the definition should add the condition when next touched.",
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-ecs1031",
+  "group": "E1",
+  "result": "pass",
+  "note": "T arbitrary Scheme.{u}; Lambda finite CommRing (Type u+1, any finite ring has a copy); F Sheaf smallEtale (ModuleCat Lambda) = Lambda_T-modules; exists LocallyClosedStratification (09XZ finite disjoint locally closed cover + Z_k, immersions, image = stratum, no constructibility: dep module matches def-constructible-stratification, source Scheme.Stratification now adds isConstructible_stratum); (a) Topology.IsConstructible per stratum; (b) G := Etale.upperStar along S.immersion k, recorded LocallyConstantDatum G, per member exists finite M with module-sheaf iso G.over U_i = constantSheaf M; n=0, empty members, zero ring/module ok; not source IsConstructibleSheaf (finite stalks vs finite values: pointer lem-weil-pbc-finite-locally-constant-module-values), not E1 set-valued IsConstructibleEtaleSheafOfSets"
+ }
 }
