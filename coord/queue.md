@@ -1,11 +1,11 @@
 # Work queue
 
-997 items; claim with `tools/claim.py next <group> [--stage N]`.
+995 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (997)
+## Stage 2: nodes to state (995)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -33,7 +33,6 @@
 | `lem-galois-descent-datum-diagonal-identity` | 1 | state |
 | `lem-galois-fpqc-morphisms-descend` | 1 | state |
 | `lem-galois-fpqc-pullback-canonical-iso` | 1 | state |
-| `lem-galois-object-exists` | 1 | state |
 | `lem-kun-separable-smooth-colimit` | 1 | state |
 | `lem-kun-stalks-commute-colimits` | 1 | state |
 | `lem-kun-support-geometric-point-independent` | 1 | state |
@@ -59,7 +58,6 @@
 | `lem-pc-finite-projective-tor-acyclic` | 1 | state |
 | `lem-pc-flat-tensor-complex-cohom` | 1 | state |
 | `lem-pc-fp-module-map-descent-affine` | 1 | state |
-| `lem-pc-fppf-affine-refinement` | 1 | state |
 | `lem-pc-fppf-affine-sheafification-restriction` | 1 | state |
 | `lem-pc-fppf-affine-site-topos-equivalence` | 1 | state |
 | `lem-pc-fpqc-descend-closed-immersion` | 1 | state |
