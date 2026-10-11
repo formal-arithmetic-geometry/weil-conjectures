@@ -170,5 +170,23 @@
   "item": "lem-weil-pbc-module-directed-colimit-finite-presentation",
   "worker": "stage1",
   "summary": "Read the Stacks proof of 01PK (properties.tex line 3215): it is exactly 01PJ (filtered-category version, line 3040) plus Categories 0032 (filtered category -> cofinal directed system) plus existence of colimits in Mod(O_X). It does not cite 01PG, 01PF, 01PI, 01BS or 01BC directly; those are used inside the proof of 01PJ (01BC, 01PF, 01PI, direct sums/cokernels of fp modules, stalks of colimits), which is created as the new unsplit node lem-weil-pbc-module-filtered-colimit-finite-presentation. Categories 0032 is the existing reviewed Mathlib leaf lem-weil-pbc-cofiltered-limit-directed-reindex (cofiltered/limit form), applied in the opposite category (Steps 2-3); the existence of colimits in Mod(O_X) that Stacks mentions is not needed because the leaf transfers the colimit property itself. Steps 2 and 4 are elementary. Mathlib re-searched with LeanSearch, Loogle and grep: IsFinitePresentation has 5 declarations (definition, => quasi-coherent, => finite type, mk, exists_quasicoherentData), no colimit result; no 01PK/01PJ in the slopmaster2 source."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ModuleDirectedColimitFinitePresentation",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.exists_directedColimit_finitePresentation",
+  "file": "lean/Sheaf/AlgebraicGeometry/ModuleDirectedColimitFinitePresentation.lean",
+  "statement": "theorem exists_directedColimit_finitePresentation (X : Scheme.{u}) [CompactSpace X] [QuasiSeparatedSpace X] (F : X.Modules) [F.IsQuasicoherent] : ∃ (I : Type u) (_ : Preorder I) (_ : Nonempty I) (_ : IsDirected I (· ≤ ·)), ∃ (D : I ⥤ X.Modules), (∀ i : I, (D.obj i).IsFinitePresentation) ∧ ∃ (φ : D ⟶ (Functor.const I).obj F), Nonempty (IsColimit (Cocone.mk F φ))",
+  "branch": "sheaf-dag",
+  "by": "J1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-mdc1243",
+  "group": "J1",
+  "result": "pass",
+  "note": "X : Scheme.{u} + CompactSpace + QuasiSeparatedSpace = qcqs; F : X.Modules [IsQuasicoherent.{u,u,u}] = qcoh O_X-module; I : Type u, Preorder, Nonempty, IsDirected = directed set (DIRECTED SETS / INDEX UNIVERSES); D : I ⥤ X.Modules = system with phi_ii=id, composition; IsFinitePresentation per stage = 01BN; phi : D ⟶ const F + Nonempty IsColimit (Cocone.mk F phi) = colimit in Mod(O_X), same form as C1 a9b50d82c filtered sibling; #check universes all u"
  }
 }
