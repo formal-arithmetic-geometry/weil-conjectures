@@ -1,31 +1,27 @@
 # Work queue
 
-606 items; claim with `tools/claim.py next <group> [--stage N]`.
+601 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (606)
+## Stage 2: nodes to state (601)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
 | `def-pod-lisse-l-adic-sheaves` | 1 | state |
 | `lem-pc-derived-tensor-transitivity` | 1 | state |
 | `lem-pc-module-pullback-identity-composition` | 1 | state |
-| `lem-pur-left-derived-exact-when-defined` | 1 | state |
 | `lem-sc-base-change-curve` | 1 | state |
 | `lem-sc-hilb-dominating-power` | 1 | state |
 | `lem-weil-derived-limit-roos-complex` | 1 | state |
 | `lem-weil-pbc-etale-finite-pushforward-locally-constant` | 1 | state |
 | `lem-weil-pbc-exchange-identity-pasting` | 1 | state |
 | `lem-weil-pbc-finite-etale-trace-degree` | 1 | state |
-| `lem-weil-pbc-finite-type-domain-dimension-trdeg` | 1 | state |
 | `lem-weil-pbc-flat-completion` | 1 | state |
 | `lem-weil-pbc-flat-local-completion-iso` | 1 | state |
 | `lem-weil-pbc-flat-local-criterion-nonzerodivisor` | 1 | state |
 | `lem-weil-pbc-flat-mod-injective` | 1 | state |
-| `lem-weil-pbc-flat-module-completion-flat` | 1 | state |
-| `lem-weil-pbc-flat-permanence` | 1 | state |
 | `lem-weil-pbc-flat-smooth-fibre-smooth-at-prime` | 1 | state |
 | `lem-weil-pbc-flat-tor-ideal-criterion` | 1 | state |
 | `lem-weil-pbc-flat-unramified-formally-etale` | 1 | state |
@@ -34,7 +30,6 @@
 | `lem-weil-pbc-formal-glueing-isogeny` | 1 | state |
 | `lem-weil-pbc-fpqc-descend-affine` | 1 | state |
 | `lem-weil-pbc-fpqc-descend-finite` | 1 | state |
-| `lem-weil-pbc-fpqc-descend-flat` | 1 | state |
 | `lem-weil-pbc-fpqc-descend-locally-finite-presentation` | 1 | state |
 | `lem-weil-pbc-fpqc-descend-locally-finite-type` | 1 | state |
 | `lem-weil-pbc-fpqc-descend-quasi-compact` | 1 | state |
