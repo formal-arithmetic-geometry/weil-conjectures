@@ -3782,3 +3782,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 08:13 L: returned deliver/M1/lem-pc-derived-adjoint-functors (reviewer RETURN: (reviewer R-daf1153, head dad40ef17) H7: this item is un-parked as a STAGE 2 STATEMENT CORRECTION (coord/stage2-parked.m)
 - 08:13 L: merged deliver/C1/def-exc-continuous-cohomology (stage 2; reviewer PASS; first push; Sheaf.RepresentationTheory.DiscreteContinuousCohomology Rep.discreteContinuousCohomologyFunctor)
 - 08:13 L: merged deliver/F1/lem-sc-p1-graded-submodule-finite (stage 2; reviewer FIX; first push; Sheaf.RingTheory.GradedSubmoduleFinite MvPolynomial.graded_submodule_finite)
+- 08:13 L: merged deliver/M1/lem-sc-invert-s-cohomology-induction (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.QuasiCompactOpenInduction AlgebraicGeometry.quasiCompactOpen_induction)

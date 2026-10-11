@@ -124,5 +124,23 @@
   "group": "H1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-isi (reviewer sub-agent of L); spot-checked: Source: Stacks coherent.tex Lemma 08DR (coherent-lemma-induction-principle), statement and proof read; item statement agrees hypothesis by hypothesis (X qcqs, P on qc opens, affine base, gluing for U qc and V affine, conclusion for all qc opens and X). New node lem-sc-invert-s-cohomology-separated-induction is the first paragraph of the proof with the same hypotheses, restricted to separated qc opens; Mathlib compact_open_induction_on (QuasiCompact.lean:241) is a different statement (no intersection hypothesis), no slopmaster2 declaration found, so not B10. Step 1: finite cover by lem-weil-pbc-qcqs-finite-affine-open-cover, U_i cap V affine by lem-weil-pbc-separated-affine-open-intersection with A = Z. Step 2: qc of U cap V by lem-weil-pbc-quasi-separated-affine-cover-criterion(1) plus finite union; separated-open node applied to the overlap. Step 3 elementary. Small cases: n=1 affine; affine line with doubled origin (qcqs, non-separated), n=2, overlap A^1 minus 0 affine. FIX more, RETURN less (C1, two places, separatedness used with no node): dag/nodes/sec-curve-estimates/lem-sc-invert-s-cohomology-induction.json: proof[0].text/uses: U and U cap V separated as opens of separated W, now cites lem-weil-pbc-separated-cancellation(a) and lem-weil-pbc-proper-fp-permanence(e); proof[1].text/uses: U cap V separated as open of affine V, now cites lem-weil-pbc-separated-cancellation(a) and lem-sc-separated-over-affine-scheme-separated; proof_deps: the three nodes added. Start Sat Oct 10 04:19:39 PM UTC 2026, end Sat Oct 10 04:20:44 PM UTC 2026.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.QuasiCompactOpenInduction",
+  "declaration": "AlgebraicGeometry.quasiCompactOpen_induction",
+  "file": "lean/Sheaf/AlgebraicGeometry/QuasiCompactOpenInduction.lean",
+  "statement": "theorem quasiCompactOpen_induction (X : Scheme.{u}) [CompactSpace X] [QuasiSeparatedSpace X] (P : X.Opens → Prop) (h_affine : ∀ U : X.Opens, IsAffineOpen U → P U) (h_union : ∀ (U V : X.Opens), IsCompact (U : Set X) → IsAffineOpen V → P U → P V → P (U ⊓ V) → P (U ⊔ V)) : ∀ U : X.Opens, IsCompact (U : Set X) → P U",
+  "branch": "sheaf-dag",
+  "by": "M1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-isc1158",
+  "group": "M1",
+  "result": "pass",
+  "note": "X:Scheme; qc=[CompactSpace X]; qs=[QuasiSeparatedSpace X]; P on X.Opens (only used on compact opens); h_affine IsAffineOpen; h_union compact U, affine V, P U,P V,P(U⊓V)→P(U⊔V); concl all compact U (X via ⊤); no duplicate in lean/Sheaf or Mathlib"
  }
 }
