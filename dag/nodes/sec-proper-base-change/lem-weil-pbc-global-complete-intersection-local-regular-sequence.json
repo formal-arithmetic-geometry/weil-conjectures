@@ -196,5 +196,23 @@
   "worker": "stage1",
   "summary": "Proof written in 6 steps following the proof of Stacks 00SB at a maximal ideal m' containing q'' (choice of m'; k[y]_{m'} regular local of dimension m, hence depth >= dimension; dim >= m - t by the Krull height bound; dim <= m - t through the prime correspondence of the localization and dim T = m - t; 00N6 gives the regular sequence in k[y]_{m'}), then localized to k[y]_{q''} (step 6, not in the source, which says only 'as seen in the proof of 00SB'). This route avoids the dimension formula at non-maximal primes and the equidimensionality node. Statement and stmt_deps kept. Existing nodes used: lem-weil-pbc-polynomial-ring-maximal-localization-dimension (00OP) and lem-weil-pbc-noetherian-height-quotient-bound (00KW iterated, Mathlib leaf), both created today by the sibling item, lem-weil-pbc-regular-local-generators-regular-sequence (00NQ), lem-weil-pbc-localization-prime-residue-field-iso. New nodes: lem-weil-pbc-polynomial-ring-field-regular-ring (00OQ, Mathlib leaf MvPolynomial.isRegularRing_of_isRegularRing), lem-weil-pbc-cm-local-dimension-drop-regular-sequence (00N6 for M = R, unsplit; Mathlib has no Cohen-Macaulay rings), lem-weil-pbc-weakly-regular-sequence-localization-prime (Mathlib leaf IsWeaklyRegular.isRegular_of_isLocalization_of_mem)."
  },
- "reviewed": "Reviewed by L 2026-10-10: follows the proof of Algebra 00SB at a maximal ideal m' ⊇ q'' (regular ring Q: new exact leaf; dim Q_{m'} = m and the height bound: today's 00OP node and Krull leaf; equality by lifting chains to T; regular sequence by 00N6 for M = R, new unsplit node) and then localizes to Q_{q''} (new exact leaf, step 6), which closes the gap in 00SC's 'as seen in the proof of 00SB'. No Mathlib match for the item."
+ "reviewed": "Reviewed by L 2026-10-10: follows the proof of Algebra 00SB at a maximal ideal m' ⊇ q'' (regular ring Q: new exact leaf; dim Q_{m'} = m and the height bound: today's 00OP node and Krull leaf; equality by lifting chains to T; regular sequence by 00N6 for M = R, new unsplit node) and then localizes to Q_{q''} (new exact leaf, step 6), which closes the gap in 00SC's 'as seen in the proof of 00SB'. No Mathlib match for the item.",
+ "lean": {
+  "module": "Sheaf.RingTheory.GlobalCompleteIntersectionLocalRegularSequence",
+  "declaration": "MvPolynomial.isRegular_localizationAtPrime_of_quotient_dimension",
+  "file": "lean/Sheaf/RingTheory/GlobalCompleteIntersectionLocalRegularSequence.lean",
+  "statement": "theorem isRegular_localizationAtPrime_of_quotient_dimension (k : Type u) [Field k] (m t : ℕ) (f : Fin t → MvPolynomial (Fin m) k) [Nontrivial (MvPolynomial (Fin m) k ⧸ Ideal.span (Set.range f))] (hdim : topologicalKrullDim (AlgebraicGeometry.Spec (CommRingCat.of (MvPolynomial (Fin m) k ⧸ Ideal.span (Set.range f)))) + (t : WithBot ℕ∞) = (m : WithBot ℕ∞)) (q : Ideal (MvPolynomial (Fin m) k)) [q.IsPrime] (hq : Ideal.span (Set.range f) ≤ q) : RingTheory.Sequence.IsRegular (Localization.AtPrime q) ((List.ofFn f).map (algebraMap (MvPolynomial (Fin m) k) (Localization.AtPrime q)))",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-gci1104",
+  "group": "E1",
+  "result": "pass",
+  "note": "field k Type u; m t : ℕ; f : Fin t → MvPolynomial (Fin m) k ordered; J = span (range f), T = quotient, T≠0 Nontrivial; dim Spec T = m-t as additive WithBot ℕ∞ equation (excludes ⊥/⊤ and t>m, equivalent to integer equality; Spec carrier = PrimeSpectrum by rfl); arbitrary prime q ⊇ J; Localization.AtPrime q; images via algebraMap; IsRegular (both clauses); #check in L sandbox"
+ }
 }
