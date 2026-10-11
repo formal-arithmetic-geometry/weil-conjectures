@@ -22,7 +22,9 @@
   "def-weil-finite-integral-morphism",
   "def-weil-flat-morphism",
   "def-sc-invertible-module",
-  "def-pc-derived-direct-image"
+  "def-pc-derived-direct-image",
+  "def-pc-derived-category",
+  "def-pur-sheaf-hom"
  ],
  "proof": [
   {
@@ -156,5 +158,22 @@
    "decls": [],
    "missing": []
   }
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FiniteFlatDualityEvaluation",
+  "declaration": "AlgebraicGeometry.finiteFlatDualityEvaluation",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteFlatDualityEvaluation.lean",
+  "statement": "theorem finiteFlatDualityEvaluation {X Y : Scheme.{u}} (f : X ⟶ Y) [IsNoetherian X] [IsNoetherian Y] [IsFinite f] [Flat f] [HasDerivedCategory.{wX} (SheafOfModules.{u} (moduleRings X.toRingedSpace))] [HasDerivedCategory.{wY} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))] (L : Y.Modules) [L.IsInvertible] (R : schemeDerivedQCohCategory X ⥤ schemeDerivedQCohCategory Y) (comparison : R ⋙ (schemeDerivedQCohProperty Y).ι ≅ (schemeDerivedQCohProperty X).ι ⋙ schemeDerivedDirectImage f) (a : schemeDerivedQCohCategory Y ⥤ schemeDerivedQCohCategory X) (adj : R ⊣ a) (K : schemeDerivedQCohCategory Y) (eL : K.obj ≅ (DerivedCategory.singleFunctor (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) 0).obj L) : ∃ (M : X.Modules), ∃ (e₀ : (DerivedCategory.singleFunctor (SheafOfModules.{u} (moduleRings X.toRingedSpace)) 0).obj M ≅ (a.obj K).obj), ∃ (c : (DerivedCategory.singleFunctor (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) 0).obj ((Scheme.Modules.pushforward f).obj M) ≅ (schemeDerivedDirectImage f).obj ((DerivedCategory.singleFunctor (SheafOfModules.{u} (moduleRings X.toRingedSpace)) 0).obj M)), c.hom = DerivedCategory.Q.map ((HomologicalComplex.singleMapHomologicalComplex (RingedSpace.moduleDirectImage f.toLRSHom.toShHom) (ComplexShape.up ℤ) 0).inv.app M) ≫ (RingedSpace.moduleDirectImage f.toLRSHom.toShHom).rightDerivedFunctorUnit.app ((HomotopyCategory.quotient _ _).obj ((CochainComplex.singleFunctor (SheafOfModules.{u} (moduleRings X.toRingedSpace)) 0).obj M)) ∧ ∃ (e : (Scheme.Modules.pushforward f).obj M ≅ SheafOfModules.homObj (R := Y.toRingedSpace.sheaf) ((Scheme.Modules.pushforward f).obj (SheafOfModules.unit X.ringCatSheaf)) L), ∃ (ε : (Scheme.Modules.pushforward f).obj M ⟶ L), (DerivedCategory.singleFunctor (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) 0).map ε = c.hom ≫ (schemeDerivedDirectImage f).map e₀.hom ≫ comparison.inv.app (a.obj K) ≫ (adj.counit.app K).hom ≫ eL.hom ∧ (∀ (U : Y.Opens) (ω : ((Scheme.Modules.pushforward f).obj M).presheaf.obj (Opposite.op U)), ε.app U ω = (PresheafOfModules.homObjEvalId ((Scheme.Modules.pushforward f).obj (SheafOfModules.unit X.ringCatSheaf)).val L.val U ((Scheme.Modules.Hom.app e.hom U) ω)) (1 : X.presheaf.obj (Opposite.op (f ⁻¹ᵁ U)))) ∧ (∀ (U : Y.Opens) (a₁ b : X.presheaf.obj (Opposite.op (f ⁻¹ᵁ U))) (ω : M.val.obj (Opposite.op (f ⁻¹ᵁ U))), (PresheafOfModules.homObjEvalId ((Scheme.Modules.pushforward f).obj (SheafOfModules.unit X.ringCatSheaf)).val L.val U ((Scheme.Modules.Hom.app e.hom U) (a₁ • ω))) b = (PresheafOfModules.homObjEvalId ((Scheme.Modules.pushforward f).obj (SheafOfModules.unit X.ringCatSheaf)).val L.val U ((Scheme.Modules.Hom.app e.hom U) ω)) (a₁ * b)) ∧ (∀ (U : Y.Opens) (a₁ : X.presheaf.obj (Opposite.op (f ⁻¹ᵁ U))) (ω : M.val.obj (Opposite.op (f ⁻¹ᵁ U))), (PresheafOfModules.homObjEvalId ((Scheme.Modules.pushforward f).obj (SheafOfModules.unit X.ringCatSheaf)).val L.val U ((Scheme.Modules.Hom.app e.hom U) ω)) a₁ = (PresheafOfModules.homObjEvalId ((Scheme.Modules.pushforward f).obj (SheafOfModules.unit X.ringCatSheaf)).val L.val U ((Scheme.Modules.Hom.app e.hom U) (a₁ • ω))) (1 : X.presheaf.obj (Opposite.op (f ⁻¹ᵁ U))))",
+  "branch": "sheaf-dag",
+  "by": "T1",
+  "date": "2026-10-12",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-ffd",
+  "group": "T1",
+  "result": "pass"
  }
 }
