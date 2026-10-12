@@ -1,0 +1,152 @@
+{
+ "id": "lem-galois-fpqc-affine-model-transitions",
+ "kind": "statement",
+ "title": "Cartesian comparison of two effective affine models",
+ "statement": "Let $f:X\\to S$ be a singleton fpqc covering of schemes [def-weil-pbc-fpqc-covering, def-pc-scheme] and let $D$ be a transport descent datum on $V\\to X$ [def-pd-descent-datum]. For each affine open $A\\subset S$ write $X_A=X\\times_S A$ and $V_A=V\\times_X X_A$, with their chosen projections [def-pc-fibre-product]. Suppose given a datum $E_A$ on $V_A\\to X_A$ relative to $X_A\\to A$, such that projection to $V$ intertwines its transport with $D$. Fix a scheme $W_A\\to A$ and a morphism $r_A:V_A\\to W_A$ whose square with $V_A\\to X_A$ and $X_A\\to A$ is Cartesian and whose composites with transported points of $E_A$ are invariant. For any affine inclusion $i:U\\hookrightarrow B$, let $c_i:V_U\\to V_B$ be the canonical restriction map (the transition of the affine cover of $S$ pulled back first to $X$ and then to $V$). There exists $t:W_U\\to W_B$ such that the square with edges $t$, $W_U\\to U$, $W_B\\to B$ and $i$ is Cartesian and $c_i\\,r_B=r_U\\,t$. No global glued scheme or identity or composition laws for a family of transitions are asserted.",
+ "source": {
+  "document": "literature/stacks-project/descent.tex",
+  "place": "Tag 02W3, lemma-descending-types-morphisms, general-base proof, paragraph beginning Suppose V prime is an affine open of V; using Tag 02W0"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-fibre-product",
+  "def-pd-descent-datum",
+  "def-weil-pbc-fpqc-covering"
+ ],
+ "proof": [
+  {
+   "text": "Pull back the B-model W_B to U. Its canonical pullback to X_U identifies with V_U via the chosen Cartesian square for r_B and the iterated pullback identities. The U-model also pulls back to V_U via its specified square.",
+   "uses": [
+    "def-pc-fibre-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 02W3, lemma-descending-types-morphisms, general-base proof, affine-open restriction and relative gluing"
+   }
+  },
+  {
+   "text": "The common identification is compatible with transport: both local transports project to the same D-transport on V by hcompat. The projection V_U -> V is a monomorphism, being a base change of an open immersion, so equality after projection identifies the transported points. On an effective Cartesian model, invariance of r and its universal property identify E with the canonical descent datum.",
+   "uses": [
+    "def-pd-descent-datum",
+    "def-pc-fibre-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 02W3, lemma-descending-types-morphisms, general-base proof, affine-open restriction and relative gluing"
+   }
+  },
+  {
+   "text": "The cover X_U -> U is fpqc by base change. Apply fpqc full faithfulness of morphisms to descend the common pullback identification between W_U and W_B times_B U, and descend its inverse. Faithfulness proves that their composites are identities. The descended isomorphism followed by the projection to W_B defines t.",
+   "uses": [
+    "lem-galois-fpqc-morphisms-descend",
+    "def-weil-pbc-fpqc-covering"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 02W3, lemma-descending-types-morphisms, general-base proof, affine-open restriction and relative gluing"
+   }
+  },
+  {
+   "text": "The isomorphism W_U to W_B times_B U gives the Cartesian square. Reconstruction in descent says that its pullback map is the chosen comparison on V_U, giving c_i followed by r_B equal to r_U followed by t. This argument covers empty opens and empty objects and does not require affine intersections.",
+   "uses": [
+    "def-pc-fibre-product",
+    "lem-galois-fpqc-morphisms-descend"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 02W3, lemma-descending-types-morphisms, general-base proof, affine-open restriction and relative gluing"
+   }
+  }
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/descent.tex",
+  "place": "Tag 02W3, general-base comparison of nested affine models, using Tag 02W0"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A comparison between two effective descent models over nested affine opens descends uniquely to a Cartesian transition morphism",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "full faithfulness of descent gives transition maps between local effective schemes over inclusions of affine opens",
+   "results": "['AlgebraicGeometry.instIsAffineHomMapOverSchemeOpensDiagram', 'AlgebraicGeometry.Scheme.directedAffineCover_trans', 'AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D', 'AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S', 'AlgebraicGeometry.Scheme.AffineZariskiSite.cocone', 'AlgebraicGeometry.Scheme.AffineZariskiSite.directedCover_f', 'AlgebraicGeometry.Scheme.IsLocallyDirected.tAux', 'AlgebraicGeometry.Scheme.OpenCover.map_glueMorphismsOfLocallyDirected']",
+   "date": "2026-10-12",
+   "verdict": "No exact transition theorem; generic gluing APIs only."
+  },
+  {
+   "tool": "grep",
+   "query": "canonicalDescentIso|fpqc_morphisms_descend|affine_model_transition",
+   "results": "[]",
+   "date": "2026-10-12",
+   "verdict": "No exact transition theorem; generic gluing APIs only."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FpqcAffineModelsGlue",
+  "date": "2026-10-12",
+  "group": "B3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-galois-descent",
+   "place": "Proof Step 2: local effective models glue; the nested-affine comparison in Stacks Tag 02W3 supplying the transition maps before the use of relative gluing.",
+   "via": [
+    "lem-galois-fpqc-affine-models-glue",
+    "lem-galois-fpqc-effectivity-affine-base-gluing",
+    "lem-galois-fpqc-descending-types-morphisms"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-h2",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.FpqcAffineModelTransitions",
+  "file": "lean/Sheaf/AlgebraicGeometry/FpqcAffineModelTransitions.lean",
+  "declaration": "AlgebraicGeometry.fpqc_affine_model_transition",
+  "statement": "theorem fpqc_affine_model_transition\n    {X S : Scheme.{u}} (f : X ⟶ S)\n    (hf : Presieve.singleton f ∈ Scheme.fpqcPrecoverage S)\n    {V : Over X} (D : Over.DescentDatum f V)\n    (E : ∀ U : S.affineOpens,\n      Over.DescentDatum (pullback.snd f U.1.ι)\n        (Over.mk (pullback.snd V.hom (pullback.fst f U.1.ι))))\n    (hcompat : ∀ U : S.affineOpens,\n        ∀ {T : Scheme.{u}} (a b : T ⟶ pullback f U.1.ι)\n          (hab : a ≫ pullback.snd f U.1.ι = b ≫ pullback.snd f U.1.ι)\n          (x : Over.mk a ⟶ Over.mk (pullback.snd V.hom (pullback.fst f U.1.ι))),\n          (D.transport (a ≫ pullback.fst f U.1.ι) (b ≫ pullback.fst f U.1.ι)\n            (by simp only [Category.assoc, pullback.condition]; rw [← Category.assoc,\n              ← Category.assoc, hab])\n            (Over.homMk (x.left ≫ pullback.fst V.hom (pullback.fst f U.1.ι))\n              (by simpa [Category.assoc, pullback.condition] using\n                  congrArg (fun z ↦ z ≫ pullback.fst f U.1.ι) (Over.w x)))).left =\n            ((E U).transport a b hab x).left ≫ pullback.fst V.hom (pullback.fst f U.1.ι))\n    (W : ∀ U : S.affineOpens, Over U.1.toScheme)\n    (r : ∀ U : S.affineOpens,\n      pullback V.hom (pullback.fst f U.1.ι) ⟶ (W U).left)\n    (hp : ∀ U, IsPullback (r U) (pullback.snd V.hom (pullback.fst f U.1.ι))\n      (W U).hom (pullback.snd f U.1.ι))\n    (hinv : ∀ (U : S.affineOpens) {T : Scheme.{u}}\n      (a b : T ⟶ pullback f U.1.ι)\n      (hab : a ≫ pullback.snd f U.1.ι = b ≫ pullback.snd f U.1.ι)\n      (x : Over.mk a ⟶ Over.mk (pullback.snd V.hom (pullback.fst f U.1.ι))),\n      ((E U).transport a b hab x).left ≫ r U = x.left ≫ r U)\n    {U B : S.affineOpens} (i : U ⟶ B) :\n    ∃ t : (W U).left ⟶ (W B).left,\n      IsPullback t (W U).hom (W B).hom (S.directedAffineCover.trans i) ∧\n      Scheme.Cover.trans ((S.directedAffineCover.pullback₁ f).pullback₁ V.hom) i ≫ r B =\n        r U ≫ t",
+  "branch": "sheaf-dag",
+  "by": "B3",
+  "date": "2026-10-12"
+ },
+ "proof_deps": [
+  "def-pc-fibre-product",
+  "def-pd-descent-datum",
+  "lem-galois-fpqc-morphisms-descend",
+  "def-weil-pbc-fpqc-covering"
+ ],
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-7e963",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261012T144053-L-2089049",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-7e963",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261012T144053-L-2089049",
+  "kind": "interface",
+  "note": "independent Codex review: Matched delivered Lean statements and proofs with both DAG nodes and Stacks sources; signatures unchanged, delivery and sole direct importer compile cleanly, axioms match the reported remaining sorry."
+ }
+}

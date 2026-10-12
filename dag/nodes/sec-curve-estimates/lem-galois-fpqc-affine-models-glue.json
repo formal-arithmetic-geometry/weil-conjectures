@@ -15,11 +15,12 @@
  ],
  "proof": [
   {
-   "text": "Compare local effective models on nested affine opens by their common transport-compatible pullback. Unique fpqc descent of morphisms produces transition isomorphisms; uniqueness proves the functor laws and the transition squares are pullbacks.",
+   "text": "Choose E_U and its effective model W_U with projection r_U from the supplied hypotheses. Each r_U is a base change of X_U -> U, itself a base change of f. Fpqc representable descent makes r_U an effective epimorphism.",
    "uses": [
-    "lem-galois-fpqc-morphisms-descend",
     "def-pd-descent-datum",
-    "def-pc-fibre-product"
+    "def-pc-fibre-product",
+    "def-weil-pbc-fpqc-covering",
+    "lem-weil-pbc-fpqc-representable-descent"
    ],
    "elementary": false,
    "source": {
@@ -28,7 +29,18 @@
    }
   },
   {
-   "text": "Relative gluing along the directed affine cover gives W over S. Glue compatible pullback identifications and their inverses to obtain the global pullback projection q.",
+   "text": "For each affine inclusion U -> B apply the pairwise transition theorem to obtain t_U_B with a Cartesian square and C.trans(U -> B) followed by r_B equal to r_U followed by t_U_B. Cancel the epimorphism r_U to prove the identity and composition laws, using the identity and composition laws of the twice-pulled-back directed affine cover. The Cartesian square also supplies the equation over the base, so these maps form a functor and an equifibered natural transformation.",
+   "uses": [
+    "lem-galois-fpqc-affine-model-transitions"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 02W3, lemma-descending-types-morphisms, general-base proof, affine-open restriction and relative gluing"
+   }
+  },
+  {
+   "text": "Apply relative gluing over the directed affine cover to this functor and natural transformation, constructing W = d.glued with structure map d.toBase. On the twice-pulled-back open cover C of V, glue the maps r_U followed by the colimit inclusions to construct q. Their compatibility follows from the reconstruction equation for t and colimit.w. Paste each local model pullback with the chart pullback of relative gluing. Scheme.isPullback_of_openCover checks on the open cover X_U of X that q and V.hom form the global pullback square. This avoids constructing and gluing global inverse maps separately.",
    "uses": [
     "lem-weil-pbc-relative-glueing-affine-opens",
     "lem-weil-pbc-scheme-morphism-gluing",
@@ -41,7 +53,7 @@
    }
   },
   {
-   "text": "Over U the composite with q agrees with the effective projection for E_U. Its transport invariance and the assumed compatibility yield the displayed local invariance.",
+   "text": "Rewrite transported points using hcompat. The gluing restriction equation rewrites projection to V followed by q as r_U followed by the colimit inclusion. Compose the transport-invariance equation of the chosen effective model E_U with this inclusion. Associativity proves exactly the claimed local invariance.",
    "uses": [
     "def-pd-descent-datum"
    ],
@@ -53,16 +65,18 @@
   }
  ],
  "proof_deps": [
-  "lem-galois-fpqc-morphisms-descend",
   "def-pd-descent-datum",
   "def-pc-fibre-product",
+  "def-weil-pbc-fpqc-covering",
+  "lem-weil-pbc-fpqc-representable-descent",
+  "lem-galois-fpqc-affine-model-transitions",
   "lem-weil-pbc-relative-glueing-affine-opens",
   "lem-weil-pbc-scheme-morphism-gluing"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/descent.tex",
-  "place": "Tag 02W3, lemma-descending-types-morphisms, general-base proof, affine-open restriction and relative gluing"
+  "place": "Tag 02W3, general-base proof; Tag 01LH, relative gluing; global Cartesian verification uses Mathlib Scheme.isPullback_of_openCover"
  },
  "mathlib_searches": [
   {
@@ -161,11 +175,11 @@
  "reviewed_proof": {
   "date": "2026-10-12",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "Y3",
+  "reviewer": "X-7e963",
+  "group": "B3",
   "result": "pass",
-  "landing": "20261012T095933-L-328556",
+  "landing": "20261012T144053-L-2089049",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent Codex review: Matched delivered Lean statements and proofs with both DAG nodes and Stacks sources; signatures unchanged, delivery and sole direct importer compile cleanly, axioms match the reported remaining sorry."
  }
 }
