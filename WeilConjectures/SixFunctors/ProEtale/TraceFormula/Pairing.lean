@@ -441,8 +441,15 @@ theorem integral_eq_sum_localTerm {E : Scheme.{u}} (aE : E ⟶ s) [IsGeometric a
     (hdisj : Pairwise fun i i' ↦ Disjoint (Set.range (j i).base) (Set.range (j i').base))
     (hcover : ⋃ i, Set.range (j i).base = Set.univ)
     (α : G.borelMooreSections aE) :
-    G.integral aE α = ∑ i, G.localTerm aE (j i) (hclosed i) α :=
-  sorry
+    G.integral aE α = ∑ i, G.localTerm aE (j i) (hclosed i) α := by
+  have h := NatTrans.congr_app (sum_clopenIdempotent A j hclosed hdisj hcover) (𝟙_ _)
+  rw [NatTrans.app_sum, NatTrans.id_app] at h
+  have h' : (∑ i, (clopenIdempotent A (j i) (hclosed i)).app (𝟙_ _)) ≫ α = α := by
+    rw [h]
+    exact Category.id_comp α
+  conv_lhs => rw [← h']
+  simp only [localTerm, integral, borelMoorePushforward, Preadditive.sum_comp,
+    Preadditive.comp_sum, Functor.map_sum, Category.assoc]
 
 end GeometricOperations
 

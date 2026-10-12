@@ -77,6 +77,22 @@ category `(Perf R, ⊗ᴸ_R, R)` of perfect complexes over a commutative ring `R
 noncomputable def trace {X : C} [HasRightDual X] (f : X ⟶ X) : 𝟙_ C ⟶ 𝟙_ C :=
   η_ X Xᘁ ≫ f ▷ Xᘁ ≫ (β_ X Xᘁ).hom ≫ ε_ X Xᘁ
 
+/-- The trace is cyclic: `tr(g ≫ h) = tr(h ≫ g)` for `g : X ⟶ Y` and `h : Y ⟶ X`. -/
+theorem trace_comp_comm {X Y : C} [HasRightDual X] [HasRightDual Y] (g : X ⟶ Y) (h : Y ⟶ X) :
+    trace (g ≫ h) = trace (h ≫ g) := by
+  symm
+  simp only [trace, MonoidalCategory.comp_whiskerRight, Category.assoc]
+  rw [← coevaluation_comp_rightAdjointMate_assoc, whisker_exchange_assoc,
+    BraidedCategory.braiding_naturality_right_assoc, rightAdjointMate_comp_evaluation,
+    ← BraidedCategory.braiding_naturality_left_assoc]
+
+/-- Blueprint `prop-trf-trace-formal-laws` (1), conjugacy invariance of the trace: if
+`w : X ≅ X'` intertwines `f : X ⟶ X` and `f' : X' ⟶ X'`, then `tr(f) = tr(f')`. -/
+theorem trace_eq_of_iso {X X' : C} [HasRightDual X] [HasRightDual X'] (w : X ≅ X') (f : X ⟶ X)
+    (f' : X' ⟶ X') (h : f ≫ w.hom = w.hom ≫ f') : trace f = trace f' := by
+  have : f' = w.inv ≫ f ≫ w.hom := by rw [h, Iso.inv_hom_id_assoc]
+  rw [this, trace_comp_comm, Category.assoc, Iso.hom_inv_id, Category.comp_id]
+
 /-- In a braided monoidal closed category, the internal hom `[X, 𝟙_ C]` out of an object `X`
 with a right dual `Xᘁ` is isomorphic to `Xᘁ`: both `ihom X` and `tensorRight Xᘁ` are right
 adjoint to `X ⊗ - ≅ - ⊗ X`. -/
