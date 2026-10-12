@@ -314,3 +314,50 @@ theorem finrank_homology_baseChange_eq_of_isScalarTower :
 end FieldExtension
 
 end CategoryTheory.ShortComplex
+
+namespace HomologicalComplex
+
+variable {A : Type u} [CommRing A] (B : Type u) [CommRing B] [Algebra A B] {ι : Type*}
+  {c : ComplexShape ι} {P C : HomologicalComplex (ModuleCat.{u} A) c} (φ : P ⟶ C) (i : ι)
+
+/-- A morphism of complexes inducing isomorphisms in homology in degree `i`, before and after base
+change to `B`, identifies the base change maps on the homology in degree `i`. -/
+theorem bijective_homologyBaseChange_iff_of_quasiIsoAt [QuasiIsoAt φ i]
+    [QuasiIsoAt (((ModuleCat.baseChange A B).mapHomologicalComplex c).map φ) i] :
+    Function.Bijective ((P.sc i).homologyBaseChange B) ↔
+      Function.Bijective ((C.sc i).homologyBaseChange B) := by
+  let ψ := (shortComplexFunctor _ c i).map φ
+  have h₁ : IsIso (ShortComplex.homologyMap ψ) := inferInstanceAs (IsIso (homologyMap φ i))
+  have h₂ : IsIso (ShortComplex.homologyMap ((ModuleCat.baseChange A B).mapShortComplex.map ψ)) :=
+    inferInstanceAs
+      (IsIso (homologyMap (((ModuleCat.baseChange A B).mapHomologicalComplex c).map φ) i))
+  let e₁ := (asIso (ShortComplex.homologyMap ψ)).toLinearEquiv.baseChange A B _ _
+  let e₂ := (asIso (ShortComplex.homologyMap
+    ((ModuleCat.baseChange A B).mapShortComplex.map ψ))).toLinearEquiv
+  have hc : ⇑((C.sc i).homologyBaseChange B) ∘ ⇑e₁ =
+      ⇑e₂ ∘ ⇑((P.sc i).homologyBaseChange B) :=
+    funext fun x ↦ ShortComplex.homologyBaseChange_naturality B ψ x
+  constructor
+  · intro h
+    have := e₂.bijective.comp h
+    rw [← hc] at this
+    exact (Function.Bijective.of_comp_iff _ e₁.bijective).1 this
+  · intro h
+    have := h.comp e₁.bijective
+    rw [hc] at this
+    exact (Function.Bijective.of_comp_iff' e₂.bijective _).1 this
+
+/-- A quasi-isomorphism in degree `i` after base change to a field `L` does not change the
+dimension of the homology. -/
+theorem finrank_homology_baseChange_eq_of_quasiIsoAt (L : Type u) [Field L] [Algebra A L]
+    [QuasiIsoAt (((ModuleCat.baseChange A L).mapHomologicalComplex c).map φ) i] :
+    Module.finrank L ((C.sc i).baseChange L).homology =
+      Module.finrank L ((P.sc i).baseChange L).homology := by
+  let ψ := (shortComplexFunctor _ c i).map φ
+  have h₂ : IsIso (ShortComplex.homologyMap ((ModuleCat.baseChange A L).mapShortComplex.map ψ)) :=
+    inferInstanceAs
+      (IsIso (homologyMap (((ModuleCat.baseChange A L).mapHomologicalComplex c).map φ) i))
+  exact (asIso (ShortComplex.homologyMap
+    ((ModuleCat.baseChange A L).mapShortComplex.map ψ))).toLinearEquiv.finrank_eq.symm
+
+end HomologicalComplex
