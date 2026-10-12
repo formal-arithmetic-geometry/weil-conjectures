@@ -7677,3 +7677,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 13:02 L: returned deliver/Z2/Sheaf.AlgebraicGeometry.StrictHenselizationStructuralMap (reviewer RETURN: (reviewer X-cf25b, head cf25b19f5) F: The change record's ## Users omits seven computed users reported in packet §1(d): )
 - 13:03 L: returned deliver/Z2/Sheaf.AlgebraicGeometry.SingleComplexBaseChangeStalkCondition (reviewer RETURN: (reviewer X-6a6d7, head 6a6d7c095) Forced adaptations: the original SingleComplexAffineBaseChange, SingleComplexBaseChan)
 - 13:04 L: merged deliver/P2/Sheaf.AlgebraicGeometry.EtaleFieldPointFunctor (stage 3; reviewer PASS; first push; landing 20261012T130429-L-1295874 (interface); batch 20261012T120425; modules 3; new nodes 2)
+- 13:04 L: returned deliver/Z2/Sheaf.AlgebraicGeometry.PrincipalOpenCechTotal (reviewer RETURN: (reviewer X-9daf5, head 9daf5f262) A2 / forced adaptations: `AffineKoszulCechDerivedComparison` changes the existing dec)
