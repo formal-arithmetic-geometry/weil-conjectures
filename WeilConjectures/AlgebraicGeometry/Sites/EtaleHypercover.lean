@@ -286,6 +286,90 @@ noncomputable def _root_.AlgebraicGeometry.Etale.pullbackSection
   (((Etale.upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) g).unit.app F).hom.app
     (op V)).hom
 
+
+/-- Naturality of `Etale.pullbackSection` in the sheaf. -/
+lemma _root_.AlgebraicGeometry.Etale.pullbackSection_naturality
+    {F F' : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)} (φ : F ⟶ F') (V : X.Etale)
+    (s : F.obj.obj (op V)) :
+    (((Etale.upperStar (ModuleCat.{u + 1} Λ) g).map φ).hom.app _).hom
+        (Etale.pullbackSection Λ g F V s) =
+      Etale.pullbackSection Λ g F' V ((φ.hom.app _).hom s) := by
+  have h := congrArg (fun k ↦ (k.hom.app (op V)).hom s)
+    ((Etale.upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) g).unit.naturality φ)
+  exact h.symm
+
+/-- Naturality of `Etale.pullbackSection` in the étale `X`-scheme. -/
+lemma _root_.AlgebraicGeometry.Etale.pullbackSection_map
+    (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) {V V' : X.Etale} (a : V' ⟶ V)
+    (s : F.obj.obj (op V)) :
+    (((Etale.upperStar (ModuleCat.{u + 1} Λ) g).obj F).obj.map
+        ((MorphismProperty.Over.pullback @Etale ⊤ g).map a).op).hom
+        (Etale.pullbackSection Λ g F V s) =
+      Etale.pullbackSection Λ g F V' ((F.obj.map a.op).hom s) := by
+  have h := congrArg (fun k ↦ k.hom s)
+    (((Etale.upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) g).unit.app F).hom.naturality
+      a.op)
+  exact h.symm
+
+open SemiSimplicialObject in
+/-- The comparison map `Λ[V ×_X Y] ⟶ g^* Λ[V]` of free sheaves: it corresponds to the pullback
+of the tautological section of `Λ[V]` over `V`. -/
+noncomputable def _root_.AlgebraicGeometry.Etale.freeSheafBaseChange (V : X.Etale) :
+    (freeSheaf Y.smallEtaleTopology Λ).obj ((MorphismProperty.Over.pullback @Etale ⊤ g).obj V) ⟶
+      (Etale.upperStar (ModuleCat.{u + 1} Λ) g).obj ((freeSheaf X.smallEtaleTopology Λ).obj V) :=
+  (freeSheafHomEquiv _ _ _ _).symm (Etale.pullbackSection Λ g _ V
+    (freeSheafHomEquiv _ _ _ _ (𝟙 _)))
+
+open SemiSimplicialObject in
+lemma _root_.AlgebraicGeometry.Etale.freeSheafHomEquiv_freeSheafBaseChange_comp (V : X.Etale)
+    {M : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)}
+    (φ : (freeSheaf X.smallEtaleTopology Λ).obj V ⟶ M) :
+    freeSheafHomEquiv _ _ _ _
+        (Etale.freeSheafBaseChange Λ g V ≫ (Etale.upperStar (ModuleCat.{u + 1} Λ) g).map φ) =
+      Etale.pullbackSection Λ g M V (freeSheafHomEquiv _ _ _ _ φ) := by
+  rw [freeSheafHomEquiv_comp, Etale.freeSheafBaseChange, Equiv.apply_symm_apply,
+    Etale.pullbackSection_naturality, ← freeSheafHomEquiv_comp, Category.id_comp]
+
+open SemiSimplicialObject in
+lemma _root_.AlgebraicGeometry.Etale.map_comp_freeSheafBaseChange {V V' : X.Etale}
+    (a : V' ⟶ V) :
+    (freeSheaf Y.smallEtaleTopology Λ).map ((MorphismProperty.Over.pullback @Etale ⊤ g).map a) ≫
+        Etale.freeSheafBaseChange Λ g V =
+      Etale.freeSheafBaseChange Λ g V' ≫
+        (Etale.upperStar (ModuleCat.{u + 1} Λ) g).map
+          ((freeSheaf X.smallEtaleTopology Λ).map a) := by
+  apply (freeSheafHomEquiv _ _ _ _).injective
+  rw [freeSheafHomEquiv_map_comp, Etale.freeSheafHomEquiv_freeSheafBaseChange_comp,
+    Etale.freeSheafBaseChange, Equiv.apply_symm_apply, Etale.pullbackSection_map,
+    ← freeSheafHomEquiv_map_comp, Category.comp_id]
+
+open SemiSimplicialObject in
+/-- The comparison morphism `Λ[U_• ×_X Y] ⟶ g^* Λ[U_•]` of free complexes. -/
+noncomputable def _root_.AlgebraicGeometry.Etale.freeComplexBaseChange
+    (U : SemiSimplicialObject X.Etale) :
+    (U.baseChange g).freeComplex Y.smallEtaleTopology Λ ⟶
+      ((Etale.upperStar (ModuleCat.{u + 1} Λ) g).mapHomologicalComplex _).obj
+        (U.freeComplex X.smallEtaleTopology Λ) where
+  f n := Etale.freeSheafBaseChange Λ g (U.obj n)
+  comm' i j hij := by
+    obtain rfl : i = j + 1 := hij.symm
+    rw [Functor.mapHomologicalComplex_obj_d, freeComplex_d, freeComplex_d, Functor.map_sum,
+      Preadditive.comp_sum, Preadditive.sum_comp]
+    refine Finset.sum_congr rfl fun k _ ↦ ?_
+    rw [Functor.map_zsmul, Preadditive.comp_zsmul, Preadditive.zsmul_comp]
+    congr 1
+    exact (Etale.map_comp_freeSheafBaseChange Λ g (U.δ j k)).symm
+
+open SemiSimplicialObject in
+/-- The comparison of free sheaves is compatible with the augmentations to the constant sheaves
+and the isomorphism `g^* Λ ≅ Λ`. -/
+lemma _root_.AlgebraicGeometry.Etale.freeAugmentation_baseChange (V : X.Etale) :
+    (presheafToSheaf _ _).map
+        (freeYonedaToConst Λ ((MorphismProperty.Over.pullback @Etale ⊤ g).obj V)) ≫
+      ((Etale.constantSheafCompUpperStarIso Λ g).app (ModuleCat.of Λ Λ)).inv =
+      Etale.freeSheafBaseChange Λ g V ≫ (Etale.upperStar (ModuleCat.{u + 1} Λ) g).map
+        ((presheafToSheaf _ _).map (freeYonedaToConst Λ V)) := by
+  sorry
 /-- The restriction map `H^q(X, F) ⟶ H^q(Y, g^* F)` of étale cohomology along `g : Y ⟶ X`:
 pull back extension classes along the exact functor `g^*`, which preserves the constant sheaf
 `Λ`. -/
@@ -306,8 +390,28 @@ theorem _root_.AlgebraicGeometry.Etale.cohomologyRestrict_cohomologyClass
     (hz : U.IsCocycle F q z) :
     Etale.cohomologyRestrict Λ g F q (hU.cohomologyClass F q z hz) =
       (hU.baseChange g).cohomologyClass _ q (Etale.pullbackSection Λ g F (U.obj q) z)
-        (hz.map ((Etale.upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) g).unit.app F)) :=
-  sorry
+        (hz.map ((Etale.upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) g).unit.app F)) := by
+  have hK := hU.isResolution (R := Λ)
+  have hK' := (hU.baseChange g).isResolution (R := Λ)
+  let G := Etale.upperStar (ModuleCat.{u + 1} Λ) g
+  let φ := (SemiSimplicialObject.freeSheafHomEquiv _ _ (U.obj q) F).symm z
+  let c := Etale.freeComplexBaseChange Λ g U
+  have hcφ : c.f q ≫ G.map φ = (SemiSimplicialObject.freeSheafHomEquiv _ _ _ _).symm
+      (Etale.pullbackSection Λ g F (U.obj q) z) := by
+    apply (SemiSimplicialObject.freeSheafHomEquiv _ _ _ _).injective
+    refine (Etale.freeSheafHomEquiv_freeSheafBaseChange_comp Λ g _ φ).trans ?_
+    erw [Equiv.apply_symm_apply, Equiv.apply_symm_apply]
+  change (Ext.mk₀ _).comp ((hU.cohomologyClass F q z hz).mapExactFunctor G) (zero_add q) = _
+  rw [SemiSimplicialObject.IsHypercover.cohomologyClass, hK.mapExt_cocycleClass G,
+    SemiSimplicialObject.IsHypercover.cohomologyClass]
+  refine Eq.symm ((hK.map G).splicing_extClass_comp_mk₀ hK'.splicing c.f _ ?_ ?_ q (G.map φ) _
+    (hK'.desc q _ _) ?_)
+  · exact Etale.freeAugmentation_baseChange Λ g (U.obj 0)
+  · intro n
+    simp only [ChainComplex.IsResolution.splicing_g, ChainComplex.IsResolution.splicing_f]
+    rw [reassoc_of% (hK'.π_ι n), c.comm]
+  · simp only [ChainComplex.IsResolution.splicing_g, ChainComplex.IsResolution.π_desc]
+    exact hcφ.symm
 
 end BaseChange
 
