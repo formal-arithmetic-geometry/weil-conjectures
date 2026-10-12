@@ -5776,3 +5776,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 01:02 L: merged deliver/U1/Sheaf.Topology.InverseImageModule (stage 3; reviewer PASS; first push; landing 20261012T010114-L-707596 (interface); modules 3; new nodes 2)
 - 01:02 L: returned deliver/J1/Sheaf.AlgebraicGeometry.EtaleCohomologyFilteredColimit (reviewer RETURN: (reviewer X-c7148, head c714864ce) C1: In dag/nodes/sec-curve-estimates/lem-weil-pbc-cohomology-filtered-colimit.json, p)
 - 01:06 L: returned deliver/T1/Sheaf.AlgebraicGeometry.FiniteAffineCoverRestrictionBound (reviewer RETURN: (reviewer X-96f6c, head 96f6c44ed) C6: the new node's stmt_deps points to lem-weil-pbc-finite-affine-cover-restriction-b)
+- 01:06 L: returned deliver/S1/Sheaf.AlgebraicGeometry.AffineClosedInjectiveAcyclic (reviewer RETURN: (reviewer X-a10b8, head a10b83e87) D1/D2: `AlgebraicGeometry.Etale.affine_closed_injective_cohomology_comparison` has th)
