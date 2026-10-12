@@ -1,0 +1,125 @@
+{
+ "id": "lem-weil-pbc-etale-triples-filtered-colimit-colimit",
+ "kind": "lemma",
+ "title": "Existence of the etale residue triples ring colimit",
+ "statement": "Let $R$ be a commutative ring, $p\\in\\operatorname{Spec}R$, and $K$ a separable closure of $\\kappa(p)$ with prescribed algebra map $\\chi:\\kappa(p)\\to K$. Let $\\mathcal T$ be the category of etale residue triples [def-weil-pbc-etale-residue-triples], and $D:\\mathcal T\\to\\mathrm{CommRing}$ its ring diagram. There exist a colimit cocone $c$ of $D$, a ring map $\\rho:R\\to c$, and a ring map $\\psi:c\\to K$, such that for every triple $t=(B,\\alpha,q,\\phi)$, $\\iota_t\\circ\\alpha=\\rho$ and $\\psi\\circ\\iota_t$ is the canonical composite $B\\to\\kappa(q)\\xrightarrow{\\phi}K$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 04GW (lemma-strict-henselization-different), colimit in the statement; Mathlib Scheme.AffineEtale.instEssentiallySmall and CommRingCat.hasColimits_commRingCat for size and existence"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-etale-residue-triples"
+ ],
+ "proof": [
+  {
+   "text": "Use essential smallness of affine etale schemes over Spec R. For each representative its primes and residue embeddings in K form a small set; transporting these along affine isomorphisms yields a small full category of triples equivalent to the original category.",
+   "uses": [
+    "lem-weil-pbc-affine-etale-essentially-small-cover"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Mathlib CommRingCat.hasColimits_commRingCat supplies the colimit of the restricted small ring diagram; hasColimit_of_equivalence_comp transports the colimit to the full category.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "The identity triple t0 has a morphism to each triple t given by its structural map alpha. Set rho equal to the coprojection at t0; cocone naturality gives iota_t composed with alpha = rho.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "The morphism equations in the under-over category say exactly that the composites B to kappa(q) to K are a cocone. Descend this cocone through IsColimit to obtain psi; its factorization equations give the second compatibility for every t.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-affine-etale-essentially-small-cover"
+ ],
+ "proof_origin": "Stacks Tag 04GW; smallness and ordinary small ring colimits from Mathlib, then identity-triple naturality and the colimit universal property. Expanded by the C2 second reader.",
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.EtaleResidueTriplesColimit",
+  "date": "2026-10-12",
+  "group": "C2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-etale-triples-filtered-colimit",
+   "place": "proof split",
+   "via": []
+  },
+  "same_as": null
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.EtaleResidueTriplesExistsColimit",
+  "file": "lean/Sheaf/RingTheory/EtaleResidueTriplesExistsColimit.lean",
+  "declaration": "AlgebraicGeometry.Scheme.etaleResidueTriples_exists_colimit_part",
+  "statement": "theorem etaleResidueTriples_exists_colimit_part (R : CommRingCat.{u}) (p : Spec R) (K : Type u) [Field K] [Algebra ((Spec R).residueField p) K] [IsSepClosure ((Spec R).residueField p) K] : ∃ c : Cocone (etaleResidueTriplesRingDiagram R p K (CommRingCat.ofHom (algebraMap ((Spec R).residueField p) K))), Nonempty (IsColimit c) ∧ ∃ (ρ : R ⟶ c.pt) (ψ : c.pt →+* K), (∀ t, t.α ≫ c.ι.app t = ρ) ∧ (∀ t, ψ.comp (c.ι.app t).hom = ((ΓSpecIso t.B).inv ≫ (Spec t.B).Γevaluation t.q ≫ t.φ).hom)",
+  "branch": "sheaf-dag",
+  "by": "C2",
+  "date": "2026-10-12"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Filtered colimit of etale residue triples",
+   "results": "unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsFiltered",
+   "results": "unknown identifier; no match",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "strictHenselization|etaleResidueTriples",
+   "results": "no existing declaration",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C2",
+  "result": "pass",
+  "landing": "20261012T060733-L-2905295",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C2",
+  "result": "pass",
+  "landing": "20261012T060733-L-2905295",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

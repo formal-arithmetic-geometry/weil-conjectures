@@ -9,6 +9,8 @@ public import Sheaf.AlgebraicGeometry.EtaleResidueTriples
 public import Mathlib.CategoryTheory.Filtered.Basic
 public import Mathlib.CategoryTheory.Limits.HasLimits
 public import Mathlib.FieldTheory.IsSepClosed
+import Sheaf.RingTheory.EtaleResidueTriplesFiltered
+import Sheaf.RingTheory.EtaleResidueTriplesExistsColimit
 
 /-!
 # Filtered colimit of pointed etale algebras
@@ -51,6 +53,8 @@ theorem etaleResidueTriples_filtered_colimit
         (∀ t, t.α ≫ c.ι.app t = ρ) ∧
         (∀ t, ψ.comp (c.ι.app t).hom =
           ((ΓSpecIso t.B).inv ≫ (Spec t.B).Γevaluation t.q ≫ t.φ).hom) := by
-  sorry
+  exact ⟨etaleResidueTriples_filtered_part R p K
+      (CommRingCat.ofHom (algebraMap ((Spec R).residueField p) K)),
+    etaleResidueTriples_exists_colimit_part R p K⟩
 
 end AlgebraicGeometry.Scheme
