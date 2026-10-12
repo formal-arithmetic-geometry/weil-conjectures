@@ -1,6 +1,6 @@
 # Work queue
 
-106 items; claim with `tools/claim.py next <group> [--stage N]`.
+104 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (8)
 
@@ -23,7 +23,7 @@
 
 Not open yet: 42 nodes that wait for stage 1, 2 nodes that wait for a statement dependency.
 
-## Stage 3: modules to prove (97)
+## Stage 3: modules to prove (95)
 
 | module | distance to a target | sorry | kind |
 |---|---|---|---|
@@ -39,7 +39,6 @@ Not open yet: 42 nodes that wait for stage 1, 2 nodes that wait for a statement 
 | `Sheaf.AlgebraicGeometry.ProperGeometricPointExchange` | 2 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.ReductionUniversalHomeomorphism` | 2 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.TorsionSheafCharacterizations` | 2 | 2 | proof |
-| `Sheaf.CategoryTheory.ExtExactFunctorCompositionComparison` | 2 | 1 | proof |
 | `WeilConjectures.AlgebraicGeometry.Cohomology.EulerChar` | 2 | 1 | proof |
 | `WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.ProjectiveLine.StrictHenselian` | 2 | 1 | proof |
 | `WeilConjectures.SixFunctors.Etale.Gabber` | 2 | 4 | proof |
@@ -55,7 +54,6 @@ Not open yet: 42 nodes that wait for stage 1, 2 nodes that wait for a statement 
 | `Sheaf.AlgebraicGeometry.ModuleSubobjectGenericNeighbourhood` | 4 | 1 | proof |
 | `Sheaf.ConstructibleSheaf.LocallyConstantCoverFiltration` | 4 | 1 | proof |
 | `Sheaf.ConstructibleSheaf.LocallyConstantRetraction` | 4 | 1 | proof |
-| `Sheaf.Paper.ZeroDimensionalEtaleCohomologyIso` | 4 | 1 | proof |
 | `Sheaf.Paper.ZeroDimensionalGlobalSectionsExact` | 4 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.ConstructibleColimitCocone` | 5 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.ConstructibleFilteredData` | 5 | 1 | proof |
