@@ -139,9 +139,8 @@ lemma eq_zero_of_germ_diagLift_eq_zero {R : Type (u + 1)} [Ring R]
     rw [← Functor.map_comp, ← op_comp, hr, op_id]
     exact P.obj.map_id _
   have := congrArg (fun φ ↦ φ.hom σ) e
-  simp only [ModuleCat.hom_comp, LinearMap.comp_apply, ModuleCat.hom_id, LinearMap.id_apply] at this
-  refine this.symm.trans ?_
-  rw [← h, map_zero]
+  simp only [ModuleCat.hom_comp, LinearMap.comp_apply, ModuleCat.hom_id] at this
+  refine this.symm.trans ((congrArg (P.obj.map r.op).hom h.symm).trans (map_zero _))
 
 end Diagonal
 
