@@ -7252,3 +7252,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 09:59 L: merged deliver/N3/Sheaf.Topology.GlueSheavesOfModules (stage 3; reviewer PASS; first push; landing 20261012T095916-L-321846 (interface); batch 20261012T095846; modules 2; new nodes 1)
 - 09:59 L: merged deliver/P1/Sheaf.AlgebraicGeometry.RingedSpaceDerivedDirectImage (stage 3; reviewer PASS; after a return; landing 20261012T095916-L-321942 (interface); batch 20261012T095846; modules 1; new nodes 0; change records: coord/changes/P1-ringed-space-direct-image-grothendieck.md)
 - 09:59 L: merged deliver/P1/Sheaf.CategoryTheory.SiteSesCechH1Surjective (stage 3; reviewer PASS; first push; landing 20261012T095917-L-322040 (proof); batch 20261012T095846; modules 1; new nodes 0)
+- 09:59 L: merged deliver/P1/Sheaf.RingTheory.GradedFreeCover (stage 3; reviewer PASS; first push; landing 20261012T095917-L-322135 (proof); batch 20261012T095846; modules 1; new nodes 0)
