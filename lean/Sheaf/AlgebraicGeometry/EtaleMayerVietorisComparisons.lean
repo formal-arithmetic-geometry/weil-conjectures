@@ -2,9 +2,7 @@ module
 
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
 public import Mathlib.CategoryTheory.Abelian.RightDerived
-import Sheaf.AlgebraicGeometry.EtaleModuleEnoughInjectives
-import WeilConjectures.SixFunctors.Etale.LowerShriek.EtaleMap
-import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
+import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.MapDerivedCategory
 
 @[expose] public section
 
@@ -44,6 +42,53 @@ theorem etale_mayerVietoris_comparisons (X : Scheme.{u}) (U V : X.Opens) :
         (evaluation _ _).obj (op (Scheme.Etale.mk (U ⊓ V).ι))).rightDerived n ≅
       (upperStar AddCommGrpCat.{u + 1} (U ⊓ V).ι ⋙ DerivedCategory.singleFunctor _ 0 ⋙
         cohomology AddCommGrpCat.{u + 1} (U ⊓ V).toScheme n)) := by
-  sorry
+  let A := AddCommGrpCat.{u + 1}
+  have total (Y : Scheme.{u}) (F : Sheaf Y.smallEtaleTopology A ⥤ A)
+      [F.Additive] (n : ℕ) :
+      F.rightDerived n ≅ DerivedCategory.singleFunctor _ 0 ⋙ F.rightDerivedFunctor ⋙
+        DerivedCategory.homologyFunctor A n :=
+    (F.singleFunctorCompRightDerivedFunctorPlusCompHomologyFunctorIso n).symm ≪≫
+      Functor.isoWhiskerRight
+        (Functor.isoWhiskerLeft (DerivedCategory.Plus.singleFunctor _ 0)
+          F.rightDerivedFunctorPlusCompatibility) (DerivedCategory.homologyFunctor A n)
+  have ambient : Nonempty (∀ n : ℕ,
+      (sheafToPresheaf X.smallEtaleTopology A ⋙
+        (evaluation _ _).obj (op (Scheme.Etale.mk (𝟙 X)))).rightDerived n ≅
+      (DerivedCategory.singleFunctor _ 0 ⋙ cohomology A X n)) := by
+    let E := sheafToPresheaf X.smallEtaleTopology A ⋙
+      (evaluation _ _).obj (op (Scheme.Etale.mk (𝟙 X)))
+    let e : E ≅ Sheaf.Γ X.smallEtaleTopology A :=
+      (Sheaf.ΓNatIsoSheafSections X.smallEtaleTopology A
+        (MorphismProperty.Over.mkIdTerminal _ _)).symm
+    exact ⟨fun n ↦ total X E n ≪≫ Functor.isoWhiskerLeft
+      (DerivedCategory.singleFunctor _ 0)
+      (Functor.isoWhiskerRight (Functor.rightDerivedFunctorNatIso e)
+        (DerivedCategory.homologyFunctor A n))⟩
+  have onOpen (W : X.Opens) : Nonempty (∀ n : ℕ,
+      (sheafToPresheaf X.smallEtaleTopology A ⋙
+        (evaluation _ _).obj (op (Scheme.Etale.mk W.ι))).rightDerived n ≅
+      (upperStar A W.ι ⋙ DerivedCategory.singleFunctor _ 0 ⋙
+        cohomology A W.toScheme n)) := by
+    let T := upperStar A W.ι
+    let G := Sheaf.Γ W.toScheme.smallEtaleTopology A
+    let E := sheafToPresheaf X.smallEtaleTopology A ⋙
+      (evaluation _ _).obj (op (Scheme.Etale.mk W.ι))
+    let e : T ⋙ G ≅ E :=
+      Functor.isoWhiskerLeft T
+        (Sheaf.ΓNatIsoSheafSections W.toScheme.smallEtaleTopology A
+          (MorphismProperty.Over.mkIdTerminal _ _)) ≪≫
+      Functor.isoWhiskerRight (upperStarIsoLocalizationRestriction A W.ι inferInstance)
+        ((sheafSections W.toScheme.smallEtaleTopology A).obj
+          (op (Scheme.Etale.mk (𝟙 W.toScheme))))
+    let : T.PreservesKInjectiveComplexes :=
+      (openImmersionLowerShriekUpperStarAdjunction A W.ι).preservesKInjectiveComplexes
+    exact ⟨fun n ↦ total X E n ≪≫ Functor.isoWhiskerLeft
+      (DerivedCategory.singleFunctor _ 0)
+      (Functor.isoWhiskerRight
+        ((Functor.rightDerivedFunctorNatIso e).symm ≪≫
+          Functor.rightDerivedFunctorCompIso T G) (DerivedCategory.homologyFunctor A n)) ≪≫
+      Functor.isoWhiskerRight T.singleFunctorCompRightDerivedFunctorIso
+        (G.rightDerivedFunctor ⋙ DerivedCategory.homologyFunctor A n)⟩
+  exact ⟨ambient, onOpen U, onOpen V, onOpen (U ⊓ V)⟩
 
 end AlgebraicGeometry.Etale

@@ -16,47 +16,56 @@
  ],
  "proof": [
   {
-   "text": "Choose bounded below injective resolutions of abelian sheaves on the small etale site. Right derived evaluation at an etale object is homology of its evaluated resolution. Bounded below complexes of injectives are K-injective, so the total right derived global sections of a sheaf in degree zero is computed on the same resolutions.",
+   "text": "Use the upstream natural isomorphism singleFunctorCompRightDerivedFunctorPlusCompHomologyFunctorIso, transported through rightDerivedFunctorPlusCompatibility, to identify each classical R^n F with H^n(RF(-[0])). The sheaf categories and coefficient category have the required injective and K-injective resolutions by the existing Grothendieck-abelian instances.",
    "uses": [
-    "lem-weil-pbc-module-sheaves-enough-injectives",
-    "lem-weil-pbc-left-exact-injective-resolution-degree-zero",
-    "lem-weil-pbc-dplus-injective-representative",
+    "lem-sp-derived-functor-single-identification",
     "def-weil-pbc-etale-cohomology"
    ],
    "elementary": false
   },
   {
-   "text": "For each W in {U,V,U intersection V}, inverse image along its open immersion is restriction to the localized etale site and preserves injectives (it is right adjoint to exact extension by zero). Thus restriction of a chosen injective resolution is an injective resolution on W. The restriction identification identifies its global sections degreewise with evaluation of the original resolution at W.",
+   "text": "Evaluation at id_X is naturally isomorphic to global sections by Mathlib Sheaf.ΓNatIsoSheafSections and MorphismProperty.Over.mkIdTerminal. Transport this isomorphism through rightDerivedFunctorNatIso and then homology to obtain the ambient comparison.",
    "uses": [
-    "lem-weil-pbc-etale-inverse-image-restriction",
-    "lem-weil-pbc-etale-restriction-injectives"
+    "def-weil-pbc-global-sections-functor"
    ],
    "elementary": false
   },
   {
-   "text": "Taking homology yields the three open comparison isomorphisms. For X no restriction is needed: evaluation at the identity etale object is global sections. The maps between injective resolutions and their homotopy uniqueness give naturality in the coefficient sheaf, as required for functor isomorphisms. Apply this independently in every nonnegative degree. The construction does not use a covering condition on U and V.",
+   "text": "For an arbitrary open W, upperStarIsoLocalizationRestriction and ΓNatIsoSheafSections identify upperStar(W) followed by global sections with evaluation at W. The exact extension-by-zero left adjoint gives preservation of K-injective complexes by Adjunction.preservesKInjectiveComplexes. Thus rightDerivedFunctorCompIso identifies the total derived evaluation with R(upperStar(W)) followed by derived global sections. Exactness of upperStar gives singleFunctorCompRightDerivedFunctorIso, moving the restriction back to sheaves before the degree-zero embedding. Whisker these natural isomorphisms with homology to obtain the open comparison.",
    "uses": [
-    "def-sp-injective-resolutions",
-    "def-weil-pbc-global-sections-functor"
+    "lem-weil-pbc-etale-inverse-image-restriction",
+    "lem-weil-pbc-extension-by-zero-adjunction",
+    "lem-weil-pbc-extension-by-zero-exact",
+    "lem-weil-pbc-right-adjoint-preserves-kinjective",
+    "def-weil-pbc-inverse-image",
+    "def-weil-pbc-global-sections-functor",
+    "def-weil-pbc-etale-cohomology"
    ],
    "elementary": false
+  },
+  {
+   "text": "Assemble the ambient comparison and the open comparisons specialized to U, V, and U intersection V. There is no cover hypothesis and no restriction on n beyond nonnegativity.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-module-sheaves-enough-injectives",
-  "lem-weil-pbc-left-exact-injective-resolution-degree-zero",
-  "lem-weil-pbc-dplus-injective-representative",
+  "lem-sp-derived-functor-single-identification",
   "def-weil-pbc-etale-cohomology",
+  "def-weil-pbc-global-sections-functor",
   "lem-weil-pbc-etale-inverse-image-restriction",
-  "lem-weil-pbc-etale-restriction-injectives",
-  "def-sp-injective-resolutions",
-  "def-weil-pbc-global-sections-functor"
+  "lem-weil-pbc-extension-by-zero-adjunction",
+  "lem-weil-pbc-extension-by-zero-exact",
+  "lem-weil-pbc-right-adjoint-preserves-kinjective",
+  "def-weil-pbc-inverse-image"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "worker",
+  "group": "F2",
+  "date": "2026-10-12",
   "document": "literature/stacks-project/sites-cohomology.tex",
   "place": "Lemma Tag 03F3 (2), with (1) for injective restriction; comparison of resolution cohomology with total derived global sections",
-  "note": "Second reader separated the resolution comparison from the raw exact sequence; homotopy uniqueness gives coefficient naturality."
+  "note": "Second reading replaced sorry-backed component-pair repackaging by a direct composition of existing natural comparison isomorphisms in Mathlib and the upstream library. No new statements. Local #print axioms reports only propext, Classical.choice, Quot.sound."
  },
  "mathlib_searches": [
   {
@@ -131,10 +140,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "U1",
+  "group": "F2",
   "result": "pass",
-  "landing": "20261012T044756-L-2041165",
-  "kind": "interface",
+  "landing": "20261012T060736-L-2906602",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
