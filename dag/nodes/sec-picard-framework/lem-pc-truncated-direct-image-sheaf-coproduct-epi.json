@@ -14,54 +14,36 @@
  ],
  "proof": [
   {
-   "text": "Choose representatives and identify the cohomology of the ambient coproduct with the sums. Exact sums commute with canonical lower truncation and give the common bound a.",
+   "text": "Lower-truncate the summands and the ambient coproduct at a. Mathlib standard t-structure supplies vanishing of their cohomology below a. The second-page coproduct theorem gives the canonical R^p f_* H^r comparison isomorphisms.",
    "uses": [
-    "lem-pc-derived-ambient-direct-sums",
-    "lem-pc-quasicoherent-module-coproducts"
+    "lem-pc-truncated-direct-image-second-page-coproduct"
    ],
    "elementary": false
   },
   {
-   "text": "Apply natural bounded-below hypercohomology. On affine opens, qcqs cohomology of the inverse image commutes with sums; the higher-direct-image presheaf description and sheafification give second-page isomorphisms.",
+   "text": "Specialize the bounded-below coproduct filtration theorem to module direct image. Pushforward is additive and preserves finite limits. It gives finite filtrations and a filtered comparison with isomorphic graded maps whose underlying map is the canonical sum of the displayed cohomology maps.",
    "uses": [
-    "thm-sp-truncation-e2",
-    "lem-weil-pbc-qcqs-cohomology-direct-sum",
-    "lem-weil-pbc-higher-direct-image-presheaf",
-    "lem-weil-pbc-module-sheaves-colimits-forgetful"
+    "lem-pc-bounded-below-coproduct-filtration"
    ],
    "elementary": false
   },
   {
-   "text": "Maps of exact couples induce maps of pages. Exact sums preserve kernels, images and cokernels, so the second-page isomorphisms propagate to the stable pages.",
+   "text": "Apply finite filtration induction to obtain IsIso of the underlying map, rewrite it using the supplied equality, and use the standard IsIso-to-Epi instance. This proves the original epimorphism statement unchanged.",
    "uses": [
-    "lem-sp-couple-morphism",
-    "lem-weil-pbc-module-sheaves-colimits-forgetful"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "In total degree q, only 0 <= p <= q-a occurs. Exact sums of the uniformly finite convergent filtrations have the corresponding sums as graded pieces. Finite filtration induction makes the canonical abutment comparison an isomorphism, hence epi. Naturality identifies Sigma.desc; below a and for the empty family both sides are zero.",
-   "uses": [
-    "thm-sp-truncation-e2",
     "lem-sp-finite-filtration-induction"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-pc-derived-ambient-direct-sums",
-  "lem-pc-quasicoherent-module-coproducts",
-  "thm-sp-truncation-e2",
-  "lem-weil-pbc-qcqs-cohomology-direct-sum",
-  "lem-weil-pbc-higher-direct-image-presheaf",
-  "lem-weil-pbc-module-sheaves-colimits-forgetful",
-  "lem-sp-couple-morphism",
+  "lem-pc-truncated-direct-image-second-page-coproduct",
+  "lem-pc-bounded-below-coproduct-filtration",
   "lem-sp-finite-filtration-induction"
  ],
  "proof_origin": {
   "by": "worker",
   "document": "Stacks Project",
-  "place": "Tag 08DZ, bounded-below spectral-sequence paragraph, with Tag 015J; the glue is written by V1 from the source argument."
+  "place": "Tags 08DZ and 015J, bounded-below spectral-sequence reduction; S3 Lean assembly from second-page comparison, conditional finite filtration comparison, and existing finite filtration induction"
  },
  "mathlib_searches": [
   {
@@ -134,11 +116,11 @@
  "reviewed_proof": {
   "date": "2026-10-12",
   "by": "L",
-  "reviewer": "X-acff0",
-  "group": "V1",
+  "reviewer": "COMPILER",
+  "group": "S3",
   "result": "pass",
-  "landing": "20261012T135326-L-1696976",
+  "landing": "20261012T153650-L-2395687",
   "kind": "interface",
-  "note": "independent Codex review: Unchanged item signature and all three Lean statements match their nodes; source arguments, proof dependencies, pruning, and report agree. All delivered modules and direct importer Sheaf.AlgebraicGeometry.DerivedDirectImageTruncatedCoproduct compile cleanly; axiom probes show only permitted axioms plus sorryAx from the two recorded holes."
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

@@ -1,0 +1,126 @@
+{
+ "id": "lem-pc-truncated-direct-image-second-page-coproduct",
+ "kind": "statement",
+ "title": "Second-page coproduct comparison for lower-truncated direct image",
+ "statement": "Let $f:X\\to Y$ be a quasi-compact quasi-separated morphism of schemes [def-pc-scheme], and let $E_i\\in D_{\\mathrm{QCoh}}(\\mathcal O_X)$ [def-pc-derived-category] have an ambient coproduct cofan $\\iota_i:E_i\\to S$ in $D(\\mathcal O_X)$. Using canonical lower truncation [def-sbc-standard-tstructure-derived-category], for every $a,r\\in\\mathbb Z$ and $p\\in\\mathbb N$, with $Rf_*$ as in [def-pc-derived-direct-image], the canonical map $\\bigoplus_i H^p(Rf_*(H^r(\\tau_{\\ge a}E_i)[0]))\\to H^p(Rf_*(H^r(\\tau_{\\ge a}S)[0]))$ induced by $H^r(\\tau_{\\ge a}\\iota_i)$ is an isomorphism.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/08DZ",
+  "place": "Tag 08DZ, bounded-below spectral-sequence reduction, with Tag 015J"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "def-pc-derived-direct-image",
+  "def-sbc-standard-tstructure-derived-category"
+ ],
+ "proof": [
+  {
+   "text": "Choose representatives of the E_i and use derivedAmbientDirectSums to identify the given ambient coproduct cofan with the termwise coproduct. Exact sums identify the cohomology cofan after lower truncation with the coproduct cofan: for r >= a this is original cohomology, naturally in the coprojections; for r < a the source and target cohomologies are zero. Quasi-coherence of each cohomology and its sum follows from the definition and the quasi-coherent coproduct theorem.",
+   "uses": [
+    "lem-pc-derived-ambient-direct-sums",
+    "lem-pc-quasicoherent-module-coproducts"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "On affine opens V in Y the inverse image is qcqs. Apply the qcqs cohomology direct-sum theorem there. The higher-direct-image presheaf description, natural in coefficients and restrictions, and preservation of sums by module sheafification identify the comparison on the affine basis, hence on all of Y. The natural single-object compatibility between the unbounded derived functor and the ordinary right derived functor identifies this isomorphism with the displayed comparison. Empty sums and r < a give zero cofans.",
+   "uses": [
+    "lem-weil-pbc-qcqs-cohomology-direct-sum",
+    "lem-weil-pbc-higher-direct-image-presheaf",
+    "lem-weil-pbc-module-sheaves-colimits-forgetful"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-derived-ambient-direct-sums",
+  "lem-pc-quasicoherent-module-coproducts",
+  "lem-weil-pbc-qcqs-cohomology-direct-sum",
+  "lem-weil-pbc-higher-direct-image-presheaf",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "Stacks Project",
+  "place": "Tag 08DZ with Tag 015J; agent-written expansion of the spectral-sequence step"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Higher direct images of a coproduct of cohomology sheaves of lower truncated quasi coherent derived objects commute with coproducts for a qcqs scheme morphism",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a quasi compact quasi separated morphism the second page R p f star H r of bounded below hypercohomology commutes with coproducts of quasi coherent complexes",
+   "results": "Hits: CategoryTheory.GrothendieckTopology.OneHypercoverFamily.IsSheafIff.fac'_assoc, CategoryTheory.GrothendieckTopology.OneHypercover.multiforkLift_map_assoc, CategoryTheory.GrothendieckTopology.OneHypercover.f_glueMorphisms_assoc, CategoryTheory.GrothendieckTopology.OneHypercover.map_amalgamate, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_g, CategoryTheory.GrothendieckTopology.OneHypercoverFamily.IsSheafIff.fac', CategoryTheory.GrothendieckTopology.OneHypercoverFamily.IsSheafIff.fac, CategoryTheory.GrothendieckTopology.OneHypercover.multiforkLift_map",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "higher.*[Ii]mage.*[Ss]um|[Cc]oproduct.*homology|homology.*[Cc]oproduct",
+   "results": "Hits: Mathlib/CategoryTheory/Limits/FormalCoproducts/Basic.lean",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.TruncatedDirectImageSheafCoproductEpi",
+  "date": "2026-10-12",
+  "group": "S3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Tag 08DZ, second-page coproduct step in the bounded-below spectral-sequence reduction",
+   "via": [
+    "lem-pc-truncated-direct-image-sheaf-coproduct-epi",
+    "lem-pc-truncated-direct-image-affine-finite-support",
+    "lem-pc-derived-direct-image-truncated-coproduct",
+    "lem-pc-derived-direct-image-cohomology-coproduct",
+    "lem-pc-derived-direct-image-preserves-direct-sums",
+    "lem-sc-proper-upper-shriek-composition"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.TruncatedDirectImageSecondPageCoproduct",
+  "file": "lean/Sheaf/AlgebraicGeometry/TruncatedDirectImageSecondPageCoproduct.lean",
+  "declaration": "AlgebraicGeometry.truncated_directImage_secondPage_coproduct",
+  "branch": "sheaf-dag",
+  "by": "S3",
+  "date": "2026-10-12",
+  "statement": "theorem truncated_directImage_secondPage_coproduct\n    {X Y : Scheme.{u}} (f : X ⟶ Y) [QuasiCompact f] [QuasiSeparated f]\n    [HasDerivedCategory.{wX} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]\n    [HasDerivedCategory.{wY} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]\n    (I : Type u) (E : I → schemeDerivedQCohCategory X)\n    (S : schemeDerivedCategory X) (ι : ∀ i, (E i).obj ⟶ S)\n    (hc : IsColimit (Cofan.mk S ι)) (a : ℤ) (p : ℕ) (r : ℤ) :\n    IsIso (Sigma.desc (fun i ↦ (schemeModuleHigherDirectImage f (p : ℤ)).map\n      ((DerivedCategory.homologyFunctor\n        (SheafOfModules.{u} (moduleRings X.toRingedSpace)) r).map\n          ((DerivedCategory.TStructure.t.truncGE a).map (ι i)))))"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S3",
+  "result": "pass",
+  "landing": "20261012T153650-L-2395687",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S3",
+  "result": "pass",
+  "landing": "20261012T153650-L-2395687",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
