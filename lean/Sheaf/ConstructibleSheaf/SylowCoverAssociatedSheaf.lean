@@ -12,6 +12,13 @@ public import Mathlib.Algebra.Field.ZMod
 public import Mathlib.LinearAlgebra.FiniteDimensional.Basic
 public import Mathlib.GroupTheory.PGroup
 public import Mathlib.CategoryTheory.Limits.Preserves.Finite
+import Sheaf.AlgebraicGeometry.FiniteFiberDegreeBaseChange
+import Sheaf.AlgebraicGeometry.FiniteLocallyFreeDegreeLocallyConstant
+import Sheaf.AlgebraicGeometry.FundamentalGroup.FiberEquivalence
+import Sheaf.AlgebraicGeometry.FundamentalGroup.LocallyConstantEquivalence
+import Sheaf.Paper.GaloisLisseRepresentations
+import WeilConjectures.AlgebraicGeometry.Morphisms.FiberDegree
+import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
 
 /-!
 # A Sylow cover and its associated-sheaf functor
