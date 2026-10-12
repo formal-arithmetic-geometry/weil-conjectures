@@ -30,7 +30,7 @@
  ],
  "proof": [
   {
-   "text": "*The pieces.* Fix $i$ and put $B_i=\\Gamma(W_i,\\mathcal O_{W_i})$, a $k$-algebra through the ring map $k=\\Gamma(\\operatorname{Spec}k,\\mathcal O)\\to B_i$ induced by the structure morphism $t_i=t\\circ\\iota_i$ of $W_i$ ($\\iota_i:W_i\\to T$ the inclusion of the open subscheme). Since $t_i$ is finite, [lem-weil-pbc-finite-over-field-affine-finite-dim] shows that $W_i$ is affine, the canonical morphism $W_i\\to\\operatorname{Spec}B_i$ is an isomorphism (in particular a homeomorphism of underlying spaces), and $B_i$ is finite-dimensional over $k$, with $\\dim_kB_i\\le n_i$ by hypothesis. The field $k$ is a local ring whose only prime ideal is $(0)$, and $B_i$ is a finite $k$-algebra, so by [lem-weil-pbc-finite-over-zero-dim-local-discrete-spectrum] $\\operatorname{Spec}B_i$ is a finite discrete space. Hence the underlying space of $W_i$ is finite and discrete: it has finitely many points and every point $w\\in W_i$ has $\\{w\\}$ open in $W_i$.",
+   "text": "Put B_i = Γ(W_i, O), with its k-algebra structure induced by t_i. The Mathlib declarations realizing [lem-weil-pbc-finite-over-field-affine-finite-dim] give IsAffine W_i and finiteness of t_i.appTop. Precomposing with the inverse of ΓSpecIso k preserves finiteness, so Module.Finite k B_i. For the field k, its prime spectrum is discrete. Algebra.QuasiFinite.discreteTopology_primeSpectrum specializes the Mathlib leaf [lem-weil-pbc-finite-over-zero-dim-local-discrete-spectrum] to B_i; compactness of Spec B_i then gives finitely many points. Transport both properties along W_i.isoSpec.hom.homeomorph. In Lean these facts are established before constructing the global restriction map.",
    "uses": [
     "lem-weil-pbc-finite-over-field-affine-finite-dim",
     "lem-weil-pbc-finite-over-zero-dim-local-discrete-spectrum"
@@ -42,7 +42,7 @@
    }
   },
   {
-   "text": "*$T$ is finite and discrete.* As a set $T=W_1\\cup\\dots\\cup W_m$ is a finite union of finite sets (step 1), hence finite (empty when $m=0$). Let $x\\in T$; choose $i$ with $x\\in W_i$. By step 1, $\\{x\\}$ is open in the subspace $W_i$, and $W_i$ is open in $T$ (an open subscheme [def-pc-scheme] has an open underlying set carrying the subspace topology), so $\\{x\\}$ is open in $T$. Every subset of $T$ is the union of its points, hence open: $T$ is discrete.",
+   "text": "The open-cover equation yields the set equation union_i W_i = T. Set.finite_iUnion applied to the finite underlying sets of step 1 gives Finite T. For x in T, choose a covering W_i containing x. Its singleton is open by discreteness of W_i, and its image under the open embedding W_i -> T is the singleton {x}; hence DiscreteTopology T. With the empty index set the cover equation forces T empty, and the same union argument applies.",
    "uses": [
     "def-pc-scheme"
    ],
@@ -65,7 +65,7 @@
    }
   },
   {
-   "text": "*Injection into the product of the pieces.* Let $\\rho_i:A=\\mathcal O_T(T)\\to\\mathcal O_T(W_i)=B_i$ be the restriction map; it is the map induced on global sections by the open immersion $\\iota_i$. Since global sections are functorial, the ring map $k\\to B_i$ induced by $t_i=t\\circ\\iota_i$ is $\\rho_i\\circ t^\\sharp$, so $\\rho_i$ is a homomorphism of $k$-algebras, and $\\rho=(\\rho_1,\\dots,\\rho_m):A\\to\\prod_{i=1}^mB_i$ is $k$-linear. It is injective: if $\\rho(s)=0$, then the section $s$ of the sheaf $\\mathcal O_T$ [def-pc-scheme] restricts to $0$ on every member of the open covering $T=\\bigcup_iW_i$, so $s=0$ by the identity (locality) axiom of a sheaf. (For $m=0$, $T=\\emptyset$ and $A=\\mathcal O_T(\\emptyset)=0$, the empty product.) Hence $\\dim_kA\\le\\dim_k\\prod_iB_i=\\sum_i\\dim_kB_i\\le n_1+\\dots+n_m$; in particular $A$ is a finite-dimensional $k$-vector space, i.e. a finitely generated $k$-module.",
+   "text": "Equip A = Γ(T,O) with t.ΓAlgebra and each B_i with t_i.ΓAlgebra. Define the algebra homomorphism rho_i using the ring homomorphism (W_i).ι.appTop. Its scalar compatibility is exactly Scheme.Hom.comp_appTop. LinearMap.pi packages these into a k-linear restriction map f : A -> product_i B_i. If f(a)=f(b), congrFun gives equality of restrictions on every W_i. Apply TopCat.Sheaf.eq_of_locally_eq' to T.sheaf and the cover to conclude a=b. The product is a finite k-module by step 1, so Module.Finite.of_injective gives Module.Finite k A. LinearMap.finrank_le_finrank_of_injective and Module.finrank_pi_fintype give dim_k A <= sum_i dim_k B_i <= sum_i n_i. Sheaf locality and the empty product also cover m=0.",
    "uses": [
     "def-pc-scheme"
    ],
@@ -76,7 +76,7 @@
    }
   },
   {
-   "text": "*$T$ is finite over $k$.* Cover $\\operatorname{Spec}k$ by the single affine open $\\operatorname{Spec}k$ itself [def-weil-affine-spectrum]. Its preimage $t^{-1}(\\operatorname{Spec}k)=T$ is affine (step 3), and the ring map $\\Gamma(\\operatorname{Spec}k,\\mathcal O)=k\\to\\Gamma(T,\\mathcal O_T)=A$ induced by $t$ makes $A$ a finitely generated $k$-module (step 4). By [lem-weil-pbc-finite-local-on-target] ((2)$\\Rightarrow$(1)), $t$ is finite [def-weil-finite-integral-morphism], i.e. $T$ is finite over $k$, and by step 4 its degree is $\\dim_k\\Gamma(T,\\mathcal O_T)=\\dim_kA\\le n_1+\\dots+n_m$.",
+   "text": "Apply the affine-target specialization of [lem-weil-pbc-finite-local-on-target], namely HasAffineProperty.iff_of_isAffine with P = IsFinite. Its first requirement is IsAffine T from step 3. Its second is finiteness of t.appTop. RingHom.finite_algebraMap translates Module.Finite k A from step 4 into finiteness of ((ΓSpecIso k).inv >> t.appTop).hom. Cancel the ring isomorphism ΓSpecIso k on the left using RingHom.finite_respectsIso.cancel_left_isIso to obtain finiteness of t.appTop. Pair the resulting IsFinite t with the dimension estimate of step 4.",
    "uses": [
     "def-weil-affine-spectrum",
     "lem-weil-pbc-finite-local-on-target",
@@ -99,9 +99,9 @@
   "def-weil-finite-integral-morphism"
  ],
  "proof_origin": {
-  "by": "agent",
+  "by": "W3 stage 3",
   "document": "literature/stacks-project/morphisms.tex",
-  "place": "Morphisms, proof of Lemma Tag 03JA, lines 15507-15518 (the claim, stated there without proof); the argument follows the proof of Lemma Tag 03J6 (line 15371: a finite discrete fibre is affine) and the sheaf axiom; written by an agent"
+  "place": "Proof of Stacks Morphisms Tag 03JA, lines 15507--15518; the original five-step DAG argument implemented with proved Mathlib affine/finiteness, spectrum topology, sheaf-locality and linear-algebra declarations."
  },
  "mathlib_searches": [
   {
@@ -192,5 +192,15 @@
   "group": "F1",
   "result": "fix",
   "note": "k field, T scheme, t : T ⟶ Spec k, U : Fin m → T.Opens (m=0 ok) with ⨆ U = ⊤, IsFinite (U i).ι ≫ t, finrankΓ ≤ n i (ΓAlgebra via ΓSpecIso, = t|W_i scalar map); conclusion IsFinite t ∧ t.finrankΓ ≤ ∑ n i; #check'd finrankΓ, IsFinite"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W3",
+  "result": "pass",
+  "landing": "20261012T085359-L-47253",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
