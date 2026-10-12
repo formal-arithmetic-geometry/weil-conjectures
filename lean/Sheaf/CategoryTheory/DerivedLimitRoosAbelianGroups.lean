@@ -7,14 +7,14 @@ module
 
 public import Mathlib.CategoryTheory.Abelian.RightDerived
 public import Mathlib.CategoryTheory.Abelian.FunctorCategory
-public import Mathlib.CategoryTheory.Functor.OfSequence
+public import Mathlib.CategoryTheory.Category.Preorder
+import Mathlib.CategoryTheory.Functor.OfSequence
 public import Mathlib.CategoryTheory.Limits.Shapes.Products
 public import Mathlib.Algebra.Category.Grp.Abelian
 public import Sheaf.CategoryTheory.Limits.TowerTransitionEndomorphism
-import Sheaf.CategoryTheory.Abelian.HorseshoeDeltaFunctor
+import Sheaf.CategoryTheory.RoosPositiveDerivedLimit
 import Sheaf.CategoryTheory.InjectiveTowerEmbedding
 import Sheaf.CategoryTheory.InjectiveSplitTower
-import Sheaf.CategoryTheory.Limits.TowerLimitAdditiveLeftExact
 
 /-!
 # Roos computation of derived limits of abelian groups
@@ -85,6 +85,76 @@ theorem roosLimitAdditive :
 
 attribute [local instance] roosLimitAdditive
 
+private noncomputable def roosInclusion (A : ℕᵒᵖ ⥤ AddCommGrpCat.{u}) :
+    limit A ⟶ ∏ᶜ (fun n : ℕ => A.obj (Opposite.op n)) :=
+  Pi.lift (fun n => limit.π A (Opposite.op n))
+
+private theorem roosInclusion_zero (A : ℕᵒᵖ ⥤ AddCommGrpCat.{u}) :
+    roosInclusion A ≫ roosMap A = 0 := by
+  apply Pi.hom_ext
+  intro n
+  simp only [roosMap, towerTransitionEndomorphism, towerProductShift,
+    Preadditive.comp_sub, Preadditive.sub_comp, Category.comp_id,
+    Category.assoc, Pi.lift_π, roosInclusion, zero_comp]
+  simp only [← Category.assoc, Pi.lift_π]
+  rw [limit.w A (homOfLE (Nat.le_succ n)).op, sub_self]
+
+set_option backward.isDefEq.respectTransparency false in
+private noncomputable def roosKernelCone (A : ℕᵒᵖ ⥤ AddCommGrpCat.{u}) :
+    Cone A where
+  pt := kernel (roosMap A)
+  π := NatTrans.ofOpSequence
+    (fun n => kernel.ι (roosMap A) ≫ Pi.π _ n)
+    (by
+      intro n
+      change (𝟙 (kernel (roosMap A))) ≫ (kernel.ι _ ≫ Pi.π _ n) =
+        (kernel.ι _ ≫ Pi.π _ (n + 1)) ≫ A.map (homOfLE (Nat.le_succ n)).op
+      simp only [Category.id_comp, Category.assoc]
+      have h := congrArg (fun f => f ≫ Pi.π (fun n : ℕ => A.obj (Opposite.op n)) n)
+        (kernel.condition (roosMap A))
+      have hp : roosMap A ≫ Pi.π (fun n : ℕ => A.obj (Opposite.op n)) n =
+          Pi.π _ n - Pi.π _ (n + 1) ≫ A.map (homOfLE (Nat.le_succ n)).op := by
+        simp [roosMap, towerTransitionEndomorphism, towerProductShift,
+          Preadditive.sub_comp]
+      rw [Category.assoc, hp, Preadditive.comp_sub] at h
+      simp only [zero_comp] at h
+      have hc := sub_eq_zero.mp h
+      simpa only [Category.id_comp, Category.assoc] using hc)
+
+private noncomputable def roosKernelIso (A : ℕᵒᵖ ⥤ AddCommGrpCat.{u}) :
+    limit A ≅ kernel (roosMap A) where
+  hom := kernel.lift _ (roosInclusion A) (roosInclusion_zero A)
+  inv := limit.lift A (roosKernelCone A)
+  hom_inv_id := by
+    apply limit.hom_ext
+    intro n
+    simp only [Category.assoc, limit.lift_π, roosKernelCone,
+      NatTrans.ofOpSequence_app]
+    change kernel.lift _ _ _ ≫ (kernel.ι _ ≫ Pi.π _ n.unop) = _
+    rw [← Category.assoc, kernel.lift_ι]
+    simp [roosInclusion]
+  inv_hom_id := by
+    apply (cancel_mono (kernel.ι (roosMap A))).mp
+    simp only [Category.assoc, kernel.lift_ι, Category.id_comp]
+    apply Pi.hom_ext
+    intro n
+    simp [roosInclusion, roosKernelCone, NatTrans.ofOpSequence_app]
+
+private theorem roosKernelIso_naturality (A B : ℕᵒᵖ ⥤ AddCommGrpCat.{u})
+    (φ : A ⟶ B)
+    (h : roosMap A ≫ Limits.Pi.map (fun n : ℕ => φ.app (Opposite.op n)) =
+      Limits.Pi.map (fun n : ℕ => φ.app (Opposite.op n)) ≫ roosMap B) :
+    limMap φ ≫ (roosKernelIso B).hom = (roosKernelIso A).hom ≫
+      kernel.map (roosMap A) (roosMap B)
+        (Limits.Pi.map (fun n : ℕ => φ.app (Opposite.op n)))
+        (Limits.Pi.map (fun n : ℕ => φ.app (Opposite.op n))) h := by
+  apply (cancel_mono (kernel.ι (roosMap B))).mp
+  simp only [roosKernelIso, Category.assoc, kernel.lift_ι, kernel.map, kernel.lift_ι]
+  rw [← Category.assoc, kernel.lift_ι]
+  apply Pi.hom_ext
+  intro n
+  simp [roosInclusion]
+
 /-- Roos computation, naturally in the tower, of Stacks Project, Tag 07KW,
 Lemma 15.88.1 (blueprint: lem-pc-derived-limit-roos-abelian-groups).
 
@@ -132,6 +202,10 @@ theorem derivedLimitRoosAbelianGroups :
               (Limits.Pi.map (fun n : ℕ => φ.app (Opposite.op n))) h) ∧
       ∀ (A : ℕᵒᵖ ⥤ AddCommGrpCat.{u}) (q : ℕ), 2 ≤ q →
         IsZero (((lim : (ℕᵒᵖ ⥤ AddCommGrpCat.{u}) ⥤ AddCommGrpCat.{u}).rightDerived q).obj A) := by
-  sorry
+  obtain ⟨e₁, hn, hz⟩ := roosPositiveDerivedLimit.{u}
+  refine ⟨inferInstance, roosKernelIso, e₁, ?_, hz⟩
+  intro A B φ
+  obtain ⟨h, hc⟩ := hn A B φ
+  exact ⟨h, roosKernelIso_naturality A B φ h, hc⟩
 
 end CategoryTheory
