@@ -9953,3 +9953,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 22:53 L: merged deliver/S2/Sheaf.AlgebraicGeometry.StructureSheafCohomologyPullbackIdentity (stage 3; reviewer PASS; first push; landing 20261012T225329-L-1812705 (proof); batch 20261012T225253; modules 1; new nodes 0)
 - 22:53 L: merged deliver/S2/Sheaf.CategoryTheory.CartanEilenbergConeFiltrationData (stage 3; reviewer PASS; first push; landing 20261012T225329-L-1812805 (interface); batch 20261012T225253; modules 3; new nodes 2)
 - 22:53 L: merged deliver/S3/Sheaf.AlgebraicGeometry.Modules.DeterminantSplitComparison (stage 3; reviewer PASS; first push; landing 20261012T225329-L-1812904 (interface); batch 20261012T225253; modules 2; new nodes 2)
+- 22:53 L: merged deliver/T1/Sheaf.AlgebraicGeometry.EtaleResolutionSectionCanonicalWholeToOpen (stage 3; reviewer PASS; first push; landing 20261012T225330-L-1813003 (proof); batch 20261012T225253; modules 1; new nodes 0)
