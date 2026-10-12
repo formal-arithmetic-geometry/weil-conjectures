@@ -13,6 +13,8 @@ public import Mathlib.Algebra.Category.Ring.Limits
 
 import Sheaf.Algebra.Category.ModuleCat.Sheaf.FlatCoproduct
 import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorClosed
+import Mathlib.Algebra.Homology.HomologicalComplexBiprod
+import WeilConjectures.CategoryTheory.Abelian.Flat.Basic
 
 /-!
 # Making a bounded flat augmentation termwise epic using identity disks
@@ -31,6 +33,41 @@ namespace CochainComplex
 
 variable {C : Type u} [Category.{u} C] {J : GrothendieckTopology C}
   {R : Sheaf J CommRingCat.{u}}
+
+private theorem flat_of_iso
+    {M N : SheafOfModules.{u}
+      ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj R)}
+    (e : M ≅ N) (h : SheafOfModules.IsFlat M) : SheafOfModules.IsFlat N := by
+  let := SheafOfModules.monoidalCategory R
+  exact (exactFunctor _ _).prop_of_iso
+    ((MonoidalCategory.tensoringRight _).mapIso e) h
+
+private theorem flat_biprod
+    {M N : SheafOfModules.{u}
+      ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj R)}
+    (hM : SheafOfModules.IsFlat M) (hN : SheafOfModules.IsFlat N) :
+    SheafOfModules.IsFlat (M ⊞ N) := by
+  let f : ULift.{u} WalkingPair → SheafOfModules.{u}
+      ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj R) :=
+    fun j ↦ (Limits.pair M N).obj ⟨j.down⟩
+  have hf : SheafOfModules.IsFlat (∐ f) :=
+    SheafOfModules.isFlat_coproduct R f (fun ⟨j⟩ ↦ by cases j <;> assumption)
+  let g : WalkingPair → SheafOfModules.{u}
+      ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj R) :=
+    fun j ↦ (Limits.pair M N).obj ⟨j⟩
+  apply flat_of_iso _ hf
+  exact (Sigma.whiskerEquiv (f := f) (g := g) Equiv.ulift (fun _ ↦ Iso.refl _)) ≪≫
+    (HasColimit.isoOfNatIso (Discrete.natIso fun _ ↦ Iso.refl _) : ∐ g ≅ M ⨿ N) ≪≫
+    (biprod.isoCoprod M N).symm
+
+private theorem flat_zero : SheafOfModules.IsFlat
+    (HasZeroObject.zero.choose : SheafOfModules.{u}
+      ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj R)) := by
+  let := SheafOfModules.monoidalCategory R
+  let := SheafOfModules.symmetricCategory R
+  obtain ⟨⟨h⟩, _⟩ := SheafOfModules.tensorClosed R
+  let := h
+  exact (ObjectProperty.flat_of_isZero (isZero_zero _)).2
 
 /-- Adding bounded-above flat identity disks makes any augmentation to a
 bounded-above complex epic without changing the source up to quasi-isomorphism.
@@ -70,6 +107,105 @@ theorem exists_boundedAbove_flat_epicification
       (∃ b : ℤ, ∀ i : ℤ, b < i → IsZero (F.X i)) ∧
       (∀ i : ℤ, SheafOfModules.IsFlat (F.X i)) ∧ QuasiIso s ∧
       (∀ i : ℤ, Epi (g.f i)) ∧ s ≫ g = f := by
-  sorry
+  classical
+  obtain ⟨N, hN⟩ := hH
+  choose Q p hQ hp using hcover
+  let P : ℤ → SheafOfModules.{u}
+      ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj R) :=
+    fun i ↦ if i ≤ N then Q (H.X i) else HasZeroObject.zero.choose
+  have hP (i : ℤ) : SheafOfModules.IsFlat (P i) := by
+    dsimp [P]
+    split_ifs
+    · exact hQ _
+    · exact flat_zero
+  have hzP (i : ℤ) (hi : N < i) : IsZero (P i) := by
+    dsimp [P]
+    rw [if_neg (not_le.mpr hi)]
+    exact HasZeroObject.zero.choose_spec
+  let q (i : ℤ) : P i ⟶ H.X i :=
+    if hi : i ≤ N then eqToHom (by simp [P, hi]) ≫ p (H.X i) else 0
+  have hq (i : ℤ) : Epi (q i) := by
+    by_cases hi : i ≤ N
+    · dsimp only [q]
+      rw [dif_pos hi]
+      have := hp (H.X i)
+      infer_instance
+    · exact (hN i (lt_of_not_ge hi)).epi _
+  let X (i : ℤ) := P i ⊞ P (i - 1)
+  let dd (i j : ℤ) : X i ⟶ X j :=
+    if hij : i + 1 = j then
+      biprod.fst ≫ eqToHom (by congr 1; omega) ≫ biprod.inr
+    else 0
+  let D : CochainComplex _ ℤ :=
+    { X := X
+      d := dd
+      shape := fun i j hij ↦ dif_neg hij
+      d_comp_d' := by
+        intro i j k hij hjk
+        change i + 1 = j at hij
+        change j + 1 = k at hjk
+        simp [dd, hij, hjk, Category.assoc] }
+  let a : D ⟶ H := CochainComplex.ofHom
+    (fun i ↦ biprod.desc (q i) (q (i - 1) ≫ H.d (i - 1) i)) (by
+      intro i
+      have hi : i + 1 - 1 = i := by omega
+      apply biprod.hom_ext'
+      · simp only [D, dd, dif_pos rfl, Category.assoc,
+          biprod.inl_fst_assoc, biprod.inr_desc]
+        simpa using (eqToHom_naturality
+          (fun k ↦ q k ≫ H.d k (i + 1)) hi.symm)
+      · simp [D, dd, Category.assoc])
+  have ha (i : ℤ) : Epi (a.f i) := by
+    have := hq i
+    exact epi_of_epi_fac (by simp [a] :
+      (biprod.inl : P i ⟶ X i) ≫ a.f i = q i)
+  let hh (i j : ℤ) : D.X i ⟶ D.X j :=
+    if hij : j + 1 = i then
+      biprod.snd ≫ eqToHom (by congr 1; omega) ≫ biprod.inl
+    else 0
+  have hcontract : Homotopy (𝟙 D) 0 := by
+    refine { hom := hh, zero := ?_, comm := ?_ }
+    · intro i j hij
+      exact dif_neg hij
+    · intro i
+      rw [dNext_eq hh (show (ComplexShape.up ℤ).Rel i (i + 1) by rfl),
+        prevD_eq hh (show (ComplexShape.up ℤ).Rel (i - 1) i by change i - 1 + 1 = i; omega)]
+      have hi' : i - 1 + 1 = i := by omega
+      simp only [D, dd, hh, dif_pos rfl, dif_pos hi', HomologicalComplex.id_f,
+        HomologicalComplex.zero_f, Category.assoc, biprod.inr_snd_assoc,
+        biprod.inl_fst_assoc, eqToHom_trans_assoc, eqToHom_refl, Category.id_comp,
+        add_zero]
+      exact (biprod.total (X := P i) (Y := P (i - 1))).symm
+  have hDbound : ∀ i : ℤ, N + 1 < i → IsZero (D.X i) := by
+    intro i hi
+    exact (biprod_isZero_iff _ _).2 ⟨hzP i (by omega), hzP (i - 1) (by omega)⟩
+  let F := E ⊞ D
+  let s : E ⟶ F := biprod.inl
+  let g : F ⟶ H := biprod.desc f a
+  let e : HomotopyEquiv E F :=
+    { hom := s
+      inv := biprod.fst
+      homotopyHomInvId := Homotopy.ofEq (by simp [s])
+      homotopyInvHomId := by
+        let h₁ := (hcontract.compRight (biprod.inr : D ⟶ F)).compLeft
+          (biprod.snd : F ⟶ D)
+        let h₂ := (Homotopy.refl (biprod.fst ≫ s)).add h₁
+        exact (Homotopy.ofEq (by simp [s])).trans
+          (h₂.symm.trans (Homotopy.ofEq (by
+            simpa only [s, Category.id_comp] using biprod.total (X := E) (Y := D)))) }
+  refine ⟨F, s, g, ?_, ?_, e.quasiIso_hom, ?_, ?_⟩
+  · obtain ⟨b, hb⟩ := hE
+    refine ⟨max b (N + 1), fun i hi ↦ ?_⟩
+    apply IsZero.of_iso _ (HomologicalComplex.biprodXIso E D i)
+    exact (biprod_isZero_iff _ _).2
+      ⟨hb i (lt_of_le_of_lt (le_max_left _ _) hi),
+        hDbound i (lt_of_le_of_lt (le_max_right _ _) hi)⟩
+  · intro i
+    exact flat_of_iso (HomologicalComplex.biprodXIso E D i).symm
+      (flat_biprod (hflat i) (flat_biprod (hP i) (hP (i - 1))))
+  · intro i
+    have := ha i
+    exact epi_of_epi_fac (HomologicalComplex.biprod_inr_desc_f f a i)
+  · simp [s, g]
 
 end CochainComplex
