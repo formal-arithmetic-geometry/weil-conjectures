@@ -1,0 +1,137 @@
+{
+ "id": "lem-pc-direct-image-global-sections-kinjective-acyclic",
+ "kind": "statement",
+ "title": "Global-sections acyclicity of a K-injective direct image",
+ "statement": "Let X and Y be schemes and f:X→Y a morphism [def-pc-scheme]. Let I be an arbitrary unbounded K-injective complex of O_X-modules [def-pur-kinjective-complex]. Write f_* for module direct image [def-pc-derived-direct-image], Qh for localization of the homotopy category [def-pc-derived-category], and Γ_Y for the global-sections functor [def-pc-global-derived-rhom]. The right-derived unit at f_*I, Qh(Γ_Y(f_*I))→RΓ_Y(Qh(f_*I)), is an isomorphism. No quasi-compactness, quasi-separatedness, flatness, boundedness, or K-injectivity of f_*I is assumed.",
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 0D5T, composed derived direct images, specialized to the global-sections point; Tag 079W, derived adjunction. Global Leray is used in duality.tex, Tag 0B6I. Read at https://stacks.math.columbia.edu/tag/0D5T and https://stacks.math.columbia.edu/tag/0B6I."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pur-kinjective-complex",
+  "def-pc-derived-direct-image",
+  "def-pc-derived-category",
+  "def-pc-global-derived-rhom"
+ ],
+ "proof": [
+  {
+   "text": "Let p_Y:Y→(pt,Γ(Y,O_Y)) be the global-sections morphism of [def-pc-global-derived-rhom]. Apply [lem-pc-ringed-space-direct-image-kinjective-acyclic] to f and p_Y. This gives invertibility of the right-derived unit for p_Y direct image on f_*I; it needs only K-injectivity of I and does not claim f_*I is K-injective. Use the standard derived category for module sheaves on the point when applying that lemma.",
+   "uses": [
+    "def-pc-global-derived-rhom",
+    "lem-pc-ringed-space-direct-image-kinjective-acyclic"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Evaluation on the point is an exact equivalence from module sheaves to Γ(Y,O_Y)-modules. Under this equivalence p_Y direct image is global sections, with the identity action on sections. Right-derived uniqueness identifies their right-derived functors and units: derive the underived natural identification, and use the exact equivalence localization factorization. The global-sections unit at f_*I is therefore the image of the invertible p_Y unit, conjugated by these factorization isomorphisms. Functors and conjugation by isomorphisms preserve invertibility.",
+   "uses": [
+    "def-pc-global-derived-rhom"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-global-derived-rhom",
+  "lem-pc-ringed-space-direct-image-kinjective-acyclic"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 0D5T, composed derived direct images, specialized to the global-sections point; Tag 079W, derived adjunction. Global Leray is used in duality.tex, Tag 0B6I. Read at https://stacks.math.columbia.edu/tag/0D5T and https://stacks.math.columbia.edu/tag/0B6I."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The pushforward of an unbounded K-injective complex of module sheaves is acyclic for global sections",
+   "results": "Service unavailable: Internal Server Error; no mathematical verdict from this service.",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "direct image of K injective sheaf complex is acyclic for derived global sections",
+   "results": "Eight hits concerned K-injective definitions, bounded-below injective complexes, and ordinary derived functors. None identifies the global-sections unit on an arbitrary module direct image.",
+   "date": "2026-10-12",
+   "verdict": "no usable match"
+  },
+  {
+   "tool": "loogle",
+   "query": "rightDerivedFunctorUnit",
+   "results": "Service reports unknown identifier rightDerivedFunctorUnit.",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "rightDerivedFunctorUnit.*globalSections|globalSections.*unit_on|globalSections.*KInjective in lean/Sheaf, lean/WeilConjectures and Mathlib; blueprint_refs.py search global sections acyclic",
+   "results": "No matching global-sections-unit acyclicity declaration; the existing ringed-space successive-direct-image unit lemma must be transported through the point-module equivalence. Blueprint search returned zero matches.",
+   "date": "2026-10-12",
+   "verdict": "no usable match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.GlobalHomAdjunctionIso",
+  "date": "2026-10-12",
+  "group": "H1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Global derived Hom adjunction: the derived Leray identity RΓ(Y,Rf_*E)=RΓ(X,E), computed on K-injective representatives.",
+   "via": [
+    "lem-pc-global-hom-adjunction",
+    "lem-sc-proper-flat-right-adjoint-affine-basechange"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.DirectImageGlobalSectionsKInjectiveAcyclic",
+  "file": "lean/Sheaf/AlgebraicGeometry/DirectImageGlobalSectionsKInjectiveAcyclic.lean",
+  "declaration": "AlgebraicGeometry.isIso_directImage_globalSections_unit_on_kInjective",
+  "statement": "theorem isIso_directImage_globalSections_unit_on_kInjective {X Y : Scheme.{u}} [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))] [HasDerivedCategory.{wA} (ModuleCat.{u} ((moduleRings Y.toRingedSpace).obj.obj (op ⊤)))] (f : X ⟶ Y) (I : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ) [I.IsKInjective] : IsIso ((RingedSpace.globalSectionsFunctor Y.toRingedSpace).rightDerivedFunctorUnit.app (((RingedSpace.moduleDirectImage f.toLRSHom.toShHom).mapHomotopyCategory (.up ℤ)).obj ((HomotopyCategory.quotient _ (.up ℤ)).obj I)))",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H1",
+  "result": "pass",
+  "landing": "20261012T165515-L-2933928",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H1",
+  "result": "pass",
+  "landing": "20261012T165515-L-2933928",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

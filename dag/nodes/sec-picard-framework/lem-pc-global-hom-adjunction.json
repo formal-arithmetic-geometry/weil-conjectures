@@ -26,7 +26,7 @@
  ],
  "proof": [
   {
-   "text": "Construct the evaluation-mate comparison by applying the fixed tensor-Hom inverse to the transpose of pullback tensor comparison, identity tensor the pullback counit, and evaluation of the pullback counit at internal Hom. Naturality of the canonical tensor-Hom bijections proves its mate equation on every test map; naturality in both entries follows from naturality of the tensor comparison and the adjunction counit. The generic Lean helpers internalHomMate_exists and tensorAdjunctionCore implement these calculations without new assumptions. No K-flat construction is reproved here: existence of the canonical pullback tensor isomorphism and the Leray comparison remain the existing named theorem holes of this module.",
+   "text": "Construct the evaluation-mate comparison by applying the fixed tensor-Hom inverse to the transpose of pullback tensor comparison, identity tensor the pullback counit, and evaluation of the pullback counit at internal Hom. Naturality of the canonical tensor-Hom bijections proves its mate equation on every test map; naturality in both entries follows from naturality of the tensor comparison and the adjunction counit. The generic Lean helpers internalHomMate_exists and tensorAdjunctionCore implement these calculations without new assumptions. No K-flat construction is reproved here: existence of the canonical pullback tensor isomorphism remains the existing named theorem hole of this module.",
    "uses": [
     "def-pc-canonical-derived-tensor-hom-bijection",
     "def-pc-derived-pullback-tensor-comparison",
@@ -51,12 +51,12 @@
    }
   },
   {
-   "text": "Apply derived global sections to the comparison map of [lem-pc-qcqs-sheaf-rhom-adjunction]. Let p_X:(X,\\mathcal O_X)\\to(\\{\\mathrm{pt}\\},\\Gamma(X,\\mathcal O_X)) and p_Y:(Y,\\mathcal O_Y)\\to(\\{\\mathrm{pt}\\},\\Gamma(Y,\\mathcal O_Y)) be the morphisms of ringed spaces of [def-pc-global-derived-rhom], so R\\Gamma(X,-)=Rp_{X,*} and R\\Gamma(Y,-)=Rp_{Y,*}, and let r:(\\{\\mathrm{pt}\\},\\Gamma(X,\\mathcal O_X))\\to(\\{\\mathrm{pt}\\},\\Gamma(Y,\\mathcal O_Y)) be given by f^\\sharp:\\Gamma(Y,\\mathcal O_Y)\\to\\Gamma(X,\\mathcal O_X), so p_Y\\circ f=r\\circ p_X and Rr_*=r_* is the exact restriction of scalars. Applying the canonical composition isomorphism [lem-pc-ringed-spaces-derived-direct-image-composition] to both factorizations gives the derived Leray identity R\\Gamma(Y,-)\\circ Rf_*\\cong r_*\\circ R\\Gamma(X,-) on D(\\mathcal O_X). Thus [def-pc-global-derived-rhom] identifies the two sides with R\\operatorname{Hom}_X(P,a(K)) (with scalars restricted to \\Gamma(Y,\\mathcal O_Y)) and R\\operatorname{Hom}_Y(Rf_*P,K). Since the map becomes an isomorphism after DQ_Y, [lem-pc-dq-coherator-adjunction] (Y is quasi-compact and quasi-separated) gives a quasi-isomorphism on R\\Gamma(Y,-): in each degree use H^i(Y,E)=Hom(\\mathcal O_Y[-i],DQ_Y E), with \\mathcal O_Y[-i] quasi-coherent. This also gives naturality in P and K. The proved bridge lem-pc-dq-coherator-derived-global-sections transports the existing K-injective detection statement to an arbitrary derived morphism using representative isomorphisms, the fully faithful K-injective model and the right-derived unit. Applying it to the coherated sheaf comparison and composing with the inverse Leray comparison proves invertibility of the actual map. Map the sheaf comparison naturality equation through global sections and use inverse Leray naturality to prove the second clause.",
+   "text": "Construct the underived global-sections/direct-image comparison as Iso.refl: both sides are restriction of scalars on sections over the whole space. By [lem-pc-direct-image-global-sections-kinjective-acyclic], the global-sections right-derived unit on a direct image of a K-injective is invertible. The private generic lemma lerayCore constructs two candidates for the right-derived functor of f_* followed by global sections. Their units are assembled from mapHomotopyCategory composition, the right-derived units, and the exact restriction-of-scalars localization factorization. On K-injectives the first candidate unit is invertible by the acyclicity lemma and the second is invertible by the K-injective computation of RΓ_X and exactness of restriction of scalars. The K-injective localizer criterion makes both candidates right derived. rightDerivedDesc and its isIso criterion construct the canonical Leray iso; rightDerived_fac_app, followed by cancellation of the underived composition iso, proves exactly the required unit equation. Apply this Leray comparison and derived global sections to the coherated sheaf-Hom comparison. The existing coherator detection bridge supplies invertibility and lerayNaturality transports the sheaf comparison naturality equation. This preserves the global-Hom unit route of Tag 0B6I.",
    "uses": [
     "def-pc-global-derived-rhom",
     "lem-pc-qcqs-sheaf-rhom-adjunction",
     "lem-pc-dq-coherator-adjunction",
-    "lem-pc-ringed-spaces-derived-direct-image-composition",
+    "lem-pc-direct-image-global-sections-kinjective-acyclic",
     "lem-pc-dq-coherator-derived-global-sections"
    ],
    "elementary": false,
@@ -74,13 +74,13 @@
   "lem-pc-qcqs-sheaf-rhom-adjunction",
   "def-pc-global-derived-rhom",
   "lem-pc-dq-coherator-adjunction",
-  "lem-pc-ringed-spaces-derived-direct-image-composition",
+  "lem-pc-direct-image-global-sections-kinjective-acyclic",
   "lem-pc-dq-coherator-derived-global-sections"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/duality.tex",
-  "place": "Tag 0B6I with the explicit evaluation mate calculation of cohomology Tag 08I3; implemented by R3"
+  "place": "Tag 0B6I with the explicit evaluation mate calculation of cohomology Tag 08I3; implemented by R3; H1 proves the canonical Leray construction and unit compatibility by the K-injective right-derived universal property, with acyclicity isolated as lem-pc-direct-image-global-sections-kinjective-acyclic"
  },
  "mathlib_searches": [
   {
@@ -180,11 +180,11 @@
  "reviewed_proof": {
   "date": "2026-10-12",
   "by": "L",
-  "reviewer": "X-ff3b3",
-  "group": "R3",
+  "reviewer": "COMPILER",
+  "group": "H1",
   "result": "pass",
-  "landing": "20261012T135310-L-1689664",
+  "landing": "20261012T165515-L-2933928",
   "kind": "interface",
-  "note": "independent Codex review: Matched the delivered proofs and coherator bridge with their nodes and cited dependencies; existing signatures and definition bodies are unchanged. Both modules and all three direct importers compile cleanly; axiom checks show only permitted axioms and sorryAx from named open dependencies."
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
