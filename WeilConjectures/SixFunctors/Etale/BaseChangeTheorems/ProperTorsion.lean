@@ -74,10 +74,10 @@ theorem Etale.isIso_baseChangeHomologyMap_of_isProper_of_prime [IsProper f]
     (sq : IsPullback g' f' f g) {r : ℕ} (hr : r.Prime)
     (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (hF : r • 𝟙 F = 0) (q : ℤ) :
     IsIso (Etale.baseChangeHomologyMap Λ sq q F) := by
-  have : IsTorsionSheaf F := .of_nsmul_id_eq_zero Λ hr.pos hF
+  have : IsTorsionModuleSheaf F := .of_nsmul_id_eq_zero Λ hr.pos hF
   exact (Etale.isIso_derivedBaseChangeMapPlus_app_singleFunctor_obj_iff Λ sq F).1
     (Etale.isIso_baseChange_of_isProper Λ sq _
-      (Etale.DerivedCategory.Plus.torsionHomology_singleFunctor_obj Λ X F)) q
+      (Etale.DerivedCategory.Plus.moduleTorsionHomology_singleFunctor_obj Λ X F)) q
 
 /-- **Torsion coefficient assembly**: for a proper morphism `f : X ⟶ Y`, a cartesian square as
 in the module docstring and a torsion sheaf `F` of `Λ`-modules on `X_ét`, the exchange map
@@ -90,7 +90,7 @@ is quasi-compact and quasi-separated.
 This is blueprint `lemma-weil-pbc-torsion-assembly`. -/
 theorem Etale.isIso_baseChangeHomologyMap_of_isProper_of_isTorsionSheaf [IsProper f]
     (sq : IsPullback g' f' f g) (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))
-    [IsTorsionSheaf F] (q : ℤ) :
+    [IsTorsionModuleSheaf F] (q : ℤ) :
     IsIso (Etale.baseChangeHomologyMap Λ sq q F) :=
   Etale.isIso_baseChangeHomologyMap_of_isTorsionSheaf Λ sq
     (fun _ hr E hE q ↦ Etale.isIso_baseChangeHomologyMap_of_isProper_of_prime Λ sq hr E hE q) F q
@@ -111,10 +111,10 @@ This is blueprint `thm-weil-pbc-bounded-below`. -/
 theorem Etale.isIso_derivedBaseChangeMapPlus_app_of_isProper [IsProper f]
     (sq : IsPullback g' f' f g)
     (K : DerivedCategory.Plus (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
-    (hK : Etale.DerivedCategory.Plus.torsionHomology Λ X K) :
+    (hK : Etale.DerivedCategory.Plus.moduleTorsionHomology Λ X K) :
     IsIso ((Etale.derivedBaseChangeMapPlus (ModuleCat.{u + 1} Λ) sq.toCommSq).app K) :=
   Etale.isIso_derivedBaseChangeMapPlus_app_of_forall_isTorsionSheaf Λ sq
-    (fun F hF q ↦ have : IsTorsionSheaf F := hF
+    (fun F hF q ↦ have : IsTorsionModuleSheaf F := hF
       Etale.isIso_baseChangeHomologyMap_of_isProper_of_isTorsionSheaf Λ sq F q) K hK
 
 /-- **Finite-torsion proper base change**: for a proper morphism `f : X ⟶ Y`, a cartesian
@@ -133,41 +133,41 @@ This is blueprint `prop-weil-proet-finite-proper-base-change`. -/
 @[stacks 095T]
 theorem Etale.isIso_derivedBaseChangeMapPlus_app_singleFunctor_of_isProper [IsProper f]
     (sq : IsPullback g' f' f g) (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))
-    [IsTorsionSheaf F] :
+    [IsTorsionModuleSheaf F] :
     IsIso ((Etale.derivedBaseChangeMapPlus (ModuleCat.{u + 1} Λ) sq.toCommSq).app
       ((DerivedCategory.Plus.singleFunctor _ 0).obj F)) :=
   Etale.isIso_derivedBaseChangeMapPlus_app_of_isProper Λ sq _
-    (Etale.DerivedCategory.Plus.torsionHomology_singleFunctor_obj Λ X F)
+    (Etale.DerivedCategory.Plus.moduleTorsionHomology_singleFunctor_obj Λ X F)
 
 /-- The natural isomorphism `g^* Rf_* F ≅ Rf'_* g'^* F` of functors of a torsion sheaf `F` of
 `Λ`-modules on `X_ét`, for a proper morphism `f` and a cartesian square as in the module
 docstring: the derived exchange morphism, restricted to torsion sheaves placed in degree `0`
 (`AlgebraicGeometry.Etale.isIso_derivedBaseChangeMapPlus_app_singleFunctor_of_isProper`). -/
 noncomputable def Etale.properBaseChangeTorsionIso [IsProper f] (sq : IsPullback g' f' f g) :
-    (Scheme.isTorsionSheaf Λ X).ι ⋙ DerivedCategory.Plus.singleFunctor _ 0 ⋙
+    (Scheme.isTorsionModuleSheaf Λ X).ι ⋙ DerivedCategory.Plus.singleFunctor _ 0 ⋙
         (f)_*[ModuleCat.{u + 1} Λ].rightDerivedFunctorPlus ⋙
           ((g)^*[ModuleCat.{u + 1} Λ]).mapDerivedCategoryPlus ≅
-      (Scheme.isTorsionSheaf Λ X).ι ⋙ DerivedCategory.Plus.singleFunctor _ 0 ⋙
+      (Scheme.isTorsionModuleSheaf Λ X).ι ⋙ DerivedCategory.Plus.singleFunctor _ 0 ⋙
         ((g')^*[ModuleCat.{u + 1} Λ]).mapDerivedCategoryPlus ⋙
           (f')_*[ModuleCat.{u + 1} Λ].rightDerivedFunctorPlus :=
-  have : ∀ F : (Scheme.isTorsionSheaf Λ X).FullSubcategory,
+  have : ∀ F : (Scheme.isTorsionModuleSheaf Λ X).FullSubcategory,
       IsIso ((Etale.derivedBaseChangeMapPlus (ModuleCat.{u + 1} Λ) sq.toCommSq).app
         ((DerivedCategory.Plus.singleFunctor _ 0).obj F.obj)) := fun F ↦
-    have : IsTorsionSheaf F.obj := F.property
+    have : IsTorsionModuleSheaf F.obj := F.property
     Etale.isIso_derivedBaseChangeMapPlus_app_singleFunctor_of_isProper Λ sq F.obj
   have : IsIso (Functor.whiskerLeft
-      ((Scheme.isTorsionSheaf Λ X).ι ⋙ DerivedCategory.Plus.singleFunctor _ 0)
+      ((Scheme.isTorsionModuleSheaf Λ X).ι ⋙ DerivedCategory.Plus.singleFunctor _ 0)
       (Etale.derivedBaseChangeMapPlus (ModuleCat.{u + 1} Λ) sq.toCommSq)) :=
     @NatIso.isIso_of_isIso_app _ _ _ _ _ _ _ this
   asIso (Functor.whiskerLeft
-      ((Scheme.isTorsionSheaf Λ X).ι ⋙ DerivedCategory.Plus.singleFunctor _ 0)
+      ((Scheme.isTorsionModuleSheaf Λ X).ι ⋙ DerivedCategory.Plus.singleFunctor _ 0)
       (Etale.derivedBaseChangeMapPlus (ModuleCat.{u + 1} Λ) sq.toCommSq))
 
 /-- The component of `AlgebraicGeometry.Etale.properBaseChangeTorsionIso` at a torsion sheaf is
 the derived exchange morphism of that sheaf. -/
 @[simp]
 lemma Etale.properBaseChangeTorsionIso_hom_app [IsProper f] (sq : IsPullback g' f' f g)
-    (F : (Scheme.isTorsionSheaf Λ X).FullSubcategory) :
+    (F : (Scheme.isTorsionModuleSheaf Λ X).FullSubcategory) :
     (Etale.properBaseChangeTorsionIso Λ sq).hom.app F =
       (Etale.derivedBaseChangeMapPlus (ModuleCat.{u + 1} Λ) sq.toCommSq).app
         ((DerivedCategory.Plus.singleFunctor _ 0).obj F.obj) :=

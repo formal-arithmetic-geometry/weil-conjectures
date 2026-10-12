@@ -79,7 +79,7 @@ the stalk at `ȳ` of the degree-`q` exchange map of the geometric fibre square
 with `(ȳ^* G)_{Spec Ω} ≅ G_ȳ` (`AlgebraicGeometry.Etale.upperStarCompSheafFiberIso`).
 This is blueprint `cor-weil-pbc-geometric-fiber-finite` (second assertion). -/
 noncomputable def Etale.sheafFiberHigherDirectImageGeometricFiberIso
-    (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) [IsTorsionSheaf F] (q : ℤ) :
+    (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) [IsTorsionModuleSheaf F] (q : ℤ) :
     (pointSmallEtale y).sheafFiber.obj (Etale.higherDirectImage Λ f q F) ≅
       (pointSmallEtale (𝟙 (Spec (.of Ω)))).sheafFiber.obj
         (Etale.higherDirectImage Λ (pullback.snd f y) q

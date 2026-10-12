@@ -39,7 +39,7 @@ The proof has two steps:
 
 ## Main statements
 
-- `AlgebraicGeometry.Scheme.IsTorsionSheaf.of_nsmul_id_eq_zero`: a sheaf killed by a positive
+- `AlgebraicGeometry.Scheme.IsTorsionModuleSheaf.of_nsmul_id_eq_zero`: a sheaf killed by a positive
   integer is torsion.
 - `AlgebraicGeometry.Etale.isIso_derivedBaseChangeMapPlus_app_of_forall_isTorsionSheaf`: the
   passage from torsion sheaves to complexes with torsion cohomology.
@@ -63,9 +63,9 @@ variable (Λ : Type (u + 1)) [CommRing Λ]
 
 /-- A sheaf of `Λ`-modules killed by a positive integer `n` is torsion: every geometric stalk
 is killed by `n`, the stalk functor being additive. -/
-lemma Scheme.IsTorsionSheaf.of_nsmul_id_eq_zero {X : Scheme.{u}}
+lemma Scheme.IsTorsionModuleSheaf.of_nsmul_id_eq_zero {X : Scheme.{u}}
     {F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)} {n : ℕ} (hn : 0 < n)
-    (hF : n • 𝟙 F = 0) : IsTorsionSheaf F where
+    (hF : n • 𝟙 F = 0) : IsTorsionModuleSheaf F where
   isTorsion_sheafFiber Ω _ _ s x := by
     have : HasLimitsOfSize.{u, u} (ModuleCat.{u + 1} Λ) :=
       hasLimitsOfSizeShrink.{u, u, u + 1, u + 1} _
@@ -79,14 +79,14 @@ lemma Scheme.IsTorsionSheaf.of_nsmul_id_eq_zero {X : Scheme.{u}}
     simpa using this.symm
 
 /-- Being torsion, as a property of sheaves of `Λ`-modules on `X_ét`. -/
-def Scheme.isTorsionSheaf (X : Scheme.{u}) :
+def Scheme.isTorsionModuleSheaf (X : Scheme.{u}) :
     ObjectProperty (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :=
-  fun F ↦ IsTorsionSheaf F
+  fun F ↦ IsTorsionModuleSheaf F
 
-instance (X : Scheme.{u}) : (Scheme.isTorsionSheaf Λ X).IsClosedUnderIsomorphisms where
+instance (X : Scheme.{u}) : (Scheme.isTorsionModuleSheaf Λ X).IsClosedUnderIsomorphisms where
   of_iso φ h := by
-    have : IsTorsionSheaf _ := h
-    exact IsTorsionSheaf.of_epi φ.hom
+    have : IsTorsionModuleSheaf _ := h
+    exact IsTorsionModuleSheaf.of_epi φ.hom
 
 variable {X S T Y : Scheme.{u}} {p : X ⟶ S} {g : T ⟶ S} {e : Y ⟶ T} {h : Y ⟶ X}
 
@@ -136,12 +136,12 @@ cohomological degree, so `Hⁿ` of both sides only depends on `τ_{≤ n} K`, wh
 extension of its shifted cohomology sheaves. -/
 theorem Etale.isIso_derivedBaseChangeMapPlus_app_of_forall_isTorsionSheaf
     (sq : IsPullback e h g p)
-    (hF : ∀ F : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ), IsTorsionSheaf F →
+    (hF : ∀ F : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ), IsTorsionModuleSheaf F →
       ∀ q, IsIso (Etale.baseChangeHomologyMap Λ sq q F))
     (K : DerivedCategory.Plus (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
-    (hK : Etale.DerivedCategory.Plus.torsionHomology Λ T K) :
+    (hK : Etale.DerivedCategory.Plus.moduleTorsionHomology Λ T K) :
     IsIso ((Etale.derivedBaseChangeMapPlus (ModuleCat.{u + 1} Λ) sq.toCommSq).app K) :=
-  DerivedCategory.Plus.isIso_app_of_forall_homology _ (Scheme.isTorsionSheaf Λ T)
+  DerivedCategory.Plus.isIso_app_of_forall_homology _ (Scheme.isTorsionModuleSheaf Λ T)
     (fun F hF' ↦ (Etale.isIso_derivedBaseChangeMapPlus_app_singleFunctor_obj_iff Λ sq F).2
       (hF F hF'))
     (fun K n _ q hq ↦ Etale.isZero_homologyFunctor_derivedBaseChangeSource_obj Λ p g K n q hq)
@@ -160,7 +160,7 @@ theorem Etale.isIso_derivedBaseChangeMapPlus_app_of_prime (sq : IsPullback e h g
     (hprime : ∀ r : ℕ, r.Prime → ∀ E : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ),
       r • 𝟙 E = 0 → ∀ q, IsIso (Etale.baseChangeHomologyMap Λ sq q E))
     (K : DerivedCategory.Plus (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
-    (hK : Etale.DerivedCategory.Plus.torsionHomology Λ T K) :
+    (hK : Etale.DerivedCategory.Plus.moduleTorsionHomology Λ T K) :
     IsIso ((Etale.derivedBaseChangeMapPlus (ModuleCat.{u + 1} Λ) sq.toCommSq).app K) :=
   Etale.isIso_derivedBaseChangeMapPlus_app_of_forall_isTorsionSheaf Λ sq
     (fun F _ q ↦ Etale.isIso_baseChangeHomologyMap_of_isTorsionSheaf Λ sq hprime F q) K hK
