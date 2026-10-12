@@ -27,38 +27,29 @@
  ],
  "proof": [
   {
-   "text": "Write i_S for affine inclusion. For f,g the small-site pullback comparison has orientation b_g b_f to b_(gf). Conjugate it by t_f, t_g and t_(gf) to obtain an isomorphism between i_Z U_g U_f and i_Z U_(gf). As i_Z is fully faithful, lift its hom and inverse componentwise to gamma. Faithfulness checks naturality and the inverse identities. By construction i_Z(gamma_V) followed by t_(gf)(V) equals t_g(U_f V), then b_g(t_f(V)), then the inverse pullbackComp component, the first displayed equation.",
+   "text": "Apply the proved gamma lift to U,t, obtaining gamma and its inclusion equation.",
    "uses": [
-    "def-pc-fibre-product"
-   ],
-   "elementary": true
-  },
-  {
-   "text": "Precomposition on sheaves applied to gamma yields the isomorphism between the composite affine direct image and the affine direct image for gf. Compose a_f and a_g. Taking the unit-compatible mate of the right-adjoint isomorphism gives d: L_f L_g isomorphic to L_(gf). Evaluate its mate equation at V and s. The composite unit is eta_f followed by U_f^s(eta_g), and the map on sections induced by gamma is restriction along gamma_V. These are exactly the two sides of the affine composition-unit formula.",
-   "uses": [
-    "def-weil-pbc-composite-adjunction",
-    "lem-weil-pbc-conjugate-iso-unit-equation"
+    "lem-weil-pbc-affine-etale-restriction-composition-gamma"
    ],
    "elementary": false
   },
   {
-   "text": "Let E_G be the iterated restriction comparison e_g on the full f-inverse image followed by L_g applied to e_f. Precompose both routes in the final square by E_G inverse, obtaining two morphisms from L_g L_f rho_X G to L_(gf) rho_X G, one of which is d. Transpose both by the composed affine adjunction. At an affine V and s in G(V), the transpose starts with eta_f(s) followed by eta_g. The unit equations for e_f and e_g identify this with the iterated full-site unit after applying E_G inverse. The assumed equation for c identifies its image with restriction of the composite full-site unit along pullbackComp inverse. The equation defining gamma rewrites those restrictions as restriction along gamma_V; the unit equation for e_(gf) then identifies the result with the affine composite unit. This is the transpose of d by the previous step. The transposes agree at every V and s, hence agree as sheaf morphisms. Injectivity of the adjunction Hom equivalence and cancellation of E_G give the final square. Choose gamma and d for every pair f,g.",
+   "text": "Apply the mate construction to U,t,L,a,e,he,c,hc and gamma with its equation, obtaining d and the remaining identities. Assemble both witnesses and all three clauses.",
    "uses": [
-    "lem-weil-pbc-conjugate-iso-unit-equation"
+    "lem-weil-pbc-affine-etale-restriction-composition-mates"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "def-pc-fibre-product",
-  "def-weil-pbc-composite-adjunction",
-  "lem-weil-pbc-conjugate-iso-unit-equation"
+  "lem-weil-pbc-affine-etale-restriction-composition-gamma",
+  "lem-weil-pbc-affine-etale-restriction-composition-mates"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/sites.tex",
   "place": "Tags 03CB (lemma-composition-morphisms-sites), 03CC (definition-composition-morphisms-sites), and Categories 0B65; unit-compatible refinement of the affine-site comparison used in 09YQ",
-  "note": "C1 spells out the unit and coherence calculations in the original comparison-node plan using the adjoint uniqueness argument of the cited sources."
+  "note": "H1 second reading: cancellation proves the gamma step; the mate/coherence obligation retains the remaining original steps."
  },
  "mathlib_searches": [
   {
@@ -137,9 +128,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "C1",
+  "group": "H1",
   "result": "pass",
-  "landing": "20261012T044738-L-2032075",
+  "landing": "20261012T060737-L-2907383",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

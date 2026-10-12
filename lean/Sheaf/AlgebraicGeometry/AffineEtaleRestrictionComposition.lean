@@ -8,6 +8,8 @@ module
 public import Sheaf.AlgebraicGeometry.FullAffineEtaleTopos
 public import Sheaf.AlgebraicGeometry.EtaleSheaves
 public import Mathlib.AlgebraicGeometry.Morphisms.Affine
+import Sheaf.AlgebraicGeometry.AffineEtaleRestrictionCompositionGamma
+import Sheaf.AlgebraicGeometry.AffineEtaleRestrictionCompositionMates
 
 /-! # Affine étale inverse-image composition coherence -/
 
@@ -115,6 +117,10 @@ theorem affineEtale_inverseImage_restriction_composition
         (e g).hom.app ((etaleSetPullback f).obj G) ≫
           (L g).map ((e f).hom.app G) ≫ (d f g).hom.app (((fullAffineEtaleInclusion
           X).sheafPushforwardContinuous (Type (u + 1))
-          (fullAffineEtaleTopology X) X.smallEtaleTopology).obj G)) := by sorry
+          (fullAffineEtaleTopology X) X.smallEtaleTopology).obj G)) := by
+  obtain ⟨gamma, hgamma⟩ := affineEtale_restriction_composition_gamma U t
+  obtain ⟨d, hd, hcompat⟩ :=
+    affineEtale_restriction_composition_mates U t L a e he c hc gamma hgamma
+  exact ⟨gamma, d, hgamma, hd, hcompat⟩
 
 end AlgebraicGeometry.Scheme
