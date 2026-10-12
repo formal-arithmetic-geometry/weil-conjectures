@@ -6,6 +6,7 @@ Authors: SHEAF group X3
 module
 
 public import Sheaf.RingTheory.PopescuLiftInduction
+import Sheaf.RingTheory.PopescuLiftQuotientData
 
 /-!
 # Induction step for lifting Popescu resolutions
@@ -57,6 +58,14 @@ theorem popescuEighthPowerLifting_tail
     (hstandard : ∀ i : Fin (n + 1), IsStrictlyStandardElement (R := R) (algebraMap R A (π i)))
     (hresolved : PopescuEighthPowerQuotientResolved (n + 1) π α q) :
     PopescuEighthPowerQuotientResolved 1 (fun _ ↦ π 0) α q := by
-  sorry
+  obtain ⟨hfp, α₀, q₀, hα₀, hq₀, hπ₀, hR₀, hΛ₀, hstandard₀, hresolved₀⟩ :=
+    popescuEighthPowerLifting_quotientData n hn R A Λ π α q hπ hR hΛ hstandard hresolved
+  let J := Ideal.span (Set.range (fun _ : Fin 1 ↦ π 0 ^ 8))
+  let R₀ := R ⧸ J
+  let A₀ := A ⧸ Ideal.map (algebraMap R A) J
+  let Λ₀ := Λ ⧸ Ideal.map (algebraMap R Λ) J
+  let τ : Fin n → R₀ := fun j ↦ Ideal.Quotient.mk J (π j.succ)
+  have htail := ih R₀ A₀ Λ₀ τ α₀ q₀ hπ₀ hR₀ hΛ₀ hstandard₀ hresolved₀
+  exact ⟨hfp, α₀, q₀, hα₀, hq₀, htail⟩
 
 end Algebra

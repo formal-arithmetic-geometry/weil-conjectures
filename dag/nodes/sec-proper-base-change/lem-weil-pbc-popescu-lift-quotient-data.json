@@ -1,0 +1,132 @@
+{
+ "id": "lem-weil-pbc-popescu-lift-quotient-data",
+ "kind": "statement",
+ "title": "First-quotient data and tail hypotheses for Popescu lifting",
+ "statement": "Let R be Noetherian, A a finitely presented R-algebra, Λ an R-algebra, α:A→Λ an R-algebra map, q a prime of Λ, and n≥1. Let π:Fin(n+1)→R satisfy the prime-membership, preceding-eighth-power annihilator equalities, and strict-standardness hypotheses of [def-weil-pbc-popescu-lift-induction], and assume Q(n+1,π,α,q). Put J=(π₀⁸), R₀=R/J, A₀=A/JA, Λ₀=Λ/JΛ and τⱼ=π(j+1) mod J. Then A₀ is finitely presented over R₀ and there are the induced R₀-algebra map α₀ and prime q₀, uniquely specified by α₀∘p_A=p_Λ∘α and p_Λ⁻¹(q₀)=q. The list τ satisfies all three membership/annihilator and strict-standardness conditions over R₀,A₀,Λ₀, and Q(n,τ,α₀,q₀) holds. This statement neither assumes P(n) nor concludes CanBePopescuResolved(α₀,q₀). Resolution and strict standardness mean [def-weil-pbc-popescu-resolution] and [def-weil-pbc-strictly-standard-element].",
+ "source": {
+  "document": "literature/stacks-project/smoothing.tex",
+  "place": "Smoothing Ring Maps, Lemma Tag 07F8, proof"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-popescu-lift-induction",
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-popescu-resolution",
+  "def-weil-pbc-strictly-standard-element"
+ ],
+ "proof": [
+  {
+   "text": "Construct the quotient map and quotient prime by the universal property and ideal correspondence; finite presentation follows from quotient tensor base change. Identify each preceding-tail quotient and the final tail quotient with the corresponding original quotient via the third isomorphism theorem. Transport the annihilator equalities on representatives, and strict standardness by Lemma 07CC and the tensor quotient equivalence. Transport the final resolution along these algebra equivalences, preserving finite presentation, singular ideals, radical extensions and prime membership. No induction hypothesis is used. The complete construction and transport argument is given in the Lean docstring.",
+   "uses": [
+    "def-weil-pbc-popescu-resolution",
+    "def-weil-pbc-strictly-standard-element",
+    "def-weil-pbc-popescu-lift-induction",
+    "lem-weil-pbc-strictly-standard-base-change",
+    "lem-weil-pbc-tensor-quotient-base-change"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-popescu-resolution",
+  "def-weil-pbc-strictly-standard-element",
+  "def-weil-pbc-popescu-lift-induction",
+  "lem-weil-pbc-strictly-standard-base-change",
+  "lem-weil-pbc-tensor-quotient-base-change"
+ ],
+ "proof_origin": {
+  "by": "R3 second reader",
+  "document": "literature/stacks-project/smoothing.tex",
+  "place": "Lemma 07F8 final paragraph; quotient-data part preceding application of induction, expanded from quotient universal properties"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "resolution of algebra map after quotient by ideal induction finite list",
+   "results": "Ideal.quotientToQuotientRangePowQuotSuccAux_mk, Algebra.Generators.naive, Algebra.FinitePresentation.quotient, Algebra.Generators.naive_σ, Ideal.quotientToQuotientRangePowQuotSuccAux, Algebra.Generators.exists_presentation_of_free_cotangent, Algebra.Generators.naive_val, Algebra.PreSubmersivePresentation.ofHasCoeffs_val",
+   "date": "2026-10-12",
+   "verdict": "No exact match; quotient equivalences and tensor base change are component tools only."
+  },
+  {
+   "tool": "loogle",
+   "query": "Ideal.quotientEquiv",
+   "results": "Ideal.quotientEquiv, Ideal.quotientEquiv_mk, Ideal.quotientEquiv_symm_mk, Ideal.quotientEquiv_apply, Ideal.quotientEquiv_symm_apply, PowerBasis.quotientEquivQuotientMinpolyMap_apply, PowerBasis.quotientEquivQuotientMinpolyMap_symm_apply",
+   "date": "2026-10-12",
+   "verdict": "No exact match; quotient equivalences and tensor base change are component tools only."
+  },
+  {
+   "tool": "grep",
+   "query": "CanBePopescuResolved",
+   "results": "No hits",
+   "date": "2026-10-12",
+   "verdict": "No exact match; quotient equivalences and tensor base change are component tools only."
+  },
+  {
+   "tool": "leansearch",
+   "query": "transport algebra map resolution and annihilator conditions to quotient by first element of list",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "grep",
+   "query": "quotientQuotient|quotIdealMapEquivTensorQuot",
+   "results": "Mathlib/RingTheory/Finiteness/Cofinite.lean, Mathlib/RingTheory/QuasiFinite/Basic.lean, Mathlib/RingTheory/Congruence/Hom.lean, Mathlib/RingTheory/Congruence/Hom.lean, Mathlib/RingTheory/Congruence/Hom.lean, Mathlib/RingTheory/Congruence/Hom.lean, Mathlib/RingTheory/Congruence/Hom.lean, Mathlib/RingTheory/LocalRing/Length.lean",
+   "date": "2026-10-12",
+   "verdict": "No exact match; quotient equivalences and tensor base change are component tools only."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.PopescuLiftSuccessor",
+  "date": "2026-10-12",
+  "group": "R3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-popescu-lift-successor",
+   "place": "Constructing the first quotient and transporting the tail inputs before applying P(n)",
+   "via": [
+    "lem-weil-pbc-popescu-resolve-char-p",
+    "lem-weil-pbc-popescu-smoothing",
+    "lem-weil-pbc-henselian-pair-approximation",
+    "lem-weil-pbc-finite-etale-lifting-approximation",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.PopescuLiftQuotientData",
+  "file": "lean/Sheaf/RingTheory/PopescuLiftQuotientData.lean",
+  "declaration": "Algebra.popescuEighthPowerLifting_quotientData",
+  "statement": "theorem popescuEighthPowerLifting_quotientData\n    (n : ℕ) (hn : 1 ≤ n)\n    (R : Type u) (A : Type v) (Λ : Type w)\n    [CommRing R] [CommRing A] [CommRing Λ]\n    [Algebra R A] [Algebra R Λ] [IsNoetherianRing R] [FinitePresentation R A]\n    (π : Fin (n + 1) → R) (α : A →ₐ[R] Λ) (q : PrimeSpectrum Λ)\n    (hπ : ∀ i : Fin (n + 1), algebraMap R Λ (π i) ∈ q.asIdeal)\n    (hR : ∀ (i : Fin (n + 1))\n      (x : R ⧸ Ideal.span {y | ∃ j : Fin (n + 1), j.val < i.val ∧ y = π j ^ 8}),\n      π i • x = 0 ↔ π i ^ 2 • x = 0)\n    (hΛ : ∀ (i : Fin (n + 1))\n      (x : Λ ⧸ Ideal.span\n        {y | ∃ j : Fin (n + 1), j.val < i.val ∧ y = algebraMap R Λ (π j) ^ 8}),\n      π i • x = 0 ↔ π i ^ 2 • x = 0)\n    (hstandard : ∀ i : Fin (n + 1), IsStrictlyStandardElement (R := R) (algebraMap R A (π i)))\n    (hresolved : PopescuEighthPowerQuotientResolved (n + 1) π α q) :\n    let J := Ideal.span (Set.range (fun _ : Fin 1 ↦ π 0 ^ 8))\n    let J_A := Ideal.map (algebraMap R A) J\n    let J_Λ := Ideal.map (algebraMap R Λ) J\n    let R₀ := R ⧸ J\n    let A₀ := A ⧸ J_A\n    let Λ₀ := Λ ⧸ J_Λ\n    let τ : Fin n → R₀ := fun j ↦ Ideal.Quotient.mk J (π j.succ)\n    ∃ (_ : FinitePresentation R₀ A₀) (α₀ : A₀ →ₐ[R₀] Λ₀) (q₀ : PrimeSpectrum Λ₀),\n      α₀.toRingHom.comp (Ideal.Quotient.mk J_A) =\n        (Ideal.Quotient.mk J_Λ).comp α.toRingHom ∧\n      PrimeSpectrum.comap (Ideal.Quotient.mk J_Λ) q₀ = q ∧\n      (∀ j : Fin n, algebraMap R₀ Λ₀ (τ j) ∈ q₀.asIdeal) ∧\n      (∀ (j : Fin n)\n        (x : R₀ ⧸ Ideal.span {y | ∃ k : Fin n, k.val < j.val ∧ y = τ k ^ 8}),\n        τ j • x = 0 ↔ τ j ^ 2 • x = 0) ∧\n      (∀ (j : Fin n)\n        (x : Λ₀ ⧸ Ideal.span\n          {y | ∃ k : Fin n, k.val < j.val ∧ y = algebraMap R₀ Λ₀ (τ k) ^ 8}),\n        τ j • x = 0 ↔ τ j ^ 2 • x = 0) ∧\n      (∀ j : Fin n, IsStrictlyStandardElement (R := R₀) (algebraMap R₀ A₀ (τ j))) ∧\n      PopescuEighthPowerQuotientResolved n τ α₀ q₀",
+  "branch": "sheaf-dag",
+  "by": "R3",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R3",
+  "result": "pass",
+  "landing": "20261012T160142-L-2566502",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R3",
+  "result": "pass",
+  "landing": "20261012T160142-L-2566502",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
