@@ -10150,3 +10150,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 23:42 L: merged deliver/U2/Sheaf.AlgebraicGeometry.FormalFunctionsFiniteQuotientIsoB (stage 3; reviewer PASS; first push; landing 20261012T234225-L-2126975 (interface); batch 20261012T234214; modules 3; new nodes 2)
 - 23:42 L: merged deliver/U3/Sheaf.AlgebraicGeometry.EtaleRestrictedSectionsComponentEpi (stage 3; reviewer PASS; first push; landing 20261012T234225-L-2127077 (proof); batch 20261012T234214; modules 1; new nodes 0)
 - 23:42 L: merged deliver/V2/Sheaf.RingTheory.ResidueFieldTowerSystem (stage 3; reviewer PASS; first push; landing 20261012T234226-L-2127186 (interface); batch 20261012T234214; modules 3; new nodes 2)
+- 23:42 L: merged deliver/W4/Sheaf.AlgebraicGeometry.EtaleResolutionSectionOpenTransferExt (stage 3; reviewer PASS; first push; landing 20261012T234226-L-2127286 (interface); batch 20261012T234214; modules 4; new nodes 3)

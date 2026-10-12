@@ -1,0 +1,139 @@
+{
+ "id": "lem-weil-pbc-etale-open-object-cohomology-pullback",
+ "kind": "statement",
+ "title": "Open-object cohomology map commutes with arbitrary Ext pullback",
+ "statement": "For $g:Y\\to X$, an open $W$, an abelian sheaf $G$, $q\\geq0$, and any $x\\in\\mathrm{Ext}^q(A_W,G)$ with $A_W$ from [def-weil-pbc-etale-open-object-cohomology-map], the open-object cohomology map sends $\\mathrm{mk}_0(k)\\circ g^*x$ to the open cohomology pullback [def-weil-pbc-cohomology-pullback] of the open-object image of $x$, where inverse image is [def-weil-pbc-inverse-image] and $k$ is [def-weil-pbc-etale-open-free-sheaf-pullback]. No resolutions or represented cocycles are used.",
+ "stmt_deps": [
+  "def-weil-pbc-inverse-image",
+  "def-weil-pbc-etale-open-object-cohomology-map",
+  "def-weil-pbc-cohomology-pullback",
+  "def-weil-pbc-etale-open-free-sheaf-pullback"
+ ],
+ "source": {
+  "document": "Stacks Project (tag pages read online)",
+  "place": "https://stacks.math.columbia.edu/tag/03F3 (localization); https://stacks.math.columbia.edu/tag/01F8 and https://stacks.math.columbia.edu/tag/01FB (functoriality)"
+ },
+ "proof": [
+  {
+   "text": "Expand both cohomology maps into Ext exact inverse images and degree-zero precomposition. Move precomposition through the functors with mapExactFunctor_comp and mapExactFunctor_mk₀. Apply exactFunctorCompositionComparison for the two factorizations of the commuting open pullback square.",
+   "uses": [
+    "def-weil-pbc-etale-open-object-cohomology-map",
+    "def-weil-pbc-cohomology-pullback",
+    "lem-weil-pbc-ext-exact-functor-composition-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Check the remaining identity-generator equality under the constant-sheaf sections adjunction. Expand the explicitly constructed free-sheaf pullback and identity generator: both images of 1 are the pulled-back identity section, with transport given by the localization comparison and inverse-image unit naturality. Ext associativity completes the equality.",
+   "uses": [
+    "def-weil-pbc-etale-open-free-sheaf-pullback",
+    "def-weil-pbc-etale-open-comparison-data",
+    "def-weil-pbc-inverse-image"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-cohomology-pullback",
+  "def-weil-pbc-etale-open-comparison-data",
+  "def-weil-pbc-etale-open-free-sheaf-pullback",
+  "def-weil-pbc-etale-open-object-cohomology-map",
+  "def-weil-pbc-inverse-image",
+  "lem-weil-pbc-ext-exact-functor-composition-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project (tag pages read online)",
+  "place": "https://stacks.math.columbia.edu/tag/03F3 (localization); https://stacks.math.columbia.edu/tag/01F8 and https://stacks.math.columbia.edu/tag/01FB (functoriality); explicit Lean-model calculation, not a verbatim Stacks statement."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Ext naturality for a map between resolutions after an exact functor",
+   "results": "mapExactFunctor_hom, mapExactFunctor, rightDerived_map_eq; generic tools, no section/open-object transfer theorem. Also searched free abelian sheaf on representable object inverse image identity generator: module-sheaf freeYonedaEquiv and freeHomEquiv tools, no match for this AddCommGrpCat model.",
+   "date": "2026-10-13",
+   "verdict": "No exact match; generic tools only"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Abelian.Ext.mapExactFunctor_comp; CategoryTheory.Adjunction.homEquiv_naturality_right",
+   "results": "One generic formula for each; neither supplies the concrete inverse-image open-generator calculation.",
+   "date": "2026-10-13",
+   "verdict": "Generic tools only"
+  },
+  {
+   "tool": "grep",
+   "query": "extMk|mapExactFunctor|sectionsEquiv|FreeSheaf; object.*[Pp]ullback|[Pp]ullback.*object|extMk.*mapExactFunctor",
+   "results": "Read pinned Mathlib Injective/Ext.lean, DerivedCategory/Ext/Map.lean, Sites/Abelian.lean and local Etale modules. mk₀_comp_extMk and extMk_comp_mk₀ handle precomposition and same-category comparisons. EtaleResolutionSectionCanonicalOpenToOpenCycle handles restriction, not cross-scheme pullback. No existing definition of the AddCommGrpCat free-open pullback map or the two required identities.",
+   "date": "2026-10-13",
+   "verdict": "No exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An exact inverse image functor transfers Ext classes represented by injective resolution cocycles, and restriction to an open commutes with this pullback; inverse image unit identity section free abelian representable pullback map",
+   "results": "UNAVAILABLE: service Internal Server Error. The other search services and pinned source rg were used.",
+   "date": "2026-10-13",
+   "verdict": null
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleResolutionSectionOpenTransferExt",
+  "date": "2026-10-13",
+  "group": "W4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-injective-restriction-acyclicity",
+   "place": "The augmentation-preserving open transfer part of the resolution-section comparison; the Ext calculation after choosing Hom cocycles. Split the represented Ext transfer from localization/generator compatibility.",
+   "via": [
+    "lem-weil-pbc-etale-resolution-section-open-transfer",
+    "lem-weil-pbc-etale-resolution-section-canonical-transfer",
+    "lem-weil-pbc-etale-resolution-section-homology-naturality",
+    "lem-weil-pbc-etale-resolution-section-homology",
+    "lem-weil-pbc-etale-mayer-vietoris-section-comparison",
+    "lem-weil-pbc-etale-mayer-vietoris-section-diagram",
+    "lem-weil-pbc-etale-mayer-vietoris-connecting-pullback",
+    "lem-weil-pbc-etale-mayer-vietoris-pullback",
+    "lem-weil-pbc-etale-cohomology-limit-of-schemes",
+    "lem-weil-pbc-etale-resolution-section-open-transfer-ext"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleOpenObjectCohomologyPullback",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleOpenObjectCohomologyPullback.lean",
+  "declaration": "AlgebraicGeometry.Etale.etaleOpenObjectCohomologyMap_pullback",
+  "statement": "theorem etaleOpenObjectCohomologyMap_pullback\n    {X Y : Scheme.{u}} (g : Y ⟶ X) (W : X.Opens)\n    (G : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) (q : ℕ)\n    (x : Abelian.Ext ((etaleOpenFreeSheaf X).obj (Scheme.Etale.mk W.ι)) G q) :\n    etaleOpenObjectCohomologyMap ((upperStar AddCommGrpCat.{u + 1} g).obj G)\n      q (g ⁻¹ᵁ W)\n        ((Abelian.Ext.mk₀ (etaleOpenFreeSheafPullback g W)).comp\n          (x.mapExactFunctor (upperStar AddCommGrpCat.{u + 1} g)) (zero_add q)) =\n      openCohomologyPullback g W G q (etaleOpenObjectCohomologyMap G q W x)",
+  "branch": "sheaf-dag",
+  "by": "W4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W4",
+  "result": "pass",
+  "landing": "20261012T234226-L-2127286",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W4",
+  "result": "pass",
+  "landing": "20261012T234226-L-2127286",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

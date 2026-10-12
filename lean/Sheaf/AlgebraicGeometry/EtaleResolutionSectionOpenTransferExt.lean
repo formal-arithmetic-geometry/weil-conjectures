@@ -3,6 +3,8 @@ module
 public import Mathlib.CategoryTheory.Abelian.Injective.Ext
 public import Sheaf.AlgebraicGeometry.EtaleResolutionSectionTransfer
 public import Sheaf.AlgebraicGeometry.EtaleOpenCohomologyComparison
+import Sheaf.AlgebraicGeometry.EtaleResolutionSectionTransferExtClass
+import Sheaf.AlgebraicGeometry.EtaleOpenObjectCohomologyPullback
 
 @[expose] public section
 
@@ -57,6 +59,8 @@ theorem resolutionSection_transfer_open_ext
     etaleOpenObjectCohomologyMap ((upperStar AddCommGrpCat.{u + 1} g).obj G)
       q (g ⁻¹ᵁ W) (J.extMk fY (q + 1) rfl hfY) =
       openCohomologyPullback g W G q
-        (etaleOpenObjectCohomologyMap G q W (I.extMk fX (q + 1) rfl hfX)) := by sorry
+        (etaleOpenObjectCohomologyMap G q W (I.extMk fX (q + 1) rfl hfX)) := by
+  rw [resolutionSection_transfer_ext g G I J α hα W q fX hfX fY hfY hsections]
+  exact etaleOpenObjectCohomologyMap_pullback g W G q (I.extMk fX (q + 1) rfl hfX)
 
 end AlgebraicGeometry.Etale
