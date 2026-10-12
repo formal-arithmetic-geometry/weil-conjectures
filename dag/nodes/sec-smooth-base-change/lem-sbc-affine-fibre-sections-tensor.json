@@ -1,0 +1,134 @@
+{
+ "id": "lem-sbc-affine-fibre-sections-tensor",
+ "kind": "statement",
+ "title": "Sections on an affine open in a scheme-theoretic fibre",
+ "statement": "Let $R$ be a commutative ring and $f:X\\to\\operatorname{Spec}R$ a morphism of schemes [def-weil-affine-spectrum]. Let $U$ be any affine open of $X$, put $A=\\Gamma(X,U)$, and give $A$ its $R$-algebra structure via the induced ring map $\\rho:R\\to A$. For every prime $p\\in\\operatorname{Spec}R$, write $\\kappa(p)$ for its residue field [def-weil-residue-field] and $i:X_p\\to X$ for the scheme-theoretic fibre inclusion [def-pc-fibre-product]. There is a ring isomorphism $e:\\Gamma(X_p,i^{-1}U)\\xrightarrow{\\sim}A\\otimes_R\\kappa(p)$ satisfying $e(i^*a)=a\\otimes1$ for every $a\\in A$. No domain, finiteness, flatness, reducedness or nonemptiness hypothesis is required.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tags 01I4 (lemma-fibre-product-affine-schemes), 01JQ (lemma-fibre-product-affines), and 01JR (lemma-open-fibre-product); used in Tag 055J, affine fibre identifications"
+ },
+ "stmt_deps": [
+  "def-weil-affine-spectrum",
+  "def-pc-fibre-product",
+  "def-weil-residue-field"
+ ],
+ "proof": [
+  {
+   "text": "Paste the pullback square for restriction of the fibre inclusion to U with the defining fibre square. In Lean use isPullback_morphismRestrict and IsPullback.paste_horiz, with flips. This identifies the open inverse image with the pullback of U and Spec of the scheme residue field over Spec R.",
+   "uses": [
+    "lem-weil-pbc-open-fibre-product"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply isPushout_appTop_of_isPullback to this square: all three schemes at the base corners are affine. Transport the pushout by the global-section isomorphisms U.topIso, V.topIso and Scheme.ΓSpecIso, and by Scheme.Spec.residueFieldIso. The four transported edges are the specified R-algebra map to A, the residue-field algebra map, restriction from A to fibre sections, and the second-projection map. Check the first edge by appLE and functoriality, the second by map_residueFieldIso_inv_eq_fromSpecResidueField and ΓSpecIso_naturality, the third by resLE_app_top and appLE_eq_app, and the fourth by cancellation of an isomorphism.",
+   "uses": [
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-weil-pbc-spec-residue-field-identification"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Compare this transported pushout with CommRingCat.isPushout_tensorProduct by IsPushout.isoIsPushout. The induced ring equivalence is e. Its inl_isoIsPushout_hom equation, evaluated at a, says exactly e(i^*a)=a tensor 1. No choice from an unproved existence statement is used. For empty U both section and tensor rings are zero, and the same pushout argument applies.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-open-fibre-product",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-spec-residue-field-identification"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "Stacks Project",
+  "place": "Tags 01I4, 01JQ, 01JR",
+  "note": "S1: completed Lean proof by pullback pasting, global-section pushouts, and tensor-product pushout uniqueness."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "sections of an affine open in a scheme theoretic fiber tensor product residue field",
+   "results": "Service unavailable: Internal Server Error; no verdict from this service.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "global sections on the preimage of an affine open under a scheme theoretic fibre inclusion are the tensor product with the residue field",
+   "results": "Eight results concern Scheme.Pullback.Triplet tensor maps and point residue fields; none supplies this section-ring comparison and restriction equation.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"isPushout_appTop_of_isPullback\"",
+   "results": "Found AlgebraicGeometry.isPushout_appTop_of_isPullback in Mathlib.AlgebraicGeometry.Morphisms.Affine. It gives the section-ring pushout for an affine square, used in the complete Lean proof.",
+   "date": "2026-10-13",
+   "verdict": "general proof tool"
+  },
+  {
+   "tool": "grep",
+   "query": "IsPushout|isPushout|Γ|tensor in Mathlib.AlgebraicGeometry.Morphisms.Affine; residueFieldIso in ResidueField; affine fibre sections in Sheaf and WeilConjectures",
+   "results": "Found isPushout_appTop_of_isPullback, isPullback_morphismRestrict, Scheme.Spec.residueFieldIso, its structure-map compatibility, and CommRingCat.isPushout_tensorProduct. Existing finite-affine-fibre sections nodes use stronger finiteness assumptions and stalks. No identical general affine-open section-ring statement. These Mathlib tools prove the new theorem completely.",
+   "date": "2026-10-13",
+   "verdict": "complete proof from general Mathlib tools"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.GenericFibreAffineRingModels",
+  "date": "2026-10-13",
+  "group": "S1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-lem-slicing",
+   "place": "Affine fibre-ring identification in the trait argument for slicing; step 1 of lem-sbc-generic-fibre-affine-ring-models, used in Tag 055J",
+   "via": [
+    "lem-sbc-generic-fibre-affine-ring-models",
+    "lem-sbc-connected-generic-fibre-trait",
+    "lem-sbc-smooth-section-component-noetherian-generalization-core",
+    "lem-sbc-smooth-section-component-noetherian-generalization",
+    "lem-sbc-smooth-section-component-generalization",
+    "lem-sbc-smooth-section-component-open"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-normal-form",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AffineFibreSectionsTensor",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineFibreSectionsTensor.lean",
+  "declaration": "AlgebraicGeometry.affine_fibre_sections_tensor",
+  "statement": "theorem affine_fibre_sections_tensor {R : Type u} [CommRing R] {X : Scheme.{u}}\n    (f : X ⟶ Spec (.of R)) (U : X.affineOpens) (p : PrimeSpectrum R) :\n    let ρ := (Scheme.ΓSpecIso (.of R)).inv ≫ f.appLE ⊤ U.1 le_top\n    let _ : Algebra R Γ(X, U.1) := ρ.hom.toAlgebra\n    ∃ e : Γ(f.fiber p, (f.fiberι p) ⁻¹ᵁ U.1) ≃+*\n        (Γ(X, U.1) ⊗[R] p.asIdeal.ResidueField),\n      ∀ a : Γ(X, U.1), e ((f.fiberι p).app U.1 a) =\n        TensorProduct.tmul R a 1",
+  "branch": "sheaf-dag",
+  "by": "S1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S1",
+  "result": "pass",
+  "landing": "20261012T194138-L-464231",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S1",
+  "result": "pass",
+  "landing": "20261012T194138-L-464231",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
