@@ -1,0 +1,181 @@
+{
+ "id": "lem-sc-affine-algebra-exact-derived-counit-iso",
+ "kind": "statement",
+ "title": "Canonical exact-derived affine algebra counit is invertible",
+ "statement": "Let $f:X\\to Y$ be an affine morphism of schemes [def-pc-scheme], and let $g:(X,\\mathcal O_X)\\to(Y,f_*\\mathcal O_X)$ be its direct-image-algebra morphism [def-sc-direct-image-algebra-derived-category]. Assume the derived categories of module sheaves [def-weil-abstract-derived-category, def-weil-sheaf-of-modules-category] over both ringed spaces exist. Let $P:\\operatorname{Mod}(f_*\\mathcal O_X)\\to\\operatorname{Mod}(\\mathcal O_X)$ be additive and preserve finite limits and finite colimits, with an adjunction $a:P\\dashv g_*$ to module direct image [def-pc-ringed-spaces-derived-direct-image]. Let $b:D(P)\\dashv Rg_*$ be the canonical derived adjunction induced by $a$, using termwise exact $P$ and the K-injective right-derived functor [lem-sc-derived-adjunction-from-underived]. For every $K\\in D(\\mathcal O_X)$ whose cohomology sheaves are quasi-coherent in all integer degrees [def-pc-derived-category], the counit $b_K:D(P)(Rg_*K)\\to K$ is an isomorphism.",
+ "source": {
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 0AVW, perfect-lemma-affine-morphism-equivalence, proof"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sc-direct-image-algebra-derived-category",
+  "def-weil-abstract-derived-category",
+  "def-weil-sheaf-of-modules-category",
+  "def-pc-ringed-spaces-derived-direct-image",
+  "lem-sc-derived-adjunction-from-underived",
+  "def-pc-derived-category"
+ ],
+ "proof": [
+  {
+   "text": "Use exact scalar restriction from the direct-image algebra to O_Y. Its composite with the underlying abelian-sheaf functor is unchanged, so exactness and reflection of isomorphisms follow from the corresponding forgetful functor properties. The right-derived composition and exact-functor comparisons identify this restriction of Rg_*K with Rf_*K, without changing the original derived-category universes.",
+   "uses": [
+    "def-pc-ringed-spaces-derived-direct-image",
+    "lem-weil-pbc-exact-functor-bounded-below"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 0AVW, perfect-lemma-affine-morphism-equivalence, proof"
+   }
+  },
+  {
+   "text": "The affine unbounded cohomology formula gives H^i(Rf_*K)=f_*H^i(K). Retain the f_*O_X action on the same pushed K-injective complex, obtaining H^i(Rg_*K)=g_*H^i(K). On affine opens the comparison is algebra-linear; its maps commute with restriction and hence glue. Exact P gives H^i(D(P)(Rg_*K))=P(g_*H^i(K)). These comparisons are natural, and use the unbounded cohomological bound in the proof of the affine formula rather than claiming exactness of arbitrary direct image.",
+   "uses": [
+    "lem-sc-affine-derived-cohomology",
+    "lem-weil-pbc-exact-functor-bounded-below"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 0AVW, perfect-lemma-affine-morphism-equivalence, proof"
+   }
+  },
+  {
+   "text": "Compute the canonical derived counit on a K-injective resolution of K. The derived-adjunction counit equation makes it the ordinary counit after the right-derived comparison and the exact pullback comparison. Applying cohomology and the kernel/image comparisons of Step 2 identifies this with P(g_*H^i(K))→H^i(K). On affine opens its map sends b tensor s to b*s; compatibility with restrictions identifies it with the ordinary affine module counit. This is the counit calculation in 0AVW, independent of any derived unit factorization.",
+   "uses": [
+    "lem-sc-derived-adjunction-from-underived",
+    "lem-weil-pbc-affine-module-correspondence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 0AVW, perfect-lemma-affine-morphism-equivalence, proof"
+   }
+  },
+  {
+   "text": "For each i the ordinary counit is invertible because H^i(K) is quasi-coherent. The homology comparisons in Step 2 therefore make H^i of the canonical derived counit invertible. The homology criterion for isomorphisms in the derived category proves its invertibility. Transport the underived adjunction from tensor pullback to the given a by uniqueness of left adjoints; the induced exact derived natural isomorphism transports the canonical counit. Empty schemes, zero modules and shifts satisfy the same argument.",
+   "uses": [
+    "lem-sc-affine-algebra-module-adjunction-isos",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 0AVW, perfect-lemma-affine-morphism-equivalence, proof"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-ringed-spaces-derived-direct-image",
+  "def-weil-abstract-derived-category",
+  "lem-sc-affine-algebra-module-adjunction-isos",
+  "lem-sc-affine-derived-cohomology",
+  "lem-sc-derived-adjunction-from-underived",
+  "lem-weil-pbc-affine-module-correspondence",
+  "lem-weil-pbc-exact-functor-bounded-below"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 0AVW, first adjunction map in the proof; canonical exact-derived counit calculation, with Tag 079W"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "affine morphism derived exact pullback counit isomorphism quasi coherent",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "canonical unbounded derived adjunction exact affine pullback counit is iso on quasi coherent complexes",
+   "results": "SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal; SheafOfModules.pullbackIso; SheafOfModules.pullbackComp; CategoryTheory.Functor.sheafPullbackConstruction.sheafPullbackIso; SheafOfModules.pushforwardPushforwardAdj_counit_app_val_app; SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit; SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit; CategoryTheory.Functor.IsDenseSubsite.instIsIsoSheafAppCounitSheafAdjunctionCocontinuous",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "mapDerivedCategoryRightDerivedAdjunction.*counit|affine.*derived.*counit",
+   "results": "No hits",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "derived pushforward fully faithful counit exact left adjoint quasi coherent sheaves",
+   "results": "SheafOfModules.pushforwardPushforwardAdj; SheafOfModules.pushforwardPushforwardAdj_counit_app_val_app; CategoryTheory.Functor.sheafPushforwardCocontinuousCompSheafToPresheafIso; SheafOfModules.instIsRightAdjointPushforwardCompSheafRingCatMapSheafPushforwardContinuous; SheafOfModules.pullbackPushforwardAdjunction; SheafOfModules.instIsRightAdjointPushforward; CategoryTheory.Functor.sheafAdjunctionCocontinuous; SheafOfModules.pushforwardNatIso",
+   "date": "2026-10-12",
+   "verdict": "second reading: no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.derived_counit",
+   "results": "CategoryTheory.Adjunction.derived_counit",
+   "date": "2026-10-12",
+   "verdict": "second reading: no replacement; generic derived-counit API only"
+  },
+  {
+   "tool": "grep",
+   "query": "counit.*quasi|quasi.*counit|counit.*homology|homology.*counit",
+   "results": "No hits",
+   "date": "2026-10-12",
+   "verdict": "second reading: no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AffineAlgebraDerivedUnitHomologyFactorization",
+  "date": "2026-10-12",
+  "group": "U3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "proof, affine derived equivalence for finite duality: invertibility of the canonical exact-derived counit, independently of the derived unit",
+   "via": [
+    "lem-sc-affine-algebra-derived-unit-homology-factorization",
+    "lem-sc-affine-algebra-derived-adjunction-isos",
+    "lem-sc-finite-affine-derived-equivalence",
+    "lem-sc-finite-duality-derived-hom"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AffineAlgebraExactDerivedCounitIso",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineAlgebraExactDerivedCounitIso.lean",
+  "declaration": "AlgebraicGeometry.affine_algebra_exact_derived_counit_isIso",
+  "statement": "theorem affine_algebra_exact_derived_counit_isIso\n    {X Y : Scheme.{v}} (f : X ⟶ Y) [IsAffineHom f]\n    [HasDerivedCategory.{wX} (SheafOfModules.{v} (moduleRings X.toRingedSpace))]\n    [HasDerivedCategory.{wA} (SheafOfModules.{v} (moduleRings (directImageAlgebraSpace f)))]\n    (P : SheafOfModules.{v} (moduleRings (directImageAlgebraSpace f)) ⥤\n      SheafOfModules.{v} (moduleRings X.toRingedSpace))\n    [P.Additive] [Limits.PreservesFiniteLimits P] [Limits.PreservesFiniteColimits P]\n    (a : P ⊣ RingedSpace.moduleDirectImage (toDirectImageAlgebraSpace f))\n    (K : schemeDerivedCategory X) (hK : schemeDerivedQCohProperty X K) :\n    IsIso ((a.mapDerivedCategoryRightDerivedAdjunction).counit.app K)",
+  "branch": "sheaf-dag",
+  "by": "U3",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U3",
+  "result": "pass",
+  "landing": "20261012T144151-L-2109321",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U3",
+  "result": "pass",
+  "landing": "20261012T144151-L-2109321",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
