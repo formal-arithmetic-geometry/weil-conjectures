@@ -58,8 +58,8 @@ theorem subsingleton_compactlySupportedCohomology_zero [IsAffine U]
     (hF : F.IsLisse) :
     Subsingleton (F.compactlySupportedCohomology 0).carrier :=
   have := subsingleton_compactlySupportedCohomology_directImage_zero (𝟙 U) F hF
-  (compactlySupportedCohomologyEquivOfIso (lowerStarIdIso F).symm 0).toLinearEquiv.toEquiv
-    |>.subsingleton
+  (compactlySupportedCohomologyEquivOfIso ((lowerStarIdIso k₀ l U).app F).symm 0)
+    |>.toLinearEquiv.toEquiv.subsingleton
 
 
 /-- Blueprint `lem-a1-affine-hc2`: Description of `H_c²` on an affine curve.
@@ -77,7 +77,8 @@ theorem nonempty_equiv_compactlySupportedCohomology_two [IsAffine U]
     Nonempty ((F.compactlySupportedCohomology 2).Equiv
       ((F.geometricCoinvariants hF).tateTwist (Nat.card k₀) (-1))) := by
   obtain ⟨e⟩ := nonempty_equiv_compactlySupportedCohomology_directImage_two (𝟙 U) F hF
-  exact ⟨(compactlySupportedCohomologyEquivOfIso (lowerStarIdIso F).symm 2).trans e⟩
+  exact ⟨(compactlySupportedCohomologyEquivOfIso ((lowerStarIdIso k₀ l U).app F).symm 2).trans
+    e⟩
 
 /-- The compactly supported cohomology of a lisse Weil sheaf on a smooth geometrically
 connected affine curve vanishes outside degrees `1` and `2`. -/
