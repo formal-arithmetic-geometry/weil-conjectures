@@ -1,0 +1,156 @@
+{
+ "id": "lem-sc-closed-immersion-disjoint-ideal-twist-mono",
+ "kind": "statement",
+ "title": "Monicity of restriction on an ideal twist",
+ "statement": "Let $i:X\\hookrightarrow Y$ be a closed immersion of schemes [def-pc-scheme] [def-weil-closed-immersion] and $I$ an ideal sheaf [def-sbc-closed-immersion-ideal-sheaf]. Suppose $I(U)\\cap\\ker(i)(U)=0$ on every open $U$ of $Y$. Let $M$ be invertible [def-sc-invertible-module], $m\\ge0$, $N=M^{\\otimes m}$ [def-pur-sheaf-tensor-product], and let $\\eta$ be the unit of the chosen module tensor-pullback adjunction [def-pc-module-pullback]. Write $\\mu:I\\otimes N\\to N$ for multiplication. Then $\\operatorname{im}(\\mu)\\hookrightarrow N\\xrightarrow{\\eta_N}i_*i^*N$ is a monomorphism of module sheaves.",
+ "source": {
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Remark remark-conductor, final sentence, and the local trivialization argument used in Lemma lemma-dim-1-noetherian-reduced-separated-has-ample"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-closed-immersion",
+  "def-sbc-closed-immersion-ideal-sheaf",
+  "def-pc-module-pullback",
+  "def-sc-invertible-module",
+  "def-pur-sheaf-tensor-product"
+ ],
+ "proof": [
+  {
+   "text": "Put N=M tensor-power m. Choose an affine basis trivializing N; on V=Spec A, i inverse-image V=Spec B is given by a surjection A -> B with kernel J. Quasi-coherence identifies the multiplication image with K=I(V). The canonical unit on this image is the quotient map K -> B. Its kernel is K intersection J, zero by hzero V. When B=0, J=A and hzero gives K=0.",
+   "uses": [
+    "def-sbc-closed-immersion-ideal-sheaf",
+    "def-weil-closed-immersion",
+    "def-pc-module-pullback",
+    "def-sc-invertible-module",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "A difference of sections killed by restriction is zero on every basis open and hence zero by sheaf separatedness. Thus the sheaf morphism is mono. Compare the chosen adjunction with the canonical one by uniqueness of left adjoints; their units differ by postcomposition with pushforward of an isomorphism on N, which preserves monicity.",
+   "uses": [
+    "def-pc-module-pullback"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sbc-closed-immersion-ideal-sheaf",
+  "def-weil-closed-immersion",
+  "def-pc-module-pullback",
+  "def-sc-invertible-module",
+  "def-pur-sheaf-tensor-product"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Remark remark-conductor, final sentence, and the local trivialization argument used in Lemma lemma-dim-1-noetherian-reduced-separated-has-ample"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A monomorphism factors through a second monomorphism with the same image and the induced morphism is an isomorphism",
+   "results": "8 hits; ; top: ['CategoryTheory.MonoOver.factors_congr', 'CategoryTheory.Limits.imageMonoIsoSource', 'CategoryTheory.Limits.IsImage.isoExt', 'CategoryTheory.Limits.imageMonoIsoSource_hom_self', 'CategoryTheory.Limits.imageMonoIsoSource_hom_self_assoc', 'CategoryTheory.Limits.MonoFactorisation.isoComp_I', 'CategoryTheory.Limits.imageMonoIsoSource_inv_ι', 'CategoryTheory.Limits.MonoFactorisation.ofIsoComp_m']",
+   "date": "2026-10-13",
+   "verdict": "No exact scheme-module restriction theorem; generic image isomorphism infrastructure is used in the parent proof."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.imageSubobject",
+   "results": "0 hits; loogle: unknown identifier 'CategoryTheory.imageSubobject'; top: []",
+   "date": "2026-10-13",
+   "verdict": "No exact scheme-module restriction theorem; generic image isomorphism infrastructure is used in the parent proof."
+  },
+  {
+   "tool": "grep",
+   "query": "image.*(iso|mono)|isIso.*bijective",
+   "results": "25 hits; ; top: ['Mathlib/CategoryTheory/FiberedCategory/HasFibers.lean', 'Mathlib/CategoryTheory/FiberedCategory/HasFibers.lean', 'Mathlib/CategoryTheory/FiberedCategory/HasFibers.lean', 'Mathlib/CategoryTheory/Simple.lean', 'Mathlib/CategoryTheory/Simple.lean', 'Mathlib/CategoryTheory/RegularCategory/Basic.lean', 'Mathlib/CategoryTheory/RegularCategory/Basic.lean', 'Mathlib/CategoryTheory/ObjectProperty/Ind.lean']",
+   "date": "2026-10-13",
+   "verdict": "No exact scheme-module restriction theorem; generic image isomorphism infrastructure is used in the parent proof."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The restriction to a closed subscheme of a product of an ideal sheaf and a line bundle has image the product of the extended ideal and the restricted line bundle",
+   "results": "0 hits; service unavailable: Internal Server Error; top: []",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For ideals K and J in a ring with K intersection J zero, the map K to the quotient by J is injective, also after tensoring by a rank one locally free module",
+   "results": "8 hits; ; top: ['AdicCompletion.tensor_map_id_left_injective_of_injective', 'Submodule.injective_tensorToSpan', 'IsLocalRing.split_injective_iff_lTensor_residueField_injective', 'Module.Flat.iff_lift_lsmul_comp_subtype_injective', 'TensorProduct.rTensor_injective_of_forall_vanishesTrivially', 'Module.free_of_maximalIdeal_rTensor_injective', \"Module.Flat.iff_rTensor_injective'\", \"Module.Flat.iff_lTensor_injective'\"]",
+   "date": "2026-10-13",
+   "verdict": "No exact scheme-module restriction theorem; generic image isomorphism infrastructure is used in the parent proof."
+  },
+  {
+   "tool": "grep",
+   "query": "ker.*(comp|restrict)|range.*(quotient|tensor)|mono.*restrict",
+   "results": "25 hits; ; top: ['Mathlib/AlgebraicGeometry/Restrict.lean', 'Mathlib/AlgebraicGeometry/Restrict.lean', 'Mathlib/AlgebraicGeometry/Restrict.lean', 'Mathlib/AlgebraicGeometry/Modules/Sheaf.lean', 'Mathlib/AlgebraicGeometry/Modules/Sheaf.lean', 'Mathlib/AlgebraicGeometry/Modules/Sheaf.lean', 'Mathlib/AlgebraicGeometry/Modules/Sheaf.lean', 'Mathlib/AlgebraicGeometry/Modules/Sheaf.lean']",
+   "date": "2026-10-13",
+   "verdict": "No exact scheme-module restriction theorem; generic image isomorphism infrastructure is used in the parent proof."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ClosedImmersionDisjointIdealTwist",
+  "date": "2026-10-13",
+  "group": "J3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-closed-immersion-disjoint-ideal-twist",
+   "place": "Kernel and image computations in the local trivialization argument",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-thm-curveestimate",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ClosedImmersionDisjointIdealTwistMono",
+  "file": "lean/Sheaf/AlgebraicGeometry/ClosedImmersionDisjointIdealTwistMono.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.closedImmersion_disjointIdeal_twist_mono",
+  "statement": "theorem closedImmersion_disjointIdeal_twist_mono {Y X : Scheme.{u}} (i : X ⟶ Y)\n    [IsClosedImmersion i] (I : Y.IdealSheafData)\n    (hzero : ∀ U : Y.Opens, I.idealOfOpens U ⊓ i.ker.idealOfOpens U = ⊥)\n    (M : Y.Modules) [M.IsInvertible] (m : ℕ) :\n    let adj := Classical.choice (nonempty_tensorPullbackAdjunction i)\n    let μ := I.toModulesι ▷ M.tensorPow m ≫ (λ_ (M.tensorPow m)).hom\n    Mono (image.ι μ ≫ adj.unit.app (M.tensorPow m))",
+  "branch": "sheaf-dag",
+  "by": "J3",
+  "date": "2026-10-13"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J3",
+  "result": "pass",
+  "landing": "20261012T184311-L-4007243",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J3",
+  "result": "pass",
+  "landing": "20261012T184311-L-4007243",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

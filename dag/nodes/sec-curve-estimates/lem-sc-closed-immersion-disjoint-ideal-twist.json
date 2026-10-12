@@ -17,36 +17,28 @@
  ],
  "proof": [
   {
-   "text": "Put N=M tensor-power m. On affine opens trivializing N, the closed immersion is A -> B=A/J and the ideal I has sections K. Multiplication K tensor A -> A has image K, and the adjoint ideal map B tensor K -> B has image KB. The map K -> KB is surjective with kernel K intersect J, hence bijective by the hypothesis. Outside the closed image J is the unit ideal, so K=0. No reducedness or component hypothesis is used.",
+   "text": "Use the disjointness kernel calculation to show the ambient restriction from image mu into pushforward of tensor pullback N is mono; postcomposition with pushforward of e is an isomorphism and preserves monicity. The target multiplication-image inclusion is mono and remains mono under pushforward.",
    "uses": [
-    "def-sbc-closed-immersion-ideal-sheaf",
-    "def-weil-closed-immersion",
-    "def-pc-module-pullback",
-    "def-sc-invertible-module",
-    "def-pur-sheaf-tensor-product"
+    "lem-sc-closed-immersion-disjoint-ideal-twist-mono"
    ],
    "elementary": false
   },
   {
-   "text": "The local corestrictions are induced by the ambient adjunction unit and agree on overlaps since the target image inclusion is mono, so the sheaf axiom glues them. They are locally isomorphisms, hence are isomorphisms of sheaves. A change of adjunction precomposes the adjoint ideal map by an isomorphism and preserves its image; transport the restriction morphism by the corresponding natural isomorphism on N. Any linear comparison e carries the product by that image ideal to the target product. This gives precisely the displayed factorization. Evaluating the inverse on any open proves sectionwise bijectivity.",
+   "text": "The image calculation identifies the images of these two monomorphisms in the same ambient module. Apply Mathlib imageSubobject_mono and Subobject.isoOfMkEqMk to obtain an isomorphism q from image mu to pushforward of image mu1. Its defining equation is precisely the required compatibility. Evaluating q and its inverse on any open gives a linear equivalence and therefore bijectivity.",
    "uses": [
-    "def-pc-module-pullback",
-    "def-pur-sheaf-tensor-product"
+    "lem-sc-closed-immersion-disjoint-ideal-twist-image"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "def-sbc-closed-immersion-ideal-sheaf",
-  "def-weil-closed-immersion",
-  "def-pc-module-pullback",
-  "def-sc-invertible-module",
-  "def-pur-sheaf-tensor-product"
+  "lem-sc-closed-immersion-disjoint-ideal-twist-mono",
+  "lem-sc-closed-immersion-disjoint-ideal-twist-image"
  ],
  "proof_origin": {
   "by": "worker",
   "document": "literature/stacks-project/varieties.tex",
-  "place": "Remark remark-conductor"
+  "place": "Second reading J3: categorical reconstruction from the separate kernel and image computations of Remark 09NW and Lemma 09NX"
  },
  "mathlib_searches": [
   {
@@ -155,9 +147,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "G1",
+  "group": "J3",
   "result": "pass",
-  "landing": "20261012T173826-L-3295829",
+  "landing": "20261012T184311-L-4007243",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

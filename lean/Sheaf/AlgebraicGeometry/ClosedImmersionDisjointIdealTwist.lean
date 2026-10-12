@@ -10,6 +10,8 @@ public import WeilConjectures.AlgebraicGeometry.Modules.Invertible
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Module
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 public import Mathlib.CategoryTheory.Abelian.Images
+import Sheaf.AlgebraicGeometry.ClosedImmersionDisjointIdealTwistMono
+import Sheaf.AlgebraicGeometry.ClosedImmersionDisjointIdealTwistImage
 
 /-! # Restricting a disjoint ideal times an invertible module
 
@@ -69,6 +71,30 @@ theorem closedImmersion_disjointIdeal_twist {Y X : Scheme.{u}} (i : X ⟶ Y)
     ∃ ρ : image μ ⟶ (pushforward i).obj (image μ₁),
       ρ ≫ (pushforward i).map (image.ι μ₁) = image.ι μ ≫ adj.unit.app (M.tensorPow m) ≫
         (pushforward i).map e.hom ∧ ∀ U : Y.Opens, Function.Bijective (ρ.app U) := by
-  sorry
+  dsimp only
+  let adj := Classical.choice (nonempty_tensorPullbackAdjunction i)
+  let φ := (adj.homEquiv I.toModules (SheafOfModules.unit X.ringCatSheaf)).symm
+    (I.toModulesι ≫ SheafOfModules.unitToPushforwardObjUnit i.toRingCatSheafHom)
+  let μ := I.toModulesι ▷ M.tensorPow m ≫ (λ_ (M.tensorPow m)).hom
+  let μ₁ := image.ι φ ▷ ((tensorPullback i).obj M).tensorPow m ≫
+    (λ_ (((tensorPullback i).obj M).tensorPow m)).hom
+  let a := image.ι μ ≫ adj.unit.app (M.tensorPow m) ≫ (pushforward i).map e.hom
+  let b := (pushforward i).map (image.ι μ₁)
+  have : Mono (image.ι μ ≫ adj.unit.app (M.tensorPow m)) :=
+    closedImmersion_disjointIdeal_twist_mono i I hzero M m
+  have : Mono a := by
+    dsimp only [a]
+    rw [← Category.assoc]
+    infer_instance
+  have : Mono b := inferInstance
+  have h := closedImmersion_disjointIdeal_twist_image i I M m e
+  have hab : Subobject.mk a = Subobject.mk b := by
+    simpa only [imageSubobject_mono] using h
+  let q := Subobject.isoOfMkEqMk a b hab
+  refine ⟨q.hom, ?_, ?_⟩
+  · change q.hom ≫ b = a
+    simp [q]
+  · intro U
+    exact (appLinearEquivOfIso q U).bijective
 
 end AlgebraicGeometry.Scheme.Modules
