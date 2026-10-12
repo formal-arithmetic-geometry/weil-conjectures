@@ -13,30 +13,37 @@
  ],
  "proof": [
   {
-   "text": "If f=0, localizations at its powers are zero; injectivity of alpha makes every chart group zero. Otherwise localize the exact pair. IsLocalizedModule.map_exact, map_injective and map_surjective give ordinary exactness and the conditional endpoint properties.",
+   "text": "Define the ordinary localized linear maps F and G at T=powers(f). Every localized element is represented by y/f^m, so the hypotheses hi and hq give F(alpha_0(s))=alpha_1(i(s)) and G(alpha_1(s))=alpha_2(q(s)). The range equality for each alpha implies its values are equal-degree fractions. Ordinary localization preserves the exact pair, by IsLocalizedModule.map_exact.",
    "uses": [
     "lem-sc-p1-localization-short-exact"
    ],
    "elementary": false
   },
   {
-   "text": "For each localized module define its degree-e subgroup as fractions y/f^m with y of degree e+m*d. Common denominators prove additive closure. Homogeneous decomposition of a numerator proves spanning. Clear denominators in a finite relation among distinct degrees, then multiply by an additional power of f killing the relation. The remaining numerators have distinct degrees e+(m+L)*d. Internality in the original module makes each zero, and hence each original fraction zero. This proves that the localized grading is internal. The localized maps preserve degrees by their fraction formulas.",
-   "uses": [],
+   "text": "If q(s)=0, commutation gives G(alpha_1(s))=0. Ordinary localized exactness gives a preimage under F. Apply away_degreeZero_lift to obtain an equal-degree preimage, using internality of the two original gradings, scalar compatibility in M_1, and the degree-preserving property of phi. The range equality for alpha_0 lifts this fraction to t in A_0; injectivity of alpha_1 then proves i(t)=s. Conversely G(F(alpha_0(t)))=0 by ordinary exactness, and commutation and injectivity of alpha_2 give q(i(t))=0. This proves Function.Exact i q without either endpoint assumption.",
+   "uses": [
+    "lem-sc-p1-localization-short-exact",
+    "lem-sc-p1-away-degreezero-lift"
+   ],
    "elementary": false
   },
   {
-   "text": "For a degree-zero element in the kernel, ordinary localized exactness gives a preimage. Decompose it into homogeneous components; the degree-zero component maps to the given element, by uniqueness of the middle-module decomposition. The same component argument gives a degree-zero preimage of every target when psi is surjective; injectivity is inherited from ordinary localization. A nonzero f^m is homogeneous of degree m*d, and uniqueness of homogeneous degree identifies degree-zero elements with precisely degreeZeroFractions. The injective alpha maps with their stated ranges and the fraction formulas transport these assertions to i and q.",
-   "uses": [],
+   "text": "If phi is injective, IsLocalizedModule.map_injective makes F injective. The commuting square and injectivity of alpha_0 transport injectivity to i. If psi is surjective, IsLocalizedModule.map_surjective makes G surjective. Lift alpha_2(s) through G, apply away_degreeZero_lift using scalar compatibility in M_2 and the grading-preserving hypothesis on psi, lift the equal-degree preimage through alpha_1, and use injectivity of alpha_2 to obtain q(t)=s. The lifting theorem already includes f=0, so no separate chart-zero argument or localized grading construction is required.",
+   "uses": [
+    "lem-sc-p1-localization-short-exact",
+    "lem-sc-p1-away-degreezero-lift"
+   ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-sc-p1-localization-short-exact"
+  "lem-sc-p1-localization-short-exact",
+  "lem-sc-p1-away-degreezero-lift"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "Stacks Project",
-  "place": "Tag 01M7 (lemma-proj-sheaves), final paragraph; Algebra Tag 00JM (section-proj) and exactness of homogeneous localization"
+  "place": "Tag 01M7, final functoriality paragraph; Algebra Section 00JM; V1 transport using the proved away_degreeZero_lift and Mathlib ordinary localization exactness"
  },
  "mathlib_searches": [
   {
@@ -106,10 +113,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "J3",
+  "group": "V1",
   "result": "pass",
-  "landing": "20261012T085254-L-21097",
-  "kind": "interface",
+  "landing": "20261012T095926-L-325705",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
