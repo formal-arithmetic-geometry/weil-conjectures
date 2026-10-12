@@ -14,8 +14,8 @@ public import WeilConjectures.CategoryTheory.Sites.ZModSheaf
 
 An abelian sheaf `G` on a site with `n • 𝟙 G = 0` is the underlying abelian sheaf of a sheaf of
 `ℤ/n`-modules (`CategoryTheory.Sheaf.mem_essImage_sheafCompose_forget₂_zmod_iff`). Restricting
-scalars along `ULift (ℤ/n) ≃+* ℤ/n`, which does not change the underlying abelian groups, it is
-also the underlying abelian sheaf of a sheaf of `ULift (ℤ/n)`-modules, the coefficient ring
+scalars along `ULift (ℤ/n) ≃+* ℤ/n`, which does not change the underlying abelian groups,
+it is also the underlying abelian sheaf of a sheaf of `ULift (ℤ/n)`-modules, the coefficient ring
 living in the universe of the values.
 
 ## Main results
@@ -60,9 +60,9 @@ end CategoryTheory.Sheaf
 namespace AlgebraicGeometry
 
 /-- **Abelian étale sheaves killed by `n` are sheaves of `ULift (ℤ/n)`-modules**: if an abelian
-sheaf `G` on the small étale site of a scheme `X` satisfies `n • 𝟙 G = 0` (`n ≥ 0`), then there
-is a sheaf `M` with values in `ModuleCat (ULift (ℤ/n))` whose underlying abelian sheaf is
-isomorphic to `G`. The module structure is the sectionwise `ℤ/n`-module structure.
+sheaf `G` on the small étale site of a scheme `X` satisfies `n • 𝟙 G = 0` (`n ≥ 0`),
+then there is a sheaf `M` with values in `ModuleCat (ULift (ℤ/n))` whose underlying abelian sheaf
+is isomorphic to `G`. The module structure is the sectionwise `ℤ/n`-module structure.
 (blueprint: `lem-weil-pbc-killed-sheaf-module-lift`) -/
 theorem exists_module_sheaf_of_nsmul_id_eq_zero {X : Scheme.{u}} (n : ℕ)
     (G : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) (h : n • 𝟙 G = 0) :
