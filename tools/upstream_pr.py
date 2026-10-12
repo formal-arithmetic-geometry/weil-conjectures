@@ -173,7 +173,7 @@ def merge_file(upstream, module, ours, selected, mapping):
         if name not in bd:
             raise ValueError(f'{p}: new declaration {name} needs a separate module')
         b=bd[name]; old=base[b['kw_pos']:b['end']]; new=ours[d['kw_pos']:d['end']]
-        if old == new: continue
+        if old == new or " ".join(ledger.mask(old).split()) == " ".join(ledger.mask(new).split()): continue
         if name not in td: kept.append(name+' (removed upstream)'); continue
         t=td[name]; current=theirs[t['kw_pos']:t['end']]
         if current != old: kept.append(name+' (changed upstream)'); continue
