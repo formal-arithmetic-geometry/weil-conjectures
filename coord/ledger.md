@@ -10061,3 +10061,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 23:16 L: merged deliver/R3/Sheaf.CategoryTheory.Abelian.RightDerived.InjectivelyExactSquareBoundarySquareNaturality (stage 3; reviewer PASS; first push; landing 20261012T231640-L-1963691 (proof); batch 20261012T231631; modules 1; new nodes 0)
 - 23:16 L: merged deliver/S4/Sheaf.AlgebraicGeometry.PicardCupProductCriterionAux (stage 3; reviewer PASS; first push; landing 20261012T231640-L-1963789 (proof); batch 20261012T231631; modules 1; new nodes 0)
 - 23:16 L: merged deliver/T1/Sheaf.CategoryTheory.DerivedCoupleExact (stage 3; reviewer PASS; first push; landing 20261012T231641-L-1963887 (proof); batch 20261012T231631; modules 1; new nodes 1)
+- 23:16 L: merged deliver/T1/Sheaf.FieldTheory.TensorOppositeMatrixLifts (stage 3; reviewer PASS; first push; landing 20261012T231641-L-1963992 (proof); batch 20261012T231631; modules 1; new nodes 0)

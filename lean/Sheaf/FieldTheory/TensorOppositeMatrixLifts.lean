@@ -7,6 +7,8 @@ module
 
 public import Sheaf.FieldTheory.BrauerScalarDefect
 public import Mathlib.LinearAlgebra.Matrix.Reindex
+import Mathlib.LinearAlgebra.TensorProduct.Opposite
+import Mathlib.RingTheory.MatrixAlgebra
 
 /-!
 # Explicit tensor lifts for an opposite factor
@@ -58,7 +60,71 @@ theorem tensorOppositeMatrixLift_properties {R S : Type*} [CommRing R] [CommRing
       tensorOppositeMatrixLift a b * tensorOppositeMatrixLift a' b' ∧
     tensorOppositeMatrixLift (Matrix.GeneralLinearGroup.scalar (Fin n) c)
         (Matrix.GeneralLinearGroup.scalar (Fin m) d) =
-      Matrix.GeneralLinearGroup.scalar (Fin (n * m)) (c / d) := by sorry
+      Matrix.GeneralLinearGroup.scalar (Fin (n * m)) (c / d) := by
+  refine ⟨?_, ?_, ?_⟩
+  · apply Units.ext
+    change Matrix.reindex finProdFinEquiv finProdFinEquiv
+        ((Matrix.GeneralLinearGroup.map f a).val ⊗ₖ
+          ((Matrix.GeneralLinearGroup.map f b)⁻¹).val.transpose) =
+      (Matrix.reindex finProdFinEquiv finProdFinEquiv
+        (a.val ⊗ₖ (b⁻¹).val.transpose)).map f
+    rw [← map_inv]
+    ext i j
+    simp [Matrix.GeneralLinearGroup.map, Matrix.reindex, Matrix.kroneckerMap,
+      Matrix.transpose]
+  · apply Units.ext
+    simp [tensorOppositeMatrixLift, Matrix.GeneralLinearGroup.kronecker,
+      ← Matrix.mul_kronecker_mul]
+  · apply Units.ext
+    change Matrix.reindex finProdFinEquiv finProdFinEquiv
+        ((Matrix.GeneralLinearGroup.scalar (Fin n) c).val ⊗ₖ
+          ((Matrix.GeneralLinearGroup.scalar (Fin m) d)⁻¹).val.transpose) =
+      (Matrix.GeneralLinearGroup.scalar (Fin (n * m)) (c / d)).val
+    rw [← map_inv]
+    change Matrix.reindex finProdFinEquiv finProdFinEquiv
+        (Matrix.diagonal (fun _ => c.val) ⊗ₖ
+          (Matrix.diagonal (fun _ => (d⁻¹).val)).transpose) =
+      Matrix.diagonal (fun _ => (c / d).val)
+    ext i j
+    change (if i.divNat = j.divNat then c.val else 0) *
+        (if j.modNat = i.modNat then (d⁻¹).val else 0) =
+      if i = j then (c / d).val else 0
+    have hij : i.divNat = j.divNat → i.modNat = j.modNat → i = j := by
+      intro h₁ h₂
+      exact finProdFinEquiv.symm.injective (Prod.ext h₁ h₂)
+    simp only [div_eq_mul_inv, Units.val_mul]
+    split_ifs <;> simp_all
+
+/-- Scalar extension distributes over the tensor product of algebras.
+Upgrade Mathlib's linear equivalence by checking one and multiplication on pure tensors. -/
+private def tensorBaseChangeEquiv (K S A B : Type*) [CommRing K] [CommRing S]
+    [Ring A] [Ring B] [Algebra K S] [Algebra K A] [Algebra K B] :
+    S ⊗[K] (A ⊗[K] B) ≃ₐ[S] (S ⊗[K] A) ⊗[S] (S ⊗[K] B) :=
+  AlgEquiv.ofLinearEquiv (TensorProduct.AlgebraTensorModule.distribBaseChange K S A B)
+    (by simp [Algebra.TensorProduct.one_def,
+      TensorProduct.AlgebraTensorModule.distribBaseChange_tmul])
+    (by
+      intro x y
+      induction x using TensorProduct.induction_on with
+      | zero => simp
+      | add x y hx hy => simp [hx, hy, add_mul]
+      | tmul s x =>
+        induction x using TensorProduct.induction_on with
+        | zero => simp
+        | add x y hx hy => simp [hx, hy, TensorProduct.tmul_add, add_mul]
+        | tmul a b =>
+          induction y using TensorProduct.induction_on with
+          | zero => simp
+          | add x y hx hy => simp [hx, hy, mul_add]
+          | tmul t y =>
+            induction y using TensorProduct.induction_on with
+            | zero => simp
+            | add x y hx hy =>
+                simp only [TensorProduct.tmul_add, mul_add, map_add, hx, hy]
+            | tmul c d =>
+              simp [Algebra.TensorProduct.tmul_mul_tmul,
+                TensorProduct.AlgebraTensorModule.distribBaseChange_tmul,
+                mul_comm s t])
 
 /-- The tensor/opposite splitting has the conjugation datum of the explicit tensor lifts.
 
@@ -93,6 +159,47 @@ theorem exists_tensor_opposite_matrix_conjugation (K : Type u) [Field K]
       ∀ (g : Gal(SeparableClosure K/K)) (v : A ⊗[K] Bᵐᵒᵖ),
         (e (1 ⊗ₜ[K] v)).map g =
         ((tensorOppositeMatrixLift (a g) (b g))⁻¹).val *
-          e (1 ⊗ₜ[K] v) * (tensorOppositeMatrixLift (a g) (b g)).val := by sorry
+          e (1 ⊗ₜ[K] v) * (tensorOppositeMatrixLift (a g) (b g)).val := by
+  let S := SeparableClosure K
+  let eO : (S ⊗[K] Bᵐᵒᵖ) ≃ₐ[S] Matrix (Fin m) (Fin m) S :=
+    ((Algebra.TensorProduct.congr (AlgEquiv.toOpposite S S)
+      (AlgEquiv.refl : Bᵐᵒᵖ ≃ₐ[K] Bᵐᵒᵖ)).trans
+        (Algebra.TensorProduct.opAlgEquiv K S S B)).trans
+      ((AlgEquiv.op eB).trans (Matrix.transposeAlgEquiv (Fin m) S S).symm)
+  let e := (tensorBaseChangeEquiv K S A Bᵐᵒᵖ).trans
+    ((Algebra.TensorProduct.congr eA eO).trans
+      ((Matrix.kroneckerAlgEquiv (Fin n) (Fin m) S).trans
+        (Matrix.reindexAlgEquiv S S finProdFinEquiv)))
+  refine ⟨e, ?_⟩
+  intro g v
+  induction v using TensorProduct.induction_on with
+  | zero => simp
+  | add x y hx hy =>
+    simp only [TensorProduct.tmul_add, map_add, Matrix.map_add g g.map_add,
+      Matrix.mul_add, Matrix.add_mul, hx, hy]
+  | tmul x y =>
+    rw [← MulOpposite.op_unop y]
+    change (Matrix.reindex finProdFinEquiv finProdFinEquiv
+        (eA (1 ⊗ₜ[K] x) ⊗ₖ (eB (1 ⊗ₜ[K] y.unop)).transpose)).map g =
+      Matrix.reindex finProdFinEquiv finProdFinEquiv
+        ((a g)⁻¹.val ⊗ₖ (b g).val.transpose) *
+      Matrix.reindex finProdFinEquiv finProdFinEquiv
+        (eA (1 ⊗ₜ[K] x) ⊗ₖ (eB (1 ⊗ₜ[K] y.unop)).transpose) *
+      Matrix.reindex finProdFinEquiv finProdFinEquiv
+        ((a g).val ⊗ₖ (b g)⁻¹.val.transpose)
+    have hmap : (Matrix.reindex finProdFinEquiv finProdFinEquiv
+        (eA (1 ⊗ₜ[K] x) ⊗ₖ (eB (1 ⊗ₜ[K] y.unop)).transpose)).map g =
+      Matrix.reindex finProdFinEquiv finProdFinEquiv
+        ((eA (1 ⊗ₜ[K] x)).map g ⊗ₖ ((eB (1 ⊗ₜ[K] y.unop)).map g).transpose) := by
+      ext i j
+      simp [Matrix.reindex, Matrix.kroneckerMap, Matrix.transpose]
+    rw [hmap, ha, hb]
+    change (Matrix.reindexRingEquiv S finProdFinEquiv) _ =
+      (Matrix.reindexRingEquiv S finProdFinEquiv) _ *
+        (Matrix.reindexRingEquiv S finProdFinEquiv) _ *
+        (Matrix.reindexRingEquiv S finProdFinEquiv) _
+    rw [← map_mul, ← map_mul]
+    congr 1
+    simp only [Matrix.transpose_mul, ← Matrix.mul_kronecker_mul, Matrix.mul_assoc]
 
 end Field
