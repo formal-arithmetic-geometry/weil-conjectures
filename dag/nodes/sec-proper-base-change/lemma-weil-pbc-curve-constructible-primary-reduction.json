@@ -15,41 +15,44 @@
  "stmt_deps": [],
  "proof": [
   {
-   "text": "The reduction map $r:X_{\\mathrm{red}}\\to X$ is a universal homeomorphism.\nThe site equivalence sends $F$ to $r^{-1}F$, preserves covering families, and\ntherefore identifies the cochain complexes computing all cohomology groups.\nIt also commutes with the corresponding reduction after extending $k$.",
-   "uses": [],
-   "elementary": null
+   "text": "Take the nilradical reduction i : C_red → C. Install reducedness and its surjective closed immersion from the existing reduction lemma. Its underlying homeomorphism transports the dimension bound; separatedness, finite type and quasi-compactness compose, so i ≫ f is again a curve.",
+   "uses": [
+    "lem-weil-pbc-reduction-universal-homeomorphism"
+   ],
+   "elementary": false
   },
   {
-   "text": "The etale topos of the noetherian scheme $X$ is coherent. Given finitely\nmany local sections of $F$ on quasi-compact etale objects and finitely many\nrelations, their image generates a constructible subsheaf: refine by a\nfinite stratification on which the finitely generated stalk groups are\nconstant. Ordered by inclusion, these constructible subsheaves $F_\\lambda$\nform a filtered system with $F=\\varinjlim_\\lambda F_\\lambda$. The preceding\ncontinuity lemma gives the natural square\n\n$$\n\\begin{CD}\n\\varinjlim_\\lambda H^q(X,F_\\lambda) @>{\\sim}>> H^q(X,F)\\\\\n@VVV @VVV\\\\\n\\varinjlim_\\lambda H^q(X_{k'},F_\\lambda|) @>{\\sim}>>\nH^q(X_{k'},F|).\n\\end{CD}\n$$\n\nThus comparison for every constructible $F_\\lambda$ implies comparison for\n$F$.",
-   "uses": [],
-   "elementary": null
+   "text": "For each constructible Λ-module sheaf on this fixed reduced curve, apply constructible-prime devissage. Supply its prime-field hypothesis by specializing H to i ≫ f.",
+   "uses": [
+    "lem-weil-pbc-constructible-prime-module-devissage"
+   ],
+   "elementary": false
   },
   {
-   "text": "Fix a constructible $F$. A finite stratification with finite stalks gives\none exponent $N$ annihilating every stalk, hence $NF=0$. Write\n$N=\\prod_{\\ell\\mid N}\\ell^{r_\\ell}$. Bezout supplies integers\n$e_\\ell$ which are $1$ modulo $\\ell^{r_\\ell}$ and $0$ modulo the other prime\npowers. The mutually orthogonal endomorphisms $e_\\ell:F\\to F$ sum to the\nidentity and give the explicit decomposition\n\n$$\nF\\xrightarrow{\\sim}\\bigoplus_{\\ell\\mid N}F[\\ell^{r_\\ell}],\n\\qquad s\\longmapsto(e_\\ell s)_\\ell,\n$$\n\nwhose inverse is addition. It remains to treat one summand.",
-   "uses": [],
-   "elementary": null
+   "text": "Pull F back to the reduction; the library torsion pullback instance preserves its torsion. Apply constructible approximation with the result of the preceding step to obtain all eight assertions for this pullback.",
+   "uses": [
+    "lem-weil-pbc-constructible-approximation-assertions"
+   ],
+   "elementary": false
   },
   {
-   "text": "If $\\ell^rF=0$, use the exact kernel–quotient sequence\n\n$$\n0\\longrightarrow F[\\ell]\\xrightarrow{\\iota}F\n\\xrightarrow{\\pi}F/F[\\ell]\\longrightarrow0.\n$$",
-   "uses": [],
-   "elementary": null
-  },
-  {
-   "text": "The quotient is killed by $\\ell^{r-1}$ because\n$\\ell^{r-1}s\\in F[\\ell]$. Pullback to $X_{k'}$ preserves this kernel,\nquotient, and both maps. Induction on $r$, with the base case\n$\\ell F=0$, and the short-exact devissage lemma prove all applicable eight\nassertions. In particular assertion (7) gives the required proper\nfield-extension invariance, reduced to constructible\n$\\mathbf F_\\ell$-module sheaves.",
-   "uses": [],
-   "elementary": null
+   "text": "Apply the reduction comparison to this actual pulled-back sheaf and its assertions, obtaining the original eight assertions unchanged.",
+   "uses": [
+    "lem-weil-pbc-reduction-module-assertions"
+   ],
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "lemma-weil-pbc-curve-filtered-cohomology",
-  "lemma-weil-pbc-eight-curve-devissage",
-  "lemma-weil-pbc-universal-homeomorphism-coverings",
-  "lemma-weil-pbc-universal-homeomorphism-site-equivalence"
+  "lem-weil-pbc-reduction-universal-homeomorphism",
+  "lem-weil-pbc-constructible-prime-module-devissage",
+  "lem-weil-pbc-constructible-approximation-assertions",
+  "lem-weil-pbc-reduction-module-assertions"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-p1/lemma-weil-pbc-curve-constructible-primary-reduction.md",
-  "place": "## Proof"
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Theorem 03SC proof, first two paragraphs, formal assembly by Q2"
  },
  "mathlib_searches": [],
  "mathlib_match": null,
@@ -116,23 +119,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "Q1",
+  "group": "Q2",
   "result": "pass",
-  "landing": "20261012T025731-L-1257477",
+  "landing": "20261012T042417-L-1819931",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed after the tool's own checks (compiles, no new sorry without its node, no axiom, statements of existing declarations unchanged); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
-  "sorry_before": [
-   "AlgebraicGeometry.IsCurve.Assertions.lowerShriek_constantModSheaf_of_finite",
-   "AlgebraicGeometry.IsCurve.Assertions.of_forall_isReduced",
-   "AlgebraicGeometry.IsCurve.bijective_cohomologyMap_of_forall_isReduced",
-   "AlgebraicGeometry.IsCurve.exists_dense_assertions_iff_forall_lowerShriek",
-   "AlgebraicGeometry.IsCurve.exists_dense_assertions_iff_lowerShriek",
-   "AlgebraicGeometry.exists_mono_lowerShriek_constantModSheaf_lowerStar"
-  ],
-  "sorry_after": [
-   "AlgebraicGeometry.IsCurve.Assertions.lowerShriek_constantModSheaf_of_finite",
-   "AlgebraicGeometry.IsCurve.Assertions.of_forall_isReduced",
-   "AlgebraicGeometry.exists_mono_lowerShriek_constantModSheaf_lowerStar"
-  ]
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

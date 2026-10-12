@@ -9,6 +9,9 @@ public import WeilConjectures.AlgebraicGeometry.Curve.Assertions
 public import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Defs
 
+import Sheaf.AlgebraicGeometry.Curve.ConstructiblePrimeDevissage
+import Sheaf.AlgebraicGeometry.Curve.ConstructibleApproximationAssertions
+import Sheaf.AlgebraicGeometry.Curve.ReductionModuleAssertions
 import WeilConjectures.ConstructibleSheaf.GenericConstancy
 import Sheaf.AlgebraicGeometry.Curve.DenseIrreducibleOpens
 import Sheaf.AlgebraicGeometry.Curve.DenseOpenPrimeAssertions
@@ -571,7 +574,31 @@ theorem IsCurve.Assertions.of_forall_isReduced [Finite Λ] {k : Type u} [Field k
     {C : Scheme.{u}} (f : C ⟶ Spec (.of k)) [IsCurve f]
     (F : Sheaf C.smallEtaleTopology (ModuleCat.{u + 1} Λ)) [Scheme.IsTorsionSheaf F] :
     IsCurve.Assertions Λ f F :=
-  sorry
+  by
+    obtain ⟨hred, hclosed, hsurj, -⟩ :=
+      reduction_isReduced_isClosedImmersion_isSurjective_isUniversalHomeomorphism C
+    let C₀ := C.nilradical.subscheme
+    let i : C₀ ⟶ C := C.nilradical.subschemeι
+    have : IsReduced C₀ := hred
+    have : IsClosedImmersion i := hclosed
+    have : Surjective i := hsurj
+    have : IsCurve (i ≫ f) :=
+      { toIsSeparated := inferInstance
+        toLocallyOfFiniteType := inferInstance
+        toQuasiCompact := inferInstance
+        krullDim_le_one := by
+          rw [IsHomeomorph.topologicalKrullDim_eq i i.isHomeomorph]
+          exact IsCurve.krullDim_le_one (f := f) }
+    let F₀ := ((i)^*[ModuleCat.{u + 1} Λ]).obj F
+    have hconstructible : ∀ (G : Sheaf C₀.smallEtaleTopology (ModuleCat.{u + 1} Λ))
+        [Scheme.IsConstructibleSheaf G], IsCurve.Assertions Λ (i ≫ f) G := by
+      intro G _
+      apply IsCurve.assertions_of_constructible_prime_devissage Λ (i ≫ f) ?_ G
+      intro r _ M _
+      exact H (i ≫ f) r M
+    have hF₀ : IsCurve.Assertions Λ (i ≫ f) F₀ :=
+      IsCurve.assertions_of_constructible_approximation Λ (i ≫ f) hconstructible F₀
+    exact IsCurve.assertions_of_reduction Λ f F hF₀
 
 /-! ### Localisation to a dense open -/
 

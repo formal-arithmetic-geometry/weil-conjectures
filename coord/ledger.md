@@ -5990,3 +5990,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 04:24 L: merged deliver/Q2/Sheaf.CategoryTheory.Sites.CohomologyDerivedEvaluation (stage 3; reviewer PASS; first push; landing 20261012T042416-L-1819523 (proof); batch 20261012T042402; modules 1; new nodes 0)
 - 04:24 L: merged deliver/Q2/Sheaf.RingTheory.StrictlyHenselianOfDimensionZero (stage 3; reviewer PASS; first push; landing 20261012T042416-L-1819680 (interface); batch 20261012T042402; modules 2; new nodes 1)
 - 04:24 L: merged deliver/Q2/WeilConjectures.AlgebraicGeometry.Cohomology.Serre (stage 3; reviewer PASS; first push; landing 20261012T042416-L-1819827 (proof); batch 20261012T042402; modules 1; new nodes 0)
+- 04:24 L: merged deliver/Q2/WeilConjectures.AlgebraicGeometry.Curve.Reductions (stage 3; reviewer PASS; first push; landing 20261012T042417-L-1819931 (interface); batch 20261012T042402; modules 4; new nodes 3)

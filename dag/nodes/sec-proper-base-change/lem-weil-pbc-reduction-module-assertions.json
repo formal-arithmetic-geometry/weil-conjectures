@@ -1,0 +1,112 @@
+{
+ "id": "lem-weil-pbc-reduction-module-assertions",
+ "kind": "statement",
+ "title": "Transfer of the eight assertions from the reduction",
+ "statement": "Let k be algebraically closed, f : C \\to \\operatorname{Spec} k a curve [def-weil-pbc-curve-setting], \\Lambda a commutative ring, F a \\Lambda-module etale sheaf, and i : C_{\\mathrm{red}} \\to C the reduction [def-weil-pbc-scheme-reduction]. The eight assertions [def-weil-pbc-eight-curve-assertions] for (C_{\\mathrm{red}},i^{-1}F) imply them for (C,F), where i^{-1} is inverse image [def-weil-pbc-inverse-image].",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Theorem 03SC proof, first two paragraphs; Proposition 03SI for reduction"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-curve-setting",
+  "def-weil-pbc-scheme-reduction",
+  "def-weil-pbc-eight-curve-assertions",
+  "def-weil-pbc-inverse-image"
+ ],
+ "proof": [
+  {
+   "text": "The reduction immersion i is a surjective closed immersion and universal\nhomeomorphism. It identifies underlying spaces and induces equivalences of etale\nsheaf categories, compatible with cohomology. Pullback preserves constructibility,\nprimary torsion and invertible torsion orders by the geometric-stalk identification.\nAffineness of C implies that of C_red; properness of f implies properness of i ≫ f.\nThus the cohomology isomorphisms transfer C1-C5 from the hypothesis.\nFor a field-extension square, base change i to i' on the extended curve and paste\nthe square with the reduction square. The map i' is again a universal homeomorphism.\nThe composition law for pullback cohomology gives a commutative comparison square,\nwhose horizontal reduction maps are bijective. The hypothesis gives the reduced\nvertical map, so the original vertical map is bijective. This proves C6,C7.\nFor an open W → C repeat this square with its inverse image in C_red. The reduced\nrestriction is surjective by C8, and the reduction maps on C and W are bijective;\ntransport a preimage through these maps to prove C8. No field extension is assumed\nreduced: its reduction map is the base change of i, which suffices.",
+   "uses": [
+    "lem-weil-pbc-reduction-universal-homeomorphism",
+    "prop-weil-pbc-universal-homeomorphism-topos",
+    "lem-weil-pbc-cohomology-pullback-functorial",
+    "lem-weil-pbc-inverse-image-composition",
+    "def-weil-pbc-primary-torsion"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-reduction-universal-homeomorphism",
+  "prop-weil-pbc-universal-homeomorphism-topos",
+  "lem-weil-pbc-cohomology-pullback-functorial",
+  "lem-weil-pbc-inverse-image-composition",
+  "def-weil-pbc-primary-torsion"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "03SC proof, first two paragraphs; detailed module-coefficient adaptation by Q2"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A universal homeomorphism identifies etale cohomology and the cohomology assertions on curves",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Universal homeomorphism induces equivalence on etale sheaves and cohomology",
+   "results": "8 hits; no exact statement of this step",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "universal.*homeomorphism|IsUniversalHomeomorphism",
+   "results": "0 hits; no exact statement of this step",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "WeilConjectures.AlgebraicGeometry.Curve.Reductions",
+  "date": "2026-10-12",
+  "group": "Q2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-curve-constructible-primary-reduction",
+   "place": "Proof: reduction, constructible approximation and primary devissage",
+   "via": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Curve.ReductionModuleAssertions",
+  "file": "lean/Sheaf/AlgebraicGeometry/Curve/ReductionModuleAssertions.lean",
+  "declaration": "AlgebraicGeometry.IsCurve.assertions_of_reduction",
+  "statement": "theorem IsCurve.assertions_of_reduction\n    (Λ : Type (u + 1)) [CommRing Λ] {k : Type u} [Field k] [IsAlgClosed k]\n    {C : Scheme.{u}} (f : C ⟶ Spec (.of k)) [IsCurve f]\n    (F : Sheaf C.smallEtaleTopology (ModuleCat.{u + 1} Λ))\n    (H : IsCurve.Assertions Λ (C.nilradical.subschemeι ≫ f)\n      ((C.nilradical.subschemeι)^*[ModuleCat.{u + 1} Λ].obj F)) :\n    IsCurve.Assertions Λ f F",
+  "branch": "sheaf-dag",
+  "by": "Q2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q2",
+  "result": "pass",
+  "landing": "20261012T042417-L-1819931",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q2",
+  "result": "pass",
+  "landing": "20261012T042417-L-1819931",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
