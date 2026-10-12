@@ -55,42 +55,18 @@
    }
   },
   {
-   "text": "Stalks at a point. Let $x\\in X$ correspond to the prime $\\mathfrak p$ and put $S=R\\setminus\\mathfrak p$ and $A=\\mathcal O_{X,x}$; the germ map $\\rho:R\\to A$ is a localization of $R$ at $S$ [lem-weil-pbc-spec-domain-stalks-function-field] (1). The stalks $\\widetilde M_x$, $\\widetilde N_x$, $(\\widetilde{M\\otimes_RN})_x$, $P^\\#_x$ are $A$-modules [def-weil-pbc-module-stalk], regarded as $R$-modules via $\\rho$. By [lem-weil-pbc-spec-tilde-stalk-localization] the $R$-linear maps $\\lambda_M:M\\to\\widetilde M_x$, $m\\mapsto\\tau_M(m)_x$, $\\lambda_N:N\\to\\widetilde N_x$ and $\\lambda_{M\\otimes N}:M\\otimes_RN\\to(\\widetilde{M\\otimes_RN})_x$, $z\\mapsto\\tau_{M\\otimes N}(z)_x$, are localizations at $S$. By [lem-weil-pbc-localization-tensor-product], applied to $\\rho:R\\to A$ and $\\lambda_M,\\lambda_N$, the $R$-linear map $u:M\\otimes_RN\\to\\widetilde M_x\\otimes_A\\widetilde N_x$, $m\\otimes n\\mapsto\\tau_M(m)_x\\otimes\\tau_N(n)_x$, is a localization of $M\\otimes_RN$ at $S$ (this is the step 'tensor product commutes with localization', Algebra, Lemma 00DL, together with the description $\\widetilde M_x=M_{\\mathfrak p}$ of Schemes, Lemma 01HV (7)).",
+   "text": "Apply affine_tilde_tensor_stalk_bijective to the adjunction extension alpha. Its pure-tensor hypothesis follows from alpha_X composed with tau = beta and the defining formula for beta. Thus the comparison is bijective on every stalk.",
    "uses": [
-    "lem-weil-pbc-spec-domain-stalks-function-field",
-    "def-weil-pbc-module-stalk",
-    "lem-weil-pbc-spec-tilde-stalk-localization",
-    "lem-weil-pbc-localization-tensor-product"
+    "lem-weil-pbc-affine-tilde-tensor-stalk-bijective"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/schemes.tex",
-    "place": "Schemes, Lemma 01I8 (lemma-widetilde-constructions), second proof of part (1)"
+    "place": "Schemes, Lemma 01I8(1), second proof; verified at https://stacks.math.columbia.edu/tag/01I8"
    }
   },
   {
-   "text": "Comparison of the stalk map with $u$. By [lem-weil-pbc-module-stalk-tensor] (Modules, Lemma 01CB) there is an $A$-linear isomorphism $\\psi:P^\\#_x\\to\\widetilde M_x\\otimes_A\\widetilde N_x$ with $\\psi((a\\otimes b)_x)=a_x\\otimes b_x$ for sections $a,b$ over an open containing $x$. The stalk map $\\alpha_x:(\\widetilde{M\\otimes_RN})_x\\to P^\\#_x$, $s_x\\mapsto\\alpha(s)_x$, is $A$-linear [def-weil-pbc-module-stalk], so $h=\\psi\\circ\\alpha_x$ is $A$-linear, hence $R$-linear. For $m\\in M$, $n\\in N$: $h(\\lambda_{M\\otimes N}(m\\otimes n))=\\psi(\\alpha_X(\\tau_{M\\otimes N}(m\\otimes n))_x)=\\psi((\\tau_M(m)\\otimes\\tau_N(n))_x)=\\tau_M(m)_x\\otimes\\tau_N(n)_x=u(m\\otimes n)$, using Step 2. Both $h\\circ\\lambda_{M\\otimes N}$ and $u$ are $R$-linear and agree on the generators $m\\otimes n$, so $h\\circ\\lambda_{M\\otimes N}=u$.",
-   "uses": [
-    "lem-weil-pbc-module-stalk-tensor",
-    "def-weil-pbc-module-stalk"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/schemes.tex",
-    "place": "Schemes, Lemma 01I8 (lemma-widetilde-constructions), second proof of part (1)"
-   }
-  },
-  {
-   "text": "$\\alpha_x$ is bijective. Let $\\ell_1=\\lambda_{M\\otimes N}:Q\\to Q_1$ and $\\ell_2=u:Q\\to Q_2$ ($Q=M\\otimes_RN$), both localizations of $Q$ at $S$ (Step 3), and $h:Q_1\\to Q_2$ $R$-linear with $h\\circ\\ell_1=\\ell_2$ (Step 4). Every $s\\in S$ acts bijectively on $Q_1$ and $Q_2$ and $h$ commutes with $s$, hence with $s^{-1}$. Surjective: an element of $Q_2$ is $s^{-1}\\ell_2(q)=h(s^{-1}\\ell_1(q))$. Injective: an element of $Q_1$ is $s^{-1}\\ell_1(q)$; if $h(s^{-1}\\ell_1(q))=0$ then $\\ell_2(q)=0$, so $s'q=0$ for some $s'\\in S$, so $s'\\ell_1(q)=0$ and $\\ell_1(q)=0$ since $s'$ acts bijectively. Thus $h$ is bijective, and since $\\psi$ is bijective, so is $\\alpha_x=\\psi^{-1}\\circ h$.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/schemes.tex",
-    "place": "Schemes, Lemma 01I8 (lemma-widetilde-constructions), second proof of part (1)"
-   }
-  },
-  {
-   "text": "$\\alpha$ is an isomorphism. $X=\\operatorname{Spec}R$ is a scheme [def-weil-affine-spectrum] and $\\alpha$ is a morphism of $\\mathcal O_X$-modules whose stalk map $\\alpha_x$ is bijective at every $x\\in X$ (Step 5); by [lem-weil-pbc-module-iso-on-stalks] $\\alpha$ is an isomorphism ('it suffices to check that it is an isomorphism on stalks'). This proves (ii).",
+   "text": "$\\alpha$ is an isomorphism. $X=\\operatorname{Spec}R$ is a scheme [def-weil-affine-spectrum] and $\\alpha$ is a morphism of $\\mathcal O_X$-modules whose stalk map $\\alpha_x$ is bijective at every $x\\in X$ (Step 3); by [lem-weil-pbc-module-iso-on-stalks] $\\alpha$ is an isomorphism ('it suffices to check that it is an isomorphism on stalks'). This proves (ii).",
    "uses": [
     "def-weil-affine-spectrum",
     "lem-weil-pbc-module-iso-on-stalks"
@@ -102,7 +78,7 @@
    }
   },
   {
-   "text": "Global sections. By Step 2, $\\beta=\\alpha_X\\circ\\tau_{M\\otimes N}$. The unit $\\tau_{M\\otimes N}:M\\otimes_RN\\to\\Gamma(X,\\widetilde{M\\otimes_RN})$ is bijective by [lem-weil-pbc-affine-tilde-gamma-adjunction] (2), and $\\alpha_X$ is bijective because $\\alpha$ is an isomorphism (Step 6; its inverse gives the inverse on sections over $X$). Hence $\\beta$ is bijective, which is (iii).",
+   "text": "Global sections. By Step 2, $\\beta=\\alpha_X\\circ\\tau_{M\\otimes N}$. The unit $\\tau_{M\\otimes N}:M\\otimes_RN\\to\\Gamma(X,\\widetilde{M\\otimes_RN})$ is bijective by [lem-weil-pbc-affine-tilde-gamma-adjunction] (2), and $\\alpha_X$ is bijective because $\\alpha$ is an isomorphism (Step 4; its inverse gives the inverse on sections over $X$). Hence $\\beta$ is bijective, which is (iii).",
    "uses": [
     "lem-weil-pbc-affine-tilde-gamma-adjunction"
    ],
@@ -118,18 +94,14 @@
   "def-pur-sheaf-tensor-product",
   "def-weil-presheaf-modules-sheafification",
   "lem-weil-pbc-affine-tilde-gamma-adjunction",
-  "lem-weil-pbc-spec-domain-stalks-function-field",
-  "def-weil-pbc-module-stalk",
-  "lem-weil-pbc-spec-tilde-stalk-localization",
-  "lem-weil-pbc-localization-tensor-product",
-  "lem-weil-pbc-module-stalk-tensor",
+  "lem-weil-pbc-affine-tilde-tensor-stalk-bijective",
   "def-weil-affine-spectrum",
   "lem-weil-pbc-module-iso-on-stalks"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/schemes.tex",
-  "place": "Schemes, Lemma 01I8 (lemma-widetilde-constructions), second proof of part (1)"
+  "place": "Schemes, Lemma 01I8(1), second proof; verified at https://stacks.math.columbia.edu/tag/01I8"
  },
  "mathlib_searches": [
   {
@@ -210,5 +182,15 @@
   "group": "G1",
   "result": "fix",
   "note": "R : CommRingCat (zero ring incl.), X = Spec R, M N : ModuleCat R unrestricted; tildes = Mathlib tilde with tau = tilde.toOpen _ ⊤; sheaf tensor switched from explicit sheafification T to tilde M ⊗ tilde N of SheafOfModules.monoidalCategory (H4/H12) with a⊗b = Scheme.Modules.tmulSection; (i) beta R-linear with pure-tensor formula, alpha with alpha_X∘tau = beta and uniqueness; (ii) IsIso alpha; (iii) Bijective beta"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F3",
+  "result": "pass",
+  "landing": "20261012T085237-L-14009",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

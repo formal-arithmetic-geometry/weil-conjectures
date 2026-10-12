@@ -1,0 +1,169 @@
+{
+ "id": "lem-weil-pbc-affine-tilde-tensor-stalk-bijective",
+ "kind": "statement",
+ "title": "Canonical affine tilde tensor comparison is bijective on stalks",
+ "statement": "Let R be a commutative ring, X = Spec R [def-weil-affine-spectrum], and M,N be R-modules. Write tilde M, tilde N, tilde(M tensor_R N) and tau for the associated module sheaves and their canonical maps on global sections [lem-weil-pbc-spec-module-tilde-sections]. Form the sheaf tensor product [def-pur-sheaf-tensor-product], with pure section tensors given by the sheafification map. If an O_X-linear morphism alpha : tilde(M tensor_R N) -> tilde M tensor_O_X tilde N sends tau(m tensor n) to tau(m) tensor tau(n) on global sections for every m,n, then for every x in X its induced map on module stalks [def-weil-pbc-module-stalk] is bijective.",
+ "source": {
+  "document": "literature/stacks-project/schemes.tex",
+  "place": "Schemes, Lemma 01I8(1), second proof; verified at https://stacks.math.columbia.edu/tag/01I8"
+ },
+ "stmt_deps": [
+  "def-weil-affine-spectrum",
+  "lem-weil-pbc-spec-module-tilde-sections",
+  "def-pur-sheaf-tensor-product",
+  "def-weil-pbc-module-stalk"
+ ],
+ "proof": [
+  {
+   "text": "For x with prime p, let S = R minus p and A = O_X,x. A is a localization of R at S. The maps f,g,q from M,N,M tensor_R N to their tilde stalks are module localization maps. Use the R-module structures of Mathlib tilde.toStalk; the scalar tower over A follows from the definition of its action.",
+   "uses": [
+    "lem-weil-pbc-spec-domain-stalks-function-field",
+    "lem-weil-pbc-spec-tilde-stalk-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Schemes, Lemma 01I8(1), second proof; verified at https://stacks.math.columbia.edu/tag/01I8"
+   }
+  },
+  {
+   "text": "TensorProduct.map f g is a module localization map at S. Compose with the inverse of IsLocalization.moduleTensorEquiv S A to obtain the localization map v : M tensor_R N -> M_x tensor_A N_x. The equivalence is the identity on pure tensors.",
+   "uses": [
+    "lem-weil-pbc-localization-tensor-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Schemes, Lemma 01I8(1), second proof; verified at https://stacks.math.columbia.edu/tag/01I8"
+   }
+  },
+  {
+   "text": "Use stalkTensorIso to identify the target stalk with M_x tensor_A N_x, by an A-linear equivalence psi. Set h = psi composed with alpha_x and restrict its scalars to R. Naturality of germs, the hypothesis on pure global tensors and the germ formula for stalkTensorIso imply h composed with q = v. TensorProduct.ext extends this equality from pure tensors to the entire module.",
+   "uses": [
+    "lem-weil-pbc-module-stalk-tensor",
+    "def-weil-pbc-module-stalk"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Schemes, Lemma 01I8(1), second proof; verified at https://stacks.math.columbia.edu/tag/01I8"
+   }
+  },
+  {
+   "text": "Since q and h composed with q are localization maps at S, IsLocalizedModule.linearEquiv_of_isLocalizedModule_comp identifies h with the linear equivalence between those two localizations. Thus h is bijective, and cancelling the bijective psi proves alpha_x bijective.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Schemes, Lemma 01I8(1), second proof; verified at https://stacks.math.columbia.edu/tag/01I8"
+   }
+  }
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/schemes.tex",
+  "place": "Schemes, Lemma 01I8(1), second proof; verified at https://stacks.math.columbia.edu/tag/01I8"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The canonical map from tilde of a tensor product to the sheaf tensor product is bijective on stalks",
+   "results": "Service unavailable: Internal Server Error; other search kinds and source grep used.",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "canonical tilde tensor comparison bijective on stalks",
+   "results": "Found TopCat.Presheaf.app_bijective_of_stalkFunctor_map_bijective and TensorProduct.map_bijective, but neither states the tilde tensor comparison.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.tilde.toStalk",
+   "results": "tilde.toStalk and its IsLocalizedModule instance; not the tensor comparison.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "tensor / toStalk in Mathlib/AlgebraicGeometry/Modules/Tilde.lean; linearEquiv_of_isLocalizedModule_comp in Mathlib/Algebra/Module/LocalizedModule/Basic.lean",
+   "results": "Tilde localization instance and the localization uniqueness equivalence found. No sheaf tensor stalk comparison theorem; the proof composes these with the existing project stalkTensorIso.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Modules.AffineTildeTensor",
+  "date": "2026-10-12",
+  "group": "F3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-h1-constructible-representation",
+   "place": "Steps 3-5 of lem-weil-pbc-affine-tilde-tensor: the canonical comparison is bijective at each stalk, in the affine tensor computation used in step 4 of lemma-weil-pbc-h1-constructible-representation.",
+   "via": [
+    "lem-weil-pbc-affine-tilde-tensor",
+    "lem-weil-pbc-quasi-coherent-tensor-product-affine-sections",
+    "lem-weil-pbc-quasi-coherent-algebra-kernel-image-ideal",
+    "lem-weil-pbc-integral-algebra-directed-colimit-finite",
+    "lem-weil-pbc-integral-morphism-limit-of-finite",
+    "lem-weil-pbc-constructible-module-finite-pushforward-noetherian",
+    "lem-weil-pbc-constructible-module-finite-pushforward-embedding"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.Modules.AffineTildeTensorStalk",
+  "file": "lean/Sheaf/AlgebraicGeometry/Modules/AffineTildeTensorStalk.lean",
+  "declaration": "AlgebraicGeometry.affine_tilde_tensor_stalk_bijective",
+  "statement": "theorem affine_tilde_tensor_stalk_bijective (R : CommRingCat.{u}) (M N : ModuleCat.{u} R) (α : tilde (ModuleCat.of R (M ⊗[R] N)) ⟶ tilde M ⊗ tilde N) (hα : ∀ (m : M) (n : N), α.val.app (op ⊤) (tilde.toOpen (ModuleCat.of R (M ⊗[R] N)) ⊤ (m ⊗ₜ[R] n)) = Scheme.Modules.tmulSection (tilde.toOpen M ⊤ m) (tilde.toOpen N ⊤ n)) (x : Spec R) : Function.Bijective ((TopCat.Presheaf.stalkFunctor AddCommGrpCat.{u} x).map α.mapPresheaf)",
+  "branch": "sheaf-dag",
+  "by": "F3",
+  "date": "2026-10-12",
+  "existing": false
+ },
+ "proof_deps": [
+  "lem-weil-pbc-spec-domain-stalks-function-field",
+  "lem-weil-pbc-spec-tilde-stalk-localization",
+  "lem-weil-pbc-localization-tensor-product",
+  "lem-weil-pbc-module-stalk-tensor",
+  "def-weil-pbc-module-stalk"
+ ],
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F3",
+  "result": "pass",
+  "landing": "20261012T085237-L-14009",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F3",
+  "result": "pass",
+  "landing": "20261012T085237-L-14009",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
