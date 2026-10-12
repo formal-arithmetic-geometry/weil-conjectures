@@ -1,0 +1,106 @@
+{
+ "id": "lem-exc-galois-point-action-open",
+ "kind": "statement",
+ "title": "Open stabilizers for geometric etale lifts",
+ "statement": "Under the field hypotheses of the geometric point over Spec K, any monoid homomorphism to endomorphisms of the geometric etale fibre functor satisfying the extension precomposition formula has open stabilizers for each geometric lift.",
+ "stmt_deps": [
+  "def-pd-separable-closure",
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-geometric-point"
+ ],
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 03QW, discussion before Theorem 59.56.3"
+ },
+ "proof": [
+  {
+   "text": "The construction extends field automorphisms and acts by precomposition; finite separable residue fields ensure independence and openness.",
+   "uses": [
+    "lem-weil-pbc-etale-fibre-discrete-separable-points"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-etale-fibre-discrete-separable-points"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 03QW"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Galois action on geometric etale lifts",
+   "results": "No exact match",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "pointSmallEtale Galois action",
+   "results": "No exact match",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "open stabilizer geometric etale point",
+   "results": "Unavailable",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.GaloisPointAction",
+  "date": "2026-10-12",
+  "group": "U1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-exc-galois-point-action",
+   "place": "proof decomposition",
+   "via": [
+    "lem-exc-galois-point-action"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-h2",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.GaloisPointActionOpen",
+  "file": "lean/Sheaf/AlgebraicGeometry/GaloisPointActionOpen.lean",
+  "declaration": "AlgebraicGeometry.Scheme.galoisPointAction_open_stabilizers",
+  "statement": "theorem galoisPointAction_open_stabilizers\n    (K Ks Ω : Type u) [Field K] [Field Ks] [Field Ω]\n    [Algebra K Ks] [IsSepClosure K Ks] [Algebra Ks Ω] [Algebra K Ω]\n    [IsScalarTower K Ks Ω] [IsAlgClosed Ω]\n    (ρ : Gal(Ks/K) →* End (pointSmallEtale\n      (Spec.map (CommRingCat.ofHom (algebraMap K Ω)))).fiber)\n    (hρ : ∀ (g : Gal(Ks/K)) (τ : Ω ≃ₐ[K] Ω)\n      (_ : (algebraMap Ks Ω).comp g.toRingHom =\n        τ.toRingHom.comp (algebraMap Ks Ω))\n      (X : (Spec (.of K)).Etale)\n      (x : (pointSmallEtale\n        (Spec.map (CommRingCat.ofHom (algebraMap K Ω)))).fiber.obj X),\n      ((ρ g).app X x).left = Spec.map (CommRingCat.ofHom τ.toRingHom) ≫ x.left) :\n    ∀ (X : (Spec (.of K)).Etale)\n      (x : (pointSmallEtale\n        (Spec.map (CommRingCat.ofHom (algebraMap K Ω)))).fiber.obj X),\n      IsOpen {g : Gal(Ks/K) | (ρ g).app X x = x}",
+  "branch": "sheaf-dag",
+  "by": "U1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U1",
+  "result": "pass",
+  "landing": "20261012T110321-L-622579",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U1",
+  "result": "pass",
+  "landing": "20261012T110321-L-622579",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
