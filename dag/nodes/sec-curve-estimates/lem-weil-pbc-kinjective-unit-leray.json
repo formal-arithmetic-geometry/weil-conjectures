@@ -16,24 +16,25 @@
  ],
  "proof": [
   {
-   "text": "Adjoint j to a map I→f_*J using the inverse-image/direct-image adjunction. Since inverse image is exact, f_*J is K-injective by the right-adjoint preservation theorem. Thus the right-derived units on I,J and f_*J are invertible.",
+   "text": "On an arbitrary homotopy-category object K, expand the derived adjunction unit using Adjunction.derivedη_fac_app. Naturality moves the exact inverse-image factorization through Leray. The defining equation of rightDerivedFunctorCompIso and rightDerivedNatTrans_fac identify the composite derived unit followed by Leray with the derived unit of global sections on Y. Naturality of the global-sections unit at the underived adjunction unit completes unit_leray_h. Preservation of K-injectives by direct image is used by the canonical Leray construction; no K-injectivity of f_*J or adjunct of j is needed.",
    "uses": [
     "def-weil-pbc-inverse-image",
-    "lem-weil-pbc-right-adjoint-preserves-kinjective"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Expand the derived adjunction unit by its unit compatibility with the underived homotopy-category adjunction. Move the exact inverse-image factorization through the Leray isomorphism by naturality. Expand the canonical Leray isomorphism as the right-derived composition comparison followed by the derived image of f_*;Γ_X≅Γ_Y. Its defining unit compatibility replaces the composite direct-image and global-sections units by the global-sections unit on Y. Naturality of that unit at j gives Γ_Y(j). The remaining invertible units, including the canonical quotient-to-derived factorization, are exactly the inverses and forward maps in rightDerivedFunctorObjQIso.",
-   "uses": [
+    "lem-weil-pbc-right-adjoint-preserves-kinjective",
     "def-weil-pbc-etale-cohomology"
    ],
    "elementary": false
   },
   {
-   "text": "The underived map Γ_X(I)→Γ_Y(J) from the preceding calculation has components Γ_X(η_{I^i}) followed by the terminal-section identification and Γ_Y(j^i). By the definitions of lowerStarCompGlobalSectionsIso and globalSectionsUpperStarMap, these are globalSectionsUpperStarMap f (I.X i) followed by Γ_Y(j.f i). The hypothesis hw and extensionality of chain maps identify it with w. Localize this equality to obtain the asserted equality of derived morphisms, before applying any homology functor.",
+   "text": "Naturality of the identification of global sections with terminal sections shows that Γ_X(η_M) followed by lowerStarCompGlobalSectionsIso at f^{-1}M equals globalSectionsUpperStarMap f M. Define the resulting chain map v:Γ_X I→Γ_Y(f^{-1}I). The component hypothesis hw and chain-map extensionality give w=v followed by Γ_Y(j). Apply the homotopy quotient and Qh to obtain the equality hquotient with Q(w).",
    "uses": [
     "def-weil-pbc-inverse-image",
+    "def-weil-pbc-etale-cohomology"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Specialize unit_leray_h to the homotopy quotient of I. The quotient lifting comparisons are identities on representatives, identifying the homotopy and cochain exact inverse-image factorizations. Postcompose with RΓ_Y(Q(j)) and use naturality of the derived global-sections unit at j. Substitute hquotient. Expand rightDerivedFunctorObjQIso on I and J, whose units are invertible by K-injectivity, and cancel the unit on I. Functoriality and associativity give exactly the asserted equality.",
+   "uses": [
     "def-weil-pbc-etale-cohomology"
    ],
    "elementary": true
@@ -46,8 +47,8 @@
  ],
  "proof_origin": {
   "by": "agent",
-  "group": "F3",
-  "date": "2026-10-12",
+  "group": "A2",
+  "date": "2026-10-13",
   "document": "literature/stacks-project/derived.tex",
   "place": "Tags 070I (lemma-K-injective) and 08BJ (lemma-adjoint-preserve-K-injectives); cohomology.tex, Lemma 01F8 and equations 01F9/01FA (lemma-functoriality and equation-functorial-derived); sites-cohomology.tex, Remark 08J6"
  },
@@ -120,10 +121,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "F3",
+  "group": "A2",
   "result": "pass",
-  "landing": "20261012T144110-L-2094772",
-  "kind": "interface",
+  "landing": "20261012T202228-L-700219",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

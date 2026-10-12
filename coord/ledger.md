@@ -9336,3 +9336,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 20:22 L: returned deliver/P2/Sheaf.CategoryTheory.HalfPlaneWeakConvergence (reviewer RETURN: (the landing tools, head cac60b104) the delivery did not land: refused by tools/import_prune_check.py for lean/Sheaf/Cat)
 - 20:22 L: returned deliver/U3/Sheaf.CategoryTheory.ColimitSiteStageImageRefinement (reviewer RETURN: (the landing tools, head c471d721c) the delivery did not land: refused by tools/import_prune_check.py for lean/Sheaf/Cat)
 - 20:22 L: merged deliver/A2/Sheaf.AlgebraicGeometry.SmoothStageGluing (stage 3; reviewer PASS; first push; landing 20261012T202228-L-700093 (proof); batch 20261012T202227; modules 1; new nodes 0)
+- 20:22 L: merged deliver/A2/Sheaf.Paper.EtaleKInjectiveUnitLeray (stage 3; reviewer PASS; first push; landing 20261012T202228-L-700219 (proof); batch 20261012T202227; modules 1; new nodes 0)
