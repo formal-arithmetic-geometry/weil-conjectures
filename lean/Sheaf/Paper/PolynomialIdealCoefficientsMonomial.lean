@@ -5,6 +5,8 @@ public import Mathlib.Algebra.Quotient
 public import Mathlib.RingTheory.Ideal.Quotient.Operations
 public import Mathlib.Algebra.MvPolynomial.Basic
 public import Mathlib.LinearAlgebra.Quotient.Basic
+import Sheaf.Paper.PolynomialIdealCoefficientsMonomialMembership
+import Sheaf.Paper.PolynomialIdealCoefficientsMonomialMap
 
 @[expose] public section
 
@@ -46,6 +48,7 @@ theorem ideal_coefficients_monomial
             Ideal.span (Set.range fun j : Fin i => C (g j) * X (Fin.castLE hir j))) ≃ₗ[R]
             Π₀ E : Fin r →₀ ℕ, R ⧸ Ideal.span (g '' {j : Fin i | E (Fin.castLE hir j) ≠ 0}),
           ∀ q, e (Ideal.Quotient.mk _ q) = Φ q := by
-  sorry
+  refine ⟨ideal_coefficients_monomial_membership r i hr hir g p, ?_⟩
+  exact ideal_coefficients_monomial_map r i hr hir g
 
 end MvPolynomial
