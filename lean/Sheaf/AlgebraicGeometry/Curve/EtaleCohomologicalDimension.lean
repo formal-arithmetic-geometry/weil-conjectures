@@ -8,18 +8,8 @@ module
 public import WeilConjectures.AlgebraicGeometry.Curve
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
-import Sheaf.AlgebraicGeometry.EtaleCohomologyFilteredColimit
-import Sheaf.AlgebraicGeometry.EtaleInverseImageModulesExact
-import Sheaf.AlgebraicGeometry.EtaleSheaves
-import Sheaf.AlgebraicGeometry.TorsionFilteredUnion
-import Sheaf.CategoryTheory.Abelian.RightDerived.FullLongExactSequence
+import Sheaf.AlgebraicGeometry.EtaleSheafHExtDerivedComparison
 import WeilConjectures.AlgebraicGeometry.Curve.CohomologicalDimension
-import WeilConjectures.AlgebraicGeometry.Curve.HighDegreeVanishing
-import WeilConjectures.AlgebraicGeometry.Sites.FiniteSupport
-import WeilConjectures.AlgebraicGeometry.Sites.TorsionAcyclic
-import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.FullyFaithful
-import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
-import WeilConjectures.SixFunctors.Etale.UpperLowerStar.EdgeMap
 
 /-!
 # Etale cohomological dimension of a smooth connected curve
@@ -83,6 +73,13 @@ theorem IsConnectedCurve.subsingleton_etaleCohomology_of_two_lt
     Subsingleton ((Etale.cohomology AddCommGrpCat.{u + 1} C (q : ℤ)).obj
       ((DerivedCategory.singleFunctor
         (Sheaf C.smallEtaleTopology AddCommGrpCat.{u + 1}) 0).obj F)) := by
-  sorry
+  let f : C ⟶ Spec (.of k) := C ↘ Spec (.of k)
+  have hq' : 3 ≤ q := by omega
+  have h := IsCurve.subsingleton_sheafH_of_three_le_of_forall f
+    (fun _ f' _ _ F' hF' ↦ IsCurve.subsingleton_sheafH_two_of_isAffine f' F' hF')
+    F hF q hq'
+  have : Subsingleton ((Sheaf.functorH C.smallEtaleTopology q).obj F) := h
+  obtain ⟨e⟩ := Scheme.nonempty_sheafH_extDerivedIso C q
+  exact (e.app F).addCommGroupIsoToAddEquiv.symm.injective.subsingleton
 
 end AlgebraicGeometry

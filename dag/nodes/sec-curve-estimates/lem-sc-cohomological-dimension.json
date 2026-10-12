@@ -143,6 +143,14 @@
     "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-cd/lem-sc-cohomological-dimension.md",
     "place": "split along the Lean proof WeilConjectures/AlgebraicGeometry/Curve/HighDegreeVanishing.lean, AlgebraicGeometry.IsCurve.subsingleton_sheafH_of_three_le_of_forall (lines 274-437): lines 432-437 (Etale.subsingleton_H_of_isTorsion, whose proof is the filtered union of the n!-torsion subsheaves and Scheme.H_map_isColimit_of_isFiltered)"
    }
+  },
+  {
+   "text": "Apply the existing complete proof IsCurve.subsingleton_sheafH_of_three_le_of_forall to the structure morphism of C, supplying lem-sc-affine-curve-h2-vanishing for its affine H2 hypothesis; this implements steps 1-9 above without adding any unfinished glue. Since 2 < q implies 3 <= q, its conclusion gives a subsingleton Ext-model Sheaf.H F q. Apply the natural isomorphism lem-weil-pbc-sheafH-ext-derived-comparison at F and transfer subsingletonness using the inverse additive equivalence. This gives exactly the derived-global-sections cohomology in the Lean statement.",
+   "uses": [
+    "lem-sc-affine-curve-h2-vanishing",
+    "lem-weil-pbc-sheafH-ext-derived-comparison"
+   ],
+   "elementary": false
   }
  ],
  "proof_deps": [
@@ -168,12 +176,13 @@
   "lem-weil-pbc-abelian-sheaf-epi-locally-surjective",
   "lem-sc-finite-support-acyclic",
   "lemma-weil-pbc-torsion-filtered-union",
-  "lem-weil-pbc-cohomology-filtered-colimit"
+  "lem-weil-pbc-cohomology-filtered-colimit",
+  "lem-weil-pbc-sheafH-ext-derived-comparison"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-cd/lem-sc-cohomological-dimension.md",
-  "place": "## Proof replaced by the route of the Lean proof AlgebraicGeometry.IsCurve.subsingleton_sheafH_of_three_le (WeilConjectures/AlgebraicGeometry/Curve/CohomologicalDimension.lean:397-415) through WeilConjectures/AlgebraicGeometry/Curve/HighDegreeVanishing.lean, AlgebraicGeometry.IsCurve.subsingleton_sheafH_of_three_le_of_forall (lines 274-437); Stacks 03SC (1) (literature/stacks-project/etale-cohomology.tex, theorem-vanishing-affine-curves) proves it by another route (constructible reduction and the trace method)"
+  "place": "## Proof replaced by the route of the Lean proof AlgebraicGeometry.IsCurve.subsingleton_sheafH_of_three_le (WeilConjectures/AlgebraicGeometry/Curve/CohomologicalDimension.lean:397-415) through WeilConjectures/AlgebraicGeometry/Curve/HighDegreeVanishing.lean, AlgebraicGeometry.IsCurve.subsingleton_sheafH_of_three_le_of_forall (lines 274-437); Stacks 03SC (1) (literature/stacks-project/etale-cohomology.tex, theorem-vanishing-affine-curves) proves it by another route (constructible reduction and the trace method); D2 stage 3 reuses the existing implementation of steps 1-9 and explicitly transports through Scheme.nonempty_sheafH_extDerivedIso."
  },
  "mathlib_searches": [
   {
@@ -273,5 +282,15 @@
   "group": "F1",
   "result": "pass",
   "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D2",
+  "result": "pass",
+  "landing": "20261012T053924-L-2631847",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
