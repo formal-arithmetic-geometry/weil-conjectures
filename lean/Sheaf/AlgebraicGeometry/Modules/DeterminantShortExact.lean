@@ -9,8 +9,9 @@ public import Sheaf.AlgebraicGeometry.Modules.ExteriorSheaf
 public import WeilConjectures.AlgebraicGeometry.Modules.TensorSection
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
 public import Mathlib.Algebra.Homology.ShortComplex.ShortExact
-import Sheaf.AlgebraicGeometry.Modules.LocalSplittingFiniteFree
-import Sheaf.LinearAlgebra.ExteriorTopDirectSum
+import Sheaf.AlgebraicGeometry.Modules.ExteriorSheafTopInvertible
+import Sheaf.AlgebraicGeometry.Modules.DeterminantShortExactExists
+import Sheaf.AlgebraicGeometry.Modules.ExteriorTensorLiftHomExt
 
 /-!
 # Determinants in short exact sequences
@@ -62,6 +63,17 @@ theorem determinant_shortExact {X : Scheme.{v}} (S : ShortComplex X.Modules)
             (exteriorSheafSection S.X₃ r₃ U b)) =
           exteriorSheafSection S.X₂ r₂ U
             (fun i => Fin.append (fun j => S.f.val.app (op U) (a j)) c (Fin.cast hr i)) := by
-  sorry
+  refine ⟨exteriorSheaf_top_isInvertible S.X₁ r₁,
+    exteriorSheaf_top_isInvertible S.X₂ r₂,
+    exteriorSheaf_top_isInvertible S.X₃ r₃, ?_⟩
+  obtain ⟨e, he⟩ := determinant_shortExact_exists S hS r₁ r₂ r₃ hr
+  refine ⟨e, he, ?_⟩
+  intro e' he'
+  apply Iso.ext_inv
+  have := hS.epi_g
+  apply exteriorTensor_lift_hom_ext S.g r₁ r₃
+  intro U a c
+  exact (he' U a (fun i ↦ S.g.val.app (op U) (c i)) c (fun _ ↦ rfl)).trans
+    (he U a (fun i ↦ S.g.val.app (op U) (c i)) c (fun _ ↦ rfl)).symm
 
 end AlgebraicGeometry.Scheme.Modules

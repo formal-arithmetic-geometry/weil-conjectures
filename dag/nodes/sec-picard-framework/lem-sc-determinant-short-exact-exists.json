@@ -1,0 +1,108 @@
+{
+ "id": "lem-sc-determinant-short-exact-exists",
+ "kind": "statement",
+ "title": "Existence of determinant isomorphism",
+ "statement": "the determinant isomorphism exists and satisfies the wedge formula for arbitrary quotient lifts.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-rr/lem-sc-riemann-roch.md",
+  "place": "Proof of (*), determinant paragraph"
+ },
+ "stmt_deps": [],
+ "proof": [
+  {
+   "text": "Construct the local map from the local splitting and exterior-power basis statements, then glue it by sheaf extensionality and separatedness.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "X2",
+  "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-rr/lem-sc-riemann-roch.md",
+  "place": "Proof of (*), determinant paragraph"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "top exterior power of a locally free sheaf is invertible",
+   "results": "service unavailable",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "top exterior power of a finite locally free sheaf is locally isomorphic to the structure sheaf",
+   "results": "ModuleCat.exteriorPower.iso₀, ModuleCat.exteriorPower.iso₁, SheafOfModules.freeSection",
+   "date": "2026-10-12",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "exterior.*hom_ext|linearMap_ext|ιMulti_span",
+   "results": "Mathlib/LinearAlgebra/ExteriorPower/Basic.lean lines 28, 80, 108",
+   "date": "2026-10-12",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Modules.DeterminantShortExact",
+  "date": "2026-10-12",
+  "group": "X2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-determinant-short-exact",
+   "place": "Proof of (*), determinant paragraph",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-rr",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.Modules.DeterminantShortExactExists",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.determinant_shortExact_exists",
+  "file": "lean/Sheaf/AlgebraicGeometry/Modules/DeterminantShortExactExists.lean",
+  "statement": "theorem determinant_shortExact_exists {X : Scheme.{v}} (S : ShortComplex X.Modules)\n    (hS : S.ShortExact) (r₁ r₂ r₃ : ℕ) (hr : r₂ = r₁ + r₃)\n    [S.X₁.IsFiniteLocallyFreeOfRank r₁] [S.X₂.IsFiniteLocallyFreeOfRank r₂]\n    [S.X₃.IsFiniteLocallyFreeOfRank r₃] :\n    ∃ e : exteriorSheaf S.X₂ r₂ ≅ exteriorSheaf S.X₁ r₁ ⊗ exteriorSheaf S.X₃ r₃,\n      ∀ (U : X.Opens) (a : Fin r₁ → S.X₁.val.obj (op U))\n        (b : Fin r₃ → S.X₃.val.obj (op U)) (c : Fin r₃ → S.X₂.val.obj (op U)),\n        (∀ i, S.g.val.app (op U) (c i) = b i) →\n        e.inv.val.app (op U)\n          (tmulSection (exteriorSheafSection S.X₁ r₁ U a)\n            (exteriorSheafSection S.X₃ r₃ U b)) =\n          exteriorSheafSection S.X₂ r₂ U\n            (fun i ↦ Fin.append (fun j ↦ S.f.val.app (op U) (a j)) c (Fin.cast hr i))",
+  "branch": "sheaf-dag",
+  "by": "X2",
+  "date": "2026-10-12",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X2",
+  "result": "pass",
+  "landing": "20261012T112854-L-773413",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X2",
+  "result": "pass",
+  "landing": "20261012T112854-L-773413",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
