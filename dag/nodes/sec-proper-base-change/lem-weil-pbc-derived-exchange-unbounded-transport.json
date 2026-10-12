@@ -1,0 +1,134 @@
+{
+ "id": "lem-weil-pbc-derived-exchange-unbounded-transport",
+ "kind": "statement",
+ "title": "Transport of the exchange equation to arbitrary K-injective representatives",
+ "statement": "Let (g':X'→X, f':X'→Y', f:X→Y, g:Y'→Y) be a cartesian square of schemes [def-weil-pbc-cartesian-square]. All sheaves are abelian sheaves on the small étale sites. Write F=f_*, F'=f'_*, G=g^{-1}, G'=g'^{-1} for the additive sheaf functors [def-weil-pbc-direct-image], [def-weil-pbc-inverse-image]. Write q_T for the quotient of ℤ-indexed cochain complexes on T to their homotopy category and Qh for its derived localization [def-weil-abstract-derived-category]. Let ι_T:D⁺(T_et)→D(T_et) be the inclusion, R⁺F and R⁺F' the bounded below right derived functors, and let φ^G_M:G(Qh M)≅Qh(G M) and φ^{G'}_M denote the exact inverse-image comparison isomorphisms [def-weil-pbc-derived-inverse-image].\n\nFix K∈D⁺(X_et) and put K'=G'K. Let E:K⁺(Inj(X_et))≌D⁺(X_et) and E':K⁺(Inj(X'_et))≌D⁺(X'_et) be the standard injective-object equivalences. Put P=ι_Inj(E^{-1}K), P'=ι_Inj(E'^{-1}K'), regarded as bounded below homotopy objects, and ρ=ι_X(E.counit_K^{-1}):ι_XK→Qh P, ρ'=ι_X'(E'.counit_K'^{-1}):ι_X'K'→Qh P'.\n\nLet I be a K-injective cochain complex on X_et [def-weil-pbc-kinjective-resolutions], s:ι_XK≅Qh(q_X I) an isomorphism, J a K-injective cochain complex on X'_et, and j:G'I→J a quasi-isomorphism. Define t=G'(s.hom)≫(φ^{G'}_{q_X I}).hom≫Qh(q_X'(j)). Define ex₀:I under (F⋙G)→I under (G'⋙F') by applying the underived exchange [def-weil-pbc-underived-exchange] term by term, and set e=ex₀≫F'(j). For arbitrary homotopy classes h₁:q_X I→P and h₂:q_X' J→P' satisfying s.hom≫Qh(h₁)=ρ and t≫Qh(h₂)=ρ', define\nχ=Qh(F(h₁))≫ι_Y(Unit_{R⁺F,P}≫R⁺F(E.counit_K)),\nχ'=Qh(F'(h₂))≫ι_Y'(Unit_{R⁺F',P'}≫R⁺F'(E'.counit_K')),\nσsrc=(φ^G_{F(q_X I)})^{-1}≫G(χ).\nLet Ex_K be the bounded below derived exchange [def-weil-pbc-derived-exchange]. The comparison equation referred to below is\nσsrc≫ι_Y'(Ex_K)=Qh(q_Y'(e))≫χ'.\n\nAssume that for this fixed square, K and J, the comparison equation holds for every bounded below K-injective source I₀, every representation isomorphism s₀:ι_XK≅Qh(q_X I₀), every quasi-isomorphism j₀:G'I₀→J, every integer lower bound n on I₀, and every compatible pair of comparison classes (with the same definitions after replacing I,s,j by I₀,s₀,j₀). Then the comparison equation also holds for the arbitrary, possibly unbounded I,s,j specified above and every compatible pair (h₁,h₂). This is the extension from bounded below representatives to arbitrary K-injective representatives.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-def-exchange/lem-weil-pbc-derived-exchange-termwise.md",
+  "place": "Proof of lem-weil-pbc-derived-exchange-termwise, step 7; Stacks sites-cohomology Lemma 0736, Remark 07A7; derived Lemmas 070I, 070K and 0DVC"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-cartesian-square",
+  "def-weil-pbc-inverse-image",
+  "def-weil-abstract-derived-category",
+  "def-weil-pbc-derived-categories",
+  "def-weil-pbc-derived-inverse-image",
+  "def-weil-pbc-direct-image",
+  "lem-weil-pbc-derived-direct-image-triangulated",
+  "def-weil-pbc-kinjective-resolutions",
+  "lem-weil-pbc-kinjective-hom-derived",
+  "def-weil-pbc-underived-exchange",
+  "def-weil-pbc-derived-exchange",
+  "lem-weil-pbc-derived-exchange-bounded-comparison"
+ ],
+ "proof": [
+  {
+   "text": "Assume the bounded formula. (Part (b) in general: reduction to a bounded below resolution.) Let $P=I(K)$ (bounded below, K-injective), $h:I\\to P$ the homotopy equivalence of step 1 with $Q(h)s=\\rho_K$, $h'$ a homotopy inverse. The termwise functors $g'^{-1}$, $g^{-1}$, $f_*$, $f'_*$ preserve homotopies ([lem-weil-pbc-termwise-adjunction-homotopy] (b)), so $j_P:=j\\circ g'^{-1}(h'):g'^{-1}P\\to J$ is a quasi-isomorphism, a K-injective resolution, and step 6 applies to $(P,\\rho_K,j_P)$. Compare the data: (1) by naturality of $\\Ex^0_\\square$ [lemma-weil-pbc-underived-exchange-naturality], $e_P\\circ g^{-1}f_*(h)=f'_*(j)f'_*g'^{-1}(h'h)\\Ex^0_{\\square,I}\\simeq e$; (2) $\\chi_{(P,\\rho_K)}=\\mathrm{id}$, and by naturality of $\\varphi^g$, $\\sigma_{\\rm src}(I)=g^{-1}Q(f_*h)(\\varphi^g_{f_*I})^{-1}=(\\varphi^g_{f_*P})^{-1}Q(g^{-1}f_*h)=\\sigma_{\\rm src}(P)\\circ Q(g^{-1}f_*h)$; (3) by naturality of $\\varphi^{g'}$, $t_P=Q(j)Q(g'^{-1}h')\\varphi^{g'}_Pg'^{-1}(Q(h)s)=Q(j)Q(g'^{-1}(h'h))\\varphi^{g'}_Ig'^{-1}(s)=t$, so $\\sigma_{\\rm tgt}$ is the same. Hence $\\Ex_{\\square,K}\\sigma_{\\rm src}(I)=\\Ex_{\\square,K}\\sigma_{\\rm src}(P)Q(g^{-1}f_*h)=\\sigma_{\\rm tgt}Q(e_P)Q(g^{-1}f_*h)=\\sigma_{\\rm tgt}Q(e)$.",
+   "uses": [
+    "lem-weil-pbc-derived-exchange-bounded-comparison",
+    "lem-weil-pbc-termwise-adjunction-homotopy",
+    "lemma-weil-pbc-underived-exchange-naturality",
+    "def-weil-pbc-derived-inverse-image",
+    "def-weil-pbc-direct-image",
+    "lem-weil-pbc-kinjective-hom-derived"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Lemma 0736 (lemma-base-change-map-flat-case, line 2427: the base change map built from injective resolutions $\\mathcal F\\to\\mathcal I$, $g'^*\\mathcal F\\to\\mathcal J$) and Remark 07A7 (remark-base-change, line 4033: the base change map as the adjoint of $L(g')^*$ of the counit); Stacks uses the two interchangeably (etale-cohomology.tex line 7600) without comparing them; the comparison is written here by an agent"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-derived-exchange-bounded-comparison",
+  "lem-weil-pbc-termwise-adjunction-homotopy",
+  "lemma-weil-pbc-underived-exchange-naturality",
+  "def-weil-pbc-derived-inverse-image",
+  "def-weil-pbc-direct-image",
+  "lem-weil-pbc-kinjective-hom-derived"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Lemma 0736 (termwise construction on injective resolutions) and Remark 07A7 (mate construction); Stacks does not compare them. Derived adjunction: derived.tex Lemma 0DVC, through prop-weil-pbc-derived-inverse-image-adjunction (1)-(2). The comparison is written by an agent."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "derived base change computed on arbitrary K injective resolution comparison",
+   "results": "CategoryTheory.Functor.rightDerived_map_eq; CategoryTheory.InjectiveResolution.isoRightDerivedObj_hom_naturality; CategoryTheory.InjectiveResolution.isoRightDerivedObj_hom_naturality_assoc; CategoryTheory.InjectiveResolution.rightDerived_app_eq; CategoryTheory.InjectiveResolution.toRightDerivedZero_eq; CategoryTheory.InjectiveResolution.toRightDerivedZero'; CategoryTheory.InjectiveResolution.isoRightDerivedObj_inv_naturality_assoc; CategoryTheory.InjectiveResolution.isoRightDerivedObj_inv_naturality",
+   "date": "2026-10-12",
+   "verdict": "K-injective Hom and homotopy functor tools found; no direct theorem of this comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "CochainComplex.IsKInjective.Qh_map_bijective",
+   "results": "CochainComplex.IsKInjective.Qh_map_bijective",
+   "date": "2026-10-12",
+   "verdict": "K-injective Hom and homotopy functor tools found; no direct theorem of this comparison."
+  },
+  {
+   "tool": "leansearch",
+   "query": "derived base change comparison on bounded below K injective resolutions",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "Qh_map_bijective|mapHomotopyCategoryCompIso",
+   "results": "Mathlib/Algebra/Homology/HomotopyCategory/Plus.lean; Mathlib/Algebra/Homology/HomotopyCategory.lean; Mathlib/Algebra/Homology/DerivedCategory/Plus.lean; Mathlib/Algebra/Homology/DerivedCategory/Plus.lean; Mathlib/Algebra/Homology/DerivedCategory/KInjective.lean; Mathlib/Algebra/Homology/DerivedCategory/KInjective.lean; Mathlib/Algebra/Homology/DerivedCategory/KInjective.lean; Mathlib/Algebra/Homology/DerivedCategory/KInjective.lean",
+   "date": "2026-10-12",
+   "verdict": "K-injective Hom and homotopy functor tools found; no direct theorem of this comparison."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.DerivedExchangeTermwise",
+  "date": "2026-10-12",
+  "group": "K2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-derived-exchange-termwise",
+   "place": "Proof, final reduction to a bounded below resolution",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-def-exchange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.DerivedExchangeUnboundedTransport",
+  "file": "lean/Sheaf/AlgebraicGeometry/DerivedExchangeUnboundedTransport.lean",
+  "declaration": "AlgebraicGeometry.derivedExchangeUnboundedTransport",
+  "statement": "lemma derivedExchangeUnboundedTransport\n    {X' X Y' Y : Scheme.{u}} {g' : X' ⟶ X} {f' : X' ⟶ Y'}\n    {f : X ⟶ Y} {g : Y' ⟶ Y} (sq : IsPullback g' f' f g)\n    (K : DerivedCategory.Plus (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}))\n    (I : CochainComplex (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) ℤ)\n    [I.IsKInjective]\n    (s : DerivedCategory.Plus.ι.obj K ≅\n      DerivedCategory.Qh.obj ((HomotopyCategory.quotient _ _).obj I))\n    (J : CochainComplex (Sheaf X'.smallEtaleTopology AddCommGrpCat.{u + 1}) ℤ)\n    [J.IsKInjective]\n    (j : (((g')^*[AddCommGrpCat.{u + 1}]).mapHomologicalComplex (.up ℤ)).obj I ⟶ J)\n    [QuasiIso j]\n    (bounded : ∀\n    (I₀ : CochainComplex (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) ℤ)\n    [I₀.IsKInjective]\n    (s₀ : DerivedCategory.Plus.ι.obj K ≅\n      DerivedCategory.Qh.obj ((HomotopyCategory.quotient _ _).obj I₀))\n    (j₀ : (((g')^*[AddCommGrpCat.{u + 1}]).mapHomologicalComplex (.up ℤ)).obj I₀ ⟶ J)\n    [QuasiIso j₀]\n    (n : ℤ) [I₀.IsStrictlyGE n],\n    let B := AddCommGrpCat.{u + 1}\n    let C := Sheaf X.smallEtaleTopology B\n    let C' := Sheaf X'.smallEtaleTopology B\n    let q := HomotopyCategory.quotient C (.up ℤ)\n    let q' := HomotopyCategory.quotient C' (.up ℤ)\n    let qY := HomotopyCategory.quotient (Sheaf Y'.smallEtaleTopology B) (.up ℤ)\n    let F := (f)_*[B]\n    let F' := (f')_*[B]\n    let G := (g)^*[B]\n    let G' := (g')^*[B]\n    let E := DerivedCategory.Plus.injectiveObjectEquivalence C\n    let E' := DerivedCategory.Plus.injectiveObjectEquivalence C'\n    let K' := G'.mapDerivedCategoryPlus.obj K\n    let P := (InjectiveObject.ι C).mapHomotopyCategoryPlus.obj (E.inverse.obj K)\n    let P' := (InjectiveObject.ι C').mapHomotopyCategoryPlus.obj (E'.inverse.obj K')\n    let ρ := DerivedCategory.Plus.ι.map (E.counitIso.inv.app K)\n    let ρ' := DerivedCategory.Plus.ι.map (E'.counitIso.inv.app K')\n    let t := G'.mapDerivedCategory.map s₀.hom ≫\n      G'.mapDerivedCategoryFactorsh.hom.app (q.obj I₀) ≫\n      DerivedCategory.Qh.map (q'.map j₀)\n    let ex₀ := (NatTrans.mapHomologicalComplex\n      (Etale.baseChangeMap B sq.toCommSq) (.up ℤ)).app I₀\n    let e := ex₀ ≫ (F'.mapHomologicalComplex (.up ℤ)).map j₀\n    ∀ h : ((q.obj I₀ ⟶ P.obj) × (q'.obj J ⟶ P'.obj)),\n      s₀.hom ≫ DerivedCategory.Qh.map h.1 = ρ →\n      t ≫ DerivedCategory.Qh.map h.2 = ρ' →\n      let χ := DerivedCategory.Qh.map ((F.mapHomotopyCategory (.up ℤ)).map h.1) ≫\n        DerivedCategory.Plus.ι.map (F.rightDerivedFunctorPlusUnit.app P ≫\n          F.rightDerivedFunctorPlus.map (E.counitIso.hom.app K))\n      let χ' := DerivedCategory.Qh.map ((F'.mapHomotopyCategory (.up ℤ)).map h.2) ≫\n        DerivedCategory.Plus.ι.map (F'.rightDerivedFunctorPlusUnit.app P' ≫\n          F'.rightDerivedFunctorPlus.map (E'.counitIso.hom.app K'))\n      let σsrc := G.mapDerivedCategoryFactorsh.inv.app\n        ((F.mapHomotopyCategory (.up ℤ)).obj (q.obj I₀)) ≫ G.mapDerivedCategory.map χ\n      σsrc ≫ DerivedCategory.Plus.ι.map\n          ((Etale.derivedBaseChangeMapPlus B sq.toCommSq).app K) =\n        DerivedCategory.Qh.map (qY.map e) ≫ χ' ) :\n    let B := AddCommGrpCat.{u + 1}\n    let C := Sheaf X.smallEtaleTopology B\n    let C' := Sheaf X'.smallEtaleTopology B\n    let q := HomotopyCategory.quotient C (.up ℤ)\n    let q' := HomotopyCategory.quotient C' (.up ℤ)\n    let qY := HomotopyCategory.quotient (Sheaf Y'.smallEtaleTopology B) (.up ℤ)\n    let F := (f)_*[B]\n    let F' := (f')_*[B]\n    let G := (g)^*[B]\n    let G' := (g')^*[B]\n    let E := DerivedCategory.Plus.injectiveObjectEquivalence C\n    let E' := DerivedCategory.Plus.injectiveObjectEquivalence C'\n    let K' := G'.mapDerivedCategoryPlus.obj K\n    let P := (InjectiveObject.ι C).mapHomotopyCategoryPlus.obj (E.inverse.obj K)\n    let P' := (InjectiveObject.ι C').mapHomotopyCategoryPlus.obj (E'.inverse.obj K')\n    let ρ := DerivedCategory.Plus.ι.map (E.counitIso.inv.app K)\n    let ρ' := DerivedCategory.Plus.ι.map (E'.counitIso.inv.app K')\n    let t := G'.mapDerivedCategory.map s.hom ≫\n      G'.mapDerivedCategoryFactorsh.hom.app (q.obj I) ≫\n      DerivedCategory.Qh.map (q'.map j)\n    let ex₀ := (NatTrans.mapHomologicalComplex\n      (Etale.baseChangeMap B sq.toCommSq) (.up ℤ)).app I\n    let e := ex₀ ≫ (F'.mapHomologicalComplex (.up ℤ)).map j\n    ∀ h : ((q.obj I ⟶ P.obj) × (q'.obj J ⟶ P'.obj)),\n      s.hom ≫ DerivedCategory.Qh.map h.1 = ρ →\n      t ≫ DerivedCategory.Qh.map h.2 = ρ' →\n      let χ := DerivedCategory.Qh.map ((F.mapHomotopyCategory (.up ℤ)).map h.1) ≫\n        DerivedCategory.Plus.ι.map (F.rightDerivedFunctorPlusUnit.app P ≫\n          F.rightDerivedFunctorPlus.map (E.counitIso.hom.app K))\n      let χ' := DerivedCategory.Qh.map ((F'.mapHomotopyCategory (.up ℤ)).map h.2) ≫\n        DerivedCategory.Plus.ι.map (F'.rightDerivedFunctorPlusUnit.app P' ≫\n          F'.rightDerivedFunctorPlus.map (E'.counitIso.hom.app K'))\n      let σsrc := G.mapDerivedCategoryFactorsh.inv.app\n        ((F.mapHomotopyCategory (.up ℤ)).obj (q.obj I)) ≫ G.mapDerivedCategory.map χ\n      σsrc ≫ DerivedCategory.Plus.ι.map\n          ((Etale.derivedBaseChangeMapPlus B sq.toCommSq).app K) =\n        DerivedCategory.Qh.map (qY.map e) ≫ χ'",
+  "branch": "sheaf-dag",
+  "by": "K2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K2",
+  "result": "pass",
+  "landing": "20261012T044747-L-2036666",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K2",
+  "result": "pass",
+  "landing": "20261012T044747-L-2036666",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
