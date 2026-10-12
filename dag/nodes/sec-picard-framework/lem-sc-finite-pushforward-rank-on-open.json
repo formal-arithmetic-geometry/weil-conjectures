@@ -23,14 +23,25 @@
  ],
  "proof": [
   {
-   "text": "On affine opens contained in U, the sections of the pushforward are a finite flat finitely presented algebra, so the existing finite-flat pushforward argument gives finite local freeness.",
+   "text": "For a finite flat locally finitely presented morphism with globally constant finrank n, use the already proved isQuasicoherent_pushforward_of_isAffineHom and isFiniteLocallyFreeOfRank_of_isAffineOpen. On each affine open V, finite_app, finitePresentation_appLE and flat_appLE give finite presentation and flatness of Gamma(X,f^-1 V). The cartesian affine chart square and finrank_SpecMap_algebraMap identify its rankAtStalk with f.finrank; hence the affine criterion gives rank n. This is the private proved helper rank_pushforward_unit.",
    "uses": [
-    "lem-pc-finite-flat-pushforward-locally-free"
+    "lem-pc-affine-morphism-hi",
+    "lem-weil-pbc-finite-flat-rank-iso"
    ],
    "elementary": false
   },
   {
-   "text": "The affine definition and base-change invariance of morphism rank identify local module rank with f.finrank. The hypothesis gives constant rank n; localizing a finite projective module gives rank-n trivializations, which cover U and define rank-n local generators data on its over site.",
+   "text": "Transport fixed-rank local generators along the site equivalence between the open subscheme U and Over U. The private proved helper rank_pushforward_site maps each free generating family along the corresponding colimit-preserving functor; its cover is the family of objects equipped with a morphism to an original cover object. Cocontinuity gives the covering property and mapFreeIso preserves the generating index type. Specialize this to overEquiv U to obtain the private proved helper rank_over_of_restrict.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Construct the direct-image restriction comparison for any module M and any scheme morphism f: (f_*M)|U is isomorphic to (f|U)_*(M|f^-1 U). Use pushforwardComp and pushforwardCongr2, with the equality image_morphismRestrict_preimage on each open. Compatibility of the ring actions is precisely morphismRestrict_app. This proves the private helper pushforward_restrict_iso without a derived base-change assumption.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Apply finrank_of_isPullback to the restriction square to make f|U globally rank n. Apply step 1 to f|U, transport its structure-sheaf pushforward through step 3 and restrictUnitIso, and apply step 2. All constructions allow an empty U and n=0.",
    "uses": [
     "lem-weil-pbc-finite-flat-rank-iso"
    ],
@@ -38,13 +49,13 @@
   }
  ],
  "proof_deps": [
-  "lem-pc-finite-flat-pushforward-locally-free",
+  "lem-pc-affine-morphism-hi",
   "lem-weil-pbc-finite-flat-rank-iso"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/morphisms.tex",
-  "place": "Tags 02KB and 04MH"
+  "place": "Tags 02KB and 04MH; implemented using the proved affine fixed-rank criterion in WeilConjectures/AlgebraicGeometry/Modules/LocallyFreeRank.lean and direct restriction comparisons."
  },
  "mathlib_searches": [
   {
@@ -109,10 +120,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "K2",
+  "group": "M3",
   "result": "pass",
-  "landing": "20261012T060744-L-2910411",
-  "kind": "interface",
+  "landing": "20261012T085306-L-26249",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
