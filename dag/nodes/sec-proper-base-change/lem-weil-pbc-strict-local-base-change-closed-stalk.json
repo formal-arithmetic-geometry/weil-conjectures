@@ -23,51 +23,24 @@
  ],
  "proof": [
   {
-   "text": "Apply `isIso_strictHenselization_baseChange_globalHomology` to f, s, G[0], and q. The canonical derived mate there equals `derivedBaseChangeMapPlus`: compare their components on bounded-below complexes using `Adjunction.derivedPlus_mateEquiv_app_fac` and `pullbackSquareComparison_hom_app_factorsh`, then use `derivedBaseChangeMapPlus_ext`. Thus global sections of homology of the canonical strict-local base-change map are invertible, without a torsion assumption.",
+   "text": "Apply the model-global-homology comparison theorem to K = G[0] and n = q, then apply the closed-stalk transfer lemma.",
    "uses": [
-    "lem-weil-pbc-strict-local-base-change-global-homology",
-    "lemma-weil-pbc-derived-exchange-replacement"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Put j = strictHenselizationStructuralMap s, P = pullback f j, p = pullback.fst f j, and v = pullback.snd f j. The map b : X₀ → P is the pullback lift of p₀ and f₀ ≫ eA.hom. It satisfies b ≫ p = p₀ and b ≫ v = f₀ ≫ eA.hom. Pullback cancellation gives the cartesian square (b, f₀, v, eA.hom); because eA.hom is invertible, b is invertible too. Its derived base-change map is invertible: inverse image along an isomorphism is an exact equivalence preserving injectives, so `derivedBaseChangeMapPlus_fac_app` on an injective representative expresses this map as a composite of isomorphisms.",
-   "uses": [
-    "def-weil-pbc-cartesian-square",
-    "lemma-weil-pbc-derived-exchange-replacement"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "The horizontal pasting formula writes the outer mate at K = G[0] as C(eA.hom,j).hom followed by D(eA.hom) of the canonical mate, the mate of the square in step 2 at D(p)K, and R(f₀) of C(b,p).inv. Here C is `upperStarCompDerivedPlus`; the equation b ≫ p = p₀ identifies the outer square with sq₀. Global sections after inverse image along eA.hom are naturally isomorphic to global sections before it: whisker the invertible adjunction unit with global sections, and apply `lowerStarCompGlobalSectionsIso`. Homology commutes with exact inverse image by `mapDerivedCategoryPlusHomologyFunctorIso`. Consequently the middle factor remains invertible after global sections of homology, by step 1. All other factors are images of isomorphisms under functors. Thus global sections of homology of the sq₀ mate are invertible.",
-   "uses": [
-    "lemma-weil-pbc-derived-exchange-coherence",
-    "def-weil-pbc-derived-inverse-image"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "The point t = a followed by the residue closed-point map lies over the closed point of Spec A (`IsLocalRing.PrimeSpectrum.comap_residue`). Enlarge k to AlgebraicClosure k. `isIso_pointSmallEtalePrecomp_sheafFiber` and its naturality identify stalk maps before and after this enlargement. Apply `strictlyHenselianSections_geometricStalk_isIso` to the enlarged point and both homology sheaves. Its naturality states that the source global germ followed by the stalk map is the section map followed by the target global germ. The section map is invertible by step 3, using `ΓNatIsoSheafSections`. Both germs are invertible by 03QO. Cancel the source germ, then the field-extension comparison, to obtain invertibility of the displayed stalk map. ",
-   "uses": [
-    "lem-weil-pbc-geometric-point-field-extension",
-    "lem-weil-pbc-strictly-henselian-sections-stalk"
+    "lem-weil-pbc-strict-local-base-change-model-global-homology",
+    "lem-weil-pbc-strictly-henselian-sections-stalk",
+    "lem-weil-pbc-geometric-point-field-extension"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-cartesian-square",
-  "def-weil-pbc-derived-inverse-image",
-  "lem-weil-pbc-geometric-point-field-extension",
-  "lem-weil-pbc-strict-local-base-change-global-homology",
+  "lem-weil-pbc-strict-local-base-change-model-global-homology",
   "lem-weil-pbc-strictly-henselian-sections-stalk",
-  "lemma-weil-pbc-derived-exchange-coherence",
-  "lemma-weil-pbc-derived-exchange-replacement"
+  "lem-weil-pbc-geometric-point-field-extension"
  ],
  "proof_origin": {
-  "by": "worker P2; argument assembled from the cited source and library statements",
+  "by": "worker E2; model-global-homology reduction and strict-henselian stalk transfer",
   "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Stacks Project, Tag 03Q9 (theorem-higher-direct-images, canonical restriction of injective section complexes) and Tag 03QO (lemma-cohomology-strictly-henselian, global sections as the closed-point stalk). Online text at https://stacks.math.columbia.edu/tag/03Q9 and https://stacks.math.columbia.edu/tag/03QO read by P2 on 2026-10-12."
+  "place": "Tags 03Q9, 03QO, 03PN and 03Q1"
  },
  "mathlib_searches": [
   {
@@ -150,9 +123,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "P2",
+  "group": "E2",
   "result": "pass",
-  "landing": "20261012T144134-L-2103643",
+  "landing": "20261012T163613-L-2784978",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

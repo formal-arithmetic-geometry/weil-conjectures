@@ -1,0 +1,127 @@
+{
+ "id": "lem-weil-pbc-strict-local-base-change-model-global-homology",
+ "kind": "statement",
+ "title": "Strict-local base-change is invertible on global homology for a chosen model",
+ "statement": "Let f:X→S be quasi-compact and quasi-separated [def-weil-quasi-separated-morphism], s:Spec Ω→S a geometric point over an algebraically closed field [def-weil-geometric-point], and A a henselian local ring with separably closed residue field [def-weil-pbc-henselian-terminology]. Let eA:Spec A≅strictHenselizationScheme(s) [def-weil-pbc-strict-henselization-limit], and let sq₀ be a cartesian square [def-weil-pbc-cartesian-square] with maps p₀:X₀→X and f₀:X₀→Spec A over f and eA.hom followed by strictHenselizationStructuralMap(s) [def-weil-pbc-strict-henselization-structural-map]. For every bounded-below derived abelian etale sheaf K [def-weil-pbc-abelian-etale-sheaves, def-weil-pbc-bounded-derived-subcategories] and integer n, global sections on Spec A of Hⁿ of the derived base-change mate of sq₀ [def-weil-pbc-derived-exchange] are invertible. This does not assert invertibility of the sheaf morphism or of its stalks.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Stacks Project, Tags 03Q9 and 03QO."
+ },
+ "stmt_deps": [
+  "def-weil-quasi-separated-morphism",
+  "def-weil-geometric-point",
+  "def-weil-pbc-henselian-terminology",
+  "def-weil-pbc-strict-henselization-limit",
+  "def-weil-pbc-cartesian-square",
+  "def-weil-pbc-strict-henselization-structural-map",
+  "def-weil-pbc-abelian-etale-sheaves",
+  "def-weil-pbc-bounded-derived-subcategories",
+  "def-weil-pbc-derived-exchange"
+ ],
+ "proof": [
+  {
+   "text": "Steps 1–3 of the parent proof. Identify the canonical derived mate with derivedBaseChangeMapPlus by derivedBaseChangeMapPlus_ext and derivedPlus_mateEquiv_app_fac. Lift the chosen cartesian model to the canonical pullback. Pullback cancellation gives a cartesian comparison square with bottom edge eA.hom, so its upper edge is invertible. Exact inverse-image equivalences preserve injectives, and calculation on injective representatives makes the comparison-square derived mate invertible. Apply horizontal pasting to express the chosen mate as comparison isomorphisms, the pullback of the canonical mate, and the comparison-square mate. Homology commutes with exact inverse image. Global sections after inverse image along eA.hom are naturally isomorphic to original sections, using the invertible unit and lowerStarCompGlobalSectionsIso. Thus the canonical factor is invertible after global homology by the existing strict-local global-homology theorem, and every other factor is an image of an isomorphism. Their composite is invertible.",
+   "uses": [
+    "lem-weil-pbc-strict-local-base-change-global-homology",
+    "lemma-weil-pbc-derived-exchange-replacement",
+    "lemma-weil-pbc-derived-exchange-coherence",
+    "def-weil-pbc-derived-inverse-image",
+    "def-weil-pbc-cartesian-square"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-strict-local-base-change-global-homology",
+  "lemma-weil-pbc-derived-exchange-replacement",
+  "lemma-weil-pbc-derived-exchange-coherence",
+  "def-weil-pbc-derived-inverse-image",
+  "def-weil-pbc-cartesian-square"
+ ],
+ "proof_origin": {
+  "by": "worker E2; categorical pasting argument from cited Stacks tags",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tags 03Q9 and 03QO"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Base change derived homology global sections invariant under isomorphism of base scheme",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules.pullbackComp, AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackComp_inv, AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction, AlgebraicGeometry.Scheme.Modules.pushforwardCongr, AlgebraicGeometry.Scheme.Modules.pushforwardCongr_inv_app_app, AlgebraicGeometry.Scheme.Modules.pullbackCongr, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc",
+   "date": "2026-10-13",
+   "verdict": "no exact match",
+   "digest": "665cb14413d257a3"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"NatIso.isIso_map_iff\"",
+   "results": "1 hits: CategoryTheory.NatIso.isIso_map_iff",
+   "date": "2026-10-13",
+   "verdict": "naturality lemma found, not the model comparison",
+   "digest": "a76db0a45afe4b0d"
+  },
+  {
+   "tool": "grep",
+   "query": "derivedBaseChangeMapPlus_paste_horiz|globalSectionsUpperStarIso",
+   "results": "0 hits: ",
+   "date": "2026-10-13",
+   "verdict": "no exact match",
+   "digest": "4f53cda18c2baa0c"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Global sections of the derived base change map to a strict henselization are isomorphisms after taking homology",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable",
+   "digest": "4f53cda18c2baa0c"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.StrictLocalBaseChangeClosedStalk",
+  "date": "2026-10-12",
+  "group": "E2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-strict-local-base-change-closed-stalk",
+   "place": "global-homology portion of the proof"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.StrictLocalBaseChangeModelGlobalHomology",
+  "file": "lean/Sheaf/AlgebraicGeometry/StrictLocalBaseChangeModelGlobalHomology.lean",
+  "declaration": "AlgebraicGeometry.Etale.isIso_strictHenselization_baseChange_modelGlobalHomology",
+  "statement": "theorem isIso_strictHenselization_baseChange_modelGlobalHomology {X S : Scheme.{u}} (f : X ⟶ S) [QuasiCompact f] [QuasiSeparated f] {Ω : Type u} [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ S) {A : Type u} [CommRing A] [HenselianLocalRing A] [IsSepClosed (IsLocalRing.ResidueField A)] (eA : Spec (.of A) ≅ strictHenselizationScheme s) {X₀ : Scheme.{u}} (p₀ : X₀ ⟶ X) (f₀ : X₀ ⟶ Spec (.of A)) (sq₀ : IsPullback p₀ f₀ f (eA.hom ≫ strictHenselizationStructuralMap s)) (K : DerivedCategory.Plus (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1})) (n : ℤ) : IsIso ((Sheaf.Γ (Spec (.of A)).smallEtaleTopology AddCommGrpCat.{u + 1}).map ((DerivedCategory.Plus.homologyFunctor _ n).map ((derivedBaseChangeMapPlus AddCommGrpCat.{u + 1} sq₀.toCommSq).app K)))",
+  "branch": "sheaf-dag",
+  "by": "E2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E2",
+  "result": "pass",
+  "landing": "20261012T163613-L-2784978",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E2",
+  "result": "pass",
+  "landing": "20261012T163613-L-2784978",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

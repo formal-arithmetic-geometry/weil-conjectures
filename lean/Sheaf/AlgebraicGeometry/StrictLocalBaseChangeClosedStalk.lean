@@ -8,10 +8,10 @@ module
 public import Sheaf.AlgebraicGeometry.StrictHenselizationStructuralMap
 public import WeilConjectures.SixFunctors.BaseChange.Derived
 public import WeilConjectures.Mathlib.RingTheory.Henselian
-import Sheaf.AlgebraicGeometry.StrictLocalBaseChangeGlobalHomology
+import Sheaf.AlgebraicGeometry.StrictLocalBaseChangeModelGlobalHomology
 import Sheaf.AlgebraicGeometry.StrictlyHenselianSectionsStalk
 import Sheaf.AlgebraicGeometry.GeometricPointFieldExtension
-import WeilConjectures.SixFunctors.BaseChange.DerivedPasting.Horizontal
+import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
 import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 import WeilConjectures.SixFunctors.BaseChange.Square
 
@@ -27,6 +27,46 @@ open CategoryTheory Limits
 open scoped CategoryTheory.Functor
 namespace AlgebraicGeometry.Etale
 open Scheme
+
+/-- An invertible map on sections induces an invertible closed geometric stalk map.
+This is the naturality argument of Stacks Project, Tag 03QO, followed by the
+field-extension comparison of Tags 03PN and 03Q1. -/
+private theorem closedStalk_isIso_of_sections
+    {A : Type u} [CommRing A] [HenselianLocalRing A]
+    [IsSepClosed (IsLocalRing.ResidueField A)]
+    {k : Type u} [Field k] [IsSepClosed k]
+    (a : Spec (.of k) ⟶ Spec (.of (IsLocalRing.ResidueField A)))
+    {F H : Sheaf (Spec (.of A)).smallEtaleTopology AddCommGrpCat.{u + 1}}
+    (φ : F ⟶ H) [IsIso ((Sheaf.Γ _ AddCommGrpCat.{u + 1}).map φ)] :
+    IsIso ((pointSmallEtale
+      (a ≫ Spec.map (CommRingCat.ofHom (IsLocalRing.residue A)))).sheafFiber.map φ) := by
+  let t := a ≫ Spec.map (CommRingCat.ofHom (IsLocalRing.residue A))
+  let c := Spec.map (CommRingCat.ofHom (algebraMap k (AlgebraicClosure k)))
+  have ht : (c ≫ t) default = IsLocalRing.closedPoint A := by
+    change (Spec.map (CommRingCat.ofHom (IsLocalRing.residue A)))
+      ((c ≫ a) default) = _
+    exact IsLocalRing.PrimeSpectrum.comap_residue A _
+  have hA : IsStrictlyHenselianLocalRing A := ⟨inferInstance⟩
+  obtain ⟨hgerm, hnat⟩ := strictlyHenselianSections_geometricStalk_isIso.{u, u}
+    hA (c ≫ t) ht
+  let T := Scheme.Etale.mk (𝟙 (Spec (.of A)))
+  have hsections : IsIso (φ.hom.app (Opposite.op T)) := by
+    exact (NatIso.isIso_map_iff
+      (Sheaf.ΓNatIsoSheafSections _ AddCommGrpCat.{u + 1}
+        (MorphismProperty.Over.mkIdTerminal _ _)) φ).mp inferInstance
+  have hF := hgerm F
+  have hH := hgerm H
+  have hstalk : IsIso ((pointSmallEtale (c ≫ t)).sheafFiber.map φ) := by
+    rw [← isIso_comp_left_iff
+      ((pointSmallEtale (c ≫ t)).toPresheafFiber T
+        (Over.homMk (c ≫ t) (Category.comp_id _)) F.obj), hnat F H φ]
+    infer_instance
+  have hcompF := isIso_pointSmallEtalePrecomp_sheafFiber t c F
+  have hcompH := isIso_pointSmallEtalePrecomp_sheafFiber t c H
+  have hn := (pointSmallEtalePrecomp t c).sheafFiber.naturality φ
+  rw [← isIso_comp_right_iff _
+    ((pointSmallEtalePrecomp t c).sheafFiber.app H), hn]
+  infer_instance
 
 /-- On the closed stalk of any chosen strict-henselization model, homology of the
 base-change mate is invertible. This concerns only the single lower cartesian square;
@@ -86,6 +126,9 @@ theorem isIso_strictHenselization_baseChange_closedStalk
       (a ≫ Spec.map (CommRingCat.ofHom (IsLocalRing.residue A)))).sheafFiber.map
         ((DerivedCategory.Plus.homologyFunctor _ (q : ℤ)).map
           ((derivedBaseChangeMapPlus AddCommGrpCat.{u + 1} sq₀.toCommSq).app
-            ((DerivedCategory.Plus.singleFunctor _ 0).obj G)))) := by sorry
+            ((DerivedCategory.Plus.singleFunctor _ 0).obj G)))) := by
+  have := isIso_strictHenselization_baseChange_modelGlobalHomology
+    f s eA p₀ f₀ sq₀ ((DerivedCategory.Plus.singleFunctor _ 0).obj G) (q : ℤ)
+  exact closedStalk_isIso_of_sections a _
 
 end AlgebraicGeometry.Etale
