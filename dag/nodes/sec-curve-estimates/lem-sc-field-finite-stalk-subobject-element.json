@@ -1,0 +1,117 @@
+{
+ "id": "lem-sc-field-finite-stalk-subobject-element",
+ "kind": "statement",
+ "title": "A stalk element lies in a finite-stalk subobject",
+ "statement": "Let $K$ be a field and $M$ a locally torsion abelian sheaf on $(\\operatorname{Spec} K)_{\\acute{e}t}$ [def-weil-pbc-etale-sheaves, def-weil-pbc-torsion-etale-sheaf]. Let $\\Phi$ be the geometric stalk at $\\operatorname{Spec}\\overline K\\to\\operatorname{Spec}K$ [def-weil-pbc-geometric-stalks], where $\\overline K$ is an algebraic closure. For every $x\\in\\Phi(M)$ there exist a subobject $N\\subseteq M$ with finite $\\Phi(N)$ and $y\\in\\Phi(N)$ whose image under $\\Phi(N\\hookrightarrow M)$ is $x$.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-cd-affine/lem-sc-affine-generic-second.md",
+  "place": "Proof, paragraph 4: finite stable subgroups; Stacks Project 04JQ and 03SA"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-pbc-torsion-etale-sheaf",
+  "def-weil-pbc-geometric-stalks"
+ ],
+ "proof": [
+  {
+   "text": "Use the abelian sheaf/discrete Galois module equivalence and the torsion stalk criterion. The orbit of x is finite because its stabilizer is open in the compact absolute Galois group. Its integral span is stable, finitely generated and torsion, hence finite. This algebraic span argument is proved by finite_stable_submodule in the module.",
+   "uses": [
+    "lem-exc-abelian-sheaves-gmodules",
+    "lem-exc-etale-open-subgroup-quotient-finite-discrete"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Form the restricted representation B of the invariant span W; its stabilizers agree with those in the ambient representation, so B is discrete continuous. Its subtype inclusion inc is monic. Under the equivalence E, take the preimage f of counit_B followed by inc, which is a mono from E.inverse B to M. The natural stalk comparison and counit give an isomorphism e from the stalk of E.inverse B to W. Naturality identifies Phi(f) with e.hom followed by the inclusion and the comparison at M. Form N = Subobject.mk f. Subobject.underlyingIso transports e to an isomorphism from Phi(N) to W, proving finiteness and giving the required lift of x. All of this is proved in Lean.",
+   "uses": [
+    "lem-exc-abelian-sheaves-gmodules"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-exc-abelian-sheaves-gmodules",
+  "lem-exc-etale-open-subgroup-quotient-finite-discrete"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "https://stacks.math.columbia.edu/tag/04JQ",
+  "place": "V3 Lean proof: finite orbit span, discrete subrepresentation, functor preimage of counit and inclusion, naturality of the stalk comparison."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "finite_of_fg_isAddTorsion|quotient_finite_of_isOpen|orbitEquivQuotientStabilizer",
+   "results": "Mathlib/Topology/Algebra/Ring/Compact.lean; Mathlib/GroupTheory/Sylow.lean; Mathlib/GroupTheory/Index.lean; Mathlib/GroupTheory/PGroup.lean; Mathlib/GroupTheory/GroupAction/Quotient.lean; Mathlib/GroupTheory/GroupAction/Quotient.lean; Mathlib/GroupTheory/GroupAction/Quotient.lean; Mathlib/GroupTheory/GroupAction/Quotient.lean",
+   "date": "2026-10-12",
+   "verdict": "no exact match; Mathlib ingredients used"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Every element of a torsion discrete Galois module belongs to a finite invariant submodule",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every element of a torsion discrete Galois module belongs to a finite invariant submodule",
+   "results": "FixedPoints.instFiniteDimensionalSubtypeMemSubfieldSubfield; FDRep.instFiniteCarrierVFGModuleCat; Representation.FiniteCyclicGroup.coinvariantsKer_eq_range; ModN.instModuleFinite; Ideal.Quotient.finite_of_isInvariant; AddMonoid.IsTorsion.module_of_finite; FixedPoints.finrank_le_card; Module.finite_of_fg_torsion",
+   "date": "2026-10-12",
+   "verdict": "no exact match; Mathlib ingredients used"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Curve.FiniteStalkSubobjectsCover",
+  "date": "2026-10-12",
+  "group": "V3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-affine-generic-second",
+   "place": "Proof, paragraph 4: finite stable subgroups exhaust the torsion generic stalk",
+   "via": [
+    "lem-sc-field-torsion-finite-stalk-subobjects-cover",
+    "lem-sc-generic-torsion-finite-stalk-colimit-finite"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-cd-affine",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Curve.FiniteStalkSubobjectElement",
+  "file": "lean/Sheaf/AlgebraicGeometry/Curve/FiniteStalkSubobjectElement.lean",
+  "declaration": "AlgebraicGeometry.Scheme.torsion_exists_finite_stalk_subobject_element",
+  "statement": "theorem torsion_exists_finite_stalk_subobject_element\n    (K : Type u) [Field K]\n    (M : Sheaf (Spec (.of K)).smallEtaleTopology AddCommGrpCat.{u + 1})\n    (hM : M.IsTorsion) :\n    let Φ := (pointSmallEtale\n      (Spec.map (CommRingCat.ofHom (algebraMap K (AlgebraicClosure K))))).sheafFiber\n        (A := AddCommGrpCat.{u + 1})\n    ∀ x : Φ.obj M, ∃ (N : Subobject M)\n      (_ : Finite (Φ.obj (N :\n        Sheaf (Spec (.of K)).smallEtaleTopology AddCommGrpCat.{u + 1})))\n      (y : Φ.obj (N :\n        Sheaf (Spec (.of K)).smallEtaleTopology AddCommGrpCat.{u + 1})),\n      Φ.map N.arrow y = x",
+  "branch": "sheaf-dag",
+  "by": "V3",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-7e45c",
+  "group": "V3",
+  "result": "pass",
+  "landing": "20261012T135329-L-1698192",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-7e45c",
+  "group": "V3",
+  "result": "pass",
+  "landing": "20261012T135329-L-1698192",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered files match the packet and node statements; both modules and the direct importer compile cleanly, with no forbidden constructs or interface breakage."
+ }
+}
