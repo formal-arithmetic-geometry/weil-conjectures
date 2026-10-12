@@ -292,6 +292,55 @@ lemma Scheme.exists_section_of_henselianRing
   have h₁ : i ≫ inv p = τ₀ ≫ (pullback.fst π i ∣_ V) := (hp.lift_fst _ _ _).symm
   rw [← Category.assoc, h₁, Category.assoc, morphismRestrict_ι, hτ₀, ← Category.assoc, hσ₀']
 
+/-- Base change along the closed fibre of a proper scheme over a henselian pair is faithful on
+finite étale schemes: two `Y`-morphisms agreeing on the closed fibre are equal
+(`AlgebraicGeometry.Scheme.eq_of_comp_eq_of_henselianRing`). -/
+lemma Scheme.faithful_pullback_finiteEtale_of_henselianRing
+    (h : IsPullback i f₀ f (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk I)))) :
+    (MorphismProperty.Over.pullback (@IsFinite ⊓ @Etale) ⊤ i).Faithful where
+  map_injective {V W} u u' huu' := by
+    have : IsFinite V.hom := V.prop.1
+    have : Etale W.hom := W.prop.2
+    have hV := (IsPullback.of_hasPullback V.hom i).paste_vert h
+    refine MorphismProperty.Over.Hom.ext (Scheme.eq_of_comp_eq_of_henselianRing I (V.hom ≫ f)
+      (pullback.fst V.hom i) (pullback.snd V.hom i ≫ f₀) hV W.hom
+      ((MorphismProperty.Over.w u).trans (MorphismProperty.Over.w u').symm) ?_)
+    have := congr_arg (fun v ↦ v.left ≫ pullback.fst W.hom i) huu'
+    simpa using this
+
+/-- Base change along the closed fibre of a proper scheme over a henselian pair is full on
+finite étale schemes: a `Y₀`-morphism `u₀ : V₀ ⟶ W₀` is a section of `(W ×_Y V)₀ ⟶ V₀`, which
+lifts to a section of `W ×_Y V ⟶ V` (`AlgebraicGeometry.Scheme.exists_section_of_henselianRing`
+for the proper scheme `V`), that is, to a `Y`-morphism `V ⟶ W`. -/
+lemma Scheme.full_pullback_finiteEtale_of_henselianRing
+    (h : IsPullback i f₀ f (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk I)))) :
+    (MorphismProperty.Over.pullback (@IsFinite ⊓ @Etale) ⊤ i).Full where
+  map_surjective {V W} u₀ := by
+    have : IsFinite V.hom := V.prop.1
+    have : IsFinite W.hom := W.prop.1
+    have : Etale W.hom := W.prop.2
+    have hV := (IsPullback.of_hasPullback V.hom i).paste_vert h
+    let π := pullback.snd W.hom V.hom
+    let j := pullback.fst V.hom i
+    have hu₀ : u₀.left ≫ pullback.snd W.hom i = pullback.snd V.hom i :=
+      MorphismProperty.Over.w u₀
+    let σ₀ : pullback V.hom i ⟶ pullback π j :=
+      pullback.lift (pullback.lift (u₀.left ≫ pullback.fst W.hom i) j (by
+        rw [Category.assoc, pullback.condition, reassoc_of% hu₀, pullback.condition]))
+        (𝟙 _) (by simp [π])
+    obtain ⟨s, hs, hjs⟩ := Scheme.exists_section_of_henselianRing I (V.hom ≫ f) j
+      (pullback.snd V.hom i ≫ f₀) hV π σ₀ (by simp [σ₀])
+    refine ⟨MorphismProperty.Over.homMk (s ≫ pullback.fst W.hom V.hom) (by
+      rw [Category.assoc, pullback.condition, ← Category.assoc, hs]; exact Category.id_comp _),
+      MorphismProperty.Over.Hom.ext ?_⟩
+    refine pullback.hom_ext ?_ ?_
+    · simp only [MorphismProperty.Over.pullback_map_left, MorphismProperty.Over.homMk_hom,
+        pullback.lift_fst]
+      change (j ≫ s) ≫ pullback.fst W.hom V.hom = _
+      rw [hjs]
+      simp [σ₀]
+    · simpa using hu₀.symm
+
 /-- **Idempotent lifting for the structure sheaf over a henselian pair.** Let `(A, I)` be a
 henselian pair, `f : Y ⟶ Spec A` proper and `i : Y₀ ⟶ Y` the closed fibre over `Spec A/I`.
 Then restriction `Γ(Y, 𝒪_Y) ⟶ Γ(Y₀, 𝒪_{Y₀})` induces a bijection between the idempotents
