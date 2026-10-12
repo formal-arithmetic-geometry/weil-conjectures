@@ -9234,3 +9234,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 19:41 L: merged deliver/N3/Sheaf.AlgebraicGeometry.Picard.CanonicalDirectImageH0Unit (stage 3; reviewer PASS; first push; landing 20261012T194127-L-460672 (proof); batch 20261012T194054; modules 1; new nodes 0)
 - 19:41 L: merged deliver/N3/Sheaf.Paper.GradedFinitenessCohomology (stage 3; reviewer PASS; first push; landing 20261012T194128-L-460786 (interface); batch 20261012T194054; modules 3; new nodes 2)
 - 19:41 L: merged deliver/N3/Sheaf.RingTheory.RegularSequenceShortExactSequence (stage 3; reviewer PASS; first push; landing 20261012T194128-L-460929 (proof); batch 20261012T194054; modules 1; new nodes 0)
+- 19:41 L: merged deliver/P1/Sheaf.AlgebraicGeometry.FormalSystemsPullback (stage 3; reviewer PASS; first push; landing 20261012T194129-L-461027 (interface); batch 20261012T194054; modules 2; new nodes 1)

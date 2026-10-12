@@ -28,111 +28,60 @@
  ],
  "proof": [
   {
-   "text": "(The ideal $\\mathcal I$.) By [lem-weil-pbc-module-pullback-ideal-quotient] (1), $\\mathcal I=f^{-1}\\mathcal J\\cdot\\mathcal O_X$ (the image of $f^*\\mathcal J\\to f^*\\mathcal O_Y\\to\\mathcal O_X$ [def-nagata-extended-ideal]) is a quasi-coherent sheaf of ideals of $\\mathcal O_X$, so, $X$ being Noetherian, the category $\\mathit{Coh}(X,\\mathcal I)$ of [def-weil-pbc-coherent-formal-module] is defined; and by part (2) of the same node $\\mathcal J^n\\mathcal O_X=\\mathcal I^n$ for every $n\\ge1$. Each $\\mathcal J^n$ is a quasi-coherent sheaf of ideals of $\\mathcal O_Y$ [def-weil-pbc-coherent-formal-module, step 1], so the node applies to $\\mathcal J^n$ in place of $\\mathcal J$: for every quasi-coherent $\\mathcal O_Y$-module $\\mathcal G$ and $n\\ge1$, with $q^n_{\\mathcal G}:\\mathcal G\\to\\mathcal G/\\mathcal J^n\\mathcal G$ and $p^n_{\\mathcal G}:f^*\\mathcal G\\to f^*\\mathcal G/\\mathcal I^nf^*\\mathcal G$ the quotient maps, $f^*q^n_{\\mathcal G}$ is an epimorphism with kernel $\\mathcal I^nf^*\\mathcal G$ and there is a unique isomorphism $\\sigma^n_{\\mathcal G}:f^*\\mathcal G/\\mathcal I^nf^*\\mathcal G\\to f^*(\\mathcal G/\\mathcal J^n\\mathcal G)$ with $\\sigma^n_{\\mathcal G}\\circ p^n_{\\mathcal G}=f^*q^n_{\\mathcal G}$, natural in $\\mathcal G$. (This is the computation $f^*(\\mathcal G/\\mathcal J^n\\mathcal G)=f^*\\mathcal G/f^{-1}\\mathcal J^nf^*\\mathcal G$ of the Stacks proof, where the ideals $\\mathcal I$ and $\\mathcal J$ are interchanged by a misprint.)",
+   "text": "Construct the all-power quotient isomorphism using the equality of image subobjects from [lem-weil-pbc-module-pullback-ideal-power-product-image]. The subobject equality gives an isomorphism of product inclusions; compose the resulting cokernel isomorphism with cokernel-of-image and preservation of cokernels by tensor pullback (its recorded adjunction). This yields sigma with projection equation. For any linear map and any pair m >= n, precompose both naturality composites with the quotient projection; the cokernel descent equation and the projection equation give equality. Cancel the epimorphism.",
    "uses": [
-    "lem-weil-pbc-module-pullback-ideal-quotient",
-    "def-nagata-extended-ideal",
-    "def-weil-pbc-coherent-formal-module"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/coherent.tex",
-    "place": "Cohomology of Schemes, proof of Lemma 0887 (lemma-inverse-systems-pullback), the displayed computation"
-   }
-  },
-  {
-   "text": "(The terms are coherent.) Let $(\\mathcal G_n)$ be an object of $\\mathit{Coh}(Y,\\mathcal J)$. Each $\\mathcal G_n$ is coherent on the locally Noetherian $Y$, hence quasi-coherent of finite type [pqf-lem-coherent-ft-locnoeth] (Stacks 01XZ). Then $f^*\\mathcal G_n$ is quasi-coherent [lem-weil-pbc-module-pullback-quasi-coherent] (Modules, Lemma 01BG) and of finite type [lem-weil-pbc-support-pullback-finite-type] (3) (Modules, Lemma 01B6), so it is coherent since $X$ is locally Noetherian [pqf-lem-coherent-ft-locnoeth]. The pulled-back transition maps $f^*t_n:f^*\\mathcal G_{n+1}\\to f^*\\mathcal G_n$ are $\\mathcal O_X$-linear, so $(f^*\\mathcal G_n,f^*t_n)$ is an inverse system of coherent $\\mathcal O_X$-modules [def-pc-module-pullback].",
-   "uses": [
-    "pqf-lem-coherent-ft-locnoeth",
-    "lem-weil-pbc-module-pullback-quasi-coherent",
-    "lem-weil-pbc-support-pullback-finite-type",
-    "def-pc-module-pullback"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/coherent.tex",
-    "place": "Cohomology of Schemes, proof of Lemma 0887 ('f^*: Coh(O_Y) -> Coh(O_X)'); Lemma 01XZ (lemma-coherent-Noetherian)"
-   }
-  },
-  {
-   "text": "($\\mathcal I^nf^*\\mathcal G_n=0$.) Since $\\mathcal J^n\\mathcal G_n=0$, the quotient map $q^n_{\\mathcal G_n}:\\mathcal G_n\\to\\mathcal G_n/\\mathcal J^n\\mathcal G_n$ is the cokernel of the zero map, an isomorphism [def-weil-pbc-coherent-formal-module, step 3]; so $f^*q^n_{\\mathcal G_n}$ is an isomorphism (a functor preserves isomorphisms). By step 1 its kernel is $\\mathcal I^nf^*\\mathcal G_n$, which is therefore $0$.",
-   "uses": [
-    "lem-weil-pbc-module-pullback-ideal-quotient",
-    "def-weil-pbc-coherent-formal-module"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/coherent.tex",
-    "place": "Cohomology of Schemes, proof of Lemma 0887; the conditions defining Coh(X, I) in Section 0EHN (section-coherent-formal)"
-   }
-  },
-  {
-   "text": "(The transition maps induce isomorphisms.) By the definition of $\\mathit{Coh}(Y,\\mathcal J)$ the transition map factors as $t_n=\\bar t_n\\circ q^n_{\\mathcal G_{n+1}}$ with $\\bar t_n:\\mathcal G_{n+1}/\\mathcal J^n\\mathcal G_{n+1}\\to\\mathcal G_n$ an isomorphism. Hence $f^*t_n=f^*(\\bar t_n)\\circ f^*q^n_{\\mathcal G_{n+1}}=f^*(\\bar t_n)\\circ\\sigma^n_{\\mathcal G_{n+1}}\\circ p^n_{\\mathcal G_{n+1}}$ (step 1). The map $\\overline{f^*t_n}:f^*\\mathcal G_{n+1}/\\mathcal I^nf^*\\mathcal G_{n+1}\\to f^*\\mathcal G_n$ induced by $f^*t_n$ (it exists and is unique by [def-weil-pbc-coherent-formal-module, step 4], using step 3 here) is characterized by $\\overline{f^*t_n}\\circ p^n_{\\mathcal G_{n+1}}=f^*t_n$; so $\\overline{f^*t_n}=f^*(\\bar t_n)\\circ\\sigma^n_{\\mathcal G_{n+1}}$, a composite of two isomorphisms. With steps 2 and 3, $(f^*\\mathcal G_n)$ satisfies condition (1) of [def-weil-pbc-coherent-formal-module]: it is an object of $\\mathit{Coh}(X,\\mathcal I)$.",
-   "uses": [
-    "lem-weil-pbc-module-pullback-ideal-quotient",
-    "def-weil-pbc-coherent-formal-module"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/coherent.tex",
-    "place": "Cohomology of Schemes, proof of Lemma 0887: 'f^*G_n = f^*(G_{n+1}/J^nG_{n+1}) = f^*G_{n+1}/I^n f^*G_{n+1}, hence the pullback of a system is a system'"
-   }
-  },
-  {
-   "text": "(The functor.) For a morphism $(\\alpha_n):(\\mathcal G_n)\\to(\\mathcal G'_n)$ of $\\mathit{Coh}(Y,\\mathcal J)$, $t'_n\\alpha_{n+1}=\\alpha_nt_n$ gives $f^*t'_n\\circ f^*\\alpha_{n+1}=f^*\\alpha_n\\circ f^*t_n$ since $f^*$ is a functor [def-pc-module-pullback]; so $(f^*\\alpha_n)$ is a morphism of $\\mathit{Coh}(X,\\mathcal I)$, and $f^*(\\mathrm{id})=\\mathrm{id}$, $f^*(\\beta\\alpha)=f^*\\beta\\circ f^*\\alpha$ componentwise. Hence $(\\mathcal G_n)\\mapsto(f^*\\mathcal G_n)$, $(\\alpha_n)\\mapsto(f^*\\alpha_n)$ is a functor $f^*:\\mathit{Coh}(Y,\\mathcal J)\\to\\mathit{Coh}(X,\\mathcal I)$ [def-weil-pbc-coherent-formal-module, step 4]. This proves (1).",
-   "uses": [
+    "lem-weil-pbc-module-pullback-ideal-power-product-image",
     "def-pc-module-pullback",
     "def-weil-pbc-coherent-formal-module"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/coherent.tex",
-    "place": "Cohomology of Schemes, Lemma 0887 (lemma-inverse-systems-pullback), statement"
-   }
+   "elementary": false
   },
   {
-   "text": "(Part (2): $f^*(\\mathcal G^\\wedge)\\cong(f^*\\mathcal G)^\\wedge$.) Let $\\mathcal G$ be coherent; $\\mathcal G^\\wedge=(\\mathcal G/\\mathcal J^n\\mathcal G,r_n)$ is an object of $\\mathit{Coh}(Y,\\mathcal J)$ with $r_n\\circ q^{n+1}_{\\mathcal G}=q^n_{\\mathcal G}$ [def-weil-pbc-coherent-formal-module, step 5], so $f^*(\\mathcal G^\\wedge)=(f^*(\\mathcal G/\\mathcal J^n\\mathcal G),f^*r_n)$ is an object of $\\mathit{Coh}(X,\\mathcal I)$ by (1); and $f^*\\mathcal G$ is coherent (step 2), so $(f^*\\mathcal G)^\\wedge=(f^*\\mathcal G/\\mathcal I^nf^*\\mathcal G,\\pi_n)$ with $\\pi_n\\circ p^{n+1}=p^n$. The isomorphisms $\\sigma^n=\\sigma^n_{\\mathcal G}$ of step 1 commute with the transition maps: $f^*r_n\\circ\\sigma^{n+1}\\circ p^{n+1}=f^*r_n\\circ f^*q^{n+1}=f^*q^n=\\sigma^n\\circ p^n=\\sigma^n\\circ\\pi_n\\circ p^{n+1}$, and $p^{n+1}$ is an epimorphism, so $f^*r_n\\circ\\sigma^{n+1}=\\sigma^n\\circ\\pi_n$. Hence $(\\sigma^n)_n:(f^*\\mathcal G)^\\wedge\\to f^*(\\mathcal G^\\wedge)$ is a morphism of $\\mathit{Coh}(X,\\mathcal I)$ whose components are isomorphisms; the componentwise inverses also commute with the transition maps, so it is an isomorphism. For $\\mathcal O_Y$-linear $u:\\mathcal G\\to\\mathcal G'$ between coherent modules, the naturality of $\\sigma^n$ in [lem-weil-pbc-module-pullback-ideal-quotient] (3) says $\\sigma^n_{\\mathcal G'}\\circ\\overline{f^*u}=f^*(u_n)\\circ\\sigma^n_{\\mathcal G}$, i.e. $(\\sigma^n)$ is natural: $f^*(u^\\wedge)\\circ(\\sigma^n_{\\mathcal G})=(\\sigma^n_{\\mathcal G'})\\circ(f^*u)^\\wedge$.",
+   "text": "A coherent module is quasi-coherent of finite type. Transfer the standard pullback quasi-coherence instance along uniqueness of left adjoints to pushforward, and use the dedicated finite-type pullback theorem. Apply the locally Noetherian coherence criterion on X. This proves coherence of every pulled-back term.",
    "uses": [
-    "lem-weil-pbc-module-pullback-ideal-quotient",
+    "pqf-lem-coherent-ft-locnoeth",
+    "lem-weil-pbc-module-pullback-quasi-coherent",
+    "lem-weil-pbc-module-pullback-finite-type",
+    "def-pc-module-pullback"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "If the original ideal-power product is zero, its inclusion is zero and its cokernel projection is an isomorphism. Its pullback is an isomorphism. The projection equation for sigma makes the target quotient projection an isomorphism too. Cancel this monomorphism in the cokernel condition: the target product inclusion is zero. Since that inclusion is monic, its source is zero. For each transition, compose sigma with the pullback of its original quotient-to-term isomorphism; the projection equation verifies the transition factorization. Together these prove the formal-system object conditions.",
+   "uses": [
     "def-weil-pbc-coherent-formal-module"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/coherent.tex",
-    "place": "Cohomology of Schemes, proof of Lemma 088B (lemma-inverse-systems-push-pull), the identification f^*(G^) = (f^*G)^; computation of the proof of Lemma 0887"
-   }
+   "elementary": true
   },
   {
-   "text": "(Open subschemes.) Let $f:U\\to Y$ be the inclusion of an open subscheme. Then $f^*\\cong(-)|_U$ naturally [lem-weil-pbc-open-immersion-module-pullback-restriction], and $\\epsilon_f:f^*\\mathcal O_Y\\to\\mathcal O_U$ is an isomorphism [lem-weil-pbc-module-pullback-structure-sheaf]; both $\\epsilon_f\\circ\\kappa_{\\mathcal O_Y}$ and the identity of $\\mathcal O_Y|_U=\\mathcal O_U$ correspond to $f^\\sharp$ under the adjunction, so they agree. By naturality of $\\kappa$, the composite $f^*\\mathcal J\\to f^*\\mathcal O_Y\\to\\mathcal O_U$ is identified with the inclusion $\\mathcal J|_U\\to\\mathcal O_U$, so $\\mathcal I=f^{-1}\\mathcal J\\cdot\\mathcal O_U=\\mathcal J|_U$ [def-nagata-extended-ideal]. Thus (2) reads $(\\mathcal G^\\wedge)|_U\\cong(\\mathcal G|_U)^\\wedge$, the completion on $U$ taken with respect to $\\mathcal J|_U$; concretely $(\\mathcal J^n\\mathcal G)|_U=(\\mathcal J|_U)^n(\\mathcal G|_U)$ [lem-weil-pbc-ideal-times-quasi-coherent-affine-sections] (3), applied inductively to $\\mathcal J^n=\\mathcal J\\cdot\\mathcal J^{n-1}$ and to $\\mathcal J^n\\mathcal G$, and restriction to $U$ preserves cokernels.",
+   "text": "Lift the termwise whiskering functor to the full subcategory of coherent formal systems using those object conditions. Lift tensor pullback to coherent modules using the coherence proof. Both composites with their inclusions are definitionally the specified functors. The same all-power naturality equation gives a natural isomorphism of completed systems, natural both in level and in the coherent module. Cancel the fully faithful inclusion of coherent formal systems to lift that isomorphism.",
    "uses": [
-    "lem-weil-pbc-open-immersion-module-pullback-restriction",
-    "lem-weil-pbc-module-pullback-structure-sheaf",
-    "def-nagata-extended-ideal",
-    "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections"
+    "def-weil-pbc-coherent-formal-module"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/coherent.tex",
-    "place": "Cohomology of Schemes, proof of Lemma 088B (lemma-inverse-systems-push-pull), restriction of completions to opens; Lemma 0887 for f an open immersion"
-   }
+   "elementary": true
+  },
+  {
+   "text": "For an open immersion, tensor pullback and restriction are left adjoints of the same pushforward; their uniqueness isomorphism identifies them. Whisker the completion comparison with this isomorphism and its inverse on the two sides to obtain the required ambient restriction comparison. No separate preservation-of-products statement for restriction or structure-sheaf comparison is needed.",
+   "uses": [
+    "def-pc-module-pullback",
+    "lem-weil-pbc-open-immersion-module-pullback-restriction"
+   ],
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-module-pullback-ideal-quotient",
-  "def-nagata-extended-ideal",
+  "lem-weil-pbc-module-pullback-ideal-power-product-image",
+  "def-pc-module-pullback",
   "def-weil-pbc-coherent-formal-module",
   "pqf-lem-coherent-ft-locnoeth",
   "lem-weil-pbc-module-pullback-quasi-coherent",
-  "lem-weil-pbc-support-pullback-finite-type",
-  "def-pc-module-pullback",
-  "lem-weil-pbc-open-immersion-module-pullback-restriction",
-  "lem-weil-pbc-module-pullback-structure-sheaf",
-  "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections"
+  "lem-weil-pbc-module-pullback-finite-type",
+  "lem-weil-pbc-open-immersion-module-pullback-restriction"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/coherent.tex",
-  "place": "Cohomology of Schemes, Lemma 0887 (lemma-inverse-systems-pullback), first assertion and its proof; the identity f^*(G^) = (f^*G)^ in the proof of Lemma 088B (lemma-inverse-systems-push-pull)"
+  "place": "Tags 0887 and 088B; categorical realization by P1, reducing the all-power image comparison to lem-weil-pbc-module-pullback-ideal-power-product-image."
  },
  "mathlib_searches": [
   {
@@ -208,5 +157,15 @@
   "group": "T1",
   "result": "pass",
   "note": "X,Y Noetherian, f, J IdealSheafData, I = J.comap f (recorded def-nagata-extended-ideal); (1) P tied to termwise tensorPullback f by equality after ι; (2) C tied to tensorPullback on coherent modules, natural iso completion Y J ⋙ P ≅ C ⋙ completion X (J.comap f); open case tensorPullback U.ι ≅ restrictFunctor U.ι and natural iso of restricted completions with J.comap U.ι"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P1",
+  "result": "pass",
+  "landing": "20261012T194129-L-461027",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
