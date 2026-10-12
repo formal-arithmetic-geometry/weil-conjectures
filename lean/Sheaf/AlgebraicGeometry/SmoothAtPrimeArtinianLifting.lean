@@ -9,10 +9,8 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
 public import Mathlib.RingTheory.RingHom.FiniteType
 public import Mathlib.RingTheory.Length
 public import Mathlib.RingTheory.LocalRing.Basic
-import Sheaf.Paper.ArtinianIdealLengthOneFiltration
-import Sheaf.RingTheory.JacobiZariskiQuotientSmooth
-import Sheaf.RingTheory.KaehlerDifferentialsModPowerIdeal
-import Sheaf.RingTheory.SplitInjectionAfterCompletion
+import Sheaf.AlgebraicGeometry.SmoothAtPrimeArtinianLiftingForward
+import Sheaf.AlgebraicGeometry.SmoothAtPrimeArtinianLiftingReverse
 
 /-!
 # Smoothness near a prime and lifting along Artinian small extensions
@@ -104,6 +102,8 @@ theorem smooth_on_open_iff_artinian_lifting
       ∀ (ρ : R →+* B') (a : A →+* B),
         a.comp φ₀ = φ.comp ρ → Ideal.comap a (IsLocalRing.maximalIdeal B) = q →
         ∃ a' : A →+* B', φ.comp a' = a ∧ a'.comp φ₀ = ρ) := by
-  sorry
+  constructor
+  · exact smooth_on_open_artinian_lifting_forward φ₀ hfinite q
+  · exact artinian_lifting_smooth_on_open_reverse φ₀ hfinite q
 
 end AlgebraicGeometry

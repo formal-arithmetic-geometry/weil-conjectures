@@ -1,0 +1,157 @@
+{
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "step 7 of its split (source: Lemma 0GS2, proof: the essential-surjectivity paragraphs); forward implication of the Artinian criterion, parent plan steps 1, 2, 3",
+   "via": [
+    "lem-weil-pbc-smooth-artinian-lifting-at-point",
+    "lem-weil-pbc-etale-infinitesimal-neighbourhoods",
+    "lem-weil-pbc-finite-etale-lifting-complete",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": null
+ },
+ "kind": "statement",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma 02HT (lemma-smooth-test-artinian), (1) implies (3), via (2)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-affine-spectrum",
+  "def-sbc-smooth-morphisms"
+ ],
+ "proof": [
+  {
+   "text": "*(Condition (1) is smoothness at $\\mathfrak q$ in the sense of Algebra, Definition 00TB.)* Claim: (1) holds iff there is $g\\in A\\setminus\\mathfrak q$ such that the ring map $R\\to A\\to A_g$ is smooth [def-weil-pbc-smooth-ring-map] ($A_g$ the localization at $\\{1,g,g^2,\\dots\\}$). For $g\\in A$ let $D(g)=\\{\\mathfrak p:g\\notin\\mathfrak p\\}$, an open subset of $\\operatorname{Spec}A$ [def-weil-affine-spectrum], and let $j_g=\\operatorname{Spec}(A\\to A_g):\\operatorname{Spec}A_g\\to\\operatorname{Spec}A$; by [lem-weil-pbc-principal-localization-open-immersion] $j_g$ is an open immersion with image $D(g)$, so [def-weil-open-immersion] $j_g=\\iota_g\\circ u_g$ with $\\iota_g$ the inclusion of the open subscheme $D(g)$ and $u_g:\\operatorname{Spec}A_g\\to D(g)$ an isomorphism; and $\\pi\\circ j_g=\\operatorname{Spec}(R\\to A_g)$ by functoriality of $\\operatorname{Spec}$ [def-weil-affine-spectrum], i.e. $(\\pi|_{D(g)})\\circ u_g=\\operatorname{Spec}(R\\to A_g)$. By [lem-weil-pbc-smooth-restrict-open-subschemes] (c) (with $u=u_g$, $v=\\mathrm{id}$) $\\pi|_{D(g)}$ is smooth iff $\\operatorname{Spec}(R\\to A_g)$ is smooth [def-sbc-smooth-morphisms], iff $R\\to A_g$ is a smooth ring map by [lem-weil-pbc-smooth-ring-map-iff-smooth-affine]. ($\\Leftarrow$) If $g\\notin\\mathfrak q$ and $R\\to A_g$ is smooth, $W=D(g)$ is an open containing $\\mathfrak q$ with $\\pi|_W$ smooth. ($\\Rightarrow$) Let $W\\ni\\mathfrak q$ be open with $\\pi|_W$ smooth. Its complement is closed, $V(\\mathfrak a)=\\{\\mathfrak p\\supseteq\\mathfrak a\\}$ for an ideal $\\mathfrak a$ (Zariski topology), and $\\mathfrak q\\notin V(\\mathfrak a)$ gives $g\\in\\mathfrak a\\setminus\\mathfrak q$; then $D(g)\\cap V(\\mathfrak a)=\\emptyset$, so $\\mathfrak q\\in D(g)\\subseteq W$. By [lem-weil-pbc-smooth-restrict-open-subschemes] (a) applied to $\\pi|_W:W\\to\\operatorname{Spec}R$ with the opens $D(g)\\subseteq W$ and $\\operatorname{Spec}R$ (the factorization of [lem-weil-pbc-morphism-factors-through-open-subscheme] being $\\pi|_{D(g)}$), $\\pi|_{D(g)}$ is smooth, so $R\\to A_g$ is smooth.",
+   "uses": [
+    "def-weil-affine-spectrum",
+    "lem-weil-pbc-principal-localization-open-immersion",
+    "def-weil-open-immersion",
+    "lem-weil-pbc-smooth-restrict-open-subschemes",
+    "lem-weil-pbc-morphism-factors-through-open-subscheme",
+    "def-sbc-smooth-morphisms",
+    "lem-weil-pbc-smooth-ring-map-iff-smooth-affine",
+    "def-weil-pbc-smooth-ring-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Definition Tag 00TB (definition-smooth-at-prime, line 37511); morphisms.tex, Morphisms, Lemma Tag 01V6 (lemma-smooth-characterize) (smoothness local on the source, affine pieces)"
+   }
+  },
+  {
+   "text": "*(Kernels of small extensions.)* Let $\\varphi:B'\\to B$ be a small extension, $\\mathfrak m'$ the maximal ideal of $B'$ and $I=\\ker\\varphi$. Since $I$ has length $1$ it is a simple $B'$-module, so $I=B'x$ for any $x\\in I\\setminus0$ and $b\\mapsto bx$ induces $B'/\\operatorname{ann}(x)\\cong I$ with $\\operatorname{ann}(x)$ a maximal ideal, i.e. $\\operatorname{ann}(x)=\\mathfrak m'$; hence $\\mathfrak m'I=0$. As $B\\neq0$ (it is local), $I\\neq B'$, so $I\\subseteq\\mathfrak m'$ and $I^2\\subseteq\\mathfrak m'I=0$. Also $\\varphi^{-1}(\\mathfrak m_B)=\\mathfrak m'$ ($\\varphi^{-1}(\\mathfrak m_B)$ is a maximal ideal since $\\varphi$ is surjective), and $\\varphi$ induces an isomorphism $\\bar\\varphi:B'/I\\to B$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, remark after Definition Tag 02HS (definition-small-extension, line 38937): 'Clearly this means that I^2 = 0 and that I = (x) for some x in B' such that m'x = 0'; Lemma Tag 00J3 (lemma-simple-pieces) (3)"
+   }
+  },
+  {
+   "text": "*((1) implies (2).)* Assume (1); by step 1 there is $g\\in A\\setminus\\mathfrak q$ with $R\\to A_g$ smooth [def-weil-pbc-smooth-ring-map]. Let $\\varphi:B'\\to B$, $\\rho$, $a$ be as in (2), $I=\\ker\\varphi$. Since $g\\notin\\mathfrak q=a^{-1}(\\mathfrak m_B)$, $a(g)\\notin\\mathfrak m_B$ is a unit of the local ring $B$, so by the universal property of localization $a=a_g\\circ\\ell$ for a unique ring map $a_g:A_g\\to B$, $\\ell:A\\to A_g$ the localization map. Regard $B'$ as an $R$-algebra via $\\rho$ and $B'/I$ via $R\\to B'\\to B'/I$; then $g_0=\\bar\\varphi^{-1}\\circ a_g:A_g\\to B'/I$ is a homomorphism of $R$-algebras, because $a_g\\circ\\ell\\circ\\varphi_0=a\\circ\\varphi_0=\\varphi\\circ\\rho$. By step 2, $I^2=0$, so [lem-weil-pbc-smooth-ring-map-square-zero-lifting] (with $A:=R$, $B:=A_g$, $D:=B'$, $N:=I$) gives a homomorphism of $R$-algebras $f:A_g\\to B'$ with $f\\bmod I=g_0$, i.e. $\\varphi\\circ f=a_g$ and $f\\circ\\ell\\circ\\varphi_0=\\rho$. Then $a'=f\\circ\\ell$ satisfies $\\varphi\\circ a'=a_g\\circ\\ell=a$ and $a'\\circ\\varphi_0=\\rho$.",
+   "uses": [
+    "def-weil-pbc-smooth-ring-map",
+    "lem-weil-pbc-smooth-ring-map-square-zero-lifting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, proof of Lemma Tag 02HT (lemma-smooth-test-artinian, line 38950), first paragraph ((1) implies (2), via Proposition Tag 00TN formal smoothness of S_g), and '(2) implies (3)'"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-affine-spectrum",
+  "lem-weil-pbc-principal-localization-open-immersion",
+  "def-weil-open-immersion",
+  "lem-weil-pbc-smooth-restrict-open-subschemes",
+  "lem-weil-pbc-morphism-factors-through-open-subscheme",
+  "def-sbc-smooth-morphisms",
+  "lem-weil-pbc-smooth-ring-map-iff-smooth-affine",
+  "def-weil-pbc-smooth-ring-map",
+  "lem-weil-pbc-smooth-ring-map-square-zero-lifting"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma 02HT (lemma-smooth-test-artinian), (1) implies (3), via (2)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "finite type algebra over a Noetherian ring smooth at a prime if and only if lifts along small Artinian local extensions",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "RingHom.FormallySmooth",
+   "results": "12 hits; RingHom.FormallySmooth.holdsForLocalizationAway, RingHom.FormallySmooth.isStableUnderBaseChange, RingHom.FormallySmooth.localizationPreserves, RingHom.FormallySmooth.respectsIso, RingHom.FormallySmooth.stableUnderComposition, RingHom.FormallySmooth, RingHom.Smooth.formallySmooth, RingHom.formallySmooth_algebraMap",
+   "date": "2026-10-13",
+   "verdict": "related tools only; no exact match for either implication"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "smoothness at a prime via infinitesimal lifting over local Artinian rings",
+   "results": "8 hits; AlgebraicGeometry.instHasRingHomPropertyIsSmoothLocallyIsStandardSmooth, Algebra.IsSmoothAt, AlgebraicGeometry.isSmooth_iff, AlgebraicGeometry.IsSmooth.exists_isStandardSmooth, RingHom.smooth_iff_locally_isStandardSmooth, RingHom.Smooth.locally_isStandardSmooth, Algebra.smoothLocus, AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension",
+   "date": "2026-10-13",
+   "verdict": "related tools only; no exact match for either implication"
+  },
+  {
+   "tool": "grep",
+   "query": "comp_surjective|exists_smooth_of_formallySmooth_stalk|small_extension",
+   "results": "25 hits; Mathlib/Logic/Equiv/Defs.lean, Mathlib/Logic/Equiv/Defs.lean, Mathlib/FieldTheory/PolynomialGaloisGroup.lean, Mathlib/Topology/Algebra/Order/Field.lean, Mathlib/Topology/Algebra/Order/Field.lean, Mathlib/AlgebraicGeometry/Morphisms/UniversallyClosed.lean, Mathlib/AlgebraicGeometry/Morphisms/UniversallyClosed.lean, Mathlib/AlgebraicGeometry/Morphisms/Proper.lean",
+   "date": "2026-10-13",
+   "verdict": "related tools only; no exact match for either implication"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "id": "lem-weil-pbc-smooth-at-prime-artinian-lifting-forward",
+ "title": "Forward implication in the Artinian lifting criterion",
+ "statement": "Let $R$ be a Noetherian commutative ring [def-weil-pbc-noetherian-ring], let $A$ be a commutative ring, let $\\varphi_0:R\\to A$ make $A$ a finitely generated $R$-algebra, and let $\\mathfrak q$ be a prime ideal of $A$. Write $\\pi=\\operatorname{Spec}(\\varphi_0)$ [def-weil-affine-spectrum]. A small extension is a surjective homomorphism $\\varphi:B^{\\prime}\\to B$ of nonzero Artinian local commutative rings with kernel of module length one over $B^{\\prime}$; write $\\mathfrak m_B$ for the maximal ideal of $B$.\n\nAssume: There is an open subscheme $W$ of $\\operatorname{Spec}A$ containing $\\mathfrak q$ with $\\pi|_W$ smooth [def-sbc-smooth-morphisms].\n\nThen: For every small extension $\\varphi:B^{\\prime}\\to B$ and ring homomorphisms $\\rho:R\\to B^{\\prime}$ and $a:A\\to B$ such that $a\\circ\\varphi_0=\\varphi\\circ\\rho$ and $a^{-1}(\\mathfrak m_B)=\\mathfrak q$, there is a ring homomorphism $a^{\\prime}:A\\to B^{\\prime}$ with $\\varphi\\circ a^{\\prime}=a$ and $a^{\\prime}\\circ\\varphi_0=\\rho$.",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.SmoothAtPrimeArtinianLifting",
+  "date": "2026-10-13",
+  "group": "B2"
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.SmoothAtPrimeArtinianLiftingForward",
+  "file": "lean/Sheaf/AlgebraicGeometry/SmoothAtPrimeArtinianLiftingForward.lean",
+  "declaration": "AlgebraicGeometry.smooth_on_open_artinian_lifting_forward",
+  "statement": "theorem smooth_on_open_artinian_lifting_forward\n    {R A : Type u} [CommRing R] [CommRing A] [IsNoetherianRing R]\n    (φ₀ : R →+* A) (hfinite : φ₀.FiniteType) (q : Ideal A) [q.IsPrime] :\n    (∃ W : (Spec (CommRingCat.of A)).Opens,\n      (⟨q, inferInstance⟩ : PrimeSpectrum A) ∈ W ∧\n        Smooth (W.ι ≫ Spec.map (CommRingCat.ofHom φ₀))) →\n    (∀ (B' B : Type (max u v)) [CommRing B'] [CommRing B]\n      [IsArtinianRing B'] [IsArtinianRing B] [IsLocalRing B'] [IsLocalRing B]\n      (φ : B' →+* B), Function.Surjective φ → Module.length B' (RingHom.ker φ) = 1 →\n      ∀ (ρ : R →+* B') (a : A →+* B),\n        a.comp φ₀ = φ.comp ρ → Ideal.comap a (IsLocalRing.maximalIdeal B) = q →\n        ∃ a' : A →+* B', φ.comp a' = a ∧ a'.comp φ₀ = ρ)",
+  "branch": "sheaf-dag",
+  "by": "B2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B2",
+  "result": "pass",
+  "landing": "20261012T194058-L-451141",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B2",
+  "result": "pass",
+  "landing": "20261012T194058-L-451141",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
