@@ -1,5 +1,9 @@
 module
 public import Sheaf.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
+import WeilConjectures.PointCount
+import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.FormallyUnramified
+import WeilConjectures.ConstructibleSheaf.Pullback
+
 @[expose] public section
 universe u
 open CategoryTheory AlgebraicGeometry
@@ -30,5 +34,52 @@ theorem constructible_field_finite_separable_constant_of_datum
             (Spec.map (CommRingCat.ofHom (algebraMap k K)))).obj G ≅
             (constantSheaf (Spec (CommRingCat.of K)).smallEtaleTopology
               (ModuleCat.{u + 1} Λ)).obj M) := by
-  sorry
+  classical
+  have : JointlySurjective etalePrecoverage.{u} :=
+    inferInstanceAs (JointlySurjective (precoverage @Etale))
+  obtain ⟨i, y, _⟩ := d.cover.exists_eq (IsLocalRing.closedPoint k)
+  let U := d.cover.X i
+  let f := d.cover.f i
+  have : Etale f := d.cover.map_prop i
+  let K := U.residueField y
+  let : Algebra k K := (f.residueFieldAlgebraMap y).toAlgebra
+  have ha : (algebraMap k (f y).asIdeal.ResidueField).Etale :=
+    RingHom.Etale.of_bijective (Ideal.algEquivResidueFieldOfField (f y).asIdeal).bijective
+  let eb := (Scheme.Spec.residueFieldIso (CommRingCat.of k) (f y)).symm
+  have hb : (Scheme.Spec.residueFieldIso (CommRingCat.of k) (f y)).inv.hom.Etale :=
+    RingHom.Etale.of_bijective
+      eb.commRingCatIsoToRingEquiv.bijective
+  have hf : (f.residueFieldAlgebraMap y).Etale := by
+    change ((f.residueFieldMap y).hom.comp
+      ((Scheme.Spec.residueFieldIso (CommRingCat.of k) (f y)).inv.hom.comp
+        (algebraMap k (f y).asIdeal.ResidueField))).Etale
+    exact RingHom.Etale.stableUnderComposition
+      ((Scheme.Spec.residueFieldIso (CommRingCat.of k) (f y)).inv.hom.comp
+        (algebraMap k (f y).asIdeal.ResidueField)) (f.residueFieldMap y).hom
+      (RingHom.Etale.stableUnderComposition
+        (algebraMap k (f y).asIdeal.ResidueField)
+        (Scheme.Spec.residueFieldIso (CommRingCat.of k) (f y)).inv.hom ha hb)
+      (f.etale_residueFieldMap y)
+  have : Algebra.Etale k K := RingHom.etale_algebraMap.mp hf
+  have hfin : FiniteDimensional k K := Algebra.FormallyUnramified.finite_of_free k K
+  have hsep : Algebra.IsSeparable k K :=
+    (Algebra.FormallyEtale.iff_isSeparable k K).mp inferInstance
+  obtain ⟨M, hM, ⟨e⟩⟩ := hd i
+  let V := d.cover.etalePrecoverageToEtale i
+  let E := Etale.overSheafEquiv V (ModuleCat.{u + 1} Λ)
+  let e₁ : (Etale.upperStar (ModuleCat.{u + 1} Λ) f).obj G ≅
+      (constantSheaf U.smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj M :=
+    (overSheafEquivFunctorObjOverIso (ModuleCat.{u + 1} Λ) V G).symm ≪≫
+      E.functor.mapIso e ≪≫
+      ((Etale.overEquiv V).constantSheafSheafCongrIso _ _
+        (ModuleCat.{u + 1} Λ) CategoryTheory.Over.mkIdTerminal).app M
+  let g := U.fromSpecResidueField y
+  refine ⟨K, inferInstance, inferInstance, hfin, hsep, M, hM, ⟨?_⟩⟩
+  have hgf : Spec.map (CommRingCat.ofHom (algebraMap k K)) = g ≫ f :=
+    f.specMap_residueFieldAlgebraMap y
+  exact (eqToIso (congrArg (fun a ↦ (Etale.upperStar (ModuleCat.{u + 1} Λ) a).obj G)
+      hgf)) ≪≫
+    (Etale.upperStarComp (ModuleCat.{u + 1} Λ) g f).app G ≪≫
+    (Etale.upperStar (ModuleCat.{u + 1} Λ) g).mapIso e₁ ≪≫
+    (upperStarConstantSheafIso (ModuleCat.{u + 1} Λ) g).app M
 end AlgebraicGeometry

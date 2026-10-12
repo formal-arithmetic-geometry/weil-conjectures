@@ -19,20 +19,47 @@
  },
  "proof": [
   {
-   "text": "Choose a point on a cover member, use etaleness to obtain its finite separable residue field extension, factor the induced map through that member, and transport the finite constant trivialization along inverse-image composition.",
-   "uses": [],
-   "elementary": false,
-   "source": {
-    "document": "lean/Sheaf/AlgebraicGeometry/ConstructibleFieldFiniteSeparableConstantCore.lean",
-    "place": "the theorem proof obligation"
-   }
+   "text": "Choose i and y in the etale cover above the unique point of Spec k using Cover.exists_eq. Set U = d.cover.X i and f = d.cover.f i; its etaleness is d.cover.map_prop i.",
+   "uses": [
+    "def-weil-etale-morphism"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Set K = U.residueField y with k-algebra structure (f.residueFieldAlgebraMap y).toAlgebra. The algebra map k to the affine residue field at f(y) is bijective by Ideal.algEquivResidueFieldOfField, and the inverse of Scheme.Spec.residueFieldIso is bijective. Compose these two etale isomorphisms with f.etale_residueFieldMap y (the already proved library theorem in WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.FormallyUnramified). By RingHom.Etale.stableUnderComposition the structure map k to K is etale. Mathlib Algebra.FormallyUnramified.finite_of_free and Algebra.FormallyEtale.iff_isSeparable give finite dimensionality and separability. By the proved library theorem f.specMap_residueFieldAlgebraMap y, Spec(algebraMap k K) equals U.fromSpecResidueField y followed by f.",
+   "uses": [
+    "def-weil-residue-field",
+    "def-weil-etale-morphism"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Choose the finite module M and localized trivialization e from hd i. Transport e through Etale.overSheafEquiv. Compose overSheafEquivFunctorObjOverIso.symm, its image of e, and Equivalence.constantSheafSheafCongrIso at M to obtain an isomorphism f^*G with the constant sheaf of the same value M on U. These are already implemented comparisons of the localized and small etale sites; no change of module value is needed.",
+   "uses": [
+    "lemma-constructible-pullback-locally-constant"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Write g = U.fromSpecResidueField y. Rewrite Spec(algebraMap k K) as g followed by f using the equality above. Compose Etale.upperStarComp at G, the image of the isomorphism in the preceding step under g^*, and upperStarConstantSheafIso at M. This is the required isomorphism on Spec K. Return K, its field and algebra structures, finite dimensionality, separability, and the original M with its unchanged finiteness proof.",
+   "uses": [
+    "lem-weil-pbc-inverse-image-composition",
+    "lemma-constructible-pullback-constant"
+   ],
+   "elementary": false
   }
  ],
- "proof_deps": [],
+ "proof_deps": [
+  "def-weil-etale-morphism",
+  "def-weil-residue-field",
+  "lemma-constructible-pullback-locally-constant",
+  "lem-weil-pbc-inverse-image-composition",
+  "lemma-constructible-pullback-constant"
+ ],
  "proof_origin": {
   "by": "worker",
   "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "proof of Lemma 09Z6"
+  "place": "proof of Lemma 09Z6; implemented from the existing residue-field and sheaf-comparison APIs by R1"
  },
  "mathlib_searches": [
   {
@@ -92,10 +119,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "B2",
+  "group": "R1",
   "result": "pass",
-  "landing": "20261012T053918-L-2628925",
-  "kind": "interface",
+  "landing": "20261012T063518-L-3158798",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
