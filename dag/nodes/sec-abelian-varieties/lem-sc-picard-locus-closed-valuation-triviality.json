@@ -27,51 +27,47 @@
  ],
  "proof": [
   {
-   "text": "For a general valuation ring, properness and finite presentation make H^0(X,L) a finitely presented A-module. Flatness of X over A makes this module torsion free, so the valuation-ring finite-free lemma gives H^0(X,L) finite free. Flat base change identifies H^0(X,L) tensor_A K with H^0(X_K,L_K), which is K because L_K is trivial and H^0(X_K,O)=K; therefore H^0(X,L) has rank one. Choose a generator s. (If $A$ is a field, then $\\mathfrak m=0$, $X_0=X$ and $s|_{X_0}=s$ is nonzero because it generates $H^0$, so there is nothing to prove; otherwise $A$ is not a field, which is the hypothesis of [lem-sc-valuation-closed-fibre-section-vanishing] as restated at 4fa15694f.)",
+   "text": "Apply lem-sc-valuation-generic-trivializing-generator to obtain a section s and a bijection a maps to a s from A to its global sections; its zero ideal pulls back to the unit ideal on the generic fibre.",
    "uses": [
-    "lem-sc-valuation-fp-torsionfree-free",
-    "lem-pc-flat-base-change-cohom",
-    "lem-sc-valuation-proper-coherent-sections"
+    "lem-sc-valuation-generic-trivializing-generator"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/more-on-morphisms.tex",
-    "place": "More on Morphisms, Lemma 0EX8, general valuation-ring case through coherent cohomology and flat base change"
+    "place": "More on Morphisms, Lemma lemma-triviality-generic-fibre-valuation-ring, Tag 0EX8, general-case proof"
    }
   },
   {
-   "text": "The restriction of s to the integral closed fibre X_0 is nonzero: otherwise the closed-fibre vanishing lemma gives a nonzero pi in the maximal ideal of A with s vanishing on X\\times_{\\operatorname{Spec}(A)}\\operatorname{Spec}(A/\\pi); since L is flat over A, multiplication by pi on L is injective with cokernel L/\\pi L, so s=\\pi t for a global section t, contradicting that s generates the free rank-one module H^0(X,L). By the zero-section relative-Cartier lemma, Z(s) is a relative effective Cartier divisor and is flat over A.",
+   "text": "Apply lem-sc-valuation-closed-fibre-divisibility. It identifies the integral closed fibre and says that a section restricting to zero is pi times t with pi in m. If s restricts to zero, write t=a s by the basis bijection. Then s=pi a s and injectivity of that same bijection gives pi a=1. The ideal m contains pi a, contradicting its properness. Thus s restricts nontrivially. Apply valuation_zero_section_relative_cartier at the closed point; its flatness clause gives Flat(Z(s) to Spec A).",
    "uses": [
-    "lem-sc-valuation-closed-fibre-section-vanishing",
+    "lem-sc-valuation-closed-fibre-divisibility",
     "lem-sc-valuation-zero-section-relative-cartier"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/more-on-morphisms.tex",
-    "place": "More on Morphisms, Lemma 0EX8, general valuation-ring case"
+    "place": "More on Morphisms, Lemma lemma-triviality-generic-fibre-valuation-ring, Tag 0EX8, general-case proof"
    }
   },
   {
-   "text": "By the previous step Z(s)\\to\\operatorname{Spec}(A) is flat. If Z(s) were nonempty, generizations lift along the flat morphism Z(s)\\to\\operatorname{Spec}(A), so the generic point of \\operatorname{Spec}(A) would lie in its image and Z(s)_K would be nonempty, contradicting that s restricts to a trivialization on X_K. Thus Z(s) is empty and s is a global trivialization of L.",
+   "text": "The image eta of the point of Spec K has zero prime ideal, since A to K is injective, so closure{eta}=Spec A. Suppose x belongs to the support of J=Z(s). Lift it to a point z of its closed subscheme using range_subschemeι. Mathlib Flat.generalizingMap lifts eta specializing to the image of z to a point z-prime of Z(s) over eta. Scheme.Pullback.exists_preimage_pullback then provides a point of X_K projecting to the image of z-prime in X. The support_comap identity puts this point in the support of J pulled back to X_K. That ideal is the unit ideal, whose support is empty, a contradiction. Hence the support of J is empty. The proved source-library isFreeGenerator_app_one_of_le applies on the whole scheme; homOfGlobalSection_app_one identifies its generator with s. Finally isIso_homOfGlobalSection supplies an isomorphism O_X to L, and its inverse gives the claimed L to O_X. All these steps are written explicitly in Lean; no additional unproved statement is used.",
    "uses": [],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/more-on-morphisms.tex",
-    "place": "More on Morphisms, Lemma 0EX8, conclusion"
+    "place": "More on Morphisms, Lemma lemma-triviality-generic-fibre-valuation-ring, Tag 0EX8, general-case proof"
    }
   }
  ],
  "proof_deps": [
-  "lem-sc-valuation-fp-torsionfree-free",
-  "lem-pc-flat-base-change-cohom",
-  "lem-sc-valuation-proper-coherent-sections",
-  "lem-sc-valuation-closed-fibre-section-vanishing",
+  "lem-sc-valuation-generic-trivializing-generator",
+  "lem-sc-valuation-closed-fibre-divisibility",
   "lem-sc-valuation-zero-section-relative-cartier"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/more-on-morphisms.tex",
-  "place": "More on Morphisms, Lemma lemma-triviality-generic-fibre-valuation-ring, Tag 0EX8"
+  "place": "More on Morphisms, Lemma lemma-triviality-generic-fibre-valuation-ring, Tag 0EX8, general-case proof"
  },
  "mathlib_searches": [
   {
@@ -168,5 +164,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N2",
+  "result": "pass",
+  "landing": "20261012T194127-L-460411",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

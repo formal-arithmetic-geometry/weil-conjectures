@@ -1,0 +1,154 @@
+{
+ "id": "lem-sc-valuation-generic-trivializing-generator",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-theorem-of-cube",
+   "place": "proof: valuation-ring generic triviality (Tag 0EX8), constructing the rank-one global-sections basis before the relative Cartier argument",
+   "via": [
+    "lem-sc-picard-locus-closed-valuation-triviality",
+    "lem-sc-general-theorem-of-cube"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "title": "An A-basis section that trivializes the generic fibre",
+ "statement": "Let A be a valuation domain with fraction field K, let f:X\\to\\operatorname{Spec}(A) be proper, flat and of finite presentation [def-weil-scheme-morphism-properties], and let L be an invertible module on X [def-sc-invertible-module]. Suppose that the canonical map K\\to\\Gamma(X_K,\\mathcal O_{X_K}) is an isomorphism and that the tensor pullback L_K is trivial [def-pc-module-pullback]. Then there is s\\in\\Gamma(X,L) for which a\\mapsto a s is a bijection A\\to\\Gamma(X,L), where A acts through A=\\Gamma(\\operatorname{Spec}(A),\\mathcal O)\\to\\Gamma(X,\\mathcal O_X), and the zero ideal sheaf of s [def-pc-zero-scheme] pulls back to the unit ideal sheaf on X_K. No closed-fibre integrality is assumed.",
+ "source": {
+  "document": "literature/stacks-project/more-on-morphisms.tex",
+  "place": "More on Morphisms, Lemma lemma-triviality-generic-fibre-valuation-ring, Tag 0EX8, general-case proof"
+ },
+ "stmt_deps": [
+  "def-weil-scheme-morphism-properties",
+  "def-sc-invertible-module",
+  "def-pc-module-pullback",
+  "def-pc-zero-scheme"
+ ],
+ "proof": [
+  {
+   "text": "Proper coherent cohomology gives finite presentation of H^0(X,L) over A, with the scalar action induced by the structural map f.",
+   "uses": [
+    "lem-sc-valuation-proper-coherent-sections"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-on-morphisms.tex",
+    "place": "More on Morphisms, Lemma lemma-triviality-generic-fibre-valuation-ring, Tag 0EX8, general-case proof"
+   }
+  },
+  {
+   "text": "For any nonzero a in A, multiplication by a on each locally free rank-one L stalk is injective: flatness of X/A preserves the injection A --a--> A on stalks, and a local basis identifies L with O_X. If a section is killed by a, all its germs vanish; the section vanishes. Thus H^0(X,L) is torsion-free. Apply the valuation-ring finite-free lemma to obtain a finite A-basis.",
+   "uses": [
+    "lem-sc-valuation-fp-torsionfree-free",
+    "def-sc-invertible-module",
+    "def-weil-scheme-morphism-properties"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-on-morphisms.tex",
+    "place": "More on Morphisms, Lemma lemma-triviality-generic-fibre-valuation-ring, Tag 0EX8, general-case proof"
+   }
+  },
+  {
+   "text": "Apply flat base change along A to K. The resulting K-module of sections is H^0(X_K,L_K). A trivialization of L_K and the canonical K-global-function isomorphism identify it with the one-dimensional K-module K. The base change of a finite A-basis is a K-basis, so its index set has cardinality one. Its sole element s gives the asserted bijection A to Gamma(X,L).",
+   "uses": [
+    "lem-pc-flat-base-change-cohom"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-on-morphisms.tex",
+    "place": "More on Morphisms, Lemma lemma-triviality-generic-fibre-valuation-ring, Tag 0EX8, general-case proof"
+   }
+  },
+  {
+   "text": "Under a generic trivialization, s_K corresponds to a nonzero scalar in K, which is a unit. Thus its zero ideal is the unit ideal. The zero-scheme pullback formula identifies that ideal with the pullback of the zero ideal of s. The tensor and categorical pullbacks are canonically isomorphic as left adjoints to the same pushforward.",
+   "uses": [
+    "lem-pc-zero-scheme-properties",
+    "lem-pc-module-pullback-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-on-morphisms.tex",
+    "place": "More on Morphisms, Lemma lemma-triviality-generic-fibre-valuation-ring, Tag 0EX8, general-case proof"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-valuation-proper-coherent-sections",
+  "lem-sc-valuation-fp-torsionfree-free",
+  "def-sc-invertible-module",
+  "def-weil-scheme-morphism-properties",
+  "lem-pc-flat-base-change-cohom",
+  "lem-pc-zero-scheme-properties",
+  "lem-pc-module-pullback-adjunction"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-on-morphisms.tex",
+  "place": "More on Morphisms, Lemma lemma-triviality-generic-fibre-valuation-ring, Tag 0EX8, general-case proof"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Global sections of an invertible sheaf on a proper flat scheme over a valuation ring form a free rank one module if the generic fibre is trivial with only constant functions",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Global sections of a generically trivial invertible sheaf on a proper flat scheme over a valuation ring have a single basis section that trivializes the generic fibre",
+   "results": "ModuleCat.Tilde.exists_const; AlgebraicGeometry.StructureSheaf.locally_const_basicOpen; AlgebraicGeometry.StructureSheaf.exists_const; AlgebraicGeometry.StructureSheaf.const_self; ModuleCat.Tilde.isUnit_toStalk; AlgebraicGeometry.instFieldCarrierFunctionField; AlgebraicGeometry.StructureSheaf.normalize_finite_fraction_representation; AlgebraicGeometry.exists_eq_pow_mul_of_isAffineOpen",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "free_of_flat_of_isLocalRing|flat_iff_torsion_eq_bot_of_isBezout|isClosed_singleton_closedPoint",
+   "results": "Mathlib/RingTheory/Spectrum/Prime/Topology.lean; Mathlib/RingTheory/Spectrum/Prime/FreeLocus.lean; Mathlib/RingTheory/Spectrum/Prime/FreeLocus.lean; Mathlib/RingTheory/Spectrum/Prime/FreeLocus.lean; Mathlib/RingTheory/Spectrum/Prime/FreeLocus.lean; Mathlib/RingTheory/Smooth/Locus.lean; Mathlib/RingTheory/Regular/ProjectiveDimension.lean; Mathlib/RingTheory/Flat/LocallyFree.lean",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PicardLocusClosedValuationTriviality",
+  "date": "2026-10-13",
+  "group": "N2"
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ValuationGenericTrivializingGenerator",
+  "file": "lean/Sheaf/AlgebraicGeometry/ValuationGenericTrivializingGenerator.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.exists_generic_trivializing_generator",
+  "statement": "theorem exists_generic_trivializing_generator\n    (A : Type u) [CommRing A] [IsDomain A] [ValuationRing A]\n    (K : Type u) [Field K] [Algebra A K] [IsFractionRing A K]\n    (X : Scheme.{u}) (f : X ⟶ Spec (CommRingCat.of A))\n    [IsProper f] [Flat f] [LocallyOfFinitePresentation f]\n    (L : X.Modules) [L.IsInvertible]\n    (hglobal : IsIso (pullback.snd f (Spec.map\n      (CommRingCat.ofHom (algebraMap A K)))).appTop)\n    (htriv : Nonempty ((tensorPullback\n      (pullback.fst f (Spec.map (CommRingCat.ofHom (algebraMap A K))))).obj L ≅\n      SheafOfModules.unit _)) :\n    ∃ s : Γ(L, ⊤),\n      Function.Bijective (fun a : A ↦\n        ((Scheme.ΓSpecIso (CommRingCat.of A)).inv ≫ f.appTop).hom a • s) ∧\n      (Hom.zeroLocus (homOfGlobalSection L s)).comap\n        (pullback.fst f (Spec.map (CommRingCat.ofHom (algebraMap A K)))) = ⊤",
+  "branch": "sheaf-dag",
+  "by": "N2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N2",
+  "result": "pass",
+  "landing": "20261012T194127-L-460411",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N2",
+  "result": "pass",
+  "landing": "20261012T194127-L-460411",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

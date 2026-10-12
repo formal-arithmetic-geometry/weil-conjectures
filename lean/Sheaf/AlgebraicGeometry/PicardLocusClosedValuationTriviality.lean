@@ -5,10 +5,11 @@ public import Sheaf.AlgebraicGeometry.TensorPullback
 public import Mathlib.AlgebraicGeometry.ValuativeCriterion
 public import Mathlib.AlgebraicGeometry.Morphisms.Flat
 public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
-import Sheaf.AlgebraicGeometry.ValuationClosedFibreSectionVanishing
-import Sheaf.AlgebraicGeometry.ValuationProperCoherentSections
+import Sheaf.AlgebraicGeometry.ValuationClosedFibreDivisibility
+import Sheaf.AlgebraicGeometry.ValuationGenericTrivializingGenerator
 import Sheaf.AlgebraicGeometry.ValuationZeroSectionRelativeCartier
-import WeilConjectures.AlgebraicGeometry.Cohomology.EulerChar
+import WeilConjectures.AlgebraicGeometry.Modules.ClearDenominators
+import Mathlib.AlgebraicGeometry.Morphisms.UniversallyOpen
 
 @[expose] public section
 
@@ -59,5 +60,72 @@ theorem generic_fibre_triviality_over_valuation_ring
       (pullback.fst f (Spec.map (CommRingCat.ofHom (algebraMap A K))))).obj L ≅
       SheafOfModules.unit _)) :
     Nonempty (L ≅ SheafOfModules.unit _) := by
-  sorry
+  classical
+  have : SheafOfModules.IsInvertible.{u, u, u} L :=
+    Scheme.Modules.IsInvertible.sheafOfModules_isInvertible L
+  obtain ⟨s, hs, hsK⟩ := Scheme.Modules.exists_generic_trivializing_generator
+    A K X f L hglobal htriv
+  obtain ⟨hclosed, hdiv⟩ := Scheme.Modules.closed_fibre_vanishing_is_divisible
+    A X f L hX₀ s
+  have hs₀ : ((Classical.choose (Scheme.Modules.exists_tensorPullbackAdjunction
+      (f.fiberι (IsLocalRing.closedPoint A)))).unit.app L).val.app
+      (Opposite.op ⊤) s ≠ 0 := by
+    intro hz
+    obtain ⟨π, hπ, t, ht⟩ := hdiv hz
+    obtain ⟨a, ha⟩ := hs.surjective t
+    rw [← ha] at ht
+    have hscalar : π * a = 1 := hs.injective (by
+      simpa only [map_mul, mul_smul, map_one, one_smul] using ht)
+    have hone : (1 : A) ∈ IsLocalRing.maximalIdeal A :=
+      hscalar ▸ (IsLocalRing.maximalIdeal A).mul_mem_right a hπ
+    exact (IsLocalRing.maximalIdeal.isMaximal A).ne_top (Ideal.eq_top_of_isUnit_mem
+      (IsLocalRing.maximalIdeal A) hone isUnit_one)
+  let : IsIntegral (f.fiber (IsLocalRing.closedPoint A)) := hclosed
+  have hcartier := Scheme.Modules.valuation_zero_section_relative_cartier
+    A X f (IsLocalRing.closedPoint A)
+    (IsLocalRing.isClosed_singleton_closedPoint A) L s hs₀
+  let J := Scheme.Modules.Hom.zeroLocus (Scheme.Modules.homOfGlobalSection L s)
+  have : Flat (J.subschemeι ≫ f) := hcartier.2
+  let g := Spec.map (CommRingCat.ofHom (algebraMap A K))
+  let η := g (IsLocalRing.closedPoint K)
+  have hη : IsGenericPoint η Set.univ := by
+    change closure {η} = Set.univ
+    rw [PrimeSpectrum.closure_singleton]
+    have hbot : η.asIdeal = ⊥ := by
+      change Ideal.comap (algebraMap A K) (IsLocalRing.maximalIdeal K) = ⊥
+      rw [IsLocalRing.maximalIdeal_eq_bot]
+      exact (RingHom.injective_iff_ker_eq_bot _).mp (IsFractionRing.injective A K)
+    rw [hbot, PrimeSpectrum.zeroLocus_bot]
+  have hJ : J.support = ⊥ := by
+    apply TopologicalSpace.Closeds.ext
+    apply Set.eq_empty_iff_forall_notMem.mpr
+    intro x hx
+    obtain ⟨z, rfl⟩ := (J.range_subschemeι ▸ hx : x ∈ Set.range J.subschemeι)
+    obtain ⟨z', _, hz'⟩ := Flat.generalizingMap (J.subschemeι ≫ f)
+      (hη.specializes (Set.mem_univ ((J.subschemeι ≫ f) z)))
+    obtain ⟨w, hw, _⟩ := Scheme.Pullback.exists_preimage_pullback
+      (f := f) (g := g) (J.subschemeι z') (IsLocalRing.closedPoint K) hz'
+    have hwJ : (pullback.fst f g) w ∈ J.support := by
+      rw [hw]
+      change J.subschemeι z' ∈ (J.support : Set X)
+      rw [← J.range_subschemeι]
+      exact Set.mem_range_self z'
+    have hwK : w ∈ (J.comap (pullback.fst f g)).support := by
+      rw [Scheme.IdealSheafData.support_comap]
+      exact hwJ
+    rw [hsK, Scheme.IdealSheafData.support_top] at hwK
+    exact hwK
+  have htop : (⊤ : X.Opens) ≤ J.support.compl := by
+    rw [hJ]
+    intro x _
+    exact Set.notMem_empty x
+  have hgen := Scheme.Modules.isFreeGenerator_app_one_of_le
+    (Scheme.Modules.homOfGlobalSection L s) htop
+  have hsgen : Scheme.Modules.IsFreeGenerator s := by
+    change Scheme.Modules.IsFreeGenerator
+      ((Scheme.Modules.homOfGlobalSection L s).app ⊤ (1 : Γ(X, ⊤))) at hgen
+    simpa only [Scheme.Modules.homOfGlobalSection_app_one,
+      Scheme.Modules.presheaf_map_id_apply] using hgen
+  have := Scheme.Modules.isIso_homOfGlobalSection hsgen
+  exact ⟨(asIso (Scheme.Modules.homOfGlobalSection L s)).symm⟩
 
