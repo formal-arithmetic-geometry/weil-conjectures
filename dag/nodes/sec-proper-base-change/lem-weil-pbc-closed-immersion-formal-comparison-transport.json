@@ -1,0 +1,143 @@
+{
+ "id": "lem-weil-pbc-closed-immersion-formal-comparison-transport",
+ "kind": "statement",
+ "title": "Closed-immersion transport of a power-annihilated formal kernel",
+ "statement": "Let j:Z -> X be a closed immersion of Noetherian schemes [def-weil-closed-immersion], f:X -> S with j followed by f locally of finite type, and Q a quasi-coherent ideal. Choose any Abelian structure on Coh(X,Q) [lem-weil-pbc-coherent-formal-modules-abelian]. Let M in Coh(X,Q) and G in Coh(Z,Q O_Z) [def-weil-pbc-coherent-formal-module] be identified by M ~= j_*G as inverse systems. Let H be a coherent module on Z with support proper over S [pqf-def-coherent, def-weil-pbc-closed-subset-proper-over-base]. Let L be a quasi-coherent ideal with nonempty complement of V(L). Given alpha:G -> H^wedge, a positive integer t and a limiting kernel fork k for alpha whose point is annihilated termwise by L^t, there exist N in Coh(X,Q), a:M -> N, and an ideal J strictly containing j.ker, such that J annihilates kernel a. Moreover some closed subscheme T -> X proper over S annihilates N.",
+ "source": {
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Theorem 088E, paragraphs 2--4 (closed quotient, Chow modification, projective algebraization and proper push-pull comparison); verified at https://stacks.math.columbia.edu/tag/088E"
+ },
+ "stmt_deps": [
+  "def-weil-closed-immersion",
+  "lem-weil-pbc-coherent-formal-modules-abelian",
+  "def-weil-pbc-coherent-formal-module",
+  "pqf-def-coherent",
+  "def-weil-pbc-closed-subset-proper-over-base"
+ ],
+ "proof": [
+  {
+   "text": "Use the closed formal pushforward equivalence and its comparison with completion to push alpha to X. Compose on its source with the specified inverse-system isomorphism M ~= j_*G. Fullness of the formal inclusion produces the actual coherent formal morphism a:M -> N, where N is the pushed completion of H.",
+   "uses": [
+    "lem-weil-pbc-closed-immersion-coherent-equivalence",
+    "def-weil-pbc-coherent-formal-module"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Let B=L^t and define J by inverse image under O_X -> j_*O_Z. On affine opens these are inverse images of ideals under quotient ring maps, and they agree upon localization, hence define a quasi-coherent ideal. Its kernel is j.ker, so j.ker <= J. At a point of the nonempty open Z minus V(L), L^t has unit stalk; B is therefore nonzero, which makes this containment strict.",
+   "uses": [
+    "def-sbc-closed-immersion-ideal-sheaf",
+    "def-weil-pbc-coherent-formal-module"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The limiting fork identifies k.pt with the kernel of alpha. Closed pushforward is exact and the formal full subcategory of objects killed by j.ker is closed under kernels in the ambient formal category. Thus the pushforward of k.pt, after the source comparison, is the ambient kernel of a. On affine opens the J action on a pushed module factors through the B action. The hypothesis that B kills all terms of k.pt therefore kills all terms of kernel a.",
+   "uses": [
+    "lem-weil-pbc-closed-immersion-coherent-equivalence",
+    "lem-weil-pbc-coherent-formal-modules-abelian",
+    "def-weil-pbc-coherent-formal-module"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the scheme-theoretic support characterization to coherent H. It gives a closed subscheme i:T -> Z whose ideal annihilates H and which is proper over S. Its ideal also annihilates every adic quotient of H. The composite i followed by j is closed and remains proper over S. The quotient-ring action calculation shows that its kernel annihilates each term of the pushed completion N.",
+   "uses": [
+    "lem-weil-pbc-module-support-proper-over-base",
+    "lem-weil-pbc-closed-immersion-coherent-equivalence",
+    "def-weil-pbc-coherent-formal-module",
+    "lem-weil-pbc-closed-subset-proper-over-base-properties"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sbc-closed-immersion-ideal-sheaf",
+  "def-weil-pbc-coherent-formal-module",
+  "lem-weil-pbc-closed-immersion-coherent-equivalence",
+  "lem-weil-pbc-closed-subset-proper-over-base-properties",
+  "lem-weil-pbc-coherent-formal-modules-abelian",
+  "lem-weil-pbc-module-support-proper-over-base"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Theorem 088E, paragraphs 2--4; this node isolates closed-immersion transport of a power-annihilated formal kernel."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Closed immersion transport formal comparison kernel annihilated ideal power",
+   "results": "Service unavailable: Internal Server Error. No absence verdict drawn.",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Closed immersion transport formal comparison kernel annihilated ideal power",
+   "results": "LeanFinder returned closed-immersion lift/isIso lemmas and kernel-of-base-change identities, not the required coherent-formal transport. Library search found the equivalence, module support characterization, and push-pull theorem; none states this kernel and ideal-lifting glue.",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "grep",
+   "query": "closed.*[Pp]resentation|chowPullbackAlgebraization|ComparisonTransport",
+   "results": "rg on both Lean roots found no matching declaration. Additional source and node searches located the existing dependencies recorded in the proof. Whole-blueprint searches for closed immersion formal system proper support, Chow algebraization, and closed quotient kernel ideal returned no matches.",
+   "date": "2026-10-13"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.GrothendieckExistenceChowComparison",
+  "date": "2026-10-13",
+  "group": "U2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "Step 7 of finite-etale lifting: geometric comparison in the proof of Theorem 088E, paragraphs 2--4, before the Noetherian induction conclusion. This node supplies closed-immersion transport of a power-annihilated formal kernel.",
+   "via": [
+    "lem-weil-pbc-grothendieck-existence-chow-comparison",
+    "lem-weil-pbc-grothendieck-existence-system-support",
+    "prop-weil-pbc-grothendieck-existence",
+    "lem-weil-pbc-algebraize-finite-over-proper",
+    "lem-weil-pbc-finite-etale-lifting-complete",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ClosedImmersionFormalComparisonTransport",
+  "file": "lean/Sheaf/AlgebraicGeometry/ClosedImmersionFormalComparisonTransport.lean",
+  "declaration": "AlgebraicGeometry.exists_closedImmersionFormalComparisonTransport",
+  "statement": "theorem exists_closedImmersionFormalComparisonTransport\n    {X Z S : Scheme.{u}} [IsNoetherian X] [IsNoetherian Z]\n    (f : X ⟶ S) (j : Z ⟶ X) [IsClosedImmersion j]\n    [LocallyOfFiniteType (j ≫ f)] (Q : X.IdealSheafData)\n    [Abelian (CoherentFormalModule X Q)]\n    (M : CoherentFormalModule X Q) (G : CoherentFormalModule Z (Q.comap j))\n    (e : M.obj ≅ G.obj ⋙ Scheme.Modules.pushforward j)\n    (H : CoherentModules Z)\n    (hH : Scheme.Modules.HasSupportProperOver (j ≫ f) H.obj)\n    (L : Z.IdealSheafData) (hU : (L.support.compl : Set Z).Nonempty)\n    (α : G ⟶ (completion Z (Q.comap j)).obj H)\n    (t : ℕ) (ht : 1 ≤ t) (k : KernelFork α) (hk : IsLimit k)\n    (hkill : ∀ n : ℕ, IsZero (Scheme.idealModuleProduct\n      (Scheme.idealSheafPower L.toModulesι t).2 (k.pt.obj.obj (op n)))) :\n    ∃ (N : CoherentFormalModule X Q) (a : M ⟶ N) (J : X.IdealSheafData),\n      j.ker < J ∧ AnnihilatedBy Q J (kernel a) ∧\n      ∃ (T : Scheme.{u}) (i : T ⟶ X) (_ : IsClosedImmersion i),\n        IsProper (i ≫ f) ∧ AnnihilatedBy Q i.ker N",
+  "branch": "sheaf-dag",
+  "by": "U2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U2",
+  "result": "pass",
+  "landing": "20261012T173910-L-3307655",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U2",
+  "result": "pass",
+  "landing": "20261012T173910-L-3307655",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

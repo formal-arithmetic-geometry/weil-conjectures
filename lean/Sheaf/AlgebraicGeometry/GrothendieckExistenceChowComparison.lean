@@ -10,18 +10,10 @@ public import Sheaf.AlgebraicGeometry.CoherentFormalModule
 public import Mathlib.CategoryTheory.Abelian.Basic
 public import Mathlib.AlgebraicGeometry.Morphisms.Separated
 public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
-import Sheaf.AlgebraicGeometry.CoherentFormalModulesAbelian
-import Sheaf.AlgebraicGeometry.ClosedImmersionCoherentEquivalence
-import Sheaf.AlgebraicGeometry.GrothendieckExistenceProjective
+import Sheaf.AlgebraicGeometry.ClosedQuotientFormalPresentation
+import Sheaf.AlgebraicGeometry.ChowPullbackAlgebraization
+import Sheaf.AlgebraicGeometry.ClosedImmersionFormalComparisonTransport
 import Sheaf.AlgebraicGeometry.FormalSystemsPushPull
-import Sheaf.AlgebraicGeometry.FormalSystemsPullback
-import Sheaf.AlgebraicGeometry.FiniteTypeModuleSupportPullback
-import Sheaf.AlgebraicGeometry.PushforwardCoherentOnOpen
-import Sheaf.AlgebraicGeometry.ReducedInducedClosedSubscheme
-import Sheaf.AlgebraicGeometry.ModuleSupportProperOverBase
-import Sheaf.AlgebraicGeometry.ClosedSubsetProperOverBaseProperties
-import Sheaf.AlgebraicGeometry.ClosedSubsetProperOverBaseUnionPreimage
-import WeilConjectures.AlgebraicGeometry.ChowLemma
 
 /-! # The Chow comparison on a closed quotient
 
@@ -93,6 +85,26 @@ theorem grothendieckExistence_chow_comparison
       ∃ (N : CoherentFormalModule X Q) (α : M ⟶ N) (J : X.IdealSheafData),
         K < J ∧ AnnihilatedBy Q J (kernel α) ∧
         ∃ (Z : Scheme.{u}) (j : Z ⟶ X) (_ : IsClosedImmersion j),
-          IsProper (j ≫ f) ∧ AnnihilatedBy Q j.ker N := by sorry
+          IsProper (j ≫ f) ∧ AnnihilatedBy Q j.ker N := by
+  intro Q _ K M hK hR hP
+  let j := K.subschemeι
+  let : IsNoetherian K.subscheme := isNoetherian_of_locallyOfFiniteType j
+  obtain ⟨G, ⟨e⟩, hG, hZ⟩ :=
+    exists_closedQuotientFormalPresentation f Q K M hK hR hP
+  have hQ : Q.comap j = (Scheme.IdealSheafData.ofIdealTop
+      (I.map (Scheme.ΓSpecIso (CommRingCat.of A)).inv.hom)).comap (j ≫ f) := by
+    exact (Scheme.IdealSheafData.comap_comp
+      (Scheme.IdealSheafData.ofIdealTop
+        (I.map (Scheme.ΓSpecIso (CommRingCat.of A)).inv.hom)) j f).symm
+  obtain ⟨Y, q, hq, L, F, hU, hV, ⟨β⟩, hF⟩ :=
+    exists_chowPullbackAlgebraization A I (j ≫ f) (Q.comap j) hQ G hG hZ
+  let : IsProper q := hq
+  obtain ⟨hcoh, α, t, k, c, ht, ⟨hk⟩, _, hkill, _⟩ :=
+    exists_formalSystemsPushPull (Q.comap j) L q hV G F β
+  obtain ⟨N, a, J, hJ, hker, hN⟩ :=
+    exists_closedImmersionFormalComparisonTransport f j Q M G e
+      ⟨(Scheme.Modules.pushforward q).obj F.obj, hcoh⟩ hF L hU α t ht k hk hkill
+  refine ⟨N, a, J, ?_, hker, hN⟩
+  simpa only [j, Scheme.IdealSheafData.ker_subschemeι] using hJ
 
 end AlgebraicGeometry

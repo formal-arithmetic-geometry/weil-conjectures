@@ -1,0 +1,128 @@
+{
+ "id": "lem-weil-pbc-closed-quotient-formal-presentation",
+ "kind": "statement",
+ "title": "Presentation on the closed quotient with proper first support",
+ "statement": "Let X be Noetherian, f:X -> S locally of finite type, Q and K quasi-coherent ideals, and M a coherent Q-adic formal module [def-weil-pbc-coherent-formal-module]. Assume K annihilates M, the first support is proper over S [def-weil-pbc-closed-subset-proper-over-base], and no proper closed subscheme of X annihilates M. With j:V(K) -> X [def-sbc-closed-immersion-ideal-sheaf], there exists G in Coh(V(K),Q O_V(K)) and an isomorphism M ~= j_*G of inverse systems. The first support of G is proper over S and V(K) is nonempty.",
+ "source": {
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Theorem 088E, paragraphs 2--4 (closed quotient, Chow modification, projective algebraization and proper push-pull comparison); verified at https://stacks.math.columbia.edu/tag/088E"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-coherent-formal-module",
+  "def-weil-pbc-closed-subset-proper-over-base",
+  "def-sbc-closed-immersion-ideal-sheaf"
+ ],
+ "proof": [
+  {
+   "text": "Use the formal closed-immersion equivalence for j=K.subschemeι. Since j.ker=K, M defines an object of its supported full subcategory. Set G to the inverse equivalence applied to that object. The counit and the natural comparison with termwise pushforward compose to give M.obj ~= G.obj composed with pushforward j.",
+   "uses": [
+    "lem-weil-pbc-closed-immersion-coherent-equivalence",
+    "def-weil-pbc-coherent-formal-module"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the coherent closed-pushforward support formula to the first term of G. Evaluation of the system isomorphism and the stalk functor give bijections of stalks, hence preserve Subsingleton. Thus Supp(M_1)=j(Supp(G_1)). Injectivity of j makes Supp(G_1)=j^{-1}(Supp(M_1)). Proper-preimage preservation for the proper closed immersion j shows that this closed subset is proper over S.",
+   "uses": [
+    "lem-weil-pbc-closed-immersion-coherent-equivalence",
+    "lem-weil-pbc-closed-subset-proper-over-base-union-preimage",
+    "def-weil-pbc-coherent-formal-module"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "If V(K) is empty, every morphism out of it is a closed immersion and therefore proper. In particular j followed by f is proper, while j.ker=K annihilates M, contrary to the hypothesis. Return the constructed G, its system isomorphism, its proper support, and nonemptiness.",
+   "uses": [
+    "def-sbc-closed-immersion-ideal-sheaf"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-sbc-closed-immersion-ideal-sheaf",
+  "def-weil-pbc-coherent-formal-module",
+  "lem-weil-pbc-closed-immersion-coherent-equivalence",
+  "lem-weil-pbc-closed-subset-proper-over-base-union-preimage"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Theorem 088E, paragraphs 2--4; this node isolates presentation on the closed quotient with proper first support."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Closed immersion coherent formal module pushforward support inverse image",
+   "results": "Service unavailable: Internal Server Error. No absence verdict drawn.",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Closed immersion coherent formal module pushforward support inverse image",
+   "results": "LeanFinder returned ideal support_map/support_comap and module pushforward/restriction definitions, no exact formal presentation. Library search found the closed-immersion equivalence and proper-preimage theorem; the delivered proof combines them.",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "grep",
+   "query": "closed.*[Pp]resentation|chowPullbackAlgebraization|ComparisonTransport",
+   "results": "rg on both Lean roots found no matching declaration. Additional source and node searches located the existing dependencies recorded in the proof. Whole-blueprint searches for closed immersion formal system proper support, Chow algebraization, and closed quotient kernel ideal returned no matches.",
+   "date": "2026-10-13"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.GrothendieckExistenceChowComparison",
+  "date": "2026-10-13",
+  "group": "U2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "Step 7 of finite-etale lifting: geometric comparison in the proof of Theorem 088E, paragraphs 2--4, before the Noetherian induction conclusion. This node supplies presentation on the closed quotient with proper first support.",
+   "via": [
+    "lem-weil-pbc-grothendieck-existence-chow-comparison",
+    "lem-weil-pbc-grothendieck-existence-system-support",
+    "prop-weil-pbc-grothendieck-existence",
+    "lem-weil-pbc-algebraize-finite-over-proper",
+    "lem-weil-pbc-finite-etale-lifting-complete",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ClosedQuotientFormalPresentation",
+  "file": "lean/Sheaf/AlgebraicGeometry/ClosedQuotientFormalPresentation.lean",
+  "declaration": "AlgebraicGeometry.exists_closedQuotientFormalPresentation",
+  "statement": "theorem exists_closedQuotientFormalPresentation\n    {X S : Scheme.{u}} [IsNoetherian X] (f : X ⟶ S)\n    [LocallyOfFiniteType f]\n    (Q K : X.IdealSheafData) (M : CoherentFormalModule X Q)\n    (hK : AnnihilatedBy Q K M)\n    (hR : Scheme.Modules.HasSupportProperOver f (M.obj.obj (op 0)))\n    (hP : ¬ ∃ (Z : Scheme.{u}) (j : Z ⟶ X) (_ : IsClosedImmersion j),\n      IsProper (j ≫ f) ∧ AnnihilatedBy Q j.ker M) :\n    ∃ G : @CoherentFormalModule K.subscheme\n        (isNoetherian_of_locallyOfFiniteType K.subschemeι) (Q.comap K.subschemeι),\n      Nonempty (M.obj ≅ G.obj ⋙ Scheme.Modules.pushforward K.subschemeι) ∧\n      Scheme.Modules.HasSupportProperOver (K.subschemeι ≫ f) (G.obj.obj (op 0)) ∧\n      Nonempty K.subscheme",
+  "branch": "sheaf-dag",
+  "by": "U2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U2",
+  "result": "pass",
+  "landing": "20261012T173910-L-3307655",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U2",
+  "result": "pass",
+  "landing": "20261012T173910-L-3307655",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

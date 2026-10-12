@@ -1,0 +1,162 @@
+{
+ "id": "lem-weil-pbc-chow-pullback-algebraization",
+ "kind": "statement",
+ "title": "Algebraization of the pullback to a Chow modification",
+ "statement": "Let A be a commutative Noetherian I-adically complete ring [def-weil-pbc-noetherian-ring, def-weil-pbc-adically-complete-ring]. Let f:Z -> Spec A be separated and of finite type [def-weil-proper-morphism, def-weil-finite-type-morphism], with Z Noetherian and nonempty. Let Q=I O_Z and G in Coh(Z,Q) [def-weil-pbc-coherent-formal-module] have first support proper over A [def-weil-pbc-closed-subset-proper-over-base]. There exist Y, a proper morphism q:Y -> Z, a quasi-coherent ideal L on Z, and a coherent module F on Y [pqf-def-coherent], such that Z minus V(L) is nonempty, q is an isomorphism after base change to this open, the inverse system q^*G is isomorphic to the completion of F for Q O_Y, and q_*F has support proper over A.",
+ "source": {
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Theorem 088E, paragraphs 2--4 (closed quotient, Chow modification, projective algebraization and proper push-pull comparison); verified at https://stacks.math.columbia.edu/tag/088E"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-adically-complete-ring",
+  "def-weil-proper-morphism",
+  "def-weil-finite-type-morphism",
+  "def-weil-pbc-coherent-formal-module",
+  "def-weil-pbc-closed-subset-proper-over-base",
+  "pqf-def-coherent"
+ ],
+ "proof": [
+  {
+   "text": "Apply Chow's lemma to Z over Spec A. Its modification q:Y -> Z is proper, isomorphic over a nonempty dense open U, and has an immersion e into a finite projective space. Y is quasi-compact and the projective space is quasi-separated, so e is quasi-compact. The scheme-theoretic image Y'=e.image has a closed inclusion e.imageι into the projective space and e.toImage:Y -> Y' is an open immersion. This directly supplies the projective compactification, without applying the affine-only ProperClosedModel theorem to Y.",
+   "uses": [
+    "lem-weil-pbc-chow-noetherian",
+    "def-nagata-scheme-theoretic-image",
+    "lemma-nagata-immersion-open-in-scheme-image",
+    "pqf-lem-locnoeth-lft"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Take the reduced ideal L of the complement of the dense open U. Because Z is nonempty and U is dense, U is nonempty. The complement of L.support is U, and the restriction isomorphism of the Chow modification is the base-change isomorphism required here. Properness of q over Noetherian Z makes Y Noetherian.",
+   "uses": [
+    "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "lem-weil-pbc-chow-noetherian",
+    "pqf-lem-locnoeth-lft"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Pull the formal module to Y. Nakayama on V(I) identifies each term support with the first support, and tensor pullback gives its inverse image under q. This support is proper over A; its image in the separated Y' is closed. Extension by zero to Y' is coherent and satisfies the formal quotient conditions on the open cover by Y and the complement of that closed support. Projective existence algebraizes the extended system. Its algebraization has support inside Y: a nonempty closed support outside Y has nonempty closed image in Spec A under the proper projection, so meets V(I) since I lies in the Jacobson radical. Reduction modulo I and Nakayama identify that intersection with the first support, already inside Y, a contradiction. Restrict the algebraization to Y; completion agrees with the pulled system.",
+   "uses": [
+    "lem-weil-pbc-formal-systems-pullback",
+    "lem-weil-pbc-support-pullback-finite-type",
+    "lem-weil-pbc-closed-subset-proper-over-base-union-preimage",
+    "lem-weil-pbc-closed-subset-proper-over-base-properties",
+    "lem-weil-pbc-pushforward-coherent-on-open",
+    "lem-weil-pbc-grothendieck-existence-projective",
+    "lem-weil-pbc-adic-complete-jacobson-radical",
+    "def-weil-pbc-coherent-formal-module"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Let F be the restriction of the projective algebraization to Y. The preceding completion comparison is exactly beta:q^*G ~= F^wedge. Its support is proper over A, since its closed immersion into the projective compactification is supported inside Y. The support of q_*F is contained in the closed image of this proper support. Proper coherent pushforward makes that support closed, and the closed-subset and image properness properties make it proper over A.",
+   "uses": [
+    "lem-weil-pbc-module-support-proper-over-base",
+    "lem-weil-pbc-closed-subset-proper-over-base-properties",
+    "lem-pc-coherent-hi",
+    "def-weil-pbc-coherent-formal-module"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-nagata-scheme-theoretic-image",
+  "def-weil-pbc-coherent-formal-module",
+  "lem-pc-coherent-hi",
+  "lem-weil-pbc-adic-complete-jacobson-radical",
+  "lem-weil-pbc-chow-noetherian",
+  "lem-weil-pbc-closed-subset-proper-over-base-properties",
+  "lem-weil-pbc-closed-subset-proper-over-base-union-preimage",
+  "lem-weil-pbc-formal-systems-pullback",
+  "lem-weil-pbc-grothendieck-existence-projective",
+  "lem-weil-pbc-module-support-proper-over-base",
+  "lem-weil-pbc-pushforward-coherent-on-open",
+  "lem-weil-pbc-reduced-induced-closed-subscheme",
+  "lem-weil-pbc-support-pullback-finite-type",
+  "lemma-nagata-immersion-open-in-scheme-image",
+  "pqf-lem-locnoeth-lft"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Theorem 088E, paragraphs 2--4; this node isolates algebraization of the pullback to a chow modification."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Algebraization of coherent adic system pulled back along Chow modification",
+   "results": "Service unavailable: Internal Server Error. No absence verdict drawn.",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Algebraization of coherent adic system pulled back along Chow modification",
+   "results": "LeanFinder returned adic completion algebra maps and formally smooth lifting statements, none about Chow pullbacks. Library search found projective existence and formal pullback, but no existing statement supplying their compactification and support glue.",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "grep",
+   "query": "closed.*[Pp]resentation|chowPullbackAlgebraization|ComparisonTransport",
+   "results": "rg on both Lean roots found no matching declaration. Additional source and node searches located the existing dependencies recorded in the proof. Whole-blueprint searches for closed immersion formal system proper support, Chow algebraization, and closed quotient kernel ideal returned no matches.",
+   "date": "2026-10-13"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.GrothendieckExistenceChowComparison",
+  "date": "2026-10-13",
+  "group": "U2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "Step 7 of finite-etale lifting: geometric comparison in the proof of Theorem 088E, paragraphs 2--4, before the Noetherian induction conclusion. This node supplies algebraization of the pullback to a chow modification.",
+   "via": [
+    "lem-weil-pbc-grothendieck-existence-chow-comparison",
+    "lem-weil-pbc-grothendieck-existence-system-support",
+    "prop-weil-pbc-grothendieck-existence",
+    "lem-weil-pbc-algebraize-finite-over-proper",
+    "lem-weil-pbc-finite-etale-lifting-complete",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ChowPullbackAlgebraization",
+  "file": "lean/Sheaf/AlgebraicGeometry/ChowPullbackAlgebraization.lean",
+  "declaration": "AlgebraicGeometry.exists_chowPullbackAlgebraization",
+  "statement": "theorem exists_chowPullbackAlgebraization\n    (A : Type u) [CommRing A] [IsNoetherianRing A]\n    (I : Ideal A) [IsAdicComplete I A]\n    {Z : Scheme.{u}} [IsNoetherian Z] (f : Z ⟶ Spec (.of A))\n    [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]\n    (Q : Z.IdealSheafData)\n    (hQ : Q = (Scheme.IdealSheafData.ofIdealTop\n      (I.map (Scheme.ΓSpecIso (CommRingCat.of A)).inv.hom)).comap f)\n    (G : CoherentFormalModule Z Q)\n    (hR : Scheme.Modules.HasSupportProperOver f (G.obj.obj (op 0)))\n    (hZ : Nonempty Z) :\n    ∃ (Y : Scheme.{u}) (q : Y ⟶ Z) (_ : IsProper q) (L : Z.IdealSheafData)\n      (F : CoherentModules Y),\n      (L.support.compl : Set Z).Nonempty ∧\n      IsIso (pullback.snd q (Scheme.Opens.ι L.support.compl)) ∧\n      Nonempty (G.obj ⋙ Scheme.Modules.tensorPullback q ≅\n        formalCompletionSystem (Q.comap q) F.obj) ∧\n      Scheme.Modules.HasSupportProperOver f ((Scheme.Modules.pushforward q).obj F.obj)",
+  "branch": "sheaf-dag",
+  "by": "U2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U2",
+  "result": "pass",
+  "landing": "20261012T173910-L-3307655",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U2",
+  "result": "pass",
+  "landing": "20261012T173910-L-3307655",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
