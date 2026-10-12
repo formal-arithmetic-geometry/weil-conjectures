@@ -14,36 +14,22 @@
  ],
  "proof": [
   {
-   "text": "Adjoint alpha to beta from the inverse image of I to J. Exactness of inverse image makes its source a resolution, and the augmentation equation says beta preserves this augmentation. The derived-category formula for extMk or homotopy independence of comparison lifts computes the inverse-image Ext class by beta applied to the pulled-back cocycle.",
+   "text": "Apply the global transfer calculation and the open transfer calculation, and combine their conclusions by conjunction introduction.",
    "uses": [
-    "def-weil-pbc-inverse-image",
-    "prop-weil-pbc-inverse-image-exact",
-    "def-weil-pbc-cohomology-pullback"
+    "lem-weil-pbc-etale-resolution-section-global-transfer",
+    "lem-weil-pbc-etale-resolution-section-open-transfer"
    ],
-   "elementary": false
-  },
-  {
-   "text": "Evaluation of this cocycle at 1 is alpha at the terminal etale object followed by terminalSectionPullback, the global section transfer. On W use the free representable and identity generator; unit naturality and inverse-image composition give the specified open coefficient transport and openSectionPullback. Apply both comparison normalizations and the surjectivity of homology pi to obtain the global and open identities.",
-   "uses": [
-    "def-weil-pbc-etale-resolution-section-canonical-comparison",
-    "def-weil-pbc-etale-resolution-section-transfer",
-    "def-weil-pbc-etale-open-object-cohomology-map"
-   ],
-   "elementary": false
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-cohomology-pullback",
-  "def-weil-pbc-etale-open-object-cohomology-map",
-  "def-weil-pbc-etale-resolution-section-canonical-comparison",
-  "def-weil-pbc-etale-resolution-section-transfer",
-  "def-weil-pbc-inverse-image",
-  "prop-weil-pbc-inverse-image-exact"
+  "lem-weil-pbc-etale-resolution-section-global-transfer",
+  "lem-weil-pbc-etale-resolution-section-open-transfer"
  ],
  "proof_origin": {
-  "by": "agent",
+  "by": "P2 stage 3",
   "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Tag 0A50, sections of an injective resolution; Tag 03F3 (2), localization; Tag 01F8 and Remark 01FB, functoriality via resolutions. Read the corresponding Stacks tag pages; cocycle expansion of the parent proof, written by W3."
+  "place": "Global and open components of the canonical transfer calculation; no change to the unit route."
  },
  "mathlib_searches": [
   {
@@ -125,11 +111,11 @@
  "reviewed_proof": {
   "date": "2026-10-12",
   "by": "L",
-  "reviewer": "X-2f41c",
-  "group": "W3",
+  "reviewer": "COMPILER",
+  "group": "P2",
   "result": "pass",
-  "landing": "20261012T194154-L-469615",
+  "landing": "20261012T211616-L-1057873",
   "kind": "interface",
-  "note": "independent Codex review: Matched Lean signatures, cocycle normalization, six identities, DAG records, change record and repaired second reading. All six modules compile cleanly; direct importer EtaleResolutionSectionHomology and its importer EtaleMayerVietorisSectionComparison compile. Original caller fails exactly as reported; adaptation preserves signatures and changes only necessary lines. Axioms are standard plus sorryAx from the three documented obligations. Targets unchanged."
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

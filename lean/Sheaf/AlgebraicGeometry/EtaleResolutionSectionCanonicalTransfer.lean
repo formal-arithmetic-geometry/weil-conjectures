@@ -6,6 +6,8 @@ Authors: SHEAF group W3
 module
 
 public import Sheaf.AlgebraicGeometry.EtaleResolutionSectionCanonicalComparison
+import Sheaf.AlgebraicGeometry.EtaleResolutionSectionCanonicalGlobalTransfer
+import Sheaf.AlgebraicGeometry.EtaleResolutionSectionCanonicalOpenTransfer
 
 /-!
 # Transfer of normalized resolution comparisons
@@ -61,6 +63,9 @@ theorem resolutionSection_canonical_transfer
       cohomologyMap g G q (cX.globalEquiv q x)) ∧
     (∀ W q x, cY.openEquiv (g ⁻¹ᵁ W) q (HomologicalComplex.homologyMap
       (openResolutionSectionTransfer g I.cocomplex J.cocomplex α W) q x) =
-      openCohomologyPullback g W G q (cX.openEquiv W q x)) := by sorry
+      openCohomologyPullback g W G q (cX.openEquiv W q x)) := by
+  constructor
+  · exact resolutionSection_canonical_transfer_global g G I J α hα cX cY
+  · exact resolutionSection_canonical_transfer_open g G I J α hα cX cY
 
 end AlgebraicGeometry.Etale

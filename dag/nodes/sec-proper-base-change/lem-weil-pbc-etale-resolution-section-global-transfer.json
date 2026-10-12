@@ -1,0 +1,142 @@
+{
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 0A50, sections of an injective resolution; Tag 03F3 (2), localization; Tag 01F8 and Remark 01FB, functoriality via resolutions. Read the corresponding Stacks tag pages; cocycle expansion of the parent proof, written by W3."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-etale-resolution-section-canonical-comparison",
+  "def-weil-pbc-etale-resolution-section-transfer",
+  "def-weil-pbc-cohomology-pullback"
+ ],
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "id": "lem-weil-pbc-etale-resolution-section-global-transfer",
+ "kind": "statement",
+ "title": "Global canonical resolution section transfer",
+ "statement": "Let $g:Y\\to X$, $G$, $I$, $J$, $\\alpha$, $h_\\alpha$, $c_X$, and $c_Y$ be as follows: $G$ is an abelian etale sheaf on $X$, $I$ resolves $G$, $J$ resolves $g^*G$, $\\alpha:I\\to g_*J$ preserves the augmentation, and $c_X,c_Y$ are normalized comparisons [def-weil-pbc-etale-resolution-section-canonical-comparison]. For every $q$ and $x\\in H^q(I(X))$, $c_Y^q(H^q(T_X)x)=g^*(c_X^q(x))$. Here $T$ is the explicit section transfer [def-weil-pbc-etale-resolution-section-transfer] and pullback is [def-weil-pbc-cohomology-pullback].",
+ "proof": [
+  {
+   "text": "Proof: Represent a homology class by a cycle z, using surjectivity of homologyπ.\nThe constant-sheaf adjunction and evaluation at 1 give a unique morphism f representing\nits underlying section. Naturality of this equivalence and the cycle equation give\nf ≫ d = 0. Adjoint α to β : g*I → J. The equation hα identifies the augmentation\nof β with the identity of g*G. Exactness of g* makes g*I a resolution of g*G.",
+   "uses": [
+    "def-weil-pbc-inverse-image",
+    "prop-weil-pbc-inverse-image-exact",
+    "def-weil-pbc-etale-resolution-section-canonical-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Proof: Represent a homology class by a cycle z, using surjectivity of homologyπ.\nThe constant-sheaf adjunction and evaluation at 1 give a unique morphism f representing\nits underlying section. Naturality of this equivalence and the cycle equation give\nf ≫ d = 0. Adjoint α to β : g*I → J. The equation hα identifies the augmentation\nof β with the identity of g*G. Exactness of g* makes g*I a resolution of g*G.\nIn the derived category, write I.extMk f using extMk_hom. Apply the exact functor g*\nand precompose with the constant-sheaf comparison. The augmentation equation cancels\nthe two resolution identifications, yielding the Ext class of the cocycle β after g*f.\nUnder the constant-sheaf adjunction this cocycle evaluates to α at the terminal object\nfollowed by restriction along terminalSectionPullback g. This is exactly the degree-q\nmap of globalResolutionSectionTransfer. The chain-map equation makes its value a cycle.\nApply cX.global_cocycle and cY.global_cocycle to these representatives, and use naturality\nof homologyπ to obtain the claimed equality for z, hence for every class. This argument\nuses no positive-degree assumption; zero coefficients and empty schemes cause no change.",
+   "uses": [
+    "def-weil-pbc-cohomology-pullback",
+    "def-weil-pbc-etale-resolution-section-transfer"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-cohomology-pullback",
+  "def-weil-pbc-etale-resolution-section-canonical-comparison",
+  "def-weil-pbc-etale-resolution-section-transfer",
+  "def-weil-pbc-inverse-image",
+  "prop-weil-pbc-inverse-image-exact"
+ ],
+ "proof_origin": {
+  "by": "P2 stage 3",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 0A50, sections of an injective resolution; Tag 03F3 (2), localization; Tag 01F8 and Remark 01FB, functoriality via resolutions. Read the corresponding Stacks tag pages; cocycle expansion of the parent proof, written by W3."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "naturality of Ext classes represented by cocycles in injective resolutions under an exact inverse image functor",
+   "results": "8 hits, including InjectiveResolution.extMk_comp_mk₀, mk₀_comp_extMk, extMk_hom, and right-derived naturality lemmas. Read the Ext signatures.",
+   "date": "2026-10-13",
+   "verdict": "Coefficient-map naturality is within a single abelian category; no hit gives the scheme inverse-image section-transfer comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.InjectiveResolution.extMk",
+   "results": "12 hits. Read extMk, extMk_hom, mk₀_comp_extMk, extMk_comp_mk₀ and extMk_surjective.",
+   "date": "2026-10-13",
+   "verdict": "These give the generic cocycle API, not the etale transfer identities."
+  },
+  {
+   "tool": "grep",
+   "query": "extMk.*map|map.*extMk",
+   "results": "msearch: 0 hits. Repository rg found no existing canonical-transfer proof; Mathlib Ext source gives coefficient and source precomposition lemmas.",
+   "date": "2026-10-13",
+   "verdict": "No existing proof found for either component."
+  },
+  {
+   "tool": "leansearch",
+   "query": "naturality of the Ext cocycle constructor under exact functors",
+   "results": "UNAVAILABLE: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": null
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleResolutionSectionCanonicalTransfer",
+  "date": "2026-10-13",
+  "group": "P2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-injective-restriction-acyclicity",
+   "place": "The resolution-section comparison: normalized Hom cocycles, their restriction, and their augmentation-preserving pullback transfer, below the Mayer-Vietoris comparison.",
+   "via": [
+    "lem-weil-pbc-etale-resolution-section-canonical-transfer",
+    "lem-weil-pbc-etale-resolution-section-homology-naturality",
+    "lem-weil-pbc-etale-resolution-section-homology",
+    "lem-weil-pbc-etale-mayer-vietoris-section-comparison",
+    "lem-weil-pbc-etale-mayer-vietoris-section-diagram",
+    "lem-weil-pbc-etale-mayer-vietoris-connecting-pullback",
+    "lem-weil-pbc-etale-mayer-vietoris-pullback",
+    "lem-weil-pbc-etale-cohomology-limit-of-schemes"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleResolutionSectionCanonicalGlobalTransfer",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleResolutionSectionCanonicalGlobalTransfer.lean",
+  "declaration": "AlgebraicGeometry.Etale.resolutionSection_canonical_transfer_global",
+  "statement": "theorem resolutionSection_canonical_transfer_global {X Y : Scheme.{u}} (g : Y ⟶ X) (G : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) (I : InjectiveResolution G) (J : InjectiveResolution ((upperStar AddCommGrpCat.{u + 1} g).obj G)) (α : I.cocomplex ⟶ ((lowerStar AddCommGrpCat.{u + 1} g).mapHomologicalComplex (.up ℕ)).obj J.cocomplex) (hα : I.ι.f 0 ≫ α.f 0 = (upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} g).unit.app G ≫ (lowerStar AddCommGrpCat.{u + 1} g).map (J.ι.f 0)) (cX : ResolutionSectionCanonicalComparison G I) (cY : ResolutionSectionCanonicalComparison ((upperStar AddCommGrpCat.{u + 1} g).obj G) J) : ∀ q x, cY.globalEquiv q (HomologicalComplex.homologyMap (globalResolutionSectionTransfer g I.cocomplex J.cocomplex α) q x) = cohomologyMap g G q (cX.globalEquiv q x)",
+  "branch": "sheaf-dag",
+  "by": "P2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P2",
+  "result": "pass",
+  "landing": "20261012T211616-L-1057873",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P2",
+  "result": "pass",
+  "landing": "20261012T211616-L-1057873",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
