@@ -9,11 +9,9 @@ public import Sheaf.AlgebraicGeometry.PseudoCoherentComplex
 public import Sheaf.AlgebraicGeometry.PerfectComplex
 public import Sheaf.Paper.DerivedInternalHomRestrictOpen
 public import Mathlib.Algebra.Homology.DerivedCategory.TStructure
-import Sheaf.AlgebraicGeometry.AffinePseudoCoherentRHomQuasiCoherent
-import Sheaf.AlgebraicGeometry.AffineQCohDerivedEquivalence
-import Sheaf.AlgebraicGeometry.DerivedCategory
-import Sheaf.AlgebraicGeometry.DerivedPullbackTensorQCoh
-import Sheaf.AlgebraicGeometry.PerfectRHomTensorComparison
+import Sheaf.AlgebraicGeometry.RHomSupportedQuasiCoherentPseudoPart
+import Sheaf.AlgebraicGeometry.RHomSupportedQuasiCoherentPerfectPart
+import Sheaf.AlgebraicGeometry.RHomSupportedQuasiCoherentSupportPart
 
 /-! # Quasi-coherence and support of derived internal Hom
 
@@ -89,6 +87,12 @@ theorem rhom_supported_quasiCoherent
             (SheafOfModules.{u} (moduleRings X.toRingedSpace)) n).obj
               ((derivedInternalHom (Opens.grothendieckTopology X.toRingedSpace)
                 X.toRingedSpace.sheaf).obj (op K, L)))) := by
-  sorry
+  refine ⟨?_, ?_, ?_⟩
+  · intro hpc hge
+    exact rhom_supported_quasiCoherent_pseudo_part X K L hL hpc hge
+  · intro hp
+    exact rhom_supported_quasiCoherent_perfect_part X K L hL hp
+  · intro T hT _hcase hzero n
+    exact rhom_supported_quasiCoherent_support_part X K L T hT hzero n
 
 end AlgebraicGeometry

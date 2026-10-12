@@ -9090,3 +9090,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 18:43 L: merged deliver/U3/Sheaf.AlgebraicGeometry.Picard.CanonicalSinglePullbackSquare (stage 3; reviewer PASS; first push; landing 20261012T184350-L-4022388 (interface); batch 20261012T184234; modules 2; new nodes 1)
 - 18:43 L: merged deliver/U3/Sheaf.AlgebraicGeometry.StrictLocalExchangeCompatibility (stage 3; reviewer PASS; after a return; landing 20261012T184351-L-4022487 (interface); batch 20261012T184234; modules 3; new nodes 2)
 - 18:43 L: merged deliver/V1/Sheaf.AlgebraicGeometry.GenericProductIdempotentBound (stage 3; reviewer PASS; first push; landing 20261012T184351-L-4022635 (proof); batch 20261012T184234; modules 1; new nodes 0)
+- 18:43 L: merged deliver/V1/Sheaf.AlgebraicGeometry.RHomSupportedQuasiCoherent (stage 3; reviewer PASS; first push; landing 20261012T184351-L-4022732 (interface); batch 20261012T184234; modules 4; new nodes 3)
