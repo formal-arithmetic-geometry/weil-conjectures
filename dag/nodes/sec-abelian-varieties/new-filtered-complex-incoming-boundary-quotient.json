@@ -1,0 +1,148 @@
+{
+ "id": "new-filtered-complex-incoming-boundary-quotient",
+ "kind": "statement",
+ "title": "Incoming page differentials vanish modulo successor boundaries",
+ "statement": "Let $\\mathcal C$ be an abelian category [def-sp-abelian], $K$ an integer-indexed cochain complex, $F$ a decreasing filtration [def-sp-filtration], $r\\ge1$, and $D$ differential data on the concrete quotient page [lem-sp-filtered-complex-page-differential]. Fix $i=(p,q)$ and $n=p+q$. Let $Z_r,B_{r+1}$ be the graded subobjects [def-sp-filtered-complex-subquotients], and suppose $h:B_{r+1}^{p,q}\\le Z_r^{p,q}$. For any object $Q$ and morphism $a:E_r^{p,q}\\to Q$ satisfying $\\mathrm{incl}_h\\,\\pi_r\\,a=0$, the incoming differential satisfies $D.d(\\mathrm{prev}(i),i)\\,a=0$. Here $\\pi_r:Z_r^{p,q}\\to E_r^{p,q}$ is the concrete cokernel projection and $\\mathrm{prev}(i)=(p-r,q+r-1)$.",
+ "source": {
+  "document": "literature/stacks-project/homology.tex",
+  "place": "Tag 012K, displayed boundary formula and differential formula preceding lemma-spectral-sequence-filtered-complex"
+ },
+ "stmt_deps": [
+  "def-sp-abelian",
+  "def-sp-filtration",
+  "def-sp-filtered-complex-subquotients",
+  "lem-sp-filtered-complex-page-differential"
+ ],
+ "proof": [
+  {
+   "text": "At the preceding bidegree (p-r,q+r-1), total degree n-1, the map from unquotiented r-cycle representatives to graded r-cycles is epic: graded cycles are the projected image of the sum of those representatives and F^(p-r+1), and that extra summand is killed by the graded projection. Composing with the cokernel projection gives an epimorphism onto the source page. One may pull back this epimorphism to lift generalized page classes without any projectivity assumption.",
+   "uses": [
+    "def-sp-filtered-complex-subquotients"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 012K, displayed boundary formula and differential formula preceding lemma-spectral-sequence-filtered-complex"
+   }
+  },
+  {
+   "text": "For a lifted representative x in F^(p-r) K^(n-1), the r-cycle condition puts dx in F^p K^n. Thus dx lies in F^p intersect d(F^(p-r)), whose projected image is B_(r+1). Also d(dx)=0, so its graded class lies in Z_r. The inclusion h agrees with this class in Z_r because the subobject arrows are monic. Lift through the image factorization defining B_(r+1) after an epimorphic pullback if needed.",
+   "uses": [
+    "def-sp-filtered-complex-subquotients"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 012K, displayed boundary formula and differential formula preceding lemma-spectral-sequence-filtered-complex"
+   }
+  },
+  {
+   "text": "Apply D.on_representatives to x and dx: the incoming differential on the page class of x is the page class of dx. Postcomposing with a gives zero by the hypothesis on B_(r+1). Cancel the epimorphic covers from the first two steps to obtain the asserted zero composite.",
+   "uses": [
+    "lem-sp-filtered-complex-page-differential",
+    "def-sp-filtered-complex-subquotients"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 012K, displayed boundary formula and differential formula preceding lemma-spectral-sequence-filtered-complex"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sp-filtered-complex-subquotients",
+  "lem-sp-filtered-complex-page-differential"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/homology.tex",
+  "place": "Tag 012K, displayed boundary formula and differential formula preceding lemma-spectral-sequence-filtered-complex; explicit finite-pullback representative chase"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A map out of a filtered complex page which kills successor boundaries kills the incoming page differential",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A morphism annihilating the successor filtered boundaries annihilates the incoming spectral sequence differential",
+   "results": "8 hits, including HomologicalComplex.homotopyCofiber.inlX_d' and HomologicalComplex.mapBifunctor.d₂_eq_zero'; none concerns the concrete filtered boundary quotient.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "incoming.*boundar|boundar.*quotient|filteredComplex.*differential",
+   "results": "1 hit: Mathlib/RepresentationTheory/Homological/GroupHomology/LowDegree.lean:614, a degree-zero group homology boundary comment; no filtered-complex match.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.FilteredComplexSuccessorBoundariesImageLe",
+  "date": "2026-10-13",
+  "group": "Y3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sp-spectral-object-yields",
+   "place": "Incoming-image calculation for successor homology of concrete filtered-complex pages, Tag 012K: the incoming differential lands in the successor-boundary quotient.",
+   "via": [
+    "new-filtered-complex-successor-boundaries-image-le",
+    "lem-sp-filtered-complex-successor-boundaries-image",
+    "lem-sp-filtered-complex-page-homology",
+    "lem-sp-filtered-complex-positive-pages",
+    "lem-sp-filtered-complex-associated-spectral-sequence-construction"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-pqf-finite",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.FilteredComplexIncomingBoundaryQuotient",
+  "file": "lean/Sheaf/CategoryTheory/FilteredComplexIncomingBoundaryQuotient.lean",
+  "declaration": "CategoryTheory.filteredComplex_incoming_boundary_quotient",
+  "statement": "theorem filteredComplex_incoming_boundary_quotient\n    (K : CochainComplex C ℤ) (F : DecreasingFiltration K) (r : ℤ) (hr : 1 ≤ r)\n    (D : FilteredComplexPageDifferential K F r) (pq : ℤ × ℤ)\n    (hB : F.complexBoundaries pq.1 (pq.1 + pq.2) (r + 1) ≤\n      F.complexCycles pq.1 (pq.1 + pq.2) r)\n    (Q : C) (q : filteredComplexPageObject K F r pq ⟶ Q)\n    (hq : Subobject.ofLE _ _ hB ≫ filteredComplexPageπ K F r pq ≫ q = 0) :\n    D.d ((ComplexShape.up' (r, 1 - r)).prev pq) pq ≫ q = 0",
+  "branch": "sheaf-dag",
+  "by": "Y3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y3",
+  "result": "pass",
+  "landing": "20261012T232907-L-2044392",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y3",
+  "result": "pass",
+  "landing": "20261012T232907-L-2044392",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
