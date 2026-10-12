@@ -13,6 +13,9 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
 public import WeilConjectures.AlgebraicGeometry.Morphisms.EtaleTorsor
 public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.Functoriality
 
+import Sheaf.AlgebraicGeometry.Morphisms.StalkFiniteEtaleModel
+import Sheaf.AlgebraicGeometry.Morphisms.FiniteEtaleStalkNeighbourhoodSpreading
+
 /-!
 # Local extension with an overlap comparison
 
@@ -84,6 +87,11 @@ theorem GaloisCover.exists_local_finiteEtale_model_overlap {S C : Scheme.{u}} [I
           (C.homOfLE (inf_le_left : (c ⁻¹ᵁ U) ⊓ (c ⁻¹ᵁ W) ≤ c ⁻¹ᵁ U))).obj PA ≅
           (FiniteEtale.pullback
           (C.homOfLE (inf_le_right : (c ⁻¹ᵁ U) ⊓ (c ⁻¹ᵁ W) ≤ c ⁻¹ᵁ W))).obj Q) := by
-  sorry
+  obtain ⟨s, hs, Q, e⟩ :=
+    GaloisCover.exists_stalk_finiteEtale_model hS c σ hσ G hG
+      q j hCη sη hsq hsj Z hZ U hηU hU jU PA ψ hjU hψ
+  obtain ⟨W, hsW, R, eR⟩ :=
+    FiniteEtale.exists_neighbourhood_model_of_stalk c U PA s Q e
+  exact ⟨W, s, hs, hsW, R, eR⟩
 
 end AlgebraicGeometry.Scheme

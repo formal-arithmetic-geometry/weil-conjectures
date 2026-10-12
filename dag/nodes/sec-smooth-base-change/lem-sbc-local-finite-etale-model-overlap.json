@@ -26,28 +26,35 @@
  ],
  "proof": [
   {
-   "text": "Choose a generic point s of an irreducible component of the nonempty closed complement of U. The inverse image of U in Spec O(S,s) is the punctured spectrum. Extend the generic group action uniquely to the existing finite etale cover over that punctured family using full faithfulness on the normal smooth integral family. The action laws and the torsor identity follow from generic faithfulness.",
-   "uses": [],
+   "text": "Apply lem-sbc-stalk-finite-etale-model to obtain s outside U, a finite etale model Q over the local family C times_S Spec O(S,s), and its pullback isomorphism with PA on the local overlap.",
+   "uses": [
+    "lem-sbc-stalk-finite-etale-model"
+   ],
    "elementary": false
   },
   {
-   "text": "Construct the finite etale extension over Spec O(S,s) by the local claim of 0EYJ. In dimension one the normal local domain is a DVR: ramification indices divide the invertible group order, the tame normalization (0EYG, 0EYH) and split-section trait test (0EYI) give etaleness near the section, and purity across the regular special divisor (0EYE) gives etaleness everywhere. In dimension at least two, normality and flatness give depth two on the total space. The depth-two finite algebra extension (0EY6) is compatible with flat base change. Complete a smooth affine neighbourhood of the section: the completion is a power series ring over the local base. The rational section point and group action split the generic section fibre, hence split the finite etale cover over the normal punctured section by generic faithfulness. Power-series full faithfulness (0EY9) splits the cover over the punctured completion. Depth-two uniqueness splits its extension; flat descent and the fibre criterion (0EYB) give etaleness over the missing fibre. Disconnected covers are treated componentwise with their stabilizers, whose orders divide the group order, then induced and reunited.",
-   "uses": [],
+   "text": "Smoothness supplies local finite presentation of c. Apply lem-sbc-finite-etale-stalk-neighbourhood-spreading to s, Q and the local comparison to obtain W containing s and R over c inverse W with its overlap comparison.",
+   "uses": [
+    "lem-sbc-finite-etale-stalk-neighbourhood-spreading"
+   ],
    "elementary": false
   },
   {
-   "text": "Apply the finite-presentation neighbourhood spreading of 0BQ5 and the finite-etale property spreading of 0EY3 to the local extension and its agreement with PA over the punctured local base. Shrink the neighbourhood W of s until Q is finite etale and the comparison over c inverse (U intersect W) is an isomorphism. Its two projections are exactly the canonical inclusions of (c inverse U) intersect (c inverse W), so it yields the displayed iso between the two FiniteEtale.pullback objects. W contains s outside U; it is not required to contain U. This step does not form U union W or glue the schemes.",
+   "text": "Return W, s, the proof that s is outside U, the proof that s belongs to W, R, and the comparison isomorphism. The canonical inclusions in the spreading theorem are exactly those in the conclusion.",
    "uses": [],
-   "elementary": false
+   "elementary": true
   }
  ],
- "proof_deps": [],
+ "proof_deps": [
+  "lem-sbc-stalk-finite-etale-model",
+  "lem-sbc-finite-etale-stalk-neighbourhood-spreading"
+ ],
  "proof_origin": {
   "kind": "from-document",
-  "by": "C1",
+  "by": "F2",
   "document": "Stacks Project",
   "place": "Tag 0EYJ, local claim; Tags 0BQ5 and 0EY3, spreading with comparison",
-  "note": "Strict local part of the original argument, before open-cover gluing."
+  "note": "Lean assembly separates extension over a stalk from finite-presentation neighbourhood spreading; no union or gluing and no change to the unit route."
  },
  "blueprint": {
   "is": null,
@@ -116,9 +123,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "C1",
+  "group": "F2",
   "result": "pass",
-  "landing": "20261012T135220-L-1656944",
+  "landing": "20261012T153009-L-2350123",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

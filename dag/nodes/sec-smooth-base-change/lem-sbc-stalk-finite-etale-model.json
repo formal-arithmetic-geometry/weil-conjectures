@@ -1,0 +1,152 @@
+{
+ "id": "lem-sbc-stalk-finite-etale-model",
+ "kind": "statement",
+ "title": "Finite etale extension over a stalk before neighbourhood spreading",
+ "statement": "Let $S$ be an integral normal Noetherian quasi-separated scheme, $c:C\\to S$ a quasi-compact quasi-separated smooth morphism with geometrically connected fibres, and $\\sigma:S\\to C$ a section [def-weil-pbc-scheme-conventions, def-sbc-normal-dominant-galois, def-sbc-smooth-morphisms]. Put $K=k(\\eta)$ for the function field. Let $q:C_\\eta\\to\\operatorname{Spec}K$ and $j:C_\\eta\\to C$ exhibit the cartesian generic fibre, and let $s_\\eta:\\operatorname{Spec}K\\to C_\\eta$ satisfy $q s_\\eta=1$ and $j s_\\eta=\\sigma a_\\eta$, where $a_\\eta:\\operatorname{Spec}K\\to S$ is canonical [def-pc-fibre-product]. Let $G$ be a finite group with invertible order on $S$, and $Z\\to C_\\eta$ a finite etale $G$-torsor with a $K$-rational point above $s_\\eta$. Let $U\\subsetneq S$ be open with $\\eta\\in U$, $C_U=c^{-1}(U)$, $i_U:C_U\\to C$ its inclusion, and $j_U:C_\\eta\\to C_U$ with $i_U j_U=j$. Let $P\\to C_U$ be finite etale, and $\\psi:Z\\to P$ exhibit its cartesian generic restriction. Then there exist $s\\notin U$ and a finite etale cover $Q\\to C_s^{\\mathrm{loc}}$, where $a_s:\\operatorname{Spec}\\mathcal O_{S,s}\\to S$ is canonical and $C_s^{\\mathrm{loc}}=C\\times_S\\operatorname{Spec}\\mathcal O_{S,s}$, with an isomorphism $\\operatorname{pr}_1^*P\\simeq\\operatorname{pr}_2^*Q$ over $C_U\\times_C C_s^{\\mathrm{loc}}$. This conclusion constructs a model only over the stalk, and asserts no neighbourhood model.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 0EYJ (pione-lemma-extend-covering), proof of the local claim before neighbourhood spreading"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-sbc-normal-dominant-galois",
+  "def-sbc-smooth-morphisms",
+  "def-pc-fibre-product"
+ ],
+ "proof": [
+  {
+   "text": "Choose s generic in an irreducible component of the nonempty closed complement of U. Its inverse image in Spec O(S,s) is the punctured spectrum of a normal Noetherian local domain A. Smoothness and geometrically connected fibres make the local family normal integral. Extend the generic action and the torsor identity to the cover on this punctured family by generic full faithfulness, using the action-extension lemma after restriction to the punctured base.",
+   "uses": [
+    "lem-sbc-generic-fibre-action-extension"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "In dimension one A is a DVR. The ramification indices divide the invertible group order. Tame normalization and its local normal form (Tags 0EYG and 0EYH), followed by the split-section trait test (0EYI), give etaleness near the section. The regular geometrically connected special fibre is irreducible, so its generic point lies in this etale neighbourhood. Purity across a regular Cartier divisor (0EYE) gives a finite etale extension of the punctured cover.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "In dimension at least two use normal-local depth at least two and the flat local depth formula to get depth at least two along the missing fibre. Form the finite depth-two algebra extension by Tag 0EY6. Its uniqueness and compatibility with flat base change are part of that construction.",
+   "uses": [
+    "lem-weil-pbc-normal-local-depth-two",
+    "lem-weil-pbc-flat-local-depth-formula"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Complete a smooth affine section neighbourhood in its section ideal; it is a power series ring over A and the completion map is flat. The rational generic section point and the torsor action split the generic section fibre. Normal generic full faithfulness extends that splitting on the punctured section. Power series full faithfulness (0EY9) splits the cover on the punctured completion. Depth-two uniqueness then splits the completed extension. Flat descent and the fibre criterion (0EYB) give etaleness on the missing fibre. Its restriction to the punctured family is the original cover by construction.",
+   "uses": [
+    "lem-sbc-normal-integral-generic-hom-full"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For disconnected torsors apply the preceding construction componentwise with their stabilizers. Each component meets the split section fibre; each stabilizer has order dividing the invertible group order. Induce the stabilizer covers to G and take their finite disjoint union. The restriction comparisons combine into the displayed pullback isomorphism.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sbc-generic-fibre-action-extension",
+  "lem-sbc-normal-integral-generic-hom-full",
+  "lem-weil-pbc-flat-local-depth-formula",
+  "lem-weil-pbc-normal-local-depth-two"
+ ],
+ "proof_origin": {
+  "kind": "from-document",
+  "by": "F2",
+  "document": "Stacks Project",
+  "place": "Tag 0EYJ (pione-lemma-extend-covering), proof of the local claim before neighbourhood spreading",
+  "note": "Intermediate step of the local extension argument, prior to gluing; written from the local Stacks source."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "finite etale cover extends to a stalk of a normal smooth family and a finite etale cover with comparison spreads from a stalk to an open neighbourhood",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite etale cover over a smooth family extends from a punctured local normal base if its generic torsor is split on a section",
+   "results": "8 hits: Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial, AlgebraicGeometry.IsEtale.of_comp, RingHom.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial, StandardEtalePair.instFormallyEtaleRing, RingHom.IsStandardSmooth.exists_etale_mvPolynomial, Algebra.exists_etale_of_isEtaleAt, AlgebraicGeometry.IsSmooth.exists_isStandardSmooth, AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension; no cover descent theorem among these hits",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "finiteEtale.*(stalk|neighbou|local)|exists.*finiteEtale.*(stalk|neighbou|local)",
+   "results": "0 hits: ",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Morphisms.LocalFiniteEtaleModelOverlap",
+  "date": "2026-10-12",
+  "group": "F2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-thm-spreading-finite-etale-galois",
+   "place": "Tag 0EYJ (pione-lemma-extend-covering), proof of the local claim before neighbourhood spreading",
+   "via": [
+    "lem-sbc-local-finite-etale-model-overlap",
+    "lem-sbc-enlarge-open-finite-etale-model",
+    "lem-sbc-noetherian-finite-etale-extension",
+    "lem-sbc-underlying-finite-etale-extension"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-input-spreading",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Morphisms.StalkFiniteEtaleModel",
+  "file": "lean/Sheaf/AlgebraicGeometry/Morphisms/StalkFiniteEtaleModel.lean",
+  "declaration": "AlgebraicGeometry.Scheme.GaloisCover.exists_stalk_finiteEtale_model",
+  "statement": "theorem GaloisCover.exists_stalk_finiteEtale_model {S C : Scheme.{u}} [IsNoetherian S] [QuasiSeparatedSpace S] [IsIntegral S] (hS : ∀ x : S, IsIntegrallyClosed (S.presheaf.stalk x)) (c : C ⟶ S) [QuasiCompact c] [QuasiSeparated c] [Smooth c] [GeometricallyConnected c] (σ : S ⟶ C) (hσ : σ ≫ c = 𝟙 S) (G : Type (u + 1)) [Group G] [Finite G] (hG : IsUnit (Nat.card G : Γ(S, ⊤))) {Cη : Scheme.{u}} (q : Cη ⟶ Spec S.functionField) (j : Cη ⟶ C) (hCη : IsPullback q j (S.fromSpecStalk (genericPoint S)) c) (sη : Spec S.functionField ⟶ Cη) (hsq : sη ≫ q = 𝟙 _) (hsj : sη ≫ j = S.fromSpecStalk (genericPoint S) ≫ σ) (Z : GaloisCover G Cη) (hZ : ∃ z : Spec S.functionField ⟶ Z.P, z ≫ Z.π = sη) (U : S.Opens) (hηU : genericPoint S ∈ U) (hU : U ≠ ⊤) (jU : Cη ⟶ (c ⁻¹ᵁ U).toScheme) (PA : (c ⁻¹ᵁ U).toScheme.FiniteEtale) (ψ : Z.P ⟶ PA.obj.left) (hjU : jU ≫ (c ⁻¹ᵁ U).ι = j) (hψ : IsPullback ψ Z.π PA.obj.hom jU) : ∃ (s : S), s ∉ U ∧ ∃ Q : (Limits.pullback c (S.fromSpecStalk s)).FiniteEtale, Nonempty ((FiniteEtale.pullback (pullback.fst (c ⁻¹ᵁ U).ι (pullback.fst c (S.fromSpecStalk s)))).obj PA ≅ (FiniteEtale.pullback (pullback.snd (c ⁻¹ᵁ U).ι (pullback.fst c (S.fromSpecStalk s)))).obj Q)",
+  "branch": "sheaf-dag",
+  "by": "F2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261012T153009-L-2350123",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261012T153009-L-2350123",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

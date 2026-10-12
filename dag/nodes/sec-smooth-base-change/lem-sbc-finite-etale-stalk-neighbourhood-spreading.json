@@ -1,0 +1,139 @@
+{
+ "id": "lem-sbc-finite-etale-stalk-neighbourhood-spreading",
+ "kind": "statement",
+ "title": "Neighbourhood spreading of a finite etale stalk model with comparison",
+ "statement": "Let $S$ be a Noetherian quasi-separated scheme and $c:C\\to S$ a quasi-compact quasi-separated morphism locally of finite presentation [def-weil-pbc-scheme-conventions, def-sbc-locally-finite-presentation]. Let $U\\subset S$ be open, $C_U=c^{-1}(U)$ with inclusion $i_U:C_U\\to C$, and $P\\to C_U$ finite etale [def-sbc-normal-dominant-galois]. Let $s\\in S$, $a_s:\\operatorname{Spec}\\mathcal O_{S,s}\\to S$ its canonical stalk morphism, $C_s^{\\mathrm{loc}}=C\\times_S\\operatorname{Spec}\\mathcal O_{S,s}$, and $Q\\to C_s^{\\mathrm{loc}}$ finite etale [def-pc-fibre-product]. Suppose given an isomorphism $\\operatorname{pr}_1^*P\\simeq\\operatorname{pr}_2^*Q$ on $C_U\\times_C C_s^{\\mathrm{loc}}$. Then there are an open neighbourhood $W\\ni s$ and a finite etale cover $R\\to C_W=c^{-1}(W)$ with an isomorphism $P|_{C_U\\cap C_W}\\simeq R|_{C_U\\cap C_W}$ over the intersection, using its canonical inclusions into $C_U$ and $C_W$. No integrality, smoothness, section, torsor, or invertibility hypothesis is assumed; $s$ may lie in $U$.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tags 0BQ5 (limits-lemma-glueing-near-point) and 0EY3 (limits-lemma-glueing-near-point-properties), relative finite-presentation descent with comparison"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-sbc-locally-finite-presentation",
+  "def-sbc-normal-dominant-galois",
+  "def-pc-fibre-product"
+ ],
+ "proof": [
+  {
+   "text": "Express Spec O(S,s) as the inverse limit of affine open neighbourhoods W of s, using the stalk limit theorem. Base change by c; C_W is qcqs and has affine transitions. Its limit is the local family.",
+   "uses": [
+    "lem-weil-pbc-local-ring-spec-limit-affine-neighbourhoods"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Descend Q, a finitely presented scheme over the local family, to C_W by finite-presentation limit descent, as in the proof of Tag 0BQ5. After shrinking W its morphism is finite and etale by the property descent results underlying Tag 0EY3.",
+   "uses": [
+    "lem-weil-pbc-descend-finite",
+    "lem-weil-pbc-descend-etale"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Noetherianity makes U retrocompact, so C_(U intersect W) is qcqs and forms a system with the local overlap as limit. Descend the comparison and its inverse by finite-presentation morphism descent in Tag 0BQ5. Descend their two identity equations after a common further shrinking; this gives an isomorphism on the intersection. The two projections identify with the canonical open inclusions. Return that W and its finite etale cover; no gluing is needed.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-descend-etale",
+  "lem-weil-pbc-descend-finite",
+  "lem-weil-pbc-local-ring-spec-limit-affine-neighbourhoods"
+ ],
+ "proof_origin": {
+  "kind": "from-document",
+  "by": "F2",
+  "document": "Stacks Project",
+  "place": "Tags 0BQ5 (limits-lemma-glueing-near-point) and 0EY3 (limits-lemma-glueing-near-point-properties), relative finite-presentation descent with comparison",
+  "note": "Intermediate step of the local extension argument, prior to gluing; written from the local Stacks source."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "finite etale cover extends to a stalk of a normal smooth family and a finite etale cover with comparison spreads from a stalk to an open neighbourhood",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite etale cover of a qcqs scheme over the spectrum of a stalk, with an isomorphism to a given cover on a retrocompact open, descends to an open neighbourhood with that isomorphism",
+   "results": "8 hits: AlgebraicGeometry.Scheme.OpenCover.finiteSubcover_f, AlgebraicGeometry.Scheme.etaleTopology, AlgebraicGeometry.Scheme.smallEtaleTopology, AlgebraicGeometry.Scheme.OpenCover.finiteSubcover_X, AlgebraicGeometry.Scheme.smallEtalePretopology, AlgebraicGeometry.Scheme.etalePretopology, AlgebraicGeometry.Scheme.Hom.normalizationOpenCover, AlgebraicGeometry.QuasiCompactCover.inst; no cover descent theorem among these hits",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "fromSpecStalk.*(finite|etale)|finite.*fromSpecStalk|etale.*neighbourhood|glueing.near.point",
+   "results": "6 hits: Mathlib/AlgebraicGeometry/Birational/RationalMap.lean, Mathlib/AlgebraicGeometry/Birational/RationalMap.lean, Mathlib/AlgebraicGeometry/Birational/RationalMap.lean, Mathlib/AlgebraicGeometry/Birational/RationalMap.lean, Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean, Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean; no cover descent theorem among these hits",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Morphisms.LocalFiniteEtaleModelOverlap",
+  "date": "2026-10-12",
+  "group": "F2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-thm-spreading-finite-etale-galois",
+   "place": "Tags 0BQ5 (limits-lemma-glueing-near-point) and 0EY3 (limits-lemma-glueing-near-point-properties), relative finite-presentation descent with comparison",
+   "via": [
+    "lem-sbc-local-finite-etale-model-overlap",
+    "lem-sbc-enlarge-open-finite-etale-model",
+    "lem-sbc-noetherian-finite-etale-extension",
+    "lem-sbc-underlying-finite-etale-extension"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-input-spreading",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Morphisms.FiniteEtaleStalkNeighbourhoodSpreading",
+  "file": "lean/Sheaf/AlgebraicGeometry/Morphisms/FiniteEtaleStalkNeighbourhoodSpreading.lean",
+  "declaration": "AlgebraicGeometry.Scheme.FiniteEtale.exists_neighbourhood_model_of_stalk",
+  "statement": "theorem FiniteEtale.exists_neighbourhood_model_of_stalk {S C : Scheme.{u}} [IsNoetherian S] [QuasiSeparatedSpace S] (c : C ⟶ S) [QuasiCompact c] [QuasiSeparated c] [LocallyOfFinitePresentation c] (U : S.Opens) (PA : (c ⁻¹ᵁ U).toScheme.FiniteEtale) (s : S) (Q : (Limits.pullback c (S.fromSpecStalk s)).FiniteEtale) (e : Nonempty ((FiniteEtale.pullback (pullback.fst (c ⁻¹ᵁ U).ι (pullback.fst c (S.fromSpecStalk s)))).obj PA ≅ (FiniteEtale.pullback (pullback.snd (c ⁻¹ᵁ U).ι (pullback.fst c (S.fromSpecStalk s)))).obj Q)) : ∃ (W : S.Opens), s ∈ W ∧ ∃ R : (c ⁻¹ᵁ W).toScheme.FiniteEtale, Nonempty ((FiniteEtale.pullback (C.homOfLE (inf_le_left : (c ⁻¹ᵁ U) ⊓ (c ⁻¹ᵁ W) ≤ c ⁻¹ᵁ U))).obj PA ≅ (FiniteEtale.pullback (C.homOfLE (inf_le_right : (c ⁻¹ᵁ U) ⊓ (c ⁻¹ᵁ W) ≤ c ⁻¹ᵁ W))).obj R)",
+  "branch": "sheaf-dag",
+  "by": "F2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261012T153009-L-2350123",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261012T153009-L-2350123",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
