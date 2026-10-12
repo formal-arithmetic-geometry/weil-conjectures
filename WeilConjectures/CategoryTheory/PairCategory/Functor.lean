@@ -306,7 +306,7 @@ def comp (Φ : CompatibleFamily F G) (Ψ : CompatibleFamily G H) : CompatibleFam
     rw [e₂, ← Functor.map_comp_assoc, ← Functor.map_comp_assoc, e₁]
     simp only [Functor.map_comp, assoc]
     congr 2
-    exact ((Ψ.iso h₂).hom.naturality_assoc _ _).symm
+    exact (Ψ.iso h₂).hom.naturality_assoc ((Φ.iso h₁).hom.app A) _
   iso_id i h A := by
     have e₁ := Φ.iso_id i h A
     have e₂ := Ψ.iso_id i h ((Φ.functor i).obj A)
@@ -338,7 +338,11 @@ noncomputable def descentIdIso : (CompatibleFamily.id F).descent ≅ 𝟭 (PairC
     simp only [Iso.refl_hom, Functor.id_map]
     refine (comp_id _).trans (Eq.trans ?_ (id_comp _).symm)
     congr 1
-    simp [mapAt])
+    simp only [mapAt, id_iso, Iso.trans_hom, Iso.trans_inv, Iso.symm_hom, Iso.symm_inv,
+      NatTrans.comp_app, Functor.rightUnitor_hom_app, Functor.leftUnitor_inv_app,
+      Functor.rightUnitor_inv_app, Functor.leftUnitor_hom_app]
+    erw [id_comp, id_comp, comp_id, comp_id]
+    rfl)
 
 /-- The descent of a composite family is the composite of the descents. -/
 noncomputable def descentCompIso (Φ : CompatibleFamily F G) (Ψ : CompatibleFamily G H) :
@@ -350,7 +354,17 @@ noncomputable def descentCompIso (Φ : CompatibleFamily F G) (Ψ : CompatibleFam
     change homMk (X := (Φ.comp Ψ).obj X) (Y := (Φ.comp Ψ).obj Y) _ _ _ =
       homMk (X := Ψ.obj (Φ.obj X)) (Y := Ψ.obj (Φ.obj Y)) _ _ _
     congr 1
-    simp [mapAt, comp_iso_hom_app, comp_iso_inv_app])
+    simp [mapAt, comp_iso_hom_app, comp_iso_inv_app]
+    rfl)
+
+lemma descent_id_map {X Y : PairCategory F} (f : X ⟶ Y) :
+    (CompatibleFamily.id F).descent.map f = f := by
+  simpa using descentIdIso.hom.naturality f
+
+lemma descent_comp_map (Φ : CompatibleFamily F G) (Ψ : CompatibleFamily G H)
+    {X Y : PairCategory F} (f : X ⟶ Y) :
+    (Φ.comp Ψ).descent.map f = Ψ.descent.map (Φ.descent.map f) := by
+  simpa using (descentCompIso Φ Ψ).hom.naturality f
 
 instance Hom.isIso_descent {Φ Ψ : CompatibleFamily F G} (τ : Hom Φ Ψ) [∀ i, IsIso (τ.app i)] :
     IsIso τ.descent := by

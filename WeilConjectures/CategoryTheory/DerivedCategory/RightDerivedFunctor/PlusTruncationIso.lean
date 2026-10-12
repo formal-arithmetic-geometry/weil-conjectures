@@ -88,7 +88,7 @@ lemma isIso_homologyFunctor_map_map_truncLEι_app (F : Plus C ⥤ Plus D)
       IsZero ((homologyFunctor D q).obj (F.obj X)))
     (K : Plus C) (n j : ℤ) (hj : j ≤ n) :
     IsIso ((homologyFunctor D j).map (F.map ((truncLEι C n).app K))) :=
-  isIso_homologyFunctor_map_map_of_isIso_homologyFunctor_map F hF _ n
+  isIso_homologyFunctor_map_map_of_isIso_homologyFunctor_map F hF ((truncLEι C n).app K) n
     (fun i hi ↦ DerivedCategory.isIso_homologyFunctor_map_truncLEι_app (ι.obj K) n i hi)
     ((DerivedCategory.isZero_homologyFunctor_obj_truncLE (ι.obj K) n (n + 1) (by lia)).mono _)
     j hj
@@ -112,7 +112,7 @@ theorem isIso_homologyFunctor_map_rightDerivedFunctorPlus_map
     (h₂ : Mono ((homologyFunctor C (n + 1)).map c)) (j : ℤ) (hj : j ≤ n) :
     IsIso ((homologyFunctor D j).map (F.rightDerivedFunctorPlus.map c)) :=
   isIso_homologyFunctor_map_map_of_isIso_homologyFunctor_map F.rightDerivedFunctorPlus
-    (fun X n _ q hq ↦ F.isZero_homologyFunctor_rightDerivedFunctorPlus_obj_of_isGE X n hq)
+    (fun X n _ _ hq ↦ F.isZero_homologyFunctor_rightDerivedFunctorPlus_obj_of_isGE X n hq)
     c n h₁ h₂ j hj
 
 open DerivedCategory.Plus in
@@ -123,7 +123,7 @@ theorem isIso_homologyFunctor_map_rightDerivedFunctorPlus_map_truncLEι_app
     (K : DerivedCategory.Plus C) (n j : ℤ) (hj : j ≤ n) :
     IsIso ((homologyFunctor D j).map (F.rightDerivedFunctorPlus.map ((truncLEι C n).app K))) :=
   isIso_homologyFunctor_map_map_truncLEι_app F.rightDerivedFunctorPlus
-    (fun X n _ q hq ↦ F.isZero_homologyFunctor_rightDerivedFunctorPlus_obj_of_isGE X n hq)
+    (fun X n _ _ hq ↦ F.isZero_homologyFunctor_rightDerivedFunctorPlus_obj_of_isGE X n hq)
     K n j hj
 
 end CategoryTheory.Functor

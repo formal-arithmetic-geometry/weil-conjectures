@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.SixFunctors.BaseChange.Derived
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusAdjunctionShift
+public import WeilConjectures.Mathlib.CategoryTheory.Triangulated.Functor
 
 /-!
 # The derived exchange transformation is a morphism of triangulated functors
@@ -59,6 +60,7 @@ lemma Etale.isTriangulated_rightDerivedFunctorPlus_lowerStar :
     ((u)_*[A]).rightDerivedFunctorPlus.IsTriangulated :=
   inferInstance
 
+omit [HasSmallSiteSheafify A] in
 /-- This is blueprint `lem-weil-pbc-derived-adjunction-commshift` for étale sheaves: the derived
 adjunction `u^* ⊣ R u_*⁺` on the bounded below derived categories is compatible with the
 shifts, i.e. its unit and counit commute with the shift isomorphisms
@@ -75,6 +77,7 @@ section Exchange
 variable {X' X Y' Y : Scheme.{u}} {g' : X' ⟶ X} {f' : X' ⟶ Y'} {f : X ⟶ Y} {g : Y' ⟶ Y}
   (sq : CommSq g' f' f g)
 
+omit [HasSmallSiteSheafify A] in
 /-- The composite `Φ = R f_*⁺ ⋙ D g^*⁺` is a triangulated functor (blueprint
 `lem-weil-pbc-triangulated-functor-composite`, Mathlib's
 `CategoryTheory.Functor.IsTriangulated.instComp`). -/
@@ -82,6 +85,7 @@ lemma Etale.isTriangulated_rightDerivedFunctorPlus_lowerStar_comp_upperStar :
     ((f)_*[A].rightDerivedFunctorPlus ⋙ ((g)^*[A]).mapDerivedCategoryPlus).IsTriangulated :=
   inferInstance
 
+omit [HasSmallSiteSheafify A] in
 /-- The composite `Ψ = D g'^*⁺ ⋙ R f'_*⁺` is a triangulated functor (blueprint
 `lem-weil-pbc-triangulated-functor-composite`). -/
 lemma Etale.isTriangulated_upperStar_comp_rightDerivedFunctorPlus_lowerStar :

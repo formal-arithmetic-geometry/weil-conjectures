@@ -127,7 +127,7 @@ lemma ιIter_succ (k : ℕ) (p q : ℤ) :
 
 instance (k : ℕ) (p q : ℤ) : Mono (X.ιIter k p q) := by
   induction k with
-  | zero => exact (inferInstance : Mono (𝟙 _))
+  | zero => exact inferInstanceAs (Mono (𝟙 (X.D p q)))
   | succ k ih => rw [ιIter_succ]; infer_instance
 
 /-- The map `α` of the iterated couple is the restriction of `α`. -/
@@ -135,7 +135,7 @@ instance (k : ℕ) (p q : ℤ) : Mono (X.ιIter k p q) := by
 lemma iter_α_ιIter (k : ℕ) (p q p' q' : ℤ) (hp : p' + 1 = p) (hq : q + 1 = q') :
     (X.iter k).α p q p' q' ≫ X.ιIter k p' q' = X.ιIter k p q ≫ X.α p q p' q' := by
   induction k with
-  | zero => simp [ιIter, iter]
+  | zero => simp [ιIter]
   | succ k ih =>
     change (X.iter k).α' p q p' q' ≫ (X.iter k).ι' p' q' ≫ X.ιIter k p' q' =
       ((X.iter k).ι' p q ≫ X.ιIter k p q) ≫ X.α p q p' q'
@@ -158,7 +158,10 @@ lemma αbarIter_succ (k : ℕ) (a b p q : ℤ) (ha : p + (k + 1 : ℕ) = a)
 instance (k : ℕ) (a b p q : ℤ) (ha : p + k = a) (hb : b + k = q) :
     Epi (X.αbarIter k a b p q ha hb) := by
   induction k generalizing p q with
-  | zero => exact (inferInstance : Epi (eqToHom _))
+  | zero =>
+    change Epi (X.αPow 0 a b p q ha hb)
+    rw [αPow_zero']
+    infer_instance
   | succ k ih =>
     rw [αbarIter_succ]
     have := ih (p + 1) (q - 1) (by lia) (by lia)
@@ -179,9 +182,10 @@ lemma αbarIter_ιIter (k : ℕ) (a b p q : ℤ) (ha : p + k = a) (hb : b + k = 
 lemma imageSubobject_αPow (k : ℕ) (a b p q : ℤ) (ha : p + k = a) (hb : b + k = q) :
     imageSubobject (X.αPow k a b p q ha hb) = Subobject.mk (X.ιIter k p q) := by
   rw [← X.αbarIter_ιIter k a b p q ha hb]
+  have := strongEpi_of_epi (X.αbarIter k a b p q ha hb)
   exact Subobject.mk_eq_mk_of_comm _ _
-    (image.isoStrongEpiMono (X.αbarIter k a b p q ha hb) (X.ιIter k p q) rfl)
-    (image.isoStrongEpiMono_hom_comp_ι _ _ rfl)
+    (image.isoStrongEpiMono (X.αbarIter k a b p q ha hb) (X.ιIter k p q) rfl).symm
+    (by rw [Iso.symm_hom, Iso.inv_comp_eq, image.isoStrongEpiMono_hom_comp_ι])
 
 lemma isZero_iter_D (k : ℕ) (p q : ℤ) (h : IsZero (X.D p q)) : IsZero ((X.iter k).D p q) := by
   rw [IsZero.iff_id_eq_zero, ← cancel_mono (X.ιIter k p q)]

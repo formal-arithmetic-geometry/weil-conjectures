@@ -21,6 +21,11 @@ proper base change, the structure of the category `Sheaf J A` of `A`-valued shea
   `P_X^# = Sheaf.freeYoneda J X P` on an object `X` of `C`, with flat coefficients `P`, is
   flat. On the small étale site with `A` the category of `Λ`-modules, `Sheaf.freeYoneda J X Λ`
   is the extension by zero `j_{X!} Λ_X` of the constant sheaf.
+
+The neighbouring blueprint nodes are existing declarations: blueprint `lem-weil-pbc-flat-coproduct`
+is `CategoryTheory.ObjectProperty.flat_coproduct`, and blueprint
+`lem-weil-pbc-sheaf-flat-separator` is
+`CategoryTheory.GrothendieckTopology.exists_flat_separator_sheaf_of_essentiallySmall`.
 -/
 
 @[expose] public section

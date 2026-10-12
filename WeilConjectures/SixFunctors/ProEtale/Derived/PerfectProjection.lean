@@ -142,7 +142,8 @@ lemma projectionFormulaLocus_singleFunctor_tensorUnit
     projectionFormulaLocus A f K
       ((DerivedCategory.singleFunctor _ 0).obj (𝟙_ (Sheaf (Scheme.ProEt.topology Y) A))) := by
   exact (projectionFormulaLocus A f K).prop_of_iso
-    (@asIso _ _ _ _ (Functor.LaxMonoidal.ε (DerivedCategory.Q (C := Sheaf (Scheme.ProEt.topology Y) A)))
+    (@asIso _ _ _ _
+      (Functor.LaxMonoidal.ε (DerivedCategory.Q (C := Sheaf (Scheme.ProEt.topology Y) A)))
       (isIso_ε_Q A Y))
     (projectionFormulaLocus_tensorUnit A f K)
 
@@ -181,7 +182,8 @@ section Package
 presented as a retract of `Λᴺ` (maps `i : F^r ⟶ Λᴺ` and `p : Λᴺ ⟶ F^r` with `p ∘ i = 1`): the
 composite
 ```
-Rf_*(K ⊗ᴸ Lf^*F^r) --Rf_*(1 ⊗ Lf^* i)--> Rf_*(K ⊗ᴸ Lf^*Λᴺ) --ρ_N--> Rf_*K ⊗ᴸ Λᴺ --1 ⊗ p--> Rf_*K ⊗ᴸ F^r
+Rf_*(K ⊗ᴸ Lf^*F^r) --Rf_*(1 ⊗ Lf^* i)--> Rf_*(K ⊗ᴸ Lf^*Λᴺ) --ρ_N--> Rf_*K ⊗ᴸ Λᴺ
+  --1 ⊗ p--> Rf_*K ⊗ᴸ F^r
 ```
 where `ρ_N` is the inverse of the finite-sum identification `π_{f,K,Λᴺ}`. By
 `AlgebraicGeometry.ProEtale.rightDerivedLowerStarProjectionInvOfRetract_eq` it is the inverse of
@@ -193,9 +195,10 @@ noncomputable def rightDerivedLowerStarProjectionInvOfRetract
     R((f)_*[A]).obj (((-⊗ᴸ-(X)[A]).obj K).obj
         (L((f)^*[A]).obj ((DerivedCategory.singleFunctor _ 0).obj F))) ⟶
       ((-⊗ᴸ-(Y)[A]).obj (R((f)_*[A]).obj K)).obj ((DerivedCategory.singleFunctor _ 0).obj F) :=
-  haveI : IsIso (((derivedUpperStarLowerStarAdjunction A f).rightAdjointProjectionMap
-      (leftDerivedUpperStarTensorComparison A f)).app K).app ((DerivedCategory.singleFunctor _ 0).obj
-        (⨁ fun _ : Fin N ↦ 𝟙_ (Sheaf (Scheme.ProEt.topology Y) A)))) :=
+  haveI : IsIso ((((derivedUpperStarLowerStarAdjunction A f).rightAdjointProjectionMap
+      (leftDerivedUpperStarTensorComparison A f)).app K).app
+        ((DerivedCategory.singleFunctor _ 0).obj
+          (⨁ fun _ : Fin N ↦ 𝟙_ (Sheaf (Scheme.ProEt.topology Y) A)))) :=
     isIso_rightDerivedLowerStarProjectionMap_singleFunctor_biproduct_unit A f K N 0
   (derivedUpperStarLowerStarAdjunction A f).rightAdjointProjectionMapInvOfRetract
     (leftDerivedUpperStarTensorComparison A f) (h.map (DerivedCategory.singleFunctor _ 0)) K
@@ -213,9 +216,10 @@ lemma rightDerivedLowerStarProjectionInvOfRetract_eq
       rightDerivedLowerStarProjectionInvOfRetract A f K h =
         inv (((rightDerivedLowerStarProjectionMap A f).app K).app
           ((DerivedCategory.singleFunctor _ 0).obj F)) := by
-  have : IsIso (((derivedUpperStarLowerStarAdjunction A f).rightAdjointProjectionMap
-      (leftDerivedUpperStarTensorComparison A f)).app K).app ((DerivedCategory.singleFunctor _ 0).obj
-        (⨁ fun _ : Fin N ↦ 𝟙_ (Sheaf (Scheme.ProEt.topology Y) A)))) :=
+  have : IsIso ((((derivedUpperStarLowerStarAdjunction A f).rightAdjointProjectionMap
+      (leftDerivedUpperStarTensorComparison A f)).app K).app
+        ((DerivedCategory.singleFunctor _ 0).obj
+          (⨁ fun _ : Fin N ↦ 𝟙_ (Sheaf (Scheme.ProEt.topology Y) A)))) :=
     isIso_rightDerivedLowerStarProjectionMap_singleFunctor_biproduct_unit A f K N 0
   exact ⟨_, (derivedUpperStarLowerStarAdjunction A f).rightAdjointProjectionMapInvOfRetract_eq
     (leftDerivedUpperStarTensorComparison A f) (h.map (DerivedCategory.singleFunctor _ 0)) K⟩
@@ -230,7 +234,8 @@ lemma isIso_rightDerivedLowerStarProjectionMap_of_strictPerfectPackage
     {F : CochainComplex (Sheaf (Scheme.ProEt.topology Y) A) ℤ}
     (P : F.StrictPerfectPackage (𝟙_ (Sheaf (Scheme.ProEt.topology Y) A))) :
     IsIso (((rightDerivedLowerStarProjectionMap A f).app K).app (DerivedCategory.Q.obj F)) :=
-  P.prop_Q_obj (projectionFormulaLocus A f K) (projectionFormulaLocus_singleFunctor_tensorUnit A f K)
+  P.prop_Q_obj (projectionFormulaLocus A f K)
+    (projectionFormulaLocus_singleFunctor_tensorUnit A f K)
 
 /-- The total arrow `ρ_{f,K,F} : Rf_*(K ⊗ᴸ Lf^*F) ⟶ Rf_*K ⊗ᴸ F` of blueprint
 `def-weil-pbc-projection-formula-arrows`, for a complex `F` with a strict-perfect package. The
@@ -243,8 +248,8 @@ noncomputable def rightDerivedLowerStarProjectionInv
     (P : F.StrictPerfectPackage (𝟙_ (Sheaf (Scheme.ProEt.topology Y) A))) :
     R((f)_*[A]).obj (((-⊗ᴸ-(X)[A]).obj K).obj (L((f)^*[A]).obj (DerivedCategory.Q.obj F))) ⟶
       ((-⊗ᴸ-(Y)[A]).obj (R((f)_*[A]).obj K)).obj (DerivedCategory.Q.obj F) :=
-  haveI := isIso_rightDerivedLowerStarProjectionMap_of_strictPerfectPackage A f K P
-  inv (((rightDerivedLowerStarProjectionMap A f).app K).app (DerivedCategory.Q.obj F))
+  @inv _ _ _ _ (((rightDerivedLowerStarProjectionMap A f).app K).app (DerivedCategory.Q.obj F))
+    (isIso_rightDerivedLowerStarProjectionMap_of_strictPerfectPackage A f K P)
 
 @[reassoc (attr := simp)]
 lemma rightDerivedLowerStarProjectionMap_comp_inv
@@ -253,8 +258,8 @@ lemma rightDerivedLowerStarProjectionMap_comp_inv
     (P : F.StrictPerfectPackage (𝟙_ (Sheaf (Scheme.ProEt.topology Y) A))) :
     ((rightDerivedLowerStarProjectionMap A f).app K).app (DerivedCategory.Q.obj F) ≫
       rightDerivedLowerStarProjectionInv A f K P = 𝟙 _ := by
-  have := isIso_rightDerivedLowerStarProjectionMap_of_strictPerfectPackage A f K P
-  simp [rightDerivedLowerStarProjectionInv]
+  exact @IsIso.hom_inv_id _ _ _ _ _
+    (isIso_rightDerivedLowerStarProjectionMap_of_strictPerfectPackage A f K P)
 
 @[reassoc (attr := simp)]
 lemma rightDerivedLowerStarProjectionInv_comp
@@ -263,8 +268,8 @@ lemma rightDerivedLowerStarProjectionInv_comp
     (P : F.StrictPerfectPackage (𝟙_ (Sheaf (Scheme.ProEt.topology Y) A))) :
     rightDerivedLowerStarProjectionInv A f K P ≫
       ((rightDerivedLowerStarProjectionMap A f).app K).app (DerivedCategory.Q.obj F) = 𝟙 _ := by
-  have := isIso_rightDerivedLowerStarProjectionMap_of_strictPerfectPackage A f K P
-  simp [rightDerivedLowerStarProjectionInv]
+  exact @IsIso.inv_hom_id _ _ _ _ _
+    (isIso_rightDerivedLowerStarProjectionMap_of_strictPerfectPackage A f K P)
 
 end Package
 
@@ -276,7 +281,8 @@ lemma isIso_rightDerivedLowerStarProjectionMap_of_isDualizable
     IsIso (((rightDerivedLowerStarProjectionMap A f).app K).app P) := by
   obtain ⟨_⟩ := DerivedCategory.nonempty_braidedCategory (Sheaf (Scheme.ProEt.topology Y) A)
   let := leftDerivedUpperStarMonoidal A f
-  exact (derivedUpperStarLowerStarAdjunction A f).isIso_rightAdjointProjectionMap_app_app_of_isDualizable
+  exact (derivedUpperStarLowerStarAdjunction A f)
+    |>.isIso_rightAdjointProjectionMap_app_app_of_isDualizable
     (leftDerivedUpperStarTensorComparison A f) (fun _ _ ↦ rfl) K hP
 
 end ProEtale

@@ -28,6 +28,8 @@ with `f` proper. This file records the sheaf-level forms of the proper base chan
   degreewise exchange maps `g⁻¹ Rᵠf_* F ⟶ Rᵠf'_* g'⁻¹ F` are isomorphisms;
 - the same for every torsion sheaf `F`, deduced from the prime case by the coefficient
   dévissage `AlgebraicGeometry.Etale.isIso_baseChangeHomologyMap_of_isTorsionSheaf`;
+- the derived exchange morphism `g^* Rf_* K ⟶ Rf'_* g'^* K` is an isomorphism for every
+  bounded below complex `K` with torsion cohomology sheaves;
 - the derived exchange morphism `g^* Rf_* F ⟶ Rf'_* g'^* F` is an isomorphism for every torsion
   sheaf `F`, naturally in `F`.
 
@@ -37,6 +39,8 @@ with `f` proper. This file records the sheaf-level forms of the proper base chan
   coefficients.
 - `AlgebraicGeometry.Etale.isIso_baseChangeHomologyMap_of_isProper_of_isTorsionSheaf`: torsion
   coefficients.
+- `AlgebraicGeometry.Etale.isIso_derivedBaseChangeMapPlus_app_of_isProper`: bounded below
+  complexes with torsion cohomology.
 - `AlgebraicGeometry.Etale.isIso_derivedBaseChangeMapPlus_app_singleFunctor_of_isProper` and
   `AlgebraicGeometry.Etale.properBaseChangeTorsionIso`: the derived exchange morphism of a
   torsion sheaf, and its naturality.
@@ -91,11 +95,33 @@ theorem Etale.isIso_baseChangeHomologyMap_of_isProper_of_isTorsionSheaf [IsPrope
   Etale.isIso_baseChangeHomologyMap_of_isTorsionSheaf Λ sq
     (fun _ hr E hE q ↦ Etale.isIso_baseChangeHomologyMap_of_isProper_of_prime Λ sq hr E hE q) F q
 
+/-- **Bounded below derived proper base change**: for a proper morphism `f : X ⟶ Y`, a
+cartesian square as in the module docstring and a complex `K ∈ D⁺(X_ét, Λ)` all of whose
+cohomology sheaves are torsion, the derived exchange morphism `g^* Rf_* K ⟶ Rf'_* g'^* K` is an
+isomorphism in `D⁺(Y'_ét, Λ)`. No hypothesis is put on `g`.
+
+It is deduced from the sheaf-level statement
+`AlgebraicGeometry.Etale.isIso_baseChangeHomologyMap_of_isProper_of_isTorsionSheaf` (the `E₂`
+terms of the hypercohomology spectral sequences): both sides do not lower the cohomological
+degree, so `Hⁿ` of both sides only depends on the truncation `τ_{≤ n} K`, a finite iterated
+extension of its shifted torsion cohomology sheaves
+(`AlgebraicGeometry.Etale.isIso_derivedBaseChangeMapPlus_app_of_forall_isTorsionSheaf`).
+This is blueprint `thm-weil-pbc-bounded-below`. -/
+@[stacks 0DDE]
+theorem Etale.isIso_derivedBaseChangeMapPlus_app_of_isProper [IsProper f]
+    (sq : IsPullback g' f' f g)
+    (K : DerivedCategory.Plus (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
+    (hK : Etale.DerivedCategory.Plus.torsionHomology Λ X K) :
+    IsIso ((Etale.derivedBaseChangeMapPlus (ModuleCat.{u + 1} Λ) sq.toCommSq).app K) :=
+  Etale.isIso_derivedBaseChangeMapPlus_app_of_forall_isTorsionSheaf Λ sq
+    (fun F hF q ↦ have : IsTorsionSheaf F := hF
+      Etale.isIso_baseChangeHomologyMap_of_isProper_of_isTorsionSheaf Λ sq F q) K hK
+
 /-- **Finite-torsion proper base change**: for a proper morphism `f : X ⟶ Y`, a cartesian
 square as in the module docstring and a torsion sheaf `F` of `Λ`-modules on `X_ét`, the derived
 exchange morphism `g^* Rf_* F ⟶ Rf'_* g'^* F` of `F` placed in degree `0` is an isomorphism in
-`D⁺(Y'_ét, Λ)`. It is all its cohomology sheaves maps
-(`AlgebraicGeometry.Etale.isIso_baseChangeHomologyMap_of_isProper_of_isTorsionSheaf`).
+`D⁺(Y'_ét, Λ)`: the complex `F[0]` has torsion cohomology, so this is the bounded below
+theorem `AlgebraicGeometry.Etale.isIso_derivedBaseChangeMapPlus_app_of_isProper` for `F[0]`.
 
 These isomorphisms are natural in `F` (`AlgebraicGeometry.Etale.properBaseChangeTorsionIso`),
 and, as for every component of `AlgebraicGeometry.Etale.derivedBaseChangeMapPlus`, they are the
@@ -110,8 +136,8 @@ theorem Etale.isIso_derivedBaseChangeMapPlus_app_singleFunctor_of_isProper [IsPr
     [IsTorsionSheaf F] :
     IsIso ((Etale.derivedBaseChangeMapPlus (ModuleCat.{u + 1} Λ) sq.toCommSq).app
       ((DerivedCategory.Plus.singleFunctor _ 0).obj F)) :=
-  (Etale.isIso_derivedBaseChangeMapPlus_app_singleFunctor_obj_iff Λ sq F).2
-    (Etale.isIso_baseChangeHomologyMap_of_isProper_of_isTorsionSheaf Λ sq F)
+  Etale.isIso_derivedBaseChangeMapPlus_app_of_isProper Λ sq _
+    (Etale.DerivedCategory.Plus.torsionHomology_singleFunctor_obj Λ X F)
 
 /-- The natural isomorphism `g^* Rf_* F ≅ Rf'_* g'^* F` of functors of a torsion sheaf `F` of
 `Λ`-modules on `X_ét`, for a proper morphism `f` and a cartesian square as in the module

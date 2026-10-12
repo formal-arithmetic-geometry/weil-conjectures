@@ -119,29 +119,23 @@ variable (q₀ q : ℤ) (hq : q₀ + 1 = q)
 `D⁺(C)`. -/
 noncomputable def truncLEδ :
     homologySingleFunctor C q ⟶ truncLE C q₀ ⋙ shiftFunctor (Plus C) (1 : ℤ) where
-  app X := ObjectProperty.homMk ((DerivedCategory.truncLEδ q₀ q hq).app (ι.obj X) ≫
+  app X := ι.preimage ((DerivedCategory.truncLEδ q₀ q hq).app (ι.obj X) ≫
     (ι.commShiftIso (1 : ℤ)).inv.app ((truncLE C q₀).obj X))
-  naturality X Y f := by
-    apply ι.map_injective
-    rw [CategoryTheory.Functor.map_comp, CategoryTheory.Functor.map_comp]
+  naturality X Y f := ι.map_injective (by
     have h₁ := (DerivedCategory.truncLEδ q₀ q hq).naturality (ι.map f)
     have h₂ := (ι.commShiftIso (1 : ℤ)).inv.naturality ((truncLE C q₀).map f)
-    dsimp at h₁ h₂
-    change (DerivedCategory.homologySingleFunctor C q).map (ι.map f) ≫
-        (DerivedCategory.truncLEδ q₀ q hq).app (ι.obj Y) ≫
-          (ι.commShiftIso (1 : ℤ)).inv.app ((truncLE C q₀).obj Y) =
-      (DerivedCategory.truncLEδ q₀ q hq).app (ι.obj X) ≫
-        (ι.commShiftIso (1 : ℤ)).inv.app ((truncLE C q₀).obj X) ≫
-          ι.map (((truncLE C q₀).map f)⟦(1 : ℤ)⟧')
-    erw [reassoc_of% h₁, ← h₂]
-    rfl
+    simp only [Functor.comp_obj, Functor.comp_map] at h₁ h₂
+    simp only [Functor.comp_obj, Functor.comp_map, Functor.map_comp, Functor.map_preimage]
+    rw [assoc, ← h₂]
+    exact (reassoc_of% h₁) _)
 
+@[reassoc]
 lemma ι_map_truncLEδ_app (X : Plus C) :
     ι.map ((truncLEδ q₀ q hq).app X) ≫ (ι.commShiftIso (1 : ℤ)).hom.app ((truncLE C q₀).obj X) =
       (DerivedCategory.truncLEδ q₀ q hq).app (ι.obj X) := by
-  change (_ ≫ _) ≫ _ = _
-  rw [assoc]
-  erw [Iso.inv_hom_id_app, comp_id]
+  dsimp only [truncLEδ]
+  rw [Functor.map_preimage, assoc, Iso.inv_hom_id_app]
+  exact comp_id _
 
 /-- The truncation triangles `τ_{≤ q₀} X ⟶ τ_{≤ q} X ⟶ H^q(X)[-q] ⟶ (τ_{≤ q₀} X)⟦1⟧` in the
 bounded below derived category, as a functor `D⁺(C) ⥤ Triangle D⁺(C)`. -/
@@ -155,10 +149,9 @@ noncomputable def mapTriangleιTruncLETriangleIso (X : Plus C) :
       (DerivedCategory.truncLETriangle q₀ q hq).obj (ι.obj X) :=
   Triangle.isoMk _ _ (Iso.refl _) (Iso.refl _) (Iso.refl _)
     ((comp_id _).trans (id_comp _).symm) ((comp_id _).trans (id_comp _).symm) (by
-      change (ι.map ((truncLEδ q₀ q hq).app X) ≫
-          (ι.commShiftIso (1 : ℤ)).hom.app ((truncLE C q₀).obj X)) ≫
-            (shiftFunctor _ (1 : ℤ)).map (𝟙 _) = 𝟙 _ ≫ (DerivedCategory.truncLEδ q₀ q hq).app (ι.obj X)
-      rw [CategoryTheory.Functor.map_id, comp_id, id_comp, ι_map_truncLEδ_app])
+      simp only [truncLETriangle, DerivedCategory.truncLETriangle, Iso.refl_hom,
+        CategoryTheory.Functor.map_id, comp_id, id_comp]
+      exact ι_map_truncLEδ_app q₀ q hq X)
 
 /-- This is blueprint `lem-weil-pbc-truncation-triangle` in `D⁺(C)`: the truncation triangles of
 a bounded below object are distinguished triangles of the bounded below derived category. -/
