@@ -33,162 +33,38 @@
  ],
  "proof": [
   {
-   "text": "(Setup.) Let $\\pi:P\\to S=P/I$ be the quotient map; then $\\mathfrak q'=\\pi^{-1}(\\mathfrak q)$ is a prime ideal of $P$ with $I\\subseteq\\mathfrak q'$. The field $k$ is Noetherian [def-weil-pbc-noetherian-ring] (its only ideals are $0$ and $k$), so $P=k[x_1,\\dots,x_n]/(0)$ [def-weil-pbc-mv-polynomial-ring] is Noetherian by [lem-weil-pbc-finite-type-algebra-noetherian]; hence $I=(u_1,\\dots,u_m)$ for some $m\\ge0$ and $u_1,\\dots,u_m\\in I$. Put $U=P\\setminus\\mathfrak q'$ and $R=P_{\\mathfrak q'}$ [def-weil-pbc-localization-at-prime], a local ring with maximal ideal $\\mathfrak q'R$, and Noetherian by [lem-weil-pbc-localization-noetherian] (with $R'=R$, the map $p\\mapsto p/1$). Bringing a finite sum $\\sum_i(r_i/w_i)(f_i/1)$ ($f_i\\in I$, $w_i\\in U$) to the common denominator $w=\\prod_iw_i\\in U$ shows $IR=\\{f/w: f\\in I,\\ w\\in U\\}$.",
+   "text": "Apply regularSequence_dimensionAtPoint to obtain e≤n and local dimension n-e.",
    "uses": [
-    "def-weil-pbc-noetherian-ring",
-    "def-weil-pbc-mv-polynomial-ring",
-    "lem-weil-pbc-finite-type-algebra-noetherian",
-    "def-weil-pbc-localization-at-prime",
-    "lem-weil-pbc-localization-noetherian"
+    "lem-weil-pbc-regular-sequence-dimension-at-point"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, Lemma Tag 00SC (label lemma-lci, line 35909), proof, second paragraph ((5) => (2)), first sentence of the first paragraph (R = k[x_1,...,x_n]_{q'}) and third paragraph (finite generation implicit in the choice of g')"
-   }
+   "elementary": false
   },
   {
-   "text": "($R/IR\\cong S_{\\mathfrak q}$; the source's $\\overline R=R/IR=S_{\\mathfrak q}$.) Since $\\mathfrak q'=\\pi^{-1}(\\mathfrak q)$, $\\pi(U)\\subseteq S\\setminus\\mathfrak q$, so $\\rho:R\\to S_{\\mathfrak q}$ [def-weil-pbc-localization-at-prime], $p/w\\mapsto\\pi(p)/\\pi(w)$, is well defined (if $p/w=p'/w'$, i.e. $v(pw'-p'w)=0$ with $v\\in U$, apply $\\pi$) and a ring homomorphism. It is surjective: an element $s/t$ of $S_{\\mathfrak q}$ has $s=\\pi(p)$, $t=\\pi(w)$ with $w\\notin\\mathfrak q'$ as $\\pi(w)\\notin\\mathfrak q$. Its kernel is $IR$: an element $f/w$ with $f\\in I$ maps to $0$; conversely, if $\\pi(p)/\\pi(w)=0$ there is $t=\\pi(v)\\in S\\setminus\\mathfrak q$, so $v\\in U$, with $\\pi(vp)=0$, i.e. $vp\\in I$, and then $p/w=vp/(vw)\\in IR$ by step 1. Hence $\\rho$ induces a ring isomorphism $R/IR\\cong S_{\\mathfrak q}$.",
+   "text": "Obtain a outside q and a presentation of S_(a*b) for every b from the local-generator presentation theorem. Apply exists_mul_away_dimension_eq inside D(a) to get b outside q and dimension dim_q Spec S. Use its presentation at that b.",
    "uses": [
-    "def-weil-pbc-localization-at-prime"
+    "lem-weil-pbc-lci-regular-sequence-global-complete-intersection-presentation",
+    "lem-weil-pbc-principal-neighborhood-dimension"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, Lemma Tag 00SC (label lemma-lci, line 35909), proof, first paragraph ('R/IR = R/I_{q'} = S_q')"
-   }
+   "elementary": false
   },
   {
-   "text": "($\\dim R/IR+e=\\dim R$; 'dimension theory'.) For $0\\le i\\le e$ let $J_i=(h_1,\\dots,h_i)\\subseteq R$ and $R_i=R/J_i$ (so $R_0=R$). By [def-weil-pbc-regular-sequence], (1) multiplication by $h_i$ on $R/J_{i-1}=R_{i-1}$ is injective, i.e. the class $\\bar h_i\\in R_{i-1}$ is a nonzerodivisor of the ring $R_{i-1}$, and (2) $R_e=R/J_e\\neq0$. Every $h_i$ lies in $\\mathfrak q'R$: otherwise $h_i$ is a unit of the local ring $R$ and $J_e=R$, contradicting (2). Each $R_i$ is Noetherian by [lem-weil-pbc-surjective-image-noetherian] (step 1), nonzero (it surjects onto $R_e\\neq0$), and local with maximal ideal $\\mathfrak q'R/J_i$ (an element of $R_i$ outside it is the class of a unit of $R$); $\\bar h_i\\in R_{i-1}$ lies in the maximal ideal $\\mathfrak q'R/J_{i-1}$, and $R_{i-1}/\\bar h_iR_{i-1}\\cong R/(J_{i-1}+h_iR)=R_i$. By [lem-weil-pbc-dimension-quotient-nonzerodivisor] applied to the Noetherian local ring $R_{i-1}$ and the nonzerodivisor $\\bar h_i$, $\\dim R_i+1=\\dim R_{i-1}$ (Krull dimensions [def-weil-pbc-krull-dimension-ring], a ring isomorphism preserving them). Adding these $e$ equalities, $\\dim R_e+e=\\dim R$. Since $h_1,\\dots,h_e$ generate $IR$, $J_e=IR$ and $\\dim(R/IR)+e=\\dim R$.",
-   "uses": [
-    "def-weil-pbc-regular-sequence",
-    "lem-weil-pbc-surjective-image-noetherian",
-    "lem-weil-pbc-dimension-quotient-nonzerodivisor",
-    "def-weil-pbc-krull-dimension-ring"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, Lemma Tag 00SC (label lemma-lci, line 35909), proof, second paragraph ((5) => (2)): dim(S_q) = dim(k[x_1,...,x_n]_{q'}) - e 'by dimension theory, see Section section-dimension' (line 14306); the fact used is Lemma Tag 00KW (label lemma-one-equation, line 14694) for a nonzerodivisor, applied e times"
-   }
-  },
-  {
-   "text": "($e=\\operatorname{ht}(\\mathfrak q')-\\operatorname{ht}(\\mathfrak q)$ and $\\dim_{\\mathfrak q}\\operatorname{Spec}S=n-e$.) Write $\\operatorname{ht}$ for the supremum of the lengths of chains of primes ending inside the given prime, as in [lem-weil-pbc-polynomial-quotient-dimension-at-point-height-difference]. By [lem-weil-pbc-localization-dimension-chains-below-prime], $\\dim R=\\dim P_{\\mathfrak q'}=\\operatorname{ht}(\\mathfrak q')$ and $\\dim S_{\\mathfrak q}=\\operatorname{ht}(\\mathfrak q)$ [def-weil-pbc-krull-dimension-ring]; by step 2 (a ring isomorphism preserves Krull dimension) $\\dim(R/IR)=\\operatorname{ht}(\\mathfrak q)$. By [lem-weil-pbc-polynomial-quotient-dimension-at-point-height-difference] both heights are integers in $[0,n]$ and $\\dim_{\\mathfrak q}(\\operatorname{Spec}S)=n-\\operatorname{ht}(\\mathfrak q')+\\operatorname{ht}(\\mathfrak q)$ [def-kun-topological-dimension-at-point]. Step 3 gives $\\operatorname{ht}(\\mathfrak q)+e=\\operatorname{ht}(\\mathfrak q')$, an equality of integers, so $e=\\operatorname{ht}(\\mathfrak q')-\\operatorname{ht}(\\mathfrak q)$ (the source's $c$) and $d:=\\dim_{\\mathfrak q}(\\operatorname{Spec}S)=n-e$.",
-   "uses": [
-    "lem-weil-pbc-localization-dimension-chains-below-prime",
-    "def-weil-pbc-krull-dimension-ring",
-    "lem-weil-pbc-polynomial-quotient-dimension-at-point-height-difference",
-    "def-kun-topological-dimension-at-point"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, Lemma Tag 00SC (label lemma-lci, line 35909), proof, second paragraph ((5) => (2)) ('height(q) = dim(S_q) = dim(k[x_1,...,x_n]_{q'}) - e = height(q') - e ... We conclude that e = c'), with c = height(q') - height(q), i.e. dim_q(S) = n - c, from the statement of 00SC and Lemma Tag 00P2 (lemma-codimension, line 28270)"
-   }
-  },
-  {
-   "text": "(Clearing denominators.) Each $h_i\\in IR$, so by step 1 $h_i=f_i'/s_i$ with $f_i'\\in I$ and $s_i\\in U$. Then $f_i'/1=(s_i/1)h_i$ with $s_i/1$ a unit of $R$ [def-weil-pbc-localization-at-prime], so the elements $f_1'/1,\\dots,f_e'/1$ generate the same ideal of $R$ as $h_1,\\dots,h_e$, namely $IR$. Let $F=(f_1',\\dots,f_e')\\subseteq P$; $F\\subseteq I$.",
-   "uses": [
-    "def-weil-pbc-localization-at-prime"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, Lemma Tag 00SC (label lemma-lci, line 35909), proof, third paragraph ((2) => (1)): 'we may find d_i not in q' such that f_i' = d_i f_i in k[x_1,...,x_n]. Then it is still true that I_{q'} = (f_1',...,f_c')R'"
-   }
-  },
-  {
-   "text": "(The element $g'$: $g'I\\subseteq F$.) For each generator $u_j$ of $I$ (step 1), $u_j/1\\in IR=(f_1'/1,\\dots,f_e'/1)$ (step 5); bringing the coefficients to a common denominator, $u_j/1=\\big(\\sum_lc_{jl}f_l'\\big)/t_j$ with $c_{jl}\\in P$, $t_j\\in U$. By the definition of equality in $R=P_{\\mathfrak q'}$ [def-weil-pbc-localization-at-prime] there is $w_j\\in U$ with $w_j\\big(t_ju_j-\\sum_lc_{jl}f_l'\\big)=0$, so $v_ju_j\\in F$ for $v_j=w_jt_j\\in U$. Put $g'=\\prod_{j=1}^mv_j$ ($g'=1$ if $m=0$); $g'\\in U$, i.e. $g'\\notin\\mathfrak q'$, as $\\mathfrak q'$ is prime. Then $g'u_j\\in F$ for all $j$, and since $I=\\sum_jPu_j$, $g'I\\subseteq F$; with $F\\subseteq I$ this is the source's $I_{g'}=(f_1',\\dots,f_e')$.",
-   "uses": [
-    "def-weil-pbc-localization-at-prime"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, Lemma Tag 00SC (label lemma-lci, line 35909), proof, third paragraph ((2) => (1)): 'Hence there exists a g' not in q' such that I_{g'} = (f_1',...,f_c')'"
-   }
-  },
-  {
-   "text": "(The element $g''$ and $g$.) Let $X=\\operatorname{Spec}S$ [def-weil-affine-spectrum] and $d=n-e$ as in step 4. By [def-kun-topological-dimension-at-point], $d$ is the minimum of $\\dim U'$ over the open neighbourhoods $U'$ of $\\mathfrak q$; let $U_0$ be one with $\\dim U_0=d$. The closed subsets of $X$ are the sets $V(J)=\\{\\mathfrak p:J\\subseteq\\mathfrak p\\}$, $J\\subseteq S$ an ideal [lem-weil-pbc-spec-irreducible-closed-subsets-primes], so $U_0=X\\setminus V(J)$ for some $J$, and $\\mathfrak q\\in U_0$ gives $\\gamma\\in J$ with $\\gamma\\notin\\mathfrak q$. Then $D(\\gamma)=\\{\\mathfrak p:\\gamma\\notin\\mathfrak p\\}\\subseteq U_0$ (if $\\gamma\\notin\\mathfrak p$ then $J\\not\\subseteq\\mathfrak p$). Choose $g''\\in P$ with $\\pi(g'')=\\gamma$; $g''\\notin\\mathfrak q'$. Put $G=g'g''\\in P$ and $g=\\pi(G)\\in S$. Since $\\pi(g')\\notin\\mathfrak q$ (step 6, $\\mathfrak q'=\\pi^{-1}(\\mathfrak q)$), $\\gamma\\notin\\mathfrak q$ and $\\mathfrak q$ is prime, $g\\notin\\mathfrak q$, i.e. $\\mathfrak q\\in D(g)$; and $D(g)\\subseteq D(\\gamma)\\subseteq U_0$, since $g\\notin\\mathfrak p$ implies $\\gamma\\notin\\mathfrak p$.",
-   "uses": [
-    "def-weil-affine-spectrum",
-    "def-kun-topological-dimension-at-point",
-    "lem-weil-pbc-spec-irreducible-closed-subsets-primes"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, Lemma Tag 00SC (label lemma-lci, line 35909), proof, third paragraph ((2) => (1)): 'pick g'' not in q' such that dim(S_{g''}) = dim_q Spec(S) ... set g equal to the image of g'g'' in S'; the existence of g'' is the remark after Topology Definition Tag 0055 (topology.tex, label definition-Krull, line 1392; remark line 1421: x has a fundamental system of open neighbourhoods U with dim(U) = dim_x(X)), written out with principal opens"
-   }
-  },
-  {
-   "text": "($\\dim S_g=n-e$.) $D(g)$ is an open neighbourhood of $\\mathfrak q$ (step 7), so $\\dim D(g)\\ge d$ by the definition of $d=\\dim_{\\mathfrak q}X$ as a minimum [def-kun-topological-dimension-at-point]; and $D(g)\\subseteq U_0$ are open in $X$, so $\\dim D(g)\\le\\dim U_0=d$ by [lem-weil-pbc-open-subspace-dimension-monotone]. Hence $\\dim D(g)=d=n-e$. By [lem-weil-pbc-principal-localization-open-immersion] the morphism $\\operatorname{Spec}S_g\\to\\operatorname{Spec}S$ induced by the localization map $S\\to S_g$ [def-weil-ring-localization-away] is an open immersion with image $D(g)$, so a homeomorphism of $\\operatorname{Spec}S_g$ onto the subspace $D(g)$; a homeomorphism maps strict chains of irreducible closed subsets bijectively onto strict chains of the same length, so the Krull dimension of the space $\\operatorname{Spec}S_g$ [def-kun-topological-krull-dimension] is $\\dim S_g=\\dim D(g)=n-e$. In particular $S_g\\neq0$.",
-   "uses": [
-    "def-kun-topological-dimension-at-point",
-    "lem-weil-pbc-open-subspace-dimension-monotone",
-    "lem-weil-pbc-principal-localization-open-immersion",
-    "def-weil-ring-localization-away",
-    "def-kun-topological-krull-dimension"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, Lemma Tag 00SC (label lemma-lci, line 35909), proof, third paragraph ((2) => (1)): 'by our choice of g'' this ring has dimension n - c'; monotonicity of dimension on open subsets from the remark after Topology Definition Tag 0055 (topology.tex line 1421: if U' subset U subset X are open then dim(U') <= dim(U)); Spec(S_g) = D(g) by Algebra Lemma Tag 00E4 (label lemma-standard-open)"
-   }
-  },
-  {
-   "text": "(The presentation.) Let $x=x_{n+1}$; by the universal property [def-weil-pbc-mv-polynomial-ring] the $k$-algebra maps $k[x_1,\\dots,x_{n+1}]\\rightleftarrows P[x]$ fixing every $x_i$ are mutually inverse, so we identify $k[x_1,\\dots,x_{n+1}]=P[x]$. Let $\\pi_x:P[x]\\to S[x]$ apply $\\pi$ to the coefficients: it is surjective with kernel $IP[x]$ (the ideal generated by $I$) by [lem-weil-pbc-polynomial-coefficient-map-kernel]. Let $\\lambda:S[x]\\to S_g$ be the $S$-algebra map with $\\lambda(x)=1/g$; by [lem-weil-pbc-localization-away-polynomial-quotient] (with $R=S$, $r=g$; $S_g$ as in [def-weil-ring-localization-away]) $\\lambda$ is surjective with kernel $(gx-1)S[x]$. So $\\Phi=\\lambda\\circ\\pi_x:k[x_1,\\dots,x_{n+1}]\\to S_g$ is a surjective homomorphism of $k$-algebras. Its kernel is $IP[x]+(Gx-1)P[x]$: $\\pi_x(Gx-1)=gx-1$, so $\\supseteq$ holds; if $\\Phi(p)=0$ then $\\pi_x(p)=(gx-1)\\pi_x(p_0)$ for some $p_0\\in P[x]$ ($\\pi_x$ surjective), so $p-(Gx-1)p_0\\in\\ker\\pi_x=IP[x]$. Let $K=(f_1',\\dots,f_e',Gx-1)\\subseteq P[x]$. Then $K\\subseteq\\ker\\Phi$ as $f_i'\\in I$ (step 5). Conversely, for $u\\in I$: $u=-u(Gx-1)+xg''\\cdot(g'u)$, and $g'u\\in F$ by step 6, so $u\\in K$; hence $IP[x]\\subseteq K$ and $\\ker\\Phi=K$. Therefore $\\Phi$ induces an isomorphism of $k$-algebras $k[x_1,\\dots,x_{n+1}]/(f_1',\\dots,f_e',\\,x_{n+1}g'g''-1)\\cong S_g$.",
-   "uses": [
-    "def-weil-pbc-mv-polynomial-ring",
-    "lem-weil-pbc-polynomial-coefficient-map-kernel",
-    "lem-weil-pbc-localization-away-polynomial-quotient",
-    "def-weil-ring-localization-away"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, Lemma Tag 00SC (label lemma-lci, line 35909), proof, third paragraph ((2) => (1)): 'S_g = k[x_1,...,x_n,x_{n+1}]/(f_1',...,f_c', x_{n+1}g'g'' - 1)', the isomorphism written out (S[x]/(gx-1) = S_g as in the proof of Lemma Tag 08JZ, line 35632)"
-   }
-  },
-  {
-   "text": "(Conclusion.) By step 9, $S_g\\cong k[x_1,\\dots,x_{n+1}]/(f_1',\\dots,f_e',x_{n+1}g'g''-1)$ as $k$-algebras, a quotient of a polynomial ring in $n+1$ variables by $e+1$ polynomials, and by step 8 $\\dim S_g=n-e=(n+1)-(e+1)$. By [def-weil-pbc-complete-intersection-over-field] (1), $S_g$ is a global complete intersection over $k$, and $g\\notin\\mathfrak q$ (step 7).",
+   "text": "Primality gives a*b outside q. The presentation has n+1 variables and e+1 equations; e≤n gives e+1≤n+1, and dimension n-e=(n+1)-(e+1). These witnesses satisfy IsGlobalCompleteIntersection.",
    "uses": [
     "def-weil-pbc-complete-intersection-over-field"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, Lemma Tag 00SC (label lemma-lci, line 35909), proof, third paragraph ((2) => (1)): 'Therefore it is a global complete intersection'"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-noetherian-ring",
-  "def-weil-pbc-mv-polynomial-ring",
-  "lem-weil-pbc-finite-type-algebra-noetherian",
-  "def-weil-pbc-localization-at-prime",
-  "lem-weil-pbc-localization-noetherian",
-  "def-weil-pbc-regular-sequence",
-  "lem-weil-pbc-surjective-image-noetherian",
-  "lem-weil-pbc-dimension-quotient-nonzerodivisor",
-  "def-weil-pbc-krull-dimension-ring",
-  "lem-weil-pbc-localization-dimension-chains-below-prime",
-  "lem-weil-pbc-polynomial-quotient-dimension-at-point-height-difference",
-  "def-kun-topological-dimension-at-point",
-  "def-weil-affine-spectrum",
-  "lem-weil-pbc-spec-irreducible-closed-subsets-primes",
-  "lem-weil-pbc-open-subspace-dimension-monotone",
-  "lem-weil-pbc-principal-localization-open-immersion",
-  "def-weil-ring-localization-away",
-  "def-kun-topological-krull-dimension",
-  "lem-weil-pbc-polynomial-coefficient-map-kernel",
-  "lem-weil-pbc-localization-away-polynomial-quotient",
+  "lem-weil-pbc-regular-sequence-dimension-at-point",
+  "lem-weil-pbc-lci-regular-sequence-global-complete-intersection-presentation",
+  "lem-weil-pbc-principal-neighborhood-dimension",
   "def-weil-pbc-complete-intersection-over-field"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "worker",
   "document": "literature/stacks-project/algebra.tex",
-  "place": "Algebra, Lemma Tag 00SC (label lemma-lci, line 35909), proof: second paragraph ((5) => (2)) and third paragraph ((2) => (1)); dimension theory through Lemma Tag 00KW (line 14694) and Lemma Tag 00P2 (line 28270); the open neighbourhood of minimal dimension from the remark after Topology Definition Tag 0055 (topology.tex line 1421)"
+  "place": "Algebra, Lemma 00SC, (5) implies (2) and (2) implies (1): genuine reduction into separately proved dimension-at-point and neighborhood steps plus the open algebraic presentation step."
  },
  "mathlib_searches": [
   {
@@ -301,5 +177,15 @@
   "group": "H1",
   "result": "pass",
   "note": "k field, P=MvPolynomial (Fin n) k, I, S=P/I, q prime (hq), q'=q.comap mk, P_q' = Localization.AtPrime q', h : Fin e -> P_q' with RingTheory.Sequence.IsRegular (List.ofFn h) and Ideal.map algebraMap I = span (range h); conclusion exists g : S, g notin q, Algebra.IsGlobalCompleteIntersection k (Localization.Away g) (F1 9145a6374 decl, k-algebra structure on S_g checked rfl = OreLocalization.instAlgebra); n=0/e=0 admitted; single universe; no hollow hypothesis"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A4",
+  "result": "pass",
+  "landing": "20261012T230752-L-1906968",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

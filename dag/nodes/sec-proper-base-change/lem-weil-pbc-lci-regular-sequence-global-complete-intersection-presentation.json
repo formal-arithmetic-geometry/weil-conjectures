@@ -1,0 +1,139 @@
+{
+ "id": "lem-weil-pbc-lci-regular-sequence-global-complete-intersection-presentation",
+ "kind": "statement",
+ "title": "Polynomial presentation near a prime from local generators",
+ "statement": "Let k be a field, P=k[x_1,...,x_n] [def-weil-pbc-mv-polynomial-ring], I an ideal, S=P/I, q a prime of S, and p its inverse image in P. Suppose h:Fin e→P_p [def-weil-pbc-localization-at-prime] generates I P_p. Then there is a∈S outside q such that for every b∈S, there exist e+1 polynomials in n+1 variables whose quotient is k-algebra isomorphic to S_(a*b) [def-weil-ring-localization-away]. Regularity and dimension are not assumed or asserted.",
+ "stmt_deps": [
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-ring-localization-away"
+ ],
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma 00SC, (2) implies (1), clearing denominators and the polynomial presentation; checked at https://stacks.math.columbia.edu/tag/00SC"
+ },
+ "proof": [
+  {
+   "text": "Clear denominators in each local generator h_i to obtain F_i in I and s_i outside the inverse-image prime p. Unit rescaling preserves the localized generated ideal.",
+   "uses": [
+    "def-weil-pbc-localization-at-prime"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "P is a Noetherian polynomial ring over a field. Take finitely many generators u_j of I and clear denominators in their membership in (F_i)P_p. Equality in localization gives v_j outside p with v_j u_j in (F_i). For A=product v_j, A I is contained in (F_i), and (F_i) is contained in I.",
+   "uses": [
+    "def-weil-pbc-mv-polynomial-ring",
+    "lem-weil-pbc-finite-type-algebra-noetherian",
+    "def-weil-pbc-localization-at-prime"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Let a be the image of A and lift an arbitrary b in P/I to B in P. Evaluation P[x] to (P/I)_(a*b) has kernel I P[x]+(ABx-1). For u in I the identity u=-u(ABx-1)+xB(Au) shows this kernel equals (F_i,ABx-1).",
+   "uses": [
+    "lem-weil-pbc-polynomial-coefficient-map-kernel",
+    "lem-weil-pbc-localization-away-polynomial-quotient",
+    "def-weil-ring-localization-away"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the algebra first isomorphism theorem and rename the n+1 variables and e+1 relations by Fin. a is outside q since A is outside its inverse image p. No dimension or regularity assertion is used.",
+   "uses": [
+    "def-weil-pbc-mv-polynomial-ring"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-pbc-mv-polynomial-ring",
+  "lem-weil-pbc-finite-type-algebra-noetherian",
+  "lem-weil-pbc-polynomial-coefficient-map-kernel",
+  "lem-weil-pbc-localization-away-polynomial-quotient",
+  "def-weil-ring-localization-away"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma 00SC, (2) implies (1), clearing denominators and the polynomial presentation; checked at https://stacks.math.columbia.edu/tag/00SC"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "existence of a principal neighborhood of a prime where a locally finitely generated ideal has the same generators",
+   "results": "Service unavailable: Internal Server Error; no verdict from this service.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "localizing an ideal generated at one prime finite generation clear denominators principal open generators",
+   "results": "Ideal.fg_of_localizationSpan, IsLocalizedModule.exists_isLocalizedModule_powers_of_finitePresentation; no direct presentation theorem.",
+   "date": "2026-10-13",
+   "verdict": "no direct match"
+  },
+  {
+   "tool": "loogle",
+   "query": "topologicalKrullDimAt",
+   "results": "Unknown identifier: this is an upstream definition, not a Mathlib definition.",
+   "date": "2026-10-13",
+   "verdict": "no direct match"
+  },
+  {
+   "tool": "grep",
+   "query": "ringKrullDim_add_length_eq_ringKrullDim_of_isRegular|exists.*localization.*presentation|map_primeCompl_comap; rg on lean/ for dimension and principal-localization presentations",
+   "results": "Mathlib regular-sequence dimension formula and quotient-localization instance used in the proved dimension lemma. Sheaf.RingTheory.EquationCountLocalizePresentation presents localizations when generators already exist globally; it does not clear denominators or identify a localization of a larger quotient ideal. No theorem of the full new statements found.",
+   "date": "2026-10-13",
+   "verdict": "step-level matches used; no complete match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.LCIRegularSequenceGlobalCompleteIntersection",
+  "date": "2026-10-13",
+  "group": "A4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-lci-regular-sequence-global-complete-intersection",
+   "place": "original proof steps 5, 6 and 9 (algebraic presentation only)"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.LocalCompleteIntersectionPresentation",
+  "file": "lean/Sheaf/RingTheory/LocalCompleteIntersectionPresentation.lean",
+  "declaration": "Algebra.exists_principal_localization_presentation_of_local_generators",
+  "statement": "theorem exists_principal_localization_presentation_of_local_generators\n    (k : Type u) [Field k] (n : ℕ)\n    (I : Ideal (MvPolynomial (Fin n) k))\n    (q : Ideal (MvPolynomial (Fin n) k ⧸ I)) (hq : q.IsPrime)\n    (e : ℕ) (h : Fin e → Localization.AtPrime (q.comap\n      (Ideal.Quotient.mk I)))\n    (hgen : Ideal.map\n      (algebraMap (MvPolynomial (Fin n) k)\n        (Localization.AtPrime (q.comap (Ideal.Quotient.mk I)))) I =\n      Ideal.span (Set.range h)) :\n    ∃ a : (MvPolynomial (Fin n) k ⧸ I), a ∉ q ∧\n      ∀ b : (MvPolynomial (Fin n) k ⧸ I),\n        ∃ f : Fin (e + 1) → MvPolynomial (Fin (n + 1)) k,\n          Nonempty ((MvPolynomial (Fin (n + 1)) k ⧸\n            Ideal.span (Set.range f)) ≃ₐ[k] Localization.Away (a * b))",
+  "branch": "sheaf-dag",
+  "by": "A4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A4",
+  "result": "pass",
+  "landing": "20261012T230752-L-1906968",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A4",
+  "result": "pass",
+  "landing": "20261012T230752-L-1906968",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

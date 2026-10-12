@@ -1,0 +1,136 @@
+{
+ "id": "lem-weil-pbc-principal-neighborhood-dimension",
+ "kind": "statement",
+ "title": "Principal neighborhoods attaining local dimension",
+ "statement": "For any commutative ring S and prime q∈Spec S [def-weil-affine-spectrum], and any a∈S outside q, there exists b∈S outside q such that Spec(S_(a*b)) [def-weil-ring-localization-away] has topological Krull dimension equal to the local topological dimension at q [def-kun-topological-dimension-at-point]. No finite-type or Noetherian hypothesis is required.",
+ "stmt_deps": [
+  "def-weil-affine-spectrum",
+  "def-weil-ring-localization-away",
+  "def-kun-topological-dimension-at-point"
+ ],
+ "source": {
+  "document": "literature/stacks-project/topology.tex",
+  "place": "Topology, Definition 0055 (local dimension as the minimum of neighborhood dimensions), used in Algebra 00SC; checked at https://stacks.math.columbia.edu/tag/0055"
+ },
+ "proof": [
+  {
+   "text": "The dimensions of the open neighborhoods of q take values in well ordered WithBot ENat; ciInf_mem attains their infimum, which is topologicalKrullDimAt q.",
+   "uses": [
+    "def-kun-topological-dimension-at-point"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Choose a basic open D(b) about q within an attaining open neighborhood. D(a*b)=D(a)∩D(b) is another neighborhood. The inducing inclusion bounds its dimension above by the minimum; the defining infimum bounds it below.",
+   "uses": [
+    "lem-weil-pbc-open-subspace-dimension-monotone",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "PrimeSpectrum.localization_away_isOpenEmbedding and localization_away_comap_range identify Spec S_(a*b) homeomorphically with D(a*b). IsHomeomorph.topologicalKrullDim_eq gives the asserted equality.",
+   "uses": [
+    "lem-weil-pbc-principal-localization-open-immersion",
+    "def-weil-ring-localization-away"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-kun-topological-dimension-at-point",
+  "lem-weil-pbc-open-subspace-dimension-monotone",
+  "def-weil-affine-spectrum",
+  "lem-weil-pbc-principal-localization-open-immersion",
+  "def-weil-ring-localization-away"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/topology.tex",
+  "place": "Topology, Definition 0055 (local dimension as the minimum of neighborhood dimensions), used in Algebra 00SC; checked at https://stacks.math.columbia.edu/tag/0055"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "existence of a principal neighborhood of a prime where a locally finitely generated ideal has the same generators",
+   "results": "Service unavailable: Internal Server Error; no verdict from this service.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "localizing an ideal generated at one prime finite generation clear denominators principal open generators",
+   "results": "Ideal.fg_of_localizationSpan, IsLocalizedModule.exists_isLocalizedModule_powers_of_finitePresentation; no direct presentation theorem.",
+   "date": "2026-10-13",
+   "verdict": "no direct match"
+  },
+  {
+   "tool": "loogle",
+   "query": "topologicalKrullDimAt",
+   "results": "Unknown identifier: this is an upstream definition, not a Mathlib definition.",
+   "date": "2026-10-13",
+   "verdict": "no direct match"
+  },
+  {
+   "tool": "grep",
+   "query": "ringKrullDim_add_length_eq_ringKrullDim_of_isRegular|exists.*localization.*presentation|map_primeCompl_comap; rg on lean/ for dimension and principal-localization presentations",
+   "results": "Mathlib regular-sequence dimension formula and quotient-localization instance used in the proved dimension lemma. Sheaf.RingTheory.EquationCountLocalizePresentation presents localizations when generators already exist globally; it does not clear denominators or identify a localization of a larger quotient ideal. No theorem of the full new statements found.",
+   "date": "2026-10-13",
+   "verdict": "step-level matches used; no complete match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Krull dimension at a point is achieved on a principal open neighborhood inside any given basic open",
+   "results": "PrimeSpectrum.topologicalKrullDim_eq_ringKrullDim, topologicalKrullDim_subspace_le, IsLocalization.AtPrime.ringKrullDim_eq_height; no complete match.",
+   "date": "2026-10-13",
+   "verdict": "no direct match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.LCIRegularSequenceGlobalCompleteIntersection",
+  "date": "2026-10-13",
+  "group": "A4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-lci-regular-sequence-global-complete-intersection",
+   "place": "original proof steps 7 and 8"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.PrincipalNeighborhoodDimension",
+  "file": "lean/Sheaf/RingTheory/PrincipalNeighborhoodDimension.lean",
+  "declaration": "PrimeSpectrum.exists_mul_away_dimension_eq",
+  "statement": "theorem exists_mul_away_dimension_eq\n    (S : Type u) [CommRing S] (q : PrimeSpectrum S) (a : S) (ha : a ∉ q.asIdeal) :\n    ∃ b : S, b ∉ q.asIdeal ∧\n      topologicalKrullDim (PrimeSpectrum (Localization.Away (a * b))) =\n        topologicalKrullDimAt q",
+  "branch": "sheaf-dag",
+  "by": "A4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A4",
+  "result": "pass",
+  "landing": "20261012T230752-L-1906968",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A4",
+  "result": "pass",
+  "landing": "20261012T230752-L-1906968",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

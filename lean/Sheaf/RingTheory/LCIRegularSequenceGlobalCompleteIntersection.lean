@@ -9,8 +9,9 @@ public import Mathlib.RingTheory.Localization.AtPrime.Basic
 public import Mathlib.RingTheory.Regular.RegularSequence
 public import Mathlib.Algebra.MvPolynomial.Basic
 public import Sheaf.RingTheory.CompleteIntersectionOverField
-import Sheaf.RingTheory.PolynomialQuotientDimensionAtPointHeightDifference
-import WeilConjectures.Mathlib.Topology.KrullDimension
+import Sheaf.RingTheory.LocalCompleteIntersectionPresentation
+import Sheaf.RingTheory.RegularSequenceDimensionAtPoint
+import Sheaf.RingTheory.PrincipalNeighborhoodDimension
 
 /-!
 # Local regular sequences give global complete intersections
@@ -55,6 +56,14 @@ theorem exists_globalCompleteIntersection_of_regularSequence
     ∃ g : (MvPolynomial (Fin n) k ⧸ I),
       g ∉ q ∧ Algebra.IsGlobalCompleteIntersection k
         (Localization.Away g) := by
-  sorry
+  obtain ⟨he, hdimAt⟩ := regularSequence_dimensionAtPoint k n I q hq e h hreg hgen
+  obtain ⟨a, ha, hpres⟩ :=
+    exists_principal_localization_presentation_of_local_generators k n I q hq e h hgen
+  obtain ⟨b, hb, hdim⟩ :=
+    PrimeSpectrum.exists_mul_away_dimension_eq _ ⟨q, hq⟩ a ha
+  obtain ⟨f, hf⟩ := hpres b
+  refine ⟨a * b, (hq.mul_notMem ha hb), Or.inr ?_⟩
+  refine ⟨n + 1, e + 1, f, Nat.add_le_add_right he 1, hf, ?_⟩
+  simpa only [hdimAt, Nat.add_sub_add_right] using hdim
 
 end Algebra
