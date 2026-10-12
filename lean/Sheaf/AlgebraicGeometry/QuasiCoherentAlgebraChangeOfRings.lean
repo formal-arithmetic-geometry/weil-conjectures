@@ -12,6 +12,8 @@ public import Mathlib.Algebra.Category.ModuleCat.Sheaf.ChangeOfRings
 public import Mathlib.AlgebraicGeometry.AffineScheme
 import Sheaf.AlgebraicGeometry.Modules.QuasiCoherentCokernelImage
 import Sheaf.AlgebraicGeometry.QuasiCoherentTensorProductAffineSections
+import Sheaf.AlgebraicGeometry.ChangeOfRingsTensorRelationPresentation
+import Sheaf.AlgebraicGeometry.TensorRelationSectionQuotient
 
 /-! # Change of rings between quasi-coherent algebras
 
@@ -41,6 +43,9 @@ local notation "𝓡" S => (sheafCompose _ (forget₂ CommRingCat.{u} RingCat.{u
 set_option hygiene false in
 local notation "𝓻" a => (sheafCompose _ (forget₂ CommRingCat.{u} RingCat.{u})).map a
 
+set_option maxHeartbeats 800000 in
+-- Comparing scalar restrictions unfolds several dependent section module instances.
+set_option backward.isDefEq.respectTransparency false in
 /-- Change of rings between quasi-coherent algebras preserves quasi-coherence of the
 underlying structure-sheaf module, and the sheafification map is bijective on affine opens.
 Source: Stacks Project, Morphisms, proof of Lemma 01SB; Schemes, Lemma 01I8 (1), Section 01LA
@@ -82,6 +87,39 @@ theorem quasiCoherent_algebra_changeOfRings (Y : Scheme.{u})
       Function.Bijective
         (((PresheafOfModules.sheafificationAdjunction (𝟙 (𝓡 C.right).obj)).unit.app
           (SheafOfModules.changeOfRingsPresheaf.{u, u, u} φ.right P)).app (op W)) := by
-  sorry
+  classical
+  let P₀ := (SheafOfModules.restrictScalars (𝓻 B.hom)).obj P
+  let S := tensorObj C.toModule P₀
+  let : B.toModule.IsQuasicoherent := hB
+  let : C.toModule.IsQuasicoherent := hC
+  let : P₀.IsQuasicoherent := hP
+  have hS := quasiCoherent_tensor_product_affine_sections C.toModule P₀
+  let : S.IsQuasicoherent := hS.1
+  have hF := quasiCoherent_tensor_product_affine_sections B.toModule S
+  let : (tensorObj B.toModule S).IsQuasicoherent := hF.1
+  obtain ⟨δ, e, hrel, he⟩ := changeOfRings_tensor_relation_presentation Y B C φ P
+  have hδ := quasiCoherent_cokernel_image δ
+  have hqc : (CategoryTheory.Limits.cokernel δ).IsQuasicoherent := hδ.2.2.2.2.2.2.1
+  refine ⟨(SheafOfModules.isQuasicoherent Y.ringCatSheaf).prop_of_iso e.symm hqc, ?_⟩
+  intro W hW
+  have hsections := hδ.2.2.2.2.2.2.2.2 ⟨W, hW⟩
+  obtain ⟨l, hl⟩ := tensor_relation_section_quotient Y B C φ P δ W
+    (hrel W) (hS.2 W hW) (hF.2 W hW) hsections.2.1 hsections.2.2.1
+  let η := ((PresheafOfModules.sheafificationAdjunction (𝟙 (𝓡 C.right).obj)).unit.app
+    (SheafOfModules.changeOfRingsPresheaf.{u, u, u} φ.right P)).app (op W)
+  have hcomp : ∀ z, e.hom.val.app (op W) (η z) = l z := by
+    intro z
+    induction z using TensorProduct.induction_on with
+    | zero => simp only [map_zero]
+    | tmul c p => exact (he W c p).trans (hl c p).symm
+    | add x y hx hy => simp only [map_add, hx, hy]
+  have hbij : Function.Bijective (fun z ↦ e.hom.val.app (op W) (η z)) := by
+    simpa only [hcomp] using l.bijective
+  have heBij : Function.Bijective (e.hom.val.app (op W)) :=
+    (appLinearEquivOfIso e W).bijective
+  exact ⟨fun x y h ↦ hbij.1 (congrArg (e.hom.val.app (op W)) h),
+    fun y ↦ by
+      obtain ⟨x, hx⟩ := hbij.2 (e.hom.val.app (op W) y)
+      exact ⟨x, heBij.1 hx⟩⟩
 
 end AlgebraicGeometry.Scheme.Modules

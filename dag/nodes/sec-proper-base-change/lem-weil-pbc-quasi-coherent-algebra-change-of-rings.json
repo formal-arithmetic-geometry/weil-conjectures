@@ -33,99 +33,71 @@
  ],
  "proof": [
   {
-   "text": "Set-up: the change of rings is the $\\mathcal O_Y$-module sheafification. Write $\\mathcal O=\\mathcal O_Y$; $\\mathcal O\\to\\mathcal B$ is the structure map, $\\mathcal O\\to\\mathcal C$ is $\\varphi$ composed with it, and every $\\mathcal P(U)$ is an $\\mathcal O(U)$-module through $\\mathcal O(U)\\to\\mathcal B(U)$, $\\mathcal C(U)$ a $\\mathcal B(U)$-module through $\\varphi_U$. Let $\\mathcal T_p$ be the presheaf $U\\mapsto\\mathcal P(U)\\otimes_{\\mathcal B(U)}\\mathcal C(U)$ of $\\mathcal C$-modules (action on the right factor; restrictions induced by those of $\\mathcal P$, $\\mathcal B$, $\\mathcal C$), $\\mathcal T=\\mathcal P\\otimes_{\\mathcal B}\\mathcal C=\\mathcal T_p^\\#$ its sheafification as a presheaf of $\\mathcal C$-modules [def-pur-sheaf-tensor-product], and $\\eta:\\mathcal T_p\\to\\mathcal T$ the sheafification map, so $t_W=\\eta_W$. By [def-weil-presheaf-modules-sheafification] (for the ring $\\mathcal C$), the underlying sheaf of abelian groups of $\\mathcal T$ is the sheafification of $\\mathcal T_p$ as a presheaf of abelian groups, with $\\eta$ its sheafification map; by the same definition for the ring $\\mathcal O$, the $\\mathcal O$-module sheafification of $\\mathcal T_p$ (restricted to $\\mathcal O$) is this same abelian sheaf with the unique map of sheaves of sets $\\mathcal O\\times\\mathcal T\\to\\mathcal T$ extending the $\\mathcal O$-action on $\\mathcal T_p$. The action of $\\mathcal O$ on $\\mathcal T$ through $\\mathcal O\\to\\mathcal C$ is such an extension, so the two agree: the underlying $\\mathcal O$-module of $\\mathcal T$, with $\\eta$, is the $\\mathcal O$-module sheafification of $\\mathcal T_p$, and every $\\mathcal O$-linear map from $\\mathcal T_p$ to a sheaf of $\\mathcal O$-modules factors uniquely through $\\eta$ by an $\\mathcal O$-linear map.",
+   "text": "Put P_0 equal to P restricted to O_Y and S=C_0 tensor_O P_0. Apply the tensor-product affine-sections theorem first to C_0,P_0 and then to B_0,S. Thus S and F=B_0 tensor_O S are quasi-coherent and both section tensor maps are bijective on affine opens.",
    "uses": [
-    "def-pur-sheaf-tensor-product",
-    "def-weil-presheaf-modules-sheafification",
-    "def-weil-sheaf-of-modules-category"
+    "lem-weil-pbc-quasi-coherent-tensor-product-affine-sections"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sheaves.tex",
-    "place": "Sheaves, Lemma 0089 (sheaves-lemma-sheafification-presheaf-modules) and the change of rings of Section sheaves-section-sheafification-presheaves-modules"
+    "place": "Sheaves, Lemma 0089 (sheaves-lemma-sheafification-presheaf-modules)"
    }
   },
   {
-   "text": "The tensor product over $\\mathcal O$ and its two $\\mathcal B$-actions. Let $\\mathcal S=\\mathcal P\\otimes_{\\mathcal O}\\mathcal C$ [def-pur-sheaf-tensor-product], the $\\mathcal O$-module sheafification of $\\mathcal S_p:U\\mapsto\\mathcal P(U)\\otimes_{\\mathcal O(U)}\\mathcal C(U)$, with sheafification map $t^{\\mathcal S}$. Since $\\mathcal P$ and $\\mathcal C$ are quasi-coherent $\\mathcal O$-modules, [lem-weil-pbc-quasi-coherent-tensor-product-affine-sections] gives: $\\mathcal S$ is quasi-coherent and $t^{\\mathcal S}_W$ is bijective for every affine open $W$. The presheaf $\\mathcal S_p$ is a presheaf of $\\mathcal B$-modules in two ways: $b\\cdot_1(p\\otimes c)=bp\\otimes c$ and $b\\cdot_2(p\\otimes c)=p\\otimes\\varphi(b)c$ (well defined because $(b,p,c)\\mapsto bp\\otimes c$ and $(b,p,c)\\mapsto p\\otimes\\varphi(b)c$ are $\\mathcal O(U)$-balanced in $(p,c)$, $\\mathcal O(U)$ acting on $\\mathcal P(U)$ and $\\mathcal C(U)$ through $\\mathcal B(U)$ and $\\varphi_U$, which is a map of $\\mathcal O(U)$-algebras; both commute with restrictions); restricted along $\\mathcal O\\to\\mathcal B$ each gives back the $\\mathcal O$-module structure of $\\mathcal S_p$. By [def-weil-presheaf-modules-sheafification] (for the ring $\\mathcal B$) the $\\mathcal B$-module sheafification of $(\\mathcal S_p,\\cdot_i)$ is the abelian sheafification $\\mathcal S$ with an action $\\cdot_i$ of $\\mathcal B$ for which $t^{\\mathcal S}$ is $\\mathcal B$-linear; restricted along $\\mathcal O\\to\\mathcal B$ it extends the $\\mathcal O$-action of $\\mathcal S_p$, so by the uniqueness in the same definition it is the $\\mathcal O$-module structure of $\\mathcal S$. Moreover for every sheaf of $\\mathcal B$-modules $\\mathcal H$ and $\\mathcal B$-linear $g:(\\mathcal S_p,\\cdot_i)\\to\\mathcal H$, the unique $\\mathcal O$-linear $\\bar g:\\mathcal S\\to\\mathcal H$ with $\\bar g\\circ t^{\\mathcal S}=g$ is $\\mathcal B$-linear for $\\cdot_i$ (the $\\mathcal B$-linear factorization exists and is $\\mathcal O$-linear, hence equals $\\bar g$).",
+   "text": "The tensor relation presentation supplies δ:F->S, the isomorphism e from underlying change of rings to coker δ, and the pure tensor relation and comparison formulas.",
    "uses": [
-    "def-pur-sheaf-tensor-product",
-    "lem-weil-pbc-quasi-coherent-tensor-product-affine-sections",
-    "def-weil-presheaf-modules-sheafification"
+    "lem-weil-pbc-change-of-rings-tensor-relation-presentation"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/modules.tex",
-    "place": "Modules, Section 01CA (modules-section-tensor-product); Schemes, Lemma 01I8 (schemes-lemma-widetilde-constructions) item (1) and Section 01LA, through the cited node"
+    "document": "literature/stacks-project/sheaves.tex",
+    "place": "Sheaves, Lemma 0089 (sheaves-lemma-sheafification-presheaf-modules)"
    }
   },
   {
-   "text": "The relation map. Let $\\mathcal F=\\mathcal B\\otimes_{\\mathcal O}\\mathcal S$ with sheafification map $t^{\\mathcal F}$; $\\mathcal B$ and $\\mathcal S$ (Step 2) are quasi-coherent, so by [lem-weil-pbc-quasi-coherent-tensor-product-affine-sections] $\\mathcal F$ is quasi-coherent and $t^{\\mathcal F}_W:\\mathcal B(W)\\otimes_{\\mathcal O(W)}\\mathcal S(W)\\to\\mathcal F(W)$ is bijective for affine $W$. For $i=1,2$ the maps $\\mathcal B(U)\\otimes_{\\mathcal O(U)}\\mathcal S(U)\\to\\mathcal S(U)$, $b\\otimes s\\mapsto b\\cdot_is$, are well defined ($\\cdot_i$ restricts to the $\\mathcal O$-structure, Step 2), $\\mathcal O(U)$-linear and compatible with restrictions; by the universal property of [def-weil-presheaf-modules-sheafification] they induce $\\mathcal O$-linear $a_i:\\mathcal F\\to\\mathcal S$ with $a_i(t^{\\mathcal F}(b\\otimes s))=b\\cdot_is$. Put $\\delta=a_1-a_2:\\mathcal F\\to\\mathcal S$, a morphism of $\\mathcal O$-modules between quasi-coherent $\\mathcal O$-modules.",
+   "text": "Apply quasiCoherent_cokernel_image to δ: its cokernel is quasi-coherent; on every affine open its projection is surjective with kernel range δ_W. Transfer quasi-coherence to change of rings along e inverse.",
    "uses": [
-    "lem-weil-pbc-quasi-coherent-tensor-product-affine-sections",
-    "def-weil-presheaf-modules-sheafification"
+    "lem-weil-pbc-quasi-coherent-module-cokernel-image",
+    "pqf-def-coherent"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/morphisms.tex",
-    "place": "Morphisms, proof of Lemma 01SB (morphisms-lemma-affine-equivalence-modules): 'quasi-coherence is preserved by ... change of rings' (argument written by the agent)"
+    "document": "literature/stacks-project/sheaves.tex",
+    "place": "Sheaves, Lemma 0089 (sheaves-lemma-sheafification-presheaf-modules)"
    }
   },
   {
-   "text": "The cokernel. Let $q:\\mathcal S\\to\\mathcal T'=\\operatorname{Coker}\\delta$ be the cokernel of $\\delta$ in $\\Mod(\\mathcal O)$. By [lem-weil-pbc-quasi-coherent-module-cokernel-image] (2), (3): $\\mathcal T'$ is quasi-coherent, $q$ is an epimorphism with $q\\circ\\delta=0$, and for every affine open $W$ the map $q_W:\\mathcal S(W)\\to\\mathcal T'(W)$ is surjective with kernel $\\delta_W(\\mathcal F(W))$.",
+   "text": "For affine W, the two section tensor bijections and the section cokernel formula meet exactly the hypotheses of tensor_relation_section_quotient. Obtain the additive equivalence λ with λ(c tensor_B p)=q_W(τ(c,p)).",
    "uses": [
-    "lem-weil-pbc-quasi-coherent-module-cokernel-image"
+    "lem-weil-pbc-tensor-relation-section-quotient"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/schemes.tex",
-    "place": "Schemes, Lemma 01IB (schemes-lemma-equivalence-quasi-coherent) and Section 01LA (schemes-section-quasi-coherent), through the cited node"
+    "document": "literature/stacks-project/sheaves.tex",
+    "place": "Sheaves, Lemma 0089 (sheaves-lemma-sheafification-presheaf-modules)"
    }
   },
   {
-   "text": "Sections of $\\mathcal T'$ over an affine open. Algebra fact (used for any open $U$): for a ring map $R\\to B_0$, a $B_0$-module $P_0$ and a $B_0$-algebra $\\varphi_0:B_0\\to C_0$, the map $\\pi:P_0\\otimes_RC_0\\to P_0\\otimes_{B_0}C_0$, $p\\otimes c\\mapsto p\\otimes c$, is surjective with kernel the $R$-submodule $N$ spanned by $b\\cdot_1x-b\\cdot_2x$ ($b\\in B_0$, $x\\in P_0\\otimes_RC_0$), equivalently by $bp\\otimes c-p\\otimes\\varphi_0(b)c$. Indeed $\\pi$ kills $N$; and $(p,c)\\mapsto$ class of $p\\otimes c$ in $(P_0\\otimes_RC_0)/N$ is biadditive and $B_0$-balanced (its $R$-balancedness is part of this since $R$ acts through $B_0$), so it induces $P_0\\otimes_{B_0}C_0\\to(P_0\\otimes_RC_0)/N$, inverse to the map induced by $\\pi$ on generators. Now let $W$ be affine, $R=\\mathcal O(W)$, $B_0=\\mathcal B(W)$, $C_0=\\mathcal C(W)$, $P_0=\\mathcal P(W)$. Every element of $\\mathcal F(W)$ is $t^{\\mathcal F}_W(\\sum_kb_k\\otimes s_k)$ and every $s_k=t^{\\mathcal S}_W(x_k)$ (Steps 2, 3), so, as $t^{\\mathcal S}$ is $\\mathcal B$-linear for $\\cdot_1,\\cdot_2$ (Step 2), $\\delta_W(\\mathcal F(W))=\\{\\sum_k t^{\\mathcal S}_W(b_k\\cdot_1x_k-b_k\\cdot_2x_k)\\}=t^{\\mathcal S}_W(N)$. By Step 4 and the algebra fact, $q_W\\circ t^{\\mathcal S}_W$ induces a bijection $\\lambda_W:P_0\\otimes_{B_0}C_0\\to\\mathcal T'(W)$, $p\\otimes c\\mapsto q_W(t^{\\mathcal S}_W(p\\otimes c))$.",
+   "text": "The comparison formula for e and the pure tensor formula for λ give e_W(η_W(z))=λ(z) by TensorProduct.induction_on (zero, pure tensor, add). Since λ and e_W are bijective, η_W is injective (apply injectivity of the composite) and surjective (lift e_W(y) through the composite and cancel e_W). This is the original affine-section conclusion.",
    "uses": [],
    "elementary": true,
    "source": {
-    "document": "literature/stacks-project/schemes.tex",
-    "place": "Schemes, Lemma 01I8 (schemes-lemma-widetilde-constructions); the algebra fact is the presentation of a tensor product over B_0 as a quotient of the one over R (written out by the agent)"
-   }
-  },
-  {
-   "text": "Comparison maps. (a) $\\rho:\\mathcal T\\to\\mathcal T'$. For every open $U$ the map $\\mathcal S_p(U)\\to\\mathcal T'(U)$, $x\\mapsto q_U(t^{\\mathcal S}_U(x))$, kills $b\\cdot_1x-b\\cdot_2x$, because $t^{\\mathcal S}(b\\cdot_1x-b\\cdot_2x)=b\\cdot_1t^{\\mathcal S}(x)-b\\cdot_2t^{\\mathcal S}(x)=\\delta(t^{\\mathcal F}(b\\otimes t^{\\mathcal S}(x)))$ (Steps 2, 3) and $q\\circ\\delta=0$ (Step 4); by the algebra fact of Step 5 it factors through $\\pi_U:\\mathcal S_p(U)\\to\\mathcal T_p(U)$, giving an $\\mathcal O(U)$-linear map compatible with restrictions, $p\\otimes c\\mapsto q_U(t^{\\mathcal S}_U(p\\otimes c))$. By Step 1 there is a unique $\\mathcal O$-linear $\\rho$ with $\\rho\\circ\\eta\\circ\\pi=q\\circ t^{\\mathcal S}$. (b) $\\sigma:\\mathcal S\\to\\mathcal T$. The map $\\eta\\circ\\pi:\\mathcal S_p\\to\\mathcal T$ is $\\mathcal O$-linear and, for each $i$, $\\mathcal B$-linear for $\\cdot_i$, where $\\mathcal T$ is a $\\mathcal B$-module through $\\varphi$ (in $\\mathcal T_p(U)$, $bp\\otimes c=p\\otimes\\varphi(b)c=b(p\\otimes c)$). By Step 2 the induced $\\mathcal O$-linear $\\sigma:\\mathcal S\\to\\mathcal T$ with $\\sigma\\circ t^{\\mathcal S}=\\eta\\circ\\pi$ is $\\mathcal B$-linear for $\\cdot_1$ and for $\\cdot_2$. Hence $\\sigma(\\delta(t^{\\mathcal F}(b\\otimes s)))=\\sigma(b\\cdot_1s)-\\sigma(b\\cdot_2s)=b\\sigma(s)-b\\sigma(s)=0$, so $\\sigma\\circ\\delta\\circ t^{\\mathcal F}=0$ and, by uniqueness in the universal property of sheafification [def-weil-presheaf-modules-sheafification], $\\sigma\\circ\\delta=0$. As $q$ is the cokernel of $\\delta$ in $\\Mod(\\mathcal O)$ (Step 4) [def-weil-sheaf-of-modules-category], $\\sigma=\\bar\\sigma\\circ q$ for a unique $\\mathcal O$-linear $\\bar\\sigma:\\mathcal T'\\to\\mathcal T$. (c) Inverse. $\\rho\\bar\\sigma q\\,t^{\\mathcal S}=\\rho\\sigma t^{\\mathcal S}=\\rho\\eta\\pi=q\\,t^{\\mathcal S}$, so $\\rho\\bar\\sigma q=q$ by uniqueness in the universal property of $t^{\\mathcal S}$, and $\\rho\\bar\\sigma=\\mathrm{id}$ because $q$ is an epimorphism. $\\bar\\sigma\\rho\\eta\\pi=\\bar\\sigma q\\,t^{\\mathcal S}=\\sigma t^{\\mathcal S}=\\eta\\pi$; each $\\pi_U$ is surjective, so $\\bar\\sigma\\rho\\eta=\\eta$ and $\\bar\\sigma\\rho=\\mathrm{id}$ by Step 1. So $\\rho$ is an isomorphism of $\\mathcal O$-modules.",
-   "uses": [
-    "def-weil-presheaf-modules-sheafification",
-    "def-weil-sheaf-of-modules-category"
-   ],
-   "elementary": false,
-   "source": {
     "document": "literature/stacks-project/sheaves.tex",
-    "place": "Sheaves, Lemma 0089 (sheaves-lemma-sheafification-presheaf-modules), universal property (argument written by the agent)"
-   }
-  },
-  {
-   "text": "Conclusion. $\\mathcal T'$ is quasi-coherent (Step 4) and $\\rho:\\mathcal T\\to\\mathcal T'$ is an isomorphism of $\\mathcal O$-modules (Step 6); if $\\mathcal T'|_U\\cong\\widetilde M$ on an affine open $U=\\operatorname{Spec}A$, then $\\mathcal T|_U\\cong\\widetilde M$, so the underlying $\\mathcal O_Y$-module of $\\mathcal T=\\mathcal P\\otimes_{\\mathcal B}\\mathcal C$ is quasi-coherent by [pqf-def-coherent]. For an affine open $W$, $\\rho_W\\circ t_W=\\rho_W\\circ\\eta_W$ sends $p\\otimes c$ to $q_W(t^{\\mathcal S}_W(p\\otimes c))$ (Step 6 (a)), i.e. $\\rho_W\\circ t_W=\\lambda_W$, which is bijective (Step 5); as $\\rho_W$ is bijective, so is $t_W$.",
-   "uses": [
-    "pqf-def-coherent"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/morphisms.tex",
-    "place": "Morphisms, proof of Lemma 01SB (morphisms-lemma-affine-equivalence-modules)"
+    "place": "Sheaves, Lemma 0089 (sheaves-lemma-sheafification-presheaf-modules)"
    }
   }
  ],
  "proof_deps": [
-  "def-pur-sheaf-tensor-product",
-  "def-weil-presheaf-modules-sheafification",
-  "def-weil-sheaf-of-modules-category",
-  "lem-weil-pbc-quasi-coherent-tensor-product-affine-sections",
+  "lem-weil-pbc-change-of-rings-tensor-relation-presentation",
   "lem-weil-pbc-quasi-coherent-module-cokernel-image",
+  "lem-weil-pbc-quasi-coherent-tensor-product-affine-sections",
+  "lem-weil-pbc-tensor-relation-section-quotient",
   "pqf-def-coherent"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/morphisms.tex",
-  "place": "Morphisms, proof of Lemma 01SB (morphisms-lemma-affine-equivalence-modules) asserts the statement without proof; the argument (change of rings as the cokernel of the two B-actions on P (x)_O C, then Schemes 01I8 / Section 01LA through the cited nodes) is written by the agent"
+  "place": "Morphisms, proof of Lemma 01SB (morphisms-lemma-affine-equivalence-modules), original tensor relation route retained; A2 made steps 1-3 and 6 into a presentation lemma, step 5 into a conditional section quotient lemma, and proved the combination in Lean"
  },
  "mathlib_searches": [
   {
@@ -218,5 +190,15 @@
   "group": "K1",
   "result": "fix",
   "note": "Y scheme; B,C quasi-coherent O_Y-algebras as Y.CommAlgebraSheaf + toModule.IsQuasicoherent (fixed from bare b : Y.sheaf ⟶ B); φ Under-morphism; P B-module with qc restriction along B.hom; changeOfRings φ.right P (scalar-first tensor, symmetric to node's); conclusion qc along C.hom = B.hom ≫ φ.right; t_W = sheafificationAdjunction unit at op W, all affine W"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A2",
+  "result": "pass",
+  "landing": "20261012T144050-L-2087794",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
