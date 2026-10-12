@@ -7701,3 +7701,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 13:17 L: returned deliver/T1/Sheaf.AlgebraicGeometry.GluedEffectiveModelChartsPullback (reviewer RETURN: (reviewer X-da256, head da2560c9b) E1/E2 (review point 4): glued_model_chart_pullbacks remains false with := by sorry. F)
 - 13:17 L: merged deliver/R3/Sheaf.AlgebraicGeometry.AffineEtaleBaseChangeGeometry (stage 3; reviewer PASS; first push; landing 20261012T131745-L-1392371 (interface); batch 20261012T120425; modules 3; new nodes 2)
 - 13:19 L: merged deliver/S1/Sheaf.Paper.ZariskiEtalePushedResolution (stage 3; reviewer PASS; first push; landing 20261012T131917-L-1402366 (interface); batch 20261012T120425; modules 3; new nodes 2)
+- 13:20 L: merged deliver/S3/Sheaf.AlgebraicGeometry.AffineEtaleCartesianSheafAdjunction (stage 3; reviewer PASS; first push; landing 20261012T132034-L-1411087 (interface); batch 20261012T120425; modules 2; new nodes 1)
