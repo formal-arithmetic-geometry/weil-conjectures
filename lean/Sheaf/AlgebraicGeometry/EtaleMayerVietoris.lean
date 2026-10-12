@@ -7,12 +7,8 @@ module
 
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
 public import Mathlib.CategoryTheory.Abelian.RightDerived
-import Sheaf.AlgebraicGeometry.EtaleCohomologyPullbackFunctorial
-import Sheaf.AlgebraicGeometry.EtaleModuleEnoughInjectives
-import Sheaf.CategoryTheory.InjectiveSheafCechAcyclic
-import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
-import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
-import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
+import Sheaf.AlgebraicGeometry.EtaleMayerVietorisComparisons
+import Sheaf.AlgebraicGeometry.EtaleMayerVietorisExact
 
 /-!
 # Mayer-Vietoris for étale cohomology
@@ -167,6 +163,30 @@ theorem etale_mayerVietoris (X : Scheme.{u}) (U V : X.Opens) (hcover : U ⊔ V =
                 ((upperStar AddCommGrpCat.{u + 1} (U ⊓ V).ι).obj F)))) →
           Subsingleton ((cohomology AddCommGrpCat.{u + 1} X n).obj
             ((DerivedCategory.singleFunctor _ 0).obj F))) := by
-  sorry
+  obtain ⟨⟨eX⟩, ⟨eU⟩, ⟨eV⟩, ⟨eUV⟩⟩ := etale_mayerVietoris_comparisons X U V
+  obtain ⟨δ, hδ⟩ := etale_mayerVietoris_exact X U V hcover
+  refine ⟨⟨eX⟩, ⟨eU⟩, ⟨eV⟩, ⟨eUV⟩, δ, ?_⟩
+  intro F
+  obtain ⟨hinj, hex⟩ := hδ F
+  refine ⟨hinj, hex, ?_⟩
+  intro n hU hV hprev
+  have hU' := (Equiv.subsingleton_congr
+    ((eU n).app F).addCommGroupIsoToAddEquiv.toEquiv).mpr hU
+  have hV' := (Equiv.subsingleton_congr
+    ((eV n).app F).addCommGroupIsoToAddEquiv.toEquiv).mpr hV
+  have hX : Subsingleton (((sheafToPresheaf X.smallEtaleTopology AddCommGrpCat.{u + 1} ⋙
+      (evaluation _ _).obj (op (Scheme.Etale.mk (𝟙 X)))).rightDerived n).obj F) := by
+    rcases hprev with rfl | ⟨m, rfl, hUV⟩
+    · exact hinj.subsingleton
+    · have hUV' := (Equiv.subsingleton_congr
+        ((eUV m).app F).addCommGroupIsoToAddEquiv.toEquiv).mpr hUV
+      refine ⟨fun x y => ?_⟩
+      have hx := (hex m).2.2 x
+      have hy := (hex m).2.2 y
+      obtain ⟨a, ha⟩ := hx.mp (Subsingleton.elim _ _)
+      obtain ⟨b, hb⟩ := hy.mp (Subsingleton.elim _ _)
+      exact ha.symm.trans ((congrArg ((δ m).app F) (Subsingleton.elim a b)).trans hb)
+  exact (Equiv.subsingleton_congr
+    ((eX n).app F).addCommGroupIsoToAddEquiv.toEquiv).mp hX
 
 end AlgebraicGeometry.Etale

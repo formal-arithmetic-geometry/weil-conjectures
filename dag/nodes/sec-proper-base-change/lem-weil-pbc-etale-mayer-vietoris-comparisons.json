@@ -1,0 +1,140 @@
+{
+ "id": "lem-weil-pbc-etale-mayer-vietoris-comparisons",
+ "kind": "statement",
+ "title": "Right derived evaluation compared with derived sections on etale opens",
+ "statement": "Let X be a scheme [def-pc-scheme] and U,V any opens. For every nonnegative degree n, right derived evaluation of abelian sheaves on X_et [def-weil-pbc-abelian-etale-sheaves] at id_X, U, V and U intersection V is naturally isomorphic to derived global sections [def-weil-pbc-etale-cohomology] on X, U, V and U intersection V, respectively, with the coefficient sheaf restricted by inverse image [def-weil-pbc-inverse-image] in the latter three cases. No cover hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Lemma Tag 03F3 (2), with (1) for injective restriction; comparison of resolution cohomology with total derived global sections"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-abelian-etale-sheaves",
+  "def-weil-pbc-etale-cohomology",
+  "def-weil-pbc-inverse-image"
+ ],
+ "proof": [
+  {
+   "text": "Choose bounded below injective resolutions of abelian sheaves on the small etale site. Right derived evaluation at an etale object is homology of its evaluated resolution. Bounded below complexes of injectives are K-injective, so the total right derived global sections of a sheaf in degree zero is computed on the same resolutions.",
+   "uses": [
+    "lem-weil-pbc-module-sheaves-enough-injectives",
+    "lem-weil-pbc-left-exact-injective-resolution-degree-zero",
+    "lem-weil-pbc-dplus-injective-representative",
+    "def-weil-pbc-etale-cohomology"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For each W in {U,V,U intersection V}, inverse image along its open immersion is restriction to the localized etale site and preserves injectives (it is right adjoint to exact extension by zero). Thus restriction of a chosen injective resolution is an injective resolution on W. The restriction identification identifies its global sections degreewise with evaluation of the original resolution at W.",
+   "uses": [
+    "lem-weil-pbc-etale-inverse-image-restriction",
+    "lem-weil-pbc-etale-restriction-injectives"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Taking homology yields the three open comparison isomorphisms. For X no restriction is needed: evaluation at the identity etale object is global sections. The maps between injective resolutions and their homotopy uniqueness give naturality in the coefficient sheaf, as required for functor isomorphisms. Apply this independently in every nonnegative degree. The construction does not use a covering condition on U and V.",
+   "uses": [
+    "def-sp-injective-resolutions",
+    "def-weil-pbc-global-sections-functor"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-module-sheaves-enough-injectives",
+  "lem-weil-pbc-left-exact-injective-resolution-degree-zero",
+  "lem-weil-pbc-dplus-injective-representative",
+  "def-weil-pbc-etale-cohomology",
+  "lem-weil-pbc-etale-inverse-image-restriction",
+  "lem-weil-pbc-etale-restriction-injectives",
+  "def-sp-injective-resolutions",
+  "def-weil-pbc-global-sections-functor"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Lemma Tag 03F3 (2), with (1) for injective restriction; comparison of resolution cohomology with total derived global sections",
+  "note": "Second reader separated the resolution comparison from the raw exact sequence; homotopy uniqueness gives coefficient naturality."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Derived evaluation on an open subscheme is naturally isomorphic to derived global sections of the restricted etale sheaf",
+   "results": "AlgebraicGeometry.Scheme.restrictFunctorΓ, AlgebraicGeometry.Scheme.Modules.restrictStalkNatIso, AlgebraicGeometry.Scheme.Opens.topIso, AlgebraicGeometry.Scheme.restrictFunctorΓ_inv_app, AlgebraicGeometry.Scheme.ofRestrict_app, AlgebraicGeometry.Scheme.ofRestrict_toLRSHom_c_app, AlgebraicGeometry.Scheme.restrictFunctorΓ_hom_app, AlgebraicGeometry.Scheme.Opens.topIso_hom",
+   "date": "2026-10-12",
+   "verdict": "No exact statement: the site Mayer-Vietoris theorem is for Ext-based H-prime, not right derived evaluation or its comparison with total derived global sections. Graded, Zariski and pro-etale results in the upstream source have different hypotheses and functors."
+  },
+  {
+   "tool": "loogle",
+   "query": "Functor.rightDerived, \"iso\"",
+   "results": "loogle: unknown identifier 'Functor.rightDerived'",
+   "date": "2026-10-12",
+   "verdict": "No exact statement: the site Mayer-Vietoris theorem is for Ext-based H-prime, not right derived evaluation or its comparison with total derived global sections. Graded, Zariski and pro-etale results in the upstream source have different hypotheses and functors."
+  },
+  {
+   "tool": "grep",
+   "query": "mayer.?vietoris|cohomology.*open|rightDerived.*[Ii]so",
+   "results": "Mathlib/CategoryTheory/Functor/Derived/RightDerived.lean, Mathlib/CategoryTheory/Functor/Derived/RightDerived.lean, Mathlib/CategoryTheory/Functor/Derived/RightDerived.lean, Mathlib/CategoryTheory/Functor/Derived/RightDerived.lean, Mathlib/CategoryTheory/Functor/Derived/RightDerived.lean, Mathlib/CategoryTheory/Functor/Derived/PointwiseRightDerived.lean, Mathlib/CategoryTheory/Functor/Derived/PointwiseRightDerived.lean, Mathlib/CategoryTheory/Localization/DerivabilityStructure/Derives.lean",
+   "date": "2026-10-12",
+   "verdict": "No exact statement: the site Mayer-Vietoris theorem is for Ext-based H-prime, not right derived evaluation or its comparison with total derived global sections. Graded, Zariski and pro-etale results in the upstream source have different hypotheses and functors."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The right derived functor of evaluating an etale sheaf on an open subscheme agrees with cohomology of the pullback sheaf",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "unavailable": true
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleMayerVietoris",
+  "date": "2026-10-12",
+  "group": "U1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-etale-mayer-vietoris",
+   "place": "Proof step 6",
+   "via": []
+  },
+  "same_as": null
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleMayerVietorisComparisons",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleMayerVietorisComparisons.lean",
+  "declaration": "AlgebraicGeometry.Etale.etale_mayerVietoris_comparisons",
+  "statement": "theorem etale_mayerVietoris_comparisons (X : Scheme.{u}) (U V : X.Opens) :\n    Nonempty (∀ n : ℕ, (sheafToPresheaf X.smallEtaleTopology AddCommGrpCat.{u + 1} ⋙\n        (evaluation _ _).obj (op (Scheme.Etale.mk (𝟙 X)))).rightDerived n ≅\n      (DerivedCategory.singleFunctor _ 0 ⋙ cohomology AddCommGrpCat.{u + 1} X n)) ∧\n    Nonempty (∀ n : ℕ, (sheafToPresheaf X.smallEtaleTopology AddCommGrpCat.{u + 1} ⋙\n        (evaluation _ _).obj (op (Scheme.Etale.mk U.ι))).rightDerived n ≅\n      (upperStar AddCommGrpCat.{u + 1} U.ι ⋙ DerivedCategory.singleFunctor _ 0 ⋙\n        cohomology AddCommGrpCat.{u + 1} U.toScheme n)) ∧\n    Nonempty (∀ n : ℕ, (sheafToPresheaf X.smallEtaleTopology AddCommGrpCat.{u + 1} ⋙\n        (evaluation _ _).obj (op (Scheme.Etale.mk V.ι))).rightDerived n ≅\n      (upperStar AddCommGrpCat.{u + 1} V.ι ⋙ DerivedCategory.singleFunctor _ 0 ⋙\n        cohomology AddCommGrpCat.{u + 1} V.toScheme n)) ∧\n    Nonempty (∀ n : ℕ, (sheafToPresheaf X.smallEtaleTopology AddCommGrpCat.{u + 1} ⋙\n        (evaluation _ _).obj (op (Scheme.Etale.mk (U ⊓ V).ι))).rightDerived n ≅\n      (upperStar AddCommGrpCat.{u + 1} (U ⊓ V).ι ⋙ DerivedCategory.singleFunctor _ 0 ⋙\n        cohomology AddCommGrpCat.{u + 1} (U ⊓ V).toScheme n))",
+  "branch": "sheaf-dag",
+  "by": "U1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U1",
+  "result": "pass",
+  "landing": "20261012T044756-L-2041165",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U1",
+  "result": "pass",
+  "landing": "20261012T044756-L-2041165",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
