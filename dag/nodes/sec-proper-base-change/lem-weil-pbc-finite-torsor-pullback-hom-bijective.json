@@ -1,0 +1,126 @@
+{
+ "id": "lem-weil-pbc-finite-torsor-pullback-hom-bijective",
+ "kind": "statement",
+ "title": "Bijection on Hom sets of finite constant torsor sheaves",
+ "statement": "Let $i:Y_0\\to Y$ be a morphism of schemes [def-weil-pbc-scheme-conventions] such that its base-change functor on finite étale schemes [def-weil-pbc-finite-etale-category] is an equivalence. Let $M$ be a finite abelian group and $T_1,T_2$ torsors [def-sc-gm-torsor] under the constant sheaf $\\underline M$ [def-weil-pbc-constant-sheaf] on $Y$. Put $L=i^{-1}$ on sheaves of sets [def-weil-pbc-inverse-image]. Then $f\\mapsto L(f)$ is a bijection from $\\operatorname{Hom}(T_1.\\mathrm{sheaf},T_2.\\mathrm{sheaf})$ to $\\operatorname{Hom}(L(T_1.\\mathrm{sheaf}),L(T_2.\\mathrm{sheaf}))$. The maps need not preserve the torsor actions.",
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-pbc-inverse-image",
+  "def-sc-gm-torsor",
+  "def-weil-pbc-finite-etale-category"
+ ],
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 0A5G, final paragraph; Tag 03RV for finite representability. Read online at https://stacks.math.columbia.edu/tag/0A5G and https://stacks.math.columbia.edu/tag/03RV."
+ },
+ "proof": [
+  {
+   "text": "Prove local constancy using torsor_isConstant_over_of_section for an arbitrary constant AddCommGrp-valued sheaf G, specializing G to the constant coefficient sheaf: on an étale object with a section, the action gives an isomorphism with the constant coefficient sheaf. Local nonemptiness gives a trivializing étale cover. For each geometric point, choose a section over one object in the point fiber; every germ becomes its translate after passage to a common refinement. Restrict to the open fiber on which the translating locally constant function equals a fixed m. This yields a surjection from the finite group M onto the stalk, hence finite stalks. Apply finiteLocallyConstant_sets_representable to obtain finite étale representatives of the underlying set sheaves, and lift the presheaf isomorphisms through fullyFaithfulSheafToPresheaf. The local-constancy lemma generalizes the source-library isConstant_over_of_section by replacing its specified constantSheaf M with an arbitrary G and an IsConstant instance. The finite-stalk proof follows EtaleTorsorDescent. Importing that module would close the cycle through HenselianFiniteEtale and this item, so it is not imported.",
+   "uses": [
+    "def-sc-gm-torsor",
+    "lem-weil-pbc-finite-locally-constant-sets-representability"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Let I and I₀ include finite étale objects into their small étale sites and R=I⋙uliftYoneda, R₀=I₀⋙uliftYoneda. Apply nonempty_inverseImage_representable_iso to the constructed set-sheaf adjunction and whisker by I, obtaining c:R⋙L ≅ F⋙R₀. Since F is an equivalence and R₀ is fully faithful, c transports fullness and faithfulness to R⋙L. The inclusions are fully faithful by MorphismProperty.Comma.fullyFaithfulChangeProp; sheaf Yoneda is fully faithful by GrothendieckTopology.fullyFaithfulUliftYoneda.",
+   "uses": [
+    "lem-galois-inverse-image-representable",
+    "def-weil-pbc-finite-etale-category"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For represented objects P,Q, injectivity of L.map follows by applying faithfulness of R⋙L to R.preimage f and R.preimage g, then mapping back by R. Surjectivity lifts k using R.map ((R⋙L).preimage k). Finally conjugate the source and target maps by d₁,d₂ and their images under L; the inverse identities cancel these conjugations, giving the claimed bijection. These are the two constructor branches of the Lean proof.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-sc-gm-torsor",
+  "lem-weil-pbc-finite-locally-constant-sets-representability",
+  "lem-galois-inverse-image-representable",
+  "def-weil-pbc-finite-etale-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 0A5G final paragraph and Tag 03RV; X2 repair generalizes local triviality to any constant group sheaf and uses finite stalks and lower-level set-sheaf representability. EtaleTorsorDescent cannot be imported because it reaches this item."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "faithful inverse image reflects equivariance for torsors under constant sheaves",
+   "results": "Internal Server Error; service unavailable.",
+   "verdict": "unavailable",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Inverse image is bijective on morphisms between finite locally constant torsor sheaves when finite etale base change is fully faithful",
+   "results": "SheafOfModules.bijective_pushforwardSections, Point.toPresheafFiber_map_bijective, and condensed locally constant functors; none has this statement.",
+   "verdict": "no usable match",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "grep",
+   "query": "torsor|Torsor|equivariant; Mathlib Sites and AlgebraicGeometry, and project torsor modules",
+   "results": "Mathlib algebraic torsors do not concern sheaf torsors. Project EtaleTorsorDescent supplies finite representability; Sites.Torsor supplies the torsor isomorphism structure. No existing Hom-bijection or unit-equivariance reflection theorem. Blueprint searches torsor faithful, torsor representability, finite torsor pullback returned no matches; equivariance returned unrelated Weil/Frobenius nodes.",
+   "verdict": "no exact match",
+   "date": "2026-10-12"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FiniteEtaleTorsorReflection",
+  "date": "2026-10-12",
+  "group": "X2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-h1-torsor-comparison",
+   "place": "proof step 2: full faithfulness lifts equivariant isomorphisms; Bijection on Hom sets of finite constant torsor sheaves",
+   "via": [
+    "lem-weil-pbc-finite-etale-torsor-reflection",
+    "lem-weil-pbc-finite-etale-equivalence-h1"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.FiniteTorsorPullbackHomBijective",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteTorsorPullbackHomBijective.lean",
+  "declaration": "AlgebraicGeometry.Etale.finite_torsor_pullback_hom_bijective",
+  "statement": "theorem finite_torsor_pullback_hom_bijective\n    [(@IsFinite ⊓ @Etale : MorphismProperty Scheme.{u}).IsStableUnderBaseChange]\n    {Y Y₀ : Scheme.{u}} (i : Y₀ ⟶ Y)\n    (hFE : (MorphismProperty.Over.pullback (@IsFinite ⊓ @Etale) ⊤ i).IsEquivalence)\n    (M : Type (u + 1)) [AddCommGroup M] [Finite M]\n    (T₁ T₂ : Sheaf.Torsor\n      ((constantSheaf Y.smallEtaleTopology AddCommGrpCat.{u + 1}).obj (AddCommGrpCat.of M))) :\n    Function.Bijective\n      (fun f : T₁.sheaf ⟶ T₂.sheaf ↦ (Scheme.etaleSetPullback i).map f)",
+  "branch": "sheaf-dag",
+  "by": "X2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X2",
+  "result": "pass",
+  "landing": "20261012T112854-L-773316",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X2",
+  "result": "pass",
+  "landing": "20261012T112854-L-773316",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

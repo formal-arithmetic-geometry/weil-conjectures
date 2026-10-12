@@ -8,9 +8,9 @@ module
 public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 public import Sheaf.AlgebraicGeometry.EtaleSheaves
 public import WeilConjectures.CategoryTheory.Sites.Torsor
-import Sheaf.AlgebraicGeometry.FiniteLocallyConstantSetsRepresentability
-import Sheaf.AlgebraicGeometry.Sites.InverseImageRepresentable
-import WeilConjectures.ConstructibleSheaf.Defs
+
+import Sheaf.AlgebraicGeometry.FiniteTorsorPullbackHomBijective
+import Sheaf.AlgebraicGeometry.TorsorUnitEquivarianceReflection
 
 /-!
 # Finite étale equivalences and transport of torsors
@@ -77,6 +77,32 @@ theorem finiteEtale_reflects_torsor_transport
     (T₁ T₂ : Sheaf.Torsor
       ((constantSheaf Y.smallEtaleTopology AddCommGrpCat.{u + 1}).obj (AddCommGrpCat.of M)))
     (h : τ T₁ ≈ τ T₂) : T₁ ≈ T₂ := by
-  sorry
+  obtain ⟨e₁, he₁⟩ := hτ T₁
+  obtain ⟨e₂, he₂⟩ := hτ T₂
+  obtain ⟨φ⟩ := h
+  let L := Scheme.etaleSetPullback i
+  let α := e₁.hom ≫ φ.iso.hom ≫ e₂.inv
+  let β := e₂.hom ≫ φ.iso.inv ≫ e₁.inv
+  obtain ⟨f, hf⟩ := (finite_torsor_pullback_hom_bijective i hFE M T₁ T₂).2 α
+  obtain ⟨g, hg⟩ := (finite_torsor_pullback_hom_bijective i hFE M T₂ T₁).2 β
+  change L.map f = α at hf
+  change L.map g = β at hg
+  have hfg : f ≫ g = 𝟙 T₁.sheaf := by
+    apply (finite_torsor_pullback_hom_bijective i hFE M T₁ T₁).1
+    change L.map (f ≫ g) = L.map (𝟙 T₁.sheaf)
+    rw [L.map_comp, L.map_id, hf, hg]
+    simp [α, β, Category.assoc]
+  have hgf : g ≫ f = 𝟙 T₂.sheaf := by
+    apply (finite_torsor_pullback_hom_bijective i hFE M T₂ T₂).1
+    change L.map (g ≫ f) = L.map (𝟙 T₂.sheaf)
+    rw [L.map_comp, L.map_id, hg, hf]
+    simp [α, β, Category.assoc]
+  refine ⟨⟨⟨f, g, hfg, hgf⟩, ?_⟩⟩
+  apply torsor_map_equivariant_of_unit i M T₁ T₂ (τ T₁) (τ T₂)
+    e₁ e₂ he₁ he₂ f (finite_torsor_pullback_hom_bijective i hFE M T₁ T₂).1
+    φ.iso.hom φ.map_vadd
+  change L.map f ≫ e₂.hom = e₁.hom ≫ φ.iso.hom
+  rw [hf]
+  simp [α, Category.assoc]
 
 end AlgebraicGeometry.Etale
