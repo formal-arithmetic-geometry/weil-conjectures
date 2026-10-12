@@ -9897,3 +9897,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 22:53 L: merged deliver/F4/Sheaf.AlgebraicGeometry.ClosedImmersionDisjointIdealTwistMono (stage 3; reviewer PASS; first push; landing 20261012T225308-L-1804568 (proof); batch 20261012T225253; modules 1; new nodes 0)
 - 22:53 L: merged deliver/F4/Sheaf.AlgebraicGeometry.CoherentFormalModuleEpi (stage 3; reviewer PASS; first push; landing 20261012T225309-L-1804685 (proof); batch 20261012T225253; modules 1; new nodes 0)
 - 22:53 L: merged deliver/G1/Sheaf.AlgebraicGeometry.CechH1MapNatural (stage 3; reviewer PASS; first push; landing 20261012T225309-L-1804805 (proof); batch 20261012T225253; modules 1; new nodes 0)
+- 22:53 L: merged deliver/G1/Sheaf.AlgebraicGeometry.ProductResidueH1Injective (stage 3; reviewer PASS; after a return; landing 20261012T225309-L-1804922 (proof); batch 20261012T225253; modules 1; new nodes 0)

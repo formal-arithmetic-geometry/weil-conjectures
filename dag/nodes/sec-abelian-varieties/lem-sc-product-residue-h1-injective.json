@@ -21,18 +21,20 @@
  ],
  "proof": [
   {
-   "text": "Evaluate universal structure pushforward at Spec κ(s). Identify the canonical scalar maps with its maps on global sections to obtain H0(X_s,O)=κ(s) and H0(Y_s,O)=κ(s). Base change the sections to rational points. Properness is stable under base change. Apply picard_h1_product_injective over κ(s).",
+   "text": "Evaluate the tensor-pullback adjunction unit on the structure sheaf after base change to Spec κ(s). By tensorPullbackObjUnitToUnit_isIso, the structure-sheaf map is the composite of this unit with pushforward of an isomorphism. Evaluation at any open U makes the structure-sheaf ring map on U an isomorphism; specialize this general comparison to the top open to make appTop an isomorphism. Composing with ΓSpecIso proves bijectivity of the canonical scalar maps. Base change the sections to rational points using pullback.lift; properness is stable under base change. Apply picard_h1_product_injective over κ(s).",
    "uses": [
     "lem-sc-picard-h1-product-injective",
-    "lem-pc-module-pullback-adjunction"
+    "lem-pc-module-pullback-adjunction",
+    "lem-weil-pbc-module-pullback-structure-sheaf"
    ],
    "elementary": false
   },
   {
-   "text": "Pullback pasting identifies the chosen residue fibre of X×_S Y with X_s×_κ(s)Y_s and identifies its base-changed section maps with the two rational-point slices. Functoriality of structure-sheaf cohomology transports the preceding injectivity along this isomorphism.",
+   "text": "Construct the product base-change isomorphism explicitly in both directions by pullback.lift and verify its inverse identities by pullback.hom_ext. Verify by the same universal property that the base-changed slices followed by this isomorphism are the rational-point slices. Transport two cohomology classes by pullback along the inverse isomorphism. Functoriality identifies their slice images, so field-product injectivity makes their transported classes equal. Pullback along the forward isomorphism and the identity law recover equality of the original classes.",
    "uses": [
     "def-pc-fibre-product",
-    "def-sc-structure-sheaf-cohomology-pullback"
+    "def-sc-structure-sheaf-cohomology-pullback",
+    "lem-sc-structure-sheaf-cohomology-pullback-functorial"
    ],
    "elementary": false
   }
@@ -40,13 +42,17 @@
  "proof_deps": [
   "lem-sc-picard-h1-product-injective",
   "lem-pc-module-pullback-adjunction",
+  "lem-weil-pbc-module-pullback-structure-sheaf",
   "def-pc-fibre-product",
-  "def-sc-structure-sheaf-cohomology-pullback"
+  "def-sc-structure-sheaf-cohomology-pullback",
+  "lem-sc-structure-sheaf-cohomology-pullback-functorial"
  ],
  "proof_origin": {
-  "by": "worker",
+  "by": "G1",
+  "date": "2026-10-13",
   "document": "literature/stacks-project/more-morphisms.tex",
-  "place": "Tag 0BF3, first sentence of proof: Kunneth injectivity on the special fibre (Tag 0BED)"
+  "place": "Tag 0BF3, first sentence of proof: Kunneth injectivity on the special fibre (Tag 0BED)",
+  "description": "The original two-step route formalized with explicit pullback pasting, top-open evaluation of the adjunction unit, and functorial cohomology transport. Repair: generalize the private structure-sheaf comparison to arbitrary opens, rather than duplicating the private top-open theorem in PicardLocusClosedValuativeFactorization."
  },
  "mathlib_searches": [
   {
@@ -119,10 +125,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "H3",
+  "group": "G1",
   "result": "pass",
-  "landing": "20261012T184306-L-4005694",
-  "kind": "interface",
+  "landing": "20261012T225309-L-1804922",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
