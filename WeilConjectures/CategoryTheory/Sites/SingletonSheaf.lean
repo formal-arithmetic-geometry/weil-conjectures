@@ -23,8 +23,6 @@ of a presheaf of types for a single morphism `π : T' ⟶ T`:
   morphism under `Over.map` follows from the sheaf condition of the restricted presheaf.
 - `CategoryTheory.Presieve.isSheafFor_singleton_of_injective`: the sheaf condition passes to a
   subpresheaf whose sections are detected after pulling back along `π`.
-- `CategoryTheory.Presieve.isSheafFor_singleton_of_overMap`: the converse of
-  `isSheafFor_singleton_overMap`.
 - `CategoryTheory.Presieve.mem_range_of_imageSieve_mem`: a section of a sheaf which lies locally
   in the image of an injective morphism from a sheaf lies in its image.
 -/
@@ -128,35 +126,5 @@ lemma mem_range_of_imageSieve_mem (J : GrothendieckTopology C) {A : Cᵒᵖ ⥤ 
   let u := (hP _ h).amalgamate x hcomp
   refine ⟨u, (hA _ h).isSeparatedFor.ext fun Z f hf ↦ ?_⟩
   rw [← NatTrans.naturality_apply, (hP _ h).valid_glue hcomp f hf, hx]
-
-
-/-- Conversely to `isSheafFor_singleton_overMap`, the restricted presheaf `(Over.map p).op ⋙ P`
-satisfies the sheaf condition for `g` if `P` satisfies it for `(Over.map p).map g`. -/
-lemma isSheafFor_singleton_of_overMap {X Y : C} (p : X ⟶ Y) {P : (Over Y)ᵒᵖ ⥤ Type w}
-    {A B : Over X} (g : A ⟶ B) (h : IsSheafFor P (.singleton ((Over.map p).map g))) :
-    IsSheafFor ((Over.map p).op ⋙ P) (.singleton g) := by
-  rw [isSheafFor_singleton] at h ⊢
-  intro x hx
-  refine h x fun {Z'} p₁ p₂ hp ↦ ?_
-  have hl : p₁.left ≫ g.left = p₂.left ≫ g.left := congrArg CommaMorphism.left hp
-  let Z : Over X := Over.mk (p₁.left ≫ A.hom)
-  let q₁ : Z ⟶ A := Over.homMk p₁.left
-  let q₂ : Z ⟶ A := Over.homMk p₂.left (by
-    simp only [Z, Over.mk_hom]
-    rw [← Over.w g, reassoc_of% hl, Over.w g])
-  let e : Z' ⟶ (Over.map p).obj Z := Over.homMk (𝟙 Z'.left) (by
-    simp only [Z, Over.map_obj_hom, Over.mk_hom, Category.id_comp, Category.assoc]
-    exact Over.w p₁)
-  have he₁ : p₁ = e ≫ (Over.map p).map q₁ := by
-    ext
-    simp [e, q₁]
-  have he₂ : p₂ = e ≫ (Over.map p).map q₂ := by
-    ext
-    simp [e, q₂]
-  have hq := hx q₁ q₂ (by
-    ext
-    simpa [q₁, q₂] using hl)
-  rw [he₁, he₂, op_comp, op_comp, Functor.map_comp_apply, Functor.map_comp_apply]
-  exact congrArg _ hq
 
 end CategoryTheory.Presieve

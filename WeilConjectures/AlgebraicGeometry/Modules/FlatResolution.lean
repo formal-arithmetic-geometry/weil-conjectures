@@ -78,7 +78,7 @@ lemma _root_.PresheafOfModules.preservesFiniteLimits_of_evaluation {C : Type*} [
     {R : Cᵒᵖ ⥤ RingCat.{u}} {D : Type*} [Category D] (G : D ⥤ _root_.PresheafOfModules.{u} R)
     (h : ∀ V, PreservesFiniteLimits (G ⋙ _root_.PresheafOfModules.evaluation R V)) :
     PreservesFiniteLimits G where
-  preservesFiniteLimits J _ _ := ⟨fun {K} ↦ ⟨fun {c} hc ↦ ⟨
+  preservesFiniteLimits _ _ _ := ⟨fun {_} ↦ ⟨fun {_} hc ↦ ⟨
     _root_.PresheafOfModules.evaluationJointlyReflectsLimits _ _ fun V ↦
       isLimitOfPreserves (G ⋙ _root_.PresheafOfModules.evaluation R V) hc⟩⟩⟩
 

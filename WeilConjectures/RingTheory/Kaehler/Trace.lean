@@ -104,9 +104,10 @@ lemma traceDerivForm_scalar_right [DecidableEq m] (X : Matrix m m R) (c : R) :
 
 /-- Conjugation invariance of `traceDerivForm` on commuting matrices: if `P Q = 1` and
 `A C = C A`, then `Tr(QCP · D(QAP)) = Tr(C · D(A))`. -/
-lemma traceDerivForm_conj [DecidableEq m] [DecidableEq n] (P : Matrix m n R) (Q : Matrix n m R)
+lemma traceDerivForm_conj [DecidableEq m] (P : Matrix m n R) (Q : Matrix n m R)
     (hPQ : P * Q = 1) (A C : Matrix m m R) (hAC : A * C = C * A) :
     traceDerivForm D (Q * C * P) (Q * A * P) = traceDerivForm D C A := by
+  classical
   have h₁ := traceDerivForm_mul_right D (Q * C * P) Q (A * P)
   have h₂ := traceDerivForm_mul_right D (Q * C) A P
   have h₃ := traceDerivForm_mul_right D (A * C) P Q

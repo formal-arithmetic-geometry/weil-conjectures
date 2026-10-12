@@ -14,6 +14,7 @@ public import WeilConjectures.AlgebraicGeometry.Cohomology.Affine
 public import WeilConjectures.AlgebraicGeometry.Cohomology.EulerChar
 public import WeilConjectures.AlgebraicGeometry.Cohomology.PushforwardZero
 public import WeilConjectures.AlgebraicGeometry.Curve.ClosedPoint
+public import WeilConjectures.AlgebraicGeometry.Curve.FiniteMapToLine
 public import WeilConjectures.AlgebraicGeometry.Curve.FiniteDuality
 public import WeilConjectures.AlgebraicGeometry.Curve.SeparatingFunction
 public import WeilConjectures.AlgebraicGeometry.Modules.FinitePushforward
@@ -505,7 +506,7 @@ theorem formallyUnramified_stalkMap_genericPoint_of_functionField [IsIntegral X]
     rw [← HomIsOver.comp_over (f := π) (S := Spec (.of k))]
     rfl
   exact Algebra.FormallyUnramified.of_finrank_kaehlerDifferential_eq_one
-    (finrank_kaehlerDifferential_functionField (X ↘ Spec (.of k))) ht
+    (finrank_kaehlerDifferential_functionField (X ↘ Spec (.of k)) 1 (.refl _) rfl) ht
     (mem_range_stalkMap_genericPoint_of_functionField t π hπ)
 
 /-- **Finite flat morphisms to the projective line.** Every smooth proper curve `X` over `k` has
@@ -565,7 +566,8 @@ theorem exists_isFinite_flat_hom_projectiveLine :
     let := (((U c).toScheme ↘ Spec (.of k)).appTop ≫
       (U c).toScheme.presheaf.germ ⊤ (genericPoint (U c).toScheme) trivial).hom.toAlgebra
     obtain ⟨t, ht, hDt⟩ := exists_transcendental_and_D_ne_zero (k := k)
-      (finrank_kaehlerDifferential_functionField ((U c).toScheme ↘ Spec (.of k))) hs
+      (finrank_kaehlerDifferential_functionField ((U c).toScheme ↘ Spec (.of k)) 1 (.refl _) rfl)
+      hs
     obtain ⟨π, hπ, hπ'⟩ := exists_hom_projectiveLine_of_functionField t ht
     obtain ⟨h₁, -, h₂, -⟩ := isFinite_flat_of_hom_projectiveLine_of_functionField t ht π hπ'
     have hunr := formallyUnramified_stalkMap_genericPoint_of_functionField t hDt π hπ'

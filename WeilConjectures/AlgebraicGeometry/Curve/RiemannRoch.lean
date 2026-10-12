@@ -77,9 +77,10 @@ locally free, which is a genuine narrowing; it will have to be undone once coher
 torsion and determinant of a coherent sheaf exist.
 
 The Euler characteristic `AlgebraicGeometry.Scheme.Modules.eulerChar` is a `finsum`, so it is
-junk unless the cohomology vanishes in large degrees. On a curve that is Grothendieck vanishing,
-`AlgebraicGeometry.Scheme.Modules.subsingleton_H_of_topologicalKrullDim_lt`, which is what makes
-every statement of this file about `χ`, `deg` and the genus meaningful.
+junk unless the cohomology vanishes in large degrees. On a curve, quasi-coherent cohomology
+vanishes in degrees `≥ 2` (`AlgebraicGeometry.Scheme.Modules.subsingleton_H_of_two_le`, proved
+through a finite morphism to `ℙ¹_k`), which is what makes the statements of this file about `χ`,
+`deg` and the genus meaningful.
 
 Ampleness is `AlgebraicGeometry.IsAmple` of
 `WeilConjectures/AlgebraicGeometry/Modules/Ample.lean`, shared with the abelian-variety block.
@@ -94,7 +95,9 @@ locally free modules. The isomorphism is the one induced by the trace pairing
 `H^q(ℱ) ⊗ H^p(ℱᵛ ⊗ ω_X) → H¹(ω_X) → k`, whose last map is the trace `t_X = ∑_x res_x`, the sum
 over closed points of Tate's `k`-linear residues (Tate, *Residues of differentials on curves*).
 At a point `x` with `κ(x)/k` separable, `res_x` is `Tr_{κ(x)/k}` of the classical residue.
-Tate's residues are not available, so the isomorphism is not given explicitly.
+This trace is `AlgebraicGeometry.Scheme.residueTrace`, and Serre duality for it is
+`AlgebraicGeometry.Scheme.serreDuality_residueTrace`
+(`WeilConjectures/AlgebraicGeometry/Curve/ResidueTrace.lean`).
 
 ## Main statements
 

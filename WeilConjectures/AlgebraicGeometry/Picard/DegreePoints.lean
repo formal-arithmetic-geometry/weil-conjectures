@@ -73,10 +73,6 @@ theorem exists_picardDegree_equiv_picardFunctorDegree [IsSepClosed k]
     rw [pt.2, Algebra.algebraMap_self, CommRingCat.ofHom_id, Spec.map_id]
   have hsplit := bijective_pic_split f pt.1 hσ
     isIso_pushforwardUnitMap_pullback_snd_of_geometricallyIntegral T₀
-  have hone (a : (Spec (.of k)).Pic) : a = 1 := by
-    obtain ⟨e⟩ := Modules.IsInvertible.nonempty_iso_unit (X := Spec (.of k)) default
-      ((fromSkeleton _).obj a.val)
-    exact Pic.eq_iff_nonempty_iso.2 ⟨e ≪≫ Pic.oneIso.symm⟩
   -- `X_k ⟶ X` is an isomorphism
   have : IsIso (pullback.fst f T₀.hom) := inferInstanceAs (IsIso (pullback.fst f (𝟙 _)))
   have hinv (L : X.Pic) :
@@ -93,7 +89,8 @@ theorem exists_picardDegree_equiv_picardFunctorDegree [IsSepClosed k]
     simp only [φ] at h'
     rw [picardFunctorDegreeι_app_toSheafify, picardFunctorDegreeι_app_toSheafify] at h'
     have hM := hsplit.1 (a₁ := Pic.map (pullback.fst f T₀.hom) L₁.1)
-      (a₂ := Pic.map (pullback.fst f T₀.hom) L₂.1) (Prod.ext ((hone _).trans (hone _).symm) h')
+      (a₂ := Pic.map (pullback.fst f T₀.hom) L₂.1)
+      (Prod.ext (Subsingleton.elim (h := Pic.subsingleton_spec_field k) _ _) h')
     exact Subtype.ext (by rw [← hinv L₁.1, hM, hinv])
   · -- the image of `s` in `Pic_{X/k}(k)` comes from a class `M` on `X_k` of degree `d`
     obtain ⟨M, hM⟩ := hsplit.2 (1, (picardFunctorDegreeι f d).hom.app _ s)

@@ -27,9 +27,6 @@ such a `t` can be chosen transcendental over `k`.
   unramified over `A`.
 - `exists_transcendental_and_D_ne_zero`: if `Ω[K⁄R]` is one-dimensional and `K` has an element
   transcendental over `k`, then it has one `t` with `D t ≠ 0`.
-- `AlgebraicGeometry.Scheme.finrank_kaehlerDifferential_functionField`: the Kähler differentials
-  of the function field of an integral scheme smooth of relative dimension one over a field
-  form a one-dimensional vector space.
 -/
 
 @[expose] public section
@@ -84,44 +81,3 @@ theorem exists_transcendental_and_D_ne_zero {k R K : Type*} [Field k] [CommRing 
     exact smul_ne_zero hs0 hu
 
 end Algebra
-
-namespace AlgebraicGeometry.Scheme
-
-/-- The Kähler differentials of the function field `K` of an integral scheme `X` smooth of
-relative dimension one over a field `k` form a one-dimensional `K`-vector space: on an affine
-open `V` with `Γ(X, V)` standard smooth of relative dimension one, `Ω[Γ(X, V)⁄k]` is free of
-rank one, and `Ω[K⁄k]` is its base change to the fraction field `K`. -/
-theorem finrank_kaehlerDifferential_functionField {k : Type u} [Field k] {X : Scheme.{u}}
-    [IsIntegral X] (f : X ⟶ Spec (.of k)) [SmoothOfRelativeDimension 1 f] :
-    letI := (f.appTop ≫ X.presheaf.germ ⊤ (genericPoint X) trivial).hom.toAlgebra
-    Module.finrank X.functionField Ω[X.functionField⁄Γ(Spec (.of k), ⊤)] = 1 := by
-  obtain ⟨U, -, V, hV, hx, e, H⟩ :=
-    SmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension (n := 1) (f := f)
-      (genericPoint X)
-  obtain rfl : U = ⊤ := eq_top_iff.mpr fun z _ ↦ Subsingleton.elim (f (genericPoint X)) z ▸ e hx
-  have : Nonempty V := ⟨⟨_, hx⟩⟩
-  let := (f.appTop ≫ X.presheaf.germ ⊤ (genericPoint X) trivial).hom.toAlgebra
-  let := (f.appLE ⊤ V e).hom.toAlgebra
-  have : Algebra.IsStandardSmoothOfRelativeDimension 1 Γ(Spec (.of k), ⊤) Γ(X, V) := H
-  have hfrac := functionField_isFractionRing_of_isAffineOpen X V hV
-  have : IsScalarTower Γ(Spec (.of k), ⊤) Γ(X, V) X.functionField := by
-    refine IsScalarTower.of_algebraMap_eq' ?_
-    ext a
-    change X.presheaf.germ ⊤ _ trivial (f.appTop a) =
-      algebraMap Γ(X, V) X.functionField (f.appLE ⊤ V e a)
-    simp only [Scheme.Hom.appLE]
-    rw [CommRingCat.comp_apply]
-    change _ = X.presheaf.germ V (genericPoint X) hx _
-    rw [← CommRingCat.comp_apply (X.presheaf.map (homOfLE e).op), X.presheaf.germ_res]
-    rfl
-  have : Algebra.FormallyEtale Γ(X, V) X.functionField :=
-    Algebra.FormallyEtale.of_isLocalization (nonZeroDivisors Γ(X, V))
-  obtain ⟨eΩ⟩ :=
-    Algebra.IsStandardSmoothOfRelativeDimension.nonempty_linearEquiv_kaehlerDifferential
-      (R := Γ(Spec (.of k), ⊤)) (S := Γ(X, V)) 1
-  have : Module.Free Γ(X, V) Ω[Γ(X, V)⁄Γ(Spec (.of k), ⊤)] := Module.Free.of_equiv eΩ.symm
-  rw [← (tensorKaehlerEquivOfFormallyEtale Γ(Spec (.of k), ⊤) Γ(X, V)
-    X.functionField).finrank_eq, Module.finrank_baseChange, eΩ.finrank_eq,
-    Module.finrank_fin_fun]
-
-end AlgebraicGeometry.Scheme
