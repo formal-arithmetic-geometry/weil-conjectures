@@ -1,0 +1,156 @@
+{
+ "id": "lem-weil-pbc-injective-etale-constant-ring-module",
+ "kind": "lemma",
+ "title": "Injective constant-coefficient etale sheaf admits a ringed-site module realization",
+ "statement": "Let Y be a scheme with its small etale site [def-weil-pbc-etale-site], let Λ be a commutative ring, and let J be an injective object [def-sp-injective-resolutions] of the category of sheaves valued in Λ-modules [def-weil-pbc-etale-sheaves]. There exist a sheaf of rings R on this site and an injective sheaf M of R-modules [def-weil-sheaf-of-modules-category] whose underlying abelian presheaf is isomorphic to the presheaf obtained from J by forgetting Λ-scalars [def-weil-pbc-abelian-etale-sheaves]. For Y : Scheme.{u}, Λ and the sections of R and M lie in Type (u+1). The construction takes R to be the constant ring sheaf associated to Λ [def-weil-pbc-constant-sheaf], but the conclusion needs only existence.",
+ "stmt_deps": [
+  "def-weil-pbc-etale-site",
+  "def-sp-injective-resolutions",
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-abelian-etale-sheaves",
+  "def-weil-pbc-constant-sheaf"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Section 093I (section-constant), opening paragraph, and Section 03CV (section-sheaves-modules); Sites Example 0H7J; constant-coefficient interface of step 1 of lem-weil-pbc-injective-etale-module-cech-h1. The equivalence and injectivity transport are written out here by C1."
+ },
+ "proof": [
+  {
+   "text": "Sheafify the constant ring presheaf Λ to obtain R. By lem-weil-pbc-ring-sheafification-underlying-sets, the underlying set presheaf of R is the sheafification of the constant set presheaf Λ, compatibly with the canonical map. Apply lem-weil-pbc-site-sheafification-sections-local to obtain local constant representatives and local equality of representatives with equal images.",
+   "uses": [
+    "def-weil-pbc-constant-sheaf",
+    "def-weil-pbc-sheafification",
+    "lem-weil-pbc-ring-sheafification-underlying-sets",
+    "lem-weil-pbc-site-sheafification-sections-local"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For a local constant representative a of a section of R and a section x of J, multiply the restriction of x by a. The restricted results agree after refining overlaps, because restrictions in J are Λ-linear. Separatedness makes them agree on overlaps, and the sheaf condition glues them uniquely. Refining any two sets of representatives shows independence. Refining jointly representatives of a,b,x proves the module laws from the Λ-module laws. Restriction of a glued product agrees with the glued restricted products by uniqueness. This constructs the R-module M with exactly the underlying abelian presheaf of J.",
+   "uses": [
+    "def-weil-pbc-etale-sheaves",
+    "def-weil-sheaf-of-modules-category",
+    "def-weil-pbc-abelian-etale-sheaves"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Restrict any R-module along the constant scalar map Λ → R to get a Λ-module-valued sheaf. Local representatives and uniqueness of gluing show that extending and restricting scalars in these two senses are inverse. A natural transformation of Λ-module sheaves commutes with multiplication by every local representative, hence by every R-section after gluing; conversely R-linearity implies Λ-linearity. This proves the equivalence on morphisms as well as objects.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category",
+    "def-weil-pbc-constant-sheaf"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "To extend a map to M across a monomorphism of R-modules, apply the inverse equivalence. It takes that monomorphism to a monomorphism of Λ-module sheaves, since the equivalence is fully faithful. Extend the resulting map to J by injectivity, and apply the forward equivalence. The equivalence identities give the desired factorization. Thus M is injective. Its sectionwise identity with J gives the required natural isomorphism of abelian presheaves. This proof requires no nonzero coefficients or nonempty scheme.",
+   "uses": [
+    "def-sp-injective-resolutions",
+    "def-weil-pbc-abelian-etale-sheaves"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sp-injective-resolutions",
+  "def-weil-pbc-abelian-etale-sheaves",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-pbc-sheafification",
+  "def-weil-sheaf-of-modules-category",
+  "lem-weil-pbc-ring-sheafification-underlying-sets",
+  "lem-weil-pbc-site-sheafification-sections-local"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Section 093I (section-constant), opening paragraph, and Section 03CV (section-sheaves-modules); Sites Example 0H7J; constant-coefficient interface of step 1 of lem-weil-pbc-injective-etale-module-cech-h1. The equivalence and injectivity transport are written out here by C1.",
+  "note": "Interface argument written by C1 from the indicated step of the parent node and the cited definitions; no change of the mathematical route."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "sheaves of modules over a constant ring sheaf equivalent to sheaves valued in modules",
+   "results": "Service unavailable: Internal Server Error. No verdict from this search.",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "sheaves of modules over a constant ring sheaf equivalent to sheaves valued in modules",
+   "results": "Eight hits, including SheafOfModules.toSheaf and forgetToSheafModuleCat. The former forgets scalars, and the latter uses a terminal object and its section ring; neither constructs the needed constant-ring equivalence or transports injectivity.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "constant|equiv|Equiv in Mathlib/Algebra/Category/ModuleCat/Sheaf*, Presheaf*; constant-coefficient equivalence and module realization in lean/Sheaf, lean/WeilConjectures and dag/nodes",
+   "results": "Change-of-rings and sheafification adjunctions found, but no equivalence between ModuleCat-valued sheaves and modules over the constant ring sheaf. Existing constant-ring torsion statements are special to Z/n and do not supply this injective realization.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.InjectiveEtaleModuleCechH1",
+  "date": "2026-10-12",
+  "group": "C1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-injective-etale-module-cech-h1",
+   "place": "Step 1: regard J as a module over the constant ring sheaf, preserving injectivity and the underlying abelian presheaf",
+   "via": [
+    "lem-weil-pbc-injective-etale-module-cech-h1",
+    "lem-weil-pbc-henselian-finite-pushforward-h1-injective-vanishing"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.InjectiveEtaleConstantRingModule",
+  "file": "lean/Sheaf/AlgebraicGeometry/InjectiveEtaleConstantRingModule.lean",
+  "declaration": "AlgebraicGeometry.Scheme.exists_injective_etale_ring_module",
+  "statement": "theorem exists_injective_etale_ring_module\n    (Y : Scheme.{u}) (Λ : Type (u + 1)) [CommRing Λ]\n    (J : Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)) [Injective J] :\n    ∃ (R : Sheaf Y.smallEtaleTopology RingCat.{u + 1})\n      (M : SheafOfModules.{u + 1} R), Injective M ∧\n        Nonempty (M.val.presheaf ≅ J.obj ⋙\n          forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C1",
+  "result": "pass",
+  "landing": "20261012T023945-L-1147078",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C1",
+  "result": "pass",
+  "landing": "20261012T023945-L-1147078",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed after the tool's own checks (compiles, no new sorry without its node, no axiom, statements of existing declarations unchanged); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -13,6 +13,11 @@ public import Mathlib.CategoryTheory.Preadditive.Injective.Basic
 public import Mathlib.CategoryTheory.Limits.Constructions.Over.Products
 public import Mathlib.CategoryTheory.Sites.SheafCohomology.Cech
 
+import Mathlib.AlgebraicGeometry.Sites.AffineEtale
+import Sheaf.AlgebraicGeometry.InjectiveEtaleConstantRingModule
+import Sheaf.CategoryTheory.SiteCechMathlibComparison
+import Sheaf.CategoryTheory.Sites.InjectiveModuleCechAcyclic
+
 /-!
 # Degree-one Čech acyclicity of injective étale module sheaves
 
@@ -62,6 +67,38 @@ theorem isZero_cech_H_one_of_injective_module_sheaf
     IsZero (((cechComplexFunctor fun i : I ↦ Over.mk (f i)).obj
       ((Over.forget U).op ⋙ ((sheafCompose Y.smallEtaleTopology
         (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj J).obj)).homology 1) := by
-  sorry
+  classical
+  let K := Y.smallEtaleTopology.toPrecoverage
+  have htop : K.toGrothendieck = Y.smallEtaleTopology := by
+    apply le_antisymm
+    · exact Y.smallEtaleTopology.toGrothendieck_toPrecoverage_le
+    · intro W R hR
+      have h : R.arrows ∈ K W :=
+        (Y.smallEtaleTopology.arrows_mem_toPrecoverage_iff R).2 hR
+      simpa using K.generate_mem_toGrothendieck h
+  have hc : Presieve.ofArrows V f ∈ K U := hcover
+  obtain ⟨S⟩ := SiteCechComplex.exists_of_covering K hc
+  obtain ⟨R, M, hM, ⟨e⟩⟩ := exists_injective_etale_ring_module Y Λ J
+  have : HasSheafify K.toGrothendieck AddCommGrpCat.{u + 1} := by
+    rw [htop]
+    infer_instance
+  have : K.toGrothendieck.WEqualsLocallyBijective AddCommGrpCat.{u + 1} := by
+    rw [htop]
+    infer_instance
+  have vanish : ∀ (R : Sheaf Y.smallEtaleTopology RingCat.{u + 1})
+      (M : SheafOfModules.{u + 1} R), Injective M →
+        IsZero ((S.cohomologyFunctor 1).obj M.val.presheaf) := by
+    rw [← htop]
+    intro R M hM
+    have : Injective M := hM
+    exact injective_module_cech_cohomology_isZero K R M V f hc S 1 (by decide)
+  have hz := vanish R M hM
+  have hz' : IsZero ((S.cohomologyFunctor 1).obj
+      (J.obj ⋙ forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})) :=
+    hz.of_iso ((S.cohomologyFunctor 1).mapIso e.symm)
+  obtain ⟨c⟩ := S.mathlib_complex_iso_exists V f
+    (J.obj ⋙ forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})
+  exact hz'.of_iso ((HomologicalComplex.homologyFunctor _ (ComplexShape.up ℕ) 1).mapIso c.symm)
+
 
 end AlgebraicGeometry.Scheme

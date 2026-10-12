@@ -5858,3 +5858,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 02:35 L: returned deliver/M1/Sheaf.Topology.CohomologyReductionConstantSubsheaves (reviewer RETURN: (reviewer X-86a05, head 86a05e638) the reviewer passed it, but the landing failed: NOT MERGED Sheaf.Topology.CohomologyR)
 - 02:37 L: merged deliver/U1/WeilConjectures.SixFunctors.Etale.Gabber (stage 3; reviewer PASS; first push; landing 20261012T023601-L-1124164 (interface); modules 2; new nodes 1)
 - 02:37 L: returned deliver/V1/WeilConjectures.ConstructibleSheaf.LocallyConstantReduction (reviewer RETURN: (reviewer X-4d255, head 4d2559dfb) the reviewer passed it, but the landing failed: NOT MERGED WeilConjectures.Constructi)
+- 02:40 L: merged deliver/C1/Sheaf.AlgebraicGeometry.InjectiveEtaleModuleCechH1 (stage 3; reviewer PASS; after a return; landing 20261012T023945-L-1147078 (interface); modules 3; new nodes 2)

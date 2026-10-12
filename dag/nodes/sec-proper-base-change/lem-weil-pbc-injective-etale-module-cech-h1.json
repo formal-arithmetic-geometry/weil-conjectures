@@ -15,26 +15,25 @@
  },
  "proof": [
   {
-   "text": "Regard J as a sheaf of modules over the constant ring sheaf O associated to Λ [def-weil-sheaf-of-modules-category]. Concretely, a section of O is locally the image of a constant scalar. On a covering where this holds, multiply the restricted section of J by those scalars and glue. Independence follows after refining the two coverings and using equality of the scalar images. This defines the O-action. Conversely restrict the O-action along Λ → O. The sheaf axiom makes the two constructions inverse, on morphisms as well as objects. The equivalence leaves the underlying abelian sheaf unchanged and preserves injectivity by transporting monomorphisms and their lifting property.",
+   "text": "Use exists_injective_etale_ring_module to obtain a ring sheaf R, an injective R-module M, and an isomorphism e of its underlying abelian presheaf with the one obtained from J by forgetting scalars. This is precisely the constant-coefficient interface in the original proof.",
    "uses": [
-    "def-weil-sheaf-of-modules-category",
-    "def-weil-pbc-etale-sheaves"
+    "lem-weil-pbc-injective-etale-constant-ring-module"
    ],
-   "elementary": true
+   "elementary": false
   },
   {
-   "text": "Apply [lem-weil-pbc-ringed-site-injective-module-cech-acyclic] to this O-module and the chosen covering, in degree p = 1. Its argument is the source 03FC: exact sheafification makes J injective among module presheaves; the free module chain complex on the covering has zero positive homology, and Yoneda identifies Hom from that complex into J with the alternating section complex. Exactness of Hom into an injective gives zero first cohomology. The theorem is valid for arbitrary index and coefficient universes.",
+   "text": "Take K to be the precoverage of all families generating a covering sieve for the small etale topology. Its generated Grothendieck topology is the original topology: one inclusion is the topology universal property; for the other, the arrow presieve of a covering sieve is a K-cover and generates that sieve. The given hcover is therefore a K-cover. Obtain a choice S of iterated fibre products by SiteCechComplex.exists_of_covering. Transport the Mathlib sheafification and locally-bijective instances along the topology equality. Apply injective_module_cech_cohomology_isZero to K,R,M,S in degree 1.",
    "uses": [
+    "def-weil-pbc-site-cech-complex",
     "lem-weil-pbc-ringed-site-injective-module-cech-acyclic"
    ],
    "elementary": false
   },
   {
-   "text": "Identify the chosen-fibre-product Cech complex [def-weil-pbc-site-cech-complex] with Mathlib cechComplexFunctor on the family i ↦ Over.mk (V_i → U). In each degree, the unique projection-compatible isomorphisms of the iterated fibre products identify their section groups. The categorical product in AddCommGrpCat is the product of these groups. Projection uniqueness implies that these isomorphisms commute with every omitted-factor map, hence with the alternating sum differential. The resulting isomorphism of cochain complexes transports zero homology to the stated object. Forgetting scalars does not alter sections or restrictions.",
+   "text": "Apply S.cohomologyFunctor 1 to the presheaf isomorphism e, transporting IsZero to the chosen-product Cech cohomology of J. Apply mathlib_complex_iso_exists to S and that underlying presheaf. Map the resulting complex isomorphism through the degree-one homology functor and transport IsZero again. The underlying presheaf of sheafCompose is definitionally J.obj followed by the forgetful functor.",
    "uses": [
-    "def-weil-pbc-site-cech-complex",
-    "def-weil-pbc-cech-complex",
-    "def-weil-pbc-abelian-etale-sheaves"
+    "lem-weil-pbc-site-cech-mathlib-comparison",
+    "def-weil-pbc-cech-complex"
    ],
    "elementary": true
   }
@@ -42,7 +41,7 @@
  "proof_origin": {
   "by": "worker",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Lemma 03FC and the underlying-abelian identification in 03FD; constant-coefficient and Cech-model interface identifications written out"
+  "place": "03FC and 03FD; constant-coefficient and chosen-product interfaces separated into lem-weil-pbc-injective-etale-constant-ring-module and lem-weil-pbc-site-cech-mathlib-comparison. C1 wrote the Lean topology transport and composition of the cohomology isomorphisms."
  },
  "mathlib_searches": [
   {
@@ -105,12 +104,11 @@
   "date": "2026-10-12"
  },
  "proof_deps": [
-  "def-weil-pbc-abelian-etale-sheaves",
   "def-weil-pbc-cech-complex",
-  "def-weil-pbc-etale-sheaves",
   "def-weil-pbc-site-cech-complex",
-  "def-weil-sheaf-of-modules-category",
-  "lem-weil-pbc-ringed-site-injective-module-cech-acyclic"
+  "lem-weil-pbc-injective-etale-constant-ring-module",
+  "lem-weil-pbc-ringed-site-injective-module-cech-acyclic",
+  "lem-weil-pbc-site-cech-mathlib-comparison"
  ],
  "reviewed": {
   "date": "2026-10-12",
@@ -125,11 +123,11 @@
  "reviewed_proof": {
   "date": "2026-10-12",
   "by": "L",
-  "reviewer": "X-8fbf7",
-  "group": "R1",
+  "reviewer": "COMPILER",
+  "group": "C1",
   "result": "pass",
-  "landing": "20261012T015045-L-906585",
+  "landing": "20261012T023945-L-1147078",
   "kind": "interface",
-  "note": "independent Codex review: Matched delivered Lean signatures and proof with the nodes, cited sources, dependencies, pruning report, and second reading; both modules compile cleanly and the axiom checks pass."
+  "note": "AUTO: proofs only; landed after the tool's own checks (compiles, no new sorry without its node, no axiom, statements of existing declarations unchanged); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
