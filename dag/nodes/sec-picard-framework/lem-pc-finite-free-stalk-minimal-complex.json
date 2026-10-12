@@ -1,0 +1,134 @@
+{
+ "id": "lem-pc-finite-free-stalk-minimal-complex",
+ "kind": "statement",
+ "title": "Bounded finite free complexes over stalks have minimal homotopy representatives",
+ "statement": "Let $Y$ be a scheme [def-pc-scheme], $y\\in Y$, $S=\\operatorname{Spec}\\mathcal O_{Y,y}$, and $t:\\operatorname{Spec}\\kappa(y)\\to S$ the morphism induced by the residue quotient. Let $P$ be a cochain complex of $\\mathcal O_S$-modules [def-pc-derived-category], supported in degrees $0$ through $d\\in\\mathbb N$, whose every term is isomorphic to a finite free sheaf [def-weil-pbc-free-module]. Then there is a cochain complex $Q$ on $S$, supported in the same interval and with finite free terms, together with a homotopy equivalence $P\\simeq Q$, such that every differential of the termwise pullback $t^*Q$ [def-pc-derived-pullback] is zero. A homotopy equivalence consists of two chain maps whose composites are chain homotopic to the respective identities. There is no hypothesis on residue cohomology and no claim that $Q$ is supported at one degree.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 00MT, lemma-add-trivial-complex, iterated unit-entry cancellation; blueprint lem-pc-perfect-locus, proof step 4"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "def-weil-pbc-free-module",
+  "def-pc-derived-pullback"
+ ],
+ "proof": [
+  {
+   "text": "Take global sections on Spec of the stalk and use the affine associated-module-sheaf correspondence on the finite free terms and matrices. Reverse the integer grading to view the complex as a chain complex. This correspondence also carries the homotopies and the residue pullback to their module counterparts.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "Induct on the sum of the ranks in degrees 0 through d. If a differential matrix has a unit entry, apply [lem-weil-pbc-free-complex-unit-entry-splits]. The identity summand has a contraction given by the inverse identity in the reverse direction. Projection and inclusion of the complement are thus inverse up to homotopy, the complementary terms remain finite free, the support bounds remain unchanged, and the rank sum decreases by two. Apply the induction hypothesis to the complement and compose its homotopy equivalence with this one.",
+   "uses": [
+    "lem-weil-pbc-free-complex-unit-entry-splits"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "If there is no unit entry, every coefficient belongs to the maximal ideal, because the stalk is a local ring. Reduction modulo that ideal therefore has zero differentials. Return the associated-sheaf complex and compose the homotopy equivalences constructed in the induction. No residue-cohomology assumption is used. If the rank sum is zero or d is zero, no cancellation is needed and the identity equivalence suffices.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-free-complex-unit-entry-splits"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "U1",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 00MT, lemma-add-trivial-complex, iterated unit-entry cancellation; blueprint lem-pc-perfect-locus, proof step 4"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A bounded finite free complex over a local ring is homotopy equivalent to a minimal complex whose residue differential is zero",
+   "results": "CategoryTheory.ProjectiveResolution.homotopyEquiv; CochainComplex.IsKProjective.nonempty_homotopy_zero; CochainComplex.IsKProjective.homotopyZero; CochainComplex.IsKProjective.homotopyZero_def; ComplexShape.QFactorsThroughHomotopy_of_exists_prev; instQFactorsThroughHomotopyDown; Rep.standardComplex.forget₂ToModuleCatHomotopyEquiv; ComplexShape.QFactorsThroughHomotopy",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "HomotopyEquiv, \"single\"",
+   "results": "No hits.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "homologyIsoOfZero|exists_iso_single|free.*residue|residue.*free",
+   "results": "Mathlib/Algebra/Homology/Embedding/CochainComplex.lean; Mathlib/Algebra/Homology/DerivedCategory/TStructure.lean; Mathlib/Algebra/Homology/DerivedCategory/TStructure.lean; Mathlib/Algebra/Homology/DerivedCategory/FullyFaithful.lean; Mathlib/Algebra/Homology/DerivedCategory/Ext/TStructure.lean; Mathlib/Algebra/Homology/DerivedCategory/Ext/TStructure.lean; Mathlib/Algebra/Module/SpanRankOperations.lean; Mathlib/RingTheory/LocalRing/Module.lean",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "bounded finite free complex over local ring minimal complex homotopy equivalent zero differential modulo maximal ideal",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FiniteFreeResidueStalkHomotopy",
+  "date": "2026-10-12",
+  "group": "U1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-perfect-locus",
+   "place": "Proof step 4, local unit-entry cancellation before residue cohomology determines the remaining ranks",
+   "via": [
+    "lem-pc-finite-free-residue-stalk-homotopy"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-perfect",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.FiniteFreeStalkMinimalComplex",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteFreeStalkMinimalComplex.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.exists_stalk_minimal_complex",
+  "statement": "theorem exists_stalk_minimal_complex {Y : Scheme.{u}} (y : Y)\n    (P : CochainComplex (Spec (Y.presheaf.stalk y)).Modules ℤ) (d : ℕ)\n    (hge : P.IsStrictlyGE 0) (hle : P.IsStrictlyLE d)\n    (hfree : ∀ n : ℤ, ∃ s : ℕ, Nonempty\n      (P.X n ≅ SheafOfModules.free\n        (R := (Spec (Y.presheaf.stalk y)).ringCatSheaf) (ULift.{u} (Fin s)))) :\n    ∃ Q : CochainComplex (Spec (Y.presheaf.stalk y)).Modules ℤ,\n      Nonempty (HomotopyEquiv P Q) ∧ Q.IsStrictlyGE 0 ∧ Q.IsStrictlyLE d ∧\n      (∀ n : ℤ, ∃ s : ℕ, Nonempty\n        (Q.X n ≅ SheafOfModules.free\n          (R := (Spec (Y.presheaf.stalk y)).ringCatSheaf) (ULift.{u} (Fin s)))) ∧\n      ∀ a b : ℤ,\n        (((Modules.pullback (Spec.map (Y.residue y))).mapHomologicalComplex _).obj\n          Q).d a b = 0",
+  "branch": "sheaf-dag",
+  "by": "U1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U1",
+  "result": "pass",
+  "landing": "20261012T161505-L-2649396",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U1",
+  "result": "pass",
+  "landing": "20261012T161505-L-2649396",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

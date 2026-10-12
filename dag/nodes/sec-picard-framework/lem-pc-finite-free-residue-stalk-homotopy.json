@@ -16,30 +16,31 @@
  ],
  "proof": [
   {
-   "text": "Choose bases of all terms. Pull back to S = Spec(O_{Y,y}) and use the affine quasicoherent module-sheaf correspondence on these free terms to obtain a bounded finite free complex of O_{Y,y}-modules. The factorization fromSpecResidueField(y) = Spec(residue quotient) followed by fromSpecStalk(y) identifies its termwise reduction with the residue complex in the hypothesis.",
-   "uses": [],
-   "elementary": false
-  },
-  {
-   "text": "Reverse the integer grading and split off a two-term identity summand at every unit differential entry using lem-weil-pbc-free-complex-unit-entry-splits. The homotopy on that summand is the inverse identity from its target to its source. Include the complement and project onto it to obtain a homotopy equivalence. The sum of the finite ranks in degrees 0 through d decreases by two; induction terminates with a bounded free complex whose differential entries all lie in the maximal ideal.",
+   "text": "Pull P back to Spec of the stalk. Pullback preserves its support and finite free terms, using pullbackFreeIso. Apply [lem-pc-finite-free-stalk-minimal-complex] to obtain a homotopy equivalent complex Q with finite free terms, nonnegative support, and zero differentials after residue reduction.",
    "uses": [
-    "lem-weil-pbc-free-complex-unit-entry-splits"
+    "lem-pc-finite-free-stalk-minimal-complex"
    ],
    "elementary": false
   },
   {
-   "text": "Residue reduction of the remainder has zero differential. The removed identity complexes are contractible after reduction, so its cohomology equals the assumed residue cohomology. In negative degrees support makes the terms zero; in nonnegative degrees the residue dimensions are zero off i and r at i. A finite free module reduces to a vector space of its free rank. Thus all remaining terms are zero except a free rank-r term in degree i; when i > d this forces r = 0. Identify that term with the standard free module and compose the homotopy equivalences. Associated sheaves and the pullback-free and pullback-single isomorphisms give exactly the two complexes of the statement.",
+   "text": "Pull the homotopy equivalence back to the residue spectrum. Functor.mapHomologicalComplexCompIso and the definition of fromSpecResidueField identify its homology with the given residue complex. ShortComplex.HomologyData.ofZeros identifies each reduced term with its homology. For a term Q.X n isomorphic to a free sheaf of rank s, pullbackFreeIso and finrank_moduleSpecΓFunctor_obj_free identify its residue dimension with s. The proved helper nonempty_free_iso_of_pullback_rank combines this with isFiniteLocallyFreeOfRank_iff_finrank_moduleSpecΓFunctor_obj to identify Q.X i with the standard rank-r free sheaf.",
    "uses": [],
-   "elementary": false
+   "elementary": true
+  },
+  {
+   "text": "For n distinct from i, negative n gives a zero term by nonnegative support. For n nonnegative, the residue hypothesis and the preceding homology identification give a zero reduced term. Its rank is zero, so the same proved rank helper identifies Q.X n with the rank-zero free sheaf; freeHomEquiv proves that this is a zero object. Thus Q is strictly supported only at i. CochainComplex.exists_iso_single and the component isomorphism at i identify Q with the single rank-r complex. Finally use singleMapHomologicalComplex and pullbackFreeIso to identify that complex with the pulled-back single complex in the goal, and compose using HomotopyEquiv.ofIso and HomotopyEquiv.trans.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-free-complex-unit-entry-splits"
+  "lem-pc-finite-free-stalk-minimal-complex"
  ],
  "proof_origin": {
   "by": "agent",
+  "group": "U1",
   "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-perfect/lem-pc-perfect-locus.md",
-  "place": "Proof, first two paragraphs: local unit-entry cancellation and extension of the finite calculation"
+  "place": "Proof step 4: separate minimalization, then identify terms from residue cohomology using existing fibre-dimension lemmas"
  },
  "mathlib_searches": [
   {
@@ -126,9 +127,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "M2",
+  "group": "U1",
   "result": "pass",
-  "landing": "20261012T153011-L-2351158",
+  "landing": "20261012T161505-L-2649396",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
