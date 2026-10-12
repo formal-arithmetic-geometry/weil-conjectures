@@ -17,7 +17,7 @@ Let `g : X ⟶ Spec R` be a morphism of schemes and `U` an affine open of `X`. T
 ## Main definitions and results
 
 - `AlgebraicGeometry.Scheme.Hom.specStructureMap`: the structure map `R ⟶ Γ(X, U)`.
-- `AlgebraicGeometry.Scheme.Hom.exists_linearEquiv_kaehlerDifferential`: for `U` affine,
+- `AlgebraicGeometry.Scheme.Hom.kaehlerSectionsEquiv`: for `U` affine,
   `Ω[Γ(X, U)⁄R] ≃ Γ(Ω¹_{X/R}, U)`, sending `D b` to `d b`.
 -/
 
@@ -85,8 +85,7 @@ lemma _root_.AlgebraicGeometry.IsAffineOpen.map_eqToHom_comp_appIso_hom :
       (Scheme.ΓSpecIso Γ(X, U)).inv := by
   rw [Scheme.Hom.appIso_hom', Scheme.Hom.map_appLE, Scheme.Hom.appLE, hU.fromSpec_app_self,
     Category.assoc, ← Functor.map_comp, Subsingleton.elim (_ ≫ _) (𝟙 _),
-    CategoryTheory.Functor.map_id,
-    Category.comp_id]
+    CategoryTheory.Functor.map_id, Category.comp_id]
 
 /-- Elementwise version of `IsAffineOpen.map_eqToHom_comp_appIso_hom`. -/
 lemma _root_.AlgebraicGeometry.IsAffineOpen.map_eqToHom_apply (a : Γ(X, U)) :
@@ -114,11 +113,13 @@ def _root_.AlgebraicGeometry.Scheme.Modules.toModuleSpecΓ {A : CommRingCat.{u}}
   map_zero' := rfl
   map_add' _ _ := rfl
 
+/-- `toModuleSpecΓ` turns the action of `Γ(Spec A, ⊤)` into the action of `A`. -/
 lemma _root_.AlgebraicGeometry.Scheme.Modules.toModuleSpecΓ_smul {A : CommRingCat.{u}}
     (N : (Spec A).Modules) (a : A) (x : N.val.obj (op ⊤)) :
     N.toModuleSpecΓ ((Scheme.ΓSpecIso A).inv a • x) = a • N.toModuleSpecΓ x :=
   rfl
 
+/-- `toModuleSpecΓ` is bijective (it is the identity). -/
 lemma _root_.AlgebraicGeometry.Scheme.Modules.toModuleSpecΓ_bijective {A : CommRingCat.{u}}
     (N : (Spec A).Modules) : Function.Bijective N.toModuleSpecΓ :=
   Function.bijective_id
@@ -136,14 +137,16 @@ variable {M : X.Modules} {N : (Spec Γ(X, U)).Modules} (θ : M.restrict hU.fromS
 /-- Given identifications `θ : M|_{Spec Γ(X, U)} ≅ N` and `ε : Γ(N, ⊤) ≅ K`, the map
 `Γ(M, U) → K` obtained by restricting along `hU.fromSpec`. -/
 noncomputable def sectionsMapOfIso (m : Γ(M, U)) : K :=
-  ε.hom.hom (N.toModuleSpecΓ (θ.hom.val.app (op ⊤) (M.presheaf.map (eqToHom hU.image_fromSpec_top).op m)))
+  ε.hom.hom (N.toModuleSpecΓ (θ.hom.val.app (op ⊤)
+    (M.presheaf.map (eqToHom hU.image_fromSpec_top).op m)))
 
-set_option maxHeartbeats 20000 in
+/-- `sectionsMapOfIso` is additive. -/
 lemma sectionsMapOfIso_add (m m' : Γ(M, U)) :
-    sectionsMapOfIso hU θ ε (m + m') = sectionsMapOfIso hU θ ε m + sectionsMapOfIso hU θ ε m' := by
+    sectionsMapOfIso hU θ ε (m + m') =
+      sectionsMapOfIso hU θ ε m + sectionsMapOfIso hU θ ε m' := by
   simp only [sectionsMapOfIso, map_add]
 
-set_option maxHeartbeats 20000 in
+/-- `sectionsMapOfIso` is `Γ(X, U)`-linear. -/
 lemma sectionsMapOfIso_smul (a : Γ(X, U)) (m : Γ(M, U)) :
     sectionsMapOfIso hU θ ε (a • m) = a • sectionsMapOfIso hU θ ε m := by
   have h1 : M.presheaf.map (eqToHom hU.image_fromSpec_top).op (a • m) =
@@ -157,11 +160,10 @@ lemma sectionsMapOfIso_smul (a : Γ(X, U)) (m : Γ(M, U)) :
   refine (congrArg (fun x ↦ ε.hom.hom x) (N.toModuleSpecΓ_smul _ _)).trans ?_
   exact ε.hom.hom.map_smul _ _
 
-set_option maxHeartbeats 20000 in
+/-- `sectionsMapOfIso` is bijective, as a composite of bijections. -/
 lemma sectionsMapOfIso_bijective : Function.Bijective (sectionsMapOfIso hU θ ε) :=
   ε.toLinearEquiv.bijective.comp ((Scheme.Modules.toModuleSpecΓ_bijective _).comp
     ((Scheme.Modules.bijective_val_app _ _).comp (ConcreteCategory.bijective_of_isIso _)))
-
 
 /-- Computing `sectionsMapOfIso` for a composite `θ ≪≫ θ'`, given the restriction of `m`. -/
 lemma sectionsMapOfIso_trans_eq {N' : (Spec Γ(X, U)).Modules} (θ' : N ≅ N')
@@ -188,18 +190,21 @@ noncomputable def sectionsToKaehler (m : Γ(g.relativeDifferentials, U)) :
     relativeDifferentialsCongr _ (g.fromSpec_comp_eq_specMap hU))
     (relativeDifferentialsSpecΓIso (g.specStructureMap U)) m
 
+/-- `sectionsToKaehler` is additive. -/
 lemma sectionsToKaehler_add (m m' : Γ(g.relativeDifferentials, U)) :
     g.sectionsToKaehler hU (m + m') = g.sectionsToKaehler hU m + g.sectionsToKaehler hU m' :=
   sectionsMapOfIso_add hU _ _ m m'
 
+/-- `sectionsToKaehler` is `Γ(X, U)`-linear. -/
 lemma sectionsToKaehler_smul (a : Γ(X, U)) (m : Γ(g.relativeDifferentials, U)) :
     g.sectionsToKaehler hU (a • m) = a • g.sectionsToKaehler hU m :=
   sectionsMapOfIso_smul hU _ _ a m
 
+/-- `sectionsToKaehler` is bijective. -/
 lemma sectionsToKaehler_bijective : Function.Bijective (g.sectionsToKaehler hU) :=
   sectionsMapOfIso_bijective hU _ _
 
-set_option maxHeartbeats 20000 in
+/-- `sectionsToKaehler` sends `d b` to `D b`. -/
 lemma sectionsToKaehler_sectionsD (b : Γ(X, U)) :
     g.sectionsToKaehler hU (g.sectionsD U b) = CommRingCat.KaehlerDifferential.d b := by
   have h1 : g.relativeDifferentials.presheaf.map (eqToHom hU.image_fromSpec_top).op
@@ -270,18 +275,56 @@ lemma sectionsDerivation_apply
     g.sectionsDerivation U h b = g.sectionsD U b :=
   rfl
 
+/-- `CommRingCat.KaehlerDifferential.d` is `KaehlerDifferential.D`. -/
+lemma _root_.CommRingCat.KaehlerDifferential.d_eq_D {A B : CommRingCat.{u}} (f : A ⟶ B) (b : B) :
+    letI := f.hom.toAlgebra
+    CommRingCat.KaehlerDifferential.d (f := f) b = KaehlerDifferential.D A B b :=
+  rfl
+
+/-- For an affine open `U`, the map `Ω[Γ(X, U)⁄R] → Γ(Ω¹_{X/R}, U)` induced by
+`sectionsDerivation` is bijective: composed with the bijection `sectionsToKaehler` it is the
+identity. -/
+lemma bijective_liftKaehlerDifferential_sectionsDerivation
+    (h : algebraMap R Γ(X, U) = (g.specStructureMap U).hom) (hU : IsAffineOpen U)
+    [Module R Γ(g.relativeDifferentials, U)]
+    [IsScalarTower R Γ(X, U) Γ(g.relativeDifferentials, U)] :
+    Function.Bijective (g.sectionsDerivation U h).liftKaehlerDifferential := by
+  obtain rfl : ‹Algebra R Γ(X, U)› = (g.specStructureMap U).hom.toAlgebra :=
+    Algebra.algebra_ext _ _ (RingHom.congr_fun h)
+  let _ : Algebra R Γ(X, U) := (g.specStructureMap U).hom.toAlgebra
+  let ψ : Γ(g.relativeDifferentials, U) →ₗ[Γ(X, U)] Ω[Γ(X, U)⁄R] :=
+    { toFun := g.sectionsToKaehler hU
+      map_add' := g.sectionsToKaehler_add hU
+      map_smul' := g.sectionsToKaehler_smul hU }
+  have hD (b : Γ(X, U)) : ψ ((g.sectionsDerivation U h).liftKaehlerDifferential
+      (KaehlerDifferential.D R Γ(X, U) b)) = KaehlerDifferential.D R Γ(X, U) b := by
+    rw [Derivation.liftKaehlerDifferential_comp_D]
+    exact (g.sectionsToKaehler_sectionsD hU b).trans
+      (CommRingCat.KaehlerDifferential.d_eq_D (g.specStructureMap U) b)
+  have hψ : ψ ∘ₗ (g.sectionsDerivation U h).liftKaehlerDifferential = LinearMap.id :=
+    Derivation.liftKaehlerDifferential_unique _ _ (Derivation.ext hD)
+  have hl : Function.LeftInverse ψ (g.sectionsDerivation U h).liftKaehlerDifferential :=
+    LinearMap.congr_fun hψ
+  exact ⟨hl.injective, fun m ↦ ⟨ψ m, (g.sectionsToKaehler_bijective hU).1 (hl (ψ m))⟩⟩
+
 /-- **Sections of the sheaf of differentials over an affine open.** For an affine open `U` of a
 scheme `X` over `Spec R`, the `Γ(X, U)`-linear map `Ω[Γ(X, U)⁄R] → Γ(Ω¹_{X/R}, U)`,
 `D b ↦ d b`, is an isomorphism. -/
 noncomputable def kaehlerSectionsEquiv
     (h : algebraMap R Γ(X, U) = (g.specStructureMap U).hom) (hU : IsAffineOpen U) :
     Ω[Γ(X, U)⁄R] ≃ₗ[Γ(X, U)] Γ(g.relativeDifferentials, U) :=
-  sorry
+  letI : Module R Γ(g.relativeDifferentials, U) := Module.compHom _ (algebraMap R Γ(X, U))
+  haveI : IsScalarTower R Γ(X, U) Γ(g.relativeDifferentials, U) :=
+    IsScalarTower.of_algebraMap_smul fun _ _ ↦ rfl
+  LinearEquiv.ofBijective _ (g.bijective_liftKaehlerDifferential_sectionsDerivation U h hU)
 
 @[simp]
 lemma kaehlerSectionsEquiv_D
     (h : algebraMap R Γ(X, U) = (g.specStructureMap U).hom) (hU : IsAffineOpen U) (b : Γ(X, U)) :
     g.kaehlerSectionsEquiv U h hU (KaehlerDifferential.D R Γ(X, U) b) = g.sectionsD U b :=
-  sorry
+  letI : Module R Γ(g.relativeDifferentials, U) := Module.compHom _ (algebraMap R Γ(X, U))
+  haveI : IsScalarTower R Γ(X, U) Γ(g.relativeDifferentials, U) :=
+    IsScalarTower.of_algebraMap_smul fun _ _ ↦ rfl
+  Derivation.liftKaehlerDifferential_comp_D (g.sectionsDerivation U h) b
 
 end AlgebraicGeometry.Scheme.Hom
