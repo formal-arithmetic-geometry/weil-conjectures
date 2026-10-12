@@ -6,6 +6,7 @@ Authors: SHEAF group F1
 module
 
 public import Mathlib.RingTheory.LocalRing.ResidueField.Ideal
+import Mathlib.RingTheory.Localization.LocalizationLocalization
 
 /-!
 # Prime ideals, local rings and residue fields of a localization
@@ -70,6 +71,40 @@ theorem prime_localRing_residueField_iso
           ∀ x : Localization.AtPrime q,
             σ (IsLocalRing.residue (Localization.AtPrime q) x) =
               IsLocalRing.residue (Localization.AtPrime q') (e x) := by
-  sorry
+  let q := q'.comap (algebraMap A A')
+  have hq := (isPrime_iff_isPrime_disjoint W A' q').mp inferInstance
+  let : q.IsPrime := hq.1
+  have hp : ∀ p : Ideal A, p.IsPrime → Disjoint (W : Set A) (p : Set A) →
+      (p.map (algebraMap A A')).IsPrime ∧
+        (p.map (algebraMap A A')).comap (algebraMap A A') = p := by
+    intro p hprime hd
+    exact ⟨isPrime_of_isPrime_disjoint W A' p hprime hd,
+      under_map_of_isPrime_disjoint W A' hprime hd⟩
+  have hbij : Set.BijOn (Ideal.comap (algebraMap A A')) {r : Ideal A' | r.IsPrime}
+      {p : Ideal A | p.IsPrime ∧ Disjoint (W : Set A) (p : Set A)} := by
+    refine ⟨?_, ?_, ?_⟩
+    · intro r hr
+      exact (isPrime_iff_isPrime_disjoint W A' r).mp hr
+    · intro r hr s hs hrs
+      exact (orderEmbedding W A').injective hrs
+    · intro p hp'
+      exact ⟨p.map (algebraMap A A'), (hp p hp'.1 hp'.2).1,
+        (hp p hp'.1 hp'.2).2⟩
+  let : IsLocalization.AtPrime (Localization.AtPrime q') q :=
+    isLocalization_isLocalization_atPrime_isLocalization W (Localization.AtPrime q') q'
+  refine ⟨hq.1, hq.2, hp, map_under W A' q', hbij, inferInstance, ?_⟩
+  let e : Localization.AtPrime q ≃ₐ[A] Localization.AtPrime q' :=
+    IsLocalization.algEquiv q.primeCompl _ _
+  refine ⟨e, ?_, ?_, IsLocalRing.ResidueField.mapAlgEquiv e, ?_⟩
+  · exact (Localization.localRingHom_unique q q' (algebraMap A A') rfl
+      (fun x ↦ by
+        change e (algebraMap A (Localization.AtPrime q) x) = _
+        rw [← IsScalarTower.algebraMap_apply A A' (Localization.AtPrime q')]
+        exact e.commutes x)).symm
+  · rw [Localization.AtPrime.map_eq_maximalIdeal,
+      Localization.AtPrime.map_eq_maximalIdeal]
+    exact IsLocalRing.map_ringEquiv_maximalIdeal e.toRingEquiv
+  · intro x
+    exact IsLocalRing.ResidueField.mapAlgEquiv_residue e x
 
 end IsLocalization
