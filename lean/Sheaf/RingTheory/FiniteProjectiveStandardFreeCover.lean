@@ -7,6 +7,7 @@ module
 
 public import Mathlib.RingTheory.Finiteness.Projective
 public import Mathlib.RingTheory.Localization.Finiteness
+import Mathlib.RingTheory.Spectrum.Prime.Topology
 import Sheaf.RingTheory.FiniteProjectivePrimeLocalFree
 
 /-! # A finite standard free cover for a finite projective module
@@ -39,6 +40,40 @@ theorem exists_standardFreeCover_of_finite_projective
       ∀ i : Fin r,
         Module.Finite (Localization.Away (f i)) (LocalizedModule.Away (f i) M) ∧
         Module.Free (Localization.Away (f i)) (LocalizedModule.Away (f i) M) := by
-  sorry
-
+  let hp : ∀ p : PrimeSpectrum A, ∃ f : A, f ∉ p.asIdeal ∧
+      ∃ r : ℕ, Nonempty (LocalizedModule.Away f M ≃ₗ[Localization.Away f]
+        (Fin r →₀ Localization.Away f)) := fun p =>
+    exists_localizationAway_equiv_finsupp_of_finite_projective p.asIdeal
+  let g : PrimeSpectrum A → A := fun p => (Classical.choose (hp p))
+  have hg : ∀ p : PrimeSpectrum A, g p ∉ p.asIdeal := by
+    intro p
+    exact (Classical.choose_spec (hp p)).1
+  have hcov : (Set.univ : Set (PrimeSpectrum A)) ⊆
+      ⋃ p, PrimeSpectrum.basicOpen (g p) := by
+    intro p hp
+    simp only [Set.mem_iUnion]
+    exact ⟨p, (PrimeSpectrum.mem_basicOpen (g p) p).2 (hg p)⟩
+  obtain ⟨t, ht⟩ :=
+    (isCompact_univ : IsCompact (Set.univ : Set (PrimeSpectrum A))).elim_finite_subcover
+      (fun p => PrimeSpectrum.basicOpen (g p)) (fun p => PrimeSpectrum.isOpen_basicOpen) hcov
+  let r := Fintype.card t
+  let e : Fin r ≃ t := (Fintype.equivFin t).symm
+  let f : Fin r → A := fun i => g (e i).1
+  refine ⟨r, f, ?_, ?_⟩
+  · apply (PrimeSpectrum.iSup_basicOpen_eq_top_iff).mp
+    apply top_unique
+    intro p hp_top
+    have hp' := ht (Set.mem_univ p)
+    rcases Set.mem_iUnion.mp hp' with ⟨q, hp'⟩
+    rcases Set.mem_iUnion.mp hp' with ⟨hq, hpq⟩
+    let j : Fin r := e.symm ⟨q, hq⟩
+    have hj : p ∈ PrimeSpectrum.basicOpen (f j) := by
+      simpa [f, j] using hpq
+    exact (show PrimeSpectrum.basicOpen (f j) ≤ (⨆ i, PrimeSpectrum.basicOpen (f i)) from
+      le_iSup (fun i : Fin r => PrimeSpectrum.basicOpen (f i)) j) hj
+  · intro i
+    obtain ⟨hi, ri, ⟨equiv⟩⟩ := Classical.choose_spec (hp (e i).1)
+    have hfi : f i = Classical.choose (hp (e i).1) := rfl
+    rw [hfi]
+    exact ⟨Module.Finite.equiv equiv.symm, Module.Free.of_equiv equiv.symm⟩
 end Module
