@@ -29,111 +29,68 @@
  ],
  "proof": [
   {
-   "text": "*Setup: a principal affine open around $y$.* By condition (2) of [def-weil-pbc-ample-invertible-module] there are $d\\ge1$ and $s\\in\\Gamma(Y,\\mathcal M^{\\otimes d})$ with $y\\in Y_s$ and $U:=Y_s$ an affine open of $Y$, where $Y_s=\\{x\\in Y: s_x\\notin\\mathfrak m_x(\\mathcal M^{\\otimes d})_x\\}$. Put $\\mathcal L:=\\mathcal M^{\\otimes d}$; it is invertible [def-sc-invertible-module], [def-pur-sheaf-tensor-product]. Let $A=\\mathcal O_Y(U)$ and, for $x\\in U$, let $\\mathfrak p_x\\subset A$ be the prime of $x$ under $U\\cong\\operatorname{Spec}A$ [lem-weil-pbc-affine-open-spec-points].",
+   "text": "Choose d>0, s and the affine open U containing y from ampleness. Use the proved bridge and the source generatesAt_iff_mem_compl_support to identify U with the zero-locus complement of homOfGlobalSection s. The source isFreeGenerator_app_one_of_le makes s a free generator on U.",
    "uses": [
     "def-weil-pbc-ample-invertible-module",
     "def-sc-invertible-module",
-    "def-pur-sheaf-tensor-product",
-    "lem-weil-pbc-affine-open-spec-points"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/properties.tex",
-    "place": "Properties Proposition 01Q3 (properties-proposition-characterize-ample), proof, second paragraph: 'Choose $s\\in S_+$ homogeneous such that $X_s$ is affine'; Definition 01PS (properties-definition-ample)"
-   }
-  },
-  {
-   "text": "*A function in $\\mathcal J(U)$ which is a unit at $y$.* $\\mathcal J$ is a quasi-coherent sheaf of ideals and $y\\in U$ with $y\\notin V(\\mathcal J)$, i.e. $\\mathcal J_y=\\mathcal O_{Y,y}$. By [lem-weil-pbc-quasi-coherent-ideal-zero-set-affine] (applied to $\\mathcal K=\\mathcal J$ and the affine open $U$), $\\mathcal J(U)\\not\\subseteq\\mathfrak p_y$; choose $f\\in\\mathcal J(U)\\subseteq A$ with $f\\notin\\mathfrak p_y$. By [lem-weil-pbc-affine-open-stalk-localization] (c) the germ $f_y\\in\\mathcal O_{Y,y}$ is a unit.",
-   "uses": [
-    "lem-weil-pbc-quasi-coherent-ideal-zero-set-affine",
-    "lem-weil-pbc-affine-open-stalk-localization"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/properties.tex",
-    "place": "Properties Proposition 01Q3, proof, second paragraph (a section $m\\in\\Gamma(X_s,\\mathcal F)$ for $\\mathcal F=\\mathcal I$ a quasi-coherent ideal, (5) $\\Rightarrow$ (6)); the choice of $m$ nonzero at $x$ is implicit in the third paragraph: 'a section $s$ ... such that $s$ does not vanish at $x$'"
-   }
-  },
-  {
-   "text": "*$Y$ is quasi-compact and separated over an affine scheme.* $Y$ is quasi-compact by hypothesis (also by condition (1) of [def-weil-pbc-ample-invertible-module]) and separated, i.e. $Y\\to\\operatorname{Spec}\\mathbf Z$ is separated, by [lem-weil-pbc-ample-scheme-separated]; $\\operatorname{Spec}\\mathbf Z$ is affine.",
-   "uses": [
-    "def-weil-pbc-ample-invertible-module",
-    "lem-weil-pbc-ample-scheme-separated",
-    "def-weil-pbc-quasi-compact-scheme"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/properties.tex",
-    "place": "Properties Proposition 01Q3, proof, second paragraph: 'Note that in particular $X$ is separated (as an open subscheme of the separated scheme $\\operatorname{Proj}(S)$)'; here via Lemma 09MP (properties-lemma-ample-separated)"
-   }
-  },
-  {
-   "text": "*$Y_s$ is the complement of the zero scheme of $s$.* Let $Z(s)$ be the zero scheme of $s\\in\\Gamma(Y,\\mathcal L)$ [def-pc-zero-scheme], cut out by the quasi-coherent ideal $\\mathcal I=\\operatorname{im}(s^\\vee:\\mathcal L^\\vee\\to\\mathcal O_Y)$. On an open $W$ with a trivialization $\\mathcal L|_W\\cong\\mathcal O_W$ [def-sc-invertible-module] sending $s|_W$ to $a\\in\\mathcal O_Y(W)$, one has $\\mathcal I|_W=a\\mathcal O_W$, so for $x\\in W$: $\\mathcal I_x=\\mathcal O_{Y,x}$ iff $a_x$ is a unit iff $s_x\\notin\\mathfrak m_x\\mathcal L_x$. By [lem-weil-pbc-quasi-coherent-ideal-zero-set-affine] the underlying set of $Z(s)$ is $V(\\mathcal I)=\\{x:\\mathcal I_x\\ne\\mathcal O_{Y,x}\\}$; hence $Y\\setminus Z(s)=Y_s=U$.",
-   "uses": [
     "def-pc-zero-scheme",
-    "def-sc-invertible-module",
-    "lem-weil-pbc-quasi-coherent-ideal-zero-set-affine"
+    "lem-sc-nonvanishing-iff-generates-at"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/properties.tex",
-    "place": "Properties, Section 01PR (properties-section-ample), opening paragraph ($X_s$ is where $s$ does not vanish)"
-   }
+   "elementary": true
   },
   {
-   "text": "*Clearing the denominator.* Apply [lem-pc-section-clearing-denominators] to the quasi-compact scheme $Y$, separated over the affine scheme $\\operatorname{Spec}\\mathbf Z$ (Step 3), the invertible module $\\mathcal L$, its section $s$ (with $Y\\setminus Z(s)=U$ by Step 4), the quasi-coherent module $\\mathcal F=\\mathcal J$ and $t=f\\in\\mathcal J(U)=\\Gamma(Y_s,\\mathcal J)$ (Step 2): there are $m\\ge0$ and $u'\\in\\Gamma(Y,\\mathcal J\\otimes\\mathcal L^{\\otimes m})$ with $u'|_U=f\\otimes s^m$. Since $\\mathcal L^{\\otimes m}=(\\mathcal M^{\\otimes d})^{\\otimes m}=\\mathcal M^{\\otimes dm}$ (associativity of the tensor product [def-pur-sheaf-tensor-product]), $u'$ is a section of $\\mathcal J\\otimes\\mathcal M^{\\otimes dm}$.",
+   "text": "The Mathlib mem_support_iff_of_mem and mem_zeroLocus_iff give a in J.ideal(U) with y in D(a). The proved source range_toModulesι_app gives t in Gamma(J.toModules,U) with image a.",
    "uses": [
+    "def-sbc-closed-immersion-ideal-sheaf"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Ample separatedness gives Y.IsSeparated. The structure modules are quasi-coherent; the source isQuasicoherent_pushforward_of_isClosedImmersion and isQuasicoherent_kernel prove quasi-coherence of J.toModules, its defining kernel (no local Noetherian hypothesis). Apply denominator clearing over the terminal affine scheme: obtain m and v restricting to t tensor s^m.",
+   "uses": [
+    "lem-weil-pbc-ample-scheme-separated",
     "lem-pc-section-clearing-denominators",
-    "def-pur-sheaf-tensor-product"
+    "def-weil-pbc-quasi-compact-scheme",
+    "def-sbc-closed-immersion-ideal-sheaf",
+    "lem-pc-closed-immersion-coherent-cohomology",
+    "lem-weil-pbc-quasi-coherent-module-kernel"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/properties.tex",
-    "place": "Properties Proposition 01Q3, proof, second paragraph: 'by Lemma 01PW (properties-lemma-invert-s-sections) we may write $m$ as the image of $m'\\otimes s^{-n}$ for some $n\\ge1$, some $m'\\in\\Gamma(X,\\mathcal F\\otimes\\mathcal L^{\\otimes n})$'"
-   }
+   "elementary": false
   },
   {
-   "text": "*The section $u$ and $n>0$.* Put $n=d(m+1)\\ge1$. Let $\\mu:\\mathcal J\\otimes\\mathcal M^{\\otimes n}\\to\\mathcal M^{\\otimes n}$ be the multiplication map (the inclusion $\\mathcal J\\subseteq\\mathcal O_Y$ tensored with $\\mathcal M^{\\otimes n}$, followed by $\\mathcal O_Y\\otimes\\mathcal M^{\\otimes n}=\\mathcal M^{\\otimes n}$); $\\mathcal J\\mathcal M^{\\otimes n}\\subseteq\\mathcal M^{\\otimes n}$ is its image sheaf. Set $u:=\\mu(u'\\otimes s)\\in\\Gamma(Y,\\mathcal M^{\\otimes n})$, where $u'\\otimes s\\in\\Gamma(Y,\\mathcal J\\otimes\\mathcal M^{\\otimes dm}\\otimes\\mathcal M^{\\otimes d})=\\Gamma(Y,\\mathcal J\\otimes\\mathcal M^{\\otimes n})$ [def-pur-sheaf-tensor-product]. As $u$ is the image under $\\mu$ of a global section, $u\\in\\Gamma(Y,\\mathcal J\\mathcal M^{\\otimes n})$ (the image presheaf is contained in the image sheaf). By Step 5, $u|_U=f\\cdot s^{m+1}|_U$, with $s^{m+1}=s\\otimes\\dots\\otimes s\\in\\Gamma(Y,\\mathcal M^{\\otimes n})$.",
+   "text": "Apply mulTensorPowSection with exponent 1 to v. Its restriction is t tensor s^(m+1). Transport along tensorPowMulIso to degree n=d*(m+1)>0, then apply the ideal inclusion tensored with identity and the left unitor. Naturality and the source tensor section formulas give u restricted to U equal to a times the transported generator s^(m+1).",
    "uses": [
-    "def-pur-sheaf-tensor-product"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/properties.tex",
-    "place": "Properties Proposition 01Q3, proof, third paragraph: 'there exists an $n\\ge1$ and a section $s\\in\\Gamma(X,\\mathcal I\\otimes\\mathcal L^{\\otimes n})$ ... We may think of $s$ as a section of $\\mathcal L^{\\otimes n}$'"
-   }
-  },
-  {
-   "text": "*$y\\in Y_u$.* By [lem-weil-pbc-nonvanishing-section-trivializes] applied to $\\mathcal L$ and $s$, $\\mathcal O_U\\to\\mathcal L|_U$, $a\\mapsto a\\,s|_U$, is an isomorphism; tensoring $m+1$ copies, $\\mathcal O_U\\to\\mathcal M^{\\otimes n}|_U$, $a\\mapsto a\\,s^{m+1}|_U$, is an isomorphism [def-pur-sheaf-tensor-product]. On stalks at $y$ it is an isomorphism $\\mathcal O_{Y,y}\\to(\\mathcal M^{\\otimes n})_y$ of $\\mathcal O_{Y,y}$-modules carrying $\\mathfrak m_y$ onto $\\mathfrak m_y(\\mathcal M^{\\otimes n})_y$ and $f_y$ to $u_y$ (Step 6). Since $f_y$ is a unit (Step 2), $f_y\\notin\\mathfrak m_y$, hence $u_y\\notin\\mathfrak m_y(\\mathcal M^{\\otimes n})_y$, i.e. $y\\in Y_u$ in the sense of [def-weil-pbc-ample-invertible-module]. Thus $n>0$ and $u\\in\\Gamma(Y,\\mathcal J\\mathcal M^{\\otimes n})$ are as claimed.",
-   "uses": [
-    "lem-weil-pbc-nonvanishing-section-trivializes",
     "def-pur-sheaf-tensor-product",
-    "def-weil-pbc-ample-invertible-module"
+    "def-sc-invertible-module"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/properties.tex",
-    "place": "Properties Proposition 01Q3, proof, third paragraph: 'such that $s$ does not vanish at $x$ (more precisely such that $s\\notin\\mathfrak m_x\\mathcal I_x\\otimes\\mathcal L_x^{\\otimes n}$)'"
-   }
+   "elementary": true
+  },
+  {
+   "text": "Tensor powers of a free generator, and its image under an isomorphism, are free generators. Since y lies in D(a), generatesAt_of_mem_basicOpen gives local generation of u; the proved bridge gives y in nonvanishingLocus u.",
+   "uses": [
+    "lem-sc-nonvanishing-iff-generates-at",
+    "def-sc-invertible-module"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
   "def-weil-pbc-ample-invertible-module",
   "def-sc-invertible-module",
-  "def-pur-sheaf-tensor-product",
-  "lem-weil-pbc-affine-open-spec-points",
-  "lem-weil-pbc-quasi-coherent-ideal-zero-set-affine",
-  "lem-weil-pbc-affine-open-stalk-localization",
-  "lem-weil-pbc-ample-scheme-separated",
-  "def-weil-pbc-quasi-compact-scheme",
   "def-pc-zero-scheme",
+  "lem-sc-nonvanishing-iff-generates-at",
+  "def-sbc-closed-immersion-ideal-sheaf",
+  "lem-weil-pbc-ample-scheme-separated",
   "lem-pc-section-clearing-denominators",
-  "lem-weil-pbc-nonvanishing-section-trivializes"
+  "def-weil-pbc-quasi-compact-scheme",
+  "lem-pc-closed-immersion-coherent-cohomology",
+  "lem-weil-pbc-quasi-coherent-module-kernel",
+  "def-pur-sheaf-tensor-product"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/properties.tex",
-  "place": "Proposition 01Q3 (properties-proposition-characterize-ample), proof, paragraphs 2-3: (1) => (5) => (6) and the use of (6) at a point; the argument is specialized to the quasi-coherent ideal J and one point, with Lemma 01PW (properties-lemma-invert-s-sections) applied to F = J, and separatedness via Lemma 09MP (properties-lemma-ample-separated) in place of the open immersion into Proj (Lemma 01Q1)"
+  "place": "Proposition 01Q3 paragraphs 2-3, using proved source denominator clearing and affine ideal sections; local generation/nonvanishing bridge follows Modules 01CY."
  },
  "mathlib_searches": [
   {
@@ -255,5 +212,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-e4472",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261012T112839-L-767504",
+  "kind": "interface",
+  "note": "independent Codex review: Packet declarations and nodes matched delivered Lean files; compilation and both direct importers passed."
  }
 }

@@ -1,0 +1,110 @@
+{
+ "id": "lem-sc-nonvanishing-iff-generates-at",
+ "kind": "statement",
+ "title": "Nonvanishing is equivalent to local generation",
+ "statement": "Let $X$ be a scheme [def-pc-scheme], $M$ an invertible $\\mathcal O_X$-module [def-sc-invertible-module], and $s\\in\\Gamma(X,M)$. For every point $x\\in X$, $s_x\\notin\\mathfrak m_x M_x$ [def-weil-pbc-ample-invertible-module] if and only if $s$ freely generates $M$ on an open neighbourhood of $x$ [def-sc-section-generating-locus].",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sc-invertible-module",
+  "def-weil-pbc-ample-invertible-module",
+  "def-sc-section-generating-locus"
+ ],
+ "source": {
+  "document": "literature/stacks-project/modules.tex",
+  "place": "Lemma 01CY, nonvanishing locus and local trivialization by a section"
+ },
+ "proof": [
+  {
+   "text": "Choose a local free generator e and write s=a e. The stalk basis identifies the germ of s with the germ of a and identifies the maximal-ideal submodule with the maximal ideal; hence nonvanishing is equivalent to a being a unit. The basic-open characterization of units gives the equivalence with local generation.",
+   "uses": [
+    "def-sc-section-generating-locus"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-sc-section-generating-locus"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/modules.tex",
+  "place": "Tag 01CY"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "invertible module section nonvanishing local free generator",
+   "results": "{\"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: Internal Server Error\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "nonvanishing open of a global section of an invertible module free generator",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.LocallyRingedSpace.\\u0393evaluation_ne_zero_iff_mem_basicOpen\", \"AlgebraicGeometry.Scheme.evaluation_ne_zero_iff_mem_basicOpen\", \"AlgebraicGeometry.LocallyRingedSpace.evaluation_ne_zero_iff_mem_basicOpen\", \"AlgebraicGeometry.RingedSpace.mem_basicOpen'\", \"AlgebraicGeometry.RingedSpace.basicOpen\", \"AlgebraicGeometry.RingedSpace.mem_top_basicOpen\", \"AlgebraicGeometry.RingedSpace.mem_basicOpen\", \"AlgebraicGeometry.Scheme.mem_basicOpen'\"], \"digest\": \"32068d6e1d605ae9\"}",
+   "date": "2026-10-12",
+   "verdict": "No exact theorem; the proved source API for local generation is used."
+  },
+  {
+   "tool": "grep",
+   "query": "generatesAt_iff_mem_compl_support",
+   "results": "{\"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-12",
+   "verdict": "No exact theorem; the proved source API for local generation is used."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AmpleIdealSection",
+  "date": "2026-10-12",
+  "group": "G2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-pic-proper-ntorsion",
+   "place": "Proof first sentence: establish projectivity; ample ideal section proof steps 4 and 7, identify fibrewise nonvanishing with a local trivialization",
+   "via": [
+    "lem-sc-ample-ideal-section",
+    "lem-sc-reduced-dim-le-one-ample",
+    "lem-sc-dim-one-ample-invertible",
+    "lem-sc-dim-one-quasi-projective"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-thm-curveestimate",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.NonvanishingGeneratingLocus",
+  "file": "lean/Sheaf/AlgebraicGeometry/NonvanishingGeneratingLocus.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.mem_nonvanishingLocus_iff_generatesAt",
+  "statement": "theorem mem_nonvanishingLocus_iff_generatesAt {X : Scheme.{u}} (M : X.Modules) [M.IsInvertible] (s : Γ(M, ⊤)) (x : X) : x ∈ nonvanishingLocus M s ↔ GeneratesAt s x",
+  "branch": "sheaf-dag",
+  "by": "G2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-e4472",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261012T112839-L-767504",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-e4472",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261012T112839-L-767504",
+  "kind": "interface",
+  "note": "independent Codex review: Packet declarations and nodes matched delivered Lean files; compilation and both direct importers passed."
+ }
+}
