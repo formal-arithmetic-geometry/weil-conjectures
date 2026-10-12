@@ -17,36 +17,49 @@
  ],
  "proof": [
   {
-   "text": "Given a finite module trivialization, forget it to an abelian trivialization. Constant module sheaves have the corresponding constant abelian sheaves underneath. Lift every geometric point to a member of the cover and identify its stalk with the finite constant value. This proves local constancy and finite abelian stalks.",
+   "text": "For a module constant-value trivialization on an etale object U, apply sheafCompose and constantCommuteCompose to obtain an abelian trivialization with the same underlying value. The pointwise restriction and forgetting commute definitionally.",
    "uses": [
-    "lem-weil-pbc-constant-module-sheaf-underlying",
-    "lem-weil-pbc-etale-cover-geometric-point-lift",
-    "lem-weil-pbc-constant-sheaf-geometric-stalk"
+    "lem-weil-pbc-constant-module-sheaf-underlying"
    ],
-   "elementary": false
+   "elementary": true
   },
   {
-   "text": "Given an abelian trivialization with finite stalks, discard empty cover members. Choose a geometric point on each remaining member. Its constant abelian value is isomorphic to the finite stalk, so is finite and annihilated by n. Give this value its canonical cyclic-module structure. Constants commute with forgetting and every additive map between cyclic modules is linear, so the trivialization lifts to a module isomorphism. These isomorphisms supply the LocallyConstantDatum and its finite constant values. For n=1 all values are zero. Empty schemes use the empty cover.",
+   "text": "Transport an abelian constant-value trivialization from the slice site over U to the small etale site of U.left, using overSheafEquivFunctorObjOverIso and constantSheafSheafCongrIso. Apply the pullback-stalk isomorphism and the constant-sheaf stalk isomorphism; their composite identifies the original abelian stalk at s composed with U.hom with the constant abelian value.",
    "uses": [
-    "lem-weil-pbc-constant-sheaf-geometric-stalk",
-    "lem-weil-pbc-constant-module-sheaf-underlying",
-    "lem-weil-pbc-sheaves-killed-by-n-zmod-modules",
+    "lemma-openclosed-stalk-upperstar",
+    "lem-weil-pbc-constant-sheaf-geometric-stalk"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Suppose the underlying abelian sheaf is locally constant with finite algebraically closed geometric stalks. Take its trivializing cover and retain only members with a point; this remains jointly surjective since every covered point lies in a nonempty member. Apply cyclic-module reflection of constancy to each restriction to construct a module LocallyConstantDatum. Choose its constant module value E. Choose a point x on that member and the algebraic closure of its residue field, defining s:Spec Omega to U.left via SpecToEquivOfField. The stalk identification in step 2, after step 1, transfers the assumed finite abelian stalk to E. This gives the finite module values required on the right.",
+   "uses": [
+    "lem-weil-pbc-cyclic-module-constant-reflection",
     "def-constructible-locally-constant"
    ],
-   "elementary": false
+   "elementary": true
+  },
+  {
+   "text": "Conversely, forget the given finite module trivializations using step 1; they supply an abelian LocallyConstantDatum. For a geometric point s of Y, choose a member over its underlying point and lift s with exists_fac_of_etale_of_isSepClosed. Step 2 identifies its stalk with the finite underlying constant module value, so its stalk is finite. Combine the resulting local constancy and stalk finiteness. Empty schemes require no chosen cover member; n=1 is included in the cyclic reflection argument.",
+   "uses": [
+    "lem-weil-pbc-etale-cover-geometric-point-lift",
+    "def-constructible-locally-constant"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
+  "def-constructible-locally-constant",
   "lem-weil-pbc-constant-module-sheaf-underlying",
-  "lem-weil-pbc-etale-cover-geometric-point-lift",
   "lem-weil-pbc-constant-sheaf-geometric-stalk",
-  "lem-weil-pbc-sheaves-killed-by-n-zmod-modules",
-  "def-constructible-locally-constant"
+  "lem-weil-pbc-cyclic-module-constant-reflection",
+  "lem-weil-pbc-etale-cover-geometric-point-lift",
+  "lemma-openclosed-stalk-upperstar"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Definition 03RU (definition-finite-locally-constant), abelian and module clauses; Definition 03RW (definition-constructible) (2),(3) with Lambda=Z/n; parent proof steps 4--6.; local part of lem-weil-pbc-constructible-torsion-modules-agree"
+  "place": "Definitions 03RU and 03RW(2),(3); complete Lean proof with quotient-based cyclic constancy reflection and explicit transport of constant values to algebraically closed stalks."
  },
  "mathlib_searches": [
   {
@@ -128,9 +141,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "K1",
+  "group": "V3",
   "result": "pass",
-  "landing": "20261012T063512-L-3156318",
+  "landing": "20261012T085355-L-45893",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
