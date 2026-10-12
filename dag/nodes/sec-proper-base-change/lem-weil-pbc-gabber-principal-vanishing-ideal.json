@@ -1,0 +1,155 @@
+{
+ "id": "lem-weil-pbc-gabber-principal-vanishing-ideal",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Gabber criterion (Stacks 0GY0), ideal and addition-closure paragraphs",
+   "via": [
+    "lem-weil-pbc-gabber-criterion-degree"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "GabberPrincipalVanishingIdeal",
+ "statement": "Let $R$ be a commutative ring, $X=\\operatorname{Spec}R$ [def-weil-affine-spectrum], and $F$ an abelian sheaf on $X_{\\mathrm{Et}}$ [def-weil-pbc-etale-site] [def-weil-pbc-abelian-etale-sheaves]. Write $F|_{D(a)}$ for inverse image along the open immersion $D(a)\\to X$ [def-weil-open-immersion] [def-weil-pbc-inverse-image], and use etale cohomology [def-weil-pbc-etale-cohomology]. Assume that for every $f,g\\in R$ and $x\\in H^1(D(f+g),F|_{D(f+g)})$, if both pullbacks of $x$ along $D(f(f+g))\\to D(f+g)$ and $D(g(f+g))\\to D(f+g)$ vanish then $x=0$. Let $q>0$ and assume $H^n(D(a),F|_{D(a)})=0$ for every $a\\in R$ and every $0<n<q$. Let $h\\in R$ and $\\xi\\in H^q(D(h),F|_{D(h)})$. For $f\\in R$ let $\\rho_{h,f}^q:H^q(D(h),F|_{D(h)})\\to H^q(D(fh),(D(fh)\\to D(h))^{-1}(F|_{D(h)}))$ be the pullback [def-weil-pbc-cohomology-pullback]. Then there is an ideal $I\\subset R$ such that for every $f\\in R$, $f\\in I$ if and only if $\\rho_{h,f}^q(\\xi)=0$.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Lemma 0GY0 (label lemma-gabber-criterion), proof: simultaneous induction on all principal opens, local triviality, and the ideal of vanishing restrictions."
+ },
+ "stmt_deps": [
+  "def-weil-affine-spectrum",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-abelian-etale-sheaves",
+  "def-weil-open-immersion",
+  "def-weil-pbc-inverse-image",
+  "def-weil-pbc-cohomology-pullback",
+  "def-weil-pbc-etale-cohomology"
+ ],
+ "proof": [
+  {
+   "text": "Define the carrier I by rho_{h,f}(xi)=0. The zero element belongs since D(0) is empty and its cohomology is zero. Multiplication by r restricts further from D(fh) to D(rfh), so functoriality and inverse-image composition preserve zero.",
+   "uses": [
+    "lem-weil-pbc-cohomology-pullback-functorial",
+    "lem-weil-pbc-inverse-image-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Lemma 0GY0 (label lemma-gabber-criterion), proof: simultaneous induction on all principal opens, local triviality, and the ideal of vanishing restrictions."
+   }
+  },
+  {
+   "text": "If q=1, restrict xi to D(h(f+g)) and apply the given kernel condition to hf and hg. The two target opens D(h^2 f(f+g)), D(h^2 g(f+g)) equal D(hf(f+g)), D(hg(f+g)). Both images are zero when f,g belong to I, by further restriction and inverse-image composition. Therefore f+g belongs to I.",
+   "uses": [
+    "lem-weil-pbc-cohomology-pullback-functorial",
+    "lem-weil-pbc-inverse-image-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Lemma 0GY0 (label lemma-gabber-criterion), proof: simultaneous induction on all principal opens, local triviality, and the ideal of vanishing restrictions."
+   }
+  },
+  {
+   "text": "If q>1, D(h(f+g)) is covered by D(hf(f+g)) and D(hg(f+g)), with intersection D(hfg(f+g)). Its degree q-1 cohomology is zero by the assumed induction hypothesis on all principal opens. Mayer-Vietoris makes the two degree-q restriction maps jointly injective. The images of the restricted class are zero, hence it is zero. Addition closure follows. Multiplication by -1 gives negatives, and the carrier with these operations is an ideal.",
+   "uses": [
+    "lem-weil-pbc-etale-mayer-vietoris",
+    "lem-weil-pbc-cohomology-pullback-functorial",
+    "lem-weil-pbc-inverse-image-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Lemma 0GY0 (label lemma-gabber-criterion), proof: simultaneous induction on all principal opens, local triviality, and the ideal of vanishing restrictions."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-cohomology-pullback-functorial",
+  "lem-weil-pbc-etale-mayer-vietoris",
+  "lem-weil-pbc-inverse-image-composition"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Lemma 0GY0 (label lemma-gabber-criterion), proof: simultaneous induction on all principal opens, local triviality, and the ideal of vanishing restrictions."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "principal restriction vanishing locus of cohomology class is an ideal using Mayer Vietoris induction",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "principal restriction vanishing locus of cohomology class is an ideal using Mayer Vietoris induction",
+   "results": "AlgebraicGeometry.Scheme.zero_of_zero_cover; AlgebraicGeometry.Scheme.IdealSheafData.mkOfMemSupportIff_ideal; AlgebraicGeometry.Scheme.IdealSheafData.vanishingIdeal; AlgebraicGeometry.Scheme.IdealSheafData.mkOfMemSupportIff; AlgebraicGeometry.Scheme.IdealSheafData.ofIdealTop; AlgebraicGeometry.RingedSpace.zeroLocus; AlgebraicGeometry.Scheme.IdealSheafData.ideal_ofIdeals_le; ModuleCat.Tilde.sectionsSubmodule",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "vanishing.*ideal|ideal.*vanishing|mayerVietoris",
+   "results": "Mathlib/CategoryTheory/Sites/MayerVietorisSquare.lean; Mathlib/CategoryTheory/Sites/MayerVietorisSquare.lean; Mathlib/CategoryTheory/Sites/MayerVietorisSquare.lean; Mathlib/CategoryTheory/Sites/MayerVietorisSquare.lean; Mathlib/CategoryTheory/Sites/MayerVietorisSquare.lean; Mathlib/CategoryTheory/Sites/SheafCohomology/MayerVietoris.lean; Mathlib/CategoryTheory/Sites/SheafCohomology/MayerVietoris.lean; Mathlib/CategoryTheory/Sites/SheafCohomology/MayerVietoris.lean",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.GabberCriterionDegree",
+  "date": "2026-10-12",
+  "group": "T2"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.GabberPrincipalVanishingIdeal",
+  "file": "lean/Sheaf/Paper/GabberPrincipalVanishingIdeal.lean",
+  "declaration": "AlgebraicGeometry.Etale.gabber_principal_vanishing_ideal",
+  "statement": "theorem gabber_principal_vanishing_ideal (R : Type u) [CommRing R] (F : Sheaf (Spec (CommRingCat.of R)).smallEtaleTopology AddCommGrpCat.{u + 1}) (hfg : ∀ (f g : R) (x : Sheaf.H (((Scheme.Opens.ι (X := Spec (CommRingCat.of R)) (PrimeSpectrum.basicOpen (f + g)))^*[AddCommGrpCat.{u + 1}]).obj F) 1), (AlgebraicGeometry.Etale.cohomologyMap (Scheme.homOfLE (X := Spec (CommRingCat.of R)) (PrimeSpectrum.basicOpen_mul_le_right f (f + g))) (((Scheme.Opens.ι (X := Spec (CommRingCat.of R)) (PrimeSpectrum.basicOpen (f + g)))^*[AddCommGrpCat.{u + 1}]).obj F) 1 x) = 0 → (AlgebraicGeometry.Etale.cohomologyMap (Scheme.homOfLE (X := Spec (CommRingCat.of R)) (PrimeSpectrum.basicOpen_mul_le_right g (f + g))) (((Scheme.Opens.ι (X := Spec (CommRingCat.of R)) (PrimeSpectrum.basicOpen (f + g)))^*[AddCommGrpCat.{u + 1}]).obj F) 1 x) = 0 → x = 0) (q : ℕ) (hq : 0 < q) (hprev : ∀ (n : ℕ), 0 < n → n < q → ∀ (a : R), Subsingleton (Sheaf.H (((Scheme.Opens.ι (X := Spec (CommRingCat.of R)) (PrimeSpectrum.basicOpen a))^*[AddCommGrpCat.{u + 1}]).obj F) n)) (h : R) (ξ : Sheaf.H (((Scheme.Opens.ι (X := Spec (CommRingCat.of R)) (PrimeSpectrum.basicOpen h))^*[AddCommGrpCat.{u + 1}]).obj F) q) : ∃ I : Ideal R, ∀ f : R, f ∈ I ↔ (cohomologyMap (Scheme.homOfLE (X := Spec (CommRingCat.of R)) (PrimeSpectrum.basicOpen_mul_le_right f h)) (((Scheme.Opens.ι (X := Spec (CommRingCat.of R)) (PrimeSpectrum.basicOpen h))^*[AddCommGrpCat.{u + 1}]).obj F) q ξ) = 0",
+  "branch": "sheaf-dag",
+  "by": "T2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T2",
+  "result": "pass",
+  "landing": "20261012T070553-L-3478408",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T2",
+  "result": "pass",
+  "landing": "20261012T070553-L-3478408",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

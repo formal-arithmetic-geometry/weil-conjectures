@@ -4,11 +4,9 @@ public import Mathlib.AlgebraicGeometry.Restrict
 public import Mathlib.RingTheory.Localization.AtPrime.Basic
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
 public import WeilConjectures.Mathlib.RingTheory.Henselian
-import Sheaf.AlgebraicGeometry.EtaleMayerVietoris
-import Sheaf.AlgebraicGeometry.ZariskiCohomologyLocallyZero
-import Sheaf.Paper.StrictHenselianZariskiEtaleComparison
-import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
-import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
+import Sheaf.Paper.GabberPrincipalClassLocallyZero
+import Sheaf.Paper.GabberPrincipalVanishingIdeal
+import Mathlib.RingTheory.Ideal.Operations
 
 @[expose] public section
 
@@ -55,6 +53,51 @@ theorem gabberCriterion_degree
               (PrimeSpectrum.basicOpen (f + g)))^*[AddCommGrpCat.{u + 1}]).obj F) 1 x) = 0 →
         x = 0)
     (q : ℕ) (hq : 0 < q) : Subsingleton (Sheaf.H F q) := by
-  sorry
+  have hall : ∀ (n : ℕ), 0 < n → ∀ (h : R),
+      Subsingleton (Sheaf.H
+        (((Scheme.Opens.ι (X := Spec (CommRingCat.of R))
+          (PrimeSpectrum.basicOpen h))^*[AddCommGrpCat.{u + 1}]).obj F) n) := by
+    intro n
+    induction n using Nat.strong_induction_on with
+    | h n ih =>
+        intro hn h
+        refine ⟨fun ξ η ↦ ?_⟩
+        have hz : ∀ ξ : Sheaf.H
+            (((Scheme.Opens.ι (X := Spec (CommRingCat.of R))
+              (PrimeSpectrum.basicOpen h))^*[AddCommGrpCat.{u + 1}]).obj F) n,
+            ξ = 0 := by
+          intro ξ
+          obtain ⟨I, hI⟩ := gabber_principal_vanishing_ideal R F hfg n hn
+            (fun m hm hmn a ↦ ih m hmn hm a) h ξ
+          have hr : h ∈ I.radical := by
+            rw [Ideal.radical_eq_sInf]
+            rw [Submodule.mem_sInf]
+            intro p hp
+            let _ : Ideal.IsPrime p := hp.2
+            by_contra hh
+            obtain ⟨f, hf, hfp⟩ :=
+              gabber_principal_class_locally_zero R hR F n hn h ξ p hh
+            exact hfp (hp.1 ((hI f).mpr hf))
+          obtain ⟨N, hN⟩ := Ideal.mem_radical_iff.mp hr
+          have hzero := (hI (h ^ N)).mp hN
+          have heq : PrimeSpectrum.basicOpen (h ^ N * h) = PrimeSpectrum.basicOpen h := by
+            rw [← pow_succ, PrimeSpectrum.basicOpen_pow h (N + 1) (Nat.succ_pos N)]
+          have hiso : IsIso (Scheme.homOfLE (X := Spec (CommRingCat.of R))
+              (PrimeSpectrum.basicOpen_mul_le_right (h ^ N) h)) := by
+            change IsIso (Scheme.homOfLE (X := Spec (CommRingCat.of R)) heq.le)
+            rw [← Scheme.isoOfEq_hom _ heq]
+            infer_instance
+          exact (cohomologyMap_bijective _ _ n).injective
+            (hzero.trans (map_zero _).symm)
+        exact (hz ξ).trans (hz η).symm
+  have htop : IsIso (Scheme.Opens.ι (X := Spec (CommRingCat.of R))
+      (PrimeSpectrum.basicOpen (1 : R))) := by
+    rw [PrimeSpectrum.basicOpen_one]
+    change IsIso (Spec (CommRingCat.of R)).topIso.hom
+    infer_instance
+  have := hall q hq 1
+  exact (cohomologyMap_bijective
+    (Scheme.Opens.ι (X := Spec (CommRingCat.of R)) (PrimeSpectrum.basicOpen (1 : R)))
+    F q).injective.subsingleton
 
 end AlgebraicGeometry.Etale
