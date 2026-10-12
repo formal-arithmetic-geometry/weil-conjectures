@@ -110,6 +110,21 @@ section General
 variable {k : Type u} [Field k] {X : Scheme.{u}} [X.Over (Spec (.of k))]
 
 variable (k X) in
+/-- A curve over a field has dimension at most one. -/
+lemma topologicalKrullDim_le_one [SmoothOfRelativeDimension 1 (X ↘ Spec (.of k))] :
+    topologicalKrullDim X ≤ 1 := by
+  exact_mod_cast topologicalKrullDim_le_of_smoothOfRelativeDimension (X ↘ Spec (.of k)) 1
+
+variable (k X) in
+/-- A scheme of finite type over a field is a noetherian topological space. -/
+lemma noetherianSpace_of_locallyOfFiniteType [LocallyOfFiniteType (X ↘ Spec (.of k))]
+    [QuasiCompact (X ↘ Spec (.of k))] : NoetherianSpace X := by
+  have : IsLocallyNoetherian X := LocallyOfFiniteType.isLocallyNoetherian (X ↘ Spec (.of k))
+  have : CompactSpace X := QuasiCompact.compactSpace_of_compactSpace (X ↘ Spec (.of k))
+  have : IsNoetherian X := {}
+  infer_instance
+
+variable (k X) in
 /-- On an integral scheme proper over `k`, `Γ(X, 𝒪_X)` is a field: it is a domain which is
 integral over `k`. -/
 lemma isField_Γ_of_isProper [IsIntegral X] [IsProper (X ↘ Spec (.of k))] : IsField Γ(X, ⊤) := by
@@ -158,7 +173,7 @@ noncomputable def residueSum :
 lemma residueSum_apply
     (d : Π₀ x : closedPoints X, Ω[X.functionField⁄k] ⧸
       Modules.stalkLattice k (differentialsToGeneric k X) x.1) :
-    residueSum k X d = ∑ᶠ x, residueAt k X x.1 (d x) := by
+    residueSum k X d = ∑ᶠ x : closedPoints X, residueAt k X x.1 (d x) := by
   classical
   rw [residueSum, DFinsupp.lsum_apply_apply, DFinsupp.sumAddHom_apply, DFinsupp.sum]
   refine (finsum_eq_sum_of_support_subset _ fun x hx ↦ ?_).symm
@@ -166,18 +181,14 @@ lemma residueSum_apply
   intro h
   exact hx (by simp [h])
 
-lemma residueSum_single (x : closedPoints X) (v : Ω[X.functionField⁄k]) :
+lemma residueSum_single [DecidableEq (closedPoints X)] (x : closedPoints X)
+    (v : Ω[X.functionField⁄k]) :
     residueSum k X (DFinsupp.single x (Submodule.Quotient.mk v)) =
       TateResidue.localRes (localSubalgebra k X x.1) v := by
-  classical
   rw [residueSum_apply, finsum_eq_single _ x fun y hy ↦ by
     rw [DFinsupp.single_eq_of_ne hy, map_zero], DFinsupp.single_eq_same, residueAt_mk]
 
 variable [SmoothOfRelativeDimension 1 (X ↘ Spec (.of k))]
-
-/-- A curve over a field has dimension at most one. -/
-lemma topologicalKrullDim_le_one : topologicalKrullDim X ≤ 1 := by
-  exact_mod_cast topologicalKrullDim_le_of_smoothOfRelativeDimension (X ↘ Spec (.of k)) 1
 
 /-- The local rings of a curve at its closed points are admissible in Tate's sense. -/
 lemma admissible_localSubalgebra {x : X} (hx : IsClosed {x}) :
@@ -187,14 +198,6 @@ lemma admissible_localSubalgebra {x : X} (hx : IsClosed {x}) :
   Subalgebra.admissible_of_isDiscreteValuationRing _
 
 variable [IsProper (X ↘ Spec (.of k))]
-
-/-- A proper curve over a field is a noetherian topological space. -/
-lemma noetherianSpace_of_isProper : NoetherianSpace X := by
-  have := SmoothOfRelativeDimension.smooth 1 (X ↘ Spec (.of k))
-  have : IsLocallyNoetherian X := LocallyOfFiniteType.isLocallyNoetherian (X ↘ Spec (.of k))
-  have : CompactSpace X := QuasiCompact.compactSpace_of_compactSpace (X ↘ Spec (.of k))
-  have : IsNoetherian X := {}
-  infer_instance
 
 /-- **The residue theorem on a curve.** For `η ∈ Ω[K⁄k]`, `∑_{x closed} res_x(η) = 0`: this is
 Tate's abstract residue theorem `TateResidue.residue_theorem` for the local rings `𝒪_{X,x}`,
@@ -210,9 +213,10 @@ theorem residueSum_differentialsPrincipalPartsMap [NoetherianSpace X]
   have hadm (x : closedPoints X) : TateResidue.Admissible X.functionField
       (Subalgebra.toSubmodule (O x)) := admissible_localSubalgebra k X x.2
   have hH0 : Module.Finite k (⨅ x, O x : Subalgebra k X.functionField) := by
-    have := finiteDimensional_iInf_localSubalgebra k X hdim
-    exact Module.Finite.equiv ((Submodule.equivOfEq _ _
-      (Subalgebra.iInf_toSubmodule O).symm).trans (Subalgebra.toSubmoduleEquiv _))
+    have : Module.Finite k ↥(⨅ x, Subalgebra.toSubmodule (O x)) :=
+      finiteDimensional_iInf_localSubalgebra k X hdim
+    exact Module.Finite.equiv ((LinearEquiv.ofEq _ _
+      (Algebra.iInf_toSubmodule O).symm).trans (Subalgebra.toSubmoduleEquiv _))
   have hpp : TateResidue.principalParts O hfin = localPrincipalPartsMap k X hdim :=
     LinearMap.ext fun f ↦ DFinsupp.ext fun x ↦ TateResidue.principalParts_apply O hfin f x
   have hH1 : Module.Finite k ((Π₀ x, X.functionField ⧸ Subalgebra.toSubmodule (O x)) ⧸
@@ -232,7 +236,7 @@ theorem residueSum_differentialsPrincipalPartsMap [NoetherianSpace X]
 noncomputable def residueTrace :
     Module.Dual k (Modules.H (X := X) (X ↘ Spec (.of k)).relativeDifferentials 1) :=
   have := SmoothOfRelativeDimension.smooth 1 (X ↘ Spec (.of k))
-  have := noetherianSpace_of_isProper k X
+  have := noetherianSpace_of_locallyOfFiniteType k X
   (LinearMap.range (differentialsPrincipalPartsMap k (topologicalKrullDim_le_one k X))).liftQ
     (residueSum k X) (by
       rintro _ ⟨η, rfl⟩
@@ -247,9 +251,8 @@ lemma residueTrace_symm_mk_eq_residueSum [NoetherianSpace X] [Smooth (X ↘ Spec
       Modules.stalkLattice k (differentialsToGeneric k X) x.1) :
     residueTrace k X ((differentialsH1Equiv k hdim).symm (Submodule.Quotient.mk d)) =
       residueSum k X d := by
-  change Submodule.liftQ _ _ _ ((differentialsH1Equiv k _)
-    ((differentialsH1Equiv k hdim).symm (Submodule.Quotient.mk d))) = _
-  rw [LinearEquiv.apply_symm_apply, Submodule.liftQ_apply]
+  rw [residueTrace, LinearMap.comp_apply, LinearEquiv.coe_coe, LinearEquiv.apply_symm_apply,
+    Submodule.liftQ_apply]
 
 /-- **The formula for the residue trace.** If the class in `H¹(X, ω)` is represented by
 `d ∈ ⨁_x Ω[K⁄k] ⧸ ω_x`, `d_x = η_x mod ω_x` for differentials `η_x ∈ Ω[K⁄k]`, then
@@ -273,7 +276,7 @@ class of the principal part `u ϖ⁻¹ dϖ` at `x` has residue trace `Tr_{κ(x)/
 theorem residueTrace_ne_zero : residueTrace k X ≠ 0 := by
   classical
   have := SmoothOfRelativeDimension.smooth 1 (X ↘ Spec (.of k))
-  have := noetherianSpace_of_isProper k X
+  have := noetherianSpace_of_locallyOfFiniteType k X
   have hdim := topologicalKrullDim_le_one k X
   obtain ⟨x, hx, -, hsep⟩ :=
     (Hom.dense_setOf_isClosed_finite_isSeparable (X ↘ Spec (.of k))).nonempty
@@ -295,9 +298,10 @@ theorem residueTrace_ne_zero : residueTrace k X ≠ 0 := by
         KaehlerDifferential.D k X.functionField ϖ)))))
   rw [residueTrace_symm_mk_eq_residueSum, residueSum_single, LinearMap.zero_apply,
     TateResidue.localRes_mul_inv_smul_D (admissible_localSubalgebra k X hx) u ϖ hϖ0] at h1
-  rw [← h1, ← Algebra.trace_eq_of_algEquiv
-    (Ideal.quotientEquivAlgOfEq k hϖ.maximalIdeal_eq.symm) (Ideal.Quotient.mk _ u)]
-  rfl
+  have e := Algebra.trace_eq_of_algEquiv (Ideal.quotientEquivAlgOfEq k hϖ.maximalIdeal_eq.symm)
+    (Ideal.Quotient.mk (Ideal.span {ϖ}) u)
+  rw [h1] at e
+  exact e
 
 end Residue
 
