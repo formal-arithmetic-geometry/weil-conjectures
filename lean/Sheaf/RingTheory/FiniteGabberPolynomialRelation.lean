@@ -5,7 +5,7 @@ public import Mathlib.RingTheory.Jacobson.Ideal
 public import Mathlib.RingTheory.Ideal.Quotient.Operations
 public import Mathlib.RingTheory.Flat.FaithfullyFlat.Algebra
 public import Mathlib.Algebra.Category.Ring.Basic
-import Sheaf.RingTheory.LiftIdempotentUpstairs
+import Sheaf.RingTheory.FiniteGabberUpstairsRelation
 
 @[expose] public section
 
@@ -54,6 +54,31 @@ theorem exists_gabber_relation_after_base_change
           ∑ j : Fin (d + 1), (I.subtype.comp (LinearMap.proj j)).smulRight (b ^ (j : ℕ));
         TensorProduct.mk A C (B ⧸ LinearMap.range L) 1
           ((LinearMap.range L).mkQ ((b - 1) * b ^ d)) = 0 := by
-  sorry
+  classical
+  obtain ⟨C, f, hC, d, hd, c, hc⟩ :=
+    exists_gabber_upstairs_tensor_relation I hI B₁ B₂ e he h₁ b hb
+  let : Algebra A C := f.toAlgebra
+  refine ⟨C, f, hC, d, hd, ?_⟩
+  let L : (Fin (d + 1) → I) →ₗ[A] B :=
+    ∑ j : Fin (d + 1), (I.subtype.comp (LinearMap.proj j)).smulRight (b ^ (j : ℕ))
+  let q := (LinearMap.range L).mkQ
+  change q.lTensor C (TensorProduct.tmul A (1 : C) ((b - 1) * b ^ d)) = 0
+  rw [hc, map_sum]
+  apply Finset.sum_eq_zero
+  intro j hj
+  have hq : q.comp (I.subtype.smulRight (b ^ (j : ℕ))) = 0 := by
+    ext i
+    change Submodule.Quotient.mk _ = 0
+    apply (Submodule.Quotient.mk_eq_zero _).2
+    refine ⟨Pi.single j i, ?_⟩
+    simp only [L, LinearMap.sum_apply, LinearMap.smulRight_apply,
+      LinearMap.comp_apply, LinearMap.proj_apply, Submodule.subtype_apply]
+    rw [Finset.sum_eq_single j]
+    · simp
+    · intro k hk hkj
+      simp [hkj]
+    · simp
+  rw [← LinearMap.lTensor_comp_apply, hq, LinearMap.lTensor_zero]
+  rfl
 
 end Algebra
