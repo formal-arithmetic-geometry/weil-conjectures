@@ -8,6 +8,7 @@ module
 public import Mathlib.Algebra.Homology.DerivedCategory.Fractions
 public import Mathlib.CategoryTheory.Functor.OfSequence
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.DerivedBaseChange
+public import WeilConjectures.Algebra.Homology.DerivedCategory.ReductionDatum
 
 /-!
 # Strict models of normalized towers
@@ -191,5 +192,97 @@ lemma towerModelMap_spec (n : ℕ) :
   (KFlatModel.exists_hom _ (towerModel L t n) (t n)).choose_spec.choose_spec
 
 end Tower
+
+section Coherence
+
+variable {A₀ A₁ A₂ A₃ : Type (u + 1)} [CommRing A₀] [CommRing A₁] [CommRing A₂] [CommRing A₃]
+  (f₁ : A₀ →+* A₁) (f₂ : A₁ →+* A₂) (f₃ : A₂ →+* A₃) (f₁₂ : A₀ →+* A₂) (f₂₃ : A₁ →+* A₃)
+  (f₁₂₃ : A₀ →+* A₃) (h₁₂ : f₁₂ = f₂.comp f₁) (h₂₃ : f₂₃ = f₃.comp f₂)
+  (h₁ : f₁₂₃ = f₂₃.comp f₁) (h₂ : f₁₂₃ = f₃.comp f₁₂)
+
+/-- The composition isomorphisms of restrictions of scalars are associative. -/
+lemma _root_.CategoryTheory.Sheaf.restrictScalarsCompIso_assoc
+    (F : Sheaf J (ModuleCat.{u + 1} A₃)) :
+    (Sheaf.restrictScalars J f₁).map ((Sheaf.restrictScalarsCompIso J f₂ f₃ f₂₃ h₂₃).hom.app F) ≫
+        (Sheaf.restrictScalarsCompIso J f₁ f₂₃ f₁₂₃ h₁).hom.app F =
+      (Sheaf.restrictScalarsCompIso J f₁ f₂ f₁₂ h₁₂).hom.app ((Sheaf.restrictScalars J f₃).obj F) ≫
+        (Sheaf.restrictScalarsCompIso J f₁₂ f₃ f₁₂₃ h₂).hom.app F := by
+  ext U x
+  rfl
+
+/-- The composition isomorphisms of restrictions of scalars of complexes are associative. -/
+lemma restrictScalarsCompIso_assoc_complex
+    (K : CochainComplex (Sheaf J (ModuleCat.{u + 1} A₃)) ℤ) :
+    ((Sheaf.restrictScalars J f₁).mapHomologicalComplex (.up ℤ)).map
+        ((Functor.mapHomologicalComplexCompIso (Sheaf.restrictScalarsCompIso J f₂ f₃ f₂₃ h₂₃)
+          (.up ℤ)).hom.app K) ≫
+        (Functor.mapHomologicalComplexCompIso (Sheaf.restrictScalarsCompIso J f₁ f₂₃ f₁₂₃ h₁)
+          (.up ℤ)).hom.app K =
+      (Functor.mapHomologicalComplexCompIso (Sheaf.restrictScalarsCompIso J f₁ f₂ f₁₂ h₁₂)
+          (.up ℤ)).hom.app (((Sheaf.restrictScalars J f₃).mapHomologicalComplex (.up ℤ)).obj K) ≫
+        (Functor.mapHomologicalComplexCompIso (Sheaf.restrictScalarsCompIso J f₁₂ f₃ f₁₂₃ h₂)
+          (.up ℤ)).hom.app K := by
+  ext i : 1
+  exact Sheaf.restrictScalarsCompIso_assoc f₁ f₂ f₃ f₁₂ f₂₃ f₁₂₃ h₁₂ h₂₃ h₁ h₂ (K.X i)
+
+end Coherence
+
+section RTower
+
+variable {R : Type (u + 1)} [CommRing R] {A : ℕ → Type (u + 1)} [∀ n, CommRing (A n)]
+  (φ : ∀ {n m : ℕ}, n ≤ m → A m →+* A n) (ψ : ∀ n, R →+* A n)
+  (hψ : ∀ {n m : ℕ} (h : n ≤ m), (φ h).comp (ψ m) = ψ n)
+  (L : ∀ n : ℕ, DerivedCategory (Sheaf J (ModuleCat.{u + 1} (A n))))
+  (t : ∀ n : ℕ, L (n + 1) ⟶ (Sheaf.derivedRestrictScalars J (φ n.le_succ)).obj (L n))
+
+/-- The levels `Res P_n` of the strict model of a normalized tower, complexes of sheaves of
+`R`-modules. -/
+noncomputable abbrev towerComplex (n : ℕ) : CochainComplex (Sheaf J (ModuleCat.{u + 1} R)) ℤ :=
+  ((Sheaf.restrictScalars J (ψ n)).mapHomologicalComplex (.up ℤ)).obj
+    (towerModel (φ := fun n ↦ φ n.le_succ) L t n).P
+
+/-- The transition maps of the strict model of a normalized tower. -/
+noncomputable def towerComplexMap (n : ℕ) :
+    towerComplex φ ψ L t (n + 1) ⟶ towerComplex φ ψ L t n :=
+  ((Sheaf.restrictScalars J (ψ (n + 1))).mapHomologicalComplex (.up ℤ)).map
+      (towerModelMap (φ := fun n ↦ φ n.le_succ) L t n) ≫
+    (Functor.mapHomologicalComplexCompIso
+      (Sheaf.restrictScalarsCompIso J (ψ (n + 1)) (φ n.le_succ) (ψ n) (hψ _).symm)
+        (.up ℤ)).hom.app _
+
+/-- The strict model of a normalized tower, a tower of complexes of sheaves of `R`-modules. -/
+noncomputable def towerFunctor : ℕᵒᵖ ⥤ CochainComplex (Sheaf J (ModuleCat.{u + 1} R)) ℤ :=
+  Functor.ofOpSequence (towerComplexMap φ ψ hψ L t)
+
+/-- The identification of the levels of the strict model with the restrictions of scalars of
+the given levels. -/
+noncomputable def towerFunctorIso (n : ℕ) :
+    Q.obj ((towerFunctor φ ψ hψ L t).obj (op n)) ≅
+      (Sheaf.derivedRestrictScalars J (ψ n)).obj (L n) :=
+  ((Sheaf.restrictScalars J (ψ n)).mapDerivedCategoryFactors.app _).symm ≪≫
+    (Sheaf.derivedRestrictScalars J (ψ n)).mapIso (towerModel (φ := fun n ↦ φ n.le_succ) L t n).iso
+
+/-- The strict model represents the transition maps of the tower. -/
+lemma Q_map_towerFunctor_map_comp_towerFunctorIso_hom (n : ℕ) :
+    Q.map ((towerFunctor φ ψ hψ L t).map (homOfLE n.le_succ).op) ≫
+        (towerFunctorIso φ ψ hψ L t n).hom =
+      (towerFunctorIso φ ψ hψ L t (n + 1)).hom ≫
+        (Sheaf.derivedRestrictScalars J (ψ (n + 1))).map (t n) ≫
+        (Sheaf.derivedRestrictScalarsCompIso J (hψ n.le_succ).symm).hom.app (L n) := by
+  have h := towerModelMap_spec (φ := fun n ↦ φ n.le_succ) L t n
+  have h' := derivedRestrictScalarsCompIso_hom_app_Q_obj (J := J) (hψ n.le_succ).symm
+    (towerModel (φ := fun n ↦ φ n.le_succ) L t n).P
+  simp only [towerFunctor, Functor.ofOpSequence_map_homOfLE_succ, towerComplexMap,
+    towerFunctorIso, Iso.trans_hom, Iso.symm_hom, Functor.mapIso_hom, Functor.map_comp,
+    Category.assoc]
+  have hnat := (Sheaf.derivedRestrictScalarsCompIso J (hψ n.le_succ).symm).hom.naturality
+    (towerModel (φ := fun n ↦ φ n.le_succ) L t n).iso.hom
+  simp only [Functor.comp_obj, Functor.comp_map] at hnat
+  rw [← Functor.map_comp_assoc (Sheaf.derivedRestrictScalars J (ψ (n + 1))) _ (t n), ← h]
+  simp only [Functor.map_comp, Category.assoc, hnat, Iso.app_inv]
+  erw [← Functor.mapDerivedCategoryFactors_inv_naturality_assoc]
+  erw [reassoc_of% h']
+
+end RTower
 
 end DerivedCategory
