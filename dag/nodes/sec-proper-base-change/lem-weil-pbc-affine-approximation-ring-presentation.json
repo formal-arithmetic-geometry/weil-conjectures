@@ -1,0 +1,122 @@
+{
+ "source": {
+  "document": "literature/stacks-project/pione.tex",
+  "place": "Tag 0GS2 (lemma-finite-etale-on-proper-over-henselian-pair), proof, General case, approximation and closed-fibre limit paragraph; Tag 0A0P (limits.tex). Official online text read."
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "id": "lem-weil-pbc-affine-approximation-ring-presentation",
+ "kind": "statement",
+ "title": "Ring presentation of an affine-base approximation",
+ "statement": "Let A be a commutative ring and f:Y\\to\\operatorname{Spec}A a scheme morphism [def-weil-pbc-scheme-conventions]. Let X_i,S_i be inverse systems indexed by a preordered set, with natural morphisms f_i:X_i\\to S_i and cones p:Y\\to X and s:\\operatorname{Spec}A\\to S satisfying p_i;f_i=f;s_i. Assume every S_i is affine [pqf-def-affine-morphism], its global sections are finite type over the integers, the global-section cocone of s is colimiting [def-weil-pbc-category-colimit], and every f_i is proper [def-weil-proper-morphism]. There exist a covariant ring diagram B, natural morphisms g:X\\to\\operatorname{Spec}B and alpha:B\\to A, with alpha colimiting, every B_i finite type over the integers, every g_i proper, and p_i;g_i=f;\\operatorname{Spec}(alpha_i).",
+ "stmt_deps": [
+  "def-weil-proper-morphism",
+  "def-pc-fibre-product",
+  "def-weil-pbc-category-colimit",
+  "pqf-def-affine-morphism",
+  "def-weil-pbc-scheme-conventions"
+ ],
+ "proof": [
+  {
+   "text": "Take global sections of the affine base diagram and use the canonical affine-scheme isomorphisms to transport fs. Naturality proves the transition equations. Whisker the given global-section colimit by the double-opposite equivalence and transport its vertex by the global sections of Spec A isomorphism. Convert finite-type ring maps to finite-type algebras and transport properness across isomorphisms.",
+   "uses": [
+    "def-weil-pbc-category-colimit",
+    "def-weil-proper-morphism",
+    "pqf-def-affine-morphism"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-category-colimit",
+  "def-weil-proper-morphism",
+  "pqf-def-affine-morphism"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project",
+  "place": "Tags 0GS2 General case and 0A0P affine-base approximation; official text read 2026-10-12."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A directed colimit of rings induces a directed colimit of quotients by the inverse images of an ideal",
+   "results": "Service unavailable: Internal Server Error (msearch.py).",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "Ideal.quotientMap",
+   "results": "quotientMap_comp_mk, quotientMap_injective, comp_quotientMap_eq_of_comp_eq give quotient compatibility; no closed-fibre limit theorem.",
+   "date": "2026-10-12",
+   "verdict": "ingredients only"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A limit of schemes over a filtered colimit of rings remains a limit after quotienting rings by inverse images of an ideal",
+   "results": "nonempty_isColimit_Γ_mapCocone, Scheme.isAffine_of_isLimit, Scheme.exists_isAffine_of_isLimit; none combines quotient diagrams with pullbacks.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "quotient.*[Cc]olimit|[Cc]olimit.*quotient|pullback.*[Ii]sLimit|[Ii]sLimit.*pullback",
+   "results": "Searched pinned Mathlib AlgebraicGeometry, Algebra/Category/Ring, CategoryTheory/Limits. Found pullback.isLimit and ring colimit constructions, no exact quotient closed-fibre transfer statement.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ProperClosedFibreApproximation",
+  "date": "2026-10-12",
+  "group": "R1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "Tag 0GS2 General case: approximation and construction of the inverse system of closed fibres; excludes descent of the finite etale cover",
+   "via": [
+    "lem-weil-pbc-finite-etale-finite-type-closed-fibre-stage",
+    "lem-weil-pbc-finite-etale-henselian-g-ring-stage",
+    "lem-weil-pbc-finite-etale-lifting-limit-descent-core",
+    "lem-weil-pbc-finite-etale-lifting-limit-descent",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AffineApproximationRingPresentation",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineApproximationRingPresentation.lean",
+  "declaration": "AlgebraicGeometry.Scheme.affine_approximation_ring_presentation",
+  "statement": "theorem affine_approximation_ring_presentation {A : Type u} [CommRing A] {Y : Scheme.{u}} (f : Y ⟶ Spec (.of A)) {Λ : Type u} [Preorder Λ] (Xs Ss : Λᵒᵖ ⥤ Scheme.{u}) (fs : Xs ⟶ Ss) (p : (Functor.const Λᵒᵖ).obj Y ⟶ Xs) (s : (Functor.const Λᵒᵖ).obj (Spec (.of A)) ⟶ Ss) (ha : ∀ i, IsAffine (Ss.obj i)) (hft : ∀ i, RingHom.FiniteType (algebraMap ℤ (Scheme.Γ.obj (Opposite.op (Ss.obj i))))) (hc : Nonempty (IsColimit (Scheme.Γ.mapCocone (Cone.mk _ s).op))) (hp : ∀ i, IsProper (fs.app i)) (hw : ∀ i, p.app i ≫ fs.app i = f ≫ s.app i) : ∃ (B : Λ ⥤ CommRingCat.{u}) (g : Xs ⟶ B.op ⋙ Scheme.Spec) (α : B ⟶ (Functor.const Λ).obj (.of A)), Nonempty (IsColimit (Cocone.mk _ α)) ∧ (∀ i, Algebra.FiniteType ℤ (B.obj i)) ∧ (∀ i, IsProper (g.app i)) ∧ (∀ i, p.app i ≫ g.app i = f ≫ Spec.map (α.app i.unop))",
+  "branch": "sheaf-dag",
+  "by": "R1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R1",
+  "result": "pass",
+  "landing": "20261012T135308-L-1688533",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R1",
+  "result": "pass",
+  "landing": "20261012T135308-L-1688533",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

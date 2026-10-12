@@ -7908,3 +7908,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 13:53 L: merged deliver/Q3/Sheaf.AlgebraicGeometry.FinitePushforwardSetStalkFiberFinite (stage 3; reviewer PASS; first push; landing 20261012T135307-L-1687998 (proof); batch 20261012T135212; modules 1; new nodes 0)
 - 13:53 L: merged deliver/Q3/Sheaf.AlgebraicGeometry.ModuleBaseChangeMapOpenRestriction (stage 3; reviewer PASS; first push; landing 20261012T135307-L-1688187 (proof); batch 20261012T135212; modules 1; new nodes 0)
 - 13:53 L: merged deliver/Q3/Sheaf.AlgebraicGeometry.QuotientBaseChangeIdeal (stage 3; reviewer PASS; first push; landing 20261012T135307-L-1688341 (proof); batch 20261012T135212; modules 1; new nodes 0)
+- 13:53 L: merged deliver/R1/Sheaf.AlgebraicGeometry.ProperClosedFibreApproximation (stage 3; reviewer PASS; first push; landing 20261012T135308-L-1688533 (interface); batch 20261012T135212; modules 3; new nodes 2)

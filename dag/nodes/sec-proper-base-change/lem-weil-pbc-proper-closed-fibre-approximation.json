@@ -16,65 +16,35 @@
  ],
  "proof": [
   {
-   "text": "Noetherian approximation of $Y\\to\\operatorname{Spec}A$. $\\operatorname{Spec}A$ is affine, hence quasi-compact and quasi-separated, and $f$ is proper. By [lem-weil-pbc-proper-limit-noetherian] (affine clause) there are a directed set $\\Lambda$ and an inverse system $(f_\\lambda:Y_\\lambda\\to S_\\lambda)_{\\lambda\\in\\Lambda}$ with affine transition morphisms, $f_\\lambda$ proper, $S_\\lambda=\\operatorname{Spec}A_\\lambda$ with $A_\\lambda$ a finitely generated $\\mathbf Z$-algebra, $Y=\\varprojlim_\\lambda Y_\\lambda$ (projections $p_\\lambda:Y\\to Y_\\lambda$), $\\operatorname{Spec}A=\\varprojlim_\\lambda S_\\lambda$ and $A=\\varinjlim_\\lambda A_\\lambda$ with coprojections $\\alpha_\\lambda:A_\\lambda\\to A$ [lem-weil-pbc-limit-affine-transition], and $f_\\lambda\\circ p_\\lambda=(\\operatorname{Spec}\\alpha_\\lambda)\\circ f$.",
+   "text": "Apply proper Noetherian approximation over Spec A. Use its affine clause, then affine_approximation_ring_presentation to express the same scheme stages over a finite-type ring diagram colimiting to A.",
    "uses": [
     "lem-weil-pbc-proper-limit-noetherian",
-    "lem-weil-pbc-limit-affine-transition"
+    "lem-weil-pbc-affine-approximation-ring-presentation"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/pione.tex",
-    "place": "Fundamental Groups, proof of Lemma Tag 0GS2 (lemma-finite-etale-on-proper-over-henselian-pair, line 1749), paragraph 'General case' (lines ~1846-1878)"
-   }
+   "elementary": false
   },
   {
-   "text": "The ideals. Put $I_\\lambda=\\alpha_\\lambda^{-1}(I)\\subseteq A_\\lambda$. For $\\mu\\le\\lambda$ the transition map $\\varphi_{\\mu\\lambda}:A_\\mu\\to A_\\lambda$ satisfies $\\alpha_\\lambda\\varphi_{\\mu\\lambda}=\\alpha_\\mu$, so $\\varphi_{\\mu\\lambda}(I_\\mu)\\subseteq I_\\lambda$ and $(A_\\lambda,I_\\lambda)$ is a directed system of pairs. Every $x\\in A$ is $\\alpha_\\lambda(a)$ for some $\\lambda$ and $a\\in A_\\lambda$ [lem-weil-pbc-filtered-colimit-algebras-elementwise]; if $x\\in I$ then $a\\in I_\\lambda$. Hence $I=\\bigcup_\\lambda\\alpha_\\lambda(I_\\lambda)$, i.e. $(A,I)=\\varinjlim_\\lambda(A_\\lambda,I_\\lambda)$ as pairs, and the induced maps $A_\\lambda/I_\\lambda\\to A/I$ are injective with union $A/I$, so $A/I=\\varinjlim_\\lambda A_\\lambda/I_\\lambda$. (Stacks: 'Thus we also have $I=\\colim I_i$ and $A/I=\\colim A_i/I_i$'.)",
+   "text": "Apply quotient_fibre_limit_transfer to this ring diagram and the limiting scheme cone. This supplies the affine closed-fibre diagram, limiting cone, stage isomorphisms, and projection identities.",
    "uses": [
-    "lem-weil-pbc-filtered-colimit-algebras-elementwise"
+    "lem-weil-pbc-quotient-fibre-limit-transfer"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/pione.tex",
-    "place": "Fundamental Groups, proof of Lemma Tag 0GS2 (lemma-finite-etale-on-proper-over-henselian-pair, line 1749), paragraph 'General case' (lines ~1846-1878)"
-   }
+   "elementary": false
   },
   {
-   "text": "The closed fibres form an inverse system with limit $Y_0$. Put $S_{\\lambda,0}=\\operatorname{Spec}(A_\\lambda/I_\\lambda)$, $Y_{\\lambda,0}=Y_\\lambda\\times_{S_\\lambda}S_{\\lambda,0}$ and $S_0=\\operatorname{Spec}(A/I)$. (a) By step 2 and [lem-weil-pbc-spec-colimit-limit], $S_0=\\varprojlim_\\lambda S_{\\lambda,0}$. (b) For $\\mu\\le\\lambda$ the morphism $Y_{\\lambda,0}\\to Y_{\\mu,0}$ induced by $Y_\\lambda\\to Y_\\mu$ and $S_{\\lambda,0}\\to S_{\\mu,0}$ factors as $Y_{\\lambda,0}=Y_\\lambda\\times_{S_\\lambda}\\operatorname{Spec}(A_\\lambda/I_\\lambda)\\to Y_\\lambda\\times_{S_\\lambda}\\operatorname{Spec}(A_\\lambda/I_\\mu A_\\lambda)=Y_\\lambda\\times_{Y_\\mu}Y_{\\mu,0}\\to Y_{\\mu,0}$: the first arrow is a base change of the closed immersion $\\operatorname{Spec}(A_\\lambda/I_\\lambda)\\to\\operatorname{Spec}(A_\\lambda/I_\\mu A_\\lambda)$ ($I_\\mu A_\\lambda\\subseteq I_\\lambda$ by step 2), hence a closed immersion [lem-weil-pbc-closed-immersion-base-change], hence affine [pqf-def-affine-morphism]; the second is a base change of the affine $Y_\\lambda\\to Y_\\mu$, hence affine [lem-weil-pbc-affine-morphism-permanence]; a composite of affine morphisms is affine (preimages of affine opens stay affine). So $(Y_{\\lambda,0})$ is an inverse system with affine transition morphisms, and its limit exists [lem-weil-pbc-limit-affine-transition]. (c) Each $Y_{\\lambda,0}\\to S_{\\lambda,0}$ is proper [lem-weil-pbc-proper-base-change], hence quasi-compact and separated [def-weil-proper-morphism]; as $S_{\\lambda,0}$ is affine, $Y_{\\lambda,0}$ is quasi-compact and quasi-separated [lem-weil-pbc-qcqs-morphism-permanence]. (d) $Y_0=\\varprojlim_\\lambda Y_{\\lambda,0}$ with projections $q_\\lambda=p_\\lambda\\times(S_0\\to S_{\\lambda,0}):Y_0\\to Y_{\\lambda,0}$: for every scheme $T$, $\\operatorname{Mor}(T,\\varprojlim Y_{\\lambda,0})=\\varprojlim_\\lambda\\big(\\operatorname{Mor}(T,Y_\\lambda)\\times_{\\operatorname{Mor}(T,S_\\lambda)}\\operatorname{Mor}(T,S_{\\lambda,0})\\big)$ [def-pc-fibre-product], and since limits commute with limits this is $\\operatorname{Mor}(T,Y)\\times_{\\operatorname{Mor}(T,\\operatorname{Spec}A)}\\operatorname{Mor}(T,S_0)=\\operatorname{Mor}(T,Y_0)$ by step 1 and (a), naturally in $T$; conclude by Yoneda. (Stacks: 'The same thing is true for schemes finite etale over $X_0=\\lim(X_i\\times_{S_i}S_{i,0})$'.) The cone projection composed with the chosen stage isomorphism gives the two displayed projection identities by the pullback lift equations. This proves only the approximation system, independently of any cover.",
-   "uses": [
-    "lem-weil-pbc-spec-colimit-limit",
-    "lem-weil-pbc-closed-immersion-base-change",
-    "pqf-def-affine-morphism",
-    "lem-weil-pbc-affine-morphism-permanence",
-    "lem-weil-pbc-limit-affine-transition",
-    "lem-weil-pbc-proper-base-change",
-    "def-weil-proper-morphism",
-    "lem-weil-pbc-qcqs-morphism-permanence",
-    "def-pc-fibre-product"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/pione.tex",
-    "place": "Fundamental Groups, proof of Lemma Tag 0GS2 (lemma-finite-etale-on-proper-over-henselian-pair, line 1749), paragraph 'General case' (lines ~1846-1878)"
-   }
+   "text": "For each stage, compose the stage isomorphism with the second pullback projection. Mathlib proper base change and isomorphism stability make this composite proper over the affine quotient spectrum. QuasiCompact.compactSpace_of_compactSpace and quasiSeparatedSpace_of_quasiSeparated give compactness and quasi-separatedness. Assemble the ring and scheme witnesses with the two supplied identities and the original commuting square.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-pc-fibre-product",
-  "def-weil-proper-morphism",
-  "lem-weil-pbc-affine-morphism-permanence",
-  "lem-weil-pbc-closed-immersion-base-change",
-  "lem-weil-pbc-filtered-colimit-algebras-elementwise",
-  "lem-weil-pbc-limit-affine-transition",
-  "lem-weil-pbc-proper-base-change",
+  "lem-weil-pbc-affine-approximation-ring-presentation",
   "lem-weil-pbc-proper-limit-noetherian",
-  "lem-weil-pbc-qcqs-morphism-permanence",
-  "lem-weil-pbc-spec-colimit-limit",
-  "pqf-def-affine-morphism"
+  "lem-weil-pbc-quotient-fibre-limit-transfer"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/stacks-project/pione.tex",
-  "place": "Tag 0GS2 (lemma-finite-etale-on-proper-over-henselian-pair), proof, General case, approximation and closed-fibre limit paragraph; Tag 0A0P (limits.tex). Official online text read."
+  "document": "Stacks Project",
+  "place": "Tag 0GS2 General case and Tag 0A0P; implemented by R1 using ring presentation, quotient-fibre transfer, and Mathlib permanence."
  },
  "mathlib_searches": [
   {
@@ -171,9 +141,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "W3",
+  "group": "R1",
   "result": "pass",
-  "landing": "20261012T110325-L-624658",
+  "landing": "20261012T135308-L-1688533",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

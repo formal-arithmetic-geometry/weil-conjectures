@@ -1,0 +1,142 @@
+{
+ "source": {
+  "document": "literature/stacks-project/pione.tex",
+  "place": "Tag 0GS2 (lemma-finite-etale-on-proper-over-henselian-pair), proof, General case, approximation and closed-fibre limit paragraph; Tag 0A0P (limits.tex). Official online text read."
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "id": "lem-weil-pbc-quotient-fibre-limit-transfer",
+ "kind": "statement",
+ "title": "Closed-fibre transfer for a directed limit over rings",
+ "statement": "Let A be a commutative ring, I an ideal, and f:Y\\to\\operatorname{Spec}A a morphism. Let Lambda be a nonempty directed preordered set, B a covariant diagram of commutative rings with a colimiting cocone alpha:B\\to A [def-weil-pbc-category-colimit], X an inverse scheme diagram with affine transitions [pqf-def-affine-morphism], g:X\\to\\operatorname{Spec}B a natural morphism, and p:Y\\to X a limiting cone. Assume p_i;g_i=f;\\operatorname{Spec}(alpha_i). There is an inverse diagram D with affine transitions and a limiting cone pi from Y times over Spec A with Spec(A/I) [def-pc-fibre-product]. For every i there is an isomorphism e_i:D_i\\cong X_i times over Spec B_i with Spec(B_i/alpha_i^{-1}(I)). The first projection composed with p_i equals pi_i;e_i followed by the first stage projection, and pi_i;e_i followed by the second stage projection equals the base projection followed by Spec of the induced quotient alpha_i. There is no properness or finite-type assumption.",
+ "stmt_deps": [
+  "def-weil-proper-morphism",
+  "def-pc-fibre-product",
+  "def-weil-pbc-category-colimit",
+  "pqf-def-affine-morphism",
+  "def-weil-pbc-scheme-conventions"
+ ],
+ "proof": [
+  {
+   "text": "Naturality sends the inverse-image ideal K_i into K_j. Define quotient transitions by Ideal.quotientMap. Every element of A/I comes from a stage; a representative whose image lies in I belongs to K_i. Compatible maps out of the quotient stages therefore induce a unique map out of A/I, giving the quotient colimit.",
+   "uses": [
+    "lem-weil-pbc-filtered-colimit-algebras-elementwise",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply Spec to the quotient colimit and form stagewise pullbacks of g_i. Induced transitions and cone maps satisfy the two projection equations. The universal property of each pullback, the supplied limit of X, and the Spec limits identify compatible maps to the stages with maps to the closed fibre of Y; hence the cone is limiting.",
+   "uses": [
+    "lem-weil-pbc-spec-colimit-limit",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For an arrow from stage j to stage i, factor the induced fibre transition through X_j times over X_i with its closed fibre. The first arrow is a closed immersion because the extended K_i is contained in K_j. The second is a base change of the given affine transition. Both are affine, and their composite is affine. Identity isomorphisms can be used for the stage pullbacks.",
+   "uses": [
+    "lem-weil-pbc-closed-immersion-base-change",
+    "lem-weil-pbc-affine-morphism-permanence",
+    "pqf-def-affine-morphism"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-fibre-product",
+  "def-weil-pbc-category-colimit",
+  "lem-weil-pbc-affine-morphism-permanence",
+  "lem-weil-pbc-closed-immersion-base-change",
+  "lem-weil-pbc-filtered-colimit-algebras-elementwise",
+  "lem-weil-pbc-spec-colimit-limit",
+  "pqf-def-affine-morphism"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project",
+  "place": "Tags 0GS2 General case and 0A0P affine-base approximation; official text read 2026-10-12."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A directed colimit of rings induces a directed colimit of quotients by the inverse images of an ideal",
+   "results": "Service unavailable: Internal Server Error (msearch.py).",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "Ideal.quotientMap",
+   "results": "quotientMap_comp_mk, quotientMap_injective, comp_quotientMap_eq_of_comp_eq give quotient compatibility; no closed-fibre limit theorem.",
+   "date": "2026-10-12",
+   "verdict": "ingredients only"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A limit of schemes over a filtered colimit of rings remains a limit after quotienting rings by inverse images of an ideal",
+   "results": "nonempty_isColimit_Γ_mapCocone, Scheme.isAffine_of_isLimit, Scheme.exists_isAffine_of_isLimit; none combines quotient diagrams with pullbacks.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "quotient.*[Cc]olimit|[Cc]olimit.*quotient|pullback.*[Ii]sLimit|[Ii]sLimit.*pullback",
+   "results": "Searched pinned Mathlib AlgebraicGeometry, Algebra/Category/Ring, CategoryTheory/Limits. Found pullback.isLimit and ring colimit constructions, no exact quotient closed-fibre transfer statement.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ProperClosedFibreApproximation",
+  "date": "2026-10-12",
+  "group": "R1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "Tag 0GS2 General case: approximation and construction of the inverse system of closed fibres; excludes descent of the finite etale cover",
+   "via": [
+    "lem-weil-pbc-finite-etale-finite-type-closed-fibre-stage",
+    "lem-weil-pbc-finite-etale-henselian-g-ring-stage",
+    "lem-weil-pbc-finite-etale-lifting-limit-descent-core",
+    "lem-weil-pbc-finite-etale-lifting-limit-descent",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.QuotientFibreLimitTransfer",
+  "file": "lean/Sheaf/AlgebraicGeometry/QuotientFibreLimitTransfer.lean",
+  "declaration": "AlgebraicGeometry.Scheme.quotient_fibre_limit_transfer",
+  "statement": "theorem quotient_fibre_limit_transfer {A : Type u} [CommRing A] (I : Ideal A) {Y : Scheme.{u}} (f : Y ⟶ Spec (.of A)) {Λ : Type u} [Preorder Λ] [Nonempty Λ] [IsDirected Λ (· ≤ ·)] (B : Λ ⥤ CommRingCat.{u}) (Xs : Λᵒᵖ ⥤ Scheme.{u}) (g : Xs ⟶ B.op ⋙ Scheme.Spec) (α : B ⟶ (Functor.const Λ).obj (.of A)) (p : (Functor.const Λᵒᵖ).obj Y ⟶ Xs) (hc : Nonempty (IsColimit (Cocone.mk _ α))) (hl : Nonempty (IsLimit (Cone.mk _ p))) (ha : ∀ {i j : Λᵒᵖ} (a : i ⟶ j), IsAffineHom (Xs.map a)) (hw : ∀ i, p.app i ≫ g.app i = f ≫ Spec.map (α.app i.unop)) : ∃ (D : Λᵒᵖ ⥤ Scheme.{u}) (π : (Functor.const Λᵒᵖ).obj (pullback f (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk I)))) ⟶ D), Nonempty (IsLimit (Cone.mk _ π)) ∧ (∀ {i j : Λᵒᵖ} (a : i ⟶ j), IsAffineHom (D.map a)) ∧ ∀ i : Λᵒᵖ, ∃ e : D.obj i ≅ pullback (g.app i) (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk (I.comap (α.app i.unop).hom)))), pullback.fst f (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk I))) ≫ p.app i = (π.app i ≫ e.hom) ≫ pullback.fst (g.app i) (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk (I.comap (α.app i.unop).hom)))) ∧ (π.app i ≫ e.hom) ≫ pullback.snd (g.app i) (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk (I.comap (α.app i.unop).hom)))) = pullback.snd f (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk I))) ≫ Spec.map (CommRingCat.ofHom (Ideal.quotientMap I (α.app i.unop).hom le_rfl))",
+  "branch": "sheaf-dag",
+  "by": "R1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R1",
+  "result": "pass",
+  "landing": "20261012T135308-L-1688533",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R1",
+  "result": "pass",
+  "landing": "20261012T135308-L-1688533",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

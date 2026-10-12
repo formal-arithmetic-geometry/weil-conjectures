@@ -9,8 +9,9 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.AlgebraicGeometry.Pullbacks
 public import Mathlib.AlgebraicGeometry.Limits
 public import Mathlib.RingTheory.FiniteType
-import Sheaf.AlgebraicGeometry.LimitAffineTransition
 import Sheaf.AlgebraicGeometry.ProperLimitNoetherian
+import Sheaf.AlgebraicGeometry.AffineApproximationRingPresentation
+import Sheaf.AlgebraicGeometry.QuotientFibreLimitTransfer
 
 /-!
 # Closed fibres of proper Noetherian approximations
@@ -80,6 +81,29 @@ theorem exists_proper_closedFibre_approximation
           (π.app i ≫ e.hom) ≫ pullback.snd h (Spec.map (CommRingCat.ofHom
             (Ideal.Quotient.mk (I.comap α)))) =
             pullback.snd f (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk I))) ≫
-              Spec.map (CommRingCat.ofHom (Ideal.quotientMap I α le_rfl)) := by sorry
+              Spec.map (CommRingCat.ofHom (Ideal.quotientMap I α le_rfl)) := by
+  obtain ⟨Λ, hpre, hne, hdir, Xs, Ss, fs, p, s, hl, hs, ht, hp, hft, hw, ha⟩ :=
+    AlgebraicGeometry.exists_proper_limit_noetherian f
+  let _ : Preorder Λ := hpre
+  let _ : Nonempty Λ := hne
+  let _ : IsDirected Λ (· ≤ ·) := hdir
+  obtain ⟨has, hcs⟩ := ha inferInstance
+  obtain ⟨B, g, α, hc, hB, hg, hpg⟩ := affine_approximation_ring_presentation
+    f Xs Ss fs p s (fun i ↦ (has i).1) (fun i ↦ (has i).2) hcs hp hw
+  obtain ⟨D, π, hlim, haff, he⟩ := quotient_fibre_limit_transfer I f B Xs g α p hc hl
+    (fun {i j} a ↦ (ht i j a).1) hpg
+  have hstage (i : Λᵒᵖ) : CompactSpace (D.obj i) ∧ QuasiSeparatedSpace (D.obj i) := by
+    obtain ⟨e, _⟩ := he i
+    let _ : IsProper (g.app i) := hg i
+    let q := pullback.snd (g.app i) (Spec.map (CommRingCat.ofHom
+      (Ideal.Quotient.mk (I.comap (α.app i.unop).hom))))
+    exact ⟨QuasiCompact.compactSpace_of_compactSpace (e.hom ≫ q),
+      quasiSeparatedSpace_of_quasiSeparated (e.hom ≫ q)⟩
+  refine ⟨Λ, hpre, hne, hdir, D, π, hlim, haff,
+    (fun i ↦ (hstage i).1), (fun i ↦ (hstage i).2), ?_⟩
+  intro i
+  obtain ⟨e, he₁, he₂⟩ := he i
+  exact ⟨B.obj i.unop, inferInstance, hB i.unop, (α.app i.unop).hom,
+    Xs.obj i, g.app i, hg i, p.app i, e, hpg i, he₁, he₂⟩
 
 end AlgebraicGeometry.Scheme
