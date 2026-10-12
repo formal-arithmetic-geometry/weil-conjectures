@@ -1,0 +1,135 @@
+{
+ "id": "lem-pc-topological-ses-cech-sections-surjective",
+ "kind": "statement",
+ "title": "First Cech acyclicity on cofinal finite open covers gives section lifting",
+ "statement": "Let $X$ be a topological space and $0\\to F\\xrightarrow{i}G\\xrightarrow{g}H\\to0$ a short exact sequence of sheaves of abelian groups [def-sc-topological-abelian-cohomology, def-weil-pbc-exact-sequence]. Let $B$ be a class of open subsets of $X$ and $\\mathcal C$ a class of finite families of open subsets. Suppose every open covering of every $V\\in B$ has a refinement $(U_i)_{i\\in\\operatorname{Fin}(n)}\\in\\mathcal C$ covering $V$. Form the Cech complex with degree $p$ term $\\prod_{(i_0,\\ldots,i_p)}F(U_{i_0}\\cap\\cdots\\cap U_{i_p})$ and differential the alternating sum of restrictions. Suppose this complex is exact at degree $1$ for every family in $\\mathcal C$. Then $g_V:G(V)\\to H(V)$ is surjective for every $V\\in B$.",
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Cohomology, Tag 01EU (lemma-ses-cech-h1), integer-module specialization; proved source realization WeilConjectures/Topology/Sheaves/CechCriterion.lean:231-272,306-317. Source read at https://stacks.math.columbia.edu/tag/01EU."
+ },
+ "stmt_deps": [
+  "def-sc-topological-abelian-cohomology",
+  "def-weil-pbc-exact-sequence"
+ ],
+ "proof": [
+  {
+   "text": "For s in H(V), short exactness gives a neighbourhood W_x of each x in V and a lift t_x of s restricted to W_x. Refine by a finite family U in C covering V and restrict the lifts to obtain a degree-zero G-cochain a whose image is the restriction of s. This is implemented by exists_app_g_eq_map and the refinement hypothesis in the existing complete source proof.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "The difference cochain d(a) maps to zero in H. Sectionwise kernel exactness gives a unique F-valued degree-one cochain e with i(e)=d(a). Since d squared is zero and i is sectionwise injective, d(e)=0. Exactness at degree one supplies b with d(b)=e. Thus d(a-i(b))=0, while g(a-i(b)) is still the restriction of s. These are the explicit exists_cechComplex_map_f_eq, exactAt_cechComplex_iff and differential computations in the proved source declaration.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "The corrected local sections agree on intersections. Glue them by the sheaf axiom of G; their image is s by separatedness of H and the covering condition. The existing surjective_app_of_exactAt_cechComplex_one proves this, and surjective_app_of_exactAt_cechComplex instantiates it with B and C. The empty covering of the empty open causes no exception: every sheaf has exactly one section there. This node ends at the attached already proved Lean declaration, rather than introducing any further proof obligation.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 01EU, lemma-ses-cech-h1, proof; existing Lean realization in WeilConjectures/Topology/Sheaves/CechCriterion.lean."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A short exact sequence of abelian sheaves with vanishing first Cech cohomology on a cofinal collection of finite open covers is surjective on sections",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"surjective_app_of_exactAt_cechComplex\"",
+   "results": "0 Mathlib hits. Direct source reading found TopCat.Sheaf.surjective_app_of_exactAt_cechComplex in WeilConjectures/Topology/Sheaves/CechCriterion.lean:306-317.",
+   "date": "2026-10-12",
+   "verdict": "No Mathlib match; attach existing proved source declaration."
+  },
+  {
+   "tool": "grep",
+   "query": "surjective_app_of_exactAt_cechComplex|cechAcyclicOnAffines",
+   "results": "0 Mathlib hits. Direct source reading found TopCat.Sheaf.surjective_app_of_exactAt_cechComplex in WeilConjectures/Topology/Sheaves/CechCriterion.lean:306-317.",
+   "date": "2026-10-12",
+   "verdict": "No Mathlib match; attach existing proved source declaration."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Modules.AffineExtensionSectionSurjectivity",
+  "date": "2026-10-12",
+  "group": "G3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "proof: compare dualizing sheaves; affine global-section lifting for the quasi-coherent extension argument, now using the existing Cech lifting criterion.",
+   "via": [
+    "lem-pc-affine-extension-section-surjectivity",
+    "lem-pc-quasi-coherent-extension",
+    "lem-sc-proper-upper-shriek-composition",
+    "lem-pc-derived-direct-image-preserves-qcoh"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": true,
+  "module": "WeilConjectures.Topology.Sheaves.CechCriterion",
+  "declaration": "TopCat.Sheaf.surjective_app_of_exactAt_cechComplex",
+  "statement": "lemma surjective_app_of_exactAt_cechComplex\n    {S : ShortComplex (CategoryTheory.Sheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u})}\n    (hS : S.ShortExact) (B : Opens X → Prop) (𝒞 : ∀ {n : ℕ}, (Fin n → Opens X) → Prop)\n    (hcov : ∀ V, B V → ∀ W : V → Opens X, (∀ x, x.1 ∈ W x) → ∃ (n : ℕ) (U : Fin n → Opens X),\n      𝒞 U ∧ iSup U = V ∧ ∀ i, ∃ x, U i ≤ W x)\n    (hF : ∀ {n : ℕ} (U : Fin n → Opens X), 𝒞 U → ((cechComplex U).obj S.X₁.obj).ExactAt 1)\n    (V : Opens X) (hV : B V) : Function.Surjective (S.g.hom.app (op V))",
+  "branch": "slopmaster2",
+  "by": "G3",
+  "date": "2026-10-12"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "TopCat.Sheaf.surjective_app_of_exactAt_cechComplex",
+     "module": "WeilConjectures.Topology.Sheaves.CechCriterion",
+     "lines": [
+      306,
+      317
+     ],
+     "kind": "lemma",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G3",
+  "result": "pass",
+  "landing": "20261012T135237-L-1666874",
+  "kind": "proof",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G3",
+  "result": "pass",
+  "landing": "20261012T135237-L-1666874",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

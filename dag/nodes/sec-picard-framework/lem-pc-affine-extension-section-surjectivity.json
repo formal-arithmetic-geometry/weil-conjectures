@@ -14,48 +14,35 @@
  ],
  "proof": [
   {
-   "text": "For m in Gamma(X,F_3), form the ideal I of a in R for which a*m is in the image of Gamma(X,F_2). To prove surjectivity it suffices to prove I=R. At every prime p, sheaf epimorphism gives a local lift s on a principal neighbourhood D(f), with f outside p.",
+   "text": "Map the given short exact sequence to its underlying abelian sheaves. The forgetful functor is additive and preserves finite limits and finite colimits, so ShortExact.map_of_exact applies. Lean uses the proved source preservesFiniteColimits_toSheaf and the finite-limit instance of Mathlib.Algebra.Category.ModuleCat.Sheaf.Limits. No quasi-coherence of the middle term is required.",
    "uses": [
-    "def-pc-scheme",
-    "def-weil-sheaf-of-modules-category",
-    "pqf-def-coherent"
+    "lem-weil-pbc-module-sheaves-colimits-forgetful"
    ],
    "elementary": true
   },
   {
-   "text": "For each point z of V(f), choose D(g) containing z with a second lift s-prime. The difference over D(fg) belongs to the kernel F_1. Since F_1 is associated to its global section module, clear a power of f from its localization over D(fg) to obtain a section over D(g). Adding this correction to f^n*s-prime extends f^n*s over D(f) union D(g), with image f^n*m.",
+   "text": "The quasi-coherent kernel has exact positive-degree standard affine Cech complexes by lem-pc-affine-cech-complex. The proved source cechAcyclicOnAffines_of_isQuasicoherent packages this property. Every cover of an affine open has a finite standard refinement, proved by exists_basicOpen_cover_of_isAffineOpen in the same source module. Apply the topological Cech section-lifting criterion through its proved wrapper surjective_app_of_cechAcyclicOnAffines to the affine open top of Spec R.",
    "uses": [
-    "lem-weil-pbc-affine-tilde-gamma-adjunction",
-    "lem-weil-pbc-spec-module-tilde-sections"
+    "lem-pc-affine-cech-complex",
+    "lem-pc-topological-ses-cech-sections-surjective"
    ],
    "elementary": false
   },
   {
-   "text": "Quasi-compactness of V(f) gives finitely many g_j and a common exponent n. On D(g_j*g_k), the differences between the corrected lifts are sections of F_1 whose localization at f is zero. The localization zero criterion gives a common additional power f^N killing all differences. Multiplication by it makes the lifts agree on every overlap; the sheaf axiom glues them over X, producing a global lift of f^(N+n)*m. Thus f^(N+n) is in I and is outside p.",
-   "uses": [
-    "def-pc-scheme",
-    "def-weil-sheaf-of-modules-category",
-    "lem-weil-pbc-spec-module-tilde-sections"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "The ideal I is contained in no prime ideal; a proper ideal is contained in a maximal ideal, so I=R. In particular 1*m lifts. This is surjectivity of the map of global section modules, equivalent to Epi in ModuleCat. This includes the zero ring, where the module category is trivial.",
+   "text": "The carrier and function of moduleSpecGammaFunctor.map S.g are definitionally the global sections and their map. ModuleCat.epi_iff_surjective converts the obtained surjectivity to Epi. The quotient quasi-coherence hypothesis is retained unchanged but is not needed. The zero ring gives the empty spectrum, included in the sheaf lifting theorem.",
    "uses": [],
    "elementary": true
   }
  ],
  "proof_deps": [
-  "def-pc-scheme",
-  "def-weil-sheaf-of-modules-category",
-  "pqf-def-coherent",
-  "lem-weil-pbc-affine-tilde-gamma-adjunction",
-  "lem-weil-pbc-spec-module-tilde-sections"
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "lem-pc-affine-cech-complex",
+  "lem-pc-topological-ses-cech-sections-surjective"
  ],
  "proof_origin": {
-  "by": "document",
-  "document": "literature/stacks-project/schemes.tex",
-  "place": "Schemes, Tag 01IE, lemma-extension-quasi-coherent, proof from Pick m to its end"
+  "by": "agent",
+  "document": "WeilConjectures/AlgebraicGeometry/Cohomology/Affine/CechAcyclic.lean",
+  "place": "G3 reuse of proved cechAcyclicOnAffines_of_isQuasicoherent and surjective_app_of_cechAcyclicOnAffines with exact module forgetting; underlying lifting proof is Stacks Tag 01EU."
  },
  "mathlib_searches": [
   {
@@ -127,10 +114,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "U2",
+  "group": "G3",
   "result": "pass",
-  "landing": "20261012T110321-L-622806",
-  "kind": "interface",
+  "landing": "20261012T135237-L-1666874",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
