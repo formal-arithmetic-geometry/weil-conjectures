@@ -27,7 +27,7 @@
  ],
  "proof": [
   {
-   "text": "**Step 1 (what exactness gives).** Write $\\iota:\\mathcal F\\to\\mathcal G$ and $\\varphi:\\mathcal G\\to\\mathcal H$ for the maps of the sequence. Exactness of $0\\to\\mathcal F\\to\\mathcal G\\to\\mathcal H\\to0$ in the abelian category $\\Ab(X_{\\Et})$ [def-weil-pbc-abelian-etale-sheaves] means: $\\varphi$ is an epimorphism (exactness at $\\mathcal H$), and $\\iota$ is a kernel of $\\varphi$ (exactness at $\\mathcal F$ and $\\mathcal G$). Kernels of abelian sheaves are computed sectionwise [lem-weil-pbc-sheafification-exact, part 1], so for every object $V$ of $X_{\\Et}$ the sequence $0\\to\\mathcal F(V)\\xrightarrow{\\iota_V}\\mathcal G(V)\\xrightarrow{\\varphi_V}\\mathcal H(V)$ is exact: $\\iota_V$ is injective and its image is $\\ker\\varphi_V$. In particular $\\varphi_V\\circ\\iota_V=0$.",
+   "text": "**Step 1 (what exactness gives).** Write $\\iota:\\mathcal F\\to\\mathcal G$ and $\\varphi:\\mathcal G\\to\\mathcal H$ for the maps of the sequence. Exactness of $0\\to\\mathcal F\\to\\mathcal G\\to\\mathcal H\\to0$ in the abelian category $\\Ab(X_{\\Et})$ [def-weil-pbc-abelian-etale-sheaves] means: $\\varphi$ is an epimorphism (exactness at $\\mathcal H$), and $\\iota$ is a kernel of $\\varphi$ (exactness at $\\mathcal F$ and $\\mathcal G$). Kernels of abelian sheaves are computed sectionwise [lem-weil-pbc-sheafification-exact, part 1], so for every object $V$ of $X_{\\Et}$ the sequence $0\\to\\mathcal F(V)\\xrightarrow{\\iota_V}\\mathcal G(V)\\xrightarrow{\\varphi_V}\\mathcal H(V)$ is exact: $\\iota_V$ is injective and its image is $\\ker\\varphi_V$. In particular $\\varphi_V\\circ\\iota_V=0$. Lean implementation: Sheaf.injective_app_f and Sheaf.exists_app_f_eq from WeilConjectures.CategoryTheory.Sites.CechCriterion provide precisely these sectionwise facts; Sheaf.app_g_app_f provides the zero composite.",
    "uses": [
     "def-weil-pbc-abelian-etale-sheaves",
     "lem-weil-pbc-sheafification-exact"
@@ -39,7 +39,7 @@
    }
   },
   {
-   "text": "**Step 2 (local lifts).** Let $h\\in\\mathcal H(U)$. Since $\\varphi$ is an epimorphism of $\\Ab(X_{\\Et})$ (Step 1), it is locally surjective [lem-weil-pbc-abelian-sheaf-epi-locally-surjective]: there are a covering $\\{V_j\\to U\\}_{j\\in J}$ of $U$ in $X_{\\Et}$ and sections $g'_j\\in\\mathcal G(V_j)$ with $\\varphi_{V_j}(g'_j)=h|_{V_j}$ for all $j$.",
+   "text": "**Step 2 (local lifts).** Let $h\\in\\mathcal H(U)$. Since $\\varphi$ is an epimorphism of $\\Ab(X_{\\Et})$ (Step 1), it is locally surjective [lem-weil-pbc-abelian-sheaf-epi-locally-surjective]: there are a covering $\\{V_j\\to U\\}_{j\\in J}$ of $U$ in $X_{\\Et}$ and sections $g'_j\\in\\mathcal G(V_j)$ with $\\varphi_{V_j}(g'_j)=h|_{V_j}$ for all $j$. Lean uses Sheaf.isLocallySurjective_iff_epi' and Presheaf.imageSieve_mem. Index all arrows in the image sieve by the sigma type of an etale object, an arrow to U, and its membership proof; Sieve.ofArrows of this family contains the image sieve, hence is covering. This index type has the required universe u+1.",
    "uses": [
     "lem-weil-pbc-abelian-sheaf-epi-locally-surjective"
    ],
@@ -50,7 +50,7 @@
    }
   },
   {
-   "text": "**Step 3 (refinement into $\\Sigma$).** As $\\Sigma$ is cofinal, there is $\\mathcal U=\\{U_i\\to U\\}_{i\\in I}\\in\\Sigma$ refining $\\{V_j\\to U\\}$: for each $i$ choose $j(i)\\in J$ and a morphism $a_i:U_i\\to V_{j(i)}$ over $U$. Put $g_i=\\mathcal G(a_i)(g'_{j(i)})=g'_{j(i)}|_{U_i}\\in\\mathcal G(U_i)$. By naturality of $\\varphi$ and functoriality of $\\mathcal H$ (the composite $U_i\\xrightarrow{a_i}V_{j(i)}\\to U$ is the structure map of $U_i$), $\\varphi_{U_i}(g_i)=\\mathcal H(a_i)(\\varphi_{V_{j(i)}}(g'_{j(i)}))=\\mathcal H(a_i)(h|_{V_{j(i)}})=h|_{U_i}$. So $\\mathcal U$ satisfies both (a) $\\check H^1(\\mathcal U,\\mathcal F)=0$ (hypothesis on $\\Sigma$) and (b) each $h|_{U_i}$ lifts to $g_i$.",
+   "text": "**Step 3 (refinement into $\\Sigma$).** As $\\Sigma$ is cofinal, there is $\\mathcal U=\\{U_i\\to U\\}_{i\\in I}\\in\\Sigma$ refining $\\{V_j\\to U\\}$: for each $i$ choose $j(i)\\in J$ and a morphism $a_i:U_i\\to V_{j(i)}$ over $U$. Put $g_i=\\mathcal G(a_i)(g'_{j(i)})=g'_{j(i)}|_{U_i}\\in\\mathcal G(U_i)$. By naturality of $\\varphi$ and functoriality of $\\mathcal H$ (the composite $U_i\\xrightarrow{a_i}V_{j(i)}\\to U$ is the structure map of $U_i$), $\\varphi_{U_i}(g_i)=\\mathcal H(a_i)(\\varphi_{V_{j(i)}}(g'_{j(i)}))=\\mathcal H(a_i)(h|_{V_{j(i)}})=h|_{U_i}$. So $\\mathcal U$ satisfies both (a) $\\check H^1(\\mathcal U,\\mathcal F)=0$ (hypothesis on $\\Sigma$) and (b) each $h|_{U_i}$ lifts to $g_i$. Lean chooses the refinement arrows and pulls back the corresponding lift with S.X₂.obj.map. NatTrans.naturality_apply, Functor.map_comp, and the refinement equation verify its image.",
    "uses": [
     "def-weil-pbc-abelian-etale-sheaves"
    ],
@@ -61,7 +61,7 @@
    }
   },
   {
-   "text": "**Step 4 (the Cech 1-cocycle of differences).** Write $U_{i_0i_1}=U_{i_0}\\times_UU_{i_1}$, $U_{i_0i_1i_2}=U_{i_0}\\times_UU_{i_1}\\times_UU_{i_2}$, and restrictions along the projections. For $(i_0,i_1)\\in I^2$ put $\\gamma_{i_0i_1}=g_{i_1}|_{U_{i_0i_1}}-g_{i_0}|_{U_{i_0i_1}}\\in\\mathcal G(U_{i_0i_1})$. Then $\\varphi(\\gamma_{i_0i_1})=h|_{U_{i_0i_1}}-h|_{U_{i_0i_1}}=0$ by Step 3 and naturality, so by Step 1 there is a unique $c_{i_0i_1}\\in\\mathcal F(U_{i_0i_1})$ with $\\iota(c_{i_0i_1})=\\gamma_{i_0i_1}$; $c=(c_{i_0i_1})\\in\\check{\\mathcal C}^1(\\mathcal U,\\mathcal F)$ [def-weil-pbc-cech-complex]. It is a cocycle: by the formula for the differential, $d(c)_{i_0i_1i_2}=c_{i_1i_2}|-c_{i_0i_2}|+c_{i_0i_1}|$ on $U_{i_0i_1i_2}$, and its image under the injective map $\\iota_{U_{i_0i_1i_2}}$ is, restriction commuting with $\\iota$ and restrictions composing, $(g_{i_2}-g_{i_1})-(g_{i_2}-g_{i_0})+(g_{i_1}-g_{i_0})=0$ (all restricted to $U_{i_0i_1i_2}$); hence $d(c)=0$.",
+   "text": "**Step 4 (the Cech 1-cocycle of differences).** Write $U_{i_0i_1}=U_{i_0}\\times_UU_{i_1}$, $U_{i_0i_1i_2}=U_{i_0}\\times_UU_{i_1}\\times_UU_{i_2}$, and restrictions along the projections. For $(i_0,i_1)\\in I^2$ put $\\gamma_{i_0i_1}=g_{i_1}|_{U_{i_0i_1}}-g_{i_0}|_{U_{i_0i_1}}\\in\\mathcal G(U_{i_0i_1})$. Then $\\varphi(\\gamma_{i_0i_1})=h|_{U_{i_0i_1}}-h|_{U_{i_0i_1}}=0$ by Step 3 and naturality, so by Step 1 there is a unique $c_{i_0i_1}\\in\\mathcal F(U_{i_0i_1})$ with $\\iota(c_{i_0i_1})=\\gamma_{i_0i_1}$; $c=(c_{i_0i_1})\\in\\check{\\mathcal C}^1(\\mathcal U,\\mathcal F)$ [def-weil-pbc-cech-complex]. It is a cocycle: by the formula for the differential, $d(c)_{i_0i_1i_2}=c_{i_1i_2}|-c_{i_0i_2}|+c_{i_0i_1}|$ on $U_{i_0i_1i_2}$, and its image under the injective map $\\iota_{U_{i_0i_1i_2}}$ is, restriction commuting with $\\iota$ and restrictions composing, $(g_{i_2}-g_{i_1})-(g_{i_2}-g_{i_0})+(g_{i_1}-g_{i_0})=0$ (all restricted to $U_{i_0i_1i_2}$); hence $d(c)=0$. Lean implementation: let a be the degree-zero cochain obtained by restricting each chosen lift along the singleton-product projection. Presheaf.cechComplex_d_zero_restrict shows that its image in H has zero differential. Presheaf.exists_cechComplex_map_f_eq, using sectionwise kernel exactness, produces e in degree one with iota(e)=d(a). Presheaf.cechComplex_map_f_injective and d²=0 imply d(e)=0.",
    "uses": [
     "def-weil-pbc-cech-complex"
    ],
@@ -72,7 +72,7 @@
    }
   },
   {
-   "text": "**Step 5 (correction by a 0-cochain).** Since $\\check H^1(\\mathcal U,\\mathcal F)=H^1(\\check{\\mathcal C}^\\bullet(\\mathcal U,\\mathcal F))=0$ [def-weil-pbc-cech-complex], the cocycle $c$ is a coboundary: there is $t=(t_i)\\in\\check{\\mathcal C}^0(\\mathcal U,\\mathcal F)=\\prod_i\\mathcal F(U_i)$ with $c=d(t)$, i.e. $c_{i_0i_1}=t_{i_1}|_{U_{i_0i_1}}-t_{i_0}|_{U_{i_0i_1}}$. Put $\\tilde g_i=g_i-\\iota(t_i)\\in\\mathcal G(U_i)$. Applying $\\iota$ (which commutes with restriction) gives $g_{i_1}|-g_{i_0}|=\\iota(t_{i_1})|-\\iota(t_{i_0})|$ on $U_{i_0i_1}$, i.e. $\\tilde g_{i_1}|_{U_{i_0i_1}}=\\tilde g_{i_0}|_{U_{i_0i_1}}$ for all $(i_0,i_1)\\in I^2$; and $\\varphi(\\tilde g_i)=\\varphi(g_i)-\\varphi\\iota(t_i)=h|_{U_i}$ since $\\varphi\\circ\\iota=0$ (Step 1).",
+   "text": "**Step 5 (correction by a 0-cochain).** Since $\\check H^1(\\mathcal U,\\mathcal F)=H^1(\\check{\\mathcal C}^\\bullet(\\mathcal U,\\mathcal F))=0$ [def-weil-pbc-cech-complex], the cocycle $c$ is a coboundary: there is $t=(t_i)\\in\\check{\\mathcal C}^0(\\mathcal U,\\mathcal F)=\\prod_i\\mathcal F(U_i)$ with $c=d(t)$, i.e. $c_{i_0i_1}=t_{i_1}|_{U_{i_0i_1}}-t_{i_0}|_{U_{i_0i_1}}$. Put $\\tilde g_i=g_i-\\iota(t_i)\\in\\mathcal G(U_i)$. Applying $\\iota$ (which commutes with restriction) gives $g_{i_1}|-g_{i_0}|=\\iota(t_{i_1})|-\\iota(t_{i_0})|$ on $U_{i_0i_1}$, i.e. $\\tilde g_{i_1}|_{U_{i_0i_1}}=\\tilde g_{i_0}|_{U_{i_0i_1}}$ for all $(i_0,i_1)\\in I^2$; and $\\varphi(\\tilde g_i)=\\varphi(g_i)-\\varphi\\iota(t_i)=h|_{U_i}$ since $\\varphi\\circ\\iota=0$ (Step 1). To use the stated Mathlib cohomology hypothesis without changing it, the fully proved private productSectionsIso identifies the categorical product with the dependent function group via the product universal property. The fully proved private cechSectionsIso applies these isomorphisms degreewise to the cosimplicial objects. Its naturality is checked after every product projection by Pi.lift_π, so it commutes with all face and degeneracy maps. Applying alternatingCofaceMapComplex gives an isomorphism from the stated Mathlib complex to Presheaf.cechComplex. HomologicalComplex.exactAt_iff_isZero_homology and ExactAt.of_iso give exactness in degree one of the explicit complex. Presheaf.exactAt_cechComplex_iff produces b with d(b)=e, and the corrected cochain a-iota(b) has differential zero by map_sub and the chain-map equation.",
    "uses": [
     "def-weil-pbc-cech-complex"
    ],
@@ -83,7 +83,7 @@
    }
   },
   {
-   "text": "**Step 6 (gluing).** $\\mathcal U$ is a covering of $U$ in $X_{\\Et}$ and $\\mathcal G$ is a sheaf [def-weil-pbc-abelian-etale-sheaves]: $\\mathcal G(U)\\to\\prod_i\\mathcal G(U_i)\\rightrightarrows\\prod_{i_0,i_1}\\mathcal G(U_{i_0i_1})$ is an equalizer. By Step 5 the family $(\\tilde g_i)$ lies in the equalizer, so there is $g\\in\\mathcal G(U)$ with $g|_{U_i}=\\tilde g_i$ for all $i$. Then $\\varphi_U(g)|_{U_i}=\\varphi_{U_i}(\\tilde g_i)=h|_{U_i}$ for all $i$, and since $\\mathcal H$ is a sheaf, the map $\\mathcal H(U)\\to\\prod_i\\mathcal H(U_i)$ is injective, so $\\varphi_U(g)=h$. As $h$ was arbitrary, $\\mathcal G(U)\\to\\mathcal H(U)$ is surjective.",
+   "text": "**Step 6 (gluing).** $\\mathcal U$ is a covering of $U$ in $X_{\\Et}$ and $\\mathcal G$ is a sheaf [def-weil-pbc-abelian-etale-sheaves]: $\\mathcal G(U)\\to\\prod_i\\mathcal G(U_i)\\rightrightarrows\\prod_{i_0,i_1}\\mathcal G(U_{i_0i_1})$ is an equalizer. By Step 5 the family $(\\tilde g_i)$ lies in the equalizer, so there is $g\\in\\mathcal G(U)$ with $g|_{U_i}=\\tilde g_i$ for all $i$. Then $\\varphi_U(g)|_{U_i}=\\varphi_{U_i}(\\tilde g_i)=h|_{U_i}$ for all $i$, and since $\\mathcal H$ is a sheaf, the map $\\mathcal H(U)\\to\\prod_i\\mathcal H(U_i)$ is injective, so $\\varphi_U(g)=h$. As $h$ was arbitrary, $\\mathcal G(U)\\to\\mathcal H(U)$ is surjective. Lean uses the degree-zero nerve objects as its covering family; this family generates a covering sieve since each original covering arrow factors through its singleton product by Pi.lift of the identity. Presheaf.map_eq_of_cechComplex_d_zero proves compatibility on arbitrary overlaps. Sheaf.isSheafFor_ofArrows and Presieve.isSheafFor_arrows_iff glue the family, and the separatedness part for H proves equality with the original section.",
    "uses": [
     "def-weil-pbc-abelian-etale-sheaves"
    ],
@@ -103,7 +103,7 @@
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Lemma Tag 03F8 (lemma-ses-cech-h1), proof"
+  "place": "Lemma Tag 03F8 (lemma-ses-cech-h1), proof; realized in Lean using the proved cochain and sheaf helpers of WeilConjectures/CategoryTheory/Sites/CechCriterion.lean and a private product comparison with Mathlib cechComplexFunctor"
  },
  "mathlib_searches": [
   {
@@ -179,5 +179,15 @@
   "group": "F1",
   "result": "pass",
   "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-95e86",
+  "group": "V1",
+  "result": "pass",
+  "landing": "20261012T025240-L-1234414",
+  "kind": "interface",
+  "note": "independent Codex review: Matched the unchanged Lean signature and complete proof with the node, its dependencies, and [Stacks 03F8](https://stacks.math.columbia.edu/tag/03F8); compilation is clean, axioms are only propext/Classical.choice/Quot.sound, removed imports remain publicly available, metadata agrees, and earlier returns are repaired."
  }
 }
