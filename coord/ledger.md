@@ -9806,3 +9806,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 22:34 L: merged deliver/Q1/Sheaf.AlgebraicGeometry.PicardRankMatchBaseChange (stage 3; reviewer PASS; first push; landing 20261012T223413-L-1639409 (interface); batch 20261012T223357; modules 3; new nodes 2)
 - 22:34 L: merged deliver/Q3/Sheaf.AlgebraicGeometry.Cohomology.CechComparisonInverseImageUnit (stage 3; reviewer PASS; first push; landing 20261012T223413-L-1639538 (interface); batch 20261012T223357; modules 4; new nodes 3)
 - 22:34 L: merged deliver/Q3/Sheaf.AlgebraicGeometry.DerivedPullbackTensorComparisonDescent (stage 3; reviewer PASS; first push; landing 20261012T223413-L-1639741 (interface); batch 20261012T223357; modules 3; new nodes 2)
+- 22:34 L: merged deliver/R2/Sheaf.AlgebraicGeometry.Curve.ProperConstantBaseChangeOne (stage 3; reviewer PASS; after a return; landing 20261012T223414-L-1639886 (interface); batch 20261012T223357; modules 2; new nodes 1)
