@@ -17,40 +17,40 @@
  ],
  "proof": [
   {
-   "text": "For each A=U,V,U intersection V, kInjective_of_restrict_open shows that the restriction of I to the localized module site is K-injective. Transport along the exact additive Scheme.Modules.overEquiv A: its inverse preserves acyclic complexes, and it transports homotopies, so the tests for K-injectivity are preserved. Apply the inverse of the underived direct-image rightDerivedFunctorObjQIso on r_A(I), followed by the exact-restriction localization comparison and the direct image of restriction of e. This gives canonical e_A.",
+   "text": "Construct c_U,c_V,c_W at QI using schemeOpenModuleImageComplexComparison. Postcompose each with the composite exact-restriction/derived-direct-image functor applied to e:QI isomorphic to E; these are the three explicit witnesses e_U,e_V,e_W.",
    "uses": [
-    "lem-sc-derived-k-injective-restrict-open",
-    "def-pc-derived-direct-image",
-    "def-pc-kinjective-mayer-vietoris-data"
+    "def-pc-open-image-complex-comparison-iso"
    ],
-   "elementary": false
+   "elementary": true
   },
   {
-   "text": "Derive the fixed underived restriction/direct-image adjunction and identify its left derived functor with the exact restriction functor. The derived unit on QI is Q(eta_A) followed by the direct-image comparison; naturality in e gives the U and V unit identities. The underived rho is the mate of alpha inverse, the restricted counit, and alpha. Under localization and the K-injective comparisons, this formula becomes the mate of the derived counit conjugated by schemeDerivedOpenRestrictionCompIso, hence exactly schemeDerivedOpenDirectImageRestriction. This gives the two canonical overlap identities.",
+   "text": "For U and V use schemeOpenModuleImageComplexComparison_unit and naturality of the supplied adjunction unit along e.hom to give the two unit equations.",
    "uses": [
-    "def-pc-derived-open-restriction-maps",
-    "def-pc-kinjective-mayer-vietoris-data"
+    "lem-pc-open-image-complex-comparison-unit"
    ],
-   "elementary": false
+   "elementary": true
   },
   {
-   "text": "For each A compare the canonical and supplied adjunctions by the right-adjoint natural isomorphism beta_A compatible with their units. Then eta_supplied=eta_canonical followed by beta_A, and epsilon_supplied=restriction(beta_A inverse) followed by epsilon_canonical. Substitution into the mate formula, naturality of beta for W and of alpha give rho_supplied=beta_A inverse followed by rho_canonical followed by beta_W. Postcompose each canonical e_A with beta_A at the restricted E. These equations give exactly the four displayed identities for the supplied adjunctions.",
+   "text": "For each of the two inclusions into the intersection apply schemeOpenModuleImageComplexComparison_restriction at QI. The generic private mate_naturality lemma is the naturality of the whiskered unit/counit transformation. It transports these two equations along e.hom and gives the requested overlap equations at E.",
    "uses": [
+    "lem-pc-open-image-complex-comparison-restriction",
     "def-pc-derived-open-restriction-maps"
    ],
    "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-sc-derived-k-injective-restrict-open",
-  "def-pc-derived-direct-image",
-  "def-pc-kinjective-mayer-vietoris-data",
+  "def-pc-open-image-complex-comparison-iso",
+  "lem-pc-open-image-complex-comparison-unit",
+  "lem-pc-open-image-complex-comparison-restriction",
   "def-pc-derived-open-restriction-maps"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
+  "agent": "X3",
   "document": "literature/stacks-project/cohomology.tex",
-  "place": "Lemma 20.33.2 (Tag 08BV, lemma-exact-sequence-j-star), displayed direct-image sequence and proof"
+  "place": "Tag 08BV (lemma-exact-sequence-j-star), first proof paragraph and displayed restriction/direct-image sequence; Tag 08BS (lemma-restrict-K-injective-to-open)",
+  "note": "Original plan made explicit: computed comparisons, proved unit factorization, nested mate compatibility split off, and proved transport along the supplied representing isomorphism."
  },
  "mathlib_searches": [
   {
@@ -130,9 +130,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "C3",
+  "group": "X3",
   "result": "pass",
-  "landing": "20261012T184246-L-3998120",
+  "landing": "20261012T220530-L-1396973",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

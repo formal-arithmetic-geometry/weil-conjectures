@@ -9743,3 +9743,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 22:05 L: merged deliver/V3/Sheaf.CategoryTheory.ColimitSiteRawSectionEvaluation (stage 3; reviewer PASS; first push; landing 20261012T220529-L-1396512 (interface); batch 20261012T220515; modules 2; new nodes 1)
 - 22:05 L: merged deliver/W3/Sheaf.AlgebraicGeometry.ClosedImmersionCoherentEquivalenceTermwise (stage 3; reviewer PASS; after a return; landing 20261012T220529-L-1396682 (interface); batch 20261012T220515; modules 2; new nodes 1)
 - 22:05 L: merged deliver/X2/Sheaf.AlgebraicGeometry.CoherentFormalModuleIsomorphismLocal (stage 3; reviewer PASS; first push; landing 20261012T220529-L-1396799 (proof); batch 20261012T220515; modules 1; new nodes 1)
+- 22:05 L: merged deliver/X3/Sheaf.AlgebraicGeometry.KInjectiveMayerVietorisComparisons (stage 3; reviewer PASS; first push; landing 20261012T220530-L-1396973 (interface); batch 20261012T220515; modules 4; new nodes 3)

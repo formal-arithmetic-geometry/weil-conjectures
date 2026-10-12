@@ -6,9 +6,8 @@ Authors: SHEAF group C3
 module
 
 public import Sheaf.AlgebraicGeometry.KInjectiveMayerVietorisData
-import Sheaf.Algebra.Homology.KInjectiveRestrictOpen
-import Sheaf.AlgebraicGeometry.DerivedOpenRestrictionMaps
-import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
+import Sheaf.AlgebraicGeometry.OpenImageComplexComparisonUnit
+import Sheaf.AlgebraicGeometry.OpenImageComplexComparisonRestriction
 
 /-! # Derived comparisons for the fixed open direct-image complexes
 
@@ -29,6 +28,28 @@ set_option synthInstance.maxSize 2048
 noncomputable section
 namespace AlgebraicGeometry
 
+private theorem mate_naturality
+    {A B D : Type*} [Category A] [Category B] [Category D]
+    {F : A ⥤ B} {G : B ⥤ A} {H : A ⥤ D} {K : D ⥤ A}
+    (a : F ⊣ G) (b : H ⊣ K) (T : B ⥤ D) (α : F ⋙ T ≅ H)
+    {M N : A} (f : M ⟶ N) :
+    G.map (F.map f) ≫ (b.homEquiv _ _)
+        (α.inv.app _ ≫ T.map (a.counit.app (F.obj N)) ≫ α.hom.app N) =
+      (b.homEquiv _ _)
+        (α.inv.app _ ≫ T.map (a.counit.app (F.obj M)) ≫ α.hom.app M) ≫
+          K.map (H.map f) := by
+  let ρ : F ⋙ G ⟶ H ⋙ K :=
+    Functor.whiskerLeft (F ⋙ G) b.unit ≫
+      Functor.whiskerRight
+        (Functor.whiskerLeft (F ⋙ G) α.inv ≫
+          Functor.whiskerRight (Functor.whiskerLeft F a.counit) T ≫ α.hom) K
+  simpa only [ρ, NatTrans.comp_app, Functor.whiskerLeft_app,
+    Functor.whiskerRight_app, Functor.comp_map, Functor.comp_obj, Adjunction.homEquiv_unit]
+    using ρ.naturality f
+
+set_option backward.isDefEq.respectTransparency true in
+set_option maxHeartbeats 600000 in
+-- Elaborating the three computed comparisons checks the transported scheme functors.
 /-- The three canonical direct-image complexes compute the derived direct images,
 compatibly with the U and V units and both nested restriction maps.
 Source: Stacks Project, Cohomology, Tag 08BV (lemma-exact-sequence-j-star),
@@ -101,6 +122,50 @@ theorem schemeOpenModuleImageComplex_comparisons
       DerivedCategory.Q.map (schemeOpenModuleImageComplexRestriction X
         (homOfLE (inf_le_right : U ⊓ V ≤ V)) I) ≫ eW.hom =
           eV.hom ≫ schemeDerivedOpenDirectImageRestriction X
-            (homOfLE inf_le_right) adjV adjUV E := by sorry
+            (homOfLE inf_le_right) adjV adjUV E := by
+  let cU := schemeOpenModuleImageComplexComparison X U I adjU
+  let cV := schemeOpenModuleImageComplexComparison X V I adjV
+  let cW := schemeOpenModuleImageComplexComparison X (U ⊓ V) I adjUV
+  let tU := ((schemeOpenRestriction X U).mapDerivedCategory ⋙
+    schemeDerivedDirectImage U.ι).mapIso e
+  let tV := ((schemeOpenRestriction X V).mapDerivedCategory ⋙
+    schemeDerivedDirectImage V.ι).mapIso e
+  let tW := ((schemeOpenRestriction X (U ⊓ V)).mapDerivedCategory ⋙
+    schemeDerivedDirectImage (U ⊓ V).ι).mapIso e
+  refine ⟨cU ≪≫ tU, cV ≪≫ tV, cW ≪≫ tW, ?_, ?_, ?_, ?_⟩
+  · exact (Category.assoc _ _ _).symm.trans
+      ((congrArg (fun f => f ≫ tU.hom)
+        (schemeOpenModuleImageComplexComparison_unit X U I adjU)).trans
+          (adjU.unit.naturality e.hom).symm)
+  · exact (Category.assoc _ _ _).symm.trans
+      ((congrArg (fun f => f ≫ tV.hom)
+        (schemeOpenModuleImageComplexComparison_unit X V I adjV)).trans
+          (adjV.unit.naturality e.hom).symm)
+  · have hn : schemeDerivedOpenDirectImageRestriction X
+        (homOfLE (inf_le_left : U ⊓ V ≤ U)) adjU adjUV (DerivedCategory.Q.obj I) ≫
+          tW.hom = tU.hom ≫ schemeDerivedOpenDirectImageRestriction X
+            (homOfLE inf_le_left) adjU adjUV E :=
+      (mate_naturality adjU adjUV
+        (schemeOpenOverlapRestriction X (homOfLE inf_le_left)).mapDerivedCategory
+        (schemeDerivedOpenRestrictionCompIso X (homOfLE inf_le_left)) e.hom).symm
+    exact (Category.assoc _ _ _).symm.trans
+      ((congrArg (fun f => f ≫ tW.hom)
+        (schemeOpenModuleImageComplexComparison_restriction X
+          (homOfLE (inf_le_left : U ⊓ V ≤ U)) I adjU adjUV)).trans
+        ((Category.assoc _ _ _).trans
+          ((congrArg (fun f => cU.hom ≫ f) hn).trans (Category.assoc _ _ _).symm)))
+  · have hn : schemeDerivedOpenDirectImageRestriction X
+        (homOfLE (inf_le_right : U ⊓ V ≤ V)) adjV adjUV (DerivedCategory.Q.obj I) ≫
+          tW.hom = tV.hom ≫ schemeDerivedOpenDirectImageRestriction X
+            (homOfLE inf_le_right) adjV adjUV E :=
+      (mate_naturality adjV adjUV
+        (schemeOpenOverlapRestriction X (homOfLE inf_le_right)).mapDerivedCategory
+        (schemeDerivedOpenRestrictionCompIso X (homOfLE inf_le_right)) e.hom).symm
+    exact (Category.assoc _ _ _).symm.trans
+      ((congrArg (fun f => f ≫ tW.hom)
+        (schemeOpenModuleImageComplexComparison_restriction X
+          (homOfLE (inf_le_right : U ⊓ V ≤ V)) I adjV adjUV)).trans
+        ((Category.assoc _ _ _).trans
+          ((congrArg (fun f => cV.hom ≫ f) hn).trans (Category.assoc _ _ _).symm)))
 
 end AlgebraicGeometry
