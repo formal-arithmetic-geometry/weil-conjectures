@@ -6,10 +6,6 @@ Authors: SHEAF group F1
 module
 
 public import Sheaf.Paper.SitePlusSeparated
-import Sheaf.CategoryTheory.Sites.SitePlusConstructionPresheaf
-import Sheaf.Paper.PlusConstructionFunctorial
-import Sheaf.Paper.SitePlusOfSeparatedIsSheaf
-import Sheaf.Paper.SitePlusOfSheafIso
 
 /-!
 # The plus construction computes sheafification
@@ -80,6 +76,46 @@ theorem plus_sheafification_theorem
       ∃! e : J.toGrothendieck.plusObj (J.toGrothendieck.plusObj P) ≅ Q.obj,
         (J.toGrothendieck.toPlus P ≫
           J.toGrothendieck.toPlus (J.toGrothendieck.plusObj P)) ≫ e.hom = θ) := by
-  sorry
+  obtain ⟨hsep, hinj⟩ := plus_separated_and_injective J P
+  have hsheaf := Plus.isSheaf_plus_plus J.toGrothendieck P
+  have hunit : J.toGrothendieck.toSheafify P =
+      J.toGrothendieck.toPlus P ≫
+        J.toGrothendieck.toPlus (J.toGrothendieck.plusObj P) := by
+    simp only [GrothendieckTopology.toSheafify, plusMap_toPlus]
+  have huniv : ∀ (G : Sheaf J.toGrothendieck (Type (max u w))) (φ : P ⟶ G.obj),
+      ∃! φ' : J.toGrothendieck.sheafify P ⟶ G.obj,
+        J.toGrothendieck.toSheafify P ≫ φ' = φ := by
+    intro G φ
+    exact ⟨J.toGrothendieck.sheafifyLift φ G.property,
+      J.toGrothendieck.toSheafify_sheafifyLift φ G.property,
+      fun γ hγ => J.toGrothendieck.sheafifyLift_unique φ G.property γ hγ⟩
+  refine ⟨hsep, hinj, hsheaf, ?_, ?_⟩
+  · intro G φ
+    obtain ⟨x, hx, hxu⟩ := huniv G φ
+    change ∃! φ' : J.toGrothendieck.sheafify P ⟶ G.obj, _
+    exact ⟨x, by simpa only [hunit] using hx,
+      fun y hy => hxu y (by simpa only [hunit] using hy)⟩
+  · intro Q θ hQ
+    let S : Sheaf J.toGrothendieck (Type (max u w)) :=
+      ⟨J.toGrothendieck.sheafify P, hsheaf⟩
+    obtain ⟨a, ha, hua⟩ := huniv Q θ
+    obtain ⟨b, hb, hub⟩ := hQ S (J.toGrothendieck.toSheafify P)
+    have hab : a ≫ b = 𝟙 S.obj := by
+      apply J.toGrothendieck.sheafify_hom_ext _ _ hsheaf
+      simp only [← Category.assoc, ha, hb]
+      rfl
+    have hba : b ≫ a = 𝟙 Q.obj := by
+      have hcomp : θ ≫ (b ≫ a) = θ := by
+        rw [← Category.assoc, hb, ha]
+      obtain ⟨z, hz, hzu⟩ := hQ Q θ
+      exact (hzu (b ≫ a) hcomp).trans (hzu (𝟙 _) (by simp)).symm
+    let e : S.obj ≅ Q.obj := ⟨a, b, hab, hba⟩
+    refine ⟨e, ?_, ?_⟩
+    · change _ ≫ a = θ
+      rw [← hunit]
+      exact ha
+    · intro e' he'
+      apply Iso.ext
+      exact (hua e'.hom (by simpa only [hunit] using he')).trans (hua a ha).symm
 
 end CategoryTheory.GrothendieckTopology

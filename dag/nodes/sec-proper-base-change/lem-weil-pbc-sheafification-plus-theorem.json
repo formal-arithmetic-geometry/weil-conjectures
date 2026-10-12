@@ -28,81 +28,30 @@
  ],
  "proof": [
   {
-   "text": "Part (1). Applying [lem-weil-pbc-sheafification-plus-separated] to $\\mathcal F$ gives that $\\mathcal F^+$ is separated (for every covering $\\{U_i\\to U\\}$ the map $\\mathcal F^+(U)\\to\\prod_i\\mathcal F^+(U_i)$ is injective; injectivity into the equalizer of the two maps to $\\prod_{i,j}\\mathcal F^+(U_i\\times_UU_j)$, as that node phrases it, is the same condition since the equalizer is a subset of the product) and that $\\theta_{\\mathcal F^+}:\\mathcal F^+\\to\\mathcal F^{++}$ is injective.",
+   "text": "Apply plus_separated_and_injective for the first separatedness and injectivity conjuncts.",
    "uses": [
-    "lem-weil-pbc-sheafification-plus-separated",
-    "def-weil-pbc-site-plus-construction"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites.tex",
-    "place": "Sites, Theorem 00WB(1) (item-sep, tag 00WC), and 00WB(2) applied to the separated presheaf $\\mathcal F^+$"
-   }
-  },
-  {
-   "text": "Part (2). By step 1, $\\mathcal F^+$ is a separated presheaf of sets in the sense of Sites, Definition 00WA. Applying [lem-weil-pbc-site-plus-of-separated-is-sheaf] to $\\mathcal G=\\mathcal F^+$ (a presheaf by [lem-weil-pbc-site-plus-construction-presheaf]) gives that $(\\mathcal F^+)^+=\\mathcal F^{++}$ is a sheaf.",
-   "uses": [
-    "lem-weil-pbc-site-plus-of-separated-is-sheaf",
-    "lem-weil-pbc-site-plus-construction-presheaf",
     "lem-weil-pbc-sheafification-plus-separated"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites.tex",
-    "place": "Sites, Theorem 00WB(4) (item-plusplus) and its proof ('now obvious' from (1) and (2))"
-   }
+   "elementary": false
   },
   {
-   "text": "Part (3), existence. Let $\\mathcal G$ be a sheaf and $\\varphi:\\mathcal F\\to\\mathcal G$ a morphism. By [lem-weil-pbc-site-plus-of-sheaf-iso], $\\theta_{\\mathcal G}:\\mathcal G\\to\\mathcal G^+$ is an isomorphism, so $\\mathcal G^+$ is a sheaf (a presheaf isomorphic to a sheaf is a sheaf, the equalizer condition being transported by the isomorphism), and applying the same node to $\\mathcal G^+$, $\\theta_{\\mathcal G^+}$ is an isomorphism; hence $\\theta^2_{\\mathcal G}=\\theta_{\\mathcal G^+}\\circ\\theta_{\\mathcal G}:\\mathcal G\\to\\mathcal G^{++}$ is an isomorphism. By [lem-weil-pbc-site-plus-construction-functorial](b) applied to $\\varphi$ and to $\\varphi^+:\\mathcal F^+\\to\\mathcal G^+$ we have $\\theta_{\\mathcal G}\\circ\\varphi=\\varphi^+\\circ\\theta_{\\mathcal F}$ and $\\theta_{\\mathcal G^+}\\circ\\varphi^+=\\varphi^{++}\\circ\\theta_{\\mathcal F^+}$, with $\\varphi^{++}=(\\varphi^+)^+$; composing, $\\theta^2_{\\mathcal G}\\circ\\varphi=\\varphi^{++}\\circ\\theta^2_{\\mathcal F}$. Put $\\varphi'=(\\theta^2_{\\mathcal G})^{-1}\\circ\\varphi^{++}:\\mathcal F^{++}\\to\\mathcal G$; then $\\varphi'\\circ\\theta^2_{\\mathcal F}=(\\theta^2_{\\mathcal G})^{-1}\\circ\\theta^2_{\\mathcal G}\\circ\\varphi=\\varphi$.",
-   "uses": [
-    "lem-weil-pbc-site-plus-of-sheaf-iso",
-    "lem-weil-pbc-site-plus-construction-functorial",
-    "def-weil-pbc-sites-and-cohomology"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites.tex",
-    "place": "Sites, Proposition 00WH (proposition-sheafification-adjoint), proof: the commutative diagram from Lemma 00W5 and Theorem 00WB(3)"
-   }
+   "text": "Use Mathlib ConcreteSheafification: double plus is a sheaf, and sheafifyLift with sheafifyLift_unique gives the universal factorization.",
+   "uses": [],
+   "elementary": false
   },
   {
-   "text": "Part (3), uniqueness. Let $\\varphi',\\varphi'':\\mathcal F^{++}\\to\\mathcal G$ with $\\varphi'\\circ\\theta^2_{\\mathcal F}=\\varphi''\\circ\\theta^2_{\\mathcal F}$, and let $x\\in\\mathcal F^{++}(U)$. Local surjectivity of $\\theta$ (Sites, Lemma 00W9): by [lem-weil-pbc-site-plus-construction-presheaf](1) applied to $\\mathcal F^+$, $x=[\\mathcal U,(t_i)_i]$ for a covering $\\mathcal U=\\{U_i\\to U\\}_{i\\in I}$ and $(t_i)\\in H^0(\\mathcal U,\\mathcal F^+)$, and by part (3) of the same node (with $h:U_i\\to U$ factoring through $U_i$ via the identity) $x|_{U_i}=\\theta_{\\mathcal F^+}(t_i)$. Likewise each $t_i=[\\{U_{ik}\\to U_i\\}_k,(r_{ik})_k]$ with $r_{ik}\\in\\mathcal F(U_{ik})$ and $t_i|_{U_{ik}}=\\theta_{\\mathcal F}(r_{ik})$. Since $\\theta_{\\mathcal F^+}$ is a morphism of presheaves, $x|_{U_{ik}}=\\theta_{\\mathcal F^+}(t_i|_{U_{ik}})=\\theta^2_{\\mathcal F}(r_{ik})$, so $\\varphi'(x)|_{U_{ik}}=\\varphi'(\\theta^2_{\\mathcal F}(r_{ik}))=\\varphi''(\\theta^2_{\\mathcal F}(r_{ik}))=\\varphi''(x)|_{U_{ik}}$. The family $\\{U_{ik}\\to U\\}_{i,k}$ is a covering of $U$ by axiom (ii) of a site, and a sheaf is separated (the map $\\mathcal G(U)\\to\\prod\\mathcal G(U_{ik})$ is injective by the equalizer condition), so $\\varphi'(x)=\\varphi''(x)$. Hence $\\varphi'=\\varphi''$.",
-   "uses": [
-    "lem-weil-pbc-site-plus-construction-presheaf",
-    "def-weil-pbc-sites-and-cohomology"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites.tex",
-    "place": "Sites, Proposition 00WH, proof ('uniqueness follows from Lemma 00W9'), with Lemma 00W9 (lemma-plus-surjective) and its proof"
-   }
-  },
-  {
-   "text": "Comparison with $\\mathcal F^\\#$. By steps 2--4, $(\\mathcal F^{++},\\theta^2_{\\mathcal F})$ is a sheaf with a morphism from $\\mathcal F$ through which every morphism from $\\mathcal F$ to a sheaf factors uniquely, which is the universal property of [def-weil-pbc-sheafification]. By the universal properties there are unique morphisms $a:\\mathcal F^{++}\\to\\mathcal F^\\#$ with $a\\circ\\theta^2_{\\mathcal F}=\\theta$ and $b:\\mathcal F^\\#\\to\\mathcal F^{++}$ with $b\\circ\\theta=\\theta^2_{\\mathcal F}$; then $b\\circ a\\circ\\theta^2_{\\mathcal F}=\\theta^2_{\\mathcal F}=\\mathrm{id}\\circ\\theta^2_{\\mathcal F}$ gives $b\\circ a=\\mathrm{id}$ by the uniqueness for $\\mathcal F^{++}$, and likewise $a\\circ b=\\mathrm{id}$. So $a$ is an isomorphism carrying $\\theta^2_{\\mathcal F}$ to $\\theta$, and it is the only morphism with $a\\circ\\theta^2_{\\mathcal F}=\\theta$.",
-   "uses": [
-    "def-weil-pbc-sheafification"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites.tex",
-    "place": "Sites, the paragraph after Proposition 00WH (the sheafification is unique up to unique isomorphism; left adjoint to the inclusion)"
-   }
+   "text": "Apply the universal property twice to construct inverse morphisms and prove they are inverse by sheafify_hom_ext and uniqueness.",
+   "uses": [],
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-sheafification-plus-separated",
-  "def-weil-pbc-site-plus-construction",
-  "lem-weil-pbc-site-plus-of-separated-is-sheaf",
-  "lem-weil-pbc-site-plus-construction-presheaf",
-  "lem-weil-pbc-site-plus-of-sheaf-iso",
-  "lem-weil-pbc-site-plus-construction-functorial",
-  "def-weil-pbc-sites-and-cohomology",
-  "def-weil-pbc-sheafification"
+  "lem-weil-pbc-sheafification-plus-separated"
  ],
  "proof_origin": {
-  "by": "document",
-  "document": "literature/stacks-project/sites.tex",
-  "place": "Sites, Theorem 00WB (theorem-plus) and Proposition 00WH (proposition-sheafification-adjoint), Section 00W1"
+  "by": "mathlib",
+  "document": "Mathlib/CategoryTheory/Sites/ConcreteSheafification.lean",
+  "place": "isSheaf_plus_plus, sheafifyLift, sheafifyLift_unique, sheafify_hom_ext"
  },
  "mathlib_searches": [
   {
@@ -193,5 +142,15 @@
   "group": "F1",
   "result": "pass",
   "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q1",
+  "result": "pass",
+  "landing": "20261012T044751-L-2038677",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
