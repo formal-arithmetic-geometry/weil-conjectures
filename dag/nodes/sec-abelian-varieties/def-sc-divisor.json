@@ -20,9 +20,46 @@
   "def-weil-pbc-constant-sheaf",
   "lem-sc-divisor-finite-support"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Construct the section submodule from the unchanged locally constant function predicate and closed-point order bounds. Zero satisfies the zero disjunct. For addition, separate a zero sum and zero summands. At coheight one, ringKrullDim_stalk_eq_coheight and [lem-sc-regular-dim1-dvr] give the DVR instance; Scheme.ord_add bounds the sum by the minimum. At other coheights Scheme.ord_eq_zero_of_coheight_neq_one reduces the bound to that of a permitted nonzero summand.",
+   "uses": [
+    "lem-sc-regular-dim1-dvr"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For scalar closure, algebraMap_germ_eq_germToFunctionField identifies the scalar values at any two points of a nonempty integral open, making the scalar function constant. Multiply locally constant functions. Separate a zero scalar or zero section value; otherwise Scheme.ord_le_smul gives the required inequality. Introduce Nonempty U only after choosing a point, so the empty open is included and the pointwise scalar instance is unchanged.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "Restriction is pointwise precomposition with the continuous open inclusion, retaining local constancy and the same closed-point bound. Its additivity, identity and composition are definitional equalities. Semilinearity follows pointwise from TopCat.Presheaf.germ_res_apply. These proofs construct the semilinear restriction maps and module presheaf.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "Realize the section condition as a TopCat.LocalPredicate. For locality, give the function field its discrete topology: local constancy is continuity by IsLocallyConstant.iff_continuous and continuity is local by TopCat.continuousLocal. Check each closed-point bound on a neighborhood containing that point. Apply TopCat.subpresheafToTypes.isSheaf and TopCat.Presheaf.isSheaf_iff_isSheaf_comp' for the forgetful functor from abelian groups. The resulting associatedModule has the prescribed explicit sections, including the unique function on the empty open.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "For moduleOfSmoothConnectedCurve, finite type supplies Noetherianity, IsConnectedCurve.connectedSpace' supplies connectedness, [lem-sc-smooth-regular] supplies IsRegular.of_smooth, and IsRegular.isIntegral supplies integrality. Apply the constructed associatedModule, without adding any hypothesis to the smooth connected curve interface.",
+   "uses": [
+    "lem-sc-smooth-regular"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-regular-dim1-dvr",
+  "lem-sc-smooth-regular"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "lean/Sheaf/AlgebraicGeometry/DivisorModule.lean",
+  "place": "Explicit construction obligations, reviewed by H3 on 2026-10-12; Mathlib order and local-predicate sheaf lemmas"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -117,5 +154,15 @@
   "group": "E1",
   "result": "pass",
   "note": "k alg closed [Field][IsAlgClosed]; smooth connected curve via f with IsConnectedCurve f + Smooth f; Div/div/Cl/deg reused from source Curve.Divisor (closedPoints →₀ ℤ, Additive K^x, range quotient, coefficient sum); O_C(D)(U) = locally constant U→k(C) with s=0 ∨ ord+n_P≥0 at closed P∈U, zero on empty open; source Picard.lean confirms O_C(D) missing upstream"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H3",
+  "result": "pass",
+  "landing": "20261012T085248-L-18698",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

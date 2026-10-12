@@ -6866,3 +6866,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 08:52 L: merged deliver/H2/Sheaf.RingTheory.FlatCompletion (stage 3; reviewer PASS; first push; landing 20261012T085247-L-18288 (interface); batch 20261012T085205; modules 2; new nodes 1)
 - 08:52 L: merged deliver/H2/Sheaf.RingTheory.GabberIntegralSectionFactor (stage 3; reviewer PASS; first push; landing 20261012T085248-L-18405 (interface); batch 20261012T085205; modules 3; new nodes 2)
 - 08:52 L: merged deliver/H2/Sheaf.RingTheory.GeometricRegularitySubfields (stage 3; reviewer PASS; first push; landing 20261012T085248-L-18593 (interface); batch 20261012T085205; modules 2; new nodes 1)
+- 08:52 L: merged deliver/H3/Sheaf.AlgebraicGeometry.DivisorModule (stage 3; reviewer PASS; first push; landing 20261012T085248-L-18698 (proof); batch 20261012T085205; modules 1; new nodes 0)

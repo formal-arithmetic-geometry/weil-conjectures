@@ -76,7 +76,8 @@ Proof: the zero function is locally constant, and at every closed point the zero
 holds. This also covers the empty open. -/
 theorem Divisor.sectionCondition_zero (D : X.Divisor) (U : X.Opens) :
     D.sectionCondition X U 0 := by
-  sorry
+  have _hreg : IsRegular X := inferInstance
+  exact ⟨IsLocallyConstant.const 0, fun _ _ ↦ Or.inl rfl⟩
 
 /-- Closure under addition. Source: blueprint node def-sc-divisor
 (blueprint: def-sc-divisor).
@@ -87,7 +88,24 @@ is zero, so when a nonzero summand is permitted its bound is already nonnegative
 theorem Divisor.sectionCondition_add (D : X.Divisor) (U : X.Opens)
     (s t : U → X.functionField) (hs : D.sectionCondition X U s)
     (ht : D.sectionCondition X U t) : D.sectionCondition X U (s + t) := by
-  sorry
+  refine ⟨hs.1.add ht.1, fun x hx ↦ ?_⟩
+  change s x + t x = 0 ∨ 0 ≤ X.ord (s x + t x) x.val + D ⟨x.val, hx⟩
+  by_cases hsum : s x + t x = 0
+  · exact Or.inl hsum
+  right
+  rcases hs.2 x hx with h | h
+  · simpa [h] using ht.2 x hx |>.resolve_left (by simpa [h] using hsum)
+  rcases ht.2 x hx with h' | h'
+  · simpa [h'] using h
+  by_cases hd : Order.coheight x.val = 1
+  · have : IsDiscreteValuationRing (X.presheaf.stalk x.val) :=
+      IsRegularLocalRing.isDiscreteValuationRing _ (by
+        rw [ringKrullDim_stalk_eq_coheight, hd]
+        rfl)
+    have hmin := ord_add (X := X) (x := x.val) hsum
+    omega
+  · rw [ord_eq_zero_of_coheight_neq_one hd] at h ⊢
+    exact h
 
 /-- Closure under regular scalars. Source: blueprint node def-sc-divisor
 (blueprint: def-sc-divisor).
@@ -98,7 +116,35 @@ satisfies the zero disjunct. Elsewhere ord is zero. The empty open has no points
 theorem Divisor.sectionCondition_smul (D : X.Divisor) (U : X.Opens)
     (a : Γ(X, U)) (s : U → X.functionField) (hs : D.sectionCondition X U s) :
     D.sectionCondition X U (a • s) := by
-  sorry
+  have hreg : IsRegular X := inferInstance
+  have hconst : IsLocallyConstant (divisorScalarMap X U a) := by
+    apply IsLocallyConstant.of_constant
+    intro x y
+    have : Nonempty U := ⟨x⟩
+    change algebraMap (X.presheaf.stalk x.val) X.functionField
+        (X.presheaf.germ U x.val x.property a) =
+      algebraMap (X.presheaf.stalk y.val) X.functionField
+        (X.presheaf.germ U y.val y.property a)
+    simp only [algebraMap_germ_eq_germToFunctionField]
+  refine ⟨hconst.mul hs.1, fun x hx ↦ ?_⟩
+  change divisorScalarMap X U a x * s x = 0 ∨
+    0 ≤ X.ord (divisorScalarMap X U a x * s x) x.val + D ⟨x.val, hx⟩
+  by_cases ha : a = 0
+  · left
+    simp [ha]
+  rcases hs.2 x hx with h | h
+  · left
+    simp [h]
+  right
+  have hord : X.ord (s x) x.val ≤
+      X.ord (divisorScalarMap X U a x * s x) x.val := by
+    have : Nonempty U := ⟨x⟩
+    convert ord_le_smul (X := X) x.property ha (s x) using 1
+    change X.ord (algebraMap (X.presheaf.stalk x.val) X.functionField
+      (X.presheaf.germ U x.val x.property a) * s x) x.val = _
+    rw [algebraMap_germ_eq_germToFunctionField]
+    rfl
+  omega
 
 /-- The explicit section submodule O_X(D)(U) inside function-field-valued functions.
 Source: blueprint node def-sc-divisor, displayed formula O_C(D)(U)
@@ -117,7 +163,9 @@ subset. The order bounds at its closed points are a subset of the original bound
 theorem Divisor.sectionCondition_restrict (D : X.Divisor) {U V : X.Opens}
     (i : V ⟶ U) (s : D.sectionModule X U) :
     D.sectionCondition X V (fun x ↦ s.val ⟨x.val, leOfHom i x.property⟩) := by
-  sorry
+  refine ⟨s.property.1.comp_continuous ?_, fun x hx ↦
+    s.property.2 ⟨x.val, leOfHom i x.property⟩ hx⟩
+  exact continuous_subtype_val.subtype_mk _
 
 /-- Pointwise restriction of the explicit section submodules.
 Source: blueprint node def-sc-divisor (blueprint: def-sc-divisor). -/
@@ -131,7 +179,7 @@ Proof: both sides have at each point the sum of the same two function-field valu
 theorem Divisor.restrictSection_add (D : X.Divisor) {U V : X.Opens}
     (i : V ⟶ U) (s t : D.sectionModule X U) :
     D.restrictSection X i (s + t) = D.restrictSection X i s + D.restrictSection X i t := by
-  sorry
+  rfl
 
 /-- Semilinearity of restriction. Source: blueprint node def-sc-divisor
 (blueprint: def-sc-divisor).
@@ -141,7 +189,13 @@ theorem Divisor.restrictSection_smul (D : X.Divisor) {U V : X.Opens}
     (i : V ⟶ U) (a : Γ(X, U)) (s : D.sectionModule X U) :
     D.restrictSection X i (a • s) =
       X.presheaf.map i.op a • D.restrictSection X i s := by
-  sorry
+  apply Subtype.ext
+  funext x
+  change algebraMap (X.presheaf.stalk x.val) X.functionField
+      (X.presheaf.germ U x.val (leOfHom i x.property) a) * s.val _ =
+    algebraMap (X.presheaf.stalk x.val) X.functionField
+      (X.presheaf.germ V x.val x.property (X.presheaf.map i.op a)) * s.val _
+  rw [TopCat.Presheaf.germ_res_apply]
 
 /-- Restriction as a semilinear map. Source: blueprint node def-sc-divisor
 (blueprint: def-sc-divisor). -/
@@ -157,7 +211,7 @@ Proof: restriction along the identity fixes the value at every point; subtype pr
 are irrelevant. -/
 theorem Divisor.restrictSection_id (D : X.Divisor) (U : X.Opens)
     (s : D.sectionModule X U) : D.restrictSection X (𝟙 U) s = s := by
-  sorry
+  rfl
 
 /-- Composition of restrictions. Source: blueprint node def-sc-divisor
 (blueprint: def-sc-divisor).
@@ -167,7 +221,7 @@ theorem Divisor.restrictSection_comp (D : X.Divisor) {U V W : X.Opens}
     (i : V ⟶ U) (j : W ⟶ V) (s : D.sectionModule X U) :
     D.restrictSection X (j ≫ i) s =
       D.restrictSection X j (D.restrictSection X i s) := by
-  sorry
+  rfl
 
 /-- The presheaf with the specified sections and pointwise restriction.
 Source: blueprint node def-sc-divisor (blueprint: def-sc-divisor). -/
@@ -195,7 +249,24 @@ checked on any covering open containing that point. This proves existence and un
 of the glued section; on the empty cover there is only the empty function. -/
 theorem Divisor.modulePresheaf_isSheaf (D : X.Divisor) :
     Presheaf.IsSheaf (Opens.grothendieckTopology X) (D.modulePresheaf X).presheaf := by
-  sorry
+  let P : TopCat.LocalPredicate (fun _ : X ↦ X.functionField) :=
+    { pred := fun {U} f ↦ D.sectionCondition X U f
+      res := fun i f hf ↦ D.sectionCondition_restrict X i ⟨f, hf⟩
+      locality := by
+        intro U f h
+        refine ⟨?_, fun x hx ↦ ?_⟩
+        · let : TopologicalSpace X.functionField := ⊥
+          have : DiscreteTopology X.functionField := ⟨rfl⟩
+          apply (IsLocallyConstant.iff_continuous f).mpr
+          apply (TopCat.continuousLocal X X.functionField).locality
+          intro x
+          obtain ⟨V, hxV, i, hi⟩ := h x
+          exact ⟨V, hxV, i, hi.1.continuous⟩
+        · obtain ⟨V, hxV, i, hi⟩ := h x
+          exact hi.2 ⟨x.val, hxV⟩ hx }
+  apply (TopCat.Presheaf.isSheaf_iff_isSheaf_comp' (CategoryTheory.forget Ab)
+    (D.modulePresheaf X).presheaf).mpr
+  exact TopCat.subpresheafToTypes.isSheaf P
 
 /-- The associated O_X-module O_X(D), with explicit section data (not an arbitrary chosen
 invertible module). Source: blueprint node def-sc-divisor, displayed formula O_C(D)(U)
