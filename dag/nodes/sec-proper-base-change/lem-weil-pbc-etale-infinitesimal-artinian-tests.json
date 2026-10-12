@@ -9,7 +9,7 @@
  },
  "proof": [
   {
-   "text": "The spectra of Artinian local B and B′ have unique points; surjectivity identifies their closed points. The test square puts the image of Spec B′ → S over Z. On an affine neighbourhood of the image point, J maps into the maximal ideal of B′, which is nilpotent. Some power J^(n+1) therefore maps to zero, so β factors through Z_n, and the test square factors α through X_n.",
+   "text": "The spectra of the Artinian local test rings have only their closed points, by IsArtinianRing.isMaximal_of_isPrime and IsLocalRing.eq_maximalIdeal. Evaluate the test square there to see that beta maps its closed point into the support of J. For I = J.comap beta, support_comap implies I.support is the whole test scheme. On global sections, fromSpec_preimage_zeroLocus and zeroLocus_eq_univ_iff show the ideal of I lies in the nilradical. The test ring is Noetherian; transfer this along GammaSpecIso and apply Ideal.FG.isNilpotent_iff_le_nilradical. Equality of ideal sheaves on an affine scheme gives I^(n+1) = bottom. The already-proved source-library Scheme.IdealSheafData.comap_pow identifies this with the pullback of J^(n+1). Its defining closed immersion has zero kernel, hence is an isomorphism by IsClosedImmersion.isIso_iff_ker_eq_bot. Its inverse followed by the second projection constructs the factorization of beta through Z_n.",
    "uses": [
     "lem-weil-pbc-artinian-local-unique-prime",
     "lem-weil-pbc-artinian-local-noetherian-nilpotent"
@@ -17,7 +17,7 @@
    "elementary": false
   },
   {
-   "text": "The length-one kernel is a residue-field module, annihilated by the maximal ideal, and is square zero. Etaleness implies flatness and formal unramifiedness, hence formal smoothness by the flat-unramified lifting theorem. Lift the factored test diagram to X_n, and compose with X_n → X; the pullback projection equations give both required equalities.",
+   "text": "Construct alpha_n by pullback.lift from alpha and Spec(phi) composed with beta_n; the original square and the factorization equation give the pullback condition. Module.length_eq_one_iff makes ker(phi) a simple module. IsSimpleModule.annihilator_isMaximal and IsLocalRing.eq_maximalIdeal identify its annihilator with the maximal ideal. Since the kernel is proper, it is contained in that annihilator, so Ideal.mul_le gives ker(phi)^2 = bottom. GammaSpecIso_naturality identifies the kernel ideal of Spec(phi) on global sections as the inverse image of ker(phi) along a ring equivalence; Ideal.le_comap_pow and injectivity show its square is zero. Together with IsClosedImmersion.spec_of_surjective, this is IsFirstOrderThickening. Etaleness of pullback.snd gives Flat, LocallyOfFiniteType and the open immersion diagonal by Mathlib instances. Give Spec Bprime the structure map beta_n, and apply the FormallySmooth half of flat_unramified_formally_etale to alpha_n. Compose its lift with pullback.fst. Category associativity, pullback.condition, pullback.lift_fst, and the factorization equation prove the two required triangles.",
    "uses": [
     "lem-weil-pbc-flat-unramified-formally-etale"
    ],
@@ -32,7 +32,7 @@
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/more-morphisms.tex",
-  "place": "Lemma 0A43, proof of part (1)"
+  "place": "Lemma 0A43, proof of part (1); ideal-sheaf pullback implementation and Lean glue by B2"
  },
  "mathlib_searches": [
   {
@@ -113,10 +113,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "F2",
+  "group": "B2",
   "result": "pass",
-  "landing": "20261012T135232-L-1663925",
-  "kind": "interface",
+  "landing": "20261012T165504-L-2930854",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
