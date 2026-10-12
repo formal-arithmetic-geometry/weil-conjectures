@@ -1,0 +1,115 @@
+{
+ "id": "lem-weil-pbc-finite-product-ring-functor",
+ "kind": "statement",
+ "title": "A finite-product-preserving functor transports commutative ring objects",
+ "statement": "Let $A,B$ be categories with chosen finite products [def-weil-category-product], terminal objects $*_A,*_B$, and Cartesian braidings (canonical for the group construction and the single-functor transport). Write $U_A,U_B$ for the underlying-object functors. An abelian group object consists of an object with associative commutative binary operation, a unit from the terminal object and an inverse endomorphism satisfying the group laws as equations of morphisms. A commutative ring object has such an additive group structure and a second associative commutative binary operation with unit from the terminal object, distributing over the additive operation. Morphisms commute with all operations. For a finite-product-preserving functor $F:A\\to B$, let $\\lambda^F_{X,Y}:F(X\\times Y)\\to F(X)\\times F(Y)$ be the canonical product comparison and $\\lambda^F_*:F(*_A)\\to *_B$ the terminal comparison. If $F:A\\to B$ preserves finite products, there exist a functor $F^r:\\operatorname{CRingObj}(A)\\to\\operatorname{CRingObj}(B)$ and a strict equality $U_BF^r=FU_A$ satisfying the following equations. For every object $X$, let $e_X:U_B(F^rX)\\to F(U_AX)$ be the component of the isomorphism associated to $U_BF^r=FU_A$. For each binary operation $m$ (addition or multiplication), $e_X\\circ m_{F^rX}=F(m_X)\\circ(\\lambda^F_{X,X})^{-1}\\circ(e_X\\times e_X)$; for each constant $q$ (zero or one), $e_X\\circ q_{F^rX}=F(q_X)\\circ(\\lambda^F_*)^{-1}$; and $e_X\\circ i_{F^rX}=F(i_X)\\circ e_X$ for negation $i$. ",
+ "stmt_deps": [
+  "def-weil-category-product"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Proposition 00YV, paragraph on rings as sextuples; transport of operations and axioms"
+ },
+ "proof": [
+  {
+   "text": "on an object X take the underlying object F(X). Define addition and\nmultiplication by F of the original binary operation precomposed with the inverse\nproduct comparison, zero and one using the inverse terminal comparison, and\nnegation by F of negation. For any term in n variables, its transported evaluation\ncomposed with the comparison F(X^n) -> F(X)^n equals F of its original evaluation.\nProve this by induction: projections follow from the defining comparison;\nconstants follow from uniqueness of maps to the terminal object; operations follow\nfrom naturality of binary comparisons and functoriality. Applying this identity to\nboth sides of associativity, units, inverses, commutativity and distributivity and\ncancelling the comparison proves all CommRingObj axioms. Send a ring morphism f to\nF(f). Naturality of the comparisons proves preservation of addition, multiplication,\nzero and one; negation follows from the additive group structure. Functoriality\nfollows from that of F. The underlying objects and maps were chosen literally as\nF(X) and F(f), so the forgetful equality holds strictly. Its eqToIso components\nare identities, giving the displayed operation equations.",
+   "uses": [
+    "def-weil-category-product"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-category-product"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Proposition 00YV, paragraph on rings as sextuples; transport of operations and axioms; details supplied by G1"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "IsRingHom|CommRingObj|mapCommRing",
+   "date": "2026-10-12",
+   "results": "Mathlib/CategoryTheory/Monoidal/Ring.lean, Mathlib/CategoryTheory/Monoidal/Ring.lean, Mathlib/CategoryTheory/Monoidal/Ring.lean, Mathlib/CategoryTheory/Monoidal/Ring.lean, Mathlib/CategoryTheory/Monoidal/Ring.lean, Mathlib/CategoryTheory/Monoidal/Cartesian/Ring.lean, Mathlib/CategoryTheory/Monoidal/Cartesian/Ring.lean, Mathlib/CategoryTheory/Monoidal/Cartesian/Ring.lean",
+   "digest": "c3f0db05c96d1ab4",
+   "verdict": "no exact match: internal ring objects and IsRingHom exist, but there is no induced ring-object functor or restricted ring adjunction"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A functor preserving finite products transports internal commutative ring structures and ring homomorphisms",
+   "date": "2026-10-12",
+   "results": "service unavailable: Internal Server Error",
+   "digest": "4f53cda18c2baa0c"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Naturality of unit and counit of product preserving adjunction implies they are morphisms of internal ring objects",
+   "date": "2026-10-12",
+   "results": "CategoryTheory.Adjunction.mapGrp_counit, CategoryTheory.Adjunction.unit_app_unit_comp_map_η, CommRingCat.monoidAlgebraAdj, CategoryTheory.Adjunction.ε_comp_map_ε, CategoryTheory.Adjunction.rightAdjointLaxMonoidal_ε, CategoryTheory.Adjunction.IsMonoidal.leftAdjoint_ε, CategoryTheory.Adjunction.map_ε_comp_counit_app_unit, CategoryTheory.frobeniusMorphism",
+   "digest": "e63a216e504022d2",
+   "verdict": "no exact match: internal ring objects and IsRingHom exist, but there is no induced ring-object functor or restricted ring adjunction"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsRingHom\"",
+   "date": "2026-10-12",
+   "results": "CategoryTheory.IsRingHom.id, CategoryTheory.IsRingHom, CategoryTheory.IsRingHom.toIsAddMonHom, CategoryTheory.IsRingHom.toIsMonHom, CategoryTheory.IsRingHom.mk, CategoryTheory.IsRingHom.comp, CategoryTheory.RingObjCat.Hom.isRingHom, CategoryTheory.CommRingObjCat.Hom.isRingHom",
+   "digest": "1db7b3e6057fa210",
+   "verdict": "no exact match: internal ring objects and IsRingHom exist, but there is no induced ring-object functor or restricted ring adjunction"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.Adjunction.LiftsGroupRingObjects",
+  "date": "2026-10-12",
+  "group": "G1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-pbc-derived-exchange",
+   "place": "Supporting the inverse-image adjunction needed for the derived inverse-image functor in the exchange construction",
+   "via": [
+    "lem-weil-pbc-etale-inverse-image-algebraic-structures",
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "def-weil-pbc-derived-inverse-image"
+   ]
+  },
+  "same_as": null
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-def-exchange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.Adjunction.FiniteProductRingFunctor",
+  "file": "lean/Sheaf/CategoryTheory/Adjunction/FiniteProductRingFunctor.lean",
+  "declaration": "CategoryTheory.Adjunction.finiteProductRingFunctor",
+  "statement": "theorem finiteProductRingFunctor\n    {A : Type uA} [Category.{vA} A] [CartesianMonoidalCategory A]\n    {B : Type uB} [Category.{vB} B] [CartesianMonoidalCategory B]\n    (F : A ⥤ B) [PreservesFiniteProducts F] :\n    letI : BraidedCategory A := BraidedCategory.ofCartesianMonoidalCategory\n    letI : BraidedCategory B := BraidedCategory.ofCartesianMonoidalCategory\n    ∃ (FF : CommRingObjCat A ⥤ CommRingObjCat B)\n      (hF : FF ⋙ CommRingObjCat.forget B = CommRingObjCat.forget A ⋙ F),\n      let eF := eqToIso hF\n      (∀ X : CommRingObjCat A,\n            AddMonObj.add (X := (FF.obj X).X) ≫ eF.hom.app X =\n              (eF.hom.app X ⊗ₘ eF.hom.app X) ≫\n                (prodComparisonIso F X.X X.X).inv ≫ F.map (AddMonObj.add (X := X.X)) ∧\n            AddMonObj.zero (X := (FF.obj X).X) ≫ eF.hom.app X =\n              (preservesTerminalIso F).inv ≫ F.map (AddMonObj.zero (X := X.X)) ∧\n            AddGrpObj.neg (X := (FF.obj X).X) ≫ eF.hom.app X =\n              eF.hom.app X ≫ F.map (AddGrpObj.neg (X := X.X)) ∧\n            MonObj.mul (X := (FF.obj X).X) ≫ eF.hom.app X =\n              (eF.hom.app X ⊗ₘ eF.hom.app X) ≫\n                (prodComparisonIso F X.X X.X).inv ≫ F.map (MonObj.mul (X := X.X)) ∧\n            MonObj.one (X := (FF.obj X).X) ≫ eF.hom.app X =\n              (preservesTerminalIso F).inv ≫ F.map (MonObj.one (X := X.X)))",
+  "branch": "sheaf-dag",
+  "by": "G1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G1",
+  "result": "pass",
+  "landing": "20261012T053932-L-2635229",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G1",
+  "result": "pass",
+  "landing": "20261012T053932-L-2635229",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

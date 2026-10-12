@@ -1,0 +1,115 @@
+{
+ "id": "lem-weil-pbc-lifted-comm-group-branch",
+ "kind": "statement",
+ "title": "Mathlib group lifting with explicit operation and adjunct formulas",
+ "statement": "Let $A,B$ be categories with chosen finite products [def-weil-category-product], terminal objects $*_A,*_B$, and Cartesian braidings (canonical for the group construction and the single-functor transport). Write $U_A,U_B$ for the underlying-object functors. An abelian group object consists of an object with associative commutative binary operation, a unit from the terminal object and an inverse endomorphism satisfying the group laws as equations of morphisms. A commutative ring object has such an additive group structure and a second associative commutative binary operation with unit from the terminal object, distributing over the additive operation. Morphisms commute with all operations. For a finite-product-preserving functor $F:A\\to B$, let $\\lambda^F_{X,Y}:F(X\\times Y)\\to F(X)\\times F(Y)$ be the canonical product comparison and $\\lambda^F_*:F(*_A)\\to *_B$ the terminal comparison. Let $L:A\\to B$, $R:B\\to A$ preserve finite products, and let $L\\dashv R$ have hom-bijection $\\Phi$, unit $\\eta$, counit $\\varepsilon$. There exist functors $L^g:\\operatorname{AbObj}(A)\\to\\operatorname{AbObj}(B)$ and $R^g:\\operatorname{AbObj}(B)\\to\\operatorname{AbObj}(A)$, strict equalities $U_BL^g=LU_A$, $U_AR^g=RU_B$ with components $e^L,e^R$, and an adjunction $L^g\\dashv R^g$ with hom-bijection $E$, such that for $F=L,R$ and its lift $F^g$ (interchanging the source and target categories for $R$), $e_X\\circ m_{F^gX}=F(m_X)\\circ(\\lambda^F_{X,X})^{-1}\\circ(e_X\\times e_X)$, $e_X\\circ q_{F^gX}=F(q_X)\\circ(\\lambda^F_*)^{-1}$, $e_X\\circ i_{F^gX}=F(i_X)\\circ e_X$, where $m,q,i$ are group multiplication, unit, inverse. For every group morphism $f:L^gX\\to Y$, $e^R_Y\\circ U_A(E(f))=\\Phi(U_B(f)\\circ(e^L_X)^{-1})$. The lifted unit $u$ and counit $v$ satisfy $R(e^L_X)\\circ e^R_{L^gX}\\circ U_A(u_X)=\\eta_{U_AX}$ and $U_B(v_Y)\\circ(e^L_{R^gY})^{-1}\\circ L((e^R_Y)^{-1})=\\varepsilon_{U_BY}$. For every $\\alpha:LU_AX\\to U_BY$, there exists $f:L^gX\\to Y$ with $U_B(f)\\circ(e^L_X)^{-1}=\\alpha$ if and only if there exists $g:X\\to R^gY$ with $e^R_Y\\circ U_A(g)=\\Phi(\\alpha)$.",
+ "stmt_deps": [
+  "def-weil-category-product"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Proposition 00YV, abelian-group part, specialized through Mathlib mapCommGrp"
+ },
+ "proof": [
+  {
+   "text": "Install the canonical braidings and the chosen-finite-product braided functor structures. Use Functor.mapCommGrp for both lifts, with reflexive strict forgetful equalities, and Adjunction.mapCommGrp for the lifted adjunction. Rewrite its operations using the canonical product and terminal comparison lemmas. Its unit and counit reduce to the original components with identity maps. Apply the lifted hom-equivalence and its inverse for the final criterion, cancelling with injectivity of the original hom-equivalence.",
+   "uses": [
+    "lem-weil-pbc-adjunction-lifts-abelian-group-objects"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-adjunction-lifts-abelian-group-objects"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Proposition 00YV, abelian-group part, specialized through Mathlib mapCommGrp; details supplied by G1"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "mapCommGrp|mapCommRing|RingObjCat.*⥤|rightAdjoint_preservesLimits",
+   "date": "2026-10-12",
+   "results": "Mathlib/CategoryTheory/Preadditive/Injective/Basic.lean, Mathlib/CategoryTheory/Preadditive/Injective/Basic.lean, Mathlib/CategoryTheory/Adjunction/Limits.lean, Mathlib/CategoryTheory/Adjunction/Limits.lean, Mathlib/CategoryTheory/Adjunction/Limits.lean, Mathlib/CategoryTheory/Adjunction/Limits.lean, Mathlib/CategoryTheory/Adjunction/Limits.lean, Mathlib/CategoryTheory/Adhesive/Basic.lean",
+   "digest": "5f21d04e887e26b4",
+   "verdict": "partial match: Mathlib.mapCommGrp supplies the group construction; compatibility and adjunct criterion are checked explicitly"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, \"mapCommGrp\"",
+   "date": "2026-10-12",
+   "results": "CategoryTheory.Adjunction.mapCommGrp, CategoryTheory.Adjunction.mapCommGrp_counit, CategoryTheory.Adjunction.mapCommGrp_unit",
+   "digest": "a0286352839475e9",
+   "verdict": "partial match: Mathlib.mapCommGrp supplies the group construction; compatibility and adjunct criterion are checked explicitly"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lift an adjunction between categories with chosen finite products to internal commutative groups and identify unit counit",
+   "date": "2026-10-12",
+   "results": "CategoryTheory.Adjunction.mapCommGrp, CategoryTheory.Adjunction.mapGrp, CommGrpCat.forget₂CommMonAdj, CategoryTheory.Adjunction.mapCommGrp_counit, CategoryTheory.Adjunction.mapCommGrp_unit, instIsRightAdjointCommGrpCatCommMonCatUnits, CategoryTheory.Adjunction.mapGrp_counit, CategoryTheory.Adjunction.mapGrp_unit",
+   "digest": "f5662ab523c48ada",
+   "verdict": "partial match: Mathlib.mapCommGrp supplies the group construction; compatibility and adjunct criterion are checked explicitly"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An adjunction between finite product preserving functors lifts to an adjunction on commutative group objects",
+   "date": "2026-10-12",
+   "results": "service unavailable: Internal Server Error",
+   "digest": "4f53cda18c2baa0c"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.Adjunction.LiftsGroupRingObjects",
+  "date": "2026-10-12",
+  "group": "G1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-pbc-derived-exchange",
+   "place": "Supporting the inverse-image adjunction needed for the derived inverse-image functor in the exchange construction",
+   "via": [
+    "lem-weil-pbc-etale-inverse-image-algebraic-structures",
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "def-weil-pbc-derived-inverse-image"
+   ]
+  },
+  "same_as": null
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-def-exchange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.Adjunction.LiftedCommGrpBranch",
+  "file": "lean/Sheaf/CategoryTheory/Adjunction/LiftedCommGrpBranch.lean",
+  "declaration": "CategoryTheory.Adjunction.liftedCommGrpBranch",
+  "statement": "theorem liftedCommGrpBranch\n    {A : Type uA} [Category.{vA} A] [CartesianMonoidalCategory A]\n    {B : Type uB} [Category.{vB} B] [CartesianMonoidalCategory B]\n    {L : A ⥤ B} {R : B ⥤ A} (adj : L ⊣ R) [PreservesFiniteProducts L]\n    [PreservesFiniteProducts R] :\n    let : BraidedCategory A := BraidedCategory.ofCartesianMonoidalCategory\n    let : BraidedCategory B := BraidedCategory.ofCartesianMonoidalCategory\n    (∃ (LF : CommGrp A ⥤ CommGrp B) (RF : CommGrp B ⥤ CommGrp A)\n          (hL : LF ⋙ CommGrp.forget B = CommGrp.forget A ⋙ L)\n          (hR : RF ⋙ CommGrp.forget A = CommGrp.forget B ⋙ R),\n        let eL := eqToIso hL\n        let eR := eqToIso hR\n        ∃ (a : LF ⊣ RF),\n          (∀ X : CommGrp A,\n            MonObj.mul (X := (LF.obj X).X) ≫ eL.hom.app X =\n              (eL.hom.app X ⊗ₘ eL.hom.app X) ≫\n                (prodComparisonIso L X.X X.X).inv ≫ L.map (MonObj.mul (X := X.X)) ∧\n            MonObj.one (X := (LF.obj X).X) ≫ eL.hom.app X =\n              (preservesTerminalIso L).inv ≫ L.map (MonObj.one (X := X.X)) ∧\n            GrpObj.inv (X := (LF.obj X).X) ≫ eL.hom.app X =\n              eL.hom.app X ≫ L.map (GrpObj.inv (X := X.X))) ∧\n          (∀ X : CommGrp B,\n            MonObj.mul (X := (RF.obj X).X) ≫ eR.hom.app X =\n              (eR.hom.app X ⊗ₘ eR.hom.app X) ≫\n                (prodComparisonIso R X.X X.X).inv ≫ R.map (MonObj.mul (X := X.X)) ∧\n            MonObj.one (X := (RF.obj X).X) ≫ eR.hom.app X =\n              (preservesTerminalIso R).inv ≫ R.map (MonObj.one (X := X.X)) ∧\n            GrpObj.inv (X := (RF.obj X).X) ≫ eR.hom.app X =\n              eR.hom.app X ≫ R.map (GrpObj.inv (X := X.X))) ∧\n          (∀ (X : CommGrp A) (Y : CommGrp B) (f : LF.obj X ⟶ Y),\n            (CommGrp.forget A).map (a.homEquiv X Y f) ≫ eR.hom.app Y =\n              adj.homEquiv X.X Y.X (eL.inv.app X ≫ (CommGrp.forget B).map f)) ∧\n          (∀ X : CommGrp A,\n            (CommGrp.forget A).map (a.unit.app X) ≫ eR.hom.app (LF.obj X) ≫\n                R.map (eL.hom.app X) = adj.unit.app X.X) ∧\n          (∀ Y : CommGrp B,\n            L.map (eR.inv.app Y) ≫ eL.inv.app (RF.obj Y) ≫\n                (CommGrp.forget B).map (a.counit.app Y) = adj.counit.app Y.X) ∧\n          (∀ (X : CommGrp A) (Y : CommGrp B) (α : L.obj X.X ⟶ Y.X),\n            (∃ f : LF.obj X ⟶ Y, eL.inv.app X ≫ (CommGrp.forget B).map f = α) ↔\n              ∃ g : X ⟶ RF.obj Y,\n                (CommGrp.forget A).map g ≫ eR.hom.app Y = adj.homEquiv X.X Y.X α))",
+  "branch": "sheaf-dag",
+  "by": "G1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G1",
+  "result": "pass",
+  "landing": "20261012T053932-L-2635229",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G1",
+  "result": "pass",
+  "landing": "20261012T053932-L-2635229",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

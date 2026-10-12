@@ -7,6 +7,9 @@ module
 
 public import Mathlib.CategoryTheory.Monoidal.CommGrp_
 public import Mathlib.CategoryTheory.Monoidal.Ring
+import Mathlib.CategoryTheory.Adjunction.Limits
+import Sheaf.CategoryTheory.Adjunction.LiftedCommGrpBranch
+import Sheaf.CategoryTheory.Adjunction.LiftedCommRingBranch
 
 /-!
 # Lifting a product preserving adjunction to group and ring objects
@@ -140,6 +143,8 @@ theorem liftsGroupRingObjects
             (∃ f : LF.obj X ⟶ Y, eL.inv.app X ≫ (CommRingObjCat.forget B).map f = α) ↔
               ∃ g : X ⟶ RF.obj Y,
                 (CommRingObjCat.forget A).map g ≫ eR.hom.app Y = adj.homEquiv X.X Y.X α)) := by
-  sorry
+  let : PreservesLimitsOfSize.{0, 0} R := adj.rightAdjoint_preservesLimits
+  let : PreservesFiniteProducts R := ⟨fun n => inferInstance⟩
+  exact ⟨inferInstance, liftedCommGrpBranch adj, liftedCommRingBranch adj⟩
 
 end CategoryTheory.Adjunction
