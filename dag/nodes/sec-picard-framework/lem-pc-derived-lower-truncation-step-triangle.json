@@ -1,161 +1,166 @@
 {
- "id": "lem-pc-derived-lower-truncation-step-triangle",
- "blueprint": {
-  "is": null,
-  "from": {
-   "node": "lem-sc-finite-duality",
-   "place": "proof, first step, uniform upper truncation bound: the truncation triangle H^{-n}(E)[n] -> E_n -> E_{n-1}",
-   "via": [
-    "lem-pc-derived-functor-truncation-stabilization"
-   ]
+  "id": "lem-pc-derived-lower-truncation-step-triangle",
+  "blueprint": {
+    "is": null,
+    "from": {
+      "node": "lem-sc-finite-duality",
+      "place": "proof, first step, uniform upper truncation bound: the truncation triangle H^{-n}(E)[n] -> E_n -> E_{n-1}",
+      "via": [
+        "lem-pc-derived-functor-truncation-stabilization"
+      ]
+    },
+    "same_as": []
   },
-  "same_as": []
- },
- "kind": "statement",
- "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-duality",
- "title": "Successive lower truncations have a single cohomology sheaf as cone",
- "statement": "Let $\\mathcal A$ be an abelian category and let $E$ be an object of $D(\\mathcal A)$ [def-weil-abstract-derived-category] with standard truncations [def-sbc-standard-tstructure-derived-category]. For every integer $n$, put $E_n=\\tau_{\\geq -n}E$ and $E_{n-1}=\\tau_{\\geq -n+1}E$. Then there is a distinguished triangle [def-weil-triangulated-category] $H^{-n}(E)[n]\\longrightarrow E_n\\longrightarrow E_{n-1}\\longrightarrow H^{-n}(E)[n+1]$, where $H^{-n}(E)[n]$ denotes the complex with $H^{-n}(E)$ in degree $-n$ and zero elsewhere, and the middle map is the canonical transition map of the truncation tower.",
- "source": {
-  "document": "literature/stacks-project/perfect.tex",
-  "place": "Tag 08D4 proof of part (2), truncation triangle H^{-n}(E)[n] -> E_n -> E_{n-1}"
- },
- "stmt_deps": [
-  "def-weil-abstract-derived-category",
-  "def-sbc-standard-tstructure-derived-category",
-  "def-weil-triangulated-category",
-  "lem-pc-derived-lower-truncation-step-ses"
- ],
- "proof": [
-  {
-   "text": "Put m=-n, B=τ≥m E, and A=τ<m+1 B. Mathlib TStructure.triangleLTGE_distinguished gives A → B → τ≥m+1 B → A[1]. The generic truncation bounds give A both ≥m and ≤m.",
-   "uses": [
+  "kind": "statement",
+  "chapter": "sec-picard-framework",
+  "unit": "sk-thm-picard-duality",
+  "title": "Successive lower truncations have a single cohomology sheaf as cone",
+  "statement": "Let $\\mathcal A$ be an abelian category and let $E$ be an object of $D(\\mathcal A)$ [def-weil-abstract-derived-category] with standard truncations [def-sbc-standard-tstructure-derived-category]. For every integer $n$, put $E_n=\\tau_{\\geq -n}E$ and $E_{n-1}=\\tau_{\\geq -n+1}E$. Then there is a distinguished triangle [def-weil-triangulated-category] $H^{-n}(E)[n]\\longrightarrow E_n\\longrightarrow E_{n-1}\\longrightarrow H^{-n}(E)[n+1]$, where $H^{-n}(E)[n]$ denotes the complex with $H^{-n}(E)$ in degree $-n$ and zero elsewhere, and the middle map is the canonical transition map of the truncation tower.",
+  "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 08D4 proof of part (2), truncation triangle H^{-n}(E)[n] -> E_n -> E_{n-1}"
+  },
+  "stmt_deps": [
+    "def-weil-abstract-derived-category",
+    "def-sbc-standard-tstructure-derived-category",
+    "def-weil-triangulated-category",
+    "lem-pc-derived-lower-truncation-step-ses"
+  ],
+  "proof": [
+    {
+      "text": "Choose a cochain-complex representative K of E. By [def-sbc-standard-tstructure-derived-category], for each m the truncation \\tau_{\\ge m}E is represented by the quotient complex K/\\tau_{\\le m-1}K, and the transition \\tau_{\\ge m}E\\to\\tau_{\\ge m+1}E by the quotient map K/\\tau_{\\le m-1}K\\to K/\\tau_{\\le m}K. Elementary (Stacks Tag 08J5, the factorization of K\\to\\tau_{\\ge a+1}K through a quasi-isomorphism K/\\tau_{\\le a}K\\to\\tau_{\\ge a+1}K): the evident surjection K/\\tau_{\\le m-1}K\\to\\tau_{\\ge m}K (zero in degree m-1, K^m\\to K^m/\\operatorname{im}(d^{m-1}) in degree m, the identity above) has degreewise kernel the two-term complex K^{m-1}/\\ker(d^{m-1})\\xrightarrow{\\sim}\\operatorname{im}(d^{m-1}), which is acyclic, so it is a quasi-isomorphism; and these quasi-isomorphisms for m=-n and m=-n+1 commute with the quotient maps K/\\tau_{\\le -n-1}K\\to K/\\tau_{\\le -n}K and q_{-n}. Hence E_n and E_{n-1} are represented by the canonical complexes \\tau_{\\ge -n}K and \\tau_{\\ge -n+1}K, and the canonical transition is represented by the quotient map q_{-n}:\\tau_{\\ge -n}K\\to\\tau_{\\ge -n+1}K. Applying [lem-pc-derived-lower-truncation-step-ses] with m=-n gives a degreewise short exact sequence 0\\to C_{-n}(K)\\to\\tau_{\\ge -n}K\\to\\tau_{\\ge -n+1}K\\to0, together with a quasi-isomorphism H^{-n}(K)[n]\\to C_{-n}(K). The latter complex represents H^{-n}(E)[n].",
+      "uses": [
+        "lem-pc-derived-lower-truncation-step-ses",
+        "def-sbc-standard-tstructure-derived-category"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/derived.tex",
+        "place": "Tag 08J5 (derived-remark-truncation-distinguished-triangle), canonical lower-truncation triangle"
+      }
+    },
+    {
+      "text": "Applying [lem-weil-pbc-complex-ses-triangle] to the short exact sequence from Step 1 gives a distinguished triangle C_{-n}(K)\\to E_n\\to E_{n-1}\\to C_{-n}(K)[1] in the derived category; the second arrow is the canonical transition because it is induced by q_{-n}.",
+      "uses": [
+        "lem-weil-pbc-complex-ses-triangle",
+        "def-weil-triangulated-category",
+        "lem-pc-derived-lower-truncation-step-ses"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/derived.tex",
+        "place": "Tag 08J5 (derived-remark-truncation-distinguished-triangle), canonical lower-truncation triangle"
+      }
+    },
+    {
+      "text": "The quasi-isomorphism H^{-n}(K)[n]\\to C_{-n}(K) becomes an isomorphism in D(\\mathcal A) by the definition of the derived category. Transporting the distinguished triangle of Step 2 across this isomorphism, using (TR1) that a triangle isomorphic to a distinguished triangle is distinguished, yields H^{-n}(E)[n]\\to E_n\\to E_{n-1}\\to H^{-n}(E)[n+1]. Naturality follows from the naturality asserted in [lem-pc-derived-lower-truncation-step-ses] and [lem-weil-pbc-complex-ses-triangle].",
+      "uses": [
+        "def-weil-abstract-derived-category",
+        "def-weil-triangulated-category",
+        "lem-pc-derived-lower-truncation-step-ses",
+        "lem-weil-pbc-complex-ses-triangle"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/derived.tex",
+        "place": "Tag 08J5 (derived-remark-truncation-distinguished-triangle), canonical lower-truncation triangle"
+      }
+    }
+  ],
+  "proof_deps": [
     "def-sbc-standard-tstructure-derived-category",
     "def-weil-abstract-derived-category",
-    "def-weil-triangulated-category"
-   ],
-   "elementary": false
+    "def-weil-triangulated-category",
+    "lem-pc-derived-lower-truncation-step-ses",
+    "lem-weil-pbc-complex-ses-triangle"
+  ],
+  "proof_origin": {
+    "by": "document",
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 08J5 (derived-remark-truncation-distinguished-triangle)"
   },
-  {
-   "text": "Upstream proved isIso_homologyFunctor_map_truncGEπ_app and isIso_homologyFunctor_map_truncLTι_app identify H^m(A) with H^m(E). These follow from the long homology sequence and vanishing of the adjacent homology of the complementary truncations. Mathlib exists_iso_singleFunctor_obj_of_isGE_of_isLE identifies A with single_m(Y); singleFunctorCompHomologyFunctorIso identifies Y with H^m(A). The singleFunctors shift isomorphism therefore gives H^m(E)[-m] ≅ A.",
-   "uses": [
-    "def-sbc-standard-tstructure-derived-category",
-    "def-weil-abstract-derived-category",
-    "def-weil-triangulated-category"
-   ],
-   "elementary": false
+  "mathlib_searches": [
+    {
+      "tool": "leanfinder",
+      "query": "distinguished triangle H^{-n}(E)[n] to tau_{>=-n} E to tau_{>=-(n-1)} E",
+      "results": "DerivedCategory.triangleOfSES and generic truncGE quasi-isomorphism declarations; no direct successive-lower-truncation triangle",
+      "date": "2026-10-11",
+      "verdict": "no match"
+    },
+    {
+      "tool": "loogle",
+      "query": "truncGE, homology, triangle",
+      "results": "unknown identifier 'truncGE'",
+      "date": "2026-10-11",
+      "verdict": "unavailable"
+    },
+    {
+      "tool": "grep",
+      "query": "truncGE.*single|truncGE.*triangle|homology.*truncGE Mathlib/Algebra/Homology Mathlib/CategoryTheory",
+      "results": "no hits",
+      "date": "2026-10-11",
+      "verdict": "no match"
+    },
+    {
+      "tool": "leansearch",
+      "query": "canonical lower truncation triangle cohomology sheaf shifted",
+      "results": "service unavailable: Internal Server Error",
+      "date": "2026-10-11",
+      "verdict": "unavailable"
+    }
+  ],
+  "mathlib_match": null,
+  "status": "split",
+  "created": {
+    "item": "lem-pc-derived-functor-truncation-stabilization",
+    "by": "worker",
+    "date": "2026-10-10"
   },
-  {
-   "text": "Mathlib isIso_truncGE_map_truncGEπ_app gives τ≥m+1 E ≅ τ≥m+1 B. Naturality of truncGEπ and the identity π_natTransTruncGEOfLE_app show that transporting the middle arrow along its inverse yields the canonical transition τ≥m E → τ≥m+1 E (use from_truncGE_obj_ext). Transport triangleLTGE along these two object isomorphisms with Triangle.isoMk and isomorphic_distinguished.",
-   "uses": [
-    "def-sbc-standard-tstructure-derived-category",
-    "def-weil-abstract-derived-category",
-    "def-weil-triangulated-category"
-   ],
-   "elementary": false
+  "split_report": {
+    "date": "2026-10-11",
+    "item": "lem-pc-derived-lower-truncation-step-triangle",
+    "worker": "stage1",
+    "summary": "Split the successive lower-truncation triangle into a smaller statement-only node giving the degreewise short exact sequence of canonical lower truncations and its quotient H^m(K)[-m]. The item proof chooses a complex representative, applies that sequence at m=-n, and invokes the existing distinguished-triangle construction for short exact complexes; the transition map is identified from the canonical inclusion.",
+    "blueprint": "Realizes the ancestor proof's first-step uniform truncation bound, specifically the sentence giving the truncation triangle H^{-n}(E)[n] -> E_n -> E_{n-1}.",
+    "tool_uses": []
+  },
+  "reviewed": {
+    "date": "2026-10-10",
+    "by": "L",
+    "reviewer": "R-dlt2448",
+    "group": "F1",
+    "result": "pass",
+    "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-dlt2448 (reviewer sub-agent of L); spot-checked: Return of 20:37 repaired: (1) SES node now 0->C_m(K)->tau_{>=m}K->tau_{>=m+1}K->0 with C_m=K^m/Im d^{m-1}->Im d^m, checked degreewise exact, q_m the quotient, H^m(K)[-m]->C_m inclusion is a quasi-iso (H^m=Ker d^m/Im, H^{m+1}=0); (2) Step 2 gives C->E_n->E_{n-1}->C[1] from lem-weil-pbc-complex-ses-triangle, Step 3 transports along the cited quasi-iso by TR1, direction right. Item statement unchanged vs base (diff only adds step sources/proof_origin). FIX more, RETURN less: C1 in Step 1, def-sbc represents tau_{>=m}E by K/tau_{<=m-1}K, not the canonical complex; added the elementary quasi-iso K/tau_{<=m-1}K->tau_{>=m}K (acyclic kernel K^{m-1}/Ker d^{m-1} ~ Im d^{m-1}, Stacks 08J5) and its compatibility with the transitions.; 1 file(s) fixed by the reviewer"
+  },
+  "lead_note": "2026-10-10 L (R-dlt2448): Second reading by F1 wrongly claims the item source was changed from 08D4 to 08J5 (it was not, and 08D4 is the correct source); harmless.",
+  "lean": {
+    "module": "Sheaf.Algebra.Homology.LowerTruncationStepTriangle",
+    "declaration": "DerivedCategory.exists_lowerTruncationStepTriangle",
+    "file": "lean/Sheaf/Algebra/Homology/LowerTruncationStepTriangle.lean",
+    "statement": "theorem exists_lowerTruncationStepTriangle {C : Type u} [Category.{v} C] [Abelian C] [HasDerivedCategory.{w} C] (E : DerivedCategory C) (n : ℤ) : ∃ (f : (Q.obj ((CochainComplex.singleFunctor C 0).obj ((homologyFunctor C (-n)).obj E)))⟦n⟧ ⟶ ((TStructure.t (C := C)).truncGE (-n)).obj E) (h : ((TStructure.t (C := C)).truncGE (-n + 1)).obj E ⟶ ((Q.obj ((CochainComplex.singleFunctor C 0).obj ((homologyFunctor C (-n)).obj E)))⟦n⟧)⟦(1 : ℤ)⟧), Triangle.mk f (((TStructure.t (C := C)).natTransTruncGEOfLE (-n) (-n + 1) (by omega)).app E) h ∈ distTriang (DerivedCategory C)",
+    "branch": "sheaf-dag",
+    "by": "G1",
+    "date": "2026-10-11",
+    "existing": false
+  },
+  "reviewed_lean": {
+    "date": "2026-10-11",
+    "by": "L",
+    "reviewer": "R-ltt0910",
+    "group": "G1",
+    "result": "pass",
+    "note": "A abelian = Category.{v}+Abelian, D(A) via HasDerivedCategory.{w}; E, n arbitrary; E_n/E_{n-1} = TStructure.t.truncGE (-n)/(-n+1) (Mathlib's t is def-sbc's standard t-structure); first object Q(single_0 H^{-n}E)[n] sits in degree -n (cohomological shift); middle arrow natTransTruncGEOfLE (-n) (-n+1), truncGE a -> truncGE b, = canonical transition by pi_natTransTruncGEOfLE_app; f,h existential, Triangle.mk in distTriang gives the 4th term obj1[1] ~ H^{-n}(E)[n+1]; no Mathlib/source triangle with H^n third term (TruncLTGE/TruncLEGT/SpectralObject/derived TStructure checked): existing false right; docstring = node's 3 steps"
+  },
+  "lean_audit": {
+    "master": {
+      "state": "none",
+      "decls": [],
+      "missing": []
+    },
+    "slopmaster2": {
+      "state": "none",
+      "decls": [],
+      "missing": []
+    }
   }
- ],
- "proof_deps": [
-  "def-sbc-standard-tstructure-derived-category",
-  "def-weil-abstract-derived-category",
-  "def-weil-triangulated-category"
- ],
- "proof_origin": {
-  "by": "worker P1",
-  "document": "literature/stacks-project/derived.tex",
-  "place": "Tag 08J5; Mathlib standard t-structure truncation triangle, with proved upstream homology truncation isomorphisms from WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.TStructure"
- },
- "mathlib_searches": [
-  {
-   "tool": "leanfinder",
-   "query": "distinguished triangle H^{-n}(E)[n] to tau_{>=-n} E to tau_{>=-(n-1)} E",
-   "results": "DerivedCategory.triangleOfSES and generic truncGE quasi-isomorphism declarations; no direct successive-lower-truncation triangle",
-   "date": "2026-10-11",
-   "verdict": "no match"
-  },
-  {
-   "tool": "loogle",
-   "query": "truncGE, homology, triangle",
-   "results": "unknown identifier 'truncGE'",
-   "date": "2026-10-11",
-   "verdict": "unavailable"
-  },
-  {
-   "tool": "grep",
-   "query": "truncGE.*single|truncGE.*triangle|homology.*truncGE Mathlib/Algebra/Homology Mathlib/CategoryTheory",
-   "results": "no hits",
-   "date": "2026-10-11",
-   "verdict": "no match"
-  },
-  {
-   "tool": "leansearch",
-   "query": "canonical lower truncation triangle cohomology sheaf shifted",
-   "results": "service unavailable: Internal Server Error",
-   "date": "2026-10-11",
-   "verdict": "unavailable"
-  }
- ],
- "mathlib_match": null,
- "status": "split",
- "created": {
-  "item": "lem-pc-derived-functor-truncation-stabilization",
-  "by": "worker",
-  "date": "2026-10-10"
- },
- "split_report": {
-  "date": "2026-10-11",
-  "item": "lem-pc-derived-lower-truncation-step-triangle",
-  "worker": "stage1",
-  "summary": "Split the successive lower-truncation triangle into a smaller statement-only node giving the degreewise short exact sequence of canonical lower truncations and its quotient H^m(K)[-m]. The item proof chooses a complex representative, applies that sequence at m=-n, and invokes the existing distinguished-triangle construction for short exact complexes; the transition map is identified from the canonical inclusion.",
-  "blueprint": "Realizes the ancestor proof's first-step uniform truncation bound, specifically the sentence giving the truncation triangle H^{-n}(E)[n] -> E_n -> E_{n-1}.",
-  "tool_uses": []
- },
- "reviewed": {
-  "date": "2026-10-10",
-  "by": "L",
-  "reviewer": "R-dlt2448",
-  "group": "F1",
-  "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-dlt2448 (reviewer sub-agent of L); spot-checked: Return of 20:37 repaired: (1) SES node now 0->C_m(K)->tau_{>=m}K->tau_{>=m+1}K->0 with C_m=K^m/Im d^{m-1}->Im d^m, checked degreewise exact, q_m the quotient, H^m(K)[-m]->C_m inclusion is a quasi-iso (H^m=Ker d^m/Im, H^{m+1}=0); (2) Step 2 gives C->E_n->E_{n-1}->C[1] from lem-weil-pbc-complex-ses-triangle, Step 3 transports along the cited quasi-iso by TR1, direction right. Item statement unchanged vs base (diff only adds step sources/proof_origin). FIX more, RETURN less: C1 in Step 1, def-sbc represents tau_{>=m}E by K/tau_{<=m-1}K, not the canonical complex; added the elementary quasi-iso K/tau_{<=m-1}K->tau_{>=m}K (acyclic kernel K^{m-1}/Ker d^{m-1} ~ Im d^{m-1}, Stacks 08J5) and its compatibility with the transitions.; 1 file(s) fixed by the reviewer"
- },
- "lead_note": "2026-10-10 L (R-dlt2448): Second reading by F1 wrongly claims the item source was changed from 08D4 to 08J5 (it was not, and 08D4 is the correct source); harmless.",
- "lean": {
-  "module": "Sheaf.Algebra.Homology.LowerTruncationStepTriangle",
-  "declaration": "DerivedCategory.exists_lowerTruncationStepTriangle",
-  "file": "lean/Sheaf/Algebra/Homology/LowerTruncationStepTriangle.lean",
-  "statement": "theorem exists_lowerTruncationStepTriangle {C : Type u} [Category.{v} C] [Abelian C] [HasDerivedCategory.{w} C] (E : DerivedCategory C) (n : ℤ) : ∃ (f : (Q.obj ((CochainComplex.singleFunctor C 0).obj ((homologyFunctor C (-n)).obj E)))⟦n⟧ ⟶ ((TStructure.t (C := C)).truncGE (-n)).obj E) (h : ((TStructure.t (C := C)).truncGE (-n + 1)).obj E ⟶ ((Q.obj ((CochainComplex.singleFunctor C 0).obj ((homologyFunctor C (-n)).obj E)))⟦n⟧)⟦(1 : ℤ)⟧), Triangle.mk f (((TStructure.t (C := C)).natTransTruncGEOfLE (-n) (-n + 1) (by omega)).app E) h ∈ distTriang (DerivedCategory C)",
-  "branch": "sheaf-dag",
-  "by": "G1",
-  "date": "2026-10-11",
-  "existing": false
- },
- "reviewed_lean": {
-  "date": "2026-10-11",
-  "by": "L",
-  "reviewer": "R-ltt0910",
-  "group": "G1",
-  "result": "pass",
-  "note": "A abelian = Category.{v}+Abelian, D(A) via HasDerivedCategory.{w}; E, n arbitrary; E_n/E_{n-1} = TStructure.t.truncGE (-n)/(-n+1) (Mathlib's t is def-sbc's standard t-structure); first object Q(single_0 H^{-n}E)[n] sits in degree -n (cohomological shift); middle arrow natTransTruncGEOfLE (-n) (-n+1), truncGE a -> truncGE b, = canonical transition by pi_natTransTruncGEOfLE_app; f,h existential, Triangle.mk in distTriang gives the 4th term obj1[1] ~ H^{-n}(E)[n+1]; no Mathlib/source triangle with H^n third term (TruncLTGE/TruncLEGT/SpectralObject/derived TStructure checked): existing false right; docstring = node's 3 steps"
- },
- "lean_audit": {
-  "master": {
-   "state": "none",
-   "decls": [],
-   "missing": []
-  },
-  "slopmaster2": {
-   "state": "none",
-   "decls": [],
-   "missing": []
-  }
- },
- "reviewed_proof": {
-  "date": "2026-10-12",
-  "by": "L",
-  "reviewer": "X-3c398",
-  "group": "P1",
-  "result": "pass",
-  "landing": "20261012T123517-L-1118025",
-  "kind": "interface"
- }
 }
