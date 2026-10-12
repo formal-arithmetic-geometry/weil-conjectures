@@ -1,0 +1,156 @@
+{
+ "id": "lemma-weil-pbc-finite-hypercover-descent-objects",
+ "blueprint": {
+  "is": null,
+  "from": "lemma-weil-pbc-finite-hypercover-descent-objects"
+ },
+ "kind": "statement",
+ "title": "Finite hypercover objects descend",
+ "statement": "Object and matching-cover clause of finite hypercover descent.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-h2/lemma-weil-pbc-finite-hypercover-descent.md",
+  "place": "node lemma-weil-pbc-finite-hypercover-descent, order 952"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-finite-split-hypercover"
+ ],
+ "proof": [
+  {
+   "text": "This is the corresponding finite-data descent clause, obtained by descending finitely many objects, arrows, and relations and passing to a common later stage.",
+   "uses": [
+    "lem-weil-pbc-etale-finite-data-descent"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-etale-finite-data-descent"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-h2/lemma-weil-pbc-finite-hypercover-descent.md",
+  "place": "## Proof"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "finite hypercover descent",
+   "results": "no exact match",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "finite_hypercover_descent_objects",
+   "results": "no exact match",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "finite_hypercover_descent",
+   "results": "only this declaration",
+   "date": "2026-10-12",
+   "verdict": "no prior declaration"
+  },
+  {
+   "tool": "leansearch",
+   "query": "finite hypercover descent",
+   "results": "no exact match",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "import_flags": [
+  "detailed_form",
+  "two_proofs"
+ ],
+ "blueprint_kind": "lemma",
+ "blueprint_order": 952,
+ "blueprint_uses": [
+  "def-weil-pbc-finite-split-hypercover",
+  "def-weil-pbc-scheme-conventions",
+  "lem-weil-pbc-etale-finite-data-descent",
+  "lemma-weil-pbc-fibre-product-limit"
+ ],
+ "uses_not_cited": [
+  "lemma-weil-pbc-fibre-product-limit"
+ ],
+ "proof_split_by": "paragraphs",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lemma-weil-pbc-finite-hypercover-descent",
+  "worker": "stage1",
+  "summary": "Descended the finite split simplicial diagram and identities, checked matching schemes against finite-limit base change, descended the finitely many covering maps, and treated morphisms and equalities as finite data. Removed a proof dependency on the unrelated strict-henselization fibre-product-limit node.",
+  "blueprint": "The first step realizes the Detailed form Proof's finite-presentation and simplicial-data sentences; the second realizes its matching-scheme and covering sentences; the third realizes its morphism/equality sentence. The original first paragraph's refinement construction is outside this item's Detailed form statement."
+ },
+ "blueprint_sketch": [
+  {
+   "statement": "Let $X_\\infty=\\varprojlim_iX_i$ be as in the continuity lemma below and fix\n$N\\geq0$. Every etale hypercover of $X_\\infty$ admits a refinement whose\n$N$-skeleton is split, has finitely many quasi-compact and quasi-separated\ncomponents in each degree, and is the pullback of an $N$-truncated etale\nhypercover of some $X_j$. A morphism between two such finite skeleta, and\nan equality between two such morphisms, also descends after increasing $j$.",
+   "proof": "Construct the refinement inductively. In degree zero, quasi-compactness of\n$X_\\infty$ lets us choose a finite subcover by quasi-compact etale objects.\nSuppose degrees $<r$ have been chosen. The $r$th matching object is a finite\nlimit of lower-degree objects, because the boundary diagram of the simplex\n$r$-simplex has finitely many faces. It is therefore quasi-compact and\nquasi-separated. Cover it by finitely many quasi-compact etale objects and\nadjoin the degenerate summands prescribed by the already chosen degeneracy\nmaps. This gives a split hypercover through degree $r$. Iterating to $N$\ngives the required finite skeleton.\n\nEvery chosen component is of finite presentation over $X_\\infty$, so it is\nthe pullback of an etale component at some stage. There are only finitely\nmany components, face maps, degeneracy maps, and augmentations through\ndegree $N$; finite presentation descends them all to one common stage.\nThe simplicial identities are finitely many equalities of morphisms between\nfinitely presented schemes and hence hold after a further common stage.\nFor each $r\\leq N$, the map to the matching object is an etale cover after\npullback to $X_\\infty$. Etaleness descends by a Jacobian etale algebra\npresentation\n$B=A[x_1,\\ldots,x_m]/(f_1,\\ldots,f_m)$ with an invertible Jacobian minor.\nSurjectivity also descends: the complement of the image is constructible and\nquasi-compact; if it survived at every later stage, its inverse limit would\ngive a point outside the limiting image. Thus, after one more stage, all\nmatching maps are covers. The same finite-presentation argument descends a\nmorphism of skeleta. Equality of two morphisms is the factorization through\ntheir equalizer, a finitely presented closed condition, so it too holds at a\nlater stage.",
+   "cites": []
+  }
+ ],
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-h2",
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T1",
+  "result": "pass",
+  "landing": "20261012T044755-L-2040630",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.FiniteHypercoverDescentParts",
+  "declaration": "AlgebraicGeometry.finite_hypercover_descent_objects",
+  "file": "lean/Sheaf/Paper/FiniteHypercoverDescentParts.lean",
+  "statement": "theorem finite_hypercover_descent_objects\n    {I : Type w} [SmallCategory I] [IsFiltered I]\n    (D : Iᵒᵖ ⥤ Scheme.{w})\n    [∀ {i j : Iᵒᵖ} (f : i ⟶ j), IsAffineHom (D.map f)]\n    [∀ i : Iᵒᵖ, CompactSpace (D.obj i)]\n    [∀ i : Iᵒᵖ, QuasiSeparatedSpace (D.obj i)]\n    (c : Cone D) (hc : IsLimit c) :\n    ∀ (r : ℕ) (U : TruncatedFiniteSplitEtaleHypercover c.pt r),\n      ∃ (i : Iᵒᵖ) (Ui : TruncatedFiniteSplitEtaleHypercover (D.obj i) r),\n        Ui.IsBaseChange (c.π.app i) U ∧\n          ∀ (j : Iᵒᵖ) (h : j ⟶ i) (n : Fin (r + 1)),\n            Surjective ((Over.pullback (D.map h)).map\n              ((Scheme.Etale.forget (D.obj i)).map (Ui.matchingMap n))).left",
+  "branch": "sheaf-dag",
+  "by": "T1",
+  "date": "2026-10-12",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-sub-B",
+  "group": "M1",
+  "result": "pass",
+  "note": "cofiltered system D : Iᵒᵖ ⥤ Scheme with I : Type w filtered, affine transitions, qcqs stages, limit cone c; clause 1 every r-truncation over c.pt is IsBaseChange of a stage truncation whose matching maps stay surjective at every later stage; clause 2 morphisms of pulled-back diagrams descend (01ZM(2) form, comparison via pullbackComp); clause 3 equalities descend; dependency module only appends TruncatedFiniteSplitEtaleHypercover/diagram/IsBaseChange to the landed module (diff has no deleted line), fields read against the truncation clause of the node (splitting cofan over epis, finite pieces, matching UP on Over X, covers, n ≤ r); combined scratch compile clean"
+ },
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteHypercoverDescent",
+  "date": "2026-10-12",
+  "group": "T1"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T1",
+  "result": "pass",
+  "landing": "20261012T044755-L-2040630",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
