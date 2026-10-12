@@ -15,27 +15,35 @@
  },
  "proof": [
   {
-   "text": "Obtain canonical lifts and addition transport equations, then identify supplied comparisons using the hom-equivalence hypotheses, injectivity of the set hom equivalence, and uniqueness of left adjoints.",
+   "text": "Construct ring addition on categorical products sectionwise as the sum of the two projections. The restriction ring homomorphisms preserve sums, so this is a sheaf morphism. Apply the supplied ring hom-equivalence equation to the identity of Lr(O) to express the forgotten ring adjunction unit as the set unit followed by direct image of er.inv. Naturality of the set unit and the product-comparison projection identities identify the two projections of the adjunct of prodComparison followed by prod.map(er.inv,er.inv). Injectivity of the set hom-equivalence reduces the addition transport equation to preservation of sums by the ring adjunction unit, checked on each section.",
    "uses": [
-    "lem-weil-pbc-etale-inverse-image-algebraic-structures",
-    "lem-weil-pbc-conjugate-iso-unit-equation"
+    "def-weil-pbc-direct-image",
+    "def-weil-pbc-inverse-image"
    ],
    "elementary": false
   },
   {
-   "text": "Precompose addition with the tensor-to-product isomorphism. Its projection identities give sectionwise sums. Substitute the canonical operation equations and cancel the comparison isomorphisms.",
+   "text": "Apply the operation compatibility theorem for the supplied abelian comparison ea and its hom-equivalence hypothesis to the underlying abelian sheaf of G. Retain its two addition morphisms, section formulas, and product-comparison transport equation.",
+   "uses": [
+    "lem-weil-pbc-etale-inverse-image-abelian-lift-ops"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Precompose each categorical addition with the inverse of the canonical product-to-tensor isomorphism. The conePointUniqueUpToIso inverse projection identities give exactly the sectionwise sums on pairs. In both transport equations, combine the consecutive functor images of the product-to-tensor isomorphism and its inverse, cancel the inverse product comparison with the product comparison, combine the two product maps, and cancel er or ea. This gives the required tensor equations.",
    "uses": [],
    "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-conjugate-iso-unit-equation",
-  "lem-weil-pbc-etale-inverse-image-algebraic-structures"
+  "def-weil-pbc-direct-image",
+  "def-weil-pbc-inverse-image",
+  "lem-weil-pbc-etale-inverse-image-abelian-lift-ops"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/stacks-project/sites-modules.tex",
-  "place": "Tags 03D2 and 00YV; lemma-pullback-module, comparison of transported addition; diagram calculation expanded by C3"
+  "place": "Tags 03D2 and 00YV; H1 direct adjunction-unit calculation, following the sectionwise operation proof in EtaleInverseImageRingLift and EtaleInverseImageRingComparisonOperations, with the existing supplied abelian operation compatibility theorem."
  },
  "mathlib_searches": [
   {
@@ -118,10 +126,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "C3",
+  "group": "H1",
   "result": "pass",
-  "landing": "20261012T135222-L-1657797",
-  "kind": "interface",
+  "landing": "20261012T153010-L-2350383",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
