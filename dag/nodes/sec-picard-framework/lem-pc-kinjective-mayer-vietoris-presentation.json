@@ -1,0 +1,133 @@
+{
+ "id": "lem-pc-kinjective-mayer-vietoris-presentation",
+ "kind": "statement",
+ "title": "K-injective Mayer-Vietoris short exact complex presentation",
+ "statement": "Let X be a scheme [def-pc-scheme], let U,V be opens with U union V = X, and assume the derived categories of module sheaves on X,U,V,U intersect V exist [def-pc-derived-category]. Let I be a K-injective complex of O_X-module sheaves, with every I^n injective, let E be in D(O_X), and fix an isomorphism e:Q(I) -> E. For W=U,V,U intersect V fix any adjunction a_W:D(r_W) dashv Rj_W*, where r_W is exact open restriction [def-pc-derived-open-restriction-maps] and Rj_W* is derived direct image [def-pc-derived-direct-image]. There exist complexes B,C, chain maps f:I -> B and g:B -> C with fg=0 and 0 -> I -> B -> C -> 0 short exact, and isomorphisms e_B:Q(B) -> Rj_U*(D(r_U)E) direct-sum Rj_V*(D(r_V)E), e_C:Q(C) -> Rj_(U intersect V)*(D(r_(U intersect V))E), such that Q(f) followed by e_B equals e followed by the pair of units of a_U,a_V, and Q(g) followed by e_C equals e_B followed by the difference of the adjoint restriction maps defined in [def-pc-derived-open-restriction-maps]. No connecting map or distinguishedness is asserted, and E need not have quasi-coherent cohomology.",
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Lemma 20.33.2 (08BV), proof and displayed short exact sequence"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "def-pc-derived-direct-image",
+  "def-pc-derived-open-restriction-maps"
+ ],
+ "proof": [
+  {
+   "text": "For each W=U,V,U intersect V restrict I termwise. By K-injective restriction [lem-sc-derived-k-injective-restrict-open], transported through the open-site equivalence, I|W computes its derived direct image [def-pc-derived-direct-image]. Set J_W=j_W*(I|W), B=J_U direct-sum J_V and C=J_(U intersect V). The maps f,g are the pair of restriction units and difference of the two restrictions. Naturality makes them chain maps and equality of the iterated restrictions gives fg=0.",
+   "uses": [
+    "lem-sc-derived-k-injective-restrict-open",
+    "def-pc-derived-direct-image",
+    "def-pc-derived-open-restriction-maps"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Over every test open T and in every degree, sheaf uniqueness and gluing identify I^n(T) with the equalizer of the two restrictions from I^n(T intersect U) direct-sum I^n(T intersect V). For right surjectivity lift an intersection section to T intersect U using injective restriction surjectivity [lem-sc-ringed-space-injective-restriction-surjective] and take zero on the V component. Thus the sheaf sequence, and hence the sequence of complexes, is short exact.",
+   "uses": [
+    "lem-sc-ringed-space-injective-restriction-surjective"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Derive the restriction/direct-image adjunction (restriction is exact) and use the K-injective computation of direct image [def-pc-derived-direct-image] on I|W. The exact-restriction localization comparison and e give Q(J_W) isomorphic to Rj_W*(E|W); localization preserves biproducts, giving e_B. The derived unit on the K-injective representative is the underived restriction unit, so Q(f) has the first displayed identity. The adjunction transpose of each restriction is the restricted counit conjugated by the canonical nested-restriction comparison [def-pc-derived-open-restriction-maps]; hence it is exactly the specified map. For arbitrary supplied adjunctions, right-adjoint uniqueness gives a natural automorphism of each right adjoint carrying canonical units to supplied units. Compose the comparison isomorphisms with these automorphisms. Counit naturality and the triangular identities conjugate the two restriction maps by the same automorphisms, proving the second identity.",
+   "uses": [
+    "def-pc-derived-open-restriction-maps"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-derived-k-injective-restrict-open",
+  "def-pc-derived-direct-image",
+  "def-pc-derived-open-restriction-maps",
+  "lem-sc-ringed-space-injective-restriction-surjective"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Lemma 20.33.2 (08BV)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "short exact direct image Mayer Vietoris complex sheaves",
+   "results": "Generic Mayer-Vietoris square declarations; no exact scheme derived direct-image match.",
+   "date": "2026-10-12",
+   "verdict": "no direct match"
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory.triangleOfSES",
+   "results": "DerivedCategory.triangleOfSES and triangleOfSES_distinguished",
+   "date": "2026-10-12",
+   "verdict": "generic triangle theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "triangleOfSES|mayer.?vietoris",
+   "results": "Mathlib ShortExact and existing extension-by-zero Mayer-Vietoris declarations",
+   "date": "2026-10-12",
+   "verdict": "generic results only"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A short exact sequence of cochain complexes of sheaves gives a distinguished triangle in the derived category",
+   "results": "Service unavailable: Internal Server Error (repeated 2026-10-12); other search kinds and Mathlib source inspection used.",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.DerivedMayerVietorisTriangle",
+  "date": "2026-10-12",
+  "group": "R1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "set-of-representatives proof: derived Mayer-Vietoris gluing over a union of two quasi-compact opens",
+   "via": [
+    "lem-pc-derived-mayer-vietoris-triangle",
+    "lem-pc-perfect-complexes-compact-set"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.KInjectiveMayerVietorisPresentation",
+  "declaration": "AlgebraicGeometry.schemeKInjective_mayerVietoris_presentation",
+  "file": "lean/Sheaf/AlgebraicGeometry/KInjectiveMayerVietorisPresentation.lean",
+  "statement": "theorem schemeKInjective_mayerVietoris_presentation (X : Scheme.{u}) (U V : X.Opens) (hcover : U ⊔ V = ⊤) [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))] [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace))] [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings V.toScheme.toRingedSpace))] [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings (U ⊓ V).toScheme.toRingedSpace))] (I : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ) [I.IsKInjective] (hI : ∀ n : ℤ, Injective (I.X n)) (E : schemeDerivedCategory X) (e : DerivedCategory.Q.obj I ≅ E) (adjU : (schemeOpenRestriction X U).mapDerivedCategory ⊣ schemeDerivedDirectImage U.ι) (adjV : (schemeOpenRestriction X V).mapDerivedCategory ⊣ schemeDerivedDirectImage V.ι) (adjUV : (schemeOpenRestriction X (U ⊓ V)).mapDerivedCategory ⊣ schemeDerivedDirectImage (U ⊓ V).ι) : ∃ (B C : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ) (f : I ⟶ B) (g : B ⟶ C) (hz : f ≫ g = 0) (eB : DerivedCategory.Q.obj B ≅ (schemeDerivedDirectImage U.ι).obj ((schemeOpenRestriction X U).mapDerivedCategory.obj E) ⊞ (schemeDerivedDirectImage V.ι).obj ((schemeOpenRestriction X V).mapDerivedCategory.obj E)) (eC : DerivedCategory.Q.obj C ≅ (schemeDerivedDirectImage (U ⊓ V).ι).obj ((schemeOpenRestriction X (U ⊓ V)).mapDerivedCategory.obj E)), (ShortComplex.mk f g hz).ShortExact ∧ DerivedCategory.Q.map f ≫ eB.hom = e.hom ≫ biprod.lift (adjU.unit.app E) (adjV.unit.app E) ∧ DerivedCategory.Q.map g ≫ eC.hom = eB.hom ≫ biprod.desc (schemeDerivedOpenDirectImageRestriction X (homOfLE inf_le_left) adjU adjUV E) (-(schemeDerivedOpenDirectImageRestriction X (homOfLE inf_le_right) adjV adjUV E))",
+  "branch": "sheaf-dag",
+  "by": "R1",
+  "date": "2026-10-12",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R1",
+  "result": "pass",
+  "landing": "20261012T110316-L-620727",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R1",
+  "result": "pass",
+  "landing": "20261012T110316-L-620727",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -7,11 +7,9 @@ module
 
 public import Sheaf.AlgebraicGeometry.DerivedOpenRestrictionMaps
 public import Sheaf.AlgebraicGeometry.DerivedDirectImagePreservesQCoh
-import Sheaf.Algebra.Homology.KInjectiveRestrictOpen
-import Sheaf.AlgebraicGeometry.DerivedCategory
-import Sheaf.AlgebraicGeometry.InjectiveRestrictionSurjective
-import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
-import Sheaf.CategoryTheory.RingedSiteKInjectiveResolutions
+import Sheaf.AlgebraicGeometry.KInjectiveMayerVietorisPresentation
+import WeilConjectures.CategoryTheory.GrothendieckAbelian.KInjectiveResolutionInjective
+import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Adjunction
 
 /-! # Derived Mayer--Vietoris for a qcqs scheme
 
@@ -32,6 +30,45 @@ noncomputable section
 namespace AlgebraicGeometry
 
 set_option synthInstance.maxSize 2048
+
+private theorem qcoh_overEquiv (X : Scheme.{u₁}) (U : X.Opens)
+    (M : SheafOfModules.{u₁} ((moduleRings X.toRingedSpace).over U)) [M.IsQuasicoherent] :
+    ((Scheme.Modules.overEquiv U).functor.obj M).IsQuasicoherent := by
+  have : ∀ W, (Over.post (X := W) U.overEquivalence.symm.functor).IsContinuous
+      ((Opens.grothendieckTopology ↥U).over W)
+      (((Opens.grothendieckTopology X).over U).over _) := fun W ↦
+    Functor.isContinuous_of_coverPreserving (compatiblePreservingOfFlat _ _)
+      ((CoverPreserving.of_isContinuous U.overEquivalence.symm.functor _ _).overPost W)
+  apply SheafOfModules.isQuasicoherent_pushforward_of_isLeftAdjoint
+    (U.overEquivalence.symm.functor) _
+    (U.sheafOfModulesEquivOverUnit (moduleRings X.toRingedSpace))
+
+private theorem qcoh_openRestriction (X : Scheme.{u₁}) (U : X.Opens)
+    [HasDerivedCategory.{w₁} (SheafOfModules.{u₁} (moduleRings X.toRingedSpace))]
+    [HasDerivedCategory.{w₁} (SheafOfModules.{u₁} (moduleRings U.toScheme.toRingedSpace))]
+    (E : schemeDerivedCategory X) (hE : schemeDerivedQCohProperty X E) :
+    schemeDerivedQCohProperty U.toScheme
+      ((schemeOpenRestriction X U).mapDerivedCategory.obj E) := by
+  classical
+  let F := schemeOpenRestriction X U
+  let K := DerivedCategory.Q.objPreimage E
+  let e : DerivedCategory.Q.obj K ≅ E := DerivedCategory.Q.objObjPreimageIso E
+  intro n
+  let comparison :
+      (DerivedCategory.homologyFunctor _ n).obj (F.mapDerivedCategory.obj E) ≅
+        F.obj ((DerivedCategory.homologyFunctor _ n).obj E) :=
+    (DerivedCategory.homologyFunctor _ n).mapIso (F.mapDerivedCategory.mapIso e.symm) ≪≫
+      (DerivedCategory.homologyFunctor _ n).mapIso (F.mapDerivedCategoryFactors.app K) ≪≫
+      (DerivedCategory.homologyFunctorFactors _ n).app _ ≪≫
+      (F.mapHomologicalComplexHomologyIso (.up ℤ) n).app K ≪≫
+      F.mapIso ((DerivedCategory.homologyFunctorFactors _ n).symm.app K ≪≫
+        (DerivedCategory.homologyFunctor _ n).mapIso e)
+  have := hE n
+  have := SheafOfModules.isQuasicoherent_over
+    ((DerivedCategory.homologyFunctor _ n).obj E) U
+  have hF := qcoh_overEquiv X U (((DerivedCategory.homologyFunctor _ n).obj E).over U)
+  exact (SheafOfModules.isQuasicoherent
+    (moduleRings U.toScheme.toRingedSpace)).prop_of_iso comparison.symm hF
 
 /-- A two-open cover gives the direct-image Mayer--Vietoris distinguished triangle.
 Source: Stacks Project, Tags 08BV and 08D5
@@ -80,6 +117,49 @@ theorem schemeDerived_mayerVietoris_triangle
       schemeDerivedQCohProperty X
         ((schemeDerivedDirectImage (U ⊓ V).ι).obj
           ((schemeOpenRestriction X (U ⊓ V)).mapDerivedCategory.obj E)) := by
-  sorry
+  classical
+  let A := SheafOfModules.{u₁} (moduleRings X.toRingedSpace)
+  let K := DerivedCategory.Q.objPreimage E
+  let I := (CochainComplex.kInjectiveResolutionFunctor.{u₁} A).obj K
+  let s : K ⟶ I := (CochainComplex.toKInjectiveResolution.{u₁} A).app K
+  have hs : QuasiIso s :=
+    (CochainComplex.monoQuasiIso_toKInjectiveResolution_app.{u₁} A K).2
+  let e : DerivedCategory.Q.obj I ≅ E :=
+    (asIso (DerivedCategory.Q.map s)).symm ≪≫ DerivedCategory.Q.objObjPreimageIso E
+  let adj (W : X.Opens)
+      [HasDerivedCategory.{w₁} (SheafOfModules.{u₁} (moduleRings W.toScheme.toRingedSpace))] :
+      (schemeOpenRestriction X W).mapDerivedCategory ⊣ schemeDerivedDirectImage W.ι :=
+    let a : schemeOpenRestriction X W ⊣
+        RingedSpace.moduleDirectImage W.ι.toLRSHom.toShHom :=
+      (Scheme.Modules.restrictAdjunction W.ι).ofNatIsoLeft
+        (Scheme.Modules.overFunctorEquiv W).symm
+    a.mapDerivedCategoryRightDerivedAdjunction
+  let adjU := adj U
+  let adjV := adj V
+  let adjUV := adj (U ⊓ V)
+  obtain ⟨B, C, f, g, hz, eB, eC, hS, hf, hg⟩ :=
+    schemeKInjective_mayerVietoris_presentation X U V hcover I
+      (fun n ↦ inferInstance) E e adjU adjV adjUV
+  let δ := eC.inv ≫ DerivedCategory.triangleOfSESδ hS ≫ e.hom⟦(1 : ℤ)⟧'
+  have htri : Triangle.mk (biprod.lift (adjU.unit.app E) (adjV.unit.app E))
+        (biprod.desc
+          (schemeDerivedOpenDirectImageRestriction X (homOfLE inf_le_left) adjU adjUV E)
+          (-(schemeDerivedOpenDirectImageRestriction X (homOfLE inf_le_right) adjV adjUV E))) δ ∈
+      distTriang (schemeDerivedCategory X) := by
+    apply isomorphic_distinguished _ (DerivedCategory.triangleOfSES_distinguished hS)
+    refine (Triangle.isoMk _ _ e eB eC hf hg ?_).symm
+    change DerivedCategory.triangleOfSESδ hS ≫ e.hom⟦(1 : ℤ)⟧' =
+      eC.hom ≫ (eC.inv ≫ DerivedCategory.triangleOfSESδ hS ≫ e.hom⟦(1 : ℤ)⟧')
+    simp only [Iso.hom_inv_id_assoc]
+  have hq (W : X.Opens) (hW : IsCompact (W : Set X))
+      [HasDerivedCategory.{w₁} (SheafOfModules.{u₁} (moduleRings W.toScheme.toRingedSpace))] :
+      schemeDerivedQCohProperty X ((schemeDerivedDirectImage W.ι).obj
+        ((schemeOpenRestriction X W).mapDerivedCategory.obj E)) := by
+    let : CompactSpace W := isCompact_iff_compactSpace.mp hW
+    exact schemeDerivedDirectImage_preserves_QCoh W.ι _ (qcoh_openRestriction X W E hE)
+  exact ⟨adjU, adjV, adjUV, δ, htri, hq U hU, hq V hV,
+    hq (U ⊓ V) (by
+      simpa only [Opens.coe_inf] using
+        QuasiSeparatedSpace.inter_isCompact (U : Set X) (V : Set X) U.isOpen hU V.isOpen hV)⟩
 
 end AlgebraicGeometry

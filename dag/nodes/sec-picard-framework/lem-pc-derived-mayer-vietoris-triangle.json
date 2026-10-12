@@ -27,66 +27,48 @@
  ],
  "proof": [
   {
-   "text": "Choose a K-injective resolution E \\to I of a representative complex for E, with every I^n injective, using [prop-pur-kinjective-resolutions-exist]. For each of the open immersions j_U, j_V, and j_{UV}, the termwise restrictions j^{-1}I are K-injective by [lem-sc-derived-k-injective-restrict-open]. By the definition of the derived direct image [def-pc-derived-direct-image], the complexes j_{U*}j_U^{-1}I, j_{V*}j_V^{-1}I, and j_{UV*}j_{UV}^{-1}I represent the three derived direct images in the asserted triangle.",
+   "text": "Represent E by K=Q.objPreimage E, choose the functorial K-injective resolution I with injective components, and obtain e:QI isomorphic to E from Q of its natural quasi-isomorphism [prop-pur-kinjective-resolutions-exist]. Construct the restriction/direct-image adjunctions by deriving the underived restriction adjunction after the canonical over-site equivalence [def-pc-derived-open-restriction-maps].",
    "uses": [
     "prop-pur-kinjective-resolutions-exist",
-    "lem-sc-derived-k-injective-restrict-open",
-    "def-pc-derived-direct-image"
+    "def-pc-derived-open-restriction-maps"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/cohomology.tex",
-    "place": "Tag 08BV proof via a K-injective resolution and Tag 08BS"
-   }
+   "elementary": false
   },
   {
-   "text": "There is a degreewise short exact sequence of complexes 0 \\to I \\to j_{U*}j_U^{-1}I direct-sum j_{V*}j_V^{-1}I \\to j_{UV*}j_{UV}^{-1}I \\to 0. On sections over an open T of W, the first map is restriction to U and V; its kernel is zero and its image is the equalizer by the sheaf gluing axiom. The last map is the difference of restrictions. Put T_U=T intersect U and T_V=T intersect V. Since I^n is injective, [lem-sc-ringed-space-injective-restriction-surjective] gives a surjection I^n(T_U) direct-sum I^n(T_V) \\to I^n(T_U intersect T_V), and T_U intersect T_V=T intersect U intersect V, so the last map is surjective on sections over T. Thus the displayed sequence is exact on every test open T and in every degree.",
+   "text": "Apply [lem-pc-kinjective-mayer-vietoris-presentation] to obtain a short exact sequence I -> B -> C and comparison isomorphisms e_B,e_C with exactly the specified first two arrows.",
    "uses": [
-    "lem-sc-ringed-space-injective-restriction-surjective"
+    "lem-pc-kinjective-mayer-vietoris-presentation"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/cohomology.tex",
-    "place": "Tag 08BV proof, exact sequence 0 -> F -> j_{U*}F|_U + j_{V*}F|_V -> j_{UV*}F|_{U cap V} -> 0"
-   }
+   "elementary": false
   },
   {
-   "text": "Apply [lem-weil-pbc-complex-ses-triangle] to the preceding degreewise short exact sequence. Its distinguished triangle is I \\to j_{U*}j_U^{-1}I direct-sum j_{V*}j_V^{-1}I \\to j_{UV*}j_{UV}^{-1}I \\to I[1], and the first two arrows are respectively the pair of restriction maps and their difference. Transporting along the quasi-isomorphism E \\to I identifies this with the claimed triangle in D(O_W). This uses the non-split short-exact-sequence triangle, not a degreewise-split construction.",
+   "text": "Use the actual connecting morphism of [lem-weil-pbc-complex-ses-triangle], and set delta=e_C inverse followed by triangleOfSESdelta followed by the shift of e. Triangle.isoMk with e,e_B,e_C and the two arrow comparison identities gives an isomorphism to the distinguished short-exact-sequence triangle. The third square is the cancellation e_C hom followed by e_C inverse = identity. Transport distinguishedness along this isomorphism.",
    "uses": [
     "lem-weil-pbc-complex-ses-triangle"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/cohomology.tex",
-    "place": "Tag 08BV, derived triangle obtained from the exact sequence of complexes"
-   }
+   "elementary": true
   },
   {
-   "text": "The construction gives a distinguished triangle in the full category D(O_W) for every E. Since U, V, and U intersect V are quasi-compact and the open immersions are quasi-compact and quasi-separated, [lem-pc-derived-direct-image-preserves-qcoh] places each displayed derived direct image in D_QCoh(O_W); restriction preserves quasi-coherent cohomology by exactness and the affine-local definition. Therefore, when E lies in D_QCoh(O_W), the same triangle is a triangle in D_QCoh(O_W), as stated.",
+   "text": "Exact restriction commutes with homology: choose Q.objPreimage, compose mapDerivedCategoryFactors, homologyFunctorFactors and mapHomologicalComplexHomologyIso, and transport along the representative isomorphism. Restrict each quasi-coherent cohomology sheaf and transport its quasi-coherent presentations across the over-site equivalence, using Mathlib isQuasicoherent_over and isQuasicoherent_pushforward_of_isLeftAdjoint. This proves quasi-coherence of the restricted derived object. Compact opens define compact open subschemes, so their inclusions are quasi-compact into the quasi-separated target and are quasi-separated open immersions. The intersection is compact by QuasiSeparatedSpace.inter_isCompact. Apply [lem-pc-derived-direct-image-preserves-qcoh] three times.",
    "uses": [
-    "lem-pc-derived-direct-image-preserves-qcoh",
-    "def-pc-derived-category"
+    "def-pc-derived-category",
+    "lem-pc-derived-direct-image-preserves-qcoh"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/perfect.tex",
-    "place": "Tag 08D5(1), quasi-coherence of derived direct images"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
   "prop-pur-kinjective-resolutions-exist",
-  "lem-sc-derived-k-injective-restrict-open",
-  "def-pc-derived-direct-image",
-  "lem-sc-ringed-space-injective-restriction-surjective",
+  "def-pc-derived-open-restriction-maps",
+  "lem-pc-kinjective-mayer-vietoris-presentation",
   "lem-weil-pbc-complex-ses-triangle",
-  "lem-pc-derived-direct-image-preserves-qcoh",
-  "def-pc-derived-category"
+  "def-pc-derived-category",
+  "lem-pc-derived-direct-image-preserves-qcoh"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/stacks-project/cohomology.tex",
-  "place": "Tag 08BV, with the K-injective construction and quasi-coherence specialization from Tag 08D5"
+  "place": "Tag 08BV, same short exact complex route, with explicit triangle transport and Tag 08D5 specialization; R1 2026-10-12"
  },
  "mathlib_searches": [
   {
@@ -186,5 +168,15 @@
   "reviewer": "R-dmv",
   "group": "U1",
   "result": "pass"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R1",
+  "result": "pass",
+  "landing": "20261012T110316-L-620727",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
