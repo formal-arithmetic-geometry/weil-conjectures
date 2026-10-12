@@ -8749,3 +8749,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 17:38 L: merged deliver/G2/Sheaf.AlgebraicGeometry.AffineCapSectionOpenDictionary (stage 3; reviewer PASS; first push; landing 20261012T173826-L-3296017 (proof); batch 20261012T173801; modules 1; new nodes 1)
 - 17:38 L: merged deliver/G2/Sheaf.AlgebraicGeometry.Curve.FinitePushforwardModuleConstructibleReflection (stage 3; reviewer PASS; after a return; landing 20261012T173827-L-3296147 (interface); batch 20261012T173801; modules 2; new nodes 1)
 - 17:38 L: merged deliver/G2/Sheaf.AlgebraicGeometry.FormalFibreIdempotentLimit (stage 3; reviewer PASS; first push; landing 20261012T173828-L-3296351 (interface); batch 20261012T173801; modules 2; new nodes 1)
+- 17:38 L: merged deliver/G3/Sheaf.AlgebraicGeometry.CohomologyPowersIdealImageBound (stage 3; reviewer PASS; first push; landing 20261012T173828-L-3296476 (interface); batch 20261012T173801; modules 2; new nodes 1)
