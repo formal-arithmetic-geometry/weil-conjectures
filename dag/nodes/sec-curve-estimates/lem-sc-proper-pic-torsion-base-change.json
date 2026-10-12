@@ -14,51 +14,43 @@
  ],
  "proof": [
   {
-   "text": "BaseChange_curve and genus_jacobian_invariant supply smooth proper geometrically integral connected curves over both fields. Proper dimension-one curves are projective, so Jacobian representability applies.",
+   "text": "Apply baseChange_curve to get a connected smooth proper curve after extension. For each curve, exists_mulEquiv_prod_picZero provides the degree-zero subgroup and a multiplicative degree coordinate. If L^n=1, applying that coordinate gives n deg(L)=0 in Z; since n is nonzero, deg(L)=0. Thus every torsion class belongs to the respective degree-zero subgroup.",
    "uses": [
     "lem-sc-base-change-curve",
-    "lem-sc-genus-invariant",
-    "lem-sc-proper-dim-one-projective",
-    "thm-sc-jacobian-representability"
+    "lem-sc-pic-proper-decomposition"
    ],
    "elementary": false
   },
   {
-   "text": "The degree homomorphism takes values in the torsion-free integers, so nth-torsion line bundles have degree zero. Jacobian representability identifies Picard-zero torsion with torsion rational points, respecting the group laws.",
+   "text": "Construct p as Pic.mapHom of the pullback projection. Hom.picDegree_eq identifies degree with the degree of the representative module, fromSkeletonToSkeletonIso identifies the representative of its Picard pullback with the actual module pullback, and Modules.degree_pullback preserves degree. Consequently p restricts to a multiplicative homomorphism j between the two degree-zero subgroups, with underlying value exactly p.",
    "uses": [
-    "lem-sc-pic-proper-decomposition",
-    "thm-sc-jacobian-representability"
+    "lem-pc-degree-base-change"
    ],
    "elementary": false
   },
   {
-   "text": "The classifying-map equation of genus_jacobian_invariant identifies canonical Picard pullback with extension of Jacobian points. Restrict this identity to nth torsion.",
+   "text": "Apply picZero_torsion_base_change to j and the nonvanishing of n in k. It gives injectivity of j and a torsion lift of every degree-zero torsion class after extension.",
    "uses": [
-    "lem-sc-genus-invariant"
+    "lem-sc-piczero-torsion-base-change"
    ],
    "elementary": false
   },
   {
-   "text": "For invertible n, Jacobian nth torsion is finite etale. Clause (c) of abelianVariety_estimate_of_isAlgClosed makes its canonical extension map bijective. Transport through the representing identifications to obtain F with its equation on each line bundle.",
-   "uses": [
-    "thm-av-final",
-    "thm-sc-jacobian-representability"
-   ],
-   "elementary": false
+   "text": "Define F on torsion classes by F(L)=(p(L), map_pow p L n and L^n=1). For injectivity, regard both source torsion classes as elements of G, use equality of their images to invoke injectivity of j, and take subgroup values. For surjectivity, regard a target torsion class as an element y of Gprime, lift it to x in G with x^n=1 and j(x)=y, and take the class x.val. Subtype.ext proves both equalities; the required value equation for F is definitional.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
   "lem-sc-base-change-curve",
-  "lem-sc-genus-invariant",
-  "lem-sc-proper-dim-one-projective",
-  "thm-sc-jacobian-representability",
   "lem-sc-pic-proper-decomposition",
-  "thm-av-final"
+  "lem-pc-degree-base-change",
+  "lem-sc-piczero-torsion-base-change"
  ],
  "proof_origin": {
-  "by": "agent",
+  "by": "worker",
   "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-ext-invariance/thm-sc-constant-invariance.md",
-  "place": "proper-case degree-one paragraph: Jacobian n-torsion comparison"
+  "place": "Proper-case degree-one paragraph, using the existing degree-zero Jacobian comparison; subgroup restriction and torsion transport written in Lean by W3."
  },
  "mathlib_searches": [
   {
@@ -185,10 +177,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "T1",
+  "group": "W3",
   "result": "pass",
-  "landing": "20261012T085339-L-39455",
-  "kind": "interface",
+  "landing": "20261012T095930-L-326864",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
