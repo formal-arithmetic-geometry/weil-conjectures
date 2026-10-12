@@ -26,6 +26,9 @@ public import WeilConjectures.Mathlib.RingTheory.Ideal.Operations
 public import WeilConjectures.Mathlib.RingTheory.MvPolynomial.Homogeneous
 public import WeilConjectures.Mathlib.RingTheory.Nullstellensatz
 
+import Sheaf.RingTheory.HeightOfHomogeneousIndependence
+import Sheaf.RingTheory.HopfAlgebra.AugmentationHeight
+
 /-!
 # Cartier's theorem: Hopf algebras in characteristic zero are reduced
 
@@ -526,6 +529,36 @@ dimensions equal. (blueprint: `lem-wf-same-lie-closed-subgroup`, clause (2)) -/
 theorem HopfAlgebra.finrank_cotangent_eq_ringKrullDim [Algebra.FiniteType k A] :
     (Module.finrank k (RingHom.ker (counitAlgHom k A)).Cotangent : WithBot ℕ∞) =
       ringKrullDim A := by
-  sorry
+  classical
+  have := Algebra.FiniteType.isNoetherianRing k A
+  let ε := counitAlgHom k A
+  have := ε.finiteDimensional_cotangent
+  let I := RingHom.ker ε
+  let B := Module.finBasis k I.Cotangent
+  choose y hy using fun i ↦ I.toCotangent_surjective (B i)
+  choose D hD using fun j ↦ Bialgebra.exists_derivation_of_cotangent k A (B.coord j)
+  have hx (i) : (y i : A) ∈ I := (y i).2
+  have hspan : ∀ a ∈ I, ∃ c : Fin (Module.finrank k I.Cotangent) → k,
+      a - ∑ i, algebraMap k A (c i) * (y i : A) ∈ I ^ 2 := by
+    intro a ha
+    refine ⟨fun i ↦ B.repr (I.toCotangent ⟨a, ha⟩) i, ?_⟩
+    have h : I.toCotangent (⟨a, ha⟩ -
+        ∑ i, B.repr (I.toCotangent ⟨a, ha⟩) i • y i) = 0 := by
+      rw [map_sub, map_sum]
+      simp_rw [LinearMap.map_smul_of_tower, hy]
+      rw [B.sum_repr, sub_self]
+    rw [I.toCotangent_eq_zero] at h
+    simpa [Algebra.smul_def] using h
+  have hDx (i j) : ε (D j (y i : A)) = if i = j then 1 else 0 := by
+    rw [hD j (y i) (y i).2, hy, Module.Basis.coord_apply, Module.Basis.repr_self,
+      Finsupp.single_apply]
+  have hheight := ε.height_ker_eq_card_of_homogeneous_independence
+    (fun i ↦ (y i : A)) hx hspan (fun r f hf hfx ↦
+      AlgHom.eq_zero_of_isHomogeneous_of_aeval_mem_pow_succ hx hDx hf hfx)
+  simp only [Fintype.card_fin] at hheight
+  calc
+    (Module.finrank k I.Cotangent : WithBot ℕ∞) = (I.height : WithBot ℕ∞) := by
+      exact_mod_cast hheight.symm
+    _ = ringKrullDim A := HopfAlgebra.height_ker_counit_eq_ringKrullDim k A
 
 end HopfAlgebra

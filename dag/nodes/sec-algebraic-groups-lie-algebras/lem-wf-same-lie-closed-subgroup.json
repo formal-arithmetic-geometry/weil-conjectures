@@ -30,17 +30,19 @@
    "elementary": false
   },
   {
-   "text": "*Dimension.* Smoothness at the identity makes\n$\\mathcal O_{K,1}$ regular, so\n$\\dim_k\\mathfrak m_1/\\mathfrak m_1^2=\\dim\\mathcal O_{K,1}$, and the\nleft side is the dimension of the tangent space at the identity, which\nis $\\operatorname{Lie}(K)$ by [def-wf-lie-algebra-derivation].\nTranslations are automorphisms of the variety $K$\n([lem-sc-translation-automorphism]), so the local\ndimensions $\\dim\\mathcal O_{K,g}$ at all closed points $g$ agree, and\nthe dimension of $K$ is their maximum. Hence\n$\\dim\\operatorname{Lie}(K)=\\dim K$, and likewise\n$\\dim\\operatorname{Lie}(L)=\\dim L$. This proves (2).",
+   "text": "For the Hopf-algebra realization of clause (2), choose a finite basis of the cotangent space at the counit and lift its basis vectors into the augmentation ideal. Their images span modulo the square by the basis expansion. Extend coordinate forms by the already-proved Bialgebra.exists_derivation_of_cotangent; their counit evaluations on the lifts are the Kronecker delta. The already-proved AlgHom.eq_zero_of_isHomogeneous_of_aeval_mem_pow_succ supplies homogeneous independence. Apply [lem-wf-height-of-homogeneous-independence] to obtain augmentation height equal to the number of basis vectors, and [lem-wf-hopf-augmentation-height] to identify it with the global dimension. The tangent/cotangent duality in [def-wf-lie-algebra-derivation] identifies this cotangent dimension with the dimension of Lie(K). This proves the dimension assertion of (2). The other assertions and proof steps of this node are unchanged.",
    "uses": [
-    "def-wf-lie-algebra-derivation",
-    "lem-sc-translation-automorphism"
+    "lem-wf-height-of-homogeneous-independence",
+    "lem-wf-hopf-augmentation-height",
+    "def-wf-lie-algebra-derivation"
    ],
    "elementary": false
   },
   {
    "text": "*Identity component.* Let $K_1$ be the unique irreducible component\ncontaining the identity.\nThe image of the irreducible variety $K_1\\times K_1$ under\nmultiplication is irreducible and contains the identity, so its closure\nlies in the unique component $K_1$. Hence $K_1K_1\\subseteq K_1$.\nInversion sends $K_1$ to an irreducible component containing the\nidentity, hence to $K_1$. Thus $K_1$ is a subgroup. Translation by\n$g\\in K$ sends $K_1$ onto the irreducible component containing\n$g$. Since $K_1$ is irreducible, it is connected; being open and\nclosed, it is the connected component of the identity, so\n$K^\\circ=K_1$ is open and closed in $K$. The local ring of the open\nsubscheme $K^\\circ$ at the identity is $\\mathcal O_{K,1}$, so its\ntangent space at the identity is unchanged:\n$\\operatorname{Lie}(K^\\circ)=\\operatorname{Lie}(K)$. This proves (3).\nIf $K$ is connected in the sense of [def-wf-algebraic-components], the\nnonempty open and closed subset $K_1$ must be all of $K$; thus $K$ is\nirreducible.",
    "uses": [
-    "def-wf-algebraic-components"
+    "def-wf-algebraic-components",
+    "lem-sc-translation-automorphism"
    ],
    "elementary": false
   },
@@ -55,29 +57,21 @@
    "text": "*Multiplication.* The tangent space at the identity is the space of\n$X$ with $1+\\varepsilon X\\in K(k[\\varepsilon]/\\varepsilon^2)$ lying\nover the identity. Points of a product with values in\n$k[\\varepsilon]/\\varepsilon^2$ are pairs of such points, so the tangent\nspace of $K\\times K$ at $(1,1)$ is\n$\\operatorname{Lie}(K)\\oplus\\operatorname{Lie}(K)$. Multiplication\nsends the pair $(1+\\varepsilon X,1+\\varepsilon Y)$ to\n\n$$\n(1+\\varepsilon X)(1+\\varepsilon Y)=1+\\varepsilon(X+Y),\n$$\n\nsince $\\varepsilon^2=0$. Hence its differential at $(1,1)$ is\n$(X,Y)\\mapsto X+Y$, which proves (4).",
    "uses": [],
    "elementary": null
-  },
-  {
-   "text": "For AlgebraicGeometry.GrpObj.finrank_lie_eq_topologicalKrullDim: apply the existing Cartier smoothness theorem to G.hom. Apply the smooth Lie-local dimension equality, then compose with the identity local-global dimension equality. Existing steps for the other declarations of this node are retained.",
-   "uses": [
-    "lem-ag-smooth-lie-local-dimension",
-    "lem-ag-group-identity-local-dimension"
-   ],
-   "elementary": true
   }
  ],
  "proof_deps": [
   "lem-wf-smooth-components-disjoint",
+  "lem-wf-height-of-homogeneous-independence",
+  "lem-wf-hopf-augmentation-height",
   "def-wf-lie-algebra-derivation",
-  "lem-sc-translation-automorphism",
   "def-wf-algebraic-components",
   "lem-ag-equal-dimension-subgroup",
-  "lem-ag-smooth-lie-local-dimension",
-  "lem-ag-group-identity-local-dimension"
+  "lem-sc-translation-automorphism"
  ],
  "proof_origin": {
-  "by": "G2 stage 3",
+  "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-algebraic-groups-lie-algebras/sk-i-cartier/lem-wf-same-lie-closed-subgroup.md",
-  "place": "Dimension paragraph; existing routes retained for declarations outside Lie.Field"
+  "place": "Proof, Dimension paragraph; ring-theoretic details supplied for the Cartier module"
  },
  "mathlib_searches": [],
  "mathlib_match": null,
@@ -257,9 +251,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "G2",
+  "group": "T2",
   "result": "pass",
-  "landing": "20261012T042408-L-1815281",
+  "landing": "20261012T044755-L-2040876",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

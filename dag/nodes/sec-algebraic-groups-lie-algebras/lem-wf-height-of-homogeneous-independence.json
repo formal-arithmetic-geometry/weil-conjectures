@@ -1,0 +1,167 @@
+{
+ "id": "lem-wf-height-of-homogeneous-independence",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-wf-same-lie-closed-subgroup",
+   "place": "Proof, Dimension paragraph: the local dimension equals the cotangent dimension; polynomial associated graded criterion",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Height from homogeneous independence at a rational point",
+ "statement": "Let $k$ be a field and $A$ a Noetherian commutative $k$-algebra [def-weil-pbc-noetherian-ring, def-weil-pbc-algebra-hom-quotient]. Let $\\varepsilon:A\\to k$ be a $k$-algebra homomorphism and put $I=\\ker\\varepsilon$. Let $\\iota$ be a finite index set and choose $x_i\\in I$ for $i\\in\\iota$. Suppose (i) every $a\\in I$ can be written $a\\equiv\\sum_i c_i x_i\\pmod{I^2}$ with $c_i\\in k$, and (ii) for every integer $r\\ge0$ and every homogeneous polynomial $f\\in k[X_i:i\\in\\iota]$ of total degree $r$ [def-weil-pbc-mv-polynomial-ring], $f(x)\\in I^{r+1}$ implies $f=0$. Then $\\operatorname{ht}(I)=\\#\\iota$, where height is the supremum of lengths of chains of primes contained in $I$ [def-weil-pbc-krull-dimension-ring].",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-algebraic-groups-lie-algebras/sk-i-cartier/lem-wf-same-lie-closed-subgroup.md",
+  "place": "Proof, Dimension paragraph: the local dimension equals the cotangent dimension; polynomial associated graded criterion"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-algebra-hom-quotient",
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-weil-pbc-krull-dimension-ring"
+ ],
+ "proof": [
+  {
+   "text": "Put I=ker ε. Since ε(algebraMap(c))=c, A/I is k. Induct on r using the spanning congruence and the product definition of I^r to represent every element of I^r/I^(r+1) by a homogeneous polynomial of degree r. The independence assumption makes these maps injective. They respect multiplication, giving gr_I A ≃ k[X_i].",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-algebraic-groups-lie-algebras/sk-i-cartier/lem-wf-same-lie-closed-subgroup.md",
+    "place": "Proof, Dimension paragraph: the local dimension equals the cotangent dimension; polynomial associated graded criterion"
+   }
+  },
+  {
+   "text": "Localize at I. Each I^r/I^(r+1) is annihilated by I, so every element outside I acts by the nonzero scalar ε(s); localization preserves the graded pieces. The local ring R=A_I is Noetherian, with polynomial associated graded ring and residue field k. Its dimension is the height of I.",
+   "uses": [
+    "lem-weil-pbc-localization-dimension-chains-below-prime"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-algebraic-groups-lie-algebras/sk-i-cartier/lem-wf-same-lie-closed-subgroup.md",
+    "place": "Proof, Dimension paragraph: the local dimension equals the cotangent dimension; polynomial associated graded criterion"
+   }
+  },
+  {
+   "text": "Nakayama shows that the chosen lifts generate the maximal ideal m of R. Krull intersection shows that R is m-adically separated: apply the localization intersection lemma at m; its element f outside m is a unit, so the intersection itself is zero. When the index set is empty, Nakayama gives m=0, hence R is a field of dimension zero.",
+   "uses": [
+    "lem-weil-pbc-nakayama-local-generators",
+    "lem-weil-pbc-krull-intersection-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-algebraic-groups-lie-algebras/sk-i-cartier/lem-wf-same-lie-closed-subgroup.md",
+    "place": "Proof, Dimension paragraph: the local dimension equals the cotangent dimension; polynomial associated graded criterion"
+   }
+  },
+  {
+   "text": "For a nonempty index set choose x_1. A nonzero y has finite m-adic order. Its initial form times X_1 is nonzero in the polynomial graded ring, so x_1 y has order ord(y)+1. Thus x_1 is a nonzerodivisor, and (x_1)∩m^r=x_1 m^(r-1) for r≥1. The kernel in each degree of gr R→gr(R/(x_1)) is therefore the degree-r part of (X_1). Thus the quotient has polynomial graded ring on one fewer variable.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-algebraic-groups-lie-algebras/sk-i-cartier/lem-wf-same-lie-closed-subgroup.md",
+    "place": "Proof, Dimension paragraph: the local dimension equals the cotangent dimension; polynomial associated graded criterion"
+   }
+  },
+  {
+   "text": "Induct on the number of variables, using the preceding strictness for each successive quotient. The dimension of R/(x_1) is n-1. A nonzerodivisor in the maximal ideal of a Noetherian local ring drops dimension by exactly one, hence dim R=n. Substituting dim R=ht I proves the assertion, including n=0.",
+   "uses": [
+    "lem-weil-pbc-dimension-quotient-nonzerodivisor",
+    "lem-weil-pbc-localization-dimension-chains-below-prime"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-algebraic-groups-lie-algebras/sk-i-cartier/lem-wf-same-lie-closed-subgroup.md",
+    "place": "Proof, Dimension paragraph: the local dimension equals the cotangent dimension; polynomial associated graded criterion"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-localization-dimension-chains-below-prime",
+  "lem-weil-pbc-nakayama-local-generators",
+  "lem-weil-pbc-krull-intersection-localization",
+  "lem-weil-pbc-dimension-quotient-nonzerodivisor"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-algebraic-groups-lie-algebras/sk-i-cartier/lem-wf-same-lie-closed-subgroup.md",
+  "place": "Proof, Dimension paragraph; ring-theoretic details supplied for the Cartier module"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "If the associated graded ring of a maximal ideal is a polynomial ring in n variables, its height is n",
+   "results": "Internal Server Error: service unavailable",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "If lifts of a basis of the cotangent space have no homogeneous relations in the associated graded ring of a maximal ideal, its height equals the cardinality of the basis",
+   "results": [
+    "height_le_ringKrullDim_quotient_add_spanFinrank",
+    "Ideal.height_le_height_add_spanFinrank_of_le",
+    "Polynomial.height_eq_height_add_one"
+   ],
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "associatedGraded.*[Dd]im|[Dd]im.*associatedGraded|height.*counit|counit.*height",
+   "results": [],
+   "date": "2026-10-12",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "WeilConjectures.RingTheory.HopfAlgebra.Cartier",
+  "date": "2026-10-12",
+  "group": "T2"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-algebraic-groups-lie-algebras",
+ "unit": "sk-i-cartier",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.HeightOfHomogeneousIndependence",
+  "file": "lean/Sheaf/RingTheory/HeightOfHomogeneousIndependence.lean",
+  "declaration": "AlgHom.height_ker_eq_card_of_homogeneous_independence",
+  "statement": "theorem height_ker_eq_card_of_homogeneous_independence {k A ι : Type*} [Field k] [CommRing A] [Algebra k A] [IsNoetherianRing A] [Fintype ι] (ε : A →ₐ[k] k) (x : ι → A) (hx : ∀ i, x i ∈ RingHom.ker ε) (hspan : ∀ a ∈ RingHom.ker ε, ∃ c : ι → k, a - ∑ i, algebraMap k A (c i) * x i ∈ RingHom.ker ε ^ 2) (hind : ∀ (r : ℕ) (f : MvPolynomial ι k), f.IsHomogeneous r → aeval x f ∈ RingHom.ker ε ^ (r + 1) → f = 0) : (RingHom.ker ε).height = Fintype.card ι",
+  "branch": "sheaf-dag",
+  "by": "T2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T2",
+  "result": "pass",
+  "landing": "20261012T044755-L-2040876",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T2",
+  "result": "pass",
+  "landing": "20261012T044755-L-2040876",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
