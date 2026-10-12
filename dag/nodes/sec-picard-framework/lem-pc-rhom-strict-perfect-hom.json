@@ -27,48 +27,38 @@
  ],
  "proof": [
   {
-   "text": "Represent M by a cochain complex and choose the functorial K-injective resolution M^bullet \\to I^bullet supplied in the definition of derived internal Hom. By that definition, R\\mathcal Hom_{O_U}(P,M) is represented by the Hom complex Hom^bullet(P,I^bullet).",
+   "text": "By def-pc-perfect-complex, each term of P retracts from a finite free module and P is bounded. Apply lem-sc-finite-free-internal-hom-exact to a short exact sequence. Contravariant precomposition with the retraction and inclusion gives a retract of short complexes; homology, monomorphisms and epimorphisms are preserved by retracts, so internal Hom from each term preserves short exact sequences.",
    "uses": [
-    "def-pur-derived-internal-hom"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Section 08J7 (derived internal Hom construction)"
-   }
-  },
-  {
-   "text": "Let f:M^bullet \\to I^bullet be the resolution of Step 1; we show Hom^bullet(P,M^bullet) \\to Hom^bullet(P,I^bullet) is a quasi-isomorphism [def-pc-quasi-iso-modules]. For each degree i, P^i is a direct summand of a finite free module [def-pc-perfect-complex], so \\mathcal Hom(P^i,-) is exact: it is a direct summand of the exact functor \\mathcal Hom(O_U^{\\oplus r},-) of [lem-sc-finite-free-internal-hom-exact]. An exact functor commutes with taking cohomology sheaves, so \\mathcal Hom(P^i,M^\\bullet) \\to \\mathcal Hom(P^i,I^\\bullet) is a quasi-isomorphism. P is bounded, so its stupid truncations \\sigma_{\\geq k}P give a finite filtration of P by subcomplexes with graded pieces P^k[-k]; since the terms of the Hom complex [def-pur-hom-complex] are finite products over the degrees of P, applying Hom^bullet(-,M^\\bullet) and Hom^bullet(-,I^\\bullet) gives termwise split short exact sequences of complexes, compatible with f, 0 \\to Hom^bullet(P^k[-k],-) \\to Hom^bullet(\\sigma_{\\geq k}P,-) \\to Hom^bullet(\\sigma_{\\geq k+1}P,-) \\to 0, whose first term is a shift of \\mathcal Hom(P^k,-) applied to the complex. Induction on the finitely many nonzero degrees of P, using the long exact cohomology sequence of a short exact sequence of complexes (Stacks Tag 0117) and the five lemma, shows that Hom^bullet(P,M^bullet) \\to Hom^bullet(P,I^bullet) is a quasi-isomorphism.",
-   "uses": [
-    "lem-sc-finite-free-internal-hom-exact",
-    "def-pur-hom-complex",
     "def-pc-perfect-complex",
-    "def-pc-quasi-iso-modules"
+    "lem-sc-finite-free-internal-hom-exact"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/cohomology.tex",
-    "place": "Tag 08DM, cohomology-lemma-RHom-strictly-perfect, finite-projective calculation"
-   }
+   "elementary": true
   },
   {
-   "text": "The quasi-isomorphism in Step 2 identifies the ordinary Hom complex Hom^bullet(P,M^bullet) with the derived representative Hom^bullet(P,I^bullet), hence gives the comparison isomorphism in D(O_U). The comparison is canonical, natural in P and M, and independent of the chosen representatives because the derived internal-Hom construction is functorial on pairs of complexes and sends quasi-isomorphisms in either variable to quasi-isomorphisms, as stated in [def-pur-derived-internal-hom].",
+   "text": "Apply lem-pc-bounded-exact-term-hom-quasi-iso to the quasi-isomorphism from M to its functorial K-injective replacement. The Hom complex of def-pur-hom-complex therefore maps by a quasi-isomorphism to the Hom complex of the replacement. Localization inverts this map.",
+   "uses": [
+    "lem-pc-bounded-exact-term-hom-quasi-iso",
+    "def-pur-hom-complex",
+    "def-pc-quasi-iso-modules",
+    "def-pur-derived-internal-hom"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The comparison theorem of def-pur-derived-internal-hom identifies the localized Hom complex of the replacement with derived internal Hom. Compose its inverse component with the isomorphism just obtained. The same quasi-isomorphism argument proves the comparison for every functorial K-injective replacement.",
    "uses": [
     "def-pur-derived-internal-hom"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/cohomology.tex",
-    "place": "Tag 08DM, cohomology-lemma-RHom-strictly-perfect, conclusion"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-pur-derived-internal-hom",
-  "lem-sc-finite-free-internal-hom-exact",
-  "def-pur-hom-complex",
   "def-pc-perfect-complex",
-  "def-pc-quasi-iso-modules"
+  "lem-sc-finite-free-internal-hom-exact",
+  "lem-pc-bounded-exact-term-hom-quasi-iso",
+  "def-pur-hom-complex",
+  "def-pc-quasi-iso-modules",
+  "def-pur-derived-internal-hom"
  ],
  "proof_origin": {
   "by": "document",
@@ -158,5 +148,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S2",
+  "result": "pass",
+  "landing": "20261012T202252-L-708614",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
