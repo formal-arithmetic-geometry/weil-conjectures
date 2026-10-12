@@ -25,64 +25,28 @@
  ],
  "proof": [
   {
-   "text": "*(1) Finite products in $\\Sh(\\mathcal C)$ are sectionwise; morphisms and equalities of morphisms are sectionwise.* (a) For sheaves of sets $\\mathcal F_1,\\dots,\\mathcal F_n$ ($n\\ge0$) the presheaf $X\\mapsto\\mathcal F_1(X)\\times\\dots\\times\\mathcal F_n(X)$, restriction componentwise, is a sheaf: given a covering $\\{U_i\\to U\\}$ and a compatible family $(s_i)$, $s_i=(s_{i,1},\\dots,s_{i,n})\\in\\prod_k\\mathcal F_k(U_i)$, each $(s_{i,k})_i$ is a compatible family of $\\mathcal F_k$ (restriction is componentwise), so it glues to a unique $s_k\\in\\mathcal F_k(U)$, and $(s_1,\\dots,s_n)$ is the unique section restricting to the $s_i$ (Sites, Lemma 00W2 and its proof, for the finite discrete diagram); for $n=0$ this is the presheaf $*$ with $*(X)$ a singleton, a sheaf because an equalizer of maps between singletons is a singleton (Sites, Example 00W3). With the sectionwise projections it is a product in presheaves (a morphism $\\mathcal H\\to\\prod_k\\mathcal F_k$ is a family of maps $\\mathcal H(X)\\to\\prod_k\\mathcal F_k(X)$ natural in $X$, i.e. an $n$-tuple of morphisms $\\mathcal H\\to\\mathcal F_k$), hence in the full subcategory $\\Sh(\\mathcal C)$ [def-weil-category-product]; for $n=0$ it is the final sheaf $*$. Any other choice of product in $\\Sh(\\mathcal C)$ has the same sections via its projections, since the inclusion of sheaves into presheaves and the evaluations $\\mathcal G\\mapsto\\mathcal G(X)$ preserve finite limits [lem-weil-pbc-presheaf-finite-limits-objectwise] (1), (2); so we use the sectionwise product throughout, with $(\\mathcal F\\times\\mathcal F)(X)=\\mathcal F(X)\\times\\mathcal F(X)$, $(\\mathcal F\\times\\mathcal F\\times\\mathcal F)(X)=\\mathcal F(X)^3$, and the morphisms $\\langle f,g\\rangle$, $f\\times g$, $\\mathrm{pr}_k$, $!_{\\mathcal F}:\\mathcal F\\to*$ given on $X$-sections by the same formulas on sets. (b) Hence a morphism of sheaves $\\mathcal F\\times\\mathcal F\\to\\mathcal F$ (resp. $*\\to\\mathcal F$, $\\mathcal F\\to\\mathcal F$) is exactly a family of maps $\\mathcal F(X)\\times\\mathcal F(X)\\to\\mathcal F(X)$ (resp. elements $0_X\\in\\mathcal F(X)$, maps $\\mathcal F(X)\\to\\mathcal F(X)$) compatible with all restriction maps $\\rho:\\mathcal F(X)\\to\\mathcal F(Y)$ along $Y\\to X$ (for $*$: $\\rho(0_X)=0_Y$), since a morphism of sheaves is a natural transformation of the underlying functors. (c) Two morphisms of sheaves are equal iff their components on every $X$ are equal (equality of natural transformations), and the component of a composite is the composite of components; so an equation between composites of structure maps, products and projections holds in $\\Sh(\\mathcal C)$ iff the corresponding equation of maps of sets holds on $\\mathcal F(X)$, $\\mathcal F(X)^2$, $\\mathcal F(X)^3$ for every $X$.",
-   "uses": [
-    "def-weil-category-product",
-    "lem-weil-pbc-presheaf-finite-limits-objectwise"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites.tex",
-    "place": "Lemma 00W2 (lemma-limit-sheaf) and its proof; Example 00W3 (example-singleton-sheaf); sheaves.tex Lemma 006I (products of presheaves sectionwise) for the universal property"
-   }
-  },
-  {
-   "text": "*(2) From a sheaf of abelian groups to an abelian group object.* Let $\\mathcal A$ be a sheaf of abelian groups and $\\mathcal F=|\\mathcal A|$ its underlying presheaf of sets, a sheaf of sets by [lem-weil-pbc-algebraic-sheaf-iff-underlying-sets]. Put $+_X(a,b)=a+b$, $0_X=0\\in\\mathcal A(X)$, $i_X(a)=-a$. Every restriction map $\\rho$ of $\\mathcal A$ is a group homomorphism, so $\\rho(a+b)=\\rho(a)+\\rho(b)$, $\\rho(0)=0$, $\\rho(-a)=-\\rho(a)$: by (1)(b) these families are morphisms $+:\\mathcal F\\times\\mathcal F\\to\\mathcal F$, $0:*\\to\\mathcal F$, $i:\\mathcal F\\to\\mathcal F$ of $\\Sh(\\mathcal C)$. By (1)(c) the axioms are checked on $X$-sections for every $X$, where they read: associativity $(a+b)+c=a+(b+c)$ on $\\mathcal F(X)^3$; commutativity $b+a=a+b$; unit $0+a=a$ (the component of $0\\circ!_{\\mathcal F}$ at $X$ is the constant map $a\\mapsto0_X$); inverse $a+(-a)=0$; these hold in the abelian group $\\mathcal A(X)$. So $(\\mathcal F,+,0,i)$ is an abelian group object. If $\\varphi:\\mathcal A\\to\\mathcal B$ is a morphism of sheaves of abelian groups, $|\\varphi|$ is a morphism of sheaves of sets with components the homomorphisms $\\varphi_X$, hence $\\varphi_X(a+b)=\\varphi_X(a)+\\varphi_X(b)$, $\\varphi_X(0)=0$, $\\varphi_X(-a)=-\\varphi_X(a)$, i.e. by (1)(c) $|\\varphi|\\circ+=+\\circ(|\\varphi|\\times|\\varphi|)$, $|\\varphi|\\circ0=0$, $|\\varphi|\\circ i=i\\circ|\\varphi|$: a morphism of abelian group objects. Identities and composites are preserved since they are computed on components. This defines a functor $\\Phi$ from sheaves of abelian groups to abelian group objects, with $\\mathrm{forget}\\circ\\Phi=|-|$ (underlying sheaf of sets, underlying morphism).",
-   "uses": [
-    "lem-weil-pbc-algebraic-sheaf-iff-underlying-sets"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites.tex",
-    "place": "Section 00YR, the quadruple description (D1)-(D4), (A1)-(A3) before Proposition 00YV and the proof of Proposition 00YV (2) (morphisms of abelian sheaves are the maps of sheaves of sets compatible with +, 0, i; 'details left to the reader')"
-   }
-  },
-  {
-   "text": "*(3) From an abelian group object to a sheaf of abelian groups.* Let $(\\mathcal F,+,0,i)$ be an abelian group object of $\\Sh(\\mathcal C)$. By (1)(b) its structure maps are families $+_X:\\mathcal F(X)^2\\to\\mathcal F(X)$, $0_X\\in\\mathcal F(X)$, $i_X:\\mathcal F(X)\\to\\mathcal F(X)$, and by (1)(c) the axioms, taken on $X$-sections, say: $+_X$ is associative and commutative, $+_X(0_X,a)=a$ (hence also $+_X(a,0_X)=a$ by commutativity), $+_X(a,i_X(a))=0_X$. So $(\\mathcal F(X),+_X,0_X,i_X)$ is an abelian group. The compatibility of the families with restriction (1)(b) says that every restriction map $\\rho:\\mathcal F(X)\\to\\mathcal F(Y)$ satisfies $\\rho(a+_Xb)=\\rho(a)+_Y\\rho(b)$, so it is a group homomorphism. Hence $\\Psi(\\mathcal F):X\\mapsto(\\mathcal F(X),+_X,0_X,i_X)$, with the restriction maps of $\\mathcal F$, is a functor $\\mathcal C^{op}\\to$ abelian groups whose underlying presheaf of sets is the sheaf $\\mathcal F$; by [lem-weil-pbc-algebraic-sheaf-iff-underlying-sets] it is a sheaf of abelian groups. If $\\varphi:\\mathcal F\\to\\mathcal G$ is a morphism of abelian group objects, then $\\varphi\\circ+=+\\circ(\\varphi\\times\\varphi)$ on $X$-sections says $\\varphi_X(a+_Xb)=\\varphi_X(a)+_X\\varphi_X(b)$, so every $\\varphi_X$ is a homomorphism and $\\varphi$ (a natural transformation) is a morphism $\\Psi(\\mathcal F)\\to\\Psi(\\mathcal G)$ of sheaves of abelian groups; $\\Psi$ is a functor (identity on underlying maps) with $|-|\\circ\\Psi=\\mathrm{forget}$.",
-   "uses": [
-    "lem-weil-pbc-algebraic-sheaf-iff-underlying-sets"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites.tex",
-    "place": "Section 00YR, the quadruple description (D1)-(D4), (A1)-(A3) before Proposition 00YV and the proof of Proposition 00YV (2) (morphisms of abelian sheaves are the maps of sheaves of sets compatible with +, 0, i; 'details left to the reader')"
-   }
-  },
-  {
-   "text": "*(4) $\\Phi$ and $\\Psi$ are inverse isomorphisms of categories; morphisms.* On objects: for a sheaf of abelian groups $\\mathcal A$, $\\Psi\\Phi(\\mathcal A)$ has the sets $\\mathcal A(X)$, the restriction maps of $\\mathcal A$ and the operations $+_X$, $0_X$, $i_X$ of (2), which are the addition, zero and negation of $\\mathcal A(X)$; so $\\Psi\\Phi(\\mathcal A)=\\mathcal A$. For an abelian group object $(\\mathcal F,+,0,i)$, $\\Phi\\Psi(\\mathcal F)$ has underlying sheaf $\\mathcal F$ and structure maps with components $+_X$, $0_X$, $i_X$, which are the components of $+,0,i$; by (1)(c) they are $+,0,i$. On morphisms both functors leave the underlying morphism of sheaves of sets unchanged, so $\\Psi\\Phi$ and $\\Phi\\Psi$ are the identity functors, and $\\Phi$ is an isomorphism of categories commuting with the forgetful functors to $\\Sh(\\mathcal C)$, with inverse $\\Psi$ giving $\\mathcal F(X)$ the operations $+_X,0_X,i_X$. In particular, for sheaves of abelian groups $\\mathcal A,\\mathcal B$ and a morphism of sheaves of sets $\\varphi:|\\mathcal A|\\to|\\mathcal B|$: if $\\varphi$ underlies a morphism of sheaves of abelian groups it commutes with $+,0,i$ by (2); conversely if it commutes with $+$ alone, its components are homomorphisms by (3), so it is a morphism of sheaves of abelian groups (and then it commutes with $0$ and $i$ too, homomorphisms preserving zero and negatives).",
+   "text": "Finite products and terminal sections follow from Cartesian monoidal sheaf instances.",
    "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sheaves.tex",
-    "place": "Lemma 006J (lemma-abelian-presheaves), equivalence of (1) and (2) (proof omitted; written out here for a site), and sites.tex Section 00YR, the displayed description of Mor_{Ab(C)} in the proof of Proposition 00YV"
-   }
+   "elementary": true
   },
   {
-   "text": "*(5) Commutative rings.* A commutative ring object $(\\mathcal F,+,0,i,\\cdot,1)$ is an abelian group object $(\\mathcal F,+,0,i)$ together with a commutative monoid object structure $(\\cdot,1)$ ((G1)-(G3) for $\\cdot,1$) satisfying distributivity $\\cdot\\circ\\langle p_1,+\\circ\\langle p_2,p_3\\rangle\\rangle=+\\circ\\langle\\cdot\\circ\\langle p_1,p_2\\rangle,\\cdot\\circ\\langle p_1,p_3\\rangle\\rangle$ (the other distributive law follows by commutativity of $\\cdot$). The argument of (2)-(4) applies verbatim, with the additional families $\\cdot_X:\\mathcal F(X)^2\\to\\mathcal F(X)$ and $1_X\\in\\mathcal F(X)$: for a sheaf of commutative rings $\\mathcal O$, $|\\mathcal O|$ is a sheaf of sets [lem-weil-pbc-algebraic-sheaf-iff-underlying-sets], restriction maps are ring homomorphisms so $\\cdot_X$, $1_X$ are natural, hence morphisms $\\cdot:\\mathcal F\\times\\mathcal F\\to\\mathcal F$, $1:*\\to\\mathcal F$ (1)(b), and the ring axioms hold on every $\\mathcal F(X)$, hence as morphisms (1)(c); conversely, for a commutative ring object, (1)(c) makes each $(\\mathcal F(X),+_X,0_X,i_X,\\cdot_X,1_X)$ a commutative ring, naturality makes the restriction maps ring homomorphisms, and [lem-weil-pbc-algebraic-sheaf-iff-underlying-sets] (case of commutative rings) makes the resulting presheaf of commutative rings a sheaf. The two constructions are inverse on objects and the identity on morphisms as in (4). Morphisms: a morphism of sheaves of sets $\\varphi$ between underlying sheaves of sheaves of commutative rings is a morphism of sheaves of rings iff every $\\varphi_X$ is a ring homomorphism, iff (by (1)(c)) $\\varphi$ commutes with $+$, $\\cdot$ and $1$; a ring homomorphism also preserves $0$ and negatives, so this is iff $\\varphi$ commutes with all the structure maps $+,0,i,\\cdot,1$.",
+   "text": "Apply the abelian algebraic-object component theorem.",
    "uses": [
-    "lem-weil-pbc-algebraic-sheaf-iff-underlying-sets"
+    "lem-weil-pbc-sheaf-algebraic-structures-abelian-component"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites.tex",
-    "place": "Section 00YR, proof of Proposition 00YV: 'This method also works for sheaves of rings by thinking of a sheaf of rings (with unit) as a sextuple (O, +, 0, i, ., 1)'"
-   }
+   "elementary": false
+  },
+  {
+   "text": "Apply the commutative-ring algebraic-object component theorem.",
+   "uses": [
+    "lem-weil-pbc-sheaf-algebraic-structures-ring-component"
+   ],
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "def-weil-category-product",
-  "lem-weil-pbc-presheaf-finite-limits-objectwise",
-  "lem-weil-pbc-algebraic-sheaf-iff-underlying-sets"
+  "lem-weil-pbc-sheaf-algebraic-structures-abelian-component",
+  "lem-weil-pbc-sheaf-algebraic-structures-ring-component"
  ],
  "proof_origin": {
   "by": "document",
@@ -206,5 +170,15 @@
   "group": "F1",
   "result": "pass",
   "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P1",
+  "result": "pass",
+  "landing": "20261012T044750-L-2038003",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

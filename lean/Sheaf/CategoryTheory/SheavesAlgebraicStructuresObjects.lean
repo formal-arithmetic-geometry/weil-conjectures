@@ -11,6 +11,8 @@ public import Mathlib.CategoryTheory.Monoidal.CommGrp_
 public import Mathlib.CategoryTheory.Monoidal.Ring
 public import Mathlib.Algebra.Category.Grp.Limits
 public import Mathlib.Algebra.Category.Ring.Limits
+import Sheaf.CategoryTheory.SheavesAlgebraicStructuresAbelian
+import Sheaf.CategoryTheory.SheavesAlgebraicStructuresRing
 
 /-!
 # Algebraic sheaves as internal algebraic objects
@@ -130,6 +132,16 @@ theorem sheaves_algebraicStructures_objects
               ((eqToIso hF).hom.app A ≫ α ≫ (eqToIso hF).inv.app B) =
             ((eqToIso hF).hom.app A ≫ α ≫ (eqToIso hF).inv.app B) ≫
               AddGrpObj.neg (X := (F.obj B).X))) := by
-  sorry
+  refine ⟨⟨inferInstance⟩, ?_, ?_, ?_, ?_⟩
+  · intro F G U
+    rfl
+  · intro U
+    constructor
+    · change Subsingleton PUnit
+      infer_instance
+    · change Nonempty PUnit
+      exact ⟨PUnit.unit⟩
+  · exact sheavesAlgebraicStructuresAbelian J
+  · exact sheavesAlgebraicStructuresRing J
 
 end CategoryTheory

@@ -1,0 +1,98 @@
+{
+ "id": "lem-weil-pbc-sheaf-algebraic-structures-abelian-component",
+ "blueprint": {
+  "is": null,
+  "from": "lem-weil-pbc-sheaf-algebraic-structures-objects",
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "SheavesAlgebraicStructuresAbelian intermediate component",
+ "statement": "    (∃ (F : Sheaf J AddCommGrpCat.{max u v w} ⥤ CommGrp (Sheaf J (Type (max u v w))))\n        (G : CommGrp (Sheaf J (Type (max u v w))) ⥤ Sheaf J AddCommGrpCat.{max u v w})\n        (hF : F ⋙ CommGrp.forget _ = sheafCompose J (forget AddCommGrpCat.{max u v w})),\n      G ⋙ sheafCompose J (forget AddCommGrpCat.{max u v w}) = CommGrp.forget _ ∧\n      F ⋙ G = 𝟭 (Sheaf J AddCommGrpCat.{max u v w}) ∧\n      G ⋙ F = 𝟭 (CommGrp (Sheaf J (Type (max u v w)))) ∧\n      (∀ (A : Sheaf J AddCommGrpCat.{max u v w}) (U : Cᵒᵖ),\n        (∀ a b : (F.obj A).X.obj.obj U,\n          ((eqToIso hF).hom.app A).hom.app U ((MonObj.mul (X := (F.obj A).X)).hom.app U (a, b)) =\n            (show A.obj.obj U from ((eqToIso hF).hom.app A).hom.app U a) +\n              (show A.obj.obj U from ((eqToIso hF).hom.app A).hom.app U b)) ∧\n        (∀ t : (𝟙_ (Sheaf J (Type (max u v w)))).obj.obj U,\n          ((eqToIso hF).hom.app A).hom.app U ((MonObj.one (X := (F.obj A).X)).hom.app U t) =\n            (0 : A.obj.obj U)) ∧\n        (∀ a : (F.obj A).X.obj.obj U,\n          ((eqToIso hF).hom.app A).hom.app U ((GrpObj.inv (X := (F.obj A).X)).hom.app U a) =\n            -(show A.obj.obj U from ((eqToIso hF).hom.app A).hom.app U a))) ∧\n      (∀ (A B : Sheaf J AddCommGrpCat.{max u v w})\n          (α : (sheafCompose J (forget AddCommGrpCat.{max u v w})).obj A ⟶\n            (sheafCompose J (forget AddCommGrpCat.{max u v w})).obj B),\n        (∃ f : A ⟶ B, (sheafCompose J (forget AddCommGrpCat.{max u v w})).map f = α) ↔\n          IsMonHom (show (F.obj A).X ⟶ (F.obj B).X from\n            (eqToIso hF).hom.app A ≫ α ≫ (eqToIso hF).inv.app B) ∧\n          GrpObj.inv (X := (F.obj A).X) ≫\n              ((eqToIso hF).hom.app A ≫ α ≫ (eqToIso hF).inv.app B) =\n            ((eqToIso hF).hom.app A ≫ α ≫ (eqToIso hF).inv.app B) ≫\n              GrpObj.inv (X := (F.obj B).X)))",
+ "source": {
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Section 00YR and Proposition 00YV"
+ },
+ "stmt_deps": [
+  "lem-weil-pbc-sheaf-algebraic-structures-objects"
+ ],
+ "proof": [
+  {
+   "text": "Construct the sectionwise algebraic-object functor and inverse, then verify strict inverse and morphism criteria by evaluating on sections.",
+   "uses": [
+    "lem-weil-pbc-sheaf-algebraic-structures-objects"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-sheaf-algebraic-structures-objects"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Section 00YR"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "LeanSearch",
+   "query": "sheaf algebraic object equivalence",
+   "results": "no exact match",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "Loogle",
+   "query": "CommGrp Sheaf",
+   "results": "no exact match",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "CommGrp (Sheaf",
+   "results": "no exact match",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.SheavesAlgebraicStructuresObjects",
+  "date": "2026-10-12",
+  "group": "P1"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-def-exchange",
+ "lean": {
+  "module": "Sheaf.CategoryTheory.SheavesAlgebraicStructuresAbelian",
+  "declaration": "CategoryTheory.sheavesAlgebraicStructuresAbelian",
+  "file": "lean/Sheaf/CategoryTheory/SheavesAlgebraicStructuresAbelian.lean",
+  "statement": "theorem sheavesAlgebraicStructuresAbelian {C : Type u} [Category.{v} C] (J : GrothendieckTopology C) : (∃ (F : Sheaf J AddCommGrpCat.{max u v w} ⥤ CommGrp (Sheaf J (Type (max u v w)))) (G : CommGrp (Sheaf J (Type (max u v w))) ⥤ Sheaf J AddCommGrpCat.{max u v w}) (hF : F ⋙ CommGrp.forget _ = sheafCompose J (forget AddCommGrpCat.{max u v w})), G ⋙ sheafCompose J (forget AddCommGrpCat.{max u v w}) = CommGrp.forget _ ∧ F ⋙ G = 𝟭 (Sheaf J AddCommGrpCat.{max u v w}) ∧ G ⋙ F = 𝟭 (CommGrp (Sheaf J (Type (max u v w)))) ∧ (∀ (A : Sheaf J AddCommGrpCat.{max u v w}) (U : Cᵒᵖ), (∀ a b : (F.obj A).X.obj.obj U, ((eqToIso hF).hom.app A).hom.app U ((MonObj.mul (X := (F.obj A).X)).hom.app U (a, b)) = (show A.obj.obj U from ((eqToIso hF).hom.app A).hom.app U a) + (show A.obj.obj U from ((eqToIso hF).hom.app A).hom.app U b)) ∧ (∀ t : (𝟙_ (Sheaf J (Type (max u v w)))).obj.obj U, ((eqToIso hF).hom.app A).hom.app U ((MonObj.one (X := (F.obj A).X)).hom.app U t) = (0 : A.obj.obj U)) ∧ (∀ a : (F.obj A).X.obj.obj U, ((eqToIso hF).hom.app A).hom.app U ((GrpObj.inv (X := (F.obj A).X)).hom.app U a) = -(show A.obj.obj U from ((eqToIso hF).hom.app A).hom.app U a))) ∧ (∀ (A B : Sheaf J AddCommGrpCat.{max u v w}) (α : (sheafCompose J (forget AddCommGrpCat.{max u v w})).obj A ⟶ (sheafCompose J (forget AddCommGrpCat.{max u v w})).obj B), (∃ f : A ⟶ B, (sheafCompose J (forget AddCommGrpCat.{max u v w})).map f = α) ↔ IsMonHom (show (F.obj A).X ⟶ (F.obj B).X from (eqToIso hF).hom.app A ≫ α ≫ (eqToIso hF).inv.app B) ∧ GrpObj.inv (X := (F.obj A).X) ≫ ((eqToIso hF).hom.app A ≫ α ≫ (eqToIso hF).inv.app B) = ((eqToIso hF).hom.app A ≫ α ≫ (eqToIso hF).inv.app B) ≫ GrpObj.inv (X := (F.obj B).X)))",
+  "branch": "sheaf-dag",
+  "by": "P1",
+  "date": "2026-10-12",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P1",
+  "result": "pass",
+  "landing": "20261012T044750-L-2038003",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P1",
+  "result": "pass",
+  "landing": "20261012T044750-L-2038003",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
