@@ -6530,3 +6530,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 06:35 L: merged deliver/U2/WeilConjectures.SixFunctors.Etale.SmoothBaseChange.FailureOverField.Survival (stage 3; reviewer PASS; first push; landing 20261012T063523-L-3161106 (interface); batch 20261012T063502; modules 6; new nodes 5)
 - 06:35 L: merged deliver/V1/Sheaf.AlgebraicGeometry.DescendClosedImmersion (stage 3; reviewer PASS; first push; landing 20261012T063523-L-3161286 (interface); batch 20261012T063502; modules 2; new nodes 1)
 - 06:35 L: merged deliver/V1/Sheaf.AlgebraicGeometry.GabberFiniteConstantTorsorsTrivial (stage 3; reviewer PASS; first push; landing 20261012T063523-L-3161432 (proof); batch 20261012T063502; modules 1; new nodes 0)
+- 06:35 L: merged deliver/V1/Sheaf.AlgebraicGeometry.GabberH1TorsorCohomologyBridge (stage 3; reviewer PASS; first push; landing 20261012T063524-L-3161588 (proof); batch 20261012T063502; modules 1; new nodes 0)

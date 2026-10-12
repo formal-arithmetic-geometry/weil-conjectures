@@ -11,6 +11,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 public import Mathlib.CategoryTheory.Sites.ConstantSheaf
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
 public import WeilConjectures.CategoryTheory.Sites.Torsor
+import Sheaf.AlgebraicGeometry.EtaleSheafHExtDerivedComparison
 
 @[expose] public section
 
@@ -45,6 +46,11 @@ theorem isZero_constant_cohomology_one_of_torsors_trivial
       ((DerivedCategory.singleFunctor (Sheaf Z.smallEtaleTopology AddCommGrpCat.{u + 1}) 0).obj
         ((constantSheaf Z.smallEtaleTopology AddCommGrpCat.{u + 1}).obj
           (AddCommGrpCat.of M)))) := by
-  sorry
+  let F := (constantSheaf Z.smallEtaleTopology AddCommGrpCat.{u + 1}).obj
+    (AddCommGrpCat.of M)
+  have hH : Subsingleton (Sheaf.H.{u + 1} F 1) :=
+    (Sheaf.subsingleton_H_one_iff terminalIsTerminal F).mpr h
+  obtain ⟨e⟩ := Scheme.nonempty_sheafH_extDerivedIso Z 1
+  exact (AddCommGrpCat.isZero_iff_subsingleton.mpr hH).of_iso (e.app F).symm
 
 end AlgebraicGeometry.Etale
