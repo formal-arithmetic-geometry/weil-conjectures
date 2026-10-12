@@ -1,0 +1,107 @@
+{
+ "id": "lem-weil-pbc-formally-smooth-at-prime-field-extension-descent-cotangent-conditions",
+ "kind": "statement",
+ "title": "Localized cotangent conditions descend along a field extension",
+ "statement": "Under the hypotheses of the field-extension descent lemma, the localized Kähler differentials at the contracted prime are projective and the localized first cotangent homology is subsingleton.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Lemma 00TG, faithful-flat descent of cotangent conditions"
+ },
+ "proof": [
+  {
+   "text": "Use flat base change for cotangent homology and Kähler differentials, then faithful-flat descent after localization.",
+   "uses": [
+    "lem-weil-pbc-h1-cotangent-flat-base-change",
+    "lem-weil-pbc-kahler-differentials-base-change",
+    "lem-weil-pbc-finite-projective-descends-flat-local"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-h1-cotangent-flat-base-change",
+  "lem-weil-pbc-kahler-differentials-base-change",
+  "lem-weil-pbc-finite-projective-descends-flat-local"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Lemma 00TG"
+ },
+ "status": "split",
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.SmoothAtPrimeFieldExtensionDescentAux",
+  "date": "2026-10-13",
+  "group": "Q2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": "lem-weil-pbc-formally-smooth-at-prime-field-extension-descent"
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.SmoothAtPrimeFieldExtensionDescentAux",
+  "file": "lean/Sheaf/RingTheory/SmoothAtPrimeFieldExtensionDescentAux.lean",
+  "declaration": "Algebra.fieldExtension_cotangent_conditions",
+  "statement": "theorem fieldExtension_cotangent_conditions\n    {k : Type u} {K : Type v} {S : Type w}\n    [Field k] [Field K] [Algebra k K] [CommRing S] [Algebra k S] [FiniteType k S]\n    (qK : PrimeSpectrum (K ⊗[k] S)) (hsmooth : IsSmoothAtPrime K qK) :\n    Module.Projective (Localization.AtPrime\n      (PrimeSpectrum.comap\n        (TensorProduct.includeRight : S →ₐ[k] K ⊗[k] S).toRingHom qK).asIdeal)\n      (KaehlerDifferential k (Localization.AtPrime\n        (PrimeSpectrum.comap\n          (TensorProduct.includeRight : S →ₐ[k] K ⊗[k] S).toRingHom qK).asIdeal)) ∧\n      Subsingleton (H1Cotangent k (Localization.AtPrime\n        (PrimeSpectrum.comap\n          (TensorProduct.includeRight : S →ₐ[k] K ⊗[k] S).toRingHom qK).asIdeal))",
+  "branch": "sheaf-dag",
+  "by": "Q2",
+  "date": "2026-10-13"
+ },
+ "stmt_deps": [
+  "lem-weil-pbc-field-extension-base-change-faithfully-flat"
+ ],
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "faithfully flat descent projective Kaehler differentials H1Cotangent localization",
+   "results": "No direct theorem; only base-change declarations.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "localized cotangent homology faithful flat descent",
+   "results": "No direct theorem found.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.Projective ?A (KaehlerDifferential ?R ?A)",
+   "results": "Generic projectivity lemmas only.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "faithfully flat cotangent projective descent",
+   "results": "No direct theorem in Mathlib or Sheaf.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  }
+ ],
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q2",
+  "result": "pass",
+  "landing": "20261012T220524-L-1394854",
+  "kind": "proof",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q2",
+  "result": "pass",
+  "landing": "20261012T220524-L-1394854",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
