@@ -29,41 +29,50 @@
  ],
  "proof": [
   {
-   "text": "The page region gives $p\\geq0$ and $q\\geq a$; on $p+q=n$ these inequalities\ngive the finite interval $a\\leq q\\leq n$, so each total degree contains\nfinitely many entries. For an entry $(p,q)$, the incoming differentials at\npage $r$ are\n\n$$\n  d_r:E_r^{p-r,q+r-1}\\longrightarrow E_r^{p,q},\n$$\n\nwhose source has first index $p-r<0$, hence vanishes when $r>p$; the outgoing\ndifferentials are\n\n$$\n  d_r:E_r^{p,q}\\longrightarrow E_r^{p+r,q-r+1},\n$$\n\nwhose target has second index $q-r+1<a$, hence vanishes when $r>q-a+1$. The\ndegrees are those of [def-sp-exact-couple]. For $r>\\max(q-a+1,p)$, taking\npage cohomology identifies the two successive entries. The recursive\nsubobjects of [def-sp-convergence] therefore stabilize, giving regularity.\nFor completeness,\n\n$$\n \\operatorname{im}(\\alpha^r)^{p,q}\n =\\operatorname{im}\\bigl(\\alpha^r:D^{p+r,q-r}\\to D^{p,q}\\bigr)=0\n$$\n\nfor $r>q-a$, by the stated hypothesis on $D$. Exactness of the original\ncouple shows that $\\alpha:D^{n-q+1,q-1}\\to D^{n-q,q}$ is an isomorphism for\n$q>n$: both adjacent $E_2$-terms have negative first index. Thus $A^n$ is the\nstable value of this system. Its image filtration has $G_q=0$ for $q<a$ and\n$G_q=A^n$ for $q\\geq n$.",
+   "text": "Induct on pages: a zero E entry has zero kernel and subsequent cokernel. The half-plane region persists. If r+2 exceeds both bounds, the incoming source and outgoing target vanish. The kernel inclusion and cokernel projection are isomorphisms; their composite gives the canonical stabilization. The cycle and boundary recurrences are then stationary. Monotonicity makes the stationary values their greatest lower and least upper bounds, constructing L and proving regularity.",
    "uses": [
     "def-sp-exact-couple",
-    "def-sp-convergence",
-    "lem-sp-derived-couple-exact"
+    "def-sp-convergence"
    ],
    "elementary": false
   },
   {
-   "text": "For the associated graded, fix $(p,q)$ with $p\\geq0$ and choose $r$ so large that\n$r>\\max(q-a+1,p)$ and $u:=p-r+2\\leq0$. Put $v:=q+r-2$, so $u+v=p+q$. By\n[lem-sp-derived-couple-exact], $D_r^{u,v}=\\operatorname{im}(D^{p,q}\\xrightarrow{\\alpha^{r-2}}D^{u,v})$.\nExactness of the iterated couple identifies this image, via the isomorphism\n$\\alpha^{-u}:D^{0,p+q}=A^{p+q}\\xrightarrow{\\sim}D^{u,v}$ from Step 1, with\n$G_qA^{p+q}=\\operatorname{im}(D^{p,q}\\to A^{p+q})$. Likewise the image of\n$\\alpha_r:D_r^{u+1,v-1}\\to D_r^{u,v}$ corresponds to\n$G_{q-1}A^{p+q}$. The next term in the exact sequence is\n$D_r^{p+2,q-1}=\\operatorname{im}(D^{p+r,q-r+1}\\to D^{p+2,q-1})$, which is zero\nbecause $q-r+1<a$. Hence exactness gives a short exact sequence\n$D_r^{u+1,v-1}\\xrightarrow{\\alpha_r}D_r^{u,v}\\xrightarrow{g_r}E_r^{p,q}\\to0$,\nso $E_r^{p,q}\\cong G_qA^{p+q}/G_{q-1}A^{p+q}$. This isomorphism is the canonical one: iterating the defining property $g'\\circ\\bar\\alpha=\\pi\\circ\\hat g$ of [lem-sp-derived-couple-exact] gives $g_r(\\alpha^{r-2}y)=\\overline{g(y)}$ for $y\\in D^{p,q}$, so the maps $D^{p,q}\\to E_\\infty^{p,q}=E_r^{p,q}$ (Step 1: $Z$ and $B$ are constant from page $r$ on) and $D^{p,q}\\to\\operatorname{gr}^pA^{p+q}$ of [def-sp-convergence] are both onto with the same kernel. The filtration is finite ($F^pA^n=A^n$ for $p\\leq0$, $F^pA^n=0$ for $p>n-a$), hence exhaustive, separated and complete. For $p<0$, both sides are\nzero by the half-plane hypothesis. This is the asserted associated graded of\n[def-sp-filtration], and proves convergence in the sense of\n[def-sp-convergence].",
+   "text": "Use normalized diagonal colimits. Their nonpositive maps are isomorphisms, so the image filtration is top there. For p>n-a the cocone source D^{p,n-p} is zero, so the filtration step is bottom. These two steps prove finiteness, exhaustivity and separatedness. For completeness of the couple, an incoming iterate whose source second index lies below a has zero image, so every common lower bound is bottom.",
    "uses": [
-    "def-sp-filtration",
+    "lem-sp-half-plane-diagonal-colimits",
     "def-sp-convergence",
-    "lem-sp-derived-couple-exact"
+    "def-sp-filtration"
    ],
    "elementary": false
   },
   {
-   "text": "(Stacks Project: Tag\n[011T](https://stacks.math.columbia.edu/tag/011T) ($Z_r$, $B_r$ and the rule\nfor $d_{r+1}$ of an exact couple); compare Tag\n[012F](https://stacks.math.columbia.edu/tag/012F) ($E_\\infty$ and the\nassociated graded of the cohomology).)",
+   "text": "Apply canonical weak convergence to L and the normalized colimits. The weakConvergence_comparison theorem of def-sp-convergence yields the associated-graded isomorphisms commuting with the two specified maps. Combined with regularity, separatedness and exhaustivity this proves abutting.",
    "uses": [
-    "lem-sp-derived-couple-exact"
+    "lem-sp-half-plane-weak-convergence",
+    "def-sp-convergence"
    ],
-   "elementary": true
+   "elementary": false
+  },
+  {
+   "text": "For inverse-limit completeness, use a zero filtration step m. All later steps are zero, so their cokernel projections are isomorphisms. Given a compatible quotient cone f, define h as f_m followed by the inverse projection. Integer induction upwards cancels invertible quotient transitions; downwards uses cone compatibility. Uniqueness follows by cancelling the projection at m. This proves convergence.",
+   "uses": [
+    "def-sp-convergence",
+    "def-sp-filtration"
+   ],
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "def-sp-exact-couple",
   "def-sp-convergence",
+  "def-sp-exact-couple",
   "def-sp-filtration",
-  "lem-sp-derived-couple-exact"
+  "lem-sp-half-plane-diagonal-colimits",
+  "lem-sp-half-plane-weak-convergence"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-abelian-varieties/sk-prop-av-pqf-finite/thm-sp-half-plane-convergence.md",
-  "place": "## Proof"
+  "place": "Proof paragraphs 1–2, direct Lean recursion and two isolated subarguments"
  },
  "mathlib_searches": [
   {
@@ -165,5 +174,15 @@
   "group": "E1",
   "result": "pass",
   "note": "hD/hE = D^{p,q}=0 for q<a and E_2 vanishing off p>=0,q>=a; A^n=D^{0,n} pinned by iota_0=id so iota_p=alpha^p and imageFiltration step = G_{n-p}, step=top for p<=0; a<=q<=n on all pages; stabilization at R=r+2>max(q-a+1,p) with canonical iso via kernel.iota/derivedEProjection (d_r bidegree (R,1-R), dInto source (p-R,q+R-1)); finite/exhaustive/separated; canonical E_inf=gr^p via toPageInfinity/toGradedPiece; IsComplete and ConvergesTo (includes IsRegular); all clauses true; no Mathlib exact couples"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H1",
+  "result": "pass",
+  "landing": "20261012T095906-L-317805",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

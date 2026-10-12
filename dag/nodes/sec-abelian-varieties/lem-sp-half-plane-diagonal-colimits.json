@@ -1,0 +1,120 @@
+{
+ "id": "lem-sp-half-plane-diagonal-colimits",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sp-half-plane-convergence",
+   "place": "proof paragraph 1: alpha is invertible at nonpositive first index and the stable diagonal is D^{0,n}",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Normalized diagonal colimits",
+ "statement": "Let $C$ be an abelian category and $X$ a type-zero bigraded exact couple\n[def-sp-exact-couple]. Assume $E^{p,q}=0$ whenever $p<0$. There is a family of\nalpha diagonal colimits $A^n$ [def-sp-convergence], with underlying objects\n$A^n=D^{0,n}$ and zeroth cocone maps the identity after the index transport.\nFor every $p\\leq0$, the cocone map $D^{p,n-p}\\to A^n$ is an isomorphism.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-abelian-varieties/sk-prop-av-pqf-finite/thm-sp-half-plane-convergence.md",
+  "place": "proof paragraph 1: alpha is invertible at nonpositive first index and the stable diagonal is D^{0,n}"
+ },
+ "stmt_deps": [
+  "def-sp-exact-couple",
+  "def-sp-convergence"
+ ],
+ "proof": [
+  {
+   "text": "At first index p≤0, the f source at p-2 and g target at p-1 vanish. Exactness gives kernel(alpha)=bottom and image(alpha)=top, hence alpha is mono and its full image makes it an isomorphism.",
+   "uses": [
+    "def-sp-exact-couple"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For each diagonal Y(p)=D^{p,n-p}, write t(p):Y(p+1)→Y(p). At zero use the identity. Integer recursion defines iota(p+1)=t(p) composed with iota(p) for p≥0, and iota(p-1)=inverse of the transported t(p-1) composed with iota(p) for p≤0. The recursion equations and invertibility prove the cocone equation at every integer. For a cocone f to T, integer induction proves iota(p) composed with f(0)=f(p): use the cocone equation in the upward step and cancel invertible transitions in the downward step. Thus f(0) is the unique factorization, since iota(0) is identity. Transport the colimit object from Y(0) to the literal object D^{0,n}, obtaining the normalized colimit. A further integer induction proves all nonpositive iota maps are isomorphisms.",
+   "uses": [
+    "def-sp-convergence"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sp-exact-couple",
+  "def-sp-convergence"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-abelian-varieties/sk-prop-av-pqf-finite/thm-sp-half-plane-convergence.md",
+  "place": "Proof paragraph 1, implemented by integer recursion with its universal property proved by integer induction"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "AlphaColimit|alphaDiagonal",
+   "results": "No hits",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "exact couple alpha diagonal colimit is the zeroth term when negative first index E terms vanish",
+   "results": "ChainComplex.exactAt_succ_single_obj; CochainComplex.exactAt_succ_single_obj; HomologicalComplex.extend.rightHomologyData.d_comp_desc_eq_zero_iff'; CategoryTheory.Limits.colim.exact_mapShortComplex; HomologicalComplex.exactAt_single_obj; HomologicalComplex.coconeOfHasColimitEval_pt_d; CochainComplex.mappingCone.inl_v_descShortComplex_f; CochainComplex.exactAt_of_isLE",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "exact couple alpha diagonal colimit is the zeroth term when negative first index E terms vanish",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.HalfPlaneConvergence",
+  "date": "2026-10-12",
+  "group": "H1"
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-pqf-finite",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.HalfPlaneDiagonalColimits",
+  "file": "lean/Sheaf/CategoryTheory/HalfPlaneDiagonalColimits.lean",
+  "declaration": "CategoryTheory.BigradedExactCouple.halfPlane_diagonal_colimits",
+  "statement": "theorem halfPlane_diagonal_colimits (X : BigradedExactCouple C 0) (hE : ∀ p q : ℤ, p < 0 → IsZero (X.E p q)) : ∃ A : ∀ n : ℤ, AlphaColimit X n, ∃ hA : ∀ n : ℤ, (A n).obj = X.D 0 n, (∀ n : ℤ, (A n).ι 0 ≫ eqToHom (hA n) = eqToHom (by congr 1; omega)) ∧ (∀ n p : ℤ, p ≤ 0 → IsIso ((A n).ι p))",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-12",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H1",
+  "result": "pass",
+  "landing": "20261012T095906-L-317805",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H1",
+  "result": "pass",
+  "landing": "20261012T095906-L-317805",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
