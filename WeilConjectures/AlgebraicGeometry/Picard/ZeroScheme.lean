@@ -58,13 +58,17 @@ The structure morphism `X ⟶ Spec k` is carried as an `AlgebraicGeometry.Scheme
 and written `X ↘ Spec (.of k)`, as in `WeilConjectures/AlgebraicGeometry/Curve/RiemannRoch`,
 because `AlgebraicGeometry.Scheme.arithmeticGenus` needs that instance.
 
-The instance hypothesis `∀ T, HasInjectiveResolutions (X ×[k] T).Modules` is the one nothing
-can discharge yet; see `AlgebraicGeometry.Scheme.Modules.isGrothendieckAbelian`.
+The instance hypothesis `∀ T, HasInjectiveResolutions (X ×[k] T).Modules` always holds, since
+the category of `𝒪`-modules on a scheme is Grothendieck abelian
+(`AlgebraicGeometry.Scheme.Modules.isGrothendieckAbelian`); it is discharged in this way in
+`WeilConjectures/AlgebraicGeometry/Picard/Scheme.lean`.
 
 ## Main definitions
 
 - `AlgebraicGeometry.Scheme.Pic.directImageCounit`: the adjunction morphism
   `f_T^* f_{T,*} ℒ ⟶ ℒ`.
+- `AlgebraicGeometry.invertibleDirectImageToHilbert`: the zero-scheme dictionary
+  `F ⟶ Hilb^g_{X/k}`, `ℒ ↦ Z(φ_ℒ)`.
 
 ## Main statements
 
@@ -79,14 +83,16 @@ can discharge yet; see `AlgebraicGeometry.Scheme.Modules.isGrothendieckAbelian`.
   dictionary (blueprint `sk-lem-picard-zero-dictionary`).
 - `AlgebraicGeometry.comap_zeroLocus_directImageCounit`: the dictionary is natural in `T`.
 - `AlgebraicGeometry.eq_of_zeroLocus_directImageCounit_eq`: the dictionary is injective.
-- `AlgebraicGeometry.exists_injective_natTrans_hilbertPresheaf`: `F` is a subfunctor of the
+- `AlgebraicGeometry.injective_invertibleDirectImageToHilbert_app`: `F` is a subfunctor of the
   Hilbert functor (blueprint
   `sk-the-subsheaf-ff-and-its-representability--remark-1`).
 - `AlgebraicGeometry.zeroLocus_directImageCounit_eq_of_iso`: for `ℒ ≅ 𝒪(D) ⊗ f_T^* 𝒩` in `F(T)`
   the dictionary returns `D` (blueprint `lem-pc-universal-adjoint-section`).
 - `AlgebraicGeometry.isRepresentable_picardFunctorInvertibleDirectImage`: `F` is representable
   by an open subscheme of `Hilb^g_{X/k}` (blueprint `sk-thm-picard-f-representable`,
-  `thm-pc-f-representable`).
+  `thm-pc-f-representable`);
+  `AlgebraicGeometry.exists_representableBy_invertibleDirectImageToHilbert`
+  adds that the representation is compatible with the zero-scheme dictionary.
 -/
 
 @[expose] public section
@@ -673,6 +679,58 @@ theorem zeroLocus_directImageCounit_eq_of_iso
   rw [ht, hs₁] at hle
   exact (hD.eq_of_le (isInvertible_zeroLocus_directImageCounit σ hσ T ℒ).2 hle).symm
 
+/-- **The zero-scheme dictionary `F ⟶ Hilb^g_{X/k}`.** The natural transformation sending a
+class `ℒ ∈ F(T)` to the zero scheme `Z(φ_ℒ) ∈ Hilb^g_{X/k}(T)` of its adjunction morphism
+`φ_ℒ : f_T^* f_{T,*} ℒ ⟶ ℒ` (`AlgebraicGeometry.Scheme.Pic.directImageCounit`), i.e. of the
+section adjoint to `Rf_{T,*} ℒ ≅ 𝒩[0]`
+(`AlgebraicGeometry.isInvertible_zeroLocus_directImageCounit`). It is natural by
+`AlgebraicGeometry.comap_zeroLocus_directImageCounit`, and injective
+(`AlgebraicGeometry.injective_invertibleDirectImageToHilbert_app`).
+
+`F` takes values in `Type (u + 1)` and `Hilb^g_{X/k}` in `Type u`, so the target is composed
+with the fully faithful `CategoryTheory.uliftFunctor.{u + 1, u}`.
+
+(blueprint: `sk-the-subsheaf-ff-and-its-representability--remark-1`,
+`the-subsheaf-ff-and-its-representability--remark-1`) -/
+noncomputable def invertibleDirectImageToHilbert
+    (σ : Spec (.of k) ⟶ X) (hσ : σ ≫ X ↘ Spec (.of k) = 𝟙 (Spec (.of k)))
+    [∀ T : Over (Spec (.of k)),
+      HasInjectiveResolutions (Limits.pullback (X ↘ Spec (.of k)) T.hom).Modules] :
+    (picardFunctorInvertibleDirectImage (X ↘ Spec (.of k)) σ hσ).toFunctor ⟶
+      hilbertPresheaf (X ↘ Spec (.of k)) (arithmeticGenus k X) ⋙ uliftFunctor.{u + 1, u} where
+  app T := TypeCat.ofHom fun ℒ ↦ ULift.up
+    ⟨_, (isInvertible_zeroLocus_directImageCounit σ hσ T.unop ℒ).2⟩
+  naturality T T' i := by
+    ext ℒ
+    exact ULift.ext _ _ (Subtype.ext (comap_zeroLocus_directImageCounit σ hσ i.unop ℒ).symm)
+
+/-- The point of `Hilb^g_{X/k}(T)` attached to `ℒ ∈ F(T)` by the zero-scheme dictionary is the
+zero scheme of the adjunction morphism of `ℒ`. -/
+@[simp]
+lemma invertibleDirectImageToHilbert_app_down_val
+    (σ : Spec (.of k) ⟶ X) (hσ : σ ≫ X ↘ Spec (.of k) = 𝟙 (Spec (.of k)))
+    [∀ T : Over (Spec (.of k)),
+      HasInjectiveResolutions (Limits.pullback (X ↘ Spec (.of k)) T.hom).Modules]
+    (T : Over (Spec (.of k)))
+    (ℒ : (picardFunctorInvertibleDirectImage (X ↘ Spec (.of k)) σ hσ).toFunctor.obj (op T)) :
+    ((invertibleDirectImageToHilbert σ hσ).app (op T) ℒ).down.1 =
+      (Pic.directImageCounit (X ↘ Spec (.of k)) T ℒ.1.1).zeroLocus :=
+  rfl
+
+/-- **The zero-scheme dictionary is injective**: the components of
+`AlgebraicGeometry.invertibleDirectImageToHilbert` are injective
+(`AlgebraicGeometry.eq_of_zeroLocus_directImageCounit_eq`), so it exhibits `F` as a subfunctor
+of `Hilb^g_{X/k}`.
+
+(blueprint: `sk-the-subsheaf-ff-and-its-representability--remark-1`) -/
+theorem injective_invertibleDirectImageToHilbert_app
+    (σ : Spec (.of k) ⟶ X) (hσ : σ ≫ X ↘ Spec (.of k) = 𝟙 (Spec (.of k)))
+    [∀ T : Over (Spec (.of k)),
+      HasInjectiveResolutions (Limits.pullback (X ↘ Spec (.of k)) T.hom).Modules]
+    (T : (Over (Spec (.of k)))ᵒᵖ) :
+    Function.Injective ((invertibleDirectImageToHilbert σ hσ).app T) := fun ℒ ℒ' h ↦
+  eq_of_zeroLocus_directImageCounit_eq σ hσ T.unop ℒ ℒ' congr($(congrArg ULift.down h).1)
+
 /-- **`F` is a subfunctor of the Hilbert functor.** The dictionary `ℒ ↦ D = Z(s)` of
 `AlgebraicGeometry.exists_isEffectiveCartierCenter_hilbertPresheaf` is natural in `T` and
 injective, so it exhibits `F` as a subfunctor of `Hilb^g_{X/k}`; the inverse on the image is
@@ -697,15 +755,8 @@ theorem exists_injective_natTrans_hilbertPresheaf [IsSepClosed k]
       HasInjectiveResolutions (Limits.pullback (X ↘ Spec (.of k)) T.hom).Modules] :
     ∃ Φ : (picardFunctorInvertibleDirectImage (X ↘ Spec (.of k)) σ hσ).toFunctor ⟶
       hilbertPresheaf (X ↘ Spec (.of k)) (arithmeticGenus k X) ⋙ uliftFunctor.{u + 1, u},
-      ∀ T, Function.Injective (Φ.app T) := by
-  refine ⟨{
-    app T := TypeCat.ofHom fun ℒ ↦ ULift.up
-      ⟨_, (isInvertible_zeroLocus_directImageCounit σ hσ T.unop ℒ).2⟩
-    naturality T T' i := ?_ }, fun T ℒ ℒ' h ↦ ?_⟩
-  · ext ℒ
-    exact ULift.ext _ _ (Subtype.ext (comap_zeroLocus_directImageCounit σ hσ i.unop ℒ).symm)
-  · exact eq_of_zeroLocus_directImageCounit_eq σ hσ T.unop ℒ ℒ'
-      congr($(congrArg ULift.down h).1)
+      ∀ T, Function.Injective (Φ.app T) :=
+  ⟨_, injective_invertibleDirectImageToHilbert_app σ hσ⟩
 
 /-- **`F` is representable** by an open subscheme of `Hilb^g_{X/k}`: given a `k`-scheme `H`
 representing `Hilb^g_{X/k}`, there are a scheme `W` and an open immersion `j : W ⟶ H` such that
@@ -721,16 +772,25 @@ by the classifying map of `Hilb^g_{X/k}`: one composite is the identity by
 `m^* ℒ_H` are both of the form `𝒪(D) ⊗ f_T^* 𝒩` and normalized
 (`AlgebraicGeometry.picardFunctorNormalized_eq_of_iso_tensorObj`).
 
-(blueprint: `sk-thm-picard-f-representable`, `thm-pc-f-representable`) -/
-theorem isRepresentable_picardFunctorInvertibleDirectImage [IsSepClosed k]
+The representation of `F` by `W` is compatible with the zero-scheme dictionary
+`Φ = AlgebraicGeometry.invertibleDirectImageToHilbert : F ⟶ Hilb^g_{X/k}`: for `a : T ⟶ W`,
+the class `R(a) ∈ F(T)` corresponding to `a` is sent by `Φ` to the point `e(j ∘ a)` of
+`Hilb^g_{X/k}(T)` corresponding to `j ∘ a : T ⟶ H`. That is, `W` represents `F` *through* `Φ`.
+
+(blueprint: `sk-thm-picard-f-representable`, `thm-pc-f-representable`,
+`sk-the-subsheaf-ff-and-its-representability--remark-1`) -/
+theorem exists_representableBy_invertibleDirectImageToHilbert [IsSepClosed k]
     (σ : Spec (.of k) ⟶ X) (hσ : σ ≫ X ↘ Spec (.of k) = 𝟙 (Spec (.of k)))
     [∀ T : Over (Spec (.of k)),
       HasInjectiveResolutions (Limits.pullback (X ↘ Spec (.of k)) T.hom).Modules]
     (H : Over (Spec (.of k)))
     (e : (hilbertPresheaf (X ↘ Spec (.of k)) (arithmeticGenus k X)).RepresentableBy H) :
-    ∃ (W : Scheme.{u}) (j : W ⟶ H.left), IsOpenImmersion j ∧
-      Nonempty ((picardFunctorInvertibleDirectImage (X ↘ Spec (.of k)) σ hσ).toFunctor
-        |>.RepresentableBy (Over.mk (j ≫ H.hom))) := by
+    ∃ (W : Scheme.{u}) (j : W ⟶ H.left) (_ : IsOpenImmersion j)
+      (R : (picardFunctorInvertibleDirectImage (X ↘ Spec (.of k)) σ hσ).toFunctor
+        |>.RepresentableBy (Over.mk (j ≫ H.hom))),
+      ∀ {T : Over (Spec (.of k))} (a : T ⟶ Over.mk (j ≫ H.hom)),
+        (invertibleDirectImageToHilbert σ hσ).app (op T) (R.homEquiv a) =
+          ULift.up (e.homEquiv (a ≫ Over.homMk j)) := by
   let G := (picardFunctorNormalized (X ↘ Spec (.of k)) σ hσ).toFunctor
   let F := picardFunctorInvertibleDirectImage (X ↘ Spec (.of k)) σ hσ
   -- The universal divisor `D_univ ⊆ X_H` and its pullbacks.
@@ -820,13 +880,13 @@ theorem isRepresentable_picardFunctorInvertibleDirectImage [IsSepClosed k]
       lift ℒ ≫ ι = e.homEquiv.symm (Φ ℒ) := by
     ext
     exact IsOpenImmersion.lift_fac _ _ _
-  refine ⟨U, U.ι, inferInstance, ⟨{
+  refine ⟨U, U.ι, inferInstance, {
     homEquiv {T} := {
       toFun b := ⟨G.map (b ≫ ι).op LH, hι b⟩
       invFun := lift
       left_inv b := ?_
       right_inv ℒ := ?_ }
-    homEquiv_comp c b := ?_ }⟩⟩
+    homEquiv_comp c b := ?_ }, fun a ↦ ?_⟩
   · rw [← cancel_mono ι]
     refine (hlift _).trans (e.homEquiv.symm_apply_eq.2 (Subtype.ext ?_))
     exact hA _ (hι b)
@@ -837,5 +897,25 @@ theorem isRepresentable_picardFunctorInvertibleDirectImage [IsSepClosed k]
     change G.map ((c ≫ b) ≫ ι).op LH = G.map c.op (G.map (b ≫ ι).op LH)
     rw [Category.assoc, op_comp, Functor.map_comp]
     rfl
+  · exact ULift.ext _ _ (Subtype.ext (hA _ (hι a)))
+
+/-- **`F` is representable** by an open subscheme of `Hilb^g_{X/k}`: given a `k`-scheme `H`
+representing `Hilb^g_{X/k}`, there are a scheme `W` and an open immersion `j : W ⟶ H` such that
+`W`, viewed as a `k`-scheme through `j`, represents `F`. See
+`AlgebraicGeometry.exists_representableBy_invertibleDirectImageToHilbert` for the compatibility
+of this representation with the zero-scheme dictionary `F ⟶ Hilb^g_{X/k}`.
+
+(blueprint: `sk-thm-picard-f-representable`, `thm-pc-f-representable`) -/
+theorem isRepresentable_picardFunctorInvertibleDirectImage [IsSepClosed k]
+    (σ : Spec (.of k) ⟶ X) (hσ : σ ≫ X ↘ Spec (.of k) = 𝟙 (Spec (.of k)))
+    [∀ T : Over (Spec (.of k)),
+      HasInjectiveResolutions (Limits.pullback (X ↘ Spec (.of k)) T.hom).Modules]
+    (H : Over (Spec (.of k)))
+    (e : (hilbertPresheaf (X ↘ Spec (.of k)) (arithmeticGenus k X)).RepresentableBy H) :
+    ∃ (W : Scheme.{u}) (j : W ⟶ H.left), IsOpenImmersion j ∧
+      Nonempty ((picardFunctorInvertibleDirectImage (X ↘ Spec (.of k)) σ hσ).toFunctor
+        |>.RepresentableBy (Over.mk (j ≫ H.hom))) :=
+  have ⟨W, j, hj, R, _⟩ := exists_representableBy_invertibleDirectImageToHilbert σ hσ H e
+  ⟨W, j, hj, ⟨R⟩⟩
 
 end AlgebraicGeometry
