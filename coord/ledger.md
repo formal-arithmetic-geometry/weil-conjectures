@@ -7081,3 +7081,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 08:53 L: merged deliver/U2/Sheaf.AlgebraicGeometry.DenseOpenComponentCoproduct (stage 3; reviewer PASS; first push; landing 20261012T085347-L-42915 (proof); batch 20261012T085205; modules 1; new nodes 0)
 - 08:53 L: merged deliver/U2/Sheaf.FieldTheory.PowerInBaseAfterLocalization (stage 3; reviewer PASS; first push; landing 20261012T085347-L-43011 (proof); batch 20261012T085205; modules 1; new nodes 0)
 - 08:53 L: merged deliver/U2/Sheaf.FieldTheory.SeparableSplitPurelyInseparableResidueFields (stage 3; reviewer PASS; first push; landing 20261012T085348-L-43106 (proof); batch 20261012T085205; modules 1; new nodes 0)
+- 08:53 L: merged deliver/U2/Sheaf.RingTheory.FiniteMapColimitDescent (stage 3; reviewer PASS; first push; landing 20261012T085348-L-43201 (interface); batch 20261012T085205; modules 2; new nodes 1)

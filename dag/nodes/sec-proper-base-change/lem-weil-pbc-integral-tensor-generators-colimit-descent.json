@@ -1,0 +1,134 @@
+{
+ "id": "lem-weil-pbc-integral-tensor-generators-colimit-descent",
+ "kind": "statement",
+ "title": "A finite family of integral tensor elements descends along a directed colimit",
+ "statement": "Let $I$ be a directed preorder, $(A_i)$ a directed system of commutative rings with colimit $A$ [def-weil-pbc-category-colimit], and $i_0\\in I$. Let $B_0,C_0$ be commutative $A_{i_0}$-algebras and $\\varphi_0:B_0\\to C_0$ an $A_{i_0}$-algebra map. Let $s\\subset C_0$ be finite. If for every $x\\in s$ the element $1\\otimes x$ of $A\\otimes_{A_{i_0}}C_0$ is integral over $A\\otimes_{A_{i_0}}B_0$ through $\\operatorname{id}_A\\otimes\\varphi_0$, then there exists $i\\ge i_0$ such that every $1\\otimes x$ with $x\\in s$ is integral over $A_i\\otimes_{A_{i_0}}B_0$ through $\\operatorname{id}_{A_i}\\otimes\\varphi_0$. All algebra structures are induced by the transition maps and the colimit coprojection. No finite-type or module-finiteness assumption is imposed.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 07RG, proof of Lemma 10.168.3, lifting monic polynomial coefficients and killing evaluations; checked at https://stacks.math.columbia.edu/tag/07RG"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-category-colimit"
+ ],
+ "proof": [
+  {
+   "text": "Restrict indices to the nonempty directed upper tail J = {i | i₀ ≤ i}. Equip each stage with its A₀-algebra structure. Tensor the transition maps and coprojections with the identity on B₀ and C₀. Functoriality and cocone naturality give compatibility; checking pure tensors proves commutation with φ₀ and preservation of 1 tensor x.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "For one x choose a monic polynomial p over A tensor B₀ annihilating 1 tensor x. Represent the finitely many coefficients of p below its natural degree at stages using part (1) of [lem-weil-pbc-directed-colimit-base-change-elementwise] for B₀. Mathlib Finset.exists_le supplies a common upper bound in J, and transition maps transport all coefficients there.",
+   "uses": [
+    "lem-weil-pbc-directed-colimit-base-change-elementwise"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Form q = X^p.natDegree plus the sum, indexed by Fin p.natDegree, of the lifted coefficient times X^k. Mathlib Polynomial.degree_sum_fin_lt and monic_X_pow_add show that q is monic, including degree zero and zero rings. Polynomial.Monic.as_sum and map compatibility show that q maps to p. Commutation of polynomial evaluation with ring homomorphisms makes the evaluation of q map to zero.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Apply part (2) of [lem-weil-pbc-directed-colimit-base-change-elementwise] for C₀ to this evaluation, giving a later stage where it is zero. Map q coefficientwise to that stage: Polynomial.Monic.map preserves monicity, and Polynomial.hom_eval₂ together with the commuting square shows that its evaluation is zero. This witnesses integrality of 1 tensor x at that stage.",
+   "uses": [
+    "lem-weil-pbc-directed-colimit-base-change-elementwise"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the previous argument to each x in the finite set s. Choose a common upper bound of the resulting indices in J with Finset.exists_le. RingHom.IsIntegralElem.map transports each witness there, and IsIntegralElem.of_comp discards the extra coefficient transition map. The transition maps fix 1 tensor x, giving simultaneous integrality. For empty s the upper tail is nonempty, so the same upper-bound argument applies.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-directed-colimit-base-change-elementwise"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 07RG, proof of Lemma 10.168.3, lifting monic polynomial coefficients and killing evaluations; checked at https://stacks.math.columbia.edu/tag/07RG; the finite coefficient and finite family bounds are written out by U2"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "An integral element at a filtered direct limit is integral at some stage",
+   "results": "Service unavailable: Internal Server Error; no result or verdict recorded.",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite family of elements integral after tensor base change to a directed colimit is integral at a common finite stage",
+   "results": "IsIntegral.tmul, Algebra.IsIntegral.tensorProduct, Algebra.IsPushout.isIntegral, RingHom.isIntegral_isStableUnderBaseChange; base-change preservation, not descent.",
+   "verdict": "no match",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "loogle",
+   "query": "RingHom.IsIntegralElem",
+   "results": "RingHom.IsIntegralElem.map and of_comp, plus map_iff and of_map. Used map and of_comp to transport witnesses; no complete descent theorem.",
+   "verdict": "partial match",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "grep",
+   "query": "adjoin_one_tmul_image_eq_top|exists.*integral.*colimit; rg monic_X_pow_add, degree_sum_fin_lt, hom_eval₂, Finset.exists_le in Mathlib",
+   "results": "No existing tensor integrality descent theorem. Polynomial.Monic.as_sum, Polynomial.monic_X_pow_add, Polynomial.degree_sum_fin_lt, Polynomial.hom_eval₂, Polynomial.eval₂_map and Finset.exists_le provide the coefficient and evaluation argument.",
+   "verdict": "partial match",
+   "date": "2026-10-12"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.FiniteMapColimitDescent",
+  "date": "2026-10-12",
+  "group": "U2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-colimit-finite-ring-map",
+   "place": "steps 3 and 4, monic equations lifted and killed at a stage",
+   "via": [
+    "lem-weil-pbc-colimit-finite-ring-map",
+    "lem-weil-pbc-descend-finite",
+    "lem-weil-pbc-finite-etale-lifting-approximation",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.IntegralElementsColimitDescent",
+  "file": "lean/Sheaf/RingTheory/IntegralElementsColimitDescent.lean",
+  "declaration": "RingHom.exists_integral_tensor_generators_of_colimit",
+  "statement": "theorem exists_integral_tensor_generators_of_colimit {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] (F : I ⥤ CommRingCat.{u}) [HasColimit F] (i₀ : I) (B₀ : Type v) (C₀ : Type t) [CommRing B₀] [CommRing C₀] [Algebra (F.obj i₀) B₀] [Algebra (F.obj i₀) C₀] (φ₀ : B₀ →ₐ[F.obj i₀] C₀) (s : Finset C₀) : letI : Algebra (F.obj i₀) (colimit F : CommRingCat.{u}) := (CommRingCat.Hom.hom (colimit.ι F i₀)).toAlgebra (∀ x ∈ s, (Algebra.TensorProduct.map (AlgHom.id (F.obj i₀) (colimit F : CommRingCat.{u})) φ₀).toRingHom.IsIntegralElem ((1 : (colimit F : CommRingCat.{u})) ⊗ₜ[F.obj i₀] x)) → ∃ (i : I) (h : i₀ ≤ i), letI : Algebra (F.obj i₀) (F.obj i) := (CommRingCat.Hom.hom (F.map (homOfLE h))).toAlgebra ∀ x ∈ s, (Algebra.TensorProduct.map (AlgHom.id (F.obj i₀) (F.obj i)) φ₀).toRingHom.IsIntegralElem ((1 : F.obj i) ⊗ₜ[F.obj i₀] x)",
+  "branch": "sheaf-dag",
+  "by": "U2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U2",
+  "result": "pass",
+  "landing": "20261012T085348-L-43201",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U2",
+  "result": "pass",
+  "landing": "20261012T085348-L-43201",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
