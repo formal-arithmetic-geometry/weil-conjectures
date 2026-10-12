@@ -3,6 +3,9 @@ module
 public import Sheaf.Paper.EtaleObjectCohomologyStalkComplex
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Etale
 
+import Sheaf.Paper.LocalStalkSectionsDescentEquality
+import Sheaf.Paper.LocalStalkSectionsDescentSections
+
 /-! # Degree-zero continuity for the specified inverse image -/
 
 @[expose] public section
@@ -42,4 +45,28 @@ theorem strictHenselian_stalkSections_comparison_iso
       (Spec (X.presheaf.stalk x)).smallEtaleTopology) :
     Nonempty (etaleObjectStalkSections X i x ≅
       H ⋙ (sheafSections (Spec (X.presheaf.stalk x)).smallEtaleTopology
-        AddCommGrpCat.{u + 1}).obj (op (Scheme.Etale.mk (𝟙 _)))) := by sorry
+        AddCommGrpCat.{u + 1}).obj (op (Scheme.Etale.mk (𝟙 _)))) := by
+  let c := LocalStalkSections.comparison i hi_inclusion x H hH
+  have hc (F : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) : IsIso (c.app F) := by
+    apply (ConcreteCategory.isIso_iff_bijective (c.app F)).2
+    constructor
+    · intro a b hab
+      obtain ⟨U, s, rfl⟩ :=
+        Concrete.colimit_exists_rep (LocalStalkSections.neighbourhoodDiagram i x F) a
+      obtain ⟨V, t, rfl⟩ :=
+        Concrete.colimit_exists_rep (LocalStalkSections.neighbourhoodDiagram i x F) b
+      have hU := ConcreteCategory.congr_hom
+        (LocalStalkSections.ι_comparison i hi_inclusion x H hH F U) s
+      have hV := ConcreteCategory.congr_hom
+        (LocalStalkSections.ι_comparison i hi_inclusion x H hH F V) t
+      have hst : (LocalStalkSections.cocone i hi_inclusion x H hH F).ι.app U s =
+          (LocalStalkSections.cocone i hi_inclusion x H hH F).ι.app V t :=
+        hU.symm.trans (hab.trans hV)
+      exact Concrete.colimit_rep_eq_of_exists _ s t
+        (localStalkSections_descent_equality i hi_inclusion x H hH F U V s t hst)
+    · intro s
+      obtain ⟨U, t, ht⟩ := localStalkSections_descent_sections i hi_inclusion x H hH F s
+      refine ⟨colimit.ι (LocalStalkSections.neighbourhoodDiagram i x F) U t, ?_⟩
+      exact (ConcreteCategory.congr_hom
+        (LocalStalkSections.ι_comparison i hi_inclusion x H hH F U) t).trans ht
+  exact ⟨NatIso.ofComponents (fun F ↦ asIso (c.app F)) (fun f ↦ c.naturality f)⟩

@@ -1,0 +1,123 @@
+{
+ "id": "new-local-stalk-sections-descent-sections",
+ "kind": "statement",
+ "title": "A local-scheme section descends to an open neighbourhood",
+ "statement": "Let X be a scheme in universe u+1 [def-pc-scheme], i : X.Opens -> X.Etale [def-sc-zariski-site, def-weil-pbc-etale-site] with i followed by forget to Over X equal to X.restrictFunctor, and x a point. Let H be a functor from abelian etale sheaves on X to abelian etale sheaves on Spec(O_X,x), with coefficients AddCommGrpCat.{u+1} [def-weil-pbc-abelian-etale-sheaves], and adj an adjunction of H to direct image along X.fromSpecStalk x. Let F be an abelian etale sheaf on X. Write D_F and c_F for the explicitly constructed neighbourhood diagram and cocone [new-local-stalk-sections-comparison-map]. For every section s of H(F) on the terminal etale object of Spec(O_X,x), there exist an opposite open neighbourhood U and t in D_F(U) such that c_F(U)(t)=s.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/03Q6",
+  "place": "Lemma 59.51.5, degree zero, proof steps (1)-(3), restricted to principal opens in an affine neighbourhood of x."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-abelian-etale-sheaves",
+  "def-sc-zariski-site",
+  "new-local-stalk-sections-comparison-map"
+ ],
+ "proof": [
+  {
+   "text": "Choose an affine neighbourhood V of x. Principal opens of V containing x\nare cofinal among neighbourhoods of x: intersect any neighbourhood with V and use\nthe principal-open basis of V. The colimit of their coordinate rings is O_X,x.\nApply the degree-zero section assertion of Tag 03Q6 to the identity of V, which is\nquasi-compact and quasi-separated, and to the restriction of F to V. Every section\nof the inverse-image sheaf on Spec(O_X,x) descends to a section on one of these\nprincipal opens. This gives the required neighbourhood U and section t. The maps\nare the pullback maps given by the inverse-image unit and the local-scheme maps to\nthe neighbourhoods. Identify the standard inverse image with the displayed H by\nuniqueness of left adjoints to the same direct image. This identification respects\nthe units and therefore identifies its pullback maps with LocalStalkSections.comparison.\nTransport the descended section through that isomorphism to obtain the requested\nrepresentative. The zero sheaf is included; no henselian or global qcqs hypothesis is needed.\nSmall affine presentations keep the coefficient universe fixed; empty X has no x. -/",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/03Q6",
+  "place": "Lemma 59.51.5, degree zero, proof steps (1)-(3), restricted to principal opens in an affine neighbourhood of x."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Sections of the inverse image of an etale sheaf on the spectrum of a local ring are the colimit of sections on open neighborhoods",
+   "results": "Unavailable: service unavailable: Internal Server Error. No verdict assigned.",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every section of an inverse image etale sheaf on Spec of a local ring descends to a section over an open neighborhood",
+   "results": "8 hits, including basicOpen_subset_etaleLocus_iff, RingHom.Etale.propertyIsLocal and Algebra.isOpen_etaleLocus. These concern ring maps, not descent of sections of an arbitrary abelian etale sheaf.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.leftAdjointUniq",
+   "results": "12 hits: uniqueness of left adjoints, its unit and counit compatibility; these are formal ingredients, not local-scheme section descent.",
+   "date": "2026-10-13",
+   "verdict": "tool match only"
+  },
+  {
+   "tool": "grep",
+   "query": "fromSpecStalk|stalkSections; continuity|limit.*sections|colimit.*sections",
+   "results": "Mathlib Stalk.lean has fromSpecStalkOfMem and its factorization; concrete-category colimit lemmas supply representatives and equality from common restrictions. Upstream SectionContinuity and Sheaf EtaleSetSectionContinuity assume coefficients in universe one above the scheme universe and require a specified affine limit presentation. They do not directly supply the same-universe abelian neighbourhood cocone assertions here.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.StrictHenselianStalkSectionsComparisonIso",
+  "date": "2026-10-13",
+  "group": "D2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-strict-henselian-stalk-sections-comparison",
+   "place": "Degree-zero continuity decomposition: A local-scheme section descends to an open neighbourhood",
+   "via": [
+    "new-strict-henselian-stalk-sections-comparison-iso"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.LocalStalkSectionsDescentSections",
+  "file": "lean/Sheaf/Paper/LocalStalkSectionsDescentSections.lean",
+  "declaration": "localStalkSections_descent_sections",
+  "statement": "theorem localStalkSections_descent_sections {X : Scheme.{u + 1}} (i : X.Opens ⥤ X.Etale) (hi : i ⋙ Scheme.Etale.forget X = X.restrictFunctor) (x : X) (H : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1} ⥤ Sheaf (Spec (X.presheaf.stalk x)).smallEtaleTopology AddCommGrpCat.{u + 1}) (hH : H ⊣ (X.fromSpecStalk x).Etale.sheafPushforwardContinuous AddCommGrpCat.{u + 1} X.smallEtaleTopology (Spec (X.presheaf.stalk x)).smallEtaleTopology) (F : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) (s : (H.obj F).obj.obj (op (Scheme.Etale.mk (𝟙 _)))) : ∃ (U : (OpenNhds x)ᵒᵖ) (t : (LocalStalkSections.neighbourhoodDiagram i x F).obj U), (LocalStalkSections.cocone i hi x H hH F).ι.app U t = s",
+  "branch": "sheaf-dag",
+  "by": "D2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D2",
+  "result": "pass",
+  "landing": "20261012T184248-L-3998926",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D2",
+  "result": "pass",
+  "landing": "20261012T184248-L-3998926",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

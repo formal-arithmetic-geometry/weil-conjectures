@@ -1,0 +1,140 @@
+{
+ "id": "new-local-stalk-sections-comparison-map",
+ "kind": "definition",
+ "title": "The canonical local-scheme section comparison",
+ "statement": "Let X be a scheme in universe u+1 [def-pc-scheme], i : X.Opens -> X.Etale [def-sc-zariski-site, def-weil-pbc-etale-site] with i followed by forget to Over X equal to X.restrictFunctor, and x a point. Let H be a functor from abelian etale sheaves on X to abelian etale sheaves on Spec(O_X,x), with coefficients AddCommGrpCat.{u+1} [def-weil-pbc-abelian-etale-sheaves], and adj an adjunction of H to direct image along X.fromSpecStalk x. Define D_F on opposite open neighbourhoods by D_F(U)=F(i(U)). The object e_U : i(U) -> U in Over X is the equality isomorphism induced by the supplied equality of functors. The canonical map l_U : Spec(O_X,x) -> i(U) is the map to the canonical open U followed by e_U inverse. Base change gives a section s_U of i(U) pulled back to Spec(O_X,x). The cocone leg is the component of adj.unit at i(U), followed by restriction along s_U. These legs induce a natural transformation from etaleObjectStalkSections X i x to H followed by terminal sections on Spec(O_X,x). The map sends each colimit coprojection to that explicitly constructed cocone leg.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/03Q6",
+  "place": "Lemma 59.51.5, degree zero, proof steps (1)-(3), restricted to principal opens in an affine neighbourhood of x."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-abelian-etale-sheaves",
+  "def-sc-zariski-site"
+ ],
+ "proof": [
+  {
+   "text": "Use Scheme.Opens.fromSpecStalkOfMem and the equality-induced isomorphism in Over X to construct l_U. Its composite with i(U).hom is X.fromSpecStalk x. The morphism i(U).hom is an open immersion, hence monic. Cancelling it proves compatibility of the l_U under inclusions. Pullback.lift constructs s_U and pullback.hom_ext proves its compatibility.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Compose the sheaf adjunction unit with restriction along s_U. Naturality of the unit and of s_U gives a cocone on D_F. Apply colimit.desc to each F. Naturality of the adjunction unit in F and of the sheaf morphism H.map f proves naturality of these colimit maps. colimit.ι_desc gives the formula for a neighbourhood section.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/03Q6",
+  "place": "Lemma 59.51.5, degree zero, proof steps (1)-(3), restricted to principal opens in an affine neighbourhood of x."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Sections of the inverse image of an etale sheaf on the spectrum of a local ring are the colimit of sections on open neighborhoods",
+   "results": "Unavailable: service unavailable: Internal Server Error. No verdict assigned.",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Construct a natural map from the colimit of sections of an etale sheaf on open neighborhoods to inverse image sections over the spectrum of a local ring using an adjunction unit",
+   "results": "8 hits, including LocallyRingedSpace.toΓSpecCApp_iff, ModuleCat.Tilde.toOpen_germ and Scheme.fromSpecStalk_appTop. None constructs this comparison for abelian etale sheaves. Scheme.Opens.fromSpecStalkOfMem and colimit.desc provide the elementary ingredients.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.leftAdjointUniq",
+   "results": "12 hits: uniqueness of left adjoints, its unit and counit compatibility; these are formal ingredients, not local-scheme section descent.",
+   "date": "2026-10-13",
+   "verdict": "tool match only"
+  },
+  {
+   "tool": "grep",
+   "query": "fromSpecStalk|stalkSections; continuity|limit.*sections|colimit.*sections",
+   "results": "Mathlib Stalk.lean has fromSpecStalkOfMem and its factorization; concrete-category colimit lemmas supply representatives and equality from common restrictions. Upstream SectionContinuity and Sheaf EtaleSetSectionContinuity assume coefficients in universe one above the scheme universe and require a specified affine limit presentation. They do not directly supply the same-universe abelian neighbourhood cocone assertions here.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.StrictHenselianStalkSectionsComparisonIso",
+  "date": "2026-10-13",
+  "group": "D2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-strict-henselian-stalk-sections-comparison",
+   "place": "Degree-zero continuity decomposition: The canonical local-scheme section comparison",
+   "via": [
+    "new-strict-henselian-stalk-sections-comparison-iso"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.LocalStalkSectionsComparisonMap",
+  "file": "lean/Sheaf/Paper/LocalStalkSectionsComparisonMap.lean",
+  "declaration": "LocalStalkSections.comparison",
+  "statement": "def comparison : etaleObjectStalkSections X i x ⟶ H ⋙ (sheafSections (Spec (X.presheaf.stalk x)).smallEtaleTopology AddCommGrpCat.{u + 1}).obj (op (Scheme.Etale.mk (𝟙 _)))",
+  "branch": "sheaf-dag",
+  "by": "D2",
+  "date": "2026-10-13",
+  "declarations": [
+   "LocalStalkSections.openIso",
+   "LocalStalkSections.lift",
+   "LocalStalkSections.lift_fac",
+   "LocalStalkSections.open_mono",
+   "LocalStalkSections.lift_naturality",
+   "LocalStalkSections.baseChangeSection",
+   "LocalStalkSections.section_naturality",
+   "LocalStalkSections.neighbourhoodDiagram",
+   "LocalStalkSections.cocone",
+   "LocalStalkSections.comparison",
+   "LocalStalkSections.ι_comparison"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D2",
+  "result": "pass",
+  "landing": "20261012T184248-L-3998926",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D2",
+  "result": "pass",
+  "landing": "20261012T184248-L-3998926",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
