@@ -27,7 +27,7 @@
  ],
  "proof": [
   {
-   "text": "Put $V=f^{-1}(U)$ and consider $f_U:V\\to U$. This is qcqs by stability under base change along an open immersion, and the affine scheme $U$ is quasi-compact. Restriction is exact and preserves quasi-coherence, so $E|_V$ has quasi-coherent cohomology. Use the standard localization model for the two local derived categories; the choices do not alter the comparison because all functors come from localization.",
+   "text": "Put V = f⁻¹(U) and g = f ∣_ U. Mathlib supplies quasi-compactness and quasi-separatedness of g by restriction, and compactness of U because U is affine. Choose the standard derived categories of the two open subschemes; the original derived categories of X and Y remain unchanged.",
    "uses": [
     "def-pc-scheme",
     "def-pc-derived-category"
@@ -39,10 +39,10 @@
    }
   },
   {
-   "text": "Use [lem-pc-restrict-derived-direct-image-open] to obtain the natural identification $(Rf_*E)|_U\\cong R(f_U)_*(E|_V)$. This is computed by restricting a K-injective resolution, using [lem-sc-derived-k-injective-restrict-open]. The comparison is natural in the morphism $E\\to\\tau_{\\geq -n}E$.",
+   "text": "Let RX and RY be the exact restriction functors, each followed by Scheme.Modules.overEquiv. Quasi-coherence is preserved by overFunctor and by the site equivalence (transport the quasi-coherent presentation using isQuasicoherent_pushforward_of_isLeftAdjoint). The natural homology comparison RX.mapDerivedCategoryHomologyFunctorIso then shows that RX.mapDerivedCategory.obj E lies in D_QCoh(V). Use schemeDerivedDirectImage_openRestriction for the natural isomorphism Rf_* ⋙ D(RY) ≅ D(RX) ⋙ Rg_*; its K-injective computation is already contained in that theorem.",
    "uses": [
-    "lem-pc-restrict-derived-direct-image-open",
-    "lem-sc-derived-k-injective-restrict-open"
+    "def-pc-derived-category",
+    "lem-pc-restrict-derived-direct-image-open"
    ],
    "elementary": false,
    "source": {
@@ -51,7 +51,7 @@
    }
   },
   {
-   "text": "Apply the second clause of [lem-pc-derived-direct-image-uniform-truncation-bound] to $f_U$, $E|_V$, and $q$. Choose its threshold $n_0$ as $n$. The q-th higher direct image of the canonical truncation projection on $V$ is an isomorphism.",
+   "text": "Apply the second clause of exists_schemeDerivedDirectImage_uniform_truncation_bound to g, the restricted quasi-coherent derived object, and q. Take n to be the supplied threshold, using n ≤ n. Thus H^q(Rg_*) maps the canonical projection of the restricted object to an isomorphism.",
    "uses": [
     "lem-pc-derived-direct-image-uniform-truncation-bound"
    ],
@@ -62,7 +62,7 @@
    }
   },
   {
-   "text": "Exact restriction commutes with homology and canonical truncation, including its projection: use Functor.mapDerivedCategoryHomologyFunctorIso and Functor.mapDerivedCategoryTruncGEIso from the existing exact-functor library. These comparisons carry the isomorphism from the previous step to the restriction to $U$ of the q-th higher direct image of the global projection. Naturality of the open-restriction comparison identifies this with the displayed map.",
+   "text": "Set π to be the global truncation projection. Let c be the inverse component of RX.mapDerivedCategoryTruncGEIso (-n). The defining equation π_descTruncGE gives π_restricted ≫ c = D(RX).map π. Both H^q(Rg_*).map π_restricted and H^q(Rg_*).map c are isomorphisms, so their composite is. Apply NatIso.isIso_map_iff first to the open-restriction isomorphism whiskered by homology, then to RY.mapDerivedCategoryHomologyFunctorIso q. This proves that RY maps H^q(Rf_*).map π to an isomorphism. The equivalence component of RY reflects isomorphisms, yielding exactly the requested overFunctor map.",
    "uses": [
     "def-sbc-standard-tstructure-derived-category",
     "lem-pc-restrict-derived-direct-image-open"
@@ -78,14 +78,13 @@
   "def-pc-scheme",
   "def-pc-derived-category",
   "lem-pc-restrict-derived-direct-image-open",
-  "lem-sc-derived-k-injective-restrict-open",
   "lem-pc-derived-direct-image-uniform-truncation-bound",
   "def-sbc-standard-tstructure-derived-category"
  ],
  "proof_origin": {
   "document": "literature/stacks-project/perfect.tex",
-  "place": "Tag 08D5 (perfect-lemma-quasi-coherence-direct-image), proof of part (1)",
-  "by": "document"
+  "place": "Tag 08D5 (perfect-lemma-quasi-coherence-direct-image), proof of part (1); implemented using exact-functor natural comparisons",
+  "by": "agent"
  },
  "mathlib_searches": [
   {
@@ -153,10 +152,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "R1",
+  "group": "V2",
   "result": "pass",
-  "landing": "20261012T060751-L-2914109",
-  "kind": "interface",
+  "landing": "20261012T085353-L-45195",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

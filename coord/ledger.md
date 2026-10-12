@@ -7098,3 +7098,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 08:53 L: merged deliver/V1/Sheaf.FieldTheory.FinitePurelyInseparableScalarDescent (stage 3; reviewer PASS; first push; landing 20261012T085352-L-44802 (proof); batch 20261012T085205; modules 1; new nodes 0)
 - 08:53 L: merged deliver/V1/Sheaf.FieldTheory.MakeSeparable (stage 3; reviewer PASS; first push; landing 20261012T085352-L-44905 (proof); batch 20261012T085205; modules 1; new nodes 0)
 - 08:53 L: merged deliver/V1/Sheaf.FieldTheory.SeparableExtensionFractionFieldOfSmoothAlgebra (stage 3; reviewer PASS; first push; landing 20261012T085353-L-45059 (proof); batch 20261012T085205; modules 1; new nodes 0)
+- 08:53 L: merged deliver/V2/Sheaf.AlgebraicGeometry.DerivedDirectImageAffineTruncationComparison (stage 3; reviewer PASS; first push; landing 20261012T085353-L-45195 (proof); batch 20261012T085205; modules 1; new nodes 0)
