@@ -6,8 +6,11 @@ Authors: SHEAF group J1
 module
 
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
-import Sheaf.AlgebraicGeometry.EtaleCechVanishingCriterion
+
+import Sheaf.AlgebraicGeometry.ModuleSheafConstantRingEquivalence
 import Sheaf.CategoryTheory.Sites.InjectiveModuleCechAcyclic
+import Sheaf.AlgebraicGeometry.EtaleCechVanishingCriterion
+import Sheaf.AlgebraicGeometry.EtaleSiteCechComplexComparison
 
 /-!
 # Underlying abelian acyclicity of injective module-valued étale sheaves
@@ -54,6 +57,59 @@ theorem isZero_rightDerived_globalSections_forget_of_injective
     IsZero (((Sheaf.Γ Y.smallEtaleTopology AddCommGrpCat.{u + 1}).rightDerived
       (n + 1)).obj ((sheafCompose Y.smallEtaleTopology
         (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj G)) := by
-  sorry
+  obtain ⟨e, ⟨eAb⟩⟩ := moduleSheaf_constantRing_equivalence Λ Y
+  let O := (sheafCompose Y.smallEtaleTopology
+    (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj
+    ((constantSheaf Y.smallEtaleTopology CommRingCat.{u + 1}).obj (CommRingCat.of Λ))
+  let I : SheafOfModules.{u + 1} O := e.functor.obj G
+  have : Injective I := (e.map_injective_iff G).mpr inferInstance
+  have htop : Y.smallEtaleTopology.toPrecoverage.toGrothendieck =
+      Y.smallEtaleTopology := by
+    apply le_antisymm
+    · exact Y.smallEtaleTopology.toGrothendieck_toPrecoverage_le
+    · intro U S hS
+      simpa only [Sieve.generate_sieve] using
+        Precoverage.generate_mem_toGrothendieck
+          ((GrothendieckTopology.arrows_mem_toPrecoverage_iff _ S).mpr hS)
+  let J := Y.smallEtaleTopology.toPrecoverage
+  have hcech (U : Y.Etale) (T : Type (u + 1)) (V : T → Y.Etale)
+      (f : ∀ t : T, V t ⟶ U) (hf : Sieve.ofArrows V f ∈ Y.smallEtaleTopology U)
+      (p : ℕ) (hp : 0 < p) :
+      IsZero (((cechComplexFunctor fun t : T ↦ Over.mk (f t)).obj
+        ((Over.forget U).op ⋙ ((SheafOfModules.toSheaf O).obj I).obj)).homology p) := by
+    have hcover : Presieve.ofArrows V f ∈ J U := hf
+    obtain ⟨S⟩ := SiteCechComplex.exists_of_covering J hcover
+    have hzero : IsZero ((S.cohomologyFunctor p).obj I.val.presheaf) := by
+      have h := @CategoryTheory.injective_module_cech_cohomology_isZero
+        Y.Etale _ J _ _ _ _
+      rw [show J.toGrothendieck = Y.smallEtaleTopology from htop] at h
+      exact @h O inferInstance inferInstance I inferInstance T U V f hcover S p hp
+    obtain ⟨c⟩ := nonempty_etale_siteCech_complex_iso Y U V f S I.val.presheaf
+    exact hzero.of_iso ((HomologicalComplex.homologyFunctor _ _ p).mapIso c.symm)
+  have hvan := isZero_rightDerived_etale_of_cech_vanishing Y Set.univ
+    (fun U _ V f ↦ Sieve.ofArrows V f ∈ Y.smallEtaleTopology U)
+    ((SheafOfModules.toSheaf O).obj I)
+    (fun _ _ _ _ h ↦ h)
+    (fun _ _ _ _ _ ↦ ⟨Set.mem_univ _, fun _ ↦ Set.mem_univ _,
+      fun _ _ ↦ Set.mem_univ _⟩)
+    (fun _ _ T V f hf ↦ ⟨T, V, f, hf, fun t ↦ ⟨t, 𝟙 _, by simp⟩⟩)
+    hcech (terminal Y.Etale) (Set.mem_univ _) (n + 1) (Nat.zero_lt_succ n)
+  let c := Sheaf.ΓNatIsoSheafSections Y.smallEtaleTopology
+    AddCommGrpCat.{u + 1} (terminalIsTerminal (C := Y.Etale))
+  have : ((sheafSections Y.smallEtaleTopology AddCommGrpCat.{u + 1}).obj
+      (Opposite.op (terminal Y.Etale))).Additive :=
+    Functor.additive_of_iso c
+  let d : (Sheaf.Γ Y.smallEtaleTopology AddCommGrpCat.{u + 1}).rightDerived (n + 1) ≅
+      ((sheafSections Y.smallEtaleTopology AddCommGrpCat.{u + 1}).obj
+        (Opposite.op (terminal Y.Etale))).rightDerived (n + 1) :=
+    { hom := c.hom.rightDerived (n + 1)
+      inv := c.inv.rightDerived (n + 1)
+      hom_inv_id := by rw [← NatTrans.rightDerived_comp, c.hom_inv_id,
+        NatTrans.rightDerived_id]
+      inv_hom_id := by rw [← NatTrans.rightDerived_comp, c.inv_hom_id,
+        NatTrans.rightDerived_id] }
+  exact (hvan.of_iso (d.app ((SheafOfModules.toSheaf O).obj I))).of_iso
+    (((Sheaf.Γ Y.smallEtaleTopology AddCommGrpCat.{u + 1}).rightDerived
+      (n + 1)).mapIso (eAb.app G).symm)
 
 end AlgebraicGeometry.Scheme

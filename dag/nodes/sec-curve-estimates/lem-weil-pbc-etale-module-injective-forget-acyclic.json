@@ -14,41 +14,45 @@
  ],
  "proof": [
   {
-   "text": "Identify ModuleCat-valued sheaves with modules over the constant ring sheaf. Global scalars act sectionwise; a general constant-ring-sheaf section is locally represented by scalars, whose actions glue uniquely. Local equality makes the action independent of representatives and the sheaf condition supplies the identities and inverse equivalence. This exact equivalence commutes with underlying abelian sheaves and preserves injectives.",
+   "text": "Apply moduleSheaf_constantRing_equivalence to obtain an equivalence e from ModuleCat-valued etale sheaves to modules over the underlying ring sheaf of the constant commutative-ring sheaf, together with its underlying-abelian natural isomorphism eAb. Set I=e(G). Mathlib Equivalence.map_injective_iff preserves injectivity, so I is injective.",
    "uses": [
-    "def-weil-sheaf-of-modules-category"
+    "def-weil-sheaf-of-modules-category",
+    "lem-weil-pbc-module-sheaf-constant-ring-equivalence"
    ],
    "elementary": false
   },
   {
-   "text": "For every covering, positive Cech cohomology of an injective module sheaf vanishes by the existing ringed-site theorem. Its free Cech chain complex is exact in positive degrees and Hom into the injective presheaf of modules is exact. Underlying abelian groups have the same sections, restrictions, and Cech differential.",
+   "text": "Set J to the precoverage of the small etale topology. Prove J.toGrothendieck equals the original topology, using toGrothendieck_toPrecoverage_le and generate_mem_toGrothendieck on each covering sieve. For every covering family choose a SiteCechComplex S. Apply injective_module_cech_cohomology_isZero to I, rewriting the topology with this equality. Use nonempty_etale_siteCech_complex_iso and map its inverse through the homology functor to transport zero positive cohomology to the categorical cechComplexFunctor.",
    "uses": [
-    "lem-weil-pbc-ringed-site-injective-module-cech-acyclic"
+    "lem-weil-pbc-ringed-site-injective-module-cech-acyclic",
+    "lem-weil-pbc-etale-site-cech-complex-comparison"
    ],
    "elementary": false
   },
   {
-   "text": "Use the abelian Cech criterion with every etale object and every covering. The closure hypothesis is automatic and every covering refines itself. The preceding positive Cech vanishing therefore gives zero positive right derived evaluation on every etale object.",
+   "text": "Apply isZero_rightDerived_etale_of_cech_vanishing with B=Set.univ and Cov equal to membership of the generated sieve in the small etale topology. Covering and closure hypotheses are immediate; every cover refines itself by identity maps. Supply the preceding Cech vanishing and evaluate at the terminal object in degree n+1.",
    "uses": [
     "lem-weil-pbc-cech-vanishing-criterion"
    ],
    "elementary": false
   },
   {
-   "text": "Evaluate at the terminal identity etale object of Y. Its evaluation functor is naturally global sections. Transport the derived evaluation vanishing along this natural isomorphism and take degree n+1.",
+   "text": "Mathlib Sheaf.ΓNatIsoSheafSections identifies global sections with terminal evaluation. Transport additivity along this isomorphism. Derive its hom and inv using NatTrans.rightDerived; rightDerived_comp and rightDerived_id prove the inverse identities. Transport the derived evaluation vanishing along its component, then along rightDerived.mapIso applied to the inverse of eAb.app G. This gives exactly the stated underlying-abelian global sections vanishing.",
    "uses": [],
    "elementary": true
   }
  ],
  "proof_deps": [
   "def-weil-sheaf-of-modules-category",
+  "lem-weil-pbc-module-sheaf-constant-ring-equivalence",
   "lem-weil-pbc-ringed-site-injective-module-cech-acyclic",
+  "lem-weil-pbc-etale-site-cech-complex-comparison",
   "lem-weil-pbc-cech-vanishing-criterion"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Tag 03FD, proof second paragraph, via Tags 03FC and 03F9"
+  "place": "Tag 03FD, proof second paragraph, via Tags 03FC and 03F9; Lean implementation by T2 uses the existing constant-ring equivalence and chosen-product/categorical Cech comparison."
  },
  "mathlib_searches": [
   {
@@ -117,10 +121,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "J1",
+  "group": "T2",
   "result": "pass",
-  "landing": "20261012T032730-L-1421799",
-  "kind": "interface",
-  "note": "AUTO: proofs only; landed after the tool's own checks (compiles, no new sorry without its node, no axiom, statements of existing declarations unchanged); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "landing": "20261012T042421-L-1822044",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
