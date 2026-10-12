@@ -10,6 +10,8 @@ public import Mathlib.RingTheory.Localization.AtPrime.Basic
 public import Mathlib.RingTheory.Localization.Away.Basic
 public import Mathlib.RingTheory.Noetherian.Defs
 import Sheaf.Paper.NormalLocusOpen
+import Sheaf.RingTheory.FiniteNormalCover
+import Sheaf.RingTheory.FiniteNormalSup
 
 @[expose] public section
 
@@ -50,4 +52,5 @@ theorem exists_finite_locally_normal_intermediate_algebra (A : Type u) (K : Type
           IsIntegrallyClosed (Localization.AtPrime q)) :
     ∃ B : Subalgebra A K, B ≤ integralClosure A K ∧ Module.Finite A B ∧
       ∀ (q : Ideal B) [q.IsPrime], IsIntegrallyClosed (Localization.AtPrime q) := by
-  sorry
+  obtain ⟨s, S, hS, hs, hn⟩ := exists_finite_normal_cover A K hAway hLocal
+  exact finite_normal_sup A K s S hS hs hn

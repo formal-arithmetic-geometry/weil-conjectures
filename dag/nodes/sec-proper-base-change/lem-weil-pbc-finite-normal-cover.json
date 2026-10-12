@@ -1,0 +1,101 @@
+{
+ "id": "lem-weil-pbc-finite-normal-cover",
+ "kind": "statement",
+ "title": "Extract a finite normal cover",
+ "statement": "A finite family of finite intermediate algebras contained in the integral closure whose supremum has integrally closed prime localizations exists under the hypotheses of the patching lemma.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 0333, finite-family compactness and finite-supremum paragraphs"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-integral-closure",
+  "def-weil-finitely-generated-module"
+ ],
+ "proof": [
+  {
+   "text": "This intermediate result is the compactness/localization part of the Stacks proof, isolated for the upper theorem.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 0333"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Extract a finite normal cover",
+   "date": "2026-10-13",
+   "results": "service unavailable",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extract a finite normal cover",
+   "results": "no exact match",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "integralClosure finite normal subalgebra",
+   "results": "no exact match",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.PatchLocalNormalIntermediateAlgebras",
+  "date": "2026-10-13",
+  "group": "M3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-patch-local-normal-intermediate-algebras",
+   "place": "decomposition of finite-family extraction and supremum patching",
+   "via": [
+    "lem-weil-pbc-patch-local-normal-intermediate-algebras"
+   ],
+   "same_as": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.FiniteNormalCover",
+  "file": "lean/Sheaf/RingTheory/FiniteNormalCover.lean",
+  "declaration": "exists_finite_normal_cover",
+  "statement": "theorem exists_finite_normal_cover (A : Type u) (K : Type v)\n    [CommRing A] [IsDomain A] [IsNoetherianRing A]\n    [Field K] [Algebra A K] [IsFractionRing A K]\n    (hAway : ∃ f : A, f ≠ 0 ∧\n      ∀ (p : Ideal (Localization.Away f)) [p.IsPrime],\n        IsDomain (Localization.AtPrime p) ∧ IsIntegrallyClosed (Localization.AtPrime p))\n    (hLocal : ∀ (m : Ideal A) [m.IsMaximal],\n      ∃ B : Subalgebra A K, B ≤ integralClosure A K ∧ Module.Finite A B ∧\n        ∀ (q : Ideal B) [q.IsPrime], Ideal.comap (algebraMap A B) q = m →\n          IsIntegrallyClosed (Localization.AtPrime q)) :\n    ∃ s : Finset (Subalgebra A K), ∃ S : Subalgebra A K,\n      S = s.sup (fun C : Subalgebra A K => C) ∧\n      (∀ C ∈ s, C ≤ integralClosure A K ∧ Module.Finite A C) ∧\n      ∀ (q : Ideal S) [q.IsPrime],\n        IsIntegrallyClosed (Localization.AtPrime q)",
+  "branch": "sheaf-dag",
+  "by": "M3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M3",
+  "result": "pass",
+  "landing": "20261012T225320-L-1809859",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M3",
+  "result": "pass",
+  "landing": "20261012T225320-L-1809859",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
