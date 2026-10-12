@@ -205,14 +205,20 @@ def cut(args):
                 dest = parent / (ident + '.md')
                 write(out / dest, node_text(node, ns))
                 if node.get('proof'):
-                    write(out / dest.with_name(ident + '.proof.md'), fields({'kind': 'proof', 'of': ident}) + proof_body(node) + '\n')
+                    uses = sorted(set(node.get('proof_deps') or []))
+                    meta = {'kind': 'proof', 'of': ident}
+                    if uses: meta['uses'] = uses
+                    write(out / dest.with_name(ident + '.proof.md'), fields(meta) + proof_body(node) + '\n')
             else:
                 path, front, body = bp[ident]
                 if mode == 'statement':
                     write(out / path, fields(front) + node['statement'].strip() + '\n')
                 if node.get('proof'):
                     proof_path = bp.get(ident + '.proof', (path.with_name(ident + '.proof.md'),))[0]
-                    write(out / proof_path, fields({'kind': 'proof', 'of': ident}) + proof_body(node) + '\n')
+                    uses = sorted(set(node.get('proof_deps') or []))
+                    meta = {'kind': 'proof', 'of': ident}
+                    if uses: meta['uses'] = uses
+                    write(out / proof_path, fields(meta) + proof_body(node) + '\n')
         manifest = {'baseline': baseline, 'chapter': args.chapter, 'sketch': args.sketch, 'asks': ask}
         write(out / '.blueprint-cut.json', json.dumps(manifest, ensure_ascii=False, indent=2) + '\n')
     changed = [str(p.relative_to(out)) for p in (out / 'blueprint').rglob('*.md') if baseline.get(str(p.relative_to(out))) != p.read_text()]
