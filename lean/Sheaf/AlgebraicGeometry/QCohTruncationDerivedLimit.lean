@@ -10,6 +10,7 @@ public import Sheaf.CategoryTheory.Triangulated.DerivedLimit
 public import Mathlib.Algebra.Homology.DerivedCategory.TStructure
 public import Mathlib.CategoryTheory.Triangulated.TStructure.TruncLTGE
 public import WeilConjectures.Algebra.Homology.HomotopyCategory.Products
+import Mathlib.Algebra.Category.Grp.Zero
 import Sheaf.AlgebraicGeometry.AffineOpenModuleCohomologyVanishing
 import Sheaf.AlgebraicGeometry.TruncationDerivedLimit
 import Sheaf.CategoryTheory.Triangulated.DerivedFunctorDerivedLimit
@@ -54,8 +55,19 @@ theorem qcoh_truncation_isDerivedLimitTriangle (X : Scheme.{u})
         omega)).app E) E
         (Pi.lift (fun n : ℕ => ((DerivedCategory.TStructure.t (C := SheafOfModules.{u}
         (moduleRings X.toRingedSpace))).truncGEπ (-(n : ℤ))).app E)) δ := by
-  sorry
+  obtain ⟨hprod, δ, hδ⟩ := truncation_isDerivedLimitTriangle_of_local_bound X E (by
+    refine ⟨0, X.affineOpens, X.isBasis_affineOpens, ?_⟩
+    intro U hU p hp q _hq
+    let := hE q
+    let := subsingleton_openModuleCohomology_of_isAffineOpen X
+      ((DerivedCategory.homologyFunctor
+        (SheafOfModules.{u} (moduleRings X.toRingedSpace)) q).obj E) U hU p hp
+    exact AddCommGrpCat.isZero_of_subsingleton _)
+  exact ⟨δ, hδ⟩
 
+set_option maxHeartbeats 800000 in
+-- Identifying Scheme.Modules with the shared SheafOfModules category requires
+-- unfolding their category and derived-functor instances during equality transport.
 /-- Applying a countable-product-preserving additive functor's right derived functor
 preserves the canonical reconstruction. Source: Stacks Project, Tag 08U1, and
 Tag 08D4, proof of (2) (blueprint: lem-pc-qcoh-truncation-derived-limit).
@@ -89,6 +101,25 @@ theorem rightDerivedFunctor_qcoh_truncation_isDerivedLimitTriangle (X : Scheme.{
         (Pi.lift (fun n : ℕ =>
           F.rightDerivedFunctor.map (((DerivedCategory.TStructure.t (C := SheafOfModules.{u}
         (moduleRings X.toRingedSpace))).truncGEπ (-(n : ℤ))).app E))) δ := by
-  sorry
+  obtain ⟨δ, hδ⟩ := qcoh_truncation_isDerivedLimitTriangle X E hE
+  let : Abelian.HasKInjectiveResolutions X.Modules := inferInstanceAs
+    (Abelian.HasKInjectiveResolutions
+      (SheafOfModules.{u} (moduleRings X.toRingedSpace)))
+  let : HasDerivedCategory.{w} X.Modules := inferInstanceAs
+    (HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace)))
+  obtain ⟨e, he, h⟩ := Scheme.rightDerivedFunctor_isDerivedLimitTriangle X F
+    _ E _ δ hδ
+  have hp : F.rightDerivedFunctor.map
+      (Pi.lift (fun n : ℕ => ((DerivedCategory.TStructure.t
+        (C := SheafOfModules.{u} (moduleRings X.toRingedSpace))).truncGEπ
+          (-(n : ℤ))).app E)) ≫ e.hom =
+      Pi.lift (fun n : ℕ => F.rightDerivedFunctor.map
+        (((DerivedCategory.TStructure.t
+          (C := SheafOfModules.{u} (moduleRings X.toRingedSpace))).truncGEπ
+            (-(n : ℤ))).app E)) := by
+    apply Pi.hom_ext
+    intro n
+    rw [Category.assoc, he, ← Functor.map_comp, Pi.lift_π, Pi.lift_π]
+  exact ⟨_, hp ▸ h⟩
 
 end AlgebraicGeometry
