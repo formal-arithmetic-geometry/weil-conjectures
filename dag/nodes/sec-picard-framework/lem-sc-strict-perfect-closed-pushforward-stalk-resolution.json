@@ -1,0 +1,125 @@
+{
+ "id": "lem-sc-strict-perfect-closed-pushforward-stalk-resolution",
+ "kind": "statement",
+ "title": "A local strictly perfect closed-pushforward model gives a bounded stalk resolution",
+ "statement": "Let $i:Z\\to Y$ be a closed immersion of schemes [def-pc-scheme, def-sbc-closed-immersion-ideal-sheaf], let $x\\in Z$, and let $U\\subset Y$ be an open neighbourhood of $i(x)$. Let $i_*\\mathcal O_Z$ be the ordinary pushforward of the structure sheaf: on an open $V\\subset Y$ it has sections $\\mathcal O_Z(i^{-1}V)$ with scalars restricted along $i^\\sharp$ [def-pc-module-pullback]. Let $K$ be a strictly perfect complex of modules on the localized ringed site over $U$ [def-pc-perfect-complex]. Suppose that in the derived category [def-pc-derived-category] its image is isomorphic to the restriction to $U$ of $(i_*\\mathcal O_Z)[0]$. Put $A=\\mathcal O_{Y,i(x)}$ and let $B$ be $\\mathcal O_{Z,x}$ regarded as an $A$-module by restriction of scalars along $i^\\sharp_x$. Then there exist a projective resolution $P_\\bullet\\to B$ over $A$ and $n\\in\\mathbb N$ such that $P_j=0$ for every $j>n$. Here a projective resolution is an augmented chain complex in nonnegative degrees with projective terms and augmentation a quasi-isomorphism to $B[0]$.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 066Q, lemma-perfect-module; applied after the closed-pushforward stalk identification and strictly perfect stalk model of Cohomology Tags 08C4 and 08CM, for the hypothesis translation in Duality Tag 0A9U"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sbc-closed-immersion-ideal-sheaf",
+  "def-pc-module-pullback",
+  "def-pc-perfect-complex",
+  "def-pc-derived-category"
+ ],
+ "proof": [
+  {
+   "text": "Use [lem-weil-pbc-closed-pushforward-stalks] to identify the stalk of the ordinary pushforward at i(x) with B, linearly over A. Restriction to the neighbourhood U does not alter this stalk. The exact stalk functor [lem-weil-pbc-module-stalk-exact] preserves quasi-isomorphisms and hence acts on the localized categories. Apply it to the given derived isomorphism. The stalk complex of K represents B[0].",
+   "uses": [
+    "lem-weil-pbc-closed-pushforward-stalks",
+    "lem-weil-pbc-module-stalk-exact"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "By [def-pc-perfect-complex], K is bounded and its terms are retracts of finite free sheaves. Stalks preserve finite free modules and retractions: take the germs of the finite standard basis, and apply the stalk functor to the two retraction maps. The stalk complex is consequently bounded with finite projective terms.",
+   "uses": [
+    "def-pc-perfect-complex"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Turn this bounded projective complex representing B[0] into a bounded resolution. Let b be an upper bound on its nonzero terms. When b>0, exactness at b makes the map from degree b-1 onto the degree-b projective term surjective. Choose a section using projectivity; its image and the kernel give a direct-sum decomposition in degree b-1. The two copies of the degree-b term form a contractible summand. Removing it preserves the represented object, boundedness, and projectivity. Repeat finitely down to degree one. The resulting complex is concentrated in nonpositive degrees, exact in negative degrees, with degree-zero cokernel B. Augment by this cokernel isomorphism and reverse indices to obtain P. A natural number at least the negative of the original lower bound is a bound n with P_j=0 for j>n. If the original model is acyclic, B=0 and the zero resolution also works. This is the bounded-projective-model to finite-resolution implication of Tag 066Q, with an explicit tail-splitting argument.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 066Q, lemma-perfect-module; expanded tail-splitting argument for the local model in steps 1-2 of lem-sc-perfect-immersion-stalkwise-tor-bounds"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A module whose degree-zero complex has a strictly perfect local sheaf model has a bounded projective resolution on stalks",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A module whose degree-zero complex has a strictly perfect local sheaf model has a bounded projective resolution on stalks",
+   "results": "8 hits: CochainComplex.isKProjective_of_projective, CategoryTheory.ProjectiveResolution.instIsKProjectiveCochainComplex, CategoryTheory.ProjectiveResolution.instProjectiveXIntCochainComplex, CategoryTheory.ProjectiveResolution.instIsStrictlyLECochainComplexOfNatInt, CategoryTheory.ProjectiveResolution.instIsGECochainComplexOfNatInt, CategoryTheory.ProjectiveResolution.instProjectiveXNatOfComplex, CochainComplex.IsKProjective, CategoryTheory.ProjectiveResolution.ofComplex",
+   "date": "2026-10-13",
+   "verdict": "component results only; no bounded stalk-resolution theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "stalk.*[Pp]rojective|[Pp]erfect.*stalk",
+   "results": "8 hits: Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Functor.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Functor.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/StructureSheaf.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/StructureSheaf.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/StructureSheaf.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/StructureSheaf.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/StructureSheaf.lean, Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean",
+   "date": "2026-10-13",
+   "verdict": "component results only; no bounded stalk-resolution theorem"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PerfectImmersionStalkwiseTorBounds",
+  "date": "2026-10-13",
+  "group": "Q3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Hypothesis translation in the smooth proper diagonal tensor formula: a local strictly perfect model of the closed pushforward gives a bounded projective stalk resolution before computing Tor",
+   "via": [
+    "lem-sc-perfect-immersion-stalkwise-tor-bounds",
+    "lem-sc-smooth-proper-diagonal-tensor-formula",
+    "lem-sc-smooth-proper-relative-dualizing-general"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.StrictPerfectClosedPushforwardStalkResolution",
+  "file": "lean/Sheaf/AlgebraicGeometry/StrictPerfectClosedPushforwardStalkResolution.lean",
+  "declaration": "AlgebraicGeometry.strictPerfectClosedPushforward_stalkResolution",
+  "statement": "theorem strictPerfectClosedPushforward_stalkResolution\n    {Z Y : Scheme.{u}} (i : Z ⟶ Y) [IsClosedImmersion i]\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]\n    (x : Z) (U : Y.Opens) (hx : i x ∈ U)\n    (K : CochainComplex\n      (SheafOfModules.{u} ((moduleRings Y.toRingedSpace).over U)) ℤ)\n    [HasDerivedCategory.{w}\n      (SheafOfModules.{u} ((moduleRings Y.toRingedSpace).over U))]\n    (hK : Y.IsStrictlyPerfect U K)\n    (e : (SheafOfModules.overFunctor.{u}\n      (moduleRings Y.toRingedSpace) U).mapDerivedCategory.obj\n        ((DerivedCategory.singleFunctor _ 0).obj\n          ((Scheme.Modules.pushforward i).obj (SheafOfModules.unit Z.ringCatSheaf))) ≅\n      DerivedCategory.Q.obj K) :\n    ∃ (P : ProjectiveResolution\n      ((ModuleCat.restrictScalars (i.stalkMap x).hom).obj\n        (ModuleCat.of (Z.presheaf.stalk x) (Z.presheaf.stalk x)))) (n : ℕ),\n      ∀ j : ℕ, n < j → IsZero (P.complex.X j)",
+  "branch": "sheaf-dag",
+  "by": "Q3",
+  "date": "2026-10-13"
+ },
+ "proof_deps": [
+  "lem-weil-pbc-closed-pushforward-stalks",
+  "lem-weil-pbc-module-stalk-exact",
+  "def-pc-perfect-complex"
+ ],
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q3",
+  "result": "pass",
+  "landing": "20261012T173857-L-3303842",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q3",
+  "result": "pass",
+  "landing": "20261012T173857-L-3303842",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
