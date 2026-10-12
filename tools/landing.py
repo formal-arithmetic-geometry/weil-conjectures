@@ -168,6 +168,20 @@ def abort(rid: str) -> int:
 
 
 def revert(rid: str, reason: str) -> int:
+    # Batch records include more than Lean files: route their take-out through
+    # the full transaction, including the fallback withdrawal.
+    rec = read_json(REQUESTS / f'{rid}.json')
+    if rec and rec.get('batch'):
+        import batch_land as bl
+        b = bl.read_json(bl.OPEN)
+        e = next((x for x in (b or {}).get('entries', []) if x['landing'] == rid), None)
+        if e:
+            try:
+                bl.unland(e, reason, reason)
+                e['state'] = 'returned'; bl.write_json(bl.OPEN, b)
+            except bl.recovery.Conflict as exc:
+                bl.withdraw(b, 'take-out conflict: ' + str(exc), lambda *x: print(*x))
+            return 0
     dirs()
     with tree_lock():
         r = read_json(REQUESTS / f"{rid}.json")

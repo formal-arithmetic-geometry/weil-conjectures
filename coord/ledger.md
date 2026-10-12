@@ -7146,6 +7146,7 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 08:54 L: merged deliver/Y3/Sheaf.Algebra.Homology.BoundedFlatReplacement (stage 3; reviewer PASS; first push; landing 20261012T085405-L-50060 (interface); batch 20261012T085205; modules 3; new nodes 2)
 - 08:54 L: merged deliver/Y3/Sheaf.Paper.LisseModuleSheaves (stage 3; reviewer PASS; first push; landing 20261012T085406-L-50165 (proof); batch 20261012T085205; modules 1; new nodes 0)
 - 08:54 L: merged deliver/Y3/Sheaf.Paper.SiteCoveringIsomorphicFamily (stage 3; reviewer PASS; first push; landing 20261012T085406-L-50260 (proof); batch 20261012T085205; modules 1; new nodes 0)
+<<<<<<< HEAD
 - 09:58 L: returned deliver/A3/Sheaf.RingTheory.EtaleResidueTripleUnitRefinement (reviewer RETURN: (the landing tools, head 8b7deaa29) the delivery did not land: refused by tools/import_prune_check.py for lean/Sheaf/Rin)
 - 09:58 L: returned deliver/E3/Sheaf.AlgebraicGeometry.EtaleLimitCohomologyDegreeZeroDescent (reviewer RETURN: (the landing tools, head c0b8ca2ae) the delivery did not land: refused by tools/import_prune_check.py for lean/Sheaf/Alg)
 - 09:58 L: returned deliver/J3/Sheaf.AlgebraicGeometry.ProjectiveSpace.GradedModuleChartData (reviewer RETURN: (the landing tools, head 8d8044c5b) the delivery did not land: (d) Sheaf.AlgebraicGeometry.ProjGradedModuleSheafExists i)
@@ -7317,3 +7318,7 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 10:20 L: returned deliver/P1/Sheaf.AlgebraicGeometry.RingedSpaceDerivedDirectImage (reviewer RETURN: (the batch landing, head aaffead89) the global build refused the delivery; it was taken out of the library again (landin)
 - 10:29 L: took deliver/J2/WeilConjectures.AlgebraicGeometry.GroupScheme.Lie.Bracket out of the library again (batch landing 20261012T095909-L-319169 reverted: WeilConjectures.AlgebraicGeometry.GroupScheme.Lie.Bracket: probe)
 - 10:29 L: returned deliver/J2/WeilConjectures.AlgebraicGeometry.GroupScheme.Lie.Bracket (reviewer RETURN: (the batch landing, head e627837ed) the global build refused the delivery; it was taken out of the library again (landin)
+=======
+
+- 17:20 L: prepare red batch recovery, ALERT, proof-import and reader gates; temporary-git/fake-build tests only, install at batch boundary.
+>>>>>>> 2c633a37e (Recover red batches with transactional take-out and bounded halves)

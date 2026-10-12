@@ -44,6 +44,7 @@ sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
 import leanindex as li  # noqa: E402
 import landing as ld  # noqa: E402
 import mergelock  # noqa: E402
+from pipeline_guard import alert, clear_alert, source_fingerprint
 
 CFG = li.config()
 CLONE = ld.LOCAL / "buildtree"
@@ -336,6 +337,13 @@ def main() -> int:
     signal.signal(signal.SIGTERM, stop); signal.signal(signal.SIGINT, stop)
 
     while True:
+        while (ld.LOCAL / 'batch/landing.json').exists():
+            # No locks held while the fixed cohort is being committed one delivery
+            # at a time. The live loop alone compiles when its journal closes.
+            marker = ld.LOCAL / 'batch/landing.json'
+            if time.time() - marker.stat().st_mtime > 180:
+                alert((ld.read_json(marker) or {}).get('id'), '?', 'partial batch landing', 'finish or withdraw the landing journal')
+            time.sleep(POLL)
         last = ld.read_json(ld.B / "last.json")
         allowed = None
         if retry:
@@ -353,6 +361,24 @@ def main() -> int:
             if wait and ld.records(ld.REQUESTS):
                 continue
             print("Nothing landed since the last green build."); return 0
+        source_id = source_fingerprint(CLONE)
+        red_trees = ld.read_json(ld.B / 'red-trees.json') or {}
+        cached = red_trees.get(source_id)
+        if cached and cached.get('compiler_red'):
+            result = dict(cached['result'], time=ld.now(), commit=commit, seconds=0,
+                          included=sorted(r['id'] for r in included),
+                          suspects=suspects(cached['result'].get('failing', []), included))
+            ld.write_json(ld.B / 'last.json', result)
+            alert((included[0].get('batch') if included else None), ' '.join(result.get('failing', [])),
+                  'same red sources requested; compile skipped', 'batch recovery or maintainer source repair')
+            print('Known red source tree: cached compiler failure; no rebuild.', flush=True)
+            return 1
+        if cached and last and last.get('source_fingerprint') == source_id:
+            # Lake succeeded before a probe rejected this very source snapshot.
+            # Re-read changed request allowances against its compiled output without
+            # running Lake again. A record repair can now publish immediately.
+            text = (ld.LOCAL / 'build.log').read_text(errors='ignore')
+            return finish_result(included, commit, text, 0, preempted, source_id, red_trees, compiler_ok=True)
         if not packages_ok():
             return 2
         ids = {r["id"] for r in included}
@@ -384,24 +410,38 @@ def main() -> int:
 
     text = LOG.read_text(errors="ignore")
     shutil.copy2(LOG, ld.LOCAL / "build.log")
+    return finish_result(included, commit, text, round(time.time() - t0), preempted, source_id, red_trees,
+                         compiler_ok=proc.returncode == 0)
+
+
+def finish_result(included, commit, text, elapsed, preempted, source_id, red_trees, *, compiler_ok):
+    """Publish or record one live-loop result, including a probe-only record retry."""
+    ids = {r['id'] for r in included}
     errors = [x for x in text.split("\n") if x.startswith("error")]
-    built = proc.returncode == 0 and not errors and "Build completed successfully" in text
+    built = compiler_ok and not errors and "Build completed successfully" in text
+    compiler_red = not built
     checks = batch_checks(included, text) if built else []
     if checks:
         built = False
         errors = ["error: " + c["message"] for c in checks]
-    result = {"time": ld.now(), "commit": commit, "seconds": round(time.time() - t0), "restarts": preempted}
+    result = {"time": ld.now(), "commit": commit, "source_fingerprint": source_id, "seconds": elapsed, "restarts": preempted}
     if built:
         publish()
         close_verified(included, commit)
         result.update(result="green", verified=sorted(ids))
         ld.write_json(ld.B / "last.json", result)
+        ld.write_json(ld.B / "published.json", result)
+        clear_alert()
         print(f"GREEN in {result['seconds']} s; {len(ids)} landing(s) verified; compiled files published.")
         return 0
     failing = sorted(set(failing_modules(text)) | {c["module"] for c in checks})
     sus = suspects(failing, included)
-    result.update(result="red", failing=failing, errors=errors[:30], suspects=sus, included=sorted(ids), batch_checks=checks)
+    result.update(result="red", source_fingerprint=source_id, failing=failing, errors=errors[:30], suspects=sus, included=sorted(ids), batch_checks=checks)
     ld.write_json(ld.B / "last.json", result)
+    red_trees[source_id] = {'compiler_red': compiler_red, 'result': result}
+    ld.write_json(ld.B / 'red-trees.json', red_trees)
+    if not sus or any(c['kind'] == 'probe' and not c.get('landing') for c in checks):
+        alert((included[0].get('batch') if included else None), ' '.join(failing), 'unattributed red/probe failure', 'maintainer diagnosis or batch withdrawal')
     print(f"RED in {result['seconds']} s; nothing published. Failing: {' '.join(failing[:12]) or '-'}")
     for x in errors[:12]:
         print("  " + x[:300])

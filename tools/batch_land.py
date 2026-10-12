@@ -27,15 +27,15 @@ the branch. The server does not compile the delivery again. One cycle:
      an independent Codex agent on the groups' machine (local/batch/triage/<batch>-r<n>/request.md -> verdict.json),
      which says for each failure whether the delivered module is wrong, or correct and broken by another delivery of
      the batch. The deliveries at fault are taken out (tools/landing.py revert, their records put back) and returned
-     with the compiler's message and the reason; the build runs again. After three rounds every remaining suspect is
-     taken out and returned.
+     with the compiler's message and the reason; the build runs again. A failed take-out or a subsequent red result withdraws the batch and bisects its fixed cohort.
+     Repeated red source trees are never compiled again; unresolved states write ~/cc1/ALERT.
 
 Usage (maintainer; SHEAF_LEAD=L-only):
   tools/batch_land.py step                      one step of the cycle (~/cc1/autoland3.py calls this in a loop)
   tools/batch_land.py status                    the open batch, the passed deliveries waiting
   tools/batch_land.py pass <G> <module> --head SHA --reviewer ID [--spot-checked NOTE] [--verdict PASS|FIX]
                                                 record a reader's pass (what merge_delivery.py --stage 3 does)
-  tools/batch_land.py unland <G> <module> REASON   take a landed delivery of the open batch out and return it
+  tools/batch_land.py take-out <G> <module> REASON   take a landed delivery of the open batch out and return it
 """
 from __future__ import annotations
 import calendar, json, os, pathlib, pickle, re, subprocess, sys, tempfile, time
@@ -48,6 +48,9 @@ import stage2_delivery as s2  # noqa: E402
 import stage3_delivery as s3  # noqa: E402
 import review_class as rc  # noqa: E402
 import sorry_ledger as sl  # noqa: E402
+import batch_recovery as recovery
+from pipeline_guard import alert, clear_alert
+import math
 
 ROOT = md.ROOT
 BD = ROOT / "local" / "batch"
@@ -165,6 +168,7 @@ def candidates(cache: dict) -> list[dict]:
             continue        # this head was returned; the group pushes a new one
         mk = read_json(marker(g, item))
         if mk and mk.get("head") == head:
+            if mk.get("not_before", 0) > time.time(): continue
             out.append({"group": g, "item": item, "head": head, "reviewer": mk["reviewer"], "note": mk.get("note"),
                         "verdict": mk.get("verdict") or "PASS", "overrides": mk.get("overrides") or {}, "passed": True})
             continue
@@ -365,6 +369,7 @@ class Pre:
 
 def land_one(plan: dict, batch_id: str) -> dict:
     """Write, register and commit one delivery. Called with coord/.merge.lock held."""
+    if (BD / 'proof-imports.json').exists(): raise Wait('proof-import cycle is committing')
     g, item, head, D, reviewer = plan["group"], plan["item"], plan["head"], plan["D"], plan["reviewer"]
     br = md.branch_of(g, item)
     if not md.has_ref(f"refs/heads/{br}") or md.git("rev-parse", br) != head:
@@ -469,11 +474,12 @@ def land_one(plan: dict, batch_id: str) -> dict:
     md.git("branch", "-D", br, check=False)
     marker(g, item).unlink(missing_ok=True)
     return {"group": g, "item": item, "head": head, "reviewer": reviewer, "landing": landing, "kind": kind,
-            "commit": sha, "modules": [m["module"] for m in mods], "claim": claim_text, "state": "landed"}
+            "commit": sha, "overrides": plan.get("overrides", {}), "modules": [m["module"] for m in mods], "claim": claim_text, "state": "landed"}
 
 
 def land_batch(cache: dict, log) -> dict | None:
     """Steps 1-4. Returns the batch (also written to local/batch/open.json), or None when nothing landed."""
+    if (BD / 'proof-imports.json').exists(): return None
     cands = candidates(cache)
     if not cands:
         return None
@@ -511,39 +517,45 @@ def land_batch(cache: dict, log) -> dict | None:
     if md.git("symbolic-ref", "-q", "--short", "HEAD", check=False) != md.MAIN:
         raise md.Fail(f"the working tree is not on {md.MAIN}")
     batch_id = time.strftime("%Y%m%dT%H%M%S", time.gmtime())
-    entries, back = [], []
-    with md.merge_lock():
-        tl = time.time()
-        by_module = {}
-        for nid, d in s2.nodes_at(s2.Git(ROOT), md.MAIN).items():
-            l = d.get("lean") if isinstance(d.get("lean"), dict) else {}
-            if l.get("module"):
-                by_module.setdefault(l["module"], []).append(nid)
-        for plan in plans:
-            g, item, head = plan["group"], plan["item"], plan["head"]
-            pre.done.pop(head, None)     # landed, or checked again
-            ids = [n for n in by_module.get(item, []) if n not in plan["D"]["nodes"]]
-            plan["item_nodes"] = [p for p in (md.node_path(n) for n in ids) if p]
-            try:
+    entries, back, held = [], [], 0.0
+    landing_marker = BD / 'landing.json'
+    write_json(landing_marker, {'id': batch_id, 'started': ld.now()})
+    tl = time.time()
+    by_module = {}
+    for nid, d in s2.nodes_at(s2.Git(ROOT), md.MAIN).items():
+        l = d.get("lean") if isinstance(d.get("lean"), dict) else {}
+        if l.get("module"):
+            by_module.setdefault(l["module"], []).append(nid)
+    for plan in plans:
+        g, item, head = plan["group"], plan["item"], plan["head"]
+        pre.done.pop(head, None)     # landed, or checked again
+        ids = [n for n in by_module.get(item, []) if n not in plan["D"]["nodes"]]
+        plan["item_nodes"] = [p for p in (md.node_path(n) for n in ids) if p]
+        try:
+            lock_started = time.time()
+            with md.merge_lock():
                 e = land_one(plan, batch_id)
-            except Wait as w:
-                log("not in this batch", g, item, head[:9], "|", str(w)[:300]); continue
-            except Refuse as f:
-                back.append((g, item, head, str(f))); continue
-            except md.Fail as f:
-                log("landing failed, nothing changed; tried again in the next cycle", g, item, head[:9], "|", str(f)[:300]); continue
-            entries.append(e)
-            log("landed", g, item, head[:9], "stage 3", f"batch {batch_id} landing {e['landing']} ({e['kind']}, {e['reviewer']})")
-        if entries:
-            md.refresh_queue(f"batch {batch_id}")
-        held = time.time() - tl
+            held += time.time() - lock_started
+            write_json(landing_marker, {"id": batch_id, "started": ld.now(), "entries": entries + [e]})
+        except Wait as w:
+            log("not in this batch", g, item, head[:9], "|", str(w)[:300]); continue
+        except Refuse as f:
+            back.append((g, item, head, str(f))); continue
+        except md.Fail as f:
+            log("landing failed, nothing changed; tried again in the next cycle", g, item, head[:9], "|", str(f)[:300]); continue
+        entries.append(e)
+        log("landed", g, item, head[:9], "stage 3", f"batch {batch_id} landing {e['landing']} ({e['kind']}, {e['reviewer']})")
+    if entries:
+        refresh_recovery_queue()
     for g, item, head, why in back:
         give_back(g, item, head, why, log)
     if not entries:
+        landing_marker.unlink(missing_ok=True)
         return None
     b = {"id": batch_id, "time": ld.now(), "round": 0, "handled": [], "entries": entries,
          "check_seconds": round(t1 - t0, 1), "lock_seconds": round(held, 1)}
     write_json(OPEN, b)
+    landing_marker.unlink(missing_ok=True)
     log(f"batch {batch_id}: {len(entries)} landed (checks {b['check_seconds']} s without a lock, lock held "
         f"{b['lock_seconds']} s); the global build verifies it")
     return b
@@ -563,47 +575,200 @@ def give_back(g, item, head, why, log):
 
 # ---------------------------------------------------------------- taking a landed delivery out
 
-def unland(e: dict, reason: str, ledger: str) -> None:
-    """Revert the landing of one delivery of a batch, put its records back as before its commit, give the claim back
-    to the group and write the return entry. Fail when the landing cannot be reverted (a file changed since)."""
-    g, item, sha, rid = e["group"], e["item"], e["commit"], e["landing"]
+def undo_entries(entries, message, *, returned=False):
+    """Prepare outside locks; restore delivery records and sources in a single commit.
+
+    See batch_recovery's docstring for the records derived from land_one and
+    merge_delivery. Substantive later edits request whole-batch withdrawal.
+    """
+    if not entries: return
+    tip = md.git("rev-parse", "HEAD")
+    prepared = recovery.inverse(ROOT, [e["commit"] for e in entries], imports_only=returned)
+    # Audits/proved flags computed after landing describe the removed source.
+    # Restore those fields from the pre-landing node; keep independent metadata.
+    for e in entries:
+        for path in recovery.git(ROOT, 'diff-tree', '--no-commit-id', '--name-only', '-r', e['commit']).decode().splitlines():
+            if not path.startswith('dag/nodes/') or path not in prepared or prepared[path] is None: continue
+            old = recovery.blob(ROOT, e['commit'] + '^', path)
+            if old is None: continue
+            a, cur = json.loads(old), json.loads(prepared[path])
+            for field in ('lean_audit', 'proved', 'proved_proof'):
+                if field in a: cur[field] = a[field]
+                else: cur.pop(field, None)
+            prepared[path] = (json.dumps(cur, ensure_ascii=False, indent=2) + '\n').encode()
+    recs = []
+    for e in entries:
+        rid = e["landing"]
+        r = ld.read_json(ld.REQUESTS / f"{rid}.json") or ld.read_json(ld.DONE / f"{rid}.json")
+        if r:
+            r = dict(r)
+            r.update(result="reverted" if returned else "withdrawn", reason=message, closed=ld.now())
+            r["sorry_allowed"] = {}
+            for f in r['files']:
+                path = 'lean/' + f['path']
+                data = prepared.get(path)
+                if path not in prepared:
+                    p = ROOT / path; data = p.read_bytes() if p.is_file() else None
+                r['sorry_allowed'][f['module']] = sorted(k for k, d in s3.decl_table((data or b'').decode()).items() if d['sorry'])
+                f['sha'] = __import__('hashlib').sha256(data).hexdigest() if data is not None else None
+            recs.append(r)
+        claim = 'coord/claims/' + e['item'].replace('/', '__') + '.lock'
+        if e.get('claim'):
+            p = ROOT / claim
+            if not p.exists(): prepared[claim] = e['claim'].encode()
+        if returned:
+            p, before, parts = md.return_entries(e['group'], e['item'])
+            kept = ''.join(x for x in parts if not x.startswith(f"## {e['item']} ("))
+            prepared[p.relative_to(ROOT).as_posix()] = (kept.rstrip() + f"\n\n## {e['item']} ({ld.now()}, head {e['head'][:9]})\n\n{message}\n").encode()
+    ledger = prepared.get('coord/ledger.md', (ROOT / 'coord/ledger.md').read_bytes()) or b''
+    prepared['coord/ledger.md'] = ledger + f"\n- {time.strftime('%H:%M')} L: {message[:180]}\n".encode()
     with md.merge_lock():
-        r = subprocess.run([sys.executable, "tools/landing.py", "revert", rid, " ".join(ledger.split())[:200]],
-                           cwd=ROOT, capture_output=True, text=True)
-        if r.returncode != 0:
-            raise md.Fail(f"landing.py revert {rid}: " + (r.stdout + r.stderr).strip()[:400])
-        paths, left = [], []
-        for ln in md.git("diff-tree", "--no-commit-id", "--name-status", "-r", sha).splitlines():
-            st, p = ln.split("\t")[0], ln.split("\t")[-1]
-            if p in ("coord/ledger.md", "coord/deliveries.log"):
-                continue
-            f = ROOT / p
-            if p.startswith("lean/"):
-                paths.append(p); continue                      # put back by landing.py
-            if st == "D":
-                if not f.exists():
-                    f.parent.mkdir(parents=True, exist_ok=True); f.write_text(md.git("show", f"{sha}^:{p}") + "\n")
-                    paths.append(p)
-                continue
-            now = md.git("hash-object", "--", p) if f.is_file() else None
-            if now != md.git("rev-parse", f"{sha}:{p}"):
-                left.append(p); continue                       # written again since: not this delivery's any more
-            if st == "A":
-                f.unlink()
+        with ld.tree_lock():
+            recovery.commit_inverse(ROOT, prepared, tip, 'Take out batch deliveries' if returned else 'Withdraw unverified batch')
+            for r in recs:
+                ld.write_json(ld.DONE / f"{r['id']}.json", r)
+                (ld.REQUESTS / f"{r['id']}.json").unlink(missing_ok=True)
+                ld.drop_mirror(r['group'], [f['path'] for f in r['files']])
+    # Queue calculation is source-only and deliberately outside both write locks.
+    refresh_recovery_queue()
+
+
+def refresh_recovery_queue():
+    r = subprocess.run([sys.executable, 'tools/queue.py', 'write'], cwd=ROOT, capture_output=True)
+    if r.returncode:
+        raise md.Fail('queue refresh after take-out failed: ' + r.stderr.decode(errors='replace')[-300:])
+    paths = ['coord/queue.tsv', 'coord/queue.md', 'coord/blueprint-index.tsv']
+    with md.merge_lock():
+        if md.git('status', '--porcelain', '--', *paths):
+            md.git_retry('add', '--', *paths)
+            md.git_retry('commit', '-q', '-m', 'Queue after batch recovery' + recovery.TRAILER, '--', *paths)
+
+
+def unland(e: dict, reason: str, ledger: str) -> None:
+    undo_entries([e], reason, returned=True)
+
+
+def withdraw(b, reason, log):
+    """Withdraw only batch commits; later independent maintainer commits survive."""
+    alert(b['id'], ' '.join((ld.read_json(ld.B / 'last.json') or {}).get('failing', [])), reason, 'withdraw batch and bisect')
+    active = [e for e in b['entries'] if e['state'] in ('landed', 'stuck')]
+    (BD / 'landing.json').unlink(missing_ok=True)
+    undo_entries(active, f"batch {b['id']} withdrawn: {reason}")
+    for e in active:
+        br = md.branch_of(e['group'], e['item'])
+        if not md.has_ref('refs/heads/' + br): md.git('branch', br, e['head'])
+        e['state'] = 'waiting'
+        write_json(marker(e['group'], e['item']), {**e, 'overrides': e.get('overrides', {}), 'verdict': 'PASS', 'time': ld.now()})
+    b.pop('triage', None)
+    b['recovery'] = {'phase': 'baseline', 'pending': active, 'good': [], 'tested': [],
+                     'last': (ld.read_json(ld.B / 'last.json') or {}).get('time'), 'builds': 0,
+                     'limit': math.ceil(math.log2(max(1, len(active)))) + 2}
+    write_json(OPEN, b)
+    log(f"batch {b['id']} withdrawn; {len(active)} deliveries waiting, maintainer commits kept; build baseline")
+    clear_alert()
+
+
+def reland_subset(b, entries):
+    out = []
+    write_json(BD / 'landing.json', {'id': b['id'], 'phase': 'reland'})
+    for original in entries:
+        br = md.branch_of(original['group'], original['item'])
+        if not md.has_ref('refs/heads/' + br): md.git('branch', br, original['head'])
+        c = dict(original, passed=True, overrides=original.get('overrides', {}), verdict='PASS')
+        plan = check(c, classify=False)
+        ids = [n for n, d in s2.nodes_at(s2.Git(ROOT), md.MAIN).items()
+               if (d.get('lean') or {}).get('module') == original['item'] and n not in plan['D']['nodes']]
+        plan['item_nodes'] = [p for p in (md.node_path(n) for n in ids) if p]
+        with md.merge_lock():
+            e = land_one(plan, b['id'])
+        out.append(e)
+    (BD / 'landing.json').unlink(missing_ok=True)
+    return out
+
+
+def recovery_step(b, log):
+    """Bounded bisection with a fixed cohort; no new deliveries enter its halves.
+
+    A green half establishes the complement of a known red set as suspect, not
+    guilty. Singleton returns require an actual red singleton build. At the build
+    budget unresolved entries remain waiting, and the restored green baseline
+    releases new batches. Interacting/multiple faults need another bounded cycle.
+    """
+    r = b['recovery']; last = ld.read_json(ld.B / 'last.json') or {}
+    if last.get('time') == r['last']: return 'waiting'
+    r['last'] = last.get('time'); r['builds'] += 1
+    phase = r['phase']
+    if not last.get('time'): return 'waiting'
+    if phase == 'baseline':
+        if last.get('result') != 'green':
+            alert(b['id'], ' '.join(last.get('failing', [])), 'withdrew batch', 'repair maintainer changes on published baseline')
+            write_json(OPEN, b); return 'waiting'
+        clear_alert()
+    elif phase != 'finish-baseline':
+        tested = r['tested']
+        if not {e['landing'] for e in tested} <= set(last.get('included', []) if last.get('result') == 'red' else last.get('verified', [])):
+            r['builds'] -= 1; write_json(OPEN, b); return 'waiting'
+        red = last.get('result') == 'red'
+        if phase == 'final' and not red:
+            for e in b['entries']:
+                e['state'] = 'verified' if any(key(x) == key(e) for x in r['good']) else e['state']
+            b.pop('recovery'); write_json(OPEN, b); return close_recovery(b, log)
+        if red and len(tested) == 1:
+            e = tested[0]
+            unland(e, '\n'.join(last.get('errors', [])) + '\nBisection: this delivery is red alone on the restored baseline.', 'red singleton')
+            for x in b['entries']:
+                if key(x) == key(e): x['state'] = 'returned'
+            r['pending'] = []; r['good'] += r.pop('complement', [])
+        else:
+            undo_entries(tested, f"batch {b['id']} bisection test completed")
+            if red:
+                r['pending'] = tested
+                r['good'] += r.pop('complement', [])
             else:
-                subprocess.run(["git", "checkout", f"{sha}^", "--", p], cwd=ROOT, capture_output=True)
-            paths.append(p)
-        claim = ROOT / "coord" / "claims" / (item.replace("/", "__") + ".lock")
-        if e.get("claim") and not claim.exists():
-            claim.write_text(e["claim"]); paths.append(claim.relative_to(ROOT).as_posix())
-        md.ledger_line(f"took deliver/{g}/{item} out of the library again (batch landing {rid} reverted: "
-                       f"{' '.join(ledger.split())[:160]})" + (f"; left as they are: {', '.join(left)}" if left else ""))
-        paths += ["coord/ledger.md", "coord/deliveries.log"]
-        md.git_retry("add", "-A", "--", *paths)
-        md.git_retry("commit", "-q", "-m", f"Take {item} ({g}) out again: the global build refused it\n\nLanding {rid} "
-                     f"reverted, the records of {sha[:9]} put back, the claim given back to {g}; the reasons are in "
-                     f"coord/returns/{g}.md.", "--", *paths)
-    md.cmd_return(g, item, reason)
+                r['good'] += tested
+                r['pending'] = r.pop('complement', [])
+        if phase == 'final' and red:
+            # Inferred-good siblings interacted or more than one delivery was bad.
+            # Restore and defer, never assert that the complement is good.
+            r['pending'] = r['good']; r['good'] = []
+    # Reserve the final build for combined survivors (or the restored baseline).
+    if r['builds'] >= r['limit'] - 1 or not r['pending']:
+        chosen = r['good']; r['phase'] = 'final'
+        for e in r['pending']:
+            e['state'] = 'waiting'
+        r['pending'] = []
+        if not chosen:
+            r['phase'] = 'finish-baseline'
+    else:
+        chosen, complement = recovery.split(r['pending'])
+        r['complement'] = complement; r['phase'] = 'half'
+    if phase == 'finish-baseline':
+        if last.get('result') != 'green':
+            alert(b['id'], ' '.join(last.get('failing', [])), 'bounded recovery restored baseline', 'repair maintainer changes')
+            write_json(OPEN, b); return 'waiting'
+        return close_recovery(b, log)
+    try:
+        r['tested'] = reland_subset(b, chosen)
+        r['expected_source'] = __import__('pipeline_guard').source_fingerprint(li.LEAN)
+    except Exception as x:
+        alert(b['id'], '?', 'reland fixed recovery cohort', str(x))
+        write_json(OPEN, b); raise
+    write_json(OPEN, b)
+    log(f"batch {b['id']} bisection {r['phase']}: {len(chosen)} deliveries; {r['builds']}/{r['limit']} builds")
+    return 'landed'
+
+
+def close_recovery(b, log):
+    for e in b['entries']:
+        if e['state'] == 'waiting':
+            br = md.branch_of(e['group'], e['item'])
+            if not md.has_ref('refs/heads/' + br): md.git('branch', br, e['head'])
+            write_json(marker(e['group'], e['item']), {**e, 'verdict': 'PASS', 'time': ld.now(), 'not_before': time.time() + 300})
+    b['closed'] = ld.now()
+    write_json(CLOSED / f"{b['id']}.json", b); OPEN.unlink(missing_ok=True)
+    clear_alert()
+    log(f"batch {b['id']} closed after bounded recovery; unresolved deliveries remain waiting to land")
+    return 'verified'
 
 
 # ---------------------------------------------------------------- a red build
@@ -654,7 +819,7 @@ def triage(b: dict, last: dict) -> dict:
     """The mechanical part: {decisions: [{failure, case, return: [G/item], reason, message}], open: [{failure,
     suspects: [G/item], message, others}], unattributed: [module]}."""
     inc = set(last.get("included") or [])
-    entries = [e for e in b["entries"] if e["state"] == "landed" and e["landing"] in inc]
+    entries = [e for e in b["entries"] if e["state"] not in ("verified", "returned", "reverted")]
     by_mod = {m: e for e in entries for m in e["modules"]}
     mine = {e["landing"] for e in entries}
     others = [s for s in last.get("suspects") or [] if s["id"] not in mine]
@@ -673,7 +838,7 @@ def triage(b: dict, last: dict) -> dict:
             continue
         msg = blocks.get(F, "") or "\n".join(x for x in last.get("errors") or [] if F.replace(".", "/") in x)
         writer = by_mod.get(F)
-        clo = li.closure(F, imports, memo)
+        clo = li.closure(F, imports, memo) | li.downstream({F}, imports) | {F}
         ups = [e for e in entries if e is not writer and set(e["modules"]) & clo]
         oth = [s for s in others if F in (s.get("fails") or [])]
         if writer and not ups and not oth:
@@ -710,7 +875,7 @@ For each failing module choose one case:
                       in the reason exactly what it has to adapt to. If the failing module was NOT delivered in this
                       batch, this case is not available: the delivery that changed the interface did not adapt its
                       user and is returned ("breaker").
-  "not-the-batch"     no delivery listed as a suspect causes the failure. Return nothing.
+  "not-the-batch"     allowed ONLY when the failing module and all its imports are byte-identical to the last green commit, mechanically checked by the tools. Return nothing.
 Return as few deliveries as make the build pass. Only suspects listed for a failure may be returned for it.
 
 {failures}
@@ -794,6 +959,10 @@ def execute(b: dict, decisions: list[dict], log) -> None:
             per.setdefault(k, []).append(d)
         if not d["return"]:
             log(f"batch {b['id']} triage: {d['failure']} {d['case']} ({d.get('by', 'tools')}); nothing returned |", d.get("reason", "")[:200])
+    if not per:
+        withdraw(b, "triage cannot name a delivery", log); return
+    if b.get("round", 0) > 0:
+        withdraw(b, "still red after take-out", log); return
     for k, ds in per.items():
         e = ent.get(k)
         if not e or e["state"] != "landed":
@@ -812,8 +981,8 @@ def execute(b: dict, decisions: list[dict], log) -> None:
         except Exception as x:  # noqa: BLE001
             if "merge.lock held" in str(x):
                 log("lock busy, will retry", e["group"], e["item"], e["head"][:9]); continue
-            e["state"] = "stuck"; e["why"] = repr(x)[:300]
-            log("COULD NOT TAKE OUT (the maintainer decides)", e["group"], e["item"], e["head"][:9], "|", repr(x)[:300])
+            alert(b["id"], ds[0]["failure"], "take-out failed: " + repr(x)[:300], "withdraw whole batch")
+            withdraw(b, "take-out failed: " + str(x)[:300], log); return
     b["round"] += 1
     b.pop("triage", None)
     write_json(OPEN, b)
@@ -824,6 +993,8 @@ def step(cache: dict, log) -> str:
     b = read_json(OPEN)
     if not b:
         return "landed" if land_batch(cache, log) else "idle"
+    if b.get("recovery"):
+        return recovery_step(b, log)
     for e in b["entries"]:
         if e["state"] != "landed":
             continue
@@ -842,6 +1013,7 @@ def step(cache: dict, log) -> str:
         log(f"batch {b['id']} closed: {n} verified by the global build, {len(b['entries']) - n} not "
             f"({', '.join(key(e) + ' ' + e['state'] for e in b['entries'] if e['state'] != 'verified') or '-'}); "
             f"cycle {b['cycle_seconds']} s, {b['round']} round(s) of triage")
+        clear_alert()
         return "verified"
     write_json(OPEN, b)
     if "_pre" in cache:
@@ -866,13 +1038,12 @@ def step(cache: dict, log) -> str:
         return "waiting"
     if not {e["landing"] for e in pend} & inc or {e["landing"] for e in b["entries"] if e["state"] in ("returned", "reverted")} & inc:
         return "waiting"
+    if b.get("round", 0) > 0:
+        withdraw(b, "red after take-out", log); return "returned"
     T = triage(b, last)
     if not T["decisions"] and not T["open"]:
-        b["handled"].append(last.get("time")); write_json(OPEN, b)
-        if True:
-            log(f"batch {b['id']}: the build is red in {' '.join(T['unattributed'][:6]) or '?'}, which no delivery of the batch "
-                "wrote or lies under: not the batch's; waiting for the maintainer")
-        return "waiting"
+        withdraw(b, "unattributed red/probe failure", log)
+        return "returned"
     log(f"batch {b['id']}: RED build (round {b['round'] + 1}); failing {' '.join((last.get('failing') or [])[:8])}")
     b["handled"].append(last.get("time"))
     if b["round"] >= ROUNDS:
@@ -881,6 +1052,15 @@ def step(cache: dict, log) -> str:
         execute(b, ds, log)
         return "returned"
     if T["open"]:
+        published = ld.read_json(ld.B / 'published.json') or {}
+        green = published.get('commit') or next((x.get('commit') for x in reversed(ld.records(ld.DONE)) if x.get('result', 'verified') == 'verified' and x.get('commit')), None)
+        imports = library_imports()
+        identical = bool(green) and all(
+            recovery.blob(ROOT, last['commit'], s3.path_of_module(m)) == recovery.blob(ROOT, green, s3.path_of_module(m))
+            for o in T['open'] for m in (li.closure(o['failure'], imports, {}) | {o['failure']}))
+        if not identical:
+            withdraw(b, 'failing import closure differs from published commit; skip not-the-batch agent', log)
+            return 'returned'
         d = write_request(b, T)
         b["triage"] = {"dir": str(d), "deadline": time.time() + TRIAGE_WAIT, "decisions": T["decisions"], "T": {"open": T["open"]}}
         write_json(OPEN, b)
@@ -911,13 +1091,17 @@ def main(a: list[str]) -> int:
             m = read_json(p) or {}
             print(f"  passed, waiting for a batch: {m.get('group')}/{m.get('item')} {str(m.get('head'))[:9]} by {m.get('reviewer')}")
         return 0
-    if len(a) >= 4 and a[0] == "unland":
+    if len(a) >= 4 and a[0] in ("unland", "take-out"):
         b = read_json(OPEN) or {"entries": []}
         e = next((e for e in b["entries"] if e["group"] == a[1] and e["item"] == a[2] and e["state"] == "landed"), None)
         if not e:
             print(f"{a[1]}/{a[2]} is not a landed delivery of the open batch"); return 1
         reason = " ".join(a[3:])
-        unland(e, f"(the batch landing, head {e['head'][:9]}) taken out of the library again by the maintainer: {reason}", reason)
+        try:
+            unland(e, f"(the batch landing, head {e['head'][:9]}) taken out of the library again by the maintainer: {reason}", reason)
+        except recovery.Conflict as exc:
+            withdraw(b, 'take-out conflict: ' + str(exc), out)
+            return 0
         e["state"] = "returned"; e["why"] = reason; write_json(OPEN, b)
         return 0
     if a and a[0] == "pass":
