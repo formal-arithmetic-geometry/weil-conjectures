@@ -29,11 +29,10 @@
  ],
  "proof": [
   {
-   "text": "Notation and the closed fibre. Write $\\varphi:R\\to S$, $\\mathfrak m_R,\\mathfrak m_S$ for the maximal ideals. Since $\\varphi$ is local, $\\varphi(\\mathfrak m_R)\\subset\\mathfrak m_S$, so $\\mathfrak m_RS\\subset\\mathfrak m_S\\ne S$ and $\\varphi^{-1}(\\mathfrak m_S)=\\mathfrak m_R$ (the preimage is a proper ideal containing $\\mathfrak m_R$). Hence $\\bar S:=S/\\mathfrak m_RS$ is a nonzero ring; it is Noetherian as a quotient of the Noetherian ring $S$ [lem-weil-pbc-surjective-image-noetherian], and it is local with maximal ideal $\\mathfrak m_S/\\mathfrak m_RS$, since its ideals are the ideals of $S$ containing $\\mathfrak m_RS$ and $\\mathfrak m_S$ is the only maximal one among them. So the hypothesis '$S/\\mathfrak m_RS$ is regular' is the statement that the Noetherian local ring $\\bar S$ is a regular local ring [def-weil-regular-scheme].",
+   "text": "The regular closed-fibre hypothesis supplies its Noetherian and local instances [def-weil-regular-scheme]. Write I = m_R S. Locality gives comap(f,m_S) = m_R and I ≤ m_S. The surjective quotient map q : S → S/I sends m_S to the unique maximal ideal of the closed fibre. This uses the standard local-ring map and quotient APIs, not a separate Noetherian-image theorem.",
    "uses": [
-    "lem-weil-pbc-surjective-image-noetherian",
-    "def-weil-pbc-noetherian-ring",
-    "def-weil-regular-scheme"
+    "def-weil-regular-scheme",
+    "def-weil-pbc-noetherian-ring"
    ],
    "elementary": false,
    "source": {
@@ -42,10 +41,9 @@
    }
   },
   {
-   "text": "Dimension formula (Stacks 00ON, which the proof of 031E cites). Apply [lem-weil-pbc-flat-height-formula] to the flat map $\\varphi$ of Noetherian rings with $\\mathfrak Q=\\mathfrak m_S$ and $\\mathfrak p=\\varphi^{-1}(\\mathfrak m_S)=\\mathfrak m_R$ (Step 1): $\\dim S_{\\mathfrak m_S}=\\dim R_{\\mathfrak m_R}+\\dim(S_{\\mathfrak m_S}/\\mathfrak m_RS_{\\mathfrak m_S})$. In a local ring every element outside the maximal ideal is a unit, so the localization maps $R\\to R_{\\mathfrak m_R}$ and $S\\to S_{\\mathfrak m_S}$ are isomorphisms [def-weil-pbc-localization-at-prime], and $S_{\\mathfrak m_S}/\\mathfrak m_RS_{\\mathfrak m_S}=S/\\mathfrak m_RS=\\bar S$. Hence $\\dim S=\\dim R+\\dim\\bar S$. (In the height form: $\\operatorname{ht}\\mathfrak m_S=\\dim S$, $\\operatorname{ht}\\mathfrak m_R=\\dim R$ and $\\operatorname{ht}(\\mathfrak m_S/\\mathfrak m_RS)=\\dim\\bar S$, the height of the maximal ideal of a local ring being its dimension.)",
+   "text": "Equip S with the R-algebra structure from f. Flatness [def-weil-pbc-flat-ring-map] supplies going down. The comap equality makes m_S lie over m_R. Apply [lem-weil-pbc-flat-height-formula], Mathlib Ideal.height_eq_height_add_of_liesOver_of_hasGoingDown, to these two maximal ideals. Rewrite the quotient image using IsLocalRing.map_maximalIdeal_of_surjective, and rewrite all maximal-ideal heights as Krull dimensions using IsLocalRing.maximalIdeal_height_eq_ringKrullDim. This yields dim S = dim R + dim(S/I), directly without localizing.",
    "uses": [
     "lem-weil-pbc-flat-height-formula",
-    "def-weil-pbc-localization-at-prime",
     "def-weil-pbc-flat-ring-map",
     "def-weil-pbc-noetherian-ring"
    ],
@@ -56,9 +54,9 @@
    }
   },
   {
-   "text": "Generators of $\\mathfrak m_S$. Let $d=\\dim R$ and $e=\\dim\\bar S$, both finite natural numbers because $R$ and $\\bar S$ are regular local rings [def-weil-regular-scheme]. Since $R$ is regular, pick $x_1,\\dots,x_d$ generating $\\mathfrak m_R$; since $\\bar S$ is regular, pick $y_1,\\dots,y_e\\in\\mathfrak m_S$ whose images generate the maximal ideal $\\mathfrak m_S/\\mathfrak m_RS$ of $\\bar S$ (lift any $e$ generators; the lifts lie in $\\mathfrak m_S$). Then $\\varphi(x_1),\\dots,\\varphi(x_d),y_1,\\dots,y_e$ generate $\\mathfrak m_S$: they lie in $\\mathfrak m_S$; and for $s\\in\\mathfrak m_S$ write $\\bar s=\\sum_j\\bar b_j\\bar y_j$ in $\\bar S$, so $s-\\sum_jb_jy_j\\in\\mathfrak m_RS=\\sum_i\\varphi(x_i)S$ (as the $x_i$ generate $\\mathfrak m_R$), i.e. $s\\in(\\varphi(x_1),\\dots,\\varphi(x_d),y_1,\\dots,y_e)$.",
+   "text": "Choose finite sets x and y generating m_R and m_(S/I), of cardinalities their respective spanFinranks, using Noetherianity [def-weil-pbc-noetherian-ring]. Lift y along q to a finite subset z of m_S, with q injective on z and image y. Set t = f(x) ∪ z. Its span is I ∨ span(z), so it contains I. Its image under q is span(y) = q(m_S). Equality of ideal images under a surjection gives span(t) ∨ ker(q) = m_S ∨ ker(q); ker(q) = I is contained in both, so span(t) = m_S. Finset cardinal bounds and injectivity on z give spanFinrank(m_S) ≤ card(t) ≤ spanFinrank(m_R) + spanFinrank(m_(S/I)).",
    "uses": [
-    "def-weil-regular-scheme"
+    "def-weil-pbc-noetherian-ring"
    ],
    "elementary": true,
    "source": {
@@ -67,7 +65,7 @@
    }
   },
   {
-   "text": "Conclusion. By Step 3 the maximal ideal of the Noetherian local ring $S$ is generated by $d+e$ elements, and $d+e=\\dim R+\\dim\\bar S=\\dim S$ by Step 2. So $\\mathfrak m_S$ can be generated by $\\dim S$ elements, which is the definition of a regular local ring [def-weil-regular-scheme]; $S$ is regular. (No appeal to the inequality $\\dim S\\le$ minimal number of generators of $\\mathfrak m_S$, Stacks 00KW, is needed, since the definition asks only for generation by $\\dim S$ elements.)",
+   "text": "Regularity of R and S/I identifies their maximal-ideal spanFinranks with their Krull dimensions [def-weil-regular-scheme]. Cast the finite generator bound into WithBot ENat, and use the dimension formula from step 2 to obtain spanFinrank(m_S) ≤ dim S. Apply Mathlib IsRegularLocalRing.of_spanFinrank_maximalIdeal_le, whose reverse inequality is Krull's height theorem, to obtain IsRegularLocalRing S. The finite-set construction handles empty generating sets without a separate positive-dimension assumption.",
    "uses": [
     "def-weil-regular-scheme"
    ],
@@ -79,17 +77,15 @@
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-surjective-image-noetherian",
-  "def-weil-pbc-noetherian-ring",
   "def-weil-regular-scheme",
+  "def-weil-pbc-noetherian-ring",
   "lem-weil-pbc-flat-height-formula",
-  "def-weil-pbc-localization-at-prime",
   "def-weil-pbc-flat-ring-map"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/algebra.tex",
-  "place": "Algebra, Lemma Tag 031E (lemma-flat-over-regular-with-regular-fibre), lines 27458--27480, with Lemma Tag 00ON (lines 27420--27456)"
+  "place": "Algebra, Lemma Tag 031E, generator-lifting proof, and Lemma Tag 00ON; formalized by D3 using the direct maximal-ideal height formula and finite-set lifting"
  },
  "mathlib_searches": [
   {
@@ -193,5 +189,15 @@
   "group": "F1",
   "result": "pass",
   "note": "R: IsRegularLocalRing (local+Noetherian+regular); S: IsLocalRing+IsNoetherianRing; f local: IsLocalHom; flat: RingHom.Flat f; closed fibre S ⧸ (maximalIdeal R).map f regular: IsRegularLocalRing; conclusion IsRegularLocalRing S; forms match M1 864d16c92, E1 91ccca9e3; #check resolves to Mathlib IsRegularLocalRing"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D3",
+  "result": "pass",
+  "landing": "20261012T085227-L-9222",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
