@@ -7,14 +7,9 @@ module
 
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
 
-import Sheaf.AlgebraicGeometry.AffineEtaleSiteColimit
-import Sheaf.AlgebraicGeometry.EtaleCohomologyPullbackFunctorial
-import Sheaf.CategoryTheory.CohomologyColimitSites
-import Sheaf.AlgebraicGeometry.FullAffineEtaleTopos
-import Sheaf.AlgebraicGeometry.LimitAffineTransition
-import Sheaf.CategoryTheory.ColimitSites
-import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
-import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
+import Sheaf.AlgebraicGeometry.EtaleLimitCohomologyClassDescent
+import Sheaf.AlgebraicGeometry.EtaleLimitAffineEventualZero
+import Mathlib.Algebra.Category.Grp.FilteredColimits
 
 /-! # Affine-stage cohomology continuity
 
@@ -99,6 +94,53 @@ theorem etale_limit_cohomology_affine_comparison
     (hB : ∀ i : I, B.ι.app i ≫ eB.hom =
       (eH i).hom ≫ AddCommGrpCat.ofHom (cohomologyMap (c.π.app (op i)) (F i) p) ≫
         AddCommGrpCat.ofHom (Sheaf.H.map ((eG i).inv ≫ L.ι.app i) p)) :
-    Nonempty (IsColimit B) := by sorry
+    Nonempty (IsColimit B) := by
+  have : PreservesFilteredColimitsOfSize.{u, u} (forget AddCommGrpCat.{u + 1}) :=
+    preservesFilteredColimitsOfSize_of_univLE.{u + 1, u + 1, u, u} _
+  have hlift := etale_limit_cohomology_class_descent D c hc F φ hidentity hcomposition
+    G eG hG L hL p H eH hH B eB hB
+  have hzero := etale_limit_affine_eventual_zero D c hc F φ hidentity hcomposition
+    G eG hG L hL p
+  have hleg (i : I) (x : H.obj i) :
+      eB.hom (B.ι.app i x) =
+        Sheaf.H.map ((eG i).inv ≫ L.ι.app i) p
+          (cohomologyMap (c.π.app (op i)) (F i) p ((eH i).hom x)) := by
+    exact congrArg (fun f ↦ f x) (hB i)
+  have htrans (i j : I) (f : i ⟶ j) (x : H.obj i) :
+      (eH j).hom (H.map f x) =
+        Sheaf.H.map (φ f) p (cohomologyMap (D.map f.op) (F i) p ((eH i).hom x)) := by
+    rw [hH]
+    simp
+  have hbij : Function.Bijective (colimit.desc H B) := by
+    constructor
+    · apply (injective_iff_map_eq_zero (colimit.desc H B).hom).2
+      intro z hz
+      obtain ⟨i, x, rfl⟩ := Concrete.colimit_exists_rep H z
+      have hx : B.ι.app i x = 0 := by
+        change (colimit.ι H i ≫ colimit.desc H B) x = 0 at hz
+        rwa [colimit.ι_desc] at hz
+      have hx' : Sheaf.H.map ((eG i).inv ≫ L.ι.app i) p
+          (cohomologyMap (c.π.app (op i)) (F i) p ((eH i).hom x)) = 0 := by
+        rw [← hleg, hx]
+        exact map_zero eB.hom.hom
+      obtain ⟨j, f, hf⟩ := hzero i ((eH i).hom x) hx'
+      have hfx : H.map f x = 0 := by
+        have heq : (eH j).hom (H.map f x) = 0 := (htrans i j f x).trans hf
+        have := congrArg (fun y ↦ (eH j).inv y) heq
+        simpa using this
+      calc
+        colimit.ι H i x = colimit.ι H j (H.map f x) :=
+          (colimit.w_apply H f x).symm
+        _ = 0 := by rw [hfx]; exact map_zero (colimit.ι H j).hom
+    · intro y
+      obtain ⟨i, x, hx⟩ := hlift y
+      refine ⟨colimit.ι H i x, ?_⟩
+      change (colimit.ι H i ≫ colimit.desc H B) x = y
+      rw [colimit.ι_desc]
+      exact hx
+  have : IsIso (colimit.desc H B) :=
+    (ConcreteCategory.isIso_iff_bijective (colimit.desc H B)).2 hbij
+  exact ⟨(colimit.isColimit H).ofIsoColimit
+    (Cocone.ext (asIso (colimit.desc H B)) (by intro i; simp))⟩
 
 end AlgebraicGeometry.Etale
