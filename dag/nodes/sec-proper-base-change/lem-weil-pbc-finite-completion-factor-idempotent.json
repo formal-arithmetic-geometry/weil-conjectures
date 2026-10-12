@@ -1,0 +1,146 @@
+{
+ "id": "lem-weil-pbc-finite-completion-factor-idempotent",
+ "kind": "statement",
+ "title": "Idempotent data for the selected finite completion factor before transfer",
+ "statement": "Let R be a Noetherian commutative ring [def-weil-pbc-noetherian-ring], S a commutative R-algebra, q a prime of S, and S' an R-subalgebra finite as an R-module [def-weil-finitely-generated-module]. Let g belong to S', with its image outside q, and suppose the canonical away-localization map S'_g to S_g is bijective [def-weil-pbc-module-localization-away]. Put p = q contracted to R, Rp = R_p, Sq = S_q [def-weil-pbc-localization-at-prime], Ip and Iq their maximal ideals, and Rph and Sqh their completions [def-weil-pbc-adic-completion]. Let f:Rp to Sq be the local base map. Put T = Rph tensor_R S', U = Rph tensor_R S, let j:T to U be the tensor inclusion, and put gamma = 1 tensor g in T. Let psi:Rph to Sqh be a ring homomorphism satisfying, for all n, x and a, eval_n(x) = a mod Ip^n implies eval_n(psi(x)) = f(a) mod Iq^n. Let phi:U to Sqh be any ring homomorphism with phi(x tensor y) = psi(x) times the image of y in Sqh. There exist e,v in T such that e^2=e, v gamma=e, phi(j(e))=1, phi composed with j is surjective, and phi(j(t))=0 implies e t=0 for every t in T. This is only finite-tensor factor data; it asserts no splitting or equivalence for U.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, proof of Lemma Tag 07NC (lemma-completion-at-quasi-finite-prime), finite product decomposition, invertibility of g on its selected factor, and the sanity check for the completed base map."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-finitely-generated-module",
+  "def-weil-pbc-module-localization-away",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-pbc-adic-completion"
+ ],
+ "proof": [
+  {
+   "text": "Contract q to q' in S'. For each y in S, away-map surjectivity gives z in S' and n with z = g^n y. The power g^n lies in S' and outside q. Thus S' is saturated to all of S along the intersection of the prime complement with S'. Localization.localRingHom_bijective_of_saturated_inf_eq_top supplies the local-ring isomorphism S'_{q'} to S_q. Alternatively the same numerator and denominator formulas establish bijectivity directly. It takes the maximal ideals and all their powers to one another. Apply its quotient equivalences componentwise to compatible sequences to get the completion equivalence alpha, with its levelwise formula and its formula on S'.",
+   "uses": [
+    "def-weil-pbc-module-localization-away",
+    "def-weil-pbc-localization-at-prime",
+    "def-weil-pbc-adic-completion"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The ideal q' is prime and lies over p. Apply completion_finite_extension_decomposition R S' p and select the factor indexed by q'. Its completed-base map theta has the displayed quotient formula. For every x and n choose a representative a of x's nth quotient coordinate. The quotient formulas for theta, alpha and psi, and commutativity of the local-ring square on R_p, give equal nth coordinates of alpha(theta(x)) and psi(x). Completion extensionality identifies these elements. On x tensor y, multiplicativity, the completed-base compatibility and S'-linearity of the finite product equivalence show phi j equals alpha followed by this factor projection.",
+   "uses": [
+    "lem-weil-pbc-completion-finite-extension-decomposition",
+    "def-weil-pbc-adic-completion"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Pull back the tuple supported at q' with value 1 to e in T. Multiplication is componentwise, so e is idempotent and the projection of e is 1. Since g is outside q', its image in S'_{q'} and hence in its completion is a unit. Pull back the tuple supported at q' with its inverse to v. Componentwise multiplication gives v gamma=e. Given c in Sqh, pull back the tuple supported at q' with value alpha inverse(c), proving surjectivity of phi j. If phi(j(t))=0, alpha injective gives zero q' component; multiplication by the tuple defining e kills all other components, so e t=0. The formulas include a singleton product and arbitrary other factors.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-module-localization-away",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-pbc-adic-completion",
+  "lem-weil-pbc-completion-finite-extension-decomposition"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Expanded selected-factor argument of Tag 07NC, with coordinate comparison and supported tuples spelled out."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A finite algebra completion product decomposition selects an idempotent whose corner is the completion at a prime and on which an element outside the prime is invertible",
+   "date": "2026-10-12",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite algebra completion product decomposition selects an idempotent whose corner is the completion at a prime and on which an element outside the prime is invertible",
+   "date": "2026-10-12",
+   "results": "RingHom.pi_bijective_of_isIdempotentElem, CompleteOrthogonalIdempotents.bijective_pi', Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq, RingHom.prod_bijective_of_isIdempotentElem, CompleteOrthogonalIdempotents.lift_of_isNilpotent_ker, CompleteOrthogonalIdempotents.bijective_pi, CompleteOrthogonalIdempotents.lift_of_isNilpotent_ker_aux, AlgEquiv.prodQuotientOfIsIdempotentElem_apply_fst",
+   "verdict": "supporting facts; no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "completion.*(idempotent|factor)|idempotent.*completion",
+   "date": "2026-10-12",
+   "results": "Mathlib/RingTheory/AdicCompletion/Basic.lean, Mathlib/RingTheory/AdicCompletion/Basic.lean, Mathlib/RingTheory/AdicCompletion/Basic.lean",
+   "verdict": "supporting facts; no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.CompletionAtQuasiFinitePrimeSplit",
+  "date": "2026-10-12",
+  "group": "X3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "step 7 of its split (source: Lemma 0GS2, proof: the essential-surjectivity paragraphs); the finite product factor and its unit in Tag 07NC",
+   "via": [
+    "lem-weil-pbc-completion-finite-subalgebra-away-split",
+    "lem-weil-pbc-completion-at-quasi-finite-prime",
+    "lem-weil-pbc-formal-fibre-quasi-finite-ascent",
+    "lem-weil-pbc-complete-local-g-ring",
+    "lem-weil-pbc-g-ring-maximal-ideal-criterion",
+    "lem-weil-pbc-henselization-pair-g-ring",
+    "lem-weil-pbc-finite-etale-lifting-limit-descent",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.FiniteCompletionFactorIdempotent",
+  "file": "lean/Sheaf/RingTheory/FiniteCompletionFactorIdempotent.lean",
+  "declaration": "Algebra.finite_completion_factor_idempotent",
+  "statement": "theorem finite_completion_factor_idempotent\n    (R : Type u) (S : Type v) [CommRing R] [CommRing S] [Algebra R S]\n    [IsNoetherianRing R] (q : PrimeSpectrum S)\n    (S' : Subalgebra R S) [Module.Finite R S']\n    (g : S') (hg : g.1 ∉ q.asIdeal)\n    (haway : Function.Bijective (Localization.awayMap S'.val.toRingHom g)) :\n    let p : Ideal R := q.comap (algebraMap R S)\n    let Rp := Localization.AtPrime p\n    let Sq := Localization.AtPrime q.asIdeal\n    let Ip := IsLocalRing.maximalIdeal Rp\n    let Iq := IsLocalRing.maximalIdeal Sq\n    let Rph := AdicCompletion Ip Rp\n    let Sqh := AdicCompletion Iq Sq\n    let f : Rp →+* Sq := Localization.localRingHom p q.asIdeal (algebraMap R S) rfl\n    let T := TensorProduct R Rph S'\n    let U := TensorProduct R Rph S\n    let j := (TensorProduct.map (AlgHom.id R Rph) S'.val).toRingHom\n    let γ := TensorProduct.tmul R (1 : Rph) g\n    ∀ (ψ : Rph →+* Sqh),\n      (∀ (n : ℕ) (x : Rph) (a : Rp),\n        AdicCompletion.evalₐ Ip n x = Ideal.Quotient.mk (Ip ^ n) a →\n        AdicCompletion.evalₐ Iq n (ψ x) = Ideal.Quotient.mk (Iq ^ n) (f a)) →\n      ∀ (φ : U →+* Sqh),\n        (∀ (x : Rph) (y : S), φ (TensorProduct.tmul R x y) =\n          ψ x * algebraMap Sq Sqh (algebraMap S Sq y)) →\n        ∃ e v : T, IsIdempotentElem e ∧ v * γ = e ∧ φ (j e) = 1 ∧\n          Function.Surjective (φ.comp j) ∧ (∀ t, φ (j t) = 0 → e * t = 0)",
+  "branch": "sheaf-dag",
+  "by": "X3",
+  "date": "2026-10-12"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X3",
+  "result": "pass",
+  "landing": "20261012T215158-L-1305460",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X3",
+  "result": "pass",
+  "landing": "20261012T215158-L-1305460",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
