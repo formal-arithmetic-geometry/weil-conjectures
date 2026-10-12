@@ -181,6 +181,8 @@ def merge_file(upstream, module, ours, selected, mapping):
             raise ValueError(f'{p}: signature changed: {name}')
         edits.append((t['kw_pos'],t['end'],new)); accepted.append(name)
     for a,b,new in sorted(edits,reverse=True): theirs=theirs[:a]+new+theirs[b:]
+    if not accepted:
+        return theirs, kept, accepted
     # Only selected imports enter this PR; imports for unrelated proofs stay out.
     added=[m for m in IMPORT.findall(ours) if m in selected|set(mapping) and m not in IMPORT.findall(theirs)]
     if added and accepted:
