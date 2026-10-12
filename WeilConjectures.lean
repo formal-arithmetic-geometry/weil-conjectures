@@ -128,6 +128,7 @@ public import WeilConjectures.AlgebraicGeometry.FiniteOverField
 public import WeilConjectures.AlgebraicGeometry.Frobenius
 public import WeilConjectures.AlgebraicGeometry.FrobeniusFixedPoints
 public import WeilConjectures.AlgebraicGeometry.FunctionFieldLimit
+public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.AdditiveCharacters
 public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.Basic
 public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.Connected
 public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.ConstantCover
@@ -169,6 +170,7 @@ public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.SheafOfSections
 public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.Specialization
 public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.TameInertia
 public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.Torsor
+public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.TorsorCoefficients
 public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.TorsorExtension
 public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.TorsorExtensionCount
 public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.TorsorExtensionMap
