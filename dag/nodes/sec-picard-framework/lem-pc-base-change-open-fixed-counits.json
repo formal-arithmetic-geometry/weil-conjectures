@@ -1,0 +1,173 @@
+{
+ "id": "lem-pc-base-change-open-fixed-counits",
+ "kind": "statement",
+ "title": "Open base-change restriction for fixed single-module counits",
+ "statement": "Choose shared derived categories [def-pc-derived-category] and additive tensor pullbacks [def-pc-module-pullback]. Let $f:X\\to S$, $g:S'\\to S$, $g':X'\\to X$, and $f':X'\\to S'$ form a cartesian square [def-pc-fibre-product]. Let $G$ be an arbitrary $\\mathcal O_X$-module, $V\\subseteq S$ and $W\\subseteq S'$ open with $W\\subseteq g^{-1}V$. Put $U=f^{-1}V$, $f_V=f|_V$, $g_V=g|_W:W\\to V$, $H=G|_U$, $P=U\\times_VW$, $p:P\\to U$, $q:P\\to W$, and $R=(-)|_W$ on derived categories [def-pc-derived-open-restriction-maps]. For any scheme morphism $k$ and module $M$, let $t_k:k^*_{\\rm tensor}\\cong k^*_{\\rm ordinary}$ be the unique adjunction-preserving comparison [lem-pc-module-pullback-adjunction]. Let $d_k(M)$ be canonicalSinglePullbackMap [lem-pc-canonical-single-pullback-comparison], followed by $t_k^{-1}(M)[0]$. This is the explicit single-module component of the fixed counit selected by exists_derivedPullbackComposition [lem-pc-ringed-spaces-derived-pullback-composition], not an arbitrary map satisfying a comparison predicate. There exist isomorphisms $a:R(Lg^*Rf_*(G[0]))\\cong Lg_V^*Rf_{V,*}(H[0])$ and $b:R(Rf'_*(g'^*_{\\rm tensor}G)[0])\\cong Rq_*((p^*_{\\rm tensor}H)[0])$ such that $R(\\beta\\mathbin{\\gg}Rf'_*(d_{g'}(G)))\\mathbin{\\gg}b=a\\mathbin{\\gg}(\\beta_V\\mathbin{\\gg}Rq_*(d_p(H)))$, where both base-change maps are schemeDerivedBaseChangeMap [def-pc-derived-base-change-map]. No flatness, affineness, quasi-coherence, properness or nonemptiness is assumed.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/08FE",
+  "place": "Tag 08FE, proof of derived direct-image restriction; Tag 08HY, counit construction; Tag 08IB, first proof paragraph (restriction part); Tag 0D5U, exact extension by zero"
+ },
+ "stmt_deps": [
+  "def-pc-derived-category",
+  "def-pc-module-pullback",
+  "def-pc-fibre-product",
+  "def-pc-derived-module-base-change-map",
+  "def-pc-derived-open-restriction-maps",
+  "def-pc-derived-base-change-map",
+  "def-pc-scheme",
+  "lem-pc-module-pullback-adjunction",
+  "lem-pc-canonical-single-pullback-comparison",
+  "lem-pc-ringed-spaces-derived-pullback-composition"
+ ],
+ "proof": [
+  {
+   "text": "Let Z be the inverse image of W under f'. The universal property of the original cartesian square identifies Z with the chosen pullback P of the restricted maps: a cone over U and W composes to a cone over X and S', whose unique lift has image in Z. The two projections agree under this identification. This includes empty opens.",
+   "uses": [
+    "def-pc-fibre-product"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Compute derived direct images on K-injective resolutions and pullbacks on K-flat resolutions. Apply derived direct-image restriction to f and f', and derived pullback restriction to g. Exact restriction identifies G[0] with H[0]. The ordinary pullback restriction identifies the restriction of g'*G with p*H. These give the source and target isomorphisms a and b.",
+   "uses": [
+    "lem-pc-restrict-derived-direct-image-open",
+    "lem-pc-derived-pullback-open-restriction-universes",
+    "lem-weil-pbc-open-immersion-module-pullback-restriction",
+    "def-pc-derived-open-restriction-maps"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the fixed left-derived counits selected in the composition structure, whose single components are d after cancelling t followed by t inverse. On K-flat representatives, pullback composition is the underived tensor reassociation; the derived adjunction is pinned to the same counits. Transpose the original and restricted mates under their pinned adjunctions. The underived square commutes sectionwise, by the restriction/pasting identity. Its localization and the derived counit equations identify the two transposes. To compare the two fixed counits on the open, extend complexes by zero, which is exact, and use the universal property of the left-derived functor. The resulting degree-zero identification can be absorbed into b; thus the asserted isomorphisms exist even though fixed counits on distinct morphisms are not assumed literally equal under restriction. This yields the displayed equality after composing the mates with d.",
+   "uses": [
+    "lem-pc-ringed-spaces-derived-pullback-composition",
+    "def-pc-derived-base-change-map",
+    "lem-pc-canonical-single-pullback-comparison",
+    "lem-weil-pbc-module-square-restriction-commutes",
+    "lem-sc-derived-open-restriction-adjunction-exact"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-derived-base-change-map",
+  "def-pc-derived-open-restriction-maps",
+  "def-pc-fibre-product",
+  "lem-pc-canonical-single-pullback-comparison",
+  "lem-pc-derived-pullback-open-restriction-universes",
+  "lem-pc-restrict-derived-direct-image-open",
+  "lem-pc-ringed-spaces-derived-pullback-composition",
+  "lem-sc-derived-open-restriction-adjunction-exact",
+  "lem-weil-pbc-module-square-restriction-commutes",
+  "lem-weil-pbc-open-immersion-module-pullback-restriction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/08HY",
+  "place": "Restriction computation using Tags 08FE and 0D5U; the first locality paragraph of Tag 08IB. Fixed-counit bookkeeping made explicit by Q2."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "derived base change natural transformation commutes with restriction to open subschemes",
+   "results": "AlgebraicGeometry.Scheme.Hom.map_appLE, AlgebraicGeometry.Scheme.Hom.appLE_map, AlgebraicGeometry.Scheme.Hom.naturality_assoc, AlgebraicGeometry.Scheme.Hom.naturality, AlgebraicGeometry.Scheme.Hom.map_appLE_assoc, AlgebraicGeometry.Scheme.Modules.restrictFunctorComp, AlgebraicGeometry.Scheme.Modules.restrictFunctorComp_hom_app_app, AlgebraicGeometry.Scheme.Hom.appLE_map_assoc",
+   "verdict": "no exact match",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leansearch",
+   "query": "derived base change commutes with restriction to open sets for fixed derived counits",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "grep",
+   "query": "base.change.*restrict|restrict.*base.change",
+   "results": "No hits",
+   "verdict": "no exact match",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Beck Chevalley mate transformation localization exact open immersion derived module counit",
+   "results": "General derived adjunction factorization and localization identities; underived restrictFunctorAdjCounitIso. No exact open-square comparison.",
+   "verdict": "no exact match",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.derivedε_fac_app",
+   "results": "General counit factorization through localization, insufficient without the open-square comparisons.",
+   "verdict": "no exact match",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "grep",
+   "query": "derivedε_fac_app|restriction.*counit|counit.*restriction",
+   "results": "Three hits: underived scalar restriction/coextension and the general derived counit factorization. No exact comparison.",
+   "verdict": "no exact match",
+   "date": "2026-10-13"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.CanonicalModuleBaseChangeOpenComparisonCompat",
+  "date": "2026-10-13",
+  "group": "Q2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-base-change-flat-module",
+   "place": "Step 1 local affine reduction: open restriction, with fixed derived counits before independence of module comparison choices",
+   "via": [
+    "lem-pc-canonical-module-base-change-open-comparison-compat",
+    "lem-pc-canonical-module-base-change-affine-chart-comparison",
+    "lem-pc-canonical-module-base-change-affine-locality",
+    "lem-pc-relatively-flat-canonical-module-base-change"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-f-representable",
+ "lean_audit": {
+  "slopmaster2": {
+   "state": "none",
+   "decls": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.BaseChangeOpenFixedCounits",
+  "file": "lean/Sheaf/AlgebraicGeometry/BaseChangeOpenFixedCounits.lean",
+  "declaration": "AlgebraicGeometry.restricted_base_change_fixed_counits",
+  "statement": "theorem restricted_base_change_fixed_counits\n    [∀ Y : Scheme.{u}, HasDerivedCategory.{w}\n      (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]\n    [∀ {Y Z : Scheme.{u}} (a : Y ⟶ Z), (Scheme.Modules.tensorPullback a).Additive]\n    {X S X' S' : Scheme.{u}} (f : X ⟶ S) (g : S' ⟶ S)\n    (g' : X' ⟶ X) (f' : X' ⟶ S') (sq : IsPullback g' f' f g)\n    (G : X.Modules) (V : S.Opens) (W : S'.Opens) (hWV : W ≤ g ⁻¹ᵁ V) :\n    fixedCounitRestrictionStatement f g g' f' sq G V W hWV",
+  "branch": "sheaf-dag",
+  "by": "Q2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q2",
+  "result": "pass",
+  "landing": "20261012T225325-L-1811484",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q2",
+  "result": "pass",
+  "landing": "20261012T225325-L-1811484",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

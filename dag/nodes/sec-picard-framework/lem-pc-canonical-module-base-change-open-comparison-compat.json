@@ -18,17 +18,32 @@
  ],
  "proof": [
   {
-   "text": "Apply the cited open-restriction and derived base-change constructions; the required cartesian and naturality identities give the displayed witness and equality.",
-   "uses": [],
+   "text": "Construct the fixed single-module counit components by cancelling the adjunction-preserving tensor-to-ordinary comparison from canonicalSinglePullbackMap. They satisfy IsDerivedModulePullbackComparison directly: use the chosen derived counit and cancel the single embedding of t followed by its inverse.",
+   "uses": [
+    "lem-pc-canonical-single-pullback-comparison",
+    "lem-pc-ringed-spaces-derived-pullback-composition"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply modulePullbackComparison_target_automorphism twice: c=c_fixed followed by alpha[0] and c0=c0_fixed followed by gamma[0]. Obtain a,b for the fixed components from lem-pc-base-change-open-fixed-counits. Let A be restriction of Rf'_* applied to alpha[0] and B be Rq_* applied to gamma[0]. Replace b by A inverse followed by b followed by B. Functoriality and associativity cancel A followed by A inverse; compose the fixed equality with B to obtain the required equality for the two supplied comparisons.",
+   "uses": [
+    "lem-pc-module-pullback-comparison-target-automorphism",
+    "lem-pc-base-change-open-fixed-counits"
+   ],
    "elementary": false
   }
  ],
- "proof_deps": [],
+ "proof_deps": [
+  "lem-pc-base-change-open-fixed-counits",
+  "lem-pc-canonical-single-pullback-comparison",
+  "lem-pc-module-pullback-comparison-target-automorphism",
+  "lem-pc-ringed-spaces-derived-pullback-composition"
+ ],
  "proof_origin": {
-  "by": "worker",
-  "document": "https://stacks.math.columbia.edu/tag/08FE",
-  "place": "Tags 08FE, 08HY, 08IB, 0D5U",
-  "note": "Stage-3 decomposition of the parent theorem."
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/08HY",
+  "place": "Fixed-counit restriction reduced separately; independence of the two supplied comparisons via the existing target-automorphism theorem, with the conjugation calculation proved in Lean."
  },
  "mathlib_searches": [
   {
@@ -113,9 +128,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "K2",
+  "group": "Q2",
   "result": "pass",
-  "landing": "20261012T202242-L-705179",
+  "landing": "20261012T225325-L-1811484",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
