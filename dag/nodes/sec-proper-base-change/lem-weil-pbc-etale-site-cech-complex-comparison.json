@@ -1,0 +1,146 @@
+{
+ "id": "lem-weil-pbc-etale-site-cech-complex-comparison",
+ "kind": "statement",
+ "title": "Comparison of chosen-product and categorical etale Cech complexes",
+ "statement": "Let $X$ be a scheme and let $X_{\\mathrm{Et}}$ be its small etale category [def-weil-pbc-etale-site]. Let $U$ be an object, let $T$ be a set, and let $f_t:V_t\\to U$ be any indexed family. Let $S$ specify chosen iterated fibre products, their universal properties and projection-compatible index maps as in [def-weil-pbc-site-cech-complex]. For every presheaf $F:X_{\\mathrm{Et}}^{op}\\to\\mathrm{Ab}$, the explicit alternating restriction complex $S.\\check{\\mathcal C}^{\\bullet}(F)$ [def-weil-pbc-site-cech-complex] is isomorphic as a cochain complex to the categorical Cech complex [def-weil-pbc-cech-complex] of the family $(V_t\\to U)$ in the slice over $U$, applied to the restriction of $F$ along the forgetful functor. No covering or sheaf condition on $F$ is assumed.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Section Tag 03AK, equation-d-cech and Definition Tag 03AM; independence of fibre-product choices, as written out in def-weil-pbc-site-cech-complex, proof step 4"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-site-cech-complex",
+  "def-weil-pbc-cech-complex"
+ ],
+ "proof": [
+  {
+   "text": "For every degree p and tuple a, form the product P_a of the objects (V_(a k) -> U) in Over U. Its underlying object and projections satisfy the same fibre-product universal property as S.W p a, by [def-weil-pbc-site-cech-complex] and [def-weil-pbc-etale-site]. The universal properties give inverse projection-compatible maps between them.",
+   "uses": [
+    "def-weil-pbc-site-cech-complex",
+    "def-weil-pbc-etale-site"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply the contravariant abelian presheaf F to the isomorphisms of Step 1, and take their product over all tuples a. The categorical product in AddCommGrpCat is isomorphic to the group of tuples by its projections. Thus these maps identify the degree-p objects of the explicit complex [def-weil-pbc-site-cech-complex] with those of the categorical complex [def-weil-pbc-cech-complex].",
+   "uses": [
+    "def-weil-pbc-site-cech-complex",
+    "def-weil-pbc-cech-complex"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For each omitted index j, the product isomorphisms commute with the omitted-factor maps: both composites to the target product have the same projection to each remaining factor, so are equal by uniqueness. Applying F proves compatibility with each restriction term; additivity proves compatibility with the signed finite sum defining the differential in [def-weil-pbc-site-cech-complex] and [def-weil-pbc-cech-complex]. The degree maps therefore define a complex morphism. Reverse the product isomorphisms to get its inverse. The composites are identities degreewise, hence on complexes. Empty index sets give empty products on both sides; degree zero uses the singleton product isomorphism.",
+   "uses": [
+    "def-weil-pbc-site-cech-complex",
+    "def-weil-pbc-cech-complex"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-cech-complex",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-site-cech-complex"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Section 03AK and Definition 03AM, the alternating restriction formula; universal-property comparison written out for the two Lean constructions"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Cech complexes formed using different choices of fibre products are canonically isomorphic",
+   "results": "Service unavailable: Internal Server Error. No verdict inferred from this unavailable search.",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The Cech complex formed from chosen fibre products is isomorphic to the Cech complex functor formed from categorical products in the slice category",
+   "results": "CechNerveTerminalFrom.iso and wideCospan.limitIsoPi compare nerves and finite products; TopCat sheaf condition diagram isomorphisms. No comparison involving SiteCechComplex.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.cechComplexFunctor",
+   "results": "Only CategoryTheory.cechComplexFunctor, its definition.",
+   "date": "2026-10-12",
+   "verdict": "no comparison theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "SiteCechComplex|cechComplexFunctorIso; repository search for SiteCechComplex with cechComplexFunctor; blueprint_refs search Cech complex and fibre product",
+   "results": "No Mathlib comparison. Repository has SiteCechComplex.comparison_exists for two SiteCechComplex choices, but no comparison with Mathlib cechComplexFunctor. Blueprint matches contain no statement of this comparison.",
+   "date": "2026-10-12",
+   "verdict": "no existing matching statement"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.InjectiveModuleAbelianAcyclic",
+  "date": "2026-10-12",
+  "group": "C1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-weil-pbc-projective-line",
+   "place": "step 5, the acyclicity of injective coefficient-module sheaves; comparison of the Cech complexes used to apply 03FC and 03F9",
+   "via": [
+    "lem-weil-pbc-injective-module-abelian-acyclic",
+    "lem-weil-pbc-injective-module-direct-image-acyclic"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleSiteCechComplexComparison",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleSiteCechComplexComparison.lean",
+  "declaration": "AlgebraicGeometry.Scheme.nonempty_etale_siteCech_complex_iso",
+  "statement": "theorem nonempty_etale_siteCech_complex_iso\n    (X : Scheme.{u}) (U : X.Etale) {J : Type (u + 1)}\n    (V : J → X.Etale) (f : ∀ j : J, V j ⟶ U) (S : SiteCechComplex V f)\n    (F : X.Etaleᵒᵖ ⥤ AddCommGrpCat.{u + 1}) :\n    Nonempty (S.complex F ≅\n      (cechComplexFunctor fun j : J ↦ Over.mk (f j)).obj ((Over.forget U).op ⋙ F))",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C1",
+  "result": "pass",
+  "landing": "20261012T024111-L-1152519",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C1",
+  "result": "pass",
+  "landing": "20261012T024111-L-1152519",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed after the tool's own checks (compiles, no new sorry without its node, no axiom, statements of existing declarations unchanged); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

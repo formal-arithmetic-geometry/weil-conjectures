@@ -26,81 +26,45 @@
  ],
  "proof": [
   {
-   "text": "Fix an object $U$ of $X_{\\Et}$ and a covering $\\mathcal U=\\{U_i\\to U\\}_{i\\in I}$ of $U$ in $X_{\\Et}$. Write $\\mathcal O=R_X$ and, as in [lem-weil-pbc-free-cech-complex-exact], $\\mathcal O_V$ for the presheaf of $\\mathcal O$-modules $W\\mapsto\\bigoplus_{\\varphi\\in\\Mor(W,V)}\\mathcal O(W)$ and $K_\\bullet=\\mathcal O_{\\mathcal U,\\bullet}$ for the chain complex with $K_p=\\bigoplus_{(i_0,\\ldots,i_p)}\\mathcal O_{U_{i_0}\\times_U\\cdots\\times_UU_{i_p}}$ and alternating differential. For any presheaf of $\\mathcal O$-modules $\\mathcal G$ [def-weil-presheaf-modules-sheafification] and object $V$, a morphism $\\psi:\\mathcal O_V\\to\\mathcal G$ is determined by $\\psi_V(1\\cdot[\\mathrm{id}_V])\\in\\mathcal G(V)$, and every element $g\\in\\mathcal G(V)$ arises, from $\\psi_W(a\\cdot[\\varphi])=a\\,\\varphi^*g$ (Yoneda); so $\\Hom_{\\mathrm{PMod}(\\mathcal O)}(\\mathcal O_V,\\mathcal G)=\\mathcal G(V)$, naturally in $V$ and $\\mathcal G$, and $\\Hom(\\bigoplus_\\alpha\\mathcal O_{V_\\alpha},\\mathcal G)=\\prod_\\alpha\\mathcal G(V_\\alpha)$. Under these identifications the map $\\Hom(K_p,\\mathcal G)\\to\\Hom(K_{p+1},\\mathcal G)$ induced by the differential of $K_\\bullet$ is $s\\mapsto(\\sum_j(-1)^js_{i_0\\ldots\\hat{i_j}\\ldots i_{p+1}}|_{U_{i_0}\\times_U\\cdots\\times_UU_{i_{p+1}}})$, because the map $\\mathcal O_{V'}\\to\\mathcal O_V$ induced by a morphism $V'\\to V$ corresponds to restriction $\\mathcal G(V)\\to\\mathcal G(V')$. Hence $\\Hom_{\\mathrm{PMod}(\\mathcal O)}(K_\\bullet,\\mathcal G)\\cong\\check{\\mathcal C}^\\bullet(\\mathcal U,\\mathcal G)$ as cochain complexes [def-weil-pbc-cech-complex], functorially in $\\mathcal G$.",
+   "text": "Use the precoverage associated to the small etale Grothendieck topology [def-weil-pbc-etale-site]. Its generated topology equals the original one: one inequality is the Mathlib Galois-connection counit; for the other, the arrows of any covering sieve belong to the precoverage and generate that same sieve. For any covering family, choose a SiteCechComplex with its iterated fibre products by the existence theorem of [def-weil-pbc-site-cech-complex].",
    "uses": [
-    "def-weil-presheaf-modules-sheafification",
-    "def-weil-pbc-cech-complex",
-    "lem-weil-pbc-free-cech-complex-exact",
+    "def-weil-pbc-etale-site",
+    "def-weil-pbc-site-cech-complex"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply [lem-weil-pbc-ringed-site-injective-module-cech-acyclic] to the constant ring sheaf and the given injective module sheaf, transporting its topology along the equality of Step 1. This gives zero positive homology of the chosen-product Cech complex. By [lem-weil-pbc-etale-site-cech-complex-comparison], that complex is isomorphic to the categorical Cech complex of the underlying abelian presheaf. Applying the homology functor to the isomorphism and transporting IsZero gives zero positive categorical Cech cohomology. Forgetting module scalars changes neither sections nor restrictions [def-weil-pbc-abelian-etale-sheaves, def-weil-pbc-etale-sheaves].",
+   "uses": [
+    "lem-weil-pbc-ringed-site-injective-module-cech-acyclic",
+    "lem-weil-pbc-etale-site-cech-complex-comparison",
+    "def-weil-pbc-abelian-etale-sheaves",
     "def-weil-pbc-etale-sheaves"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Lemma Tag 03FC (lemma-injective-module-trivial-cech), proof, first display: Lemma Tag 03AS (lemma-cech-map-into), whose proof is the tautology of Modules on Sites, Lemma Tag 03A8 (lemma-obvious-adjointness), combined with the change-of-rings adjunction Modules on Sites, Lemma Tag 03CU (lemma-adjointness-tensor-restrict-presheaves) for Z_{U,bullet} tensor_{p,Z} O"
-   }
+   "elementary": false
   },
   {
-   "text": "By [lem-weil-pbc-free-cech-complex-exact] applied to the presheaf of rings $\\mathcal O=R_X$ and the covering $\\mathcal U$, the complex $K_\\bullet$ is exact in positive degrees in $\\mathrm{PMod}(\\mathcal O)$: $H_p(K_\\bullet)=0$ for $p>0$ (exactness in the presheaf category is objectwise).",
-   "uses": [
-    "lem-weil-pbc-free-cech-complex-exact"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Lemma Tag 03FC, proof: Lemma Tag 03F5 (lemma-complex-tensored-still-exact)"
-   }
-  },
-  {
-   "text": "Let $I$ be injective in $\\Mod(X_{\\Et},R)$. By [lem-weil-pbc-injective-module-injective-presheaf], $I$ is injective in $\\mathrm{PMod}(R_X)$, so the contravariant functor $\\Hom_{\\mathrm{PMod}(R_X)}(-,I)$ is exact; an exact additive functor commutes with taking homology, so $H^p(\\Hom(K_\\bullet,I))=\\Hom(H_p(K_\\bullet),I)=0$ for $p>0$ by the previous step. By the first step this cochain complex is $\\check{\\mathcal C}^\\bullet(\\mathcal U,I)$; thus $\\check H^p(\\mathcal U,I)=0$ for every $p>0$.",
-   "uses": [
-    "lem-weil-pbc-injective-module-injective-presheaf",
-    "def-weil-pbc-cech-complex"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Lemma Tag 03FC (lemma-injective-module-trivial-cech), proof: Lemma Tag 03FB and exactness of Hom(-, I)"
-   }
-  },
-  {
-   "text": "The Cech complex of the module sheaf $I$ is by definition [def-weil-pbc-cech-complex] the Cech complex of its underlying presheaf of abelian groups, which is the underlying presheaf of the abelian sheaf $I_{ab}$ [def-weil-pbc-abelian-etale-sheaves] (same groups $I(V)$, same restriction maps). Hence $\\check H^p(\\mathcal U,I_{ab})=\\check H^p(\\mathcal U,I)=0$ for $p>0$, for every covering $\\mathcal U$ of every object $U$ of $X_{\\Et}$.",
-   "uses": [
-    "def-weil-pbc-cech-complex",
-    "def-weil-pbc-abelian-etale-sheaves"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Lemma Tag 03FD (lemma-cohomology-modules-abelian-agree), proof, second paragraph: assumption (3) of Lemma 03F9 holds by Lemma 03FC"
-   }
-  },
-  {
-   "text": "Apply [lem-weil-pbc-cech-vanishing-criterion] to $\\mathcal F=I_{ab}$, $\\mathcal B=\\Ob(X_{\\Et})$ and $\\mathrm{Cov}$ the set of all coverings of $X_{\\Et}$. Assumption (1) holds because fibre products of objects of $X_{\\Et}$ over an object exist in $X_{\\Et}$ [def-weil-pbc-etale-site]; assumption (2) holds because every covering of $U$ belongs to $\\mathrm{Cov}$ and refines itself; assumption (3) is the previous step. The criterion gives $H^q(U,I_{ab})=0$ for every $q>0$ and every object $U$ of $X_{\\Et}$, cohomology being the derived functors of $G\\mapsto G(U)$ on $\\Ab(X_{\\Et})$, which is the claim.",
+   "text": "Apply [lem-weil-pbc-cech-vanishing-criterion] with B the set of all objects and Cov the collection of all covering families. Every object and every iterated fibre product belongs to B. Every cover refines itself using the same index set, the identity maps of its members, and the category identity law. The Cech-vanishing hypothesis is Step 2. The resulting zero positive derived evaluation at the original U and q is exactly the assertion.",
    "uses": [
     "lem-weil-pbc-cech-vanishing-criterion",
     "def-weil-pbc-etale-site"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Lemma Tag 03FD (lemma-cohomology-modules-abelian-agree), proof, second paragraph: Lemma Tag 03F9 (lemma-cech-vanish-collection) with B = C and Cov = Cov_C"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
   "def-weil-pbc-abelian-etale-sheaves",
-  "def-weil-pbc-cech-complex",
   "def-weil-pbc-etale-sheaves",
   "def-weil-pbc-etale-site",
-  "def-weil-presheaf-modules-sheafification",
+  "def-weil-pbc-site-cech-complex",
   "lem-weil-pbc-cech-vanishing-criterion",
-  "lem-weil-pbc-free-cech-complex-exact",
-  "lem-weil-pbc-injective-module-injective-presheaf"
+  "lem-weil-pbc-etale-site-cech-complex-comparison",
+  "lem-weil-pbc-ringed-site-injective-module-cech-acyclic"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Lemma Tag 03FD (lemma-cohomology-modules-abelian-agree), second paragraph of the proof, with Lemma Tag 03FC (lemma-injective-module-trivial-cech) and its proof written out, and Lemma Tag 03F9 (lemma-cech-vanish-collection); stated there for any ringed site, here for (X_et, R_X)"
+  "place": "Lemma 03FD, second paragraph, applying 03FC and 03F9; uses the existing general ringed-site 03FC statement and an explicit comparison of its chosen-product complex with the categorical etale Cech complex"
  },
  "mathlib_searches": [
   {
@@ -218,5 +182,15 @@
   "group": "K1",
   "result": "pass",
   "note": "X:Scheme, R CommRing via constantSheaf RingCat ULift (as landed EtaleShortExactLocalLift), I:SheafOfModules [Injective I] in modules only, I_ab = SheafOfModules.toSheaf, all U:X.Etale, q>0, rightDerived of abelian evaluation formed before applying (same expression as landed EtaleCechVanishingCriterion), IsZero; #check clean"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C1",
+  "result": "pass",
+  "landing": "20261012T024111-L-1152519",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed after the tool's own checks (compiles, no new sorry without its node, no axiom, statements of existing declarations unchanged); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

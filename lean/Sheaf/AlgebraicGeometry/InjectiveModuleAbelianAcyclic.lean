@@ -10,6 +10,10 @@ public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
 public import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.EnoughInjectives
 public import Mathlib.CategoryTheory.Abelian.RightDerived
 
+import Sheaf.CategoryTheory.Sites.InjectiveModuleCechAcyclic
+import Sheaf.AlgebraicGeometry.EtaleCechVanishingCriterion
+import Sheaf.AlgebraicGeometry.EtaleSiteCechComplexComparison
+
 /-!
 # Abelian cohomology of injective etale module sheaves
 
@@ -59,6 +63,38 @@ theorem isZero_rightDerived_etale_toSheaf_of_injective
     IsZero (((sheafToPresheaf X.smallEtaleTopology AddCommGrpCat.{u + 1} ⋙
       (CategoryTheory.evaluation X.Etaleᵒᵖ AddCommGrpCat.{u + 1}).obj
         (op U)).rightDerived q).obj ((SheafOfModules.toSheaf _).obj I)) := by
-  sorry
+  have htop : X.smallEtaleTopology.toPrecoverage.toGrothendieck =
+      X.smallEtaleTopology := by
+    apply le_antisymm
+    · exact X.smallEtaleTopology.toGrothendieck_toPrecoverage_le
+    · intro U S hS
+      simpa only [Sieve.generate_sieve] using
+        Precoverage.generate_mem_toGrothendieck
+          ((GrothendieckTopology.arrows_mem_toPrecoverage_iff _ S).mpr hS)
+  let J := X.smallEtaleTopology.toPrecoverage
+  let O := (constantSheaf X.smallEtaleTopology RingCat.{u + 1}).obj
+    (RingCat.of (ULift.{u + 1, u} R))
+  have hcech (U : X.Etale) (T : Type (u + 1)) (V : T → X.Etale)
+      (f : ∀ t : T, V t ⟶ U) (hf : Sieve.ofArrows V f ∈ X.smallEtaleTopology U)
+      (p : ℕ) (hp : 0 < p) :
+      IsZero (((cechComplexFunctor fun t : T ↦ Over.mk (f t)).obj
+        ((Over.forget U).op ⋙ ((SheafOfModules.toSheaf O).obj I).obj)).homology p) := by
+    have hcover : Presieve.ofArrows V f ∈ J U := hf
+    obtain ⟨S⟩ := SiteCechComplex.exists_of_covering J hcover
+    have hzero : IsZero ((S.cohomologyFunctor p).obj I.val.presheaf) := by
+      have h := @CategoryTheory.injective_module_cech_cohomology_isZero
+        X.Etale _ J _ _ _ _
+      rw [show J.toGrothendieck = X.smallEtaleTopology from htop] at h
+      exact @h O inferInstance inferInstance I inferInstance T U V f hcover S p hp
+    obtain ⟨e⟩ := nonempty_etale_siteCech_complex_iso X U V f S I.val.presheaf
+    exact hzero.of_iso ((HomologicalComplex.homologyFunctor _ _ p).mapIso e.symm)
+  exact isZero_rightDerived_etale_of_cech_vanishing X Set.univ
+    (fun U _ V f ↦ Sieve.ofArrows V f ∈ X.smallEtaleTopology U)
+    ((SheafOfModules.toSheaf O).obj I)
+    (fun _ _ _ _ h ↦ h)
+    (fun _ _ _ _ _ ↦ ⟨Set.mem_univ _, fun _ ↦ Set.mem_univ _,
+      fun _ _ ↦ Set.mem_univ _⟩)
+    (fun _ _ T V f hf ↦ ⟨T, V, f, hf, fun t ↦ ⟨t, 𝟙 _, by simp⟩⟩)
+    hcech U (Set.mem_univ _) q hq
 
 end AlgebraicGeometry.Scheme
