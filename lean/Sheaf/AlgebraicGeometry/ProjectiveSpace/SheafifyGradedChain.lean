@@ -9,9 +9,8 @@ public import Mathlib.Algebra.Homology.ExactSequence
 public import Sheaf.AlgebraicGeometry.ProjGradedModuleSheafExists
 public import Sheaf.AlgebraicGeometry.ProjectiveLineProjChartIsomorphism
 
-import Sheaf.AlgebraicGeometry.ProjSheafificationExact
-import Sheaf.AlgebraicGeometry.ProjTildeFunctorial
-import Sheaf.AlgebraicGeometry.TensorPullback
+import Sheaf.AlgebraicGeometry.ProjectiveSpace.GradedChainMapsExact
+import Sheaf.AlgebraicGeometry.ProjectiveSpace.GradedModuleChartData
 
 /-!
 # Exactness of an associated graded chain on the projective line
@@ -146,6 +145,33 @@ theorem sheafify_graded_chain (k : Type u) [Field k]
               alpha g b hb hg ((E i).val.map (homOfLE inc).op s) =
                 mk (a ^ m • y) (⟨g ^ (e * m), ⟨e * m, rfl⟩⟩ : Submonoid.powers g))) ∧
       Mono g₂ ∧ Epi g₀ ∧ (ComposableArrows.mk₃ g₂ g₁ g₀).Exact := by
-  sorry
+  classical
+  have hcharts := fun i : Fin 3 ↦
+    graded_module_chart_data_exists k (A i) (𝒢 i) (h𝒢 i) (hA_smul i)
+  choose E hE using hcharts
+  obtain ⟨g₂, g₁, g₀, hg₂, hg₀, hex⟩ := graded_chain_maps_exact k M 𝓜 h𝓜 hsmul
+    F alpha halpha hscalar hres A 𝒢 f₂ f₁ f₀ h𝒢 hA_smul hf₂ hf₁ hf₀ hinj hex₁ hex₀
+    hsurj E hE
+  let P := Scheme.Modules.pullback C.iso.inv
+  let Q := Scheme.Modules.pullback C.iso.hom
+  let e : (Proj (homogeneousSubmodule (Fin 2) k)).Modules ≌
+      (ProjectiveLine (Spec (.of k))).Modules :=
+    CategoryTheory.Equivalence.mk P Q
+      ((Scheme.Modules.pullbackComp C.iso.hom C.iso.inv) ≪≫
+        Scheme.Modules.pullbackCongr C.iso.hom_inv_id ≪≫
+        Scheme.Modules.pullbackId _).symm
+      ((Scheme.Modules.pullbackComp C.iso.inv C.iso.hom) ≪≫
+        Scheme.Modules.pullbackCongr C.iso.inv_hom_id ≪≫
+        Scheme.Modules.pullbackId _)
+  have : P.IsEquivalence := e.isEquivalence_functor
+  have : Mono g₂ := hg₂
+  have : Epi g₀ := hg₀
+  refine ⟨E, P.map g₂, P.map g₁, P.map g₀, hE, inferInstance, inferInstance, ?_⟩
+  have h₂₁ : g₂ ≫ g₁ = 0 := hex.toIsComplex.zero 0
+  have h₁₀ : g₁ ≫ g₀ = 0 := hex.toIsComplex.zero 1
+  have hx₂₁ : (ShortComplex.mk g₂ g₁ h₂₁).Exact := hex.exact 0
+  have hx₁₀ : (ShortComplex.mk g₁ g₀ h₁₀).Exact := hex.exact 1
+  exact ComposableArrows.exact_of_δ₀
+    ((hx₂₁.map P).exact_toComposableArrows) ((hx₁₀.map P).exact_toComposableArrows)
 
 end AlgebraicGeometry.Proj

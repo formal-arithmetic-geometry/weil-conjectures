@@ -1,0 +1,129 @@
+{
+ "id": "lem-sc-p1-graded-chain-maps-exact",
+ "kind": "statement",
+ "title": "Exact maps between fixed associated sheaves of a graded chain",
+ "statement": "Let $k$ be a field and $S=k[T_0,T_1]$. Let $M,A_0,A_1,A_2$ be internally integer-graded $S$-modules with degree-compatible scalar multiplication. Suppose degree-preserving maps form an exact chain $0\\to A_2\\to A_1\\to A_0\\to M\\to0$. Fix module sheaves $F,E_0,E_1,E_2$ on $\\operatorname{Proj}(S)$ [def-nagata-affine-proj], each equipped with injective additive standard-open chart maps onto degree-zero fractions, respecting ring actions and the homogeneous restriction formula [lem-weil-pbc-proj-graded-module-sheaf-exists]. Then there exist maps $E_2\\to E_1\\to E_0\\to F$ with monic first map, epic last map, and exactness at both middle terms. No projective-line isomorphism or transported arrows occur in this statement.",
+ "source": {
+  "document": "Stacks Project, Constructions of Schemes",
+  "place": "Definition 27.8.3 (01M6), construction preceding it; Lemma 27.8.4 (01M7), clauses (2),(3),(5) and final paragraph",
+  "url": "https://stacks.math.columbia.edu/tag/01M7"
+ },
+ "stmt_deps": [
+  "def-nagata-affine-proj",
+  "lem-weil-pbc-proj-graded-module-sheaf-exists"
+ ],
+ "proof": [
+  {
+   "text": "Put K=range(f_1), with degree-j part K intersect G_0(j). Decompose each preimage into finitely many homogeneous parts; degree preservation and internality show the degree-j projection of an image is itself an image. Thus these parts give an internal grading on K, compatible with scalar multiplication. The injectivity, two range/kernel identities and surjectivity give the short exact sequences A_2 -> A_1 -> K and K -> A_0 -> M.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Use the underlying additive-subgroup polynomial grading for gradedModuleSheaf_exists and tilde_functorial, and the canonical scheme isomorphism with the homogeneous-submodule Proj obtained by identifying homogeneous ideals and fraction charts. Its chart ring maps and restrictions agree. Construct the associated sheaf of K and canonical sheaves/stalk charts for the other modules. The given chart data identify each fixed sheaf with the canonical one: invert the injective map onto its stated range and compose with the canonical chart equivalence. The scalar equations make this linear over the chart ring. For any basic-open inclusion standardOpenProperties gives g^e=af; both chart restrictions agree on all fractions by the supplied restriction formulas. Apply exists_sheafOfModules_from_basis to these compatible chart isomorphisms. Transport the canonical stalk maps across the resulting sheaf isomorphisms.",
+   "uses": [
+    "lem-weil-pbc-proj-graded-module-sheaf-exists",
+    "lem-weil-pbc-proj-standard-open-inclusion",
+    "lem-weil-pbc-sheaf-of-modules-from-basis"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use tilde_functorial on the two triples to construct the induced maps with their fraction formulas. Use proj_sheafification_shortExact for the two short sequences and these formulas.",
+   "uses": [
+    "lem-sc-p1-proj-tilde-functorial",
+    "lem-sc-p1-proj-sheafification-exact"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Compose E_1 -> K~ with K~ -> E_0. The first short exact sequence supplies a mono E_2 -> E_1, and the second an epi E_0 -> F. Composing with a mono leaves the first kernel unchanged, and composing with an epi leaves the second image unchanged. The two short exactness identities therefore establish exactness at E_1 and E_0.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-proj-graded-module-sheaf-exists",
+  "lem-weil-pbc-proj-standard-open-inclusion",
+  "lem-weil-pbc-sheaf-of-modules-from-basis",
+  "lem-sc-p1-proj-tilde-functorial",
+  "lem-sc-p1-proj-sheafification-exact"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project, Constructions of Schemes",
+  "place": "Tag 01M7; interface extraction from the proof of lem-sc-p1-sheafify-graded-chain"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "exact sequence of associated sheaves on Proj induced by exact graded module maps",
+   "results": "Service unavailable: HTTP 500. No absence verdict inferred.",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An exact chain of graded modules induces an exact chain of associated sheaves on Proj",
+   "results": "Chart query returned Proj.structureSheaf and ModuleCat.tilde (on Spec); chain query returned IsLocalizedModule.map_exact and ModuleCat.localizedModule_functor_map_exact. None packages the associated module sheaf charts or chain on Proj.",
+   "verdict": "no direct match",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "grep",
+   "query": "gradedModuleSheaf_exists|sheafify_graded_chain|graded.*[Ee]xact|[Ee]xact.*graded in Mathlib/AlgebraicGeometry/ProjectiveSpectrum, lean/Sheaf and lean/WeilConjectures",
+   "results": "Existing gradedModuleSheaf_exists takes additive-subgroup gradings; target takes homogeneousSubmodule. tilde_functorial additionally needs stalk charts. proj_sheafification_shortExact requires an already specified short sequence of sheaf maps with fraction formulas. No direct matching statement.",
+   "verdict": "no direct match",
+   "date": "2026-10-12"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ProjectiveSpace.SheafifyGradedChain",
+  "date": "2026-10-12",
+  "group": "X2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-p1-graded-resolution",
+   "place": "Sheafifying the graded resolution; Exact maps between fixed associated sheaves of a graded chain",
+   "via": [
+    "lem-sc-p1-sheafify-graded-chain"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ProjectiveSpace.GradedChainMapsExact",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProjectiveSpace/GradedChainMapsExact.lean",
+  "declaration": "AlgebraicGeometry.Proj.graded_chain_maps_exact",
+  "statement": "theorem graded_chain_maps_exact (k : Type u) [Field k]\n    (M : ModuleCat.{u} (MvPolynomial (Fin 2) k))\n    (𝓜 : ℤ → AddSubgroup M) (h𝓜 : DirectSum.IsInternal 𝓜)\n    (hsmul : ∀ (n : ℕ) (z : ℤ) (a : MvPolynomial (Fin 2) k) (y : M),\n      a ∈ homogeneousSubmodule (Fin 2) k n → y ∈ 𝓜 z → a • y ∈ 𝓜 (n + z))\n    (F : (Proj (homogeneousSubmodule (Fin 2) k)).Modules)\n    (alpha : ∀ (f : MvPolynomial (Fin 2) k) (d : ℕ),\n      0 < d → f ∈ homogeneousSubmodule (Fin 2) k d →\n      F.val.obj (op (basicOpen (homogeneousSubmodule (Fin 2) k) f)) →+\n        LocalizedModule.Away f M)\n    (halpha : ∀ (f : MvPolynomial (Fin 2) k) (d : ℕ) (hd : 0 < d)\n        (hf : f ∈ homogeneousSubmodule (Fin 2) k d),\n        Function.Injective (alpha f d hd hf) ∧\n        Set.range (alpha f d hd hf) = degreeZeroFractions\n          (fun n : ℕ ↦ (homogeneousSubmodule (Fin 2) k n : Set (MvPolynomial (Fin 2) k)))\n          (fun n : ℕ ↦ (𝓜 n : Set M)) (Submonoid.powers f))\n    (hscalar : ∀ (f : MvPolynomial (Fin 2) k) (d : ℕ) (hd : 0 < d)\n        (hf : f ∈ homogeneousSubmodule (Fin 2) k d)\n        (r : HomogeneousLocalization.Away (homogeneousSubmodule (Fin 2) k) f)\n        (s : F.val.obj (op (basicOpen (homogeneousSubmodule (Fin 2) k) f))),\n        alpha f d hd hf (awayToSection (homogeneousSubmodule (Fin 2) k) f r • s) =\n          algebraMap (HomogeneousLocalization.Away (homogeneousSubmodule (Fin 2) k) f)\n            (Localization.Away f) r • alpha f d hd hf s)\n    (hres : ∀ (f g : MvPolynomial (Fin 2) k) (d b : ℕ) (hd : 0 < d) (hb : 0 < b)\n        (hf : f ∈ homogeneousSubmodule (Fin 2) k d)\n        (hg : g ∈ homogeneousSubmodule (Fin 2) k b)\n        (inc : basicOpen (homogeneousSubmodule (Fin 2) k) g ≤\n          basicOpen (homogeneousSubmodule (Fin 2) k) f)\n        (e c : ℕ) (a : MvPolynomial (Fin 2) k),\n        0 < e → a ∈ homogeneousSubmodule (Fin 2) k c → g ^ e = a * f →\n        ∀ (m : ℕ) (y : M)\n          (s : F.val.obj (op (basicOpen (homogeneousSubmodule (Fin 2) k) f))),\n          alpha f d hd hf s = mk y (⟨f ^ m, ⟨m, rfl⟩⟩ : Submonoid.powers f) →\n          alpha g b hb hg (F.val.map (homOfLE inc).op s) =\n            mk (a ^ m • y) (⟨g ^ (e * m), ⟨e * m, rfl⟩⟩ : Submonoid.powers g))\n    (A : Fin 3 → ModuleCat.{u} (MvPolynomial (Fin 2) k))\n    (𝒢 : ∀ i : Fin 3, ℤ → AddSubgroup (A i))\n    (f₂ : A 2 →ₗ[MvPolynomial (Fin 2) k] A 1)\n    (f₁ : A 1 →ₗ[MvPolynomial (Fin 2) k] A 0)\n    (f₀ : A 0 →ₗ[MvPolynomial (Fin 2) k] M)\n    (h𝒢 : ∀ i : Fin 3, DirectSum.IsInternal (𝒢 i))\n    (hA_smul : ∀ (i : Fin 3) (n : ℕ) (j : ℤ) (s : MvPolynomial (Fin 2) k) (x : A i),\n        s ∈ homogeneousSubmodule (Fin 2) k n → x ∈ 𝒢 i j →\n          s • x ∈ 𝒢 i ((n : ℤ) + j))\n    (hf₂ : ∀ (j : ℤ) (x : A 2), x ∈ 𝒢 2 j → f₂ x ∈ 𝒢 1 j)\n    (hf₁ : ∀ (j : ℤ) (x : A 1), x ∈ 𝒢 1 j → f₁ x ∈ 𝒢 0 j)\n    (hf₀ : ∀ (j : ℤ) (x : A 0), x ∈ 𝒢 0 j → f₀ x ∈ 𝓜 j)\n    (hinj : Function.Injective f₂) (hex₁ : LinearMap.range f₂ = LinearMap.ker f₁)\n    (hex₀ : LinearMap.range f₁ = LinearMap.ker f₀) (hsurj : Function.Surjective f₀)\n    (E : Fin 3 → (Proj (homogeneousSubmodule (Fin 2) k)).Modules)\n    (hE : (∀ i : Fin 3,\n        ∃ (alpha : ∀ (f : MvPolynomial (Fin 2) k) (d : ℕ),\n          0 < d → f ∈ homogeneousSubmodule (Fin 2) k d →\n          (E i).val.obj (op (basicOpen (homogeneousSubmodule (Fin 2) k) f)) →+\n            LocalizedModule.Away f (A i)),\n          (∀ (f : MvPolynomial (Fin 2) k) (d : ℕ) (hd : 0 < d)\n            (hf : f ∈ homogeneousSubmodule (Fin 2) k d),\n            Function.Injective (alpha f d hd hf) ∧\n            Set.range (alpha f d hd hf) = degreeZeroFractions\n              (fun n : ℕ ↦ (homogeneousSubmodule (Fin 2) k n : Set (MvPolynomial (Fin 2) k)))\n              (fun n : ℕ ↦ (𝒢 i n : Set (A i))) (Submonoid.powers f)) ∧\n          (∀ (f : MvPolynomial (Fin 2) k) (d : ℕ) (hd : 0 < d)\n            (hf : f ∈ homogeneousSubmodule (Fin 2) k d)\n            (r : HomogeneousLocalization.Away (homogeneousSubmodule (Fin 2) k) f)\n            (s : (E i).val.obj (op (basicOpen (homogeneousSubmodule (Fin 2) k) f))),\n            alpha f d hd hf (awayToSection (homogeneousSubmodule (Fin 2) k) f r • s) =\n              algebraMap (HomogeneousLocalization.Away (homogeneousSubmodule (Fin 2) k) f)\n                (Localization.Away f) r • alpha f d hd hf s) ∧\n          (∀ (f g : MvPolynomial (Fin 2) k) (d b : ℕ) (hd : 0 < d) (hb : 0 < b)\n            (hf : f ∈ homogeneousSubmodule (Fin 2) k d)\n            (hg : g ∈ homogeneousSubmodule (Fin 2) k b)\n            (inc : basicOpen (homogeneousSubmodule (Fin 2) k) g ≤\n              basicOpen (homogeneousSubmodule (Fin 2) k) f)\n            (e c : ℕ) (a : MvPolynomial (Fin 2) k),\n            0 < e → a ∈ homogeneousSubmodule (Fin 2) k c → g ^ e = a * f →\n            ∀ (m : ℕ) (y : A i)\n              (s : (E i).val.obj (op (basicOpen (homogeneousSubmodule (Fin 2) k) f))),\n              alpha f d hd hf s = mk y (⟨f ^ m, ⟨m, rfl⟩⟩ : Submonoid.powers f) →\n              alpha g b hb hg ((E i).val.map (homOfLE inc).op s) =\n                mk (a ^ m • y) (⟨g ^ (e * m), ⟨e * m, rfl⟩⟩ : Submonoid.powers g)))) :\n    ∃ (g₂ : E 2 ⟶ E 1) (g₁ : E 1 ⟶ E 0) (g₀ : E 0 ⟶ F),\n      Mono g₂ ∧ Epi g₀ ∧ (ComposableArrows.mk₃ g₂ g₁ g₀).Exact",
+  "branch": "sheaf-dag",
+  "by": "X2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X2",
+  "result": "pass",
+  "landing": "20261012T063527-L-3163148",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X2",
+  "result": "pass",
+  "landing": "20261012T063527-L-3163148",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

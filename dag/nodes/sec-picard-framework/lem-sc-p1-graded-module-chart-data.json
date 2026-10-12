@@ -1,0 +1,114 @@
+{
+ "id": "lem-sc-p1-graded-module-chart-data",
+ "kind": "statement",
+ "title": "Associated-sheaf chart data for an integer-graded polynomial module",
+ "statement": "Let $k$ be a field, $S=k[T_0,T_1]$ and $P=\\operatorname{Proj}(S)$ with its homogeneous-submodule total-degree grading [def-nagata-affine-proj]. Let $A$ be an integer-graded $S$-module with internal grading $\\mathcal G$ and $S_n\\mathcal G_j\\subseteq\\mathcal G_{n+j}$. There exists an associated module sheaf $E$ [lem-weil-pbc-proj-graded-module-sheaf-exists] with injective additive maps from its sections on every positive homogeneous standard open into $A_f$, whose images are the degree-zero fractions. These maps respect the chart ring action and restriction along each homogeneous relation $g^e=af$, sending $y/f^m$ to $a^my/g^{em}$.",
+ "source": {
+  "document": "Stacks Project, Constructions of Schemes",
+  "place": "Definition 27.8.3 (01M6), construction preceding it; Lemma 27.8.4 (01M7), clauses (2),(3),(5) and final paragraph",
+  "url": "https://stacks.math.columbia.edu/tag/01M7"
+ },
+ "stmt_deps": [
+  "def-nagata-affine-proj",
+  "lem-weil-pbc-proj-graded-module-sheaf-exists"
+ ],
+ "proof": [
+  {
+   "text": "The additive subgroup grading underlying homogeneousSubmodule has the same homogeneous elements, multiplication and direct-sum decomposition. Apply gradedModuleSheaf_exists to this grading and G. Its Proj is canonically isomorphic to the submodule-graded Proj: identify homogeneous ideals by their underlying ideals and identify each homogeneous localization by identical numerators and denominators. The standard-open identifications commute with ring restrictions; glue them on the standard basis to identify the structure sheaves and obtain the scheme isomorphism.",
+   "uses": [
+    "lem-weil-pbc-proj-graded-module-sheaf-exists",
+    "lem-weil-pbc-proj-standard-open-inclusion"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Transport the sheaf along this scheme isomorphism. Compose the chart additive equivalences supplied by gradedModuleSheaf_exists with inclusion of Z_f into A_f. The composite is injective and has range exactly Z_f. The recorded equality of the carrier of Z_f with degree-zero fractions gives the asserted range. Apply this inclusion to the scalar equation and to the restriction equation; the supplied formula for rho gives the restriction formula g^e=af, y/f^m -> a^my/g^(em).",
+   "uses": [
+    "lem-weil-pbc-proj-graded-module-sheaf-exists"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-proj-graded-module-sheaf-exists",
+  "lem-weil-pbc-proj-standard-open-inclusion"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project, Constructions of Schemes",
+  "place": "Tag 01M7; interface extraction from the proof of lem-sc-p1-sheafify-graded-chain"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "graded module on Proj has chart sections identified with degree zero homogeneous fractions",
+   "results": "Service unavailable: HTTP 500. No absence verdict inferred.",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "associated sheaf of a graded module exists with explicit degree zero localization charts",
+   "results": "Chart query returned Proj.structureSheaf and ModuleCat.tilde (on Spec); chain query returned IsLocalizedModule.map_exact and ModuleCat.localizedModule_functor_map_exact. None packages the associated module sheaf charts or chain on Proj.",
+   "verdict": "no direct match",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "grep",
+   "query": "gradedModuleSheaf_exists|sheafify_graded_chain|graded.*[Ee]xact|[Ee]xact.*graded in Mathlib/AlgebraicGeometry/ProjectiveSpectrum, lean/Sheaf and lean/WeilConjectures",
+   "results": "Existing gradedModuleSheaf_exists takes additive-subgroup gradings; target takes homogeneousSubmodule. tilde_functorial additionally needs stalk charts. proj_sheafification_shortExact requires an already specified short sequence of sheaf maps with fraction formulas. No direct matching statement.",
+   "verdict": "no direct match",
+   "date": "2026-10-12"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ProjectiveSpace.SheafifyGradedChain",
+  "date": "2026-10-12",
+  "group": "X2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-p1-graded-resolution",
+   "place": "Sheafifying the graded resolution; Associated-sheaf chart data for an integer-graded polynomial module",
+   "via": [
+    "lem-sc-p1-sheafify-graded-chain"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ProjectiveSpace.GradedModuleChartData",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProjectiveSpace/GradedModuleChartData.lean",
+  "declaration": "AlgebraicGeometry.Proj.graded_module_chart_data_exists",
+  "statement": "theorem graded_module_chart_data_exists (k : Type u) [Field k]\n    (A : ModuleCat.{u} (MvPolynomial (Fin 2) k))\n    (𝒢 : ℤ → AddSubgroup A) (h𝒢 : DirectSum.IsInternal 𝒢)\n    (hsmul : ∀ (n : ℕ) (j : ℤ) (s : MvPolynomial (Fin 2) k) (x : A),\n      s ∈ homogeneousSubmodule (Fin 2) k n → x ∈ 𝒢 j → s • x ∈ 𝒢 ((n : ℤ) + j)) :\n    ∃ E : (Proj (homogeneousSubmodule (Fin 2) k)).Modules,\n    ∃ (alpha : ∀ (f : MvPolynomial (Fin 2) k) (d : ℕ),\n      0 < d → f ∈ homogeneousSubmodule (Fin 2) k d →\n      E.val.obj (op (basicOpen (homogeneousSubmodule (Fin 2) k) f)) →+\n        LocalizedModule.Away f A),\n      (∀ (f : MvPolynomial (Fin 2) k) (d : ℕ) (hd : 0 < d)\n        (hf : f ∈ homogeneousSubmodule (Fin 2) k d),\n        Function.Injective (alpha f d hd hf) ∧\n        Set.range (alpha f d hd hf) = degreeZeroFractions\n          (fun n : ℕ ↦ (homogeneousSubmodule (Fin 2) k n : Set (MvPolynomial (Fin 2) k)))\n          (fun n : ℕ ↦ (𝒢 n : Set A)) (Submonoid.powers f)) ∧\n      (∀ (f : MvPolynomial (Fin 2) k) (d : ℕ) (hd : 0 < d)\n        (hf : f ∈ homogeneousSubmodule (Fin 2) k d)\n        (r : HomogeneousLocalization.Away (homogeneousSubmodule (Fin 2) k) f)\n        (s : E.val.obj (op (basicOpen (homogeneousSubmodule (Fin 2) k) f))),\n        alpha f d hd hf (awayToSection (homogeneousSubmodule (Fin 2) k) f r • s) =\n          algebraMap (HomogeneousLocalization.Away (homogeneousSubmodule (Fin 2) k) f)\n            (Localization.Away f) r • alpha f d hd hf s) ∧\n      (∀ (f g : MvPolynomial (Fin 2) k) (d b : ℕ) (hd : 0 < d) (hb : 0 < b)\n        (hf : f ∈ homogeneousSubmodule (Fin 2) k d)\n        (hg : g ∈ homogeneousSubmodule (Fin 2) k b)\n        (inc : basicOpen (homogeneousSubmodule (Fin 2) k) g ≤\n          basicOpen (homogeneousSubmodule (Fin 2) k) f)\n        (e c : ℕ) (a : MvPolynomial (Fin 2) k),\n        0 < e → a ∈ homogeneousSubmodule (Fin 2) k c → g ^ e = a * f →\n        ∀ (m : ℕ) (y : A)\n          (s : E.val.obj (op (basicOpen (homogeneousSubmodule (Fin 2) k) f))),\n          alpha f d hd hf s = mk y (⟨f ^ m, ⟨m, rfl⟩⟩ : Submonoid.powers f) →\n          alpha g b hb hg (E.val.map (homOfLE inc).op s) =\n            mk (a ^ m • y) (⟨g ^ (e * m), ⟨e * m, rfl⟩⟩ : Submonoid.powers g))",
+  "branch": "sheaf-dag",
+  "by": "X2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X2",
+  "result": "pass",
+  "landing": "20261012T063527-L-3163148",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X2",
+  "result": "pass",
+  "landing": "20261012T063527-L-3163148",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

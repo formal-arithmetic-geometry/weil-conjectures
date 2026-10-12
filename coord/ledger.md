@@ -6541,3 +6541,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 06:35 L: merged deliver/W2/Sheaf.AlgebraicGeometry.ProjSheafificationExact (stage 3; reviewer PASS; first push; landing 20261012T063526-L-3162754 (interface); batch 20261012T063502; modules 3; new nodes 2)
 - 06:35 L: merged deliver/W2/Sheaf.RingTheory.FilteredColimitIsDomain (stage 3; reviewer PASS; first push; landing 20261012T063526-L-3162875 (proof); batch 20261012T063502; modules 1; new nodes 0)
 - 06:35 L: merged deliver/X2/Sheaf.AlgebraicGeometry.ProjShiftedFreeTwist (stage 3; reviewer PASS; first push; landing 20261012T063526-L-3163020 (interface); batch 20261012T063502; modules 4; new nodes 3)
+- 06:35 L: merged deliver/X2/Sheaf.AlgebraicGeometry.ProjectiveSpace.SheafifyGradedChain (stage 3; reviewer PASS; first push; landing 20261012T063527-L-3163148 (interface); batch 20261012T063502; modules 3; new nodes 2)
