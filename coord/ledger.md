@@ -8169,3 +8169,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 14:41 L: merged deliver/P2/Sheaf.RingTheory.FiniteModuleComplete (stage 3; reviewer PASS; first push; landing 20261012T144135-L-2103841 (proof); batch 20261012T144049; modules 1; new nodes 0)
 - 14:41 L: merged deliver/P3/Sheaf.AlgebraicGeometry.ProperFibreIdempotentImage (stage 3; reviewer PASS; first push; landing 20261012T144135-L-2103938 (interface); batch 20261012T144049; modules 3; new nodes 2)
 - 14:41 L: merged deliver/P3/Sheaf.CategoryTheory.BoundedBelowSecondFiltration (stage 3; reviewer PASS; first push; landing 20261012T144135-L-2104039 (proof); batch 20261012T144049; modules 1; new nodes 0)
+- 14:41 L: merged deliver/P3/Sheaf.FieldTheory.SeparableRootPthPower (stage 3; reviewer PASS; first push; landing 20261012T144136-L-2104143 (proof); batch 20261012T144049; modules 1; new nodes 0)
