@@ -9,6 +9,8 @@ public import Sheaf.RingTheory.KoszulDualComplex
 public import Sheaf.RingTheory.KoszulRegularSequence
 public import Mathlib.Algebra.Homology.DerivedCategory.Ext.Linear
 public import Mathlib.Algebra.Category.ModuleCat.Ext.HasExt
+import Sheaf.RingTheory.KoszulProjectiveResolution
+import Sheaf.CategoryTheory.ExtSignedDualHomology
 
 /-! # Ext computed by a finite free Koszul resolution
 
@@ -47,6 +49,16 @@ theorem exists_koszul_ext_dual_homology_equiv
     (I : Ideal A) (r : ℕ) (f : Fin r → A)
     (hreg : RingTheory.Sequence.IsKoszulRegular f) (hf : Ideal.span (Set.range f) = I) :
     Nonempty (Abelian.Ext (ModuleCat.of A (A ⧸ I)) (ModuleCat.of A A) r ≃ₗ[A]
-      (koszulDualComplex A r f).homology r) := by sorry
+      (koszulDualComplex A r f).homology r) := by
+  obtain ⟨P, hP⟩ := exists_koszul_projective_resolution A I r f hreg hf
+  rcases P with ⟨K, hproj, π, hπ⟩
+  dsimp only at hP
+  subst K
+  let P : ProjectiveResolution (ModuleCat.of A (A ⧸ I)) :=
+    { complex := koszulComplex A r f, projective := hproj, π := π, quasiIso := hπ }
+  apply P.exists_ext_signed_dual_homology_equiv A (koszulDualComplex A r f)
+    (fun i ↦ Iso.refl _) _ r
+  intro i
+  simp [P, koszulDualComplex, koszulDualBoundary]
 
 end ExteriorAlgebra

@@ -13,32 +13,30 @@
  ],
  "proof": [
   {
-   "text": "Construct the quotient augmentation of the Koszul complex. The image of d_1 is I, hence degree zero homology is A/I; higher homology vanishes. Each term has the finite exterior basis, so this is a projective resolution.",
+   "text": "Obtain P with P.complex=koszulComplex A r f from exists_koszul_projective_resolution. Destructure P and substitute the complex equality, keeping its projectivity, augmentation and quasi-isomorphism proofs.",
    "uses": [
-    "def-weil-pbc-koszul-complex",
-    "def-weil-pbc-koszul-regular-sequence",
-    "lem-weil-pbc-exterior-power-free-basis"
+    "new-j3-koszul-projective-resolution"
    ],
    "elementary": false
   },
   {
-   "text": "Apply Mathlib ProjectiveResolution.extEquivCohomologyClass to this resolution and A. A cocycle into A[0] has a single component in nonnegative degree n, namely a functional on K_n. Its total Hom differential is (-1)^(n+1) times precomposition with d_(n+1). Identifying that component identifies cycles, coboundaries and their quotient with homology of the signed dual complex, A-linearly. Take degree r.",
+   "text": "Apply exists_ext_signed_dual_homology_equiv to this projective resolution, Y=A and L=koszulDualComplex A r f in degree r. The component isomorphisms are identities. The differential compatibility is the defining formula of koszulDualBoundary, and follows by simp after unfolding the Koszul dual definitions.",
    "uses": [
+    "new-j3-ext-signed-dual-homology",
     "def-sc-koszul-dual-complex"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "def-sc-koszul-dual-complex",
-  "def-weil-pbc-koszul-complex",
-  "def-weil-pbc-koszul-regular-sequence",
-  "lem-weil-pbc-exterior-power-free-basis"
+  "new-j3-koszul-projective-resolution",
+  "new-j3-ext-signed-dual-homology",
+  "def-sc-koszul-dual-complex"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "https://stacks.math.columbia.edu/tag/0BQZ",
-  "place": "Lemma 48.15.5, computation of derived Hom by a finite free Koszul resolution; the source argument made explicit in exterior basis coordinates"
+  "place": "Lemma 48.15.5; second reader J3 separates augmentation/projectivity from the generic signed total Hom comparison, then checks the component differential by unfolding"
  },
  "mathlib_searches": [
   {
@@ -109,11 +107,11 @@
  "reviewed_proof": {
   "date": "2026-10-12",
   "by": "L",
-  "reviewer": "X-b3c5c",
-  "group": "V1",
+  "reviewer": "COMPILER",
+  "group": "J3",
   "result": "pass",
-  "landing": "20261012T223424-L-1643422",
+  "landing": "20261012T234219-L-2125260",
   "kind": "interface",
-  "note": "independent Codex review: Packet, delivered files, node metadata, report, and lcompile.py --all result matched; the roof theorem’s STATEMENT-DISPUTED sign counterexample is valid."
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

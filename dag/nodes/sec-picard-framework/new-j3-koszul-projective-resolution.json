@@ -1,0 +1,120 @@
+{
+ "id": "new-j3-koszul-projective-resolution",
+ "kind": "statement",
+ "title": "The Koszul chain complex is a projective resolution of its quotient",
+ "statement": "For every commutative ring A, ideal I, natural number r, and sequence f:Fin r -> A which is Koszul-regular [def-weil-pbc-koszul-regular-sequence] and has span(range f)=I, there exists a projective resolution P of the A-module A/I whose chain complex is exactly K_A(f) [def-weil-pbc-koszul-complex]. No assumption that I is proper or r is positive is made.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/0BQZ",
+  "place": "Lemma 48.15.5, finite free Koszul resolution; Tags 0623 and 062E for the augmentation and Koszul regularity"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-koszul-regular-sequence",
+  "def-weil-pbc-koszul-complex"
+ ],
+ "proof": [
+  {
+   "text": "Construct the augmentation: identify wedge^0(A^r) with A and then quotient by I in degree zero; use zero in positive degrees. Contraction d_1 sends e_i to f_i, so its image is span(range f)=I and the augmentation is a chain map.",
+   "uses": [
+    "def-weil-pbc-koszul-complex",
+    "lem-weil-pbc-exterior-power-free-basis"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The cokernel universal property identifies the induced map on H_0 with A/I. Positive homology vanishes by Koszul regularity and the target single complex has zero positive homology. Therefore the augmentation is a quasi-isomorphism.",
+   "uses": [
+    "def-weil-pbc-koszul-regular-sequence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Each Koszul term has the exterior basis of the standard finite free module, hence is free and projective. Bundle the same complex and augmentation as a ProjectiveResolution; its complex field is exactly the given Koszul complex.",
+   "uses": [
+    "lem-weil-pbc-exterior-power-free-basis"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-koszul-complex",
+  "lem-weil-pbc-exterior-power-free-basis",
+  "def-weil-pbc-koszul-regular-sequence"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/0BQZ",
+  "place": "Lemma 48.15.5, finite free Koszul resolution; Tags 0623 and 062E for the augmentation and Koszul regularity; local algebra and the Mathlib component formulas expanded by the second reader"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Koszul regular chain complex is a projective resolution of its degree zero quotient",
+   "results": "service unavailable: ",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A Koszul regular sequence Koszul chain complex is a projective resolution of quotient by its generated ideal",
+   "results": "ModuleCat.projectiveResolution; CategoryTheory.ProjectiveResolution.ofComplex; CategoryTheory.ProjectiveResolution.of; CategoryTheory.ProjectiveResolution.of_def; CategoryTheory.ProjectiveResolution.complex; CategoryTheory.ProjectiveResolution.instProjectiveXNatOfComplex; CategoryTheory.projectiveResolution; CategoryTheory.ProjectiveResolution.projective",
+   "date": "2026-10-13",
+   "verdict": "No exact match in the pinned library; relevant comparison primitives inspected locally."
+  },
+  {
+   "tool": "grep",
+   "query": "[Kk]oszul.*[Rr]esolution|[Kk]oszul.*[Aa]ugment|[Rr]esolution.*[Kk]oszul",
+   "results": "No matches.",
+   "date": "2026-10-13",
+   "verdict": "No exact match in the pinned library; relevant comparison primitives inspected locally."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.KoszulExtDualHomology",
+  "date": "2026-10-13",
+  "group": "J3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-koszul-ext-dual-homology",
+   "place": "The Koszul chain complex is a projective resolution of its quotient",
+   "via": [
+    "lem-sc-koszul-ext-dual-homology"
+   ]
+  }
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.KoszulProjectiveResolution",
+  "file": "lean/Sheaf/RingTheory/KoszulProjectiveResolution.lean",
+  "declaration": "ExteriorAlgebra.exists_koszul_projective_resolution",
+  "statement": "theorem exists_koszul_projective_resolution (A : Type u) [CommRing A] (I : Ideal A) (r : ℕ) (f : Fin r → A) (hreg : RingTheory.Sequence.IsKoszulRegular f) (hf : Ideal.span (Set.range f) = I) : ∃ P : ProjectiveResolution (ModuleCat.of A (A ⧸ I)), P.complex = koszulComplex A r f",
+  "branch": "sheaf-dag",
+  "by": "J3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J3",
+  "result": "pass",
+  "landing": "20261012T234219-L-2125260",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J3",
+  "result": "pass",
+  "landing": "20261012T234219-L-2125260",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
