@@ -1,0 +1,183 @@
+{
+ "id": "lem-weil-pbc-completion-localized-algebra-product-surjective",
+ "kind": "statement",
+ "title": "Surjectivity of the local product map from the completion of the localized algebra",
+ "statement": "Let $R$ be a Noetherian commutative ring [def-weil-pbc-noetherian-ring], $S$ a finite commutative $R$-algebra [def-weil-finitely-generated-module], and $p$ a prime ideal. Put $A=R_p$ [def-weil-pbc-localization-at-prime], $B=A\\otimes_R S$ [def-weil-module-base-change], $J=pB$, $Q=\\{q\\subset S:q\\text{ prime},q\\cap R=p\\}$, and $D_q=\\widehat{S_q}$, completed at the maximal ideal [def-weil-pbc-adic-completion]. Let $\\psi_q:B\\to S_q$ be $S$-algebra maps whose values on $r\\otimes1$ equal the canonical localized maps $\\varphi_q:R_p\\to S_q$. Let $g:\\widehat B_J\\to\\prod_{q\\in Q}D_q$ be a ring map such that for every $q,n,x,b$, $x_n=b\\bmod J^n$ implies $(g(x)_q)_n=\\psi_q(b)\\bmod(qS_q)^n$. Then $g$ is surjective. This is the inverse-limit product step for the localized algebra; its domain is not a tensor product with the completed base.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 07N9 (lemma-completion-finite-extension), second equality and proof before the final invocation of lemma-completion-tensor; Tag 0394 (lemma-finite-after-completion)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-finitely-generated-module",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-pbc-adic-completion",
+  "def-weil-module-base-change"
+ ],
+ "proof": [
+  {
+   "text": "Put A = R_p and B = A tensor_R S. B is finite over the Noetherian local ring A. The finitely many primes over m correspond to Q and have local rings S_q. For n > 0 the Artinian ring B/m^n B is canonically the product of the S_q/m^n S_q by Tags 00JA and 00CT. The isomorphisms commute with reduction because their maps are induced by the same localization maps at every level. The S-algebra property of psi and its prescribed values on r tensor 1 determine the localization maps on all pure tensors and hence on B.",
+   "uses": [
+    "lem-weil-pbc-localization-base-change",
+    "lem-weil-pbc-localization-prime-residue-field-iso",
+    "lem-weil-pbc-localization-noetherian",
+    "lem-weil-pbc-finite-type-algebra-noetherian",
+    "lem-weil-pbc-finite-over-zero-dim-local-discrete-spectrum",
+    "lem-weil-pbc-product-of-localizations-at-maximal",
+    "lem-weil-pbc-localization-at-prime-of-quotient"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "In each S_q the m S_q-adic and maximal-ideal-adic filtrations are cofinal: m S_q is contained in q S_q, and finite generation plus radical equality gives (q S_q)^t contained in m S_q. Tag 0394 gives the canonical comparison of completions, induced by the identity on S_q.",
+   "uses": [
+    "lem-weil-pbc-finite-after-completion"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Given a tuple in the maximal-ideal completions, use these comparisons to obtain m-adic sequences in all factors. At each positive n apply the inverse quotient product isomorphism to their coordinates. These preimages commute with reduction by uniqueness, hence define an element of the m-adic completion of B. The n = 0 coordinate belongs to the zero quotient.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "The prescribed level equation for g identifies its value on the compatible preimage sequence with the chosen tuple, first in every quotient and then by completion extensionality. If Q is empty, choose zero. No comparison with a tensor product of the completed base is used.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-after-completion",
+  "lem-weil-pbc-finite-over-zero-dim-local-discrete-spectrum",
+  "lem-weil-pbc-finite-type-algebra-noetherian",
+  "lem-weil-pbc-localization-at-prime-of-quotient",
+  "lem-weil-pbc-localization-base-change",
+  "lem-weil-pbc-localization-noetherian",
+  "lem-weil-pbc-localization-prime-residue-field-iso",
+  "lem-weil-pbc-product-of-localizations-at-maximal"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 07N9, localized-algebra inverse-limit product, before the completed tensor comparison"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "completion.*(surjective|tensor)|localMaps|completion.*product",
+   "results": "Mathlib/NumberTheory/NumberField/Completion/FinitePlace.lean, Mathlib/NumberTheory/NumberField/Completion/InfinitePlace.lean, Mathlib/NumberTheory/NumberField/Completion/InfinitePlace.lean, Mathlib/NumberTheory/NumberField/Completion/InfinitePlace.lean, Mathlib/NumberTheory/NumberField/Completion/InfinitePlace.lean, Mathlib/NumberTheory/NumberField/Completion/InfinitePlace.lean, Mathlib/NumberTheory/Padics/HeightOneSpectrum.lean, Mathlib/Analysis/InnerProductSpace/Completion.lean",
+   "date": "2026-10-12",
+   "verdict": "partial ingredients; no exact localized algebra completion product theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite algebra over a Noetherian local ring has completion equal to the product of completions of its local rings",
+   "results": "IsDedekindDomain.HeightOneSpectrum.instAlgebraAdicCompletion, isLocalRing_of_isAdicComplete_maximal, AdicCompletion.ofAlgEquiv, IsDedekindDomain.HeightOneSpectrum.algebraMap_adicCompletion, IsDedekindDomain.HeightOneSpectrum.adicCompletion, IsDedekindDomain.HeightOneSpectrum.instAlgebraSubtypeAdicCompletionMemValuationSubringAdicCompletionIntegers, AdicCompletion.piEquivFin_apply, AdicCompletion.piEquivFin",
+   "date": "2026-10-12",
+   "verdict": "partial ingredients; no exact localized algebra completion product theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "AdicCompletion, TensorProduct",
+   "results": "AdicCompletion.ofTensorProduct, AdicCompletion.ofTensorProductEquivOfFiniteNoetherian, AdicCompletion.ofTensorProductEquivOfPiFintype, AdicCompletion.ofTensorProductInvOfPiFintype, AdicCompletion.coe_ofTensorProductEquivOfFiniteNoetherian, AdicCompletion.ofTensorProduct_surjective_of_finite, AdicCompletion.ofTensorProduct_bijective_of_finite_of_isNoetherian, AdicCompletion.ofTensorProduct_tmul",
+   "date": "2026-10-12",
+   "verdict": "partial ingredients; no exact localized algebra completion product theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The adic completion of a localized finite algebra maps surjectively onto the product of the completions at its primes over the base prime",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "(semilocal|adicCompletion.*[Ee]quiv|completion.*[Pp]roduct)",
+   "results": "Mathlib/RingTheory/LocalProperties/Semilocal.lean, Mathlib/RingTheory/LocalProperties/Semilocal.lean, Mathlib/RingTheory/LocalProperties/Semilocal.lean, Mathlib/RingTheory/LocalProperties/Semilocal.lean, Mathlib/RingTheory/LocalProperties/Semilocal.lean, Mathlib/RingTheory/LaurentSeries.lean, Mathlib/RingTheory/Localization/Finiteness.lean, Mathlib/RingTheory/Localization/Finiteness.lean",
+   "date": "2026-10-12",
+   "verdict": "second reading: ingredients only; no exact localized-algebra product interpolation theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "AdicCompletion, Ideal.map",
+   "results": "AdicCompletion.ker_evalOneₐ_eq_map, AdicCompletion.isAdicComplete_self, AdicCompletion.isMaximal_map_of_le, AdicCompletion.maximalIdeal_eq_map, AdicCompletion.maximalIdeal_eq_map_of_fg",
+   "date": "2026-10-12",
+   "verdict": "second reading: ingredients only; no exact localized-algebra product interpolation theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a semilocal finite algebra, the adic completion is isomorphic to the product of maximal ideal completions",
+   "results": "AdicCompletion.piEquivFin_apply, AdicCompletion.ofAlgEquiv, AdicCompletion.piEquivFin, AdicCompletion.piEquivOfFintype_apply, AdicCompletion.ofAlgEquiv_apply, AdicCompletion.piEquivOfFintype, AdicCompletion.mk_smul_top_ofAlgEquiv_symm, AdicCompletion.mk_ofAlgEquiv_symm_eq_evalOneₐ",
+   "date": "2026-10-12",
+   "verdict": "second reading: ingredients only; no exact localized-algebra product interpolation theorem"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.CompletionTensorLocalMapsSurjective",
+  "date": "2026-10-13",
+  "group": "F2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "step 7 of its split (source: Lemma 0GS2, essential-surjectivity paragraphs), via Tag 07N9: surjective direction of the completion product comparison; specifically steps 1--3 of the local-maps surjectivity reduction",
+   "via": [
+    "lem-weil-pbc-completion-tensor-local-maps-surjective",
+    "lem-weil-pbc-completion-finite-extension-decomposition",
+    "lem-weil-pbc-completion-finite-extension",
+    "lem-weil-pbc-another-helper-g-ring",
+    "lem-weil-pbc-polynomial-complete-local-formal-fibres",
+    "lem-weil-pbc-finite-type-over-g-ring",
+    "lem-weil-pbc-finite-type-z-g-ring",
+    "lem-weil-pbc-finite-etale-lifting-limit-descent",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.CompletionLocalizedAlgebraProductSurjective",
+  "file": "lean/Sheaf/RingTheory/CompletionLocalizedAlgebraProductSurjective.lean",
+  "declaration": "AdicCompletion.completion_localizedAlgebra_product_surjective",
+  "statement": "theorem completion_localizedAlgebra_product_surjective\n    (R : Type u) (S : Type v) [CommRing R] [CommRing S] [Algebra R S]\n    [IsNoetherianRing R] [Module.Finite R S] (p : Ideal R) [p.IsPrime] :\n    let A := Localization.AtPrime p\n    let B := A ⊗[R] S\n    letI := Algebra.TensorProduct.rightAlgebra (R := R) (A := A) (B := S)\n    let J := p.map (algebraMap R B)\n    let Q := p.primesOver S\n    let D := fun q : Q ↦\n      AdicCompletion (IsLocalRing.maximalIdeal (Localization.AtPrime q.1))\n        (Localization.AtPrime q.1)\n    ∀ (ψ : ∀ q : Q, B →ₐ[S] Localization.AtPrime q.1),\n      (∀ (q : Q) (r : A), ψ q (r ⊗ₜ[R] (1 : S)) =\n        Localization.localRingHom p q.1 (algebraMap R S)\n          (Ideal.LiesOver.over (P := q.1) (p := p)) r) →\n      ∀ (g : AdicCompletion J B →+* (∀ q : Q, D q)),\n        (∀ (q : Q) (n : ℕ) (x : AdicCompletion J B) (b : B),\n          evalₐ J n x = Ideal.Quotient.mk (J ^ n) b →\n          evalₐ (IsLocalRing.maximalIdeal (Localization.AtPrime q.1)) n (g x q) =\n            Ideal.Quotient.mk\n              ((IsLocalRing.maximalIdeal (Localization.AtPrime q.1)) ^ n) (ψ q b)) →\n        Function.Surjective g",
+  "branch": "sheaf-dag",
+  "by": "F2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261012T223403-L-1635893",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261012T223403-L-1635893",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
