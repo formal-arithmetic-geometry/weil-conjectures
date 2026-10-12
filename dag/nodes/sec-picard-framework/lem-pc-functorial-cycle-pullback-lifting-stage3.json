@@ -1,0 +1,106 @@
+{
+ "id": "lem-pc-functorial-cycle-pullback-lifting-stage3",
+ "kind": "statement",
+ "title": "Local lifting from an epic cycle-pullback comparison",
+ "statement": "Let $E,F$ be cochain complexes [def-pc-cochain-complex-modules] in an abelian category, $\\epsilon:E\\to F$ a chain map and $i\\in\\mathbf Z$. Set $d=d_E^{i+1}$, $f=d_F^i$, $g:\\ker d\\to F^{i+1}$ equal to the kernel inclusion followed by $\\epsilon^{i+1}$. Suppose $e:E^i\\to F^i\\times_{F^{i+1}}\\ker d$ is epic, its first projection equals $\\epsilon^i$, and its second projection followed by the kernel inclusion equals $d_E^i$. For every object $B$, cycle $x:B\\to E^{i+1}$ and $y:B\\to F^i$ with $x\\epsilon^{i+1}=y d_F^i$, there exist an epimorphism $p:B^{\\prime}\\to B$ and $z:B^{\\prime}\\to E^i$ with $z\\epsilon^i=py$ and $z d_E^i=px$.",
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Lemma 05T7 (1), descending cycle-pullback step; https://stacks.math.columbia.edu/tag/05T7"
+ },
+ "stmt_deps": [
+  "def-pc-cochain-complex-modules"
+ ],
+ "proof": [
+  {
+   "text": "Factor x through the kernel of the next differential using kernel.lift and hx. The compatibility equation identifies y followed by the target differential with that factor followed by the map from the kernel to the next target term. Form a:B to the pullback using pullback.lift. Its projections recover y and the kernel factor by pullback.lift_fst and pullback.lift_snd.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Take B prime to be pullback e a, p its second projection and z its first projection. The Mathlib instance Abelian.epi_pullback_of_epi_f gives Epi p. The pullback condition gives z followed by e equal to p followed by a. Postcompose with the first projection and use he1 to obtain the augmentation equation. Postcompose with the second projection and kernel inclusion and use he2 and kernel.lift_ι to obtain the differential equation.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Lemma 05T7 (1), local lifting via kernel factorization and pullback stability of epimorphisms"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Functorial bounded above complex construction by epimorphic covers of pullbacks of kernels",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An epimorphic cover of the pullback of the next cycles gives local lifting of compatible cycles in a bounded above complex",
+   "results": "Eight hits, led by CochainComplex.cm5b.degreewiseEpiWithInjectiveKernel_p and CochainComplex.cm5b. These require enough injectives and give a different construction; no fixed-T bounded-above construction.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "epi_pullback_of_epi_f|kernel.lift_ι|pullback.lift_snd; cyclePullback|cycle.pullback|functorial.*[Rr]esolution",
+   "results": "Mathlib CategoryTheory.Abelian.Basic supplies epi_pullback_of_epi_f. Kernels supplies kernel.lift_ι; HasPullback supplies pullback.lift_fst and pullback.lift_snd. Library search finds the assigned construction and its BoundedFlatReplacement caller, but no alternative construction. These Mathlib lemmas prove the local lifting step, not the recursive existence.",
+   "date": "2026-10-12",
+   "verdict": "partial matches used"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.CyclePullbackResolution",
+  "date": "2026-10-12",
+  "group": "F3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-derived-tensor",
+   "place": "the bounded-above flat replacement in the proof of the K-flat resolution lemma: Functorial cycle-pullback construction from an epimorphic cover",
+   "via": [
+    "lem-pc-functorial-cycle-pullback-construction",
+    "lem-pc-kflat-bounded-flat-replacement"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.CyclePullbackLifting",
+  "file": "lean/Sheaf/Algebra/Homology/CyclePullbackLifting.lean",
+  "declaration": "CochainComplex.cyclePullback_lifting_pointwise",
+  "statement": "theorem cyclePullback_lifting_pointwise {A : Type u} [Category.{v} A] [Abelian A]\n    {E F : CochainComplex A ℤ} (ε : E ⟶ F) (i : ℤ)\n    (e : E.X i ⟶ pullback (F.d i (i + 1))\n      (kernel.ι (E.d (i + 1) (i + 1 + 1)) ≫ ε.f (i + 1)))\n    [Epi e]\n    (he₁ : e ≫ pullback.fst _ _ = ε.f i)\n    (he₂ : e ≫ pullback.snd _ _ ≫ kernel.ι _ = E.d i (i + 1))\n    (B : A) (x : B ⟶ E.X (i + 1)) (y : B ⟶ F.X i)\n    (hx : x ≫ E.d (i + 1) (i + 1 + 1) = 0)\n    (hy : x ≫ ε.f (i + 1) = y ≫ F.d i (i + 1)) :\n    ∃ (B' : A) (p : B' ⟶ B) (_ : Epi p) (z : B' ⟶ E.X i),\n      z ≫ ε.f i = p ≫ y ∧ z ≫ E.d i (i + 1) = p ≫ x",
+  "branch": "sheaf-dag",
+  "by": "F3",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F3",
+  "result": "pass",
+  "landing": "20261012T135233-L-1665507",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F3",
+  "result": "pass",
+  "landing": "20261012T135233-L-1665507",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

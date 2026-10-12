@@ -1,0 +1,106 @@
+{
+ "id": "lem-pc-functorial-cycle-pullback-core-stage3",
+ "kind": "statement",
+ "title": "Functorial bounded cycle-pullback assembly without epimorphicity",
+ "statement": "Let $A$ be an abelian category, $S$ a property containing all zero objects, $T:A\\to A$ a functor and $\\pi:T\\to\\operatorname{Id}_A$ with $S(TX)$ for all $X$, and $N\\in\\mathbf Z$. No epimorphism assumption on $\\pi$ is made. On the full subcategory of cochain complexes [def-pc-cochain-complex-modules] zero above $N$, there exist a functor $Q$ and natural augmentation $\\epsilon:Q\\to\\iota$, with all terms in $S$ and zero above $N$. For every $F$ and degree $i\\leq N$, put $d=d_{QF}^{i+1}$, $f=d_F^i$, and $g:\\ker d\\to F^{i+1}$ equal to the kernel inclusion followed by $\\epsilon_F^{i+1}$. There is an isomorphism $c:(QF)^i\\cong T(F^i\\times_{F^{i+1}}\\ker d)$ such that $c$ followed by $\\pi$ and the first projection is $\\epsilon_F^i$, and $c$ followed by $\\pi$, the second projection and the kernel inclusion is $d_{QF}^i$.",
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Lemma 05T7 (1), descending cycle-pullback step; https://stacks.math.columbia.edu/tag/05T7"
+ },
+ "stmt_deps": [
+  "def-pc-cochain-complex-modules"
+ ],
+ "proof": [
+  {
+   "text": "Put zero in degrees above N. Descend through degrees N-k: form the kernel of the next differential, map it to the next target term via the augmentation, and pull back along the current target differential. Set the current term equal to T of this pullback. Define the augmentation by pi followed by the first projection, and the differential by pi, the second projection and the kernel inclusion. The kernel equation gives square zero; the pullback equation gives the chain-map equation. The term property follows from hT, or hzero above N. Assembly of the integer-indexed complex transports the constructed term identification to the isomorphism c. The two projection equations hold by the definitions. No epimorphism or lifting property is assumed or asserted.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "For a map of target complexes descend in degree. The already constructed maps in the next two degrees induce the kernel map and then the pullback map; applying T gives the current component. Naturality of pi gives compatibility with the augmentation and differential. Uniqueness in the kernel and pullback universal properties and the functor laws of T prove identity and composition. Assemble Q and the natural augmentation epsilon, carrying along the constructed term identifications at or below N.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Lemma 05T7 (1); fixed functor T and natural pi give the functorial variant by universal properties"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Functorial bounded above complex construction by epimorphic covers of pullbacks of kernels",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An epimorphic cover of the pullback of the next cycles gives local lifting of compatible cycles in a bounded above complex",
+   "results": "Eight hits, led by CochainComplex.cm5b.degreewiseEpiWithInjectiveKernel_p and CochainComplex.cm5b. These require enough injectives and give a different construction; no fixed-T bounded-above construction.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "epi_pullback_of_epi_f|kernel.lift_ι|pullback.lift_snd; cyclePullback|cycle.pullback|functorial.*[Rr]esolution",
+   "results": "Mathlib CategoryTheory.Abelian.Basic supplies epi_pullback_of_epi_f. Kernels supplies kernel.lift_ι; HasPullback supplies pullback.lift_fst and pullback.lift_snd. Library search finds the assigned construction and its BoundedFlatReplacement caller, but no alternative construction. These Mathlib lemmas prove the local lifting step, not the recursive existence.",
+   "date": "2026-10-12",
+   "verdict": "partial matches used"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.CyclePullbackResolution",
+  "date": "2026-10-12",
+  "group": "F3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-derived-tensor",
+   "place": "the bounded-above flat replacement in the proof of the K-flat resolution lemma: Functorial cycle-pullback construction from an epimorphic cover",
+   "via": [
+    "lem-pc-functorial-cycle-pullback-construction",
+    "lem-pc-kflat-bounded-flat-replacement"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.CyclePullbackCore",
+  "file": "lean/Sheaf/Algebra/Homology/CyclePullbackCore.lean",
+  "declaration": "CochainComplex.exists_functorial_cyclePullback_core",
+  "statement": "theorem exists_functorial_cyclePullback_core {A : Type u} [Category.{v} A] [Abelian A]\n    (S : ObjectProperty A) (hzero : ∀ X : A, IsZero X → S X) (T : A ⥤ A)\n    (π : T ⟶ 𝟭 A) (hT : ∀ X : A, S (T.obj X))\n    (N : ℤ) :\n    let P : ObjectProperty (CochainComplex A ℤ) :=\n      fun F ↦ ∀ i : ℤ, N < i → IsZero (F.X i)\n    ∃ Q : P.FullSubcategory ⥤ CochainComplex A ℤ, ∃ ε : Q ⟶ P.ι,\n      ∀ F : P.FullSubcategory,\n        (∀ i : ℤ, S ((Q.obj F).X i)) ∧\n        (∀ i : ℤ, N < i → IsZero ((Q.obj F).X i)) ∧\n        ∀ (i : ℤ), i ≤ N →\n          let d := (Q.obj F).d (i + 1) (i + 1 + 1)\n          let f := F.obj.d i (i + 1)\n          let g := kernel.ι d ≫ (ε.app F).f (i + 1)\n          ∃ (c : (Q.obj F).X i ≅ T.obj (pullback f g)),\n            c.hom ≫ π.app (pullback f g) ≫ pullback.fst f g = (ε.app F).f i ∧\n            c.hom ≫ π.app (pullback f g) ≫ pullback.snd f g ≫ kernel.ι d =\n              (Q.obj F).d i (i + 1)",
+  "branch": "sheaf-dag",
+  "by": "F3",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F3",
+  "result": "pass",
+  "landing": "20261012T135233-L-1665507",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F3",
+  "result": "pass",
+  "landing": "20261012T135233-L-1665507",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
