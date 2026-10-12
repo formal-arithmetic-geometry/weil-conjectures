@@ -1,0 +1,136 @@
+{
+ "id": "lem-weil-pbc-etale-fpqc-local-representatives",
+ "kind": "statement",
+ "title": "A covering presieve of locally matching fpqc representatives",
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-iff",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], $\\{g_i:T_i\\to S\\}_{i\\in I}$ an fpqc covering [def-weil-pbc-fpqc-covering], and $F$ a sheaf of sets on the small étale site of $S$ [def-weil-pbc-etale-sheaf-of-sets, def-weil-pbc-etale-site]. Let $s_i\\in (g_i^{-1}F)(T_i)$ be sections whose two pullbacks on $T_i\\times_S T_j$ agree using the unit-compatible composition comparisons [lem-weil-pbc-sets-etale-inverse-image-composition-units, def-pc-fibre-product]. There exists a presieve $P$ on the identity étale object $S$ whose generated sieve covers $S$, such that each arrow $f:V\\to S$ in $P$ admits a section $t\\in F(V)$ with $\\eta_{g_i,V}(t)$ equal to the restriction of $s_i$ along $V\\times_S T_i\\to T_i$ for every $i$. Here $\\eta_{g_i,V}:F(V)\\to(g_i^{-1}F)(V\\times_S T_i)$ is the inverse-image adjunction unit. No representatives are chosen in this assertion, and compatibility between different representatives is not asserted.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-fpqc-covering",
+  "def-weil-pbc-etale-sheaf-of-sets",
+  "def-weil-pbc-etale-site",
+  "lem-weil-pbc-sets-etale-inverse-image-composition-units",
+  "def-pc-fibre-product"
+ ],
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 09XN (lemma-describe-pullback), local representative and covering paragraphs"
+ },
+ "proof": [
+  {
+   "text": "For each point x of S, joint surjectivity of the fpqc cover supplies a point y of some T_i over x. The inverse-image section description gives a covering by Z_j and representatives t on etale V/S. Joint surjectivity of this etale covering supplies a point z of some Z_j over y.",
+   "uses": [
+    "def-weil-pbc-fpqc-covering",
+    "lem-weil-pbc-etale-inverse-image-section-description",
+    "def-weil-pbc-etale-site"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the single-representative open theorem to this V,t,Z_j and its representing map. Obtain U in V, a point w in U over z, and the restricted section t|_U that matches every s_i. The fibre-product projection equation and the over-category equations give U -> S sending w to x.",
+   "uses": [
+    "lem-weil-pbc-etale-fpqc-representative-open",
+    "def-pc-fibre-product"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Choose these U_x and sections for the points x of S. Their arrows to S form a jointly surjective etale covering because w_x maps to x. Take P to be their presieve of arrows. Each membership witness identifies an arrow with one U_x and gives the asserted section. If S is empty this is the empty covering.",
+   "uses": [
+    "def-weil-pbc-etale-site"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pc-fibre-product",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-fpqc-covering",
+  "lem-weil-pbc-etale-fpqc-representative-open",
+  "lem-weil-pbc-etale-inverse-image-section-description"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 09XN (lemma-describe-pullback), local representative and covering paragraphs"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Compatible inverse image sections of an etale sheaf along an fpqc cover admit etale local sections on the base",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Compatible inverse image sections of an etale sheaf along an fpqc cover admit etale local sections on the base",
+   "results": "AlgebraicGeometry.Scheme.etaleTopology; AlgebraicGeometry.Scheme.smallEtaleTopology; Algebra.basicOpen_subset_etaleLocus_iff; AlgebraicGeometry.IsEtale.of_comp; Algebra.basicOpen_subset_etaleLocus_iff_etale; AlgebraicGeometry.Scheme.Etale.forget; Algebra.mem_etaleLocus_iff; AlgebraicGeometry.Scheme.smallEtalePretopology",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "fpqc.*(sheaf|section)|(sheaf|section).*fpqc",
+   "results": "Mathlib/AlgebraicGeometry/Sites/ConstantSheaf.lean; Mathlib/AlgebraicGeometry/Sites/ConstantSheaf.lean; Mathlib/AlgebraicGeometry/Sites/ConstantSheaf.lean; Mathlib/AlgebraicGeometry/Sites/ConstantSheaf.lean; Mathlib/AlgebraicGeometry/Sites/ConstantSheaf.lean; Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean; Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean; Mathlib/AlgebraicGeometry/Sites/Fpqc.lean",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleFpqcMatchingFamily",
+  "date": "2026-10-12",
+  "group": "N1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-proper-underived-exchange",
+   "place": "The fpqc section descent in the degree-zero comparison used by the underived exchange: Tag 09XN (lemma-describe-pullback), local representative and covering paragraphs",
+   "via": [
+    "lem-weil-pbc-etale-fpqc-matching-family",
+    "lem-weil-pbc-etale-sections-fpqc-existence",
+    "lem-weil-pbc-etale-sections-fpqc-descent"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "state": "none"
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleFpqcLocalRepresentatives",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleFpqcLocalRepresentatives.lean",
+  "declaration": "AlgebraicGeometry.etaleFpqcSections_exists_local_representatives",
+  "statement": "theorem etaleFpqcSections_exists_local_representatives {S : Scheme.{u}} {I : Type v} (T : I → Scheme.{u}) (g : ∀ i, T i ⟶ S) (hcover : Presieve.ofArrows T g ∈ Scheme.fpqcPrecoverage S) (F : Sheaf S.smallEtaleTopology (Type (u + 1))) (s : ∀ i, ((Scheme.etaleSetPullback (g i)).obj F).obj.obj (op (Scheme.Etale.mk (𝟙 (T i))))) (hcompat : ∀ i j, ((Classical.choose etaleSetInverseImageCompositionUnits.2.2 S (T i) (pullback (g i) (g j)) (g i) (pullback.fst (g i) (g j))).hom.app F).hom.app (op (Scheme.Etale.mk (𝟙 (pullback (g i) (g j))))) (((Scheme.etaleSetPullback (pullback.fst (g i) (g j))).obj ((Scheme.etaleSetPullback (g i)).obj F)).obj.map (MorphismProperty.Over.homMk (pullback.lift (pullback.fst (g i) (g j)) (𝟙 (pullback (g i) (g j))) ((Category.comp_id _).trans (Category.id_comp _).symm)) (by simp) : Scheme.Etale.mk (𝟙 (pullback (g i) (g j))) ⟶ (MorphismProperty.Over.pullback @Etale ⊤ (pullback.fst (g i) (g j))).obj (Scheme.Etale.mk (𝟙 (T i)))).op (((Functor.sheafPullbackConstruction.sheafAdjunctionContinuous (MorphismProperty.Over.pullback @Etale ⊤ (pullback.fst (g i) (g j))) _ ((T i).smallGrothendieckTopology @Etale) ((pullback (g i) (g j)).smallGrothendieckTopology @Etale)).unit.app ((Scheme.etaleSetPullback (g i)).obj F)).hom.app (op (Scheme.Etale.mk (𝟙 (T i)))) (s i))) = Eq.mp (congrArg (fun k : pullback (g i) (g j) ⟶ S ↦ ((Scheme.etaleSetPullback k).obj F).obj.obj (op (Scheme.Etale.mk (𝟙 (pullback (g i) (g j)))))) (pullback.condition (f := g i) (g := g j)).symm) (((Classical.choose etaleSetInverseImageCompositionUnits.2.2 S (T j) (pullback (g i) (g j)) (g j) (pullback.snd (g i) (g j))).hom.app F).hom.app (op (Scheme.Etale.mk (𝟙 (pullback (g i) (g j))))) (((Scheme.etaleSetPullback (pullback.snd (g i) (g j))).obj ((Scheme.etaleSetPullback (g j)).obj F)).obj.map (MorphismProperty.Over.homMk (pullback.lift (pullback.snd (g i) (g j)) (𝟙 (pullback (g i) (g j))) ((Category.comp_id _).trans (Category.id_comp _).symm)) (by simp) : Scheme.Etale.mk (𝟙 (pullback (g i) (g j))) ⟶ (MorphismProperty.Over.pullback @Etale ⊤ (pullback.snd (g i) (g j))).obj (Scheme.Etale.mk (𝟙 (T j)))).op (((Functor.sheafPullbackConstruction.sheafAdjunctionContinuous (MorphismProperty.Over.pullback @Etale ⊤ (pullback.snd (g i) (g j))) _ ((T j).smallGrothendieckTopology @Etale) ((pullback (g i) (g j)).smallGrothendieckTopology @Etale)).unit.app ((Scheme.etaleSetPullback (g j)).obj F)).hom.app (op (Scheme.Etale.mk (𝟙 (T j)))) (s j))))) : ∃ P : Presieve (Scheme.Etale.mk (𝟙 S)), Sieve.generate P ∈ S.smallEtaleTopology (Scheme.Etale.mk (𝟙 S)) ∧ ∀ (V : S.Etale) (f : V ⟶ Scheme.Etale.mk (𝟙 S)), P f → ∃ t : F.obj.obj (op V), ∀ i, let β := MorphismProperty.Over.pullback @Etale ⊤ (g i) let H := (Scheme.etaleSetPullback (g i)).obj F let η := (Functor.sheafPullbackConstruction.sheafAdjunctionContinuous β (Type (u + 1)) (S.smallGrothendieckTopology @Etale) ((T i).smallGrothendieckTopology @Etale)).unit.app F η.hom.app (op V) t = H.obj.map (MorphismProperty.Over.homMk (β.obj V).hom (Category.comp_id _) : β.obj V ⟶ Scheme.Etale.mk (𝟙 (T i))).op (s i)",
+  "branch": "sheaf-dag",
+  "by": "N1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N1",
+  "result": "pass",
+  "landing": "20261012T160139-L-2565351",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N1",
+  "result": "pass",
+  "landing": "20261012T160139-L-2565351",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

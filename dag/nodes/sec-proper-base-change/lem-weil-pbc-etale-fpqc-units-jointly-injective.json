@@ -1,0 +1,143 @@
+{
+ "id": "lem-weil-pbc-etale-fpqc-units-jointly-injective",
+ "kind": "statement",
+ "title": "Joint injectivity of fpqc units at every etale object",
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-iff",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], $\\{g_i:T_i\\to S\\}_{i\\in I}$ an fpqc covering [def-weil-pbc-fpqc-covering], $F$ a sheaf of sets on $S_{\\mathrm{et}}$ [def-weil-pbc-etale-sheaf-of-sets, def-weil-pbc-etale-site], and $V\\to S$ an étale object. For $t,t'\\in F(V)$, suppose the inverse-image adjunction units satisfy $\\eta_{g_i,V}(t)=\\eta_{g_i,V}(t')$ in $(g_i^{-1}F)(V\\times_S T_i)$ for every $i$ [lem-weil-pbc-sets-etale-inverse-image-composition-units, def-pc-fibre-product]. Then $t=t'$. No compatible datum or local-existence hypothesis is required.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-fpqc-covering",
+  "def-weil-pbc-etale-sheaf-of-sets",
+  "def-weil-pbc-etale-site",
+  "lem-weil-pbc-sets-etale-inverse-image-composition-units",
+  "def-pc-fibre-product"
+ ],
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tags 03Q1 (3) and 03PU, germ comparison and separatedness; Tag 09XN, uniqueness"
+ },
+ "proof": [
+  {
+   "text": "Base change the fpqc covering to V. For each point v of V, joint surjectivity gives a point y in some T_i times_S V above it. The algebraic closure of the residue field of y supplies a geometric lift r, whose projections to T_i and V give a pointed neighborhood of its image in S.",
+   "uses": [
+    "lem-galois-fpqc-covering-base-change",
+    "def-weil-pbc-fpqc-covering",
+    "def-weil-geometric-point",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the germ formula of the inverse-image stalk comparison to t and t′ and the projection of r to T_i. Their equal unit images give equal germs, hence their original germs at the pointed neighborhood V agree.",
+   "uses": [
+    "lem-weil-pbc-sets-etale-inverse-image-stalk-germ"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The pointed-neighborhood filtered-colimit equality criterion yields W -> V with equal restrictions and a geometric lift above v. Choose one for every v. The W cover V, so sheaf separatedness gives t=t′. The empty family handles empty V.",
+   "uses": [
+    "def-weil-pbc-geometric-stalks",
+    "lem-weil-pbc-filtered-colimit-sets-elementwise",
+    "def-weil-pbc-etale-site",
+    "def-weil-pbc-etale-sheaf-of-sets"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-fibre-product",
+  "def-weil-geometric-point",
+  "def-weil-pbc-etale-sheaf-of-sets",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-fpqc-covering",
+  "def-weil-pbc-geometric-stalks",
+  "lem-galois-fpqc-covering-base-change",
+  "lem-weil-pbc-filtered-colimit-sets-elementwise",
+  "lem-weil-pbc-sets-etale-inverse-image-stalk-germ"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tags 03Q1 (3) and 03PU, germ comparison and separatedness; Tag 09XN, uniqueness"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The units of inverse image of an etale sheaf along an fpqc covering are jointly injective on sections of every etale object",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The units of inverse image of an etale sheaf along an fpqc covering are jointly injective on sections of every etale object",
+   "results": "AlgebraicGeometry.Scheme.LocalRepresentability.instIsLocallyInjectiveHomObjForgetTypeYonedaGluedToSheaf; CategoryTheory.Sheaf.isLocallyInjective_iff_injective; CategoryTheory.Presheaf.isLocallyInjective_iff_injective_of_separated; CategoryTheory.Presheaf.isLocallyInjective_of_injective; CategoryTheory.GrothendieckTopology.W.isLocallyInjective; CategoryTheory.Sheaf.instIsLocallyInjectiveAppArrowPLocallySurjectiveLocallyInjectiveFunctorialLocallySurjectiveInjectiveFactorization; CategoryTheory.Sheaf.IsLocallyInjective; PresheafOfModules.IsLocallyInjective",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "fpqc.*(inject|separat)|(inject|separat).*fpqc",
+   "results": "Mathlib/AlgebraicGeometry/Morphisms/FlatDescent.lean",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleFpqcMatchingFamily",
+  "date": "2026-10-12",
+  "group": "N1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-proper-underived-exchange",
+   "place": "The fpqc section descent in the degree-zero comparison used by the underived exchange: Tags 03Q1 (3) and 03PU, germ comparison and separatedness; Tag 09XN, uniqueness",
+   "via": [
+    "lem-weil-pbc-etale-fpqc-matching-family",
+    "lem-weil-pbc-etale-sections-fpqc-existence",
+    "lem-weil-pbc-etale-sections-fpqc-descent"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "state": "none"
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleFpqcUnitsJointlyInjective",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleFpqcUnitsJointlyInjective.lean",
+  "declaration": "AlgebraicGeometry.etaleFpqcUnits_jointly_injective",
+  "statement": "theorem etaleFpqcUnits_jointly_injective {S : Scheme.{u}} {I : Type v} (T : I → Scheme.{u}) (g : ∀ i, T i ⟶ S) (hcover : Presieve.ofArrows T g ∈ Scheme.fpqcPrecoverage S) (F : Sheaf S.smallEtaleTopology (Type (u + 1))) (V : S.Etale) (t t' : F.obj.obj (op V)) (heq : ∀ i, let β := MorphismProperty.Over.pullback @Etale ⊤ (g i) let η := (Functor.sheafPullbackConstruction.sheafAdjunctionContinuous β (Type (u + 1)) (S.smallGrothendieckTopology @Etale) ((T i).smallGrothendieckTopology @Etale)).unit.app F η.hom.app (op V) t = η.hom.app (op V) t') : t = t'",
+  "branch": "sheaf-dag",
+  "by": "N1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N1",
+  "result": "pass",
+  "landing": "20261012T160139-L-2565351",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N1",
+  "result": "pass",
+  "landing": "20261012T160139-L-2565351",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
