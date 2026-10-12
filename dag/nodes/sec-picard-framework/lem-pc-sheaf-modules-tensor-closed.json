@@ -23,66 +23,43 @@
  ],
  "proof": [
   {
-   "text": "By the tensor-product definition, $\\mathcal F\\otimes_{\\mathcal O}\\mathcal G$ is the sheafification of the sectionwise tensor presheaf. The module associativity, symmetry, unit and inverse maps on each section are compatible with restriction, so they are morphisms of presheaves of $\\mathcal O$-modules and induce, by the universal property of module sheafification [def-weil-presheaf-modules-sheafification], the corresponding sheaf morphisms; the pentagon, hexagon, triangle and involutivity identities can be checked after restricting to sections, where they are the ordinary module identities. Bilinearity gives additivity in each variable.",
-   "uses": [
-    "def-pur-sheaf-tensor-product",
-    "def-weil-presheaf-modules-sheafification"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Section 03EK (sites-modules-section-tensor-product)"
-   }
-  },
-  {
-   "text": "For sheaves $\\mathcal F,\\mathcal H$, the rule $U\\mapsto\\operatorname{Hom}_{\\mathcal O|_U}(\\mathcal F|_U,\\mathcal H|_U)$ with restriction by relocalization is precisely the presheaf $\\mathcal{H}om_{\\mathcal O}(\\mathcal F,\\mathcal H)$ in the definition. The sheaf-Hom lemma [lem-pur-sheaf-hom-is-sheaf] states that this presheaf is a sheaf of $\\mathcal O$-modules and that its global sections are $\\operatorname{Hom}_{\\mathcal O}(\\mathcal F,\\mathcal H)$.",
-   "uses": [
-    "def-pur-sheaf-hom",
-    "lem-pur-sheaf-hom-is-sheaf"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Section 04TT (sites-modules-section-internal-hom) and Lemma 03EM (sites-modules-lemma-internal-hom)"
-   }
-  },
-  {
-   "text": "Call a family of $\\mathcal O(U)$-bilinear maps $b_U:\\mathcal F(U)\\times\\mathcal G(U)\\to\\mathcal H(U)$ compatible with restriction an $\\mathcal O$-bilinear morphism $b:\\mathcal F\\times\\mathcal G\\to\\mathcal H$. By the universal property of the tensor product of $\\mathcal O(U)$-modules on each section, such $b$ are the same as morphisms of presheaves of $\\mathcal O$-modules $\\mathcal F\\otimes_{p,\\mathcal O}\\mathcal G\\to\\mathcal H$, and since $\\mathcal H$ is a sheaf these are, by the universal property of module sheafification [def-weil-presheaf-modules-sheafification], the same as morphisms $\\mathcal F\\otimes_{\\mathcal O}\\mathcal G\\to\\mathcal H$ [def-pur-sheaf-tensor-product]; all identifications are natural. Given $b$, a section $g\\in\\mathcal G(U)$ gives the $\\mathcal O|_U$-linear map $\\mathcal F|_U\\to\\mathcal H|_U$ with components $f\\mapsto b_V(f,g|_V)$ on $V/U$, an element of $\\mathcal{H}om_{\\mathcal O}(\\mathcal F,\\mathcal H)(U)$; this is $\\mathcal O(U)$-linear in $g$ and compatible with the restriction maps of step 2 [lem-pur-sheaf-hom-is-sheaf], so it is a morphism $\\mathcal G\\to\\mathcal{H}om_{\\mathcal O}(\\mathcal F,\\mathcal H)$ of sheaves of $\\mathcal O$-modules. Conversely, a morphism $c:\\mathcal G\\to\\mathcal{H}om_{\\mathcal O}(\\mathcal F,\\mathcal H)$ gives the bilinear morphism $b_U(f,g)=c_U(g)_{U/U}(f)$. The two constructions are mutually inverse and natural in $\\mathcal F,\\mathcal G,\\mathcal H$, which gives $\\operatorname{Hom}_{\\mathcal O}(\\mathcal F\\otimes_{\\mathcal O}\\mathcal G,\\mathcal H)\\cong\\operatorname{Hom}_{\\mathcal O}(\\mathcal G,\\mathcal{H}om_{\\mathcal O}(\\mathcal F,\\mathcal H))$ (this is the item's source, Stacks 03EO, with $\\mathcal F$ and $\\mathcal G$ interchanged by symmetry).",
+   "text": "Use the existing source monoidalCategory and symmetricCategory structures [def-pur-sheaf-tensor-product]. The source module WeilConjectures.Algebra.Category.ModuleCat.Sheaf.MonoidalFree proves that tensorLeft and tensorRight are additive, using tensorHomAdjunction, preservation of binary biproducts by left adjoints, and symmetry. Their map_zero and map_add laws supply all four fields of MonoidalPreadditive.",
    "uses": [
     "def-pur-sheaf-tensor-product",
     "def-pur-sheaf-hom",
-    "lem-pur-sheaf-hom-is-sheaf",
     "def-weil-presheaf-modules-sheafification"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Lemma 03EO (sites-modules-lemma-internal-hom-adjoint-tensor)"
-   }
+   "elementary": true
   },
   {
-   "text": "The natural bijection in the preceding step is the adjunction between the functor $\\mathcal F\\otimes_{\\mathcal O}-$ and the internal-Hom functor $\\mathcal{H}om_{\\mathcal O}(\\mathcal F,-)$, which is the definition of a closed monoidal category. Thus the additive symmetric monoidal category from step 1 is closed.",
+   "text": "Use the source SheafOfModules.monoidalClosed and choose its tensorHomEquiv for the displayed family. The source constructs this equivalence by tensorObjIsoSheafification [def-pur-sheaf-tensor-product], sheafificationAdjunction [def-weil-presheaf-modules-sheafification], and the presheaf internal-Hom equivalence for the existing homObj [def-pur-sheaf-hom]. Thus no separate sheaf-Hom/global-sections theorem is needed.",
+   "uses": [
+    "def-pur-sheaf-tensor-product",
+    "def-pur-sheaf-hom",
+    "def-weil-presheaf-modules-sheafification"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Expand f tensor g into right whiskering followed by left whiskering. Apply tensorHomEquiv_whiskerRight_comp, tensorHomEquiv_whiskerLeft_comp, and tensorHomEquiv_comp_homObjMap. Reassociate compositions and combine homObjMap (identity) h with homObjMap f (identity) using homObjMap_comp_homObjMap. This yields the claimed simultaneous naturality in all three variables.",
    "uses": [
     "def-pur-sheaf-tensor-product",
     "def-pur-sheaf-hom"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Lemma 03EO (sites-modules-lemma-internal-hom-adjoint-tensor)"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
   "def-pur-sheaf-tensor-product",
   "def-pur-sheaf-hom",
-  "lem-pur-sheaf-hom-is-sheaf",
   "def-weil-presheaf-modules-sheafification"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
+  "group": "E2",
+  "date": "2026-10-12",
   "document": "literature/stacks-project/sites-modules.tex",
-  "place": "Section 03EK and Lemma 03EO"
+  "place": "Section 03EK and Lemma 03EO; reused the existing source implementation in Sheaf/MonoidalClosed.lean and Sheaf/MonoidalFree.lean, and combined its naturality lemmas"
  },
  "mathlib_searches": [
   {
@@ -162,5 +139,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E2",
+  "result": "pass",
+  "landing": "20261012T070533-L-3469488",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

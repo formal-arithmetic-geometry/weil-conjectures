@@ -8,7 +8,7 @@ public import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProduct
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHom
 public import Mathlib.CategoryTheory.Monoidal.Closed.Basic
 public import Mathlib.CategoryTheory.Monoidal.Preadditive
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.HomIsSheaf
+import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.MonoidalFree
 
 /-!
 # Tensor closed structure on sheaves of modules
@@ -69,6 +69,18 @@ theorem tensorClosed (R : Sheaf J CommRingCat.{u}) :
             (f : F' ⟶ F) (g : G' ⟶ G) (h : H ⟶ H') (t : F ⊗ G ⟶ H),
             e F' G' H' ((f ⊗ₘ g) ≫ t ≫ h) =
               g ≫ e F G H t ≫ homObjMap f h := by
-  sorry
+  let := monoidalCategory R
+  let := symmetricCategory R
+  refine ⟨⟨?_⟩, ⟨monoidalClosed⟩, tensorHomEquiv, ?_⟩
+  · exact
+      { whiskerLeft_zero := fun {X Y Z} ↦ (tensorLeft X).map_zero Y Z
+        zero_whiskerRight := fun {X Y Z} ↦ (tensorRight X).map_zero Y Z
+        whiskerLeft_add := fun {X Y Z} f g ↦ (tensorLeft X).map_add (f := f) (g := g)
+        add_whiskerRight := fun {X Y Z} f g ↦ (tensorRight X).map_add (f := f) (g := g) }
+  · intro F F' G G' H H' f g h t
+    rw [tensorHom_def, Category.assoc, tensorHomEquiv_whiskerRight_comp,
+      tensorHomEquiv_whiskerLeft_comp, tensorHomEquiv_comp_homObjMap]
+    simp only [Category.assoc, homObjMap_comp_homObjMap,
+      Category.comp_id]
 
 end SheafOfModules
