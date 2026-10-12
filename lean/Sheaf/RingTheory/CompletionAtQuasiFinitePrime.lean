@@ -10,7 +10,8 @@ public import Mathlib.RingTheory.AdicCompletion.Algebra
 public import Mathlib.RingTheory.Localization.AtPrime.Basic
 public import Mathlib.RingTheory.FiniteType
 public import Sheaf.RingTheory.QuasiFiniteAtPrime
-import Sheaf.RingTheory.CompletionFiniteExtension
+import Sheaf.RingTheory.CompletionAtQuasiFinitePrimeMap
+import Sheaf.RingTheory.CompletionAtQuasiFinitePrimeSplit
 import Sheaf.RingTheory.QuasiFiniteAtFiniteSubalgebraAway
 
 @[expose] public section
@@ -85,6 +86,13 @@ theorem completion_at_quasiFiniteAtPrime
           φ (TensorProduct.tmul R x y) =
             ψ x * algebraMap Sq Sqh (algebraMap S Sq y)) ∧
         ∃ e : U ≃+* Sqh × B, e.toRingHom = RingHom.prod φ β := by
-  sorry
+  dsimp
+  obtain ⟨S', hfinite, g, hg, haway⟩ :=
+    exists_finite_subalgebra_away_of_isQuasiFiniteAtPrime R S q hq
+  let : Module.Finite R S' := hfinite
+  obtain ⟨ψ, hψ⟩ := exists_completion_map_atPrime R S q
+  obtain ⟨B, _inst, β, φ, hφ, e, he⟩ :=
+    completion_split_of_finite_subalgebra_away R S q S' g hg haway ψ hψ
+  exact ⟨ψ, hψ, B, inferInstance, β, φ, hφ, e, he⟩
 
 end Algebra

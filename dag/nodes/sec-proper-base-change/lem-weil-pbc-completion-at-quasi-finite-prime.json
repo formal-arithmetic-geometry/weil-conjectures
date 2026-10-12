@@ -31,108 +31,43 @@
  ],
  "proof": [
   {
-   "text": "*A finite subalgebra agreeing with $S$ away from $g$.* Since $S$ is a finitely generated $R$-algebra and $R\\to S$ is quasi-finite at $\\mathfrak q$ [def-weil-pbc-ring-map-quasi-finite-at-prime], [lem-weil-pbc-quasi-finite-at-finite-subalgebra-away] gives an $R$-subalgebra $S'\\subseteq S$, with inclusion $i:S'\\to S$, which is a finitely generated $R$-module, and $g\\in S'$, $g\\notin\\mathfrak q$, such that $i_g:S'_g\\to S_g$, $y/g^n\\mapsto i(y)/g^n$ [def-weil-pbc-module-localization-away], is an isomorphism. Put $\\mathfrak q'=i^{-1}(\\mathfrak q)=S'\\cap\\mathfrak q$, a prime ideal of $S'$ with $g\\notin\\mathfrak q'$; its inverse image in $R$ is $\\varphi^{-1}(\\mathfrak q)=\\mathfrak p$, since $R\\to S$ factors as $R\\to S'\\xrightarrow{i}S$.",
+   "text": "Choose S', its Module.Finite instance and g outside q with bijective awayMap, by Algebra.exists_finite_subalgebra_away_of_isQuasiFiniteAtPrime applied to hq.",
    "uses": [
     "lem-weil-pbc-quasi-finite-at-finite-subalgebra-away",
-    "def-weil-pbc-ring-map-quasi-finite-at-prime",
-    "def-weil-pbc-module-localization-away"
+    "def-weil-pbc-ring-map-quasi-finite-at-prime"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, proof of Lemma Tag 07NC (lemma-completion-at-quasi-finite-prime, line 31064): 'There exists a finite $R$-algebra $S'\\subset S$ and an element $g\\in S'$, $g\\notin\\mathfrak q'=S'\\cap\\mathfrak q$ such that $S'_g=S_g$', by Lemma Tag 00QB (lemma-quasi-finite-open-integral-closure, line 30906) with Theorem Tag 00Q9"
-   }
+   "elementary": false
   },
   {
-   "text": "*$S'_{\\mathfrak q'}\\cong S_{\\mathfrak q}$ and on completions.* The map $i_{\\mathfrak q'}:S'_{\\mathfrak q'}\\to S_{\\mathfrak q}$, $y/t\\mapsto i(y)/i(t)$ [def-weil-pbc-localization-at-prime] (well defined since $t\\notin\\mathfrak q'$ means $i(t)\\notin\\mathfrak q$) is an isomorphism. Surjective: for $s\\in S$, surjectivity of $i_g$ gives $y\\in S'$, $k\\ge0$ with $s/1=y/g^k$ in $S_g$, i.e. $g^l(g^ks-y)=0$ in $S$ for some $l$, so $g^Ns\\in S'$ for $N=k+l$; given $s/t\\in S_{\\mathfrak q}$ choose $N$ with $g^Ns,g^Nt\\in S'$; then $g^Nt\\notin\\mathfrak q'$ and $s/t=i_{\\mathfrak q'}(g^Ns/g^Nt)$. Injective: if $i(y)/1=0$ in $S_{\\mathfrak q}$, then $ty=0$ in $S$ for some $t\\in S\\setminus\\mathfrak q$; as above $u=g^Nt\\in S'$ for some $N$, $u\\notin\\mathfrak q'$ (as $g,t\\notin\\mathfrak q$), and $uy=g^N(ty)=0$, so $y/1=0$ in $S'_{\\mathfrak q'}$; a general element $y/t$ is $(y/1)(t/1)^{-1}$. An isomorphism of local rings carries the maximal ideal $\\mathfrak q'S'_{\\mathfrak q'}$ onto $\\mathfrak qS_{\\mathfrak q}$ and its powers onto the powers, so it induces isomorphisms $S'_{\\mathfrak q'}/(\\mathfrak q'S'_{\\mathfrak q'})^n\\cong S_{\\mathfrak q}/(\\mathfrak qS_{\\mathfrak q})^n$ compatible with the transition maps, hence a ring isomorphism of completions [def-weil-pbc-adic-completion] $\\alpha:(S'_{\\mathfrak q'})^\\wedge\\to(S_{\\mathfrak q})^\\wedge$. Let $\\psi:(R_{\\mathfrak p})^\\wedge\\to(S'_{\\mathfrak q'})^\\wedge$ be induced by the local map $R_{\\mathfrak p}\\to S'_{\\mathfrak q'}$ and $\\iota':S'\\to(S'_{\\mathfrak q'})^\\wedge$ the canonical map. Since $R_{\\mathfrak p}\\to S'_{\\mathfrak q'}\\xrightarrow{i_{\\mathfrak q'}}S_{\\mathfrak q}$ is the map $R_{\\mathfrak p}\\to S_{\\mathfrak q}$ and $S'\\to S'_{\\mathfrak q'}\\to S_{\\mathfrak q}$ is $S'\\xrightarrow{i}S\\to S_{\\mathfrak q}$, comparing level by level gives $\\alpha\\circ\\psi=\\hat\\varphi$ and $\\alpha\\circ\\iota'=\\iota\\circ i$.",
+   "text": "Construct the completed local map ψ and its levelwise formula by Algebra.exists_completion_map_atPrime (proved from Mathlib).",
    "uses": [
-    "def-weil-pbc-localization-at-prime",
-    "def-weil-pbc-module-localization-away",
-    "def-weil-pbc-adic-completion"
+    "lem-weil-pbc-completion-local-map-at-prime"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, proof of Lemma Tag 07NC (lemma-completion-at-quasi-finite-prime, line 31064): 'in particular $S'_{\\mathfrak q'}=S_{\\mathfrak q}$' and 'the isomorphism $S'_{\\mathfrak q'}=S_\\mathfrak q$ determines an isomorphism on completions' (both written out here)"
-   }
+   "elementary": false
   },
   {
-   "text": "*The completed base change of the finite algebra $S'$.* Let $T=(R_{\\mathfrak p})^\\wedge\\otimes_RS'$. $R$ is Noetherian and $S'$ is a finitely generated $R$-module [def-weil-finitely-generated-module]; let $\\mathfrak q'_1=\\mathfrak q',\\mathfrak q'_2,\\dots,\\mathfrak q'_m$ be the primes of $S'$ over $\\mathfrak p$ ($\\mathfrak q'$ is one by step 1). By [lem-weil-pbc-completion-finite-extension] the ring map $T\\to\\prod_{i=1}^m(S'_{\\mathfrak q'_i})^\\wedge$ whose $i$-th component is $x\\otimes y\\mapsto\\psi_i(x)\\iota'_i(y)$ ($\\psi_i$, $\\iota'_i$ the maps induced by $R_{\\mathfrak p}\\to S'_{\\mathfrak q'_i}$ and $S'\\to S'_{\\mathfrak q'_i}$) is an isomorphism (it is compatible with the $S'$- and $(R_{\\mathfrak p})^\\wedge$-algebra structures). Its first component is $\\phi':T\\to(S'_{\\mathfrak q'})^\\wedge$, $x\\otimes y\\mapsto\\psi(x)\\iota'(y)$. Let $e\\in T$ be the element mapping to $(1,0,\\dots,0)$: $e$ is idempotent, $\\phi'(e)=1$, $\\phi'(1-e)=0$, and the restriction of $\\phi'$ to the ring $Te$ (with unit $e$) is a ring isomorphism $\\phi'_e:Te\\to(S'_{\\mathfrak q'})^\\wedge$, because the isomorphism carries $Te$ onto $(S'_{\\mathfrak q'})^\\wedge\\times0\\times\\dots\\times0$.",
+   "text": "Apply Algebra.completion_split_of_finite_subalgebra_away to these explicit S', g, finiteness and awayMap data, and ψ with its formula. This is the remaining seven-step finite-subalgebra argument of 07NC.",
    "uses": [
-    "lem-weil-pbc-completion-finite-extension",
-    "def-weil-finitely-generated-module"
+    "lem-weil-pbc-completion-finite-subalgebra-away-split"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, proof of Lemma Tag 07NC (lemma-completion-at-quasi-finite-prime, line 31064): '$R_\\mathfrak p^\\wedge\\otimes_RS'=(S'_{\\mathfrak q'})^\\wedge\\times B'$ by Lemma Tag 07N9 (lemma-completion-finite-extension, line 23135)'"
-   }
+   "elementary": false
   },
   {
-   "text": "*Comparison with $U=(R_{\\mathfrak p})^\\wedge\\otimes_RS$.* Let $U=(R_{\\mathfrak p})^\\wedge\\otimes_RS$ and $j=1\\otimes i:T\\to U$, a ring map. Then $\\phi\\circ j=\\alpha\\circ\\phi'$: both are ring maps, hence additive, and on a generator $x\\otimes y$ ($x\\in(R_{\\mathfrak p})^\\wedge$, $y\\in S'$) they give $\\hat\\varphi(x)\\iota(i(y))=\\alpha(\\psi(x))\\alpha(\\iota'(y))$ by step 2.",
+   "text": "Package the resulting B, ring instance, β, φ and product equivalence together with ψ and its coordinate formula.",
    "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, proof of Lemma Tag 07NC (lemma-completion-at-quasi-finite-prime, line 31064): the 'sanity check' that the induced map to $S_\\mathfrak q^\\wedge$ is the natural one (for $x\\otimes1$ 'the natural map $R_\\mathfrak p^\\wedge\\to S_\\mathfrak q^\\wedge$ factors through $(S'_{\\mathfrak q'})^\\wedge$'); here it is checked on the image of $T$, which by steps 5-7 suffices"
-   }
-  },
-  {
-   "text": "*$T$ and $U$ agree after inverting $g$.* Regard $T$ and $U$ as $S'$-modules via $y\\mapsto1\\otimes y$ and $y\\mapsto1\\otimes i(y)$; $j$ is $S'$-linear. Write $N=(R_{\\mathfrak p})^\\wedge$ (an $R$-module) and use the symmetry $N\\otimes_RM\\cong M\\otimes_RN$. By [lem-weil-pbc-localization-tensor-over-base] (with $A=S'$, the multiplicative set of powers of $g$, and $M=S'$, resp. $M=S$ viewed as an $S'$-module via $i$, whose localization at $g$ is $S_g$ [def-weil-pbc-module-localization-away]), $\\ell':T\\to N\\otimes_RS'_g$ and $\\ell:U\\to N\\otimes_RS_g$, $x\\otimes y\\mapsto x\\otimes y/1$, are localizations at $g$, i.e. induce isomorphisms $T_g\\cong N\\otimes_RS'_g$ and $U_g\\cong N\\otimes_RS_g$, $(x\\otimes y)/g^k\\mapsto x\\otimes(y/g^k)$. Under them the map $j_g:T_g\\to U_g$, $t/g^k\\mapsto j(t)/g^k$, becomes $1\\otimes i_g$ (check on the generators $(x\\otimes y)/g^k$), which is an isomorphism with inverse $1\\otimes i_g^{-1}$ since $i_g$ is one (step 1). Hence $j_g$ is an isomorphism.",
-   "uses": [
-    "lem-weil-pbc-localization-tensor-over-base",
-    "def-weil-pbc-module-localization-away"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, proof of Lemma Tag 07NC (lemma-completion-at-quasi-finite-prime, line 31064): 'Since $S'_g=S_g$ we also have $(R_\\mathfrak p^\\wedge\\otimes_RS')_g=(R_\\mathfrak p^\\wedge\\otimes_RS)_g$'"
-   }
-  },
-  {
-   "text": "*$g$ is a unit on the first factor.* Write $\\gamma=1\\otimes g\\in T$; then $j(\\gamma)=1\\otimes i(g)$, which is the element by which $g$ acts on $U$. $\\phi'(\\gamma)=\\iota'(g)$ is the image of $g/1$, a unit of $S'_{\\mathfrak q'}$ because $g\\notin\\mathfrak q'$, hence a unit of $(S'_{\\mathfrak q'})^\\wedge$. Since $\\phi'_e$ is a ring isomorphism (step 3) and $\\phi'_e(\\gamma e)=\\phi'(\\gamma)$, $\\gamma e$ is a unit of $Te$: there is $v\\in T$ with $v\\gamma e=e$. Let $f=j(e)\\in U$, an idempotent, and $w=j(v)$; then $w\\,j(\\gamma)\\,f=f$.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, proof of Lemma Tag 07NC (lemma-completion-at-quasi-finite-prime, line 31064): 'under this product decomposition $g$ maps to a pair $(u,b')$ with $u\\in(S'_{\\mathfrak q'})^\\wedge$ a unit because $g\\notin\\mathfrak q'$'"
-   }
-  },
-  {
-   "text": "*$j$ maps $Te$ isomorphically onto $Uf$.* $j$ restricts to a ring map $j_e:Te\\to Uf$ (units $e\\mapsto f$). Surjective: for $u\\in U$, step 5 gives $t\\in T$ and $k\\ge0$ with $u/1=j(t)/g^k$ in $U_g$, i.e. $j(\\gamma)^l(j(\\gamma)^ku-j(t))=0$ for some $l$ [def-weil-pbc-module-localization-away]; multiplying by $f$ and by $w^{k+l}$ and using $w\\,j(\\gamma)f=f$ gives $uf=w^{k+l}j(\\gamma)^lj(t)f=j(v^{k+l}\\gamma^lte)$. Injective: if $j(te)=0$, then $j_g(te/1)=0$, so $te/1=0$ in $T_g$ by step 5, i.e. $\\gamma^lte=0$ for some $l$; multiplying by $v^l$ and using $v\\gamma e=e$ gives $te=0$.",
-   "uses": [
-    "def-weil-pbc-module-localization-away"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, proof of Lemma Tag 07NC (lemma-completion-at-quasi-finite-prime, line 31064): 'since $g\\mapsto(u,b')$ where $u$ is a unit we see that $(S'_{\\mathfrak q'})^\\wedge=A$', with $A=(R_\\mathfrak p^\\wedge\\otimes_RS)f$ the factor induced by the product decomposition of $R_\\mathfrak p^\\wedge\\otimes_RS'$"
-   }
-  },
-  {
-   "text": "*Conclusion.* Put $B=U(1-f)$, a ring with unit $1-f$, and $\\beta:U\\to B$, $u\\mapsto u(1-f)$, a ring map. Since $\\phi(1-f)=\\phi(j(1-e))=\\alpha(\\phi'(1-e))=0$ (step 4), $\\phi(u)=\\phi(uf)$ for all $u$, and the restriction $\\phi_f:Uf\\to(S_{\\mathfrak q})^\\wedge$ is a ring map with $\\phi_f\\circ j_e=\\alpha\\circ\\phi'_e$ (step 4); as $j_e$, $\\alpha$, $\\phi'_e$ are isomorphisms (steps 7, 2, 3), so is $\\phi_f$. The map $U\\to Uf\\times U(1-f)$, $u\\mapsto(uf,u(1-f))$, is a ring isomorphism (inverse $(a,b)\\mapsto a+b$, as $f$ is idempotent), and $(\\phi,\\beta)$ is its composite with $\\phi_f\\times\\mathrm{id}_B$; hence $(\\phi,\\beta):U\\to(S_{\\mathfrak q})^\\wedge\\times B$ is a ring isomorphism. In particular, giving $(S_{\\mathfrak q})^\\wedge\\times B$ the $S$-algebra structure $y\\mapsto(\\iota(y),\\beta(1\\otimes y))$ and the $(R_{\\mathfrak p})^\\wedge$-algebra structure $x\\mapsto(\\hat\\varphi(x),\\beta(x\\otimes1))$, it is an isomorphism of $S$-algebras and of $(R_{\\mathfrak p})^\\wedge$-algebras, since $\\phi(1\\otimes y)=\\iota(y)$ and $\\phi(x\\otimes1)=\\hat\\varphi(x)$.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, proof of Lemma Tag 07NC (lemma-completion-at-quasi-finite-prime, line 31064): 'The product decomposition for $R_\\mathfrak p^\\wedge\\otimes_RS'$ induces a product decomposition $R_\\mathfrak p^\\wedge\\otimes_RS=A\\times B$ ... this also tells us that $A=S_\\mathfrak q^\\wedge$', and the final sanity check (here the projection is shown to be the natural map $\\phi$ by step 4 instead of the computation with $g^ny$)"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
   "lem-weil-pbc-quasi-finite-at-finite-subalgebra-away",
   "def-weil-pbc-ring-map-quasi-finite-at-prime",
-  "def-weil-pbc-module-localization-away",
-  "def-weil-pbc-localization-at-prime",
-  "def-weil-pbc-adic-completion",
-  "lem-weil-pbc-completion-finite-extension",
-  "def-weil-finitely-generated-module",
-  "lem-weil-pbc-localization-tensor-over-base"
+  "lem-weil-pbc-completion-local-map-at-prime",
+  "lem-weil-pbc-completion-finite-subalgebra-away-split"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/algebra.tex",
-  "place": "Algebra, Lemma Tag 07NC (lemma-completion-at-quasi-finite-prime, line 31064) and its proof; uses Theorem Tag 00Q9 / Lemma Tag 00QB and Lemma Tag 07N9. The final sanity check is reorganized: the natural map is compared with the decomposition on the image of $T$ (step 4) rather than on elements $g^ny$."
+  "place": "07NC: step 1 is the existing finite-subalgebra-away theorem; the natural completion map is proved from Mathlib; steps 2–8 remain in the finite-subalgebra helper. No unit route is changed."
  },
  "mathlib_searches": [
   {
@@ -216,5 +151,15 @@
   "group": "E1",
   "result": "fix",
   "note": "R->S CommRing+Algebra; R Noetherian (IsNoetherianRing); S finite type (Algebra.FiniteType); q prime (PrimeSpectrum); p = comap; quasi-finite at q = recorded Algebra.IsQuasiFiniteAtPrime; Rp,Sq = Localization.AtPrime; completions AdicCompletion at maximalIdeal; local map = Localization.localRingHom (F1 72b404dc7 form); psi fixed level-by-level; phi pinned on pure tensors x⊗y ↦ psi x * iota y; B, beta existential in max u v; e : U ≃+* Sqh × B with e = prod phi beta encodes S- and Rph-algebra iso"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-a3978",
+  "group": "T2",
+  "result": "pass",
+  "landing": "20261012T194143-L-465686",
+  "kind": "interface",
+  "note": "independent Codex review: Matched delivered Lean signatures and proofs with all three node records, the unchanged library interface, Stacks 07NC, compilation results, and axiom checks."
  }
 }

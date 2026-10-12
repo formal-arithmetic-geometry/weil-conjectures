@@ -1,0 +1,173 @@
+{
+ "id": "lem-weil-pbc-completion-finite-subalgebra-away-split",
+ "kind": "statement",
+ "title": "Completion factor from an explicit finite subalgebra agreeing away from an element",
+ "statement": "Let R be a Noetherian commutative ring [def-weil-pbc-noetherian-ring], S any commutative R-algebra and q a prime of S. Suppose an R-subalgebra S' of S is a finite R-module [def-weil-finitely-generated-module], g ∈ S' is outside q, and the canonical away-localization map S'_g → S_g is bijective [def-weil-pbc-module-localization-away]. Put p = q ∩ R, Rp = R_p and Sq = S_q [def-weil-pbc-localization-at-prime], and let Rph and Sqh be their maximal-ideal-adic completions [def-weil-pbc-adic-completion]. Let f : Rp → Sq be the induced local homomorphism and ι : S → Sqh the composite of the canonical localization and completion maps. Write Ip and Iq for the maximal ideals of Rp and Sq. For any ring map ψ : Rph → Sqh such that, for every n ≥ 0, x ∈ Rph and a ∈ Rp, the nth coordinate of x being the class of a modulo Ip^n implies that the nth coordinate of ψ(x) is the class of f(a) modulo Iq^n, put U = Rph ⊗_R S. There exist a commutative ring B in the universe of U, ring maps β : U → B and φ : U → Sqh, and a ring equivalence e : U ≃ Sqh × B, such that φ(x ⊗ y) = ψ(x)ι(y) on pure tensors and e = (φ, β). The finite subalgebra and its away-isomorphism are inputs, not conclusions; this omits their construction from quasi-finiteness.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, proof of Lemma Tag 07NC (lemma-completion-at-quasi-finite-prime)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-finitely-generated-module",
+  "def-weil-pbc-module-localization-away",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-pbc-adic-completion"
+ ],
+ "proof": [
+  {
+   "text": "Put q' = q ∩ S'. Clear powers of g in numerators and denominators to identify S'_{q'} with S_q, including injectivity. Carry maximal-ideal powers along this local-ring isomorphism to obtain the compatible completion isomorphism α.",
+   "uses": [
+    "def-weil-pbc-module-localization-away",
+    "def-weil-pbc-localization-at-prime",
+    "def-weil-pbc-adic-completion"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply completion_finite_extension R S' p. The product factor indexed by q' gives an idempotent e in T = Rph ⊗_R S', with eT isomorphic to the completion at q'.",
+   "uses": [
+    "lem-weil-pbc-completion-finite-extension",
+    "def-weil-finitely-generated-module"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The map j : T → U becomes an isomorphism after inverting γ = 1 ⊗ g, by tensor-localization and the input away-isomorphism.",
+   "uses": [
+    "lem-weil-pbc-localization-tensor-over-base",
+    "def-weil-pbc-module-localization-away"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The image of g is a unit in the q' completion factor; choose v supported on e with vγ = e. Put f₀ = j(e). Clearing γ-denominators and multiplying by powers of v proves that j restricts to an isomorphism eT → f₀U.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "The coordinate formula determines ψ uniquely. Compare it with the completed finite local map followed by α. It agrees on every coordinate. It commutes with R, so the tensor universal property constructs φ. Comparing on pure tensors shows φj is α followed by the finite q' projection.",
+   "uses": [
+    "def-weil-pbc-adic-completion"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Thus φ is an isomorphism on f₀U and kills (1-f₀)U. Set B = (1-f₀)U, β(u) = (1-f₀)u, and combine the idempotent product equivalence with φ on the first factor.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-module-localization-away",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-pbc-adic-completion",
+  "lem-weil-pbc-completion-finite-extension",
+  "def-weil-finitely-generated-module",
+  "lem-weil-pbc-localization-tensor-over-base"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "The natural completion map and the finite-subalgebra portion of the proof of 07NC, with the denominator and idempotent arguments written out."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "AdicCompletion finite algebra tensor product direct factor localization prime",
+   "date": "2026-10-13",
+   "results": "Service unavailable: service unavailable: Internal Server Error",
+   "verdict": "service unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "finite subalgebra isomorphic after localization away from an element gives direct product factor of completed tensor product at a prime",
+   "date": "2026-10-13",
+   "results": "IsLocalization.Away.tensorEquiv supports the tensor-localization step. SurjectiveOnStalks.exists_mul_eq_tmul concerns clearing denominators. Neither gives the direct-factor conclusion.",
+   "verdict": "supporting tools, no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Localization.awayMap, AdicCompletion",
+   "date": "2026-10-13",
+   "results": "No hits.",
+   "verdict": "supporting tools, no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "completion.*(split|factor|quasi)|awayMap.*completion|completion.*awayMap",
+   "date": "2026-10-13",
+   "results": "Only AdicCompletion transition-map and lift-factor compatibility lines; no splitting theorem.",
+   "verdict": "supporting tools, no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.CompletionAtQuasiFinitePrime",
+  "date": "2026-10-13",
+  "group": "T2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "step 7 of its split (source: Lemma 0GS2, proof: the essential-surjectivity paragraphs)",
+   "via": [
+    "lem-weil-pbc-completion-at-quasi-finite-prime",
+    "lem-weil-pbc-formal-fibre-quasi-finite-ascent",
+    "lem-weil-pbc-complete-local-g-ring",
+    "lem-weil-pbc-g-ring-maximal-ideal-criterion",
+    "lem-weil-pbc-henselization-pair-g-ring",
+    "lem-weil-pbc-finite-etale-lifting-limit-descent",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.CompletionAtQuasiFinitePrimeSplit",
+  "file": "lean/Sheaf/RingTheory/CompletionAtQuasiFinitePrimeSplit.lean",
+  "declaration": "Algebra.completion_split_of_finite_subalgebra_away",
+  "statement": "theorem completion_split_of_finite_subalgebra_away\n    (R : Type u) (S : Type v) [CommRing R] [CommRing S] [Algebra R S]\n    [IsNoetherianRing R] (q : PrimeSpectrum S)\n    (S' : Subalgebra R S) [Module.Finite R S']\n    (g : S') (hg : g.1 ∉ q.asIdeal)\n    (haway : Function.Bijective (Localization.awayMap S'.val.toRingHom g)) :\n    let p : Ideal R := q.comap (algebraMap R S)\n    let Rp := Localization.AtPrime p\n    let Sq := Localization.AtPrime q.asIdeal\n    let Ip := IsLocalRing.maximalIdeal Rp\n    let Iq := IsLocalRing.maximalIdeal Sq\n    let Rph := AdicCompletion Ip Rp\n    let Sqh := AdicCompletion Iq Sq\n    let f : Rp →+* Sq := Localization.localRingHom p q.asIdeal (algebraMap R S) rfl\n    let U := TensorProduct R Rph S\n    ∀ (ψ : Rph →+* Sqh),\n      (∀ (n : ℕ) (x : Rph) (a : Rp),\n        AdicCompletion.evalₐ Ip n x = Ideal.Quotient.mk (Ip ^ n) a →\n        AdicCompletion.evalₐ Iq n (ψ x) = Ideal.Quotient.mk (Iq ^ n) (f a)) →\n      ∃ (B : Type (max u v)) (_ : CommRing B) (β : U →+* B) (φ : U →+* Sqh),\n        (∀ (x : Rph) (y : S),\n          φ (TensorProduct.tmul R x y) =\n            ψ x * algebraMap Sq Sqh (algebraMap S Sq y)) ∧\n        ∃ e : U ≃+* Sqh × B, e.toRingHom = RingHom.prod φ β",
+  "branch": "sheaf-dag",
+  "by": "T2",
+  "date": "2026-10-13"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-a3978",
+  "group": "T2",
+  "result": "pass",
+  "landing": "20261012T194143-L-465686",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-a3978",
+  "group": "T2",
+  "result": "pass",
+  "landing": "20261012T194143-L-465686",
+  "kind": "interface",
+  "note": "independent Codex review: Matched delivered Lean signatures and proofs with all three node records, the unchanged library interface, Stacks 07NC, compilation results, and axiom checks."
+ }
+}

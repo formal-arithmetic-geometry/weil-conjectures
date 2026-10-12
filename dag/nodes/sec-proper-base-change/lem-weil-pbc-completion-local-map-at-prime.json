@@ -1,0 +1,138 @@
+{
+ "id": "lem-weil-pbc-completion-local-map-at-prime",
+ "kind": "statement",
+ "title": "The compatible map on completions of prime localizations",
+ "statement": "Let R and S be commutative rings with an R-algebra structure on S, and q a prime of S. Put p = q ∩ R, Rp = R_p and Sq = S_q [def-weil-pbc-localization-at-prime], Ip and Iq their maximal ideals, and Rph and Sqh their corresponding adic completions [def-weil-pbc-adic-completion]. Let f : Rp → Sq be the induced local homomorphism. There exists a ring map ψ : Rph → Sqh such that for every n ≥ 0, x ∈ Rph and a ∈ Rp, if the nth coordinate of x is the class of a modulo Ip^n, then the nth coordinate of ψ(x) is the class of f(a) modulo Iq^n. No Noetherian, finite-type or quasi-finite assumption is required.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, proof of Lemma Tag 07NC (lemma-completion-at-quasi-finite-prime)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-pbc-adic-completion"
+ ],
+ "proof": [
+  {
+   "text": "The induced localization map is local, so it maps the maximal ideal, and each of its powers, into the target maximal ideal and its powers (IsLocalRing.map_maximalIdeal_le and Ideal.map_pow).",
+   "uses": [
+    "def-weil-pbc-localization-at-prime"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Construct the maps on ideal-power quotients with Ideal.quotientMap. Their composites with the source evaluations commute with reduction: use AdicCompletion.induction_on and Ideal.mk_eq_mk. Apply AdicCompletion.liftRingHom and evalₐ_liftRingHom.",
+   "uses": [
+    "def-weil-pbc-adic-completion"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-pbc-adic-completion"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "The natural completed local map in 07NC, constructed from ideal-power quotient maps and Mathlib AdicCompletion.liftRingHom."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A local ring map induces compatible homomorphisms between maximal ideal adic completions via maps on quotients",
+   "date": "2026-10-13",
+   "results": "Service unavailable: service unavailable: Internal Server Error",
+   "verdict": "service unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "local ring homomorphism induces homomorphism of adic completions compatible with quotient maps",
+   "date": "2026-10-13",
+   "results": "AdicCompletion.liftRingHom is the inverse-limit construction needed, not this specialized local-map statement.",
+   "verdict": "supporting tools, no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AdicCompletion.liftRingHom",
+   "date": "2026-10-13",
+   "results": "AdicCompletion.liftRingHom and evalₐ_liftRingHom give the construction and levelwise formula.",
+   "verdict": "supporting tools, no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "liftRingHom|evalₐ_liftRingHom|map_maximalIdeal_le",
+   "date": "2026-10-13",
+   "results": "LocalRing/RingHom/Basic.lean:98 map_maximalIdeal_le; AdicCompletion/Algebra.lean liftRingHom and evaluation lemmas. These prove the statement directly.",
+   "verdict": "supporting tools, no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.CompletionAtQuasiFinitePrime",
+  "date": "2026-10-13",
+  "group": "T2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "step 7 of its split (source: Lemma 0GS2, proof: the essential-surjectivity paragraphs)",
+   "via": [
+    "lem-weil-pbc-completion-at-quasi-finite-prime",
+    "lem-weil-pbc-formal-fibre-quasi-finite-ascent",
+    "lem-weil-pbc-complete-local-g-ring",
+    "lem-weil-pbc-g-ring-maximal-ideal-criterion",
+    "lem-weil-pbc-henselization-pair-g-ring",
+    "lem-weil-pbc-finite-etale-lifting-limit-descent",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.CompletionAtQuasiFinitePrimeMap",
+  "file": "lean/Sheaf/RingTheory/CompletionAtQuasiFinitePrimeMap.lean",
+  "declaration": "Algebra.exists_completion_map_atPrime",
+  "statement": "theorem exists_completion_map_atPrime\n    (R : Type u) (S : Type v) [CommRing R] [CommRing S] [Algebra R S]\n    (q : PrimeSpectrum S) :\n    let p : Ideal R := q.comap (algebraMap R S)\n    let Rp := Localization.AtPrime p\n    let Sq := Localization.AtPrime q.asIdeal\n    let Ip := IsLocalRing.maximalIdeal Rp\n    let Iq := IsLocalRing.maximalIdeal Sq\n    let Rph := AdicCompletion Ip Rp\n    let Sqh := AdicCompletion Iq Sq\n    let f : Rp →+* Sq := Localization.localRingHom p q.asIdeal (algebraMap R S) rfl\n    ∃ ψ : Rph →+* Sqh,\n      ∀ (n : ℕ) (x : Rph) (a : Rp),\n        AdicCompletion.evalₐ Ip n x = Ideal.Quotient.mk (Ip ^ n) a →\n        AdicCompletion.evalₐ Iq n (ψ x) = Ideal.Quotient.mk (Iq ^ n) (f a)",
+  "branch": "sheaf-dag",
+  "by": "T2",
+  "date": "2026-10-13"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-a3978",
+  "group": "T2",
+  "result": "pass",
+  "landing": "20261012T194143-L-465686",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-a3978",
+  "group": "T2",
+  "result": "pass",
+  "landing": "20261012T194143-L-465686",
+  "kind": "interface",
+  "note": "independent Codex review: Matched delivered Lean signatures and proofs with all three node records, the unchanged library interface, Stacks 07NC, compilation results, and axiom checks."
+ }
+}
