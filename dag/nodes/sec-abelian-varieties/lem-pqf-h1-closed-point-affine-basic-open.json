@@ -14,33 +14,46 @@
  ],
  "proof": [
   {
-   "text": "Choose an affine neighbourhood $U=\\operatorname{Spec}A$ of $x$, and its maximal ideal $\\mathfrak m$. Put $Z=X\\setminus U$ and $Z\\prime=Z\\cup\\{x\\}$. The reduced-induced construction gives quasi-coherent ideals $\\mathcal I\\prime\\subseteq\\mathcal I$ defining $Z\\prime$ and $Z$. Their restrictions to $U$ are $\\mathfrak m$ and $A$, and their restrictions to $X\\setminus\\{x\\}$ agree.",
+   "text": "Choose an affine open neighbourhood U of x. Form the concrete vanishing ideal data I of X minus U and J of (X minus U) union {x}, and use the canonical toModulesOfLE inclusion. It is mono since its composite with I.toModulesι is J.toModulesι. Thus the inclusion and its categorical cokernel give a short exact sequence. The quotient-section lemma provides q whose global lifts have residue one at x.",
    "uses": [
-    "lem-weil-pbc-reduced-induced-closed-subscheme"
+    "lem-pqf-h1-closed-point-ideal-quotient"
    ],
    "elementary": false
   },
   {
-   "text": "The quotient $\\mathcal I/\\mathcal I\\prime$ restricts to $\\widetilde{A/\\mathfrak m}$ on $U$ and zero on $X\\setminus\\{x\\}$. Gluing over these two opens gives global sections $A/\\mathfrak m$. The long exact sequence and the assumed vanishing of $H^1(X,\\mathcal I\\prime)$ lift its section $1$ to $f\\in\\Gamma(X,\\mathcal I)$.",
+   "text": "Prove J.toModules quasi-coherent by identifying it as the kernel of the map from the structure module to closed-immersion pushforward of the structure module of its closed subscheme. Closed-immersion pushforward and kernels preserve quasi-coherence. Apply the assumed ideal H1 vanishing to J.",
+   "uses": [
+    "lem-pc-closed-immersion-coherent-cohomology",
+    "lem-weil-pbc-quasi-coherent-module-kernel"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply exists_rightDerived_full_long_exact to the short exact sequence and the module-valued global sections functor. H1(J) is subsingleton, so the first connecting map is zero. Exactness gives an epimorphism on R0, and naturality of rightDerivedZeroIsoSelf transfers it to an epimorphism on global sections. ModuleCat.epi_iff_surjective lifts q to s in Gamma(X,I).",
    "uses": [
     "lem-weil-pbc-derived-functor-long-exact"
    ],
    "elementary": false
   },
   {
-   "text": "Viewed as a structure-sheaf section, $f$ vanishes on $Z$ and its residue at $x$ is $1$. Hence $x\\in X_f\\subseteq U$. The basic-open construction identifies $X_f$ with $D(f|_U)$ in the affine scheme $U$, so it is affine.",
-   "uses": [],
-   "elementary": true
+   "text": "Let f be the image of s in the structure sheaf. The quotient-section property gives residue one at x, hence x lies in its basic open. Membership of f in the vanishing ideal of X minus U gives zero residue at every point outside U, hence X_f is contained in U. Restricting f to U gives the same basic open by basicOpen_res and the containment. IsAffineOpen.basicOpen then makes X_f affine.",
+   "uses": [
+    "lem-weil-pbc-reduced-induced-closed-subscheme"
+   ],
+   "elementary": false
   }
  ],
  "proof_deps": [
+  "lem-pc-closed-immersion-coherent-cohomology",
+  "lem-pqf-h1-closed-point-ideal-quotient",
   "lem-weil-pbc-derived-functor-long-exact",
+  "lem-weil-pbc-quasi-coherent-module-kernel",
   "lem-weil-pbc-reduced-induced-closed-subscheme"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/stacks-project/coherent.tex",
-  "place": "Tag 01XF, label lemma-quasi-compact-h1-zero-covering; first paragraph of proof, lines 323-352"
+  "place": "Tag 01XF, first paragraph, made into Lean using the actual ideal-module cokernel, gluing and module-valued right derived global sections"
  },
  "mathlib_searches": [
   {
@@ -124,11 +137,11 @@
  "reviewed_proof": {
   "date": "2026-10-12",
   "by": "L",
-  "reviewer": "X-05611",
-  "group": "S2",
+  "reviewer": "COMPILER",
+  "group": "W2",
   "result": "pass",
-  "landing": "20261012T202252-L-708722",
+  "landing": "20261012T223425-L-1643802",
   "kind": "interface",
-  "note": "independent Codex review: Delivered Lean signatures, proof, imports and node records against the clone, Stacks 01XF, change record and earlier return; delivery and sole direct importer compile cleanly; axioms conform."
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

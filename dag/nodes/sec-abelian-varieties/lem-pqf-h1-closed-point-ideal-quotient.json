@@ -1,0 +1,130 @@
+{
+ "id": "lem-pqf-h1-closed-point-ideal-quotient",
+ "kind": "statement",
+ "title": "Distinguished section of the closed-point vanishing-ideal quotient",
+ "statement": "Let $X$ be a scheme [def-pc-scheme], let $U$ be an open subset, and let $x\\in U$ have closed singleton. Put $Z=X\\setminus U$ and $Z^{\\prime}=Z\\cup\\{x\\}$. Let $I$ and $J$ be the reduced vanishing ideal sheaves of $Z$ and $Z^{\\prime}$ [lem-weil-pbc-reduced-induced-closed-subscheme], represented as $\\mathcal O_X$-modules [def-weil-sheaf-of-modules-category]. Let $i:J\\to I$ be their canonical inclusion and $Q=\\operatorname{coker}(i)$. There exists $q\\in\\Gamma(X,Q)$ such that every $s\\in\\Gamma(X,I)$ whose image in $Q$ is $q$ has residue $1$ at $x$ after inclusion in $\\mathcal O_X$ [def-weil-residue-field]. No existence of a global lift of $q$ is assumed or asserted, and U need not be affine.",
+ "source": {
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Tag 01XF, label lemma-quasi-compact-h1-zero-covering, first paragraph before the H1 lifting step; read at https://stacks.math.columbia.edu/tag/01XF"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "lem-weil-pbc-reduced-induced-closed-subscheme",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-residue-field"
+ ],
+ "proof": [
+  {
+   "text": "Let Z be X minus U and Z prime be Z union the closed singleton x. Take the concrete reduced vanishing ideals I and J. Their sectionwise descriptions by zero residue evaluations show that 1 on U is in I(U), so lift it through the injective inclusion of I into the structure sheaf to a section sU.",
+   "uses": [
+    "lem-weil-pbc-reduced-induced-closed-subscheme"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Take the existing canonical inclusion i = IdealSheafData.toModulesOfLE and its categorical cokernel Q. On V = X minus {x}, the reduced vanishing ideal descriptions give equality of I and J on every open contained in V. Prove the restriction of i is an isomorphism by injectivity and surjectivity on all sections. Restriction preserves cokernels, so Q restricted to V is zero. Evaluation and restrictAppIso give subsingleton sections of Q on every W contained in V.",
+   "uses": [
+    "lem-weil-pbc-reduced-induced-closed-subscheme"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The quotient image qU of sU on U and the zero section on V agree on both overlaps since Q has zero sections there. U and V cover X because x belongs to U. Apply TopCat.Sheaf.existsUnique_gluing with the Bool-indexed cover to obtain a global section q with the prescribed restriction.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "For any lift s of q, naturality shows that its restriction to U minus sU lies in the kernel of the quotient map on U. The inclusion i is mono because its composite with I.toModulesι is J.toModulesι, so i and its cokernel form a short exact sequence. Evaluation at U preserves finite limits and is additive, hence is exact at the middle. Obtain a section of J(U) mapping to the difference. Its residue at x is zero since x belongs to Z prime. As sU maps to 1, the residue of s on U is 1. The germ restriction identity transports the same equality to the global section.",
+   "uses": [
+    "lem-weil-pbc-reduced-induced-closed-subscheme"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-reduced-induced-closed-subscheme"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Tag 01XF first paragraph, expanding quotient gluing and replacing the affine residue-module description by pointwise vanishing and left exactness of evaluation"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Quotient of reduced vanishing ideals supported at a closed point has a global section whose lifts have residue one",
+   "results": "HTTP 500 Internal Server Error; service unavailable; no conclusion from this search.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cokernel of ideals cutting out a closed set and its union with a closed point has global section with residue one",
+   "results": "Localization of ideal data, vanishing ideals, and spectrum residue-point lemmas; no theorem giving the global quotient section.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "TopCat.Sheaf.existsUnique_gluing",
+   "results": "Mathlib.Topology.Sheaves.SheafCondition.UniqueGluing supplies general unique gluing, used after proving quotient vanishing off x.",
+   "date": "2026-10-13",
+   "verdict": "ingredient only"
+  },
+  {
+   "tool": "grep",
+   "query": "closedPoint_ideal_quotient_section|vanishingIdeal.*cokernel|cokernel.*vanishingIdeal",
+   "results": "No matching theorem. Local rg additionally found ideal inclusions in DivisorIdealSheaf and restriction and gluing infrastructure; none states the required section theorem.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.H1ClosedPointAffineBasicOpen",
+  "date": "2026-10-13",
+  "group": "W2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pqf-h1-closed-point-affine-basic-open",
+   "place": "Steps 1 and the geometric portion of step 2: quotient supported at the closed point and gluing its section one"
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-pqf-finite",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.H1ClosedPointIdealQuotient",
+  "file": "lean/Sheaf/Paper/H1ClosedPointIdealQuotient.lean",
+  "declaration": "AlgebraicGeometry.exists_closedPoint_ideal_quotient_section",
+  "statement": "theorem exists_closedPoint_ideal_quotient_section (X : Scheme.{u})\n    (U : X.Opens) (x : X) (hxU : x ∈ U)\n    (hx : IsClosed ({x} : Set X)) :\n    let Z : TopologicalSpace.Closeds X := ⟨(U : Set X)ᶜ, U.isOpen.isClosed_compl⟩\n    let Z' : TopologicalSpace.Closeds X := ⟨(U : Set X)ᶜ ∪ {x},\n      U.isOpen.isClosed_compl.union hx⟩\n    let I := Scheme.IdealSheafData.vanishingIdeal Z\n    let J := Scheme.IdealSheafData.vanishingIdeal Z'\n    let i : J.toModules ⟶ I.toModules := Scheme.IdealSheafData.toModulesOfLE\n      (Scheme.IdealSheafData.vanishingIdeal_antimono\n        (show Z ≤ Z' from Set.subset_union_left))\n    ∃ (q : Γ(cokernel i, ⊤)), ∀ (s : Γ(I.toModules, ⊤)),\n      (cokernel.π i).app ⊤ s = q →\n        X.evaluation ⊤ x (by trivial) (I.toModulesι.app ⊤ s) = 1",
+  "branch": "sheaf-dag",
+  "by": "W2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W2",
+  "result": "pass",
+  "landing": "20261012T223425-L-1643802",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W2",
+  "result": "pass",
+  "landing": "20261012T223425-L-1643802",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
