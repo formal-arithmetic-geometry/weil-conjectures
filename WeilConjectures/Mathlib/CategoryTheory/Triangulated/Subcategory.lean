@@ -49,3 +49,25 @@ instance isTriangulated_liftFullSubcategory [HasZeroObject C] [HasZeroObject D] 
   inferInstanceAs ((Q.lift (P.ι ⋙ F) fun X ↦ h X.obj X.property).IsTriangulated)
 
 end CategoryTheory.ObjectProperty
+
+namespace CategoryTheory.ObjectProperty
+
+open Limits Pretriangulated
+
+variable {C D : Type*} [Category* C] [Category* D] [HasZeroObject C] [HasZeroObject D]
+  [Preadditive C] [Preadditive D] [HasShift C ℤ] [HasShift D ℤ]
+  [∀ n : ℤ, (shiftFunctor C n).Additive] [∀ n : ℤ, (shiftFunctor D n).Additive]
+  [Pretriangulated C] [Pretriangulated D]
+
+/-- **Restriction of a triangulated functor to triangulated subcategories.** Let `F : C ⥤ D` be
+a triangulated functor and `S`, `S'` triangulated subcategories of `C`, `D` with `F` sending `S`
+into `S'`. Then the restriction `S ⥤ S'` of `F` (`S'.lift (S.ι ⋙ F) hF`) is triangulated, and
+its composite with the inclusion of `S'` is `S.ι ⋙ F`.
+(blueprint: `lem-weil-pbc-triangulated-functor-restriction`) -/
+theorem isTriangulated_lift_ι_comp (F : C ⥤ D) [F.CommShift ℤ] [F.IsTriangulated]
+    (S : ObjectProperty C) [S.IsTriangulated] (S' : ObjectProperty D) [S'.IsTriangulated]
+    (hF : ∀ X : S.FullSubcategory, S' (F.obj X.obj)) :
+    (S'.lift (S.ι ⋙ F) hF).IsTriangulated ∧ S'.lift (S.ι ⋙ F) hF ⋙ S'.ι = S.ι ⋙ F :=
+  ⟨inferInstance, rfl⟩
+
+end CategoryTheory.ObjectProperty

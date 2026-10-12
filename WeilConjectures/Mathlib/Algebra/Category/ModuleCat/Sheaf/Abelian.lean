@@ -71,3 +71,48 @@ theorem isGrothendieckAbelian : IsGrothendieckAbelian.{u} (SheafOfModules.{u} R)
   exact {}
 
 end SheafOfModules
+
+namespace SheafOfModules
+
+universe v v' u'
+
+variable {C : Type u'} [Category.{v'} C] {J : GrothendieckTopology C} (R : Sheaf J RingCat.{u})
+  [HasSheafify J AddCommGrpCat.{v}] [J.WEqualsLocallyBijective AddCommGrpCat.{v}]
+
+/-- **The category of sheaves of modules.** A sheaf of `R`-modules is a sheaf of abelian groups
+with compatible `R(U)`-module structures on its sections, and a morphism is a morphism of the
+underlying sheaves of abelian groups that is `R(U)`-linear on sections: the forgetful functor
+`SheafOfModules.toSheaf R` to sheaves of abelian groups is faithful and additive. When
+sheafification of abelian presheaves exists, `SheafOfModules R` is abelian
+(`SheafOfModules.instAbelian`). (blueprint: `def-weil-sheaf-of-modules-category`) -/
+theorem faithful_toSheaf_and_abelian :
+    (toSheaf.{v} R).Faithful ∧ (toSheaf.{v} R).Additive ∧
+      Nonempty (Abelian (SheafOfModules.{v} R)) :=
+  ⟨inferInstance, inferInstance, ⟨inferInstance⟩⟩
+
+/-- **Colimits of sheaves of modules and the forgetful functor.** Let `R` be a sheaf of rings on
+a site where abelian presheaves can be sheafified. Then: (1) the forgetful functor
+`toSheaf R` to sheaves of abelian groups is faithful and exact; (2) sheaves of `R`-modules
+have all small limits and colimits, a colimit being the sheafification of the colimit of the
+underlying presheaves of modules; (3) `toSheaf R` preserves all small limits and colimits.
+(blueprint: `lem-weil-pbc-module-sheaves-colimits-forgetful`) -/
+theorem toSheaf_exact_and_preservesLimitsColimits :
+    (toSheaf.{v} R).Faithful ∧ PreservesFiniteLimits (toSheaf.{v} R) ∧
+      PreservesFiniteColimits (toSheaf.{v} R) ∧
+      HasLimitsOfSize.{v, v} (SheafOfModules.{v} R) ∧
+      HasColimitsOfSize.{v, v} (SheafOfModules.{v} R) ∧
+      PreservesLimitsOfSize.{v, v} (toSheaf.{v} R) ∧
+      PreservesColimitsOfSize.{v, v} (toSheaf.{v} R) ∧
+      ∀ {K : Type v} [SmallCategory K] (F : K ⥤ SheafOfModules.{v} R),
+        Nonempty (colimit F ≅
+          (PresheafOfModules.sheafification (𝟙 R.obj)).obj (colimit (F ⋙ forget R))) := by
+  refine ⟨inferInstance, inferInstance, inferInstance, inferInstance, inferInstance,
+    inferInstance, ⟨fun {K} _ ↦ inferInstance⟩, fun {K} _ F ↦ ?_⟩
+  let L := PresheafOfModules.sheafification.{v} (𝟙 R.obj)
+  let adj := PresheafOfModules.sheafificationAdjunction.{v} (𝟙 R.obj)
+  have : PreservesColimitsOfSize.{v, v} L := adj.leftAdjoint_preservesColimits
+  let e : F ≅ (F ⋙ forget R) ⋙ L :=
+    (F.rightUnitor.symm ≪≫ Functor.isoWhiskerLeft F (asIso adj.counit).symm)
+  exact ⟨HasColimit.isoOfNatIso e ≪≫ preservesColimitIso L (F ⋙ forget R)⟩
+
+end SheafOfModules

@@ -79,3 +79,17 @@ instance (priority := low) hasColimitsOfSize_succ_of_succ (A : Type u') [Categor
   hasColimitsOfSizeShrink.{u, u + 1, u + 1, u + 1} A
 
 end CategoryTheory.Limits
+
+namespace CategoryTheory.Limits
+
+/-- **Universal property of the chosen colimit.** For a diagram `F : J ⥤ C` having a colimit,
+with coprojections `colimit.ι F j`, every cocone `s` on `F` receives exactly one morphism
+`colimit F ⟶ s.pt` compatible with the coprojections, namely `colimit.desc F s`.
+(blueprint: `def-weil-pbc-category-colimit`) -/
+theorem colimit.existsUnique_desc {J : Type*} [Category* J] {C : Type*} [Category* C]
+    (F : J ⥤ C) [HasColimit F] (s : Cocone F) :
+    ∃! u : colimit F ⟶ s.pt, ∀ j, colimit.ι F j ≫ u = s.ι.app j :=
+  ⟨colimit.desc F s, fun j ↦ colimit.ι_desc s j,
+    fun u hu ↦ colimit.hom_ext fun j ↦ by simp [hu]⟩
+
+end CategoryTheory.Limits

@@ -46,7 +46,10 @@ sends it to the restriction, along the canonical morphism `ψ : V ×_{Y'} X' ⟶
 a section of `g'^* F` over `V ×_{Y'} X'`, that is of `f'_* g'^* F` over `V`. The statement is
 an equality of morphisms out of `F(W ×_Y X)`, so it holds for all sections at once and does not
 depend on the chosen representative.
-(blueprint: `lem-weil-pbc-underived-exchange-sectionwise`) -/
+This is also the content of the pointer remark `rem-ptr-weil-pbc-underived-exchange-4`: the
+sectionwise rule is independent of the representative and agrees with the adjoint description.
+(blueprint: `lem-weil-pbc-underived-exchange-sectionwise`, `rem-ptr-weil-pbc-underived-exchange-4`)
+-/
 lemma Etale.baseChangeMap_app_sectionwise (sq : CommSq g' f' f g)
     (F : Sheaf X.smallEtaleTopology A) (W : Y.Etale) (V : Y'.Etale)
     (φ : V ⟶ (MorphismProperty.Over.pullback @Etale ⊤ g).obj W)

@@ -114,7 +114,9 @@ an object of `D⁺(X_ét)`, `e : K ≅ I` a K-injective resolution, so that `f_*
 `f'_* J` represents `R f'_*⁺ (g'^* K)`. Then the derived base change map at `K` is the class of
 the morphism of complexes `g^* f_* I ⟶ f'_* g'^* I ⟶ f'_* J`, the levelwise underived base
 change map followed by `f'_* s`, conjugated by these identifications.
-(blueprint: `lem-weil-pbc-derived-exchange-termwise`) -/
+This is also the content of the pointer remark `rem-ptr-weil-pbc-derived-exchange-5`: the
+derived exchange morphism and its termwise description agree.
+(blueprint: `lem-weil-pbc-derived-exchange-termwise`, `rem-ptr-weil-pbc-derived-exchange-5`) -/
 lemma Etale.derivedBaseChangeMapPlus_app_eq_termwise (sq : CommSq g' f' f g)
     (K : DerivedCategory.Plus (Sheaf X.smallEtaleTopology A))
     (I : HomotopyCategory.Plus (Sheaf X.smallEtaleTopology A))

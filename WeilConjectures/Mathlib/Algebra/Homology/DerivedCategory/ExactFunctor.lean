@@ -1594,3 +1594,38 @@ noncomputable def mapDerivedCategoryTruncGEIso (n : ℤ) :
         nat₁])).symm
 
 end CategoryTheory.Functor
+
+namespace CategoryTheory.Functor
+
+open Limits
+
+variable {C₁ C₂ : Type*} [Category* C₁] [Category* C₂] [Abelian C₁] [Abelian C₂]
+  [HasDerivedCategory C₁] [HasDerivedCategory C₂] (F : C₁ ⥤ C₂) [F.Additive]
+  [PreservesFiniteLimits F] [PreservesFiniteColimits F]
+
+/-- **An exact functor induces a triangulated functor on derived categories.** For an exact
+functor `F` of abelian categories, the functor `F.mapDerivedCategory : D(C₁) ⥤ D(C₂)` obtained by
+applying `F` termwise is triangulated, and it carries a complex `A[n]` concentrated in one
+degree to `F(A)[n]` (`Functor.mapDerivedCategorySingleFunctor`).
+(blueprint: `lem-sf-exact-functor-derived-triangulated`) -/
+theorem mapDerivedCategory_isTriangulated_and_singleFunctor :
+    F.mapDerivedCategory.IsTriangulated ∧ ∀ n : ℤ,
+      Nonempty (DerivedCategory.singleFunctor C₁ n ⋙ F.mapDerivedCategory ≅
+        F ⋙ DerivedCategory.singleFunctor C₂ n) :=
+  ⟨inferInstance, fun n ↦ ⟨F.mapDerivedCategorySingleFunctor n⟩⟩
+
+/-- **The derived functor of an exact functor and its factorization.** For an exact functor `F`
+of abelian categories, applying `F` termwise to cochain complexes preserves
+quasi-isomorphisms; the induced functor `F.mapDerivedCategory` commutes with the shifts and is
+triangulated; and the isomorphism `F.mapDerivedCategoryFactors :
+Q ⋙ F.mapDerivedCategory ≅ F.mapHomologicalComplex _ ⋙ Q` is compatible with the shifts. In
+particular `F` applied termwise to a complex `K` represents `F.mapDerivedCategory (Q K)`.
+(blueprint: `lem-weil-pbc-exact-functor-derived-factorization`) -/
+theorem mapDerivedCategoryFactors_commShift :
+    (∀ {K L : CochainComplex C₁ ℤ} (f : K ⟶ L), QuasiIso f →
+      QuasiIso ((F.mapHomologicalComplex (ComplexShape.up ℤ)).map f)) ∧
+    F.mapDerivedCategory.IsTriangulated ∧
+    NatTrans.CommShift F.mapDerivedCategoryFactors.hom ℤ :=
+  ⟨fun _ _ ↦ inferInstance, inferInstance, inferInstance⟩
+
+end CategoryTheory.Functor
