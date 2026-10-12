@@ -7,6 +7,7 @@ module
 
 public import Mathlib.RingTheory.AdicCompletion.Algebra
 public import Mathlib.RingTheory.Noetherian.Defs
+import Mathlib.RingTheory.MvPowerSeries.Equiv
 import Sheaf.RingTheory.PowerSeriesOntoCompletion
 
 /-!
@@ -36,6 +37,10 @@ variables gives a surjective ring homomorphism from the multivariate formal powe
 `lem-weil-pbc-surjective-image-noetherian` (Stacks Tag 00FN), proving the conclusion. -/
 theorem isNoetherianRing {A : Type u} [CommRing A] [IsNoetherianRing A] (I : Ideal A) :
     IsNoetherianRing (AdicCompletion I A) := by
-  sorry
+  obtain ⟨n, f, hf⟩ :=
+    Submodule.fg_iff_exists_fin_generating_family.mp (IsNoetherian.noetherian I)
+  obtain ⟨Φ, _, hΦ, _, _⟩ :=
+    MvPowerSeries.exists_surjective_toAdicCompletion n f I hf.symm
+  exact isNoetherianRing_of_surjective (MvPowerSeries (Fin n) A) _ Φ hΦ
 
 end AdicCompletion
