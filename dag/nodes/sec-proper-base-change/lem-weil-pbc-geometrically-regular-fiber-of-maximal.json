@@ -1,0 +1,138 @@
+{
+ "id": "lem-weil-pbc-geometrically-regular-fiber-of-maximal",
+ "kind": "statement",
+ "title": "Geometric regularity of one fibre descends from maximal target localizations",
+ "statement": "Let R and S be commutative rings, with S an R-algebra and Noetherian [def-weil-pbc-noetherian-ring]. Fix a prime ideal p of R and its residue field kappa(p) [def-weil-pbc-localization-at-prime]. If for every maximal ideal m of S the fibre kappa(p) tensor_R S_m is geometrically regular over kappa(p) [def-weil-pbc-g-ring], then kappa(p) tensor_R S is geometrically regular over kappa(p). No flatness hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Lemma Tag 07C0 (lemma-regular-local), fibre argument in (3) implies (1); checked at https://stacks.math.columbia.edu/tag/07C0 on 2026-10-12"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-pbc-g-ring"
+ ],
+ "proof": [
+  {
+   "text": "The fibre F = kappa(p) tensor_R S is Noetherian by the Noetherian fibre theorem. A finite purely inseparable extension K/kappa(p) gives an extended fibre F_K finite over F, hence of finite type and Noetherian.",
+   "uses": [
+    "lem-weil-pbc-fibre-ring-noetherian",
+    "lem-weil-pbc-finite-type-algebra-noetherian",
+    "def-weil-pbc-g-ring"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Fix a prime n of F_K and contract it to a prime q of S. Choose a maximal ideal m containing q. For each s outside m its image is outside n, since s is outside q. Tensor products commute with localization: K tensor_kappa(p) (kappa(p) tensor_R S_m) is the localization of F_K at the images of S minus m. By the hypothesis and geometric regularity, this ring is regular.",
+   "uses": [
+    "lem-weil-pbc-localization-tensor-product",
+    "def-weil-pbc-localization-at-prime",
+    "def-weil-pbc-g-ring"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Because n avoids these denominators, (F_K)_n is a localization at a prime of the regular ring just obtained, and hence regular local. The Noetherian regular-ring local criterion proves F_K regular. Apply the definition of geometric regularity to all finite purely inseparable K to conclude. If S is zero, F and all F_K are zero, whose regularity follows because they have no primes.",
+   "uses": [
+    "lem-weil-pbc-localization-of-regular-ring",
+    "lem-weil-pbc-regular-ring-local-criterion",
+    "def-weil-pbc-g-ring"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "C3",
+  "date": "2026-10-12",
+  "note": "Expanded the fibre part of the proof of Stacks 07C0, keeping the base prime fixed and separating it from flatness and source localization.",
+  "document": "literature/stacks-project/more-algebra.tex"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Geometric regularity of a fibre descends from localization at every maximal ideal of a Noetherian target algebra",
+   "results": "Service unavailable: Internal Server Error. The attempt is recorded in searches.jsonl; LeanFinder, Loogle, and grep were used instead.",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "geometric regularity of fibre over source prime follows if fibre after localization of target at every maximal ideal is geometrically regular",
+   "results": "Smooth-locus and standard-smooth locality declarations only; none states geometric regularity of fibres.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsRegularRing, Localization.AtPrime",
+   "results": "IsRegularRing.isRegularLocalRing_localization, isRegularRing_iff, IsRegularRing.mk: regular ring local criterion only.",
+   "date": "2026-10-12",
+   "verdict": "partial: local criterion for rings, not fibre descent"
+  },
+  {
+   "tool": "grep",
+   "query": "isGeometricallyRegular.*local|geometricallyRegular.*[Mm]aximal",
+   "results": "No match via msearch; direct rg of Sheaf and WeilConjectures found no geometric-regularity fibre-local descent theorem.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.RegularLocalMaximal",
+  "date": "2026-10-12",
+  "group": "C3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-regular-local-maximal",
+   "place": "fibre descent in the maximal-local converse (original proof steps 2 and 3)",
+   "via": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.GeometricallyRegularFibersOfMaximal",
+  "file": "lean/Sheaf/RingTheory/GeometricallyRegularFibersOfMaximal.lean",
+  "declaration": "Algebra.isGeometricallyRegular_fiber_of_localizations_maximal",
+  "statement": "theorem isGeometricallyRegular_fiber_of_localizations_maximal\n    {R : Type u} {S : Type v} [CommRing R] [CommRing S] [Algebra R S]\n    [IsNoetherianRing S] (p : Ideal R) [p.IsPrime]\n    (h : ∀ (m : Ideal S) [m.IsMaximal],\n      IsGeometricallyRegular p.ResidueField (p.Fiber (Localization.AtPrime m))) :\n    IsGeometricallyRegular p.ResidueField (p.Fiber S)",
+  "branch": "sheaf-dag",
+  "by": "C3",
+  "date": "2026-10-12"
+ },
+ "proof_deps": [
+  "lem-weil-pbc-fibre-ring-noetherian",
+  "lem-weil-pbc-finite-type-algebra-noetherian",
+  "def-weil-pbc-g-ring",
+  "lem-weil-pbc-localization-tensor-product",
+  "def-weil-pbc-localization-at-prime",
+  "lem-weil-pbc-localization-of-regular-ring",
+  "lem-weil-pbc-regular-ring-local-criterion"
+ ],
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C3",
+  "result": "pass",
+  "landing": "20261012T085222-L-7051",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C3",
+  "result": "pass",
+  "landing": "20261012T085222-L-7051",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
