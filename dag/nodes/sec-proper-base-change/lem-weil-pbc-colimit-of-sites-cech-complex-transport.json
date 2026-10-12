@@ -1,0 +1,125 @@
+{
+ "id": "lem-weil-pbc-colimit-of-sites-cech-complex-transport",
+ "kind": "statement",
+ "title": "Transport of finite covering products",
+ "statement": "In the situation of [lem-weil-pbc-colimit-of-sites] (a cofiltered category $\\mathcal I$, sites $\\mathcal C_i$ whose coverings have finite index sets, morphisms of sites $f_a:\\mathcal C_j\\to\\mathcal C_i$ for $a:j\\to i$ given by continuous functors $u_a:\\mathcal C_i\\to\\mathcal C_j$ with $u_b\\circ u_a=u_{a\\circ b}$, the colimit site $\\mathcal C=\\varinjlim\\mathcal C_i$ with the canonical functors $u_i:\\mathcal C_i\\to\\mathcal C$, $u_j\\circ u_a=u_i$, and the morphisms of sites $f_i:\\mathcal C\\to\\mathcal C_i$ they define [def-weil-pbc-sites-and-cohomology]), let $\\mathcal F_i$ be abelian sheaves on $\\mathcal C_i$ and $\\varphi_a:f_a^{-1}\\mathcal F_i\\to\\mathcal F_j$ ($a:j\\to i$) maps of abelian sheaves with $\\varphi_{a\\circ b}=\\varphi_b\\circ f_b^{-1}\\varphi_a$, and $\\mathcal F=\\varinjlim f_i^{-1}\\mathcal F_i$ in $\\textit{Ab}(\\mathcal C)$. Let $\\mathcal U_i=\\{U_i^t\\to U_i\\}_{t\\in T}$ be a covering of $\\mathcal C_i$ ($T$ finite). With identity as well as composition laws for the adjoint transition maps, then each image covering at a later stage and at the colimit site is covering. There exist choices of its iterated fibre products in every degree such that, for every tuple of indices, the image of the corresponding chosen product on the initial site is isomorphic to the chosen image-site product, and the isomorphism commutes with every projection. This asserts only transported covering and product data, not a diagram or comparison of complexes. The common sheaf data are not used for this conclusion.",
+ "source": {
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Proof of Tag 09YL, Hom pullback calculation and induction on products"
+ },
+ "stmt_deps": [
+  "lem-weil-pbc-colimit-of-sites",
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-pbc-site-cech-complex"
+ ],
+ "proof": [
+  {
+   "text": "The image of the covering presieve is the presieve of the image family. Apply hcover at a later stage and hQ with witness i at the colimit site. Choose target product data by SiteCechComplex.exists_of_covering.",
+   "uses": [
+    "lem-weil-pbc-colimit-of-sites",
+    "def-weil-pbc-site-cech-complex"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Induct on the number of factors. The single factor is unchanged; each additional factor is a pullback of an original covering arrow along the remaining product map. hpullback preserves this pullback. For the colimit functor, lift test objects, arrows, and compatibility equations to a common stage using the object and arrow set colimits; existence and eventual equality of the stage mediating arrows give the universal property in the colimit, as in the Hom computation of 09YL.",
+   "uses": [
+    "lem-weil-pbc-colimit-of-sites",
+    "lem-weil-pbc-filtered-colimits-commute-finite-limits"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Compare the image product with the chosen target product by their universal properties. The unique projection-compatible maps in both directions are inverse because their composites have the identity projections. This gives the asserted isomorphisms. Empty index sets have no positive-length tuples.",
+   "uses": [
+    "def-weil-pbc-site-cech-complex"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-colimit-of-sites",
+  "def-weil-pbc-site-cech-complex",
+  "lem-weil-pbc-filtered-colimits-commute-finite-limits"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Tag 09YL proof, with universal product comparison made explicit"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A finite covering and its iterated fiber products transport through a filtered colimit of sites, and the Cech complex of the colimit sheaf is the filtered colimit of the stage complexes",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Filtered colimit of inverse image sheaves on a colimit site, sections of the Cech complex of a finite family",
+   "results": "TopCat.Presheaf.IsCompatible.sectionPairwise; TopCat.Presheaf.SheafConditionEqualizerProducts.fork_pt; TopCat.Presheaf.SheafConditionPairwiseIntersections.coneEquivFunctor_obj_π_app; TopCat.Presheaf.SheafConditionEqualizerProducts.w_apply; TopCat.Presheaf.SheafConditionEqualizerProducts.res; TopCat.Presheaf.SheafConditionPairwiseIntersections.coneEquivInverse_obj_π_app; TopCat.Presheaf.SheafConditionPairwiseIntersections.coneEquivInverseObj_π_app; CategoryTheory.typesGlue",
+   "date": "2026-10-12",
+   "verdict": "No matching colimit-site Cech transport or canonical stage comparison theorem. General product and complex colimit tools alone do not construct the specified data."
+  },
+  {
+   "tool": "grep",
+   "query": "Preserves.*(WidePullback|Cech)|preserves.*[Cc]olimit.*[Cc]omplex",
+   "results": "Mathlib/CategoryTheory/SmallObject/IsCardinalForSmallObjectArgument.lean; Mathlib/CategoryTheory/Limits/Preserves/Shapes/Over.lean; Mathlib/CategoryTheory/Limits/Preserves/Shapes/Over.lean; Mathlib/CategoryTheory/Limits/Preserves/Shapes/Over.lean; Mathlib/Algebra/Homology/HomologicalComplexAbelian.lean; Mathlib/Algebra/Homology/HomologicalComplexAbelian.lean; Mathlib/Algebra/Homology/HomologicalComplexAbelian.lean; Mathlib/CategoryTheory/Limits/Shapes/ConcreteCategory.lean",
+   "date": "2026-10-12",
+   "verdict": "No matching colimit-site Cech transport or canonical stage comparison theorem. General product and complex colimit tools alone do not construct the specified data."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.ColimitSiteCechComplex",
+  "date": "2026-10-12",
+  "group": "F2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-injective-restriction-acyclicity",
+   "place": "step 5 of its split (source: Lemma Tag 0A51 (lemma-vanishing-restriction-injective) and its proof: 'By Theorem 09YQ we have H^q(X^h, I|) = colim H^q(Spec(B), I|)... Thus the cohomology groups on the right are zero')",
+   "via": [
+    "lem-weil-pbc-colimit-of-sites-cech-complex",
+    "lem-weil-pbc-cohomology-colimit-of-sites",
+    "lem-weil-pbc-etale-cohomology-limit-of-schemes"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.ColimitSiteCechTransport",
+  "file": "lean/Sheaf/CategoryTheory/ColimitSiteCechTransport.lean",
+  "declaration": "CategoryTheory.colimitSite_cech_complex_transport",
+  "statement": "theorem colimitSite_cech_complex_transport {J : Type u} [SmallCategory J] [IsFiltered J] (F : J ⥤ Cat.{u, u}) (P : ∀ j, Precoverage (F.obj j)) [∀ j, (P j).HasIsos] [∀ j, (P j).IsStableUnderComposition] [∀ j, (P j).IsStableUnderBaseChange] [∀ j, (P j).HasPullbacks] (hfinite : ∀ (j : J) (X : F.obj j) (R : Presieve X), R ∈ P j X → Finite R.uncurry) (hcover : ∀ (j k : J) (a : j ⟶ k) (X : F.obj j) (R : Presieve X), R ∈ P j X → R.map (F.map a).toFunctor ∈ P k ((F.map a).toFunctor.obj X)) (hpullback : ∀ (j k : J) (a : j ⟶ k) (X Y Z : F.obj j) (R : Presieve X), R ∈ P j X → ∀ (f : Y ⟶ X) (g : Z ⟶ X), R f → PreservesLimit (cospan f g) (F.map a).toFunctor) [∀ (j k : J) (a : j ⟶ k), (F.map a).toFunctor.IsContinuous (P j).toGrothendieck (P k).toGrothendieck] [∀ (j k : J) (a : j ⟶ k), PreservesFiniteLimits (sheafPullback (F.map a).toFunctor (Type u) (P j).toGrothendieck (P k).toGrothendieck)] [∀ (j k : J) (a : j ⟶ k), PreservesFiniteColimits (sheafPullback (F.map a).toFunctor (Type u) (P j).toGrothendieck (P k).toGrothendieck)] (V : Cocone F) (hobjects : IsColimit (Cat.objects.mapCocone V)) (harrows : IsColimit (Cat.arrows.mapCocone V)) (Q : Precoverage V.pt) [Q.HasIsos] [Q.IsStableUnderComposition] [Q.IsStableUnderBaseChange] [Q.HasPullbacks] (hQ : ∀ (Y : V.pt) (R : Presieve Y), R ∈ Q Y ↔ ∃ (j : J) (X : F.obj j) (S : Presieve X) (h : (V.ι.app j).toFunctor.obj X = Y), S ∈ P j X ∧ h ▸ S.map (V.ι.app j).toFunctor = R) [∀ j, (V.ι.app j).toFunctor.IsContinuous (P j).toGrothendieck Q.toGrothendieck] (G : ∀ j, Sheaf (P j).toGrothendieck AddCommGrpCat.{u}) (θ : ∀ (j k : J) (a : j ⟶ k), (G j).obj ⟶ (F.map a).toFunctor.op ⋙ (G k).obj) (hθid : ∀ (j : J) (X : F.obj j), Arrow.mk ((θ j j (𝟙 j)).app (op X)) = Arrow.mk (𝟙 ((G j).obj.obj (op X)))) (hθcomp : ∀ (j k l : J) (a : j ⟶ k) (b : k ⟶ l) (X : F.obj j), Arrow.mk ((θ j l (a ≫ b)).app (op X)) = Arrow.mk ((θ j k a).app (op X) ≫ (θ k l b).app (op ((F.map a).toFunctor.obj X)))) (H : J ⥤ Sheaf Q.toGrothendieck AddCommGrpCat.{u}) (E : ∀ j, H.obj j ≅ (sheafPullback (V.ι.app j).toFunctor AddCommGrpCat.{u} (P j).toGrothendieck Q.toGrothendieck).obj (G j)) : let β := fun (j : J) (X : F.obj j) ↦ (((sheafAdjunctionContinuous (V.ι.app j).toFunctor AddCommGrpCat.{u} (P j).toGrothendieck Q.toGrothendieck).unit.app (G j)).hom.app (op X)) ≫ (E j).inv.hom.app (op ((V.ι.app j).toFunctor.obj X)) (∀ (j k : J) (a : j ⟶ k) (X : F.obj j), Arrow.mk (β j X ≫ (H.map a).hom.app (op ((V.ι.app j).toFunctor.obj X))) = Arrow.mk ((θ j k a).app (op X) ≫ β k ((F.map a).toFunctor.obj X))) → ∀ (c : Cocone H), IsColimit c → ∀ (i : J) {T : Type u} [Finite T] {U : F.obj i} (f : T → F.obj i) (hom : ∀ t, f t ⟶ U), Presieve.ofArrows f hom ∈ P i U → ∀ S : SiteCechComplex f hom, (∀ a : Under i, Presieve.ofArrows (fun t ↦ (F.map a.hom).toFunctor.obj (f t)) (fun t ↦ (F.map a.hom).toFunctor.map (hom t)) ∈ P a.right ((F.map a.hom).toFunctor.obj U) ∧ ∃ Sa : SiteCechComplex (fun t ↦ (F.map a.hom).toFunctor.obj (f t)) (fun t ↦ (F.map a.hom).toFunctor.map (hom t)), ∀ (p : ℕ) (t : Fin (p + 1) → T), ∃ e : (F.map a.hom).toFunctor.obj (S.W p t) ≅ Sa.W p t, ∀ k, e.hom ≫ Sa.pr p t k = (F.map a.hom).toFunctor.map (S.pr p t k)) ∧ (Presieve.ofArrows (fun t ↦ (V.ι.app i).toFunctor.obj (f t)) (fun t ↦ (V.ι.app i).toFunctor.map (hom t)) ∈ Q ((V.ι.app i).toFunctor.obj U) ∧ ∃ Sc : SiteCechComplex (fun t ↦ (V.ι.app i).toFunctor.obj (f t)) (fun t ↦ (V.ι.app i).toFunctor.map (hom t)), ∀ (p : ℕ) (t : Fin (p + 1) → T), ∃ e : (V.ι.app i).toFunctor.obj (S.W p t) ≅ Sc.W p t, ∀ k, e.hom ≫ Sc.pr p t k = (V.ι.app i).toFunctor.map (S.pr p t k))",
+  "branch": "sheaf-dag",
+  "by": "F2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261012T053930-L-2634602",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261012T053930-L-2634602",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,135 @@
+{
+ "id": "lem-weil-pbc-colimit-of-sites-cech-complex-colimit-data",
+ "kind": "statement",
+ "title": "Canonical stage Cech complex colimit cocone",
+ "statement": "In the situation of [lem-weil-pbc-colimit-of-sites] (a cofiltered category $\\mathcal I$, sites $\\mathcal C_i$ whose coverings have finite index sets, morphisms of sites $f_a:\\mathcal C_j\\to\\mathcal C_i$ for $a:j\\to i$ given by continuous functors $u_a:\\mathcal C_i\\to\\mathcal C_j$ with $u_b\\circ u_a=u_{a\\circ b}$, the colimit site $\\mathcal C=\\varinjlim\\mathcal C_i$ with the canonical functors $u_i:\\mathcal C_i\\to\\mathcal C$, $u_j\\circ u_a=u_i$, and the morphisms of sites $f_i:\\mathcal C\\to\\mathcal C_i$ they define [def-weil-pbc-sites-and-cohomology]), let $\\mathcal F_i$ be abelian sheaves on $\\mathcal C_i$ and $\\varphi_a:f_a^{-1}\\mathcal F_i\\to\\mathcal F_j$ ($a:j\\to i$) maps of abelian sheaves with $\\varphi_{a\\circ b}=\\varphi_b\\circ f_b^{-1}\\varphi_a$, and $\\mathcal F=\\varinjlim f_i^{-1}\\mathcal F_i$ in $\\textit{Ab}(\\mathcal C)$. Let $\\mathcal U_i=\\{U_i^t\\to U_i\\}_{t\\in T}$ be a covering of $\\mathcal C_i$ ($T$ finite). With identity as well as composition laws for the adjoint transition maps, then the complexes [def-weil-pbc-site-cech-complex] on the initial chosen products with the pulled-back stage presheaves form a filtered diagram over arrows out of i. Its transition maps are the componentwise adjoint section maps. There is a cocone whose point is isomorphic to the Cech complex of the colimit sheaf restricted to the initial site, whose coprojections are exactly the products of the adjunction units followed by the sheaf-colimit coprojections, and this cocone is colimiting. More precisely, D, eD, K, and eK satisfy the two displayed component projection equations in the Lean signature and Nonempty (IsColimit K). No covering transport conclusion and no additional isomorphism assertion is included.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Proof of Tag 09YP, displayed Cech comparison; degree-zero formula from Sites Tags 09YM and 09YN"
+ },
+ "stmt_deps": [
+  "lem-weil-pbc-colimit-of-sites",
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-pbc-site-cech-complex"
+ ],
+ "proof": [
+  {
+   "text": "At an object a of Under i take the Cech complex of the pulled-back stage presheaf. For b:a to a′ use theta on every product and identify endpoints using the under-category triangle. Naturality commutes with each face restriction and hence with signed sums; htheta-id and htheta-comp prove the diagram laws. The product of beta followed by the coprojections of c gives K. Naturality gives chain maps, and the assumed compatibility of H followed by the cocone laws for c gives the cocone laws and the two required projection equations.",
+   "uses": [
+    "def-weil-pbc-sites-and-cohomology",
+    "def-weil-pbc-site-cech-complex"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For every chosen product apply the section formula of 09YN: compute each inverse image by the later-stage section formula of 09YM, insert into the colimit of H, and interchange the two filtered colimits using finality of diagonal refinement. The finite covering hypothesis and hQ imply finite coverings on the colimit site, so its filtered sheaf colimits are sectionwise. This identifies precisely the map defined by beta and the coprojections. The current colimitSite_sections_isIso handles only the latter sectionwise sheaf-colimit step; the inverse-image and diagonal-refinement steps remain part of this lemma.",
+   "uses": [
+    "lem-weil-pbc-colimit-of-sites",
+    "lem-weil-pbc-colimit-of-sites-sections"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "In degree p the tuple set T^(p+1) is finite. Commute the filtered colimit with its product of abelian groups and use the preceding section comparisons. The cocone is therefore colimiting in every degree, including the zero-group empty product.",
+   "uses": [
+    "lem-weil-pbc-filtered-colimits-commute-finite-limits",
+    "def-weil-pbc-site-cech-complex"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The unique degreewise maps to another cocone commute with the differentials: both composites agree after every stage coprojection. Hence they form the unique mediating chain map and prove IsColimit K.",
+   "uses": [
+    "def-weil-pbc-site-cech-complex"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-pbc-site-cech-complex",
+  "lem-weil-pbc-colimit-of-sites",
+  "lem-weil-pbc-colimit-of-sites-sections",
+  "lem-weil-pbc-filtered-colimits-commute-finite-limits"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 09YP displayed equality, expanded using Sites Tags 09YM and 09YN"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A finite covering and its iterated fiber products transport through a filtered colimit of sites, and the Cech complex of the colimit sheaf is the filtered colimit of the stage complexes",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Filtered colimit of inverse image sheaves on a colimit site, sections of the Cech complex of a finite family",
+   "results": "TopCat.Presheaf.IsCompatible.sectionPairwise; TopCat.Presheaf.SheafConditionEqualizerProducts.fork_pt; TopCat.Presheaf.SheafConditionPairwiseIntersections.coneEquivFunctor_obj_π_app; TopCat.Presheaf.SheafConditionEqualizerProducts.w_apply; TopCat.Presheaf.SheafConditionEqualizerProducts.res; TopCat.Presheaf.SheafConditionPairwiseIntersections.coneEquivInverse_obj_π_app; TopCat.Presheaf.SheafConditionPairwiseIntersections.coneEquivInverseObj_π_app; CategoryTheory.typesGlue",
+   "date": "2026-10-12",
+   "verdict": "No matching colimit-site Cech transport or canonical stage comparison theorem. General product and complex colimit tools alone do not construct the specified data."
+  },
+  {
+   "tool": "grep",
+   "query": "Preserves.*(WidePullback|Cech)|preserves.*[Cc]olimit.*[Cc]omplex",
+   "results": "Mathlib/CategoryTheory/SmallObject/IsCardinalForSmallObjectArgument.lean; Mathlib/CategoryTheory/Limits/Preserves/Shapes/Over.lean; Mathlib/CategoryTheory/Limits/Preserves/Shapes/Over.lean; Mathlib/CategoryTheory/Limits/Preserves/Shapes/Over.lean; Mathlib/Algebra/Homology/HomologicalComplexAbelian.lean; Mathlib/Algebra/Homology/HomologicalComplexAbelian.lean; Mathlib/Algebra/Homology/HomologicalComplexAbelian.lean; Mathlib/CategoryTheory/Limits/Shapes/ConcreteCategory.lean",
+   "date": "2026-10-12",
+   "verdict": "No matching colimit-site Cech transport or canonical stage comparison theorem. General product and complex colimit tools alone do not construct the specified data."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.ColimitSiteCechComplex",
+  "date": "2026-10-12",
+  "group": "F2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-injective-restriction-acyclicity",
+   "place": "step 5 of its split (source: Lemma Tag 0A51 (lemma-vanishing-restriction-injective) and its proof: 'By Theorem 09YQ we have H^q(X^h, I|) = colim H^q(Spec(B), I|)... Thus the cohomology groups on the right are zero')",
+   "via": [
+    "lem-weil-pbc-colimit-of-sites-cech-complex",
+    "lem-weil-pbc-cohomology-colimit-of-sites",
+    "lem-weil-pbc-etale-cohomology-limit-of-schemes"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.ColimitSiteCechColimit",
+  "file": "lean/Sheaf/CategoryTheory/ColimitSiteCechColimit.lean",
+  "declaration": "CategoryTheory.colimitSite_cech_complex_colimit",
+  "statement": "theorem colimitSite_cech_complex_colimit {J : Type u} [SmallCategory J] [IsFiltered J] (F : J ⥤ Cat.{u, u}) (P : ∀ j, Precoverage (F.obj j)) [∀ j, (P j).HasIsos] [∀ j, (P j).IsStableUnderComposition] [∀ j, (P j).IsStableUnderBaseChange] [∀ j, (P j).HasPullbacks] (hfinite : ∀ (j : J) (X : F.obj j) (R : Presieve X), R ∈ P j X → Finite R.uncurry) (hcover : ∀ (j k : J) (a : j ⟶ k) (X : F.obj j) (R : Presieve X), R ∈ P j X → R.map (F.map a).toFunctor ∈ P k ((F.map a).toFunctor.obj X)) (hpullback : ∀ (j k : J) (a : j ⟶ k) (X Y Z : F.obj j) (R : Presieve X), R ∈ P j X → ∀ (f : Y ⟶ X) (g : Z ⟶ X), R f → PreservesLimit (cospan f g) (F.map a).toFunctor) [∀ (j k : J) (a : j ⟶ k), (F.map a).toFunctor.IsContinuous (P j).toGrothendieck (P k).toGrothendieck] [∀ (j k : J) (a : j ⟶ k), PreservesFiniteLimits (sheafPullback (F.map a).toFunctor (Type u) (P j).toGrothendieck (P k).toGrothendieck)] [∀ (j k : J) (a : j ⟶ k), PreservesFiniteColimits (sheafPullback (F.map a).toFunctor (Type u) (P j).toGrothendieck (P k).toGrothendieck)] (V : Cocone F) (hobjects : IsColimit (Cat.objects.mapCocone V)) (harrows : IsColimit (Cat.arrows.mapCocone V)) (Q : Precoverage V.pt) [Q.HasIsos] [Q.IsStableUnderComposition] [Q.IsStableUnderBaseChange] [Q.HasPullbacks] (hQ : ∀ (Y : V.pt) (R : Presieve Y), R ∈ Q Y ↔ ∃ (j : J) (X : F.obj j) (S : Presieve X) (h : (V.ι.app j).toFunctor.obj X = Y), S ∈ P j X ∧ h ▸ S.map (V.ι.app j).toFunctor = R) [∀ j, (V.ι.app j).toFunctor.IsContinuous (P j).toGrothendieck Q.toGrothendieck] (G : ∀ j, Sheaf (P j).toGrothendieck AddCommGrpCat.{u}) (θ : ∀ (j k : J) (a : j ⟶ k), (G j).obj ⟶ (F.map a).toFunctor.op ⋙ (G k).obj) (hθid : ∀ (j : J) (X : F.obj j), Arrow.mk ((θ j j (𝟙 j)).app (op X)) = Arrow.mk (𝟙 ((G j).obj.obj (op X)))) (hθcomp : ∀ (j k l : J) (a : j ⟶ k) (b : k ⟶ l) (X : F.obj j), Arrow.mk ((θ j l (a ≫ b)).app (op X)) = Arrow.mk ((θ j k a).app (op X) ≫ (θ k l b).app (op ((F.map a).toFunctor.obj X)))) (H : J ⥤ Sheaf Q.toGrothendieck AddCommGrpCat.{u}) (E : ∀ j, H.obj j ≅ (sheafPullback (V.ι.app j).toFunctor AddCommGrpCat.{u} (P j).toGrothendieck Q.toGrothendieck).obj (G j)) : let β := fun (j : J) (X : F.obj j) ↦ (((sheafAdjunctionContinuous (V.ι.app j).toFunctor AddCommGrpCat.{u} (P j).toGrothendieck Q.toGrothendieck).unit.app (G j)).hom.app (op X)) ≫ (E j).inv.hom.app (op ((V.ι.app j).toFunctor.obj X)) (∀ (j k : J) (a : j ⟶ k) (X : F.obj j), Arrow.mk (β j X ≫ (H.map a).hom.app (op ((V.ι.app j).toFunctor.obj X))) = Arrow.mk ((θ j k a).app (op X) ≫ β k ((F.map a).toFunctor.obj X))) → ∀ (c : Cocone H), IsColimit c → ∀ (i : J) {T : Type u} [Finite T] {U : F.obj i} (f : T → F.obj i) (hom : ∀ t, f t ⟶ U), Presieve.ofArrows f hom ∈ P i U → ∀ S : SiteCechComplex f hom, ∃ (D : Under i ⥤ CochainComplex AddCommGrpCat.{u} ℕ) (eD : ∀ a : Under i, D.obj a ≅ S.complex ((F.map a.hom).toFunctor.op ⋙ (G a.right).obj)) (K : Cocone D) (eK : K.pt ≅ S.complex ((V.ι.app i).toFunctor.op ⋙ c.pt.obj)), (∀ (a a' : Under i) (b : a ⟶ a') (p : ℕ) (t : Fin (p + 1) → T), Arrow.mk ((eD a).inv.f p ≫ (D.map b).f p ≫ (eD a').hom.f p ≫ AddCommGrpCat.ofHom (Pi.evalAddMonoidHom _ t)) = Arrow.mk (AddCommGrpCat.ofHom (Pi.evalAddMonoidHom (fun t ↦ (G a.right).obj.obj (op ((F.map a.hom).toFunctor.obj (S.W p t)))) t) ≫ (θ a.right a'.right b.right).app (op ((F.map a.hom).toFunctor.obj (S.W p t))))) ∧ (∀ (a : Under i) (p : ℕ) (t : Fin (p + 1) → T), Arrow.mk ((eD a).inv.f p ≫ (K.ι.app a).f p ≫ eK.hom.f p ≫ AddCommGrpCat.ofHom (Pi.evalAddMonoidHom _ t)) = Arrow.mk (AddCommGrpCat.ofHom (Pi.evalAddMonoidHom (fun t ↦ (G a.right).obj.obj (op ((F.map a.hom).toFunctor.obj (S.W p t)))) t) ≫ β a.right ((F.map a.hom).toFunctor.obj (S.W p t)) ≫ (c.ι.app a.right).hom.app (op ((V.ι.app a.right).toFunctor.obj ((F.map a.hom).toFunctor.obj (S.W p t)))))) ∧ Nonempty (IsColimit K)",
+  "branch": "sheaf-dag",
+  "by": "F2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261012T053930-L-2634602",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261012T053930-L-2634602",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

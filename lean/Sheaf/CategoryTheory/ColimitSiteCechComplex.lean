@@ -2,7 +2,8 @@ module
 
 public import Sheaf.CategoryTheory.ColimitSites
 public import Sheaf.CategoryTheory.SiteCechComplex
-import Sheaf.CategoryTheory.ColimitSiteSections
+import Sheaf.CategoryTheory.ColimitSiteCechTransport
+import Sheaf.CategoryTheory.ColimitSiteCechColimit
 
 /-! # Čech complexes and filtered colimits of sites
 
@@ -150,6 +151,15 @@ theorem colimitSite_cech_complex_isIso
                 ((F.map a.hom).toFunctor.obj (S.W p t)))))) ∧
         Nonempty (IsColimit K) ∧
         ∀ (cD : Cocone D) (hcD : IsColimit cD), IsIso (hcD.desc K) := by
-  sorry
+  dsimp
+  intro hcompat c hc i T instT U f hom hcov S
+  have ht := colimitSite_cech_complex_transport F P hfinite hcover hpullback V
+    hobjects harrows Q hQ G θ hθid hθcomp H E hcompat c hc i f hom hcov S
+  obtain ⟨D, eD, K, eK, hD, hK, hcolimit⟩ :=
+    colimitSite_cech_complex_colimit F P hfinite hcover hpullback V
+      hobjects harrows Q hQ G θ hθid hθcomp H E hcompat c hc i f hom hcov S
+  refine ⟨ht.1, ht.2, D, eD, K, eK, hD, hK, hcolimit, ?_⟩
+  intro cD hcD
+  exact hcD.nonempty_isColimit_iff_isIso_desc.mp hcolimit
 
 end CategoryTheory

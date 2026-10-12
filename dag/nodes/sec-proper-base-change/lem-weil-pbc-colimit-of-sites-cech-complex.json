@@ -29,66 +29,22 @@
  ],
  "proof": [
   {
-   "text": "*The transported coverings and their fibre products.* For an arrow $a:j\\to i$, continuity of $u_a$ carries the covering $\\mathcal U_i$ to the covering $u_a(\\mathcal U_i)$ and carries each binary fibre product of members over $U_i$ to the corresponding fibre product over $u_a(U_i)$ [def-weil-pbc-sites-and-cohomology]. Induction on $p$ gives the displayed identification of every iterated fibre product. The same argument applies to $u_i$: it is continuous by [lem-weil-pbc-colimit-of-sites], and that node's fibre-product step identifies the image of a fibre product from $\\mathcal C_i$ with the fibre product in $\\mathcal C$. Thus all the Cech complexes in the statement are defined on the indicated transported coverings, with the chosen fibre products identified compatibly with their projections.",
+   "text": "Apply the transport lemma to obtain the two covering/product clauses. Apply the complex-colimit lemma for D, eD, K, eK, the two projection equations, and a colimit witness. Combine the strict sub-conclusions. For any other colimit cocone cD, Mathlib IsColimit.nonempty_isColimit_iff_isIso_desc applied to hcolimit proves that hcD.desc K is an isomorphism.",
    "uses": [
-    "def-weil-pbc-sites-and-cohomology",
-    "lem-weil-pbc-colimit-of-sites",
-    "def-weil-pbc-site-cech-complex"
+    "lem-weil-pbc-colimit-of-sites-cech-complex-transport",
+    "lem-weil-pbc-colimit-of-sites-cech-complex-colimit-data"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites.tex",
-    "place": "proof of Lemma Tag 09YL (lemma-colimit-sites), especially the displayed fibre-product computation; definition of continuous functor, Tag 00WV"
-   }
-  },
-  {
-   "text": "*The filtered system of complexes.* Fix $a:j\\to i$ and $b:k\\to j$. For each object $X_i$ of $\\mathcal C_i$, [lem-weil-pbc-colimit-of-sites-sections] defines the transition homomorphism $\\mathcal F_j(u_aX_i)\\to\\mathcal F_k(u_{a\\circ b}X_i)$ as the unit of $f_b^{-1}\\dashv f_{b*}$ followed by $\\varphi_b$, and proves that these homomorphisms form the filtered system indexed by the arrows into $i$. They are natural in $X_i$: for a morphism $Y_i\\to X_i$, both composites from $\\mathcal F_j(u_aX_i)$ to $\\mathcal F_k(u_{a\\circ b}Y_i)$ agree by naturality of the adjunction unit and of $\\varphi_b$. Apply this to every face projection between the iterated fibre products of Step 1. Taking the finite product over $T^{p+1}$ gives a homomorphism in each Cech degree, and naturality makes it commute with every restriction in the alternating differential [def-weil-pbc-site-cech-complex]; hence it is a morphism of complexes. The identity and composition laws are inherited termwise from the system in [lem-weil-pbc-colimit-of-sites-sections], so these complexes form the asserted filtered system.",
-   "uses": [
-    "lem-weil-pbc-colimit-of-sites-sections",
-    "def-weil-pbc-site-cech-complex"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "proof of Lemma Tag 09YP (lemma-colimit), display identifying the Cech complex 'by the case p = 0'; naturality implicit in this equality, written out from the Cech differential"
-   }
-  },
-  {
-   "text": "*The canonical map is an isomorphism in every degree.* Fix $p\\ge0$ and put $X_{\\mathbf t}=U_i^{t_0}\\times_{U_i}\\cdots\\times_{U_i}U_i^{t_p}$ for $\\mathbf t\\in T^{p+1}$. The degree-$p$ source is $\\varinjlim_{a:j\\to i}\\prod_{\\mathbf t\\in T^{p+1}}\\mathcal F_j(u_aX_{\\mathbf t})$. Since $T$ is finite, $T^{p+1}$ is finite, and [lem-weil-pbc-filtered-colimits-commute-finite-limits] identifies this group with $\\prod_{\\mathbf t\\in T^{p+1}}\\varinjlim_{a:j\\to i}\\mathcal F_j(u_aX_{\\mathbf t})$. For each $\\mathbf t$, [lem-weil-pbc-colimit-of-sites-sections] identifies the corresponding colimit with $\\mathcal F(u_iX_{\\mathbf t})$. By Step 1 and the definition of the Cech complex, their product is $\\check{\\mathcal C}^p(u_i(\\mathcal U_i),\\mathcal F)$. The composite is exactly the degree-$p$ canonical map in the statement, since both cited isomorphisms are induced by the same units and coprojections.",
-   "uses": [
-    "lem-weil-pbc-filtered-colimits-commute-finite-limits",
-    "lem-weil-pbc-colimit-of-sites-sections",
-    "def-weil-pbc-site-cech-complex"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "proof of Lemma Tag 09YP (lemma-colimit), display identifying the Cech complex 'by the case p = 0'; finite-product interchange made explicit using Categories Lemma Tag 002W"
-   }
-  },
-  {
-   "text": "*Passage from degrees to complexes.* The maps from Step 3 commute with the Cech differentials by the naturality calculation of Step 2, so together they give the stated morphism of complexes. Every component is an isomorphism by Step 3. Taking the componentwise inverse, the equations expressing commutation with the differentials remain true after composing with the inverses; hence the morphism is an isomorphism of complexes.",
-   "uses": [
-    "def-weil-pbc-site-cech-complex"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "proof of Lemma Tag 09YP (lemma-colimit), displayed equality of Cech complexes"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-sites-and-cohomology",
-  "lem-weil-pbc-colimit-of-sites",
-  "def-weil-pbc-site-cech-complex",
-  "lem-weil-pbc-colimit-of-sites-sections",
-  "lem-weil-pbc-filtered-colimits-commute-finite-limits"
+  "lem-weil-pbc-colimit-of-sites-cech-complex-transport",
+  "lem-weil-pbc-colimit-of-sites-cech-complex-colimit-data"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "proof of Lemma Tag 09YP (lemma-colimit), displayed equality of Cech complexes; continuity and fibre products from sites.tex proof of Lemma Tag 09YL; the naturality and finite-product details are written out"
+  "place": "F2 stage-3 reduction of the Tag 09YP Cech comparison into transport and the colimit cocone; final comparison isomorphism by Mathlib IsColimit.nonempty_isColimit_iff_isIso_desc"
  },
  "mathlib_searches": [
   {
@@ -166,5 +122,15 @@
   "group": "T1",
   "result": "pass",
   "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261012T053930-L-2634602",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
