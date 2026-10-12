@@ -167,6 +167,39 @@ theorem isZero_rightDerived_one_genericLowerStar_upperStar_gmSheaf [IsNoetherian
   rw [h0] at hδ
   exact IsZero.of_epi_zero ((F.rightDerived 0).obj (cokernel ι)) _
 
+/-- **`R¹η_* μₙ` is the cokernel of `n` on `η_* 𝔾ₘ`.** Let `X` be an integral regular noetherian
+scheme with generic point `η`, and let `n` be invertible in `k(X)`. The connecting morphism
+`δ : η_* 𝔾ₘ ⟶ R¹η_* μₙ` of the long exact sequence of right derived functors of `η_*` applied to
+the Kummer sequence of `Spec k(X)` is a cokernel of `n : η_* 𝔾ₘ ⟶ η_* 𝔾ₘ`, since `R¹η_* 𝔾ₘ = 0`
+(`AlgebraicGeometry.Scheme.isZero_rightDerived_one_genericLowerStar_upperStar_gmSheaf`). -/
+theorem exists_isColimit_rightDerived_one_rootsOfUnitySheaf [IsNoetherian X] [IsRegular X]
+    (n : ℕ) (hn : IsUnit (n : X.functionField)) :
+    ∃ (δ : X.genericGm ⟶ (X.genericLowerStar.rightDerived 1).obj
+        ((Spec X.functionField).rootsOfUnitySheaf n)) (w : (n • 𝟙 X.genericGm) ≫ δ = 0),
+      Nonempty (IsColimit (CokernelCofork.ofπ δ w)) := by
+  let := HasDerivedCategory.standard (Sheaf (Spec X.functionField).smallEtaleTopology
+    AddCommGrpCat.{u + 1})
+  let := HasDerivedCategory.standard (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1})
+  set F := X.genericLowerStar
+  have hn' : IsUnit (n : Γ(Spec X.functionField, ⊤)) := by
+    simpa using hn.map (ΓSpecIso X.functionField).inv.hom
+  have hK := (Spec X.functionField).kummerSequence_shortExact n hn'
+  have := X.isIso_upperStarGmSheafToGmSheaf_fromSpecFunctionField
+  have hG : IsZero ((F.rightDerived (0 + 1)).obj (Spec X.functionField).gmSheaf) :=
+    X.isZero_rightDerived_one_genericLowerStar_upperStar_gmSheaf.of_iso
+      ((F.rightDerived 1).mapIso (asIso (upperStarGmSheafToGmSheaf X.fromSpecFunctionField))).symm
+  have : Epi (hK.rightDerivedδ F 0) := (hK.rightDerivedδ_exact₃ F 0).epi_f (hG.eq_of_tgt _ _)
+  have h₀ := (hK.rightDerivedδ_exact₂ F 0).gIsCokernel
+  let e₁ : X.genericGm ≅ (F.rightDerived 0).obj (Spec X.functionField).gmSheaf :=
+    X.genericGmIso ≪≫ (F.rightDerivedZeroIsoSelf.app _).symm
+  have he : (n • 𝟙 X.genericGm) ≫ e₁.hom =
+      e₁.hom ≫ (F.rightDerived 0).map ((Spec X.functionField).kummerSequence n).g := by
+    change _ = e₁.hom ≫ (F.rightDerived 0).map (n • 𝟙 _)
+    simp only [Functor.map_nsmul, Preadditive.nsmul_comp, Preadditive.comp_nsmul,
+      Category.id_comp]
+    erw [CategoryTheory.Functor.map_id, Category.comp_id]
+  exact ⟨_, _, ⟨CokernelCofork.isColimitOfπOfIso e₁ he _ h₀⟩⟩
+
 end Generic
 
 end AlgebraicGeometry.Scheme
