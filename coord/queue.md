@@ -1,6 +1,6 @@
 # Work queue
 
-55 items; claim with `tools/claim.py next <group> [--stage N]`.
+57 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (5)
 
@@ -24,19 +24,22 @@
 
 Not open yet: 42 nodes that wait for stage 1, 6 nodes that wait for a statement dependency.
 
-## Stage 3: modules to prove (45)
+## Stage 3: modules to prove (47)
 
 | module | distance to a target | sorry | kind |
 |---|---|---|---|
 | `WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.BaseChangeProperty` | 0 | 1 | proof |
 | `WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.ProjectiveLine` | 0 | 1 | proof |
-| `Sheaf.AlgebraicGeometry.EtaleCohomologyPullbackFunctorial` | 1 | 1 | proof |
 | `WeilConjectures.AlgebraicGeometry.Curve.Reductions` | 1 | 6 | proof |
+| `Sheaf.AlgebraicGeometry.ConstantPullbackCompositionCoherence` | 2 | 1 | proof |
+| `Sheaf.AlgebraicGeometry.ConstantPullbackIdentityCoherence` | 2 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.ConstructibleModuleSubobjectNoetherian` | 2 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.EtaleCohomologyFilteredColimit` | 2 | 2 | proof |
 | `Sheaf.AlgebraicGeometry.ProjectiveLineStrictLocalModelComparison` | 2 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.ProperGeometricPointExchange` | 2 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.PullbackCohomologyLongExactLadder` | 2 | 1 | proof |
+| `Sheaf.CategoryTheory.ExtExactFunctorCompositionComparison` | 2 | 1 | proof |
+| `Sheaf.CategoryTheory.ExtExactFunctorIdentityComparison` | 2 | 1 | proof |
 | `WeilConjectures.AlgebraicGeometry.Cohomology.EulerChar` | 2 | 1 | proof |
 | `WeilConjectures.ConstructibleSheaf.KernelCokernel` | 2 | 1 | proof |
 | `WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.ProjectiveLine.StrictHenselian` | 2 | 1 | proof |
@@ -48,7 +51,6 @@ Not open yet: 42 nodes that wait for stage 1, 6 nodes that wait for a statement 
 | `Sheaf.AlgebraicGeometry.EtaleH0FiniteConnectedCriterion` | 3 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.GlobalSectionsStalkComparison` | 3 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.ZeroDimensionalBaseChangeGeometricPoints` | 3 | 1 | proof |
-| `Sheaf.AlgebraicGeometry.ZeroDimensionalBaseChangePointsFibrePoint` | 3 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.ZeroDimensionalSectionsStalks` | 3 | 1 | proof |
 | `Sheaf.Paper.ZeroDimensionalEtaleCohomologyRest` | 3 | 1 | proof |
 | `WeilConjectures.AlgebraicGeometry.HenselianConnectedness` | 3 | 1 | proof |
