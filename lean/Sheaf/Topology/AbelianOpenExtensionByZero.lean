@@ -66,7 +66,7 @@ theorem abelianOpenRestriction_isSheaf {X : TopCat.{u}} (U : Opens X)
     (F : TopCat.Sheaf AddCommGrpCat.{u} X) :
     CategoryTheory.Presheaf.IsSheaf (Opens.grothendieckTopology ((Opens.toTopCat X).obj U))
       (abelianOpenRestrictionPresheaf U F) := by
-  sorry
+  exact TopCat.Presheaf.isSheaf_of_isOpenEmbedding U.isOpenEmbedding F.property
 
 /-- Restriction as an abelian sheaf on the open subspace.
 Source: Stacks, Lemma 00A5 (blueprint: def-sc-abelian-open-extension-by-zero). -/
@@ -80,7 +80,15 @@ Proof: the resulting open is V intersect U, which equals V by the inclusion.
 Source: Stacks, Definition 00A4 (blueprint: def-sc-abelian-open-extension-by-zero). -/
 theorem openImage_preimage_eq {X : TopCat.{u}} (U V : Opens X) (h : V ≤ U) :
     U.isOpenEmbedding.functor.obj ((Opens.map U.inclusion').obj V) = V := by
-  sorry
+  apply Opens.ext
+  apply Set.ext
+  intro x
+  simp only [Topology.IsOpenEmbedding.functor, Opens.map, Opens.inclusion']
+  constructor
+  · rintro ⟨y, hy, rfl⟩
+    exact hy
+  · intro hx
+    exact ⟨⟨x, h hx⟩, hx, rfl⟩
 
 open Classical in
 /-- The presheaf counit is identity on the sole summand when V lies in U, and zero
