@@ -5,6 +5,7 @@ Authors: Christian Merten
 -/
 module
 
+public import WeilConjectures.Mathlib.CategoryTheory.Adjunction.Mates
 public import WeilConjectures.SixFunctors.BaseChange.Square
 
 /-!
@@ -66,29 +67,6 @@ universe u' u
 open CategoryTheory Category Limits Opposite
 
 namespace CategoryTheory
-
-section MateWhisker
-
-variable {A B C D : Type*} [Category A] [Category B] [Category C] [Category D]
-  {G G' : A ⥤ C} {H H' : B ⥤ D} {L₁ : A ⥤ B} {R₁ : B ⥤ A} {L₂ : C ⥤ D} {R₂ : D ⥤ C}
-  (adj₁ : L₁ ⊣ R₁) (adj₂ : L₂ ⊣ R₂)
-
-/-- The mates correspondence is compatible with whiskering by natural transformations on the
-sides of the square that are not part of the adjunctions: whiskering the top and bottom of
-the square `G ⋙ L₂ ⟶ L₁ ⋙ H` corresponds to whiskering the right and left of its mate
-`R₁ ⋙ G ⟶ H ⋙ R₂`. -/
-lemma mateEquiv_whiskerTop_whiskerBottom (α : TwoSquare G L₁ L₂ H) (σ : G' ⟶ G) (τ : H ⟶ H') :
-    mateEquiv adj₁ adj₂ ((α.whiskerTop σ).whiskerBottom τ) =
-      ((mateEquiv adj₁ adj₂ α).whiskerRight σ).whiskerLeft τ := by
-  ext d
-  simp only [mateEquiv_apply, TwoSquare.whiskerBottom, TwoSquare.whiskerTop,
-    TwoSquare.whiskerLeft, TwoSquare.whiskerRight, NatTrans.comp_app, Functor.comp_obj,
-    Functor.whiskerLeft_app, Functor.whiskerRight_app, Functor.map_comp, Category.assoc,
-    Functor.rightUnitor_inv_app, Functor.associator_hom_app, Functor.associator_inv_app,
-    Functor.leftUnitor_hom_app, Functor.comp_map, id_comp, comp_id, Functor.id_obj]
-  rw [Adjunction.unit_naturality_assoc, ← R₂.map_comp, ← τ.naturality, R₂.map_comp]
-
-end MateWhisker
 
 section IsoAux
 

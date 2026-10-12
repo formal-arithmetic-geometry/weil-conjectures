@@ -34,6 +34,8 @@ deduction that `V` is Noetherian, which is what makes the immersion quasi-compac
 
 - `AlgebraicGeometry.nonempty_properClosedModel` — an affine scheme locally of finite type over
   a Noetherian scheme admits a proper closed model.
+- `AlgebraicGeometry.nonempty_properClosedModel_of_quasiSeparatedSpace` — the same over a
+  quasi-compact quasi-separated scheme.
 
 ## References
 
@@ -82,26 +84,39 @@ instance isProper_emb_comp_over : IsProper (M.emb ≫ ℙ(M.n; S) ↘ S) := infe
 
 end ProperClosedModel
 
-/-- **Step 3 of the proof of Chow's lemma.** An affine scheme `V` locally of finite type over a
-Noetherian scheme `S` admits a proper closed model: a closed subscheme `Z` of some projective
-space `ℙ(n; S)` with `n` finite, containing `V` as a scheme-theoretically dense open subscheme
-and proper over `S`.
+/-- **Step 3 of the proof of Chow's lemma over a quasi-compact quasi-separated base.** An affine
+scheme `V` locally of finite type over a quasi-compact quasi-separated scheme `S` admits a
+proper closed model.
 
 Indeed, `V` immerses into some `ℙ(n; S)` over `S` by
 `AlgebraicGeometry.exists_isImmersion_projectiveSpace`, and this immersion is quasi-compact
-since `V` is Noetherian; so its scheme-theoretic image does the job. -/
-@[stacks 01RG "combined with 0200, step 3 of the proof"]
-theorem nonempty_properClosedModel {V S : Scheme.{u}} [IsAffine V] [IsNoetherian S] (g : V ⟶ S)
-    [LocallyOfFiniteType g] :
+since `V` is quasi-compact and `ℙ(n; S)` is quasi-compact and quasi-separated, being proper
+over `S`; so its scheme-theoretic image does the job. This is the form of step 3 used in the
+non-Noetherian variant of Chow's lemma (blueprint `rem-chow-lemma-non-noetherian`). -/
+@[stacks 01RG "combined with 0203"]
+theorem nonempty_properClosedModel_of_quasiSeparatedSpace {V S : Scheme.{u}} [IsAffine V]
+    [CompactSpace S] [QuasiSeparatedSpace S] (g : V ⟶ S) [LocallyOfFiniteType g] :
     Nonempty (ProperClosedModel g) := by
   obtain ⟨n, hn, j, hj, hjg⟩ := exists_isImmersion_projectiveSpace g
-  -- `V` is Noetherian, hence `j` is quasi-compact.
-  have : IsLocallyNoetherian V := LocallyOfFiniteType.isLocallyNoetherian g
-  have : IsNoetherian V := ⟨⟩
+  -- `ℙ(n; S)` is quasi-compact and quasi-separated, hence `j` is quasi-compact.
+  have : CompactSpace ℙ(n; S) := QuasiCompact.compactSpace_of_compactSpace (ℙ(n; S) ↘ S)
+  have : QuasiSeparatedSpace ℙ(n; S) := quasiSeparatedSpace_of_quasiSeparated (ℙ(n; S) ↘ S)
+  have : QuasiCompact j := (quasiCompact_iff_compactSpace j).mpr inferInstance
   exact ⟨{ n := n
            Z := j.image
            emb := j.imageι
            ι := j.toImage
            w := by rw [j.toImage_imageι_assoc, hjg] }⟩
+
+/-- **Step 3 of the proof of Chow's lemma.** An affine scheme `V` locally of finite type over a
+Noetherian scheme `S` admits a proper closed model: a closed subscheme `Z` of some projective
+space `ℙ(n; S)` with `n` finite, containing `V` as a scheme-theoretically dense open subscheme
+and proper over `S`. This is the special case of
+`AlgebraicGeometry.nonempty_properClosedModel_of_quasiSeparatedSpace` for a Noetherian `S`. -/
+@[stacks 01RG "combined with 0200, step 3 of the proof"]
+theorem nonempty_properClosedModel {V S : Scheme.{u}} [IsAffine V] [IsNoetherian S] (g : V ⟶ S)
+    [LocallyOfFiniteType g] :
+    Nonempty (ProperClosedModel g) :=
+  nonempty_properClosedModel_of_quasiSeparatedSpace g
 
 end AlgebraicGeometry

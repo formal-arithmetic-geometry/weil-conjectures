@@ -49,6 +49,9 @@ over `S`.
   projective `S`-scheme.
 - `AlgebraicGeometry.ChowModification.nonempty_data` — the assembly of the above out of the
   reduction, the graph and the gluing; all of the declarations listed here are read off it.
+- `AlgebraicGeometry.exists_chowModification_of_finite_irreducibleComponents` — Chow's lemma
+  over a quasi-compact quasi-separated base, for `X` with finitely many irreducible components
+  (Stacks 0203); `nonempty_data` is its Noetherian special case.
 
 ## Implementation notes
 
@@ -95,64 +98,52 @@ namespace AlgebraicGeometry
 
 noncomputable section
 
-variable {X S : Scheme.{u}} (f : X ⟶ S) [IsNoetherian S] [IsSeparated f] [LocallyOfFiniteType f]
-  [QuasiCompact f]
+/-- **Chow's lemma over a quasi-compact quasi-separated base** (the non-Noetherian variant,
+blueprint `rem-chow-lemma-non-noetherian`): let `S` be quasi-compact and quasi-separated and let
+`f : X ⟶ S` be separated and of finite type, with `X` having finitely many irreducible
+components. Then there are a proper surjective morphism `π : X' ⟶ X` which is an isomorphism
+over a dense open subset of `X`, and an immersion `e : X' ⟶ ℙ(N; S)` over `S` with `N` finite.
 
-namespace ChowModification
-
-/-- All the data the Chow modification of `f : X ⟶ S` is made of, in one structure: the
-modification `X'` together with the proper surjective `π : X' ⟶ X`, which is an isomorphism
-over a dense open subset of `X`, and the immersion of `X'` into a projective space `ℙ(N; S)`
-over `S`.
-
-Bundling the data like this is what makes the choices underlying `ChowModification f`,
-`ChowModification.index f`, `ChowModification.modificationMap f` and
-`ChowModification.toProjectiveSpace f` the *same* choices: all four are fields of
-`ChowModification.data f`. -/
-structure Data {X S : Scheme.{u}} (f : X ⟶ S) [IsNoetherian S] [IsSeparated f]
-    [LocallyOfFiniteType f] [QuasiCompact f] where
-  /-- the modification `X'` -/
-  X' : Scheme.{u}
-  /-- the proper surjective morphism `X' ⟶ X` -/
-  π : X' ⟶ X
-  [isProper_π : IsProper π]
-  [surjective_π : Surjective π]
-  /-- the index type of the homogeneous coordinates of the ambient projective space -/
-  N : Type u
-  [finite_N : Finite N]
-  /-- the immersion of `X'` into the projective space `ℙ(N; S)` -/
-  e : X' ⟶ ℙ(N; S)
-  [isImmersion_e : IsImmersion e]
-  /-- the immersion is a morphism over `S` -/
-  w : e ≫ ℙ(N; S) ↘ S = π ≫ f
-  /-- the modification is an isomorphism over a dense open subset of `X` -/
-  exists_dense_isIso : ∃ U : X.Opens, Dense (U : Set X) ∧ IsIso (π ∣_ U)
-
-/-- **Chow's lemma**: a separated morphism of finite type over a Noetherian scheme admits a
-Chow modification.
-
-Steps 1 and 2 of Stacks' proof produce a reduction `R` of `f` (`AlgebraicGeometry.ChowReduction`)
-with a nonempty finite affine open cover `R.U`, step 3 a proper closed model `M i` of each
-member of the cover, step 4 the graph `ChowGraph M` of the family, and step 5 the modification
-`ChowGraph.modificationMap M` obtained by gluing the projections of the graph. It remains to
-check that the latter is proper (it is proper over each `R.U i`, which cover), surjective (it
-is universally closed and dominant, the dense open `U∞` mapping isomorphically onto
-`⋂ i, R.U i`) and an isomorphism over `⋂ i, R.U i` (the open `U∞` of `X'` is dense in the
-preimage of `⋂ i, R.U i` and proper over it, hence all of it); step 7 is the closed immersion
-of the graph into a single projective space over `S`.
-(blueprint: `thm:chow-lemma`) -/
-@[stacks 0200]
-theorem nonempty_data : Nonempty (Data f) := by
+The proof is that of `AlgebraicGeometry.ChowModification.nonempty_data`: Noetherianity of `S`
+is only used there through the finiteness of the set of irreducible components of `X` and the
+quasi-compactness of the various immersions out of quasi-compact schemes, which here follows
+from quasi-separatedness instead. -/
+@[stacks 0203]
+theorem exists_chowModification_of_finite_irreducibleComponents {X S : Scheme.{u}} (f : X ⟶ S)
+    [CompactSpace S] [QuasiSeparatedSpace S] [IsSeparated f] [LocallyOfFiniteType f]
+    [QuasiCompact f] (hX : (irreducibleComponents X).Finite) :
+    ∃ (X' : Scheme.{u}) (π : X' ⟶ X) (N : Type u) (_ : Finite N) (e : X' ⟶ ℙ(N; S)),
+      IsProper π ∧ Surjective π ∧ IsImmersion e ∧ e ≫ ℙ(N; S) ↘ S = π ≫ f ∧
+      ∃ U : X.Opens, Dense (U : Set X) ∧ IsIso (π ∣_ U) := by
+  have : CompactSpace X := QuasiCompact.compactSpace_of_compactSpace f
+  have : QuasiSeparatedSpace X := quasiSeparatedSpace_of_quasiSeparated f
   -- Steps 1 and 2: a reduction of `f` with a nonempty finite affine open cover.
-  obtain ⟨R, hn⟩ := exists_chowReduction_n_ne_zero f
+  obtain ⟨R, hn⟩ := (nonempty_chowReduction_of_finite_irreducibleComponents f hX).some
+    |>.exists_n_ne_zero
   have : Nonempty (Fin R.n) := ⟨⟨0, Nat.pos_of_ne_zero hn⟩⟩
-  have : IsLocallyNoetherian R.Y := LocallyOfFiniteType.isLocallyNoetherian (R.c ≫ f)
   have : CompactSpace R.Y := QuasiCompact.compactSpace_of_compactSpace (R.c ≫ f)
-  have : IsNoetherian R.Y := ⟨⟩
+  have : QuasiSeparatedSpace R.Y := quasiSeparatedSpace_of_quasiSeparated (R.c ≫ f)
   -- Step 3: a proper closed model of each member of the cover.
   have M : ∀ i, ProperClosedModel ((R.U i).ι ≫ R.c ≫ f) := fun i ↦
     have : IsAffine (R.U i) := R.isAffineOpen_U i
-    (nonempty_properClosedModel _).some
+    (nonempty_properClosedModel_of_quasiSeparatedSpace _).some
+  -- The tuple morphism is quasi-compact: its source `⋂ i, R.U i` is quasi-compact, being a
+  -- finite intersection of affine opens of a quasi-separated scheme, and its target is
+  -- quasi-compact and quasi-separated, being proper over `S`.
+  have hc : IsCompact ((⨅ i, R.U i : R.Y.Opens) : Set R.Y) := by
+    have h := QuasiSeparatedSpace.isCompact_sInter (α := R.Y)
+      (s := Set.range fun i ↦ (R.U i : Set R.Y)) (Set.finite_range _)
+      (by rintro _ ⟨i, rfl⟩; exact Or.inl (R.U i).isOpen)
+      (by rintro _ ⟨i, rfl⟩; exact (R.isAffineOpen_U i).isCompact)
+    rwa [Set.sInter_range, ← TopologicalSpace.Opens.coe_iInf] at h
+  have : CompactSpace (⨅ i, R.U i : R.Y.Opens) := isCompact_iff_compactSpace.mp hc
+  have : QuasiCompact (⨅ i, R.U i).ι := (quasiCompact_iff_compactSpace _).mpr inferInstance
+  have : QuasiCompact (ChowGraph.tuple M) := by
+    have : CompactSpace (ChowGraph.ambient M).left :=
+      QuasiCompact.compactSpace_of_compactSpace (ChowGraph.ambient M).hom
+    have : QuasiSeparatedSpace (ChowGraph.ambient M).left :=
+      quasiSeparatedSpace_of_quasiSeparated (ChowGraph.ambient M).hom
+    exact (quasiCompact_iff_compactSpace _).mpr inferInstance
   -- Step 7: the graph is a closed subscheme of a single projective space over `S`.
   obtain ⟨N, hNfin, g, hg, hgS⟩ := ChowGraph.exists_isClosedImmersion_over M
   -- Step 5: the modification is proper, being proper over each member of the cover.
@@ -220,12 +211,9 @@ theorem nonempty_data : Nonempty (Data f) := by
     inferInstanceAs (IsIso ((⨆ i, ChowGraph.projPreimage M i).toScheme.isoOfEq hVW).hom)
   have hq : IsIso (ChowGraph.modificationMap M ∣_ ⨅ i, R.U i) :=
     IsIso.of_isIso_comp_left ((⨆ i, ChowGraph.projPreimage M i).toScheme.homOfLE hle) _
-  refine ⟨{ X' := (⨆ i, ChowGraph.projPreimage M i).toScheme
-            π := ChowGraph.modificationMap M ≫ R.c
-            N := N
-            e := (⨆ i, ChowGraph.projPreimage M i).ι ≫ g
-            w := ?_
-            exists_dense_isIso := ?_ }⟩
+  refine ⟨(⨆ i, ChowGraph.projPreimage M i).toScheme, ChowGraph.modificationMap M ≫ R.c, N,
+    hNfin, (⨆ i, ChowGraph.projPreimage M i).ι ≫ g, inferInstance, inferInstance,
+    inferInstance, ?_, ?_⟩
   · simp only [Category.assoc]
     rw [hgS, ChowGraph.modificationMap_over]
   · refine ⟨R.V, R.dense_V, ?_⟩
@@ -234,6 +222,64 @@ theorem nonempty_data : Nonempty (Data f) := by
       exact hq
     rw [morphismRestrict_comp]
     infer_instance
+
+variable {X S : Scheme.{u}} (f : X ⟶ S) [IsNoetherian S] [IsSeparated f] [LocallyOfFiniteType f]
+  [QuasiCompact f]
+
+namespace ChowModification
+
+/-- All the data the Chow modification of `f : X ⟶ S` is made of, in one structure: the
+modification `X'` together with the proper surjective `π : X' ⟶ X`, which is an isomorphism
+over a dense open subset of `X`, and the immersion of `X'` into a projective space `ℙ(N; S)`
+over `S`.
+
+Bundling the data like this is what makes the choices underlying `ChowModification f`,
+`ChowModification.index f`, `ChowModification.modificationMap f` and
+`ChowModification.toProjectiveSpace f` the *same* choices: all four are fields of
+`ChowModification.data f`. -/
+structure Data {X S : Scheme.{u}} (f : X ⟶ S) [IsNoetherian S] [IsSeparated f]
+    [LocallyOfFiniteType f] [QuasiCompact f] where
+  /-- the modification `X'` -/
+  X' : Scheme.{u}
+  /-- the proper surjective morphism `X' ⟶ X` -/
+  π : X' ⟶ X
+  [isProper_π : IsProper π]
+  [surjective_π : Surjective π]
+  /-- the index type of the homogeneous coordinates of the ambient projective space -/
+  N : Type u
+  [finite_N : Finite N]
+  /-- the immersion of `X'` into the projective space `ℙ(N; S)` -/
+  e : X' ⟶ ℙ(N; S)
+  [isImmersion_e : IsImmersion e]
+  /-- the immersion is a morphism over `S` -/
+  w : e ≫ ℙ(N; S) ↘ S = π ≫ f
+  /-- the modification is an isomorphism over a dense open subset of `X` -/
+  exists_dense_isIso : ∃ U : X.Opens, Dense (U : Set X) ∧ IsIso (π ∣_ U)
+
+/-- **Chow's lemma**: a separated morphism of finite type over a Noetherian scheme admits a
+Chow modification.
+
+Steps 1 and 2 of Stacks' proof produce a reduction `R` of `f` (`AlgebraicGeometry.ChowReduction`)
+with a nonempty finite affine open cover `R.U`, step 3 a proper closed model `M i` of each
+member of the cover, step 4 the graph `ChowGraph M` of the family, and step 5 the modification
+`ChowGraph.modificationMap M` obtained by gluing the projections of the graph. It remains to
+check that the latter is proper (it is proper over each `R.U i`, which cover), surjective (it
+is universally closed and dominant, the dense open `U∞` mapping isomorphically onto
+`⋂ i, R.U i`) and an isomorphism over `⋂ i, R.U i` (the open `U∞` of `X'` is dense in the
+preimage of `⋂ i, R.U i` and proper over it, hence all of it); step 7 is the closed immersion
+of the graph into a single projective space over `S`. These steps are carried out in
+`AlgebraicGeometry.exists_chowModification_of_finite_irreducibleComponents`, which applies since
+`X` is Noetherian.
+(blueprint: `thm:chow-lemma`) -/
+@[stacks 0200]
+theorem nonempty_data : Nonempty (Data f) := by
+  have : IsLocallyNoetherian X := LocallyOfFiniteType.isLocallyNoetherian f
+  have : CompactSpace X := QuasiCompact.compactSpace_of_compactSpace f
+  have : IsNoetherian X := ⟨⟩
+  obtain ⟨X', π, N, hN, e, hπ, hπs, he, w, hU⟩ :=
+    exists_chowModification_of_finite_irreducibleComponents f
+      (finite_irreducibleComponents_of_isNoetherian (X := X))
+  exact ⟨{ X' := X', π := π, N := N, e := e, w := w, exists_dense_isIso := hU }⟩
 
 /-- The choice of all the data underlying the Chow modification of `f`. -/
 def data : Data f := (nonempty_data f).some

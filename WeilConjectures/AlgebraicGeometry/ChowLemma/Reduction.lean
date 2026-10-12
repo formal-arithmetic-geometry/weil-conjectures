@@ -37,6 +37,8 @@ ingredients applicable.
 ## Main statements
 
 - `AlgebraicGeometry.nonempty_chowReduction` — steps 1 and 2 of the proof of Chow's lemma.
+- `AlgebraicGeometry.nonempty_chowReduction_of_finite_irreducibleComponents` — the same for a
+  quasi-compact quasi-separated scheme with finitely many irreducible components.
 - `AlgebraicGeometry.exists_chowReduction_n_ne_zero` — the same, with a nonempty cover.
 
 ## References
@@ -83,29 +85,36 @@ structure ChowReduction {X S : Scheme.{u}} (f : X ⟶ S) where
 attribute [instance] ChowReduction.isClosedImmersion_c ChowReduction.surjective_c
   ChowReduction.isIso_morphismRestrict_c ChowReduction.isSchemeTheoreticallyDominant_iInf
 
-/-- **Steps 1 and 2 of the proof of Chow's lemma.** A scheme `X` that is separated and of finite
-type over a Noetherian scheme `S` admits a surjective closed model `X*` with a finite affine
-open cover whose intersection is scheme-theoretically dense in `X*` and lies over a dense open
-of `X` over which `X* ⟶ X` is an isomorphism.
+/-- **Steps 1 and 2 of the proof of Chow's lemma for a scheme with finitely many irreducible
+components.** A quasi-compact quasi-separated scheme `X` with finitely many irreducible
+components admits a surjective closed model `X*` with a finite affine open cover whose
+intersection is scheme-theoretically dense in `X*` and lies over a dense open of `X` over which
+`X* ⟶ X` is an isomorphism.
 
 Step 1 covers `X` by finitely many affine opens `Wᵢ` all containing the generic points of the
-irreducible components of `X`; their intersection `V` is then dense. Step 2 replaces `X` by the
-scheme-theoretic image `X*` of `V ⟶ X`, in which the copy of `V` is scheme-theoretically
-dense. -/
-@[stacks 0200 "Steps 1 and 2 of the proof"]
-theorem nonempty_chowReduction {X S : Scheme.{u}} (f : X ⟶ S) [IsNoetherian S] [IsSeparated f]
-    [LocallyOfFiniteType f] [QuasiCompact f] :
+irreducible components of `X`; their intersection `V` is then dense, and quasi-compact since
+`X` is quasi-separated. Step 2 replaces `X` by the scheme-theoretic image `X*` of the
+quasi-compact immersion `V ⟶ X`, in which the copy of `V` is scheme-theoretically dense.
+This is the form of steps 1 and 2 used in the non-Noetherian variant of Chow's lemma
+(blueprint `rem-chow-lemma-non-noetherian`). -/
+@[stacks 0203]
+theorem nonempty_chowReduction_of_finite_irreducibleComponents {X S : Scheme.{u}} (f : X ⟶ S)
+    [CompactSpace X] [QuasiSeparatedSpace X] (hX : (irreducibleComponents X).Finite) :
     Nonempty (ChowReduction f) := by
-  -- `X` is Noetherian, hence quasi-compact, quasi-separated and with finitely many components.
-  have : IsLocallyNoetherian X := LocallyOfFiniteType.isLocallyNoetherian f
-  have : CompactSpace X := QuasiCompact.compactSpace_of_compactSpace f
-  have : IsNoetherian X := ⟨⟩
   -- Step 1: a finite affine cover through the generic points, with dense intersection.
-  obtain ⟨n, W, hWaff, hWgen, hWcov⟩ :=
-    exists_isAffineOpen_cover_genericPoints_subset
-      (finite_irreducibleComponents_of_isNoetherian (X := X))
+  obtain ⟨n, W, hWaff, hWgen, hWcov⟩ := exists_isAffineOpen_cover_genericPoints_subset hX
   set V : X.Opens := ⨅ i, W i with hV
   have hVdense : Dense (V : Set X) := dense_iInf_of_genericPoints_subset hWgen
+  -- `V` is quasi-compact, being a finite intersection of affine opens of a quasi-separated
+  -- scheme, so the inclusion `V ⟶ X` is quasi-compact.
+  have hVc : IsCompact (V : Set X) := by
+    have h := QuasiSeparatedSpace.isCompact_sInter (α := X)
+      (s := Set.range fun i ↦ (W i : Set X)) (Set.finite_range _)
+      (by rintro _ ⟨i, rfl⟩; exact Or.inl (W i).isOpen)
+      (by rintro _ ⟨i, rfl⟩; exact (hWaff i).isCompact)
+    rwa [Set.sInter_range, ← TopologicalSpace.Opens.coe_iInf] at h
+  have : CompactSpace V := isCompact_iff_compactSpace.mp hVc
+  have : QuasiCompact V.ι := (quasiCompact_iff_compactSpace V.ι).mpr inferInstance
   -- Step 2: replace `X` by the scheme-theoretic image of `V ⟶ X`.
   have hVU : ⨅ i, V.ι.imageι ⁻¹ᵁ W i = V.ι.imageι ⁻¹ᵁ V := V.iInf_preimage_imageι hV.symm
   exact ⟨{ n := n
@@ -119,6 +128,24 @@ theorem nonempty_chowReduction {X S : Scheme.{u}} (f : X ⟶ S) [IsNoetherian S]
            dense_V := hVdense
            preimage_V := hVU.symm
            isSchemeTheoreticallyDominant_iInf := hVU ▸ inferInstance }⟩
+
+/-- **Steps 1 and 2 of the proof of Chow's lemma.** A scheme `X` that is separated and of finite
+type over a Noetherian scheme `S` admits a surjective closed model `X*` with a finite affine
+open cover whose intersection is scheme-theoretically dense in `X*` and lies over a dense open
+of `X` over which `X* ⟶ X` is an isomorphism.
+
+Indeed, `X` is Noetherian, hence quasi-compact, quasi-separated and with finitely many
+irreducible components, so this is a special case of
+`AlgebraicGeometry.nonempty_chowReduction_of_finite_irreducibleComponents`. -/
+@[stacks 0200 "Steps 1 and 2 of the proof"]
+theorem nonempty_chowReduction {X S : Scheme.{u}} (f : X ⟶ S) [IsNoetherian S] [IsSeparated f]
+    [LocallyOfFiniteType f] [QuasiCompact f] :
+    Nonempty (ChowReduction f) := by
+  have : IsLocallyNoetherian X := LocallyOfFiniteType.isLocallyNoetherian f
+  have : CompactSpace X := QuasiCompact.compactSpace_of_compactSpace f
+  have : IsNoetherian X := ⟨⟩
+  exact nonempty_chowReduction_of_finite_irreducibleComponents f
+    (finite_irreducibleComponents_of_isNoetherian (X := X))
 
 /-- The cover of a `AlgebraicGeometry.ChowReduction` may always be assumed to be nonempty: if it
 is indexed by `Fin 0`, then `X*` is empty and the one-element cover by `⊤` satisfies all the

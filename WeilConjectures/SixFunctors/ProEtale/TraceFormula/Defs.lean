@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Scheme
 public import WeilConjectures.SixFunctors.ProEtale.Derived.Hom
+public import WeilConjectures.SixFunctors.ProEtale.Derived.Shift
 public import WeilConjectures.SixFunctors.ProEtale.Derived.TorAmplitude
 public import WeilConjectures.SixFunctors.ProEtale.Derived.UpperLowerStar
 public import WeilConjectures.SixFunctors.ProEtale.Derived.UpperShriek
@@ -323,6 +324,11 @@ lemma quasiCompact {f : X ⟶ Y} (hf : IsGeometricHom s f) : QuasiCompact f := b
   obtain ⟨a, _, _⟩ := hf
   exact QuasiCompact.of_comp f a
 
+/-- The source of a morphism of geometric schemes is geometric. -/
+lemma id_source {f : X ⟶ Y} (hf : IsGeometricHom s f) : IsGeometricHom s (𝟙 X) := by
+  obtain ⟨a, _, _⟩ := hf
+  exact .id (f ≫ a)
+
 /-- Morphisms of geometric schemes are stable under composition. -/
 lemma comp {f : X ⟶ Y} {g : Y ⟶ Z} (hf : IsGeometricHom s f) (hg : IsGeometricHom s g) :
     IsGeometricHom s (f ≫ g) := by
@@ -434,6 +440,43 @@ noncomputable def exceptionalHomEquiv (f : X ⟶ Y) (hf : IsGeometricHom s f)
     (((G.exceptionalAdjunction f hf).homEquiv ⟨K, hK⟩ ⟨L, hL⟩).trans
       (G.ctf X).fullyFaithfulι.homEquiv)
 
+/-- The exceptional adjunction `Hom(Rf_! K, L) ≃ Hom(K, Rf^! L)` is natural in `L`. -/
+lemma exceptionalHomEquiv_naturality_right (f : X ⟶ Y) (hf : IsGeometricHom s f)
+    [HasCompactification f]
+    {K : DerivedCategory (Sheaf (Scheme.ProEt.topology X) A)} (hK : G.ctf X K)
+    {L L' : DerivedCategory (Sheaf (Scheme.ProEt.topology Y) A)} (hL : G.ctf Y L)
+    (hL' : G.ctf Y L') (φ : (rightDerivedLowerShriek A f).obj K ⟶ L) (g : L ⟶ L') :
+    G.exceptionalHomEquiv f hf hK hL' (φ ≫ g) =
+      G.exceptionalHomEquiv f hf hK hL φ ≫ (rightDerivedUpperShriek A f).map g :=
+  congrArg (·.hom) ((G.exceptionalAdjunction f hf).homEquiv_naturality_right
+    (X := ⟨K, hK⟩) (Y := ⟨L, hL⟩) (Y' := ⟨L', hL'⟩) (ObjectProperty.homMk φ)
+    (ObjectProperty.homMk g))
+
+/-- The exceptional adjunction `Hom(Rf_! K, L) ≃ Hom(K, Rf^! L)` is natural in `K`. -/
+lemma exceptionalHomEquiv_naturality_left (f : X ⟶ Y) (hf : IsGeometricHom s f)
+    [HasCompactification f]
+    {K K' : DerivedCategory (Sheaf (Scheme.ProEt.topology X) A)} (hK : G.ctf X K)
+    (hK' : G.ctf X K')
+    {L : DerivedCategory (Sheaf (Scheme.ProEt.topology Y) A)} (hL : G.ctf Y L)
+    (g : K ⟶ K') (φ : (rightDerivedLowerShriek A f).obj K' ⟶ L) :
+    G.exceptionalHomEquiv f hf hK hL ((rightDerivedLowerShriek A f).map g ≫ φ) =
+      g ≫ G.exceptionalHomEquiv f hf hK' hL φ :=
+  congrArg (·.hom) ((G.exceptionalAdjunction f hf).homEquiv_naturality_left
+    (X' := ⟨K, hK⟩) (X := ⟨K', hK'⟩) (Y := ⟨L, hL⟩) (ObjectProperty.homMk g)
+    (ObjectProperty.homMk φ))
+
+/-- The exceptional adjunction sends the counit `Rf_! Rf^! L ⟶ L` to the identity. -/
+@[simp]
+lemma exceptionalHomEquiv_exceptionalCounit (f : X ⟶ Y) (hf : IsGeometricHom s f)
+    [HasCompactification f]
+    {L : DerivedCategory (Sheaf (Scheme.ProEt.topology Y) A)} (hL : G.ctf Y L) :
+    G.exceptionalHomEquiv f hf (G.ctf_upperShriek f hf hL) hL
+        (G.exceptionalCounit f hf L hL) = 𝟙 _ := by
+  have h : (G.exceptionalAdjunction f hf).homEquiv _ ⟨L, hL⟩
+      ((G.exceptionalAdjunction f hf).counit.app ⟨L, hL⟩) = 𝟙 _ := by
+    rw [← Adjunction.homEquiv_symm_id, Equiv.apply_symm_apply]
+  exact congrArg (·.hom) h
+
 end GeometricCoefficients
 
 /-- A braiding on the derived category `D(X, A)` of the pro-étale site of every scheme `X`.
@@ -519,7 +562,9 @@ the identification `Rf_* = Rf_!` for proper `f`, composition of exceptional dire
 `!`-base change, the projection formula, the monoidal structure of the pullback `Lf^*`, braided
 for `DerivedBraiding`, and the invertibility of two canonical maps: the biduality map
 `K ⟶ D_X D_X K` on `Dᵇctf`, and the Künneth-Verdier map `kunnethVerdierMapOf`. The
-identity isomorphism `R(𝟙 X)_! ≃ 𝟭` is tied to `lowerShriekComp` by unit axioms;
+identity isomorphism `R(𝟙 X)_! ≃ 𝟭` is tied to `lowerShriekComp` by unit axioms, and
+`lowerShriekComp` is associative; `properComparison` and `lowerShriekComp` commute with the
+shifts;
 `properComparison`, `dualizingBase`, `dualizingComp` and the unit of `Lf^*` are tied to the
 identity isomorphisms at `f = 𝟙`; `properComparison` and `dualizingComp`
 are compatible with composition, and `baseChange` with vertical pasting.
@@ -593,6 +638,36 @@ structure GeometricOperations (s : Scheme.{u}) extends GeometricCoefficients A s
     lowerShriekComp f (𝟙 Y) hf hY hf' =
       Functor.isoWhiskerLeft _ (lowerShriekId Y hY) ≪≫ Functor.rightUnitor _ ≪≫
         ctfLowerShriekCongr (Category.comp_id f).symm _ _
+  /-- associativity of the composition isomorphisms of the exceptional direct images: for
+  `f : X ⟶ Y`, `g : Y ⟶ Z` and `h : Z ⟶ W`, the two isomorphisms
+  `Rh_! Rg_! Rf_! ≃ R((f ≫ g) ≫ h)_!` built from `lowerShriekComp` agree at every object of
+  `Dᵇctf(X)`, that is, the square
+
+  ```
+    Rh_! Rg_! Rf_! ──Rh_! (lowerShriekComp f g)──▶ Rh_! R(f ≫ g)_!
+          │                                              │
+    lowerShriekComp g h                     lowerShriekComp (f ≫ g) h
+          ▼                                              ▼
+    R(g ≫ h)_! Rf_! ──lowerShriekComp f (g ≫ h)──▶ R(f ≫ g ≫ h)_! = R((f ≫ g) ≫ h)_!
+  ```
+
+  commutes (blueprint `def-trf-global-operator`, item 3: the composition law is an
+  isomorphism of functors with the associativity compatibility). -/
+  lowerShriekComp_assoc {X Y Z W : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) (h : Z ⟶ W)
+      (hf : IsGeometricHom s f) (hg : IsGeometricHom s g) (hh : IsGeometricHom s h)
+      (hfg : IsGeometricHom s (f ≫ g)) (hgh : IsGeometricHom s (g ≫ h))
+      (hfgh : IsGeometricHom s (f ≫ g ≫ h)) (hfgh' : IsGeometricHom s ((f ≫ g) ≫ h))
+      [HasCompactification f] [HasCompactification g] [HasCompactification h]
+      [HasCompactification (f ≫ g)] [HasCompactification (g ≫ h)]
+      [HasCompactification (f ≫ g ≫ h)] [HasCompactification ((f ≫ g) ≫ h)] (K : Ctf A X) :
+    (rightDerivedLowerShriek A h).map ((lowerShriekComp f g hf hg hfg).hom.app K).hom ≫
+        ((lowerShriekComp (f ≫ g) h hfg hh hfgh').hom.app K).hom =
+      ((lowerShriekComp g h hg hh hgh).hom.app
+          ((toGeometricCoefficients.lowerShriekCtf f hf).obj K)).hom ≫
+        ((lowerShriekComp f (g ≫ h) hf hgh hfgh).hom.app K).hom ≫
+        ((ctfLowerShriekCongr (Category.assoc f g h).symm
+          (fun _ hK ↦ toGeometricCoefficients.ctf_lowerShriek _ hfgh hK)
+          (fun _ hK ↦ toGeometricCoefficients.ctf_lowerShriek _ hfgh' hK)).hom.app K).hom
   /-- for `f = 𝟙 X`, `properComparison` is the composite
   `R(𝟙 X)_! ≃ 𝟭 ≃ R(𝟙 X)_*` of `lowerShriekId` and the identity isomorphism of `R(𝟙 X)_*`,
   the conjugate of `leftDerivedUpperStarId`, at every object of `Dᵇctf(X)`. -/
@@ -672,6 +747,33 @@ structure GeometricOperations (s : Scheme.{u}) extends GeometricCoefficients A s
               (.mk (aY := a) rfl))).app ⟨dualizing a, ctf_dualizing a⟩) ≪≫
         (rightDerivedUpperShriek A f).mapIso (dualizingComp g a) ≪≫ dualizingComp f (g ≫ a) ≪≫
         eqToIso (congrArg dualizing (Category.assoc f g a).symm)
+  /-- `properComparison` is compatible with the shifts: the identification `Rf_! ≃ Rf_*` at
+  `K⟦n⟧` is, through the commutation of `Rf_!` and `Rf_*` with the shift, the shift of the
+  identification at `K`. The two functors are triangulated and the identification is one of
+  triangulated functors. -/
+  properComparison_commShift {X Y : Scheme.{u}} (f : X ⟶ Y) (hf : IsGeometricHom s f)
+      [HasCompactification f] [IsProper f] (K : Ctf A X) (n : ℤ) :
+    ((properComparison f hf).hom.app
+          ⟨K.obj⟦n⟧, ProEtale.DerivedCategory.constructibleFiniteTor.shift K.property n⟩).hom ≫
+        (((lowerStar A f).rightDerivedFunctor).commShiftIso n).hom.app K.obj =
+      ((rightDerivedLowerShriek A f).commShiftIso n).hom.app K.obj ≫
+        ((properComparison f hf).hom.app K).hom⟦n⟧'
+  /-- `lowerShriekComp` is compatible with the shifts: the composition `Rg_! Rf_! ≃ R(f ≫ g)_!`
+  at `K⟦n⟧` is, through the commutation of the functors with the shift, the shift of the
+  composition at `K`. The functors are triangulated and the composition is an isomorphism of
+  triangulated functors. -/
+  lowerShriekComp_commShift {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)
+      (hf : IsGeometricHom s f) (hg : IsGeometricHom s g) (hfg : IsGeometricHom s (f ≫ g))
+      [HasCompactification f] [HasCompactification g] [HasCompactification (f ≫ g)]
+      (K : Ctf A X) (n : ℤ) :
+    ((lowerShriekComp f g hf hg hfg).hom.app
+          ⟨K.obj⟦n⟧, ProEtale.DerivedCategory.constructibleFiniteTor.shift K.property n⟩).hom ≫
+        ((rightDerivedLowerShriek A (f ≫ g)).commShiftIso n).hom.app K.obj =
+      (rightDerivedLowerShriek A g).map
+          (((rightDerivedLowerShriek A f).commShiftIso n).hom.app K.obj) ≫
+        ((rightDerivedLowerShriek A g).commShiftIso n).hom.app
+          ((rightDerivedLowerShriek A f).obj K.obj) ≫
+        ((lowerShriekComp f g hf hg hfg).hom.app K).hom⟦n⟧'
   /-- `!`-base change along a Cartesian square of geometric schemes: `Lg^* Rf_! ≃ Rf'_! Lg'^*`
   on `Dᵇctf`, for
 
@@ -929,6 +1031,33 @@ lemma conjugateIsoEquiv_lowerShriekComp {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : 
         ((G.exceptionalAdjunction f hf).comp (G.exceptionalAdjunction g hg))
         (G.lowerShriekComp f g hf hg hfg) = G.upperShriekComp f g hf hg hfg :=
   rfl
+
+/-- The composition isomorphism `f^! g^! L ≃ (f ≫ g)^! L` of exceptional inverse images at an
+object `L` of `Dᵇctf(Z)`, as an isomorphism of `D(X, A)`. -/
+noncomputable def upperShriekCompIso {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)
+    (hf : IsGeometricHom s f) (hg : IsGeometricHom s g) (hfg : IsGeometricHom s (f ≫ g))
+    [HasCompactification f] [HasCompactification g] [HasCompactification (f ≫ g)]
+    (L : DerivedCategory (Sheaf (Scheme.ProEt.topology Z) A)) (hL : G.ctf Z L) :
+    (rightDerivedUpperShriek A f).obj ((rightDerivedUpperShriek A g).obj L) ≅
+      (rightDerivedUpperShriek A (f ≫ g)).obj L :=
+  (DerivedCategory.constructibleFiniteTor A X).ι.mapIso
+    (X := (G.upperShriekCtf g hg ⋙ G.upperShriekCtf f hf).obj ⟨L, hL⟩)
+    (Y := (G.upperShriekCtf (f ≫ g) hfg).obj ⟨L, hL⟩)
+    ((G.upperShriekComp f g hf hg hfg).symm.app ⟨L, hL⟩)
+
+/-- `GeometricOperations.upperShriekCompIso` is natural in `L`. -/
+@[reassoc]
+lemma upperShriekCompIso_hom_naturality {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)
+    (hf : IsGeometricHom s f) (hg : IsGeometricHom s g) (hfg : IsGeometricHom s (f ≫ g))
+    [HasCompactification f] [HasCompactification g] [HasCompactification (f ≫ g)]
+    {L L' : DerivedCategory (Sheaf (Scheme.ProEt.topology Z) A)} (hL : G.ctf Z L)
+    (hL' : G.ctf Z L') (φ : L ⟶ L') :
+    (rightDerivedUpperShriek A f).map ((rightDerivedUpperShriek A g).map φ) ≫
+        (G.upperShriekCompIso f g hf hg hfg L' hL').hom =
+      (G.upperShriekCompIso f g hf hg hfg L hL).hom ≫
+        (rightDerivedUpperShriek A (f ≫ g)).map φ :=
+  congrArg (·.hom) ((G.upperShriekComp f g hf hg hfg).inv.naturality
+    (X := ⟨L, hL⟩) (Y := ⟨L', hL'⟩) (ObjectProperty.homMk φ))
 
 /-- The exceptional trace `Rp_{X!} p_Y^* ω_Y ⟶ A_X` of a Cartesian square `Z = X ×_s Y`: the
 composite
