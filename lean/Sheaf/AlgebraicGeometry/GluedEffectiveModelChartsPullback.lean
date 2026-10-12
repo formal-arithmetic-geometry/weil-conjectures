@@ -3,6 +3,7 @@ module
 public import Mathlib.AlgebraicGeometry.Restrict
 public import Mathlib.AlgebraicGeometry.Sites.Fpqc
 public import WeilConjectures.CategoryTheory.Comma.Over.DescentDatum
+import Sheaf.AlgebraicGeometry.GluedEffectiveModelChartPullbackSingle
 
 @[expose] public section
 universe u
@@ -22,6 +23,8 @@ theorem glued_model_chart_pullbacks
     (hcover : ∀ w : W₀.left, ∃ i, ∃ z : (W i).left, j i z = w)
     (hover : ∀ i, j i ≫ W₀.hom = (W i).hom)
     (hcomm : ∀ i, q i ≫ j i = (U i).ι ≫ q₀) :
-    ∀ i, IsPullback (q i) (U i).ι (j i) q₀ := by sorry
+    ∀ i, IsPullback (q i) (U i).ι (j i) q₀ := by
+  intro i
+  exact glued_model_chart_pullback_single U W q W₀ q₀ j i (hcart i) hopen hcover hover hcomm
 
 end CategoryTheory.Over.DescentDatum
