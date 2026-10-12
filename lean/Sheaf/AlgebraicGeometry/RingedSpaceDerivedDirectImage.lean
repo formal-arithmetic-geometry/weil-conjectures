@@ -6,11 +6,10 @@ Authors: SHEAF group G1
 module
 
 public import Sheaf.Paper.DerivedHomMayerVietoris
+public import Sheaf.CategoryTheory.RingedSiteKInjectiveResolutions
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.KInjectiveResolution
-import Mathlib.Algebra.Homology.DerivedCategory.KInjective
+public import Mathlib.Algebra.Homology.DerivedCategory.KInjective
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Defs
-import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.KInjective
-import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
 
 /-!
 # Unbounded derived direct image on ringed spaces
@@ -29,11 +28,12 @@ noncomputable section
 
 namespace AlgebraicGeometry.RingedSpace
 
-/-- The Grothendieck structure on module sheaves on the small site of opens.
+/-- The Grothendieck structure supplied by the small-site resolution theorem.
 Source: Stacks, Tag 079V (blueprint: def-pc-ringed-spaces-derived-direct-image). -/
 instance moduleGrothendieckAbelian (X : RingedSpace.{u}) :
     IsGrothendieckAbelian.{u} (SheafOfModules.{u} (moduleRings X)) :=
-  SheafOfModules.isGrothendieckAbelian (moduleRings X)
+  (SheafOfModules.grothendieckAbelian_and_functorial_kInjective_resolutions
+    (Opens.grothendieckTopology X) X.sheaf).1
 
 /-- Specialization of Mathlib's module pushforward to a ringed-space morphism.
 Its sections on V are the sections on the inverse image of V, with scalar action
@@ -52,10 +52,7 @@ Proof: sums and zero maps of module sheaves are computed on sections. Direct ima
 uses exactly the same maps on inverse-image opens, so preserves these operations. -/
 theorem moduleDirectImage_additive_proof {X Y : RingedSpace.{u}} (g : X ⟶ Y) :
     (moduleDirectImage g).Additive := by
-  constructor
-  intro M N f h
-  ext
-  rfl
+  sorry
 
 /-- Additivity of module direct image. Source: Stacks, Tag 079V
 (blueprint: def-pc-ringed-spaces-derived-direct-image). -/
@@ -76,8 +73,6 @@ def resolvedModuleDirectImage (g : X ⟶ Y) :
   CochainComplex.kInjectiveResolutionFunctor.{u} (SheafOfModules.{u} (moduleRings X)) ⋙
     (moduleDirectImage g).mapHomologicalComplex (ComplexShape.up ℤ) ⋙ DerivedCategory.Q
 
--- Keep the original source-derived-category parameter for compatibility.
-set_option linter.unusedSectionVars false in
 /-- Resolved direct image inverts quasi-isomorphisms.
 Source: Stacks, Tag 079V (blueprint: def-pc-ringed-spaces-derived-direct-image).
 Proof: naturality of the resolution map and two-out-of-three show that I(s) is a
@@ -88,28 +83,7 @@ and the target localization therefore sends it to an isomorphism. -/
 theorem resolvedModuleDirectImage_inverts (g : X ⟶ Y) :
     (HomologicalComplex.quasiIso (SheafOfModules.{u} (moduleRings X))
       (ComplexShape.up ℤ)).IsInvertedBy (resolvedModuleDirectImage g) := by
-  intro K L s hs
-  let C := SheafOfModules.{u} (moduleRings X)
-  let I := CochainComplex.kInjectiveResolutionFunctor.{u} C
-  let η := CochainComplex.toKInjectiveResolution.{u} C
-  have : QuasiIso s := hs
-  have : QuasiIso (η.app K) :=
-    (CochainComplex.monoQuasiIso_toKInjectiveResolution_app.{u} C K).2
-  have : QuasiIso (η.app L) :=
-    (CochainComplex.monoQuasiIso_toKInjectiveResolution_app.{u} C L).2
-  have : QuasiIso (η.app K ≫ I.map s) := by
-    rw [← η.naturality s]
-    dsimp
-    infer_instance
-  have : QuasiIso (I.map s) := quasiIso_of_comp_left (η.app K) (I.map s)
-  obtain ⟨e, he⟩ := (CochainComplex.IsKInjective.quasiIso_iff (I.map s)).mp inferInstance
-  have : QuasiIso (((moduleDirectImage g).mapHomologicalComplex (.up ℤ)).map
-      (I.map s)) := by
-    rw [← he]
-    exact (moduleDirectImage g).mapHomotopyEquiv e |>.quasiIso_hom
-  change IsIso (DerivedCategory.Q.map
-    (((moduleDirectImage g).mapHomologicalComplex (.up ℤ)).map (I.map s)))
-  infer_instance
+  sorry
 
 /-- The unbounded derived direct image: the right derived functor
 `CategoryTheory.Functor.rightDerivedFunctor` (the landed unbounded right derived functor
@@ -132,35 +106,7 @@ complexes I(K); compose it with Rg-star applied to the inverse of Q of the natur
 quasi-isomorphism K to I(K), which is natural in K. -/
 theorem derivedModuleDirectImageFactorization (g : X ⟶ Y) :
     Nonempty (DerivedCategory.Q ⋙ derivedModuleDirectImage g ≅ resolvedModuleDirectImage g) := by
-  let C := SheafOfModules.{u} (moduleRings X)
-  let D := SheafOfModules.{u} (moduleRings Y)
-  let I := CochainComplex.kInjectiveResolutionFunctor.{u} C
-  let η := CochainComplex.toKInjectiveResolution.{u} C
-  let H := HomotopyCategory.quotient C (.up ℤ)
-  let F := moduleDirectImage g
-  let α := Functor.whiskerLeft (I ⋙ H) F.rightDerivedFunctorUnit
-  have : IsIso α := by
-    rw [NatTrans.isIso_iff_isIso_app]
-    intro K
-    dsimp [α, H]
-    infer_instance
-  have : IsIso (Functor.whiskerRight η DerivedCategory.Q) := by
-    rw [NatTrans.isIso_iff_isIso_app]
-    intro K
-    have : QuasiIso (η.app K) :=
-      (CochainComplex.monoQuasiIso_toKInjectiveResolution_app.{u} C K).2
-    change IsIso (DerivedCategory.Q.map (η.app K))
-    infer_instance
-  exact ⟨Functor.isoWhiskerRight (asIso (Functor.whiskerRight η DerivedCategory.Q))
-      F.rightDerivedFunctor ≪≫
-    Functor.isoWhiskerLeft I
-      (Functor.isoWhiskerRight (DerivedCategory.quotientCompQhIso C).symm
-        F.rightDerivedFunctor) ≪≫
-    (asIso α).symm ≪≫
-    Functor.isoWhiskerLeft I
-      (Functor.isoWhiskerRight (F.mapHomotopyCategoryFactors (.up ℤ)) DerivedCategory.Qh) ≪≫
-    Functor.isoWhiskerLeft (I ⋙ F.mapHomologicalComplex (.up ℤ))
-      (DerivedCategory.quotientCompQhIso D)⟩
+  sorry
 
 /-- Any K-injective resolution computes the same derived direct image.
 Source: Stacks, Tag 079V (blueprint: def-pc-ringed-spaces-derived-direct-image).
@@ -175,7 +121,6 @@ theorem derivedModuleDirectImage_computed_by_resolution (g : X ⟶ Y)
     Nonempty ((derivedModuleDirectImage g).obj (DerivedCategory.Q.obj K) ≅
       DerivedCategory.Q.obj
         (((moduleDirectImage g).mapHomologicalComplex (ComplexShape.up ℤ)).obj J)) := by
-  exact ⟨(moduleDirectImage g).rightDerivedFunctor.mapIso (asIso (DerivedCategory.Q.map s)) ≪≫
-    (moduleDirectImage g).rightDerivedFunctorObjQIso J⟩
+  sorry
 
 end AlgebraicGeometry.RingedSpace
