@@ -7741,3 +7741,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 13:52 L: merged deliver/A2/Sheaf.Algebra.Homology.TotalFreeFiltrationQuotients (stage 3; reviewer PASS; first push; landing 20261012T135213-L-1653960 (interface); batch 20261012T135212; modules 4; new nodes 3)
 - 13:52 L: merged deliver/A2/Sheaf.AlgebraicGeometry.AffineAlgebraReductionsCartesian (stage 3; reviewer PASS; after a return; landing 20261012T135213-L-1654065 (proof); batch 20261012T135212; modules 1; new nodes 0)
 - 13:52 L: merged deliver/A2/Sheaf.AlgebraicGeometry.EtaleAffineSectionSameStageEquality (stage 3; reviewer PASS; first push; landing 20261012T135214-L-1654209 (interface); batch 20261012T135212; modules 2; new nodes 2)
+- 13:52 L: merged deliver/A2/Sheaf.AlgebraicGeometry.EtaleFibreProductCoproduct (stage 3; reviewer PASS; first push; landing 20261012T135214-L-1654449 (proof); batch 20261012T135212; modules 1; new nodes 0)

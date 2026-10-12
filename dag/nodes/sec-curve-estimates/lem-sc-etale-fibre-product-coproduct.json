@@ -25,51 +25,37 @@
  ],
  "proof": [
   {
-   "text": "Write $\\iota_i:U_i\\to V$ for the coprojections of [lem-weil-pbc-scheme-coproduct-family], and for $p\\ge0$ let $V^{p+1}=V\\times_X\\cdots\\times_XV$ and $U_J=U_{j_0}\\times_X\\cdots\\times_XU_{j_p}$ for $J=(j_0,\\ldots,j_p)\\in I^{p+1}$, the iterated fibre products [def-pc-fibre-product] being formed from the left, $V^{p+2}=V^{p+1}\\times_XV$ and $U_{(J,i)}=U_J\\times_XU_i$. Let $\\varphi_J:U_J\\to V^{p+1}$ be the morphism $\\iota_{j_0}\\times_X\\cdots\\times_X\\iota_{j_p}$, i.e. the unique morphism whose $r$-th projection is $\\iota_{j_r}$ composed with the $r$-th projection of $U_J$; it is a morphism over $X$ since $u\\circ\\iota_{j_r}=u_{j_r}$. By the universal property of the coproduct [lem-weil-pbc-scheme-coproduct-family] the $\\varphi_J$ glue to a unique morphism $\\varphi_p:\\coprod_{J\\in I^{p+1}}U_J\\to V^{p+1}$ over $X$ with $\\varphi_p$ restricted to the summand $J$ equal to $\\varphi_J$.",
+   "text": "Work in the category of schemes over X, whose finite products are the iterated fibre products [def-pc-fibre-product]. The scheme coproduct [lem-weil-pbc-scheme-coproduct-family] is also a coproduct in Over X because the forgetful functor creates and reflects colimits. Form the cofan with vertex the n-fold product of V and component at J the product lift of the maps pi_r followed by iota_(J r).",
    "uses": [
     "def-pc-fibre-product",
     "lem-weil-pbc-scheme-coproduct-family"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/schemes.tex",
-    "place": "Schemes, Section 26.17 (universal property of fibre products), with the coproduct of schemes of Tags 01JB and 01JC (lemma-glue, lemma-glue-schemes)"
-   }
+   "elementary": true
   },
   {
-   "text": "We prove by induction on $p\\ge0$ that $\\varphi_p$ is an isomorphism. For $p=0$, $\\varphi_0$ is the morphism $\\coprod_iU_i\\to V$ with $\\varphi_0\\circ\\iota_i=\\iota_i$ for every $i$, so $\\varphi_0=\\mathrm{id}_V$ by the uniqueness in [lem-weil-pbc-scheme-coproduct-family].",
+   "text": "The forgetful functor Over X to Scheme preserves pullbacks and finite coproducts and reflects isomorphisms. Mathlib finitaryExtensive_of_preserves_and_reflects_isomorphism therefore transfers the extensive structure of Scheme to Over X. Prove that the canonical cofan is a colimit by induction on n, including n=0: there is exactly one empty index tuple, and the empty products identify by their universal properties.",
    "uses": [
+    "def-pc-fibre-product",
     "lem-weil-pbc-scheme-coproduct-family"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/schemes.tex",
-    "place": "Schemes, Tags 01JB and 01JC (lemma-glue, lemma-glue-schemes): base of the induction"
-   }
+   "elementary": true
   },
   {
-   "text": "Inductive step: assume $\\varphi_p$ is an isomorphism. By [lem-sc-etale-fibre-product-base-change-coproduct] applied to the family $(U_i\\to X)_{i\\in I}$ and $T=V^{p+1}$, the morphism $\\alpha:\\coprod_{i\\in I}V^{p+1}\\times_XU_i\\to V^{p+1}\\times_XV=V^{p+2}$ which is $\\mathrm{id}\\times_X\\iota_i$ on the summand $i$ is an isomorphism. For each $i$, $\\varphi_p$ is an isomorphism over $X$ from the coproduct $\\coprod_JU_J$ (with its induced morphism to $X$) to $V^{p+1}$, so $\\varphi_p\\times_X\\mathrm{id}_{U_i}$ is an isomorphism (functoriality in [def-pc-fibre-product], applied to $\\varphi_p$ and its inverse); and [lem-sc-etale-fibre-product-base-change-coproduct] applied to the family $(U_J\\to X)_{J\\in I^{p+1}}$ and $T=U_i$, followed on both sides by the exchange of the two factors (an isomorphism by the uniqueness in [def-pc-fibre-product]), shows that the morphism $\\beta_i:\\coprod_JU_J\\times_XU_i\\to(\\coprod_JU_J)\\times_XU_i$ which is $\\iota_J\\times_X\\mathrm{id}_{U_i}$ on the summand $J$ is an isomorphism. Hence $\\alpha\\circ\\coprod_i((\\varphi_p\\times_X\\mathrm{id}_{U_i})\\circ\\beta_i)$ is an isomorphism from $\\coprod_i\\coprod_JU_{(J,i)}=\\coprod_{(J,i)\\in I^{p+2}}U_{(J,i)}$ (a coproduct of coproducts is the coproduct over the union of the index sets, by the universal property in [lem-weil-pbc-scheme-coproduct-family]) to $V^{p+2}$. On the summand $(J,i)$ it is $(\\varphi_J\\times_X\\mathrm{id}_{U_i})$ followed by $\\mathrm{id}\\times_X\\iota_i$, i.e. $\\varphi_J\\times_X\\iota_i=\\varphi_{(J,i)}$: both have the same projections to $V^{p+1}$ and to $V$, so they agree by the uniqueness in [def-pc-fibre-product]. By the uniqueness in [lem-weil-pbc-scheme-coproduct-family] this isomorphism is $\\varphi_{p+1}$, which completes the induction. So for every $p\\ge0$, $\\varphi_p$ is an isomorphism of schemes over $X$, the canonical isomorphism of the statement.",
+   "text": "For the successor, reindex tuples by their first coordinate and remaining coordinates using Fin.cons. Split each (n+1)-fold product into a binary product of its first factor and its n-fold tail; the limiting binary fan follows directly from product lifts and extensionality. Both the original coproduct and the tail cofan are universal finite coproducts by FinitaryPreExtensive.isUniversal_finiteCoproducts. Apply IsUniversalColimit.nonempty_isColimit_prod_of_isPullback to these two cofans, interpreting binary products as pullbacks over the terminal object. This applies the base-change distribution [lem-sc-etale-fibre-product-base-change-coproduct] in both arguments and flattens the resulting coproduct. Its component equations are Pi.lift_pi and the Fin.cons equations. Reindexing back gives the desired colimit cofan.",
    "uses": [
     "lem-sc-etale-fibre-product-base-change-coproduct",
     "def-pc-fibre-product",
     "lem-weil-pbc-scheme-coproduct-family"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/schemes.tex",
-    "place": "Schemes, Tags 01JB and 01JC (lemma-glue, lemma-glue-schemes) and Section 26.17, applied inductively after base change"
-   }
+   "elementary": false
   },
   {
-   "text": "Let $\\pi:V^{p+1}\\to V^{p}$ be a projection omitting the $r$-th factor ($p\\ge1$), and $\\pi_J:U_J\\to U_{J'}$ the corresponding projection, $J'$ being $J$ with $j_r$ omitted. Then $\\pi\\circ\\varphi_J$ and $\\varphi_{J'}\\circ\\pi_J$ have the same projections to each remaining factor $V$, namely $\\iota_{j_s}$ composed with the $s$-th projection of $U_J$ ($s\\ne r$), so they are equal by the uniqueness in [def-pc-fibre-product]. Thus under the isomorphism $\\varphi_p$ of Step 3, $\\pi$ restricts on the summand $J$ to $\\pi_J$ followed by the coprojection of the summand $J'$.",
+   "text": "For n=p+1, compare this colimit cofan with the chosen coproduct using coconePointUniqueUpToIso. The colimit comparison equations followed by the product projections give exactly the component identities. For each omitted-factor projection, apply Pi.hom_ext; after composing with a remaining coordinate, rewrite both sides by the component identities and Pi.lift_pi. This proves all omitted-factor compatibility equations.",
    "uses": [
-    "def-pc-fibre-product"
+    "def-pc-fibre-product",
+    "lem-weil-pbc-scheme-coproduct-family"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/schemes.tex",
-    "place": "Schemes, Section 26.17, universal property of fibre products"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
@@ -80,7 +66,7 @@
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/schemes.tex",
-  "place": "Schemes, Lemmas Tags 01JB and 01JC (lemma-glue and lemma-glue-schemes), together with Section 26.17"
+  "place": "Tags 01JB and 01JC and Section 26.17; implemented by A2 using Mathlib universal finite coproducts in Over X, induction from zero factors, and colimit/product uniqueness"
  },
  "mathlib_searches": [
   {
@@ -160,5 +146,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A2",
+  "result": "pass",
+  "landing": "20261012T135214-L-1654449",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
