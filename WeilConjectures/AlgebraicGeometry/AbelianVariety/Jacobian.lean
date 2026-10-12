@@ -68,7 +68,15 @@ fibrewise degree zero in `Pic (C_T)` to the point of `J` that `φ` attaches to i
 product of invertible modules into the group law of `J` (`AlgebraicGeometry.IsPicardZeroMul`).
 
 Representability is stated as the existence of `φ` rather than as a chosen isomorphism, so that
-`IsJacobian` is a `Prop`; the data of `φ` is recovered by choice. -/
+`IsJacobian` is a `Prop`; the data of `φ` is recovered by choice.
+
+The hypotheses on `f` are those of a geometrically integral smooth proper curve; a smooth
+projective curve in the sense of `AlgebraicGeometry.IsSmoothProjectiveCurve` satisfies them,
+since it is a connected curve (`AlgebraicGeometry.IsIntegralCurve.isConnectedCurve`) and proper
+(`AlgebraicGeometry.IsHProjective.isProper`). The genus is `f.genus = dim_K Γ(C, Ω¹_{C/K})`,
+which agrees with `dim_K H¹(C, 𝒪_C)` (`AlgebraicGeometry.Scheme.genus_eq_arithmeticGenus`).
+
+(blueprint: `def-sc-jacobian`) -/
 class IsJacobian (f : C ⟶ Spec (.of K)) [IsCurve f] [Smooth f] [IsProper f]
     [GeometricallyIntegral f] (J : Over (Spec (.of K))) [GrpObj J] : Prop
     extends IsAbelianVariety J where

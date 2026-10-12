@@ -13,6 +13,7 @@ public import WeilConjectures.Algebra.Homology.TotalComplexRowResolution
 public import WeilConjectures.CategoryTheory.Sites.CechSheaf
 public import WeilConjectures.CategoryTheory.Sites.SheafCohomology.InjectiveResolution
 public import WeilConjectures.Mathlib.Algebra.Homology.TotalComplex
+public import WeilConjectures.Mathlib.Algebra.Homology.SpectralSequence.Basic
 
 /-!
 # The Čech-to-derived spectral sequence
@@ -31,24 +32,26 @@ restriction of `P` to `Over X`.
 
 ## Main statements
 
-- `CategoryTheory.Sheaf.exists_cechDoubleComplex`: the double complex `C^p(𝔘, I^q)` attached to
-  an injective resolution `F → I^•`, through its column cohomology and the cohomology of its
-  total complex.
 - `CategoryTheory.Sheaf.exists_cechToDerivedSpectralSequence`: the Čech-to-derived spectral
-  sequence of a covering, as the first spectral sequence
-  `HomologicalComplex₂.exists_spectralSequence` of that double complex.
+  sequence of a covering.
+- `CategoryTheory.Sheaf.exists_cechDoubleComplex`: when abelian sheaves have enough injectives,
+  the double complex `C^p(𝔘, I^q)` attached to an injective resolution `F → I^•`, through its
+  column cohomology and the cohomology of its total complex.
 
 ## Implementation notes
 
-The proof through the double complex `C^p(𝔘, I^q)` needs an injective resolution of `F`, and
-the groups `I^q(V)` are only `v`-small. The statements are therefore made under
-`EnoughInjectives (Sheaf J AddCommGrpCat.{v})`, for coverings indexed by `ι : Type v` and with
-cohomology computed in `AddCommGrpCat.{v}`.
+The general statement `exists_cechToDerivedSpectralSequence` allows a large site, a covering
+indexed by `ι : Type w` and cohomology computed in `AddCommGrpCat.{w}`. The proof through the
+double complex `C^p(𝔘, I^q)` needs an injective resolution of `F`, and the groups `I^q(V)` are
+only `v`-small, so it is carried out under `EnoughInjectives (Sheaf J AddCommGrpCat.{v})` with
+`w = v`; the resulting spectral sequence is
+`CategoryTheory.Sheaf.exists_cechToDerivedSpectralSequence_of_enoughInjectives`, in
+`WeilConjectures.CategoryTheory.Sites.CechSpectralSequence`.
 -/
 
 @[expose] public section
 
-universe v u
+universe w v u
 
 namespace CategoryTheory
 
@@ -58,6 +61,26 @@ attribute [local instance] Over.ConstructProducts.over_finiteProducts_of_finiteW
 
 variable {C : Type u} [Category.{v} C] {J : GrothendieckTopology C} [HasFiniteWidePullbacks C]
   [HasSheafify J AddCommGrpCat.{v}]
+
+/-- **The Čech-to-derived spectral sequence.** Let `C` be a site with fibre products, `X : C` and
+`𝔘 = {π i : U i ⟶ X}` a family of morphisms generating a covering sieve of `X`. For an abelian
+sheaf `F` on `C` there is a first quadrant cohomological spectral sequence with
+`E₂^{p, q} ≅ Ȟ^p(𝔘, ℋ^q(F))` abutting to `H^{p + q}(X, F)`, where `ℋ^q(F)` is the presheaf
+`V ↦ H^q(V, F)`.
+
+The `E₂`-term is the `p`-th cohomology of the Čech complex of the family `fun i ↦ Over.mk (π i)`
+of objects of `Over X` with coefficients in the restriction of `ℋ^q(F)` to `Over X`.
+
+(blueprint: `sk-thm-picard-cech`, `lem-sc-cech-spectral`) -/
+theorem Sheaf.exists_cechToDerivedSpectralSequence [HasExt.{w} (Sheaf J AddCommGrpCat.{v})]
+    (F : Sheaf J AddCommGrpCat.{v}) (X : C)
+    {ι : Type w} {U : ι → C} (π : ∀ i, U i ⟶ X) (hπ : Sieve.ofArrows U π ∈ J X) :
+    ∃ E : E₂CohomologicalSpectralSequenceNat AddCommGrpCat.{w},
+      (∀ p q : ℕ, Nonempty ((E.page 2).X (p, q) ≅
+        ((cechComplexFunctor fun i ↦ Over.mk (π i)).obj
+          ((Over.forget X).op ⋙ F.cohomologyPresheaf q)).homology p)) ∧
+      E.AbutsTo fun n ↦ F.H' n X :=
+  sorry
 
 /-- **The Čech double complex of a covering.** Let `𝔘 = {π i : U i ⟶ X}` generate a covering
 sieve of `X` and let `F` be an abelian sheaf, on a site whose abelian sheaves have enough
@@ -129,33 +152,5 @@ theorem Sheaf.exists_cechDoubleComplex [HasExt.{v} (Sheaf J AddCommGrpCat.{v})]
   have := HomologicalComplex₂.quasiIso_toTotalOfAugmentation (hε := hε) h₀ h₁ hrow
   exact (isoOfQuasiIsoAt (D.toTotalOfAugmentation ε hε) n).symm ≪≫
     Sheaf.cohomologyPresheafIsoApp R n (op X)
-
-/-- **The Čech-to-derived spectral sequence.** Let `C` be a site with fibre products, `X : C` and
-`𝔘 = {π i : U i ⟶ X}` a family of morphisms generating a covering sieve of `X`. For an abelian
-sheaf `F` on `C` there is a first quadrant cohomological spectral sequence with
-`E₂^{p, q} ≅ Ȟ^p(𝔘, ℋ^q(F))` abutting to `H^{p + q}(X, F)`, where `ℋ^q(F)` is the presheaf
-`V ↦ H^q(V, F)`.
-
-The `E₂`-term is the `p`-th cohomology of the Čech complex of the family `fun i ↦ Over.mk (π i)`
-of objects of `Over X` with coefficients in the restriction of `ℋ^q(F)` to `Over X`. It is the
-first spectral sequence of the double complex `Sheaf.exists_cechDoubleComplex`, which is why
-abelian sheaves on `C` are assumed to have enough injectives, the covering is indexed by
-`ι : Type v` and the cohomology is computed in `AddCommGrpCat.{v}`.
-
-(blueprint: `sk-thm-picard-cech`, `lem-sc-cech-spectral`) -/
-theorem Sheaf.exists_cechToDerivedSpectralSequence
-    [HasExt.{v} (Sheaf J AddCommGrpCat.{v})] [EnoughInjectives (Sheaf J AddCommGrpCat.{v})]
-    (F : Sheaf J AddCommGrpCat.{v}) (X : C)
-    {ι : Type v} {U : ι → C} (π : ∀ i, U i ⟶ X) (hπ : Sieve.ofArrows U π ∈ J X) :
-    ∃ E : E₂CohomologicalSpectralSequenceNat AddCommGrpCat.{v},
-      (∀ p q : ℕ, Nonempty ((E.page 2).X (p, q) ≅
-        ((cechComplexFunctor fun i ↦ Over.mk (π i)).obj
-          ((Over.forget X).op ⋙ F.cohomologyPresheaf q)).homology p)) ∧
-      E.AbutsTo fun n ↦ F.H' n X := by
-  obtain ⟨D, hcol, htot⟩ := F.exists_cechDoubleComplex X π hπ
-  obtain ⟨E, hE₂, hE⟩ := D.exists_spectralSequence
-  refine ⟨E, fun p q ↦ ?_, hE.of_iso fun n ↦ (htot n).some⟩
-  obtain ⟨e⟩ := hE₂ p q
-  exact ⟨e ≪≫ (HomologicalComplex.homologyFunctor _ _ p).mapIso (hcol q).some⟩
 
 end CategoryTheory
