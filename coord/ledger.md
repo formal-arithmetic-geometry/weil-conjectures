@@ -8521,3 +8521,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 16:15 L: merged deliver/M1/Sheaf.AlgebraicGeometry.FieldComplexHomotopyNormalForm (stage 3; reviewer PASS; first push; landing 20261012T161502-L-2648183 (proof); batch 20261012T161459; modules 1; new nodes 0)
 - 16:15 L: merged deliver/M1/Sheaf.AlgebraicGeometry.FormalFunctionsDegreeZeroStalkIso (stage 3; reviewer PASS; first push; landing 20261012T161502-L-2648282 (proof); batch 20261012T161459; modules 1; new nodes 0)
 - 16:15 L: merged deliver/M2/Sheaf.AlgebraicGeometry.ProperFibreIdempotentDescent (stage 3; reviewer PASS; first push; landing 20261012T161502-L-2648385 (proof); batch 20261012T161459; modules 1; new nodes 0)
+- 16:15 L: merged deliver/N1/Sheaf.AlgebraicGeometry.AmpleProjOpen (stage 3; reviewer PASS; first push; landing 20261012T161503-L-2648491 (proof); batch 20261012T161459; modules 1; new nodes 0)

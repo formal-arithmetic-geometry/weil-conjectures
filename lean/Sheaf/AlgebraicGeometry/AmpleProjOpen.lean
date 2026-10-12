@@ -8,6 +8,7 @@ module
 public import Sheaf.AlgebraicGeometry.Ample
 public import Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Scheme
 public import Mathlib.AlgebraicGeometry.OpenImmersion
+import Mathlib.AlgebraicGeometry.Morphisms.OpenImmersion
 import Sheaf.AlgebraicGeometry.AmpleFiniteAffineCover
 import Sheaf.AlgebraicGeometry.AmpleProjLocalChart
 
@@ -44,6 +45,36 @@ theorem exists_isOpenImmersion_proj_of_isAmple (X : Scheme.{u}) (L : X.Modules)
     [L.IsInvertible] (hL : Scheme.Modules.IsAmple X L) :
     ∃ (S : Type u) (_ : CommRing S) (𝒮 : ℕ → AddSubgroup S) (_ : GradedRing 𝒮)
       (f : X ⟶ Proj 𝒮), IsOpenImmersion f := by
-  sorry
+  classical
+  open Scheme.Modules in
+  obtain ⟨m, n, s, U, hn, hU, hnonvanishing, hcover⟩ :=
+    Scheme.Modules.IsAmple.exists_finite_affine_cover X L hL
+  let t (i : Fin m) : Scheme.Modules.sectionRingGrade L (n i) :=
+    ⟨DirectSum.of (Scheme.Modules.SectionRingComponent L) (n i) (s i), ⟨s i, rfl⟩⟩
+  have ht (i : Fin m) : (t i).val (n i) = s i := DirectSum.of_eq_same _ _
+  have hUeq (i : Fin m) : (U i : Set X) =
+      Scheme.Modules.nonvanishingLocus (L.tensorPow (n i)) ((t i).val (n i)) := by
+    rw [ht]
+    exact Set.ext (hnonvanishing i)
+  obtain ⟨f, hf⟩ := Scheme.Modules.exists_sectionRing_proj_affine_charts X L (by
+    intro x
+    obtain ⟨i, hi⟩ := hcover x
+    exact ⟨n i, t i, hn i, hUeq i ▸ hi⟩)
+  refine ⟨Scheme.Modules.InvertibleSectionRing L, inferInstance,
+    Scheme.Modules.sectionRingGrade L, inferInstance, f, ?_⟩
+  let V (i : Fin m) := Proj.basicOpen (Scheme.Modules.sectionRingGrade L) (t i).val
+  have hV (i : Fin m) : IsIso (f ∣_ V i) :=
+    (hf (n i) (hn i) (t i)).2.2 hL (U i) (hUeq i) (hU i)
+  apply IsZariskiLocalAtTarget.of_range_subset_iSup V
+  · rintro y ⟨x, rfl⟩
+    obtain ⟨i, hi⟩ := hcover x
+    have hxi : x ∈ f ⁻¹ᵁ V i := by
+      change x ∈ (f ⁻¹ᵁ V i : Set X)
+      rw [(hf (n i) (hn i) (t i)).1]
+      exact hUeq i ▸ hi
+    exact (le_iSup V i) hxi
+  · intro i
+    let := hV i
+    infer_instance
 
 end AlgebraicGeometry

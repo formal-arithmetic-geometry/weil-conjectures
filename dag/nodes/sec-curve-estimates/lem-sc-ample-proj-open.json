@@ -28,7 +28,7 @@
  ],
  "proof": [
   {
-   "text": "Form the nonnegatively graded section ring $S=\\bigoplus_{n\\ge0}\\Gamma(X,\\mathcal L^{\\otimes n})$. By [lem-sc-ample-finite-affine-cover] choose finitely many positive-degree homogeneous sections $s_i$ with affine principal opens $X_{s_i}$ covering $X$; hence the cover hypothesis of [lem-sc-ample-proj-local-chart] holds, and that node provides the canonical morphism $f:X\\to\\operatorname{Proj}(S)$.",
+   "text": "Form the explicit section ring S = InvertibleSectionRing L with grading sectionRingGrade L. Apply [lem-sc-ample-finite-affine-cover] to obtain positive powers n_i, global sections s_i, and affine opens U_i covering X with U_i = X_{s_i}. Embed each s_i into degree n_i by DirectSum.of; evaluation in that degree is s_i (DirectSum.of_eq_same). These homogeneous sections verify the cover hypothesis of [lem-sc-ample-proj-local-chart], which provides f : X -> Proj(S).",
    "uses": [
     "lem-sc-ample-finite-affine-cover",
     "lem-sc-ample-proj-local-chart"
@@ -40,7 +40,7 @@
    }
   },
   {
-   "text": "For each $i$, [lem-sc-ample-proj-local-chart] gives $f^{-1}(D_+(s_i))=X_{s_i}$ and, because $X_{s_i}$ is affine, identifies $X_{s_i}\\to D_+(s_i)$ as an isomorphism. Thus the image of $f$ is the union of the open standard charts $D_+(s_i)$, and $f$ is an isomorphism over each of them.",
+   "text": "Put V_i = D_+(s_i). By [lem-sc-ample-proj-local-chart], f^{-1}(V_i) = X_{s_i} = U_i, and ampleness together with the affineness of U_i gives IsIso (f restricted to V_i). The inverse-image identities and the cover of X show that the image of f is contained in the union of the V_i.",
    "uses": [
     "lem-sc-ample-proj-local-chart"
    ],
@@ -51,7 +51,7 @@
    }
   },
   {
-   "text": "The local isomorphisms in step 2 agree on overlaps because they are restrictions of the single canonical morphism $f$. They therefore identify $X$ with the open subscheme $\\bigcup_iD_+(s_i)\\subseteq\\operatorname{Proj}(S)$, so $f$ is an open immersion.",
+   "text": "Apply Mathlib AlgebraicGeometry.IsZariskiLocalAtTarget.of_range_subset_iSup with P = IsOpenImmersion and target opens V_i. The preceding step supplies the image containment and an isomorphism over every V_i; each isomorphism is an open immersion. This proves f is an open immersion, including when the finite index set is empty. Return S, its explicit commutative ring instance, its grading and graded-ring instance, and f as the required existential witnesses.",
    "uses": [],
    "elementary": true,
    "source": {
@@ -67,7 +67,7 @@
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/properties.tex",
-  "place": "Properties Proposition 01Q3 (1) => (2), via Lemma 01Q1"
+  "place": "Properties Proposition 01Q3 (1) => (2), via Lemma 01Q1; Lean gluing by Mathlib IsZariskiLocalAtTarget.of_range_subset_iSup"
  },
  "mathlib_searches": [
   {
@@ -146,5 +146,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N1",
+  "result": "pass",
+  "landing": "20261012T161503-L-2648491",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
