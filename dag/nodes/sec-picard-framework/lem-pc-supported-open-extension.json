@@ -1,0 +1,167 @@
+{
+ "id": "lem-pc-supported-open-extension",
+ "kind": "statement",
+ "title": "Extension of a supported perfect object from an affine open",
+ "statement": "Let $X$ be a quasi-separated scheme [def-weil-pbc-scheme-conventions], and $j:V\\hookrightarrow X$ an affine open. Choose derived module categories [def-pc-derived-category] in one Hom universe on $X$, its localized open sites, $V$, and its localized open sites. Let $S\\subseteq X$ be closed and contained in $V$. For every perfect quasi-coherent $B\\in D(\\mathcal O_V)$ [def-pc-perfect-complex] with all cohomology stalks outside $S$ zero, there exists a perfect quasi-coherent $A\\in D(\\mathcal O_X)$ with all cohomology stalks outside $S$ zero, such that for every $C\\in D(\\mathcal O_X)$ and integer $n$, $\\operatorname{Hom}(A[n],C)\\cong\\operatorname{Hom}(B[n],C|_V)$ as types. Here $C|_V$ is exact over-site restriction followed by the canonical module equivalence [def-pc-derived-open-restriction-maps]. The proof constructs $A$ by exact extension by zero; no detection property is asserted.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/08DF",
+  "place": "Lemma 20.33.6 (2), together with Tags 08DP, 08D5, 00A7 (3)-(4) and the supported Koszul construction of Tag 0A9A"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-pc-derived-category",
+  "def-pc-perfect-complex",
+  "def-pc-derived-open-restriction-maps"
+ ],
+ "proof": [
+  {
+   "text": "Let E be the actual extension-by-zero presheaf followed by module sheafification on the localized site of V, and e the over equivalence. Construct L=e.inverse followed by E. Exactness and the adjunction E ⊣ restriction come from lem-sc-derived-open-restriction-adjunction-exact. Compose with the equivalence adjunction. Apply the proved source-library mapDerivedCategoryRightDerivedAdjunction and rightDerivedFunctorIsoMapDerivedCategory to obtain D(L) ⊣ D(restriction). The isomorphism E followed by restriction to identity from lem-pc-open-extension-restriction-iso, composed with e.counitIso, gives L followed by scheme restriction isomorphic to identity. Derive this isomorphism using mapDerivedCategoryCompIso, mapDerivedCategoryNatIso and mapDerivedCategoryIdIso. Hence the derived left adjoint is fully faithful and its unit is invertible.",
+   "uses": [
+    "lem-sc-derived-open-restriction-adjunction-exact",
+    "lem-pc-open-extension-restriction-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://stacks.math.columbia.edu/tag/08DF",
+    "place": "Lemma 20.33.6 (2), together with Tags 08DP, 08D5, 00A7 (3)-(4) and the supported Koszul construction of Tag 0A9A"
+   }
+  },
+  {
+   "text": "The usual restriction/direct-image adjunction of module sheaves, transported through overFunctorEquiv, gives the right derived adjunction D(restriction) ⊣ Rj_*. Transpose the inverse of the unit of D(L) ⊣ D(restriction) to obtain phi:D(L)(B)→Rj_*B. Its adjunct composed with that unit is identity, so the canonical comparison clause of lem-pc-supported-open-pushforward makes phi invertible. The perfection clause makes Rj_*B perfect. The affine inclusion is quasi-compact because its source is compact and its target is quasi-separated, and it is separated as an open immersion. Apply lem-pc-derived-direct-image-preserves-qcoh. Transport quasi-coherence degreewise and local strictly perfect representatives across phi to A=D(L)(B). The data of A is this explicit exact construction, rather than a witness chosen from an unproved mere existence result.",
+   "uses": [
+    "lem-pc-supported-open-pushforward",
+    "lem-pc-derived-direct-image-preserves-qcoh"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://stacks.math.columbia.edu/tag/08DF",
+    "place": "Lemma 20.33.6 (2), together with Tags 08DP, 08D5, 00A7 (3)-(4) and the supported Koszul construction of Tag 0A9A"
+   }
+  },
+  {
+   "text": "Exact L commutes with homology, so H^n(A) is isomorphic to L(H^n(B)). At a point inside V, use the previously constructed L followed by restriction isomorphism, overFunctorEquiv and restrictStalkNatIso to identify this stalk with the stalk of H^n(B). Outside S it is zero by the hypothesis. At a point outside V, apply lem-sc-module-extension-by-zero-stalk-maps-outside to the inverse-over-equivalence of H^n(B). Thus A is supported on S. This covers empty V and empty S without selecting points.",
+   "uses": [
+    "lem-sc-module-extension-by-zero-stalk-maps-outside"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://stacks.math.columbia.edu/tag/08DF",
+    "place": "Lemma 20.33.6 (2), together with Tags 08DP, 08D5, 00A7 (3)-(4) and the supported Koszul construction of Tag 0A9A"
+   }
+  },
+  {
+   "text": "The canonical commShiftIso for D(L) identifies A[n] with D(L)(B[n]). Compose its Hom-congruence equivalence with the derived adjunction homEquiv at B[n] and arbitrary C. This proves the Hom formula without imposing support or quasi-coherence on C.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://stacks.math.columbia.edu/tag/08DF",
+    "place": "Lemma 20.33.6 (2), together with Tags 08DP, 08D5, 00A7 (3)-(4) and the supported Koszul construction of Tag 0A9A"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-derived-direct-image-preserves-qcoh",
+  "lem-pc-open-extension-restriction-iso",
+  "lem-pc-supported-open-pushforward",
+  "lem-sc-derived-open-restriction-adjunction-exact",
+  "lem-sc-module-extension-by-zero-stalk-maps-outside"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "https://stacks.math.columbia.edu/tag/08DF",
+  "place": "Lemma 20.33.6 (2), together with Tags 08DP, 08D5, 00A7 (3)-(4) and the supported Koszul construction of Tag 0A9A"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "extension by zero perfect complex supported closed subset derived open immersion adjunction",
+   "results": "Service unavailable: Internal Server Error.",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "extension by zero of perfect complex supported on closed subset open immersion derived adjunction",
+   "results": "Found Scheme.Modules.restrictAdjunction, restrictFunctorAdjCounitIso and other underived restriction facts, not the supported perfect extension with derived Hom formula.",
+   "date": "2026-10-13",
+   "verdict": "no exact match; use the underived adjunction as an ingredient"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction",
+   "results": "Found Equivalence.toAdjunction, Adjunction.mkOfHomEquiv and basic adjunction definitions.",
+   "date": "2026-10-13",
+   "verdict": "generic ingredients, no supported extension theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "supported.*extension|extension.*supported|extension.*perfect in Mathlib and lean/Sheaf/AlgebraicGeometry and lean/WeilConjectures/AlgebraicGeometry",
+   "results": "Existing SupportedOpenPushforward gives perfection and canonical comparison for supplied adjunctions; OpenRestrictionAdjunctionExact gives the exact underived left adjoint; neither states this constructed extension and its Hom formula. Mathlib Modules.Sheaf supplies restrictAdjunction and overFunctorEquiv.",
+   "date": "2026-10-13",
+   "verdict": "no exact match; assemble the existing declarations"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.SupportedKoszulRelativeDetector",
+  "date": "2026-10-13",
+  "group": "J2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "supported perfect generator argument: extend the supported Koszul complex from the affine complement and transfer Hom vanishing by extension-by-zero adjunction",
+   "via": [
+    "lem-pc-supported-koszul-relative-detector",
+    "lem-pc-supported-koszul-unit-summand",
+    "lem-pc-supported-perfect-detector-gluing",
+    "lem-pc-supported-perfect-generator",
+    "lem-sc-right-adjoint-open-support-criterion"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.SupportedOpenExtension",
+  "file": "lean/Sheaf/AlgebraicGeometry/SupportedOpenExtension.lean",
+  "declaration": "AlgebraicGeometry.supported_open_extension",
+  "statement": "theorem supported_open_extension (X : Scheme.{u}) [QuasiSeparatedSpace X] [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))] [∀ U : X.Opens, HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))] (V : X.affineOpens) [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings (V : X.Opens).toScheme.toRingedSpace))] [∀ U : (V : X.Opens).toScheme.Opens, HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings (V : X.Opens).toScheme.toRingedSpace).over U))] (S : Set X) (hS : IsClosed S) (hSV : S ⊆ (V : X.Opens)) (B : schemeDerivedQCohCategory (V : X.Opens).toScheme) (hB : Scheme.IsPerfect (V : X.Opens).toScheme B.obj) (hsB : ∀ (n : ℤ) (x : (V : X.Opens).toScheme), x.val ∉ S → Subsingleton (↑(TopCat.Presheaf.stalk ((DerivedCategory.homologyFunctor (SheafOfModules.{u} (moduleRings (V : X.Opens).toScheme.toRingedSpace)) n).obj B.obj).val.presheaf x))) : ∃ A : schemeDerivedQCohCategory X, Scheme.IsPerfect X A.obj ∧ (∀ (n : ℤ) (x : X), x ∉ S → Subsingleton (↑(TopCat.Presheaf.stalk ((DerivedCategory.homologyFunctor (SheafOfModules.{u} (moduleRings X.toRingedSpace)) n).obj A.obj).val.presheaf x))) ∧ ∀ (C : schemeDerivedCategory X) (n : ℤ), Nonempty ((A.obj⟦n⟧ ⟶ C) ≃ (B.obj⟦n⟧ ⟶ (schemeOpenRestriction X (V : X.Opens)).mapDerivedCategory.obj C))",
+  "branch": "sheaf-dag",
+  "by": "J2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J2",
+  "result": "pass",
+  "landing": "20261012T184310-L-4006981",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J2",
+  "result": "pass",
+  "landing": "20261012T184310-L-4006981",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

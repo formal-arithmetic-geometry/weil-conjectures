@@ -33,44 +33,66 @@
  },
  "proof": [
   {
-   "text": "Put S=T intersect (X minus U). It is closed in X and contained in V by the cover. Its complement in V is (U intersect V) union (V minus T), which is quasi-compact by quasi-separatedness and the two compactness assumptions. Apply the affine supported detector on the scheme V, with the singleton affine cover, to obtain B perfect, quasi-coherent, supported on S, detecting all supported objects on V.",
+   "text": "Set S=T intersect (X minus U). It is closed and contained in V by the cover. For the inverse image S' on Y=V.toScheme, the image of its complement is (T-complement intersect V) union (U intersect V). Both intersections are compact by quasi-separatedness and the given compactness hypotheses, so S' has compact complement in Y. Transport the chosen derived localization on the over-site of V through Modules.overEquiv: the standard derived category on Y is w-locally-small by its faithful derived equivalence with the chosen over-site category, and hasLocalizationOfLocallySmall gives the required localization. Then lem-pc-derived-open-localization-universe supplies localizations on every open of Y. Y is affine, compact and quasi-separated.",
    "uses": [
-    "lem-pc-supported-perfect-detector-affine"
+    "lem-pc-derived-open-localization-universe"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "https://stacks.math.columbia.edu/tag/0A9A",
+    "place": "Lemma 36.15.4, affine detection and supported Koszul construction in the induction step; transport and stalk computations written out in Lean"
+   }
   },
   {
-   "text": "Take its exact extension by zero along V into X. Supported open pushforward identifies it with derived direct image and makes it perfect and supported on S. The affine inclusion is quasi-compact and separated, so derived direct image preserves quasi-coherent cohomology. The support disjoint from U makes restriction to U zero.",
+   "text": "Use the singleton affine cover {top} of Y and lem-pc-supported-perfect-detector-affine with S' to obtain B perfect, quasi-coherent and detecting S'-supported objects. Apply lem-pc-supported-open-extension to B and the globally closed S contained in V. This gives A perfect, quasi-coherent, supported on S, and Hom(A[n],C) equivalent to Hom(B[n],C|V). Since S is contained in T, A is supported on T; since U is disjoint from S, lem-pc-supported-derived-restriction-zero makes A|U zero.",
    "uses": [
-    "lem-pc-supported-open-pushforward",
-    "lem-sc-derived-open-restriction-adjunction-exact",
-    "lem-pc-derived-direct-image-preserves-qcoh",
+    "lem-pc-supported-perfect-detector-affine",
+    "lem-pc-supported-open-extension",
     "lem-pc-supported-derived-restriction-zero"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "https://stacks.math.columbia.edu/tag/0A9A",
+    "place": "Lemma 36.15.4, affine detection and supported Koszul construction in the induction step; transport and stalk computations written out in Lean"
+   }
   },
   {
-   "text": "For C supported on T and zero on U, its restriction to V has support in S: stalks off T are zero by hypothesis, and stalks on U are zero by exactness of restriction and homology. Extension-by-zero derived adjunction transfers orthogonality to A to orthogonality to B on V. The affine detector makes C restricted to V zero. The given vanishing on U and derived isomorphism detection on the cover U,V, applied to C to zero, show that C is zero globally.",
+   "text": "Given C as in the theorem, lem-pc-derived-open-restriction-qcoh-iff and isQuasicoherent_over make C|V quasi-coherent. Exactness gives H^n(C|V)=H^n(C)|V and restrictStalkNatIso identifies its stalk with the original stalk. Off T it is zero by hypothesis. At a point of T outside S', the point belongs to U; homology of the zero restriction C|U is zero, and the same stalk comparison makes the original stalk zero. Thus C|V is supported on S'. The Hom equivalence of the extension transfers every orthogonality hypothesis to B, and the affine detector makes C|V zero.",
    "uses": [
-    "lem-sc-derived-open-restriction-adjunction-exact",
+    "lem-pc-derived-open-restriction-qcoh-iff",
     "lem-pc-supported-perfect-detector-affine",
+    "lem-pc-supported-open-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://stacks.math.columbia.edu/tag/0A9A",
+    "place": "Lemma 36.15.4, affine detection and supported Koszul construction in the induction step; transport and stalk computations written out in Lean"
+   }
+  },
+  {
+   "text": "The derived over equivalence is faithful, so the vanishing on the scheme V implies vanishing in its localized over-site category. Apply lem-pc-derived-restriction-isIso-open-cover to the zero endomorphism of C. Its restrictions to U and V are maps between zero objects, hence invertible. Therefore the zero endomorphism of C is invertible; its inverse identity implies id_C=0, which is exactly IsZero C. Empty opens, empty T, and total U are included throughout; no nonemptiness assumption is introduced.",
+   "uses": [
     "lem-pc-derived-restriction-isIso-open-cover"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "https://stacks.math.columbia.edu/tag/0A9A",
+    "place": "Lemma 36.15.4, affine detection and supported Koszul construction in the induction step; transport and stalk computations written out in Lean"
+   }
   }
  ],
  "proof_deps": [
-  "lem-pc-derived-direct-image-preserves-qcoh",
+  "lem-pc-derived-open-localization-universe",
+  "lem-pc-derived-open-restriction-qcoh-iff",
   "lem-pc-derived-restriction-isIso-open-cover",
   "lem-pc-supported-derived-restriction-zero",
-  "lem-pc-supported-open-pushforward",
-  "lem-pc-supported-perfect-detector-affine",
-  "lem-sc-derived-open-restriction-adjunction-exact"
+  "lem-pc-supported-open-extension",
+  "lem-pc-supported-perfect-detector-affine"
  ],
  "proof_origin": {
   "by": "document",
-  "document": "literature/stacks-project/perfect.tex",
-  "place": "Tag 0A9A: affine detection and supported Koszul construction on the affine complement"
+  "document": "https://stacks.math.columbia.edu/tag/0A9A",
+  "place": "Lemma 36.15.4, affine detection and supported Koszul construction in the induction step; transport and stalk computations written out in Lean"
  },
  "blueprint": {
   "is": null,
@@ -127,9 +149,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "H3",
+  "group": "J2",
   "result": "pass",
-  "landing": "20261012T165515-L-2934038",
+  "landing": "20261012T184310-L-4006981",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
