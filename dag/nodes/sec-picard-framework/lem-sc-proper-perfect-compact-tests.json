@@ -16,44 +16,38 @@
  ],
  "proof": [
   {
-   "text": "Use functorial K-injective resolutions to choose the small-Hom derived models on the schemes and every open, and transport between arbitrary given localizations through their localization equivalences. These equivalences commute with the localization functors on complexes, hence with homology, derived restriction and derived direct image by their universal properties. They preserve coproducts and Hom groups, so compactness, quasi-coherence and isomorphism detection transport. No arbitrary object is selected for a definition.",
+   "text": "Choose the small compact representative family G on X; every compact P admits an isomorphism P ≅ G_s.",
    "uses": [
-    "lem-pc-derived-category-locally-small",
-    "prop-pur-kinjective-resolutions-exist"
+    "lem-sc-derived-qcoh-compact-representatives"
    ],
    "elementary": false
   },
   {
-   "text": "In the small-Hom models choose the u-small perfect representatives from lem-pc-perfect-complexes-compact-set. This includes representatives of all shifts since shifts of strictly perfect local representatives remain strictly perfect. Noetherian schemes are qcqs. Perfect-object compactness gives compactness of each representative. The stalkwise finite-Tor and proper hypotheses give perfection of its direct image; perfect compactness on Y and the specified eR give compactness of its R-image.",
+   "text": "Each G_s is compact and its R-image is compact by proper perfect preservation of compactness, applied with f, hTor, R, and eR.",
    "uses": [
-    "lem-pc-perfect-complexes-compact-set",
-    "lem-pc-proper-perfect-direct-image-perfect",
-    "lem-pc-perfect-object-compact"
+    "lem-sc-proper-perfect-preserves-compact"
    ],
    "elementary": false
   },
   {
-   "text": "If Hom(G_s,g) is bijective for all s, it is bijective from every perfect object and shift. Complete g to an ambient distinguished triangle. Its cone is quasi-coherent by the cohomology long exact sequence. Exactness and the Hom bijections force every Hom from shifted perfect objects to the cone to vanish. The class of objects all of whose shifts are orthogonal to the cone is closed under shifts, cones, retracts, isomorphisms and arbitrary coproducts. Perfect generation makes it the whole quasi-coherent derived category. Apply it to the cone itself: its identity is zero, hence the cone is zero and g is an isomorphism. Transfer the family through the localization equivalence to finish.",
+   "text": "Given bijections Hom(G_s,g), take any compact P and a representative isomorphism e:P ≅ G_s. For injectivity precompose an equality with e.inv and use injectivity for G_s, then cancel e.inv. For surjectivity lift e.inv composed with the requested map using surjectivity for G_s and precompose the lift with e.hom. The inverse identities show this maps to the requested map. Thus Hom(P,g) is bijective for every compact P; compact detection makes g invertible.",
    "uses": [
-    "lem-pc-derived-qcoh-perfect-generation"
+    "lem-sc-derived-qcoh-compact-detection"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-pc-derived-category-locally-small",
-  "lem-pc-derived-qcoh-perfect-generation",
-  "lem-pc-perfect-complexes-compact-set",
-  "lem-pc-perfect-object-compact",
-  "lem-pc-proper-perfect-direct-image-perfect",
-  "prop-pur-kinjective-resolutions-exist"
+  "lem-sc-derived-qcoh-compact-detection",
+  "lem-sc-derived-qcoh-compact-representatives",
+  "lem-sc-proper-perfect-preserves-compact"
  ],
  "proof_origin": {
   "by": "agent",
-  "agent": "N2",
-  "document": "literature/stacks-project/duality.tex",
-  "place": "Tag 0A9R, perfect direct-image input and perfect-generation detection; Tags 0B6G, 09M1, 09IS",
-  "note": "Extracted from Tag 0A9R; model transport and the indexing-universe argument are written out by N2."
+  "agent": "R1",
+  "document": "https://stacks.math.columbia.edu/tag/0A9R",
+  "place": "first paragraph and compact-generation detection",
+  "note": "Reduction to three independent subarguments, using compact = perfect (09M1), with explicit representative-isomorphism Hom transport in Lean."
  },
  "mathlib_searches": [
   {
@@ -124,9 +118,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "N2",
+  "group": "R1",
   "result": "pass",
-  "landing": "20261012T184324-L-4012113",
+  "landing": "20261012T225326-L-1811926",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

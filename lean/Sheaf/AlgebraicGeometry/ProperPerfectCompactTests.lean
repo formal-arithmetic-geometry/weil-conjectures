@@ -7,12 +7,10 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
 public import Mathlib.CategoryTheory.Monoidal.Tor
-import Sheaf.AlgebraicGeometry.DerivedQCohPerfectGeneration
-import Sheaf.AlgebraicGeometry.PerfectObjectCompact
-import Sheaf.AlgebraicGeometry.ProperPerfectDirectImagePerfect
-import Sheaf.AlgebraicGeometry.PerfectComplexRepresentatives
-import Sheaf.CategoryTheory.RingedSiteKInjectiveResolutions
-import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasDerivedCategory
+
+import Sheaf.AlgebraicGeometry.DerivedQCohCompactRepresentatives
+import Sheaf.AlgebraicGeometry.ProperPerfectPreservesCompact
+import Sheaf.AlgebraicGeometry.DerivedQCohCompactDetection
 
 @[expose] public section
 
@@ -65,6 +63,23 @@ theorem properPerfect_compactTests
       (∀ s, IsCompactObject (G s) ∧ IsCompactObject (R.obj (G s))) ∧
       ∀ (A B : schemeDerivedQCohCategory X) (g : A ⟶ B),
         (∀ s, Function.Bijective (fun a : G s ⟶ A ↦ a ≫ g)) → IsIso g := by
-  sorry
+  obtain ⟨S, G, hcompact, hrep⟩ := derivedQCoh_compact_representatives X
+  refine ⟨S, G, fun s ↦ ⟨hcompact s,
+    properPerfect_preserves_compact f hTor R eR (G s) (hcompact s)⟩, ?_⟩
+  intro A B g hg
+  apply derivedQCoh_compact_detection X A B g
+  intro P hP
+  obtain ⟨s, ⟨e⟩⟩ := hrep P hP
+  constructor
+  · intro a b hab
+    apply (cancel_epi e.inv).mp
+    apply (hg s).injective
+    simpa only [Category.assoc] using congrArg (fun k ↦ e.inv ≫ k) hab
+  · intro b
+    obtain ⟨a, ha⟩ := (hg s).surjective (e.inv ≫ b)
+    refine ⟨e.hom ≫ a, ?_⟩
+    change (e.hom ≫ a) ≫ g = b
+    change a ≫ g = e.inv ≫ b at ha
+    rw [Category.assoc, ha, ← Category.assoc, e.hom_inv_id, Category.id_comp]
 
 end AlgebraicGeometry

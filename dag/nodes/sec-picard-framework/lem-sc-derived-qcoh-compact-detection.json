@@ -1,0 +1,129 @@
+{
+ "id": "lem-sc-derived-qcoh-compact-detection",
+ "kind": "statement",
+ "title": "Compact objects detect quasi-coherent derived isomorphisms",
+ "statement": "Let $X$ be a Noetherian scheme [def-pc-scheme] and choose any derived category [def-pc-derived-category], with its universe-$u$ coproducts [lem-pc-derived-qcoh-direct-sums]. For any morphism $g:A\\to B$ of $D_{QCoh}(X)$, if $Hom(P,g):Hom(P,A)\\to Hom(P,B)$ is bijective for every compact object $P$ [def-pc-compact-object], then $g$ is an isomorphism.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/09IS",
+  "place": "Tag 09IS (perfect-theorem-bondal-van-den-Bergh); compactness Tag 09M1; detection step of Tag 0A9R"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "lem-pc-derived-qcoh-direct-sums",
+  "def-pc-compact-object"
+ ],
+ "proof": [
+  {
+   "text": "Choose small-Hom models on X and its opens using K-injective resolutions. Localization equivalences preserve quasi-coherence, compactness, Hom sets, and isomorphisms. Work in these models; Noetherian X is qcqs.",
+   "uses": [
+    "prop-pur-kinjective-resolutions-exist",
+    "lem-pc-derived-category-locally-small"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Complete g to a distinguished triangle A -> B -> C -> A[1]. Its cone has quasi-coherent cohomology by exactness. Every shift of a perfect object is perfect and compact. Hom bijections from these shifts and the long exact Hom sequence give Hom(P[n],C)=0 for all perfect P and integers n.",
+   "uses": [
+    "lem-pc-perfect-object-compact"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The objects Q satisfying Hom(Q[n],C)=0 for every n form a class closed under isomorphisms, shifts, cones by exactness, retracts, and coproducts by the universal property. Perfect generation identifies this class with all of D_QCoh(X). Hence the identity of C vanishes and C is zero. Exactness gives bijectivity of Hom(T,g) for every T, and Yoneda makes g invertible. Transfer back. This also covers the empty scheme.",
+   "uses": [
+    "lem-pc-derived-qcoh-perfect-generation"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-derived-category-locally-small",
+  "lem-pc-derived-qcoh-perfect-generation",
+  "lem-pc-perfect-object-compact",
+  "prop-pur-kinjective-resolutions-exist"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "agent": "R1",
+  "document": "https://stacks.math.columbia.edu/tag/09IS",
+  "place": "Tag 09IS (perfect-theorem-bondal-van-den-Bergh); compactness Tag 09M1; detection step of Tag 0A9R",
+  "note": "Source argument with explicit localization transport to the arbitrary given derived models."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Isomorphisms detected by Hom bijections from all compact objects in a compactly generated derived category",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Isomorphism detection by all compact objects in a compactly generated triangulated category",
+   "results": "CategoryTheory.Triangulated.TStructure.le_isClosedUnderIsomorphisms, CategoryTheory.Triangulated.TStructure.ge_isClosedUnderIsomorphisms, CategoryTheory.Triangulated.TStructure.isGE_of_iso, CategoryTheory.Triangulated.Subcategory.W_of_isIso, CategoryTheory.Functor.essImageDistTriang_mem_of_iso, CategoryTheory.Triangulated.TStructure.isLE_of_iso, CategoryTheory.ObjectProperty.trW_of_isIso, CategoryTheory.Functor.instIsClosedUnderIsomorphismsHomologicalKernel",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "compact.*detect|detect.*compact|isIso_of_yoneda_map_bijective",
+   "results": "Mathlib/CategoryTheory/Triangulated/Adjunction.lean, Mathlib/CategoryTheory/Triangulated/Pretriangulated.lean, Mathlib/CategoryTheory/Triangulated/Pretriangulated.lean, Mathlib/CategoryTheory/Yoneda.lean, Mathlib/CategoryTheory/Yoneda.lean",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ProperPerfectCompactTests",
+  "date": "2026-10-13",
+  "group": "R1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "right adjoint commutes with direct sums: Proper perfect pushforward has compact isomorphism tests",
+   "via": [
+    "lem-sc-proper-perfect-compact-tests",
+    "lem-sc-smooth-proper-tensor-direct-sums",
+    "lem-sc-smooth-proper-diagonal-tensor-formula"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.DerivedQCohCompactDetection",
+  "file": "lean/Sheaf/AlgebraicGeometry/DerivedQCohCompactDetection.lean",
+  "declaration": "AlgebraicGeometry.derivedQCoh_compact_detection",
+  "statement": "theorem derivedQCoh_compact_detection (X : Scheme.{u}) [IsNoetherian X]\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))] :\n    let _ : HasCoproducts.{u} (schemeDerivedQCohCategory X) := derivedQCohDirectSums X\n    ∀ (A B : schemeDerivedQCohCategory X) (g : A ⟶ B),\n      (∀ P : schemeDerivedQCohCategory X, IsCompactObject P →\n        Function.Bijective (fun a : P ⟶ A ↦ a ≫ g)) → IsIso g",
+  "branch": "sheaf-dag",
+  "by": "R1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R1",
+  "result": "pass",
+  "landing": "20261012T225326-L-1811926",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R1",
+  "result": "pass",
+  "landing": "20261012T225326-L-1811926",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
