@@ -6027,3 +6027,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 04:24 L: merged deliver/W2/Sheaf.RingTheory.HenselianLocalRootLifting (stage 3; reviewer PASS; first push; landing 20261012T042425-L-1823769 (proof); batch 20261012T042402; modules 1; new nodes 0)
 - 04:24 L: merged deliver/W2/WeilConjectures.SixFunctors.Etale.SmoothBaseChange.DegreeZero (stage 3; reviewer PASS; first push; landing 20261012T042426-L-1823918 (interface); batch 20261012T042402; modules 3; new nodes 4)
 - 04:24 L: merged deliver/X2/Sheaf.CategoryTheory.Abelian.ExactFunctorHigherDerivedVanishing (stage 3; reviewer PASS; first push; landing 20261012T042426-L-1824018 (proof); batch 20261012T042402; modules 1; new nodes 0)
+- 04:24 L: merged deliver/X2/WeilConjectures.SixFunctors.Etale.SmoothBaseChange.FailureOverField.Survival (stage 3; reviewer PASS; first push; landing 20261012T042426-L-1824132 (interface); batch 20261012T042402; modules 4; new nodes 3)

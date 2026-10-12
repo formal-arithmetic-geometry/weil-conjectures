@@ -1,0 +1,121 @@
+{
+ "id": "lem-sbc-target-transition-comp",
+ "kind": "statement",
+ "title": "Composition of target transitions",
+ "statement": "Let $\\Lambda$ be a commutative ring and let $q\\in\\mathbf Z$. Let $e:Y\\to T$, $h:Y\\to X$, $\\pi_2:T_2\\to T$, $a_2:Y_2\\to Y$, $e_2:Y_2\\to T_2$, $h_2:Y_2\\to X$, $\\pi_1:T_1\\to T_2$, $a_1:Y_1\\to Y_2$, $e_1:Y_1\\to T_1$, and $h_1:Y_1\\to X$ be morphisms of schemes [def-weil-pbc-scheme-conventions] such that $e a_2=\\pi_2e_2$, $h a_2=h_2$, $e_2a_1=\\pi_1e_1$, and $h_2a_1=h_1$. For any etale sheaf $F$ of $\\Lambda$-modules on $T$ [def-weil-pbc-etale-sheaves], let $t_2$ and $t_1$ be the canonical restriction transitions on the degree-$q$ targets $R^qh_*e^{-1}F$ of [sbc-def-base-change-map], for $\\pi_2$ and $\\pi_1$, respectively. Then $t_1t_2$, followed by the target functor applied to the canonical identification $\\pi_1^{-1}\\pi_2^{-1}F\\cong(\\pi_2\\pi_1)^{-1}F$, equals the target transition for $\\pi_2\\pi_1$ covered by $a_2a_1$. No cartesianness is required.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-smooth-base-change/sk-lem-failure-field/sbc-lem-bc-failure-field.md",
+  "place": "Proof, condition (1): thickenings; transition compatibility made explicit"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-etale-sheaves",
+  "sbc-def-base-change-map"
+ ],
+ "proof": [
+  {
+   "text": "Expand each lower-direct-image transition as the mate of the pullback composition comparison for its commutative triangle. Apply clause (1) of [lem-weil-pbc-mate-pasting] with identity functors on the common base X: the composite of the two mates is the mate of the pasted comparison. This law applies to arbitrary natural-transformation squares, so no cartesianness is required.",
+   "uses": [
+    "lem-weil-pbc-mate-pasting"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The associativity of the inverse-image composition comparisons [lem-weil-pbc-derived-inverse-image-composition] identifies the pasted comparison with the comparison for a2 composed with a1. Naturality of the comparisons with the single-complex identification cancels the intermediate pi2-pullback coefficient identification. The remaining identification is exactly the inverse of upperStarComp for pi1, pi2 applied to F. Apply degree-q homology, which preserves composition.",
+   "uses": [
+    "lem-weil-pbc-derived-inverse-image-composition"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-derived-inverse-image-composition",
+  "lem-weil-pbc-mate-pasting"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-smooth-base-change/sk-lem-failure-field/sbc-lem-bc-failure-field.md",
+  "place": "Proof, condition (1): thickenings; transition compatibility made explicit"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "composition of base change target transitions and invariance of higher direct image under a thickening",
+   "results": "HTTP Internal Server Error; service unavailable",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "canonical derived direct image transition maps compose and are isomorphisms along a closed immersion surjective on points",
+   "results": "Eight scheme gluing / immersion lemmas, including Scheme.IsLocallyDirected.homOfLE_tAux_assoc and IsClosedImmersion.lift_fac_assoc; none states a derived transition comparison.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "lowerStarPlusTransition|baseChangeSourceTransition|baseChangeTargetTransition",
+   "results": "0 Mathlib hits; local source search found transition definitions and the proved compatibility with the base-change map, but no composition or thickening-isomorphism statement.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "WeilConjectures.SixFunctors.Etale.SmoothBaseChange.FailureOverField.Survival",
+  "date": "2026-10-12",
+  "group": "X2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-lem-bc-failure-field",
+   "place": "Proof, condition (1): thickenings",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-lem-failure-field",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.BaseChangeTargetTransitionComp",
+  "file": "lean/Sheaf/AlgebraicGeometry/BaseChangeTargetTransitionComp.lean",
+  "declaration": "AlgebraicGeometry.Etale.baseChangeTargetTransition_comp",
+  "statement": "theorem Etale.baseChangeTargetTransition_comp {X T Y T₁ T₂ Y₁ Y₂ : Scheme.{u}} (e : Y ⟶ T) (h : Y ⟶ X) (q : ℤ) (π₂ : T₂ ⟶ T) (a₂ : Y₂ ⟶ Y) (e₂ : Y₂ ⟶ T₂) (h₂ : Y₂ ⟶ X) (wa₂ : a₂ ≫ e = e₂ ≫ π₂) (wh₂ : a₂ ≫ h = h₂) (π₁ : T₁ ⟶ T₂) (a₁ : Y₁ ⟶ Y₂) (e₁ : Y₁ ⟶ T₁) (h₁ : Y₁ ⟶ X) (wa₁ : a₁ ≫ e₂ = e₁ ≫ π₁) (wh₁ : a₁ ≫ h₂ = h₁) (F : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ)) : Etale.baseChangeTargetTransition Λ e h q π₂ a₂ e₂ h₂ wa₂ wh₂ F ≫ Etale.baseChangeTargetTransition Λ e₂ h₂ q π₁ a₁ e₁ h₁ wa₁ wh₁ (((π₂)^*[ModuleCat.{u + 1} Λ]).obj F) ≫ (Etale.baseChangeTargetFunctor Λ e₁ h₁ q).map ((Etale.upperStarComp (ModuleCat.{u + 1} Λ) π₁ π₂ (π₁ ≫ π₂) rfl).inv.app F) = Etale.baseChangeTargetTransition Λ e h q (π₁ ≫ π₂) (a₁ ≫ a₂) e₁ h₁ (by rw [Category.assoc, wa₂, ← Category.assoc, wa₁, Category.assoc]) (by rw [Category.assoc, wh₂, wh₁]) F",
+  "branch": "sheaf-dag",
+  "by": "X2",
+  "date": "2026-10-12",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X2",
+  "result": "pass",
+  "landing": "20261012T042426-L-1824132",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X2",
+  "result": "pass",
+  "landing": "20261012T042426-L-1824132",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
