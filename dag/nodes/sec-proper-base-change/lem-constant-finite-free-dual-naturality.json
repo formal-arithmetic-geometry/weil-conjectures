@@ -12,21 +12,31 @@
  },
  "proof": [
   {
-   "text": "Identify finite free modules with finite biproducts of copies of Λ. The monoidal constant sheaf functor preserves these finite biproducts and sends Λ to the monoidal unit. The tensor-Hom adjunction and unit constraints identify the internal Hom dual with the constant sheaf on the coefficient dual.",
+   "text": "Construct the coordinate exact pairing of M = Λ^n and its linear dual: coevaluation sends 1 to the sum of basis vectors tensor their coordinate functionals, and evaluation is contraction. Prove both triangle identities by TensorProduct.ext' and the identity sum_j ξ_j(q) m_j = q. These are the contractLeft_zig and contractLeft_zag calculations of WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Monoidal.Closed, specialized to the explicitly constructed coordinate basis, not to a chosen witness. The empty basis n=0 satisfies the same identities.",
    "uses": [],
    "elementary": false
   },
   {
-   "text": "Evaluate both composites on each finite basis vector. Linearity shows that precomposition by g has coordinates given by g.dualMap, so the square commutes; the empty finite products give the n=0 and m=0 cases.",
+   "text": "Equip the constant-presheaf functor with componentwise identity monoidal comparisons, and compose with monoidal sheafification. Swap the coefficient pairing using BraidedCategory.exactPairing_swap and transport it by the proved ExactPairing.map. Its evaluation is the sheafified coefficient evaluation followed by the inverse unit comparison. MonoidalClosed.isIso_curry_evaluation proves its curry is invertible, giving the desired comparison isomorphism in the reverse direction. All invoked categorical results are already proved in Mathlib or WeilConjectures; no Sheaf statement dependency is introduced.",
    "uses": [],
    "elementary": false
+  },
+  {
+   "text": "For every coefficient module map g, evaluate the two coefficient composites on x tensor φ. Both give φ(g(x)); TensorProduct.ext' proves equality. After sheafification, tensorator naturality and curry_natural_left/curry_pre_app give naturality of the curried comparison. This calculation is valid for arbitrary modules and specializes to every finite matrix, including maps to or from the zero module.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "Choose e_n as the inverse of the explicit curried comparison. Cancel its invertible forward map, rewrite by the proved comparison naturality square, and cancel the comparison at m. This is the required dualMap square with the original signature.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [],
  "proof_origin": {
   "by": "worker",
-  "document": "lean/WeilConjectures/ConstructibleSheaf/Monoidal.lean",
-  "place": "finite free transpose and constant sheaf argument"
+  "document": "lean/WeilConjectures/ConstructibleSheaf/Monoidal.lean; lean/WeilConjectures/Mathlib/Algebra/Category/ModuleCat/Monoidal/Closed.lean; lean/WeilConjectures/Mathlib/CategoryTheory/Monoidal/Rigid/OfEquivalence.lean; lean/WeilConjectures/Mathlib/CategoryTheory/Monoidal/Rigid/Basic.lean",
+  "place": "finite free transpose step; contractLeft_zig/zag dual-basis calculations; ExactPairing.map; MonoidalClosed.isIso_curry_evaluation"
  },
  "mathlib_searches": [
   {
@@ -93,11 +103,11 @@
  "reviewed_proof": {
   "date": "2026-10-12",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "Y2",
+  "reviewer": "X-93926",
+  "group": "C1",
   "result": "pass",
-  "landing": "20261012T154837-L-2474939",
+  "landing": "20261012T194103-L-452241",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent Codex review: Delivered module, node, report, and direct importer match the review requirements; all compile cleanly and axioms are allowed."
  }
 }
