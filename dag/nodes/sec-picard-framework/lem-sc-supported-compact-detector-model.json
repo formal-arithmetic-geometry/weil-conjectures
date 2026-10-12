@@ -26,12 +26,13 @@
    }
   },
   {
-   "text": "Ambient coproducts have coproduct cohomology. Stalks of sheaf coproducts are direct sums of the input stalks, hence zero on V, including empty sums. The ambient quasi-coherent property is closed under these coproducts by schemeDerivedQCohClosedUnderCoproducts; the theorem on direct sums supplies the agreed coproduct structure in D_QCoh. Thus P is closed under universe-u coproducts and its inclusion creates them.",
+   "text": "The proved private helper supported_closed_coproducts first uses schemeDerivedQCohClosedUnderCoproducts for quasi-coherence. For stalk vanishing, choose complex representatives using the localization functor object-preimage operation. Apply derivedAmbientDirectSums to identify each homology sheaf of their derived coproduct with the coproduct of the input homology sheaves, and transport to the supplied colimit presentation. Applying the stalk functor transports that isomorphism. exists_stalk_directSum_linearEquiv identifies the stalk of the sheaf sum with the direct sum of the input stalks. Each input is subsingleton by the support hypotheses, so that direct sum and hence the output stalk are subsingleton. This applies also to the empty family. The full-subcategory inclusion creates coproducts; derivedAmbientHasCoproducts supplies the ambient coproducts.",
    "uses": [
     "lem-pc-derived-ambient-direct-sums",
     "lem-pc-stalk-direct-sums",
     "lem-pc-derived-qcoh-direct-sums",
-    "lem-pc-derived-qcoh-closed-coproducts"
+    "lem-pc-derived-qcoh-closed-coproducts",
+    "lem-pc-derived-ambient-has-coproducts"
    ],
    "elementary": false,
    "source": {
@@ -40,9 +41,10 @@
    }
   },
   {
-   "text": "K-injective resolutions identify each derived Hom set with homotopy classes of chain maps into a K-injective representative. Chain maps between universe-u module sheaves form a universe-u-small set; quotients preserve smallness. Hence the supported category is locally u-small. The proved source-library instance DerivedCategory.locallySmall in WeilConjectures.CategoryTheory.GrothendieckAbelian.HasDerivedCategory supplies this conclusion after installing the module-sheaf Grothendieck structure and K-injective resolutions.",
+   "text": "Install the proved source-library SheafOfModules.isGrothendieckAbelian instance on the shared sheaf-of-modules carrier, then Abelian.hasKInjectiveResolutions_of_isGrothendieckAbelian. Apply the proved DerivedCategory.locallySmall instance from WeilConjectures.CategoryTheory.GrothendieckAbelian.HasDerivedCategory. Faithfulness of the supported full-subcategory inclusion gives LocallySmall at universe u. This does not need the ringed-site theorem with its extra generator and functorial-resolution conclusions.",
    "uses": [
-    "prop-pur-kinjective-resolutions-exist"
+    "lem-pc-scheme-modules-grothendieck-abelian",
+    "lem-pc-derived-category-locally-small"
    ],
    "elementary": false,
    "source": {
@@ -51,7 +53,7 @@
    }
   },
   {
-   "text": "Take ShrinkHoms of this full subcategory, keeping its objects and shrinking Hom sets to universe u. Transport zero, addition, shifts and distinguished triangles along the canonical equivalence using triangulatedEquivalenceTransfer. Equivalences preserve coproducts. Compose the inverse equivalence with the inclusion to obtain F, additive and exact and preserving universe-u coproducts. Each image is quasi-coherent.",
+   "text": "Take C = ShrinkHoms of the supported full subcategory and its canonical equivalence. triangulatedEquivalenceTransfer gives the zero object, preadditive structure, shifts, additive shifts and triangulated structures, together with exactness of the equivalence functor and inverse. Equivalence adjunction transports coproduct existence. Let F be the inverse followed by the ambient inclusion; inferred composition instances give its shift compatibility, exactness, additivity and preservation of coproducts. The quasi-coherent image property is the first component of the supported object property. The two specified objects give e and q with reflexive image isomorphisms.",
    "uses": [
     "lem-pc-triangulated-equivalence-transfer"
    ],
@@ -62,7 +64,7 @@
    }
   },
   {
-   "text": "The supported objects E and Q give e and q. Full faithfulness and agreement of coproducts identify the compactness comparison with that for E: on every direct-sum summand both send f to f composed with its coprojection. Thus e is compact. The singleton coproduct is e. For any nonzero model object K, shifted-Hom detection gives a nonzero map E[n] to F(K). Applying the inverse shift equivalence rewrites it as a map E to F(K)[-n]. Full faithfulness and the shift comparison give a nonzero map e to K[-n], proving singleton generation.",
+   "text": "Factor the supported inclusion through D_QCoh(Y). It is fully faithful and additive, and preserves coproducts because its composite with the fully faithful D_QCoh inclusion preserves them and that inclusion reflects them. The proved private helper compact_of_fully_faithful compares the two Hom direct-sum maps using additive Hom equivalences and sigmaComparison; equality is checked on each summand, and bijectivity transfers. Thus hcompact proves compactness of e. The proved private helper singleton_generator_of_detection uses hgen: a nonzero model object has nonzero image since F is faithful and additive, hence receives a nonzero map from E[n]. The shift-equivalence adjunction transports this to E -> F(K)[-n], preserving zero. The image isomorphism of e and the shift comparison produce a nonzero map F(e) -> F(K[-n]); fullness lifts it to the model, and preservation of zero proves its nonvanishing. Precompose with the unique-index coproduct isomorphism to obtain the required generator map.",
    "uses": [
     "def-pc-generators"
    ],
@@ -78,7 +80,9 @@
   "lem-pc-stalk-direct-sums",
   "lem-pc-derived-qcoh-direct-sums",
   "lem-pc-derived-qcoh-closed-coproducts",
-  "prop-pur-kinjective-resolutions-exist",
+  "lem-pc-derived-ambient-has-coproducts",
+  "lem-pc-scheme-modules-grothendieck-abelian",
+  "lem-pc-derived-category-locally-small",
   "lem-pc-triangulated-equivalence-transfer",
   "def-pc-generators"
  ],
@@ -164,10 +168,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "U1",
+  "group": "H3",
   "result": "pass",
-  "landing": "20261012T144150-L-2108828",
-  "kind": "interface",
+  "landing": "20261012T173832-L-3297521",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
