@@ -9,6 +9,15 @@ public import WeilConjectures.AlgebraicGeometry.Curve.Assertions
 public import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Defs
 
+import Sheaf.AlgebraicGeometry.EtaleCohomologyFilteredColimit
+import Sheaf.AlgebraicGeometry.EtaleSheafHExtDerivedComparison
+import Sheaf.AlgebraicGeometry.ZeroDimensionalPullbackGlobalSections
+import Sheaf.AlgebraicGeometry.ZeroDimensionalBaseChangePoints
+import Sheaf.AlgebraicGeometry.EtaleCohomologyPullbackDegreeZero
+import Sheaf.Paper.ZeroDimensionalCohomology
+import Mathlib.Algebra.Category.Grp.FilteredColimits
+import Mathlib.CategoryTheory.Limits.ConcreteCategory.Basic
+
 /-!
 # Reduction steps for the eight curve-cohomology assertions
 
@@ -83,7 +92,32 @@ theorem Scheme.H_map_isColimit_of_isFiltered (X : Scheme.{u}) [CompactSpace X]
       Sheaf.H.map (c.ι.app j) q y = x) ∧
     ∀ (j : J) (y : Sheaf.H (D.obj j) q), Sheaf.H.map (c.ι.app j) q y = 0 →
       ∃ (j' : J) (φ : j ⟶ j'), Sheaf.H.map (D.map φ) q y = 0 :=
-  sorry
+  by
+    let E := Sheaf.functorH.{u + 1} X.smallEtaleTopology q
+    let R := DerivedCategory.singleFunctor
+      (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) 0 ⋙
+        Etale.cohomology AddCommGrpCat.{u + 1} X (q : ℤ)
+    let e : E ≅ R := (Scheme.nonempty_sheafH_extDerivedIso X q).some
+    have hR : IsColimit (R.mapCocone c) :=
+      (Scheme.etaleCohomology_isColimit_of_isFiltered X hc q).some
+    have hE : IsColimit (E.mapCocone c) := by
+      exact IsColimit.mapCoconeEquiv e.symm hR
+    have : PreservesFilteredColimitsOfSize.{u, u} (CategoryTheory.forget AddCommGrpCat.{u + 1}) :=
+      preservesFilteredColimitsOfSize_shrink.{u, u + 1, u, u + 1}
+        (CategoryTheory.forget AddCommGrpCat.{u + 1})
+    constructor
+    · intro x
+      exact Concrete.isColimit_exists_rep (D ⋙ E) hE x
+    · intro j y hy
+      have hz : (E.mapCocone c).ι.app j y = (E.mapCocone c).ι.app j 0 := by
+        change Sheaf.H.map (c.ι.app j) q y = Sheaf.H.map (c.ι.app j) q 0
+        rw [(Sheaf.H.map (c.ι.app j) q).map_zero]
+        exact hy
+      obtain ⟨j', φ, ψ, hφ⟩ :=
+        Concrete.isColimit_exists_of_rep_eq (D ⋙ E) hE y 0 hz
+      refine ⟨j', φ, ?_⟩
+      change Sheaf.H.map (D.map φ) q y = Sheaf.H.map (D.map ψ) q 0 at hφ
+      rwa [(Sheaf.H.map (D.map ψ) q).map_zero] at hφ
 
 /-! ### Dévissage -/
 
@@ -104,6 +138,20 @@ theorem IsCurve.Assertions.of_shortExact [IsNoetherianRing Λ] {k : Type u} [Fie
   sorry
 
 /-! ### Dimension zero -/
+
+private theorem subsingleton_sheafH_of_dim_zero {k : Type u} [Field k] [IsAlgClosed k]
+    {C : Scheme.{u}} (f : C ⟶ Spec (.of k)) [IsSeparated f]
+    [LocallyOfFiniteType f] [QuasiCompact f] (hC : topologicalKrullDim C ≤ 0)
+    (F : Sheaf C.smallEtaleTopology AddCommGrpCat.{u + 1}) (q : ℕ) (hq : 0 < q) :
+    Subsingleton (Sheaf.H F q) := by
+  have h := (zero_dimensional_etale_cohomology k C f hC F
+    (fun x ↦ AlgebraicClosure (C.residueField x)) C.algClosurePoint
+    (fun x ↦ C.algClosurePoint_base x default)).2.1 q hq
+  let e := (Scheme.nonempty_sheafH_extDerivedIso C q).some.app F
+  constructor
+  intro x y
+  exact e.addCommGroupIsoToAddEquiv.injective (h.elim _ _)
+
 
 /-- **Field extension in dimension zero.** Let `k ⊆ k'` be algebraically closed fields, `C` a
 separated `k`-scheme of finite type of dimension at most zero, and `F` a torsion étale sheaf of
@@ -128,7 +176,62 @@ theorem IsCurve.bijective_cohomologyMap_of_topologicalKrullDim_le_zero {k k' : T
     [Scheme.IsTorsionSheaf F] (q : ℕ) :
     Function.Bijective (Etale.cohomologyMap ι'
       ((sheafCompose _ (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj F) q) :=
-  sorry
+  by
+    let A := (sheafCompose C.smallEtaleTopology
+      (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj F
+    cases q with
+    | zero =>
+      let A' := ((ι')^*[AddCommGrpCat.{u + 1}]).obj A
+      let e : Sheaf.H A 0 ≃+ (Sheaf.Γ C.smallEtaleTopology AddCommGrpCat.{u + 1}).obj A :=
+        (Sheaf.H.equiv₀ A terminalIsTerminal).trans
+          (((Sheaf.ΓNatIsoSheafSections _ _ terminalIsTerminal).symm.app A)
+            |>.addCommGroupIsoToAddEquiv)
+      let e' : Sheaf.H A' 0 ≃+
+          (Sheaf.Γ C'.smallEtaleTopology AddCommGrpCat.{u + 1}).obj A' :=
+        (Sheaf.H.equiv₀ A' terminalIsTerminal).trans
+          (((Sheaf.ΓNatIsoSheafSections _ _ terminalIsTerminal).symm.app A')
+            |>.addCommGroupIsoToAddEquiv)
+      have hΓ := Etale.bijective_globalSectionsUpperStarMap_of_dim_zero f hC h A
+      have he (x : Sheaf.H A 0) :
+          Etale.cohomologyMap ι' A 0 x =
+            e'.symm (Etale.globalSectionsUpperStarMap AddCommGrpCat.{u + 1} ι' A (e x)) := by
+        have hh := Etale.cohomologyMap_zero_eq_globalSectionsUpperStarMap ι' A (e x)
+        change Etale.cohomologyMap ι' A 0 (e.symm (e x)) =
+          e'.symm (Etale.globalSectionsUpperStarMap AddCommGrpCat.{u + 1} ι' A (e x)) at hh
+        simpa only [AddEquiv.symm_apply_apply] using hh
+      have hb := e'.symm.bijective.comp (hΓ.comp e.bijective)
+      have heq : Etale.cohomologyMap ι' A 0 =
+          e'.symm ∘ Etale.globalSectionsUpperStarMap AddCommGrpCat.{u + 1} ι' A ∘ e :=
+        funext he
+      change Function.Bijective (Etale.cohomologyMap ι' A 0)
+      rw [heq]
+      exact hb
+    | succ q =>
+      obtain ⟨a, rfl⟩ := Spec.map_surjective ι
+      let : Algebra k k' := a.hom.toAlgebra
+      let : C.Over (Spec (.of k)) := ⟨f⟩
+      have : IsSeparated (C ↘ Spec (.of k)) := by
+        change IsSeparated f
+        infer_instance
+      have : LocallyOfFiniteType (C ↘ Spec (.of k)) := by
+        change LocallyOfFiniteType f
+        infer_instance
+      have : QuasiCompact (C ↘ Spec (.of k)) := by
+        change QuasiCompact f
+        infer_instance
+      have hdim := (zeroDimensional_baseChange_points k k' C hC).2.2.2.2.1
+      change topologicalKrullDim (pullback f (Spec.map a) : Scheme.{u}) ≤ 0 at hdim
+      have hdim' : topologicalKrullDim C' ≤ 0 := by
+        rw [IsHomeomorph.topologicalKrullDim_eq h.isoPullback.hom
+          h.isoPullback.hom.homeomorph.isHomeomorph]
+        exact hdim
+      have : IsSeparated f' := MorphismProperty.of_isPullback h inferInstance
+      have : LocallyOfFiniteType f' := MorphismProperty.of_isPullback h inferInstance
+      have : QuasiCompact f' := MorphismProperty.of_isPullback h inferInstance
+      have := subsingleton_sheafH_of_dim_zero f hC A (q + 1) (Nat.zero_lt_succ q)
+      have := subsingleton_sheafH_of_dim_zero f' hdim'
+        (((ι')^*[AddCommGrpCat.{u + 1}]).obj A) (q + 1) (Nat.zero_lt_succ q)
+      exact ⟨fun _ _ _ ↦ Subsingleton.elim _ _, fun y ↦ ⟨0, Subsingleton.elim _ _⟩⟩
 
 /-! ### Reduction to constructible prime torsion -/
 

@@ -5740,3 +5740,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 00:04 L: merged deliver/R1/WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.ProjectiveLine.StrictHenselian (stage 3; reviewer PASS; after a return; landing 20261012T000248-L-482311 (interface); modules 3; new nodes 2)
 - 00:10 L: returned deliver/H1/Sheaf.Topology.NoetherianTopologicalCohomologyVanishing (reviewer RETURN: (reviewer X-d0295, head d02955d79) D4/H8 — In lean/Sheaf/Topology/NoetherianVanishingByIrreducibleComponents.lean lines )
 - 00:11 L: returned deliver/C1/WeilConjectures.AlgebraicGeometry.Cohomology.EulerChar (reviewer RETURN: (reviewer X-bb494, head bb4949ffe) D1/D2: DegreeEulerCharUnfolding.lean:19–24 moves the entire unresolved assertion into)
+- 00:13 L: merged deliver/G1/WeilConjectures.AlgebraicGeometry.Curve.Reductions (stage 3; reviewer PASS; first push; landing 20261012T001209-L-509996 (interface); modules 3; new nodes 2)

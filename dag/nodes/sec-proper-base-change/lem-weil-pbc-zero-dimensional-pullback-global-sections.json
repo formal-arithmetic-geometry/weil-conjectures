@@ -1,0 +1,131 @@
+{
+ "id": "lem-weil-pbc-zero-dimensional-pullback-global-sections",
+ "kind": "statement",
+ "title": "Pullback on global sections in dimension zero",
+ "statement": "Let k and k′ be algebraically closed fields, f:C → Spec k a separated finite-type scheme of topological dimension at most zero [def-weil-pbc-curve-setting], and let C′ → C, C′ → Spec k′, Spec k′ → Spec k be any cartesian square [def-pc-base-change]. For every abelian etale sheaf F on C [def-weil-pbc-abelian-etale-sheaves], the canonical global-sections pullback Γ(C,F) → Γ(C′,ι′⁻¹F), given by globalSectionsUpperStarMap [def-weil-pbc-finite-section-pullback], is bijective. Neither torsion nor reducedness is needed.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-p1/lem-weil-pbc-zero-dimensional-field-extension.md",
+  "place": "Proof steps 1 and 4 of the expanded DAG proof: the point bijection and compatibility of stalk germs. Stacks Tags 03Q1 and 0GJA."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-curve-setting",
+  "def-pc-base-change",
+  "def-weil-pbc-abelian-etale-sheaves",
+  "def-weil-pbc-inverse-image",
+  "def-weil-pbc-finite-section-pullback"
+ ],
+ "proof": [
+  {
+   "text": "The projection induces a bijection between the finite discrete point sets of C′ and C; each residue field on C is k. The base change is again separated and finite type, of dimension at most zero. For an arbitrary cartesian square identify it with the canonical pullback via its universal property.",
+   "uses": [
+    "lem-weil-pbc-zero-dimensional-base-change-points",
+    "lem-pod-separated-finite-type-base-change"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Choose an algebraically closed geometric point above each point of C′ and compose with the projection. Reindex along the point bijection to obtain a geometric point above every point of C. The canonical germ maps on C and C′ identify sections of F and ι′⁻¹F with products of their respective geometric stalks. This also applies to the empty scheme.",
+   "uses": [
+    "lem-weil-pbc-zero-dimensional-sections-stalks"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For each chosen point, the inverse-image stalk is canonically isomorphic to the original stalk. Its compatibility with the adjunction-unit germ shows that the sections pullback, under the two product identifications, is exactly the product of these isomorphisms reindexed along the bijection of points. Its inverse is the product of the inverse stalk maps with the inverse reindexing. Thus the specified globalSectionsUpperStarMap is bijective, not merely some abstract map between isomorphic groups.",
+   "uses": [
+    "lem-weil-pbc-inverse-image-stalk-germ"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pod-separated-finite-type-base-change",
+  "lem-weil-pbc-inverse-image-stalk-germ",
+  "lem-weil-pbc-zero-dimensional-base-change-points",
+  "lem-weil-pbc-zero-dimensional-sections-stalks"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-p1/lem-weil-pbc-zero-dimensional-field-extension.md",
+  "place": "Proof steps 1 and 4 of the expanded DAG proof: the point bijection and compatibility of stalk germs. Stacks Tags 03Q1 and 0GJA."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "etale global sections invariant under field extension",
+   "results": "UNAVAILABLE: HTTP Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": null
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Global sections of any etale abelian sheaf on a zero dimensional scheme invariant under algebraically closed field extension",
+   "results": "Only unrelated etale-ring and cotangent results.",
+   "date": "2026-10-12",
+   "verdict": "No match."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Etale.globalSectionsUpperStarMap",
+   "results": "Unknown identifier in Mathlib-only index.",
+   "date": "2026-10-12",
+   "verdict": "The functor is a source-library definition, not a Mathlib theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "globalSectionsUpperStarMap.*(dim|zero)|functorH.*rightDerived",
+   "results": "No match in Mathlib; source GlobalSections proves the isomorphism case only. Existing Sheaf.AlgebraicGeometry.EtaleSectionsBaseFieldExtension concerns set sheaves in a canonical pullback, not this abelian Γ map.",
+   "date": "2026-10-12",
+   "verdict": "The abelian-coefficient/interface comparison is needed; the existing general set-sheaf result is an alternative route, but does not apply directly."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "WeilConjectures.AlgebraicGeometry.Curve.Reductions",
+  "date": "2026-10-12",
+  "group": "G1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-zero-dimensional-field-extension",
+   "place": "Proof, degree-zero comparison: the map on sections is the product of the identity maps on the geometric stalks.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ZeroDimensionalPullbackGlobalSections",
+  "file": "lean/Sheaf/AlgebraicGeometry/ZeroDimensionalPullbackGlobalSections.lean",
+  "declaration": "AlgebraicGeometry.Etale.bijective_globalSectionsUpperStarMap_of_dim_zero",
+  "statement": "theorem bijective_globalSectionsUpperStarMap_of_dim_zero {k k' : Type u}\n    [Field k] [IsAlgClosed k] [Field k'] [IsAlgClosed k'] {C C' : Scheme.{u}}\n    (f : C ⟶ Spec (.of k)) [IsCurve f] (hC : topologicalKrullDim C ≤ 0)\n    {ι : Spec (.of k') ⟶ Spec (.of k)} {f' : C' ⟶ Spec (.of k')} {ι' : C' ⟶ C}\n    (h : IsPullback ι' f' f ι) (F : Sheaf C.smallEtaleTopology AddCommGrpCat.{u + 1}) :\n    Function.Bijective (globalSectionsUpperStarMap AddCommGrpCat.{u + 1} ι' F)",
+  "branch": "sheaf-dag",
+  "by": "G1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-efdeb",
+  "group": "G1",
+  "result": "pass",
+  "landing": "20261012T001209-L-509996",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-efdeb",
+  "group": "G1",
+  "result": "pass",
+  "landing": "20261012T001209-L-509996",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered files compile cleanly; proofs, new declarations, node metadata, imports, and report satisfy the stage-3 review requirements."
+ }
+}

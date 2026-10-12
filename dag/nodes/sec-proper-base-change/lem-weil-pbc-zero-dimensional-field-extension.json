@@ -19,74 +19,47 @@
  ],
  "proof": [
   {
-   "text": "*The base change.* Write $C'=C_{k'}=C\\times_{\\operatorname{Spec}k}\\operatorname{Spec}k'$, $\\pi:C'\\to C$ the projection and $F'=\\pi^{-1}F$, an abelian sheaf on $C'_{\\Et}$ [def-weil-pbc-extension-pullback]. Since $C\\to\\operatorname{Spec}k$ is separated and of finite type, so is its base change $C'\\to\\operatorname{Spec}k'$ [lem-pod-separated-finite-type-base-change]. By [lem-weil-pbc-zero-dimensional-base-change-points] ($k$ algebraically closed): $|C|$ is finite, every $c\\in|C|$ has $\\kappa(c)=k$, $\\dim C'\\le0$, and $\\pi$ induces a bijection $|C'|\\to|C|$. So $C'$ is a separated finite-type scheme of dimension $\\le0$ over the algebraically closed field $k'$, and both $(C,F)$ over $k$ and $(C',F')$ over $k'$ satisfy the hypotheses of [lem-weil-pbc-zero-dimensional-cohomology] and [lem-weil-pbc-zero-dimensional-sections-stalks] (which need no torsion hypothesis).",
+   "text": "For q=0, use bijectivity of the canonical global-sections pullback. Compose Sheaf.H.equiv₀ with ΓNatIsoSheafSections to identify H^0 with Γ on both schemes. cohomologyMap_zero_eq_globalSectionsUpperStarMap identifies the specified cohomology map with the conjugate of the sections map, hence makes it bijective.",
    "uses": [
-    "def-weil-pbc-extension-pullback",
-    "lem-pod-separated-finite-type-base-change",
-    "lem-weil-pbc-zero-dimensional-base-change-points",
+    "lem-weil-pbc-zero-dimensional-pullback-global-sections",
+    "lem-weil-pbc-cohomology-pullback-degree-zero"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For q>0 choose the algebraic-closure points C.algClosurePoint. zero_dimensional_etale_cohomology gives subsingleton derived cohomology; evaluate the natural Ext/derived isomorphism on F and use its injectivity to deduce subsingleton Sheaf.H.",
+   "uses": [
     "lem-weil-pbc-zero-dimensional-cohomology",
-    "lem-weil-pbc-zero-dimensional-sections-stalks"
+    "lem-weil-pbc-sheafH-ext-derived-comparison"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-p1/lem-weil-pbc-zero-dimensional-field-extension.md",
-    "place": "## Proof (its base change is $\\coprod_c\\operatorname{Spec}k'$); literature/stacks-project/etale-cohomology.tex proof of Lemma Tag 0GJA (lemma-restrict-to-open): a zero-dimensional $Z$ is a finite set of $k$-rational points"
-   }
+   "elementary": false
   },
   {
-   "text": "*Degrees $q>0$.* By [lem-weil-pbc-zero-dimensional-cohomology] applied to $(C,F)$ over $k$ and to $(C',F')$ over $k'$ (step 1), $H^q(C_{\\Et},F)=0$ and $H^q(C'_{\\Et},F')=0$ for $q>0$. A homomorphism between zero groups is an isomorphism, so $\\rho^q_{k'/k}(C,F)$ is an isomorphism for $q>0$.",
+   "text": "Write the bottom morphism as Spec.map a and give k′ the algebra structure induced by a. zeroDimensional_baseChange_points gives the dimension bound on the canonical pullback. Transfer it to C′ using h.isoPullback and invariance of topological Krull dimension under a homeomorphism. Separatedness, local finite type and quasi-compactness of f′ follow by stability under base change.",
    "uses": [
-    "lem-weil-pbc-zero-dimensional-cohomology"
+    "lem-weil-pbc-zero-dimensional-base-change-points",
+    "lem-pod-separated-finite-type-base-change"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-p1/lem-weil-pbc-zero-dimensional-field-extension.md",
-    "place": "## Proof, first sentence; literature/stacks-project/etale-cohomology.tex proof of Lemma Tag 0GJA ('we conclude that $H^q_\\etale(Z,i^*\\mathcal F)=0$ for $q>0$') and proof of Lemma Tag 0A5B, first paragraph"
-   }
+   "elementary": false
   },
   {
-   "text": "*Degree $0$ is the unit on global sections.* $\\rho^0_{k'/k}(C,F)$ is the pullback map $\\pi^*:H^0(C_{\\Et},F)\\to H^0(C'_{\\Et},\\pi^{-1}F)$ of [def-weil-pbc-cohomology-pullback] for $u=\\pi$, $G=F$ [def-weil-pbc-extension-pullback]. By [lem-weil-pbc-cohomology-pullback-degree-zero] (1) the maps $\\epsilon_{C,F}:F(C)\\to H^0(C_{\\Et},F)$ and $\\epsilon_{C',F'}:F'(C')\\to H^0(C'_{\\Et},F')$ are isomorphisms, and by its clause (2) $\\pi^*\\circ\\epsilon_{C,F}=\\epsilon_{C',F'}\\circ\\eta_{\\pi,F}(C)$, where $\\eta_{\\pi,F}(C):F(C)\\to(\\pi_*\\pi^{-1}F)(C)=F'(C')$ is the unit of $\\pi^{-1}\\dashv\\pi_*$ on global sections [def-weil-pbc-inverse-image]. Hence $\\rho^0_{k'/k}(C,F)=\\epsilon_{C',F'}\\circ\\eta_{\\pi,F}(C)\\circ\\epsilon_{C,F}^{-1}$, and $\\rho^0$ is an isomorphism if and only if $\\eta_{\\pi,F}(C)$ is bijective.",
-   "uses": [
-    "def-weil-pbc-cohomology-pullback",
-    "def-weil-pbc-extension-pullback",
-    "lem-weil-pbc-cohomology-pullback-degree-zero",
-    "def-weil-pbc-inverse-image"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-p1/lem-weil-pbc-zero-dimensional-field-extension.md",
-    "place": "## Proof ('its map on sections is the identity'); literature/stacks-project/cohomology.tex Section Tag 01F7, equation Tag 01FA"
-   }
-  },
-  {
-   "text": "*The unit on global sections is bijective.* For each $c'\\in|C'|$ choose a geometric point $\\bar c':\\operatorname{Spec}\\Omega_{c'}\\to C'$ over $c'$, and put $\\bar c=\\pi\\circ\\bar c'$, a geometric point of $C$ over $c=\\pi(c')$. Since $c'\\mapsto\\pi(c')$ is a bijection $\\sigma:|C'|\\to|C|$ (step 1), this chooses exactly one geometric point over each point of $C$. Consider\n$$\\gamma_{C,F}:F(C)\\to\\prod_{c\\in|C|}F_{\\bar c},\\qquad \\gamma_{C',F'}:F'(C')\\to\\prod_{c'\\in|C'|}F'_{\\bar c'},$$\nthe germ maps of [lem-weil-pbc-zero-dimensional-sections-stalks], applied over $k$ to $(C,F)$ with the points $\\bar c=\\pi\\circ\\bar c'$ and over $k'$ to $(C',F')$ with the points $\\bar c'$; both are isomorphisms. Let $\\kappa:\\prod_{c'}F'_{\\bar c'}\\to\\prod_{c}F_{\\bar c}$ send $(x_{c'})_{c'}$ to the family whose $\\sigma(c')$-component is $c_{\\pi,\\bar c',F}(x_{c'})$, with $c_{\\pi,\\bar c',F}:(\\pi^{-1}F)_{\\bar c'}\\xrightarrow{\\sim}F_{\\pi\\circ\\bar c'}$ the isomorphism of [lem-weil-pbc-inverse-image-stalk-germ]; $\\kappa$ is an isomorphism, being a product of isomorphisms reindexed along the bijection $\\sigma$. For $a\\in F(C)$, the $c'$-component of $\\gamma_{C',F'}(\\eta_{\\pi,F}(C)(a))$ is the germ $(\\eta_{\\pi,F}(C)(a))_{\\bar c'}$, and by the germ compatibility of [lem-weil-pbc-inverse-image-stalk-germ] (case $U=C$) $c_{\\pi,\\bar c',F}\\bigl((\\eta_{\\pi,F}(C)(a))_{\\bar c'}\\bigr)=a_{\\pi\\circ\\bar c'}=a_{\\bar c}$, the $\\sigma(c')$-component of $\\gamma_{C,F}(a)$. Thus $\\kappa\\circ\\gamma_{C',F'}\\circ\\eta_{\\pi,F}(C)=\\gamma_{C,F}$, so $\\eta_{\\pi,F}(C)=\\gamma_{C',F'}^{-1}\\circ\\kappa^{-1}\\circ\\gamma_{C,F}$ is bijective. By step 3, $\\rho^0_{k'/k}(C,F)$ is an isomorphism; with step 2, $\\rho^q_{k'/k}(C,F)$ is an isomorphism for every $q\\ge0$. (If $C=\\emptyset$ all groups are $0$ and the claim is trivial; the argument above covers it with empty products.)",
-   "uses": [
-    "lem-weil-pbc-zero-dimensional-sections-stalks",
-    "lem-weil-pbc-inverse-image-stalk-germ",
-    "lem-weil-pbc-zero-dimensional-base-change-points"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-p1/lem-weil-pbc-zero-dimensional-field-extension.md",
-    "place": "## Proof ('On each point the pullback of a sheaf of abelian groups is the same group ... the product of these identity maps'); literature/stacks-project/etale-cohomology.tex Lemma Tag 03Q1 (3) for the stalks of $\\pi^{-1}F$ and proof of Lemma Tag 0GJA ($H^0_\\etale(Z,i^{-1}\\mathcal F)=\\bigoplus_i\\mathcal F_{x_i}$)"
-   }
+   "text": "Apply the positive-degree vanishing argument to both the original abelian sheaf and its inverse image on C′. A map between two zero abelian groups is injective by Subsingleton.elim and surjective using the zero preimage. The degree-zero and positive-degree cases exhaust all natural numbers.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-extension-pullback",
   "lem-pod-separated-finite-type-base-change",
+  "lem-weil-pbc-cohomology-pullback-degree-zero",
+  "lem-weil-pbc-sheafH-ext-derived-comparison",
   "lem-weil-pbc-zero-dimensional-base-change-points",
   "lem-weil-pbc-zero-dimensional-cohomology",
-  "lem-weil-pbc-zero-dimensional-sections-stalks",
-  "def-weil-pbc-cohomology-pullback",
-  "lem-weil-pbc-cohomology-pullback-degree-zero",
-  "def-weil-pbc-inverse-image",
-  "lem-weil-pbc-inverse-image-stalk-germ"
+  "lem-weil-pbc-zero-dimensional-pullback-global-sections"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-p1/lem-weil-pbc-zero-dimensional-field-extension.md",
-  "place": "## Proof; the degree-zero identification follows literature/stacks-project/etale-cohomology.tex, proof of Lemma Tag 0GJA (zero-dimensional $Z$: $H^q=0$ for $q>0$, $H^0$ the sum of stalks) and Lemma Tag 03Q1 (3); the comparison of the two sides along $\\pi$ is written by the agent (Stacks treats only the vanishing and the $H^0$ formula)"
+  "place": "G1 stage-3 Lean reduction, 2026-10-12; the existing statement and unit route are unchanged."
  },
  "mathlib_searches": [
   {
@@ -191,5 +164,15 @@
   ],
   "sorry_free": false,
   "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state sorry_here)"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-efdeb",
+  "group": "G1",
+  "result": "pass",
+  "landing": "20261012T001209-L-509996",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered files compile cleanly; proofs, new declarations, node metadata, imports, and report satisfy the stage-3 review requirements."
  }
 }

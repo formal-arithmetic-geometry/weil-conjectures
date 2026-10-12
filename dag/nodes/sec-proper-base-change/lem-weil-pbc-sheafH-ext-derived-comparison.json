@@ -1,0 +1,129 @@
+{
+ "id": "lem-weil-pbc-sheafH-ext-derived-comparison",
+ "kind": "statement",
+ "title": "Natural comparison of Ext sheaf cohomology with derived global sections",
+ "statement": "Let X be any scheme [def-weil-pbc-scheme-conventions] and q a nonnegative integer. On abelian sheaves on its small etale site [def-weil-pbc-abelian-etale-sheaves], the functor F ↦ Sheaf.H F q (Ext from the constant integer sheaf [def-weil-pbc-constant-sheaf]) is naturally isomorphic, as an abelian-group-valued functor, to F ↦ H^q(RΓ(X,F[0])) [def-weil-pbc-etale-cohomology]. No compactness, dimension, reducedness, or torsion assumption is imposed.",
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Definition 015A, Lemmas 05TI and 06XR; the injective-resolution convention for cohomology in Etale Cohomology Lemma 03Q5."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-abelian-etale-sheaves",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-pbc-etale-cohomology"
+ ],
+ "proof": [
+  {
+   "text": "For each abelian sheaf F choose an injective resolution. A bounded-below injective resolution is K-injective, and the homology of derived global sections on F[0] is the cohomology of its complex of global sections.",
+   "uses": [
+    "lem-sp-derived-functor-single-identification"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Compute Ext from the constant integer sheaf using that same injective resolution. The constant-sheaf/global-sections adjunction, followed by evaluation at 1 in the integers, identifies each Hom group with global sections of the corresponding injective term. These maps commute with the differentials, so induce an additive isomorphism on cohomology in every nonnegative degree.",
+   "uses": [
+    "lem-weil-pbc-ext-via-injective-resolution",
+    "def-weil-pbc-constant-sheaf"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Lift a morphism F → G to the chosen injective resolutions. Both cohomology constructions use the same lift and the preceding termwise identification commutes with it. Homotopic lifts induce the same cohomology map. Thus the isomorphisms are natural and independent of choices, including degree zero and the empty scheme.",
+   "uses": [
+    "lem-weil-pbc-ext-via-injective-resolution"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-constant-sheaf",
+  "lem-sp-derived-functor-single-identification",
+  "lem-weil-pbc-ext-via-injective-resolution"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Definition 015A, Lemmas 05TI and 06XR; the injective-resolution convention for cohomology in Etale Cohomology Lemma 03Q5."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Ext sheaf cohomology equals derived global sections",
+   "results": "UNAVAILABLE: HTTP Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": null
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Natural isomorphism between Ext from the constant integer sheaf and homology of derived global sections",
+   "results": "InjectiveResolution.extAddEquivCohomologyClass; Sheaf.H; ProjectiveResolution.isoExt",
+   "date": "2026-10-12",
+   "verdict": "No natural sheaf/global-sections comparison; these provide the Ext half of the argument."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Sheaf.functorH, CategoryTheory.Functor.rightDerived",
+   "results": "0 hits",
+   "date": "2026-10-12",
+   "verdict": "No match."
+  },
+  {
+   "tool": "grep",
+   "query": "functorH.*rightDerived|Ext.*rightDerived in Mathlib and the source library",
+   "results": "No complete comparison; source PlusCompatibility supplies homologyRightDerivedFunctorObjSingleFunctorIso.",
+   "date": "2026-10-12",
+   "verdict": "New glue between the existing Ext and derived-global-sections models is needed."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "WeilConjectures.AlgebraicGeometry.Curve.Reductions",
+  "date": "2026-10-12",
+  "group": "G1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-curve-filtered-cohomology",
+   "place": "Proof step 3: use filtered continuity for H^q, identifying Ext sheaf cohomology with derived global sections.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleSheafHExtDerivedComparison",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleSheafHExtDerivedComparison.lean",
+  "declaration": "AlgebraicGeometry.Scheme.nonempty_sheafH_extDerivedIso",
+  "statement": "theorem nonempty_sheafH_extDerivedIso (X : Scheme.{u}) (q : ℕ) :\n    Nonempty (Sheaf.functorH.{u + 1} X.smallEtaleTopology q ≅\n      DerivedCategory.singleFunctor (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) 0 ⋙\n        Etale.cohomology AddCommGrpCat.{u + 1} X (q : ℤ))",
+  "branch": "sheaf-dag",
+  "by": "G1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-efdeb",
+  "group": "G1",
+  "result": "pass",
+  "landing": "20261012T001209-L-509996",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-efdeb",
+  "group": "G1",
+  "result": "pass",
+  "landing": "20261012T001209-L-509996",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered files compile cleanly; proofs, new declarations, node metadata, imports, and report satisfy the stage-3 review requirements."
+ }
+}
