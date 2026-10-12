@@ -1,0 +1,164 @@
+{
+ "id": "lem-sp-cone-horizontal-step-stable",
+ "kind": "statement",
+ "title": "The cone differential preserves finite horizontal tails",
+ "statement": "Let $C$ be an abelian category [def-sp-abelian] in which every natural-indexed first-quadrant bicomplex has a total complex [def-sp-double-complex-total]. Let $f:A\\to B$ be a morphism of such bicomplexes, and let $M=\\operatorname{Cone}(\\operatorname{extend}(\\operatorname{Tot}(f)))$. For $h\\in\\mathbb N$ and integer $m\\ge0$, let $s_{K,h,m}$ be the total inclusion of $K^{h,m-h}$, followed by the inverse extension isomorphism into $(\\operatorname{extend}\\operatorname{Tot}(K))^m$, and put it equal to zero if $m<0$ or $h>m$. Let $J_{h,n}$ be the join of the images of $s_{A,h,n+1}$ followed by the source cone inclusion and $s_{B,h,n}$ followed by the target cone inclusion. Define $S_{p,n}$ to be the finite supremum of $J_{h,n}$ for natural $h<(n+2).toNat$ with $p\\le h$. Then $S_{p,n+1}$ contains the image of $S_{p,n}\\hookrightarrow M^n\\xrightarrow{d}M^{n+1}$ for all integers $p,n$; equivalently this composite factors through $S_{p,n+1}$.",
+ "stmt_deps": [
+  "def-sp-abelian",
+  "def-sp-double-complex-total",
+  "def-sp-filtration"
+ ],
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/012X",
+  "place": "First horizontal filtration, displayed formula preceding Lemma 12.25.1; columnwise mapping-cone refinement of parent node proof steps 1 and 3."
+ },
+ "proof": [
+  {
+   "text": "On a total summand of horizontal index h, expand the extended total differential using extend_d_eq, ι_D₁ and ι_D₂. Its two summands have horizontal indices h+1 and h. Each factors through any subobject containing the corresponding horizontal generators. Integer scalar multiplication preserves such a factorization. Outside the finite diagonal the summand inclusion is zero.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://stacks.math.columbia.edu/tag/012X",
+    "place": "First horizontal filtration, displayed formula preceding Lemma 12.25.1; columnwise mapping-cone refinement of parent node proof steps 1 and 3."
+   }
+  },
+  {
+   "text": "A cone source generator followed by the cone differential is the negative source-total differential plus f followed by the target inclusion (homotopyCofiber.inlX_d). The total map preserves horizontal index (ιTotalOrZero_map and extendMap_f). A target generator followed by the differential is its target-total differential followed by the target inclusion. Thus all generating maps of S_{p,n}, composed with d, factor through S_{p,n+1}.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://stacks.math.columbia.edu/tag/012X",
+    "place": "First horizontal filtration, displayed formula preceding Lemma 12.25.1; columnwise mapping-cone refinement of parent node proof steps 1 and 3."
+   }
+  },
+  {
+   "text": "Pull S_{p,n+1} back along the cone differential. Each generating image is contained in that pullback by pullback_factors. Taking the finite supremum, including its source/target binary joins, gives S_{p,n} contained in the pullback. The pullback factorization criterion yields the asserted restricted differential.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://stacks.math.columbia.edu/tag/012X",
+    "place": "First horizontal filtration, displayed formula preceding Lemma 12.25.1; columnwise mapping-cone refinement of parent node proof steps 1 and 3."
+   }
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/012X",
+  "place": "First horizontal filtration, displayed formula preceding Lemma 12.25.1 (label lemma-double-complex); columnwise mapping-cone refinement of parent node proof steps 1 and 3."
+ },
+ "mathlib_searches": [
+  {
+   "t": "2026-10-12T18:14:28Z",
+   "tool": "leansearch",
+   "query": "The horizontal filtration of a mapping cone of total complexes is a filtration by subcomplexes whose graded complex is a shifted column mapping cone",
+   "sub": "",
+   "ok": false,
+   "n_hits": 0,
+   "note": "service unavailable: Internal Server Error",
+   "top": [],
+   "digest": "4f53cda18c2baa0c",
+   "date": "2026-10-12",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable"
+  },
+  {
+   "t": "2026-10-12T18:18:58Z",
+   "tool": "grep",
+   "query": "filtration.*cone|cone.*filtration|graded.*mappingCone|mappingCone.*graded",
+   "sub": "Algebra/Homology",
+   "ok": true,
+   "n_hits": 0,
+   "note": "",
+   "top": [],
+   "digest": "4f53cda18c2baa0c",
+   "date": "2026-10-12",
+   "results": "0 hits: ",
+   "verdict": "Related mapping-cone APIs only; no statement for the horizontal cone filtration. The component differential API is used in the compiled stability proof."
+  },
+  {
+   "t": "2026-10-12T18:16:09Z",
+   "tool": "leanfinder",
+   "query": "The differential of a first quadrant total mapping cone preserves the finite sum of source and target summands with horizontal index at least p",
+   "sub": "",
+   "ok": true,
+   "n_hits": 8,
+   "note": "",
+   "top": [
+    "CochainComplex.mappingCone.d_fst_v'",
+    "CochainComplex.mappingCone.d_fst_v",
+    "CochainComplex.mappingCone.d_snd_v",
+    "CochainComplex.mappingCone.d_snd_v'",
+    "CochainComplex.mappingCone.inl_v_d",
+    "CochainComplex.mappingCone.d_fst_v'_assoc",
+    "CochainComplex.mappingCone.d_fst_v_assoc",
+    "CochainComplex.mappingCone.δ_snd"
+   ],
+   "digest": "9138263b3b743461",
+   "date": "2026-10-12",
+   "results": "8 hits: CochainComplex.mappingCone.d_fst_v', CochainComplex.mappingCone.d_fst_v, CochainComplex.mappingCone.d_snd_v, CochainComplex.mappingCone.d_snd_v', CochainComplex.mappingCone.inl_v_d, CochainComplex.mappingCone.d_fst_v'_assoc, CochainComplex.mappingCone.d_fst_v_assoc, CochainComplex.mappingCone.δ_snd",
+   "verdict": "Related mapping-cone APIs only; no statement for the horizontal cone filtration. The component differential API is used in the compiled stability proof."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.FirstQuadrantVerticalConeFiltration",
+  "date": "2026-10-13",
+  "group": "X2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sp-double-complex-spectral-sequences",
+   "place": "First-filtration construction and column-cone graded comparison in proof steps 1 and 2; parent lem-sp-first-quadrant-vertical-cone-filtration",
+   "via": [
+    "lem-sp-first-quadrant-vertical-cone-filtration",
+    "lem-sp-double-complex-vertical-tower-comparison-finite",
+    "lem-sp-double-complex-vertical-tower-comparison",
+    "lem-sp-double-complex-vertical-spectral-object"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-pqf-finite",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.ConeHorizontalStepStable",
+  "file": "lean/Sheaf/Algebra/Homology/ConeHorizontalStepStable.lean",
+  "declaration": "HomologicalComplex₂.coneHorizontal_step_stable",
+  "statement": "theorem coneHorizontal_step_stable\n    {A B : HomologicalComplex₂ C (ComplexShape.up ℕ) (ComplexShape.up ℕ)}\n    (f : A ⟶ B) (p n : ℤ) :\n    (coneHorizontalStep f p (n + 1)).Factors\n      ((coneHorizontalStep f p n).arrow ≫\n        (CochainComplex.mappingCone\n          (HomologicalComplex.extendMap (total.map f (ComplexShape.up ℕ))\n            ComplexShape.embeddingUpNat)).d n (n + 1))",
+  "branch": "sheaf-dag",
+  "by": "X2",
+  "date": "2026-10-13",
+  "declarations": [
+   "HomologicalComplex₂.coneHorizontalSummand",
+   "HomologicalComplex₂.coneHorizontalImage",
+   "HomologicalComplex₂.coneHorizontalStep",
+   "HomologicalComplex₂.coneHorizontal_step_stable"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X2",
+  "result": "pass",
+  "landing": "20261012T194155-L-469920",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X2",
+  "result": "pass",
+  "landing": "20261012T194155-L-469920",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
