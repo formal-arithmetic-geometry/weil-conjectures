@@ -10,10 +10,9 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Module
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 public import Mathlib.RingTheory.Ideal.Cotangent
-import Sheaf.AlgebraicGeometry.Coherent
-import Sheaf.AlgebraicGeometry.ModulePullbackAffineSections
-import Sheaf.AlgebraicGeometry.TensorPullback
+import Sheaf.AlgebraicGeometry.AffineConormalSectionsExistence
 import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Tilde
+import WeilConjectures.AlgebraicGeometry.Modules.ClosedImmersion
 
 /-!
 # Affine sections of the conormal sheaf
@@ -73,6 +72,20 @@ theorem affine_conormal_sections {X Z : Scheme.{u}} (i : Z ⟶ X) [IsClosedImmer
             e (I.toCotangent a) =
               ((Classical.choose (exists_tensorPullbackAdjunction i)).unit.app
                 i.ker.toModules).app U.1 s := by
-  sorry
+  constructor
+  · have := SheafOfModules.isQuasicoherent_unit (R := i.ker.subscheme.ringCatSheaf)
+    have := SheafOfModules.isQuasicoherent_unit (R := X.ringCatSheaf)
+    have : SheafOfModules.IsQuasicoherent (R := X.ringCatSheaf)
+        ((SheafOfModules.pushforward i.ker.subschemeι.toRingCatSheafHom).obj
+          (SheafOfModules.unit i.ker.subscheme.ringCatSheaf)) :=
+      isQuasicoherent_pushforward_of_isClosedImmersion i.ker.subschemeι _
+    have : i.ker.toModules.IsQuasicoherent :=
+      isQuasicoherent_kernel i.ker.toPushforwardSubscheme
+    let e : tensorPullback i ≅ pullback i :=
+      (Classical.choose (exists_tensorPullbackAdjunction i)).leftAdjointUniq
+        (pullbackPushforwardAdjunction i)
+    exact (SheafOfModules.isQuasicoherent Z.ringCatSheaf).prop_of_iso
+      (e.app i.ker.toModules).symm (by infer_instance)
+  · exact affine_conormal_sections_existence i
 
 end AlgebraicGeometry.Scheme.Modules
