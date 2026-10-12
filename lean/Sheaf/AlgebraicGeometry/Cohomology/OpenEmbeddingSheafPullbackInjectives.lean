@@ -5,6 +5,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 public import Mathlib.Topology.Sheaves.Abelian
 public import Mathlib.CategoryTheory.Preadditive.Injective.Preserves
+import Sheaf.AlgebraicGeometry.Cohomology.OpenEmbeddingSheafPullbackAdjunction
 /-! # Open embeddings and injective sheaf pullback
 
 Source: Stacks Project, Tags 03DI and 03DJ.
@@ -25,4 +26,8 @@ applies.
 (blueprint: lem-pc-open-embedding-sheaf-pullback-injectives) -/
 theorem Topology.isOpenEmbedding_sheafPullback_preservesInjectiveObjects
     {X Y : TopCat.{u}} (f : X ⟶ Y) (hf : Topology.IsOpenEmbedding f) :
-    (TopCat.Sheaf.pullback AddCommGrpCat.{u} f).PreservesInjectiveObjects := by sorry
+    (TopCat.Sheaf.pullback AddCommGrpCat.{u} f).PreservesInjectiveObjects := by
+  obtain ⟨L, ⟨hmono⟩, ⟨hadj⟩⟩ :=
+    Topology.isOpenEmbedding_sheafPullback_adjunction f hf
+  let _ : L.PreservesMonomorphisms := hmono
+  exact Functor.preservesInjectiveObjects_of_adjunction_of_preservesMonomorphisms hadj

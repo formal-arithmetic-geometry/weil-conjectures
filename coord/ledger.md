@@ -10162,3 +10162,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 23:51 L: merged deliver/G3/Sheaf.RingTheory.CohenMacaulayFreeResolutionConstruction (stage 3; reviewer PASS; first push; landing 20261012T235111-L-2171786 (proof); batch 20261012T235109; modules 1; new nodes 0)
 - 23:51 L: merged deliver/J4/Sheaf.AlgebraicGeometry.IdealPowerProductRestrictionZero (stage 3; reviewer PASS; after a return; landing 20261012T235112-L-2171902 (proof); batch 20261012T235109; modules 1; new nodes 0)
 - 23:51 L: merged deliver/M2/Sheaf.Paper.FiniteFreeKernelH1Vanishing (stage 3; reviewer PASS; first push; landing 20261012T235112-L-2171999 (interface); batch 20261012T235109; modules 2; new nodes 1)
+- 23:51 L: merged deliver/M3/Sheaf.AlgebraicGeometry.Cohomology.OpenEmbeddingSheafPullbackInjectives (stage 3; reviewer PASS; first push; landing 20261012T235113-L-2172121 (interface); batch 20261012T235109; modules 2; new nodes 1)
