@@ -10,6 +10,7 @@ public import Mathlib.FieldTheory.KrullTopology
 public import Mathlib.LinearAlgebra.Matrix.GeneralLinearGroup.Defs
 public import Mathlib.RingTheory.TensorProduct.Basic
 public import Mathlib.Topology.LocallyConstant.Basic
+import Sheaf.FieldTheory.GaloisMatrixCocycleDescent
 
 /-!
 # Splitting an algebra with a genuine matrix descent cocycle
@@ -60,6 +61,10 @@ theorem nonempty_algEquiv_matrix_of_galois_cocycle (K : Type u) [Field K]
       (e (1 ⊗ₜ[K] a)).map g =
         ((b g)⁻¹).val * e (1 ⊗ₜ[K] a) * (b g).val)
     (hcoc : ∀ g h, b g * Matrix.GeneralLinearGroup.map g.toRingHom (b h) = b (g * h)) :
-    Nonempty (D ≃ₐ[K] Matrix (Fin n) (Fin n) K) := by sorry
+    Nonempty (D ≃ₐ[K] Matrix (Fin n) (Fin n) K) := by
+  obtain ⟨f, hf⟩ := exists_algHom_matrix_of_galois_cocycle K D n e b hb hdesc hcoc
+  have hfbij : Function.Bijective f := hf
+  have ef : D ≃ₐ[K] Matrix (Fin n) (Fin n) K := AlgEquiv.ofBijective f hfbij
+  exact ⟨ef⟩
 
 end Field

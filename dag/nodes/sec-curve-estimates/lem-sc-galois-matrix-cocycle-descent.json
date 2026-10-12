@@ -1,0 +1,106 @@
+{
+ "id": "lem-sc-galois-matrix-cocycle-descent",
+ "kind": "statement",
+ "title": "Matrix cocycle descent produces a bijective base algebra homomorphism",
+ "statement": "Under the hypotheses of lem-sc-galois-matrix-cocycle-split, there exists a K-algebra homomorphism f : D → M_n(K) that is bijective as a function.",
+ "source": {
+  "document": "Stacks Project, Etale Cohomology",
+  "place": "Tag 03R7, tensor computation and injectivity via vector-space descent"
+ },
+ "stmt_deps": [
+  "lem-sc-galois-matrix-cocycle-split"
+ ],
+ "proof": [
+  {
+   "text": "Perform finite Galois descent after trivializing the locally constant cocycle by matrix Hilbert 90; the descended map is injective and surjective by faithful scalar extension.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "worker",
+  "document": "Stacks Project, Etale Cohomology",
+  "place": "Expanded steps of Tag 03R7 and Section 0DVG"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "existence of a bijective algebra homomorphism after finite Galois matrix cocycle descent",
+   "results": "No exact existing theorem; the descent argument is the split-off statement.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Function.Bijective (f : D →ₐ[K] Matrix (Fin n) (Fin n) K)",
+   "results": "No exact descent theorem found; AlgEquiv.ofBijective is used for assembly.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n 'exists_algHom_matrix|Galois.*cocycle.*matrix' lean Mathlib",
+   "results": "No prior declaration; only this split node provides the needed descent theorem.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.FieldTheory.GaloisMatrixCocycleSplit",
+  "date": "2026-10-13",
+  "group": "C2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-galois-matrix-cocycle-split",
+   "place": "descent construction",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-thm-br",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.FieldTheory.GaloisMatrixCocycleDescent",
+  "file": "lean/Sheaf/FieldTheory/GaloisMatrixCocycleDescent.lean",
+  "declaration": "Field.exists_algHom_matrix_of_galois_cocycle",
+  "statement": "theorem exists_algHom_matrix_of_galois_cocycle (K : Type u) [Field K] (D : Type u) [Ring D] [Algebra K D] (n : ℕ) (e : (SeparableClosure K ⊗[K] D) ≃ₐ[SeparableClosure K] Matrix (Fin n) (Fin n) (SeparableClosure K)) (b : Gal(SeparableClosure K/K) → Matrix.GeneralLinearGroup (Fin n) (SeparableClosure K)) (hb : IsLocallyConstant b) (hdesc : ∀ (g : Gal(SeparableClosure K/K)) (a : D), (e (1 ⊗ₜ[K] a)).map g = ((b g)⁻¹).val * e (1 ⊗ₜ[K] a) * (b g).val) (hcoc : ∀ g h, b g * Matrix.GeneralLinearGroup.map g.toRingHom (b h) = b (g * h)) : ∃ f : D →ₐ[K] Matrix (Fin n) (Fin n) K, Function.Bijective f",
+  "branch": "sheaf-dag",
+  "by": "C2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C2",
+  "result": "pass",
+  "landing": "20261012T213039-L-1151156",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C2",
+  "result": "pass",
+  "landing": "20261012T213039-L-1151156",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
