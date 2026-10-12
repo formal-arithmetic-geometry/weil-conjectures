@@ -401,6 +401,43 @@ theorem sheafAlgebraHom_underlying_linear (F : SheafOfModules.{u}
   rw [← hr]
   exact (φ.app W).hom.map_smul (Y.sheaf.obj.map W.unop.hom.op r) x
 
+private theorem forget_restrictScalars {C : Type*} [Category C]
+    {J : GrothendieckTopology C} {R S : Sheaf J RingCat} (α : R ⟶ S) :
+    SheafOfModules.restrictScalars α ⋙ SheafOfModules.forget R ⋙
+      PresheafOfModules.toPresheaf R.obj =
+      SheafOfModules.forget S ⋙ PresheafOfModules.toPresheaf S.obj := rfl
+
+private theorem ofPresheaf_eq {C : Type*} [Category C] (R : Cᵒᵖ ⥤ RingCat)
+    (P : Cᵒᵖ ⥤ AddCommGrpCat) (m₁ m₂ : ∀ U, Module (R.obj U) (P.obj U))
+    (h : m₁ = m₂)
+    (h₁ : ∀ ⦃U V⦄ (f : U ⟶ V) (r : R.obj U) (x : P.obj U),
+      P.map f (@SMul.smul _ _ (m₁ U).toSMul r x) =
+        @SMul.smul _ _ (m₁ V).toSMul (R.map f r) (P.map f x))
+    (h₂ : ∀ ⦃U V⦄ (f : U ⟶ V) (r : R.obj U) (x : P.obj U),
+      P.map f (@SMul.smul _ _ (m₂ U).toSMul r x) =
+        @SMul.smul _ _ (m₂ V).toSMul (R.map f r) (P.map f x)) :
+    @PresheafOfModules.ofPresheaf _ _ R P m₁ h₁ =
+      @PresheafOfModules.ofPresheaf _ _ R P m₂ h₂ := by
+  subst m₂
+  rfl
+
+private theorem sheaf_eq {C : Type*} [Category C] {J : GrothendieckTopology C}
+    {R : Sheaf J RingCat} {M N : SheafOfModules R} (h : M.val = N.val) : M = N := by
+  cases M
+  cases N
+  cases h
+  rfl
+
+private theorem functor_eq_of_comp {C D E : Type*} [Category C] [Category D] [Category E]
+    (F G : C ⥤ D) (H : D ⥤ E) [H.Faithful]
+    (ho : ∀ X, F.obj X = G.obj X) (hc : F ⋙ H = G ⋙ H) : F = G := by
+  refine CategoryTheory.Functor.ext ho ?_
+  intro X Y f
+  apply H.map_injective
+  simpa only [H.map_comp, eqToHom_map, Functor.comp_obj, Functor.comp_map] using
+    CategoryTheory.Functor.congr_hom hc f
+
+
 /-- Restricting the explicitly constructed Hom functor gives the existing O-module Hom.
 Source: Stacks Project, Section 48.11, Tag 0BUZ
 (blueprint: def-pc-derived-rhom-algebra-module).
@@ -414,7 +451,40 @@ theorem sheafAlgebraHomUnderlying_eq :
       ((sheafCompose (Opens.grothendieckTopology Y)
         (forget₂ CommRingCat RingCat)).map B.hom) =
       (SheafOfModules.homFunctor Y.sheaf).obj (op B.toModule) := by
-  sorry
+  have hobj (F : SheafOfModules.{u} ((sheafCompose (Opens.grothendieckTopology Y)
+      (forget₂ CommRingCat RingCat)).obj Y.sheaf)) :
+      ((sheafAlgebraHom Y B ⋙ SheafOfModules.restrictScalars
+        ((sheafCompose (Opens.grothendieckTopology Y)
+          (forget₂ CommRingCat RingCat)).map B.hom)).obj F).val =
+        (SheafOfModules.homObj (R := Y.sheaf) B.toModule F).val := by
+    let P := (PresheafOfModules.homObj B.toModule.val F.val).presheaf
+    let R := Y.sheaf.obj ⋙ forget₂ CommRingCat RingCat
+    let m₁ : ∀ U, Module (R.obj U) (P.obj U) := fun U ↦
+      Module.compHom (sheafAlgebraHomSections Y B F U) (B.hom.hom.app U).hom
+    let m₂ : ∀ U, Module (R.obj U) (P.obj U) := fun U ↦
+      (PresheafOfModules.homObj B.toModule.val F.val).obj U |>.isModule
+    have hm : m₁ = m₂ := by
+      funext U
+      exact Module.ext' _ _ (sheafAlgebraHom_underlying_linear Y B F U)
+    apply ofPresheaf_eq R P m₁ m₂ hm
+    · intro U V f r x
+      exact ((sheafAlgebraHom Y B ⋙ SheafOfModules.restrictScalars
+        ((sheafCompose (Opens.grothendieckTopology Y)
+          (forget₂ CommRingCat RingCat)).map B.hom )).obj F).val.map_smul f r x
+    · intro U V f r x
+      exact (PresheafOfModules.homObj B.toModule.val F.val).map_smul f r x
+  have hs (F) : (sheafAlgebraHom Y B ⋙ SheafOfModules.restrictScalars
+        ((sheafCompose (Opens.grothendieckTopology Y)
+          (forget₂ CommRingCat RingCat)).map B.hom)).obj F =
+      ((SheafOfModules.homFunctor Y.sheaf).obj (op B.toModule)).obj F := by
+    exact sheaf_eq (hobj F)
+  let R := ((sheafCompose (Opens.grothendieckTopology Y)
+    (forget₂ CommRingCat RingCat)).obj Y.sheaf)
+  apply functor_eq_of_comp _ _
+    (SheafOfModules.forget R ⋙ PresheafOfModules.toPresheaf R.obj) hs
+  rw [CategoryTheory.Functor.assoc, forget_restrictScalars]
+  rfl
+
 
 /-- The identity comparison, transported along equality of the constructed underlying
 functor with the shared Hom functor. No Hom object, map or isomorphism is chosen.

@@ -36,7 +36,7 @@
    }
   },
   {
-   "text": "Localization.lift defines the derived functor, and the already proved Localization.fac comparison computes it on a representative. The two existing obligations sheafAlgebraHomUnderlying_eq and derivedRHomAlgebraModule_underlying remain unchanged, with their complete planned proofs in their docstrings; they are not claimed proved by this partial delivery.",
+   "text": "Localization.lift defines the derived functor, and the already proved Localization.fac comparison computes it on a representative. For sheafAlgebraHomUnderlying_eq, compare the two sectionwise O-module structures on the same Hom carrier using Module.ext' and sheafAlgebraHom_underlying_linear. The generic ofPresheaf_eq helper identifies the resulting presheaves by equality of the module structures and proof irrelevance of their semilinearity witnesses; sheaf_eq identifies the sheaves. Both functors have the same maps after forgetting to abelian presheaves: scalar restriction changes neither the carrier nor the restriction and postcomposition functions. The generic functor_eq_of_comp helper uses faithful forgetting and Functor.congr_hom to prove equality of the original functors from this equality and the object equalities. The existing derivedRHomAlgebraModule_underlying obligation remains unchanged, with its planned proof in its docstring; it is not claimed proved by this partial delivery.",
    "uses": [],
    "elementary": true
   }
@@ -44,10 +44,10 @@
  "proof_deps": [],
  "proof_origin": {
   "by": "worker",
-  "group": "J1",
-  "date": "2026-10-12",
+  "group": "T3",
+  "date": "2026-10-13",
   "document": "literature/stacks-project/duality.tex",
-  "place": "Tags 0BUZ, 0BV0, 0BV1; partial proof of descent via Mathlib homotopy equivalences, written by J1"
+  "place": "Tags 0BUZ, 0BV0, 0BV1; inherited descent proof and completed underlying sheaf-Hom equality via scalar compatibility and faithful forgetting"
  },
  "mathlib_searches": [
   {
@@ -170,11 +170,11 @@
  "reviewed_proof": {
   "date": "2026-10-12",
   "by": "L",
-  "reviewer": "X-f3d32",
-  "group": "J1",
+  "reviewer": "COMPILER",
+  "group": "T3",
   "result": "pass",
-  "landing": "20261012T165516-L-2934396",
-  "kind": "interface",
-  "note": "independent Codex review: Matched the delivery with its node and baseline: all 27 exported types and definition bodies unchanged; delivered module and all twelve direct importers compile cleanly; checked proofs use only permitted axioms; two existing holes remain accurately reported."
+  "landing": "20261012T194144-L-465894",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
