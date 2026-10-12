@@ -1,0 +1,112 @@
+{
+ "id": "lem-pc-derived-open-restriction-qcoh-iff",
+ "kind": "statement",
+ "title": "Derived open restriction and quasi-coherent cohomology",
+ "statement": "Let X be a scheme [def-pc-scheme], U an arbitrary open subscheme, and K an object of D(O_X) [def-pc-derived-category]. Choose derived categories on X and U with independent localization universes. Let R be the exact functor taking a module to its over-object at U and then applying the over equivalence to modules on U. Then R.mapDerivedCategory(K) has quasi-coherent cohomology if and only if, for every integer n, H^n(K).over(U) is quasi-coherent.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/08DW",
+  "place": "Tag 08DW, proof of (1) by compatibility with open restriction and the affine computation (2); Tag 06Z0"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category"
+ ],
+ "proof": [
+  {
+   "text": "The functor and inverse of the over equivalence preserve quasi-coherence: realize them as pushforwards along the equivalence of open sites. Continuity of Over.post follows from compatiblePreservingOfFlat and CoverPreserving.overPost. Apply Mathlib isQuasicoherent_pushforward_of_isLeftAdjoint using sheafOfModulesEquivOverUnit and its inverse-unit comparison.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Choose a representative complex P and e:Q(P) ≅ K via Q.objObjPreimageIso. Apply homology to R.mapDerivedCategory.mapIso(e.symm), then mapDerivedCategoryFactors at P, then homologyFunctorFactors, then mapHomologicalComplexHomologyIso, and finally R.mapIso of homologyFunctorFactors.symm composed with homology(e). This gives H^n(R(K)) ≅ R(H^n(K)) for each n.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Transfer quasi-coherence along this isomorphism. For the forward direction apply the inverse over equivalence and then its inverse unit isomorphism. For the reverse direction apply the forward over equivalence and the inverse cohomology comparison. These implications hold for every n, proving the iff.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "document",
+  "document": "https://stacks.math.columbia.edu/tag/08DW",
+  "place": "Tag 08DW, proof of (1) by compatibility with open restriction and the affine computation (2); Tag 06Z0"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Exact restriction to open subschemes commutes with derived cohomology and quasi coherence",
+   "results": "Service unavailable: Internal Server Error.",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.IsQuasicoherent",
+   "results": "12 hits, including isQuasicoherent_over and isQuasicoherent_pushforward_of_isLeftAdjoint.",
+   "date": "2026-10-12",
+   "verdict": "ingredients used in the proof; no exact derived restriction equivalence"
+  },
+  {
+   "tool": "grep",
+   "query": "homologyFunctorFactors|mapHomologicalComplexHomologyIso|isQuasicoherent_pushforward_of_isLeftAdjoint",
+   "results": "25 hits including DerivedCategory.homologyFunctorFactors and the quasi-coherence pushforward lemma. Further local rg and compiler checks found Functor.mapHomologicalComplexHomologyIso.",
+   "date": "2026-10-12",
+   "verdict": "ingredients used in the proof"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.DerivedPullbackPreservesQCoh",
+  "date": "2026-10-12",
+  "group": "R1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-projection-formula",
+   "place": "proof step (2): exact restriction commutes with cohomology and identifies quasi-coherence on an open with quasi-coherence in its over category",
+   "via": [
+    "lem-pc-derived-pullback-qcoh-component",
+    "lem-pc-derived-pullback-tensor-qcoh"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-f-representable",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.DerivedOpenRestrictionQCoh",
+  "file": "lean/Sheaf/AlgebraicGeometry/DerivedOpenRestrictionQCoh.lean",
+  "declaration": "AlgebraicGeometry.schemeDerivedQCoh_openRestriction_iff",
+  "statement": "theorem schemeDerivedQCoh_openRestriction_iff (X : Scheme.{u}) (U : X.Opens)\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]\n    [HasDerivedCategory.{wO} (SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace))]\n    (K : schemeDerivedCategory X) :\n    schemeDerivedQCohProperty U.toScheme\n      ((SheafOfModules.overFunctor.{u} (moduleRings X.toRingedSpace) U ⋙\n        Equivalence.functor\n          (C := SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))\n          (D := SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace))\n          (Scheme.Modules.overEquiv U)).mapDerivedCategory.obj K) ↔\n      ∀ n : ℤ, (((DerivedCategory.homologyFunctor\n        (SheafOfModules.{u} (moduleRings X.toRingedSpace)) n).obj K).over U).IsQuasicoherent",
+  "branch": "sheaf-dag",
+  "by": "R1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R1",
+  "result": "pass",
+  "landing": "20261012T085326-L-34617",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R1",
+  "result": "pass",
+  "landing": "20261012T085326-L-34617",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

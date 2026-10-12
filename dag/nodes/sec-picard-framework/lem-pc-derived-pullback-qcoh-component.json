@@ -25,26 +25,50 @@
  ],
  "proof": [
   {
-   "text": "the affine opens U and V give a morphism U → V. Exact restriction\ncommutes with cohomology. On U, restriction of the pullback is the pullback of E|V,\nby the open-restriction comparison. Represent E|V by tilde of a module complex using\n06Z0. The affine pullback comparison expresses its pullback as tilde of the module\ncomplex obtained by derived base change. Exactness of tilde identifies its cohomology\nwith tilde of module cohomology, which is quasi-coherent. Transfer along the comparison\nisomorphisms and pass to the over category of U. This includes empty opens and arbitrary degrees;\nno boundedness or flatness of f is used.",
+   "text": "Restrict E to V using the reverse implication of schemeDerivedQCoh_openRestriction_iff and Mathlib isQuasicoherent_over in every degree.",
    "uses": [
-    "lem-pc-affine-derived-pullback-tensor-tilde",
-    "lem-pc-affine-qcoh-derived-equivalence"
+    "lem-pc-derived-open-restriction-qcoh-iff"
    ],
-   "elementary": false,
-   "source": {
-    "document": "https://stacks.math.columbia.edu/tag/08DW",
-    "place": "Tag 08DW, perfect-lemma-quasi-coherence-pullback, proof of (1) using (2), and Tag 06Z0"
-   }
+   "elementary": true
+  },
+  {
+   "text": "Choose standard derived categories on U,V and on Spec Γ(U,O_U), as well as the module derived category. Apply the affine module model to f.resLE V U and the restricted E. Its output is derived exact restriction of the tilde complex of extendScalars of a K-flat input complex.",
+   "uses": [
+    "lem-pc-affine-derived-pullback-module-model"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply exists_affineQCohDerivedEquivalence_core on the target ring B=Γ(U,O_U). Its tilde comparison identifies Q(tilde(M)) with the image of Q(M) in the full quasi-coherent derived subcategory, so all its homology sheaves are quasi-coherent.",
+   "uses": [
+    "new-affine-qcoh-derived-equivalence-core"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For exact restriction R along U→Spec(B), compose mapDerivedCategoryFactors, homologyFunctorFactors and mapHomologicalComplexHomologyIso to identify H^i(R(Q(tilde(M)))) with R(H^i(Q(tilde(M)))). Underived restriction preserves quasi-coherence. Transfer it through the affine model isomorphism.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Apply derivedPullback_openRestriction_iso_universes and map its component at E through homology. Transfer quasi-coherence back through that isomorphism, then apply the forward implication of schemeDerivedQCoh_openRestriction_iff to obtain the over-category conclusion in degree n.",
+   "uses": [
+    "lem-pc-derived-pullback-open-restriction-universes",
+    "lem-pc-derived-open-restriction-qcoh-iff"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-pc-affine-derived-pullback-tensor-tilde",
-  "lem-pc-affine-qcoh-derived-equivalence"
+  "lem-pc-affine-derived-pullback-module-model",
+  "lem-pc-derived-open-restriction-qcoh-iff",
+  "lem-pc-derived-pullback-open-restriction-universes",
+  "new-affine-qcoh-derived-equivalence-core"
  ],
  "proof_origin": {
   "by": "document",
   "document": "https://stacks.math.columbia.edu/tag/08DW",
-  "place": "Tag 08DW, perfect-lemma-quasi-coherence-pullback, proof of (1) using (2), and Tag 06Z0"
+  "place": "Tag 08DW, proof of (1) by compatibility with open restriction and the affine computation (2); Tag 06Z0"
  },
  "mathlib_searches": [
   {
@@ -112,7 +136,7 @@
   "reviewer": "COMPILER",
   "group": "R1",
   "result": "pass",
-  "landing": "20261012T053950-L-2644151",
+  "landing": "20261012T085326-L-34617",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

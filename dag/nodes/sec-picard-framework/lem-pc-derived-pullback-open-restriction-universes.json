@@ -1,0 +1,120 @@
+{
+ "id": "lem-pc-derived-pullback-open-restriction-universes",
+ "kind": "statement",
+ "title": "Open restriction of derived pullback with independent universes",
+ "statement": "Let f:X→Y be a morphism of schemes [def-pc-scheme], U⊆X and V⊆Y opens with U⊆f⁻¹(V). Write R_U and R_V for exact module restriction followed by the over equivalences. Choose ambient derived categories with common localization universe w and open-subscheme derived categories with common localization universe wO, possibly different from w. There is a natural isomorphism Lf* followed by R_U.mapDerivedCategory ≅ R_V.mapDerivedCategory followed by L(f.resLE V U)* [def-pc-derived-pullback]. No affineness or quasi-coherence assumption is required.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/08DW",
+  "place": "Tag 08DW, proof of (1) by compatibility with open restriction and the affine computation (2); Tag 06Z0"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "def-pc-derived-pullback"
+ ],
+ "proof": [
+  {
+   "text": "Choose standard localizations of all four complex categories. Apply derivedPullback_openRestriction_iso in the affine calculation node to obtain its natural comparison with a common standard localization universe.",
+   "uses": [
+    "lem-pc-affine-derived-pullback-tensor-tilde"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Uniqueness of localization gives canonical equivalences from each chosen localization to each standard one, commuting naturally with Q. Exact restriction is induced by its termwise complex functor, so its derived functors commute with these equivalences. The left-derived universal property from exists_derivedPullback likewise identifies the transported derived pullback with the chosen derived pullback: transport its counit and use uniqueness of left-derived functors.",
+   "uses": [
+    "def-pc-derived-pullback"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Whisker the standard comparison by the canonical equivalences and cancel their units and counits. The resulting natural isomorphism is the claimed comparison on the ambient and open-subscheme localization choices. In particular it does not assert that w=wO.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pc-derived-pullback",
+  "lem-pc-affine-derived-pullback-tensor-tilde"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "https://stacks.math.columbia.edu/tag/08DW",
+  "place": "Tag 08DW, proof of (1) by compatibility with open restriction and the affine computation (2); Tag 06Z0"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Derived pullback commutes with restriction to open subschemes in different localization universes",
+   "results": "Service unavailable: Internal Server Error.",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived pullback commutes with restriction to open subschemes independently of the localization universe",
+   "results": "8 hits concerning underived scheme restriction/pullback squares, no derived restriction theorem.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "derivedPullback_openRestriction|derivedPullback_affine_qcoh|schemeDerivedQCoh_openRestriction",
+   "results": "0 Mathlib hits. Direct project reading found derivedPullback_openRestriction_iso, but it forces all four localization universes to agree.",
+   "date": "2026-10-12",
+   "verdict": "same-universe project comparison exists; independent-universe comparison absent"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.DerivedPullbackPreservesQCoh",
+  "date": "2026-10-12",
+  "group": "R1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-projection-formula",
+   "place": "proof step (2): compatibility of the derived pullback factor with open restriction, retaining independent localization choices",
+   "via": [
+    "lem-pc-derived-pullback-qcoh-component",
+    "lem-pc-derived-pullback-tensor-qcoh"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-f-representable",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.DerivedPullbackOpenRestrictionUniverses",
+  "file": "lean/Sheaf/AlgebraicGeometry/DerivedPullbackOpenRestrictionUniverses.lean",
+  "declaration": "AlgebraicGeometry.derivedPullback_openRestriction_iso_universes",
+  "statement": "theorem derivedPullback_openRestriction_iso_universes {X Y : Scheme.{u}} (f : X ⟶ Y)\n    (U : X.Opens) (V : Y.Opens) (hUV : U ≤ f ⁻¹ᵁ V)\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]\n    [HasDerivedCategory.{wO} (SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace))]\n    [HasDerivedCategory.{wO} (SheafOfModules.{u} (moduleRings V.toScheme.toRingedSpace))] :\n    Nonempty (derivedPullback f ⋙\n      (SheafOfModules.overFunctor.{u} (moduleRings X.toRingedSpace) U ⋙\n        Equivalence.functor\n          (C := SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))\n          (D := SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace))\n          (Scheme.Modules.overEquiv U)).mapDerivedCategory ≅\n      (SheafOfModules.overFunctor.{u} (moduleRings Y.toRingedSpace) V ⋙\n        Equivalence.functor\n          (C := SheafOfModules.{u} ((moduleRings Y.toRingedSpace).over V))\n          (D := SheafOfModules.{u} (moduleRings V.toScheme.toRingedSpace))\n          (Scheme.Modules.overEquiv V)).mapDerivedCategory ⋙\n        derivedPullback (f.resLE V U hUV))",
+  "branch": "sheaf-dag",
+  "by": "R1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R1",
+  "result": "pass",
+  "landing": "20261012T085326-L-34617",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R1",
+  "result": "pass",
+  "landing": "20261012T085326-L-34617",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
