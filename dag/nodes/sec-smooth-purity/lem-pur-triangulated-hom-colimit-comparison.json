@@ -1,0 +1,138 @@
+{
+ "id": "lem-pur-triangulated-hom-colimit-comparison",
+ "kind": "statement",
+ "title": "Third contravariant Hom-colimit comparison for distinguished triangles",
+ "statement": "Let J be a cofiltered category and D a pretriangulated category [def-weil-triangulated-category]. Let H : J -> Triangle(D) be a functor all of whose values are distinguished, let U be a distinguished triangle, let j0 be an object of J, and let m : H(j0) -> U be a triangle morphism. Assume that for every object W of D, and for each i=1,2, the map Hom(U_i,W) -> colim over J opposite of Hom(H(j)_i,W), sending phi to the class of m_i followed by phi at j0, is bijective. Then for every W the corresponding map at i=3 is bijective. The triangle U and the morphism m are supplied data; no candidate value or denominator triangle is constructed in this statement.",
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Lemma 05SC proof, displayed five-term Hom diagram, dualized to contravariant Hom"
+ },
+ "stmt_deps": [
+  "def-weil-triangulated-category"
+ ],
+ "proof": [
+  {
+   "text": "For W in D apply Hom(-,W) to every distinguished triangle H(j) and to U. Use the shifted five-term sequence Hom(H(j)_2[1],W) -> Hom(H(j)_1[1],W) -> Hom(H(j)_3,W) -> Hom(H(j)_2,W) -> Hom(H(j)_1,W). Triangle morphisms make these sequences functorial over J opposite. Their exactness is the contravariant Hom exactness of distinguished triangles.",
+   "uses": [
+    "def-weil-triangulated-category"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Since J opposite is filtered, take the filtered colimit of the five-term exact sequences of abelian groups. It remains exact. If necessary lift all Hom groups into a common larger universe; the canonical colimit representative maps identify the underlying filtered colimit with ColimitType.",
+   "uses": [
+    "lem-weil-pbc-filtered-colimit-abelian-groups-exact"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Precompose with the five components m_2[1], m_1[1], m_3, m_2, m_1 at j0 to obtain a map from the five-term exact sequence of U into the colimit sequence. All four squares commute by the three triangle-morphism equations and their shifts. The last two vertical maps are bijective by hypothesis. For the first two use the same hypothesis with W[-1], transported by the natural Hom equivalence for the shift autoequivalence. Naturality identifies the transported maps with precomposition by m_i[1].",
+   "uses": [
+    "def-weil-triangulated-category"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the five lemma to the two exact sequences of abelian groups with the four outer maps isomorphisms. The middle map is an isomorphism, hence bijective on underlying sets. Its representative formula is phi mapped to the class of m_3 followed by phi at j0, exactly the stated third comparison.",
+   "uses": [
+    "lem-weil-pbc-five-lemma"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Lemma 05SC, displayed Hom comparison and exact filtered colimits; LF dual"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "cofiltered diagram of distinguished triangles first two Hom colimit comparisons are bijective implies third comparison bijective",
+   "results": "UNAVAILABLE: service unavailable: Internal Server Error",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A map of a distinguished triangle into a cofiltered colimit of distinguished triangles is bijective on third contravariant Hom if bijective on first two Hom for every object",
+   "results": [
+    "CategoryTheory.ObjectProperty.rightOrthogonal.map_bijective_of_isTriangulated",
+    "CategoryTheory.ObjectProperty.leftOrthogonal.map_bijective_of_isTriangulated",
+    "CategoryTheory.Functor.bijective_colimitTypePrecomp",
+    "CategoryTheory.Pretriangulated.Triangle.yoneda_exact2"
+   ],
+   "verdict": "Orthogonal localization lemmas have different hypotheses; final-colimit and exactness results are useful building blocks but do not state the general five-term comparison.",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"colimitTypePrecomp\"",
+   "results": [
+    "CategoryTheory.Functor.colimitTypePrecomp",
+    "CategoryTheory.Functor.bijective_colimitTypePrecomp",
+    "CategoryTheory.Functor.colimitTypePrecomp_ιColimitType"
+   ],
+   "verdict": "Canonical final-functor comparison only; does not prove the comparison induced by a triangle morphism.",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "grep",
+   "query": "five_lemma|fiveLemma|triangulated.*hom.*colimit|map_bijective_of_isTriangulated",
+   "results": "Mathlib Pretriangulated.isIso3_of_isIso12 is a single-stage five-lemma result; Abelian.isIso_of_epi_of_isIso_of_isIso_of_mono is the general five lemma. Searches of the DAG and both library roots found the upper third-value and value-triangle nodes, but no independent diagram-level Hom-colimit comparison.",
+   "verdict": "New statement isolates exactly the existing plan’s five-term comparison, without localization or value existence.",
+   "date": "2026-10-13"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.ThirdValueConstruction",
+  "date": "2026-10-13",
+  "group": "T1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-derived-functor-triangles-05sc-third-value-core",
+   "via": "proof step 3 of the previous route: exact filtered Hom colimits and the five lemma"
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-operations",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.TriangulatedHomColimitComparison",
+  "file": "lean/Sheaf/CategoryTheory/TriangulatedHomColimitComparison.lean",
+  "declaration": "CategoryTheory.triangulated_hom_colimit_comparison",
+  "statement": "theorem triangulated_hom_colimit_comparison\n    {J : Type uJ} {D : Type uD} [Category.{vJ} J] [Category.{vD} D]\n    [IsCofiltered J] [HasZeroObject D] [HasShift D ℤ] [Preadditive D]\n    [∀ n : ℤ, (shiftFunctor D n).Additive] [Pretriangulated D]\n    (H : J ⥤ Triangle D) (hH : ∀ j, H.obj j ∈ distTriang D)\n    (U : Triangle D) (hU : U ∈ distTriang D) (j₀ : J) (m : H.obj j₀ ⟶ U)\n    (h₁ : ∀ W : D, Function.Bijective (fun φ : U.obj₁ ⟶ W ↦\n      (((H ⋙ Triangle.π₁).op ⋙ yoneda.obj W).ιColimitType\n        (Opposite.op j₀) (m.hom₁ ≫ φ))))\n    (h₂ : ∀ W : D, Function.Bijective (fun φ : U.obj₂ ⟶ W ↦\n      (((H ⋙ Triangle.π₂).op ⋙ yoneda.obj W).ιColimitType\n        (Opposite.op j₀) (m.hom₂ ≫ φ)))) :\n    ∀ W : D, Function.Bijective (fun φ : U.obj₃ ⟶ W ↦\n      (((H ⋙ Triangle.π₃).op ⋙ yoneda.obj W).ιColimitType\n        (Opposite.op j₀) (m.hom₃ ≫ φ)))",
+  "branch": "sheaf-dag",
+  "by": "T1",
+  "date": "2026-10-13"
+ },
+ "proof_deps": [
+  "def-weil-triangulated-category",
+  "lem-weil-pbc-filtered-colimit-abelian-groups-exact",
+  "lem-weil-pbc-five-lemma"
+ ],
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T1",
+  "result": "pass",
+  "landing": "20261012T225330-L-1813101",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T1",
+  "result": "pass",
+  "landing": "20261012T225330-L-1813101",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
