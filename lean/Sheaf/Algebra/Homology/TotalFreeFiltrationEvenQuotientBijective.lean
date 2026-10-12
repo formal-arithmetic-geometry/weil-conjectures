@@ -6,7 +6,6 @@ Authors: SHEAF group X2
 module
 
 public import Sheaf.Algebra.Homology.TotalFreeFiltrationEvenQuotientMap
-import Mathlib.Algebra.Homology.ShortComplex.ModuleCat
 import Sheaf.Algebra.Homology.TotalFreeFiltrationTerms
 
 /-!
@@ -98,7 +97,28 @@ the cokernel projection kills the even part.
 -/
 theorem evenQuotientComponent_surjective
     (h_exact : ∀ j, (S j).ShortExact) (j : ℕ) (k : ℤ) :
-    Function.Surjective (evenQuotientComponent K S e h_positive j k) := by sorry
+    Function.Surjective (evenQuotientComponent K S e h_positive j k) := by
+  have _ := h_exact j
+  let π := (cokernel.π (step K S e h_positive (2 * j))).f k
+  have hπ : Function.Surjective π := (ModuleCat.epi_iff_surjective π).mp inferInstance
+  intro z
+  obtain ⟨x, hx⟩ := hπ z
+  obtain ⟨y, hy, w, hw, heq⟩ := (Submodule.mem_sup).mp
+    (odd_le_even_sup K S e j k x.property)
+  obtain ⟨v, rfl⟩ := hw
+  let y' : (complex K S e h_positive (2 * j)).X k := ⟨y, hy⟩
+  have hdecomp : x = (step K S e h_positive (2 * j)).f k y' +
+      lowerToOdd K S e h_positive j k v := by
+    apply Subtype.ext
+    exact heq.symm
+  have hz : (step K S e h_positive (2 * j)).f k ≫ π = 0 :=
+    congrArg (fun f ↦ f.f k) (cokernel.condition (step K S e h_positive (2 * j)))
+  refine ⟨v, ?_⟩
+  change π (lowerToOdd K S e h_positive j k v) = z
+  rw [← hx, hdecomp, map_add]
+  have hzero := congrArg (fun f ↦ f y') hz
+  change π ((step K S e h_positive (2 * j)).f k y') = 0 at hzero
+  rw [hzero, zero_add]
 
 theorem evenQuotientComponent_bijective
     (h_exact : ∀ j, (S j).ShortExact) (j : ℕ) (k : ℤ) :
