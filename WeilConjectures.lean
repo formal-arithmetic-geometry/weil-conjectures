@@ -69,6 +69,7 @@ public import WeilConjectures.AlgebraicGeometry.Cohomology.Affine.Cech
 public import WeilConjectures.AlgebraicGeometry.Cohomology.Affine.CechAcyclic
 public import WeilConjectures.AlgebraicGeometry.Cohomology.Affine.CechBaseChange
 public import WeilConjectures.AlgebraicGeometry.Cohomology.Affine.Leray
+public import WeilConjectures.AlgebraicGeometry.Cohomology.Affine.LerayNatural
 public import WeilConjectures.AlgebraicGeometry.Cohomology.Affine.Vanishing
 public import WeilConjectures.AlgebraicGeometry.Cohomology.CechGluing
 public import WeilConjectures.AlgebraicGeometry.Cohomology.Clopen
@@ -105,6 +106,7 @@ public import WeilConjectures.AlgebraicGeometry.Cohomology.Projective
 public import WeilConjectures.AlgebraicGeometry.Cohomology.Projective.Finiteness
 public import WeilConjectures.AlgebraicGeometry.Cohomology.ProjectiveFinite
 public import WeilConjectures.AlgebraicGeometry.Cohomology.ProjectiveLine
+public import WeilConjectures.AlgebraicGeometry.Cohomology.ProjectiveSpaceSerrePairing
 public import WeilConjectures.AlgebraicGeometry.Cohomology.ProjectiveSpaceTwist
 public import WeilConjectures.AlgebraicGeometry.Cohomology.PushforwardZero
 public import WeilConjectures.AlgebraicGeometry.Cohomology.Restriction
@@ -300,6 +302,7 @@ public import WeilConjectures.AlgebraicGeometry.Modules.IntegralSections
 public import WeilConjectures.AlgebraicGeometry.Modules.Invertible
 public import WeilConjectures.AlgebraicGeometry.Modules.InvertibleFibre
 public import WeilConjectures.AlgebraicGeometry.Modules.InvertibleSections
+public import WeilConjectures.AlgebraicGeometry.Modules.Linear
 public import WeilConjectures.AlgebraicGeometry.Modules.LocalDerivation
 public import WeilConjectures.AlgebraicGeometry.Modules.LocallyFreeAffine
 public import WeilConjectures.AlgebraicGeometry.Modules.LocallyFreeRank

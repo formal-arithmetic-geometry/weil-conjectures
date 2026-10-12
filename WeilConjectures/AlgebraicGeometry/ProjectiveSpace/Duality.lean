@@ -13,7 +13,9 @@ public import WeilConjectures.AlgebraicGeometry.Modules.HomTensor
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Koszul
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Resolution
 public import WeilConjectures.AlgebraicGeometry.Modules.Differentials
+public import Mathlib.Algebra.Homology.DerivedCategory.Ext.Linear
 public import WeilConjectures.AlgebraicGeometry.Modules.Ext
+public import WeilConjectures.AlgebraicGeometry.Modules.Linear
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Twist
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Basic
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.Ext.Basic
@@ -38,8 +40,11 @@ Let `k` be a field, `ℙ¹_k = ProjectiveLine (Spec k)` and `ω = Ω¹_{ℙ¹_k/
 - `AlgebraicGeometry.Scheme.Modules.nonempty_dual_H_zero_addEquiv_ext_of_shortExact`:
   `H⁰(X, 𝒢)^∨ ≅ Ext¹(𝒢, ω)` from a resolution `0 → 𝒦 → ℰ → 𝒢 → 0` on which the `H¹`-duality
   pairing is known.
+- `AlgebraicGeometry.Scheme.Modules.nonempty_dual_H_zero_linearEquiv_ext_of_shortExact`: the same,
+  `k`-linearly, for the `k`-linear structure `AlgebraicGeometry.Scheme.Modules.linearOfOver`.
 - `AlgebraicGeometry.ProjectiveLine.nonempty_dual_H_zero_addEquiv_ext`:
   `H⁰(ℙ¹, 𝒢)^∨ ≅ Ext¹(𝒢, ω)`.
+- `AlgebraicGeometry.ProjectiveLine.nonempty_dual_H_zero_linearEquiv_ext`: the same, `k`-linearly.
 
 ## Implementation notes
 
@@ -152,6 +157,93 @@ lemma nonempty_dual_H_zero_addEquiv_ext_of_shortExact {S : ShortComplex X.Module
     ((QuotientAddGroup.quotientAddEquivOfEq hker.symm).trans
       (QuotientAddGroup.quotientKerEquivOfSurjective D hD))⟩
 
+omit [HasExt X.Modules] in
+/-- The duality pairing is `k`-linear, for the `k`-linear structure of `X.Modules`. -/
+lemma dualPairing_smul (G : X.Modules) (c : k) (φ : G ⟶ ω) :
+    dualPairing t G (c • φ) = c • dualPairing t G φ := by
+  refine LinearMap.ext fun x ↦ ?_
+  rw [dualPairing_apply, H.map_smul_hom, t.map_smul, LinearMap.smul_apply, dualPairing_apply]
+
+/-- The duality pairing `Hom(G, ω) → H¹(X, G)^∨`, `φ ↦ t ∘ H¹(φ)`, as a `k`-linear map. -/
+@[simps]
+noncomputable def dualPairingLinearMap (G : X.Modules) :
+    (G ⟶ ω) →ₗ[k] Module.Dual k (G.H 1) where
+  toFun := dualPairing t G
+  map_add' := map_add _
+  map_smul' := dualPairing_smul t G
+
+/-- **`H⁰`-duality from a resolution, `k`-linearly.** Let `0 → 𝒦 → ℰ → 𝒢 → 0` be a short exact
+sequence of `𝒪_X`-modules with `H⁰(ℰ) = 0` and `Ext¹(ℰ, ω) = 0`, such that the duality pairing
+`Hom(-, ω) → H¹(X, -)^∨` is bijective on `𝒦` and surjective on `ℰ`. Then
+`H⁰(X, 𝒢)^∨ ≅ Ext¹(𝒢, ω)` as `k`-vector spaces, for the `k`-linear structure of `X.Modules`
+(`Scheme.Modules.linearOfOver`).
+
+This is `nonempty_dual_H_zero_addEquiv_ext_of_shortExact` with `k`-linear maps: both sides are
+cokernels of `Hom(ℰ, ω) ⟶ Hom(𝒦, ω)`. -/
+lemma nonempty_dual_H_zero_linearEquiv_ext_of_shortExact {S : ShortComplex X.Modules}
+    (hS : S.ShortExact) [Subsingleton (S.X₂.H 0)] [Subsingleton (Ext S.X₂ ω 1)]
+    (h₁ : Function.Bijective (dualPairing t S.X₁))
+    (h₂ : Function.Surjective (dualPairing t S.X₂)) :
+    Nonempty (Module.Dual k (S.X₃.H 0) ≃ₗ[k] Ext S.X₃ ω 1) := by
+  let δ := H.δLinearMap k hS 0
+  have hδ : Function.Injective δ := by
+    refine (injective_iff_map_eq_zero _).2 fun x hx ↦ ?_
+    obtain ⟨y, rfl⟩ := (H.ker_δ_eq_range_map_g hS 0).le hx
+    rw [Subsingleton.elim y 0, map_zero]
+  have hfδ (x : S.X₃.H 0) : H.map S.f 1 (δ x) = 0 :=
+    (H.ker_map_f_eq_range_δ hS 0).ge ⟨x, rfl⟩
+  let Ψ : Ext S.X₁ ω 0 →ₗ[k] Module.Dual k (S.X₃.H 0) :=
+    δ.dualMap ∘ₗ dualPairingLinearMap t S.X₁ ∘ₗ (Abelian.Ext.linearEquiv₀ (R := k)).toLinearMap
+  let D : Ext S.X₁ ω 0 →ₗ[k] Ext S.X₃ ω 1 :=
+    Abelian.Ext.precompOfLinear hS.extClass k ω (add_zero 1)
+  have hΨφ (φ : S.X₁ ⟶ ω) :
+      Ψ (Abelian.Ext.mk₀ φ) = δ.dualMap (dualPairing t S.X₁ φ) := by
+    change δ.dualMap (dualPairing t S.X₁ (Abelian.Ext.addEquiv₀
+      (Abelian.Ext.addEquiv₀.symm φ))) = _
+    rw [AddEquiv.apply_symm_apply]
+  have hD : Function.Surjective D := fun x ↦
+    Abelian.Ext.contravariant_sequence_exact₃ hS ω x (Subsingleton.elim _ _) (add_zero 1)
+  have hΨ : Function.Surjective Ψ := fun ν ↦ by
+    obtain ⟨μ, rfl⟩ := LinearMap.dualMap_surjective_of_injective hδ ν
+    obtain ⟨φ, hφ⟩ := h₁.2 μ
+    exact ⟨Abelian.Ext.mk₀ φ, by rw [hΨφ, hφ]⟩
+  have hker : LinearMap.ker D = LinearMap.ker Ψ := by
+    ext x
+    obtain ⟨φ, rfl⟩ := Abelian.Ext.addEquiv₀.symm.surjective x
+    simp only [LinearMap.mem_ker]
+    constructor
+    · intro hx
+      obtain ⟨y, hy⟩ := Abelian.Ext.contravariant_sequence_exact₁ hS ω _ (add_zero 1) hx
+      obtain ⟨ψ, rfl⟩ := Abelian.Ext.addEquiv₀.symm.surjective y
+      have : φ = S.f ≫ ψ := by
+        apply Abelian.Ext.addEquiv₀.symm.injective
+        rw [← hy]
+        exact Abelian.Ext.mk₀_comp_mk₀ _ _
+      subst this
+      change Ψ (Abelian.Ext.mk₀ (S.f ≫ ψ)) = 0
+      rw [hΨφ, dualPairing_comp]
+      refine LinearMap.ext fun x ↦ ?_
+      change dualPairing t S.X₂ ψ (H.map S.f 1 (δ x)) = 0
+      rw [hfδ, map_zero]
+    · intro hx
+      change Ψ (Abelian.Ext.mk₀ φ) = 0 at hx
+      rw [hΨφ] at hx
+      have hl : dualPairing t S.X₁ φ ∈
+          (LinearMap.ker (H.mapLinearMap k S.f 1)).dualAnnihilator := by
+        rw [Submodule.mem_dualAnnihilator]
+        intro v hv
+        obtain ⟨w, rfl⟩ := (H.ker_map_f_eq_range_δ hS 0).le hv
+        exact LinearMap.congr_fun hx w
+      rw [← LinearMap.range_dualMap_eq_dualAnnihilator_ker] at hl
+      obtain ⟨μ, hμ⟩ := hl
+      obtain ⟨ψ, rfl⟩ := h₂ μ
+      have : φ = S.f ≫ ψ := h₁.1 (by rw [dualPairing_comp]; exact hμ.symm)
+      subst this
+      change hS.extClass.comp (Abelian.Ext.mk₀ (S.f ≫ ψ)) (add_zero 1) = 0
+      rw [← Abelian.Ext.mk₀_comp_mk₀, ← Abelian.Ext.comp_assoc_of_second_deg_zero,
+        hS.extClass_comp, Abelian.Ext.zero_comp]
+  exact ⟨(Ψ.quotKerEquivOfSurjective hΨ).symm ≪≫ₗ Submodule.quotEquivOfEq _ _ hker.symm ≪≫ₗ
+    D.quotKerEquivOfSurjective hD⟩
 end Scheme.Modules
 
 namespace ProjectiveLine
@@ -491,6 +583,78 @@ theorem nonempty_dual_H_zero_addEquiv_ext [HasExt.{u} (ProjectiveLine (Spec (.of
   exact nonempty_dual_H_zero_addEquiv_ext_of_shortExact t hS
     (bijective_dualPairing_of_isCoherent k t ht S.X₁)
     (bijective_dualPairing_sigma t _ fun p ↦ bijective_dualPairing_twist k t ht _).2
+
+/-- **Duality on the projective line, `H⁰`, `k`-linearly.** For a coherent `𝒪_{ℙ¹_k}`-module
+`𝒢`, `H⁰(ℙ¹_k, 𝒢)^∨ ≅ Ext¹(𝒢, Ω¹_{ℙ¹_k/k})` as `k`-vector spaces, for the `k`-linear structure
+of `𝒪_{ℙ¹_k}`-modules (`Scheme.Modules.linearOfOver`) and the induced `k`-vector space structure
+on `Ext`.
+
+The proof is that of `nonempty_dual_H_zero_addEquiv_ext`, using the `k`-linear form
+`Scheme.Modules.nonempty_dual_H_zero_linearEquiv_ext_of_shortExact` of the resolution argument.
+The isomorphism is not shown to be induced by the Yoneda pairing
+`Ext¹(𝒢, ω) × H⁰(𝒢) → H¹(ω) ≅ k`, nor to be natural in `𝒢`.
+
+(blueprint: `thm-sc-p1-duality`, second isomorphism) -/
+theorem nonempty_dual_H_zero_linearEquiv_ext [HasExt.{u} (ProjectiveLine (Spec (.of k))).Modules]
+    (𝒢 : (ProjectiveLine (Spec (.of k))).Modules)
+    [SheafOfModules.IsQuasicoherent (R := (ProjectiveLine (Spec (.of k))).ringCatSheaf) 𝒢]
+    [SheafOfModules.IsFinitePresentation (R := (ProjectiveLine (Spec (.of k))).ringCatSheaf) 𝒢] :
+    Nonempty (Module.Dual k (𝒢.H 0) ≃ₗ[k]
+      Scheme.Modules.Ext 𝒢 (ProjectiveLine (Spec (.of k)) ↘ Spec (.of k)).relativeDifferentials
+        1) := by
+  obtain ⟨t, ht⟩ := exists_dual_H_one_relativeDifferentials_ne_zero k
+  obtain ⟨ι, _, e, φ₀, hφ₀, -, -⟩ := ProjectiveSpace.exists_epi_sigma_twist k 𝒢
+  -- `ℰ = ⨁_{j, i} 𝒪(-eⱼ - 1)`, mapping onto `⨁ⱼ 𝒪(-eⱼ)` by the Koszul maps `xᵢ`
+  let m : ι → ℤ := fun j ↦ -(e j : ℤ) - 2
+  have hm (j : ι) : 𝒪(m j + 1 + 1) = 𝒪(-(e j : ℤ)) := by
+    congr 1
+    simp only [m]
+    omega
+  let E := ∐ fun p : ι × ULift.{u} (Fin 2) ↦ 𝒪(m p.1 + 1)
+  let ψ : E ⟶ ∐ fun j ↦ 𝒪(-(e j : ℤ)) := Sigma.desc fun p ↦
+    mulX (Spec (.of k)) (m p.1 + 1) p.2.down ≫ eqToHom (hm p.1) ≫
+      Sigma.ι (fun j ↦ 𝒪(-(e j : ℤ))) p.1
+  have hψ : Epi ψ := by
+    refine ⟨fun {Z} g h hgh ↦ Sigma.hom_ext _ _ fun j ↦ ?_⟩
+    have : Epi (koszulRight (Spec (.of k)) (m j)) :=
+      (koszul_shortExact (Spec (.of k)) (m j)).epi_g
+    rw [← cancel_epi (koszulRight (Spec (.of k)) (m j) ≫ eqToHom (hm j))]
+    simp only [Category.assoc]
+    refine biprod.hom_ext' _ _ ?_ ?_
+    · have h₀ := Sigma.ι (fun p : ι × ULift.{u} (Fin 2) ↦ 𝒪(m p.1 + 1)) (j, ULift.up 0) ≫= hgh
+      simpa [koszulRight, ψ, E] using h₀
+    · have h₁ := Sigma.ι (fun p : ι × ULift.{u} (Fin 2) ↦ 𝒪(m p.1 + 1)) (j, ULift.up 1) ≫= hgh
+      simpa [koszulRight, ψ, E] using h₁
+  let S := ShortComplex.mk (kernel.ι (ψ ≫ φ₀)) (ψ ≫ φ₀) (kernel.condition _)
+  have hS : S.ShortExact :=
+    ShortComplex.ShortExact.mk' (ShortComplex.exact_of_f_is_kernel _ (kernelIsKernel _))
+      inferInstance (epi_comp ψ φ₀)
+  have : IsLocallyNoetherian (ProjectiveLine (Spec (.of k))) :=
+    LocallyOfFiniteType.isLocallyNoetherian (ProjectiveLine (Spec (.of k)) ↘ Spec (.of k))
+  have := isQuasicoherent_sigma fun p : ι × ULift.{u} (Fin 2) ↦ 𝒪(m p.1 + 1)
+  have := isFinitePresentation_sigma fun p : ι × ULift.{u} (Fin 2) ↦ 𝒪(m p.1 + 1)
+  have : SheafOfModules.IsQuasicoherent (R := (ProjectiveLine (Spec (.of k))).ringCatSheaf)
+      S.X₁ := isQuasicoherent_kernel _
+  have : SheafOfModules.IsFinitePresentation (R := (ProjectiveLine (Spec (.of k))).ringCatSheaf)
+      S.X₁ := isFinitePresentation_kernel _
+  have : ∀ p : ι × ULift.{u} (Fin 2), Subsingleton ((𝒪(m p.1 + 1)).H 0) := fun p ↦
+    subsingleton_H_zero_twist_of_neg k _ (by simp only [m]; omega)
+  have : Subsingleton (S.X₂.H 0) := subsingleton_H_sigma _ 0
+  have (p : ι × ULift.{u} (Fin 2)) : Subsingleton (Ext (𝒪(m p.1 + 1)) ω 1) := by
+    obtain ⟨eE⟩ := nonempty_ext_addEquiv_H (𝒪(m p.1 + 1)) ω 1
+    obtain ⟨eω⟩ := nonempty_relativeDifferentials_iso_twist k
+    have : (ω).IsInvertible := IsInvertible.of_iso eω.symm
+    let i := asIso (dualTensorHom (𝒪(m p.1 + 1)) ω) ≪≫
+      (nonempty_homObj_twist_iso k (m p.1 + 1)).some
+    have := subsingleton_H_one_twist k (-(m p.1 + 1) + -2) (by simp only [m]; omega)
+    have : Subsingleton (((𝒪(m p.1 + 1))ᵛ ⊗ ω).H 1) :=
+      (H.mapLinearEquiv i 1).toEquiv.subsingleton
+    exact eE.toEquiv.subsingleton
+  have : Subsingleton (Ext S.X₂ ω 1) := Abelian.Ext.subsingleton_sigma _ ω 1
+  exact nonempty_dual_H_zero_linearEquiv_ext_of_shortExact t hS
+    (bijective_dualPairing_of_isCoherent k t ht S.X₁)
+    (bijective_dualPairing_sigma t _ fun p ↦ bijective_dualPairing_twist k t ht _).2
+
 
 end ProjectiveLine
 
