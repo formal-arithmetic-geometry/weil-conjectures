@@ -9,6 +9,8 @@ public import Mathlib.Algebra.Category.CommAlgCat.Basic
 public import Mathlib.LinearAlgebra.SymmetricAlgebra.Basic
 public import Mathlib.RingTheory.TensorProduct.Maps
 public import Mathlib.RingTheory.Kaehler.Basic
+import Sheaf.RingTheory.ReducedTensorDifferentials
+import Sheaf.RingTheory.SymmetricAlgebraDifferentials
 
 /-! # Reduced differentials of symmetric-algebra stabilization
 
@@ -55,6 +57,21 @@ theorem symmetric_stabilization_differentials
     letI : Algebra (SymmetricAlgebra A₁ K ⊗[A] B) Q := τ.toRingHom.toAlgebra
     Nonempty ((Q ⊗[SymmetricAlgebra A₁ K ⊗[A] B]
       KaehlerDifferential A₁ (SymmetricAlgebra A₁ K ⊗[A] B)) ≃ₗ[Q]
-        ((Q ⊗[B] KaehlerDifferential A B) × (Q ⊗[A₁] K))) := by sorry
+        ((Q ⊗[B] KaehlerDifferential A B) × (Q ⊗[A₁] K))) := by
+  let S := SymmetricAlgebra A₁ K
+  let : Algebra B Q := σ.toRingHom.toAlgebra
+  let : Algebra A₁ Q := η.toRingHom.toAlgebra
+  let : Algebra S Q :=
+    (τ.comp Algebra.TensorProduct.includeLeft).toRingHom.toAlgebra
+  let : Algebra (S ⊗[A] B) Q := τ.toRingHom.toAlgebra
+  have : IsScalarTower A₁ S Q := IsScalarTower.of_algebraMap_eq fun a => by
+    change η a = τ (algebraMap A₁ S a ⊗ₜ[A] (1 : B))
+    exact (hη a).symm
+  obtain ⟨eTensor⟩ := reduced_tensor_differentials A A₁ S B Q σ η τ hσ hη
+  obtain ⟨eSym, _⟩ := symmetric_algebra_differentials A₁ K
+  let eBase := LinearEquiv.baseChange S Q _ _ eSym
+  let eCancel := TensorProduct.AlgebraTensorModule.cancelBaseChange A₁ S Q Q K
+  exact ⟨eTensor.trans
+    ((LinearEquiv.refl Q _).prodCongr (eBase.trans eCancel))⟩
 
 end AlgebraicGeometry

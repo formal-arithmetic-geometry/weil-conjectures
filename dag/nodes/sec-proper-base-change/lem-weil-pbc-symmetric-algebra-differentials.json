@@ -1,0 +1,229 @@
+{
+ "id": "lem-weil-pbc-symmetric-algebra-differentials",
+ "kind": "statement",
+ "title": "Differentials of an arbitrary symmetric algebra",
+ "statement": "Let R be a commutative ring and K an arbitrary R-module. Put S=Sym_R(K) with generator map iota:K -> S [lem-weil-pbc-symmetric-algebra-universal-property]. There exists an S-linear equivalence e:Omega[S/R] -> S tensor_R K such that e(d(iota(k)))=1 tensor k for every k in K. Here differentials are as in [def-weil-pbc-kahler-differentials] and extension of scalars is as in [lem-weil-pbc-module-base-change-universal-property]. This holds without finite generation, freeness or projectivity of K.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tags 00DM and 00RO; the symmetric-algebra differential calculation used in Tag 07M7; parent node proof step 2"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-kahler-differentials",
+  "lem-weil-pbc-module-base-change-universal-property",
+  "lem-weil-pbc-symmetric-algebra-universal-property"
+ ],
+ "proof": [
+  {
+   "text": "For any S-module N and R-linear v:K -> N, use SymmetricAlgebra.lift on k -> (iota(k),v(k)) into the trivial square-zero extension S plus N. The first component is the identity by SymmetricAlgebra.algHom_ext. The second component d_v is an R-derivation by the square-zero multiplication law, and d_v(iota(k))=v(k). Two derivations agreeing on iota(K) agree on constants, sums and products by the derivation laws, and therefore on all S by SymmetricAlgebra.induction.",
+   "uses": [
+    "lem-weil-pbc-symmetric-algebra-universal-property"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For N=S tensor_R K and v(k)=1 tensor k, lift d_v through the differential universal property to f:Omega[S/R] -> S tensor_R K. Extend the R-linear map k -> d(iota(k)) to g:S tensor_R K -> Omega[S/R]. The composite g f composed with d agrees with d on iota(K), so derivation uniqueness and differential universality give g f=id. The composite f g is the identity on 1 tensor k, so base-change extensionality gives f g=id. Form the linear equivalence with forward map f and inverse g; its required generator formula follows from d_v(iota(k))=1 tensor k.",
+   "uses": [
+    "def-weil-pbc-kahler-differentials",
+    "lem-weil-pbc-module-base-change-universal-property",
+    "lem-weil-pbc-symmetric-algebra-universal-property"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-kahler-differentials",
+  "lem-weil-pbc-module-base-change-universal-property",
+  "lem-weil-pbc-symmetric-algebra-universal-property"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "H1",
+  "date": "2026-10-13",
+  "description": "Written and fully proved by H1 from the parent node universal-property plan, with explicit square-zero algebra constructions and inverse identities."
+ },
+ "mathlib_searches": [
+  {
+   "t": "2026-10-12T15:51:53Z",
+   "tool": "leanfinder",
+   "query": "Kahler differentials of a symmetric algebra are the tensor product with its generating module",
+   "sub": "",
+   "ok": true,
+   "n_hits": 8,
+   "note": "",
+   "top": [
+    "tensorKaehlerQuotKerSqEquiv",
+    "tensorKaehlerQuotKerSqEquiv_tmul_D",
+    "tensorKaehlerQuotKerSqEquiv_symm_tmul_D",
+    "KaehlerDifferential.quotKerTotalEquiv",
+    "KaehlerDifferential.D_apply",
+    "KaehlerDifferential",
+    "KaehlerDifferential.quotKerTotalEquiv_apply",
+    "KaehlerDifferential.DLinearMap_apply"
+   ],
+   "digest": "461e93586e418eac",
+   "verdict": "No exact splitting found; related base-change and differential universal-property results were inspected.",
+   "date": "2026-10-13"
+  },
+  {
+   "t": "2026-10-12T15:52:53Z",
+   "tool": "loogle",
+   "query": "KaehlerDifferential, SymmetricAlgebra",
+   "sub": "",
+   "ok": true,
+   "n_hits": 0,
+   "note": "",
+   "top": [],
+   "digest": "4f53cda18c2baa0c",
+   "verdict": "No exact splitting found; related base-change and differential universal-property results were inspected.",
+   "date": "2026-10-13"
+  },
+  {
+   "t": "2026-10-12T15:52:54Z",
+   "tool": "grep",
+   "query": "Kaehler.*prod|symmetric.*[Dd]ifferential",
+   "sub": "",
+   "ok": true,
+   "n_hits": 12,
+   "note": "",
+   "top": [
+    "Mathlib/RingTheory/Extension/Cotangent/Basic.lean",
+    "Mathlib/RingTheory/Extension/Cotangent/Basic.lean",
+    "Mathlib/RingTheory/Extension/Cotangent/Basic.lean",
+    "Mathlib/RingTheory/Extension/Cotangent/BaseChange.lean",
+    "Mathlib/RingTheory/Smooth/Quotient.lean",
+    "Mathlib/RingTheory/Smooth/Fiber.lean",
+    "Mathlib/RingTheory/Kaehler/JacobiZariski.lean",
+    "Mathlib/RingTheory/Kaehler/Basic.lean"
+   ],
+   "digest": "b2e6b6aed34e6b1c",
+   "verdict": "No exact splitting found; related base-change and differential universal-property results were inspected.",
+   "date": "2026-10-13"
+  },
+  {
+   "t": "2026-10-12T16:37:39Z",
+   "tool": "leanfinder",
+   "query": "The Kahler differentials of a tensor product of algebras split into the scalar extensions of the differentials of the factors",
+   "sub": "",
+   "ok": true,
+   "n_hits": 8,
+   "note": "",
+   "top": [
+    "KaehlerDifferential.tensorKaehlerEquiv_tmul_D",
+    "KaehlerDifferential.tensorKaehlerEquiv_tmul",
+    "KaehlerDifferential.tensorKaehlerEquivBase_tmul",
+    "KaehlerDifferential.tensorKaehlerEquivBase",
+    "KaehlerDifferential.tensorKaehlerEquiv_symm_D_tmul",
+    "KaehlerDifferential.tensorKaehlerEquiv_symm_D_tmul'",
+    "tensorKaehlerQuotKerSqEquiv_tmul_D",
+    "tensorKaehlerQuotKerSqEquiv"
+   ],
+   "digest": "10f39986e0dbbb86",
+   "verdict": "No exact splitting found; related base-change and differential universal-property results were inspected.",
+   "date": "2026-10-13"
+  },
+  {
+   "t": "2026-10-12T16:37:44Z",
+   "tool": "loogle",
+   "query": "KaehlerDifferential, Prod",
+   "sub": "",
+   "ok": true,
+   "n_hits": 6,
+   "note": "",
+   "top": [
+    "Algebra.Generators.CotangentSpace.compEquiv",
+    "Algebra.Generators.CotangentSpace.fst_compEquiv",
+    "Algebra.Generators.CotangentSpace.fst_compEquiv_apply",
+    "Algebra.Generators.H1Cotangent.δAux_ofComp",
+    "Algebra.Generators.CotangentSpace.compEquiv_symm_inr",
+    "Algebra.Generators.CotangentSpace.compEquiv_symm_zero"
+   ],
+   "digest": "3bbd5b6d9fbb91f7",
+   "verdict": "No exact splitting found; related base-change and differential universal-property results were inspected.",
+   "date": "2026-10-13"
+  },
+  {
+   "t": "2026-10-12T16:37:44Z",
+   "tool": "grep",
+   "query": "SymmetricAlgebra.*Kaehler|Kaehler.*SymmetricAlgebra",
+   "sub": "",
+   "ok": true,
+   "n_hits": 0,
+   "note": "",
+   "top": [],
+   "digest": "4f53cda18c2baa0c",
+   "verdict": "No exact splitting found; related base-change and differential universal-property results were inspected.",
+   "date": "2026-10-13"
+  },
+  {
+   "t": "2026-10-12T16:40:18Z",
+   "tool": "leansearch",
+   "query": "Kahler differentials of symmetric algebras and splitting the differentials of tensor products",
+   "sub": "",
+   "ok": false,
+   "n_hits": 0,
+   "note": "service unavailable: Internal Server Error",
+   "top": [],
+   "digest": "4f53cda18c2baa0c",
+   "verdict": "unavailable",
+   "date": "2026-10-13"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.SymmetricStabilizationDifferentials",
+  "date": "2026-10-13",
+  "group": "H1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "Essential-surjectivity approximation step: Tag 07M7, first paragraph, symmetric-algebra reduced differential calculation; symmetric-algebra derivation restriction",
+   "via": [
+    "lem-weil-pbc-symmetric-stabilization-differentials",
+    "lem-weil-pbc-smooth-section-stabilization-free",
+    "lem-weil-pbc-smooth-section-differential-basis",
+    "lem-weil-pbc-smooth-section-etale-neighbourhoods",
+    "lem-weil-pbc-smooth-section-etale-lift",
+    "lem-weil-pbc-henselian-pair-approximation",
+    "lem-weil-pbc-finite-etale-lifting-approximation",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.SymmetricAlgebraDifferentials",
+  "file": "lean/Sheaf/RingTheory/SymmetricAlgebraDifferentials.lean",
+  "declaration": "AlgebraicGeometry.symmetric_algebra_differentials",
+  "statement": "theorem symmetric_algebra_differentials\n    (R K : Type u) [CommRing R] [AddCommGroup K] [Module R K] :\n    ∃ e : KaehlerDifferential R (SymmetricAlgebra R K) ≃ₗ[SymmetricAlgebra R K]\n        (SymmetricAlgebra R K ⊗[R] K),\n      ∀ k : K, e (KaehlerDifferential.D R (SymmetricAlgebra R K)\n        (SymmetricAlgebra.ι R K k)) = 1 ⊗ₜ[R] k",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H1",
+  "result": "pass",
+  "landing": "20261012T173829-L-3296794",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H1",
+  "result": "pass",
+  "landing": "20261012T173829-L-3296794",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
