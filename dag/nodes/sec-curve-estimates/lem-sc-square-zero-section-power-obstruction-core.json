@@ -1,0 +1,157 @@
+{
+ "id": "lem-sc-square-zero-section-power-obstruction-core",
+ "kind": "statement",
+ "title": "Obstruction and power lifting, without the quasi-coherence assertion",
+ "statement": "Let j:Z\\to X be a closed immersion [def-weil-closed-immersion] of schemes [def-pc-scheme], L an invertible module [def-sc-invertible-module], and I=j.\\ker [def-sbc-closed-immersion-ideal-sheaf] with I^2=0 [def-sbc-ideal-sheaf-powers]. For n\\ge0 and s a global section of N=(j^*L)^{\\otimes n}, with tensor pullback [def-pc-module-pullback], put F=j^*(I\\otimes L^{\\otimes n}). There exists xi in H^1(Z,F) [def-sc-ringed-space-module-cohomology] such that for every e\\ge0, if the map on H^1 induced by F\\simeq F\\otimes O_Z\\to F\\otimes N^{\\otimes e}, v\\mapsto v\\otimes s^{\\otimes e}, kills xi, then there are a global section t of L^{\\otimes n(e+1)} and an isomorphism a:j^*(L^{\\otimes n(e+1)})\\simeq N^{\\otimes(e+1)} which sends the restriction of t under the canonical adjunction unit [lem-pc-module-pullback-adjunction] to the (e+1)st tensor power of the section morphism of s. No compactness, Noetherianity, or affine nonvanishing-open assumption is imposed.",
+ "stmt_deps": [
+  "def-weil-closed-immersion",
+  "def-pc-scheme",
+  "def-sbc-closed-immersion-ideal-sheaf",
+  "def-sbc-ideal-sheaf-powers",
+  "def-sc-invertible-module",
+  "def-pc-module-pullback",
+  "lem-pc-module-pullback-adjunction",
+  "def-pc-quasi-coherent-sheaf",
+  "def-sc-ringed-space-module-cohomology"
+ ],
+ "source": {
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Cohomology of Schemes, Lemma 09MS, equation (30.17.5.1) and the square-zero section-power lifting argument; https://stacks.math.columbia.edu/tag/09MS"
+ },
+ "proof": [
+  {
+   "text": "Put N=j^*L. The closed-immersion ideal sequence tensored by the invertible L^d is exact, with kernel M_d=I tensor L^d and quotient j_*j^*(L^d), by the unit-quotient theorem. Pullback commutes with tensors, so identify the quotient with j_*(N^d). The ideal I and M_d are quasi-coherent, and I M_d=0 because I^2=0. The annihilated-module theorem identifies M_d with j_*G_d, where G_d=j^*M_d is quasi-coherent. The affine-morphism cohomology edge identifies H^1(X,M_d) with H^1(Z,G_d). The given section s of N^n has a connecting class xi in degree n.",
+   "uses": [
+    "lem-weil-pbc-closed-immersion-unit-quotient",
+    "lem-weil-pbc-closed-immersion-pushforward-annihilated",
+    "lem-weil-pbc-affine-morphism-cohomology-edge",
+    "def-sbc-closed-immersion-ideal-sheaf",
+    "def-sbc-ideal-sheaf-powers",
+    "lem-weil-pbc-invertible-pullback-tensor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Cohomology of Schemes, Lemma 09MS, equation (30.17.5.1) and the square-zero section-power lifting argument; https://stacks.math.columbia.edu/tag/09MS"
+   }
+  },
+  {
+   "text": "Set O'=direct sum over m>=0 of L^{tensor m} and O=direct sum over m>=0 of j_*j^*L^{tensor m}, with multiplication by tensor product. These are sheaves of commutative O_X-algebras: locally a frame for the invertible L identifies O' with a polynomial algebra in one generator, so its multiplication is commutative; the quotient O is commutative too. The degreewise surjection from step 1 gives O' \\to O with kernel K=direct sum over m>=0 of I tensor L^{tensor m}; products of two kernel terms land in I^2 tensor L^{tensor (a+b)}=0. Apply [lem-sc-boundary-derivation-square-zero] to O' \\to O. By naturality of the long exact sequence for inclusion of a degree-m summand and projection onto it, projecting the boundary of the summed sequence to degree m is the boundary of the degree-m exact sequence. Thus the image of s in the degree-n summand has boundary xi. Induct on k>=1: for k=1 this is xi; if partial(s^k)=k s^{k-1}xi, the Leibniz rule gives partial(s^{k+1})=s partial(s^k)+s^k partial(s)=(k+1)s^k xi. Taking k=e+1 gives partial(s^{e+1})=(e+1)s^e xi, where s^e acts through O on K.",
+   "uses": [
+    "lem-sc-boundary-derivation-square-zero"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Cohomology Lemma 0B8S, boundary derivation"
+   }
+  },
+  {
+   "text": "For any exponent e annihilating the transported boundary class, naturality identifies the displayed H^1 map with multiplication by s^e. The derivation formula makes the degree n*(e+1) boundary vanish. Exactness then supplies a lift; the tensor-pullback comparisons identify its restriction with the (e+1)st power.",
+   "uses": [
+    "lem-weil-pbc-affine-morphism-cohomology-edge",
+    "lem-weil-pbc-invertible-pullback-tensor",
+    "lem-pc-module-pullback-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Cohomology of Schemes, Lemma 09MS, equation (30.17.5.1) and the square-zero section-power lifting argument; https://stacks.math.columbia.edu/tag/09MS"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-closed-immersion-unit-quotient",
+  "lem-weil-pbc-closed-immersion-pushforward-annihilated",
+  "lem-weil-pbc-affine-morphism-cohomology-edge",
+  "def-sbc-closed-immersion-ideal-sheaf",
+  "def-sbc-ideal-sheaf-powers",
+  "lem-weil-pbc-invertible-pullback-tensor",
+  "lem-sc-boundary-derivation-square-zero",
+  "lem-pc-module-pullback-adjunction"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "R3 second reading: the obstruction-and-lifting conjunct of the tensor exact sequence and boundary calculation in 09MS; the quasi-coherence conjunct is proved separately in the parent using upstream declarations."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Connecting homomorphism of an ideal sheaf exact sequence and tensor powers of a section of a line bundle",
+   "date": "2026-10-13",
+   "results": "Hits: Algebra.Generators.H1Cotangent.δ, Algebra.H1Cotangent.δ, Algebra.Generators.H1Cotangent.exact_δ_map, Algebra.Generators.H1Cotangent.δ_eq, Algebra.H1Cotangent.exact_δ_mapBaseChange, KaehlerDifferential.D_tensorProductTo, KaehlerDifferential.kerCotangentToTensor, Algebra.Generators.H1Cotangent.exact_map_δ'",
+   "verdict": "No global square-zero section-power obstruction criterion; quasi-coherence has upstream replacements used in the parent."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsQuasicoherent\", \"kernel\"",
+   "date": "2026-10-13",
+   "results": "No hits",
+   "verdict": "No global square-zero section-power obstruction criterion; quasi-coherence has upstream replacements used in the parent."
+  },
+  {
+   "tool": "grep",
+   "query": "obstruction|connecting.*derivation|derivation.*connecting",
+   "date": "2026-10-13",
+   "results": "No hits",
+   "verdict": "No global square-zero section-power obstruction criterion; quasi-coherence has upstream replacements used in the parent."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A global section of a line bundle over a square zero closed subscheme lifts after taking a tensor power if that power annihilates its connecting cohomology class",
+   "date": "2026-10-13",
+   "results": "service unavailable: Internal Server Error"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.SquareZeroSectionPowerObstruction",
+  "date": "2026-10-13",
+  "group": "R3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-square-zero-section-power-obstruction",
+   "place": "Intermediate component of the parent obstruction theorem",
+   "via": []
+  },
+  "same_as": null
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-thm-curveestimate",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.SquareZeroSectionPowerLiftingCriterion",
+  "file": "lean/Sheaf/AlgebraicGeometry/SquareZeroSectionPowerLiftingCriterion.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.square_zero_section_power_obstruction_core",
+  "statement": "theorem square_zero_section_power_obstruction_core {X Z : Scheme.{u}} (j : Z ⟶ X) [IsClosedImmersion j] (L : X.Modules) [L.IsInvertible] (hI : j.ker ^ 2 = ⊥) (n : ℕ) (s : (((tensorPullback j).obj L).tensorPow n).val.presheaf.obj (Opposite.op ⊤)) : let F := (tensorPullback j).obj (j.ker.toModules ⊗ L.tensorPow n) ∃ (xi : (RingedSpace.moduleCohomology Z.toRingedSpace 1).obj F), ∀ e : ℕ, (RingedSpace.moduleCohomology Z.toRingedSpace 1).map ((ρ_ F).inv ≫ F ◁ tensorPowSection (homOfGlobalSection (((tensorPullback j).obj L).tensorPow n) s) e) xi = 0 → ∃ t : (L.tensorPow (n * (e + 1))).val.presheaf.obj (Opposite.op ⊤), ∃ a : (tensorPullback j).obj (L.tensorPow (n * (e + 1))) ≅ (((tensorPullback j).obj L).tensorPow n).tensorPow (e + 1), homOfGlobalSection ((tensorPullback j).obj (L.tensorPow (n * (e + 1)))) (((Classical.choose (exists_tensorPullbackAdjunction j)).unit.app (L.tensorPow (n * (e + 1)))).val.app (Opposite.op ⊤) t) ≫ a.hom = tensorPowSection (homOfGlobalSection (((tensorPullback j).obj L).tensorPow n) s) (e + 1)",
+  "branch": "sheaf-dag",
+  "by": "R3",
+  "date": "2026-10-13"
+ },
+ "lean_audit": null,
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R3",
+  "result": "pass",
+  "landing": "20261012T184340-L-4018760",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R3",
+  "result": "pass",
+  "landing": "20261012T184340-L-4018760",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

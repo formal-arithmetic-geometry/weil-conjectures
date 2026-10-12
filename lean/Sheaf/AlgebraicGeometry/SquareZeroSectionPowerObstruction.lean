@@ -10,11 +10,11 @@ public import Sheaf.Topology.RingedSpaceModuleCohomology
 public import Sheaf.AlgebraicGeometry.TensorPullbackAdjunction
 public import WeilConjectures.AlgebraicGeometry.Modules.ClearDenominators
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
-import Sheaf.AlgebraicGeometry.Modules.InvertiblePullbackTensor
-import Sheaf.AlgebraicGeometry.AffineMorphismCohomologyEdge
-import Sheaf.AlgebraicGeometry.ClosedImmersionPushforwardAnnihilated
-import Sheaf.AlgebraicGeometry.ClosedImmersionUnitQuotient
-import Sheaf.Paper.BoundaryDerivationSquareZero
+
+import Sheaf.AlgebraicGeometry.SquareZeroSectionPowerLiftingCriterion
+import WeilConjectures.AlgebraicGeometry.Modules.ClosedImmersion
+import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentKernel
+import WeilConjectures.AlgebraicGeometry.Modules.ProjectionFormula
 
 /-! # Square-zero section-power obstruction
 
@@ -69,6 +69,25 @@ theorem exists_square_zero_section_power_obstruction
               (((Classical.choose (exists_tensorPullbackAdjunction j)).unit.app
                 (L.tensorPow (n * (e + 1)))).val.app (Opposite.op ⊤) t) ≫ a.hom =
             tensorPowSection (homOfGlobalSection
-              (((tensorPullback j).obj L).tensorPow n) s) (e + 1) := by sorry
+              (((tensorPullback j).obj L).tensorPow n) s) (e + 1) := by
+  dsimp only
+  constructor
+  · have := SheafOfModules.isQuasicoherent_unit (R := j.ker.subscheme.ringCatSheaf)
+    have := SheafOfModules.isQuasicoherent_unit (R := X.ringCatSheaf)
+    have : SheafOfModules.IsQuasicoherent (R := X.ringCatSheaf)
+        ((SheafOfModules.pushforward j.ker.subschemeι.toRingCatSheafHom).obj
+          (SheafOfModules.unit j.ker.subscheme.ringCatSheaf)) :=
+      isQuasicoherent_pushforward_of_isClosedImmersion j.ker.subschemeι _
+    have : j.ker.toModules.IsQuasicoherent :=
+      isQuasicoherent_kernel j.ker.toPushforwardSubscheme
+    have : (j.ker.toModules ⊗ L.tensorPow n).IsQuasicoherent :=
+      isQuasicoherent_tensorObj _ _
+    let a : tensorPullback j ≅ pullback j :=
+      (Classical.choose (exists_tensorPullbackAdjunction j)).leftAdjointUniq
+        (pullbackPushforwardAdjunction j)
+    exact (SheafOfModules.isQuasicoherent Z.ringCatSheaf).prop_of_iso
+      (a.app _).symm (inferInstance : ((pullback j).obj _).IsQuasicoherent)
+  · exact square_zero_section_power_obstruction_core j L hI n s
+
 
 end AlgebraicGeometry.Scheme.Modules
