@@ -5,6 +5,7 @@ Authors: Nailin Guan
 -/
 module
 
+public import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.SingleFunctor
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.FailureOverField.TransitionComposition
 
 /-!
@@ -30,93 +31,6 @@ the limit theorem for higher direct images (`AlgebraicGeometry.Etale.higherDirec
 universe u
 
 open CategoryTheory Limits
-
-namespace CategoryTheory.Functor
-
-variable {C D E : Type*} [Category C] [Category D] [Category E]
-  [Abelian C] [Abelian D] [Abelian E]
-  [HasDerivedCategory C] [HasDerivedCategory D] [HasDerivedCategory E]
-
-attribute [local instance] comp_preservesFiniteLimits comp_preservesFiniteColimits
-
-set_option backward.defeqAttrib.useBackward true in
-set_option backward.isDefEq.respectTransparency false in
-lemma mapDerivedCategorySingleFunctor_hom_app_eq (F : C ⥤ D) [F.Additive]
-    [PreservesFiniteLimits F] [PreservesFiniteColimits F] (X : C) :
-    (F.mapDerivedCategorySingleFunctor 0).hom.app X =
-      F.mapDerivedCategoryFactors.hom.app ((HomologicalComplex.single C (.up ℤ) 0).obj X) ≫
-        DerivedCategory.Q.map ((F.mapCochainComplexSingleFunctor 0).hom.app X) := by
-  rw [← F.mapDerivedCategoryFactors_inv_app_mapDerivedCategorySingleFunctor_hom_app X,
-    Iso.hom_inv_id_app_assoc]
-
-set_option backward.defeqAttrib.useBackward true in
-set_option backward.isDefEq.respectTransparency false in
-lemma mapDerivedCategoryNatIso_hom_app_singleFunctor {F G : C ⥤ D} [F.Additive] [G.Additive]
-    [PreservesFiniteLimits F] [PreservesFiniteColimits F]
-    [PreservesFiniteLimits G] [PreservesFiniteColimits G] (e : F ≅ G) (X : C) :
-    (mapDerivedCategoryNatIso e).hom.app ((DerivedCategory.singleFunctor C 0).obj X) ≫
-        (G.mapDerivedCategorySingleFunctor 0).hom.app X =
-      (F.mapDerivedCategorySingleFunctor 0).hom.app X ≫
-        (DerivedCategory.singleFunctor D 0).map (e.hom.app X) := by
-  rw [mapDerivedCategorySingleFunctor_hom_app_eq, mapDerivedCategorySingleFunctor_hom_app_eq]
-  erw [mapDerivedCategoryNatIso_fac_assoc e ((HomologicalComplex.single C (.up ℤ) 0).obj X)]
-  rw [Category.assoc]
-  congr 1
-  rw [← DerivedCategory.Q.map_comp]
-  change _ = _ ≫ DerivedCategory.Q.map _
-  rw [← DerivedCategory.Q.map_comp]
-  congr 1
-  ext i
-  by_cases hi : i = 0
-  · subst hi
-    have h' : e.hom.app (((HomologicalComplex.single C (ComplexShape.up ℤ) 0).obj X).X 0) =
-        F.map (HomologicalComplex.singleObjXSelf (ComplexShape.up ℤ) 0 X).hom ≫ e.hom.app X ≫
-          G.map (HomologicalComplex.singleObjXSelf (ComplexShape.up ℤ) 0 X).inv := by
-      rw [e.hom.naturality_assoc, ← G.map_comp, Iso.hom_inv_id, G.map_id, Category.comp_id]
-    simp only [mapHomologicalComplex_obj_X, comp_obj, mapCochainComplexSingleFunctor,
-      HomologicalComplex.comp_f, NatTrans.mapHomologicalComplex_app_f, h',
-      HomologicalComplex.singleObjXSelf, HomologicalComplex.singleObjXIsoOfEq, eqToIso_refl,
-      Iso.refl_hom, map_id, Iso.refl_inv, Category.id_comp,
-      HomologicalComplex.singleMapHomologicalComplex_hom_app_self, Category.assoc,
-      CochainComplex.singleFunctors, CochainComplex.shiftFunctor_obj_X',
-      HomologicalComplex.single_map_f_self]
-    erw [G.map_id, Category.comp_id, Category.id_comp, Category.comp_id]
-  · exact (HomologicalComplex.isZero_single_obj_X _ _ _ _ hi).eq_of_tgt _ _
-
-lemma mapDerivedCategoryCompIso_hom_app_singleFunctor (F : C ⥤ D) (G : D ⥤ E)
-    [F.Additive] [G.Additive]
-    [PreservesFiniteLimits F] [PreservesFiniteColimits F]
-    [PreservesFiniteLimits G] [PreservesFiniteColimits G] (X : C) :
-    (mapDerivedCategoryCompIso F G).hom.app ((DerivedCategory.singleFunctor C 0).obj X) ≫
-        G.mapDerivedCategory.map ((F.mapDerivedCategorySingleFunctor 0).hom.app X) ≫
-        (G.mapDerivedCategorySingleFunctor 0).hom.app (F.obj X) =
-      ((F ⋙ G).mapDerivedCategorySingleFunctor 0).hom.app X := by
-  rw [mapDerivedCategorySingleFunctor_hom_app_eq, mapDerivedCategorySingleFunctor_hom_app_eq,
-    mapDerivedCategorySingleFunctor_hom_app_eq]
-  rw [← mapDerivedCategoryCompIso_fac F G]
-  erw [Functor.map_comp, Category.assoc]
-  simp only [Category.assoc]
-  refine congrArg (_ ≫ ·) (congrArg (_ ≫ ·) ?_)
-  have := G.mapDerivedCategoryFactors.hom.naturality
-    ((F.mapCochainComplexSingleFunctor 0).hom.app X)
-  erw [reassoc_of% this]
-  refine congrArg (_ ≫ ·) ?_
-  erw [← DerivedCategory.Q.map_comp, ← DerivedCategory.Q.map_comp]
-  refine congrArg _ ?_
-  ext i
-  by_cases hi : i = 0
-  · subst hi
-    simp only [comp_obj, mapCochainComplexSingleFunctor, HomologicalComplex.comp_f,
-      mapHomologicalComplex_map_f, HomologicalComplex.singleMapHomologicalComplex_hom_app_self,
-      HomologicalComplex.singleObjXSelf, HomologicalComplex.singleObjXIsoOfEq, eqToIso_refl,
-      Iso.refl_hom, map_id, Iso.refl_inv, Category.id_comp, mapHomologicalComplexCompIso,
-      NatIso.mapHomologicalComplex, NatTrans.mapHomologicalComplex_id, NatTrans.id_app,
-      HomologicalComplex.id_f, comp_map]
-    erw [Functor.map_id]
-    rfl
-  · exact (HomologicalComplex.isZero_single_obj_X _ _ _ _ hi).eq_of_tgt _ _
-
-end CategoryTheory.Functor
 
 namespace CategoryTheory.Functor
 

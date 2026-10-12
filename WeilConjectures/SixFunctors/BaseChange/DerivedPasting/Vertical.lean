@@ -62,7 +62,7 @@ section Instances
 variable {X Y : Scheme.{u}} (f : X ⟶ Y)
 
 /-- The pushforward `f_*` preserves injective objects, being right adjoint to the exact
-functor `f^*`. -/
+functor `f^*`. (blueprint: `lem-weil-pbc-direct-image-preserves-injectives`) -/
 instance Etale.preservesInjectiveObjects_lowerStar : ((f)_*[A]).PreservesInjectiveObjects :=
   Functor.preservesInjectiveObjects_of_adjunction_of_preservesMonomorphisms
     (Etale.upperStarLowerStarAdjunction A f)
