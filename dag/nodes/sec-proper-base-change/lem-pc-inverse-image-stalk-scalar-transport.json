@@ -1,0 +1,186 @@
+{
+ "id": "lem-pc-inverse-image-stalk-scalar-transport",
+ "kind": "statement",
+ "title": "Scalar transport through inverse-image stalk identifications",
+ "statement": "Let f:X\\to Y be a scheme morphism [def-weil-locally-ringed-space-morphism], x\\in X, y=f(x), R=(f^{-1}\\mathcal O_Y)_x, S=\\mathcal O_{X,x}, A=\\mathcal O_{Y,y}, and ψ:f^{-1}\\mathcal O_Y\\to\\mathcal O_X the adjoint ring map [def-pc-module-pullback]. Let η_G be the unit of the explicit inverse-image adjunction for the underlying abelian sheaf [def-pc-topological-inverse-image-module]. There exists a family of S-linear isomorphisms β_G:S\\otimes_{A,f^\\sharp_x}\\mathcal G_y\\cong S\\otimes_{R,ψ_x}(f^{-1}\\mathcal G)_x, for all O_Y-modules G, with β_G(1\\otimes s_y)=1\\otimes(η_G(s))_x for every section s on a neighborhood V of y. Stalk module structures are those of [def-pc-module-stalk-functor].",
+ "source": {
+  "document": "literature/stacks-project/sheaves.tex",
+  "place": "Sheaves, Tag 0098 (Lemma 6.26.4), inverse-image scalar transport in the proof via Tag 008H and Section 6.23; expanded steps 1, 2, 4 of lem-weil-pbc-module-stalk-pullback. Read https://stacks.math.columbia.edu/tag/0098 and /tag/008H."
+ },
+ "stmt_deps": [
+  "def-weil-locally-ringed-space-morphism",
+  "def-pc-module-pullback",
+  "def-pc-topological-inverse-image-module",
+  "def-pc-module-stalk-functor"
+ ],
+ "proof": [
+  {
+   "text": "Apply the abelian-group and commutative-ring inverse-image stalk identifications of Tag 008H, with their unit germ formulas. Identify the explicit inverseImageConstruction left adjoint with the recorded sheaf pullback using uniqueness of left adjoints, transporting the unit along that identification. This gives bijections c_G and c_R whose germ formulas use the explicit sheafAdjunctionContinuous unit in the Lean statement.",
+   "uses": [
+    "lem-weil-pbc-topological-inverse-image-stalk",
+    "def-pc-topological-inverse-image-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sheaves.tex",
+    "place": "Sheaves, Tag 0098 (Lemma 6.26.4), inverse-image scalar transport in the proof via Tag 008H and Section 6.23; expanded steps 1, 2, 4 of lem-weil-pbc-module-stalk-pullback. Read https://stacks.math.columbia.edu/tag/0098 and /tag/008H."
+   }
+  },
+  {
+   "text": "Represent an original ring stalk element a and a module stalk element m over a common neighborhood V. The semilinearity of the inverse-image module unit, and the stalk formula for multiplication, give c_G(a m)=c_R(a)c_G(m). The ring-map adjunction identity ψ η_R=f sharp implies ψ_x(c_R(a))=f.stalkMap x(a), first on germs and then on all elements since every ring stalk element is a germ.",
+   "uses": [
+    "def-pc-topological-inverse-image-module",
+    "def-pc-module-pullback",
+    "def-weil-locally-ringed-space-morphism",
+    "def-pc-module-stalk-functor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sheaves.tex",
+    "place": "Sheaves, Tag 0098 (Lemma 6.26.4), inverse-image scalar transport in the proof via Tag 008H and Section 6.23; expanded steps 1, 2, 4 of lem-weil-pbc-module-stalk-pullback. Read https://stacks.math.columbia.edu/tag/0098 and /tag/008H."
+   }
+  },
+  {
+   "text": "Define β_G on generators by b tensor m maps to b tensor c_G(m). It is biadditive. Balancing follows from b tensor c_G(a m)=b tensor c_R(a)c_G(m)=ψ_x(c_R(a))b tensor c_G(m)=f.stalkMap x(a)b tensor c_G(m). Define its inverse on generators by b tensor n maps to b tensor c_G inverse(n). It is balanced because c_G inverse(r n)=c_R inverse(r)c_G inverse(n) and f.stalkMap x(c_R inverse(r))=ψ_x(r). The two composites are identities on generators. Both maps commute with multiplication on the coefficient factor and therefore are linear over O_X,x. The universal property of tensor products gives the claimed module isomorphism.",
+   "uses": [
+    "lem-weil-pbc-topological-inverse-image-stalk"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sheaves.tex",
+    "place": "Sheaves, Tag 0098 (Lemma 6.26.4), inverse-image scalar transport in the proof via Tag 008H and Section 6.23; expanded steps 1, 2, 4 of lem-weil-pbc-module-stalk-pullback. Read https://stacks.math.columbia.edu/tag/0098 and /tag/008H."
+   }
+  },
+  {
+   "text": "For m the germ of s, the formula for c_G gives c_G(m)=germ of η_G(s). Substituting b=1 in the construction of β_G gives the displayed formula. Choose this family of isomorphisms for each G; its values are determined on generators by this construction. Naturality of the final pullback stalk comparison is proved separately in the parent Lean module, not assumed here.",
+   "uses": [
+    "lem-weil-pbc-topological-inverse-image-stalk"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sheaves.tex",
+    "place": "Sheaves, Tag 0098 (Lemma 6.26.4), inverse-image scalar transport in the proof via Tag 008H and Section 6.23; expanded steps 1, 2, 4 of lem-weil-pbc-module-stalk-pullback. Read https://stacks.math.columbia.edu/tag/0098 and /tag/008H."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-module-pullback",
+  "def-pc-module-stalk-functor",
+  "def-pc-topological-inverse-image-module",
+  "def-weil-locally-ringed-space-morphism",
+  "lem-weil-pbc-topological-inverse-image-stalk"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sheaves.tex",
+  "place": "V2 expands the scalar-transport portion of Tag 0098 using Tag 008H and the formulas of Section 6.23; no new mathematical route."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "stalk of pullback of sheaf of modules is extension of scalars of stalk",
+   "date": "2026-10-12",
+   "results": "TopCat.Presheaf.stalkPullbackHom; TopCat.Presheaf.stalkPullbackInv; TopCat.Presheaf.stalkPullbackIso; ModuleCat.Tilde.stalkIso_hom; AlgebraicGeometry.StructureSheaf.toPushforwardStalk_comp; ModuleCat.Tilde.toStalk_comp_stalkToFiberLinearMap; ModuleCat.Tilde.toStalk_comp_stalkToFiberLinearMap_assoc; ModuleCat.Tilde.toStalk",
+   "verdict": "No exact match for the scalar transport through the inverse-image module stalk and the adjoint ring-map compatibility."
+  },
+  {
+   "tool": "loogle",
+   "query": "ModuleCat, Function.Bijective",
+   "date": "2026-10-12",
+   "results": "ModuleCat.hom_bijective",
+   "verdict": "No exact match for the scalar transport through the inverse-image module stalk and the adjoint ring-map compatibility."
+  },
+  {
+   "tool": "grep",
+   "query": "stalk.*[Ss]calar|[Ss]calar.*stalk|[Ss]emilinear.*stalk",
+   "date": "2026-10-12",
+   "results": "Mathlib/AlgebraicGeometry/OrderOfVanishing.lean; Mathlib/AlgebraicGeometry/FunctionField.lean; Mathlib/AlgebraicGeometry/StructureSheaf.lean; Mathlib/RingTheory/Spectrum/Prime/FreeLocus.lean; Mathlib/RingTheory/Spectrum/Prime/FreeLocus.lean; Mathlib/RingTheory/QuasiFinite/Basic.lean",
+   "verdict": "No exact match for the scalar transport through the inverse-image module stalk and the adjoint ring-map compatibility."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Extension of scalars through an isomorphism of inverse image stalks of sheaves of modules",
+   "date": "2026-10-12",
+   "results": "service unavailable: Internal Server Error"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"stalk\", \"smul\"",
+   "results": "AlgebraicGeometry.SurjectiveOnStalks.instIsMultiplicativeScheme",
+   "date": "2026-10-12",
+   "verdict": "No exact inverse-image stalk scalar-transport result; the hits concern affine localization stalks or multiplicativity of surjectivity on stalks."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extension of scalars commutes with semilinear inverse image stalk isomorphism over the ring stalk isomorphism",
+   "results": "ModuleCat.Tilde.stalkIso_inv; ModuleCat.Tilde.stalkIso_hom; ModuleCat.Tilde.stalkIso; ModuleCat.Tilde.toStalk_comp_stalkToFiberLinearMap; ModuleCat.Tilde.toStalk_comp_stalkToFiberLinearMap_assoc; ModuleCat.Tilde.stalkToFiberLinearMap_toStalk; ModuleCat.Tilde.stalkToFiberLinearMap; AlgebraicGeometry.localRingHom_comp_stalkIso_apply'",
+   "date": "2026-10-12",
+   "verdict": "No exact inverse-image stalk scalar-transport result; the hits concern affine localization stalks or multiplicativity of surjectivity on stalks."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Modules.TensorPullbackStalk",
+  "date": "2026-10-12",
+  "group": "V2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-symmetric-product-properties",
+   "place": "Symmetric-product properties, pullback stalk computation: steps 1, 2, 4 of the module-stalk-pullback split",
+   "via": [
+    "lem-weil-pbc-module-stalk-pullback",
+    "lem-weil-pbc-invertible-pullback-tensor"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-reduction",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Modules.InverseImageStalkScalarTransport",
+  "file": "lean/Sheaf/AlgebraicGeometry/Modules/InverseImageStalkScalarTransport.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.exists_inverseImage_stalk_scalar_transport",
+  "statement": "theorem exists_inverseImage_stalk_scalar_transport {X Y : Scheme.{u}}\n    (f : X ⟶ Y) (x : X) :\n    ∃ β : ∀ G : Y.Modules,\n      (ModuleCat.extendScalars (f.stalkMap x).hom).obj\n          ((RingedSpace.moduleStalkFunctor Y.toRingedSpace (f x)).obj G) ≅\n        (ModuleCat.extendScalars\n          ((TopCat.Presheaf.stalkFunctor CommRingCat x).map\n            (tensorPullbackRingMap f).hom).hom).obj\n          (ModuleCat.of (TopCat.Presheaf.stalk (C := CommRingCat.{u}) (X := X.toTopCat)\n            (TopCat.Sheaf.inverseImageRing f.base Y.sheaf).obj x)\n            (TopCat.Presheaf.stalk (C := Ab.{u}) (X := X.toTopCat)\n              (TopCat.Sheaf.inverseImageModule f.base Y.sheaf G).val.presheaf x)),\n      ∀ (G : Y.Modules) (V : Y.Opens) (hx : f x ∈ V) (s : G.val.obj (op V)),\n        (β G).hom ((1 : X.presheaf.stalk x) ⊗ₜ[_, (f.stalkMap x).hom]\n          (TopCat.Presheaf.germ G.val.presheaf V (f x) hx s)) =\n        (1 : (TopCat.Presheaf.stalkFunctor CommRingCat x).obj X.sheaf.obj) ⊗ₜ[\n          TopCat.Presheaf.stalk (C := CommRingCat.{u}) (X := X.toTopCat)\n          (TopCat.Sheaf.inverseImageRing f.base Y.sheaf).obj x,\n          ((TopCat.Presheaf.stalkFunctor CommRingCat x).map\n            (tensorPullbackRingMap f).hom).hom]\n          (TopCat.Presheaf.germ\n            (TopCat.Sheaf.inverseImageModule f.base Y.sheaf G).val.presheaf\n            (f ⁻¹ᵁ V) x hx\n            (((Functor.sheafPullbackConstruction.sheafAdjunctionContinuous\n              (Opens.map f.base) AddCommGrpCat.{u}\n              (Opens.grothendieckTopology Y) (Opens.grothendieckTopology X)).unit.app\n                ((SheafOfModules.toSheaf _).obj G)).hom.app (op V) s))",
+  "branch": "sheaf-dag",
+  "by": "V2",
+  "date": "2026-10-12"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V2",
+  "result": "pass",
+  "landing": "20261012T085353-L-45402",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V2",
+  "result": "pass",
+  "landing": "20261012T085353-L-45402",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

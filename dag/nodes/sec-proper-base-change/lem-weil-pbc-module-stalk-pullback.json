@@ -26,103 +26,46 @@
  ],
  "proof": [
   {
-   "text": "*(0) Set-up.* Write $y=f(x)$, $\\eta_{\\mathcal H}:\\mathcal H\\to f_*f^{-1}\\mathcal H$ for the unit of the topological adjunction $f^{-1}\\dashv f_*$ (on abelian sheaves or sheaves of rings), and $\\psi:f^{-1}\\mathcal O_Y\\to\\mathcal O_X$ for the map of sheaves of rings adjoint to $f^\\sharp:\\mathcal O_Y\\to f_*\\mathcal O_X$ [def-weil-locally-ringed-space-morphism], so $f_*(\\psi)\\circ\\eta_{\\mathcal O_Y}=f^\\sharp$, i.e. $\\psi_{f^{-1}V}(\\eta_{\\mathcal O_Y,V}(a))=f^\\sharp_V(a)$ for $a\\in\\mathcal O_Y(V)$. By [def-pc-module-pullback] (Stacks Tags 008X, 0095), $f^{-1}\\mathcal G$ is an $f^{-1}\\mathcal O_Y$-module whose structure makes each $\\eta_{\\mathcal G,V}$ semilinear: $\\eta_{\\mathcal G,V}(as)=\\eta_{\\mathcal O_Y,V}(a)\\,\\eta_{\\mathcal G,V}(s)$ (the action is $f^{-1}$ of the action map $\\mathcal O_Y\\times\\mathcal G\\to\\mathcal G$, and $f^{-1}$ commutes with finite products), and $f^*\\mathcal G=\\mathcal O_X\\otimes_{f^{-1}\\mathcal O_Y}f^{-1}\\mathcal G$, which we write, by the symmetry of the presheaf tensor products $b\\otimes m\\mapsto m\\otimes b$ followed by sheafification [def-pur-sheaf-tensor-product], as the change of rings $f^{-1}\\mathcal G\\otimes_{f^{-1}\\mathcal O_Y}\\mathcal O_X$ along $\\psi$, as in the source. The adjunction $f^*\\dashv f_*$ is the one of Stacks Tag 0096: the composite of the extension/restriction-of-scalars adjunction along $\\psi$ (Sheaves, Lemma lemma-adjointness-tensor-restrict) and of $f^{-1}\\dashv f_*$ for modules (Tag 008Z, whose bijection is that of abelian sheaves). The unit of a composite of adjunctions is the composite of the units, and the unit of extension of scalars sends a section $m$ to (the image under sheafification of) $m\\otimes1$; hence the unit $\\mathcal G\\to f_*f^*\\mathcal G$ is $s\\mapsto\\eta_{\\mathcal G,V}(s)\\otimes1$, i.e. $f^*s=\\eta_{\\mathcal G,V}(s)\\otimes1\\in(f^*\\mathcal G)(f^{-1}V)$ for $s\\in\\mathcal G(V)$.",
+   "text": "Obtain β and its germ formula from lem-pc-inverse-image-stalk-scalar-transport. Apply SheafOfModules.stalkChangeOfRingsIso to tensorPullbackRingMap f and inverseImageModule f.base Y.sheaf G, obtaining τ and its pure-tensor germ formula. Form δ_G=β_G followed by τ_G, an isomorphism from extension of scalars of G_y to the stalk of tensorPullback f G.",
    "uses": [
-    "def-pc-module-pullback",
-    "def-pur-sheaf-tensor-product",
-    "def-weil-locally-ringed-space-morphism"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sheaves.tex",
-    "place": "Sheaves, Section 6.26 (Tags 0095, 0096: definition of $f^*$ and the adjunction, via Lemmas lemma-adjointness-tensor-restrict and 008Z), Section 6.25 (Tag 008X: the $f^{-1}\\mathcal O_Y$-module $f^{-1}\\mathcal G$)"
-   }
-  },
-  {
-   "text": "*(1) Stalks of $f^{-1}$.* By [lem-weil-pbc-topological-inverse-image-stalk] applied to the abelian sheaf $\\mathcal G$ and to the sheaf of rings $\\mathcal O_Y$ there are an isomorphism of abelian groups $c_{\\mathcal G}:\\mathcal G_y\\to(f^{-1}\\mathcal G)_x$ and a ring isomorphism $c_{\\mathcal O}:\\mathcal O_{Y,y}\\to(f^{-1}\\mathcal O_Y)_x$, natural, with $c(s_y)=(\\eta_V(s))_x$ on germs. $c_{\\mathcal G}$ is semilinear over $c_{\\mathcal O}$: for $a_y\\in\\mathcal O_{Y,y}$, $s_y\\in\\mathcal G_y$ represented over a common open $V\\ni y$, $c_{\\mathcal G}(a_ys_y)=c_{\\mathcal G}((as)_y)=(\\eta_{\\mathcal G,V}(as))_x=(\\eta_{\\mathcal O_Y,V}(a)\\eta_{\\mathcal G,V}(s))_x=(\\eta_{\\mathcal O_Y,V}(a))_x(\\eta_{\\mathcal G,V}(s))_x=c_{\\mathcal O}(a_y)c_{\\mathcal G}(s_y)$, using step (0) and that the germ map of a sheaf of modules is compatible with the action (the definition of the $\\mathcal O_x$-module structure on a stalk, Sheaves, Lemma lemma-stalk-module).",
-   "uses": [
-    "lem-weil-pbc-topological-inverse-image-stalk",
-    "def-pc-module-pullback"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sheaves.tex",
-    "place": "Sheaves, Lemma Tag 008H (lemma-stalk-pullback) and Lemma lemma-stalk-module; the proof of Lemma Tag 0098 ('the identification of the stalks of pullback sheaves at $x$ with the corresponding stalks at $f(x)$', Section section-presheaves-structures-functorial)"
-   }
-  },
-  {
-   "text": "*(2) The ring map.* $\\psi_x\\circ c_{\\mathcal O}=f^\\sharp_x:\\mathcal O_{Y,y}\\to\\mathcal O_{X,x}$. Indeed, for $a\\in\\mathcal O_Y(V)$, $V\\ni y$: $\\psi_x(c_{\\mathcal O}(a_y))=\\psi_x((\\eta_{\\mathcal O_Y,V}(a))_x)=(\\psi_{f^{-1}V}(\\eta_{\\mathcal O_Y,V}(a)))_x=(f^\\sharp_V(a))_x=f^\\sharp_x(a_y)$, by step (1), the definition of the stalk map of $\\psi$, step (0), and the definition of $f^\\sharp_x$ [def-weil-locally-ringed-space-morphism] (the germ of $f^\\sharp_V(a)$ at $x$); every element of $\\mathcal O_{Y,y}$ is such a germ.",
-   "uses": [
-    "lem-weil-pbc-topological-inverse-image-stalk",
-    "def-weil-locally-ringed-space-morphism"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sheaves.tex",
-    "place": "Sheaves, Section 6.26, the paragraph before Lemma Tag 0098 (the stalk maps of an $f$-map and $f^\\sharp_x$)"
-   }
-  },
-  {
-   "text": "*(3) Stalk of the change of rings.* By [lem-weil-pbc-stalk-change-of-rings-tensor] applied on $X$ to $\\psi:f^{-1}\\mathcal O_Y\\to\\mathcal O_X$ and the $f^{-1}\\mathcal O_Y$-module $f^{-1}\\mathcal G$ there is an isomorphism of $\\mathcal O_{X,x}$-modules $\\tau:(f^{-1}\\mathcal G)_x\\otimes_{(f^{-1}\\mathcal O_Y)_x}\\mathcal O_{X,x}\\xrightarrow{\\sim}(f^*\\mathcal G)_x$ (tensor product along $\\psi_x$), natural in $\\mathcal G$, with $\\tau(m_x\\otimes b_x)=(m\\otimes b)_x$ for sections $m$ of $f^{-1}\\mathcal G$ and $b$ of $\\mathcal O_X$ over an open containing $x$.",
-   "uses": [
+    "lem-pc-inverse-image-stalk-scalar-transport",
     "lem-weil-pbc-stalk-change-of-rings-tensor",
     "def-pc-module-pullback"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sheaves.tex",
-    "place": "Sheaves, Lemma Tag 008B (lemma-stalk-tensor-sheaf-modules), as used in the proof of Lemma Tag 0098"
-   }
+   "elementary": false
   },
   {
-   "text": "*(4) Transport along $c$.* The map $\\beta:\\mathcal G_y\\otimes_{\\mathcal O_{Y,y}}\\mathcal O_{X,x}\\to(f^{-1}\\mathcal G)_x\\otimes_{(f^{-1}\\mathcal O_Y)_x}\\mathcal O_{X,x}$, $m\\otimes b\\mapsto c_{\\mathcal G}(m)\\otimes b$ (left side formed with $f^\\sharp_x$, right side with $\\psi_x$) is well defined: it is biadditive and balanced, since $c_{\\mathcal G}(am)\\otimes b=c_{\\mathcal O}(a)c_{\\mathcal G}(m)\\otimes b=c_{\\mathcal G}(m)\\otimes\\psi_x(c_{\\mathcal O}(a))b=c_{\\mathcal G}(m)\\otimes f^\\sharp_x(a)b$ by steps (1) and (2). Symmetrically $n\\otimes b\\mapsto c_{\\mathcal G}^{-1}(n)\\otimes b$ is well defined (as $c_{\\mathcal G}^{-1}$ is semilinear over $c_{\\mathcal O}^{-1}$ and $f^\\sharp_x\\circ c_{\\mathcal O}^{-1}=\\psi_x$), and the two maps are mutually inverse on generators; $\\beta$ is $\\mathcal O_{X,x}$-linear. Put $\\Phi_{\\mathcal G}=(\\tau\\circ\\beta)^{-1}:(f^*\\mathcal G)_x\\to\\mathcal G_y\\otimes_{\\mathcal O_{Y,y}}\\mathcal O_{X,x}$, an isomorphism of $\\mathcal O_{X,x}$-modules. This is the identification of Stacks Tag 0098.",
+   "text": "Evaluate δ_G on 1 tensor germ(s). The β formula followed by the τ formula, with coefficient section 1, yields the germ of the sheafification unit applied to 1 tensor η_G(s). The chosen canonical adjunction unit formula in exists_tensorPullbackAdjunction identifies this with the germ of the pulled-back section. This is hδ in Lean.",
    "uses": [
-    "lem-weil-pbc-topological-inverse-image-stalk"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sheaves.tex",
-    "place": "Sheaves, Lemma Tag 0098 (lemma-stalk-pullback-modules) and its proof (the tensor product on the right uses $f^\\sharp_x$)"
-   }
-  },
-  {
-   "text": "*(5) Germs of $f^*s$.* For $V\\ni y$ open and $s\\in\\mathcal G(V)$: by step (0), $f^*s=\\eta_{\\mathcal G,V}(s)\\otimes1$ over $f^{-1}V\\ni x$, so by step (3) $(f^*s)_x=\\tau((\\eta_{\\mathcal G,V}(s))_x\\otimes1)$, and by step (1) $(\\eta_{\\mathcal G,V}(s))_x=c_{\\mathcal G}(s_y)$; hence $(f^*s)_x=\\tau(\\beta(s_y\\otimes1))$, i.e. $\\Phi_{\\mathcal G}((f^*s)_x)=s_y\\otimes1$.",
-   "uses": [
-    "lem-weil-pbc-topological-inverse-image-stalk",
+    "lem-pc-inverse-image-stalk-scalar-transport",
     "lem-weil-pbc-stalk-change-of-rings-tensor",
-    "def-pc-module-pullback"
+    "lem-pc-module-pullback-adjunction"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sheaves.tex",
-    "place": "Sheaves, Lemma Tag 0098: the description of germs follows from the construction of the identification (Tags 008H, 008B, 0096)"
-   }
+   "elementary": true
   },
   {
-   "text": "*(6) Naturality.* For an $\\mathcal O_Y$-linear $u:\\mathcal G\\to\\mathcal G'$, $f^*u$ is the change of rings of $f^{-1}u$ [def-pc-module-pullback], and $\\tau$ is natural in the $f^{-1}\\mathcal O_Y$-module (step (3)), $c$ is natural in the sheaf (step (1)), and $\\beta$ is built from $c$ and the identity of $\\mathcal O_{X,x}$; hence $(u_y\\otimes1)\\circ\\Phi_{\\mathcal G}=\\Phi_{\\mathcal G'}\\circ(f^*u)_x$. (Alternatively: both sides are $\\mathcal O_{X,x}$-linear and agree on the elements $(f^*s)_x$, $s\\in\\mathcal G(V)$, by step (5) and $f^*u(f^*s)=f^*(u(s))$ (naturality of the unit); these generate $(f^*\\mathcal G)_x$ as an $\\mathcal O_{X,x}$-module since $s_y\\otimes1$ generate $\\mathcal G_y\\otimes_{\\mathcal O_{Y,y}}\\mathcal O_{X,x}$.)",
+   "text": "Prove naturality of δ using ModuleCat.ExtendScalars.hom_ext, which reduces it to 1 tensor m. Represent m by a germ(s). The stalk-map germ formula sends m to germ(a(s)), and extendScalars.map_tmul computes its tensor image. On both sides use hδ. Naturality of the chosen adjunction unit says tensorPullback(a)(unit_G(s))=unit_H(a(s)); the stalk-map germ formula turns this section equality into the required stalk equality. NatIso.ofComponents now gives a natural isomorphism d.",
    "uses": [
-    "lem-weil-pbc-topological-inverse-image-stalk",
-    "lem-weil-pbc-stalk-change-of-rings-tensor",
-    "def-pc-module-pullback"
+    "lem-pc-module-pullback-adjunction"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sheaves.tex",
-    "place": "Sheaves, Lemma Tag 0098 (canonical identification); naturality written out by an agent"
-   }
+   "elementary": true
+  },
+  {
+   "text": "Take e=d inverse. Apply δ_G inverse to hδ; the inverse-after-forward identity gives e_G(germ(pulled-back s))=1 tensor germ(s), exactly the required formula. No naturality assumption on β or τ is needed.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
   "def-pc-module-pullback",
-  "def-pur-sheaf-tensor-product",
-  "def-weil-locally-ringed-space-morphism",
-  "lem-weil-pbc-topological-inverse-image-stalk",
+  "lem-pc-inverse-image-stalk-scalar-transport",
+  "lem-pc-module-pullback-adjunction",
   "lem-weil-pbc-stalk-change-of-rings-tensor"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/stacks-project/sheaves.tex",
-  "place": "Sheaves, Lemma 6.26.4 (Tag 0098, lemma-stalk-pullback-modules) and its proof via Lemma Tag 008B and Lemma Tag 008H; the germ formula, the semilinearity of $c_{\\mathcal G}$, the identity $\\psi_x\\circ c=f^\\sharp_x$ and naturality are written out by the worker following the constructions of Sections 6.21 and 6.26 (the source says 'see the formulae in Section section-presheaves-structures-functorial')"
+  "place": "V2 Lean reduction of Tag 0098: compose scalar transport with Tag 008B, prove the germ formula via Tag 0096, and prove naturality directly on 1 tensor germ generators."
  },
  "mathlib_searches": [
   {
@@ -228,5 +171,15 @@
   "group": "J1",
   "result": "fix",
   "note": "X Y:Scheme.{u}, f:X⟶Y = morphism of schemes; f.stalkMap x = f#_x; G:Y.Modules; tensorPullback f = f^* (landed); f^*s = unit of Classical.choose exists_tensorPullbackAdjunction at op V; stalks = landed RingedSpace.moduleStalkFunctor (was upstream G.presheaf.stalk + Hom.stalkLinearMap: H4, fixed); e natural iso tensorPullback ⋙ S_x ≅ S_{f x} ⋙ extendScalars f#_x = O_X,x ⊗ G_y (symmetric to node's G_y ⊗ O_X,x); germ (f^*s)_x ↦ 1 ⊗ s_y; no extra hypotheses"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V2",
+  "result": "pass",
+  "landing": "20261012T085353-L-45402",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
