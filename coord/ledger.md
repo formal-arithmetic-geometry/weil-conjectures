@@ -6825,3 +6825,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 08:52 L: merged deliver/F2/Sheaf.AlgebraicGeometry.EtaleInverseImageModuleUnitLinearLift (stage 3; reviewer PASS; first push; landing 20261012T085235-L-13317 (proof); batch 20261012T085205; modules 1; new nodes 0)
 - 08:52 L: merged deliver/F2/Sheaf.AlgebraicGeometry.EtaleMayerVietorisExact (stage 3; reviewer PASS; first push; landing 20261012T085236-L-13419 (interface); batch 20261012T085205; modules 5; new nodes 4; change records: coord/changes/etale-mayer-vietoris-exact-proof-parser.md)
 - 08:52 L: merged deliver/F2/Sheaf.CategoryTheory.DoubleComplexTotal (stage 3; reviewer PASS; first push; landing 20261012T085236-L-13531 (proof); batch 20261012T085205; modules 1; new nodes 0)
+- 08:52 L: merged deliver/F2/Sheaf.RingTheory.GRingMaximalIdealComparison (stage 3; reviewer PASS; first push; landing 20261012T085236-L-13667 (proof); batch 20261012T085205; modules 1; new nodes 0)

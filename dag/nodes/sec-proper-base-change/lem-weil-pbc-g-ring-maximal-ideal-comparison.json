@@ -24,22 +24,21 @@
  ],
  "proof": [
   {
-   "text": "Given a prime p of R, choose a maximal ideal m containing it. Set A = R_m. Then A and R_p are Noetherian local rings. The ideal pA is prime and contracts to p; localizing A at pA canonically identifies it with R_p.",
+   "text": "Choose a maximal ideal m containing p and set A = R_m. The ideal pA is prime and its contraction to R is p, because p is disjoint from the complement of m.",
    "uses": [
-    "def-weil-pbc-g-ring",
     "def-weil-pbc-localization-at-prime",
-    "lem-weil-pbc-flat-local-ring-maps",
-    "def-weil-pbc-adic-completion"
+    "def-weil-pbc-noetherian-ring"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Lemma Tag 07PT (more-algebra-lemma-check-G-ring-maximal-ideals, line 12392), proof"
+    "place": "Lemma Tag 07PT, diagram and proof before the final regular-permanence step"
    }
   },
   {
-   "text": "$A^\\wedge$ is a Noetherian ring [lem-weil-pbc-adic-completion-noetherian], a local ring with maximal ideal $\\mathfrak mA^\\wedge$ [lem-weil-pbc-local-completion-local-ring], and $\\mathfrak mA^\\wedge$-adically complete [lem-weil-pbc-adic-completion-mod-ideal] ($\\mathfrak mA$ is finitely generated as $A$ is Noetherian); so $A^\\wedge$ is a Noetherian complete local ring. The map $c$ is flat and $\\operatorname{Spec}A^\\wedge\\to\\operatorname{Spec}A$ is surjective [lem-weil-pbc-local-completion-faithfully-flat], so there is a prime $\\mathfrak p'\\subset A^\\wedge$ with $c^{-1}(\\mathfrak p')=\\mathfrak pA$.",
+   "text": "Set Ahat equal to the maximal-ideal completion of A. It is Noetherian, local, and complete at its maximal ideal. The map A → Ahat is faithfully flat, so choose a prime q lying over pA. The scalar-tower identity and the contraction of pA imply that q contracts along R → Ahat to p.",
    "uses": [
+    "def-weil-pbc-adic-completion",
     "lem-weil-pbc-adic-completion-noetherian",
     "lem-weil-pbc-local-completion-local-ring",
     "lem-weil-pbc-adic-completion-mod-ideal",
@@ -48,79 +47,73 @@
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Lemma Tag 07PT (more-algebra-lemma-check-G-ring-maximal-ideals, line 12392), proof: 'Since R_m -> R_m^ is faithfully flat we can choose a prime p' in R_m^ lying over pR_m'"
+    "place": "Lemma Tag 07PT, diagram and proof before the final regular-permanence step"
    }
   },
   {
-   "text": "Put $B=(A^\\wedge)_{\\mathfrak p'}$, with localization map $\\lambda:A^\\wedge\\to B$, and let $c_B:B\\to B^\\wedge$ be the completion of $B$ at its maximal ideal $\\mathfrak p'B$. By [lem-weil-pbc-complete-local-g-ring] the Noetherian complete local ring $A^\\wedge$ (Step 3) is a G-ring, so by the definition [def-weil-pbc-g-ring] at its prime $\\mathfrak p'$ the map $c_B$ is regular.",
+   "text": "The localization R → A is regular; A → Ahat is regular by hypothesis. Compose these maps to obtain regularity of R → Ahat. Its fibres are Noetherian since Ahat is Noetherian.",
    "uses": [
-    "lem-weil-pbc-complete-local-g-ring",
+    "lem-weil-pbc-localization-regular",
+    "lem-weil-pbc-regular-composition",
+    "lem-weil-pbc-fibre-ring-noetherian",
     "def-weil-pbc-g-ring"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Lemma Tag 07PT (more-algebra-lemma-check-G-ring-maximal-ideals, line 12392), proof: 'By Proposition 07PS (R_m^)_{p'} -> (R_m^)_{p'}^ is regular'"
+    "place": "Lemma Tag 07PT, diagram and proof before the final regular-permanence step"
    }
   },
   {
-   "text": "Apply [lem-weil-pbc-flat-local-ring-maps] to the flat map $c$ between the Noetherian rings $A$ and $A^\\wedge$ (Step 3) at the prime $\\mathfrak p'$, $c^{-1}(\\mathfrak p')=\\mathfrak pA$: the induced map $\\varphi:A_{\\mathfrak pA}\\to B$, $a/s\\mapsto c(a)/c(s)$, is a flat local homomorphism of Noetherian local rings, $\\varphi(\\mathfrak pA_{\\mathfrak pA})\\subseteq\\mathfrak p'B$. Here $A_{\\mathfrak pA}=(R_{\\mathfrak m})_{\\mathfrak pR_{\\mathfrak m}}$ is canonically $R_{\\mathfrak p}$ (both are the localization of $R$ at $R\\setminus\\mathfrak p$, since $R\\setminus\\mathfrak m\\subseteq R\\setminus\\mathfrak p$) [def-weil-pbc-localization-at-prime]; via this identification the localization map $\\ell:A\\to A_{\\mathfrak pA}$ is the map $R_{\\mathfrak m}\\to R_{\\mathfrak p}$, and $\\varphi\\circ\\ell=\\lambda\\circ c$ by the formula for $\\varphi$.",
+   "text": "Set B = Ahat_q and Bhat equal to its maximal-ideal completion. Both are Noetherian and B is local. Ahat is a complete Noetherian local G-ring, so B → Bhat is regular. Ahat → B is a regular localization. Composing R → Ahat → B → Bhat twice gives regularity of R → Bhat; Noetherianity of B and Bhat gives all needed Noetherian fibres.",
+   "uses": [
+    "lem-weil-pbc-complete-local-g-ring",
+    "def-weil-pbc-g-ring",
+    "lem-weil-pbc-localization-regular",
+    "lem-weil-pbc-regular-composition",
+    "lem-weil-pbc-adic-completion-noetherian",
+    "lem-weil-pbc-fibre-ring-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Lemma Tag 07PT, diagram and proof before the final regular-permanence step"
+   }
+  },
+  {
+   "text": "Define φ : R_p → B as Localization.localRingHom induced by R → Ahat and the contraction identity for q. It is flat because R → Ahat is flat, and it is local. Its formula on R shows that R → Bhat factors as the localization R → R_p followed by the completion map composed with φ. Regularity through localization therefore gives regularity of R_p → Bhat, completing the comparison assertion.",
    "uses": [
     "lem-weil-pbc-flat-local-ring-maps",
-    "def-weil-pbc-localization-at-prime"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Lemma Tag 07PT (more-algebra-lemma-check-G-ring-maximal-ideals, line 12392), proof: the commutative diagram"
-   }
-  },
-  {
-   "text": "The composite $c_B\\circ\\lambda\\circ c:A\\to B^\\wedge$ is regular. Indeed $c$ is regular by hypothesis ($\\mathfrak m$ maximal), $\\lambda$ is regular [lem-weil-pbc-localization-regular] and $c_B$ is regular (Step 4). The rings $B$ (Step 5) and $B^\\wedge$ [lem-weil-pbc-adic-completion-noetherian] are Noetherian, so every fibre ring of a ring map into them is Noetherian: $\\Lambda\\otimes_A\\kappa(\\mathfrak q)\\cong\\Lambda_{\\mathfrak q}/\\mathfrak q\\Lambda_{\\mathfrak q}$ [def-weil-pbc-localization-at-prime] is a quotient of a localization of the Noetherian ring $\\Lambda$, hence Noetherian [def-weil-pbc-noetherian-ring]. So [lem-weil-pbc-regular-composition] applied to $c$ and $\\lambda$ shows $\\lambda\\circ c:A\\to B$ regular, and applied again to $\\lambda\\circ c$ and $c_B$ shows $c_B\\circ\\lambda\\circ c$ regular.",
-   "uses": [
-    "lem-weil-pbc-localization-regular",
-    "lem-weil-pbc-adic-completion-noetherian",
     "def-weil-pbc-localization-at-prime",
-    "def-weil-pbc-noetherian-ring",
-    "lem-weil-pbc-regular-composition"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Lemma Tag 07PT (more-algebra-lemma-check-G-ring-maximal-ideals, line 12392), proof: 'The localization R_m^ -> (R_m^)_{p'} is regular. Hence R_m -> (R_m^)_{p'}^ is regular by Lemma 07QI (lemma-regular-composition)'"
-   }
-  },
-  {
-   "text": "By Step 5, $c_B\\circ\\lambda\\circ c=(c_B\\circ\\varphi)\\circ\\ell$ with $\\ell:A\\to A_{\\mathfrak pA}=R_{\\mathfrak p}$ the localization at the multiplicative subset $A\\setminus\\mathfrak pA$. Since this composite is regular (Step 6), [lem-weil-pbc-regular-through-localization] shows that $c_B\\circ\\varphi:R_{\\mathfrak p}\\to B^\\wedge$ is regular. Together with the flat local map φ and the Noetherian local ring B constructed above, this proves the comparison assertion. No descent to the completion of R_p is used in this lemma.",
-   "uses": [
     "lem-weil-pbc-regular-through-localization"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Lemma Tag 07PT (more-algebra-lemma-check-G-ring-maximal-ideals, line 12392), proof: 'Since it factors through the localization R_p, also the ring map R_p -> (R_m^)_{p'}^ is regular'"
+    "place": "Lemma Tag 07PT, diagram and proof before the final regular-permanence step"
    }
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-g-ring",
   "def-weil-pbc-localization-at-prime",
-  "lem-weil-pbc-flat-local-ring-maps",
+  "def-weil-pbc-noetherian-ring",
   "def-weil-pbc-adic-completion",
   "lem-weil-pbc-adic-completion-noetherian",
   "lem-weil-pbc-local-completion-local-ring",
   "lem-weil-pbc-adic-completion-mod-ideal",
   "lem-weil-pbc-local-completion-faithfully-flat",
-  "lem-weil-pbc-complete-local-g-ring",
   "lem-weil-pbc-localization-regular",
-  "def-weil-pbc-noetherian-ring",
   "lem-weil-pbc-regular-composition",
+  "lem-weil-pbc-fibre-ring-noetherian",
+  "def-weil-pbc-g-ring",
+  "lem-weil-pbc-complete-local-g-ring",
+  "lem-weil-pbc-flat-local-ring-maps",
   "lem-weil-pbc-regular-through-localization"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/more-algebra.tex",
-  "place": "Lemma Tag 07PT, construction of B and regularity of R_p → Bhat"
+  "place": "Lemma Tag 07PT, diagram and proof before the final regular-permanence step; compose from R and descend along R → R_p directly"
  },
  "mathlib_searches": [
   {
@@ -199,10 +192,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "H2",
+  "group": "F2",
   "result": "pass",
-  "landing": "20261012T053935-L-2636508",
-  "kind": "interface",
+  "landing": "20261012T085236-L-13667",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
