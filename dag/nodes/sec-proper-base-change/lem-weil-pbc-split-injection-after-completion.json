@@ -40,63 +40,38 @@
    }
   },
   {
-   "text": "*A finite free presentation of the cokernel.* Put $Q=M/u(N)$ with projection $p:M\\to Q$, so $0\\to N\\xrightarrow{u}M\\xrightarrow{p}Q\\to0$ is exact (step 1). $Q$ is finitely generated (images of generators of $M$) [def-weil-finitely-generated-module], so there is a surjection $\\pi:F_0=A^a\\to Q$ sending the basis to generators. Its kernel is a submodule of the finitely generated module $A^a$ over the Noetherian ring $A$, hence finitely generated [lem-weil-pbc-noetherian-submodule-finite]; choose a surjection $F_1=A^b\\to\\ker\\pi$ and let $d_1:F_1\\to F_0$ be its composite with the inclusion, so $F_1\\xrightarrow{d_1}F_0\\xrightarrow{\\pi}Q\\to0$ is exact. (Stacks takes a resolution $F_2\\to F_1\\to F_0\\to Q\\to 0$; $F_2$ only serves to name the class of $\\beta$ in $\\mathrm{Ext}^1_A(Q,N)$ and is not needed for the argument.) Since $F_0$ is free and $p$ surjective, choose $\\alpha:F_0\\to M$ with $p\\circ\\alpha=\\pi$ (send each basis vector to a preimage of its image). Then $p\\circ\\alpha\\circ d_1=\\pi\\circ d_1=0$, so $\\alpha\\circ d_1$ takes values in $u(N)$, and since $u$ is injective there is a unique $A$-linear $\\beta:F_1\\to N$ with $u\\circ\\beta=\\alpha\\circ d_1$.",
+   "text": "Choose finite relation data for u using [lem-weil-pbc-finite-relation-splitting-data].",
    "uses": [
-    "def-weil-finitely-generated-module",
-    "lem-weil-pbc-noetherian-submodule-finite",
-    "def-weil-pbc-noetherian-ring"
+    "lem-weil-pbc-finite-relation-splitting-data"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, proof of Lemma Tag 02HO (lemma-split-injection-after-completion), lines 18151-18162"
-   }
+   "elementary": false
   },
   {
-   "text": "*Reduction modulo $J^k$.* Let $k$ be one of the integers of the hypothesis, $v_k:M/J^kM\\to N/J^kN$ with $v_k\\circ u_k=\\mathrm{id}$, and $q_N:N\\to N/J^kN$, $q_M:M\\to M/J^kM$ the projections, so $u_k\\circ q_N=q_M\\circ u$. Put $\\bar\\gamma_k=v_k\\circ q_M\\circ\\alpha:F_0\\to N/J^kN$. Then $\\bar\\gamma_k\\circ d_1=v_k\\circ q_M\\circ u\\circ\\beta=v_k\\circ u_k\\circ q_N\\circ\\beta=q_N\\circ\\beta$. Since $F_0$ is free and $q_N$ surjective, lift $\\bar\\gamma_k$ to an $A$-linear $\\gamma_k:F_0\\to N$ with $q_N\\circ\\gamma_k=\\bar\\gamma_k$; then $q_N\\circ(\\beta-\\gamma_k\\circ d_1)=0$, i.e. $\\beta-\\gamma_k\\circ d_1$ maps $F_1$ into $J^kN$. (This is Stacks' 'arguing as above' for the reduced sequence, which is the 'only if' direction of the splitting criterion; written directly it needs neither the exactness of the reduced sequences nor of the reduced presentation.)",
+   "text": "For a splitting exponent k, lift $v_kq_M\\alpha$ along $q_N$ using projectivity of $A^a$, giving $q_N\\gamma_k=v_kq_M\\alpha$. Evaluating on $d(x)$ and using $u\\beta=\\alpha d$ and $v_kq_Mu=q_N$ gives $q_N(\\beta-\\gamma_kd)=0$. Thus the error map has image in $J^kN$.",
    "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, proof of Lemma Tag 02HO (lemma-split-injection-after-completion), lines 18166-18190"
-   }
+   "elementary": true
   },
   {
-   "text": "*Translation into $\\mathrm{Hom}$.* Let $H=\\mathrm{Hom}_A(F_1,N)$ and $d_1^*:\\mathrm{Hom}_A(F_0,N)\\to H$, $\\gamma\\mapsto\\gamma\\circ d_1$. With the basis $e_1,\\dots,e_b$ of $F_1=A^b$, $H\\cong N^b$ via $f\\mapsto(f(e_j))_j$, and $f$ maps $F_1$ into $J^kN$ iff each $f(e_j)\\in J^kN$, iff $f\\in J^kH$ (as $J^k(N^b)=(J^kN)^b$). So step 3 gives $\\beta\\in\\mathrm{im}(d_1^*)+J^kH$ for arbitrarily large $k$. Let $C=H/\\mathrm{im}(d_1^*)$ and $c$ the image of $\\beta$ in $C$; then $c\\in J^kC$ for arbitrarily large $k$, hence for all $k$ (the $J^kC$ decrease). $C$ is a quotient of $H\\cong N^b$, a finitely generated $A$-module [def-weil-finitely-generated-module], so $\\bigcap_kJ^kC=0$ by [lem-weil-pbc-krull-intersection-jacobson] ($A$ Noetherian [def-weil-pbc-noetherian-ring], $J$ in the Jacobson radical). Hence $c=0$: there is $\\gamma:F_0\\to N$ with $\\beta=\\gamma\\circ d_1$.",
+   "text": "Apply [lem-weil-pbc-relation-factors-of-approximation] to obtain beta = gamma d. The descent property of the data gives the required retraction.",
    "uses": [
-    "lem-weil-pbc-krull-intersection-jacobson",
-    "def-weil-finitely-generated-module",
-    "def-weil-pbc-noetherian-ring"
+    "lem-weil-pbc-relation-factors-of-approximation",
+    "lem-weil-pbc-finite-relation-splitting-data"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, proof of Lemma Tag 02HO (lemma-split-injection-after-completion), lines 18186-18202 (Lemma 00IQ applied to the cokernel of Hom(F_0,N) -> Hom(F_1,N))"
-   }
-  },
-  {
-   "text": "*Conclusion.* By steps 1 and 2, $u$ is injective, $F_1\\xrightarrow{d_1}F_0\\xrightarrow{\\pi}Q\\to0$ is exact with $F_0$ free, $p\\circ\\alpha=\\pi$ and $u\\circ\\beta=\\alpha\\circ d_1$; by step 4, $\\beta=\\gamma\\circ d_1$ for some $\\gamma:F_0\\to N$. The splitting criterion [lem-weil-pbc-split-extension-free-presentation] gives an $A$-linear $v:M\\to N$ with $v\\circ u=\\mathrm{id}_N$, i.e. $u$ is a split injection.",
-   "uses": [
-    "lem-weil-pbc-split-extension-free-presentation"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, proof of Lemma Tag 02HO (lemma-split-injection-after-completion), lines 18160-18165 and 18199-18202"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
   "lem-weil-pbc-krull-intersection-jacobson",
   "def-weil-pbc-noetherian-ring",
   "def-weil-finitely-generated-module",
-  "lem-weil-pbc-noetherian-submodule-finite",
-  "lem-weil-pbc-split-extension-free-presentation"
+  "lem-weil-pbc-finite-relation-splitting-data",
+  "lem-weil-pbc-relation-factors-of-approximation"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/stacks-project/algebra.tex",
-  "place": "Algebra, Lemma Tag 02HO (lemma-split-injection-after-completion, line 18142) and its proof, Section Tag 02HN (section-ext-application)"
+  "place": "Tag 02HO, proof",
+  "note": "M1 formalization: present M and the preimage of u(N); direct quotient descent replaces the unproved categorical splitting criterion. The Hom-cokernel and Krull argument follows the source."
  },
  "mathlib_searches": [
   {
@@ -172,5 +147,15 @@
   "group": "P1",
   "result": "pass",
   "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M1",
+  "result": "pass",
+  "landing": "20261012T212722-L-1131144",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

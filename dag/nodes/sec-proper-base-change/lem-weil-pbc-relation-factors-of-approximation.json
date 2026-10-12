@@ -1,0 +1,146 @@
+{
+ "id": "lem-weil-pbc-relation-factors-of-approximation",
+ "kind": "statement",
+ "title": "Approximation modulo ideal powers implies factorization of a finite free relation map",
+ "statement": "Let $A$ be a commutative Noetherian ring [def-weil-pbc-noetherian-ring], $N$ a finite $A$-module [def-weil-finitely-generated-module], $J$ an ideal contained in the Jacobson radical (the intersection of maximal ideals), $a,b\\in\\mathbb N$, and $d:A^b\\to A^a$, $\\beta:A^b\\to N$ linear maps. Suppose for every $c\\in\\mathbb N$ there exist $k\\ge c$ and a linear map $\\gamma_k:A^a\\to N$ such that $(\\beta-\\gamma_kd)(x)\\in J^kN$ for every $x\\in A^b$. Then $\\beta=\\gamma d$ for some linear $\\gamma:A^a\\to N$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 02HO, proof: the Hom-module cokernel and the final application of Krull intersection"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-finitely-generated-module"
+ ],
+ "proof": [
+  {
+   "text": "Let $H=\\operatorname{Hom}_A(A^b,N)$, $D$ the image of precomposition with $d$, and $q:H\\to C=H/D$ the quotient. The standard basis identifies $H$ with $N^b$, so $H$ and $C$ are finite.",
+   "uses": [
+    "def-weil-finitely-generated-module"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "If $f(A^b)\\subseteq J^kN$, express $f$ as the sum of the maps supported on individual basis coordinates. Each insertion $N\\to H$ is linear and sends $J^kN$ into $J^kH$, hence $f\\in J^kH$. Applying the quotient map and using $q(\\gamma_kd)=0$ gives $q(\\beta)\\in J^kC$. Since the powers decrease and k is arbitrarily large, this holds at every exponent.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Krull intersection [lem-weil-pbc-krull-intersection-jacobson] on the finite quotient C gives $q(\\beta)=0$. Thus $\\beta\\in D$, which means $\\beta=\\gamma d$ for some $\\gamma$.",
+   "uses": [
+    "lem-weil-pbc-krull-intersection-jacobson",
+    "def-weil-pbc-noetherian-ring"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-finitely-generated-module",
+  "lem-weil-pbc-krull-intersection-jacobson",
+  "def-weil-pbc-noetherian-ring"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 02HO, proof: the Hom-module cokernel and the final application of Krull intersection",
+  "note": "Formalized by M1 from the source argument; the finite presentation is adapted as explained in the proof."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "finite free module homomorphism relation factors if approximated modulo arbitrarily high ideal powers Jacobson radical",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "finite free presentation of cokernel of injective linear map and splitting criterion for lifted relations",
+   "results": "Module.finitePresentation_of_split_exact, Module.FinitePresentation, Module.Presentation.cokernelSolution.isPresentation, Module.Presentation.cokernel_R, Module.FinitePresentation.exists_fin, Module.Presentation.cokernelSolution.isPresentationCore, Module.finitePresentation_iff_exists_presentation, Module.FinitePresentation.out",
+   "date": "2026-10-13",
+   "verdict": "ingredients found; no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "iInf_pow_smul_eq_bot_of_le_jacobson|exists_fin\\x27|projective_lifting_property",
+   "results": "Mathlib/RingTheory/LocalProperties/Projective.lean, Mathlib/RingTheory/LocalProperties/FinitePresentation.lean, Mathlib/RingTheory/Artinian/Module.lean, Mathlib/RingTheory/Finiteness/Projective.lean, Mathlib/RingTheory/Finiteness/Projective.lean, Mathlib/RingTheory/Smooth/Basic.lean, Mathlib/RingTheory/Noetherian/Basic.lean, Mathlib/RingTheory/Noetherian/Basic.lean",
+   "date": "2026-10-13",
+   "verdict": "ingredients found; no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "linear map between finite free modules approximated in ideal powers lies in image by Krull intersection",
+   "results": "AdicCompletion.exists_smodEq_pow_add_one_smul, AdicCompletion.exists_smodEq_pow_smul_top_and_smodEq_pow_add_one_smul_top, AdicCompletion.exists_smodEq_pow_smul_top_and_mkQ_eq, AdicCompletion.submodule, AdicCompletion.AdicCauchySequence.submodule, LinearMap.exists_monic_and_coeff_mem_pow_and_aeval_eq_zero_of_range_le_smul, AdicCompletion.IsAdicCauchy, IsPrecomplete.prec",
+   "date": "2026-10-13",
+   "verdict": "ingredients found; no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.SplitInjectionAfterCompletion",
+  "date": "2026-10-13",
+  "group": "M1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "step 7 of its split (source: Lemma 0GS2, proof: the essential-surjectivity paragraphs); Tag 02HO, proof: the Hom-module cokernel and the final application of Krull intersection",
+   "via": [
+    "lem-weil-pbc-split-injection-after-completion",
+    "lem-weil-pbc-smooth-at-prime-artinian-lifting",
+    "lem-weil-pbc-smooth-artinian-lifting-at-point",
+    "lem-weil-pbc-etale-infinitesimal-neighbourhoods",
+    "lem-weil-pbc-finite-etale-lifting-complete",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.RelationFactorsOfApproximation",
+  "file": "lean/Sheaf/RingTheory/RelationFactorsOfApproximation.lean",
+  "declaration": "LinearMap.exists_relation_factor_of_approximation",
+  "statement": "theorem LinearMap.exists_relation_factor_of_approximation {A : Type u} [CommRing A] [IsNoetherianRing A] {N : Type v} [AddCommGroup N] [Module A N] [Module.Finite A N] (J : Ideal A) (hJ : J ≤ (⊥ : Ideal A).jacobson) {a b : ℕ} (d : (Fin b → A) →ₗ[A] (Fin a → A)) (β : (Fin b → A) →ₗ[A] N) (happrox : ∀ c : ℕ, ∃ k : ℕ, c ≤ k ∧ ∃ γ : (Fin a → A) →ₗ[A] N, ∀ x, (β - γ.comp d) x ∈ J ^ k • (⊤ : Submodule A N)) : ∃ γ : (Fin a → A) →ₗ[A] N, β = γ.comp d",
+  "branch": "sheaf-dag",
+  "by": "M1",
+  "date": "2026-10-13"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M1",
+  "result": "pass",
+  "landing": "20261012T212722-L-1131144",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M1",
+  "result": "pass",
+  "landing": "20261012T212722-L-1131144",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

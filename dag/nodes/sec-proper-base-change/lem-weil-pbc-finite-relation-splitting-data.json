@@ -1,0 +1,145 @@
+{
+ "id": "lem-weil-pbc-finite-relation-splitting-data",
+ "kind": "statement",
+ "title": "Finite relation data and descent for an injective module map",
+ "statement": "Let $A$ be a commutative Noetherian ring [def-weil-pbc-noetherian-ring], $N$ an $A$-module, $M$ a finite $A$-module [def-weil-finitely-generated-module], and $u:N\\to M$ an injective $A$-linear map. There exist natural numbers $a,b$ and $A$-linear maps $d:A^b\\to A^a$, $\\alpha:A^a\\to M$, $\\beta:A^b\\to N$ such that $u\\beta=\\alpha d$ and, for every $A$-linear $\\gamma:A^a\\to N$, the equality $\\beta=\\gamma d$ implies existence of an $A$-linear $v:M\\to N$ with $vu=\\mathrm{id}_N$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 02HO, proof: the finite free presentation and splitting criterion; adapted to a free presentation of M"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-finitely-generated-module"
+ ],
+ "proof": [
+  {
+   "text": "Choose a finite free surjection $\\alpha:A^a\\to M$. Set $K=\\alpha^{-1}(u(N))$. This submodule of a finite free module is finite by [lem-weil-pbc-noetherian-submodule-finite]. Choose a finite free surjection $\\delta:A^b\\to K$ and let $d$ be its composite with inclusion.",
+   "uses": [
+    "lem-weil-pbc-noetherian-submodule-finite",
+    "def-weil-finitely-generated-module",
+    "def-weil-pbc-noetherian-ring"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The injective map $u$ identifies $N$ with $u(N)$. Compose its inverse with $\\alpha d$ to obtain $\\beta$ with $u\\beta=\\alpha d$.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "If $\\beta=\\gamma d$, then $\\gamma$ vanishes on $\\ker\\alpha$: write $x=d(y)$ using surjectivity onto $K$; $u\\beta(y)=\\alpha(x)=0$ gives $\\beta(y)=0$. Descend $\\gamma$ to $v:M\\to N$ through the first isomorphism theorem. Given $n$, choose $x$ with $\\alpha(x)=u(n)$ and write $x=d(y)$. Injectivity gives $\\beta(y)=n$, hence $v(u(n))=\\gamma(x)=\\beta(y)=n$.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-noetherian-submodule-finite",
+  "def-weil-finitely-generated-module",
+  "def-weil-pbc-noetherian-ring"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 02HO, proof: the finite free presentation and splitting criterion; adapted to a free presentation of M",
+  "note": "Formalized by M1 from the source argument; the finite presentation is adapted as explained in the proof."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "finite free module homomorphism relation factors if approximated modulo arbitrarily high ideal powers Jacobson radical",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "finite free presentation of cokernel of injective linear map and splitting criterion for lifted relations",
+   "results": "Module.finitePresentation_of_split_exact, Module.FinitePresentation, Module.Presentation.cokernelSolution.isPresentation, Module.Presentation.cokernel_R, Module.FinitePresentation.exists_fin, Module.Presentation.cokernelSolution.isPresentationCore, Module.finitePresentation_iff_exists_presentation, Module.FinitePresentation.out",
+   "date": "2026-10-13",
+   "verdict": "ingredients found; no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "iInf_pow_smul_eq_bot_of_le_jacobson|exists_fin\\x27|projective_lifting_property",
+   "results": "Mathlib/RingTheory/LocalProperties/Projective.lean, Mathlib/RingTheory/LocalProperties/FinitePresentation.lean, Mathlib/RingTheory/Artinian/Module.lean, Mathlib/RingTheory/Finiteness/Projective.lean, Mathlib/RingTheory/Finiteness/Projective.lean, Mathlib/RingTheory/Smooth/Basic.lean, Mathlib/RingTheory/Noetherian/Basic.lean, Mathlib/RingTheory/Noetherian/Basic.lean",
+   "date": "2026-10-13",
+   "verdict": "ingredients found; no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "linear map between finite free modules approximated in ideal powers lies in image by Krull intersection",
+   "results": "AdicCompletion.exists_smodEq_pow_add_one_smul, AdicCompletion.exists_smodEq_pow_smul_top_and_smodEq_pow_add_one_smul_top, AdicCompletion.exists_smodEq_pow_smul_top_and_mkQ_eq, AdicCompletion.submodule, AdicCompletion.AdicCauchySequence.submodule, LinearMap.exists_monic_and_coeff_mem_pow_and_aeval_eq_zero_of_range_le_smul, AdicCompletion.IsAdicCauchy, IsPrecomplete.prec",
+   "date": "2026-10-13",
+   "verdict": "ingredients found; no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.SplitInjectionAfterCompletion",
+  "date": "2026-10-13",
+  "group": "M1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "step 7 of its split (source: Lemma 0GS2, proof: the essential-surjectivity paragraphs); Tag 02HO, proof: the finite free presentation and splitting criterion; adapted to a free presentation of M",
+   "via": [
+    "lem-weil-pbc-split-injection-after-completion",
+    "lem-weil-pbc-smooth-at-prime-artinian-lifting",
+    "lem-weil-pbc-smooth-artinian-lifting-at-point",
+    "lem-weil-pbc-etale-infinitesimal-neighbourhoods",
+    "lem-weil-pbc-finite-etale-lifting-complete",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.FiniteRelationSplittingData",
+  "file": "lean/Sheaf/RingTheory/FiniteRelationSplittingData.lean",
+  "declaration": "LinearMap.exists_finite_relation_splitting_data",
+  "statement": "theorem LinearMap.exists_finite_relation_splitting_data {A : Type u} [CommRing A] [IsNoetherianRing A] {N : Type v} [AddCommGroup N] [Module A N] {M : Type w} [AddCommGroup M] [Module A M] [Module.Finite A M] (u : N →ₗ[A] M) (hu : Function.Injective u) : ∃ (a b : ℕ) (d : (Fin b → A) →ₗ[A] (Fin a → A)) (α : (Fin a → A) →ₗ[A] M) (β : (Fin b → A) →ₗ[A] N), u.comp β = α.comp d ∧ (∀ γ : (Fin a → A) →ₗ[A] N, β = γ.comp d → ∃ v : M →ₗ[A] N, v.comp u = LinearMap.id)",
+  "branch": "sheaf-dag",
+  "by": "M1",
+  "date": "2026-10-13"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M1",
+  "result": "pass",
+  "landing": "20261012T212722-L-1131144",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M1",
+  "result": "pass",
+  "landing": "20261012T212722-L-1131144",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

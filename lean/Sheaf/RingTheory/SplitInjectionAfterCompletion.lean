@@ -9,7 +9,10 @@ public import Mathlib.RingTheory.Noetherian.Defs
 public import Mathlib.RingTheory.Jacobson.Ideal
 public import Mathlib.LinearAlgebra.Quotient.Basic
 public import Mathlib.RingTheory.Ideal.Operations
-import Sheaf.LinearAlgebra.SplitExtensionFreePresentation
+import Sheaf.RingTheory.FiniteRelationSplittingData
+import Sheaf.RingTheory.RelationFactorsOfApproximation
+import Mathlib.Algebra.Module.Projective
+import Mathlib.RingTheory.Filtration
 
 /-!
 # Split injections detected modulo arbitrarily high ideal powers
@@ -55,4 +58,43 @@ theorem LinearMap.exists_leftInverse_of_split_mod_pow
         vk.comp (((J ^ k • (⊤ : Submodule A M)).mkQ).comp u) =
           (J ^ k • (⊤ : Submodule A N)).mkQ) :
     ∃ v : M →ₗ[A] N, v.comp u = LinearMap.id := by
-  sorry
+  have hu : Function.Injective u := by
+    intro x y hxy
+    have hz : u (x - y) = 0 := by
+      rw [map_sub, hxy, sub_self]
+    have hzall : x - y ∈ (⨅ k : ℕ, J ^ k • (⊤ : Submodule A N)) := by
+      rw [Submodule.mem_iInf]
+      intro b
+      obtain ⟨k, hk, vk, hvk⟩ := hsplit b
+      have hzero : (J ^ k • (⊤ : Submodule A N)).mkQ (x - y) = 0 := by
+        rw [← hvk]
+        simp only [LinearMap.comp_apply, Submodule.mkQ_apply]
+        rw [hz]
+        exact map_zero vk
+      have hzk : x - y ∈ J ^ k • (⊤ : Submodule A N) :=
+        (Submodule.Quotient.mk_eq_zero _).mp hzero
+      exact (Submodule.smul_mono (Ideal.pow_le_pow_right hk) le_top) hzk
+    have hbot := Ideal.iInf_pow_smul_eq_bot_of_le_jacobson (M := N) J hJ
+    rw [hbot] at hzall
+    exact sub_eq_zero.mp hzall
+  obtain ⟨a, b, d, α, β, hβ, hdescend⟩ :=
+    LinearMap.exists_finite_relation_splitting_data u hu
+  have happrox : ∀ c : ℕ, ∃ k : ℕ, c ≤ k ∧
+      ∃ γ : (Fin a → A) →ₗ[A] N,
+        ∀ x, (β - γ.comp d) x ∈ J ^ k • (⊤ : Submodule A N) := by
+    intro c
+    obtain ⟨k, hk, vk, hvk⟩ := hsplit c
+    obtain ⟨γ, hγ⟩ := Module.projective_lifting_property
+      (J ^ k • (⊤ : Submodule A N)).mkQ
+      (vk.comp ((J ^ k • (⊤ : Submodule A M)).mkQ.comp α))
+      (Submodule.mkQ_surjective _)
+    refine ⟨k, hk, γ, fun x ↦ (Submodule.Quotient.mk_eq_zero _).mp ?_⟩
+    change (J ^ k • (⊤ : Submodule A N)).mkQ ((β - γ.comp d) x) = 0
+    rw [LinearMap.sub_apply, map_sub, LinearMap.comp_apply]
+    have hrel : u (β x) = α (d x) := DFunLike.congr_fun hβ x
+    have hsplitx := DFunLike.congr_fun hvk (β x)
+    have hliftx := DFunLike.congr_fun hγ (d x)
+    simp only [LinearMap.comp_apply] at hsplitx hliftx
+    rw [hliftx, ← hrel, hsplitx, sub_self]
+  obtain ⟨γ, hγ⟩ := LinearMap.exists_relation_factor_of_approximation J hJ d β happrox
+  exact hdescend γ hγ
