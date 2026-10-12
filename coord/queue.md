@@ -30,9 +30,9 @@ Not open yet: 42 nodes that wait for stage 1, 6 nodes that wait for a statement 
 |---|---|---|---|
 | `WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.BaseChangeProperty` | 0 | 1 | proof |
 | `WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.ProjectiveLine` | 0 | 1 | proof |
-| `Sheaf.AlgebraicGeometry.Curve.SepClosedComparison` | 1 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.EtaleCohomologyPullbackFunctorial` | 1 | 1 | proof |
 | `WeilConjectures.AlgebraicGeometry.Curve.Reductions` | 1 | 7 | proof |
+| `Sheaf.AlgebraicGeometry.Curve.SepClosedComparisonCore` | 2 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.EtaleCohomologyFilteredColimit` | 2 | 2 | proof |
 | `Sheaf.AlgebraicGeometry.EtaleCohomologyPullbackDegreeZero` | 2 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.EtaleSheafHExtDerivedComparison` | 2 | 1 | proof |
