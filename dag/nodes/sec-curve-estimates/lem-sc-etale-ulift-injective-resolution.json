@@ -1,0 +1,131 @@
+{
+ "id": "lem-sc-etale-ulift-injective-resolution",
+ "kind": "statement",
+ "title": "Coefficient lift transports etale injective resolutions and their evaluation complexes",
+ "statement": "Let X be any scheme, with small etale site [def-weil-pbc-etale-site], and F an abelian sheaf with values in AddCommGrpCat.{u}. Let R be any injective resolution of F [def-sp-injective-resolutions]. There exists an injective resolution S of the coefficient lift of F with values in AddCommGrpCat.{u+1} such that, for every object U of X.Etale, the complex obtained by evaluating S at U is isomorphic to the complex obtained by evaluating R at U and lifting every group and differential. The degree indices are natural numbers. No affine or quasi-coherence hypothesis is imposed.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/01DO",
+  "place": "Injectives, Lemma 19.7.3: injectivity tested on subsheaves of free representables; applied to coefficient lift on the small affine etale model. Resolution and evaluation consequences use exactness of coefficient lift."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-etale-site",
+  "def-sp-injective-resolutions"
+ ],
+ "proof": [
+  {
+   "text": "Pass to the u-small model of the affine etale site using Mathlib AffineEtale.sheafEquiv and then a u-small skeleton of the essentially u-small affine site, with the transported topology. Coefficient lift commutes with this equivalence, since its restriction functor is precomposition and its inverse is determined by the sheaf condition. The free abelian sheaf on each representable is u-small: both the free presheaf and its sheafification are built from u-small sets using u-small limits and colimits. ULift preserves these constructions, so the large free representable identifies with the lift of the small one.",
+   "uses": [
+    "def-weil-pbc-etale-site"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Let I be an injective small-coefficient sheaf. A subsheaf S of any lifted free representable is small objectwise, being a subgroup of a small group. Shrink these groups and transport all restrictions to a small-valued sheaf S0. Its inclusion and every map S to ULift(I) descend through the full faithful lift functor. Injectivity of I extends the descended map over the small free representable. Lifting the extension gives the extension over the large free representable. Stacks 01DO now proves ULift(I) is injective in the large sheaf category. Transfer this conclusion back through the affine-site equivalences.",
+   "uses": [
+    "def-sp-injective-resolutions"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Coefficient lift is additive and exact. Kernels are objectwise and ULift preserves kernels. Sheaf epimorphisms are locally surjective; this condition is invariant under ULift, since both sections and their local lifts correspond under up/down. Consequently lift preserves exact augmented complexes. Lift the cocomplex and augmentation of the given injective resolution R; the terms remain injective by the preceding step and the augmentation remains a quasi-isomorphism. This produces S as an injective resolution of the lifted F. Evaluation at each U commutes with lift on groups and restriction maps, yielding the indicated complex isomorphism. No affineness, quasi-coherence, or nonemptiness of X was used.",
+   "uses": [
+    "def-sp-injective-resolutions"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-etale-site",
+  "def-sp-injective-resolutions"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "https://stacks.math.columbia.edu/tag/01DO",
+  "place": "Application of the cited injectivity criterion, followed by degreewise lift of the augmented injective resolution and evaluation. The small model is Mathlib AffineEtale.sheafEquiv."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "universe lift preserves injective resolutions of abelian sheaves on a small site",
+   "date": "2026-10-12",
+   "results": "service unavailable: Internal Server Error"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "sheaf cohomology is unchanged by lifting the coefficient universe",
+   "date": "2026-10-12",
+   "results": "Sheaf.H, cohomologyPresheaf, Presieve.isSheaf_comp_uliftFunctor, and cohomology-class definitions; no injective-resolution lift theorem.",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Injective\", \"sheafCompose\"",
+   "date": "2026-10-12",
+   "results": "0 hits",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "ulift.*[Ii]njective|[Ii]njective.*ulift",
+   "date": "2026-10-12",
+   "results": "Only function-injectivity lemmas involving ULift; no injective object or injective resolution preservation theorem. Blueprint search injective universe returned 0 nodes. The existing quasi-coherent cohomology lift theorem has a different statement and depends on the current affine theorem.",
+   "verdict": "no match"
+  },
+  {
+   "tool": "second-reader search",
+   "query": "\"InjectiveResolution\", \"map\"; injective abelian sheaf remains injective after increasing the universe of coefficient groups; preservesInjectiveObjects and ulift in Mathlib/upstream/Sheaf",
+   "date": "2026-10-12",
+   "results": "Loogle: no hits. Lean Finder: ModuleCat.ulift_injective_of_injective and generic Grothendieck-abelian sheaf facts. Mathlib ModuleCat/Ulift preserves injectives of modules, not sheaves; generic adjunction preservation requires an adjunction not present here. No existing sheaf-resolution transport result.",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleAffineQcoherent",
+  "date": "2026-10-12",
+  "group": "H1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-etale-affine-qcoherent-succ",
+   "place": "Step 3: identify evaluation cohomology with Sheaf.H, bridging the coefficient universes used by the affine Cech criterion and the original statement.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-h2",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleULiftInjectiveResolution",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleULiftInjectiveResolution.lean",
+  "declaration": "AlgebraicGeometry.Scheme.exists_etale_ulift_injectiveResolution",
+  "statement": "theorem exists_etale_ulift_injectiveResolution (X : Scheme.{u}) (F : Sheaf X.smallEtaleTopology AddCommGrpCat.{u}) (R : InjectiveResolution F) : ∃ S : InjectiveResolution ((sheafCompose X.smallEtaleTopology AddCommGrpCat.uliftFunctor.{u + 1, u}).obj F), ∀ U : X.Etale, Nonempty (((sheafToPresheaf X.smallEtaleTopology AddCommGrpCat.{u + 1} ⋙ (CategoryTheory.evaluation X.Etaleᵒᵖ AddCommGrpCat.{u + 1}).obj (op U)).mapHomologicalComplex (.up ℕ)).obj S.cocomplex ≅ ((sheafToPresheaf X.smallEtaleTopology AddCommGrpCat.{u} ⋙ (CategoryTheory.evaluation X.Etaleᵒᵖ AddCommGrpCat.{u}).obj (op U) ⋙ AddCommGrpCat.uliftFunctor.{u + 1, u}).mapHomologicalComplex (.up ℕ)).obj R.cocomplex)",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H1",
+  "result": "pass",
+  "landing": "20261012T085245-L-17401",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H1",
+  "result": "pass",
+  "landing": "20261012T085245-L-17401",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

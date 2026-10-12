@@ -17,73 +17,37 @@
  ],
  "proof": [
   {
-   "text": "Fix $X=\\operatorname{Spec}(A)$ and let $\\mathcal B$ be the affine objects of the small etale site $X_{\\mathrm{et}}$. Let $\\mathrm{Cov}$ consist of finite jointly surjective families of etale maps from affine schemes to an affine object $U\\in\\mathcal B$. For a family in $\\mathrm{Cov}$, every iterated fibre product is affine by [lem-weil-pbc-fibre-product-affine-spectra]. Thus $U$, its members, and all iterated fibre products lie in $\\mathcal B$, verifying condition (1) of [lem-weil-pbc-cech-vanishing-criterion]. Every etale covering of an affine $U$ has a refinement in $\\mathrm{Cov}$ by [lem-weil-pbc-etale-covering-affine-refinement], so condition (2), cofinality, holds.",
+   "text": "Let G be the original tensor-section sheaf and Gprime its coefficient lift. Use etale_affine_qcoherent_ulift to obtain Subsingleton (Sheaf.H Gprime (n+1)). This retains the finite affine basis, faithfully flat Amitsur Cech calculation, and Cech criterion through that existing theorem.",
    "uses": [
-    "lem-weil-pbc-cech-vanishing-criterion",
-    "lem-weil-pbc-fibre-product-affine-spectra",
-    "lem-weil-pbc-etale-covering-affine-refinement"
+    "lem-sc-etale-affine-qcoherent"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Lemma Tag 03F9 (label lemma-cech-vanish-collection), hypotheses (1) and (2); Schemes Lemmas Tags 01I4/01JQ and Topologies Lemma Tag 0218"
-   }
+   "elementary": false
   },
   {
-   "text": "For a family $\\mathcal U=(U_j\\to U)$ in $\\mathrm{Cov}$, with $u:U\\to X$ the structure map, set $V=\\coprod_jU_j$. The pullback $u^*\\mathcal F$ is a quasi-coherent $\\mathcal O_U$-module by [lem-weil-pbc-module-pullback-quasi-coherent], so $(u^*\\mathcal F)_{\\mathrm{et}}$ is an abelian sheaf on $U_{\\mathrm{et}}$ by [def-sc-etale-qcoherent-module] and [lem-sc-etale-qcoherent-descent]. For an object $g:W\\to U$ of $U_{\\mathrm{et}}$ (an object $u\\circ g$ of $X_{\\mathrm{et}}$), the composition isomorphism $c_{g,u}:g^*u^*\\mathcal F\\cong(u\\circ g)^*\\mathcal F$ of [lem-pc-module-pullback-identity-composition] gives $\\Gamma(W,g^*u^*\\mathcal F)\\cong\\Gamma(W,(u\\circ g)^*\\mathcal F)=\\mathcal F_{\\mathrm{et}}(W)$, compatibly with the restrictions $\\rho$ of [def-sc-etale-qcoherent-module] (the maps $\\rho_g$ are defined through these $c$'s); since fibre products over $U$ are the same in $U_{\\mathrm{et}}$ and $X_{\\mathrm{et}}$ [def-weil-pbc-etale-site], the Cech complex of $\\mathcal U$ for $\\mathcal F_{\\mathrm{et}}$ in $X_{\\mathrm{et}}$ is that of $\\mathcal U$ for $(u^*\\mathcal F)_{\\mathrm{et}}$ in $U_{\\mathrm{et}}$. The standard-cover comparison [lem-sc-etale-standard-cover-cech], applied to the affine scheme $U$ and the sheaf $(u^*\\mathcal F)_{\\mathrm{et}}$, identifies this Cech complex with the one-map Cech complex of $V\\to U$ and gives that $A\\to B$ is faithfully flat, where $U=\\operatorname{Spec}(A)$, $V=\\operatorname{Spec}(B)$. With $M=\\Gamma(U,u^*\\mathcal F)$, [lem-weil-pbc-fibre-product-affine-spectra] and [lem-weil-pbc-module-pullback-affine-sections] (applied to the quasi-coherent $u^*\\mathcal F$ on the affine $U$) identify the terms on $V^{p+1}_U$ with $M\\otimes_A B^{\\otimes_A(p+1)}$. The pullback identity and composition [lem-pc-module-pullback-identity-composition], together with the definition [def-sc-etale-qcoherent-module], identify all face maps with the Amitsur differentials. Therefore [lem-pc-cech-exact] gives $\\check H^p(\\mathcal U,\\mathcal F_{\\mathrm{et}})=0$ for every $p>0$, verifying condition (3) of [lem-weil-pbc-cech-vanishing-criterion]. For the Lean realization, lift every section group and every map to the coefficient universe u+1. Products of finitely indexed section groups, kernels, and images identify with their lifts, so the Amitsur exactness applies unchanged: an underlying cocycle has an underlying preimage, and lifting the preimage proves exactness of the lifted complex.",
+   "text": "Let T be the identity etale object, terminal by MorphismProperty.Over.mkIdTerminal. Choose an injective resolution R of G. The coefficient-lift resolution theorem supplies a resolution S of Gprime and an isomorphism between its evaluation complex at T and the coefficient lift of the evaluation complex of R. The Ext/right-derived evaluation comparison and S.isoRightDerivedObj turn the lifted cohomology vanishing into zero homology of evaluated S.",
    "uses": [
-    "lem-weil-pbc-cech-vanishing-criterion",
-    "lem-weil-pbc-module-pullback-quasi-coherent",
-    "lem-sc-etale-qcoherent-descent",
-    "def-weil-pbc-etale-site",
-    "lem-sc-etale-standard-cover-cech",
-    "lem-weil-pbc-fibre-product-affine-spectra",
-    "lem-weil-pbc-module-pullback-affine-sections",
-    "lem-pc-module-pullback-identity-composition",
-    "def-sc-etale-qcoherent-module",
-    "lem-pc-cech-exact"
+    "lem-sc-etale-ulift-injective-resolution",
+    "new-sheaf-cohomology-derived-evaluation"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Theorem Tag 03P2 (label theorem-zariski-fpqc-quasi-coherent), affine case, Cech/Amitsur calculation; Lemma Tag 03OZ (label lemma-cech-complex)"
-   }
+   "elementary": false
   },
   {
-   "text": "Apply [lem-weil-pbc-cech-vanishing-criterion] with $\\mathcal F=\\mathcal F_{\\mathrm{et}}$ and $U=X$ (an affine object of $X_{\\mathrm{et}}$, so in $\\mathcal B$). It yields $H^q(X,\\mathcal F_{\\mathrm{et}})=0$ for $q>0$, where $H^q(X,-)$ is the $q$-th right derived functor, computed by an injective resolution $\\mathcal F_{\\mathrm{et}}\\to I^\\bullet$ in $\\Ab(X_{\\mathrm{et}})$, of evaluation at the final object $X$, which is the global-sections functor $\\Gamma(X,-)$ [def-weil-pbc-global-sections-functor]. The injective resolution $I^\\bullet$ is a bounded-below complex of injective objects, hence K-injective, so $\\mathcal F_{\\mathrm{et}}\\to I^\\bullet$ is a K-injective resolution [prop-weil-pbc-kinjective-resolutions-exist]. By [def-weil-pbc-etale-cohomology], $H^q(X_{\\mathrm{et}},\\mathcal F_{\\mathrm{et}})=\\mathcal H^q(\\Gamma(X,I^\\bullet))=H^q(X,\\mathcal F_{\\mathrm{et}})$. Hence $H^q(X_{\\mathrm{et}},\\mathcal F_{\\mathrm{et}})=0$ for every $q>0$.",
+   "text": "Map the evaluation-complex isomorphism to homology. Functor.mapHomologicalComplexCompIso identifies the composite map functor, and ShortComplex.mapHomologyIso for AddCommGrpCat.uliftFunctor identifies lifted homology with the lift of the small homology group. Transport IsZero along these isomorphisms; ULift.up is injective, so the small homology group is subsingleton too. R.isoRightDerivedObj and the Ext/right-derived terminal evaluation comparison then give the original Sheaf.H subsingleton. The existing arbitrary-positive-degree wrapper is unchanged.",
    "uses": [
-    "lem-weil-pbc-cech-vanishing-criterion",
-    "def-weil-pbc-global-sections-functor",
-    "prop-weil-pbc-kinjective-resolutions-exist",
-    "def-weil-pbc-etale-cohomology"
+    "new-sheaf-cohomology-derived-evaluation"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Lemma Tag 03F9 conclusion; Etale Cohomology Theorem Tag 03P2 (label theorem-zariski-fpqc-quasi-coherent), affine case"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-cech-vanishing-criterion",
-  "lem-weil-pbc-fibre-product-affine-spectra",
-  "lem-weil-pbc-etale-covering-affine-refinement",
-  "lem-weil-pbc-module-pullback-quasi-coherent",
-  "lem-sc-etale-qcoherent-descent",
-  "def-weil-pbc-etale-site",
-  "lem-sc-etale-standard-cover-cech",
-  "lem-weil-pbc-module-pullback-affine-sections",
-  "lem-pc-module-pullback-identity-composition",
-  "def-sc-etale-qcoherent-module",
-  "lem-pc-cech-exact",
-  "def-weil-pbc-global-sections-functor",
-  "prop-weil-pbc-kinjective-resolutions-exist",
-  "def-weil-pbc-etale-cohomology"
+  "lem-sc-etale-affine-qcoherent",
+  "lem-sc-etale-ulift-injective-resolution",
+  "new-sheaf-cohomology-derived-evaluation"
  ],
  "proof_origin": {
-  "by": "document",
-  "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Tag 03P2, affine case, via the recorded 03F9 Cech criterion; coefficient groups realized in AddCommGrpCat.{u+1} by ULift."
+  "by": "worker",
+  "document": "https://stacks.math.columbia.edu/tag/03P2",
+  "place": "Affine Cech/Amitsur argument supplied by the existing lifted-coefficient theorem; coefficient-universe descent through injective resolutions uses Stacks 01DO and Mathlib homology preservation by ULift."
  },
  "mathlib_searches": [
   {
@@ -204,10 +168,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "U1",
+  "group": "H1",
   "result": "pass",
-  "landing": "20261012T053957-L-2647219",
-  "kind": "proof",
+  "landing": "20261012T085245-L-17401",
+  "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  },
  "created": {
