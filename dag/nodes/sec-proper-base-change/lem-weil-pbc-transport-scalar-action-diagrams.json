@@ -1,0 +1,122 @@
+{
+ "id": "lem-weil-pbc-transport-scalar-action-diagrams",
+ "kind": "statement",
+ "title": "Finite product transport of scalar action diagrams",
+ "statement": "Let C and D be categories with finite products [def-weil-category-product], L : C -> D a functor preserving finite limits, RV and AV objects of C, RU and AU objects of D, and er : RU ~= L(RV), ea : AU ~= L(AV) isomorphisms. Let mulV : RV x RV -> RV, mulU : RU x RU -> RU, oneV : 1_C -> RV, oneU : 1_D -> RU, and muV : RV x AV -> AV be morphisms. Write c(X,Y) : L(X x Y) -> L(X) x L(Y) for the canonical product comparison. Assume L(mulV) = c(RV,RV);(er^-1 x er^-1);mulU;er and L(oneV) = !;oneU;er, where semicolon denotes composition from left to right. Assume the source associativity equation (mulV x id);muV = <pr1;pr1, <pr1;pr2,pr2>;muV>;muV and unit equation <!;oneV,id>;muV = id. Define mu = (er x ea);c(RV,AV)^-1;L(muV);ea^-1. Then (mulU x id);mu = <pr1;pr1, <pr1;pr2,pr2>;mu>;mu and <!;oneU,id>;mu = id. No monoid laws for mulV itself and no additive structure are assumed.",
+ "stmt_deps": [
+  "def-weil-category-product"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03D2, proof of lemma-pullback-module; Associativity and unit transport of the scalar action, inverse-image module construction"
+ },
+ "proof": [
+  {
+   "text": "Set k = (er x ea);c(RV,AV)^-1. Its composites with L(pr1) and L(pr2) are pr1;er and pr2;ea. For arbitrary maps a,b and t into an image L(T), equality of these two projections shows <a,b>;k = t;L(<f,g>) whenever a;er=t;L(f) and b;ea=t;L(g).",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Use the double scalar comparison er2 = (er x er);c(RV,RV)^-1 and the triple comparison t = (er2 x ea);c(RV x RV,AV)^-1. The multiplication transport equation identifies the first composite with mulU;er. Apply the preceding pairing identity to the multiplied-scalar and nested-action maps. Apply L to the source associativity equation and cancel ea to obtain target associativity.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Apply the pairing identity with t=ea to the unit insertion. The one transport equation and uniqueness of maps to the terminal object identify the scalar projection; the other projection is ea. Apply L to the source unit equation and cancel ea to obtain target unit.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03D2, explicit categorical calculation by C1"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A finite product preserving functor transports monoid action associativity and unit diagrams",
+   "results": "Unavailable: Internal Server Error",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "finite product preserving functor transports monoid action associativity and unit",
+   "results": "Action.instHasFiniteProducts, Functor.mapAction and related action functor results",
+   "date": "2026-10-12",
+   "verdict": "These transport an action by a fixed external monoid, not the internal binary action here."
+  },
+  {
+   "tool": "loogle",
+   "query": "prodComparison",
+   "results": "Unknown identifier on service",
+   "date": "2026-10-12",
+   "verdict": "No match returned."
+  },
+  {
+   "tool": "grep",
+   "query": "prodComparison|map_lift in Mathlib/CategoryTheory/Limits/Shapes/BinaryProducts.lean",
+   "results": "prodComparison_fst, prodComparison_snd, prodComparison_natural, prodComparison_inv_natural, prod.lift_map",
+   "date": "2026-10-12",
+   "verdict": "Projection lemmas suffice for the proved categorical calculation; no exact packaged action-diagram result."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleInverseImageScalarAssociativity",
+  "date": "2026-10-12",
+  "group": "C1"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-def-exchange",
+ "blueprint": {
+  "from": {
+   "node": "def-weil-pbc-derived-exchange",
+   "place": "Associativity and unit transport of the scalar action, inverse-image module construction",
+   "via": [
+    "lem-weil-pbc-inverse-image-scalar-associativity",
+    "lem-weil-pbc-inverse-image-module-action-laws",
+    "lem-weil-pbc-inverse-image-module-object",
+    "lem-weil-pbc-inverse-image-module-construction",
+    "lem-weil-pbc-inverse-image-module-adjunction",
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "def-weil-pbc-derived-inverse-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.TransportScalarActionDiagrams",
+  "file": "lean/Sheaf/CategoryTheory/TransportScalarActionDiagrams.lean",
+  "declaration": "CategoryTheory.transportScalarActionDiagrams",
+  "statement": "theorem transportScalarActionDiagrams\n    {C : Type u₁} [Category.{v₁} C] [HasFiniteProducts C]\n    {D : Type u₂} [Category.{v₂} D] [HasFiniteProducts D]\n    (L : C ⥤ D) [PreservesFiniteLimits L]\n    (RV AV : C) (RU AU : D) (er : RU ≅ L.obj RV) (ea : AU ≅ L.obj AV)\n    (mulV : RV ⨯ RV ⟶ RV) (mulU : RU ⨯ RU ⟶ RU)\n    (oneV : ⊤_ C ⟶ RV) (oneU : ⊤_ D ⟶ RU) (muV : RV ⨯ AV ⟶ AV)\n    (hMul : L.map mulV = prodComparison L RV RV ≫\n      prod.map er.inv er.inv ≫ mulU ≫ er.hom)\n    (hOne : L.map oneV = terminal.from _ ≫ oneU ≫ er.hom)\n    (hAssoc : prod.map mulV (𝟙 AV) ≫ muV =\n      prod.lift (prod.fst ≫ prod.fst)\n        (prod.lift (prod.fst ≫ prod.snd) prod.snd ≫ muV) ≫ muV)\n    (hUnit : prod.lift (terminal.from AV ≫ oneV) (𝟙 AV) ≫ muV = 𝟙 AV) :\n    let mu := prod.map er.hom ea.hom ≫ inv (prodComparison L RV AV) ≫\n      L.map muV ≫ ea.inv\n    (prod.map mulU (𝟙 AU) ≫ mu =\n      prod.lift (prod.fst ≫ prod.fst)\n        (prod.lift (prod.fst ≫ prod.snd) prod.snd ≫ mu) ≫ mu) ∧\n    (prod.lift (terminal.from AU ≫ oneU) (𝟙 AU) ≫ mu = 𝟙 AU)",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C1",
+  "result": "pass",
+  "landing": "20261012T112831-L-764619",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C1",
+  "result": "pass",
+  "landing": "20261012T112831-L-764619",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

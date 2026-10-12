@@ -7477,3 +7477,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 11:28 L: merged deliver/B2/Sheaf.ConstructibleSheaf.TorsorAssociatedModuleEssentialImage (stage 3; reviewer PASS; first push; landing 20261012T112830-L-764300 (interface); batch 20261012T112824; modules 4; new nodes 3)
 - 11:28 L: merged deliver/B3/Sheaf.AlgebraicGeometry.AffineDerivedSectionsHomologyComparison (stage 3; reviewer PASS; first push; landing 20261012T112830-L-764405 (interface); batch 20261012T112824; modules 3; new nodes 2)
 - 11:28 L: merged deliver/B3/Sheaf.AlgebraicGeometry.EtaleSetSectionFiniteMatching (stage 3; reviewer PASS; first push; landing 20261012T112830-L-764502 (interface); batch 20261012T112824; modules 3; new nodes 2)
+- 11:28 L: merged deliver/C1/Sheaf.AlgebraicGeometry.EtaleInverseImageScalarAssociativity (stage 3; reviewer PASS; first push; landing 20261012T112831-L-764619 (interface); batch 20261012T112824; modules 3; new nodes 2)

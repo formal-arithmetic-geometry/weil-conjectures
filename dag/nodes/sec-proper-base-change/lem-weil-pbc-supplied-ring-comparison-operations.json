@@ -1,0 +1,124 @@
+{
+ "id": "lem-weil-pbc-supplied-ring-comparison-operations",
+ "kind": "statement",
+ "title": "Multiplication and unit for a supplied ring inverse image comparison",
+ "statement": "Let U and V be schemes [def-pc-scheme], f : U -> V, O a commutative ring sheaf on the small etale site [def-weil-pbc-etale-site], and L the set inverse image [def-weil-pbc-etale-sheaves], preserving finite limits. Write FrU and FrV for underlying set sheaf functors and Rr for the ring direct image given by precomposition with etale base change. Suppose Lr is any left adjoint to Rr with adjunction ar, and er : Lr;FrU ~= FrV;L a natural isomorphism. Suppose forgetting ar.homEquiv(h) equals aS.homEquiv(er^-1;FrU(h)) for every ring-sheaf morphism h : Lr(G) -> F, where aS is the set inverse-image adjunction. There exist morphisms mulV and mulU on the categorical squares of FrV(O) and FrU(Lr(O)), and morphisms oneV and oneU from their respective terminal set sheaves, with section formulas multiplication of the two projections and constant one. They satisfy L(mulV) = c; (er(O)^-1 x er(O)^-1);mulU;er(O) and L(oneV) = !;oneU;er(O). Composition is from left to right and c is the canonical binary product comparison.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-etale-sheaves"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03D2, proof of lemma-pullback-module; Ring multiplication and one equations needed before scalar action transport"
+ },
+ "proof": [
+  {
+   "text": "Construct mulV, mulU, oneV and oneU as sectionwise multiplication and one maps. Ring restriction maps preserve multiplication and one, so these are natural sheaf morphisms with the claimed formulas.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Apply hom-equivalence compatibility to id on Lr(O). The ring unit after forgetting is the set unit followed by direct image of er.inv(O). Let q=c;prod.map(er.inv(O),er.inv(O)), and t be the set unit on the source square followed by direct image of q. Naturality of the set unit and the product comparison shows that the projections of t are the source projections followed by the ring unit.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Cancel er.inv(O), then apply injectivity of the set-adjunction hom equivalence to the multiplication transport equation. Naturality of the unit reduces it to preservation of multiplication by the ring-adjunction unit, checked on each section using the projection formulas for t. The one equation reduces in the same way to preservation of one; uniqueness of maps to the terminal object supplies its input. These equations prove the required result for the supplied lift without canonical choices.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03D2, explicit categorical calculation by C1"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A ring sheaf adjunction compatible with forgetting to sets preserves multiplication and one under the product comparison",
+   "results": "Unavailable: Internal Server Error",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "a ring adjunction compatible with the underlying set adjunction transports multiplication and one",
+   "results": "Eight unrelated subalgebra and ring structure results",
+   "date": "2026-10-12",
+   "verdict": "No exact sheaf adjunction result."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.homEquiv",
+   "results": "Adjunction.homEquiv_apply, homEquiv_unit, homEquiv_counit, homEquiv_id",
+   "date": "2026-10-12",
+   "verdict": "General adjunction calculation lemmas, no ring operation result."
+  },
+  {
+   "tool": "grep",
+   "query": "homEquiv_apply|unit_naturality in Mathlib/CategoryTheory/Adjunction/Basic.lean; prodComparison in BinaryProducts.lean",
+   "results": "homEquiv_unit, unit_naturality, prodComparison_fst and prodComparison_snd",
+   "date": "2026-10-12",
+   "verdict": "Use these Mathlib tools in the sectionwise proof. The existing EtaleInverseImageRingLift proof provides the same argument for its chosen lift."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleInverseImageScalarAssociativity",
+  "date": "2026-10-12",
+  "group": "C1"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-def-exchange",
+ "blueprint": {
+  "from": {
+   "node": "def-weil-pbc-derived-exchange",
+   "place": "Ring multiplication and one equations needed before scalar action transport",
+   "via": [
+    "lem-weil-pbc-inverse-image-scalar-associativity",
+    "lem-weil-pbc-inverse-image-module-action-laws",
+    "lem-weil-pbc-inverse-image-module-object",
+    "lem-weil-pbc-inverse-image-module-construction",
+    "lem-weil-pbc-inverse-image-module-adjunction",
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "def-weil-pbc-derived-inverse-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleInverseImageRingComparisonOperations",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleInverseImageRingComparisonOperations.lean",
+  "declaration": "AlgebraicGeometry.etaleInverseImageRingComparisonOperations",
+  "statement": "theorem etaleInverseImageRingComparisonOperations (U V : Scheme.{u}) (f : U ⟶ V)\n    (O : Sheaf V.smallEtaleTopology CommRingCat.{u + 1})\n    [PreservesFiniteLimits (Scheme.etaleSetPullback f)] :\n    let L := Scheme.etaleSetPullback f\n    let FrU := sheafForget (D := CommRingCat.{u + 1}) U.smallEtaleTopology\n    let FrV := sheafForget (D := CommRingCat.{u + 1}) V.smallEtaleTopology\n    let b := MorphismProperty.Over.pullback @Etale ⊤ f\n    let aS := Functor.sheafPullbackConstruction.sheafAdjunctionContinuous b\n      (Type (u + 1)) (V.smallGrothendieckTopology @Etale)\n      (U.smallGrothendieckTopology @Etale)\n    let Rr := b.sheafPushforwardContinuous CommRingCat.{u + 1}\n      (V.smallGrothendieckTopology @Etale) (U.smallGrothendieckTopology @Etale)\n    ∀ (Lr : Sheaf V.smallEtaleTopology CommRingCat.{u + 1} ⥤\n        Sheaf U.smallEtaleTopology CommRingCat.{u + 1})\n      (ar : Lr ⊣ Rr) (er : Lr ⋙ FrU ≅ FrV ⋙ L),\n      (∀ (G : Sheaf V.smallEtaleTopology CommRingCat.{u + 1})\n          (F : Sheaf U.smallEtaleTopology CommRingCat.{u + 1}) (h : Lr.obj G ⟶ F),\n        FrV.map (ar.homEquiv G F h) =\n          aS.homEquiv (FrV.obj G) (FrU.obj F) (er.inv.app G ≫ FrU.map h)) →\n    ∃ (mulV : (FrV.obj O) ⨯ (FrV.obj O) ⟶ FrV.obj O)\n      (mulU : (FrU.obj (Lr.obj O)) ⨯ (FrU.obj (Lr.obj O)) ⟶ FrU.obj (Lr.obj O))\n      (oneV : ⊤_ (Sheaf V.smallEtaleTopology (Type (u + 1))) ⟶ FrV.obj O)\n      (oneU : ⊤_ (Sheaf U.smallEtaleTopology (Type (u + 1))) ⟶ FrU.obj (Lr.obj O)),\n      (∀ (W : V.Etaleᵒᵖ) (x : ((FrV.obj O) ⨯ (FrV.obj O)).obj.obj W),\n        mulV.hom.app W x =\n          @Mul.mul (O.obj.obj W) inferInstance\n          ((prod.fst : (FrV.obj O) ⨯ (FrV.obj O) ⟶ FrV.obj O).hom.app W x :\n            O.obj.obj W)\n          ((prod.snd : (FrV.obj O) ⨯ (FrV.obj O) ⟶ FrV.obj O).hom.app W x :\n            O.obj.obj W)) ∧\n      (∀ (W : U.Etaleᵒᵖ)\n          (x : ((FrU.obj (Lr.obj O)) ⨯ (FrU.obj (Lr.obj O))).obj.obj W),\n        mulU.hom.app W x =\n          @Mul.mul ((Lr.obj O).obj.obj W) inferInstance\n          ((prod.fst : (FrU.obj (Lr.obj O)) ⨯ (FrU.obj (Lr.obj O)) ⟶\n            FrU.obj (Lr.obj O)).hom.app W x : (Lr.obj O).obj.obj W)\n          ((prod.snd : (FrU.obj (Lr.obj O)) ⨯ (FrU.obj (Lr.obj O)) ⟶\n            FrU.obj (Lr.obj O)).hom.app W x : (Lr.obj O).obj.obj W)) ∧\n      (∀ (W : V.Etaleᵒᵖ)\n          (x : (⊤_ (Sheaf V.smallEtaleTopology (Type (u + 1)))).obj.obj W),\n        oneV.hom.app W x = (1 : O.obj.obj W)) ∧\n      (∀ (W : U.Etaleᵒᵖ)\n          (x : (⊤_ (Sheaf U.smallEtaleTopology (Type (u + 1)))).obj.obj W),\n        oneU.hom.app W x = (1 : (Lr.obj O).obj.obj W)) ∧\n      L.map mulV = prodComparison L (FrV.obj O) (FrV.obj O) ≫\n        prod.map (er.inv.app O) (er.inv.app O) ≫ mulU ≫ er.hom.app O ∧\n      L.map oneV = terminal.from _ ≫ oneU ≫ er.hom.app O",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C1",
+  "result": "pass",
+  "landing": "20261012T112831-L-764619",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C1",
+  "result": "pass",
+  "landing": "20261012T112831-L-764619",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
