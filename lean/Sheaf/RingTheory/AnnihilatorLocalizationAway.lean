@@ -9,6 +9,7 @@ public import Mathlib.Algebra.Module.LocalizedModule.Basic
 public import Mathlib.RingTheory.Finiteness.Defs
 public import Mathlib.RingTheory.Ideal.Maps
 public import Mathlib.RingTheory.Localization.Away.Basic
+import Mathlib.RingTheory.Localization.Ideal
 
 /-!
 # Annihilators of finite modules localized away from an element
@@ -47,6 +48,49 @@ theorem annihilator_localization_away_of_finite
     [AddCommGroup M] [Module A M] [Module.Finite A M] :
     Module.annihilator (Localization.Away f) (LocalizedModule.Away f M) =
       Ideal.map (algebraMap A (Localization.Away f)) (Module.annihilator A M) := by
-  sorry
+  classical
+  let S := Submonoid.powers f
+  apply le_antisymm
+  · intro x hx
+    obtain ⟨a, s, rfl⟩ := IsLocalization.exists_mk'_eq S x
+    have hkill : ∀ m : M, ∃ t : S, (t : A) • (a • m) = 0 := by
+      intro m
+      have h := Module.mem_annihilator.mp hx (LocalizedModule.mk m (1 : S))
+      rw [← Localization.mk_eq_mk', LocalizedModule.mk_smul_mk] at h
+      have heq : LocalizedModule.mk (a • m) (s * 1) =
+          LocalizedModule.mk (0 : M) (1 : S) := by simpa using h
+      obtain ⟨t, ht⟩ := LocalizedModule.mk_eq.mp heq
+      exact ⟨t, by simpa [Submonoid.smul_def] using ht⟩
+    obtain ⟨g, hg⟩ := Module.Finite.fg_top (R := A) (M := M)
+    have huniform : ∀ g : Finset M, ∃ t : S, ∀ m ∈ g, (t : A) • (a • m) = 0 := by
+      intro g
+      induction g using Finset.induction_on with
+      | empty => exact ⟨1, by simp⟩
+      | @insert m g hmg ih =>
+        obtain ⟨t, ht⟩ := hkill m
+        obtain ⟨u, hu⟩ := ih
+        refine ⟨t * u, ?_⟩
+        intro n hn
+        rcases Finset.mem_insert.mp hn with rfl | hn
+        · simp only [Submonoid.coe_mul, mul_smul]
+          rw [smul_comm, ht, smul_zero]
+        · simp only [Submonoid.coe_mul, mul_smul]
+          rw [hu n hn, smul_zero]
+    obtain ⟨t, ht⟩ := huniform g
+    have ha : (t : A) * a ∈ Module.annihilator A M := by
+      rw [← Submodule.annihilator_top, ← hg, Submodule.mem_annihilator_span]
+      intro m
+      simpa only [mul_smul] using ht m.val m.property
+    exact (IsLocalization.mk'_mem_map_algebraMap_iff S
+      (Localization.Away f) (Module.annihilator A M) a s).mpr ⟨t, t.property, ha⟩
+  · rw [Ideal.map_le_iff_le_comap]
+    intro a ha
+    apply Module.mem_annihilator.mpr
+    intro z
+    induction z using LocalizedModule.induction_on with
+    | h m s =>
+      rw [← Localization.mk_one_eq_algebraMap, LocalizedModule.mk_smul_mk]
+      rw [Module.mem_annihilator.mp ha m, LocalizedModule.zero_mk]
+
 
 end Module
