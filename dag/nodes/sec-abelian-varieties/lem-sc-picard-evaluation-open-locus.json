@@ -1,0 +1,129 @@
+{
+ "id": "lem-sc-picard-evaluation-open-locus",
+ "kind": "statement",
+ "title": "Retrocompact evaluation-isomorphism open inside a rank-matched locus",
+ "statement": "Let $f:X\\to S$ satisfy the flat, proper, finite-presentation and universal structure-pushforward assumptions [def-weil-flat-morphism] [def-weil-proper-morphism] [def-sbc-locally-finite-presentation] [lem-pc-module-pullback-adjunction], and let $\\mathcal E$ be finite locally free [def-sc-finite-locally-free-sheaf]. Let $j:W\\to S$ be any morphism such that $P(f,\\mathcal E,h\\circ j)$ holds for every $h:T\\to W$ [def-sc-picard-direct-image-rank-condition]. There is a quasi-compact open immersion $k:Z\\to W$ such that $h$ factors through $k$ if and only if the adjunction counit $p^*p_*q^*\\mathcal E\\to q^*\\mathcal E$ [lem-pc-module-pullback-adjunction] is invertible, for the base change of $f$ along $h\\circ j$.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/0BDP",
+  "place": "final two paragraphs of the proof: cup-product dual bases and the retrocompact determinant open"
+ },
+ "stmt_deps": [
+  "def-weil-flat-morphism",
+  "def-weil-proper-morphism",
+  "def-sbc-locally-finite-presentation",
+  "lem-pc-module-pullback-adjunction",
+  "def-sc-finite-locally-free-sheaf",
+  "def-sc-picard-direct-image-rank-condition"
+ ],
+ "proof": [
+  {
+   "text": "The explicit universal rank and canonical base-change condition gives two finite locally free direct images N and D of the same rank r, locally on W, and identifies their pullbacks with the direct images over every test scheme. The pushforward of evaluation and the structure-pushforward identification give the cup-product pairing N tensor D to O_W.",
+   "uses": [
+    "def-sc-picard-direct-image-rank-condition",
+    "lem-pc-module-pullback-adjunction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "In local frames take the determinant of the transpose D to N-dual of this pairing. Frame changes multiply the determinant by a unit. Its principal opens glue to a retrocompact open Z of W. Factorization through Z is equivalent to perfection of the pairing after arbitrary base change.",
+   "uses": [
+    "def-amb-finite-locally-free-module"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "A perfect pairing gives local dual bases whose evaluations are the identity matrix. They define inverse maps between q*E and p*N: a split map of free modules of the same rank is invertible. The first map is the canonical adjunction counit. Conversely an invertible counit gives q*E isomorphic to p*N; the local finite-free projection calculation identifies D with N-dual and the pairing with evaluation. Hence the determinant criterion is equivalent to the displayed counit condition. The rank-zero determinant is 1 and the empty base is vacuous.",
+   "uses": [
+    "lem-pc-module-pullback-adjunction",
+    "def-amb-finite-locally-free-module"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sc-picard-direct-image-rank-condition",
+  "lem-pc-module-pullback-adjunction",
+  "def-amb-finite-locally-free-module"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "https://stacks.math.columbia.edu/tag/0BDP",
+  "place": "final two paragraphs of the proof: cup-product dual bases and the retrocompact determinant open",
+  "note": "A stage-3 reduction of the existing proof, retaining the unit route."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Quasi compact open determinant locus where evaluation from pullback of the direct image of a finite locally free sheaf is an isomorphism",
+   "results": "Service timed out; no response.",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Over a universal rank matched direct image locus the adjunction counit for a finite locally free sheaf is an isomorphism on a quasi compact open locus detected by a determinant",
+   "results": "Counit isomorphisms for open-immersion restriction and Gamma-Spec; no evaluation determinant locus.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "counit.*[Ll]ocus|[Ll]ocus.*counit|[Pp]erfect[Pp]airing",
+   "results": "LinearAlgebra and topology perfect-pairing files; no sheaf evaluation locus.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PicardDiagonalLocallyClosed",
+  "date": "2026-10-13",
+  "group": "Y2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-theorem-of-cube",
+   "place": "proof: obtain a universal locally closed subscheme from Tag 0BDP; final two paragraphs of the proof: cup-product dual bases and the retrocompact determinant open",
+   "via": [
+    "lem-sc-picard-diagonal-locally-closed",
+    "lem-sc-general-theorem-of-cube"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.PicardEvaluationOpenLocus",
+  "file": "lean/Sheaf/AlgebraicGeometry/PicardEvaluationOpenLocus.lean",
+  "declaration": "AlgebraicGeometry.Scheme.exists_picardEvaluationOpenLocus",
+  "statement": "theorem exists_picardEvaluationOpenLocus {X S : Scheme.{u}} (f : X ⟶ S)\n    [Flat f] [IsProper f] [LocallyOfFinitePresentation f]\n    (hO : ∀ {T : Scheme.{u}} (g : T ⟶ S),\n      IsIso ((Classical.choose\n        (Modules.exists_tensorPullbackAdjunction (pullback.snd f g))).unit.app\n          (SheafOfModules.unit T.ringCatSheaf)))\n    (E : X.Modules) [E.IsFiniteLocallyFree]\n    {W : Scheme.{u}} (j : W ⟶ S)\n    (hW : ∀ {T : Scheme.{u}} (h : T ⟶ W), PicardDirectImageRankCondition f E (h ≫ j)) :\n    ∃ (Z : Scheme.{u}) (k : Z ⟶ W), IsOpenImmersion k ∧ QuasiCompact k ∧\n      ∀ {T : Scheme.{u}} (h : T ⟶ W),\n        (∃ l : T ⟶ Z, l ≫ k = h) ↔\n          IsIso ((Classical.choose\n            (Modules.exists_tensorPullbackAdjunction (pullback.snd f (h ≫ j)))).counit.app\n              ((Modules.tensorPullback (pullback.fst f (h ≫ j))).obj E))",
+  "branch": "sheaf-dag",
+  "by": "Y2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y2",
+  "result": "pass",
+  "landing": "20261012T173920-L-3310815",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y2",
+  "result": "pass",
+  "landing": "20261012T173920-L-3310815",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

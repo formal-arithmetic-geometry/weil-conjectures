@@ -28,61 +28,42 @@
  ],
  "proof": [
   {
-   "text": "The universal pushforward hypothesis gives $H^0(X_s,\\mathcal O_{X_s})=\\kappa(s)$ for every field-valued fibre, so a nontrivial open-and-closed decomposition of a fibre would give a nontrivial idempotent in this field. Thus every fibre is connected and the locally constant rank of $\\mathcal E$ is constant on it. For each $r$, let $V_r\\subseteq X$ be the open-and-closed locus where $\\mathcal E$ has rank $r$. The image $S_r=f(V_r)$ is open by [lem-weil-pbc-flat-lfp-open] and closed because $V_r\\to S$ is proper and [lem-weil-pbc-proper-closed-image] applies. Connectedness of each fibre makes the $S_r$ disjoint, and their union is $S$ because every fibre is nonempty ($H^0(X_s,\\mathcal O_{X_s})=\\kappa(s)\\neq0$). Restrict to $S_r$ and write the rank as $r$.",
+   "text": "Construct j:W to S representing the universal simultaneous direct-image rank and base-change condition P. Give the immersion, local finite presentation, quasi-compactness and quasi-separatedness properties to instance synthesis.",
    "uses": [
-    "lem-weil-pbc-flat-lfp-open",
-    "lem-weil-pbc-proper-closed-image"
+    "lem-sc-picard-direct-image-rank-locus"
    ],
-   "elementary": false,
-   "source": {
-    "document": "/home/ubuntu/c1-stacks-review/more-morphisms.tex",
-    "place": "Tag 0BDP proof, rank decomposition paragraph"
-   }
+   "elementary": false
   },
   {
-   "text": "The sheaves $\\mathcal E$ and $\\mathcal E^\\vee=\\mathcal{H}om(\\mathcal E,\\mathcal O_X)$ are finite locally free, hence of finite presentation and flat over $S$ because $f$ is flat. By [lem-pc-rf-perfect-base-change], $E=Rf_*\\mathcal E$ and $E'=Rf_*\\mathcal E^\\vee$ are perfect and $Lg^*E\\cong Rp_*q^*\\mathcal E$, $Lg^*E'\\cong Rp_*q^*\\mathcal E^\\vee$ for every $g:T\\to S$; in particular $p_*q^*\\mathcal E=H^0(Lg^*E)$ and $p_*q^*\\mathcal E^\\vee=H^0(Lg^*E')$. Since $Lg^*E$ has no cohomology in negative degrees for every $g$ (in particular for $g=\\operatorname{Spec}\\kappa(s)\\to S$), a perfect complex with this property has, locally on $S$, tor-amplitude in $[0,b]$ for some $b$ (represent it near $s$ by a complex of finite free modules that is minimal at $s$, as in the Tag 0BDP proof); the construction below is local on $S$ and glues by its universal property. Apply [lem-sc-perfect-h0-locally-closed] with $a=0$ and the rank $r$ to $E$ and to $E'$, obtaining immersions $Z\\to S$, $Z'\\to S$ of finite presentation, and replace $S$ by $Z\\times_SZ'$ (the next step shows that every $g$ admitting an $\\mathcal N$ factors through both). On this replacement $f_*\\mathcal E$ and $f_*\\mathcal E^\\vee$ are finite locally free of rank $r$ and their formation commutes with arbitrary base change.",
+   "text": "For every h:T to W, the representing equivalence gives P(f,E,h followed by j). Construct the retrocompact evaluation-isomorphism open k:Z to W. The composite k followed by j is an immersion, locally of finite presentation, quasi-compact and quasi-separated by the Mathlib composition instances.",
    "uses": [
-    "lem-pc-rf-perfect-base-change",
-    "lem-sc-perfect-h0-locally-closed"
+    "lem-sc-picard-evaluation-open-locus"
    ],
-   "elementary": false,
-   "source": {
-    "document": "/home/ubuntu/c1-stacks-review/more-morphisms.tex",
-    "place": "Tag 0BDP proof, perfect direct-image and locally closed locus paragraphs"
-   }
+   "elementary": false
   },
   {
-   "text": "Let $g:T\\to S$. If $q^*\\mathcal E\\cong p^*\\mathcal N$ with $\\mathcal N$ finite locally free, then by [lem-pc-projection-formula] and the item's hypothesis $\\mathcal O_T\\cong p_*\\mathcal O_{X_T}$ we get $p_*q^*\\mathcal E\\cong\\mathcal N\\otimes p_*\\mathcal O_{X_T}\\cong\\mathcal N$ and likewise $p_*q^*\\mathcal E^\\vee\\cong\\mathcal N^\\vee$, of rank $r$, and this persists after every further base change $T'\\to T$ (the hypothesis holds for $T'\\to S$ too); so $g$ factors through $Z\\times_SZ'$ and the cup-product pairing $p_*q^*\\mathcal E\\otimes p_*q^*\\mathcal E^\\vee\\to\\mathcal O_T$ is perfect. Conversely, if this pairing between the two rank-$r$ bundles is perfect, choose locally on $T$ bases $\\sigma_1,\\dots,\\sigma_r$ and $\\tau_1,\\dots,\\tau_r$ with $\\sigma_i\\tau_j=\\delta_{ij}$; the maps $(\\sigma_i):\\mathcal O_{X_T}^{\\oplus r}\\to q^*\\mathcal E$ and $(\\tau_j):q^*\\mathcal E\\to\\mathcal O_{X_T}^{\\oplus r}$ are inverse, so $q^*\\mathcal E\\cong p^*p_*q^*\\mathcal E$.",
-   "uses": [
-    "lem-pc-projection-formula"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "/home/ubuntu/c1-stacks-review/more-morphisms.tex",
-    "place": "Tag 0BDP proof, cup-product pairing paragraph"
-   }
-  },
-  {
-   "text": "Since $f_*\\mathcal E$ and $f_*\\mathcal E^\\vee$ commute with base change, the cup-product pairing over $T$ is the pullback of the pairing $f_*\\mathcal E\\otimes f_*\\mathcal E^\\vee\\to\\mathcal O_S$, and it is perfect exactly over the open locus of $S$ where its determinant (in local bases) is invertible; this open is retrocompact, so its inclusion is of finite presentation. Composing with the immersion of the preceding step and taking the disjoint union over the rank components $S_r$ gives an immersion $j:Z\\to S$ of finite presentation, and the preceding equivalence says that $g:T\\to S$ factors through $Z$ if and only if $q^*\\mathcal E\\cong p^*\\mathcal N$ for some finite locally free $\\mathcal N$ on $T$.",
+   "text": "If g factors through k followed by j via l, reassociate its factorization and apply both representing equivalences. P gives finite local freeness of the actual module N=p_*q*E. The invertible counit gives q*E isomorphic to p*N by the inverse of asIso(counit). This constructs the required N without choosing data from an existence theorem.",
    "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "/home/ubuntu/c1-stacks-review/more-morphisms.tex",
-    "place": "Tag 0BDP proof, final determinant paragraph"
-   }
+   "elementary": true
+  },
+  {
+   "text": "Conversely, given a finite locally free N and q*E isomorphic to p*N, apply the pullback-evaluation implication to obtain P and an invertible counit. P gives h:T to W with h followed by j equal to g. Substitute this equality into the counit condition; the open-locus equivalence gives l:T to Z with l followed by k equal to h. Composition and associativity prove l followed by (k followed by j) equal to g.",
+   "uses": [
+    "lem-sc-picard-pullback-evaluation"
+   ],
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-flat-lfp-open",
-  "lem-weil-pbc-proper-closed-image",
-  "lem-pc-rf-perfect-base-change",
-  "lem-sc-perfect-h0-locally-closed",
-  "lem-pc-projection-formula"
+  "lem-sc-picard-direct-image-rank-locus",
+  "lem-sc-picard-evaluation-open-locus",
+  "lem-sc-picard-pullback-evaluation"
  ],
  "proof_origin": {
   "by": "document",
-  "document": "/home/ubuntu/c1-stacks-review/more-morphisms.tex",
-  "place": "More on Morphisms, Lemma diagonal-picard-flat-proper, Tag 0BDP"
+  "document": "https://stacks.math.columbia.edu/tag/0BDP",
+  "place": "Tag 0BDP, rank decomposition, simultaneous direct-image loci, projection formula, and determinant pairing; Lean assembly by Y2",
+  "note": "Three strictly smaller source-backed intermediate theorems; construction of the descending module is the actual direct image."
  },
  "mathlib_searches": [
   {
@@ -183,5 +164,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y2",
+  "result": "pass",
+  "landing": "20261012T173920-L-3310815",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

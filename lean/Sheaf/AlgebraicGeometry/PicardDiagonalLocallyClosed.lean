@@ -7,9 +7,9 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Immersion
 public import Mathlib.AlgebraicGeometry.Modules.Sheaf
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf
 public import Sheaf.AlgebraicGeometry.TensorPullbackAdjunction
-import Sheaf.AlgebraicGeometry.PerfectDirectImageBaseChange
-import Sheaf.AlgebraicGeometry.PerfectLowestCohomologyLocus
-import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Sections
+import Sheaf.AlgebraicGeometry.PicardDirectImageRankLocus
+import Sheaf.AlgebraicGeometry.PicardEvaluationOpenLocus
+import Sheaf.AlgebraicGeometry.PicardPullbackEvaluation
 
 /-!
 # Universal locally closed pullback locus for a finite locally free module
@@ -56,6 +56,41 @@ theorem picard_diagonal_locally_closed {X S : Scheme.{u}} (f : X ⟶ S)
           ∃ (N : T.Modules) (_ : N.IsFiniteLocallyFree),
             Nonempty (((Scheme.Modules.tensorPullback (pullback.fst f g)).obj E) ≅
               ((Scheme.Modules.tensorPullback (pullback.snd f g)).obj N)) := by
-  sorry
+  obtain ⟨W, j, hj, hjfp, hjqc, hjqs, hW⟩ :=
+    exists_picardDirectImageRankLocus f hO E
+  have : IsImmersion j := hj
+  have : LocallyOfFinitePresentation j := hjfp
+  have : QuasiCompact j := hjqc
+  have : QuasiSeparated j := hjqs
+  obtain ⟨Z, k, hk, hkqc, hZ⟩ := exists_picardEvaluationOpenLocus f hO E j
+    (fun h ↦ (hW (h ≫ j)).mp ⟨h, rfl⟩)
+  have : IsOpenImmersion k := hk
+  have : QuasiCompact k := hkqc
+  refine ⟨Z, k ≫ j, inferInstance, inferInstance, inferInstance, inferInstance, ?_⟩
+  intro T g
+  constructor
+  · rintro ⟨l, hl⟩
+    have hl' : (l ≫ k) ≫ j = g := (Category.assoc l k j).trans hl
+    subst g
+    have hP := (hW ((l ≫ k) ≫ j)).mp ⟨l ≫ k, rfl⟩
+    have hε := (hZ (l ≫ k)).mp ⟨l, rfl⟩
+    let N := (Modules.pushforward (pullback.snd f ((l ≫ k) ≫ j))).obj
+      ((Modules.tensorPullback (pullback.fst f ((l ≫ k) ≫ j))).obj E)
+    have hN : N.IsFiniteLocallyFree := hP.1
+    have e : Nonempty
+        ((Modules.tensorPullback (pullback.fst f ((l ≫ k) ≫ j))).obj E ≅
+          (Modules.tensorPullback (pullback.snd f ((l ≫ k) ≫ j))).obj N) :=
+      ⟨(asIso ((Classical.choose
+        (Modules.exists_tensorPullbackAdjunction
+          (pullback.snd f ((l ≫ k) ≫ j)))).counit.app
+            ((Modules.tensorPullback (pullback.fst f ((l ≫ k) ≫ j))).obj E))).symm⟩
+    exact ⟨N, hN, e⟩
+  · rintro ⟨N, hN, e⟩
+    have : N.IsFiniteLocallyFree := hN
+    obtain ⟨hP, hε⟩ := picard_rankCondition_and_isIso_counit_of_pullback f hO E g N e
+    obtain ⟨h, hh⟩ := (hW g).mpr hP
+    subst g
+    obtain ⟨l, hl⟩ := (hZ h).mpr hε
+    exact ⟨l, by rw [← Category.assoc, hl]⟩
 
 end AlgebraicGeometry.Scheme
