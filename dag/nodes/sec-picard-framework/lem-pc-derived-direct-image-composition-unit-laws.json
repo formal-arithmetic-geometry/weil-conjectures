@@ -1,0 +1,117 @@
+{
+ "id": "lem-pc-derived-direct-image-composition-unit-laws",
+ "kind": "statement",
+ "title": "Unit laws of canonical unbounded derived direct image comparisons",
+ "statement": "Fix unbounded derived categories of module sheaves on every scheme [def-pc-derived-category] and derived direct images [def-pc-derived-direct-image]. Suppose c(f,g): Rg_* composed with Rf_* is isomorphic to R(gf)_* for all scheme morphisms and its inverse satisfies the pasted right-derived unit equation. There exist identity comparisons i(X): R(id_X)_* is isomorphic to the identity, such that c(id_X,f) equals Rf_* applied to i(X) and c(f,id_Y) equals i(Y) applied after Rf_*, with the canonical identifications induced by id_comp and comp_id. These are natural-transformation equalities, stated componentwise on every derived object.",
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 0D5T (Lemma 20.28.2), coherence expanded using the universal property of the construction in Tag 079V"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-direct-image",
+  "def-pc-derived-category"
+ ],
+ "proof": [
+  {
+   "text": "underived direct image for an identity is canonically the identity functor, with the sectionwise identity as its unitor. Derive this identification. Since the identity functor is exact, its derived functor is the identity on the localization; uniqueness of right derived functors gives i X, characterized by the derived-unit equation with this underived unitor. The hypothesis hc transports the right-derived universal property of the composite morphism to the composite derived functors, with the pasted unit. For c (id X) f, substitute the defining equation of i X into that pasted unit and use naturality of the derived unit of f. The result is the derived unit of f composed with the underived left unitor. For c f (id Y), substitute the equation for i Y; the result is the same with the right unitor. In both cases the other side of the claimed law has exactly this factorization. Uniqueness of morphisms out of the right derived functor therefore equates the natural transformations. Evaluating at E gives the displayed equalities, with eqToHom accounting for id_comp and comp_id.",
+   "uses": [
+    "def-pc-derived-direct-image",
+    "def-pc-derived-category"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-derived-direct-image",
+  "def-pc-derived-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "A3",
+  "date": "2026-10-12",
+  "note": "Expansion of the implicit coherence of Tag 0D5T by uniqueness of right-derived functors (Mathlib Functor.rightDerived_ext and rightDerivedUnique)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "canonical composition of derived pushforward functors satisfies identity and associativity via uniqueness of right derived functors",
+   "results": "Generic derived-functor factorization and natural-transformation composition lemmas; no scheme-level coherent comparison theorem.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.rightDerived_ext",
+   "results": "CategoryTheory.Functor.rightDerived_ext provides uniqueness after precomposition with the derived unit; it does not state the required unit/associativity equations for scheme pushforwards.",
+   "date": "2026-10-12",
+   "verdict": "generic tool only"
+  },
+  {
+   "tool": "grep",
+   "query": "rightDerived.*(comp|id|unique)|conjugate.*(comp|id)",
+   "results": "Mathlib rightDerivedNatTrans_comp and derived uniqueness; source-library PlusComp coherence applies only to bounded-below derived categories. No unbounded scheme direct-image unit/associativity declaration.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Canonical unbounded derived direct image composition isomorphisms satisfy unit laws and associativity",
+   "results": "Service returned Internal Server Error; no result was inferred from this failure. LeanFinder, Loogle and source grep were run successfully.",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ProperDerivedDirectImageComposition",
+  "date": "2026-10-12",
+  "group": "A3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Proper direct-image composition: identity and associativity coherence in the proof of proper upper-shriek composition",
+   "via": [
+    "lem-pc-proper-derived-direct-image-composition",
+    "lem-sc-proper-upper-shriek-composition"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.DerivedDirectImageCompositionUnitLaws",
+  "file": "lean/Sheaf/AlgebraicGeometry/DerivedDirectImageCompositionUnitLaws.lean",
+  "declaration": "AlgebraicGeometry.derivedDirectImageComposition_unit_laws",
+  "statement": "theorem derivedDirectImageComposition_unit_laws\n    [d : ∀ X : Scheme.{u}, HasDerivedCategory.{w}\n      (SheafOfModules.{u} (moduleRings X.toRingedSpace))]\n    (c : ∀ {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z),\n      schemeDerivedDirectImage f ⋙ schemeDerivedDirectImage g ≅\n        schemeDerivedDirectImage (f ≫ g))\n    (hc : ∀ {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)\n        (K : HomotopyCategory (SheafOfModules.{u} (moduleRings X.toRingedSpace))\n          (ComplexShape.up ℤ)),\n      (RingedSpace.moduleDirectImage (f ≫ g).toLRSHom.toShHom).rightDerivedFunctorUnit.app K ≫\n          (c f g).inv.app (DerivedCategory.Qh.obj K) =\n        (RingedSpace.moduleDirectImage g.toLRSHom.toShHom).rightDerivedFunctorUnit.app\n            (((RingedSpace.moduleDirectImage f.toLRSHom.toShHom).mapHomotopyCategory\n              (ComplexShape.up ℤ)).obj K) ≫\n          (schemeDerivedDirectImage g).map\n            ((RingedSpace.moduleDirectImage f.toLRSHom.toShHom).rightDerivedFunctorUnit.app K)) :\n    ∃ i : ∀ X : Scheme.{u}, schemeDerivedDirectImage (𝟙 X) ≅ 𝟭 (schemeDerivedCategory X),\n      (∀ {X Y : Scheme.{u}} (f : X ⟶ Y) (E : schemeDerivedCategory X),\n        (c (𝟙 X) f).hom.app E ≫\n            eqToHom (congrArg (fun k : X ⟶ Y => (schemeDerivedDirectImage k).obj E)\n              (Category.id_comp f)) =\n          (schemeDerivedDirectImage f).map ((i X).hom.app E)) ∧\n      (∀ {X Y : Scheme.{u}} (f : X ⟶ Y) (E : schemeDerivedCategory X),\n        (c f (𝟙 Y)).hom.app E ≫\n            eqToHom (congrArg (fun k : X ⟶ Y => (schemeDerivedDirectImage k).obj E)\n              (Category.comp_id f)) =\n          (i Y).hom.app ((schemeDerivedDirectImage f).obj E))",
+  "branch": "sheaf-dag",
+  "by": "A3",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A3",
+  "result": "pass",
+  "landing": "20261012T070526-L-3465684",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A3",
+  "result": "pass",
+  "landing": "20261012T070526-L-3465684",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

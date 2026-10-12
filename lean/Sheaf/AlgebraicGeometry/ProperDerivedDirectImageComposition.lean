@@ -8,10 +8,10 @@ module
 public import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
-import Sheaf.AlgebraicGeometry.DerivedAdjoint
-import Sheaf.AlgebraicGeometry.DerivedCategory
-import Sheaf.AlgebraicGeometry.DerivedPullbackComposition
-import Sheaf.AlgebraicGeometry.NoetherianDerivedDirectImageRightAdjoint
+import Sheaf.AlgebraicGeometry.RingedSpaceDerivedDirectImageComposition
+import Sheaf.AlgebraicGeometry.DerivedDirectImagePreservesQCoh
+import Sheaf.AlgebraicGeometry.DerivedDirectImageCompositionUnitLaws
+import Sheaf.AlgebraicGeometry.DerivedDirectImageCompositionAssociativity
 
 /-!
 # Coherent composition of proper derived direct images
@@ -30,6 +30,8 @@ set_option autoImplicit false
 
 namespace AlgebraicGeometry
 
+set_option maxHeartbeats 800000 in
+-- Elaborating the comparison witnesses and their dependent coherence clauses.
 /-- Proper derived direct images on Noetherian schemes preserve quasi-coherent cohomology
 and have canonical, unital and associative composition comparisons. The comparisons are
 written after the fully faithful inclusions into the ambient derived categories; together
@@ -105,6 +107,51 @@ theorem exists_properDerivedDirectImageComposition
                 (Category.assoc f g h)) =
             (c g h).hom.app ⟨(schemeDerivedDirectImage f).obj E.obj, p f E⟩ ≫
               (c f (g ≫ h)).hom.app E) := by
-  sorry
+  classical
+  let p : ∀ {X Y : Scheme.{u}} [IsNoetherian X] [IsNoetherian Y] (f : X ⟶ Y)
+      [IsProper f], ∀ E : schemeDerivedQCohCategory X,
+      schemeDerivedQCohProperty Y ((schemeDerivedDirectImage f).obj E.obj) := by
+    intro X Y hX hY f hf E
+    exact schemeDerivedDirectImage_preserves_QCoh f E.obj E.property
+  let c₀ : ∀ {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z),
+      schemeDerivedDirectImage f ⋙ schemeDerivedDirectImage g ≅
+        schemeDerivedDirectImage (f ≫ g) := fun f g ↦
+    (RingedSpace.exists_derivedModuleDirectImageComposition
+      f.toLRSHom.toShHom g.toLRSHom.toShHom).choose
+  have hc₀ : ∀ {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)
+      (K : HomotopyCategory (SheafOfModules.{u} (moduleRings X.toRingedSpace))
+        (ComplexShape.up ℤ)),
+      (RingedSpace.moduleDirectImage (f ≫ g).toLRSHom.toShHom).rightDerivedFunctorUnit.app K ≫
+          (c₀ f g).inv.app (DerivedCategory.Qh.obj K) =
+        (RingedSpace.moduleDirectImage g.toLRSHom.toShHom).rightDerivedFunctorUnit.app
+            (((RingedSpace.moduleDirectImage f.toLRSHom.toShHom).mapHomotopyCategory
+              (ComplexShape.up ℤ)).obj K) ≫
+          (schemeDerivedDirectImage g).map
+            ((RingedSpace.moduleDirectImage f.toLRSHom.toShHom).rightDerivedFunctorUnit.app K) := by
+    intro X Y Z f g K
+    exact (RingedSpace.exists_derivedModuleDirectImageComposition
+      f.toLRSHom.toShHom g.toLRSHom.toShHom).choose_spec K
+  let c : ∀ {X Y Z : Scheme.{u}} [IsNoetherian X] [IsNoetherian Y]
+      [IsNoetherian Z] (f : X ⟶ Y) (g : Y ⟶ Z) [IsProper f] [IsProper g],
+      (schemeDerivedQCohProperty X).ι ⋙
+          (schemeDerivedDirectImage f ⋙ schemeDerivedDirectImage g) ≅
+        (schemeDerivedQCohProperty X).ι ⋙ schemeDerivedDirectImage (f ≫ g) := by
+    intro X Y Z hX hY hZ f g hf hg
+    exact Functor.isoWhiskerLeft (schemeDerivedQCohProperty X).ι (c₀ f g)
+  obtain ⟨i₀, hi₁, hi₂⟩ := derivedDirectImageComposition_unit_laws c₀ hc₀
+  let i : ∀ (X : Scheme.{u}) [IsNoetherian X],
+      (schemeDerivedQCohProperty X).ι ⋙ schemeDerivedDirectImage (𝟙 X) ≅
+        (schemeDerivedQCohProperty X).ι := fun X ↦
+    Functor.isoWhiskerLeft (schemeDerivedQCohProperty X).ι (i₀ X) ≪≫
+      Functor.rightUnitor (schemeDerivedQCohProperty X).ι
+  refine ⟨p, c, ?_, i, ?_, ?_, ?_⟩
+  · intro X Y Z hX hY hZ f g hf hg K hK
+    exact hc₀ f g K
+  · intro X Y hX hY f hf E
+    simpa [c, i] using hi₁ f E.obj
+  · intro X Y hX hY f hf E
+    simpa [c, i] using hi₂ f E.obj
+  · intro W X Y Z hW hX hY hZ f g h hf hg hh E
+    exact derivedDirectImageComposition_associativity c₀ hc₀ f g h E.obj
 
 end AlgebraicGeometry

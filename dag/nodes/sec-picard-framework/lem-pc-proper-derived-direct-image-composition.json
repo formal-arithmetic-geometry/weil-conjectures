@@ -26,46 +26,39 @@
  ],
  "proof": [
   {
-   "text": "By [lem-pc-ringed-spaces-derived-adjoint], $Lf^*$ is left adjoint to $Rf_*$ and $Lg^*$ is left adjoint to $Rg_*$ on the unbounded derived categories. By [lem-pc-ringed-spaces-derived-pullback-composition], $Lf^*\\circ Lg^*\\cong L(g\\circ f)^*$; transporting the adjunction $L(g\\circ f)^*\\dashv R(g\\circ f)_*$ along this isomorphism, $R(g\\circ f)_*$ is a right adjoint of $Lf^*\\circ Lg^*$. Applying [lem-cat-right-adjoint-composition] with $F=Lg^*$, $G=Lf^*$, $F^!=Rg_*$, $G^!=Rf_*$ and $(G\\circ F)^!=R(g\\circ f)_*$ gives a canonical natural isomorphism $R(g\\circ f)_*\\cong Rg_*\\circ Rf_*$ on $D(\\mathcal O_X)$ (Stacks Tag 0D5T). Since $X$, $Y$, $Z$ are Noetherian, [lem-pc-noetherian-derived-direct-image-right-adjoint] says $Rf_*$, $Rg_*$ and $R(g\\circ f)_*$ preserve $D_{\\mathrm{QCoh}}$, so the isomorphism restricts to the full subcategories $D_{\\mathrm{QCoh}}$ [def-pc-derived-category]. Properness and finite type are not used.",
+   "text": "Proper morphisms are quasi-compact and quasi-separated. Apply [lem-pc-derived-direct-image-preserves-qcoh] to each object of D_QCoh, using its property proof, to construct p. No right adjoint of the restricted direct image is needed.",
    "uses": [
-    "lem-pc-ringed-spaces-derived-adjoint",
-    "lem-pc-ringed-spaces-derived-pullback-composition",
-    "lem-cat-right-adjoint-composition",
-    "lem-pc-noetherian-derived-direct-image-right-adjoint",
-    "def-pc-derived-direct-image",
-    "def-pc-derived-category"
+    "lem-pc-derived-direct-image-preserves-qcoh"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/cohomology.tex",
-    "place": "Tag 0D5T, proof using Tag 079W and Tag 0D5S"
-   }
+   "elementary": false
   },
   {
-   "text": "The unit case and the associativity case come from the corresponding coherence of derived pullbacks in [lem-pc-ringed-spaces-derived-pullback-composition]: $L(\\mathrm{id})^*\\cong\\mathrm{id}$ compatibly with the composition isomorphisms, and the two ways of identifying $Lf^*\\circ Lg^*\\circ Lh^*$ with $L(h\\circ g\\circ f)^*$ agree. The isomorphisms of step 1 are the conjugates (mates) of these pullback isomorphisms, characterised by [lem-cat-right-adjoint-composition] through the pasted units and counits; conjugation is compatible with composition and identities, so the unit and associativity equations for the pullbacks give those for the direct images.",
+   "text": "Choose the ambient comparison and its right-derived unit equation from [lem-pc-ringed-spaces-derived-direct-image-composition] for the underlying ringed-space morphisms. Whisker with the full-subcategory inclusion to construct c. Its inverse component at the included Qh(K) is the ambient component, so the existing unit equation proves the required characterization.",
    "uses": [
-    "lem-pc-ringed-spaces-derived-pullback-composition",
-    "lem-cat-right-adjoint-composition"
+    "lem-pc-ringed-spaces-derived-direct-image-composition"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/cohomology.tex",
-    "place": "Tag 0D5T together with Tag 0D5S, identity and associativity coherence"
-   }
+   "elementary": false
+  },
+  {
+   "text": "Apply [lem-pc-derived-direct-image-composition-unit-laws] to the chosen ambient comparisons and their characterization. Whisker its identity comparison with each inclusion and compose with the functor right unitor. Simplification proves the two restricted unit equations. Apply [lem-pc-derived-direct-image-composition-associativity] at the underlying object E.obj to obtain the restricted triple-composition equation. The witnesses use p only for membership of the intermediate objects; proof irrelevance identifies those membership proofs.",
+   "uses": [
+    "lem-pc-derived-direct-image-composition-unit-laws",
+    "lem-pc-derived-direct-image-composition-associativity"
+   ],
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-pc-ringed-spaces-derived-adjoint",
-  "lem-pc-ringed-spaces-derived-pullback-composition",
-  "lem-cat-right-adjoint-composition",
-  "lem-pc-noetherian-derived-direct-image-right-adjoint",
-  "def-pc-derived-direct-image",
-  "def-pc-derived-category"
+  "lem-pc-derived-direct-image-preserves-qcoh",
+  "lem-pc-ringed-spaces-derived-direct-image-composition",
+  "lem-pc-derived-direct-image-composition-unit-laws",
+  "lem-pc-derived-direct-image-composition-associativity"
  ],
  "proof_origin": {
-  "by": "document",
-  "document": "literature/stacks-project/cohomology.tex",
-  "place": "Tag 0D5T, proof of lemma-derived-pushforward-composition"
+  "by": "agent",
+  "group": "A3",
+  "date": "2026-10-12",
+  "note": "Lean reduction using existing ambient composition and qcqs preservation, with the two coherence clauses isolated as strictly smaller theorems."
  },
  "mathlib_searches": [
   {
@@ -143,5 +136,15 @@
   "reviewer": "R-pdc2",
   "group": "R1",
   "result": "pass"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A3",
+  "result": "pass",
+  "landing": "20261012T070526-L-3465684",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
