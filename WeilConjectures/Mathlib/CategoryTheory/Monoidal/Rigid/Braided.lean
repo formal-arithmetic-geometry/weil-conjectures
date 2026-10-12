@@ -39,8 +39,9 @@ and `End (𝟙_ C) = R`.
 
 ## Main statements
 
-- `CategoryTheory.MonoidalClosed.isIso_toIhomIhomUnit`: the biduality map of an object with a
-  right dual is an isomorphism.
+- `CategoryTheory.MonoidalClosed.isIso_toIhomIhomUnit`,
+  `CategoryTheory.MonoidalClosed.isIso_toIhomIhomUnit_of_isDualizable`: the biduality map of an
+  object with a right dual, or of a dualizable object, is an isomorphism.
 
 - `CategoryTheory.IsDualizable.ihom_unit`: in a braided monoidal closed category, the internal
   dual of a dualizable object is dualizable.
@@ -293,6 +294,13 @@ theorem isIso_toIhomIhomUnit (X : C) [HasRightDual X] : IsIso (toIhomIhomUnit X)
     rw [h]
     infer_instance
   exact IsIso.of_isIso_comp_right _ ((pre e.inv).app (𝟙_ C))
+
+/-- In a braided monoidal closed category, the canonical biduality map
+`X ⟶ [[X, 𝟙_ C], 𝟙_ C]` of a dualizable object is an isomorphism. -/
+theorem isIso_toIhomIhomUnit_of_isDualizable {X : C} (hX : IsDualizable X) :
+    IsIso (toIhomIhomUnit X) := by
+  obtain ⟨_⟩ := hX
+  exact isIso_toIhomIhomUnit X
 
 /-- A perfect pairing `b : X ⊗ Y ⟶ 𝟙_ C` of a dualizable object `X` is the evaluation of an
 exact pairing of `Y` and `X` (`IsPerfectPairing.evaluation_exactPairing`): `Y` is a
