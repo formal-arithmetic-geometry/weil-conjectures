@@ -54,10 +54,10 @@
  "unit": "sk-thm-picard-coherence",
  "id": "lem-pc-flat-model-finite-free-quasi-iso",
  "title": "Quasi-isomorphism for local finite-free model",
- "statement": "Under the hypotheses of lem-pc-flat-model-finite-free-shortening, given V ≤ U, P over V, and the preceding structural properties, there exists a quasi-isomorphism eP : P ⟶ (V → U)^*C.",
+ "statement": "Under the hypotheses of lem-pc-flat-model-finite-free-shortening and a point t ∈ U, there exist V ≤ U and a complex P supported in [0,d] with finite-free terms, with quasi-isomorphisms eQ : (V → U)^*Q ⟶ P and eP : P ⟶ (V → U)^*C such that eQ ≫ eP = (V → U)^*e.",
  "proof": [
   {
-   "text": "Carry out the corresponding construction argument from the cited Stacks tags; this intermediate theorem records exactly that strict sub-conclusion.",
+   "text": "restrict to an affine neighbourhood of t and set M = coker(Q^{-1} → Q^0).\nThe finite-free terms of Q are quasi-coherent, hence so is M, and M is finitely\npresented. At each stalk, C is bounded and flat in [0,d], so it has Tor amplitude\n[0,d]. The bounded-above free complex Q is K-flat at each stalk, and its\nquasi-isomorphism to C implies negative tensor cohomology vanishes. Tag 0653\nthen gives flatness of M at every stalk. Thus the affine module associated to M\nis finitely presented and flat, hence finite projective by Tag 00NX. Shrink\naround t until M is finite free. No quasi-coherence of C is assumed.\nDefine P by the quotient truncation of Q: zero in negative degrees, M in degree\nzero, and Q in positive degrees. It vanishes above d and all terms are finite free.\nThe quotient Q → P is a quasi-isomorphism because Q has no negative cohomology.\nSince C^{-1} = 0, the chain map e kills the image of Q^{-1} → Q^0 and factors\nthrough P. This factor is a quasi-isomorphism by two-out-of-three. Open restriction\nis exact, so the same argument and comparison hold on the shrunken neighbourhood.\nThe witnesses are constructed simultaneously; no assertion concerns an arbitrary P.\nRetain the quotient map eQ from the restricted Q to P. The degree-zero cokernel universal property and identity maps in positive degrees give eQ ≫ eP = (V → U)^*e. Thus this theorem constructs a compatible quasi-isomorphism factorization, strictly stronger than the existing construction theorem.",
    "uses": [],
    "elementary": false
   }
@@ -68,10 +68,10 @@
   "module": "Sheaf.AlgebraicGeometry.FlatModelFiniteFreeQuasiIso",
   "file": "lean/Sheaf/AlgebraicGeometry/FlatModelFiniteFreeQuasiIso.lean",
   "declaration": "AlgebraicGeometry.Scheme.Modules.exists_local_finiteFree_quasiIso",
-  "statement": "theorem exists_local_finiteFree_quasiIso {T : Scheme.{u}} (U : T.Opens) (C Q : CochainComplex U.toScheme.Modules ℤ) (d : ℕ) (hCge : C.IsStrictlyGE 0) (hCle : C.IsStrictlyLE d) (hCflat : ∀ n : ℤ, (C.X n).IsFlatOver (𝟙 U.toScheme)) (hQle : Q.IsStrictlyLE d) (hQfree : ∀ n : ℤ, ∃ r : ℕ, Nonempty (Q.X n ≅ SheafOfModules.free (R := U.toScheme.ringCatSheaf) (ULift.{u} (Fin r)))) (e : Q ⟶ C) (he : QuasiIso e) (t : T) (V : T.Opens) (hVU : V ≤ U) (P : CochainComplex V.toScheme.Modules ℤ) (hstruct : t ∈ V ∧ P.IsStrictlyGE 0 ∧ P.IsStrictlyLE d ∧ (∀ n : ℤ, ∃ r : ℕ, Nonempty (P.X n ≅ SheafOfModules.free (R := V.toScheme.ringCatSheaf) (ULift.{u} (Fin r))))) : ∃ (eP : P ⟶ ((Modules.pullback (T.homOfLE hVU)).mapHomologicalComplex _).obj C), QuasiIso eP",
+  "statement": "theorem exists_local_finiteFree_quasiIso {T : Scheme.{u}} (U : T.Opens) (C Q : CochainComplex U.toScheme.Modules ℤ) (d : ℕ) (hCge : C.IsStrictlyGE 0) (hCle : C.IsStrictlyLE d) (hCflat : ∀ n : ℤ, (C.X n).IsFlatOver (𝟙 U.toScheme)) (hQle : Q.IsStrictlyLE d) (hQfree : ∀ n : ℤ, ∃ r : ℕ, Nonempty (Q.X n ≅ SheafOfModules.free (R := U.toScheme.ringCatSheaf) (ULift.{u} (Fin r)))) (e : Q ⟶ C) (he : QuasiIso e) (t : T) (ht : t ∈ U) : ∃ (V : T.Opens) (hVU : V ≤ U) (P : CochainComplex V.toScheme.Modules ℤ), (t ∈ V ∧ P.IsStrictlyGE 0 ∧ P.IsStrictlyLE d ∧ (∀ n : ℤ, ∃ r : ℕ, Nonempty (P.X n ≅ SheafOfModules.free (R := V.toScheme.ringCatSheaf) (ULift.{u} (Fin r))))) ∧ ∃ (eQ : ((Modules.pullback (T.homOfLE hVU)).mapHomologicalComplex _).obj Q ⟶ P) (eP : P ⟶ ((Modules.pullback (T.homOfLE hVU)).mapHomologicalComplex _).obj C), QuasiIso eQ ∧ QuasiIso eP ∧ eQ ≫ eP = ((Modules.pullback (T.homOfLE hVU)).mapHomologicalComplex _).map e",
   "branch": "sheaf-dag",
-  "by": "W2",
-  "date": "2026-10-12"
+  "by": "H2",
+  "date": "2026-10-13"
  },
  "reviewed": {
   "date": "2026-10-12",
@@ -86,11 +86,35 @@
  "reviewed_proof": {
   "date": "2026-10-12",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "W2",
+  "reviewer": "X-153cd",
+  "group": "H2",
   "result": "pass",
-  "landing": "20261012T160144-L-2567167",
+  "landing": "20261012T194116-L-456828",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent Codex review: Delivered Lean signatures match both node records; factorization agrees with the cited Stacks argument. Both modules and direct importer compile; original caller reproduces the reported failure. Adaptation is minimal, target statements unchanged, and axioms are standard plus the documented sorryAx."
+ },
+ "statement_change": {
+  "date": "2026-10-13",
+  "by": "H2 stage 2",
+  "old_statement": "Under the hypotheses of lem-pc-flat-model-finite-free-shortening, given V ≤ U, P over V, and the preceding structural properties, there exists a quasi-isomorphism eP : P ⟶ (V → U)^*C.",
+  "what": "The arbitrary P interface is false: the zero complex satisfies the structural conditions even when C has nonzero H^0. Construct P and its comparison together and require t ∈ U. Repair of return X-5a8a2: generalize in place to construct the quotient quasi-isomorphism eQ as well, with eQ ≫ eP equal to the restriction of e. The original arbitrary-P interface remains corrected, and the construction caller retains its existing statement by forgetting eQ and the factorization equality.",
+  "source": {
+   "document": "literature/stacks-project",
+   "place": "Tags 064U, 0653, 00NX, 06YD and 06YJ"
+  },
+  "citers": [
+   {
+    "id": "lem-pc-flat-model-finite-free-shortening-construction",
+    "holds": true,
+    "note": "The unchanged caller conclusion follows by existential elimination and forgetting eQ, its quasi-isomorphism proof, and the factorization equality."
+   }
+  ],
+  "old_proof": [
+   {
+    "text": "Carry out the corresponding construction argument from the cited Stacks tags; this intermediate theorem records exactly that strict sub-conclusion.",
+    "uses": [],
+    "elementary": false
+   }
+  ]
  }
 }

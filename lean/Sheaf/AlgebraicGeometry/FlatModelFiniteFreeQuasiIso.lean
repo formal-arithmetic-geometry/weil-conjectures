@@ -9,13 +9,26 @@ universe u
 open CategoryTheory Limits
 namespace AlgebraicGeometry.Scheme.Modules
 
-/-- Comparison part of the local finite-free replacement. Given the structural
-local model, construct its quasi-isomorphism to the restricted complex.
-Source: Stacks Project, Tags 06YD and 06YJ.
-Proof: identify the truncated replacement with the original bounded flat complex
-through the resolution quasi-isomorphism; pull the resulting map to the shrunken
-open and use the flatness criterion to preserve quasi-isomorphisms. The omitted
-comparison argument is exactly this named stage-3 intermediate theorem.
+/-- Construct a local finite-free model and a compatible quasi-isomorphism factorization.
+Source: Stacks Project, Tags 064U, 0653, 00NX, 06YD and 06YJ.
+Proof: restrict to an affine neighbourhood of t and set M = coker(Q^{-1} → Q^0).
+The finite-free terms of Q are quasi-coherent, hence so is M, and M is finitely
+presented. At each stalk, C is bounded and flat in [0,d], so it has Tor amplitude
+[0,d]. The bounded-above free complex Q is K-flat at each stalk, and its
+quasi-isomorphism to C implies negative tensor cohomology vanishes. Tag 0653
+then gives flatness of M at every stalk. Thus the affine module associated to M
+is finitely presented and flat, hence finite projective by Tag 00NX. Shrink
+around t until M is finite free. No quasi-coherence of C is assumed.
+Define P by the quotient truncation of Q: zero in negative degrees, M in degree
+zero, and Q in positive degrees. It vanishes above d and all terms are finite free.
+The quotient Q → P is a quasi-isomorphism because Q has no negative cohomology.
+Since C^{-1} = 0, the chain map e kills the image of Q^{-1} → Q^0 and factors
+through P. This factor is a quasi-isomorphism by two-out-of-three. Open restriction
+is exact, so the same argument and comparison hold on the shrunken neighbourhood.
+Retain the quotient map from the restricted Q to P as eQ. It is a
+quasi-isomorphism and eQ ≫ eP equals the restriction of e, by the cokernel
+universal property in degree zero and identity maps in positive degrees.
+The witnesses are constructed simultaneously; no assertion concerns an arbitrary P.
 (blueprint: lem-pc-flat-model-finite-free-quasi-iso). -/
 theorem exists_local_finiteFree_quasiIso {T : Scheme.{u}} (U : T.Opens)
     (C Q : CochainComplex U.toScheme.Modules ℤ) (d : ℕ)
@@ -25,14 +38,16 @@ theorem exists_local_finiteFree_quasiIso {T : Scheme.{u}} (U : T.Opens)
     (hQfree : ∀ n : ℤ, ∃ r : ℕ,
       Nonempty (Q.X n ≅ SheafOfModules.free
         (R := U.toScheme.ringCatSheaf) (ULift.{u} (Fin r))))
-    (e : Q ⟶ C) (he : QuasiIso e) (t : T)
-    (V : T.Opens) (hVU : V ≤ U) (P : CochainComplex V.toScheme.Modules ℤ)
-    (hstruct : t ∈ V ∧ P.IsStrictlyGE 0 ∧ P.IsStrictlyLE d ∧
-      (∀ n : ℤ, ∃ r : ℕ,
-        Nonempty (P.X n ≅ SheafOfModules.free
-          (R := V.toScheme.ringCatSheaf) (ULift.{u} (Fin r))))) :
-    ∃ (eP : P ⟶ ((Modules.pullback (T.homOfLE hVU)).mapHomologicalComplex _).obj C),
-      QuasiIso eP := by
+    (e : Q ⟶ C) (he : QuasiIso e) (t : T) (ht : t ∈ U) :
+    ∃ (V : T.Opens) (hVU : V ≤ U) (P : CochainComplex V.toScheme.Modules ℤ),
+      (t ∈ V ∧ P.IsStrictlyGE 0 ∧ P.IsStrictlyLE d ∧
+        (∀ n : ℤ, ∃ r : ℕ,
+          Nonempty (P.X n ≅ SheafOfModules.free
+            (R := V.toScheme.ringCatSheaf) (ULift.{u} (Fin r))))) ∧
+      ∃ (eQ : ((Modules.pullback (T.homOfLE hVU)).mapHomologicalComplex _).obj Q ⟶ P)
+        (eP : P ⟶ ((Modules.pullback (T.homOfLE hVU)).mapHomologicalComplex _).obj C),
+        QuasiIso eQ ∧ QuasiIso eP ∧
+          eQ ≫ eP = ((Modules.pullback (T.homOfLE hVU)).mapHomologicalComplex _).map e := by
   sorry
 
 end AlgebraicGeometry.Scheme.Modules
