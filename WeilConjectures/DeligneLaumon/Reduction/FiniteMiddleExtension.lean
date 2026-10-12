@@ -7,11 +7,12 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.AffineSpace.Line
 public import WeilConjectures.DeligneLaumon.AffineLine.Endpoints
-public import WeilConjectures.DeligneLaumon.Reduction.OpenLine
+public import WeilConjectures.DeligneLaumon.Reduction.CompactSupport
 public import WeilConjectures.DeligneLaumon.Reduction.QuasiFiniteWeights
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Integral
 public import WeilConjectures.WeilSheaf.Finiteness
 public import WeilConjectures.WeilSheaf.LisseLocus
+public import WeilConjectures.WeilSheaf.LisseFiltration
 public import WeilConjectures.WeilSheaf.LowerShriekFunctoriality
 public import WeilConjectures.WeilSheaf.LowerStarComp
 public import WeilConjectures.WeilSheaf.MiddleExtension
@@ -118,11 +119,6 @@ namespace WeilSheaf
 
 variable {X Y Z : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
   [Y.Over (Spec (CommRingCat.of k₀))] [Z.Over (Spec (CommRingCat.of k₀))]
-
-/-- A Weil sheaf isomorphic to a lisse Weil sheaf is lisse. -/
-theorem IsLisse.of_iso {F G : WeilSheaf k₀ l X} (e : F ≅ G) (hF : F.IsLisse) : G.IsLisse :=
-  ProEtale.IsAdicLisseSheaf.of_iso
-    ((ObjectProperty.ι _ ⋙ Endofunctor.IsoAlgebra.forget _).mapIso e) hF
 
 /-- The composition isomorphism `ψ_* φ_* F ≅ (φ ≫ ψ)_* F` of pushforwards of Weil sheaves. -/
 noncomputable def lowerStarCompObjIso (φ : X ⟶ Y) (ψ : Y ⟶ Z)

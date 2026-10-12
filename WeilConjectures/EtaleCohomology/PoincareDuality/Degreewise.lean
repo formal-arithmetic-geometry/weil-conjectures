@@ -264,7 +264,6 @@ section FieldDuality
 
 variable (Λ : Type (u + 1)) [CommRing Λ] {k : Type u} [Field k] [IsSepClosed k]
 
-variable [Finite Λ] in
 /-- Over a separably closed field `k`, derived global sections carry a perfect pairing
 `b : C ⊗ᴸ D ⟶ Λ` in `D(Spec k_ét, Λ)`, with `C ∈ D^b_c(Spec k, Λ)`, to a duality
 `RΓ(Spec k, D) ≅ RΓ(Spec k, C)^∨` in `D(Λ)`: the pairing identifies `D` with the dual `C^∨`,
