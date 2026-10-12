@@ -35,6 +35,8 @@ theorem isRegularLocalRing_of_principal_maximalIdeal
     {π : A} (hπ : π ≠ 0)
     (hmax : IsLocalRing.maximalIdeal A = Ideal.span ({π} : Set A)) :
     IsRegularLocalRing A := by
-  sorry
+  apply (isRegularLocalRing_iff A).mpr
+  rw [hmax, hdim, Submodule.spanFinrank_singleton hπ]
+  rfl
 
 end Ring

@@ -6736,3 +6736,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 08:52 L: merged deliver/A3/Sheaf.RingTheory.GradedSyzygy (stage 3; reviewer PASS; first push; landing 20261012T085211-L-1989 (interface); batch 20261012T085205; modules 4; new nodes 3)
 - 08:52 L: merged deliver/A3/Sheaf.RingTheory.PopescuSmoothing (stage 3; reviewer PASS; first push; landing 20261012T085211-L-2094 (proof); batch 20261012T085205; modules 1; new nodes 0)
 - 08:52 L: merged deliver/A3/Sheaf.RingTheory.PowerSeriesOntoCompletion (stage 3; reviewer PASS; first push; landing 20261012T085211-L-2209 (proof); batch 20261012T085205; modules 1; new nodes 0)
+- 08:52 L: merged deliver/A3/Sheaf.RingTheory.PrincipalMaximalDimOneRegular (stage 3; reviewer PASS; first push; landing 20261012T085212-L-2330 (proof); batch 20261012T085205; modules 1; new nodes 0)
