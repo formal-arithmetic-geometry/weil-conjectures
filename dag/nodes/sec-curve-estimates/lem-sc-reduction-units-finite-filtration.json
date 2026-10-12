@@ -1,0 +1,159 @@
+{
+ "id": "lem-sc-reduction-units-finite-filtration",
+ "kind": "statement",
+ "title": "Finite quasi-coherent filtration of the reduction units kernel",
+ "statement": "Let $X$ be a Noetherian scheme [def-pc-scheme], meaning quasi-compact [def-weil-pbc-quasi-compact-scheme] and locally Noetherian [pqf-def-locnoeth], and $i:X_{\\mathrm{red}}\\to X$ its reduction [def-weil-pbc-scheme-reduction]. Let $K=\\ker(i^{-1}\\mathbf G_{m,X}\\to\\mathbf G_{m,X_{\\mathrm{red}}})$ in abelian etale sheaves [def-sc-gm-torsor, def-weil-pbc-inverse-image, def-weil-pbc-abelian-etale-sheaves]. There exist $n\\geq0$ and sheaves $E_j$ on $(X_{\\mathrm{red}})_{\\mathrm{Et}}$ with $E_0\\simeq K$, $E_n=0$, and, for each $0\\leq j<n$, a quasi-coherent $\\mathcal O_X$-module $F_j$ and a short exact sequence $0\\to E_{j+1}\\to E_j\\to i^{-1}(F_j)_{\\mathrm{Et}}\\to0$ [def-sc-etale-qcoherent-module]. The additive coefficients are lifted to the universe of $\\mathbf G_m$.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-h2/lem-sc-brauer-zero-all-curves.md",
+  "place": "Proof, Step 1 and the following Claim; proof text retained in the parent DAG node"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-reduction",
+  "def-sc-gm-torsor",
+  "def-weil-pbc-inverse-image",
+  "def-weil-pbc-abelian-etale-sheaves",
+  "def-sc-etale-qcoherent-module",
+  "def-pc-scheme",
+  "def-weil-pbc-quasi-compact-scheme",
+  "pqf-def-locnoeth"
+ ],
+ "proof": [
+  {
+   "text": "The nilradical N of the Noetherian scheme is coherent and nilpotent: choose a finite affine cover and the maximum of the affine nilpotence exponents. On etale affines, flat pullback preserves N and its powers, and the quotient by the pulled-back N is reduced, since it is etale over X_red. Thus the kernel of restriction of units is 1+N.",
+   "uses": [
+    "etale-proposition-etale-reduced",
+    "def-sc-etale-qcoherent-module"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Choose m>=1 with N^m=0. Filter 1+N by 1+N^(j+1), for 0<=j<=m-1. Multiplication becomes addition modulo N^(j+2), since 2j+2>=j+2. The quotient is the associated additive sheaf of the quasi-coherent module N^(j+1)/N^(j+2), and local unit lifting gives the short exact sequences. Lift the coefficients sectionwise; this preserves exactness.",
+   "uses": [
+    "def-sc-etale-qcoherent-module"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Reduction is a universal homeomorphism, so its inverse image is an exact equivalence. Pull back the filtration and its short exact sequences. The adjunction counit on G_m,X_red is invertible; applying inverse image to the original units comparison and then the counit gives upperStarGmSheafToGmSheaf. Preservation of kernels identifies the first term with its kernel. The final term is zero. Reduced and empty schemes have the zero-length filtration.",
+   "uses": [
+    "lem-weil-pbc-reduction-universal-homeomorphism",
+    "prop-weil-pbc-universal-homeomorphism-topos"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "etale-proposition-etale-reduced",
+  "def-sc-etale-qcoherent-module",
+  "lem-weil-pbc-reduction-universal-homeomorphism",
+  "prop-weil-pbc-universal-homeomorphism-topos"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-h2/lem-sc-brauer-zero-all-curves.md",
+  "place": "Proof, Step 1 and its Claim; geometric nilpotent-units filtration, before taking cohomology"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A noetherian scheme has a nilpotent nilradical and the kernel of units on its reduction has a finite filtration by quasi-coherent additive sheaves",
+   "results": "Service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Etale cohomology of a quasi coherent sheaf on a curve vanishes in degree two, nilpotent units filtration",
+   "results": "8 hits, about cotangent complexes and etale algebras; none states this filtration.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Sheaf.H\", \"Subsingleton\"",
+   "results": "0 hits",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "nilpotent.*units|units.*filtration|subsingleton.*etaleTensor",
+   "results": "3 ring-level hits; no sheaf filtration. Repository rg found no existing geometric filtration statement.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "kernel of units of a nilpotent thickening filtered by powers of an ideal with additive quotient sheaves",
+   "results": "Second reading: eight ring cotangent and ideal-sheaf kernel results; none gives a filtration of units sheaves.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Units\", \"nilpotent\"",
+   "results": "Second reading: Ring.KrullDimLE.isNilpotent_iff_mem_nonunits only; no matching sheaf theorem.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "gmSheaf.*kernel|kernel.*gmSheaf|nilradical.*pow|pow.*nilradical",
+   "results": "Second reading: ten ring-level results in Mathlib. Repository and upstream source rg found no units-filtration theorem.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Curve.ReductionUnitsKernelVanishing",
+  "date": "2026-10-12",
+  "group": "V2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-brauer-zero-all-curves",
+   "place": "Proof, Step 1 and its Claim: filtration of the infinitesimal units kernel by powers of the nilradical",
+   "via": [
+    "lem-sc-reduction-units-kernel-h2",
+    "lem-sc-brauer-reduction-injection"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-h2",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Curve.ReductionUnitsFiltration",
+  "file": "lean/Sheaf/AlgebraicGeometry/Curve/ReductionUnitsFiltration.lean",
+  "declaration": "AlgebraicGeometry.Scheme.exists_reduction_units_finite_filtration",
+  "statement": "theorem exists_reduction_units_finite_filtration (X : Scheme.{u}) [IsNoetherian X] : ∃ (n : ℕ) (E : ℕ → Sheaf X.nilradical.subscheme.smallEtaleTopology AddCommGrpCat.{u + 1}), Nonempty (E 0 ≅ kernel (upperStarGmSheafToGmSheaf X.nilradical.subschemeι)) ∧ IsZero (E n) ∧ ∀ j, j < n → ∃ (F : X.Modules) (_ : F.IsQuasicoherent) (S : ShortComplex (Sheaf X.nilradical.subscheme.smallEtaleTopology AddCommGrpCat.{u + 1})), S.ShortExact ∧ Nonempty (S.X₁ ≅ E (j + 1)) ∧ Nonempty (S.X₂ ≅ E j) ∧ Nonempty (S.X₃ ≅ (Etale.upperStar AddCommGrpCat.{u + 1} X.nilradical.subschemeι).obj ((sheafCompose X.smallEtaleTopology AddCommGrpCat.uliftFunctor.{u + 1, u}).obj (Modules.etaleTensorSectionsSheaf F)))",
+  "branch": "sheaf-dag",
+  "by": "V2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V2",
+  "result": "pass",
+  "landing": "20261012T095927-L-325994",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V2",
+  "result": "pass",
+  "landing": "20261012T095927-L-325994",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
