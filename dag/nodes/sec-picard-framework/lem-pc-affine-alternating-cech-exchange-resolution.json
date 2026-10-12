@@ -1,0 +1,130 @@
+{
+ "id": "lem-pc-affine-alternating-cech-exchange-resolution",
+ "kind": "statement",
+ "title": "Alternating affine resolution with invertible ordinary exchange",
+ "statement": "Fix shared derived categories [def-pc-derived-category], rings A and B, a quasi-compact separated f:X→Spec A, g:Spec B→Spec A, a finite affine open cover U:Fin r→X.Opens with supremum top, and a quasi-coherent X-module G. Put p=pullback.fst f g and f′=pullback.snd f g. Assume additive tensor pullback along g and p. There exist a homotopy complex D, an augmentation a:G[0]→D and an isomorphism q:f_*D→the homotopy image of affineAlternatingCechModel f U G [def-pc-affine-alternating-cech-model], such that Qh(a) and Qh(p*(a)) are isomorphisms, the recorded right-derived units for f at D and f′ at p*D are isomorphisms, and Qh of termwise ordinary module base change at D is an isomorphism. Termwise exchange is the map of [lem-weil-pbc-module-base-change-map-open-restriction], descended with the composition identifications; it has no left-derived counit or derived mate in its definition.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-semicon/lem-pc-rf-base-change-flat-module.md",
+  "place": "Proof, Cech resolution and pulled-back cover paragraphs; Steps 1--2 of lem-pc-affine-alternating-cech-pinned-mate. Stacks Tag 02KH, lemma-flat-base-change-cohomology, equality of Cech complexes before taking cohomology. Tag 02KG for arbitrary base change of the affine intersection inclusions."
+ },
+ "stmt_deps": [
+  "def-pc-derived-category",
+  "def-pc-affine-alternating-cech-model",
+  "def-pc-derived-direct-image",
+  "def-pc-fibre-product",
+  "lem-weil-pbc-module-base-change-map-open-restriction"
+ ],
+ "proof": [
+  {
+   "text": "Construct the increasing-tuple sheaf complex using open direct images on intersections, signed restrictions and augmentation. Inserting a cover index and sorting with sign gives a local contracting homotopy, including after ordinary pullback. Extend by zero to integer degrees. Apply affine_open_pushforward_rightAcyclic [lem-pc-affine-open-pushforward-acyclic] to each affine intersection factor. Right-acyclic objects are closed under finite products. The proved upstream criterion Functor.isIso_rightDerivedFunctorPlusUnit_app_of_rightAcyclic makes the bounded-below unit invertible; Functor.rightDerivedFunctorPlusCompatibility and its unit identity transport this to the unbounded unit. Apply these same statements to the pulled-back cover for the target unit. This uses their statements, not the all-tuples resolution construction. Identify f_*D with the explicit tilde section complex by the affine tilde-Gamma equivalence and its restriction formula.",
+   "uses": [
+    "lem-pc-affine-open-pushforward-acyclic",
+    "def-pc-affine-alternating-cech-model"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "An affine intersection inclusion j_J is affine because X is separated over the affine base: on any affine chart V its inverse image is the affine intersection U_J intersect V. Apply [lem-weil-pbc-affine-pushforward-base-change] to j_J, the cartesian pullback square along p, and the quasi-coherent restriction of G. This identifies pullback of each intersection pushforward with its pulled-back intersection pushforward. On each affine intersection ordinary exchange is the bijective section-pullback formula s tensor b ↦ b times p*s. Tensor commutes with finite products, and this formula commutes with every signed restriction; hence it gives an isomorphism of complexes and its localized exchange is invertible. If the cover is empty, X is empty and the zero complexes give the same conclusions.",
+   "uses": [
+    "lem-weil-pbc-affine-pushforward-base-change",
+    "lem-weil-pbc-module-pullback-affine-sections"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-affine-alternating-cech-model",
+  "lem-pc-affine-open-pushforward-acyclic",
+  "lem-weil-pbc-affine-pushforward-base-change",
+  "lem-weil-pbc-module-pullback-affine-sections"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-semicon/lem-pc-rf-base-change-flat-module.md",
+  "place": "Proof, Cech resolution and pulled-back cover paragraphs; Steps 1--2 of lem-pc-affine-alternating-cech-pinned-mate. Stacks Tag 02KH, lemma-flat-base-change-cohomology, equality of Cech complexes before taking cohomology. Tag 02KG for arbitrary base change of the affine intersection inclusions."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "derived base change mate computed by a Cech acyclic resolution",
+   "results": "CategoryTheory.InjectiveResolution.rightDerived_app_eq, CategoryTheory.Functor.rightDerived_map_eq, CategoryTheory.InjectiveResolution.toRightDerivedZero_eq, CategoryTheory.InjectiveResolution.isoRightDerivedObj_hom_naturality, CategoryTheory.InjectiveResolution.toRightDerivedZero', CategoryTheory.InjectiveResolution.isoRightDerivedObj_hom_naturality_assoc, CategoryTheory.Functor.toRightDerivedZero, CategoryTheory.InjectiveResolution.rightDerivedToHomotopyCategory_app_eq",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"rightDerivedFunctorUnit\"",
+   "results": "0 hits",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "baseChange.*cech|cech.*baseChange|acyclic.*resolution",
+   "results": "0 hits",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "ordinary base change on a finite alternating Cech acyclic sheaf resolution and derived functor unit compatibility",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AffineAlternatingCechPinnedMate",
+  "date": "2026-10-13",
+  "group": "H3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-base-change-flat-module",
+   "place": "Proof, Cech resolution and pulled-back cover paragraphs: affine intersections and equality of the two Cech complexes; expanded as Steps 1--2 of the pinned-mate node.",
+   "via": [
+    "lem-pc-affine-alternating-cech-pinned-mate",
+    "lem-pc-affine-alternating-cech-base-change-factorization",
+    "lem-pc-affine-relatively-flat-canonical-module-base-change",
+    "lem-pc-relatively-flat-canonical-module-base-change"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-f-representable",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AffineAlternatingCechExchangeResolution",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineAlternatingCechExchangeResolution.lean",
+  "declaration": "AlgebraicGeometry.exists_affineAlternatingCech_exchange_resolution",
+  "statement": "theorem exists_affineAlternatingCech_exchange_resolution\n    [∀ Y : Scheme.{u},\n      HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]\n    {A B : CommRingCat.{u}} {X : Scheme.{u}} (f : X ⟶ Spec A)\n    [QuasiCompact f] [IsSeparated f] (g : Spec B ⟶ Spec A)\n    {r : ℕ} (U : Fin r → X.Opens) (hU : iSup U = ⊤)\n    (haffine : ∀ i, IsAffineOpen (U i))\n    [(Scheme.Modules.tensorPullback g).Additive]\n    [(Scheme.Modules.tensorPullback (pullback.fst f g)).Additive]\n    (G : X.Modules) [SheafOfModules.IsQuasicoherent.{u} G] :\n    ∃ (D : HomotopyCategory\n        (SheafOfModules.{u} (moduleRings X.toRingedSpace)) (ComplexShape.up ℤ))\n      (a : (HomotopyCategory.singleFunctor\n        (SheafOfModules.{u} (moduleRings X.toRingedSpace)) 0).obj G ⟶ D)\n      (q : ((Scheme.Modules.pushforward f).mapHomotopyCategory\n          (ComplexShape.up ℤ)).obj D ≅\n        (HomotopyCategory.quotient _ (ComplexShape.up ℤ)).obj\n          (affineAlternatingCechModel f U G)),\n      IsIso (DerivedCategory.Qh.map a) ∧\n      IsIso ((DerivedCategory.Qh (C := SheafOfModules.{u}\n        (moduleRings (pullback f g).toRingedSpace))).map\n        (((Scheme.Modules.tensorPullback (pullback.fst f g)).mapHomotopyCategory\n          (ComplexShape.up ℤ)).map a)) ∧\n      IsIso ((RingedSpace.moduleDirectImage f.toLRSHom.toShHom).rightDerivedFunctorUnit.app D) ∧\n      IsIso ((RingedSpace.moduleDirectImage\n        (pullback.snd f g).toLRSHom.toShHom).rightDerivedFunctorUnit.app\n          (((Scheme.Modules.tensorPullback (pullback.fst f g)).mapHomotopyCategory\n            (ComplexShape.up ℤ)).obj D)) ∧\n      IsIso ((DerivedCategory.Qh (C := SheafOfModules.{u}\n        (moduleRings (Spec B).toRingedSpace))).map\n        ((moduleHomotopyBaseChange f (pullback.snd f g) g (pullback.fst f g)\n          pullback.condition).app D))",
+  "branch": "sheaf-dag",
+  "by": "H3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H3",
+  "result": "pass",
+  "landing": "20261012T230757-L-1908806",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H3",
+  "result": "pass",
+  "landing": "20261012T230757-L-1908806",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
