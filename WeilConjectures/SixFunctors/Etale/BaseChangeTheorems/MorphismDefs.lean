@@ -5,14 +5,7 @@ Authors: Edison Xie, Nailin Guan
 -/
 module
 
-public import Mathlib
-public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
-public import WeilConjectures.SixFunctors.Etale.Derived.OpenImmersionLowerShriek
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStar
-public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
-public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
-public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.RightDerivedFunctorPlus
-public import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.MapDerivedCategory
 public import WeilConjectures.Mathlib.CategoryTheory.Functor.SquareTransport
 
 /-!
