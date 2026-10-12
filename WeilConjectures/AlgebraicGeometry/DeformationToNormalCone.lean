@@ -6,10 +6,12 @@ Authors: Claude
 module
 
 public import WeilConjectures.AlgebraicGeometry.Morphisms.RegularImmersion
+public import WeilConjectures.Compactification.Affine
 public import WeilConjectures.Mathlib.AlgebraicGeometry.AffineSpace
 public import WeilConjectures.AlgebraicGeometry.DeformationSpace
 public import WeilConjectures.AlgebraicGeometry.DeformationSpace.Smooth
 public import Mathlib.AlgebraicGeometry.Morphisms.Separated
+public import WeilConjectures.Compactification.NagataCompactification
 
 /-!
 # Deformation to the normal cone of a section
@@ -451,10 +453,22 @@ complement of the zero section, there is a cartesian square
      𝔾_{m,B} -----------> 𝔸¹_B
 ```
 
-identifying `g̃⁻¹(𝔾_{m,B})` with `V ×_B 𝔾_{m,B}` over `𝔾_{m,B}`.
+identifying `g̃⁻¹(𝔾_{m,B})` with `V ×_B 𝔾_{m,B}` over `𝔾_{m,B}`, under which `s̃` is `s × 1`.
 
-The fibre over `t = 0` is the normal cone datum `N`; existence of the datum with `N` the normal
-cone of `s` (`AlgebraicGeometry.Scheme.Hom.normalConeData`) is
+Étale-locally on `B` the deformation has coordinates (clauses (2), (4) and (5)): over a
+surjective étale `v : B' ⟶ B`, an open neighbourhood of the section in the base change
+`𝒟_s V ×_{𝔸¹_B} 𝔸¹_{B'}` maps étale to `𝔸^d_{𝔸¹_{B'}}` over `𝔸¹_{B'}`, carrying the section to
+the zero section (`exists_etale_coordinates`).
+
+The fibre over `t = 0` is the normal cone datum `N`.
+
+In the purity conventions every scheme is separated of finite type over the base field, so
+`g̃` and the coordinate chart are moreover separated and compactifiable, and every open
+immersion is quasi-compact; this is recorded, compactifiability being what makes the dualizing
+complexes defined.
+
+Existence of the datum with `N` the normal cone of `s`
+(`AlgebraicGeometry.Scheme.Hom.normalConeData`) is
 `AlgebraicGeometry.Scheme.Hom.nonempty_deformationToNormalConeData`. -/
 -- TODO(unify): sk-def-purity-conv
 structure DeformationToNormalConeData (d : ℕ) (g : V ⟶ B) (s : B ⟶ V)
@@ -469,6 +483,13 @@ structure DeformationToNormalConeData (d : ℕ) (g : V ⟶ B) (s : B ⟶ V)
   sect_comp_proj : sect ≫ proj = 𝟙 _
   /-- `g̃` is again smooth of pure relative dimension `d`. -/
   smoothOfRelativeDimension_proj : SmoothOfRelativeDimension d proj
+  /-- `g̃` is separated: in the purity conventions every scheme is separated of finite type
+  over the base field. -/
+  isSeparated_proj : IsSeparated proj
+  /-- `g̃` is compactifiable, as every separated morphism of finite type between schemes of
+  finite type over a field is (Nagata). This is what makes the dualizing complex `ω_{g̃}`,
+  and with it the family object of the deformation, defined. -/
+  hasCompactification_proj : HasCompactification proj
   /-- The inclusion `ι₁ : V ⟶ 𝒟_s V` of the fibre over `t = 1`. -/
   oneFibre : V ⟶ scheme
   /-- The fibre of `g̃` over the unit section is `g`. -/
@@ -494,12 +515,38 @@ structure DeformationToNormalConeData (d : ℕ) (g : V ⟶ B) (s : B ⟶ V)
   /-- Over `𝔾_{m,B}` the deformation is `V ×_B 𝔾_{m,B}`: the square formed by `κ°`, the
   projection to `𝔾_{m,B}`, `g̃` and the inclusion `𝔾_{m,B} ⊆ 𝔸¹_B` is cartesian. -/
   isPullback_generic : IsPullback generic (pullback.snd _ _) proj puncturedLine.ι
+  /-- Over `𝔾_{m,B}` the section `s̃` is `s × 1` (clause (3)): its restriction to the punctured
+  line is `κ° ∘ (s × 1)`, for the section `s × 1 : 𝔾_{m,B} ⟶ V ×_B 𝔾_{m,B}`. -/
+  exists_sect_generic : ∃ σ : puncturedLine.toScheme ⟶
+      pullback g (puncturedLine.ι ≫ 𝔸(ULift.{u} (Fin 1); B) ↘ B),
+    σ ≫ pullback.fst _ _ = (puncturedLine.ι ≫ 𝔸(ULift.{u} (Fin 1); B) ↘ B) ≫ s ∧
+      σ ≫ pullback.snd _ _ = 𝟙 _ ∧ σ ≫ generic = puncturedLine.ι ≫ sect
+  /-- Clauses (2), (4) and (5): étale-local coordinates on the deformation. There are a
+  separated surjective étale `v : B' ⟶ B` and, writing `v₁ : 𝔸¹_{B'} ⟶ 𝔸¹_B` for its base change
+  and `𝒟' = 𝒟_s V ×_{𝔸¹_B} 𝔸¹_{B'}` for the base change of the deformation (5), a quasi-compact
+  open `j : W ⟶ 𝒟'` containing the base-changed section `σ` together with a quasi-compact
+  étale `c : W ⟶ 𝔸^d_{𝔸¹_{B'}}` over `𝔸¹_{B'}` carrying `σ` to the zero section. Here `c` is the
+  chart `u_i = x_i / t` of the deformation of the standard pair `(𝔸^d_{B'} → B', 0)`, which is
+  `𝔸^d_{B'} ×_{B'} 𝔸¹_{B'}` (4), for étale coordinates `x₁, …, x_d` of `(g, s)` over `B'` (2). -/
+  exists_etale_coordinates : ∃ (B' : Scheme.{u}) (v : B' ⟶ B) (W : Scheme.{u})
+      (j : W ⟶ pullback proj (AffineSpace.map (ULift.{u} (Fin 1)) v))
+      (c : W ⟶ 𝔸(ULift.{u} (Fin d); 𝔸(ULift.{u} (Fin 1); B')))
+      (σ : 𝔸(ULift.{u} (Fin 1); B') ⟶ W),
+    _root_.AlgebraicGeometry.Etale v ∧ Surjective v ∧ IsSeparated v ∧ IsOpenImmersion j ∧
+      QuasiCompact j ∧ _root_.AlgebraicGeometry.Etale c ∧ QuasiCompact c ∧
+      HasCompactification c ∧
+      j ≫ pullback.snd _ _ =
+        c ≫ 𝔸(ULift.{u} (Fin d); 𝔸(ULift.{u} (Fin 1); B')) ↘ 𝔸(ULift.{u} (Fin 1); B') ∧
+      σ ≫ j ≫ pullback.fst _ _ = AffineSpace.map (ULift.{u} (Fin 1)) v ≫ sect ∧
+      σ ≫ c = AffineSpace.zeroSection (ULift.{u} (Fin d)) 𝔸(ULift.{u} (Fin 1); B')
 
 attribute [instance] DeformationToNormalConeData.smoothOfRelativeDimension_proj
+  DeformationToNormalConeData.isSeparated_proj
+  DeformationToNormalConeData.hasCompactification_proj
 
 section Charts
 
-open Polynomial
+open _root_.Polynomial
 
 open AffineZariskiSite
 
@@ -738,6 +785,46 @@ noncomputable def normalConeData (hs : s ≫ g = 𝟙 B) : NormalConeData d s wh
 
 end Smooth
 
+section Separated
+
+open AffineZariskiSite
+
+variable (g : V ⟶ B) (s : B ⟶ V)
+
+instance : IsAffineHom s.ker.deformationSpaceToPolynomialSpec := by
+  have : IsAffineHom (s.ker.deformationSpaceToPolynomialSpec ≫ V.polynomialSpecProj) := by
+    rw [IdealSheafData.deformationSpaceToPolynomialSpec,
+      relativeGluingMap_toBase _ _ _ s.ker.toPolynomialPresheaf_comp_polynomialToRees]
+    infer_instance
+  exact IsAffineHom.of_comp _ V.polynomialSpecProj
+
+/-- `g̃` is separated if `g` is: it is affine over `𝔸¹_V`, which is a base change of `g`. -/
+instance [IsSeparated g] : IsSeparated (deformationSpaceProj g s) := by
+  have : IsSeparated (AffineSpace.map (ULift.{u} (Fin 1)) g) :=
+    MorphismProperty.of_isPullback (P := @IsSeparated) (AffineSpace.isPullback_map g).flip ‹_›
+  rw [deformationSpaceProj]
+  infer_instance
+
+instance [QuasiCompact g] : QuasiCompact (deformationSpaceProj g s) := by
+  have : QuasiCompact (AffineSpace.map (ULift.{u} (Fin 1)) g) :=
+    MorphismProperty.of_isPullback (P := @QuasiCompact) (AffineSpace.isPullback_map g).flip ‹_›
+  rw [deformationSpaceProj]
+  infer_instance
+
+/-- `g̃` is compactifiable over a quasi-compact quasi-separated base, by Nagata's
+compactification theorem. -/
+lemma hasCompactification_deformationSpaceProj (d : ℕ) [SmoothOfRelativeDimension d g]
+    [IsSeparated g] [QuasiCompact g] [CompactSpace B] [QuasiSeparatedSpace B]
+    [IsClosedImmersion s] (hs : s ≫ g = 𝟙 B) :
+    HasCompactification (deformationSpaceProj g s) :=
+  have := smoothOfRelativeDimension_deformationSpaceProj d g s hs
+  have := SmoothOfRelativeDimension.smooth d (deformationSpaceProj g s)
+  have := QuasiCompact.compactSpace_of_compactSpace (𝔸(ULift.{u} (Fin 1); B) ↘ B)
+  have := quasiSeparatedSpace_of_quasiSeparated (𝔸(ULift.{u} (Fin 1); B) ↘ B)
+  (NagataCompactification (deformationSpaceProj g s)).hasCompactification
+
+end Separated
+
 /-- Blueprint `sk-lem-geometry`: Geometry of the deformation of a section
 
 **Existence of the deformation to the normal cone.** Let `g : V ⟶ B` be smooth of pure
@@ -747,16 +834,29 @@ datum of `AlgebraicGeometry.Scheme.Hom.DeformationToNormalConeData` exists, with
 over `t = 0`: the deformation space is the relative spectrum `D_s V = Spec_V 𝒪_V[t, I t⁻¹]` of the
 extended Rees algebra of the ideal `I` of `s`. Its fibre over `t = 1` is `V` and over `t = 0` the
 normal cone, over the punctured line it is `V ×_B 𝔾_{m,B}`, and `g̃` is smooth of relative
-dimension `d`. -/
+dimension `d`. As `g` is separated and quasi-compact over a quasi-compact quasi-separated base,
+`g̃` is separated and compactifiable.
+
+TODO: the étale-local coordinates (`exists_etale_coordinates`, clauses (2), (4) and (5)) are not
+yet constructed; the charts of `smoothOfRelativeDimension_deformationSpaceProj` are their
+Zariski-local form. -/
 theorem nonempty_deformationToNormalConeData (d : ℕ) (g : V ⟶ B)
-    [SmoothOfRelativeDimension d g] (s : B ⟶ V) [IsClosedImmersion s] (hs : s ≫ g = 𝟙 B) :
+    [SmoothOfRelativeDimension d g] [IsSeparated g] [QuasiCompact g] [CompactSpace B]
+    [QuasiSeparatedSpace B] (s : B ⟶ V) [IsClosedImmersion s] (hs : s ≫ g = 𝟙 B) :
     Nonempty (DeformationToNormalConeData d g s (normalConeData d hs)) :=
   have := smoothOfRelativeDimension_deformationSpaceProj d g s hs
+  have hm : ((puncturedLine B).ι ≫ s.deformationSpaceSection) ≫ deformationSpaceProj g s =
+      𝟙 _ ≫ (puncturedLine B).ι := by
+    rw [Category.assoc, deformationSpaceSection_deformationSpaceProj hs, Category.comp_id,
+      Category.id_comp]
+  have P := isPullback_deformationSpaceGeneric g s
   ⟨{ scheme := s.ker.deformationSpace
      proj := deformationSpaceProj g s
      sect := s.deformationSpaceSection
      sect_comp_proj := deformationSpaceSection_deformationSpaceProj hs
      smoothOfRelativeDimension_proj := this
+     isSeparated_proj := inferInstance
+     hasCompactification_proj := hasCompactification_deformationSpaceProj g s d hs
      oneFibre := deformationSpaceOneFibre g s
      isPullback_oneFibre := isPullback_deformationSpaceOneFibre g s
      comp_oneFibre := comp_deformationSpaceOneFibre hs
@@ -766,7 +866,11 @@ theorem nonempty_deformationToNormalConeData (d : ℕ) (g : V ⟶ B)
      puncturedLine := puncturedLine B
      coe_puncturedLine := coe_puncturedLine B
      generic := deformationSpaceGeneric g s
-     isPullback_generic := isPullback_deformationSpaceGeneric g s }⟩
+     isPullback_generic := P
+     exists_sect_generic := ⟨P.lift _ _ hm, by
+       rw [← deformationSpaceGeneric_toBase g s, P.lift_fst_assoc, Category.assoc,
+         deformationSpaceSection_toBase, Category.assoc], P.lift_snd _ _ _, P.lift_fst _ _ _⟩
+     exists_etale_coordinates := sorry }⟩
 
 end Scheme.Hom
 
