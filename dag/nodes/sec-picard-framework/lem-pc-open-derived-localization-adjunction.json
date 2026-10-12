@@ -1,0 +1,142 @@
+{
+ "id": "lem-pc-open-derived-localization-adjunction",
+ "kind": "statement",
+ "title": "Fixed-universe derived localizations and adjunction for open restriction",
+ "statement": "Let $X$ be a scheme [def-weil-pbc-scheme-conventions] with derived localizations [def-pc-derived-category] for structure-sheaf modules on $X$ and on every localized open site, all with morphism universe $w$. For any open $U$, there are derived localizations, in the same universe $w$, for modules on the open subscheme $U$ and on each of its localized open sites. There is also a right adjoint $R$ to the exact derived localized restriction $L=D(\\operatorname{overFunctor}_U)$, with an adjunction $L\\dashv R$. These assertions hold without compactness or support hypotheses.",
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 079W, Lemma cohomology-lemma-adjoint, specialized to the open inclusion; the same adjunction is used in perfect.tex Tag 0A9A, lemma-supported-generator"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-pc-derived-category"
+ ],
+ "proof": [
+  {
+   "text": "Use the exact module equivalence Modules.overEquiv U and its induced derived equivalence to transport local w-smallness from the given localization on the localized site to the standard derived category of the open scheme. MorphismProperty.hasLocalizationOfLocallySmall supplies hD by shrinking Hom types.",
+   "uses": [
+    "def-pc-derived-category"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the proved [lem-pc-derived-open-localization-universe] to the open scheme with hD, obtaining the family hO of localizations on its localized open sites in the same universe w. This theorem uses exact extension by zero and restriction to transfer the Hom smallness.",
+   "uses": [
+    "lem-pc-derived-open-localization-universe"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The localized restriction L has its existing explicit underived right adjoint G. Use [prop-pur-kinjective-resolutions-exist] to install the Grothendieck abelian structure on its target and the existing source-library K-injective resolution instance. Apply the proved upstream CategoryTheory.Adjunction.mapDerivedCategoryRightDerivedAdjunction to obtain L.mapDerivedCategory adjoint to G.rightDerivedFunctor. This API establishes the absolute-derived hypotheses and applies [lem-sc-derived-adjunction-from-underived].",
+   "uses": [
+    "prop-pur-kinjective-resolutions-exist",
+    "lem-sc-derived-adjunction-from-underived"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-derived-category",
+  "lem-pc-derived-open-localization-universe",
+  "lem-sc-derived-adjunction-from-underived",
+  "prop-pur-kinjective-resolutions-exist"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 079W, Lemma cohomology-lemma-adjoint, specialized to the open inclusion; the same adjunction is used in perfect.tex Tag 0A9A, lemma-supported-generator; explicit localization and module-system comparison argument"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Transport derived localizations for sheaves of modules from the localized site to an open subscheme, and derive the open restriction direct image adjunction",
+   "results": "Internal Server Error; service unavailable",
+   "verdict": "unavailable",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Transport derived localization along an exact equivalence with fixed morphism universe and derive a right adjoint to exact restriction",
+   "results": "Eight generic localization hits, including CategoryTheory.LocalizerMorphism.localizedFunctor_isEquivalence; no combined open statement",
+   "verdict": "no exact match",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "grep",
+   "query": "HasLocalization|overPushforwardOverAdj",
+   "results": "Mathlib CategoryTheory/Localization/LocallySmall.lean has hasLocalizationOfLocallySmall; Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean has overPushforwardOverAdj. These are separate ingredients",
+   "verdict": "no exact match",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "grep",
+   "query": "mapDerivedCategoryRightDerivedAdjunction; nonempty_derivedOpenLocalization; transportDerived",
+   "results": "Second reader found the proved upstream unbounded exact-left-adjoint API in WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Adjunction, the proved Sheaf.AlgebraicGeometry.DerivedOpenLocalization theorem, and the private transport construction in PerfectGluingTrianglePresentation. These close the proposed hole without changing its statement.",
+   "verdict": "ingredients suffice; proved",
+   "date": "2026-10-13"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.SupportedDetectorOpenLiftCore",
+  "date": "2026-10-12",
+  "group": "C2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "induction: choosing U and lifting P; final paragraph: adjunction when the open unit is invertible; exact open restriction and its derived adjunction",
+   "via": [
+    "lem-pc-supported-detector-open-lift-core",
+    "lem-pc-supported-perfect-detector-gluing",
+    "lem-pc-supported-perfect-generator",
+    "lem-sc-right-adjoint-open-support-criterion"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.OpenDerivedLocalizationAdjunction",
+  "file": "lean/Sheaf/AlgebraicGeometry/OpenDerivedLocalizationAdjunction.lean",
+  "declaration": "AlgebraicGeometry.open_derived_localization_adjunction",
+  "statement": "theorem open_derived_localization_adjunction\n    (X : Scheme.{u})\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]\n    [∀ U : X.Opens, HasDerivedCategory.{w}\n      (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))]\n    (U : X.Opens) :\n    ∃ hD : HasDerivedCategory.{w}\n        (SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace)),\n    letI := hD\n    ∃ hO : ∀ W : U.toScheme.Opens, HasDerivedCategory.{w}\n        (SheafOfModules.{u} ((moduleRings U.toScheme.toRingedSpace).over W)),\n    letI := hO\n    ∃ (R : DerivedCategory\n        (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U)) ⥤\n        schemeDerivedCategory X),\n      Nonempty ((SheafOfModules.overFunctor.{u}\n        (moduleRings X.toRingedSpace) U).mapDerivedCategory ⊣ R)",
+  "branch": "sheaf-dag",
+  "by": "C2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-9b52e",
+  "group": "C2",
+  "result": "pass",
+  "landing": "20261012T194103-L-452503",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-9b52e",
+  "group": "C2",
+  "result": "pass",
+  "landing": "20261012T194103-L-452503",
+  "kind": "interface",
+  "note": "independent Codex review: Matched all three Lean signatures and proofs with their DAG nodes; existing interface unchanged; delivered modules and sole direct importer compile cleanly; axiom checks show only permitted axioms and inherited sorryAx."
+ }
+}

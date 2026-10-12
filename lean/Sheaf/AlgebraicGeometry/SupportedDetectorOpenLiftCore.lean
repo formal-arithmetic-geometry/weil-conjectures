@@ -3,7 +3,10 @@ module
 public import Sheaf.AlgebraicGeometry.PerfectComplex
 public import Mathlib.Topology.QuasiSeparated
 import Sheaf.AlgebraicGeometry.PerfectSupportedMapLift
-import Sheaf.AlgebraicGeometry.RingedSpaceDerivedAdjunctionGeneral
+import Sheaf.AlgebraicGeometry.OpenDerivedRestrictionComparison
+import Sheaf.AlgebraicGeometry.PerfectPseudoCoherentLocallyFiniteTor
+import Sheaf.AlgebraicGeometry.PseudoCoherentQCoh
+import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 /-! # The detector on the localized smaller open
 
 Source: Stacks Project, Tag 0A9A, induction paragraphs.
@@ -14,7 +17,12 @@ Source: Stacks Project, Tag 0A9A, induction paragraphs.
 set_option autoImplicit false
 universe u w
 open CategoryTheory CategoryTheory.Limits
+open scoped ZeroObject
 namespace AlgebraicGeometry
+
+attribute [local instance] Functor.additive_of_preserves_binary_products
+  comp_preservesFiniteLimits comp_preservesFiniteColimits
+set_option linter.unusedVariables false in
 /-- A supported perfect global object whose derived restriction detects the supported
 quasi-coherent objects on the smaller open. No assertion of global detection is made.
 Source: Stacks Project, Tag 0A9A, induction paragraphs and retract argument.
@@ -92,5 +100,110 @@ theorem exists_supported_detector_open_lift_core
           IsZero
             ((SheafOfModules.overFunctor.{u} (moduleRings X.toRingedSpace) U).mapDerivedCategory.obj
                K.obj) := by
-  sorry
+  classical
+  obtain ⟨V, hV⟩ := Finset.card_pos.mp (by omega : 0 < s.card)
+  let a := s.erase V
+  let U : X.Opens := ⨆ W ∈ a, (W : X.Opens)
+  have hU : IsCompact (U : Set X) := by
+    simpa only [U, TopologicalSpace.Opens.coe_iSup] using
+      a.isCompact_biUnion (fun W _ ↦ W.property.isCompact)
+  have hUV : U ⊔ (V : X.Opens) = ⊤ := by
+    rw [← hcover]
+    apply le_antisymm
+    · apply sup_le
+      · exact iSup₂_le fun W hW ↦ le_iSup₂_of_le W (Finset.mem_of_mem_erase hW) le_rfl
+      · exact le_iSup₂_of_le V hV le_rfl
+    · apply iSup₂_le
+      intro W hW
+      by_cases hWV : W = V
+      · subst W
+        exact le_sup_right
+      · exact le_sup_of_le_left
+          (le_iSup₂_of_le W (Finset.mem_erase.mpr ⟨hWV, hW⟩) le_rfl)
+  let : CompactSpace U.toScheme := isCompact_iff_compactSpace.mp hU
+  let : QuasiSeparatedSpace U.toScheme :=
+    QuasiSeparatedSpace.of_isOpenEmbedding U.isOpenEmbedding
+  let f : {W // W ∈ a} → U.toScheme.affineOpens := fun W ↦
+    ⟨U.ι ⁻¹ᵁ (W.val : X.Opens), W.val.property.preimage_of_isOpenImmersion U.ι
+      (by
+        rw [Scheme.Opens.opensRange_ι]
+        exact le_iSup₂_of_le W.val W.property le_rfl)⟩
+  let t : Finset U.toScheme.affineOpens := Finset.univ.image f
+  have htcard : t.card < s.card := by
+    have ht : t.card ≤ a.card := by
+      simpa [t] using (Finset.card_image_le (s := Finset.univ) (f := f))
+    exact lt_of_le_of_lt ht (Finset.card_erase_lt_of_mem hV)
+  have htcover : (⨆ W ∈ t, (W : U.toScheme.Opens)) = ⊤ := by
+    apply top_unique
+    intro x _
+    have hx : x.val ∈ U := x.property
+    simp only [U, TopologicalSpace.Opens.mem_iSup] at hx
+    obtain ⟨W, hW, hxW⟩ := hx
+    apply TopologicalSpace.Opens.mem_iSup.mpr
+    refine ⟨f ⟨W, hW⟩, TopologicalSpace.Opens.mem_iSup.mpr ⟨?_, ?_⟩⟩
+    · exact Finset.mem_image.mpr ⟨⟨W, hW⟩, Finset.mem_univ _, rfl⟩
+    · exact hxW
+  let S : Set U.toScheme := Subtype.val ⁻¹' T
+  have hS : IsClosed S := hT.preimage continuous_subtype_val
+  have hSc : IsCompact Sᶜ := by
+    have hi : IsCompact ((U : Set X) ∩ Tᶜ) :=
+      hU.inter_of_isOpen hTc U.isOpen hT.isOpen_compl
+    apply Subtype.isCompact_iff.mpr
+    have heq : Subtype.val '' Sᶜ = (U : Set X) ∩ Tᶜ := by
+      ext x
+      constructor
+      · rintro ⟨y, hy, rfl⟩
+        exact ⟨y.property, hy⟩
+      · rintro ⟨hxU, hxT⟩
+        exact ⟨⟨x, hxU⟩, hxT, rfl⟩
+    rw [heq]
+    exact hi
+  obtain ⟨hD, hO, R, adj, hqc, hsupp, horth, hzero⟩ :=
+    open_derived_restriction_comparison X U
+  let := hD
+  let := hO
+  let M := ((SheafOfModules.overFunctor.{u} (moduleRings X.toRingedSpace) U) ⋙
+    Equivalence.functor
+      (C := SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))
+      (D := SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace))
+      (Scheme.Modules.overEquiv U)).mapDerivedCategory
+  obtain ⟨P, hP, hPT, hdet⟩ := ih U.toScheme t htcard htcover S hS hSc
+  have hzfree : IsZero
+      (SheafOfModules.free (R := moduleRings X.toRingedSpace) PEmpty.{u + 1}) := by
+    apply (IsZero.iff_id_eq_zero _).mpr
+    apply (SheafOfModules.freeHomEquiv _).injective
+    funext i
+    exact PEmpty.elim i
+  have : (SheafOfModules.isQuasicoherent (moduleRings X.toRingedSpace)).ContainsZero :=
+    ⟨⟨_, hzfree, SheafOfModules.isQuasicoherent_free
+      (R := moduleRings X.toRingedSpace) PEmpty.{u + 1}⟩⟩
+  let E : schemeDerivedQCohCategory X := ⟨0, fun n ↦
+    (SheafOfModules.isQuasicoherent (moduleRings X.toRingedSpace)).prop_of_isZero
+      ((DerivedCategory.homologyFunctor _ n).map_isZero (isZero_zero _))⟩
+  obtain ⟨Q, β, hQ, hQT, i, p, hip, _⟩ :=
+    Scheme.exists_perfect_supported_map_lift X U hU T hT hTc E P.obj hP hPT 0
+  have hQqc : schemeDerivedQCohProperty X Q := by
+    have : ∀ W : X.Opens, HasDerivedCategory.{w}
+        (SheafOfModules.{u} (moduleRings W.toScheme.toRingedSpace)) :=
+      fun W ↦ (open_derived_restriction_comparison X W).choose
+    exact Scheme.schemeDerivedQCohProperty_of_isPseudoCoherent X Q
+      (Scheme.perfect_isPseudoCoherent_and_hasLocallyFiniteTorDimension X Q hQ).1
+  let Qc : schemeDerivedQCohCategory X := ⟨Q, hQqc⟩
+  refine ⟨U, V, hU, hUV, R, adj, Qc, hQ, hQT, ?_⟩
+  intro K hKT hKorth
+  apply hzero
+  let Ku : schemeDerivedQCohCategory U.toScheme := ⟨M.obj K.obj, hqc K.obj K.property⟩
+  apply hdet Ku (hsupp T K.obj hKT)
+  intro n
+  have := horth Q K.obj n (hKorth n)
+  let i' := (shiftFunctor (schemeDerivedCategory U.toScheme) n).map i
+  let p' := (shiftFunctor (schemeDerivedCategory U.toScheme) n).map p
+  have hi'p' : i' ≫ p' = 𝟙 (P.obj⟦n⟧) := by
+    dsimp [i', p']
+    rw [← Functor.map_comp, hip]
+    exact (shiftFunctor _ n).map_id _
+  refine ⟨fun b c ↦ ?_⟩
+  have hbc : p' ≫ b = p' ≫ c := Subsingleton.elim _ _
+  have := congrArg (fun k ↦ i' ≫ k) hbc
+  simpa only [← Category.assoc, hi'p', Category.id_comp] using this
 end AlgebraicGeometry

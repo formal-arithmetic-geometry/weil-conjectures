@@ -1,0 +1,137 @@
+{
+ "id": "lem-pc-open-derived-restriction-comparison",
+ "kind": "statement",
+ "title": "Support, cohomology and shifted Hom comparisons for open derived restriction",
+ "statement": "Let $X$ be a scheme [def-weil-pbc-scheme-conventions] with derived localizations [def-pc-derived-category] of morphism universe $w$ for structure-sheaf modules on $X$ and on every localized open site. For every open $U$, choose localizations on its open subscheme and all its opens in universe $w$. Put $L=D(\\operatorname{overFunctor}_U)$ and $M=D(\\operatorname{overFunctor}_U\\circ\\operatorname{Modules.overEquiv}_U)$ (restriction followed by the canonical module equivalence). There is a right adjoint $R$ with $L\\dashv R$. For every $K$, quasi-coherent cohomology of $K$ implies quasi-coherent cohomology of $M(K)$. For every subset $T\\subseteq X$, zero cohomology stalks of $K$ outside $T$ imply zero cohomology stalks of $M(K)$ outside the inverse image of $T$. For all $Q,K$ and $n\\in\\mathbb Z$, subsingleton $\\operatorname{Hom}(L(Q[n]),L(K))$ implies subsingleton $\\operatorname{Hom}(M(Q)[n],M(K))$. Finally $M(K)=0$ implies $L(K)=0$. There is no detector, perfection or compactness assumption.",
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tags 079W and 0A9A, the open adjunction and restriction of the supported generator"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-pc-derived-category"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-pc-open-derived-localization-adjunction] to obtain the fixed-universe localizations and R with its adjunction. Put e = Modules.overEquiv U and F = overFunctor U followed by e. Functor.mapDerivedCategoryCompIso identifies M with L followed by D(e).",
+   "uses": [
+    "lem-pc-open-derived-localization-adjunction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply [lem-pc-derived-open-restriction-qcoh-iff] and SheafOfModules.isQuasicoherent_over in each degree to get preservation of quasi-coherent cohomology. Functor.mapDerivedCategoryHomologyFunctorIso and Modules.overFunctorEquiv identify the homology of M(K) with restriction of the homology of K. Modules.restrictStalkNatIso then identifies its stalk at x with the original stalk at x.val. IsZero of that additive group transports along the stalk isomorphism, proving support for every subset T.",
+   "uses": [
+    "lem-pc-derived-open-restriction-qcoh-iff"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The exact equivalence e induces a fully faithful derived functor D(e). The composition comparison identifies the Hom types before and after D(e). The canonical commShiftIso of M identifies M(Q[n]) with M(Q)[n], so these Hom equivalences transport subsingletonness. If M(K) is zero, the composition comparison makes D(e)(L(K)) zero. Full faithfulness reflects zero objects by IsZero.of_full_of_faithful_of_isZero. No restriction of a detector or invertibility of a global adjunction unit is used.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-derived-open-restriction-qcoh-iff",
+  "lem-pc-open-derived-localization-adjunction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tags 079W and 0A9A, the open adjunction and restriction of the supported generator; explicit localization and module-system comparison argument"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Exact restriction of sheaves of modules to an open subset preserves quasicoherent cohomology and vanishing stalks and admits a derived right adjoint",
+   "results": "Service unavailable",
+   "verdict": "unavailable",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived category equivalence for restriction of module sheaves to an open subscheme preserves Hom groups and supports",
+   "results": "Eight hits: Scheme.Modules.restrictFunctor, restrictAdjunction, restrict_obj and others; no combined derived comparison statement",
+   "verdict": "no exact match",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.mapDerivedCategory",
+   "results": "Twelve hits including mapDerivedCategoryCompIso and its shift instance; useful general ingredients",
+   "verdict": "no exact match",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "grep",
+   "query": "overEquiv|mapDerivedCategoryHomologyIso",
+   "results": "25 hits, including Scheme.Modules.overEquiv and restriction module comparisons; no exact combined statement",
+   "verdict": "no exact match",
+   "date": "2026-10-12"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.SupportedDetectorOpenLiftCore",
+  "date": "2026-10-12",
+  "group": "C2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "induction: choosing U and lifting P; final paragraph: adjunction when the open unit is invertible; exact open restriction and its derived adjunction",
+   "via": [
+    "lem-pc-supported-detector-open-lift-core",
+    "lem-pc-supported-perfect-detector-gluing",
+    "lem-pc-supported-perfect-generator",
+    "lem-sc-right-adjoint-open-support-criterion"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.OpenDerivedRestrictionComparison",
+  "file": "lean/Sheaf/AlgebraicGeometry/OpenDerivedRestrictionComparison.lean",
+  "declaration": "AlgebraicGeometry.open_derived_restriction_comparison",
+  "statement": "theorem open_derived_restriction_comparison\n    (X : Scheme.{u})\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]\n    [∀ U : X.Opens, HasDerivedCategory.{w}\n      (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))]\n    (U : X.Opens) :\n    ∃ hD : HasDerivedCategory.{w}\n        (SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace)),\n    letI := hD\n    ∃ hO : ∀ W : U.toScheme.Opens, HasDerivedCategory.{w}\n        (SheafOfModules.{u} ((moduleRings U.toScheme.toRingedSpace).over W)),\n    letI := hO\n    let L := (SheafOfModules.overFunctor.{u} (moduleRings X.toRingedSpace) U).mapDerivedCategory\n    let M := ((SheafOfModules.overFunctor.{u} (moduleRings X.toRingedSpace) U) ⋙\n      Equivalence.functor\n        (C := SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))\n        (D := SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace))\n        (Scheme.Modules.overEquiv U)).mapDerivedCategory\n    ∃ (R : DerivedCategory\n        (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U)) ⥤\n        schemeDerivedCategory X) (_ : L ⊣ R),\n      (∀ K : schemeDerivedCategory X, schemeDerivedQCohProperty X K →\n        schemeDerivedQCohProperty U.toScheme (M.obj K)) ∧\n      (∀ (T : Set X) (K : schemeDerivedCategory X),\n        (∀ (n : ℤ) (x : X), x ∉ T →\n          Subsingleton (↑(TopCat.Presheaf.stalk ((DerivedCategory.homologyFunctor\n            (SheafOfModules.{u} (moduleRings X.toRingedSpace)) n).obj K).val.presheaf x))) →\n        ∀ (n : ℤ) (x : U.toScheme), x.val ∉ T →\n          Subsingleton (↑(TopCat.Presheaf.stalk ((DerivedCategory.homologyFunctor\n            (SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace)) n).obj\n              (M.obj K)).val.presheaf x))) ∧\n      (∀ (Q K : schemeDerivedCategory X) (n : ℤ),\n        Subsingleton (L.obj (Q⟦n⟧) ⟶ L.obj K) →\n        Subsingleton ((M.obj Q)⟦n⟧ ⟶ M.obj K)) ∧\n      (∀ K : schemeDerivedCategory X, IsZero (M.obj K) → IsZero (L.obj K))",
+  "branch": "sheaf-dag",
+  "by": "C2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-9b52e",
+  "group": "C2",
+  "result": "pass",
+  "landing": "20261012T194103-L-452503",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-9b52e",
+  "group": "C2",
+  "result": "pass",
+  "landing": "20261012T194103-L-452503",
+  "kind": "interface",
+  "note": "independent Codex review: Matched all three Lean signatures and proofs with their DAG nodes; existing interface unchanged; delivered modules and sole direct importer compile cleanly; axiom checks show only permitted axioms and inherited sorryAx."
+ }
+}

@@ -14,33 +14,45 @@
  ],
  "proof": [
   {
-   "text": "Choose an affine chart V in s and take U to be the finite union of the remaining charts. Their inverse images form an affine cover of U with strictly smaller cardinality. Compactness and quasi-separatedness give the hypotheses on U and the inverse image of T. Transport the given localizations along the canonical module equivalences and apply ih to obtain a perfect supported detector P on U.",
+   "text": "Choose V in s, let a=s.erase V and U be its finite union. Compactness follows from Finset.isCompact_biUnion and compactness of affine opens. The cover identity gives U union V=X. Pull each remaining affine chart back to U; because it lies inside U, IsAffineOpen.preimage_of_isOpenImmersion applies. Form the image Finset t. card_image_le and card_erase_lt_of_mem give t.card<s.card. The induced cover is checked pointwise. Compactness and quasi-separatedness of U follow from the subtype compactness and open-embedding APIs. For S=Subtype.val inverse-image T, closedness is by continuity; compactness of its complement follows from compactness of U intersect T-complement and Subtype.isCompact_iff.",
    "uses": [],
-   "elementary": false
+   "elementary": true
   },
   {
-   "text": "Apply the supported perfect map lift to P and the zero map into the zero object. Obtain a global perfect Q supported on T with P a retract of Q restricted to U. Local finite locally free models give quasi-coherent homology for Q.",
+   "text": "Apply [lem-pc-open-derived-restriction-comparison] to get the open localizations, R and adj and restriction comparisons. Apply the given ih directly to U, t and S, obtaining the perfect supported detector P.",
    "uses": [
-    "lem-sc-perfect-support-map-lift"
+    "lem-pc-open-derived-restriction-comparison"
    ],
    "elementary": false
   },
   {
-   "text": "Derive the open restriction/direct-image adjunction with K-injective resolutions and transport to the localized module site. Exact restriction preserves quasi-coherent homology and support and commutes with shifts. Orthogonality to restricted Q[n] implies orthogonality to P[n] by the shifted retract. The detector P implies that the restriction is zero.",
+   "text": "Construct the actual zero quasi-coherent derived object from the free module on PEmpty and additive homology. Apply [lem-sc-perfect-support-map-lift] to P and the zero map. This gives a perfect global Q supported on T and maps i and p with i composed with p equal to the identity of P. For each open, the comparison theorem supplies the localization needed to apply [lem-pc-perfect-pseudo-coherent-locally-finite-tor]. Its first conclusion and [lem-sc-pseudo-coherent-qcoh] give quasi-coherent cohomology of Q.",
    "uses": [
-    "lem-pc-ringed-spaces-derived-adjoint-general"
+    "lem-sc-perfect-support-map-lift",
+    "lem-pc-open-derived-restriction-comparison",
+    "lem-pc-perfect-pseudo-coherent-locally-finite-tor",
+    "lem-sc-pseudo-coherent-qcoh"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For a supported quasi-coherent K, use the comparison to equip M(K) with quasi-coherence and support. The shifted Hom comparison turns the given orthogonality into subsingleton Hom(M(Q)[n],M(K)). Apply the shift functor to i and p; functoriality preserves their retract equation. For maps b,c from P[n], subsingletonness gives p[n] composed with b equal to p[n] composed with c; precompose by i[n] and cancel the retract identity to obtain b=c. The detector P makes M(K) zero, and reflection of zero gives L(K) zero.",
+   "uses": [
+    "lem-pc-open-derived-restriction-comparison"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-pc-ringed-spaces-derived-adjoint-general",
-  "lem-sc-perfect-support-map-lift"
+  "lem-pc-open-derived-restriction-comparison",
+  "lem-pc-perfect-pseudo-coherent-locally-finite-tor",
+  "lem-sc-perfect-support-map-lift",
+  "lem-sc-pseudo-coherent-qcoh"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/perfect.tex",
-  "place": "Tag 0A9A, Lemma perfect-lemma-supported-generator, induction paragraphs"
+  "place": "Tag 0A9A, lemma-supported-generator, induction and retract argument; explicit finite-cover and localization glue in Lean"
  },
  "mathlib_searches": [
   {
@@ -111,11 +123,11 @@
  "reviewed_proof": {
   "date": "2026-10-12",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "G1",
+  "reviewer": "X-9b52e",
+  "group": "C2",
   "result": "pass",
-  "landing": "20261012T160826-L-2610883",
+  "landing": "20261012T194103-L-452503",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent Codex review: Matched all three Lean signatures and proofs with their DAG nodes; existing interface unchanged; delivered modules and sole direct importer compile cleanly; axiom checks show only permitted axioms and inherited sorryAx."
  }
 }
