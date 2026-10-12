@@ -12,6 +12,7 @@ public import WeilConjectures.SixFunctors.ClosedImmersionStages
 public import WeilConjectures.SixFunctors.Etale.Derived.IntegralCoefficients
 public import WeilConjectures.SixFunctors.Etale.Derived.Localization
 public import WeilConjectures.SixFunctors.Etale.Derived.ReductionConservative
+public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal.Vanishing
 
 /-!
 # The closed-support triangle on `Dᵇc(-, 𝒪_E)`
@@ -23,14 +24,26 @@ formalism. The category `Dᵇc(X, Λ)` is
 `D(X_ét, Λ)` which are derived complete for `I` and whose reductions `K ⊗ᴸ Λ ⧸ Iⁿ⁺¹` are bounded
 constructible of Tor amplitude in one common interval.
 
-This file proves clauses (1)–(4) and (1')–(4') of blueprint `prop-sf-localization-all-stages`
-at the integral stage, for a closed immersion `i : Z ⟶ X` and the complementary quasi-compact
-open immersion `j : U ⟶ X` of schemes of finite type over `k`.
+This file proves the ingredients of clauses (1)–(4) and (1')–(4') of blueprint
+`prop-sf-localization-all-stages` at the integral stage, for a closed immersion `i : Z ⟶ X` and
+the complementary quasi-compact open immersion `j : U ⟶ X` of schemes of finite type over `k`:
+the stability of `Dᵇc(-, Λ)` under the operations, its triangulated structure, the supported
+localization triangle on `D(X_ét, Λ)`, and the closed-support triangle on `Dᵇc(-, Λ)` under the
+hypotheses providing an exceptional adjunction `Ri_! ⊣ Ri^!` on `D(X_ét, Λ)`. The right adjoint
+of `i_*` on `Dᵇc(-, Λ)` without those hypotheses is constructed in
+`WeilConjectures.SixFunctors.Etale.Derived.LocalizationIntegralClosedSupport`.
 
 ## Main statements
 
 - `AlgebraicGeometry.Etale.DerivedCategory.isTriangulated_boundedConstructibleIntegral`:
-  `Dᵇc(X, Λ)` is a triangulated subcategory of `D(X_ét, Λ)`.
+  `Dᵇc(X, Λ)` is a triangulated subcategory of `D(X_ét, Λ)`, provided constructible sheaves of
+  `Λ`-modules on `X` are closed under extensions.
+- `AlgebraicGeometry.Etale.boundedConstructibleIntegral_rightDerivedLowerStar_obj`: `Rf_*`
+  preserves `Dᵇc(-, Λ)` (clause (1)).
+- `AlgebraicGeometry.Etale.boundedConstructibleIntegral_of_rightDerivedLowerStar_obj`: `Ri_*`
+  detects `Dᵇc(-, Λ)`.
+- `AlgebraicGeometry.Etale.torAmplitudeIn_reductionModIdeal_of_distTriang`: the Tor amplitude
+  bound of clause (2').
 -/
 
 @[expose] public section
@@ -117,25 +130,60 @@ lemma DerivedCategory.isClosedUnderIsomorphisms_boundedConstructibleIntegral
         (DerivedCategory.torAmplitudeIn _ X a b).prop_of_iso
           ((reductionModIdeal Λ X _).mapIso e) (h n).2⟩⟩
 
-variable [IsNoetherianRing Λ]
-  [(constructibleSheaf (ModuleCat.{u + 1} Λ) X).IsClosedUnderExtensions]
-
-/-- The reductions of a zero object of `D(X_ét, Λ)` are bounded constructible, of Tor amplitude
-in any interval. -/
-lemma DerivedCategory.boundedConstructible_and_torAmplitudeIn_reductionModIdeal_of_isZero
-    {K : 𝐃(X, Λ)} (hK : IsZero K) (J : Ideal Λ) (a b : ℤ) :
-    DerivedCategory.boundedConstructible (ModuleCat.{u + 1} Λ) X
-        ((reductionModIdeal Λ X J).obj K) ∧
-      DerivedCategory.torAmplitudeIn (ModuleCat.{u + 1} Λ) X a b
-        ((reductionModIdeal Λ X J).obj K) := by
-  have hR := (reductionModIdeal Λ X J).map_isZero hK
-  refine ⟨(DerivedCategory.boundedConstructible _ X).prop_of_isZero hR, fun F ↦ ?_⟩
-  have hG := (MonoidalCategory.tensorRight ((_root_.DerivedCategory.singleFunctor _ 0).obj F)).map_isZero hR
-  exact ⟨_root_.DerivedCategory.TStructure.t.isGE_of_isZero hG a,
+/-- The reductions of a zero object of `D(X_ét, Λ)` have Tor amplitude in any interval. -/
+lemma DerivedCategory.torAmplitudeIn_reductionModIdeal_of_isZero {K : 𝐃(X, Λ)} (hK : IsZero K)
+    (J : Ideal Λ) (a b : ℤ) :
+    DerivedCategory.torAmplitudeIn (ModuleCat.{u + 1} Λ) X a b
+      ((reductionModIdeal Λ X J).obj K) := fun F ↦
+  have hG := isZero_derivedTensor_obj_obj_of_isZero_left ((reductionModIdeal Λ X J).map_isZero hK)
+    ((_root_.DerivedCategory.singleFunctor _ 0).obj F)
+  ⟨_root_.DerivedCategory.TStructure.t.isGE_of_isZero hG a,
     _root_.DerivedCategory.TStructure.t.isLE_of_isZero hG b⟩
 
+/-- The reductions of a shift: if the reduction of `K` modulo `J` is bounded constructible of
+Tor amplitude in `[a, b]`, then that of `K⟦m⟧` is bounded constructible of Tor amplitude in
+`[a - m, b - m]`. -/
+lemma DerivedCategory.boundedConstructible_and_torAmplitudeIn_reductionModIdeal_shift
+    {K : 𝐃(X, Λ)} (J : Ideal Λ) (m : ℤ) {a b : ℤ}
+    (h : DerivedCategory.boundedConstructible (ModuleCat.{u + 1} Λ) X
+        ((reductionModIdeal Λ X J).obj K) ∧
+      DerivedCategory.torAmplitudeIn (ModuleCat.{u + 1} Λ) X a b
+        ((reductionModIdeal Λ X J).obj K)) :
+    DerivedCategory.boundedConstructible (ModuleCat.{u + 1} Λ) X
+        ((reductionModIdeal Λ X J).obj (K⟦m⟧)) ∧
+      DerivedCategory.torAmplitudeIn (ModuleCat.{u + 1} Λ) X (a - m) (b - m)
+        ((reductionModIdeal Λ X J).obj (K⟦m⟧)) := by
+  have e := ((reductionModIdeal Λ X J).commShiftIso m).app K
+  exact ⟨(DerivedCategory.boundedConstructible _ X).prop_of_iso e.symm
+      ((DerivedCategory.boundedConstructible _ X).le_shift m _ h.1),
+    (DerivedCategory.torAmplitudeIn _ X _ _).prop_of_iso e.symm
+      (DerivedCategory.torAmplitudeIn.shift h.2 m)⟩
+
+/-- Derived completeness for `I = (ϖ)` is stable under the shifts. -/
+lemma _root_.DerivedCategory.derivedComplete_shift (hϖ : ϖ ∈ nonZeroDivisors Λ)
+    (hI : I = Ideal.span {ϖ}) {K : 𝐃(X, Λ)}
+    (hK : _root_.DerivedCategory.derivedComplete X.smallEtaleTopology I K) (m : ℤ) :
+    _root_.DerivedCategory.derivedComplete X.smallEtaleTopology I (K⟦m⟧) :=
+  have := _root_.DerivedCategory.isTriangulated_derivedComplete
+    (J := X.smallEtaleTopology) hϖ hI
+  (_root_.DerivedCategory.derivedComplete _ I).le_shift m K hK
+
+/-- `Dᵇc(X, Λ)` is stable under the shifts.
+Blueprint `prop-sf-localization-all-stages` (integral stage `𝒪_E`). -/
+lemma DerivedCategory.isStableUnderShift_boundedConstructibleIntegral
+    (hϖ : ϖ ∈ nonZeroDivisors Λ) (hI : I = Ideal.span {ϖ}) :
+    (DerivedCategory.boundedConstructibleIntegral I X).IsStableUnderShift ℤ where
+  isStableUnderShiftBy m := ⟨fun _ hK ↦
+    ⟨_root_.DerivedCategory.derivedComplete_shift hϖ hI hK.1 m, hK.2.choose - m,
+      hK.2.choose_spec.choose - m, fun n ↦
+        boundedConstructible_and_torAmplitudeIn_reductionModIdeal_shift _ m
+          (hK.2.choose_spec.choose_spec n)⟩⟩
+
+variable [IsNoetherianRing Λ] [(constructibleSheaf (ModuleCat.{u + 1} Λ) X).IsClosedUnderExtensions]
+
 open ZeroObject in
-/-- `Dᵇc(X, Λ)` contains the zero object. -/
+/-- `Dᵇc(X, Λ)` contains the zero object.
+Blueprint `prop-sf-localization-all-stages` (integral stage `𝒪_E`). -/
 lemma DerivedCategory.containsZero_boundedConstructibleIntegral (hϖ : ϖ ∈ nonZeroDivisors Λ)
     (hI : I = Ideal.span {ϖ}) :
     (DerivedCategory.boundedConstructibleIntegral I X).ContainsZero := by
@@ -144,27 +192,17 @@ lemma DerivedCategory.containsZero_boundedConstructibleIntegral (hϖ : ϖ ∈ no
     (J := X.smallEtaleTopology) hϖ hI
   exact ⟨⟨0, isZero_zero _, (_root_.DerivedCategory.derivedComplete _ I).prop_of_isZero
     (isZero_zero _), 0, 0, fun _ ↦
-      boundedConstructible_and_torAmplitudeIn_reductionModIdeal_of_isZero (isZero_zero _) _ 0 0⟩⟩
-
-/-- `Dᵇc(X, Λ)` is stable under the shifts. -/
-lemma DerivedCategory.isStableUnderShift_boundedConstructibleIntegral
-    (hϖ : ϖ ∈ nonZeroDivisors Λ) (hI : I = Ideal.span {ϖ}) :
-    (DerivedCategory.boundedConstructibleIntegral I X).IsStableUnderShift ℤ := by
-  have := _root_.DerivedCategory.isTriangulated_derivedComplete
-    (J := X.smallEtaleTopology) hϖ hI
-  refine ⟨fun m ↦ ⟨fun K ⟨hc, a, b, h⟩ ↦
-    ⟨(_root_.DerivedCategory.derivedComplete _ I).le_shift m K hc, a - m, b - m, fun n ↦ ?_⟩⟩⟩
-  have e := ((reductionModIdeal Λ X (I ^ (n + 1))).commShiftIso m).app K
-  exact ⟨(DerivedCategory.boundedConstructible _ X).prop_of_iso e.symm
-      ((DerivedCategory.boundedConstructible _ X).le_shift m _ (h n).1),
-    (DerivedCategory.torAmplitudeIn _ X _ _).prop_of_iso e.symm
-      (DerivedCategory.torAmplitudeIn.shift (h n).2 m)⟩
+      ⟨(DerivedCategory.boundedConstructible _ X).prop_of_isZero
+        ((reductionModIdeal Λ X _).map_isZero (isZero_zero _)),
+      torAmplitudeIn_reductionModIdeal_of_isZero (isZero_zero _) _ 0 0⟩⟩⟩
 
 /-- `Dᵇc(X, Λ)` is closed under extensions: the reduction of a distinguished triangle is
-distinguished, and the Tor amplitude interval is widened. -/
+distinguished, and the Tor amplitude interval is widened.
+Blueprint `prop-sf-localization-all-stages` (integral stage `𝒪_E`). -/
 lemma DerivedCategory.isTriangulatedClosed₂_boundedConstructibleIntegral
     (hϖ : ϖ ∈ nonZeroDivisors Λ) (hI : I = Ideal.span {ϖ}) :
     (DerivedCategory.boundedConstructibleIntegral I X).IsTriangulatedClosed₂ := by
+  have := _root_.DerivedCategory.isClosedUnderIsomorphisms_derivedComplete (X := X) hϖ hI
   have := DerivedCategory.isClosedUnderIsomorphisms_boundedConstructibleIntegral (X := X) hϖ hI
   have := _root_.DerivedCategory.isTriangulated_derivedComplete
     (J := X.smallEtaleTopology) hϖ hI
@@ -180,7 +218,8 @@ nonzerodivisor, `Λ` noetherian, and constructible sheaves of `Λ`-modules on `X
 extensions: derived complete objects form a triangulated subcategory
 (`DerivedCategory.isTriangulated_derivedComplete`), the reductions are triangulated functors,
 bounded constructible complexes then form a triangulated subcategory, and Tor amplitude is stable
-under shifts and, with the interval widened, under extensions. -/
+under shifts and, with the interval widened, under extensions.
+Blueprint `prop-sf-localization-all-stages` (integral stage `𝒪_E`). -/
 lemma DerivedCategory.isTriangulated_boundedConstructibleIntegral_of_eq_span
     (hϖ : ϖ ∈ nonZeroDivisors Λ) (hI : I = Ideal.span {ϖ}) :
     (DerivedCategory.boundedConstructibleIntegral I X).IsTriangulated :=
@@ -311,10 +350,12 @@ theorem boundedConstructibleIntegral_leftDerivedUpperStar (j : X ⟶ Y) [IsOpenI
 
 /-- For a closed immersion `i : Z ⟶ X`, an object `Q` of `D(Z_ét, Λ)` lies in `Dᵇc(Z, Λ)` as soon
 as `Ri_* Q` lies in `Dᵇc(X, Λ)`: `Ri_*` is faithful and `Λ`-linear, so it reflects derived
-completeness, and `Q ≅ i^* Ri_* Q`, whose reductions are the pullbacks of those of `Ri_* Q`. -/
+completeness, and `Q ≅ i^* Ri_* Q`, whose reductions are the pullbacks of those of `Ri_* Q`.
+Blueprint `prop-sf-localization-all-stages` (integral stage `𝒪_E`). -/
 theorem boundedConstructibleIntegral_of_rightDerivedLowerStar_obj (i : X ⟶ Y)
     [IsClosedImmersion i] {Q : 𝐃(X, Λ)}
-    (hQ : DerivedCategory.boundedConstructibleIntegral I Y ((R((i)_*[ModuleCat.{u + 1} Λ])).obj Q)) :
+    (hQ : DerivedCategory.boundedConstructibleIntegral I Y
+      ((R((i)_*[ModuleCat.{u + 1} Λ])).obj Q)) :
     DerivedCategory.boundedConstructibleIntegral I X Q := by
   obtain ⟨hc, a, b, h⟩ := hQ
   let adj := derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) i
@@ -399,15 +440,16 @@ variable (Λ) in
 faithful. -/
 instance isIso_derivedUpperStarLowerStarAdjunction_counit (j : U ⟶ X) [IsOpenImmersion j] :
     IsIso (derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) j).counit := by
-  have : IsIso (mapDerivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) j).counit :=
+  let adj := mapDerivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) j
+  have : IsIso adj.counit :=
     (Adjunction.Triple.mk
       (derivedOpenImmersionLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} Λ) j)
-      (mapDerivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) j)).isIso_unit_iff_isIso_counit.1
-      inferInstance
-  have hff := (mapDerivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) j).fullyFaithfulROfIsIsoCounit
+      adj).isIso_unit_iff_isIso_counit.1 inferInstance
+  have hff := adj.fullyFaithfulROfIsIsoCounit
   have := hff.full
   have := hff.faithful
-  exact (derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) j).counit_isIso_of_R_fully_faithful
+  exact
+    (derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) j).counit_isIso_of_R_fully_faithful
 
 variable (Λ) in
 /-- The adjunction `Ri_* ⊣ Ri^!` for a closed immersion `i`: the exceptional adjunction
@@ -576,7 +618,7 @@ end Localization
 
 section BoundedConstructible
 
-variable {U Z X : Scheme.{u}} [IsNoetherianRing Λ] {k : Type u} [Field k]
+variable {U Z X Y : Scheme.{u}} [IsNoetherianRing Λ] {k : Type u} [Field k]
   [HasInvertibleExponent (Λ ⧸ I) (Spec (.of k))]
 
 /-- Blueprint `prop-sf-localization-all-stages`, clauses (1) and (1') at the integral stage
@@ -609,22 +651,69 @@ theorem boundedConstructibleIntegral_rightDerivedLowerStar_of_isClosedImmersion
   have ⟨d, hd⟩ := exists_topologicalKrullDim_le (i ≫ aX)
   (boundedConstructibleIntegral_rightDerivedLowerStar hϖ hI (i ≫ aX) aX i rfl d hd hQ).1
 
-variable (I) in
-/-- The direct image `Rf_* : Dᵇc(X, Λ) ⥤ Dᵇc(Y, Λ)` along a closed immersion, the restriction of
-`Rf_*` (`AlgebraicGeometry.Etale.boundedConstructibleIntegral_rightDerivedLowerStar`). -/
-noncomputable abbrev boundedConstructibleIntegralRightDerivedLowerStar
+/-- Blueprint `prop-sf-localization-all-stages`, clause (1) at the integral stage `𝒪_E`, for any
+separated quasi-compact morphism `f : Y ⟶ X` locally of finite type (an open immersion `j` or a
+closed immersion `i`) into a scheme of finite type over `k`: `Rf_*` carries `Dᵇc(Y, Λ)` into
+`Dᵇc(X, Λ)` (`AlgebraicGeometry.Etale.boundedConstructibleIntegral_rightDerivedLowerStar`). -/
+theorem boundedConstructibleIntegral_rightDerivedLowerStar_obj
     (hϖ : ϖ ∈ nonZeroDivisors Λ) (hI : I = Ideal.span {ϖ}) (aX : X ⟶ Spec (.of k))
-    [LocallyOfFiniteType aX] [QuasiCompact aX] (i : Z ⟶ X) [IsClosedImmersion i] :
-    (DerivedCategory.boundedConstructibleIntegral I Z).FullSubcategory ⥤
-      (DerivedCategory.boundedConstructibleIntegral I X).FullSubcategory :=
-  ObjectProperty.liftFullSubcategory (DerivedCategory.boundedConstructibleIntegral I Z) _
-    (R((i)_*[ModuleCat.{u + 1} Λ])) fun _ hQ ↦
-      boundedConstructibleIntegral_rightDerivedLowerStar_of_isClosedImmersion hϖ hI aX i hQ
+    [LocallyOfFiniteType aX] [QuasiCompact aX] (f : Y ⟶ X) [IsSeparated f] [QuasiCompact f]
+    [LocallyOfFiniteType f] {G : 𝐃(Y, Λ)}
+    (hG : DerivedCategory.boundedConstructibleIntegral I Y G) :
+    DerivedCategory.boundedConstructibleIntegral I X ((R((f)_*[ModuleCat.{u + 1} Λ])).obj G) :=
+  have ⟨d, hd⟩ := exists_topologicalKrullDim_le (f ≫ aX)
+  (boundedConstructibleIntegral_rightDerivedLowerStar hϖ hI (f ≫ aX) aX f rfl d hd hG).1
+
+/-- Blueprint `prop-sf-localization-all-stages`, clause (2') at the integral stage `𝒪_E`, the
+Tor amplitude bound in a closed-support triangle: let `T` be a distinguished triangle of
+`D(X_ét, Λ)` with vertices `Ri_* M`, `K` and `Rj_* j^* K`, where `K` and `Ri_* M` lie in
+`Dᵇc(X, Λ)`. If the reductions of `K` have Tor amplitude in `[a, b]` and `dim U ≤ d`, the
+reductions of `M` have Tor amplitude in `[a, b + 2d + 1]`: the reductions of `T` are
+distinguished, those of `Rj_* j^* K` have Tor amplitude in `[a, b + 2d]`, and
+`M ≅ i^* Ri_* M`. -/
+theorem torAmplitudeIn_reductionModIdeal_of_distTriang (hϖ : ϖ ∈ nonZeroDivisors Λ)
+    (hI : I = Ideal.span {ϖ}) (aX : X ⟶ Spec (.of k)) [LocallyOfFiniteType aX] [QuasiCompact aX]
+    (i : Z ⟶ X) [IsClosedImmersion i] (j : U ⟶ X) [IsOpenImmersion j] [QuasiCompact j]
+    {K : 𝐃(X, Λ)} (hK : DerivedCategory.boundedConstructibleIntegral I X K) {M : 𝐃(Z, Λ)}
+    (hM : DerivedCategory.boundedConstructibleIntegral I X
+      ((R((i)_*[ModuleCat.{u + 1} Λ])).obj M))
+    {T : Triangle 𝐃(X, Λ)} (hT : T ∈ distTriang _)
+    (e₁ : T.obj₁ ≅ (R((i)_*[ModuleCat.{u + 1} Λ])).obj M) (e₂ : T.obj₂ ≅ K)
+    (e₃ : T.obj₃ ≅ (R((j)_*[ModuleCat.{u + 1} Λ])).obj ((L((j)^*[ModuleCat.{u + 1} Λ])).obj K))
+    (d : ℕ) (hd : topologicalKrullDim U ≤ (d : WithBot ℕ∞)) (a b : ℤ)
+    (hab : ∀ n : ℕ, DerivedCategory.torAmplitudeIn (ModuleCat.{u + 1} Λ) X a b
+      ((reductionModIdeal Λ X (I ^ (n + 1))).obj K)) (n : ℕ) :
+    DerivedCategory.torAmplitudeIn (ModuleCat.{u + 1} Λ) Z a (b + 2 * (d : ℤ) + 1)
+      ((reductionModIdeal Λ Z (I ^ (n + 1))).obj M) := by
+  let R := reductionModIdeal Λ X (I ^ (n + 1))
+  have hjK := boundedConstructibleIntegral_leftDerivedUpperStar hϖ hI j hK
+  have hjab := fun m ↦
+    (boundedConstructible_and_torAmplitudeIn_reductionModIdeal_leftDerivedUpperStar hϖ hI j m
+      ⟨(hK.2.choose_spec.choose_spec m).1, hab m⟩).2
+  have h₃ := (boundedConstructibleIntegral_rightDerivedLowerStar_of_isOpenImmersion hϖ hI aX j
+    hjK).2 d hd a b hjab n
+  have hT' := R.map_distinguished _ hT
+  have h₁ := DerivedCategory.torAmplitudeIn_obj₂ (ModuleCat.{u + 1} Λ)
+    (inv_rot_of_distTriang _ hT')
+    (DerivedCategory.torAmplitudeIn.shift
+      ((DerivedCategory.torAmplitudeIn _ X _ _).prop_of_iso (R.mapIso e₃.symm) h₃) (-1))
+    ((DerivedCategory.torAmplitudeIn _ X _ _).prop_of_iso (R.mapIso e₂.symm) (hab n))
+  have h₁' : DerivedCategory.torAmplitudeIn (ModuleCat.{u + 1} Λ) X a (b + 2 * (d : ℤ) + 1)
+      (R.obj ((R((i)_*[ModuleCat.{u + 1} Λ])).obj M)) :=
+    ((DerivedCategory.torAmplitudeIn _ X _ _).prop_of_iso (R.mapIso e₁) h₁).mono (by omega)
+      (by omega)
+  let adj := derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) i
+  have : IsIso adj.counit := adj.counit_isIso_of_R_fully_faithful
+  exact (DerivedCategory.torAmplitudeIn _ Z _ _).prop_of_iso
+    ((reductionModIdeal Λ Z (I ^ (n + 1))).mapIso (asIso (adj.counit.app M)))
+    (boundedConstructible_and_torAmplitudeIn_reductionModIdeal_leftDerivedUpperStar hϖ hI i n
+      ⟨(hM.2.choose_spec.choose_spec n).1, h₁'⟩).2
 
 variable (I) in
 /-- The exceptional inverse image `Ri^! : Dᵇc(X, Λ) ⥤ Dᵇc(Z, Λ)` along a closed immersion, the
-restriction of `Ri^!` (`AlgebraicGeometry.Etale.boundedConstructibleIntegral_rightDerivedUpperShriek`).
--/
+restriction of `Ri^!`
+(`AlgebraicGeometry.Etale.boundedConstructibleIntegral_rightDerivedUpperShriek`), under the
+hypotheses providing the exceptional adjunction `Ri_! ⊣ Ri^!` on `D(X_ét, Λ)`. -/
 noncomputable abbrev boundedConstructibleIntegralRightDerivedUpperShriek [IsDomain Λ]
     [IsAdicComplete I Λ] [Finite (Λ ⧸ I)] (hϖ : ϖ ∈ nonZeroDivisors Λ)
     (hI : I = Ideal.span {ϖ}) (aX : X ⟶ Spec (.of k)) (aZ : Z ⟶ Spec (.of k))
@@ -653,20 +742,10 @@ variable {U Z X : Scheme.{u}} [IsDomain Λ] [IsNoetherianRing Λ] [IsAdicComplet
   (i : Z ⟶ X) (hi : i ≫ aX = aZ) [IsClosedImmersion i] [HasCompactification i]
   [(R(i)_![ModuleCat.{u + 1} Λ]).IsLeftAdjoint]
 
-/-- Blueprint `prop-sf-localization-all-stages`, clause (2) at the integral stage `𝒪_E`: the
-direct image `i_* : Dᵇc(Z, Λ) ⥤ Dᵇc(X, Λ)` along a closed immersion has the right adjoint `Ri^!`,
-the restriction of the exceptional inverse image (the derived limit `R lim_n Res_n Ri_n^! K_n` of
-blueprint `def-weil-exceptional-inverse-image`, by
-`AlgebraicGeometry.Etale.boundedConstructibleIntegral_exceptionalAdjoint`). -/
-noncomputable def boundedConstructibleIntegralClosedUpperShriekAdjunction :
-    boundedConstructibleIntegralRightDerivedLowerStar I hϖ hI aX i ⊣
-      boundedConstructibleIntegralRightDerivedUpperShriek I hϖ hI aX aZ i hi :=
-  (rightDerivedLowerStarUpperShriekAdjunction Λ i).restrictFullyFaithful
-    (ObjectProperty.fullyFaithfulι _) (ObjectProperty.fullyFaithfulι _) (Iso.refl _) (Iso.refl _)
-
 include hϖ hI hi in
 /-- Blueprint `prop-sf-localization-all-stages`, clauses (3) and (3') at the integral stage
-`𝒪_E`: for `K ∈ Dᵇc(X, Λ)` the counit `Ri_* Ri^! K ⟶ K` and the unit `K ⟶ Rj_* j^* K` extend to a
+`𝒪_E`, under the hypotheses providing the exceptional adjunction on `D(X_ét, Λ)`: for
+`K ∈ Dᵇc(X, Λ)` the counit `Ri_* Ri^! K ⟶ K` and the unit `K ⟶ Rj_* j^* K` extend to a
 distinguished triangle `Ri_* Ri^! K ⟶ K ⟶ Rj_* j^* K ⟶ (Ri_* Ri^! K)[1]` with a unique third
 arrow, and its three vertices lie in `Dᵇc(-, Λ)`. The vanishing of
 `Hom((Ri_* Q)[m], Rj_* G)` is
@@ -689,11 +768,11 @@ theorem boundedConstructibleIntegral_closedSupportTriangle (j : U ⟶ X) [IsOpen
     existsUnique_distTriang_closedSupportTriangle i j hij K⟩
 
 include hϖ hI hi in
-/-- Blueprint `prop-sf-localization-all-stages`, clause (2') at the integral stage `𝒪_E`: if the
-reductions of `K ∈ Dᵇc(X, Λ)` have Tor amplitude in `[a, b]` and the open complement `U` has
-dimension `≤ d`, the reductions of `Ri^! K` have Tor amplitude in `[a, b + 2d + 1]`. The
-reductions of the closed-support triangle are distinguished, `Rj_* j^* K` has reductions of Tor
-amplitude in `[a, b + 2d]`, and `Ri^! K ≅ i^* Ri_* Ri^! K`. -/
+/-- Blueprint `prop-sf-localization-all-stages`, clause (2') at the integral stage `𝒪_E`, under
+the hypotheses providing the exceptional adjunction on `D(X_ét, Λ)`: if the reductions of
+`K ∈ Dᵇc(X, Λ)` have Tor amplitude in `[a, b]` and the open complement `U` has dimension `≤ d`,
+the reductions of `Ri^! K` have Tor amplitude in `[a, b + 2d + 1]`
+(`AlgebraicGeometry.Etale.torAmplitudeIn_reductionModIdeal_of_distTriang`). -/
 theorem torAmplitudeIn_reductionModIdeal_rightDerivedUpperShriek (j : U ⟶ X)
     [IsOpenImmersion j] [QuasiCompact j] (hij : Set.range i.base = (Set.range j.base)ᶜ)
     {K : 𝐃(X, Λ)} (hK : DerivedCategory.boundedConstructibleIntegral I X K) (d : ℕ)
@@ -704,27 +783,8 @@ theorem torAmplitudeIn_reductionModIdeal_rightDerivedUpperShriek (j : U ⟶ X)
       ((reductionModIdeal Λ Z (I ^ (n + 1))).obj ((R(i)^![ModuleCat.{u + 1} Λ]).obj K)) := by
   obtain ⟨hM, -, w, hw, -⟩ := boundedConstructibleIntegral_closedSupportTriangle hϖ hI aX aZ i hi
     j hij hK
-  have hbcK := hK.2.choose_spec.choose_spec n
-  have hjK := boundedConstructibleIntegral_leftDerivedUpperStar hϖ hI j hK
-  have hjab := fun m ↦
-    (boundedConstructible_and_torAmplitudeIn_reductionModIdeal_leftDerivedUpperStar hϖ hI j m
-      ⟨(hK.2.choose_spec.choose_spec m).1, hab m⟩).2
-  have h₃ := (boundedConstructibleIntegral_rightDerivedLowerStar_of_isOpenImmersion hϖ hI aX j
-    hjK).2 d hd a b hjab n
-  have hT := (reductionModIdeal Λ X (I ^ (n + 1))).map_distinguished _ hw
-  have h₁ := DerivedCategory.torAmplitudeIn_obj₂ (ModuleCat.{u + 1} Λ)
-    (inv_rot_of_distTriang _ hT) (DerivedCategory.torAmplitudeIn.shift h₃ (-1)) (hab n)
-  have h₁' : DerivedCategory.torAmplitudeIn (ModuleCat.{u + 1} Λ) X a (b + 2 * (d : ℤ) + 1)
-      ((reductionModIdeal Λ X (I ^ (n + 1))).obj ((R((i)_*[ModuleCat.{u + 1} Λ])).obj
-        ((R(i)^![ModuleCat.{u + 1} Λ]).obj K))) :=
-    h₁.mono (by omega) (by omega)
-  have : IsIso (derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) i).counit :=
-    (derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) i).counit_isIso_of_R_fully_faithful
-  exact (DerivedCategory.torAmplitudeIn _ Z _ _).prop_of_iso
-    ((reductionModIdeal Λ Z (I ^ (n + 1))).mapIso
-      (asIso ((derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) i).counit.app _)))
-    (boundedConstructible_and_torAmplitudeIn_reductionModIdeal_leftDerivedUpperStar hϖ hI i n
-      ⟨(hM.2.choose_spec.choose_spec n).1, h₁'⟩).2
+  exact torAmplitudeIn_reductionModIdeal_of_distTriang hϖ hI aX i j hK hM hw (Iso.refl _)
+    (Iso.refl _) (Iso.refl _) d hd a b hab n
 
 end Triangle
 

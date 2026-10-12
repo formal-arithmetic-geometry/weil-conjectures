@@ -1597,6 +1597,8 @@ public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.Shriek
 public import WeilConjectures.SixFunctors.Etale.Derived.Localization
 public import WeilConjectures.SixFunctors.Etale.Derived.LocalizationBaseChange
 public import WeilConjectures.SixFunctors.Etale.Derived.LocalizationIntegral
+public import WeilConjectures.SixFunctors.Etale.Derived.LocalizationIntegralClosedSupport
+public import WeilConjectures.SixFunctors.Etale.Derived.LocalizationRational
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekBaseChange
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekBaseChangeShift
