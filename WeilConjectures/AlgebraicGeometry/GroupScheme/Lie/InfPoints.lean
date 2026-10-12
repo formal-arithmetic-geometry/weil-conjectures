@@ -60,11 +60,6 @@ theorem mem_infPoints {v : Scheme.dualNumbersOver S ⟶ G} :
 instance : (infPoints G).Normal :=
   MonoidHom.normal_ker _
 
-/-- The infinitesimal points form a commutative group: their group law is the addition of tangent
-vectors. -/
-theorem isMulCommutative_infPoints : IsMulCommutative (infPoints G) := by
-  sorry
-
 /-- The identity point, as a morphism of schemes, is the identity section. -/
 theorem one_left : (1 : Over.mk (𝟙 S) ⟶ G).left = unitSection G := by
   rw [Hom.one_def, Over.comp_left, unitSection]

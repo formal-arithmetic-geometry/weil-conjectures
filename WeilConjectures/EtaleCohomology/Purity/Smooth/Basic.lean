@@ -6,24 +6,20 @@ Authors: Claude
 module
 
 public import WeilConjectures.Compactification.BaseChange
+public import WeilConjectures.EtaleCohomology.Purity.Smooth.CohomologicalSmoothness
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.AffineSpace
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.Deformation
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Smooth
-public import WeilConjectures.SixFunctors.Etale.Derived.LocallyConstantInvertible
-public import WeilConjectures.SixFunctors.Etale.Derived.SmoothDuality
 public import WeilConjectures.SixFunctors.Etale.Derived.TensorStructure
 
 /-!
-# Cohomological smoothness and finite-coefficient smooth purity
+# Finite-coefficient smooth purity
 
-The two central statements of the block. For `f : X ⟶ Y` smooth separated of pure relative
-dimension `d` and a finite coefficient ring `Λ` whose exponent is invertible on `X`:
-
-* *cohomological smoothness* (`sk-prop-cohsm`): the dualizing complex `ω_f = Rf^! Λ_Y` is
-  ⊗-invertible, `Rf^! K ≅ Lf^* K ⊗^L ω_f` for every `K ∈ D^b_{ctf}(Y, Λ)`, and the formation
-  of `Rf^!` commutes with base change;
-* *smooth purity* (`sk-thm-smooth-purity`): `ω_f ≅ Λ_X(d)[2d]`, hence
-  `Rf^! K ≅ Lf^* K(d)[2d]`.
+The central statement of the block. For `f : X ⟶ Y` smooth separated of pure relative
+dimension `d` and a finite coefficient ring `Λ` whose exponent is invertible on `X`, *smooth
+purity* (`sk-thm-smooth-purity`) says `ω_f ≅ Λ_X(d)[2d]`, hence `Rf^! K ≅ Lf^* K(d)[2d]`.
+It rests on *cohomological smoothness* (`sk-prop-cohsm`), stated in
+`WeilConjectures.EtaleCohomology.Purity.Smooth.CohomologicalSmoothness`.
 
 The route is the blueprint's: the model case is affine-space purity
 `AlgebraicGeometry.Etale.nonempty_iso_dualizingComplex_affineSpace`, transported along the
@@ -32,30 +28,16 @@ of the diagonal, a closed section of the first projection `X ×_Y X ⟶ X`.
 
 ## Implementation notes
 
-The blueprint asserts that each isomorphism below is *canonical*: `sk-prop-cohsm` (b) is about
-the mate `φ_K : Lf^* K ⊗ ω_f ⟶ Rf^! K` of the projection formula, and `sk-thm-smooth-purity`
-about the normalized comparison. Neither map exists in the repository — the projection map
-itself is a TODO of `WeilConjectures.SixFunctors.Etale.Derived.Exchange` — so each statement
-records the existence of the isomorphism only, with a `TODO(unify)` marker. For the same
-reason the smooth purity map `γ_{f,K}` and the smooth pullback exchange are built from their
-constituent isomorphisms, which are arguments of the constructions.
+The blueprint asserts that each isomorphism below is *canonical*: `sk-thm-smooth-purity` is
+about the normalized comparison, built from the mate `φ_K : Lf^* K ⊗ ω_f ⟶ Rf^! K` of the
+projection formula. That map does not exist in the repository — the projection map itself is a
+TODO of `WeilConjectures.SixFunctors.Etale.Derived.Exchange` — so each statement records the
+existence of the isomorphism only, with a `TODO(unify)` marker. For the same reason the smooth
+purity map `γ_{f,K}` and the smooth pullback exchange are built from their constituent
+isomorphisms, which are arguments of the constructions.
 
-The statements of `sk-prop-cohsm` carry `include d in`: their statements do not mention the
-relative dimension `d`, and without it the hypothesis `[SmoothOfRelativeDimension d f]` would
-silently be dropped. They hold without the Tate twist datum and without separatedness
-(which is implied by the compactification), so these hypotheses are omitted.
-
-The three clauses of `sk-prop-cohsm` are read off from the orientation-free smooth duality of
-the ambient chapter, as in the proof of `thm-pur-cohomological-smoothness`: the locally constant
-rank-one shape of `ω_f` and the tensor formula
-(`AlgebraicGeometry.Etale.exists_dualizingComplex_iso_and_tensor`, `thm-asd-smooth-tensor`),
-and arbitrary base change for `Rf^!`
-(`AlgebraicGeometry.Etale.nonempty_iso_rightDerivedUpperShriek_comp_leftDerivedUpperStar`,
-`prop-asd-smooth-base-change`). A locally constant sheaf with free rank-one stalks, placed in any
-degree, is invertible
-(`AlgebraicGeometry.Etale.isInvertible_shift_singleFunctor_obj_of_isLocallyConstantSheaf`).
-The notion of a cohomologically smooth morphism and its structural properties are in
-`WeilConjectures.EtaleCohomology.Purity.Smooth.CohomologicalSmoothness`.
+Statements whose type does not mention the relative dimension `d` carry `include d in`;
+without it the hypothesis `[SmoothOfRelativeDimension d f]` would silently be dropped.
 
 ## Main definitions
 
@@ -68,9 +50,6 @@ The notion of a cohomologically smooth morphism and its structural properties ar
 
 ## Main statements
 
-- `AlgebraicGeometry.Etale.isInvertible_dualizingComplex`
-- `AlgebraicGeometry.Etale.nonempty_iso_rightDerivedUpperShriek_obj_derivedTensor`
-- `AlgebraicGeometry.Etale.nonempty_iso_leftDerivedUpperStar_comp_rightDerivedUpperShriek`
 - `AlgebraicGeometry.Etale.nonempty_iso_sectionInvariant_diagonal`: `𝒞(p₁, Δ) ≅ ω_f`.
 - `AlgebraicGeometry.Etale.nonempty_iso_dualizingComplex_twistShift`: `ω_f ≅ Λ_X(d)[2d]`.
 - `AlgebraicGeometry.Etale.nonempty_iso_rightDerivedUpperShriek_twistShift`:
@@ -97,84 +76,6 @@ namespace Etale
 variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] [HasTateTwist Λ] {X Y : Scheme.{u}}
   {d : ℕ} (f : X ⟶ Y) [IsSeparated f] [SmoothOfRelativeDimension d f] [HasCompactification f]
   [HasInvertibleExponent Λ X]
-
-omit [HasTateTwist Λ] [IsSeparated f] in
-include d in
-/-- Blueprint `sk-prop-cohsm`: Cohomological smoothness
-
-*Clause (a).* For `f` smooth separated of pure relative dimension `d` the dualizing complex
-`ω_f = Rf^! Λ_Y` is ⊗-invertible: it is a lisse rank-one object, twisted and shifted. This is
-the form of cohomological smoothness that does not yet name the twist; smooth purity
-identifies `ω_f` with `Λ_X(d)[2d]`. -/
-theorem isInvertible_dualizingComplex :
-    DerivedCategory.isInvertible Λ X (dualizingComplex (ModuleCat.{u + 1} Λ) f) := by
-  obtain ⟨L, _, hL, ⟨e⟩, -⟩ := exists_dualizingComplex_iso_and_tensor Λ f d
-  exact DerivedCategory.isInvertible.of_iso e.symm
-    (isInvertible_shift_singleFunctor_obj_of_isLocallyConstantSheaf L hL _)
-
-omit [HasTateTwist Λ] [IsSeparated f] in
-include d in
-/-- Blueprint `sk-prop-cohsm`: Cohomological smoothness
-
-*Clause (b), the tensor formula.* For `f` smooth separated of pure relative dimension `d` and
-`K ∈ D^b_{ctf}(Y, Λ)`,
-
-`Rf^! K ≅ Lf^* K ⊗^L ω_f`.
-
-Equivalently, `Rf^!` is `Lf^*` twisted by the invertible object `ω_f` of clause (a); this is
-what turns the computation of `ω_f` into a computation of `Rf^!` on all coefficients. The
-blueprint statement is that the mate `φ_K` of the projection formula is this isomorphism, which
-is `AlgebraicGeometry.Etale.isIso_dualizingComplexTensorMap_of_smoothOfRelativeDimension`. -/
-theorem nonempty_iso_rightDerivedUpperShriek_obj_derivedTensor
-    (K : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
-    (_hK : DerivedCategory.boundedConstructibleFiniteTor Λ Y K) :
-    Nonempty (((derivedTensor (ModuleCat.{u + 1} Λ) X).obj
-        ((L((f)^*[ModuleCat.{u + 1} Λ])).obj K)).obj
-          (dualizingComplex (ModuleCat.{u + 1} Λ) f) ≅
-      (rightDerivedUpperShriek (ModuleCat.{u + 1} Λ) f).obj K) :=
-  nonempty_iso_derivedTensor_leftDerivedUpperStar_obj_dualizingComplex Λ f d K
-
-omit [HasTateTwist Λ] [IsSeparated f] in
-include d in
-/-- Blueprint `sk-prop-cohsm`: Cohomological smoothness
-
-*Clause (b), the tensor formula, canonical form.* For `f` smooth of pure relative dimension `d`,
-the mate of the projection formula, `θ_{f,K} : ω_f ⊗ᴸ Lf^* K ⟶ Rf^! K`
-(`AlgebraicGeometry.Etale.dualizingComplexTensorMap`), is an isomorphism for every `K`. -/
-theorem isIso_dualizingComplexTensorMap_of_smoothOfRelativeDimension
-    (K : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
-    IsIso (dualizingComplexTensorMap Λ f K) :=
-  (exists_dualizingComplex_iso_and_tensor Λ f d).choose_spec.2.2.2 K
-
-omit [HasTateTwist Λ] [IsSeparated f] in
-include d in
-/-- Blueprint `sk-prop-cohsm`: Cohomological smoothness
-
-*Clause (c), smooth base change for `R^!`.* In the cartesian square
-
-```
-  X' --g'--> X          Rf^! ⋙ Lg'^*  ≅  Lg^* ⋙ Rf'^!
-  |          |
-  f'         f          as functors D(Y_ét, Λ) ⥤ D(X'_ét, Λ)
-  |          |
-  v          v
-  Y' --g---> Y
-```
-
-with `f` smooth and `f'` its base change along `g`, the formation of `Rf^!` commutes with base
-change. Applied to the diagonal square `W = X ×_Y X` this gives `ω_{p₁} ≅ Lp₂^* ω_f` and
-`ω_{p₂} ≅ Lp₁^* ω_f`, which is what makes the diagonal computation of the purity theorem
-possible. For quasi-compact `f'` the canonical base change map is an isomorphism
-(`AlgebraicGeometry.Etale.isIso_rightDerivedUpperShriekBaseChangeMap_of_smoothOfRelativeDimension`).
--/
-theorem nonempty_iso_leftDerivedUpperStar_comp_rightDerivedUpperShriek {X' Y' : Scheme.{u}}
-    {g : Y' ⟶ Y} {f' : X' ⟶ Y'} {g' : X' ⟶ X} (sq : IsPullback g' f' f g)
-    [HasCompactification f'] :
-    Nonempty (rightDerivedUpperShriek (ModuleCat.{u + 1} Λ) f ⋙
-        L((g')^*[ModuleCat.{u + 1} Λ]) ≅
-      L((g)^*[ModuleCat.{u + 1} Λ]) ⋙
-        rightDerivedUpperShriek (ModuleCat.{u + 1} Λ) f') :=
-  nonempty_iso_rightDerivedUpperShriek_comp_leftDerivedUpperStar Λ f d sq
 
 /-! ### The twist reassociation and its compatibility with pullback -/
 
@@ -247,32 +148,7 @@ theorem nonempty_iso_sectionInvariant_diagonal :
       dualizingComplex (ModuleCat.{u + 1} Λ) f) := by
   obtain ⟨e⟩ := nonempty_iso_dualizingComplex_pullbackFst Λ (d := d) f
   exact ⟨(L((pullback.diagonal f)^*[ModuleCat.{u + 1} Λ])).mapIso e ≪≫
-    ((leftDerivedUpperStarComp _ (pullback.diagonal f) (pullback.snd f f) (𝟙 X)
-      (pullback.diagonal_snd f).symm).app _).symm ≪≫
-    (Functor.leftDerivedFunctorNatIso _ (Etale.upperStarId _ X) ≪≫
-      (𝟭 _).leftDerivedFunctorIsoMapDerivedCategory ≪≫ Functor.mapDerivedCategoryIdIso _).app _⟩
-
-/-- Blueprint `sk-thm-smooth-purity`: Finite-coefficient smooth purity
-
-*Step 3, the standard pair.* For the projection `π : 𝔸^c_B ⟶ B` of a trivial vector bundle of
-rank `c` with zero section `0`, over a separated scheme of finite type over a field, the
-section invariant is the Tate twist:
-
-`𝒞(π, 0) = L0^* ω_π ≅ L0^* Λ(c)[2c] ≅ Λ_B(c)[2c]`,
-
-by affine-space purity (`AlgebraicGeometry.Etale.nonempty_iso_dualizingComplex_affineSpace`)
-and the compatibility of the twist with pullback. -/
-theorem nonempty_iso_sectionInvariant_affineSpace [HasTateTwist.IsNormalized Λ]
-    {k : Type u} [Field k] (c : ℕ)
-    (B : Scheme.{u}) (aB : B ⟶ Spec (.of k)) [IsSeparated aB] [LocallyOfFiniteType aB]
-    [HasInvertibleExponent Λ B] :
-    Nonempty (sectionInvariant Λ (𝔸(ULift.{u} (Fin c); B) ↘ B)
-        (AffineSpace.zeroSection (ULift.{u} (Fin c)) B) ≅
-      (twistShift Λ B c).obj (constantComplex Λ B)) := by
-  obtain ⟨e⟩ := nonempty_iso_dualizingComplex_affineSpace Λ c B aB
-  exact ⟨(L((AffineSpace.zeroSection (ULift.{u} (Fin c)) B)^*[ModuleCat.{u + 1} Λ])).mapIso
-      (e ≪≫ twistShiftConstantComplexIso Λ _ _) ≪≫
-    leftDerivedUpperStarTateShiftIso Λ _ _ ≪≫ (twistShiftConstantComplexIso Λ B _).symm⟩
+    (leftDerivedUpperStarCompSectionIso _ _ _ (pullback.diagonal_snd f)).app _⟩
 
 /-- Blueprint `sk-thm-smooth-purity`: Finite-coefficient smooth purity
 
@@ -290,42 +166,30 @@ diagonal argument. Let `W = X ×_Y X` and `Δ : X ⟶ W` the diagonal, a closed 
 smooth projection `p₁`.
 1. `𝒞(p₁, Δ) ≅ ω_f` by smooth base change
    (`AlgebraicGeometry.Etale.nonempty_iso_sectionInvariant_diagonal`).
-2. The deformation to the normal cone (`sk-thm-dnc`,
+2. The deformation to the normal cone of `Δ` (`sk-thm-dnc`,
    `AlgebraicGeometry.Etale.nonempty_iso_sectionInvariant_normalCone`) identifies `𝒞(p₁, Δ)`
-   with the section invariant of a rank-`d` vector bundle with its zero section.
+   with the section invariant of its normal bundle, a rank-`d` vector bundle.
 3. That section invariant is `Λ_X(d)[2d]` by affine-space purity
    (`AlgebraicGeometry.Etale.nonempty_iso_sectionInvariant_affineSpace`), which needs `X` of
    finite type over the field.
 
 The normal bundle of `Δ` is the relative tangent bundle `T_{X/Y}`, which is étale-locally
-trivial of rank `d` (`sk-lem-diag-reg`). Mathlib has neither vector bundles nor `T_{X/Y}`, so
-the normal cone datum is recorded through `AlgebraicGeometry.Scheme.Hom.NormalConeData`, which
-only asks for a smooth rank-`d` projection with a closed zero section; the trivial bundle
-`𝔸^d_X` is used in step 2, for which step 3 is affine-space purity. -/
+trivial of rank `d` (`sk-lem-diag-reg`), so that step 3 is affine-space purity étale-locally.
+Mathlib has neither vector bundles nor `T_{X/Y}`, and the normal cone datum
+`AlgebraicGeometry.Scheme.Hom.NormalConeData` is not yet tied to the immersion, so the proof is
+left as a TODO. -/
 theorem nonempty_iso_dualizingComplex_twistShift [HasTateTwist.IsNormalized Λ]
     {k : Type u} [Field k]
     (aY : Y ⟶ Spec (.of k)) [IsSeparated aY] [LocallyOfFiniteType aY] :
     Nonempty (dualizingComplex (ModuleCat.{u + 1} Λ) f ≅
-      (twistShift Λ X d).obj (constantComplex Λ X)) := by
-  -- TODO: the normal cone datum of `Δ` should be its normal bundle `T_{X/Y}`, as in blueprint
-  -- `thm-pur-dnc-invariance`, and step 3 vector-bundle purity for it. `NormalConeData` does not
-  -- tie the datum to the immersion, so the trivial bundle `𝔸^d_X` is accepted here; undo this
-  -- shortcut once the datum is pinned down.
-  let N : (pullback.diagonal f).NormalConeData d :=
-    { scheme := 𝔸(ULift.{u} (Fin d); X)
-      proj := 𝔸(ULift.{u} (Fin d); X) ↘ X
-      zeroSection := AffineSpace.zeroSection _ X
-      zeroSection_comp_proj := AffineSpace.zeroSection_over _ X
-      isClosedImmersion_zeroSection := inferInstance
-      smoothOfRelativeDimension_proj := by
-        have := AffineSpace.smoothOfRelativeDimension_over (ULift.{u} (Fin d)) X
-        rwa [show Nat.card (ULift.{u} (Fin d)) = d by simp] at this }
-  have : HasCompactification N.proj := HasCompactification.affineSpace_over _ X
-  obtain ⟨e₁⟩ := nonempty_iso_sectionInvariant_diagonal Λ (d := d) f
-  obtain ⟨e₂⟩ := nonempty_iso_sectionInvariant_normalCone Λ d (pullback.fst f f)
-    (pullback.diagonal f) (pullback.diagonal_fst f) N
-  obtain ⟨e₃⟩ := nonempty_iso_sectionInvariant_affineSpace Λ d X (f ≫ aY)
-  exact ⟨e₁.symm ≪≫ e₂ ≪≫ e₃⟩
+      (twistShift Λ X d).obj (constantComplex Λ X)) :=
+  -- TODO: step 2 needs a deformation to the normal cone of `Δ` whose normal cone datum is the
+  -- normal bundle `T_{X/Y}` (`nonempty_iso_sectionInvariant_normalCone`), and step 3
+  -- vector-bundle purity for it. `NormalConeData` does not yet tie the datum to the immersion,
+  -- and the existence of a deformation datum (`nonempty_deformationToNormalConeData`) is false
+  -- for an arbitrary one, so the proof waits for the normal bundle
+  -- (`prove2/sk-thm-smooth-purity-2`).
+  sorry
 
 /-! ### The smooth purity map -/
 
