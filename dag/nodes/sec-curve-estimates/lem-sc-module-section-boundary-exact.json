@@ -1,0 +1,145 @@
+{
+ "id": "lem-sc-module-section-boundary-exact",
+ "kind": "statement",
+ "title": "Exactness of the canonical module section boundary",
+ "statement": "Let $X$ be a ringed space and $S:0\\to A\\to B\\xrightarrow{g}C\\to0$ a short exact sequence of its module sheaves [def-weil-pbc-exact-sequence]. Use module cohomology [def-sc-ringed-space-module-cohomology] and the canonical connecting map [def-sc-module-cohomology-boundary], computed in any chosen derived categories [def-weil-abstract-derived-category]. Define the section boundary $\\Gamma(X,C)\\to H^1(X,A)$ as the canonical degree-zero comparison $\\Gamma(X,C)\\simeq H^0(X,C)$ followed by that connecting map. For every $s\\in\\Gamma(X,C)$ its section boundary is zero if and only if there exists $t\\in\\Gamma(X,B)$ with $\\Gamma(g)(t)=s$.",
+ "stmt_deps": [
+  "def-weil-pbc-exact-sequence",
+  "def-sc-ringed-space-module-cohomology",
+  "def-sc-module-cohomology-boundary",
+  "def-weil-abstract-derived-category"
+ ],
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 01DZ, cohomology as right-derived global sections and its long exact sequence; https://stacks.math.columbia.edu/tag/01DZ"
+ },
+ "proof": [
+  {
+   "text": "Apply derived global sections to the canonical distinguished triangle of a short exact module sequence. It remains distinguished; the derived homology sequence [lem-sf-derived-homology-long-exact] is exact at degree zero of the quotient. Transport its maps by the canonical single-complex comparison defining [def-sc-module-cohomology-boundary].",
+   "uses": [
+    "def-sc-module-cohomology-boundary",
+    "lem-sf-derived-homology-long-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 01DZ, cohomology as right-derived global sections and its long exact sequence; https://stacks.math.columbia.edu/tag/01DZ"
+   }
+  },
+  {
+   "text": "Global sections preserves finite limits, so its map to the zeroth derived functor is an isomorphism. Naturality identifies the quotient map after this comparison. In a module category exactness says that the kernel of the second map is the image of the first; evaluating this equality on s gives the desired equivalence with existence of a lifting global section.",
+   "uses": [
+    "def-sc-ringed-space-module-cohomology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 01DZ, cohomology as right-derived global sections and its long exact sequence; https://stacks.math.columbia.edu/tag/01DZ"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sc-module-cohomology-boundary",
+  "lem-sf-derived-homology-long-exact",
+  "def-sc-ringed-space-module-cohomology"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 01DZ, cohomology as right-derived global sections and its long exact sequence; https://stacks.math.columbia.edu/tag/01DZ"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The connecting homomorphism from global sections to first derived global sections vanishes if and only if the section lifts through a short exact sequence",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"ShortComplex\", \"ShortExact\"",
+   "results": "CategoryTheory.ShortComplex.ShortExact, ShortExact.exact, ShortExact.epi_g and basic short-exact-sequence lemmas; no canonical RingedSpace section-boundary specialization",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "ShortComplex.*exact|moduleCohomologyBoundary|tensorPow.*boundary|boundary.*tensorPow",
+   "results": "msearch found basic ShortComplex exact-sequence lemmas. ModuleCohomologyBoundary in the project defines the canonical map; upstream exists_rightDerived_δ_exact only supplies an existential connecting map. Mathlib ShortComplex.moduleCat_exact_iff supplies the underlying function criterion.",
+   "date": "2026-10-13",
+   "verdict": "no exact match; the specialization is proved in Lean from the existing constructions"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.SquareZeroSectionPowerLiftingCriterion",
+  "date": "2026-10-13",
+  "group": "H2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-pic-proper-ntorsion",
+   "place": "Ample invertible sheaf construction on proper dimension-one schemes: the square-zero section-power boundary and lifting step of Stacks 09MS.",
+   "via": [
+    "lem-sc-square-zero-section-power-obstruction-core",
+    "lem-sc-square-zero-section-power-obstruction",
+    "lem-sc-square-zero-section-power-lift",
+    "lem-sc-square-zero-section-power-locus",
+    "lem-sc-ample-square-zero-thickening",
+    "lem-sc-ample-on-reduction-noetherian",
+    "lem-sc-dim-one-ample-invertible",
+    "lem-sc-dim-one-quasi-projective",
+    "lem-sc-proper-dim-one-projective"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-thm-curveestimate",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.SectionBoundaryExact",
+  "file": "lean/Sheaf/AlgebraicGeometry/SectionBoundaryExact.lean",
+  "declaration": "AlgebraicGeometry.RingedSpace.moduleSectionBoundary_eq_zero_iff",
+  "statement": "theorem moduleSectionBoundary_eq_zero_iff (X : RingedSpace.{u}) [HasDerivedCategory.{wC} (SheafOfModules.{u} (moduleRings X))] [HasDerivedCategory.{wD} (ModuleCat.{u} ((moduleRings X).obj.obj (Opposite.op ⊤)))] (S : ShortComplex (SheafOfModules.{u} (moduleRings X))) (hS : S.ShortExact) (s : (globalSectionsFunctor X).obj S.X₃) : moduleSectionBoundary X S hS s = 0 ↔ ∃ t : (globalSectionsFunctor X).obj S.X₂, (globalSectionsFunctor X).map S.g t = s",
+  "branch": "sheaf-dag",
+  "by": "H2",
+  "date": "2026-10-13",
+  "declarations": [
+   "AlgebraicGeometry.RingedSpace.moduleSectionBoundary",
+   "AlgebraicGeometry.RingedSpace.moduleSectionBoundary_eq_zero_iff"
+  ]
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H2",
+  "result": "pass",
+  "landing": "20261012T225314-L-1807473",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H2",
+  "result": "pass",
+  "landing": "20261012T225314-L-1807473",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

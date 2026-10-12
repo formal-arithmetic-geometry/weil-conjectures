@@ -1,0 +1,160 @@
+{
+ "id": "lem-sc-square-zero-tensor-power-boundary",
+ "kind": "statement",
+ "title": "Canonical square-zero tensor-power boundary formula",
+ "statement": "Let $j:Z\\to X$ be a closed immersion of schemes, $L$ an invertible $\\mathcal O_X$-module, and $I=j.\\ker$ with $I^2=0. For $n\\ge0$ and a global section $s$ of $N=(j^*L)^{\\otimes n}$, put $F=j^*(I\\otimes L^{\\otimes n})$. For each $d$, let $\\eta_d:L^{\\otimes d}\\to j_*j^*(L^{\\otimes d})$ be the canonical tensor-pullback adjunction unit and assume its categorical kernel sequence is short exact. There is $\\xi\\in H^1(Z,F)$ such that for every $e\\ge0$ there are a tensor comparison $a:j^*(L^{\\otimes n(e+1)})\\simeq N^{\\otimes(e+1)}$ and an additive map $b:H^1(Z,F\\otimes N^{\\otimes e})\\to H^1(X,\\ker\\eta_{n(e+1)})$. The canonical section boundary [lem-sc-module-section-boundary-exact] of the section obtained by evaluating $s^{\\otimes(e+1)}\\circ a^{-1}$ on $1$ equals $(e+1)b(H^1(\\rho_F^{-1};\\,\\mathrm{id}_F\\otimes s^{\\otimes e})(\\xi))$. Cohomology is module cohomology [def-sc-ringed-space-module-cohomology], and the boundary is [def-sc-module-cohomology-boundary]. Scheme, closed immersion, ideal, ideal powers, invertibility and tensor pullback are as in [def-pc-scheme], [def-weil-closed-immersion], [def-sbc-closed-immersion-ideal-sheaf], [def-sbc-ideal-sheaf-powers], [def-sc-invertible-module], [def-pc-module-pullback]; the unit is [lem-pc-module-pullback-adjunction].",
+ "stmt_deps": [
+  "def-weil-closed-immersion",
+  "def-pc-scheme",
+  "def-sbc-closed-immersion-ideal-sheaf",
+  "def-sbc-ideal-sheaf-powers",
+  "def-sc-invertible-module",
+  "def-pc-module-pullback",
+  "lem-pc-module-pullback-adjunction",
+  "def-pc-quasi-coherent-sheaf",
+  "def-sc-ringed-space-module-cohomology",
+  "lem-sc-module-section-boundary-exact",
+  "def-sc-module-cohomology-boundary"
+ ],
+ "source": {
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Tag 09MS, equation coherent-equation-ses and its section-power boundary calculation; https://stacks.math.columbia.edu/tag/09MS"
+ },
+ "proof": [
+  {
+   "text": "Put N=j^*L. The closed-immersion ideal sequence tensored by the invertible L^d is exact, with kernel M_d=I tensor L^d and quotient j_*j^*(L^d), by the unit-quotient theorem. Pullback commutes with tensors, so identify the quotient with j_*(N^d). The ideal I and M_d are quasi-coherent, and I M_d=0 because I^2=0. The annihilated-module theorem identifies M_d with j_*G_d, where G_d=j^*M_d is quasi-coherent. The affine-morphism cohomology edge identifies H^1(X,M_d) with H^1(Z,G_d). The given section s of N^n has a connecting class xi in degree n. The given short-exact kernel sequences fix the canonical units and hence their canonical connecting maps; their short-exactness is redundant geometric data, supplied separately by the unit-quotient theorem.",
+   "uses": [
+    "lem-weil-pbc-closed-immersion-unit-quotient",
+    "lem-weil-pbc-closed-immersion-pushforward-annihilated",
+    "lem-weil-pbc-affine-morphism-cohomology-edge",
+    "def-sbc-closed-immersion-ideal-sheaf",
+    "def-sbc-ideal-sheaf-powers",
+    "lem-weil-pbc-invertible-pullback-tensor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Cohomology of Schemes, Lemma 09MS, equation (30.17.5.1) and the square-zero section-power lifting argument; https://stacks.math.columbia.edu/tag/09MS"
+   }
+  },
+  {
+   "text": "Set O'=direct sum over m>=0 of L^{tensor m} and O=direct sum over m>=0 of j_*j^*L^{tensor m}, with multiplication by tensor product. These are sheaves of commutative O_X-algebras: locally a frame for the invertible L identifies O' with a polynomial algebra in one generator, so its multiplication is commutative; the quotient O is commutative too. The degreewise surjection from step 1 gives O' \\to O with kernel K=direct sum over m>=0 of I tensor L^{tensor m}; products of two kernel terms land in I^2 tensor L^{tensor (a+b)}=0. Apply [lem-sc-boundary-derivation-square-zero] to O' \\to O. By naturality of the long exact sequence for inclusion of a degree-m summand and projection onto it, projecting the boundary of the summed sequence to degree m is the boundary of the degree-m exact sequence. Thus the image of s in the degree-n summand has boundary xi. Induct on k>=1: for k=1 this is xi; if partial(s^k)=k s^{k-1}xi, the Leibniz rule gives partial(s^{k+1})=s partial(s^k)+s^k partial(s)=(k+1)s^k xi. Taking k=e+1 gives partial(s^{e+1})=(e+1)s^e xi, where s^e acts through O on K. Identify the ideal-tensor kernel with the categorical kernel of the canonical adjunction unit. The inverse cohomology comparison gives the additive map b from H^1(Z,F tensor N^e) to H^1(X,kernel eta_{n(e+1)}). Transport the canonical derivation identity to that kernel. The canonical boundary is the triangle boundary of [def-sc-module-cohomology-boundary], preceded by the degree-zero sections comparison of [lem-sc-module-section-boundary-exact]. No lifting is asserted.",
+   "uses": [
+    "lem-sc-boundary-derivation-square-zero",
+    "def-sc-module-cohomology-boundary",
+    "lem-sc-module-section-boundary-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Cohomology Lemma 0B8S, boundary derivation"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-closed-immersion-unit-quotient",
+  "lem-weil-pbc-closed-immersion-pushforward-annihilated",
+  "lem-weil-pbc-affine-morphism-cohomology-edge",
+  "def-sbc-closed-immersion-ideal-sheaf",
+  "def-sbc-ideal-sheaf-powers",
+  "lem-weil-pbc-invertible-pullback-tensor",
+  "lem-sc-boundary-derivation-square-zero",
+  "def-sc-module-cohomology-boundary",
+  "lem-sc-module-section-boundary-exact"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Tag 09MS, equation coherent-equation-ses and its section-power boundary calculation; https://stacks.math.columbia.edu/tag/09MS"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The boundary of the tensor power of a section for a square zero ideal equals the exponent times the section power acting on its first cohomology boundary",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A global section of a line bundle on a square zero closed subscheme lifts when its first cohomology obstruction vanishes",
+   "results": "Algebra.Extension.homInfinitesimal and formally smooth extension lemmas in Mathlib/RingTheory/Smooth; no sheaf section-power formula",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "moduleCohomologyBoundary|section_power|boundary_derivation",
+   "results": "msearch: 0 hits. Local repository rg found only the parent section-power modules and BoundaryDerivationSquareZero.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.SquareZeroSectionPowerLiftingCriterion",
+  "date": "2026-10-13",
+  "group": "H2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-pic-proper-ntorsion",
+   "place": "Ample invertible sheaf construction on proper dimension-one schemes: the square-zero section-power boundary and lifting step of Stacks 09MS.",
+   "via": [
+    "lem-sc-square-zero-section-power-obstruction-core",
+    "lem-sc-square-zero-section-power-obstruction",
+    "lem-sc-square-zero-section-power-lift",
+    "lem-sc-square-zero-section-power-locus",
+    "lem-sc-ample-square-zero-thickening",
+    "lem-sc-ample-on-reduction-noetherian",
+    "lem-sc-dim-one-ample-invertible",
+    "lem-sc-dim-one-quasi-projective",
+    "lem-sc-proper-dim-one-projective"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-thm-curveestimate",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.SquareZeroTensorPowerBoundary",
+  "file": "lean/Sheaf/AlgebraicGeometry/SquareZeroTensorPowerBoundary.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.square_zero_tensor_power_boundary",
+  "statement": "theorem square_zero_tensor_power_boundary {X Z : Scheme.{u}} (j : Z ⟶ X) [IsClosedImmersion j] [HasDerivedCategory.{wC} (SheafOfModules.{u} (moduleRings X.toRingedSpace))] [HasDerivedCategory.{wD} (ModuleCat.{u} ((moduleRings X.toRingedSpace).obj.obj (Opposite.op ⊤)))] (L : X.Modules) [L.IsInvertible] (hI : j.ker ^ 2 = ⊥) (n : ℕ) (s : (((tensorPullback j).obj L).tensorPow n).val.presheaf.obj (Opposite.op ⊤)) (hshort : ∀ d : ℕ, (ShortComplex.kernelSequence ((Classical.choose (exists_tensorPullbackAdjunction j)).unit.app (L.tensorPow d))).ShortExact) : let F : Z.Modules := (tensorPullback j).obj (j.ker.toModules ⊗ L.tensorPow n) ∃ xi : (RingedSpace.moduleCohomology Z.toRingedSpace 1).obj F, ∀ e : ℕ, ∃ a : (tensorPullback j).obj (L.tensorPow (n * (e + 1))) ≅ (((tensorPullback j).obj L).tensorPow n).tensorPow (e + 1), ∃ b : (RingedSpace.moduleCohomology Z.toRingedSpace 1).obj (show Z.Modules from F ⊗ (((tensorPullback j).obj L).tensorPow n).tensorPow e) →+ (RingedSpace.moduleCohomology X.toRingedSpace 1).obj (kernel ((Classical.choose (exists_tensorPullbackAdjunction j)).unit.app (L.tensorPow (n * (e + 1))))), RingedSpace.moduleSectionBoundary X.toRingedSpace (ShortComplex.kernelSequence ((Classical.choose (exists_tensorPullbackAdjunction j)).unit.app (L.tensorPow (n * (e + 1))))) (hshort (n * (e + 1))) ((tensorPowSection (homOfGlobalSection (((tensorPullback j).obj L).tensorPow n) s) (e + 1) ≫ a.inv).app ⊤ (1 : Γ(Z, ⊤))) = (e + 1) • b ((RingedSpace.moduleCohomology Z.toRingedSpace 1).map ((ρ_ F).inv ≫ F ◁ tensorPowSection (homOfGlobalSection (((tensorPullback j).obj L).tensorPow n) s) e) xi)",
+  "branch": "sheaf-dag",
+  "by": "H2",
+  "date": "2026-10-13"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H2",
+  "result": "pass",
+  "landing": "20261012T225314-L-1807473",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H2",
+  "result": "pass",
+  "landing": "20261012T225314-L-1807473",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

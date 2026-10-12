@@ -20,60 +20,48 @@
  },
  "proof": [
   {
-   "text": "Put N=j^*L. The closed-immersion ideal sequence tensored by the invertible L^d is exact, with kernel M_d=I tensor L^d and quotient j_*j^*(L^d), by the unit-quotient theorem. Pullback commutes with tensors, so identify the quotient with j_*(N^d). The ideal I and M_d are quasi-coherent, and I M_d=0 because I^2=0. The annihilated-module theorem identifies M_d with j_*G_d, where G_d=j^*M_d is quasi-coherent. The affine-morphism cohomology edge identifies H^1(X,M_d) with H^1(Z,G_d). The given section s of N^n has a connecting class xi in degree n.",
+   "text": "The closed-immersion unit-quotient theorem makes each canonical unit eta_d an epimorphism. Transfer from its recorded adjunction to the adjunction fixed in the statement by uniqueness of left adjoints. Its categorical kernel sequence is therefore short exact.",
    "uses": [
-    "lem-weil-pbc-closed-immersion-unit-quotient",
-    "lem-weil-pbc-closed-immersion-pushforward-annihilated",
-    "lem-weil-pbc-affine-morphism-cohomology-edge",
-    "def-sbc-closed-immersion-ideal-sheaf",
-    "def-sbc-ideal-sheaf-powers",
-    "lem-weil-pbc-invertible-pullback-tensor"
+    "lem-weil-pbc-closed-immersion-unit-quotient"
    ],
-   "elementary": false,
+   "elementary": true,
    "source": {
     "document": "literature/stacks-project/coherent.tex",
-    "place": "Cohomology of Schemes, Lemma 09MS, equation (30.17.5.1) and the square-zero section-power lifting argument; https://stacks.math.columbia.edu/tag/09MS"
+    "place": "Tag 09MS, equation coherent-equation-ses and its section-power boundary calculation; https://stacks.math.columbia.edu/tag/09MS"
    }
   },
   {
-   "text": "Set O'=direct sum over m>=0 of L^{tensor m} and O=direct sum over m>=0 of j_*j^*L^{tensor m}, with multiplication by tensor product. These are sheaves of commutative O_X-algebras: locally a frame for the invertible L identifies O' with a polynomial algebra in one generator, so its multiplication is commutative; the quotient O is commutative too. The degreewise surjection from step 1 gives O' \\to O with kernel K=direct sum over m>=0 of I tensor L^{tensor m}; products of two kernel terms land in I^2 tensor L^{tensor (a+b)}=0. Apply [lem-sc-boundary-derivation-square-zero] to O' \\to O. By naturality of the long exact sequence for inclusion of a degree-m summand and projection onto it, projecting the boundary of the summed sequence to degree m is the boundary of the degree-m exact sequence. Thus the image of s in the degree-n summand has boundary xi. Induct on k>=1: for k=1 this is xi; if partial(s^k)=k s^{k-1}xi, the Leibniz rule gives partial(s^{k+1})=s partial(s^k)+s^k partial(s)=(k+1)s^k xi. Taking k=e+1 gives partial(s^{e+1})=(e+1)s^e xi, where s^e acts through O on K.",
+   "text": "Apply [lem-sc-square-zero-tensor-power-boundary] to obtain xi and, for each e, the tensor comparison a and additive coefficient comparison b. If the displayed cohomology action kills xi, additivity makes b of that action zero, so the canonical boundary of the corresponding section power is zero.",
    "uses": [
-    "lem-sc-boundary-derivation-square-zero"
+    "lem-sc-square-zero-tensor-power-boundary"
    ],
-   "elementary": false,
+   "elementary": true,
    "source": {
-    "document": "literature/stacks-project/cohomology.tex",
-    "place": "Cohomology Lemma 0B8S, boundary derivation"
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Tag 09MS, equation coherent-equation-ses and its section-power boundary calculation; https://stacks.math.columbia.edu/tag/09MS"
    }
   },
   {
-   "text": "For any exponent e annihilating the transported boundary class, naturality identifies the displayed H^1 map with multiplication by s^e. The derivation formula makes the degree n*(e+1) boundary vanish. Exactness then supplies a lift; the tensor-pullback comparisons identify its restriction with the (e+1)st power.",
+   "text": "Apply [lem-sc-module-section-boundary-exact] to obtain a global lifting section t in degree n(e+1). Reconstruct the section morphism from its value on 1 using the unit-Hom equivalence. The lift equality identifies its restriction morphism with the power morphism followed by a inverse; composing with a hom and cancelling a inverse proves exactly the stated equality.",
    "uses": [
-    "lem-weil-pbc-affine-morphism-cohomology-edge",
-    "lem-weil-pbc-invertible-pullback-tensor",
-    "lem-pc-module-pullback-adjunction"
+    "lem-sc-module-section-boundary-exact"
    ],
-   "elementary": false,
+   "elementary": true,
    "source": {
     "document": "literature/stacks-project/coherent.tex",
-    "place": "Cohomology of Schemes, Lemma 09MS, equation (30.17.5.1) and the square-zero section-power lifting argument; https://stacks.math.columbia.edu/tag/09MS"
+    "place": "Tag 09MS, equation coherent-equation-ses and its section-power boundary calculation; https://stacks.math.columbia.edu/tag/09MS"
    }
   }
  ],
  "proof_deps": [
   "lem-weil-pbc-closed-immersion-unit-quotient",
-  "lem-weil-pbc-closed-immersion-pushforward-annihilated",
-  "lem-weil-pbc-affine-morphism-cohomology-edge",
-  "def-sbc-closed-immersion-ideal-sheaf",
-  "def-sbc-ideal-sheaf-powers",
-  "lem-weil-pbc-invertible-pullback-tensor",
-  "lem-sc-boundary-derivation-square-zero",
-  "lem-pc-module-pullback-adjunction"
+  "lem-sc-square-zero-tensor-power-boundary",
+  "lem-sc-module-section-boundary-exact"
  ],
  "proof_origin": {
   "by": "worker",
   "document": "literature/stacks-project/coherent.tex",
-  "place": "R3 second reading: the obstruction-and-lifting conjunct of the tensor exact sequence and boundary calculation in 09MS; the quasi-coherence conjunct is proved separately in the parent using upstream declarations."
+  "place": "H2 reduction: canonical power-boundary formula followed by proved canonical-boundary exactness and section-morphism reconstruction; Tag 09MS."
  },
  "mathlib_searches": [
   {
@@ -148,9 +136,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "R3",
+  "group": "H2",
   "result": "pass",
-  "landing": "20261012T184340-L-4018760",
+  "landing": "20261012T225314-L-1807473",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
