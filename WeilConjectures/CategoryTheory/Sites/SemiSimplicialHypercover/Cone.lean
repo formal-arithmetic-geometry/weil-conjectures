@@ -218,7 +218,8 @@ theorem IsHypercover.coneSieve_mem (hU : U.IsHypercover J) :
     have hh' (l : ℕ) (hl : l ≤ m) : (fun τ ↦ (h l τ).map (g' ≫ ·)) = h' l :=
       (Function.update_of_ne (show l ≠ m + 1 by lia) k fun l τ ↦ (h l τ).map (g' ≫ ·)).symm
     refine ⟨g' ≫ v, h', fun σ hσ ↦ ?_⟩
-    refine ⟨(hy σ hσ).choose, by simp only [h', Function.update_self, k, dif_pos (hy σ hσ)], ?_, fun i ↦ ⟨?_, ?_⟩⟩
+    refine ⟨(hy σ hσ).choose, by simp only [h', Function.update_self, k, dif_pos (hy σ hσ)],
+      ?_, fun i ↦ ⟨?_, ?_⟩⟩
     · rw [(hy σ hσ).choose_spec, coneFamily_last, Category.assoc]
     · obtain ⟨z, hz, -⟩ := (hc' σ hσ i).exists_eq_some
       rw [← hh' m le_rfl, (hy σ hσ).choose_spec, coneFamily_castSucc, hz]
