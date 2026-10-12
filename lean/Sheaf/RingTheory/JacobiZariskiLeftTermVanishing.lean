@@ -7,7 +7,7 @@ module
 
 public import Mathlib.RingTheory.Extension.Cotangent.Basic
 public import Mathlib.LinearAlgebra.TensorProduct.Map
-import WeilConjectures.Mathlib.RingTheory.Flat.Equalizer
+import Mathlib.RingTheory.Flat.Equalizer
 
 /-!
 # Vanishing of the left base-change term of the Jacobi-Zariski sequence
@@ -50,6 +50,23 @@ theorem jacobiZariski_leftTerm_vanishing
       Nonempty ((LinearMap.ker δ) ≃ₗ[B] (H1Cotangent A B ⊗[B] (B ⧸ a))) ∧
       Subsingleton (H1Cotangent A B ⊗[B] (B ⧸ a)) ∧
       Subsingleton (LinearMap.ker δ) := by
-  sorry
+  let P := (Generators.self A B).toExtension
+  -- Zero first homology makes the differential injective before base change.
+  have hδ : Function.Injective P.cotangentComplex :=
+    P.subsingleton_h1Cotangent.mp inferInstance
+  -- Its cokernel is projective, hence flat; apply tensor injectivity directly.
+  have hδtensor : Function.Injective (P.cotangentComplex.rTensor (B ⧸ a)) :=
+    (P.cotangentComplex.lTensor_inj_iff_rTensor_inj (B ⧸ a)).mp
+      (LinearMap.lTensor_injective_of_exact_of_flat P.toKaehler P.toKaehler_surjective
+        P.cotangentComplex hδ P.exact_cotangentComplex_toKaehler (B ⧸ a))
+  have hker : LinearMap.ker (P.cotangentComplex.rTensor (B ⧸ a)) = ⊥ :=
+    LinearMap.ker_eq_bot.mpr hδtensor
+  let : Subsingleton (LinearMap.ker (P.cotangentComplex.rTensor (B ⧸ a))) :=
+    Submodule.subsingleton_iff_eq_bot.mpr hker
+  refine ⟨fun _ _ _ ↦ Subsingleton.elim _ _, ?_,
+    ⟨LinearEquiv.ofSubsingleton _ _⟩, inferInstance, inferInstance⟩
+  rw [hker]
+  apply LinearMap.range_eq_bot.mpr
+  exact Subsingleton.elim _ _
 
 end Algebra

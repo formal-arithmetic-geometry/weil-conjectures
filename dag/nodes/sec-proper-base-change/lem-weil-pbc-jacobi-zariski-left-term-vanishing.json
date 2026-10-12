@@ -28,61 +28,37 @@
  ],
  "proof": [
   {
-   "text": "Write $M=\\operatorname{im}\\delta\\subseteq N_0$. By [def-weil-pbc-smooth-ring-map], $N_0$ is the free $B$-module on the symbols $\\mathrm d[b]$ and $H_1(L_{B/A})=\\ker\\delta$; by [lem-weil-pbc-naive-cotangent-complex-cokernel-kahler], $\\operatorname{coker}\\delta\\cong\\Omega_{B/A}$ via $\\pi:\\mathrm d[b]\\mapsto\\mathrm db$. Hence there are two short exact sequences of $B$-modules $$(E_1)\\quad 0\\to H_1(L_{B/A})\\to N_1\\xrightarrow{\\ \\delta'\\ }M\\to0,\\qquad (E_2)\\quad 0\\to M\\xrightarrow{\\ \\iota\\ }N_0\\xrightarrow{\\ \\pi\\ }\\Omega_{B/A}\\to0,$$ with $\\delta=\\iota\\circ\\delta'$ ($\\delta'$ the corestriction of $\\delta$, $\\iota$ the inclusion).",
+   "text": "For the canonical presentation P, H_1(L_{B/A}) is the kernel of the conormal differential delta. The zero-H_1 hypothesis therefore makes delta injective (Mathlib Algebra.Extension.subsingleton_h1Cotangent). The sequence N_1 -> N_0 -> Omega_{B/A} -> 0 is exact and its last arrow is surjective by [lem-weil-pbc-naive-cotangent-complex-cokernel-kahler]. Consequently 0 -> N_1 -> N_0 -> Omega_{B/A} -> 0 is a short exact sequence.",
    "uses": [
     "def-weil-pbc-smooth-ring-map",
     "lem-weil-pbc-naive-cotangent-complex-cokernel-kahler"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, Lemma Tag 00S2 (lemma-exact-sequence-NL), proof of the final assertion, lines 35467-35485; 'NL_{B/A} = (N^{-1} -> N^0) is a two term complex of B-modules with N^0 free and cohomology modules H^0 = Omega_{B/A} and H^{-1} = H_1(L_{B/A}). Write M for the image of the differential'"
-   }
+   "elementary": false
   },
   {
-   "text": "Flatness of the terms. $\\Omega_{B/A}$ is projective by hypothesis and $N_0$ is free, so both are flat $B$-modules by [lem-weil-pbc-projective-module-flat]. Applying [lem-weil-pbc-flat-ses-kernel-flat] to $(E_2)$ (middle and right terms flat) shows that $M$ is flat.",
+   "text": "Projectivity of Omega_{B/A} gives its flatness by [lem-weil-pbc-projective-module-flat]. Apply [lem-weil-pbc-flat-quotient-tensor-injective] directly to the short exact sequence in the preceding step and the module C = B/a. It follows that id_C tensor delta is injective. Tensor symmetry (Mathlib LinearMap.lTensor_inj_iff_rTensor_inj) gives injectivity of delta tensor id_C. Its kernel is therefore zero. Because H_1 was already zero, there is no need to factor delta through its image, to prove that image flat, or to use freeness of N_0.",
    "uses": [
     "lem-weil-pbc-projective-module-flat",
-    "lem-weil-pbc-flat-ses-kernel-flat"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, Lemma Tag 00S2 (lemma-exact-sequence-NL), proof of the final assertion, lines 35467-35485; Stacks uses Tor_1^B(Omega,C) = 0 and Tor_2^B(Omega,C) = Tor_1^B(M,C) = 0 (dimension shift with N^0 free); with Omega projective these vanish because Omega and M are flat, so the flatness statements Lemma Tag 00HM (lemma-flat-ses, line 9071) and the proof of Lemma Tag 051G (line 24332: projective modules are flat) are used in their place"
-   }
-  },
-  {
-   "text": "Tensoring with $C$. Apply [lem-weil-pbc-flat-quotient-tensor-injective] with $N=C$: to $(E_2)$, whose last term $\\Omega_{B/A}$ is flat, it shows that $\\iota\\otimes\\mathrm{id}_C:M\\otimes_BC\\to N_0\\otimes_BC$ is injective; to $(E_1)$, whose last term $M$ is flat, it shows that $$0\\to H_1(L_{B/A})\\otimes_BC\\to N_1\\otimes_BC\\xrightarrow{\\ \\delta'\\otimes\\mathrm{id}_C\\ }M\\otimes_BC\\to0$$ is exact.",
-   "uses": [
     "lem-weil-pbc-flat-quotient-tensor-injective"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, Lemma Tag 00S2 (lemma-exact-sequence-NL), proof of the final assertion, lines 35467-35485; the two exact sequences 0 -> M (x) C -> N^0 (x) C -> H^0 (x) C -> 0 and 0 -> H^{-1} (x) C -> N^{-1} (x) C -> M (x) C -> 0, with Lemma Tag 00HL (lemma-flat-tor-zero, line 9037) in place of the Tor vanishing"
-   }
+   "elementary": false
   },
   {
-   "text": "Conclusion. Since $\\delta\\otimes\\mathrm{id}_C=(\\iota\\otimes\\mathrm{id}_C)\\circ(\\delta'\\otimes\\mathrm{id}_C)$ and $\\iota\\otimes\\mathrm{id}_C$ is injective, $\\ker(\\delta\\otimes\\mathrm{id}_C)=\\ker(\\delta'\\otimes\\mathrm{id}_C)$, which by the exact sequence of the previous step is the image of the injective map $H_1(L_{B/A})\\otimes_BC\\to N_1\\otimes_BC$. Thus $H_1(\\mathrm{NL}_{B/A}\\otimes_BC)\\cong H_1(L_{B/A})\\otimes_BC$, and this is $0\\otimes_BC=0$ because $H_1(L_{B/A})=0$.",
+   "text": "The tensor H_1(L_{B/A}) tensor_B C is a zero module (Mathlib TensorProduct.uniqueLeft). The tensored kernel inclusion has subsingleton source, hence is injective and is the zero map; its image is the zero submodule, equal to the kernel of the tensored differential by the preceding step. The latter kernel is also subsingleton. Mathlib LinearEquiv.ofSubsingleton supplies the linear equivalence between these two zero modules, establishing every conjunct in the conclusion.",
    "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, Lemma Tag 00S2 (lemma-exact-sequence-NL), proof of the final assertion, lines 35467-35485; 'H^{-1} (x)_B C is the kernel of N^{-1} (x)_B C -> N^0 (x)_B C as desired'"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
   "def-weil-pbc-smooth-ring-map",
   "lem-weil-pbc-flat-quotient-tensor-injective",
-  "lem-weil-pbc-flat-ses-kernel-flat",
   "lem-weil-pbc-naive-cotangent-complex-cokernel-kahler",
   "lem-weil-pbc-projective-module-flat"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/algebra.tex",
-  "place": "Algebra, Lemma Tag 00S2 (lemma-exact-sequence-NL), proof of the final assertion, lines 35467-35485, with the Tor vanishings supplied by flatness (Lemmas Tag 00HL, 00HM)"
+  "place": "Algebra, Lemma Tag 00S2 (lemma-exact-sequence-NL), proof of the final assertion, specialized to H_1 = 0: N_1 identifies with the image of the differential, so the flat-cokernel tensor-injectivity lemma applies directly. Read at https://stacks.math.columbia.edu/tag/00S2; the local literature checkout is absent on this machine."
  },
  "mathlib_searches": [
   {
@@ -170,5 +146,15 @@
   "group": "J1",
   "result": "pass",
   "note": "A->B any ring map (CommRing A B, Algebra A B); H1(L)=0 as Subsingleton (Algebra.H1Cotangent A B = (Generators.self A B).toExtension.H1Cotangent, abbrev); Omega projective as Module.Projective B (KaehlerDifferential A B); C = B/a; NL = cotangentComplex of canonical presentation Generators.self (N1 = I/I^2, N0 = S (x) Omega[A[B]/A] free on d[b]); delta(x)id_C and (ker delta incl)(x)id_C via rTensor; injective + range = ker + iso + both zero; no extra hypotheses, universes independent, no new definitions"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261012T085228-L-10010",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
