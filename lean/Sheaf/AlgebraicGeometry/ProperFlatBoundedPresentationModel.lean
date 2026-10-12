@@ -8,6 +8,8 @@ module
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Sections
+import Sheaf.AlgebraicGeometry.ProperFlatBoundedPresentationModelCore
+import Sheaf.AlgebraicGeometry.ProperFlatBoundedPresentationModelBaseChange
 
 /-! # Bounded perfect cohomology models before lower truncation -/
 
@@ -58,6 +60,11 @@ theorem exists_proper_flat_boundedPresentation_model {X T : Scheme.{u}}
       ∀ {T' X' : Scheme.{u}} (g : T' ⟶ U.toScheme) (g' : X' ⟶ X) (f' : X' ⟶ T')
         [HasInjectiveResolutions X'.Modules], IsPullback g' f' f (g ≫ U.ι) → ∀ q : ℕ,
         Nonempty ((((Modules.pullback g).mapHomologicalComplex _).obj C).homology q ≅
-          (higherDirectImage f' q).obj ((Modules.pullback g').obj F)) := by sorry
+          (higherDirectImage f' q).obj ((Modules.pullback g').obj F)) := by
+  obtain ⟨C, a, b, hge, hle, hflat, hqc, hfp⟩ :=
+    exists_proper_flat_boundedPresentation_model_core f F hF U hU
+  obtain ⟨hneg, hcomp⟩ := proper_flat_boundedPresentation_model_baseChange
+    f F hF U hU C a b hge hle hflat hqc hfp
+  exact ⟨C, a, b, hge, hle, hflat, hqc, hfp, hneg, hcomp⟩
 
 end AlgebraicGeometry.Scheme.Modules
