@@ -20,53 +20,38 @@
  ],
  "proof": [
   {
-   "text": "Choose the standard derived category of A-modules. Scalar restriction is exact and the supplied H is exact. Derive their adjunction using localization of the termwise functors. The derived adjunction counit formula identifies its counit, on L[0], with the single of the underived counit via the canonical exact-functor single comparisons. Additivity of H follows from being right adjoint between additive categories.",
+   "text": "Choose the standard derived category of A-modules. Scalar restriction is exact, and the given H is additive by the underived adjunction. Construct gamma as the inverse exact-composition comparison followed by the derived identity g_*T=f_*.",
    "uses": [
-    "lem-sc-derived-adjunction-from-underived",
-    "def-pc-derived-rhom-algebra-module"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Let G = Rg_*, rho = RT and rhoR = RH, with derived adjunction adjA. Construct gamma : G ⋙ rho ≅ Rf_* from the exact-restriction comparison, the inverse derived-composite comparison, and the identity g_* ⋙ T = f_*. Put J = iX ⋙ G and beta : R ⋙ iY ≅ J ⋙ rho using comparison and gamma.symm. The finite affine derived equivalence makes J fully faithful. Since K is bounded below by eL, finite_scalar_right_adjoint_qcoh puts rhoR(K) in the essential image of J. Define phi as the adjA-transpose of beta.inv.app(a(K)) followed by iY(adj.counit.app K). For every N, composition with phi is bijective by full faithfulness of J and iY and the two adjunction hom equivalences. Choose an isomorphism J(N0) ≅ rhoR(K) from essential image membership; bijectivity supplies a right inverse to phi, and injectivity at a(K) makes it a left inverse. Thus phi is an isomorphism. Its transpose equation gives rho(phi) followed by adjA.counit = gamma.hom followed by comparison.inv followed by the geometric counit, with this same gamma.",
-   "uses": [
-    "lem-sc-finite-affine-derived-equivalence",
-    "lem-sc-finite-scalar-right-adjoint-qcoh"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Construct the canonical g_* single comparison using its right-derived unit. After exact scalar restriction and the same canonical gamma of step 2, its image is the canonical f_* single comparison, invertible by affine_singlePushforward_unit_isIso for the quasi-coherent M. Derived scalar restriction reflects isomorphisms: its cohomology is underived restriction, which reflects isomorphisms through the unchanged underlying abelian sheaf. Hence the g_* single comparison is invertible. Combine it, Rg_*(e0), phi, the derived image of eL, and the exact-H single comparison to obtain an isomorphism from (g_*M)[0] to H(L)[0]. Full faithfulness of singleFunctor over A lifts this isomorphism to j.",
-   "uses": [
-    "lem-sc-affine-single-pushforward-unit-iso",
-    "def-pc-derived-category",
     "def-pc-derived-rhom-algebra-module",
-    "lem-sc-finite-affine-derived-factorization"
+    "lem-sc-derived-adjunction-from-underived"
    ],
    "elementary": false
   },
   {
-   "text": "Use the same canonical gamma constructed in step 2, from g_* followed by T being identically f_*, the exact-restriction right-derived comparison, and the derived-composite comparison. Its localization factorization equations identify the composite of the canonical g_* single comparison with this factorization and exact T single comparison with the canonical f_* single comparison. Apply naturality along e0 and eL. Restrict the lifted morphism to O_Y, use the counit equation of step 2 and the derived-adjunction counit formula of step 1, then use hc to replace the initial canonical f_* single comparison by c.hom. The zero object, empty schemes, and rank-zero A satisfy the same identities.",
+   "text": "The given isomorphism eL makes K bounded below in degree zero. Apply the algebra-linear derived mate theorem with this gamma, obtaining phi and its counit equation.",
    "uses": [
-    "lem-sc-derived-adjunction-from-underived",
-    "lem-sc-finite-affine-derived-factorization"
+    "lem-sc-finite-exact-hom-derived-mate"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Compose G(e0), phi and RH(eL) to form e. Apply canonical single-counit transport to obtain j. Naturality of the derived counit along eL, the phi equation, naturality of gamma along e0 and inverse-hom cancellation give the target equality. This is the proved private helper scalarCounitTransport. Finally hc identifies the initial canonical f_* single comparison with c.hom.",
+   "uses": [
+    "lem-sc-finite-exact-hom-single-counit-transport"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-sc-derived-adjunction-from-underived",
   "def-pc-derived-rhom-algebra-module",
-  "lem-sc-finite-affine-derived-equivalence",
-  "lem-sc-finite-scalar-right-adjoint-qcoh",
-  "lem-sc-affine-single-pushforward-unit-iso",
-  "def-pc-derived-category",
-  "lem-sc-finite-affine-derived-factorization"
+  "lem-sc-derived-adjunction-from-underived",
+  "lem-sc-finite-exact-hom-derived-mate",
+  "lem-sc-finite-exact-hom-single-counit-transport"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "Stacks Project and existing library declarations",
-  "place": "Tag 0AX2, lemma-finite, right-adjoint comparison; Tag 0AX3, remark-trace-map-finite; Tag 0AVW, lemma-affine-morphism; N3 assembly of canonical comparisons"
+  "document": "Stacks Project, Tags 0AX2, 0AX3 and 0AVW, with library derived-adjunction infrastructure",
+  "place": "U3 proved derived-mate and scalar-counit assembly; canonical single transport split off as its own item"
  },
  "mathlib_searches": [
   {
@@ -137,11 +122,11 @@
  "reviewed_proof": {
   "date": "2026-10-12",
   "by": "L",
-  "reviewer": "X-58047",
-  "group": "N3",
+  "reviewer": "COMPILER",
+  "group": "U3",
   "result": "pass",
-  "landing": "20261012T144132-L-2103043",
+  "landing": "20261012T165536-L-2941407",
   "kind": "interface",
-  "note": "independent Codex review: Delivered files match the recorded node statements and compile cleanly, including direct importer FiniteFlatDualityEvaluation; required set_option interface check passes."
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

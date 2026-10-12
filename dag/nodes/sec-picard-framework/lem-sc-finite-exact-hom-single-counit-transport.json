@@ -1,0 +1,131 @@
+{
+ "id": "lem-sc-finite-exact-hom-single-counit-transport",
+ "kind": "statement",
+ "title": "Canonical single-complex transport of the scalar-adjunction counit",
+ "statement": "Let $f:X\\to Y$ be affine [def-pc-scheme], put $A=f_*\\mathcal O_X$, and assume derived module categories of $X,Y,A$ exist [def-pc-derived-category, def-sc-direct-image-algebra-derived-category]. Write $G=Rg_*$ and $T$ for scalar restriction, and assume $T$ is exact. Let $M$ be quasi-coherent on $X$ and $L$ any module on $Y$. Let $H:\\operatorname{Mod}(\\mathcal O_Y)\\to\\operatorname{Mod}(A)$ be additive and exact, with adjunction $T\\dashv H$. Let $\\gamma:D(T)\\circ G\\cong Rf_*$ [def-pc-derived-direct-image] be precisely the inverse exact-composition comparison followed by the derived image of the identity $T\\circ g_*=f_*$. For any isomorphism $e:G(M[0])\\cong RH(L[0])$, there is an isomorphism $j:g_*M\\cong H(L)$ such that $(T(j)\\gg\\varepsilon_{H,L})[0]=c_f(M)\\gg\\gamma_{M[0]}^{-1}\\gg D(T)(e)\\gg\\varepsilon^D_{L[0]}$. Here $c_f(M)$ is the inverse termwise single comparison followed by the right-derived unit, and $\\varepsilon^D$ is the counit of the derived adjunction of $T\\dashv H$.",
+ "source": {
+  "document": "literature/stacks-project/duality.tex; literature/stacks-project/perfect.tex",
+  "place": "Tag 0AVW, lemma-affine-morphism, final pushforward identification; Tag 0AX3, remark-trace-map-finite"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "def-pc-derived-direct-image",
+  "def-sc-direct-image-algebra-derived-category"
+ ],
+ "proof": [
+  {
+   "text": "Form cg from the inverse termwise single comparison and the right-derived unit for g. Its image under exact scalar restriction and the canonical gamma is cf. The affine single-pushforward theorem makes cf invertible. Exact restriction reflects derived isomorphisms because it commutes with cohomology and reflects isomorphisms of underlying abelian sheaves. Hence cg is invertible.",
+   "uses": [
+    "lem-sc-affine-single-pushforward-unit-iso"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Compose cg, e, and the exact-H single comparison, giving an isomorphism of single complexes over A. Full faithfulness of the single functor lifts it uniquely to j. The derived-adjunction counit formula on L[0] and naturality of exact-T single comparison give single(T(j) followed by the underived counit). The localization factorization for the specified gamma changes the initial factors to cf followed by gamma inverse, yielding the displayed equation.",
+   "uses": [
+    "lem-sc-derived-adjunction-from-underived",
+    "def-pc-derived-category"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-affine-single-pushforward-unit-iso",
+  "lem-sc-derived-adjunction-from-underived",
+  "def-pc-derived-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project and existing Lean derived-adjunction infrastructure",
+  "place": "Tag 0AVW, lemma-affine-morphism, final pushforward identification; Tag 0AX3, remark-trace-map-finite; U3 explicit counit-compatible assembly"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "fully faithful single functor exact right adjoint counit derived category",
+   "results": "8 hits: DerivedCategory.instFullSingleFunctor, CategoryTheory.Adjunction.derived'_counit, CategoryTheory.Adjunction.derived_counit, CategoryTheory.Abelian.Ext.mapExactFunctor_hom, CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app, CategoryTheory.Adjunction.derived, CategoryTheory.Functor.mapDerivedCategorySingleFunctor, CategoryTheory.Adjunction.derived'",
+   "date": "2026-10-12",
+   "verdict": "Generic categorical infrastructure; no theorem giving this finite algebra counit comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.rightAdjointUniq",
+   "results": "12 hits: CategoryTheory.Adjunction.rightAdjointUniq, CategoryTheory.Adjunction.rightAdjointUniq_refl, CategoryTheory.Adjunction.rightAdjointUniq_inv_app, CategoryTheory.Adjunction.rightAdjointUniq_hom_counit, CategoryTheory.Adjunction.unit_rightAdjointUniq_hom, CategoryTheory.Adjunction.rightAdjointUniq_trans, CategoryTheory.Adjunction.rightAdjointUniq_trans_app, CategoryTheory.Adjunction.unit_rightAdjointUniq_hom_app",
+   "date": "2026-10-12",
+   "verdict": "Generic categorical infrastructure; no theorem giving this finite algebra counit comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "rightDerivedFunctor.*[Ss]ingle|[Ss]ingle.*rightDerivedFunctor",
+   "results": "0 hits: ",
+   "date": "2026-10-12",
+   "verdict": "Generic categorical infrastructure; no theorem giving this finite algebra counit comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.rightAdjointUniq",
+   "results": "12 hits: CategoryTheory.Adjunction.rightAdjointUniq, CategoryTheory.Adjunction.rightAdjointUniq_refl, CategoryTheory.Adjunction.rightAdjointUniq_inv_app, CategoryTheory.Adjunction.rightAdjointUniq_hom_counit, CategoryTheory.Adjunction.unit_rightAdjointUniq_hom, CategoryTheory.Adjunction.rightAdjointUniq_trans, CategoryTheory.Adjunction.rightAdjointUniq_trans_app, CategoryTheory.Adjunction.unit_rightAdjointUniq_hom_app",
+   "date": "2026-10-12",
+   "verdict": "Generic categorical infrastructure; no theorem giving this finite algebra counit comparison."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An exact right adjoint on derived categories commutes with the single functor and the adjunction counit",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FiniteExactHomDegreeZeroLift",
+  "date": "2026-10-12",
+  "group": "U3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Proof: affine restriction-of-scalars right adjoint and its trace comparison; Tag 0AVW, lemma-affine-morphism, final pushforward identification; Tag 0AX3, remark-trace-map-finite",
+   "via": [
+    "lem-sc-finite-exact-hom-degree-zero-lift"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.FiniteExactHomSingleCounitTransport",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteExactHomSingleCounitTransport.lean",
+  "declaration": "AlgebraicGeometry.finite_exactHom_single_counit_transport",
+  "statement": "theorem finite_exactHom_single_counit_transport\n    {X Y : Scheme.{u}} (f : X ⟶ Y)\n    [HasDerivedCategory.{wX} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]\n    [HasDerivedCategory.{wY} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]\n    [HasDerivedCategory.{wA} (SheafOfModules.{u} (moduleRings (directImageAlgebraSpace f)))]\n    [IsAffineHom f]\n    (M : X.Modules) (hM : M.IsQuasicoherent) (L : Y.Modules)\n    [PreservesFiniteLimits (SheafOfModules.restrictScalars\n      (R := moduleRings Y.toRingedSpace)\n      (R' := moduleRings (directImageAlgebraSpace f)) f.toRingCatSheafHom)]\n    [PreservesFiniteColimits (SheafOfModules.restrictScalars\n      (R := moduleRings Y.toRingedSpace)\n      (R' := moduleRings (directImageAlgebraSpace f)) f.toRingCatSheafHom)]\n    (H : SheafOfModules.{u} (moduleRings Y.toRingedSpace) ⥤\n      SheafOfModules.{u} (moduleRings (directImageAlgebraSpace f)))\n    [H.Additive] [PreservesFiniteLimits H] [PreservesFiniteColimits H]\n    (adjH : SheafOfModules.restrictScalars\n        (R := moduleRings Y.toRingedSpace)\n        (R' := moduleRings (directImageAlgebraSpace f)) f.toRingCatSheafHom ⊣ H)\n    (γ : RingedSpace.derivedModuleDirectImage (toDirectImageAlgebraSpace f) ⋙\n      (SheafOfModules.restrictScalars\n        (R := moduleRings Y.toRingedSpace)\n        (R' := moduleRings (directImageAlgebraSpace f)) f.toRingCatSheafHom).mapDerivedCategory ≅\n        schemeDerivedDirectImage f)\n    (hγ : γ =\n      (Functor.rightDerivedFunctorCompMapDerivedCategoryIso\n        (RingedSpace.moduleDirectImage (toDirectImageAlgebraSpace f))\n        (SheafOfModules.restrictScalars\n        (R := moduleRings Y.toRingedSpace)\n        (R' := moduleRings (directImageAlgebraSpace f)) f.toRingCatSheafHom)).symm ≪≫\n      Functor.rightDerivedFunctorNatIso\n        (show RingedSpace.moduleDirectImage (toDirectImageAlgebraSpace f) ⋙\n          SheafOfModules.restrictScalars\n        (R := moduleRings Y.toRingedSpace)\n        (R' := moduleRings (directImageAlgebraSpace f)) f.toRingCatSheafHom ≅\n          RingedSpace.moduleDirectImage f.toLRSHom.toShHom from Iso.refl _))\n    (e : (RingedSpace.derivedModuleDirectImage (toDirectImageAlgebraSpace f)).obj\n        ((DerivedCategory.singleFunctor\n          (SheafOfModules.{u} (moduleRings X.toRingedSpace)) 0).obj M) ≅\n      H.rightDerivedFunctor.obj ((DerivedCategory.singleFunctor\n        (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) 0).obj L)) :\n    ∃ j : (RingedSpace.moduleDirectImage (toDirectImageAlgebraSpace f)).obj M ≅ H.obj L,\n      (DerivedCategory.singleFunctor\n        (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) 0).map\n          ((SheafOfModules.restrictScalars\n        (R := moduleRings Y.toRingedSpace)\n        (R' := moduleRings (directImageAlgebraSpace f)) f.toRingCatSheafHom).map j.hom ≫\n            adjH.counit.app L) =\n      DerivedCategory.Q.map\n        ((HomologicalComplex.singleMapHomologicalComplex\n          (RingedSpace.moduleDirectImage f.toLRSHom.toShHom) (ComplexShape.up ℤ) 0).inv.app M) ≫\n        (RingedSpace.moduleDirectImage f.toLRSHom.toShHom).rightDerivedFunctorUnit.app\n          ((HomotopyCategory.quotient _ _).obj ((CochainComplex.singleFunctor\n            (SheafOfModules.{u} (moduleRings X.toRingedSpace)) 0).obj M)) ≫\n        γ.inv.app ((DerivedCategory.singleFunctor\n          (SheafOfModules.{u} (moduleRings X.toRingedSpace)) 0).obj M) ≫\n        (SheafOfModules.restrictScalars\n        (R := moduleRings Y.toRingedSpace)\n        (R' := moduleRings (directImageAlgebraSpace f)) f.toRingCatSheafHom).mapDerivedCategory.map\n          e.hom ≫\n        adjH.mapDerivedCategoryRightDerivedAdjunction.counit.app\n          ((DerivedCategory.singleFunctor\n            (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) 0).obj L)",
+  "branch": "sheaf-dag",
+  "by": "U3",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U3",
+  "result": "pass",
+  "landing": "20261012T165536-L-2941407",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U3",
+  "result": "pass",
+  "landing": "20261012T165536-L-2941407",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

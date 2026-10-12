@@ -11,13 +11,11 @@ public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFr
 public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import Sheaf.AlgebraicGeometry.DirectImageAlgebraDerivedCategory
-import Mathlib.CategoryTheory.Functor.Derived.Adjunction
 import Sheaf.AlgebraicGeometry.DerivedRHomAlgebraModule
-import Sheaf.AlgebraicGeometry.FiniteAffineDerivedEquivalence
-import Sheaf.AlgebraicGeometry.FiniteScalarRightAdjointQCoh
-import Sheaf.AlgebraicGeometry.AffineSinglePushforwardUnitIso
-import Sheaf.AlgebraicGeometry.FiniteAffineDerivedFactorization
-import Sheaf.AlgebraicGeometry.DerivedCategory
+
+import Mathlib.CategoryTheory.Adjunction.Additive
+import Sheaf.AlgebraicGeometry.FiniteExactHomDerivedMate
+import Sheaf.AlgebraicGeometry.FiniteExactHomSingleCounitTransport
 
 /-! # Lifting the exact affine right adjoint to degree zero
 Source: Stacks Project, Tags 0AX2, 0AX3 and 0AVW
@@ -31,6 +29,29 @@ open CategoryTheory CategoryTheory.Limits Opposite
 open AlgebraicGeometry
 namespace AlgebraicGeometry
 
+
+private theorem scalarCounitTransport
+    {C A B : Type*} [Category* C] [Category* A] [Category* B]
+    (T : A ⥤ B) (H : B ⥤ A) (ε : H ⋙ T ⟶ 𝟭 B)
+    (G : C ⥤ A) (F : C ⥤ B) (γ : G ⋙ T ≅ F)
+    {x₀ x : C} {k l : B} (e₀ : x₀ ⟶ x) (eL : k ⟶ l)
+    (φ : G.obj x ⟶ H.obj k) (d : F.obj x ⟶ k)
+    (hφ : T.map φ ≫ ε.app k = γ.hom.app x ≫ d) :
+    γ.inv.app x₀ ≫ T.map (G.map e₀ ≫ φ ≫ H.map eL) ≫ ε.app l =
+      F.map e₀ ≫ d ≫ eL := by
+  have hn := ε.naturality eL
+  dsimp only [Functor.comp_map, Functor.id_map] at hn
+  have hg := γ.hom.naturality e₀
+  dsimp only [Functor.comp_map] at hg
+  simp only [Functor.map_comp, Category.assoc]
+  rw [hn, ← Category.assoc (T.map φ), hφ]
+  simp only [Category.assoc]
+  rw [reassoc_of% hg, Iso.inv_hom_id_app_assoc]
+
+-- The retained interface includes iH, but lifting uses only the specified exact adjunction.
+set_option linter.unusedVariables false in
+set_option maxHeartbeats 800000 in
+-- Elaborating the canonical derived comparisons involves large sheaf category instances.
 /-- Lift the derived finite-duality comparison to an isomorphism over the direct-image
 algebra. This statement does not identify the underlying Hom model's evaluation or action.
 Source: Stacks Project, Duality for Schemes, Tags 0AX2 and 0AX3; Tag 0AVW
@@ -114,6 +135,53 @@ theorem finite_exactHom_degreeZero_lift
           ((SheafOfModules.restrictScalars f.toRingCatSheafHom).map j.hom ≫
             adjH.counit.app L) =
         c.hom ≫ (schemeDerivedDirectImage f).map e₀.hom ≫
-          comparison.inv.app (a.obj K) ≫ (adj.counit.app K).hom ≫ eL.hom := by sorry
+          comparison.inv.app (a.obj K) ≫ (adj.counit.app K).hom ≫ eL.hom := by
+  classical
+  let A := SheafOfModules.{u} (moduleRings (directImageAlgebraSpace f))
+  let : HasDerivedCategory A := HasDerivedCategory.standard A
+  let T : A ⥤ SheafOfModules.{u} (moduleRings Y.toRingedSpace) :=
+    SheafOfModules.restrictScalars f.toRingCatSheafHom
+  let F := RingedSpace.moduleDirectImage (toDirectImageAlgebraSpace f)
+  let G := RingedSpace.derivedModuleDirectImage (toDirectImageAlgebraSpace f)
+  let H' : SheafOfModules.{u} (moduleRings Y.toRingedSpace) ⥤ A := H
+  have : PreservesFiniteLimits T := by
+    have : PreservesFiniteLimits
+        (T ⋙ SheafOfModules.toSheaf (moduleRings Y.toRingedSpace)) := by
+      change PreservesFiniteLimits
+        (SheafOfModules.toSheaf (moduleRings (directImageAlgebraSpace f)))
+      infer_instance
+    exact preservesFiniteLimits_of_reflects_of_preserves T
+      (SheafOfModules.toSheaf (moduleRings Y.toRingedSpace))
+  have : PreservesFiniteColimits T := by
+    exact @sheafAlgebraRestrictScalars_preservesFiniteColimits.{u, wY, u + 1} Y
+      (Under.mk (⟨f.c⟩ : Y.sheaf ⟶
+        (TopCat.Sheaf.pushforward CommRingCat f.base).obj X.sheaf))
+      inferInstance (by change HasDerivedCategory A; infer_instance)
+  let adjH' : T ⊣ H' := adjH
+  have : H'.Additive := adjH'.right_adjoint_additive
+  let γ : G ⋙ T.mapDerivedCategory ≅ schemeDerivedDirectImage f :=
+    (Functor.rightDerivedFunctorCompMapDerivedCategoryIso F T).symm ≪≫
+      Functor.rightDerivedFunctorNatIso
+        (show F ⋙ T ≅ RingedSpace.moduleDirectImage f.toLRSHom.toShHom from Iso.refl _)
+  let adjA : T.mapDerivedCategory ⊣ H'.rightDerivedFunctor :=
+    adjH'.mapDerivedCategoryRightDerivedAdjunction
+  have hK : ∃ n : ℤ, K.obj.IsGE n := by
+    refine ⟨0, ?_⟩
+    exact DerivedCategory.TStructure.t.isGE_of_iso eL.symm 0
+  obtain ⟨φ, hφ⟩ := finite_exactHom_derived_mate f R comparison a adj K hK H' adjH' γ
+  let e : G.obj ((DerivedCategory.singleFunctor
+      (SheafOfModules.{u} (moduleRings X.toRingedSpace)) 0).obj M) ≅
+        H'.rightDerivedFunctor.obj ((DerivedCategory.singleFunctor
+          (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) 0).obj L) :=
+    G.mapIso e₀ ≪≫ φ ≪≫ H'.rightDerivedFunctor.mapIso eL
+  obtain ⟨j, hj⟩ := finite_exactHom_single_counit_transport f M _hM L H' adjH' γ rfl e
+  have ht := scalarCounitTransport T.mapDerivedCategory H'.rightDerivedFunctor
+    adjA.counit G (schemeDerivedDirectImage f) γ e₀.hom eL.hom φ.hom
+    (comparison.inv.app (a.obj K) ≫ (adj.counit.app K).hom) hφ
+  refine ⟨j, ?_⟩
+  dsimp only [e, Iso.trans_hom, Functor.mapIso_hom] at hj
+  rw [ht] at hj
+  rw [_hc]
+  simpa only [Category.assoc] using hj
 
 end AlgebraicGeometry
