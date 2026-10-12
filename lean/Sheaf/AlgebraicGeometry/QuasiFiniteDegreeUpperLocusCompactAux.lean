@@ -2,6 +2,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.Morphisms.FiberDegree
 public import Sheaf.AlgebraicGeometry.QuasiFiniteMorphism
+import Sheaf.AlgebraicGeometry.QuasiFiniteDegreeSublevelFiniteEquations
 
 /-! Auxiliary finite-generation conclusion for the successor degree locus. -/
 
@@ -38,6 +39,32 @@ theorem exists_compact_open_successor_degree_locus_inter_affine
     ∃ U : S.Opens, IsCompact (U : Set S) ∧
       (U : Set S) = {s : S | r + 1 ≤ (f.fiberToSpecResidueField s).finrankΓ} ∩
         (W : Set S) := by
-  sorry
+  classical
+  obtain ⟨t, ht⟩ := exists_finite_equations_degree_sublevel_inter_affine
+    f hf r W hW hclosed hdegree hWge
+  let U : S.Opens := ⨆ a ∈ t, S.basicOpen a
+  have hU : (U : Set S) = ⋃ a ∈ t, (S.basicOpen a : Set S) := by
+    simp [U]
+  refine ⟨U, ?_, ?_⟩
+  · rw [hU]
+    exact t.finite_toSet.isCompact_biUnion fun a _ ↦ (hW.basicOpen a).isCompact
+  · rw [hU]
+    ext s
+    simp only [Set.mem_iUnion, Set.mem_inter_iff, Set.mem_ofPred_eq]
+    constructor
+    · rintro ⟨a, ha, hs⟩
+      have hsW : s ∈ W := S.basicOpen_le a hs
+      have hn : ¬ (f.fiberToSpecResidueField s).finrankΓ ≤ r := by
+        intro h
+        exact ((ht s hsW).mp h a ha) hs
+      exact ⟨by omega, hsW⟩
+    · rintro ⟨hs, hsW⟩
+      have hn : ¬ ∀ a ∈ t, s ∉ S.basicOpen a := by
+        intro h
+        have := (ht s hsW).mpr h
+        omega
+      push Not at hn
+      obtain ⟨a, ha, hsa⟩ := hn
+      exact ⟨a, ha, hsa⟩
 
 end AlgebraicGeometry.Scheme.Hom
