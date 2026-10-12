@@ -1,0 +1,100 @@
+{
+ "id": "lem-pc-cech-comparison-system-existence-comparison",
+ "kind": "statement",
+ "title": "Existence of normalized Cech comparison morphisms",
+ "statement": "Let X be a scheme, U an open cover and hcover its covering proof. There exists a family of natural morphisms from Cech cohomology to sheaf cohomology in every degree satisfying the degree-zero normalization.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/01EQ",
+  "place": "Lemmas 20.11.2 and 20.15.1"
+ },
+ "stmt_deps": [
+  "def-pc-cech-comparison-system"
+ ],
+ "proof": [
+  {
+   "text": "Resolve each sheaf by injectives and use the augmented ordered Cech double complex. The injective Cech augmentation is a quasi-isomorphism, so the coefficient augmentation composed with its inverse gives the family; degree zero is the canonical gluing map.",
+   "uses": [
+    "lem-sc-injective-cech-augmentation-quasi-iso"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-injective-cech-augmentation-quasi-iso"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "https://stacks.math.columbia.edu/tag/01EQ",
+  "place": "Augmented ordered Cech double-complex construction"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "existence normalized Cech comparison natural transformations",
+   "results": "No direct match; intermediate obligation stated for this delivery.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cech comparison sheaf cohomology connecting morphism",
+   "results": "No direct match.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "CechComparisonSystem comparison connecting",
+   "results": "Only the target structure and this decomposition.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Cohomology.CechComparisonSystemExistence",
+  "date": "2026-10-13",
+  "group": "W2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-cech-comparison-system-existence",
+   "place": "decomposition of the existence proof"
+  }
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-rr",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Cohomology.CechComparisonSystemComparison",
+  "file": "lean/Sheaf/AlgebraicGeometry/Cohomology/CechComparisonSystemComparison.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.exists_cechComparisonSystem_comparison",
+  "statement": "theorem exists_cechComparisonSystem_comparison\n    {X : Scheme.{u}} {ι : Type u} (U : ι → X.Opens) (hcover : iSup U = ⊤) :\n    ∃ comparison : ∀ q, TopCat.Sheaf.cechCohomologyFunctor U q ⟶\n      Sheaf.functorH (Opens.grothendieckTopology X) q,\n      comparison 0 =\n        (TopCat.Sheaf.cechCohomologyZeroIso U hcover).inv ≫\n          (Sheaf.functorHZeroIso (Opens.grothendieckTopology X) isTerminalTop).inv",
+  "branch": "sheaf-dag",
+  "by": "W2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W2",
+  "result": "pass",
+  "landing": "20261012T194152-L-468714",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W2",
+  "result": "pass",
+  "landing": "20261012T194152-L-468714",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
