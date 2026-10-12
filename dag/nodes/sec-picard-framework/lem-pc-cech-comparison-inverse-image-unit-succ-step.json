@@ -1,0 +1,111 @@
+{
+ "id": "lem-pc-cech-comparison-inverse-image-unit-succ-step",
+ "kind": "statement",
+ "title": "Positive-degree induction step for inverse-image Čech comparison",
+ "statement": "Let g : Y → X be a scheme morphism [def-pc-scheme], U,V open covers with every nonempty V-tuple intersection contained in the preimage of its U-tuple intersection, and c,c′ normalized comparison systems [def-pc-cech-comparison-system]. Let T be any short exact sequence of abelian sheaves on X whose quotient map is surjective on U-tuple sections and whose exact inverse-image quotient map [def-pc-flat-cohomology-comparison] is surjective on V-tuple sections. For q ≥ 0 and y in degree-q Čech cohomology of T.X₃, suppose the unit cochain map [def-pc-cech-inverse-image-cochain-map] commutes with the comparisons on y. Then it commutes with the comparisons in degree q+1 on cechδ(T)(y). No surjectivity of the connecting maps is assumed.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-cech-comparison-system",
+  "def-pc-cech-inverse-image-cochain-map",
+  "def-pc-flat-cohomology-comparison"
+ ],
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/01FD",
+  "place": "Lemma 20.15.1 and Tag 01EQ, compatibility of comparison maps; elementary connecting-map consequence for normalized systems"
+ },
+ "proof": [
+  {
+   "text": "Use naturality of the adjunction-unit cochain map and HomologySequence.δ_naturality to commute the two Čech connecting maps.",
+   "uses": [
+    "def-pc-cech-inverse-image-cochain-map"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the connecting laws for each normalized comparison system, then exact inverse-image functoriality of Ext and associativity to rewrite the sheaf connecting map; substitute the degree-q hypothesis.",
+   "uses": [
+    "def-pc-cech-comparison-system",
+    "def-pc-flat-cohomology-comparison"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-cech-comparison-system",
+  "def-pc-cech-inverse-image-cochain-map",
+  "def-pc-flat-cohomology-comparison"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "https://stacks.math.columbia.edu/tag/01FD",
+  "place": "Elementary connecting-map diagram chase in the relative-effacement induction, written by Q3"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "HomologySequence delta naturality Cech comparison inverse image",
+   "date": "2026-10-13",
+   "results": "no direct match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "HomologySequence.δ_naturality Ext mapFunctor connecting",
+   "date": "2026-10-13",
+   "results": "no direct match"
+  },
+  {
+   "tool": "grep",
+   "query": "cechComparison.*succ_step",
+   "date": "2026-10-13",
+   "results": "no existing declaration"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Cohomology.CechComparisonInverseImageUnit",
+  "date": "2026-10-13",
+  "group": "Q3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-cech-comparison-inverse-image-unit",
+   "place": "Proof, positive-degree induction step"
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-rr",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Cohomology.CechComparisonInverseImageSuccessor",
+  "file": "lean/Sheaf/AlgebraicGeometry/Cohomology/CechComparisonInverseImageSuccessor.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.cechComparison_inverseImage_succ_step",
+  "statement": "theorem cechComparison_inverseImage_succ_step\n    {X Y : Scheme.{u}} {ι : Type u} (g : Y ⟶ X)\n    (U : ι → X.Opens) (V : ι → Y.Opens) (hcover : iSup U = ⊤)\n    (hcover' : iSup V = ⊤)\n    (hinter : ∀ (k : ℕ) (y : Fin (k + 1) → ι),\n      (⨅ l, V (y l)) ≤ g ⁻¹ᵁ (⨅ l, U (y l)))\n    (c : CechComparisonSystem U hcover) (c' : CechComparisonSystem V hcover')\n    (T : ShortComplex (Sheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u}))\n    (hT : T.ShortExact)\n    (hg : ∀ (k : ℕ) (y : Fin (k + 1) → ι),\n      Function.Surjective (T.g.hom.app (op (⨅ l, U (y l)))))\n    (hg' : ∀ (k : ℕ) (y : Fin (k + 1) → ι),\n      Function.Surjective (((invImage g).map T.g).hom.app (op (⨅ l, V (y l)))))\n    (q : ℕ) (y : (TopCat.Sheaf.cechCohomologyFunctor U q).obj T.X₃)\n    (hih : (c'.comparison q).app ((invImage g).obj T.X₃)\n        (HomologicalComplex.homologyMap\n          (cechInverseImageCochainMap g U V hinter T.X₃ ((invImage g).obj T.X₃)\n            ((TopCat.Sheaf.pullbackPushforwardAdjunction AddCommGrpCat.{u} g.base).unit.app\n              T.X₃).hom) q y) =\n      Sheaf.H.mapFunctor (invImage g) (constIso g).symm T.X₃ q\n        ((c.comparison q).app T.X₃ y)) :\n    (c'.comparison (q + 1)).app ((invImage g).obj T.X₁)\n        (HomologicalComplex.homologyMap\n          (cechInverseImageCochainMap g U V hinter T.X₁ ((invImage g).obj T.X₁)\n            ((TopCat.Sheaf.pullbackPushforwardAdjunction AddCommGrpCat.{u} g.base).unit.app\n              T.X₁).hom) (q + 1)\n          (TopCat.Sheaf.cechδ U hT hg q y)) =\n      Sheaf.H.mapFunctor (invImage g) (constIso g).symm T.X₁ (q + 1)\n        ((c.comparison (q + 1)).app T.X₁\n          (TopCat.Sheaf.cechδ U hT hg q y))",
+  "branch": "sheaf-dag",
+  "by": "Q3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q3",
+  "result": "pass",
+  "landing": "20261012T223413-L-1639538",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q3",
+  "result": "pass",
+  "landing": "20261012T223413-L-1639538",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

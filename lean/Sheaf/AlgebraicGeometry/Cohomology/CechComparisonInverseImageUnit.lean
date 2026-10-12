@@ -7,6 +7,9 @@ module
 
 public import Sheaf.AlgebraicGeometry.Cohomology.CechComparisonSystem
 public import Sheaf.AlgebraicGeometry.Cohomology.CechInverseImageCochainMap
+import Sheaf.AlgebraicGeometry.Cohomology.CechCoverRelativeEffacement
+import Sheaf.AlgebraicGeometry.Cohomology.CechInverseImageDegreeZero
+import Sheaf.AlgebraicGeometry.Cohomology.CechComparisonInverseImageSuccessor
 import Sheaf.AlgebraicGeometry.Cohomology.FlatCohomologyComparison
 import Sheaf.CategoryTheory.InjectiveCechAugmentationQuasiIso
 
@@ -70,6 +73,17 @@ theorem cechComparison_inverseImage_unit
             ((TopCat.Sheaf.pullbackPushforwardAdjunction AddCommGrpCat.{u} g.base).unit.app
               F).hom) q x) =
       Sheaf.H.mapFunctor (invImage g) (constIso g).symm F q
-        ((c.comparison q).app F x) := by sorry
+        ((c.comparison q).app F x) := by
+  induction q generalizing F with
+  | zero =>
+    rw [c.zero, c'.zero]
+    exact cechInverseImage_degree_zero g U V hcover hcover' hinter F x
+  | succ q ih =>
+    obtain ⟨T, hF, hT, hg, hg', hsurj⟩ :=
+      exists_cechCoverRelativeEffacement g U V hcover hinter F
+    subst F
+    obtain ⟨y, rfl⟩ := hsurj q x
+    exact cechComparison_inverseImage_succ_step g U V hcover hcover' hinter c c' T hT hg hg' q y
+      (ih T.X₃ y)
 
 end AlgebraicGeometry.Scheme.Modules
