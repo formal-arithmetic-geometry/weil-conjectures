@@ -7756,3 +7756,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 13:52 L: merged deliver/B2/Sheaf.AlgebraicGeometry.ClosedSubsetProperOverBaseUnionPreimage (stage 3; reviewer PASS; first push; landing 20261012T135218-L-1656061 (proof); batch 20261012T135212; modules 1; new nodes 0)
 - 13:52 L: merged deliver/B2/Sheaf.AlgebraicGeometry.ModuleCechComparison (stage 3; reviewer PASS; first push; landing 20261012T135218-L-1656160 (proof); batch 20261012T135212; modules 1; new nodes 0)
 - 13:52 L: merged deliver/B2/Sheaf.AlgebraicGeometry.SupportedPerfectDetectorGluing (stage 3; reviewer PASS; first push; landing 20261012T135218-L-1656293 (interface); batch 20261012T135212; modules 3; new nodes 2)
+- 13:52 L: merged deliver/B2/Sheaf.Topology.ConstantSubsheafLowerImageStalks (stage 3; reviewer PASS; after a return; landing 20261012T135219-L-1656392 (interface); batch 20261012T135212; modules 2; new nodes 1)
