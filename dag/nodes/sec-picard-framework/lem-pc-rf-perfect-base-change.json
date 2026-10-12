@@ -35,46 +35,60 @@
  ],
  "proof": [
   {
-   "text": "By [def-weil-proper-morphism], $f$ is separated and of finite type, hence quasi-compact. The finitely presented $\\mathcal O_X$-module $\\mathcal G$ is quasi-coherent and flat over $S$ by hypothesis. Apply [lem-pc-rf-base-change-flat-module] to $f$ and $\\mathcal G$: for every $g:T\\to S$ it identifies the canonical map $Lg^*Rf_*\\mathcal G\\to Rf_{T,*}\\mathcal G_T$ as an isomorphism.",
+   "text": "Transport the given scheme derived categories to localized open sites by the exact equivalence Scheme.Modules.overEquiv and Mathlib localization transport. Use a dependent function update so the family on S remains the supplied one. The derived tensor unit is the single structure sheaf. On the top open, its degree-zero term is a free rank-one module and its other terms are zero; the singleton coproduct isomorphism and zero retractions prove strict perfectness.",
    "uses": [
-    "def-weil-proper-morphism",
-    "lem-pc-rf-base-change-flat-module"
+    "def-pc-derived-category",
+    "def-pc-perfect-complex"
    ],
-   "elementary": false,
+   "elementary": true,
    "source": {
-    "document": "literature/stacks-project/perfect.tex",
-    "place": "Lemma 36.30.4, Tag 0B91, clause (2), base-change conclusion; properness gives the quasi-compact separated hypotheses"
+    "document": "Stacks Project",
+    "place": "Tags 05RU, 08C4, and 08CM; localization transport via Mathlib Functor.IsLocalization.of_equivalence_source"
    }
   },
   {
-   "text": "Regard $\\mathcal G$ as a complex concentrated in degree $0$ and take $E=\\mathcal O_X$ in [lem-pc-proper-support-perfect-direct-image]. The structure sheaf is perfect: on each affine open it is a free module of rank one in degree $0$ [def-pc-perfect-complex]. The support of $\\mathcal G$ is closed by [lem-weil-pbc-finite-type-module-support-closed], because finite presentation implies finite type. Since $X\\to S$ is proper, $X$ itself is a closed subset proper over $S$ [def-weil-pbc-closed-subset-proper-over-base]; its closed subset $\\operatorname{Supp}(\\mathcal G)$ is proper over $S$ by [lem-weil-pbc-closed-subset-proper-over-base-properties](2). All hypotheses of the cited tensor theorem now hold, and $E\\otimes^L\\mathcal G\\cong\\mathcal G$, since $E=\\mathcal O_X$ is the tensor unit. Its conclusion gives the required perfectness of $Rf_*\\mathcal G$ (and agrees with the base-change map of step 1). This is the specialization used in the proof of Stacks Tag 0B91, clause (2).",
+   "text": "Take K to be G concentrated in degree zero. It is bounded. Its zero terms are finitely presented, by their isomorphism to the free sheaf on no generators, and relatively flat, because their sections are zero modules. Its degree-zero term has these properties by hypothesis. Finite presentation implies quasi-coherence and finite type. The finite-type support theorem makes the support of every term closed. Its reduced induced closed immersion is proper, hence its composition with the proper f is proper. Apply properSupport_perfect_directImage to the perfect tensor unit and K. The left unitor and singleFunctorIsoCompQ identify the resulting direct image with Rf_*(G[0]); compose these isomorphisms with the local perfect witnesses, keeping exactly the original derived category and open-localization family on S.",
    "uses": [
+    "def-weil-proper-morphism",
     "lem-pc-proper-support-perfect-direct-image",
-    "def-pc-perfect-complex",
     "lem-weil-pbc-finite-type-module-support-closed",
-    "def-weil-pbc-closed-subset-proper-over-base",
-    "lem-weil-pbc-closed-subset-proper-over-base-properties"
+    "def-weil-pbc-closed-subset-proper-over-base"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/perfect.tex",
-    "place": "Lemma 36.30.4, Tag 0B91, clause (2)"
+    "document": "Stacks Project",
+    "place": "Tag 0B91, proof of clause (2), applying Tag 0A1H with E=O_X and G in degree zero"
+   }
+  },
+  {
+   "text": "Unpack the comparison c in IsDerivedModuleBaseChangeMap. Index a cover of T by pairs of affine opens V in S and W in T with W contained in g^{-1}(V); the affine basis supplies such a W through every point. For the chosen pullback square, apply canonicalModuleBaseChange_isIso_on_affine_open_of_affine_cases using canonicalModuleBaseChange_isIso_affine_of_isFlatOver as its affine input. Thus the restriction of the particular displayed composite is invertible on each W, for every comparison c satisfying its predicate. Exact open restriction commutes with every homology functor. Under the equivalence with the localized open site, the sheaf-isomorphism open-cover theorem proves invertibility of every homology map. DerivedCategory.isIso_iff then proves invertibility of the original canonical composite.",
+   "uses": [
+    "lem-pc-affine-relatively-flat-canonical-module-base-change",
+    "lem-pc-canonical-module-base-change-affine-locality",
+    "lem-weil-pbc-sheaf-isomorphism-local-open-cover"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "Stacks Project",
+    "place": "Tags 0A1D and 04TN; the affine Cech route of lem-pc-rf-base-change-flat-module"
    }
   }
  ],
  "proof_deps": [
-  "def-weil-proper-morphism",
-  "lem-pc-rf-base-change-flat-module",
-  "lem-pc-proper-support-perfect-direct-image",
+  "def-pc-derived-category",
   "def-pc-perfect-complex",
+  "def-weil-proper-morphism",
+  "lem-pc-proper-support-perfect-direct-image",
   "lem-weil-pbc-finite-type-module-support-closed",
   "def-weil-pbc-closed-subset-proper-over-base",
-  "lem-weil-pbc-closed-subset-proper-over-base-properties"
+  "lem-pc-affine-relatively-flat-canonical-module-base-change",
+  "lem-pc-canonical-module-base-change-affine-locality",
+  "lem-weil-pbc-sheaf-isomorphism-local-open-cover"
  ],
  "proof_origin": {
-  "by": "document",
-  "document": "literature/stacks-project/perfect.tex",
-  "place": "Lemma 36.30.4, Tag 0B91, proof of clause (2), applying Lemma 36.30.1, Tag 0A1H"
+  "by": "agent",
+  "document": "Stacks Project",
+  "place": "Tags 0B91(2), 0A1H, 0A1D and 04TN; Lean specialization and canonical affine-local assembly by H1"
  },
  "mathlib_searches": [
   {
@@ -264,5 +278,15 @@
    "def-pc-morphism-conventions",
    "def-pc-perfect-complex"
   ]
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H1",
+  "result": "pass",
+  "landing": "20261012T202239-L-704356",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
