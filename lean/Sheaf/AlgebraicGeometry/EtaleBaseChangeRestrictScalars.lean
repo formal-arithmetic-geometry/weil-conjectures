@@ -7,6 +7,7 @@ module
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Defs
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.RestrictScalars
 public import Mathlib.CategoryTheory.Comma.Arrow
+import Sheaf.AlgebraicGeometry.EtaleRestrictScalarsExchange
 
 /-!
 # Compatibility of étale base change with restriction of coefficients
@@ -49,7 +50,45 @@ theorem restrictScalars_baseChange_comparison
           (baseChangeHomologyMap Λ' sq q G) =
         baseChangeHomologyMap Λ sq q
           ((Sheaf.restrictScalars T.smallEtaleTopology φ).obj G) ≫ b.hom := by
-  sorry
+  let K := (DerivedCategory.Plus.singleFunctor _ 0).obj G
+  let d := ((Sheaf.restrictScalars T.smallEtaleTopology φ).mapDerivedCategoryPlusSingleFunctor
+    0).symm.app G
+  let A := ((g)_*[ModuleCat.{u + 1} Λ]).rightDerivedFunctorPlus ⋙
+    ((p)^*[ModuleCat.{u + 1} Λ]).mapDerivedCategoryPlus
+  let B := ((e)^*[ModuleCat.{u + 1} Λ]).mapDerivedCategoryPlus ⋙
+    ((h)_*[ModuleCat.{u + 1} Λ]).rightDerivedFunctorPlus
+  let aD := A.mapIso d ≪≫ derivedBaseChangeSourceRestrictScalarsIso φ p g K
+  let bD := B.mapIso d ≪≫ derivedBaseChangeTargetRestrictScalarsIso φ e h K
+  let res := Sheaf.restrictScalars X.smallEtaleTopology φ
+  let bc := baseChange (ModuleCat.{u + 1} Λ) sq.toCommSq
+  let bc' := baseChange (ModuleCat.{u + 1} Λ') sq.toCommSq
+  have wD : aD.hom ≫ res.mapDerivedCategoryPlus.map (bc'.app K) =
+      bc.app _ ≫ bD.hom := by
+    dsimp only [aD, bD, Functor.mapIso_hom, Iso.trans_hom]
+    rw [Category.assoc, derivedBaseChange_restrictScalars_exchange φ sq K]
+    have hd : A.map d.hom ≫ bc.app _ = bc.app _ ≫ B.map d.hom :=
+      bc.naturality d.hom
+    change A.map d.hom ≫ (bc.app _ ≫ _) = _
+    rw [← Category.assoc, hd, Category.assoc]
+  let H := DerivedCategory.Plus.homologyFunctor
+    (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) q
+  let c := res.mapDerivedCategoryPlusHomologyFunctorIso q
+  let a := H.mapIso aD ≪≫ c.symm.app _
+  let b := H.mapIso bD ≪≫ c.symm.app _
+  refine ⟨a, b, ?_⟩
+  have w := congrArg H.map wD
+  simp only [Functor.map_comp] at w
+  have hn : H.map (res.mapDerivedCategoryPlus.map (bc'.app K)) ≫
+      c.inv.app ((((h)_*[ModuleCat.{u + 1} Λ']).rightDerivedFunctorPlus).obj
+        ((((e)^*[ModuleCat.{u + 1} Λ']).mapDerivedCategoryPlus).obj K)) =
+    c.inv.app ((((p)^*[ModuleCat.{u + 1} Λ']).mapDerivedCategoryPlus).obj
+        ((((g)_*[ModuleCat.{u + 1} Λ']).rightDerivedFunctorPlus).obj K)) ≫
+      res.map ((DerivedCategory.Plus.homologyFunctor _ q).map (bc'.app K)) :=
+    c.inv.naturality (bc'.app K)
+  change (H.map aD.hom ≫ c.inv.app _) ≫
+      res.map ((DerivedCategory.Plus.homologyFunctor _ q).map (bc'.app K)) =
+    H.map (bc.app _) ≫ (H.map bD.hom ≫ c.inv.app _)
+  rw [Category.assoc, ← hn, ← Category.assoc, w, Category.assoc]
 
 /-- Restriction of coefficients identifies the degreewise base-change arrows.
 

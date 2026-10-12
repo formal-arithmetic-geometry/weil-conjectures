@@ -1,0 +1,115 @@
+{
+ "id": "lem-sbc-restrict-scalars-derived-exchange",
+ "kind": "statement",
+ "title": "Canonical coefficient comparisons commute with derived exchange",
+ "statement": "Let Λ and Λ′ be commutative rings in Type(u+1), φ:Λ→Λ′ a ring homomorphism, and Y --e→ T, Y --h→ X, T --g→ S, X --p→ S a cartesian square of schemes [sbc-def-base-change-square]. For every K in D⁺(T_et,Λ′), use the canonical endpoint isomorphisms a_K and b_K of [lem-sbc-canonical-restrict-scalars-functor-comparisons]. They satisfy a_K ∘ Res_φ(BC_Λ′(K)) = BC_Λ(Res_φ K) ∘ b_K, where composition is written in Lean order (first a_K), and BC is the actual derived exchange morphism of [sbc-def-base-change-map]. The assertion is solely equality of two morphisms between the already constructed endpoints; it does not assert the existence or invertibility of endpoint comparisons.",
+ "source": {
+  "document": "Stacks Project, Cohomology on Sites",
+  "place": "Remark 21.19.3, Tag 07A7, mate construction; Lemma 21.20.7(3), Tag 0D6J, natural direct-image comparison."
+ },
+ "stmt_deps": [
+  "lem-sbc-canonical-restrict-scalars-functor-comparisons",
+  "sbc-def-base-change-square",
+  "sbc-def-base-change-map"
+ ],
+ "proof": [
+  {
+   "text": "The inverse-image coefficient comparison is the uniqueness isomorphism of two left adjoints of the same direct-image/coextension composite. Its defining identities are compatibility with the units and counits. The derived direct-image coefficient comparison is characterized by compatibility with right-derived units. On injective resolutions this characterization is a sectionwise equality; restricted resolutions compute direct image by acyclicity.",
+   "uses": [
+    "lem-sbc-canonical-restrict-scalars-functor-comparisons"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Transpose both sides under the inverse-image/direct-image adjunction for h. The two transpose expressions first apply the pullback composition comparison for the cartesian square and then e^* of the counit for g. Transporting each factor through the coefficient comparisons gives the same expression: adjunction uniqueness handles the unit and counit factors, and functoriality of exact derivation handles the square comparison. The units used for right derivation commute by their characterization. Injectivity of the hom-set adjunction equivalence yields equality of the two original morphisms.",
+   "uses": [
+    "lem-sbc-canonical-restrict-scalars-functor-comparisons"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sbc-canonical-restrict-scalars-functor-comparisons"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "Stacks Project, Cohomology on Sites",
+  "place": "Remark 21.19.3, Tag 07A7, mate construction; Lemma 21.20.7(3), Tag 0D6J, natural direct-image comparison."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Restriction of coefficient scalars commutes with adjunction units, counits and derived base change",
+   "results": "Service unavailable: Internal Server Error",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction of coefficient scalars commutes with adjunction units, counits and derived base change",
+   "results": "ModuleCat.extendRestrictScalarsAdj and its unit/counit; no sheaf derived exchange compatibility.",
+   "date": "2026-10-12",
+   "verdict": "Related results only; no matching sheaf coefficient comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "restrictScalars.*baseChange|baseChange.*restrictScalars|restrictScalars.*mate",
+   "results": "Only tensor/module base-change results in Mathlib; no derived sheaf exchange compatibility.",
+   "date": "2026-10-12",
+   "verdict": "No matching sheaf coefficient comparison."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleBaseChangeRestrictScalars",
+  "date": "2026-10-12",
+  "group": "V1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-thm-smooth-base-change",
+   "place": "Reduction of sheaves annihilated by an integer to quotient coefficient rings; coefficient-independent inverse/direct images and compatibility of their exchange maps.",
+   "via": [
+    "lem-sbc-base-change-restrict-scalars-comparison",
+    "lem-sbc-base-change-restrict-scalars-arrow",
+    "lem-sbc-quotient-coefficients-base-change"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-thm-smooth-base-change",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleRestrictScalarsExchange",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleRestrictScalarsExchange.lean",
+  "declaration": "AlgebraicGeometry.Etale.derivedBaseChange_restrictScalars_exchange",
+  "statement": "theorem derivedBaseChange_restrictScalars_exchange {Λ Λ' : Type (u + 1)} [CommRing Λ] [CommRing Λ'] (φ : Λ →+* Λ') {X S T Y : Scheme.{u}} {p : X ⟶ S} {g : T ⟶ S} {e : Y ⟶ T} {h : Y ⟶ X} (sq : IsPullback e h g p) (K : DerivedCategory.Plus (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ'))) : (derivedBaseChangeSourceRestrictScalarsIso φ p g K).hom ≫ (Sheaf.restrictScalars X.smallEtaleTopology φ).mapDerivedCategoryPlus.map ((baseChange (ModuleCat.{u + 1} Λ') sq.toCommSq).app K) = (baseChange (ModuleCat.{u + 1} Λ) sq.toCommSq).app ((Sheaf.restrictScalars T.smallEtaleTopology φ).mapDerivedCategoryPlus.obj K) ≫ (derivedBaseChangeTargetRestrictScalarsIso φ e h K).hom",
+  "branch": "sheaf-dag",
+  "by": "V1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V1",
+  "result": "pass",
+  "landing": "20261012T070556-L-3479336",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V1",
+  "result": "pass",
+  "landing": "20261012T070556-L-3479336",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

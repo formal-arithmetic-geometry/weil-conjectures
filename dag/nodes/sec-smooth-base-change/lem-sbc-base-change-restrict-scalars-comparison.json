@@ -23,21 +23,35 @@
  ],
  "proof": [
   {
-   "text": "Construct the comparison on inverse images and direct images sectionwise, then pass to derived direct images using an injective resolution; restriction of scalars is exact and preserves the relevant acyclicity.",
-   "uses": [],
+   "text": "Construct canonical source and target isomorphisms on bounded below derived categories from the inverse-image comparison and inverse direct-image comparison. Place the Λ′-sheaf G in degree zero, and transport from the degree-zero inclusion of Res_φ G using mapDerivedCategoryPlusSingleFunctor.",
+   "uses": [
+    "lem-sbc-canonical-restrict-scalars-functor-comparisons"
+   ],
    "elementary": false
   },
   {
-   "text": "Compatibility with the adjunction units and counits identifies the resulting source and target comparisons with the base-change map, yielding the stated commutative square.",
-   "uses": [],
+   "text": "Use the canonical derived exchange equality, then naturality of the Λ-base-change transformation for the degree-zero coefficient isomorphism, to obtain the derived commutative square.",
+   "uses": [
+    "lem-sbc-restrict-scalars-derived-exchange"
+   ],
    "elementary": false
+  },
+  {
+   "text": "Apply the degree-q homology functor to the endpoint isomorphisms and commutative square. Compose with the inverse of mapDerivedCategoryPlusHomologyFunctorIso. Naturality of this last isomorphism transports the equality to the restricted-scalar homology map. This produces the two existential witnesses and the required equality for every integer q.",
+   "uses": [
+    "lem-sbc-canonical-restrict-scalars-functor-comparisons"
+   ],
+   "elementary": true
   }
  ],
- "proof_deps": [],
+ "proof_deps": [
+  "lem-sbc-canonical-restrict-scalars-functor-comparisons",
+  "lem-sbc-restrict-scalars-derived-exchange"
+ ],
  "proof_origin": {
-  "by": "agent",
+  "by": "worker",
   "document": "lean/Sheaf/AlgebraicGeometry/EtaleBaseChangeRestrictScalars.lean",
-  "place": "Intermediate comparison theorem used to assemble the arrow isomorphism"
+  "place": "Canonical derived endpoint comparisons, single-functor transport, exchange equality and homology naturality; V1 stage 3."
  },
  "mathlib_searches": [
   {
@@ -127,10 +141,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "A2",
+  "group": "V1",
   "result": "pass",
-  "landing": "20261012T053917-L-2628206",
-  "kind": "proof",
+  "landing": "20261012T070556-L-3479336",
+  "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
