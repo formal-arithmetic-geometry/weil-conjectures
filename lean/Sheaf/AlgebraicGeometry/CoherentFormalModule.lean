@@ -78,6 +78,18 @@ Source: Stacks, Section 0EHN (blueprint: def-weil-pbc-coherent-formal-module). -
 abbrev CoherentFormalModule (X : Scheme.{u}) [IsNoetherian X] (I : X.IdealSheafData) :=
   (IsCoherentFormalModule I).FullSubcategory
 
+/-- A map carries the product by the m-th ideal power into the product by the n-th
+ideal power when n ≤ m, hence factors through that product inclusion.
+Source: Stacks Project, Cohomology of Schemes, Section 0EHN, equation 0880
+(blueprint: lem-weil-pbc-formal-module-ideal-power-factor). -/
+theorem formalModuleQuotient_factor {X : Scheme.{u}} (I : X.IdealSheafData)
+    {F G : X.Modules} (f : F ⟶ G) {m n : ℕ} (h : n ≤ m) :
+    ∃ k : Scheme.idealModuleProduct (Scheme.idealSheafPower I.toModulesι m).2 F ⟶
+        Scheme.idealModuleProduct (Scheme.idealSheafPower I.toModulesι n).2 G,
+      Scheme.idealModuleProductι (Scheme.idealSheafPower I.toModulesι m).2 F ≫ f =
+        k ≫ Scheme.idealModuleProductι (Scheme.idealSheafPower I.toModulesι n).2 G := by
+  sorry
+
 /-- Linear maps preserve ideal products; inclusion of powers for n ≤ m gives the
 factorization needed for the canonical quotient map. Proof: node steps 1--3: on affine
 opens u sends each sum a_i s_i to the sum a_i u(s_i); I^m F is contained in I^n F.
@@ -87,7 +99,14 @@ theorem formalModuleQuotient_map_zero {X : Scheme.{u}} (I : X.IdealSheafData)
     {F G : X.Modules} (f : F ⟶ G) {m n : ℕ} (h : n ≤ m) :
     Scheme.idealModuleProductι (Scheme.idealSheafPower I.toModulesι m).2 F ≫
       f ≫ formalModuleQuotientπ I n G = 0 := by
-  sorry
+  obtain ⟨k, hk⟩ := formalModuleQuotient_factor I f h
+  calc
+    _ = (k ≫ Scheme.idealModuleProductι
+      (Scheme.idealSheafPower I.toModulesι n).2 G) ≫
+      formalModuleQuotientπ I n G := by
+        rw [← hk]
+        simp only [Category.assoc]
+    _ = 0 := by simp [formalModuleQuotientπ]
 
 /-- Reduction of a linear map from level m to level n, n ≤ m, by the cokernel property.
 Source: Stacks, equation 0880 (blueprint: def-weil-pbc-coherent-formal-module). -/

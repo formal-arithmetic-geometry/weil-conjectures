@@ -1,0 +1,98 @@
+{
+ "id": "lem-weil-pbc-formal-module-ideal-power-factor",
+ "kind": "lemma",
+ "title": "Ideal-power product maps factor through lower powers",
+ "statement": "For a scheme X, ideal sheaf I, map f : F ⟶ G, and n ≤ m, the composite of the inclusion I^m F ⟶ F with f factors through the inclusion I^n G ⟶ G.",
+ "source": {
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Section 0EHN, equation 0880, construction of reduction maps"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-ideal-module-product-stalk"
+ ],
+ "proof": [
+  {
+   "text": "On affine opens, I^m F is contained in I^n F for n ≤ m and f carries I^n F into I^n G. The induced factorization through the image defining I^n G is compatible with restriction, hence glues to a morphism of sheaves.",
+   "uses": [
+    "def-weil-pbc-ideal-module-product-stalk"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-ideal-module-product-stalk"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Section 0EHN, equation 0880"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "factorization of ideal power module inclusion through lower ideal power product",
+   "results": "no match",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "idealModuleProductι",
+   "results": "no match",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg idealModuleProduct factorization in Mathlib and library",
+   "results": "no existing theorem",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.CoherentFormalModule",
+  "date": "2026-10-12",
+  "group": "V3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": "def-weil-pbc-coherent-formal-module"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.CoherentFormalModule",
+  "file": "lean/Sheaf/AlgebraicGeometry/CoherentFormalModule.lean",
+  "declaration": "AlgebraicGeometry.formalModuleQuotient_factor",
+  "statement": "theorem formalModuleQuotient_factor {X : Scheme.{u}} (I : X.IdealSheafData)\n    {F G : X.Modules} (f : F ⟶ G) {m n : ℕ} (h : n ≤ m) :\n    ∃ k : Scheme.idealModuleProduct (Scheme.idealSheafPower I.toModulesι m).2 F ⟶\n        Scheme.idealModuleProduct (Scheme.idealSheafPower I.toModulesι n).2 G,\n      Scheme.idealModuleProductι (Scheme.idealSheafPower I.toModulesι m).2 F ≫ f =\n        k ≫ Scheme.idealModuleProductι (Scheme.idealSheafPower I.toModulesι n).2 G",
+  "branch": "sheaf-dag",
+  "by": "V3",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V3",
+  "result": "pass",
+  "landing": "20261012T144155-L-2110629",
+  "kind": "proof",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V3",
+  "result": "pass",
+  "landing": "20261012T144155-L-2110629",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
