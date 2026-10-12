@@ -8325,3 +8325,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 15:19 L: merged deliver/R2/Sheaf.AlgebraicGeometry.GeometricallyConnectedFiniteSeparableTest (stage 3; reviewer PASS; first push; landing 20261012T151913-L-2290528 (interface); batch 20261012T151904; modules 2; new nodes 1)
 - 15:19 L: merged deliver/R3/Sheaf.AlgebraicGeometry.QuotientFibreLimitTransfer (stage 3; reviewer PASS; first push; landing 20261012T151913-L-2290637 (proof); batch 20261012T151904; modules 1; new nodes 0)
 - 15:19 L: merged deliver/T2/Sheaf.LinearAlgebra.IdempotentCharpolyLocalCharpoly (stage 3; reviewer PASS; after a return; landing 20261012T151914-L-2290758 (proof); batch 20261012T151904; modules 1; new nodes 0)
+- 15:19 L: merged deliver/W3/Sheaf.ConstructibleSheaf.TorsorEquivariantModuleDiagonalEvaluation (stage 3; reviewer PASS; first push; landing 20261012T151914-L-2290910 (proof); batch 20261012T151904; modules 1; new nodes 0)

@@ -21,11 +21,23 @@
  ],
  "proof": [
   {
-   "text": "Proof: Compose the torsor isomorphism with interchange of the two factors.\nThis identifies c.P times_V c.P with the disjoint union, indexed by the group,\nof copies of c.P, whose g-th component is (identity, g times identity). Given a\nvalue n, prescribe on this component the constant value rho(g)n. These\nfunctions are locally constant on the disjoint union; transport them across the\nisomorphism to the double overlap. The second factor action by h carries\ncomponent g to component hg. The representation identity rho(hg)n =\nrho(h)(rho(g)n) proves equivariance. On the identity component, which is the\ndiagonal, the value is rho(1)n = n. Thus the section has the requested value at\nthe diagonal point. No connectedness or nonzero module hypothesis is needed,\nand the construction works for the trivial group.",
+   "text": "Compose the defining torsor coproduct isomorphism with pullback symmetry. Its g component j(g) is (identity, smul(g)). Every overlap point lies in such a component. Applying the inverse isomorphism and sigmaι_eq_iff proves its component label is unique.",
    "uses": [
     "def-weil-pbc-torsor-associated-module"
    ],
    "elementary": false
+  },
+  {
+   "text": "The fiber of the component label g is the inverse image under the inverse torsor isomorphism of the open range of the g coproduct injection. Hence the label is locally constant. Postcompose it with g ↦ rho(g.down)n to construct a section for each n.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "Pullback hom_ext and mul_smul show j(g) followed by sectionAction(h) equals j(hg). The representation identity rho(hg)=rho(h) composed with rho(g) proves equivariance. The identity component equals the diagonal and rho(1)n=n, proving evaluation is surjective.",
+   "uses": [
+    "def-weil-pbc-torsor-associated-module"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
@@ -34,7 +46,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Tags 0DV5 (3), 0DV6, 0A3R, 04TR and 04TS"
+  "place": "Tags 0DV5 (3), 0DV6 and 0A3R; W3 direct Lean implementation of the existing componentwise construction"
  },
  "mathlib_searches": [
   {
@@ -108,11 +120,11 @@
  "reviewed_proof": {
   "date": "2026-10-12",
   "by": "L",
-  "reviewer": "X-9cf2f",
-  "group": "N1",
+  "reviewer": "COMPILER",
+  "group": "W3",
   "result": "pass",
-  "landing": "20261012T135257-L-1679505",
-  "kind": "interface",
-  "note": "independent Codex review: Matched the unchanged fullness signature and implemented proof with its node, all three helper signatures and proofs in words with their nodes, and the earlier repairs; all four delivered modules and the sole direct importer compile cleanly, with only allowed axioms and expected sorryAx."
+  "landing": "20261012T151914-L-2290910",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
