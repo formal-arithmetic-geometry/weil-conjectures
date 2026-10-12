@@ -34,7 +34,8 @@ namespace CategoryTheory.Cat
 Proof: write an arrow as its source, target and morphism; the identity preserves all three. -/
 theorem arrows_map_id (C : Cat.{v, u}) :
     (fun a : Arrow C ↦ Arrow.mk ((𝟭 C).map a.hom)) = id := by
-  sorry
+  funext a
+  simp
 
 /-- Source: Stacks Project, Sites, proof of Tag 09YL
 (blueprint: def-weil-pbc-arrows-functor). Composition acts by successive arrow maps.
@@ -44,7 +45,8 @@ theorem arrows_map_comp {C D E : Cat.{v, u}} (f : C ⟶ D) (g : D ⟶ E) :
     (fun a : Arrow C ↦ Arrow.mk ((f ≫ g).toFunctor.map a.hom)) =
       (fun a : Arrow D ↦ Arrow.mk (g.toFunctor.map a.hom)) ∘
         (fun a : Arrow C ↦ Arrow.mk (f.toFunctor.map a.hom)) := by
-  sorry
+  funext a
+  rfl
 
 /-- Source: Stacks Project, Sites, proof of Tag 09YL
 (blueprint: def-weil-pbc-arrows-functor). A category is sent to the set of all its arrows,
