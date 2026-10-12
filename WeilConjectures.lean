@@ -772,6 +772,7 @@ public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.Curve
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.DetWeightExterior
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.DetWeightOperations
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.DetWeights
+public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.EulerRadius
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.FundamentalGroup
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.Jacobian
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.LFunction
