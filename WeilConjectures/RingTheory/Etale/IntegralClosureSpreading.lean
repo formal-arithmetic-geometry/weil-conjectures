@@ -218,11 +218,14 @@ private lemma etale_integralClosure_of_subalgebra (L₀ : Subalgebra B L) [Modul
   have hb : IsUnit (algebraMap B B' (algebraMap R B a)) :=
     IsLocalization.Away.algebraMap_isUnit _
   let E := Algebra.adjoin B' (L₀ : Set L)
-  have hL0E : L₀ ≤ E.restrictScalars B := fun x hx ↦ Algebra.subset_adjoin hx
+  have hL0E : L₀ ≤ E.restrictScalars B := fun x hx ↦
+    (Subalgebra.mem_restrictScalars B).2 (Algebra.subset_adjoin (R := B') hx)
   have hEint : E ≤ integralClosure B' L := by
     refine Algebra.adjoin_le fun x hx ↦ ?_
-    have : IsIntegral B (⟨x, hx⟩ : L₀) := Algebra.IsIntegral.isIntegral _
-    exact (this.map L₀.val).tower_top
+    have : IsIntegral B (⟨x, hx⟩ : L₀) :=
+      (Algebra.IsIntegral.of_finite B L₀).isIntegral _
+    have h2 : IsIntegral B x := this.map L₀.val
+    exact (show IsIntegral B' x from h2.tower_top)
   let ι : L₀ →ₐ[B] E := Subalgebra.inclusion hL0E
   let : Algebra L₀ E := ι.toRingHom.toAlgebra
   have : IsScalarTower B L₀ E := .of_algebraMap_eq fun b ↦ (ι.commutes b).symm
@@ -236,8 +239,9 @@ private lemma etale_integralClosure_of_subalgebra (L₀ : Subalgebra B L) [Modul
     refine IsLocalization.of_injective _ ?_ (Subalgebra.inclusion_injective hL0E) fun y ↦ ?_
     · rintro _ ⟨n, rfl⟩
       rw [map_pow]; exact hrE.pow n
-    · obtain ⟨k, hk⟩ : ∃ k : ℕ, r ^ k * y.1 ∈ L₀ := by
-        induction y.2 using Algebra.adjoin_induction with
+    · obtain ⟨y, hy⟩ := y
+      obtain ⟨k, hk⟩ : ∃ k : ℕ, r ^ k * y ∈ L₀ := by
+        induction hy using Algebra.adjoin_induction with
         | mem x hx => exact ⟨0, by simpa using hx⟩
         | algebraMap x =>
           obtain ⟨n, b, hnb⟩ := IsLocalization.Away.surj (algebraMap R B a) x
@@ -266,8 +270,8 @@ private lemma etale_integralClosure_of_subalgebra (L₀ : Subalgebra B L) [Modul
       simp [ι, m, r]
       rfl
   have : Algebra.Etale B E :=
-    .of_equiv ((IsLocalization.algEquiv (Submonoid.powers m) (Localization.Away m) E).restrictScalars
-      B)
+    .of_equiv ((IsLocalization.algEquiv (Submonoid.powers m) (Localization.Away m)
+      E).restrictScalars B)
   have : Algebra.Etale B B' := .of_isLocalizationAway (algebraMap R B a)
   have : Algebra.Etale B' E := .of_restrictScalars B B' E
   let : Algebra R E := ((algebraMap B E).comp (algebraMap R B)).toAlgebra
@@ -282,7 +286,7 @@ private lemma etale_integralClosure_of_subalgebra (L₀ : Subalgebra B L) [Modul
   have hbot := integralClosure_eq_bot_of_smooth_of_isLocalization (R := R) (E := E) (L := L)
   have hEq : integralClosure B' L = E := by
     refine le_antisymm (fun x hx ↦ ?_) hEint
-    have hx' : IsIntegral E x := IsIntegral.tower_top hx
+    have hx' : IsIntegral E x := (show IsIntegral B' x from hx).tower_top
     have : x ∈ integralClosure E L := hx'
     rw [hbot] at this
     obtain ⟨y, rfl⟩ := this
