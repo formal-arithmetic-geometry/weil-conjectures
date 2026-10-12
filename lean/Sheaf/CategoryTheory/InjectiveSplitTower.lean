@@ -7,6 +7,7 @@ module
 
 public import Mathlib.Algebra.Category.Grp.Abelian
 public import Mathlib.CategoryTheory.Preadditive.Injective.Basic
+import Sheaf.CategoryTheory.InjectiveSplitTowerExtension
 
 /-!
 # Injectivity of split towers of injective abelian groups
@@ -43,6 +44,8 @@ theorem injective_of_injective_split_tower (I : ℕᵒᵖ ⥤ AddCommGrpCat.{u})
     (hI : ∀ n : ℕ, Injective (I.obj (Opposite.op n)))
     (hp : ∀ n : ℕ, IsSplitEpi (I.map (homOfLE (Nat.le_add_right n 1)).op)) :
     Injective I := by
-  sorry
+  constructor
+  intro A B g f inst
+  exact injective_split_tower_extension I hI hp f g
 
 end CategoryTheory
