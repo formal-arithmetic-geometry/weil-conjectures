@@ -7115,3 +7115,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 08:53 L: merged deliver/W2/Sheaf.AlgebraicGeometry.ArtinSchreierDataConstruction (stage 3; reviewer PASS; first push; landing 20261012T085357-L-46579 (interface); batch 20261012T085205; modules 2; new nodes 1)
 - 08:53 L: merged deliver/W2/Sheaf.AlgebraicGeometry.DerivedDirectImageBoundedBelowQCoh (stage 3; reviewer PASS; first push; landing 20261012T085357-L-46675 (proof); batch 20261012T085205; modules 1; new nodes 0)
 - 08:53 L: merged deliver/W2/Sheaf.AlgebraicGeometry.EtaleComplexGradedClassDescent (stage 3; reviewer PASS; first push; landing 20261012T085357-L-46770 (interface); batch 20261012T085205; modules 2; new nodes 1)
+- 08:53 L: merged deliver/W2/Sheaf.AlgebraicGeometry.OpenModuleCohomologyComparison (stage 3; reviewer PASS; first push; landing 20261012T085358-L-46867 (proof); batch 20261012T085205; modules 1; new nodes 0)
