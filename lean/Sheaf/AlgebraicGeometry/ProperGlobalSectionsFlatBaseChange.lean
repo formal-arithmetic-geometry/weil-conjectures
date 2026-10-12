@@ -8,7 +8,7 @@ module
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.AlgebraicGeometry.Pullbacks
 public import Mathlib.RingTheory.Flat.Basic
-import WeilConjectures.AlgebraicGeometry.Cohomology.EulerChar
+import WeilConjectures.AlgebraicGeometry.Sites.EtaleTopologicalInvariance.GlobalSections
 
 /-!
 # Flat base change for global sections of a proper scheme
@@ -35,13 +35,13 @@ then so is the canonical map `S → Γ(X ×_{Spec R} Spec S, ⊤)`.
 Source: Stacks Project, Lemma 30.5.2 (Tag 02KH), specialized to a proper morphism and
 `i = 0` (blueprint: lem-weil-pbc-stein-flat-base-change-global-sections).
 
-Proof: Apply `lem-pc-flat-base-change-cohom` to the square defined by `f` and
-`Spec.map (CommRingCat.ofHom (algebraMap R S))`, with the quasi-coherent structure sheaf.
-Properness implies quasi-compactness and quasi-separatedness. The pullback of the
-structure sheaf is the structure sheaf of the pullback scheme, and in degree zero the
-theorem says the canonical comparison `H^0(X, O_X) ⊗_R S → H^0(X_U, O_{X_U})` is an
-isomorphism. If `H^0(X, O_X) = R`, the tensor identity `R ⊗[R] S ≅ S` gives the final
-clause. -/
+Proof: Properness makes X quasi-compact and quasi-separated. Apply the proved
+`isPushout_appTop_of_flat` to f and the flat morphism Spec S → Spec R. This is the
+degree-zero flat-base-change theorem of Mathlib, specialized to the top opens.
+If GammaSpecIso.inv followed by f.appTop is an isomorphism, cancel GammaSpecIso.inv
+to see that f.appTop is an isomorphism. The opposite arrow of the pushout is then
+an isomorphism by IsPushout.isIso_inr_of_isIso, and composition with GammaSpecIso.inv
+over S gives the final clause. -/
 theorem Scheme.Hom.globalSections_flat_base_change
     {R S : Type u} [CommRing R] [CommRing S] [Algebra R S] [Module.Flat R S]
     {X : Scheme.{u}} (f : X ⟶ Spec (.of R)) [IsProper f] :
@@ -51,6 +51,17 @@ theorem Scheme.Hom.globalSections_flat_base_change
       (IsIso ((Scheme.ΓSpecIso (.of R)).inv ≫ f.appTop) →
         IsIso ((Scheme.ΓSpecIso (.of S)).inv ≫
           (pullback.snd f (Spec.map (CommRingCat.ofHom (algebraMap R S)))).appTop)) := by
-  sorry
+  have : CompactSpace X := QuasiCompact.compactSpace_of_compactSpace f
+  have : QuasiSeparatedSpace X := quasiSeparatedSpace_of_quasiSeparated f
+  have : Flat (Spec.map (CommRingCat.ofHom (algebraMap R S))) :=
+    Flat.SpecMap_iff.mpr (RingHom.flat_algebraMap_iff.mpr inferInstance)
+  have h := isPushout_appTop_of_flat
+    (Spec.map (CommRingCat.ofHom (algebraMap R S))) f
+  refine ⟨h, ?_⟩
+  intro hi
+  have : IsIso f.appTop := by
+    exact (isIso_comp_left_iff (Scheme.ΓSpecIso (.of R)).inv f.appTop).mp hi
+  have := h.isIso_inr_of_isIso
+  infer_instance
 
 end AlgebraicGeometry

@@ -25,24 +25,25 @@
  ],
  "proof": [
   {
-   "text": "Apply the general flat-base-change theorem [lem-pc-flat-base-change-cohom] to the cartesian square obtained from f:X -> Spec R and Spec R' -> Spec R, with the quasi-coherent sheaf F = O_X and i=0. Proper morphisms are quasi-compact and quasi-separated, so its hypotheses hold; the pullback of O_X is O_{X_U}. The theorem identifies the canonical map H^0(X,O_X) tensor_R R' -> H^0(X_U,O_{X_U}) with an isomorphism. If H^0(X,O_X)=R, then R tensor_R R' is canonically R', giving the final assertion.",
+   "text": "Properness supplies quasi-compactness and quasi-separatedness. The affine base is compact, so QuasiCompact.compactSpace_of_compactSpace gives CompactSpace X, and quasiSeparatedSpace_of_quasiSeparated gives QuasiSeparatedSpace X. Module.Flat R S makes algebraMap R S flat by RingHom.flat_algebraMap_iff; Flat.SpecMap_iff then makes Spec S -> Spec R flat. Apply [lem-weil-pbc-flat-base-change-global-sections-qcqs] through the proved upstream isPushout_appTop_of_flat, which specializes Mathlib.isIso_pushoutSection_of_isQuasiSeparated_of_flat_right to the top opens. This gives the required pushout of the canonical section maps.",
    "uses": [
-    "lem-pc-flat-base-change-cohom"
+    "lem-weil-pbc-flat-base-change-global-sections-qcqs"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/cohomology.tex",
-    "place": "Cohomology of Schemes, Lemma 30.5.2 (Tag 02KH), statement and proof, especially the affine formula and the hypotheses at lines 23--54 of the online source; specialize i=0 and F=O_X"
-   }
+   "elementary": false
+  },
+  {
+   "text": "If GammaSpecIso.inv followed by f.appTop is an isomorphism, cancel the first isomorphism with isIso_comp_left_iff to deduce IsIso f.appTop. The opposite arrow in the pushout is an isomorphism by IsPushout.isIso_inr_of_isIso. Composing it with GammaSpecIso.inv over S proves the final clause.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-pc-flat-base-change-cohom"
+  "lem-weil-pbc-flat-base-change-global-sections-qcqs"
  ],
  "proof_origin": {
-  "by": "document",
-  "document": "literature/stacks-project/cohomology.tex",
-  "place": "Lemma 30.5.2 (Tag 02KH), specialized to a proper morphism, the structure sheaf, and degree 0"
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/02KH",
+  "place": "Degree-zero flat base change, using the proved upstream isPushout_appTop_of_flat and its Mathlib proof; second reading by C2."
  },
  "mathlib_searches": [
   {
@@ -124,5 +125,15 @@
   "group": "R1",
   "result": "fix",
   "note": "R,S CommRing; Algebra R S + Module.Flat R S = flat ring map; f : X ⟶ Spec R IsProper; X_U = pullback f (Spec.map algebraMap); canonical H^0 tensor map iso = IsPushout of appTop square (fixed from applied instance lambda); corollary IsIso ΓSpecIso.inv ≫ appTop R → S"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C2",
+  "result": "pass",
+  "landing": "20261012T154827-L-2472002",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
