@@ -86,7 +86,24 @@ theorem quotientBaseChange_extendedIdeal_mul_pow {A : Type u} [CommRing A]
             (CommRingCat.of A)).inv.hom)).comap f ^ m =
           (Scheme.IdealSheafData.ofIdealTop ((K ^ m).map (Scheme.ΓSpecIso
               (CommRingCat.of A)).inv.hom)).comap f := by
-  sorry
+  have sections (K : Ideal A) (U : X.affineOpens) :
+      ((Scheme.IdealSheafData.ofIdealTop
+        (K.map (Scheme.ΓSpecIso (CommRingCat.of A)).inv.hom)).comap f).ideal U =
+        K.map ((Scheme.ΓSpecIso (CommRingCat.of A)).inv ≫ f.appLE ⊤ U.1 le_top).hom := by
+    rw [(modulePullbackIdealQuotient f _).1
+      ⟨⊤, isAffineOpen_top (Spec (CommRingCat.of A))⟩ U (by simp)]
+    simp [Scheme.IdealSheafData.ofIdealTop_ideal, Ideal.map_map]
+  constructor
+  · intro K K'
+    apply Scheme.IdealSheafData.ext
+    funext U
+    simp only [Scheme.IdealSheafData.ideal_mul, Pi.mul_apply]
+    rw [sections K U, sections K' U, sections (K * K') U, Ideal.map_mul]
+  · intro K m hm
+    apply Scheme.IdealSheafData.ext
+    funext U
+    simp only [Scheme.IdealSheafData.ideal_pow, Pi.pow_apply]
+    rw [sections K U, sections (K ^ m) U, Ideal.map_pow]
 
 /-- Clause (3), Stacks Tag 01JU (1) over Spec(A/J), and Remark 088F
 (blueprint: lem-weil-pbc-quotient-base-change-closed-immersion-ideal).
