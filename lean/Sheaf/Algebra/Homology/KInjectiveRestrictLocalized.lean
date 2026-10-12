@@ -9,7 +9,7 @@ public import Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
 public import Mathlib.Algebra.Category.Grp.FilteredColimits
 public import Mathlib.Algebra.Homology.HomotopyCategory.KInjective
-import Sheaf.CategoryTheory.LocalizedModuleAdjunctionExact
+import Sheaf.Algebra.Homology.LocalizedRestrictionAdjunction
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Comp
 
 /-!
@@ -23,7 +23,7 @@ Source: Stacks Project, Tag 08FI, Lemma 21.20.1
 
 universe u v
 
-open CategoryTheory
+open CategoryTheory CategoryTheory.Limits
 
 namespace CategoryTheory
 
@@ -53,6 +53,17 @@ theorem isKInjective_restrict_localized
     letI := hzero
     CochainComplex.IsKInjective
       (((SheafOfModules.overFunctor.{max u v} R U).mapHomologicalComplex
-        (ComplexShape.up ℤ)).obj I) := by sorry
+        (ComplexShape.up ℤ)).obj I) := by
+  let := hzero
+  obtain ⟨G, hlimits, hcolimits, hadd, ⟨adj⟩⟩ := localized_restriction_adjunction R U hzero
+  let : PreservesFiniteLimits G := hlimits
+  let : PreservesFiniteColimits G := hcolimits
+  let : G.IsLeftAdjoint := adj.isLeftAdjoint
+  let : G.Additive := G.additive_of_preserves_binary_products
+  let : (SheafOfModules.overFunctor.{max u v} R U).Additive := hadd
+  let : (SheafOfModules.overFunctor.{max u v} R U).PreservesKInjectiveComplexes :=
+    adj.preservesKInjectiveComplexes
+  exact Functor.PreservesKInjectiveComplexes.isKInjective_map I
+
 
 end CategoryTheory

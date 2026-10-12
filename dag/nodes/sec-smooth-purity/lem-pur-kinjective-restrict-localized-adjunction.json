@@ -1,0 +1,120 @@
+{
+ "id": "lem-pur-kinjective-restrict-localized-adjunction",
+ "kind": "statement",
+ "title": "Exact additive extension by zero adjoint to localized restriction",
+ "statement": "For a sheaf of rings R on a Grothendieck site and an object U, assuming the localized restriction functor preserves zero morphisms, there is a functor G from localized R-module sheaves to R-module sheaves preserving finite limits and finite colimits, together with an adjunction G ⊣ restriction, and the localized restriction functor is additive.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Lemma 08FI (sites-cohomology-lemma-restriction-K-injective)"
+ },
+ "stmt_deps": [],
+ "proof": [
+  {
+   "text": "Construct the presheaf extension by direct sums over arrows V → U, then apply module sheafification. Maps from each summand to F(V) identify naturally with maps into restriction, yielding the adjunction. A monomorphism induces an injection on every summand and therefore on their direct sum. Module sheafification has underlying abelian sheafification, which preserves monomorphisms by [lem-weil-pbc-sheafification-exact]. Thus G preserves monomorphisms; being an additive left adjoint, it is right exact, hence exact and preserves finite limits and finite colimits. Restriction preserves addition sectionwise.",
+   "uses": [
+    "lem-weil-pbc-sheafification-exact"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-sheafification-exact"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Lemma 08FI"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "exact additive left adjoint to SheafOfModules.overFunctor preserving finite limits and colimits",
+   "results": "No matching theorem.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "PreservesFiniteLimits (SheafOfModules.overFunctor _ _)",
+   "results": "No matching theorem.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "extensionByZero.*overFunctor|localized_restriction_adjunction",
+   "results": "No existing declaration.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "exact additive left adjoint to restriction preserving finite limits and colimits",
+   "results": "No exact matching declaration found.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "PreservesFiniteLimits (SheafOfModules.overFunctor _ _)",
+   "results": "No exact matching declaration found.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "extensionByZero overFunctor localized restriction adjunction",
+   "results": "No exact matching declaration found.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.KInjectiveRestrictLocalized",
+  "date": "2026-10-12",
+  "group": "N3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-kinjective-restrict-localized",
+   "place": "proof step 1"
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-operations",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.LocalizedRestrictionAdjunction",
+  "file": "lean/Sheaf/Algebra/Homology/LocalizedRestrictionAdjunction.lean",
+  "declaration": "CategoryTheory.localized_restriction_adjunction",
+  "statement": "theorem localized_restriction_adjunction\n    {C : Type u} [Category.{v} C] {J : GrothendieckTopology C}\n    (R : Sheaf J RingCat.{max u v}) (U : C)\n    (hzero : (SheafOfModules.overFunctor.{max u v} R U).PreservesZeroMorphisms) :\n    ∃ (G : SheafOfModules.{max u v} (R.over U) ⥤ SheafOfModules.{max u v} R),\n      PreservesFiniteLimits G ∧ PreservesFiniteColimits G ∧\n      (SheafOfModules.overFunctor.{max u v} R U).Additive ∧\n      Nonempty (G ⊣ SheafOfModules.overFunctor.{max u v} R U)",
+  "branch": "sheaf-dag",
+  "by": "N3",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-604f6",
+  "group": "N3",
+  "result": "pass",
+  "landing": "20261012T150954-L-2231334",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-604f6",
+  "group": "N3",
+  "result": "pass",
+  "landing": "20261012T150954-L-2231334",
+  "kind": "interface",
+  "note": "independent Codex review: Matched unchanged theorem signature and delivered proofs with DAG records and Stacks 03DI/03DJ/08FI; both modules and both direct importers compile cleanly; axioms are standard plus sorryAx from the named intermediate lemma."
+ }
+}

@@ -13,28 +13,22 @@
  ],
  "proof": [
   {
-   "text": "Restriction to $\\mathcal C/U$ has exact module extension by zero as left adjoint: the presheaf extension is the direct sum over arrows $V\\to U$, followed by module sheafification [lem-pur-site-restriction-module-adjunction-exact]. The statement of that node is for general ringed sites; its present Lean declaration has extra small/precoverage/pullback assumptions and must be generalized to apply here.",
+   "text": "Use the exact additive finite-limit and finite-colimit left adjunction supplied by [lem-pur-kinjective-restrict-localized-adjunction]. The adjunction induces preservation of K-injective complexes by its right adjoint, so applying that preservation theorem to I yields K-injectivity after restriction.",
    "uses": [
-    "lem-pur-site-restriction-module-adjunction-exact"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Apply [lem-weil-pbc-right-adjoint-preserves-kinjective] to this exact-left-adjoint adjunction. Explicitly a map from acyclic $A$ to $I|_U$ corresponds to a map $j_!A\\to I$, which is null-homotopic since $j_!A$ is acyclic. Transport the homotopy back along the additive adjunction.",
-   "uses": [
+    "lem-pur-kinjective-restrict-localized-adjunction",
     "lem-weil-pbc-right-adjoint-preserves-kinjective"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-pur-site-restriction-module-adjunction-exact",
+  "lem-pur-kinjective-restrict-localized-adjunction",
   "lem-weil-pbc-right-adjoint-preserves-kinjective"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Lemma 08FI (sites-cohomology-lemma-restriction-K-injective); checked against the Stacks Project online source"
+  "place": "Lemma 08FI, via exact extension-by-zero adjunction"
  },
  "mathlib_searches": [
   {
@@ -103,11 +97,11 @@
  "reviewed_proof": {
   "date": "2026-10-12",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "S2",
+  "reviewer": "X-604f6",
+  "group": "N3",
   "result": "pass",
-  "landing": "20261012T095922-L-324295",
+  "landing": "20261012T150954-L-2231334",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent Codex review: Matched unchanged theorem signature and delivered proofs with DAG records and Stacks 03DI/03DJ/08FI; both modules and both direct importers compile cleanly; axioms are standard plus sorryAx from the named intermediate lemma."
  }
 }
