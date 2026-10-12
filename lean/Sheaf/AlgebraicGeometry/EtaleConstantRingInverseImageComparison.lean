@@ -6,6 +6,7 @@ Authors: SHEAF group H1
 module
 
 public import Sheaf.AlgebraicGeometry.EtaleInverseImageAlgebraicStructures
+import WeilConjectures.Mathlib.CategoryTheory.Sites.ConstantSheaf
 
 /-!
 # Constant-ring comparison for etale inverse image
@@ -83,6 +84,73 @@ theorem etaleConstantRingInverseImageComparison (U V : Scheme.{u}) (f : U ⟶ V)
       ((constantSheaf V.smallEtaleTopology CommRingCat.{u + 1}).obj R)
       ((constantSheaf U.smallEtaleTopology CommRingCat.{u + 1}).obj R)
       (toSheafify V.smallEtaleTopology ((Functor.const V.Etaleᵒᵖ).obj R))
-      (toSheafify U.smallEtaleTopology ((Functor.const U.Etaleᵒᵖ).obj R)) := by sorry
+      (toSheafify U.smallEtaleTopology ((Functor.const U.Etaleᵒᵖ).obj R)) := by
+  let b := MorphismProperty.Over.pullback @Etale ⊤ f
+  obtain ⟨_, ea, da, Lr, ar, er, dr, hda, hdr, ha, _, hr, _, _, _⟩ :=
+    etaleInverseImageAlgebraicStructures U V f
+  -- Both composite left adjoints represent maps from R to sections over b(T).
+  let T := ⊤_ V.Etale
+  let hT : IsTerminal T := terminalIsTerminal
+  let hGT : IsTerminal (b.obj T) := hT.isTerminalObj b T
+  let av := constantSheafAdj V.smallEtaleTopology CommRingCat.{u + 1} hT
+  let au := constantSheafAdj U.smallEtaleTopology CommRingCat.{u + 1} hGT
+  let d := b.sheafPushforwardContinuousCompSheafSectionsObjIso CommRingCat.{u + 1}
+    (V.smallGrothendieckTopology @Etale) (U.smallGrothendieckTopology @Etale)
+    (Opposite.op T)
+  let ac := (av.comp ar).ofNatIsoRight d
+  let c := (ac.leftAdjointUniq au).app R
+  let gamma := ar.homEquiv _ _ c.hom
+  refine ⟨Lr, ar, er, ea, gamma, c, rfl, ?_, ?_, ?_⟩
+  · have ht := Adjunction.homEquiv_leftAdjointUniq_hom_app ac au R
+    have hv : av.homEquiv R _ gamma = au.unit.app R := by
+      change ac.homEquiv R _ c.hom = _ at ht
+      dsimp only [ac] at ht
+      rw [Adjunction.homEquiv_ofNatIsoRight_apply, Adjunction.comp_homEquiv] at ht
+      change av.homEquiv R _ (ar.homEquiv _ _ c.hom) ≫ 𝟙 _ = au.unit.app R at ht
+      simpa only [Category.comp_id] using ht
+    let etaV := toSheafify V.smallEtaleTopology ((Functor.const V.Etaleᵒᵖ).obj R)
+    let etaU := toSheafify U.smallEtaleTopology ((Functor.const U.Etaleᵒᵖ).obj R)
+    have hv' : etaV.app (Opposite.op T) ≫ gamma.hom.app (Opposite.op T) =
+        etaU.app (Opposite.op (b.obj T)) := by
+      change etaV.app (Opposite.op T) ≫ gamma.hom.app (Opposite.op T) =
+        etaU.app (Opposite.op (b.obj T)) at hv
+      exact hv
+    -- Naturality propagates the equation at the terminal object to every object.
+    intro W r
+    have hn := (etaV ≫ gamma.hom).naturality (hT.from W.unop).op
+    have hu := etaU.naturality (b.map (hT.from W.unop)).op
+    have hw : etaV.app W ≫ gamma.hom.app W = etaU.app (b.op.obj W) := by
+      calc
+        etaV.app W ≫ gamma.hom.app W =
+            (etaV.app (Opposite.op T) ≫ gamma.hom.app (Opposite.op T)) ≫
+              ((constantSheaf U.smallEtaleTopology CommRingCat.{u + 1}).obj R).obj.map
+                (b.map (hT.from W.unop)).op := by
+          change 𝟙 R ≫ (etaV.app W ≫ gamma.hom.app W) = _ at hn
+          exact (Category.id_comp _).symm.trans hn
+        _ = etaU.app (Opposite.op (b.obj T)) ≫
+              ((constantSheaf U.smallEtaleTopology CommRingCat.{u + 1}).obj R).obj.map
+                (b.map (hT.from W.unop)).op := by rw [hv']
+        _ = etaU.app (b.op.obj W) := by
+          change 𝟙 R ≫ etaU.app (b.op.obj W) = _ at hu
+          exact hu.symm.trans (Category.id_comp _)
+    exact congrArg (fun k ↦ k r) hw
+  · intro G F h
+    have hh := hr G F h
+    apply Sheaf.hom_ext
+    ext W x
+    have hx := congrArg (fun k ↦ k.hom.app W x) hh
+    change (dr.hom.app F).hom.app W
+      (((sheafForget V.smallEtaleTopology).map (ar.homEquiv G F h)).hom.app W x) = _ at hx
+    exact (hdr F W _).symm.trans hx
+  · intro G F h
+    have hh := ha G F h
+    apply Sheaf.hom_ext
+    ext W x
+    have hx := congrArg (fun k ↦ k.hom.app W x) hh
+    change (da.hom.app F).hom.app W
+      (((sheafForget V.smallEtaleTopology).map
+        ((Etale.upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} f).homEquiv
+          G F h)).hom.app W x) = _ at hx
+    exact (hda F W _).symm.trans hx
 
 end AlgebraicGeometry
