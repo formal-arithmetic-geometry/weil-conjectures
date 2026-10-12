@@ -7,9 +7,11 @@ module
 
 public import Sheaf.RingTheory.GlobalDimension
 public import Mathlib.RingTheory.Finiteness.Defs
+import Mathlib.RingTheory.Finiteness.Basic
 public import Mathlib.RingTheory.Ideal.Quotient.Defs
 public import Mathlib.Algebra.Module.ULift
 import Sheaf.RingTheory.WellOrderedUnionProjectiveDimension
+import Sheaf.RingTheory.CyclicGlobalDimension
 
 /-!
 # Testing global dimension on finite and cyclic modules
@@ -53,6 +55,20 @@ theorem hasGlobalDimensionLE_iff_finite_iff_cyclic (R : Type u) [CommRing R] (n 
         ModuleCat.HasProjectiveResolutionLE M n) ↔
       ∀ I : Ideal R,
         ModuleCat.HasProjectiveResolutionLE (ModuleCat.of R (ULift.{v} (R ⧸ I))) n) := by
-  sorry
+  let P : Prop := ∀ M : ModuleCat.{max u v} R, Module.Finite R M →
+    ModuleCat.HasProjectiveResolutionLE M n
+  let C : Prop := ∀ I : Ideal R,
+    ModuleCat.HasProjectiveResolutionLE (ModuleCat.of R (ULift.{v} (R ⧸ I))) n
+  have hGC : C → HasGlobalDimensionLE.{u, max u v} R n :=
+    hasGlobalDimensionLE_of_cyclic R n
+  have hGF : HasGlobalDimensionLE.{u, max u v} R n → P := by
+    intro h M hM
+    exact h M
+  have hFC : P → C := by
+    intro h I
+    apply h
+    infer_instance
+  have hCF : C → P := fun h => hGF (hGC h)
+  exact ⟨⟨hGF, fun h => hGC (hFC h)⟩, ⟨hFC, hCF⟩⟩
 
 end Ring
