@@ -19,9 +19,24 @@
   "document": "literature/stacks-project/coherent.tex",
   "place": "Tag 02OD, lemma-formal-functions-stalk and its proof; Tag 01FB, construction of maps on cohomology; Tag 01E4, the canonical map to the higher direct image; Tag 0G7X, canonical degree-zero restriction"
  },
- "proof": [],
+ "proof": [
+  {
+   "text": "Partial stage-3 proof: formalFibreBaseMap_transition unfolds the two base maps, reassociates composition and applies Spec.map_comp contravariantly. The quotient map followed by Ideal.Quotient.factorPow is the earlier quotient map by extensionality; congr closes this equality.",
+   "uses": [],
+   "elementary": "Functoriality of Spec and the defining quotient-factor equation; no additional DAG lemma is used."
+  },
+  {
+   "text": "formalFibreTransition_ι unfolds formalFibreTransition and formalFibreι, then uses the second-projection equation for pullback.map and composition with the identity. The two completed-ring scalar-linearity theorems remain open, with their original source and proof docstrings unchanged.",
+   "uses": [],
+   "elementary": "The universal-property projection equation for pullback.map and the identity law; no additional DAG lemma is used."
+  }
+ ],
  "proof_deps": [],
- "proof_origin": null,
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Tag 02OD; elementary quotient-factor and fibre-product compatibility proofs written in Lean by R1, independently checked in the second reading. Partial proof only: both scalar-linearity statements remain sorry."
+ },
  "mathlib_match": null,
  "mathlib_searches": [
   {
@@ -155,5 +170,15 @@
   "group": "R1",
   "result": "fix",
   "note": "f proper, Y loc. Noetherian, F coherent, y, p; X_n = Spec(A/m^(n+1)) x_Y X with j_n = pullback.map; transition = fmap of the adjoint h-map; theta_n tied by IsFormalFunctionsTheta (canonical 01E4 class via landed FlatBaseChangeOpenChoices + pullback along X_n -> f^-1 V); compatibility, m^(n+1)M kill, completed-ring iso with projections; degree-zero section clause; reverted the delivery's change of existing node(s) lem-weil-pbc-higher-direct-image-presheaf (--revert-nodes; kept as on sheaf-dag)"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R1",
+  "result": "pass",
+  "landing": "20261012T144139-L-2105522",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

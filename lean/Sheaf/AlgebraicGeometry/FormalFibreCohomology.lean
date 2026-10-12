@@ -80,7 +80,9 @@ theorem formalFibreBaseMap_transition (Y : Scheme.{uF}) (y : Y) (n : ℕ) :
       Spec.map (CommRingCat.ofHom
         (Ideal.Quotient.factorPow (maximalIdeal (Y.presheaf.stalk y))
           (Nat.le_succ (n + 1)))) ≫ formalFibreBaseMap Y y (n + 1) := by
-  sorry
+  rw [formalFibreBaseMap, formalFibreBaseMap]
+  rw [← Category.assoc, ← Spec.map_comp]
+  congr
 
 /-- The closed immersion j_n : X_n → X_(n+1), the base change of the reduction map.
 Source: Stacks, Tag 02OD (blueprint: def-weil-pbc-formal-fibre-cohomology). -/
@@ -98,7 +100,7 @@ Source: Stacks, Tag 02OD (blueprint: def-weil-pbc-formal-fibre-cohomology).
 Proof: the second projection of pullback.map is the second projection followed by 𝟙. -/
 theorem formalFibreTransition_ι {X Y : Scheme.{uF}} (f : X ⟶ Y) (y : Y) (n : ℕ) :
     formalFibreι f y n = formalFibreTransition f y n ≫ formalFibreι f y (n + 1) := by
-  sorry
+  simp [formalFibreTransition, formalFibreι]
 
 /-- The transition h-map F_(n+1) → j_n* F_n: the adjoint, for the canonical
 tensor-pullback adjunction of i_(n+1), of the unit of i_n followed by the composition
