@@ -41,12 +41,19 @@
    "elementary": true
   },
   {
-   "text": "*(3).* Now let $T$ be reduced, hence $A$ reduced, and let $\\beta^q$ be\nlocally constant. Shrinking $U$ around $t$ we may assume $\\beta^q$ is\nconstant on $U$, so $\\rho_q+\\rho_{q-1}=c$ is constant. Then\n$\\rho_q=c-\\rho_{q-1}$ is also upper semicontinuous, hence locally\nconstant, and likewise $\\rho_{q-1}$. Shrinking $U$ once more, we may\nassume $\\rho_q\\equiv r$ and $\\rho_{q-1}\\equiv r'$ on $U$.",
+   "text": "For part (3), choose the finite-free model P on U supplied by the local-model step and its bases. At t choose a maximal nonvanishing minor of each adjacent differential, using le_rank_map_appTop_iff. Intersect the images of their basic opens with the open fibre of the locally constant function beta^q through t. On this neighbourhood W each differential rank is at least its rank at t, while finrank_homology_pullback_add_rank_add_rank and hFiber_eq_finrank_homology show that their sum equals its value at t. Natural-number arithmetic forces each rank separately to equal its value at t. This implements the local-constancy step directly without defining rank functions on the whole base.",
    "uses": [],
    "elementary": true
   },
   {
-   "text": "*Claim.* Let $\\phi:A^m\\to A^n$ be a matrix over a reduced ring $A$\nwhose rank at every point of $\\operatorname{Spec}(A)$ equals $r$. Then\nevery point has a principal open neighbourhood over which, in suitable\nbases, $\\phi=\\begin{pmatrix}I_r&0\\0&0\\end{pmatrix}$. Indeed, every\n$(r+1)\\times(r+1)$ minor of $\\phi$ vanishes in every residue field,\nhence lies in every prime ideal, hence is nilpotent, hence is $0$ since\n$A$ is reduced. At a given point some $r\\times r$ minor $\\delta$ is\nnonzero, so $\\delta$ is a unit on $D(\\delta)$. After permuting bases,\n$\\phi=\\begin{pmatrix}D&B\\C&F\\end{pmatrix}$ with $D$ invertible over\n$A_\\delta$; invertible row and column operations bring $\\phi$ to\n$\\begin{pmatrix}I_r&0\\0&F'\\end{pmatrix}$ with $F'=F-CD^{-1}B$. The\n$(r+1)\\times(r+1)$ minors of the new matrix are\n$A_\\delta$-linear combinations of those of $\\phi$ (Cauchy–Binet), so\nthey vanish; the minor formed by $I_r$ and one entry of $F'$ equals\nthat entry, so $F'=0$.\n\nApply the claim to $d^q$ and to $d^{q-1}$ and shrink $U$ to a principal\nopen neighbourhood of $t$ on which both normal forms hold (the bases\nused for the two maps need not agree). Then\n$Z=\\ker d^q$ is a direct summand of $K^q$, free of rank $n_q-r$, with a\ncomplement $Z'$ mapped by $d^q$ isomorphically onto a direct summand of\n$K^{q+1}$; and $B=\\operatorname{im}d^{q-1}$ is a direct summand of\n$K^q$, free of rank $r'$, with $K^{q-1}\\to B$ a split surjection.\nSince $B\\subseteq Z$, a retraction $K^q\\to B$ restricts to a retraction\n$Z\\to B$, so $B$ is a direct summand of $Z$ and\n\n$$\nH^q(K)=Z/B\n$$\n\nis a finite projective $A$-module of rank $n_q-r-r'=\\beta^q(t)$. Being\nfinite projective, it is locally free on principal opens, so\n$R^qf_*\\mathcal F$ is finite locally free near $t$, in particular flat.\n\nFor $s\\in U$ split injections and split surjections remain so after\n$\\otimes_A\\kappa(s)$. Thus $d^q(s)$ is injective on\n$Z'\\otimes\\kappa(s)$ and zero on $Z\\otimes\\kappa(s)$, giving\n$\\ker d^q(s)=Z\\otimes_A\\kappa(s)$; and\n$\\operatorname{im}d^{q-1}(s)=B\\otimes_A\\kappa(s)$ inside\n$K^q\\otimes_A\\kappa(s)$. The split exact sequence\n$0\\to B\\to Z\\to Z/B\\to0$ stays exact after tensoring, so\n\n$$\nH^q(K\\otimes_A\\kappa(s))\n=\\frac{Z\\otimes_A\\kappa(s)}{B\\otimes_A\\kappa(s)}\n=H^q(K)\\otimes_A\\kappa(s),\n$$\n\nand the identification is exactly the map of (1). Hence $\\varphi^q(s)$\nis an isomorphism for all $s\\in U$. Since $t$ was arbitrary, (3)\nfollows.",
+   "text": "Apply [lem-pc-constant-rank-complex-homology] to P, the open immersion W→U, and the two constant differential ranks just obtained. For a point w of W use Spec κ(w) for its residue field in the ambient base T and lift its canonical morphism through U; the lift has singleton image at the image of w. The lemma gives H^q(P|W) finite locally free of rank r(q)-a-b. The fibre rank formula identifies this rank with beta^q(t). Apply the finite-free model base-change isomorphism to f restricted over W, and compose it with nonempty_higherDirectImage_iso_restrict to identify H^q(P|W) with (R^q f_* F)|W. Transfer finite local freeness through this isomorphism. This completes the existing Lean Grauert declaration.",
+   "uses": [
+    "lem-pc-constant-rank-complex-homology"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For the additional canonical-map claim in paper part (3), retain the original local normal-form argument: on a principal neighbourhood over the reduced affine ring A, put each of the two differentials separately into diag(I,0). Its outgoing kernel Z and incoming image B are direct summands of K^q, and a retraction onto B restricts to Z. Choose a complementary summand Z′ for the outgoing kernel. Split injections and surjections remain split after tensoring with κ(s), so the kernel of the outgoing differential on the fibre is Z⊗κ(s), and the incoming image is B⊗κ(s). The split exact sequence 0→B→Z→Z/B→0 remains exact after tensoring. Thus H^q(K⊗κ(s))=(Z⊗κ(s))/(B⊗κ(s))=(Z/B)⊗κ(s). This identification sends a cycle class tensor 1 to its fibre cycle class, hence is exactly the canonical map defined in (1). It is an isomorphism, and these neighbourhoods cover the base. The current Lean module states only local freeness, so this canonical-map argument remains the paper-level proof, not a claim about the noncanonical isomorphisms of the finite-free-model API.",
    "uses": [],
    "elementary": true
   },
@@ -61,12 +68,13 @@
   "def-pc-perfect-complex",
   "def-pc-derived-direct-image",
   "lem-pc-flat-complex-derived-pullback",
-  "lem-pc-cohomology-sections-affine-base"
+  "lem-pc-cohomology-sections-affine-base",
+  "lem-pc-constant-rank-complex-homology"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-semicon/thm-pc-semicontinuity-base-change.md",
-  "place": "## Proof"
+  "place": "Original proof, with D2 Lean reduction of (3): minor neighbourhoods, rank arithmetic, constant-rank complex homology, and open base-change/restriction isomorphisms; 2026-10-12."
  },
  "mathlib_searches": [],
  "mathlib_match": null,
@@ -95,7 +103,11 @@
   "sorry_free": false,
   "body_lines": 48,
   "sorry_free_note": "corrected by L 14:55 UTC: the imported flag was shallow; the declaration rests on sorried declarations transitively (sorry map slopmaster2_71d63dcf, d edges); not attachable",
-  "note": "Lean refresh 7d675a26 (L): moved from WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage:635"
+  "note": "Lean refresh 7d675a26 (L): moved from WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage:635",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.Modules.upperSemicontinuous_hFiber",
+   "AlgebraicGeometry.Scheme.Modules.exists_isFiniteLocallyFreeOfRank_higherDirectImage_of_isLocallyConstant"
+  ]
  },
  "blueprint_lean": [
   "AlgebraicGeometry.Scheme.Modules.upperSemicontinuous_hFiber"
@@ -204,5 +216,15 @@
   "group": "J1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-scb1921 (reviewer sub-agent of L); spot-checked: Read all steps: rank/minor semicontinuity, reduced-ring normal form, split kernel/image tensor argument, k[e]/e^2 elliptic counterexample all correct; tool use lem-pc-cohomology-sections-affine-base accepted (generic; hypotheses proper=>qc+separated, F_s qcoh, Spec k(s) affine). FIX more, RETURN less: (1) C4 Step 1 applied lem-pc-finite-free-complex-higher-direct-image 'in the identity case' to the complex K from perfectness, but that node only asserts SOME complex P on SOME U, not K; replaced by def-pc-derived-direct-image (H^q(Rf_*)=R^qf_*) plus restriction and exactness of tilde, and made the H^q(X_s,F_s) identification cite def-pc-derived-direct-image and lem-pc-cohomology-sections-affine-base explicitly. (2) class (d): lem-pc-finite-free-complex-higher-direct-image is a few-line consequence of lem-pc-rf-perfect-base-change + def-pc-perfect-complex + lem-pc-flat-complex-derived-pullback + def-pc-derived-direct-image (exactly what Step 1 derives); dropped. (3) C1 Step 2: phi^q(t) was asserted equal to the evident local map without definition; now defined as H^q(E)(x)k(t)->H^q(Lg_t^*E) composed with the base-change isomorphisms, which is the evident map in the local model. proof_deps/uses updated.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D2",
+  "result": "pass",
+  "landing": "20261012T040223-L-1633574",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed after the tool's own checks (compiles, no new sorry without its node, no axiom, statements of existing declarations unchanged); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

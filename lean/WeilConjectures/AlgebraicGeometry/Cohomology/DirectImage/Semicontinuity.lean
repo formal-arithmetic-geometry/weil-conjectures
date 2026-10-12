@@ -11,6 +11,7 @@ public import Mathlib.Topology.LocallyConstant.Basic
 public import Mathlib.Topology.Semicontinuity.Basic
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.FiniteFreeComplex
 public import WeilConjectures.AlgebraicGeometry.Modules.FreeComplex
+import Sheaf.AlgebraicGeometry.Modules.ConstantRankComplexHomology
 
 /-!
 # Upper semicontinuity of fibre cohomology
@@ -138,8 +139,93 @@ theorem exists_isFiniteLocallyFreeOfRank_higherDirectImage_of_isLocallyConstant 
     (hℱ : ℱ.IsFlatOver f) (q : ℕ) (hq : IsLocallyConstant (ℱ.hFiber f q)) (t : T) :
     ∃ U : T.Opens, t ∈ U ∧
       (((higherDirectImage f q).obj ℱ).restrict U.ι).IsFiniteLocallyFreeOfRank
-        (ℱ.hFiber f q t) :=
-  sorry
+        (ℱ.hFiber f q t) := by
+  classical
+  obtain ⟨U, P, d, htU, hP, hbc⟩ := exists_isFiniteFreeComplex_higherDirectImage f ℱ hℱ t
+  choose r he using hP.exists_iso_free
+  let e n := (he n).some
+  let A := freeMatrix
+    ((e q).inv ≫ P.d q (q + 1) ≫ (e (q + 1)).hom)
+  let B := freeMatrix
+    ((e (q - 1)).inv ≫ P.d (q - 1) q ≫ (e q).hom)
+  obtain ⟨g, hg⟩ := exists_comp_ι_eq_fromSpecResidueField htU
+  obtain ⟨x⟩ : Nonempty (Spec (T.residueField t)) := inferInstance
+  have hx : U.ι.base (g.base x) = t := by
+    rw [← Scheme.Hom.comp_apply, hg]
+    exact (Scheme.range_fromSpecResidueField t).subset ⟨x, rfl⟩
+  obtain ⟨a₁, a₂, ha⟩ := (le_rank_map_appTop_iff
+    (isField_Γ_Spec (Field.toIsField _)) g x A _).1 le_rfl
+  obtain ⟨b₁, b₂, hb⟩ := (le_rank_map_appTop_iff
+    (isField_Γ_Spec (Field.toIsField _)) g x B _).1 le_rfl
+  let V : U.toScheme.Opens :=
+    U.toScheme.basicOpen (A.submatrix a₁ a₂).det ⊓
+      U.toScheme.basicOpen (B.submatrix b₁ b₂).det
+  let C : T.Opens := ⟨{s | ℱ.hFiber f q s = ℱ.hFiber f q t}, hq.isOpen_fiber _⟩
+  let W : T.Opens := (U.ι ''ᵁ V) ⊓ C
+  have htW : t ∈ W := ⟨⟨g.base x, ⟨ha, hb⟩, hx⟩, rfl⟩
+  have hWU : Set.range W.ι.base ⊆ Set.range U.ι.base := by
+    rintro _ ⟨w, rfl⟩
+    obtain ⟨v, _, hv⟩ := w.2.1
+    exact ⟨v, hv⟩
+  let j := IsOpenImmersion.lift U.ι W.ι hWU
+  have hj : j ≫ U.ι = W.ι := IsOpenImmersion.lift_fac _ _ _
+  have : IsOpenImmersion (j ≫ U.ι) := by rw [hj]; infer_instance
+  have : IsOpenImmersion j := IsOpenImmersion.of_comp j U.ι
+  have htfin := hFiber_eq_finrank_homology f ℱ hbc g hg q
+  have htformula := finrank_homology_pullback_add_rank_add_rank e (Field.toIsField _) g q
+  have hfree := isFiniteLocallyFreeOfRank_homology_pullback_of_constantRank e q j
+    (A.map g.appTop).rank (B.map g.appTop).rank (by
+      intro w
+      have hwU : W.ι.base w ∈ U := by
+        rw [← SetLike.mem_coe, ← Scheme.Opens.range_ι]
+        exact hWU ⟨w, rfl⟩
+      obtain ⟨g', hg'⟩ := exists_comp_ι_eq_fromSpecResidueField hwU
+      have hrange : Set.range g'.base = {j.base w} := by
+        apply Set.Subset.antisymm
+        · rintro _ ⟨y, rfl⟩
+          apply U.ι.isOpenEmbedding.injective
+          rw [← Scheme.Hom.comp_apply, hg', ← Scheme.Hom.comp_apply, hj]
+          exact (Scheme.range_fromSpecResidueField (W.ι.base w)).subset ⟨y, rfl⟩
+        · intro z hz
+          obtain ⟨y⟩ : Nonempty (Spec (T.residueField (W.ι.base w))) := inferInstance
+          have hy : g'.base y = j.base w := by
+            apply U.ι.isOpenEmbedding.injective
+            rw [← Scheme.Hom.comp_apply, hg', ← Scheme.Hom.comp_apply, hj]
+            exact (Scheme.range_fromSpecResidueField (W.ι.base w)).subset ⟨y, rfl⟩
+          exact ⟨y, hy.trans (Set.mem_singleton_iff.mp hz).symm⟩
+      obtain ⟨y⟩ : Nonempty (Spec (T.residueField (W.ι.base w))) := inferInstance
+      have hyV : g'.base y ∈ V := by
+        obtain ⟨v, hv, hvw⟩ := w.2.1
+        change U.ι.base v = W.ι.base w at hvw
+        have hy : g'.base y = v := by
+          apply U.ι.isOpenEmbedding.injective
+          rw [← Scheme.Hom.comp_apply, hg', hvw]
+          exact (Scheme.range_fromSpecResidueField (W.ι.base w)).subset ⟨y, rfl⟩
+        rw [hy]
+        exact hv
+      have hA := (le_rank_map_appTop_iff (isField_Γ_Spec (Field.toIsField _)) g' y A _).2
+        ⟨a₁, a₂, hyV.1⟩
+      have hB := (le_rank_map_appTop_iff (isField_Γ_Spec (Field.toIsField _)) g' y B _).2
+        ⟨b₁, b₂, hyV.2⟩
+      have hsfin := hFiber_eq_finrank_homology f ℱ hbc g' hg' q
+      have hsformula := finrank_homology_pullback_add_rank_add_rank e (Field.toIsField _) g' q
+      have hconst : ℱ.hFiber f q (W.ι.base w) = ℱ.hFiber f q t := w.2.2
+      refine ⟨_, Field.toIsField _, g', hrange, ?_, ?_⟩ <;>
+        dsimp only [A, B] at * <;> omega)
+  have hr : r q - (A.map g.appTop).rank - (B.map g.appTop).rank = ℱ.hFiber f q t := by
+    dsimp only [A, B] at *
+    omega
+  rw [hr] at hfree
+  have := isGrothendieckAbelian (f ⁻¹ᵁ W).toScheme
+  have sq : IsPullback (f ⁻¹ᵁ W).ι (f ∣_ W) f (j ≫ U.ι) := by
+    rw [hj]
+    exact (isPullback_morphismRestrict f W).flip
+  obtain ⟨e₁⟩ := hbc j _ _ sq q
+  obtain ⟨e₂⟩ := nonempty_higherDirectImage_iso_restrict f ℱ W.ι _ _
+    (isPullback_morphismRestrict f W).flip q
+  exact ⟨W, htW, by
+    have := hfree
+    exact SheafOfModules.IsFiniteLocallyFreeOfRank.of_iso (e₁ ≪≫ e₂)⟩
 
 /-- **The fibre cohomology vanishes in large degrees, locally on the base.** In the situation of
 `AlgebraicGeometry.Scheme.Modules.upperSemicontinuous_hFiber`, every point `t` of `T` has an open
