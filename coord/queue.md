@@ -1,6 +1,6 @@
 # Work queue
 
-106 items; claim with `tools/claim.py next <group> [--stage N]`.
+107 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (8)
 
@@ -24,7 +24,7 @@
 
 Not open yet: 42 nodes that wait for stage 1, 3 nodes that wait for a statement dependency.
 
-## Stage 3: modules to prove (96)
+## Stage 3: modules to prove (97)
 
 | module | distance to a target | sorry | kind |
 |---|---|---|---|
@@ -90,7 +90,6 @@ Not open yet: 42 nodes that wait for stage 1, 3 nodes that wait for a statement 
 | `Sheaf.Topology.IrreducibleNoetherianConstantAcyclic` | 7 | 1 | proof |
 | `Sheaf.Topology.NoetherianOpenClosedCohomologySequence` | 7 | 1 | proof |
 | `WeilConjectures.SixFunctors.Etale.SmoothBaseChange.FailureOverField.Survival` | 7 | 3 | proof |
-| `Sheaf.Topology.ClosedImmersionPushforwardCohomology` | 8 | 1 | proof |
 | `Sheaf.Topology.IrreducibleConstantSections` | 8 | 1 | proof |
 | `WeilConjectures.AlgebraicGeometry.Morphisms.EtaleTorsorCohomology` | 8 | 1 | proof |
 | `WeilConjectures.AlgebraicGeometry.Morphisms.EtaleTorsorSpreading` | 8 | 1 | proof |
@@ -98,6 +97,8 @@ Not open yet: 42 nodes that wait for stage 1, 3 nodes that wait for a statement 
 | `WeilConjectures.SixFunctors.Etale.SmoothBaseChange.AlgClosedExtension` | 8 | 1 | proof |
 | `WeilConjectures.SixFunctors.Etale.SmoothBaseChange.CurveTestDatum` | 8 | 1 | proof |
 | `WeilConjectures.SixFunctors.Etale.SmoothBaseChange.HigherDirectImage.Transition` | 8 | 1 | proof |
+| `Sheaf.CategoryTheory.Abelian.ExactFunctorHigherDerivedVanishing` | 9 | 1 | proof |
+| `Sheaf.Topology.Sheaves.LerayAcyclicComparison` | 9 | 1 | proof |
 | `WeilConjectures.AlgebraicGeometry.Curve.Affine` | 9 | 2 | proof |
 | `WeilConjectures.SixFunctors.Etale.SmoothBaseChange.HigherDirectImage.FreeSheaf` | 9 | 1 | proof |
 | `WeilConjectures.AlgebraicGeometry.Curve.Compactification` | 10 | 2 | proof |
