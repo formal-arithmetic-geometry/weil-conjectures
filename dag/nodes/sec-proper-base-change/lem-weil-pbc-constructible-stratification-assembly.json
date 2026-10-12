@@ -1,0 +1,124 @@
+{
+ "id": "lem-weil-pbc-constructible-stratification-assembly",
+ "kind": "statement",
+ "title": "Assemble stratifications of a constructible immersed partition",
+ "statement": "Let $X$ be a quasi-compact quasi-separated scheme [def-weil-pbc-scheme-conventions]. Let $(\\iota_i:Y_i\\to X)_{i<n}$ be a finite family of immersions [def-weil-closed-immersion] whose images are constructible [def-weil-constructible-subset], pairwise disjoint and cover $X$. For every $i$ let $T_i$ be a finite constructible locally closed scheme stratification of $Y_i$ [def-constructible-stratification]. Let $P$ be any predicate on scheme morphisms into $X$, and assume $P$ holds for every composite $(T_i)_b\\to Y_i\\to X$. Then there is a finite constructible locally closed scheme stratification $R$ of $X$ such that $P$ holds for every stratum immersion of $R$.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex; literature/stacks-project/topology.tex",
+  "place": "Tag 03S0 (lemma-etale-stratified-finite), final refinement in the proof; Tag 09YJ (lemma-constructible-in-constructible), https://stacks.math.columbia.edu/tag/03S0 and https://stacks.math.columbia.edu/tag/09YJ"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-closed-immersion",
+  "def-weil-constructible-subset",
+  "def-constructible-stratification"
+ ],
+ "proof": [
+  {
+   "text": "Index the new strata by the dependent sum of the finite local index sets and reindex by Fin of its cardinality. Take the given local domain schemes and composite immersion maps. Immersions compose, and their images are locally closed.",
+   "uses": [
+    "def-constructible-stratification",
+    "def-weil-closed-immersion"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Identify each outer scheme homeomorphically with the image of its immersion. Transfer constructibility of its local stratum to that image. The image is constructible in X, and X has a basis of quasi-compact opens, so constructibility in a constructible subspace gives constructibility in X.",
+   "uses": [
+    "lem-weil-pbc-constructible-in-retrocompact-open"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Covering follows by first choosing an outer stratum and then a local stratum. Different outer pieces give disjoint composite images; within one piece use injectivity of its immersion and disjointness of the local strata. These data form the required LocallyClosedStratification. Each predicate proof is the given hP because the domains and maps were taken literally from the local data. Empty index sets are included.",
+   "uses": [
+    "def-constructible-stratification"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-constructible-stratification",
+  "def-weil-closed-immersion",
+  "lem-weil-pbc-constructible-in-retrocompact-open"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/etale-cohomology.tex; literature/stacks-project/topology.tex",
+  "place": "Tag 03S0 (lemma-etale-stratified-finite), final refinement in the proof; Tag 09YJ (lemma-constructible-in-constructible), https://stacks.math.columbia.edu/tag/03S0 and https://stacks.math.columbia.edu/tag/09YJ"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Assemble a finite constructible stratification by stratifying each member of a finite locally closed constructible partition",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "Topology.IsConstructible, Topology.IsConstructible",
+   "results": "12 hits: Topology.IsConstructible, Topology.IsConstructible.univ, Topology.IsConstructible.empty, Topology.IsConstructible.isLocallyConstructible, IsRetrocompact.isConstructible, Topology.IsConstructible.compl, Topology.IsConstructible.of_compl, Topology.isConstructible_compl; no assembly theorem.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "stratification|IsConstructible.*image",
+   "results": "5 hits: Mathlib/Topology/Constructible.lean, Mathlib/Topology/Constructible.lean, Mathlib/Topology/Constructible.lean, Mathlib/Topology/Constructible.lean, Mathlib/Topology/Constructible.lean; no assembly theorem.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleStratifiedFinite",
+  "date": "2026-10-12",
+  "group": "U2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-h1-constructible-representation",
+   "place": "Step 2: constructible representation via finite etale strata; final refinement of the separated restrictions in Tag 03S0, proof, last sentence.",
+   "via": [
+    "lem-weil-pbc-etale-stratified-finite"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ConstructibleStratificationAssembly",
+  "file": "lean/Sheaf/AlgebraicGeometry/ConstructibleStratificationAssembly.lean",
+  "declaration": "AlgebraicGeometry.Scheme.exists_stratification_of_stratified_partition",
+  "statement": "theorem exists_stratification_of_stratified_partition {X : Scheme.{u}} [CompactSpace X] [QuasiSeparatedSpace X]\n    (n : ℕ) (Y : Fin n → Scheme.{u}) (ι : ∀ i, Y i ⟶ X)\n    (hι : ∀ i, IsImmersion (ι i))\n    (hc : ∀ i, Topology.IsConstructible (Set.range (ι i)))\n    (hd : Pairwise (fun i k ↦ Disjoint (Set.range (ι i)) (Set.range (ι k))))\n    (hu : (⋃ i, Set.range (ι i)) = Set.univ)\n    (T : ∀ i, LocallyClosedStratification (Y i))\n    (P : ∀ Z : Scheme.{u}, (Z ⟶ X) → Prop)\n    (hP : ∀ i b, P ((T i).domain b) ((T i).immersion b ≫ ι i)) :\n    ∃ R : LocallyClosedStratification X,\n      (∀ k, Topology.IsConstructible (R.stratum k)) ∧\n      ∀ k, P (R.domain k) (R.immersion k)",
+  "branch": "sheaf-dag",
+  "by": "U2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U2",
+  "result": "pass",
+  "landing": "20261012T044756-L-2041530",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U2",
+  "result": "pass",
+  "landing": "20261012T044756-L-2041530",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -30,70 +30,46 @@
  ],
  "proof": [
   {
-   "text": "First suppose that $j:U\\to X$ is separated. Since an etale morphism is flat, locally of finite presentation, and quasi-finite, the separated stratification theorem gives a finite partition of $X$ by constructible locally closed strata whose base changes are finite locally free. Etaleness is preserved by base change, and a finite locally free etale morphism is finite etale, so this is the required partition.",
-   "uses": [
-    "lem-weil-pbc-etale-separated-stratified-finite"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-morphisms.tex",
-    "place": "More on Morphisms, Lemma Tag 07RZ (more-morphisms-lemma-stratify-flat-fp-qf), proof and conclusion; etale properties and finite-etale conclusion"
-   }
+   "text": "Choose finite affine open covers of U and X using Mathlib Scheme.OpenCover.finiteSubcover on the canonical affine cover, take opensRange of the cover maps, and reindex by Fin using Fintype.equivFin.",
+   "uses": [],
+   "elementary": true
   },
   {
-   "text": "Over an affine base $X$, choose a finite affine open covering $U=\\bigcup_aU_a$, and apply the separated case to every $U_a\\to X$ and every overlap $U_a\\cap U_b\\to X$. A common refinement of the finitely many resulting partitions, followed by refinement by affine strata, gives a finite constructible locally closed affine partition of $X$ for which all chart and overlap base changes are finite etale. The finite-cover gluing lemma then says that $V_i:=U\\times_XX_i\\to X_i$ is separated for every stratum.",
+   "text": "Over an affine base apply exists_etale_affine_cover_stratification to the finite affine cover of U. Keep its immersed constructible affine partition and the separatedness of the pullbacks.",
    "uses": [
-    "lem-weil-pbc-etale-affine-cover-gluing",
-    "lem-weil-pbc-etale-separated-stratified-finite",
-    "lem-weil-pbc-etale-qcqs-cofinal-finite-coverings",
-    "lemma-constructible-common-refinement",
-    "def-pc-fibre-product"
+    "lem-weil-pbc-etale-affine-cover-gluing"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Etale Cohomology, Lemma Tag 03S9 (lemma-etale-stratified-finite), proof, second paragraph, lines 12045-12050"
-   }
+   "elementary": false
   },
   {
-   "text": "Apply the separated case once more to each separated etale morphism $V_i\\to X_i$ from the preceding step and take a common refinement of the resulting finite partitions. Each refined base change is finite etale, and the finite common refinement remains a finite constructible locally closed partition of the affine base.",
+   "text": "For each affine piece, apply exists_etale_separated_stratified_finite to the separated etale quasi-compact pullback. Assemble the resulting local stratifications with exists_stratification_of_stratified_partition, using the predicate that the pullback of j is finite etale. The inverse of pullbackLeftPullbackSndIso identifies the iterated and composite pullback projections, and finite and etale properties are invariant under this isomorphism.",
    "uses": [
     "lem-weil-pbc-etale-separated-stratified-finite",
-    "lemma-constructible-common-refinement",
+    "lem-weil-pbc-constructible-stratification-assembly",
     "def-pc-fibre-product"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Etale Cohomology, Lemma Tag 03S9 (lemma-etale-stratified-finite), proof, second paragraph, lines 12050-12061"
-   }
+   "elementary": false
   },
   {
-   "text": "For the original qcqs base $X$, choose a finite affine open covering. Perform the preceding affine construction on each member. The locality/gluing lemma assembles the finitely many local partitions into one finite constructible locally closed partition of $X$, preserving the finite-etale base-change property on every piece.",
+   "text": "Apply the affine result to the pullback of j to each affine open in the finite cover of X. Compactness follows from quasi-compact base change, and quasi-separatedness from quasi-separated base change. Pullback pasting identifies each local projection with the pullback of j along the composite stratum immersion into X. Apply exists_constructible_stratification_finite_etale_of_affine_local.",
    "uses": [
     "lem-weil-pbc-etale-stratification-local-gluing",
-    "lem-weil-pbc-qcqs-scheme-cofinal-finite-coverings"
+    "def-pc-fibre-product"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Etale Cohomology, Lemma Tag 03S9 (lemma-etale-stratified-finite), proof, second paragraph, line 12045, with the finite affine-cover locality made explicit"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-etale-separated-stratified-finite",
+  "def-pc-fibre-product",
+  "lem-weil-pbc-constructible-stratification-assembly",
   "lem-weil-pbc-etale-affine-cover-gluing",
-  "lem-weil-pbc-etale-qcqs-cofinal-finite-coverings",
-  "lem-weil-pbc-qcqs-scheme-cofinal-finite-coverings",
-  "lem-weil-pbc-etale-stratification-local-gluing",
-  "lemma-constructible-common-refinement",
-  "def-pc-fibre-product"
+  "lem-weil-pbc-etale-separated-stratified-finite",
+  "lem-weil-pbc-etale-stratification-local-gluing"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Lemma 03S9 (lemma-etale-stratified-finite), proof at lines 12042-12061"
+  "place": "Tag 03S0, proof (finite affine-cover reduction, separated affine pieces, final refinement, locality); implemented by U2 on 2026-10-12, with assembly proved using Tag 09YJ."
  },
  "mathlib_searches": [
   {
@@ -196,5 +172,15 @@
    "def-pc-fibre-product"
   ]
  },
- "lead_note": "2026-10-11 10:16 UTC L (via B-1015): source.place: Stacks tag 03S9 (no such tag) corrected to 03S0 (tags file: 03S0,etale-cohomology-lemma-etale-stratified-finite)."
+ "lead_note": "2026-10-11 10:16 UTC L (via B-1015): source.place: Stacks tag 03S9 (no such tag) corrected to 03S0 (tags file: 03S0,etale-cohomology-lemma-etale-stratified-finite).",
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U2",
+  "result": "pass",
+  "landing": "20261012T044756-L-2041530",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
 }
