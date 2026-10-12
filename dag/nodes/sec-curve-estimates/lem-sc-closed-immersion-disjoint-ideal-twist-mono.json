@@ -17,35 +17,44 @@
  ],
  "proof": [
   {
-   "text": "Put N=M tensor-power m. Choose an affine basis trivializing N; on V=Spec A, i inverse-image V=Spec B is given by a surjection A -> B with kernel J. Quasi-coherence identifies the multiplication image with K=I(V). The canonical unit on this image is the quotient map K -> B. Its kernel is K intersection J, zero by hzero V. When B=0, J=A and hzero gives K=0.",
+   "text": "For maps a:T -> I.toModules and b:T -> J.toModules with equal composites into O_Y, evaluate on every open U. The common value lies in both ideals by range_toModulesι_app_eq_idealOfOpens, hence is zero by hzero U. Extensionality makes the composite zero, and canceling the monic ideal inclusion gives a=0.",
    "uses": [
-    "def-sbc-closed-immersion-ideal-sheaf",
-    "def-weil-closed-immersion",
-    "def-pc-module-pullback",
+    "def-sbc-closed-immersion-ideal-sheaf"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Set N=M.tensorPow m. N is invertible, and tensorRight N is an equivalence with inverse tensorRight N.dual. For maps a and b into I tensor N and J tensor N having equal composites, precompose with the counit isomorphism at their source and take functor preimages. Faithfulness gives equal untensored composites. Step 1 makes the preimage of a zero; mapping back and canceling the counit gives a=0. Tensoring the monic ideal inclusions preserves monicity, and so do the unitor composites.",
+   "uses": [
     "def-sc-invertible-module",
-    "def-pur-sheaf-tensor-product"
+    "def-pur-sheaf-tensor-product",
+    "lem-pc-tensor-dual-invertible"
    ],
    "elementary": false
   },
   {
-   "text": "A difference of sections killed by restriction is zero on every basis open and hence zero by sheaf separatedness. Thus the sheaf morphism is mono. Compare the chosen adjunction with the canonical one by uniqueness of left adjoints; their units differ by postcomposition with pushforward of an isomorphism on N, which preserves monicity.",
+   "text": "Apply closedImmersion_unit_kernel to N for the same Classical.choice adjunction used in the statement. Any g:T -> image(mu_I) with g followed by image.ι(mu_I) and the unit zero lifts through image.ι(mu_J) by the limiting kernel fork. Since both multiplication maps are monic, imageMonoIsoSource identifies their images with I tensor N and J tensor N. The lifted equality, after cancellation of the common unitor, is the equality in step 2. It forces the map into I tensor N to be zero; cancel its image isomorphism to obtain g=0. Preadditive.mono_iff_cancel_zero proves the required monomorphism.",
    "uses": [
-    "def-pc-module-pullback"
+    "lem-weil-pbc-closed-immersion-unit-kernel",
+    "def-pc-module-pullback",
+    "def-weil-closed-immersion"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
   "def-sbc-closed-immersion-ideal-sheaf",
-  "def-weil-closed-immersion",
-  "def-pc-module-pullback",
   "def-sc-invertible-module",
-  "def-pur-sheaf-tensor-product"
+  "def-pur-sheaf-tensor-product",
+  "lem-pc-tensor-dual-invertible",
+  "lem-weil-pbc-closed-immersion-unit-kernel",
+  "def-pc-module-pullback",
+  "def-weil-closed-immersion"
  ],
  "proof_origin": {
   "by": "worker",
   "document": "literature/stacks-project/varieties.tex",
-  "place": "Remark remark-conductor, final sentence, and the local trivialization argument used in Lemma lemma-dim-1-noetherian-reduced-separated-has-ample"
+  "place": "Remark 09NW, I/(I intersection J), and Lemma 09NX; implemented by tensor equivalence and the existing unit-kernel theorem (Modules 08KS), group F4."
  },
  "mathlib_searches": [
   {
@@ -147,10 +156,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "J3",
+  "group": "F4",
   "result": "pass",
-  "landing": "20261012T184311-L-4007243",
-  "kind": "interface",
+  "landing": "20261012T225308-L-1804568",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
