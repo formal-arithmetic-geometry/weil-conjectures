@@ -10,6 +10,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.Coefficients
 public import WeilConjectures.SixFunctors.Etale.Derived.Invertible
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.FlatModuleCat
+public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Surjective
 
 /-!
 # Automorphisms of invertible complexes are determined along a closed subscheme
@@ -132,6 +133,55 @@ lemma eq_id_of_leftDerivedUpperStar_map_eq_id_of_isInvertible
     (leftDerivedUpperStarTensorNatIso (ModuleCat.{u + 1} Λ) i)
     (eq_id_of_leftDerivedUpperStar_map_eq_id i hi) e e' γ hγ
 
+
+section Surjective
+
+variable {Z : Scheme.{u}} (π : Z ⟶ X) [Surjective π]
+
+/-- An endomorphism of the unit `Λ_X` of `D(X_ét, Λ)` which becomes the identity after `Lπ^*`
+for a surjective `π` is the identity: it is a morphism of sheaves placed in degree zero, and the
+pullback of sheaves along `π` is faithful. -/
+lemma eq_id_of_leftDerivedUpperStar_map_eq_id_of_surjective
+    (δ : 𝟙_ (DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) ⟶ 𝟙_ _)
+    (hδ : (L((π)^*[ModuleCat.{u + 1} Λ])).map δ = 𝟙 _) : δ = 𝟙 _ := by
+  let A := ModuleCat.{u + 1} Λ
+  let U := 𝟙_ (Sheaf X.smallEtaleTopology A)
+  let u := singleFunctorObjUnitIso A X
+  let S := DerivedCategory.singleFunctor (Sheaf X.smallEtaleTopology A) 0
+  obtain ⟨δ₀, hδ₀⟩ := S.map_surjective (u.hom ≫ δ ≫ u.inv)
+  let c : S ⋙ L((π)^*[A]) ≅ (π)^*[A] ⋙ DerivedCategory.singleFunctor _ 0 :=
+    Functor.isoWhiskerLeft S (leftDerivedUpperStarIsoMapDerivedCategory A π) ≪≫
+      ((π)^*[A]).mapDerivedCategorySingleFunctor 0
+  have h₁ : (L((π)^*[A])).map (S.map δ₀) = 𝟙 _ := by
+    rw [hδ₀, Functor.map_comp, Functor.map_comp, hδ, Category.id_comp, ← Functor.map_comp,
+      Iso.hom_inv_id, CategoryTheory.Functor.map_id]
+  have h₂ : (DerivedCategory.singleFunctor _ 0).map (((π)^*[A]).map δ₀) =
+      (DerivedCategory.singleFunctor _ 0).map (((π)^*[A]).map (𝟙 U)) := by
+    have := c.hom.naturality δ₀
+    rw [Functor.comp_map, h₁] at this
+    erw [Category.id_comp] at this
+    rw [CategoryTheory.Functor.map_id, CategoryTheory.Functor.map_id, ← cancel_epi (c.hom.app U)]
+    exact this.symm.trans (Category.comp_id _).symm
+  have := Etale.faithful_upperStar_of_surjective Λ π π.surjective
+  have h₄ : δ₀ = 𝟙 U := ((π)^*[A]).map_injective
+    ((DerivedCategory.singleFunctor _ 0).map_injective h₂)
+  rw [h₄, CategoryTheory.Functor.map_id] at hδ₀
+  calc δ = u.inv ≫ (u.hom ≫ δ ≫ u.inv) ≫ u.hom := by simp
+    _ = 𝟙 _ := by rw [← hδ₀, Category.id_comp, Iso.inv_hom_id]
+
+/-- An endomorphism `γ` of an invertible object `F` of `D(X_ét, Λ)` with `Lπ^* γ = 𝟙` for a
+surjective `π` is the identity, as in
+`AlgebraicGeometry.Etale.eq_id_of_leftDerivedUpperStar_map_eq_id_of_isInvertible`. -/
+lemma eq_id_of_leftDerivedUpperStar_map_eq_id_of_isInvertible_of_surjective
+    {F : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
+    (hF : DerivedCategory.isInvertible Λ X F) (γ : F ⟶ F)
+    (hγ : (L((π)^*[ModuleCat.{u + 1} Λ])).map γ = 𝟙 _) : γ = 𝟙 _ := by
+  obtain ⟨M, ⟨e⟩, ⟨e'⟩⟩ := hF
+  exact MonoidalCategory.eq_id_of_map_eq_id_of_tensorInverse L((π)^*[ModuleCat.{u + 1} Λ])
+    (leftDerivedUpperStarTensorNatIso (ModuleCat.{u + 1} Λ) π)
+    (eq_id_of_leftDerivedUpperStar_map_eq_id_of_surjective π) e e' γ hγ
+
+end Surjective
 end Etale
 
 end AlgebraicGeometry

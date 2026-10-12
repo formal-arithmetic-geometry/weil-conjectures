@@ -278,6 +278,7 @@ theorem Etale.isZero_higherDirectImage_of_isPullback_of_isProper [Finite Λ] {k 
   let t := Y''.algClosurePoint y
   let sq' := IsPullback.of_hasPullback p' t
   have := Etale.isIso_baseChange_of_isProper_of_isAddTorsion_ring Λ isAddTorsion_of_finite sq'
+  rw [Etale.baseChange_eq_derivedBaseChangeMapPlus] at this
   -- the geometric fibre has dimension at most `d`
   have hdim : topologicalKrullDim (pullback p' t : Scheme.{u}) ≤ (d : WithBot ℕ∞) := by
     let e := (sq'.paste_horiz sq).isoPullback

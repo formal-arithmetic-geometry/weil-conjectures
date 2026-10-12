@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.Compactification.Affine
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.AffineLine
+public import WeilConjectures.EtaleCohomology.Purity.Smooth.AffineSpaceAdjunction
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.Coprojection
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.Twist
 public import WeilConjectures.SixFunctors.Etale.Derived.CoefficientsShift
@@ -36,15 +37,14 @@ affine line, where the input is `sk-prop-a1` (for clause (i)) and affine-line pu
 
 - `AlgebraicGeometry.Etale.nonempty_iso_rightDerivedUpperShriek_affineSpaceZero`: clause (i),
   `Rz^! Λ(c)[2c] ≅ Λ_B`.
-- `AlgebraicGeometry.Etale.nonempty_adjunction_rightDerivedLowerShriek_affineSpace`: the
-  ambient adjunction `Rp_{d!} ⊣ Lp_d^*(-)(d)[2d]` (`cor-amb-affine-space-adjunction`, stated
-  here as an input from subsection `sk-prop-sf-cbc`).
 - `AlgebraicGeometry.Etale.nonempty_iso_rightDerivedUpperShriek_affineLine`: affine-line purity,
   `Rp^! K ≅ Lp^* K (1)[2]`, by uniqueness of right adjoints.
 - `AlgebraicGeometry.Etale.nonempty_iso_rightDerivedUpperShriek_affineSpace`: clause (ii),
   affine-space purity `Rp_c^! K ≅ Lp_c^* K (c)[2c]`.
 - `AlgebraicGeometry.Etale.nonempty_iso_dualizingComplex_affineSpace`: its case `K = Λ_B`,
   `ω_{p_c} ≅ Λ(c)[2c]`.
+- `AlgebraicGeometry.Etale.nonempty_iso_sectionInvariant_affineSpace`: the section invariant of
+  the standard pair, `𝒞(𝔸^c_B → B, 0) ≅ Λ_B(c)[2c]`.
 
 ## Implementation notes
 
@@ -215,24 +215,6 @@ theorem nonempty_iso_rightDerivedUpperShriek_affineSpaceZero [HasTateTwist.IsNor
 
 /-! ### The `Rp^!`-form -/
 
-/-- Blueprint `cor-amb-affine-space-adjunction`: affine-space ambient adjunction
-
-For the projection `p_d : 𝔸^d_S → S` of relative affine space over a locally noetherian scheme
-`S` on which the exponent of `Λ` is invertible, on the entire ordinary derived categories of
-étale `Λ`-module sheaves,
-
-`Rp_{d!} ⊣ Lp_d^*(-)(d)[2d]`.
-
-It is obtained by composing `j_! ⊣ j^*` for the open immersion `j : 𝔸¹_S ↪ ℙ¹_S` with the
-explicit projective-line adjunction `Rq_* ⊣ q^*(1)[2]` (`thm-amb-p1-adjunction`), and
-iterating along the tower of affine-line projections, the twists adding up. -/
-theorem nonempty_adjunction_rightDerivedLowerShriek_affineSpace [HasTateTwist.IsNormalized Λ]
-    (d : ℕ) (S : Scheme.{u}) [IsLocallyNoetherian S] [HasInvertibleExponent Λ S] :
-    Nonempty (R((𝔸(ULift.{u} (Fin d); S) ↘ S))_![ModuleCat.{u + 1} Λ] ⊣
-      L(((𝔸(ULift.{u} (Fin d); S) ↘ S))^*[ModuleCat.{u + 1} Λ]) ⋙
-        twistShift Λ 𝔸(ULift.{u} (Fin d); S) d) :=
-  sorry
-
 /-- Blueprint `thm-pur-affine-line-purity`: affine-line purity
 
 For the projection `p : 𝔸¹_Y → Y` of the affine line over a separated scheme of finite type
@@ -245,10 +227,11 @@ In the blueprint the isomorphism is the comparison `γ_{p,K}`, the transpose und
 (`def-pur-affine-line-purity-comparison`); this comparison is not constructed, so only the
 existence of the isomorphism is recorded.
 
-The proof is the blueprint's: `Rp_!` has the two right adjoints `Rp^!` (by definition) and
-`Lp^*(-)(1)[2]` (the explicit affine-space adjunction, `cor-amb-affine-space-adjunction`), and
-right adjoints are unique up to isomorphism. The hypothesis `K ∈ D^b_{ctf}` of the blueprint is
-not needed for this argument. -/
+The proof follows the blueprint: `Rp^!` is by definition the right adjoint of `Rp_!`, and
+`Rp_! ⊣ p^*(1)[2]` is the affine-space ambient adjunction
+(`AlgebraicGeometry.Etale.nonempty_rightDerivedLowerShriek_adjunction_affineSpace`,
+`cor-amb-affine-space-adjunction`), so the two right adjoints agree. In particular the
+isomorphism holds for every `K`, constructible or not. -/
 theorem nonempty_iso_rightDerivedUpperShriek_affineLine [HasTateTwist.IsNormalized Λ]
     {k : Type u} [Field k]
     (Y : Scheme.{u}) (aY : Y ⟶ Spec (.of k)) [IsSeparated aY] [LocallyOfFiniteType aY]
@@ -259,10 +242,8 @@ theorem nonempty_iso_rightDerivedUpperShriek_affineLine [HasTateTwist.IsNormaliz
           (𝔸(ULift.{u} (Fin 1); Y) ↘ Y)).obj K ≅
       (twistShift Λ 𝔸(ULift.{u} (Fin 1); Y) 1).obj
         ((L(((𝔸(ULift.{u} (Fin 1); Y) ↘ Y))^*[ModuleCat.{u + 1} Λ])).obj K)) := by
-  have : IsLocallyNoetherian Y := LocallyOfFiniteType.isLocallyNoetherian aY
-  obtain ⟨adj⟩ := nonempty_adjunction_rightDerivedLowerShriek_affineSpace Λ 1 Y
-  exact ⟨((rightDerivedUpperShriekAdjunction _ _).rightAdjointUniq adj).app K ≪≫
-    eqToIso (by simp)⟩
+  obtain ⟨adj⟩ := nonempty_rightDerivedLowerShriek_adjunction_affineSpace Λ 1 Y
+  exact ⟨((rightDerivedUpperShriekAdjunction _ _).rightAdjointUniq adj).app K⟩
 
 omit [HasTateTwist Λ] in
 /-- Blueprint `sk-prop-an`, Step 6: the projection of `𝔸^{d+1}_Y` is that of `𝔸¹_{Y'}`
@@ -391,6 +372,28 @@ theorem nonempty_iso_dualizingComplex_affineSpace [HasTateTwist.IsNormalized Λ]
   exact ⟨(rightDerivedUpperShriek _ _).mapIso (HasTateTwist.twistObjectZeroIso Y).symm ≪≫ e ≪≫
     (twistShift Λ _ d).mapIso ((L(((𝔸(ULift.{u} (Fin d); Y) ↘ Y))^*[ModuleCat.{u + 1} Λ])).mapIso
       (HasTateTwist.twistObjectZeroIso Y) ≪≫ leftDerivedUpperStarUnitIso _ _)⟩
+
+/-- Blueprint `sk-thm-smooth-purity`: Finite-coefficient smooth purity
+
+*Step 3, the standard pair.* For the projection `π : 𝔸^c_B ⟶ B` of a trivial vector bundle of
+rank `c` with zero section `0`, over a separated scheme of finite type over a field, the
+section invariant is the Tate twist:
+
+`𝒞(π, 0) = L0^* ω_π ≅ L0^* Λ(c)[2c] ≅ Λ_B(c)[2c]`,
+
+by affine-space purity (`AlgebraicGeometry.Etale.nonempty_iso_dualizingComplex_affineSpace`)
+and the compatibility of the twist with pullback. -/
+theorem nonempty_iso_sectionInvariant_affineSpace [HasTateTwist.IsNormalized Λ]
+    {k : Type u} [Field k] (c : ℕ)
+    (B : Scheme.{u}) (aB : B ⟶ Spec (.of k)) [IsSeparated aB] [LocallyOfFiniteType aB]
+    [HasInvertibleExponent Λ B] :
+    Nonempty (sectionInvariant Λ (𝔸(ULift.{u} (Fin c); B) ↘ B)
+        (AffineSpace.zeroSection (ULift.{u} (Fin c)) B) ≅
+      (twistShift Λ B c).obj (constantComplex Λ B)) := by
+  obtain ⟨e⟩ := nonempty_iso_dualizingComplex_affineSpace Λ c B aB
+  exact ⟨(L((AffineSpace.zeroSection (ULift.{u} (Fin c)) B)^*[ModuleCat.{u + 1} Λ])).mapIso
+      (e ≪≫ twistShiftConstantComplexIso Λ _ _) ≪≫
+    leftDerivedUpperStarTateShiftIso Λ _ _ ≪≫ (twistShiftConstantComplexIso Λ B _).symm⟩
 
 end Etale
 
