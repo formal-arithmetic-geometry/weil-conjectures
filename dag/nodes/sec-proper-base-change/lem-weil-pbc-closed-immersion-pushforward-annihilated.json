@@ -30,115 +30,78 @@
  ],
  "proof": [
   {
-   "text": "(1), quasi-coherence. The closed immersion $i$ is finite, in particular affine [lem-weil-pbc-closed-immersion-finite]. For an affine morphism the pushforward of a quasi-coherent module is quasi-coherent [lem-weil-pbc-affine-pushforward-base-change](1). Hence $i_*\\mathcal G$ is a quasi-coherent $\\mathcal O_X$-module for every quasi-coherent $\\mathcal O_Z$-module $\\mathcal G$. (Stacks deduces this from Schemes 01LC, a closed immersion being quasi-compact and separated by Morphisms 01QT, 01QU; the affine case used here is the special case of a closed immersion being affine, Morphisms 01SE.)",
+   "text": "A closed immersion is affine by the Mathlib instance for IsClosedImmersion. Apply affinePushforward_baseChange to the identity base-change square (i, i, id_X, id_Z), and take its quasi-coherence conjunct to prove the quasi-coherence of i_*G.",
    "uses": [
-    "lem-weil-pbc-closed-immersion-finite",
+    "def-weil-closed-immersion",
     "lem-weil-pbc-affine-pushforward-base-change"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/morphisms.tex",
-    "place": "Morphisms, Lemma 01QY (lemma-i-star-equivalence), proof, first paragraph"
-   }
+   "elementary": false
   },
   {
-   "text": "(1), annihilation. Let $V\\subseteq X$ be open, $a\\in\\mathcal I(V)$ and $s\\in(i_*\\mathcal G)(V)=\\mathcal G(i^{-1}V)$. The $\\mathcal O_X(V)$-module structure of $(i_*\\mathcal G)(V)$ is the $\\mathcal O_Z(i^{-1}V)$-module structure of $\\mathcal G(i^{-1}V)$ restricted along $i^\\sharp_V:\\mathcal O_X(V)\\to\\mathcal O_Z(i^{-1}V)$ (definition of the pushforward of modules [def-pc-module-pullback]), so $as=i^\\sharp_V(a)\\,s=0\\cdot s=0$, because $\\mathcal I(V)=\\ker i^\\sharp_V$ [def-sbc-closed-immersion-ideal-sheaf]. Hence $\\mathcal I\\,(i_*\\mathcal G)=0$ (for every $\\mathcal O_Z$-module $\\mathcal G$).",
+   "text": "For a section a in i.ker.idealOfOpens(V), mem_idealOfOpens_iff says that a maps to zero under i.ker.subschemeι.app(V). The factorization i = i.toImage followed by i.ker.subschemeι and comp_app therefore show that i.app(V)(a) = 0. The scalar action on i_*G is restriction along this map, so a times s = 0 times s = 0 for every section s.",
    "uses": [
     "def-pc-module-pullback",
     "def-sbc-closed-immersion-ideal-sheaf"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/modules.tex",
-    "place": "Modules, Lemma 08KS (lemma-i-star-equivalence), cited in the proof of Morphisms 01QY for I(i_*F) = 0"
-   }
+   "elementary": true
   },
   {
-   "text": "(2), quasi-coherence and finite type of $i^*\\mathcal F$. Since $\\mathcal F$ is quasi-coherent, $i^*\\mathcal F$ is quasi-coherent [lem-weil-pbc-module-pullback-quasi-coherent]. If $\\mathcal F$ is moreover of finite type, then $i^*\\mathcal F$ is of finite type by [lem-weil-pbc-support-pullback-finite-type](3) applied to $f=i$.",
+   "text": "Both tensorPullback(i) and Mathlib pullback(i) are left adjoints to pushforward(i). Uniqueness of left adjoints gives a natural isomorphism between them. Apply the already proved isQuasicoherent_pullback instance to F and transport quasi-coherence through this isomorphism.",
    "uses": [
+    "def-pc-module-pullback",
     "lem-weil-pbc-module-pullback-quasi-coherent",
-    "lem-weil-pbc-support-pullback-finite-type"
+    "lem-pc-module-pullback-adjunction"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/modules.tex",
-    "place": "Modules, Lemma 01BG (lemma-pullback-quasi-coherent) and Lemma 01B6 (lemma-pullback-finite-type)"
-   }
+   "elementary": false
   },
   {
-   "text": "(2), stalks of $\\eta_{\\mathcal F}$ outside $i(Z)$. By [lem-weil-pbc-module-iso-on-stalks] it suffices to show that the stalk map $(\\eta_{\\mathcal F})_x:\\mathcal F_x\\to(i_*i^*\\mathcal F)_x$ [def-weil-pbc-module-stalk] is bijective for every $x\\in X$. Let $x\\notin i(Z)$. Since $i(Z)$ is closed [def-weil-closed-immersion], $V=X\\setminus i(Z)$ is an open neighbourhood of $x$ with $i^{-1}V=\\emptyset$. Then $(i_*i^*\\mathcal F)_x=0$ [lem-weil-pbc-closed-pushforward-stalks](1); and $\\mathcal O_Z(\\emptyset)=0$ gives $\\mathcal I(W)=\\ker(\\mathcal O_X(W)\\to0)=\\mathcal O_X(W)$ [def-sbc-closed-immersion-ideal-sheaf], so $1\\in\\mathcal I(W)$ and every $s\\in\\mathcal F(W)$ satisfies $s=1\\cdot s=0$ by $\\mathcal I\\mathcal F=0$; hence $\\mathcal F_x=0$. So $(\\eta_{\\mathcal F})_x:0\\to0$ is bijective.",
+   "text": "Put J = i.ker and let mu : J tensor F -> F be J.toModulesι whiskered by F followed by the left unitor. On a pure tensor a tensor s over V, mu has value J.toModulesι(a) times s. The ideal-range lemma puts J.toModulesι(a) in J.idealOfOpens(V), so the annihilation hypothesis makes this value zero. To prove mu = 0 globally, precompose with tensorObjIsoSheafification.inv and use injectivity of the sheafification adjunction hom equivalence. Equality of the resulting presheaf maps is checked sectionwise by tensor induction: zero and addition use linearity, while the pure-tensor case is the calculation just given.",
    "uses": [
-    "lem-weil-pbc-module-iso-on-stalks",
-    "lem-weil-pbc-closed-pushforward-stalks",
-    "def-weil-pbc-module-stalk",
-    "def-weil-closed-immersion",
-    "def-sbc-closed-immersion-ideal-sheaf"
+    "def-sbc-closed-immersion-ideal-sheaf",
+    "def-pur-sheaf-tensor-product",
+    "def-weil-presheaf-modules-sheafification"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/modules.tex",
-    "place": "Modules, Lemma 08KS (lemma-i-star-equivalence), proof, second paragraph (case x not in i(Z)); Sheaves, Lemma 00AE (lemma-stalks-closed-pushforward), first case, literature/stacks-project/sheaves.tex"
-   }
+   "elementary": true
   },
   {
-   "text": "(2), the local ring map at a point of $Z$. Let $z\\in Z$, $x=i(z)$, and let $\\varphi=i^\\sharp_z:\\mathcal O_{X,x}\\to\\mathcal O_{Z,z}$, $a_x\\mapsto(i^\\sharp_V(a))_z$ for $a\\in\\mathcal O_X(V)$; it is the composite of the stalk map $\\mathcal O_{X,x}\\to(i_*\\mathcal O_Z)_x$ of $i^\\sharp$ with the bijection $\\beta=c_z:(i_*\\mathcal O_Z)_x\\to\\mathcal O_{Z,z}$ of [lem-weil-pbc-closed-pushforward-stalks](2) for $\\mathcal G=\\mathcal O_Z$ ($i$ is a homeomorphism onto the closed subset $i(Z)$ [def-weil-closed-immersion]). (a) $\\varphi$ is surjective: $i^\\sharp:\\mathcal O_X\\to i_*\\mathcal O_Z$ is surjective as a map of sheaves [def-weil-closed-immersion], hence surjective on the stalk at $x$ [lem-weil-pbc-locally-surjective-iff-stalks], and $\\beta$ is bijective. (b) $K=\\ker\\varphi$ kills $\\mathcal F_x$: if $a\\in\\mathcal O_X(V)$ and $\\varphi(a_x)=0$, then, $\\beta$ being injective, the germ of $i^\\sharp_V(a)$ at $x$ in $(i_*\\mathcal O_Z)_x$ is $0$ [def-weil-pbc-module-stalk], so there is an open $x\\in W\\subseteq V$ with $i^\\sharp_W(a|_W)=i^\\sharp_V(a)|_{i^{-1}W}=0$, i.e. $a|_W\\in\\mathcal I(W)$ [def-sbc-closed-immersion-ideal-sheaf]. For $s\\in\\mathcal F(V')$ with $x\\in V'$, put $W'=W\\cap V'$: $a_x s_x=(a|_{W'}s|_{W'})_x=0$ since $a|_{W'}\\in\\mathcal I(W')$ and $\\mathcal I\\mathcal F=0$. So $K\\mathcal F_x=0$.",
+   "text": "Apply closedImmersion_unit_quotient. It supplies an epimorphic adjunction unit eta and says that image.ι(mu) is its kernel. Since factorThruImage(mu) is epi and its composite with image.ι(mu) is mu = 0, cancellation proves image.ι(mu) = 0. If g followed by eta is zero, the universal property of this kernel gives g = l followed by image.ι(mu) = 0. The preadditive cancellation criterion therefore makes eta mono. In the abelian category of modules a mono and epi is an isomorphism.",
    "uses": [
-    "lem-weil-pbc-closed-pushforward-stalks",
-    "def-weil-closed-immersion",
-    "lem-weil-pbc-locally-surjective-iff-stalks",
-    "def-weil-pbc-module-stalk",
-    "def-sbc-closed-immersion-ideal-sheaf"
+    "lem-weil-pbc-closed-immersion-unit-quotient"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/modules.tex",
-    "place": "Modules, Lemma 08KS (lemma-i-star-equivalence), proof, second paragraph: 'O_{Z,x} = O_{X,x}/I_x and G_x is annihilated by I_x'"
-   }
+   "elementary": false
   },
   {
-   "text": "(2), stalks of $\\eta_{\\mathcal F}$ on $i(Z)$. Keep $z$, $x=i(z)$, $\\varphi$, $K$ of the previous step and put $M=\\mathcal F_x$. Let $\\beta':(i_*i^*\\mathcal F)_x\\to(i^*\\mathcal F)_z$ be the bijection $c_z$ of [lem-weil-pbc-closed-pushforward-stalks](2) for the $\\mathcal O_Z$-module $i^*\\mathcal F$, and $\\gamma:(i^*\\mathcal F)_z\\to M\\otimes_{\\mathcal O_{X,x}}\\mathcal O_{Z,z}$ the isomorphism of [lem-weil-pbc-module-stalk-pullback] (tensor product formed with $\\varphi$). For $s\\in\\mathcal F(V)$, $x\\in V$: $(\\eta_{\\mathcal F})_x(s_x)$ is the germ at $x$ of $\\eta_{\\mathcal F,V}(s)=i^*s\\in(i_*i^*\\mathcal F)(V)=(i^*\\mathcal F)(i^{-1}V)$ [def-pc-module-pullback], $\\beta'$ sends it to $(i^*s)_z$, and $\\gamma((i^*s)_z)=s_x\\otimes1$. Hence $\\gamma\\circ\\beta'\\circ(\\eta_{\\mathcal F})_x=c$ with $c:M\\to M\\otimes_{\\mathcal O_{X,x}}\\mathcal O_{Z,z}$, $m\\mapsto m\\otimes1$. The map $c$ is bijective: $\\varphi$ is surjective with kernel $K$ and $KM=0$ (previous step), so $(m,b)\\mapsto\\tilde b\\,m$ ($\\tilde b\\in\\mathcal O_{X,x}$ any lift of $b$) is a well-defined $\\mathcal O_{X,x}$-bilinear map $M\\times\\mathcal O_{Z,z}\\to M$, whose induced map $M\\otimes\\mathcal O_{Z,z}\\to M$ is inverse to $c$ (it sends $m\\otimes b=\\tilde bm\\otimes1$ to $\\tilde bm$). Since $\\beta'$ and $\\gamma$ are bijective, $(\\eta_{\\mathcal F})_x=\\beta'^{-1}\\gamma^{-1}c$ is bijective.",
-   "uses": [
-    "lem-weil-pbc-closed-pushforward-stalks",
-    "lem-weil-pbc-module-stalk-pullback",
-    "def-pc-module-pullback"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/modules.tex",
-    "place": "Modules, Lemma 08KS (lemma-i-star-equivalence), proof, second paragraph (case x in Z: G_x -> G_x (x) O_{Z,x} via Sheaves 0098 and 00AE); the algebra fact N -> N (x)_R R/I is the one of the proof of Morphisms 01QY ('proof of this easy algebra fact is omitted')"
-   }
-  },
-  {
-   "text": "(2), conclusion. $\\eta_{\\mathcal F}$ is a morphism of $\\mathcal O_X$-modules [def-pc-module-pullback] whose stalk maps are bijective at every $x\\in X$ (the two previous steps cover $x\\notin i(Z)$ and $x\\in i(Z)$), hence an isomorphism of $\\mathcal O_X$-modules [lem-weil-pbc-module-iso-on-stalks].",
+   "text": "The unit-quotient lemma uses Classical.choice(nonempty_tensorPullbackAdjunction i), whereas this statement uses Classical.choose(exists_tensorPullbackAdjunction i). Compare these two adjunctions by leftAdjointUniq. The unit_leftAdjointUniq_hom_app identity writes the second unit as the first unit followed by pushforward of the component of the comparison isomorphism. Both factors are isomorphisms, so the exact unit appearing in this statement is invertible.",
    "uses": [
     "def-pc-module-pullback",
-    "lem-weil-pbc-module-iso-on-stalks"
+    "lem-pc-module-pullback-adjunction"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/morphisms.tex",
-    "place": "Morphisms, Lemma 01QY (lemma-i-star-equivalence), proof, third paragraph and its footnote (the map G -> i_* i^* G is an isomorphism, proved in the proof of Modules 08KS)"
-   }
+   "elementary": true
+  },
+  {
+   "text": "If F is finite type, install that hypothesis as a local instance and take the first conjunct of tensorPullback_isFiniteType Z X i F. This proves finite type of tensorPullback(i)(F) directly, without requiring the support and residue-fibre assertions.",
+   "uses": [
+    "lem-weil-pbc-module-pullback-finite-type"
+   ],
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-closed-immersion-finite",
+  "def-weil-closed-immersion",
   "lem-weil-pbc-affine-pushforward-base-change",
   "def-pc-module-pullback",
   "def-sbc-closed-immersion-ideal-sheaf",
   "lem-weil-pbc-module-pullback-quasi-coherent",
-  "lem-weil-pbc-support-pullback-finite-type",
-  "lem-weil-pbc-module-iso-on-stalks",
-  "lem-weil-pbc-closed-pushforward-stalks",
-  "def-weil-pbc-module-stalk",
-  "def-weil-closed-immersion",
-  "lem-weil-pbc-locally-surjective-iff-stalks",
-  "lem-weil-pbc-module-stalk-pullback"
+  "lem-pc-module-pullback-adjunction",
+  "def-pur-sheaf-tensor-product",
+  "def-weil-presheaf-modules-sheafification",
+  "lem-weil-pbc-closed-immersion-unit-quotient",
+  "lem-weil-pbc-module-pullback-finite-type"
  ],
  "proof_origin": {
   "by": "document",
-  "document": "literature/stacks-project/morphisms.tex",
-  "place": "Morphisms, Lemma 01QY (lemma-i-star-equivalence) with its proof; for the isomorphism G -> i_*i^*G the stalkwise proof of Modules, Lemma 08KS (lemma-i-star-equivalence, literature/stacks-project/modules.tex) to which the footnote of 01QY refers; Modules 01BG and 01B6 for i^*F"
+  "document": "literature/stacks-project/modules.tex",
+  "place": "Modules, Lemma 08KS and Lemma 01B6; Morphisms, Lemma 01QY. The Lean proof uses the existing closed-immersion unit/quotient lemma (04CJ(1), proved stalkwise by 08KS), derives its zero-kernel special case by the sectionwise annihilation calculation and the sheafification adjunction, and compares the two chosen adjunctions by uniqueness."
  },
  "mathlib_searches": [
   {
@@ -225,5 +188,15 @@
   "group": "E1",
   "result": "pass",
   "note": "X Z : Scheme.{u}, i closed immersion [IsClosedImmersion i]; I = i.ker.idealOfOpens V (= range i.ker.toModulesι.app V by range_toModulesι_app_eq_idealOfOpens), all opens; (1) G qcoh => pushforward qcoh and a•s=0 (smul is restriction along i.app V, rfl-checked); (2) F qcoh with sectionwise IF=0 => tensorPullback qcoh, IsIso of unit of Classical.choose exists_tensorPullbackAdjunction, finite type conditional; hypothesis not automatic (simp fails); node unchanged but lean record"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X3",
+  "result": "pass",
+  "landing": "20261012T144200-L-2112551",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
