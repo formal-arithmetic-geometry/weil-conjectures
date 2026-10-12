@@ -9384,3 +9384,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 20:22 L: merged deliver/M2/Sheaf.AlgebraicGeometry.FiniteFreeStalkChainMapLiftLocal (stage 3; reviewer PASS; first push; landing 20261012T202244-L-706179 (interface); batch 20261012T202227; modules 3; new nodes 2)
 - 20:22 L: merged deliver/M3/Sheaf.AlgebraicGeometry.StructureSheafCohomologyPullbackFunctorial (stage 3; reviewer PASS; first push; landing 20261012T202245-L-706354 (interface); batch 20261012T202227; modules 3; new nodes 2)
 - 20:22 L: merged deliver/N1/Sheaf.AlgebraicGeometry.EtaleSectionsRestrictionSquare (stage 3; reviewer PASS; first push; landing 20261012T202245-L-706454 (proof); batch 20261012T202227; modules 1; new nodes 0)
+- 20:22 L: merged deliver/N2/Sheaf.AlgebraicGeometry.KoszulAffineDetection (stage 3; reviewer PASS; first push; landing 20261012T202246-L-706606 (interface); batch 20261012T202227; modules 2; new nodes 1)

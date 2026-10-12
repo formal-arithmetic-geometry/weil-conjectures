@@ -1,0 +1,133 @@
+{
+ "id": "lem-pc-koszul-supported-augmentation-vanishing",
+ "kind": "statement",
+ "title": "Supported structure maps are eventually killed by Koszul augmentations",
+ "statement": "Let A be a commutative ring, X=Spec(A) [def-pc-scheme], r a natural number, and f:Fin(r)→A. Let U be the union of the principal opens D(f_i). Use the shared derived category of modules on X and its localized site over U [def-pc-derived-category]. Let E belong to D_QCoh(O_X), with zero restriction to U. For the Koszul tail power system [def-sc-koszul-open-system], write I_e, O and u_e:I_e→O for its derived tail, structure object and augmentation, where index e means exponent e+1. For every integer n and every morphism φ:O[n]→E, there exists a natural number e for which u_e[n] followed by φ is zero. No orthogonality, regularity, nonzero-ring or nonempty-family hypothesis is made.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "def-sc-koszul-open-system"
+ ],
+ "source": {
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Equation 36.9.4.1 (Tag 08DC), Proposition 36.9.5 (Tag 08DD), and Lemma 36.15.2 (Tag 09IR), supported-object reduction"
+ },
+ "proof": [
+  {
+   "text": "Move source shift n to target shift -n. The resulting target still has quasi-coherent cohomology and zero restriction. Apply the canonical Koszul Hom colimit comparison of lem-sc-affine-perfect-open-represent-cohomology. Restriction followed by the inverse restricted augmentation sends the index-zero element u_0 composed with φ to zero because the restricted target is zero. The comparison is a colimit cocone, so this element equals the zero element in that colimit. For arbitrary universes, first choose standard localizations and represent E by a complex; transport Hom via uniqueness of localization and transport restriction via mapDerivedCategoryFactors. Compose restriction with Scheme.Modules.overEquiv when applying the comparison; this exact equivalence preserves zero.",
+   "uses": [
+    "lem-sc-affine-perfect-open-represent-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 08DC comparison and Tag 08DD proof"
+   }
+  },
+  {
+   "text": "In a filtered colimit of sets, equality with zero at index zero is witnessed at a later index b. Apply Mathlib Types.FilteredColimit.isColimit_eq_iff' to the comparison cocone. The Hom diagram transition is precomposition with koszulOpenMap, which sends zero to zero. The augmentation compatibility supplied by represent-cohomology identifies the transitioned u_0 composed with φ with u_b composed with φ. Hence this last composite is zero. Move the shift back to the source. The empty family has a zero tail and kills every map immediately; the zero ring and zero target also satisfy the assertion.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 08DC compatibility of the comparison with the power system; filtered-colimit equality argument"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-affine-perfect-open-represent-cohomology"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tags 08DC and 08DD, with explicit localization-universe and filtered-colimit glue"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A morphism from the structure sheaf to a quasi coherent derived object vanishing on a finite principal open is killed by a Koszul augmentation",
+   "results": "Service unavailable: Internal Server Error.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Koszul augmentation eventually kills a cohomology class whose restriction to the finite union of principal opens is zero",
+   "results": "Eight results including Scheme.zero_of_zero_cover, exists_of_res_zero_of_qcqs, and exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isAffineOpen. These concern ordinary sections, not derived Koszul augmentations. No match.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "eventually.*Koszul|Koszul.*eventually|augmentation.*vanish; KoszulOpenSystem and AffinePerfectOpenRepresentCohomology in Sheaf; isZero.*homology in Mathlib and WeilConjectures",
+   "results": "The existing KoszulOpenSystem gives the diagram and augmentation laws. AffinePerfectOpenRepresentCohomology gives the comparison with extra localization instances, but no supported-map eventual-zero theorem at the given localization universes. No exact match. Blueprint searches for Koszul cohomology, eventually augmentation and 08DC returned zero matches.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.KoszulAffineDetection",
+  "date": "2026-10-13",
+  "group": "N2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Perfect-generation induction: supported affine object; filtered-colimit comparison step proving that maps from structure shifts are eventually killed by Koszul augmentations.",
+   "via": [
+    "lem-pc-koszul-affine-detection",
+    "lem-pc-derived-qcoh-perfect-generation",
+    "lem-pc-perfect-generation-koszul-orthogonal"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.KoszulSupportedAugmentationVanishing",
+  "file": "lean/Sheaf/AlgebraicGeometry/KoszulSupportedAugmentationVanishing.lean",
+  "declaration": "AlgebraicGeometry.koszul_supported_augmentation_eventually_zero",
+  "statement": "theorem koszul_supported_augmentation_eventually_zero\n    (A : Type u) [CommRing A] (r : ℕ) (f : Fin r → A)\n    [HasDerivedCategory.{w}\n      (SheafOfModules.{u} (moduleRings (Spec (.of A)).toRingedSpace))]\n    (U : (Spec (.of A)).Opens)\n    (hU : U = ⨆ i : Fin r, PrimeSpectrum.basicOpen (f i))\n    [HasDerivedCategory.{w}\n      (SheafOfModules.{u} ((moduleRings (Spec (.of A)).toRingedSpace).over U))]\n    (E : schemeDerivedQCohCategory (Spec (.of A)))\n    (hres : IsZero ((SheafOfModules.overFunctor.{u}\n      (moduleRings (Spec (.of A)).toRingedSpace) U).mapDerivedCategory.obj E.obj))\n    (n : ℤ) (φ : (koszulOpenStructure A)⟦n⟧ ⟶ E.obj) :\n    ∃ e : ℕ, (koszulOpenUnit A r f e)⟦n⟧' ≫ φ = 0",
+  "branch": "sheaf-dag",
+  "by": "N2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N2",
+  "result": "pass",
+  "landing": "20261012T202246-L-706606",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N2",
+  "result": "pass",
+  "landing": "20261012T202246-L-706606",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

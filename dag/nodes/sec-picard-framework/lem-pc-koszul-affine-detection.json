@@ -27,46 +27,49 @@
  ],
  "proof": [
   {
-   "text": "Fix an integer e\\ge1 and the diagonal tuple (e,...,e); the hypothesis gives Hom(K_{(e,...,e)}[m],E)=0 for every integer m. Since U=X minus V(f_1, ..., f_r)=D(f_1)\\cup\\cdots\\cup D(f_r), the represent-cohomology statement [lem-sc-affine-perfect-open-represent-cohomology] supplies perfect objects I_e with distinguished triangles I_e\\to O_X\\to K_e\\to I_e[1], compatible maps u_e:I_e\\to O_X, and the isomorphism colim_e Hom(I_e,F)\\to H^0(U,F|_U) for every F in D_QCoh(O_X); its K_e is the Koszul complex on f_1^e, ..., f_r^e, which is K_{(e,...,e)} up to a shift of indexing, harmless because the hypothesis holds for every shift. Fix n and apply Hom(-,E[n]) to the triangle: the long exact sequence Hom(K_e,E[n])\\to Hom(O_X,E[n])\\to Hom(I_e,E[n])\\to Hom(K_e,E[n+1]) has vanishing outer terms, so u_e^*:H^n(X,E)=Hom(O_X,E[n])\\to Hom(I_e,E[n]) is an isomorphism for every e, compatibly with the transition maps since the u_e are compatible.",
+   "text": "For each integer n and morphism φ:O_X[n]→E, apply lem-pc-koszul-supported-augmentation-vanishing to obtain an index e with u_e[n] followed by φ equal to zero. This step needs only the restriction-zero hypothesis, not orthogonality.",
    "uses": [
-    "lem-sc-affine-perfect-open-represent-cohomology"
+    "lem-pc-koszul-supported-augmentation-vanishing"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/perfect.tex",
-    "place": "Tag 09IR (lemma-orthogonal-koszul-complex), via proposition-represent-cohomology-class-on-open and Tag 06Z0"
+    "place": "Tag 09IR, proof using Lemma 36.9.6 and Lemma 36.3.5"
    }
   },
   {
-   "text": "Pass to the colimit over e: H^n(X,E)\\to colim_e Hom(I_e,E[n]) is an isomorphism (colimit of a system of isomorphisms out of a constant system). Composing with the isomorphism colim_e Hom(I_e,E[n])\\to H^0(U,E[n]|_U)=H^n(U,E|_U) of [lem-sc-affine-perfect-open-represent-cohomology], applied to F=E[n] in D_QCoh(O_X), shows H^n(X,E)\\cong H^n(U,E|_U)=0, because E restricted to U is zero. Hence H^n(X,E)=0 for every integer n.",
+   "text": "Extract the Koszul triangle I_e→O_X→K_e from lem-sc-affine-perfect-open-represent-cohomology, applying that theorem in standard localizations and transporting the triangle along the canonical triangulated localization equivalence. Shift the triangle by n. Yoneda exactness factors φ through K_e[n]. The diagonal tuple of positive exponents e+1 in horth makes the factor zero, hence φ=0. A termwise identity natural isomorphism between koszulOpenTilde and Mathlib tilde identifies K_e with the hypothesis object. Triangle shifting multiplies arrows by (-1)^n; this unit preserves the zero-precomposition equality.",
    "uses": [
-    "lem-sc-affine-perfect-open-represent-cohomology"
+    "lem-sc-affine-perfect-open-represent-cohomology",
+    "def-sc-koszul-open-system"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/perfect.tex",
-    "place": "Tag 09IR (lemma-orthogonal-koszul-complex), via proposition-represent-cohomology-class-on-open and Tag 06Z0"
+    "place": "Tag 09IR, proof using Lemma 36.9.6 and Lemma 36.3.5"
    }
   },
   {
-   "text": "By the affine quasi-coherent derived equivalence [lem-pc-affine-qcoh-derived-equivalence], E is isomorphic to the associated complex of R\\Gamma(X,E) in D(A), whose cohomology modules are the groups H^n(X,E)=0. So R\\Gamma(X,E)=0 in D(A) and therefore E=0 in D_QCoh(O_X).",
+   "text": "ExtendSingleIso, singleMapHomologicalComplex and tildeSelf identify the structure object with the derived single structure sheaf. All its shifted Hom sets into E are now subsingletons. Apply the zero-detection clause of lem-pc-perfect-generation-affine-base in a standard localization to a representative complex of E, whose quasi-coherent cohomology is transported by homologyFunctorFactors. Transfer the single-source Hom sets through Localization.homEquiv and transport zero back through Localization.uniq. This is precisely the affine derived-equivalence argument of the original plan, using its existing generator-criterion corollary.",
    "uses": [
-    "lem-pc-affine-qcoh-derived-equivalence"
+    "lem-pc-perfect-generation-affine-base"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/perfect.tex",
-    "place": "Tag 06Z0 (lemma-affine-compare-bounded), applied in Tag 09IR"
+    "place": "Tag 06Z0, affine comparison; Tag 09IS, affine base case"
    }
   }
  ],
  "proof_deps": [
-  "lem-pc-affine-qcoh-derived-equivalence",
+  "def-sc-koszul-open-system",
+  "lem-pc-koszul-supported-augmentation-vanishing",
+  "lem-pc-perfect-generation-affine-base",
   "lem-sc-affine-perfect-open-represent-cohomology"
  ],
  "proof_origin": {
   "document": "literature/stacks-project/perfect.tex",
-  "place": "Tag 09IR (lemma-orthogonal-koszul-complex), proof via proposition-represent-cohomology-class-on-open and Tag 06Z0",
+  "place": "Tag 09IR, supported-object reduction via Tags 08DC and 08DD; Tag 06Z0 and affine case of Tag 09IS. Lean interface glue written by N2.",
   "by": "document"
  },
  "mathlib_searches": [
@@ -163,5 +166,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N2",
+  "result": "pass",
+  "landing": "20261012T202246-L-706606",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
