@@ -342,11 +342,21 @@ theorem isPerverseGE_lowerShriek (d : ℕ) (f : X ⟶ Y) [IsAffineHom f] [Locall
     (hK : IsPerverseGE (f ≫ aY) n K) (hK' : constructibleFiniteTor (ModuleCat.{u + 1} Λ) X K) :
     IsPerverseGE aY (n - d) ((R(f)_![ModuleCat.{u + 1} Λ]).obj K) :=
   isPerverseGE_lowerShriek_of_supportCondition_rightDerivedLowerStar aY d f
-    -- The support estimate for `Rf_*` along the affine `f`: Artin's affine vanishing theorem
-    -- (BBD 4.1.1; Stacks `0F0X`: `Rᵠf_*` of a sheaf supported on points of transcendence
-    -- degree `≤ a` is supported on points of transcendence degree `≤ a - q`), applied to the
-    -- homology sheaves of `M`. Neither it nor its inputs (Stacks `0F0U`, `0F0W`, and the
-    -- affine bound `thm-sc-affine-torsion-cd`) are available in the repository.
+    -- PLAN (artingabber). The full support estimate (Stacks `0F0X`) needs the strict
+    -- henselisation stalk formula, which the repository lacks. Specialise to `dim Y ≤ d`
+    -- (the blueprint instance `p₂ : 𝔸¹ × 𝔸¹ ⟶ 𝔸¹`, `d = 1`), where the weak form suffices:
+    -- `Rᵖf_* G = 0` for `p > dim supp G`. If `Hⁿ(Rf_* M) ≠ 0`, dévissage gives
+    -- `Rⁿ⁻ᶜ f_* Hᶜ M ≠ 0`, so `n - c ≤ dim supp Hᶜ M ≤ m - c`, i.e. `n ≤ m`; and supports in
+    -- `Y` have dimension `≤ d`.
+    -- Weak form: reduce to `G = i_* G'` on the closed support `Z` (`dim Z ≤ e`), i.e. to
+    -- `Rᵖ g_* F = 0` (`p > e`) for affine `g : Z ⟶ Y`. Let `K = kˢᵉᵖ = ⋃ L` (finite `L`).
+    -- (A) `Rᵖ(Z_K ⟶ Y)_* = 0` for `p > e`: `W ×_Y Z_K` is affine of finite type over `K`
+    --     for affine `W` étale over `Y`, so `thm-sc-affine-torsion-cd` (`c = 0`) applies.
+    -- (L) limit theorem `higherDirectImage_limit` for the system `Z_L` over `Y`: a stalk
+    --     element of `Rᵖg_* F` dies in some `Rᵖ(Z_L ⟶ Y)_*`.
+    -- (B) the transition `Rᵖ g_* F ⟶ Rᵖ(Z_L ⟶ Y)_* F|` is mono: after the étale surjective
+    --     base change `Y_L ⟶ Y` (étale base change) it splits, `Z_L ×_Y Y_L ⟶ Z ×_Y Y_L`
+    --     having a section.
     (fun _ _ _ _ ↦ sorry) hK hK'
 
 end LowerShriek
