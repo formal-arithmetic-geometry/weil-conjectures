@@ -1,0 +1,139 @@
+{
+ "id": "lem-sp-bounded-filtered-page-construction",
+ "kind": "statement",
+ "title": "Functorial bounded filtered pages and their exact couple",
+ "statement": "Let C be an abelian category and let FilFin(C) denote the full subcategory of cochain complexes with finite decreasing subcomplex filtration [def-sp-filtration]. Suppose maps phi(U,p,r):F^p U/F^(p+r) U to F^(p-r+1) U/F^(p+1) U are given for every U, p and r>=1, characterized by their composites with the source quotient projections being the filtration inclusion followed by the target quotient projection [def-sp-filtered-complex-subquotients]. There exist a functor S:FilFin(C) to cohomological spectral sequences starting at page 1 [def-sp-spectral-sequence], comparisons e1:E1^(p,q)(U) isomorphic to H^(p+q)(gr^p U), and eI:Er^(p,q)(U) isomorphic to image H^(p+q)(phi(U,p,r)). At r=1, eI followed by the image inclusion equals e1 followed by H(phi). For every filtered morphism t there are restrictions s_i to the filtration steps, two induced quotient morphisms a and b, and a graded morphism g, each characterized by its composite with the quotient projection or step inclusion. The first-page comparison commutes with H(g), and the image comparison commutes with H(b) after image inclusions. The first differential corresponds under e1 to the connecting map of the short exact sequence gr^(p+1) U to F^p U/F^(p+2) U to gr^p U; both arrows are characterized by their composites with quotient projections. For each r>=1, B_r<=Z_r and there are an isomorphism eZ:Er^(p,q) to cokernel(B_r to Z_r), a restriction z from cycle representatives to Z_r, and a cycle lift g in F^p/F^(p+r). Their composites with inclusions equal the respective quotient projections of the representatives, and z followed by the boundary quotient, eZ inverse, eI and image inclusion equals g followed by homology projection and H(phi). For every U there is a type-zero bigraded exact couple X [def-sp-exact-couple] and comparisons eD:X.D(P,Q) to H^(P+Q)(F^(-Q) U), eC:X.pageCouple(s).E(2p+q,-p) to E_(s+1)^(p,q)(U). Under these comparisons alpha is the filtration inclusion and initial gamma is the quotient projection followed by e1 inverse; the derived-couple differential equals the page differential. No abutment or stabilization is asserted.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-abelian-varieties/sk-prop-av-pqf-finite/thm-sp-spectral-object-yields.md",
+  "place": "Proof steps 1--4"
+ },
+ "stmt_deps": [
+  "def-sp-filtration",
+  "def-sp-spectral-sequence",
+  "def-sp-convergence",
+  "def-sp-filtered-complex-subquotients",
+  "def-sp-exact-couple"
+ ],
+ "proof": [
+  {
+   "text": "Form the short exact sequences of successive filtration steps and apply the homology long exact sequence. Their inclusion, connecting, and quotient maps give the exact-couple exactness relations. Set D(P,Q)=H^(P+Q)(F^(-Q)) and E(P,Q)=H^(P+Q)(gr^(-Q)). Derive this couple recursively and reindex E by (2p+q,-p); the differential bidegree becomes (r,1-r). The three-step quotient short exact sequence identifies the first differential. This gives S on objects, e1, X, eD, eC and all structural equations.",
+   "uses": [
+    "def-sp-exact-couple",
+    "def-sp-spectral-sequence",
+    "def-sp-filtered-complex-subquotients"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Restrict filtered morphisms to every filtration step and descend through the cokernels. The quotient projection equations determine the descents uniquely, so they respect identities and composition. Naturality of the long exact sequence gives a couple morphism; the page part of lem-sp-couple-morphism gives compatible maps on all derived pages. Thus these maps form the functor S and the naturality equations.",
+   "uses": [
+    "lem-sp-couple-morphism",
+    "def-sp-filtration"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use lem-sp-filtered-complex-ZB-description to identify the representative image quotient. A representative x with dx in F^(p+r) is a source quotient cycle; its target cohomology image vanishes exactly for x=dy+f with y in F^(p-r+1), f in F^(p+1). Quotienting this kernel gives the image comparison and its representative equation. The given phi is this descent because both composites with the epimorphic source projection agree. At r=1 phi is the identity; this yields the first-page image equation. The representative maps commute with filtered maps because inclusions, differentials and projections do.",
+   "uses": [
+    "lem-sp-filtered-complex-ZB-description",
+    "def-sp-filtered-complex-subquotients"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sp-exact-couple",
+  "def-sp-spectral-sequence",
+  "def-sp-filtered-complex-subquotients",
+  "lem-sp-couple-morphism",
+  "def-sp-filtration",
+  "lem-sp-filtered-complex-ZB-description"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-abelian-varieties/sk-prop-av-pqf-finite/thm-sp-spectral-object-yields.md",
+  "place": "Original proof plan made precise in the new Lean interface"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Functorial bounded filtered pages and their exact couple",
+   "results": "Service unavailable: Internal Server Error; no match verdict made.",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "functorial spectral sequence filtered cochain complex exact couple image comparisons",
+   "results": "Eight mapping-cone/homology or AB5/exactness candidates; none states this filtered-complex construction or finite exact-couple abutment.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg filtered|finite|converg in Mathlib/Algebra/Homology/SpectralSequence and SpectralObject; rg spectral/filtered in lean/WeilConjectures and dag/nodes",
+   "results": "Mathlib spectral objects supply abstract page constructions, but no statement with these filtration-step and quotient comparisons. Source convergence is restricted to first-quadrant spectral objects; HalfPlaneConvergence requires negative first-index vanishing, which the present reindexing does not have.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.BoundedFilteredComplexPageCore",
+  "date": "2026-10-12",
+  "group": "Q1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sp-spectral-object-yields-canonical-pages",
+   "place": "Construction steps 1--4",
+   "via": [
+    "lem-sp-bounded-filtered-page-core"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-pqf-finite",
+ "lean": {
+  "module": "Sheaf.CategoryTheory.BoundedFilteredPageConstruction",
+  "file": "lean/Sheaf/CategoryTheory/BoundedFilteredPageConstruction.lean",
+  "declaration": "CategoryTheory.boundedFilteredComplex_pageConstruction",
+  "statement": "theorem boundedFilteredComplex_pageConstruction (C : Type u) [Category.{v} C] [Abelian C] (φ : ∀ (U : ObjectProperty.FullSubcategory (fun W : FilteredObject (CochainComplex C ℤ) ↦ W.filtration.IsFinite)) (p r : ℤ) (hr : 1 ≤ r), U.obj.filtration.complexQuotient p (p + r) (by omega) ⟶ U.obj.filtration.complexQuotient (p - r + 1) (p + 1) (by omega)) (hφ : ∀ (U : ObjectProperty.FullSubcategory (fun W : FilteredObject (CochainComplex C ℤ) ↦ W.filtration.IsFinite)) (p r : ℤ) (hr : 1 ≤ r), U.obj.filtration.complexQuotientπ p (p + r) (by omega) ≫ φ U p r hr = Subobject.ofLE (U.obj.filtration.step p) (U.obj.filtration.step (p - r + 1)) (U.obj.filtration.antitone_step (by omega)) ≫ U.obj.filtration.complexQuotientπ (p - r + 1) (p + 1) (by omega)) : ∃ (S : ObjectProperty.FullSubcategory (fun U : FilteredObject (CochainComplex C ℤ) ↦ U.filtration.IsFinite) ⥤ CohomologicalSpectralSequence C 1) (e₁ : ∀ (U : ObjectProperty.FullSubcategory (fun W : FilteredObject (CochainComplex C ℤ) ↦ W.filtration.IsFinite)) (p q : ℤ), ((S.obj U).page 1).X (p, q) ≅ (U.obj.filtration.gradedPiece p).homology (p + q)) (eI : ∀ (U : ObjectProperty.FullSubcategory (fun W : FilteredObject (CochainComplex C ℤ) ↦ W.filtration.IsFinite)) (p q r : ℤ) (hr : 1 ≤ r), ((S.obj U).page r hr).X (p, q) ≅ image (HomologicalComplex.homologyMap (φ U p r hr) (p + q))), (∀ (U : ObjectProperty.FullSubcategory (fun W : FilteredObject (CochainComplex C ℤ) ↦ W.filtration.IsFinite)) (p q : ℤ), (eI U p q 1 (by omega)).hom ≫ image.ι (HomologicalComplex.homologyMap (φ U p 1 (by omega)) (p + q)) = (e₁ U p q).hom ≫ HomologicalComplex.homologyMap (φ U p 1 (by omega)) (p + q)) ∧ (∀ (U V : ObjectProperty.FullSubcategory (fun W : FilteredObject (CochainComplex C ℤ) ↦ W.filtration.IsFinite)) (t : U ⟶ V) (p q r : ℤ) (hr : 1 ≤ r), ∃ (s : ∀ a : ℤ, (U.obj.filtration.step a : CochainComplex C ℤ) ⟶ (V.obj.filtration.step a : CochainComplex C ℤ)) (a : U.obj.filtration.complexQuotient p (p + r) (by omega) ⟶ V.obj.filtration.complexQuotient p (p + r) (by omega)) (b : U.obj.filtration.complexQuotient (p - r + 1) (p + 1) (by omega) ⟶ V.obj.filtration.complexQuotient (p - r + 1) (p + 1) (by omega)) (g : U.obj.filtration.gradedPiece p ⟶ V.obj.filtration.gradedPiece p), (∀ i : ℤ, s i ≫ (V.obj.filtration.step i).arrow = (U.obj.filtration.step i).arrow ≫ t.hom.hom) ∧ U.obj.filtration.complexQuotientπ p (p + r) (by omega) ≫ a = s p ≫ V.obj.filtration.complexQuotientπ p (p + r) (by omega) ∧ U.obj.filtration.complexQuotientπ (p - r + 1) (p + 1) (by omega) ≫ b = s (p - r + 1) ≫ V.obj.filtration.complexQuotientπ (p - r + 1) (p + 1) (by omega) ∧ U.obj.filtration.complexQuotientπ p (p + 1) (by omega) ≫ g = s p ≫ V.obj.filtration.complexQuotientπ p (p + 1) (by omega) ∧ ((S.map t).hom 1).f (p, q) ≫ (e₁ V p q).hom = (e₁ U p q).hom ≫ HomologicalComplex.homologyMap g (p + q) ∧ ((S.map t).hom r hr).f (p, q) ≫ (eI V p q r hr).hom ≫ image.ι (HomologicalComplex.homologyMap (φ V p r hr) (p + q)) = (eI U p q r hr).hom ≫ image.ι (HomologicalComplex.homologyMap (φ U p r hr) (p + q)) ≫ HomologicalComplex.homologyMap b (p + q)) ∧ ∀ U : ObjectProperty.FullSubcategory (fun W : FilteredObject (CochainComplex C ℤ) ↦ W.filtration.IsFinite), (∀ p q : ℤ, ∃ (i : U.obj.filtration.gradedPiece (p + 1) ⟶ U.obj.filtration.complexQuotient p (p + 2) (by omega)) (j : U.obj.filtration.complexQuotient p (p + 2) (by omega) ⟶ U.obj.filtration.gradedPiece p) (hij : i ≫ j = 0) (hS : (ShortComplex.mk i j hij).ShortExact), U.obj.filtration.complexQuotientπ (p + 1) (p + 1 + 1) (by omega) ≫ i = Subobject.ofLE (U.obj.filtration.step (p + 1)) (U.obj.filtration.step p) (U.obj.filtration.antitone_step (by omega)) ≫ U.obj.filtration.complexQuotientπ p (p + 2) (by omega) ∧ U.obj.filtration.complexQuotientπ p (p + 2) (by omega) ≫ j = U.obj.filtration.complexQuotientπ p (p + 1) (by omega) ∧ ((S.obj U).page 1).d (p, q) (p + 1, q) ≫ (e₁ U (p + 1) q).hom = (e₁ U p q).hom ≫ hS.δ (p + q) (p + 1 + q) (by simp [ComplexShape.up]; omega)) ∧ (∀ (p q r : ℤ) (hr : 1 ≤ r), ∃ (hBZ : U.obj.filtration.complexBoundaries p (p + q) r ≤ U.obj.filtration.complexCycles p (p + q) r) (eZ : ((S.obj U).page r hr).X (p, q) ≅ cokernel (Subobject.ofLE _ _ hBZ)) (z : (U.obj.filtration.complexCycleRepresentatives p (p + q) r : C) ⟶ (U.obj.filtration.complexCycles p (p + q) r : C)) (g : (U.obj.filtration.complexCycleRepresentatives p (p + q) r : C) ⟶ (U.obj.filtration.complexQuotient p (p + r) (by omega)).cycles (p + q)), z ≫ (U.obj.filtration.complexCycles p (p + q) r).arrow = (U.obj.filtration.complexCycleRepresentatives p (p + q) r).arrow ≫ (U.obj.filtration.complexQuotientπ p (p + 1) (by omega)).f (p + q) ∧ g ≫ (U.obj.filtration.complexQuotient p (p + r) (by omega)).iCycles (p + q) = (U.obj.filtration.complexCycleRepresentatives p (p + q) r).arrow ≫ (U.obj.filtration.complexQuotientπ p (p + r) (by omega)).f (p + q) ∧ z ≫ cokernel.π (Subobject.ofLE _ _ hBZ) ≫ eZ.inv ≫ (eI U p q r hr).hom ≫ image.ι (HomologicalComplex.homologyMap (φ U p r hr) (p + q)) = g ≫ (U.obj.filtration.complexQuotient p (p + r) (by omega)).homologyπ (p + q) ≫ HomologicalComplex.homologyMap (φ U p r hr) (p + q)) ∧ (∃ (X : BigradedExactCouple C 0) (eD : ∀ P Q : ℤ, X.D P Q ≅ (U.obj.filtration.step (-Q) : CochainComplex C ℤ).homology (P + Q)) (eC : ∀ (s : ℕ) (p q : ℤ), (X.pageCouple s).E (2 * p + q) (-p) ≅ ((S.obj U).page (s + 1) (by omega)).X (p, q)) , (∀ P Q : ℤ, X.alpha P Q ≫ (eD (P - 1) (Q + 1)).hom = (eD P Q).hom ≫ HomologicalComplex.homologyMap (Subobject.ofLE (U.obj.filtration.step (-Q)) (U.obj.filtration.step (-(Q + 1))) (U.obj.filtration.antitone_step (by omega))) (P + Q) ≫ eqToHom (by rw [show P - 1 + (Q + 1) = P + Q by omega])) ∧ (∀ P Q : ℤ, X.initialG P Q ≫ eqToHom (by congr 1 <;> omega) ≫ (eC 0 (-Q) (P + 2 * Q)).hom ≫ (e₁ U (-Q) (P + 2 * Q)).hom ≫ eqToHom (by rw [show -Q + (P + 2 * Q) = P + Q by omega] rfl) = (eD P Q).hom ≫ HomologicalComplex.homologyMap (U.obj.filtration.complexQuotientπ (-Q) (-Q + 1) (by omega)) (P + Q)) ∧ (∀ (s : ℕ) (p q : ℤ), (eC s p q).hom ≫ ((S.obj U).page (s + 1) (by omega)).d (p, q) (p + (s + 1), q - (s + 1) + 1) = (X.pageCouple s).d (2 * p + q) (-p) ≫ eqToHom (by congr 1 <;> omega) ≫ (eC s (p + (s + 1)) (q - (s + 1) + 1)).hom))",
+  "branch": "sheaf-dag",
+  "by": "Q1",
+  "date": "2026-10-12",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q1",
+  "result": "pass",
+  "landing": "20261012T144137-L-2104646",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q1",
+  "result": "pass",
+  "landing": "20261012T144137-L-2104646",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

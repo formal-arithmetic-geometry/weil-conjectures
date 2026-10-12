@@ -1,0 +1,138 @@
+{
+ "id": "lem-sp-bounded-filtered-couple-abutment",
+ "kind": "statement",
+ "title": "Finite cohomology abutment of a filtered exact couple",
+ "statement": "Let C be abelian, let S be a functor from the full subcategory of finitely decreasing-filtered cochain complexes to cohomological spectral sequences starting at 1, and let e1 give first-page isomorphisms to H^(p+q)(gr^p U) [def-sp-filtration, def-sp-spectral-sequence, def-sp-filtered-complex-subquotients]. Fix U and a type-zero bigraded exact couple X [def-sp-exact-couple]. Suppose eD identifies X.D(P,Q) with H^(P+Q)(F^(-Q) U), and eC identifies X.pageCouple(s).E(2p+q,-p) with S(U).E_(s+1)^(p,q). Assume alpha corresponds via eD to filtration inclusion and initial gamma corresponds via eC at s=0 and e1 to the quotient projection on cohomology. Then there exist decreasing filtrations G on H^n(U), limiting subobjects L of X, diagonal alpha-colimits A and isomorphisms aH:A(n).obj to H^n(U) [def-sp-convergence]. The steps of G are exactly image(H^n(F^p U) to H^n(U)), and G is finite and separated. The cocone map from D(P,n-P), followed by aH, is eD followed by the cohomology inclusion from F^(P-n) U into U, with the indicated index transports. X converges to L,A in the regular, abutting and inverse-limit sense of def-sp-convergence, and its infinite page at (2p+q,-p) is isomorphic to gr^p G H^(p+q)(U). This result constructs no page functor, representative maps or finite-page differentials.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-abelian-varieties/sk-prop-av-pqf-finite/thm-sp-spectral-object-yields.md",
+  "place": "Proof step 5; Stacks Homology Lemma 12.24.11"
+ },
+ "stmt_deps": [
+  "def-sp-filtration",
+  "def-sp-spectral-sequence",
+  "def-sp-convergence",
+  "def-sp-filtered-complex-subquotients",
+  "def-sp-exact-couple"
+ ],
+ "proof": [
+  {
+   "text": "Define G^p H^n as the homology inclusion image. Compositions of inclusions make G antitone. A whole filtration step gives a whole image; a zero step gives a zero image. Thus G is finite and separated. Along each total degree the D diagonal has a constant bottom tail identified by eD with H^n(U); the alpha equation identifies its transitions with identity. Inclusion into U gives its colimit cocone and aH, with the displayed compatibility.",
+   "uses": [
+    "def-sp-filtration",
+    "def-sp-filtered-complex-subquotients",
+    "def-sp-exact-couple",
+    "def-sp-convergence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Induct on derivation of the exact couple: cycles are the inverse images under f of iterated incoming alpha images, and boundaries are the images under gamma of kernels of outgoing alpha iterates. The whole and zero tails of the filtration stabilize these objects. Their stationary values give the greatest lower and least upper bounds L, and regularity. The gamma equation identifies their quotient with the successive quotient of the homology inclusion images. The two canonical quotient maps are epi and have identical kernels; the first isomorphism theorem gives weak convergence and the graded-page isomorphism, with filtration index (2p+q)-(p+q)=p.",
+   "uses": [
+    "def-sp-exact-couple",
+    "def-sp-convergence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The finite image filtration is exhaustive and separated. Its quotient inverse system is constant at the whole object after a zero filtration step: a compatible cone is determined uniquely by its component there, which gives the inverse-limit universal property. Together with regularity and weak convergence this is ConvergesTo.",
+   "uses": [
+    "def-sp-filtration",
+    "def-sp-convergence"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sp-filtration",
+  "def-sp-filtered-complex-subquotients",
+  "def-sp-exact-couple",
+  "def-sp-convergence"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-abelian-varieties/sk-prop-av-pqf-finite/thm-sp-spectral-object-yields.md",
+  "place": "Original proof plan made precise in the new Lean interface"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Finite cohomology abutment of a filtered exact couple",
+   "results": "Service unavailable: Internal Server Error; no match verdict made.",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "finite filtration exact couple convergence image filtration cohomology alpha colimit",
+   "results": "Eight mapping-cone/homology or AB5/exactness candidates; none states this filtered-complex construction or finite exact-couple abutment.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg filtered|finite|converg in Mathlib/Algebra/Homology/SpectralSequence and SpectralObject; rg spectral/filtered in lean/WeilConjectures and dag/nodes",
+   "results": "Mathlib spectral objects supply abstract page constructions, but no statement with these filtration-step and quotient comparisons. Source convergence is restricted to first-quadrant spectral objects; HalfPlaneConvergence requires negative first-index vanishing, which the present reindexing does not have.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.BoundedFilteredComplexPageCore",
+  "date": "2026-10-12",
+  "group": "Q1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sp-spectral-object-yields-canonical-pages",
+   "place": "Finite-filtration convergence step 5",
+   "via": [
+    "lem-sp-bounded-filtered-page-core"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-pqf-finite",
+ "lean": {
+  "module": "Sheaf.CategoryTheory.BoundedFilteredCoupleAbutment",
+  "file": "lean/Sheaf/CategoryTheory/BoundedFilteredCoupleAbutment.lean",
+  "declaration": "CategoryTheory.boundedFilteredComplex_coupleAbutment",
+  "statement": "theorem boundedFilteredComplex_coupleAbutment (C : Type u) [Category.{v} C] [Abelian C] (S : ObjectProperty.FullSubcategory (fun U : FilteredObject (CochainComplex C ℤ) ↦ U.filtration.IsFinite) ⥤ CohomologicalSpectralSequence C 1) (e₁ : ∀ (U : ObjectProperty.FullSubcategory (fun W : FilteredObject (CochainComplex C ℤ) ↦ W.filtration.IsFinite)) (p q : ℤ), ((S.obj U).page 1).X (p, q) ≅ (U.obj.filtration.gradedPiece p).homology (p + q)) (U : ObjectProperty.FullSubcategory (fun W : FilteredObject (CochainComplex C ℤ) ↦ W.filtration.IsFinite)) (X : BigradedExactCouple C 0) (eD : ∀ P Q : ℤ, X.D P Q ≅ (U.obj.filtration.step (-Q) : CochainComplex C ℤ).homology (P + Q)) (eC : ∀ (s : ℕ) (p q : ℤ), (X.pageCouple s).E (2 * p + q) (-p) ≅ ((S.obj U).page (s + 1) (by omega)).X (p, q)) (hα : ∀ P Q : ℤ, X.alpha P Q ≫ (eD (P - 1) (Q + 1)).hom = (eD P Q).hom ≫ HomologicalComplex.homologyMap (Subobject.ofLE (U.obj.filtration.step (-Q)) (U.obj.filtration.step (-(Q + 1))) (U.obj.filtration.antitone_step (by omega))) (P + Q) ≫ eqToHom (by rw [show P - 1 + (Q + 1) = P + Q by omega])) (hγ : ∀ P Q : ℤ, X.initialG P Q ≫ eqToHom (by congr 1 <;> omega) ≫ (eC 0 (-Q) (P + 2 * Q)).hom ≫ (e₁ U (-Q) (P + 2 * Q)).hom ≫ eqToHom (by rw [show -Q + (P + 2 * Q) = P + Q by omega] rfl) = (eD P Q).hom ≫ HomologicalComplex.homologyMap (U.obj.filtration.complexQuotientπ (-Q) (-Q + 1) (by omega)) (P + Q)) : ∃ (G : ∀ n : ℤ, DecreasingFiltration (U.obj.obj.homology n)) (L : X.LimitSubobjects) (A : ∀ n : ℤ, X.AlphaColimit n) (aH : ∀ n : ℤ, (A n).obj ≅ U.obj.obj.homology n), (∀ n p : ℤ, (G n).step p = imageSubobject (HomologicalComplex.homologyMap (U.obj.filtration.step p).arrow n)) ∧ (∀ n : ℤ, (G n).IsFinite ∧ (G n).IsSeparated) ∧ (∀ n P : ℤ, (A n).ι P ≫ (aH n).hom = (eD P (n - P)).hom ≫ eqToHom (by rw [show -(n - P) = P - n by omega, show P + (n - P) = n by omega]) ≫ HomologicalComplex.homologyMap (U.obj.filtration.step (P - n)).arrow n) ∧ X.ConvergesTo L A ∧ (∀ p q : ℤ, Nonempty (X.pageInfinity L (2 * p + q) (-p) ≅ (G (p + q)).gradedPiece p))",
+  "branch": "sheaf-dag",
+  "by": "Q1",
+  "date": "2026-10-12",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q1",
+  "result": "pass",
+  "landing": "20261012T144137-L-2104646",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q1",
+  "result": "pass",
+  "landing": "20261012T144137-L-2104646",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

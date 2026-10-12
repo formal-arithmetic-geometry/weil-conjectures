@@ -10,10 +10,8 @@ public import Sheaf.CategoryTheory.ExactCoupleConvergence
 public import Mathlib.Algebra.Homology.HomologySequence
 public import Mathlib.Algebra.Homology.SpectralSequence.Basic
 public import Mathlib.CategoryTheory.ObjectProperty.FullSubcategory
-import Sheaf.Algebra.Homology.FilteredComplexZBDescription
-import Sheaf.CategoryTheory.ExactCoupleMorphism
-import Sheaf.CategoryTheory.ExactCouple
-import Sheaf.CategoryTheory.Filtration
+import Sheaf.CategoryTheory.BoundedFilteredPageConstruction
+import Sheaf.CategoryTheory.BoundedFilteredCoupleAbutment
 
 /-!
 # Canonical bounded filtered pages and their finite abutment
@@ -28,6 +26,100 @@ blueprint thm-sp-spectral-object-yields, steps 1--5
 universe u v
 open CategoryTheory.Limits
 namespace CategoryTheory
+
+private theorem pageCore_subobjects_stabilize
+    {C : Type u} [Category.{v} C] [Abelian C]
+    {K : CochainComplex C ℤ} (F : DecreasingFiltration K) (hF : F.IsFinite)
+    (p n : ℤ) :
+    ∃ (R : ℤ) (_hR : 1 ≤ R), ∀ r : ℤ, R ≤ r →
+      F.complexCycles p n r = F.complexCycles p n R ∧
+      F.complexBoundaries p n r = F.complexBoundaries p n R := by
+  obtain ⟨a, b, ha, hb⟩ := hF
+  have hbot (i : ℤ) (hi : b ≤ i) : F.step i = ⊥ := by
+    apply le_antisymm _ bot_le
+    simpa only [hb] using F.antitone_step hi
+  have htop (i : ℤ) (hi : i ≤ a) : F.step i = ⊤ := by
+    apply le_antisymm le_top
+    simpa only [ha] using F.antitone_step hi
+  let R := max 1 (max (b - p) (p + 1 - a))
+  have hR : 1 ≤ R := le_max_left _ _
+  have hRb : b - p ≤ R := (le_max_left _ _).trans (le_max_right _ _)
+  have hRa : p + 1 - a ≤ R := (le_max_right _ _).trans (le_max_right _ _)
+  refine ⟨R, hR, ?_⟩
+  intro r hr
+  have hhi : F.step (p + r) = F.step (p + R) := by
+    rw [hbot (p + r) (by omega), hbot (p + R) (by omega)]
+  have hlo : F.step (p - r + 1) = F.step (p - R + 1) := by
+    rw [htop (p - r + 1) (by omega), htop (p - R + 1) (by omega)]
+  have hhi' : F.complexStep (p + r) (n + 1) = F.complexStep (p + R) (n + 1) :=
+    congrArg (fun T : Subobject K ↦ imageSubobject (T.arrow.f (n + 1))) hhi
+  have hlo' : F.complexStep (p - r + 1) (n - 1) =
+      F.complexStep (p - R + 1) (n - 1) :=
+    congrArg (fun T : Subobject K ↦ imageSubobject (T.arrow.f (n - 1))) hlo
+  constructor
+  · simp only [DecreasingFiltration.complexCycles, hhi']
+  · simp only [DecreasingFiltration.complexBoundaries, hlo']
+
+private theorem pageCore_quotient_iso
+    {C : Type u} [Category.{v} C] [Abelian C] {A : C}
+    {B Z B' Z' : Subobject A} (h : B ≤ Z) (h' : B' ≤ Z')
+    (hB : B = B') (hZ : Z = Z') :
+    Nonempty (cokernel (Subobject.ofLE B Z h) ≅ cokernel (Subobject.ofLE B' Z' h')) := by
+  subst B'
+  subst Z'
+  exact ⟨Iso.refl _⟩
+
+private theorem pageCore_graded_zero
+    {C : Type u} [Category.{v} C] [Abelian C]
+    {K : CochainComplex C ℤ} (F : DecreasingFiltration K) (p n : ℤ)
+    (h : F.step (p + 1) = F.step p) : IsZero ((F.gradedPiece p).X n) := by
+  have hz : IsZero (F.gradedPiece p) := by
+    dsimp [DecreasingFiltration.gradedPiece]
+    let e := Subobject.isoOfEq (F.step (p + 1)) (F.step p) h
+    change IsZero (cokernel e.hom)
+    exact isZero_cokernel_of_epi _
+  exact (HomologicalComplex.eval C (ComplexShape.up ℤ) n).map_isZero hz
+
+private theorem pageCore_differentials_stabilize
+    {C : Type u} [Category.{v} C] [Abelian C]
+    (U : ObjectProperty.FullSubcategory
+      (fun W : FilteredObject (CochainComplex C ℤ) ↦ W.filtration.IsFinite))
+    (E : CohomologicalSpectralSequence C 1)
+    (hpages : ∀ (p q r : ℤ) (hr : 1 ≤ r),
+      ∃ hBZ : U.obj.filtration.complexBoundaries p (p + q) r ≤
+          U.obj.filtration.complexCycles p (p + q) r,
+        Nonempty ((E.page r hr).X (p, q) ≅ cokernel (Subobject.ofLE _ _ hBZ)))
+    (p q : ℤ) :
+    ∃ (R : ℤ) (_hR : 1 ≤ R), ∀ (r : ℤ) (_hr : R ≤ r),
+      (E.page r (by omega)).d (p, q) (p + r, q - r + 1) = 0 ∧
+      (E.page r (by omega)).d (p - r, q + r - 1) (p, q) = 0 := by
+  obtain ⟨a, b, ha, hb⟩ := U.property
+  have hbot (i : ℤ) (hi : b ≤ i) : U.obj.filtration.step i = ⊥ := by
+    apply le_antisymm _ bot_le
+    simpa only [hb] using U.obj.filtration.antitone_step hi
+  have htop (i : ℤ) (hi : i ≤ a) : U.obj.filtration.step i = ⊤ := by
+    apply le_antisymm le_top
+    simpa only [ha] using U.obj.filtration.antitone_step hi
+  have hzero (k l r : ℤ) (hr : 1 ≤ r) (hk : k < a ∨ b ≤ k) :
+      IsZero ((E.page r hr).X (k, l)) := by
+    have heq : U.obj.filtration.step (k + 1) = U.obj.filtration.step k := by
+      rcases hk with hk | hk
+      · rw [htop (k + 1) (by omega), htop k (by omega)]
+      · rw [hbot (k + 1) (by omega), hbot k hk]
+    have hz := pageCore_graded_zero U.obj.filtration k (k + l) heq
+    obtain ⟨hBZ, ⟨e⟩⟩ := hpages k l r hr
+    have hZ : IsZero (U.obj.filtration.complexCycles k (k + l) r : C) :=
+      IsZero.of_mono (U.obj.filtration.complexCycles k (k + l) r).arrow hz
+    have hquot := IsZero.of_epi (cokernel.π (Subobject.ofLE _ _ hBZ)) hZ
+    exact hquot.of_iso e
+  let R := max 1 (max (b - p) (p - a + 1))
+  have hR : 1 ≤ R := le_max_left _ _
+  have hRb : b - p ≤ R := (le_max_left _ _).trans (le_max_right _ _)
+  have hRa : p - a + 1 ≤ R := (le_max_right _ _).trans (le_max_right _ _)
+  refine ⟨R, hR, ?_⟩
+  intro r hr
+  exact ⟨(hzero (p + r) (q - r + 1) r (by omega) (Or.inr (by omega))).eq_zero_of_tgt _,
+    (hzero (p - r) (q + r - 1) r (by omega) (Or.inl (by omega))).eq_zero_of_src _⟩
 
 /-- Canonical page construction and finite convergence, without first-quadrant support.
 Source: Stacks Project, Homology, Section 12.24, Lemmas 12.24.2--12.24.4 and 12.24.11;
@@ -207,6 +299,41 @@ theorem boundedFilteredComplex_pageCore
           ((S.obj U).page r (by omega)).d (p, q) (p + r, q - r + 1) = 0 ∧
           ((S.obj U).page r (by omega)).d (p - r, q + r - 1) (p, q) = 0 ∧
           Nonempty (((S.obj U).page r (by omega)).X (p, q) ≅
-            ((S.obj U).page R hR).X (p, q))) := by sorry
+            ((S.obj U).page R hR).X (p, q))) := by
+  obtain ⟨S, e₁, eI, hfirst, hnat, hobj⟩ :=
+    boundedFilteredComplex_pageConstruction C φ hφ
+  refine ⟨S, e₁, eI, hfirst, hnat, ?_⟩
+  intro U
+  obtain ⟨hd₁, hrep, X, eD, eC, hα, hγ, hd⟩ := hobj U
+  obtain ⟨G, L, A, aH, hG, hfinite, hcocone, hconv, hinf⟩ :=
+    boundedFilteredComplex_coupleAbutment C S e₁ U X eD eC hα hγ
+  refine ⟨hd₁, hrep, ⟨G, X, L, A, aH, eD, eC, hG, hfinite, hcocone,
+    hα, hγ, hd, hconv, hinf⟩, ?_⟩
+  have hpages (p q r : ℤ) (hr : 1 ≤ r) :
+      ∃ hBZ : U.obj.filtration.complexBoundaries p (p + q) r ≤
+          U.obj.filtration.complexCycles p (p + q) r,
+        Nonempty (((S.obj U).page r hr).X (p, q) ≅ cokernel (Subobject.ofLE _ _ hBZ)) := by
+    obtain ⟨hBZ, eZ, _⟩ := hrep p q r hr
+    exact ⟨hBZ, ⟨eZ⟩⟩
+  intro p q
+  obtain ⟨R₀, hR₀, hsub⟩ :=
+    pageCore_subobjects_stabilize U.obj.filtration U.property p (p + q)
+  obtain ⟨R₁, hR₁, hdiff⟩ := pageCore_differentials_stabilize U (S.obj U) hpages p q
+  let R := max R₀ R₁
+  have hR : 1 ≤ R := hR₀.trans (le_max_left _ _)
+  have hR₀R : R₀ ≤ R := le_max_left _ _
+  have hR₁R : R₁ ≤ R := le_max_right _ _
+  refine ⟨R, hR, ?_⟩
+  intro r hr
+  obtain ⟨hZr, hBr⟩ := hsub r (hR₀R.trans hr)
+  obtain ⟨hZR, hBR⟩ := hsub R hR₀R
+  have hZ := hZr.trans hZR.symm
+  have hB := hBr.trans hBR.symm
+  obtain ⟨hout, hin⟩ := hdiff r (hR₁R.trans hr)
+  obtain ⟨hBZr, ⟨er⟩⟩ := hpages p q r (hR.trans hr)
+  obtain ⟨hBZR, ⟨eR⟩⟩ := hpages p q R hR
+  obtain ⟨equot⟩ := pageCore_quotient_iso hBZr hBZR hB hZ
+  exact ⟨hZ, hB, hout, hin, ⟨er ≪≫ equot ≪≫ eR.symm⟩⟩
+
 
 end CategoryTheory
