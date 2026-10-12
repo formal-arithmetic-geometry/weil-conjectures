@@ -1,0 +1,134 @@
+{
+ "id": "lem-sc-as-sequence-construction-helper-restriction",
+ "kind": "statement",
+ "title": "Naturality of the canonical structure-module section equivalences",
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-h2",
+ "statement": "Let C be a scheme [def-pc-scheme]. Let G be the ULift of the etale tensor-sections sheaf of its structure module [def-sc-etale-qcoherent-module] on the small etale site [def-weil-pbc-etale-site]. Define a_U by ULift.down followed by the additive equivalence induced on global sections by the adjoint structure-module isomorphism epsilon_u [lem-weil-pbc-module-pullback-structure-sheaf]. For every morphism g : V -> U over C and every x in G(U), a_V(G(g)(x)) = g-sharp(a_U(x)). No existence of arbitrary identifications, sheaves or maps is asserted: these are the displayed canonical maps.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-etale-site",
+  "def-sc-etale-qcoherent-module",
+  "lem-weil-pbc-module-pullback-structure-sheaf"
+ ],
+ "source": {
+  "document": "Stacks Project, Tags 0096, 01CA, 03DR, 03DU; literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-h2/lem-sc-as-sequence.md",
+  "place": "03DR equation (35.8.1), 03DU item 4, and the maps paragraph; parent helper proof step 3"
+ },
+ "proof": [
+  {
+   "text": "The normalized composition isomorphism c_{g,u} followed by epsilon_{g >> u} equals g^*(epsilon_u) followed by epsilon_g. Apply the composite adjunction Hom equivalence. The unit equation of c and unit naturality reduce both sides to the composite structure-sheaf map. The defining equations of epsilon_u and epsilon_g identify this with (g >> u)-sharp. Injectivity of the Hom equivalence proves equality.",
+   "uses": [
+    "lem-sc-etale-qcoherent-presheaf-functorial",
+    "lem-weil-pbc-module-pullback-structure-sheaf"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Transport epsilon along the site relation g >> u = v by equality elimination. Evaluate the preceding equality on the top open. Naturality of the adjunction unit moves epsilon_u through section pullback. The unit equation for epsilon_g identifies the result with g-sharp after epsilon_u. Since preimage of top is top, the auxiliary restriction in tensorSectionsUnit is the identity.",
+   "uses": [
+    "lem-sc-etale-qcoherent-presheaf-functorial",
+    "lem-weil-pbc-module-pullback-structure-sheaf"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The ULift functor maps a section homomorphism by ULift.up after that homomorphism after ULift.down. Applying the explicit canonical section equivalences therefore gives exactly the section identity just proved. Empty schemes and identity maps require no separate assumption.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-etale-qcoherent-presheaf-functorial",
+  "lem-weil-pbc-module-pullback-structure-sheaf"
+ ],
+ "proof_origin": {
+  "by": "agent (W2 worker)",
+  "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-h2/lem-sc-as-sequence.md",
+  "place": "Parent helper proof step 3, expanded using the Stacks section-pullback formula and Mathlib adjunction unit-conjugation equation"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Pullback of the structure sheaf gives natural additive equivalences on global sections",
+   "date": "2026-10-12",
+   "results": "pullbackPushforwardAdjunction, pullbackObjUnitToUnit, pullbackObjFreeIso; these concern the abstract Mathlib pullback, not the normalized tensor-sections restrictions.",
+   "verdict": "No theorem for this canonical tensor construction."
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.unitToPushforwardObjUnit",
+   "date": "2026-10-12",
+   "results": "unitToPushforwardObjUnit_val_app_apply, pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit, pushforwardSections_unitHomEquiv",
+   "verdict": "Support the structure-map computation; do not state its compatibility with tensorSectionsComp."
+  },
+  {
+   "tool": "grep",
+   "query": "tensorPullbackObjUnitToUnit|etaleTensorSections.*unit",
+   "date": "2026-10-12",
+   "results": "No direct search-service hits. Local rg finds TensorPullbackStructureSheaf and EtaleTensorSections, and Mathlib unit_conjugateEquiv_symm.",
+   "verdict": "Composition/unit calculation still needed."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Canonical pullback structure sheaf section equivalences commute with restrictions on the small etale site",
+   "date": "2026-10-12",
+   "results": "Service unavailable: Internal Server Error"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ArtinSchreierDataConstruction",
+  "date": "2026-10-12",
+  "group": "W2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-as-sequence",
+   "place": "Proof, maps paragraph identifying the additive structure sheaf with regular functions naturally under restriction",
+   "via": [
+    "lem-sc-as-sequence-construction-helper",
+    "lem-sc-as-sequence-data"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleStructureSectionsEquiv",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleStructureSectionsEquiv.lean",
+  "declaration": "AlgebraicGeometry.etaleStructureSectionsEquiv_naturality",
+  "declarations": [
+   "AlgebraicGeometry.tensorStructureSectionsEquiv",
+   "AlgebraicGeometry.etaleStructureSectionsEquiv",
+   "AlgebraicGeometry.etaleStructureSectionsEquiv_naturality"
+  ],
+  "statement": "theorem etaleStructureSectionsEquiv_naturality (C : Scheme.{u})\n    (U V : C.Etaleᵒᵖ) (g : U ⟶ V)\n    (x : ((sheafCompose C.smallEtaleTopology AddCommGrpCat.uliftFunctor.{u + 1, u}).obj\n      (Scheme.Modules.etaleTensorSectionsSheaf (Scheme.Modules.unitObj C))).obj.obj U) :\n    etaleStructureSectionsEquiv C V\n      (((sheafCompose C.smallEtaleTopology AddCommGrpCat.uliftFunctor.{u + 1, u}).obj\n        (Scheme.Modules.etaleTensorSectionsSheaf (Scheme.Modules.unitObj C))).obj.map g x) =\n      g.unop.left.appTop (etaleStructureSectionsEquiv C U x)",
+  "branch": "sheaf-dag",
+  "by": "W2",
+  "date": "2026-10-12"
+ },
+ "mathlib_match": null,
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W2",
+  "result": "pass",
+  "landing": "20261012T085357-L-46579",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W2",
+  "result": "pass",
+  "landing": "20261012T085357-L-46579",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -3,9 +3,7 @@ module
 public import Sheaf.AlgebraicGeometry.EtaleTensorSectionsSheaf
 public import WeilConjectures.AlgebraicGeometry.Sites.EtaleHom
 public import Mathlib.Algebra.Category.Grp.Ulift
-import Sheaf.AlgebraicGeometry.TensorPullbackStructureSheaf
-import Sheaf.AlgebraicGeometry.EtaleQuasiCoherentDescent
-import Sheaf.AlgebraicGeometry.EtaleTensorSections
+import Sheaf.AlgebraicGeometry.EtaleStructureSectionsEquiv
 
 @[expose] public section
 universe u
@@ -38,6 +36,8 @@ theorem artinSchreier_construction (C : Scheme.{u}) :
       (a : ∀ U : C.Etaleᵒᵖ, G.obj.obj U ≃+ Γ(U.unop.left, ⊤)),
       ∀ (U V : C.Etaleᵒᵖ) (g : U ⟶ V) (x : G.obj.obj U),
         a V (G.obj.map g x) = g.unop.left.appTop (a U x) := by
-  sorry
+  refine ⟨_, Iso.refl _, etaleStructureSectionsEquiv C, ?_⟩
+  intro U V g x
+  exact etaleStructureSectionsEquiv_naturality C U V g x
 
 end AlgebraicGeometry
