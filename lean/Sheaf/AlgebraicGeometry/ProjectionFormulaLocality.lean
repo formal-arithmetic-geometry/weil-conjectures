@@ -8,6 +8,8 @@ public import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 import Sheaf.AlgebraicGeometry.AffineDerivedPullbackTensorTilde
 import Sheaf.AlgebraicGeometry.DerivedDirectImageOpenRestriction
+import Sheaf.AlgebraicGeometry.ProjectionFormulaLocalityLocalToGlobal
+import Sheaf.AlgebraicGeometry.ProjectionFormulaLocalityGlobalToLocal
 
 /-! # Locality of the projection-formula isomorphism
 
@@ -55,6 +57,8 @@ theorem projectionFormula_isIso_iff_openCover
         (E ⊗ ((derivedPullback f).obj K))) :
     IsIso φ ↔ ∀ i : I,
       IsIso ((schemeOpenRestriction Y (U i)).mapDerivedCategory.map φ) := by
-  sorry
+  constructor
+  · exact projectionFormula_global_to_local f E K I U φ
+  · exact projectionFormula_local_to_global f E K I U hcover φ
 
 end AlgebraicGeometry
