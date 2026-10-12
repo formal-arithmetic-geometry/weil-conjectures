@@ -13,14 +13,25 @@
  ],
  "proof": [
   {
-   "text": "Exact localization identifies $H^n(M^\\bullet\\otimes_A A_{f_i})$ with $H^n(M^\\bullet)_{f_i}$. Equivalently use the exactness of the localized differential pair and identify termwise extension of scalars with module localization.",
+   "text": "Construct the private tensorEquiv by tensor-product lifts in both directions, sending s tensor x to the same pure tensor for the restricted scalar action. The maps are inverse by induction on tensors. This is ModuleCat.tensorEquivExtendScalars with the module universe generalized; no object is chosen from an existence assertion.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "For each i, A localized away from f_i is flat (IsLocalization.flat). Module.Flat.lTensor_exact preserves exact pairs. Transport this exactness through tensorEquiv, whose naturality follows by induction on tensors, to show termwise extension of scalars preserves every exact short complex. Functor.exact_tfae gives preservation of homology.",
    "uses": [
-    "lem-weil-pbc-localization-module-exact"
+    "lem-weil-pbc-localization-flat",
+    "lem-weil-pbc-flat-tensor-exact"
    ],
    "elementary": false
   },
   {
-   "text": "Apply the unit-ideal localization zero criterion to each element of $H^n(M^\\bullet)$. All its localized images are zero, so it is zero, and the module is a zero object.",
+   "text": "Compose DerivedCategory.homologyFunctorFactors with Functor.mapHomologicalComplexHomologyIso from the proved source-library module WeilConjectures.FromJoel.Algebra.Homology.PreservesQuasiIso. The local hypothesis therefore says that extension of scalars of M.homology n is a zero object. These are the canonical homology comparison isomorphisms for exact functors.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "For x in M.homology n and a in the range of f, choose an index i with f_i=a. tensorEquiv carries 1 tensor x into a zero module, so injectivity shows 1 tensor x=0. The localization/base-change instance makes TensorProduct.mk A (Localization.Away a) H 1 a module localization. Apply Module.eq_zero_of_isLocalized_span to Set.range f and hf. Every x is zero, so H is a zero object. Transfer back by homologyFunctorFactors. This includes the empty family, since the Mathlib zero criterion requires only span(range f)=top.",
    "uses": [
     "lem-weil-pbc-localized-span-eq-zero"
    ],
@@ -28,13 +39,14 @@
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-localization-module-exact",
+  "lem-weil-pbc-localization-flat",
+  "lem-weil-pbc-flat-tensor-exact",
   "lem-weil-pbc-localized-span-eq-zero"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "E2 stage-3 worker",
   "document": "literature/stacks-project/more-algebra.tex",
-  "place": "Tag 066D, proof, first paragraph"
+  "place": "Tag 066D, first paragraph; Algebra Tags 00HT, 00HD and 00EO (1); canonical exact-functor homology comparisons in the source library."
  },
  "mathlib_searches": [
   {
@@ -99,11 +111,11 @@
  "reviewed_proof": {
   "date": "2026-10-12",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "D3",
+  "reviewer": "X-8deab",
+  "group": "E2",
   "result": "pass",
-  "landing": "20261012T213847-L-1207586",
+  "landing": "20261012T230754-L-1907877",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent Codex review: Matched the unchanged Lean signature to the node and clone, the proof to its recorded dependencies, and the report to the delivery; compiled the delivery and sole direct importer unchanged, and verified both proved declarations use only standard axioms."
  }
 }
