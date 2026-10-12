@@ -6,6 +6,8 @@ Authors: SHEAF group E3
 module
 
 public import Sheaf.AlgebraicGeometry.EtaleInjectiveSectionsComparison
+import Sheaf.AlgebraicGeometry.StrictLocalInjectiveSourceTransition
+import Sheaf.AlgebraicGeometry.StrictLocalInjectiveSourceRestriction
 import Sheaf.AlgebraicGeometry.StrictHenselizationRestriction
 import Sheaf.AlgebraicGeometry.StrictLocalCohomologyGerms
 import Sheaf.AlgebraicGeometry.StrictLocalMateProjectionData
@@ -107,6 +109,13 @@ theorem exists_strictLocalInjectiveSourceSections {X S : Scheme.{v}}
                 (((InjectiveObject.ι _).mapHomologicalComplex (.up ℤ)).obj J.obj) n ≫
               representativeSectionsComparison
                 (pullback.fst f (Scheme.strictHenselizationStructuralMap s)) q n ≫
-              (strictLocalBaseChangeTargetIso f s K n).inv) := by sorry
+              (strictLocalBaseChangeTargetIso f s K n).inv)  := by
+  let e := strictLocalInjectiveSourceIso f s K n J q
+  refine ⟨e, ?_, ?_⟩
+  · intro i j a
+    apply (cancel_mono (e i).hom).1
+    simp only [Category.assoc, Iso.inv_hom_id, Category.comp_id]
+    exact strictLocalInjectiveSourceIso_transition f s K n J q a
+  · exact strictLocalInjectiveSourceIso_restriction f s K n Q J q
 
 end AlgebraicGeometry.Etale

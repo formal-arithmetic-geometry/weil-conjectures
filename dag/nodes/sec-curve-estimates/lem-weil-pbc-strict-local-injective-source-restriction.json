@@ -1,0 +1,144 @@
+{
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tags 03Q8 and 03Q9, injective-complex computation; https://stacks.math.columbia.edu/tag/03Q9"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Derived Hom from a free abelian sheaf on an etale neighbourhood to a bounded below injective complex is its sections cohomology",
+   "results": "CategoryTheory.Sheaf.H, CategoryTheory.Sheaf.cohomologyPresheaf, CategoryTheory.Sheaf.cohomologyPresheafFunctor, CategoryTheory.Sheaf.instAddCommGroupH, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_X₁, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_X₃, CategoryTheory.InjectiveResolution.extEquivCohomologyClass_extMk, CategoryTheory.InjectiveResolution.extEquivCohomologyClass",
+   "date": "2026-10-12",
+   "verdict": "Generic Hom-complex and localization infrastructure, used in the construction; no strict-local compatibility equation."
+  },
+  {
+   "tool": "loogle",
+   "query": "CochainComplex.HomComplex.CohomologyClass.homAddEquiv",
+   "results": "CochainComplex.HomComplex.CohomologyClass.homAddEquiv, CochainComplex.HomComplex.CohomologyClass.homAddEquiv_apply",
+   "date": "2026-10-12",
+   "verdict": "Generic Hom-complex and localization infrastructure, used in the construction; no strict-local compatibility equation."
+  },
+  {
+   "tool": "grep",
+   "query": "Qh_map_bijective|sourceFreeSections|strictLocalInjectiveSource",
+   "results": "Mathlib/Algebra/Homology/DerivedCategory/KInjective.lean, Mathlib/Algebra/Homology/DerivedCategory/KInjective.lean, Mathlib/Algebra/Homology/DerivedCategory/KInjective.lean, Mathlib/Algebra/Homology/DerivedCategory/KInjective.lean, Mathlib/Algebra/Homology/DerivedCategory/KProjective.lean, Mathlib/Algebra/Homology/DerivedCategory/KProjective.lean, Mathlib/Algebra/Homology/DerivedCategory/KProjective.lean, Mathlib/Algebra/Homology/DerivedCategory/KProjective.lean",
+   "date": "2026-10-12",
+   "verdict": "Generic Hom-complex and localization infrastructure, used in the construction; no strict-local compatibility equation."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Cohomology classes in a Hom complex compute derived Hom into a K-injective complex",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.StrictLocalInjectiveSourceSections",
+  "date": "2026-10-12",
+  "group": "M3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-weil-pbc-strict-henselization-stalk-formula",
+   "place": "03Q9 final paragraph: computing f_*J and restricting its sections on each neighbourhood",
+   "via": [
+    "lem-weil-pbc-strict-local-injective-source-sections",
+    "lem-weil-pbc-strict-local-mate-projection-formulas",
+    "lem-weil-pbc-strict-local-mate-continuity-presentation",
+    "lem-weil-pbc-strict-local-base-change-global-homology"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-h2",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "id": "lem-weil-pbc-strict-local-injective-source-restriction",
+ "kind": "statement",
+ "title": "StrictLocalInjectiveSourceRestriction",
+ "statement": "Let $f:X\\to S$, $s:\\operatorname{Spec}\\Omega\\to S$, $K$, $n$, $J$ and $q$\nbe as in [def-weil-pbc-strict-local-injective-source-comparison], and let $Q$ be\nstrict-local neighbourhood geometry [def-weil-pbc-strict-local-neighbourhood-geometry].\nUse the specific constructed $A_i$, not arbitrary source isomorphisms. For each $i$,\nthe canonical source leg $\\ell_i$ [def-weil-pbc-canonical-derived-cohomology-germs]\nfollowed by the global-sections homology map $m$ of the derived strict-local mate\n[def-weil-pbc-strict-local-mate-projection-data] is\n$\\ell_i m=A_i r_{Q_i,t_i,p} c_p T^{-1}$, where $r$ is termwise sections restriction,\n$c_p$ is representativeSectionsComparison\n[lem-weil-pbc-injective-sections-pullback-comparison], $p$ is the limit projection\nand $T$ is strictLocalBaseChangeTargetIso. This only asserts the cone-leg equation\nfor the canonical comparison; it asserts neither transition naturality nor\ninvertibility of $c_p$.",
+ "stmt_deps": [
+  "def-weil-pbc-strict-local-injective-source-comparison",
+  "def-weil-pbc-strict-local-neighbourhood-geometry",
+  "def-weil-pbc-canonical-derived-cohomology-germs",
+  "def-weil-pbc-strict-local-mate-projection-data",
+  "lem-weil-pbc-injective-sections-pullback-comparison"
+ ],
+ "proof": [
+  {
+   "text": "Represent a source morphism by a Hom-complex cocycle into f_*J using K-injective localization. Applying homology, evaluating the free generator and taking the canonical germ gives the class of the same section. The unique strict-local stalk restriction is characterized by its neighbourhood germ legs. Q.first and Q.over identify both components with the fixed cone leg.",
+   "uses": [
+    "def-weil-pbc-strict-local-injective-source-comparison",
+    "def-weil-pbc-canonical-derived-cohomology-germs",
+    "def-weil-pbc-strict-local-neighbourhood-geometry",
+    "def-weil-pbc-strict-henselization-restriction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Compute the derived units and counits on J, expand the mate and cancel the intermediate unit and counit by the adjunction triangle identities. On sections this is sectionsPullbackNat along the cone leg followed by the inverse composition comparison. Take homology and retain the derived-sections unit at the limit: this is r followed by c_p. Exact inverse image commutes with homology; exact strict-local sections and Leray give T. Transport by q preserves this identity. No injectivity at the limit or continuity is used.",
+   "uses": [
+    "prop-weil-pbc-derived-inverse-image-adjunction",
+    "lem-weil-pbc-injective-sections-pullback-comparison",
+    "def-weil-pbc-strict-local-mate-projection-data"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-canonical-derived-cohomology-germs",
+  "def-weil-pbc-strict-henselization-restriction",
+  "def-weil-pbc-strict-local-injective-source-comparison",
+  "def-weil-pbc-strict-local-mate-projection-data",
+  "def-weil-pbc-strict-local-neighbourhood-geometry",
+  "lem-weil-pbc-injective-sections-pullback-comparison",
+  "prop-weil-pbc-derived-inverse-image-adjunction"
+ ],
+ "proof_origin": {
+  "by": "M3 following document",
+  "document": "Stacks Project",
+  "place": "Tags 03Q8 and 03Q9, injective-complex computation"
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.StrictLocalInjectiveSourceRestriction",
+  "file": "lean/Sheaf/AlgebraicGeometry/StrictLocalInjectiveSourceRestriction.lean",
+  "declaration": "AlgebraicGeometry.Etale.strictLocalInjectiveSourceIso_restriction",
+  "statement": "theorem strictLocalInjectiveSourceIso_restriction {X S : Scheme.{v}} (f : X ⟶ S) {Ω : Type v} [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ S) (K : DerivedCategory.Plus (Sheaf X.smallEtaleTopology AddCommGrpCat.{v + 1})) (n : ℤ) (Q : StrictLocalNeighbourhoodGeometry f s) (J : CochainComplex.Plus (InjectiveObject (Sheaf X.smallEtaleTopology AddCommGrpCat.{v + 1}))) (q : K.obj ≅ DerivedCategory.Q.obj (((InjectiveObject.ι _).mapHomologicalComplex (.up ℤ)).obj J.obj)) : ∀ i : SmallModel.{v} (Scheme.strictHenselizationNeighbourhoods s), ((strictLocalCohomologySourceLegs s ((rightDerivedLowerStarPlus AddCommGrpCat.{v + 1} f).obj K) n).app (op i)) ≫ ((Sheaf.Γ (Scheme.strictHenselizationScheme s).smallEtaleTopology AddCommGrpCat.{v + 1}).map ((DerivedCategory.Plus.homologyFunctor _ n).map ((mateEquiv (upperStarLowerStarAdjunction AddCommGrpCat.{v + 1} f).derivedPlus (upperStarLowerStarAdjunction AddCommGrpCat.{v + 1} (pullback.snd f (Scheme.strictHenselizationStructuralMap s))).derivedPlus (TwoSquare.mk _ _ _ _ (pullbackSquareComparison AddCommGrpCat.{v + 1} (IsPullback.of_hasPullback f (Scheme.strictHenselizationStructuralMap s)).toCommSq).hom)) |>.natTrans.app K))) = (strictLocalInjectiveSourceIso f s K n J q i).hom ≫ termwiseSectionsRestriction (Q.legs.app i) ((strictLocalNeighbourhoodProjection f s).app i) (pullback.fst f (Scheme.strictHenselizationStructuralMap s)) (Q.over i).symm (((InjectiveObject.ι _).mapHomologicalComplex (.up ℤ)).obj J.obj) n ≫ representativeSectionsComparison (pullback.fst f (Scheme.strictHenselizationStructuralMap s)) q n ≫ (strictLocalBaseChangeTargetIso f s K n).inv",
+  "branch": "sheaf-dag",
+  "by": "M3",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M3",
+  "result": "pass",
+  "landing": "20261012T163616-L-2786096",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M3",
+  "result": "pass",
+  "landing": "20261012T163616-L-2786096",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
