@@ -7954,3 +7954,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 13:53 L: merged deliver/U1/Sheaf.CategoryTheory.SiteExtensionByZeroExact (stage 3; reviewer PASS; first push; landing 20261012T135322-L-1695070 (proof); batch 20261012T135212; modules 1; new nodes 0)
 - 13:53 L: merged deliver/U1/Sheaf.Paper.ZariskiEtaleResolutionMap (stage 3; reviewer PASS; first push; landing 20261012T135322-L-1695187 (interface); batch 20261012T135212; modules 3; new nodes 2)
 - 13:53 L: merged deliver/U1/Sheaf.RingTheory.RegularSequenceKoszulRegular (stage 3; reviewer PASS; first push; landing 20261012T135323-L-1695321 (interface); batch 20261012T135212; modules 3; new nodes 2)
+- 13:53 L: merged deliver/U2/Sheaf.AlgebraicGeometry.ConstantRankExteriorDerivedComparison (stage 3; reviewer PASS; first push; landing 20261012T135323-L-1695480 (interface); batch 20261012T135212; modules 2; new nodes 1)

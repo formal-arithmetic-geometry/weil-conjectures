@@ -16,38 +16,39 @@
  ],
  "proof": [
   {
-   "text": "For the constant rank function d, the rank-d open is all of X, and all other rank opens are empty. On an empty scheme the sheaf condition forces every module sheaf to have zero sections on its only open. Pushforward from that open is zero. On the full open, restriction and pushforward along its inclusion compose to the identity, including the exterior-power sheafification. Hence L(M,r) is supported only in degree d, with term exteriorSheaf M d.",
+   "text": "In degree d, the rank-d open is the full open. Unfold the nonnegative term and use exteriorSheaf_fullOpen_pushforward_iso to identify it with exteriorSheaf M d. For nonnegative i different from d, i.toNat differs from d and the rank stratum is empty. Every open of this empty scheme is bottom, whose structure ring is subsingleton. Module.subsingleton makes every section module zero. Hence the pushforward identity is zero on each open, so the pushforward is a zero object. Negative terms are zero by definition. This is the objectwise classification proved by termIso.",
    "uses": [
     "def-sc-locally-ranked-exterior-complex",
+    "lem-sc-sheaf-exterior-full-open-iso"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply ModuleCat.exteriorPower.functor on each open U to the component isomorphism of e. For naturality, apply exteriorPower.linearMap_ext and check a pure wedge. The characterization in exteriorSheafRestriction_existsUnique expresses restrictions as restrictions of tuples; exteriorPower.map_apply_ιMulti maps the wedge through e, and PresheafOfModules.naturality_apply e.hom.val identifies the two tuples. PresheafOfModules.isoMk gives a presheaf isomorphism. Mapping it through sheafification gives exteriorSheaf M d isomorphic to exteriorSheaf N d. This is the proved helper exteriorIso.",
+   "uses": [
     "def-sc-sheaf-exterior-power"
    ],
-   "elementary": true
+   "elementary": false
   },
   {
-   "text": "On an open U the isomorphism e induces the exterior map sending a pure wedge of m_j to the wedge of e(m_j); e inverse gives the inverse. Compatibility with restrictions follows by checking this formula on pure wedges, which span. Sheafification therefore identifies exteriorSheaf M d with exteriorSheaf N d. Use this isomorphism in degree d and the unique maps between zero objects elsewhere to identify L(M,r) with the single complex in degree d. All differentials are zero, so these component maps and their inverses are complex morphisms.",
+   "text": "Combine the term classification with HomologicalComplex.singleObjXIsoOfEq in degree d and isZero_single_obj_X elsewhere. HomologicalComplex.Hom.isoOfComponents assembles an isomorphism with the degree-d single complex: the equations reduce to zero differentials. Map by Q, invert the component of DerivedCategory.singleFunctorIsoCompQ, and map exteriorIso through the degree-d single functor. Finally invert the component of (DerivedCategory.singleFunctors C).shiftIso (-d) d 0, using -d+d=0. This composite proves the unchanged original statement.",
    "uses": [
-    "def-sc-sheaf-exterior-power",
-    "def-sc-locally-ranked-exterior-complex"
-   ],
-   "elementary": true
-  },
-  {
-   "text": "Apply Q to the complex isomorphism. By the definition of the cohomological shift, a single object in degree d is the degree-zero single shifted by -d; use the usual single/shift isomorphism in the derived category. The same calculation holds for d=0 and empty X.",
-   "uses": [
+    "def-sc-locally-ranked-exterior-complex",
     "def-pc-derived-category"
    ],
-   "elementary": true
+   "elementary": false
   }
  ],
  "proof_deps": [
   "def-sc-locally-ranked-exterior-complex",
+  "lem-sc-sheaf-exterior-full-open-iso",
   "def-sc-sheaf-exterior-power",
   "def-pc-derived-category"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/duality.tex",
-  "place": "Tag 0BR0, expression wedge^r N[-r] for the locally constant rank function; constant-rank specialization; expanded implementation argument from the cited construction"
+  "place": "Tag 0BR0, expression wedge^r N[-r]; full-open identification in the constant-rank specialization"
  },
  "mathlib_searches": [
   {
@@ -129,11 +130,11 @@
  "reviewed_proof": {
   "date": "2026-10-12",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "C1",
+  "reviewer": "X-2910f",
+  "group": "U2",
   "result": "pass",
-  "landing": "20261012T110255-L-612343",
+  "landing": "20261012T135323-L-1695480",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent Codex review: Delivered files match recorded node statements and proof metadata; both modules and direct importer compile cleanly with lcompile.py."
  }
 }

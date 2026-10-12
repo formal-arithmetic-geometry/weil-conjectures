@@ -1,0 +1,139 @@
+{
+ "id": "lem-sc-sheaf-exterior-full-open-iso",
+ "kind": "statement",
+ "title": "Exterior sheaves commute with full-open restriction and pushforward",
+ "statement": "Let $X$ be a scheme [def-pc-scheme], let $M$ be a sheaf of $\\mathcal O_X$-modules [def-weil-sheaf-of-modules-category], and let $d\\in\\mathbf N$. Let $j:X|_X\\to X$ be the inclusion of the full-open subscheme into $X$, and let $j^*M$ be the restriction of $M$ to that open subscheme. Writing $\\bigwedge^d$ for the sheafification of sectionwise exterior powers [def-sc-sheaf-exterior-power], there is an isomorphism of module sheaves $j_*(\\bigwedge^d(j^*M))\\cong\\bigwedge^d M$. No local freeness hypothesis is imposed on $M$.",
+ "source": {
+  "document": "literature/stacks-project/duality.tex",
+  "place": "Tag 0BR0, expression wedge^r N[-r]; full-open identification in the constant-rank specialization"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-sheaf-of-modules-category",
+  "def-sc-sheaf-exterior-power"
+ ],
+ "proof": [
+  {
+   "text": "The full-open inclusion j is the canonical scheme isomorphism X.topIso.hom. Its image and preimage operations on opens are inverse; they identify the structure sheaves, module restriction and pushforward, and covering families. Thus module sections and their scalar rings on corresponding opens are identified, compatibly with restriction.",
+   "uses": [
+    "def-pc-scheme",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "On corresponding opens, use the exterior-power universal property to transport pure wedges through the section and scalar identifications. The inverse section identification gives the inverse exterior map. Both composites are identity on pure wedges, hence on every element since pure wedges span. Naturality follows by checking the two restriction composites on pure wedges using the characterized exterior restrictions. These maps give an isomorphism of exterior presheaves after transport through the equivalence of opens.",
+   "uses": [
+    "def-sc-sheaf-exterior-power"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Transport the module-sheafification universal property through the equivalence of opens, which preserves covers. Given a map from the transported exterior presheaf to an X-module sheaf, restrict both target and map along j. The sheafification adjunction factors it uniquely through the exterior sheaf on the full-open subscheme. Pushing the factorization forward gives a unique factorization on X. Thus the pushforward of this exterior sheaf and exteriorSheaf M d are sheafifications of isomorphic exterior presheaves. Factor their two unit maps by these universal properties. Uniqueness makes the resulting maps inverse. For empty X all sheaves are zero; for d=0 the same construction uses the zeroth exterior power. No basis or local freeness is used.",
+   "uses": [
+    "def-sc-sheaf-exterior-power",
+    "lem-pc-presheaf-module-sheafification-ring"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-scheme",
+  "def-weil-sheaf-of-modules-category",
+  "def-sc-sheaf-exterior-power",
+  "lem-pc-presheaf-module-sheafification-ring"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/duality.tex",
+  "place": "Tag 0BR0, expression wedge^r N[-r]; full-open identification in the constant-rank specialization"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "For a constant rank d on a scheme, pushforward of the exterior power of a module sheaf restricted to the rank d full open is the original dth exterior sheaf",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction of an exterior sheaf to the full open subscheme followed by pushforward identifies with the original exterior sheaf",
+   "results": "Returned restrictFunctorAdjCounitIso, restrictFunctorId and component lemmas, restrictFunctorΓ, restrictAdjunction counit/unit component lemmas, and ofRestrict_app. They do not give compatibility with the exterior-sheaf construction.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "exteriorSheaf.*restrict|exteriorSheaf.*pushforward|exterior.*sheafification",
+   "results": "0 Mathlib hits. Repository/DAG searches found the assigned comparison and exterior-sheaf definition but no full-open exterior-sheaf lemma. Blueprint searches for exterior sheaf and constant rank exterior returned no matches.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ConstantRankExteriorDerivedComparison",
+  "date": "2026-10-12",
+  "group": "U2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Tag 0BR0, expression wedge^r N[-r] for the locally constant rank function; constant-rank specialization; smooth-diagonal determinant comparison, constant-rank exterior complex as a shifted single exterior sheaf; first proof step: exterior sheaf identification on the full-open rank stratum",
+   "via": [
+    "lem-sc-constant-rank-exterior-derived-comparison",
+    "lem-sc-smooth-diagonal-dualizing-determinant",
+    "lem-sc-smooth-proper-dualizing-tensor-evaluation",
+    "lem-sc-smooth-proper-relative-dualizing-general",
+    "lem-sc-smooth-proper-curve-dualizing",
+    "lem-sc-finite-duality-trace"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Modules.ExteriorSheafFullOpenIso",
+  "file": "lean/Sheaf/AlgebraicGeometry/Modules/ExteriorSheafFullOpenIso.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.exteriorSheaf_fullOpen_pushforward_iso",
+  "statement": "theorem exteriorSheaf_fullOpen_pushforward_iso {X : Scheme.{u}} (M : X.Modules) (d : ℕ) : Nonempty ((pushforward (⊤ : X.Opens).ι).obj (exteriorSheaf ((restrictFunctor (⊤ : X.Opens).ι).obj M) d) ≅ exteriorSheaf M d)",
+  "branch": "sheaf-dag",
+  "by": "U2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-2910f",
+  "group": "U2",
+  "result": "pass",
+  "landing": "20261012T135323-L-1695480",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-2910f",
+  "group": "U2",
+  "result": "pass",
+  "landing": "20261012T135323-L-1695480",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered files match recorded node statements and proof metadata; both modules and direct importer compile cleanly with lcompile.py."
+ }
+}
