@@ -1,0 +1,126 @@
+{
+ "id": "lem-weil-pbc-thickening-system-hom-transport",
+ "kind": "statement",
+ "title": "Transport of system arrows to compatible pullback families",
+ "statement": "Let X be a scheme and let T_n be schemes with maps i_n:T_n to T_(n+1). Let j_n:T_n to X be closed immersions. Put L_n=j_n^* and P_n=i_n^*, using tensor pullback [def-pc-module-pullback]. Let c_n,d_n:L_(n+1) followed by P_n isomorphic to L_n be arbitrary natural comparison isomorphisms. Let R:Coh(X) to CoherentThickeningSystem(T,i) be a functor, where Coh(X) is the full subcategory of coherent modules [def-weil-pbc-coherent-formal-module] and system arrows are compatible component families [def-weil-pbc-coherent-thickening-system]. Suppose natural evaluation isomorphisms r_n:R followed by evaluation_n isomorphic to restriction L_n satisfy comparison_(R F),n followed by r_n,F = P_n(r_(n+1),F) followed by d_n,F for every coherent F and n. For coherent F,G there is an equivalence from Hom(R G,R F) to families v_n:L_n G to L_n F satisfying c_n,G followed by v_n = P_n(v_(n+1)) followed by c_n,F. The equivalence sends R(w) to the family L_n(w) for every coherent-module arrow w:G to F. No formal-completion system occurs in this statement.",
+ "source": {
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Remark 088F (compatible systems) and Lemma 087T (closed-immersion full faithfulness); elementary categorical transport extracted from the completion dictionary plan"
+ },
+ "stmt_deps": [
+  "def-pc-module-pullback",
+  "def-weil-pbc-coherent-formal-module",
+  "def-weil-pbc-coherent-thickening-system"
+ ],
+ "proof": [
+  {
+   "text": "Conjugate each system arrow component a_n by r_n,G inverse on the left and r_n,F on the right. Use hr for F and G to translate compatibility into the equation for d_n. The inverse conjugations reconstruct the arrow; the inverse laws hold componentwise by the isomorphism identities and proof irrelevance.",
+   "uses": [
+    "def-weil-pbc-coherent-thickening-system"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For each closed immersion j_n, choose its tensor-pullback adjunction. The counit is invertible by closedImmersion_pushforward_fullyFaithful, and the left triangle identity makes the pulled-back unit invertible. Conjugating the component of a natural automorphism alpha of j_n^* at j_n,*N by the counit defines a natural automorphism beta of the identity on modules on T_n. Naturality against the unit gives beta_(j_n^*M)=alpha_M. Hence alpha_G commutes with every map j_n^*G to j_n^*F. Apply this to alpha=d_n.symm followed by c_n and cancel alpha_F to identify the c_n and d_n compatibility equations.",
+   "uses": [
+    "lem-weil-pbc-closed-immersion-pushforward-fully-faithful",
+    "def-pc-module-pullback"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Combine the componentwise conjugation bijection with the identification of family subtypes. Naturality of r identifies the family of R.map w with the pullbacks of w; the proof of family compatibility is naturality of c.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pc-module-pullback",
+  "def-weil-pbc-coherent-thickening-system",
+  "lem-weil-pbc-closed-immersion-pushforward-fully-faithful"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Categorical conjugation and comparison independence argument expanded from Remark 088F and Lemma 087T; no Grothendieck existence used"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A natural automorphism of a localization left adjoint commutes with all morphisms between objects in its image when the right adjoint is fully faithful",
+   "results": "8 hits: CategoryTheory.Adjunction.localization, CategoryTheory.Adjunction.Localization.ε, CategoryTheory.Adjunction.Localization.η, CategoryTheory.Adjunction.Localization.η_app, CategoryTheory.Adjunction.Localization.ε_app, CategoryTheory.Adjunction.localization_unit_app, CategoryTheory.Adjunction.isLocalization_leftAdjoint, CategoryTheory.Adjunction.isLocalization'",
+   "date": "2026-10-12",
+   "verdict": "No matching transport theorem; standard categorical building blocks only."
+  },
+  {
+   "tool": "grep",
+   "query": "comparison.*hom|hom.*transport|central.*nat",
+   "results": "25 hits: Mathlib/Condensed/Discrete/LocallyConstant.lean, Mathlib/NumberTheory/Bertrand.lean, Mathlib/NumberTheory/Bertrand.lean, Mathlib/AlgebraicTopology/SimplicialSet/NerveAdjunction.lean, Mathlib/AlgebraicTopology/SimplicialSet/NerveAdjunction.lean, Mathlib/Geometry/RingedSpace/LocallyRingedSpace/HasColimits.lean, Mathlib/Combinatorics/Enumerative/Catalan/Basic.lean, Mathlib/Combinatorics/Enumerative/Catalan/Basic.lean",
+   "date": "2026-10-12",
+   "verdict": "No matching transport theorem; standard categorical building blocks only."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatTrans.naturality",
+   "results": "9 hits: CategoryTheory.NatTrans.naturality, CategoryTheory.Limits.PullbackCone.isoMk, CategoryTheory.Limits.PushoutCocone.isoMk, CategoryTheory.Limits.PullbackCone.isoMk_hom_hom, CategoryTheory.Limits.PullbackCone.isoMk_inv_hom, CategoryTheory.Limits.PushoutCocone.isoMk_hom_hom, CategoryTheory.Limits.PushoutCocone.isoMk_inv_hom, CategoryTheory.Grothendieck.map_map",
+   "date": "2026-10-12",
+   "verdict": "No matching transport theorem; standard categorical building blocks only."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Conjugating component morphisms by natural evaluation isomorphisms gives a bijection between morphisms of restriction systems and compatible families, independently of comparison isomorphisms for closed immersion pullback",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ThickeningCompletionHomDictionary",
+  "date": "2026-10-13",
+  "group": "W2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-thickening-completion-hom-dictionary",
+   "place": "proof steps 2 and 3: component transport, after the dictionary has supplied R and r",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ThickeningSystemHomTransport",
+  "file": "lean/Sheaf/AlgebraicGeometry/ThickeningSystemHomTransport.lean",
+  "declaration": "AlgebraicGeometry.thickeningSystem_hom_transport",
+  "statement": "theorem thickeningSystem_hom_transport\n    {X : Scheme.{u}} {T : ℕ → Scheme.{u}} {i : ∀ n, T n ⟶ T (n + 1)}\n    (j : ∀ n, T n ⟶ X) (hj : ∀ n, IsClosedImmersion (j n))\n    (c d : ∀ n, Scheme.Modules.tensorPullback (j (n + 1)) ⋙\n      Scheme.Modules.tensorPullback (i n) ≅ Scheme.Modules.tensorPullback (j n))\n    (R : CoherentModules X ⥤ CoherentThickeningSystem T i)\n    (r : ∀ n, R ⋙ CoherentThickeningSystem.evaluation T i n ≅\n      ObjectProperty.ι (RingedSpace.IsCoherent X.toRingedSpace) ⋙\n        Scheme.Modules.tensorPullback (j n))\n    (hr : ∀ (F : CoherentModules X) (n : ℕ),\n      ((R.obj F).comparison n).hom ≫ (r n).hom.app F =\n        (Scheme.Modules.tensorPullback (i n)).map ((r (n + 1)).hom.app F) ≫\n          (d n).hom.app F.obj)\n    (F G : CoherentModules X) :\n    ∃ e : (R.obj G ⟶ R.obj F) ≃\n      {v : ∀ n, (Scheme.Modules.tensorPullback (j n)).obj G.obj ⟶\n        (Scheme.Modules.tensorPullback (j n)).obj F.obj |\n        ∀ n, (c n).hom.app G.obj ≫ v n =\n          (Scheme.Modules.tensorPullback (i n)).map (v (n + 1)) ≫ (c n).hom.app F.obj},\n      ∀ w : G ⟶ F, e (R.map w) =\n        ⟨fun n ↦ (Scheme.Modules.tensorPullback (j n)).map w.hom,\n          fun n ↦ ((c n).hom.naturality w.hom).symm⟩",
+  "branch": "sheaf-dag",
+  "by": "W2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W2",
+  "result": "pass",
+  "landing": "20261012T184355-L-4023877",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W2",
+  "result": "pass",
+  "landing": "20261012T184355-L-4023877",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

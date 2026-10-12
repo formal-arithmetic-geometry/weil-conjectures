@@ -10,7 +10,7 @@ public import Sheaf.AlgebraicGeometry.CoherentFormalModule
 public import Sheaf.AlgebraicGeometry.TensorPullback
 public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 import Sheaf.AlgebraicGeometry.ThickeningSystemsDictionary
-import Sheaf.AlgebraicGeometry.ClosedImmersionPushforwardFullyFaithful
+import Sheaf.AlgebraicGeometry.ThickeningSystemHomTransport
 
 /-! # Morphisms of completions as compatible restriction families
 
@@ -97,6 +97,39 @@ theorem thickeningSystems_completion_hom_equiv
         (I.map (Scheme.ΓSpecIso (CommRingCat.of A)).inv.hom)).comap f) w) =
           ⟨fun n ↦ (Scheme.Modules.tensorPullback (pullback.fst f
             (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk (I ^ (n + 1))))))).map w,
-            fun n ↦ ((c n).hom.naturality w).symm⟩ := by sorry
+            fun n ↦ ((c n).hom.naturality w).symm⟩ := by
+  classical
+  have _ := hc
+  let K := ((Scheme.IdealSheafData.ofIdealTop
+    (I.map (Scheme.ΓSpecIso (CommRingCat.of A)).inv.hom)).comap f)
+  let ai := fun n ↦ Classical.choice (Scheme.Modules.nonempty_tensorPullbackAdjunction (i n))
+  let aj := fun n ↦ Classical.choice (Scheme.Modules.nonempty_tensorPullbackAdjunction
+    (pullback.fst f (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk (I ^ (n + 1)))))))
+  obtain ⟨hX, hj, Φ, β, hΦ, hβ, d, R, r, ρ, hd, hr, hρ, hb, hm, rest⟩ :=
+    thickeningSystems_dictionary f I i hi hp ai aj
+  let : IsNoetherian X := hX
+  let F' : CoherentModules X := ⟨F, hF⟩
+  let G' : CoherentModules X := ⟨G, hG⟩
+  obtain ⟨eR, heR⟩ := thickeningSystem_hom_transport (i := i)
+    (fun n ↦ pullback.fst f (Spec.map (CommRingCat.ofHom
+      (Ideal.Quotient.mk (I ^ (n + 1)))))) (fun n ↦ (hj n).1) c d R r hr F' G'
+  let b : (R.obj G' ⟶ R.obj F') ≃
+      ((completion X K).obj G' ⟶ (completion X K).obj F') :=
+    Equiv.ofBijective (fun v ↦ (ρ.hom.app G') ≫ Φ.map v ≫ (ρ.inv.app F')) (hb F' G')
+  let q : ((completion X K).obj G' ⟶ (completion X K).obj F') ≃
+      (formalCompletionSystem K G ⟶ formalCompletionSystem K F) :=
+    { toFun := fun v ↦ v.hom
+      invFun := fun v ↦ ObjectProperty.homMk v
+      left_inv := fun v ↦ by cases v; rfl
+      right_inv := fun v ↦ rfl }
+  refine ⟨q.symm.trans (b.symm.trans eR), ?_⟩
+  intro w
+  have hw : b (R.map (ObjectProperty.homMk w : G' ⟶ F')) =
+      (completion X K).map (ObjectProperty.homMk w : G' ⟶ F') := hm F' G' _
+  change eR (b.symm (q.symm (formalCompletionMap K w))) = _
+  have hq : q.symm (formalCompletionMap K w) =
+      (completion X K).map (ObjectProperty.homMk w : G' ⟶ F') := rfl
+  rw [hq, ← hw, b.symm_apply_apply]
+  exact heR (ObjectProperty.homMk w)
 
 end AlgebraicGeometry
