@@ -10,19 +10,14 @@ public import WeilConjectures.AlgebraicGeometry.Curve.Affine
 public import WeilConjectures.AlgebraicGeometry.Sites.RootsOfUnity
 public import Sheaf.AlgebraicGeometry.Curve.PicProperNTorsion
 public import Sheaf.AlgebraicGeometry.GenusInvariant
-import Sheaf.AlgebraicGeometry.BaseChangeCurve
-import Sheaf.AlgebraicGeometry.Curve.KummerBaseChangeCompatibility
-import Sheaf.AlgebraicGeometry.Curve.ProperCohomology
-import Sheaf.AlgebraicGeometry.Curve.UnitsQuotientBaseChange
+import Sheaf.AlgebraicGeometry.Curve.ConstantLowDegreeBaseChange
+import Sheaf.AlgebraicGeometry.Curve.ConstantKummerNaturality
+import Sheaf.AlgebraicGeometry.Curve.ConstantProperDegreeCoordinates
 import Sheaf.AlgebraicGeometry.IsProperOrIsAffine
-import WeilConjectures.AlgebraicGeometry.AbelianVariety.Final
-import WeilConjectures.AlgebraicGeometry.Curve.Brauer
-import WeilConjectures.AlgebraicGeometry.Curve.CohomologicalDimension
-import WeilConjectures.AlgebraicGeometry.Curve.Kummer
-import WeilConjectures.AlgebraicGeometry.DensePoints
-import WeilConjectures.AlgebraicGeometry.Picard.Jacobian
-import WeilConjectures.Mathlib.AlgebraicGeometry.Geometrically.Connected
 import WeilConjectures.Mathlib.RingTheory.RootsOfUnity.AlgebraicallyClosed
+import Sheaf.AlgebraicGeometry.BaseChangeCurve
+import Sheaf.AlgebraicGeometry.Curve.ProperCohomology
+import WeilConjectures.AlgebraicGeometry.Curve.CohomologicalDimension
 
 /-!
 # Constant coefficients under algebraically closed field extension
@@ -52,24 +47,22 @@ In the affine case the equations are the canonical short exact Kummer ladder, wh
 term is the quotient of the compactification's Jacobian described by lem-sc-pic-affine.
 
 Proof following the node:
-1. lem-sc-base-change-curve preserves smoothness, separatedness, dimension and properness or
-   affineness. lem-weil-separably-closed-geometrically-connected and
-   def-pc-geometrically-irreducible give connectedness after base change.
-2. Proper case: lem-sc-primitive-root gives compatible trivializations. lem-sc-brauer-zero
-   and lem-sc-kummer-les compute degrees one and two, and
-   lem-sc-kummer-base-change-compatibility identifies the maps with Picard pullback.
-   lem-sc-pic-proper-ntorsion identifies Picard torsion with (Z/n)^(2g).
-   thm-sc-jacobian-representability and lem-sc-genus-invariant identify Jacobians after
-   base change, and thm-av-final(c) gives bijectivity on their n-torsion points.
-   Degree identifies Pic/n with Z/n: lem-pc-rational-points-dense provides a point of degree
-   one, whose pullback still has degree one. thm-sc-proper-cohomology gives higher vanishing.
-3. Affine case: lem-sc-proper-or-affine reduces to this remaining case.
-   thm-sc-affine-cohomology gives H0 = Z/n and vanishing above degree one. In degree one,
-   lem-sc-kummer-les and lem-sc-kummer-base-change-compatibility give the canonical ladder.
-   Its outer maps are bijective by lem-sc-units-quotient-base-change and the affine clause
-   of lem-sc-kummer-base-change-compatibility, using lem-sc-pic-affine and thm-av-final.
-   The short five lemma gives bijectivity of the middle map. All equations follow from
-   the same Kummer naturality and the compatible primitive roots. -/
+1. Use baseChange_curve for the smooth connected curve over K. Define r to be the canonical
+   cohomology pullback followed by the constant-sheaf comparison. Degrees zero and one use
+   constant_low_degree_baseChange_bijective. Degree two uses the proper degree coordinates or
+   affine vanishing; in higher degrees both groups vanish by curve
+   cohomological dimension, so r is bijective there too.
+2. Apply the cohomology functor to each primitive-root sheaf isomorphism to construct t and
+   tK with exactly the required underlying maps. constant_kummer_baseChange_naturality gives
+   the inclusion, Picard-boundary and affine units-boundary equations.
+3. For proper C, constant_proper_degree_coordinates gives degree-two coordinates and equality
+   of the source and compactification genera. genus_jacobian_invariant gives the base-change
+   genus equality. Proper cohomology supplies degree-one coordinates over k; composing them
+   with the inverse of the bijective r in degree one supplies compatible coordinates over K.
+4. Apply genus_jacobian_invariant to f when it is proper and to c.g unconditionally, retaining
+   its exact classifying-morphism compatibility. Supply base-changed smoothness by
+   baseChange_curve. Finally, functoriality of Picard pullback and pullback.lift_fst prove the
+   affine compactification restriction equation for every line bundle. -/
 theorem IsConnectedCurve.constant_cohomology_baseChange_compatible
     {k K : Type u} [Field k] [Field K] [IsAlgClosed k] [IsAlgClosed K] [Algebra k K]
     {C : Scheme.{u}} (f : C ⟶ Spec (.of k)) [IsConnectedCurve f] [Smooth f]
@@ -235,6 +228,108 @@ theorem IsConnectedCurve.constant_cohomology_baseChange_compatible
                 (Category.id_comp (Spec.map (CommRingCat.ofHom (algebraMap k K)))).symm))
             (Scheme.Pic.map (pullback.fst c.g (Spec.map (CommRingCat.ofHom (algebraMap k K)))) L))
               := by
-  sorry
+  classical
+  let b := Spec.map (CommRingCat.ofHom (algebraMap k K))
+  let P := pullback f b
+  let fK := pullback.snd f b
+  let π := pullback.fst f b
+  have hbase := baseChange_curve (k' := K) f
+  have : IsConnectedCurve fK := hbase.2.2.2.2.2 inferInstance
+  have : Smooth fK := hbase.2.2.1 inferInstance
+  let r : ∀ q : ℕ, Sheaf.H (C.constantZMod n) q →+ Sheaf.H (P.constantZMod n) q :=
+    fun q => (Sheaf.H.map
+      (((Scheme.upperStarConstantSheafIso AddCommGrpCat.{u + 1} π).app
+        (AddCommGrpCat.of (ULift.{u + 1} (ZMod n)))).hom) q).comp
+          (Etale.cohomologyMap π (C.constantZMod n) q)
+  have hr : ∀ q, r q = _ := fun _ => rfl
+  have hlow := constant_low_degree_baseChange_bijective f c _hfin _hclosed n _hn r hr
+  have hbij : ∀ q, Function.Bijective (r q) := by
+    intro q
+    by_cases hq : q ≤ 1
+    · exact hlow q hq
+    · by_cases hq₂ : q = 2
+      · subst q
+        obtain hf | hC := isProper_or_isAffine f
+        · have : IsProper f := hf
+          have : NeZero (n : k) := ⟨_hn⟩
+          obtain ⟨_, _, ζ₀, hζ₀, hmap⟩ := IsSepClosed.exists_isPrimitiveRoot k n
+          let t₀ : ∀ q, Sheaf.H (C.constantZMod n) q ≃+
+              Sheaf.H (C.rootsOfUnitySheaf n) q :=
+            fun q => ((Sheaf.functorH C.smallEtaleTopology q).mapIso
+              (C.constantZModIsoRootsOfUnitySheaf n f hζ₀)).addCommGroupIsoToAddEquiv
+          let tK₀ : ∀ q, Sheaf.H (P.constantZMod n) q ≃+
+              Sheaf.H (P.rootsOfUnitySheaf n) q :=
+            fun q => ((Sheaf.functorH P.smallEtaleTopology q).mapIso
+              (P.constantZModIsoRootsOfUnitySheaf n fK
+                (hmap K (algebraMap k K)))).addCommGroupIsoToAddEquiv
+          obtain ⟨_, e, eK, he, _, _⟩ := constant_proper_degree_coordinates
+            f c _hfin _hclosed n _hn r hr ζ₀ hζ₀ (hmap K (algebraMap k K))
+              t₀ tK₀ (fun _ => rfl) (fun _ => rfl)
+          refine ⟨?_, ?_⟩
+          · intro x y hxy
+            apply e.injective
+            rw [← he x, ← he y, hxy]
+          · intro y
+            refine ⟨e.symm (eK y), eK.injective ?_⟩
+            rw [he, AddEquiv.apply_symm_apply]
+        · have : IsAffine C := hC
+          have : IsAffine P := hbase.2.2.2.2.1 hC
+          have : Subsingleton (Sheaf.H (C.constantZMod n) 2) :=
+            IsCurve.subsingleton_sheafH_two_of_isAffine f _
+              (C.isTorsion_constantZMod (NeZero.ne n))
+          have : Subsingleton (Sheaf.H (P.constantZMod n) 2) :=
+            IsCurve.subsingleton_sheafH_two_of_isAffine fK _
+              (P.isTorsion_constantZMod (NeZero.ne n))
+          exact ⟨fun _ _ _ => Subsingleton.elim _ _,
+            fun y => ⟨0, Subsingleton.elim _ _⟩⟩
+      · have hq' : 3 ≤ q := by omega
+        have : Subsingleton (Sheaf.H (C.constantZMod n) q) :=
+          IsCurve.subsingleton_sheafH_of_three_le f _
+            (C.isTorsion_constantZMod (NeZero.ne n)) q hq'
+        have : Subsingleton (Sheaf.H (P.constantZMod n) q) :=
+          IsCurve.subsingleton_sheafH_of_three_le fK _
+            (P.isTorsion_constantZMod (NeZero.ne n)) q hq'
+        exact ⟨fun _ _ _ => Subsingleton.elim _ _,
+          fun y => ⟨0, Subsingleton.elim _ _⟩⟩
+  refine ⟨r, hr, hbij, ?_⟩
+  intro ζ hζ hζK
+  let t : ∀ q, Sheaf.H (C.constantZMod n) q ≃+ Sheaf.H (C.rootsOfUnitySheaf n) q :=
+    fun q => ((Sheaf.functorH C.smallEtaleTopology q).mapIso
+      (C.constantZModIsoRootsOfUnitySheaf n f hζ)).addCommGroupIsoToAddEquiv
+  let tK : ∀ q, Sheaf.H (P.constantZMod n) q ≃+ Sheaf.H (P.rootsOfUnitySheaf n) q :=
+    fun q => ((Sheaf.functorH P.smallEtaleTopology q).mapIso
+      (P.constantZModIsoRootsOfUnitySheaf n fK hζK)).addCommGroupIsoToAddEquiv
+  have ht : ∀ q, (t q).toAddMonoidHom = _ := fun _ => rfl
+  have htK : ∀ q, (tK q).toAddMonoidHom = _ := fun _ => rfl
+  obtain ⟨hpic, hboundary, hunits⟩ := constant_kummer_baseChange_naturality
+    f c _hfin _hclosed n _hn r hr ζ hζ hζK t tK ht htK
+  refine ⟨t, tK, ht, htK, hpic, hboundary, ?_, ?_, ?_, hunits, ?_⟩
+  · intro hf
+    have : IsProper f := hf
+    obtain ⟨hgen, e₂, eK₂, he₂, hdegree, hdegreeK⟩ :=
+      constant_proper_degree_coordinates f c _hfin _hclosed n _hn
+        r hr ζ hζ hζK t tK ht htK
+    obtain ⟨_, _, _, hgenK, _, _, _⟩ := genus_jacobian_invariant (K := K) f
+    obtain ⟨e₁⟩ := (sheafH_constantZMod_of_isProper f n _hn).2.1
+    let e : Sheaf.H (C.constantZMod n) 1 ≃+ (Fin (2 * c.g.genus) → ZMod n) :=
+      by
+        rw [← hgen]
+        exact e₁
+    let er := AddEquiv.ofBijective (r 1) (hbij 1)
+    refine ⟨hgenK.trans hgen, ⟨e, er.symm.trans e, ?_⟩,
+      e₂, eK₂, he₂, hdegree, hdegreeK⟩
+    intro x
+    exact congrArg e (er.symm_apply_apply x)
+  · intro hf
+    have : IsProper f := hf
+    obtain ⟨hGI, hCC, hGIK, _, _, _, hJ⟩ := genus_jacobian_invariant (K := K) f
+    exact ⟨hGI, hGIK, hCC, inferInstance, hJ⟩
+  · have : IsProper c.g := c.isProper
+    obtain ⟨hGI, hCC, hGIK, _, _, _, hJ⟩ := genus_jacobian_invariant (K := K) c.g
+    have : Smooth (pullback.snd c.g b) :=
+      (baseChange_curve (k' := K) c.g).2.2.1 inferInstance
+    exact ⟨hGI, hGIK, hCC, inferInstance, hJ⟩
+  · intro _ L _
+    rw [← Scheme.Pic.map_comp, ← Scheme.Pic.map_comp, pullback.lift_fst]
 
 end AlgebraicGeometry

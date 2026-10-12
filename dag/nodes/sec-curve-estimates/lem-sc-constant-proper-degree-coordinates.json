@@ -1,0 +1,211 @@
+{
+ "id": "lem-sc-constant-proper-degree-coordinates",
+ "kind": "statement",
+ "title": "Proper degree-two coordinates and compactification genus",
+ "statement": "Let k contained in K be algebraically closed fields [def-sc-field-extension], f:C over k a smooth proper separated connected curve [def-sc-curves], c a smooth connected proper compactification with finite closed boundary [lem-sc-compactification], and n positive and nonzero in k. Let r be canonical constant-coefficient cohomology pullback and t,tK the cohomology equivalences of the primitive-root trivializations [def-sc-mu-trivialization]. Then f's genus equals c's genus [def-sc-genus]. There exist additive equivalences e:H2(C,Z/n) to Z/n and eK:H2(C_K,Z/n) to Z/n which satisfy eK(r(x))=e(x). For each line bundle over either curve, the inverse-trivialized Kummer boundary [lem-sc-kummer-les] is sent to its degree modulo n [def-pc-degree-line-bundle].",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-ext-invariance/thm-sc-constant-invariance.md",
+  "place": "proof, proper case: Pic/n via degree and compactification equals the proper curve"
+ },
+ "stmt_deps": [
+  "def-sc-field-extension",
+  "def-sc-curves",
+  "lem-sc-compactification",
+  "def-sc-mu-trivialization",
+  "def-sc-genus",
+  "lem-sc-kummer-les",
+  "def-pc-degree-line-bundle"
+ ],
+ "proof": [
+  {
+   "text": "The compactification open immersion is proper because its composite is proper and the target is separated over the field. Its image is both open and closed and is nonempty, so connectedness of the compactification makes it surjective. It is an isomorphism over k; transport of relative differentials and global sections preserves genus.",
+   "uses": [
+    "lem-sc-compactification",
+    "def-sc-genus"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Over both fields, Brauer vanishing and the Kummer sequence identify H2(mu_n) with Pic/n. Picard degree zero is n-divisible, and a rational point has degree one, so degree induces an additive equivalence from this quotient to Z/n. Compose it with the prescribed cohomological primitive-root trivialization to obtain e and eK. By construction their values on Kummer boundaries are line-bundle degrees modulo n.",
+   "uses": [
+    "lem-sc-base-change-curve",
+    "lem-sc-brauer-zero",
+    "lem-sc-kummer-les",
+    "lem-sc-pic-proper-ntorsion",
+    "lem-pc-rational-points-dense",
+    "def-sc-mu-trivialization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The Picard Kummer boundary is surjective by Brauer vanishing. Evaluate eK(r(x)) and e(x) on this surjective image, use the constant-coefficient Kummer boundary naturality, and apply preservation of line-bundle degree under field extension. Equality on the image is equality on every class.",
+   "uses": [
+    "lem-sc-constant-kummer-naturality",
+    "lem-sc-brauer-zero",
+    "lem-sc-kummer-les",
+    "lem-pc-degree-base-change"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-compactification",
+  "def-sc-genus",
+  "lem-sc-base-change-curve",
+  "lem-sc-brauer-zero",
+  "lem-sc-kummer-les",
+  "lem-sc-pic-proper-ntorsion",
+  "lem-pc-rational-points-dense",
+  "def-sc-mu-trivialization",
+  "lem-sc-constant-kummer-naturality",
+  "lem-pc-degree-base-change"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-ext-invariance/thm-sc-constant-invariance.md",
+  "place": "proof, proper case: Pic/n via degree and compactification equals the proper curve; formalized reduction by C2"
+ },
+ "mathlib_searches": [
+  {
+   "t": "2026-10-12T04:25:48Z",
+   "tool": "leanfinder",
+   "query": "second etale cohomology smooth proper curve degree line bundles ZMod",
+   "sub": "",
+   "ok": true,
+   "n_hits": 8,
+   "note": "",
+   "top": [
+    "FunctionField.classNumber",
+    "WeierstrassCurve.Affine.Point.toClass_apply",
+    "FunctionField.RingOfIntegers.instFintypeClassGroupSubtypeMemSubalgebraPolynomialRingOfIntegers",
+    "WeierstrassCurve.Affine.Point.toClass_some",
+    "WeierstrassCurve.Affine.CoordinateRing.mk_XYIdeal'_mul_mk_XYIdeal'",
+    "WeierstrassCurve.Affine.CoordinateRing.mk_XYIdeal'_neg_mul",
+    "groupCohomology.H1ofAutOnUnitsUnique",
+    "WeierstrassCurve.Affine.Point.toClass"
+   ],
+   "digest": "c99371bd8b3bbd8b",
+   "date": "2026-10-12",
+   "results": [
+    "FunctionField.classNumber",
+    "WeierstrassCurve.Affine.Point.toClass_apply",
+    "FunctionField.RingOfIntegers.instFintypeClassGroupSubtypeMemSubalgebraPolynomialRingOfIntegers",
+    "WeierstrassCurve.Affine.Point.toClass_some",
+    "WeierstrassCurve.Affine.CoordinateRing.mk_XYIdeal'_mul_mk_XYIdeal'",
+    "WeierstrassCurve.Affine.CoordinateRing.mk_XYIdeal'_neg_mul",
+    "groupCohomology.H1ofAutOnUnitsUnique",
+    "WeierstrassCurve.Affine.Point.toClass"
+   ],
+   "verdict": "No matching etale curve/trivialization/degree declaration; hits are other notions."
+  },
+  {
+   "t": "2026-10-12T04:25:47Z",
+   "tool": "leansearch",
+   "query": "etale cohomology of smooth proper curve degree two is Picard degree modulo n",
+   "sub": "",
+   "ok": false,
+   "n_hits": 0,
+   "note": "service unavailable: Internal Server Error",
+   "top": [],
+   "digest": "4f53cda18c2baa0c",
+   "date": "2026-10-12",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable"
+  },
+  {
+   "t": "2026-10-12T04:33:46Z",
+   "tool": "loogle",
+   "query": "CategoryTheory.Sheaf.H.map",
+   "sub": "",
+   "ok": true,
+   "n_hits": 12,
+   "note": "",
+   "top": [
+    "CategoryTheory.Sheaf.H.map",
+    "CategoryTheory.Sheaf.functorH_map",
+    "CategoryTheory.Sheaf.H.map_id_apply",
+    "CategoryTheory.Sheaf.H.map_apply",
+    "CategoryTheory.Sheaf.H.map_comp_apply",
+    "CategoryTheory.Sheaf.H.map_add_apply",
+    "CategoryTheory.Sheaf.H.equiv₀_naturality",
+    "CategoryTheory.Sheaf.H.equiv₀_symm_naturality"
+   ],
+   "digest": "cb8a601429501e74",
+   "date": "2026-10-12",
+   "results": [
+    "CategoryTheory.Sheaf.H.map",
+    "CategoryTheory.Sheaf.functorH_map",
+    "CategoryTheory.Sheaf.H.map_id_apply",
+    "CategoryTheory.Sheaf.H.map_apply",
+    "CategoryTheory.Sheaf.H.map_comp_apply",
+    "CategoryTheory.Sheaf.H.map_add_apply",
+    "CategoryTheory.Sheaf.H.equiv₀_naturality",
+    "CategoryTheory.Sheaf.H.equiv₀_symm_naturality"
+   ],
+   "verdict": "No matching etale curve/trivialization/degree declaration; hits are other notions."
+  },
+  {
+   "t": "2026-10-12T04:29:39Z",
+   "tool": "grep",
+   "query": "kummer|constantZMod|picDegree|rootsOfUnitySheaf",
+   "sub": "AlgebraicGeometry",
+   "ok": true,
+   "n_hits": 0,
+   "note": "",
+   "top": [],
+   "digest": "4f53cda18c2baa0c",
+   "date": "2026-10-12",
+   "results": [],
+   "verdict": "No matches in the searched Mathlib source."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Curve.ConstantInvariance",
+  "date": "2026-10-12",
+  "group": "C2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-constant-invariance",
+   "place": "proof, proper case: Pic/n via degree and compactification equals the proper curve",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-ext-invariance",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Curve.ConstantProperDegreeCoordinates",
+  "file": "lean/Sheaf/AlgebraicGeometry/Curve/ConstantProperDegreeCoordinates.lean",
+  "declaration": "AlgebraicGeometry.IsConnectedCurve.constant_proper_degree_coordinates",
+  "statement": "theorem IsConnectedCurve.constant_proper_degree_coordinates\n    {k K : Type u} [Field k] [Field K] [IsAlgClosed k] [IsAlgClosed K] [Algebra k K]\n    {C : Scheme.{u}} (f : C ⟶ Spec (.of k)) [IsConnectedCurve f] [Smooth f]\n    (c : Compactification f) [IsConnectedCurve c.g] [Smooth c.g]\n    (_hfin : (Set.range c.i.base)ᶜ.Finite)\n    (_hclosed : ∀ x ∈ (Set.range c.i.base)ᶜ, IsClosed ({x} : Set c.Z))\n    (n : ℕ) [NeZero n] (_hn : (n : k) ≠ 0)\n    (r : ∀ q : ℕ, Sheaf.H (C.constantZMod n) q →+\n        Sheaf.H ((pullback f (Spec.map (CommRingCat.ofHom (algebraMap k K)))).constantZMod n) q)\n    (hr : (∀ q : ℕ, r q =\n        (Sheaf.H.map (((Scheme.upperStarConstantSheafIso AddCommGrpCat.{u + 1}\n          (pullback.fst f (Spec.map (CommRingCat.ofHom (algebraMap k K))))).app\n            (AddCommGrpCat.of (ULift.{u + 1} (ZMod n)))).hom) q).comp\n          (Etale.cohomologyMap\n            (pullback.fst f (Spec.map (CommRingCat.ofHom (algebraMap k K))))\n            (C.constantZMod n) q)))\n    (ζ : k) (hζ : IsPrimitiveRoot ζ n)\n    (hζK : IsPrimitiveRoot (algebraMap k K ζ) n)\n    (t : ∀ q : ℕ, Sheaf.H (C.constantZMod n) q ≃+\n          Sheaf.H (C.rootsOfUnitySheaf n) q)\n        (tK : ∀ q : ℕ,\n          Sheaf.H ((pullback f (Spec.map (CommRingCat.ofHom (algebraMap k K)))).constantZMod n) q ≃+\n          Sheaf.H\n            ((pullback f (Spec.map (CommRingCat.ofHom (algebraMap k K)))).rootsOfUnitySheaf n) q)\n    (ht : (∀ q : ℕ, (t q).toAddMonoidHom =\n          Sheaf.H.map (C.constantZModIsoRootsOfUnitySheaf n f hζ).hom q))\n    (htK : (∀ q : ℕ, (tK q).toAddMonoidHom = Sheaf.H.map\n          ((pullback f (Spec.map (CommRingCat.ofHom (algebraMap k\n            K)))).constantZModIsoRootsOfUnitySheaf n\n              (pullback.snd f (Spec.map (CommRingCat.ofHom (algebraMap k K)))) hζK).hom q))\n    [IsProper f] :\n    f.genus = c.g.genus ∧\n    ∃ (e : Sheaf.H (C.constantZMod n) 2 ≃+ ZMod n)\n            (eK : Sheaf.H\n              ((pullback f (Spec.map (CommRingCat.ofHom (algebraMap k K)))).constantZMod n) 2 ≃+\n                ZMod n),\n            (∀ x, eK (r 2 x) = e x) ∧\n            (∀ (hnC : IsUnit (n : Γ(C, ⊤))) (L : Additive C.Pic),\n              e ((t 2).symm (C.kummerδ₁ n hnC\n                (Scheme.Pic.toCohomologicalPicardGroupAddEquiv C L))) =\n                  (f.picDegree L.toMul : ZMod n)) ∧\n            (∀ (hnK : IsUnit (n : Γ(pullback f\n                (Spec.map (CommRingCat.ofHom (algebraMap k K))), ⊤)))\n              (L : Additive (pullback f (Spec.map (CommRingCat.ofHom (algebraMap k K)))).Pic),\n              eK ((tK 2).symm\n                ((pullback f (Spec.map (CommRingCat.ofHom (algebraMap k K)))).kummerδ₁ n hnK\n                  (Scheme.Pic.toCohomologicalPicardGroupAddEquiv\n                    (pullback f (Spec.map (CommRingCat.ofHom (algebraMap k K)))) L))) =\n                  ((pullback.snd f (Spec.map (CommRingCat.ofHom (algebraMap k K)))).picDegree\n                    L.toMul : ZMod n))",
+  "branch": "sheaf-dag",
+  "by": "C2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C2",
+  "result": "pass",
+  "landing": "20261012T053923-L-2631271",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C2",
+  "result": "pass",
+  "landing": "20261012T053923-L-2631271",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,205 @@
+{
+ "id": "lem-sc-constant-kummer-naturality",
+ "kind": "statement",
+ "title": "Transport the Kummer ladder through primitive-root coordinates",
+ "statement": "Let k contained in K be algebraically closed fields [def-sc-field-extension], C a smooth connected separated curve [def-sc-curves], c a smooth connected compactification with finite closed boundary [lem-sc-compactification], and n positive and nonzero in k. Let r be the canonical constant-coefficient cohomology pullback. Choose a primitive nth root zeta in k and its primitive image in K [lem-sc-primitive-root]. Let t and tK in every degree be additive equivalences whose underlying maps are the cohomology maps of the primitive-root sheaf trivializations [def-sc-mu-trivialization]. Then the cohomology inclusion of mu_n into Gm in degree one corresponds to Picard pullback; the Picard Kummer boundary in degree two commutes with r after inverse trivialization; and, if C is affine, the units Kummer boundary in degree one commutes with r after inverse trivialization. These are the three elementwise equations in the recorded Lean signature [lem-sc-kummer-base-change-compatibility].",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-ext-invariance/thm-sc-constant-invariance.md",
+  "place": "proof, Kummer naturality sentences in proper and affine cases"
+ },
+ "stmt_deps": [
+  "def-sc-field-extension",
+  "def-sc-curves",
+  "lem-sc-compactification",
+  "lem-sc-primitive-root",
+  "def-sc-mu-trivialization",
+  "lem-sc-kummer-base-change-compatibility"
+ ],
+ "proof": [
+  {
+   "text": "Obtain the morphism of Kummer complexes, the connecting-map and inclusion squares, and the degree-zero units and degree-one Picard identifications from kummer_base_change_compatibility. Apply cohomology to the primitive-root sheaf square and use cohomology pullback naturality to show that tK(r(x)) equals the roots-of-unity ladder map applied to t(x).",
+   "uses": [
+    "lem-sc-kummer-base-change-compatibility",
+    "lem-sc-root-trivialization-base-change"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For the inclusion equation, take the inverse Picard/cohomological-Picard equivalence of the inclusion applied to t(x). Substitute it in the Picard pullback identity, cancel the equivalence with its inverse, and apply the inclusion square followed by the trivialization square.",
+   "uses": [
+    "lem-sc-kummer-base-change-compatibility",
+    "lem-sc-h1-gm-pic"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For the Picard boundary equation, apply the injective equivalence tK in degree two. Cancel t and tK with their inverses, use the trivialization square and the connecting-map square in degree one, and substitute the Picard pullback identity. This proves the equation before inverse transport.",
+   "uses": [
+    "lem-sc-kummer-base-change-compatibility"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For the units boundary equation, apply tK in degree one. Express the degree-zero boundary as deltaSucc(0) of the inverse degree-zero sections equivalence applied to the lifted unit. Use the trivialization square and the connecting-map square in degree zero, then the units pullback identity and deltaSucc_zero to recover the displayed Kummer boundary.",
+   "uses": [
+    "lem-sc-kummer-base-change-compatibility",
+    "lem-sc-kummer-les"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-kummer-base-change-compatibility",
+  "lem-sc-root-trivialization-base-change",
+  "lem-sc-h1-gm-pic",
+  "lem-sc-kummer-les"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-ext-invariance/thm-sc-constant-invariance.md",
+  "place": "proof, Kummer naturality sentences in proper and affine cases; formalized reduction by C2"
+ },
+ "mathlib_searches": [
+  {
+   "t": "2026-10-12T04:25:24Z",
+   "tool": "leanfinder",
+   "query": "naturality Kummer exact sequence primitive root trivialization under field extension",
+   "sub": "",
+   "ok": true,
+   "n_hits": 8,
+   "note": "",
+   "top": [
+    "autEquivZmod_symm_apply_natCast",
+    "autEquivZmod_symm_apply_intCast",
+    "autEquivRootsOfUnity_smul",
+    "autEquivRootsOfUnity",
+    "autAdjoinRootXPowSubCHom",
+    "autEquivZmod",
+    "autAdjoinRootXPowSubC",
+    "autAdjoinRootXPowSubCEquiv"
+   ],
+   "digest": "78d4440f887d67a9",
+   "date": "2026-10-12",
+   "results": [
+    "autEquivZmod_symm_apply_natCast",
+    "autEquivZmod_symm_apply_intCast",
+    "autEquivRootsOfUnity_smul",
+    "autEquivRootsOfUnity",
+    "autAdjoinRootXPowSubCHom",
+    "autEquivZmod",
+    "autAdjoinRootXPowSubC",
+    "autAdjoinRootXPowSubCEquiv"
+   ],
+   "verdict": "No matching etale curve/trivialization/degree declaration; hits are other notions."
+  },
+  {
+   "t": "2026-10-12T04:29:39Z",
+   "tool": "leansearch",
+   "query": "Kummer sequence primitive root trivialization natural under base change of schemes",
+   "sub": "",
+   "ok": false,
+   "n_hits": 0,
+   "note": "service unavailable: Internal Server Error",
+   "top": [],
+   "digest": "4f53cda18c2baa0c",
+   "date": "2026-10-12",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable"
+  },
+  {
+   "t": "2026-10-12T04:33:46Z",
+   "tool": "loogle",
+   "query": "CategoryTheory.Sheaf.H.map",
+   "sub": "",
+   "ok": true,
+   "n_hits": 12,
+   "note": "",
+   "top": [
+    "CategoryTheory.Sheaf.H.map",
+    "CategoryTheory.Sheaf.functorH_map",
+    "CategoryTheory.Sheaf.H.map_id_apply",
+    "CategoryTheory.Sheaf.H.map_apply",
+    "CategoryTheory.Sheaf.H.map_comp_apply",
+    "CategoryTheory.Sheaf.H.map_add_apply",
+    "CategoryTheory.Sheaf.H.equiv₀_naturality",
+    "CategoryTheory.Sheaf.H.equiv₀_symm_naturality"
+   ],
+   "digest": "cb8a601429501e74",
+   "date": "2026-10-12",
+   "results": [
+    "CategoryTheory.Sheaf.H.map",
+    "CategoryTheory.Sheaf.functorH_map",
+    "CategoryTheory.Sheaf.H.map_id_apply",
+    "CategoryTheory.Sheaf.H.map_apply",
+    "CategoryTheory.Sheaf.H.map_comp_apply",
+    "CategoryTheory.Sheaf.H.map_add_apply",
+    "CategoryTheory.Sheaf.H.equiv₀_naturality",
+    "CategoryTheory.Sheaf.H.equiv₀_symm_naturality"
+   ],
+   "verdict": "No matching etale curve/trivialization/degree declaration; hits are other notions."
+  },
+  {
+   "t": "2026-10-12T04:29:39Z",
+   "tool": "grep",
+   "query": "kummer|constantZMod|picDegree|rootsOfUnitySheaf",
+   "sub": "AlgebraicGeometry",
+   "ok": true,
+   "n_hits": 0,
+   "note": "",
+   "top": [],
+   "digest": "4f53cda18c2baa0c",
+   "date": "2026-10-12",
+   "results": [],
+   "verdict": "No matches in the searched Mathlib source."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Curve.ConstantInvariance",
+  "date": "2026-10-12",
+  "group": "C2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-constant-invariance",
+   "place": "proof, Kummer naturality sentences in proper and affine cases",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-ext-invariance",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Curve.ConstantKummerNaturality",
+  "file": "lean/Sheaf/AlgebraicGeometry/Curve/ConstantKummerNaturality.lean",
+  "declaration": "AlgebraicGeometry.IsConnectedCurve.constant_kummer_baseChange_naturality",
+  "statement": "theorem IsConnectedCurve.constant_kummer_baseChange_naturality\n    {k K : Type u} [Field k] [Field K] [IsAlgClosed k] [IsAlgClosed K] [Algebra k K]\n    {C : Scheme.{u}} (f : C ⟶ Spec (.of k)) [IsConnectedCurve f] [Smooth f]\n    (c : Compactification f) [IsConnectedCurve c.g] [Smooth c.g]\n    (_hfin : (Set.range c.i.base)ᶜ.Finite)\n    (_hclosed : ∀ x ∈ (Set.range c.i.base)ᶜ, IsClosed ({x} : Set c.Z))\n    (n : ℕ) [NeZero n] (_hn : (n : k) ≠ 0)\n    (r : ∀ q : ℕ, Sheaf.H (C.constantZMod n) q →+\n        Sheaf.H ((pullback f (Spec.map (CommRingCat.ofHom (algebraMap k K)))).constantZMod n) q)\n    (hr : (∀ q : ℕ, r q =\n        (Sheaf.H.map (((Scheme.upperStarConstantSheafIso AddCommGrpCat.{u + 1}\n          (pullback.fst f (Spec.map (CommRingCat.ofHom (algebraMap k K))))).app\n            (AddCommGrpCat.of (ULift.{u + 1} (ZMod n)))).hom) q).comp\n          (Etale.cohomologyMap\n            (pullback.fst f (Spec.map (CommRingCat.ofHom (algebraMap k K))))\n            (C.constantZMod n) q)))\n    (ζ : k) (hζ : IsPrimitiveRoot ζ n)\n    (hζK : IsPrimitiveRoot (algebraMap k K ζ) n)\n    (t : ∀ q : ℕ, Sheaf.H (C.constantZMod n) q ≃+\n          Sheaf.H (C.rootsOfUnitySheaf n) q)\n        (tK : ∀ q : ℕ,\n          Sheaf.H ((pullback f (Spec.map (CommRingCat.ofHom (algebraMap k K)))).constantZMod n) q ≃+\n          Sheaf.H\n            ((pullback f (Spec.map (CommRingCat.ofHom (algebraMap k K)))).rootsOfUnitySheaf n) q)\n    (ht : (∀ q : ℕ, (t q).toAddMonoidHom =\n          Sheaf.H.map (C.constantZModIsoRootsOfUnitySheaf n f hζ).hom q))\n    (htK : (∀ q : ℕ, (tK q).toAddMonoidHom = Sheaf.H.map\n          ((pullback f (Spec.map (CommRingCat.ofHom (algebraMap k\n            K)))).constantZModIsoRootsOfUnitySheaf n\n              (pullback.snd f (Spec.map (CommRingCat.ofHom (algebraMap k K)))) hζK).hom q)) :\n    (∀ x : Sheaf.H (C.constantZMod n) 1,\n          Scheme.Pic.toCohomologicalPicardGroupAddEquiv\n            (pullback f (Spec.map (CommRingCat.ofHom (algebraMap k K))))\n            (Additive.ofMul (Scheme.Pic.map\n              (pullback.fst f (Spec.map (CommRingCat.ofHom (algebraMap k K))))\n              ((Scheme.Pic.toCohomologicalPicardGroupAddEquiv C).symm\n                (Sheaf.H.map (kernel.ι (n • 𝟙 C.gmSheaf)) 1 (t 1 x))).toMul)) =\n          Sheaf.H.map (kernel.ι (n • 𝟙\n            (pullback f (Spec.map (CommRingCat.ofHom (algebraMap k K)))).gmSheaf)) 1\n              (tK 1 (r 1 x))) ∧\n        (∀ (hnC : IsUnit (n : Γ(C, ⊤)))\n          (hnK : IsUnit (n : Γ(pullback f\n            (Spec.map (CommRingCat.ofHom (algebraMap k K))), ⊤))) (L : Additive C.Pic),\n          r 2 ((t 2).symm (C.kummerδ₁ n hnC\n            (Scheme.Pic.toCohomologicalPicardGroupAddEquiv C L))) =\n          (tK 2).symm\n            ((pullback f (Spec.map (CommRingCat.ofHom (algebraMap k K)))).kummerδ₁ n hnK\n              (Scheme.Pic.toCohomologicalPicardGroupAddEquiv\n                (pullback f (Spec.map (CommRingCat.ofHom (algebraMap k K))))\n                (Additive.ofMul (Scheme.Pic.map\n                  (pullback.fst f (Spec.map (CommRingCat.ofHom (algebraMap k K)))) L.toMul))))) ∧\n    (IsAffine C → ∀ (hnC : IsUnit (n : Γ(C, ⊤)))\n          (hnK : IsUnit (n : Γ(pullback f\n            (Spec.map (CommRingCat.ofHom (algebraMap k K))), ⊤))) (a : Additive Γ(C, ⊤)ˣ),\n          r 1 ((t 1).symm (C.kummerδ₀ n hnC a)) =\n          (tK 1).symm\n            ((pullback f (Spec.map (CommRingCat.ofHom (algebraMap k K)))).kummerδ₀ n hnK\n              (Additive.ofMul (Units.map\n                (pullback.fst f (Spec.map (CommRingCat.ofHom (algebraMap k K)))).appTop.hom\n                a.toMul))))",
+  "branch": "sheaf-dag",
+  "by": "C2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C2",
+  "result": "pass",
+  "landing": "20261012T053923-L-2631271",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C2",
+  "result": "pass",
+  "landing": "20261012T053923-L-2631271",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

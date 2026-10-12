@@ -1,0 +1,199 @@
+{
+ "id": "lem-sc-root-trivialization-base-change",
+ "kind": "statement",
+ "title": "Primitive-root sheaf square under field extension",
+ "statement": "Let k contained in K be a field extension [def-sc-field-extension], C a scheme over k [def-weil-scheme-over-base], n a positive integer, and zeta a primitive nth root in k whose image in K is primitive. Set P=C_K and pi:P to C. Let phi be a morphism from the pi-inverse image of C's Kummer complex [def-sc-kummer-sequence] to P's Kummer complex whose middle component is the canonical comparison of units [lem-sc-kummer-base-change-compatibility]. Write theta and thetaK for the sheaf trivializations associated to the two primitive roots [def-sc-mu-trivialization], and alpha for the canonical inverse-image comparison of constant sheaves [def-weil-pbc-inverse-image]. Then pi^*(theta) followed by phi's first component equals alpha followed by thetaK.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-ext-invariance/thm-sc-constant-invariance.md",
+  "place": "proof, proper case: compatible primitive-root trivializations"
+ },
+ "stmt_deps": [
+  "def-sc-field-extension",
+  "def-weil-scheme-over-base",
+  "def-sc-kummer-sequence",
+  "lem-sc-kummer-base-change-compatibility",
+  "def-sc-mu-trivialization",
+  "def-weil-pbc-inverse-image"
+ ],
+ "proof": [
+  {
+   "text": "Compose the desired equality with the inclusion of mu_n into Gm. The first commutative square of the morphism of Kummer complexes and its prescribed middle component replace the left composite by pullback of the map from the constant sheaf to units.",
+   "uses": [
+    "def-sc-kummer-sequence",
+    "lem-sc-kummer-base-change-compatibility"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "On the generating constant-presheaf sections, the original map sends a to zeta^a. Pullback of units preserves powers and the ground-field structure square sends zeta to its image in K. Both composites send a to the same power of that image. By the universal property of sheafification, and the adjunction defining inverse image and its constant comparison, the two sheaf maps are equal.",
+   "uses": [
+    "def-sc-mu-trivialization",
+    "def-weil-pbc-sheafification",
+    "def-weil-pbc-inverse-image"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The inclusion of mu_n is a kernel inclusion, hence a monomorphism. Cancel it to obtain the primitive-root square. This argument only uses the supplied roots, so algebraic closedness is unnecessary.",
+   "uses": [
+    "def-sc-kummer-sequence"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-sc-kummer-sequence",
+  "lem-sc-kummer-base-change-compatibility",
+  "def-sc-mu-trivialization",
+  "def-weil-pbc-sheafification",
+  "def-weil-pbc-inverse-image"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-ext-invariance/thm-sc-constant-invariance.md",
+  "place": "proof, proper case: compatible primitive-root trivializations; formalized reduction by C2"
+ },
+ "mathlib_searches": [
+  {
+   "t": "2026-10-12T04:25:24Z",
+   "tool": "leanfinder",
+   "query": "naturality Kummer exact sequence primitive root trivialization under field extension",
+   "sub": "",
+   "ok": true,
+   "n_hits": 8,
+   "note": "",
+   "top": [
+    "autEquivZmod_symm_apply_natCast",
+    "autEquivZmod_symm_apply_intCast",
+    "autEquivRootsOfUnity_smul",
+    "autEquivRootsOfUnity",
+    "autAdjoinRootXPowSubCHom",
+    "autEquivZmod",
+    "autAdjoinRootXPowSubC",
+    "autAdjoinRootXPowSubCEquiv"
+   ],
+   "digest": "78d4440f887d67a9",
+   "date": "2026-10-12",
+   "results": [
+    "autEquivZmod_symm_apply_natCast",
+    "autEquivZmod_symm_apply_intCast",
+    "autEquivRootsOfUnity_smul",
+    "autEquivRootsOfUnity",
+    "autAdjoinRootXPowSubCHom",
+    "autEquivZmod",
+    "autAdjoinRootXPowSubC",
+    "autAdjoinRootXPowSubCEquiv"
+   ],
+   "verdict": "No matching etale curve/trivialization/degree declaration; hits are other notions."
+  },
+  {
+   "t": "2026-10-12T04:29:39Z",
+   "tool": "leansearch",
+   "query": "Kummer sequence primitive root trivialization natural under base change of schemes",
+   "sub": "",
+   "ok": false,
+   "n_hits": 0,
+   "note": "service unavailable: Internal Server Error",
+   "top": [],
+   "digest": "4f53cda18c2baa0c",
+   "date": "2026-10-12",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable"
+  },
+  {
+   "t": "2026-10-12T04:33:46Z",
+   "tool": "loogle",
+   "query": "CategoryTheory.Sheaf.H.map",
+   "sub": "",
+   "ok": true,
+   "n_hits": 12,
+   "note": "",
+   "top": [
+    "CategoryTheory.Sheaf.H.map",
+    "CategoryTheory.Sheaf.functorH_map",
+    "CategoryTheory.Sheaf.H.map_id_apply",
+    "CategoryTheory.Sheaf.H.map_apply",
+    "CategoryTheory.Sheaf.H.map_comp_apply",
+    "CategoryTheory.Sheaf.H.map_add_apply",
+    "CategoryTheory.Sheaf.H.equiv₀_naturality",
+    "CategoryTheory.Sheaf.H.equiv₀_symm_naturality"
+   ],
+   "digest": "cb8a601429501e74",
+   "date": "2026-10-12",
+   "results": [
+    "CategoryTheory.Sheaf.H.map",
+    "CategoryTheory.Sheaf.functorH_map",
+    "CategoryTheory.Sheaf.H.map_id_apply",
+    "CategoryTheory.Sheaf.H.map_apply",
+    "CategoryTheory.Sheaf.H.map_comp_apply",
+    "CategoryTheory.Sheaf.H.map_add_apply",
+    "CategoryTheory.Sheaf.H.equiv₀_naturality",
+    "CategoryTheory.Sheaf.H.equiv₀_symm_naturality"
+   ],
+   "verdict": "No matching etale curve/trivialization/degree declaration; hits are other notions."
+  },
+  {
+   "t": "2026-10-12T04:29:39Z",
+   "tool": "grep",
+   "query": "kummer|constantZMod|picDegree|rootsOfUnitySheaf",
+   "sub": "AlgebraicGeometry",
+   "ok": true,
+   "n_hits": 0,
+   "note": "",
+   "top": [],
+   "digest": "4f53cda18c2baa0c",
+   "date": "2026-10-12",
+   "results": [],
+   "verdict": "No matches in the searched Mathlib source."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Curve.ConstantInvariance",
+  "date": "2026-10-12",
+  "group": "C2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-constant-invariance",
+   "place": "proof, proper case: compatible primitive-root trivializations",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-ext-invariance",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Curve.RootTrivializationBaseChange",
+  "file": "lean/Sheaf/AlgebraicGeometry/Curve/RootTrivializationBaseChange.lean",
+  "declaration": "AlgebraicGeometry.constant_root_trivialization_baseChange",
+  "statement": "theorem constant_root_trivialization_baseChange\n    {k K : Type u} [Field k] [Field K] [Algebra k K]\n    {C : Scheme.{u}} (f : C ⟶ Spec (.of k)) (n : ℕ) [NeZero n]\n    (ζ : k) (hζ : IsPrimitiveRoot ζ n)\n    (hζK : IsPrimitiveRoot (algebraMap k K ζ) n)\n    (φ : ((Etale.upperStar AddCommGrpCat.{u + 1}\n      (pullback.fst f (Spec.map (CommRingCat.ofHom (algebraMap k K))))).mapShortComplex.obj\n        (C.kummerSequence n)) ⟶\n      (pullback f (Spec.map (CommRingCat.ofHom (algebraMap k K)))).kummerSequence n)\n    (hφ : φ.τ₂ = upperStarGmSheafToGmSheaf\n      (pullback.fst f (Spec.map (CommRingCat.ofHom (algebraMap k K))))) :\n    (Etale.upperStar AddCommGrpCat.{u + 1}\n      (pullback.fst f (Spec.map (CommRingCat.ofHom (algebraMap k K))))).map\n        (C.constantZModIsoRootsOfUnitySheaf n f hζ).hom ≫ φ.τ₁ =\n      (((Scheme.upperStarConstantSheafIso AddCommGrpCat.{u + 1}\n        (pullback.fst f (Spec.map (CommRingCat.ofHom (algebraMap k K))))).app\n          (AddCommGrpCat.of (ULift.{u + 1} (ZMod n)))).hom) ≫\n      ((pullback f\n        (Spec.map (CommRingCat.ofHom (algebraMap k K)))).constantZModIsoRootsOfUnitySheaf n\n          (pullback.snd f (Spec.map (CommRingCat.ofHom (algebraMap k K)))) hζK).hom",
+  "branch": "sheaf-dag",
+  "by": "C2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C2",
+  "result": "pass",
+  "landing": "20261012T053923-L-2631271",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C2",
+  "result": "pass",
+  "landing": "20261012T053923-L-2631271",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
