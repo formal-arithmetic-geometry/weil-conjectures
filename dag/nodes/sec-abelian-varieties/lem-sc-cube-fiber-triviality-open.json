@@ -1,0 +1,135 @@
+{
+ "id": "lem-sc-cube-fiber-triviality-open",
+ "kind": "statement",
+ "title": "Extension of a trivial residue-field fibre when two product slices are trivial",
+ "statement": "Let K be a field [def-weil-field], and let X,Y,Z be schemes over K [def-weil-scheme-over-base]. Assume X and Y are proper [def-weil-proper-morphism] and geometrically integral [def-pc-geometrically-irreducible], with K-rational points x and y [def-pc-rational-point]. Let L be an invertible module [def-sc-invertible-module] on X×_K Y×_K Z [def-pc-fibre-product]. Suppose its pullbacks [def-pc-module-pullback] along {x}×Y×Z and X×{y}×Z are trivial. If t∈Z and L is trivial on the residue-field fibre over t [def-weil-residue-field], then L is trivial over the inverse image of some open neighbourhood U of t in Z. The point t need not be K-rational and Z need not be connected.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 0BF3, after base change to Z; source-library theorem of the cube interface"
+ },
+ "stmt_deps": [
+  "def-weil-scheme-over-base",
+  "def-pc-module-pullback",
+  "def-sc-invertible-module",
+  "def-weil-residue-field",
+  "def-weil-field",
+  "def-pc-rational-point",
+  "def-pc-fibre-product",
+  "def-weil-proper-morphism",
+  "def-pc-geometrically-irreducible"
+ ],
+ "proof": [
+  {
+   "text": "Set f:X×_K Z→Z and g:Y×_K Z→Z. Properness and geometric integrality are stable under base change; flatness and local finite presentation follow from being proper over a field. The rational points induce sections σ and τ. Use the canonical comparison isomorphism e:(X×Y)×Z≅(X×Z)×_Z(Y×Z) of categorical products.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Apply proper-flat global sections to f and g, using geometrically reduced and connected fibres, to obtain the universal pushforward hypotheses required for the Picard product theorem.",
+   "uses": [
+    "lem-sc-proper-flat-global-sections"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Transport L to the pullback by e.inv. The comparison isomorphism identifies the maps (1,τ) and (σ,1) with the two specified slices, as checked by both fibre-product projections. It also identifies the fibre map at t with the last-projection fibre, using the canonical pullback lift. Transfer the three trivializations using pullback composition and the unit pullback isomorphism. Identify tensorPullback with pullback by uniqueness of their common right adjoint pushforward.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Apply picard_product_open to the transported line bundle, sections, slice trivializations, fibre trivialization, and universal pushforward hypotheses. It gives an open U containing t and a trivialization on the open base change.",
+   "uses": [
+    "lem-sc-picard-product-open"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The inverse image of U in (X×Y)×Z maps to that open base change by the pair consisting of e and the restriction of the projection to U. The pullback projection composed with e.inv is the open immersion. Pulling back the obtained trivialization along this map gives exactly the asserted trivialization on the inverse-image open.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-proper-flat-global-sections",
+  "lem-sc-picard-product-open"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "Stacks Project",
+  "place": "Tag 0BF3, after base change to Z; formal comparison of module pullbacks and product presentations by S2"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "An invertible sheaf on X times Y times Z trivial on two section slices and a residue field fibre is trivial over an open neighbourhood",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a proper geometrically integral product, an invertible sheaf trivial on two section slices and a fibre is trivial over a neighbourhood of the fibre",
+   "results": "AlgebraicGeometry.exists_of_res_eq_of_qcqs_of_top; AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top; ModuleCat.Tilde.exists_const; AlgebraicGeometry.Scheme.zero_of_zero_cover; AlgebraicGeometry.StructureSheaf.const_mul_rev; AlgebraicGeometry.StructureSheaf.normalize_finite_fraction_representation; AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isCompact; AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isAffineOpen (8 hits; no matching theorem)",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "picard|theorem.of.[Cc]ube|preimageSnd",
+   "results": "Mathlib/AlgebraicGeometry/EllipticCurve/Weierstrass.lean; Mathlib/AlgebraicGeometry/EllipticCurve/Weierstrass.lean; Mathlib/AlgebraicGeometry/EllipticCurve/Weierstrass.lean; Mathlib/RingTheory/PicardGroup.lean; Mathlib/RingTheory/PicardGroup.lean; Mathlib/RingTheory/PicardGroup.lean; Mathlib/RingTheory/PicardGroup.lean; Mathlib/RingTheory/PicardGroup.lean (23 hits; no matching theorem)",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "WeilConjectures.AlgebraicGeometry.TheoremOfCube",
+  "date": "2026-10-12",
+  "group": "S2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-theorem-of-cube",
+   "place": "proof: identify the closed fibre-triviality locus and extend trivial fibres using the two section slices",
+   "via": [
+    "lem-sc-general-theorem-of-cube"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.CubeFiberTrivialityOpen",
+  "declaration": "AlgebraicGeometry.exists_mem_nonempty_pullback_iso_unit_of_cube_fiber",
+  "file": "lean/Sheaf/AlgebraicGeometry/CubeFiberTrivialityOpen.lean",
+  "statement": "theorem exists_mem_nonempty_pullback_iso_unit_of_cube_fiber {K : Type u} [Field K] (X Y Z : Over (Spec (.of K))) [IsProper X.hom] [GeometricallyIntegral X.hom] [IsProper Y.hom] [GeometricallyIntegral Y.hom] (x : 𝟙_ _ ⟶ X) (y : 𝟙_ _ ⟶ Y) (L : ((X ⊗ Y) ⊗ Z).left.Modules) [L.IsInvertible] (hx : Nonempty (Scheme.Modules.overPullback (lift (lift (toUnit _ ≫ x) (fst Y Z)) (snd Y Z)) L ≅ SheafOfModules.unit _)) (hy : Nonempty (Scheme.Modules.overPullback (lift (lift (fst X Z) (toUnit _ ≫ y)) (snd X Z)) L ≅ SheafOfModules.unit _)) (t : Z.left) (ht : Nonempty ((Scheme.Modules.pullback ((snd (X ⊗ Y) Z).left.fiberι t)).obj L ≅ SheafOfModules.unit _)) : ∃ U : Z.left.Opens, t ∈ U ∧ Nonempty ((Scheme.Modules.pullback ((snd (X ⊗ Y) Z).left ⁻¹ᵁ U).ι).obj L ≅ SheafOfModules.unit _)",
+  "branch": "sheaf-dag",
+  "by": "S2",
+  "date": "2026-10-12",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-dbd94",
+  "group": "S2",
+  "result": "pass",
+  "landing": "20261012T053954-L-2645949",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-dbd94",
+  "group": "S2",
+  "result": "pass",
+  "landing": "20261012T053954-L-2645949",
+  "kind": "interface",
+  "note": "independent Codex review: Packet, delivered files, DAG nodes, report, and commit dbd949b8bfe2 match; all modules compile cleanly and review points pass."
+ }
+}

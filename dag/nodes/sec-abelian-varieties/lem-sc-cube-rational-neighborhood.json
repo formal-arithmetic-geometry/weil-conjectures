@@ -1,0 +1,127 @@
+{
+ "id": "lem-sc-cube-rational-neighborhood",
+ "kind": "statement",
+ "title": "A rational third-slice isomorphism extends to an open neighbourhood",
+ "statement": "Let K be a field [def-weil-field], X,Y,Z schemes over K [def-weil-scheme-over-base], X,Y proper [def-weil-proper-morphism] and geometrically integral [def-pc-geometrically-irreducible], and x,y,z rational points of X,Y,Z [def-pc-rational-point]. Let M,N be invertible modules [def-sc-invertible-module] on X×Y×Z [def-pc-fibre-product]. If M and N have isomorphic pullbacks [def-pc-module-pullback] on each of {x}×Y×Z, X×{y}×Z and X×Y×{z}, then there is an open neighbourhood U of the underlying point of z in Z over whose inverse image M and N are isomorphic.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tags 0BF3 and 0BF4, rational third slice; source-library theorem of the cube interface"
+ },
+ "stmt_deps": [
+  "def-weil-scheme-over-base",
+  "def-pc-module-pullback",
+  "def-sc-invertible-module",
+  "def-weil-residue-field",
+  "def-weil-field",
+  "def-pc-rational-point",
+  "def-pc-fibre-product",
+  "def-weil-proper-morphism",
+  "def-pc-geometrically-irreducible"
+ ],
+ "proof": [
+  {
+   "text": "Set L=M⊗N∨ and t=z(closedPoint K). Tensoring each slice isomorphism with the dual gives triviality of L on all three slices. The canonical map Spec κ(t)→Z factors through the K-point z: its residue-field map κ(t)→K is a field homomorphism with a right inverse induced by the structure morphism, hence is bijective. Cancel its Spec isomorphism in the defining factorization of z to obtain this equality.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Let i:X×Y→X×Y×Z be the third-slice morphism and let q be the first projection composed with p.fiberι(t). The previous factorization gives q≫i=p.fiberι(t), as verified on both product projections. Pull the third-slice trivialization back along q to trivialize L on the entire residue-field fibre at t.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Apply the arbitrary-fibre openness lemma to L, using the first two slice trivializations and the fibre trivialization just constructed. It gives U containing t on which L is trivial.",
+   "uses": [
+    "lem-sc-cube-fiber-triviality-open"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the tensor-dual cancellation equivalence to turn this trivialization into an isomorphism of the restrictions of M and N. The point t is the underlying point occurring in the conclusion, so U is the required neighbourhood.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-cube-fiber-triviality-open"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "Stacks Project",
+  "place": "Tags 0BF3 and 0BF4, rational third slice; formal comparison of module pullbacks and product presentations by S2"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "An invertible sheaf on X times Y times Z trivial on two section slices and a residue field fibre is trivial over an open neighbourhood",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a proper geometrically integral product, an invertible sheaf trivial on two section slices and a fibre is trivial over a neighbourhood of the fibre",
+   "results": "AlgebraicGeometry.exists_of_res_eq_of_qcqs_of_top; AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top; ModuleCat.Tilde.exists_const; AlgebraicGeometry.Scheme.zero_of_zero_cover; AlgebraicGeometry.StructureSheaf.const_mul_rev; AlgebraicGeometry.StructureSheaf.normalize_finite_fraction_representation; AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isCompact; AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isAffineOpen (8 hits; no matching theorem)",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "picard|theorem.of.[Cc]ube|preimageSnd",
+   "results": "Mathlib/AlgebraicGeometry/EllipticCurve/Weierstrass.lean; Mathlib/AlgebraicGeometry/EllipticCurve/Weierstrass.lean; Mathlib/AlgebraicGeometry/EllipticCurve/Weierstrass.lean; Mathlib/RingTheory/PicardGroup.lean; Mathlib/RingTheory/PicardGroup.lean; Mathlib/RingTheory/PicardGroup.lean; Mathlib/RingTheory/PicardGroup.lean; Mathlib/RingTheory/PicardGroup.lean (23 hits; no matching theorem)",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "WeilConjectures.AlgebraicGeometry.TheoremOfCube",
+  "date": "2026-10-12",
+  "group": "S2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-theorem-of-cube",
+   "place": "proof: identify the closed fibre-triviality locus and extend trivial fibres using the two section slices",
+   "via": [
+    "lem-sc-general-theorem-of-cube"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "lean": {
+  "module": "WeilConjectures.AlgebraicGeometry.TheoremOfCube",
+  "declaration": "AlgebraicGeometry.exists_mem_nonempty_iso_preimageSnd",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/TheoremOfCube.lean",
+  "statement": "theorem exists_mem_nonempty_iso_preimageSnd (X Y Z : Over (Spec (.of K))) [IsProper X.hom] [GeometricallyIntegral X.hom] [IsProper Y.hom] [GeometricallyIntegral Y.hom] (x : 𝟙_ _ ⟶ X) (y : 𝟙_ _ ⟶ Y) (z : 𝟙_ _ ⟶ Z) (M N : ((X ⊗ Y) ⊗ Z).left.Modules) [M.IsInvertible] [N.IsInvertible] (hx : Nonempty (overPullback (lift (lift (toUnit _ ≫ x) (fst Y Z)) (snd Y Z)) M ≅ overPullback (lift (lift (toUnit _ ≫ x) (fst Y Z)) (snd Y Z)) N)) (hy : Nonempty (overPullback (lift (lift (fst X Z) (toUnit _ ≫ y)) (snd X Z)) M ≅ overPullback (lift (lift (fst X Z) (toUnit _ ≫ y)) (snd X Z)) N)) (hz : Nonempty (overPullback (lift (𝟙 (X ⊗ Y)) (toUnit _ ≫ z)) M ≅ overPullback (lift (𝟙 (X ⊗ Y)) (toUnit _ ≫ z)) N)) : ∃ U : Z.left.Opens, z.left.base (IsLocalRing.closedPoint K) ∈ U ∧ Nonempty ((Scheme.Modules.pullback (preimageSnd X Y Z U).ι).obj M ≅ (Scheme.Modules.pullback (preimageSnd X Y Z U).ι).obj N)",
+  "branch": "sheaf-dag",
+  "by": "S2",
+  "date": "2026-10-12",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-dbd94",
+  "group": "S2",
+  "result": "pass",
+  "landing": "20261012T053954-L-2645949",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-dbd94",
+  "group": "S2",
+  "result": "pass",
+  "landing": "20261012T053954-L-2645949",
+  "kind": "interface",
+  "note": "independent Codex review: Packet, delivered files, DAG nodes, report, and commit dbd949b8bfe2 match; all modules compile cleanly and review points pass."
+ }
+}

@@ -1,0 +1,130 @@
+{
+ "id": "lem-sc-cube-local-isomorphism-closed",
+ "kind": "statement",
+ "title": "Closedness of the local isomorphism locus for two invertible modules on a triple product",
+ "statement": "Let K be a field [def-weil-field], X,Y,Z schemes over K [def-weil-scheme-over-base], and X,Y proper [def-weil-proper-morphism] and geometrically integral [def-pc-geometrically-irreducible], with rational points x,y [def-pc-rational-point]. Let M,N be invertible modules [def-sc-invertible-module] on X×Y×Z [def-pc-fibre-product], whose pullbacks [def-pc-module-pullback] to {x}×Y×Z and X×{y}×Z are isomorphic. Then the set of t∈Z for which M and N are isomorphic over X×Y×U for some open neighbourhood U of t is closed in Z.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tags 0BF0, 0BF3 and 0BF4; source-library theorem of the cube interface"
+ },
+ "stmt_deps": [
+  "def-weil-scheme-over-base",
+  "def-pc-module-pullback",
+  "def-sc-invertible-module",
+  "def-weil-residue-field",
+  "def-weil-field",
+  "def-pc-rational-point",
+  "def-pc-fibre-product",
+  "def-weil-proper-morphism",
+  "def-pc-geometrically-irreducible"
+ ],
+ "proof": [
+  {
+   "text": "Put L=M⊗N∨ and p:X×Y×Z→Z. For every morphism a, an isomorphism a*M≅a*N is equivalent to a*L≅O. The forward implication tensors with the dual; the reverse uses the pullback tensor comparison, evaluation N⊗N∨≅O, symmetry, and associativity to cancel N∨. Thus the two slice isomorphisms give trivial restrictions of L.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "The product X×Y is proper and geometrically integral. For geometric integrality, base change to an arbitrary extension field; the base-changed X is integral and locally noetherian, and the projection from its product with Y is geometrically integral by base change of Y. Thus its total space is integral. Consequently p is proper, flat, locally of finite presentation, and geometrically integral. The pair (x,y) gives a section of p. Apply the closed-fibre-locus lemma to L.",
+   "uses": [
+    "lem-sc-picard-fiber-triviality-closed"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The local isomorphism locus equals the fibre-triviality locus of L. One inclusion follows by restricting an open trivialization to the fibre: the canonical fibre map factors through the inverse-image open containing it. For the other inclusion use the arbitrary-fibre openness lemma with the two trivial slice restrictions, and cancel N∨ to recover M≅N over the resulting open.",
+   "uses": [
+    "lem-sc-cube-fiber-triviality-open"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Rewrite the local-isomorphism set by this equality and use closedness of the fibre-triviality set.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-picard-fiber-triviality-closed",
+  "lem-sc-cube-fiber-triviality-open"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "Stacks Project",
+  "place": "Tags 0BF0, 0BF3 and 0BF4; formal comparison of module pullbacks and product presentations by S2"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "For a proper flat family with geometrically integral fibres the set of points where a line bundle has trivial restriction to the fibre is closed",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The trivial fibre locus of an invertible module in a proper flat geometrically integral family is closed",
+   "results": "PrimeSpectrum.isIntegral_of_isClosedMap_comap_mapRingHom; AlgebraicGeometry.Scheme.zeroLocus_isClosed; PrimeSpectrum.isClosed_comap_singleton_of_isIntegral; AlgebraicGeometry.RingedSpace.zeroLocus_isClosed; PrimeSpectrum.isClosedMap_comap_of_isIntegral; AlgebraicGeometry.isIntegral_appTop_of_universallyClosed; AlgebraicGeometry.finite_appTop_of_universallyClosed; AlgebraicGeometry.Scheme.IdealSheafData.isClosed_supportSet (8 hits; no matching theorem)",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "picard.*(fiber|locus)|isClosed.*pullback|nonempty.*fiber.*iso",
+   "results": "Mathlib/Topology/SeparatedMap.lean; Mathlib/Topology/SeparatedMap.lean; Mathlib/Topology/SeparatedMap.lean; Mathlib/Topology/SeparatedMap.lean; Mathlib/CategoryTheory/Sites/Closed.lean; Mathlib/CategoryTheory/Sites/Closed.lean; Mathlib/CategoryTheory/Sites/Closed.lean; Mathlib/CategoryTheory/Sites/Closed.lean (21 hits; no matching theorem)",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "WeilConjectures.AlgebraicGeometry.TheoremOfCube",
+  "date": "2026-10-12",
+  "group": "S2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-theorem-of-cube",
+   "place": "proof: identify the closed fibre-triviality locus and extend trivial fibres using the two section slices",
+   "via": [
+    "lem-sc-general-theorem-of-cube"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "lean": {
+  "module": "WeilConjectures.AlgebraicGeometry.TheoremOfCube",
+  "declaration": "AlgebraicGeometry.isClosed_setOf_exists_nonempty_iso_preimageSnd",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/TheoremOfCube.lean",
+  "statement": "theorem isClosed_setOf_exists_nonempty_iso_preimageSnd (X Y Z : Over (Spec (.of K))) [IsProper X.hom] [GeometricallyIntegral X.hom] [IsProper Y.hom] [GeometricallyIntegral Y.hom] (x : 𝟙_ _ ⟶ X) (y : 𝟙_ _ ⟶ Y) (M N : ((X ⊗ Y) ⊗ Z).left.Modules) [M.IsInvertible] [N.IsInvertible] (hx : Nonempty (overPullback (lift (lift (toUnit _ ≫ x) (fst Y Z)) (snd Y Z)) M ≅ overPullback (lift (lift (toUnit _ ≫ x) (fst Y Z)) (snd Y Z)) N)) (hy : Nonempty (overPullback (lift (lift (fst X Z) (toUnit _ ≫ y)) (snd X Z)) M ≅ overPullback (lift (lift (fst X Z) (toUnit _ ≫ y)) (snd X Z)) N)) : IsClosed {t : Z.left | ∃ U : Z.left.Opens, t ∈ U ∧ Nonempty ((Scheme.Modules.pullback (preimageSnd X Y Z U).ι).obj M ≅ (Scheme.Modules.pullback (preimageSnd X Y Z U).ι).obj N)}",
+  "branch": "sheaf-dag",
+  "by": "S2",
+  "date": "2026-10-12",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-dbd94",
+  "group": "S2",
+  "result": "pass",
+  "landing": "20261012T053954-L-2645949",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-dbd94",
+  "group": "S2",
+  "result": "pass",
+  "landing": "20261012T053954-L-2645949",
+  "kind": "interface",
+  "note": "independent Codex review: Packet, delivered files, DAG nodes, report, and commit dbd949b8bfe2 match; all modules compile cleanly and review points pass."
+ }
+}

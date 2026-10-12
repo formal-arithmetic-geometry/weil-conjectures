@@ -1,0 +1,120 @@
+{
+ "id": "lem-sc-picard-locus-fiber-range",
+ "kind": "statement",
+ "title": "Image of a Picard immersion equals the trivial-fibre locus in a family with a section",
+ "statement": "Let f:P→S be a morphism of schemes [def-weil-scheme-over-base] with a section σ:S→P [def-pc-section], and let L be an invertible module [def-sc-invertible-module] on P. Let j:T→S be an immersion. Suppose that for every B→S the morphism factors through j if and only if the restriction of L to P×_S B [def-pc-fibre-product] is the pullback [def-pc-module-pullback] of a finite locally free module on B. Then the set-theoretic image of j equals the set of s∈S for which the restriction of L to P_s=P×_S Spec κ(s) [def-weil-residue-field] is trivial. No properness, flatness or connectedness assumption is needed in this assertion.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tags 0BDP and 0BF4, image of the universal locus; source-library theorem of the cube interface"
+ },
+ "stmt_deps": [
+  "def-weil-scheme-over-base",
+  "def-pc-module-pullback",
+  "def-sc-invertible-module",
+  "def-weil-residue-field",
+  "def-pc-section",
+  "def-pc-fibre-product"
+ ],
+ "proof": [
+  {
+   "text": "For s in the image of j, the canonical map g:Spec κ(s)→S lifts through j. Indeed, an immersion is surjective on stalks, hence its residue-field maps are field isomorphisms. For a point t with j(t)=s, compose Spec of the inverse residue-field map with the canonical residue-field morphism of t. This is the existing proved Scheme.exists_comp_eq_of_mem_range, applied to g; the image of its closed point is s.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Evaluate the assumed universal factorization property at g. It supplies a finite locally free module N on Spec κ(s) with q*L≅p*N, where q and p are the two fibre projections. The tensorPullback and source-library pullback functors are naturally isomorphic by uniqueness of left adjoints to pushforward, so transport the supplied isomorphism to ordinary module pullbacks.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Base change the section σ to r:Spec κ(s)→P_s. Pulling the isomorphism back along r gives (r≫q)*L≅N, since r≫p=id. Pullback preserves invertibility, so N is invertible. An invertible module on Spec of a field is trivial: apply the existing IsInvertible.nonempty_iso_unit at its unique point. Pulling this trivialization back along p trivializes q*L.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Conversely, if q*L is trivial, use N=O in the universal property. The structure module is finite locally free. The unit pullback isomorphism and the canonical comparison of the two pullback functors supply its required isomorphism. The resulting factorization g=h≫j, evaluated at the closed point of Spec κ(s), places s in the image of j. These implications give equality of the two sets.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "document",
+  "document": "Stacks Project",
+  "place": "Tags 0BDP and 0BF4, image of the universal locus; formal comparison of module pullbacks and product presentations by S2"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The image of the universal Picard immersion for a family with a section equals the locus of fibres where the invertible module is trivial",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A point is in the image of the universal Picard locus if and only if the line bundle on its fibre is trivial",
+   "results": "AlgebraicGeometry.Scheme.basicOpen_eq_bot_iff_forall_evaluation_eq_zero; CommRing.relPic; AlgebraicGeometry.Scheme.evaluation_eq_zero_iff_notMem_basicOpen; Submodule.range_unitsToPic; CommRing.relPic_eq_top; AlgebraicGeometry.Scheme.mem_basicOpen_top; AlgebraicGeometry.Scheme.mem_basicOpen'; AlgebraicGeometry.LocallyRingedSpace.Γevaluation_eq_zero_iff_notMem_basicOpen (8 hits; no matching theorem)",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "picard.*(fiber|locus)|isClosed.*pullback|nonempty.*fiber.*iso",
+   "results": "Mathlib/Topology/SeparatedMap.lean; Mathlib/Topology/SeparatedMap.lean; Mathlib/Topology/SeparatedMap.lean; Mathlib/Topology/SeparatedMap.lean; Mathlib/CategoryTheory/Sites/Closed.lean; Mathlib/CategoryTheory/Sites/Closed.lean; Mathlib/CategoryTheory/Sites/Closed.lean; Mathlib/CategoryTheory/Sites/Closed.lean (21 hits; no matching theorem)",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "WeilConjectures.AlgebraicGeometry.TheoremOfCube",
+  "date": "2026-10-12",
+  "group": "S2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-theorem-of-cube",
+   "place": "proof: identify the closed fibre-triviality locus and extend trivial fibres using the two section slices",
+   "via": [
+    "lem-sc-general-theorem-of-cube"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.PicardLocusFiberRange",
+  "declaration": "AlgebraicGeometry.Scheme.range_eq_setOf_nonempty_pullback_fiber_iso_unit",
+  "file": "lean/Sheaf/AlgebraicGeometry/PicardLocusFiberRange.lean",
+  "statement": "theorem range_eq_setOf_nonempty_pullback_fiber_iso_unit {P S T : Scheme.{u}} (f : P ⟶ S) (σ : S ⟶ P) (hσ : σ ≫ f = 𝟙 S) (L : P.Modules) [L.IsInvertible] (j : T ⟶ S) [IsImmersion j] (hZ : ∀ {B : Scheme.{u}} (g : B ⟶ S), (∃ h : B ⟶ T, h ≫ j = g) ↔ ∃ (N : B.Modules) (_ : N.IsFiniteLocallyFree), Nonempty ((Modules.tensorPullback (pullback.fst f g)).obj L ≅ (Modules.tensorPullback (pullback.snd f g)).obj N)) : Set.range j = {s : S | Nonempty ((Modules.pullback (f.fiberι s)).obj L ≅ SheafOfModules.unit _)}",
+  "branch": "sheaf-dag",
+  "by": "S2",
+  "date": "2026-10-12",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-dbd94",
+  "group": "S2",
+  "result": "pass",
+  "landing": "20261012T053954-L-2645949",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-dbd94",
+  "group": "S2",
+  "result": "pass",
+  "landing": "20261012T053954-L-2645949",
+  "kind": "interface",
+  "note": "independent Codex review: Packet, delivered files, DAG nodes, report, and commit dbd949b8bfe2 match; all modules compile cleanly and review points pass."
+ }
+}

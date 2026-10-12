@@ -1,0 +1,138 @@
+{
+ "id": "lem-sc-picard-fiber-triviality-closed",
+ "kind": "statement",
+ "title": "Closedness of the trivial-fibre locus in a proper geometrically integral family with a section",
+ "statement": "Let f:P→S be a proper [def-weil-proper-morphism], flat [def-weil-flat-morphism] morphism of schemes [def-weil-scheme-over-base], locally of finite presentation [def-sbc-locally-finite-presentation], with geometrically integral fibres [def-pc-geometrically-irreducible]. Suppose f has a section σ [def-pc-section]. For any invertible module L [def-sc-invertible-module] on P, the set of s∈S such that the pullback [def-pc-module-pullback] of L to P_s over Spec κ(s) [def-weil-residue-field] is trivial is closed.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tags 0E0L, 0BDP, 0BF0 and 0BF4; source-library theorem of the cube interface"
+ },
+ "stmt_deps": [
+  "def-weil-scheme-over-base",
+  "def-pc-module-pullback",
+  "def-sc-invertible-module",
+  "def-weil-residue-field",
+  "def-pc-section",
+  "def-weil-proper-morphism",
+  "def-weil-flat-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-pc-geometrically-irreducible"
+ ],
+ "proof": [
+  {
+   "text": "Geometrically integral fibres are geometrically reduced and geometrically connected. Apply the proper-flat global-sections theorem to obtain universally trivial structure-sheaf pushforward.",
+   "uses": [
+    "lem-sc-proper-flat-global-sections"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "An invertible source-library module gives an invertible sheaf of modules, hence a finite locally free module. Apply the universal Picard-locus theorem to L, obtaining an immersion j:T→S of finite presentation and its universal factorization property.",
+   "uses": [
+    "lem-pc-invertible-sheaf-instance",
+    "lem-sc-picard-diagonal-locally-closed"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The closed Picard-locus theorem makes j a closed immersion under the geometrically integral hypothesis.",
+   "uses": [
+    "lem-sc-picard-locus-closed"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The section σ and the universal factorization property identify the image of j with the trivial-fibre locus by the range lemma. A closed immersion is a closed embedding, whose image is closed.",
+   "uses": [
+    "lem-sc-picard-locus-fiber-range"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-proper-flat-global-sections",
+  "lem-pc-invertible-sheaf-instance",
+  "lem-sc-picard-diagonal-locally-closed",
+  "lem-sc-picard-locus-closed",
+  "lem-sc-picard-locus-fiber-range"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "Stacks Project",
+  "place": "Tags 0E0L, 0BDP, 0BF0 and 0BF4; formal comparison of module pullbacks and product presentations by S2"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "For a proper flat family with geometrically integral fibres the set of points where a line bundle has trivial restriction to the fibre is closed",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The trivial fibre locus of an invertible module in a proper flat geometrically integral family is closed",
+   "results": "PrimeSpectrum.isIntegral_of_isClosedMap_comap_mapRingHom; AlgebraicGeometry.Scheme.zeroLocus_isClosed; PrimeSpectrum.isClosed_comap_singleton_of_isIntegral; AlgebraicGeometry.RingedSpace.zeroLocus_isClosed; PrimeSpectrum.isClosedMap_comap_of_isIntegral; AlgebraicGeometry.isIntegral_appTop_of_universallyClosed; AlgebraicGeometry.finite_appTop_of_universallyClosed; AlgebraicGeometry.Scheme.IdealSheafData.isClosed_supportSet (8 hits; no matching theorem)",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "picard.*(fiber|locus)|isClosed.*pullback|nonempty.*fiber.*iso",
+   "results": "Mathlib/Topology/SeparatedMap.lean; Mathlib/Topology/SeparatedMap.lean; Mathlib/Topology/SeparatedMap.lean; Mathlib/Topology/SeparatedMap.lean; Mathlib/CategoryTheory/Sites/Closed.lean; Mathlib/CategoryTheory/Sites/Closed.lean; Mathlib/CategoryTheory/Sites/Closed.lean; Mathlib/CategoryTheory/Sites/Closed.lean (21 hits; no matching theorem)",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "WeilConjectures.AlgebraicGeometry.TheoremOfCube",
+  "date": "2026-10-12",
+  "group": "S2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-theorem-of-cube",
+   "place": "proof: identify the closed fibre-triviality locus and extend trivial fibres using the two section slices",
+   "via": [
+    "lem-sc-general-theorem-of-cube"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.PicardFiberTrivialityClosed",
+  "declaration": "AlgebraicGeometry.Scheme.isClosed_setOf_nonempty_pullback_fiber_iso_unit",
+  "file": "lean/Sheaf/AlgebraicGeometry/PicardFiberTrivialityClosed.lean",
+  "statement": "theorem isClosed_setOf_nonempty_pullback_fiber_iso_unit {P S : Scheme.{u}} (f : P ⟶ S) [IsProper f] [Flat f] [LocallyOfFinitePresentation f] [GeometricallyIntegral f] (σ : S ⟶ P) (hσ : σ ≫ f = 𝟙 S) (L : P.Modules) [L.IsInvertible] : IsClosed {s : S | Nonempty ((Modules.pullback (f.fiberι s)).obj L ≅ SheafOfModules.unit _)}",
+  "branch": "sheaf-dag",
+  "by": "S2",
+  "date": "2026-10-12",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-dbd94",
+  "group": "S2",
+  "result": "pass",
+  "landing": "20261012T053954-L-2645949",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-dbd94",
+  "group": "S2",
+  "result": "pass",
+  "landing": "20261012T053954-L-2645949",
+  "kind": "interface",
+  "note": "independent Codex review: Packet, delivered files, DAG nodes, report, and commit dbd949b8bfe2 match; all modules compile cleanly and review points pass."
+ }
+}
