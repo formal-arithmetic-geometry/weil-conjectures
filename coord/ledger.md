@@ -10168,3 +10168,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 23:51 L: merged deliver/S2/Sheaf.AlgebraicGeometry.SourceDerivedSectionsNaturality (stage 3; reviewer PASS; first push; landing 20261012T235114-L-2172563 (interface); batch 20261012T235109; modules 2; new nodes 3)
 - 23:51 L: merged deliver/S4/Sheaf.AlgebraicGeometry.PerfectRightAdjointTensorHomComparison (stage 3; reviewer PASS; first push; landing 20261012T235114-L-2172672 (proof); batch 20261012T235109; modules 1; new nodes 0)
 - 23:51 L: merged deliver/U1/Sheaf.AlgebraicGeometry.Morphisms.StalkNormalizationNormalDense (stage 3; reviewer PASS; first push; landing 20261012T235114-L-2172770 (interface); batch 20261012T235109; modules 3; new nodes 2)
+- 23:53 L: returned deliver/J2/Sheaf.AlgebraicGeometry.DerivedPullbackTensorAssociativity (reviewer RETURN: (reviewer X-9095e, head 9095edeee) F1: In coord/reports/J2/Sheaf.AlgebraicGeometry.DerivedPullbackTensorAssociativity.md)
