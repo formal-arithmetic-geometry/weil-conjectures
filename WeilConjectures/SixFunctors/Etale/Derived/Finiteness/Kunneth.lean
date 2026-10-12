@@ -9,9 +9,10 @@ public import Mathlib.Algebra.Category.ModuleCat.FilteredColimits
 public import Mathlib.FieldTheory.IsSepClosed
 public import WeilConjectures.AlgebraicGeometry.InvertibleExponent
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
+public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekToLowerStar
+public import WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormula
 public import WeilConjectures.SixFunctors.Etale.Derived.Tensor
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStar
-
 /-!
 # Künneth and the projection formula in ordinary étale cohomology
 
@@ -39,7 +40,6 @@ open Scheme
 namespace Etale
 
 variable (Λ : Type (u + 1)) [CommRing Λ] {X Y : Scheme.{u}}
-
 section Kunneth
 
 variable [Finite Λ] {k : Type u} [Field k] [IsSepClosed k]
@@ -68,9 +68,15 @@ exhibiting `W = X ×_k Y`, the exterior-product map
 
 is an isomorphism for all `E ∈ D(X_ét, Λ)` and `K ∈ D(Y_ét, Λ)` — unbounded, and with no
 properness hypothesis. Without the cartesian hypothesis the statement is false: for `W = ∅`
-and `X = Y = Spec k` the right-hand side is `0` and the left-hand side is `Λ`. -/
-theorem nonempty_iso_kunneth {W : Scheme.{u}} (p₁ : W ⟶ X) (p₂ : W ⟶ Y)
-    (sq : IsPullback p₁ p₂ aX aY)
+and `X = Y = Spec k` the right-hand side is `0` and the left-hand side is `Λ`.
+
+The schemes have to be quasi-compact, as in Stacks 0F1P (blueprint `thm-kun-0f1p`), which
+asks for `X` and `Y` of finite type: for `X` the disjoint union of countably many copies of
+`Spec k`, `Y = Spec k`, `Λ = 𝔽_ℓ`, `E = Λ` and `K` a vector space `V` in degree `0`, the
+left-hand side is `(∏ 𝔽_ℓ) ⊗ V` and the right-hand side is `∏ V`; for `dim V = ℶ_ω` the
+second has dimension `ℶ_ω ^ ℵ₀ > ℶ_ω`, the dimension of the first. -/
+theorem nonempty_iso_kunneth [QuasiCompact aX] [QuasiCompact aY] {W : Scheme.{u}} (p₁ : W ⟶ X)
+    (p₂ : W ⟶ Y) (sq : IsPullback p₁ p₂ aX aY)
     (E : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
     (K : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
     Nonempty ((rightDerivedGlobalSections (ModuleCat.{u + 1} Λ) X).obj E ⊗
@@ -81,13 +87,18 @@ theorem nonempty_iso_kunneth {W : Scheme.{u}} (p₁ : W ⟶ X) (p₂ : W ⟶ Y)
           ((L((p₂)^*[ModuleCat.{u + 1} Λ])).obj K))) :=
   sorry
 
+omit [HasInvertibleExponent Λ X] [HasInvertibleExponent Λ Y] in
 /-- Blueprint `sk-prop-sf-kunneth-ordinary`: Künneth and the projection formula in ordinary
 étale cohomology
 
 **The projection formula for a proper morphism.** For `f : X ⟶ Y` proper between finite-type
 `k`-schemes and all `E ∈ D(X_ét, Λ)`, `L ∈ D(Y_ét, Λ)`,
 
-`Rf_* E ⊗^L L ≅ Rf_*(E ⊗^L Lf^* L)`. -/
+`Rf_* E ⊗^L L ≅ Rf_*(E ⊗^L Lf^* L)`.
+
+It is the projection formula for `Rf_!` at finite coefficients
+(`AlgebraicGeometry.Etale.hasProjectionFormula_of_finite`), transported along `Rf_! ≅ Rf_*`
+(`AlgebraicGeometry.Etale.rightDerivedLowerShriekIsoRightDerivedLowerStar`). -/
 theorem nonempty_iso_derivedTensor_rightDerivedLowerStar_of_isProper (f : X ⟶ Y) [IsProper f]
     (E : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
     (L : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
@@ -95,8 +106,12 @@ theorem nonempty_iso_derivedTensor_rightDerivedLowerStar_of_isProper (f : X ⟶ 
           ((R((f)_*[ModuleCat.{u + 1} Λ])).obj E)).obj L ≅
       (R((f)_*[ModuleCat.{u + 1} Λ])).obj
         (((derivedTensor (ModuleCat.{u + 1} Λ) X).obj E).obj
-          ((L((f)^*[ModuleCat.{u + 1} Λ])).obj L))) :=
-  sorry
+          ((L((f)^*[ModuleCat.{u + 1} Λ])).obj L))) := by
+  obtain ⟨e⟩ := nonempty_iso_derivedTensor_obj_rightDerivedLowerShriek (ModuleCat.{u + 1} Λ) f E
+    (hasProjectionFormula_of_finite Λ f E)
+  let φ := rightDerivedLowerShriekIsoRightDerivedLowerStar (ModuleCat.{u + 1} Λ) f
+  exact ⟨((derivedTensor (ModuleCat.{u + 1} Λ) Y).mapIso (φ.app E).symm).app L ≪≫ e.app L ≪≫
+    φ.app _⟩
 
 end Kunneth
 
