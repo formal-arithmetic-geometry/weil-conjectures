@@ -7,6 +7,9 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.Curve.Assertions
 public import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
+import Sheaf.AlgebraicGeometry.Curve.DenseOpenHighCohomology
+import Sheaf.AlgebraicGeometry.Curve.DenseOpenPrimaryFiniteness
+import Sheaf.AlgebraicGeometry.Curve.DenseOpenBaseChange
 import Sheaf.AlgebraicGeometry.Curve.DenseOpenAssertions
 import Sheaf.AlgebraicGeometry.PullbackCohomologyLongExactLadder
 import Sheaf.Paper.ZeroDimensionalCohomology
@@ -21,6 +24,21 @@ universe u
 open CategoryTheory AlgebraicGeometry.Etale
 
 namespace AlgebraicGeometry.IsCurve
+
+private theorem surjective_iff_of_bijective_square
+    {A B C D : Type*} (i : A → B) (j : C → D) (a : A → C) (b : B → D)
+    (hi : Function.Bijective i) (hj : Function.Bijective j)
+    (hcomm : ∀ x, j (a x) = b (i x)) :
+    Function.Surjective a ↔ Function.Surjective b := by
+  constructor
+  · intro ha y
+    obtain ⟨z, rfl⟩ := hj.2 y
+    obtain ⟨x, rfl⟩ := ha z
+    exact ⟨i x, (hcomm x).symm⟩
+  · intro hb z
+    obtain ⟨y, hy⟩ := hb (j z)
+    obtain ⟨x, rfl⟩ := hi.2 y
+    exact ⟨x, hj.1 ((hcomm x).trans hy)⟩
 
 /-- The eight assertions are unchanged by extending the restriction from a dense open by zero.
 Source: Stacks Project, Lemma 0GJA and its proof, specialized to prime-torsion coefficients
@@ -52,6 +70,48 @@ theorem assertions_iff_dense_open_prime (Λ : Type (u + 1)) [CommRing Λ] [Finit
     [Scheme.IsConstructibleSheaf F] (hF : r • 𝟙 F = 0)
     (U : X.Opens) (hU : Dense (U : Set X)) :
     IsCurve.Assertions Λ f F ↔ IsCurve.Assertions Λ f
-      ((U.ι)_!open[ModuleCat.{u + 1} Λ].obj ((U.ι)^*[ModuleCat.{u + 1} Λ].obj F)) := by sorry
+      ((U.ι)_!open[ModuleCat.{u + 1} Λ].obj ((U.ι)^*[ModuleCat.{u + 1} Λ].obj F)) := by
+  let G := (U.ι)_!open[ModuleCat.{u + 1} Λ].obj
+    ((U.ι)^*[ModuleCat.{u + 1} Λ].obj F)
+  let A := (sheafCompose X.smallEtaleTopology
+    (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj F
+  let B := (sheafCompose X.smallEtaleTopology
+    (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj G
+  let ε : B ⟶ A := (sheafCompose X.smallEtaleTopology
+    (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).map
+      ((openImmersionLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} Λ) U.ι).counit.app F)
+  obtain ⟨hhigh, hopen⟩ := dense_open_high_cohomology Λ f F U hU
+  have hhigh' (q : ℕ) (hq : 1 < q) : Function.Bijective (Sheaf.H.map ε q) :=
+    hhigh q hq
+  have h₁ : VanishingAboveTwo Λ F ↔ VanishingAboveTwo Λ G := by
+    constructor
+    · intro h q hq
+      exact (Equiv.ofBijective _ (hhigh' q (by omega))).subsingleton_congr.mpr (h q hq)
+    · intro h q hq
+      exact (Equiv.ofBijective _ (hhigh' q (by omega))).subsingleton_congr.mp (h q hq)
+  have h₂ : VanishingAboveOneOfIsAffine Λ F ↔ VanishingAboveOneOfIsAffine Λ G := by
+    constructor
+    · intro h _ q hq
+      exact (Equiv.ofBijective _ (hhigh' q hq)).subsingleton_congr.mpr (h q hq)
+    · intro h _ q hq
+      exact (Equiv.ofBijective _ (hhigh' q hq)).subsingleton_congr.mp (h q hq)
+  obtain ⟨h₃, h₄, h₅⟩ := dense_open_primary_finiteness Λ f r F hF U hU
+  obtain ⟨h₆, h₇⟩ := dense_open_base_change Λ f r F hF U hU
+  have h₈ : SurjectiveRestrictionTwo Λ F ↔ SurjectiveRestrictionTwo Λ G := by
+    constructor
+    · intro h W a _
+      exact (surjective_iff_of_bijective_square (Sheaf.H.map ε 2)
+        (Sheaf.H.map (((a)^*[AddCommGrpCat.{u + 1}]).map ε) 2)
+        (cohomologyMap a B 2) (cohomologyMap a A 2)
+        (hhigh' 2 (by omega)) (hopen a)
+        (fun x ↦ (cohomologyMap_map a 2 ε x).symm)).mpr (h a)
+    · intro h W a _
+      exact (surjective_iff_of_bijective_square (Sheaf.H.map ε 2)
+        (Sheaf.H.map (((a)^*[AddCommGrpCat.{u + 1}]).map ε) 2)
+        (cohomologyMap a B 2) (cohomologyMap a A 2)
+        (hhigh' 2 (by omega)) (hopen a)
+        (fun x ↦ (cohomologyMap_map a 2 ε x).symm)).mp (h a)
+  rw [assertions_iff, assertions_iff]
+  exact h₁.and (h₂.and (h₃.and (h₄.and (h₅.and (h₆.and (h₇.and h₈))))))
 
 end AlgebraicGeometry.IsCurve

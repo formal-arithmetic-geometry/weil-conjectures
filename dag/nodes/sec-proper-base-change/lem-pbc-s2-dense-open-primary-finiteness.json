@@ -1,0 +1,174 @@
+{
+ "id": "lem-pbc-s2-dense-open-primary-finiteness",
+ "kind": "statement",
+ "title": "Conditional primary vanishing and finiteness across a dense open",
+ "statement": "Let $k$ be algebraically closed, $f:X\\to\\operatorname{Spec}k$ a reduced curve [def-weil-pbc-curve-setting], $\\Lambda$ a finite commutative ring, $r$ a prime, and $F$ a constructible sheaf of $\\Lambda$-modules [def-weil-pbc-etale-constructible-sheaf] with $r\\,\\mathrm{id}_F=0$. For any dense open $j:U\\hookrightarrow X$ let $G=j_!j^*F$ [def-weil-pbc-extension-by-zero]. In the original conditional convention of [def-weil-pbc-eight-curve-assertions], the assertion $C_3(X,F)$ is equivalent to $C_3(X,G)$, $C_4(X,F)$ is equivalent to $C_4(X,G)$, and $C_5(X,F)$ is equivalent to $C_5(X,G)$. Here $C_3$ is vanishing in degrees greater than one when the sheaf is primary for the positive characteristic [def-weil-pbc-primary-torsion], $C_4$ is finiteness of all cohomology under constructible invertible-order torsion, and $C_5$ is finiteness of all cohomology under properness and constructibility. The torsion predicates on $F$ and $G$ are not asserted to be equivalent.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 0GJA (lemma-restrict-to-open), proof: the finite stalk product, five-term exact sequence, and remarks (a) and (b)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-curve-setting",
+  "def-weil-pbc-etale-constructible-sheaf",
+  "def-weil-pbc-extension-by-zero",
+  "def-weil-pbc-eight-curve-assertions",
+  "def-weil-pbc-primary-torsion"
+ ],
+ "proof": [
+  {
+   "text": "Use the stalk formula for extension by zero and inverse-image stalks. The stalks of G are the stalks of F over U and zero elsewhere. Refining a constructible stratification by U and its closed complement proves constructibility of G; additivity of pullback and extension by zero proves r-torsion. Primary and invertible-order torsion pass from F to G.",
+   "uses": [
+    "lem-weil-pbc-extension-by-zero-stalks",
+    "lem-weil-pbc-inverse-image-stalk-germ",
+    "def-weil-pbc-etale-constructible-sheaf",
+    "def-weil-pbc-primary-torsion"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Let Z be the reduced closed complement of U. Finite type makes X Noetherian with finitely many irreducible components. Density and openness put the generic point of every component in U: if its closure meets U, every generalization of that point of intersection lies in U. Thus no irreducible component lies in Z. Any strict chain of nonempty irreducible closed subsets in Z would extend by a component of X to a chain of length at least two in X, contradicting dimension at most one. Hence Z has dimension at most zero. Its underlying space is finite and discrete, and each residue field is k. The same argument applies to any open immersion W into X and the complement W times_X Z.",
+   "uses": [
+    "def-weil-pbc-curve-setting",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-noetherian-finitely-many-components",
+    "lem-weil-pbc-zero-dimensional-cohomology",
+    "lem-weil-pbc-closed-point-residue-field-base"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The open-closed short exact sequence of module sheaves is 0 -> G -> F -> i_*i^*F -> 0, with the first arrow the specified adjunction counit. Forgetting module structure gives a short exact sequence of abelian sheaves. Finite exact direct image and the Leray identification give H^q(X,i_*i^*F)=H^q(Z,i^*F). This vanishes for q>0. Inverse image along any open immersion is exact and computes the analogous closed direct image over the intersection with Z.",
+   "uses": [
+    "lem-weil-pbc-open-closed-short-exact",
+    "lemma-weil-pbc-finite-direct-image-exact",
+    "lem-weil-pbc-cohomology-pullback-derived-unit",
+    "lem-weil-pbc-zero-dimensional-cohomology",
+    "lem-weil-pbc-extension-by-zero-adjunction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The degree-zero group of the closed term is the finite product of finitely generated stalk modules of F over the finite ring Λ. It is finite. The long exact sequence reduces to 0 -> H^0(G) -> H^0(F) -> H^0(B) -> H^1(G) -> H^1(F) -> 0. If all groups of F are finite, H^0(G) is a subgroup of H^0(F), H^1(G) has finite kernel and finite image, and higher groups are isomorphic. If all groups of G are finite, H^0(F) has finite kernel and image, H^1(F) is a quotient of H^1(G), and higher groups are isomorphic. This proves equivalence of the unconditional finiteness conclusions, and hence the conditional proper finiteness assertions.",
+   "uses": [
+    "lem-weil-pbc-zero-dimensional-cohomology",
+    "lem-pbc-s2-dense-open-high-cohomology",
+    "lem-weil-pbc-pullback-cohomology-long-exact-ladder"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For a prime p equal to char k, if r=p then both sheaves are p-primary and the higher-degree bijections transfer the q>1 vanishings. If r differs from p, any p-primary r-torsion sheaf is zero: each stalk element is killed both by r and by a power of p, so Bezout makes it zero; stalk conservativity gives the zero sheaf. Thus both conditional implications for primary vanishing hold. For invertible-order finiteness, if r is invertible in k both sheaves satisfy the torsion hypothesis and the preceding finite-group argument applies. Otherwise an invertible-order hypothesis on either r-torsion sheaf makes it zero by the same coprimality argument. This proves C3, C4 and C5 without claiming equivalence of their hypotheses.",
+   "uses": [
+    "def-weil-pbc-primary-torsion",
+    "def-weil-pbc-eight-curve-assertions",
+    "lemma-weil-pbc-geometric-stalk-conservative",
+    "lem-pbc-s2-dense-open-high-cohomology"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-curve-setting",
+  "def-weil-pbc-eight-curve-assertions",
+  "def-weil-pbc-etale-constructible-sheaf",
+  "def-weil-pbc-primary-torsion",
+  "lem-pbc-s2-dense-open-high-cohomology",
+  "lem-weil-pbc-closed-point-residue-field-base",
+  "lem-weil-pbc-cohomology-pullback-derived-unit",
+  "lem-weil-pbc-extension-by-zero-adjunction",
+  "lem-weil-pbc-extension-by-zero-stalks",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-inverse-image-stalk-germ",
+  "lem-weil-pbc-noetherian-finitely-many-components",
+  "lem-weil-pbc-open-closed-short-exact",
+  "lem-weil-pbc-pullback-cohomology-long-exact-ladder",
+  "lem-weil-pbc-zero-dimensional-cohomology",
+  "lemma-weil-pbc-finite-direct-image-exact",
+  "lemma-weil-pbc-geometric-stalk-conservative"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 0GJA; canonical ModuleCat counit formulation and conditional prime-torsion cases written out by S2 from the source proof."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "etale cohomology dense open extension by zero natural higher cohomology comparison; etale cohomology dense open extension by zero field extension invariance and finiteness assertions",
+   "results": "Both attempted queries returned Internal Server Error. No mathematical verdict inferred.",
+   "date": "2026-10-12",
+   "verdict": null
+  },
+  {
+   "tool": "leanfinder",
+   "query": "etale cohomology curve dense open extension by zero eight assertions equivalence; constructible prime torsion sheaf on curve dense open primary vanishing finiteness conditional equivalence",
+   "results": "Eight results per query: etale loci and smooth algebras for the first, scheme sections vanishing on basic opens for the second. No matching etale cohomology theorem.",
+   "date": "2026-10-12",
+   "verdict": "No matching theorem in these semantic results."
+  },
+  {
+   "tool": "loogle",
+   "query": "Equiv.subsingleton_congr",
+   "results": "Mathlib.Logic.Equiv.Defs: Equiv.subsingleton_congr transfers Subsingleton across an equivalence.",
+   "date": "2026-10-12",
+   "verdict": "Used for the proved C1 and C2 transfers, not a replacement for the geometric comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "dense.*(cohomology|finite|baseChange)|(cohomology|finite|baseChange).*dense|prime.*torsion.*dense in Mathlib/AlgebraicGeometry and Mathlib/CategoryTheory; dense_open and five_term in lean/Sheaf and lean/WeilConjectures",
+   "results": "No matching Mathlib result. Existing DenseOpenAssertions uses a CurveCoefficientPair and ULift Z modules, not arbitrary ModuleCat Λ. No specialized canonical higher-cohomology comparison or conditional subpackage theorem was found.",
+   "date": "2026-10-12",
+   "verdict": "No direct replacement with these coefficient and map conventions."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Curve.DenseOpenPrimeAssertions",
+  "date": "2026-10-12",
+  "group": "S2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-curve-dense-open-reduction",
+   "place": "proof, open-closed exact sequence and dense-open cohomology comparison: Conditional primary vanishing and finiteness across a dense open",
+   "via": [
+    "lem-pbc-q1-dense-open-prime-assertions"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Curve.DenseOpenPrimaryFiniteness",
+  "file": "lean/Sheaf/AlgebraicGeometry/Curve/DenseOpenPrimaryFiniteness.lean",
+  "declaration": "AlgebraicGeometry.IsCurve.dense_open_primary_finiteness",
+  "statement": "theorem dense_open_primary_finiteness (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]\n    {k : Type u} [Field k] [IsAlgClosed k] {X : Scheme.{u}}\n    (f : X ⟶ Spec (.of k)) [IsCurve f] [IsReduced X]\n    (r : ℕ) [Fact r.Prime] (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))\n    [Scheme.IsConstructibleSheaf F] (hF : r • 𝟙 F = 0)\n    (U : X.Opens) (hU : Dense (U : Set X)) :\n    let G := (U.ι)_!open[ModuleCat.{u + 1} Λ].obj\n      ((U.ι)^*[ModuleCat.{u + 1} Λ].obj F)\n    (VanishingAboveOneOfIsPrimaryTorsionSheaf Λ F k ↔\n      VanishingAboveOneOfIsPrimaryTorsionSheaf Λ G k) ∧\n    (FiniteOfInvertibleOrder Λ F k ↔ FiniteOfInvertibleOrder Λ G k) ∧\n    (FiniteOfIsProper Λ f F ↔ FiniteOfIsProper Λ f G)",
+  "branch": "sheaf-dag",
+  "by": "S2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S2",
+  "result": "pass",
+  "landing": "20261012T042419-L-1821220",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S2",
+  "result": "pass",
+  "landing": "20261012T042419-L-1821220",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

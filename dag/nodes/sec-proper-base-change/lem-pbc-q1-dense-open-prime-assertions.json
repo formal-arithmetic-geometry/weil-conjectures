@@ -15,46 +15,52 @@
  ],
  "proof": [
   {
-   "text": "Use the argument of the existing dense-open assertion node in the module-valued coefficient convention. The complement Z is a finite union of algebraically closed points. The open-closed short exact sequence has third term i_* i^* F. Its cohomology is zero in positive degree, finite in degree zero, and invariant under algebraically closed extension. Finite coefficient rings turn the finitely generated stalk modules of constructible F into finite abelian groups.",
+   "text": "Let G be extension by zero of the restriction and ε:G -> F the forgotten canonical counit. Use dense_open_high_cohomology to obtain bijectivity of Sheaf.H.map ε in degrees greater than one and of its inverse image in degree two on each open immersion.",
    "uses": [
-    "lem-weil-pbc-curve-assertions-dense-open",
-    "lem-weil-pbc-open-closed-short-exact",
-    "lem-weil-pbc-zero-dimensional-cohomology",
-    "lem-weil-pbc-zero-dimensional-field-extension"
+    "lem-pbc-s2-dense-open-high-cohomology"
    ],
    "elementary": false
   },
   {
-   "text": "The long exact ladder gives canonical isomorphisms between cohomology of F and j_!j^*F in degree at least two, and the exact five-term sequence in degrees zero and one, compatibly with field extension and restriction to every open. Transfer C1-C3 by the high-degree isomorphisms, C4-C5 by them and finiteness of the boundary product, C6-C7 by the five-term ladders and the five lemma, and C8 by the commuting degree-two restriction squares.",
+   "text": "For each q>2 (respectively q>1 in the affine case), Equiv.ofBijective applied to Sheaf.H.map ε transfers Subsingleton in both directions. This proves the equivalences for C1 and C2.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Obtain the equivalences for C3, C4 and C5 from dense_open_primary_finiteness and those for C6 and C7 from dense_open_base_change. Each theorem has exactly the original conditional predicates and coefficient convention.",
    "uses": [
-    "lem-weil-pbc-pullback-cohomology-long-exact-ladder",
-    "lem-weil-pbc-five-lemma"
+    "lem-pbc-s2-dense-open-primary-finiteness",
+    "lem-pbc-s2-dense-open-base-change"
    ],
    "elementary": false
   },
   {
-   "text": "Both sheaves are constructible and killed by r. If r differs from the characteristic then both have invertible torsion; if it equals the characteristic both are primary. A different-primary or exceptional invertible-torsion hypothesis forces a prime-torsion sheaf to be zero. These cases give both implications for the conditional eight-assertion package. The empty scheme and the full open give zero groups and the identity map respectively.",
+   "text": "For every open immersion a:W -> X, cohomologyMap_map gives the commuting square of degree-two restriction maps with vertical arrows H^2(ε) and H^2(a^*ε). Both vertical maps are bijective. To transfer surjectivity from F to G, map a class on W with coefficients G into F, lift it on X, lift back through H^2(ε), and use injectivity of H^2(a^*ε) and commutativity. To transfer from G to F, lift a class on W through H^2(a^*ε), lift it by the restriction map for G, and map it through H^2(ε). The private square lemma formalizes these two arguments.",
    "uses": [
-    "def-weil-pbc-eight-curve-assertions",
-    "def-weil-pbc-primary-torsion"
+    "lem-pbc-s2-dense-open-high-cohomology",
+    "def-weil-pbc-cohomology-pullback"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Rewrite both Assertions with assertions_iff, and combine the eight individual equivalences using Iff.and. No target or existing theorem signature changes.",
+   "uses": [
+    "def-weil-pbc-eight-curve-assertions"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
+  "def-weil-pbc-cohomology-pullback",
   "def-weil-pbc-eight-curve-assertions",
-  "def-weil-pbc-primary-torsion",
-  "lem-weil-pbc-curve-assertions-dense-open",
-  "lem-weil-pbc-five-lemma",
-  "lem-weil-pbc-open-closed-short-exact",
-  "lem-weil-pbc-pullback-cohomology-long-exact-ladder",
-  "lem-weil-pbc-zero-dimensional-cohomology",
-  "lem-weil-pbc-zero-dimensional-field-extension"
+  "lem-pbc-s2-dense-open-base-change",
+  "lem-pbc-s2-dense-open-high-cohomology",
+  "lem-pbc-s2-dense-open-primary-finiteness"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "03SC, 0GJA; elementary details and ModuleCat coefficient transport written out by Q1"
+  "place": "Tag 0GJA. S2: three strictly partial residual theorems and a complete Lean proof of the higher-vanishing and restriction transfers, assembled by assertions_iff."
  },
  "mathlib_searches": [
   {
@@ -128,10 +134,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "Q1",
+  "group": "S2",
   "result": "pass",
-  "landing": "20261012T025731-L-1257477",
+  "landing": "20261012T042419-L-1821220",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed after the tool's own checks (compiles, no new sorry without its node, no axiom, statements of existing declarations unchanged); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
