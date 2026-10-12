@@ -23,59 +23,36 @@
  ],
  "proof": [
   {
-   "text": "Comparison of Hom-colimits. Here \"initial\" is Stacks' notion (Categories, Definition of an initial functor): conditions (1), (2) of [lem-weil-pbc-initial-functor-limit]. Fix an object $W$ of $\\mathcal C$ and consider the functor $j\\mapsto\\operatorname{Hom}_{\\mathcal C}(M(j),W)$ from $\\mathcal J$ to the opposite category $\\mathrm{Set}^{\\mathrm{op}}$; its limit in $\\mathrm{Set}^{\\mathrm{op}}$ is the colimit $\\varinjlim_{j\\in\\mathcal J^{\\mathrm{op}}}\\operatorname{Hom}(M(j),W)$ in $\\mathrm{Set}$, which exists. Applying [lem-weil-pbc-initial-functor-limit] to $H$ and this functor (with $\\mathrm{Set}^{\\mathrm{op}}$ as the target category) gives that the canonical map $\\kappa_W:\\varinjlim_{i\\in\\mathcal I^{\\mathrm{op}}}\\operatorname{Hom}(M(H(i)),W)\\to\\varinjlim_{j\\in\\mathcal J^{\\mathrm{op}}}\\operatorname{Hom}(M(j),W)$, $[\\psi]_i\\mapsto[\\psi]_{H(i)}$, is a bijection.",
+   "text": "Restriction directly from Definition 05PU(2). Choose p:H(i0)→j0 by initiality and use M(p)≫r as the retraction; naturality of u gives the splitting. For i choose the original factorization stage j and lift it by q:H(l)→j. Cofilteredness of I supplies a stage over i0, l, i. Apply Mathlib Functor.Initial.exists_eq twice, first to equalize the composites to j0, then those to H(i). Applying M and the original factorization proves the restricted common-stage clause. This is the proved private helper restrict_witness. The elementary refinement argument uses Mathlib Functor.initial_iff_of_isCofiltered and IsCofilteredOrEmpty.cone_objs.",
    "uses": [
-    "lem-weil-pbc-initial-functor-limit"
+    "def-pc-essentially-constant-pro-diagram"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/categories.tex",
-    "place": "Categories, Lemma Tag 0A1T proof: Lemma Tag 04E7 (lemma-cofinal) for the cofinal functor H^opp"
-   }
+   "elementary": true
   },
   {
-   "text": "Assume $M$ is essentially constant with value $X$ and cone maps $u_j$. By [lem-pc-essentially-constant-pro-hom-colimit] the map $\\varinjlim_{j}\\operatorname{Hom}(M(j),W)\\to\\operatorname{Hom}(X,W)$, $[\\psi]_j\\mapsto\\psi\\circ u_j$, is bijective; composing with $\\kappa_W$ of Step 1, the map $\\beta_W:[\\psi]_i\\mapsto\\psi\\circ u_{H(i)}$ from $\\varinjlim_{i\\in\\mathcal I^{\\mathrm{op}}}\\operatorname{Hom}(M(H(i)),W)$ to $\\operatorname{Hom}(X,W)$ is bijective for every $W$. Let $[r']_{i_0}=\\beta_X^{-1}(\\mathrm{id}_X)$, with $r':M(H(i_0))\\to X$; then $r'\\circ u_{H(i_0)}=\\mathrm{id}_X$, and $\\beta_W([\\varphi\\circ r']_{i_0})=\\varphi$, so $\\varphi\\mapsto[\\varphi\\circ r']_{i_0}$ is the inverse bijection $\\beta_W^{-1}$. By [lem-pur-essential-constant-pro-criterion-05py] ($\\mathcal I$ cofiltered, index $i_0$, $r=r'$), $M\\circ H$ is essentially constant with value $X$, with cone maps $u'_i$ satisfying $[u'_i\\circ r']_{i_0}=[\\mathrm{id}_{M(H(i))}]_i$ in $\\varinjlim_k\\operatorname{Hom}(M(H(k)),M(H(i)))$. Applying $\\beta_{M(H(i))}$ to both sides gives $u'_i\\circ r'\\circ u_{H(i_0)}=u_{H(i)}$, i.e. $u'_i=u_{H(i)}$: the cone maps are the restricted $u_{H(i)}$.",
+   "text": "Extend the given cone with Functor.Initial.extendCone, the cone-extension clause of [lem-weil-pbc-initial-functor-limit]. Mathlib extendCone_obj_π_app' gives u_j=v_i≫M(p) for any p:H(i)→j. In particular, taking the identity arrow shows u_{H(i)}=v_i. Keep j0=H(i0) and the given retraction. For each j choose p:H(i)→j by initiality and postcompose the factorization at i by M(p); the component formula yields the common-stage clause at j. This is the proved private helper extend_witness.",
    "uses": [
-    "lem-pc-essentially-constant-pro-hom-colimit",
-    "lem-pur-essential-constant-pro-criterion-05py"
+    "lem-weil-pbc-initial-functor-limit",
+    "def-pc-essentially-constant-pro-diagram"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/categories.tex",
-    "place": "Categories, Lemma Tag 0A1T proof, using Lemma Tag 05PZ (2)=>(1) and (4)=>(1)"
-   }
+   "elementary": false
   },
   {
-   "text": "Conversely assume $M\\circ H$ is essentially constant with value $X$ and cone maps $v_i$. By [lem-pc-essentially-constant-pro-hom-colimit] (for $M\\circ H$ over the cofiltered $\\mathcal I$) the map $\\gamma_W:[\\psi]_i\\mapsto\\psi\\circ v_i$ from $\\varinjlim_{i\\in\\mathcal I^{\\mathrm{op}}}\\operatorname{Hom}(M(H(i)),W)$ to $\\operatorname{Hom}(X,W)$ is bijective. Let $[r]_{i_0}=\\gamma_X^{-1}(\\mathrm{id}_X)$, $r:M(H(i_0))\\to X$; then $r\\circ v_{i_0}=\\mathrm{id}_X$ and $\\gamma_W^{-1}(\\varphi)=[\\varphi\\circ r]_{i_0}$. Composing with $\\kappa_W$ of Step 1, $\\varphi\\mapsto[\\varphi\\circ r]_{H(i_0)}$ is a bijection $\\operatorname{Hom}(X,W)\\to\\varinjlim_{j\\in\\mathcal J^{\\mathrm{op}}}\\operatorname{Hom}(M(j),W)$ for every $W$. By [lem-pur-essential-constant-pro-criterion-05py] (index $j_0=H(i_0)$, morphism $r$), $M$ is essentially constant with value $X$, with cone maps $u_j$ characterized by $[u_j\\circ r]_{H(i_0)}=[\\mathrm{id}_{M(j)}]_j$ in $\\varinjlim_k\\operatorname{Hom}(M(k),M(j))$.",
+   "text": "Unpack IsEssentiallyConstantProDiagram and apply the preceding witness constructions in each direction. The restricted cone is explicitly the natural transformation with components u_{H(i)}. The same two constructions establish the prescribed-cone clauses. All values, cone components and universes remain unchanged.",
    "uses": [
-    "lem-pc-essentially-constant-pro-hom-colimit",
-    "lem-pur-essential-constant-pro-criterion-05py"
+    "def-pc-essentially-constant-pro-diagram"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/categories.tex",
-    "place": "Categories, Lemma Tag 0A1T proof, using Lemma Tag 05PZ (4)=>(1)"
-   }
-  },
-  {
-   "text": "The cone maps agree: for an index $i$ take $j=H(i)$ and $W=M(H(i))$ in Step 3. Both $[u_{H(i)}\\circ r]_{i_0}$ and $[\\mathrm{id}]_i$ in $\\varinjlim_{k\\in\\mathcal I^{\\mathrm{op}}}\\operatorname{Hom}(M(H(k)),M(H(i)))$ are sent by $\\kappa_W$ to the equal classes $[u_{H(i)}\\circ r]_{H(i_0)}=[\\mathrm{id}]_{H(i)}$; $\\kappa_W$ is injective, so they are equal, and applying $\\gamma_W$ gives $u_{H(i)}\\circ r\\circ v_{i_0}=v_i$, i.e. $u_{H(i)}=v_i$ since $r\\circ v_{i_0}=\\mathrm{id}_X$.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/categories.tex",
-    "place": "Categories, Lemma Tag 0A1T proof"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-initial-functor-limit",
-  "lem-pc-essentially-constant-pro-hom-colimit",
-  "lem-pur-essential-constant-pro-criterion-05py"
+  "def-pc-essentially-constant-pro-diagram",
+  "lem-weil-pbc-initial-functor-limit"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/stacks-project/categories.tex",
-  "place": "Categories, Lemma Tag 0A1T (lemma-initial-essentially-constant)"
+  "place": "Definition 05PU(2) and Lemma 0A1T; direct common-stage proof using Mathlib initial-functor cone extension and cofiltered equalization, written by Y3 on 2026-10-13"
  },
  "mathlib_searches": [
   {
@@ -190,5 +167,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y3",
+  "result": "pass",
+  "landing": "20261012T202301-L-711341",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
