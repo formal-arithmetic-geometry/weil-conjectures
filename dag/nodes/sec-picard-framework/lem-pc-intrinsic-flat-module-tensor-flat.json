@@ -17,16 +17,46 @@
  ],
  "proof": [
   {
-   "text": "For each point choose an affine neighbourhood U. Evaluate IsFlatOver G (identity Y) at V = U and U; the identity appLE is the identity on the coordinate ring, so G(U) is flat. Quasi-coherence identifies its localization at the point with the stalk G_x, which is therefore flat over O_Y,x. Tensor commutes with stalks, and exactness of sheaves is detected on stalks. Tensoring any exact sequence with G remains exact on every stalk and hence globally. Tensor is additive and preserves finite colimits; preservation of short exact sequences also gives finite limits, so tensorRight G is exact. If Y is empty the stalkwise test is vacuous; zero stalks are flat.",
-   "uses": [],
+   "text": "Specialize IsFlatOver G (identity Y) at equal affine opens V=U. Apply flat_stalk_of_affine_sections_flat to obtain Module.Flat O_Y,x G_x for every point x.",
+   "uses": [
+    "lem-pc-intrinsic-flat-module-flat-stalk"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The module stalk functor preserves finite limits: after forgetting to abelian groups it is the composite of the module-to-sheaf functor with the exact abelian-sheaf stalk functor. Reflect finite-limit preservation through the module-to-abelian-group forgetful functor. The family of module stalk functors jointly reflects isomorphisms by the abelian-sheaf stalk isomorphism criterion.",
+   "uses": [
+    "def-pc-module-stalk-functor"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use stalkTensorIso, natural in both arguments, to identify tensorRight G followed by the stalk at x with the stalk followed by tensorRight G_x. Module.Flat.iff_preservesFiniteLimits_tensorRight supplies finite-limit preservation for the latter. Joint reflection of limits by the stalk functors then gives finite-limit preservation for tensorRight G.",
+   "uses": [
+    "lem-pc-ringed-space-module-stalk-tensor"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The upstream SheafOfModules.monoidalClosed construction makes tensorLeft G a left adjoint, hence it preserves finite colimits. Symmetry transfers this to tensorRight G. Together with the finite-limit preservation just proved, this is precisely SheafOfModules.IsFlat G.",
+   "uses": [
+    "lem-pc-sheaf-modules-tensor-closed"
+   ],
    "elementary": false
   }
  ],
- "proof_deps": [],
+ "proof_deps": [
+  "def-pc-module-stalk-functor",
+  "lem-pc-intrinsic-flat-module-flat-stalk",
+  "lem-pc-ringed-space-module-stalk-tensor",
+  "lem-pc-sheaf-modules-tensor-closed"
+ ],
  "proof_origin": {
-  "by": "document",
+  "by": "worker",
+  "group": "X3",
+  "date": "2026-10-13",
   "document": "Stacks Project, Morphisms of Schemes and Modules",
-  "place": "Tags 01U4 and 05NE: affine-local flatness over the identity and stalkwise criterion for flat sheaves"
+  "place": "Tags 01U4 and 05NE; affine-to-stalk step split off, followed by a Lean proof using stalk tensor naturality, Mathlib flat tensor exactness and joint reflection of limits."
  },
  "mathlib_searches": [
   {
@@ -118,9 +148,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "R3",
+  "group": "X3",
   "result": "pass",
-  "landing": "20261012T144141-L-2106120",
+  "landing": "20261012T184359-L-4025179",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
