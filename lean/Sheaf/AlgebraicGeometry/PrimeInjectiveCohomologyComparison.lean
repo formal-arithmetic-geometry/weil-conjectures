@@ -7,6 +7,8 @@ module
 
 public import WeilConjectures.SixFunctors.BaseChange.GlobalSections
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
+import Sheaf.AlgebraicGeometry.KilledSheafModuleLift
+import Sheaf.AlgebraicGeometry.ModuleAcyclicCohomologyComparison
 
 /-! # Cohomology comparison from prime-module injective acyclicity
 
@@ -64,6 +66,29 @@ theorem Etale.bijective_cohomologyMap_of_prime_injective_acyclic
           AddCommGrpCat.{u + 1})).obj
             ((i)^*[ModuleCat.{u + 1} (ULift.{u + 1} (ZMod r))].obj J)) q))
     (G : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) (hG : r • 𝟙 G = 0)
-    (q : ℕ) : Function.Bijective (Etale.cohomologyMap i G q) := by sorry
+    (q : ℕ) : Function.Bijective (Etale.cohomologyMap i G q) := by
+  obtain ⟨M, ⟨e⟩⟩ := exists_module_sheaf_of_nsmul_id_eq_zero X r G hG
+  have hM := Etale.bijective_cohomologyMap_of_module_acyclic i r hzero hacyclic M q
+  let eX := (Sheaf.functorH X.smallEtaleTopology q).mapIso e
+  let eY := (Sheaf.functorH Y.smallEtaleTopology q).mapIso
+    (((i)^*[AddCommGrpCat.{u + 1}]).mapIso e)
+  have hX : Function.Bijective (Sheaf.H.map e.hom q) :=
+    (ConcreteCategory.bijective_of_isIso eX.hom)
+  have hY : Function.Bijective
+      (Sheaf.H.map (((i)^*[AddCommGrpCat.{u + 1}]).map e.hom) q) :=
+    (ConcreteCategory.bijective_of_isIso eY.hom)
+  refine ⟨?_, ?_⟩
+  · intro x y hxy
+    obtain ⟨x', rfl⟩ := hX.2 x
+    obtain ⟨y', rfl⟩ := hX.2 y
+    apply congrArg (Sheaf.H.map e.hom q)
+    apply hM.1
+    apply hY.1
+    simpa only [← Etale.cohomologyMap_map] using hxy
+  · intro y
+    obtain ⟨y', rfl⟩ := hY.2 y
+    obtain ⟨x', hx'⟩ := hM.2 y'
+    refine ⟨Sheaf.H.map e.hom q x', ?_⟩
+    rw [Etale.cohomologyMap_map, hx']
 
 end AlgebraicGeometry

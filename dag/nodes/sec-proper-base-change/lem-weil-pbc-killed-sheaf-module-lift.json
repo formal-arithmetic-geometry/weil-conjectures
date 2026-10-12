@@ -1,0 +1,123 @@
+{
+ "id": "lem-weil-pbc-killed-sheaf-module-lift",
+ "kind": "statement",
+ "title": "Lift an annihilated abelian sheaf to constant-ring-valued module sheaves",
+ "statement": "Let $X$ be a scheme [def-weil-pbc-scheme-conventions], $n\\geq0$, and $G$ an abelian sheaf on its small etale site [def-weil-pbc-abelian-etale-sheaves]. If $n\\operatorname{id}_G=0$, then there exists a sheaf $M$ valued in $\\operatorname{Mod}(\\operatorname{ULift}(\\mathbf Z/n))$ [def-weil-pbc-etale-sheaves] whose underlying abelian sheaf is isomorphic to $G$.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/095T",
+  "place": "First step of the parent proof: sectionwise module structure; construction implicit in Tag 03RW"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-pbc-abelian-etale-sheaves",
+  "def-weil-pbc-inverse-image",
+  "def-weil-pbc-etale-cohomology",
+  "def-weil-pbc-cohomology-pullback"
+ ],
+ "proof": [
+  {
+   "text": "Evaluate the annihilation equation at every object and section. Use Mathlib AddCommGroup.zmodModule to equip each section group with its Z/n-module structure and ULift.module for lifted scalars. Additive restriction maps are linear by ZMod.map_smul. Functor laws follow from those of the original sheaf. This is valid also at n=0, n=1 and for the zero sheaf.",
+   "uses": [
+    "def-weil-pbc-abelian-etale-sheaves"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The underlying abelian presheaf is definitionally the original presheaf. ModuleCat forgetting to abelian groups reflects limits, so Presheaf.isSheaf_of_isSheaf_comp proves the module presheaf is a sheaf. Iso.refl gives the claimed underlying-sheaf isomorphism.",
+   "uses": [
+    "def-weil-pbc-etale-sheaves"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-abelian-etale-sheaves",
+  "def-weil-pbc-etale-sheaves"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project, Tags 095T and 03FD; Mathlib Algebra.Module.ZMod",
+  "place": "First step of the parent proof: sectionwise module structure; construction implicit in Tag 03RW"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "An abelian sheaf killed by n can be lifted to a sheaf of ZMod n modules with the same underlying abelian sheaf",
+   "results": "UNAVAILABLE: service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "AddCommGroup.zmodModule",
+   "results": "1 hits; AddCommGroup.zmodModule. No whole sheaf comparison theorem; relevant primitives are used in the Lean proof.",
+   "date": "2026-10-12",
+   "verdict": "no exact match; primitives used when applicable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An abelian sheaf annihilated by n lifts to a sheaf of ZMod n modules; forgetting coefficients recovers the sheaf",
+   "results": "8 hits; SheafOfModules.forgetToSheafModuleCat, instAbelianCondensedMod, instAbelianLightCondMod, SheafOfModules.forgetToSheafModuleCat_obj_val, SheafOfModules.toSheaf, SheafOfModules.toSheafCompSheafToPresheafIso, SheafOfModules.instAbelian, AlgebraicGeometry.Scheme.Modules.instAbelian. No whole sheaf comparison theorem; relevant primitives are used in the Lean proof.",
+   "date": "2026-10-12",
+   "verdict": "no exact match; primitives used when applicable"
+  },
+  {
+   "tool": "grep",
+   "query": "zmodModule|toZModLinearMap",
+   "results": "5 hits; 25, 44, 48, 53, 55. No whole sheaf comparison theorem; relevant primitives are used in the Lean proof.",
+   "date": "2026-10-12",
+   "verdict": "no exact match; primitives used when applicable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PrimeInjectiveCohomologyComparison",
+  "date": "2026-10-12",
+  "group": "U1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-prime-injective-cohomology-comparison",
+   "place": "First step of the parent proof: sectionwise module structure; construction implicit in Tag 03RW",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.KilledSheafModuleLift",
+  "file": "lean/Sheaf/AlgebraicGeometry/KilledSheafModuleLift.lean",
+  "declaration": "AlgebraicGeometry.exists_module_sheaf_of_nsmul_id_eq_zero",
+  "statement": "theorem exists_module_sheaf_of_nsmul_id_eq_zero (X : Scheme.{u}) (n : ℕ)\n    (G : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) (hG : n • 𝟙 G = 0) :\n    ∃ M : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod n))),\n      Nonempty (((sheafCompose _\n        (forget₂ (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod n)))\n          AddCommGrpCat.{u + 1})).obj M) ≅ G)",
+  "branch": "sheaf-dag",
+  "by": "U1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-079e0",
+  "group": "U1",
+  "result": "pass",
+  "landing": "20261012T010707-L-731415",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-079e0",
+  "group": "U1",
+  "result": "pass",
+  "landing": "20261012T010707-L-731415",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered Lean files, node metadata, report, and target signatures match the stage-3 brief; compilation succeeds with only the documented intermediate sorry."
+ }
+}

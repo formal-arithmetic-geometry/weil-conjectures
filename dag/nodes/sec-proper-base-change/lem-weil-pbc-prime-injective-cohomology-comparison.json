@@ -18,51 +18,36 @@
  ],
  "proof": [
   {
-   "text": "The equation r times id G = 0 makes each section group a canonical Z/r-module. Restrictions are linear, so this is a module sheaf, with underlying abelian sheaf canonically G. ULift changes only the universe of the coefficient ring.",
+   "text": "Apply exists_module_sheaf_of_nsmul_id_eq_zero to obtain a module-valued sheaf M and an isomorphism e from its underlying abelian sheaf to G.",
    "uses": [
-    "def-weil-pbc-etale-sheaves",
-    "def-weil-pbc-abelian-etale-sheaves"
+    "lem-weil-pbc-killed-sheaf-module-lift"
    ],
    "elementary": false
   },
   {
-   "text": "Choose an injective resolution in prime-module sheaves. Forgetting to abelian sheaves is exact and its terms are cohomologically acyclic by 03FD. Inverse image is exact; the assumed restriction acyclicity makes the restricted resolution acyclic on Y as well. Leray computes both abelian cohomologies from section complexes.",
+   "text": "Apply bijective_cohomologyMap_of_module_acyclic to M with the stated hzero and hacyclic hypotheses.",
    "uses": [
-    "lem-weil-pbc-module-sheaves-enough-injectives",
-    "lem-weil-pbc-injective-module-abelian-acyclic",
-    "prop-weil-pbc-inverse-image-exact",
-    "lemma-weil-pbc-leray-acyclicity",
-    "def-sp-injective-resolutions"
+    "lem-weil-pbc-module-acyclic-cohomology-comparison"
    ],
    "elementary": false
   },
   {
-   "text": "The assumed global-sections restriction isomorphisms give a termwise isomorphism of these complexes, hence bijections on homology in all degrees. Compare into abelian injective resolutions on X and Y. Naturality of restriction gives the commuting square; homotopy uniqueness makes the induced comparison independent of lifts. Thus these homology maps are the canonical cohomologyMap, rather than unspecified bijections.",
+   "text": "Map e through the cohomology functor on X and map its inverse-image isomorphism through the cohomology functor on Y. These maps are bijective because they are isomorphisms in AddCommGrpCat. The existing proved cohomologyMap_map naturality identity transports both injectivity and surjectivity to G, as written in the Lean proof.",
    "uses": [
-    "def-weil-pbc-cohomology-pullback",
-    "lem-weil-pbc-cohomology-pullback-functorial",
-    "prop-weil-pbc-kinjective-resolutions-exist",
-    "lemma-weil-pbc-leray-acyclicity"
+    "def-weil-pbc-cohomology-pullback"
    ],
-   "elementary": false
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-etale-sheaves",
-  "def-weil-pbc-abelian-etale-sheaves",
-  "lem-weil-pbc-module-sheaves-enough-injectives",
-  "lem-weil-pbc-injective-module-abelian-acyclic",
-  "prop-weil-pbc-inverse-image-exact",
-  "lemma-weil-pbc-leray-acyclicity",
-  "def-sp-injective-resolutions",
-  "def-weil-pbc-cohomology-pullback",
-  "lem-weil-pbc-cohomology-pullback-functorial",
-  "prop-weil-pbc-kinjective-resolutions-exist"
+  "lem-weil-pbc-killed-sheaf-module-lift",
+  "lem-weil-pbc-module-acyclic-cohomology-comparison",
+  "def-weil-pbc-cohomology-pullback"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "Stacks Project, Tag 095T",
-  "place": "Proof, second paragraph: injective-module resolution argument; parent node steps (c)--(d); specialized to constant coefficients and the library Sheaf.H encoding"
+  "document": "Stacks Project, Tags 095T and 03FD",
+  "place": "Second reading by U1: lift to module-valued sheaves, acyclic module comparison, then coefficient-isomorphism naturality"
  },
  "mathlib_searches": [
   {
@@ -136,11 +121,11 @@
  "reviewed_proof": {
   "date": "2026-10-12",
   "by": "L",
-  "reviewer": "X-a3709",
-  "group": "C1",
+  "reviewer": "X-079e0",
+  "group": "U1",
   "result": "pass",
-  "landing": "20261012T003530-L-597800",
+  "landing": "20261012T010707-L-731415",
   "kind": "interface",
-  "note": "independent Codex review: Delivered files compile cleanly; target and existing declarations are unchanged in signature, proofs and DAG metadata align, new sorry statements are documented and represented by nodes, and axiom checks show only permitted axioms plus recorded sorryAx dependencies."
+  "note": "independent Codex review: Delivered Lean files, node metadata, report, and target signatures match the stage-3 brief; compilation succeeds with only the documented intermediate sorry."
  }
 }
