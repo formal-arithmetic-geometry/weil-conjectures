@@ -7655,3 +7655,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 12:31 L: returned deliver/B2/Sheaf.Topology.ConstantSubsheafLowerImageStalks (reviewer RETURN: (reviewer X-e4e39, head e4e39962a) G1: The earlier reuse requirement remains unresolved: moving duplicated proofs into l)
 - 12:31 L: merged deliver/M1/Sheaf.RingTheory.PowerSeriesFieldCohenRegularComplete (stage 3; reviewer PASS; first push; landing 20261012T123141-L-1097992 (proof); batch 20261012T120425; modules 1; new nodes 0)
 - 12:32 L: merged deliver/M2/Sheaf.CategoryTheory.ExactCoupleConvergence (stage 3; reviewer PASS; first push; landing 20261012T123243-L-1102566 (interface); batch 20261012T120425; modules 2; new nodes 1)
+- 12:33 L: returned deliver/Y3/Sheaf.AlgebraicGeometry.EtaleSheafClopenProduct (reviewer RETURN: (reviewer X-0acbe, head 0acbe0653) C1 (brief point 6): Include dag/nodes/sec-curve-estimates/lem-weil-pbc-etale-sheaf-cl)
