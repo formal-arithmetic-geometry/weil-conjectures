@@ -1,0 +1,95 @@
+{
+ "id": "aux-directed-colimit-map",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-sheaves-directed-colimit-sections",
+   "place": "split auxiliary step",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Canonical section maps for directed colimits",
+ "statement": "Canonical section maps for directed colimits.",
+ "source": {
+  "document": "literature/stacks-project/sheaves.tex",
+  "place": "Sheaves Lemma 009F"
+ },
+ "stmt_deps": [],
+ "proof": [
+  {
+   "text": "This is the corresponding sheafification, compactness, or finite-cover argument of Lemma 009F; it is left as a named stage-3 theorem for a subsequent worker.",
+   "uses": [],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sheaves.tex",
+    "place": "Lemma 009F"
+   }
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sheaves.tex",
+  "place": "Lemma 009F"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "LeanSearch",
+   "query": "directed colimit sections sheaf",
+   "verdict": "No matching declaration found; the auxiliary statement is project-specific."
+  },
+  {
+   "tool": "Loogle/LeanFinder",
+   "query": "Function.Injective colimit sheaf sections",
+   "verdict": "No exact match found in Mathlib."
+  },
+  {
+   "tool": "grep",
+   "query": "rg directedColimit sections Mathlib",
+   "verdict": "No matching Mathlib source declaration found."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Topology.SheavesDirectedColimitSections",
+  "date": "2026-10-12",
+  "group": "R2"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "module": "Sheaf.Topology.SheavesDirectedColimitSections",
+  "declaration": "TopCat.directedColimit_sections_map",
+  "file": "lean/Sheaf/Topology/SheavesDirectedColimitSections.lean",
+  "statement": "theorem directedColimit_sections_map (X : TopCat.{u}) (I : Type u) [Preorder I] [Nonempty I] [IsDirected I (· ≤ ·)] (D : I ⥤ TopCat.Sheaf (Type u) X) [HasColimit D] : ∃ Ψ : ∀ (U : Opens X), colimit (D ⋙ (TopCat.Sheaf.forget (Type u) X) ⋙ (evaluation (Opens X)ᵒᵖ (Type u)).obj (op U)) ⟶ (colimit D).obj.obj (op U), ∀ (U : Opens X) (i : I) (s : (D.obj i).obj.obj (op U)), Ψ U (colimit.ι (D ⋙ (TopCat.Sheaf.forget (Type u) X) ⋙ (evaluation (Opens X)ᵒᵖ (Type u)).obj (op U)) i s) = (colimit.ι D i).1.app (op U) s",
+  "branch": "sheaf-dag",
+  "by": "R2",
+  "date": "2026-10-12",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R2",
+  "result": "pass",
+  "landing": "20261012T044753-L-2039905",
+  "kind": "proof",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R2",
+  "result": "pass",
+  "landing": "20261012T044753-L-2039905",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
