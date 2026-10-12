@@ -94,7 +94,41 @@ theorem degreeZeroCohomology_resolution_naturality (T : Scheme.{u})
     (Sheaf.Γ T.smallEtaleTopology AddCommGrpCat.{u + 1}).map φ ≫ z' ≫
       (((Sheaf.Γ T.smallEtaleTopology AddCommGrpCat.{u + 1}).mapHomologicalComplex
         (ComplexShape.up ℤ)).obj I').homologyπ 0 := by
-  sorry
+  let F := Sheaf.Γ T.smallEtaleTopology AddCommGrpCat.{u + 1}
+  let M := F.mapHomologicalComplex (ComplexShape.up ℤ)
+  let K := M.obj ((CochainComplex.singleFunctor _ 0).obj G)
+  let k := F.map (singleObjXSelf (ComplexShape.up ℤ) 0 G).inv
+  have hk : k ≫ K.d 0 1 = 0 := by
+    dsimp [k, K, M]
+    simp
+  let w := K.liftCycles k 1 (by simp) hk
+  have hw : w ≫ K.iCycles 0 = k := by
+    apply liftCycles_i
+  have hs : w ≫ cyclesMap (M.map s) 0 = z := by
+    apply (cancel_mono ((M.obj I).iCycles 0)).1
+    rw [Category.assoc, cyclesMap_i, ← Category.assoc, hw, hz]
+    exact (F.map_comp _ _).symm
+  have hs' : w ≫ cyclesMap (M.map ((CochainComplex.singleFunctor _ 0).map φ ≫ s')) 0 =
+      F.map φ ≫ z' := by
+    apply (cancel_mono ((M.obj I').iCycles 0)).1
+    rw [Category.assoc, cyclesMap_i, ← Category.assoc, hw, Category.assoc, hz']
+    dsimp [k, M, CochainComplex.singleFunctor, CochainComplex.singleFunctors]
+    simp only [Functor.map_comp, comp_f, Functor.mapHomologicalComplex_map_f,
+      single_map_f_self, Category.assoc]
+    rw [← F.map_comp_assoc, Iso.inv_hom_id, F.map_id, Category.id_comp]
+  have hh := (F.mapHomotopy h).homologyMap_eq 0
+  rw [Functor.map_comp, homologyMap_comp] at hh
+  calc
+    _ = w ≫ K.homologyπ 0 ≫ homologyMap (M.map s) 0 ≫
+        homologyMap (M.map a) 0 := by
+      change z ≫ (M.obj I).homologyπ 0 ≫ homologyMap (M.map a) 0 = _
+      rw [← hs]
+      simp only [Category.assoc, homologyπ_naturality_assoc, homologyπ_naturality]
+    _ = w ≫ K.homologyπ 0 ≫
+        homologyMap (M.map ((CochainComplex.singleFunctor _ 0).map φ ≫ s')) 0 := by
+      simpa only [Category.assoc] using congrArg (fun f => w ≫ K.homologyπ 0 ≫ f) hh
+    _ = _ := by
+      rw [homologyπ_naturality, ← Category.assoc, hs', Category.assoc]
 
 /-- The degree-zero pullback formula on the actual complexes computing cohomology.
 Source: Stacks Tag 01FA (blueprint: lem-weil-pbc-cohomology-pullback-degree-zero).
@@ -147,7 +181,54 @@ theorem degreeZeroCohomology_resolution_pullback {X Y : Scheme.{u}} (u : Y ⟶ X
     globalSectionsUpperStarMap AddCommGrpCat.{u + 1} u G ≫ z' ≫
       (((Sheaf.Γ Y.smallEtaleTopology AddCommGrpCat.{u + 1}).mapHomologicalComplex
         (ComplexShape.up ℤ)).obj J).homologyπ 0 := by
-  sorry
+  let F := Sheaf.Γ X.smallEtaleTopology AddCommGrpCat.{u + 1}
+  let F' := Sheaf.Γ Y.smallEtaleTopology AddCommGrpCat.{u + 1}
+  let U := upperStar AddCommGrpCat.{u + 1} u
+  let η : F ⟶ U ⋙ F' :=
+    Functor.whiskerRight (upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} u).unit F ≫
+      (Functor.associator U (lowerStar AddCommGrpCat.{u + 1} u) F).hom ≫
+      Functor.whiskerLeft U (lowerStarCompGlobalSectionsIso AddCommGrpCat.{u + 1} u).hom
+  let b := (NatTrans.mapHomologicalComplex η (ComplexShape.up ℤ)).app I ≫
+    (F'.mapHomologicalComplex (ComplexShape.up ℤ)).map r
+  have hη : η.app G = globalSectionsUpperStarMap AddCommGrpCat.{u + 1} u G := by
+    change F.map ((upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} u).unit.app G) ≫
+      (lowerStarCompGlobalSectionsIso AddCommGrpCat.{u + 1} u).hom.app (U.obj G) = _
+    simp only [lowerStarCompGlobalSectionsIso, Iso.trans_hom, NatTrans.comp_app,
+      Functor.isoWhiskerLeft_hom, Functor.whiskerLeft_app, Iso.symm_hom,
+      globalSectionsUpperStarMap]
+    dsimp only [F, U]
+    erw [← Category.assoc, (Sheaf.ΓNatIsoSheafSections
+      X.smallEtaleTopology AddCommGrpCat.{u + 1} terminalIsTerminal).hom.naturality
+        ((upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} u).unit.app G)]
+    rfl
+  change z ≫ _ ≫ homologyMap b 0 = _
+  rw [homologyπ_naturality, ← Category.assoc]
+  rw [← Category.assoc (globalSectionsUpperStarMap AddCommGrpCat.{u + 1} u G)]
+  apply congrArg (fun f => f ≫
+    (((F'.mapHomologicalComplex (ComplexShape.up ℤ)).obj J).homologyπ 0))
+  apply (cancel_mono
+    (((F'.mapHomologicalComplex (ComplexShape.up ℤ)).obj J).iCycles 0)).1
+  rw [Category.assoc, cyclesMap_i, ← Category.assoc, hz, Category.assoc, hz']
+  change F.map ((singleObjXSelf (ComplexShape.up ℤ) 0 G).inv ≫ s.f 0) ≫
+      (η.app (I.X 0) ≫ F'.map (r.f 0)) =
+    globalSectionsUpperStarMap AddCommGrpCat.{u + 1} u G ≫
+      F'.map (U.map ((singleObjXSelf (ComplexShape.up ℤ) 0 G).inv ≫ s.f 0) ≫ r.f 0)
+  rw [← Category.assoc, η.naturality, Category.assoc, Functor.comp_map,
+    ← F'.map_comp, hη]
+
+private theorem uliftZ_naturality {A B : AddCommGrpCat.{u + 1}}
+    (f : AddCommGrpCat.of (ULift.{u + 1} ℤ) ⟶ A) (k : A ⟶ B) :
+    AddCommGrpCat.uliftZMultiplesAddEquiv B (f ≫ k) =
+      k (AddCommGrpCat.uliftZMultiplesAddEquiv A f) := by
+  rfl
+
+private theorem homEquiv_comparison {C D : Type*} [Category* C] [Category* D]
+    {L L' : C ⥤ D} {R : D ⥤ C} (adj : L ⊣ R) (adj' : L' ⊣ R)
+    (A : C) (B : D) (f : L.obj A ⟶ B) :
+    adj'.homEquiv A B ((Adjunction.leftAdjointUniq adj adj').inv.app A ≫ f) =
+      adj.homEquiv A B f := by
+  rw [Adjunction.leftAdjointUniq_inv_app, adj'.homEquiv_naturality_right,
+    Adjunction.homEquiv_leftAdjointUniq_hom_app, adj.homEquiv_apply]
 
 /-- Under the canonical degree-zero identification, pullback on étale cohomology is
 pullback of a global section by the adjunction unit.
@@ -170,6 +251,34 @@ theorem cohomologyMap_zero_eq_globalSectionsUpperStarMap {X Y : Scheme.{u}}
       ((Sheaf.ΓNatIsoSheafSections Y.smallEtaleTopology AddCommGrpCat.{u + 1}
         terminalIsTerminal).hom.app ((upperStar AddCommGrpCat.{u + 1} u).obj G)
         (globalSectionsUpperStarMap AddCommGrpCat.{u + 1} u G g)) := by
-  sorry
+  apply (Sheaf.H.equiv₀ _ terminalIsTerminal).injective
+  simp only [AddEquiv.apply_symm_apply]
+  rw [cohomologyMap_apply]
+  simp only [Sheaf.H.equiv₀, AddEquiv.symm_trans_apply, AddEquiv.trans_apply]
+  simp only [CategoryTheory.Abelian.Ext.addEquiv₀_symm_apply,
+    CategoryTheory.Abelian.Ext.mapExactFunctor_mk₀, CategoryTheory.Abelian.Ext.mk₀_comp_mk₀]
+  rw [← CategoryTheory.Abelian.Ext.addEquiv₀_symm_apply, AddEquiv.apply_symm_apply]
+  simp only [Adjunction.homAddEquiv_apply, Adjunction.homAddEquiv_symm_apply]
+  simp only [Scheme.upperStarConstantSheafIso, Iso.app_hom, Iso.symm_hom]
+  erw [homEquiv_comparison]
+  rw [Adjunction.homEquiv_ofNatIsoRight_apply, Adjunction.comp_homEquiv]
+  let A := AddCommGrpCat.of (ULift.{u + 1} ℤ)
+  let adjX := constantSheafAdj X.smallEtaleTopology AddCommGrpCat.{u + 1} terminalIsTerminal
+  let f := (adjX.homEquiv A G).symm
+    ((AddCommGrpCat.uliftZMultiplesAddEquiv _).symm
+      ((Sheaf.ΓNatIsoSheafSections _ _ terminalIsTerminal).hom.app G g))
+  change AddCommGrpCat.uliftZMultiplesAddEquiv _
+    (adjX.homEquiv A _ ((upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} u).homEquiv
+      _ _ ((upperStar AddCommGrpCat.{u + 1} u).map f)) ≫
+      (lowerStarCompSheafSectionsTerminalIso AddCommGrpCat.{u + 1} u).hom.app _) = _
+  erw [(upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} u).homEquiv_apply,
+    (upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} u).unit_naturality]
+  rw [Adjunction.homEquiv_naturality_right, Equiv.apply_symm_apply]
+  rw [uliftZ_naturality, uliftZ_naturality, AddEquiv.apply_symm_apply]
+  simp only [globalSectionsUpperStarMap, lowerStarCompSheafSectionsTerminalIso,
+    NatIso.ofComponents_hom_app, Functor.mapIso_hom, Iso.symm_hom,
+    ConcreteCategory.comp_apply]
+  simp only [← ConcreteCategory.comp_apply, Category.assoc, Iso.inv_hom_id_app]
+  rfl
 
 end AlgebraicGeometry.Etale
