@@ -9370,3 +9370,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 20:22 L: merged deliver/H1/Sheaf.Topology.RingedSpaceRGammaDerivedLimit (stage 3; reviewer PASS; first push; landing 20261012T202240-L-704458 (proof); batch 20261012T202227; modules 1; new nodes 0)
 - 20:22 L: merged deliver/H2/Sheaf.AlgebraicGeometry.Morphisms.FiniteEtaleStalkComparisonDescent (stage 3; reviewer PASS; first push; landing 20261012T202240-L-704582 (proof); batch 20261012T202227; modules 1; new nodes 0)
 - 20:22 L: merged deliver/H3/Sheaf.FieldTheory.ExistsPBasis (stage 3; reviewer PASS; first push; landing 20261012T202240-L-704681 (proof); batch 20261012T202227; modules 1; new nodes 0)
+- 20:22 L: merged deliver/J2/Sheaf.RingTheory.FormallySmoothAdicBaseChange (stage 3; reviewer PASS; first push; landing 20261012T202241-L-704827 (interface); batch 20261012T202227; modules 2; new nodes 1)
