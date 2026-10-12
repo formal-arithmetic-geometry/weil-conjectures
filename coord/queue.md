@@ -16,13 +16,13 @@
 
 | node | distance to Mathlib | kind | blockers |
 |---|---|---|---|
-| `def-nagata-relative-gluing-datum-descent` | 2 | state | 7 |
+| `def-nagata-relative-gluing-valid-stage` | 2 | state | 5 |
 | `lem-sc-boundary-cech-injective-middle` | 1 | state | 1 |
 | `lem-sc-hilb-dominating-power` | 1 | state | 0 |
 | `lem-sc-qcoh-complex-alternating-cech-derived-sections` | 1 | state | 0 |
 | `lem-weil-pbc-locally-constant-zero-locus-clopen` | 1 | state | 0 |
 
-Not open yet: 42 nodes that wait for stage 1, 6 nodes that wait for a statement dependency.
+Not open yet: 42 nodes that wait for stage 1, 5 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (54)
 
