@@ -32,68 +32,46 @@
  ],
  "proof": [
   {
-   "text": "For every point $s$ of $S$, the assumed connected geometric fibre over a geometric point above $s$ is nonempty [def-weil-connected-scheme], so $f$ has a point above $s$ [def-weil-geometric-fibre]. Thus $f$ is surjective. Together with the given flatness and quasi-compactness, the singleton family $\\{f:T\\to S\\}$ is an fpqc covering by [def-weil-pbc-fpqc-covering]: for an affine open $V\\subseteq S$, $f^{-1}V$ is quasi-compact by [def-weil-finite-type-morphism], so finitely many affine opens in $f^{-1}V$ cover it and their images cover $V$.",
+   "text": "For each s, connectedness supplies a point x of the chosen geometric fibre. The pullback condition evaluated at x and Scheme.fromSpecResidueField_apply show that the first projection of x maps to s. This proves Surjective f in Lean. Apply Mathlib Scheme.Hom.singleton_mem_fpqcPrecoverage, using Flat f and QuasiCompact f, and Presieve.ofArrows_pUnit to obtain the PUnit-indexed fpqc cover.",
    "uses": [
     "def-weil-connected-scheme",
     "def-weil-geometric-fibre",
-    "def-weil-pbc-fpqc-covering",
     "def-weil-flat-morphism",
-    "def-weil-finite-type-morphism"
+    "def-weil-finite-type-morphism",
+    "def-weil-pbc-fpqc-covering"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Lemma 59.39.3 (Tag 0A3H, label lemma-sections-upstairs), proof, first paragraph and second paragraph's fpqc-covering assertion, lines 5042-5051"
-   }
+   "elementary": true
   },
   {
-   "text": "Let $\\alpha\\in\\Gamma(T,f^{-1}F)$ and let $s$ be any point of $S$. Choose an algebraic closure $\\Omega$ of $\\kappa(s)$ and its geometric point $\\bar s:\\operatorname{Spec}\\Omega\\to S$ [def-weil-geometric-fibre]. Put $T_{\\bar s}=T\\times_S\\operatorname{Spec}\\Omega$. Let $p:T_{\\bar s}\\to T$ and $h:T_{\\bar s}\\to\\operatorname{Spec}\\Omega$ be the projections, so $f\\circ p=\\bar s\\circ h$. By [lem-weil-pbc-sets-etale-inverse-image-composition-units] the restriction $p^{-1}f^{-1}F$ of $f^{-1}F$ to $T_{\\bar s}$ is canonically $(\\bar s\\circ h)^{-1}F$, compatibly with pullback of sections and associatively under further composition (clauses (1), (2)); by [lem-weil-pbc-etale-geometric-fibre-constant-sections] it is the constant sheaf with value $F_{\\bar s}$; since this fibre is connected and nonempty, $\\alpha|_{T_{\\bar s}}$ is the constant section for a unique $a_{\\bar s}\\in F_{\\bar s}$. The fibre of $T\\times_ST$ over $\\bar s$ is $T_{\\bar s}\\times_{\\operatorname{Spec}\\Omega}T_{\\bar s}$. Using again the composition isomorphisms of [lem-weil-pbc-sets-etale-inverse-image-composition-units] to identify the restriction to this product fibre of the pullback of $\\alpha$ along either projection $T\\times_ST\\to T$ with the pullback of $\\alpha|_{T_{\\bar s}}$ along the corresponding projection $T_{\\bar s}\\times_{\\operatorname{Spec}\\Omega}T_{\\bar s}\\to T_{\\bar s}$, naturality in [lem-weil-pbc-etale-geometric-fibre-constant-sections] says that both projection pullbacks of $\\alpha$ restrict to the constant section with value $a_{\\bar s}$ on this product fibre.",
+   "text": "For any section a upstairs, apply etaleSet_section_compatible_of_connected_geometricFibres to hconn, F and a. Its equality is definitionally the singleton hcompat hypothesis of existsUnique_etaleSection_of_fpqc_cover. Apply that existing descent theorem with the constant PUnit-indexed family to obtain a unique section downstairs for each upstairs section.",
    "uses": [
-    "lem-weil-pbc-etale-geometric-fibre-constant-sections",
-    "def-weil-geometric-fibre",
-    "def-weil-connected-scheme",
+    "lem-weil-pbc-etale-connected-fibres-section-compatible",
+    "lem-weil-pbc-etale-sections-fpqc-descent"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Let j be the canonical terminal-etale-object pullback lift, with inverse k the second projection. Prove j followed by k is identity using pullback.lift_snd; prove k followed by j is identity by pullback.hom_ext, pullback.lift_fst, pullback.lift_snd and pullback.condition. Thus restriction along j is bijective. The singleton descent conclusion says its composite with the original adjunction unit has unique preimages, so Function.bijective_iff_existsUnique makes that composite bijective. Cancel the bijective restriction by Function.Bijective.of_comp_iff\\prime.",
+   "uses": [
     "lem-weil-pbc-sets-etale-inverse-image-composition-units"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Lemma 59.39.3 (Tag 0A3H, label lemma-sections-upstairs), proof, second paragraph, lines 5051-5067"
-   }
-  },
-  {
-   "text": "A geometric point of $T\\times_ST$ maps to a point $s$ of $S$ and has an algebraically closed residue field containing $\\kappa(s)$ [def-weil-geometric-point]. Choose an embedding of the algebraic closure $\\Omega$ used in Step 2 into this field over $\\kappa(s)$; the point then factors through the product fibre over $\\bar s$. The two projection pullbacks of $\\alpha$ agree on that fibre by Step 2; since the germ of a section at a geometric point equals, via the bijection of [lem-weil-pbc-sets-etale-inverse-image-stalk-germ] for the inclusion $j$ of the product fibre, the germ of its pullback along $j$ at the lifted geometric point, they have equal germs at every geometric point of $T\\times_ST$. Equality of sections follows directly from [def-weil-pbc-geometric-stalks] and the separated part of the sheaf axiom [def-weil-pbc-etale-sheaf-of-sets]: equality of germs supplies an etale neighbourhood of each geometric point on which they agree, these neighbourhoods cover, and the sheaf axiom makes the sections equal. Applying [lem-weil-pbc-etale-sections-fpqc-descent] to the singleton fpqc covering from Step 1 produces a unique section of $F$ on $S$ pulling back to $\\alpha$. The same uniqueness proves injectivity of the canonical map.",
-   "uses": [
-    "def-weil-pbc-geometric-stalks",
-    "def-weil-geometric-point",
-    "def-weil-pbc-etale-sheaf-of-sets",
-    "lem-weil-pbc-etale-sections-fpqc-descent",
-    "lem-weil-pbc-sets-etale-inverse-image-stalk-germ"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Lemma 59.39.3 (Tag 0A3H, label lemma-sections-upstairs), proof, second paragraph and conclusion, lines 5048-5068; Lemma 59.39.2 (Tag 09XN, label lemma-describe-pullback)"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
   "def-weil-connected-scheme",
+  "def-weil-finite-type-morphism",
+  "def-weil-flat-morphism",
   "def-weil-geometric-fibre",
   "def-weil-pbc-fpqc-covering",
-  "def-weil-flat-morphism",
-  "def-weil-finite-type-morphism",
-  "lem-weil-pbc-etale-geometric-fibre-constant-sections",
-  "def-weil-pbc-geometric-stalks",
-  "def-weil-geometric-point",
-  "def-weil-pbc-etale-sheaf-of-sets",
+  "lem-weil-pbc-etale-connected-fibres-section-compatible",
   "lem-weil-pbc-etale-sections-fpqc-descent",
-  "lem-weil-pbc-sets-etale-inverse-image-composition-units",
-  "lem-weil-pbc-sets-etale-inverse-image-stalk-germ"
+  "lem-weil-pbc-sets-etale-inverse-image-composition-units"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Lemma 59.39.3 (Tag 0A3H, label lemma-sections-upstairs), proof, lines 5042-5068"
+  "place": "Tag 0A3H: surjectivity, singleton fpqc descent and compatibility; the compatibility argument is isolated in lem-weil-pbc-etale-connected-fibres-section-compatible."
  },
  "mathlib_searches": [
   {
@@ -179,5 +157,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F1",
+  "result": "pass",
+  "landing": "20261012T135230-L-1661819",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
