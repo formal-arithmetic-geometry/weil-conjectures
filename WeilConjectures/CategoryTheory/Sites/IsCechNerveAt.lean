@@ -283,7 +283,8 @@ lemma faceD_comp_faceD {P₀ P₁ P₂ : D} (h₂ : IsCechNerveAt g (n + 2) P₂
     (h₁ : IsCechNerveAt g (n + 1) P₁) (h₀ : IsCechNerveAt g n P₀) (F : Dᵒᵖ ⥤ A) :
     h₁.faceD h₀ F ≫ h₂.faceD h₁ F = 0 := by
   simp only [faceD_eq_d, Category.assoc]
-  rw [← F.map_comp_assoc, ← op_comp, Iso.inv_hom_id, op_id, F.map_id, Category.id_comp,
+  rw [← F.map_comp_assoc, ← op_comp, Iso.inv_hom_id, op_id]
+  erw [F.map_id, Category.id_comp,
     HomologicalComplex.d_comp_d_assoc, zero_comp, comp_zero]
 
 /-- The short complex of alternating sums of face maps in degrees `n`, `n + 1`, `n + 2`. -/
@@ -302,11 +303,13 @@ noncomputable def faceDShortComplexIso {P₀ P₁ P₂ : D} (h₂ : IsCechNerveA
     (by
       simp only [faceDShortComplex_f, faceD_eq_d, Functor.mapIso_hom, Iso.op_hom,
         HomologicalComplex.shortComplexFunctor'_obj_f]
-      rw [← F.map_comp_assoc, ← op_comp, Iso.inv_hom_id, op_id, F.map_id, Category.id_comp])
+      rw [← F.map_comp_assoc, ← op_comp, Iso.inv_hom_id, op_id]
+      erw [F.map_id, Category.id_comp])
     (by
       simp only [faceDShortComplex_g, faceD_eq_d, Functor.mapIso_hom, Iso.op_hom,
         HomologicalComplex.shortComplexFunctor'_obj_g]
-      rw [← F.map_comp_assoc, ← op_comp, Iso.inv_hom_id, op_id, F.map_id, Category.id_comp])
+      rw [← F.map_comp_assoc, ← op_comp, Iso.inv_hom_id, op_id]
+      erw [F.map_id, Category.id_comp])
 
 end Preadditive
 

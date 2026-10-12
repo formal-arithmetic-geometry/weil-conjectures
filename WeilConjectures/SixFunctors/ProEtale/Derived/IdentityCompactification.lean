@@ -116,6 +116,7 @@ lemma derivedOpenImmersionLowerShriekProjectionMap_id_comp
   dsimp only [Adjunction.projectionMapTranspose, NatTrans.comp_app]
   erw [Category.assoc, ← hτ]
   dsimp only [Functor.whiskeringLeft₂, Functor.postcompose₂]
+  trace_state
   sorry
 
 end Id

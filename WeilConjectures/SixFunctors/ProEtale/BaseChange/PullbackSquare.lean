@@ -123,8 +123,9 @@ lemma mapDerivedCategorySquareIso_upperStarCompIso_hom_app (sq : CommSq g' f' f 
         (leftDerivedUpperStarComp A f' g).inv.app P =
       (Functor.mapDerivedCategoryTriangleIso (ProEtale.upperStarComp A f' g)).inv.app P ≫
         (leftDerivedUpperStarIsoMapDerivedCategory A (f' ≫ g)).inv.app P := by
-    rw [← cancel_mono ((leftDerivedUpperStarComp A f' g).hom.app P), Category.assoc,
-      Category.assoc, Iso.inv_hom_id_app, Category.comp_id, leftDerivedUpperStarComp_hom_app]
+    rw [← cancel_mono ((leftDerivedUpperStarComp A f' g).hom.app P)]
+    simp only [Category.assoc, Iso.inv_hom_id_app, Category.comp_id]
+    rw [leftDerivedUpperStarComp_hom_app]
     simp only [Category.assoc, Iso.inv_hom_id_app_assoc]
   simp only [leftDerivedUpperStarSquareIso, Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app,
     reassoc_of% hc, leftDerivedUpperStarCongr_hom_app, leftDerivedUpperStarComp_hom_app,

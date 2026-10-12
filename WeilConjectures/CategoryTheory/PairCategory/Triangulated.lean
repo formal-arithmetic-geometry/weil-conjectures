@@ -256,27 +256,30 @@ lemma complete_morphism_incl_of_stage {k m : ι} (h : k ≤ m) {S₁ S₂ : Tria
 /-- TR3 for images of distinguished triangles of a common stage. -/
 lemma complete_morphism_incl {k : ι} {S₁ S₂ : Triangle (F.obj ⟨k⟩)}
     (hS₁ : S₁ ∈ distTriang _) (hS₂ : S₂ ∈ distTriang _)
-    (a : ((incl F k).mapTriangle.obj S₁).obj₁ ⟶ ((incl F k).mapTriangle.obj S₂).obj₁)
-    (b : ((incl F k).mapTriangle.obj S₁).obj₂ ⟶ ((incl F k).mapTriangle.obj S₂).obj₂)
-    (hcomm : ((incl F k).mapTriangle.obj S₁).mor₁ ≫ b = a ≫ ((incl F k).mapTriangle.obj S₂).mor₁) :
+    (a : (incl F k).obj S₁.obj₁ ⟶ (incl F k).obj S₂.obj₁)
+    (b : (incl F k).obj S₁.obj₂ ⟶ (incl F k).obj S₂.obj₂)
+    (hcomm : (incl F k).map S₁.mor₁ ≫ b = a ≫ (incl F k).map S₂.mor₁) :
     ∃ c, ((incl F k).mapTriangle.obj S₁).mor₂ ≫ c = b ≫ ((incl F k).mapTriangle.obj S₂).mor₂ ∧
       ((incl F k).mapTriangle.obj S₁).mor₃ ≫ a⟦(1 : ℤ)⟧' =
         c ≫ ((incl F k).mapTriangle.obj S₂).mor₃ := by
   revert hcomm
-  obtain ⟨m₁, -, h₁, -, a₁, rfl⟩ := exists_homMk_ge a k
-  obtain ⟨m, hm, h₂, -, b₁, rfl⟩ := exists_homMk_ge b m₁
+  obtain ⟨m₁, -, h₁, h₁', a₁, rfl⟩ := exists_homMk_ge a k
+  obtain ⟨m, hm, h₂, h₂', b₁, rfl⟩ := exists_homMk_ge b m₁
   intro hcomm
-  rw [← homMk_trHom (X := (incl F k).obj S₁.obj₁) (Y := (incl F k).obj S₂.obj₁) hm h₁ h₁ h₂ h₂
-    a₁] at hcomm ⊢
-  set a₂ := trHom (X := (incl F k).obj S₁.obj₁) (Y := (incl F k).obj S₂.obj₁) hm h₁ h₁ h₂ h₂ a₁
-  change (incl F k).map S₁.mor₁ ≫ _ = _ ≫ (incl F k).map S₂.mor₁ at hcomm
-  rw [incl_map_eq_homMk h₂, incl_map_eq_homMk h₂, homMk_comp_homMk, homMk_comp_homMk,
+  rw [← homMk_trHom hm h₁ h₁' (h₁.trans hm) (h₁'.trans hm) a₁] at hcomm ⊢
+  generalize trHom hm h₁ h₁' (h₁.trans hm) (h₁'.trans hm) a₁ = a₂ at hcomm ⊢
+  rw [incl_map_eq_homMk (i := k) h₂ S₁.mor₁, incl_map_eq_homMk (i := k) h₂' S₂.mor₁,
+    homMk_comp_homMk, homMk_comp_homMk,
     homMk_eq_homMk_iff] at hcomm
   obtain ⟨m', hm', e⟩ := hcomm
-  rw [trHom_comp, trHom_comp, trHom_transition_map, trHom_transition_map] at e
-  rw [← homMk_trHom hm' h₂ h₂ (h₂.trans hm') (h₂.trans hm') a₂,
-    ← homMk_trHom hm' h₂ h₂ (h₂.trans hm') (h₂.trans hm') b₁]
-  exact complete_morphism_incl_of_stage _ hS₁ hS₂ _ _ e
+  rw [trHom_comp (X := (incl F k).obj S₁.obj₁) (Y := (incl F k).obj S₁.obj₂)
+      (Z := (incl F k).obj S₂.obj₂) hm' _ _ _ _ ((h₂ : k ≤ m).trans hm'),
+    trHom_comp (X := (incl F k).obj S₁.obj₁) (Y := (incl F k).obj S₂.obj₁)
+      (Z := (incl F k).obj S₂.obj₂) hm' _ _ _ _ ((h₂ : k ≤ m).trans hm'),
+    trHom_transition_map, trHom_transition_map] at e
+  rw [← homMk_trHom hm' (h₁.trans hm) (h₁'.trans hm) (h₂.trans hm') (h₂'.trans hm') a₂,
+    ← homMk_trHom hm' h₂ h₂' (h₂.trans hm') (h₂'.trans hm') b₁]
+  exact complete_morphism_incl_of_stage (h₂.trans hm') hS₁ hS₂ _ _ e
 
 lemma complete_morphism_of_mem_distTriangles {T₁ T₂ : Triangle (PairCategory F)}
     (hT₁ : T₁ ∈ distTriangles F) (hT₂ : T₂ ∈ distTriangles F)

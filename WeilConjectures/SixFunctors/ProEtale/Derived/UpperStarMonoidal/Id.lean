@@ -69,8 +69,8 @@ lemma leftDerivedUpperStarId_hom_app_Qh_obj
         Qh.map ((NatTrans.mapHomotopyCategory (upperStarId A X).hom (.up ℤ)).app K ≫
           (Functor.mapHomotopyCategoryIdIso _ (.up ℤ)).hom.app K) := by
   have h₁ := Functor.leftDerivedFunctorNatIso_hom_app_comp_counit _ (upperStarId A X) K
-  have h₂ := (𝟭 (Sheaf (Scheme.ProEt.topology X) A)).leftDerivedFunctorIsoMapDerivedCategory_hom_app_fac
-    K
+  have h₂ := Functor.leftDerivedFunctorIsoMapDerivedCategory_hom_app_fac
+    (𝟭 (Sheaf (Scheme.ProEt.topology X) A)) K
   have h₃ := NatTrans.congr_app
     (congrArg Iso.hom (Functor.mapDerivedCategoryIdIso_factorsh
       (Sheaf (Scheme.ProEt.topology X) A))) K
@@ -143,25 +143,25 @@ lemma leftDerivedUpperStarComp_hom_app_comp_leftDerivedUpperStarId_hom_app (t : 
       (leftDerivedUpperStarCongr A (Category.id_comp t)).hom.app Z := by
   let α : L((𝟙 X ≫ t)^*[A]) ⟶ L((t)^*[A]) :=
     (leftDerivedUpperStarComp A (𝟙 X) t).hom ≫
-      Functor.whiskerLeft L((t)^*[A]) (leftDerivedUpperStarId A X).hom ≫
-        (Functor.rightUnitor _).hom
+      Functor.whiskerLeft L((t)^*[A]) (leftDerivedUpperStarId A X).hom
+  have hα_app (Z : DerivedCategory (Sheaf (Scheme.ProEt.topology Y) A)) :
+      α.app Z = (leftDerivedUpperStarComp A (𝟙 X) t).hom.app Z ≫
+        (leftDerivedUpperStarId A X).hom.app (L((t)^*[A]).obj Z) := rfl
   suffices hα : α = (leftDerivedUpperStarCongr A (Category.id_comp t)).hom by
-    have := NatTrans.congr_app hα Z
-    simpa [α] using this
+    rw [← hα_app, hα]
   refine natTrans_ext_Qh A (fun K ↦ ?_)
   have : IsIso ((t)^*[A].leftDerivedFunctorCounit.app K) := by
     rw [← Functor.leftDerivedFunctorIsoMapDerivedCategory_hom_app_fac]
     infer_instance
-  rw [← cancel_mono ((t)^*[A].leftDerivedFunctorCounit.app K),
+  rw [hα_app, ← cancel_mono ((t)^*[A].leftDerivedFunctorCounit.app K), Category.assoc,
     leftDerivedUpperStarCongr_hom_app_Qh_obj_comp_counit]
-  have hn := (leftDerivedUpperStarId A X).hom.naturality ((t)^*[A].leftDerivedFunctorCounit.app K)
-  simp only [Functor.id_map] at hn
-  simp only [α, NatTrans.comp_app, Functor.whiskerLeft_app, Functor.rightUnitor_hom_app,
-    Category.assoc]
-  erw [Category.id_comp ((t)^*[A].leftDerivedFunctorCounit.app K)]
-  erw [← hn]
-  erw [leftDerivedUpperStarId_hom_app_Qh_obj]
-  rw [
+  have hn : L((𝟙 X)^*[A]).map ((t)^*[A].leftDerivedFunctorCounit.app K) ≫
+        (leftDerivedUpperStarId A X).hom.app
+          (Qh.obj (((t)^*[A].mapHomotopyCategory (.up ℤ)).obj K)) =
+      (leftDerivedUpperStarId A X).hom.app (L((t)^*[A]).obj (Qh.obj K)) ≫
+        (t)^*[A].leftDerivedFunctorCounit.app K :=
+    (leftDerivedUpperStarId A X).hom.naturality _
+  rw [← hn, leftDerivedUpperStarId_hom_app_Qh_obj,
     leftDerivedUpperStarComp_hom_app_Qh_obj_comp_counit_assoc, ← Functor.map_comp,
     ← mapHomotopyCategoryCompHom_upperStarComp_id_left]
 

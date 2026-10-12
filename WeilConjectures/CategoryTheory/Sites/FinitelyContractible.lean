@@ -265,11 +265,10 @@ instance locallyCoverDense_isFinitelyContractible :
     (ObjectProperty.ι J.IsFinitelyContractible).LocallyCoverDense J where
   functorPushforward_functorPullback_mem := by
     intro X T
-    obtain ⟨ι, Y, f, hf, hfT⟩ := X.property T.1 T.2
+    obtain ⟨ι, P, f, hf, hfT⟩ := X.property T.1 T.2
     refine J.superset_covering ?_ hf.mem
     rintro Z _ ⟨W, a, _, ⟨i⟩, rfl⟩
-    trace_state
-    refine ⟨⟨Y i, X.property.of_isFiniteDisjointCover hf i⟩, ObjectProperty.homMk (f i), a,
+    refine ⟨⟨P i, X.property.of_isFiniteDisjointCover hf i⟩, ObjectProperty.homMk (f i), a,
       ?_, rfl⟩
     exact hfT i
 

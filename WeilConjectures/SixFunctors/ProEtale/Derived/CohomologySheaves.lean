@@ -37,22 +37,26 @@ namespace AlgebraicGeometry.ProEtale
 variable (Λ : Type (u + 1)) [CommRing Λ] (Y : Scheme.{u})
 
 /-- `def-weil-derived-cohomology-sheaves`: the `r`-th cohomology sheaf of `K ∈ D(Y_proét, Λ)`. -/
-example (K : DerivedCategory (Sheaf (Scheme.ProEt.topology Y) (ModuleCat.{u + 1} Λ))) (r : ℤ) :
+noncomputable example
+    (K : DerivedCategory (Sheaf (Scheme.ProEt.topology Y) (ModuleCat.{u + 1} Λ))) (r : ℤ) :
     Sheaf (Scheme.ProEt.topology Y) (ModuleCat.{u + 1} Λ) :=
   (DerivedCategory.homologyFunctor _ r).obj K
 
 /-- `def-weil-derived-cohomology-sheaves`: the nonpositive part of the standard t-structure. -/
-example (K : DerivedCategory (Sheaf (Scheme.ProEt.topology Y) (ModuleCat.{u + 1} Λ))) :
+example
+    (K : DerivedCategory (Sheaf (Scheme.ProEt.topology Y) (ModuleCat.{u + 1} Λ))) :
     K.IsLE 0 ↔ ∀ r : ℤ, 0 < r → IsZero ((DerivedCategory.homologyFunctor _ r).obj K) :=
   DerivedCategory.isLE_iff K 0
 
 /-- `def-weil-derived-cohomology-sheaves`: the nonnegative part of the standard t-structure. -/
-example (K : DerivedCategory (Sheaf (Scheme.ProEt.topology Y) (ModuleCat.{u + 1} Λ))) :
+example
+    (K : DerivedCategory (Sheaf (Scheme.ProEt.topology Y) (ModuleCat.{u + 1} Λ))) :
     K.IsGE 0 ↔ ∀ r : ℤ, r < 0 → IsZero ((DerivedCategory.homologyFunctor _ r).obj K) :=
   DerivedCategory.isGE_iff K 0
 
 /-- `def-weil-derived-cohomology-sheaves`: `ℋ^r` is the cohomology of a representing complex. -/
-example (K : CochainComplex (Sheaf (Scheme.ProEt.topology Y) (ModuleCat.{u + 1} Λ)) ℤ) (r : ℤ) :
+noncomputable example
+    (K : CochainComplex (Sheaf (Scheme.ProEt.topology Y) (ModuleCat.{u + 1} Λ)) ℤ) (r : ℤ) :
     (DerivedCategory.homologyFunctor _ r).obj (DerivedCategory.Q.obj K) ≅ K.homology r :=
   (DerivedCategory.homologyFunctorFactors _ r).app K
 
