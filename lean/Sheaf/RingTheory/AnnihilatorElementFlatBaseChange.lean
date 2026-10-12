@@ -44,6 +44,57 @@ theorem annihilator_element_flat_base_change {R : Type u} {S : Type v}
     (φ : R →+* S) (hφ : φ.Flat) (x : R) :
     Module.annihilator S (Ideal.span ({φ x} : Set S)) =
       Ideal.map φ (Module.annihilator R (Ideal.span ({x} : Set R))) := by
-  sorry
+  let : Algebra R S := φ.toAlgebra
+  have : Module.Flat R S := hφ
+  let f : R →ₗ[R] R := LinearMap.mulRight R x
+  let I := LinearMap.ker f
+  let e := TensorProduct.lid R S
+  have hI : I = Module.annihilator R (Ideal.span ({x} : Set R)) := by
+    ext r
+    change r * x = 0 ↔ r ∈ (Submodule.span R ({x} : Set R)).annihilator
+    rw [Submodule.mem_annihilator_span_singleton, smul_eq_mul]
+  have he (t : TensorProduct R R S) : e (f.rTensor S t) = e t * φ x := by
+    induction t with
+    | zero => simp
+    | tmul r s =>
+      change φ (r * x) * s = (φ r * s) * φ x
+      simp [mul_comm, mul_left_comm]
+    | add t t' ht ht' => simp [ht, ht', add_mul]
+  have hex := Module.Flat.rTensor_exact S (LinearMap.exact_subtype_ker_map f)
+  apply le_antisymm
+  · intro s hs
+    have hsx : s * φ x = 0 := by
+      change s ∈ (Submodule.span S ({φ x} : Set S)).annihilator at hs
+      simpa only [smul_eq_mul] using
+        (Submodule.mem_annihilator_span_singleton (φ x) s).mp hs
+    have hz : f.rTensor S (TensorProduct.tmul R (1 : R) s) = 0 := by
+      apply e.injective
+      simpa [e, hsx] using he (TensorProduct.tmul R (1 : R) s)
+    obtain ⟨t, ht⟩ := (hex (TensorProduct.tmul R (1 : R) s)).mp hz
+    have hm : e (I.subtype.rTensor S t) ∈
+        Ideal.map φ (Module.annihilator R (Ideal.span ({x} : Set R))) := by
+      clear ht
+      induction t with
+      | zero => simp
+      | tmul r z =>
+        have hr : (r : R) ∈ Module.annihilator R (Ideal.span ({x} : Set R)) :=
+          hI ▸ r.property
+        have hmap := Ideal.mem_map_of_mem φ hr
+        change φ (r : R) * z ∈ _
+        simpa only [mul_comm] using
+          (Ideal.map φ (Module.annihilator R (Ideal.span ({x} : Set R)))).mul_mem_left z hmap
+      | add t t' ht ht' => simpa using add_mem ht ht'
+    change e (I.subtype.rTensor S t) ∈ _ at hm
+    rw [ht] at hm
+    simpa [e] using hm
+  · rw [Ideal.map_le_iff_le_comap]
+    intro r hr
+    change φ r ∈ (Submodule.span S ({φ x} : Set S)).annihilator
+    rw [Submodule.mem_annihilator_span_singleton, smul_eq_mul, ← map_mul]
+    have hrx : r * x = 0 := by
+      change r ∈ (Submodule.span R ({x} : Set R)).annihilator at hr
+      simpa only [smul_eq_mul] using
+        (Submodule.mem_annihilator_span_singleton x r).mp hr
+    rw [hrx, map_zero]
 
 end RingHom
