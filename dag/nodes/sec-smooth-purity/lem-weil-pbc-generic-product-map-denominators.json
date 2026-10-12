@@ -10,16 +10,26 @@
  "stmt_deps": [],
  "proof": [
   {
-   "text": "Tensor associativity and commutation identify B tensor_A K' with (K tensor_A B) tensor_K K'. The map B tensor_A R to this generic algebra followed by the quotient and e kills every nilpotent, because a product of fields is reduced. Thus it factors through the source reduction, giving f and the pure-tensor identity. For z in L_j, apply e inverse to the vector supported at j with value z. Every element of B tensor_A K' is a finite sum of pure tensors. Write their K' coefficients as fractions over R, multiply the finitely many nonzero denominators, and lift the resulting numerator to B tensor_A R. Passing to the quotient gives a*z = f(x)_j. The product denominator is nonzero: R embeds in its fraction field K'. Empty sums use denominator 1. If r is zero the coordinate assertion is vacuous.",
+   "text": "Compose the two tensor inclusions with the generic quotient and e to obtain an A-algebra map g from B to the product of the L_j. Use AlgHom.liftEquiv and commRight to extend it to an R-algebra map h from B tensor_A R, with h(b tensor a) = a times g(b). Every nilpotent maps to zero in the reduced product of fields. Ideal.Quotient.liftₐ therefore produces f on the source reduction, and the pure-tensor formula proves the required compatibility.",
    "uses": [],
-   "elementary": false
+   "elementary": true
+  },
+  {
+   "text": "Let S be the K'-linear span of the image of h. The generic pure tensor (k tensor b) tensor t is (algebraMap(K,K')(k) times t) times ((1 tensor b) tensor 1). Its image under e after the quotient lies in S, because g(b) = h(b tensor 1). Induction on both tensor factors shows the entire generic algebra maps into S. Lift the vector supported at j with value z using e inverse and quotient surjectivity; it therefore lies in S.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "The proved private helper clear_denominator_of_span clears denominators by span induction. A generator uses denominator 1 and zero uses numerator zero. For a sum with denominators a,b use denominator a*b and numerator b*x+a*w. For a scalar c=n/d and a vector with denominator a use denominator d*a and numerator n*x. R is a domain by injectivity into its fraction field, so all these denominators are nonzero. Apply the helper to the supported vector and evaluate at j; take the quotient class of the resulting numerator. The r=0 case is vacuous.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [],
  "proof_origin": {
   "by": "worker",
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-weil-pbc-finite-pushforward-generic-constructible.md",
-  "place": "proof steps 4--9"
+  "place": "proof steps 4--9; direct tensor-map and span-induction implementation by M2"
  },
  "mathlib_searches": [
   {
@@ -97,10 +107,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "A3",
+  "group": "M2",
   "result": "pass",
-  "landing": "20261012T173806-L-3289958",
-  "kind": "interface",
+  "landing": "20261012T184318-L-4009866",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
