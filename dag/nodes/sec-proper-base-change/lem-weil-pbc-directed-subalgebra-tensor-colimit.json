@@ -1,0 +1,162 @@
+{
+ "id": "lem-weil-pbc-directed-subalgebra-tensor-colimit",
+ "kind": "statement",
+ "title": "Tensor base changes of a directed union form a filtered ring colimit",
+ "statement": "Let R be a commutative ring, A0 a Z-subalgebra of R, and B a commutative A0-algebra [lem-weil-pbc-algebra-tensor-pushout-universal-property]. Let P be a nonempty directed collection of Z-subalgebras A of R, each containing A0, which covers R elementwise. There is a small filtered category I, a diagram F:I to CommRing with a colimit [def-weil-pbc-category-colimit], and a ring isomorphism colim F to R tensor over A0 B. Each stage is ring-isomorphic to A tensor over A0 B for an A belonging to P with its inclusion-induced A0-algebra structure. All types live in the common universe of R and B. There are no smoothness, normality or finite-type assumptions.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 033C, third paragraph (the displayed tensor colimit); Tags 00CV and 05G3 (algebra tensor product universal property), with the directed-union universal property expanded"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-category-colimit",
+  "lem-weil-pbc-algebra-tensor-pushout-universal-property"
+ ],
+ "proof": [
+  {
+   "text": "Let I be the subalgebras A belonging to P with the inherited inclusion order. The nonempty directed hypotheses make it small filtered. Give every A the A0-algebra structure from A0 <= A. Define F(A)=A tensor over A0 B, with tensor maps induced by inclusions [lem-weil-pbc-algebra-tensor-map-ring-hom]. Define the cocone U with vertex R tensor over A0 B and tensor maps induced by inclusions A to R.",
+   "uses": [
+    "def-weil-pbc-category-colimit",
+    "lem-weil-pbc-algebra-tensor-map-ring-hom"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The covering hypothesis gives supremum A=top. Thus [lem-weil-pbc-directed-subalgebra-ring-colimit] makes the inclusion cocone for A to R colimiting.",
+   "uses": [
+    "lem-weil-pbc-directed-subalgebra-ring-colimit"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For a ring cocone c on F, restriction to A tensor 1 gives a compatible family of ring maps out of A. The base colimit gives r:R to c.pt. Restriction to 1 tensor B gives b:B to c.pt independently of the stage, since any two stages have a common upper bound. The tensor balancing relation shows r and b agree on A0. Define the A0-algebra structure on c.pt using b and use [lem-weil-pbc-algebra-tensor-pushout-universal-property] to obtain a ring map m:R tensor B to c.pt.",
+   "uses": [
+    "lem-weil-pbc-directed-subalgebra-ring-colimit",
+    "lem-weil-pbc-algebra-tensor-pushout-universal-property"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The composites of m with the tensor coprojections agree with c on each tensor factor, so ringHom_ext proves factorization. For uniqueness, agreement on the R tensor 1 factor is tested in a stage containing its R element, using the cover; agreement on 1 tensor B is tested in any one stage. Tensor extensionality proves equality of the two maps.",
+   "uses": [
+    "lem-weil-pbc-algebra-tensor-pushout-universal-property"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The explicit cocone is colimiting. Choose HasColimit from it and compare it with the chosen categorical colimit to obtain the ring equivalence. Each stage is definitionally A tensor B; all types fit in the universe of R and B. No smoothness, normality or finite-generation hypothesis was used.",
+   "uses": [
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-category-colimit",
+  "lem-weil-pbc-algebra-tensor-map-ring-hom",
+  "lem-weil-pbc-directed-subalgebra-ring-colimit",
+  "lem-weil-pbc-algebra-tensor-pushout-universal-property"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "agent": "A3",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 033C, third paragraph (the displayed tensor colimit); Tags 00CV and 05G3 (algebra tensor product universal property), with the directed-union universal property expanded"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Finite-type normal subalgebras, or directed-subalgebra ring/tensor colimits",
+   "results": "The LeanSearch service returned Internal Server Error. This is unavailable, not evidence of absence.",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Tensor products over a fixed subalgebra commute with a directed union of subalgebras as a colimit of commutative rings",
+   "results": "Hits include Submodule.FG.rTensor.directLimit, Algebra.TensorProduct.adjoin_tmul_eq_top, and algEquivIncludeRange. None supplies the categorical ring-colimit statement with stage tensor equivalences.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Subalgebra, CategoryTheory.Limits.IsColimit",
+   "results": "No hits.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "subalgebraCocone|exists_tensorProduct_colimit_of_directed_cover; tensorProduct / colimit in Mathlib RingTheory and algebra-category modules",
+   "results": "No direct tensor-union ring theorem. Source CommRingCat.isColimitSubalgebraCocone supplies the base union colimit; Mathlib Algebra.TensorProduct.map, lift, and ringHom_ext supply the tensor construction.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.SmoothNormalDomainApproximation",
+  "date": "2026-10-12",
+  "group": "A3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-normal-constant-generic",
+   "place": "Step 4 (normality of the strict henselian local ring), via the proof of smooth normality, Tag 033C, third paragraph: normal Noetherian subrings and colimit of their base changes.",
+   "via": [
+    "lem-weil-pbc-smooth-normal-domain-approximation",
+    "lem-weil-pbc-smooth-over-normal-ring-normal",
+    "lem-weil-pbc-etale-over-normal-ring-normal",
+    "lem-weil-pbc-etale-colimit-normal-local-domain"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.DirectedSubalgebraTensorColimit",
+  "file": "lean/Sheaf/RingTheory/DirectedSubalgebraTensorColimit.lean",
+  "declaration": "Subalgebra.exists_tensorProduct_colimit_of_directed_cover",
+  "statement": "theorem exists_tensorProduct_colimit_of_directed_cover {R : Type u} [CommRing R] (A0 : Subalgebra ℤ R) (B : Type u) [CommRing B] [Algebra A0 B] (P : Set (Subalgebra ℤ R)) (hne : P.Nonempty) (hdir : DirectedOn (· ≤ ·) P) (hcover : ∀ x : R, ∃ A ∈ P, x ∈ A) (hle : ∀ A ∈ P, A0 ≤ A) : ∃ (I : Type u) (_ : SmallCategory I) (_ : IsFiltered I) (F : I ⥤ CommRingCat.{u}) (_ : HasColimit F), Nonempty ((colimit F : CommRingCat.{u}) ≃+* (R ⊗[A0] B)) ∧ ∀ i : I, ∃ (A : Subalgebra ℤ R) (_ : A ∈ P) (_ : Algebra A0 A), Nonempty ((A ⊗[A0] B) ≃+* F.obj i)",
+  "branch": "sheaf-dag",
+  "by": "A3",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A3",
+  "result": "pass",
+  "landing": "20261012T085212-L-2442",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A3",
+  "result": "pass",
+  "landing": "20261012T085212-L-2442",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

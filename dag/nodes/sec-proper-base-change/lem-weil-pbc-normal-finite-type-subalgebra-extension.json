@@ -1,0 +1,154 @@
+{
+ "id": "lem-weil-pbc-normal-finite-type-subalgebra-extension",
+ "kind": "statement",
+ "title": "A finite-type subalgebra of a normal domain has a normal finite-type extension inside it",
+ "statement": "Let R be an integrally closed integral domain [def-weil-pbc-normal-ring] and C a finitely generated Z-subalgebra of R [def-weil-pbc-finite-type-algebra]. Then there is a Z-subalgebra A of R containing C, finitely generated over Z, and integrally closed in its own fraction field. No algebraicity assumption on R over C is imposed. All rings have the universe of R.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 033C (lemma-normal-goes-up), third paragraph; details of the normalization and directed-union construction"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-normal-ring",
+  "def-weil-pbc-finite-type-algebra"
+ ],
+ "proof": [
+  {
+   "text": "Let K be the fraction field of C and N its integral closure in K. Since C is finite type over Z, [lem-weil-pbc-finite-type-z-domain-normalization-finite] gives Module.Finite C N. A module-finite algebra is finite type, and finite type is transitive, so N is finite type over Z.",
+   "uses": [
+    "lem-weil-pbc-finite-type-z-domain-normalization-finite",
+    "def-weil-pbc-finite-type-algebra"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The normalization N is an integrally closed domain by [lem-weil-pbc-integral-closure-algebraic-extension-normal], applied to the trivial extension of K. In Lean use integralClosure.isIntegrallyClosedOfFiniteExtension K.",
+   "uses": [
+    "lem-weil-pbc-integral-closure-algebraic-extension-normal"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Embed K in L=Frac(R) by the injective inclusion of C into R. Restrict this map to N. Each image is integral over C and then over R, so lies in the image of R in L because R is integrally closed. Codomain-restrict to that image and invert the isomorphism R to its image to obtain an injective integer-algebra map h:N to R.",
+   "uses": [
+    "def-weil-pbc-normal-ring"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Take A=h.range. The image contains C because h agrees with the inclusion on C. The isomorphism N to A transfers integral closure, while the surjection N to A transfers finite type over Z. Convert finite type to Subalgebra.FG. This proves all three assertions.",
+   "uses": [
+    "def-weil-pbc-finite-type-algebra"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-type-z-domain-normalization-finite",
+  "def-weil-pbc-finite-type-algebra",
+  "lem-weil-pbc-integral-closure-algebraic-extension-normal",
+  "def-weil-pbc-normal-ring"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "agent": "A3",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 033C, third paragraph; detailed realization of the indicated construction"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Finite-type normal subalgebras, or directed-subalgebra ring/tensor colimits",
+   "results": "The LeanSearch service returned Internal Server Error. This is unavailable, not evidence of absence.",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every finitely generated integer subalgebra of an integrally closed domain is contained in a finitely generated integrally closed integer subalgebra",
+   "results": "Hits include mem_integralClosure_iff_mem_fg, integral closures of Dedekind domains, and Ring.NormalClosure. None states this extension theorem.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "exists.*(fg.*integrallyClosed|integrallyClosed.*fg), normal subalgebra, across Mathlib RingTheory, WeilConjectures and Sheaf",
+   "results": "No extension theorem found. The normalization-finiteness theorem already exists in Sheaf.RingTheory.FiniteTypeZDomainNormalizationFinite and is used rather than restated.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsIntegrallyClosed, Subalgebra",
+   "results": "Second reading: 12 hits, including integralClosure.isIntegrallyClosedOfFiniteExtension (already used), integralClosure_eq_bot and intersection/localization normality. None gives a finitely generated normal extension subalgebra.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.SmoothNormalDomainApproximation",
+  "date": "2026-10-12",
+  "group": "A3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-normal-constant-generic",
+   "place": "Step 4 (normality of the strict henselian local ring), via the proof of smooth normality, Tag 033C, third paragraph: normal Noetherian subrings and colimit of their base changes.",
+   "via": [
+    "lem-weil-pbc-smooth-normal-domain-approximation",
+    "lem-weil-pbc-smooth-over-normal-ring-normal",
+    "lem-weil-pbc-etale-over-normal-ring-normal",
+    "lem-weil-pbc-etale-colimit-normal-local-domain"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.NormalFiniteTypeSubalgebraExtension",
+  "file": "lean/Sheaf/RingTheory/NormalFiniteTypeSubalgebraExtension.lean",
+  "declaration": "Subalgebra.exists_fg_integrallyClosed_extension",
+  "statement": "theorem exists_fg_integrallyClosed_extension {R : Type u} [CommRing R] [IsDomain R] [IsIntegrallyClosed R] (C : Subalgebra ℤ R) (hC : C.FG) : ∃ A : Subalgebra ℤ R, C ≤ A ∧ A.FG ∧ IsIntegrallyClosed A",
+  "branch": "sheaf-dag",
+  "by": "A3",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A3",
+  "result": "pass",
+  "landing": "20261012T085212-L-2442",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A3",
+  "result": "pass",
+  "landing": "20261012T085212-L-2442",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
