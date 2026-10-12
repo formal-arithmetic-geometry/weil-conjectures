@@ -15,12 +15,31 @@
  ],
  "proof": [
   {
-   "text": "Evaluate both transformations on a sheaf and a global section. The inverse of\n`lowerStarCompGlobalSectionsIso` views the section on the terminal object over Y.\nThe pulled germ is its germ at the image of t, transported to the inverse-image stalk.\nExpand the exchange as the mate of the pullback-square isomorphism. The adjunction\ntriangle identities cancel the counit and the unit on the Y side. What remains is the\nunit into g'_*g'^* applied to the original section, followed by the terminal-object\nidentification over X' and its germ over Y'. Expand the stalk identification into\n`sheafPullbackIso`, `sheafFiberComapIso` and `pointSmallEtaleComapIso`; their unit-germ\nformulas give this equality already on each representative in the stalk colimit.\nThe terminal-section identifications give exactly the three remaining components of b.\nThis uses only commutativity of the square and works for separably closed Ω.",
+   "text": "Prove the canonical pullback-unit germ formula by expanding upperStarCompSheafFiberIso into sheafPullbackIso, sheafFiberComapIso, and pointSmallEtaleComapIso. Use the existing toPresheafFiber_sheafFiberIso_inv_app and toPresheafFiber_sheafFiberComapIso_hom_app formulas, naturality of germs, and Adjunction.unit_leftAdjointUniq_hom_app. Identify terminal evaluation with the global-section restriction map by expanding the adjunction definitions. Transport the identity neighbourhoods to the chosen terminal objects using toPresheafFiber_w; uniqueness of arrows into the base-changed terminal object identifies their pointed germs. This proves pulledGlobalGerm_app: the pulled germ equals global sections of the pullback unit followed by the pushforward/global-sections identification and the target global germ.",
+   "uses": [
+    "def-weil-pbc-derived-global-germ"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Prove lowerStarCompGlobalSectionsIso_comp for an arbitrary composable pair of scheme maps. Postcompose with terminal evaluation, expand lowerStarCompGlobalSectionsIso, use naturality of terminal evaluation, and cancel the intervening evaluation isomorphisms. The remaining restrictions of the original sheaf agree because both site morphisms have the same source and a terminal target. Apply this composition formula to both sides of the commutative square and cancel the composition isomorphisms to obtain squareLowerStarIso_globalSections.",
+   "uses": [
+    "def-weil-pbc-underived-exchange"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Evaluate a and b on a sheaf P and remove the identity associators. Replace the pulled germ using pulledGlobalGerm_app. Naturality of globalGerm and lowerStarCompGlobalSectionsIso moves the stalk of baseChangeMap next to the adjunction unit. Apply the proved library formula unit_map_baseChangeMap_app, which expresses this composite as f_* of the g-prime unit followed by squareLowerStarIso. Naturality of the inverse global-sections identification for f moves the g-prime unit to the front.",
    "uses": [
     "def-weil-pbc-derived-global-germ",
     "def-weil-pbc-underived-exchange"
    ],
    "elementary": false
+  },
+  {
+   "text": "Whisker the equality squareLowerStarIso_globalSections on the left by the inverse identification for f and on the right by the inverse identification for f-prime followed by globalGerm(t). Cancel both adjacent inverse isomorphisms. The resulting equality is the remaining equality of components of a and b. Natural-transformation extensionality finishes.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
@@ -28,9 +47,9 @@
   "def-weil-pbc-underived-exchange"
  ],
  "proof_origin": {
-  "by": "T3 stage-3 worker, repaired by independent second reader",
-  "document": "Stacks Project and the library derived-functor unit formulas",
-  "place": "Categorical expansion of the canonical comparisons; full proof in the Lean docstring"
+  "by": "T2 stage-3 worker",
+  "document": "Stacks Project and the proved library unit/germ formulas",
+  "place": "Tags 095T and 01F8; canonical germ expansion and the pushforward unit form unit_map_baseChangeMap_app"
  },
  "mathlib_searches": [
   {
@@ -104,9 +123,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "T3",
+  "group": "T2",
   "result": "pass",
-  "landing": "20261012T132339-L-1432371",
-  "kind": "interface"
+  "landing": "20261012T153012-L-2351466",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
