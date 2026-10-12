@@ -311,28 +311,47 @@ def _check(c):
         return "error", repr(e)[:300]
 
 
-def run_checks(cands: list[dict]) -> list[tuple]:
-    """_check for every candidate, POOL of them at a time, each in a process of its own (tools/queue.py hides the
-    standard module `queue`, so neither multiprocessing nor concurrent.futures can be imported from tools/)."""
-    res, running, i = [None] * len(cands), {}, 0
-    with tempfile.TemporaryDirectory(prefix="sheaf-batch-") as td:
-        while i < len(cands) or running:
-            while i < len(cands) and len(running) < POOL:
-                out = pathlib.Path(td) / f"{i}.pkl"
-                p = subprocess.Popen([sys.executable, str(pathlib.Path(__file__).resolve()), "check-one", str(out)], cwd=ROOT,
-                                     stdin=subprocess.PIPE, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
-                p.stdin.write(json.dumps(cands[i]).encode()); p.stdin.close()
-                running[i] = (p, out); i += 1
-            for k, (p, out) in list(running.items()):
-                if p.poll() is None:
-                    continue
-                del running[k]
-                try:
-                    res[k] = pickle.loads(out.read_bytes())
-                except Exception:  # noqa: BLE001
-                    res[k] = ("error", f"the check process ended with exit code {p.returncode}")
+class Pre:
+    """The checks, POOL deliveries at a time, each in a process of its own (tools/queue.py hides the standard module
+    `queue`, so neither multiprocessing nor concurrent.futures can be imported from tools/). The loop calls pump()
+    while a batch waits for its build, so the next batch is checked by the time it may land; a result is kept by the
+    head it was computed for, and the landing compares the head and the library files with it again under the lock."""
+
+    def __init__(self):
+        self.dir = pathlib.Path(tempfile.mkdtemp(prefix="sheaf-batch-"))
+        self.running, self.done = {}, {}
+
+    def pump(self, cands: list[dict]) -> None:
+        for h, (p, out) in list(self.running.items()):
+            if p.poll() is None:
+                continue
+            del self.running[h]
+            try:
+                self.done[h] = pickle.loads(out.read_bytes())
+            except Exception:  # noqa: BLE001
+                self.done[h] = ("error", f"the check process ended with exit code {p.returncode}")
+            out.unlink(missing_ok=True)
+        live = {c["head"] for c in cands}
+        for h in [h for h in self.done if h not in live]:
+            del self.done[h]
+        for c in cands:
+            h = c["head"]
+            if len(self.running) >= POOL:
+                break
+            if h in self.done or h in self.running:
+                continue
+            out = self.dir / f"{h}.pkl"
+            p = subprocess.Popen([sys.executable, str(pathlib.Path(__file__).resolve()), "check-one", str(out)], cwd=ROOT,
+                                 stdin=subprocess.PIPE, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+            p.stdin.write(json.dumps(c).encode()); p.stdin.close()
+            self.running[h] = (p, out)
+
+    def results(self, cands: list[dict]) -> list[tuple]:
+        while True:
+            self.pump(cands)
+            if all(c["head"] in self.done for c in cands):
+                return [self.done[c["head"]] for c in cands]
             time.sleep(0.2)
-    return res
 
 
 # ---------------------------------------------------------------- the landing, under the lock
@@ -452,11 +471,13 @@ def land_batch(cache: dict, log) -> dict | None:
     if not cands:
         return None
     t0 = time.time()
-    res = run_checks(cands)
+    pre = cache.setdefault("_pre", Pre())
+    res = pre.results(cands)
     plans, taken = [], {}
     for c, (st, x) in zip(cands, res):
         g, item, head = c["group"], c["item"], c["head"]
         if st == "ok":
+            x = dict(x)
             clash = [p for p in x["paths"] if p in taken]
             if clash:
                 log("waits for the next batch", g, item, head[:9], "|", f"{clash[0]} is written by {taken[clash[0]]} in this batch")
@@ -465,13 +486,16 @@ def land_batch(cache: dict, log) -> dict | None:
                 taken[p] = key(c)
             plans.append(x)
         elif st == "refuse":
+            pre.done.pop(head, None)
             give_back(g, item, head, x, log)
         elif st == "wait":
+            pre.done.pop(head, None)
             if x.startswith("class "):
                 cache[head] = "READER"
             else:
                 log("not in this batch", g, item, head[:9], "|", x[:300])
         else:
+            pre.done.pop(head, None)
             cache[head] = "ERROR"
             log("check error, left for a reader", g, item, head[:9], "|", x)
     if not plans:
@@ -490,6 +514,7 @@ def land_batch(cache: dict, log) -> dict | None:
                 by_module.setdefault(l["module"], []).append(nid)
         for plan in plans:
             g, item, head = plan["group"], plan["item"], plan["head"]
+            pre.done.pop(head, None)     # landed, or checked again
             ids = [n for n in by_module.get(item, []) if n not in plan["D"]["nodes"]]
             plan["item_nodes"] = [p for p in (md.node_path(n) for n in ids) if p]
             try:
@@ -812,6 +837,8 @@ def step(cache: dict, log) -> str:
             f"cycle {b['cycle_seconds']} s, {b['round']} round(s) of triage")
         return "verified"
     write_json(OPEN, b)
+    if "_pre" in cache:
+        cache["_pre"].pump(candidates(cache))       # the next batch is checked while this one is built
     if b.get("triage"):
         t = b["triage"]
         v = read_json(pathlib.Path(t["dir"]) / "verdict.json")
