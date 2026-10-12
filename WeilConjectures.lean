@@ -454,7 +454,6 @@ public import WeilConjectures.AlgebraicGeometry.Sites.DivisorSequence
 public import WeilConjectures.AlgebraicGeometry.Sites.EtaleEssentiallySmall
 public import WeilConjectures.AlgebraicGeometry.Sites.EtaleHom
 public import WeilConjectures.AlgebraicGeometry.Sites.EtaleIsoTorsor
-public import WeilConjectures.AlgebraicGeometry.Sites.EtaleMayerVietoris
 public import WeilConjectures.AlgebraicGeometry.Sites.EtalePicard
 public import WeilConjectures.AlgebraicGeometry.Sites.EtalePicardMul
 public import WeilConjectures.AlgebraicGeometry.Sites.EtaleRigidity
@@ -490,7 +489,6 @@ public import WeilConjectures.AlgebraicGeometry.Sites.Hilbert90
 public import WeilConjectures.AlgebraicGeometry.Sites.Hilbert90Etale
 public import WeilConjectures.AlgebraicGeometry.Sites.Kummer
 public import WeilConjectures.AlgebraicGeometry.Sites.ModulePointFunctions
-public import WeilConjectures.AlgebraicGeometry.Sites.PairHenselizationCohomology
 public import WeilConjectures.AlgebraicGeometry.Sites.PointCohomology
 public import WeilConjectures.AlgebraicGeometry.Sites.PointConstantSheaf
 public import WeilConjectures.AlgebraicGeometry.Sites.PointFunctions
@@ -1626,7 +1624,6 @@ public import WeilConjectures.RingTheory.GenericIrreducibility
 public import WeilConjectures.RingTheory.GradedAlgebra.LinearPair
 public import WeilConjectures.RingTheory.GradedAlgebra.Standard
 public import WeilConjectures.RingTheory.Henselian.EtaleRetraction
-public import WeilConjectures.RingTheory.Henselian.PairHenselization
 public import WeilConjectures.RingTheory.HopfAlgebra.Cartier
 public import WeilConjectures.RingTheory.HopfAlgebra.Etale
 public import WeilConjectures.RingTheory.HopfAlgebra.GeneralLinearGroup
