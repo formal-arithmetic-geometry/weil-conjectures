@@ -28,81 +28,52 @@
  ],
  "proof": [
   {
-   "text": "*$h$ is qcqs.* $\\operatorname{Spec}K$ is affine, hence quasi-compact and quasi-separated, and $X$ is quasi-separated. By [lem-weil-pbc-qcqs-morphism-permanence] (1) (a morphism from a quasi-compact scheme to a quasi-separated scheme is quasi-compact; a morphism from a quasi-separated scheme is quasi-separated) $h:\\operatorname{Spec}K\\to X$ is quasi-compact and quasi-separated. So the normalization of $X$ in $\\operatorname{Spec}K$ is defined.",
+   "text": "Let h be the canonical composite Spec K -> X. Spec K is affine, hence compact and quasi-separated. Since X is quasi-separated, quasiCompact_of_compactSpace and QuasiSeparated.of_quasiSeparatedSpace give the two required morphism properties.",
    "uses": [
     "lem-weil-pbc-qcqs-morphism-permanence",
     "def-weil-affine-spectrum"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/schemes.tex",
-    "place": "Lemma 03GI (lemma-quasi-compact-permanence) and Lemma 01KV (lemma-compose-after-separated), applied with T -> Spec Z, as in the last paragraph of the proof of Morphisms Lemma 035I"
-   }
+   "elementary": false
   },
   {
-   "text": "*The normalization; $Y$ integral.* Apply [lem-weil-pbc-relative-normalization] to $f=h$, $T=\\operatorname{Spec}K$: we get $Y:=X'$, $\\nu:Y\\to X$ and $g:=f':\\operatorname{Spec}K\\to Y$ with $h=\\nu\\circ g$, $\\nu$ integral (i), $g$ dominant (ii), and the affine description (iii). $\\operatorname{Spec}K$ is an integral scheme [def-pc-integral-scheme] (it is nonempty and its only nonempty open is the whole space, with ring $K$, a domain), so $Y$ is integral by (iv). (Stacks 09Z6 normalizes the reduced closure $Z$ of $x$ instead; by the last clause of Morphisms 035I applied to the integral morphism $Z\\to X$ through which $h$ factors, the normalization of $Z$ in $\\operatorname{Spec}K$ is the same $X$-scheme, so nothing changes; working over $X$ avoids $Z$.)",
+   "text": "Take Y = h.normalization, nu = h.fromNormalization and g = h.toNormalization. The relative-normalization instances give IsIntegralHom nu and IsIntegral Y, and toNormalization_fromNormalization gives h = g >> nu.",
    "uses": [
     "lem-weil-pbc-relative-normalization",
     "def-pc-integral-scheme"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/morphisms.tex",
-    "place": "Definition 035H (line 13910), Lemma 035I (line 13936), Lemma 0AXN (line 14067); literature/stacks-project/etale-cohomology.tex proof of Lemma 09Z6, lines 12967-12975"
-   }
+   "elementary": false
   },
   {
-   "text": "*The ring of $Y$ over an affine open.* Let $U\\subseteq X$ be an affine open, $A=\\mathcal O_X(U)$. The set $h^{-1}(U)$ is open in the one-point space $\\operatorname{Spec}K$, so it is empty if $x\\notin U$ and all of $\\operatorname{Spec}K$ if $x\\in U$. If $x\\notin U$, then $B=\\Gamma(h^{-1}(U),\\mathcal O)=0$, its integral closure $A'_U$ is $0$, and by [lem-weil-pbc-relative-normalization] (iii) $\\nu^{-1}(U)$ is the affine scheme with ring $0$, i.e. $\\nu^{-1}(U)=\\emptyset$. If $x\\in U$, let $\\mathfrak p\\subset A$ be the prime corresponding to $x$. By [lem-weil-pbc-spec-field-point-residue-field] (2) the morphism $\\operatorname{Spec}\\kappa(x)\\to X$ factors through $U\\cong\\operatorname{Spec}A$ via the ring map $A\\to\\kappa(\\mathfrak p)=\\kappa(x)$, so by [lem-weil-pbc-morphism-into-affine-scheme] the map $h^\\sharp:A\\to\\Gamma(\\operatorname{Spec}K,\\mathcal O)=K$ is $\\psi:A\\to\\kappa(\\mathfrak p)\\to K$, whose kernel is $\\mathfrak p$ (a map of fields is injective; [lem-weil-pbc-spec-field-point-residue-field] (1)). Put $A_0=A/\\mathfrak p$, a domain with fraction field $\\kappa(\\mathfrak p)$ ([lem-weil-pbc-spec-field-point-residue-field] (1)); $\\psi$ induces $A_0\\subseteq\\kappa(\\mathfrak p)\\subseteq K$. An element $k\\in K$ is integral over $A$ (via $\\psi$) iff it is integral over $A_0$: a monic equation over $A$ maps to one over $A_0$, and a monic equation over $A_0$ lifts coefficientwise to one over $A$ with the same value at $k$, since $A$ acts on $K$ through $A_0$. So $A'_U$ = the integral closure of $A$ in $K$ = the integral closure of $A_0$ in $K$. As $K/\\kappa(\\mathfrak p)$ is finite and $\\kappa(\\mathfrak p)=\\operatorname{Frac}(A_0)$, [lem-weil-pbc-integral-closure-finite-extension-normal] gives: $A'_U$ is a normal domain and $K$ is a fraction field of $A'_U$ via the inclusion $A'_U\\subseteq K$. By [lem-weil-pbc-relative-normalization] (iii), $\\nu^{-1}(U)$ is affine with $\\Gamma(\\nu^{-1}(U),\\mathcal O_Y)\\cong A'_U$, under which $g^\\sharp$ on $\\nu^{-1}(U)$ is the inclusion $A'_U\\subseteq K$.",
-   "uses": [
-    "lem-weil-pbc-relative-normalization",
-    "lem-weil-pbc-spec-field-point-residue-field",
-    "lem-weil-pbc-morphism-into-affine-scheme",
-    "lem-weil-pbc-integral-closure-finite-extension-normal",
-    "def-weil-affine-spectrum",
-    "def-weil-residue-field"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/morphisms.tex",
-    "place": "proof of Lemma 035L (line 14170 ff.: U' = Spec(A'_i) with A'_i the integral closure of A in B_i = Γ(V_i, O), here V = Spec K, B = K; Algebra Lemma 034L); Lemma 035F (line 13845); the fraction-field clause written out by the agent (Etale Cohomology 09Z6, line 12976, calls it clear)"
-   }
-  },
-  {
-   "text": "*$Y$ is normal.* $\\operatorname{Spec}K$ is an integral scheme (step 2) whose only local ring is $K$ (the localization of $K$ at its zero ideal), a field, hence an integrally closed domain; $h$ is qcqs (step 1). By [lem-weil-pbc-normalization-normal-stalks] every local ring $\\mathcal O_{Y,y}$ is an integrally closed domain. (Concretely, by step 3: every $y\\in Y$ lies in $\\nu^{-1}(U)\\cong\\operatorname{Spec}A'_U$ for an affine open $U\\ni\\nu(y)$, necessarily with $x\\in U$, and $\\mathcal O_{Y,y}$ is a localization of the normal domain $A'_U$.)",
+   "text": "The unique source stalk is isomorphic to K by stalkClosedPointIso and is integrally closed. Apply Scheme.Hom.isIntegrallyClosed_stalk_normalization to h. The domain property of each stalk of Y follows from IsIntegral Y.",
    "uses": [
     "lem-weil-pbc-normalization-normal-stalks"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/morphisms.tex",
-    "place": "Lemma 035L (lemma-normal-normalization, line 14170), as cited in literature/stacks-project/etale-cohomology.tex proof of Lemma 09Z6, line 12974-12975 ('Y is a normal integral scheme')"
-   }
+   "elementary": false
   },
   {
-   "text": "*$g$ hits the generic point.* Let $\\xi$ be the point of $\\operatorname{Spec}K$. $Y$ is integral (step 2), so irreducible, with a unique generic point $\\eta_Y$ by [lem-weil-pbc-scheme-sober]. Since $g$ is dominant (step 2), $\\overline{\\{g(\\xi)\\}}=\\overline{g(\\operatorname{Spec}K)}=Y$, so $g(\\xi)$ is a generic point of the irreducible closed set $Y$, and $g(\\xi)=\\eta_Y$ by uniqueness.",
+   "text": "Dominance of g gives closure(range g) = Y. Since Spec K has one point xi, range g = {g(xi)}; thus g(xi) is generic. IsGenericPoint.eq identifies it with genericPoint Y, whose stalk is a field by Scheme.functionField. No existence theorem beyond the existing scheme generic-point API is needed.",
    "uses": [
+    "lem-weil-pbc-relative-normalization",
     "lem-weil-pbc-scheme-sober",
     "def-pc-integral-scheme"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/morphisms.tex",
-    "place": "Lemma 035I (f' dominant), Lemma 035L ('Y -> X' is dominant'); Schemes Lemma 01IS (lemma-scheme-sober)"
-   }
+   "elementary": false
   },
   {
-   "text": "*The function field is $K$.* Choose an affine open $U\\subseteq X$ containing $x$. Then $\\nu(\\eta_Y)=\\nu(g(\\xi))=h(\\xi)=x\\in U$, so $\\eta_Y\\in V:=\\nu^{-1}(U)$, and $g^{-1}(V)=h^{-1}(U)=\\operatorname{Spec}K$. By step 3, $V$ is affine with ring $A'_U$, and the restriction $g:\\operatorname{Spec}K\\to V$ corresponds ([lem-weil-pbc-morphism-into-affine-scheme]) to the inclusion $\\iota:A'_U\\subseteq K$, which is injective with $K$ a fraction field of the domain $A'_U$ (step 3). By [lem-weil-pbc-spec-field-point-residue-field] (3), $g(\\xi)$ is the generic point $(0)$ of $V=\\operatorname{Spec}A'_U$ and the induced map of residue fields $\\kappa_V(\\eta_Y)\\to K$ is an isomorphism. As $V$ is open in $Y$, $\\mathcal O_{V,\\eta_Y}=\\mathcal O_{Y,\\eta_Y}$, so $\\kappa(\\eta_Y)\\to K$ induced by $g$ is an isomorphism: $g$ is the inclusion of the generic point of $Y$ and $K$ is the function field of $Y$. This proves (b), and (a) is steps 2 and 4.",
+   "text": "Choose an affine open U containing h(xi)=x and identify sections on h^{-1}(U)=Spec K with K by theta. The proved private helper finite_residue_extension_integral_quotients identifies h.app U >> theta.hom with the germ at x followed by the residue map and the extension map, using germ_stalkClosedPointTo and germ_stalkClosedPointTo_Spec_fromSpecStalk. Give the stalk and K the compatible algebra structures. The finite field extension is integral; the residue map is surjective, hence integral, so every l in K is integral over the stalk by isIntegral_trans. IsAffineOpen.isLocalization_stalk and IsIntegral.exists_multiple_integral_of_isLocalization produce b outside the affine prime such that b*l is integral over Gamma(X,U). The image of b is a unit in the stalk, and therefore has nonzero image in K by IsLocalization.map_units and IsUnit.map. Both b*l and b are integral over Gamma(X,U), and (b*l)/b=l. This directly proves the quotient calculation, without identifying A/p or invoking a separate fraction-field theorem.",
    "uses": [
-    "lem-weil-pbc-morphism-into-affine-scheme",
-    "lem-weil-pbc-spec-field-point-residue-field",
+    "def-weil-residue-field",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Put psi=stalkClosedPointTo g. For any m integral over Gamma(X,U), theta.inv m is integral in the source sections by IsIntegral.map_of_comp_eq. Apply normalizationObjIso.inv to this integral element to obtain a section s of Y above U. The equality normalizationObjIso_hom_val, followed by germ_stalkClosedPointTo g, shows psi(germ(s))=m. Thus every integral numerator and denominator from the previous step is in the image of psi. The source of psi is a field, so psi preserves division; this proves surjectivity, and field-map injectivity gives bijectivity. Passing through the surjective residue map gives an isomorphism delta from the residue field of Y at g(xi) to K. The analogous descended map delta0 from the residue field of Spec K to K is an isomorphism using stalkClosedPointIso. The equalities residue_residueFieldMap and residue_descResidueField, cancelled against the epimorphic residue map of Y, show g.residueFieldMap xi >> delta0 = delta. IsIso.of_isIso_comp_right now gives the required residue-field isomorphism.",
+   "uses": [
     "lem-weil-pbc-relative-normalization",
     "def-weil-residue-field"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "proof of Lemma 09Z6, line 12976-12977 ('As K/kappa(x) is a finite extension, it is clear that K is the function field of Y. Denote g : Spec(K) -> Y the inclusion'); the argument is written out by the agent"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
@@ -110,18 +81,15 @@
   "def-weil-affine-spectrum",
   "lem-weil-pbc-relative-normalization",
   "def-pc-integral-scheme",
-  "lem-weil-pbc-spec-field-point-residue-field",
-  "lem-weil-pbc-morphism-into-affine-scheme",
-  "lem-weil-pbc-integral-closure-finite-extension-normal",
-  "def-weil-residue-field",
   "lem-weil-pbc-normalization-normal-stalks",
-  "lem-weil-pbc-scheme-sober"
+  "lem-weil-pbc-scheme-sober",
+  "def-weil-residue-field"
  ],
  "proof_origin": {
-  "by": "document",
-  "document": "literature/stacks-project/morphisms.tex",
-  "place": "Definition 035H, Lemmas 035F, 035I, 0AXN, 035L and its proof; literature/stacks-project/etale-cohomology.tex proof of Lemma 09Z6 (lines 12967-12977)",
-  "note": "the identification of the function field with K (steps 3 and 6), which 09Z6 calls clear, is written out by the agent"
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Lemma 09Z6 (lemma-constructible-maps-into-constant), proof, normalization and function-field paragraph; relative normalization as in Morphisms 035H, 035I and 035L",
+  "note": "Q1 stage 3: fully checked Lean proof. Replaces the planned prime-quotient and affine residue-field calculation by integrality over the affine stalk and Mathlib denominator clearing; no new sorry or new public statement."
  },
  "mathlib_searches": [
   {
@@ -215,5 +183,15 @@
   "group": "E1",
   "result": "fix",
   "note": "QuasiSeparatedSpace X (qs scheme); h = Spec.map(algebraMap κ(x)→K) ≫ fromSpecResidueField with Module.Finite; QC∧QS h; ∃Y ν g, IsIntegralHom ν, h = g≫ν; AlgebraicGeometry.IsIntegral Y (#check); stalks IsDomain∧IsIntegrallyClosed (NORMAL RING domain form); IsGenericPoint η univ, g pt = η; IsIso residueFieldMap at closedPoint = κ(η)≅K; FIX: let h inlined, docstring garble"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-c3f36",
+  "group": "Q1",
+  "result": "pass",
+  "landing": "20261012T060751-L-2913766",
+  "kind": "interface",
+  "note": "independent Codex review: Matched the unchanged theorem with its node, the proof with revised dependencies, and the import change with both users; clean compilation and both axiom probes show only propext, Classical.choice, Quot.sound."
  }
 }
