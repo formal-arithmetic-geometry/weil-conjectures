@@ -73,6 +73,14 @@ lemma shiftedHomEquiv_comp (A : C) {N N' : C} (q : ℤ)
   congr 2
   exact (singleFunctorιIso C 0).hom.naturality g
 
+lemma shiftedHomEquiv_precomp {A A' : C} (N : C) (q : ℤ) (g : A' ⟶ A)
+    (f : (singleFunctor C 0).obj A ⟶ ((singleFunctor C 0).obj N)⟦q⟧) :
+    shiftedHomEquiv A' N q ((singleFunctor C 0).map g ≫ f) =
+      (DerivedCategory.singleFunctor C 0).map g ≫ shiftedHomEquiv A N q f := by
+  simp only [shiftedHomEquiv_apply, Functor.map_comp, Category.assoc]
+  rw [Iso.app_inv, Iso.app_inv]
+  exact ((singleFunctorιIso C 0).inv.naturality_assoc g _).symm
+
 /-- Maps `A[0] ⟶ N[0]⟦q⟧` in `D⁺(C)` vanish for `q < 0`. -/
 lemma subsingleton_shiftedHom_of_neg (A N : C) (q : ℤ) (hq : q < 0) :
     Subsingleton ((singleFunctor C 0).obj A ⟶ ((singleFunctor C 0).obj N)⟦q⟧) := by
@@ -105,6 +113,20 @@ lemma shiftedHomAddEquivExt_comp (A : C) {N N' : C} (n : ℕ)
   simp only [shiftedHomAddEquivExt, AddEquiv.trans_apply, AddEquiv.coe_mk]
   rw [key, key]
   exact shiftedHomEquiv_comp A n f g
+
+lemma shiftedHomAddEquivExt_precomp {A A' : C} (N : C) (n : ℕ) (g : A' ⟶ A)
+    (f : (singleFunctor C 0).obj A ⟶ ((singleFunctor C 0).obj N)⟦(n : ℤ)⟧) :
+    shiftedHomAddEquivExt A' N n ((singleFunctor C 0).map g ≫ f) =
+      (Ext.mk₀ g).comp (shiftedHomAddEquivExt A N n f) (zero_add n) := by
+  have key {A : C} (x : ShiftedHom ((DerivedCategory.singleFunctor C 0).obj A)
+      ((DerivedCategory.singleFunctor C 0).obj N) (n : ℤ)) :
+      (Ext.homAddEquiv.symm x : Ext.{w} A N n).hom = x :=
+    Ext.homAddEquiv.apply_symm_apply x
+  refine (Ext.homAddEquiv (X := A') (Y := N) (n := n)).injective ?_
+  rw [Ext.homAddEquiv_apply, Ext.homAddEquiv_apply, Ext.comp_hom, Ext.mk₀_hom]
+  simp only [shiftedHomAddEquivExt, AddEquiv.trans_apply, AddEquiv.coe_mk]
+  rw [key, key, ShiftedHom.mk₀_comp]
+  exact shiftedHomEquiv_precomp N n g f
 
 section Colimits
 
