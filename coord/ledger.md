@@ -8089,3 +8089,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 14:41 L: merged deliver/F3/Sheaf.AlgebraicGeometry.NilpotentBaseChangeIdempotents (stage 3; reviewer PASS; first push; landing 20261012T144109-L-2094358 (proof); batch 20261012T144049; modules 1; new nodes 0)
 - 14:41 L: merged deliver/F3/Sheaf.CategoryTheory.GrothendieckResolutionUnitComparison (stage 3; reviewer PASS; first push; landing 20261012T144109-L-2094475 (interface); batch 20261012T144049; modules 4; new nodes 3)
 - 14:41 L: merged deliver/F3/Sheaf.FieldTheory.FieldTensorUniqueMinimalPrime (stage 3; reviewer PASS; after a return; landing 20261012T144110-L-2094623 (interface); batch 20261012T144049; modules 3; new nodes 2)
+- 14:41 L: merged deliver/F3/Sheaf.Paper.EtaleKInjectivePullbackAbutment (stage 3; reviewer PASS; first push; landing 20261012T144110-L-2094772 (interface); batch 20261012T144049; modules 2; new nodes 1)

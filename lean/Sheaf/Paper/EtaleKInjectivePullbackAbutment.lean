@@ -7,12 +7,8 @@ module
 
 public import Sheaf.Paper.EtaleTermwiseHypercohomology
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStar
-import Sheaf.Algebra.Homology.KInjectiveComparisonPrinciple
-import Sheaf.AlgebraicGeometry.CohomologyPullbackDerivedUnit
-import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Comp
-import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
-import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
-import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
+
+import Sheaf.Paper.EtaleKInjectiveUnitLeray
 
 /-! # K-injective computation of the étale pullback abutment
 
@@ -84,6 +80,72 @@ theorem etaleKInjective_pullback_abutment
           (rightDerivedGlobalSections AddCommGrpCat.{uNatural + 1} Y).map
             ((upperStar AddCommGrpCat.{uNatural + 1} f).mapDerivedCategoryFactors.hom.app K ≫
               DerivedCategory.Q.map v)) := by
-  sorry
+  have : ρ.complex.IsKInjective := ρ.isKInjective
+  have : σ.complex.IsKInjective := σ.isKInjective
+  have : QuasiIso ρ.map := ρ.quasiIso
+  have : QuasiIso σ.map := σ.quasiIso
+  let G := Sheaf.Γ X.smallEtaleTopology AddCommGrpCat.{uNatural + 1}
+  let H := Sheaf.Γ Y.smallEtaleTopology AddCommGrpCat.{uNatural + 1}
+  let U := (upperStar AddCommGrpCat.{uNatural + 1} f).mapDerivedCategory
+  let adj := mapDerivedUpperStarLowerStarAdjunction AddCommGrpCat.{uNatural + 1} f
+  let e := rightDerivedLowerStarCompRightDerivedGlobalSectionsIso
+    AddCommGrpCat.{uNatural + 1} f
+  let β : G.rightDerivedFunctor ⟶ U ⋙ H.rightDerivedFunctor :=
+    (Functor.leftUnitor G.rightDerivedFunctor).inv ≫
+      Functor.whiskerRight adj.unit G.rightDerivedFunctor ≫
+      (Functor.associator _ _ _).hom ≫ Functor.whiskerLeft U e.hom
+  let a := G.rightDerivedFunctor.mapIso (asIso (DerivedCategory.Q.map ρ.map)) ≪≫
+    G.rightDerivedFunctorObjQIso ρ.complex
+  let b := H.rightDerivedFunctor.mapIso (asIso (DerivedCategory.Q.map σ.map)) ≪≫
+    H.rightDerivedFunctorObjQIso σ.complex
+  have hunit : (G.rightDerivedFunctorObjQIso ρ.complex).hom ≫ DerivedCategory.Q.map w ≫
+    (H.rightDerivedFunctorObjQIso σ.complex).inv =
+      β.app (DerivedCategory.Q.obj ρ.complex) ≫
+        H.rightDerivedFunctor.map
+          ((upperStar AddCommGrpCat.{uNatural + 1} f).mapDerivedCategoryFactors.hom.app
+            ρ.complex ≫ DerivedCategory.Q.map j)  := by
+    simpa only [β, G, H, U, adj, e, rightDerivedGlobalSections, NatTrans.comp_app,
+      Functor.whiskerRight_app,
+      Functor.whiskerLeft_app, Functor.leftUnitor_inv_app,
+      Functor.associator_hom_app, Category.id_comp, Category.comp_id, Category.assoc]
+      using etaleKInjective_unit_leray f ρ.complex σ.complex j w hw
+  have hq := DerivedCategory.Q_map_eq_of_homotopy _ hj.some
+  have hfac := Functor.mapDerivedCategoryFactors_hom_naturality
+    (upperStar AddCommGrpCat.{uNatural + 1} f) ρ.map
+  have hnat := β.naturality (DerivedCategory.Q.map ρ.map)
+  dsimp only [Functor.comp_map] at hnat
+  have ht : a.hom ≫ DerivedCategory.Q.map w ≫ b.inv =
+      β.app (DerivedCategory.Q.obj K) ≫ H.rightDerivedFunctor.map
+        ((upperStar AddCommGrpCat.{uNatural + 1} f).mapDerivedCategoryFactors.hom.app K ≫
+          DerivedCategory.Q.map v) := by
+    dsimp only [a, b, Iso.trans_hom, Iso.trans_inv, Functor.mapIso_hom,
+      Functor.mapIso_inv, asIso_hom, asIso_inv]
+    simp only [Category.assoc]
+    rw [reassoc_of% hunit, reassoc_of% hnat]
+    rw [← Functor.map_comp, ← Functor.map_comp]
+    congr 1
+    congr 1
+    simp only [Category.assoc]
+    rw [reassoc_of% hfac]
+    rw [← Functor.map_comp_assoc, hq, Functor.map_comp]
+    simp
+  let T := DerivedCategory.homologyFunctor AddCommGrpCat.{uNatural + 1} n
+  let c := (DerivedCategory.homologyFunctorFactors AddCommGrpCat.{uNatural + 1} n).app
+    ((G.mapHomologicalComplex (ComplexShape.up ℤ)).obj ρ.complex)
+  let d := (DerivedCategory.homologyFunctorFactors AddCommGrpCat.{uNatural + 1} n).app
+    ((H.mapHomologicalComplex (ComplexShape.up ℤ)).obj σ.complex)
+  have hn := DerivedCategory.homologyFunctorFactors_hom_naturality w n
+  change T.map (DerivedCategory.Q.map w) ≫ d.hom =
+    c.hom ≫ HomologicalComplex.homologyMap w n at hn
+  change (T.mapIso a ≪≫ c).hom ≫ HomologicalComplex.homologyMap w n ≫
+    (T.mapIso b ≪≫ d).inv = _
+  simp only [Iso.trans_hom, Iso.trans_inv, Functor.mapIso_hom, Functor.mapIso_inv,
+    Category.assoc]
+  rw [← Category.assoc c.hom, ← hn]
+  simp only [Category.assoc, Iso.hom_inv_id_assoc]
+  rw [← Functor.map_comp, ← Functor.map_comp, ht]
+  simp only [β, G, H, U, adj, e, T, rightDerivedGlobalSections, NatTrans.comp_app,
+    Functor.whiskerRight_app, Functor.whiskerLeft_app, Functor.leftUnitor_inv_app,
+    Functor.associator_hom_app, Category.id_comp, Category.assoc]
 
 end AlgebraicGeometry.Etale
