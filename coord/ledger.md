@@ -6840,3 +6840,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 08:52 L: merged deliver/G1/Sheaf.AlgebraicGeometry.GrothendieckExistence (stage 3; reviewer PASS; first push; landing 20261012T085240-L-15135 (interface); batch 20261012T085205; modules 4; new nodes 3)
 - 08:52 L: merged deliver/G1/Sheaf.ConstructibleSheaf.ModuleConstantOfSetPullback (stage 3; reviewer PASS; first push; landing 20261012T085240-L-15295 (proof); batch 20261012T085205; modules 1; new nodes 0)
 - 08:52 L: merged deliver/G1/Sheaf.ConstructibleSheaf.TorsorModuleDescentEquivalence (stage 3; reviewer PASS; first push; landing 20261012T085241-L-15409 (interface); batch 20261012T085205; modules 5; new nodes 4)
+- 08:52 L: merged deliver/G2/Sheaf.Algebra.Category.ModuleCat.TorSymmetry (stage 3; reviewer PASS; first push; landing 20261012T085241-L-15527 (interface); batch 20261012T085205; modules 4; new nodes 3)

@@ -30,113 +30,62 @@
  ],
  "proof": [
   {
-   "text": "Setup. Choose projective resolutions $\\cdots\\to P_1\\xrightarrow{d^P_1}P_0\\xrightarrow{\\varepsilon}M\\to0$ of $M$ and $\\cdots\\to Q_1\\xrightarrow{d^Q_1}Q_0\\xrightarrow{\\eta}N\\to0$ of $N$; by [def-weil-pbc-tor-modules] $\\operatorname{Tor}^R_i(M,N)\\cong H_i(P_\\bullet\\otimes_RN)$ and $\\operatorname{Tor}^R_i(N,M)\\cong H_i(Q_\\bullet\\otimes_RM)$ canonically ($\\iota_{P,N}$, $\\iota_{Q,M}$), independently of the choices. Form the double complex $A_{i,j}=P_i\\otimes_RQ_j$ ($i,j\\ge0$) [def-weil-pbc-module-tensor-product] with $d_{i,j}=d^P_i\\otimes1_{Q_j}:A_{i,j}\\to A_{i-1,j}$ and $\\delta_{i,j}=1_{P_i}\\otimes d^Q_j:A_{i,j}\\to A_{i,j-1}$. Then $d\\circ d=(d^Pd^P)\\otimes1=0$, $\\delta\\circ\\delta=1\\otimes(d^Qd^Q)=0$, and $\\delta_{i-1,j}d_{i,j}=d^P_i\\otimes d^Q_j=d_{i,j-1}\\delta_{i,j}$ by functoriality of $\\otimes$ in each factor; all maps are $R$-linear.",
+   "text": "Construct the tensor bicomplex of projective resolutions by [def-weil-pbc-tensor-bicomplex]. Its rows and columns are exact in positive degrees: each resolution term is projective, hence flat, and tensoring preserves the exact consecutive differentials. The zero-index cases are excluded by the positive-degree hypotheses.",
    "uses": [
+    "def-weil-pbc-tensor-bicomplex",
     "def-weil-pbc-tor-modules",
-    "def-weil-pbc-module-tensor-product"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, Lemma Tag 00M3 (lemma-tor-left-right), proof, first paragraph, lines 18542-18555 (there with free resolutions $F_\\bullet$, $G_\\bullet$; only the flatness of the terms (step 2) and the lifting of maps (step 7) are used, both of which hold for projective resolutions)"
-   }
-  },
-  {
-   "text": "Rows and columns are exact in positive degrees. Each $Q_j$ is projective, hence flat [lem-weil-pbc-projective-module-flat]. For $i\\ge1$ the sequence $P_{i+1}\\to P_i\\to P_{i-1}$ is exact (for $i=1$: $P_2\\to P_1\\to P_0$; exactness of the resolution [def-weil-pbc-exact-sequence]), so by [lem-weil-pbc-flat-tensor-exact] applied with the flat module $Q_j$, $P_{i+1}\\otimes Q_j\\to P_i\\otimes Q_j\\to P_{i-1}\\otimes Q_j$ is exact: row $j$ of $A$ is exact at $A_{i,j}$ for all $i\\ge1$. Symmetrically, each $P_i$ is flat and $Q_{j+1}\\to Q_j\\to Q_{j-1}$ is exact for $j\\ge1$, so column $i$ is exact at $A_{i,j}$ for all $j\\ge1$. Hence $A$ satisfies hypotheses (1) and (2) of [lem-weil-pbc-double-complex-cokernel-homology-iso].",
-   "uses": [
     "lem-weil-pbc-projective-module-flat",
-    "def-weil-pbc-exact-sequence",
     "lem-weil-pbc-flat-tensor-exact",
-    "lem-weil-pbc-double-complex-cokernel-homology-iso"
+    "def-weil-pbc-exact-sequence"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, Lemma Tag 00M3 (lemma-tor-left-right), proof, second paragraph, lines 18557-18563 ('Since each $G_j$ is free, and hence flat we see that each row of the double complex is exact except in homological degree 0 ...')"
-   }
+   "elementary": false
   },
   {
-   "text": "The two cokernel complexes. Since $P_1\\xrightarrow{d^P_1}P_0\\xrightarrow{\\varepsilon}M\\to0$ is exact, [lem-weil-pbc-tensor-right-exact] (tensoring with $Q_j$) shows that $P_1\\otimes Q_j\\to P_0\\otimes Q_j\\xrightarrow{\\varepsilon\\otimes1}M\\otimes Q_j\\to0$ is exact, so $\\varepsilon\\otimes1_{Q_j}$ induces an isomorphism $A^{\\mathrm{rt}}_j=\\operatorname{Coker}(d_{1,j})\\xrightarrow{\\sim}M\\otimes_RQ_j$. Under these isomorphisms the differential induced by $\\delta_{0,j}=1_{P_0}\\otimes d^Q_j$ becomes $1_M\\otimes d^Q_j$, because $(\\varepsilon\\otimes1)\\circ(1\\otimes d^Q_j)=\\varepsilon\\otimes d^Q_j=(1\\otimes d^Q_j)\\circ(\\varepsilon\\otimes1)$. So $A^{\\mathrm{rt}}_\\bullet\\cong M\\otimes_RQ_\\bullet$ as chain complexes [def-weil-pbc-chain-complex-tensor-module] (the tensor complex with factors in the other order, which is defined in the same way). In exactly the same way, $Q_1\\to Q_0\\xrightarrow{\\eta}N\\to0$ exact and [lem-weil-pbc-tensor-right-exact] give $A^{\\mathrm{up}}_i=\\operatorname{Coker}(\\delta_{i,1})\\xrightarrow{\\sim}P_i\\otimes_RN$ via $1_{P_i}\\otimes\\eta$, compatible with the differentials $d^P_i\\otimes1$: $A^{\\mathrm{up}}_\\bullet\\cong P_\\bullet\\otimes_RN$.",
+   "text": "Use [lem-weil-pbc-tensor-resolution-column-cokernel-iso] and [lem-weil-pbc-tensor-resolution-row-cokernel-iso] for the natural chain isomorphisms U(A)≅P tensor N and R(A)≅Q tensor M (the latter includes the factor swap). Apply the homology functor to these isomorphisms and compose with [lem-weil-pbc-double-complex-cokernel-homology-iso] and the canonical projective-resolution computations [def-weil-pbc-tor-modules] to form the components σ(M,N).",
    "uses": [
-    "lem-weil-pbc-tensor-right-exact",
-    "def-weil-pbc-chain-complex-tensor-module",
-    "def-weil-pbc-module-chain-complex-homology"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, Lemma Tag 00M3 (lemma-tor-left-right), proof, third paragraph, lines 18565-18576 (computation of $R(A)_\\bullet=M\\otimes_RG_\\bullet$ and $U(A)_\\bullet=F_\\bullet\\otimes_RN$)"
-   }
-  },
-  {
-   "text": "Comparison. By step 2, [lem-weil-pbc-double-complex-cokernel-homology-iso] gives $R$-linear isomorphisms $\\theta^A_i:H_i(A^{\\mathrm{up}}_\\bullet)\\xrightarrow{\\sim}H_i(A^{\\mathrm{rt}}_\\bullet)$ for all $i\\ge0$; with step 3 this is an $R$-linear isomorphism $H_i(P_\\bullet\\otimes_RN)\\cong H_i(M\\otimes_RQ_\\bullet)$ (homology of isomorphic complexes being isomorphic [def-weil-pbc-module-chain-complex-homology]).",
-   "uses": [
+    "lem-weil-pbc-tensor-resolution-column-cokernel-iso",
+    "lem-weil-pbc-tensor-resolution-row-cokernel-iso",
     "lem-weil-pbc-double-complex-cokernel-homology-iso",
-    "def-weil-pbc-module-chain-complex-homology"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, Lemma Tag 00M3 (lemma-tor-left-right), proof, display lines 18577-18589, third equality, 'Here the third equality is Lemma lemma-no-spectral-sequence'"
-   }
-  },
-  {
-   "text": "Swapping the factors. The isomorphisms $\\tau_j=\\tau_{M,Q_j}:M\\otimes_RQ_j\\to Q_j\\otimes_RM$ of [lem-weil-pbc-module-tensor-comm] satisfy $\\tau_{j-1}\\circ(1_M\\otimes d^Q_j)=(d^Q_j\\otimes1_M)\\circ\\tau_j$ by its naturality clause (with $f=1_M$, $g=d^Q_j$), so they form an isomorphism of chain complexes $M\\otimes_RQ_\\bullet\\cong Q_\\bullet\\otimes_RM$ and induce $R$-linear isomorphisms $H_i(M\\otimes_RQ_\\bullet)\\cong H_i(Q_\\bullet\\otimes_RM)$.",
-   "uses": [
-    "lem-weil-pbc-module-tensor-comm",
-    "def-weil-pbc-module-chain-complex-homology"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, Lemma Tag 00M3 (lemma-tor-left-right), proof, display lines 18577-18589, fifth equality, 'the fifth equality uses the isomorphism $V\\otimes W=W\\otimes V$ of the tensor product'"
-   }
-  },
-  {
-   "text": "The isomorphism. Define $\\sigma_i(M,N):\\operatorname{Tor}^R_i(M,N)\\to\\operatorname{Tor}^R_i(N,M)$ as the composite $\\iota_{Q,M}^{-1}\\circ H_i(\\tau_\\bullet)\\circ\\theta^A_i\\circ\\iota_{P,N}$, reading $\\theta^A_i$ through the identifications of step 3, of the $R$-linear isomorphisms of steps 1, 4 and 5 and [def-weil-pbc-tor-modules]. It is an $R$-linear isomorphism.",
-   "uses": [
+    "def-weil-pbc-module-chain-complex-homology",
     "def-weil-pbc-tor-modules"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, Lemma Tag 00M3 (lemma-tor-left-right), proof, display lines 18577-18589: $\\operatorname{Tor}_i(M,N)=H_i(F\\otimes N)=H_i(U(A))=H_i(R(A))=H_i(M\\otimes G)=H_i(G\\otimes M)=\\operatorname{Tor}_i(N,M)$"
-   }
+   "elementary": false
   },
   {
-   "text": "Naturality. Let $\\varphi:M_1\\to M_2$, $\\psi:N_1\\to N_2$ be $R$-linear, with projective resolutions $(P_{\\nu,\\bullet},\\varepsilon_\\nu)$ of $M_\\nu$ and $(Q_{\\nu,\\bullet},\\eta_\\nu)$ of $N_\\nu$ ($\\nu=1,2$), and $A_\\nu=P_{\\nu,\\bullet}\\otimes Q_{\\nu,\\bullet}$ as in step 1. By [lem-weil-pbc-projective-resolution-lift] choose chain maps $a:P_{1,\\bullet}\\to P_{2,\\bullet}$, $b:Q_{1,\\bullet}\\to Q_{2,\\bullet}$ with $\\varepsilon_2a_0=\\varphi\\varepsilon_1$, $\\eta_2b_0=\\psi\\eta_1$. (i) $\\Phi_{i,j}=a_i\\otimes b_j:A_{1,i,j}\\to A_{2,i,j}$ is a morphism of double complexes: $(d^P\\otimes1)(a_i\\otimes b_j)=(d^Pa_i)\\otimes b_j=(a_{i-1}d^P)\\otimes b_j=(a_{i-1}\\otimes b_j)(d^P\\otimes1)$, and likewise for $\\delta$ using $d^Qb_j=b_{j-1}d^Q$. (ii) Under the identifications of step 3, $\\Phi^{\\mathrm{rt}}_j$ is $\\varphi\\otimes b_j:M_1\\otimes Q_{1,j}\\to M_2\\otimes Q_{2,j}$, since $(\\varepsilon_2\\otimes1)(a_0\\otimes b_j)=(\\varepsilon_2a_0)\\otimes b_j=(\\varphi\\varepsilon_1)\\otimes b_j=(\\varphi\\otimes b_j)(\\varepsilon_1\\otimes1)$; similarly $\\Phi^{\\mathrm{up}}_i$ is $a_i\\otimes\\psi:P_{1,i}\\otimes N_1\\to P_{2,i}\\otimes N_2$. (iii) The functoriality clause of [lem-weil-pbc-double-complex-cokernel-homology-iso] gives $H_i(\\varphi\\otimes b)\\circ\\theta^{A_1}_i=\\theta^{A_2}_i\\circ H_i(a\\otimes\\psi)$. (iv) The naturality clause of [lem-weil-pbc-module-tensor-comm] gives $\\tau_{M_2,Q_{2,j}}\\circ(\\varphi\\otimes b_j)=(b_j\\otimes\\varphi)\\circ\\tau_{M_1,Q_{1,j}}$, so $H_i(\\tau)\\circ H_i(\\varphi\\otimes b)=H_i(b\\otimes\\varphi)\\circ H_i(\\tau)$. (v) By [lem-weil-pbc-tor-map-via-resolution-lift], $\\iota\\circ\\operatorname{Tor}_i(\\varphi,N_1)=H_i(a\\otimes1_{N_1})\\circ\\iota$ and $\\iota\\circ\\operatorname{Tor}_i(M_2,\\psi)=H_i(1_{P_2}\\otimes\\psi)\\circ\\iota$, so $\\operatorname{Tor}_i(\\varphi,\\psi)=\\operatorname{Tor}_i(M_2,\\psi)\\circ\\operatorname{Tor}_i(\\varphi,N_1)$ corresponds to $H_i(1\\otimes\\psi)H_i(a\\otimes1)=H_i(a\\otimes\\psi)$; in the same way $\\operatorname{Tor}_i(\\psi,\\varphi):\\operatorname{Tor}_i(N_1,M_1)\\to\\operatorname{Tor}_i(N_2,M_2)$ corresponds to $H_i(b\\otimes\\varphi)$ on $H_i(Q_{\\nu,\\bullet}\\otimes M_\\nu)$. Combining (iii), (iv), (v) with the definition of $\\sigma_i$ in step 6: $\\sigma_i(M_2,N_2)\\circ\\operatorname{Tor}_i(\\varphi,\\psi)=\\operatorname{Tor}_i(\\psi,\\varphi)\\circ\\sigma_i(M_1,N_1)$. Taking $\\varphi=1_M$, $\\psi=1_N$ with two choices of resolutions also shows (with [def-weil-pbc-tor-modules]) that $\\sigma_i$ does not depend on the resolutions chosen. Hence $\\sigma_i$ is a natural isomorphism of functors $\\operatorname{Mod}_R\\times\\operatorname{Mod}_R\\to\\operatorname{Mod}_R$.",
+   "text": "Lift f:M→M' and g:N→N' to augmentation-compatible a,b using [lem-weil-pbc-projective-resolution-lift]. The private tor_resolution_naturality combines isoLeftDerivedObj_hom_naturality and leftDerived_app_eq [lem-weil-pbc-tor-map-via-resolution-lift] to identify Tor(f,g) with H(a tensor g). Map the naturality equations of the column and row identifications through homology, invert the column equation by composing inverse isomorphisms, and use the naturality square of the double-complex comparison. Substitute these equations in the five-factor composite σ; cancel the resolution computation isomorphisms to get Tor(f,g) followed by σ(M',N')=σ(M,N) followed by Tor(g,f).",
    "uses": [
     "lem-weil-pbc-projective-resolution-lift",
-    "lem-weil-pbc-double-complex-cokernel-homology-iso",
-    "lem-weil-pbc-module-tensor-comm",
     "lem-weil-pbc-tor-map-via-resolution-lift",
-    "def-weil-pbc-tor-modules"
+    "def-weil-pbc-tensor-bicomplex",
+    "lem-weil-pbc-tensor-resolution-column-cokernel-iso",
+    "lem-weil-pbc-tensor-resolution-row-cokernel-iso",
+    "lem-weil-pbc-double-complex-cokernel-homology-iso"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, Lemma Tag 00M3 (lemma-tor-left-right), proof, functoriality paragraph, lines 18591-18619"
-   }
+   "elementary": false
+  },
+  {
+   "text": "Specialize bifunctoriality to (id,g) and (f,id), simplifying identity maps. Apply NatIso.ofComponents twice to package the component isomorphisms as Tor'≅(Tor').flip.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
+  "def-weil-pbc-tensor-bicomplex",
   "def-weil-pbc-tor-modules",
-  "def-weil-pbc-module-tensor-product",
   "lem-weil-pbc-projective-module-flat",
-  "def-weil-pbc-exact-sequence",
   "lem-weil-pbc-flat-tensor-exact",
+  "def-weil-pbc-exact-sequence",
+  "lem-weil-pbc-tensor-resolution-column-cokernel-iso",
+  "lem-weil-pbc-tensor-resolution-row-cokernel-iso",
   "lem-weil-pbc-double-complex-cokernel-homology-iso",
-  "lem-weil-pbc-tensor-right-exact",
-  "def-weil-pbc-chain-complex-tensor-module",
   "def-weil-pbc-module-chain-complex-homology",
-  "lem-weil-pbc-module-tensor-comm",
   "lem-weil-pbc-projective-resolution-lift",
   "lem-weil-pbc-tor-map-via-resolution-lift"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/algebra.tex",
-  "place": "Algebra, Lemma Tag 00M3 (lemma-tor-left-right), proof lines 18542-18620, with Lemma Tag 00M1 (lemma-no-spectral-sequence) and Lemma Tag 00LS (lemma-compare-resolutions); Stacks takes free resolutions, the DAG's Tor (def-weil-pbc-tor-modules) projective ones: the proof uses only flatness of the terms and the lifting of maps, both valid for projective modules"
+  "place": "Tag 00M3, tensor double complex, cokernel-complex computations and functoriality; implemented with projective resolutions and the existing Tag 00M1 comparison"
  },
  "mathlib_searches": [
   {
@@ -236,5 +185,15 @@
   "group": "K1",
   "result": "pass",
   "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261012T085241-L-15527",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

@@ -1,0 +1,129 @@
+{
+ "id": "lem-weil-pbc-tensor-resolution-column-cokernel-iso",
+ "kind": "statement",
+ "title": "Natural column-cokernel identification for the tensor bicomplex of resolutions",
+ "statement": "Let R be a commutative ring. For every pair of R-modules M,N and projective resolutions P of M and Q of N [def-weil-pbc-tor-modules], put A=A(P,Q) [def-weil-pbc-tensor-bicomplex]. There is a family e_{M,N,P,Q}: A.flip.opcycles(0) ≅ P tensor_R N [def-weil-pbc-chain-complex-tensor-module]. The family is chosen simultaneously for all modules and resolutions. For modules M,N,M',N', resolutions P,Q,P',Q', maps f:M→M', g:N→N', and chain maps a:P→P', b:Q→Q' satisfying a_0 followed by the augmentation of P' equals the augmentation of P followed by f, and likewise b_0 with g, e_{M,N,P,Q} followed by a tensor g equals the induced column-cokernel map of A(a,b) followed by e_{M',N',P',Q'}.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 00M3 (lemma-tor-left-right), proof: tensor double complex, cokernel-complex computations and functoriality paragraph; https://stacks.math.columbia.edu/tag/00M3"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-tor-modules",
+  "def-weil-pbc-tensor-bicomplex",
+  "def-weil-pbc-chain-complex-tensor-module"
+ ],
+ "proof": [
+  {
+   "text": "Construct the column augmentation termwise as 1 tensor the augmentation of Q. Bifunctoriality gives a chain map and annihilates the incoming outer differential.",
+   "uses": [
+    "def-weil-pbc-tensor-bicomplex"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Descend this chain map through the column cokernel. Tensoring the exact cokernel cofork Q₁→Q₀→N with P_p preserves its cokernel by right exactness. Thus the descended map is an isomorphism: apply ChainComplex.isIso_descOpcycles_iff, HomologicalComplex.exact_of_degreewise_exact and epi_of_epi_f, with Q.exact₀.map_of_epi_of_preservesCokernel and the fact that tensorLeft is a left adjoint.",
+   "uses": [
+    "lem-weil-pbc-tensor-right-exact"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For augmentation-compatible a,b, precompose the naturality square with the column-cokernel projection. The p_descOpcycles and p_opcyclesMap identities reduce the square to tensor functoriality and b₀ followed by Q'.π₀=Q.π₀ followed by g. Cancel the cokernel projection (an epimorphism).",
+   "uses": [
+    "def-weil-pbc-tensor-bicomplex"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-tensor-bicomplex",
+  "lem-weil-pbc-tensor-right-exact"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 00M3, proof and functoriality paragraph, using projective resolutions (flatness and lifting suffice)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "column cokernel complex of tensor bicomplex of projective resolutions is a resolution tensored with module",
+   "results": "HTTP Internal Server Error; service unavailable.",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "column cokernel complex of tensor bicomplex of projective resolutions is a resolution tensored with module",
+   "results": "Tor definitions, projective resolution constructors and vanishing on projectives returned; no natural chain-complex cokernel identification.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "cokernel.*tensor|tensor.*cokernel",
+   "results": "CokernelCofork.tensor and tensorIsCokernel in Monoidal.Limits.Cokernels concern a cokernel of a coproduct map, not this natural identification of chain complexes.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Category.ModuleCat.TorSymmetry",
+  "date": "2026-10-12",
+  "group": "G2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-normal-constant-generic",
+   "place": "step 4 of its split (normality of the strict henselization in Stacks 09Z5); Tor symmetry is used by the flat-module injectivity input along this branch",
+   "via": [
+    "lem-weil-pbc-tor-symmetry",
+    "lem-weil-pbc-flat-tor-ideal-criterion",
+    "lem-weil-pbc-flat-mod-injective",
+    "lem-weil-pbc-flat-local-depth-formula",
+    "lem-weil-pbc-serre-sk-goes-up",
+    "lem-weil-pbc-flat-normal-fibres-noetherian-normal",
+    "lem-weil-pbc-smooth-over-normal-ring-normal",
+    "lem-weil-pbc-etale-over-normal-ring-normal",
+    "lem-weil-pbc-etale-colimit-normal-local-domain"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.TensorResolutionColumnCokernelIso",
+  "file": "lean/Sheaf/Algebra/Homology/TensorResolutionColumnCokernelIso.lean",
+  "declaration": "HomologicalComplex₂.tensorResolutionColumnCokernelIso",
+  "statement": "theorem tensorResolutionColumnCokernelIso (R : Type u) [CommRing R] : ∃ e : ∀ (M N : ModuleCat.{u} R) (P : ProjectiveResolution M) (Q : ProjectiveResolution N), (tensorBicomplex P.complex Q.complex).flip.opcycles 0 ≅ ((tensorRight N).mapHomologicalComplex (.down ℕ)).obj P.complex, ∀ (M N M' N' : ModuleCat.{u} R) (P : ProjectiveResolution M) (Q : ProjectiveResolution N) (P' : ProjectiveResolution M') (Q' : ProjectiveResolution N') (f : M ⟶ M') (g : N ⟶ N') (a : P.complex ⟶ P'.complex) (b : Q.complex ⟶ Q'.complex) (_ha : a.f 0 ≫ P'.π.f 0 = P.π.f 0 ≫ f) (_hb : b.f 0 ≫ Q'.π.f 0 = Q.π.f 0 ≫ g), (e M N P Q).hom ≫ chainTensorMap a g = HomologicalComplex.opcyclesMap ((flipFunctor (ModuleCat R) (.down ℕ) (.down ℕ)).map (tensorBicomplexMap a b)) 0 ≫ (e M' N' P' Q').hom",
+  "branch": "sheaf-dag",
+  "by": "G2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261012T085241-L-15527",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261012T085241-L-15527",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
