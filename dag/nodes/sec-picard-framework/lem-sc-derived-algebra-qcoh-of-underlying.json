@@ -1,0 +1,154 @@
+{
+ "id": "lem-sc-derived-algebra-qcoh-of-underlying",
+ "kind": "statement",
+ "title": "Bounded-below quasi-coherent algebra-derived objects detected on underlying cohomology",
+ "statement": "Let $Y$ be a scheme [def-pc-scheme], $A$ a quasi-coherent commutative $\\mathcal O_Y$-algebra, and $E$ an object of $D(A)$ [def-pc-derived-category-qcoh-algebra]. If its derived restriction of scalars has quasi-coherent cohomology [def-pc-derived-category] and is bounded below, then $E$ belongs to $D^+_{\\mathrm{QCoh}}(A)$ [def-pc-derived-category-qcoh-algebra].",
+ "source": {
+  "document": "literature/stacks-project/duality.tex",
+  "place": "Tags 0BV0, 0BV1 and 0AX2, exact restriction of algebra scalars"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "def-pc-derived-category-qcoh-algebra"
+ ],
+ "proof": [
+  {
+   "text": "Use the finite-limit and finite-colimit preservation instances for scalar restriction from def-pc-derived-rhom-algebra-module. Choose the canonical Q-preimage representative of E. Combine the Q factorization isomorphisms and the short-complex mapHomologyIso to identify restricted cohomology with cohomology of derived restriction.",
+   "uses": [
+    "def-pc-derived-rhom-algebra-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/duality.tex",
+    "place": "Tags 0BV0, 0BV1 and 0AX2, exact restriction of algebra scalars"
+   }
+  },
+  {
+   "text": "Transport quasi-coherence through this isomorphism. For each degree below the underlying bound, the restricted cohomology object is zero. Evaluating its identity-equals-zero equation gives the same equation on the algebra cohomology, since restriction of scalars leaves the underlying maps unchanged. Thus the algebra cohomology is zero and both defining clauses of the claimed membership hold.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/duality.tex",
+    "place": "Tags 0BV0, 0BV1 and 0AX2, exact restriction of algebra scalars"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-derived-rhom-algebra-module"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "agent": "K1 stage-3 worker",
+  "date": "2026-10-12",
+  "based_on": {
+   "document": "literature/stacks-project/duality.tex",
+   "place": "Tags 0BV0, 0BV1 and 0AX2, exact restriction of algebra scalars"
+  },
+  "note": "Formalizes the local-to-global or exact-scalar step of the parent proof."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Exact restriction of algebra scalars commutes with derived cohomology",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived internal Hom from a pseudo-coherent object preserves quasi-coherent cohomology",
+   "results": "Eight generic sheaf and abelian-category results, no derived scheme-level theorem.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory.isGE_iff",
+   "results": "Found DerivedCategory.isGE_iff, used for the bound; no complete matching assertion.",
+   "date": "2026-10-12",
+   "verdict": "generalization only"
+  },
+  {
+   "tool": "grep",
+   "query": "locally.*bounded|homology.*mapDerivedCategory",
+   "results": "No complete theorem. Direct source inspection found compact finite subcovers, short-complex mapHomologyIso, and derived Q factorization isomorphisms used in the proof.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exact restriction of scalars commutes with cohomology on derived categories",
+   "results": "Eight group-cohomology and Ext exact-functor results; none states the desired cohomology comparison or algebra-derived QCoh criterion.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "mapDerivedCategory.*[Hh]omology|[Ll]ocally[Bb]oundedBelow",
+   "results": "No matching Mathlib declarations; built the homology comparison from short-complex and derived factorization isomorphisms.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PseudoCoherentRHomQuasiCoherent",
+  "date": "2026-10-12",
+  "group": "K1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "proof: finite-cover bound and exact scalar restriction",
+   "via": [
+    "lem-sc-pseudo-coherent-rhom-qcoherent",
+    "lem-sc-finite-pushforward-derived-hom-qcoherent"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.DerivedAlgebraQCohOfUnderlying",
+  "file": "lean/Sheaf/AlgebraicGeometry/DerivedAlgebraQCohOfUnderlying.lean",
+  "declaration": "AlgebraicGeometry.derivedAlgebraQCohOfUnderlying",
+  "statement": "theorem derivedAlgebraQCohOfUnderlying (Y : Scheme.{u}) (A : Y.CommAlgebraSheaf) (hA : A.toModule.IsQuasicoherent) [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))] [HasDerivedCategory.{wA} (SheafOfModules.{u} ((sheafCompose (Opens.grothendieckTopology Y) (forget₂ CommRingCat RingCat)).obj A.right))] (E : sheafAlgebraDerivedCategory Y A hA) (hq : schemeDerivedQCohProperty Y ((SheafOfModules.restrictScalars.{u} ((sheafCompose (Opens.grothendieckTopology Y) (forget₂ CommRingCat RingCat)).map A.hom)).mapDerivedCategory.obj E)) (hb : ∃ a : ℤ, ((SheafOfModules.restrictScalars.{u} ((sheafCompose (Opens.grothendieckTopology Y) (forget₂ CommRingCat RingCat)).map A.hom)).mapDerivedCategory.obj E).IsGE a) : sheafAlgebraDerivedQCohProperty Y A hA E",
+  "branch": "sheaf-dag",
+  "by": "K1",
+  "date": "2026-10-12"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "merged_into": null,
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K1",
+  "result": "pass",
+  "landing": "20261012T144123-L-2100034",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K1",
+  "result": "pass",
+  "landing": "20261012T144123-L-2100034",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

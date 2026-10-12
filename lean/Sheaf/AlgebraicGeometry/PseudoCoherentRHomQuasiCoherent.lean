@@ -9,11 +9,9 @@ public import Sheaf.AlgebraicGeometry.PseudoCoherentComplex
 public import Sheaf.AlgebraicGeometry.DerivedRHomAlgebraModule
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.Algebra.Homology.DerivedCategory.TStructure
-import Sheaf.Algebra.Homology.OpenRestrictionAdjunctionExact
-import Sheaf.AlgebraicGeometry.AffinePseudoCoherentRHomQuasiCoherent
-import Sheaf.AlgebraicGeometry.AffineQCohDerivedEquivalence
-import Sheaf.AlgebraicGeometry.DerivedCategoryQCoherentAlgebra
-import Sheaf.Paper.DerivedInternalHomRestrictOpen
+import Sheaf.AlgebraicGeometry.RHomSupportedQuasiCoherent
+import Sheaf.AlgebraicGeometry.DerivedLocallyBoundedBelowGlobal
+import Sheaf.AlgebraicGeometry.DerivedAlgebraQCohOfUnderlying
 
 /-! # Derived internal Hom from a pseudo-coherent algebra
 
@@ -76,6 +74,30 @@ theorem pseudoCoherentRHomQuasiCoherent
         ((sheafCompose (Opens.grothendieckTopology Y)
           (forget₂ CommRingCat RingCat)).map A.hom)).mapDerivedCategory.obj
             ((derivedRHomAlgebraModule Y A hA).obj K)).IsGE a := by
-  sorry
+  let S := DerivedCategory.Q.obj
+    ((HomologicalComplex.single (SheafOfModules.{u} (moduleRings Y.toRingedSpace))
+      (ComplexShape.up ℤ) 0).obj A.toModule)
+  obtain ⟨hq, hlocal⟩ := (rhom_supported_quasiCoherent Y S K hK).1 hpc hbounded
+  obtain ⟨e⟩ := derivedRHomAlgebraModule_underlying Y A hA
+  let eK := e.app K
+  have hq' : schemeDerivedQCohProperty Y
+      ((SheafOfModules.restrictScalars.{u}
+        ((sheafCompose (Opens.grothendieckTopology Y)
+          (forget₂ CommRingCat RingCat)).map A.hom)).mapDerivedCategory.obj
+            ((derivedRHomAlgebraModule Y A hA).obj K)) := by
+    intro n
+    exact (SheafOfModules.isQuasicoherent (moduleRings Y.toRingedSpace)).prop_of_iso
+      ((DerivedCategory.homologyFunctor _ n).mapIso eK.symm) (hq n)
+  obtain ⟨a, ha⟩ := derivedLocallyBoundedBelowGlobal Y _ hlocal
+  have hb : ∃ a : ℤ,
+      ((SheafOfModules.restrictScalars.{u}
+        ((sheafCompose (Opens.grothendieckTopology Y)
+          (forget₂ CommRingCat RingCat)).map A.hom)).mapDerivedCategory.obj
+            ((derivedRHomAlgebraModule Y A hA).obj K)).IsGE a := by
+    refine ⟨a, (DerivedCategory.isGE_iff _ a).mpr ?_⟩
+    intro n hn
+    exact ((DerivedCategory.isGE_iff _ a).mp ha n hn).of_iso
+      ((DerivedCategory.homologyFunctor _ n).mapIso eK)
+  exact ⟨derivedAlgebraQCohOfUnderlying Y A hA _ hq' hb, hq', hb⟩
 
 end AlgebraicGeometry
