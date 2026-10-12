@@ -30,7 +30,7 @@
  ],
  "proof": [
   {
-   "text": "*Step 1 (a stage where $f$ is affine).* Write $f_{ii'}:S_i\\to S_{i'}$ ($i\\ge i'$) for the transition morphisms, $f_{ii}=\\mathrm{id}$, and $p_i:S\\to S_i$ for the projections of the limit. A finite morphism is affine by definition [def-weil-finite-integral-morphism], so $f$ is affine [pqf-def-affine-morphism]. By [lem-weil-pbc-descend-affine] there is $k\\in I$, $k\\ge0$, such that $f_k:X_k\\to Y_k$ is affine. Fix such a $k$.",
+   "text": "Finiteness at the limit implies affineness. The two pullback-map presentations are related by pullback.congrHom (Over.w f₀) rfl; pullback hom-ext identifies the raw map with the source-isomorphism followed by Over.pullback.map. Cancel this source isomorphism in IsAffineHom and apply affineness descent to obtain k >= i₀ with affine f_k.",
    "uses": [
     "def-weil-finite-integral-morphism",
     "pqf-def-affine-morphism",
@@ -39,98 +39,42 @@
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/limits.tex",
-    "place": "Lemma Tag 01ZO (line 1772), proof: 'A finite morphism is affine, see Morphisms, Definition 01WH. Hence by Lemma 01ZN (lemma-descend-affine-finite-presentation, line 1750) above after increasing $0$ we may assume that $f_0$ is affine'"
+    "place": "Proof of Lemma Tag 01ZO (lemma-descend-finite-finite-presentation), the reduction to affine pieces; Algebra Lemma Tag 07RG (lemma-colimit-finite). Read from the downloaded Stacks copies on this machine."
    }
   },
   {
-   "text": "*Step 2 (replacing $0$ by $k$).* Let $T$ be $S_i$ for some $i\\ge k$, with $q_T=f_{ik}:T\\to S_k$, or $S$, with $q_T=p_k$; in both cases $f_{k0}\\circ q_T:T\\to S_0$ is the structure morphism $f_{i0}$, resp. $p_0$. Let $X_T=X_0\\times_{S_0}T$, $Y_T=Y_0\\times_{S_0}T$ and $f_T=f_0\\times\\mathrm{id}_T$ (so $f_T=f_i$, resp. $f$). (a) Apply [lem-weil-pbc-cartesian-square-pasting] to the diagram whose right column is $T\\xrightarrow{q_T}S_k\\xrightarrow{f_{k0}}S_0$, whose left column is $X_T\\to X_k\\to X_0$ (the first map being $(\\mathrm{pr}_1,q_T\\circ\\mathrm{pr}_2)$ into $X_k=X_0\\times_{S_0}S_k$, the second $\\mathrm{pr}_1$), and whose horizontal maps are the second projections $X_T\\to T$, $X_k\\to S_k$, $X_0\\to S_0$: the lower square is cartesian by definition of $X_k$ and the outer rectangle by definition of $X_T$ [def-pc-fibre-product], so the upper square is cartesian, i.e. $X_T$ with $(\\mathrm{pr}_1,q_T\\mathrm{pr}_2)$ and $\\mathrm{pr}_2$ is a fibre product $X_k\\times_{S_k}T$. In the same way $Y_T$ is a fibre product $Y_k\\times_{S_k}T$. Under these identifications $f_T$ and $f_k\\times\\mathrm{id}_T$ are two morphisms into $Y_k\\times_{S_k}T$ with the same components ($\\mathrm{pr}_1$ gives $(f_0\\mathrm{pr}_1,q_T\\mathrm{pr}_2)=f_k\\circ(\\mathrm{pr}_1,q_T\\mathrm{pr}_2)$, $\\mathrm{pr}_2$ gives $\\mathrm{pr}_2$), hence equal: $f_T=f_k\\times\\mathrm{id}_T$. (b) Apply [lem-weil-pbc-cartesian-square-pasting] to the diagram with left column $X_k\\xrightarrow{f_k}Y_k\\to S_k$, right column $X_0\\xrightarrow{f_0}Y_0\\to S_0$ and horizontal maps the first projections: the lower square ($Y_k$ over $S_k$) and the outer rectangle ($X_k$ over $S_k$) are cartesian, so the upper square is: $f_k$ is the base change of $f_0$ along $Y_k\\to Y_0$. Since $f_0$ is locally of finite type, so is $f_k$ by [lem-weil-pbc-lft-base-change].",
+   "text": "Choose the finite subcover of the affine cover of Y₀. For every covering affine open V_b restrict the finite-limit hypothesis to its inverse image and apply the local affine-open descent lemma with the known affine stage k. This gives j_b >= k and finiteness of that restriction at every i >= j_b.",
    "uses": [
-    "lem-weil-pbc-cartesian-square-pasting",
-    "def-pc-fibre-product",
-    "lem-weil-pbc-lft-base-change"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/limits.tex",
-    "place": "Lemma Tag 01ZO (lemma-descend-finite-finite-presentation, line 1772), proof: 'after increasing $0$ we may assume that $f_0$ is affine. By writing $Y_0$ as a finite union of affines we reduce to proving the result when $X_0$ and $Y_0$ are affine and map into a common affine $W\\subset S_0$'; Categories, proof of Lemma Tag 001Y (lemma-composition-representable, categories.tex line 791: $x\\times_y(y\\times_zt)=x\\times_zt$); written out by the agent"
-   }
-  },
-  {
-   "text": "*Step 3 (finitely many affine pieces at stage $k$).* Write $g_0:Y_0\\to S_0$ for the structure morphism. For $y\\in Y_0$ choose an affine open $W\\subseteq S_0$ containing $g_0(y)$ and an affine open $V\\subseteq g_0^{-1}(W)$ containing $y$ ([lem-weil-pbc-affine-open-spec-points]: an affine open is a spectrum, whose principal opens form a basis of affine opens). Since $Y_0$ is quasi-compact [def-weil-pbc-scheme-conventions], finitely many such pairs $(W_b,V_b)$, $b=1,\\dots,m$, satisfy $Y_0=\\bigcup_bV_b$, $g_0(V_b)\\subseteq W_b$. Fix $b$ and drop it from the notation. Put $W_k=f_{k0}^{-1}(W)\\subseteq S_k$, an affine open since $f_{k0}$ is affine [pqf-def-affine-morphism], and $V_k=\\mathrm{pr}_1^{-1}(V)\\subseteq Y_k$. As $f_{k0}\\mathrm{pr}_2=g_0\\mathrm{pr}_1$ maps $V_k$ into $W$, $\\mathrm{pr}_2(V_k)\\subseteq W_k$, so $V_k=\\mathrm{pr}_1^{-1}(V)\\cap\\mathrm{pr}_2^{-1}(W_k)\\cong V\\times_WW_k$ by [lem-weil-pbc-open-fibre-product], which is affine by [lem-weil-pbc-fibre-product-affine-spectra]; the $V_{b,k}$ cover $Y_k$ (preimages of a covering) and $V_k$ maps into $W_k$. Since $f_k$ is affine (step 1), $U_k=f_k^{-1}(V_k)$ is an affine open of $X_k$ [pqf-def-affine-morphism]. Put $A_k=\\mathcal O_{S_k}(W_k)$, $B_k=\\mathcal O_{Y_k}(V_k)$, $C_k=\\mathcal O_{X_k}(U_k)$, with the ring maps $A_k\\to B_k$ and $\\varphi_k:B_k\\to C_k$ induced by the structure morphism of $Y_k$ and by $f_k$; by [lem-weil-pbc-morphism-into-affine-scheme], under the identifications of [lem-weil-pbc-affine-open-spec-points] the restrictions $U_k\\to V_k\\to W_k$ are $\\operatorname{Spec}$ of these maps. As $f_k$ is locally of finite type (step 2) and $f_k(U_k)\\subseteq V_k$, $\\varphi_k$ is of finite type by [lem-weil-pbc-lft-affine-pairs]. (Only the quasi-compactness of $Y_0$ is used here.)",
-   "uses": [
-    "lem-weil-pbc-affine-open-spec-points",
+    "def-pc-scheme",
     "def-weil-pbc-scheme-conventions",
-    "pqf-def-affine-morphism",
-    "lem-weil-pbc-open-fibre-product",
-    "lem-weil-pbc-fibre-product-affine-spectra",
-    "lem-weil-pbc-morphism-into-affine-scheme",
-    "lem-weil-pbc-lft-affine-pairs"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/limits.tex",
-    "place": "Lemma Tag 01ZO (lemma-descend-finite-finite-presentation, line 1772), proof: 'after increasing $0$ we may assume that $f_0$ is affine. By writing $Y_0$ as a finite union of affines we reduce to proving the result when $X_0$ and $Y_0$ are affine and map into a common affine $W\\subset S_0$'; the finite affine covering of $Y_0$ as in the proof of Lemma Tag 01ZN (line 1757: 'Let $Y_0=\\bigcup_{j=1,\\ldots,m}V_{j,0}$ be a finite affine open covering'); Morphisms, Lemma Tag 01T2 for the finite type ring map; written out by the agent"
-   }
-  },
-  {
-   "text": "*Step 4 (the base over $W_k$ as a colimit of rings).* For $i\\ge k$ put $W_i=f_{ik}^{-1}(W_k)$, an affine open of $S_i$ ($f_{ik}$ is affine [pqf-def-affine-morphism]), $A_i=\\mathcal O_{S_i}(W_i)$, and for $i\\ge i'\\ge k$ let $A_{i'}\\to A_i$ be induced by $f_{ii'}$; by [lem-weil-pbc-morphism-into-affine-scheme] the restricted transition morphisms are $\\operatorname{Spec}$ of these maps, and $(A_i)_{i\\ge k}$ is a directed system over the directed set $I_{\\ge k}$. Let $A=\\varinjlim_{i\\ge k}A_i$ [def-weil-pbc-category-colimit] and $W_S=p_k^{-1}(W_k)$. By [lem-weil-pbc-limit-affine-transition] (the clause on open subschemes, with $k$ as the base index and $U_0=W_k$) $W_S$ is the limit of $(W_i)_{i\\ge k}$, and by [lem-weil-pbc-spec-colimit-limit] so is $\\operatorname{Spec}A$ with the coprojections; uniqueness of limits gives $W_S\\cong\\operatorname{Spec}A$, under which $p_k|_{W_S}$ is $\\operatorname{Spec}(A_k\\to A)$. Write $A_T=A_i$, $W_T=W_i$ for $T=S_i$ and $A_T=A$, $W_T=W_S$ for $T=S$; then $W_T=q_T^{-1}(W_k)=\\operatorname{Spec}A_T$ over $W_k=\\operatorname{Spec}A_k$.",
-   "uses": [
-    "pqf-def-affine-morphism",
-    "lem-weil-pbc-morphism-into-affine-scheme",
-    "def-weil-pbc-category-colimit",
-    "lem-weil-pbc-limit-affine-transition",
-    "lem-weil-pbc-spec-colimit-limit"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/limits.tex",
-    "place": "Lemma Tag 01ZO (lemma-descend-finite-finite-presentation, line 1772), proof: 'after increasing $0$ we may assume that $f_0$ is affine. By writing $Y_0$ as a finite union of affines we reduce to proving the result when $X_0$ and $Y_0$ are affine and map into a common affine $W\\subset S_0$'; Lemma Tag 01YX (lemma-directed-inverse-system-has-limit, line 58) and Lemma Tag 01YW (line 42); written out by the agent (the reduction is only sketched in the source)"
-   }
-  },
-  {
-   "text": "*Step 5 (the pieces of $f_T$ are spectra).* Let $T$ be as in step 2 and identify $X_T=X_k\\times_{S_k}T$, $Y_T=Y_k\\times_{S_k}T$, $f_T=f_k\\times\\mathrm{id}_T$ (step 2(a)). Put $V_T=\\mathrm{pr}_1^{-1}(V_k)\\subseteq Y_T$ and $U_T=\\mathrm{pr}_1^{-1}(U_k)\\subseteq X_T$. Since $\\mathrm{pr}_1\\circ f_T=f_k\\circ\\mathrm{pr}_1$ and $U_k=f_k^{-1}(V_k)$, we have $U_T=f_T^{-1}(V_T)$. As in step 3, $\\mathrm{pr}_2(U_T)\\subseteq W_T$ and $\\mathrm{pr}_2(V_T)\\subseteq W_T$, so [lem-weil-pbc-open-fibre-product] identifies $U_T=U_k\\times_{W_k}W_T$ and $V_T=V_k\\times_{W_k}W_T$, and [lem-weil-pbc-fibre-product-affine-spectra] gives $U_T\\cong\\operatorname{Spec}(A_T\\otimes_{A_k}C_k)$ and $V_T\\cong\\operatorname{Spec}(A_T\\otimes_{A_k}B_k)$, the projections becoming $\\operatorname{Spec}$ of $c\\mapsto1\\otimes c$, $a\\mapsto a\\otimes1$ (factors swapped by the symmetry of $\\otimes$). The restriction $f_T|:U_T\\to V_T$ and $\\operatorname{Spec}(\\mathrm{id}_{A_T}\\otimes\\varphi_k)$ are two morphisms into $V_T\\cong V_k\\times_{W_k}W_T$ with the same two components ($f_k|_{U_k}\\circ\\mathrm{pr}_1$ and $\\mathrm{pr}_2$), hence equal; so, under these isomorphisms, $f_T|$ is $\\operatorname{Spec}$ of $\\varphi_T=\\mathrm{id}_{A_T}\\otimes\\varphi_k:B_T=A_T\\otimes_{A_k}B_k\\to C_T=A_T\\otimes_{A_k}C_k$, and by [lem-weil-pbc-morphism-into-affine-scheme] the ring map $\\mathcal O_{Y_T}(V_T)\\to\\mathcal O_{X_T}(U_T)=\\mathcal O_{X_T}(f_T^{-1}(V_T))$ induced by $f_T$ is $\\varphi_T$ composed on both sides with ring isomorphisms. For $T=S_i$ the opens $V^b_{S_i}$, $b=1,\\dots,m$, cover $Y_i$, being the preimages of the covering $Y_k=\\bigcup_bV_{b,k}$ (step 3).",
-   "uses": [
-    "lem-weil-pbc-open-fibre-product",
-    "lem-weil-pbc-fibre-product-affine-spectra",
-    "lem-weil-pbc-morphism-into-affine-scheme"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/limits.tex",
-    "place": "Lemma Tag 01ZO (lemma-descend-finite-finite-presentation, line 1772), proof: 'after increasing $0$ we may assume that $f_0$ is affine. By writing $Y_0$ as a finite union of affines we reduce to proving the result when $X_0$ and $Y_0$ are affine and map into a common affine $W\\subset S_0$'; Schemes, Lemma Tag 01JR and Tag 01I4; written out by the agent"
-   }
-  },
-  {
-   "text": "*Step 6 (the hypothesis on the piece over $S$).* Take $T=S$ in step 5. $V_S$ is an affine open of $Y$ with $f^{-1}(V_S)=U_S$; since $f$ is finite [def-weil-finite-integral-morphism], the ring map $\\mathcal O_Y(V_S)\\to\\mathcal O_X(U_S)$ induced by $f$ is finite. By step 5 it equals $\\beta\\circ\\varphi\\circ\\alpha$ with ring isomorphisms $\\alpha,\\beta$ and $\\varphi=\\mathrm{id}_A\\otimes\\varphi_k:A\\otimes_{A_k}B_k\\to A\\otimes_{A_k}C_k$; module generators $c_1,\\dots,c_n$ of the target over the source give the generators $\\beta^{-1}(c_j)$, so $\\varphi$ is finite.",
-   "uses": [
-    "def-weil-finite-integral-morphism"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/limits.tex",
-    "place": "Lemma Tag 01ZO (line 1772), hypothesis (1) carried to an affine piece; Morphisms, Definition Tag 01WH (definition-integral)"
-   }
-  },
-  {
-   "text": "*Step 7 (the algebra fact, and larger indices).* By steps 3 and 6, the directed system $(A_i)_{i\\ge k}$ with colimit $A$, the index $k$ and the $A_k$-algebra map $\\varphi_k:B_k\\to C_k$ of finite type satisfy the hypotheses of [lem-weil-pbc-colimit-finite-ring-map] (with $k$ in place of $0$); so there is $i_b\\ge k$ such that $\\varphi_{i_b}:B_{i_b}\\to C_{i_b}$ is finite. This persists for every $i\\ge i_b$: let $\\tau:A_{i_b}\\to A_i$ be the transition map; $\\tau\\otimes\\mathrm{id}$ gives ring maps $B_{i_b}\\to B_i$, $C_{i_b}\\to C_i$ with $\\varphi_i\\circ(\\tau\\otimes\\mathrm{id})=(\\tau\\otimes\\mathrm{id})\\circ\\varphi_{i_b}$. If $x_1,\\dots,x_n$ generate $C_{i_b}$ as a $B_{i_b}$-module, write $1\\otimes c=\\sum_j\\varphi_{i_b}(\\beta_j)x_j$ for $c\\in C_k$; applying $\\tau\\otimes\\mathrm{id}$, $1\\otimes c=\\sum_j\\varphi_i(\\bar\\beta_j)\\bar x_j$ in $C_i$, hence $a\\otimes c=(a\\otimes1)(1\\otimes c)=\\sum_j\\varphi_i\\big((a\\otimes1)\\bar\\beta_j\\big)\\bar x_j$ for $a\\in A_i$ (as $a\\otimes1=\\varphi_i(a\\otimes1)$); since the $a\\otimes c$ generate $C_i$ additively, the images $\\bar x_j$ generate $C_i$ as a $B_i$-module, i.e. $\\varphi_i$ is finite.",
-   "uses": [
-    "lem-weil-pbc-colimit-finite-ring-map"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, Lemma Tag 07RG (lemma-colimit-finite, line 47522), cited in the proof of Lemma 01ZO ('The corresponding algebra statement follows from Algebra, Lemma 07RG'); the persistence to larger indices is written out by the agent"
-   }
-  },
-  {
-   "text": "*Step 8 (a common index; $f_i$ is finite).* $I$ is directed and there are finitely many $b$, so there is $i\\in I$ with $i\\ge i_b$ for $b=1,\\dots,m$ (hence $i\\ge k\\ge0$). Take $T=S_i$ in step 5. For each $b$, $V^b_{S_i}$ is an affine open of $Y_i$, $f_i^{-1}(V^b_{S_i})=U^b_{S_i}$ is affine, and the ring map $\\mathcal O_{Y_i}(V^b_{S_i})\\to\\mathcal O_{X_i}(U^b_{S_i})$ is $\\varphi^b_i$ composed with ring isomorphisms, hence finite by step 7 (generators transported as in step 6). The $V^b_{S_i}$ cover $Y_i$ (step 5), so $f_i$ is finite by [lem-weil-pbc-finite-local-on-target], (2)$\\Rightarrow$(1).",
-   "uses": [
+    "lem-weil-pbc-affine-open-spec-points",
+    "lem-weil-pbc-descend-finite-affine-open",
     "lem-weil-pbc-finite-local-on-target"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/limits.tex",
-    "place": "Lemma Tag 01ZO (lemma-descend-finite-finite-presentation, line 1772), proof: 'after increasing $0$ we may assume that $f_0$ is affine. By writing $Y_0$ as a finite union of affines we reduce to proving the result when $X_0$ and $Y_0$ are affine and map into a common affine $W\\subset S_0$'; Morphisms, Lemma Tag 01WI (lemma-finite-local, morphisms.tex line 11001), (2)$\\Rightarrow$(1); one index for finitely many pieces as in the proof of Lemma Tag 01ZN (line 1768: 'As there are finitely many $j$ we can pick an $i$ which works for all $j$')"
+    "place": "Proof of Lemma Tag 01ZO (lemma-descend-finite-finite-presentation), the reduction to affine pieces; Algebra Lemma Tag 07RG (lemma-colimit-finite). Read from the downloaded Stacks copies on this machine."
+   }
+  },
+  {
+   "text": "The finite range of b ↦ j_b is bounded above in the directed preorder. Choose an upper bound i of it, then a common upper bound i′ of i and k. The chosen k supplies Nonempty I, so finite boundedness also applies to an empty cover. Thus i′ >= k >= i₀ and every covering restriction is finite at i′.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Proof of Lemma Tag 01ZO (lemma-descend-finite-finite-presentation), the reduction to affine pieces; Algebra Lemma Tag 07RG (lemma-colimit-finite). Read from the downloaded Stacks copies on this machine."
+   }
+  },
+  {
+   "text": "Inverse image by Y_i′ → Y₀ commutes with iSup and sends the top open to the top open. Consequently the inverse images of the V_b cover Y_i′. Apply IsZariskiLocalAtTarget.of_iSup_eq_top for IsFinite to the finite restrictions at i′ to prove f_i′ finite.",
+   "uses": [
+    "lem-weil-pbc-finite-local-on-target"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Proof of Lemma Tag 01ZO (lemma-descend-finite-finite-presentation), the reduction to affine pieces; Algebra Lemma Tag 07RG (lemma-colimit-finite). Read from the downloaded Stacks copies on this machine."
    }
   }
  ],
@@ -138,25 +82,16 @@
   "def-weil-finite-integral-morphism",
   "pqf-def-affine-morphism",
   "lem-weil-pbc-descend-affine",
-  "lem-weil-pbc-cartesian-square-pasting",
-  "def-pc-fibre-product",
-  "lem-weil-pbc-lft-base-change",
-  "lem-weil-pbc-affine-open-spec-points",
+  "def-pc-scheme",
   "def-weil-pbc-scheme-conventions",
-  "lem-weil-pbc-open-fibre-product",
-  "lem-weil-pbc-fibre-product-affine-spectra",
-  "lem-weil-pbc-morphism-into-affine-scheme",
-  "lem-weil-pbc-lft-affine-pairs",
-  "def-weil-pbc-category-colimit",
-  "lem-weil-pbc-limit-affine-transition",
-  "lem-weil-pbc-spec-colimit-limit",
-  "lem-weil-pbc-colimit-finite-ring-map",
+  "lem-weil-pbc-affine-open-spec-points",
+  "lem-weil-pbc-descend-finite-affine-open",
   "lem-weil-pbc-finite-local-on-target"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/limits.tex",
-  "place": "proof of Lemma Tag 01ZO (lemma-descend-finite-finite-presentation, line 1772), with Lemma Tag 01ZN, Algebra Lemma Tag 07RG and Morphisms Lemma Tag 01WI; the reduction to the affine case, which the source only sketches, is written out by the agent after the pattern of the reviewed lem-weil-pbc-descend-etale"
+  "place": "Proof of Lemma Tag 01ZO (lemma-descend-finite-finite-presentation), the reduction to affine pieces; Algebra Lemma Tag 07RG (lemma-colimit-finite). Read from the downloaded Stacks copies on this machine."
  },
  "mathlib_searches": [
   {
@@ -247,5 +182,15 @@
   "group": "K1",
   "result": "fix",
   "note": "I : Type u with Scheme.{u} (index universe OK), directed preorder, affine transitions, Cone+IsLimit, i0, qcqs S0/X0/Y0, f0 over S0, LocallyOfFiniteType f0, IsFinite of the limit base change, exists i >= i0 IsFinite; FIX: pullback.map x0 y0 h0 form rewritten to the Over.pullback form of the landed siblings (K1 d68be4daf, J1 bfbc053b5, M1 658c5d95f)"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-f8b58",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261012T053929-L-2634410",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered files compile cleanly; target and existing signatures are unchanged; proofs, sorry node, DAG, imports, change record, and report satisfy all review points."
  }
 }

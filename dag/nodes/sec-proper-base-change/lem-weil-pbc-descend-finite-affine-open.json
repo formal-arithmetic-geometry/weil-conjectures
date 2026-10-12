@@ -1,0 +1,209 @@
+{
+ "id": "lem-weil-pbc-descend-finite-affine-open",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "Essential-surjectivity proof: descend finiteness of the finite-presentation approximation; the local affine calculation of Limits 01ZO.",
+   "via": [
+    "lem-weil-pbc-descend-finite",
+    "lem-weil-pbc-finite-etale-lifting-approximation",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Eventual local finiteness on one affine target open after an affine stage",
+ "statement": "Let $I$ be a directed preorder, $D:I^{\\rm op}\\to\\mathrm{Scheme}$ an inverse system of schemes [def-pc-scheme] with affine transition morphisms [pqf-def-affine-morphism], and $c$ a limit cone [lem-weil-pbc-limit-affine-transition]. Fix $i_0\\le k$ and a morphism $f_0:X_0\\to Y_0$ over $S_{i_0}=D(i_0)$ [def-pc-fibre-product], locally of finite type [def-weil-finite-type-morphism]. Write $f_i$ and $f$ for its base changes to $S_i$ and the limit, and $p_{i0}:Y_i\\to Y_0$, $p_0:Y\\to Y_0$ for the first pullback projections. Suppose $f_k$ is affine. Let $V\\subseteq Y_0$ be an affine open [lem-weil-pbc-affine-open-spec-points], and suppose the restriction $f|_{p_0^{-1}(V)}$ is finite [def-weil-finite-integral-morphism]. Then there exist $j\\ge k$ such that for every $i\\ge j$, the restriction $f_i|_{p_{i0}^{-1}(V)}$ is finite. No quasi-compactness or quasi-separatedness assumption on $S_{i_0},X_0,Y_0$ is required.",
+ "source": {
+  "document": "literature/stacks-project/limits.tex",
+  "place": "Proof of Lemma Tag 01ZO (lemma-descend-finite-finite-presentation), the reduction to affine pieces; Algebra Lemma Tag 07RG (lemma-colimit-finite). Read from the downloaded Stacks copies on this machine."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "pqf-def-affine-morphism",
+  "lem-weil-pbc-limit-affine-transition",
+  "def-pc-fibre-product",
+  "def-weil-finite-type-morphism",
+  "lem-weil-pbc-affine-open-spec-points",
+  "def-weil-finite-integral-morphism"
+ ],
+ "proof": [
+  {
+   "text": "Put $V_k=p_{k0}^{-1}(V)$, where $p_{k0}:Y_k\\to Y_0$ is the first pullback projection. It is affine because $p_{k0}$ is a base change of the affine transition $S_k\\to S_0$. The preimage $U_k=f_k^{-1}(V_k)$ is affine by the assumed affineness of $f_k$. Cartesian-square pasting identifies, for every $i\\ge k$ and for the limit, the restrictions over the preimage of $V$ with base changes of $U_k\\to V_k$. The latter map is locally of finite type by base-change stability and restriction.",
+   "uses": [
+    "pqf-def-affine-morphism",
+    "lem-weil-pbc-affine-morphism-permanence",
+    "lem-weil-pbc-cartesian-square-pasting",
+    "def-pc-fibre-product",
+    "lem-weil-pbc-lft-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Proof of Lemma Tag 01ZO (lemma-descend-finite-finite-presentation), the reduction to affine pieces; Algebra Lemma Tag 07RG (lemma-colimit-finite). Read from the downloaded Stacks copies on this machine."
+   }
+  },
+  {
+   "text": "For each point $v\\in V$ choose an affine open $W_b\\subset S_0$ around its image and an affine open $V_b\\subset V\\cap (Y_0\\to S_0)^{-1}(W_b)$ containing $v$. The affine-open basis allows this choice, and $V$ is affine and hence quasi-compact, so finitely many $V_b$ cover $V$. Pull these opens back to $k$. The base opens $W_{b,k}$ are affine; open fibre-product pasting identifies $V_{b,k}$ with $V_b\\times_{W_b}W_{b,k}$, hence it is affine. Its inverse image $U_{b,k}$ under $f_k$ is affine. Put $A_{b,k}=\\Gamma(W_{b,k})$, $B_{b,k}=\\Gamma(V_{b,k})$ and $C_{b,k}=\\Gamma(U_{b,k})$. Their structure morphisms are Spec of the induced ring maps and $\\varphi_{b,k}:B_{b,k}\\to C_{b,k}$ is of finite type.",
+   "uses": [
+    "lem-weil-pbc-affine-open-spec-points",
+    "def-weil-pbc-scheme-conventions",
+    "pqf-def-affine-morphism",
+    "lem-weil-pbc-open-fibre-product",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-weil-pbc-morphism-into-affine-scheme",
+    "lem-weil-pbc-lft-affine-pairs"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Proof of Lemma Tag 01ZO (lemma-descend-finite-finite-presentation), the reduction to affine pieces; Algebra Lemma Tag 07RG (lemma-colimit-finite). Read from the downloaded Stacks copies on this machine."
+   }
+  },
+  {
+   "text": "For fixed $b$, use the directed upper tail $I_{\\ge k}$. The opens $W_{b,i}=f_{ik}^{-1}(W_{b,k})$ are affine and form an inverse system with affine transitions. Affine-transition limits identify their limit with $W_{b,S}=p_k^{-1}(W_{b,k})$. Write $A_b=\\mathop{\\rm colim}_{i\\ge k}\\Gamma(W_{b,i})$. The Spec adjunction identifies $W_{b,S}$ with $\\operatorname{Spec} A_b$, compatibly with all projections: Spec of the colimit is a limit, and the isomorphism is the unique limit isomorphism. Transfer from the chosen limit of the cited theorem to the given cone using uniqueness of limits.",
+   "uses": [
+    "pqf-def-affine-morphism",
+    "lem-weil-pbc-morphism-into-affine-scheme",
+    "def-weil-pbc-category-colimit",
+    "lem-weil-pbc-limit-affine-transition",
+    "lem-weil-pbc-spec-colimit-limit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Proof of Lemma Tag 01ZO (lemma-descend-finite-finite-presentation), the reduction to affine pieces; Algebra Lemma Tag 07RG (lemma-colimit-finite). Read from the downloaded Stacks copies on this machine."
+   }
+  },
+  {
+   "text": "Open pullback pasting and the affine-spectrum fibre-product isomorphism identify the later pieces with $\\operatorname{Spec}(A_{b,i}\\otimes_{A_{b,k}}B_{b,k})$ and $\\operatorname{Spec}(A_{b,i}\\otimes_{A_{b,k}}C_{b,k})$, and similarly at the limit with $A_b$. The map is Spec of $\\mathrm{id}\\otimes\\varphi_{b,k}$: both descriptions have the same two pullback components, so they agree by the pullback universal property. Restrict the local finite-limit hypothesis to $V_{b,S}$. The resulting coordinate ring map is finite; conjugating by the ring isomorphisms preserves this, by transporting a finite set of module generators and its spanning equations.",
+   "uses": [
+    "lem-weil-pbc-cartesian-square-pasting",
+    "lem-weil-pbc-open-fibre-product",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-weil-pbc-morphism-into-affine-scheme",
+    "def-weil-finite-integral-morphism",
+    "lem-weil-pbc-finite-local-on-target"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Proof of Lemma Tag 01ZO (lemma-descend-finite-finite-presentation), the reduction to affine pieces; Algebra Lemma Tag 07RG (lemma-colimit-finite). Read from the downloaded Stacks copies on this machine."
+   }
+  },
+  {
+   "text": "Apply the finite-ring-map colimit descent lemma to $\\varphi_{b,k}$ to get $j_b\\ge k$ where the tensor-product map is finite. This persists above $j_b$. Explicitly, if $x_1,\\ldots,x_n$ generate $A_{b,j_b}\\otimes C_{b,k}$ over $A_{b,j_b}\\otimes B_{b,k}$, write each $1\\otimes c$ as $\\sum_l\\varphi_{b,j_b}(\\beta_l)x_l$. After applying the transition ring maps this identity holds at $i\\ge j_b$. Multiplying it by $a\\otimes1$ expresses each $a\\otimes c$ in the span of the images of $x_l$ over $A_{b,i}\\otimes B_{b,k}$. Pure tensors generate additively, hence those images span the entire target. Thus the corresponding restricted scheme morphism is finite at every $i\\ge j_b$.",
+   "uses": [
+    "lem-weil-pbc-colimit-finite-ring-map",
+    "def-weil-finite-integral-morphism",
+    "lem-weil-pbc-finite-local-on-target"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Proof of Lemma Tag 01ZO (lemma-descend-finite-finite-presentation), the reduction to affine pieces; Algebra Lemma Tag 07RG (lemma-colimit-finite). Read from the downloaded Stacks copies on this machine."
+   }
+  },
+  {
+   "text": "Directedness gives an upper bound $j$ of the finite set of $j_b$ together with $k$. For every $i\\ge j$ the inverse images of $V_b$ cover the inverse image of $V$ in $Y_i$ and every restriction is finite by the preceding calculation. Finiteness local on the target yields finiteness of the restriction over the inverse image of $V$. If $V$ is empty, take $j=k$; finiteness follows from the empty open cover. No quasi-compactness or quasi-separatedness hypothesis on $S_0,X_0,Y_0$ is used: only the affine open $V$ must be quasi-compact.",
+   "uses": [
+    "lem-weil-pbc-finite-local-on-target"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Proof of Lemma Tag 01ZO (lemma-descend-finite-finite-presentation), the reduction to affine pieces; Algebra Lemma Tag 07RG (lemma-colimit-finite). Read from the downloaded Stacks copies on this machine."
+   }
+  }
+ ],
+ "proof_deps": [
+  "pqf-def-affine-morphism",
+  "lem-weil-pbc-affine-morphism-permanence",
+  "lem-weil-pbc-cartesian-square-pasting",
+  "def-pc-fibre-product",
+  "lem-weil-pbc-lft-base-change",
+  "lem-weil-pbc-affine-open-spec-points",
+  "def-weil-pbc-scheme-conventions",
+  "lem-weil-pbc-open-fibre-product",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-morphism-into-affine-scheme",
+  "lem-weil-pbc-lft-affine-pairs",
+  "def-weil-pbc-category-colimit",
+  "lem-weil-pbc-limit-affine-transition",
+  "lem-weil-pbc-spec-colimit-limit",
+  "def-weil-finite-integral-morphism",
+  "lem-weil-pbc-finite-local-on-target",
+  "lem-weil-pbc-colimit-finite-ring-map"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/limits.tex",
+  "place": "Proof of Lemma Tag 01ZO (lemma-descend-finite-finite-presentation), the reduction to affine pieces; Algebra Lemma Tag 07RG (lemma-colimit-finite). Read from the downloaded Stacks copies on this machine."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Finiteness of a scheme morphism restricted to one affine target open eventually holds at stages of an inverse limit with affine transitions",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Once a stage morphism is affine, finite type ring maps on one affine target open become finite at sufficiently large stages when finite over the inverse limit",
+   "results": "AlgebraicGeometry.IsFinite.instHasAffinePropertyAndIsAffineFiniteCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensTopHomAppTop, AlgebraicGeometry.Scheme.Hom.finite_app, AlgebraicGeometry.isFinite_iff, AlgebraicGeometry.IsFinite.finite_app, AlgebraicGeometry.Scheme.Hom.finiteType_appLE, AlgebraicGeometry.LocallyOfFiniteType.finiteType_appLE, AlgebraicGeometry.locallyOfFiniteType_iff, AlgebraicGeometry.LocallyOfFiniteType.finiteType_of_affine_subset",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "exists.*[Ff]inite.*(morphismRestrict|baseChange|[Ll]imit)|01ZO|07RG",
+   "results": "Mathlib/ModelTheory/DirectLimit.lean, Mathlib/Topology/Category/CompHausLike/Limits.lean, Mathlib/Topology/Category/Profinite/CofilteredLimit.lean, Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean, Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean, Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean, Mathlib/AlgebraicGeometry/Group/Abelian.lean",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.DescendFinite",
+  "group": "F2",
+  "date": "2026-10-12"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.DescendFiniteAffineOpen",
+  "file": "lean/Sheaf/AlgebraicGeometry/DescendFiniteAffineOpen.lean",
+  "declaration": "AlgebraicGeometry.exists_isFinite_morphismRestrict_baseChange_affine_open",
+  "statement": "theorem exists_isFinite_morphismRestrict_baseChange_affine_open\n    {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)]\n    (D : Iᵒᵖ ⥤ Scheme.{u})\n    [∀ {i j : Iᵒᵖ} (g : i ⟶ j), IsAffineHom (D.map g)]\n    (c : Cone D) (hc : IsLimit c) (i₀ k : I) (hk : i₀ ≤ k)\n    (X₀ Y₀ : Over (D.obj (op i₀))) (f₀ : X₀ ⟶ Y₀)\n    [LocallyOfFiniteType f₀.left]\n    (haffine : IsAffineHom (((Over.pullback (D.map (homOfLE hk).op)).map f₀).left))\n    (V : Y₀.left.Opens) (hV : IsAffineOpen V)\n    (hfinite : IsFinite\n      ((((Over.pullback (c.π.app (op i₀))).map f₀).left) ∣_\n        ((pullback.fst Y₀.hom (c.π.app (op i₀))) ⁻¹ᵁ V))) :\n    ∃ (j : I) (hkj : k ≤ j), ∀ (i : I) (hji : j ≤ i),\n      IsFinite\n        ((((Over.pullback (D.map (homOfLE (hk.trans (hkj.trans hji))).op)).map f₀).left)\n          ∣_ ((pullback.fst Y₀.hom\n            (D.map (homOfLE (hk.trans (hkj.trans hji))).op)) ⁻¹ᵁ V))",
+  "branch": "sheaf-dag",
+  "by": "F2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-f8b58",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261012T053929-L-2634410",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-f8b58",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261012T053929-L-2634410",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered files compile cleanly; target and existing signatures are unchanged; proofs, sorry node, DAG, imports, change record, and report satisfy all review points."
+ }
+}
