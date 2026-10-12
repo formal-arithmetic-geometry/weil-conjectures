@@ -11,6 +11,9 @@ public import Mathlib.CategoryTheory.Sites.PrecoverageToGrothendieck
 public import Mathlib.CategoryTheory.Sites.Pullback
 public import Mathlib.CategoryTheory.Comma.Over.Basic
 
+import Sheaf.CategoryTheory.ColimitSiteStageImageSheaf
+import Sheaf.CategoryTheory.ColimitSiteStageImageRefinement
+
 /-! # Every limit inverse-image section is represented by a stage section.
 
 Source: Stacks Project, Sites, Tag 0A35.
@@ -25,6 +28,21 @@ open CategoryTheory CategoryTheory.Limits Opposite
 open CategoryTheory.Functor.sheafPullbackConstruction
 
 namespace CategoryTheory
+
+private theorem arrow_mk_heq_apply {A B C : Type u} (f : A ⟶ B) (g : A ⟶ C)
+    (h : Arrow.mk f = Arrow.mk g) (a : A) : HEq (f a) (g a) := by
+  obtain ⟨hA, hB, hfg⟩ := (Arrow.mk_eq_mk_iff f g).mp h
+  cases hB
+  simpa using congrArg (fun k : A ⟶ B ↦ k a) hfg
+
+
+private theorem arrow_restrict_eq {C : Type u} [SmallCategory C]
+    (T : Cᵒᵖ ⥤ Type u) {A : Type u} {X Y : C} (h : X = Y)
+    (f : A ⟶ T.obj (op X)) (g : A ⟶ T.obj (op Y))
+    (hf : Arrow.mk f = Arrow.mk g) : f ≫ T.map (eqToHom h.symm).op = g := by
+  apply Arrow.mk_injective
+  rw [eqToHom_op, eqToHom_map, Arrow.arrow_mk_comp_eqToHom]
+  exact hf
 
 /-- Source: Stacks Project, Sites, Tag 0A35 (lemma-compute-pullback-to-limit).
 (blueprint: lem-weil-pbc-colimit-site-set-section-representatives).
@@ -112,6 +130,62 @@ theorem colimit_site_set_section_representatives
     (hι : ∀ t : Under i, Arrow.mk (K.ι.app t ≫ e.hom) =
       Arrow.mk ((E t).hom ≫
         (α t).hom.app (op ((F.map t.hom).toFunctor.obj U)))):
-    ∀ x : K.pt, ∃ (t : Under i) (y : D.obj t), x = K.ι.app t y := by sorry
+    ∀ x : K.pt, ∃ (t : Under i) (y : D.obj t), x = K.ι.app t y := by
+  let H := (sheafPullback (V.ι.app i).toFunctor (Type u)
+    (P i).toGrothendieck Q.toGrothendieck).obj G
+  let S := colimitSiteStageImage F P V Q i G α
+  have hS : Presheaf.IsSheaf Q.toGrothendieck S.toFunctor :=
+    colimit_site_stage_image_isSheaf J F P hfinite hcover hpullback
+      V hobjects harrows Q hQ hVpullback i G α hα
+  let A : Sheaf Q.toGrothendieck (Type u) := ⟨S.toFunctor, hS⟩
+  let inc : A ⟶ H := ⟨S.ι⟩
+  let adj := sheafAdjunctionContinuous (V.ι.app i).toFunctor (Type u)
+    (P i).toGrothendieck Q.toGrothendieck
+  have hunit (X : F.obj i) (x : G.obj.obj (op X)) :
+      (adj.unit.app G).hom.app (op X) x ∈
+        S.obj (op ((V.ι.app i).toFunctor.obj X)) := by
+    let t : Under i := Under.mk (𝟙 i)
+    let z := ((sheafAdjunctionContinuous (F.map t.hom).toFunctor (Type u)
+      (P i).toGrothendieck (P t.right).toGrothendieck).unit.app G).hom.app (op X) x
+    have hw : (V.ι.app t.right).toFunctor.obj ((F.map t.hom).toFunctor.obj X) =
+        (V.ι.app i).toFunctor.obj X := by
+      exact congrArg (fun f : F.obj i ⟶ V.pt ↦ f.toFunctor.obj X) (V.w t.hom)
+    refine ⟨t, (F.map t.hom).toFunctor.obj X, eqToHom hw.symm, z, ?_⟩
+    have he := arrow_restrict_eq H.obj hw
+      (((sheafAdjunctionContinuous (F.map t.hom).toFunctor (Type u)
+        (P i).toGrothendieck (P t.right).toGrothendieck).unit.app G).hom.app (op X) ≫
+        (α t).hom.app (op ((F.map t.hom).toFunctor.obj X)))
+      ((adj.unit.app G).hom.app (op X)) (hα t X)
+    exact ConcreteCategory.congr_hom he x
+  let η : G ⟶ ((V.ι.app i).toFunctor.sheafPushforwardContinuous (Type u)
+      (P i).toGrothendieck Q.toGrothendieck).obj A :=
+    ⟨{ app := fun X ↦ TypeCat.ofHom (fun x ↦ ⟨(adj.unit.app G).hom.app X x,
+          hunit (unop X) x⟩)
+       naturality := by
+         intro X Y f
+         apply ConcreteCategory.hom_ext
+         intro x
+         apply Subtype.ext
+         exact NatTrans.naturality_apply (adj.unit.app G).hom f x }⟩
+  let r : H ⟶ A := (adj.homEquiv G A).symm η
+  have hr : r ≫ inc = 𝟙 H := by
+    apply (adj.homEquiv G H).injective
+    rw [adj.homEquiv_naturality_right, Equiv.apply_symm_apply]
+    apply Sheaf.hom_ext
+    rfl
+  intro x
+  have hx : e.hom x ∈ S.obj (op ((V.ι.app i).toFunctor.obj U)) := by
+    have he := ConcreteCategory.congr_hom
+      (NatTrans.congr_app (congrArg (fun f ↦ f.hom) hr)
+        (op ((V.ι.app i).toFunctor.obj U))) (e.hom x)
+    exact he ▸ (r.hom.app (op ((V.ι.app i).toFunctor.obj U)) (e.hom x)).property
+  obtain ⟨t, z, hz⟩ := colimit_site_stage_image_refinement
+    J F P V hobjects harrows Q i G α hα U (e.hom x) hx
+  refine ⟨t, (E t).inv z, ?_⟩
+  apply (ConcreteCategory.bijective_of_isIso e.hom).1
+  have he := arrow_mk_heq_apply _ _ (hι t) ((E t).inv z)
+  have hEz : (E t).hom ((E t).inv z) = z := Iso.inv_hom_id_apply (E t) z
+  simp only [types_comp_apply, hEz] at he
+  exact (eq_of_heq (he.trans hz)).symm
 
 end CategoryTheory
