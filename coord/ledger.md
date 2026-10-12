@@ -7926,3 +7926,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 13:53 L: merged deliver/S1/Sheaf.AlgebraicGeometry.CoherentPseudoCoherent (stage 3; reviewer PASS; first push; landing 20261012T135313-L-1690777 (proof); batch 20261012T135212; modules 1; new nodes 0)
 - 13:53 L: merged deliver/S1/Sheaf.AlgebraicGeometry.GaloisPointActionCore (stage 3; reviewer PASS; first push; landing 20261012T135313-L-1690902 (proof); batch 20261012T135212; modules 1; new nodes 1)
 - 13:53 L: merged deliver/S1/Sheaf.AlgebraicGeometry.SmoothSectionComponentNoetherianModel (stage 3; reviewer PASS; after a return; landing 20261012T135313-L-1691067 (interface); batch 20261012T135212; modules 3; new nodes 2)
+- 13:53 L: merged deliver/S1/Sheaf.CategoryTheory.Triangulated.DerivedLimitExistence (stage 3; reviewer PASS; after a return; landing 20261012T135313-L-1691236 (interface); batch 20261012T135212; modules 3; new nodes 2)

@@ -13,10 +13,8 @@ public import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
 public import Mathlib.Algebra.Homology.HomotopyCategory.KInjective
 public import Mathlib.Algebra.Homology.HomologicalComplexLimits
 public import Mathlib.Algebra.Homology.Functor
-import Sheaf.Algebra.Homology.KInjectiveProducts
-import Sheaf.Algebra.Homology.RoosComplex
-import Sheaf.CategoryTheory.LocalizationHomColimit
-import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Comp
+import Sheaf.CategoryTheory.Triangulated.DerivedLimitProducts
+import Sheaf.CategoryTheory.Triangulated.DerivedLimitTower
 
 /-!
 # Existence and computation of derived limits
@@ -117,6 +115,9 @@ theorem derivedCategory_countableProducts_and_towerLimit
         (_e : I.asFunctor ⋙ DerivedCategory.Q ≅ Functor.ofOpSequence f),
         ∃ c : Cone I.asFunctor, Nonempty (IsLimit c) ∧
           IsDerivedLimit f (DerivedCategory.Q.obj c.pt)) := by
-  sorry
+  obtain ⟨hP, hproducts, hhomology⟩ := derivedCategory_countableProducts_core A
+  let _ := hP
+  refine ⟨hP, hproducts, hhomology, ?_⟩
+  exact derivedCategory_towerLimit_core A hP
 
 end CategoryTheory

@@ -44,76 +44,40 @@
  ],
  "proof": [
   {
-   "text": "For (1), apply Mathlib CategoryTheory.Pretriangulated.distinguished_cocone_triangle₁ to the transition endomorphism of [def-weil-derived-limit]. This is TR1 followed by inverse rotation in [def-weil-triangulated-category] and directly supplies the object and both maps of a derived limit triangle. For uniqueness, rotate each supplied triangle so its first arrow is the same transition endomorphism. Apply Mathlib CategoryTheory.Pretriangulated.exists_iso_of_arrow_iso to the identity isomorphism of that arrow. Its proof extends the identity square by TR3 and uses [lem-sf-triangle-morphism-iso] to make the third component an isomorphism. Project the resulting triangle isomorphism to its third objects, obtaining L[1] ≅ L′[1], and take its preimage under the fully faithful shiftFunctor D 1 to obtain L ≅ L′. This is a propositional existence proof; no canonical choice is asserted. Clauses (2) and (3) remain unproved in this delivery, with their original planned steps below.",
+   "text": "For clause (1), use the existing triangle-completion and triangle-isomorphism argument implemented by exists_isDerivedLimit_and_iso in this module.",
    "uses": [
     "def-weil-derived-limit",
     "def-weil-triangulated-category",
     "lem-sf-triangle-morphism-iso"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Definition 13.34.1 and remarks, Tag 08TC"
-   }
+   "elementary": false
   },
   {
-   "text": "For (2), choose complexes $C_i$ representing $K_i$ and let $\\prod_iC_i$ be the termwise product with projections $\\mathrm{pr}_i$. Exactness of countable products makes the products of the short exact sequences $0\\to Z^p\\to C^p\\to B^{p+1}\\to0$ and $0\\to B^p\\to Z^p\\to H^p\\to0$ exact, so $Z^p$, $B^p$ and $H^p$ commute with products: $H^p(\\prod_iC_i)=\\prod_iH^p(C_i)$, and a product of quasi-isomorphisms is a quasi-isomorphism. A chain map into a termwise product, and a chain homotopy, are exactly families of component chain maps and homotopies, so $\\operatorname{Hom}_{K(\\mathcal A)}(L,\\prod_iN_i)=\\prod_i\\operatorname{Hom}_{K(\\mathcal A)}(L,N_i)$. Quasi-isomorphisms form a multiplicative system in $K(\\mathcal A)$ with localization $D(\\mathcal A)$ [lem-pc-quasi-isomorphisms-multiplicative-system, def-weil-abstract-derived-category], so every morphism $Q(X)\\to Q(Y)$ is $Q(s)^{-1}Q(f)$ for a quasi-isomorphism $s:Y\\to M$ and $f:X\\to M$, and $Q(s)^{-1}Q(f)=0$ if and only if $uf\\simeq0$ for some quasi-isomorphism $u:M\\to M'$ [lem-pc-left-localization-hom-colimit]. Existence (the argument of Tag 07KC): given $\\alpha_i=Q(s_i)^{-1}Q(f_i):L\\to C_i$ with $s_i:C_i\\to M_i$, the product $s=\\prod_is_i$ is a quasi-isomorphism and $\\alpha=Q(s)^{-1}Q(\\prod_if_i)$ satisfies $Q(\\mathrm{pr}_i)\\alpha=\\alpha_i$, because $\\mathrm{pr}_i\\circ s=s_i\\circ\\mathrm{pr}_i$. Uniqueness: let $\\alpha=Q(s)^{-1}Q(f):L\\to\\prod_iC_i$, $s:\\prod_iC_i\\to M$, with $Q(\\mathrm{pr}_i)\\alpha=0$ for all $i$. Write $Q(\\mathrm{pr}_i)Q(s)^{-1}=Q(t_i)^{-1}Q(g_i)$ with $t_i:C_i\\to N_i$ a quasi-isomorphism and $g_i:M\\to N_i$; then $Q(g_is)=Q(t_i\\mathrm{pr}_i)$ and $Q(g_if)=0$, so after composing $t_i,g_i$ with a later quasi-isomorphism out of $N_i$ we have $g_is\\simeq t_i\\mathrm{pr}_i$ and $g_if\\simeq0$. With $g=(g_i)_i:M\\to\\prod_iN_i$ and the quasi-isomorphism $t=\\prod_it_i$, componentwise homotopies give $gs\\simeq t$ and $gf\\simeq0$, so $Q(s)^{-1}=Q(t)^{-1}Q(g)$ and $\\alpha=Q(t)^{-1}Q(gf)=0$. As $\\operatorname{Hom}_{D(\\mathcal A)}$ is additive, $\\prod_iC_i$ with the $Q(\\mathrm{pr}_i)$ is the product of the $K_i$ in $D(\\mathcal A)$ [def-weil-category-product], for any choice of representatives.",
+   "text": "Apply derivedCategory_countableProducts_core to obtain countable products in the derived category, product cones, and preservation of countable discrete limits by homology.",
    "uses": [
-    "lem-pc-quasi-isomorphisms-multiplicative-system",
-    "lem-pc-left-localization-hom-colimit",
-    "def-weil-abstract-derived-category",
-    "def-weil-category-product"
+    "lem-weil-derived-limit-products-core"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Lemma 13.34.2, Tag 07KC"
-   }
+   "elementary": false
   },
   {
-   "text": "For (3), for each $n$ the functor $\\lambda_n:\\mathcal A\\to\\operatorname{Tow}(\\mathcal A)$ sending $X$ to the tower equal to $X$ at levels $m\\le n$ with identity transitions and $0$ at levels $m>n$ is exact and left adjoint to evaluation $\\operatorname{ev}_n$ (a map $\\lambda_nX\\to Y_\\bullet$ is determined by its level-$n$ component $X\\to Y_n$), so [lem-weil-pbc-right-adjoint-preserves-kinjective] makes each $\\operatorname{ev}_n(I_\\bullet)$ K-injective. By [lem-pc-ringed-space-product-kinjective] (a general abelian category, applied to the countable index set of levels, whose termwise products exist by hypothesis) the termwise product $P=\\prod_n\\operatorname{ev}_n(I_\\bullet)$ is K-injective and represents $\\prod_nK_n$ in $D(\\mathcal A)$ with the projections, as also given by Step 2; the chain map $1-s:P\\to P$ satisfies $\\mathrm{pr}_n\\circ(1-s)=\\mathrm{pr}_n-f_n\\circ\\mathrm{pr}_{n+1}$, so it represents the transition endomorphism of [def-weil-derived-limit].",
+   "text": "Apply derivedCategory_towerLimit_core with the obtained product instance to obtain the K-injective tower limit cone and derived-limit property.",
    "uses": [
-    "lem-weil-pbc-right-adjoint-preserves-kinjective",
-    "lem-pc-ringed-space-product-kinjective",
-    "def-weil-derived-limit"
+    "lem-weil-derived-limit-tower-core"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Lemma Tag 08BJ and Lemma 13.31.5, Tag 0BK6"
-   }
-  },
-  {
-   "text": "The mapping cone of the chain map $1-s:P\\to P$ gives the distinguished cone triangle $P\\xrightarrow{1-s}P\\to\\operatorname{Cone}(1-s)\\to P[1]$ of $D(\\mathcal A)$ [def-weil-abstract-derived-category]; rotating it back by TR2 of [def-weil-triangulated-category] gives a distinguished triangle $\\operatorname{Cone}(1-s)[-1]\\to P\\xrightarrow{1-s}P\\to\\operatorname{Cone}(1-s)$, so by Step 3 the object $\\operatorname{Cone}(1-s)[-1]$ is a derived limit of $(K_n,f_n)$ [def-weil-derived-limit]. By [lem-weil-derived-limit-roos-complex] the termwise inverse-limit complex $L=\\varprojlim_nI_n$ is quasi-isomorphic to $\\operatorname{Cone}(1-s)[-1]$, so it represents the same object of $D(\\mathcal A)$, namely $R\\varprojlim_nK_n$.",
-   "uses": [
-    "def-weil-abstract-derived-category",
-    "def-weil-triangulated-category",
-    "lem-weil-derived-limit-roos-complex",
-    "def-weil-derived-limit"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Lemmas 13.34.3 and 13.34.6, Tags 0BK7 and 070M"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
   "def-weil-derived-limit",
   "def-weil-triangulated-category",
   "lem-sf-triangle-morphism-iso",
-  "lem-pc-quasi-isomorphisms-multiplicative-system",
-  "lem-pc-left-localization-hom-colimit",
-  "def-weil-abstract-derived-category",
-  "def-weil-category-product",
-  "lem-weil-pbc-right-adjoint-preserves-kinjective",
-  "lem-pc-ringed-space-product-kinjective",
-  "lem-weil-derived-limit-roos-complex"
+  "lem-weil-derived-limit-products-core",
+  "lem-weil-derived-limit-tower-core"
  ],
  "proof_origin": {
-  "by": "agent",
+  "by": "worker",
   "document": "lean/Sheaf/CategoryTheory/Triangulated/DerivedLimitExistence.lean",
-  "place": "Clause (1): R1 stage-3 proof using Mathlib triangle completion and arrow isomorphisms; clauses (2) and (3): original blueprint plan, not changed."
+  "place": "Clause (1) uses the existing triangle proof; clauses (2) and (3) are supplied by the split core theorems."
  },
  "mathlib_searches": [],
  "mathlib_match": null,
@@ -184,10 +148,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "R1",
+  "group": "S1",
   "result": "pass",
-  "landing": "20261012T085326-L-34811",
-  "kind": "proof",
+  "landing": "20261012T135313-L-1691236",
+  "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

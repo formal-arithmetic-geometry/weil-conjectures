@@ -1,0 +1,114 @@
+{
+ "id": "lem-weil-derived-limit-products-core",
+ "kind": "lemma",
+ "title": "Countable products in derived categories",
+ "statement": "Let A be an abelian category with exact countable products and derived category D(A) [def-weil-abstract-derived-category]. Countable products [def-weil-category-product] exist in D(A), the image under Q of every termwise product cone is limiting, and each homology functor preserves countable discrete limits.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 07KC"
+ },
+ "proof": [
+  {
+   "text": "For (2), choose complexes $C_i$ representing $K_i$ and let $\\prod_iC_i$ be the termwise product with projections $\\mathrm{pr}_i$. Exactness of countable products makes the products of the short exact sequences $0\\to Z^p\\to C^p\\to B^{p+1}\\to0$ and $0\\to B^p\\to Z^p\\to H^p\\to0$ exact, so $Z^p$, $B^p$ and $H^p$ commute with products: $H^p(\\prod_iC_i)=\\prod_iH^p(C_i)$, and a product of quasi-isomorphisms is a quasi-isomorphism. A chain map into a termwise product, and a chain homotopy, are exactly families of component chain maps and homotopies, so $\\operatorname{Hom}_{K(\\mathcal A)}(L,\\prod_iN_i)=\\prod_i\\operatorname{Hom}_{K(\\mathcal A)}(L,N_i)$. Quasi-isomorphisms form a multiplicative system in $K(\\mathcal A)$ with localization $D(\\mathcal A)$ [lem-pc-quasi-isomorphisms-multiplicative-system, def-weil-abstract-derived-category], so every morphism $Q(X)\\to Q(Y)$ is $Q(s)^{-1}Q(f)$ for a quasi-isomorphism $s:Y\\to M$ and $f:X\\to M$, and $Q(s)^{-1}Q(f)=0$ if and only if $uf\\simeq0$ for some quasi-isomorphism $u:M\\to M'$ [lem-pc-left-localization-hom-colimit]. Existence (the argument of Tag 07KC): given $\\alpha_i=Q(s_i)^{-1}Q(f_i):L\\to C_i$ with $s_i:C_i\\to M_i$, the product $s=\\prod_is_i$ is a quasi-isomorphism and $\\alpha=Q(s)^{-1}Q(\\prod_if_i)$ satisfies $Q(\\mathrm{pr}_i)\\alpha=\\alpha_i$, because $\\mathrm{pr}_i\\circ s=s_i\\circ\\mathrm{pr}_i$. Uniqueness: let $\\alpha=Q(s)^{-1}Q(f):L\\to\\prod_iC_i$, $s:\\prod_iC_i\\to M$, with $Q(\\mathrm{pr}_i)\\alpha=0$ for all $i$. Write $Q(\\mathrm{pr}_i)Q(s)^{-1}=Q(t_i)^{-1}Q(g_i)$ with $t_i:C_i\\to N_i$ a quasi-isomorphism and $g_i:M\\to N_i$; then $Q(g_is)=Q(t_i\\mathrm{pr}_i)$ and $Q(g_if)=0$, so after composing $t_i,g_i$ with a later quasi-isomorphism out of $N_i$ we have $g_is\\simeq t_i\\mathrm{pr}_i$ and $g_if\\simeq0$. With $g=(g_i)_i:M\\to\\prod_iN_i$ and the quasi-isomorphism $t=\\prod_it_i$, componentwise homotopies give $gs\\simeq t$ and $gf\\simeq0$, so $Q(s)^{-1}=Q(t)^{-1}Q(g)$ and $\\alpha=Q(t)^{-1}Q(gf)=0$. As $\\operatorname{Hom}_{D(\\mathcal A)}$ is additive, $\\prod_iC_i$ with the $Q(\\mathrm{pr}_i)$ is the product of the $K_i$ in $D(\\mathcal A)$ [def-weil-category-product], for any choice of representatives.",
+   "uses": [
+    "lem-pc-quasi-isomorphisms-multiplicative-system",
+    "lem-pc-left-localization-hom-colimit",
+    "def-weil-abstract-derived-category",
+    "def-weil-category-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Lemma 13.34.2, Tag 07KC"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-quasi-isomorphisms-multiplicative-system",
+  "lem-pc-left-localization-hom-colimit",
+  "def-weil-abstract-derived-category",
+  "def-weil-category-product"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "lean/Sheaf/CategoryTheory/Triangulated/DerivedLimitProducts.lean",
+  "place": "theorem derivedCategory_countableProducts_core"
+ },
+ "status": "split",
+ "blueprint": {
+  "is": null,
+  "from": "lem-weil-derived-limit-existence"
+ },
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.Triangulated.DerivedLimitExistence",
+  "date": "2026-10-12",
+  "group": "S1"
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.Triangulated.DerivedLimitProducts",
+  "file": "lean/Sheaf/CategoryTheory/Triangulated/DerivedLimitProducts.lean",
+  "declaration": "CategoryTheory.derivedCategory_countableProducts_core",
+  "statement": "theorem derivedCategory_countableProducts_core\n    (A : Type u) [Category.{v} A] [Abelian A] [HasDerivedCategory.{w} A]\n    [HasCountableProducts A] [CountableAB4Star A] :\n    ∃ hP : HasCountableProducts (DerivedCategory A),\n      letI : HasCountableProducts (DerivedCategory A) := hP\n      (∀ (J : Type t) [Countable J] (C : J → CochainComplex A ℤ),\n        Nonempty (IsLimit (DerivedCategory.Q.mapCone (limit.cone (Discrete.functor C))))) ∧\n      (∀ (J : Type t) [Countable J] (p : ℤ),\n        PreservesLimitsOfShape (Discrete J) (DerivedCategory.homologyFunctor A p))",
+  "branch": "sheaf-dag",
+  "by": "S1",
+  "date": "2026-10-12"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "stmt_deps": [
+  "def-weil-abstract-derived-category",
+  "def-weil-category-product"
+ ],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "homology.*[Pp]roduct|[Pp]roduct.*homology|[Ll]imit.*[Kk]Injective",
+   "results": "4 hits; no full match. Inspected results: Mathlib/GroupTheory/GroupExtension/Defs.lean, Mathlib/CategoryTheory/Limits/FormalCoproducts/Basic.lean, Mathlib/AlgebraicTopology/DoldKan/Homotopies.lean",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "localization of complexes preserves infinite products with exact products",
+   "results": "8 hits; no full match. Inspected results: CategoryTheory.Localization.hasProductsOfShape, CategoryTheory.Localization.preservesProductsOfShape, CategoryTheory.Localization.preservesFiniteProducts",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsLimit\", \"mapCone\", \"Q\"",
+   "results": "11 hits; no full match. Inspected results: CategoryTheory.Limits.IsLimit.mapConeEquiv, CategoryTheory.Limits.isLimitMapConeEmptyConeEquiv, CategoryTheory.Limits.BinaryFan.isLimitMapConeEquiv",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "In an abelian category with exact countable products, the derived category has countable products and homology preserves them",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "available": false
+  }
+ ],
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S1",
+  "result": "pass",
+  "landing": "20261012T135313-L-1691236",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S1",
+  "result": "pass",
+  "landing": "20261012T135313-L-1691236",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
