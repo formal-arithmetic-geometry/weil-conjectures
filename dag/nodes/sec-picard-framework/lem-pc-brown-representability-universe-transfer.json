@@ -15,17 +15,21 @@
  },
  "proof": [
   {
-   "text": "Proof: Put V = max w v vH. Replace C by ULiftHom.{V} C, which has the same\nobject universe and Hom groups lifted to V. Transport zero objects, preadditivity,\nshifts, distinguished triangles, and the triangulated axioms along its equivalence\nwith C. Transport the V-indexed coproducts along the equivalence. The original\ncompact generators, with the same index set, remain compact: the canonical map\nfrom the direct sum of lifted Hom groups to Hom into a coproduct is identified\nwith the original canonical map by the lift/down additive equivalences. The\ncoproduct of the transported generators remains a weak generator because the\nequivalence preserves zero objects, shifts, and nonzero morphisms.\n\nPrecompose H with the opposite of the equivalence's inverse and postcompose with\nAddCommGrpCat.uliftFunctor.{V}. This is a functor K to AddCommGrpCat.{V}.\nIt is homological: the equivalence preserves distinguished triangles and the lift\nfunctor preserves exact sequences of groups. It preserves V-indexed products:\nthe equivalence preserves limits, H preserves these products by assumption, and\nlifting groups preserves a product whenever that product exists (the product\nuniversal property transfers along the lift/down bijections). Apply hBrown to K.\nFor a representing object G in the lifted category, transport G back to C.\nEvaluate the representing natural isomorphism on the lifted objects of C and\ncompose its component bijections with the lift/down bijections on Hom groups and\non H's values. This gives natural bijections Hom_C(-, G) ≃ H(-), hence the asserted\nrepresentability of the underlying set-valued functor. Empty coproducts and the\nzero category are preserved by the same equivalence; no nonemptiness is required.",
-   "uses": [],
-   "elementary": true
+   "text": "Apply the auxiliary universe-transfer reduction to obtain a representing object and representable-by structure in C, then package it as IsRepresentable using the definition of Functor.IsRepresentable.",
+   "uses": [
+    "lem-pc-brown-representability-universe-transfer-aux"
+   ],
+   "elementary": false
   }
  ],
- "proof_deps": [],
+ "proof_deps": [
+  "lem-pc-brown-representability-universe-transfer-aux"
+ ],
  "proof_origin": {
-  "by": "agent",
-  "group": "E2",
+  "by": "worker",
+  "group": "G2",
   "date": "2026-10-12",
-  "description": "Explicit equivalence and universe-lift argument for applying the Stacks 0A8F principle in the independent universes of 0A8G; this transport is not spelled out in Stacks."
+  "description": "The main theorem is reduced by a real Lean proof to a strictly smaller auxiliary theorem carrying the universe transport."
  },
  "mathlib_searches": [
   {
@@ -101,11 +105,11 @@
  "reviewed_proof": {
   "date": "2026-10-12",
   "by": "L",
-  "reviewer": "X-dad82",
-  "group": "E2",
+  "reviewer": "COMPILER",
+  "group": "G2",
   "result": "pass",
-  "landing": "20261012T085229-L-10437",
+  "landing": "20261012T112840-L-767849",
   "kind": "interface",
-  "note": "independent Codex review: Matched delivered Lean signatures and proofs with both DAG nodes, the unchanged library interface, change record, and report; both modules compile cleanly and axiom checks show only standard axioms plus sorryAx from the recorded open dependencies."
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

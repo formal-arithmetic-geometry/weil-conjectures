@@ -1,0 +1,99 @@
+{
+ "id": "lem-pc-brown-representability-universe-transfer-aux",
+ "kind": "statement",
+ "title": "Auxiliary universe-transfer reduction for Brown representability",
+ "statement": "Under the hypotheses of lem-pc-brown-representability-universe-transfer, the common-universe Brown principle yields an object G : C and a natural representing-by structure for the underlying set-valued functor H ⋙ forget AddCommGrpCat.",
+ "stmt_deps": [
+  "lem-pc-brown-representability-universe-transfer"
+ ],
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tag 0A8F, with explicit universe transport supplied by the worker"
+ },
+ "proof": [
+  {
+   "text": "Construct ULiftHom.{max w v vH} C, transport the category, triangulated, coproduct, compact-generation, homological, and product-preservation structures across ULiftHom.equiv and AddCommGrpCat.uliftFunctor, apply hBrown, and descend the representing object and natural bijections along the equivalences. This is the full set-theoretic universe bookkeeping argument.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "group": "G2",
+  "date": "2026-10-12",
+  "description": "Intermediate theorem isolates the universe bookkeeping required by the stated proof."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Brown representability after lifting category universes",
+   "results": "No complete match; only ULiftHom and representability lift APIs found.",
+   "date": "2026-10-12",
+   "verdict": "no full match"
+  },
+  {
+   "tool": "loogle",
+   "query": "ULiftHom.equiv",
+   "results": "ULiftHom.equiv found; no theorem transporting compact generation and triangulated structures.",
+   "date": "2026-10-12",
+   "verdict": "partial API only"
+  },
+  {
+   "tool": "grep",
+   "query": "rg ULiftHom Brown representability transport",
+   "results": "No existing project theorem for the complete transport.",
+   "date": "2026-10-12",
+   "verdict": "new auxiliary statement required"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.BrownCohomologicalRepresentabilityUniverseTransfer",
+  "date": "2026-10-12",
+  "group": "G2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-brown-representability-universe-transfer",
+   "place": "universe transport subargument",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.BrownCohomologicalRepresentabilityUniverseTransferAux",
+  "file": "lean/Sheaf/CategoryTheory/BrownCohomologicalRepresentabilityUniverseTransferAux.lean",
+  "declaration": "CategoryTheory.brownCohomologicalRepresentabilityUniverseTransfer_aux",
+  "statement": "theorem brownCohomologicalRepresentabilityUniverseTransfer_aux\n    (C : Type u) [Category.{v} C] [HasZeroObject C] [HasShift C ℤ]\n    [Preadditive C] [∀ n : ℤ, (shiftFunctor C n).Additive] [Pretriangulated C]\n    [IsTriangulated C] [HasCoproducts.{max w v vH} C]\n    (hC : IsCompactlyGeneratedTriangulated.{max w v vH} C)\n    (H : Cᵒᵖ ⥤ AddCommGrpCat.{vH}) [H.IsHomological]\n    (hH : ∀ I : Type (max w v vH), PreservesLimitsOfShape (Discrete I) H)\n    (hBrown : ∀ (A : Type u) [Category.{max w v vH} A]\n      [HasZeroObject A] [HasShift A ℤ] [Preadditive A]\n      [∀ n : ℤ, (shiftFunctor A n).Additive] [Pretriangulated A]\n      [IsTriangulated A] [HasCoproducts.{max w v vH} A],\n      IsCompactlyGeneratedTriangulated.{max w v vH} A →\n      ∀ (K : Aᵒᵖ ⥤ AddCommGrpCat.{max w v vH}) [K.IsHomological],\n      (∀ I : Type (max w v vH), PreservesLimitsOfShape (Discrete I) K) →\n      ∃ G : A, Nonempty (K ≅ preadditiveYoneda.obj G)) :\n    ∃ G : C, Nonempty ((H ⋙ forget AddCommGrpCat).RepresentableBy G)",
+  "branch": "sheaf-dag",
+  "by": "G2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261012T112840-L-767849",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261012T112840-L-767849",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
