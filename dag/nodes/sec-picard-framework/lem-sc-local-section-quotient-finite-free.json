@@ -132,11 +132,12 @@
   "module": "Sheaf.AlgebraicGeometry.LocalSectionQuotientFiniteFree",
   "declaration": "AlgebraicGeometry.exists_local_section_of_shortExact_finiteLocallyFree",
   "file": "lean/Sheaf/AlgebraicGeometry/LocalSectionQuotientFiniteFree.lean",
-  "statement": "theorem exists_local_section_of_shortExact_finiteLocallyFree {X : Scheme.{u}} (S : ShortComplex X.Modules) (hS : S.ShortExact) {d : ℕ} (hE₃ : S.X₃.IsFiniteLocallyFreeOfRank d) : ∀ x : X, ∃ U : X.Opens, x ∈ U ∧ ∃ s : (Scheme.Modules.restrictFunctor U.ι).obj S.X₃ ⟶ (Scheme.Modules.restrictFunctor U.ι).obj S.X₂, (Scheme.Modules.restrictFunctor U.ι).map S.g ≫ s = 𝟙 _",
+  "statement": "theorem exists_local_section_of_shortExact_finiteLocallyFree {X : Scheme.{u}} (S : ShortComplex X.Modules) (hS : S.ShortExact) {d : ℕ} (hE₃ : S.X₃.IsFiniteLocallyFreeOfRank d) : ∀ x : X, ∃ U : X.Opens, x ∈ U ∧ ∃ s : (Scheme.Modules.restrictFunctor U.ι).obj S.X₃ ⟶ (Scheme.Modules.restrictFunctor U.ι).obj S.X₂, s ≫ (Scheme.Modules.restrictFunctor U.ι).map S.g = 𝟙 _",
   "branch": "sheaf-dag",
-  "by": "H1",
-  "date": "2026-10-11",
-  "existing": false
+  "by": "C2",
+  "date": "2026-10-13",
+  "existing": false,
+  "note": "Correct the reversed Lean composition to s ≫ restrict(g) = id on the quotient; the mathematical node statement is unchanged. The theorem is proved by finite basis lifting."
  },
  "reviewed_lean": {
   "date": "2026-10-11",
@@ -157,5 +158,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-d69a5",
+  "group": "C2",
+  "result": "pass",
+  "landing": "20261012T202232-L-701922",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered module, node, change record, report, compilation, and direct importer matched against the stage-3 review requirements"
  }
 }
