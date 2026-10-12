@@ -15,24 +15,42 @@
  ],
  "proof": [
   {
-   "text": "Contract Q to p and put A = R_p. Extend Q to a maximal ideal q of A[X] and identify A[X]_q with R[X]_Q. Complete A at its maximal ideal to obtain S; the completion is Noetherian, local, and complete. The common residue field gives a maximal ideal Q' of S[X] whose contraction is the maximal ideal of S. The maximal ideal of S is the extension of the finitely generated maximal ideal of A; completeness of completion for that extended ideal gives completeness at the maximal ideal of S.",
+   "text": "Let p be the contraction of Q under the coefficient map and A = R_p. Put S equal to the maximal-ideal-adic completion of A, explicitly. Noetherianity of R follows from the G-ring hypothesis; localization and completion give Noetherianity of A and S. Mathlib supplies locality, maximal-ideal completeness, and bijectivity of the induced residue-field map A/m_A to S/m_S.",
    "uses": [
     "def-weil-pbc-g-ring",
+    "lem-weil-pbc-localization-noetherian",
     "lem-weil-pbc-adic-completion-noetherian",
     "lem-weil-pbc-local-completion-local-ring",
-    "lem-weil-pbc-adic-completion-mod-ideal",
-    "lem-weil-pbc-localization-noetherian"
+    "lem-weil-pbc-adic-completion-mod-ideal"
    ],
    "elementary": false
   },
   {
-   "text": "Base change the regular map A to S along A to A[X], then localize at Q'. The resulting map is regular and flat. Its contraction identity makes it local, and transport along A[X]_q ≃ R[X]_Q gives the stated map. Composition is justified by regular composition and Noetherian fibres of the Noetherian target.",
+   "text": "Set K = the residue field of Q. The canonical local map A to R[X]_Q followed by its residue map gives a local map t_A : A to K. Factor t_A through A/m_A and the inverse of the residue-field isomorphism to get t_S : S to K with kernel m_S. Evaluate S[X] in K using t_S on coefficients and the image of X from R[X]. Its composite with coefficient extension R[X] to S[X] is exactly the residue map at Q, by polynomial extensionality. Thus evaluation is surjective. Its kernel Qprime is maximal, contracts to m_S in S, and contracts to Q in R[X]. All maps are explicit constructions; only the inverse of a proved bijection is used.",
    "uses": [
-    "lem-weil-pbc-regular-base-change",
+    "lem-weil-pbc-local-completion-local-ring"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The map R to A is regular by localization and A to S is regular by the G-ring hypothesis. The composite R to S is regular by regular composition, with Noetherian fibres because S is Noetherian. Base change along R to R[X] gives regularity of R[X] to S tensor_R R[X]. The canonical polynomial tensor algebra isomorphism identifies this map with R[X] to S[X]. Transport flatness using its linear equivalence and geometric regularity using the induced fibre tensor equivalences.",
+   "uses": [
+    "def-weil-pbc-g-ring",
     "lem-weil-pbc-localization-regular",
-    "lem-weil-pbc-regular-through-localization",
     "lem-weil-pbc-regular-composition",
-    "lem-weil-pbc-fibre-ring-noetherian"
+    "lem-weil-pbc-fibre-ring-noetherian",
+    "lem-weil-pbc-regular-base-change"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Compose the regular polynomial map with S[X] to S[X]_(Qprime). Composition is regular because the target is Noetherian and therefore has Noetherian fibres over R[X]. The contraction identity gives the canonical local ring homomorphism phi from R[X]_Q to S[X]_(Qprime). Its composite with the source localization map is the previous regular composite. Apply regularity through source localization to prove phi regular. Mathlib locality of the canonical localRingHom gives preservation of maximal-ideal membership, completing the existential statement.",
+   "uses": [
+    "lem-weil-pbc-localization-noetherian",
+    "lem-weil-pbc-localization-regular",
+    "lem-weil-pbc-regular-composition",
+    "lem-weil-pbc-fibre-ring-noetherian",
+    "lem-weil-pbc-regular-through-localization"
    ],
    "elementary": false
   }
@@ -50,9 +68,11 @@
   "lem-weil-pbc-regular-through-localization"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "worker",
+  "group": "V2",
+  "date": "2026-10-12",
   "document": "literature/stacks-project/more-algebra.tex",
-  "place": "Proposition 07PV, completion square, second paragraph"
+  "place": "Proposition 07PV, second paragraph; direct polynomial base change of R to completion(R_p), without intermediate R_p[X] localization transport"
  },
  "mathlib_searches": [
   {
@@ -143,10 +163,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "X2",
+  "group": "V2",
   "result": "pass",
-  "landing": "20261012T085402-L-48928",
-  "kind": "interface",
+  "landing": "20261012T110323-L-623687",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
