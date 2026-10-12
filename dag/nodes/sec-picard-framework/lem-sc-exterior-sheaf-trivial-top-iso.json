@@ -1,0 +1,135 @@
+{
+ "id": "lem-sc-exterior-sheaf-trivial-top-iso",
+ "kind": "statement",
+ "title": "Top exterior presheaf of a globally trivial sheaf",
+ "statement": "Let $X$ be a scheme [def-pc-scheme], $\\mathcal M$ a sheaf of $\\mathcal O_X$-modules [def-weil-sheaf-of-modules-category], and $r\\geq0$. Suppose a sheaf isomorphism $e:\\mathcal M\\cong\\mathcal O_X^{\\oplus r}$ is given. The sectionwise exterior presheaf $P_r(\\mathcal M)$ [def-sc-sheaf-exterior-power] is isomorphic, as a presheaf of $\\mathcal O_X$-modules, to the underlying presheaf of $\\mathcal O_X$.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-rr/lem-sc-riemann-roch.md",
+  "place": "Proof of (*), determinant paragraph"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-sheaf-of-modules-category",
+  "def-sc-sheaf-exterior-power"
+ ],
+ "proof": [
+  {
+   "text": "On each open $V$, evaluate $e$ and the coordinate projections of the finite free sheaf. They give an $\\mathcal O_X(V)$-linear equivalence $c_V:\\mathcal M(V)\\cong\\mathcal O_X(V)^r$. Transport the standard basis using $c_V^{-1}$. By [lem-weil-pbc-exterior-power-free-basis], its $r$th exterior basis is indexed by the $r$-element subsets of $\\operatorname{Fin}(r)$. There is exactly one such subset, the full set, so its single coordinate gives an equivalence $P_r(\\mathcal M)(V)\\cong\\mathcal O_X(V)$.",
+   "uses": [
+    "lem-weil-pbc-exterior-power-free-basis"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-rr/lem-sc-riemann-roch.md",
+    "place": "Proof of (*), determinant paragraph"
+   }
+  },
+  {
+   "text": "The coordinate of a pure wedge is the determinant of the matrix of coordinates of its factors (Mathlib exteriorPower.ιMultiDual_apply_ιMulti and basis_repr_apply). Naturality of $e$ and of each free-sheaf coordinate projection says that these matrix entries restrict by the ring restriction map. Ring maps preserve determinants. The exterior-presheaf restriction sends pure wedges to wedges of restricted factors by [def-sc-sheaf-exterior-power]. Thus the coordinate equivalences are natural on pure wedges, and therefore on the entire exterior module because pure wedges span. PresheafOfModules.isoMk assembles the equivalences. Rank zero uses the empty determinant, and no nontriviality of a scalar ring is required.",
+   "uses": [
+    "def-sc-sheaf-exterior-power"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-rr/lem-sc-riemann-roch.md",
+    "place": "Proof of (*), determinant paragraph"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sc-sheaf-exterior-power",
+  "lem-weil-pbc-exterior-power-free-basis"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-rr/lem-sc-riemann-roch.md",
+  "place": "Proof of (*), determinant paragraph"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The top exterior power of a globally free sheaf of rank r is the structure sheaf",
+   "results": "Internal Server Error; service unavailable",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.Basis.exteriorPower",
+   "results": "Module.Basis.exteriorPower; exteriorPower.basis_coord and basis_repr_apply in Mathlib.LinearAlgebra.ExteriorPower.Basis. These provide the sectionwise basis, not the sheaf naturality assertion.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "exteriorPower|exteriorSheaf|sheafification",
+   "results": "PresheafOfModules.sheafification and sheafificationAdjunction, SheafOfModules.pullback construction; no exterior-sheaf restriction or trivial-top theorem. Also read ExteriorPower/Basis.lean:97-142 and WeilConjectures/Mathlib/Algebra/Category/ModuleCat/Sheaf/Free.lean:64-90.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Modules.ExteriorSheafTopInvertible",
+  "date": "2026-10-12",
+  "group": "T3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-riemann-roch",
+   "place": "Proof of (*), determinant paragraph: local wedge bases and compatibility with restriction",
+   "via": [
+    "lem-sc-exterior-sheaf-top-invertible",
+    "lem-sc-determinant-short-exact"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-rr",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.Modules.ExteriorSheafTrivialTopIso",
+  "file": "lean/Sheaf/AlgebraicGeometry/Modules/ExteriorSheafTrivialTopIso.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.exteriorSheaf_trivial_top_presheaf_iso",
+  "statement": "theorem exteriorSheaf_trivial_top_presheaf_iso {X : Scheme.{v}} (M : X.Modules) (r : ℕ) (e : M ≅ SheafOfModules.free (R := X.ringCatSheaf) (ULift.{v} (Fin r))) : Nonempty (exteriorSheafPresheaf M r ≅ (SheafOfModules.unit X.ringCatSheaf).val)",
+  "branch": "sheaf-dag",
+  "by": "T3",
+  "date": "2026-10-12",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T3",
+  "result": "pass",
+  "landing": "20261012T144148-L-2108423",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T3",
+  "result": "pass",
+  "landing": "20261012T144148-L-2108423",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

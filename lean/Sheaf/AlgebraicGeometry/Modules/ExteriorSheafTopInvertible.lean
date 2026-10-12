@@ -8,6 +8,8 @@ module
 public import Sheaf.AlgebraicGeometry.Modules.ExteriorSheaf
 public import WeilConjectures.AlgebraicGeometry.Modules.Invertible
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
+import Sheaf.AlgebraicGeometry.Modules.ExteriorSheafRestrictIso
+import Sheaf.AlgebraicGeometry.Modules.ExteriorSheafTrivialTopIso
 
 /-!
 # Invertibility of the top exterior power
@@ -24,6 +26,7 @@ open CategoryTheory Opposite MonoidalCategory
 
 namespace AlgebraicGeometry.Scheme.Modules
 
+set_option backward.isDefEq.respectTransparency false in
 /-- The top exterior power of a constant-rank finite locally free sheaf is invertible.
 
 Source: blueprint, Riemann--Roch, proof of (*), determinant paragraph
@@ -43,6 +46,19 @@ For `r = 0` the basis wedge is the empty wedge and the identification is
 characteristic is used. -/
 theorem exteriorSheaf_top_isInvertible {X : Scheme.{v}} (M : X.Modules) (r : ℕ)
     [M.IsFiniteLocallyFreeOfRank r] :
-    AlgebraicGeometry.Scheme.Modules.IsInvertible (exteriorSheaf M r) := by sorry
+    AlgebraicGeometry.Scheme.Modules.IsInvertible (exteriorSheaf M r) := by
+  obtain ⟨ι, U, hU, h⟩ := IsFiniteLocallyFreeOfRank.exists_restrict_iso_free M (r := r)
+  refine ⟨fun x ↦ ?_⟩
+  obtain ⟨i, hi⟩ : ∃ i, x ∈ U i := by
+    have hx : x ∈ (⨆ i, U i) := by rw [hU]; trivial
+    simpa only [TopologicalSpace.Opens.mem_iSup] using hx
+  obtain ⟨e⟩ := h i
+  obtain ⟨p⟩ := exteriorSheaf_trivial_top_presheaf_iso (M.restrict (U i).ι) r e
+  let s := (PresheafOfModules.sheafification (𝟙 (U i).toScheme.ringCatSheaf.obj)).mapIso p
+  let c := (asIso (PresheafOfModules.sheafificationAdjunction.{v}
+    (𝟙 (U i).toScheme.ringCatSheaf.obj)).counit).app
+      (SheafOfModules.unit.{v} (U i).toScheme.ringCatSheaf)
+  exact ⟨U i, hi, ⟨((restrictFunctorIsoPullback (U i).ι).app _).symm ≪≫
+    (exteriorSheaf_restrict_iso M r (U i)).some ≪≫ s ≪≫ c⟩⟩
 
 end AlgebraicGeometry.Scheme.Modules

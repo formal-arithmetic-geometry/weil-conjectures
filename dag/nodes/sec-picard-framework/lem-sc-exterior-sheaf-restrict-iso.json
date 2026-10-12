@@ -1,0 +1,134 @@
+{
+ "id": "lem-sc-exterior-sheaf-restrict-iso",
+ "kind": "statement",
+ "title": "Exterior sheaves commute with open restriction",
+ "statement": "Let $X$ be a scheme [def-pc-scheme], $\\mathcal M$ a sheaf of $\\mathcal O_X$-modules [def-weil-sheaf-of-modules-category], $n\\geq0$, and $U\\subseteq X$ an open subscheme. For the exterior sheaf defined by sheafification of sectionwise exterior powers [def-sc-sheaf-exterior-power], there is an isomorphism of $\\mathcal O_U$-modules $(\\bigwedge^n\\mathcal M)|_U\\cong\\bigwedge^n(\\mathcal M|_U)$. No local-freeness hypothesis is imposed.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-rr/lem-sc-riemann-roch.md",
+  "place": "Proof of (*), determinant paragraph"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-sheaf-of-modules-category",
+  "def-sc-sheaf-exterior-power"
+ ],
+ "proof": [
+  {
+   "text": "For every open $V$ of $U$, restriction identifies the sections of $\\mathcal M|_U$ and its scalar ring with those of $\\mathcal M$ and $\\mathcal O_X$ on the corresponding open of $X$. Transport through the scalar-ring isomorphism and apply the universal property of exterior powers in both directions, sending every pure wedge to the same wedge of its identified factors. The composites are identities since pure wedges span. The restriction maps agree on pure wedges by [def-sc-sheaf-exterior-power], hence everywhere. This gives a presheaf isomorphism between the exterior presheaf on $U$ and the restriction of the exterior presheaf on $X$.",
+   "uses": [
+    "def-sc-sheaf-exterior-power"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-rr/lem-sc-riemann-roch.md",
+    "place": "Proof of (*), determinant paragraph"
+   }
+  },
+  {
+   "text": "Sheafification commutes with restriction to $U$: a section of the associated sheaf is locally represented by presheaf sections, with equal representations identified after a covering refinement; an open in $U$ has exactly the same open covers and refinements when viewed in $X$. These local representations and their equivalence relations coincide under restriction, and the scalar actions coincide as well. Consequently the associated sheaves of the two presheaves just identified are isomorphic. Composing these isomorphisms proves the assertion, including $n=0$ and $U=\\varnothing$.",
+   "uses": [
+    "def-sc-sheaf-exterior-power"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-rr/lem-sc-riemann-roch.md",
+    "place": "Proof of (*), determinant paragraph"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sc-sheaf-exterior-power"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-rr/lem-sc-riemann-roch.md",
+  "place": "Proof of (*), determinant paragraph"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "exterior powers of sheaves of modules commute with restriction to an open subscheme",
+   "results": "Internal Server Error; service unavailable",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exterior powers of sheaves commute with restriction to open subschemes",
+   "results": "Scheme.Modules.restrictFunctorComp and restrict_map; ModuleCat.Tilde.toOpen_res. No exterior-sheaf comparison theorem.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "exteriorPower|exteriorSheaf|sheafification",
+   "results": "PresheafOfModules.sheafification and sheafificationAdjunction, SheafOfModules.pullback construction; no exterior-sheaf restriction or trivial-top theorem. Also read ExteriorPower/Basis.lean:97-142 and WeilConjectures/Mathlib/Algebra/Category/ModuleCat/Sheaf/Free.lean:64-90.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Modules.ExteriorSheafTopInvertible",
+  "date": "2026-10-12",
+  "group": "T3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-riemann-roch",
+   "place": "Proof of (*), determinant paragraph: local wedge bases and compatibility with restriction",
+   "via": [
+    "lem-sc-exterior-sheaf-top-invertible",
+    "lem-sc-determinant-short-exact"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-rr",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.Modules.ExteriorSheafRestrictIso",
+  "file": "lean/Sheaf/AlgebraicGeometry/Modules/ExteriorSheafRestrictIso.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.exteriorSheaf_restrict_iso",
+  "statement": "theorem exteriorSheaf_restrict_iso {X : Scheme.{v}} (M : X.Modules) (n : ℕ) (U : X.Opens) : Nonempty ((exteriorSheaf M n).restrict U.ι ≅ exteriorSheaf (M.restrict U.ι) n)",
+  "branch": "sheaf-dag",
+  "by": "T3",
+  "date": "2026-10-12",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T3",
+  "result": "pass",
+  "landing": "20261012T144148-L-2108423",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T3",
+  "result": "pass",
+  "landing": "20261012T144148-L-2108423",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
