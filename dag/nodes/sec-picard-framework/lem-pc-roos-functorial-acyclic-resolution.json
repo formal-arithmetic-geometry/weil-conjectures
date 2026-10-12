@@ -29,55 +29,45 @@
  ],
  "proof": [
   {
-   "text": "For a tower A indexed by n >= 0, define U(A)_n as the finite product of A_i with i <= n and V(A)_n as the finite product with i < n. Both transitions forget the last coordinate. Define i_A at n by all composites of transitions from A_n to A_i. Define p_A at n by x_i - f_i(x_(i+1)) for i < n. Coordinatewise maps induced by a morphism of towers commute with i_A,p_A and transitions, yielding functors U,V and natural transformations i,p with i_A p_A=0.",
+   "text": "Use the explicit functors T_1 and T_0, augmentation, difference, zero composite, and short exactness from the finite-prefix construction.",
    "uses": [
-    "def-weil-inverse-system"
+    "lem-pc-roos-finite-prefix-construction"
    ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Tag 07KW, Lemma 15.88.1, proof: finite-prefix systems B and C"
+    "place": "Tag 07KW, Lemma 15.88.1, proof (https://stacks.math.columbia.edu/tag/07KW)"
    }
   },
   {
-   "text": "At level n, i_A is injective because its coordinate n is the identity. The kernel of p_A consists precisely of successive-transition tuples and is the image of i_A. Given y_i for i<n, start with x_n=0 and solve x_i=y_i+f_i(x_(i+1)) downwards, so p_A is surjective. These levelwise short exact sequences are short exact in the functor category, since its kernels and cokernels are computed levelwise by their universal properties. The empty prefix V(A)_0 is the zero group.",
+   "text": "Apply the finite-prefix limit cones for s=1 and s=0. Their universal properties yield objectwise isomorphisms with the full product. Compare product coordinates to prove naturality: coordinate i is extracted from prefix i+1. Compute the limit of the difference at this prefix; compatibility identifies its two coordinates with the full-product coordinates i and i+1, giving exactly the natural map 1 minus shift.",
    "uses": [
-    "lem-pc-tower-abelian"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Tag 07KW, Lemma 15.88.1, proof: finite-prefix systems B and C"
-   }
-  },
-  {
-   "text": "A compatible family of finite prefixes is determined uniquely by one entry in each A_i; conversely a full tuple restricts to such a family. This gives natural isomorphisms lim U(A) and lim V(A) with product_i A_i. Computing every coordinate identifies lim p_A with 1 minus the shift, namely x_i-f_i(x_(i+1)). Thus the isomorphisms intertwine lim p with the natural transition endomorphism of the product functor.",
-   "uses": [
+    "lem-pc-roos-finite-prefix-limits",
     "def-weil-tower-transition-endomorphism"
    ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Tag 07KW, Lemma 15.88.1, proof: finite-prefix systems B and C"
+    "place": "Tag 07KW, Lemma 15.88.1, proof (https://stacks.math.columbia.edu/tag/07KW)"
    }
   },
   {
-   "text": "Both U(A) and V(A) have surjective projection transitions (extend a prefix by zero). Apply the acyclicity theorem for surjective towers to each: all positive right derived limits of U(A) and V(A) vanish.",
+   "text": "Apply finite-prefix acyclicity at s=1 and s=0 to give the vanishing of both positive derived limits. Assemble these data into the existential resolution.",
    "uses": [
-    "lem-pc-tower-surjective-lim-acyclic"
+    "lem-pc-roos-prefix-acyclic"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Tag 07KW, Lemma 15.88.1, proof: finite-prefix systems B and C"
+    "place": "Tag 07KW, Lemma 15.88.1, proof (https://stacks.math.columbia.edu/tag/07KW)"
    }
   }
  ],
  "proof_deps": [
-  "def-weil-inverse-system",
   "def-weil-tower-transition-endomorphism",
-  "lem-pc-tower-abelian",
-  "lem-pc-tower-surjective-lim-acyclic"
+  "lem-pc-roos-finite-prefix-construction",
+  "lem-pc-roos-finite-prefix-limits",
+  "lem-pc-roos-prefix-acyclic"
  ],
  "proof_origin": {
   "by": "document",
@@ -151,11 +141,11 @@
  "reviewed_proof": {
   "date": "2026-10-12",
   "by": "L",
-  "reviewer": "X-abfc5",
-  "group": "C1",
+  "reviewer": "COMPILER",
+  "group": "P3",
   "result": "pass",
-  "landing": "20261012T135221-L-1657192",
+  "landing": "20261012T163617-L-2786473",
   "kind": "interface",
-  "note": "independent Codex review: Matched unchanged Roos statement and delivered proof with its node; matched the new acyclic-resolution statement with its node and Stacks 07KW; compiled both modules and all eight direct importers."
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
