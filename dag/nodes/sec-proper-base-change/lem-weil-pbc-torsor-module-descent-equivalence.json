@@ -18,71 +18,27 @@
  ],
  "proof": [
   {
-   "text": "Construct the associated sheaf directly. For a P-representation N, restrict its scalars along ULift(F_l) -> F_l. For W etale over V, take the submodule of locally constant sections on W times_V c.P with values in this module satisfying s(g*y)=g*s(y). The torsor action and representation action make this a submodule. Restriction is restriction of sections. Given a matching family on an etale cover of W, glue its sections on the induced cover upstairs; uniqueness of gluing preserves equivariance. This proves the sheaf condition. On the pulled-back torsor there is a diagonal section, and evaluation at it identifies equivariant sections with ordinary constant-sheaf sections. Its inverse extends a section by the group action. These formulas commute with restriction and module maps and give the natural pullback isomorphism.",
+   "text": "Use the concrete equivariant-section functor. Its additivity follows pointwise and from left exact sheafification. The pullback comparison puts every object in the constant-pullback full subcategory. Faithfulness follows by taking a geometric fibre of the constant pullback comparison: the fibre of a constant sheaf is its value, and forgetting a representation and restricting scalars are faithful. Fullness lifts to the full subcategory. The essential-image theorem supplies essential surjectivity of the lifted functor. Apply Functor.asEquivalence and its definitionally unchanged functor to retain both comparisons and additivity.",
    "uses": [
-    "def-sbc-normal-dominant-galois",
-    "def-weil-pbc-etale-sheaves",
-    "def-weil-pbc-constant-sheaf"
+    "def-weil-pbc-torsor-associated-module",
+    "lem-weil-pbc-torsor-associated-module-comparisons",
+    "lem-weil-pbc-torsor-associated-module-full",
+    "lem-weil-pbc-torsor-associated-module-essential-image"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tags 0DV5 (3), 0DV6 and 0A3R, proof identifying the restricted representation; sites.tex Tags 04TR and 04TS (gluing sheaves and mapping property), with module operations as in 0DV5 (3)"
-   }
-  },
-  {
-   "text": "An equivariant linear map acts pointwise on these sections. Pointwise identity, composition and addition prove functoriality and additivity. For the trivial rank-one representation the equivariance condition is invariance. A locally constant invariant function on W times_V c.P is the pullback of a unique locally constant function on W: define it on an etale cover where the torsor has a section, and use invariance to make these local definitions independent of the section and equal on overlaps. Hence the trivial coefficient representation maps to the constant coefficient sheaf.",
-   "uses": [
-    "def-sbc-normal-dominant-galois",
-    "def-weil-pbc-constant-sheaf"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tags 0DV5 (3), 0DV6 and 0A3R, proof identifying the restricted representation; sites.tex Tags 04TR and 04TS (gluing sheaves and mapping property), with module operations as in 0DV5 (3)"
-   }
-  },
-  {
-   "text": "For a sheaf F whose pullback is constant with value A, choose a trivialization. On the components of c.P times_V c.P indexed by P, the transported canonical descent isomorphism is a map of constant module sheaves on c.P. Each constant section a has locally constant image; connectedness and nonemptiness imply that image is constant. Evaluation at one point recovers a linear map on A. Equality of the constant sections implies equality of sheaf maps since sections are locally constant sections. The inverse descent map gives invertibility, and the triple-overlap cocycle gives the group action (with the projection convention of the construction). Transporting scalars back gives a representation. Local evaluation in the trivialization identifies its associated sheaf with F, and these local identifications agree by the transported descent maps. This proves essential surjectivity without finite-dimensionality.",
-   "uses": [
-    "def-weil-connected-scheme",
-    "def-sbc-normal-dominant-galois",
-    "def-weil-pbc-constant-sheaf",
-    "def-weil-pbc-inverse-image"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tags 0DV5 (3), 0DV6 and 0A3R, proof identifying the restricted representation; sites.tex Tags 04TR and 04TS (gluing sheaves and mapping property), with module operations as in 0DV5 (3)"
-   }
-  },
-  {
-   "text": "For a map between two associated sheaves, pull it back and use the natural constant pullback identifications. The same connectedness argument shows it is one linear map of values. Commutation with the canonical descent maps says precisely that this linear map is P-equivariant. Its pointwise map of associated sheaves is the original map, because they agree after the etale surjective covering c.P -> V, and uniqueness in the sheaf condition detects that equality. This gives full faithfulness. Together with essential surjectivity it yields an equivalence with the full subcategory of sheaves having constant pullback; choose its inverse and unit and counit from these object and morphism identifications. The underlying functor retains its additivity, pullback comparison and trivial coefficient comparison.",
-   "uses": [
-    "def-weil-connected-scheme",
-    "def-sbc-normal-dominant-galois",
-    "def-weil-pbc-etale-sheaves",
-    "def-weil-pbc-constant-sheaf"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tags 0DV5 (3), 0DV6 and 0A3R, proof identifying the restricted representation; sites.tex Tags 04TR and 04TS (gluing sheaves and mapping property), with module operations as in 0DV5 (3)"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "def-sbc-normal-dominant-galois",
-  "def-weil-connected-scheme",
-  "def-weil-pbc-constant-sheaf",
-  "def-weil-pbc-etale-sheaves",
-  "def-weil-pbc-inverse-image"
+  "def-weil-pbc-torsor-associated-module",
+  "lem-weil-pbc-torsor-associated-module-comparisons",
+  "lem-weil-pbc-torsor-associated-module-full",
+  "lem-weil-pbc-torsor-associated-module-essential-image"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/etale-cohomology.tex",
   "place": "Tags 0DV5 (3), 0DV6 and 0A3R, proof identifying the restricted representation; sites.tex Tags 04TR and 04TS (gluing sheaves and mapping property), with module operations as in 0DV5 (3)",
-  "note": "Explicit equivariant-section construction and connectedness argument extending the finite-module correspondence to arbitrary modules trivialized by this finite torsor. No geometric-stalk or finite-dimensionality conclusion is asserted."
+  "note": "G1: concrete associated functor and proved additivity; reduction to comparisons, fullness and essential image. Faithfulness is proved using existing constant sheaf fibre isomorphism. Unit route unchanged."
  },
  "mathlib_searches": [
   {
@@ -161,9 +117,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "U2",
+  "group": "G1",
   "result": "pass",
-  "landing": "20261012T070555-L-3479025",
+  "landing": "20261012T085241-L-15409",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

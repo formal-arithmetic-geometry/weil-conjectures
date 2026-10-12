@@ -13,9 +13,11 @@ public import Mathlib.Algebra.Field.ULift
 public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
 
 public import Mathlib.CategoryTheory.ObjectProperty.FullSubcategory
-import Sheaf.AlgebraicGeometry.EtaleSheaves
-import Sheaf.AlgebraicGeometry.NormalScheme
-import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
+import Sheaf.ConstructibleSheaf.TorsorAssociatedModuleComparisons
+import Sheaf.ConstructibleSheaf.TorsorAssociatedModuleFull
+import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
+import WeilConjectures.Mathlib.CategoryTheory.Sites.Point.ConstantSheaf
+import Sheaf.ConstructibleSheaf.TorsorAssociatedModuleEssentialImage
 
 /-!
 # Descent equivalence for a connected finite torsor
@@ -93,6 +95,38 @@ theorem Scheme.GaloisCover.exists_module_descent_equivalence
           constantSheaf c.P.smallEtaleTopology C) ∧
       Nonempty (T.obj (Rep.trivial (ZMod ℓ) P (ULift.{u + 1} (ZMod ℓ))) ≅
         (constantSheaf V.smallEtaleTopology C).obj
-          (ModuleCat.of _ (ULift.{u + 1} (ZMod ℓ)))) := by sorry
+          (ModuleCat.of _ (ULift.{u + 1} (ZMod ℓ)))) := by
+  classical
+  dsimp only
+  let C := ModuleCat.{u + 1} (ULift.{u + 1} (ZMod ℓ))
+  let D : ObjectProperty (Sheaf V.smallEtaleTopology C) := fun F ↦
+    ∃ A : C, Nonempty ((c.π)^*[C].obj F ≅
+      (constantSheaf c.P.smallEtaleTopology C).obj A)
+  let T := c.associatedModuleFunctor ℓ
+  obtain ⟨⟨eπ⟩, hunit⟩ := c.associatedModuleFunctor_comparisons ℓ P
+  let _ : T.Full := c.associatedModuleFunctor_full ℓ P
+  obtain ⟨x⟩ := ‹ConnectedSpace c.P›.toNonempty
+  let Φ := c.P.uliftPointSmallEtale x
+  let _ : (constantSheaf c.P.smallEtaleTopology C).Faithful :=
+    Functor.Faithful.of_comp_iso (Φ.constantSheafCompSheafFiberIso _ C)
+  let _ : (T ⋙ (c.π)^*[C]).Faithful := Functor.Faithful.of_iso eπ.symm
+  let _ : T.Faithful := Functor.Faithful.of_comp T (c.π)^*[C]
+  have hT : ∀ N, D (T.obj N) := fun N ↦
+    ⟨_, ⟨eπ.app N⟩⟩
+  let L := D.lift T hT
+  have hess : L.EssSurj := by
+    constructor
+    intro F
+    obtain ⟨A, hA⟩ := F.property
+    obtain ⟨N, ⟨e⟩⟩ := c.associatedModuleFunctor_essentialImage ℓ P F.obj A hA
+    exact ⟨N, ⟨D.isoMk e⟩⟩
+  let _ : L.EssSurj := hess
+  let _ : L.IsEquivalence := {}
+  let E := L.asEquivalence
+  refine ⟨E, ?_, ?_, ?_⟩
+  · change (L ⋙ D.ι).Additive
+    exact Functor.additive_of_iso (D.liftCompιIso T hT).symm
+  · exact ⟨eπ⟩
+  · exact hunit
 
 end AlgebraicGeometry
