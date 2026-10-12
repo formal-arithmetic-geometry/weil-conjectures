@@ -7,6 +7,8 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.Curve.Assertions
 public import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
+import Sheaf.AlgebraicGeometry.Curve.FilteredFiniteCoverLowerShriekTransferCore
+import Sheaf.AlgebraicGeometry.Curve.FilteredFiniteCoverLowerShriekTransferRetract
 
 /-! # Transfer from a filtered finite etale cover through extension by zero
 
@@ -82,7 +84,9 @@ theorem filteredFiniteCoverLowerShriekTransfer {k : Type u} [Field k] [IsAlgClos
             (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod r)))).obj
             (ModuleCat.of _ (ULift.{u + 1} (ZMod r)))))) :
     IsCurve.Assertions (ULift.{u + 1} (ZMod r)) f
-      ((Etale.openImmersionLowerShriek (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod r))) j).obj G) :=
-  by sorry
+      ((Etale.openImmersionLowerShriek (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod r))) j).obj G) := by
+  apply filteredFiniteCoverLowerShriekTransfer_retract f j r G v
+    (filteredFiniteCoverLowerShriekTransfer_core f j r G v n W ι hzero hend
+      hquot hconstant) ρ hρ
 
 end AlgebraicGeometry.IsCurve

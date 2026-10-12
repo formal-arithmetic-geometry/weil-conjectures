@@ -1,0 +1,119 @@
+{
+ "id": "k1-filtered-finite-cover-lower-shriek-transfer-retract",
+ "kind": "statement",
+ "title": "Retract transfer for filtered cover",
+ "statement": "Let $k$ be algebraically closed [def-weil-algebraic-closure], $X$ a reduced [def-pc-reduced-scheme] separated finite-type $k$-curve of dimension at most one [def-weil-pbc-curve-setting], $j:U\\to X$ an open immersion, $r$ a prime, $R=\\operatorname{ULift}(\\mathbb Z/r\\mathbb Z)$, and $G$ a finite locally constant $R$-module sheaf [def-weil-pbc-etale-constructible-sheaf] on $U$. Let $v:V\\to U$ be finite etale and $H=v_*v^*G$ [def-weil-pbc-direct-image, def-weil-pbc-inverse-image]. Assume all eight assertions [def-weil-pbc-eight-curve-assertions] hold for $j_!H$ [def-weil-pbc-extension-by-zero]. Suppose $\\rho:H\\to G$ retracts the adjunction unit $G\\to H$. Then all eight assertions hold for $j_!G$.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "03SD (lemma-vanishing-easier), paragraphs 2--4; 05K0, 0GJ1, 0A5C and 0A5D"
+ },
+ "stmt_deps": [
+  "def-weil-algebraic-closure",
+  "def-pc-reduced-scheme",
+  "def-weil-pbc-curve-setting",
+  "def-weil-pbc-etale-constructible-sheaf",
+  "def-weil-pbc-eight-curve-assertions",
+  "def-weil-pbc-extension-by-zero",
+  "def-weil-pbc-inverse-image",
+  "def-weil-pbc-direct-image"
+ ],
+ "proof": [
+  {
+   "text": "Apply j_! to the unit and its specified retraction. For nonzero r-torsion sheaves the primary characteristic condition forces p=r; invertible-order torsion forces r invertible in k, otherwise G is zero and its pullback and pushforward are zero. Constructibility is preserved by finite locally constant pullback, finite pushforward and extension by zero. Thus the larger sheaf has the required conditional hypotheses. Cohomology retractions preserve vanishing and finiteness, and the natural comparison maps are retracts preserving bijectivity and surjectivity. Descend all assertions to j_!G.",
+   "uses": [
+    "def-weil-pbc-primary-torsion",
+    "def-weil-pbc-constructible-torsion",
+    "lem-weil-pbc-finite-pushforward-constructible-noetherian",
+    "lem-weil-pbc-curve-assertions-retract"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-primary-torsion",
+  "def-weil-pbc-constructible-torsion",
+  "lem-weil-pbc-finite-pushforward-constructible-noetherian",
+  "lem-weil-pbc-curve-assertions-retract"
+ ],
+ "proof_origin": "Stacks 03SD: descend the eight assertions from j_!(v_*v^*G) to j_!G using the supplied unit retraction and verification of the conditional coefficient hypotheses.",
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "etale cohomology eight assertions finite morphism pushforward constant successive quotients",
+   "results": "Actual second-reader search: 8 hits; AlgebraicGeometry.IsEtale.of_comp; AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified; AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme; AlgebraicGeometry.Scheme.etaleTopology; Algebra.FormallyEtale.instForallOfFinite; Algebra.FormallyEtale.comp; Algebra.Etale.comp; AlgebraicGeometry.Scheme.smallEtaleTopology",
+   "date": "2026-10-12",
+   "verdict": "No matching filtered-cover core or specialized prime-coefficient retract theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"cohomology\", \"retract\"",
+   "results": "Actual second-reader search: 0 hits; no indexed match",
+   "date": "2026-10-12",
+   "verdict": "No matching filtered-cover core or specialized prime-coefficient retract theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "etale.*cohomology|cohomology.*etale|sheaf.*retract",
+   "results": "Actual second-reader search: 0 hits; no indexed match",
+   "date": "2026-10-12",
+   "verdict": "No matching filtered-cover core or specialized prime-coefficient retract theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "etale cohomology curve assertions descend along a retraction after finite pushforward",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Curve.FilteredFiniteCoverLowerShriekTransfer",
+  "date": "2026-10-12",
+  "group": "T1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-weil-pbc-algebraically-closed-extension",
+   "place": "proof: reduced constructible prime-coefficient case, unit-retraction descent",
+   "via": [
+    "k1-filtered-finite-cover-lower-shriek-transfer",
+    "e1-prime-coefficient-curve-assertions"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Curve.FilteredFiniteCoverLowerShriekTransferRetract",
+  "file": "lean/Sheaf/AlgebraicGeometry/Curve/FilteredFiniteCoverLowerShriekTransferRetract.lean",
+  "declaration": "AlgebraicGeometry.IsCurve.filteredFiniteCoverLowerShriekTransfer_retract",
+  "statement": "theorem filteredFiniteCoverLowerShriekTransfer_retract {k : Type u} [Field k] [IsAlgClosed k]\n    {X U V : Scheme.{u}} (f : X ⟶ Spec (.of k)) [IsCurve f] [IsReduced X]\n    (j : U ⟶ X) [IsOpenImmersion j] (r : ℕ) [Fact r.Prime]\n    (G : Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod r))))\n    [Scheme.IsFiniteLocallyConstantSheaf G] (v : V ⟶ U) [IsFinite v] [Etale v]\n    (hH : IsCurve.Assertions (ULift.{u + 1} (ZMod r)) f\n      ((Etale.openImmersionLowerShriek (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod r))) j).obj\n        ((Etale.lowerStar (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod r))) v).obj\n          ((Etale.upperStar (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod r))) v).obj G))))\n    (ρ : (Etale.lowerStar (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod r))) v).obj\n      ((Etale.upperStar (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod r))) v).obj G) ⟶ G)\n    (hρ : (Etale.upperStarLowerStarAdjunction\n      (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod r))) v).unit.app G ≫ ρ = 𝟙 G) :\n    IsCurve.Assertions (ULift.{u + 1} (ZMod r)) f\n      ((Etale.openImmersionLowerShriek (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod r))) j).obj G)",
+  "branch": "sheaf-dag",
+  "by": "T1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T1",
+  "result": "pass",
+  "landing": "20261012T030255-L-1281385",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T1",
+  "result": "pass",
+  "landing": "20261012T030255-L-1281385",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed after the tool's own checks (compiles, no new sorry without its node, no axiom, statements of existing declarations unchanged); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
