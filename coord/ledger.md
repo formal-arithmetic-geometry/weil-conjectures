@@ -9570,3 +9570,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 21:22 L: merged deliver/M1/Sheaf.AlgebraicGeometry.FiniteFreeStalkDegreewiseLift (stage 3; reviewer PASS; first push; landing 20261012T212209-L-1097756 (interface); batch 20261012T212205; modules 3; new nodes 2)
 - 21:22 L: merged deliver/M2/Sheaf.RingTheory.PopescuFlatCoordinates (stage 3; reviewer PASS; first push; landing 20261012T212209-L-1097864 (interface); batch 20261012T212205; modules 3; new nodes 2)
 - 21:22 L: merged deliver/M3/Sheaf.Paper.EtaleFiniteDataDescent (stage 3; reviewer PASS; first push; landing 20261012T212210-L-1097990 (interface); batch 20261012T212205; modules 3; new nodes 2)
+- 21:22 L: merged deliver/P3/Sheaf.CategoryTheory.Sites.OverPullbackAdjunctionMono (stage 3; reviewer PASS; after a return; landing 20261012T212210-L-1098108 (interface); batch 20261012T212205; modules 1; new nodes 0; change records: coord/changes/OverPullbackAdjunctionMono-import.md)
