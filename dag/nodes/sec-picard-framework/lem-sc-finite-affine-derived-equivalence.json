@@ -29,67 +29,79 @@
  ],
  "proof": [
   {
-   "text": "Put $\\mathcal A=f_*\\mathcal O_X$. The affine module correspondence [lem-weil-pbc-affine-module-correspondence] identifies quasi-coherent $\\mathcal O_X$-modules with quasi-coherent $\\mathcal A$-modules, via $f_*$. Regard this equivalence as the underived direct image for the ringed-space morphism $g$.",
+   "text": "Obtain the ambient derived tensor pullback L and its adjunction to Rg_* from [lem-pc-ringed-spaces-derived-adjoint-general].",
    "uses": [
-    "lem-weil-pbc-affine-module-correspondence"
+    "lem-pc-ringed-spaces-derived-adjoint-general"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/perfect.tex",
-    "place": "Tag 0AVW, reduction to the affine module correspondence"
+    "place": "Tag 0AVW, perfect-lemma-affine-morphism-equivalence, proof"
    }
   },
   {
-   "text": "The morphism $g$ is flat: on affine stalks it is the localization map $\\mathcal A_q\\to\\mathcal O_{X,p}$. Thus $g^*=\\mathcal O_X\\otimes_{g^{-1}\\mathcal A}g^{-1}(-)$ is exact on the relevant quasi-coherent objects. By the displayed definition of $Lg^*$, a K-flat resolution $P\\to M$ computes it, and exactness gives $H^i(Lg^*M)=g^*H^i(M)$ by applying $g^*$ to kernels and images. The ringed-space adjunction [lem-pc-ringed-spaces-derived-adjoint-general] gives $Lg^*\\dashv Rg_*$. First restrict this adjunction's direct image to the underlying schemes: Step 4 identifies the restriction of $Rg_*$ with $Rf_*$. Therefore [lem-sc-affine-derived-cohomology] gives $H^i(Rg_*K)=f_*H^i(K)$, since restriction of scalars is exact and does not change cohomology sheaves. The affine correspondence makes these sheaves quasi-coherent $\\mathcal A$-modules, so $Rg_*$ lands in $D_{\\mathrm{QCoh}}(\\mathcal A)$.",
+   "text": "Restriction of scalars T is exact by the finite-limit and finite-colimit preservation declarations in [def-pc-derived-rhom-algebra-module], specialized to the algebra Under.mk f.c. The underived composite g_* followed by T is definitionally f_*. The source-library exact-postcomposition theorem rightDerivedFunctorCompMapDerivedCategoryIso and rightDerivedFunctorNatIso give Rg_* followed by RT naturally isomorphic to Rf_*; rightDerivedFunctorIsoMapDerivedCategory identifies RT with levelwise scalar restriction. No K-injective preservation by g_* is assumed.",
    "uses": [
-    "lem-pc-ringed-spaces-derived-adjoint-general",
-    "lem-sc-affine-derived-cohomology",
-    "lem-weil-pbc-affine-module-correspondence",
-    "def-pc-ringed-spaces-derived-direct-image"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/perfect.tex",
-    "place": "Tag 0AVW, derived equivalence and cohomology comparison"
-   }
-  },
-  {
-   "text": "For $M\\in D_{\\mathrm{QCoh}}(\\mathcal A)$, the same exact-localization calculation gives $H^i(Lg^*M)=g^*H^i(M)$ and preserves quasi-coherence. The correspondence's $h(G)=f^*G\\otimes_{f^*\\mathcal A}\\mathcal O_X$ agrees naturally with $g^*G$: $h(G)=(\\mathcal O_X\\otimes_{f^{-1}\\mathcal O_Y}f^{-1}G)\\otimes_{\\mathcal O_X\\otimes f^{-1}\\mathcal A}\\mathcal O_X=\\mathcal O_X\\otimes_{f^{-1}\\mathcal A}f^{-1}G=g^*G$. Since $g^*$ and $g_*$ are exact on the relevant objects, the cohomology maps of the derived unit and counit are the underived maps $H^i(M)\\to g_*g^*H^i(M)$ and $g^*g_*H^i(K)\\to H^i(K)$. They are respectively the affine correspondence's $\\beta_{H^i(M)}$ and $\\alpha_{H^i(K)}$, hence isomorphisms. Thus $Lg^*$ and $Rg_*$ are mutually quasi-inverse.",
-   "uses": [
-    "lem-weil-pbc-affine-module-correspondence",
-    "lem-pc-ringed-spaces-derived-adjoint-general",
-    "def-pc-ringed-spaces-derived-direct-image"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/perfect.tex",
-    "place": "Tag 0AVW, unit and counit of the affine derived equivalence"
-   }
-  },
-  {
-   "text": "Restriction of scalars along $\\mathcal O_Y\\to\\mathcal A$ is exact because it does not change the underlying sheaf or its kernels and cokernels. By [def-pc-ringed-spaces-derived-direct-image], choose a K-injective representative $I$ of $K$; both $Rg_*K$ and $Rf_*K$ are represented by the same underlying complex $f_*I$, with only the module structure changed. The scheme-level derived direct image is the functor in [def-pc-derived-direct-image]. Hence restriction of $\\Phi=Rg_*$ is canonically $Rf_*$, and this comparison is used in Step 2 before applying the affine cohomology formula.",
-   "uses": [
+    "def-pc-derived-rhom-algebra-module",
     "def-pc-ringed-spaces-derived-direct-image",
     "def-pc-derived-direct-image"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/perfect.tex",
-    "place": "Tag 0AVW, final identification with derived pushforward"
+    "place": "Tag 0AVW, perfect-lemma-affine-morphism-equivalence, proof"
+   }
+  },
+  {
+   "text": "For each degree, rightDerivedFunctorHomologyFunctorIso identifies the cohomology of RT with scalar restriction of cohomology. Clause (1) of [lem-weil-pbc-affine-module-correspondence] implies RT preserves quasi-coherent cohomology. To show Rg_* does too, compose this homology comparison with the derived composite comparison and [lem-sc-affine-derived-cohomology]. Scalar restriction of H^i(Rg_*K) is isomorphic to f_*H^i(K), which is quasi-coherent; clause (1) reflects quasi-coherence back to the algebra module.",
+   "uses": [
+    "lem-weil-pbc-affine-module-correspondence",
+    "lem-sc-affine-derived-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 0AVW, perfect-lemma-affine-morphism-equivalence, proof"
+   }
+  },
+  {
+   "text": "Use [lem-sc-affine-algebra-derived-adjunction-qcoh] to preserve quasi-coherence under L. Lift L and Rg_* to the full subcategories with ObjectProperty.lift, and restrict the adjunction using Adjunction.restrictFullyFaithful. The inclusion images of its unit and counit are the ambient maps, composed with identity comparisons. They are isomorphisms by [lem-sc-affine-algebra-derived-adjunction-isos]. Fully faithful inclusions reflect isomorphisms. Apply Adjunction.toEquivalence and take its inverse equivalence, so the forward functor is the restricted Rg_*.",
+   "uses": [
+    "lem-sc-affine-algebra-derived-adjunction-qcoh",
+    "lem-sc-affine-algebra-derived-adjunction-isos"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 0AVW, perfect-lemma-affine-morphism-equivalence, proof"
+   }
+  },
+  {
+   "text": "Lift RT to the full quasi-coherent subcategory on Y to define S. Both lift/inclusion comparisons are definitional identity isomorphisms. Whisker the composite comparison of Step 2 with the source inclusion to obtain E.functor followed by S and inclusion naturally isomorphic to the source inclusion followed by Rf_*. This proves all three comparison clauses.",
+   "uses": [
+    "def-pc-derived-direct-image"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 0AVW, perfect-lemma-affine-morphism-equivalence, proof"
    }
   }
  ],
  "proof_deps": [
+  "lem-pc-ringed-spaces-derived-adjoint-general",
+  "def-pc-derived-rhom-algebra-module",
   "def-pc-ringed-spaces-derived-direct-image",
   "def-pc-derived-direct-image",
   "lem-weil-pbc-affine-module-correspondence",
-  "lem-pc-ringed-spaces-derived-adjoint-general",
-  "lem-sc-affine-derived-cohomology"
+  "lem-sc-affine-derived-cohomology",
+  "lem-sc-affine-algebra-derived-adjunction-qcoh",
+  "lem-sc-affine-algebra-derived-adjunction-isos"
  ],
  "proof_origin": {
-  "by": "document",
-  "document": "literature/stacks-project/perfect.tex",
-  "place": "Tag 0AVW, lemma-affine-morphism-equivalence"
+  "by": "agent",
+  "document": "literature/stacks-project/perfect.tex; lean/WeilConjectures/CategoryTheory/DerivedCategory/RightDerivedFunctor/MapDerivedCategory.lean",
+  "place": "Tag 0AVW, perfect-lemma-affine-morphism-equivalence; U3 implements the full-subcategory argument, affine direct-image preservation, and scalar comparison, splitting only pullback preservation and ambient unit/counit invertibility."
  },
  "mathlib_searches": [
   {
@@ -177,5 +189,15 @@
   "group": "S1",
   "result": "pass",
   "note": "X,Y,f,[IsAffineHom f] = affine morphism; source schemeDerivedQCohCategory X; target new unbounded D_QCoh(f_*O_X) over (Y,f_*O_X) (carrier rfl-equal to CommAlgebraSheaf Under.mk <f.c> form, checked); E.functor tied to Rg_* (derivedModuleDirectImage of g); S tied to rightDerivedFunctor of restrictScalars along f.c (as landed AffineQCohDerivedEquivalence); E.functor ⋙ S = Rf_*; new node needed (no landed ringed space (Y,f_*O_X)/g, D+_QCoh(B) is bounded); check_dag clean"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U3",
+  "result": "pass",
+  "landing": "20261012T085349-L-43586",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

@@ -1,0 +1,155 @@
+{
+ "id": "lem-sc-affine-algebra-derived-adjunction-qcoh",
+ "kind": "statement",
+ "title": "Affine algebra derived pullback preserves quasi-coherence",
+ "statement": "Let $f:X\\to Y$ be an affine morphism of schemes [def-pc-scheme]. Put $\\mathcal A=f_*\\mathcal O_X$ and $g:(X,\\mathcal O_X)\\to(Y,\\mathcal A)$ as in [def-sc-direct-image-algebra-derived-category]. Use the unbounded derived categories of sheaves of modules [def-weil-abstract-derived-category], with $Rg_*$ as in [def-pc-ringed-spaces-derived-direct-image]. Let $L:D(\\mathcal A)\\to D(\\mathcal O_X)$ be any functor with an adjunction $L\\dashv Rg_*$. If $M$ has quasi-coherent $\\mathcal A$-module cohomology [def-sc-direct-image-algebra-derived-category], then $L(M)$ has quasi-coherent $\\mathcal O_X$-module cohomology [def-pc-derived-category].",
+ "source": {
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 0AVW, perfect-lemma-affine-morphism-equivalence, proof"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "def-sc-direct-image-algebra-derived-category",
+  "def-pc-ringed-spaces-derived-direct-image",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof": [
+  {
+   "text": "Work on affine opens $Y=\\operatorname{Spec}(B)$, $X=\\operatorname{Spec}(A)$. For $p$ above $q$, $\\mathcal A_q=A_q$ and $\\mathcal O_{X,p}=A_p$; the map $A_q\\to A_p$ is a localization. Localization is flat, so stalkwise tensor pullback is exact. Applying it to kernels and images gives $H^i(Lg^*M)=g^*H^i(M)$, for all integers $i$. The derived pullback in [lem-pc-ringed-spaces-derived-adjoint-general] is computed by K-flat resolutions, so this exactness computes that derived functor without boundedness.",
+   "uses": [
+    "lem-pc-ringed-spaces-derived-adjoint-general"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 0AVW, perfect-lemma-affine-morphism-equivalence, proof"
+   }
+  },
+  {
+   "text": "Tensor associativity identifies $g^*G$ with $H(G)$ in [lem-weil-pbc-affine-module-correspondence]: extend from $f^{-1}\\mathcal A$ to the pulled-back algebra and then to $\\mathcal O_X$ along multiplication. The correspondence says $H(G)$ preserves quasi-coherence. Apply this to $H^i(M)$ on the affine cover, obtaining quasi-coherent cohomology of $Lg^*M$.",
+   "uses": [
+    "lem-weil-pbc-affine-module-correspondence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 0AVW, perfect-lemma-affine-morphism-equivalence, proof"
+   }
+  },
+  {
+   "text": "Both the given $L$ and $Lg^*$ are left adjoints of the same $Rg_*$ by [lem-pc-ringed-spaces-derived-adjoint-general]. The unique adjunction-compatible natural isomorphism between them induces isomorphisms in every cohomology degree; quasi-coherence is invariant under these isomorphisms.",
+   "uses": [
+    "lem-pc-ringed-spaces-derived-adjoint-general"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 0AVW, perfect-lemma-affine-morphism-equivalence, proof"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-ringed-spaces-derived-adjoint-general",
+  "lem-weil-pbc-affine-module-correspondence"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 0AVW, perfect-lemma-affine-morphism-equivalence, proof; step of the affine algebra adjunction argument isolated by U3"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "derived adjunction affine ringed space quasi coherent cohomology unit counit isomorphism",
+   "results": "AlgebraicGeometry.ΓSpec.locallyRingedSpaceAdjunction; AlgebraicGeometry.instIsIsoSchemeAppUnitOppositeCommRingCatAdjunctionOfIsAffine; AlgebraicGeometry.ΓSpec.adjunction; AlgebraicGeometry.ΓSpec.isIso_locallyRingedSpaceAdjunction_counit; AlgebraicGeometry.ΓSpec.locallyRingedSpaceAdjunction_counit; AlgebraicGeometry.ΓSpec.isIso_adjunction_counit; AlgebraicGeometry.ΓSpec.toOpen_comp_locallyRingedSpaceAdjunction_homEquiv_app; AlgebraicGeometry.ΓSpec.locallyRingedSpaceAdjunction_homEquiv_apply'; no affine algebra derived adjunction theorem",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.toEquivalence",
+   "results": "CategoryTheory.Adjunction.toEquivalence; CategoryTheory.Adjunction.toEquivalence_functor; CategoryTheory.Adjunction.toEquivalence_inverse; CategoryTheory.Adjunction.toEquivalence_counitIso_hom_app; CategoryTheory.Adjunction.toEquivalence_unitIso_hom_app; CategoryTheory.Adjunction.toEquivalence_counitIso_inv_app; CategoryTheory.Adjunction.toEquivalence_unitIso_inv_app; CategoryTheory.MonoidalClosed.ofEquiv_curry_def; no affine algebra derived adjunction theorem",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "derivedModulePullback.*QCoh|directImageAlgebra.*[Uu]nit|directImageAlgebra.*[Ss]calar",
+   "results": "No hits; no affine algebra derived adjunction theorem",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "affine ringed space derived pullback pushforward quasi coherent cohomology adjunction unit counit",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FiniteAffineDerivedEquivalence",
+  "date": "2026-10-12",
+  "group": "U3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "proof, affine derived equivalence for the finite morphism: affine algebra derived pullback preserves quasi-coherence",
+   "via": [
+    "lem-sc-finite-affine-derived-equivalence",
+    "lem-sc-finite-duality-derived-hom"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AffineAlgebraDerivedAdjunctionQCoh",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineAlgebraDerivedAdjunctionQCoh.lean",
+  "declaration": "AlgebraicGeometry.affine_algebra_derived_pullback_preserves_qcoh",
+  "statement": "theorem affine_algebra_derived_pullback_preserves_qcoh\n    {X Y : Scheme.{v}} (f : X ⟶ Y) [IsAffineHom f]\n    [HasDerivedCategory.{wX} (SheafOfModules.{v} (moduleRings X.toRingedSpace))]\n    [HasDerivedCategory.{wA} (SheafOfModules.{v} (moduleRings (directImageAlgebraSpace f)))]\n    (L : DerivedCategory (SheafOfModules.{v} (moduleRings (directImageAlgebraSpace f))) ⥤\n      schemeDerivedCategory X)\n    (adj : L ⊣ RingedSpace.derivedModuleDirectImage (toDirectImageAlgebraSpace f)) :\n    (∀ M : DerivedCategory (SheafOfModules.{v} (moduleRings (directImageAlgebraSpace f))),\n      directImageAlgebraDerivedQCohProperty f M →\n        schemeDerivedQCohProperty X (L.obj M))",
+  "branch": "sheaf-dag",
+  "by": "U3",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U3",
+  "result": "pass",
+  "landing": "20261012T085349-L-43586",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U3",
+  "result": "pass",
+  "landing": "20261012T085349-L-43586",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

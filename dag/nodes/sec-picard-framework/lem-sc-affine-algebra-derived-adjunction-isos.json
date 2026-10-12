@@ -1,0 +1,164 @@
+{
+ "id": "lem-sc-affine-algebra-derived-adjunction-isos",
+ "kind": "statement",
+ "title": "Affine algebra derived unit and counit are isomorphisms",
+ "statement": "Let $f:X\\to Y$ be an affine morphism of schemes [def-pc-scheme]. Set $\\mathcal A=f_*\\mathcal O_X$ and $g:(X,\\mathcal O_X)\\to(Y,\\mathcal A)$ [def-sc-direct-image-algebra-derived-category]. In the unbounded derived categories [def-weil-abstract-derived-category], take any $L:D(\\mathcal A)\\to D(\\mathcal O_X)$ and any adjunction $a:L\\dashv Rg_*$, where $Rg_*$ is [def-pc-ringed-spaces-derived-direct-image]. The unit $a_M:M\\to Rg_*L(M)$ is an isomorphism for every $M$ with quasi-coherent $\\mathcal A$-cohomology [def-sc-direct-image-algebra-derived-category]. The counit $a_K:L Rg_*(K)\\to K$ is an isomorphism for every $K$ with quasi-coherent $\\mathcal O_X$-cohomology [def-pc-derived-category].",
+ "source": {
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 0AVW, perfect-lemma-affine-morphism-equivalence, proof"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "def-sc-direct-image-algebra-derived-category",
+  "def-pc-ringed-spaces-derived-direct-image",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof": [
+  {
+   "text": "Use [lem-pc-ringed-spaces-derived-adjoint-general] for the tensor-derived adjunction. For $g$ the affine stalk map $A_q\\to A_p$ is a localization, so pullback is exact and $H^i(Lg^*M)=g^*H^i(M)$. This computation preserves quasi-coherence by [lem-sc-affine-algebra-derived-adjunction-qcoh]. Exact scalar restriction compares $Rg_*$ to $Rf_*$ using the same K-injective representative and the same underlying complex; [lem-sc-affine-derived-cohomology] computes $H^i(Rg_*K)$ as $g_*H^i(K)$.",
+   "uses": [
+    "lem-pc-ringed-spaces-derived-adjoint-general",
+    "lem-sc-affine-algebra-derived-adjunction-qcoh",
+    "def-pc-ringed-spaces-derived-direct-image",
+    "lem-sc-affine-derived-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 0AVW, perfect-lemma-affine-morphism-equivalence, proof"
+   }
+  },
+  {
+   "text": "The tensor-associativity identification with the two tensor operations of [lem-weil-pbc-affine-module-correspondence] carries the cohomology maps of the derived unit and counit to its $\\beta_{H^i(M)}$ and $\\alpha_{H^i(K)}$. This follows by applying the resolution comparison to the underived adjunction unit and counit, and using exactness to identify kernels and images. The correspondence asserts these maps are isomorphisms on quasi-coherent modules.",
+   "uses": [
+    "lem-weil-pbc-affine-module-correspondence",
+    "lem-pc-ringed-spaces-derived-adjoint-general"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 0AVW, perfect-lemma-affine-morphism-equivalence, proof"
+   }
+  },
+  {
+   "text": "A derived morphism inducing an isomorphism in every cohomology degree is invertible: its cone is acyclic and hence zero in the localization. Thus both adjunction maps are invertible. Uniqueness of the left adjoint transports the maps through the adjunction-compatible natural isomorphism to the given $L,a$.",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "lem-pc-ringed-spaces-derived-adjoint-general"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 0AVW, perfect-lemma-affine-morphism-equivalence, proof"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-ringed-spaces-derived-adjoint-general",
+  "lem-sc-affine-algebra-derived-adjunction-qcoh",
+  "def-pc-ringed-spaces-derived-direct-image",
+  "lem-sc-affine-derived-cohomology",
+  "lem-weil-pbc-affine-module-correspondence",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 0AVW, perfect-lemma-affine-morphism-equivalence, proof; step of the affine algebra adjunction argument isolated by U3"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "derived adjunction affine ringed space quasi coherent cohomology unit counit isomorphism",
+   "results": "AlgebraicGeometry.ΓSpec.locallyRingedSpaceAdjunction; AlgebraicGeometry.instIsIsoSchemeAppUnitOppositeCommRingCatAdjunctionOfIsAffine; AlgebraicGeometry.ΓSpec.adjunction; AlgebraicGeometry.ΓSpec.isIso_locallyRingedSpaceAdjunction_counit; AlgebraicGeometry.ΓSpec.locallyRingedSpaceAdjunction_counit; AlgebraicGeometry.ΓSpec.isIso_adjunction_counit; AlgebraicGeometry.ΓSpec.toOpen_comp_locallyRingedSpaceAdjunction_homEquiv_app; AlgebraicGeometry.ΓSpec.locallyRingedSpaceAdjunction_homEquiv_apply'; no affine algebra derived adjunction theorem",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.toEquivalence",
+   "results": "CategoryTheory.Adjunction.toEquivalence; CategoryTheory.Adjunction.toEquivalence_functor; CategoryTheory.Adjunction.toEquivalence_inverse; CategoryTheory.Adjunction.toEquivalence_counitIso_hom_app; CategoryTheory.Adjunction.toEquivalence_unitIso_hom_app; CategoryTheory.Adjunction.toEquivalence_counitIso_inv_app; CategoryTheory.Adjunction.toEquivalence_unitIso_inv_app; CategoryTheory.MonoidalClosed.ofEquiv_curry_def; no affine algebra derived adjunction theorem",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "derivedModulePullback.*QCoh|directImageAlgebra.*[Uu]nit|directImageAlgebra.*[Ss]calar",
+   "results": "No hits; no affine algebra derived adjunction theorem",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "affine ringed space derived pullback pushforward quasi coherent cohomology adjunction unit counit",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FiniteAffineDerivedEquivalence",
+  "date": "2026-10-12",
+  "group": "U3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "proof, affine derived equivalence for the finite morphism: affine algebra derived unit and counit are isomorphisms",
+   "via": [
+    "lem-sc-finite-affine-derived-equivalence",
+    "lem-sc-finite-duality-derived-hom"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AffineAlgebraDerivedAdjunctionIsos",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineAlgebraDerivedAdjunctionIsos.lean",
+  "declaration": "AlgebraicGeometry.affine_algebra_derived_adjunction_isos",
+  "statement": "theorem affine_algebra_derived_adjunction_isos\n    {X Y : Scheme.{v}} (f : X ⟶ Y) [IsAffineHom f]\n    [HasDerivedCategory.{wX} (SheafOfModules.{v} (moduleRings X.toRingedSpace))]\n    [HasDerivedCategory.{wA} (SheafOfModules.{v} (moduleRings (directImageAlgebraSpace f)))]\n    (L : DerivedCategory (SheafOfModules.{v} (moduleRings (directImageAlgebraSpace f))) ⥤\n      schemeDerivedCategory X)\n    (adj : L ⊣ RingedSpace.derivedModuleDirectImage (toDirectImageAlgebraSpace f)) :\n    (∀ M : DerivedCategory (SheafOfModules.{v} (moduleRings (directImageAlgebraSpace f))),\n      directImageAlgebraDerivedQCohProperty f M → IsIso (adj.unit.app M)) ∧\n    (∀ K : schemeDerivedCategory X, schemeDerivedQCohProperty X K →\n      IsIso (adj.counit.app K))",
+  "branch": "sheaf-dag",
+  "by": "U3",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U3",
+  "result": "pass",
+  "landing": "20261012T085349-L-43586",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U3",
+  "result": "pass",
+  "landing": "20261012T085349-L-43586",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
