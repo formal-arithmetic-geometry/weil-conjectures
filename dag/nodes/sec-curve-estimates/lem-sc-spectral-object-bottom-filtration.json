@@ -1,0 +1,198 @@
+{
+ "id": "lem-sc-spectral-object-bottom-filtration",
+ "kind": "statement",
+ "title": "Graded image-filtration comparison and bottom spectral-object factorization",
+ "statement": "Let $C$ be an abelian category, $Y$ an $\\operatorname{EInt}$-indexed first-quadrant abelian spectral object, and $E$ its standard $E_2$ spectral sequence on nonnegative bidegrees [def-sp-spectral-sequence]. Let $H:\\mathbb N\\to C$ and $h_n:Y.H^n(\\bot,\\top)\\simeq H_n$ be specified isomorphisms. Let $T_n$ be decreasing filtrations [def-sp-filtration] with $T_n^i$ exactly the image, transported by $h_n$, of $Y.H^n(\\bot,n+1-i)\\to Y.H^n(\\bot,\\top)$. Let $t_{p,r}:E_r^{p,0}\\to E_{r+1}^{p,0}$ for $r\\ge2$ satisfy $i_{\\rm cycles}t_{p,r}=\\pi_{\\rm homology}\\,\\mathrm{iso}_r$. Let $b_{p,r}:E_2^{p,0}\\to E_r^{p,0}$ satisfy $b_{p,2}=1$ and $b_{p,r+1}=b_{p,r}t_{p,r}$. There are isomorphisms $g_{p,q}:\\operatorname{gr}^pT_{p+q}\\simeq E_\\infty^{p,q}$, where $E_\\infty^{p,q}=E_{p+q+2}^{p,q}$, and $k_p:E_\\infty^{p,0}\\simeq T_p^p$, such that the quotient projection $T_p^p\\to\\operatorname{gr}^pT_p$ followed by $g_{p,0}$ is $k_p^{-1}$. The canonical page-two interval comparison $E_2^{p,0}\\to Y.H^p(0,1)$, followed by the spectral-object bottom edge and $h_p$, equals $b_{p,p+2}$ followed by $k_p$ and the inclusion $T_p^p\\to H_p$. This theorem only compares graded pieces and the bottom projection of the specified image filtration; it does not construct $Y$, $t$, $b$, or cohomology comparisons.",
+ "source": {
+  "document": "Stacks Project, Derived Categories and Cohomology of Sheaves",
+  "place": "Tags 015J, 015N and Homology Tag 012K; successive image quotients and bottom opcycles projection"
+ },
+ "stmt_deps": [
+  "def-sp-filtration",
+  "def-sp-spectral-sequence"
+ ],
+ "proof": [
+  {
+   "text": "The abutment of a first-quadrant spectral object identifies consecutive image-filtration quotients with stable spectral-object terms. Transport these cokernel isomorphisms by h. The standard spectral-object page comparison identifies them with the terms at page p+q+2, supplying g.",
+   "uses": [
+    "lem-sp-first-quadrant-spectral-object-abutment",
+    "def-sp-filtration"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "First-quadrant vanishing makes T_p^(p+1) zero. Its arrow into T_p^p is zero, so the cokernel projection is an isomorphism. Compose g_(p,0)^(-1) with the inverse projection to obtain k; the quotient equation follows by cancellation.",
+   "uses": [
+    "def-sp-filtration",
+    "lem-sp-first-quadrant-spectral-object-abutment"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "On the bottom row cycles inclusion is invertible, hence ht uniquely determines every t and hb2,hbt uniquely determine b by integer induction. Express successor-page homology isomorphisms using the spectral-object kernel/image model: the transition is the quotient map of its opcycles. Induct through r=2,...,p+1; their composite is the opcycles quotient from interval (0,1) to the stabilized bottom term. Its composite with the inclusion of the image filtration is the defining inverse of H^p(bottom,1)->H^p(0,1), followed by H^p(bottom,1)->H^p(bottom,top), namely bottomEdge. Transport through h to obtain the displayed factorization.",
+   "uses": [
+    "def-sp-spectral-sequence",
+    "lem-sp-first-quadrant-spectral-object-abutment"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sp-first-quadrant-spectral-object-abutment",
+  "def-sp-filtration",
+  "def-sp-spectral-sequence"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/015N",
+  "place": "Tags 015J, 015N and Homology Tag 012K; successive image quotients and bottom opcycles projection; expanded spectral-object formulation by H1"
+ },
+ "mathlib_searches": [
+  {
+   "t": "2026-10-12T15:48:28Z",
+   "tool": "leansearch",
+   "query": "first quadrant spectral sequence bottom edge factorization through stable page image filtration",
+   "sub": "",
+   "ok": false,
+   "n_hits": 0,
+   "note": "service unavailable: Internal Server Error",
+   "top": [],
+   "digest": "4f53cda18c2baa0c",
+   "date": "2026-10-12",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable"
+  },
+  {
+   "t": "2026-10-12T15:59:34Z",
+   "tool": "leanfinder",
+   "query": "first quadrant spectral object bottom edge factors through iterated cycles homology transitions and final image filtration",
+   "sub": "",
+   "ok": true,
+   "n_hits": 8,
+   "note": "",
+   "top": [
+    "CochainComplex.homologySequenceδ_quotient_mapTriangle_obj",
+    "CochainComplex.mappingCone.homologySequenceδ_triangleh",
+    "CochainComplex.homologySequenceδ_quotient_mapTriangle_obj_assoc",
+    "CategoryTheory.Functor.homologySequence_comp",
+    "DerivedCategory.HomologySequence.δ",
+    "CategoryTheory.Pretriangulated.preadditiveYoneda_homologySequenceδ_apply",
+    "CategoryTheory.Functor.homologySequenceδ_comp",
+    "CategoryTheory.Pretriangulated.preadditiveCoyoneda_homologySequenceδ_apply"
+   ],
+   "digest": "1e34fd803bc6bb00",
+   "date": "2026-10-12",
+   "results": [
+    "CochainComplex.homologySequenceδ_quotient_mapTriangle_obj",
+    "CochainComplex.mappingCone.homologySequenceδ_triangleh",
+    "CochainComplex.homologySequenceδ_quotient_mapTriangle_obj_assoc",
+    "CategoryTheory.Functor.homologySequence_comp",
+    "DerivedCategory.HomologySequence.δ",
+    "CategoryTheory.Pretriangulated.preadditiveYoneda_homologySequenceδ_apply",
+    "CategoryTheory.Functor.homologySequenceδ_comp",
+    "CategoryTheory.Pretriangulated.preadditiveCoyoneda_homologySequenceδ_apply"
+   ],
+   "verdict": "Related API only; no exact match for the complete statement."
+  },
+  {
+   "t": "2026-10-12T15:59:40Z",
+   "tool": "loogle",
+   "query": "SpectralObject.bottomEdge",
+   "sub": "",
+   "ok": true,
+   "n_hits": 0,
+   "note": "loogle: unknown identifier 'SpectralObject.bottomEdge'",
+   "top": [],
+   "digest": "4f53cda18c2baa0c",
+   "date": "2026-10-12",
+   "results": "loogle: unknown identifier 'SpectralObject.bottomEdge'",
+   "verdict": "Related API only; no exact match for the complete statement."
+  },
+  {
+   "t": "2026-10-12T16:07:40Z",
+   "tool": "grep",
+   "query": "spectralSequencePageXIso|iCycles.*homologyπ|E₂SpectralSequenceNat",
+   "sub": "Algebra/Homology/SpectralObject",
+   "ok": true,
+   "n_hits": 8,
+   "note": "",
+   "top": [
+    "Mathlib/Algebra/Homology/SpectralObject/SpectralSequence.lean",
+    "Mathlib/Algebra/Homology/SpectralObject/SpectralSequence.lean",
+    "Mathlib/Algebra/Homology/SpectralObject/SpectralSequence.lean",
+    "Mathlib/Algebra/Homology/SpectralObject/SpectralSequence.lean",
+    "Mathlib/Algebra/Homology/SpectralObject/SpectralSequence.lean",
+    "Mathlib/Algebra/Homology/SpectralObject/FirstPage.lean",
+    "Mathlib/Algebra/Homology/SpectralObject/FirstPage.lean",
+    "Mathlib/Algebra/Homology/SpectralObject/FirstPage.lean"
+   ],
+   "digest": "8c686dcddce99dde",
+   "date": "2026-10-12",
+   "results": [
+    "Mathlib/Algebra/Homology/SpectralObject/SpectralSequence.lean",
+    "Mathlib/Algebra/Homology/SpectralObject/SpectralSequence.lean",
+    "Mathlib/Algebra/Homology/SpectralObject/SpectralSequence.lean",
+    "Mathlib/Algebra/Homology/SpectralObject/SpectralSequence.lean",
+    "Mathlib/Algebra/Homology/SpectralObject/SpectralSequence.lean",
+    "Mathlib/Algebra/Homology/SpectralObject/FirstPage.lean",
+    "Mathlib/Algebra/Homology/SpectralObject/FirstPage.lean",
+    "Mathlib/Algebra/Homology/SpectralObject/FirstPage.lean"
+   ],
+   "verdict": "Related API only; no exact match for the complete statement."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Topology.TopologicalLerayCartanEilenbergCocycle",
+  "date": "2026-10-12",
+  "group": "H1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-pic-proper-ntorsion",
+   "place": "Tags 015J, 015N and Homology Tag 012K; successive image quotients and bottom opcycles projection",
+   "via": [
+    "lem-sc-topological-leray-cartan-eilenberg-cocycle",
+    "lem-sc-topological-leray-bottom-realization",
+    "lem-sc-topological-leray-spectral-sequence",
+    "lem-sc-leray-closed-pushforward-cohomology"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-thm-curveestimate",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.SpectralObjectBottomFiltration",
+  "file": "lean/Sheaf/CategoryTheory/SpectralObjectBottomFiltration.lean",
+  "declaration": "CategoryTheory.exists_spectral_object_bottom_filtration",
+  "statement": "theorem exists_spectral_object_bottom_filtration {C : Type u} [Category.{v} C] [Abelian C] (Y : Abelian.SpectralObject C EInt) [Y.IsFirstQuadrant] (H : ℕ → C) (h : ∀ n : ℕ, (Y.H n).obj (mk₁ (homOfLE (bot_le : (⊥ : EInt) ≤ ⊤))) ≅ H n) (T : ∀ n : ℕ, DecreasingFiltration (H n)) (hT : ∀ (n : ℕ) (i : ℤ), (T n).step i = (Subobject.«exists» (h n).hom).obj (Y.imageFiltration n ((n : ℤ) + 1 - i))) (t : ∀ (p : ℕ) (r : ℤ) (hr : 2 ≤ r), (Y.E₂SpectralSequenceNat.page r hr).X (p, 0) ⟶ (Y.E₂SpectralSequenceNat.page (r + 1) (by omega)).X (p, 0)) (ht : ∀ (p : ℕ) (r : ℤ) (hr : 2 ≤ r), (Y.E₂SpectralSequenceNat.page r hr).iCycles (p, 0) ≫ t p r hr = (Y.E₂SpectralSequenceNat.page r hr).homologyπ (p, 0) ≫ (Y.E₂SpectralSequenceNat.iso r (r + 1) (p, 0) rfl hr).hom) (b : ∀ (p : ℕ) (r : ℤ) (hr : 2 ≤ r), (Y.E₂SpectralSequenceNat.page 2).X (p, 0) ⟶ (Y.E₂SpectralSequenceNat.page r hr).X (p, 0)) (hb2 : ∀ p, b p 2 (by omega) = 𝟙 _) (hbt : ∀ (p : ℕ) (r : ℤ) (hr : 2 ≤ r), b p (r + 1) (by omega) = b p r hr ≫ t p r hr) : ∃ g : ∀ p q : ℕ, (T (p + q)).gradedPiece p ≅ Y.E₂SpectralSequenceNat.pageInfinity (p, q), ∃ k : ∀ p : ℕ, Y.E₂SpectralSequenceNat.pageInfinity (p, 0) ≅ ((T p).step p : C), (∀ p, cokernel.π (Subobject.ofLE ((T p).step (p + 1)) ((T p).step p) ((T p).antitone_step (by omega))) ≫ (g p 0).hom = (k p).inv) ∧ (∀ p : ℕ, (Y.E₂SpectralSequenceNatPageTwoXIso p 0).hom ≫ Y.bottomEdge p ≫ (h p).hom = b p (p + 2) (by omega) ≫ (k p).hom ≫ ((T p).step p).arrow)",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-8c075",
+  "group": "H1",
+  "result": "pass",
+  "landing": "20261012T173831-L-3297062",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-8c075",
+  "group": "H1",
+  "result": "pass",
+  "landing": "20261012T173831-L-3297062",
+  "kind": "interface",
+  "note": "independent Codex review: Matched the delivered Lean statements and proof with their DAG nodes, unchanged existing signature, cited spectral-object APIs, clean compilation, and axiom checks."
+ }
+}

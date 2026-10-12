@@ -8753,3 +8753,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 17:38 L: merged deliver/G3/Sheaf.AlgebraicGeometry.QuasiCoherentMayerVietorisOpenCover (stage 3; reviewer PASS; first push; landing 20261012T173829-L-3296599 (proof); batch 20261012T173801; modules 1; new nodes 0)
 - 17:38 L: merged deliver/H1/Sheaf.AlgebraicGeometry.SymmetricStabilizationDifferentials (stage 3; reviewer PASS; first push; landing 20261012T173829-L-3296794 (interface); batch 20261012T173801; modules 3; new nodes 2)
 - 17:38 L: merged deliver/H1/Sheaf.RingTheory.SubsingletonH1CotangentOfCharP (stage 3; reviewer PASS; first push; landing 20261012T173830-L-3296941 (interface); batch 20261012T173801; modules 2; new nodes 1)
+- 17:38 L: merged deliver/H1/Sheaf.Topology.TopologicalLerayCartanEilenbergCocycle (stage 3; reviewer PASS; first push; landing 20261012T173831-L-3297062 (interface); batch 20261012T173801; modules 3; new nodes 2)

@@ -13,43 +13,46 @@
  ],
  "proof": [
   {
-   "text": "Apply the Cartan--Eilenberg Grothendieck construction to direct image and terminal sections. Use injective preservation to check the acyclicity condition. Regard abelian sheaves as modules over the constant integer ring sheaf to supply the Grothendieck abelian hypotheses. Transport the canonical E2 and abutment comparisons along hX,hZ and the equality of terminal sections before and after direct image. Resolution and Cartan--Eilenberg comparisons are independent up to homotopy from page two, preserving the filtration, so this gives spectral-sequence data in the functor category.",
+   "text": "Obtain the topological spectral object Y with h,e and its bottom augmentation computation. Set E to the existing standard natural-number spectral sequence of Y and e2 to the canonical page-two comparison followed by e.",
    "uses": [
-    "thm-sp-grothendieck",
-    "lem-sc-topological-pushforward-injective",
-    "prop-pur-kinjective-resolutions-exist",
-    "def-sc-topological-abelian-cohomology"
+    "lem-sc-topological-leray-spectral-object-augmentation"
    ],
-   "elementary": false
+   "elementary": true
   },
   {
-   "text": "The second total-complex filtration gives T and its graded comparisons. First-quadrant bounds give top at zero, bottom at n+1, and stabilization for r>max(p,q+1), in particular at p+q+2. The bottom outgoing differential is zero, so the cycles inclusion is invertible. Compose its inverse with homology projection and the next-page comparison to form t; iterate from the identity to obtain b. The denominator of the bottom graded quotient is zero, yielding k with its quotient equation. The derived-zero comparison gives e0. Define bottom as their displayed composite.",
+   "text": "Prove bottom outgoing differentials vanish using the natural-number spectral-sequence complex shape. Invert cycles inclusion, then compose with homology projection and the successor-page comparison to form t. Define b by Int.leInduction from the identity and prove both recursion identities. For stabilization, apply the spectral-object page comparison at arbitrary r>=p+q+2, replace its outer interval endpoints by bottom and top using first-quadrant vanishing, and compose with the inverse comparison at pageInfinity.",
    "uses": [
-    "thm-sp-grothendieck",
+    "def-sp-spectral-sequence"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Construct T explicitly as the transported imageFiltration(n,n+1-i); its antitonicity follows from imageFiltration_mono. First-quadrant vanishing gives step zero=top and step n+1=bottom. Apply the graded bottom-filtration comparison to obtain g,k and the factorization of the spectral-object bottom edge through b and k.",
+   "uses": [
+    "lem-sc-spectral-object-bottom-filtration",
     "def-sp-filtration"
    ],
-   "elementary": false
+   "elementary": true
   },
   {
-   "text": "Compute the total-complex augmentation in resolution degree zero on s. Comparison into f_*I sends it to s followed by phi^p. Terminal-section representation identifies this with z precisely by the given equation with a; the generator formula for a fixes the terminal-section identification. The canonical resolution abutment computation identifies this total cohomology class with I.extMk(z). This proves the asserted bottom-cocycle equation without comparing any supplied cohomology map.",
+   "text": "Define e0 from the whiskered derived-zero isomorphism and e2 inverse. Define bottom using the derived-zero map, e inverse, spectral-object bottomEdge and h. Rewrite the generic bottom factorization and cancel the canonical page-two isomorphism with its inverse; this proves the required filtration composite. The augmentation computation proves the cocycle equation for this explicit bottom.",
    "uses": [
-    "thm-sp-grothendieck",
-    "def-sc-topological-abelian-cohomology"
+    "lem-sc-topological-leray-spectral-object-augmentation",
+    "lem-sc-spectral-object-bottom-filtration"
    ],
-   "elementary": false
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "thm-sp-grothendieck",
-  "lem-sc-topological-pushforward-injective",
-  "prop-pur-kinjective-resolutions-exist",
-  "def-sc-topological-abelian-cohomology",
+  "lem-sc-topological-leray-spectral-object-augmentation",
+  "def-sp-spectral-sequence",
+  "lem-sc-spectral-object-bottom-filtration",
   "def-sp-filtration"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "https://stacks.math.columbia.edu/tag/015N",
-  "place": "Tags 015N, 015J and 01F2; second Cartan--Eilenberg filtration and degree-zero augmentation; explicit specialization of the parent proof step"
+  "place": "Tags 015N, 015J and 01F2; H1 reduction through a spectral object, with stabilization, bottom transitions, iteration, image-filtration bounds and comparison cancellation proved in Lean"
  },
  "mathlib_searches": [
   {
@@ -120,11 +123,11 @@
  "reviewed_proof": {
   "date": "2026-10-12",
   "by": "L",
-  "reviewer": "X-ed741",
-  "group": "A3",
+  "reviewer": "X-8c075",
+  "group": "H1",
   "result": "pass",
-  "landing": "20261012T135217-L-1655634",
+  "landing": "20261012T173831-L-3297062",
   "kind": "interface",
-  "note": "independent Codex review: Matched unchanged parent signature and proof to its node, both new cocycle lemmas to their nodes and sources; all three modules and sole direct importer compile cleanly, and axiom checks show only permitted axioms plus sorryAx from the two recorded holes."
+  "note": "independent Codex review: Matched the delivered Lean statements and proof with their DAG nodes, unchanged existing signature, cited spectral-object APIs, clean compilation, and axiom checks."
  }
 }

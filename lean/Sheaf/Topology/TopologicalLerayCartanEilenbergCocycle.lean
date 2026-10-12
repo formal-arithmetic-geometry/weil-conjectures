@@ -11,8 +11,8 @@ public import Mathlib.CategoryTheory.Abelian.Injective.Ext
 public import WeilConjectures.Mathlib.Algebra.Homology.SpectralSequence.Basic
 
 public import Sheaf.CategoryTheory.Filtration
-import Sheaf.CategoryTheory.GrothendieckSpectralSequence
-import Sheaf.CategoryTheory.RingedSiteKInjectiveResolutions
+import Sheaf.CategoryTheory.SpectralObjectBottomFiltration
+import Sheaf.Topology.TopologicalLeraySpectralObjectAugmentation
 
 /-! # Cartan--Eilenberg Leray construction on cocycles -/
 
@@ -23,6 +23,66 @@ universe u
 open CategoryTheory CategoryTheory.Limits TopologicalSpace Opposite
 
 namespace CategoryTheory
+
+private theorem exists_bottom_page_transitions
+    {C : Type*} [Category C] [Abelian C] (E : E₂CohomologicalSpectralSequenceNat C) :
+    ∃ t : ∀ (p : ℕ) (r : ℤ) (hr : 2 ≤ r),
+        (E.page r hr).X (p, 0) ⟶ (E.page (r + 1) (by omega)).X (p, 0),
+      (∀ (p : ℕ) (r : ℤ) (hr : 2 ≤ r),
+        (E.page r hr).iCycles (p, 0) ≫ t p r hr =
+          (E.page r hr).homologyπ (p, 0) ≫ (E.iso r (r + 1) (p, 0) rfl hr).hom) ∧
+      ∃ b : ∀ (p : ℕ) (r : ℤ) (hr : 2 ≤ r),
+          (E.page 2).X (p, 0) ⟶ (E.page r hr).X (p, 0),
+        (∀ p, b p 2 (by omega) = 𝟙 _) ∧
+        (∀ (p : ℕ) (r : ℤ) (hr : 2 ≤ r),
+          b p (r + 1) (by omega) = b p r hr ≫ t p r hr) := by
+  have hi (p : ℕ) (r : ℤ) (hr : 2 ≤ r) : IsIso ((E.page r hr).iCycles (p, 0)) := by
+    apply (E.page r hr).isIso_iCycles (p, 0) _ rfl
+    apply (E.page r hr).shape
+    simp only [ComplexShape.spectralSequenceNat_rel_iff]
+    omega
+  let t (p : ℕ) (r : ℤ) (hr : 2 ≤ r) :=
+    @inv _ _ _ _ ((E.page r hr).iCycles (p, 0)) (hi p r hr) ≫
+      (E.page r hr).homologyπ (p, 0) ≫ (E.iso r (r + 1) (p, 0) rfl hr).hom
+  have ht (p : ℕ) (r : ℤ) (hr : 2 ≤ r) :
+      (E.page r hr).iCycles (p, 0) ≫ t p r hr =
+        (E.page r hr).homologyπ (p, 0) ≫ (E.iso r (r + 1) (p, 0) rfl hr).hom := by
+    let := hi p r hr
+    simp [t]
+  let b (p : ℕ) := Int.leInduction
+    (motive := fun r hr ↦ (E.page 2).X (p, 0) ⟶ (E.page r hr).X (p, 0))
+    (𝟙 _) (fun r hr x ↦ x ≫ t p r hr)
+  refine ⟨t, ht, b, ?_, ?_⟩
+  · intro p
+    exact Int.leInduction_base _ _
+  · intro p r hr
+    exact Int.leInduction_add_one _ _ r hr
+
+private theorem spectral_object_page_stabilizes
+    {C : Type*} [Category C] [Abelian C]
+    (Y : Abelian.SpectralObject C EInt) [Y.IsFirstQuadrant] :
+    ∀ p q : ℕ, ∃ (R : ℤ) (_hR : 2 ≤ R), ∀ (r : ℤ) (hr : R ≤ r),
+      Nonempty ((Y.E₂SpectralSequenceNat.page r (by omega)).X (p, q) ≅
+        Y.E₂SpectralSequenceNat.pageInfinity (p, q)) := by
+  intro p q
+  refine ⟨(p + q + 2 : ℕ), by omega, ?_⟩
+  intro r hr
+  let i := Y.spectralSequencePageXIso Abelian.SpectralObject.coreE₂CohomologicalNat
+    r (by omega) (p, q) (q - r + 2 : ℤ) q (q + 1 : ℤ) (q + r - 1 : ℤ)
+    rfl rfl rfl rfl (p + q - 1) (p + q) (p + q + 1) (by simp)
+  let j :=
+    (Y.isoMapFourδ₁Toδ₀' ⊥ (q - r + 2 : ℤ) q (q + 1 : ℤ) (q + r - 1 : ℤ)
+      bot_le (WithBotTop.coe_le_coe.2 (by omega))
+      (WithBotTop.coe_le_coe.2 (by omega)) (WithBotTop.coe_le_coe.2 (by omega))
+      (p + q - 1) (p + q) (p + q + 1)
+      (Y.isZero₁_of_isFirstQuadrant _ _ _ (WithBotTop.coe_le_coe.2 (by omega)) _)).symm
+  let k := Y.isoMapFourδ₄Toδ₃' ⊥ q (q + 1 : ℤ) (q + r - 1 : ℤ) ⊤ bot_le
+    (WithBotTop.coe_le_coe.2 (by omega)) (WithBotTop.coe_le_coe.2 (by omega))
+    le_top (p + q - 1) (p + q) (p + q + 1)
+    (Y.isZero₂_of_isFirstQuadrant _ _ _ _ (WithBotTop.coe_lt_coe.2 (by omega)))
+  obtain ⟨l⟩ := Y.nonempty_pageInfinity_iso p q (p + q) q (q + 1)
+    (by omega) rfl rfl
+  exact ⟨i ≪≫ j ≪≫ k ≪≫ l.symm⟩
 
 /-- Construct the Leray pages and finite filtration, computing their bottom composite
 on injective-resolution cocycles, without any prescribed cohomology map.
@@ -137,6 +197,45 @@ theorem exists_topological_leray_cartan_eilenberg_cocycle
             ((eqToHom (congrArg (fun Q ↦ Q.obj
               ((TopCat.Sheaf.pushforwardAb f).obj F)) (hX p)).symm)
               (J.extMk s (p + 1) rfl hs))) =
-            I.extMk z (p + 1) rfl hz) := by sorry
+            I.extMk z (p + 1) rfl hz) := by
+  obtain ⟨Y, hY, h, e, computation⟩ :=
+    exists_topological_leray_spectral_object_augmentation f HX HZ hX hZ a ha
+  let := hY
+  let E := Y.E₂SpectralSequenceNat
+  obtain ⟨t, ht, b, hb2, hbt⟩ := exists_bottom_page_transitions E
+  have stable := spectral_object_page_stabilizes Y
+  let T (n : ℕ) : DecreasingFiltration (HZ n) :=
+    { step i := (Subobject.«exists» (h n).hom).obj
+        (Y.imageFiltration n ((n : ℤ) + 1 - i))
+      antitone_step := by
+        intro i j hij
+        exact leOfHom ((Subobject.«exists» (h n).hom).map
+          (homOfLE (Y.imageFiltration_mono n (by omega)))) }
+  have top (n : ℕ) : (T n).step 0 = ⊤ := by
+    dsimp [T]
+    rw [Y.imageFiltration_eq_top _ _ (by omega)]
+    rw [Subobject.exists_iso_map, Subobject.map_top, Subobject.mk_eq_top_of_isIso]
+  have bot (n : ℕ) : (T n).step (n + 1) = ⊥ := by
+    dsimp [T]
+    rw [Y.imageFiltration_eq_bot _ _ (by omega)]
+    rw [Subobject.exists_iso_map, Subobject.map_bot]
+  obtain ⟨g, k, hk, factor⟩ :=
+    exists_spectral_object_bottom_filtration Y HZ h T (fun _ _ ↦ rfl) t ht b hb2 hbt
+  let e₂ (p q : ℕ) := Y.E₂SpectralSequenceNatPageTwoXIso p q ≪≫ e p q
+  let e₀ (p : ℕ) :=
+    Functor.isoWhiskerRight (asIso (TopCat.Sheaf.pushforwardAb f).toRightDerivedZero)
+      (HX p) ≪≫ (e₂ p 0).symm
+  let bottom (p : ℕ) := Functor.whiskerRight
+    (TopCat.Sheaf.pushforwardAb f).toRightDerivedZero (HX p) ≫
+      (e p 0).inv ≫ Y.bottomEdge p ≫ (h p).hom
+  refine ⟨E, e₂, stable, T, top, bot, g, e₀, ?_, t, ht, b, hb2, hbt, k, hk,
+    bottom, ?_, computation⟩
+  · intro p
+    rfl
+  · intro p
+    dsimp [bottom, e₀, e₂]
+    rw [← factor p]
+    simp only [Category.assoc, Iso.inv_hom_id_assoc]
+
 
 end CategoryTheory
