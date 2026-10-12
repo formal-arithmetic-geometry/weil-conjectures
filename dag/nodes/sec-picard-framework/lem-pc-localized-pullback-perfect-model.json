@@ -1,0 +1,153 @@
+{
+ "id": "lem-pc-localized-pullback-perfect-model",
+ "kind": "statement",
+ "title": "Derived pullback computed on a specified localized strictly perfect model",
+ "statement": "Let $g:T\\to X$ be a morphism of schemes [def-pc-scheme], let $U\\subseteq X$ be an open, and put $V=g^{-1}(U)$. Let $E\\in D(\\mathcal O_X)$ [def-pc-derived-category], let $K$ be a strictly perfect complex of modules on the localized site of $U$ [def-pc-perfect-complex, def-pur-localized-ringed-site], and fix an isomorphism $E|_U\\cong Q(K)$. Define the ordinary localized pullback functor $F$ by the open-site equivalence from localized modules on $U$ to modules on $U$ as an open subscheme, followed by ordinary module pullback along $V\\to U$ [def-pc-module-pullback], followed by the inverse open-site equivalence on $V$. There is an isomorphism $(Lg^*E)|_V\\cong Q(F(K))$ [def-pc-derived-pullback], where $F(K)$ is the termwise image of $K$. The ambient and localized derived categories may have any common localization universe $w$; no affineness or quasi-coherence hypothesis is imposed.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/09UA",
+  "place": "Tag 09UA, alternative proof via 09U7; restriction in 08DW and flat computation in 06YD/06YJ"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "def-pc-perfect-complex",
+  "def-pur-localized-ringed-site",
+  "def-pc-module-pullback",
+  "def-pc-derived-pullback"
+ ],
+ "proof": [
+  {
+   "text": "Put V = g inverse-image U. Construct F as Modules.overEquiv U followed by the ordinary module pullback of g.resLE U V and Modules.overEquiv V inverse. Transport K to a complex P on U.toScheme. Additivity preserves the zero terms beyond the upper bound of K. The open-site equivalence preserves coproducts and carries the unit to the unit, so its image of every finite free module is finite free. Map the retract maps of each K term to show that each P term is a retract of a finite free module.",
+   "uses": [
+    "def-pc-perfect-complex",
+    "def-pc-module-pullback"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Install the proved tensorClosed structures and the proved source SheafOfModules.isGrothendieckAbelian instance. The unit is flat by the monoidal unitors; flat_coproduct makes each finite free module flat. Apply the proved source ObjectProperty.flat_of_retract to the explicit mapped retract, and take its tensorRight exactness clause. Thus every term of P is flat.",
+   "uses": [
+    "lem-pc-sheaf-modules-tensor-closed",
+    "lem-weil-pbc-flat-coproduct"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply flatComplexDerivedPullback to g.resLE U V and P. Its functor F_tensor is identified with Scheme.Modules.tensorPullback by the recorded object and morphism equalities. The tensor pullback adjunction and the Mathlib module pullback adjunction have the same pushforward; leftAdjointUniq identifies the functors. Compose the canonical quotientCompQhIso, the inverse of the flat comparison, mapHomotopyCategoryFactors, quotientCompQhIso again, and the image under Q of the termwise adjoint-uniqueness isomorphism. This gives L(g.resLE)* Q(P) isomorphic to Q of the ordinary pulled P.",
+   "uses": [
+    "lem-pc-flat-complex-derived-pullback",
+    "def-pc-module-pullback"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Choose standard derived categories on U.toScheme and V.toScheme independently of the ambient localization universe w. Use derivedPullback_openRestriction_iso_universes. The composition isomorphisms for exact mapDerivedCategory and the given model isomorphism e identify the image under the derived open-site equivalence of (Lg* E)|V with L(g.resLE)* Q(P). Compose with the isomorphism of the preceding step.",
+   "uses": [
+    "lem-pc-derived-pullback-open-restriction-universes"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For C = Modules.overEquiv V functor, compose associators and the equivalence counit to obtain F followed by C isomorphic to Modules.overEquiv U functor followed by ordinary pullback. Apply mapHomologicalComplexCompIso and mapDerivedCategoryFactors to obtain the same Q of the ordinary pulled P from C.mapDerivedCategory applied to Q(F K). The two isomorphisms have a common target. Compose one with the inverse of the other and take preimageIso under the fully faithful C.mapDerivedCategory, proving the claimed local model isomorphism.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pc-module-pullback",
+  "def-pc-perfect-complex",
+  "lem-pc-derived-pullback-open-restriction-universes",
+  "lem-pc-flat-complex-derived-pullback",
+  "lem-pc-sheaf-modules-tensor-closed",
+  "lem-weil-pbc-flat-coproduct"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/09UA",
+  "place": "Tag 09UA, alternative proof via 09U7; restriction in 08DW and flat computation in 06YD/06YJ; Q1 implemented the categorical transports using the existing source-library exact-functor comparisons."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Derived pullback of a bounded complex of finite projective sheaf modules commutes with restriction to an open subset",
+   "results": "Service unavailable: Internal Server Error.",
+   "verdict": "unavailable",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived pullback preserves perfect complexes on schemes",
+   "results": "Eight scheme-level ordinary geometric pullback hits; no derived perfect-model comparison.",
+   "verdict": "no exact match",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.mapDerivedCategory, Equivalence",
+   "results": "Zero hits. Direct source reading found source-library mapDerivedCategoryCompIso and Equivalence.mapDerivedCategory; Mathlib provides mapDerivedCategoryFactors.",
+   "verdict": "categorical tools only; no exact local-model computation",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "grep",
+   "query": "IsStrictlyPerfect|derivedPullback_preserve_perfect; derivedPullback_openRestriction|mapDerivedCategoryCompIso",
+   "results": "No Mathlib perfect-complex match. Project reading found the existing flatComplexDerivedPullback and universe-aware open-restriction comparison, but not their localized strictly-perfect-model composite.",
+   "verdict": "reuse the existing computations and prove their transport",
+   "date": "2026-10-12"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.DerivedPullbackPerfect",
+  "date": "2026-10-12",
+  "group": "Q1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "local strictly perfect model computation in derived pullback preservation",
+   "via": [
+    "lem-pc-perfect-tensor-hom-duality",
+    "lem-sc-smooth-proper-tensor-perfect-case",
+    "lem-sc-smooth-proper-diagonal-tensor-formula",
+    "lem-pc-derived-pullback-perfect"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.LocalizedPullbackPerfectModel",
+  "file": "lean/Sheaf/AlgebraicGeometry/LocalizedPullbackPerfectModel.lean",
+  "declaration": "AlgebraicGeometry.localizedPullback_perfectModel_iso",
+  "statement": "theorem localizedPullback_perfectModel_iso {T X : Scheme.{u}} (g : T ⟶ X)\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]\n    [∀ U : X.Opens, HasDerivedCategory.{w}\n      (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))]\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings T.toRingedSpace))]\n    [∀ V : T.Opens, HasDerivedCategory.{w}\n      (SheafOfModules.{u} ((moduleRings T.toRingedSpace).over V))]\n    (U : X.Opens) (E : schemeDerivedCategory X)\n    (K : CochainComplex (SheafOfModules.{u}\n      ((moduleRings X.toRingedSpace).over U)) ℤ)\n    (hK : Scheme.IsStrictlyPerfect X U K)\n    (e : (SheafOfModules.overFunctor.{u}\n      (moduleRings X.toRingedSpace) U).mapDerivedCategory.obj E ≅ DerivedCategory.Q.obj K) :\n    Nonempty ((SheafOfModules.overFunctor.{u}\n      (moduleRings T.toRingedSpace) (g ⁻¹ᵁ U)).mapDerivedCategory.obj\n        ((derivedPullback g).obj E) ≅\n      DerivedCategory.Q.obj\n        (((Scheme.Modules.localizedPullback g U).mapHomologicalComplex (.up ℤ)).obj K))",
+  "branch": "sheaf-dag",
+  "by": "Q1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q1",
+  "result": "pass",
+  "landing": "20261012T144136-L-2104439",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q1",
+  "result": "pass",
+  "landing": "20261012T144136-L-2104439",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
