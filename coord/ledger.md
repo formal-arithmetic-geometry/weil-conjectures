@@ -6042,3 +6042,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 04:47 L: merged deliver/C1/Sheaf.AlgebraicGeometry.AffineEtaleInverseImageComparison (stage 3; reviewer PASS; first push; landing 20261012T044738-L-2032075 (interface); batch 20261012T044734; modules 3; new nodes 2)
 - 04:47 L: merged deliver/C1/Sheaf.AlgebraicGeometry.CohomologyPullbackDerivedUnit (stage 3; reviewer PASS; first push; landing 20261012T044738-L-2032236 (proof); batch 20261012T044734; modules 1; new nodes 0)
 - 04:47 L: merged deliver/C1/Sheaf.CategoryTheory.Sites.InjectivePresheafModuleCechExact (stage 3; reviewer PASS; first push; landing 20261012T044738-L-2032340 (proof); batch 20261012T044734; modules 1; new nodes 0)
+- 04:47 L: merged deliver/C1/WeilConjectures.AlgebraicGeometry.Cohomology.EulerChar (stage 3; reviewer PASS; after a return; landing 20261012T044739-L-2032473 (interface); batch 20261012T044734; modules 4; new nodes 5)

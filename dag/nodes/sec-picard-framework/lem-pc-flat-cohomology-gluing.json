@@ -1,0 +1,134 @@
+{
+ "id": "lem-pc-flat-cohomology-gluing",
+ "kind": "statement",
+ "title": "Mayer--Vietoris gluing of canonical flat cohomology comparisons",
+ "statement": "Let R,S be commutative rings with S a flat R-algebra [def-weil-pbc-flat-ring-map], f:X→Spec R a morphism of schemes [def-pc-scheme], M a quasi-coherent O_X-module [pqf-def-coherent], and U,V open subschemes covering X. Use Ext-based cohomology [pqf-def-cohomology], scheme and module pullback [def-pc-base-change], and the canonical comparisons β of [def-pc-flat-cohomology-comparison]. Assume for every n≥0 that the comparisons on U, V, and U∩V for the restrictions of M are bijective. Then β^q_{f,M,S} on X is bijective for every q≥0. Neither the opens nor their intersection are assumed affine, compact, or separated. All local comparisons are the canonical maps, transported through the usual iterated-pullback isomorphisms.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-flat-ring-map",
+  "pqf-def-coherent",
+  "pqf-def-cohomology",
+  "def-pc-base-change",
+  "def-pc-flat-cohomology-comparison"
+ ],
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/02KH",
+  "place": "Cohomology of Schemes, Lemma 30.5.2 (Tag 02KH), proof, quasi-separated-case paragraph: Mayer--Vietoris and induction on the number of affine opens"
+ },
+ "proof": [
+  {
+   "text": "Form the Mayer--Vietoris sequences for the two-open cover of X and its inverse-image cover of X_S. Tensor the first sequence with S; flatness preserves exactness and tensor preserves binary sums.",
+   "uses": [
+    "lem-sc-mayer-vietoris-ringed-space",
+    "lem-weil-pbc-flat-tensor-exact"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The specifically defined β maps give a commuting diagram of these sequences. Compatibility with restrictions is functoriality of the inverse-image Ext map and adjunction units. For the boundaries use naturality of Ext Yoneda composition, or a common Cech/injective double complex. Iterated-pullback isomorphisms identify the local maps with precisely those in the hypotheses.",
+   "uses": [
+    "def-pc-flat-cohomology-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "In positive degree, the four outside arrows around the cohomology of X are isomorphisms by the assumptions in adjacent degrees. The five lemma proves the middle arrow bijective. In degree zero use the initial left-exact sequence starting with zero. This proves all degrees without assuming affine intersections.",
+   "uses": [
+    "lem-weil-pbc-five-lemma"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-flat-cohomology-comparison",
+  "lem-sc-mayer-vietoris-ringed-space",
+  "lem-weil-pbc-five-lemma",
+  "lem-weil-pbc-flat-tensor-exact"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/02KH",
+  "place": "proof, quasi-separated-case paragraph: Mayer--Vietoris and induction on the number of affine opens; explicit Lean constructions and qcqs induction by C1"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Mayer Vietoris gluing canonical cohomology base change comparison maps",
+   "results": "MayerVietorisSquare constructions, no flat scalar-extension comparison gluing theorem.",
+   "date": "2026-10-12",
+   "verdict": "No complete match; use the indicated existing infrastructure."
+  },
+  {
+   "tool": "grep",
+   "query": "Mayer.Vietoris|baseChange.*cohomology|mapFunctor_map",
+   "results": "Mathlib has Mayer--Vietoris sequences, and the source library has Sheaf.H.mapFunctor_map; no scalar-extension scheme comparison theorem.",
+   "date": "2026-10-12",
+   "verdict": "No complete match; use the indicated existing infrastructure."
+  },
+  {
+   "tool": "loogle",
+   "query": "Function.Bijective, TensorProduct",
+   "results": "TensorProduct.map_bijective and algebraic tensor results; no geometric comparison.",
+   "date": "2026-10-12",
+   "verdict": "No complete match; use the indicated existing infrastructure."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Flat base change of scheme cohomology and Mayer Vietoris gluing of canonical comparison maps",
+   "results": "Service unavailable: Internal Server Error; recorded in searches.jsonl. Other search kinds and local grep used.",
+   "date": "2026-10-12"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "WeilConjectures.AlgebraicGeometry.Cohomology.EulerChar",
+  "date": "2026-10-12",
+  "group": "C1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-flat-base-change-coherent",
+   "place": "proof, quasi-separated-case paragraph: Mayer--Vietoris and induction on the number of affine opens",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-rr",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Cohomology.FlatCohomologyGluing",
+  "file": "lean/Sheaf/AlgebraicGeometry/Cohomology/FlatCohomologyGluing.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.H.baseChange_bijective_of_openCover",
+  "statement": "theorem H.baseChange_bijective_of_openCover\n    {R S : Type u} [CommRing R] [CommRing S] [Algebra R S] [Module.Flat R S]\n    {X : Scheme.{u}} (f : X ⟶ Spec (.of R)) (M : X.Modules) [M.IsQuasicoherent]\n    (U V : X.Opens) (hcover : U ⊔ V = ⊤)\n    (hU : ∀ q : ℕ, Function.Bijective\n      (H.baseChange (S := S) (U.ι ≫ f) ((pullback U.ι).obj M) q))\n    (hV : ∀ q : ℕ, Function.Bijective\n      (H.baseChange (S := S) (V.ι ≫ f) ((pullback V.ι).obj M) q))\n    (hUV : ∀ q : ℕ, Function.Bijective\n      (H.baseChange (S := S) ((U ⊓ V).ι ≫ f) ((pullback (U ⊓ V).ι).obj M) q))\n    (q : ℕ) : Function.Bijective (H.baseChange (S := S) f M q)",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-12"
+ },
+ "split_report": {
+  "blueprint": "This node makes precise proof, quasi-separated-case paragraph: Mayer--Vietoris and induction on the number of affine opens of lem-sc-flat-base-change-coherent. The unit and chapter are unchanged. Blueprint searches for flat base change separated, flat cohomology gluing, and cohomology comparison map found no duplicate; the general derived Mayer--Vietoris nodes use different derived cohomology objects."
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C1",
+  "result": "pass",
+  "landing": "20261012T044739-L-2032473",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C1",
+  "result": "pass",
+  "landing": "20261012T044739-L-2032473",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

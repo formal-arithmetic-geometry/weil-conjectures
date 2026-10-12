@@ -1,0 +1,126 @@
+{
+ "id": "def-pc-flat-cohomology-comparison",
+ "kind": "definition",
+ "title": "Canonical scalar-extension comparison on Ext-based scheme cohomology",
+ "statement": "Let R and S be commutative rings, S an R-algebra, X a scheme with f:X→Spec R [def-pc-scheme, def-pc-base-change], and M an O_X-module [pqf-def-coherent]. Write H^q(X,M) for the Ext-based cohomology [pqf-def-cohomology], with R-action through R→Γ(X,O_X). Put p:X_S=X×_{Spec R}Spec S→X and f_S:X_S→Spec S. Define HOver(f,M,q) to be that cohomology with this R-action. The inverse-image functor on abelian sheaves maps Ext classes; use the canonical comparison of constant integer sheaves and the map adjoint to M→p_*p^*M to obtain a canonical R-linear map HOver(f,M,q)→HOver(f_S,p^*M,q). Define β^q_{f,M,S}:S⊗_R HOver(f,M,q)→HOver(f_S,p^*M,q) as its S-linear extension, b⊗x↦b·p^*x. No flatness or compactness is assumed. The coefficient maps and cohomology maps are natural for commuting module squares, and their scalar law is H(f,φ)(a·x)=f^♯(a)·H(f,φ)(x). This describes the specifically constructed map H.baseChange, not the existence of an unspecified map.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-base-change",
+  "pqf-def-coherent",
+  "pqf-def-cohomology"
+ ],
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/02KH",
+  "place": "Cohomology of Schemes, Lemma 30.5.2 (Tag 02KH), proof, affine-section comparison and canonical base-change map preceding the separated-case paragraph"
+ },
+ "proof": [
+  {
+   "text": "Use [lem-pc-abelian-inverse-image-finite-limits] and [lem-pc-abelian-inverse-image-finite-colimits] to obtain preservation of finite limits and colimits by invImage f, as required by the map on Ext classes. Construct the underlying coefficient map by the sheaf adjunction, and compare the constant integer sheaves using constantSheafsheafPullbackIso.",
+   "uses": [
+    "lem-pc-abelian-inverse-image-finite-limits",
+    "lem-pc-abelian-inverse-image-finite-colimits"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Build cohomologyModule from a ring representation on an abelian sheaf, using additivity and functoriality of Sheaf.H.map. The ring representation scalarRep sends a global section to its smulHom. Build cohomologyComparisonLinear from Sheaf.H.mapFunctor followed by Sheaf.H.map of the coefficient map; sheafComparison_naturality proves R-linearity for compatible representations. Specialize to the module pullback unit. Cached sheafification and HasExt instances share the cohomology construction; named baseChangedScheme, baseChangeFst, baseChangeSnd, baseChangedModule and baseChangeUnit share the cartesian square and coefficient data without changing them.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Restrict the scalar representations along R→Γ(X,O_X) and S→Γ(X_S,O_X_S). The pullback-square equation and ΓSpecIso naturality identify the R-actions, giving the coefficient compatibility used by H.baseChangeLinear. The generic extendComparison uses TensorProduct.AlgebraTensorModule.lift to extend that linear map to H.baseChange, sending b⊗x to b times its cohomology pullback. HOver is a type synonym of Modules.H retaining the displayed structure morphism. Its additive group directly reuses instAddCommGroupH and its scalar module directly reuses moduleH restricted along the displayed morphism, without copying either into expanded fields. The generic scalar-representation action agrees definitionally with that action. The unneeded H.fmap and H.fmap_smul helpers are absent.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-abelian-inverse-image-finite-colimits",
+  "lem-pc-abelian-inverse-image-finite-limits"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/02KH",
+  "place": "proof, affine-section comparison and canonical base-change map preceding the separated-case paragraph; explicit Lean constructions and qcqs induction by C1; repaired X-de254: explicit finite-limit and finite-colimit preservation Mathlib leaves; repaired X-2722c: shared Ext instances and direct scalar representations replace expanded additive/module instance wrappers; cartesian data and generic linear/tensor comparisons are named definitions in the same module"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Canonical map on sheaf cohomology from inverse image and extension of scalars",
+   "results": "SheafOfModules.pushforwardSections and cohomologyPresheafFunctor, but no complete comparison.",
+   "date": "2026-10-12",
+   "verdict": "No complete match; use the indicated existing infrastructure."
+  },
+  {
+   "tool": "loogle",
+   "query": "Sheaf.H.mapFunctor",
+   "results": "No Mathlib identifier; the source library has the reusable construction.",
+   "date": "2026-10-12",
+   "verdict": "No complete match; use the indicated existing infrastructure."
+  },
+  {
+   "tool": "grep",
+   "query": "Mayer.Vietoris|baseChange.*cohomology|mapFunctor_map",
+   "results": "Mathlib has Mayer--Vietoris sequences, and the source library has Sheaf.H.mapFunctor_map; no scalar-extension scheme comparison theorem.",
+   "date": "2026-10-12",
+   "verdict": "No complete match; use the indicated existing infrastructure."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Flat base change of scheme cohomology and Mayer Vietoris gluing of canonical comparison maps",
+   "results": "Service unavailable: Internal Server Error; recorded in searches.jsonl. Other search kinds and local grep used.",
+   "date": "2026-10-12"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "WeilConjectures.AlgebraicGeometry.Cohomology.EulerChar",
+  "date": "2026-10-12",
+  "group": "C1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-flat-base-change-coherent",
+   "place": "proof, affine-section comparison and canonical base-change map preceding the separated-case paragraph",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-rr",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Cohomology.FlatCohomologyComparison",
+  "file": "lean/Sheaf/AlgebraicGeometry/Cohomology/FlatCohomologyComparison.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.H.baseChange",
+  "statement": "def H.baseChange (f : X ⟶ Spec (.of R)) (M : X.Modules) (q : ℕ) : TensorProduct R S (HOver f M q) →ₗ[S] HOver (baseChangeSnd (S := S) f) (baseChangedModule (S := S) f M) q",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-12"
+ },
+ "split_report": {
+  "blueprint": "This node makes precise proof, affine-section comparison and canonical base-change map preceding the separated-case paragraph of lem-sc-flat-base-change-coherent. The unit and chapter are unchanged. Blueprint searches for flat base change separated, flat cohomology gluing, and cohomology comparison map found no duplicate; the general derived Mayer--Vietoris nodes use different derived cohomology objects."
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C1",
+  "result": "pass",
+  "landing": "20261012T044739-L-2032473",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C1",
+  "result": "pass",
+  "landing": "20261012T044739-L-2032473",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

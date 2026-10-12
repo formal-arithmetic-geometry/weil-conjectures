@@ -17,9 +17,9 @@ public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicohe
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf
 import Sheaf.AlgebraicGeometry.ZariskiDimensionBound
 import Mathlib.Topology.Sheaves.Abelian
-import Sheaf.AlgebraicGeometry.BaseChangeConventions
-import Sheaf.AlgebraicGeometry.ModulePullbackAffineSections
-import WeilConjectures.AlgebraicGeometry.Cohomology.Affine.Leray
+import Sheaf.AlgebraicGeometry.Cohomology.FlatCohomologySeparated
+import Sheaf.AlgebraicGeometry.Cohomology.FlatCohomologyGluing
+import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Tilde
 
 /-!
 # The arithmetic genus and the cohomological degree of a sheaf of modules
@@ -148,12 +148,13 @@ Proof (Stacks 02KH): first suppose `X` is separated. A finite affine open cover 
 intersections, so its Čech complex computes quasi-coherent cohomology. The affine pullback
 section formula identifies the base-changed complex with its tensor product by `K`.
 Tensoring over the field `k` is exact, hence commutes with cohomology. For general
-quasi-separated `X`, the intersections of a finite affine cover are quasi-compact and
-separated, so the separated case applies to their cohomology. The natural comparison of
-Čech-to-cohomology spectral sequences is an isomorphism on the second pages after tensoring
-by `K`. Exactness of tensoring preserves these pages and the finite filtrations in each total
-degree, giving the claimed isomorphism on the abutments. Tensor symmetry gives the displayed
-order `K ⊗[k] H^q(X, M)` and its `K`-linear structure.
+quasi-separated `X`, use compact-open induction. Its step adds an affine open `V` to a
+compact open `U`. The overlap `U ∩ V` is compact by quasi-separatedness and separated
+because it is open in the affine scheme `V`; it need not be affine. The separated case
+applies to `V` and the overlap, while the induction hypothesis applies to `U`.
+Mayer--Vietoris gluing of the canonical comparisons proves bijectivity on `U ∪ V` in
+all degrees. Apply the induction at the whole scheme and invert the resulting
+`K`-linear comparison from `K ⊗[k] H^q(X, M)` to the pullback cohomology.
 
 (blueprint: `lem-sc-flat-base-change-coherent`) -/
 @[stacks 02KH]
@@ -161,8 +162,57 @@ theorem Modules.nonempty_H_pullback_linearEquiv [QuasiCompact (X ↘ Spec (.of k
     [QuasiSeparated (X ↘ Spec (.of k))] (M : X.Modules) [M.IsQuasicoherent] (q : ℕ) :
     Nonempty (((Modules.pullback (Limits.pullback.fst (X ↘ Spec (.of k))
       (Spec.map (CommRingCat.ofHom (algebraMap k K))))).obj M).H q ≃ₗ[K]
-        TensorProduct k K (M.H q)) :=
-  sorry
+        TensorProduct k K (M.H q)) := by
+  classical
+  have : CompactSpace X := QuasiCompact.compactSpace_of_compactSpace (X ↘ Spec (.of k))
+  have : QuasiSeparatedSpace X :=
+    quasiSeparatedSpace_of_quasiSeparated (X ↘ Spec (.of k))
+  let P (U : X.Opens) : Prop :=
+    ∀ (Y : Scheme.{u}) (j : Y ⟶ X) (_ : IsOpenImmersion j), j.opensRange = U →
+      ∀ (N : Y.Modules) (_ : N.IsQuasicoherent) (n : ℕ),
+        Function.Bijective (Modules.H.baseChange (S := K) (j ≫ X ↘ Spec (.of k)) N n)
+  have hP : P ⊤ := by
+    apply compact_open_induction_on (P := P) ⊤ isCompact_univ
+    · intro Y j hj hjrange N hN n
+      have : IsEmpty Y := ⟨fun y ↦ by
+        have hy : j y ∈ j.opensRange := ⟨y, rfl⟩
+        rw [hjrange] at hy
+        exact hy⟩
+      exact Modules.H.baseChange_bijective_of_isSeparated _ N n
+    · intro U hU V ih Y j hj hjrange N hN n
+      let A : Y.Opens := j ⁻¹ᵁ U
+      let B : Y.Opens := j ⁻¹ᵁ V.1
+      have hAimage : j ''ᵁ A = U := by
+        rw [Hom.image_preimage_eq_opensRange_inf, hjrange, inf_eq_right.mpr le_sup_left]
+      have hB : IsAffineOpen B :=
+        V.2.preimage_of_isOpenImmersion j (hjrange.symm ▸ le_sup_right)
+      have hAc : IsCompact (A : Set Y) :=
+        j.isOpenEmbedding.isEmbedding.isCompact_iff.mpr (by
+          change IsCompact (j ''ᵁ A : Set X)
+          rw [hAimage]
+          exact hU)
+      have : CompactSpace A.toScheme := isCompact_iff_compactSpace.mp hAc
+      have : QuasiSeparatedSpace Y := j.isOpenEmbedding.quasiSeparatedSpace
+      have hIc : IsCompact ((A ⊓ B : Y.Opens) : Set Y) :=
+        hAc.inter_of_isOpen hB.isCompact A.isOpen B.isOpen
+      have : CompactSpace (A ⊓ B).toScheme := isCompact_iff_compactSpace.mp hIc
+      have : IsAffine B.toScheme := hB
+      have : (A ⊓ B).toScheme.IsSeparated := ⟨by
+        rw [← Limits.terminal.comp_from (Y.homOfLE (inf_le_right : A ⊓ B ≤ B))]
+        infer_instance⟩
+      apply Modules.H.baseChange_bijective_of_openCover _ N A B ?_ ?_ ?_ ?_ n
+      · change j ⁻¹ᵁ U ⊔ j ⁻¹ᵁ V.1 = ⊤
+        rw [← j.preimage_sup, ← hjrange, j.preimage_opensRange]
+      · intro r
+        apply ih A.toScheme (A.ι ≫ j) inferInstance ?_ _ inferInstance r
+        rw [Hom.opensRange_comp, Opens.opensRange_ι, hAimage]
+      · intro r
+        exact Modules.H.baseChange_bijective_of_isSeparated _ _ r
+      · intro r
+        exact Modules.H.baseChange_bijective_of_isSeparated _ _ r
+  have hb := hP X (𝟙 X) inferInstance (Hom.opensRange_of_isIso _) M inferInstance q
+  exact ⟨(LinearEquiv.ofBijective (Modules.H.baseChange (S := K)
+    (X ↘ Spec (.of k)) M q) hb).symm⟩
 
 /-- **Flat base change of `h^q`.** For a quasi-coherent module `M` on a quasi-compact
 quasi-separated scheme `X` over `k` and a field extension `K/k`,
@@ -360,3 +410,4 @@ end Additivity
 end Modules
 
 end AlgebraicGeometry.Scheme
+

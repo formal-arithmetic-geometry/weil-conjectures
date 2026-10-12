@@ -23,12 +23,13 @@
  ],
  "proof": [
   {
-   "text": "The structure morphism $X\\to\\operatorname{Spec}k$ is proper, hence separated and of finite type [def-weil-proper-morphism]. Thus $X$ is quasi-compact and quasi-separated and has a finite affine open cover $\\mathfrak U=\\{U_1,\\ldots,U_r\\}$ whose finite intersections are affine (a separated scheme over the affine $\\operatorname{Spec}k$ has affine intersections of affine opens [lem-weil-pbc-separated-affine-open-intersection]). Base change along $\\operatorname{Spec}k'\\to\\operatorname{Spec}k$ gives the affine cover $\\mathfrak U_{k'}$ of $X_{k'}$, with $(U_J)_{k'}$ affine for every intersection. Applying [lem-pc-cech-computes] to $\\mathfrak U$ and $\\mathfrak U_{k'}$ identifies both cohomology groups with the corresponding Cech cohomology groups.",
+   "text": "The structure morphism $X\\to\\operatorname{Spec}k$ is proper, hence separated and of finite type [def-weil-proper-morphism]. Thus $X$ is quasi-compact and quasi-separated and has a finite affine open cover $\\mathfrak U=\\{U_1,\\ldots,U_r\\}$ whose finite intersections are affine (a separated scheme over the affine $\\operatorname{Spec}k$ has affine intersections of affine opens [lem-weil-pbc-separated-affine-open-intersection]). Base change along $\\operatorname{Spec}k'\\to\\operatorname{Spec}k$ gives the affine cover $\\mathfrak U_{k'}$ of $X_{k'}$, with $(U_J)_{k'}$ affine for every intersection. Applying [lem-pc-cech-computes] to $\\mathfrak U$ and $\\mathfrak U_{k'}$ identifies both cohomology groups with the corresponding Cech cohomology groups. Equivalently, the separated-case canonical comparison is precisely [lem-pc-flat-cohomology-separated], which is stated for arbitrary commutative flat algebras and applies here without any field hypothesis on k′.",
    "uses": [
     "def-weil-proper-morphism",
     "lem-pc-cech-computes",
     "def-pc-base-change",
-    "lem-weil-pbc-separated-affine-open-intersection"
+    "lem-weil-pbc-separated-affine-open-intersection",
+    "lem-pc-flat-cohomology-separated"
    ],
    "elementary": false,
    "source": {
@@ -67,20 +68,32 @@
     "document": "literature/stacks-project/coherent.tex",
     "place": "Cohomology of Schemes, Lemma 30.5.2 (Tag 02KH), field-extension specialization"
    }
+  },
+  {
+   "text": "The recorded Lean declaration also allows qcqs schemes over a field that are not separated. Implement compact-open induction using Mathlib compact_open_induction_on. Start with the empty scheme. For a compact open U and an affine open V, U intersect V is compact by quasi-separatedness and separated because it is open in the affine V. Apply [lem-pc-flat-cohomology-separated] to V and U intersect V, use the induction hypothesis on U, and combine the three canonical comparisons by [lem-pc-flat-cohomology-gluing]. Quantify the induction property over all open immersions into X with the given image, so the final application is directly to the identity of X. Invert the resulting bijective S-linear map using LinearEquiv.ofBijective. This is the Mayer--Vietoris alternative in Tag 02KH; no assertion of affine intersections in the qcqs case is made.",
+   "uses": [
+    "def-pc-flat-cohomology-comparison",
+    "lem-pc-flat-cohomology-separated",
+    "lem-pc-flat-cohomology-gluing"
+   ],
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "def-weil-proper-morphism",
-  "lem-pc-cech-computes",
   "def-pc-base-change",
   "def-pc-field-extension",
-  "lem-weil-pbc-separated-affine-open-intersection",
-  "lem-weil-pbc-module-pullback-affine-sections"
+  "def-pc-flat-cohomology-comparison",
+  "def-weil-proper-morphism",
+  "lem-pc-cech-computes",
+  "lem-pc-flat-cohomology-gluing",
+  "lem-pc-flat-cohomology-separated",
+  "lem-weil-pbc-module-pullback-affine-sections",
+  "lem-weil-pbc-separated-affine-open-intersection"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-rr/lem-sc-flat-base-change-coherent.md",
-  "place": "## Proof"
+  "document": "https://stacks.math.columbia.edu/tag/02KH",
+  "place": "Separated Cech argument over general flat commutative algebras; Mayer--Vietoris alternative for the qcqs Lean statement. Canonical map and compact-open induction implemented by C1."
  },
  "mathlib_searches": [],
  "mathlib_match": null,
@@ -152,20 +165,13 @@
   "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state sorry_here)"
  },
  "reviewed_proof": {
-  "date": "2026-10-11",
+  "date": "2026-10-12",
   "by": "L",
-  "reviewer": "X-0172f",
-  "group": "H1",
+  "reviewer": "COMPILER",
+  "group": "C1",
   "result": "pass",
-  "landing": "20261011T233842-L-412783",
-  "kind": "proof",
-  "note": "independent Codex review: Delivered EulerChar proof, node metadata, report, and compiled files matched the stage-3 brief; lcompile and axiom checks passed.",
-  "sorry_before": [
-   "AlgebraicGeometry.Scheme.Modules.nonempty_H_pullback_linearEquiv",
-   "AlgebraicGeometry.Scheme.Modules.subsingleton_H_of_topologicalKrullDim_lt"
-  ],
-  "sorry_after": [
-   "AlgebraicGeometry.Scheme.Modules.nonempty_H_pullback_linearEquiv"
-  ]
+  "landing": "20261012T044739-L-2032473",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
