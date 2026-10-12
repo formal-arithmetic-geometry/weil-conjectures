@@ -7,6 +7,8 @@ module
 
 public import Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
 public import Mathlib.Topology.Sheaves.Flasque
+import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.EnoughInjectives
+import WeilConjectures.Mathlib.Topology.Sheaves.Flasque
 import Sheaf.AlgebraicGeometry.InjectiveRestrictionSurjective
 
 /-!
@@ -30,21 +32,38 @@ Source: Stacks Project, `cohomology.tex`, Tag 09SY (`lemma-flasque-acyclic`)
 (blueprint: lem-sc-zariski-flasque-acyclic).
 
 Proof:
-1. Let `0 → F → I → Q → 0` be short exact with `I` injective. Abelian sheaves are the
-   modules over the locally constant sheaf `ℤ_X`, so `I` is an injective `ℤ_X`-module and
-   its restrictions are surjective (`lem-sc-ringed-space-injective-restriction-surjective`):
-   `I` is flasque (`def-sc-zariski-flasque`). As `F` is flasque, `I(V) → Q(V)` is surjective
-   for every open `V`, and `Q` is flasque (`lem-sc-zariski-flasque-quotient-sections`).
-2. Embedding into injectives (`lem-weil-pbc-site-sheaves-enough-injectives`) and iterating on
-   the flasque quotients gives an injective resolution `F → I^•` whose complex of sections
-   `I^•(V)` is exact in positive degrees for every open `V`.
-3. By `def-sc-zariski-cohomology`, `H^q(X, F)` is the `q`-th cohomology of `I^•(X)`, which
-   vanishes for `q > 0` by step 2. -/
+1. Apply the source library's `IsFlasque.subsingleton_H` in degree `q = n + 1`.
+   It proves flasque acyclicity by embedding into injectives and dimension shifting;
+   enough injectives on the opens site is provided by Mathlib.
+2. The representable presheaf of the top open has exactly one element at every open.
+   The free abelian group on this singleton is canonically `ℤ`, hence `ULift ℤ`.
+   These component isomorphisms are natural because every generator maps to `1`.
+3. Sheafify this isomorphism and use `Ext.precompAddEquiv` to identify `H' F q ⊤`
+   with `H F q`. Transport the subsingleton instance along the equivalence. -/
 theorem IsFlasque.subsingleton_H'_top {X : TopCat.{u}}
     [HasExt.{u} (CategoryTheory.Sheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u})]
     (F : CategoryTheory.Sheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u})
     [TopCat.Sheaf.IsFlasque F] (q : ℕ) (hq : 0 < q) :
     Subsingleton (CategoryTheory.Sheaf.H' F q ⊤) := by
-  sorry
+  obtain ⟨n, rfl⟩ := Nat.exists_eq_succ_of_ne_zero (Nat.ne_of_gt hq)
+  have : Subsingleton (CategoryTheory.Sheaf.H.{u} F (n + 1)) :=
+    IsFlasque.subsingleton_H n F
+  let e : yoneda.obj (⊤ : Opens X) ⋙ AddCommGrpCat.free ≅
+      (Functor.const (Opens X)ᵒᵖ).obj (AddCommGrpCat.of (ULift.{u} ℤ)) :=
+    NatIso.ofComponents (fun U ↦ by
+      letI : Unique (U.unop ⟶ (⊤ : Opens X)) :=
+        ⟨⟨homOfLE le_top⟩, fun _ ↦ Subsingleton.elim _ _⟩
+      exact ((FreeAbelianGroup.uniqueEquiv _).trans AddEquiv.ulift.symm).toAddCommGrpIso)
+      (by
+        intro U V f
+        apply AddCommGrpCat.hom_ext
+        apply FreeAbelianGroup.lift_ext
+        intro a
+        simp [FreeAbelianGroup.uniqueEquiv])
+  let eS := (presheafToSheaf (Opens.grothendieckTopology X) AddCommGrpCat).mapIso e
+  let eH : CategoryTheory.Sheaf.H' F (n + 1) ⊤ ≃+
+      CategoryTheory.Sheaf.H.{u} F (n + 1) :=
+    (CategoryTheory.Abelian.Ext.precompAddEquiv eS F (n + 1)).symm
+  exact eH.injective.subsingleton
 
 end TopCat.Sheaf
