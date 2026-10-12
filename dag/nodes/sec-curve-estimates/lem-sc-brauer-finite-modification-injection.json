@@ -17,58 +17,38 @@
  ],
  "proof": [
   {
-   "text": "A finite morphism has closed image; the isomorphism over V puts V in this image, so density gives surjectivity. This persists after etale base change. A unit whose pullback is 1 differs from 1 by a function vanishing in every residue field. An etale scheme over reduced C is reduced, so this difference is zero. Thus G_m,C → ν_*G_m,Y is a monomorphism. Let Q be its cokernel. Over V the map is an isomorphism, so Q restricts to zero.",
+   "text": "Use dense_open_finite_complement to obtain finiteness, closedness of points, and separably closed residue fields of C minus V. The units comparison on the isomorphism locus shows that φ = gmSheafToLowerStarGmSheaf ν is an isomorphism after inverse image along V inclusion.",
    "uses": [
-    "lem-weil-pbc-finite-closed-map-finite-fibres",
-    "etale-proposition-etale-reduced"
+    "lem-sc-dense-open-finite-complement",
+    "lem-sc-gm-finite-modification-open-iso"
    ],
    "elementary": false
   },
   {
-   "text": "Finite type makes C Noetherian. Density of V implies it contains each generic point: if the closed complement contained one, it would contain its entire irreducible component and thus a nonempty open of C. Therefore Z=C minus V contains no generic point. In dimension at most one every non-generic point is closed (a strict specialization beyond it would produce a chain of length two). The closed-point closed subset Z is finite. Each residue field is a finite extension of k by finite type and the field form of the Nullstellensatz, hence equals algebraically closed k.",
+   "text": "Apply bijective_H_map_of_isIso_upperStar_map to φ in degree 0+2. Its injective part gives injectivity from H²(C,G_m) to H²(C,ν_*G_m). This packages kernel and cokernel acyclicity and avoids proving that φ itself is a monomorphism. The unit route is unchanged.",
    "uses": [
-    "lem-weil-pbc-finite-type-over-noetherian",
-    "lem-sc-noetherian-closed-points-finite",
-    "lem-weil-pbc-alg-closed-finite-extension-trivial",
-    "lem-weil-pbc-closed-point-residue-field-base"
+    "lem-sc-iso-off-finite-set-cohomology"
    ],
    "elementary": false
   },
   {
-   "text": "A sheaf supported on finitely many closed points with separably closed residue fields has vanishing positive-degree cohomology: on geometric stalks it is the direct sum of the pushforwards of its restrictions to these points; finite pushforward is exact and the point cohomology vanishes for every abelian coefficient sheaf. In particular H^1(C,Q)=0.",
+   "text": "Compose with the injective part of bijective_edgeMap_of_isFinite ν Y.gmSheaf 2. Rewrite by cohomologyMap_map. Unfold upperStarGmSheafToGmSheaf using Adjunction.homEquiv_counit and apply H.map_comp_apply. The composite is exactly the canonical pullback in the unchanged target statement.",
    "uses": [
-    "lem-sc-finite-support-acyclic",
-    "lem-kun-03qu-sep-closed"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Apply the long exact cohomology sequence of 0 → G_m,C → ν_*G_m,Y → Q → 0. Since H^1(C,Q)=0, its H^2 map is injective. Exact finite pushforward identifies H^2(C,ν_*G_m,Y) with H^2(Y,G_m,Y). By adjunction and naturality of the edge map, this composite is the stated canonical pullback.",
-   "uses": [
-    "lem-weil-pbc-sheaf-ext-cohomology-long-exact",
-    "lemma-weil-pbc-finite-direct-image-exact",
     "lem-weil-pbc-finite-pushforward-cohomology"
    ],
-   "elementary": false
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-finite-closed-map-finite-fibres",
-  "etale-proposition-etale-reduced",
-  "lem-weil-pbc-finite-type-over-noetherian",
-  "lem-sc-noetherian-closed-points-finite",
-  "lem-weil-pbc-alg-closed-finite-extension-trivial",
-  "lem-weil-pbc-closed-point-residue-field-base",
-  "lem-sc-finite-support-acyclic",
-  "lem-kun-03qu-sep-closed",
-  "lem-weil-pbc-sheaf-ext-cohomology-long-exact",
-  "lemma-weil-pbc-finite-direct-image-exact",
+  "lem-sc-dense-open-finite-complement",
+  "lem-sc-gm-finite-modification-open-iso",
+  "lem-sc-iso-off-finite-set-cohomology",
   "lem-weil-pbc-finite-pushforward-cohomology"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-h2/lem-sc-brauer-zero-all-curves.md",
-  "place": "Proof, Step 2 (normalization), units sequence and its cokernel; extracted and generalized from the proof quoted in lem-sc-brauer-zero-all-curves"
+  "place": "Proof, Step 2 (normalization), units sequence and its cokernel; proof text retained in the parent DAG node; N1 stage-3 proof using the existing isomorphism-off-finite-support cohomology theorem; both geometric inputs proved in new modules"
  },
  "mathlib_searches": [
   {
@@ -142,9 +122,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "S1",
+  "group": "N1",
   "result": "pass",
-  "landing": "20261012T042419-L-1821106",
+  "landing": "20261012T063516-L-3157719",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

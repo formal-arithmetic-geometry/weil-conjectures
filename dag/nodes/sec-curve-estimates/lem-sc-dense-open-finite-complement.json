@@ -1,0 +1,129 @@
+{
+ "id": "lem-sc-dense-open-finite-complement",
+ "kind": "statement",
+ "title": "Finite closed-point complement of a dense open in a curve",
+ "statement": "Let $k$ be algebraically closed [def-weil-algebraic-closure], $f:C\\to\\operatorname{Spec}k$ a curve [def-sc-curves], and $V\\subseteq C$ a dense open. Then $C\\setminus V$ is finite, each of its points is closed [def-weil-closed-points], and each residue field [def-weil-residue-field] is separably closed [def-kun-separably-closed]. No reducedness, irreducibility, smoothness or properness is assumed.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-h2/lem-sc-brauer-zero-all-curves.md",
+  "place": "Proof, Step 2 (normalization), units sequence and its cokernel; proof text retained in the parent DAG node"
+ },
+ "stmt_deps": [
+  "def-weil-algebraic-closure",
+  "def-sc-curves",
+  "def-weil-closed-points",
+  "def-weil-residue-field",
+  "def-kun-separably-closed"
+ ],
+ "proof": [
+  {
+   "text": "Finite type and quasi-compactness make C Noetherian. For an irreducible component Z remove the other finitely many components to obtain an open W with closure Z (Mathlib closure_sUnion_irreducibleComponents_sdiff_singleton). Thus W is nonempty and density gives a point of V in Z. The irreducible subspace Z has dimension at most one by the subspace dimension inequality. Apply the dimension-one closed-point lemma to the nonempty open V intersect Z: each point of Z outside V is closed in Z, hence in C. For each x outside V take Z to be a component containing x.",
+   "uses": [
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-noetherian-finitely-many-components",
+    "lem-sc-dim-one-point-outside-open-closed"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Decompose the closed complement into finitely many closed irreducible subsets using NoetherianSpace.exists_finite_set_isClosed_irreducible. Sobriety supplies a generic point z of each. This z lies outside V and so is closed by the first step. The subset, equal to the closure of z, is a singleton. A finite union of these singletons is finite. Lean proves this directly, without the unproved finite_of_isClosed_of_closed_points theorem.",
+   "uses": [
+    "lem-sc-noetherian-closed-subset-finite-components",
+    "lem-sc-scheme-sober"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use residueFieldIsoBase f x (hcl x hx) for each point outside V. Transport algebraic closedness of k across its inverse ring equivalence, then infer separable closedness. Empty curves and empty complements are included.",
+   "uses": [
+    "lem-weil-pbc-closed-point-residue-field-base"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-noetherian-finitely-many-components",
+  "lem-sc-dim-one-point-outside-open-closed",
+  "lem-sc-noetherian-closed-subset-finite-components",
+  "lem-sc-scheme-sober",
+  "lem-weil-pbc-closed-point-residue-field-base"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-h2/lem-sc-brauer-zero-all-curves.md",
+  "place": "Proof, Step 2 (normalization), units sequence and its cokernel; proof text retained in the parent DAG node; N1 direct Lean proof"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "dense open complement finite closed points of noetherian curve algebraically closed residue fields",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "dense open complement finite closed points of noetherian curve algebraically closed residue fields",
+   "results": "Hits: AlgebraicGeometry.instIsDominantιCoborderRange, AlgebraicGeometry.dominant_eq_topologically, AlgebraicGeometry.isClosed_singleton_iff_locallyOfFiniteType, AlgebraicGeometry.Scheme.Hom.denseRange, AlgebraicGeometry.instIsDominantToSpecΓOfCompactSpaceCarrierCarrierCommRingCat, AlgebraicGeometry.IsDominant.denseRange, AlgebraicGeometry.Scheme.RationalMap.dense_domain, AlgebraicGeometry.Scheme.PartialMap.Opens.isDominant_ι",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "finite.*compl.*[Dd]ense|[Dd]ense.*compl.*finite",
+   "results": "Hits: Mathlib/NumberTheory/NumberField/InfinitePlace/Basic.lean, Mathlib/Topology/MetricSpace/HausdorffDimension.lean, Mathlib/Topology/MetricSpace/HausdorffDimension.lean, Mathlib/Topology/MetricSpace/HausdorffDimension.lean",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Curve.BrauerFiniteModificationInjection",
+  "date": "2026-10-12",
+  "group": "N1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-brauer-zero-all-curves",
+   "place": "Proof, Step 2 (normalization), Finite closed-point complement of a dense open in a curve",
+   "via": [
+    "lem-sc-brauer-finite-modification-injection"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-h2",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Curve.DenseOpenFiniteComplement",
+  "file": "lean/Sheaf/AlgebraicGeometry/Curve/DenseOpenFiniteComplement.lean",
+  "declaration": "AlgebraicGeometry.IsCurve.dense_open_finite_complement",
+  "statement": "theorem dense_open_finite_complement {k : Type u} [Field k] [IsAlgClosed k]\n    {C : Scheme.{u}} (f : C ⟶ Spec (.of k)) [IsCurve f]\n    (V : C.Opens) (hV : Dense (V : Set C)) :\n    (V : Set C)ᶜ.Finite ∧ (∀ x ∉ V, IsClosed ({x} : Set C)) ∧\n      (∀ x ∉ V, IsSepClosed (C.residueField x))",
+  "branch": "sheaf-dag",
+  "by": "N1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N1",
+  "result": "pass",
+  "landing": "20261012T063516-L-3157719",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N1",
+  "result": "pass",
+  "landing": "20261012T063516-L-3157719",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

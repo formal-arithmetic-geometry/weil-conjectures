@@ -8,12 +8,9 @@ module
 public import WeilConjectures.AlgebraicGeometry.Curve
 public import WeilConjectures.AlgebraicGeometry.Sites.Gm
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
-import Sheaf.AlgebraicGeometry.FiniteOfIsClosedOfClosedPoints
-import WeilConjectures.AlgebraicGeometry.Sites.CohomologyClopen
+import Sheaf.AlgebraicGeometry.Curve.DenseOpenFiniteComplement
+import Sheaf.AlgebraicGeometry.Curve.GmFiniteModificationOpenIso
 import WeilConjectures.AlgebraicGeometry.Sites.FiniteSupport
-import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Etale
-import WeilConjectures.Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
-import WeilConjectures.SixFunctors.Finite.Exact
 
 /-! # Brauer pullback along finite modifications of reduced curves
 
@@ -58,6 +55,17 @@ theorem injective_brauer_pullback_finite_modification {k : Type u} [Field k]
     Function.Injective (fun x : C.CohomologicalBrauerGroup ↦
       Sheaf.H.map (Scheme.upperStarGmSheafToGmSheaf ν) 2
         (Etale.cohomologyMap ν C.gmSheaf 2 x)) := by
-  sorry
+  obtain ⟨hfin, hcl, hsep⟩ := dense_open_finite_complement f V hV
+  have hφ := Scheme.isIso_upperStar_map_gmSheafToLowerStar_of_isIso_restrict ν V
+  have hinj := (Etale.bijective_H_map_of_isIso_upperStar_map V hfin hcl hsep
+    (Scheme.gmSheafToLowerStarGmSheaf ν) hφ 0).injective
+  have hedge := (Etale.bijective_edgeMap_of_isFinite ν Y.gmSheaf 2).injective
+  have hcomp := hedge.comp hinj
+  convert hcomp using 1
+  funext x
+  dsimp only [Function.comp_apply]
+  rw [Etale.cohomologyMap_map, Scheme.upperStarGmSheafToGmSheaf,
+    Adjunction.homEquiv_counit, Sheaf.H.map_comp_apply]
+  rfl
 
 end AlgebraicGeometry.IsCurve
