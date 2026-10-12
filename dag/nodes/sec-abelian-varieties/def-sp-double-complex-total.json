@@ -16,9 +16,49 @@
   "def-sp-abelian",
   "def-sp-filtration"
  ],
- "proof": [],
+ "proof": [
+  {
+   "text": "For each total degree n, index the full diagonal by pairs (i,j) with i+j=n. Its nonnegative pairs inject into the finite integer interval [0,n]. Form their finite coproduct. Extend its cofan to the whole diagonal using zero morphisms outside the nonnegative pairs. First-quadrant vanishing makes every such discarded source a zero object. Given another cofan, its maps from the nonnegative pairs determine a unique map from the finite coproduct, and its other maps agree by uniqueness from zero objects. This proves hasTotal_of_firstQuadrant, including empty diagonals.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "Interval containment [q,n] ⊆ [p,n] for p≤q proves both antitone lemmas by Finset.sup_mono. The empty interval [n+1,n] proves both finite bounds. If n<0, every diagonal pair has a negative coordinate, so total.hom_ext proves that the identity on the total object is zero.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "For either degree-zero filtration step, every nonzero diagonal inclusion belongs to its image supremum; an inclusion with a negative coordinate is zero and its image is bottom. Factor all coprojections through the step and combine the factors by totalDesc. The resulting map is a right inverse to the step arrow by total.hom_ext. Since the arrow is monic and split epic, it is invertible and its subobject is top.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "To prove differential preservation, pull back the target step along the total differential. For each generating image, use total_d, ι_D₁, ι_D₂, d₁_eq' and d₂_eq': the horizontal and signed vertical components factor through the target step because each filtered index either stays fixed or increases by one. Addition and integer scalar multiplication preserve these factorizations. The finite supremum lies in that pullback by Finset.sup_le, giving the required subcomplex restriction.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "For each graded piece, construct the projection from the total object to the distinguished diagonal summand using totalDesc, identity on that summand, and zero on the others. The original summand inclusion factors through step p; if p>n its source is zero. The projection kills step p+1, so its restriction to step p descends to the cokernel of the inclusion of step p+1. This descended map and the canonical inclusion into the cokernel are mutually inverse. One composite follows from the summand projection identity. For the other, cancel the epic cokernel projection and check on each canonical lift generating the finite image supremum: index p gives the identity, and every larger index factors through step p+1 and is killed. The private finite_sup_hom_ext proves this generating-family criterion using an equalizer and the supremum universal property. This proves both canonical graded-piece isomorphisms.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "Choose the already-proved subcomplex restrictions for every filtration index. Monicity of the target step arrows shows that these restrictions commute with the inclusions of successive steps. Thus cokernel.desc defines the induced graded differential and proves its compatibility with the quotient maps. The composite of two restricted differentials is zero after postcomposition with the monic step arrow, by total d_comp_d. Cancelling the epic quotient maps proves that the induced graded differential also squares to zero.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "Finally evaluate the total differential on the distinguished diagonal inclusion. In the first filtration, its horizontal term factors through step p+1 and disappears after the quotient; the surviving vertical term has coefficient p.negOnePow, which Int.coe_negOnePow identifies with (-1)^p.natAbs. In the second filtration, the signed vertical term factors through step p+1 and disappears, leaving the horizontal term. Monicity of the step arrows verifies these equalities before quotienting, and cokernel.condition finishes the two required differential formulas.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
  "proof_deps": [],
- "proof_origin": null,
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-abelian-varieties/sk-prop-av-pqf-finite/def-sp-double-complex-total.md",
+  "place": "Total complex, two filtrations, degreewise bounds and graded-piece clauses; full Lean proof by F2, 2026-10-12"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -153,5 +193,15 @@
   "group": "K1",
   "result": "pass",
   "note": "Abelian C; K : HomologicalComplex2 (up Z)(up Z) recorded with total/iTotalOrZero/eps2=(-1)^p checked in ComplexShapeSigns; first quadrant as IsZero Prop hK; F'/F'' step p = sup over Icc p n of images of iTotalOrZero (i,n-i)/(n-i,i), antitone; subcomplex lifts of total d; step0=top, step(n+1)=bot, Tot^n=0 for n<0; graded via canonical lift of iTotalOrZero and gradedPiece's cokernel.pi, differential (-1)^p d_II resp. d_I, delta^2=0; all R-dct0742 points"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261012T085236-L-13531",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
