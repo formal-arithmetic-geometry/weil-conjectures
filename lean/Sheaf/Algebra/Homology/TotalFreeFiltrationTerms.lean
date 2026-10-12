@@ -62,6 +62,95 @@ lemma term_mono {n m : ℕ} (h : n ≤ m) (k : ℤ) :
   · split_ifs <;> first | exact le_rfl | exact bot_le | omega
   · split_ifs <;> first | exact le_rfl | exact bot_le | omega
 
+private lemma full_mem (n j : ℕ) (k : ℤ) (h : 2 * j + 2 ≤ n)
+    (x : (K.X (-(j : ℤ))).X (k + j)) : full K j k x ∈ term K S e n k := by
+  apply (le_iSup (fun j : ℕ ↦
+    (if 2 * j + 2 ≤ n then LinearMap.range (full K j k).hom else ⊥) ⊔
+      (if 2 * j + 1 ≤ n then LinearMap.range (lower K S e j k).hom else ⊥)) j)
+  apply Submodule.mem_sup_left
+  simpa only [if_pos h] using (LinearMap.mem_range_self (full K j k).hom x)
+
+private lemma lower_mem (n j : ℕ) (k : ℤ) (h : 2 * j + 1 ≤ n)
+    (x : (S j).X₁.X (k + j)) : lower K S e j k x ∈ term K S e n k := by
+  apply (le_iSup (fun j : ℕ ↦
+    (if 2 * j + 2 ≤ n then LinearMap.range (full K j k).hom else ⊥) ⊔
+      (if 2 * j + 1 ≤ n then LinearMap.range (lower K S e j k).hom else ⊥)) j)
+  apply Submodule.mem_sup_right
+  simpa only [if_pos h] using (LinearMap.mem_range_self (lower K S e j k).hom x)
+
+private lemma full_d (j : ℕ) (k : ℤ) :
+    full K j k ≫ (K.total (ComplexShape.up ℤ)).d k (k + 1) =
+      (K.d (-(j : ℤ)) (-(j : ℤ) + 1)).f (k + j) ≫
+        K.ιTotal (ComplexShape.up ℤ) (-(j : ℤ) + 1) (k + j) (k + 1) (by dsimp; omega) +
+      ComplexShape.ε₂ (ComplexShape.up ℤ) (ComplexShape.up ℤ) (ComplexShape.up ℤ)
+        (-(j : ℤ), k + j) •
+        ((K.X (-(j : ℤ))).d (k + j) (k + 1 + j) ≫ full K j (k + 1)) := by
+  dsimp only [full]
+  rw [HomologicalComplex₂.total_d, Preadditive.comp_add,
+    HomologicalComplex₂.ι_D₁, HomologicalComplex₂.ι_D₂]
+  rw [K.d₁_eq (ComplexShape.up ℤ) (by rfl) (k + j) (k + 1) (by dsimp; omega)]
+  rw [K.d₂_eq (ComplexShape.up ℤ) (-(j : ℤ))
+    (show (ComplexShape.up ℤ).Rel (k + j) (k + 1 + j) from by change k + j + 1 = k + 1 + j; omega)
+    (k + 1) (by dsimp; omega)]
+  simp
+
+private lemma horizontal_mem
+    (hp : ∀ p : ℤ, 0 < p → IsZero (K.X p)) (n j : ℕ) (k : ℤ)
+    (h : 2 * j + 1 ≤ n) (x : (K.X (-(j : ℤ))).X (k + j)) :
+    (K.ιTotal (ComplexShape.up ℤ) (-(j : ℤ) + 1) (k + j) (k + 1)
+      (by dsimp; omega)) ((K.d (-(j : ℤ)) (-(j : ℤ) + 1)).f (k + j) x) ∈
+        term K S e n (k + 1) := by
+  cases j with
+  | zero =>
+    have hd : K.d 0 1 = 0 := (hp 1 (by omega)).eq_zero_of_tgt _
+    simp [hd]
+  | succ j =>
+    have hj : -(↑(j + 1) : ℤ) + 1 = -(j : ℤ) := by push_cast; omega
+    have hk : k + (↑(j + 1) : ℤ) = k + 1 + j := by push_cast; omega
+    generalize (K.d (-(↑(j + 1) : ℤ)) (-(↑(j + 1) : ℤ) + 1)).f
+      (k + ↑(j + 1)) x = y
+    have hi := congrArg (fun f ↦ f y)
+      (K.XXIsoOfEq_hom_ιTotal (ComplexShape.up ℤ) hj hk (k + 1) (by simp))
+    rw [← hi]
+    exact full_mem K S e n j (k + 1) (by omega) _
+
+private lemma full_d_mem
+    (hp : ∀ p : ℤ, 0 < p → IsZero (K.X p)) (n j : ℕ) (k : ℤ)
+    (h : 2 * j + 2 ≤ n) (x : (K.X (-(j : ℤ))).X (k + j)) :
+    (K.total (ComplexShape.up ℤ)).d k (k + 1) (full K j k x) ∈
+      term K S e n (k + 1) := by
+  have hd := congrArg (fun f ↦ f x) (full_d K j k)
+  simp only [Units.smul_def] at hd
+  change (K.total (ComplexShape.up ℤ)).d k (k + 1) (full K j k x) =
+    _ + (_ : ℤ) • (full K j (k + 1)
+      ((K.X (-(j : ℤ))).d (k + j) (k + 1 + j) x)) at hd
+  rw [hd]
+  apply Submodule.add_mem
+  · exact horizontal_mem K S e hp n j k (by omega) x
+  · exact (term K S e n (k + 1)).toAddSubgroup.zsmul_mem
+      (full_mem K S e n j (k + 1) h _) _
+
+private lemma lower_d_mem
+    (hp : ∀ p : ℤ, 0 < p → IsZero (K.X p)) (n j : ℕ) (k : ℤ)
+    (h : 2 * j + 1 ≤ n) (x : (S j).X₁.X (k + j)) :
+    (K.total (ComplexShape.up ℤ)).d k (k + 1) (lower K S e j k x) ∈
+      term K S e n (k + 1) := by
+  let a : (S j).X₁ ⟶ K.X (-(j : ℤ)) := (S j).f ≫ (e j).hom
+  have hd := congrArg (fun f ↦ f (a.f (k + j) x)) (full_d K j k)
+  simp only [Units.smul_def] at hd
+  change (K.total (ComplexShape.up ℤ)).d k (k + 1) (lower K S e j k x) =
+    _ + (_ : ℤ) • (full K j (k + 1)
+      ((K.X (-(j : ℤ))).d (k + j) (k + 1 + j) (a.f (k + j) x))) at hd
+  rw [hd]
+  apply Submodule.add_mem
+  · exact horizontal_mem K S e hp n j k h _
+  · have hc := congrArg (fun f ↦ f x) (a.comm (k + j) (k + 1 + j))
+    change (K.X (-(j : ℤ))).d (k + j) (k + 1 + j) (a.f (k + j) x) =
+      a.f (k + 1 + j) ((S j).X₁.d (k + j) (k + 1 + j) x) at hc
+    rw [hc]
+    exact (term K S e n (k + 1)).toAddSubgroup.zsmul_mem
+      (lower_mem K S e n j (k + 1) h _) _
+
 /-- The alternating column submodules are preserved by the total differential.
 Source: Stacks Project, Tag 09KP, proof, filtration construction.
 (blueprint: lem-pc-derived-total-filtration-stable)
@@ -81,7 +170,27 @@ theorem differential_mem
     (h_positive : ∀ p : ℤ, 0 < p → IsZero (K.X p))
     (n : ℕ) (k l : ℤ) (x : (K.total (ComplexShape.up ℤ)).X k)
     (hx : x ∈ term K S e n k) :
-    (K.total (ComplexShape.up ℤ)).d k l x ∈ term K S e n l := by sorry
+    (K.total (ComplexShape.up ℤ)).d k l x ∈ term K S e n l := by
+  classical
+  by_cases hkl : (ComplexShape.up ℤ).Rel k l
+  · have hl : l = k + 1 := hkl.symm
+    subst l
+    suffices hs : term K S e n k ≤
+        (term K S e n (k + 1)).comap
+          ((K.total (ComplexShape.up ℤ)).d k (k + 1)).hom from hs hx
+    apply iSup_le
+    intro j
+    apply sup_le
+    · split_ifs with hj
+      · rintro y ⟨z, rfl⟩
+        exact full_d_mem K S e h_positive n j k hj z
+      · exact bot_le
+    · split_ifs with hj
+      · rintro y ⟨z, rfl⟩
+        exact lower_d_mem K S e h_positive n j k hj z
+      · exact bot_le
+  · rw [HomologicalComplex.shape _ k l hkl]
+    exact (term K S e n l).zero_mem
 
 /-- Restriction of a module complex to differential-stable submodules.
 Source: Stacks Project, Tag 09KP, proof. -/
