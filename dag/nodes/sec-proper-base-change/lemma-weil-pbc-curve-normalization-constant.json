@@ -15,26 +15,38 @@
  "stmt_deps": [],
  "proof": [
   {
-   "text": "The normalization $X^\\nu$ is a finite disjoint union of smooth curves and\npoints. On a component disjoint from $U^\\nu$ the extension-by-zero sheaf is\nzero and every assertion is immediate; on every other component $U^\\nu$ is\ndense. The dense-open localization lemma on $X^\\nu$ therefore reduces\n$j^\\nu_!\\underline{\\mathbf F_\\ell}$ to the constant sheaf on each remaining\nsmooth component, with the five-term sequence and all comparison maps\nalready specified there. If $\\ell\\ne\\operatorname{char}k$, apply the Kummer and\nlocalization calculation; if $\\ell=\\operatorname{char}k$, apply the\nArtin–Schreier calculation. Thus all applicable eight assertions hold for\n$j^\\nu_!\\underline{\\mathbf F_\\ell}$.",
-   "uses": [],
-   "elementary": null
+   "text": "Obtain the normalization monomorphism, its constructible cokernel and vanishing over V from exists_mono_lowerShriek_constantModSheaf_lowerStar. The source calculations are already the hypothesis H in this Lean interface.",
+   "uses": [
+    "lemma-weil-pbc-normalization-exact-sequence"
+   ],
+   "elementary": true
   },
   {
-   "text": "Exact finite direct image transfers them to\n$\\nu_*j^\\nu_!\\underline{\\mathbf F_\\ell}$. The normalization exact sequence\nthen transfers them to $j_!\\underline{\\mathbf F_\\ell}$, including the\nlow-degree comparison maps and assertion (8). Properness is preserved by\nfinite normalization; affineness is preserved because a finite morphism\nover an affine is affine. This completes the normalization, proper/affine\nlocalization, prime-to-characteristic, and characteristic-$\\ell$ branches\nwithout an unnamed smooth-curve calculation.",
-   "uses": [],
-   "elementary": null
+   "text": "Use finite_pushforward_open_constantModSheaf_constructible for the direct-image sheaf G, then of_finite_pushforward_module to obtain its eight assertions from H.",
+   "uses": [
+    "lem-weil-pbc-finite-pushforward-open-quotient-constant",
+    "b3-finite-pushforward-module-assertions"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Prove that the constant quotient sheaf is annihilated by ℓ using Ideal.Quotient.eq_zero_iff_mem. Additivity of extension by zero and direct image gives ℓ • id G = 0. Apply of_finite_support_mono to the normalization monomorphism.",
+   "uses": [
+    "b3-finite-support-mono-assertions"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lemma-weil-pbc-curve-dense-open-reduction",
   "lemma-weil-pbc-normalization-exact-sequence",
-  "lemma-weil-pbc-smooth-curve-artin-schreier",
-  "lemma-weil-pbc-smooth-curve-kummer-localization"
+  "lem-weil-pbc-finite-pushforward-open-quotient-constant",
+  "b3-finite-pushforward-module-assertions",
+  "b3-finite-support-mono-assertions"
  ],
  "proof_origin": {
-  "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-p1/lemma-weil-pbc-curve-normalization-constant.md",
-  "place": "## Proof"
+  "by": "worker",
+  "document": "Stacks Project, Etale Cohomology",
+  "place": "Lemmas 0A5D, 0A3Q and 0GJA; explicit module-valued normalization reduction by B3"
  },
  "mathlib_searches": [],
  "mathlib_match": null,
@@ -94,18 +106,18 @@
   "declarations": [
    "AlgebraicGeometry.IsCurve.Assertions.lowerShriek_constantModSheaf_of_finite"
   ],
-  "sorry_free": false,
+  "sorry_free": true,
   "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state sorry_here); A2 repair E1: finite quotient hypothesis restored; prime-field blueprint statement unchanged.",
   "statement": "theorem IsCurve.Assertions.lowerShriek_constantModSheaf_of_finite {k : Type u} [Field k]\n    [IsAlgClosed k] {X X' U U' : Scheme.{u}} (f : X ⟶ Spec (.of k)) [IsCurve f] [IsReduced X]\n    (ν : X' ⟶ X) [IsFinite ν] [Surjective ν] [Smooth (ν ≫ f)] (V : X.Opens)\n    (hV : Dense (V : Set X)) [IsIso (ν ∣_ V)] (j : U ⟶ X) [IsOpenImmersion j]\n    {j' : U' ⟶ X'} [IsOpenImmersion j'] {ν' : U' ⟶ U} (hj : IsPullback j' ν' ν j) (ℓ : ℕ)\n    [Fact ℓ.Prime] [Finite (Λ ⧸ Ideal.span {(ℓ : Λ)})]\n    (H : IsCurve.Assertions Λ (ν ≫ f)\n      ((j')_!open[ModuleCat.{u + 1} Λ].obj (Etale.constantModSheaf Λ U' ℓ))) :\n    IsCurve.Assertions Λ f ((j)_!open[ModuleCat.{u + 1} Λ].obj (Etale.constantModSheaf Λ U ℓ))"
  },
  "reviewed_proof": {
   "date": "2026-10-12",
   "by": "L",
-  "reviewer": "X-bd1bc",
-  "group": "A2",
+  "reviewer": "COMPILER",
+  "group": "B3",
   "result": "pass",
-  "landing": "20261012T112828-L-763717",
+  "landing": "20261012T135220-L-1656835",
   "kind": "interface",
-  "note": "independent Codex review: Delivered finite-quotient signature, node record, change record, report, and Lean source matched each other and the repository; delivered module and downstream caller compiled cleanly."
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
