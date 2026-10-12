@@ -40,10 +40,9 @@
    }
   },
   {
-   "text": "*Quasi-compact intersections.* Every $U_j$ is affine, hence quasi-compact (Stacks 00E8; Mathlib `AlgebraicGeometry.IsAffineOpen.isCompact`). Since $X$ is quasi-separated, [pqf-lem-qs-intersection-qc] applied to the quasi-compact opens $U_j$ and $U_{j'}$ shows that $U_j\\cap U_{j'}$ is quasi-compact for every $j,j'\\in J$. Equivalently, one may apply condition (2) of Stacks 01KO directly: the intersection of two affine opens in a quasi-separated scheme is a finite union of affine opens. Therefore every open covering admits a refinement in the stated class, so the finite affine open coverings with quasi-compact pairwise intersections form a cofinal system and satisfy hypothesis (3) of Modules 01BS (and Sheaves 009F (4) for $U=X$).",
+   "text": "Each selected affine open U_j is compact by Mathlib AlgebraicGeometry.IsAffineOpen.isCompact (Stacks 00E8). Apply Mathlib QuasiSeparatedSpace.inter_isCompact to the two open compact subsets U_j and U_j' of X, using the assumed QuasiSeparatedSpace X instance, to obtain compactness of their intersection (Stacks 01KO). This directly supplies the last clause without the project lemma pqf-lem-qs-intersection-qc.",
    "uses": [
-    "def-weil-pbc-scheme-conventions",
-    "pqf-lem-qs-intersection-qc"
+    "def-weil-pbc-scheme-conventions"
    ],
    "elementary": false,
    "source": {
@@ -54,13 +53,12 @@
  ],
  "proof_deps": [
   "def-pc-scheme",
-  "def-weil-pbc-scheme-conventions",
-  "pqf-lem-qs-intersection-qc"
+  "def-weil-pbc-scheme-conventions"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "worker",
   "document": "literature/stacks-project/schemes.tex",
-  "place": "Schemes, Lemmas 01IT and 01KO, with Algebra, Lemma 00E8; their application to Modules 01BS hypothesis (3) is written out"
+  "place": "Schemes 01IT and 01KO, Algebra 00E8; direct Mathlib affine basis, finite subcover, and QuasiSeparatedSpace.inter_isCompact proof by X2."
  },
  "tool_uses": [
   "pqf-lem-qs-intersection-qc"
@@ -141,5 +139,15 @@
   "group": "F1",
   "result": "fix",
   "note": "qcqs = [CompactSpace X][QuasiSeparatedSpace X] (not hollow, inferInstance fails); arbitrary cover A : Type v, IsOpenCover V; finite J : Type u with Finite J (fixed from Fin n); U covers, IsAffineOpen, refinement tied by a : J → A with U j ≤ V (a j); IsCompact of pairwise intersections; empty X/n=0 ok"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X2",
+  "result": "pass",
+  "landing": "20261012T044759-L-2043431",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
