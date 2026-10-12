@@ -8425,3 +8425,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 16:01 L: returned deliver/A2/Sheaf.Algebra.Homology.ZigzagBoundaryReduction (reviewer RETURN: (the landing tools, head 245511a29) the delivery did not land: refused by tools/import_prune_check.py for lean/Sheaf/Alg)
 - 16:01 L: returned deliver/T1/Sheaf.AlgebraicGeometry.AffineDerivedTensorChartComparison (reviewer RETURN: (the landing tools, head 64f36ed67) the delivery did not land: refused by tools/import_prune_check.py for lean/Sheaf/Alg)
 - 16:01 L: returned deliver/T1/Sheaf.AlgebraicGeometry.StrictHenselizationExchangeCubeTargetStalkIso (reviewer RETURN: (the landing tools, head 116238951) the delivery did not land: refused by tools/import_prune_check.py for lean/Sheaf/Alg)
+- 16:01 L: merged deliver/A2/Sheaf.Algebra.Homology.BaseDerivedTensorCounitLinear (stage 3; reviewer PASS; first push; landing 20261012T160132-L-2562444 (proof); batch 20261012T160131; modules 1; new nodes 0)
