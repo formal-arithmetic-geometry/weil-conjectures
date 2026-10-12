@@ -6,8 +6,8 @@ module
 
 public import Mathlib.Algebra.Category.ModuleCat.Abelian
 public import Mathlib.Algebra.Homology.DerivedCategory.Basic
-import Sheaf.Algebra.Homology.FilteredFreeResolution
-import Sheaf.CategoryTheory.DerivedModuleDirectSums
+import Sheaf.Algebra.Homology.LargeFilteredFreeResolution
+import Sheaf.CategoryTheory.DerivedShiftedFreeCoproduct
 import Mathlib.Algebra.Homology.DerivedCategory.ShortExact
 
 @[expose] public section
@@ -58,6 +58,25 @@ theorem derivedModuleCellularFiltration (R : Type u) [CommRing R]
           (b : DerivedCategory.Q.obj (F n) ⟶ DerivedCategory.Q.obj (F (n + 1)))
           (c : DerivedCategory.Q.obj (F (n + 1)) ⟶ G⟦(1 : ℤ)⟧),
           Pretriangulated.Triangle.mk a b c ∈ Pretriangulated.distinguishedTriangles) := by
-  sorry
+  classical
+  let M := DerivedCategory.Q.objPreimage K
+  obtain ⟨L, q, hq, F, ι, step, hzero, hmono, hcompat, hexhaustive, hsplit, hquot⟩ :=
+    CochainComplex.exists_large_filtered_free_resolution M
+  let : QuasiIso q := hq
+  refine ⟨L, F, ι, step, ?_, DerivedCategory.Q.map_isZero hzero,
+    hmono, hcompat, hexhaustive, ?_⟩
+  · exact ⟨(DerivedCategory.Q.objObjPreimageIso K).symm ≪≫
+      (asIso (DerivedCategory.Q.map q)).symm⟩
+  · intro n
+    let : Mono (ι n) := hmono n
+    let : Mono (step n) := mono_of_mono_fac (hcompat n)
+    obtain ⟨I, degree, he⟩ := hquot n
+    obtain ⟨d, j, hc⟩ := derivedShiftedFreeCoproduct R (cokernel (step n)) I degree he
+    let S := ShortComplex.mk (step n) (cokernel.π (step n)) (cokernel.condition _)
+    have hS : S.ShortExact := { exact := ShortComplex.exact_cokernel (step n) }
+    let T := (DerivedCategory.triangleOfSES hS).invRotate
+    refine ⟨I, d, T.obj₁, j, hc, T.mor₁, T.mor₂, T.mor₃, ?_⟩
+    exact Pretriangulated.inv_rot_of_distTriang _
+      (DerivedCategory.triangleOfSES_distinguished hS)
 
 end CategoryTheory

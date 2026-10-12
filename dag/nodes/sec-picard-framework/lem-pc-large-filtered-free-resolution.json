@@ -1,0 +1,113 @@
+{
+ "id": "lem-pc-large-filtered-free-resolution",
+ "kind": "statement",
+ "title": "Filtered free resolution with a larger module carrier universe",
+ "statement": "Let $A$ be a commutative ring in universe $u$, and let $M$ be a cochain complex of $A$-modules with carriers in universe $\\max(u,v)$ [def-pc-cochain-complex-modules]. There exist a complex $P$ and a quasi-isomorphism $q:P\\to M$ [def-pc-quasi-iso-modules], complexes $F_n$ for $n\\in\\mathbb N$, maps $\\iota_n:F_n\\to P$, and maps $s_n:F_n\\to F_{n+1}$ such that $F_0$ is zero, all $\\iota_n$ are monic, $s_n\\iota_{n+1}=\\iota_n$, every element of every degree of $P$ belongs to an $F_n$, each component of every $s_n$ admits a retraction, and for each $n$ there is a set $I$ in universe $\\max(u,v)$ and integers $d_i$ with $\\operatorname{coker}(s_n)\\cong\\bigoplus_{i\\in I}(\\operatorname{ULift}A)[-d_i]$ as cochain complexes. Here the summand has its only nonzero module in degree $d_i$, and $\\operatorname{ULift}A$ denotes the rank-one $A$-module with carrier in the specified universe.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Remark 15.60.11 (Tag 09PB), https://stacks.math.columbia.edu/tag/09PB; filtered construction: Lemma 22.20.4 (Tag 09KP)"
+ },
+ "stmt_deps": [
+  "def-pc-cochain-complex-modules",
+  "def-pc-quasi-iso-modules"
+ ],
+ "proof": [
+  {
+   "text": "Let B=ULift A and use the ring equivalence B≃A to regard M as a complex of B-modules. Apply [lem-pc-derived-filtered-free-resolution] in universe max(u,v).",
+   "uses": [
+    "lem-pc-derived-filtered-free-resolution"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the inverse module-category equivalence degreewise to the resolution and filtration. Compose the transported augmentation with the inverse of the complex equivalence unit. Exact equivalences preserve quasi-isomorphisms; their complex functors preserve zero objects and monomorphisms. Functoriality gives step compatibility, and applying the inverse functor to the degreewise retractions gives the splitting identities. The carriers and functions are unchanged under scalar restriction, so elementwise exhaustion is unchanged.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Identify the cokernel of each transported step with the transported cokernel via PreservesCokernel.iso. Transport its free quotient isomorphism, then use the inverse sigmaComparison to commute the equivalence with its coproduct. Use singleMapHomologicalComplex on each summand; the transported rank-one module is definitionally ULift A with its usual A-action.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-derived-filtered-free-resolution"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 09PB; formal transport through Mathlib equivalences and shift comparisons"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Transport a filtered free resolution along an equivalence of module categories",
+   "results": "Unavailable: service returned Internal Server Error.",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Transport a filtered free resolution to modules in a larger universe using a ring equivalence",
+   "results": "8 hits, including ModuleCat.projectiveResolution, Module.Free.ulift and Module.Free.of_ringEquiv; no theorem giving this filtered resolution.",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "grep",
+   "query": "restrictScalarsEquivalenceOfRingEquiv|singleMapHomologicalComplex",
+   "results": "21 hits; ModuleCat.restrictScalarsEquivalenceOfRingEquiv and HomologicalComplex.singleMapHomologicalComplex provide the transport tools. Local source search found exists_filtered_free_resolution only in the smaller universe.",
+   "date": "2026-10-12"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.DerivedModuleCellularFiltration",
+  "date": "2026-10-12",
+  "group": "V1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-projection-formula",
+   "place": "proof step (2): every D(A) object is generated from shifts of A by direct sums, triangles, and retracts",
+   "via": [
+    "lem-pc-derived-module-cellular-filtration",
+    "lem-pc-derived-module-free-generation"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-f-representable",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.LargeFilteredFreeResolution",
+  "file": "lean/Sheaf/Algebra/Homology/LargeFilteredFreeResolution.lean",
+  "declaration": "CochainComplex.exists_large_filtered_free_resolution",
+  "statement": "theorem exists_large_filtered_free_resolution {A : Type u} [CommRing A]\n    (M : CochainComplex (ModuleCat.{max u v} A) ℤ) :\n    ∃ (P : CochainComplex (ModuleCat.{max u v} A) ℤ) (q : P ⟶ M),\n      QuasiIso q ∧\n      ∃ (F : ℕ → CochainComplex (ModuleCat.{max u v} A) ℤ)\n        (ι : ∀ n, F n ⟶ P) (step : ∀ n, F n ⟶ F (n + 1)),\n        IsZero (F 0) ∧\n        (∀ n, Mono (ι n)) ∧\n        (∀ n, step n ≫ ι (n + 1) = ι n) ∧\n        (∀ (k : ℤ) (x : P.X k), ∃ (n : ℕ) (y : (F n).X k), (ι n).f k y = x) ∧\n        (∀ (n : ℕ) (k : ℤ),\n          ∃ r : (F (n + 1)).X k ⟶ (F n).X k,\n            (step n).f k ≫ r = 𝟙 ((F n).X k)) ∧\n        (∀ n, ∃ (I : Type (max u v)) (degree : I → ℤ),\n          Nonempty (cokernel (step n) ≅\n            ∐ (fun i : I =>\n              (HomologicalComplex.single (ModuleCat.{max u v} A) (ComplexShape.up ℤ) (degree i)).obj\n                (ModuleCat.of A (ULift.{v} A)))))",
+  "branch": "sheaf-dag",
+  "by": "V1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V1",
+  "result": "pass",
+  "landing": "20261012T070556-L-3479583",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V1",
+  "result": "pass",
+  "landing": "20261012T070556-L-3479583",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

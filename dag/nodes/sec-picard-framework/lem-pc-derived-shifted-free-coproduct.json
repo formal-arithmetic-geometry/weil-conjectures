@@ -1,0 +1,112 @@
+{
+ "id": "lem-pc-derived-shifted-free-coproduct",
+ "kind": "statement",
+ "title": "Shifted localized free complexes are coproducts of shifted generators",
+ "statement": "Let $R$ be a commutative ring in universe $u$, assume the derived category of $R$-modules with carriers in universe $\\max(u,v)$ exists [def-weil-abstract-derived-category], and let $T$ be a cochain complex of these modules. Suppose $I$ is a set in universe $\\max(u,v)$, $d:I\\to\\mathbb Z$, and $T\\cong\\bigoplus_{i\\in I}(\\operatorname{ULift}R)[-d_i]$ as complexes, with summand $i$ supported in degree $d_i$. Then there are integers $e_i$ and maps $j_i:(R[0])[e_i]\\to Q(T)[-1]$ presenting $Q(T)[-1]$ as their coproduct. The free rank-one module $R$ here has carrier $\\operatorname{ULift}R$ in the stated module universe.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Remark 15.60.11 (Tag 09PB), https://stacks.math.columbia.edu/tag/09PB; filtered construction: Lemma 22.20.4 (Tag 09KP)"
+ },
+ "stmt_deps": [
+  "def-weil-abstract-derived-category"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-pc-derived-module-direct-sums] to the family of single complexes supported in degrees d_i. It gives a coproduct cocone at Q of their complex coproduct.",
+   "uses": [
+    "lem-pc-derived-module-direct-sums"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Shift the coproduct cocone by -1; this functor is an equivalence, so isColimitOfPreserves gives a colimit cocone. Transport the cocone point by the shifted image under Q of the given isomorphism T≅coproduct.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Set e_i=-d_i-1. The singleFunctors.shiftIso with n=-d_i, a=d_i, a′=0 identifies the shift by -d_i of singleFunctor 0 with singleFunctor d_i. The shiftFunctorAdd comparison then identifies its further shift by -1 with the shift by e_i. Precompose the coprojections with these isomorphisms. Construct desc by composing with the inverse point isomorphism and the old coproduct desc; the factorization and uniqueness identities follow from the old coproduct universal property and cancellation of isomorphisms.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-derived-module-direct-sums"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 09PB; formal transport through Mathlib equivalences and shift comparisons"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Direct sums of single complexes become coproducts of shifts of the rank-one module in the derived category",
+   "results": "Unavailable: service returned Internal Server Error.",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "loogle",
+   "query": "SingleFunctors.shiftIso",
+   "results": "Search returned no hits: unknown identifier 'SingleFunctors.shiftIso'. Local inspection found CategoryTheory.SingleFunctors.shiftIso in Mathlib.CategoryTheory.Shift.SingleFunctors.",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "grep",
+   "query": "restrictScalarsEquivalenceOfRingEquiv|singleMapHomologicalComplex",
+   "results": "21 hits, including the single-complex comparison in Mathlib.Algebra.Homology.Additive. Local source inspection also found DerivedCategory.singleFunctors and shiftFunctorAdd; the library has derivedModuleDirectSums but no shifted free coproduct theorem.",
+   "date": "2026-10-12"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.DerivedModuleCellularFiltration",
+  "date": "2026-10-12",
+  "group": "V1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-projection-formula",
+   "place": "proof step (2): every D(A) object is generated from shifts of A by direct sums, triangles, and retracts",
+   "via": [
+    "lem-pc-derived-module-cellular-filtration",
+    "lem-pc-derived-module-free-generation"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-f-representable",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.DerivedShiftedFreeCoproduct",
+  "file": "lean/Sheaf/CategoryTheory/DerivedShiftedFreeCoproduct.lean",
+  "declaration": "CategoryTheory.derivedShiftedFreeCoproduct",
+  "statement": "theorem derivedShiftedFreeCoproduct (R : Type u) [CommRing R]\n    [HasDerivedCategory.{w} (ModuleCat.{max u v} R)]\n    (T : CochainComplex (ModuleCat.{max u v} R) ℤ)\n    (I : Type (max u v)) (degree : I → ℤ)\n    (hT : Nonempty (T ≅ ∐ (fun i : I =>\n      (HomologicalComplex.single (ModuleCat.{max u v} R)\n        (ComplexShape.up ℤ) (degree i)).obj (ModuleCat.of R (ULift.{v} R))))) :\n    ∃ (d : I → ℤ)\n      (j : ∀ i : I, (((DerivedCategory.singleFunctor\n        (ModuleCat.{max u v} R) 0).obj (ModuleCat.of R (ULift.{v} R)))⟦d i⟧) ⟶\n          (DerivedCategory.Q.obj T)⟦(-1 : ℤ)⟧),\n      Nonempty (IsColimit (Cofan.mk ((DerivedCategory.Q.obj T)⟦(-1 : ℤ)⟧) j))",
+  "branch": "sheaf-dag",
+  "by": "V1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V1",
+  "result": "pass",
+  "landing": "20261012T070556-L-3479583",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V1",
+  "result": "pass",
+  "landing": "20261012T070556-L-3479583",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
