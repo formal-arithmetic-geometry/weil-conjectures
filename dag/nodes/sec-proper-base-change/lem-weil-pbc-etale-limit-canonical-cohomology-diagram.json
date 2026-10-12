@@ -18,14 +18,14 @@
  ],
  "proof": [
   {
-   "text": "Define H_i as the degree-n cohomology of F_i and each transition as cohomology pullback followed by H.map(phi_f). The identity transition of F and the identity pullback clause give H.map_id. For composition, rewrite phi_(f≫g), use naturality of pullback in coefficients to interchange the map of phi_f and pullback along g, then apply the composition clause of cohomologyPullbackFunctorial. This gives H.map_comp.",
+   "text": "Define H_i as AddCommGrpCat.of of degree-n cohomology of F_i and each transition as ofHom of H.map(phi_f) composed with cohomologyMap(D.map(f.op)). For identity, apply the coefficient identity hypothesis, transport the cohomology pullback across D.map_id using the generic functor_transport_map equality lemma instantiated with Sheaf.functorH, and use the identity clause of cohomologyPullbackFunctorial. For composition, expand hcomposition and H.map_comp_apply, transport the scheme map equality D.map_comp in cohomology_composition_transport, apply the composition clause of cohomologyPullbackFunctorial, and use cohomologyMap_map to interchange the coefficient transition with the second pullback. These pointwise equations give the functor laws by extensionality.",
    "uses": [
     "lem-weil-pbc-cohomology-pullback-functorial"
    ],
    "elementary": false
   },
   {
-   "text": "Take B.pt=H^n(L.pt) and its ith leg to be cohomology pullback along f_i followed by H.map((eG_i).inv≫L_i). For naturality along f:i->j, interchange phi_f with pullback along f_j; the cone equation identifies f_j composed with D(f^op) with f_i. The cohomology pullback composition clause introduces exactly the upperStarComp in hG. Rewrite G.map f by hG in the cocone equation L.w f and cancel the inverse-image object isomorphisms. Applying H.map to the resulting coefficient equality proves naturality of the legs. Take all eH and eB to be identity isomorphisms.",
+   "text": "Define B.pt as AddCommGrpCat.of of H^n(L.pt), with leg i the ofHom of H.map((eG_i).inv followed by L_i) composed with cohomologyMap(c.pi_i). Precompose L.w(f) with (eG_i).inv and rewrite hG; cancel (eG_i).inv followed by (eG_i).hom to obtain the coefficient equality upperStarComp.hom followed by pullback(phi_f) followed by (eG_j).inv followed by L_j equals (eG_i).inv followed by L_i. For naturality of B, apply cohomologyMap_map, the composition clause transported across c.w(f.op), and H.map_comp_apply twice. Apply H.map to the coefficient equality to finish. Use identity isomorphisms eH and eB; AddCommGrpCat.ofHom_comp proves both displayed identification equations. This is the original two-step construction and uses no continuity or exactness result.",
    "uses": [
     "lem-weil-pbc-cohomology-pullback-functorial"
    ],
@@ -38,7 +38,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "Stacks Project, Tags 09YP, 0EXZ, 0739, 09YQ and 01F7",
-  "place": "Step 4 of the parent node: form the canonical degree-n cohomology diagram and comparison cocone; 01F7 and 09YQ."
+  "place": "Canonical degree-n diagram and comparison cocone in the parent node, implemented in Lean using cohomologyPullbackFunctorial, equality transport via Sheaf.functorH, coefficient naturality, and the supplied cocone equation. The original unit route is unchanged."
  },
  "mathlib_searches": [
   {
@@ -108,11 +108,11 @@
  "reviewed_proof": {
   "date": "2026-10-12",
   "by": "L",
-  "reviewer": "X-9abe6",
-  "group": "E3",
+  "reviewer": "X-d1b64",
+  "group": "T3",
   "result": "pass",
-  "landing": "20261012T112835-L-766146",
-  "kind": "interface",
-  "note": "independent Codex review: Delivered files, node metadata, statements, proofs, report, full compilation, and direct importer reader-gate check matched the stage-3 brief."
+  "landing": "20261012T135320-L-1694313",
+  "kind": "proof",
+  "note": "independent Codex review: Unchanged theorem signature and node statement matched the explicit proof, dependencies, unit route, and report; delivery and sole direct importer compiled cleanly; all proved declarations use only permitted axioms."
  }
 }
