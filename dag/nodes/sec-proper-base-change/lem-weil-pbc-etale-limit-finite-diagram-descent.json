@@ -1,0 +1,141 @@
+{
+ "id": "lem-weil-pbc-etale-limit-finite-diagram-descent",
+ "kind": "statement",
+ "title": "Finite qcqs etale star diagrams descend to a common stage",
+ "statement": "Let $I$ be a nonempty directed preorder, $D:I^{\\mathrm{op}}\\to\\mathrm{Sch}$ a system of qcqs schemes with affine transition maps, and $c$ a limit cone [def-pc-scheme, def-weil-pbc-scheme-conventions, def-weil-pbc-category-colimit]. Let $U$ be a qcqs object of the small etale site of $c.pt$ [def-weil-pbc-etale-site], let $K$ be finite (possibly empty), let $V_k$ be qcqs etale objects, and let $f_k:V_k\\to U$ be arrows. There exist a stage $i$, qcqs etale objects $U_i,V_{i,k}$ over $D_i$, arrows $f_{i,k}:V_{i,k}\\to U_i$, and isomorphisms from their actual pullbacks along the limit projection to $U,V_k$, such that $B_{\\pi_i}(f_{i,k});e_U=e_{V,k};f_k$ [def-pc-fibre-product]. No covering assumption or conclusion is made.",
+ "source": {
+  "document": "Stacks Project, Limits of Schemes",
+  "place": "Tags 01ZM(1),(2) and 07RP; first two steps of lem-weil-pbc-etale-limit-finite-cover-descent."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-category-colimit",
+  "def-weil-pbc-etale-site",
+  "def-pc-fibre-product"
+ ],
+ "proof": [
+  {
+   "text": "Choose a stage to see that the given limit has affine projection, hence is quasi-separated. A qcqs etale object has finite-presentation structure map. Apply exists_isPullback_of_finitePresentation to spread it out. The finite-presentation model over a qcqs stage is qcqs. Apply Etale.exists_stage_of_inverseLimit to its arrow into the identity object; etaleness of the limit structure map transfers across the canonical pullback isomorphism. The resulting model remains qcqs.",
+   "uses": [
+    "lem-weil-pbc-limit-cone-affine-projections-opens",
+    "thm-pd-spreading-out",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "lem-weil-pbc-descend-etale"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the single-model construction to the finite family indexed by Option K, with U at none and V_k at some k. Take a common upper bound by Finite.bddAbove_range. The isPullbackLift squares identify the pulled-back models with the original objects; their canonical isomorphisms are morphisms over the limit base. Affine first projections preserve qcqs. This also treats empty K because Option K still contains none.",
+   "uses": [
+    "lem-weil-pbc-cartesian-square-pasting",
+    "lem-weil-pbc-qcqs-morphism-permanence"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Conjugate the arrows by these limit isomorphisms and project to the fixed target model. Apply exists_pullback_hom_of_isLimit separately to each arrow. Choose a common upper bound of their stages and the object stage; pullback.map first and second projection identities preserve the descended structure equations and limit equalities. For empty K there are no arrows and directedness still provides a stage.",
+   "uses": [
+    "thm-pd-spreading-out"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Lift the descended scheme maps by pullback.lift to arrows of the etale site. Paste the new limit pullback square with the stage square, and compare with the old limit square by their universal properties. Check the arrow equation with the old pullback hom_ext: its first projection is precisely the descended-map equality, its second projection is the structure-map equation. Compose with the original-object isomorphisms. Affine first projections retain qcqs.",
+   "uses": [
+    "lem-weil-pbc-cartesian-square-pasting",
+    "lem-weil-pbc-qcqs-morphism-permanence"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-limit-cone-affine-projections-opens",
+  "thm-pd-spreading-out",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-weil-pbc-descend-etale",
+  "lem-weil-pbc-cartesian-square-pasting"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project, Limits of Schemes",
+  "place": "Tags 01ZM and 07RP; adapted qcqs single-model argument and explicit simultaneous pullback comparison."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A finite diagram of quasi compact quasi separated etale schemes over an inverse limit descends to a common stage",
+   "date": "2026-10-13",
+   "results": "Service returned Internal Server Error; unavailable.",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite diagram of quasi compact quasi separated etale schemes over an inverse limit descends to a common stage",
+   "date": "2026-10-13",
+   "results": "Eight AffineTransitionLimit hits, including scheme arrow descent and eventual affineness. No finite qcqs etale diagram theorem.",
+   "verdict": "partial match"
+  },
+  {
+   "tool": "grep",
+   "query": "finite.*diagram.*descent|etale.*common.*models|exists.*finite.*diagram",
+   "date": "2026-10-13",
+   "results": "msearch grep returned zero hits. Direct repository rg found affineEtale_finite_diagram_descent and its Objects/Arrows modules; their affineness restriction excludes general qcqs objects. Their proof pattern was generalized here.",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleLimitFiniteCoverDescent",
+  "date": "2026-10-13",
+  "group": "S2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-injective-restriction-acyclicity",
+   "place": "Object and arrow descent (steps 1 and 2) of finite geometric cover descent, within the 09YQ comparison used for injective-restriction acyclicity.",
+   "via": [
+    "lem-weil-pbc-etale-limit-finite-cover-descent",
+    "lem-weil-pbc-etale-limit-finite-cech-stage-data",
+    "lem-weil-pbc-etale-limit-finite-cech-complex-colimit",
+    "lem-weil-pbc-etale-limit-injective-colimit-acyclic"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleLimitFiniteDiagramDescent",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleLimitFiniteDiagramDescent.lean",
+  "declaration": "AlgebraicGeometry.Etale.exists_etale_limit_finite_diagram_descent",
+  "statement": "theorem exists_etale_limit_finite_diagram_descent\n    {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I]\n    (D : Iᵒᵖ ⥤ Scheme.{u}) (c : Cone D) (hc : IsLimit c)\n    [∀ i : Iᵒᵖ, CompactSpace (D.obj i)] [∀ i : Iᵒᵖ, QuasiSeparatedSpace (D.obj i)]\n    [∀ (i j : Iᵒᵖ) (f : i ⟶ j), IsAffineHom (D.map f)]\n    (U : c.pt.Etale) [CompactSpace U.left] [QuasiSeparatedSpace U.left]\n    (K : Type (u + 1)) [Finite K] (V : K → c.pt.Etale) (f : ∀ k, V k ⟶ U)\n    (hV : ∀ k, CompactSpace (V k).left ∧ QuasiSeparatedSpace (V k).left)\n    :\n    ∃ (i₀ : I) (U₀ : (D.obj (op i₀)).Etale)\n    (V₀ : K → (D.obj (op i₀)).Etale) (f₀ : ∀ k, V₀ k ⟶ U₀)\n    (eU : (MorphismProperty.Over.pullback @Etale ⊤ (c.π.app (op i₀))).obj U₀ ≅ U)\n    (eV : ∀ k,\n      (MorphismProperty.Over.pullback @Etale ⊤ (c.π.app (op i₀))).obj (V₀ k) ≅ V k),\n    (CompactSpace U₀.left ∧ QuasiSeparatedSpace U₀.left) ∧\n    (∀ k, CompactSpace (V₀ k).left ∧ QuasiSeparatedSpace (V₀ k).left) ∧\n    (∀ k, (MorphismProperty.Over.pullback @Etale ⊤ (c.π.app (op i₀))).map (f₀ k) ≫\n      eU.hom = (eV k).hom ≫ f k)",
+  "branch": "sheaf-dag",
+  "by": "S2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S2",
+  "result": "pass",
+  "landing": "20261012T225328-L-1812604",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S2",
+  "result": "pass",
+  "landing": "20261012T225328-L-1812604",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

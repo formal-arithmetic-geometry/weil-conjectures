@@ -16,57 +16,49 @@
  ],
  "proof": [
   {
-   "text": "The qcqs limit base and the qcqs etale sources imply finite presentation of the structure maps. Spread out U and the finite family V_k using 01ZM(1). Finite presentation over qcqs bases makes the models qcqs. Apply etaleness descent to each structure morphism and pass to a common upper bound, using pullback composition to retain the limit isomorphisms.",
+   "text": "Apply exists_etale_limit_finite_diagram_descent to obtain common qcqs etale object and arrow models, without using the covering assumption.",
    "uses": [
-    "lem-weil-pbc-limit-affine-transition",
-    "lem-weil-pbc-qcqs-morphism-permanence",
-    "thm-pd-spreading-out",
-    "lem-weil-pbc-descend-etale",
-    "lem-weil-pbc-cartesian-square-pasting"
+    "lem-weil-pbc-etale-limit-finite-diagram-descent"
    ],
    "elementary": false
   },
   {
-   "text": "Apply morphism descent to the finitely many f_k with these fixed object identifications. Pass to a common upper bound, retaining the arrow equations and all qcqs properties.",
+   "text": "Transfer the covering to the canonical limit pullbacks using the arrow equations and inverse object isomorphisms. Etale arrows are locally finitely presented, and qcqs models over the qcqs stage have finite-presentation structure maps. Apply finite_family_joint_surjectivity_stage to obtain a later jointly surjective family; the site covering criterion makes it a covering.",
    "uses": [
-    "thm-pd-spreading-out",
-    "lem-weil-pbc-cartesian-square-pasting",
-    "lem-weil-pbc-qcqs-morphism-permanence"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "The finite disjoint union of the covering sources is qcqs, and its arrow into U_0 is locally finitely presented. The covering assumption says its limit base change is surjective. Descend surjectivity to a later stage by 07RR. In the small etale topology this makes the descended family covering. In the empty-family case the source is empty and the same surjectivity theorem makes the target empty.",
-   "uses": [
-    "lem-weil-pbc-descend-surjective",
+    "lem-weil-pbc-finite-family-joint-surjectivity-stage",
     "lem-weil-pbc-qcqs-morphism-permanence",
     "def-weil-pbc-etale-site"
    ],
    "elementary": false
   },
   {
-   "text": "Every later family is an actual pullback of this stage family; base change preserves coverings. The affine transitions preserve the qcqs properties of the models. This gives all claimed properties.",
+   "text": "Use the actual pullbacks at this later stage as the output models. The pullbackComp inverse composed with the original isomorphisms identifies their limit pullbacks. Naturality of this inverse proves the arrow equations. Affine first projections preserve qcqs.",
    "uses": [
-    "lem-weil-pbc-etale-base-change-continuous",
+    "lem-weil-pbc-cartesian-square-pasting",
     "lem-weil-pbc-qcqs-morphism-permanence"
    ],
-   "elementary": false
+   "elementary": true
+  },
+  {
+   "text": "For each later stage use Scheme.Hom.coverPreserving_etale and Sieve.functorPushforward_ofArrows: the pushed covering sieve is exactly the displayed actual pullback family. No nonemptiness assumption on K was used; finite-family surjectivity descent handles the empty case.",
+   "uses": [
+    "lem-weil-pbc-etale-base-change-continuous"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-limit-affine-transition",
+  "lem-weil-pbc-etale-limit-finite-diagram-descent",
+  "lem-weil-pbc-finite-family-joint-surjectivity-stage",
   "lem-weil-pbc-qcqs-morphism-permanence",
-  "thm-pd-spreading-out",
-  "lem-weil-pbc-descend-etale",
-  "lem-weil-pbc-cartesian-square-pasting",
-  "lem-weil-pbc-descend-surjective",
   "def-weil-pbc-etale-site",
+  "lem-weil-pbc-cartesian-square-pasting",
   "lem-weil-pbc-etale-base-change-continuous"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "Stacks Project, Limits and Etale Cohomology",
-  "place": "Tags 01ZM(1),(2), 07RP, 07RR; the finite-cover descent used in 09YQ and the parent node step 1. Expanded as the corresponding part of the parent stage-data plan."
+  "place": "01ZM and 07RP via finite diagram descent; 07RR via existing finite-family joint surjectivity descent; pullback composition and covering preservation checked explicitly in Lean by S2."
  },
  "mathlib_searches": [
   {
@@ -137,9 +129,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "C1",
+  "group": "S2",
   "result": "pass",
-  "landing": "20261012T215152-L-1303443",
+  "landing": "20261012T225328-L-1812604",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
