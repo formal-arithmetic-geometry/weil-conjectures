@@ -1,0 +1,123 @@
+{
+ "id": "lem-pc-supported-open-pushforward-perfect-component",
+ "kind": "statement",
+ "title": "Perfectness of supported open pushforward",
+ "statement": "Let X be a scheme, U an open, and T a closed subset of X contained in U. A perfect derived module F on U [def-pc-perfect-complex, def-pc-derived-category] whose cohomology stalks vanish outside T has perfect R(U.ι)_*F [def-pc-derived-direct-image].",
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 08DP (Lemma 20.49.10), using Tag 08FE and Definition 08CM"
+ },
+ "stmt_deps": [
+  "def-pc-ringed-spaces-derived-direct-image",
+  "def-pc-derived-category",
+  "def-pc-perfect-complex",
+  "def-pc-derived-direct-image",
+  "lem-sc-derived-open-restriction-adjunction-exact"
+ ],
+ "proof": [
+  {
+   "text": "On U, derived direct image restricts to F; on V = X minus T it is the derived direct image of the zero restriction on U intersect V. Thus it is zero on V.",
+   "uses": [
+    "lem-pc-restrict-derived-direct-image-open"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Perfectness is defined by local strictly perfect models. Combine the local models of F on U with the zero strictly perfect model on V, since U and V cover X.",
+   "uses": [
+    "def-pc-perfect-complex"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pc-perfect-complex",
+  "lem-pc-restrict-derived-direct-image-open"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "reason": "Specialization and local computations from the cited Stacks argument; the Lean reduction uses the listed existing declarations."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "derived restriction open immersion supported cohomology unit invertible perfect complex locality",
+   "results": "8 hits: DerivedCategory.exists_iso_Q_obj_of_isGE, DerivedCategory.exists_iso_Q_obj_of_isLE, DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE, DerivedCategory.isGE_Q_obj_iff, DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE, DerivedCategory.left_fac_of_isStrictlyGE, DerivedCategory.isLE_Q_obj_iff, DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE",
+   "date": "2026-10-12",
+   "verdict": "Useful ingredients only; no direct match for this statement."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, CategoryTheory.IsIso",
+   "results": "12 hits: CategoryTheory.Adjunction.toEquivalence, CategoryTheory.Adjunction.toEquivalence_functor, CategoryTheory.Adjunction.toEquivalence_inverse, CategoryTheory.Adjunction.toEquivalence_counitIso_hom_app, CategoryTheory.Adjunction.toEquivalence_unitIso_hom_app, CategoryTheory.Adjunction.toEquivalence_counitIso_inv_app, CategoryTheory.Adjunction.toEquivalence_unitIso_inv_app, CategoryTheory.Adjunction.fullyFaithfulLOfIsIsoUnit",
+   "date": "2026-10-12",
+   "verdict": "Useful ingredients only; no direct match for this statement."
+  },
+  {
+   "tool": "grep",
+   "query": "isIso.*(homology|stalk)|[Pp]erfect.*[Rr]estrict|[Rr]estrict.*[Pp]erfect",
+   "results": "25 hits: Mathlib/LinearAlgebra/RootSystem/IsValuedIn.lean, Mathlib/LinearAlgebra/RootSystem/BaseChange.lean, Mathlib/LinearAlgebra/PerfectPairing/Restrict.lean, Mathlib/LinearAlgebra/PerfectPairing/Restrict.lean, Mathlib/LinearAlgebra/PerfectPairing/Restrict.lean, Mathlib/LinearAlgebra/PerfectPairing/Restrict.lean, Mathlib/LinearAlgebra/PerfectPairing/Restrict.lean, Mathlib/AlgebraicTopology/SingularHomology/HomologyZero.lean",
+   "date": "2026-10-12",
+   "verdict": "Useful ingredients only; no direct match for this statement."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A perfect complex supported on a closed subset of an open has perfect derived direct image and local comparison maps on the complementary open",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.SupportedOpenPushforward",
+  "date": "2026-10-12",
+  "group": "R2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Perfect-generation induction: supported open pushforward and recovery of supported objects; Perfectness of supported open pushforward",
+   "via": [
+    "lem-pc-supported-open-pushforward",
+    "lem-pc-perfect-generation-open-induction-step",
+    "lem-pc-derived-qcoh-perfect-generation"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.SupportedOpenPushforwardPerfectComponent",
+  "file": "lean/Sheaf/AlgebraicGeometry/SupportedOpenPushforwardPerfectComponent.lean",
+  "declaration": "AlgebraicGeometry.Scheme.supported_open_pushforward_perfect",
+  "statement": "theorem supported_open_pushforward_perfect (X : Scheme.{u}) (U : X.Opens)\n    (T : Set X) (hT : IsClosed T) (hTU : T ⊆ (U : Set X))\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]\n    [∀ V : X.Opens,\n      HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over V))]\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace))]\n    [∀ V : U.toScheme.Opens, HasDerivedCategory.{w}\n      (SheafOfModules.{u} ((moduleRings U.toScheme.toRingedSpace).over V))] :\n    (∀ F : schemeDerivedCategory U.toScheme, IsPerfect U.toScheme F →\n      (∀ (n : ℤ) (x : U.toScheme), x.val ∉ T →\n        Subsingleton (↑(TopCat.Presheaf.stalk ((DerivedCategory.homologyFunctor\n          (SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace)) n).obj F).val.presheaf\n            x))) →\n      IsPerfect X ((schemeDerivedDirectImage U.ι).obj F))",
+  "branch": "sheaf-dag",
+  "by": "R2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-84140",
+  "group": "R2",
+  "result": "pass",
+  "landing": "20261012T154245-L-2435293",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-84140",
+  "group": "R2",
+  "result": "pass",
+  "landing": "20261012T154245-L-2435293",
+  "kind": "interface",
+  "note": "independent Codex review: Matched delivered Lean signatures and proofs with DAG records and cited sources; four delivered modules and all three direct importers compile cleanly; axiom checks match the two reported deferred theorems."
+ }
+}

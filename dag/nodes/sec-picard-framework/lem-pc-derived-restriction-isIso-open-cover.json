@@ -1,0 +1,117 @@
+{
+ "id": "lem-pc-derived-restriction-isIso-open-cover",
+ "kind": "statement",
+ "title": "Derived isomorphism detection on a binary open cover",
+ "statement": "Let X be a scheme and U,V opens with U union V = X. A morphism phi:E→F in D(O_X) [def-pc-derived-category] is invertible if its exact derived over-site restrictions to U and to V are invertible. All required derived categories exist. Restriction is [lem-sc-derived-open-restriction-adjunction-exact].",
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 08DF, proof (local cohomology criterion); sheaf locality Tag 04TN"
+ },
+ "stmt_deps": [
+  "def-pc-derived-category",
+  "lem-sc-derived-open-restriction-adjunction-exact"
+ ],
+ "proof": [
+  {
+   "text": "Mathlib DerivedCategory.isIso_iff reduces invertibility to invertibility of every homology map. The exact-functor homology comparison identifies the restrictions of these maps with homology of the restricted derived maps.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Apply the existing sheaf-module isomorphism criterion on the Bool-indexed cover consisting of V and U to each homology map. This proves global invertibility.",
+   "uses": [
+    "lem-weil-pbc-sheaf-isomorphism-local-open-cover"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-sheaf-isomorphism-local-open-cover"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "reason": "Specialization and local computations from the cited Stacks argument; the Lean reduction uses the listed existing declarations."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "derived category morphism isomorphism iff homology isomorphism restriction to open cover",
+   "results": "8 hits: HomologicalComplexUpToQuasiIso.isIso_Q_map_iff_mem_quasiIso, DerivedCategory.isIso_Q_map_iff_quasiIso, CochainComplex.cm5b.instQuasiIsoIntP, CochainComplex.ConnectData.homologyIsoPos, DerivedCategory.instIsIsoMapCochainComplexIntQ, HomotopyCategory.homologyFunctor_inverts_quasiIso, HomologicalComplex.isSupported_iff_of_quasiIso, HomologicalComplex.homologyFunctor_inverts_quasiIso",
+   "date": "2026-10-12",
+   "verdict": "Useful ingredients only; no direct match for this statement."
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory.isIso_iff",
+   "results": "1 hits: DerivedCategory.isIso_iff",
+   "date": "2026-10-12",
+   "verdict": "Useful ingredients only; no direct match for this statement."
+  },
+  {
+   "tool": "grep",
+   "query": "isIso_iff|isIso_of_coversTop",
+   "results": "6 hits: Mathlib/Algebra/Homology/DerivedCategory/HomologySequence.lean, Mathlib/Algebra/Homology/DerivedCategory/DerivabilityStructureInjectives.lean, Mathlib/Algebra/Homology/DerivedCategory/DerivabilityStructureInjectives.lean, Mathlib/Algebra/Homology/DerivedCategory/DerivabilityStructureInjectives.lean, Mathlib/Algebra/Homology/DerivedCategory/Plus.lean, Mathlib/Algebra/Homology/DerivedCategory/Plus.lean",
+   "date": "2026-10-12",
+   "verdict": "Useful ingredients only; no direct match for this statement."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A derived morphism is invertible if its restrictions to two opens covering the scheme are invertible",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.SupportedOpenPushforward",
+  "date": "2026-10-12",
+  "group": "R2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Perfect-generation induction: supported open pushforward and recovery of supported objects; Derived isomorphism detection on a binary open cover",
+   "via": [
+    "lem-pc-supported-open-pushforward",
+    "lem-pc-perfect-generation-open-induction-step",
+    "lem-pc-derived-qcoh-perfect-generation"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.DerivedRestrictionIsIsoOpenCover",
+  "file": "lean/Sheaf/AlgebraicGeometry/DerivedRestrictionIsIsoOpenCover.lean",
+  "declaration": "AlgebraicGeometry.Scheme.derived_restriction_isIso_open_cover",
+  "statement": "theorem derived_restriction_isIso_open_cover (X : Scheme.{u}) (U V : X.Opens)\n    (hcover : U ⊔ V = ⊤)\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]\n    [∀ W : X.Opens,\n      HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over W))]\n    {E F : schemeDerivedCategory X} (φ : E ⟶ F)\n    (hU : IsIso ((SheafOfModules.overFunctor.{u}\n      (moduleRings X.toRingedSpace) U).mapDerivedCategory.map φ))\n    (hV : IsIso ((SheafOfModules.overFunctor.{u}\n      (moduleRings X.toRingedSpace) V).mapDerivedCategory.map φ)) : IsIso φ",
+  "branch": "sheaf-dag",
+  "by": "R2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-84140",
+  "group": "R2",
+  "result": "pass",
+  "landing": "20261012T154245-L-2435293",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-84140",
+  "group": "R2",
+  "result": "pass",
+  "landing": "20261012T154245-L-2435293",
+  "kind": "interface",
+  "note": "independent Codex review: Matched delivered Lean signatures and proofs with DAG records and cited sources; four delivered modules and all three direct importers compile cleanly; axiom checks match the two reported deferred theorems."
+ }
+}

@@ -27,50 +27,35 @@
  ],
  "proof": [
   {
-   "text": "Put V=X\\setminus T, open since T is closed, and W=U\\cap V; since T\\subseteq U, X=U\\cup V is an open cover. Let G be an object of D(O_U) whose cohomology sheaves are supported on T, so G|_W has zero cohomology sheaves and G|_W=0. By [lem-pc-restrict-derived-direct-image-open] applied to j and the open V (with j^{-1}(V)=W), (Rj_*G)|_V is canonically R(j|_W)_*(G|_W)=0; applied to j and the open U (with j^{-1}(U)=U and induced map the identity), (Rj_*G)|_U is canonically G, and under this identification the restriction to U of the unit of j^{-1}\\dashv Rj_* is the identity. Now let E be in D(O_X) with cohomology sheaves supported on T and take G=E|_U, which is again supported on T. The canonical map E\\to Rj_*(E|_U) restricts on U to the identity of E|_U, and on V it is a map between objects with zero cohomology sheaves (E|_V=0 by the support hypothesis, (Rj_*(E|_U))|_V=0 by the above). Hence its cone has cohomology sheaves vanishing on U and on V, so zero cohomology sheaves, so the cone is zero and the map is an isomorphism (an isomorphism of objects is detected on cohomology sheaves, which are local).",
+   "text": "Use the deferred perfectness component, whose proof keeps the original restriction-and-local-perfectness route.",
    "uses": [
-    "lem-pc-restrict-derived-direct-image-open"
+    "lem-pc-supported-open-pushforward-perfect-component"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/cohomology.tex",
-    "place": "Tag 08DF (cohomology-lemma-pushforward-restriction), Lemma 33.6(1), using Tag 08FE"
-   }
+   "elementary": false
   },
   {
-   "text": "Let F be in D(O_U) with cohomology sheaves supported on T. Extension by zero j_! on modules is exact and left adjoint to restriction [lem-sc-derived-open-restriction-adjunction-exact], so j_!F is computed termwise on any representing complex and j_! commutes with taking cohomology sheaves. Immediately from the construction of extension by zero (Stacks, proof of 08DF), (j_!F)|_U=F and (j_!F)|_V=j_{W!}(F|_W)=0, since F|_W=0 by the support hypothesis. By the preceding step (with G=F), also (Rj_*F)|_U=F and (Rj_*F)|_V=0, and the canonical map j_!F\\to Rj_*F restricts on U to the identity of F. So it is an isomorphism on each member of the cover {U,V}, and the cone argument of the preceding step shows it is an isomorphism.",
+   "text": "Construct V = X minus T. It is open since T is closed. Prove U union V = X pointwise from T contained in U. Obtain the local unit and canonical-map comparisons on U and V.",
    "uses": [
-    "lem-sc-derived-open-restriction-adjunction-exact",
-    "lem-pc-restrict-derived-direct-image-open"
+    "lem-pc-supported-open-pushforward-local-comparisons"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/cohomology.tex",
-    "place": "Tag 08DF (cohomology-lemma-pushforward-restriction), Lemma 33.6(2), using Tag 08FE"
-   }
+   "elementary": false
   },
   {
-   "text": "Perfectness is local: by [def-pc-perfect-complex] an object is perfect when it is, on the members of some open cover, isomorphic to strictly perfect complexes, and covers of the members of a cover combine. Let F be a perfect object of D(O_U) with cohomology sheaves supported on T. On the cover {U,V} of the first step, (Rj_*F)|_U=F is perfect, and (Rj_*F)|_V=0 by the first step, and the zero complex is strictly perfect. Hence Rj_*F is perfect on X.",
+   "text": "For each of the two maps, use derived isomorphism detection on this two-open cover. Assemble these global isomorphism results with the perfectness component.",
    "uses": [
-    "def-pc-perfect-complex",
-    "lem-pc-restrict-derived-direct-image-open"
+    "lem-pc-derived-restriction-isIso-open-cover"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/cohomology.tex",
-    "place": "Tag 08DP (cohomology-lemma-pushforward-perfect), Lemma 49.10"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-pc-restrict-derived-direct-image-open",
-  "lem-sc-derived-open-restriction-adjunction-exact",
-  "def-pc-perfect-complex"
+  "lem-pc-supported-open-pushforward-perfect-component",
+  "lem-pc-supported-open-pushforward-local-comparisons",
+  "lem-pc-derived-restriction-isIso-open-cover"
  ],
  "proof_origin": {
-  "by": "document",
-  "document": "literature/stacks-project/cohomology.tex",
-  "place": "Tags 08DP and 08DF"
+  "by": "agent",
+  "reason": "Second reading R2: actual reduction through a constructed open cover, local comparisons, and a proved homology/sheaf-locality isomorphism criterion; perfectness remains deferred."
  },
  "mathlib_searches": [
   {
@@ -170,5 +155,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-84140",
+  "group": "R2",
+  "result": "pass",
+  "landing": "20261012T154245-L-2435293",
+  "kind": "interface",
+  "note": "independent Codex review: Matched delivered Lean signatures and proofs with DAG records and cited sources; four delivered modules and all three direct importers compile cleanly; axiom checks match the two reported deferred theorems."
  }
 }

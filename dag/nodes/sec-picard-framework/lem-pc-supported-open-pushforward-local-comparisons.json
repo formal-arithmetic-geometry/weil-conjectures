@@ -1,0 +1,123 @@
+{
+ "id": "lem-pc-supported-open-pushforward-local-comparisons",
+ "kind": "statement",
+ "title": "Local supported comparison maps",
+ "statement": "Let X be a scheme, U an open, and T a closed subset contained in U. Set V = X minus T. Derived restriction and R(U.ι)_* use [def-pc-derived-category, def-pc-derived-direct-image]. For every adjunction restriction ⊣ R(U.ι)_*, the unit at an object E whose cohomology stalks vanish outside T becomes invertible after restriction to each of U and V. For any left adjoint S of restriction [lem-sc-derived-open-restriction-adjunction-exact], any perfect F on U [def-pc-perfect-complex] supported on T, and any map phi:S(F)→R(U.ι)_*F whose right-adjunct composed with the left-adjunction unit is the identity of F, phi becomes invertible after restriction to each of U and V.",
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 08DF (Lemma 20.33.6), restriction computations using Tags 08FE and 08BS"
+ },
+ "stmt_deps": [
+  "def-pc-ringed-spaces-derived-direct-image",
+  "def-pc-derived-category",
+  "def-pc-perfect-complex",
+  "def-pc-derived-direct-image",
+  "lem-sc-derived-open-restriction-adjunction-exact"
+ ],
+ "proof": [
+  {
+   "text": "Restriction commutes with derived direct image. A supported object restricts to zero on U intersect V. Consequently direct image restricts to the original object on U and to zero on V. The unit is invertible on U, and is a morphism between zero objects on V. Changing an adjunction structure changes these maps only by natural automorphisms.",
+   "uses": [
+    "lem-pc-restrict-derived-direct-image-open"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Exact extension by zero provides the left adjoint of derived restriction; uniqueness of left adjoints identifies every S with it. Its restriction on U is F with invertible unit; on V it is extension by zero of the zero restriction of F. The adjunct equation and invertible units/counits imply invertibility of phi on U; on V it is a morphism between zero objects.",
+   "uses": [
+    "lem-sc-derived-open-restriction-adjunction-exact"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-restrict-derived-direct-image-open",
+  "lem-sc-derived-open-restriction-adjunction-exact"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "reason": "Specialization and local computations from the cited Stacks argument; the Lean reduction uses the listed existing declarations."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "derived restriction open immersion supported cohomology unit invertible perfect complex locality",
+   "results": "8 hits: DerivedCategory.exists_iso_Q_obj_of_isGE, DerivedCategory.exists_iso_Q_obj_of_isLE, DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE, DerivedCategory.isGE_Q_obj_iff, DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE, DerivedCategory.left_fac_of_isStrictlyGE, DerivedCategory.isLE_Q_obj_iff, DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE",
+   "date": "2026-10-12",
+   "verdict": "Useful ingredients only; no direct match for this statement."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, CategoryTheory.IsIso",
+   "results": "12 hits: CategoryTheory.Adjunction.toEquivalence, CategoryTheory.Adjunction.toEquivalence_functor, CategoryTheory.Adjunction.toEquivalence_inverse, CategoryTheory.Adjunction.toEquivalence_counitIso_hom_app, CategoryTheory.Adjunction.toEquivalence_unitIso_hom_app, CategoryTheory.Adjunction.toEquivalence_counitIso_inv_app, CategoryTheory.Adjunction.toEquivalence_unitIso_inv_app, CategoryTheory.Adjunction.fullyFaithfulLOfIsIsoUnit",
+   "date": "2026-10-12",
+   "verdict": "Useful ingredients only; no direct match for this statement."
+  },
+  {
+   "tool": "grep",
+   "query": "isIso.*(homology|stalk)|[Pp]erfect.*[Rr]estrict|[Rr]estrict.*[Pp]erfect",
+   "results": "25 hits: Mathlib/LinearAlgebra/RootSystem/IsValuedIn.lean, Mathlib/LinearAlgebra/RootSystem/BaseChange.lean, Mathlib/LinearAlgebra/PerfectPairing/Restrict.lean, Mathlib/LinearAlgebra/PerfectPairing/Restrict.lean, Mathlib/LinearAlgebra/PerfectPairing/Restrict.lean, Mathlib/LinearAlgebra/PerfectPairing/Restrict.lean, Mathlib/LinearAlgebra/PerfectPairing/Restrict.lean, Mathlib/AlgebraicTopology/SingularHomology/HomologyZero.lean",
+   "date": "2026-10-12",
+   "verdict": "Useful ingredients only; no direct match for this statement."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A perfect complex supported on a closed subset of an open has perfect derived direct image and local comparison maps on the complementary open",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.SupportedOpenPushforward",
+  "date": "2026-10-12",
+  "group": "R2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Perfect-generation induction: supported open pushforward and recovery of supported objects; Local supported comparison maps",
+   "via": [
+    "lem-pc-supported-open-pushforward",
+    "lem-pc-perfect-generation-open-induction-step",
+    "lem-pc-derived-qcoh-perfect-generation"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.SupportedOpenPushforwardLocalComparisons",
+  "file": "lean/Sheaf/AlgebraicGeometry/SupportedOpenPushforwardLocalComparisons.lean",
+  "declaration": "AlgebraicGeometry.Scheme.supported_open_pushforward_local_comparisons",
+  "statement": "theorem supported_open_pushforward_local_comparisons (X : Scheme.{u}) (U : X.Opens)\n    (T : Set X) (hT : IsClosed T) (hTU : T ⊆ (U : Set X))\n    (V : X.Opens) (hV : (V : Set X) = Tᶜ)\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]\n    [∀ V : X.Opens,\n      HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over V))]\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace))]\n    [∀ V : U.toScheme.Opens, HasDerivedCategory.{w}\n      (SheafOfModules.{u} ((moduleRings U.toScheme.toRingedSpace).over V))] :\n    (∀ (adj : ((SheafOfModules.overFunctor.{u} (moduleRings X.toRingedSpace) U) ⋙\n          Equivalence.functor\n            (C := SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))\n            (D := SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace))\n            (Modules.overEquiv U)).mapDerivedCategory ⊣ schemeDerivedDirectImage U.ι)\n        (E : schemeDerivedCategory X),\n      (∀ (n : ℤ) (x : X), x ∉ T →\n        Subsingleton (↑(TopCat.Presheaf.stalk ((DerivedCategory.homologyFunctor\n          (SheafOfModules.{u} (moduleRings X.toRingedSpace)) n).obj E).val.presheaf x))) →\n      ∀ W : X.Opens, W = U ∨ W = V →\n        IsIso ((SheafOfModules.overFunctor.{u}\n          (moduleRings X.toRingedSpace) W).mapDerivedCategory.map (adj.unit.app E))) ∧\n    (∀ (adj : ((SheafOfModules.overFunctor.{u} (moduleRings X.toRingedSpace) U) ⋙\n          Equivalence.functor\n            (C := SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))\n            (D := SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace))\n            (Modules.overEquiv U)).mapDerivedCategory ⊣ schemeDerivedDirectImage U.ι)\n        (S : schemeDerivedCategory U.toScheme ⥤ schemeDerivedCategory X)\n        (adjS : S ⊣ ((SheafOfModules.overFunctor.{u} (moduleRings X.toRingedSpace) U) ⋙\n          Equivalence.functor\n            (C := SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))\n            (D := SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace))\n            (Modules.overEquiv U)).mapDerivedCategory)\n        (F : schemeDerivedCategory U.toScheme), IsPerfect U.toScheme F →\n      (∀ (n : ℤ) (x : U.toScheme), x.val ∉ T →\n        Subsingleton (↑(TopCat.Presheaf.stalk ((DerivedCategory.homologyFunctor\n          (SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace)) n).obj F).val.presheaf\n            x))) →\n      ∀ φ : S.obj F ⟶ (schemeDerivedDirectImage U.ι).obj F,\n        adjS.unit.app F ≫ (adj.homEquiv (S.obj F) F).symm φ = 𝟙 F →\n        ∀ W : X.Opens, W = U ∨ W = V →\n          IsIso ((SheafOfModules.overFunctor.{u}\n            (moduleRings X.toRingedSpace) W).mapDerivedCategory.map φ))",
+  "branch": "sheaf-dag",
+  "by": "R2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-84140",
+  "group": "R2",
+  "result": "pass",
+  "landing": "20261012T154245-L-2435293",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-84140",
+  "group": "R2",
+  "result": "pass",
+  "landing": "20261012T154245-L-2435293",
+  "kind": "interface",
+  "note": "independent Codex review: Matched delivered Lean signatures and proofs with DAG records and cited sources; four delivered modules and all three direct importers compile cleanly; axiom checks match the two reported deferred theorems."
+ }
+}
