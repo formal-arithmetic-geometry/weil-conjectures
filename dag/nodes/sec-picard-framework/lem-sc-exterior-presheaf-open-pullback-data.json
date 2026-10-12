@@ -1,0 +1,116 @@
+{
+ "id": "lem-sc-exterior-presheaf-open-pullback-data",
+ "kind": "statement",
+ "title": "Component data for exterior presheaf under open pullback",
+ "statement": "For a scheme X, an O_X-module M, a natural number n and an open U, there are component isomorphisms between the presheaf pullback of the sectionwise exterior-power presheaf and the sectionwise exterior-power presheaf of M.restrict U.ι, satisfying presheaf naturality.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-rr/lem-sc-riemann-roch.md",
+  "place": "Proof of (*), determinant paragraph"
+ },
+ "stmt_deps": [
+  "def-sc-sheaf-exterior-power"
+ ],
+ "proof": [
+  {
+   "text": "Construct the component maps on pure wedges using the open immersion section isomorphisms and transport of scalars. The exterior-power universal property gives linear maps and inverse maps; checking the defining formulas on pure wedges gives the naturality equation.",
+   "uses": [
+    "def-sc-sheaf-exterior-power"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sc-sheaf-exterior-power"
+ ],
+ "proof_origin": {
+  "by": "W3",
+  "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-rr/lem-sc-riemann-roch.md",
+  "place": "Proof of (*), determinant paragraph"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "presheaf exterior power pullback components naturality open immersion",
+   "results": "No exact theorem found",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "presheaf exterior power pullback component isomorphism",
+   "results": "No exact theorem found",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "PresheafOfModules.isoMk exteriorPower",
+   "results": "No exact theorem found",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "W3",
+  "item": "Sheaf.AlgebraicGeometry.Modules.ExteriorPresheafOpenPullback",
+  "date": "2026-10-13",
+  "group": "W3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-exterior-presheaf-open-pullback",
+   "place": "Proof of (*), determinant paragraph",
+   "via": [
+    "lem-sc-exterior-presheaf-open-pullback"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-rr",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Modules.ExteriorPresheafOpenPullbackData",
+  "file": "lean/Sheaf/AlgebraicGeometry/Modules/ExteriorPresheafOpenPullbackData.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.exteriorPresheaf_open_pullback_data",
+  "statement": "theorem exteriorPresheaf_open_pullback_data {X : Scheme.{v}} (M : X.Modules) (n : ℕ) (U : X.Opens) : ∃ (app : ∀ V : U.toScheme.Opensᵒᵖ, ((PresheafOfModules.pullback.{v} U.ι.toRingCatSheafHom.hom).obj (exteriorSheafPresheaf M n)).obj V ≅ (exteriorSheafPresheaf (M.restrict U.ι) n).obj V), ∀ {V W : U.toScheme.Opensᵒᵖ} (f : V ⟶ W), ((PresheafOfModules.pullback.{v} U.ι.toRingCatSheafHom.hom).obj (exteriorSheafPresheaf M n)).map f ≫ (ModuleCat.restrictScalars ((U.toScheme.ringCatSheaf.obj.map f).hom)).map (app W).hom = (app V).hom ≫ (exteriorSheafPresheaf (M.restrict U.ι) n).map f",
+  "branch": "sheaf-dag",
+  "by": "W3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W3",
+  "result": "pass",
+  "landing": "20261012T231643-L-1964527",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W3",
+  "result": "pass",
+  "landing": "20261012T231643-L-1964527",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

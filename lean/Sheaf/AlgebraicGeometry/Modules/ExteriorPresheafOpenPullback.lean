@@ -5,6 +5,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import Sheaf.AlgebraicGeometry.Modules.ExteriorSheaf
+import Sheaf.AlgebraicGeometry.Modules.ExteriorPresheafOpenPullbackData
 
 /-!
 # Exterior presheaves under open pullback
@@ -47,6 +48,9 @@ theorem exteriorPresheaf_open_pullback {X : Scheme.{v}} (M : X.Modules) (n : ℕ
     (U : X.Opens) :
     Nonempty ((PresheafOfModules.pullback.{v} U.ι.toRingCatSheafHom.hom).obj
       (exteriorSheafPresheaf M n) ≅ exteriorSheafPresheaf (M.restrict U.ι) n) := by
-  sorry
+  obtain ⟨app, happ⟩ := exteriorPresheaf_open_pullback_data M n U
+  refine ⟨PresheafOfModules.isoMk app ?_⟩
+  intro V W f
+  exact happ f
 
 end AlgebraicGeometry.Scheme.Modules

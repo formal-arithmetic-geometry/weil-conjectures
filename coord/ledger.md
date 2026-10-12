@@ -10066,3 +10066,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 23:16 L: merged deliver/U2/Sheaf.RingTheory.FiniteIntegralConductor (stage 3; reviewer PASS; first push; landing 20261012T231642-L-1964198 (proof); batch 20261012T231631; modules 1; new nodes 0)
 - 23:16 L: merged deliver/U3/Sheaf.Algebra.Homology.LocalizedRestrictionExtensionExists (stage 3; reviewer PASS; first push; landing 20261012T231642-L-1964295 (proof); batch 20261012T231631; modules 1; new nodes 0)
 - 23:16 L: merged deliver/W2/Sheaf.AlgebraicGeometry.ModuleCohomologyFMapBasicProperties (stage 3; reviewer PASS; first push; landing 20261012T231643-L-1964425 (interface); batch 20261012T231631; modules 6; new nodes 5)
+- 23:16 L: merged deliver/W3/Sheaf.AlgebraicGeometry.Modules.ExteriorPresheafOpenPullback (stage 3; reviewer PASS; first push; landing 20261012T231643-L-1964527 (interface); batch 20261012T231631; modules 2; new nodes 1)
