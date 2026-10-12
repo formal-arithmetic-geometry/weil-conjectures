@@ -1,116 +1,120 @@
 {
-  "id": "lem-weil-pbc-etale-triple-unit-refinement",
-  "kind": "lemma",
-  "title": "Etale residue triple unit refinement",
-  "statement": "Let $R$ be a commutative ring, $p$ a prime, $K$ a field, and $\\chi:\\kappa(p)\\to K$ a field homomorphism. For a triple $t=(B,\\alpha,q,\\phi)$ in [def-weil-pbc-etale-residue-triples] and $f\\in B\\setminus q$, there are a triple $s=(B_s,\\alpha_s,q_s,\\phi_s)$ and a morphism $a:t\\to s$ whose underlying ring map sends $f$ to a unit of $B_s$.",
-  "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Tags 04GN and 04GP"
+ "id": "lem-weil-pbc-etale-triple-unit-refinement",
+ "kind": "lemma",
+ "title": "Etale residue triple unit refinement",
+ "statement": "Let $R$ be a commutative ring, $p$ a prime, $K$ a field, and $\\chi:\\kappa(p)\\to K$ a field homomorphism. For a triple $t=(B,\\alpha,q,\\phi)$ in [def-weil-pbc-etale-residue-triples] and $f\\in B\\setminus q$, there are a triple $s=(B_s,\\alpha_s,q_s,\\phi_s)$ and a morphism $a:t\\to s$ whose underlying ring map sends $f$ to a unit of $B_s$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tags 04GN and 04GP"
+ },
+ "proof": [
+  {
+   "text": "Write beta:B -> K for the residue map of t. Its kernel is q, since the residue-field embedding is injective. Thus beta(f) is nonzero and is a unit in K. The universal property extends beta to B[1/f] -> K.",
+   "uses": [],
+   "elementary": true
   },
-  "proof": [
-    {
-      "text": "Write beta:B -> K for the residue map of t. Its kernel is q, since the residue-field embedding is injective. Thus beta(f) is nonzero and is a unit in K. The universal property extends beta to B[1/f] -> K.",
-      "uses": [],
-      "elementary": true
-    },
-    {
-      "text": "The kernel q_s of the extended map is prime, pulls back to q, and hence lies over p. The induced injection B[1/f]/q_s -> K extends to its fraction field, giving phi_s. Compatibility follows by restriction to R. Spec(B[1/f]) -> Spec(B) is the principal open immersion, hence is etale by lem-weil-pbc-etale-composition-cancellation(1); composing with Spec(B) -> Spec(R) is etale by clause (2), so this is a triple s and the localization map is a morphism t -> s. The image of f is invertible by construction.",
-      "uses": [
-        "lem-weil-pbc-etale-composition-cancellation"
-      ],
-      "elementary": false
-    }
-  ],
-  "proof_deps": [
+  {
+   "text": "The kernel q_s of the extended map is prime, pulls back to q, and hence lies over p. The induced injection B[1/f]/q_s -> K extends to its fraction field, giving phi_s. Compatibility follows by restriction to R. Spec(B[1/f]) -> Spec(B) is the principal open immersion, hence is etale by lem-weil-pbc-etale-composition-cancellation(1); composing with Spec(B) -> Spec(R) is etale by clause (2), so this is a triple s and the localization map is a morphism t -> s. The image of f is invertible by construction.",
+   "uses": [
     "lem-weil-pbc-etale-composition-cancellation"
-  ],
-  "proof_origin": "Stacks Project Tags 04GN and 04GP, with kernel and residue-field constructions; second reading by D2, 2026-10-12.",
-  "status": "split",
-  "created": {
-    "by": "worker",
-    "item": "Sheaf.RingTheory.EtaleResidueTriplesLocalization",
-    "date": "2026-10-12",
-    "group": "D2"
-  },
-  "blueprint": {
-    "is": null,
-    "from": {
-      "node": "lem-weil-pbc-etale-triples-colimit-localization",
-      "place": "proof steps",
-      "via": []
-    },
-    "same_as": null
-  },
-  "chapter": "sec-proper-base-change",
-  "unit": "sk-thm-p1",
-  "lean": {
-    "existing": false,
-    "module": "Sheaf.RingTheory.EtaleResidueTripleUnitRefinement",
-    "file": "lean/Sheaf/RingTheory/EtaleResidueTripleUnitRefinement.lean",
-    "declaration": "AlgebraicGeometry.Scheme.etaleResidueTriple_unit_refinement",
-    "statement": "theorem etaleResidueTriple_unit_refinement\n    (R : CommRingCat.{u}) (p : Spec R) (K : Type u) [Field K]\n    (χ : (Spec R).residueField p ⟶ CommRingCat.of K)\n    (t : EtaleResidueTriples R p K χ) (f : t.B) (hf : f ∉ t.q.asIdeal) :\n    ∃ (s : EtaleResidueTriples R p K χ) (a : t ⟶ s),\n      IsUnit (((etaleResidueTriplesRingDiagram R p K χ).map a).hom f)",
-    "branch": "sheaf-dag",
-    "by": "D2",
-    "date": "2026-10-12"
-  },
-  "stmt_deps": [
-    "def-weil-pbc-etale-residue-triples"
-  ],
-  "mathlib_searches": [
-    {
-      "tool": "leansearch",
-      "query": "An element outside a prime in a pointed etale algebra becomes invertible in a later pointed etale algebra by principal localization",
-      "date": "2026-10-12",
-      "results": "service unavailable: Internal Server Error",
-      "verdict": "Unavailable; no mathematical verdict drawn from service failure."
-    },
-    {
-      "tool": "loogle",
-      "query": "IsLocalization.Away, IsUnit",
-      "date": "2026-10-12",
-      "results": "['IsLocalization.atUnit', 'IsLocalization.Away.algebraMap_isUnit', 'IsLocalization.away_of_isUnit_of_bijective', 'IsLocalization.Away.isUnit_of_dvd', 'IsLocalization.Away.algebraMap_pow_isUnit', 'IsLocalization.Away.lift', 'IsLocalization.Away.mul_of_isUnit', \"IsLocalization.Away.mul_of_isUnit'\"]",
-      "verdict": "Mathlib gives the unit and extension-map properties of principal localization, but not its construction as a morphism of residue triples."
-    },
-    {
-      "tool": "grep",
-      "query": "mem_map_algebraMap_iff|iff_map_maximalIdeal_eq|algebraMap_isUnit",
-      "date": "2026-10-12",
-      "results": "['Mathlib/RingTheory/Spectrum/Prime/Topology.lean', 'Mathlib/RingTheory/Spectrum/Prime/Topology.lean', 'Mathlib/RingTheory/RamificationInertia/Ramification.lean', 'Mathlib/RingTheory/Localization/Algebra.lean', 'Mathlib/RingTheory/Localization/Algebra.lean', 'Mathlib/RingTheory/Localization/Ideal.lean', 'Mathlib/RingTheory/Localization/Ideal.lean', 'Mathlib/RingTheory/Localization/Ideal.lean']",
-      "verdict": "Mathlib gives the unit and extension-map properties of principal localization, but not its construction as a morphism of residue triples.",
-      "sub": "RingTheory"
-    }
-  ],
-  "mathlib_match": null,
-  "lean_audit": {
-    "master": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    },
-    "slopmaster2": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    }
-  },
-  "reviewed": {
-    "date": "2026-10-12",
-    "by": "L",
-    "reviewer": "X-2e48d",
-    "group": "D2",
-    "result": "pass",
-    "landing": "20261012T085225-L-8352",
-    "kind": "interface",
-    "note": "new node of a stage-3 delivery, read against its source by the reviewer"
-  },
-  "reviewed_proof": {
-    "date": "2026-10-12",
-    "by": "L",
-    "reviewer": "X-2e48d",
-    "group": "D2",
-    "result": "pass",
-    "landing": "20261012T085225-L-8352",
-    "kind": "interface",
-    "note": "independent Codex review: Matched delivered Lean signatures and proofs with all four nodes, cited dependencies and sources, import-change users, unit route, report, and earlier return; all modules and the direct importer compile cleanly; axiom audits show only standard axioms and the three reported helper sorries."
+   ],
+   "elementary": false
   }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-etale-composition-cancellation"
+ ],
+ "proof_origin": "Stacks Project Tags 04GN and 04GP, with kernel and residue-field constructions; second reading by D2, 2026-10-12.",
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.EtaleResidueTriplesLocalization",
+  "date": "2026-10-12",
+  "group": "D2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-etale-triples-colimit-localization",
+   "place": "proof steps",
+   "via": []
+  },
+  "same_as": null
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.EtaleResidueTripleUnitRefinement",
+  "file": "lean/Sheaf/RingTheory/EtaleResidueTripleUnitRefinement.lean",
+  "declaration": "AlgebraicGeometry.Scheme.etaleResidueTriple_unit_refinement",
+  "statement": "theorem etaleResidueTriple_unit_refinement\n    (R : CommRingCat.{u}) (p : Spec R) (K : Type u) [Field K]\n    (χ : (Spec R).residueField p ⟶ CommRingCat.of K)\n    (t : EtaleResidueTriples R p K χ) (f : t.B) (hf : f ∉ t.q.asIdeal) :\n    ∃ (s : EtaleResidueTriples R p K χ) (a : t ⟶ s),\n      IsUnit (((etaleResidueTriplesRingDiagram R p K χ).map a).hom f)",
+  "branch": "sheaf-dag",
+  "by": "D2",
+  "date": "2026-10-12"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-etale-residue-triples"
+ ],
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "An element outside a prime in a pointed etale algebra becomes invertible in a later pointed etale algebra by principal localization",
+   "date": "2026-10-12",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "Unavailable; no mathematical verdict drawn from service failure."
+  },
+  {
+   "tool": "loogle",
+   "query": "IsLocalization.Away, IsUnit",
+   "date": "2026-10-12",
+   "results": "['IsLocalization.atUnit', 'IsLocalization.Away.algebraMap_isUnit', 'IsLocalization.away_of_isUnit_of_bijective', 'IsLocalization.Away.isUnit_of_dvd', 'IsLocalization.Away.algebraMap_pow_isUnit', 'IsLocalization.Away.lift', 'IsLocalization.Away.mul_of_isUnit', \"IsLocalization.Away.mul_of_isUnit'\"]",
+   "verdict": "Mathlib gives the unit and extension-map properties of principal localization, but not its construction as a morphism of residue triples."
+  },
+  {
+   "tool": "grep",
+   "query": "mem_map_algebraMap_iff|iff_map_maximalIdeal_eq|algebraMap_isUnit",
+   "date": "2026-10-12",
+   "results": "['Mathlib/RingTheory/Spectrum/Prime/Topology.lean', 'Mathlib/RingTheory/Spectrum/Prime/Topology.lean', 'Mathlib/RingTheory/RamificationInertia/Ramification.lean', 'Mathlib/RingTheory/Localization/Algebra.lean', 'Mathlib/RingTheory/Localization/Algebra.lean', 'Mathlib/RingTheory/Localization/Ideal.lean', 'Mathlib/RingTheory/Localization/Ideal.lean', 'Mathlib/RingTheory/Localization/Ideal.lean']",
+   "verdict": "Mathlib gives the unit and extension-map properties of principal localization, but not its construction as a morphism of residue triples.",
+   "sub": "RingTheory"
+  }
+ ],
+ "mathlib_match": null,
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-2e48d",
+  "group": "D2",
+  "result": "pass",
+  "landing": "20261012T085225-L-8352",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "U2",
+  "result": "pass",
+  "landing": "20261012T154836-L-2474766",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "AlgebraicGeometry.Scheme.etaleResidueTriple_unit_refinement"
+  ],
+  "sorry_after": []
+ }
 }
