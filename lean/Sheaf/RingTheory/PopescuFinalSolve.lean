@@ -6,6 +6,8 @@ Authors: SHEAF group C1
 module
 
 public import Sheaf.RingTheory.SingularIdeal
+import Mathlib.RingTheory.Smooth.Locus
+import Mathlib.LinearAlgebra.Finsupp.LinearCombination
 import Sheaf.RingTheory.LinearEquationLocalizationPolynomial
 import Sheaf.RingTheory.SingularIdealLocalizationSmooth
 
@@ -50,6 +52,82 @@ theorem exists_smooth_factorization_of_singularIdeal_map_eq_top
     (h : Ideal.map α.toRingHom (singularIdeal R A) = ⊤) :
     ∃ (B : Type v) (_ : CommRing B) (_ : Algebra R B),
       Smooth R B ∧ ∃ (β : A →ₐ[R] B) (γ : B →ₐ[R] Λ), γ.comp β = α := by
-  sorry
+  classical
+  have hmem : (1 : Λ) ∈ Submodule.span Λ
+      (α.toRingHom '' (singularIdeal R A : Set A)) := by
+    change (1 : Λ) ∈ Ideal.map α.toRingHom (singularIdeal R A)
+    rw [h]
+    trivial
+  obtain ⟨r, c, g, hg⟩ := Submodule.mem_span_set'.mp hmem
+  choose f hf hα using fun i ↦ (g i).property
+  have hsum : ∑ i : Fin r, α (f i) * c i = 1 := by
+    simp only [smul_eq_mul, ← hα] at hg
+    change ∑ i : Fin r, c i * α (f i) = 1 at hg
+    simpa only [mul_comm] using hg
+  let I : Ideal (MvPolynomial (Fin r) A) :=
+    Ideal.span {(∑ j : Fin r, MvPolynomial.C (f j) * MvPolynomial.X j) - 1}
+  let B := MvPolynomial (Fin r) A ⧸ I
+  let q := Ideal.Quotient.mk I
+  let β : A →ₐ[R] B := IsScalarTower.toAlgHom R A B
+  let ev : MvPolynomial (Fin r) A →ₐ[R] Λ :=
+    { MvPolynomial.eval₂Hom α.toRingHom c with
+      commutes' := fun x ↦ by simp [AlgHom.commutes] }
+  have hev : ∀ p ∈ I, ev p = 0 := by
+    change I ≤ RingHom.ker ev.toRingHom
+    apply Ideal.span_le.mpr
+    intro p hp
+    rcases hp with rfl
+    simpa [ev] using sub_eq_zero.mpr hsum
+  let γ : B →ₐ[R] Λ := Ideal.Quotient.liftₐ I ev hev
+  refine ⟨B, inferInstance, inferInstance, ?_, β, γ, ?_⟩
+  · have hcover : Ideal.span (Set.range (algebraMap A B ∘ f)) = ⊤ := by
+      apply (Ideal.eq_top_iff_one _).mpr
+      have hrel : (∑ j : Fin r, algebraMap A B (f j) * q (MvPolynomial.X j)) = 1 := by
+        have hz := Ideal.Quotient.eq_zero_iff_mem.mpr
+          (Ideal.subset_span (Set.mem_singleton
+            ((∑ j : Fin r, MvPolynomial.C (f j) * MvPolynomial.X j) - 1)))
+        change q ((∑ j : Fin r, MvPolynomial.C (f j) * MvPolynomial.X j) - 1) = 0 at hz
+        change (∑ j : Fin r, q (MvPolynomial.C (f j)) * q (MvPolynomial.X j)) = 1
+        simpa only [map_sub, map_sum, map_mul, map_one, sub_eq_zero] using hz
+      rw [← hrel]
+      exact Ideal.sum_mem _ fun j _ ↦ Ideal.mul_mem_right _ _
+        (Ideal.subset_span ⟨j, rfl⟩)
+    have hlocal (i : Fin r) : Smooth R (Localization.Away (algebraMap A B (f i))) := by
+      let Af := Localization.Away (f i)
+      let Bf := Localization.Away (algebraMap A B (f i))
+      let : Algebra Af Bf := (Localization.awayMap (algebraMap A B) (f i)).toAlgebra
+      have : Smooth R Af := smooth_localization_of_mem_singularIdeal R A (f i) (hf i)
+      obtain ⟨e, _⟩ := MvPolynomial.linearEquationLocalizationPolynomial A r f i
+      have : Smooth Af (MvPolynomial {j : Fin r // j ≠ i} Af) :=
+        ⟨inferInstance, inferInstance⟩
+      have : Smooth Af Bf := Smooth.of_equiv e
+      have : IsScalarTower R Af Bf := by
+        apply IsScalarTower.of_algebraMap_eq
+        intro x
+        change algebraMap R Bf x =
+          Localization.awayMap (algebraMap A B) (f i) (algebraMap R Af x)
+        rw [IsScalarTower.algebraMap_apply R A Af]
+        change algebraMap R Bf x =
+          IsLocalization.Away.map Af Bf (algebraMap A B) (f i)
+            (algebraMap A Af (algebraMap R A x))
+        simp only [IsLocalization.Away.map, IsLocalization.map_eq]
+        rw [← IsScalarTower.algebraMap_apply A B Bf,
+          ← IsScalarTower.algebraMap_apply R A Bf]
+      exact Smooth.comp R Af Bf
+    have : FinitePresentation R B :=
+      FinitePresentation.quotient (R := R) (A := MvPolynomial (Fin r) A)
+        (Submodule.fg_span_singleton _)
+    refine ⟨?_, inferInstance⟩
+    apply smoothLocus_eq_univ_iff.mp
+    apply Set.eq_univ_of_univ_subset
+    rw [← TopologicalSpace.Opens.coe_top,
+      ← PrimeSpectrum.iSup_basicOpen_eq_top_iff'.mpr hcover]
+    simp only [TopologicalSpace.Opens.coe_iSup, Set.iUnion_subset_iff]
+    intro b hb
+    obtain ⟨i, rfl⟩ := hb
+    exact basicOpen_subset_smoothLocus_iff_smooth.mpr (hlocal i)
+  · ext a
+    change ev (MvPolynomial.C a) = α a
+    simp [ev]
 
 end Algebra

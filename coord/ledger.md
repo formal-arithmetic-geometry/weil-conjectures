@@ -6930,3 +6930,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 08:53 L: merged deliver/M2/Sheaf.CategoryTheory.EquivalenceInternalModule (stage 3; reviewer PASS; first push; landing 20261012T085305-L-25664 (interface); batch 20261012T085205; modules 1; new nodes 0; change records: coord/changes/EquivalenceInternalModule-redundant-imports.md)
 - 08:53 L: merged deliver/M2/Sheaf.RingTheory.BijectiveQuotientMapPowOfFlat (stage 3; reviewer PASS; first push; landing 20261012T085305-L-25760 (proof); batch 20261012T085205; modules 1; new nodes 0)
 - 08:53 L: merged deliver/M2/Sheaf.RingTheory.FlatLocalDepthFormula (stage 3; reviewer PASS; first push; landing 20261012T085305-L-25866 (interface); batch 20261012T085205; modules 2; new nodes 1)
+- 08:53 L: merged deliver/M2/Sheaf.RingTheory.PopescuFinalSolve (stage 3; reviewer PASS; first push; landing 20261012T085306-L-25964 (proof); batch 20261012T085205; modules 1; new nodes 0)
