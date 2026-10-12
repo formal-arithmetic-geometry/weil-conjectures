@@ -12,20 +12,41 @@
  ],
  "proof": [
   {
-   "text": "The K-flat resolution diagram is cofinal and essentially constant; its limiting cone is absolute, so every postcomposition functor preserves the comparison.",
+   "text": "Every homotopy object admits a quasi-isomorphism from the image of a K-flat complex, by quotient_obj_surjective and exists_isKFlatResolution. Use the right calculus and two-out-of-three for quasi-isomorphisms.",
    "uses": [
-    "q3-ringed-space-tensor-pullback-left-derived"
+    "lem-pc-kflat-resolution",
+    "lem-pur-quasi-isos-saturated-triangulated"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For any postcomposition H, naturality of epsilon identifies F(s) between K-flat objects as inv(epsilon_X) followed by L(Qh(s)) followed by epsilon_X'. Thus F followed by H inverts these arrows. Resolving-class essential constancy, the Stacks-to-Kan bridge and Mathlib totalLeftDerived give a derived pair (R,alpha) for F followed by H, with alpha invertible on K-flat objects.",
+   "uses": [
+    "lem-pur-resolving-class-essential-constancy",
+    "lem-pur-left-derived-defined-pointwise-kan-bridge",
+    "lem-pur-total-left-derived-localization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The universal lift phi from L followed by H to R satisfies phi at Qh(X) followed by alpha_X equals H(epsilon_X). Both comparison components are invertible on K-flat objects, hence so is phi there. Naturality along a K-flat resolution makes phi invertible at every Qh(X), and essential surjectivity of Qh makes it invertible everywhere. Mathlib isLeftDerivedFunctor_iff_isIso_leftDerivedLift now proves the desired postcomposed universal property.",
+   "uses": [
+    "lem-pur-total-left-derived-localization"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "q3-ringed-space-tensor-pullback-left-derived"
+  "lem-pc-kflat-resolution",
+  "lem-pur-quasi-isos-saturated-triangulated",
+  "lem-pur-resolving-class-essential-constancy",
+  "lem-pur-left-derived-defined-pointwise-kan-bridge",
+  "lem-pur-total-left-derived-localization"
  ],
  "proof_origin": {
   "by": "document",
-  "document": "literature/stacks-project/cohomology.tex",
-  "place": "Tag 06XN"
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tag 06XN, dual resolving-class argument; Mathlib pointwise Kan-extension assembly and uniqueness. For concrete inverse image and extension of scalars, Tags 06YC, 06YJ and 06YT."
  },
  "status": "split",
  "created": {
@@ -89,11 +110,11 @@
  "reviewed_proof": {
   "date": "2026-10-12",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "Q3",
+  "reviewer": "X-59f29",
+  "group": "P3",
   "result": "pass",
-  "landing": "20261012T112848-L-770947",
+  "landing": "20261012T150956-L-2231869",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent Codex review: Both unchanged theorem signatures and proofs match their node records and dependencies; the delivery and sole direct importer compile cleanly, and axiom checks show only permitted axioms plus imported sorryAx."
  }
 }
