@@ -9,6 +9,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 public import Mathlib.AlgebraicGeometry.Morphisms.Etale
 public import Mathlib.AlgebraicGeometry.Pullbacks
 import Sheaf.AlgebraicGeometry.UnramifiedEtaleLocalDecomposition
+import Sheaf.AlgebraicGeometry.FiniteUnramifiedEtaleLocalReduction
 
 /-!
 # Étale-local decomposition of finite unramified morphisms
@@ -67,6 +68,7 @@ theorem exists_etale_closed_immersion_decomposition_of_finite_unramified
         Nonempty (IsColimit (Cofan.mk (pullback f g) ι)) ∧
         (∀ j, IsOpenImmersion (ι j) ∧ IsClosedImmersion (ι j)) ∧
         (∀ j, IsClosedImmersion (ι j ≫ pullback.snd f g)) := by
-  sorry
+  obtain ⟨n, pts, hpts, h⟩ := finite_decomposition_input f x
+  exact finite_coproduct_of_unramified_decomposition f x n pts hpts h
 
 end AlgebraicGeometry

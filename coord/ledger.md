@@ -6067,3 +6067,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 04:47 L: merged deliver/H2/Sheaf.RingTheory.EtaleRetractionFiniteProductLocal (stage 3; reviewer PASS; first push; landing 20261012T044745-L-2035601 (proof); batch 20261012T044734; modules 1; new nodes 0)
 - 04:47 L: merged deliver/J1/Sheaf.AlgebraicGeometry.ConstructibleEtaleModuleSupport (stage 3; reviewer PASS; first push; landing 20261012T044745-L-2035696 (proof); batch 20261012T044734; modules 1; new nodes 0)
 - 04:47 L: merged deliver/J1/Sheaf.CategoryTheory.CohomologyColimitSites (stage 3; reviewer PASS; first push; landing 20261012T044745-L-2035824 (interface); batch 20261012T044734; modules 3; new nodes 2)
+- 04:47 L: merged deliver/J2/Sheaf.AlgebraicGeometry.FiniteUnramifiedEtaleLocal (stage 3; reviewer PASS; first push; landing 20261012T044745-L-2035986 (interface); batch 20261012T044734; modules 2; new nodes 2)

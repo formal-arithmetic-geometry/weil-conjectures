@@ -1,0 +1,92 @@
+{
+ "kind": "lemma",
+ "source": {
+  "document": "literature/stacks-project/etale.tex",
+  "place": "Stacks Etale Morphisms, Lemma 04HJ, line 1758"
+ },
+ "status": "split",
+ "proof_origin": "worker reduction of existing blueprint proof",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FiniteUnramifiedEtaleLocal",
+  "date": "2026-10-12",
+  "group": "J2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": "lem-weil-pbc-finite-unramified-etale-local"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "id": "lem-weil-pbc-finite-unramified-etale-local-input",
+ "title": "Finite fibre decomposition input",
+ "statement": "Intermediate theorem stated in the Lean module; see declaration for the complete type.",
+ "proof": [
+  {
+   "text": "The result is the corresponding group of geometric shrinking and finite coproduct steps in the proof of Lemma 04HJ.",
+   "uses": [
+    "lem-weil-pbc-unramified-etale-local-decomposition"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-unramified-etale-local-decomposition"
+ ],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.FiniteUnramifiedEtaleLocalReduction",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteUnramifiedEtaleLocalReduction.lean",
+  "declaration": "AlgebraicGeometry.finite_decomposition_input",
+  "statement": "theorem finite_decomposition_input {X Y : Scheme.{u}} (f : Y ⟶ X) [IsFinite f] [LocallyOfFiniteType f] [IsOpenImmersion (pullback.diagonal f)] (x : X) : ∃ (n : ℕ) (pts : Fin n → Y), (∀ i, f.base (pts i) = x) ∧ (∃ (U : Scheme.{u}) (g : U ⟶ X) (u : U), Etale g ∧ g.base u = x ∧ ∃ (m : Fin n → ℕ) (W : (pullback f g).Opens) (V : (Σ i : Fin n, Fin (m i)) → (pullback f g).Opens), IsClosed (W : Set ↥(pullback f g)) ∧ (∀ a, IsClosed (V a : Set ↥(pullback f g))) ∧ Pairwise (fun a b ↦ Disjoint (V a) (V b)) ∧ (∀ a, Disjoint W (V a)) ∧ W ⊔ iSup V = ⊤ ∧ (∀ a, IsClosedImmersion ((V a).ι ≫ pullback.snd f g) ∧ u ∈ Set.range (((V a).ι ≫ pullback.snd f g).base)) ∧ (∀ p : ↥(pullback f g), p ∈ W → (pullback.snd f g).base p = u → ∀ i, (pullback.fst f g).base p ≠ pts i))",
+  "branch": "sheaf-dag",
+  "by": "J2",
+  "date": "2026-10-12"
+ },
+ "stmt_deps": [
+  "lem-weil-pbc-unramified-etale-local-decomposition"
+ ],
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "finite fibre enumeration and unramified etale local decomposition schemes",
+   "results": "No matching scheme-level theorem found.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "finite coproduct clopen decomposition scheme pullback closed immersion",
+   "results": "No matching theorem found.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicGeometry.IsClosedImmersion IsColimit Cofan",
+   "results": "No matching theorem found.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  }
+ ],
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J2",
+  "result": "pass",
+  "landing": "20261012T044745-L-2035986",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J2",
+  "result": "pass",
+  "landing": "20261012T044745-L-2035986",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
