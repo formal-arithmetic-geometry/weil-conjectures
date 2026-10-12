@@ -1,0 +1,133 @@
+{
+ "id": "lem-sc-structure-sheaf-cohomology-pullback-composition",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-structure-sheaf-cohomology-pullback-functorial",
+   "place": "decomposition of its identity/composition conjunct"
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Composition law for structure-sheaf cohomology pullback",
+ "statement": "For composable scheme morphisms f : X ⟶ Y and g : Y ⟶ Z and every n ≥ 0, structureSheafCohomologyPullback (f ≫ g) n = (structureSheafCohomologyPullback f n).comp (structureSheafCohomologyPullback g n).",
+ "stmt_deps": [
+  "def-sc-structure-sheaf-cohomology-pullback"
+ ],
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Section 01F7 equation-functorial and Remark 01FB"
+ },
+ "proof": [
+  {
+   "text": "Proof: Write Lf and Lg for the exact inverse images and Lfg for inverse image\nalong f ≫ g. There is a canonical comparison alpha : Lfg ≅ Lg ⋙ Lf, obtained from\nthe equality of composite direct images by uniqueness of left adjoints. Write af,\nag and afg for the adjoints of the additive structure maps, and cf, cg and cfg for\nthe constant-integer-sheaf comparisons Z_X → Lf(Z_Y), Z_Y → Lg(Z_Z) and\nZ_X → Lfg(Z_Z). Compatibility with the adjunction units and the formula for the\nstructure map of a composite give\n  afg = alpha at O_Z ; Lf(ag) ; af.\nThe construction of the constant comparison by uniqueness of left adjoints gives\n  cfg ; alpha at Z_Z = cf ; Lf(cg).\nFor x : Ext Z_Z O_Z n, unfold H.mapFunctor and H.map: the pullback of x is\ncfg ; Lfg(x) ; afg. Substitute the first equality and use naturality of alpha on\nExt to move alpha from the coefficient object to Z_Z. Substitute the second equality.\nFunctoriality of exact-functor maps on Ext and associativity of Yoneda products now\ngive cf ; Lf(cg ; Lg(x) ; ag) ; af, which is f*(g*(x)). This proves equality\npointwise, hence equality of additive homomorphisms. The argument includes degree\nzero, either identity morphism, and empty schemes without extra hypotheses.",
+   "uses": [
+    "def-sc-structure-sheaf-cohomology-pullback"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sc-structure-sheaf-cohomology-pullback"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Section 01F7 equation-functorial and Remark 01FB"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "structureSheafCohomologyPullback|kunneth",
+   "results": "0 hits: ; no exact match.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Sheaf cohomology pullback is functorial for composition and identities",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Pullback of structure sheaf cohomology along identity and composition of scheme morphisms",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules.pullbackComp, AlgebraicGeometry.Scheme.comp_app_assoc, AlgebraicGeometry.Scheme.Hom.map_appLE'_assoc, AlgebraicGeometry.Scheme.comp_appLE_assoc, AlgebraicGeometry.Scheme.Hom.comp_app_assoc, AlgebraicGeometry.Scheme.Hom.comp_appLE_assoc, AlgebraicGeometry.Scheme.Hom.appLE_comp_appLE_assoc, AlgebraicGeometry.Scheme.Hom.appLE_map'_assoc; no exact match.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"cohomology\"",
+   "results": "12 cochain HomComplex cohomology-class declarations; no scheme projection spanning or structure-sheaf pullback identity/composition result. Independent second-reader search.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exact functor induces Ext maps compatible with composition and identity and natural isomorphisms",
+   "results": "8 hits, including Ext.mapExactFunctor, Ext.mapExactFunctor_hom and Functor.mapExtAddHom; these are primitives, not the scheme identity/composition laws.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mapFunctor\"",
+   "results": "12 hits on Over, Under, bicategory and graded-object map functors; no exact scheme cohomology law.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "mapExactFunctor|sheafPullbackId|sheafPullbackComp",
+   "results": "Ext.Map and MapBijective contain exact-functor Ext primitives, including Yoneda-product compatibility. Local rg on both library roots finds only the original combined functoriality theorem and the definition, not separately proved component laws.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "status": "split",
+ "merged_into": null,
+ "import_flags": [],
+ "blueprint_kind": "statement",
+ "blueprint_order": null,
+ "blueprint_uses": [],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.StructureSheafCohomologyPullbackComposition",
+  "file": "lean/Sheaf/AlgebraicGeometry/StructureSheafCohomologyPullbackComposition.lean",
+  "declaration": "AlgebraicGeometry.Scheme.structureSheafCohomologyPullback_comp",
+  "statement": "theorem structureSheafCohomologyPullback_comp {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) (n : ℕ) : structureSheafCohomologyPullback (f ≫ g) n = (structureSheafCohomologyPullback f n).comp (structureSheafCohomologyPullback g n)",
+  "branch": "sheaf-dag",
+  "by": "M3",
+  "date": "2026-10-13"
+ },
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.StructureSheafCohomologyPullbackFunctorial",
+  "date": "2026-10-13",
+  "group": "M3"
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M3",
+  "result": "pass",
+  "landing": "20261012T202245-L-706354",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M3",
+  "result": "pass",
+  "landing": "20261012T202245-L-706354",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

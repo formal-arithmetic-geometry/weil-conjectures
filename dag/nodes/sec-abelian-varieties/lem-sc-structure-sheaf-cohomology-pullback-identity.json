@@ -1,0 +1,133 @@
+{
+ "id": "lem-sc-structure-sheaf-cohomology-pullback-identity",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-structure-sheaf-cohomology-pullback-functorial",
+   "place": "decomposition of its identity/composition conjunct"
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Identity law for structure-sheaf cohomology pullback",
+ "statement": "For every scheme X and n ≥ 0, structureSheafCohomologyPullback (𝟙 X) n = AddMonoidHom.id (Sheaf.H (structureSheafAb X) n).",
+ "stmt_deps": [
+  "def-sc-structure-sheaf-cohomology-pullback"
+ ],
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Section 01F7 equation-functorial and Remark 01FB"
+ },
+ "proof": [
+  {
+   "text": "Proof: Write L for inverse image along the identity and let alpha : L ≅ Id\nbe the unique left-adjoint comparison with identity direct image, compatible with the\nadjunction unit. The adjoint of the identity structure map is alpha at the additive\nstructure sheaf O. Write c : Z ≅ L(Z) for the constant-integer-sheaf comparison used\nin the definition. Its construction by uniqueness of left adjoints gives\nc.hom ≫ alpha.hom.app Z = id. Naturality of alpha on the derived category identifies\nL(x) followed by alpha at O with alpha at Z followed by x, for every Ext class\nx : Ext Z O n. Unfolding H.mapFunctor and H.map, pullback sends x to the Yoneda\ncomposite c.hom ; L(x) ; alpha at O. Substitution and cancellation give x.\nThus the additive homomorphism is the identity in every degree. In degree zero this\nis the usual identity map on global sections; the argument also applies to the empty\nscheme, where all the cohomology groups are zero.",
+   "uses": [
+    "def-sc-structure-sheaf-cohomology-pullback"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sc-structure-sheaf-cohomology-pullback"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Section 01F7 equation-functorial and Remark 01FB"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "structureSheafCohomologyPullback|kunneth",
+   "results": "0 hits: ; no exact match.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Sheaf cohomology pullback is functorial for composition and identities",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Pullback of structure sheaf cohomology along identity and composition of scheme morphisms",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules.pullbackComp, AlgebraicGeometry.Scheme.comp_app_assoc, AlgebraicGeometry.Scheme.Hom.map_appLE'_assoc, AlgebraicGeometry.Scheme.comp_appLE_assoc, AlgebraicGeometry.Scheme.Hom.comp_app_assoc, AlgebraicGeometry.Scheme.Hom.comp_appLE_assoc, AlgebraicGeometry.Scheme.Hom.appLE_comp_appLE_assoc, AlgebraicGeometry.Scheme.Hom.appLE_map'_assoc; no exact match.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"cohomology\"",
+   "results": "12 cochain HomComplex cohomology-class declarations; no scheme projection spanning or structure-sheaf pullback identity/composition result. Independent second-reader search.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exact functor induces Ext maps compatible with composition and identity and natural isomorphisms",
+   "results": "8 hits, including Ext.mapExactFunctor, Ext.mapExactFunctor_hom and Functor.mapExtAddHom; these are primitives, not the scheme identity/composition laws.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mapFunctor\"",
+   "results": "12 hits on Over, Under, bicategory and graded-object map functors; no exact scheme cohomology law.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "mapExactFunctor|sheafPullbackId|sheafPullbackComp",
+   "results": "Ext.Map and MapBijective contain exact-functor Ext primitives, including Yoneda-product compatibility. Local rg on both library roots finds only the original combined functoriality theorem and the definition, not separately proved component laws.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "status": "split",
+ "merged_into": null,
+ "import_flags": [],
+ "blueprint_kind": "statement",
+ "blueprint_order": null,
+ "blueprint_uses": [],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.StructureSheafCohomologyPullbackIdentity",
+  "file": "lean/Sheaf/AlgebraicGeometry/StructureSheafCohomologyPullbackIdentity.lean",
+  "declaration": "AlgebraicGeometry.Scheme.structureSheafCohomologyPullback_identity",
+  "statement": "theorem structureSheafCohomologyPullback_identity (X : Scheme.{u}) (n : ℕ) : structureSheafCohomologyPullback (𝟙 X) n = AddMonoidHom.id (Sheaf.H (structureSheafAb X) n)",
+  "branch": "sheaf-dag",
+  "by": "M3",
+  "date": "2026-10-13"
+ },
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.StructureSheafCohomologyPullbackFunctorial",
+  "date": "2026-10-13",
+  "group": "M3"
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M3",
+  "result": "pass",
+  "landing": "20261012T202245-L-706354",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M3",
+  "result": "pass",
+  "landing": "20261012T202245-L-706354",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

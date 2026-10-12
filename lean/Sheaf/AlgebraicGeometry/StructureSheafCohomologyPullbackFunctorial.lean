@@ -7,7 +7,8 @@ module
 
 public import Sheaf.AlgebraicGeometry.StructureSheafCohomologyPullback
 
-import Sheaf.CategoryTheory.SiteCohomologyPullback
+import Sheaf.AlgebraicGeometry.StructureSheafCohomologyPullbackIdentity
+import Sheaf.AlgebraicGeometry.StructureSheafCohomologyPullbackComposition
 
 /-!
 # Functoriality of pullback on structure sheaf cohomology
@@ -49,6 +50,11 @@ theorem structureSheafCohomologyPullback_functorial :
     (∀ {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) (n : ℕ),
       structureSheafCohomologyPullback (f ≫ g) n =
         (structureSheafCohomologyPullback f n).comp
-          (structureSheafCohomologyPullback g n)) := by sorry
+          (structureSheafCohomologyPullback g n)) := by
+  constructor
+  · intro X n
+    exact structureSheafCohomologyPullback_identity X n
+  · intro X Y Z f g n
+    exact structureSheafCohomologyPullback_comp f g n
 
 end AlgebraicGeometry.Scheme
