@@ -12,6 +12,7 @@ public import Mathlib.CategoryTheory.Monoidal.Tor
 public import Mathlib.RingTheory.Flat.Equalizer
 import Sheaf.Algebra.TorDimensionShiftFree
 import Sheaf.Paper.TorLongExactFirstVariable
+import Mathlib.Algebra.Homology.ShortComplex.ModuleCat
 
 /-!
 # Kernel base change for a two-term complex
@@ -57,7 +58,71 @@ theorem exists_twoTermKernelBaseChange_equiv
     ∃ e : (LinearMap.ker δ ⊗[B] C) ≃ₗ[B] LinearMap.ker (δ.rTensor C),
       ∀ x : LinearMap.ker δ ⊗[B] C,
         (e x : N₁ ⊗[B] C) = (LinearMap.ker δ).subtype.rTensor C x := by
-  sorry
+  let I := LinearMap.range δ
+  let j : I →ₗ[B] N₀ := I.subtype
+  let p : N₀ →ₗ[B] N₀ ⧸ I := I.mkQ
+  have hj : Function.Injective j := I.injective_subtype
+  have hp : Function.Surjective p := I.mkQ_surjective
+  have hjp : Function.Exact j p := LinearMap.exact_subtype_mkQ I
+  let S := ModuleCat.shortComplexOfCompEqZero j p (by ext x; simp [j, p])
+  have hS : S.ShortExact := ModuleCat.shortComplex_shortExact S hjp hj hp
+  have hI := (CategoryTheory.tor_dimension_shift_free S hS (ModuleCat.of B C)).2.mp hTor₂
+  obtain ⟨d₀, hd₀, _⟩ := CategoryTheory.tor_long_exact_first_variable j p hj hp hjp
+  have hjC : Function.Injective (j.rTensor C) := by
+    apply LinearMap.ker_eq_bot.mp
+    apply LinearMap.ker_eq_bot'.mpr
+    intro x hx
+    obtain ⟨t, ht⟩ := ((hd₀ C).2.1 x).mp hx
+    have ht0 : t = 0 := (ModuleCat.isZero_iff_subsingleton.mp hTor₁).elim _ _
+    simpa [ht0] using ht.symm
+  let q : N₁ →ₗ[B] I := δ.rangeRestrict
+  let k : LinearMap.ker δ →ₗ[B] N₁ := (LinearMap.ker δ).subtype
+  have hq : Function.Surjective q := by
+    rintro ⟨y, x, rfl⟩
+    exact ⟨x, rfl⟩
+  have hkq : Function.Exact k q := by
+    intro x
+    change q x = 0 ↔ ∃ y, k y = x
+    constructor
+    · intro hx
+      refine ⟨⟨x, ?_⟩, rfl⟩
+      exact congrArg Subtype.val hx
+    · rintro ⟨y, rfl⟩
+      apply Subtype.ext
+      exact y.property
+  obtain ⟨d₁, hd₁, _⟩ := CategoryTheory.tor_long_exact_first_variable
+    k q (LinearMap.ker δ).injective_subtype hq hkq
+  have hkC : Function.Injective (k.rTensor C) := by
+    apply LinearMap.ker_eq_bot.mp
+    apply LinearMap.ker_eq_bot'.mpr
+    intro x hx
+    obtain ⟨t, ht⟩ := ((hd₁ C).2.1 x).mp hx
+    have ht0 : t = 0 := (ModuleCat.isZero_iff_subsingleton.mp hI).elim _ _
+    simpa [ht0] using ht.symm
+  have hδ : δ = j ∘ₗ q := rfl
+  have hkδ : δ ∘ₗ k = 0 := by
+    ext x
+    exact x.property
+  let f : (LinearMap.ker δ ⊗[B] C) →ₗ[B] LinearMap.ker (δ.rTensor C) :=
+    LinearMap.codRestrict _ (k.rTensor C) (fun x => by
+      change (δ.rTensor C) (k.rTensor C x) = 0
+      change ((δ.rTensor C) ∘ₗ (k.rTensor C)) x = 0
+      rw [← LinearMap.rTensor_comp, hkδ]
+      simp)
+  have hf : Function.Bijective f := by
+    constructor
+    · intro x y hxy
+      exact hkC (congrArg Subtype.val hxy)
+    · intro y
+      have hy : q.rTensor C y.val = 0 := by
+        apply hjC
+        have hδC : δ.rTensor C = (j.rTensor C) ∘ₗ (q.rTensor C) := by
+          rw [hδ, LinearMap.rTensor_comp]
+        have heq : δ.rTensor C y.val = 0 := y.property
+        simpa only [hδC, LinearMap.comp_apply, map_zero] using heq
+      obtain ⟨x, hx⟩ := ((hd₁ C).2.2.1 y.val).mp hy
+      exact ⟨x, Subtype.ext hx⟩
+  exact ⟨LinearEquiv.ofBijective f hf, fun _ => rfl⟩
 
 /-- When `C` is a `B`-algebra, the same canonical kernel map is a `C`-linear isomorphism.
 Tensor symmetry identifies this map with the one in `exists_twoTermKernelBaseChange_equiv`.
@@ -77,6 +142,27 @@ theorem bijective_twoTermKernelBaseChange_algebra
     (hTor₂ : IsZero (((Tor' (ModuleCat B) 2).obj
       (ModuleCat.of B (N₀ ⧸ LinearMap.range δ))).obj (ModuleCat.of B C))) :
     Function.Bijective (δ.tensorKer C C) := by
-  sorry
+  obtain ⟨e, he⟩ := exists_twoTermKernelBaseChange_equiv B C N₁ N₀ δ hTor₁ hTor₂
+  have hkC : Function.Injective ((LinearMap.ker δ).subtype.rTensor C) := by
+    intro x y hxy
+    apply e.injective
+    apply Subtype.ext
+    simpa only [he] using hxy
+  constructor
+  · intro x y hxy
+    apply (TensorProduct.comm B C (LinearMap.ker δ)).injective
+    apply hkC
+    simpa only [LinearMap.rTensor_comm, LinearMap.tensorKer_coe] using
+      congrArg (fun z => TensorProduct.comm B C N₁ z.val) hxy
+  · intro y
+    let z : LinearMap.ker (δ.rTensor C) :=
+      ⟨TensorProduct.comm B C N₁ y.val, by
+        rw [LinearMap.mem_ker, LinearMap.rTensor_comm]
+        have hy : δ.lTensor C y.val = 0 := y.property
+        rw [hy, map_zero]⟩
+    refine ⟨TensorProduct.comm B (LinearMap.ker δ) C (e.symm z), ?_⟩
+    apply Subtype.ext
+    rw [LinearMap.tensorKer_coe, LinearMap.lTensor_comm, ← he, e.apply_symm_apply]
+    simp [z]
 
 end LinearMap

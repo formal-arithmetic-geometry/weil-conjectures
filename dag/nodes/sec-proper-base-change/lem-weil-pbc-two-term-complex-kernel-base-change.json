@@ -73,7 +73,7 @@
    }
   },
   {
-   "text": "Conclusion. Since $\\delta=j\\circ\\delta'$, functoriality of $-\\otimes_BC$ gives $\\delta\\otimes\\mathrm{id}_C=(j\\otimes1)\\circ(\\delta'\\otimes1)$, and as $j\\otimes1$ is injective (step 2), $\\ker(\\delta\\otimes\\mathrm{id}_C)=\\ker(\\delta'\\otimes1)$. The map of the statement is $\\iota\\otimes1$ with its target restricted to $\\ker(\\delta\\otimes\\mathrm{id}_C)$ (on generators $h\\otimes c\\mapsto\\iota(h)\\otimes c$); by step 4 it is injective and its image is $\\ker(\\delta'\\otimes1)=\\ker(\\delta\\otimes\\mathrm{id}_C)$, so it is a bijective $B$-linear map, hence an isomorphism of $B$-modules. If $C$ is a $B$-algebra, $\\iota\\otimes1$ commutes with the $C$-module structures $c'\\cdot(x\\otimes c)=x\\otimes c'c$ on both sides (checked on generators), so the map is $C$-linear.",
+   "text": "Conclusion. Since $\\delta=j\\circ\\delta'$, functoriality of $-\\otimes_BC$ gives $\\delta\\otimes\\mathrm{id}_C=(j\\otimes1)\\circ(\\delta'\\otimes1)$, and as $j\\otimes1$ is injective (step 2), $\\ker(\\delta\\otimes\\mathrm{id}_C)=\\ker(\\delta'\\otimes1)$. The map of the statement is $\\iota\\otimes1$ with its target restricted to $\\ker(\\delta\\otimes\\mathrm{id}_C)$ (on generators $h\\otimes c\\mapsto\\iota(h)\\otimes c$); by step 4 it is injective and its image is $\\ker(\\delta'\\otimes1)=\\ker(\\delta\\otimes\\mathrm{id}_C)$, so it is a bijective $B$-linear map, hence an isomorphism of $B$-modules. If $C$ is a $B$-algebra, $\\iota\\otimes1$ commutes with the $C$-module structures $c'\\cdot(x\\otimes c)=x\\otimes c'c$ on both sides (checked on generators), so the map is $C$-linear. In Lean, first form LinearEquiv.ofBijective from the explicitly constructed codRestrict of the kernel inclusion. For the algebra clause, use this equivalence and its coercion formula: tensor symmetry carries injectivity of the right-tensored inclusion to injectivity of tensorKer; to lift a target kernel element, commute its factors, apply the inverse equivalence, and commute back. LinearMap.tensorKer_coe and the tensor-commutation identities verify both claims.",
    "uses": [],
    "elementary": true,
    "source": {
@@ -185,5 +185,15 @@
   "group": "U1",
   "result": "pass",
   "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E3",
+  "result": "pass",
+  "landing": "20261012T184253-L-4001019",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
