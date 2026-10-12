@@ -1,0 +1,143 @@
+{
+ "id": "lem-sbc-prime-quotient-detection",
+ "kind": "statement",
+ "title": "Prime cyclic coefficient is a retract of a nonzero ring quotient",
+ "statement": "Let $\\Lambda$ be a commutative ring, $h:Y\\to X$ a morphism of schemes, $q\\in\\mathbf Z$, and $r$ a prime natural number which is not a unit in $\\Lambda$ [def-pc-scheme]. Write $P_r=\\operatorname{ULift}(\\mathbf F_r)$ and use the constant module sheaves on the small etale site [def-weil-pbc-etale-sheaves, def-weil-pbc-constant-sheaf]. If $R^qh_*\\underline{\\Lambda/(r)}=0$, then $R^qh_*\\underline{P_r/(r)}=0$, with higher direct images computed in the corresponding module-sheaf categories [def-weil-pbc-direct-image].",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 0F08 (proof, cyclic-coefficient reduction); Tag 03FD (lemma-cohomology-modules-abelian-agree); Tag 0739 (lemma-colimit), with the arbitrary-ring coefficient argument explicitly supplied here"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-pbc-direct-image",
+  "def-weil-pbc-constant-sheaf"
+ ],
+ "proof": [
+  {
+   "text": "If $1\\in(r)$, an expression $1=ar$ makes $r$ a unit. Therefore $V=\\Lambda/(r)$ is nonzero. Since $r$ is prime, $V$ is an $\\mathbf F_r$-vector space and its vector $1$ is nonzero. Mathlib Module.Projective.exists_dual_eq_one over the field $\\mathbf F_r$ supplies a linear functional $\\phi:V\\to\\mathbf F_r$ with $\\phi(1)=1$. The inclusion $a\\mapsto a\\cdot1$ and $\\phi$ give an additive retraction.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Apply the constant abelian sheaf functor and then abelian $R^qh_*$ to the retraction identities. Thus the degree-$q$ image for $\\mathbf F_r$ is a retract of the degree-$q$ image for $V$. A retract of zero is zero: its identity factors through the zero object and is therefore zero.",
+   "uses": [
+    "def-weil-pbc-direct-image",
+    "def-weil-pbc-constant-sheaf"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "By [lem-weil-pbc-constant-module-sheaf-underlying], the two constant module sheaves have underlying abelian sheaves $V$ and $\\mathbf F_r$. Resolve them by injective module sheaves. Their underlying abelian sheaves are direct-image acyclic by [lem-weil-pbc-injective-module-direct-image-acyclic], so the same pushforward complexes compute their underlying abelian higher direct images. Forgetting coefficients is faithful and exact, and hence reflects zero objects. Together with the fact that $(r)=0$ in $P_r$, the abelian vanishing from the previous step is exactly the desired module-sheaf vanishing. For negative degrees both sides vanish; degree zero is ordinary pushforward.",
+   "uses": [
+    "lem-weil-pbc-constant-module-sheaf-underlying",
+    "lem-weil-pbc-injective-module-direct-image-acyclic"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-pbc-direct-image",
+  "lem-weil-pbc-constant-module-sheaf-underlying",
+  "lem-weil-pbc-injective-module-direct-image-acyclic"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project, Tags 0F08 and 03FD",
+  "place": "Coefficient step in 0F08, made precise for arbitrary Lambda; abelian/module comparison in 03FD; vector-space retract for the quotient step"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A bounded torsion abelian group is a direct sum of finite cyclic groups",
+   "date": "2026-10-12",
+   "results": "8 actual hits: AddCommGroup.finite_of_fg_torsion, CommGroup.finite_of_fg_torsion, Module.finite_of_fg_torsion, AddMonoid.isTorsion_iff_isTorsion_int, isAddCyclic_of_card_nsmul_eq_zero_le, AddCircle.finite_torsion, AddMonoid.IsTorsion.torsionAddEquiv, is_add_torsion_of_finite",
+   "verdict": "No matching full coefficient-reduction or ring-quotient detection theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "IsZero",
+   "date": "2026-10-12",
+   "results": "loogle: unknown identifier 'IsZero'",
+   "verdict": "No matching full coefficient-reduction or ring-quotient detection theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "isInternal.*cyclic|torsion.*cyclic|higherDirectImage",
+   "date": "2026-10-12",
+   "results": "3 actual hits: Mathlib/NumberTheory/NumberField/CMField.lean, Mathlib/NumberTheory/NumberField/Units/Basic.lean, Mathlib/NumberTheory/NumberField/Units/Basic.lean",
+   "verdict": "No matching full coefficient-reduction or ring-quotient detection theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Nonzero higher direct image of a constant bounded torsion module is detected by a prime cyclic coefficient, and nonzero prime coefficients are detected by a nonzero vector space",
+   "date": "2026-10-12",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Higher direct image of a constant torsion sheaf vanishes if its prime cyclic constituents vanish",
+   "date": "2026-10-12",
+   "results": "8 actual hits: Rep.isZero_Tor_succ_of_projective, DerivedCategory.to_singleFunctor_obj_eq_zero_of_injective, DerivedCategory.isZero_of_isLE, CategoryTheory.Functor.isZero_rightDerived_obj_injective_succ, DerivedCategory.isZero_of_isGE, CategoryTheory.Sheaf.H, DerivedCategory.isGE_iff, DerivedCategory.from_singleFunctor_obj_eq_zero_of_projective",
+   "verdict": "No matching full coefficient-reduction or ring-quotient detection theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "IsZero.*(rightDerived|constantSheaf)|Preserves.*Coproduct",
+   "date": "2026-10-12",
+   "results": "25 actual hits: Mathlib/Algebra/Category/ModuleCat/Sheaf/Free.lean, Mathlib/Algebra/Homology/Monoidal.lean, Mathlib/Algebra/Homology/Monoidal.lean, Mathlib/CategoryTheory/ObjectProperty/FiniteProducts.lean, Mathlib/AlgebraicTopology/SimplicialObject/Split.lean, Mathlib/CategoryTheory/GradedObject/Braiding.lean, Mathlib/CategoryTheory/GradedObject/Braiding.lean, Mathlib/CategoryTheory/GradedObject/Monoidal.lean",
+   "verdict": "No matching full coefficient-reduction or ring-quotient detection theorem."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "WeilConjectures.SixFunctors.Etale.SmoothBaseChange.CurveTestDatum",
+  "date": "2026-10-12",
+  "group": "F1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-lem-bc-universal-test",
+   "place": "Proof, coefficient sentence: a module on the geometric point is reduced to cyclic coefficients; arbitrary-ring interpretation in CurveTestDatum.lean",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-lem-universal-datum",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.SmoothBaseChange.PrimeQuotientDetection",
+  "file": "lean/Sheaf/AlgebraicGeometry/SmoothBaseChange/PrimeQuotientDetection.lean",
+  "declaration": "AlgebraicGeometry.Etale.isZero_prime_cyclic_higherDirectImage_of_quotient",
+  "statement": "theorem isZero_prime_cyclic_higherDirectImage_of_quotient (Λ : Type (u + 1)) [CommRing Λ] {X Y : Scheme.{u}} (h : Y ⟶ X) (q : ℤ) (r : ℕ) (hr : r.Prime) (hunit : ¬ IsUnit (r : Λ)) (hzero : IsZero (higherDirectImage Λ h q (constantModSheaf Λ Y r))) : IsZero (higherDirectImage (ULift.{u + 1} (ZMod r)) h q (constantModSheaf (ULift.{u + 1} (ZMod r)) Y r))",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F1",
+  "result": "pass",
+  "landing": "20261012T040945-L-1687428",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F1",
+  "result": "pass",
+  "landing": "20261012T040945-L-1687428",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed after the tool's own checks (compiles, no new sorry without its node, no axiom, statements of existing declarations unchanged); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

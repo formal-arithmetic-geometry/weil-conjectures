@@ -5934,3 +5934,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 04:07 L: merged deliver/E2/WeilConjectures.AlgebraicGeometry.GroupScheme.Lie.Basic (stage 3; reviewer PASS; first push; landing 20261012T040707-L-1667276 (proof); modules 1; new nodes 0)
 - 04:07 L: merged deliver/Z2/lemma-nagata-final-descended-model (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.NagataFinalDescendedModelProperties AlgebraicGeometry.nagataFinalDescendedModel_properties); claim not held by Z2: not your claim
 - 04:09 L: merged deliver/F1/Sheaf.AlgebraicGeometry.AffineClosedEtaleNeighborhoodComparison (stage 3; reviewer PASS; first push; landing 20261012T040757-L-1674610 (interface); modules 2; new nodes 1)
+- 04:11 L: merged deliver/F1/WeilConjectures.SixFunctors.Etale.SmoothBaseChange.CurveTestDatum (stage 3; reviewer PASS; first push; landing 20261012T040945-L-1687428 (interface); modules 3; new nodes 2)

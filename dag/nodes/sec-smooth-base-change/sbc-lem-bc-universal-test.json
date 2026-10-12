@@ -24,24 +24,36 @@
  ],
  "proof": [
   {
-   "text": "By [sbc-lem-bc-failure-field] there are a morphism $S'\\to S$ with\n$S'$ affine, the base change $f':X'\\to S'$, a field $K$ with a morphism\n$T=\\operatorname{Spec}K\\to S'$, and a sheaf $\\mathcal F$ on $T$\nannihilated by $n$ for which the degree-$q$ base-change map of $f'$\nalong $T\\to S'$ is not an isomorphism. By\n[sbc-lem-bc-integral-surjective] (whose hypothesis, $\\mathrm{BC}(f,n,q-1)$\nuniversally, is part of ours) applied to\nthe base change $\\pi:\\operatorname{Spec}K'\\to\\operatorname{Spec}K$\nto an algebraic closure $K'$ of $K$ (an integral surjective morphism),\nwe may assume $K$ is algebraically closed. A sheaf of\n$\\mathbf Z/n\\mathbf Z$-modules on a geometric point is a direct sum of\ncopies of $\\mathbf Z/d\\mathbf Z$ for varying $d\\mid n$, so by the\nfinite direct-sum and retract case of the map, we may assume\n$\\mathcal F$ is constant with value $\\mathbf Z/d\\mathbf Z$ for some\n$d\\mid n$ (the cokernel of the base-change map\n$\\bigl(R^qh_*(c)\\bigr)$ decomposes accordingly). Finally, by\n[sbc-lem-bc-integral-base] applied to\n$\\pi:S''\\to S'$ the normalization of $S'$ in\n$\\operatorname{Spec}K$ (integral: the integral closure of the normal\ndomain $A'$ in $K$ is integral over $A'$, commutative algebra),\nwith $X''=X'\\times_{S'}S''$, we may replace $S'$ by $S''$, which is\naffine, integral, and normal with algebraically closed function field\n$K$; this is the datum of the statement.",
+   "text": "Choose the field failure using [sbc-lem-bc-failure-field] and pass to its algebraic closure using [sbc-lem-bc-integral-surjective]. Normalize the affine base in that algebraic closure using Etale.exists_normalization_of_isAlgClosed, and transport the failure to this integral base change using [sbc-lem-bc-integral-base]. This is the unchanged geometric part of Etale.exists_isPullback_not_isZero_higherDirectImage.",
    "uses": [
     "sbc-lem-bc-failure-field",
     "sbc-lem-bc-integral-surjective",
     "sbc-lem-bc-integral-base"
    ],
    "elementary": false
+  },
+  {
+   "text": "By [sbc-lem-bc-injectivity], in the unchanged existing proof the normalized base-change map is mono and is not an isomorphism, so its target is nonzero. For the coefficient step apply [lem-sbc-prime-cyclic-detection] to obtain a prime $r\\mid n$, not a unit in $\\Lambda$, with nonzero prime-cyclic higher direct image. If the image on $\\Lambda/(r)$ were zero, [lem-sbc-prime-quotient-detection] would make that prime-cyclic image zero. This contradiction proves the existing coefficient theorem with $d=r$. Finally assemble the datum as in the existing proof; all geometry and divisibility witnesses are unchanged.",
+   "uses": [
+    "lem-sbc-prime-cyclic-detection",
+    "lem-sbc-prime-quotient-detection",
+    "sbc-lem-bc-injectivity"
+   ],
+   "elementary": false
   }
  ],
  "proof_deps": [
+  "lem-sbc-prime-cyclic-detection",
+  "lem-sbc-prime-quotient-detection",
   "sbc-lem-bc-failure-field",
-  "sbc-lem-bc-integral-surjective",
-  "sbc-lem-bc-integral-base"
+  "sbc-lem-bc-injectivity",
+  "sbc-lem-bc-integral-base",
+  "sbc-lem-bc-integral-surjective"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-smooth-base-change/sk-lem-universal-datum/sbc-lem-bc-universal-test.md",
-  "place": "## Proof"
+  "document": "Stacks Project, Tag 0F08; CurveTestDatum.lean",
+  "place": "Existing geometric reduction retained; coefficient reduction through prime cyclic detection and the ring-quotient retract"
  },
  "mathlib_searches": [],
  "mathlib_match": null,
@@ -74,5 +86,15 @@
   }
  },
  "chapter": "sec-smooth-base-change",
- "unit": "sk-lem-universal-datum"
+ "unit": "sk-lem-universal-datum",
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F1",
+  "result": "pass",
+  "landing": "20261012T040945-L-1687428",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed after the tool's own checks (compiles, no new sorry without its node, no axiom, statements of existing declarations unchanged); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
 }

@@ -9,6 +9,8 @@ public import Mathlib
 public import WeilConjectures.Mathlib.FieldTheory.IsAlgClosed.Basic
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.FailureOverField
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.IntegralBaseChange
+import Sheaf.AlgebraicGeometry.SmoothBaseChange.PrimeCyclicDetection
+import Sheaf.AlgebraicGeometry.SmoothBaseChange.PrimeQuotientDetection
 
 /-!
 # The universal curve-test datum attached to a failure of base change
@@ -194,8 +196,13 @@ theorem Etale.exists_not_isZero_higherDirectImage_constantModSheaf {K : Type u} 
     [QuasiSeparated h] (n : ℕ) (hn : n ≠ 0) (hΛ : (n : Λ) = 0) (q : ℤ)
     (F : Sheaf (Spec (.of K)).smallEtaleTopology (ModuleCat.{u + 1} Λ))
     (hF : ¬ IsZero ((Etale.baseChangeTargetFunctor Λ e h q).obj F)) :
-    ∃ d, d ∣ n ∧ ¬ IsZero (Etale.higherDirectImage Λ h q (Etale.constantModSheaf Λ Y d)) :=
-  sorry
+    ∃ d, d ∣ n ∧ ¬ IsZero (Etale.higherDirectImage Λ h q (Etale.constantModSheaf Λ Y d)) := by
+  obtain ⟨r, hr, hrn, hunit, hnonzero⟩ :=
+    Etale.exists_prime_cyclic_higherDirectImage Λ e h n hn hΛ q F hF
+  refine ⟨r, hrn, ?_⟩
+  intro hzero
+  exact hnonzero
+    (Etale.isZero_prime_cyclic_higherDirectImage_of_quotient Λ h q r hr hunit hzero)
 
 /-- Blueprint `sbc-lem-bc-universal-test`: Universal curve-test datum for a failure.
 
