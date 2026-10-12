@@ -14,38 +14,38 @@
  ],
  "proof": [
   {
-   "text": "In each degree choose a splitting of the finite projective module P^n from a finite free A-module. Applying tilde preserves the splitting equations and identifies tilde(A^m) with the finite free structure-sheaf module by [lem-weil-pbc-affine-tilde-gamma-adjunction].",
-   "uses": [
-    "lem-weil-pbc-affine-tilde-gamma-adjunction"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Take U=Y, and K equal to termwise restriction of tilde(P) to the localized site. Restriction preserves the finite free modules and the splitting equations, and additive functors preserve zero objects, so K satisfies the given boundedness and retract definition of strictly perfect.",
+   "text": "Choose U = top and construct K by applying tilde termwise to P, then applying SheafOfModules.overFunctor termwise. Functor.map_isZero twice preserves the original bounds; K is an explicit complex, not a witness selected from an unproved existence theorem.",
    "uses": [
     "def-pc-perfect-complex"
    ],
    "elementary": true
   },
   {
-   "text": "Exact restriction preserves quasi-isomorphisms, so its derived functor agrees on Q(tilde(P)) with Q of the restricted complex; this gives the required isomorphism. For an empty spectrum the pointwise conclusion is vacuous.",
+   "text": "For each degree use Mathlib Module.Finite.exists_comp_eq_id_of_projective to obtain f:A^m -> P^n and g:P^n -> A^m with f composed with g equal to the identity. Reindex Pi.basisFun along Equiv.ulift.symm to identify A^m with finitely supported functions on ULift(Fin m). Map this isomorphism by tilde and restriction, use tildeFinsupp and SheafOfModules.mapFreeIso to identify the result with the finite free sheaf. Map g and f and compose with that isomorphism; functoriality and the split equation prove the retract equation.",
+   "uses": [
+    "lem-weil-pbc-affine-tilde-gamma-adjunction"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Use (SheafOfModules.overFunctor R top).mapDerivedCategoryFactors.app on the explicitly constructed tilde complex for the required derived-object isomorphism. Top contains every point, completing the original local statement without any split-off theorem.",
    "uses": [
     "def-pc-derived-category"
    ],
-   "elementary": false
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-affine-tilde-gamma-adjunction",
   "def-pc-perfect-complex",
+  "lem-weil-pbc-affine-tilde-gamma-adjunction",
   "def-pc-derived-category"
  ],
  "proof_origin": {
   "by": "worker",
-  "group": "P3",
-  "date": "2026-10-12",
+  "group": "G3",
+  "date": "2026-10-13",
   "document": "literature/stacks-project/perfect.tex",
-  "place": "Tag 08EB reverse implication, termwise restriction comparison"
+  "place": "Tag 08EB reverse implication; second reader completed the termwise retract and derived restriction construction using Mathlib"
  },
  "mathlib_searches": [
   {
@@ -123,10 +123,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "P3",
+  "group": "G3",
   "result": "pass",
-  "landing": "20261012T110314-L-620079",
-  "kind": "interface",
+  "landing": "20261012T184301-L-4003663",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
