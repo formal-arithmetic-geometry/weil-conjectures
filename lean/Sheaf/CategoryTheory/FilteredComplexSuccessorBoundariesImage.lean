@@ -7,6 +7,8 @@ module
 
 public import Mathlib.Algebra.Homology.ShortComplex.HomologicalComplex
 public import Sheaf.CategoryTheory.FilteredComplexPageDifferential
+import Sheaf.CategoryTheory.FilteredComplexSuccessorBoundariesImageLe
+import Sheaf.CategoryTheory.FilteredComplexSuccessorBoundariesImageGe
 import Sheaf.Algebra.Homology.FilteredComplexSubquotients
 import Sheaf.CategoryTheory.FilteredComplexBoundariesLECycles
 import Sheaf.CategoryTheory.Filtration
@@ -56,6 +58,9 @@ theorem filteredComplex_successor_boundaries_image
       (imageSubobject (D.page.toCycles ((ComplexShape.up' (r, 1 - r)).prev pq) pq)) =
       Subobject.mk (Subobject.ofLE _ _
         (filteredComplex_boundaries_le_cycles K F pq.1 (pq.1 + pq.2) (r + 1))) :=
-  by sorry
+  by
+    apply le_antisymm
+    · exact filteredComplex_successor_boundaries_image_le K F r hr D pq hZ f hf
+    · exact filteredComplex_successor_boundaries_image_ge K F r hr D pq hZ f hf
 
 end CategoryTheory

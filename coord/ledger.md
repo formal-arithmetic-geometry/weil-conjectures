@@ -9829,3 +9829,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 22:34 L: merged deliver/U2/Sheaf.AlgebraicGeometry.FlatBaseChangeResolutionAffineSections (stage 3; reviewer PASS; first push; landing 20261012T223421-L-1642526 (interface); batch 20261012T223357; modules 2; new nodes 1)
 - 22:34 L: merged deliver/U2/Sheaf.AlgebraicGeometry.SourceStageSectionsNaturality (stage 3; reviewer PASS; first push; landing 20261012T223422-L-1642649 (interface); batch 20261012T223357; modules 2; new nodes 1)
 - 22:34 L: merged deliver/U3/Sheaf.AlgebraicGeometry.IntegralHenselianClosedFibreSections (stage 3; reviewer PASS; first push; landing 20261012T223422-L-1642762 (proof); batch 20261012T223357; modules 1; new nodes 0)
+- 22:34 L: merged deliver/U3/Sheaf.CategoryTheory.FilteredComplexSuccessorBoundariesImage (stage 3; reviewer PASS; first push; landing 20261012T223422-L-1642868 (interface); batch 20261012T223357; modules 3; new nodes 2)
