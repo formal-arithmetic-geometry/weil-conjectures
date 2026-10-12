@@ -1,0 +1,192 @@
+{
+ "id": "lem-weil-pbc-normal-locus-associated-prime",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-normal-locus-open",
+   "place": "Steps 4--8: associated-prime witness below a nonnormal prime",
+   "via": [
+    "lem-weil-pbc-normal-locus-open"
+   ]
+  }
+ },
+ "kind": "statement",
+ "title": "Nonnormal primes contain nonnormal associated primes of the principal quotient",
+ "statement": "Let R be a Noetherian ring [def-weil-pbc-noetherian-ring] that is an integral domain, and f a nonzero element such that the localization R_f [def-weil-ring-localization-away] is a normal domain [def-weil-pbc-normal-ring]. For every prime p of Spec R [def-weil-affine-spectrum] for which R_p [def-weil-pbc-localization-at-prime] is not normal, there exists a prime q contained in p, associated to the R-module R/fR [def-weil-pbc-annihilator-associated-primes], whose localization R_q is not normal.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 0332 (lemma-openness-normal-locus), proof, Cases I and II"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-ring-localization-away",
+  "def-weil-pbc-normal-ring",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-affine-spectrum",
+  "def-weil-pbc-annihilator-associated-primes"
+ ],
+ "proof": [
+  {
+   "text": "Serre criterion applied to the nonnormal local domain R_p produces q contained in p where R_q fails S2 or R1, hence is nonnormal. Use the prime correspondence and localization-of-localization equivalence to identify the local rings.",
+   "uses": [
+    "lem-weil-pbc-localization-noetherian",
+    "lem-weil-pbc-primes-of-localization",
+    "lem-weil-pbc-localize-localization-at-prime",
+    "lem-weil-pbc-serre-criterion-normal",
+    "def-weil-pbc-serre-conditions-rk-sk"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 0332 (lemma-openness-normal-locus), proof, Cases I and II"
+   }
+  },
+  {
+   "text": "Normality is preserved by localization. Thus D(f) is normal and f belongs to q. Its image in R_q is nonzero and regular because R is a domain.",
+   "uses": [
+    "lem-weil-pbc-localization-of-localization",
+    "lem-weil-pbc-localization-normal-domain"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 0332 (lemma-openness-normal-locus), proof, Cases I and II"
+   }
+  },
+  {
+   "text": "Depth of R_q is at most one, from failure of S2 or from depth bounded by dimension at the associated prime zero. In dimension zero a local domain is a field, ruling out failure of regularity.",
+   "uses": [
+    "lem-weil-pbc-depth-le-dim-associated-prime",
+    "def-weil-pbc-krull-dimension-ring",
+    "def-weil-regular-scheme",
+    "def-weil-pbc-annihilator-associated-primes"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 0332 (lemma-openness-normal-locus), proof, Cases I and II"
+   }
+  },
+  {
+   "text": "Depth drops by one for the image of f, so R_q/fR_q is nonzero and has depth zero. If its maximal ideal were not associated, a regular element in that ideal would give a length-one regular sequence, a contradiction.",
+   "uses": [
+    "lem-weil-pbc-depth-drops-by-one",
+    "lem-weil-pbc-nonzerodivisor-if-maximal-not-associated",
+    "def-weil-pbc-regular-sequence",
+    "def-weil-pbc-depth"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 0332 (lemma-openness-normal-locus), proof, Cases I and II"
+   }
+  },
+  {
+   "text": "Identify the principal quotient with the localization of R/fR at q and descend the associated maximal ideal to q. This gives a nonnormal associated prime below p.",
+   "uses": [
+    "def-weil-pbc-module-localization",
+    "lem-weil-pbc-noetherian-associated-prime-from-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 0332 (lemma-openness-normal-locus), proof, Cases I and II"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-localization-noetherian",
+  "lem-weil-pbc-primes-of-localization",
+  "lem-weil-pbc-localize-localization-at-prime",
+  "lem-weil-pbc-serre-criterion-normal",
+  "def-weil-pbc-serre-conditions-rk-sk",
+  "lem-weil-pbc-localization-of-localization",
+  "lem-weil-pbc-localization-normal-domain",
+  "lem-weil-pbc-depth-le-dim-associated-prime",
+  "def-weil-pbc-krull-dimension-ring",
+  "def-weil-regular-scheme",
+  "def-weil-pbc-annihilator-associated-primes",
+  "lem-weil-pbc-depth-drops-by-one",
+  "lem-weil-pbc-nonzerodivisor-if-maximal-not-associated",
+  "def-weil-pbc-regular-sequence",
+  "def-weil-pbc-depth",
+  "def-weil-pbc-module-localization",
+  "lem-weil-pbc-noetherian-associated-prime-from-localization"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 0332 (lemma-openness-normal-locus), proof, Cases I and II"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "normal.*locus|locus.*normal|associatedPrimes.*finite",
+   "results": "Mathlib/RingTheory/Regular/LinearMap.lean, Mathlib/RingTheory/Ideal/AssociatedPrime/Localization.lean, Mathlib/RingTheory/Ideal/AssociatedPrime/Finiteness.lean, Mathlib/RingTheory/Ideal/AssociatedPrime/Finiteness.lean, Mathlib/RingTheory/Ideal/AssociatedPrime/Finiteness.lean, Mathlib/RingTheory/Ideal/AssociatedPrime/Finiteness.lean, Mathlib/RingTheory/Ideal/AssociatedPrime/Finiteness.lean",
+   "date": "2026-10-13",
+   "verdict": "no match: no nonnormal associated-prime witness theorem; localization and finiteness lemmas used where applicable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A nonnormal prime of a Noetherian domain lies above an associated prime of the quotient by a nonzero element whose localization is normal",
+   "results": "IsLocalization.OverPrime.mem_normalizedFactors_of_isPrime, Ideal.IsMaximal.mem_associatedPrimes_of_isFractionRing, Ideal.mem_primesOver_iff_mem_normalizedFactors, Ideal.exists_not_mem_forall_mem_of_ne_of_liesOver, Module.associatedPrimes.mem_associatePrimes_of_comap_mem_associatePrimes_isLocalizedModule, Module.associatedPrimes.preimage_comap_associatedPrimes_eq_associatedPrimes_of_isLocalizedModule, Module.associatedPrimes.comap_mem_associatedPrimes_of_mem_associatedPrimes_of_isLocalizedModule_of_fg, Module.associatedPrimes.mem_associatePrimes_localizedModule_atPrime_of_mem_associated_primes",
+   "date": "2026-10-13",
+   "verdict": "no match: no nonnormal associated-prime witness theorem; localization and finiteness lemmas used where applicable"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsIntegrallyClosed, Localization.AtPrime",
+   "results": "IsIntegrallyClosed.of_localization_maximal, IsIntegrallyClosed.of_localization",
+   "date": "2026-10-13",
+   "verdict": "no match: no nonnormal associated-prime witness theorem; localization and finiteness lemmas used where applicable"
+  },
+  {
+   "tool": "leansearch",
+   "query": "If a prime localization of a Noetherian domain is not integrally closed, it contains a nonnormal associated prime of a principal quotient R/fR when R localized away from f is integrally closed",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.NormalLocusOpen",
+  "date": "2026-10-13",
+  "group": "Q2"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.NormalLocusAssociatedPrime",
+  "file": "lean/Sheaf/Paper/NormalLocusAssociatedPrime.lean",
+  "declaration": "AlgebraicGeometry.exists_nonNormal_associatedPrime_le",
+  "statement": "theorem exists_nonNormal_associatedPrime_le\n    {R : Type u} [CommRing R] [IsNoetherianRing R] [IsDomain R]\n    (f : R) (hf : f ≠ 0)\n    (hf_normal : IsDomain (Localization.Away f) ∧\n      IsIntegrallyClosed (Localization.Away f))\n    (p : PrimeSpectrum R)\n    (hp : ¬ (IsDomain (Localization.AtPrime p.asIdeal) ∧\n      IsIntegrallyClosed (Localization.AtPrime p.asIdeal))) :\n    ∃ q : PrimeSpectrum R,\n      q.asIdeal ∈ associatedPrimes R (R ⧸ Ideal.span {f}) ∧\n      q.asIdeal ≤ p.asIdeal ∧\n      ¬ (IsDomain (Localization.AtPrime q.asIdeal) ∧\n        IsIntegrallyClosed (Localization.AtPrime q.asIdeal))",
+  "branch": "sheaf-dag",
+  "by": "Q2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q2",
+  "result": "pass",
+  "landing": "20261012T235556-L-2201941",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q2",
+  "result": "pass",
+  "landing": "20261012T235556-L-2201941",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

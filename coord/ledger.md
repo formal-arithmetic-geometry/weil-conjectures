@@ -10181,3 +10181,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 23:55 L: merged deliver/K2/Sheaf.RingTheory.PopescuDesingularizationInvertedQuotient (stage 3; reviewer PASS; first push; landing 20261012T235555-L-2201559 (proof); batch 20261012T235552; modules 1; new nodes 0)
 - 23:55 L: merged deliver/N4/Sheaf.AlgebraicGeometry.CoherentFormalModulesAffineComplete (stage 3; reviewer PASS; first push; landing 20261012T235555-L-2201710 (interface); batch 20261012T235552; modules 2; new nodes 2)
 - 23:55 L: merged deliver/P3/Sheaf.RepresentationTheory.DiscreteResolutionInhomogeneousCohomology (stage 3; reviewer PASS; after a return; landing 20261012T235556-L-2201828 (interface); batch 20261012T235552; modules 3; new nodes 2)
+- 23:55 L: merged deliver/Q2/Sheaf.Paper.NormalLocusOpen (stage 3; reviewer PASS; first push; landing 20261012T235556-L-2201941 (interface); batch 20261012T235552; modules 2; new nodes 1)

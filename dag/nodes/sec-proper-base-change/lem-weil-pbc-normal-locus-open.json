@@ -33,162 +33,37 @@
  ],
  "proof": [
   {
-   "text": "Notation. Let $K$ be the fraction field of the domain $R$. For a prime $\\mathfrak q\\subset R$ the map $R\\to R_{\\mathfrak q}$ is injective ($r/1=0$ means $ur=0$ for some $u\\notin\\mathfrak q$, so $r=0$), so $R_{\\mathfrak q}$ is a domain, $\\neq0$, a local ring with maximal ideal $\\mathfrak qR_{\\mathfrak q}$ [def-weil-pbc-localization-at-prime], and Noetherian by [lem-weil-pbc-localization-noetherian] (localization of the Noetherian ring $R$ at $R\\setminus\\mathfrak q$). The same holds for $R_f$ [def-weil-ring-localization-away] (with $f\\neq0$ in the domain $R$). Regularity, Krull dimension and depth of a local ring are invariant under ring isomorphisms, and an isomorphism of rings carries normal domains to normal domains [def-weil-pbc-normal-ring]; we use this tacitly below.",
+   "text": "Apply the associated-prime witness theorem to each nonnormal prime. The set E of associated primes of R/fR with nonnormal localizations is finite by associatedPrimes.finite (preimage under the injective PrimeSpectrum.asIdeal).",
    "uses": [
-    "def-weil-pbc-localization-at-prime",
-    "lem-weil-pbc-localization-noetherian",
-    "def-weil-ring-localization-away",
-    "def-weil-pbc-normal-ring",
-    "def-weil-pbc-noetherian-ring"
+    "lem-weil-pbc-normal-locus-associated-prime",
+    "lem-weil-pbc-noetherian-associated-primes-finite"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, Lemma Tag 0332, statement (lines 45442-45451): R Noetherian domain, R_f normal"
-   }
+   "elementary": false
   },
   {
-   "text": "$D(f)\\subseteq U$ ('It is clear that the standard open $D(f)$ is contained in $U$'). Let $\\mathfrak p$ be a prime with $f\\notin\\mathfrak p$. Let $\\varphi:R\\to R_f$ be the localization at $M=\\{1,f,f^2,\\dots\\}$ and $N=\\varphi(R\\setminus\\mathfrak p)\\subseteq R_f$, a multiplicative subset not containing $0$ (since $\\varphi$ is injective and $0\\notin R\\setminus\\mathfrak p$). By [lem-weil-pbc-localization-of-localization] (1), the localization $T=N^{-1}R_f$ is a localization of $R$ at $U'=\\{x\\in R:\\varphi(x)=\\varphi(s)\\varphi(f^m)\\text{ for some }s\\notin\\mathfrak p,\\ m\\ge0\\}$. Since $\\varphi$ is injective, $x\\in U'$ means $x=sf^m$ with $s\\notin\\mathfrak p$, and as $f\\notin\\mathfrak p$ and $\\mathfrak p$ is prime this says exactly $x\\notin\\mathfrak p$; so $U'=R\\setminus\\mathfrak p$ and $T\\cong R_{\\mathfrak p}$ as $R$-algebras. Since $R_f$ is a normal domain by hypothesis, [lem-weil-pbc-localization-normal-domain] applied to $R_f$ and $N$ gives that $T\\cong R_{\\mathfrak p}$ is a normal domain, i.e. $\\mathfrak p\\in U$. Contrapositively: if $\\mathfrak q$ is a prime with $R_{\\mathfrak q}$ not a normal domain, then $f\\in\\mathfrak q$.",
+   "text": "If q is contained in p, realize R_q as a localization of R_p using the inclusion of prime complements. Normality of R_p implies normality of R_q by isIntegrallyClosed_of_isLocalization. Thus every prime above an element of E is nonnormal.",
    "uses": [
     "lem-weil-pbc-localization-of-localization",
-    "lem-weil-pbc-localization-normal-domain",
-    "def-weil-ring-localization-away",
-    "def-weil-pbc-localization-at-prime"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, Lemma Tag 0332, proof, line 45454: 'It is clear that the standard open D(f) is contained in U'; and line 45467: 'hence f in q'"
-   }
-  },
-  {
-   "text": "Non-normality goes up along specialization. Let $\\mathfrak q\\subseteq\\mathfrak p$ be primes of $R$ with $R_{\\mathfrak q}$ not a normal domain; then $R_{\\mathfrak p}$ is not a normal domain. Indeed, put $A=R_{\\mathfrak p}$ and $Q'=\\mathfrak qA$, a prime of $A$ whose contraction to $R$ is $\\mathfrak q$ by [lem-weil-pbc-primes-of-localization] (1). By [lem-weil-pbc-localize-localization-at-prime] (1) the natural map $R_{\\mathfrak q}\\to A_{Q'}$ is an isomorphism. If $A$ were a normal domain, then $A_{Q'}$, the localization of $A$ at the multiplicative subset $A\\setminus Q'\\not\\ni0$, would be a normal domain by [lem-weil-pbc-localization-normal-domain], hence so would $R_{\\mathfrak q}$, a contradiction.",
-   "uses": [
-    "lem-weil-pbc-primes-of-localization",
-    "lem-weil-pbc-localize-localization-at-prime",
     "lem-weil-pbc-localization-normal-domain"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, Lemma Tag 0332, proof, lines 45474-45478: the equality Spec(R) minus U = union of V(q), q in E (the inclusion of the union in the complement, left implicit in the source)"
-   }
+   "elementary": false
   },
   {
-   "text": "Serre's criterion at a non-normal point. Let $\\mathfrak p\\notin U$ and $A=R_{\\mathfrak p}$, a Noetherian local domain (step 1). First, $A$ is not a normal ring [def-weil-pbc-normal-ring]: otherwise its localization $A_{\\mathfrak pA}$ at the prime $\\mathfrak pA$ would be a normal domain, while $R_{\\mathfrak p}\\to A_{\\mathfrak pA}$ is an isomorphism by [lem-weil-pbc-localize-localization-at-prime] (1) (with $Q'=\\mathfrak pA$, whose contraction is $\\mathfrak p$ by [lem-weil-pbc-primes-of-localization] (1)), so $R_{\\mathfrak p}$ would be a normal domain. By Serre's criterion [lem-weil-pbc-serre-criterion-normal] for the Noetherian ring $A$, $A$ fails $(R_1)$ or $(S_2)$ [def-weil-pbc-serre-conditions-rk-sk]: there is a prime $Q'\\subset A$ such that either (Case II) $\\dim(A_{Q'})\\le1$ and $A_{Q'}$ is not a regular local ring [def-weil-regular-scheme], or (Case I) $\\operatorname{depth}(A_{Q'})<\\min\\{2,\\dim(A_{Q'})\\}$ [def-weil-pbc-depth], [def-weil-pbc-krull-dimension-ring]. Let $\\mathfrak q\\subseteq\\mathfrak p$ be the contraction of $Q'$ to $R$ [lem-weil-pbc-primes-of-localization] (1); by [lem-weil-pbc-localize-localization-at-prime] (1), $B:=R_{\\mathfrak q}\\cong A_{Q'}$, so $B$ is a Noetherian local domain with maximal ideal $\\mathfrak qB$ in Case I or Case II.",
-   "uses": [
-    "def-weil-pbc-normal-ring",
-    "lem-weil-pbc-localize-localization-at-prime",
-    "lem-weil-pbc-primes-of-localization",
-    "lem-weil-pbc-serre-criterion-normal",
-    "def-weil-pbc-serre-conditions-rk-sk",
-    "def-weil-regular-scheme",
-    "def-weil-pbc-depth",
-    "def-weil-pbc-krull-dimension-ring"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, Lemma Tag 0332, proof, lines 45455-45464: 'By Serre's criterion Lemma [031S] we see that p not in U implies that for some q contained in p we have either Case I ... or Case II ...'"
-   }
-  },
-  {
-   "text": "$B=R_{\\mathfrak q}$ is not a normal domain, hence $f\\in\\mathfrak q$ ('This in particular also means that $R_{\\mathfrak q}$ is not normal, and hence $f\\in\\mathfrak q$'). Suppose $B$ were a normal domain. Then for every prime $P\\subset B$ the localization $B_P$ is a normal domain by [lem-weil-pbc-localization-normal-domain] (multiplicative subset $B\\setminus P\\not\\ni0$), so $B$ is a normal ring [def-weil-pbc-normal-ring], Noetherian by step 1, and has $(R_1)$ and $(S_2)$ by [lem-weil-pbc-serre-criterion-normal]. Apply these at the maximal ideal $\\mathfrak qB$: by [lem-weil-pbc-localize-localization-at-prime] (1) (for $A=B=R_{\\mathfrak q}$ and $Q'=\\mathfrak qB$, contraction $\\mathfrak q$) $B\\cong B_{\\mathfrak qB}$, so $B$ is regular if $\\dim B\\le1$, and $\\operatorname{depth}B\\ge\\min\\{2,\\dim B\\}$ [def-weil-pbc-serre-conditions-rk-sk]; this contradicts both Case I and Case II of step 4. So $B$ is not a normal domain, and by step 2, $f\\in\\mathfrak q$; thus $f/1$ lies in the maximal ideal $\\mathfrak qB$ and is nonzero (step 1), hence is a nonzerodivisor on the domain $B$.",
-   "uses": [
-    "lem-weil-pbc-localization-normal-domain",
-    "def-weil-pbc-normal-ring",
-    "lem-weil-pbc-serre-criterion-normal",
-    "lem-weil-pbc-localize-localization-at-prime",
-    "def-weil-pbc-serre-conditions-rk-sk"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, Lemma Tag 0332, proof, lines 45466-45467"
-   }
-  },
-  {
-   "text": "$\\operatorname{depth}(B)\\le1$. In Case I, $\\operatorname{depth}(B)<\\min\\{2,\\dim B\\}\\le2$, so $\\operatorname{depth}(B)\\le1$. In Case II, $(0)$ is an associated prime of the finite $B$-module $B$: $B\\neq0$ is a domain, so $\\operatorname{Ann}_B(1)=(0)$ and $(0)$ is prime. By [lem-weil-pbc-depth-le-dim-associated-prime] (Noetherian local ring $B$, $M=B$, $\\mathfrak p=(0)$), $\\operatorname{depth}(B)\\le\\dim(B/(0))=\\dim B\\le1$.",
-   "uses": [
-    "lem-weil-pbc-depth-le-dim-associated-prime",
-    "def-weil-finitely-generated-module"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, Lemma Tag 0332, proof, lines 45460-45464 (Cases I and II); the depth bound in Case II is what makes 'q is an associated prime of R/fR of height 1' (line 45471) true"
-   }
-  },
-  {
-   "text": "$\\mathfrak qB$ is an associated prime of $B/fB$ ('$\\operatorname{depth}(R_{\\mathfrak q})=\\operatorname{depth}(R_{\\mathfrak q}/fR_{\\mathfrak q})+1$'). By [lem-weil-pbc-depth-drops-by-one] applied to the Noetherian local ring $B$, the finite module $M=B\\neq0$ and the nonzerodivisor $f/1\\in\\mathfrak qB$ (step 5): $B/fB\\neq0$ and $\\operatorname{depth}(B/fB)=\\operatorname{depth}(B)-1\\le0$ (step 6), so $\\operatorname{depth}(B/fB)=0$. Suppose $\\mathfrak qB$ were not an associated prime of the finite $B$-module $B/fB$ (generated by the class of $1$). By [lem-weil-pbc-nonzerodivisor-if-maximal-not-associated] there is $x\\in\\mathfrak qB$ which is a nonzerodivisor on $B/fB$; and $(B/fB)/x(B/fB)=B/(f,x)B\\neq0$ since $(f,x)B\\subseteq\\mathfrak qB$. So $x$ is a $B/fB$-regular sequence of length $1$ in $\\mathfrak qB$ [def-weil-pbc-regular-sequence], and $\\operatorname{depth}(B/fB)\\ge1$ by [def-weil-pbc-depth], a contradiction. Hence there is $w\\in B/fB$ with $\\operatorname{Ann}_B(w)=\\mathfrak qB$.",
-   "uses": [
-    "lem-weil-pbc-depth-drops-by-one",
-    "lem-weil-pbc-nonzerodivisor-if-maximal-not-associated",
-    "def-weil-pbc-regular-sequence",
-    "def-weil-pbc-depth",
-    "def-weil-finitely-generated-module"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, Lemma Tag 0332, proof, lines 45467-45471: 'In case I we see that depth(R_q) = depth(R_q/fR_q) + 1. Hence such a prime q is the same thing as an embedded associated prime of R/fR. In case II q is an associated prime of R/fR of height 1'"
-   }
-  },
-  {
-   "text": "$\\mathfrak q$ is an associated prime of the $R$-module $R/fR$. The localization $(R/fR)_{\\mathfrak q}$ of the $R$-module $R/fR$ at $R\\setminus\\mathfrak q$ [def-weil-pbc-module-localization] is identified with the $R_{\\mathfrak q}$-module $B/fB$ by $\\bar r/s\\mapsto\\overline{r/s}$ (well defined and bijective: $\\bar r/s=0$ iff $ur\\in fR$ for some $u\\notin\\mathfrak q$, iff $r/s\\in fB$). By step 7 there is $w\\in(R/fR)_{\\mathfrak q}$ with $\\operatorname{Ann}_{R_{\\mathfrak q}}(w)=\\mathfrak qR_{\\mathfrak q}$, so by [lem-weil-pbc-noetherian-associated-prime-from-localization] ($R$ Noetherian, $M=R/fR$) there is $z\\in R/fR$ with $\\operatorname{Ann}_R(z)=\\mathfrak q$.",
-   "uses": [
-    "def-weil-pbc-module-localization",
-    "lem-weil-pbc-noetherian-associated-prime-from-localization"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, Lemma Tag 0332, proof, lines 45469-45471 (associated primes of R/fR), with Lemma Tag 0310 (lemma-associated-primes-localize) for passing from R_q to R"
-   }
-  },
-  {
-   "text": "Conclusion ('Thus there is a finite set $E$ of such primes $\\mathfrak q$ (see Lemma 00LC) and $\\operatorname{Spec}(R)\\setminus U=\\bigcup_{\\mathfrak q\\in E}V(\\mathfrak q)$'). Let $E$ be the set of primes $\\mathfrak q\\subset R$ which are associated primes of the $R$-module $R/fR$ and for which $R_{\\mathfrak q}$ is not a normal domain. $R/fR$ is a finite $R$-module (generated by the class of $1$) [def-weil-finitely-generated-module], so its set of associated primes is finite by [lem-weil-pbc-noetherian-associated-primes-finite], and $E$ is finite. If $\\mathfrak p\\notin U$, steps 4, 5 and 8 give $\\mathfrak q\\in E$ with $\\mathfrak q\\subseteq\\mathfrak p$, i.e. $\\mathfrak p\\in V(\\mathfrak q)$. Conversely if $\\mathfrak p\\in V(\\mathfrak q)$ with $\\mathfrak q\\in E$, then $\\mathfrak q\\subseteq\\mathfrak p$ and $R_{\\mathfrak q}$ is not a normal domain, so $\\mathfrak p\\notin U$ by step 3. Hence $\\operatorname{Spec}(R)\\setminus U=\\bigcup_{\\mathfrak q\\in E}V(\\mathfrak q)$, a finite union of the sets $V(\\mathfrak q)=\\{\\mathfrak p:\\mathfrak q\\subseteq\\mathfrak p\\}$, which are closed in the Zariski topology of $\\operatorname{Spec}R$ [def-weil-affine-spectrum]. A finite union of closed sets is closed, so $U$ is open.",
-   "uses": [
-    "def-weil-finitely-generated-module",
-    "lem-weil-pbc-noetherian-associated-primes-finite",
-    "def-weil-affine-spectrum"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, Lemma Tag 0332, proof, lines 45471-45479, with Lemma Tag 00LC (lemma-finite-ass, line 15176)"
-   }
+   "text": "The two inclusions identify the complement with the union of V(q) over q in E. Each zero locus is closed; Set.Finite.isClosed_biUnion makes this finite union closed, so its complement is open.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-localization-at-prime",
-  "lem-weil-pbc-localization-noetherian",
-  "def-weil-ring-localization-away",
-  "def-weil-pbc-normal-ring",
-  "def-weil-pbc-noetherian-ring",
-  "lem-weil-pbc-localization-of-localization",
-  "lem-weil-pbc-localization-normal-domain",
-  "lem-weil-pbc-primes-of-localization",
-  "lem-weil-pbc-localize-localization-at-prime",
-  "lem-weil-pbc-serre-criterion-normal",
-  "def-weil-pbc-serre-conditions-rk-sk",
-  "def-weil-regular-scheme",
-  "def-weil-pbc-depth",
-  "def-weil-pbc-krull-dimension-ring",
-  "lem-weil-pbc-depth-le-dim-associated-prime",
-  "def-weil-finitely-generated-module",
-  "lem-weil-pbc-depth-drops-by-one",
-  "lem-weil-pbc-nonzerodivisor-if-maximal-not-associated",
-  "def-weil-pbc-regular-sequence",
-  "def-weil-pbc-module-localization",
-  "lem-weil-pbc-noetherian-associated-prime-from-localization",
+  "lem-weil-pbc-normal-locus-associated-prime",
   "lem-weil-pbc-noetherian-associated-primes-finite",
-  "def-weil-affine-spectrum"
+  "lem-weil-pbc-localization-of-localization",
+  "lem-weil-pbc-localization-normal-domain"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/algebra.tex",
-  "place": "Algebra, Lemma Tag 0332 (lemma-openness-normal-locus), proof, lines 45453-45480; Serre's criterion Tag 031S (lemma-criterion-normal, line 43977), finiteness of associated primes Tag 00LC (lemma-finite-ass, line 15176)"
+  "place": "Algebra, Lemma Tag 0332, proof: associated-prime detection followed by finite union; specialization via localization of normal domains"
  },
  "mathlib_searches": [
   {
@@ -267,5 +142,15 @@
   "group": "J1",
   "result": "pass",
   "note": "R: CommRing+IsNoetherianRing+IsDomain; f≠0; R_f normal domain inline IsDomain∧IsIntegrallyClosed (Localization.Away f); U = {p : PrimeSpectrum R | IsDomain∧IsIntegrallyClosed (Localization.AtPrime p.asIdeal)}; IsOpen in Zariski topology; names #check'd outside AlgebraicGeometry ns; no dup in lean/Sheaf; only item files in diff"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q2",
+  "result": "pass",
+  "landing": "20261012T235556-L-2201941",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
