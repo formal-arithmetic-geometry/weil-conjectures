@@ -40,4 +40,4 @@ def IsN2 (R : Type u) (K : Type v) [CommRing R] [IsDomain R] [Field K]
 (Stacks, Tag 032F) (blueprint: def-weil-pbc-japanese-domain). -/
 theorem isN1_of_isN2 (R : Type u) (K : Type v) [CommRing R] [IsDomain R]
     [Field K] [Algebra R K] [IsFractionRing R K] (h : IsN2 R K) : IsN1 R K := by
-  sorry
+  exact h K
