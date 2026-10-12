@@ -19,24 +19,51 @@
  "stmt_deps": [],
  "proof": [
   {
-   "text": "Apply the finite torsion bound and cyclic-module comparison from the parent node, then apply the Noetherian subobject/cokernel theorem and transport constructibility across the induced isomorphism.",
+   "text": "Install P.isCurve and apply isNoetherian_of_locallyOfFiniteType to P.toSpec; the curve is Noetherian.",
    "uses": [
-    "lem-weil-pbc-curve-constructible-sub-quotient"
+    "lem-weil-pbc-finite-type-over-noetherian"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Proposition 09BH"
-   }
+   "elementary": false
+  },
+  {
+   "text": "Convert the abelian sheaves to modules over ULift Z using the equivalence between abelian groups and integral modules, followed by restriction along ULift.ringEquiv. Postcomposition on sheaves is fully faithful and essentially surjective: compose each module sheaf with the inverse coefficient equivalence and use its counit. The induced equivalence is additive, so ShortExact.map_of_exact preserves the given sequence. Apply isConstructibleSheaf_integral_iff to identify constructibility of the middle module sheaf with hF.",
+   "uses": [
+    "q1-constructible-integral-coefficients"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The mapped first arrow is monic by short exactness. Apply constructible_of_mono_noetherian over the Noetherian ring ULift Z to obtain constructibility of its source.",
+   "uses": [
+    "lem-weil-pbc-constructible-module-subobject-noetherian"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the existing IsConstructibleSheaf.cokernel declaration in KernelCokernel to the mapped first arrow. Its Lean statement permits arbitrary coefficient rings (the finite-ring formulation of thm-constructible-serre is a specialization). Both source and target are constructible. ShortExact.gIsCokernel identifies the third term with this cokernel; transport constructibility across coconePointUniqueUpToIso using IsConstructibleSheaf.of_iso.",
+   "uses": [
+    "thm-constructible-serre"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply isConstructibleSheaf_integral_iff to F₂ with its supplied torsion proof h₂ to return to the unchanged CurveCoefficientPair.IsConstructible conclusion.",
+   "uses": [
+    "q1-constructible-integral-coefficients"
+   ],
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-curve-constructible-sub-quotient"
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "q1-constructible-integral-coefficients",
+  "lem-weil-pbc-constructible-module-subobject-noetherian",
+  "thm-constructible-serre"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Proposition 09BH (proposition-constructible-over-noetherian) (2)/(3) and its proof, with Lemma 03RZ (lemma-constructible-abelian), Lemma 095E (lemma-constructible-quasi-compact-quasi-separated) and the first paragraph of Section 'Constructible sheaves on Noetherian schemes'; step 1 (one integer N kills F) and the Z/N-module bridge are written out by the agent."
+  "place": "Proposition 09BH (2), implemented through canonical integral coefficients instead of a finite annihilator and cyclic coefficients; subobject then cokernel route unchanged."
  },
  "mathlib_searches": [
   {
@@ -116,10 +143,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "U1",
+  "group": "J1",
   "result": "pass",
-  "landing": "20261012T044756-L-2041041",
-  "kind": "interface",
+  "landing": "20261012T060740-L-2908703",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
