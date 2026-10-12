@@ -8,8 +8,7 @@ module
 public import Mathlib.CategoryTheory.Sites.ConstantSheaf
 public import Mathlib.Topology.Sheaves.Abelian
 public import Sheaf.Topology.AbelianOpenExtensionByZero
-import Sheaf.Topology.ConstantSheafLocallyConstantComparison
-import Sheaf.Topology.AbelianOpenExtensionByZeroStalks
+import Sheaf.Topology.ConstantSubsheafPositiveRefinement
 
 /-! # Positive constant compact-open components
 
@@ -29,20 +28,10 @@ namespace TopCat.Sheaf
 Source: Stacks Project, Cohomology, Lemma 0A38, first proof paragraph.
 (blueprint: lem-sc-constant-subsheaf-positive-presentation)
 
-Proof: Evaluate each original component on its canonical unit section. Compose its
-image with isoC and view it as a locally constant integer function. Its fibres give a
-finite clopen partition of the compact domain; each fibre is compact in X. Restrict
-the section to every fibre. A section of K on V defines a map from the constant integer
-sheaf on V by integer multiplication, and then a map from its extension by zero by
-adjunction. Delete the zero fibres: their sections vanish since ι is monic. Replace
-negative sections and their component maps by their negatives. Their images are the
-positive absolute values. On each stalk the refined components generate exactly the
-same subgroup as the original components: a point of an original domain is in exactly
-one fibre, and the sign change preserves the generated subgroup. Outside the domains
-the extension-by-zero stalks vanish. Thus the resulting coproduct map is stalkwise
-surjective and therefore epi. Enumerate the finite family by Fin n. If all fibres are
-zero, K has zero stalks and the empty coproduct map is epi. No intersection-compactness
-hypothesis or attained-divisor assertion is used in this step. -/
+Proof: Apply positive clopen refinement to the given finite family and its map g.
+This gives positive components f and a factorization l ≫ Sigma.desc f = g.
+Since g is epi, Mathlib's epi_of_epi_fac makes Sigma.desc f epi. Retain the
+compactness, positivity and unit-value equations from the refinement. -/
 theorem constantSubsheaf_positive_presentation
     (X : TopCat.{u}) (K C : Sheaf AddCommGrpCat X) (ι : K ⟶ C) [Mono ι]
     (isoC : C ≅ (constantSheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u}).obj
@@ -70,6 +59,10 @@ theorem constantSubsheaf_positive_presentation
       (toSheafify (Opens.grothendieckTopology X)
       ((Functor.const (Opens X)ᵒᵖ).obj (AddCommGrpCat.of (ULift.{u} ℤ)))).app
       (op (A i)) (ULift.up (c i : ℤ)) := by
-  sorry
+  obtain ⟨m, U, hU, g, hg⟩ := hgen
+  obtain ⟨n, A, hA, c, hc, f, ⟨l, hl⟩, hv⟩ :=
+    constantSubsheaf_positive_refinement X K C ι isoC m U hU g
+  have : Epi g := hg
+  exact ⟨n, A, hA, c, hc, f, epi_of_epi_fac hl, hv⟩
 
 end TopCat.Sheaf
