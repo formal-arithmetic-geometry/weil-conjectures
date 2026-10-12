@@ -30,7 +30,7 @@
  ],
  "proof": [
   {
-   "text": "Fibre of the base change. Let $r:\\kappa(s)\\to\\kappa(s')$ be the map induced by $g$ on residue fields. By [lem-weil-pbc-fibre-of-base-change] there is a morphism $h:X'_{s'}\\to X_s$ with $\\iota\\circ h=g'\\circ\\iota'$ (where $\\iota:X_s\\to X$, $\\iota':X'_{s'}\\to X'$ are the first projections) which, together with the projection $X'_{s'}\\to\\operatorname{Spec}\\kappa(s')$, makes $X'_{s'}$ a fibre product $X_s\\times_{\\operatorname{Spec}\\kappa(s)}\\operatorname{Spec}\\kappa(s')$, the map $\\operatorname{Spec}\\kappa(s')\\to\\operatorname{Spec}\\kappa(s)$ being $\\operatorname{Spec}(r)$. Since $f'(x')=s'$, by [def-pc-scheme-fibre] there is a unique point $\\xi'\\in X'_{s'}$ with $\\iota'(\\xi')=x'$; this is the point of the fibre meant by '$x'$ is isolated in $X'_{s'}$'. Put $\\xi=h(\\xi')$. Then $\\iota(\\xi)=g'(\\iota'(\\xi'))=g'(x')=x$, and since $\\iota$ is injective (a homeomorphism onto $f^{-1}(s)$ [def-pc-scheme-fibre]), $\\xi$ is the point of $X_s$ corresponding to $x$; by hypothesis $\\{\\xi\\}$ is open in $X_s$.",
+   "text": "Fibre of the base change. Let $r:\\kappa(s)\\to\\kappa(s')$ be the map induced by $g$ on residue fields. By [lem-weil-pbc-fibre-of-base-change] there is a morphism $h:X'_{s'}\\to X_s$ with $\\iota\\circ h=g'\\circ\\iota'$ (where $\\iota:X_s\\to X$, $\\iota':X'_{s'}\\to X'$ are the first projections) which, together with the projection $X'_{s'}\\to\\operatorname{Spec}\\kappa(s')$, makes $X'_{s'}$ a fibre product $X_s\\times_{\\operatorname{Spec}\\kappa(s)}\\operatorname{Spec}\\kappa(s')$, the map $\\operatorname{Spec}\\kappa(s')\\to\\operatorname{Spec}\\kappa(s)$ being $\\operatorname{Spec}(r)$. Since $f'(x')=s'$, by [def-pc-scheme-fibre] there is a unique point $\\xi'\\in X'_{s'}$ with $\\iota'(\\xi')=x'$; this is the point of the fibre meant by '$x'$ is isolated in $X'_{s'}$'. Put $\\xi=h(\\xi')$. Then $\\iota(\\xi)=g'(\\iota'(\\xi'))=g'(x')=x$, and since $\\iota$ is injective (a homeomorphism onto $f^{-1}(s)$ [def-pc-scheme-fibre]), $\\xi$ is the point of $X_s$ corresponding to $x$; by hypothesis $\\{\\xi\\}$ is open in $X_s$. Lean realization: isPullback_fiberToSpecResidueField_of_isPullback gives the square; pullback.lift_fst identifies the point; fiberHomeo and Homeomorph.setCongr transport the open singleton across the equality of base points.",
    "uses": [
     "lem-weil-pbc-fibre-of-base-change",
     "def-pc-scheme-fibre"
@@ -42,7 +42,7 @@
    }
   },
   {
-   "text": "The open point as a scheme over $\\kappa(s)$. Let $W\\subseteq X_s$ be the open subscheme with underlying set $\\{\\xi\\}$ and $w:W\\to X_s$ its inclusion, an open immersion [def-weil-open-immersion]. The morphism $w$ is locally of finite type by [lem-weil-pbc-immersion-base-change-lft] (2); the projection $\\pi:X_s\\to\\operatorname{Spec}\\kappa(s)$ is the base change of the morphism $f$, locally of finite type, along $\\operatorname{Spec}\\kappa(s)\\to S$, hence locally of finite type by [lem-weil-pbc-lft-base-change]; so $\\pi\\circ w:W\\to\\operatorname{Spec}\\kappa(s)$ is locally of finite type by [lem-weil-pbc-proper-fp-permanence] (e). The underlying space of $W$ is one point, hence discrete.",
+   "text": "The open point as a scheme over $\\kappa(s)$. Let $W\\subseteq X_s$ be the open subscheme with underlying set $\\{\\xi\\}$ and $w:W\\to X_s$ its inclusion, an open immersion [def-weil-open-immersion]. The morphism $w$ is locally of finite type by [lem-weil-pbc-immersion-base-change-lft] (2); the projection $\\pi:X_s\\to\\operatorname{Spec}\\kappa(s)$ is the base change of the morphism $f$, locally of finite type, along $\\operatorname{Spec}\\kappa(s)\\to S$, hence locally of finite type by [lem-weil-pbc-lft-base-change]; so $\\pi\\circ w:W\\to\\operatorname{Spec}\\kappa(s)$ is locally of finite type by [lem-weil-pbc-proper-fp-permanence] (e). The underlying space of $W$ is one point, hence discrete. Lean realization: U is the actual open singleton; U.toScheme is subsingleton. LocallyQuasiFinite.of_injective applied to U.ι ≫ p packages its discrete finite fibres and local finite type.",
    "uses": [
     "def-weil-open-immersion",
     "lem-weil-pbc-immersion-base-change-lft",
@@ -56,7 +56,7 @@
    }
   },
   {
-   "text": "Base change of the open point is discrete and open. By [lem-weil-pbc-discrete-field-base-change-artinian] (with $k=\\kappa(s)$, $K=\\kappa(s')$ via $r$, and the scheme $W$ of the previous step), the base change $W_{\\kappa(s')}=W\\times_{\\operatorname{Spec}\\kappa(s)}\\operatorname{Spec}\\kappa(s')$ has discrete underlying space. By [lem-weil-pbc-open-fibre-product], applied to the fibre product $X'_{s'}=X_s\\times_{\\operatorname{Spec}\\kappa(s)}\\operatorname{Spec}\\kappa(s')$ of the first step with the opens $W\\subseteq X_s$, $\\operatorname{Spec}\\kappa(s)$ and $\\operatorname{Spec}\\kappa(s')$, the canonical morphism $W_{\\kappa(s')}\\to X'_{s'}$ is an open immersion [def-weil-open-immersion] with image $h^{-1}(W)$. Hence $h^{-1}(W)$ is an open subset of $X'_{s'}$ and, being homeomorphic to $W_{\\kappa(s')}$, is discrete in the subspace topology.",
+   "text": "Base change of the open point is discrete and open. By [lem-weil-pbc-discrete-field-base-change-artinian] (with $k=\\kappa(s)$, $K=\\kappa(s')$ via $r$, and the scheme $W$ of the previous step), the base change $W_{\\kappa(s')}=W\\times_{\\operatorname{Spec}\\kappa(s)}\\operatorname{Spec}\\kappa(s')$ has discrete underlying space. By [lem-weil-pbc-open-fibre-product], applied to the fibre product $X'_{s'}=X_s\\times_{\\operatorname{Spec}\\kappa(s)}\\operatorname{Spec}\\kappa(s')$ of the first step with the opens $W\\subseteq X_s$, $\\operatorname{Spec}\\kappa(s)$ and $\\operatorname{Spec}\\kappa(s')$, the canonical morphism $W_{\\kappa(s')}\\to X'_{s'}$ is an open immersion [def-weil-open-immersion] with image $h^{-1}(W)$. Hence $h^{-1}(W)$ is an open subset of $X'_{s'}$ and, being homeomorphic to $W_{\\kappa(s')}$, is discrete in the subspace topology. Lean realization: (isPullback_morphismRestrict h U).paste_vert hp identifies the inverse-image open subscheme directly as the pullback of U over the extension field. MorphismProperty.of_isPullback transfers local quasi-finiteness, and IsLocallyArtinian.of_locallyQuasiFinite gives its discrete topology. This is the recorded Mathlib realization of the discrete-field-base-change leaf, using injectivity for its singleton case; no quasi-finiteness of the original morphism is assumed.",
    "uses": [
     "lem-weil-pbc-discrete-field-base-change-artinian",
     "lem-weil-pbc-open-fibre-product",
@@ -69,7 +69,7 @@
    }
   },
   {
-   "text": "Conclusion. Since $h(\\xi')=\\xi\\in W$, $\\xi'\\in h^{-1}(W)$. As $h^{-1}(W)$ is discrete, $\\{\\xi'\\}$ is open in $h^{-1}(W)$, and as $h^{-1}(W)$ is open in $X'_{s'}$, $\\{\\xi'\\}$ is open in $X'_{s'}$: $x'$ is an isolated point of $X'_{s'}$.",
+   "text": "Conclusion. Since $h(\\xi')=\\xi\\in W$, $\\xi'\\in h^{-1}(W)$. As $h^{-1}(W)$ is discrete, $\\{\\xi'\\}$ is open in $h^{-1}(W)$, and as $h^{-1}(W)$ is open in $X'_{s'}$, $\\{\\xi'\\}$ is open in $X'_{s'}$: $x'$ is an isolated point of $X'_{s'}$. Lean realization: construct zU in the inverse-image open and apply its inclusion’s isOpenEmbedding.isOpenMap to the discrete singleton; Set.image_singleton identifies its image.",
    "uses": [],
    "elementary": true,
    "source": {
@@ -91,7 +91,7 @@
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/algebra.tex",
-  "place": "Algebra, Lemma 00PP (algebra-lemma-quasi-finite-base-change, line 30362), proof of part (1), run on the scheme fibres instead of affine fibre rings. Stacks proves Morphisms, Lemma 01TM (1) (morphisms.tex line 3925) by reduction to affine opens (01TH (4), line 3664) and 00PP; the statement here is 01TM (1) read through 01TH (1)<=>(2), and the argument of 00PP (fibre of base change = base change of fibre; dimension 0 / isolatedness preserved by field extension, 00P4 and 00PJ) gives it directly, without passing through quasi-finiteness."
+  "place": "Algebra, Lemma 00PP (algebra-lemma-quasi-finite-base-change, line 30362), proof of part (1), run on the scheme fibres instead of affine fibre rings. Stacks proves Morphisms, Lemma 01TM (1) (morphisms.tex line 3925) by reduction to affine opens (01TH (4), line 3664) and 00PP; the statement here is 01TM (1) read through 01TH (1)<=>(2), and the argument of 00PP (fibre of base change = base change of fibre; dimension 0 / isolatedness preserved by field extension, 00P4 and 00PJ) gives it directly, without assuming quasi-finiteness of the original morphism. The Lean implementation packages the singleton open’s local finite type and finite fibres as LocallyQuasiFinite.of_injective, transfers this along its pullback square, and obtains discreteness with IsLocallyArtinian.of_locallyQuasiFinite, as in the Mathlib match of lem-weil-pbc-discrete-field-base-change-artinian."
  },
  "mathlib_searches": [
   {
@@ -195,5 +195,15 @@
   "group": "M1",
   "result": "pass",
   "note": "f : X ⟶ S [LocallyOfFiniteType f] (lft, not finite type); g : S' ⟶ S arbitrary; X' = pullback f g, g' = pullback.fst, f' = pullback.snd; hx open singleton f.asFiber x in f.fiber (f x) (= pullback f (fromSpecResidueField), landed spelling of EtaleLocalFiniteAtPoint/FiniteDimensionalResidueFieldOfIsolatedFiberPoint); conclusion open singleton (pullback.snd f g).asFiber x' in fiber at s'; one universe u; no hollow binders"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E2",
+  "result": "pass",
+  "landing": "20261012T085229-L-10293",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
